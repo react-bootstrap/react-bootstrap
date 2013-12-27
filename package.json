@@ -1,0 +1,23 @@
+{
+  "name": "react-bootstrap",
+  "version": "0.1.0",
+  "description": "Bootstrap 3 components build with React",
+  "main": "index.js",
+  "scripts": {
+    "build": "jsxc -e .jsx src/ lib/",
+    "start": "jsxc -e .jsx --watch src/ lib/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "bootstrap"
+  ],
+  "author": "Stephen J. Collings <stevoland@gmail.com>",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "~0.8"
+  },
+  "devDependencies": {
+    "jsxc": "~0.1.6"
+  }
+}
