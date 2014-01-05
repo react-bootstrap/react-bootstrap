@@ -66,7 +66,9 @@ module.exports     = React.createClass({
           </HeadingClass>
         </div>
         <div className={collapseClassName} id={this.props.id}>
-          {this.props.children}
+          <div className="panel-body">
+            {this.props.children}
+          </div>
         </div>
       </div>
     );
