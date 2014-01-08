@@ -19,7 +19,7 @@ module.exports     = React.createClass({
   renderButton: function (className) {
     return (
       <button
-        type="button"
+        type={this.props.type || "button"}
         className={className}
         onClick={this.props.onClick}
         disabled={this.props.disabled}>

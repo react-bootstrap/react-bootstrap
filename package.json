@@ -6,7 +6,9 @@
   "scripts": {
     "build": "jsxc -e .jsx src/ lib/",
     "start": "jsxc -e .jsx --watch src/ lib/",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build_test": "jsxc --watch test/ test_built/",
+    "bundle_test": "./node_modules/.bin/browserify ./test_built/*.js -o test_bundle.js",
+    "test": "karma start karma.conf.js"
   },
   "keywords": [
     "react",
@@ -18,6 +20,22 @@
     "react": "~0.8"
   },
   "devDependencies": {
-    "jsxc": "~0.1.6"
+    "jsxc": "~0.1.6",
+    "karma-chai": "0.0.2",
+    "mocha": "~1.16.2",
+    "karma-script-launcher": "~0.1.0",
+    "karma-chrome-launcher": "~0.1.2",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-firefox-launcher": "~0.1.3",
+    "karma-jasmine": "~0.1.5",
+    "karma-coffee-preprocessor": "~0.1.2",
+    "requirejs": "~2.1.9",
+    "karma-requirejs": "~0.2.1",
+    "karma-phantomjs-launcher": "~0.1.1",
+    "karma": "~0.10.9",
+    "karma-mocha": "~0.1.1",
+    "browserify": "~3.19.1",
+    "react": "git://github.com/stevoland/react-with-test-utils",
+    "watchify": "~0.5.0"
   }
 }
