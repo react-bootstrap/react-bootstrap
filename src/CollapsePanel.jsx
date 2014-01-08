@@ -58,7 +58,7 @@ var CollapsePanel  = React.createClass({
           <HeadingClass
             className="panel-title">
             <a
-              href={'#' + this.props.id}
+              href={this.props.id ? '#' + this.props.id : '#'}
               className={anchorClassName}
               onClick={this.handleClick}>
               {this.props.headingChildren}
