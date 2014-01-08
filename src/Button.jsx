@@ -3,7 +3,7 @@
 var React          = require('react');
 var merge          = require('react/lib/merge');
 
-module.exports     = React.createClass({
+var Button = React.createClass({
   renderAnchor: function (className) {
     return (
       <a
@@ -43,3 +43,5 @@ module.exports     = React.createClass({
       this.renderAnchor(className) : this.renderButton(className);
   }
 });
+
+module.exports = Button;

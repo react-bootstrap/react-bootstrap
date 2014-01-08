@@ -3,7 +3,7 @@
 var React          = require('react/addons');
 var classSet       = React.addons.classSet;
 
-module.exports     = React.createClass({
+var CollapsePanel  = React.createClass({
   getDefaultProps: function () {
     return {
       headingClass: React.DOM.h4,
@@ -74,3 +74,5 @@ module.exports     = React.createClass({
     );
   }
 });
+
+module.exports = CollapsePanel;

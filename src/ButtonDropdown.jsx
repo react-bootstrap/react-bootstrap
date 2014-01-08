@@ -21,7 +21,7 @@ var Option = React.createClass({
   }
 });
 
-module.exports     = React.createClass({
+var ButtonDropdown = React.createClass({
   getInitialState: function () {
     return {
       open: false
@@ -120,3 +120,5 @@ module.exports     = React.createClass({
     );
   }
 });
+
+module.exports = ButtonDropdown;
