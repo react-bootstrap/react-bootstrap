@@ -56,23 +56,58 @@ describe('Button', function () {
   });
 
   it('Should have the default class', function () {
-    var instance = Button({'default': true}, 'Title');
+    var instance = Button({bsStyle: 'default'}, 'Title');
     ReactTestUtils.renderIntoDocument(instance);
 
     assert.ok(instance.getDOMNode().className.match(/\bbtn-default\b/));
   });
 
   it('Should have the primary class', function () {
-    var instance = Button({'primary': true}, 'Title');
+    var instance = Button({bsStyle: 'primary'}, 'Title');
     ReactTestUtils.renderIntoDocument(instance);
 
     assert.ok(instance.getDOMNode().className.match(/\bbtn-primary\b/));
   });
 
-  it('Should have the default class', function () {
-    var instance = Button({'primary': true}, 'Title');
+  it('Should have the success class', function () {
+    var instance = Button({bsStyle: 'success'}, 'Title');
     ReactTestUtils.renderIntoDocument(instance);
 
-    assert.ok(instance.getDOMNode().className.match(/\bbtn-primary\b/));
+    assert.ok(instance.getDOMNode().className.match(/\bbtn-success\b/));
+  });
+
+  it('Should have the info class', function () {
+    var instance = Button({bsStyle: 'info'}, 'Title');
+    ReactTestUtils.renderIntoDocument(instance);
+
+    assert.ok(instance.getDOMNode().className.match(/\bbtn-info\b/));
+  });
+
+  it('Should have the warning class', function () {
+    var instance = Button({bsStyle: 'warning'}, 'Title');
+    ReactTestUtils.renderIntoDocument(instance);
+
+    assert.ok(instance.getDOMNode().className.match(/\bbtn-warning\b/));
+  });
+
+  it('Should have the danger class', function () {
+    var instance = Button({bsStyle: 'danger'}, 'Title');
+    ReactTestUtils.renderIntoDocument(instance);
+
+    assert.ok(instance.getDOMNode().className.match(/\bbtn-danger\b/));
+  });
+
+  it('Should have the link class', function () {
+    var instance = Button({bsStyle: 'link'}, 'Title');
+    ReactTestUtils.renderIntoDocument(instance);
+
+    assert.ok(instance.getDOMNode().className.match(/\bbtn-link\b/));
+  });
+
+  it('Should have the inline class', function () {
+    var instance = Button({bsStyle: 'inline'}, 'Title');
+    ReactTestUtils.renderIntoDocument(instance);
+
+    assert.ok(instance.getDOMNode().className.match(/\bbtn-inline\b/));
   });
 });

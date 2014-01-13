@@ -2,6 +2,7 @@
 
 var React          = require('react/addons');
 var Button         = require('./Button');
+var BootstrapMixin = require('./BootstrapMixin');
 
 var Option = React.createClass({
   handleClick: function (e) {
@@ -22,15 +23,19 @@ var Option = React.createClass({
 });
 
 var ButtonDropdown = React.createClass({
+  mixins: [BootstrapMixin],
+
   getInitialState: function () {
     return {
       open: false
-    }
+    };
   },
 
   getDefaultProps: function () {
     return {
-      options: []
+      options: [],
+      bsClass: 'button',
+      className: 'dropdown-toggle'
     }
   },
 
@@ -88,9 +93,7 @@ var ButtonDropdown = React.createClass({
       "open": this.state.open
     });
 
-    var className = {
-      "dropdown-toggle": true
-    };
+    var className = this.extendClassName();
 
     var options = Object.keys(this.props.options).map(function (key) {
       return Option({
@@ -103,12 +106,6 @@ var ButtonDropdown = React.createClass({
     return (
       <div className={groupClassName}>
           <Button
-            default={this.props.default}
-            primary={this.props.primary}
-            success={this.props.success}
-            info={this.props.info}
-            warning={this.props.warning}
-            danger={this.props.danger}
             className={className}
             onClick={this.handleClick}>
             {this.props.title}{' '}<span className="caret" />

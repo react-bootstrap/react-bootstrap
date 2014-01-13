@@ -6,9 +6,8 @@
   "scripts": {
     "build": "jsxc -e .jsx src/ lib/",
     "start": "jsxc -e .jsx --watch src/ lib/",
-    "build_test": "jsxc --watch test/ test_built/",
-    "bundle_test": "./node_modules/.bin/browserify ./test_built/*.js -o test_bundle.js",
-    "test": "karma start karma.conf.js"
+    "bundle-test": "npm run start& ./node_modules/.bin/watchify ./test/*Spec.* -o test_bundle.js",
+    "test": "npm run bundle-test& karma start karma.conf.js"
   },
   "keywords": [
     "react",
@@ -36,6 +35,14 @@
     "karma-mocha": "~0.1.1",
     "browserify": "~3.19.1",
     "react": "git://github.com/stevoland/react-with-test-utils",
-    "watchify": "~0.5.0"
+    "watchify": "~0.5.0",
+    "envify": "~0.2.0",
+    "reactify": "~0.5.0"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
   }
 }
