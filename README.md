@@ -2,6 +2,10 @@
 
 [Bootstrap 3](http://getbootstrap.com) components built with [React](http://facebook.github.io/react/)
 
+## Contributors
+
+- Huge contributions from [syllog1sm](https://github.com/syllog1sm) ([blog](http://clozeit.wordpress.com/))
+
 ## Currently implemented
 
 - [Button](#Button)
