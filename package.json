@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "jsxc -e .jsx src/ lib/",
-    "start": "jsxc -e .jsx --watch src/ lib/",
-    "bundle-test": "npm run start& ./node_modules/.bin/watchify ./test/*Spec.* -o test_bundle.js",
-    "test": "npm run bundle-test& karma start karma.conf.js"
+    "build-watch": "jsxc -e .jsx --watch src/ lib/",
+    "bundle-test": "./node_modules/.bin/browserify ./test/*Spec.* -o test_bundle.js",
+    "bundle-test-watch": "npm run build-watch& ./node_modules/.bin/watchify ./test/*Spec.* -o test_bundle.js",
+    "test-watch": "npm run bundle-test-watch& karma start karma.dev.js",
+    "test": "npm run bundle-test && karma start karma.ci.js"
   },
   "keywords": [
     "react",
