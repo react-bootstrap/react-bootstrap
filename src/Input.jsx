@@ -21,6 +21,8 @@ var Input = React.createClass({
   propTypes: {
     name: React.PropTypes.string.isRequired,
     type: React.PropTypes.oneOf(INPUT_TYPES).isRequired,
+    id: React.PropTypes.string,
+    className: React.PropTypes.string,
     placeholder: React.PropTypes.string,
     label: React.PropTypes.string,
     required: React.PropTypes.bool,
@@ -37,6 +39,7 @@ var Input = React.createClass({
 
     return (
       <input
+        id={this.props.id}
         type={this.props.type}
         className={className}
         placeholder={this.props.placeholder}
@@ -46,7 +49,7 @@ var Input = React.createClass({
   },
 
   renderLabel: function () {
-    return this.props.label ? <label>{this.props.label}</label> : null;
+    return this.props.label ? <label for={this.props.id}>{this.props.label}</label> : null;
   },
 
   render: function () {
@@ -57,14 +60,14 @@ var Input = React.createClass({
     }
 
     return (
-      <div className={className} onBlur={this.onBlur} onFocus={this.onFocus}>
+      <div className={className} onBlur={this.handleBlur} onFocus={this.handleFocus}>
         {this.renderInput()}
         {this.renderLabel()}
       </div>
     );
   },
 
-  onBlur: function (e) {
+  handleBlur: function (e) {
     var value = this.getValue();
     var error;
 
@@ -81,7 +84,7 @@ var Input = React.createClass({
     });
   },
 
-  onFocus: function(e) {
+  handleFocus: function(e) {
     this.setState({
       error: false
     });
