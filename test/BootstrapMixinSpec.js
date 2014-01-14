@@ -127,5 +127,10 @@ describe('Button', function () {
       var instance = Component({bsClass: 'button', bsSize: 'xsmall'}, 'content');
       assert.equal(instance.extendClassName(), 'btn btn-xs');
     });
+
+    it('should return "btn btn-variation"', function () {
+      var instance = Component({bsClass: 'button', bsVariation: 'variation'}, 'content');
+      assert.equal(instance.extendClassName(), 'btn btn-variation');
+    });
   });
 });
