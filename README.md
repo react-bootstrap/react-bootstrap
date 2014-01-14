@@ -2,6 +2,8 @@
 
 [Bootstrap 3](http://getbootstrap.com) components built with [React](http://facebook.github.io/react/)
 
+[![Build Status](https://travis-ci.org/stevoland/react-bootstrap.png)](https://travis-ci.org/stevoland/react-bootstrap)
+
 ## Contributors
 
 - Huge contributions from [syllog1sm](https://github.com/syllog1sm) ([blog](http://clozeit.wordpress.com/))
