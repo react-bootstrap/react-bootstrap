@@ -6,6 +6,7 @@ module.exports = function(config) {
     frameworks: ['mocha', 'chai'],
 
     files: [
+      'test/bindPolyfill.js',
       'test_bundle.js'
     ],
 
@@ -19,7 +20,7 @@ module.exports = function(config) {
 
     autoWatch: false,
 
-    browsers: ['PhantomJS'],
+    browsers: ['Firefox'],
 
     captureTimeout: 60000,
 
