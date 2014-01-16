@@ -103,12 +103,15 @@ var ButtonDropdown = React.createClass({
       });
     }.bind(this));
 
+    var title = this.props.isTitleHidden ?
+      <span className="sr-only">{this.props.title}</span> : this.props.title;
+
     return (
       <div className={groupClassName}>
           <Button
             className={className}
             onClick={this.handleClick}>
-            {this.props.title}{' '}<span className="caret" />
+            {title}{' '}<span className="caret" />
           </Button>
           <ul className="dropdown-menu" role="menu">
             {options}
