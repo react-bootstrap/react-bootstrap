@@ -10,9 +10,10 @@ var SplitButton = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
-    title: React.PropTypes.string,
-    dropdownTitle: React.PropTypes.string,
+    title: React.PropTypes.renderable.isRequired,
+    dropdownTitle: React.PropTypes.renderable,
     bsVariation: React.PropTypes.oneOf(['dropup']),
+    isInInputGroup: React.PropTypes.bool,
     onClick: React.PropTypes.func,
     onOptionClick: React.PropTypes.func
   },
@@ -36,9 +37,10 @@ var SplitButton = React.createClass({
   },
 
   render: function () {
-    var classes = {
-      'btn-group': true
-    };
+    var classes = this.getClassSetFromClassName();
+
+    classes['btn-group'] = !this.props.isInInputGroup;
+    classes['input-group-btn'] = this.props.isInInputGroup;
 
     if (this.props.bsVariation) {
       classes[this.props.bsVariation] = true;
@@ -50,7 +52,11 @@ var SplitButton = React.createClass({
       <div className={className}>
         {this.transferPropsTo(<Button onClick={this.handleClick}>{this.props.title}</Button>)}
         {this.transferPropsTo(
-          <ButtonDropdown title={this.props.dropdownTitle} isTitleHidden={true} onClick={this.handleOptionClick} />
+          <ButtonDropdown
+            title={this.props.dropdownTitle}
+            isTitleHidden={true}
+            onClick={this.handleOptionClick}
+          />
         )}
       </div>
     );
