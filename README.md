@@ -34,5 +34,11 @@ TODO docs
 
 ## Up next
 
+- Label
+- MenuItem
+- SplitButton
+- TabbedArea, TabPane, Tab
+- Nav, NavItem
+- Pagination, Pager
 - Alert
 - Modal
