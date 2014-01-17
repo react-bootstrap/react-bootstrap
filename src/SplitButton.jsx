@@ -15,7 +15,8 @@ var SplitButton = React.createClass({
     bsVariation: React.PropTypes.oneOf(['dropup']),
     isInInputGroup: React.PropTypes.bool,
     onClick: React.PropTypes.func,
-    onOptionClick: React.PropTypes.func
+    onOptionClick: React.PropTypes.func,
+    options: React.PropTypes.array
   },
 
   getDefaultProps: function () {
@@ -56,6 +57,7 @@ var SplitButton = React.createClass({
             title={this.props.dropdownTitle}
             isTitleHidden={true}
             onClick={this.handleOptionClick}
+            options={this.props.options}
           />
         )}
       </div>

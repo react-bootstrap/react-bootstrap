@@ -109,11 +109,12 @@ var ButtonDropdown = React.createClass({
     return (
       <div className={groupClassName}>
           <Button
+            id={this.props.id}
             className={className}
             onClick={this.handleClick}>
             {title}{' '}<span className="caret" />
           </Button>
-          <ul className="dropdown-menu" role="menu">
+          <ul className="dropdown-menu" role="menu" aria-labelledby={this.props.id}>
             {options}
           </ul>
       </div>
