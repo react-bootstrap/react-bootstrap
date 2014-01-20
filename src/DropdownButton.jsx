@@ -1,28 +1,13 @@
 /** @jsx React.DOM */
 
-var React          = require('react/addons');
-var Button         = require('./Button');
-var BootstrapMixin = require('./BootstrapMixin');
+var React              = require('react/addons');
+var Button             = require('./Button');
+var MenuItem           = require('./MenuItem');
+var BootstrapMixin     = require('./BootstrapMixin');
+var ObjectToPropsMixin = require('./ObjectToPropsMixin');
 
-var Option = React.createClass({
-  handleClick: function (e) {
-    this.props.onClick(this.props.key);
 
-    return false;
-  },
-
-  render: function () {
-    return (
-      <li key={this.props.key}>
-        <a onClick={this.handleClick} href="#">
-          {this.props.title}
-        </a>
-      </li>
-    );
-  }
-});
-
-var ButtonDropdown = React.createClass({
+var DropdownButton = React.createClass({
   mixins: [BootstrapMixin],
 
   getInitialState: function () {
@@ -58,9 +43,10 @@ var ButtonDropdown = React.createClass({
     this.toggle();
   },
 
-  handleOptionClick: function (key) {
-    this.toggle();
-    this.props.onClick(key);
+  handleOptionSelect: function (i) {
+    if (typeof this.props.onSelect === 'function') {
+      this.props.onSelect(i);
+    }
   },
 
   handleKeyUp: function (e) {
@@ -89,19 +75,29 @@ var ButtonDropdown = React.createClass({
 
   render: function () {
     var groupClassName = React.addons.classSet({
-      "btn-group": true,
-      "open": this.state.open
+      'btn-group': true,
+      'open': this.state.open
     });
 
     var className = this.extendClassName();
 
-    var options = Object.keys(this.props.options).map(function (key) {
-      return Option({
-        onClick: this.handleOptionClick,
-        key: key,
-        title: this.props.options[key]
-      });
+    var menuItems = []
+
+    this.props.children.forEach(function (child, i) {
+      menuItems.push(
+        this.transferObjectAsPropsTo(
+          child.props,
+          MenuItem(
+            {
+              onSelect: this.handleOptionSelect.bind(this, i),
+              key: i,
+              ref: 'item' + i
+            }, child.props.children
+          )
+        )
+      )
     }.bind(this));
+
 
     var title = this.props.isTitleHidden ?
       <span className="sr-only">{this.props.title}</span> : this.props.title;
@@ -110,16 +106,22 @@ var ButtonDropdown = React.createClass({
       <div className={groupClassName}>
           <Button
             id={this.props.id}
+            ref="button"
             className={className}
             onClick={this.handleClick}>
             {title}{' '}<span className="caret" />
           </Button>
-          <ul className="dropdown-menu" role="menu" aria-labelledby={this.props.id}>
-            {options}
+          <ul
+            className="dropdown-menu"
+            role="menu"
+            ref="menu"
+            aria-labelledby={this.props.id}
+          >
+            {menuItems}
           </ul>
       </div>
     );
   }
 });
 
-module.exports = ButtonDropdown;
+module.exports = DropdownButton;
