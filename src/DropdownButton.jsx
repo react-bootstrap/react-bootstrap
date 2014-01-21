@@ -8,7 +8,7 @@ var ObjectToPropsMixin = require('./ObjectToPropsMixin');
 
 
 var DropdownButton = React.createClass({
-  mixins: [BootstrapMixin],
+  mixins: [BootstrapMixin, ObjectToPropsMixin],
 
   getInitialState: function () {
     return {

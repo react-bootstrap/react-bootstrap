@@ -6,8 +6,9 @@
   "scripts": {
     "build": "jsxc -e .jsx src/ lib/",
     "build-watch": "jsxc -e .jsx --watch src/ lib/",
-    "build-test-watch": "jsxc -e .jsx --watch test/ test-built/",
-    "bundle-test": "./node_modules/.bin/browserify ./test-built/*Spec.* -o test_bundle.js",
+    "build-test": "mkdir -p test-built && jsxc -e .jsx test/ test-built/",
+    "build-test-watch": "mkdir -p test-built && jsxc -e .jsx --watch test/ test-built/",
+    "bundle-test": "npm run build-test && ./node_modules/.bin/browserify ./test-built/*Spec.* -o test_bundle.js",
     "bundle-test-watch": "npm run build-watch& npm run build-test-watch& ./node_modules/.bin/watchify ./test-built/*Spec.* -o test_bundle.js",
     "test-watch": "npm run bundle-test-watch& karma start karma.dev.js",
     "test": "npm run bundle-test && karma start karma.ci.js"

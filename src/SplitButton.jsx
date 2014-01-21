@@ -4,7 +4,7 @@ var React          = require('react');
 var merge          = require('react/lib/merge');
 var BootstrapMixin = require('./BootstrapMixin');
 var Button         = require('./Button');
-var ButtonDropdown = require('./ButtonDropdown');
+var DropdownButton = require('./DropdownButton');
 
 var SplitButton = React.createClass({
   mixins: [BootstrapMixin],
@@ -53,7 +53,7 @@ var SplitButton = React.createClass({
       <div className={className}>
         {this.transferPropsTo(<Button onClick={this.handleClick}>{this.props.title}</Button>)}
         {this.transferPropsTo(
-          <ButtonDropdown
+          <DropdownButton
             title={this.props.dropdownTitle}
             isTitleHidden={true}
             onClick={this.handleOptionClick}
