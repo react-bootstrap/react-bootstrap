@@ -41,7 +41,8 @@
     "react": "git://github.com/stevoland/react-with-test-utils",
     "watchify": "~0.5.0",
     "envify": "~0.2.0",
-    "reactify": "~0.5.0"
+    "reactify": "~0.5.0",
+    "es6-module-transpiler": "~0.3.6"
   },
   "browserify": {
     "transform": [

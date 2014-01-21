@@ -15,8 +15,8 @@ describe('DropdownButton', function () {
   it('Should render correctly', function () {
     var instance = (
         <DropdownButton title="Title">
-          <MenuItem>MenuItem 1 content</MenuItem>
-          <MenuItem>MenuItem 2 content</MenuItem>
+          <MenuItem key="1">MenuItem 1 content</MenuItem>
+          <MenuItem key="2">MenuItem 2 content</MenuItem>
         </DropdownButton>
       );
 

@@ -2,13 +2,11 @@
 
 var React              = require('react/addons');
 var BootstrapMixin     = require('./BootstrapMixin');
-var ObjectToPropsMixin = require('./ObjectToPropsMixin');
 var utils              = require('./utils');
 var Tab                = require('./Tab');
-var TabPane            = require('./TabPane');
 
 var TabbedArea = React.createClass({
-  mixins: [BootstrapMixin, ObjectToPropsMixin],
+  mixins: [BootstrapMixin],
 
   tabs : [],
 
@@ -24,13 +22,11 @@ var TabbedArea = React.createClass({
     var isActive = (i === this.props.activeIndex);
 
     this.panes.push(
-      this.transferObjectAsPropsTo(
-        child.props,
-        TabPane({
-          isActive: isActive,
-          ref: 'pane' + i,
-          key: i
-        }, child.props.children)
+      utils.cloneWithProps(
+        child,
+        {
+          isActive: isActive
+        }
       )
     );
 
@@ -63,10 +59,10 @@ var TabbedArea = React.createClass({
 
     return this.transferPropsTo(
       <div>
-        <ul className="nav nav-tabs">
+        <ul className="nav nav-tabs" ref="tabs">
           {this.tabs}
         </ul>
-        <div id={this.props.id}>
+        <div id={this.props.id} ref="panes">
           {this.panes}
         </div>
       </div>

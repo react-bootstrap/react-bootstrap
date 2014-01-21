@@ -2,13 +2,12 @@
 
 var React              = require('react/addons');
 var Button             = require('./Button');
-var MenuItem           = require('./MenuItem');
 var BootstrapMixin     = require('./BootstrapMixin');
-var ObjectToPropsMixin = require('./ObjectToPropsMixin');
+var utils              = require('./utils');
 
 
 var DropdownButton = React.createClass({
-  mixins: [BootstrapMixin, ObjectToPropsMixin],
+  mixins: [BootstrapMixin],
 
   getInitialState: function () {
     return {
@@ -81,21 +80,17 @@ var DropdownButton = React.createClass({
 
     var className = this.extendClassName();
 
-    var menuItems = []
+    var menuItems = [];
 
     this.props.children.forEach(function (child, i) {
       menuItems.push(
-        this.transferObjectAsPropsTo(
-          child.props,
-          MenuItem(
-            {
-              onSelect: this.handleOptionSelect.bind(this, i),
-              key: i,
-              ref: 'item' + i
-            }, child.props.children
-          )
+        utils.cloneWithProps(
+          child,
+          {
+            onSelect: this.handleOptionSelect.bind(this, i)
+          }
         )
-      )
+      );
     }.bind(this));
 
 
