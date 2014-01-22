@@ -7,6 +7,7 @@
 ## Contributors
 
 - Huge contributions from [syllog1sm](https://github.com/syllog1sm) ([blog](http://clozeit.wordpress.com/))
+- [Pieter Vanderwerff](https://github.com/pieter-vanderwerff)
 
 ## Currently implemented (but under active development)
 
