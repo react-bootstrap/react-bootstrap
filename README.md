@@ -15,6 +15,7 @@
 - MenuItem
 - [TabbedArea, TabPane, Tab](#Tabs)
 - [CollapsePanel](#CollapsePanel)
+- [Alert](#Alert)
 - SplitButton
 
 ### <a name="Button"></a>Button
@@ -58,6 +59,19 @@ function handleSelect (selectedIndex) {
 </TabbedArea>
 ```
 
+### <a name="Alert"></a>Alert
+
+```
+var Alert = require('react-bootstrap/lib/Alert');
+
+function handleDismiss () {
+}
+
+<Alert bsStyle="danger" onDismiss={handleDismiss} dismissAfter={5000}>
+  <strong>Oh snap!</strong> Change a few things up and try submitting again.
+</Alert>
+```
+
 ### <a name="CollapsePanel"></a>CollapsePanel
 
 `var CollapsePanel = require('react-bootstrap/lib/CollapsePanel')`
@@ -70,5 +84,4 @@ TODO docs
 - Accordion
 - Nav, NavItem
 - Pagination, Pager
-- Alert
 - Modal
