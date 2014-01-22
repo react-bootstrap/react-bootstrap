@@ -133,5 +133,13 @@ describe('Button', function () {
       var instance = Component({bsClass: 'button', bsVariation: 'variation'}, 'content');
       assert.equal(instance.extendClassName(), 'btn btn-variation');
     });
+
+    it('should accept extra classes which override everything', function () {
+      var instance = Component({bsClass: 'button', bsVariation: 'variation'}, 'content');
+      assert.equal(instance.extendClassName({
+        'btn-variation': false,
+        'extra-class': true
+      }), 'btn extra-class');
+    });
   });
 });

@@ -32,12 +32,10 @@ var Alert = React.createClass({
   },
 
   render: function () {
-    var classes = this.getClassSetFromString(this.extendClassName());
     var isDismissable = !!this.props.onDismiss;
-
-    classes['alert-dismissable'] = isDismissable;
-
-    var className = React.addons.classSet(classes);
+    var className = this.extendClassName({
+      'alert-dismissable': isDismissable
+    });
 
     return this.transferPropsTo(
       <div className={className}>
