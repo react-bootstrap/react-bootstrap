@@ -50,9 +50,10 @@ describe('Button', function () {
   });
 
   it('Should be disabled', function () {
-    var instance = Button({disabled: true}, 'Title');
+    var instance = Button({isDisabled: true}, 'Title');
     ReactTestUtils.renderIntoDocument(instance);
 
+    assert.ok(instance.getDOMNode().className.match(/\bdisabled\b/));
     assert.equal(instance.getDOMNode().getAttribute('disabled'), 'true');
   });
 
@@ -110,5 +111,28 @@ describe('Button', function () {
     ReactTestUtils.renderIntoDocument(instance);
 
     assert.ok(instance.getDOMNode().className.match(/\bbtn-inline\b/));
+  });
+
+  it('Should be active', function () {
+    var instance = Button({isActive: true}, 'Title');
+    ReactTestUtils.renderIntoDocument(instance);
+
+    assert.ok(instance.getDOMNode().className.match(/\bactive\b/));
+  });
+
+  it('Should be in loading state with default text', function () {
+    var instance = Button({isLoading: true}, 'Title');
+    ReactTestUtils.renderIntoDocument(instance);
+
+    assert.ok(instance.getDOMNode().className.match(/\bdisabled\b/));
+    assert.equal(instance.getDOMNode().getAttribute('disabled'), 'true');
+    assert.equal(instance.getDOMNode().innerText, 'Loading...');
+  });
+
+  it('Should have custom loading text', function () {
+    var instance = Button({isLoading: true, loadingChildren: 'Loading, yo'}, 'Title');
+    ReactTestUtils.renderIntoDocument(instance);
+
+    assert.equal(instance.getDOMNode().innerText, 'Loading, yo');
   });
 });
