@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
-var React = require('react/addons');
-
-var BootstrapMixin = require('../lib/BootstrapMixin');
+var React            = require('react');
+var ReactTestUtils   = require('react/lib/ReactTestUtils');
+var createObjectFrom = require('react/lib/createObjectFrom');
+var BootstrapMixin   = require('../lib/BootstrapMixin');
 
 var LargeMixin   = require('../lib/LargeMixin');
 var MediumMixin  = require('../lib/MediumMixin');
@@ -19,25 +20,20 @@ var DangerMixin  = require('../lib/DangerMixin');
 var LinkMixin    = require('../lib/LinkMixin');
 var InlineMixin  = require('../lib/InlineMixin');
 
-var ReactTestUtils;
-
-describe('Button', function () {
-  beforeEach(function() {
-    ReactTestUtils = React.addons.ReactTestUtils;
-  });
-
+describe('Mixins', function () {
   var testMixins = function (TestMixins, expectedClassName) {
-      var Component = React.createClass({
-        mixins: [BootstrapMixin].concat(TestMixins),
+    var expectedClasses = createObjectFrom(expectedClassName.split(' '));
+    var Component = React.createClass({
+      mixins: [BootstrapMixin].concat(TestMixins),
 
-        render: function () {
-          return React.DOM.button();
-        }
-      });
-      var instance = Component({bsClass: 'button'}, 'content');
-      ReactTestUtils.renderIntoDocument(instance);
+      render: function () {
+        return React.DOM.button();
+      }
+    });
+    var instance = Component({bsClass: 'button'}, 'content');
+    ReactTestUtils.renderIntoDocument(instance);
 
-      assert.equal(instance.extendClassName(), expectedClassName);
+    assert.deepEqual(instance.getBsClassSet(), expectedClasses);
   };
 
   describe('LargeMixin#extendClassName', function () {

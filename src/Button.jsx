@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var React          = require('react');
-var merge          = require('react/lib/merge');
+var classSet       = require('react/lib/cx');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var Button = React.createClass({
@@ -21,11 +21,11 @@ var Button = React.createClass({
     };
   },
 
-  renderAnchor: function (children, className, isDisabled) {
-    return (
+  renderAnchor: function (children, classes, isDisabled) {
+    return this.transferPropsTo(
       <a
         href={this.props.href}
-        className={className}
+        className={classSet(classes)}
         onClick={this.props.onClick}
         disabled={isDisabled}>
         {children}
@@ -33,11 +33,11 @@ var Button = React.createClass({
     );
   },
 
-  renderButton: function (children, className, isDisabled) {
-    return (
+  renderButton: function (children, classes, isDisabled) {
+    return this.transferPropsTo(
       <button
         type={this.props.type || "button"}
-        className={className}
+        className={classSet(classes)}
         onClick={this.props.onClick}
         disabled={isDisabled}>
         {children}
@@ -47,10 +47,10 @@ var Button = React.createClass({
 
   render: function () {
     var isDisabled = !!(this.props.isDisabled || this.props.isLoading);
-    var className = this.extendClassName({
-      disabled: isDisabled,
-      active: this.props.isActive
-    });
+
+    var classes = this.getBsClassSet();
+    classes['disabled'] = isDisabled;
+    classes['active'] = this.props.isActive;
 
     var children = this.props.isLoading ?
       this.props.loadingChildren : this.props.children;
@@ -58,7 +58,7 @@ var Button = React.createClass({
     var renderFuncName = (this.props.href) ?
       'renderAnchor' : 'renderButton';
 
-    return this[renderFuncName](children, className, isDisabled);
+    return this[renderFuncName](children, classes, isDisabled);
   }
 });
 

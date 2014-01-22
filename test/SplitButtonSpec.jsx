@@ -1,16 +1,11 @@
 /** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
-var React = require('react/addons');
-var SplitButton = require('../lib/SplitButton');
-
-var ReactTestUtils;
+var React          = require('react');
+var ReactTestUtils = require('react/lib/ReactTestUtils');
+var SplitButton    = require('../lib/SplitButton');
 
 describe('SplitButton', function () {
-  beforeEach(function() {
-    ReactTestUtils = React.addons.ReactTestUtils;
-  });
-
   it('Should throw if missing title', function (done) {
     try {
       var instance = SplitButton({});

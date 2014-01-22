@@ -1,4 +1,7 @@
-var React = require('react/addons');
+/** @jsx React.DOM */
+
+var React    = require('react');
+var classSet = require('react/lib/cx');
 
 var INPUT_TYPES = [
   'text',
@@ -35,13 +38,16 @@ var Input = React.createClass({
   },
 
   renderInput: function () {
-    var className = 'form-control input-md';
+    var classes = {
+      'form-control': true,
+      'input-md': true
+    };
 
     return (
       <input
         id={this.props.id}
         type={this.props.type}
-        className={className}
+        className={classSet(classes)}
         placeholder={this.props.placeholder}
         ref="input"
       />
@@ -53,14 +59,13 @@ var Input = React.createClass({
   },
 
   render: function () {
-    var className = 'form-group';
-
-    if (this.state.error) {
-      className += ' has-error';
-    }
+    var classes = {
+      'form-group': true,
+      'has-error': !!this.state.error
+    };
 
     return (
-      <div className={className} onBlur={this.handleBlur} onFocus={this.handleFocus}>
+      <div className={classSet(classes)} onBlur={this.handleBlur} onFocus={this.handleFocus}>
         {this.renderInput()}
         {this.renderLabel()}
       </div>

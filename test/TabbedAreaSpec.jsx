@@ -1,17 +1,12 @@
 /** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
-var React      = require('react/addons');
-var TabbedArea = require('../lib/TabbedArea');
-var TabPane    = require('../lib/TabPane');
-
-var ReactTestUtils;
+var React          = require('react');
+var ReactTestUtils = require('react/lib/ReactTestUtils');
+var TabbedArea     = require('../lib/TabbedArea');
+var TabPane        = require('../lib/TabPane');
 
 describe('TabbedArea', function () {
-  beforeEach(function() {
-    ReactTestUtils = React.addons.ReactTestUtils;
-  });
-
   it('Should show the correct tab initially', function () {
     var instance = (
         <TabbedArea activeIndex={0}>

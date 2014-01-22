@@ -1,16 +1,14 @@
 /** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
-var React = require('react/addons');
+var React          = require('react');
+var ReactTestUtils = require('react/lib/ReactTestUtils');
 var BootstrapMixin = require('../lib/BootstrapMixin');
 
-var ReactTestUtils;
 var Component;
 
-describe('Button', function () {
+describe('BootstrapMixin', function () {
   beforeEach(function() {
-    ReactTestUtils = React.addons.ReactTestUtils;
-
     Component = React.createClass({
       mixins: [BootstrapMixin],
 
@@ -22,124 +20,110 @@ describe('Button', function () {
     });
   });
 
-  describe('#extendClassName', function () {
+  describe('#getBsClassSet', function () {
     it('should return blank', function () {
       var instance = Component({}, 'content');
-      assert.equal(instance.extendClassName(), '');
-    });
-
-    it('should return props.className', function () {
-      var className = 'css-class css-class2';
-      var instance = Component({className: className}, 'content');
-      assert.equal(instance.extendClassName(), className);
+      assert.deepEqual(instance.getBsClassSet(), {});
     });
 
     it('should return "col"', function () {
       var instance = Component({bsClass: 'column'}, 'content');
-      assert.equal(instance.extendClassName(), 'col');
+      assert.deepEqual(instance.getBsClassSet(), {'col': true});
     });
 
     it('should return "btn"', function () {
       var instance = Component({bsClass: 'button'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true});
     });
 
     it('should return "btn-group"', function () {
       var instance = Component({bsClass: 'button-group'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn-group');
+      assert.deepEqual(instance.getBsClassSet(), {'btn-group': true});
     });
 
     it('should return "label"', function () {
       var instance = Component({bsClass: 'label'}, 'content');
-      assert.equal(instance.extendClassName(), 'label');
+      assert.deepEqual(instance.getBsClassSet(), {'label': true});
     });
 
     it('should return "alert"', function () {
       var instance = Component({bsClass: 'alert'}, 'content');
-      assert.equal(instance.extendClassName(), 'alert');
+      assert.deepEqual(instance.getBsClassSet(), {'alert': true});
     });
 
     it('should return "input-group"', function () {
       var instance = Component({bsClass: 'input-group'}, 'content');
-      assert.equal(instance.extendClassName(), 'input-group');
+      assert.deepEqual(instance.getBsClassSet(), {'input-group': true});
     });
 
     it('should return "form"', function () {
       var instance = Component({bsClass: 'form'}, 'content');
-      assert.equal(instance.extendClassName(), 'form');
+      assert.deepEqual(instance.getBsClassSet(), {'form': true});
     });
 
     it('should return "panel"', function () {
       var instance = Component({bsClass: 'panel'}, 'content');
-      assert.equal(instance.extendClassName(), 'panel');
+      assert.deepEqual(instance.getBsClassSet(), {'panel': true});
     });
 
     it('should return "btn btn-default"', function () {
       var instance = Component({bsClass: 'button', bsStyle: 'default'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn btn-default');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-default': true});
     });
 
     it('should return "btn btn-default"', function () {
       var instance = Component({bsClass: 'button', bsStyle: 'default'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn btn-default');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-default': true});
     });
 
     it('should return "btn btn-primary"', function () {
       var instance = Component({bsClass: 'button', bsStyle: 'primary'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn btn-primary');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-primary': true});
     });
 
     it('should return "btn btn-success"', function () {
       var instance = Component({bsClass: 'button', bsStyle: 'success'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn btn-success');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-success': true});
     });
 
     it('should return "btn btn-info"', function () {
       var instance = Component({bsClass: 'button', bsStyle: 'info'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn btn-info');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-info': true});
     });
 
     it('should return "btn btn-link"', function () {
       var instance = Component({bsClass: 'button', bsStyle: 'link'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn btn-link');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-link': true});
     });
 
     it('should return "btn btn-inline"', function () {
       var instance = Component({bsClass: 'button', bsStyle: 'inline'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn btn-inline');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-inline': true});
     });
 
     it('should return "btn btn-lg"', function () {
       var instance = Component({bsClass: 'button', bsSize: 'large'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn btn-lg');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-lg': true});
     });
 
     it('should return "btn btn-md"', function () {
       var instance = Component({bsClass: 'button', bsSize: 'medium'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn btn-md');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-md': true});
     });
 
     it('should return "btn btn-sm"', function () {
       var instance = Component({bsClass: 'button', bsSize: 'small'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn btn-sm');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-sm': true});
     });
 
     it('should return "btn btn-xs"', function () {
       var instance = Component({bsClass: 'button', bsSize: 'xsmall'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn btn-xs');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-xs': true});
     });
 
     it('should return "btn btn-variation"', function () {
       var instance = Component({bsClass: 'button', bsVariation: 'variation'}, 'content');
-      assert.equal(instance.extendClassName(), 'btn btn-variation');
-    });
-
-    it('should accept extra classes which override everything', function () {
-      var instance = Component({bsClass: 'button', bsVariation: 'variation'}, 'content');
-      assert.equal(instance.extendClassName({
-        'btn-variation': false,
-        'extra-class': true
-      }), 'btn extra-class');
+      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-variation': true});
     });
   });
 });

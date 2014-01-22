@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var React          = require('react');
-var merge          = require('react/lib/merge');
+var classSet       = require('react/lib/cx');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var Alert = React.createClass({
@@ -32,13 +32,13 @@ var Alert = React.createClass({
   },
 
   render: function () {
+    var classes = this.getBsClassSet();
     var isDismissable = !!this.props.onDismiss;
-    var className = this.extendClassName({
-      'alert-dismissable': isDismissable
-    });
+
+    classes['alert-dismissable'] = isDismissable;
 
     return this.transferPropsTo(
-      <div className={className}>
+      <div className={classSet(classes)}>
         {isDismissable ? this.renderDismissButton() : null}
         {this.props.children}
       </div>

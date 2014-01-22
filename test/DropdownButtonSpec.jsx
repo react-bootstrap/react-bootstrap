@@ -1,17 +1,12 @@
 /** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
-var React          = require('react/addons');
+var React          = require('react');
+var ReactTestUtils = require('react/lib/ReactTestUtils');
 var DropdownButton = require('../lib/DropdownButton');
 var MenuItem       = require('../lib/MenuItem');
 
-var ReactTestUtils;
-
 describe('DropdownButton', function () {
-  beforeEach(function() {
-    ReactTestUtils = React.addons.ReactTestUtils;
-  });
-
   it('Should render correctly', function () {
     var instance = (
         <DropdownButton title="Title">

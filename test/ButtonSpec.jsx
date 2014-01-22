@@ -1,16 +1,12 @@
 /** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
-var React = require('react/addons');
-var Button = require('../lib/Button');
+var React          = require('react');
+var ReactTestUtils = require('react/lib/ReactTestUtils');
+var Button         = require('../lib/Button');
 
-var ReactTestUtils;
 
 describe('Button', function () {
-  beforeEach(function() {
-    ReactTestUtils = React.addons.ReactTestUtils;
-  });
-
   it('Should output a button', function () {
     var instance = Button({}, 'Title');
     ReactTestUtils.renderIntoDocument(instance);
