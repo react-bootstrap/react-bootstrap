@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
-var React          = require('react/addons');
+var React          = require('react');
+var classSet       = require('react/lib/cx');
 var BootstrapMixin = require('./BootstrapMixin');
-var classSet       = React.addons.classSet;
 
 var CollapsePanel  = React.createClass({
   mixins: [BootstrapMixin],
@@ -41,7 +41,7 @@ var CollapsePanel  = React.createClass({
     var isOpen = (this.props.isStateful) ?
       this.state.isOpen : this.props.isOpen;
 
-    var panelClassName = this.extendClassName();
+    var panelClassName = classSet(this.getBsClassSet());
 
     var anchorClassName = classSet({
       "collapsed": !isOpen
@@ -53,7 +53,7 @@ var CollapsePanel  = React.createClass({
       "collapse": !isOpen
     });
 
-    return (
+    return this.transferPropsTo(
       <div className={panelClassName}>
         <div className="panel-heading">
           <HeadingClass

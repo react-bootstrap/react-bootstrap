@@ -1,5 +1,4 @@
-var React     = require('react/addons');
-var merge     = require('react/lib/merge');
+var React     = require('react');
 var constants = require('./constants');
 
 var BootstrapMixin = {
@@ -10,45 +9,21 @@ var BootstrapMixin = {
     bsVariation: React.PropTypes.string
   },
 
-  getClassSetFromString: function (className) {
+  getBsClassSet: function () {
     var classes = {};
 
-    className = className || '';
-
-    className.split(' ').map(
-      function (cssClass) {
-        if (cssClass) {
-          classes[cssClass] = true;
-        }
-      }
-    );
-
-    return classes;
-  },
-
-  getClassSetFromClassName: function () {
-    return this.getClassSetFromString(this.props.className);
-  },
-
-  extendClassName: function (extraClasses) {
-    var prefix,
-        className,
-        classes = this.getClassSetFromClassName(),
-        bsClass,
-        bsStyle,
-        bsSize;
-
-    bsClass = this.props.bsClass && constants.CLASSES[this.props.bsClass];
+    var bsClass = this.props.bsClass && constants.CLASSES[this.props.bsClass];
     if (bsClass) {
       classes[bsClass] = true;
 
-      prefix = bsClass + '-';
+      var prefix = bsClass + '-';
 
-      bsSize = this.props.bsSize && constants.SIZES[this.props.bsSize];
+      var bsSize = this.props.bsSize && constants.SIZES[this.props.bsSize];
       if (bsSize) {
         classes[prefix + bsSize] = true;
       }
-      bsStyle = this.props.bsStyle && constants.STYLES[this.props.bsStyle];
+
+      var bsStyle = this.props.bsStyle && constants.STYLES[this.props.bsStyle];
       if (this.props.bsStyle) {
         classes[prefix + bsStyle] = true;
       }
@@ -58,13 +33,7 @@ var BootstrapMixin = {
       }
     }
 
-    if (extraClasses) {
-      classes = merge(classes, extraClasses);
-    }
-
-    className = React.addons.classSet(classes);
-
-    return className.replace(/\s+/, ' ');
+    return classes;
   }
 };
 

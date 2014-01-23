@@ -1,16 +1,11 @@
 /** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
-var React = require('react/addons');
-var Alert = require('../lib/Alert');
-
-var ReactTestUtils;
+var React          = require('react');
+var ReactTestUtils = require('react/lib/ReactTestUtils');
+var Alert          = require('../lib/Alert');
 
 describe('Alert', function () {
-  beforeEach(function() {
-    ReactTestUtils = React.addons.ReactTestUtils;
-  });
-
   it('Should output a alert with message', function () {
     var instance = Alert({}, <strong>Message</strong>);
     ReactTestUtils.renderIntoDocument(instance);

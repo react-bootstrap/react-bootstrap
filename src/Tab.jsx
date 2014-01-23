@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 
-var React = require('react/addons');
+var React    = require('react');
+var classSet = require('react/lib/cx');
 
 var Tab = React.createClass({
   handleClick: function () {
@@ -10,20 +11,20 @@ var Tab = React.createClass({
   },
 
   render: function () {
-    var className = React.addons.classSet({
+    var classes = {
       'nav': true,
       'nav-tab': true,
       'active': this.props.isActive
-    });
+    };
 
     return this.transferPropsTo(
-      <li className={className}>
+      <li className={classSet(classes)}>
         <a
           ref="button"
           href={this.props.id ? '#' + this.props.id : null}
           onClick={this.handleClick}>
-            {this.props.children}
-          </a>
+          {this.props.children}
+        </a>
       </li>
     );
   }
