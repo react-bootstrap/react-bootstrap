@@ -1,9 +1,6 @@
 var ReactPropTransferer = require('react/lib/ReactPropTransferer');
 
 module.exports = {
-  isArray: function (obj) {
-    return (Object.prototype.toString.call(obj) === '[object Array]');
-  },
 
   /**
    * Sometimes you want to change the props of a child passed to you. Usually
@@ -19,4 +16,4 @@ module.exports = {
       ReactPropTransferer.mergeProps(child.props, props)
     );
   }
-}
+};
