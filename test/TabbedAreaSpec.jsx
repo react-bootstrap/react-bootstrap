@@ -91,4 +91,56 @@ describe('TabbedArea', function () {
     );
   });
 
+  it('Should show the correct initial tab', function () {
+    var instance = (
+        <TabbedArea initialActiveKey={2}>
+          <TabPane tab="Tab 1" key={1}>Tab 1 content</TabPane>
+          <TabPane tab="Tab 2" key={2}>Tab 2 content</TabPane>
+        </TabbedArea>
+      );
+
+    ReactTestUtils.renderIntoDocument(instance);
+    assert.notOk(instance.refs.panes.getDOMNode().children[0].className.match(/\bopen\b/));
+    assert.ok(instance.refs.panes.getDOMNode().children[1].className.match(/\bopen\b/));
+    assert.notOk(instance.refs.tab1.getDOMNode().className.match(/\active\b/));
+    assert.ok(instance.refs.tab2.getDOMNode().className.match(/\active\b/));
+  });
+
+  it('Should show the correct first tab with no active key value', function () {
+    var instance = (
+        <TabbedArea>
+          <TabPane tab="Tab 1" key={1}>Tab 1 content</TabPane>
+          <TabPane tab="Tab 2" key={2}>Tab 2 content</TabPane>
+        </TabbedArea>
+      );
+
+    ReactTestUtils.renderIntoDocument(instance);
+    assert.ok(instance.refs.panes.getDOMNode().children[0].className.match(/\bopen\b/));
+    assert.notOk(instance.refs.panes.getDOMNode().children[1].className.match(/\bopen\b/));
+    assert.ok(instance.refs.tab1.getDOMNode().className.match(/\active\b/));
+    assert.notOk(instance.refs.tab2.getDOMNode().className.match(/\active\b/));
+  });
+
+  it('Should show the correct tab when selected', function (done) {
+    var instance = (
+        <TabbedArea initialActiveKey={2}>
+          <TabPane tab="Tab 1" key={1}>Tab 1 content</TabPane>
+          <TabPane tab="Tab 2" key={2}>Tab 2 content</TabPane>
+        </TabbedArea>
+      );
+
+    // Override `componentDidUpdate` for now, but this should be replaced
+    // with `ReactTestUtils#nextUpdate()` when it is merged.
+    // @see https://github.com/facebook/react/pull/948
+    instance.componentDidUpdate = function () {
+      assert.ok(instance.refs.panes.getDOMNode().children[0].className.match(/\bopen\b/));
+      assert.notOk(instance.refs.panes.getDOMNode().children[1].className.match(/\bopen\b/));
+      assert.ok(instance.refs.tab1.getDOMNode().className.match(/\active\b/));
+      assert.notOk(instance.refs.tab2.getDOMNode().className.match(/\active\b/));
+      done();
+    };
+
+    ReactTestUtils.renderIntoDocument(instance);
+    ReactTestUtils.Simulate.click(instance.refs.tab1.refs.button.getDOMNode());
+  });
 });
