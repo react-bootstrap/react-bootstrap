@@ -13,7 +13,7 @@
 
 - [Button](#Button)
 - [DropdownButton](#DropdownButton)
-- MenuItem
+- [MenuItem](#MenuItem)
 - [TabbedArea, TabPane, Tab](#Tabs)
 - [CollapsePanel](#CollapsePanel)
 - [Alert](#Alert)
@@ -78,6 +78,17 @@ function handleDismiss () {
 `var CollapsePanel = require('react-bootstrap/lib/CollapsePanel')`
 
 TODO docs
+
+### <a name="MenuItem"></a>MenuItem
+
+```
+var MenuItem = require('react-bootstrap/lib/MenuItem');
+
+function handleSelect (key) {
+}
+
+<MenuItem key={1} bsVariation="[divider|header]" onSelect={handleSelect}>Content</MenuItem>
+```
 
 ## Up next
 
