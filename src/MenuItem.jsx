@@ -9,12 +9,30 @@ var MenuItem = React.createClass({
     }
   },
 
-  render: function () {
+  renderAnchor: function () {
     return (
-      <li key={this.props.key}>
-        <a onClick={this.handleClick} href="#">
-          {this.props.title}
-        </a>
+      <a onClick={this.handleClick} href="#" tabIndex="-1" ref="anchor">
+        {this.props.children}
+      </a>
+    );
+  },
+
+  render: function () {
+    var className = null;
+    var children = null;
+
+    if (this.props.bsVariation === 'header') {
+      children = this.props.children;
+      className = 'dropdown-header';
+    } else if (this.props.bsVariation === 'divider') {
+      className = 'divider';
+    } else {
+      children = this.renderAnchor();
+    }
+
+    return this.transferPropsTo(
+      <li role="presentation" className={className}>
+        {children}
       </li>
     );
   }
