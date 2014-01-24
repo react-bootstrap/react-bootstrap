@@ -48,15 +48,15 @@ function handleSelect (selectedIndex) {
 var TabbedArea = require('react-bootstrap/lib/TabbedArea');
 var TabPane    = require('react-bootstrap/lib/TabPane');
 
-var index = 0;
+var key = 0;
 
-function handleSelect (selectedIndex) {
-    index = selectedIndex;
+function handleSelect (selectedKey) {
+  key = selectedKey;
 }
 
-<TabbedArea title="Title" activeIndex={index} onSelect={handleSelect}>
-  <TabPane title="Tab 1" key="1">TabPane 1 content</TabPane>
-  <TabPane title="Tab 1" key="2">TabPane 2 content</TabPane>
+<TabbedArea title="Title" activeKey={key} onSelect={handleSelect}>
+  <TabPane tab="Tab 1" key={1}>TabPane 1 content</TabPane>
+  <TabPane tab={<strong>Tab 2</strong>} key={2}>TabPane 2 content</TabPane>
 </TabbedArea>
 ```
 
