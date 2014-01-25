@@ -4,3 +4,4 @@ node_modules
 npm-debug.log
 test_bundle.js
 test-built/*
+.idea/
