@@ -44,17 +44,29 @@ function handleSelect (selectedIndex) {
 
 ### <a name="Tabs"></a>Tabs
 
+#### Controlled
 ```
 var TabbedArea = require('react-bootstrap/lib/TabbedArea');
 var TabPane    = require('react-bootstrap/lib/TabPane');
 
-var key = 0;
+var key = 1;
 
 function handleSelect (selectedKey) {
   key = selectedKey;
 }
 
 <TabbedArea title="Title" activeKey={key} onSelect={handleSelect}>
+  <TabPane tab="Tab 1" key={1}>TabPane 1 content</TabPane>
+  <TabPane tab={<strong>Tab 2</strong>} key={2}>TabPane 2 content</TabPane>
+</TabbedArea>
+```
+
+#### Uncontrolled
+```
+var TabbedArea = require('react-bootstrap/lib/TabbedArea');
+var TabPane    = require('react-bootstrap/lib/TabPane');
+
+<TabbedArea title="Title" initialActiveKey={1}>
   <TabPane tab="Tab 1" key={1}>TabPane 1 content</TabPane>
   <TabPane tab={<strong>Tab 2</strong>} key={2}>TabPane 2 content</TabPane>
 </TabbedArea>
