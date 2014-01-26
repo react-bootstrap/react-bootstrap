@@ -1,9 +1,9 @@
 /** @jsx React.DOM */
 
-var React              = require('react');
-var BootstrapMixin     = require('./BootstrapMixin');
-var utils              = require('./utils');
-var Tab                = require('./Tab');
+var React                 = require('react');
+import BootstrapMixin     from './BootstrapMixin';
+import utils              from './utils';
+import Tab                from './Tab';
 
 var TabbedArea = React.createClass({
   mixins: [BootstrapMixin],
@@ -94,4 +94,4 @@ var TabbedArea = React.createClass({
   }
 });
 
-module.exports = TabbedArea;
+export default = TabbedArea;

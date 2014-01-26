@@ -3,7 +3,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Alert          = require('../lib/Alert');
+var Alert          = require('../cjs/Alert');
 
 describe('Alert', function () {
   it('Should output a alert with message', function () {

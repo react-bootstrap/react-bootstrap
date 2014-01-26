@@ -3,8 +3,8 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var DropdownButton = require('../lib/DropdownButton');
-var MenuItem       = require('../lib/MenuItem');
+var DropdownButton = require('../cjs/DropdownButton');
+var MenuItem       = require('../cjs/MenuItem');
 
 describe('DropdownButton', function () {
   it('Should render correctly', function () {

@@ -3,7 +3,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var SplitButton    = require('../lib/SplitButton');
+var SplitButton    = require('../cjs/SplitButton');
 
 describe('SplitButton', function () {
   it('Should throw if missing title', function (done) {

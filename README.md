@@ -22,7 +22,7 @@
 ### <a name="Button"></a>Button
 
 ```
-var Button = require('react-bootstrap/lib/Button');
+var Button = require('react-bootstrap/cjs/Button');
 
 <Button onClick={handleClick}>Title</Button>
 ```
@@ -30,8 +30,8 @@ var Button = require('react-bootstrap/lib/Button');
 ### <a name="DropdownButton"></a>DropdownButton
 
 ```
-var DropdownButton = require('react-bootstrap/lib/DropdownButton');
-var MenuItem       = require('react-bootstrap/lib/MenuItem');
+var DropdownButton = require('react-bootstrap/cjs/DropdownButton');
+var MenuItem       = require('react-bootstrap/cjs/MenuItem');
 
 function handleSelect (selectedIndex) {
 }
@@ -46,8 +46,8 @@ function handleSelect (selectedIndex) {
 
 #### Controlled
 ```
-var TabbedArea = require('react-bootstrap/lib/TabbedArea');
-var TabPane    = require('react-bootstrap/lib/TabPane');
+var TabbedArea = require('react-bootstrap/cjs/TabbedArea');
+var TabPane    = require('react-bootstrap/cjs/TabPane');
 
 var key = 1;
 
@@ -63,8 +63,8 @@ function handleSelect (selectedKey) {
 
 #### Uncontrolled
 ```
-var TabbedArea = require('react-bootstrap/lib/TabbedArea');
-var TabPane    = require('react-bootstrap/lib/TabPane');
+var TabbedArea = require('react-bootstrap/cjs/TabbedArea');
+var TabPane    = require('react-bootstrap/cjs/TabPane');
 
 <TabbedArea title="Title" initialActiveKey={1}>
   <TabPane tab="Tab 1" key={1}>TabPane 1 content</TabPane>
@@ -75,7 +75,7 @@ var TabPane    = require('react-bootstrap/lib/TabPane');
 ### <a name="Alert"></a>Alert
 
 ```
-var Alert = require('react-bootstrap/lib/Alert');
+var Alert = require('react-bootstrap/cjs/Alert');
 
 function handleDismiss () {
 }
@@ -87,14 +87,14 @@ function handleDismiss () {
 
 ### <a name="CollapsePanel"></a>CollapsePanel
 
-`var CollapsePanel = require('react-bootstrap/lib/CollapsePanel')`
+`var CollapsePanel = require('react-bootstrap/cjs/CollapsePanel')`
 
 TODO docs
 
 ### <a name="MenuItem"></a>MenuItem
 
 ```
-var MenuItem = require('react-bootstrap/lib/MenuItem');
+var MenuItem = require('react-bootstrap/cjs/MenuItem');
 
 function handleSelect (key) {
 }

@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
-var React          = require('react');
-var classSet       = require('react/lib/cx');
-var BootstrapMixin = require('./BootstrapMixin');
+var React             = require('react');
+var classSet          = require('react/lib/cx');
+import BootstrapMixin from './BootstrapMixin';
 
 var Button = React.createClass({
   mixins: [BootstrapMixin],
@@ -62,4 +62,4 @@ var Button = React.createClass({
   }
 });
 
-module.exports = Button;
+export default = Button;

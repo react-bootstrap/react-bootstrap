@@ -3,8 +3,8 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var TabbedArea     = require('../lib/TabbedArea');
-var TabPane        = require('../lib/TabPane');
+var TabbedArea     = require('../cjs/TabbedArea');
+var TabPane        = require('../cjs/TabPane');
 
 describe('TabbedArea', function () {
   it('Should show the correct tab', function () {

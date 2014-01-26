@@ -3,7 +3,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var MenuItem        = require('../lib/MenuItem');
+var MenuItem        = require('../cjs/MenuItem');
 
 
 describe('MenuItem', function () {

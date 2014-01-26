@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-var React    = require('react');
-var classSet = require('react/lib/cx');
+var React       = require('react');
+var classSet    = require('react/lib/cx');
 
 var INPUT_TYPES = [
   'text',
@@ -98,4 +98,4 @@ var Input = React.createClass({
   }
 });
 
-module.exports = Input;
+export default = Input;

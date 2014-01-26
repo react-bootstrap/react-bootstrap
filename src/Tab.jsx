@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-var React    = require('react');
-var classSet = require('react/lib/cx');
+var React       = require('react');
+var classSet    = require('react/lib/cx');
 
 var Tab = React.createClass({
   handleClick: function () {
@@ -30,4 +30,4 @@ var Tab = React.createClass({
   }
 });
 
-module.exports = Tab;
+export default = Tab;

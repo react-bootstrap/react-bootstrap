@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
+var React    = require('react');
 
 var MenuItem = React.createClass({
   handleClick: function (e) {
@@ -38,4 +38,4 @@ var MenuItem = React.createClass({
   }
 });
 
-module.exports = MenuItem;
+export default = MenuItem;

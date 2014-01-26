@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
-var React          = require('react');
-var classSet       = require('react/lib/cx');
-var BootstrapMixin = require('./BootstrapMixin');
+var React             = require('react');
+var classSet          = require('react/lib/cx');
+import BootstrapMixin from './BootstrapMixin';
 
 var CollapsePanel  = React.createClass({
   mixins: [BootstrapMixin],
@@ -76,4 +76,4 @@ var CollapsePanel  = React.createClass({
   }
 });
 
-module.exports = CollapsePanel;
+export default = CollapsePanel;

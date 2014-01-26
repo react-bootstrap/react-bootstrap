@@ -1,10 +1,10 @@
 /** @jsx React.DOM */
 
-var React          = require('react');
-var classSet       = require('react/lib/cx');
-var Button         = require('./Button');
-var BootstrapMixin = require('./BootstrapMixin');
-var utils          = require('./utils');
+var React             = require('react');
+var classSet          = require('react/lib/cx');
+import Button         from './Button';
+import BootstrapMixin from './BootstrapMixin';
+import utils          from './utils';
 
 
 var DropdownButton = React.createClass({
@@ -116,4 +116,4 @@ var DropdownButton = React.createClass({
   }
 });
 
-module.exports = DropdownButton;
+export default = DropdownButton;

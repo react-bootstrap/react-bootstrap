@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-var React    = require('react');
-var classSet = require('react/lib/cx');
+var React       = require('react');
+var classSet    = require('react/lib/cx');
 
 var TabPane = React.createClass({
   render: function () {
@@ -18,4 +18,4 @@ var TabPane = React.createClass({
   }
 });
 
-module.exports = TabPane;
+export default = TabPane;
