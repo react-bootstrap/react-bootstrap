@@ -81,38 +81,36 @@ var DropdownButton = React.createClass({
 
     var className = classSet(this.getBsClassSet());
 
-    var menuItems = this.props.children
-      .map(function (child, i) {
-        return utils.cloneWithProps(
-          child,
-          {
-            onSelect: this.handleOptionSelect.bind(this, i)
-          }
-        );
-      }, this);
-
-
     var title = this.props.isTitleHidden ?
       <span className="sr-only">{this.props.title}</span> : this.props.title;
 
     return (
       <div className={groupClassName}>
-          <Button
-            id={this.props.id}
-            ref="button"
-            className={className}
-            onClick={this.handleClick}>
-            {title}{' '}<span className="caret" />
-          </Button>
-          <ul
-            className="dropdown-menu"
-            role="menu"
-            ref="menu"
-            aria-labelledby={this.props.id}>
-            {menuItems}
-          </ul>
+        <Button
+          id={this.props.id}
+          ref="button"
+          className={className}
+          onClick={this.handleClick}>
+          {title}{' '}<span className="caret" />
+        </Button>
+        <ul
+          className="dropdown-menu"
+          role="menu"
+          ref="menu"
+          aria-labelledby={this.props.id}>
+          {utils.modifyChildren(this.props.children, this.renderMenuItem)}
+        </ul>
       </div>
     );
+  },
+
+  renderMenuItem: function (child, i) {
+    return utils.cloneWithProps(
+        child,
+        {
+          onSelect: this.handleOptionSelect.bind(this, i)
+        }
+      );
   }
 });
 

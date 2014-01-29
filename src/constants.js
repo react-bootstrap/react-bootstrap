@@ -7,7 +7,8 @@ export default = {
         'alert': 'alert',
         'input-group': 'input-group',
         'form': 'form',
-        'panel': 'panel'
+        'panel': 'panel',
+        'nav': 'nav'
     },
     STYLES: {
         'default': 'default',
@@ -17,7 +18,9 @@ export default = {
         'warning': 'warning',
         'danger': 'danger',
         'link': 'link',
-        'inline': 'inline'
+        'inline': 'inline',
+        'tabs': 'tabs',
+        'pills': 'pills'
     },
     SIZES: {
         'large': 'lg',

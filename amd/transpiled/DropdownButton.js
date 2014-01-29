@@ -85,38 +85,36 @@ define(
 
         var className = classSet(this.getBsClassSet());
 
-        var menuItems = this.props.children
-          .map(function (child, i) {
-            return utils.cloneWithProps(
-              child,
-              {
-                onSelect: this.handleOptionSelect.bind(this, i)
-              }
-            );
-          }, this);
-
-
         var title = this.props.isTitleHidden ?
           React.DOM.span( {className:"sr-only"}, this.props.title) : this.props.title;
 
         return (
           React.DOM.div( {className:groupClassName}, 
-              Button(
-                {id:this.props.id,
-                ref:"button",
-                className:className,
-                onClick:this.handleClick}, 
-                title,' ',React.DOM.span( {className:"caret"} )
-              ),
-              React.DOM.ul(
-                {className:"dropdown-menu",
-                role:"menu",
-                ref:"menu",
-                'aria-labelledby':this.props.id}, 
-                menuItems
-              )
+            Button(
+              {id:this.props.id,
+              ref:"button",
+              className:className,
+              onClick:this.handleClick}, 
+              title,' ',React.DOM.span( {className:"caret"} )
+            ),
+            React.DOM.ul(
+              {className:"dropdown-menu",
+              role:"menu",
+              ref:"menu",
+              'aria-labelledby':this.props.id}, 
+              utils.modifyChildren(this.props.children, this.renderMenuItem)
+            )
           )
         );
+      },
+
+      renderMenuItem: function (child, i) {
+        return utils.cloneWithProps(
+            child,
+            {
+              onSelect: this.handleOptionSelect.bind(this, i)
+            }
+          );
       }
     });
 

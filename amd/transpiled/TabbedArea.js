@@ -1,13 +1,14 @@
 define(
-  ["./BootstrapMixin","./utils","./Tab","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+  ["./BootstrapMixin","./utils","./Nav","./NavItem","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
-    var React                 = require('react');
+    var React             = require('react');
     var BootstrapMixin = __dependency1__["default"];
     var utils = __dependency2__["default"];
-    var Tab = __dependency3__["default"];
+    var Nav = __dependency3__["default"];
+    var NavItem = __dependency4__["default"];
 
     var TabbedArea = React.createClass({displayName: 'TabbedArea',
       mixins: [BootstrapMixin],
@@ -31,11 +32,8 @@ define(
       },
 
       render: function () {
-        var children = this.props.children;
-
-        if (!Array.isArray(children)) {
-          children = [children]
-        }
+        var activeKey =
+          this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
 
         function hasTab (child) {
           return !!child.props.tab;
@@ -43,11 +41,11 @@ define(
 
         return this.transferPropsTo(
           React.DOM.div(null, 
-            React.DOM.ul( {className:"nav nav-tabs", ref:"tabs"}, 
-              children.filter(hasTab).map(this.renderTab)
+            Nav( {bsStyle:"tabs", activeKey:activeKey, onSelect:this.handleSelect, ref:"tabs"}, 
+              utils.modifyChildren(utils.filterChildren(this.props.children, hasTab), this.renderTab)
             ),
-            React.DOM.div( {id:this.props.id, ref:"panes"}, 
-              children.map(this.renderPane)
+            React.DOM.div( {id:this.props.id, className:"tab-content", ref:"panes"}, 
+              utils.modifyChildren(this.props.children, this.renderPane)
             )
           )
         );
@@ -65,16 +63,11 @@ define(
       },
 
       renderTab: function (child) {
-        var activeKey =
-          this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
         var key = child.props.key;
         return (
-          Tab(
-            {id:child.props.id,
-            ref:'tab' + key,
-            key:key,
-            isActive:key === activeKey,
-            onSelect:this.handleSelect.bind(this, key)}, 
+          NavItem(
+            {ref:'tab' + key,
+            key:key}, 
             child.props.tab
           )
         );
