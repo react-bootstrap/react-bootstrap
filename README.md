@@ -7,10 +7,11 @@
 ## Contributors
 
 - Huge contributions from [syllog1sm](https://github.com/syllog1sm) ([blog](http://clozeit.wordpress.com/))
-- [Pieter Vanderwerff](https://github.com/pieter-vanderwerff)
+- [Pieter Vanderwerff](https://github.com/pieterv)
 
 ## Currently implemented (but under active development)
 
+- [Nav, NavItem](#Nav)
 - [Button](#Button)
 - [DropdownButton](#DropdownButton)
 - [MenuItem](#MenuItem)
@@ -18,6 +19,25 @@
 - [CollapsePanel](#CollapsePanel)
 - [Alert](#Alert)
 - SplitButton
+
+### <a name="Nav"></a>Nav
+
+```
+var Nav     = require('react-bootstrap/cjs/Nav');
+var NavItem = require('react-bootstrap/cjs/NavItem');
+
+var key = 1;
+
+function handleSelect (selectedKey) {
+  key = selectedKey;
+}
+
+<Nav bsStyle="[tabs|pills]" bsVariation="[stacked|justified]" activeKey={key} onSelect={handleSelect}>
+  <NavItem key={1} href="/home">NavItem 1 content</NavItem>
+  <NavItem key={2} title="Item">NavItem 2 content</NavItem>
+  <NavItem key={3} disabled={true}>NavItem 3 content</NavItem>
+</Nav>
+```
 
 ### <a name="Button"></a>Button
 
@@ -106,6 +126,5 @@ function handleSelect (key) {
 
 - Label
 - Accordion
-- Nav, NavItem
 - Pagination, Pager
 - Modal
