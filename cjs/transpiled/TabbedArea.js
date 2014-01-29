@@ -1,10 +1,11 @@
 "use strict";
 /** @jsx React.DOM */
 
-var React                 = require('react');
+var React             = require('react');
 var BootstrapMixin = require("./BootstrapMixin")["default"];
 var utils = require("./utils")["default"];
-var Tab = require("./Tab")["default"];
+var Nav = require("./Nav")["default"];
+var NavItem = require("./NavItem")["default"];
 
 var TabbedArea = React.createClass({displayName: 'TabbedArea',
   mixins: [BootstrapMixin],
@@ -28,11 +29,8 @@ var TabbedArea = React.createClass({displayName: 'TabbedArea',
   },
 
   render: function () {
-    var children = this.props.children;
-
-    if (!Array.isArray(children)) {
-      children = [children]
-    }
+    var activeKey =
+      this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
 
     function hasTab (child) {
       return !!child.props.tab;
@@ -40,11 +38,11 @@ var TabbedArea = React.createClass({displayName: 'TabbedArea',
 
     return this.transferPropsTo(
       React.DOM.div(null, 
-        React.DOM.ul( {className:"nav nav-tabs", ref:"tabs"}, 
-          children.filter(hasTab).map(this.renderTab)
+        Nav( {bsStyle:"tabs", activeKey:activeKey, onSelect:this.handleSelect, ref:"tabs"}, 
+          utils.modifyChildren(utils.filterChildren(this.props.children, hasTab), this.renderTab)
         ),
-        React.DOM.div( {id:this.props.id, ref:"panes"}, 
-          children.map(this.renderPane)
+        React.DOM.div( {id:this.props.id, className:"tab-content", ref:"panes"}, 
+          utils.modifyChildren(this.props.children, this.renderPane)
         )
       )
     );
@@ -62,16 +60,11 @@ var TabbedArea = React.createClass({displayName: 'TabbedArea',
   },
 
   renderTab: function (child) {
-    var activeKey =
-      this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
     var key = child.props.key;
     return (
-      Tab(
-        {id:child.props.id,
-        ref:'tab' + key,
-        key:key,
-        isActive:key === activeKey,
-        onSelect:this.handleSelect.bind(this, key)}, 
+      NavItem(
+        {ref:'tab' + key,
+        key:key}, 
         child.props.tab
       )
     );
