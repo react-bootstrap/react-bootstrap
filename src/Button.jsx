@@ -1,14 +1,15 @@
 /** @jsx React.DOM */
 
-var React             = require('react');
-var classSet          = require('react/lib/cx');
+import React          from './react-es6';
+import classSet       from './react-es6/lib/cx';
 import BootstrapMixin from './BootstrapMixin';
 
 var Button = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
-    loadingChildren: React.PropTypes.renderable,
+    // TODO: Uncompatable with React 0.8.0
+    //loadingChildren: React.PropTypes.renderable,
     isLoading:   React.PropTypes.bool,
     isActive:    React.PropTypes.bool,
     isDisabled:    React.PropTypes.bool

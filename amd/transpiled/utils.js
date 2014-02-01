@@ -1,8 +1,8 @@
 define(
-  ["exports"],
-  function(__exports__) {
+  ["./react-es6/lib/ReactPropTransferer","exports"],
+  function(__dependency1__, __exports__) {
     "use strict";
-    var ReactPropTransferer = require('react/lib/ReactPropTransferer');
+    var ReactPropTransferer = __dependency1__["default"];
 
     __exports__["default"] = {
 

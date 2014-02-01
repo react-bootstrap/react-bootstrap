@@ -1,5 +1,5 @@
 "use strict";
-var ReactPropTransferer = require('react/lib/ReactPropTransferer');
+var ReactPropTransferer = require("./react-es6/lib/ReactPropTransferer")["default"];
 
 exports["default"] = {
 

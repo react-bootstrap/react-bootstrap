@@ -1,13 +1,13 @@
 define(
-  ["./BootstrapMixin","./utils","exports"],
-  function(__dependency1__, __dependency2__, __exports__) {
+  ["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
-    var React             = require('react');
-    var classSet          = require('react/lib/cx');
-    var BootstrapMixin = __dependency1__["default"];
-    var utils = __dependency2__["default"];
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var utils = __dependency4__["default"];
 
 
     var Nav = React.createClass({displayName: 'Nav',

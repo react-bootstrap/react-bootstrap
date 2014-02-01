@@ -1,10 +1,10 @@
 define(
-  ["exports"],
-  function(__exports__) {
+  ["./react-es6","exports"],
+  function(__dependency1__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
-    var React    = require('react');
+    var React = __dependency1__["default"];
 
     var MenuItem = React.createClass({displayName: 'MenuItem',
       handleClick: function (e) {

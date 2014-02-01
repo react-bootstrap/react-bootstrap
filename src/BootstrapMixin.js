@@ -1,4 +1,4 @@
-var React        = require('react');
+import React     from './react-es6';
 import constants from './constants';
 
 var BootstrapMixin = {

@@ -1,18 +1,19 @@
 define(
-  ["./BootstrapMixin","exports"],
-  function(__dependency1__, __exports__) {
+  ["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
-    var React             = require('react');
-    var classSet          = require('react/lib/cx');
-    var BootstrapMixin = __dependency1__["default"];
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
 
     var Button = React.createClass({displayName: 'Button',
       mixins: [BootstrapMixin],
 
       propTypes: {
-        loadingChildren: React.PropTypes.renderable,
+        // TODO: Uncompatable with React 0.8.0
+        //loadingChildren: React.PropTypes.renderable,
         isLoading:   React.PropTypes.bool,
         isActive:    React.PropTypes.bool,
         isDisabled:    React.PropTypes.bool

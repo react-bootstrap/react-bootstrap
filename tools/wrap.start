@@ -1,0 +1,11 @@
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD.
+        define(['react'], factory);
+    } else {
+        // Browser globals
+        root.ReactBootstrap = factory(root.React);
+    }
+}(this, function (React) {
+
+

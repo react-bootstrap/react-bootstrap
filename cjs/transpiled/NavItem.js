@@ -1,8 +1,8 @@
 "use strict";
 /** @jsx React.DOM */
 
-var React             = require('react');
-var classSet          = require('react/lib/cx');
+var React = require("./react-es6")["default"];
+var classSet = require("./react-es6/lib/cx")["default"];
 var BootstrapMixin = require("./BootstrapMixin")["default"];
 
 var NavItem = React.createClass({displayName: 'NavItem',

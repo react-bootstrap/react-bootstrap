@@ -1,9 +1,9 @@
 define(
-  ["./constants","exports"],
-  function(__dependency1__, __exports__) {
+  ["./react-es6","./constants","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
-    var React        = require('react');
-    var constants = __dependency1__["default"];
+    var React = __dependency1__["default"];
+    var constants = __dependency2__["default"];
 
     var BootstrapMixin = {
       propTypes: {

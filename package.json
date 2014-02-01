@@ -41,6 +41,8 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-browserify": "~1.3.0",
     "grunt-cli": "~0.1.13",
-    "grunt-react": "~0.6.0"
+    "grunt-react": "~0.6.0",
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt-shell": "~0.6.4"
   }
 }

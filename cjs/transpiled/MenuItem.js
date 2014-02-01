@@ -1,7 +1,7 @@
 "use strict";
 /** @jsx React.DOM */
 
-var React    = require('react');
+var React = require("./react-es6")["default"];
 
 var MenuItem = React.createClass({displayName: 'MenuItem',
   handleClick: function (e) {

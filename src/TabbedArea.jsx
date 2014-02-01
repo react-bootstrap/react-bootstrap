@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-var React             = require('react');
+import React          from './react-es6';
 import BootstrapMixin from './BootstrapMixin';
 import utils          from './utils';
 import Nav            from './Nav';

@@ -1,21 +1,22 @@
 define(
-  ["./BootstrapMixin","./Button","./DropdownButton","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+  ["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./Button","./DropdownButton","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
-    var React             = require('react');
-    var classSet          = require('react/lib/cx');
-    var BootstrapMixin = __dependency1__["default"];
-    var Button = __dependency2__["default"];
-    var DropdownButton = __dependency3__["default"];
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var Button = __dependency4__["default"];
+    var DropdownButton = __dependency5__["default"];
 
     var SplitButton = React.createClass({displayName: 'SplitButton',
       mixins: [BootstrapMixin],
 
       propTypes: {
-        title: React.PropTypes.renderable.isRequired,
-        dropdownTitle: React.PropTypes.renderable,
+        // TODO: Uncompatable with React 0.8.0
+        //title: React.PropTypes.renderable.isRequired,
+        //dropdownTitle: React.PropTypes.renderable,
         bsVariation: React.PropTypes.oneOf(['dropup']),
         isInInputGroup: React.PropTypes.bool,
         onClick: React.PropTypes.func,

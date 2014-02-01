@@ -1,11 +1,11 @@
 define(
-  ["exports"],
-  function(__exports__) {
+  ["./react-es6","./react-es6/lib/cx","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
-    var React       = require('react');
-    var classSet    = require('react/lib/cx');
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
 
     var INPUT_TYPES = [
       'text',

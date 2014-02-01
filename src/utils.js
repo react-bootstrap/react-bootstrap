@@ -1,4 +1,4 @@
-var ReactPropTransferer = require('react/lib/ReactPropTransferer');
+import ReactPropTransferer       from './react-es6/lib/ReactPropTransferer';
 
 export default = {
 

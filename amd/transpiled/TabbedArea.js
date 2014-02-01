@@ -1,14 +1,14 @@
 define(
-  ["./BootstrapMixin","./utils","./Nav","./NavItem","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+  ["./react-es6","./BootstrapMixin","./utils","./Nav","./NavItem","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
-    var React             = require('react');
-    var BootstrapMixin = __dependency1__["default"];
-    var utils = __dependency2__["default"];
-    var Nav = __dependency3__["default"];
-    var NavItem = __dependency4__["default"];
+    var React = __dependency1__["default"];
+    var BootstrapMixin = __dependency2__["default"];
+    var utils = __dependency3__["default"];
+    var Nav = __dependency4__["default"];
+    var NavItem = __dependency5__["default"];
 
     var TabbedArea = React.createClass({displayName: 'TabbedArea',
       mixins: [BootstrapMixin],

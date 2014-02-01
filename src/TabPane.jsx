@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-var React       = require('react');
-var classSet    = require('react/lib/cx');
+import React          from './react-es6';
+import classSet       from './react-es6/lib/cx';
 
 var TabPane = React.createClass({
   render: function () {

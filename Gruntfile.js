@@ -2,23 +2,14 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    // uglify: {
-    //   options: {
-    //     banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-    //   },
-    //   build: {
-    //     src: 'src/<%= pkg.name %>.js',
-    //     dest: 'build/<%= pkg.name %>.min.js'
-    //   }
-    // }
-    //
+
     transpile: {
       cjs: {
         type: 'cjs',
         files: [{
           expand: true,
           cwd: '.',
-          src: ['transpiled/*.js'],
+          src: ['transpiled/**/*.js'],
           dest: 'cjs/'
         }]
       },
@@ -28,7 +19,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '.',
-          src: ['transpiled/*.js'],
+          src: ['transpiled/**/*.js'],
           dest: 'amd/'
         }]
       }
@@ -42,7 +33,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'cjs/transpiled',
-          src: ['**/*.js'],
+          src: ['*.js'],
           dest: 'cjs'
         }]
       },
@@ -53,7 +44,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'amd/transpiled',
-          src: ['**/*.js'],
+          src: ['*.js'],
           dest: 'amd'
         }]
       }
@@ -111,10 +102,32 @@ module.exports = function (grunt) {
           'test_bundle.js': ['test-built/**/*.js'],
         },
         options: {
-          transform: ['envify']
+          transform: ['envify'],
+          verbose: true
         }
       }
+    },
+
+    // TODO: work out how to get grunt-contrib-requirejs working
+    shell: {
+      requirejs: {
+        command: 'node tools/r.js -o tools/build.js',
+        options: {
+            stdout: true
+        }
+      }
+    },
+
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      },
+      build: {
+        src: 'dist/<%= pkg.name %>.min.js',
+        dest: 'dist/<%= pkg.name %>.min.js'
+      }
     }
+
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -125,6 +138,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-es6-module-wrap-default');
   grunt.loadNpmTasks('grunt-browserify');
+  grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('build', [
     'clean:amd',
@@ -133,6 +147,8 @@ module.exports = function (grunt) {
     'transpile',
     'es6_module_wrap_default',
     'browserify',
+    'shell:requirejs',
+    'uglify',
     'clean:transpiled'
   ]);
 

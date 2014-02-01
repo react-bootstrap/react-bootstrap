@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-var React             = require('react');
-var classSet          = require('react/lib/cx');
+import React          from './react-es6';
+import classSet       from './react-es6/lib/cx';
 import BootstrapMixin from './BootstrapMixin';
 import Button         from './Button';
 import DropdownButton from './DropdownButton';
@@ -10,8 +10,9 @@ var SplitButton = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
-    title: React.PropTypes.renderable.isRequired,
-    dropdownTitle: React.PropTypes.renderable,
+    // TODO: Uncompatable with React 0.8.0
+    //title: React.PropTypes.renderable.isRequired,
+    //dropdownTitle: React.PropTypes.renderable,
     bsVariation: React.PropTypes.oneOf(['dropup']),
     isInInputGroup: React.PropTypes.bool,
     onClick: React.PropTypes.func,

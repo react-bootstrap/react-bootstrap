@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-var React    = require('react');
+import React          from './react-es6';
 
 var MenuItem = React.createClass({
   handleClick: function (e) {

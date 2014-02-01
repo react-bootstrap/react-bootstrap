@@ -1,7 +1,7 @@
 "use strict";
 /** @jsx React.DOM */
 
-var React             = require('react');
+var React = require("./react-es6")["default"];
 var BootstrapMixin = require("./BootstrapMixin")["default"];
 var utils = require("./utils")["default"];
 var Nav = require("./Nav")["default"];
