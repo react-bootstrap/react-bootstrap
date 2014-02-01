@@ -9,6 +9,39 @@
 - Huge contributions from [syllog1sm](https://github.com/syllog1sm) ([blog](http://clozeit.wordpress.com/))
 - [Pieter Vanderwerff](https://github.com/pieterv)
 
+## Getting started
+
+You can import the lib with as AMD modules, CommonJS modules as a global JS script.
+
+First add the bootstrap CSS to your project then
+
+### AMD
+```
+bower install react-bootstrap
+
+var Alert = require('react-bootstrap/amd/Alert');
+// or
+var Alert = require('react-bootstrap/amd').Alert;
+```
+
+### CommonJS
+```
+npm install react react-bootstrap
+
+var Alert = require('react-bootstrap/cjs/Alert');
+// or
+var Alert = require('react-bootstrap').Alert;
+```
+
+### Browser globals
+```
+<script src="http://fb.me/react-0.8.0.js"></script>
+<script src="react-bootstrap/dist/react-bootstrap.min.js"></script>
+<script>
+    var Alert = ReactBootstrap.Alert;
+</script>
+```
+
 ## Currently implemented (but under active development)
 
 - [Nav, NavItem](#Nav)
