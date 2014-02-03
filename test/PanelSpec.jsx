@@ -62,22 +62,57 @@ describe('Panel', function () {
 
   it('Should have collapse classes', function () {
     var instance = (
-        <Panel isCollapsable={true}>Panel content</Panel>
+        <Panel isCollapsable={true} isOpen={true}>Panel content</Panel>
       );
 
     ReactTestUtils.renderIntoDocument(instance);
-    assert.ok(instance.getDOMNode().className.match(/\bpanel-collapse\b/));
-    assert.ok(instance.getDOMNode().className.match(/\bcollapse\b/));
-    assert.notOk(instance.getDOMNode().className.match(/\bin\b/));
+    assert.ok(instance.getDOMNode().querySelector('.panel-collapse.collapse.in'));
+  });
+
+  it('Should pass through dom properties', function () {
+    var instance = (
+        <Panel isCollapsable={false} id="testid">Panel content</Panel>
+      );
+
+    ReactTestUtils.renderIntoDocument(instance);
+    assert.equal(instance.getDOMNode().id, 'testid');
+  });
+
+  it('Should pass id to panel-collapse', function () {
+    var instance = (
+        <Panel isCollapsable={true} id="testid" header="Heading">Panel content</Panel>
+      );
+
+    ReactTestUtils.renderIntoDocument(instance);
+    assert.notOk(instance.getDOMNode().id);
+    var collapse = instance.getDOMNode().querySelector('.panel-collapse');
+    var anchor = instance.getDOMNode().querySelector('.panel-title a');
+    assert.equal(collapse.id, 'testid');
+    assert.equal(anchor.getAttribute('href'), '#testid');
   });
 
   it('Should be open', function () {
     var instance = (
-        <Panel isOpen={true}>Panel content</Panel>
+        <Panel isCollapsable={true} isOpen={true} header="Heading">Panel content</Panel>
       );
 
     ReactTestUtils.renderIntoDocument(instance);
-    assert.ok(instance.getDOMNode().className.match(/\bin\b/));
+    var collapse = instance.getDOMNode().querySelector('.panel-collapse');
+    var anchor = instance.getDOMNode().querySelector('.panel-title a');
+    assert.ok(collapse.className.match(/\bin\b/));
+    assert.notOk(anchor.className.match(/\bcollapsed\b/));
+  });
+
+  it('Should be closed', function () {
+    var instance = (
+        <Panel isCollapsable={true} isOpen={false} header="Heading">Panel content</Panel>
+      );
+
+    ReactTestUtils.renderIntoDocument(instance);
+    var collapse = instance.getDOMNode().querySelector('.panel-collapse');
+    var anchor = instance.getDOMNode().querySelector('.panel-title a');
+    assert.notOk(collapse.className.match(/\bin\b/));
+    assert.ok(anchor.className.match(/\bcollapsed\b/));
   });
 
   it('Should call onSelect handler', function (done) {
@@ -86,11 +121,29 @@ describe('Panel', function () {
       done();
     }
     var instance = (
-        <Panel onSelect={handleSelect} header="Click me" key={1}>Panel content</Panel>
+        <Panel isCollapsable={true} onSelect={handleSelect} header="Click me" key={1}>Panel content</Panel>
       );
 
     ReactTestUtils.renderIntoDocument(instance);
     var title = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-title');
-    ReactTestUtils.Simulate.click(title.getDOMNode());
+    ReactTestUtils.Simulate.click(title.getDOMNode().firstChild);
+  });
+
+  it('Should toggle when uncontrolled', function (done) {
+    var instance = (
+        <Panel isCollapsable={true} defaultOpen={false} header="Click me">Panel content</Panel>
+      );
+
+    ReactTestUtils.renderIntoDocument(instance);
+
+    assert.notOk(instance.state.isOpen);
+    // TODO: update to `ReactTestUtils#nextUpdate()`
+    instance.componentDidUpdate = function () {
+      assert.ok(instance.state.isOpen);
+      done();
+    }
+
+    var title = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-title');
+    ReactTestUtils.Simulate.click(title.getDOMNode().firstChild);
   });
 });

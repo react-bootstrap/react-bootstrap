@@ -48,8 +48,7 @@ var Alert = require('react-bootstrap').Alert;
 - [Button](#Button)
 - [DropdownButton](#DropdownButton)
 - [MenuItem](#MenuItem)
-- [TabbedArea, TabPane, Tab](#Tabs)
-- [CollapsePanel](#CollapsePanel)
+- [TabbedArea, TabPane](#Tabs)
 - [Alert](#Alert)
 - SplitButton
 
@@ -138,12 +137,6 @@ function handleDismiss () {
 </Alert>
 ```
 
-### <a name="CollapsePanel"></a>CollapsePanel
-
-`var CollapsePanel = require('react-bootstrap/cjs/CollapsePanel')`
-
-TODO docs
-
 ### <a name="MenuItem"></a>MenuItem
 
 ```
@@ -157,6 +150,8 @@ function handleSelect (key) {
 
 ## Up next
 
+- Panel, PanelGroup
+- Input
 - Label
 - Accordion
 - Pagination, Pager

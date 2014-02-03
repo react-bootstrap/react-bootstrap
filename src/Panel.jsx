@@ -22,26 +22,64 @@ var Panel = React.createClass({
     };
   },
 
-  handleSelect: function () {
+  getInitialState: function() {
+    return {
+      isOpen: this.props.defaultOpen != null ? this.props.defaultOpen : null
+    };
+  },
+
+  handleSelect: function (e) {
     if (this.props.onSelect) {
+      this._isChanging = true;
       this.props.onSelect(this.props.key);
+      this._isChanging = false;
+      e.preventDefault();
     }
+
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  },
+
+  shouldComponentUpdate: function () {
+    return !this._isChanging;
+  },
+
+  isOpen: function () {
+    return (this.props.isOpen != null) ? this.props.isOpen : this.state.isOpen;
   },
 
   render: function () {
     var classes = this.getBsClassSet();
     classes['panel'] = true;
-    classes['panel-collapse'] = this.props.isCollapsable;
-    classes['collapse'] = this.props.isCollapsable;
-    classes['in'] = this.props.isOpen;
 
     return this.transferPropsTo(
-      <div className={classSet(classes)}>
+      <div className={classSet(classes)} id={this.props.isCollapsable ? null : this.props.id}>
         {this.renderHeading()}
-        <div className="panel-body">
-          {this.props.children}
-        </div>
+        {this.props.isCollapsable ? this.renderCollapsableBody() : this.renderBody()}
         {this.renderFooter()}
+      </div>
+    );
+  },
+
+  renderCollapsableBody: function () {
+    var classes = {
+      'panel-collapse': true,
+      'collapse': true,
+      'in': this.isOpen()
+    };
+
+    return (
+      <div className={classSet(classes)} id={this.props.id}>
+        {this.renderBody()}
+      </div>
+    );
+  },
+
+  renderBody: function () {
+    return (
+      <div className="panel-body">
+        {this.props.children}
       </div>
     );
   },
@@ -54,9 +92,8 @@ var Panel = React.createClass({
     }
 
     if (!React.isValidComponent(header) || Array.isArray(header)) {
-      header = (
-        <h4 className="panel-title">{header}</h4>
-      );
+      header = this.props.isCollapsable ?
+        this.renderCollapsableTitle(header) : this.renderTitle(header);
     } else {
       header = utils.cloneWithProps(header, {
         className: 'panel-title'
@@ -64,9 +101,28 @@ var Panel = React.createClass({
     }
 
     return (
-      <div className="panel-heading" onClick={this.handleSelect}>
+      <div className="panel-heading">
         {header}
       </div>
+    );
+  },
+
+  renderTitle: function (header) {
+    return (
+      <h4 className="panel-title">{header}</h4>
+    );
+  },
+
+  renderCollapsableTitle: function (header) {
+    return (
+      <h4 className="panel-title">
+        <a
+          href={'#' + (this.props.id || '')}
+          className={this.isOpen() ? null : 'collapsed'}
+          onClick={this.handleSelect}>
+          {header}
+        </a>
+      </h4>
     );
   },
 
