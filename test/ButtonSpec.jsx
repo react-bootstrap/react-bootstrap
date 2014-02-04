@@ -49,7 +49,7 @@ describe('Button', function () {
     ReactTestUtils.renderIntoDocument(instance);
 
     assert.ok(instance.getDOMNode().className.match(/\bdisabled\b/));
-    assert.equal(instance.getDOMNode().getAttribute('disabled'), 'true');
+    assert.ok(instance.getDOMNode().disabled);
   });
 
   it('Should have the default class', function () {
@@ -120,7 +120,7 @@ describe('Button', function () {
     ReactTestUtils.renderIntoDocument(instance);
 
     assert.ok(instance.getDOMNode().className.match(/\bdisabled\b/));
-    assert.equal(instance.getDOMNode().getAttribute('disabled'), 'true');
+    assert.ok(instance.getDOMNode().disabled);
     assert.equal(instance.getDOMNode().innerText, 'Loading...');
   });
 
