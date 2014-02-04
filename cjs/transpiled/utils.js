@@ -1,5 +1,5 @@
 "use strict";
-var ReactPropTransferer = require("./react-es6/lib/ReactPropTransferer")["default"];
+var cloneWithProps = require("./react-es6/lib/cloneWithProps")["default"];
 
 exports["default"] = {
 
@@ -74,8 +74,6 @@ exports["default"] = {
    * @return {object} a clone of child with props merged in.
    */
   cloneWithProps: function (child, props) {
-    return child.constructor.ConvenienceConstructor(
-      ReactPropTransferer.mergeProps(child.props, props)
-    );
+    return cloneWithProps(child, props);
   }
 };

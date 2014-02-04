@@ -1,18 +1,30 @@
 <html>
 <head>
-    <script src="../tools/react.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+    <script src="http://react.zpao.com/builds/master/latest/react.js"></script>
     <script src="../dist/react-bootstrap.min.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
 </head>
 <body>
-    <script>
-        React.renderComponent(
-            ReactBootstrap.Button({
-                onClick: function () {
-                    alert('yay!');
-                }
-            }, 'Click me'),
-            document.body
-        );
+    <script type="text/jsx">
+        /** @jsx React.DOM */
+        var Panel = ReactBootstrap.Panel,
+            isOpen = true,
+            handleSelect = function () {
+                isOpen = !isOpen;
+                render();
+            },
+            render = function () {
+                var header = 'header'; //React.DOM.h1({}, 'Header');
+                React.renderComponent(
+                    <Panel header={header}  bsStyle="default">Content</Panel>,
+                    document.body
+                );
+            };
+
+            render();
+
     </script>
 </body>
 </html>

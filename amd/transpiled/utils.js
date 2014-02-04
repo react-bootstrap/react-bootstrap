@@ -1,8 +1,8 @@
 define(
-  ["./react-es6/lib/ReactPropTransferer","exports"],
+  ["./react-es6/lib/cloneWithProps","exports"],
   function(__dependency1__, __exports__) {
     "use strict";
-    var ReactPropTransferer = __dependency1__["default"];
+    var cloneWithProps = __dependency1__["default"];
 
     __exports__["default"] = {
 
@@ -77,9 +77,7 @@ define(
        * @return {object} a clone of child with props merged in.
        */
       cloneWithProps: function (child, props) {
-        return child.constructor.ConvenienceConstructor(
-          ReactPropTransferer.mergeProps(child.props, props)
-        );
+        return cloneWithProps(child, props);
       }
     };
   });

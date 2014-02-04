@@ -25,16 +25,14 @@ describe('Panel', function () {
     assert.ok(instance.getDOMNode().className.match(/\bpanel-default\b/));
   });
 
-  it('Should have header wrapped in h4', function () {
+  it('Should have unwrapped header', function () {
     var instance = (
         <Panel header="Heading">Panel content</Panel>
       );
 
     ReactTestUtils.renderIntoDocument(instance);
     var header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading').getDOMNode();
-    assert.equal(header.firstChild.nodeName, 'H4');
-    assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
-    assert.equal(header.firstChild.innerText, 'Heading');
+    assert.equal(header.innerHTML, 'Heading');
   });
 
   it('Should have custom component header', function () {
@@ -47,7 +45,21 @@ describe('Panel', function () {
     var header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading').getDOMNode();
     assert.equal(header.firstChild.nodeName, 'H3');
     assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
-    assert.equal(header.firstChild.innerText, 'Heading');
+    assert.equal(header.firstChild.innerHTML, 'Heading');
+  });
+
+  it('Should have custom component header with anchor', function () {
+    var header = <h3>Heading</h3>,
+        instance = (
+          <Panel header={header} isCollapsable={true}>Panel content</Panel>
+        );
+
+    ReactTestUtils.renderIntoDocument(instance);
+    var header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading').getDOMNode();
+    assert.equal(header.firstChild.nodeName, 'H3');
+    assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
+    assert.equal(header.firstChild.firstChild.nodeName, 'A');
+    assert.equal(header.firstChild.firstChild.innerHTML, 'Heading');
   });
 
   it('Should have footer', function () {

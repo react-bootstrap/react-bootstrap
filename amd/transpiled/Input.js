@@ -33,8 +33,8 @@ define(
         placeholder: React.PropTypes.string,
         label: React.PropTypes.string,
         required: React.PropTypes.bool,
-        oneOf: React.PropTypes.array,
-        minLength: React.PropTypes.int
+        oneOf: React.PropTypes.array
+        //minLength: React.PropTypes.int
       },
 
       getValue: function () {

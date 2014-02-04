@@ -1,4 +1,4 @@
-import ReactPropTransferer       from './react-es6/lib/ReactPropTransferer';
+import cloneWithProps from './react-es6/lib/cloneWithProps';
 
 export default = {
 
@@ -73,8 +73,6 @@ export default = {
    * @return {object} a clone of child with props merged in.
    */
   cloneWithProps: function (child, props) {
-    return child.constructor.ConvenienceConstructor(
-      ReactPropTransferer.mergeProps(child.props, props)
-    );
+    return cloneWithProps(child, props);
   }
 };
