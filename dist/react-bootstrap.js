@@ -2336,3 +2336,5 @@ define('react-bootstrap',['require','../amd/Alert','../amd/BootstrapMixin','../a
     //value.
     return require('react-bootstrap');
 }));
+
+//# sourceMappingURL=react-bootstrap.js.map
