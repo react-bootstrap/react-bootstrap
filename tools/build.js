@@ -7,9 +7,10 @@
     },
     "include": ["./almond", "react-bootstrap"],
     "exclude": ["react"],
-    "out": "../dist/react-bootstrap.min.js",
+    "out": "../dist/react-bootstrap.js",
     "wrap": {
         "startFile": "wrap.start",
         "endFile": "wrap.end"
-    }
+    },
+    "optimize": "none"
 })
