@@ -1,9 +1,7 @@
 ({
     "baseUrl": "../tools",
     "paths": {
-        "react-bootstrap": "../amd",
-        "../amd/transpiled/react-es6": "./react-es6",
-        "../amd/transpiled/react-es6/lib": "../amd/transpiled/react-es6/lib"
+        "react-bootstrap": "../amd"
     },
     "include": ["./almond", "react-bootstrap"],
     "exclude": ["react"],

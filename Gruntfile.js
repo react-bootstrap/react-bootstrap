@@ -50,6 +50,17 @@ module.exports = function (grunt) {
       }
     },
 
+    copy: {
+      amdreact: {
+        files: [
+          {
+            src: ['tools/react-es6.js'],
+            dest: 'amd/transpiled/react-es6.js'
+          }
+        ]
+      }
+    },
+
     react: {
       src: {
         files: [
@@ -136,6 +147,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-react');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-es6-module-wrap-default');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-shell');
@@ -146,6 +158,7 @@ module.exports = function (grunt) {
     'react',
     'transpile',
     'es6_module_wrap_default',
+    'copy:amdreact',
     'browserify',
     'shell:requirejs',
     'uglify',
