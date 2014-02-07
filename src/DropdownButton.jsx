@@ -19,8 +19,7 @@ var DropdownButton = React.createClass({
   getDefaultProps: function () {
     return {
       options: [],
-      bsClass: 'button',
-      className: 'dropdown-toggle'
+      bsClass: 'button'
     }
   },
 
@@ -79,7 +78,9 @@ var DropdownButton = React.createClass({
       'open': this.state.open
     });
 
-    var className = classSet(this.getBsClassSet());
+    var classObject = this.getBsClassSet();
+    classObject['dropdown-toggle'] = true;
+    var className = classSet(classObject);
 
     var title = this.props.isTitleHidden ?
       <span className="sr-only">{this.props.title}</span> : this.props.title;

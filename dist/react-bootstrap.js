@@ -1427,8 +1427,7 @@ define(
       getDefaultProps: function () {
         return {
           options: [],
-          bsClass: 'button',
-          className: 'dropdown-toggle'
+          bsClass: 'button'
         }
       },
 
@@ -1487,7 +1486,9 @@ define(
           'open': this.state.open
         });
 
-        var className = classSet(this.getBsClassSet());
+        var classObject = this.getBsClassSet();
+        classObject['dropdown-toggle'] = true;
+        var className = classSet(classObject);
 
         var title = this.props.isTitleHidden ?
           React.DOM.span( {className:"sr-only"}, this.props.title) : this.props.title;
