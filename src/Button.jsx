@@ -1,45 +1,66 @@
 /** @jsx React.DOM */
 
-var React          = require('react');
-var merge          = require('react/lib/merge');
+import React          from './react-es6';
+import classSet       from './react-es6/lib/cx';
+import BootstrapMixin from './BootstrapMixin';
 
-module.exports     = React.createClass({
-  renderAnchor: function (className) {
-    return (
+var Button = React.createClass({
+  mixins: [BootstrapMixin],
+
+  propTypes: {
+    // TODO: Uncompatable with React 0.8.0
+    //loadingChildren: React.PropTypes.renderable,
+    isLoading:   React.PropTypes.bool,
+    isActive:    React.PropTypes.bool,
+    isDisabled:    React.PropTypes.bool
+  },
+
+  getDefaultProps: function () {
+    return {
+      bsClass: 'button',
+      loadingChildren: 'Loading...'
+    };
+  },
+
+  renderAnchor: function (children, classes, isDisabled) {
+    return this.transferPropsTo(
       <a
         href={this.props.href}
-        className={className}
+        className={classSet(classes)}
         onClick={this.props.onClick}
-        disabled={this.props.disabled}>
-        {this.props.children}
+        disabled={isDisabled}>
+        {children}
       </a>
     );
   },
 
-  renderButton: function (className) {
-    return (
+  renderButton: function (children, classes, isDisabled) {
+    return this.transferPropsTo(
       <button
         type={this.props.type || "button"}
-        className={className}
+        className={classSet(classes)}
         onClick={this.props.onClick}
-        disabled={this.props.disabled}>
-        {this.props.children}
+        disabled={isDisabled}>
+        {children}
       </button>
     );
   },
 
   render: function () {
-    var className = React.addons.classSet(merge({
-          "btn": true,
-          "btn-default": this.props.default,
-          "btn-primary": this.props.primary,
-          "btn-success": this.props.success,
-          "btn-info": this.props.info,
-          "btn-warning": this.props.warning,
-          "btn-danger": this.props.danger
-        }, this.props.className));
+    var isDisabled = !!(this.props.isDisabled || this.props.isLoading);
 
-    return (this.props.href) ?
-      this.renderAnchor(className) : this.renderButton(className);
+    var classes = this.getBsClassSet();
+    classes['disabled'] = isDisabled;
+    classes['active'] = this.props.isActive;
+
+    var children = this.props.isLoading ?
+      this.props.loadingChildren : this.props.children;
+
+    var renderFuncName = (this.props.href) ?
+      'renderAnchor' : 'renderButton';
+
+    return this[renderFuncName](children, classes, isDisabled);
   }
 });
+
+export default = Button;
