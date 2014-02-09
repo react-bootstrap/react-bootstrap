@@ -18,8 +18,7 @@ var DropdownButton = React.createClass({
 
   getDefaultProps: function () {
     return {
-      options: [],
-      bsClass: 'button'
+      options: []
     }
   },
 
@@ -42,9 +41,9 @@ var DropdownButton = React.createClass({
     this.toggle();
   },
 
-  handleOptionSelect: function (i) {
+  handleOptionSelect: function (key) {
     if (typeof this.props.onSelect === 'function') {
-      this.props.onSelect(i);
+      this.props.onSelect(key);
     }
   },
 
@@ -78,22 +77,21 @@ var DropdownButton = React.createClass({
       'open': this.state.open
     });
 
-    var classObject = this.getBsClassSet();
-    classObject['dropdown-toggle'] = true;
-    var className = classSet(classObject);
-
     var title = this.props.isTitleHidden ?
       <span className="sr-only">{this.props.title}</span> : this.props.title;
 
-    return (
-      <div className={groupClassName}>
+    var button = this.transferPropsTo(
         <Button
-          id={this.props.id}
           ref="button"
-          className={className}
+          className="dropdown-toggle"
           onClick={this.handleClick}>
           {title}{' '}<span className="caret" />
         </Button>
+    );
+
+    return (
+      <div className={groupClassName}>
+        {button}
         <ul
           className="dropdown-menu"
           role="menu"
@@ -109,7 +107,8 @@ var DropdownButton = React.createClass({
     return utils.cloneWithProps(
         child,
         {
-          onSelect: this.handleOptionSelect.bind(this, i)
+          ref: 'menuItem' + (i + 1),
+          onSelect: this.handleOptionSelect.bind(this, child.props.key)
         }
       );
   }

@@ -15,7 +15,7 @@
   "author": "Stephen J. Collings <stevoland@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "react": "~0.8"
+    "react": "~0.9"
   },
   "devDependencies": {
     "karma-chai": "0.0.2",

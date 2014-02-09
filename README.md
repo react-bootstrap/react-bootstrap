@@ -100,7 +100,7 @@ var Button = require('react-bootstrap/cjs/Button');
 var DropdownButton = require('react-bootstrap/cjs/DropdownButton');
 var MenuItem       = require('react-bootstrap/cjs/MenuItem');
 
-function handleSelect (selectedIndex) {
+function handleSelect (selectedKey) {
 }
 
 <DropdownButton title="Title" onSelect={handleSelect}>

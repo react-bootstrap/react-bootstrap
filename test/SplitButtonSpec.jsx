@@ -16,17 +16,4 @@ describe('SplitButton', function () {
     }
   });
 
-  it('Should throw with bad variation', function (done) {
-    try {
-      var instance = SplitButton({
-        title: 'button',
-        bsVariation: 'invalid'
-      });
-      ReactTestUtils.renderIntoDocument(instance);
-    } catch (e) {
-      assert(e);
-      done();
-    }
-  });
-
 });
