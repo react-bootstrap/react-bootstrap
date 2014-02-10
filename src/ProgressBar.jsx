@@ -1,3 +1,10 @@
+/** @jsx React.DOM */
+
+import React          from './react-es6';
+import classSet       from './react-es6/lib/cx';
+import BootstrapMixin from './BootstrapMixin';
+
+
 var ProgressBar = React.createClass({
     propTypes: {
         min: React.PropTypes.number.isRequired,
@@ -6,14 +13,14 @@ var ProgressBar = React.createClass({
         text: React.PropTypes.string
     },
 
-    mixins: [BootStrapMixin],
+    mixins: [BootstrapMixin],
 
-    getDefaultProps: function() {return {bsClass: 'progress-bar'};},
+    getDefaultProps: function() {return {bsClass: 'progress-bar', bsStyle: 'default'};},
 
     render: function() {
         var width = (this.props.now / this.props.max) * 100;
         return this.transferPropsTo(
-            <div className={this.extendClassName()} role="progressbar"
+            <div className={classSet(this.getBsClassSet())} role="progressbar"
                 style={{width: width + '%'}}
                 ariaValuenow={this.props.now}
                 ariaValuemin={this.props.min}
@@ -26,7 +33,11 @@ var ProgressBar = React.createClass({
     },
 
     textForScreenReader: function() {
-        var formatted = this.props.txt.replace('%d%', this.props.now);
-        return formatted + ' (' + this.props.bsStyle + ')');
+        if (!this.props.text)
+            return '';
+        var formatted = this.props.text.replace('%d%', this.props.now);
+        return formatted + ' (' + this.props.bsStyle + ')';
     }
 });
+
+export default = ProgressBar;
