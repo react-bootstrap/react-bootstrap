@@ -6,3 +6,4 @@ test_bundle.js
 test-built/*
 .idea
 transpiled/*
+dist/react-bootstrap.js.map
