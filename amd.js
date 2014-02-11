@@ -20,6 +20,7 @@ define(function (require) {
         NavItem: require('../amd/NavItem'),
         Panel: require('../amd/Panel'),
         PrimaryMixin: require('../amd/PrimaryMixin'),
+        ProgressBar: require('../amd/ProgressBar'),
         SmallMixin: require('../amd/SmallMixin'),
         SplitButton: require('../amd/SplitButton'),
         SuccessMixin: require('../amd/SuccessMixin'),
