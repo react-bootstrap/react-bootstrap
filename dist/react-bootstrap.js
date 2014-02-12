@@ -1428,7 +1428,7 @@ define(
       getDefaultProps: function () {
         return {
           options: []
-        }
+        };
       },
 
       toggle: function (open) {
@@ -1482,19 +1482,16 @@ define(
 
       render: function () {
         var groupClassName = classSet({
-          'btn-group': true,
-          'open': this.state.open
-        });
-
-        var title = this.props.isTitleHidden ?
-          React.DOM.span( {className:"sr-only"}, this.props.title) : this.props.title;
+            'btn-group': true,
+            'open': this.state.open
+          });
 
         var button = this.transferPropsTo(
             Button(
               {ref:"button",
               className:"dropdown-toggle",
               onClick:this.handleClick}, 
-              title,' ',React.DOM.span( {className:"caret"} )
+              this.props.title + ' ',React.DOM.span( {className:"caret"} )
             )
         );
 
@@ -2100,73 +2097,135 @@ define('../amd/SmallMixin',['./transpiled/SmallMixin'], function (SmallMixin) {
   return SmallMixin.default;
 });
 define(
-  '../amd/transpiled/SplitButton',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./Button","./DropdownButton","exports"],
+  '../amd/transpiled/SplitButton',["./react-es6","./react-es6/lib/cx","./Button","./BootstrapMixin","./utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
-    var BootstrapMixin = __dependency3__["default"];
-    var Button = __dependency4__["default"];
-    var DropdownButton = __dependency5__["default"];
+    var Button = __dependency3__["default"];
+    var BootstrapMixin = __dependency4__["default"];
+    var utils = __dependency5__["default"];
+
 
     var SplitButton = React.createClass({displayName: 'SplitButton',
       mixins: [BootstrapMixin],
 
-      propTypes: {
-        // TODO: Uncompatable with React 0.8.0
-        //title: React.PropTypes.renderable.isRequired,
-        //dropdownTitle: React.PropTypes.renderable,
-        bsVariation: React.PropTypes.oneOf(['dropup']),
-        isInInputGroup: React.PropTypes.bool,
-        onClick: React.PropTypes.func,
-        onOptionClick: React.PropTypes.func,
-        options: React.PropTypes.array
+      getInitialState: function () {
+        return {
+          open: false
+        };
       },
 
       getDefaultProps: function () {
         return {
+          options: [],
           dropdownTitle: 'Toggle dropdown'
         };
       },
 
-      handleClick: function () {
-        if (typeof this.props.onClick === 'function') {
-          this.props.onClick();
+      toggle: function (open) {
+        var newState = (open === undefined) ?
+              !this.state.open : open;
+
+        if (newState) {
+          this.bindCloseHandlers();
+        } else {
+          this.unbindCloseHandlers();
+        }
+
+        this.setState({
+          open: newState
+        });
+      },
+
+      handleClick: function (e) {
+        if (this.props.onClick) {
+          this.props.onClick(e);
         }
       },
 
-      handleOptionClick: function (key) {
-        if (typeof this.props.onOptionClick === 'function') {
-          this.props.onOptionClick(key);
+      handleDropdownClick: function (e) {
+        this.toggle();
+      },
+
+      handleOptionSelect: function (key) {
+        if (typeof this.props.onSelect === 'function') {
+          this.props.onSelect(key);
         }
+      },
+
+      handleKeyUp: function (e) {
+        if (e.keyCode === 27) {
+          this.toggle(false);
+        }
+      },
+
+      handleClickOutside: function (e) {
+        this.toggle(false);
+      },
+
+      bindCloseHandlers: function () {
+        document.addEventListener('click', this.handleClickOutside);
+        document.addEventListener('keyup', this.handleKeyUp);
+      },
+
+      unbindCloseHandlers: function () {
+        document.removeEventListener('click', this.handleClickOutside);
+        document.removeEventListener('keyup', this.handleKeyUp);
+      },
+
+      componentWillUnmount: function () {
+        this.unbindCloseHandlers();
       },
 
       render: function () {
-        var classes = {};
+        var groupClassName = classSet({
+            'btn-group': true,
+            'open': this.state.open
+          });
 
-        classes[this.state.className] = true;
-        classes['btn-group'] = !this.props.isInInputGroup;
-        classes['input-group-btn'] = this.props.isInInputGroup;
+        var button = this.transferPropsTo(
+            Button(
+              {ref:"button",
+              onClick:this.handleClick}, 
+              this.props.title
+            )
+        );
 
-        if (this.props.bsVariation) {
-          classes[this.props.bsVariation] = true;
-        }
+        var dropdownButton = this.transferPropsTo(
+            Button(
+              {ref:"dropdownButton",
+              className:"dropdown-toggle",
+              onClick:this.handleDropdownClick}, 
+              React.DOM.span( {className:"sr-only"}, this.props.dropdownTitle),React.DOM.span( {className:"caret"} )
+            )
+        );
 
         return (
-          React.DOM.div( {className:classSet(classes)}, 
-            this.transferPropsTo(Button( {onClick:this.handleClick}, this.props.title)),
-            this.transferPropsTo(
-              DropdownButton(
-                {title:this.props.dropdownTitle,
-                isTitleHidden:true,
-                onClick:this.handleOptionClick,
-                options:this.props.options}
-              )
+          React.DOM.div( {className:groupClassName}, 
+            button,
+            dropdownButton,
+            React.DOM.ul(
+              {className:"dropdown-menu",
+              role:"menu",
+              ref:"menu",
+              'aria-labelledby':this.props.id}, 
+              utils.modifyChildren(this.props.children, this.renderMenuItem)
             )
           )
         );
+      },
+
+      renderMenuItem: function (child, i) {
+        return utils.cloneWithProps(
+            child,
+            {
+              ref: 'menuItem' + (i + 1),
+              onSelect: this.handleOptionSelect.bind(this, child.props.key)
+            }
+          );
       }
     });
 

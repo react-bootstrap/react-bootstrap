@@ -19,7 +19,7 @@ var DropdownButton = React.createClass({
   getDefaultProps: function () {
     return {
       options: []
-    }
+    };
   },
 
   toggle: function (open) {
@@ -73,19 +73,16 @@ var DropdownButton = React.createClass({
 
   render: function () {
     var groupClassName = classSet({
-      'btn-group': true,
-      'open': this.state.open
-    });
-
-    var title = this.props.isTitleHidden ?
-      <span className="sr-only">{this.props.title}</span> : this.props.title;
+        'btn-group': true,
+        'open': this.state.open
+      });
 
     var button = this.transferPropsTo(
         <Button
           ref="button"
           className="dropdown-toggle"
           onClick={this.handleClick}>
-          {title}{' '}<span className="caret" />
+          {this.props.title + ' '}<span className="caret" />
         </Button>
     );
 
