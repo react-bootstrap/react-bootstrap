@@ -4,6 +4,7 @@ define(function (require) {
     'use strict';
 
     return {
+        Accordion: require('../amd/Accordion'),
         Alert: require('../amd/Alert'),
         BootstrapMixin: require('../amd/BootstrapMixin'),
         Button: require('../amd/Button'),
@@ -19,6 +20,7 @@ define(function (require) {
         Nav: require('../amd/Nav'),
         NavItem: require('../amd/NavItem'),
         Panel: require('../amd/Panel'),
+        PanelGroup: require('../amd/PanelGroup'),
         PrimaryMixin: require('../amd/PrimaryMixin'),
         ProgressBar: require('../amd/ProgressBar'),
         SmallMixin: require('../amd/SmallMixin'),

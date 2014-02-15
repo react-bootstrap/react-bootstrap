@@ -12,6 +12,7 @@ define(
             'input-group': 'input-group',
             'form': 'form',
             'panel': 'panel',
+            'panel-group': 'panel-group',
             'progress-bar': 'progress-bar',
             'nav': 'nav'
         },

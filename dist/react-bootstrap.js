@@ -412,6 +412,7 @@ define(
             'input-group': 'input-group',
             'form': 'form',
             'panel': 'panel',
+            'panel-group': 'panel-group',
             'progress-bar': 'progress-bar',
             'nav': 'nav'
         },
@@ -480,181 +481,6 @@ define(
 
     __exports__["default"] = BootstrapMixin;
   });
-define(
-  '../amd/transpiled/Alert',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
-    
-    /** @jsx React.DOM */
-
-    var React = __dependency1__["default"];
-    var classSet = __dependency2__["default"];
-    var BootstrapMixin = __dependency3__["default"];
-
-
-    var Alert = React.createClass({displayName: 'Alert',
-      mixins: [BootstrapMixin],
-
-      propTypes: {
-        onDismiss: React.PropTypes.func,
-        dismissAfter: React.PropTypes.number
-      },
-
-      getDefaultProps: function () {
-        return {
-          bsClass: 'alert',
-          bsStyle: 'info'
-        };
-      },
-
-      renderDismissButton: function () {
-        return (
-          React.DOM.button(
-            {type:"button",
-            className:"close",
-            onClick:this.props.onDismiss,
-            'aria-hidden':"true"}, 
-            " × "
-          )
-        );
-      },
-
-      render: function () {
-        var classes = this.getBsClassSet();
-        var isDismissable = !!this.props.onDismiss;
-
-        classes['alert-dismissable'] = isDismissable;
-
-        return this.transferPropsTo(
-          React.DOM.div( {className:classSet(classes)}, 
-            isDismissable ? this.renderDismissButton() : null,
-            this.props.children
-          )
-        );
-      },
-
-      componentDidMount: function() {
-        if (this.props.dismissAfter && this.props.onDismiss) {
-          this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter);
-        }
-      },
-
-      componentWillUnmount: function() {
-        clearTimeout(this.dismissTimer);
-      }
-    });
-
-    __exports__["default"] = Alert;
-  });
-define('../amd/Alert',['./transpiled/Alert'], function (Alert) {
-  return Alert.default;
-});
-define('../amd/BootstrapMixin',['./transpiled/BootstrapMixin'], function (BootstrapMixin) {
-  return BootstrapMixin.default;
-});
-define(
-  '../amd/transpiled/Button',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
-    
-    /** @jsx React.DOM */
-
-    var React = __dependency1__["default"];
-    var classSet = __dependency2__["default"];
-    var BootstrapMixin = __dependency3__["default"];
-
-    var Button = React.createClass({displayName: 'Button',
-      mixins: [BootstrapMixin],
-
-      propTypes: {
-        // TODO: Uncompatable with React 0.8.0
-        //loadingChildren: React.PropTypes.renderable,
-        isLoading:   React.PropTypes.bool,
-        isActive:    React.PropTypes.bool,
-        isDisabled:    React.PropTypes.bool
-      },
-
-      getDefaultProps: function () {
-        return {
-          bsClass: 'button',
-          loadingChildren: 'Loading...'
-        };
-      },
-
-      renderAnchor: function (children, classes, isDisabled) {
-        return this.transferPropsTo(
-          React.DOM.a(
-            {href:this.props.href,
-            className:classSet(classes),
-            onClick:this.props.onClick,
-            disabled:isDisabled}, 
-            children
-          )
-        );
-      },
-
-      renderButton: function (children, classes, isDisabled) {
-        return this.transferPropsTo(
-          React.DOM.button(
-            {type:this.props.type || "button",
-            className:classSet(classes),
-            onClick:this.props.onClick,
-            disabled:isDisabled}, 
-            children
-          )
-        );
-      },
-
-      render: function () {
-        var isDisabled = !!(this.props.isDisabled || this.props.isLoading);
-
-        var classes = this.getBsClassSet();
-        classes['disabled'] = isDisabled;
-        classes['active'] = this.props.isActive;
-
-        var children = this.props.isLoading ?
-          this.props.loadingChildren : this.props.children;
-
-        var renderFuncName = (this.props.href) ?
-          'renderAnchor' : 'renderButton';
-
-        return this[renderFuncName](children, classes, isDisabled);
-      }
-    });
-
-    __exports__["default"] = Button;
-  });
-define('../amd/Button',['./transpiled/Button'], function (Button) {
-  return Button.default;
-});
-define(
-  '../amd/transpiled/DangerMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsStyle: 'danger'
-            };
-        }
-    };
-  });
-define('../amd/DangerMixin',['./transpiled/DangerMixin'], function (DangerMixin) {
-  return DangerMixin.default;
-});
-define(
-  '../amd/transpiled/DefaultMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsStyle: 'default'
-            };
-        }
-    };
-  });
-define('../amd/DefaultMixin',['./transpiled/DefaultMixin'], function (DefaultMixin) {
-  return DefaultMixin.default;
-});
 define(
   '../amd/transpiled/react-es6/lib/copyProperties',["exports"],
   function(__exports__) {
@@ -1404,6 +1230,294 @@ define(
     };
   });
 define(
+  '../amd/transpiled/PanelGroup',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var utils = __dependency4__["default"];
+
+    var PanelGroup = React.createClass({displayName: 'PanelGroup',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        onSelect: React.PropTypes.func
+      },
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'panel-group'
+        };
+      },
+
+      getInitialState: function () {
+        var initialActiveKey = this.props.initialActiveKey;
+
+        return {
+          activeKey: initialActiveKey
+        };
+      },
+
+      render: function () {
+        var activeKey =
+          this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+
+        return this.transferPropsTo(
+          React.DOM.div( {className:classSet(this.getBsClassSet())}, 
+              utils.modifyChildren(this.props.children, this.renderPanel)
+          )
+        );
+      },
+
+      renderPanel: function (child) {
+        var activeKey =
+          this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+
+        var props = {
+          bsStyle: this.props.bsStyle
+        };
+
+        if (this.props.isAccordion) {
+          props.isCollapsable = true;
+          props.isOpen = (child.props.key === activeKey);
+          props.onSelect = this.handleSelect;
+        }
+
+        return utils.cloneWithProps(
+          child,
+          props
+        );
+      },
+
+      shouldComponentUpdate: function() {
+        // Defer any updates to this component during the `onSelect` handler.
+        return !this._isChanging;
+      },
+
+      handleSelect: function (key) {
+        if (this.props.onSelect) {
+          this._isChanging = true;
+          this.props.onSelect(key);
+          this._isChanging = false;
+        }
+
+        if (this.state.activeKey === key) {
+          key = null;
+        }
+
+        this.setState({
+          activeKey: key
+        });
+      }
+    });
+
+    __exports__["default"] = PanelGroup;
+  });
+define(
+  '../amd/transpiled/Accordion',["./react-es6","./PanelGroup","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var PanelGroup = __dependency2__["default"];
+
+    var Accordion = React.createClass({displayName: 'Accordion',
+
+      render: function () {
+        return this.transferPropsTo(
+          PanelGroup( {isAccordion:true}, 
+              this.props.children
+          )
+        );
+      }
+
+    });
+
+    __exports__["default"] = Accordion;
+  });
+define('../amd/Accordion',['./transpiled/Accordion'], function (Accordion) {
+  return Accordion.default;
+});
+define(
+  '../amd/transpiled/Alert',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+
+
+    var Alert = React.createClass({displayName: 'Alert',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        onDismiss: React.PropTypes.func,
+        dismissAfter: React.PropTypes.number
+      },
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'alert',
+          bsStyle: 'info'
+        };
+      },
+
+      renderDismissButton: function () {
+        return (
+          React.DOM.button(
+            {type:"button",
+            className:"close",
+            onClick:this.props.onDismiss,
+            'aria-hidden':"true"}, 
+            " × "
+          )
+        );
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+        var isDismissable = !!this.props.onDismiss;
+
+        classes['alert-dismissable'] = isDismissable;
+
+        return this.transferPropsTo(
+          React.DOM.div( {className:classSet(classes)}, 
+            isDismissable ? this.renderDismissButton() : null,
+            this.props.children
+          )
+        );
+      },
+
+      componentDidMount: function() {
+        if (this.props.dismissAfter && this.props.onDismiss) {
+          this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter);
+        }
+      },
+
+      componentWillUnmount: function() {
+        clearTimeout(this.dismissTimer);
+      }
+    });
+
+    __exports__["default"] = Alert;
+  });
+define('../amd/Alert',['./transpiled/Alert'], function (Alert) {
+  return Alert.default;
+});
+define('../amd/BootstrapMixin',['./transpiled/BootstrapMixin'], function (BootstrapMixin) {
+  return BootstrapMixin.default;
+});
+define(
+  '../amd/transpiled/Button',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+
+    var Button = React.createClass({displayName: 'Button',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        // TODO: Uncompatable with React 0.8.0
+        //loadingChildren: React.PropTypes.renderable,
+        isLoading:   React.PropTypes.bool,
+        isActive:    React.PropTypes.bool,
+        isDisabled:    React.PropTypes.bool
+      },
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'button',
+          loadingChildren: 'Loading...'
+        };
+      },
+
+      renderAnchor: function (children, classes, isDisabled) {
+        return this.transferPropsTo(
+          React.DOM.a(
+            {href:this.props.href,
+            className:classSet(classes),
+            onClick:this.props.onClick,
+            disabled:isDisabled}, 
+            children
+          )
+        );
+      },
+
+      renderButton: function (children, classes, isDisabled) {
+        return this.transferPropsTo(
+          React.DOM.button(
+            {type:this.props.type || "button",
+            className:classSet(classes),
+            onClick:this.props.onClick,
+            disabled:isDisabled}, 
+            children
+          )
+        );
+      },
+
+      render: function () {
+        var isDisabled = !!(this.props.isDisabled || this.props.isLoading);
+
+        var classes = this.getBsClassSet();
+        classes['disabled'] = isDisabled;
+        classes['active'] = this.props.isActive;
+
+        var children = this.props.isLoading ?
+          this.props.loadingChildren : this.props.children;
+
+        var renderFuncName = (this.props.href) ?
+          'renderAnchor' : 'renderButton';
+
+        return this[renderFuncName](children, classes, isDisabled);
+      }
+    });
+
+    __exports__["default"] = Button;
+  });
+define('../amd/Button',['./transpiled/Button'], function (Button) {
+  return Button.default;
+});
+define(
+  '../amd/transpiled/DangerMixin',["exports"],
+  function(__exports__) {
+    
+    __exports__["default"] = {
+        getDefaultProps: function () {
+            return {
+                bsStyle: 'danger'
+            };
+        }
+    };
+  });
+define('../amd/DangerMixin',['./transpiled/DangerMixin'], function (DangerMixin) {
+  return DangerMixin.default;
+});
+define(
+  '../amd/transpiled/DefaultMixin',["exports"],
+  function(__exports__) {
+    
+    __exports__["default"] = {
+        getDefaultProps: function () {
+            return {
+                bsStyle: 'default'
+            };
+        }
+    };
+  });
+define('../amd/DefaultMixin',['./transpiled/DefaultMixin'], function (DefaultMixin) {
+  return DefaultMixin.default;
+});
+define(
   '../amd/transpiled/DropdownButton',["./react-es6","./react-es6/lib/cx","./Button","./BootstrapMixin","./utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     
@@ -2015,6 +2129,9 @@ define(
 define('../amd/Panel',['./transpiled/Panel'], function (Panel) {
   return Panel.default;
 });
+define('../amd/PanelGroup',['./transpiled/PanelGroup'], function (PanelGroup) {
+  return PanelGroup.default;
+});
 define(
   '../amd/transpiled/PrimaryMixin',["exports"],
   function(__exports__) {
@@ -2408,10 +2525,11 @@ define('../amd/XSmallMixin',['./transpiled/XSmallMixin'], function (XSmallMixin)
 });
 /*global define */
 
-define('react-bootstrap',['require','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Nav','../amd/NavItem','../amd/Panel','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
+define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Nav','../amd/NavItem','../amd/Panel','../amd/PanelGroup','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
     
 
     return {
+        Accordion: require('../amd/Accordion'),
         Alert: require('../amd/Alert'),
         BootstrapMixin: require('../amd/BootstrapMixin'),
         Button: require('../amd/Button'),
@@ -2427,6 +2545,7 @@ define('react-bootstrap',['require','../amd/Alert','../amd/BootstrapMixin','../a
         Nav: require('../amd/Nav'),
         NavItem: require('../amd/NavItem'),
         Panel: require('../amd/Panel'),
+        PanelGroup: require('../amd/PanelGroup'),
         PrimaryMixin: require('../amd/PrimaryMixin'),
         ProgressBar: require('../amd/ProgressBar'),
         SmallMixin: require('../amd/SmallMixin'),
