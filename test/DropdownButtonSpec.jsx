@@ -8,14 +8,12 @@ var MenuItem       = require('../cjs/MenuItem');
 
 describe('DropdownButton', function () {
   it('Should render button correctly', function () {
-    var instance = (
+    var instance = ReactTestUtils.renderIntoDocument(
         <DropdownButton title="Title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </DropdownButton>
-      );
-
-    ReactTestUtils.renderIntoDocument(instance);
+    );
 
     var button = instance.refs.button.getDOMNode();
     assert.ok(instance.getDOMNode().className.match(/\bbtn-group\b/));
@@ -28,14 +26,12 @@ describe('DropdownButton', function () {
   });
 
   it('Should render menu correctly', function () {
-    var instance = (
+    var instance = ReactTestUtils.renderIntoDocument(
         <DropdownButton title="Title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </DropdownButton>
-      );
-
-    ReactTestUtils.renderIntoDocument(instance);
+    );
 
     var menu = instance.refs.menu.getDOMNode();
     assert.ok(menu.className.match(/\bdropdown-menu\b/));
@@ -47,14 +43,11 @@ describe('DropdownButton', function () {
   });
 
   it('Should pass props to button', function () {
-    var instance = (
+    var instance = ReactTestUtils.renderIntoDocument(
         <DropdownButton title="Title" bsStyle="primary" className="test-class" id="testid">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
-        </DropdownButton>
-      );
-
-    ReactTestUtils.renderIntoDocument(instance);
+        </DropdownButton>);
 
     var button = instance.refs.button.getDOMNode();
     assert.ok(button.className.match(/\bbtn-primary\b/));
@@ -63,32 +56,27 @@ describe('DropdownButton', function () {
   });
 
   it('Should be closed by default', function () {
-    var instance = (
+    var instance = ReactTestUtils.renderIntoDocument(
         <DropdownButton title="Title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
-        </DropdownButton>
-      );
-
-    ReactTestUtils.renderIntoDocument(instance);
+        </DropdownButton>);
 
     assert.notOk(instance.getDOMNode().className.match(/\bopen\b/));
   });
 
   it('Should open when clicked', function (done) {
-    var instance = (
+    var instance = ReactTestUtils.renderIntoDocument(
         <DropdownButton title="Title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </DropdownButton>
-      );
+    );
 
     instance.componentDidUpdate = function () {
         assert.ok(instance.getDOMNode().className.match(/\bopen\b/));
         done();
     };
-
-    ReactTestUtils.renderIntoDocument(instance);
 
     ReactTestUtils.Simulate.click(instance.refs.button.getDOMNode());
   });
@@ -98,14 +86,12 @@ describe('DropdownButton', function () {
           assert.equal(key, '1');
           done();
         },
-        instance = (
-        <DropdownButton title="Title" onSelect={handleSelect}>
-          <MenuItem key="1">MenuItem 1 content</MenuItem>
-          <MenuItem key="2">MenuItem 2 content</MenuItem>
-        </DropdownButton>
-      );
-
-    ReactTestUtils.renderIntoDocument(instance);
+        instance = ReactTestUtils.renderIntoDocument(
+          <DropdownButton title="Title" onSelect={handleSelect}>
+            <MenuItem key="1">MenuItem 1 content</MenuItem>
+            <MenuItem key="2">MenuItem 2 content</MenuItem>
+          </DropdownButton>
+        );
     ReactTestUtils.Simulate.click(instance.refs.menu.props.children[0].getDOMNode().firstChild);
   });
 
@@ -113,7 +99,7 @@ describe('DropdownButton', function () {
     var instance;
 
     beforeEach(function (done) {
-      instance = (
+      instance = ReactTestUtils.renderIntoDocument(
         <DropdownButton title="Title">
           <MenuItem key="1" ref="item1">MenuItem 1 content</MenuItem>
           <MenuItem key="2" ref="item2">MenuItem 2 content</MenuItem>
@@ -125,7 +111,6 @@ describe('DropdownButton', function () {
         done();
       };
 
-      ReactTestUtils.renderIntoDocument(instance);
       instance.toggle();
     });
 

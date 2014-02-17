@@ -8,14 +8,12 @@ var MenuItem       = require('../cjs/MenuItem');
 
 describe('SplitButton', function () {
   it('Should render button correctly', function () {
-    var instance = (
+    var instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </SplitButton>
-      );
-
-    ReactTestUtils.renderIntoDocument(instance);
+    );
 
     var button = instance.refs.button.getDOMNode();
     var dropdownButton = instance.refs.dropdownButton.getDOMNode();
@@ -31,14 +29,12 @@ describe('SplitButton', function () {
   });
 
   it('Should render menu correctly', function () {
-    var instance = (
+    var instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </SplitButton>
-      );
-
-    ReactTestUtils.renderIntoDocument(instance);
+    );
 
     var menu = instance.refs.menu.getDOMNode();
     assert.ok(menu.className.match(/\bdropdown-menu\b/));
@@ -50,27 +46,23 @@ describe('SplitButton', function () {
   });
 
   it('Should pass dropdownTitle to dropdown button', function () {
-    var instance = (
+    var instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title" dropdownTitle="New title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </SplitButton>
-      );
-
-    ReactTestUtils.renderIntoDocument(instance);
+    );
 
     assert.equal(instance.refs.dropdownButton.getDOMNode().firstChild.innerText.trim(), 'New title');
   });
 
   it('Should pass props to button', function () {
-    var instance = (
+    var instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title" bsStyle="primary" className="test-class" id="testid">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </SplitButton>
-      );
-
-    ReactTestUtils.renderIntoDocument(instance);
+    );
 
     var button = instance.refs.button.getDOMNode();
     assert.ok(button.className.match(/\bbtn-primary\b/));
@@ -79,32 +71,28 @@ describe('SplitButton', function () {
   });
 
   it('Should be closed by default', function () {
-    var instance = (
+    var instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </SplitButton>
-      );
-
-    ReactTestUtils.renderIntoDocument(instance);
+    );
 
     assert.notOk(instance.getDOMNode().className.match(/\bopen\b/));
   });
 
   it('Should open when clicked', function (done) {
-    var instance = (
+    var instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </SplitButton>
-      );
+    );
 
     instance.componentDidUpdate = function () {
         assert.ok(instance.getDOMNode().className.match(/\bopen\b/));
         done();
     };
-
-    ReactTestUtils.renderIntoDocument(instance);
 
     ReactTestUtils.Simulate.click(instance.refs.dropdownButton.getDOMNode());
   });
@@ -114,14 +102,12 @@ describe('SplitButton', function () {
           assert.equal(key, '1');
           done();
         },
-        instance = (
+        instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title" onSelect={handleSelect}>
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </SplitButton>
-      );
-
-    ReactTestUtils.renderIntoDocument(instance);
+    );
     ReactTestUtils.Simulate.click(instance.refs.menu.props.children[0].getDOMNode().firstChild);
   });
 
@@ -129,7 +115,7 @@ describe('SplitButton', function () {
     var instance;
 
     beforeEach(function (done) {
-      instance = (
+      instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title">
           <MenuItem key="1" ref="item1">MenuItem 1 content</MenuItem>
           <MenuItem key="2" ref="item2">MenuItem 2 content</MenuItem>
@@ -141,7 +127,6 @@ describe('SplitButton', function () {
         done();
       };
 
-      ReactTestUtils.renderIntoDocument(instance);
       instance.toggle();
     });
 
