@@ -43,16 +43,15 @@ var Alert = require('react-bootstrap/amd').Alert;
 - [Button](#Button)
 - [DropdownButton](#DropdownButton)
 - [MenuItem](#MenuItem)
-- [TabbedArea, TabPane, Tab](#Tabs)
-- [CollapsePanel](#CollapsePanel)
+- [TabbedArea, TabPane](#Tabs)
 - [Alert](#Alert)
 - SplitButton
 
 ### <a name="Nav"></a>Nav
 
 ```
-var Nav     = require('react-bootstrap/amd/Nav');
-var NavItem = require('react-bootstrap/amd/NavItem');
+var Nav     = require('react-bootstrap/cjs/Nav');
+var NavItem = require('react-bootstrap/cjs/NavItem');
 
 var key = 1;
 
@@ -70,7 +69,7 @@ function handleSelect (selectedKey) {
 ### <a name="Button"></a>Button
 
 ```
-var Button = require('react-bootstrap/amd/Button');
+var Button = require('react-bootstrap/cjs/Button');
 
 <Button onClick={handleClick}>Title</Button>
 ```
@@ -78,8 +77,8 @@ var Button = require('react-bootstrap/amd/Button');
 ### <a name="DropdownButton"></a>DropdownButton
 
 ```
-var DropdownButton = require('react-bootstrap/amd/DropdownButton');
-var MenuItem       = require('react-bootstrap/amd/MenuItem');
+var DropdownButton = require('react-bootstrap/cjs/DropdownButton');
+var MenuItem       = require('react-bootstrap/cjs/MenuItem');
 
 function handleSelect (selectedIndex) {
 }
@@ -94,8 +93,8 @@ function handleSelect (selectedIndex) {
 
 #### Controlled
 ```
-var TabbedArea = require('react-bootstrap/amd/TabbedArea');
-var TabPane    = require('react-bootstrap/amd/TabPane');
+var TabbedArea = require('react-bootstrap/cjs/TabbedArea');
+var TabPane    = require('react-bootstrap/cjs/TabPane');
 
 var key = 1;
 
@@ -111,8 +110,8 @@ function handleSelect (selectedKey) {
 
 #### Uncontrolled
 ```
-var TabbedArea = require('react-bootstrap/amd/TabbedArea');
-var TabPane    = require('react-bootstrap/amd/TabPane');
+var TabbedArea = require('react-bootstrap/cjs/TabbedArea');
+var TabPane    = require('react-bootstrap/cjs/TabPane');
 
 <TabbedArea title="Title" initialActiveKey={1}>
   <TabPane tab="Tab 1" key={1}>TabPane 1 content</TabPane>
@@ -123,7 +122,7 @@ var TabPane    = require('react-bootstrap/amd/TabPane');
 ### <a name="Alert"></a>Alert
 
 ```
-var Alert = require('react-bootstrap/amd/Alert');
+var Alert = require('react-bootstrap/cjs/Alert');
 
 function handleDismiss () {
 }
@@ -133,16 +132,10 @@ function handleDismiss () {
 </Alert>
 ```
 
-### <a name="CollapsePanel"></a>CollapsePanel
-
-`var CollapsePanel = require('react-bootstrap/amd/CollapsePanel')`
-
-TODO docs
-
 ### <a name="MenuItem"></a>MenuItem
 
 ```
-var MenuItem = require('react-bootstrap/amd/MenuItem');
+var MenuItem = require('react-bootstrap/cjs/MenuItem');
 
 function handleSelect (key) {
 }
