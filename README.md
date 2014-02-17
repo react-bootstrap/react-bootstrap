@@ -15,7 +15,10 @@ The source repo is [here](https://github.com/stevoland/react-bootstrap).
 
 ## Getting started
 
-You can import the lib with as AMD modules, CommonJS modules as a global JS script.
+NOTE: Requires the latest React: 0.9.0-alpha. Get the build from http://react.zpao.com/builds/master/latest or from my
+build for npm `npm install git://github.com/stevoland/react-with-test-utils`
+
+You can import the lib with as AMD modules or as a browser globals script.
 
 First add the bootstrap CSS to your project then
 
@@ -50,8 +53,8 @@ var Alert = require('react-bootstrap/amd').Alert;
 ### <a name="Nav"></a>Nav
 
 ```
-var Nav     = require('react-bootstrap/cjs/Nav');
-var NavItem = require('react-bootstrap/cjs/NavItem');
+var Nav     = require('react-bootstrap/amd/Nav');
+var NavItem = require('react-bootstrap/amd/NavItem');
 
 var key = 1;
 
@@ -69,7 +72,7 @@ function handleSelect (selectedKey) {
 ### <a name="Button"></a>Button
 
 ```
-var Button = require('react-bootstrap/cjs/Button');
+var Button = require('react-bootstrap/amd/Button');
 
 <Button onClick={handleClick}>Title</Button>
 ```
@@ -77,10 +80,10 @@ var Button = require('react-bootstrap/cjs/Button');
 ### <a name="DropdownButton"></a>DropdownButton
 
 ```
-var DropdownButton = require('react-bootstrap/cjs/DropdownButton');
-var MenuItem       = require('react-bootstrap/cjs/MenuItem');
+var DropdownButton = require('react-bootstrap/amd/DropdownButton');
+var MenuItem       = require('react-bootstrap/amd/MenuItem');
 
-function handleSelect (selectedIndex) {
+function handleSelect (selectedKey) {
 }
 
 <DropdownButton title="Title" onSelect={handleSelect}>
@@ -93,8 +96,8 @@ function handleSelect (selectedIndex) {
 
 #### Controlled
 ```
-var TabbedArea = require('react-bootstrap/cjs/TabbedArea');
-var TabPane    = require('react-bootstrap/cjs/TabPane');
+var TabbedArea = require('react-bootstrap/amd/TabbedArea');
+var TabPane    = require('react-bootstrap/amd/TabPane');
 
 var key = 1;
 
@@ -110,8 +113,8 @@ function handleSelect (selectedKey) {
 
 #### Uncontrolled
 ```
-var TabbedArea = require('react-bootstrap/cjs/TabbedArea');
-var TabPane    = require('react-bootstrap/cjs/TabPane');
+var TabbedArea = require('react-bootstrap/amd/TabbedArea');
+var TabPane    = require('react-bootstrap/amd/TabPane');
 
 <TabbedArea title="Title" initialActiveKey={1}>
   <TabPane tab="Tab 1" key={1}>TabPane 1 content</TabPane>
@@ -122,7 +125,7 @@ var TabPane    = require('react-bootstrap/cjs/TabPane');
 ### <a name="Alert"></a>Alert
 
 ```
-var Alert = require('react-bootstrap/cjs/Alert');
+var Alert = require('react-bootstrap/amd/Alert');
 
 function handleDismiss () {
 }
@@ -135,7 +138,7 @@ function handleDismiss () {
 ### <a name="MenuItem"></a>MenuItem
 
 ```
-var MenuItem = require('react-bootstrap/cjs/MenuItem');
+var MenuItem = require('react-bootstrap/amd/MenuItem');
 
 function handleSelect (key) {
 }

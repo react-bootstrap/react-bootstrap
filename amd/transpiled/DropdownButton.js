@@ -22,9 +22,7 @@ define(
 
       getDefaultProps: function () {
         return {
-          options: [],
-          bsClass: 'button',
-          className: 'dropdown-toggle'
+          options: []
         }
       },
 
@@ -47,9 +45,9 @@ define(
         this.toggle();
       },
 
-      handleOptionSelect: function (i) {
+      handleOptionSelect: function (key) {
         if (typeof this.props.onSelect === 'function') {
-          this.props.onSelect(i);
+          this.props.onSelect(key);
         }
       },
 
@@ -83,20 +81,21 @@ define(
           'open': this.state.open
         });
 
-        var className = classSet(this.getBsClassSet());
-
         var title = this.props.isTitleHidden ?
           React.DOM.span( {className:"sr-only"}, this.props.title) : this.props.title;
 
-        return (
-          React.DOM.div( {className:groupClassName}, 
+        var button = this.transferPropsTo(
             Button(
-              {id:this.props.id,
-              ref:"button",
-              className:className,
+              {ref:"button",
+              className:"dropdown-toggle",
               onClick:this.handleClick}, 
               title,' ',React.DOM.span( {className:"caret"} )
-            ),
+            )
+        );
+
+        return (
+          React.DOM.div( {className:groupClassName}, 
+            button,
             React.DOM.ul(
               {className:"dropdown-menu",
               role:"menu",
@@ -112,7 +111,8 @@ define(
         return utils.cloneWithProps(
             child,
             {
-              onSelect: this.handleOptionSelect.bind(this, i)
+              ref: 'menuItem' + (i + 1),
+              onSelect: this.handleOptionSelect.bind(this, child.props.key)
             }
           );
       }
