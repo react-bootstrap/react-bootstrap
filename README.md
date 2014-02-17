@@ -22,8 +22,7 @@ Yes please!
 
 ## Getting started
 
-NOTE: Requires the latest React: 0.9.0-alpha. Get the build from http://react.zpao.com/builds/master/latest or from my
-build for npm `npm install git://github.com/stevoland/react-with-test-utils`
+NOTE: Requires the latest React: [0.9.0-rc1](http://facebook.github.io/react/blog/2014/02/16/react-v0.9-rc1.html).
 
 You can import the lib with as AMD modules, CommonJS modules as a global JS script.
 
@@ -31,6 +30,7 @@ First add the bootstrap CSS to your project then:
 
 ### AMD
 ```
+bower install react#v0.9.0-rc1
 bower install react-bootstrap
 
 var Alert = require('react-bootstrap/amd/Alert');
@@ -40,7 +40,7 @@ var Alert = require('react-bootstrap/amd').Alert;
 
 ### CommonJS
 ```
-npm install git://github.com/stevoland/react-with-test-utils
+npm install react@v0.9.0-rc1
 npm install react-bootstrap
 
 var Alert = require('react-bootstrap/cjs/Alert');
@@ -50,7 +50,7 @@ var Alert = require('react-bootstrap').Alert;
 
 ### Browser globals
 ```
-<script src="http://react.zpao.com/builds/master/latest/react.js"></script>
+<script src="http://fb.me/react-0.9.0-rc1.js"></script>
 <script src="react-bootstrap/dist/react-bootstrap.min.js"></script>
 <script>
     var Alert = ReactBootstrap.Alert;
