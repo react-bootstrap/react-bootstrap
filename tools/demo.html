@@ -16,16 +16,22 @@
             DropdownButton = ReactBootstrap.DropdownButton,
             SplitButton = ReactBootstrap.SplitButton,
             MenuItem = ReactBootstrap.MenuItem,
+            Modal = ReactBootstrap.Modal,
+            LayeredComponentMixin = ReactBootstrap.LayeredComponentMixin,
             isOpen = true,
+
             handleSelect = function () {
                 isOpen = !isOpen;
                 render();
             },
+
             handleDropdownSelect = function (key) {
                 console.info(key);
             },
+
             render = function () {
                 var header = 'header'; //React.DOM.h1({}, 'Header');
+
                 React.renderComponent(
                     <div>
                         <DropdownButton title="Dropdown" onSelect={handleDropdownSelect}>
@@ -42,10 +48,50 @@
                             <Panel header='header1' key="1">Content1</Panel>
                             <Panel header='header2' key="2">Content2</Panel>
                         </Accordion>
+                        <ModalLink/>
                     </div>,
                     document.body
                 );
-            };
+            },
+
+            ModalLink = React.createClass({
+                mixins: [LayeredComponentMixin],
+
+                handleClick: function() {
+                    this.setState({
+                        shown: !this.state.shown
+                    });
+                },
+
+                getInitialState: function() {
+                    return {
+                        shown: false
+                    };
+                },
+
+                renderLayer: function() {
+                    if (!this.state.shown) {
+                        return <span />;
+                    }
+
+                    return (
+                        <Modal onRequestClose={this.handleClick} title="Title" fade={true}>
+                            <div className="modal-body">
+                                Content
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-default" onClick={this.handleClick}>Close</button>
+                                <button type="button" className="btn btn-primary">Save changes</button>
+                            </div>
+                        </Modal>
+                    );
+                },
+
+                render: function() {
+                    return <a href="javascript:;" role="button" onClick={this.handleClick}>Click to toggle modal</a>;
+                }
+            });
+
 
             render();
 

@@ -414,7 +414,8 @@ define(
             'panel': 'panel',
             'panel-group': 'panel-group',
             'progress-bar': 'progress-bar',
-            'nav': 'nav'
+            'nav': 'nav',
+            'modal': 'modal'
         },
         STYLES: {
             'default': 'default',
@@ -1794,6 +1795,40 @@ define('../amd/LargeMixin',['./transpiled/LargeMixin'], function (LargeMixin) {
   return LargeMixin.default;
 });
 define(
+  '../amd/transpiled/LayeredComponentMixin',["./react-es6","exports"],
+  function(__dependency1__, __exports__) {
+    
+    var React = __dependency1__["default"];
+
+    __exports__["default"] = {
+      componentWillUnmount: function () {
+        this._unrenderLayer();
+        document.body.removeChild(this._target);
+      },
+
+      componentDidUpdate: function () {
+        this._renderLayer();
+      },
+
+      componentDidMount: function () {
+        this._target = document.createElement('div');
+        document.body.appendChild(this._target);
+        this._renderLayer();
+      },
+
+      _renderLayer: function () {
+        React.renderComponent(this.renderLayer(), this._target);
+      },
+      
+      _unrenderLayer: function () {
+        React.unmountComponentAtNode(this._target);
+      }
+    };
+  });
+define('../amd/LayeredComponentMixin',['./transpiled/LayeredComponentMixin'], function (LayeredComponentMixin) {
+  return LayeredComponentMixin.default;
+});
+define(
   '../amd/transpiled/MediumMixin',["exports"],
   function(__exports__) {
     
@@ -1856,6 +1891,117 @@ define(
   });
 define('../amd/MenuItem',['./transpiled/MenuItem'], function (MenuItem) {
   return MenuItem.default;
+});
+define(
+  '../amd/transpiled/Modal',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+
+    var Modal = React.createClass({displayName: 'Modal',
+      mixins: [BootstrapMixin],
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'modal',
+          backdrop: true,
+          keyboard: true
+        };
+      },
+
+      componentDidMount: function () {
+        document.addEventListener('keyup', this.handleKeyUp);
+
+        setTimeout(this.fadeIn, 0);
+      },
+
+      fadeIn: function () {
+        if (this.isMounted() && this.refs.modal.getDOMNode().className.match(/\bfade\b/)) {
+          this.refs.modal.getDOMNode().className += ' in';
+          this.refs.backdrop.getDOMNode().className += ' in';
+        }
+      },
+
+      componentWillUnmount: function () {
+        document.removeEventListener('keyup', this.handleKeyUp);
+      },
+
+      killClick: function (e) {
+        console.info(e);
+        e.stopPropagation();
+      },
+
+      handleBackdropClick: function () {
+        this.props.onRequestClose();
+      },
+
+      handleKeyUp: function (e) {
+        if (this.props.keyboard && e.keyCode === 27) {
+          this.props.onRequestClose();
+        }
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+        
+        classes['fade'] = this.props.fade;
+
+        var modal = this.transferPropsTo(
+          React.DOM.div(
+            {bsClass:"modal",
+            tabIndex:"-1",
+            role:"dialog",
+            'aria-hidden':"true",
+            style:{display: 'block'},
+            className:classSet(classes),
+            onClick:this.handleBackdropClick,
+            ref:"modal"}
+          , 
+            React.DOM.div( {className:"modal-dialog"}, 
+              React.DOM.div( {className:"modal-content", onClick:this.killClick}, 
+                this.props.title ? this.renderHeader() : null,
+                this.props.children
+              )
+            )
+          )
+        );
+
+        return this.props.backdrop ?
+          this.renderBackdrop(modal) : modal;
+      },
+
+      renderBackdrop: function (modal) {
+        var classes = {
+          'modal-backdrop': true,
+          'fade': this.props.fade
+        };
+
+        return (
+          React.DOM.div(null, 
+            React.DOM.div( {className:classSet(classes), ref:"backdrop"} ),
+            modal
+          )
+        );
+      },
+
+      renderHeader: function () {
+        return (
+          React.DOM.div( {className:"modal-header"}, 
+            React.DOM.button( {type:"button", className:"close", 'aria-hidden':"true", onClick:this.props.onRequestClose}, "×"),
+            React.DOM.h4( {className:"modal-title"}, this.props.title)
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = Modal;
+  });
+define('../amd/Modal',['./transpiled/Modal'], function (Modal) {
+  return Modal.default;
 });
 define(
   '../amd/transpiled/Nav',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
@@ -2525,7 +2671,7 @@ define('../amd/XSmallMixin',['./transpiled/XSmallMixin'], function (XSmallMixin)
 });
 /*global define */
 
-define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Nav','../amd/NavItem','../amd/Panel','../amd/PanelGroup','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
+define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/LayeredComponentMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/Panel','../amd/PanelGroup','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
     
 
     return {
@@ -2540,8 +2686,10 @@ define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/Bo
         InlineMixin: require('../amd/InlineMixin'),
         Input: require('../amd/Input'),
         LargeMixin: require('../amd/LargeMixin'),
+        LayeredComponentMixin: require('../amd/LayeredComponentMixin'),
         MediumMixin: require('../amd/MediumMixin'),
         MenuItem: require('../amd/MenuItem'),
+        Modal: require('../amd/Modal'),
         Nav: require('../amd/Nav'),
         NavItem: require('../amd/NavItem'),
         Panel: require('../amd/Panel'),
