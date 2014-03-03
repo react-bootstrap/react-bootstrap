@@ -1795,40 +1795,6 @@ define('../amd/LargeMixin',['./transpiled/LargeMixin'], function (LargeMixin) {
   return LargeMixin.default;
 });
 define(
-  '../amd/transpiled/LayeredComponentMixin',["./react-es6","exports"],
-  function(__dependency1__, __exports__) {
-    
-    var React = __dependency1__["default"];
-
-    __exports__["default"] = {
-      componentWillUnmount: function () {
-        this._unrenderLayer();
-        document.body.removeChild(this._target);
-      },
-
-      componentDidUpdate: function () {
-        this._renderLayer();
-      },
-
-      componentDidMount: function () {
-        this._target = document.createElement('div');
-        document.body.appendChild(this._target);
-        this._renderLayer();
-      },
-
-      _renderLayer: function () {
-        React.renderComponent(this.renderLayer(), this._target);
-      },
-      
-      _unrenderLayer: function () {
-        React.unmountComponentAtNode(this._target);
-      }
-    };
-  });
-define('../amd/LayeredComponentMixin',['./transpiled/LayeredComponentMixin'], function (LayeredComponentMixin) {
-  return LayeredComponentMixin.default;
-});
-define(
   '../amd/transpiled/MediumMixin',["exports"],
   function(__exports__) {
     
@@ -1893,17 +1859,79 @@ define('../amd/MenuItem',['./transpiled/MenuItem'], function (MenuItem) {
   return MenuItem.default;
 });
 define(
-  '../amd/transpiled/Modal',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+  '../amd/transpiled/FadeMixin',["./react-es6","exports"],
+  function(__dependency1__, __exports__) {
+    
+    var React = __dependency1__["default"];
+
+    // TODO: listen for onTransitionEnd to remove el
+    __exports__["default"] = {
+      _fadeIn: function () {
+        var els;
+
+        if (this.isMounted()) {
+          els = this.getDOMNode().querySelectorAll('.fade');
+          if (els) {
+            Array.prototype.forEach.call(els, function (el) {
+              el.className += ' in';
+            });
+          }
+        }
+      },
+
+      _fadeOut: function () {
+        var els = this._fadeOutEl.querySelectorAll('.fade.in');
+
+        if (els) {
+          Array.prototype.forEach.call(els, function (el) {
+            el.className = el.className.replace(/\bin\b/, '');
+          });
+        }
+
+        setTimeout(this._handleFadeOutEnd, 300);
+      },
+
+      _handleFadeOutEnd: function () {
+        this._fadeOutEl.parentNode.removeChild(this._fadeOutEl);
+      },
+
+      componentDidMount: function () {
+        if (document.querySelectorAll) {
+          setTimeout(this._fadeIn, 0);
+        }
+      },
+
+      componentWillUnmount: function () {
+        var els = this.getDOMNode().querySelectorAll('.fade');
+
+        if (els) {
+          this._fadeOutEl = document.createElement('div');
+          document.body.appendChild(this._fadeOutEl);
+          this._fadeOutEl.innerHTML = this.getDOMNode().innerHTML;
+          setTimeout(this._fadeOut, 0);
+        }
+      }
+    };
+  });
+define(
+  '../amd/transpiled/Modal',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./FadeMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
     var BootstrapMixin = __dependency3__["default"];
+    var FadeMixin = __dependency4__["default"];
+
+
+    // TODO:
+    // - aria-labelledby
+    // - Add `modal-body` div if only one child passed in that doesn't already have it
+    // - Tests
 
     var Modal = React.createClass({displayName: 'Modal',
-      mixins: [BootstrapMixin],
+      mixins: [BootstrapMixin, FadeMixin],
 
       getDefaultProps: function () {
         return {
@@ -1915,15 +1943,6 @@ define(
 
       componentDidMount: function () {
         document.addEventListener('keyup', this.handleKeyUp);
-
-        setTimeout(this.fadeIn, 0);
-      },
-
-      fadeIn: function () {
-        if (this.isMounted() && this.refs.modal.getDOMNode().className.match(/\bfade\b/)) {
-          this.refs.modal.getDOMNode().className += ' in';
-          this.refs.backdrop.getDOMNode().className += ' in';
-        }
       },
 
       componentWillUnmount: function () {
@@ -1931,24 +1950,26 @@ define(
       },
 
       killClick: function (e) {
-        console.info(e);
         e.stopPropagation();
       },
 
       handleBackdropClick: function () {
-        this.props.onRequestClose();
+        this.props.onRequestHide();
       },
 
       handleKeyUp: function (e) {
         if (this.props.keyboard && e.keyCode === 27) {
-          this.props.onRequestClose();
+          this.props.onRequestHide();
         }
       },
 
       render: function () {
         var classes = this.getBsClassSet();
-        
+
         classes['fade'] = this.props.fade;
+        if (!document.querySelectorAll) {
+          classes['in'] = this.props.fade;
+        }
 
         var modal = this.transferPropsTo(
           React.DOM.div(
@@ -1980,6 +2001,10 @@ define(
           'fade': this.props.fade
         };
 
+        if (!document.querySelectorAll) {
+          classes['in'] = this.props.fade;
+        }
+
         return (
           React.DOM.div(null, 
             React.DOM.div( {className:classSet(classes), ref:"backdrop"} ),
@@ -1991,9 +2016,16 @@ define(
       renderHeader: function () {
         return (
           React.DOM.div( {className:"modal-header"}, 
-            React.DOM.button( {type:"button", className:"close", 'aria-hidden':"true", onClick:this.props.onRequestClose}, "×"),
-            React.DOM.h4( {className:"modal-title"}, this.props.title)
+            React.DOM.button( {type:"button", className:"close", 'aria-hidden':"true", onClick:this.props.onRequestHide}, "×"),
+            this.renderTitle()
           )
+        );
+      },
+
+      renderTitle: function () {
+        return (
+          React.isValidComponent(this.props.title) ?
+            this.props.title : React.DOM.h4( {className:"modal-title"}, this.props.title)
         );
       }
     });
@@ -2118,6 +2150,125 @@ define(
   });
 define('../amd/NavItem',['./transpiled/NavItem'], function (NavItem) {
   return NavItem.default;
+});
+define(
+  '../amd/transpiled/OverlayTriggerMixin',["./react-es6","exports"],
+  function(__dependency1__, __exports__) {
+    
+    var React = __dependency1__["default"];
+
+    __exports__["default"] = {
+      componentWillUnmount: function () {
+        this._unrenderOverlay();
+        document.body.removeChild(this._overlayTarget);
+      },
+
+      componentDidUpdate: function () {
+        this._renderOverlay();
+      },
+
+      componentDidMount: function () {
+        this._overlayTarget = document.createElement('div');
+        document.body.appendChild(this._overlayTarget);
+        this._renderOverlay();
+      },
+
+      _renderOverlay: function () {
+        React.renderComponent(this.renderOverlay(), this._overlayTarget);
+      },
+
+      _unrenderOverlay: function () {
+        React.unmountComponentAtNode(this._overlayTarget);
+      }
+    };
+  });
+define(
+  '../amd/transpiled/OverlayTrigger',["./react-es6","./react-es6/lib/cloneWithProps","./OverlayTriggerMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var cloneWithProps = __dependency2__["default"];
+    var OverlayTriggerMixin = __dependency3__["default"];
+
+    var OverlayTrigger = React.createClass({displayName: 'OverlayTrigger',
+        mixins: [OverlayTriggerMixin],
+
+        getDefaultProps: function () {
+            return {
+                trigger: 'click'
+            };
+        },
+
+        getInitialState: function() {
+            return {
+                isOverlayShown: false
+            };
+        },
+
+        show: function () {
+            this.setState({
+                isOverlayShown: true
+            });
+        },
+
+        hide: function () {
+            this.setState({
+                isOverlayShown: false
+            });
+        },
+
+        toggle: function () {
+            this.setState({
+                isOverlayShown: !this.state.isOverlayShown
+            });
+        },
+
+        renderOverlay: function() {
+            if (!this.state.isOverlayShown || !this.props.overlay) {
+                return React.DOM.span(null );
+            }
+
+            return cloneWithProps(
+                this.props.overlay,
+                {onRequestHide: this.hide}
+            );
+        },
+
+        render: function() {
+            return (this.props.children) ?
+                this.renderTrigger() : React.DOM.span(null );
+        },
+
+        renderTrigger: function () {
+            var props = {},
+                trigger = this.props.trigger,
+                propName;
+
+            if (trigger !== 'manual') {
+                if (trigger === 'hover') {
+                    trigger = 'mouseOver';
+                }
+                propName = 'on' + trigger.substr(0, 1).toUpperCase() +
+                    trigger.substr(1);
+                props[propName] = this.toggle;
+            }
+
+            return React.DOM.span(
+                props,
+                this.props.children
+            );
+        }
+    });
+
+    __exports__["default"] = OverlayTrigger;
+  });
+define('../amd/OverlayTrigger',['./transpiled/OverlayTrigger'], function (OverlayTrigger) {
+  return OverlayTrigger.default;
+});
+define('../amd/OverlayTriggerMixin',['./transpiled/OverlayTriggerMixin'], function (OverlayTriggerMixin) {
+  return OverlayTriggerMixin.default;
 });
 define(
   '../amd/transpiled/Panel',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
@@ -2671,7 +2822,7 @@ define('../amd/XSmallMixin',['./transpiled/XSmallMixin'], function (XSmallMixin)
 });
 /*global define */
 
-define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/LayeredComponentMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/Panel','../amd/PanelGroup','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
+define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/OverlayTrigger','../amd/OverlayTriggerMixin','../amd/Panel','../amd/PanelGroup','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
     
 
     return {
@@ -2686,12 +2837,13 @@ define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/Bo
         InlineMixin: require('../amd/InlineMixin'),
         Input: require('../amd/Input'),
         LargeMixin: require('../amd/LargeMixin'),
-        LayeredComponentMixin: require('../amd/LayeredComponentMixin'),
         MediumMixin: require('../amd/MediumMixin'),
         MenuItem: require('../amd/MenuItem'),
         Modal: require('../amd/Modal'),
         Nav: require('../amd/Nav'),
         NavItem: require('../amd/NavItem'),
+        OverlayTrigger: require('../amd/OverlayTrigger'),
+        OverlayTriggerMixin: require('../amd/OverlayTriggerMixin'),
         Panel: require('../amd/Panel'),
         PanelGroup: require('../amd/PanelGroup'),
         PrimaryMixin: require('../amd/PrimaryMixin'),

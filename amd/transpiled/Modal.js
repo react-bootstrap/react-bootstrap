@@ -1,15 +1,22 @@
 define(
-  ["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+  ["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./FadeMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
     var BootstrapMixin = __dependency3__["default"];
+    var FadeMixin = __dependency4__["default"];
+
+
+    // TODO:
+    // - aria-labelledby
+    // - Add `modal-body` div if only one child passed in that doesn't already have it
+    // - Tests
 
     var Modal = React.createClass({displayName: 'Modal',
-      mixins: [BootstrapMixin],
+      mixins: [BootstrapMixin, FadeMixin],
 
       getDefaultProps: function () {
         return {
@@ -21,15 +28,6 @@ define(
 
       componentDidMount: function () {
         document.addEventListener('keyup', this.handleKeyUp);
-
-        setTimeout(this.fadeIn, 0);
-      },
-
-      fadeIn: function () {
-        if (this.isMounted() && this.refs.modal.getDOMNode().className.match(/\bfade\b/)) {
-          this.refs.modal.getDOMNode().className += ' in';
-          this.refs.backdrop.getDOMNode().className += ' in';
-        }
       },
 
       componentWillUnmount: function () {
@@ -37,24 +35,26 @@ define(
       },
 
       killClick: function (e) {
-        console.info(e);
         e.stopPropagation();
       },
 
       handleBackdropClick: function () {
-        this.props.onRequestClose();
+        this.props.onRequestHide();
       },
 
       handleKeyUp: function (e) {
         if (this.props.keyboard && e.keyCode === 27) {
-          this.props.onRequestClose();
+          this.props.onRequestHide();
         }
       },
 
       render: function () {
         var classes = this.getBsClassSet();
-        
+
         classes['fade'] = this.props.fade;
+        if (!document.querySelectorAll) {
+          classes['in'] = this.props.fade;
+        }
 
         var modal = this.transferPropsTo(
           React.DOM.div(
@@ -86,6 +86,10 @@ define(
           'fade': this.props.fade
         };
 
+        if (!document.querySelectorAll) {
+          classes['in'] = this.props.fade;
+        }
+
         return (
           React.DOM.div(null, 
             React.DOM.div( {className:classSet(classes), ref:"backdrop"} ),
@@ -97,9 +101,16 @@ define(
       renderHeader: function () {
         return (
           React.DOM.div( {className:"modal-header"}, 
-            React.DOM.button( {type:"button", className:"close", 'aria-hidden':"true", onClick:this.props.onRequestClose}, "×"),
-            React.DOM.h4( {className:"modal-title"}, this.props.title)
+            React.DOM.button( {type:"button", className:"close", 'aria-hidden':"true", onClick:this.props.onRequestHide}, "×"),
+            this.renderTitle()
           )
+        );
+      },
+
+      renderTitle: function () {
+        return (
+          React.isValidComponent(this.props.title) ?
+            this.props.title : React.DOM.h4( {className:"modal-title"}, this.props.title)
         );
       }
     });
