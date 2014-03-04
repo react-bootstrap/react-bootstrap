@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
-    <script src="http://react.zpao.com/builds/master/latest/react.js"></script>
+    <link rel="stylesheet" href="./vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="./vendor/bootstrap-theme.min.css">
+    <script src="./vendor/react-0.9.0.js"></script>
+    <script src="./vendor/JSXTransformer-0.9.0.js"></script>
     <script src="../dist/react-bootstrap.js"></script>
-    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
 </head>
 <body>
     <script type="text/jsx">
@@ -16,16 +16,33 @@
             DropdownButton = ReactBootstrap.DropdownButton,
             SplitButton = ReactBootstrap.SplitButton,
             MenuItem = ReactBootstrap.MenuItem,
+            Modal = ReactBootstrap.Modal,
+            OverlayTrigger = ReactBootstrap.OverlayTrigger,
             isOpen = true,
+
             handleSelect = function () {
                 isOpen = !isOpen;
                 render();
             },
+
             handleDropdownSelect = function (key) {
                 console.info(key);
             },
+
+            modalInstance = (
+                <Modal title="Title" fade={true}>
+                    <div className="modal-body">
+                        Content
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-primary">Save changes</button>
+                    </div>
+                </Modal>
+            ),
+
             render = function () {
                 var header = 'header'; //React.DOM.h1({}, 'Header');
+
                 React.renderComponent(
                     <div>
                         <DropdownButton title="Dropdown" onSelect={handleDropdownSelect}>
@@ -42,10 +59,14 @@
                             <Panel header='header1' key="1">Content1</Panel>
                             <Panel header='header2' key="2">Content2</Panel>
                         </Accordion>
+                        <OverlayTrigger overlay={modalInstance}>
+                            <a href="#">Open modal</a>
+                        </OverlayTrigger>
                     </div>,
                     document.body
                 );
             };
+
 
             render();
 

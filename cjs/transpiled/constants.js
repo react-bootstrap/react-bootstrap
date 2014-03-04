@@ -11,7 +11,8 @@ exports["default"] = {
         'panel': 'panel',
         'panel-group': 'panel-group',
         'progress-bar': 'progress-bar',
-        'nav': 'nav'
+        'nav': 'nav',
+        'modal': 'modal'
     },
     STYLES: {
         'default': 'default',
