@@ -3,7 +3,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var ProgressBar         = require('../cjs/ProgressBar');
+var ProgressBar         = require('../react-bootstrap-npm/ProgressBar');
 
 describe('ProgressBar', function () {
   it('Should output a progress bar', function () {

@@ -4,60 +4,79 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     transpile: {
-      cjs: {
+      npm: {
         type: 'cjs',
         files: [{
           expand: true,
           cwd: '.',
           src: ['transpiled/**/*.js'],
-          dest: 'cjs/'
+          dest: 'react-bootstrap-npm/'
         }]
       },
-      amd: {
+      bower: {
         type: 'amd',
         anonymous: true,
         files: [{
           expand: true,
           cwd: '.',
           src: ['transpiled/**/*.js'],
-          dest: 'amd/'
+          dest: 'react-bootstrap-bower/'
         }]
       }
     },
 
     es6_module_wrap_default: {
-      cjs: {
+      npm: {
         options: {
           type: 'cjs'
         },
         files: [{
           expand: true,
-          cwd: 'cjs/transpiled',
+          cwd: 'react-bootstrap-npm/transpiled',
           src: ['*.js'],
-          dest: 'cjs'
+          dest: 'react-bootstrap-npm'
         }]
       },
-      amd: {
+      bower: {
         options: {
           type: 'amd'
         },
         files: [{
           expand: true,
-          cwd: 'amd/transpiled',
+          cwd: 'react-bootstrap-bower/transpiled',
           src: ['*.js'],
-          dest: 'amd'
+          dest: 'react-bootstrap-bower'
         }]
       }
     },
 
     copy: {
-      amdreact: {
+      bower: {
         files: [
           {
-            src: ['tools/react-es6.js'],
-            dest: 'amd/transpiled/react-es6.js'
+            dot: true,
+            expand: true,
+            cwd: 'tools/bower/',
+            src: ['**'],
+            dest: 'react-bootstrap-bower/'
           }
         ]
+      },
+      npm: {
+        files: [
+          {
+            dot: true,
+            expand: true,
+            cwd: 'tools/npm/',
+            src: ['**'],
+            dest: 'react-bootstrap-npm/'
+          }
+        ]
+      },
+      options: {
+        process: function (content, srcpath) {
+          return grunt.template.process(content);
+        }
       }
     },
 
@@ -88,8 +107,8 @@ module.exports = function (grunt) {
 
     clean: {
       transpiled: ['transpiled'],
-      cjs: ['cjs'],
-      amd: ['amd']
+      npm: ['react-bootstrap-npm'],
+      bower: ['react-bootstrap-bower']
     },
 
     watch: {
@@ -122,7 +141,7 @@ module.exports = function (grunt) {
     // TODO: work out how to get grunt-contrib-requirejs working
     shell: {
       requirejs: {
-        command: 'node tools/r.js -o tools/build.js',
+        command: 'node tools/vendor/r.js -o tools/build.js',
         options: {
             stdout: true
         }
@@ -134,8 +153,8 @@ module.exports = function (grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'dist/<%= pkg.name %>.js',
-        dest: 'dist/<%= pkg.name %>.min.js'
+        src: 'react-bootstrap-bower/<%= pkg.name %>.js',
+        dest: 'react-bootstrap-bower/<%= pkg.name %>.min.js'
       }
     }
 
@@ -153,12 +172,13 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-shell');
 
   grunt.registerTask('build', [
-    'clean:amd',
-    'clean:cjs',
+    'clean:bower',
+    'clean:npm',
     'react',
     'transpile',
     'es6_module_wrap_default',
-    'copy:amdreact',
+    'copy:bower',
+    'copy:npm',
     'browserify',
     'shell:requirejs',
     'uglify',

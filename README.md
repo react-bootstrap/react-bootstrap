@@ -31,9 +31,9 @@ First add the bootstrap CSS to your project then:
 bower install react#v0.9.0
 bower install react-bootstrap
 
-var Alert = require('react-bootstrap/amd/Alert');
+var Alert = require('react-bootstrap/Alert');
 // or
-var Alert = require('react-bootstrap/amd').Alert;
+var Alert = require('react-bootstrap').Alert;
 ```
 
 ### CommonJS
@@ -41,7 +41,7 @@ var Alert = require('react-bootstrap/amd').Alert;
 npm install react@v0.9.0
 npm install react-bootstrap
 
-var Alert = require('react-bootstrap/cjs/Alert');
+var Alert = require('react-bootstrap/Alert');
 // or
 var Alert = require('react-bootstrap').Alert;
 ```
@@ -49,7 +49,7 @@ var Alert = require('react-bootstrap').Alert;
 ### Browser globals
 ```
 <script src="http://fb.me/react-0.9.0.js"></script>
-<script src="react-bootstrap/dist/react-bootstrap.min.js"></script>
+<script src="react-bootstrap/react-bootstrap.min.js"></script>
 <script>
     var Alert = ReactBootstrap.Alert;
 </script>
@@ -77,8 +77,8 @@ var Alert = require('react-bootstrap').Alert;
 ### <a name="Nav"></a>Nav
 
 ```
-var Nav     = require('react-bootstrap/cjs/Nav');
-var NavItem = require('react-bootstrap/cjs/NavItem');
+var Nav     = require('react-bootstrap/Nav');
+var NavItem = require('react-bootstrap/NavItem');
 
 var key = 1;
 
@@ -96,7 +96,7 @@ function handleSelect (selectedKey) {
 ### <a name="Button"></a>Button
 
 ```
-var Button = require('react-bootstrap/cjs/Button');
+var Button = require('react-bootstrap/Button');
 
 <Button onClick={handleClick}>Title</Button>
 ```
@@ -104,8 +104,8 @@ var Button = require('react-bootstrap/cjs/Button');
 ### <a name="DropdownButton"></a>DropdownButton
 
 ```
-var DropdownButton = require('react-bootstrap/cjs/DropdownButton');
-var MenuItem       = require('react-bootstrap/cjs/MenuItem');
+var DropdownButton = require('react-bootstrap/DropdownButton');
+var MenuItem       = require('react-bootstrap/MenuItem');
 
 function handleSelect (selectedKey) {
 }
@@ -119,8 +119,8 @@ function handleSelect (selectedKey) {
 ### <a name="SplitButton"></a>SplitButton
 
 ```
-var SplitButton = require('react-bootstrap/cjs/SplitButton');
-var MenuItem    = require('react-bootstrap/cjs/MenuItem');
+var SplitButton = require('react-bootstrap/SplitButton');
+var MenuItem    = require('react-bootstrap/MenuItem');
 
 function handleSelect (selectedKey) {
 }
@@ -134,7 +134,7 @@ function handleSelect (selectedKey) {
 ### <a name="MenuItem"></a>MenuItem
 
 ```
-var MenuItem = require('react-bootstrap/cjs/MenuItem');
+var MenuItem = require('react-bootstrap/MenuItem');
 
 function handleSelect (key) {
 }
@@ -146,8 +146,8 @@ function handleSelect (key) {
 
 #### Controlled
 ```
-var TabbedArea = require('react-bootstrap/cjs/TabbedArea');
-var TabPane    = require('react-bootstrap/cjs/TabPane');
+var TabbedArea = require('react-bootstrap/TabbedArea');
+var TabPane    = require('react-bootstrap/TabPane');
 
 var key = 1;
 
@@ -163,8 +163,8 @@ function handleSelect (selectedKey) {
 
 #### Uncontrolled
 ```
-var TabbedArea = require('react-bootstrap/cjs/TabbedArea');
-var TabPane    = require('react-bootstrap/cjs/TabPane');
+var TabbedArea = require('react-bootstrap/TabbedArea');
+var TabPane    = require('react-bootstrap/TabPane');
 
 <TabbedArea title="Title" initialActiveKey={1}>
   <TabPane tab="Tab 1" key={1}>TabPane 1 content</TabPane>
@@ -175,7 +175,7 @@ var TabPane    = require('react-bootstrap/cjs/TabPane');
 ### <a name="Alert"></a>Alert
 
 ```
-var Alert = require('react-bootstrap/cjs/Alert');
+var Alert = require('react-bootstrap/Alert');
 
 function handleDismiss () {
 }
@@ -189,8 +189,8 @@ function handleDismiss () {
 
 #### Controlled
 ```
-var PanelGroup = require('react-bootstrap/cjs/PanelGroup');
-var Panel    = require('react-bootstrap/cjs/Panel');
+var PanelGroup = require('react-bootstrap/PanelGroup');
+var Panel    = require('react-bootstrap/Panel');
 
 var key = 1;
 
@@ -206,8 +206,8 @@ function handleSelect (selectedKey) {
 
 #### Uncontrolled
 ```
-var PanelGroup = require('react-bootstrap/cjs/PanelGroup');
-var Panel    = require('react-bootstrap/cjs/Panel');
+var PanelGroup = require('react-bootstrap/PanelGroup');
+var Panel    = require('react-bootstrap/Panel');
 
 <PanelGroup title="Title" initialActiveKey={1} isAccordion={true}>
   <Panel header="Panel 1" key={1}>Panel 1 content</Panel>
@@ -223,8 +223,8 @@ Overlays require the overlay instance itself and a 'trigger' component which con
 overlay is visible or not.
 
 ```
-var Modal = require('react-bootstrap/cjs/Modal');
-var OverlayTrigger = require('react-bootstrap/cjs/OverlayTrigger');
+var Modal = require('react-bootstrap/Modal');
+var OverlayTrigger = require('react-bootstrap/OverlayTrigger');
 
 var modalInstance = (
   <Modal title="Modal title" animation={true} backdrop={true} keyboard={true}>
@@ -246,7 +246,7 @@ var trigger = (
 You can make a custom trigger component like this:
 
 ```
-var OverlayTriggerMixin = require('react-bootstrap/cjs/OverlayTriggerMixin');
+var OverlayTriggerMixin = require('react-bootstrap/OverlayTriggerMixin');
 var CustomTrigger = React.createClass({
   mixins: [OverlayTriggerMixin],
 

@@ -1,9 +1,0 @@
-{
-  "name": "react-bootstrap",
-  "version": "0.4.2",
-  "main": [
-    "dist/react-bootstrap.min.js",
-    "amd.js"
-  ],
-  "ignore": []
-}

@@ -3,7 +3,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Button         = require('../cjs/Button');
+var Button         = require('../react-bootstrap-npm/Button');
 
 describe('Button', function () {
   it('Should output a button', function () {

@@ -3,7 +3,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var NavItem        = require('../cjs/NavItem');
+var NavItem        = require('../react-bootstrap-npm/NavItem');
 
 describe('NavItem', function () {
   it('Should add active class', function () {

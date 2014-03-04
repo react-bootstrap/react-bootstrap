@@ -3,8 +3,8 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Nav            = require('../cjs/Nav');
-var NavItem        = require('../cjs/NavItem');
+var Nav            = require('../react-bootstrap-npm/Nav');
+var NavItem        = require('../react-bootstrap-npm/NavItem');
 
 describe('Nav', function () {
   it('Should set the correct item active', function () {

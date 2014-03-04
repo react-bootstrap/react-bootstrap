@@ -3,8 +3,8 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var SplitButton = require('../cjs/SplitButton');
-var MenuItem       = require('../cjs/MenuItem');
+var SplitButton = require('../react-bootstrap-npm/SplitButton');
+var MenuItem       = require('../react-bootstrap-npm/MenuItem');
 
 describe('SplitButton', function () {
   it('Should render button correctly', function () {

@@ -1,11 +1,12 @@
 ({
-    "baseUrl": "../tools",
+    "baseUrl": "../react-bootstrap-bower",
     "paths": {
-        "react-bootstrap": "../amd"
+        "react-bootstrap": "../tools/bower/index",
+        "react": "../tools/vendor/react-0.9.0"
     },
-    "include": ["./almond", "react-bootstrap"],
+    "include": ["../tools/vendor/almond", "react-bootstrap"],
     "exclude": ["react"],
-    "out": "../dist/react-bootstrap.js",
+    "out": "../react-bootstrap-bower/react-bootstrap.js",
     "wrap": {
         "startFile": "wrap.start",
         "endFile": "wrap.end"

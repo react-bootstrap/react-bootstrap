@@ -4,21 +4,21 @@
 var React            = require('react');
 var ReactTestUtils   = require('react/lib/ReactTestUtils');
 var createObjectFrom = require('react/lib/createObjectFrom');
-var BootstrapMixin   = require('../cjs/BootstrapMixin');
+var BootstrapMixin   = require('../react-bootstrap-npm/BootstrapMixin');
 
-var LargeMixin   = require('../cjs/LargeMixin');
-var MediumMixin  = require('../cjs/MediumMixin');
-var SmallMixin   = require('../cjs/SmallMixin');
-var XSmallMixin  = require('../cjs/XSmallMixin');
+var LargeMixin   = require('../react-bootstrap-npm/LargeMixin');
+var MediumMixin  = require('../react-bootstrap-npm/MediumMixin');
+var SmallMixin   = require('../react-bootstrap-npm/SmallMixin');
+var XSmallMixin  = require('../react-bootstrap-npm/XSmallMixin');
 
-var DefaultMixin = require('../cjs/DefaultMixin');
-var PrimaryMixin = require('../cjs/PrimaryMixin');
-var SuccessMixin = require('../cjs/SuccessMixin');
-var InfoMixin    = require('../cjs/InfoMixin');
-var WarningMixin = require('../cjs/WarningMixin');
-var DangerMixin  = require('../cjs/DangerMixin');
-var LinkMixin    = require('../cjs/LinkMixin');
-var InlineMixin  = require('../cjs/InlineMixin');
+var DefaultMixin = require('../react-bootstrap-npm/DefaultMixin');
+var PrimaryMixin = require('../react-bootstrap-npm/PrimaryMixin');
+var SuccessMixin = require('../react-bootstrap-npm/SuccessMixin');
+var InfoMixin    = require('../react-bootstrap-npm/InfoMixin');
+var WarningMixin = require('../react-bootstrap-npm/WarningMixin');
+var DangerMixin  = require('../react-bootstrap-npm/DangerMixin');
+var LinkMixin    = require('../react-bootstrap-npm/LinkMixin');
+var InlineMixin  = require('../react-bootstrap-npm/InlineMixin');
 
 describe('Mixins', function () {
   var testMixins = function (TestMixins, expectedClassName) {

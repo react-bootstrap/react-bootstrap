@@ -3,8 +3,8 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var DropdownButton = require('../cjs/DropdownButton');
-var MenuItem       = require('../cjs/MenuItem');
+var DropdownButton = require('../react-bootstrap-npm/DropdownButton');
+var MenuItem       = require('../react-bootstrap-npm/MenuItem');
 
 describe('DropdownButton', function () {
   it('Should render button correctly', function () {
