@@ -2,7 +2,6 @@
   "name": "react-bootstrap",
   "version": "0.6.3",
   "description": "Bootstrap 3 components build with React",
-  "main": "main.js",
   "scripts": {
     "build": "./node_modules/.bin/grunt build",
     "test-watch": "./node_modules/.bin/grunt watch 2>&1 >/dev/null & karma start karma.dev.js",

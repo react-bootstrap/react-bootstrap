@@ -51,13 +51,30 @@ module.exports = function (grunt) {
     },
 
     copy: {
-      amdreact: {
+      amd: {
         files: [
           {
-            src: ['tools/react-es6.js'],
-            dest: 'amd/transpiled/react-es6.js'
+            src: ['**/*'],
+            dest: 'amd/',
+            cwd: 'tools/amd',
+            expand: true
           }
         ]
+      },
+      cjs: {
+        files: [
+          {
+            src: ['**/*'],
+            dest: 'cjs/',
+            cwd: 'tools/cjs',
+            expand: true
+          }
+        ]
+      },
+      options: {
+        process: function (content, srcpath) {
+          return grunt.template.process(content);
+        }
       }
     },
 
@@ -121,24 +138,25 @@ module.exports = function (grunt) {
     },
 
     requirejs: {
-        dev: {
-            // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
-            options: {
-                "baseUrl": "tools",
-                "paths": {
-                    "react-bootstrap": "../amd"
-                },
-                "include": ["almond", "react-bootstrap"],
-                "exclude": ["react"],
-                "out": "dist/react-bootstrap.js",
-                "wrap": {
-                    "startFile": "tools/wrap.start",
-                    "endFile": "tools/wrap.end"
-                },
-                "optimize": "none",
-                "generateSourceMaps": true
-            }
+      dev: {
+        // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
+        options: {
+          baseUrl: "amd",
+          paths: {
+            "react-bootstrap": "./index",
+            almond: "../tools/vendor/almond",
+            react: "../tools/vendor/react-0.9.0"
+          },
+          include: ["almond", "react-bootstrap"],
+          exclude: ["react"],
+          out: "amd/react-bootstrap.js",
+          wrap: {
+            startFile: "tools/wrap.start",
+            endFile: "tools/wrap.end"
+          },
+          optimize: "none"
         }
+      }
     },
 
     uglify: {
@@ -146,8 +164,8 @@ module.exports = function (grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'dist/<%= pkg.name %>.js',
-        dest: 'dist/<%= pkg.name %>.min.js'
+        src: 'amd/<%= pkg.name %>.js',
+        dest: 'amd/<%= pkg.name %>.min.js'
       }
     }
 
@@ -171,7 +189,7 @@ module.exports = function (grunt) {
     'react:test',
     'transpile',
     'es6_module_wrap_default',
-    'copy:amdreact',
+    'copy',
     'browserify:test',
     'requirejs:dev',
     'uglify:build',

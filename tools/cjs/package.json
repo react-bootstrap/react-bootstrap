@@ -1,0 +1,23 @@
+{
+  "name": "<%= pkg.name %>",
+  "version": "<%= pkg.version %>",
+  "description": "<%= pkg.description %>",
+  "main": "main.js",
+  "keywords": [
+    "react",
+    "react-component",
+    "bootstrap"
+  ],
+  "author": "Stephen J. Collings <stevoland@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "stevoland/react-bootstrap"
+  },
+  "bugs": {
+    "url": "https://github.com/stevoland/react-bootstrap/issues"
+  },
+  "peerDependencies": {
+    "react": "~0.9"
+  }
+}
