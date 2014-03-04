@@ -45,6 +45,8 @@ var DropdownButton = React.createClass({
     if (typeof this.props.onSelect === 'function') {
       this.props.onSelect(key);
     }
+
+    this.toggle(false);
   },
 
   handleKeyUp: function (e) {
@@ -54,7 +56,15 @@ var DropdownButton = React.createClass({
   },
 
   handleClickOutside: function (e) {
-    this.toggle(false);
+    if (!this._clickedInside) {
+      this.toggle(false);
+    }
+    delete this._clickedInside;
+  },
+
+  killClick: function (e) {
+    // e.stopPropagation() doesn't prevent `handleClickOutside` from being called
+    this._clickedInside = true;
   },
 
   bindCloseHandlers: function () {
@@ -93,7 +103,8 @@ var DropdownButton = React.createClass({
           className="dropdown-menu"
           role="menu"
           ref="menu"
-          aria-labelledby={this.props.id}>
+          aria-labelledby={this.props.id}
+          onClick={this.killClick}>
           {utils.modifyChildren(this.props.children, this.renderMenuItem)}
         </ul>
       </div>
