@@ -33,7 +33,8 @@ export default = {
 
   componentDidMount: function () {
     if (document.querySelectorAll) {
-      setTimeout(this._fadeIn, 0);
+      // Firefox needs delay for transition to be triggered
+      setTimeout(this._fadeIn, 20);
     }
   },
 
@@ -44,7 +45,8 @@ export default = {
       this._fadeOutEl = document.createElement('div');
       document.body.appendChild(this._fadeOutEl);
       this._fadeOutEl.innerHTML = this.getDOMNode().innerHTML;
-      setTimeout(this._fadeOut, 0);
+      // Firefox needs delay for transition to be triggered
+      setTimeout(this._fadeOut, 20);
     }
   }
 };

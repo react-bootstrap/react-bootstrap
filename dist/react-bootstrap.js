@@ -1641,6 +1641,66 @@ define('../amd/DropdownButton',['./transpiled/DropdownButton'], function (Dropdo
   return DropdownButton.default;
 });
 define(
+  '../amd/transpiled/FadeMixin',["./react-es6","exports"],
+  function(__dependency1__, __exports__) {
+    
+    var React = __dependency1__["default"];
+
+    // TODO: listen for onTransitionEnd to remove el
+    __exports__["default"] = {
+      _fadeIn: function () {
+        var els;
+
+        if (this.isMounted()) {
+          els = this.getDOMNode().querySelectorAll('.fade');
+          if (els) {
+            Array.prototype.forEach.call(els, function (el) {
+              el.className += ' in';
+            });
+          }
+        }
+      },
+
+      _fadeOut: function () {
+        var els = this._fadeOutEl.querySelectorAll('.fade.in');
+
+        if (els) {
+          Array.prototype.forEach.call(els, function (el) {
+            el.className = el.className.replace(/\bin\b/, '');
+          });
+        }
+
+        setTimeout(this._handleFadeOutEnd, 300);
+      },
+
+      _handleFadeOutEnd: function () {
+        this._fadeOutEl.parentNode.removeChild(this._fadeOutEl);
+      },
+
+      componentDidMount: function () {
+        if (document.querySelectorAll) {
+          // Firefox needs delay for transition to be triggered
+          setTimeout(this._fadeIn, 20);
+        }
+      },
+
+      componentWillUnmount: function () {
+        var els = this.getDOMNode().querySelectorAll('.fade');
+
+        if (els) {
+          this._fadeOutEl = document.createElement('div');
+          document.body.appendChild(this._fadeOutEl);
+          this._fadeOutEl.innerHTML = this.getDOMNode().innerHTML;
+          // Firefox needs delay for transition to be triggered
+          setTimeout(this._fadeOut, 20);
+        }
+      }
+    };
+  });
+define('../amd/FadeMixin',['./transpiled/FadeMixin'], function (FadeMixin) {
+  return FadeMixin.default;
+});
+define(
   '../amd/transpiled/InfoMixin',["exports"],
   function(__exports__) {
     
@@ -1859,61 +1919,6 @@ define('../amd/MenuItem',['./transpiled/MenuItem'], function (MenuItem) {
   return MenuItem.default;
 });
 define(
-  '../amd/transpiled/FadeMixin',["./react-es6","exports"],
-  function(__dependency1__, __exports__) {
-    
-    var React = __dependency1__["default"];
-
-    // TODO: listen for onTransitionEnd to remove el
-    __exports__["default"] = {
-      _fadeIn: function () {
-        var els;
-
-        if (this.isMounted()) {
-          els = this.getDOMNode().querySelectorAll('.fade');
-          if (els) {
-            Array.prototype.forEach.call(els, function (el) {
-              el.className += ' in';
-            });
-          }
-        }
-      },
-
-      _fadeOut: function () {
-        var els = this._fadeOutEl.querySelectorAll('.fade.in');
-
-        if (els) {
-          Array.prototype.forEach.call(els, function (el) {
-            el.className = el.className.replace(/\bin\b/, '');
-          });
-        }
-
-        setTimeout(this._handleFadeOutEnd, 300);
-      },
-
-      _handleFadeOutEnd: function () {
-        this._fadeOutEl.parentNode.removeChild(this._fadeOutEl);
-      },
-
-      componentDidMount: function () {
-        if (document.querySelectorAll) {
-          setTimeout(this._fadeIn, 0);
-        }
-      },
-
-      componentWillUnmount: function () {
-        var els = this.getDOMNode().querySelectorAll('.fade');
-
-        if (els) {
-          this._fadeOutEl = document.createElement('div');
-          document.body.appendChild(this._fadeOutEl);
-          this._fadeOutEl.innerHTML = this.getDOMNode().innerHTML;
-          setTimeout(this._fadeOut, 0);
-        }
-      }
-    };
-  });
-define(
   '../amd/transpiled/Modal',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./FadeMixin","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     
@@ -1976,7 +1981,6 @@ define(
             {bsClass:"modal",
             tabIndex:"-1",
             role:"dialog",
-            'aria-hidden':"true",
             style:{display: 'block'},
             className:classSet(classes),
             onClick:this.handleBackdropClick,
@@ -2822,7 +2826,7 @@ define('../amd/XSmallMixin',['./transpiled/XSmallMixin'], function (XSmallMixin)
 });
 /*global define */
 
-define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/OverlayTrigger','../amd/OverlayTriggerMixin','../amd/Panel','../amd/PanelGroup','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
+define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/FadeMixin','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/OverlayTrigger','../amd/OverlayTriggerMixin','../amd/Panel','../amd/PanelGroup','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
     
 
     return {
@@ -2833,6 +2837,7 @@ define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/Bo
         DangerMixin: require('../amd/DangerMixin'),
         DefaultMixin: require('../amd/DefaultMixin'),
         DropdownButton: require('../amd/DropdownButton'),
+        FadeMixin: require('../amd/FadeMixin'),
         InfoMixin: require('../amd/InfoMixin'),
         InlineMixin: require('../amd/InlineMixin'),
         Input: require('../amd/Input'),
