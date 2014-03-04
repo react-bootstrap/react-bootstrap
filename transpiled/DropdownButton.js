@@ -11,7 +11,7 @@ define(
     var utils = __dependency5__["default"];
 
 
-    var SplitButton = React.createClass({displayName: 'SplitButton',
+    var DropdownButton = React.createClass({displayName: 'DropdownButton',
       mixins: [BootstrapMixin],
 
       getInitialState: function () {
@@ -22,8 +22,7 @@ define(
 
       getDefaultProps: function () {
         return {
-          options: [],
-          dropdownTitle: 'Toggle dropdown'
+          options: []
         };
       },
 
@@ -43,12 +42,6 @@ define(
       },
 
       handleClick: function (e) {
-        if (this.props.onClick) {
-          this.props.onClick(e);
-        }
-      },
-
-      handleDropdownClick: function (e) {
         this.toggle();
       },
 
@@ -56,6 +49,8 @@ define(
         if (typeof this.props.onSelect === 'function') {
           this.props.onSelect(key);
         }
+
+        this.toggle(false);
       },
 
       handleKeyUp: function (e) {
@@ -65,7 +60,15 @@ define(
       },
 
       handleClickOutside: function (e) {
-        this.toggle(false);
+        if (!this._clickedInside) {
+          this.toggle(false);
+        }
+        delete this._clickedInside;
+      },
+
+      killClick: function (e) {
+        // e.stopPropagation() doesn't prevent `handleClickOutside` from being called
+        this._clickedInside = true;
       },
 
       bindCloseHandlers: function () {
@@ -91,29 +94,21 @@ define(
         var button = this.transferPropsTo(
             Button(
               {ref:"button",
-              onClick:this.handleClick}, 
-              this.props.title
-            )
-        );
-
-        var dropdownButton = this.transferPropsTo(
-            Button(
-              {ref:"dropdownButton",
               className:"dropdown-toggle",
-              onClick:this.handleDropdownClick}, 
-              React.DOM.span( {className:"sr-only"}, this.props.dropdownTitle),React.DOM.span( {className:"caret"} )
+              onClick:this.handleClick}, 
+              this.props.title + ' ',React.DOM.span( {className:"caret"} )
             )
         );
 
         return (
           React.DOM.div( {className:groupClassName}, 
             button,
-            dropdownButton,
             React.DOM.ul(
               {className:"dropdown-menu",
               role:"menu",
               ref:"menu",
-              'aria-labelledby':this.props.id}, 
+              'aria-labelledby':this.props.id,
+              onClick:this.killClick}, 
               utils.modifyChildren(this.props.children, this.renderMenuItem)
             )
           )
@@ -124,12 +119,13 @@ define(
         return utils.cloneWithProps(
             child,
             {
-              ref: 'menuItem' + (i + 1),
+              ref: child.props.ref || 'menuItem' + (i + 1),
+              key: child.props.key,
               onSelect: this.handleOptionSelect.bind(this, child.props.key)
             }
           );
       }
     });
 
-    __exports__["default"] = SplitButton;
+    __exports__["default"] = DropdownButton;
   });

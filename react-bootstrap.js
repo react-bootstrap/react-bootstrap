@@ -341,16 +341,16 @@ var requirejs, require, define;
     };
 }());
 
-define("almond", function(){});
+define("../tools/vendor/almond", function(){});
 
 define(
-  '../amd/transpiled/react-es6',["exports", "react"],
+  'transpiled/react-es6',["exports", "react"],
   function(__exports__, React) {
     
     __exports__["default"] = React;
   });
 define(
-  '../amd/transpiled/react-es6/lib/cx',["exports"],
+  'transpiled/react-es6/lib/cx',["exports"],
   function(__exports__) {
     
     /**
@@ -386,7 +386,7 @@ define(
      * @param [string ...]  Variable list of classNames in the string case.
      * @return string       Renderable space-separated CSS className.
      */
-    function cx(classNames) {
+    function cx (classNames) {
       if (typeof classNames == 'object') {
         return Object.keys(classNames).map(function(className) {
           return classNames[className] ? className : '';
@@ -399,7 +399,7 @@ define(
     __exports__["default"] = cx;
   });
 define(
-  '../amd/transpiled/constants',["exports"],
+  'transpiled/constants',["exports"],
   function(__exports__) {
     
     __exports__["default"] = {
@@ -412,8 +412,10 @@ define(
             'input-group': 'input-group',
             'form': 'form',
             'panel': 'panel',
+            'panel-group': 'panel-group',
             'progress-bar': 'progress-bar',
-            'nav': 'nav'
+            'nav': 'nav',
+            'modal': 'modal'
         },
         STYLES: {
             'default': 'default',
@@ -436,7 +438,7 @@ define(
     };
   });
 define(
-  '../amd/transpiled/BootstrapMixin',["./react-es6","./constants","exports"],
+  'transpiled/BootstrapMixin',["./react-es6","./constants","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     
     var React = __dependency1__["default"];
@@ -481,182 +483,7 @@ define(
     __exports__["default"] = BootstrapMixin;
   });
 define(
-  '../amd/transpiled/Alert',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
-    
-    /** @jsx React.DOM */
-
-    var React = __dependency1__["default"];
-    var classSet = __dependency2__["default"];
-    var BootstrapMixin = __dependency3__["default"];
-
-
-    var Alert = React.createClass({displayName: 'Alert',
-      mixins: [BootstrapMixin],
-
-      propTypes: {
-        onDismiss: React.PropTypes.func,
-        dismissAfter: React.PropTypes.number
-      },
-
-      getDefaultProps: function () {
-        return {
-          bsClass: 'alert',
-          bsStyle: 'info'
-        };
-      },
-
-      renderDismissButton: function () {
-        return (
-          React.DOM.button(
-            {type:"button",
-            className:"close",
-            onClick:this.props.onDismiss,
-            'aria-hidden':"true"}, 
-            " × "
-          )
-        );
-      },
-
-      render: function () {
-        var classes = this.getBsClassSet();
-        var isDismissable = !!this.props.onDismiss;
-
-        classes['alert-dismissable'] = isDismissable;
-
-        return this.transferPropsTo(
-          React.DOM.div( {className:classSet(classes)}, 
-            isDismissable ? this.renderDismissButton() : null,
-            this.props.children
-          )
-        );
-      },
-
-      componentDidMount: function() {
-        if (this.props.dismissAfter && this.props.onDismiss) {
-          this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter);
-        }
-      },
-
-      componentWillUnmount: function() {
-        clearTimeout(this.dismissTimer);
-      }
-    });
-
-    __exports__["default"] = Alert;
-  });
-define('../amd/Alert',['./transpiled/Alert'], function (Alert) {
-  return Alert.default;
-});
-define('../amd/BootstrapMixin',['./transpiled/BootstrapMixin'], function (BootstrapMixin) {
-  return BootstrapMixin.default;
-});
-define(
-  '../amd/transpiled/Button',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
-    
-    /** @jsx React.DOM */
-
-    var React = __dependency1__["default"];
-    var classSet = __dependency2__["default"];
-    var BootstrapMixin = __dependency3__["default"];
-
-    var Button = React.createClass({displayName: 'Button',
-      mixins: [BootstrapMixin],
-
-      propTypes: {
-        // TODO: Uncompatable with React 0.8.0
-        //loadingChildren: React.PropTypes.renderable,
-        isLoading:   React.PropTypes.bool,
-        isActive:    React.PropTypes.bool,
-        isDisabled:    React.PropTypes.bool
-      },
-
-      getDefaultProps: function () {
-        return {
-          bsClass: 'button',
-          loadingChildren: 'Loading...'
-        };
-      },
-
-      renderAnchor: function (children, classes, isDisabled) {
-        return this.transferPropsTo(
-          React.DOM.a(
-            {href:this.props.href,
-            className:classSet(classes),
-            onClick:this.props.onClick,
-            disabled:isDisabled}, 
-            children
-          )
-        );
-      },
-
-      renderButton: function (children, classes, isDisabled) {
-        return this.transferPropsTo(
-          React.DOM.button(
-            {type:this.props.type || "button",
-            className:classSet(classes),
-            onClick:this.props.onClick,
-            disabled:isDisabled}, 
-            children
-          )
-        );
-      },
-
-      render: function () {
-        var isDisabled = !!(this.props.isDisabled || this.props.isLoading);
-
-        var classes = this.getBsClassSet();
-        classes['disabled'] = isDisabled;
-        classes['active'] = this.props.isActive;
-
-        var children = this.props.isLoading ?
-          this.props.loadingChildren : this.props.children;
-
-        var renderFuncName = (this.props.href) ?
-          'renderAnchor' : 'renderButton';
-
-        return this[renderFuncName](children, classes, isDisabled);
-      }
-    });
-
-    __exports__["default"] = Button;
-  });
-define('../amd/Button',['./transpiled/Button'], function (Button) {
-  return Button.default;
-});
-define(
-  '../amd/transpiled/DangerMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsStyle: 'danger'
-            };
-        }
-    };
-  });
-define('../amd/DangerMixin',['./transpiled/DangerMixin'], function (DangerMixin) {
-  return DangerMixin.default;
-});
-define(
-  '../amd/transpiled/DefaultMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsStyle: 'default'
-            };
-        }
-    };
-  });
-define('../amd/DefaultMixin',['./transpiled/DefaultMixin'], function (DefaultMixin) {
-  return DefaultMixin.default;
-});
-define(
-  '../amd/transpiled/react-es6/lib/copyProperties',["exports"],
+  'transpiled/react-es6/lib/copyProperties',["exports"],
   function(__exports__) {
     
     /**
@@ -709,7 +536,7 @@ define(
     __exports__["default"] = copyProperties;
   });
 define(
-  '../amd/transpiled/react-es6/lib/emptyFunction',["./copyProperties","exports"],
+  'transpiled/react-es6/lib/emptyFunction',["./copyProperties","exports"],
   function(__dependency1__, __exports__) {
     
     /**
@@ -732,8 +559,8 @@ define(
 
     var copyProperties = __dependency1__["default"];
 
-    function makeEmptyFunction(arg) {
-      return function() {
+    function makeEmptyFunction (arg) {
+      return function () {
         return arg;
       };
     }
@@ -743,7 +570,7 @@ define(
      * primarily useful idiomatically for overridable function endpoints which
      * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
      */
-    function emptyFunction() {}
+    function emptyFunction () {}
 
     copyProperties(emptyFunction, {
       thatReturns: makeEmptyFunction,
@@ -757,7 +584,7 @@ define(
     __exports__["default"] = emptyFunction;
   });
 define(
-  '../amd/transpiled/react-es6/lib/invariant',["exports"],
+  'transpiled/react-es6/lib/invariant',["exports"],
   function(__exports__) {
     
     /**
@@ -789,7 +616,7 @@ define(
      * will remain to ensure logic does not differ in production.
      */
 
-    function invariant(condition) {
+    function invariant (condition) {
       if (!condition) {
         var error = new Error('Invariant Violation');
         error.framesToPop = 1;
@@ -800,7 +627,7 @@ define(
     __exports__["default"] = invariant;
   });
 define(
-  '../amd/transpiled/react-es6/lib/joinClasses',["exports"],
+  'transpiled/react-es6/lib/joinClasses',["exports"],
   function(__exports__) {
     
     /**
@@ -831,7 +658,7 @@ define(
      * @param {...?string} classes
      * @return {string}
      */
-    function joinClasses(className/*, ... */) {
+    function joinClasses (className/*, ... */) {
       if (!className) {
         className = '';
       }
@@ -849,7 +676,7 @@ define(
     __exports__["default"] = joinClasses;
   });
 define(
-  '../amd/transpiled/react-es6/lib/keyMirror',["./invariant","exports"],
+  'transpiled/react-es6/lib/keyMirror',["./invariant","exports"],
   function(__dependency1__, __exports__) {
     
     /**
@@ -909,7 +736,7 @@ define(
     __exports__["default"] = keyMirror;
   });
 define(
-  '../amd/transpiled/react-es6/lib/mergeHelpers',["./invariant","./keyMirror","exports"],
+  'transpiled/react-es6/lib/mergeHelpers',["./invariant","./keyMirror","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     
     /**
@@ -949,7 +776,7 @@ define(
      * @param {*} o The item/object/value to test.
      * @return {boolean} true iff the argument is a terminal.
      */
-    var isTerminal = function(o) {
+    var isTerminal = function (o) {
       return typeof o !== 'object' || o === null;
     };
 
@@ -965,7 +792,7 @@ define(
        * @param {?Object=} arg Argument to be normalized (nullable optional)
        * @return {!Object}
        */
-      normalizeMergeArg: function(arg) {
+      normalizeMergeArg: function (arg) {
         return arg === undefined || arg === null ? {} : arg;
       },
 
@@ -977,7 +804,7 @@ define(
        * @param {*} one Array to merge into.
        * @param {*} two Array to merge from.
        */
-      checkMergeArrayArgs: function(one, two) {
+      checkMergeArrayArgs: function (one, two) {
         (invariant(Array.isArray(one) && Array.isArray(two)));
       },
 
@@ -985,7 +812,7 @@ define(
        * @param {*} one Object to merge into.
        * @param {*} two Object to merge from.
        */
-      checkMergeObjectArgs: function(one, two) {
+      checkMergeObjectArgs: function (one, two) {
         mergeHelpers.checkMergeObjectArg(one);
         mergeHelpers.checkMergeObjectArg(two);
       },
@@ -993,7 +820,7 @@ define(
       /**
        * @param {*} arg
        */
-      checkMergeObjectArg: function(arg) {
+      checkMergeObjectArg: function (arg) {
         (invariant(!isTerminal(arg) && !Array.isArray(arg)));
       },
 
@@ -1003,7 +830,7 @@ define(
        *
        * @param {number} Level of recursion to validate against maximum.
        */
-      checkMergeLevel: function(level) {
+      checkMergeLevel: function (level) {
         (invariant(level < MAX_MERGE_DEPTH));
       },
 
@@ -1012,7 +839,7 @@ define(
        *
        * @param {string} Array merge strategy.
        */
-      checkArrayStrategy: function(strategy) {
+      checkArrayStrategy: function (strategy) {
         (invariant(strategy === undefined || strategy in mergeHelpers.ArrayStrategies));
       },
 
@@ -1033,7 +860,7 @@ define(
     __exports__["default"] = mergeHelpers;
   });
 define(
-  '../amd/transpiled/react-es6/lib/mergeInto',["./mergeHelpers","exports"],
+  'transpiled/react-es6/lib/mergeInto',["./mergeHelpers","exports"],
   function(__dependency1__, __exports__) {
     
     /**
@@ -1067,7 +894,7 @@ define(
      * @param {object} one Object to be merged into.
      * @param {?object} two Optional object with properties to merge from.
      */
-    function mergeInto(one, two) {
+    function mergeInto (one, two) {
       checkMergeObjectArg(one);
       if (two != null) {
         checkMergeObjectArg(two);
@@ -1083,7 +910,7 @@ define(
     __exports__["default"] = mergeInto;
   });
 define(
-  '../amd/transpiled/react-es6/lib/merge',["./mergeInto","exports"],
+  'transpiled/react-es6/lib/merge',["./mergeInto","exports"],
   function(__dependency1__, __exports__) {
     
     /**
@@ -1115,7 +942,7 @@ define(
      * @param {?object} two Optional object with properties to merge from.
      * @return {object} The shallow extension of one by two.
      */
-    var merge = function(one, two) {
+    var merge = function (one, two) {
       var result = {};
       mergeInto(result, one);
       mergeInto(result, two);
@@ -1125,7 +952,7 @@ define(
     __exports__["default"] = merge;
   });
 define(
-  '../amd/transpiled/react-es6/lib/ReactPropTransferer',["./emptyFunction","./invariant","./joinClasses","./merge","exports"],
+  'transpiled/react-es6/lib/ReactPropTransferer',["./emptyFunction","./invariant","./joinClasses","./merge","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     
     /**
@@ -1160,8 +987,8 @@ define(
      * @param {function} mergeStrategy
      * @return {function}
      */
-    function createTransferStrategy(mergeStrategy) {
-      return function(props, key, value) {
+    function createTransferStrategy (mergeStrategy) {
+      return function (props, key, value) {
         if (!props.hasOwnProperty(key)) {
           props[key] = value;
         } else {
@@ -1213,7 +1040,7 @@ define(
        * @param {object} newProps new props to merge in
        * @return {object} a new object containing both sets of props merged.
        */
-      mergeProps: function(oldProps, newProps) {
+      mergeProps: function (oldProps, newProps) {
         var props = merge(oldProps);
 
         for (var thisKey in newProps) {
@@ -1251,7 +1078,7 @@ define(
          * @final
          * @protected
          */
-        transferPropsTo: function(component) {
+        transferPropsTo: function (component) {
           (invariant(component._owner === this));
 
           component.props = ReactPropTransferer.mergeProps(
@@ -1268,20 +1095,44 @@ define(
     __exports__["default"] = ReactPropTransferer;
   });
 define(
-  '../amd/transpiled/react-es6/lib/cloneWithProps',["./ReactPropTransferer","./keyMirror","exports"],
+  'transpiled/react-es6/lib/keyOf',["exports"],
+  function(__exports__) {
+    
+    /**
+     * Allows extraction of a minified key. Let's the build system minify keys
+     * without loosing the ability to dynamically use key strings as values
+     * themselves. Pass in an object with a single key/val pair and it will return
+     * you the string key of that single record. Suppose you want to grab the
+     * value for a key 'className' inside of an object. Key/val minification may
+     * have aliased that key to be 'xa12'. keyOf({className: null}) will return
+     * 'xa12' in that case. Resolve keys you want to use once at startup time, then
+     * reuse those resolutions.
+     */
+    var keyOf = function(oneKeyObj) {
+      var key;
+      for (key in oneKeyObj) {
+        if (!oneKeyObj.hasOwnProperty(key)) {
+          continue;
+        }
+        return key;
+      }
+      return null;
+    };
+
+
+    __exports__["default"] = keyOf;
+  });
+define(
+  'transpiled/react-es6/lib/cloneWithProps',["./ReactPropTransferer","./keyOf","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     
     
 
     var ReactPropTransferer = __dependency1__["default"];
 
-    var keyMirror = __dependency2__["default"];
+    var keyOf = __dependency2__["default"];
 
-    var SpecialPropsToTransfer = keyMirror({
-      key: null,
-      children: null,
-      ref: null
-    });
+    var CHILDREN_PROP = keyOf({children: null});
 
     /**
      * Sometimes you want to change the props of a child passed to you. Usually
@@ -1292,27 +1143,13 @@ define(
      * as if you used `transferPropsTo()`.
      * @return {object} a clone of child with props merged in.
      */
-    function cloneWithProps(child, props) {
-      var newProps = ReactPropTransferer.mergeProps(child.props, props);
+    function cloneWithProps (child, props) {
+      var newProps = ReactPropTransferer.mergeProps(props, child.props);
 
-      // ReactPropTransferer does not transfer the `key` prop so do it manually. Do
-      // not transfer it from the original component.
-      if (props.hasOwnProperty(SpecialPropsToTransfer.key)) {
-        newProps.key = props.key;
-      }
-
-      // ReactPropTransferer does not transfer the `children` prop. Transfer it
-      // from `props` if it exists, otherwise use `child.props.children` if it is
-      // provided.
-      if (props.hasOwnProperty(SpecialPropsToTransfer.children)) {
-        newProps.children = props.children;
-      } else if (child.props.hasOwnProperty(SpecialPropsToTransfer.children)) {
+      // Use `child.props.children` if it is provided.
+      if (!newProps.hasOwnProperty(CHILDREN_PROP) &&
+          child.props.hasOwnProperty(CHILDREN_PROP)) {
         newProps.children = child.props.children;
-      }
-
-      // ReactPropTransferer does not transfer `ref` so do it manually.
-      if (props.hasOwnProperty(SpecialPropsToTransfer.ref)) {
-        newProps.ref = props.ref;
       }
 
       return child.constructor.ConvenienceConstructor(newProps);
@@ -1321,7 +1158,7 @@ define(
     __exports__["default"] = cloneWithProps;
   });
 define(
-  '../amd/transpiled/utils',["./react-es6/lib/cloneWithProps","exports"],
+  'transpiled/utils',["./react-es6/lib/cloneWithProps","exports"],
   function(__dependency1__, __exports__) {
     
     var cloneWithProps = __dependency1__["default"];
@@ -1404,7 +1241,295 @@ define(
     };
   });
 define(
-  '../amd/transpiled/DropdownButton',["./react-es6","./react-es6/lib/cx","./Button","./BootstrapMixin","./utils","exports"],
+  'transpiled/PanelGroup',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var utils = __dependency4__["default"];
+
+    var PanelGroup = React.createClass({displayName: 'PanelGroup',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        onSelect: React.PropTypes.func
+      },
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'panel-group'
+        };
+      },
+
+      getInitialState: function () {
+        var initialActiveKey = this.props.initialActiveKey;
+
+        return {
+          activeKey: initialActiveKey
+        };
+      },
+
+      render: function () {
+        var activeKey =
+          this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+
+        return this.transferPropsTo(
+          React.DOM.div( {className:classSet(this.getBsClassSet())}, 
+              utils.modifyChildren(this.props.children, this.renderPanel)
+          )
+        );
+      },
+
+      renderPanel: function (child) {
+        var activeKey =
+          this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+
+        var props = {
+          bsStyle: this.props.bsStyle
+        };
+
+        if (this.props.isAccordion) {
+          props.isCollapsable = true;
+          props.isOpen = (child.props.key === activeKey);
+          props.onSelect = this.handleSelect;
+        }
+
+        return utils.cloneWithProps(
+          child,
+          props
+        );
+      },
+
+      shouldComponentUpdate: function() {
+        // Defer any updates to this component during the `onSelect` handler.
+        return !this._isChanging;
+      },
+
+      handleSelect: function (key) {
+        if (this.props.onSelect) {
+          this._isChanging = true;
+          this.props.onSelect(key);
+          this._isChanging = false;
+        }
+
+        if (this.state.activeKey === key) {
+          key = null;
+        }
+
+        this.setState({
+          activeKey: key
+        });
+      }
+    });
+
+    __exports__["default"] = PanelGroup;
+  });
+define(
+  'transpiled/Accordion',["./react-es6","./PanelGroup","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var PanelGroup = __dependency2__["default"];
+
+    var Accordion = React.createClass({displayName: 'Accordion',
+
+      render: function () {
+        return this.transferPropsTo(
+          PanelGroup( {isAccordion:true}, 
+              this.props.children
+          )
+        );
+      }
+
+    });
+
+    __exports__["default"] = Accordion;
+  });
+define('Accordion',['./transpiled/Accordion'], function (Accordion) {
+  return Accordion.default;
+});
+define(
+  'transpiled/Alert',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+
+
+    var Alert = React.createClass({displayName: 'Alert',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        onDismiss: React.PropTypes.func,
+        dismissAfter: React.PropTypes.number
+      },
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'alert',
+          bsStyle: 'info'
+        };
+      },
+
+      renderDismissButton: function () {
+        return (
+          React.DOM.button(
+            {type:"button",
+            className:"close",
+            onClick:this.props.onDismiss,
+            'aria-hidden':"true"}, 
+            " × "
+          )
+        );
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+        var isDismissable = !!this.props.onDismiss;
+
+        classes['alert-dismissable'] = isDismissable;
+
+        return this.transferPropsTo(
+          React.DOM.div( {className:classSet(classes)}, 
+            isDismissable ? this.renderDismissButton() : null,
+            this.props.children
+          )
+        );
+      },
+
+      componentDidMount: function() {
+        if (this.props.dismissAfter && this.props.onDismiss) {
+          this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter);
+        }
+      },
+
+      componentWillUnmount: function() {
+        clearTimeout(this.dismissTimer);
+      }
+    });
+
+    __exports__["default"] = Alert;
+  });
+define('Alert',['./transpiled/Alert'], function (Alert) {
+  return Alert.default;
+});
+define('BootstrapMixin',['./transpiled/BootstrapMixin'], function (BootstrapMixin) {
+  return BootstrapMixin.default;
+});
+define(
+  'transpiled/Button',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+
+    var Button = React.createClass({displayName: 'Button',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        // TODO: Uncompatable with React 0.8.0
+        //loadingChildren: React.PropTypes.renderable,
+        isLoading:   React.PropTypes.bool,
+        isActive:    React.PropTypes.bool,
+        isDisabled:    React.PropTypes.bool
+      },
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'button',
+          loadingChildren: 'Loading...'
+        };
+      },
+
+      renderAnchor: function (children, classes, isDisabled) {
+        return this.transferPropsTo(
+          React.DOM.a(
+            {href:this.props.href,
+            className:classSet(classes),
+            onClick:this.props.onClick,
+            disabled:isDisabled}, 
+            children
+          )
+        );
+      },
+
+      renderButton: function (children, classes, isDisabled) {
+        return this.transferPropsTo(
+          React.DOM.button(
+            {type:this.props.type || "button",
+            className:classSet(classes),
+            onClick:this.props.onClick,
+            disabled:isDisabled}, 
+            children
+          )
+        );
+      },
+
+      render: function () {
+        var isDisabled = !!(this.props.isDisabled || this.props.isLoading);
+
+        var classes = this.getBsClassSet();
+        classes['disabled'] = isDisabled;
+        classes['active'] = this.props.isActive;
+
+        var children = this.props.isLoading ?
+          this.props.loadingChildren : this.props.children;
+
+        var renderFuncName = (this.props.href) ?
+          'renderAnchor' : 'renderButton';
+
+        return this[renderFuncName](children, classes, isDisabled);
+      }
+    });
+
+    __exports__["default"] = Button;
+  });
+define('Button',['./transpiled/Button'], function (Button) {
+  return Button.default;
+});
+define(
+  'transpiled/DangerMixin',["exports"],
+  function(__exports__) {
+    
+    __exports__["default"] = {
+        getDefaultProps: function () {
+            return {
+                bsStyle: 'danger'
+            };
+        }
+    };
+  });
+define('DangerMixin',['./transpiled/DangerMixin'], function (DangerMixin) {
+  return DangerMixin.default;
+});
+define(
+  'transpiled/DefaultMixin',["exports"],
+  function(__exports__) {
+    
+    __exports__["default"] = {
+        getDefaultProps: function () {
+            return {
+                bsStyle: 'default'
+            };
+        }
+    };
+  });
+define('DefaultMixin',['./transpiled/DefaultMixin'], function (DefaultMixin) {
+  return DefaultMixin.default;
+});
+define(
+  'transpiled/DropdownButton',["./react-es6","./react-es6/lib/cx","./Button","./BootstrapMixin","./utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     
     /** @jsx React.DOM */
@@ -1454,6 +1579,8 @@ define(
         if (typeof this.props.onSelect === 'function') {
           this.props.onSelect(key);
         }
+
+        this.toggle(false);
       },
 
       handleKeyUp: function (e) {
@@ -1463,7 +1590,15 @@ define(
       },
 
       handleClickOutside: function (e) {
-        this.toggle(false);
+        if (!this._clickedInside) {
+          this.toggle(false);
+        }
+        delete this._clickedInside;
+      },
+
+      killClick: function (e) {
+        // e.stopPropagation() doesn't prevent `handleClickOutside` from being called
+        this._clickedInside = true;
       },
 
       bindCloseHandlers: function () {
@@ -1502,7 +1637,8 @@ define(
               {className:"dropdown-menu",
               role:"menu",
               ref:"menu",
-              'aria-labelledby':this.props.id}, 
+              'aria-labelledby':this.props.id,
+              onClick:this.killClick}, 
               utils.modifyChildren(this.props.children, this.renderMenuItem)
             )
           )
@@ -1513,7 +1649,8 @@ define(
         return utils.cloneWithProps(
             child,
             {
-              ref: 'menuItem' + (i + 1),
+              ref: child.props.ref || 'menuItem' + (i + 1),
+              key: child.props.key,
               onSelect: this.handleOptionSelect.bind(this, child.props.key)
             }
           );
@@ -1522,11 +1659,70 @@ define(
 
     __exports__["default"] = DropdownButton;
   });
-define('../amd/DropdownButton',['./transpiled/DropdownButton'], function (DropdownButton) {
+define('DropdownButton',['./transpiled/DropdownButton'], function (DropdownButton) {
   return DropdownButton.default;
 });
 define(
-  '../amd/transpiled/InfoMixin',["exports"],
+  'transpiled/FadeMixin',["./react-es6","exports"],
+  function(__dependency1__, __exports__) {
+    
+    var React = __dependency1__["default"];
+
+    // TODO: listen for onTransitionEnd to remove el
+    __exports__["default"] = {
+      _fadeIn: function () {
+        var els;
+
+        if (this.isMounted()) {
+          els = this.getDOMNode().querySelectorAll('.fade');
+          if (els.length) {
+            Array.prototype.forEach.call(els, function (el) {
+              el.className += ' in';
+            });
+          }
+        }
+      },
+
+      _fadeOut: function () {
+        var els = this._fadeOutEl.querySelectorAll('.fade.in');
+
+        if (els.length) {
+          Array.prototype.forEach.call(els, function (el) {
+            el.className = el.className.replace(/\bin\b/, '');
+          });
+        }
+
+        setTimeout(this._handleFadeOutEnd, 300);
+      },
+
+      _handleFadeOutEnd: function () {
+        this._fadeOutEl.parentNode.removeChild(this._fadeOutEl);
+      },
+
+      componentDidMount: function () {
+        if (document.querySelectorAll) {
+          // Firefox needs delay for transition to be triggered
+          setTimeout(this._fadeIn, 20);
+        }
+      },
+
+      componentWillUnmount: function () {
+        var els = this.getDOMNode().querySelectorAll('.fade');
+        if (els.length) {
+          this._fadeOutEl = document.createElement('div');
+          document.body.appendChild(this._fadeOutEl);
+          this._fadeOutEl.innerHTML = this.getDOMNode().innerHTML;
+          // Firefox needs delay for transition to be triggered
+          setTimeout(this._fadeOut, 20);
+        }
+      }
+    };
+  });
+define('FadeMixin',['./transpiled/FadeMixin'], function (FadeMixin) {
+  return FadeMixin.default;
+});
+define(
+  'transpiled/InfoMixin',["exports"],
   function(__exports__) {
     
     __exports__["default"] = {
@@ -1537,11 +1733,11 @@ define(
         }
     };
   });
-define('../amd/InfoMixin',['./transpiled/InfoMixin'], function (InfoMixin) {
+define('InfoMixin',['./transpiled/InfoMixin'], function (InfoMixin) {
   return InfoMixin.default;
 });
 define(
-  '../amd/transpiled/InlineMixin',["exports"],
+  'transpiled/InlineMixin',["exports"],
   function(__exports__) {
     
     __exports__["default"] = {
@@ -1552,11 +1748,11 @@ define(
         }
     };
   });
-define('../amd/InlineMixin',['./transpiled/InlineMixin'], function (InlineMixin) {
+define('InlineMixin',['./transpiled/InlineMixin'], function (InlineMixin) {
   return InlineMixin.default;
 });
 define(
-  '../amd/transpiled/Input',["./react-es6","./react-es6/lib/cx","exports"],
+  'transpiled/Input',["./react-es6","./react-es6/lib/cx","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     
     /** @jsx React.DOM */
@@ -1661,11 +1857,11 @@ define(
 
     __exports__["default"] = Input;
   });
-define('../amd/Input',['./transpiled/Input'], function (Input) {
+define('Input',['./transpiled/Input'], function (Input) {
   return Input.default;
 });
 define(
-  '../amd/transpiled/LargeMixin',["exports"],
+  'transpiled/LargeMixin',["exports"],
   function(__exports__) {
     
     __exports__["default"] = {
@@ -1676,11 +1872,11 @@ define(
         }
     };
   });
-define('../amd/LargeMixin',['./transpiled/LargeMixin'], function (LargeMixin) {
+define('LargeMixin',['./transpiled/LargeMixin'], function (LargeMixin) {
   return LargeMixin.default;
 });
 define(
-  '../amd/transpiled/MediumMixin',["exports"],
+  'transpiled/MediumMixin',["exports"],
   function(__exports__) {
     
     __exports__["default"] = {
@@ -1691,11 +1887,11 @@ define(
         }
     };
   });
-define('../amd/MediumMixin',['./transpiled/MediumMixin'], function (MediumMixin) {
+define('MediumMixin',['./transpiled/MediumMixin'], function (MediumMixin) {
   return MediumMixin.default;
 });
 define(
-  '../amd/transpiled/MenuItem',["./react-es6","exports"],
+  'transpiled/MenuItem',["./react-es6","exports"],
   function(__dependency1__, __exports__) {
     
     /** @jsx React.DOM */
@@ -1740,11 +1936,129 @@ define(
 
     __exports__["default"] = MenuItem;
   });
-define('../amd/MenuItem',['./transpiled/MenuItem'], function (MenuItem) {
+define('MenuItem',['./transpiled/MenuItem'], function (MenuItem) {
   return MenuItem.default;
 });
 define(
-  '../amd/transpiled/Nav',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
+  'transpiled/Modal',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./FadeMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var FadeMixin = __dependency4__["default"];
+
+
+    // TODO:
+    // - aria-labelledby
+    // - Add `modal-body` div if only one child passed in that doesn't already have it
+    // - Tests
+
+    var Modal = React.createClass({displayName: 'Modal',
+      mixins: [BootstrapMixin, FadeMixin],
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'modal',
+          backdrop: true,
+          keyboard: true,
+          animation: true
+        };
+      },
+
+      componentDidMount: function () {
+        document.addEventListener('keyup', this.handleKeyUp);
+      },
+
+      componentWillUnmount: function () {
+        document.removeEventListener('keyup', this.handleKeyUp);
+      },
+
+      killClick: function (e) {
+        e.stopPropagation();
+      },
+
+      handleBackdropClick: function () {
+        this.props.onRequestHide();
+      },
+
+      handleKeyUp: function (e) {
+        if (this.props.keyboard && e.keyCode === 27) {
+          this.props.onRequestHide();
+        }
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+
+        classes['fade'] = this.props.animation;
+        classes['in'] = !this.props.animation || !document.querySelectorAll;
+
+        var modal = this.transferPropsTo(
+          React.DOM.div(
+            {bsClass:"modal",
+            tabIndex:"-1",
+            role:"dialog",
+            style:{display: 'block'},
+            className:classSet(classes),
+            onClick:this.handleBackdropClick,
+            ref:"modal"}
+          , 
+            React.DOM.div( {className:"modal-dialog"}, 
+              React.DOM.div( {className:"modal-content", onClick:this.killClick}, 
+                this.props.title ? this.renderHeader() : null,
+                this.props.children
+              )
+            )
+          )
+        );
+
+        return this.props.backdrop ?
+          this.renderBackdrop(modal) : modal;
+      },
+
+      renderBackdrop: function (modal) {
+        var classes = {
+          'modal-backdrop': true,
+          'fade': this.props.animation
+        };
+
+        classes['in'] = !this.props.animation || !document.querySelectorAll;
+
+        return (
+          React.DOM.div(null, 
+            React.DOM.div( {className:classSet(classes), ref:"backdrop"} ),
+            modal
+          )
+        );
+      },
+
+      renderHeader: function () {
+        return (
+          React.DOM.div( {className:"modal-header"}, 
+            React.DOM.button( {type:"button", className:"close", 'aria-hidden':"true", onClick:this.props.onRequestHide}, "×"),
+            this.renderTitle()
+          )
+        );
+      },
+
+      renderTitle: function () {
+        return (
+          React.isValidComponent(this.props.title) ?
+            this.props.title : React.DOM.h4( {className:"modal-title"}, this.props.title)
+        );
+      }
+    });
+
+    __exports__["default"] = Modal;
+  });
+define('Modal',['./transpiled/Modal'], function (Modal) {
+  return Modal.default;
+});
+define(
+  'transpiled/Nav',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     
     /** @jsx React.DOM */
@@ -1784,22 +2098,24 @@ define(
 
       renderNavItem: function (child) {
         return utils.cloneWithProps(
-            child,
-            {
-              isActive: this.props.activeKey != null ? child.props.key === this.props.activeKey : null,
-              onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect)
-            }
-          );
+          child,
+          {
+            isActive: this.props.activeKey != null ? child.props.key === this.props.activeKey : null,
+            onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),
+            ref: child.props.ref,
+            key: child.props.key
+          }
+        );
       }
     });
 
     __exports__["default"] = Nav;
   });
-define('../amd/Nav',['./transpiled/Nav'], function (Nav) {
+define('Nav',['./transpiled/Nav'], function (Nav) {
   return Nav.default;
 });
 define(
-  '../amd/transpiled/NavItem',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
+  'transpiled/NavItem',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     
     /** @jsx React.DOM */
@@ -1836,7 +2152,8 @@ define(
             React.DOM.a(
               {href:this.props.href,
               title:this.props.title,
-              onClick:this.handleClick}, 
+              onClick:this.handleClick,
+              ref:"anchor"}, 
               this.props.children
             )
           )
@@ -1856,11 +2173,153 @@ define(
 
     __exports__["default"] = NavItem;
   });
-define('../amd/NavItem',['./transpiled/NavItem'], function (NavItem) {
+define('NavItem',['./transpiled/NavItem'], function (NavItem) {
   return NavItem.default;
 });
 define(
-  '../amd/transpiled/Panel',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
+  'transpiled/OverlayTriggerMixin',["./react-es6","exports"],
+  function(__dependency1__, __exports__) {
+    
+    var React = __dependency1__["default"];
+
+    __exports__["default"] = {
+      componentWillUnmount: function () {
+        this._unrenderOverlay();
+        document.body.removeChild(this._overlayTarget);
+      },
+
+      componentDidUpdate: function () {
+        this._renderOverlay();
+      },
+
+      componentDidMount: function () {
+        this._overlayTarget = document.createElement('div');
+        document.body.appendChild(this._overlayTarget);
+        this._renderOverlay();
+      },
+
+      _renderOverlay: function () {
+        React.renderComponent(this.renderOverlay(), this._overlayTarget);
+      },
+
+      _unrenderOverlay: function () {
+        React.unmountComponentAtNode(this._overlayTarget);
+      }
+    };
+  });
+define(
+  'transpiled/OverlayTrigger',["./react-es6","./react-es6/lib/cloneWithProps","./OverlayTriggerMixin","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var cloneWithProps = __dependency2__["default"];
+    var OverlayTriggerMixin = __dependency3__["default"];
+
+    var OverlayTrigger = React.createClass({displayName: 'OverlayTrigger',
+        mixins: [OverlayTriggerMixin],
+
+        getDefaultProps: function () {
+            return {
+                trigger: 'click'
+            };
+        },
+
+        getInitialState: function() {
+            return {
+                isOverlayShown: (this.props.defaultOverlayShown == null) ?
+                    false : this.props.defaultOverlayShown
+            };
+        },
+
+        show: function () {
+            this.setState({
+                isOverlayShown: true
+            });
+        },
+
+        hide: function () {
+            this.setState({
+                isOverlayShown: false
+            });
+        },
+
+        toggle: function () {
+            this.setState({
+                isOverlayShown: !this.state.isOverlayShown
+            });
+        },
+
+        _trigger: function () {
+            var propName = 'delay' + (this.state.isOverlayShown ? 'Hide' : 'Show'),
+                delay = this.props[propName] || this.props.delay;
+
+            clearTimeout(this._triggerTimeout);
+            if (delay) {
+                this._triggerTimeout = setTimeout(this.toggle, parseInt(delay, 10));
+            } else {
+                this.toggle();
+            }
+        },
+
+        renderOverlay: function() {
+            var props;
+
+            if (!this.state.isOverlayShown || !this.props.overlay) {
+                return React.DOM.span(null );
+            }
+
+            props = {
+                onRequestHide: this._trigger
+            };
+
+            if (this.props.animation != null) {
+                props.animation = this.props.animation;
+            }
+
+            return cloneWithProps(
+                this.props.overlay,
+                props
+            );
+        },
+
+        render: function() {
+            return (this.props.children) ?
+                this.renderTrigger() : React.DOM.span(null );
+        },
+
+        renderTrigger: function () {
+            var props = {},
+                trigger = this.props.trigger,
+                propName;
+
+            if (trigger !== 'manual') {
+                if (trigger === 'hover') {
+                    trigger = 'mouseOver';
+                }
+                propName = 'on' + trigger.substr(0, 1).toUpperCase() +
+                    trigger.substr(1);
+                props[propName] = this._trigger;
+            }
+
+            return React.DOM.span(
+                props,
+                this.props.children
+            );
+        }
+    });
+
+    __exports__["default"] = OverlayTrigger;
+  });
+define('OverlayTrigger',['./transpiled/OverlayTrigger'], function (OverlayTrigger) {
+  return OverlayTrigger.default;
+});
+define('OverlayTriggerMixin',['./transpiled/OverlayTriggerMixin'], function (OverlayTriggerMixin) {
+  return OverlayTriggerMixin.default;
+});
+define(
+  'transpiled/Panel',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     
     /** @jsx React.DOM */
@@ -2012,11 +2471,14 @@ define(
 
     __exports__["default"] = Panel;
   });
-define('../amd/Panel',['./transpiled/Panel'], function (Panel) {
+define('Panel',['./transpiled/Panel'], function (Panel) {
   return Panel.default;
 });
+define('PanelGroup',['./transpiled/PanelGroup'], function (PanelGroup) {
+  return PanelGroup.default;
+});
 define(
-  '../amd/transpiled/PrimaryMixin',["exports"],
+  'transpiled/PrimaryMixin',["exports"],
   function(__exports__) {
     
     __exports__["default"] = {
@@ -2027,11 +2489,11 @@ define(
         }
     };
   });
-define('../amd/PrimaryMixin',['./transpiled/PrimaryMixin'], function (PrimaryMixin) {
+define('PrimaryMixin',['./transpiled/PrimaryMixin'], function (PrimaryMixin) {
   return PrimaryMixin.default;
 });
 define(
-  '../amd/transpiled/ProgressBar',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
+  'transpiled/ProgressBar',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     
     /** @jsx React.DOM */
@@ -2078,11 +2540,11 @@ define(
 
     __exports__["default"] = ProgressBar;
   });
-define('../amd/ProgressBar',['./transpiled/ProgressBar'], function (ProgressBar) {
+define('ProgressBar',['./transpiled/ProgressBar'], function (ProgressBar) {
   return ProgressBar.default;
 });
 define(
-  '../amd/transpiled/SmallMixin',["exports"],
+  'transpiled/SmallMixin',["exports"],
   function(__exports__) {
     
     __exports__["default"] = {
@@ -2093,11 +2555,11 @@ define(
         }
     };
   });
-define('../amd/SmallMixin',['./transpiled/SmallMixin'], function (SmallMixin) {
+define('SmallMixin',['./transpiled/SmallMixin'], function (SmallMixin) {
   return SmallMixin.default;
 });
 define(
-  '../amd/transpiled/SplitButton',["./react-es6","./react-es6/lib/cx","./Button","./BootstrapMixin","./utils","exports"],
+  'transpiled/SplitButton',["./react-es6","./react-es6/lib/cx","./Button","./BootstrapMixin","./utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     
     /** @jsx React.DOM */
@@ -2154,6 +2616,8 @@ define(
         if (typeof this.props.onSelect === 'function') {
           this.props.onSelect(key);
         }
+
+        this.toggle(false);
       },
 
       handleKeyUp: function (e) {
@@ -2163,7 +2627,16 @@ define(
       },
 
       handleClickOutside: function (e) {
-        this.toggle(false);
+        if (!this._clickedInside) {
+          this.toggle(false);
+        }
+
+        delete this._clickedInside;
+      },
+
+      killClick: function (e) {
+        // e.stopPropagation() doesn't prevent `handleClickOutside` from being called
+        this._clickedInside = true;
       },
 
       bindCloseHandlers: function () {
@@ -2211,7 +2684,9 @@ define(
               {className:"dropdown-menu",
               role:"menu",
               ref:"menu",
-              'aria-labelledby':this.props.id}, 
+              'aria-labelledby':this.props.id,
+              onClick:this.killClick}
+            , 
               utils.modifyChildren(this.props.children, this.renderMenuItem)
             )
           )
@@ -2222,7 +2697,8 @@ define(
         return utils.cloneWithProps(
             child,
             {
-              ref: 'menuItem' + (i + 1),
+              ref: child.props.ref || 'menuItem' + (i + 1),
+              key: child.props.key,
               onSelect: this.handleOptionSelect.bind(this, child.props.key)
             }
           );
@@ -2231,11 +2707,11 @@ define(
 
     __exports__["default"] = SplitButton;
   });
-define('../amd/SplitButton',['./transpiled/SplitButton'], function (SplitButton) {
+define('SplitButton',['./transpiled/SplitButton'], function (SplitButton) {
   return SplitButton.default;
 });
 define(
-  '../amd/transpiled/SuccessMixin',["exports"],
+  'transpiled/SuccessMixin',["exports"],
   function(__exports__) {
     
     __exports__["default"] = {
@@ -2246,11 +2722,11 @@ define(
         }
     };
   });
-define('../amd/SuccessMixin',['./transpiled/SuccessMixin'], function (SuccessMixin) {
+define('SuccessMixin',['./transpiled/SuccessMixin'], function (SuccessMixin) {
   return SuccessMixin.default;
 });
 define(
-  '../amd/transpiled/TabbedArea',["./react-es6","./BootstrapMixin","./utils","./Nav","./NavItem","exports"],
+  'transpiled/TabbedArea',["./react-es6","./BootstrapMixin","./utils","./Nav","./NavItem","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     
     /** @jsx React.DOM */
@@ -2308,7 +2784,9 @@ define(
         return utils.cloneWithProps(
             child,
             {
-              isActive: (child.props.key === activeKey)
+              isActive: (child.props.key === activeKey),
+              ref: child.props.ref,
+              key: child.props.key
             }
           );
       },
@@ -2344,11 +2822,11 @@ define(
 
     __exports__["default"] = TabbedArea;
   });
-define('../amd/TabbedArea',['./transpiled/TabbedArea'], function (TabbedArea) {
+define('TabbedArea',['./transpiled/TabbedArea'], function (TabbedArea) {
   return TabbedArea.default;
 });
 define(
-  '../amd/transpiled/TabPane',["./react-es6","./react-es6/lib/cx","exports"],
+  'transpiled/TabPane',["./react-es6","./react-es6/lib/cx","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     
     /** @jsx React.DOM */
@@ -2373,11 +2851,11 @@ define(
 
     __exports__["default"] = TabPane;
   });
-define('../amd/TabPane',['./transpiled/TabPane'], function (TabPane) {
+define('TabPane',['./transpiled/TabPane'], function (TabPane) {
   return TabPane.default;
 });
 define(
-  '../amd/transpiled/WarningMixin',["exports"],
+  'transpiled/WarningMixin',["exports"],
   function(__exports__) {
     
     __exports__["default"] = {
@@ -2388,11 +2866,11 @@ define(
         }
     };
   });
-define('../amd/WarningMixin',['./transpiled/WarningMixin'], function (WarningMixin) {
+define('WarningMixin',['./transpiled/WarningMixin'], function (WarningMixin) {
   return WarningMixin.default;
 });
 define(
-  '../amd/transpiled/XSmallMixin',["exports"],
+  'transpiled/XSmallMixin',["exports"],
   function(__exports__) {
     
     __exports__["default"] = {
@@ -2403,39 +2881,45 @@ define(
         }
     };
   });
-define('../amd/XSmallMixin',['./transpiled/XSmallMixin'], function (XSmallMixin) {
+define('XSmallMixin',['./transpiled/XSmallMixin'], function (XSmallMixin) {
   return XSmallMixin.default;
 });
 /*global define */
 
-define('react-bootstrap',['require','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Nav','../amd/NavItem','../amd/Panel','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
+define('react-bootstrap',['require','./Accordion','./Alert','./BootstrapMixin','./Button','./DangerMixin','./DefaultMixin','./DropdownButton','./FadeMixin','./InfoMixin','./InlineMixin','./Input','./LargeMixin','./MediumMixin','./MenuItem','./Modal','./Nav','./NavItem','./OverlayTrigger','./OverlayTriggerMixin','./Panel','./PanelGroup','./PrimaryMixin','./ProgressBar','./SmallMixin','./SplitButton','./SuccessMixin','./TabbedArea','./TabPane','./WarningMixin','./XSmallMixin'],function (require) {
     
 
     return {
-        Alert: require('../amd/Alert'),
-        BootstrapMixin: require('../amd/BootstrapMixin'),
-        Button: require('../amd/Button'),
-        DangerMixin: require('../amd/DangerMixin'),
-        DefaultMixin: require('../amd/DefaultMixin'),
-        DropdownButton: require('../amd/DropdownButton'),
-        InfoMixin: require('../amd/InfoMixin'),
-        InlineMixin: require('../amd/InlineMixin'),
-        Input: require('../amd/Input'),
-        LargeMixin: require('../amd/LargeMixin'),
-        MediumMixin: require('../amd/MediumMixin'),
-        MenuItem: require('../amd/MenuItem'),
-        Nav: require('../amd/Nav'),
-        NavItem: require('../amd/NavItem'),
-        Panel: require('../amd/Panel'),
-        PrimaryMixin: require('../amd/PrimaryMixin'),
-        ProgressBar: require('../amd/ProgressBar'),
-        SmallMixin: require('../amd/SmallMixin'),
-        SplitButton: require('../amd/SplitButton'),
-        SuccessMixin: require('../amd/SuccessMixin'),
-        TabbedArea: require('../amd/TabbedArea'),
-        TabPane: require('../amd/TabPane'),
-        WarningMixin: require('../amd/WarningMixin'),
-        XSmallMixin: require('../amd/XSmallMixin')
+        Accordion: require('./Accordion'),
+        Alert: require('./Alert'),
+        BootstrapMixin: require('./BootstrapMixin'),
+        Button: require('./Button'),
+        DangerMixin: require('./DangerMixin'),
+        DefaultMixin: require('./DefaultMixin'),
+        DropdownButton: require('./DropdownButton'),
+        FadeMixin: require('./FadeMixin'),
+        InfoMixin: require('./InfoMixin'),
+        InlineMixin: require('./InlineMixin'),
+        Input: require('./Input'),
+        LargeMixin: require('./LargeMixin'),
+        MediumMixin: require('./MediumMixin'),
+        MenuItem: require('./MenuItem'),
+        Modal: require('./Modal'),
+        Nav: require('./Nav'),
+        NavItem: require('./NavItem'),
+        OverlayTrigger: require('./OverlayTrigger'),
+        OverlayTriggerMixin: require('./OverlayTriggerMixin'),
+        Panel: require('./Panel'),
+        PanelGroup: require('./PanelGroup'),
+        PrimaryMixin: require('./PrimaryMixin'),
+        ProgressBar: require('./ProgressBar'),
+        SmallMixin: require('./SmallMixin'),
+        SplitButton: require('./SplitButton'),
+        SuccessMixin: require('./SuccessMixin'),
+        TabbedArea: require('./TabbedArea'),
+        TabPane: require('./TabPane'),
+        WarningMixin: require('./WarningMixin'),
+        XSmallMixin: require('./XSmallMixin')
     };
 });    //Register in the values from the outer closure for common dependencies
     //as local almond modules

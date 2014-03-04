@@ -34,8 +34,8 @@ define(
      * @param {function} mergeStrategy
      * @return {function}
      */
-    function createTransferStrategy(mergeStrategy) {
-      return function(props, key, value) {
+    function createTransferStrategy (mergeStrategy) {
+      return function (props, key, value) {
         if (!props.hasOwnProperty(key)) {
           props[key] = value;
         } else {
@@ -87,7 +87,7 @@ define(
        * @param {object} newProps new props to merge in
        * @return {object} a new object containing both sets of props merged.
        */
-      mergeProps: function(oldProps, newProps) {
+      mergeProps: function (oldProps, newProps) {
         var props = merge(oldProps);
 
         for (var thisKey in newProps) {
@@ -125,7 +125,7 @@ define(
          * @final
          * @protected
          */
-        transferPropsTo: function(component) {
+        transferPropsTo: function (component) {
           (invariant(component._owner === this));
 
           component.props = ReactPropTransferer.mergeProps(

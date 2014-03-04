@@ -39,7 +39,7 @@ define(
      * @param {*} o The item/object/value to test.
      * @return {boolean} true iff the argument is a terminal.
      */
-    var isTerminal = function(o) {
+    var isTerminal = function (o) {
       return typeof o !== 'object' || o === null;
     };
 
@@ -55,7 +55,7 @@ define(
        * @param {?Object=} arg Argument to be normalized (nullable optional)
        * @return {!Object}
        */
-      normalizeMergeArg: function(arg) {
+      normalizeMergeArg: function (arg) {
         return arg === undefined || arg === null ? {} : arg;
       },
 
@@ -67,7 +67,7 @@ define(
        * @param {*} one Array to merge into.
        * @param {*} two Array to merge from.
        */
-      checkMergeArrayArgs: function(one, two) {
+      checkMergeArrayArgs: function (one, two) {
         (invariant(Array.isArray(one) && Array.isArray(two)));
       },
 
@@ -75,7 +75,7 @@ define(
        * @param {*} one Object to merge into.
        * @param {*} two Object to merge from.
        */
-      checkMergeObjectArgs: function(one, two) {
+      checkMergeObjectArgs: function (one, two) {
         mergeHelpers.checkMergeObjectArg(one);
         mergeHelpers.checkMergeObjectArg(two);
       },
@@ -83,7 +83,7 @@ define(
       /**
        * @param {*} arg
        */
-      checkMergeObjectArg: function(arg) {
+      checkMergeObjectArg: function (arg) {
         (invariant(!isTerminal(arg) && !Array.isArray(arg)));
       },
 
@@ -93,7 +93,7 @@ define(
        *
        * @param {number} Level of recursion to validate against maximum.
        */
-      checkMergeLevel: function(level) {
+      checkMergeLevel: function (level) {
         (invariant(level < MAX_MERGE_DEPTH));
       },
 
@@ -102,7 +102,7 @@ define(
        *
        * @param {string} Array merge strategy.
        */
-      checkArrayStrategy: function(strategy) {
+      checkArrayStrategy: function (strategy) {
         (invariant(strategy === undefined || strategy in mergeHelpers.ArrayStrategies));
       },
 

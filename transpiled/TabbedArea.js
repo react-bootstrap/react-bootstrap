@@ -57,7 +57,9 @@ define(
         return utils.cloneWithProps(
             child,
             {
-              isActive: (child.props.key === activeKey)
+              isActive: (child.props.key === activeKey),
+              ref: child.props.ref,
+              key: child.props.key
             }
           );
       },

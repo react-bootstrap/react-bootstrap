@@ -1,6 +1,6 @@
 define(
-  ["./mergeInto","exports"],
-  function(__dependency1__, __exports__) {
+  ["exports"],
+  function(__exports__) {
     "use strict";
     /**
      * Copyright 2013 Facebook, Inc.
@@ -17,26 +17,27 @@ define(
      * See the License for the specific language governing permissions and
      * limitations under the License.
      *
-     * @providesModule merge
+     * @providesModule invariant
      */
-
-    "use strict";
-
-    var mergeInto = __dependency1__["default"];
 
     /**
-     * Shallow merges two structures into a return value, without mutating either.
+     * Use invariant() to assert state which your program assumes to be true.
      *
-     * @param {?object} one Optional object with properties to merge from.
-     * @param {?object} two Optional object with properties to merge from.
-     * @return {object} The shallow extension of one by two.
+     * Provide sprintf-style format (only %s is supported) and arguments
+     * to provide information about what broke and what you were
+     * expecting.
+     *
+     * The invariant message will be stripped in production, but the invariant
+     * will remain to ensure logic does not differ in production.
      */
-    var merge = function(one, two) {
-      var result = {};
-      mergeInto(result, one);
-      mergeInto(result, two);
-      return result;
-    };
 
-    __exports__["default"] = merge;
+    function invariant (condition) {
+      if (!condition) {
+        var error = new Error('Invariant Violation');
+        error.framesToPop = 1;
+        throw error;
+      }
+    }
+
+    __exports__["default"] = invariant;
   });
