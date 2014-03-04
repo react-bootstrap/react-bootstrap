@@ -11,7 +11,7 @@ define(
 
         if (this.isMounted()) {
           els = this.getDOMNode().querySelectorAll('.fade');
-          if (els) {
+          if (els.length) {
             Array.prototype.forEach.call(els, function (el) {
               el.className += ' in';
             });
@@ -22,7 +22,7 @@ define(
       _fadeOut: function () {
         var els = this._fadeOutEl.querySelectorAll('.fade.in');
 
-        if (els) {
+        if (els.length) {
           Array.prototype.forEach.call(els, function (el) {
             el.className = el.className.replace(/\bin\b/, '');
           });
@@ -44,8 +44,7 @@ define(
 
       componentWillUnmount: function () {
         var els = this.getDOMNode().querySelectorAll('.fade');
-
-        if (els) {
+        if (els.length) {
           this._fadeOutEl = document.createElement('div');
           document.body.appendChild(this._fadeOutEl);
           this._fadeOutEl.innerHTML = this.getDOMNode().innerHTML;

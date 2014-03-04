@@ -52,4 +52,4 @@ var keyMirror = function(obj) {
   return ret;
 };
 
-export default keyMirror;
+export default = keyMirror;

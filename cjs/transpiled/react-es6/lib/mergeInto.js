@@ -30,7 +30,7 @@ var checkMergeObjectArg = mergeHelpers.checkMergeObjectArg;
  * @param {object} one Object to be merged into.
  * @param {?object} two Optional object with properties to merge from.
  */
-function mergeInto(one, two) {
+function mergeInto (one, two) {
   checkMergeObjectArg(one);
   if (two != null) {
     checkMergeObjectArg(two);

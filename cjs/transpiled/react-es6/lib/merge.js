@@ -28,7 +28,7 @@ var mergeInto = require("./mergeInto")["default"];
  * @param {?object} two Optional object with properties to merge from.
  * @return {object} The shallow extension of one by two.
  */
-var merge = function(one, two) {
+var merge = function (one, two) {
   var result = {};
   mergeInto(result, one);
   mergeInto(result, two);

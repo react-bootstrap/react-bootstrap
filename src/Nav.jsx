@@ -35,12 +35,14 @@ var Nav = React.createClass({
 
   renderNavItem: function (child) {
     return utils.cloneWithProps(
-        child,
-        {
-          isActive: this.props.activeKey != null ? child.props.key === this.props.activeKey : null,
-          onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect)
-        }
-      );
+      child,
+      {
+        isActive: this.props.activeKey != null ? child.props.key === this.props.activeKey : null,
+        onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),
+        ref: child.props.ref,
+        key: child.props.key
+      }
+    );
   }
 });
 

@@ -50,15 +50,14 @@ describe('Nav', function () {
       assert.equal(key, 2);
       done();
     }
-    var tab2 = <span>Tab 2 content</span>;
     var instance = (
       <Nav bsStyle="tabs" activeKey={1} onSelect={handleSelect}>
         <NavItem key={1} ref="item1">Tab 1 content</NavItem>
-        <NavItem key={2} ref="item2">{tab2}</NavItem>
+        <NavItem key={2} ref="item2"><span>Tab 2 content</span></NavItem>
       </Nav>
       );
 
     ReactTestUtils.renderIntoDocument(instance);
-    ReactTestUtils.Simulate.click(tab2.getDOMNode());
+    ReactTestUtils.Simulate.click(instance.refs.item2.refs.anchor);
   });
 });

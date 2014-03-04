@@ -45,4 +45,4 @@ function copyProperties(obj, a, b, c, d, e, f) {
   return obj;
 }
 
-export default copyProperties;
+export default = copyProperties;

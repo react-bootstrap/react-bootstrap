@@ -36,7 +36,8 @@ define(
             React.DOM.a(
               {href:this.props.href,
               title:this.props.title,
-              onClick:this.handleClick}, 
+              onClick:this.handleClick,
+              ref:"anchor"}, 
               this.props.children
             )
           )

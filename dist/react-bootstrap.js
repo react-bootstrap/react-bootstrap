@@ -386,7 +386,7 @@ define(
      * @param [string ...]  Variable list of classNames in the string case.
      * @return string       Renderable space-separated CSS className.
      */
-    function cx(classNames) {
+    function cx (classNames) {
       if (typeof classNames == 'object') {
         return Object.keys(classNames).map(function(className) {
           return classNames[className] ? className : '';
@@ -559,8 +559,8 @@ define(
 
     var copyProperties = __dependency1__["default"];
 
-    function makeEmptyFunction(arg) {
-      return function() {
+    function makeEmptyFunction (arg) {
+      return function () {
         return arg;
       };
     }
@@ -570,7 +570,7 @@ define(
      * primarily useful idiomatically for overridable function endpoints which
      * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
      */
-    function emptyFunction() {}
+    function emptyFunction () {}
 
     copyProperties(emptyFunction, {
       thatReturns: makeEmptyFunction,
@@ -616,7 +616,7 @@ define(
      * will remain to ensure logic does not differ in production.
      */
 
-    function invariant(condition) {
+    function invariant (condition) {
       if (!condition) {
         var error = new Error('Invariant Violation');
         error.framesToPop = 1;
@@ -658,7 +658,7 @@ define(
      * @param {...?string} classes
      * @return {string}
      */
-    function joinClasses(className/*, ... */) {
+    function joinClasses (className/*, ... */) {
       if (!className) {
         className = '';
       }
@@ -776,7 +776,7 @@ define(
      * @param {*} o The item/object/value to test.
      * @return {boolean} true iff the argument is a terminal.
      */
-    var isTerminal = function(o) {
+    var isTerminal = function (o) {
       return typeof o !== 'object' || o === null;
     };
 
@@ -792,7 +792,7 @@ define(
        * @param {?Object=} arg Argument to be normalized (nullable optional)
        * @return {!Object}
        */
-      normalizeMergeArg: function(arg) {
+      normalizeMergeArg: function (arg) {
         return arg === undefined || arg === null ? {} : arg;
       },
 
@@ -804,7 +804,7 @@ define(
        * @param {*} one Array to merge into.
        * @param {*} two Array to merge from.
        */
-      checkMergeArrayArgs: function(one, two) {
+      checkMergeArrayArgs: function (one, two) {
         (invariant(Array.isArray(one) && Array.isArray(two)));
       },
 
@@ -812,7 +812,7 @@ define(
        * @param {*} one Object to merge into.
        * @param {*} two Object to merge from.
        */
-      checkMergeObjectArgs: function(one, two) {
+      checkMergeObjectArgs: function (one, two) {
         mergeHelpers.checkMergeObjectArg(one);
         mergeHelpers.checkMergeObjectArg(two);
       },
@@ -820,7 +820,7 @@ define(
       /**
        * @param {*} arg
        */
-      checkMergeObjectArg: function(arg) {
+      checkMergeObjectArg: function (arg) {
         (invariant(!isTerminal(arg) && !Array.isArray(arg)));
       },
 
@@ -830,7 +830,7 @@ define(
        *
        * @param {number} Level of recursion to validate against maximum.
        */
-      checkMergeLevel: function(level) {
+      checkMergeLevel: function (level) {
         (invariant(level < MAX_MERGE_DEPTH));
       },
 
@@ -839,7 +839,7 @@ define(
        *
        * @param {string} Array merge strategy.
        */
-      checkArrayStrategy: function(strategy) {
+      checkArrayStrategy: function (strategy) {
         (invariant(strategy === undefined || strategy in mergeHelpers.ArrayStrategies));
       },
 
@@ -894,7 +894,7 @@ define(
      * @param {object} one Object to be merged into.
      * @param {?object} two Optional object with properties to merge from.
      */
-    function mergeInto(one, two) {
+    function mergeInto (one, two) {
       checkMergeObjectArg(one);
       if (two != null) {
         checkMergeObjectArg(two);
@@ -942,7 +942,7 @@ define(
      * @param {?object} two Optional object with properties to merge from.
      * @return {object} The shallow extension of one by two.
      */
-    var merge = function(one, two) {
+    var merge = function (one, two) {
       var result = {};
       mergeInto(result, one);
       mergeInto(result, two);
@@ -987,8 +987,8 @@ define(
      * @param {function} mergeStrategy
      * @return {function}
      */
-    function createTransferStrategy(mergeStrategy) {
-      return function(props, key, value) {
+    function createTransferStrategy (mergeStrategy) {
+      return function (props, key, value) {
         if (!props.hasOwnProperty(key)) {
           props[key] = value;
         } else {
@@ -1040,7 +1040,7 @@ define(
        * @param {object} newProps new props to merge in
        * @return {object} a new object containing both sets of props merged.
        */
-      mergeProps: function(oldProps, newProps) {
+      mergeProps: function (oldProps, newProps) {
         var props = merge(oldProps);
 
         for (var thisKey in newProps) {
@@ -1078,7 +1078,7 @@ define(
          * @final
          * @protected
          */
-        transferPropsTo: function(component) {
+        transferPropsTo: function (component) {
           (invariant(component._owner === this));
 
           component.props = ReactPropTransferer.mergeProps(
@@ -1095,20 +1095,44 @@ define(
     __exports__["default"] = ReactPropTransferer;
   });
 define(
-  '../amd/transpiled/react-es6/lib/cloneWithProps',["./ReactPropTransferer","./keyMirror","exports"],
+  '../amd/transpiled/react-es6/lib/keyOf',["exports"],
+  function(__exports__) {
+    
+    /**
+     * Allows extraction of a minified key. Let's the build system minify keys
+     * without loosing the ability to dynamically use key strings as values
+     * themselves. Pass in an object with a single key/val pair and it will return
+     * you the string key of that single record. Suppose you want to grab the
+     * value for a key 'className' inside of an object. Key/val minification may
+     * have aliased that key to be 'xa12'. keyOf({className: null}) will return
+     * 'xa12' in that case. Resolve keys you want to use once at startup time, then
+     * reuse those resolutions.
+     */
+    var keyOf = function(oneKeyObj) {
+      var key;
+      for (key in oneKeyObj) {
+        if (!oneKeyObj.hasOwnProperty(key)) {
+          continue;
+        }
+        return key;
+      }
+      return null;
+    };
+
+
+    __exports__["default"] = keyOf;
+  });
+define(
+  '../amd/transpiled/react-es6/lib/cloneWithProps',["./ReactPropTransferer","./keyOf","exports"],
   function(__dependency1__, __dependency2__, __exports__) {
     
     
 
     var ReactPropTransferer = __dependency1__["default"];
 
-    var keyMirror = __dependency2__["default"];
+    var keyOf = __dependency2__["default"];
 
-    var SpecialPropsToTransfer = keyMirror({
-      key: null,
-      children: null,
-      ref: null
-    });
+    var CHILDREN_PROP = keyOf({children: null});
 
     /**
      * Sometimes you want to change the props of a child passed to you. Usually
@@ -1119,27 +1143,13 @@ define(
      * as if you used `transferPropsTo()`.
      * @return {object} a clone of child with props merged in.
      */
-    function cloneWithProps(child, props) {
-      var newProps = ReactPropTransferer.mergeProps(child.props, props);
+    function cloneWithProps (child, props) {
+      var newProps = ReactPropTransferer.mergeProps(props, child.props);
 
-      // ReactPropTransferer does not transfer the `key` prop so do it manually. Do
-      // not transfer it from the original component.
-      if (props.hasOwnProperty(SpecialPropsToTransfer.key)) {
-        newProps.key = props.key;
-      }
-
-      // ReactPropTransferer does not transfer the `children` prop. Transfer it
-      // from `props` if it exists, otherwise use `child.props.children` if it is
-      // provided.
-      if (props.hasOwnProperty(SpecialPropsToTransfer.children)) {
-        newProps.children = props.children;
-      } else if (child.props.hasOwnProperty(SpecialPropsToTransfer.children)) {
+      // Use `child.props.children` if it is provided.
+      if (!newProps.hasOwnProperty(CHILDREN_PROP) &&
+          child.props.hasOwnProperty(CHILDREN_PROP)) {
         newProps.children = child.props.children;
-      }
-
-      // ReactPropTransferer does not transfer `ref` so do it manually.
-      if (props.hasOwnProperty(SpecialPropsToTransfer.ref)) {
-        newProps.ref = props.ref;
       }
 
       return child.constructor.ConvenienceConstructor(newProps);
@@ -1639,7 +1649,8 @@ define(
         return utils.cloneWithProps(
             child,
             {
-              ref: 'menuItem' + (i + 1),
+              ref: child.props.ref || 'menuItem' + (i + 1),
+              key: child.props.key,
               onSelect: this.handleOptionSelect.bind(this, child.props.key)
             }
           );
@@ -1664,7 +1675,7 @@ define(
 
         if (this.isMounted()) {
           els = this.getDOMNode().querySelectorAll('.fade');
-          if (els) {
+          if (els.length) {
             Array.prototype.forEach.call(els, function (el) {
               el.className += ' in';
             });
@@ -1675,7 +1686,7 @@ define(
       _fadeOut: function () {
         var els = this._fadeOutEl.querySelectorAll('.fade.in');
 
-        if (els) {
+        if (els.length) {
           Array.prototype.forEach.call(els, function (el) {
             el.className = el.className.replace(/\bin\b/, '');
           });
@@ -1697,8 +1708,7 @@ define(
 
       componentWillUnmount: function () {
         var els = this.getDOMNode().querySelectorAll('.fade');
-
-        if (els) {
+        if (els.length) {
           this._fadeOutEl = document.createElement('div');
           document.body.appendChild(this._fadeOutEl);
           this._fadeOutEl.innerHTML = this.getDOMNode().innerHTML;
@@ -1953,7 +1963,8 @@ define(
         return {
           bsClass: 'modal',
           backdrop: true,
-          keyboard: true
+          keyboard: true,
+          animation: true
         };
       },
 
@@ -1982,10 +1993,8 @@ define(
       render: function () {
         var classes = this.getBsClassSet();
 
-        classes['fade'] = this.props.fade;
-        if (!document.querySelectorAll) {
-          classes['in'] = this.props.fade;
-        }
+        classes['fade'] = this.props.animation;
+        classes['in'] = !this.props.animation || !document.querySelectorAll;
 
         var modal = this.transferPropsTo(
           React.DOM.div(
@@ -2013,12 +2022,10 @@ define(
       renderBackdrop: function (modal) {
         var classes = {
           'modal-backdrop': true,
-          'fade': this.props.fade
+          'fade': this.props.animation
         };
 
-        if (!document.querySelectorAll) {
-          classes['in'] = this.props.fade;
-        }
+        classes['in'] = !this.props.animation || !document.querySelectorAll;
 
         return (
           React.DOM.div(null, 
@@ -2091,12 +2098,14 @@ define(
 
       renderNavItem: function (child) {
         return utils.cloneWithProps(
-            child,
-            {
-              isActive: this.props.activeKey != null ? child.props.key === this.props.activeKey : null,
-              onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect)
-            }
-          );
+          child,
+          {
+            isActive: this.props.activeKey != null ? child.props.key === this.props.activeKey : null,
+            onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),
+            ref: child.props.ref,
+            key: child.props.key
+          }
+        );
       }
     });
 
@@ -2143,7 +2152,8 @@ define(
             React.DOM.a(
               {href:this.props.href,
               title:this.props.title,
-              onClick:this.handleClick}, 
+              onClick:this.handleClick,
+              ref:"anchor"}, 
               this.props.children
             )
           )
@@ -2218,7 +2228,8 @@ define(
 
         getInitialState: function() {
             return {
-                isOverlayShown: false
+                isOverlayShown: (this.props.defaultOverlayShown == null) ?
+                    false : this.props.defaultOverlayShown
             };
         },
 
@@ -2240,14 +2251,36 @@ define(
             });
         },
 
+        _trigger: function () {
+            var propName = 'delay' + (this.state.isOverlayShown ? 'Hide' : 'Show'),
+                delay = this.props[propName] || this.props.delay;
+
+            clearTimeout(this._triggerTimeout);
+            if (delay) {
+                this._triggerTimeout = setTimeout(this.toggle, parseInt(delay, 10));
+            } else {
+                this.toggle();
+            }
+        },
+
         renderOverlay: function() {
+            var props;
+
             if (!this.state.isOverlayShown || !this.props.overlay) {
                 return React.DOM.span(null );
             }
 
+            props = {
+                onRequestHide: this._trigger
+            };
+
+            if (this.props.animation != null) {
+                props.animation = this.props.animation;
+            }
+
             return cloneWithProps(
                 this.props.overlay,
-                {onRequestHide: this.hide}
+                props
             );
         },
 
@@ -2267,7 +2300,7 @@ define(
                 }
                 propName = 'on' + trigger.substr(0, 1).toUpperCase() +
                     trigger.substr(1);
-                props[propName] = this.toggle;
+                props[propName] = this._trigger;
             }
 
             return React.DOM.span(
@@ -2664,7 +2697,8 @@ define(
         return utils.cloneWithProps(
             child,
             {
-              ref: 'menuItem' + (i + 1),
+              ref: child.props.ref || 'menuItem' + (i + 1),
+              key: child.props.key,
               onSelect: this.handleOptionSelect.bind(this, child.props.key)
             }
           );
@@ -2750,7 +2784,9 @@ define(
         return utils.cloneWithProps(
             child,
             {
-              isActive: (child.props.key === activeKey)
+              isActive: (child.props.key === activeKey),
+              ref: child.props.ref,
+              key: child.props.key
             }
           );
       },

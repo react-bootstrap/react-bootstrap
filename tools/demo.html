@@ -30,7 +30,7 @@
             },
 
             modalInstance = (
-                <Modal title="Title" fade={true}>
+                <Modal title="Title" animation={false}>
                     <div className="modal-body">
                         Content
                     </div>
@@ -59,7 +59,7 @@
                             <Panel header='header1' key="1">Content1</Panel>
                             <Panel header='header2' key="2">Content2</Panel>
                         </Accordion>
-                        <OverlayTrigger overlay={modalInstance}>
+                        <OverlayTrigger overlay={modalInstance} animation={true}>
                             <a href="#">Open modal</a>
                         </OverlayTrigger>
                     </div>,

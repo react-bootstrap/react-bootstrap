@@ -27,7 +27,7 @@
  * will remain to ensure logic does not differ in production.
  */
 
-function invariant(condition) {
+function invariant (condition) {
   if (!condition) {
     var error = new Error('Invariant Violation');
     error.framesToPop = 1;
@@ -35,4 +35,4 @@ function invariant(condition) {
   }
 }
 
-export default invariant;
+export default = invariant;

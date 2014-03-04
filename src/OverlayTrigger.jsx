@@ -15,7 +15,8 @@ var OverlayTrigger = React.createClass({
 
     getInitialState: function() {
         return {
-            isOverlayShown: false
+            isOverlayShown: (this.props.defaultOverlayShown == null) ?
+                false : this.props.defaultOverlayShown
         };
     },
 
@@ -37,14 +38,36 @@ var OverlayTrigger = React.createClass({
         });
     },
 
+    _trigger: function () {
+        var propName = 'delay' + (this.state.isOverlayShown ? 'Hide' : 'Show'),
+            delay = this.props[propName] || this.props.delay;
+
+        clearTimeout(this._triggerTimeout);
+        if (delay) {
+            this._triggerTimeout = setTimeout(this.toggle, parseInt(delay, 10));
+        } else {
+            this.toggle();
+        }
+    },
+
     renderOverlay: function() {
+        var props;
+
         if (!this.state.isOverlayShown || !this.props.overlay) {
             return <span />;
         }
 
+        props = {
+            onRequestHide: this._trigger
+        };
+
+        if (this.props.animation != null) {
+            props.animation = this.props.animation;
+        }
+
         return cloneWithProps(
             this.props.overlay,
-            {onRequestHide: this.hide}
+            props
         );
     },
 
@@ -64,7 +87,7 @@ var OverlayTrigger = React.createClass({
             }
             propName = 'on' + trigger.substr(0, 1).toUpperCase() +
                 trigger.substr(1);
-            props[propName] = this.toggle;
+            props[propName] = this._trigger;
         }
 
         return React.DOM.span(

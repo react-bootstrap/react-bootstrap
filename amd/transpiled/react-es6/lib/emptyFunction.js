@@ -22,8 +22,8 @@ define(
 
     var copyProperties = __dependency1__["default"];
 
-    function makeEmptyFunction(arg) {
-      return function() {
+    function makeEmptyFunction (arg) {
+      return function () {
         return arg;
       };
     }
@@ -33,7 +33,7 @@ define(
      * primarily useful idiomatically for overridable function endpoints which
      * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
      */
-    function emptyFunction() {}
+    function emptyFunction () {}
 
     copyProperties(emptyFunction, {
       thatReturns: makeEmptyFunction,

@@ -32,7 +32,8 @@ var NavItem = React.createClass({
         <a
           href={this.props.href}
           title={this.props.title}
-          onClick={this.handleClick}>
+          onClick={this.handleClick}
+          ref="anchor">
           {this.props.children}
         </a>
       </li>

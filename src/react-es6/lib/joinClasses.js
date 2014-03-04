@@ -26,7 +26,7 @@
  * @param {...?string} classes
  * @return {string}
  */
-function joinClasses(className/*, ... */) {
+function joinClasses (className/*, ... */) {
   if (!className) {
     className = '';
   }
@@ -41,4 +41,4 @@ function joinClasses(className/*, ... */) {
   return className;
 }
 
-export default joinClasses;
+export default = joinClasses;

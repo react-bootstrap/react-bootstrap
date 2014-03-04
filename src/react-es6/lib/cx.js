@@ -31,7 +31,7 @@
  * @param [string ...]  Variable list of classNames in the string case.
  * @return string       Renderable space-separated CSS className.
  */
-function cx(classNames) {
+function cx (classNames) {
   if (typeof classNames == 'object') {
     return Object.keys(classNames).map(function(className) {
       return classNames[className] ? className : '';
@@ -41,4 +41,4 @@ function cx(classNames) {
   }
 }
 
-export default cx;
+export default = cx;

@@ -133,7 +133,8 @@ var SplitButton = React.createClass({
     return utils.cloneWithProps(
         child,
         {
-          ref: 'menuItem' + (i + 1),
+          ref: child.props.ref || 'menuItem' + (i + 1),
+          key: child.props.key,
           onSelect: this.handleOptionSelect.bind(this, child.props.key)
         }
       );

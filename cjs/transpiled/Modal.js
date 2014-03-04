@@ -19,7 +19,8 @@ var Modal = React.createClass({displayName: 'Modal',
     return {
       bsClass: 'modal',
       backdrop: true,
-      keyboard: true
+      keyboard: true,
+      animation: true
     };
   },
 
@@ -48,10 +49,8 @@ var Modal = React.createClass({displayName: 'Modal',
   render: function () {
     var classes = this.getBsClassSet();
 
-    classes['fade'] = this.props.fade;
-    if (!document.querySelectorAll) {
-      classes['in'] = this.props.fade;
-    }
+    classes['fade'] = this.props.animation;
+    classes['in'] = !this.props.animation || !document.querySelectorAll;
 
     var modal = this.transferPropsTo(
       React.DOM.div(
@@ -79,12 +78,10 @@ var Modal = React.createClass({displayName: 'Modal',
   renderBackdrop: function (modal) {
     var classes = {
       'modal-backdrop': true,
-      'fade': this.props.fade
+      'fade': this.props.animation
     };
 
-    if (!document.querySelectorAll) {
-      classes['in'] = this.props.fade;
-    }
+    classes['in'] = !this.props.animation || !document.querySelectorAll;
 
     return (
       React.DOM.div(null, 

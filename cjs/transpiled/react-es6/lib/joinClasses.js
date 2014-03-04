@@ -27,7 +27,7 @@
  * @param {...?string} classes
  * @return {string}
  */
-function joinClasses(className/*, ... */) {
+function joinClasses (className/*, ... */) {
   if (!className) {
     className = '';
   }
