@@ -21,11 +21,13 @@ define(
       },
 
       _renderOverlay: function () {
-        React.renderComponent(this.renderOverlay(), this._overlayTarget);
+        // Save reference to help testing
+        this._overlayInstance = React.renderComponent(this.renderOverlay(), this._overlayTarget);
       },
 
       _unrenderOverlay: function () {
         React.unmountComponentAtNode(this._overlayTarget);
+        this._overlayInstance = null;
       }
     };
   });
