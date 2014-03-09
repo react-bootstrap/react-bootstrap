@@ -1541,19 +1541,19 @@ var InternalLink = Router.Link;
 
 var NAV_LINKS = {
   'getting-started': {
-    link: 'getting-started.html',
+    link: '/getting-started.html',
     title: 'Getting started'
   },
   'css': {
-    link: 'css.html',
+    link: '/css.html',
     title: 'CSS'
   },
   'components': {
-    link: 'components.html',
+    link: '/components.html',
     title: 'Components'
   },
   'javascript': {
-    link: 'javascript.html',
+    link: '/javascript.html',
     title: 'JavaScript'
   }
 };
@@ -1574,7 +1574,7 @@ var NavMain = React.createClass({displayName: 'NavMain',
               React.DOM.span( {className:"icon-bar"} ),
               React.DOM.span( {className:"icon-bar"} )
             ),
-            InternalLink( {href:"index.html", className:"navbar-brand"}, "React Bootstrap")
+            InternalLink( {href:"/", className:"navbar-brand"}, "React Bootstrap")
           ),
           React.DOM.nav( {className:"collapse navbar-collapse bs-navbar-collapse", role:"navigation"}, 
             React.DOM.ul( {className:"nav navbar-nav"}, 
@@ -1905,7 +1905,6 @@ var ComponentsPage = require('./ComponentsPage');
 var JavaScriptPage = require('./JavaScriptPage');
 var NotFoundPage = require('./NotFoundPage');
 
-var Pages = Router.Pages;
 var Locations = Router.Locations;
 var Location = Router.Location;
 var NotFound = Router.NotFound;
@@ -1983,17 +1982,19 @@ var Root = React.createClass({displayName: 'Root',
             React.DOM.link( {href:"vendor/codemirror/codemirror.css", rel:"stylesheet"} ),
             React.DOM.link( {href:"vendor/codemirror/solarized.css", rel:"stylesheet"} ),
             React.DOM.link( {href:"vendor/codemirror/syntax.css", rel:"stylesheet"} ),
-            React.DOM.link( {href:"assets/style.css", rel:"stylesheet"} ),
+            React.DOM.link( {href:"assets/style.css", rel:"stylesheet"} )
+          ),
+
+          React.DOM.body(null, 
+            Locations( {path:Root.getBaseUrl() + this.props.initialPath}, 
+              Location( {path:Root.getBaseUrl() + '*', handler:PagesHolder} )
+            ),
 
             React.DOM.script( {dangerouslySetInnerHTML:browserInitScriptObj} ),
             React.DOM.script( {src:"vendor/codemirror/codemirror.js"} ),
             React.DOM.script( {src:"vendor/codemirror/javascript.js"} ),
             React.DOM.script( {src:"vendor/JSXTransformer.js"} ),
             React.DOM.script( {src:"bundle.js"} )
-          ),
-
-          Pages( {path:Root.getBaseUrl() + this.props.initialPath}, 
-            Location( {path:Root.getBaseUrl() + '*', handler:PagesHolder} )
           )
         )
       );
@@ -2007,10 +2008,7 @@ module.exports = Root;
 var React = require('react');
 var Root = require('./built/Root');
 
-document.addEventListener('DOMContentLoaded', function () {
-  React.renderComponent(Root(window.INITIAL_PROPS || null), document);
-}, false);
-
+React.renderComponent(Root(window.INITIAL_PROPS || null), document);
 },{"./built/Root":39,"react":187}],41:[function(require,module,exports){
 
 },{}],42:[function(require,module,exports){
@@ -2179,6 +2177,7 @@ var AsyncRouteRenderingMixin = {
           this.replaceState({
             match: this.state.match,
             prefix: this.state.prefix,
+            navigation: this.state.navigation,
             pendingChildren: handler
           });
 
@@ -2229,9 +2228,10 @@ function Environment() {
 /**
  * Notify routers about the change.
  *
+ * @param {Object} navigation
  * @param {Function} cb
  */
-Environment.prototype.notify = function notify(cb) {
+Environment.prototype.notify = function notify(navigation, cb) {
   var latch = this.routers.length;
 
   if (latch === 0) {
@@ -2247,17 +2247,33 @@ Environment.prototype.notify = function notify(cb) {
 
   ReactUpdates.batchedUpdates(function() {
     for (var i = 0, len = this.routers.length; i < len; i++) {
-      this.routers[i].setPath(this.path, callback);
+      this.routers[i].setPath(this.path, navigation, callback);
     }
   }.bind(this));
 }
 
-Environment.prototype.makeHref = function navigate(path) {
+Environment.prototype.makeHref = function makeHref(path) {
   return path;
 }
 
-Environment.prototype.navigate = function navigate(path, cb) {
-  return this.setPath(path, cb);
+Environment.prototype.navigate = function navigate(path, navigation, cb) {
+  if (typeof navigation === 'function' && cb === undefined) {
+    cb = navigation;
+    navigation = {};
+  }
+  return this.setPath(path, navigation, cb);
+}
+
+Environment.prototype.setPath = function(path, navigation, cb) {
+  if (!navigation.isPopState) {
+    if (navigation.replace) {
+      this.replaceState(path, navigation);
+    } else {
+      this.pushState(path, navigation);
+    }
+  }
+  this.path = path;
+  this.notify(navigation, cb);
 }
 
 /**
@@ -2298,13 +2314,13 @@ PathnameEnvironment.prototype.getPath = function() {
   return window.location.pathname;
 }
 
-PathnameEnvironment.prototype.setPath = function(path, cb, retrospective) {
-  if (!retrospective) {
-    window.history.pushState({}, '', path);
-  }
-  this.path = path;
-  this.notify(cb);
-};
+PathnameEnvironment.prototype.pushState = function(path, navigation) {
+  window.history.pushState({}, '', path);
+}
+
+PathnameEnvironment.prototype.replaceState = function(path, navigation) {
+  window.history.replaceState({}, '', path);
+}
 
 PathnameEnvironment.prototype.start = function() {
   window.addEventListener('popstate', this.onPopState.bind(this));
@@ -2318,7 +2334,7 @@ PathnameEnvironment.prototype.onPopState = function(e) {
   var path = window.location.pathname;
 
   if (this.path !== path) {
-    this.setPath(path, undefined, true);
+    this.setPath(path, {isPopState: true});
   }
 };
 
@@ -2336,13 +2352,14 @@ HashEnvironment.prototype.getPath = function() {
   return window.location.hash.slice(1) || '/';
 };
 
-HashEnvironment.prototype.setPath = function(path, cb, retrospective) {
-  if (!retrospective) {
-    window.location.hash = path;
-  }
-  this.path = path;
-  this.notify(cb);
-};
+HashEnvironment.prototype.pushState = function(path, navigation) {
+  window.location.hash = path;
+}
+
+HashEnvironment.prototype.replaceState = function(path, navigation) {
+  var href = window.location.href.replace(/(javascript:|#).*$/, '');
+  window.location.replace(href + '#' + path);
+}
 
 HashEnvironment.prototype.start = function() {
   window.addEventListener('hashchange', this.onHashChange.bind(this));
@@ -2353,10 +2370,10 @@ HashEnvironment.prototype.stop = function() {
 };
 
 HashEnvironment.prototype.onHashChange = function() {
-  var path = window.location.hash.slice(1);
+  var path = this.getPath();
 
   if (this.path !== path) {
-    this.setPath(path, undefined, true);
+    this.setPath(path, {isPopState: true});
   }
 };
 
@@ -2466,6 +2483,16 @@ var Link = React.createClass({
     }
   },
 
+  _navigationParams: function() {
+    var params = {};
+    for (var k in this.props) {
+      if (!this.constructor.propTypes[k]) {
+        params[k] = this.props[k];
+      }
+    }
+    return params;
+  },
+
   _createHref: function() {
     return this.props.global ?
       Environment.defaultEnvironment.makeHref(this.props.href) :
@@ -2481,7 +2508,7 @@ var Link = React.createClass({
       return Environment.defaultEnvironment.navigate(path, cb);
     }
 
-    return this.navigate(path, cb);
+    return this.navigate(path, this._navigationParams(), cb);
   },
 
   render: function() {
@@ -2644,8 +2671,8 @@ function createRouter(name, component) {
 
     displayName: name,
 
-    getRoutes: function() {
-      return this.props.children;
+    getRoutes: function(props) {
+      return props.children;
     },
 
     getDefaultProps: function() {
@@ -2706,23 +2733,32 @@ var RouterMixin = {
   },
 
   getInitialState: function() {
+    return this.getRouterState(this.props);
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    var nextState = this.getRouterState(nextProps);
+    this.replaceState(nextState);
+  },
+
+  getRouterState: function(props) {
     var path;
     var prefix;
 
-    if (this.props.contextual && this.context.router) {
+    if (props.contextual && this.context.router) {
 
       var match = this.context.router.getMatch();
 
       invariant(
-        this.props.path || isString(match.unmatchedPath),
+        props.path || isString(match.unmatchedPath),
         "contextual router has nothing to match on: %s", match.unmatchedPath
       );
 
-      path = this.props.path || match.unmatchedPath;
+      path = props.path || match.unmatchedPath;
       prefix = match.matchedPath;
     } else {
 
-      path = this.props.path || this.props.environment.getPath();
+      path = props.path || props.environment.getPath();
 
       invariant(
         isString(path),
@@ -2734,17 +2770,14 @@ var RouterMixin = {
     }
 
     if (path[0] !== '/') {
-      path = '/' + path
+      path = '/' + path;
     }
 
     return {
-      match: matchRoutes(this.getRoutes(), path),
-      prefix: prefix
+      match: matchRoutes(this.getRoutes(props), path),
+      prefix: prefix,
+      navigation: {}
     };
-  },
-
-  componentWillReceiveProps: function() {
-    this.replaceState(this.getInitialState());
   },
 
   /**
@@ -2774,14 +2807,13 @@ var RouterMixin = {
    * @param {String} path
    * @param {Callback} cb
    */
-  navigate: function(path, cb) {
-    path = join(this.state.prefix, path);
-
-    if (path[0] !== '/') {
-      path = '/' + path
+  navigate: function(path, navigation, cb) {
+    if (typeof navigation === 'function' && cb === undefined) {
+      cb = navigation;
+      navigation = {};
     }
-
-    this.props.environment.setPath(path, cb);
+    path = join(this.state.prefix, path);
+    this.props.environment.setPath(path, navigation, cb);
   },
 
   /**
@@ -2794,10 +2826,11 @@ var RouterMixin = {
    * @param {String} path
    * @param {Callback} cb
    */
-  setPath: function(path, cb) {
+  setPath: function(path, navigation, cb) {
     this.replaceState({
-      match: matchRoutes(this.getRoutes(), path),
+      match: matchRoutes(this.getRoutes(this.props), path),
       prefix: this.state.prefix,
+      navigation: navigation
     }, cb);
   },
 
@@ -19740,7 +19773,7 @@ module.exports={
     "grunt-contrib-copy": "~0.5.0",
     "brfs": "0.0.9",
     "react-async": "~0.6.0",
-    "react-router-component": "~0.8.0",
+    "react-router-component": "~0.10.0",
     "send": "~0.2.0"
   }
 }

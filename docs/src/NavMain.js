@@ -9,19 +9,19 @@ var InternalLink = Router.Link;
 
 var NAV_LINKS = {
   'getting-started': {
-    link: 'getting-started.html',
+    link: '/getting-started.html',
     title: 'Getting started'
   },
   'css': {
-    link: 'css.html',
+    link: '/css.html',
     title: 'CSS'
   },
   'components': {
-    link: 'components.html',
+    link: '/components.html',
     title: 'Components'
   },
   'javascript': {
-    link: 'javascript.html',
+    link: '/javascript.html',
     title: 'JavaScript'
   }
 };
@@ -42,7 +42,7 @@ var NavMain = React.createClass({
               <span className="icon-bar" />
               <span className="icon-bar" />
             </button>
-            <InternalLink href="index.html" className="navbar-brand">React Bootstrap</InternalLink>
+            <InternalLink href="/" className="navbar-brand">React Bootstrap</InternalLink>
           </div>
           <nav className="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <ul className="nav navbar-nav">
