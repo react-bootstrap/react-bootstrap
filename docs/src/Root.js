@@ -12,7 +12,6 @@ var ComponentsPage = require('./ComponentsPage');
 var JavaScriptPage = require('./JavaScriptPage');
 var NotFoundPage = require('./NotFoundPage');
 
-var Pages = Router.Pages;
 var Locations = Router.Locations;
 var Location = Router.Location;
 var NotFound = Router.NotFound;
@@ -91,17 +90,19 @@ var Root = React.createClass({
             <link href="vendor/codemirror/solarized.css" rel="stylesheet" />
             <link href="vendor/codemirror/syntax.css" rel="stylesheet" />
             <link href="assets/style.css" rel="stylesheet" />
+          </head>
+
+          <body>
+            <Locations path={Root.getBaseUrl() + this.props.initialPath}>
+              <Location path={Root.getBaseUrl() + '*'} handler={PagesHolder} />
+            </Locations>
 
             <script dangerouslySetInnerHTML={browserInitScriptObj} />
             <script src="vendor/codemirror/codemirror.js" />
             <script src="vendor/codemirror/javascript.js" />
             <script src="vendor/JSXTransformer.js" />
             <script src="bundle.js" />
-          </head>
-
-          <Pages path={Root.getBaseUrl() + this.props.initialPath}>
-            <Location path={Root.getBaseUrl() + '*'} handler={PagesHolder} />
-          </Pages>
+          </body>
         </html>
       );
   }

@@ -47,7 +47,7 @@
     "grunt-contrib-copy": "~0.5.0",
     "brfs": "0.0.9",
     "react-async": "~0.6.0",
-    "react-router-component": "~0.8.0",
+    "react-router-component": "~0.10.0",
     "send": "~0.2.0"
   }
 }
