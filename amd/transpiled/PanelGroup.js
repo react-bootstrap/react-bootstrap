@@ -42,8 +42,6 @@ define(
         var activeKey =
           this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
 
-        console.info(activeKey);
-
         var props = {
           bsStyle: this.props.bsStyle,
           key: child.props.key,
@@ -68,7 +66,6 @@ define(
       },
 
       handleSelect: function (key) {
-        console.info(key);
         if (this.props.onSelect) {
           this._isChanging = true;
           this.props.onSelect(key);
