@@ -1163,6 +1163,28 @@ define(
     
     var cloneWithProps = __dependency1__["default"];
 
+    // From https://www.npmjs.org/package/extend
+    var hasOwn = Object.prototype.hasOwnProperty;
+    var toString = Object.prototype.toString;
+
+    function isPlainObject(obj) {
+      if (!obj || toString.call(obj) !== '[object Object]' || obj.nodeType || obj.setInterval)
+        return false;
+
+      var has_own_constructor = hasOwn.call(obj, 'constructor');
+      var has_is_property_of_method = hasOwn.call(obj.constructor.prototype, 'isPrototypeOf');
+      // Not own constructor property must be Object
+      if (obj.constructor && !has_own_constructor && !has_is_property_of_method)
+        return false;
+
+      // Own properties are enumerated firstly, so to speed up,
+      // if last one is own, then all properties are own.
+      var key;
+      for ( key in obj ) {}
+
+      return key === undefined || hasOwn.call( obj, key );
+    };
+
     __exports__["default"] = {
 
       /**
@@ -1237,6 +1259,82 @@ define(
        */
       cloneWithProps: function (child, props) {
         return cloneWithProps(child, props);
+      },
+
+      /**
+       * From https://www.npmjs.org/package/extend
+       * node-extend is a port of the classic extend() method from jQuery.
+       * It behaves as you expect. It is simple, tried and true.
+       *
+       * Extend one object with one or more others, returning the modified object.
+       * Keep in mind that the target object will be modified, and will be returned from extend().
+       *
+       * If a boolean true is specified as the first argument, extend performs a deep copy,
+       * recursively copying any objects it finds. Otherwise, the copy will share structure
+       * with the original object(s). Undefined properties are not copied. However, properties
+       * inherited from the object's prototype will be copied over.
+       *
+       * @example
+       * extend([deep], target, object1, [objectN])
+       *
+       * @return {object}
+       */
+      extend: function () {
+        var options, name, src, copy, copyIsArray, clone,
+            target = arguments[0] || {},
+            i = 1,
+            length = arguments.length,
+            deep = false;
+
+        // Handle a deep copy situation
+        if ( typeof target === "boolean" ) {
+          deep = target;
+          target = arguments[1] || {};
+          // skip the boolean and the target
+          i = 2;
+        }
+
+        // Handle case when target is a string or something (possible in deep copy)
+        if ( typeof target !== "object" && typeof target !== "function") {
+          target = {};
+        }
+
+        for ( ; i < length; i++ ) {
+          // Only deal with non-null/undefined values
+          if ( (options = arguments[ i ]) != null ) {
+            // Extend the base object
+            for ( name in options ) {
+              src = target[ name ];
+              copy = options[ name ];
+
+              // Prevent never-ending loop
+              if ( target === copy ) {
+                continue;
+              }
+
+              // Recurse if we're merging plain objects or arrays
+              if ( deep && copy && ( isPlainObject(copy) || (copyIsArray = Array.isArray(copy)) ) ) {
+                if ( copyIsArray ) {
+                  copyIsArray = false;
+                  clone = src && Array.isArray(src) ? src : [];
+
+                } else {
+                  clone = src && isPlainObject(src) ? src : {};
+                }
+
+                // Never move original objects, clone them
+                target[ name ] = extend( deep, clone, copy );
+
+              // Don't bring in undefined values
+              } else if ( copy !== undefined ) {
+                target[ name ] = copy;
+              }
+            }
+          }
+        }
+
+        // Return the modified object
+        return target;
       }
     };
   });
@@ -2493,48 +2591,201 @@ define('../amd/PrimaryMixin',['./transpiled/PrimaryMixin'], function (PrimaryMix
   return PrimaryMixin.default;
 });
 define(
-  '../amd/transpiled/ProgressBar',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","exports"],
+  '../amd/transpiled/Interpolate',["./react-es6","./react-es6/lib/invariant","./utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    // https://www.npmjs.org/package/react-interpolate-component
+    
+
+    var React = __dependency1__["default"];
+    var invariant = __dependency2__["default"];
+    var utils = __dependency3__["default"];
+
+    function isString(object) {
+      return Object.prototype.toString.call(object) === '[object String]';
+    }
+
+    var REGEXP = /\%\((.+?)\)s/;
+
+    var Interpolate = React.createClass({
+      displayName: 'Interpolate',
+
+      getDefaultProps: function() {
+        return { component: React.DOM.span };
+      },
+
+      render: function() {
+        var format = this.props.children || this.props.format;
+        var parent = this.props.component;
+        var unsafe = this.props.unsafe === true;
+        var props  = utils.extend({}, this.props);
+
+        delete props.children;
+        delete props.format;
+        delete props.component;
+        delete props.unsafe;
+
+        invariant(isString(format), 'Interpolate expects either a format string as only child or a `format` prop with a string value');
+
+        if (unsafe) {
+          var content = format.split(REGEXP).reduce(function(memo, match, index) {
+            var html;
+
+            if (index % 2 === 0) {
+              html = match;
+            } else {
+              html = props[match];
+              delete props[match];
+            }
+
+            if (React.isValidComponent(html)) {
+              throw new Error('cannot interpolate a React component into unsafe text');
+            }
+
+            memo += html;
+
+            return memo;
+          }, '');
+
+          props.dangerouslySetInnerHTML = { __html: content };
+
+          return parent(props);
+        } else {
+          var args = format.split(REGEXP).reduce(function(memo, match, index) {
+            var child;
+
+            if (index % 2 === 0) {
+              if (match.length === 0) {
+                return memo;
+              }
+
+              child = match;
+            } else {
+              child = props[match];
+              delete props[match];
+            }
+
+            memo.push(child);
+
+            return memo;
+          }, [props]);
+
+          return parent.apply(null, args);
+        }
+      }
+    });
+
+    __exports__["default"] = Interpolate;
+  });
+define(
+  '../amd/transpiled/ProgressBar',["./react-es6","./react-es6/lib/cx","./Interpolate","./BootstrapMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
-    var BootstrapMixin = __dependency3__["default"];
+    var Interpolate = __dependency3__["default"];
+    var BootstrapMixin = __dependency4__["default"];
+    var utils = __dependency5__["default"];
 
 
     var ProgressBar = React.createClass({displayName: 'ProgressBar',
         propTypes: {
-            min: React.PropTypes.number.isRequired,
-            now: React.PropTypes.number.isRequired,
-            max: React.PropTypes.number.isRequired,
+            min: React.PropTypes.number,
+            now: React.PropTypes.number,
+            max: React.PropTypes.number,
             text: React.PropTypes.string
         },
 
         mixins: [BootstrapMixin],
 
-        getDefaultProps: function() {return {bsClass: 'progress-bar', bsStyle: 'default'};},
+        getDefaultProps: function () {
+            return {
+                bsClass: 'progress-bar',
+                min: 0,
+                max: 100
+            };
+        },
 
-        render: function() {
-            var width = (this.props.now / this.props.max) * 100;
-            return this.transferPropsTo(
-                React.DOM.div( {className:classSet(this.getBsClassSet()), role:"progressbar",
-                    style:{width: width + '%'},
-                    ariaValuenow:this.props.now,
-                    ariaValuemin:this.props.min,
-                    ariaValuemax:this.props.max}, 
-                        React.DOM.span( {className:"sr-only"}, 
-                            this.textForScreenReader()
+        getPercentage: function (now, min, max) {
+            return Math.ceil((now - min) / (max - min) * 100);
+        },
+
+        render: function () {
+            var classes = {
+                    progress: true
+                };
+
+            if (this.props.bsVariation === 'active') {
+                classes['progress-striped'] = true;
+                classes['active'] = true;
+            } else if (this.props.bsVariation === 'striped') {
+                classes['progress-striped'] = true;
+            }
+
+            if (!this.props.children) {
+                if (!this.props.isChild) {
+                    return this.transferPropsTo(
+                        React.DOM.div( {className:classSet(classes)}, 
+                            this.renderProgressBar()
                         )
+                    );
+                } else {
+                    return this.transferPropsTo(
+                        this.renderProgressBar()
+                    );
+                }
+            } else {
+                return this.transferPropsTo(
+                    React.DOM.div( {className:classSet(classes)}, 
+                        utils.modifyChildren(this.props.children, this.renderChildBar)
+                    )
+                );
+            }
+        },
+
+        renderChildBar: function (child) {
+            return utils.cloneWithProps(child, {
+                isChild: true,
+                key: child.props.key,
+                ref: child.props.ref
+            });
+        },
+
+        renderProgressBar: function () {
+            var percentage = this.getPercentage(
+                    this.props.now,
+                    this.props.min,
+                    this.props.max
+                );
+
+            return (
+                React.DOM.div( {className:classSet(this.getBsClassSet()), role:"progressbar",
+                    style:{width: percentage + '%'},
+                    'aria-valuenow':this.props.now,
+                    'aria-valuemin':this.props.min,
+                    'aria-valuemax':this.props.max}, 
+                    this.props.text ? this.renderScreenReaderText(percentage) : null
                 )
             );
         },
 
-        textForScreenReader: function() {
-            if (!this.props.text)
-                return '';
-            var formatted = this.props.text.replace('%d%', this.props.now);
-            return formatted + ' (' + this.props.bsStyle + ')';
+        renderScreenReaderText: function (percentage) {
+            var InterpolateClass = this.props.interpolateClass || Interpolate;
+
+            return (
+                React.DOM.span( {className:"sr-only"}, 
+                    InterpolateClass(
+                        {now:this.props.now,
+                        min:this.props.min,
+                        max:this.props.max,
+                        percent:percentage,
+                        bsStyle:this.props.bsStyle}, 
+                        this.props.text
+                    )
+                )
+            );
         }
     });
 
