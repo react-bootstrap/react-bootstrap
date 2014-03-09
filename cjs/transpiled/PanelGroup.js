@@ -28,9 +28,6 @@ var PanelGroup = React.createClass({displayName: 'PanelGroup',
   },
 
   render: function () {
-    var activeKey =
-      this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
-
     return this.transferPropsTo(
       React.DOM.div( {className:classSet(this.getBsClassSet())}, 
           utils.modifyChildren(this.props.children, this.renderPanel)
@@ -42,8 +39,12 @@ var PanelGroup = React.createClass({displayName: 'PanelGroup',
     var activeKey =
       this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
 
+    console.info(activeKey);
+
     var props = {
-      bsStyle: this.props.bsStyle
+      bsStyle: this.props.bsStyle,
+      key: child.props.key,
+      ref: child.props.ref
     };
 
     if (this.props.isAccordion) {
@@ -64,6 +65,7 @@ var PanelGroup = React.createClass({displayName: 'PanelGroup',
   },
 
   handleSelect: function (key) {
+    console.info(key);
     if (this.props.onSelect) {
       this._isChanging = true;
       this.props.onSelect(key);

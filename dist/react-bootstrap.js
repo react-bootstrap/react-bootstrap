@@ -1371,9 +1371,6 @@ define(
       },
 
       render: function () {
-        var activeKey =
-          this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
-
         return this.transferPropsTo(
           React.DOM.div( {className:classSet(this.getBsClassSet())}, 
               utils.modifyChildren(this.props.children, this.renderPanel)
@@ -1385,8 +1382,12 @@ define(
         var activeKey =
           this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
 
+        console.info(activeKey);
+
         var props = {
-          bsStyle: this.props.bsStyle
+          bsStyle: this.props.bsStyle,
+          key: child.props.key,
+          ref: child.props.ref
         };
 
         if (this.props.isAccordion) {
@@ -1407,6 +1408,7 @@ define(
       },
 
       handleSelect: function (key) {
+        console.info(key);
         if (this.props.onSelect) {
           this._isChanging = true;
           this.props.onSelect(key);
