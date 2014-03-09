@@ -289,3 +289,18 @@ var CustomTrigger = React.createClass({
 });
 ```
 
+### <a name="ProgressBar"></a>ProgressBar
+
+```
+var ProgressBar = require('react-bootstrap/ProgressBar');
+
+<ProgressBar
+  min={0}
+  max={100}
+  now={20}
+  bsStyle="danger"
+  bsVariation="[striped|active]"
+  text="%(percent)s% complete (%(bsStyle)s)"
+/>
+```
+
