@@ -203,6 +203,11 @@ var Button = require("./Button")["default"];
 var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
   mixins: [BootstrapMixin],
 
+  propTypes: {
+    vertical:  React.PropTypes.bool,
+    justified: React.PropTypes.bool
+  },
+
   getDefaultProps: function () {
     return {
       bsClass: 'button-group'
@@ -211,6 +216,8 @@ var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
 
   render: function () {
     var classes = this.getBsClassSet();
+    classes['btn-group-vertical'] = this.props.vertical;
+    classes['btn-group-justified'] = this.props.justified;
 
     return this.transferPropsTo(
       React.DOM.div(
@@ -296,8 +303,6 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
   },
 
   handleClick: function (e) {
-    e.preventDefault();
-
     this.toggle();
   },
 
@@ -1615,12 +1620,12 @@ var ButtonActiveText = "/** @jsx React.DOM */\n\nvar buttonsInstance = (\n    <d
 var ButtonDisabledText = "/** @jsx React.DOM */\n\nvar buttonsInstance = (\n    <div>\n      <Button bsStyle=\"primary\" bsSize=\"large\" disabled>Primary button</Button>\n      <Button bsSize=\"large\" disabled>Button</Button>\n    </div>\n  );\n\nReact.renderComponent(buttonsInstance, mountNode);";
 var ButtonTagTypesText = "/** @jsx React.DOM */\n\nvar buttonsInstance = (\n    <div>\n      <Button href=\"#\">Link</Button>\n      <Button>Button</Button>\n    </div>\n  );\n\nReact.renderComponent(buttonsInstance, mountNode);";
 var ButtonLoadingText = "/** @jsx React.DOM */\n\nvar LoadingButton = React.createClass({\n  getInitialState: function() {\n    return {\n      isLoading: false\n    };\n  },\n\n  render: function() {\n    var isLoading = this.state.isLoading;\n    return (\n        <Button\n          bsStyle=\"primary\"\n          disabled={isLoading}\n          onClick={!isLoading ? this.handleClick : null}>\n          {isLoading ? 'Loading...' : 'Loading state'}\n        </Button>\n      );\n  },\n\n  handleClick: function() {\n    this.setState({isLoading: true});\n\n    // This probably where you would have an `ajax` call\n    setTimeout(function() {\n\n      // Completed of async action, set loading state back\n      this.setState({isLoading: false});\n    }.bind(this), 2000);\n  }\n});\n\nReact.renderComponent(LoadingButton(), mountNode);";
-var ButtonGroupBasicText = "/** @jsx React.DOM */\n\nvar buttonGroupInstance = (\n    <ButtonGroup>\n      <Button bsStyle=\"default\">Left</Button>\n      <Button bsStyle=\"default\">Middle</Button>\n      <Button bsStyle=\"default\">Right</Button>\n    </ButtonGroup>\n  );\n\nReact.renderComponent(buttonGroupInstance, mountNode);";
-var ButtonToolbarBasicText = "/** @jsx React.DOM */\n\nvar buttonGroupInstance = (\n    <ButtonToolbar>\n      <ButtonGroup>\n        <Button bsStyle=\"default\">1</Button>\n        <Button bsStyle=\"default\">2</Button>\n        <Button bsStyle=\"default\">3</Button>\n        <Button bsStyle=\"default\">4</Button>\n      </ButtonGroup>\n\n      <ButtonGroup>\n        <Button bsStyle=\"default\">5</Button>\n        <Button bsStyle=\"default\">6</Button>\n        <Button bsStyle=\"default\">7</Button>\n      </ButtonGroup>\n\n      <ButtonGroup>\n        <Button bsStyle=\"default\">8</Button>\n      </ButtonGroup>\n    </ButtonToolbar>\n  );\n\nReact.renderComponent(buttonGroupInstance, mountNode);";
-var ButtonGroupSizesText = "/** @jsx React.DOM */\n\nvar buttonGroupInstance = (\n    <div>\n      <ButtonToolbar>\n        <ButtonGroup bsSize=\"large\">\n          <Button bsStyle=\"default\">Left</Button>\n          <Button bsStyle=\"default\">Middle</Button>\n          <Button bsStyle=\"default\">Right</Button>\n        </ButtonGroup>\n      </ButtonToolbar>\n\n      <ButtonToolbar>\n        <ButtonGroup>\n          <Button bsStyle=\"default\">Left</Button>\n          <Button bsStyle=\"default\">Middle</Button>\n          <Button bsStyle=\"default\">Right</Button>\n        </ButtonGroup>\n      </ButtonToolbar>\n\n      <ButtonToolbar>\n        <ButtonGroup bsSize=\"small\">\n          <Button bsStyle=\"default\">Left</Button>\n          <Button bsStyle=\"default\">Middle</Button>\n          <Button bsStyle=\"default\">Right</Button>\n        </ButtonGroup>\n      </ButtonToolbar>\n\n      <ButtonToolbar>\n        <ButtonGroup bsSize=\"xsmall\">\n          <Button bsStyle=\"default\">Left</Button>\n          <Button bsStyle=\"default\">Middle</Button>\n          <Button bsStyle=\"default\">Right</Button>\n        </ButtonGroup>\n      </ButtonToolbar>\n    </div>\n  );\n\nReact.renderComponent(buttonGroupInstance, mountNode);";
-var ButtonGroupNestedText = "/** @jsx React.DOM */\n\nvar buttonGroupInstance = (\n    <ButtonGroup>\n      <Button bsStyle=\"default\">1</Button>\n      <Button bsStyle=\"default\">2</Button>\n      <DropdownButton bsStyle=\"default\" title=\"Dropdown\">\n        <MenuItem key=\"1\">Dropdown link</MenuItem>\n        <MenuItem key=\"2\">Dropdown link</MenuItem>\n      </DropdownButton>\n    </ButtonGroup>\n  );\n\nReact.renderComponent(buttonGroupInstance, mountNode);";
-var ButtonGroupVerticalText = "/** @jsx React.DOM */\n\nvar buttonGroupInstance = (\n    <ButtonGroup bsVariation=\"vertical\">\n      <Button bsStyle=\"default\">Button</Button>\n      <Button bsStyle=\"default\">Button</Button>\n      <DropdownButton bsStyle=\"default\" title=\"Dropdown\">\n        <MenuItem key=\"1\">Dropdown link</MenuItem>\n        <MenuItem key=\"2\">Dropdown link</MenuItem>\n      </DropdownButton>\n      <Button bsStyle=\"default\">Button</Button>\n      <Button bsStyle=\"default\">Button</Button>\n      <DropdownButton bsStyle=\"default\" title=\"Dropdown\">\n        <MenuItem key=\"1\">Dropdown link</MenuItem>\n        <MenuItem key=\"2\">Dropdown link</MenuItem>\n      </DropdownButton>\n      <DropdownButton bsStyle=\"default\" title=\"Dropdown\">\n        <MenuItem key=\"1\">Dropdown link</MenuItem>\n        <MenuItem key=\"2\">Dropdown link</MenuItem>\n      </DropdownButton>\n    </ButtonGroup>\n  );\n\nReact.renderComponent(buttonGroupInstance, mountNode);";
-var ButtonGroupJustifiedText = "/** @jsx React.DOM */\n\nvar buttonGroupInstance = (\n    <ButtonGroup bsVariation=\"justified\">\n      <Button href=\"#\" bsStyle=\"default\">Left</Button>\n      <Button href=\"#\" bsStyle=\"default\">Middle</Button>\n      <DropdownButton href=\"#\" bsStyle=\"default\" title=\"Dropdown\">\n        <MenuItem key=\"1\">Dropdown link</MenuItem>\n        <MenuItem key=\"2\">Dropdown link</MenuItem>\n      </DropdownButton>\n    </ButtonGroup>\n  );\n\nReact.renderComponent(buttonGroupInstance, mountNode);";
+var ButtonGroupBasicText = "/** @jsx React.DOM */\n\nvar buttonGroupInstance = (\n    <ButtonGroup>\n      <Button>Left</Button>\n      <Button>Middle</Button>\n      <Button>Right</Button>\n    </ButtonGroup>\n  );\n\nReact.renderComponent(buttonGroupInstance, mountNode);";
+var ButtonToolbarBasicText = "/** @jsx React.DOM */\n\nvar buttonGroupInstance = (\n    <ButtonToolbar>\n      <ButtonGroup>\n        <Button>1</Button>\n        <Button>2</Button>\n        <Button>3</Button>\n        <Button>4</Button>\n      </ButtonGroup>\n\n      <ButtonGroup>\n        <Button>5</Button>\n        <Button>6</Button>\n        <Button>7</Button>\n      </ButtonGroup>\n\n      <ButtonGroup>\n        <Button>8</Button>\n      </ButtonGroup>\n    </ButtonToolbar>\n  );\n\nReact.renderComponent(buttonGroupInstance, mountNode);";
+var ButtonGroupSizesText = "/** @jsx React.DOM */\n\nvar buttonGroupInstance = (\n    <div>\n      <ButtonToolbar>\n        <ButtonGroup bsSize=\"large\">\n          <Button>Left</Button>\n          <Button>Middle</Button>\n          <Button>Right</Button>\n        </ButtonGroup>\n      </ButtonToolbar>\n\n      <ButtonToolbar>\n        <ButtonGroup>\n          <Button>Left</Button>\n          <Button>Middle</Button>\n          <Button>Right</Button>\n        </ButtonGroup>\n      </ButtonToolbar>\n\n      <ButtonToolbar>\n        <ButtonGroup bsSize=\"small\">\n          <Button>Left</Button>\n          <Button>Middle</Button>\n          <Button>Right</Button>\n        </ButtonGroup>\n      </ButtonToolbar>\n\n      <ButtonToolbar>\n        <ButtonGroup bsSize=\"xsmall\">\n          <Button>Left</Button>\n          <Button>Middle</Button>\n          <Button>Right</Button>\n        </ButtonGroup>\n      </ButtonToolbar>\n    </div>\n  );\n\nReact.renderComponent(buttonGroupInstance, mountNode);";
+var ButtonGroupNestedText = "/** @jsx React.DOM */\n\nvar buttonGroupInstance = (\n    <ButtonGroup>\n      <Button>1</Button>\n      <Button>2</Button>\n      <DropdownButton title=\"Dropdown\">\n        <MenuItem key=\"1\">Dropdown link</MenuItem>\n        <MenuItem key=\"2\">Dropdown link</MenuItem>\n      </DropdownButton>\n    </ButtonGroup>\n  );\n\nReact.renderComponent(buttonGroupInstance, mountNode);";
+var ButtonGroupVerticalText = "/** @jsx React.DOM */\n\nvar buttonGroupInstance = (\n    <ButtonGroup vertical>\n      <Button>Button</Button>\n      <Button>Button</Button>\n      <DropdownButton title=\"Dropdown\">\n        <MenuItem key=\"1\">Dropdown link</MenuItem>\n        <MenuItem key=\"2\">Dropdown link</MenuItem>\n      </DropdownButton>\n      <Button>Button</Button>\n      <Button>Button</Button>\n      <DropdownButton title=\"Dropdown\">\n        <MenuItem key=\"1\">Dropdown link</MenuItem>\n        <MenuItem key=\"2\">Dropdown link</MenuItem>\n      </DropdownButton>\n      <DropdownButton title=\"Dropdown\">\n        <MenuItem key=\"1\">Dropdown link</MenuItem>\n        <MenuItem key=\"2\">Dropdown link</MenuItem>\n      </DropdownButton>\n    </ButtonGroup>\n  );\n\nReact.renderComponent(buttonGroupInstance, mountNode);";
+var ButtonGroupJustifiedText = "/** @jsx React.DOM */\n\nvar buttonGroupInstance = (\n    <ButtonGroup justified>\n      <Button href=\"#\">Left</Button>\n      <Button href=\"#\">Middle</Button>\n      <DropdownButton href=\"#\" title=\"Dropdown\">\n        <MenuItem key=\"1\">Dropdown link</MenuItem>\n        <MenuItem key=\"2\">Dropdown link</MenuItem>\n      </DropdownButton>\n    </ButtonGroup>\n  );\n\nReact.renderComponent(buttonGroupInstance, mountNode);";
 
 var ComponentsPage = React.createClass({displayName: 'ComponentsPage',
   render: function () {
@@ -1707,7 +1712,7 @@ var ComponentsPage = React.createClass({displayName: 'ComponentsPage',
                   React.DOM.h3( {id:"btn-groups-vertical"}, "Vertical variation"),
                   React.DOM.p(null, "Make a set of buttons appear vertically stacked rather than horizontally. ",
                     React.DOM.strong( {className:"text-danger"}, "Split button dropdowns are not supported here.")),
-                  React.DOM.p(null, "Just add ", React.DOM.code(null, "bsVariation=\"vertical\""), " to the ", React.DOM.code(null, '<ButtonGroup />'),"."),
+                  React.DOM.p(null, "Just add ", React.DOM.code(null, "vertical"), " to the ", React.DOM.code(null, '<ButtonGroup />'),"."),
                   ReactPlayground( {codeText:ButtonGroupVerticalText} ),
 
                   React.DOM.h3( {id:"btn-groups-justified"}, "Justified button groups"),
@@ -1716,7 +1721,7 @@ var ComponentsPage = React.createClass({displayName: 'ComponentsPage',
                     React.DOM.h4(null, "Style issues"),
                     React.DOM.p(null, "There are some issues and workarounds required when using this property, please see ", React.DOM.a( {href:"http://getbootstrap.com/components/#btn-groups-justified"}, "bootstrap’s button group docs"), " for more specifics.")
                   ),
-                  React.DOM.p(null, "Just add ", React.DOM.code(null, "bsVariation=\"justified\""), " to the ", React.DOM.code(null, '<ButtonGroup />'),"."),
+                  React.DOM.p(null, "Just add ", React.DOM.code(null, "justified"), " to the ", React.DOM.code(null, '<ButtonGroup />'),"."),
                   ReactPlayground( {codeText:ButtonGroupJustifiedText} )
                 )
               ),

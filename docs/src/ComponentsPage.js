@@ -109,7 +109,7 @@ var ComponentsPage = React.createClass({
                   <h3 id="btn-groups-vertical">Vertical variation</h3>
                   <p>Make a set of buttons appear vertically stacked rather than horizontally.
                     <strong className="text-danger">Split button dropdowns are not supported here.</strong></p>
-                  <p>Just add <code>bsVariation="vertical"</code> to the <code>{'<ButtonGroup />'}</code>.</p>
+                  <p>Just add <code>vertical</code> to the <code>{'<ButtonGroup />'}</code>.</p>
                   <ReactPlayground codeText={ButtonGroupVerticalText} />
 
                   <h3 id="btn-groups-justified">Justified button groups</h3>
@@ -118,7 +118,7 @@ var ComponentsPage = React.createClass({
                     <h4>Style issues</h4>
                     <p>There are some issues and workarounds required when using this property, please see <a href="http://getbootstrap.com/components/#btn-groups-justified">bootstrap&#8217;s button group docs</a> for more specifics.</p>
                   </div>
-                  <p>Just add <code>bsVariation="justified"</code> to the <code>{'<ButtonGroup />'}</code>.</p>
+                  <p>Just add <code>justified</code> to the <code>{'<ButtonGroup />'}</code>.</p>
                   <ReactPlayground codeText={ButtonGroupJustifiedText} />
                 </div>
               </div>

@@ -8,6 +8,11 @@ import Button         from './Button';
 var ButtonGroup = React.createClass({
   mixins: [BootstrapMixin],
 
+  propTypes: {
+    vertical:  React.PropTypes.bool,
+    justified: React.PropTypes.bool
+  },
+
   getDefaultProps: function () {
     return {
       bsClass: 'button-group'
@@ -16,6 +21,8 @@ var ButtonGroup = React.createClass({
 
   render: function () {
     var classes = this.getBsClassSet();
+    classes['btn-group-vertical'] = this.props.vertical;
+    classes['btn-group-justified'] = this.props.justified;
 
     return this.transferPropsTo(
       <div

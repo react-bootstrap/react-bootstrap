@@ -2,9 +2,9 @@
 
 var buttonGroupInstance = (
     <ButtonGroup>
-      <Button bsStyle="default">Left</Button>
-      <Button bsStyle="default">Middle</Button>
-      <Button bsStyle="default">Right</Button>
+      <Button>Left</Button>
+      <Button>Middle</Button>
+      <Button>Right</Button>
     </ButtonGroup>
   );
 

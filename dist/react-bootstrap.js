@@ -1601,6 +1601,11 @@ define(
     var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
       mixins: [BootstrapMixin],
 
+      propTypes: {
+        vertical:  React.PropTypes.bool,
+        justified: React.PropTypes.bool
+      },
+
       getDefaultProps: function () {
         return {
           bsClass: 'button-group'
@@ -1609,6 +1614,8 @@ define(
 
       render: function () {
         var classes = this.getBsClassSet();
+        classes['btn-group-vertical'] = this.props.vertical;
+        classes['btn-group-justified'] = this.props.justified;
 
         return this.transferPropsTo(
           React.DOM.div(

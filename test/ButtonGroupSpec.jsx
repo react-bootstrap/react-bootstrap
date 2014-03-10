@@ -21,13 +21,13 @@ describe('ButtonGroup', function () {
   });
 
   it('Should add vertical variation', function () {
-    var instance = ButtonGroup({bsVariation: 'vertical'}, Button(null, 'Title'));
+    var instance = ButtonGroup({vertical: true}, Button(null, 'Title'));
     ReactTestUtils.renderIntoDocument(instance);
     assert.ok(instance.getDOMNode().className.match(/\bbtn-group-vertical\b/));
   });
 
   it('Should add justified variation', function () {
-    var instance = ButtonGroup({bsVariation: 'justified'}, Button(null, 'Title'));
+    var instance = ButtonGroup({justified: true}, Button(null, 'Title'));
     ReactTestUtils.renderIntoDocument(instance);
     assert.ok(instance.getDOMNode().className.match(/\bbtn-group-justified\b/));
   });
