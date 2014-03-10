@@ -20,7 +20,7 @@ var buttonsInstance = (
       {/* Indicates a dangerous or potentially negative action */}
       <Button bsStyle="danger">Danger</Button>
 
-      {/* Indicates a dangerous or potentially negative action */}
+      {/* Deemphasize a button by making it look like a link while maintaining button behavior */}
       <Button bsStyle="link">Link</Button>
     </div>
   );
