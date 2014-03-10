@@ -20,6 +20,7 @@ define(
       getDefaultProps: function () {
         return {
           bsClass: 'button',
+          bsStyle: 'default',
           type: 'button'
         };
       },
