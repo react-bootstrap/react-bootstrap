@@ -103,7 +103,6 @@ var Page = React.createClass({
                   Back to top
                   </a>
                 </div>
-
               </div>
             </div>
           </div>

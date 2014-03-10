@@ -132,58 +132,48 @@ var Button = React.createClass({displayName: 'Button',
   mixins: [BootstrapMixin],
 
   propTypes: {
-    // TODO: Uncompatable with React 0.8.0
-    //loadingChildren: React.PropTypes.renderable,
-    isLoading:   React.PropTypes.bool,
-    isActive:    React.PropTypes.bool,
-    isDisabled:    React.PropTypes.bool
+    active:   React.PropTypes.bool,
+    disabled: React.PropTypes.bool,
+    block:    React.PropTypes.bool
   },
 
   getDefaultProps: function () {
     return {
       bsClass: 'button',
-      loadingChildren: 'Loading...'
+      type: 'button'
     };
   },
 
-  renderAnchor: function (children, classes, isDisabled) {
-    return this.transferPropsTo(
-      React.DOM.a(
-        {href:this.props.href,
-        className:classSet(classes),
-        onClick:this.props.onClick,
-        disabled:isDisabled}, 
-        children
-      )
-    );
-  },
-
-  renderButton: function (children, classes, isDisabled) {
-    return this.transferPropsTo(
-      React.DOM.button(
-        {type:this.props.type || "button",
-        className:classSet(classes),
-        onClick:this.props.onClick,
-        disabled:isDisabled}, 
-        children
-      )
-    );
-  },
-
   render: function () {
-    var isDisabled = !!(this.props.isDisabled || this.props.isLoading);
-
     var classes = this.getBsClassSet();
-    classes['disabled'] = isDisabled;
-    classes['active'] = this.props.isActive;
+    classes['active'] = this.props.active;
+    classes['btn-block'] = this.props.block;
 
-    var children = this.props.isLoading ?
-      this.props.loadingChildren : this.props.children;
-
-    var renderFuncName = (this.props.href) ?
+    var renderFuncName = this.props.href ?
       'renderAnchor' : 'renderButton';
 
-    return this[renderFuncName](children, classes, isDisabled);
+    return this[renderFuncName](classes);
+  },
+
+  renderAnchor: function (classes) {
+    classes['disabled'] = this.props.disabled;
+
+    return this.transferPropsTo(
+      React.DOM.a(
+        {className:classSet(classes),
+        role:"button"}, 
+        this.props.children
+      )
+    );
+  },
+
+  renderButton: function (classes) {
+    return this.transferPropsTo(
+      React.DOM.button(
+        {className:classSet(classes)}, 
+        this.props.children
+      )
+    );
   }
 });
 
@@ -1143,6 +1133,28 @@ exports["default"] = mergeInto;
 "use strict";
 var cloneWithProps = require("./react-es6/lib/cloneWithProps")["default"];
 
+// From https://www.npmjs.org/package/extend
+var hasOwn = Object.prototype.hasOwnProperty;
+var toString = Object.prototype.toString;
+
+function isPlainObject(obj) {
+  if (!obj || toString.call(obj) !== '[object Object]' || obj.nodeType || obj.setInterval)
+    return false;
+
+  var has_own_constructor = hasOwn.call(obj, 'constructor');
+  var has_is_property_of_method = hasOwn.call(obj.constructor.prototype, 'isPrototypeOf');
+  // Not own constructor property must be Object
+  if (obj.constructor && !has_own_constructor && !has_is_property_of_method)
+    return false;
+
+  // Own properties are enumerated firstly, so to speed up,
+  // if last one is own, then all properties are own.
+  var key;
+  for ( key in obj ) {}
+
+  return key === undefined || hasOwn.call( obj, key );
+};
+
 exports["default"] = {
 
   /**
@@ -1217,6 +1229,82 @@ exports["default"] = {
    */
   cloneWithProps: function (child, props) {
     return cloneWithProps(child, props);
+  },
+
+  /**
+   * From https://www.npmjs.org/package/extend
+   * node-extend is a port of the classic extend() method from jQuery.
+   * It behaves as you expect. It is simple, tried and true.
+   *
+   * Extend one object with one or more others, returning the modified object.
+   * Keep in mind that the target object will be modified, and will be returned from extend().
+   *
+   * If a boolean true is specified as the first argument, extend performs a deep copy,
+   * recursively copying any objects it finds. Otherwise, the copy will share structure
+   * with the original object(s). Undefined properties are not copied. However, properties
+   * inherited from the object's prototype will be copied over.
+   *
+   * @example
+   * extend([deep], target, object1, [objectN])
+   *
+   * @return {object}
+   */
+  extend: function () {
+    var options, name, src, copy, copyIsArray, clone,
+        target = arguments[0] || {},
+        i = 1,
+        length = arguments.length,
+        deep = false;
+
+    // Handle a deep copy situation
+    if ( typeof target === "boolean" ) {
+      deep = target;
+      target = arguments[1] || {};
+      // skip the boolean and the target
+      i = 2;
+    }
+
+    // Handle case when target is a string or something (possible in deep copy)
+    if ( typeof target !== "object" && typeof target !== "function") {
+      target = {};
+    }
+
+    for ( ; i < length; i++ ) {
+      // Only deal with non-null/undefined values
+      if ( (options = arguments[ i ]) != null ) {
+        // Extend the base object
+        for ( name in options ) {
+          src = target[ name ];
+          copy = options[ name ];
+
+          // Prevent never-ending loop
+          if ( target === copy ) {
+            continue;
+          }
+
+          // Recurse if we're merging plain objects or arrays
+          if ( deep && copy && ( isPlainObject(copy) || (copyIsArray = Array.isArray(copy)) ) ) {
+            if ( copyIsArray ) {
+              copyIsArray = false;
+              clone = src && Array.isArray(src) ? src : [];
+
+            } else {
+              clone = src && isPlainObject(src) ? src : {};
+            }
+
+            // Never move original objects, clone them
+            target[ name ] = extend( deep, clone, copy );
+
+          // Don't bring in undefined values
+          } else if ( copy !== undefined ) {
+            target[ name ] = copy;
+          }
+        }
+      }
+    }
+
+    // Return the modified object
+    return target;
   }
 };
 },{"./react-es6/lib/cloneWithProps":17}],29:[function(require,module,exports){
@@ -1263,10 +1351,20 @@ module.exports = CSSPage;
 'use strict';
 
 var React = require('react');
+var fs = require('fs');
 
 var NavMain = require('./NavMain');
 var PageHeader = require('./PageHeader');
 var PageFooter = require('./PageFooter');
+var ReactPlayground = require('./ReactPlayground');
+
+var ButtonTypesText = "/** @jsx React.DOM */\n\nvar buttonsInstance = (\n    <div>\n      {/* Standard button */}\n      <Button bsStyle=\"default\">Default</Button>\n\n      {/* Provides extra visual weight and identifies the primary action in a set of buttons */}\n      <Button bsStyle=\"primary\">Primary</Button>\n\n      {/* Indicates a successful or positive action */}\n      <Button bsStyle=\"success\">Success</Button>\n\n      {/* Contextual button for informational alert messages */}\n      <Button bsStyle=\"info\">Info</Button>\n\n      {/* Indicates caution should be taken with this action */}\n      <Button bsStyle=\"warning\">Warning</Button>\n\n      {/* Indicates a dangerous or potentially negative action */}\n      <Button bsStyle=\"danger\">Danger</Button>\n\n      {/* Indicates a dangerous or potentially negative action */}\n      <Button bsStyle=\"link\">Link</Button>\n    </div>\n  );\n\nReact.renderComponent(buttonsInstance, mountNode);";
+var ButtonSizesText = "/** @jsx React.DOM */\n\nvar buttonsInstance = (\n    <div>\n      <p>\n        <Button bsStyle=\"primary\" bsSize=\"large\">Large button</Button>\n        <Button bsStyle=\"default\" bsSize=\"large\">Large button</Button>\n      </p>\n      <p>\n        <Button bsStyle=\"primary\">Default button</Button>\n        <Button bsStyle=\"default\">Default button</Button>\n      </p>\n      <p>\n        <Button bsStyle=\"primary\" bsSize=\"small\">Small button</Button>\n        <Button bsStyle=\"default\" bsSize=\"small\">Small button</Button>\n      </p>\n      <p>\n        <Button bsStyle=\"primary\" bsSize=\"xsmall\">Extra small button</Button>\n        <Button bsStyle=\"default\" bsSize=\"xsmall\">Extra small button</Button>\n      </p>\n    </div>\n  );\n\nReact.renderComponent(buttonsInstance, mountNode);";
+var ButtonBlockText = "/** @jsx React.DOM */\nvar wellStyles = {maxWidth: 400, margin: '0 auto 10px'};\n\nvar buttonsInstance = (\n    <div className=\"well\" style={wellStyles}>\n      <Button bsStyle=\"primary\" bsSize=\"large\" block>Block level button</Button>\n      <Button bsStyle=\"default\" bsSize=\"large\" block>Block level button</Button>\n    </div>\n  );\n\nReact.renderComponent(buttonsInstance, mountNode);";
+var ButtonActiveText = "/** @jsx React.DOM */\n\nvar buttonsInstance = (\n    <div>\n      <Button bsStyle=\"primary\" bsSize=\"large\" active>Primary button</Button>\n      <Button bsStyle=\"default\" bsSize=\"large\" active>Button</Button>\n    </div>\n  );\n\nReact.renderComponent(buttonsInstance, mountNode);";
+var ButtonDisabledText = "/** @jsx React.DOM */\n\nvar buttonsInstance = (\n    <div>\n      <Button bsStyle=\"primary\" bsSize=\"large\" disabled>Primary button</Button>\n      <Button bsStyle=\"default\" bsSize=\"large\" disabled>Button</Button>\n    </div>\n  );\n\nReact.renderComponent(buttonsInstance, mountNode);";
+var ButtonTagTypesText = "/** @jsx React.DOM */\n\nvar buttonsInstance = (\n    <div>\n      <Button href=\"#\" bsStyle=\"default\">Link</Button>\n      <Button bsStyle=\"default\">Button</Button>\n    </div>\n  );\n\nReact.renderComponent(buttonsInstance, mountNode);";
+var ButtonLoadingText = "/** @jsx React.DOM */\n\nvar LoadingButton = React.createClass({\n  getInitialState: function() {\n    return {\n      isLoading: false\n    };\n  },\n\n  render: function() {\n    var isLoading = this.state.isLoading;\n    return (\n        <Button\n          bsStyle=\"primary\"\n          disabled={isLoading}\n          onClick={!isLoading ? this.handleClick : null}>\n          {isLoading ? 'Loading...' : 'Loading state'}\n        </Button>\n      );\n  },\n\n  handleClick: function() {\n    this.setState({isLoading: true});\n\n    // This probably where you would have an `ajax` call\n    setTimeout(function() {\n\n      // Completed of async action, set loading state back\n      this.setState({isLoading: false});\n    }.bind(this), 2000);\n  }\n});\n\nReact.renderComponent(LoadingButton(), mountNode);";
 
 var ComponentsPage = React.createClass({displayName: 'ComponentsPage',
   render: function () {
@@ -1281,8 +1379,54 @@ var ComponentsPage = React.createClass({displayName: 'ComponentsPage',
           React.DOM.div( {className:"container bs-docs-container"}, 
             React.DOM.div( {className:"row"}, 
               React.DOM.div( {className:"col-md-9", role:"main"}, 
+
+                /* Buttons */
                 React.DOM.div( {className:"bs-docs-section"}, 
-                  React.DOM.h1( {className:"page-header"}, "Example Components ", React.DOM.small(null, "Example"))
+                  React.DOM.h1( {id:"buttons", className:"page-header"}, "Buttons"),
+                  React.DOM.h2( {id:"buttons-options"}, "Options"),
+                  React.DOM.p(null, "Use any of the available button style types to quickly create a styled button. Just modify the ", React.DOM.code(null, "bsStyle"), " prop."),
+                  ReactPlayground( {codeText:ButtonTypesText} ),
+
+                  React.DOM.h2( {id:"buttons-sizes"}, "Sizes"),
+                  React.DOM.p(null, "Fancy larger or smaller buttons? Add ", React.DOM.code(null, "bsSize=\"large\""),", ", React.DOM.code(null, "bsSize=\"small\""),", or ", React.DOM.code(null, "bsSize=\"xsmall\""), " for additional sizes."),
+                  ReactPlayground( {codeText:ButtonSizesText} ),
+
+                  React.DOM.p(null, "Create block level buttons—those that span the full width of a parent— by adding the ", React.DOM.code(null, "block"), " prop."),
+                  ReactPlayground( {codeText:ButtonBlockText} ),
+
+                  React.DOM.h2( {id:"buttons-active"}, "Active state"),
+                  React.DOM.p(null, "To set a buttons active state simply set the components ", React.DOM.code(null, "active"), " prop."),
+                  ReactPlayground( {codeText:ButtonActiveText} ),
+
+                  React.DOM.h2( {id:"buttons-disabled"}, "Disabled state"),
+                  React.DOM.p(null, "Make buttons look unclickable by fading them back 50%. To do this add the ", React.DOM.code(null, "disabled"), " attribute to buttons."),
+                  ReactPlayground( {codeText:ButtonDisabledText} ),
+
+                  React.DOM.div( {className:"bs-callout bs-callout-warning"}, 
+                    React.DOM.h4(null, "Event handler functionality not impacted"),
+                    React.DOM.p(null, "This prop will only change the ", React.DOM.code(null, '<Button />'),"’s appearance, not its functionality. Use custom logic to disable the effect of the ", React.DOM.code(null, "onClick"), " handlers.")
+                  ),
+
+                  React.DOM.h2( {id:"buttons-tags"}, "Button tags"),
+                  React.DOM.p(null, "The DOM element tag is choosen automaticly for you based on the props you supply. Passing a ", React.DOM.code(null, "href"), " will result in the button using a ", React.DOM.code(null, '<a />'), " element otherwise a ", React.DOM.code(null, '<button />'), " element will be used."),
+                  ReactPlayground( {codeText:ButtonTagTypesText} ),
+
+                  React.DOM.h2( {id:"buttons-tags"}, "Button loading state"),
+                  React.DOM.p(null, "When activating an asynchronous action from a button it is a good UX pattern to give the user feedback as to the loading state, this can easily be done by updating your ", React.DOM.code(null, '<Button />'),"’s props from a state change like below."),
+                  ReactPlayground( {codeText:ButtonLoadingText} )
+                )
+              ),
+
+              React.DOM.div( {className:"col-md-3"}, 
+                React.DOM.div( {className:"bs-docs-sidebar hidden-print affix-top", role:"complementary"}, 
+                  React.DOM.ul( {className:"nav bs-docs-sidenav"}, 
+                    React.DOM.li(null, 
+                      React.DOM.a( {href:"#buttons"}, "Buttons")
+                    )
+                  ),
+                  React.DOM.a( {className:"back-to-top", href:"#top"}, 
+                  " Back to top "
+                  )
                 )
               )
             )
@@ -1295,7 +1439,7 @@ var ComponentsPage = React.createClass({displayName: 'ComponentsPage',
 });
 
 module.exports = ComponentsPage;
-},{"./NavMain":34,"./PageFooter":36,"./PageHeader":37,"react":187}],31:[function(require,module,exports){
+},{"./NavMain":34,"./PageFooter":36,"./PageHeader":37,"./ReactPlayground":38,"fs":41,"react":187}],31:[function(require,module,exports){
 /** @jsx React.DOM */
 
 'use strict';
@@ -1512,7 +1656,6 @@ var Page = React.createClass({displayName: 'Page',
                   " Back to top "
                   )
                 )
-
               )
             )
           ),

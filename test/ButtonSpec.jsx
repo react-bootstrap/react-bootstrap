@@ -45,89 +45,37 @@ describe('Button', function () {
   });
 
   it('Should be disabled', function () {
-    var instance = Button({isDisabled: true}, 'Title');
+    var instance = Button({disabled: true}, 'Title');
     ReactTestUtils.renderIntoDocument(instance);
 
-    assert.ok(instance.getDOMNode().className.match(/\bdisabled\b/));
     assert.ok(instance.getDOMNode().disabled);
   });
 
-  it('Should have the default class', function () {
+  it('Should be disabled link', function () {
+    var instance = Button({disabled: true, href:'#'}, 'Title');
+    ReactTestUtils.renderIntoDocument(instance);
+
+    assert.ok(instance.getDOMNode().className.match(/\bdisabled\b/));
+  });
+
+  it('Should have block class', function () {
+    var instance = Button({block: true}, 'Title');
+    ReactTestUtils.renderIntoDocument(instance);
+
+    assert.ok(instance.getDOMNode().className.match(/\bbtn-block\b/));
+  });
+
+  it('Should apply bsStyle class', function () {
     var instance = Button({bsStyle: 'default'}, 'Title');
     ReactTestUtils.renderIntoDocument(instance);
 
     assert.ok(instance.getDOMNode().className.match(/\bbtn-default\b/));
   });
 
-  it('Should have the primary class', function () {
-    var instance = Button({bsStyle: 'primary'}, 'Title');
-    ReactTestUtils.renderIntoDocument(instance);
-
-    assert.ok(instance.getDOMNode().className.match(/\bbtn-primary\b/));
-  });
-
-  it('Should have the success class', function () {
-    var instance = Button({bsStyle: 'success'}, 'Title');
-    ReactTestUtils.renderIntoDocument(instance);
-
-    assert.ok(instance.getDOMNode().className.match(/\bbtn-success\b/));
-  });
-
-  it('Should have the info class', function () {
-    var instance = Button({bsStyle: 'info'}, 'Title');
-    ReactTestUtils.renderIntoDocument(instance);
-
-    assert.ok(instance.getDOMNode().className.match(/\bbtn-info\b/));
-  });
-
-  it('Should have the warning class', function () {
-    var instance = Button({bsStyle: 'warning'}, 'Title');
-    ReactTestUtils.renderIntoDocument(instance);
-
-    assert.ok(instance.getDOMNode().className.match(/\bbtn-warning\b/));
-  });
-
-  it('Should have the danger class', function () {
-    var instance = Button({bsStyle: 'danger'}, 'Title');
-    ReactTestUtils.renderIntoDocument(instance);
-
-    assert.ok(instance.getDOMNode().className.match(/\bbtn-danger\b/));
-  });
-
-  it('Should have the link class', function () {
-    var instance = Button({bsStyle: 'link'}, 'Title');
-    ReactTestUtils.renderIntoDocument(instance);
-
-    assert.ok(instance.getDOMNode().className.match(/\bbtn-link\b/));
-  });
-
-  it('Should have the inline class', function () {
-    var instance = Button({bsStyle: 'inline'}, 'Title');
-    ReactTestUtils.renderIntoDocument(instance);
-
-    assert.ok(instance.getDOMNode().className.match(/\bbtn-inline\b/));
-  });
-
   it('Should be active', function () {
-    var instance = Button({isActive: true}, 'Title');
+    var instance = Button({active: true}, 'Title');
     ReactTestUtils.renderIntoDocument(instance);
 
     assert.ok(instance.getDOMNode().className.match(/\bactive\b/));
-  });
-
-  it('Should be in loading state with default text', function () {
-    var instance = Button({isLoading: true}, 'Title');
-    ReactTestUtils.renderIntoDocument(instance);
-
-    assert.ok(instance.getDOMNode().className.match(/\bdisabled\b/));
-    assert.ok(instance.getDOMNode().disabled);
-    assert.equal(instance.getDOMNode().innerText, 'Loading...');
-  });
-
-  it('Should have custom loading text', function () {
-    var instance = Button({isLoading: true, loadingChildren: 'Loading, yo'}, 'Title');
-    ReactTestUtils.renderIntoDocument(instance);
-
-    assert.equal(instance.getDOMNode().innerText, 'Loading, yo');
   });
 });
