@@ -8,6 +8,8 @@ define(function (require) {
         Alert: require('../amd/Alert'),
         BootstrapMixin: require('../amd/BootstrapMixin'),
         Button: require('../amd/Button'),
+        ButtonGroup: require('../amd/ButtonGroup'),
+        ButtonToolbar: require('../amd/ButtonToolbar'),
         DangerMixin: require('../amd/DangerMixin'),
         DefaultMixin: require('../amd/DefaultMixin'),
         DropdownButton: require('../amd/DropdownButton'),

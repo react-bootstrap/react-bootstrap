@@ -7,6 +7,7 @@ define(
             'column': 'col',
             'button': 'btn',
             'button-group': 'btn-group',
+            'button-toolbar': 'btn-toolbar',
             'label': 'label',
             'alert': 'alert',
             'input-group': 'input-group',
