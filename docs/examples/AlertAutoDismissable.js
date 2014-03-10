@@ -18,7 +18,7 @@ var AlertAutoDismissable = React.createClass({
     }
 
     return (
-      <Button bsStyle="default" onClick={this.handleAlertShow}>Show Alert</Button>
+      <Button onClick={this.handleAlertShow}>Show Alert</Button>
       );
   },
 

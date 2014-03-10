@@ -17,6 +17,7 @@ var Button = React.createClass({displayName: 'Button',
   getDefaultProps: function () {
     return {
       bsClass: 'button',
+      bsStyle: 'default',
       type: 'button'
     };
   },

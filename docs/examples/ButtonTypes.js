@@ -3,7 +3,7 @@
 var buttonsInstance = (
     <div>
       {/* Standard button */}
-      <Button bsStyle="default">Default</Button>
+      <Button>Default</Button>
 
       {/* Provides extra visual weight and identifies the primary action in a set of buttons */}
       <Button bsStyle="primary">Primary</Button>

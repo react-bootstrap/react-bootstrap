@@ -66,10 +66,17 @@ describe('Button', function () {
   });
 
   it('Should apply bsStyle class', function () {
+    var instance = Button({bsStyle: 'danger'}, 'Title');
+    ReactTestUtils.renderIntoDocument(instance);
+
+    assert.ok(instance.getDOMNode().className.match(/\bbtn-danger\b/));
+  });
+
+  it('Should default to bsStyle="default"', function () {
     var instance = Button({bsStyle: 'default'}, 'Title');
     ReactTestUtils.renderIntoDocument(instance);
 
-    assert.ok(instance.getDOMNode().className.match(/\bbtn-default\b/));
+    assert.equal(instance.props.bsStyle, 'default');
   });
 
   it('Should be active', function () {
