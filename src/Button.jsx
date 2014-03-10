@@ -8,58 +8,48 @@ var Button = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
-    // TODO: Uncompatable with React 0.8.0
-    //loadingChildren: React.PropTypes.renderable,
-    isLoading:   React.PropTypes.bool,
-    isActive:    React.PropTypes.bool,
-    isDisabled:    React.PropTypes.bool
+    active:   React.PropTypes.bool,
+    disabled: React.PropTypes.bool,
+    block:    React.PropTypes.bool
   },
 
   getDefaultProps: function () {
     return {
       bsClass: 'button',
-      loadingChildren: 'Loading...'
+      type: 'button'
     };
   },
 
-  renderAnchor: function (children, classes, isDisabled) {
+  render: function () {
+    var classes = this.getBsClassSet();
+    classes['active'] = this.props.active;
+    classes['btn-block'] = this.props.block;
+
+    var renderFuncName = this.props.href ?
+      'renderAnchor' : 'renderButton';
+
+    return this[renderFuncName](classes);
+  },
+
+  renderAnchor: function (classes) {
+    classes['disabled'] = this.props.disabled;
+
     return this.transferPropsTo(
       <a
-        href={this.props.href}
         className={classSet(classes)}
-        onClick={this.props.onClick}
-        disabled={isDisabled}>
-        {children}
+        role="button">
+        {this.props.children}
       </a>
     );
   },
 
-  renderButton: function (children, classes, isDisabled) {
+  renderButton: function (classes) {
     return this.transferPropsTo(
       <button
-        type={this.props.type || "button"}
-        className={classSet(classes)}
-        onClick={this.props.onClick}
-        disabled={isDisabled}>
-        {children}
+        className={classSet(classes)}>
+        {this.props.children}
       </button>
     );
-  },
-
-  render: function () {
-    var isDisabled = !!(this.props.isDisabled || this.props.isLoading);
-
-    var classes = this.getBsClassSet();
-    classes['disabled'] = isDisabled;
-    classes['active'] = this.props.isActive;
-
-    var children = this.props.isLoading ?
-      this.props.loadingChildren : this.props.children;
-
-    var renderFuncName = (this.props.href) ?
-      'renderAnchor' : 'renderButton';
-
-    return this[renderFuncName](children, classes, isDisabled);
   }
 });
 
