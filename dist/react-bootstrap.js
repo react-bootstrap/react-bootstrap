@@ -1695,30 +1695,63 @@ define('../amd/DefaultMixin',['./transpiled/DefaultMixin'], function (DefaultMix
   return DefaultMixin.default;
 });
 define(
-  '../amd/transpiled/DropdownButton',["./react-es6","./react-es6/lib/cx","./Button","./BootstrapMixin","./utils","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
+  '../amd/transpiled/DropdownMenu',["./react-es6","./react-es6/lib/cx","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
+
+    var DropdownMenu = React.createClass({displayName: 'DropdownMenu',
+      propTypes: {
+        right: React.PropTypes.bool
+      },
+
+      render: function () {
+        var classes = {
+            'dropdown-menu': true,
+            'dropdown-menu-right': this.props.right
+          };
+
+        return this.transferPropsTo(
+          React.DOM.ul(
+            {className:classSet(classes),
+            role:"menu"}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = DropdownMenu;
+  });
+define(
+  '../amd/transpiled/DropdownButton',["./react-es6","./react-es6/lib/cx","./Button","./DropdownMenu","./BootstrapMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
+    
+    /** @jsx React.DOM */
+    /* global document */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
     var Button = __dependency3__["default"];
-    var BootstrapMixin = __dependency4__["default"];
-    var utils = __dependency5__["default"];
+    var DropdownMenu = __dependency4__["default"];
+    var BootstrapMixin = __dependency5__["default"];
+    var utils = __dependency6__["default"];
 
 
     var DropdownButton = React.createClass({displayName: 'DropdownButton',
       mixins: [BootstrapMixin],
 
+      propTypes: {
+        dropup: React.PropTypes.bool,
+        right: React.PropTypes.bool
+      },
+
       getInitialState: function () {
         return {
           open: false
-        };
-      },
-
-      getDefaultProps: function () {
-        return {
-          options: []
         };
       },
 
@@ -1737,7 +1770,7 @@ define(
         });
       },
 
-      handleClick: function (e) {
+      handleClick: function () {
         this.toggle();
       },
 
@@ -1745,8 +1778,6 @@ define(
         if (typeof this.props.onSelect === 'function') {
           this.props.onSelect(key);
         }
-
-        this.toggle(false);
       },
 
       handleKeyUp: function (e) {
@@ -1755,16 +1786,10 @@ define(
         }
       },
 
-      handleClickOutside: function (e) {
+      handleClickOutside: function () {
         if (!this._clickedInside) {
           this.toggle(false);
         }
-        delete this._clickedInside;
-      },
-
-      killClick: function (e) {
-        // e.stopPropagation() doesn't prevent `handleClickOutside` from being called
-        this._clickedInside = true;
       },
 
       bindCloseHandlers: function () {
@@ -1784,7 +1809,8 @@ define(
       render: function () {
         var groupClassName = classSet({
             'btn-group': true,
-            'open': this.state.open
+            'open': this.state.open,
+            'dropup': this.props.dropup
           });
 
         var button = this.transferPropsTo(
@@ -1799,12 +1825,10 @@ define(
         return (
           React.DOM.div( {className:groupClassName}, 
             button,
-            React.DOM.ul(
-              {className:"dropdown-menu",
-              role:"menu",
-              ref:"menu",
+            DropdownMenu(
+              {ref:"menu",
               'aria-labelledby':this.props.id,
-              onClick:this.killClick}, 
+              right:this.props.right}, 
               utils.modifyChildren(this.props.children, this.renderMenuItem)
             )
           )
@@ -1827,6 +1851,9 @@ define(
   });
 define('../amd/DropdownButton',['./transpiled/DropdownButton'], function (DropdownButton) {
   return DropdownButton.default;
+});
+define('../amd/DropdownMenu',['./transpiled/DropdownMenu'], function (DropdownMenu) {
+  return DropdownMenu.default;
 });
 define(
   '../amd/transpiled/FadeMixin',["./react-es6","exports"],
@@ -2889,20 +2916,26 @@ define('../amd/SmallMixin',['./transpiled/SmallMixin'], function (SmallMixin) {
   return SmallMixin.default;
 });
 define(
-  '../amd/transpiled/SplitButton',["./react-es6","./react-es6/lib/cx","./Button","./BootstrapMixin","./utils","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
+  '../amd/transpiled/SplitButton',["./react-es6","./react-es6/lib/cx","./Button","./DropdownMenu","./BootstrapMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
     
     /** @jsx React.DOM */
+    /* global document */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
     var Button = __dependency3__["default"];
-    var BootstrapMixin = __dependency4__["default"];
-    var utils = __dependency5__["default"];
+    var DropdownMenu = __dependency4__["default"];
+    var BootstrapMixin = __dependency5__["default"];
+    var utils = __dependency6__["default"];
 
 
     var SplitButton = React.createClass({displayName: 'SplitButton',
       mixins: [BootstrapMixin],
+
+      propTypes: {
+        right: React.PropTypes.bool
+      },
 
       getInitialState: function () {
         return {
@@ -2912,7 +2945,6 @@ define(
 
       getDefaultProps: function () {
         return {
-          options: [],
           dropdownTitle: 'Toggle dropdown'
         };
       },
@@ -2938,7 +2970,7 @@ define(
         }
       },
 
-      handleDropdownClick: function (e) {
+      handleDropdownClick: function () {
         this.toggle();
       },
 
@@ -2956,17 +2988,10 @@ define(
         }
       },
 
-      handleClickOutside: function (e) {
+      handleClickOutside: function () {
         if (!this._clickedInside) {
           this.toggle(false);
         }
-
-        delete this._clickedInside;
-      },
-
-      killClick: function (e) {
-        // e.stopPropagation() doesn't prevent `handleClickOutside` from being called
-        this._clickedInside = true;
       },
 
       bindCloseHandlers: function () {
@@ -2986,7 +3011,8 @@ define(
       render: function () {
         var groupClassName = classSet({
             'btn-group': true,
-            'open': this.state.open
+            'open': this.state.open,
+            'dropup': this.props.dropup
           });
 
         var button = this.transferPropsTo(
@@ -3010,13 +3036,10 @@ define(
           React.DOM.div( {className:groupClassName}, 
             button,
             dropdownButton,
-            React.DOM.ul(
-              {className:"dropdown-menu",
-              role:"menu",
-              ref:"menu",
+            DropdownMenu(
+              {ref:"menu",
               'aria-labelledby':this.props.id,
-              onClick:this.killClick}
-            , 
+              right:this.props.right}, 
               utils.modifyChildren(this.props.children, this.renderMenuItem)
             )
           )
@@ -3216,7 +3239,7 @@ define('../amd/XSmallMixin',['./transpiled/XSmallMixin'], function (XSmallMixin)
 });
 /*global define */
 
-define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/ButtonGroup','../amd/ButtonToolbar','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/FadeMixin','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/OverlayTrigger','../amd/OverlayTriggerMixin','../amd/Panel','../amd/PanelGroup','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
+define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/ButtonGroup','../amd/ButtonToolbar','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/DropdownMenu','../amd/FadeMixin','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/OverlayTrigger','../amd/OverlayTriggerMixin','../amd/Panel','../amd/PanelGroup','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
     
 
     return {
@@ -3229,6 +3252,7 @@ define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/Bo
         DangerMixin: require('../amd/DangerMixin'),
         DefaultMixin: require('../amd/DefaultMixin'),
         DropdownButton: require('../amd/DropdownButton'),
+        DropdownMenu: require('../amd/DropdownMenu'),
         FadeMixin: require('../amd/FadeMixin'),
         InfoMixin: require('../amd/InfoMixin'),
         InlineMixin: require('../amd/InlineMixin'),

@@ -1,14 +1,20 @@
 /** @jsx React.DOM */
+/* global document */
 
 import React          from './react-es6';
 import classSet       from './react-es6/lib/cx';
 import Button         from './Button';
+import DropdownMenu   from './DropdownMenu';
 import BootstrapMixin from './BootstrapMixin';
 import utils          from './utils';
 
 
 var SplitButton = React.createClass({
   mixins: [BootstrapMixin],
+
+  propTypes: {
+    right: React.PropTypes.bool
+  },
 
   getInitialState: function () {
     return {
@@ -18,7 +24,6 @@ var SplitButton = React.createClass({
 
   getDefaultProps: function () {
     return {
-      options: [],
       dropdownTitle: 'Toggle dropdown'
     };
   },
@@ -44,7 +49,7 @@ var SplitButton = React.createClass({
     }
   },
 
-  handleDropdownClick: function (e) {
+  handleDropdownClick: function () {
     this.toggle();
   },
 
@@ -62,17 +67,10 @@ var SplitButton = React.createClass({
     }
   },
 
-  handleClickOutside: function (e) {
+  handleClickOutside: function () {
     if (!this._clickedInside) {
       this.toggle(false);
     }
-
-    delete this._clickedInside;
-  },
-
-  killClick: function (e) {
-    // e.stopPropagation() doesn't prevent `handleClickOutside` from being called
-    this._clickedInside = true;
   },
 
   bindCloseHandlers: function () {
@@ -92,7 +90,8 @@ var SplitButton = React.createClass({
   render: function () {
     var groupClassName = classSet({
         'btn-group': true,
-        'open': this.state.open
+        'open': this.state.open,
+        'dropup': this.props.dropup
       });
 
     var button = this.transferPropsTo(
@@ -116,15 +115,12 @@ var SplitButton = React.createClass({
       <div className={groupClassName}>
         {button}
         {dropdownButton}
-        <ul
-          className="dropdown-menu"
-          role="menu"
+        <DropdownMenu
           ref="menu"
           aria-labelledby={this.props.id}
-          onClick={this.killClick}
-        >
+          right={this.props.right}>
           {utils.modifyChildren(this.props.children, this.renderMenuItem)}
-        </ul>
+        </DropdownMenu>
       </div>
     );
   },

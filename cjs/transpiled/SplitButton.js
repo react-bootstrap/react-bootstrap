@@ -1,15 +1,21 @@
 "use strict";
 /** @jsx React.DOM */
+/* global document */
 
 var React = require("./react-es6")["default"];
 var classSet = require("./react-es6/lib/cx")["default"];
 var Button = require("./Button")["default"];
+var DropdownMenu = require("./DropdownMenu")["default"];
 var BootstrapMixin = require("./BootstrapMixin")["default"];
 var utils = require("./utils")["default"];
 
 
 var SplitButton = React.createClass({displayName: 'SplitButton',
   mixins: [BootstrapMixin],
+
+  propTypes: {
+    right: React.PropTypes.bool
+  },
 
   getInitialState: function () {
     return {
@@ -19,7 +25,6 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
 
   getDefaultProps: function () {
     return {
-      options: [],
       dropdownTitle: 'Toggle dropdown'
     };
   },
@@ -45,7 +50,7 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
     }
   },
 
-  handleDropdownClick: function (e) {
+  handleDropdownClick: function () {
     this.toggle();
   },
 
@@ -63,17 +68,10 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
     }
   },
 
-  handleClickOutside: function (e) {
+  handleClickOutside: function () {
     if (!this._clickedInside) {
       this.toggle(false);
     }
-
-    delete this._clickedInside;
-  },
-
-  killClick: function (e) {
-    // e.stopPropagation() doesn't prevent `handleClickOutside` from being called
-    this._clickedInside = true;
   },
 
   bindCloseHandlers: function () {
@@ -93,7 +91,8 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
   render: function () {
     var groupClassName = classSet({
         'btn-group': true,
-        'open': this.state.open
+        'open': this.state.open,
+        'dropup': this.props.dropup
       });
 
     var button = this.transferPropsTo(
@@ -117,13 +116,10 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
       React.DOM.div( {className:groupClassName}, 
         button,
         dropdownButton,
-        React.DOM.ul(
-          {className:"dropdown-menu",
-          role:"menu",
-          ref:"menu",
+        DropdownMenu(
+          {ref:"menu",
           'aria-labelledby':this.props.id,
-          onClick:this.killClick}
-        , 
+          right:this.props.right}, 
           utils.modifyChildren(this.props.children, this.renderMenuItem)
         )
       )

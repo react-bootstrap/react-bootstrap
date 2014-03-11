@@ -1,28 +1,29 @@
 define(
-  ["./react-es6","./react-es6/lib/cx","./Button","./BootstrapMixin","./utils","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
+  ["./react-es6","./react-es6/lib/cx","./Button","./DropdownMenu","./BootstrapMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
+    /* global document */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
     var Button = __dependency3__["default"];
-    var BootstrapMixin = __dependency4__["default"];
-    var utils = __dependency5__["default"];
+    var DropdownMenu = __dependency4__["default"];
+    var BootstrapMixin = __dependency5__["default"];
+    var utils = __dependency6__["default"];
 
 
     var DropdownButton = React.createClass({displayName: 'DropdownButton',
       mixins: [BootstrapMixin],
 
+      propTypes: {
+        dropup: React.PropTypes.bool,
+        right: React.PropTypes.bool
+      },
+
       getInitialState: function () {
         return {
           open: false
-        };
-      },
-
-      getDefaultProps: function () {
-        return {
-          options: []
         };
       },
 
@@ -41,7 +42,7 @@ define(
         });
       },
 
-      handleClick: function (e) {
+      handleClick: function () {
         this.toggle();
       },
 
@@ -49,8 +50,6 @@ define(
         if (typeof this.props.onSelect === 'function') {
           this.props.onSelect(key);
         }
-
-        this.toggle(false);
       },
 
       handleKeyUp: function (e) {
@@ -59,16 +58,10 @@ define(
         }
       },
 
-      handleClickOutside: function (e) {
+      handleClickOutside: function () {
         if (!this._clickedInside) {
           this.toggle(false);
         }
-        delete this._clickedInside;
-      },
-
-      killClick: function (e) {
-        // e.stopPropagation() doesn't prevent `handleClickOutside` from being called
-        this._clickedInside = true;
       },
 
       bindCloseHandlers: function () {
@@ -88,7 +81,8 @@ define(
       render: function () {
         var groupClassName = classSet({
             'btn-group': true,
-            'open': this.state.open
+            'open': this.state.open,
+            'dropup': this.props.dropup
           });
 
         var button = this.transferPropsTo(
@@ -103,12 +97,10 @@ define(
         return (
           React.DOM.div( {className:groupClassName}, 
             button,
-            React.DOM.ul(
-              {className:"dropdown-menu",
-              role:"menu",
-              ref:"menu",
+            DropdownMenu(
+              {ref:"menu",
               'aria-labelledby':this.props.id,
-              onClick:this.killClick}, 
+              right:this.props.right}, 
               utils.modifyChildren(this.props.children, this.renderMenuItem)
             )
           )

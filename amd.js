@@ -13,6 +13,7 @@ define(function (require) {
         DangerMixin: require('../amd/DangerMixin'),
         DefaultMixin: require('../amd/DefaultMixin'),
         DropdownButton: require('../amd/DropdownButton'),
+        DropdownMenu: require('../amd/DropdownMenu'),
         FadeMixin: require('../amd/FadeMixin'),
         InfoMixin: require('../amd/InfoMixin'),
         InlineMixin: require('../amd/InlineMixin'),

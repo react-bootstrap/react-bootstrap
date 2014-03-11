@@ -1,9 +1,11 @@
 "use strict";
 /** @jsx React.DOM */
+/* global document */
 
 var React = require("./react-es6")["default"];
 var classSet = require("./react-es6/lib/cx")["default"];
 var Button = require("./Button")["default"];
+var DropdownMenu = require("./DropdownMenu")["default"];
 var BootstrapMixin = require("./BootstrapMixin")["default"];
 var utils = require("./utils")["default"];
 
@@ -11,15 +13,14 @@ var utils = require("./utils")["default"];
 var DropdownButton = React.createClass({displayName: 'DropdownButton',
   mixins: [BootstrapMixin],
 
+  propTypes: {
+    dropup: React.PropTypes.bool,
+    right: React.PropTypes.bool
+  },
+
   getInitialState: function () {
     return {
       open: false
-    };
-  },
-
-  getDefaultProps: function () {
-    return {
-      options: []
     };
   },
 
@@ -38,7 +39,7 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
     });
   },
 
-  handleClick: function (e) {
+  handleClick: function () {
     this.toggle();
   },
 
@@ -46,8 +47,6 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
     if (typeof this.props.onSelect === 'function') {
       this.props.onSelect(key);
     }
-
-    this.toggle(false);
   },
 
   handleKeyUp: function (e) {
@@ -56,16 +55,10 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
     }
   },
 
-  handleClickOutside: function (e) {
+  handleClickOutside: function () {
     if (!this._clickedInside) {
       this.toggle(false);
     }
-    delete this._clickedInside;
-  },
-
-  killClick: function (e) {
-    // e.stopPropagation() doesn't prevent `handleClickOutside` from being called
-    this._clickedInside = true;
   },
 
   bindCloseHandlers: function () {
@@ -85,7 +78,8 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
   render: function () {
     var groupClassName = classSet({
         'btn-group': true,
-        'open': this.state.open
+        'open': this.state.open,
+        'dropup': this.props.dropup
       });
 
     var button = this.transferPropsTo(
@@ -100,12 +94,10 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
     return (
       React.DOM.div( {className:groupClassName}, 
         button,
-        React.DOM.ul(
-          {className:"dropdown-menu",
-          role:"menu",
-          ref:"menu",
+        DropdownMenu(
+          {ref:"menu",
           'aria-labelledby':this.props.id,
-          onClick:this.killClick}, 
+          right:this.props.right}, 
           utils.modifyChildren(this.props.children, this.renderMenuItem)
         )
       )

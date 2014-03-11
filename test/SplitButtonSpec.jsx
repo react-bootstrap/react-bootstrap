@@ -111,6 +111,28 @@ describe('SplitButton', function () {
     ReactTestUtils.Simulate.click(instance.refs.menu.props.children[0].getDOMNode().firstChild);
   });
 
+  it('Should have dropup class', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+        <SplitButton title="Title" dropdownTitle="New title" dropup>
+          <MenuItem key="1">MenuItem 1 content</MenuItem>
+          <MenuItem key="2">MenuItem 2 content</MenuItem>
+        </SplitButton>
+    );
+
+    assert.ok(instance.getDOMNode().className.match(/\bdropup\b/));
+  });
+
+  it('Should pass right prop to menu', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+        <SplitButton title="Title" dropdownTitle="New title" right>
+          <MenuItem key="1">MenuItem 1 content</MenuItem>
+          <MenuItem key="2">MenuItem 2 content</MenuItem>
+        </SplitButton>
+    );
+
+    assert.ok(instance.refs.menu.props.right);
+  });
+
   describe('when open', function () {
     var instance;
 
