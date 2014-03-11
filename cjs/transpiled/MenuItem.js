@@ -4,7 +4,12 @@
 var React = require("./react-es6")["default"];
 
 var MenuItem = React.createClass({displayName: 'MenuItem',
-  handleClick: function (e) {
+  propTypes: {
+    header: React.PropTypes.bool,
+    divider: React.PropTypes.bool
+  },
+
+  handleClick: function () {
     if (typeof this.props.onSelect === 'function') {
       this.props.onSelect(this.props.key);
     }
@@ -22,10 +27,10 @@ var MenuItem = React.createClass({displayName: 'MenuItem',
     var className = null;
     var children = null;
 
-    if (this.props.bsVariation === 'header') {
+    if (this.props.header) {
       children = this.props.children;
       className = 'dropdown-header';
-    } else if (this.props.bsVariation === 'divider') {
+    } else if (this.props.divider) {
       className = 'divider';
     } else {
       children = this.renderAnchor();

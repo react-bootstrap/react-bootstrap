@@ -46,7 +46,7 @@ describe('MenuItem', function () {
 
   it('should be a divider with no children', function () {
     var instance = MenuItem({
-      bsVariation: 'divider'
+      divider: true
     }, 'Title');
     ReactTestUtils.renderIntoDocument(instance);
 
@@ -56,7 +56,7 @@ describe('MenuItem', function () {
 
   it('should be a header with no anchor', function () {
     var instance = MenuItem({
-      bsVariation: 'header'
+      header: true
     }, 'Title');
     ReactTestUtils.renderIntoDocument(instance);
 
