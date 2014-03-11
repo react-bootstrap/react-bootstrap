@@ -33,9 +33,9 @@ describe('Nav', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-tabs'));
   });
 
-  it('Should adds variation class', function () {
+  it('Should adds stacked variation class', function () {
     var instance = (
-        <Nav bsStyle="tabs" bsVariation="stacked" activeKey={1}>
+        <Nav bsStyle="tabs" stacked activeKey={1}>
           <NavItem key={1} ref="item1">Tab 1 content</NavItem>
           <NavItem key={2} ref="item2">Tab 2 content</NavItem>
         </Nav>
@@ -43,6 +43,18 @@ describe('Nav', function () {
 
     ReactTestUtils.renderIntoDocument(instance);
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-stacked'));
+  });
+
+  it('Should adds variation class', function () {
+    var instance = (
+        <Nav bsStyle="tabs" justified activeKey={1}>
+          <NavItem key={1} ref="item1">Tab 1 content</NavItem>
+          <NavItem key={2} ref="item2">Tab 2 content</NavItem>
+        </Nav>
+      );
+
+    ReactTestUtils.renderIntoDocument(instance);
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-justified'));
   });
 
   it('Should call on select when item is selected', function (done) {

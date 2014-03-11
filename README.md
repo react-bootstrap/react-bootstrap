@@ -87,7 +87,7 @@ function handleSelect (selectedKey) {
   key = selectedKey;
 }
 
-<Nav bsStyle="[tabs|pills]" bsVariation="[stacked|justified]" activeKey={key} onSelect={handleSelect}>
+<Nav bsStyle="[tabs|pills]" stacked justified activeKey={key} onSelect={handleSelect}>
   <NavItem key={1} href="/home">NavItem 1 content</NavItem>
   <NavItem key={2} title="Item">NavItem 2 content</NavItem>
   <NavItem key={3} disabled={true}>NavItem 3 content</NavItem>
@@ -140,7 +140,9 @@ var MenuItem = require('react-bootstrap/MenuItem');
 function handleSelect (key) {
 }
 
-<MenuItem key={1} bsVariation="[divider|header]" onSelect={handleSelect}>Content</MenuItem>
+<MenuItem key={2} header>Header</MenuItem>
+<MenuItem key={1} onSelect={handleSelect}>Content</MenuItem>
+<MenuItem key={2} divider>Header</MenuItem>
 ```
 
 ### <a name="Tabs"></a>Tabs

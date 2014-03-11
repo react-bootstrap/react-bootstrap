@@ -11,7 +11,8 @@ var Nav = React.createClass({
 
   propTypes: {
     bsStyle: React.PropTypes.oneOf(['tabs','pills']).isRequired,
-    bsVariation: React.PropTypes.oneOf(['stacked','justified']),
+    stacked: React.PropTypes.bool,
+    justified: React.PropTypes.bool,
     onSelect: React.PropTypes.func
   },
 
@@ -23,6 +24,9 @@ var Nav = React.createClass({
 
   render: function () {
     var classes = this.getBsClassSet();
+
+    classes['nav-stacked'] = this.props.stacked;
+    classes['nav-justified'] = this.props.justified;
 
     return this.transferPropsTo(
       <nav>

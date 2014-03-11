@@ -160,12 +160,5 @@ describe('BootstrapMixin', function () {
       );
       assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-xs': true});
     });
-
-    it('should return "btn btn-variation"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
-        Component({bsClass: 'button', bsVariation: 'variation'}, 'content')
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-variation': true});
-    });
   });
 });

@@ -449,8 +449,7 @@ define(
       propTypes: {
         bsClass: React.PropTypes.oneOf(Object.keys(constants.CLASSES)),
         bsStyle: React.PropTypes.oneOf(Object.keys(constants.STYLES)),
-        bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES)),
-        bsVariation: React.PropTypes.string
+        bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES))
       },
 
       getBsClassSet: function () {
@@ -470,10 +469,6 @@ define(
           var bsStyle = this.props.bsStyle && constants.STYLES[this.props.bsStyle];
           if (this.props.bsStyle) {
             classes[prefix + bsStyle] = true;
-          }
-
-          if (this.props.bsVariation) {
-            classes[prefix + this.props.bsVariation] = true;
           }
         }
 
@@ -2250,7 +2245,8 @@ define(
 
       propTypes: {
         bsStyle: React.PropTypes.oneOf(['tabs','pills']).isRequired,
-        bsVariation: React.PropTypes.oneOf(['stacked','justified']),
+        stacked: React.PropTypes.bool,
+        justified: React.PropTypes.bool,
         onSelect: React.PropTypes.func
       },
 
@@ -2262,6 +2258,9 @@ define(
 
       render: function () {
         var classes = this.getBsClassSet();
+
+        classes['nav-stacked'] = this.props.stacked;
+        classes['nav-justified'] = this.props.justified;
 
         return this.transferPropsTo(
           React.DOM.nav(null, 
