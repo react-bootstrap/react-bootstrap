@@ -1,3 +1,7 @@
 .CodeMirror {
 	height: auto;
 }
+
+.bs-example .btn-toolbar + .btn-toolbar {
+    margin-top: 10px;
+}

@@ -407,6 +407,7 @@ define(
             'column': 'col',
             'button': 'btn',
             'button-group': 'btn-group',
+            'button-toolbar': 'btn-toolbar',
             'label': 'label',
             'alert': 'alert',
             'input-group': 'input-group',
@@ -1585,6 +1586,88 @@ define(
   });
 define('../amd/Button',['./transpiled/Button'], function (Button) {
   return Button.default;
+});
+define(
+  '../amd/transpiled/ButtonGroup',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./Button","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var Button = __dependency4__["default"];
+
+    var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        vertical:  React.PropTypes.bool,
+        justified: React.PropTypes.bool
+      },
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'button-group'
+        };
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+        classes['btn-group-vertical'] = this.props.vertical;
+        classes['btn-group-justified'] = this.props.justified;
+
+        return this.transferPropsTo(
+          React.DOM.div(
+            {className:classSet(classes)}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = ButtonGroup;
+  });
+define('../amd/ButtonGroup',['./transpiled/ButtonGroup'], function (ButtonGroup) {
+  return ButtonGroup.default;
+});
+define(
+  '../amd/transpiled/ButtonToolbar',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./Button","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var Button = __dependency4__["default"];
+
+    var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
+      mixins: [BootstrapMixin],
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'button-toolbar'
+        };
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+
+        return this.transferPropsTo(
+          React.DOM.div(
+            {role:"toolbar",
+            className:classSet(classes)}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = ButtonGroup;
+  });
+define('../amd/ButtonToolbar',['./transpiled/ButtonToolbar'], function (ButtonToolbar) {
+  return ButtonToolbar.default;
 });
 define(
   '../amd/transpiled/DangerMixin',["exports"],
@@ -3127,7 +3210,7 @@ define('../amd/XSmallMixin',['./transpiled/XSmallMixin'], function (XSmallMixin)
 });
 /*global define */
 
-define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/FadeMixin','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/OverlayTrigger','../amd/OverlayTriggerMixin','../amd/Panel','../amd/PanelGroup','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
+define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/ButtonGroup','../amd/ButtonToolbar','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/FadeMixin','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/OverlayTrigger','../amd/OverlayTriggerMixin','../amd/Panel','../amd/PanelGroup','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
     
 
     return {
@@ -3135,6 +3218,8 @@ define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/Bo
         Alert: require('../amd/Alert'),
         BootstrapMixin: require('../amd/BootstrapMixin'),
         Button: require('../amd/Button'),
+        ButtonGroup: require('../amd/ButtonGroup'),
+        ButtonToolbar: require('../amd/ButtonToolbar'),
         DangerMixin: require('../amd/DangerMixin'),
         DefaultMixin: require('../amd/DefaultMixin'),
         DropdownButton: require('../amd/DropdownButton'),
