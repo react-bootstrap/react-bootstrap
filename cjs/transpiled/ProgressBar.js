@@ -13,7 +13,9 @@ var ProgressBar = React.createClass({displayName: 'ProgressBar',
         min: React.PropTypes.number,
         now: React.PropTypes.number,
         max: React.PropTypes.number,
-        text: React.PropTypes.string
+        text: React.PropTypes.string,
+        striped: React.PropTypes.bool,
+        active: React.PropTypes.bool
     },
 
     mixins: [BootstrapMixin],
@@ -35,10 +37,10 @@ var ProgressBar = React.createClass({displayName: 'ProgressBar',
                 progress: true
             };
 
-        if (this.props.bsVariation === 'active') {
+        if (this.props.active) {
             classes['progress-striped'] = true;
             classes['active'] = true;
-        } else if (this.props.bsVariation === 'striped') {
+        } else if (this.props.striped) {
             classes['progress-striped'] = true;
         }
 

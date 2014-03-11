@@ -299,7 +299,8 @@ var ProgressBar = require('react-bootstrap/ProgressBar');
   max={100}
   now={20}
   bsStyle="danger"
-  bsVariation="[striped|active]"
+  striped=true|false
+  active=true|false
   text="%(percent)s% complete (%(bsStyle)s)"
 />
 ```

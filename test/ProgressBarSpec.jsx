@@ -134,7 +134,7 @@ describe('ProgressBar', function () {
 
   it('Should show striped bar', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-      ProgressBar({min: 1, max:11, now: 6, bsVariation: 'striped'})
+      ProgressBar({min: 1, max:11, now: 6, striped: true})
     );
 
     assert.ok(instance.getDOMNode().className.match(/\bprogress-striped\b/));
@@ -142,7 +142,7 @@ describe('ProgressBar', function () {
 
   it('Should show animated striped bar', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-      ProgressBar({min: 1, max:11, now: 6, bsVariation: 'active'})
+      ProgressBar({min: 1, max:11, now: 6, active: true})
     );
 
     assert.ok(instance.getDOMNode().className.match(/\bprogress-striped\b/));
