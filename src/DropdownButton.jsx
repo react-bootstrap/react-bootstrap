@@ -1,11 +1,9 @@
 /** @jsx React.DOM */
-/* global document */
 
 import React              from './react-es6';
 import classSet           from './react-es6/lib/cx';
 import BootstrapMixin     from './BootstrapMixin';
 import DropdownStateMixin from './DropdownStateMixin';
-import utils              from './utils';
 import Button             from './Button';
 import ButtonGroup        from './ButtonGroup';
 import DropdownMenu       from './DropdownMenu';
@@ -15,7 +13,7 @@ var DropdownButton = React.createClass({
   mixins: [BootstrapMixin, DropdownStateMixin],
 
   propTypes: {
-    right:    React.PropTypes.bool,
+    pullRight:    React.PropTypes.bool,
     title:    React.PropTypes.string,
     href:     React.PropTypes.string,
     onClick:  React.PropTypes.func,
@@ -46,7 +44,7 @@ var DropdownButton = React.createClass({
           ref="menu"
           aria-labelledby={this.props.id}
           onSelect={this.handleOptionSelect}
-          right={this.props.right}>
+          pullRight={this.props.pullRight}>
           {this.props.children}
         </DropdownMenu>
       </ButtonGroup>

@@ -6,14 +6,14 @@ import utils          from './utils';
 
 var DropdownMenu = React.createClass({
   propTypes: {
-    right: React.PropTypes.bool,
+    pullRight: React.PropTypes.bool,
     onSelect: React.PropTypes.func
   },
 
   render: function () {
     var classes = {
         'dropdown-menu': true,
-        'dropdown-menu-right': this.props.right
+        'dropdown-menu-right': this.props.pullRight
       };
 
     return this.transferPropsTo(

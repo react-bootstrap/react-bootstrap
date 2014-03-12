@@ -15,7 +15,7 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
   mixins: [BootstrapMixin, DropdownStateMixin],
 
   propTypes: {
-    right:         React.PropTypes.bool,
+    pullRight:         React.PropTypes.bool,
     title:         React.PropTypes.renderable,
     href:          React.PropTypes.string,
     dropdownTitle: React.PropTypes.renderable,
@@ -60,7 +60,7 @@ var SplitButton = React.createClass({displayName: 'SplitButton',
           {ref:"menu",
           onSelect:this.handleOptionSelect,
           'aria-labelledby':this.props.id,
-          right:this.props.right}, 
+          pullRight:this.props.pullRight}, 
           this.props.children
         )
       )

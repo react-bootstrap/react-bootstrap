@@ -148,7 +148,7 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={SplitButtonDropupText} />
 
                   <h3 id="btn-dropdowns-right">Dropdown right variation</h3>
-                  <p>Trigger dropdown menus that align to the right of the button using the <code>right</code> prop.</p>
+                  <p>Trigger dropdown menus that align to the right of the button using the <code>pullRight</code> prop.</p>
                   <ReactPlayground codeText={SplitButtonRightText} />
                 </div>
               </div>

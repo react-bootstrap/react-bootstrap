@@ -1,12 +1,10 @@
 "use strict";
 /** @jsx React.DOM */
-/* global document */
 
 var React = require("./react-es6")["default"];
 var classSet = require("./react-es6/lib/cx")["default"];
 var BootstrapMixin = require("./BootstrapMixin")["default"];
 var DropdownStateMixin = require("./DropdownStateMixin")["default"];
-var utils = require("./utils")["default"];
 var Button = require("./Button")["default"];
 var ButtonGroup = require("./ButtonGroup")["default"];
 var DropdownMenu = require("./DropdownMenu")["default"];
@@ -16,7 +14,7 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
   mixins: [BootstrapMixin, DropdownStateMixin],
 
   propTypes: {
-    right:    React.PropTypes.bool,
+    pullRight:    React.PropTypes.bool,
     title:    React.PropTypes.string,
     href:     React.PropTypes.string,
     onClick:  React.PropTypes.func,
@@ -47,7 +45,7 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
           {ref:"menu",
           'aria-labelledby':this.props.id,
           onSelect:this.handleOptionSelect,
-          right:this.props.right}, 
+          pullRight:this.props.pullRight}, 
           this.props.children
         )
       )

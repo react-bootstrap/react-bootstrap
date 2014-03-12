@@ -1758,14 +1758,14 @@ define(
 
     var DropdownMenu = React.createClass({displayName: 'DropdownMenu',
       propTypes: {
-        right: React.PropTypes.bool,
+        pullRight: React.PropTypes.bool,
         onSelect: React.PropTypes.func
       },
 
       render: function () {
         var classes = {
             'dropdown-menu': true,
-            'dropdown-menu-right': this.props.right
+            'dropdown-menu-right': this.props.pullRight
           };
 
         return this.transferPropsTo(
@@ -1795,27 +1795,25 @@ define(
     __exports__["default"] = DropdownMenu;
   });
 define(
-  '../amd/transpiled/DropdownButton',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./DropdownStateMixin","./utils","./Button","./ButtonGroup","./DropdownMenu","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __exports__) {
+  '../amd/transpiled/DropdownButton',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./DropdownStateMixin","./Button","./ButtonGroup","./DropdownMenu","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __exports__) {
     
     /** @jsx React.DOM */
-    /* global document */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
     var BootstrapMixin = __dependency3__["default"];
     var DropdownStateMixin = __dependency4__["default"];
-    var utils = __dependency5__["default"];
-    var Button = __dependency6__["default"];
-    var ButtonGroup = __dependency7__["default"];
-    var DropdownMenu = __dependency8__["default"];
+    var Button = __dependency5__["default"];
+    var ButtonGroup = __dependency6__["default"];
+    var DropdownMenu = __dependency7__["default"];
 
 
     var DropdownButton = React.createClass({displayName: 'DropdownButton',
       mixins: [BootstrapMixin, DropdownStateMixin],
 
       propTypes: {
-        right:    React.PropTypes.bool,
+        pullRight:    React.PropTypes.bool,
         title:    React.PropTypes.string,
         href:     React.PropTypes.string,
         onClick:  React.PropTypes.func,
@@ -1846,7 +1844,7 @@ define(
               {ref:"menu",
               'aria-labelledby':this.props.id,
               onSelect:this.handleOptionSelect,
-              right:this.props.right}, 
+              pullRight:this.props.pullRight}, 
               this.props.children
             )
           )
@@ -2965,7 +2963,7 @@ define(
       mixins: [BootstrapMixin, DropdownStateMixin],
 
       propTypes: {
-        right:         React.PropTypes.bool,
+        pullRight:         React.PropTypes.bool,
         title:         React.PropTypes.renderable,
         href:          React.PropTypes.string,
         dropdownTitle: React.PropTypes.renderable,
@@ -3010,7 +3008,7 @@ define(
               {ref:"menu",
               onSelect:this.handleOptionSelect,
               'aria-labelledby':this.props.id,
-              right:this.props.right}, 
+              pullRight:this.props.pullRight}, 
               this.props.children
             )
           )

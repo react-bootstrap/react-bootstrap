@@ -135,15 +135,15 @@ describe('SplitButton', function () {
     assert.ok(instance.getDOMNode().className.match(/\bdropup\b/));
   });
 
-  it('Should pass right prop to menu', function () {
+  it('Should pass pullRight prop to menu', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-        <SplitButton title="Title" dropdownTitle="New title" right>
+        <SplitButton title="Title" dropdownTitle="New title" pullRight>
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </SplitButton>
     );
 
-    assert.ok(instance.refs.menu.props.right);
+    assert.ok(instance.refs.menu.props.pullRight);
   });
 
   describe('when open', function () {

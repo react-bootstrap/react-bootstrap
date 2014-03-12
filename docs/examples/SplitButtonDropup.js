@@ -13,7 +13,7 @@ var buttonsInstance = (
       </ButtonToolbar>
 
       <ButtonToolbar>
-        <SplitButton bsStyle="primary" title="Right dropup" dropup right>
+        <SplitButton bsStyle="primary" title="Right dropup" dropup pullRight>
           <MenuItem key="1">Action</MenuItem>
           <MenuItem key="2">Another action</MenuItem>
           <MenuItem key="3">Something else here</MenuItem>
