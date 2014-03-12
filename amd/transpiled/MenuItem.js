@@ -1,46 +1,57 @@
 define(
-  ["./react-es6","exports"],
-  function(__dependency1__, __exports__) {
+  ["./react-es6","./react-es6/lib/cx","exports"],
+  function(__dependency1__, __dependency2__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
 
     var MenuItem = React.createClass({displayName: 'MenuItem',
       propTypes: {
-        header: React.PropTypes.bool,
-        divider: React.PropTypes.bool
+        header:   React.PropTypes.bool,
+        divider:  React.PropTypes.bool,
+        href:     React.PropTypes.string,
+        title:    React.PropTypes.string,
+        onSelect: React.PropTypes.func
       },
 
-      handleClick: function () {
-        if (typeof this.props.onSelect === 'function') {
+      getDefaultProps: function () {
+        return {
+          href: '#'
+        };
+      },
+
+      handleClick: function (e) {
+        if (this.props.onSelect) {
+          e.preventDefault();
           this.props.onSelect(this.props.key);
         }
       },
 
       renderAnchor: function () {
         return (
-          React.DOM.a( {onClick:this.handleClick, href:"#", tabIndex:"-1", ref:"anchor"}, 
+          React.DOM.a( {onClick:this.handleClick, href:this.props.href, title:this.props.title, tabIndex:"-1"}, 
             this.props.children
           )
         );
       },
 
       render: function () {
-        var className = null;
-        var children = null;
+        var classes = {
+            'dropdown-header': this.props.header,
+            'divider': this.props.divider
+          };
 
+        var children = null;
         if (this.props.header) {
           children = this.props.children;
-          className = 'dropdown-header';
-        } else if (this.props.divider) {
-          className = 'divider';
-        } else {
+        } else if (!this.props.divider) {
           children = this.renderAnchor();
         }
 
         return this.transferPropsTo(
-          React.DOM.li( {role:"presentation", className:className}, 
+          React.DOM.li( {role:"presentation", title:null, href:null, className:classSet(classes)}, 
             children
           )
         );
