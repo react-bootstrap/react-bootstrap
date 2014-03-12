@@ -23,6 +23,11 @@ var ButtonGroupSizesText = fs.readFileSync(__dirname + '/../examples/ButtonGroup
 var ButtonGroupNestedText = fs.readFileSync(__dirname + '/../examples/ButtonGroupNested.js', {encoding: 'utf8'});
 var ButtonGroupVerticalText = fs.readFileSync(__dirname + '/../examples/ButtonGroupVertical.js', {encoding: 'utf8'});
 var ButtonGroupJustifiedText = fs.readFileSync(__dirname + '/../examples/ButtonGroupJustified.js', {encoding: 'utf8'});
+var DropdownButtonBasicText = fs.readFileSync(__dirname + '/../examples/DropdownButtonBasic.js', {encoding: 'utf8'});
+var SplitButtonBasicText = fs.readFileSync(__dirname + '/../examples/SplitButtonBasic.js', {encoding: 'utf8'});
+var DropdownButtonSizesText = fs.readFileSync(__dirname + '/../examples/DropdownButtonSizes.js', {encoding: 'utf8'});
+var SplitButtonDropupText = fs.readFileSync(__dirname + '/../examples/SplitButtonDropup.js', {encoding: 'utf8'});
+var SplitButtonRightText = fs.readFileSync(__dirname + '/../examples/SplitButtonRight.js', {encoding: 'utf8'});
 
 var ComponentsPage = React.createClass({
   render: function () {
@@ -121,6 +126,31 @@ var ComponentsPage = React.createClass({
                   <p>Just add <code>justified</code> to the <code>{'<ButtonGroup />'}</code>.</p>
                   <ReactPlayground codeText={ButtonGroupJustifiedText} />
                 </div>
+
+                <div className="bs-docs-section">
+                  <h1 id="btn-dropdowns" className="page-header">Button dropdowns</h1>
+                  <p className="lead">Use <code>{'<DropdownButton />'}</code> or <code>{'<SplitButton />'}</code> components to display a button with a dropdown menu.</p>
+
+                  <h3 id="btn-dropdowns-single">Single button dropdowns</h3>
+                  <p>Create a dropdown button with the <code>{'<DropdownButton />'}</code> component.</p>
+                  <ReactPlayground codeText={DropdownButtonBasicText} />
+
+                  <h3 id="btn-dropdowns-split">Split button dropdowns</h3>
+                  <p>Similarly, create split button dropdowns with the <code>{'<SplitButton />'}</code> component.</p>
+                  <ReactPlayground codeText={SplitButtonBasicText} />
+
+                  <h3 id="btn-dropdowns-sizing">Sizing</h3>
+                  <p>Button dropdowns work with buttons of all sizes.</p>
+                  <ReactPlayground codeText={DropdownButtonSizesText} />
+
+                  <h3 id="btn-dropdowns-dropup">Dropup variation</h3>
+                  <p>Trigger dropdown menus that site above the button by adding the <code>dropup</code> prop.</p>
+                  <ReactPlayground codeText={SplitButtonDropupText} />
+
+                  <h3 id="btn-dropdowns-right">Dropdown right variation</h3>
+                  <p>Trigger dropdown menus that align to the right of the button using the <code>right</code> prop.</p>
+                  <ReactPlayground codeText={SplitButtonRightText} />
+                </div>
               </div>
 
               <div className="col-md-3">
@@ -131,6 +161,9 @@ var ComponentsPage = React.createClass({
                     </li>
                     <li>
                       <a href="#btn-groups">Button groups</a>
+                    </li>
+                    <li>
+                      <a href="#btn-dropdowns">Button dropdowns</a>
                     </li>
                   </ul>
                   <a className="back-to-top" href="#top">

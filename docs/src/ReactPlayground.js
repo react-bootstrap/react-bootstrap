@@ -12,6 +12,7 @@ var Button = require('../../cjs/Button');
 var ButtonGroup = require('../../cjs/ButtonGroup');
 var ButtonToolbar = require('../../cjs/ButtonToolbar');
 var DropdownButton = require('../../cjs/DropdownButton');
+var SplitButton = require('../../cjs/SplitButton');
 var Nav = require('../../cjs/Nav');
 var NavItem = require('../../cjs/NavItem');
 var MenuItem = require('../../cjs/MenuItem');

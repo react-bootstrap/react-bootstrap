@@ -3,12 +3,19 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var SplitButton = require('../cjs/SplitButton');
+var SplitButton    = require('../cjs/SplitButton');
 var MenuItem       = require('../cjs/MenuItem');
 
 describe('SplitButton', function () {
+  var instance;
+  afterEach(function() {
+    if (instance && ReactTestUtils.isCompositeComponent(instance) && instance.isMounted()) {
+      React.unmountComponentAtNode(instance.getDOMNode().parent);
+    }
+  });
+
   it('Should render button correctly', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
@@ -29,7 +36,7 @@ describe('SplitButton', function () {
   });
 
   it('Should render menu correctly', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
@@ -46,19 +53,21 @@ describe('SplitButton', function () {
   });
 
   it('Should pass dropdownTitle to dropdown button', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
-        <SplitButton title="Title" dropdownTitle="New title">
+    var CustomTitle = React.createClass({ render: function() { return <span />; } });
+    instance = ReactTestUtils.renderIntoDocument(
+        <SplitButton title={<CustomTitle />} dropdownTitle={<CustomTitle />}>
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </SplitButton>
     );
 
-    assert.equal(instance.refs.dropdownButton.getDOMNode().firstChild.innerText.trim(), 'New title');
+    assert.ok(ReactTestUtils.findRenderedComponentWithType(instance.refs.button, CustomTitle));
+    assert.ok(ReactTestUtils.findRenderedComponentWithType(instance.refs.dropdownButton, CustomTitle));
   });
 
   it('Should pass props to button', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
-        <SplitButton title="Title" bsStyle="primary" className="test-class" id="testid">
+    instance = ReactTestUtils.renderIntoDocument(
+        <SplitButton title="Title" bsStyle="primary">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
         </SplitButton>
@@ -66,12 +75,10 @@ describe('SplitButton', function () {
 
     var button = instance.refs.button.getDOMNode();
     assert.ok(button.className.match(/\bbtn-primary\b/));
-    assert.ok(button.className.match(/\btest-class\b/));
-    assert.equal(button.id, 'testid');
   });
 
   it('Should be closed by default', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
@@ -82,7 +89,7 @@ describe('SplitButton', function () {
   });
 
   it('Should open when clicked', function (done) {
-    var instance = ReactTestUtils.renderIntoDocument(
+    instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title">
           <MenuItem key="1">MenuItem 1 content</MenuItem>
           <MenuItem key="2">MenuItem 2 content</MenuItem>
@@ -94,21 +101,27 @@ describe('SplitButton', function () {
         done();
     };
 
-    ReactTestUtils.Simulate.click(instance.refs.dropdownButton.getDOMNode());
+    ReactTestUtils.SimulateNative.click(instance.refs.dropdownButton.getDOMNode());
   });
 
   it('should call onSelect with key when MenuItem is clicked', function (done) {
-    var handleSelect = function (key) {
-          assert.equal(key, '1');
-          done();
-        },
-        instance = ReactTestUtils.renderIntoDocument(
-        <SplitButton title="Title" onSelect={handleSelect}>
-          <MenuItem key="1">MenuItem 1 content</MenuItem>
-          <MenuItem key="2">MenuItem 2 content</MenuItem>
-        </SplitButton>
+    function handleSelect(key) {
+      assert.equal(key, 2);
+      done();
+    }
+
+    instance = ReactTestUtils.renderIntoDocument(
+      <SplitButton title="Title" onSelect={handleSelect}>
+        <MenuItem key={1}>MenuItem 1 content</MenuItem>
+        <MenuItem key={2}>MenuItem 2 content</MenuItem>
+      </SplitButton>
     );
-    ReactTestUtils.Simulate.click(instance.refs.menu.props.children[0].getDOMNode().firstChild);
+
+    var menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
+    assert.equal(menuItems.length, 2);
+    ReactTestUtils.SimulateNative.click(
+      ReactTestUtils.findRenderedDOMComponentWithTag(menuItems[1], 'a')
+    );
   });
 
   it('Should have dropup class', function () {
@@ -134,22 +147,15 @@ describe('SplitButton', function () {
   });
 
   describe('when open', function () {
-    var instance;
-
     beforeEach(function (done) {
       instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title">
-          <MenuItem key="1" ref="item1">MenuItem 1 content</MenuItem>
-          <MenuItem key="2" ref="item2">MenuItem 2 content</MenuItem>
+          <MenuItem key={1}>MenuItem 1 content</MenuItem>
+          <MenuItem key={2}>MenuItem 2 content</MenuItem>
         </SplitButton>
       );
 
-      instance.componentDidUpdate = function () {
-        instance.componentDidUpdate = function () {};
-        done();
-      };
-
-      instance.toggle();
+      instance.setDropdownState(true, done);
     });
 
     it('should close when button is clicked', function (done) {
@@ -158,8 +164,9 @@ describe('SplitButton', function () {
         done();
       };
 
-      ReactTestUtils.Simulate.click(instance.refs.dropdownButton.getDOMNode());
+      var evt = document.createEvent('HTMLEvents');
+      evt.initEvent('click', true, true);
+      document.documentElement.dispatchEvent(evt);
     });
-
   });
 });
