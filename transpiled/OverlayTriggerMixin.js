@@ -28,6 +28,7 @@ define(
         if (!this._overlayTarget) {
           this._mountOverlayTarget();
         }
+
         // Save reference to help testing
         this._overlayInstance = React.renderComponent(this.renderOverlay(), this._overlayTarget);
       },

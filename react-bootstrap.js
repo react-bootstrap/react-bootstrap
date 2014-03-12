@@ -1696,7 +1696,9 @@ define(
       },
 
       _handleFadeOutEnd: function () {
-        this._fadeOutEl.parentNode.removeChild(this._fadeOutEl);
+        if (this._fadeOutEl && this._fadeOutEl.parentNode) {
+          this._fadeOutEl.parentNode.removeChild(this._fadeOutEl);
+        }
       },
 
       componentDidMount: function () {
@@ -2199,11 +2201,13 @@ define(
       },
 
       _renderOverlay: function () {
-        React.renderComponent(this.renderOverlay(), this._overlayTarget);
+        // Save reference to help testing
+        this._overlayInstance = React.renderComponent(this.renderOverlay(), this._overlayTarget);
       },
 
       _unrenderOverlay: function () {
         React.unmountComponentAtNode(this._overlayTarget);
+        this._overlayInstance = null;
       }
     };
   });
