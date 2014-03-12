@@ -15,20 +15,31 @@ describe('MenuItem', function () {
   });
 
   it('should pass through props', function () {
-    var instance = MenuItem({
-      className: 'test-class'
-    }, 'Title');
-    ReactTestUtils.renderIntoDocument(instance);
-    assert(instance.getDOMNode().className.match(/\btest-class\b/));
+    var instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem
+        className="test-class"
+        href="#hi-mom!"
+        title="hi mom!">
+        Title
+      </MenuItem>
+    );
+
+    var node = instance.getDOMNode();
+    assert(node.className.match(/\btest-class\b/));
+    assert.equal(node.getAttribute('href'), null);
+    assert.equal(node.getAttribute('title'), null);
+
+    var anchorNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a').getDOMNode();
+    assert.notOk(anchorNode.className.match(/\btest-class\b/));
+    assert.equal(anchorNode.getAttribute('href'), '#hi-mom!');
+    assert.equal(anchorNode.getAttribute('title'), 'hi mom!');
   });
 
   it('should have an anchor', function () {
-    var instance = MenuItem({}, 'Title');
-    ReactTestUtils.renderIntoDocument(instance);
+    var instance = ReactTestUtils.renderIntoDocument(<MenuItem>Title</MenuItem>);
 
-    var anchor = instance.refs.anchor.getDOMNode();
-    assert.equal(anchor.nodeName, 'A');
-    assert.equal(anchor.getAttribute('tabIndex'), '-1');
+    var anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
+    assert.equal(anchor.getDOMNode().getAttribute('tabIndex'), '-1');
   });
 
   it('should fire callback on click of link', function (done) {
@@ -41,7 +52,8 @@ describe('MenuItem', function () {
     }, 'Title');
 
     ReactTestUtils.renderIntoDocument(instance);
-    ReactTestUtils.Simulate.click(instance.refs.anchor.getDOMNode());
+    var anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
+    ReactTestUtils.Simulate.click(anchor);
   });
 
   it('should be a divider with no children', function () {
