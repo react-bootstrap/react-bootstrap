@@ -15,6 +15,9 @@ var DropdownButton = require('../../cjs/DropdownButton');
 var Nav = require('../../cjs/Nav');
 var NavItem = require('../../cjs/NavItem');
 var MenuItem = require('../../cjs/MenuItem');
+var Modal = require('../../cjs/Modal');
+var OverlayTrigger = require('../../cjs/OverlayTrigger');
+var OverlayTriggerMixin = require('../../cjs/OverlayTriggerMixin');
 
 var IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)

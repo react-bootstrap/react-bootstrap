@@ -24,6 +24,10 @@ var ButtonGroupNestedText = fs.readFileSync(__dirname + '/../examples/ButtonGrou
 var ButtonGroupVerticalText = fs.readFileSync(__dirname + '/../examples/ButtonGroupVertical.js', {encoding: 'utf8'});
 var ButtonGroupJustifiedText = fs.readFileSync(__dirname + '/../examples/ButtonGroupJustified.js', {encoding: 'utf8'});
 
+var ModalStatic = fs.readFileSync(__dirname + '/../examples/ModalStatic.js', {encoding: 'utf8'});
+var ModalOverlayTrigger = fs.readFileSync(__dirname + '/../examples/ModalOverlayTrigger.js', {encoding: 'utf8'});
+var ModalOverlayTriggerMixin = fs.readFileSync(__dirname + '/../examples/ModalOverlayTriggerMixin.js', {encoding: 'utf8'});
+
 var ComponentsPage = React.createClass({
   render: function () {
     return (
@@ -121,6 +125,23 @@ var ComponentsPage = React.createClass({
                   <p>Just add <code>justified</code> to the <code>{'<ButtonGroup />'}</code>.</p>
                   <ReactPlayground codeText={ButtonGroupJustifiedText} />
                 </div>
+
+                <div className="bs-docs-section">
+                  <h1 id="modals" className="page-header">Modals <small>Modal</small></h1>
+
+                  <h3 id="modals-static">A static example</h3>
+                  <p>A rendered modal with header, body, and set of actions in the footer.</p>
+                  <p>The header is added automatically if you pass in a <code>title</code> prop.</p>
+                  <ReactPlayground codeText={ModalStatic} />
+
+                  <h3 id="modals-static">Live demo</h3>
+                  <p>Use <code>&lt;OverlayTrigger/&gt;</code> to create a real modal that's added to the document body when opened.</p>
+                  <ReactPlayground codeText={ModalOverlayTrigger} />
+
+                  <h3 id="modals-static">Custom trigger</h3>
+                  <p>Use <code>&lt;OverlayTriggerMixin/&gt;</code> in a custom component to manage the modal's state yourself.</p>
+                  <ReactPlayground codeText={ModalOverlayTriggerMixin} />
+                </div>
               </div>
 
               <div className="col-md-3">
@@ -131,6 +152,9 @@ var ComponentsPage = React.createClass({
                     </li>
                     <li>
                       <a href="#btn-groups">Button groups</a>
+                    </li>
+                    <li>
+                      <a href="#modals">Modals</a>
                     </li>
                   </ul>
                   <a className="back-to-top" href="#top">
