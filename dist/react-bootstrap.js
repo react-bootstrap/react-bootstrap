@@ -1583,118 +1583,6 @@ define('../amd/Button',['./transpiled/Button'], function (Button) {
   return Button.default;
 });
 define(
-  '../amd/transpiled/ButtonGroup',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./Button","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
-    
-    /** @jsx React.DOM */
-
-    var React = __dependency1__["default"];
-    var classSet = __dependency2__["default"];
-    var BootstrapMixin = __dependency3__["default"];
-    var Button = __dependency4__["default"];
-
-    var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
-      mixins: [BootstrapMixin],
-
-      propTypes: {
-        vertical:  React.PropTypes.bool,
-        justified: React.PropTypes.bool
-      },
-
-      getDefaultProps: function () {
-        return {
-          bsClass: 'button-group'
-        };
-      },
-
-      render: function () {
-        var classes = this.getBsClassSet();
-        classes['btn-group-vertical'] = this.props.vertical;
-        classes['btn-group-justified'] = this.props.justified;
-
-        return this.transferPropsTo(
-          React.DOM.div(
-            {className:classSet(classes)}, 
-            this.props.children
-          )
-        );
-      }
-    });
-
-    __exports__["default"] = ButtonGroup;
-  });
-define('../amd/ButtonGroup',['./transpiled/ButtonGroup'], function (ButtonGroup) {
-  return ButtonGroup.default;
-});
-define(
-  '../amd/transpiled/ButtonToolbar',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./Button","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
-    
-    /** @jsx React.DOM */
-
-    var React = __dependency1__["default"];
-    var classSet = __dependency2__["default"];
-    var BootstrapMixin = __dependency3__["default"];
-    var Button = __dependency4__["default"];
-
-    var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
-      mixins: [BootstrapMixin],
-
-      getDefaultProps: function () {
-        return {
-          bsClass: 'button-toolbar'
-        };
-      },
-
-      render: function () {
-        var classes = this.getBsClassSet();
-
-        return this.transferPropsTo(
-          React.DOM.div(
-            {role:"toolbar",
-            className:classSet(classes)}, 
-            this.props.children
-          )
-        );
-      }
-    });
-
-    __exports__["default"] = ButtonGroup;
-  });
-define('../amd/ButtonToolbar',['./transpiled/ButtonToolbar'], function (ButtonToolbar) {
-  return ButtonToolbar.default;
-});
-define(
-  '../amd/transpiled/DangerMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsStyle: 'danger'
-            };
-        }
-    };
-  });
-define('../amd/DangerMixin',['./transpiled/DangerMixin'], function (DangerMixin) {
-  return DangerMixin.default;
-});
-define(
-  '../amd/transpiled/DefaultMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsStyle: 'default'
-            };
-        }
-    };
-  });
-define('../amd/DefaultMixin',['./transpiled/DefaultMixin'], function (DefaultMixin) {
-  return DefaultMixin.default;
-});
-define(
   '../amd/transpiled/DropdownStateMixin',["./react-es6","exports"],
   function(__dependency1__, __exports__) {
     
@@ -1745,6 +1633,47 @@ define(
     };
 
     __exports__["default"] = DropdownStateMixin;
+  });
+define(
+  '../amd/transpiled/ButtonGroup',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./Button","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var Button = __dependency4__["default"];
+
+    var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        vertical:  React.PropTypes.bool,
+        justified: React.PropTypes.bool
+      },
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'button-group'
+        };
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+        classes['btn-group-vertical'] = this.props.vertical;
+        classes['btn-group-justified'] = this.props.justified;
+
+        return this.transferPropsTo(
+          React.DOM.div(
+            {className:classSet(classes)}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = ButtonGroup;
   });
 define(
   '../amd/transpiled/DropdownMenu',["./react-es6","./react-es6/lib/cx","./utils","exports"],
@@ -1869,9 +1798,6 @@ define(
 define('../amd/DropdownButton',['./transpiled/DropdownButton'], function (DropdownButton) {
   return DropdownButton.default;
 });
-define('../amd/DropdownMenu',['./transpiled/DropdownMenu'], function (DropdownMenu) {
-  return DropdownMenu.default;
-});
 define(
   '../amd/transpiled/FadeMixin',["./react-es6","exports"],
   function(__dependency1__, __exports__) {
@@ -1930,36 +1856,6 @@ define(
   });
 define('../amd/FadeMixin',['./transpiled/FadeMixin'], function (FadeMixin) {
   return FadeMixin.default;
-});
-define(
-  '../amd/transpiled/InfoMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsStyle: 'info'
-            };
-        }
-    };
-  });
-define('../amd/InfoMixin',['./transpiled/InfoMixin'], function (InfoMixin) {
-  return InfoMixin.default;
-});
-define(
-  '../amd/transpiled/InlineMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsStyle: 'inline'
-            };
-        }
-    };
-  });
-define('../amd/InlineMixin',['./transpiled/InlineMixin'], function (InlineMixin) {
-  return InlineMixin.default;
 });
 define(
   '../amd/transpiled/Input',["./react-es6","./react-es6/lib/cx","exports"],
@@ -2069,36 +1965,6 @@ define(
   });
 define('../amd/Input',['./transpiled/Input'], function (Input) {
   return Input.default;
-});
-define(
-  '../amd/transpiled/LargeMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsSize: 'large'
-            };
-        }
-    };
-  });
-define('../amd/LargeMixin',['./transpiled/LargeMixin'], function (LargeMixin) {
-  return LargeMixin.default;
-});
-define(
-  '../amd/transpiled/MediumMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsSize: 'medium'
-            };
-        }
-    };
-  });
-define('../amd/MediumMixin',['./transpiled/MediumMixin'], function (MediumMixin) {
-  return MediumMixin.default;
 });
 define(
   '../amd/transpiled/MenuItem',["./react-es6","./react-es6/lib/cx","exports"],
@@ -2708,21 +2574,6 @@ define('../amd/PanelGroup',['./transpiled/PanelGroup'], function (PanelGroup) {
   return PanelGroup.default;
 });
 define(
-  '../amd/transpiled/PrimaryMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsStyle: 'primary'
-            };
-        }
-    };
-  });
-define('../amd/PrimaryMixin',['./transpiled/PrimaryMixin'], function (PrimaryMixin) {
-  return PrimaryMixin.default;
-});
-define(
   '../amd/transpiled/Interpolate',["./react-es6","./react-es6/lib/invariant","./utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     
@@ -2929,21 +2780,6 @@ define('../amd/ProgressBar',['./transpiled/ProgressBar'], function (ProgressBar)
   return ProgressBar.default;
 });
 define(
-  '../amd/transpiled/SmallMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsSize: 'small'
-            };
-        }
-    };
-  });
-define('../amd/SmallMixin',['./transpiled/SmallMixin'], function (SmallMixin) {
-  return SmallMixin.default;
-});
-define(
   '../amd/transpiled/SplitButton',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./DropdownStateMixin","./utils","./Button","./ButtonGroup","./DropdownMenu","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __exports__) {
     
@@ -3034,21 +2870,6 @@ define(
   });
 define('../amd/SplitButton',['./transpiled/SplitButton'], function (SplitButton) {
   return SplitButton.default;
-});
-define(
-  '../amd/transpiled/SuccessMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsStyle: 'success'
-            };
-        }
-    };
-  });
-define('../amd/SuccessMixin',['./transpiled/SuccessMixin'], function (SuccessMixin) {
-  return SuccessMixin.default;
 });
 define(
   '../amd/transpiled/TabbedArea',["./react-es6","./BootstrapMixin","./utils","./Nav","./NavItem","exports"],
@@ -3179,39 +3000,9 @@ define(
 define('../amd/TabPane',['./transpiled/TabPane'], function (TabPane) {
   return TabPane.default;
 });
-define(
-  '../amd/transpiled/WarningMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsStyle: 'warning'
-            };
-        }
-    };
-  });
-define('../amd/WarningMixin',['./transpiled/WarningMixin'], function (WarningMixin) {
-  return WarningMixin.default;
-});
-define(
-  '../amd/transpiled/XSmallMixin',["exports"],
-  function(__exports__) {
-    
-    __exports__["default"] = {
-        getDefaultProps: function () {
-            return {
-                bsSize: 'xsmall'
-            };
-        }
-    };
-  });
-define('../amd/XSmallMixin',['./transpiled/XSmallMixin'], function (XSmallMixin) {
-  return XSmallMixin.default;
-});
 /*global define */
 
-define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/ButtonGroup','../amd/ButtonToolbar','../amd/DangerMixin','../amd/DefaultMixin','../amd/DropdownButton','../amd/DropdownMenu','../amd/FadeMixin','../amd/InfoMixin','../amd/InlineMixin','../amd/Input','../amd/LargeMixin','../amd/MediumMixin','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/OverlayTrigger','../amd/OverlayTriggerMixin','../amd/Panel','../amd/PanelGroup','../amd/PrimaryMixin','../amd/ProgressBar','../amd/SmallMixin','../amd/SplitButton','../amd/SuccessMixin','../amd/TabbedArea','../amd/TabPane','../amd/WarningMixin','../amd/XSmallMixin'],function (require) {
+define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/DropdownButton','../amd/FadeMixin','../amd/Input','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/OverlayTrigger','../amd/OverlayTriggerMixin','../amd/Panel','../amd/PanelGroup','../amd/ProgressBar','../amd/SplitButton','../amd/TabbedArea','../amd/TabPane'],function (require) {
     
 
     return {
@@ -3219,18 +3010,9 @@ define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/Bo
         Alert: require('../amd/Alert'),
         BootstrapMixin: require('../amd/BootstrapMixin'),
         Button: require('../amd/Button'),
-        ButtonGroup: require('../amd/ButtonGroup'),
-        ButtonToolbar: require('../amd/ButtonToolbar'),
-        DangerMixin: require('../amd/DangerMixin'),
-        DefaultMixin: require('../amd/DefaultMixin'),
         DropdownButton: require('../amd/DropdownButton'),
-        DropdownMenu: require('../amd/DropdownMenu'),
         FadeMixin: require('../amd/FadeMixin'),
-        InfoMixin: require('../amd/InfoMixin'),
-        InlineMixin: require('../amd/InlineMixin'),
         Input: require('../amd/Input'),
-        LargeMixin: require('../amd/LargeMixin'),
-        MediumMixin: require('../amd/MediumMixin'),
         MenuItem: require('../amd/MenuItem'),
         Modal: require('../amd/Modal'),
         Nav: require('../amd/Nav'),
@@ -3239,15 +3021,10 @@ define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/Bo
         OverlayTriggerMixin: require('../amd/OverlayTriggerMixin'),
         Panel: require('../amd/Panel'),
         PanelGroup: require('../amd/PanelGroup'),
-        PrimaryMixin: require('../amd/PrimaryMixin'),
         ProgressBar: require('../amd/ProgressBar'),
-        SmallMixin: require('../amd/SmallMixin'),
         SplitButton: require('../amd/SplitButton'),
-        SuccessMixin: require('../amd/SuccessMixin'),
         TabbedArea: require('../amd/TabbedArea'),
-        TabPane: require('../amd/TabPane'),
-        WarningMixin: require('../amd/WarningMixin'),
-        XSmallMixin: require('../amd/XSmallMixin')
+        TabPane: require('../amd/TabPane')
     };
 });    //Register in the values from the outer closure for common dependencies
     //as local almond modules
