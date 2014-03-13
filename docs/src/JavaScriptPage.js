@@ -10,14 +10,6 @@ var PageHeader = require('./PageHeader');
 var PageFooter = require('./PageFooter');
 var ReactPlayground = require('./ReactPlayground');
 
-var NavBasicText = fs.readFileSync(__dirname + '/../examples/NavBasic.js', {encoding: 'utf8'});
-var AlertBasicText = fs.readFileSync(__dirname + '/../examples/AlertBasic.js', {encoding: 'utf8'});
-var AlertDismissableText = fs.readFileSync(__dirname + '/../examples/AlertDismissable.js', {encoding: 'utf8'});
-var AlertAutoDismissableText = fs.readFileSync(__dirname + '/../examples/AlertAutoDismissable.js', {encoding: 'utf8'});
-var TabbedAreaUncontrolledText = fs.readFileSync(__dirname + '/../examples/TabbedAreaUncontrolled.js', {encoding: 'utf8'});
-var TabbedAreaControlledText = fs.readFileSync(__dirname + '/../examples/TabbedAreaControlled.js', {encoding: 'utf8'});
-
-
 var Page = React.createClass({
   render: function () {
     return (
@@ -38,7 +30,7 @@ var Page = React.createClass({
                   <h2 id="navs-examples">Example navs</h2>
 
                   <p>Navs come in two styles, pills and tabs.</p>
-                  <ReactPlayground codeText={NavBasicText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavBasic.js', 'utf8')} />
                 </div>
 
                 {/* Tabbed Areas */}
@@ -49,11 +41,11 @@ var Page = React.createClass({
 
                   <h3>Uncontrolled</h3>
                   <p>Allow the component to control its own state.</p>
-                  <ReactPlayground codeText={TabbedAreaUncontrolledText} exampleClassName="bs-example-tabs" />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TabbedAreaUncontrolled.js', 'utf8')} exampleClassName="bs-example-tabs" />
 
                   <h3>Controlled</h3>
                   <p>Pass down the active state on render via props.</p>
-                  <ReactPlayground codeText={TabbedAreaControlledText} exampleClassName="bs-example-tabs" />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TabbedAreaControlled.js', 'utf8')} exampleClassName="bs-example-tabs" />
 
                   <div className="bs-callout bs-callout-info">
                     <h4>Extends tabbed navigation</h4>
@@ -67,13 +59,13 @@ var Page = React.createClass({
                   <h2 id="alerts-examples">Example alerts</h2>
 
                   <p>Basic alert styles.</p>
-                  <ReactPlayground codeText={AlertBasicText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/AlertBasic.js', 'utf8')} />
 
                   <p>Closeable alerts, just pass in a <code>onDismiss</code> function.</p>
-                  <ReactPlayground codeText={AlertDismissableText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/AlertDismissable.js', 'utf8')} />
 
                   <p>Auto close after a set time with <code>dismissAfter</code> prop.</p>
-                  <ReactPlayground codeText={AlertAutoDismissableText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/AlertAutoDismissable.js', 'utf8')} />
                 </div>
               </div>
 
