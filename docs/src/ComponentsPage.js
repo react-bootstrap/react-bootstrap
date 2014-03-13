@@ -41,6 +41,13 @@ var ModalStatic = fs.readFileSync(__dirname + '/../examples/ModalStatic.js', {en
 var ModalOverlayTrigger = fs.readFileSync(__dirname + '/../examples/ModalOverlayTrigger.js', {encoding: 'utf8'});
 var ModalOverlayTriggerMixin = fs.readFileSync(__dirname + '/../examples/ModalOverlayTriggerMixin.js', {encoding: 'utf8'});
 
+var ProgressBarBasic = fs.readFileSync(__dirname + '/../examples/ProgressBarBasic.js', {encoding: 'utf8'});
+var ProgressBarWithLabel = fs.readFileSync(__dirname + '/../examples/ProgressBarWithLabel.js', {encoding: 'utf8'});
+var ProgressBarScreenreaderLabel = fs.readFileSync(__dirname + '/../examples/ProgressBarScreenreaderLabel.js', {encoding: 'utf8'});
+var ProgressBarContextual = fs.readFileSync(__dirname + '/../examples/ProgressBarContextual.js', {encoding: 'utf8'});
+var ProgressBarStriped = fs.readFileSync(__dirname + '/../examples/ProgressBarStriped.js', {encoding: 'utf8'});
+var ProgressBarAnimated = fs.readFileSync(__dirname + '/../examples/ProgressBarAnimated.js', {encoding: 'utf8'});
+var ProgressBarStacked = fs.readFileSync(__dirname + '/../examples/ProgressBarStacked.js', {encoding: 'utf8'});
 
 var ComponentsPage = React.createClass({
   render: function () {
@@ -213,6 +220,41 @@ var ComponentsPage = React.createClass({
                   <p>Use <code>&lt;OverlayTriggerMixin /&gt;</code> in a custom component to manage the modal's state yourself.</p>
                   <ReactPlayground codeText={ModalOverlayTriggerMixin} />
                 </div>
+
+                <div className="bs-docs-section">
+                  <h1 id="progress" className="page-header">Progress bars <small>ProgressBar</small></h1>
+
+                  <p className="lead">Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.</p>
+
+                  <h2 id="modals-static">Basic example</h2>
+                  <p>Default progress bar.</p>
+                  <ReactPlayground codeText={ProgressBarBasic} />
+
+                  <h2 id="modals-label">With label</h2>
+                  <p>Add a <code>label</code> prop to show a visible percentage. For low percentages, consider adding a min-width to ensure the label's text is fully visible.</p>
+                  <p>The following keys are interpolated with the current values: <code>%(min)s</code>, <code>%(max)s</code>, <code>%(now)s</code>, <code>%(percent)s</code>, <code>%(bsStyle)s</code></p>
+                  <ReactPlayground codeText={ProgressBarWithLabel} />
+
+                  <h2 id="modals-label">Screenreader only label</h2>
+                  <p>Add a <code>srOnly</code> prop to hide the label visually.</p>
+                  <ReactPlayground codeText={ProgressBarScreenreaderLabel} />
+
+                  <h2 id="modals-label">Contextual alternatives</h2>
+                  <p>Progress bars use some of the same button and alert classes for consistent styles.</p>
+                  <ReactPlayground codeText={ProgressBarContextual} />
+
+                  <h2 id="modals-label">Striped</h2>
+                  <p>Uses a gradient to create a striped effect. Not available in IE8.</p>
+                  <ReactPlayground codeText={ProgressBarStriped} />
+
+                  <h2 id="modals-label">Animated</h2>
+                  <p>Add <code>active</code> prop to animate the stripes right to left. Not available in IE9 and below.</p>
+                  <ReactPlayground codeText={ProgressBarAnimated} />
+
+                  <h2 id="modals-label">Stacked</h2>
+                  <p>Nest <code>&lt;ProgressBar /&gt;</code>s to stack them.</p>
+                  <ReactPlayground codeText={ProgressBarStacked} />
+                </div>
               </div>
 
               <div className="col-md-3">
@@ -232,6 +274,9 @@ var ComponentsPage = React.createClass({
                     </li>
                     <li>
                       <a href="#modals">Modals</a>
+                    </li>
+                    <li>
+                      <a href="#progress">Progress bars</a>
                     </li>
                   </ul>
                   <a className="back-to-top" href="#top">

@@ -103,7 +103,7 @@ describe('ProgressBar', function () {
     assert.equal(bar.getDOMNode().style.width, '50%');
   });
 
-  it('Should not have screen reader text', function () {
+  it('Should not have label', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       ProgressBar({
         min: 0,
@@ -112,24 +112,38 @@ describe('ProgressBar', function () {
         bsStyle: 'primary'
       })
     );
-    var srText = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'sr-only');
 
-    assert.notOk(srText.length);
+    assert.equal(instance.getDOMNode().innerText, '');
   });
 
-  it('Should have screen reader text', function () {
+  it('Should have label', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       ProgressBar({
         min: 0,
         max: 10,
         now: 5,
         bsStyle: 'primary',
-        text: 'min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s'
+        label: 'min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s'
       })
     );
-    var srText = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
 
-    assert.equal(srText.getDOMNode().innerText, 'min:0, max:10, now:5, percent:50, bsStyle:primary');
+    assert.equal(instance.getDOMNode().innerText, 'min:0, max:10, now:5, percent:50, bsStyle:primary');
+  });
+
+  it('Should have screen reader only label', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      ProgressBar({
+        min: 0,
+        max: 10,
+        now: 5,
+        bsStyle: 'primary',
+        label: 'min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s',
+        srOnly: true
+      })
+    );
+    var srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
+
+    assert.equal(srLabel.getDOMNode().innerText, 'min:0, max:10, now:5, percent:50, bsStyle:primary');
   });
 
   it('Should show striped bar', function () {

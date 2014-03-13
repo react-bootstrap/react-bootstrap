@@ -20,6 +20,7 @@ var OverlayTrigger = require('../../cjs/OverlayTrigger');
 var OverlayTriggerMixin = require('../../cjs/OverlayTriggerMixin');
 var Panel = require('../../cjs/Panel');
 var PanelGroup = require('../../cjs/PanelGroup');
+var ProgressBar = require('../../cjs/ProgressBar');
 var TabbedArea = require('../../cjs/TabbedArea');
 var TabPane = require('../../cjs/TabPane');
 
