@@ -1,5 +1,5 @@
 .CodeMirror {
-	height: auto;
+    height: auto;
 }
 
 .bs-example .btn-toolbar + .btn-toolbar {
@@ -14,4 +14,9 @@
     bottom: auto;
     z-index: 1;
     display: block;
+}
+
+.bs-docs-booticon {
+    background: url('./logo.png') 0 0 no-repeat;
+    background-size: contain;
 }

@@ -2878,9 +2878,12 @@ var HomePage = React.createClass({displayName: 'HomePage',
         React.DOM.div(null, 
           NavMain( {activePage:"home"} ),
 
-          PageHeader(
-            {title:"React bootstrap",
-            subTitle:"Bootstrap 3 components built with React"} ),
+          React.DOM.main( {className:"bs-docs-masthead", id:"content", role:"main"}, 
+            React.DOM.div( {className:"container"}, 
+              React.DOM.span( {className:"bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline"}),
+              React.DOM.p( {className:"lead"}, "The most popular front-end framework, rebuilt for React.")
+            )
+          ),
 
           PageFooter(null )
         )
