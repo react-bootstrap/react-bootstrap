@@ -1,20 +1,21 @@
 define(
-  ["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./utils","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+  ["./react-es6","./react-es6/lib/cx","./react-es6/lib/ReactTransitionEvents","./BootstrapMixin","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     /** @jsx React.DOM */
 
     var React = __dependency1__["default"];
     var classSet = __dependency2__["default"];
-    var BootstrapMixin = __dependency3__["default"];
-    var utils = __dependency4__["default"];
+    var ReactTransitionEvents = __dependency3__["default"];
+    var BootstrapMixin = __dependency4__["default"];
+    var utils = __dependency5__["default"];
 
     var Panel = React.createClass({displayName: 'Panel',
       mixins: [BootstrapMixin],
 
       propTypes: {
-        //header: React.PropTypes.renderable,
-        //footer: React.PropTypes.renderable,
+        header: React.PropTypes.renderable,
+        footer: React.PropTypes.renderable,
         isCollapsable: React.PropTypes.bool,
         isOpen: React.PropTypes.bool,
         onClick: React.PropTypes.func
@@ -28,7 +29,8 @@ define(
 
       getInitialState: function() {
         return {
-          isOpen: this.props.defaultOpen != null ? this.props.defaultOpen : null
+          isOpen: this.props.defaultOpen != null ? this.props.defaultOpen : null,
+          isCollapsing: false
         };
       },
 
@@ -50,6 +52,77 @@ define(
         return !this._isChanging;
       },
 
+      handleTransitionEnd: function () {
+        this._collapseEnd = true;
+        this.setState({
+          collapsePhase: 'end',
+          isCollapsing: false
+        });
+      },
+
+      componentWillReceiveProps: function (newProps) {
+        if (newProps.isOpen !== this.props.isOpen) {
+          this._collapseEnd = false;
+          this.setState({
+            collapsePhase: 'start',
+            isCollapsing: true
+          });
+        }
+      },
+
+      _addEndTransitionListener: function () {
+        if (this.refs && this.refs.panel) {
+          ReactTransitionEvents.addEndEventListener(
+            this.refs.panel.getDOMNode(),
+            this.handleTransitionEnd
+          );
+        }
+      },
+
+      _removeEndTransitionListener: function () {
+        if (this.refs && this.refs.panel) {
+          ReactTransitionEvents.addEndEventListener(
+            this.refs.panel.getDOMNode(),
+            this.handleTransitionEnd
+          );
+        }
+      },
+
+      componentDidMount: function () {
+        this._afterRender();
+      },
+
+      componentWillUnmount: function () {
+        this._removeEndTransitionListener();
+      },
+
+      componentWillUpdate: function (nextProps) {
+        this._removeEndTransitionListener();
+        if (nextProps.isOpen !== this.props.isOpen && this.props.isOpen) {
+          this.refs.panel.getDOMNode().style.height = this._getBodyHeight() + 'px';
+        }
+      },
+
+      componentDidUpdate: function () {
+        this._afterRender();
+      },
+
+      _afterRender: function () {
+        this._addEndTransitionListener();
+        setTimeout(this._updateHeightAfterRender, 0);
+      },
+
+      _getBodyHeight: function () {
+        return this.refs.body.getDOMNode().offsetHeight;
+      },
+
+      _updateHeightAfterRender: function () {
+        if (this.isMounted() && this.refs && this.refs.panel) {
+          this.refs.panel.getDOMNode().style.height = this.isOpen() ?
+            this._getBodyHeight() + 'px' : '0px';
+        }
+      },
+
       isOpen: function () {
         return (this.props.isOpen != null) ? this.props.isOpen : this.state.isOpen;
       },
@@ -69,13 +142,15 @@ define(
 
       renderCollapsableBody: function () {
         var classes = {
-          'panel-collapse': true,
-          'collapse': true,
-          'in': this.isOpen()
-        };
+              'panel-collapse': true,
+              'collapsing': this.state.isCollapsing,
+              'collapse': !this.state.isCollapsing,
+              'in': this.isOpen() && !this.state.isCollapsing
+            };
+
 
         return (
-          React.DOM.div( {className:classSet(classes), id:this.props.id}, 
+          React.DOM.div( {className:classSet(classes), id:this.props.id, ref:"panel"}, 
             this.renderBody()
           )
         );
@@ -83,7 +158,7 @@ define(
 
       renderBody: function () {
         return (
-          React.DOM.div( {className:"panel-body"}, 
+          React.DOM.div( {className:"panel-body", ref:"body"}, 
             this.props.children
           )
         );
