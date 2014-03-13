@@ -6,9 +6,14 @@
 
 Under active development - APIs will change.
 
-## Contributors
+## Docs
 
-- Huge contributions from [syllog1sm](https://github.com/syllog1sm) ([blog](http://clozeit.wordpress.com/))
+A [docs site](http://react-bootstrap.github.io) with live editable examples is a work in progress
+
+## Authors
+
+- [Stephen J. Collings](https://github.com/stevoland)
+- [Matthew Honnibal](https://github.com/syllog1sm)
 - [Pieter Vanderwerff](https://github.com/pieterv)
 
 ## Contributions
