@@ -1,5 +1,12 @@
 /** @jsx React.DOM */
 
+var renderedTriggerInstance;
+
+function closeModal () {
+    // You can call `hide`, `show` and `toggle` methods on the rendered trigger
+    renderedTriggerInstance.hide();
+}
+
 var modalInstance = (
     <Modal title="Modal heading">
       <div className="modal-body">
@@ -25,6 +32,9 @@ var modalInstance = (
         <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
         <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
       </div>
+      <div className="modal-footer">
+        <Button onClick={closeModal}>Close</Button>
+      </div>
     </Modal>
   );
 
@@ -34,4 +44,4 @@ var overlayTriggerInstance = (
     </OverlayTrigger>
   );
 
-React.renderComponent(overlayTriggerInstance, mountNode);
+renderedTriggerInstance = React.renderComponent(overlayTriggerInstance, mountNode);

@@ -165,11 +165,11 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={ModalStatic} />
 
                   <h3 id="modals-static">Live demo</h3>
-                  <p>Use <code>&lt;OverlayTrigger/&gt;</code> to create a real modal that's added to the document body when opened.</p>
+                  <p>Use <code>&lt;OverlayTrigger /&gt;</code> to create a real modal that's added to the document body when opened.</p>
                   <ReactPlayground codeText={ModalOverlayTrigger} />
 
                   <h3 id="modals-static">Custom trigger</h3>
-                  <p>Use <code>&lt;OverlayTriggerMixin/&gt;</code> in a custom component to manage the modal's state yourself.</p>
+                  <p>Use <code>&lt;OverlayTriggerMixin /&gt;</code> in a custom component to manage the modal's state yourself.</p>
                   <ReactPlayground codeText={ModalOverlayTriggerMixin} />
                 </div>
               </div>
