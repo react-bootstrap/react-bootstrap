@@ -29,9 +29,18 @@ var DropdownButtonSizesText = fs.readFileSync(__dirname + '/../examples/Dropdown
 var SplitButtonDropupText = fs.readFileSync(__dirname + '/../examples/SplitButtonDropup.js', {encoding: 'utf8'});
 var SplitButtonRightText = fs.readFileSync(__dirname + '/../examples/SplitButtonRight.js', {encoding: 'utf8'});
 
+var PanelBasic = fs.readFileSync(__dirname + '/../examples/PanelBasic.js', {encoding: 'utf8'});
+var PanelWithHeading = fs.readFileSync(__dirname + '/../examples/PanelWithHeading.js', {encoding: 'utf8'});
+var PanelWithFooter = fs.readFileSync(__dirname + '/../examples/PanelWithFooter.js', {encoding: 'utf8'});
+var PanelContextual = fs.readFileSync(__dirname + '/../examples/PanelContextual.js', {encoding: 'utf8'});
+var PanelGroupControlled = fs.readFileSync(__dirname + '/../examples/PanelGroupControlled.js', {encoding: 'utf8'});
+var PanelGroupUncontrolled = fs.readFileSync(__dirname + '/../examples/PanelGroupUncontrolled.js', {encoding: 'utf8'});
+var PanelGroupAccordion = fs.readFileSync(__dirname + '/../examples/PanelGroupAccordion.js', {encoding: 'utf8'});
+
 var ModalStatic = fs.readFileSync(__dirname + '/../examples/ModalStatic.js', {encoding: 'utf8'});
 var ModalOverlayTrigger = fs.readFileSync(__dirname + '/../examples/ModalOverlayTrigger.js', {encoding: 'utf8'});
 var ModalOverlayTriggerMixin = fs.readFileSync(__dirname + '/../examples/ModalOverlayTriggerMixin.js', {encoding: 'utf8'});
+
 
 var ComponentsPage = React.createClass({
   render: function () {
@@ -157,6 +166,38 @@ var ComponentsPage = React.createClass({
                 </div>
 
                 <div className="bs-docs-section">
+                  <h1 id="panels" className="page-header">Panels <small>Panel, PanelGroup, Accordion</small></h1>
+
+                  <h3 id="panels-basic">Basic example</h3>
+                  <p>By default, all the <code>&lt;Panel /&gt;</code> does is apply some basic border and padding to contain some content.</p>
+                  <ReactPlayground codeText={PanelBasic} />
+
+                  <h3 id="panels-heading">Panel with heading</h3>
+                  <p>Easily add a heading container to your panel with the <code>header</code> prop.</p>
+                  <ReactPlayground codeText={PanelWithHeading} />
+
+                  <h3 id="panels-footer">Panel with footer</h3>
+                  <p>Pass buttons or secondary text in the <code>footer</code> prop. Note that panel footers do not inherit colors and borders when using contextual variations as they are not meant to be in the foreground.</p>
+                  <ReactPlayground codeText={PanelWithFooter} />
+
+                  <h3 id="panels-contextual">Contextual alternatives</h3>
+                  <p>Like other components, easily make a panel more meaningful to a particular context by adding a <code>bsStyle</code> prop.</p>
+                  <ReactPlayground codeText={PanelContextual} />
+
+                  <h3 id="panels-controlled">Controlled PanelGroups</h3>
+                  <p><code>PanelGroup</code>s can be controlled by a parent component. The <code>activeKey</code> prop dictates which panel is open.</p>
+                  <ReactPlayground codeText={PanelGroupControlled} />
+
+                  <h3 id="panels-uncontrolled">Uncontrolled PanelGroups</h3>
+                  <p><code>PanelGroup</code>s can also be uncontrolled where they manage their own state. The <code>defualtActiveKey</code> prop dictates which panel is open when initially.</p>
+                  <ReactPlayground codeText={PanelGroupUncontrolled} />
+
+                  <h3 id="panels-accordion">Accordions</h3>
+                  <p><code>&lt;Accordion /&gt;</code> aliases <code>&lt;PanelGroup isAccordion /&gt;</code>.</p>
+                  <ReactPlayground codeText={PanelGroupAccordion} />
+                </div>
+
+                <div className="bs-docs-section">
                   <h1 id="modals" className="page-header">Modals <small>Modal</small></h1>
 
                   <h3 id="modals-static">A static example</h3>
@@ -185,6 +226,9 @@ var ComponentsPage = React.createClass({
                     </li>
                     <li>
                       <a href="#btn-dropdowns">Button dropdowns</a>
+                    </li>
+                    <li>
+                      <a href="#panels">Panels</a>
                     </li>
                     <li>
                       <a href="#modals">Modals</a>

@@ -201,7 +201,7 @@ function handleSelect (selectedKey) {
   key = selectedKey;
 }
 
-<PanelGroup title="Title" activeKey={key} onSelect={handleSelect} isAccordion={true}>
+<PanelGroup activeKey={key} onSelect={handleSelect} isAccordion={true}>
   <Panel header="Panel 1" key={1}>TabPane 1 content</Panel>
   <Panel header={<strong>Panel 2</strong>} key={2}>TabPane 2 content</Panel>
 </PanelGroup>
@@ -212,7 +212,7 @@ function handleSelect (selectedKey) {
 var PanelGroup = require('react-bootstrap/PanelGroup');
 var Panel    = require('react-bootstrap/Panel');
 
-<PanelGroup title="Title" initialActiveKey={1} isAccordion={true}>
+<PanelGroup defaultActiveKey={1} isAccordion={true}>
   <Panel header="Panel 1" key={1}>Panel 1 content</Panel>
   <Panel header={<strong>Panel 2</strong>} key={2}>Panel 2 content</Panel>
 </PanelGroup>

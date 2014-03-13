@@ -19,10 +19,10 @@ var PanelGroup = React.createClass({
   },
 
   getInitialState: function () {
-    var initialActiveKey = this.props.initialActiveKey;
+    var defaultActiveKey = this.props.defaultActiveKey;
 
     return {
-      activeKey: initialActiveKey
+      activeKey: defaultActiveKey
     };
   },
 

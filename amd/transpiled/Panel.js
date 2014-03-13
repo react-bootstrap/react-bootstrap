@@ -23,7 +23,8 @@ define(
 
       getDefaultProps: function () {
         return {
-          bsClass: 'panel'
+          bsClass: 'panel',
+          bsStyle: 'default'
         };
       },
 

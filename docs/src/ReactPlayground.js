@@ -5,8 +5,7 @@
 var React = require('react');
 var CodeMirror = global.CodeMirror;
 var JSXTransformer = global.JSXTransformer;
-var TabbedArea = require('../../cjs/TabbedArea');
-var TabPane = require('../../cjs/TabPane');
+var Accordion = require('../../cjs/Accordion');
 var Alert = require('../../cjs/Alert');
 var Button = require('../../cjs/Button');
 var ButtonGroup = require('../../cjs/ButtonGroup');
@@ -19,6 +18,10 @@ var MenuItem = require('../../cjs/MenuItem');
 var Modal = require('../../cjs/Modal');
 var OverlayTrigger = require('../../cjs/OverlayTrigger');
 var OverlayTriggerMixin = require('../../cjs/OverlayTriggerMixin');
+var Panel = require('../../cjs/Panel');
+var PanelGroup = require('../../cjs/PanelGroup');
+var TabbedArea = require('../../cjs/TabbedArea');
+var TabPane = require('../../cjs/TabPane');
 
 var IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)

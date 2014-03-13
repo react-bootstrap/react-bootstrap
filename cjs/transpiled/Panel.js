@@ -20,7 +20,8 @@ var Panel = React.createClass({displayName: 'Panel',
 
   getDefaultProps: function () {
     return {
-      bsClass: 'panel'
+      bsClass: 'panel',
+      bsStyle: 'default'
     };
   },
 

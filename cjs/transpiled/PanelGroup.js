@@ -20,10 +20,10 @@ var PanelGroup = React.createClass({displayName: 'PanelGroup',
   },
 
   getInitialState: function () {
-    var initialActiveKey = this.props.initialActiveKey;
+    var defaultActiveKey = this.props.defaultActiveKey;
 
     return {
-      activeKey: initialActiveKey
+      activeKey: defaultActiveKey
     };
   },
 
