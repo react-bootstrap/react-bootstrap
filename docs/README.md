@@ -23,7 +23,7 @@ The site uses React bootstrap components, so first make sure you've built the pr
 ```sh
 $ cd react-bootstrap
 $ grunt serveDocs
-$ open http://localhost:4000/react-bootstrap/
+$ open http://localhost:4000/
 ```
 
 After making any modifications you will need to regenerate the site. Like:

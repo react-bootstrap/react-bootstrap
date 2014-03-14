@@ -225,7 +225,7 @@ module.exports = function (grunt) {
         grunt.log.errorlns(errMessage);
       }
 
-      var url = req.url.replace('/react-bootstrap/', '/');
+      var url = req.url;
       grunt.verbose.writeln(url);
       send(req, url)
         .root('docs')
@@ -234,7 +234,7 @@ module.exports = function (grunt) {
     }).listen(4000);
 
     grunt.log.writeln('Docs running at ' +
-      'http://localhost:4000/react-bootstrap/'.cyan );
+      'http://localhost:4000/'.cyan );
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
