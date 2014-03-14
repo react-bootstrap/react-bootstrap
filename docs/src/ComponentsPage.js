@@ -10,45 +10,6 @@ var PageHeader = require('./PageHeader');
 var PageFooter = require('./PageFooter');
 var ReactPlayground = require('./ReactPlayground');
 
-var ButtonTypesText = fs.readFileSync(__dirname + '/../examples/ButtonTypes.js', {encoding: 'utf8'});
-var ButtonSizesText = fs.readFileSync(__dirname + '/../examples/ButtonSizes.js', {encoding: 'utf8'});
-var ButtonBlockText = fs.readFileSync(__dirname + '/../examples/ButtonBlock.js', {encoding: 'utf8'});
-var ButtonActiveText = fs.readFileSync(__dirname + '/../examples/ButtonActive.js', {encoding: 'utf8'});
-var ButtonDisabledText = fs.readFileSync(__dirname + '/../examples/ButtonDisabled.js', {encoding: 'utf8'});
-var ButtonTagTypesText = fs.readFileSync(__dirname + '/../examples/ButtonTagTypes.js', {encoding: 'utf8'});
-var ButtonLoadingText = fs.readFileSync(__dirname + '/../examples/ButtonLoading.js', {encoding: 'utf8'});
-var ButtonGroupBasicText = fs.readFileSync(__dirname + '/../examples/ButtonGroupBasic.js', {encoding: 'utf8'});
-var ButtonToolbarBasicText = fs.readFileSync(__dirname + '/../examples/ButtonToolbarBasic.js', {encoding: 'utf8'});
-var ButtonGroupSizesText = fs.readFileSync(__dirname + '/../examples/ButtonGroupSizes.js', {encoding: 'utf8'});
-var ButtonGroupNestedText = fs.readFileSync(__dirname + '/../examples/ButtonGroupNested.js', {encoding: 'utf8'});
-var ButtonGroupVerticalText = fs.readFileSync(__dirname + '/../examples/ButtonGroupVertical.js', {encoding: 'utf8'});
-var ButtonGroupJustifiedText = fs.readFileSync(__dirname + '/../examples/ButtonGroupJustified.js', {encoding: 'utf8'});
-var DropdownButtonBasicText = fs.readFileSync(__dirname + '/../examples/DropdownButtonBasic.js', {encoding: 'utf8'});
-var SplitButtonBasicText = fs.readFileSync(__dirname + '/../examples/SplitButtonBasic.js', {encoding: 'utf8'});
-var DropdownButtonSizesText = fs.readFileSync(__dirname + '/../examples/DropdownButtonSizes.js', {encoding: 'utf8'});
-var SplitButtonDropupText = fs.readFileSync(__dirname + '/../examples/SplitButtonDropup.js', {encoding: 'utf8'});
-var SplitButtonRightText = fs.readFileSync(__dirname + '/../examples/SplitButtonRight.js', {encoding: 'utf8'});
-
-var PanelBasic = fs.readFileSync(__dirname + '/../examples/PanelBasic.js', {encoding: 'utf8'});
-var PanelWithHeading = fs.readFileSync(__dirname + '/../examples/PanelWithHeading.js', {encoding: 'utf8'});
-var PanelWithFooter = fs.readFileSync(__dirname + '/../examples/PanelWithFooter.js', {encoding: 'utf8'});
-var PanelContextual = fs.readFileSync(__dirname + '/../examples/PanelContextual.js', {encoding: 'utf8'});
-var PanelGroupControlled = fs.readFileSync(__dirname + '/../examples/PanelGroupControlled.js', {encoding: 'utf8'});
-var PanelGroupUncontrolled = fs.readFileSync(__dirname + '/../examples/PanelGroupUncontrolled.js', {encoding: 'utf8'});
-var PanelGroupAccordion = fs.readFileSync(__dirname + '/../examples/PanelGroupAccordion.js', {encoding: 'utf8'});
-
-var ModalStatic = fs.readFileSync(__dirname + '/../examples/ModalStatic.js', {encoding: 'utf8'});
-var ModalOverlayTrigger = fs.readFileSync(__dirname + '/../examples/ModalOverlayTrigger.js', {encoding: 'utf8'});
-var ModalOverlayTriggerMixin = fs.readFileSync(__dirname + '/../examples/ModalOverlayTriggerMixin.js', {encoding: 'utf8'});
-
-var ProgressBarBasic = fs.readFileSync(__dirname + '/../examples/ProgressBarBasic.js', {encoding: 'utf8'});
-var ProgressBarWithLabel = fs.readFileSync(__dirname + '/../examples/ProgressBarWithLabel.js', {encoding: 'utf8'});
-var ProgressBarScreenreaderLabel = fs.readFileSync(__dirname + '/../examples/ProgressBarScreenreaderLabel.js', {encoding: 'utf8'});
-var ProgressBarContextual = fs.readFileSync(__dirname + '/../examples/ProgressBarContextual.js', {encoding: 'utf8'});
-var ProgressBarStriped = fs.readFileSync(__dirname + '/../examples/ProgressBarStriped.js', {encoding: 'utf8'});
-var ProgressBarAnimated = fs.readFileSync(__dirname + '/../examples/ProgressBarAnimated.js', {encoding: 'utf8'});
-var ProgressBarStacked = fs.readFileSync(__dirname + '/../examples/ProgressBarStacked.js', {encoding: 'utf8'});
-
 var ComponentsPage = React.createClass({
   render: function () {
     return (
@@ -69,24 +30,24 @@ var ComponentsPage = React.createClass({
                   <h2 id="buttons-options">Options</h2>
                   <p>Use any of the available button style types to quickly create a styled button. Just modify the
                     <code>bsStyle</code> prop.</p>
-                  <ReactPlayground codeText={ButtonTypesText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonTypes.js', 'utf8')} />
 
                   <h2 id="buttons-sizes">Sizes</h2>
                   <p>Fancy larger or smaller buttons? Add <code>bsSize="large"</code>, <code>bsSize="small"</code>, or <code>bsSize="xsmall"</code> for additional sizes.</p>
-                  <ReactPlayground codeText={ButtonSizesText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonSizes.js', 'utf8')} />
 
                   <p>Create block level buttons—those that span the full width of a parent— by adding the
                       <code>block</code> prop.</p>
-                  <ReactPlayground codeText={ButtonBlockText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonBlock.js', 'utf8')} />
 
                   <h2 id="buttons-active">Active state</h2>
                   <p>To set a buttons active state simply set the components <code>active</code> prop.</p>
-                  <ReactPlayground codeText={ButtonActiveText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonActive.js', 'utf8')} />
 
                   <h2 id="buttons-disabled">Disabled state</h2>
                   <p>Make buttons look unclickable by fading them back 50%. To do this add the <code>disabled</code>
                     attribute to buttons.</p>
-                  <ReactPlayground codeText={ButtonDisabledText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonDisabled.js', 'utf8')} />
 
                   <div className="bs-callout bs-callout-warning">
                     <h4>Event handler functionality not impacted</h4>
@@ -98,13 +59,13 @@ var ComponentsPage = React.createClass({
                   <p>The DOM element tag is choosen automaticly for you based on the props you supply. Passing a
                     <code>href</code> will result in the button using a <code>{'<a />'}</code> element otherwise a
                     <code>{'<button />'}</code> element will be used.</p>
-                  <ReactPlayground codeText={ButtonTagTypesText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonTagTypes.js', 'utf8')} />
 
                   <h2 id="buttons-tags">Button loading state</h2>
                   <p>When activating an asynchronous action from a button it is a good UX pattern to give the user
                     feedback as to the loading state, this can easily be done by updating your
                     <code>{'<Button />'}</code>&#8217;s props from a state change like below.</p>
-                  <ReactPlayground codeText={ButtonLoadingText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonLoading.js', 'utf8')} />
                 </div>
 
                 {/* Button Groups */}
@@ -114,28 +75,28 @@ var ComponentsPage = React.createClass({
 
                   <h3 id="btn-groups-single">Basic example</h3>
                   <p>Wrap a series of <code>{'<Button />'}</code>&#8217;s in a <code>{'<ButtonGroup />'}</code>.</p>
-                  <ReactPlayground codeText={ButtonGroupBasicText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonGroupBasic.js', 'utf8')} />
 
                   <h3 id="btn-groups-toolbar">Button toolbar</h3>
                   <p>Combine sets of <code>{'<ButtonGroup />'}</code>&#8217;s into a <code>{'<ButtonToolbar />'}</code>
                     for more complex components.</p>
-                  <ReactPlayground codeText={ButtonToolbarBasicText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonToolbarBasic.js', 'utf8')} />
 
                   <h3 id="btn-groups-sizing">Sizing</h3>
                   <p>Instead of applying button sizing props to every button in a group, just add <code>bsSize</code>
                     prop to the <code>{'<ButtonGroup />'}</code>.</p>
-                  <ReactPlayground codeText={ButtonGroupSizesText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonGroupSizes.js', 'utf8')} />
 
                   <h3 id="btn-groups-nested">Nesting</h3>
                   <p>You can place other button types within the <code>{'<ButtonGroup />'}</code> like
                     <code>{'<DropdownButton />'}</code>&#8217;s.</p>
-                  <ReactPlayground codeText={ButtonGroupNestedText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonGroupNested.js', 'utf8')} />
 
                   <h3 id="btn-groups-vertical">Vertical variation</h3>
                   <p>Make a set of buttons appear vertically stacked rather than horizontally.
                     <strong className="text-danger">Split button dropdowns are not supported here.</strong></p>
                   <p>Just add <code>vertical</code> to the <code>{'<ButtonGroup />'}</code>.</p>
-                  <ReactPlayground codeText={ButtonGroupVerticalText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonGroupVertical.js', 'utf8')} />
 
                   <h3 id="btn-groups-justified">Justified button groups</h3>
                   <p>Make a group of buttons stretch at equal sizes to span the entire width of its parent. Also works with button dropdowns within the button group.</p>
@@ -144,7 +105,7 @@ var ComponentsPage = React.createClass({
                     <p>There are some issues and workarounds required when using this property, please see <a href="http://getbootstrap.com/components/#btn-groups-justified">bootstrap&#8217;s button group docs</a> for more specifics.</p>
                   </div>
                   <p>Just add <code>justified</code> to the <code>{'<ButtonGroup />'}</code>.</p>
-                  <ReactPlayground codeText={ButtonGroupJustifiedText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonGroupJustified.js', 'utf8')} />
                 </div>
 
                 <div className="bs-docs-section">
@@ -153,23 +114,23 @@ var ComponentsPage = React.createClass({
 
                   <h3 id="btn-dropdowns-single">Single button dropdowns</h3>
                   <p>Create a dropdown button with the <code>{'<DropdownButton />'}</code> component.</p>
-                  <ReactPlayground codeText={DropdownButtonBasicText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/DropdownButtonBasic.js', 'utf8')} />
 
                   <h3 id="btn-dropdowns-split">Split button dropdowns</h3>
                   <p>Similarly, create split button dropdowns with the <code>{'<SplitButton />'}</code> component.</p>
-                  <ReactPlayground codeText={SplitButtonBasicText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/SplitButtonBasic.js', 'utf8')} />
 
                   <h3 id="btn-dropdowns-sizing">Sizing</h3>
                   <p>Button dropdowns work with buttons of all sizes.</p>
-                  <ReactPlayground codeText={DropdownButtonSizesText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/DropdownButtonSizes.js', 'utf8')} />
 
                   <h3 id="btn-dropdowns-dropup">Dropup variation</h3>
                   <p>Trigger dropdown menus that site above the button by adding the <code>dropup</code> prop.</p>
-                  <ReactPlayground codeText={SplitButtonDropupText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/SplitButtonDropup.js', 'utf8')} />
 
                   <h3 id="btn-dropdowns-right">Dropdown right variation</h3>
                   <p>Trigger dropdown menus that align to the right of the button using the <code>pullRight</code> prop.</p>
-                  <ReactPlayground codeText={SplitButtonRightText} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/SplitButtonRight.js', 'utf8')} />
                 </div>
 
                 <div className="bs-docs-section">
@@ -177,31 +138,31 @@ var ComponentsPage = React.createClass({
 
                   <h3 id="panels-basic">Basic example</h3>
                   <p>By default, all the <code>&lt;Panel /&gt;</code> does is apply some basic border and padding to contain some content.</p>
-                  <ReactPlayground codeText={PanelBasic} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelBasic.js', 'utf8')} />
 
                   <h3 id="panels-heading">Panel with heading</h3>
                   <p>Easily add a heading container to your panel with the <code>header</code> prop.</p>
-                  <ReactPlayground codeText={PanelWithHeading} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelWithHeading.js', 'utf8')} />
 
                   <h3 id="panels-footer">Panel with footer</h3>
                   <p>Pass buttons or secondary text in the <code>footer</code> prop. Note that panel footers do not inherit colors and borders when using contextual variations as they are not meant to be in the foreground.</p>
-                  <ReactPlayground codeText={PanelWithFooter} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelWithFooter.js', 'utf8')} />
 
                   <h3 id="panels-contextual">Contextual alternatives</h3>
                   <p>Like other components, easily make a panel more meaningful to a particular context by adding a <code>bsStyle</code> prop.</p>
-                  <ReactPlayground codeText={PanelContextual} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelContextual.js', 'utf8')} />
 
                   <h3 id="panels-controlled">Controlled PanelGroups</h3>
                   <p><code>PanelGroup</code>s can be controlled by a parent component. The <code>activeKey</code> prop dictates which panel is open.</p>
-                  <ReactPlayground codeText={PanelGroupControlled} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelGroupControlled.js', 'utf8')} />
 
                   <h3 id="panels-uncontrolled">Uncontrolled PanelGroups</h3>
                   <p><code>PanelGroup</code>s can also be uncontrolled where they manage their own state. The <code>defualtActiveKey</code> prop dictates which panel is open when initially.</p>
-                  <ReactPlayground codeText={PanelGroupUncontrolled} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelGroupUncontrolled.js', 'utf8')} />
 
                   <h3 id="panels-accordion">Accordions</h3>
                   <p><code>&lt;Accordion /&gt;</code> aliases <code>&lt;PanelGroup isAccordion /&gt;</code>.</p>
-                  <ReactPlayground codeText={PanelGroupAccordion} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelGroupAccordion.js', 'utf8')} />
                 </div>
 
                 <div className="bs-docs-section">
@@ -210,15 +171,15 @@ var ComponentsPage = React.createClass({
                   <h3 id="modals-static">A static example</h3>
                   <p>A rendered modal with header, body, and set of actions in the footer.</p>
                   <p>The header is added automatically if you pass in a <code>title</code> prop.</p>
-                  <ReactPlayground codeText={ModalStatic} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalStatic.js', 'utf8')} />
 
                   <h3 id="modals-static">Live demo</h3>
                   <p>Use <code>&lt;OverlayTrigger /&gt;</code> to create a real modal that's added to the document body when opened.</p>
-                  <ReactPlayground codeText={ModalOverlayTrigger} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalOverlayTrigger.js', 'utf8')} />
 
                   <h3 id="modals-static">Custom trigger</h3>
                   <p>Use <code>&lt;OverlayTriggerMixin /&gt;</code> in a custom component to manage the modal's state yourself.</p>
-                  <ReactPlayground codeText={ModalOverlayTriggerMixin} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalOverlayTriggerMixin.js', 'utf8')} />
                 </div>
 
                 <div className="bs-docs-section">
@@ -228,32 +189,32 @@ var ComponentsPage = React.createClass({
 
                   <h2 id="modals-static">Basic example</h2>
                   <p>Default progress bar.</p>
-                  <ReactPlayground codeText={ProgressBarBasic} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarBasic.js', 'utf8')} />
 
                   <h2 id="modals-label">With label</h2>
                   <p>Add a <code>label</code> prop to show a visible percentage. For low percentages, consider adding a min-width to ensure the label's text is fully visible.</p>
                   <p>The following keys are interpolated with the current values: <code>%(min)s</code>, <code>%(max)s</code>, <code>%(now)s</code>, <code>%(percent)s</code>, <code>%(bsStyle)s</code></p>
-                  <ReactPlayground codeText={ProgressBarWithLabel} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarWithLabel.js', 'utf8')} />
 
                   <h2 id="modals-label">Screenreader only label</h2>
                   <p>Add a <code>srOnly</code> prop to hide the label visually.</p>
-                  <ReactPlayground codeText={ProgressBarScreenreaderLabel} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarScreenreaderLabel.js', 'utf8')} />
 
                   <h2 id="modals-label">Contextual alternatives</h2>
                   <p>Progress bars use some of the same button and alert classes for consistent styles.</p>
-                  <ReactPlayground codeText={ProgressBarContextual} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarContextual.js', 'utf8')} />
 
                   <h2 id="modals-label">Striped</h2>
                   <p>Uses a gradient to create a striped effect. Not available in IE8.</p>
-                  <ReactPlayground codeText={ProgressBarStriped} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarStriped.js', 'utf8')} />
 
                   <h2 id="modals-label">Animated</h2>
                   <p>Add <code>active</code> prop to animate the stripes right to left. Not available in IE9 and below.</p>
-                  <ReactPlayground codeText={ProgressBarAnimated} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarAnimated.js', 'utf8')} />
 
                   <h2 id="modals-label">Stacked</h2>
                   <p>Nest <code>&lt;ProgressBar /&gt;</code>s to stack them.</p>
-                  <ReactPlayground codeText={ProgressBarStacked} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarStacked.js', 'utf8')} />
                 </div>
               </div>
 
