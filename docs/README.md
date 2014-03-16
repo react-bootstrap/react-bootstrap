@@ -12,24 +12,37 @@ If you are working on the site, you will want to install and run a local copy of
 All dependencies are installed with npm, just:
 
 ```sh
-$ cd react-bootstrap
+$ cd react-bootstrap/docs
 $ npm install
 ```
 
 ### Instructions
 
-The site uses React bootstrap components, so first make sure you've built the project (via `grunt`). Then:
+#### Development
+
+The site uses React bootstrap components, so first make sure you've installed and built the project (via `grunt`). Then:
 
 ```sh
-$ cd react-bootstrap
-$ grunt serveDocs
+$ cd react-bootstrap/docs
+$ npm start
 $ open http://localhost:4000/
 ```
 
-After making any modifications you will need to regenerate the site. Like:
+This will start an express based node server which will generate static html content and the js bundle on request. After making any modifications the server should restart and regenerate any necessary files on the next request.
+
+#### Production
+
+This site is statically published on github pages, to do this the static assets need to be generated.
 
 ```sh
-$ cd react-bootstrap
-$ grunt watch:docs # Automatically compiles as needed
-$ grunt build:docs # Single compile
+$ cd react-bootstrap/docs
+$ npm run build
+```
+
+To test the static files you can use the included express based static file server.
+
+```sh
+$ cd react-bootstrap/docs
+$ npm run start-prod
+$ open http://localhost:4000/
 ```
