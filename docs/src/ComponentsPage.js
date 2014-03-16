@@ -18,14 +18,14 @@ var ReactPlayground = require('./ReactPlayground');
 var ComponentsPage = React.createClass({
   getInitialState: function () {
     return {
-      activeNavItemKey: null,
+      activeNavItemHref: null,
       navOffsetTop: null
     };
   },
 
   handleNavItemSelect: function (key, href) {
     this.setState({
-      activeNavItemKey: key
+      activeNavItemHref: href
     });
 
     window.location = href;
@@ -259,7 +259,7 @@ var ComponentsPage = React.createClass({
                   offsetBottom={this.state.navOffsetBottom}>
                   <Nav
                     className="bs-docs-sidenav"
-                    activeKey={this.state.activeNavItemKey}
+                    activeHref={this.state.activeNavItemHref}
                     onSelect={this.handleNavItemSelect}
                     ref="sideNav">
                     <SubNav href="#buttons" key={1} text="Buttons">

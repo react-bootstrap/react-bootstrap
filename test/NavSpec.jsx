@@ -72,4 +72,17 @@ describe('Nav', function () {
     ReactTestUtils.renderIntoDocument(instance);
     ReactTestUtils.Simulate.click(instance.refs.item2.refs.anchor);
   });
+
+  it('Should set the correct item active by href', function () {
+    var instance = (
+        <Nav bsStyle="pills" activeHref="#item2">
+          <NavItem key={1} ref="item1" href="#item1">Pill 1 content</NavItem>
+          <NavItem key={2} ref="item2" href="#item2">Pill 2 content</NavItem>
+        </Nav>
+      );
+
+    ReactTestUtils.renderIntoDocument(instance);
+    assert.ok(instance.refs.item2.props.isActive);
+    assert.notOk(instance.refs.item1.props.isActive);
+  });
 });

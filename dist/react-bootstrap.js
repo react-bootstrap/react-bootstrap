@@ -2565,13 +2565,31 @@ define(
         );
       },
 
+      isChildActive: function (child) {
+        if (child.props.isActive) {
+          return true;
+        }
+        if (this.props.activeKey != null) {
+          if (child.props.key === this.props.activeKey) {
+            return true;
+          }
+        }
+        if (this.props.activeHref != null) {
+          if (child.props.href === this.props.activeHref) {
+            return true;
+          }
+        }
+
+        return child.props.isActive;
+      },
+
       renderNavItem: function (child) {
         return utils.cloneWithProps(
           child,
           {
-            isActive: this.props.activeKey != null ?
-              child.props.key === this.props.activeKey : child.props.isActive,
+            isActive: this.isChildActive(child),
             activeKey: this.props.activeKey,
+            activeHref: this.props.activeHref,
             onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),
             ref: child.props.ref,
             key: child.props.key
@@ -3465,6 +3483,10 @@ define(
           return true;
         }
 
+        if (this.props.activeHref != null && this.props.activeHref === child.props.href) {
+          return true;
+        }
+
         if (child.props.children) {
           React.Children.forEach(
             child.props.children,
@@ -3480,6 +3502,24 @@ define(
         }
 
         return false;
+      },
+
+      getChildActiveProp: function (child) {
+        if (child.props.isActive) {
+          return true;
+        }
+        if (this.props.activeKey != null) {
+          if (child.props.key === this.props.activeKey) {
+            return true;
+          }
+        }
+        if (this.props.activeHref != null) {
+          if (child.props.href === this.props.activeHref) {
+            return true;
+          }
+        }
+
+        return child.props.isActive;
       },
 
       render: function () {
@@ -3508,8 +3548,7 @@ define(
         return utils.cloneWithProps(
           child,
           {
-            isActive: this.props.activeKey != null ?
-              child.props.key === this.props.activeKey : child.props.isActive,
+            isActive: this.getChildActiveProp(child),
             onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),
             ref: child.props.ref,
             key: child.props.key
