@@ -8,7 +8,7 @@ var NavItem        = require('../cjs/NavItem');
 describe('NavItem', function () {
   it('Should add active class', function () {
     var instance = (
-        <NavItem isActive={true}>Item content</NavItem>
+        <NavItem active={true}>Item content</NavItem>
       );
 
     ReactTestUtils.renderIntoDocument(instance);

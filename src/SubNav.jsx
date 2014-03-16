@@ -11,7 +11,7 @@ var SubNav = React.createClass({
 
   propTypes: {
     onSelect: React.PropTypes.func,
-    isActive: React.PropTypes.bool,
+    active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
@@ -41,7 +41,7 @@ var SubNav = React.createClass({
   isChildActive: function (child) {
     var isActive = false;
 
-    if (child.props.isActive) {
+    if (child.props.active) {
       return true;
     }
 
@@ -71,7 +71,7 @@ var SubNav = React.createClass({
   },
 
   getChildActiveProp: function (child) {
-    if (child.props.isActive) {
+    if (child.props.active) {
       return true;
     }
     if (this.props.activeKey != null) {
@@ -85,7 +85,7 @@ var SubNav = React.createClass({
       }
     }
 
-    return child.props.isActive;
+    return child.props.active;
   },
 
   render: function () {
@@ -114,7 +114,7 @@ var SubNav = React.createClass({
     return utils.cloneWithProps(
       child,
       {
-        isActive: this.getChildActiveProp(child),
+        active: this.getChildActiveProp(child),
         onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),
         ref: child.props.ref,
         key: child.props.key

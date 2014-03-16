@@ -15,8 +15,8 @@ describe('TabbedArea', function () {
       </TabbedArea>
     );
 
-    assert.equal(instance.refs.pane1.props.isActive, true);
-    assert.equal(instance.refs.pane2.props.isActive, false);
+    assert.equal(instance.refs.pane1.props.active, true);
+    assert.equal(instance.refs.pane2.props.active, false);
 
     assert.equal(instance.refs.tabs.props.activeKey, 1);
   });
@@ -85,8 +85,8 @@ describe('TabbedArea', function () {
       </TabbedArea>
     );
 
-    assert.equal(instance.refs.pane1.props.isActive, false);
-    assert.equal(instance.refs.pane2.props.isActive, true);
+    assert.equal(instance.refs.pane1.props.active, false);
+    assert.equal(instance.refs.pane2.props.active, true);
 
     assert.equal(instance.refs.tabs.props.activeKey, 2);
   });
@@ -99,8 +99,8 @@ describe('TabbedArea', function () {
       </TabbedArea>
     );
 
-    assert.equal(instance.refs.pane1.props.isActive, true);
-    assert.equal(instance.refs.pane2.props.isActive, false);
+    assert.equal(instance.refs.pane1.props.active, true);
+    assert.equal(instance.refs.pane2.props.active, false);
 
     assert.equal(instance.refs.tabs.props.activeKey, 1);
   });
@@ -118,8 +118,8 @@ describe('TabbedArea', function () {
     // with `ReactTestUtils#nextUpdate()` when it is merged.
     // @see https://github.com/facebook/react/pull/948
     instance.componentDidUpdate = function () {
-      assert.equal(instance.refs.pane1.props.isActive, true);
-      assert.equal(instance.refs.pane2.props.isActive, false);
+      assert.equal(instance.refs.pane1.props.active, true);
+      assert.equal(instance.refs.pane2.props.active, false);
 
       assert.equal(instance.refs.tabs.props.activeKey, 1);
       done();

@@ -17,7 +17,7 @@ describe('TabPane', function () {
 
   it('Should add active class', function () {
     var instance = (
-        <TabPane isActive={true}>Item content</TabPane>
+        <TabPane active={true}>Item content</TabPane>
       );
 
     ReactTestUtils.renderIntoDocument(instance);

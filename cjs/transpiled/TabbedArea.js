@@ -54,7 +54,7 @@ var TabbedArea = React.createClass({displayName: 'TabbedArea',
     return utils.cloneWithProps(
         child,
         {
-          isActive: (child.props.key === activeKey),
+          active: (child.props.key === activeKey),
           ref: child.props.ref,
           key: child.props.key
         }

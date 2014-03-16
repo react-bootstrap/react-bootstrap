@@ -8,7 +8,7 @@ var TabPane = React.createClass({displayName: 'TabPane',
   render: function () {
     var classes = {
       'tab-pane': true,
-      'active': this.props.isActive
+      'active': this.props.active
     };
 
     return this.transferPropsTo(

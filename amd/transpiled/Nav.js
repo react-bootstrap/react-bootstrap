@@ -41,8 +41,8 @@ define(
         );
       },
 
-      isChildActive: function (child) {
-        if (child.props.isActive) {
+      getChildActiveProp: function (child) {
+        if (child.props.active) {
           return true;
         }
         if (this.props.activeKey != null) {
@@ -56,14 +56,14 @@ define(
           }
         }
 
-        return child.props.isActive;
+        return child.props.active;
       },
 
       renderNavItem: function (child) {
         return utils.cloneWithProps(
           child,
           {
-            isActive: this.isChildActive(child),
+            active: this.getChildActiveProp(child),
             activeKey: this.props.activeKey,
             activeHref: this.props.activeHref,
             onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),

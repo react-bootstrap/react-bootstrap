@@ -15,7 +15,7 @@ define(
 
       propTypes: {
         onSelect: React.PropTypes.func,
-        isActive: React.PropTypes.bool,
+        active: React.PropTypes.bool,
         disabled: React.PropTypes.bool,
         href: React.PropTypes.string,
         title: React.PropTypes.string,
@@ -45,7 +45,7 @@ define(
       isChildActive: function (child) {
         var isActive = false;
 
-        if (child.props.isActive) {
+        if (child.props.active) {
           return true;
         }
 
@@ -75,7 +75,7 @@ define(
       },
 
       getChildActiveProp: function (child) {
-        if (child.props.isActive) {
+        if (child.props.active) {
           return true;
         }
         if (this.props.activeKey != null) {
@@ -89,7 +89,7 @@ define(
           }
         }
 
-        return child.props.isActive;
+        return child.props.active;
       },
 
       render: function () {
@@ -118,7 +118,7 @@ define(
         return utils.cloneWithProps(
           child,
           {
-            isActive: this.getChildActiveProp(child),
+            active: this.getChildActiveProp(child),
             onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),
             ref: child.props.ref,
             key: child.props.key

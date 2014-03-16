@@ -16,8 +16,8 @@ describe('Nav', function () {
       );
 
     ReactTestUtils.renderIntoDocument(instance);
-    assert.ok(instance.refs.item1.props.isActive);
-    assert.notOk(instance.refs.item2.props.isActive);
+    assert.ok(instance.refs.item1.props.active);
+    assert.notOk(instance.refs.item2.props.active);
   });
 
   it('Should adds style class', function () {
@@ -82,7 +82,7 @@ describe('Nav', function () {
       );
 
     ReactTestUtils.renderIntoDocument(instance);
-    assert.ok(instance.refs.item2.props.isActive);
-    assert.notOk(instance.refs.item1.props.isActive);
+    assert.ok(instance.refs.item2.props.active);
+    assert.notOk(instance.refs.item1.props.active);
   });
 });

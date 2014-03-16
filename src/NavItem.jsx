@@ -9,7 +9,7 @@ var NavItem = React.createClass({
 
   propTypes: {
     onSelect: React.PropTypes.func,
-    isActive: React.PropTypes.bool,
+    active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string
@@ -23,7 +23,7 @@ var NavItem = React.createClass({
 
   render: function () {
     var classes = {
-      'active': this.props.isActive,
+      'active': this.props.active,
       'disabled': this.props.disabled
     };
 
