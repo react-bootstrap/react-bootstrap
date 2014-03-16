@@ -5,16 +5,49 @@
 var React = require('react');
 var fs = require('fs');
 
+var Affix = require('../../cjs/Affix');
+var Nav = require('../../cjs/Nav');
+var SubNav = require('../../cjs/SubNav');
+var NavItem = require('../../cjs/NavItem');
+
 var NavMain = require('./NavMain');
 var PageHeader = require('./PageHeader');
 var PageFooter = require('./PageFooter');
 var ReactPlayground = require('./ReactPlayground');
 
 var ComponentsPage = React.createClass({
+  getInitialState: function () {
+    return {
+      activeNavItemKey: null,
+      navOffsetTop: null
+    };
+  },
+
+  handleNavItemSelect: function (key, href) {
+    this.setState({
+      activeNavItemKey: key
+    });
+
+    window.location = href;
+  },
+
+  componentDidMount: function () {
+    var elem = this.refs.sideNav.getDOMNode(),
+        domUtils = Affix.domUtils,
+        sideNavOffsetTop = domUtils.getOffset(elem).top,
+        sideNavMarginTop = parseInt(domUtils.getComputedStyles(elem.firstChild).marginTop, 10),
+        topNavHeight = this.refs.topNav.getDOMNode().offsetHeight;
+
+    this.setState({
+      navOffsetTop: sideNavOffsetTop - topNavHeight - sideNavMarginTop,
+      navOffsetBottom: this.refs.footer.getDOMNode().offsetHeight
+    });
+  },
+
   render: function () {
     return (
         <div>
-          <NavMain activePage="components" />
+          <NavMain activePage="components" ref="topNav" />
 
           <PageHeader
             title="Components"
@@ -219,36 +252,33 @@ var ComponentsPage = React.createClass({
               </div>
 
               <div className="col-md-3">
-                <div className="bs-docs-sidebar hidden-print affix-top" role="complementary">
-                  <ul className="nav bs-docs-sidenav">
-                    <li>
-                      <a href="#buttons">Buttons</a>
-                    </li>
-                    <li>
-                      <a href="#btn-groups">Button groups</a>
-                    </li>
-                    <li>
-                      <a href="#btn-dropdowns">Button dropdowns</a>
-                    </li>
-                    <li>
-                      <a href="#panels">Panels</a>
-                    </li>
-                    <li>
-                      <a href="#modals">Modals</a>
-                    </li>
-                    <li>
-                      <a href="#progress">Progress bars</a>
-                    </li>
-                  </ul>
+                <Affix
+                  className="bs-docs-sidebar hidden-print"
+                  role="complementary"
+                  offsetTop={this.state.navOffsetTop}
+                  offsetBottom={this.state.navOffsetBottom}>
+                  <Nav
+                    className="bs-docs-sidenav"
+                    activeKey={this.state.activeNavItemKey}
+                    onSelect={this.handleNavItemSelect}
+                    ref="sideNav">
+                    <SubNav href="#buttons" key={1} text="Buttons">
+                      <NavItem href="#btn-groups" key={2}>Button groups</NavItem>
+                      <NavItem href="#btn-dropdowns" key={3}>Button dropdowns</NavItem>
+                    </SubNav>
+                    <NavItem href="#panels" key={4}>Panels</NavItem>
+                    <NavItem href="#modals" key={5}>Modals</NavItem>
+                    <NavItem href="#progress" key={6}>Progress bars</NavItem>
+                  </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top
                   </a>
-                </div>
+                </Affix>
               </div>
             </div>
           </div>
 
-          <PageFooter />
+          <PageFooter ref="footer" />
         </div>
       );
   }

@@ -5,6 +5,8 @@ define(function (require) {
 
     return {
         Accordion: require('../amd/Accordion'),
+        Affix: require('../amd/Affix'),
+        Affix: require('../amd/AffixMixin'),
         Alert: require('../amd/Alert'),
         BootstrapMixin: require('../amd/BootstrapMixin'),
         Button: require('../amd/Button'),
@@ -26,6 +28,7 @@ define(function (require) {
         PanelGroup: require('../amd/PanelGroup'),
         ProgressBar: require('../amd/ProgressBar'),
         SplitButton: require('../amd/SplitButton'),
+        SubNav: require('../amd/SubNav'),
         TabbedArea: require('../amd/TabbedArea'),
         TabPane: require('../amd/TabPane')
     };

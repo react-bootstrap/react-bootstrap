@@ -45,7 +45,7 @@ var NavItem = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.key);
+        this.props.onSelect(this.props.key,this.props.href);
       }
     }
   }

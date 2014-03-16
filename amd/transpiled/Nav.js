@@ -14,7 +14,7 @@ define(
       mixins: [BootstrapMixin],
 
       propTypes: {
-        bsStyle: React.PropTypes.oneOf(['tabs','pills']).isRequired,
+        bsStyle: React.PropTypes.oneOf(['tabs','pills']),
         stacked: React.PropTypes.bool,
         justified: React.PropTypes.bool,
         onSelect: React.PropTypes.func
@@ -45,7 +45,9 @@ define(
         return utils.cloneWithProps(
           child,
           {
-            isActive: this.props.activeKey != null ? child.props.key === this.props.activeKey : null,
+            isActive: this.props.activeKey != null ?
+              child.props.key === this.props.activeKey : child.props.isActive,
+            activeKey: this.props.activeKey,
             onSelect: utils.createChainedFunction(child.onSelect, this.props.onSelect),
             ref: child.props.ref,
             key: child.props.key
