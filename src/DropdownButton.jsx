@@ -26,6 +26,9 @@ var DropdownButton = React.createClass({
         'dropup': this.props.dropup
       };
 
+    var className = this.props.className ?
+      this.props.className + ' dropdown-toggle' : 'dropdown-toggle';
+
     return (
       <ButtonGroup
         bsSize={this.props.bsSize}
@@ -34,7 +37,7 @@ var DropdownButton = React.createClass({
           ref="dropdownButton"
           href={this.props.href}
           bsStyle={this.props.bsStyle}
-          className="dropdown-toggle"
+          className={className}
           onClick={this.handleOpenClick}>
           {this.props.title}{' '}
           <span className="caret" />

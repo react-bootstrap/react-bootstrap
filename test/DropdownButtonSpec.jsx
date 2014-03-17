@@ -18,7 +18,7 @@ describe('DropdownButton', function () {
 
   it('Should render button correctly', function () {
     instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title">
+      <DropdownButton title="Title" className="test-class">
         <MenuItem key="1">MenuItem 1 content</MenuItem>
         <MenuItem key="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
@@ -27,6 +27,7 @@ describe('DropdownButton', function () {
     var button = instance.refs.dropdownButton.getDOMNode();
     assert.ok(instance.getDOMNode().className.match(/\bbtn-group\b/));
     assert.ok(button.className.match(/\bbtn\b/));
+    assert.ok(button.className.match(/\btest-class\b/));
     assert.equal(button.nodeName, 'BUTTON');
     assert.equal(button.type, 'button');
     assert.ok(button.className.match(/\bdropdown-toggle\b/));
