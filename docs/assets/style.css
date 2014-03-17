@@ -1,22 +1,82 @@
+/*
+ * React Bootstrap Documentation
+ * Special styles for presenting react-bootstrap's documentation and code examples.
+ * Based on the Bootstrap Documentation styles and overridden as necessary.
+ */
+
+body {
+  background-color: #f9f9f9;
+}
+
+.bs-docs-nav {
+  background-color: #222;
+}
+
+.bs-docs-nav .navbar-nav>li>a {
+  color: #aaa;
+  font-weight: normal;
+  border-bottom: 3px solid #222;
+}
+
+.bs-docs-nav .navbar-nav>li>a:hover,.bs-docs-nav .navbar-nav>.active>a, .bs-docs-nav .navbar-nav>.active>a:hover {
+  background: #333;
+  color: #fafafa;
+  border-bottom: 3px solid #cc7a6f;
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+  color: #00d8ff;
+}
+
+.bs-docs-masthead, .bs-docs-header {
+  background: #2d2d2d;
+  color: #e9e9e9;
+}
+
+.bs-docs-header h1 {
+  color: #e9e9e9;
+}
+
+.bs-docs-header p {
+  color: #e9e9e9;
+}
+
+.bs-docs-sidebar .nav>li>a {
+  color: #666;
+}
+
+.bs-docs-sidebar .nav>li>a:hover, .bs-docs-sidebar .nav>li>a:focus {
+  color: #cc7a6f;
+  border-left: 1px solid #cc7a6f;
+}
+
+.back-to-top:hover {
+  color: #cc7a6f;
+}
+
+
 .CodeMirror {
-    height: auto;
+  height: auto;
 }
 
 .bs-example .btn-toolbar + .btn-toolbar {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .bs-example .modal {
-    position: relative;
-    top: auto;
-    right: auto;
-    left: auto;
-    bottom: auto;
-    z-index: 1;
-    display: block;
+  position: relative;
+  top: auto;
+  right: auto;
+  left: auto;
+  bottom: auto;
+  z-index: 1;
+  display: block;
 }
 
 .bs-docs-booticon {
-    background: url('./logo.png') 0 0 no-repeat;
-    background-size: contain;
+  background: url('./logo.png') 0 0 no-repeat;
+  background-size: contain;
+  border: 0;
+  width: 200px;
+  height: 200px;
 }
