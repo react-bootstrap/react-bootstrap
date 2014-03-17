@@ -15,7 +15,7 @@ function renderDropdownButton(title) {
 }
 
 var buttonsInstance = (
-    <div>{BUTTONS.map(renderDropdownButton)}</div>
+    <ButtonToolbar>{BUTTONS.map(renderDropdownButton)}</ButtonToolbar>
   );
 
 React.renderComponent(buttonsInstance, mountNode);
