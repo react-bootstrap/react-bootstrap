@@ -63,11 +63,15 @@ var ComponentsPage = React.createClass({
                   <h2 id="buttons-options">Options</h2>
                   <p>Use any of the available button style types to quickly create a styled button. Just modify the
                     <code>bsStyle</code> prop.</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonTypes.js', 'utf8')} />
+                  <ReactPlayground
+                    codeText={fs.readFileSync(__dirname + '/../examples/ButtonTypes.js', 'utf8')}
+                    exampleClassName="bs-example-btn-margin"/>
 
                   <h2 id="buttons-sizes">Sizes</h2>
                   <p>Fancy larger or smaller buttons? Add <code>bsSize="large"</code>, <code>bsSize="small"</code>, or <code>bsSize="xsmall"</code> for additional sizes.</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonSizes.js', 'utf8')} />
+                  <ReactPlayground
+                    codeText={fs.readFileSync(__dirname + '/../examples/ButtonSizes.js', 'utf8')}
+                    exampleClassName="bs-example-btn-margin" />
 
                   <p>Create block level buttons—those that span the full width of a parent— by adding the
                       <code>block</code> prop.</p>
@@ -75,12 +79,16 @@ var ComponentsPage = React.createClass({
 
                   <h2 id="buttons-active">Active state</h2>
                   <p>To set a buttons active state simply set the components <code>active</code> prop.</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonActive.js', 'utf8')} />
+                  <ReactPlayground
+                    codeText={fs.readFileSync(__dirname + '/../examples/ButtonActive.js', 'utf8')}
+                    exampleClassName="bs-example-btn-margin" />
 
                   <h2 id="buttons-disabled">Disabled state</h2>
                   <p>Make buttons look unclickable by fading them back 50%. To do this add the <code>disabled</code>
                     attribute to buttons.</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonDisabled.js', 'utf8')} />
+                  <ReactPlayground
+                    codeText={fs.readFileSync(__dirname + '/../examples/ButtonDisabled.js', 'utf8')}
+                    exampleClassName="bs-example-btn-margin" />
 
                   <div className="bs-callout bs-callout-warning">
                     <h4>Event handler functionality not impacted</h4>
@@ -92,7 +100,9 @@ var ComponentsPage = React.createClass({
                   <p>The DOM element tag is choosen automaticly for you based on the props you supply. Passing a
                     <code>href</code> will result in the button using a <code>{'<a />'}</code> element otherwise a
                     <code>{'<button />'}</code> element will be used.</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonTagTypes.js', 'utf8')} />
+                  <ReactPlayground
+                    codeText={fs.readFileSync(__dirname + '/../examples/ButtonTagTypes.js', 'utf8')}
+                    exampleClassName="bs-example-btn-margin" />
 
                   <h2 id="buttons-tags">Button loading state</h2>
                   <p>When activating an asynchronous action from a button it is a good UX pattern to give the user
@@ -147,11 +157,15 @@ var ComponentsPage = React.createClass({
 
                   <h3 id="btn-dropdowns-single">Single button dropdowns</h3>
                   <p>Create a dropdown button with the <code>{'<DropdownButton />'}</code> component.</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/DropdownButtonBasic.js', 'utf8')} />
+                  <ReactPlayground
+                    codeText={fs.readFileSync(__dirname + '/../examples/DropdownButtonBasic.js', 'utf8')}
+                    exampleClassName="bs-example-btn-margin-group" />
 
                   <h3 id="btn-dropdowns-split">Split button dropdowns</h3>
                   <p>Similarly, create split button dropdowns with the <code>{'<SplitButton />'}</code> component.</p>
-                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/SplitButtonBasic.js', 'utf8')} />
+                  <ReactPlayground
+                    codeText={fs.readFileSync(__dirname + '/../examples/SplitButtonBasic.js', 'utf8')}
+                    exampleClassName="bs-example-btn-margin-group" />
 
                   <h3 id="btn-dropdowns-sizing">Sizing</h3>
                   <p>Button dropdowns work with buttons of all sizes.</p>

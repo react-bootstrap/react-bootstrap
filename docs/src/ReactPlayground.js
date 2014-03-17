@@ -3,6 +3,7 @@
  */
 
 var React = require('react');
+var classSet = require('react/lib/cx');
 var CodeMirror = global.CodeMirror;
 var JSXTransformer = global.JSXTransformer;
 var Accordion = require('../../cjs/Accordion');
@@ -149,7 +150,14 @@ var ReactPlayground = React.createClass({
   },
 
   render: function() {
+    var classes = {
+      'bs-example': true
+    };
     var editor;
+
+    if (this.props.exampleClassName){
+      classes[this.props.exampleClassName] = true;
+    }
 
     if (this.state.mode !== this.MODES.NONE) {
        editor = (
@@ -162,7 +170,7 @@ var ReactPlayground = React.createClass({
     }
     return (
       <div className="playground">
-        <div className={'bs-example ' + this.props.exampleClassName}>
+        <div className={classSet(classes)}>
           <div ref="mount" />
         </div>
         {editor}

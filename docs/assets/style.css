@@ -16,6 +16,14 @@
     display: block;
 }
 
+.bs-example-btn-margin .btn {
+    margin-right: 4px;
+}
+
+.bs-example-btn-margin-group .btn-group {
+    margin-right: 4px;
+}
+
 .bs-docs-booticon {
     background: url('./logo.png') 0 0 no-repeat;
     background-size: contain;
