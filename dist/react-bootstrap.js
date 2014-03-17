@@ -1583,6 +1583,88 @@ define('../amd/Button',['./transpiled/Button'], function (Button) {
   return Button.default;
 });
 define(
+  '../amd/transpiled/ButtonGroup',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./Button","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var Button = __dependency4__["default"];
+
+    var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
+      mixins: [BootstrapMixin],
+
+      propTypes: {
+        vertical:  React.PropTypes.bool,
+        justified: React.PropTypes.bool
+      },
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'button-group'
+        };
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+        classes['btn-group-vertical'] = this.props.vertical;
+        classes['btn-group-justified'] = this.props.justified;
+
+        return this.transferPropsTo(
+          React.DOM.div(
+            {className:classSet(classes)}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = ButtonGroup;
+  });
+define('../amd/ButtonGroup',['./transpiled/ButtonGroup'], function (ButtonGroup) {
+  return ButtonGroup.default;
+});
+define(
+  '../amd/transpiled/ButtonToolbar',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./Button","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
+    
+    /** @jsx React.DOM */
+
+    var React = __dependency1__["default"];
+    var classSet = __dependency2__["default"];
+    var BootstrapMixin = __dependency3__["default"];
+    var Button = __dependency4__["default"];
+
+    var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
+      mixins: [BootstrapMixin],
+
+      getDefaultProps: function () {
+        return {
+          bsClass: 'button-toolbar'
+        };
+      },
+
+      render: function () {
+        var classes = this.getBsClassSet();
+
+        return this.transferPropsTo(
+          React.DOM.div(
+            {role:"toolbar",
+            className:classSet(classes)}, 
+            this.props.children
+          )
+        );
+      }
+    });
+
+    __exports__["default"] = ButtonGroup;
+  });
+define('../amd/ButtonToolbar',['./transpiled/ButtonToolbar'], function (ButtonToolbar) {
+  return ButtonToolbar.default;
+});
+define(
   '../amd/transpiled/DropdownStateMixin',["./react-es6","exports"],
   function(__dependency1__, __exports__) {
     
@@ -1633,47 +1715,6 @@ define(
     };
 
     __exports__["default"] = DropdownStateMixin;
-  });
-define(
-  '../amd/transpiled/ButtonGroup',["./react-es6","./react-es6/lib/cx","./BootstrapMixin","./Button","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
-    
-    /** @jsx React.DOM */
-
-    var React = __dependency1__["default"];
-    var classSet = __dependency2__["default"];
-    var BootstrapMixin = __dependency3__["default"];
-    var Button = __dependency4__["default"];
-
-    var ButtonGroup = React.createClass({displayName: 'ButtonGroup',
-      mixins: [BootstrapMixin],
-
-      propTypes: {
-        vertical:  React.PropTypes.bool,
-        justified: React.PropTypes.bool
-      },
-
-      getDefaultProps: function () {
-        return {
-          bsClass: 'button-group'
-        };
-      },
-
-      render: function () {
-        var classes = this.getBsClassSet();
-        classes['btn-group-vertical'] = this.props.vertical;
-        classes['btn-group-justified'] = this.props.justified;
-
-        return this.transferPropsTo(
-          React.DOM.div(
-            {className:classSet(classes)}, 
-            this.props.children
-          )
-        );
-      }
-    });
-
-    __exports__["default"] = ButtonGroup;
   });
 define(
   '../amd/transpiled/DropdownMenu',["./react-es6","./react-es6/lib/cx","./utils","exports"],
@@ -1797,6 +1838,12 @@ define(
   });
 define('../amd/DropdownButton',['./transpiled/DropdownButton'], function (DropdownButton) {
   return DropdownButton.default;
+});
+define('../amd/DropdownMenu',['./transpiled/DropdownMenu'], function (DropdownMenu) {
+  return DropdownMenu.default;
+});
+define('../amd/DropdownStateMixin',['./transpiled/DropdownStateMixin'], function (DropdownStateMixin) {
+  return DropdownStateMixin.default;
 });
 define(
   '../amd/transpiled/FadeMixin',["./react-es6","exports"],
@@ -1965,6 +2012,96 @@ define(
   });
 define('../amd/Input',['./transpiled/Input'], function (Input) {
   return Input.default;
+});
+define(
+  '../amd/transpiled/Interpolate',["./react-es6","./react-es6/lib/invariant","./utils","exports"],
+  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
+    
+    // https://www.npmjs.org/package/react-interpolate-component
+    
+
+    var React = __dependency1__["default"];
+    var invariant = __dependency2__["default"];
+    var utils = __dependency3__["default"];
+
+    function isString(object) {
+      return Object.prototype.toString.call(object) === '[object String]';
+    }
+
+    var REGEXP = /\%\((.+?)\)s/;
+
+    var Interpolate = React.createClass({
+      displayName: 'Interpolate',
+
+      getDefaultProps: function() {
+        return { component: React.DOM.span };
+      },
+
+      render: function() {
+        var format = this.props.children || this.props.format;
+        var parent = this.props.component;
+        var unsafe = this.props.unsafe === true;
+        var props  = utils.extend({}, this.props);
+
+        delete props.children;
+        delete props.format;
+        delete props.component;
+        delete props.unsafe;
+
+        invariant(isString(format), 'Interpolate expects either a format string as only child or a `format` prop with a string value');
+
+        if (unsafe) {
+          var content = format.split(REGEXP).reduce(function(memo, match, index) {
+            var html;
+
+            if (index % 2 === 0) {
+              html = match;
+            } else {
+              html = props[match];
+              delete props[match];
+            }
+
+            if (React.isValidComponent(html)) {
+              throw new Error('cannot interpolate a React component into unsafe text');
+            }
+
+            memo += html;
+
+            return memo;
+          }, '');
+
+          props.dangerouslySetInnerHTML = { __html: content };
+
+          return parent(props);
+        } else {
+          var args = format.split(REGEXP).reduce(function(memo, match, index) {
+            var child;
+
+            if (index % 2 === 0) {
+              if (match.length === 0) {
+                return memo;
+              }
+
+              child = match;
+            } else {
+              child = props[match];
+              delete props[match];
+            }
+
+            memo.push(child);
+
+            return memo;
+          }, [props]);
+
+          return parent.apply(null, args);
+        }
+      }
+    });
+
+    __exports__["default"] = Interpolate;
+  });
+define('../amd/Interpolate',['./transpiled/Interpolate'], function (Interpolate) {
+  return Interpolate.default;
 });
 define(
   '../amd/transpiled/MenuItem',["./react-es6","./react-es6/lib/cx","exports"],
@@ -2811,93 +2948,6 @@ define('../amd/PanelGroup',['./transpiled/PanelGroup'], function (PanelGroup) {
   return PanelGroup.default;
 });
 define(
-  '../amd/transpiled/Interpolate',["./react-es6","./react-es6/lib/invariant","./utils","exports"],
-  function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
-    
-    // https://www.npmjs.org/package/react-interpolate-component
-    
-
-    var React = __dependency1__["default"];
-    var invariant = __dependency2__["default"];
-    var utils = __dependency3__["default"];
-
-    function isString(object) {
-      return Object.prototype.toString.call(object) === '[object String]';
-    }
-
-    var REGEXP = /\%\((.+?)\)s/;
-
-    var Interpolate = React.createClass({
-      displayName: 'Interpolate',
-
-      getDefaultProps: function() {
-        return { component: React.DOM.span };
-      },
-
-      render: function() {
-        var format = this.props.children || this.props.format;
-        var parent = this.props.component;
-        var unsafe = this.props.unsafe === true;
-        var props  = utils.extend({}, this.props);
-
-        delete props.children;
-        delete props.format;
-        delete props.component;
-        delete props.unsafe;
-
-        invariant(isString(format), 'Interpolate expects either a format string as only child or a `format` prop with a string value');
-
-        if (unsafe) {
-          var content = format.split(REGEXP).reduce(function(memo, match, index) {
-            var html;
-
-            if (index % 2 === 0) {
-              html = match;
-            } else {
-              html = props[match];
-              delete props[match];
-            }
-
-            if (React.isValidComponent(html)) {
-              throw new Error('cannot interpolate a React component into unsafe text');
-            }
-
-            memo += html;
-
-            return memo;
-          }, '');
-
-          props.dangerouslySetInnerHTML = { __html: content };
-
-          return parent(props);
-        } else {
-          var args = format.split(REGEXP).reduce(function(memo, match, index) {
-            var child;
-
-            if (index % 2 === 0) {
-              if (match.length === 0) {
-                return memo;
-              }
-
-              child = match;
-            } else {
-              child = props[match];
-              delete props[match];
-            }
-
-            memo.push(child);
-
-            return memo;
-          }, [props]);
-
-          return parent.apply(null, args);
-        }
-      }
-    });
-
-    __exports__["default"] = Interpolate;
-  });
-define(
   '../amd/transpiled/ProgressBar',["./react-es6","./react-es6/lib/cx","./Interpolate","./BootstrapMixin","./utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     
@@ -3253,7 +3303,7 @@ define('../amd/TabPane',['./transpiled/TabPane'], function (TabPane) {
 });
 /*global define */
 
-define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/DropdownButton','../amd/FadeMixin','../amd/Input','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/OverlayTrigger','../amd/OverlayTriggerMixin','../amd/Panel','../amd/PanelGroup','../amd/ProgressBar','../amd/SplitButton','../amd/TabbedArea','../amd/TabPane'],function (require) {
+define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/ButtonGroup','../amd/ButtonToolbar','../amd/DropdownButton','../amd/DropdownMenu','../amd/DropdownStateMixin','../amd/FadeMixin','../amd/Input','../amd/Interpolate','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/OverlayTrigger','../amd/OverlayTriggerMixin','../amd/Panel','../amd/PanelGroup','../amd/ProgressBar','../amd/SplitButton','../amd/TabbedArea','../amd/TabPane'],function (require) {
     
 
     return {
@@ -3261,9 +3311,14 @@ define('react-bootstrap',['require','../amd/Accordion','../amd/Alert','../amd/Bo
         Alert: require('../amd/Alert'),
         BootstrapMixin: require('../amd/BootstrapMixin'),
         Button: require('../amd/Button'),
+        ButtonGroup: require('../amd/ButtonGroup'),
+        ButtonToolbar: require('../amd/ButtonToolbar'),
         DropdownButton: require('../amd/DropdownButton'),
+        DropdownMenu: require('../amd/DropdownMenu'),
+        DropdownStateMixin: require('../amd/DropdownStateMixin'),
         FadeMixin: require('../amd/FadeMixin'),
         Input: require('../amd/Input'),
+        Interpolate: require('../amd/Interpolate'),
         MenuItem: require('../amd/MenuItem'),
         Modal: require('../amd/Modal'),
         Nav: require('../amd/Nav'),
