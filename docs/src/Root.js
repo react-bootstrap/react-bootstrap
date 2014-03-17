@@ -59,6 +59,11 @@ var Root = React.createClass({
       ];
     },
 
+    renderToString: function (props) {
+      return Root.getDoctype() +
+        React.renderComponentToString(Root(props));
+    },
+
     /**
      * Get the Base url this app sits at
      * This url is appended to all app urls to make absolute url's within the app.
@@ -101,7 +106,7 @@ var Root = React.createClass({
             <script src="vendor/codemirror/codemirror.js" />
             <script src="vendor/codemirror/javascript.js" />
             <script src="vendor/JSXTransformer.js" />
-            <script src="bundle.js" />
+            <script src="assets/bundle.js" />
           </body>
         </html>
       );
