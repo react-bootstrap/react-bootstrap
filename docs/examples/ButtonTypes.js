@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var buttonsInstance = (
-    <div>
+    <ButtonToolbar>
       {/* Standard button */}
       <Button>Default</Button>
 
@@ -22,7 +22,7 @@ var buttonsInstance = (
 
       {/* Deemphasize a button by making it look like a link while maintaining button behavior */}
       <Button bsStyle="link">Link</Button>
-    </div>
+    </ButtonToolbar>
   );
 
 React.renderComponent(buttonsInstance, mountNode);

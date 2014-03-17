@@ -1,10 +1,10 @@
 /** @jsx React.DOM */
 
 var buttonsInstance = (
-    <div>
+    <ButtonToolbar>
       <Button href="#">Link</Button>
       <Button>Button</Button>
-    </div>
+    </ButtonToolbar>
   );
 
 React.renderComponent(buttonsInstance, mountNode);

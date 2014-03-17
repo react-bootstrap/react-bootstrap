@@ -1,10 +1,10 @@
 /** @jsx React.DOM */
 
 var buttonsInstance = (
-    <div>
+    <ButtonToolbar>
       <Button bsStyle="primary" bsSize="large" disabled>Primary button</Button>
       <Button bsSize="large" disabled>Button</Button>
-    </div>
+    </ButtonToolbar>
   );
 
 React.renderComponent(buttonsInstance, mountNode);
