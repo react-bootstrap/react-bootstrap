@@ -64,7 +64,12 @@ var ComponentsPage = React.createClass({
                   <p>Use any of the available button style types to quickly create a styled button. Just modify the
                     <code>bsStyle</code> prop.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonTypes.js', 'utf8')} />
-
+                  <div className="bs-callout bs-callout-warning">
+                    <h4>Button spacing</h4>
+                    <p>Because React doesn't output newlines between elements, buttons on the same line are displayed 
+                    flush against each other. To preserve the spacing between multiple inline buttons, wrap your 
+                    button group in <code>{'<ButtonToolbar />'}</code>.</p>
+                  </div>
                   <h2 id="buttons-sizes">Sizes</h2>
                   <p>Fancy larger or smaller buttons? Add <code>bsSize="large"</code>, <code>bsSize="small"</code>, or <code>bsSize="xsmall"</code> for additional sizes.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonSizes.js', 'utf8')} />
