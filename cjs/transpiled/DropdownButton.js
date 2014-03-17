@@ -15,7 +15,7 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
 
   propTypes: {
     pullRight:    React.PropTypes.bool,
-    title:    React.PropTypes.string,
+    title:    React.PropTypes.renderable,
     href:     React.PropTypes.string,
     onClick:  React.PropTypes.func,
     onSelect: React.PropTypes.func
@@ -37,7 +37,7 @@ var DropdownButton = React.createClass({displayName: 'DropdownButton',
           bsStyle:this.props.bsStyle,
           className:"dropdown-toggle",
           onClick:this.handleOpenClick}, 
-          this.props.title + ' ',
+          this.props.title,' ',
           React.DOM.span( {className:"caret"} )
         ),
 

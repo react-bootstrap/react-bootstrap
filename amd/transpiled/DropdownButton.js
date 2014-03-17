@@ -18,7 +18,7 @@ define(
 
       propTypes: {
         pullRight:    React.PropTypes.bool,
-        title:    React.PropTypes.string,
+        title:    React.PropTypes.renderable,
         href:     React.PropTypes.string,
         onClick:  React.PropTypes.func,
         onSelect: React.PropTypes.func
@@ -40,7 +40,7 @@ define(
               bsStyle:this.props.bsStyle,
               className:"dropdown-toggle",
               onClick:this.handleOpenClick}, 
-              this.props.title + ' ',
+              this.props.title,' ',
               React.DOM.span( {className:"caret"} )
             ),
 

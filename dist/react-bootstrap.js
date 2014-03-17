@@ -1743,7 +1743,7 @@ define(
 
       propTypes: {
         pullRight:    React.PropTypes.bool,
-        title:    React.PropTypes.string,
+        title:    React.PropTypes.renderable,
         href:     React.PropTypes.string,
         onClick:  React.PropTypes.func,
         onSelect: React.PropTypes.func
@@ -1765,7 +1765,7 @@ define(
               bsStyle:this.props.bsStyle,
               className:"dropdown-toggle",
               onClick:this.handleOpenClick}, 
-              this.props.title + ' ',
+              this.props.title,' ',
               React.DOM.span( {className:"caret"} )
             ),
 
@@ -2282,6 +2282,7 @@ define(
       componentWillUnmount: function () {
         this._unrenderOverlay();
         document.body.removeChild(this._overlayTarget);
+        this._overlayTarget = null;
       },
 
       componentDidUpdate: function () {
@@ -2289,17 +2290,26 @@ define(
       },
 
       componentDidMount: function () {
-        this._overlayTarget = document.createElement('div');
-        document.body.appendChild(this._overlayTarget);
         this._renderOverlay();
       },
 
+      _mountOverlayTarget: function () {
+        this._overlayTarget = document.createElement('div');
+        document.body.appendChild(this._overlayTarget);
+      },
+
       _renderOverlay: function () {
-        React.renderComponent(this.renderOverlay(), this._overlayTarget);
+        if (!this._overlayTarget) {
+          this._mountOverlayTarget();
+        }
+
+        // Save reference to help testing
+        this._overlayInstance = React.renderComponent(this.renderOverlay(), this._overlayTarget);
       },
 
       _unrenderOverlay: function () {
         React.unmountComponentAtNode(this._overlayTarget);
+        this._overlayInstance = null;
       }
     };
   });
