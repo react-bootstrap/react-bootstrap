@@ -16,15 +16,15 @@
     "node-jsx": "~0.9.0",
     "reactify": "~0.8.1",
     "brfs": "~1.0.0",
-    "node-dev": "~2.1.6",
     "envify": "~1.2.0",
     "browserify": "~3.26.0",
     "connect-browserify": "~1.0.0",
-    "uglify-js": "^2.3.6"
+    "uglify-js": "^2.3.6",
+    "supervisor": "~0.5.7"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node-dev --no-deps server.js",
+    "start": "supervisor -w .,../cjs -i node_modules server.js",
     "build": "node build.js && browserify client.js | uglifyjs -cm 2>/dev/null > ./assets/bundle.js",
     "start-prod": "NODE_ENV=production node server.js"
   },
