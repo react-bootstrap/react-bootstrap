@@ -9,7 +9,6 @@
 }(this, function (React) {
 
 
-
 /**
  * almond 0.1.2 Copyright (c) 2011, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
@@ -3725,7 +3724,8 @@ define(function (require) {
         TabbedArea: require('../amd/TabbedArea'),
         TabPane: require('../amd/TabPane')
     };
-});    //Register in the values from the outer closure for common dependencies
+});
+    //Register in the values from the outer closure for common dependencies
     //as local almond modules
     define('react', function () {
         return React;

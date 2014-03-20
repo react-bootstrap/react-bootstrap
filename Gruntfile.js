@@ -120,14 +120,25 @@ module.exports = function (grunt) {
       }
     },
 
-    // TODO: work out how to get grunt-contrib-requirejs working
-    shell: {
-      requirejs: {
-        command: 'node tools/r.js -o tools/build.js',
-        options: {
-            stdout: true
+    requirejs: {
+        dev: {
+            // Options: https://github.com/jrburke/r.js/blob/master/build/example.build.js
+            options: {
+                "baseUrl": "tools",
+                "paths": {
+                    "react-bootstrap": "../amd"
+                },
+                "include": ["almond", "react-bootstrap"],
+                "exclude": ["react"],
+                "out": "dist/react-bootstrap.js",
+                "wrap": {
+                    "startFile": "tools/wrap.start",
+                    "endFile": "tools/wrap.end"
+                },
+                "optimize": "none",
+                "generateSourceMaps": true
+            }
         }
-      }
     },
 
     uglify: {
@@ -150,7 +161,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
-  grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
   grunt.registerTask('build', [
     'clean:amd',
@@ -162,7 +173,7 @@ module.exports = function (grunt) {
     'es6_module_wrap_default',
     'copy:amdreact',
     'browserify:test',
-    'shell:requirejs',
+    'requirejs:dev',
     'uglify:build',
     'clean:transpiled'
   ]);
