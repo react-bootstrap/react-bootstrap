@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "0.6.3",
+  "version": "0.7.0",
   "description": "Bootstrap 3 components build with React",
   "scripts": {
     "build": "./node_modules/.bin/grunt build",
