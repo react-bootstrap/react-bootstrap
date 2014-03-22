@@ -6,7 +6,7 @@ define(function (require) {
     return {
         Accordion: require('../amd/Accordion'),
         Affix: require('../amd/Affix'),
-        Affix: require('../amd/AffixMixin'),
+        AffixMixin: require('../amd/AffixMixin'),
         Alert: require('../amd/Alert'),
         BootstrapMixin: require('../amd/BootstrapMixin'),
         Button: require('../amd/Button'),

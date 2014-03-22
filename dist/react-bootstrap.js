@@ -9,6 +9,7 @@
 }(this, function (React) {
 
 
+
 /**
  * almond 0.1.2 Copyright (c) 2011, The Dojo Foundation All Rights Reserved.
  * Available via the MIT or new BSD license.
@@ -3692,13 +3693,13 @@ define('../amd/TabPane',['./transpiled/TabPane'], function (TabPane) {
 });
 /*global define */
 
-define(function (require) {
+define('react-bootstrap',['require','../amd/Accordion','../amd/Affix','../amd/AffixMixin','../amd/Alert','../amd/BootstrapMixin','../amd/Button','../amd/ButtonGroup','../amd/ButtonToolbar','../amd/DropdownButton','../amd/DropdownMenu','../amd/DropdownStateMixin','../amd/FadeMixin','../amd/Input','../amd/Interpolate','../amd/MenuItem','../amd/Modal','../amd/Nav','../amd/NavItem','../amd/OverlayTrigger','../amd/OverlayTriggerMixin','../amd/Panel','../amd/PanelGroup','../amd/ProgressBar','../amd/SplitButton','../amd/SubNav','../amd/TabbedArea','../amd/TabPane'],function (require) {
     
 
     return {
         Accordion: require('../amd/Accordion'),
         Affix: require('../amd/Affix'),
-        Affix: require('../amd/AffixMixin'),
+        AffixMixin: require('../amd/AffixMixin'),
         Alert: require('../amd/Alert'),
         BootstrapMixin: require('../amd/BootstrapMixin'),
         Button: require('../amd/Button'),
@@ -3724,8 +3725,7 @@ define(function (require) {
         TabbedArea: require('../amd/TabbedArea'),
         TabPane: require('../amd/TabPane')
     };
-});
-    //Register in the values from the outer closure for common dependencies
+});    //Register in the values from the outer closure for common dependencies
     //as local almond modules
     define('react', function () {
         return React;
