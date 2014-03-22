@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Bootstrap 3 components build with React",
   "main": "main.js",
   "scripts": {
