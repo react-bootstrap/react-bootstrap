@@ -1,7 +1,14 @@
 /** @jsx React.DOM */
 
+function handleHide() {
+  alert('Close me!')
+}
+
 var modalInstance = (
-    <Modal title="Modal title" backdrop={false} animation={false}>
+    <Modal title="Modal title"
+      backdrop={false}
+      animation={false}
+      onRequestHide={handleHide}>
       <div className="modal-body">
         One fine body...
       </div>
