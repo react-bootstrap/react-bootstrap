@@ -25,6 +25,8 @@ var PanelGroup = require('../../cjs/PanelGroup');
 var ProgressBar = require('../../cjs/ProgressBar');
 var TabbedArea = require('../../cjs/TabbedArea');
 var TabPane = require('../../cjs/TabPane');
+var Tooltip = require('../../cjs/Tooltip');
+var Popover = require('../../cjs/Popover');
 
 var IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)
