@@ -220,6 +220,21 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalOverlayMixin.js', 'utf8')} />
                 </div>
 
+                {/* Tooltip */}
+                <div className="bs-docs-section">
+                  <h1 id="tooltips" className="page-header">Tooltips <small>Tooltip</small></h1>
+                  <h2 id="tooltips-examples">Example tooltips</h2>
+
+                  <p>Tooltip component.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TooltipBasic.js', 'utf8')} />
+
+                  <p>Positioned tooltip component.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TooltipPositioned.js', 'utf8')} />
+
+                  <p>Positioned tooltip in copy.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TooltipInCopy.js', 'utf8')} />
+                </div>
+
                 <div className="bs-docs-section">
                   <h1 id="progress" className="page-header">Progress bars <small>ProgressBar</small></h1>
 
@@ -390,17 +405,18 @@ var ComponentsPage = React.createClass({
                     </SubNav>
                     <NavItem href="#panels" key={4}>Panels</NavItem>
                     <NavItem href="#modals" key={5}>Modals</NavItem>
-                    <NavItem href="#progress" key={6}>Progress bars</NavItem>
-                    <NavItem href="#navs" key={7}>Navs</NavItem>
-                    <NavItem href="#tabs" key={8}>Togglable tabs</NavItem>
-                    <NavItem href="#alerts" key={9}>Alerts</NavItem>
-                    <NavItem href="#carousels" key={10}>Carousels</NavItem>
-                    <NavItem href="#labels" key={11}>Labels</NavItem>
-                    <NavItem href="#badges" key={12}>Badges</NavItem>
-                    <NavItem href="#jumbotron" key={13}>Jumbotron</NavItem>
-                    <NavItem href="#page-header" key={14}>Page Header</NavItem>
-                    <NavItem href="#wells" key={15}>Wells</NavItem>
-                    <NavItem href="#glyphicons" key={16}>Glyphicons</NavItem>
+                    <NavItem href="#tooltips" key={6}>Tooltips</NavItem>
+                    <NavItem href="#progress" key={7}>Progress bars</NavItem>
+                    <NavItem href="#navs" key={8}>Navs</NavItem>
+                    <NavItem href="#tabs" key={9}>Togglable tabs</NavItem>
+                    <NavItem href="#alerts" key={10}>Alerts</NavItem>
+                    <NavItem href="#carousels" key={11}>Carousels</NavItem>
+                    <NavItem href="#labels" key={12}>Labels</NavItem>
+                    <NavItem href="#badges" key={13}>Badges</NavItem>
+                    <NavItem href="#jumbotron" key={14}>Jumbotron</NavItem>
+                    <NavItem href="#page-header" key={15}>Page Header</NavItem>
+                    <NavItem href="#wells" key={16}>Wells</NavItem>
+                    <NavItem href="#glyphicons" key={17}>Glyphicons</NavItem>
                   </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top

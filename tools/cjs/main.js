@@ -20,6 +20,8 @@ module.exports = {
     ModalTrigger: require('./ModalTrigger'),
     OverlayTrigger: require('./OverlayTrigger'),
     OverlayMixin: require('./OverlayMixin'),
+    Popover: require('./Popover'),
+    Tooltip: require('./Tooltip'),
     Panel: require('./Panel'),
     PanelGroup: require('./PanelGroup'),
     ProgressBar: require('./ProgressBar'),
