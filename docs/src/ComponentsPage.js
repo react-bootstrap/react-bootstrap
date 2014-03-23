@@ -211,7 +211,7 @@ var ComponentsPage = React.createClass({
                   <p>The header is added automatically if you pass in a <code>title</code> prop.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalStatic.js', 'utf8')} />
 
-                  <h3 id="modals-static">Live demo</h3>
+                  <h3 id="modals-live">Live demo</h3>
                   <p>Use <code>&lt;OverlayTrigger /&gt;</code> to create a real modal that's added to the document body when opened.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalOverlayTrigger.js', 'utf8')} />
 
@@ -225,32 +225,32 @@ var ComponentsPage = React.createClass({
 
                   <p className="lead">Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.</p>
 
-                  <h2 id="modals-static">Basic example</h2>
+                  <h2 id="progress-basic">Basic example</h2>
                   <p>Default progress bar.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarBasic.js', 'utf8')} />
 
-                  <h2 id="modals-label">With label</h2>
+                  <h2 id="progress-label">With label</h2>
                   <p>Add a <code>label</code> prop to show a visible percentage. For low percentages, consider adding a min-width to ensure the label's text is fully visible.</p>
                   <p>The following keys are interpolated with the current values: <code>%(min)s</code>, <code>%(max)s</code>, <code>%(now)s</code>, <code>%(percent)s</code>, <code>%(bsStyle)s</code></p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarWithLabel.js', 'utf8')} />
 
-                  <h2 id="modals-label">Screenreader only label</h2>
+                  <h2 id="progress-screenreader-label">Screenreader only label</h2>
                   <p>Add a <code>srOnly</code> prop to hide the label visually.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarScreenreaderLabel.js', 'utf8')} />
 
-                  <h2 id="modals-label">Contextual alternatives</h2>
+                  <h2 id="progress-contextual">Contextual alternatives</h2>
                   <p>Progress bars use some of the same button and alert classes for consistent styles.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarContextual.js', 'utf8')} />
 
-                  <h2 id="modals-label">Striped</h2>
+                  <h2 id="progress-striped">Striped</h2>
                   <p>Uses a gradient to create a striped effect. Not available in IE8.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarStriped.js', 'utf8')} />
 
-                  <h2 id="modals-label">Animated</h2>
+                  <h2 id="progress-animated">Animated</h2>
                   <p>Add <code>active</code> prop to animate the stripes right to left. Not available in IE9 and below.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarAnimated.js', 'utf8')} />
 
-                  <h2 id="modals-label">Stacked</h2>
+                  <h2 id="progress-stacked">Stacked</h2>
                   <p>Nest <code>&lt;ProgressBar /&gt;</code>s to stack them.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarStacked.js', 'utf8')} />
                 </div>
