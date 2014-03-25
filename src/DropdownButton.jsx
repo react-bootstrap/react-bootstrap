@@ -38,7 +38,8 @@ var DropdownButton = React.createClass({
           href={this.props.href}
           bsStyle={this.props.bsStyle}
           className={className}
-          onClick={this.handleOpenClick}>
+          onClick={this.handleOpenClick}
+          id={this.props.id}>
           {this.props.title}{' '}
           <span className="caret" />
         </Button>

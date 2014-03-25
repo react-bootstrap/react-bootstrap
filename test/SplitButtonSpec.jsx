@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/*global describe, beforeEach, afterEach, it, assert */
+/*global document, describe, beforeEach, afterEach, it, assert */
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
@@ -75,6 +75,17 @@ describe('SplitButton', function () {
 
     var button = instance.refs.button.getDOMNode();
     assert.ok(button.className.match(/\bbtn-primary\b/));
+  });
+
+  it('Should pass id to button group', function () {
+    instance = ReactTestUtils.renderIntoDocument(
+        <SplitButton title="Title" bsStyle="primary" id="testId">
+          <MenuItem key="1">MenuItem 1 content</MenuItem>
+          <MenuItem key="2">MenuItem 2 content</MenuItem>
+        </SplitButton>
+    );
+
+    assert.equal(instance.getDOMNode().getAttribute('id'), 'testId');
   });
 
   it('Should be closed by default', function () {

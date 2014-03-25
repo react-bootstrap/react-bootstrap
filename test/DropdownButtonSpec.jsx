@@ -50,7 +50,7 @@ describe('DropdownButton', function () {
 
   it('Should pass props to button', function () {
     instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title" bsStyle="primary">
+      <DropdownButton title="Title" bsStyle="primary" id="testId">
         <MenuItem key="1">MenuItem 1 content</MenuItem>
         <MenuItem key="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
@@ -58,6 +58,7 @@ describe('DropdownButton', function () {
 
     var button = instance.refs.dropdownButton.getDOMNode();
     assert.ok(button.className.match(/\bbtn-primary\b/));
+    assert.equal(button.getAttribute('id'), 'testId');
   });
 
   it('Should be closed by default', function () {

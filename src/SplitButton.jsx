@@ -1,11 +1,9 @@
 /** @jsx React.DOM */
-/* global document */
 
 import React              from './react-es6';
 import classSet           from './react-es6/lib/cx';
 import BootstrapMixin     from './BootstrapMixin';
 import DropdownStateMixin from './DropdownStateMixin';
-import utils              from './utils';
 import Button             from './Button';
 import ButtonGroup        from './ButtonGroup';
 import DropdownMenu       from './DropdownMenu';
@@ -14,7 +12,7 @@ var SplitButton = React.createClass({
   mixins: [BootstrapMixin, DropdownStateMixin],
 
   propTypes: {
-    pullRight:         React.PropTypes.bool,
+    pullRight:     React.PropTypes.bool,
     title:         React.PropTypes.renderable,
     href:          React.PropTypes.string,
     dropdownTitle: React.PropTypes.renderable,
@@ -37,7 +35,8 @@ var SplitButton = React.createClass({
     return (
       <ButtonGroup
         bsSize={this.props.bsSize}
-        className={classSet(groupClasses)}>
+        className={classSet(groupClasses)}
+        id={this.props.id}>
         <Button
           ref="button"
           href={this.props.href}
