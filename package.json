@@ -14,7 +14,7 @@
   "author": "Stephen J. Collings <stevoland@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "react": "~0.9"
+    "react": ">=0.9"
   },
   "devDependencies": {
     "karma-chai": "0.0.2",
@@ -30,7 +30,7 @@
     "karma-phantomjs-launcher": "~0.1.1",
     "karma": "~0.10.9",
     "karma-mocha": "~0.1.1",
-    "react": "0.9.0",
+    "react": "0.10.0",
     "envify": "~1.2.1",
     "grunt-es6-module-transpiler": "~0.6.0",
     "grunt": "~0.4.2",
@@ -44,7 +44,7 @@
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-shell": "~0.6.4",
     "grunt-contrib-copy": "~0.5.0",
-    "react-async": "~0.6.0",
-    "react-router-component": "~0.10.0"
+    "react-async": "~0.8.0",
+    "react-router-component": "~0.15.0"
   }
 }

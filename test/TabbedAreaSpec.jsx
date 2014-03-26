@@ -54,15 +54,17 @@ describe('TabbedArea', function () {
       done();
     }
 
-    var tab2 = <span>Tab2</span>;
+    var tab2 = <span className="tab2">Tab2</span>;
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea onSelect={onSelect} activeKey={1}>
         <TabPane tab="Tab 1" key={1}>Tab 1 content</TabPane>
-        <TabPane tab={tab2} key={2}>Tab 2 content</TabPane>
+        <TabPane tab={tab2} key={2} ref="tab2">Tab 2 content</TabPane>
       </TabbedArea>
     );
 
-    ReactTestUtils.Simulate.click(tab2.getDOMNode());
+    ReactTestUtils.Simulate.click(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab2')
+    );
   });
 
   it('Should have children with the correct DOM properties', function () {
