@@ -191,6 +191,13 @@ var ReactPlayground = React.createClass({
     }
   },
 
+  componentWillUnmount: function() {
+    var mountNode = this.refs.mount.getDOMNode();
+    try {
+      React.unmountComponentAtNode(mountNode);
+    } catch (e) { }
+  },
+
   executeCode: function() {
     var mountNode = this.refs.mount.getDOMNode();
 
