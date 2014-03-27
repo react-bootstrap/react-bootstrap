@@ -205,8 +205,12 @@ var OverlayTrigger = React.createClass({
 
   getPosition: function () {
     var node = this.getDOMNode();
+    var container = this.getContainerDOMNode();
 
-    return merge(domUtils.getOffset(node), {
+    var offset = container.tagName == 'BODY' ?
+      domUtils.getOffset(node) : domUtils.getPosition(node, container);
+
+    return merge(offset, {
       height: node.offsetHeight,
       width: node.offsetWidth
     });

@@ -235,6 +235,21 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TooltipInCopy.js', 'utf8')} />
                 </div>
 
+                {/* Popover */}
+                <div className="bs-docs-section">
+                  <h1 id="popovers" className="page-header">Popovers <small>Popover</small></h1>
+                  <h2 id="popovers-examples">Example popovers</h2>
+
+                  <p>Popovers component.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PopoverBasic.js', 'utf8')} />
+
+                  <p>Popovers component.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PopoverPositioned.js', 'utf8')} />
+
+                  <p>Popovers scrolling.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PopoverPositionedContained.js', 'utf8')} exampleClassName="bs-example-scroll" />
+                </div>
+
                 <div className="bs-docs-section">
                   <h1 id="progress" className="page-header">Progress bars <small>ProgressBar</small></h1>
 
@@ -406,17 +421,18 @@ var ComponentsPage = React.createClass({
                     <NavItem href="#panels" key={4}>Panels</NavItem>
                     <NavItem href="#modals" key={5}>Modals</NavItem>
                     <NavItem href="#tooltips" key={6}>Tooltips</NavItem>
-                    <NavItem href="#progress" key={7}>Progress bars</NavItem>
-                    <NavItem href="#navs" key={8}>Navs</NavItem>
-                    <NavItem href="#tabs" key={9}>Togglable tabs</NavItem>
-                    <NavItem href="#alerts" key={10}>Alerts</NavItem>
-                    <NavItem href="#carousels" key={11}>Carousels</NavItem>
-                    <NavItem href="#labels" key={12}>Labels</NavItem>
-                    <NavItem href="#badges" key={13}>Badges</NavItem>
-                    <NavItem href="#jumbotron" key={14}>Jumbotron</NavItem>
-                    <NavItem href="#page-header" key={15}>Page Header</NavItem>
-                    <NavItem href="#wells" key={16}>Wells</NavItem>
-                    <NavItem href="#glyphicons" key={17}>Glyphicons</NavItem>
+                    <NavItem href="#popovers" key={7}>Popovers</NavItem>
+                    <NavItem href="#progress" key={8}>Progress bars</NavItem>
+                    <NavItem href="#navs" key={9}>Navs</NavItem>
+                    <NavItem href="#tabs" key={10}>Togglable tabs</NavItem>
+                    <NavItem href="#alerts" key={11}>Alerts</NavItem>
+                    <NavItem href="#carousels" key={12}>Carousels</NavItem>
+                    <NavItem href="#labels" key={13}>Labels</NavItem>
+                    <NavItem href="#badges" key={14}>Badges</NavItem>
+                    <NavItem href="#jumbotron" key={15}>Jumbotron</NavItem>
+                    <NavItem href="#page-header" key={16}>Page Header</NavItem>
+                    <NavItem href="#wells" key={17}>Wells</NavItem>
+                    <NavItem href="#glyphicons" key={18}>Glyphicons</NavItem>
                   </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top

@@ -80,3 +80,13 @@ body {
   width: 200px;
   height: 200px;
 }
+
+.bs-example-scroll {
+  overflow: scroll;
+  height: 200px;
+}
+
+.bs-example-scroll > div {
+  position: relative;
+  padding: 100px 0;
+}
