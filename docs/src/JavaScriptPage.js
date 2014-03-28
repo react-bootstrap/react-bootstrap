@@ -24,6 +24,33 @@ var Page = React.createClass({
             <div className="row">
               <div className="col-md-9" role="main">
 
+                {/* Tooltip */}
+                <div className="bs-docs-section">
+                  <h1 id="tooltips" className="page-header">Tooltips <small>Tooltip</small></h1>
+                  <h2 id="tooltips-examples">Example tooltips</h2>
+
+                  <p>Tooltip component.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TooltipBasic.js', 'utf8')} />
+
+                  <p>Positioned tooltip component.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TooltipPositioned.js', 'utf8')} />
+
+                  <p>Positioned tooltip in copy.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TooltipInCopy.js', 'utf8')} />
+                </div>
+
+                {/* Popover */}
+                <div className="bs-docs-section">
+                  <h1 id="popovers" className="page-header">Popovers <small>Popover</small></h1>
+                  <h2 id="popovers-examples">Example popovers</h2>
+
+                  <p>Popovers component.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PopoverBasic.js', 'utf8')} />
+
+                  <p>Popovers component.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PopoverPositioned.js', 'utf8')} />
+                </div>
+
                 {/* Nav */}
                 <div className="bs-docs-section">
                   <h1 id="navs" className="page-header">Navs <small>Nav, NavItem</small></h1>

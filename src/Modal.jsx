@@ -14,6 +14,13 @@ import FadeMixin        from './FadeMixin';
 var Modal = React.createClass({
   mixins: [BootstrapMixin, FadeMixin],
 
+  propTypes: {
+    title: React.PropTypes.renderable,
+    backdrop: React.PropTypes.oneOf(['static', true, false]),
+    keyboard: React.PropTypes.bool,
+    onRequestHide: React.PropTypes.func.isRequired
+  },
+
   getDefaultProps: function () {
     return {
       bsClass: 'modal',
@@ -23,29 +30,8 @@ var Modal = React.createClass({
     };
   },
 
-  componentDidMount: function () {
-    document.addEventListener('keyup', this.handleKeyUp);
-  },
-
-  componentWillUnmount: function () {
-    document.removeEventListener('keyup', this.handleKeyUp);
-  },
-
-  killClick: function (e) {
-    e.stopPropagation();
-  },
-
-  handleBackdropClick: function () {
-    this.props.onRequestHide();
-  },
-
-  handleKeyUp: function (e) {
-    if (this.props.keyboard && e.keyCode === 27) {
-      this.props.onRequestHide();
-    }
-  },
-
   render: function () {
+    var modalStyle = {display: 'block'};
     var classes = this.getBsClassSet();
 
     classes['fade'] = this.props.animation;
@@ -53,16 +39,14 @@ var Modal = React.createClass({
 
     var modal = this.transferPropsTo(
       <div
-        bsClass="modal"
         tabIndex="-1"
         role="dialog"
-        style={{display: 'block'}}
+        style={modalStyle}
         className={classSet(classes)}
-        onClick={this.handleBackdropClick}
-        ref="modal"
-      >
+        onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
+        ref="modal">
         <div className="modal-dialog">
-          <div className="modal-content" onClick={this.killClick}>
+          <div className="modal-content">
             {this.props.title ? this.renderHeader() : null}
             {this.props.children}
           </div>
@@ -104,6 +88,28 @@ var Modal = React.createClass({
       React.isValidComponent(this.props.title) ?
         this.props.title : <h4 className="modal-title">{this.props.title}</h4>
     );
+  },
+
+  componentDidMount: function () {
+    document.addEventListener('keyup', this.handleDocumentKeyUp);
+  },
+
+  componentWillUnmount: function () {
+    document.removeEventListener('keyup', this.handleDocumentKeyUp);
+  },
+
+  handleBackdropClick: function (e) {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+
+    this.props.onRequestHide();
+  },
+
+  handleDocumentKeyUp: function (e) {
+    if (this.props.keyboard && e.keyCode === 27) {
+      this.props.onRequestHide();
+    }
   }
 });
 

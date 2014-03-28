@@ -1,4 +1,4 @@
-import React          from './react-es6';
+import React from './react-es6';
 
 export default = {
   componentWillUnmount: function () {
@@ -32,5 +32,13 @@ export default = {
   _unrenderOverlay: function () {
     React.unmountComponentAtNode(this._overlayTarget);
     this._overlayInstance = null;
+  },
+
+  getOverlayDOMNode: function() {
+    if (!this.isMounted()) {
+      throw new Error('getOverlayDOMNode(): A component must be mounted to have a DOM node.');
+    }
+
+    return this._overlayInstance.getDOMNode();
   }
 };

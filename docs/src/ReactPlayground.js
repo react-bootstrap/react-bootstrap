@@ -17,13 +17,16 @@ var Nav = require('../../cjs/Nav');
 var NavItem = require('../../cjs/NavItem');
 var MenuItem = require('../../cjs/MenuItem');
 var Modal = require('../../cjs/Modal');
+var ModalTrigger = require('../../cjs/ModalTrigger');
 var OverlayTrigger = require('../../cjs/OverlayTrigger');
-var OverlayTriggerMixin = require('../../cjs/OverlayTriggerMixin');
+var OverlayMixin = require('../../cjs/OverlayMixin');
 var Panel = require('../../cjs/Panel');
 var PanelGroup = require('../../cjs/PanelGroup');
 var ProgressBar = require('../../cjs/ProgressBar');
 var TabbedArea = require('../../cjs/TabbedArea');
 var TabPane = require('../../cjs/TabPane');
+var Tooltip = require('../../cjs/Tooltip');
+var Popover = require('../../cjs/Popover');
 
 var IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)
