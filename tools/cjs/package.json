@@ -18,6 +18,6 @@
     "url": "https://github.com/stevoland/react-bootstrap/issues"
   },
   "peerDependencies": {
-    "react": "~0.9"
+    "react": ">=0.9"
   }
 }
