@@ -303,6 +303,20 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/AlertAutoDismissable.js', 'utf8')} />
                 </div>
 
+                {/* Carousels */}
+                <div className="bs-docs-section">
+                  <h1 id="carousels" className="page-header">Carousels <small>Carousel, CarouselItem</small></h1>
+                  <h2 id="carousels-examples">Example carousels</h2>
+
+                  <h3>Uncontrolled</h3>
+                  <p>Allow the component to control its own state.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/CarouselUncontrolled.js', 'utf8')} exampleClassName="bs-example-tabs" />
+
+                  <h3>Controlled</h3>
+                  <p>Pass down the active state on render via props.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/CarouselControlled.js', 'utf8')} exampleClassName="bs-example-tabs" />
+                </div>
+
                 {/* Labels */}
                 <div className="bs-docs-section">
                   <h1 id="labels" className="page-header">Labels</h1>
@@ -313,7 +327,6 @@ var ComponentsPage = React.createClass({
                   <h2 id="label-static">Available variations</h2>
                   <p>Add any of the below mentioned modifier classes to change the appearance of a label.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/LabelVariations.js', 'utf8')} />
-
                 </div>
 
                 {/* Badges */}
@@ -348,7 +361,7 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/Well.js', 'utf8')} />
                   <h2 id="well-optins-static">Optional classes</h2>
                   <p>Control padding and rounded corners with two optional modifier classes.</p>
-                    <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/WellSizes.js', 'utf8')} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/WellSizes.js', 'utf8')} />
                 </div>
 
                 {/* Glyphicons */}
@@ -356,7 +369,7 @@ var ComponentsPage = React.createClass({
                   <h1 id="glyphicons" className="page-header">Glyphicons</h1>
                   <p>Use them in buttons, button groups for a toolbar, navigation, or prepended form inputs.</p>
                   <h2 id="glyphicon-static">Example</h2>
-                    <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/Glyphicon.js', 'utf8')} />
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/Glyphicon.js', 'utf8')} />
                 </div>
               </div>
 
@@ -380,12 +393,14 @@ var ComponentsPage = React.createClass({
                     <NavItem href="#progress" key={6}>Progress bars</NavItem>
                     <NavItem href="#navs" key={7}>Navs</NavItem>
                     <NavItem href="#tabs" key={8}>Togglable tabs</NavItem>
-                    <NavItem href="#labels" key={9}>Labels</NavItem>
-                    <NavItem href="#badges" key={10}>Badges</NavItem>
-                    <NavItem href="#jumbotron" key={11}>Jumbotron</NavItem>
-                    <NavItem href="#page-header" key={12}>Page Header</NavItem>
-                    <NavItem href="#wells" key={13}>Wells</NavItem>
-                    <NavItem href="#glyphicons" key={14}>Glyphicons</NavItem>
+                    <NavItem href="#alerts" key={9}>Alerts</NavItem>
+                    <NavItem href="#carousels" key={10}>Carousels</NavItem>
+                    <NavItem href="#labels" key={11}>Labels</NavItem>
+                    <NavItem href="#badges" key={12}>Badges</NavItem>
+                    <NavItem href="#jumbotron" key={13}>Jumbotron</NavItem>
+                    <NavItem href="#page-header" key={14}>Page Header</NavItem>
+                    <NavItem href="#wells" key={15}>Wells</NavItem>
+                    <NavItem href="#glyphicons" key={16}>Glyphicons</NavItem>
                   </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top
