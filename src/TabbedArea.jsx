@@ -6,34 +6,56 @@ import utils          from './utils';
 import Nav            from './Nav';
 import NavItem        from './NavItem';
 
+function hasTab (child) {
+  return !!child.props.tab;
+}
+
 var TabbedArea = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
+    animation: React.PropTypes.bool,
     onSelect: React.PropTypes.func
   },
 
-  getInitialState: function () {
-    var initialActiveKey = this.props.initialActiveKey;
+  getDefaultProps: function () {
+    return {
+      animation: true
+    };
+  },
 
-    if (initialActiveKey == null) {
+  getInitialState: function () {
+    var defaultActiveKey = this.props.defaultActiveKey;
+
+    if (defaultActiveKey == null) {
       var children = this.props.children;
-      initialActiveKey =
+      defaultActiveKey =
         Array.isArray(children) ? children[0].props.key : children.props.key;
     }
 
     return {
-      activeKey: initialActiveKey
+      activeKey: defaultActiveKey,
+      previousActiveKey: null
     };
+  },
+
+  componentWillReceiveProps: function (nextProps) {
+    if (nextProps.activeKey != null && nextProps.activeKey !== this.props.activeKey) {
+      this.setState({
+        previousActiveKey: this.props.activeKey
+      });
+    }
+  },
+
+  handlePaneAnimateOutEnd: function () {
+    this.setState({
+      previousActiveKey: null
+    });
   },
 
   render: function () {
     var activeKey =
       this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
-
-    function hasTab (child) {
-      return !!child.props.tab;
-    }
 
     return this.transferPropsTo(
       <div>
@@ -47,15 +69,23 @@ var TabbedArea = React.createClass({
     );
   },
 
+  getActiveKey: function () {
+    return this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+  },
+
   renderPane: function (child) {
-    var activeKey =
-      this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+    var activeKey = this.getActiveKey();
+
     return utils.cloneWithProps(
         child,
         {
-          active: (child.props.key === activeKey),
+          active: (child.props.key === activeKey &&
+            (this.state.previousActiveKey == null || !this.props.animation)),
           ref: child.props.ref,
-          key: child.props.key
+          key: child.props.key,
+          animation: this.props.animation,
+          onAnimateOutEnd: (this.state.previousActiveKey != null &&
+            child.props.key === this.state.previousActiveKey) ? this.handlePaneAnimateOutEnd: null
         }
       );
   },
@@ -81,11 +111,12 @@ var TabbedArea = React.createClass({
       this._isChanging = true;
       this.props.onSelect(key);
       this._isChanging = false;
+    } else if (key !== this.getActiveKey()) {
+      this.setState({
+        activeKey: key,
+        previousActiveKey: this.getActiveKey()
+      });
     }
-
-    this.setState({
-      activeKey: key
-    });
   }
 });
 

@@ -66,8 +66,8 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ButtonTypes.js', 'utf8')} />
                   <div className="bs-callout bs-callout-warning">
                     <h4>Button spacing</h4>
-                    <p>Because React doesn't output newlines between elements, buttons on the same line are displayed 
-                    flush against each other. To preserve the spacing between multiple inline buttons, wrap your 
+                    <p>Because React doesn't output newlines between elements, buttons on the same line are displayed
+                    flush against each other. To preserve the spacing between multiple inline buttons, wrap your
                     button group in <code>{'<ButtonToolbar />'}</code>.</p>
                   </div>
                   <h2 id="buttons-sizes">Sizes</h2>
@@ -254,6 +254,54 @@ var ComponentsPage = React.createClass({
                   <p>Nest <code>&lt;ProgressBar /&gt;</code>s to stack them.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ProgressBarStacked.js', 'utf8')} />
                 </div>
+
+                {/* Nav */}
+                <div className="bs-docs-section">
+                  <h1 id="navs" className="page-header">Navs <small>Nav, NavItem</small></h1>
+                  <h2 id="navs-examples">Example navs</h2>
+
+                  <p>Navs come in two styles, pills and tabs.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavBasic.js', 'utf8')} />
+                </div>
+
+                {/* Tabbed Areas */}
+                <div className="bs-docs-section">
+                  <h1 id="tabs" className="page-header">Togglable tabs <small>TabbedArea, TabPane</small></h1>
+                  <h2 id="tabs-examples">Example tabs</h2>
+                  <p>Add quick, dynamic tab functionality to transition through panes of local content, even via dropdown menus.</p>
+
+                  <h3>Uncontrolled</h3>
+                  <p>Allow the component to control its own state.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TabbedAreaUncontrolled.js', 'utf8')} exampleClassName="bs-example-tabs" />
+
+                  <h3>Controlled</h3>
+                  <p>Pass down the active state on render via props.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TabbedAreaControlled.js', 'utf8')} exampleClassName="bs-example-tabs" />
+
+                  <h3>No animation</h3>
+                  <p>Set the <code>animation</code> prop to <code>false</code></p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TabbedAreaNoAnimation.js', 'utf8')} exampleClassName="bs-example-tabs" />
+
+                  <div className="bs-callout bs-callout-info">
+                    <h4>Extends tabbed navigation</h4>
+                    <p>This plugin extends the <a href="#navs">tabbed navigation component</a> to add tabbable areas.</p>
+                  </div>
+                </div>
+
+                {/* Alerts */}
+                <div className="bs-docs-section">
+                  <h1 id="alerts" className="page-header">Alert messages <small>Alert</small></h1>
+                  <h2 id="alerts-examples">Example alerts</h2>
+
+                  <p>Basic alert styles.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/AlertBasic.js', 'utf8')} />
+
+                  <p>Closeable alerts, just pass in a <code>onDismiss</code> function.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/AlertDismissable.js', 'utf8')} />
+
+                  <p>Auto close after a set time with <code>dismissAfter</code> prop.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/AlertAutoDismissable.js', 'utf8')} />
+                </div>
               </div>
 
               <div className="col-md-3">
@@ -274,6 +322,8 @@ var ComponentsPage = React.createClass({
                     <NavItem href="#panels" key={4}>Panels</NavItem>
                     <NavItem href="#modals" key={5}>Modals</NavItem>
                     <NavItem href="#progress" key={6}>Progress bars</NavItem>
+                    <NavItem href="#navs" key={7}>Navs</NavItem>
+                    <NavItem href="#tabs" key={8}>Togglable tabs</NavItem>
                   </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top

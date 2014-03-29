@@ -12,17 +12,9 @@ var NAV_LINKS = {
     link: '/getting-started.html',
     title: 'Getting started'
   },
-  'css': {
-    link: '/css.html',
-    title: 'CSS'
-  },
   'components': {
     link: '/components.html',
     title: 'Components'
-  },
-  'javascript': {
-    link: '/javascript.html',
-    title: 'JavaScript'
   }
 };
 

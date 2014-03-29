@@ -7,9 +7,7 @@ var Router = require('react-router-component');
 
 var HomePage = require('./HomePage');
 var GettingStartedPage = require('./GettingStartedPage');
-var CSSPage = require('./CSSPage');
 var ComponentsPage = require('./ComponentsPage');
-var JavaScriptPage = require('./JavaScriptPage');
 var NotFoundPage = require('./NotFoundPage');
 
 var Locations = Router.Locations;
@@ -23,9 +21,7 @@ var PagesHolder = React.createClass({
           <Location path="/" handler={HomePage} />
           <Location path="/index.html" handler={HomePage} />
           <Location path="/getting-started.html" handler={GettingStartedPage} />
-          <Location path="/css.html" handler={CSSPage} />
           <Location path="/components.html" handler={ComponentsPage} />
-          <Location path="/javascript.html" handler={JavaScriptPage} />
           <NotFound handler={NotFoundPage} />
         </Locations>
       );
