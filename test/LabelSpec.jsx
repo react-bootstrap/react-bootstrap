@@ -8,20 +8,17 @@ var Label          = require('../cjs/Label');
 describe('Label', function () {
 
   it('Should output a label with message', function () {
-    var instance = Label({}, <strong>Message</strong>);
-    ReactTestUtils.renderIntoDocument(instance);
+    var instance = ReactTestUtils.renderIntoDocument(Label({}, <strong>Message</strong>));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
   it('Should have bsClass by default', function () {
-    var instance = Label({}, 'Message');
-    ReactTestUtils.renderIntoDocument(instance);
+    var instance = ReactTestUtils.renderIntoDocument(Label({}, 'Message'));
     assert.ok(instance.getDOMNode().className.match(/\blabel\b/));
   });
 
   it('Should have bsStyle by default', function () {
-    var instance = Label({}, 'Message');
-    ReactTestUtils.renderIntoDocument(instance);
+    var instance = ReactTestUtils.renderIntoDocument(Label({}, 'Message'));
     assert.ok(instance.getDOMNode().className.match(/\blabel-default\b/));
   });
 

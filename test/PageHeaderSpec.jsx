@@ -7,15 +7,12 @@ var PageHeader      = require('../cjs/PageHeader');
 
 describe('PageHeader', function () {
   it('Should output a div with content', function () {
-    var instance = PageHeader({}, <strong>Content</strong>);
-    ReactTestUtils.renderIntoDocument(instance);
+    var instance = ReactTestUtils.renderIntoDocument(PageHeader({}, <strong>Content</strong>));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
   it('Should have a page-header class', function () {
-    var instance = PageHeader({}, 'Content');
-    ReactTestUtils.renderIntoDocument(instance);
-
+    var instance = ReactTestUtils.renderIntoDocument(PageHeader({}, 'Content'));
     assert.ok(instance.getDOMNode().className.match(/\bpage-header\b/));
   });
 

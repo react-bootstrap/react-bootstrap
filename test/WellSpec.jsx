@@ -7,21 +7,17 @@ var Well           = require('../cjs/Well');
 
 describe('Well', function () {
   it('Should output a well with content', function () {
-    var instance = Well({}, <strong>Content</strong>);
-    ReactTestUtils.renderIntoDocument(instance);
+    var instance = ReactTestUtils.renderIntoDocument(Well({}, <strong>Content</strong>));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
   it('Should have a well class', function () {
-    var instance = Well({}, 'Content');
-    ReactTestUtils.renderIntoDocument(instance);
-
+    var instance = ReactTestUtils.renderIntoDocument(Well({}, 'Content'));
     assert.ok(instance.getDOMNode().className.match(/\bwell\b/));
   });
 
   it('Should accept bsSize arguments', function () {
-      var instance = Well({bsSize: 'small'}, 'Message');
-      ReactTestUtils.renderIntoDocument(instance);
+      var instance = ReactTestUtils.renderIntoDocument(Well({bsSize: 'small'}, 'Message'));
       assert.ok(instance.getDOMNode().className.match(/\bwell-sm\b/));
     });
 

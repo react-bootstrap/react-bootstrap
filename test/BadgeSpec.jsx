@@ -7,15 +7,12 @@ var Badge          = require('../cjs/Badge');
 
 describe('Badge', function () {
   it('Should output a badge with content', function () {
-    var instance = Badge({}, <strong>Content</strong>);
-    ReactTestUtils.renderIntoDocument(instance);
+    var instance = ReactTestUtils.renderIntoDocument(Badge({}, <strong>Content</strong>));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
   it('Should have a badge class', function () {
-    var instance = Badge({}, 'Content');
-    ReactTestUtils.renderIntoDocument(instance);
-
+    var instance = ReactTestUtils.renderIntoDocument(Badge({}, 'Content'));
     assert.ok(instance.getDOMNode().className.match(/\bbadge\b/));
   });
 
