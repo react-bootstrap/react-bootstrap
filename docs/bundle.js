@@ -3165,10 +3165,11 @@ var ProgressBarStriped = "/** @jsx React.DOM */\n\nvar progressInstance = (\n   
 var ProgressBarAnimated = "/** @jsx React.DOM */\n\nvar progressInstance = (\n    <ProgressBar active now={45} />\n  );\n\nReact.renderComponent(progressInstance, mountNode);";
 var ProgressBarStacked = "/** @jsx React.DOM */\n\nvar progressInstance = (\n    <ProgressBar>\n      <ProgressBar bsStyle=\"success\" now={35} key={1} />\n      <ProgressBar bsStyle=\"warning\" now={20} key={2}  />\n      <ProgressBar bsStyle=\"danger\" now={10} key={3}  />\n    </ProgressBar>\n  );\n\nReact.renderComponent(progressInstance, mountNode);";
 
-var Label = "/** @jsx React.DOM */\n\nvar labelInstance = (\n  <div>\n    <h1>Label <Label bsStyle=\"default\">Default</Label></h1>\n    <h2>Label <Label bsStyle=\"primary\">Primary</Label></h2>\n    <h3>Label <Label bsStyle=\"success\">Success</Label></h3>\n    <h4>Label <Label bsStyle=\"info\">Info</Label></h4>\n    <h5>Label <Label bsStyle=\"warning\">Warning</Label></h5>\n    <p>Label <Label bsStyle=\"danger\">Danger</Label></p>\n  </div>\n);\n\nReact.renderComponent(labelInstance, mountNode);";
+var Label = "/** @jsx React.DOM */\n\nvar labelInstance = (\n  <div>\n    <h1>Label <Label>Default</Label></h1>\n    <h2>Label <Label>Primary</Label></h2>\n    <h3>Label <Label>Success</Label></h3>\n    <h4>Label <Label>Info</Label></h4>\n    <h5>Label <Label>Warning</Label></h5>\n    <p>Label <Label>Danger</Label></p>\n  </div>\n);\n\nReact.renderComponent(labelInstance, mountNode);";
+var LabelVariations = "/** @jsx React.DOM */\n\nvar labelVariationInstance = (\n  <div>\n    <Label bsStyle=\"default\">Default</Label>\n    <Label bsStyle=\"primary\">Primary</Label>\n    <Label bsStyle=\"success\">Success</Label>\n    <Label bsStyle=\"info\">Info</Label>\n    <Label bsStyle=\"warning\">Warning</Label>\n    <Label bsStyle=\"danger\">Danger</Label>\n  </div>\n);\n\nReact.renderComponent(labelVariationInstance, mountNode);";
 var Badge = "/** @jsx React.DOM */\n\nvar badgeInstance = (\n  <p>Badges <Badge>42</Badge></p>\n);\n\nReact.renderComponent(badgeInstance, mountNode);";
 var Jumbotron = "/** @jsx React.DOM */\n\nvar jumbotronInstance = (\n  <Jumbotron>\n    <h1>Hello, world!</h1>\n    <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>\n    <p><Button bsStyle=\"primary\">Learn more</Button></p>\n  </Jumbotron>\n  );\n\nReact.renderComponent(jumbotronInstance, mountNode);";
-var PageHeader = "/** @jsx React.DOM */\n\nvar pageHeaderInstance = (\n  <PageHeader>You can leverage <small>other elements</small> too!</PageHeader>\n);\n\nReact.renderComponent(pageHeaderInstance, mountNode);";
+var PageHeader = "/** @jsx React.DOM */\n\nvar pageHeaderInstance = (\n  <PageHeader>Example page header <small>Subtext for header</small></PageHeader>\n);\n\nReact.renderComponent(pageHeaderInstance, mountNode);";
 var Well = "/** @jsx React.DOM */\n\nvar wellInstance = (\n  <div>\n    <Well>Look I'm in a well!</Well>\n  </div>\n);\n\nReact.renderComponent(wellInstance, mountNode);";
 var WellSizes = "/** @jsx React.DOM */\n\nvar wellInstance = (\n  <div>\n    <Well bsSize=\"large\">Look I'm in a large well!</Well>\n    <Well bsSize=\"small\">Look I'm in a small well!</Well>\n  </div>\n);\n\nReact.renderComponent(wellInstance, mountNode);";
 var Glyphicon = "/** @jsx React.DOM */\n\nvar glyphInstance = (\n  <div>\n    <ButtonToolbar>\n      <ButtonGroup>\n        <Button><Glyphicon bsGlyph=\"align-left\" /></Button>\n        <Button><Glyphicon bsGlyph=\"align-center\" /></Button>\n        <Button><Glyphicon bsGlyph=\"align-right\" /></Button>\n        <Button><Glyphicon bsGlyph=\"align-justify\" /></Button>\n      </ButtonGroup>\n    </ButtonToolbar>\n    <ButtonToolbar>\n      <ButtonGroup>\n        <Button bsSize=\"large\"><Glyphicon bsGlyph=\"star\" /> Star</Button>\n        <Button><Glyphicon bsGlyph=\"star\" /> Star</Button>\n        <Button bsSize=\"small\"><Glyphicon bsGlyph=\"star\" /> Star</Button>\n        <Button bsSize=\"xsmall\"><Glyphicon bsGlyph=\"star\" /> Star</Button>\n      </ButtonGroup>\n    </ButtonToolbar>\n  </div>\n);\n\nReact.renderComponent(glyphInstance, mountNode);";
@@ -3382,36 +3383,37 @@ var ComponentsPage = React.createClass({displayName: 'ComponentsPage',
 
                 React.DOM.div( {className:"bs-docs-section"}, 
                   React.DOM.h1( {id:"labels", className:"page-header"}, "Labels"),
-
                   React.DOM.h2( {id:"label-static"}, "Example"),
-                  ReactPlayground( {codeText:Label} )
+                  React.DOM.p(null, "Create a ", React.DOM.code(null, '<Label>label</Label>'), " show highlight information"),
+                  ReactPlayground( {codeText:Label} ),
+                  React.DOM.h2( {id:"label-static"}, "Available variations"),
+                  React.DOM.p(null, "Add any of the below mentioned modifier classes to change the appearance of a label."),
+                  ReactPlayground( {codeText:LabelVariations} )
                 ),
 
                 React.DOM.div( {className:"bs-docs-section"}, 
                   React.DOM.h1( {id:"badges", className:"page-header"}, "Badges"),
-                  React.DOM.p(null, "Easily highlight new or unread items by adding a ", React.DOM.code(null, '<Badge>'), " to links, Bootstrap navs, and more."),
-                  React.DOM.h2( {id:"badge-static"}, "Example"),
+                  React.DOM.p(null, "Easily highlight new or unread items by adding a ", React.DOM.code(null, '<Badge>badge</Badge>'), " to links, Bootstrap navs, and more."),
                   ReactPlayground( {codeText:Badge} )
                 ),
 
                 React.DOM.div( {className:"bs-docs-section"}, 
                   React.DOM.h1( {id:"jumbotron", className:"page-header"}, "Jumbotron"),
                   React.DOM.p(null, "A lightweight, flexible component that can optionally extend the entire viewport to showcase key content on your site."),
-                  React.DOM.h2( {id:"page-header-static"}, "Example"),
+                  React.DOM.p(null, "To make the jumbotron full width, and without rounded corners, place it outside all .containers and instead add a .container within."),
                   ReactPlayground( {codeText:Jumbotron} )
                 ),
 
                 React.DOM.div( {className:"bs-docs-section"}, 
                   React.DOM.h1( {id:"page-header", className:"page-header"}, "Page Header"),
                   React.DOM.p(null, "A simple shell for an ", React.DOM.code(null, "h1"), " to appropriately space out and segment sections of content on a page. It can utilize the ", React.DOM.code(null, "h1"),"’s default ", React.DOM.code(null, "small"), " element, as well as most other components (with additional styles)."),
-                  React.DOM.h2( {id:"page-header-static"}, "Example"),
                   ReactPlayground( {codeText:PageHeader} )
                 ),
 
                 React.DOM.div( {className:"bs-docs-section"}, 
                   React.DOM.h1( {id:"wells", className:"page-header"}, "Wells"),
-                  React.DOM.p(null, "Use the well as a simple effect on an element to give it an inset effect."),
                   React.DOM.h2( {id:"well-static"}, "Default Wells"),
+                  React.DOM.p(null, "Use the well as a simple effect on an element to give it an inset effect."),
                   ReactPlayground( {codeText:Well} ),
                   React.DOM.h2( {id:"well-optins-static"}, "Optional classes"),
                   React.DOM.p(null, "Control padding and rounded corners with two optional modifier classes."),
@@ -3421,7 +3423,6 @@ var ComponentsPage = React.createClass({displayName: 'ComponentsPage',
                 React.DOM.div( {className:"bs-docs-section"}, 
                   React.DOM.h1( {id:"glyphicons", className:"page-header"}, "Glyphicons"),
                   React.DOM.p(null, "Use them in buttons, button groups for a toolbar, navigation, or prepended form inputs."),
-                  React.DOM.h2( {id:"glyphicon-static"}, "Example"),
                     ReactPlayground( {codeText:Glyphicon} )
                 )
               ),

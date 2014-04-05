@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var pageHeaderInstance = (
-  <PageHeader>You can leverage <small>other elements</small> too!</PageHeader>
+  <PageHeader>Example page header <small>Subtext for header</small></PageHeader>
 );
 
 React.renderComponent(pageHeaderInstance, mountNode);

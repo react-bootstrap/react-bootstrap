@@ -2,12 +2,12 @@
 
 var labelInstance = (
   <div>
-    <h1>Label <Label bsStyle="default">Default</Label></h1>
-    <h2>Label <Label bsStyle="primary">Primary</Label></h2>
-    <h3>Label <Label bsStyle="success">Success</Label></h3>
-    <h4>Label <Label bsStyle="info">Info</Label></h4>
-    <h5>Label <Label bsStyle="warning">Warning</Label></h5>
-    <p>Label <Label bsStyle="danger">Danger</Label></p>
+    <h1>Label <Label>Default</Label></h1>
+    <h2>Label <Label>Primary</Label></h2>
+    <h3>Label <Label>Success</Label></h3>
+    <h4>Label <Label>Info</Label></h4>
+    <h5>Label <Label>Warning</Label></h5>
+    <p>Label <Label>Danger</Label></p>
   </div>
 );
 
