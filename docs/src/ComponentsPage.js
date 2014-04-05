@@ -302,6 +302,62 @@ var ComponentsPage = React.createClass({
                   <p>Auto close after a set time with <code>dismissAfter</code> prop.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/AlertAutoDismissable.js', 'utf8')} />
                 </div>
+
+                {/* Labels */}
+                <div className="bs-docs-section">
+                  <h1 id="labels" className="page-header">Labels</h1>
+
+                  <h2 id="label-static">Example</h2>
+                  <p>Create a <code>{'<Label>label</Label>'}</code> show highlight information</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/Label.js', 'utf8')} />
+                  <h2 id="label-static">Available variations</h2>
+                  <p>Add any of the below mentioned modifier classes to change the appearance of a label.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/LabelVariations.js', 'utf8')} />
+
+                </div>
+
+                {/* Badges */}
+                <div className="bs-docs-section">
+                  <h1 id="badges" className="page-header">Badges</h1>
+                  <p>Easily highlight new or unread items by adding a <code>{'<Badge>'}</code> to links, Bootstrap navs, and more.</p>
+                  <h2 id="badge-static">Example</h2>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/Badge.js', 'utf8')} />
+                </div>
+
+                {/* Jumbotron */}
+                <div className="bs-docs-section">
+                  <h1 id="jumbotron" className="page-header">Jumbotron</h1>
+                  <p>A lightweight, flexible component that can optionally extend the entire viewport to showcase key content on your site.</p>
+                  <h2 id="page-header-static">Example</h2>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/Jumbotron.js', 'utf8')} />
+                </div>
+
+                {/* Page Header */}
+                <div className="bs-docs-section">
+                  <h1 id="page-header" className="page-header">Page Header</h1>
+                  <p>A simple shell for an <code>h1</code> to appropriately space out and segment sections of content on a page. It can utilize the <code>h1</code>&#8217;s default <code>small</code> element, as well as most other components (with additional styles).</p>
+                  <h2 id="page-header-static">Example</h2>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PageHeader.js', 'utf8')} />
+                </div>
+
+                {/* Wells */}
+                <div className="bs-docs-section">
+                  <h1 id="wells" className="page-header">Wells</h1>
+                  <p>Use the well as a simple effect on an element to give it an inset effect.</p>
+                  <h2 id="well-static">Default Wells</h2>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/Well.js', 'utf8')} />
+                  <h2 id="well-optins-static">Optional classes</h2>
+                  <p>Control padding and rounded corners with two optional modifier classes.</p>
+                    <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/WellSizes.js', 'utf8')} />
+                </div>
+
+                {/* Glyphicons */}
+                <div className="bs-docs-section">
+                  <h1 id="glyphicons" className="page-header">Glyphicons</h1>
+                  <p>Use them in buttons, button groups for a toolbar, navigation, or prepended form inputs.</p>
+                  <h2 id="glyphicon-static">Example</h2>
+                    <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/Glyphicon.js', 'utf8')} />
+                </div>
               </div>
 
               <div className="col-md-3">
@@ -324,6 +380,12 @@ var ComponentsPage = React.createClass({
                     <NavItem href="#progress" key={6}>Progress bars</NavItem>
                     <NavItem href="#navs" key={7}>Navs</NavItem>
                     <NavItem href="#tabs" key={8}>Togglable tabs</NavItem>
+                    <NavItem href="#labels" key={9}>Labels</NavItem>
+                    <NavItem href="#badges" key={10}>Badges</NavItem>
+                    <NavItem href="#jumbotron" key={11}>Jumbotron</NavItem>
+                    <NavItem href="#page-header" key={12}>Page Header</NavItem>
+                    <NavItem href="#wells" key={13}>Wells</NavItem>
+                    <NavItem href="#glyphicons" key={14}>Glyphicons</NavItem>
                   </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top
