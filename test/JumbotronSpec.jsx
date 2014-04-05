@@ -7,15 +7,12 @@ var Jumbotron      = require('../cjs/Jumbotron');
 
 describe('Jumbotron', function () {
   it('Should output a div with content', function () {
-    var instance = Jumbotron({}, <strong>Content</strong>);
-    ReactTestUtils.renderIntoDocument(instance);
+    var instance = ReactTestUtils.renderIntoDocument(Jumbotron({}, <strong>Content</strong>));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
   it('Should have a jumbotron class', function () {
-    var instance = Jumbotron({}, 'Content');
-    ReactTestUtils.renderIntoDocument(instance);
-
+    var instance = ReactTestUtils.renderIntoDocument(Jumbotron({}, 'Content'));
     assert.ok(instance.getDOMNode().className.match(/\bjumbotron\b/));
   });
 
