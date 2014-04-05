@@ -6,7 +6,7 @@ var React = require('react');
 var fs = require('fs');
 
 var NavMain = require('./NavMain');
-var PageHeader = require('./PageHeader');
+var DocsPageHeader = require('./PageHeader');
 var PageFooter = require('./PageFooter');
 var ReactPlayground = require('./ReactPlayground');
 
@@ -49,13 +49,21 @@ var ProgressBarStriped = fs.readFileSync(__dirname + '/../examples/ProgressBarSt
 var ProgressBarAnimated = fs.readFileSync(__dirname + '/../examples/ProgressBarAnimated.js', {encoding: 'utf8'});
 var ProgressBarStacked = fs.readFileSync(__dirname + '/../examples/ProgressBarStacked.js', {encoding: 'utf8'});
 
+var Label = fs.readFileSync(__dirname + '/../examples/Label.js', {encoding: 'utf8'});
+var Badge = fs.readFileSync(__dirname + '/../examples/Badge.js', {encoding: 'utf8'});
+var Jumbotron = fs.readFileSync(__dirname + '/../examples/Jumbotron.js', {encoding: 'utf8'});
+var PageHeader = fs.readFileSync(__dirname + '/../examples/PageHeader.js', {encoding: 'utf8'});
+var Well = fs.readFileSync(__dirname + '/../examples/Well.js', {encoding: 'utf8'});
+var WellSizes = fs.readFileSync(__dirname + '/../examples/WellSizes.js', {encoding: 'utf8'});
+var Glyphicon = fs.readFileSync(__dirname + '/../examples/Glyphicon.js', {encoding: 'utf8'});
+
 var ComponentsPage = React.createClass({
   render: function () {
     return (
         <div>
           <NavMain activePage="components" />
 
-          <PageHeader
+          <DocsPageHeader
             title="Components"
             subTitle="" />
 
@@ -255,6 +263,51 @@ var ComponentsPage = React.createClass({
                   <p>Nest <code>&lt;ProgressBar /&gt;</code>s to stack them.</p>
                   <ReactPlayground codeText={ProgressBarStacked} />
                 </div>
+
+                <div className="bs-docs-section">
+                  <h1 id="labels" className="page-header">Labels</h1>
+
+                  <h2 id="label-static">Example</h2>
+                  <ReactPlayground codeText={Label} />
+                </div>
+
+                <div className="bs-docs-section">
+                  <h1 id="badges" className="page-header">Badges</h1>
+                  <p>Easily highlight new or unread items by adding a <code>{'<Badge>'}</code> to links, Bootstrap navs, and more.</p>
+                  <h2 id="badge-static">Example</h2>
+                  <ReactPlayground codeText={Badge} />
+                </div>
+
+                <div className="bs-docs-section">
+                  <h1 id="jumbotron" className="page-header">Jumbotron</h1>
+                  <p>A lightweight, flexible component that can optionally extend the entire viewport to showcase key content on your site.</p>
+                  <h2 id="page-header-static">Example</h2>
+                  <ReactPlayground codeText={Jumbotron} />
+                </div>
+
+                <div className="bs-docs-section">
+                  <h1 id="page-header" className="page-header">Page Header</h1>
+                  <p>A simple shell for an <code>h1</code> to appropriately space out and segment sections of content on a page. It can utilize the <code>h1</code>&#8217;s default <code>small</code> element, as well as most other components (with additional styles).</p>
+                  <h2 id="page-header-static">Example</h2>
+                  <ReactPlayground codeText={PageHeader} />
+                </div>
+
+                <div className="bs-docs-section">
+                  <h1 id="wells" className="page-header">Wells</h1>
+                  <p>Use the well as a simple effect on an element to give it an inset effect.</p>
+                  <h2 id="well-static">Default Wells</h2>
+                  <ReactPlayground codeText={Well} />
+                  <h2 id="well-optins-static">Optional classes</h2>
+                  <p>Control padding and rounded corners with two optional modifier classes.</p>
+                    <ReactPlayground codeText={WellSizes} />
+                </div>
+
+                <div className="bs-docs-section">
+                  <h1 id="glyphicons" className="page-header">Glyphicons</h1>
+                  <p>Use them in buttons, button groups for a toolbar, navigation, or prepended form inputs.</p>
+                  <h2 id="glyphicon-static">Example</h2>
+                    <ReactPlayground codeText={Glyphicon} />
+                </div>
               </div>
 
               <div className="col-md-3">
@@ -277,6 +330,24 @@ var ComponentsPage = React.createClass({
                     </li>
                     <li>
                       <a href="#progress">Progress bars</a>
+                    </li>
+                    <li>
+                      <a href="#labels">Labels</a>
+                    </li>
+                    <li>
+                      <a href="#badges">Badges</a>
+                    </li>
+                    <li>
+                      <a href="#jumbotron">Jumbotron</a>
+                    </li>
+                    <li>
+                      <a href="#page-header">Page Header</a>
+                    </li>
+                    <li>
+                      <a href="#wells">Wells</a>
+                    </li>
+                    <li>
+                      <a href="#glyphicons">Glyphicons</a>
                     </li>
                   </ul>
                   <a className="back-to-top" href="#top">

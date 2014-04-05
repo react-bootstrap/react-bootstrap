@@ -23,6 +23,12 @@ var PanelGroup = require('../../cjs/PanelGroup');
 var ProgressBar = require('../../cjs/ProgressBar');
 var TabbedArea = require('../../cjs/TabbedArea');
 var TabPane = require('../../cjs/TabPane');
+var Label = require('../../cjs/Label');
+var Badge = require('../../cjs/Badge');
+var Jumbotron = require('../../cjs/Jumbotron');
+var PageHeader = require('../../cjs/PageHeader');
+var Well = require('../../cjs/Well');
+var Glyphicon = require('../../cjs/Glyphicon');
 
 var IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)
