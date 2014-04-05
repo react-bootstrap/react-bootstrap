@@ -3,7 +3,6 @@
  */
 
 var React = require('react');
-var classSet = require('react/lib/cx');
 var CodeMirror = global.CodeMirror;
 var JSXTransformer = global.JSXTransformer;
 var Accordion = require('../../cjs/Accordion');
@@ -41,7 +40,7 @@ var IS_MOBILE = typeof navigator !== 'undefined' && (
     || navigator.userAgent.match(/Windows Phone/i)
   );
 
-var CodeMirrorEditor = React.createClass({
+var CodeMirrorEditor = React.createClass({displayName: 'CodeMirrorEditor',
   componentDidMount: function() {
     if (IS_MOBILE) return;
 
@@ -75,15 +74,15 @@ var CodeMirrorEditor = React.createClass({
 
     if (IS_MOBILE) {
       var preStyles = {overflow: 'scroll'};
-      editor = <pre style={preStyles}>{this.props.codeText}</pre>;
+      editor = React.DOM.pre( {style:preStyles}, this.props.codeText);
     } else {
-      editor = <textarea ref="editor" defaultValue={this.props.codeText} />;
+      editor = React.DOM.textarea( {ref:"editor", defaultValue:this.props.codeText} );
     }
 
     return (
-      <div style={this.props.style} className={this.props.className}>
-        {editor}
-      </div>
+      React.DOM.div( {style:this.props.style, className:this.props.className},
+        editor
+      )
       );
   }
 });
@@ -99,7 +98,7 @@ var selfCleaningTimeout = {
   }
 };
 
-var ReactPlayground = React.createClass({
+var ReactPlayground = React.createClass({displayName: 'ReactPlayground',
   mixins: [selfCleaningTimeout],
 
   MODES: {JSX: 'JSX', JS: 'JS', NONE: null},
@@ -156,32 +155,25 @@ var ReactPlayground = React.createClass({
   },
 
   render: function() {
-    var classes = {
-      'bs-example': true
-    };
     var editor;
-
-    if (this.props.exampleClassName){
-      classes[this.props.exampleClassName] = true;
-    }
 
     if (this.state.mode !== this.MODES.NONE) {
        editor = (
-           <CodeMirrorEditor
-             key="jsx"
-             onChange={this.handleCodeChange}
-             className="highlight"
-             codeText={this.state.code}/>
+           CodeMirrorEditor(
+             {key:"jsx",
+             onChange:this.handleCodeChange,
+             className:"highlight",
+             codeText:this.state.code})
         );
     }
     return (
-      <div className="playground">
-        <div className={classSet(classes)}>
-          <div ref="mount" />
-        </div>
-        {editor}
-        <a onClick={this.handleCodeModeToggle} href="#">{this.state.mode === this.MODES.NONE ? 'show code' : 'hide code'}</a>
-      </div>
+      React.DOM.div( {className:"playground"},
+        React.DOM.div( {className:'bs-example ' + this.props.exampleClassName},
+          React.DOM.div( {ref:"mount"} )
+        ),
+        editor,
+        React.DOM.a( {onClick:this.handleCodeModeToggle, href:"#"}, this.state.mode === this.MODES.NONE ? 'show code' : 'hide code')
+      )
       );
   },
 
@@ -197,13 +189,6 @@ var ReactPlayground = React.createClass({
     }
   },
 
-  componentWillUnmount: function() {
-    var mountNode = this.refs.mount.getDOMNode();
-    try {
-      React.unmountComponentAtNode(mountNode);
-    } catch (e) { }
-  },
-
   executeCode: function() {
     var mountNode = this.refs.mount.getDOMNode();
 
@@ -215,7 +200,7 @@ var ReactPlayground = React.createClass({
       var compiledCode = this.compileCode();
       if (this.props.renderCode) {
         React.renderComponent(
-          <CodeMirrorEditor codeText={compiledCode} readOnly={true} />,
+          CodeMirrorEditor( {codeText:compiledCode, readOnly:true} ),
           mountNode
         );
       } else {
@@ -224,7 +209,7 @@ var ReactPlayground = React.createClass({
     } catch (err) {
       this.setTimeout(function() {
         React.renderComponent(
-          <Alert bsStyle="danger">{err.toString()}</Alert>,
+          Alert( {bsStyle:"danger"}, err.toString()),
           mountNode
         );
       }, 500);
