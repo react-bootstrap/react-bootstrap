@@ -5,7 +5,8 @@ var BootstrapMixin = {
   propTypes: {
     bsClass: React.PropTypes.oneOf(Object.keys(constants.CLASSES)),
     bsStyle: React.PropTypes.oneOf(Object.keys(constants.STYLES)),
-    bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES))
+    bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES)),
+    bsGlyph: React.PropTypes.oneOf(Object.keys(constants.GLYPHS))
   },
 
   getBsClassSet: function () {
@@ -20,6 +21,11 @@ var BootstrapMixin = {
       var bsSize = this.props.bsSize && constants.SIZES[this.props.bsSize];
       if (bsSize) {
         classes[prefix + bsSize] = true;
+      }
+
+      var bsGlyph = this.props.bsGlyph && constants.GLYPHS[this.props.bsGlyph];
+      if (bsGlyph) {
+        classes[prefix + bsGlyph] = true;
       }
 
       var bsStyle = this.props.bsStyle && constants.STYLES[this.props.bsStyle];
