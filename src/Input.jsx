@@ -55,7 +55,7 @@ var Input = React.createClass({
   },
 
   renderLabel: function () {
-    return this.props.label ? <label for={this.props.id}>{this.props.label}</label> : null;
+    return this.props.label ? <label htmlFor={this.props.id}>{this.props.label}</label> : null;
   },
 
   render: function () {
