@@ -47,7 +47,7 @@ var CarouselItem = React.createClass({
     }
 
     if (this.props.active !== prevProps.active) {
-      setTimeout(this.startAnimation, 0);
+      setTimeout(this.startAnimation, 20);
     }
   },
 
