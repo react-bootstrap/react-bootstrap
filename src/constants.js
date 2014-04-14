@@ -12,7 +12,9 @@ export default = {
     'panel-group': 'panel-group',
     'progress-bar': 'progress-bar',
     'nav': 'nav',
-    'modal': 'modal'
+    'modal': 'modal',
+    'glyphicon': 'glyphicon',
+    'well': 'well'
   },
   STYLES: {
     'default': 'default',
