@@ -164,6 +164,9 @@ var ReactPlayground = React.createClass({
     var classes = {
       'bs-example': true
     };
+    var toggleClasses = {
+      'code-toggle': true
+    };
     var editor;
 
     if (this.props.exampleClassName){
@@ -178,6 +181,7 @@ var ReactPlayground = React.createClass({
              className="highlight"
              codeText={this.state.code}/>
         );
+       toggleClasses.open = true;
     }
     return (
       <div className="playground">
@@ -185,7 +189,7 @@ var ReactPlayground = React.createClass({
           <div ref="mount" />
         </div>
         {editor}
-        <a onClick={this.handleCodeModeToggle} href="#">{this.state.mode === this.MODES.NONE ? 'show code' : 'hide code'}</a>
+        <a className={classSet(toggleClasses)} onClick={this.handleCodeModeToggle} href="#">{this.state.mode === this.MODES.NONE ? 'show code' : 'hide code'}</a>
       </div>
       );
   },
