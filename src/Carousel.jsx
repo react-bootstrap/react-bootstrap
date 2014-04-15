@@ -172,8 +172,8 @@ var Carousel = React.createClass({
     }
 
     return (
-      <a className="left carousel-control" href={href} key={0}>
-        <span className="glyphicon glyphicon-chevron-left" onClick={this.prev}/>
+      <a className="left carousel-control" href={href} key={0} onClick={this.prev}>
+        <span className="glyphicon glyphicon-chevron-left"/>
       </a>
     );
   },
@@ -186,8 +186,8 @@ var Carousel = React.createClass({
     }
 
     return (
-      <a className="right carousel-control" href={href} key={1}>
-        <span className="glyphicon glyphicon-chevron-right" onClick={this.next}/>
+      <a className="right carousel-control" href={href} key={1} onClick={this.next}>
+        <span className="glyphicon glyphicon-chevron-right"/>
       </a>
     );
   },
