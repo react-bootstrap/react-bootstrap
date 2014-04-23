@@ -12,6 +12,7 @@ export default = {
     'panel-group': 'panel-group',
     'progress-bar': 'progress-bar',
     'nav': 'nav',
+    'navbar': 'navbar',
     'modal': 'modal',
     'glyphicon': 'glyphicon',
     'well': 'well'

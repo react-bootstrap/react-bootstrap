@@ -27,6 +27,7 @@ define(function (require) {
     MenuItem: require('./MenuItem'),
     Modal: require('./Modal'),
     Nav: require('./Nav'),
+    Navbar: require('./Navbar'),
     NavItem: require('./NavItem'),
     ModalTrigger: require('./ModalTrigger'),
     OverlayTrigger: require('./OverlayTrigger'),
