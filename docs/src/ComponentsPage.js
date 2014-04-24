@@ -7,6 +7,7 @@ var fs = require('fs');
 
 var Affix = require('../../cjs/Affix');
 var Nav = require('../../cjs/Nav');
+var Navbar = require('../../cjs/Navbar');
 var SubNav = require('../../cjs/SubNav');
 var NavItem = require('../../cjs/NavItem');
 
@@ -294,6 +295,15 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavBasic.js', 'utf8')} />
                 </div>
 
+                {/* Navbar */}
+                <div className="bs-docs-section">
+                  <h1 id="navbars" className="page-header">Navbars <small>Navbar</small></h1>
+                  <h2 id="navbars-examples">Example navbars</h2>
+
+                  <p>Navbars.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavbarBasic.js', 'utf8')} />
+                </div>
+
                 {/* Tabbed Areas */}
                 <div className="bs-docs-section">
                   <h1 id="tabs" className="page-header">Togglable tabs <small>TabbedArea, TabPane</small></h1>
@@ -424,15 +434,16 @@ var ComponentsPage = React.createClass({
                     <NavItem href="#popovers" key={7}>Popovers</NavItem>
                     <NavItem href="#progress" key={8}>Progress bars</NavItem>
                     <NavItem href="#navs" key={9}>Navs</NavItem>
-                    <NavItem href="#tabs" key={10}>Togglable tabs</NavItem>
-                    <NavItem href="#alerts" key={11}>Alerts</NavItem>
-                    <NavItem href="#carousels" key={12}>Carousels</NavItem>
-                    <NavItem href="#labels" key={13}>Labels</NavItem>
-                    <NavItem href="#badges" key={14}>Badges</NavItem>
-                    <NavItem href="#jumbotron" key={15}>Jumbotron</NavItem>
-                    <NavItem href="#page-header" key={16}>Page Header</NavItem>
-                    <NavItem href="#wells" key={17}>Wells</NavItem>
-                    <NavItem href="#glyphicons" key={18}>Glyphicons</NavItem>
+                    <NavItem href="#navbars" key={10}>Navbars</NavItem>
+                    <NavItem href="#tabs" key={11}>Togglable tabs</NavItem>
+                    <NavItem href="#alerts" key={12}>Alerts</NavItem>
+                    <NavItem href="#carousels" key={13}>Carousels</NavItem>
+                    <NavItem href="#labels" key={14}>Labels</NavItem>
+                    <NavItem href="#badges" key={15}>Badges</NavItem>
+                    <NavItem href="#jumbotron" key={16}>Jumbotron</NavItem>
+                    <NavItem href="#page-header" key={17}>Page Header</NavItem>
+                    <NavItem href="#wells" key={18}>Wells</NavItem>
+                    <NavItem href="#glyphicons" key={19}>Glyphicons</NavItem>
                   </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top

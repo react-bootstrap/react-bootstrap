@@ -10,31 +10,39 @@ var Nav = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
-    bsStyle: React.PropTypes.oneOf(['tabs','pills']),
+    bsStyle: React.PropTypes.oneOf(['tabs','pills','navbar-nav']),
     stacked: React.PropTypes.bool,
     justified: React.PropTypes.bool,
+    navbar: React.PropTypes.bool,
+    right: React.PropTypes.bool,
     onSelect: React.PropTypes.func
   },
 
   getDefaultProps: function () {
     return {
-      bsClass: 'nav'
+      bsClass: 'nav',
+      navbar: false
     };
   },
 
   render: function () {
-    var classes = this.getBsClassSet();
+    var classes = this.getBsClassSet(this.props.navbar);
 
     classes['nav-stacked'] = this.props.stacked;
     classes['nav-justified'] = this.props.justified;
+    classes['navbar-right'] = this.props.right;
 
-    return this.transferPropsTo(
-      <nav>
-        <ul className={classSet(classes)}>
-          {utils.modifyChildren(this.props.children, this.renderNavItem)}
-        </ul>
-      </nav>
-    );
+    if (!this.props.navbar) {
+      return this.transferPropsTo(
+        <nav>
+          <NavItemRender classes={classes} children={this.props.children} renderNavItem={this.renderNavItem} />
+        </nav>
+      );
+    } else {
+      return (
+        <NavItemRender classes={classes} children={this.props.children} renderNavItem={this.renderNavItem} />
+      );
+    }
   },
 
   getChildActiveProp: function (child) {
@@ -69,5 +77,13 @@ var Nav = React.createClass({
     );
   }
 });
+
+var NavItemRender = function (props) {
+  return (
+    <ul className={classSet(props.classes)}>
+      {utils.modifyChildren(props.children, props.renderNavItem)}
+    </ul>
+  );
+};
 
 export default = Nav;

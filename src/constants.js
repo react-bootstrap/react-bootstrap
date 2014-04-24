@@ -27,7 +27,8 @@ export default = {
     'link': 'link',
     'inline': 'inline',
     'tabs': 'tabs',
-    'pills': 'pills'
+    'pills': 'pills',
+    'navbar-nav': 'navbar-nav'
   },
   SIZES: {
     'large': 'lg',

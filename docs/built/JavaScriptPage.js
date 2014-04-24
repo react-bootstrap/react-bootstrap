@@ -11,6 +11,7 @@ var PageFooter = require('./PageFooter');
 var ReactPlayground = require('./ReactPlayground');
 
 var NavBasicText = fs.readFileSync(__dirname + '/../examples/NavBasic.js', {encoding: 'utf8'});
+var NavbarBasicText = fs.readFileSync(__dirname + '/../examples/NavbarBasic.js', {encoding: 'utf8'});
 var AlertBasicText = fs.readFileSync(__dirname + '/../examples/AlertBasic.js', {encoding: 'utf8'});
 var AlertDismissableText = fs.readFileSync(__dirname + '/../examples/AlertDismissable.js', {encoding: 'utf8'});
 var AlertAutoDismissableText = fs.readFileSync(__dirname + '/../examples/AlertAutoDismissable.js', {encoding: 'utf8'});

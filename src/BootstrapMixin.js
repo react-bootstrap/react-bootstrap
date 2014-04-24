@@ -8,14 +8,14 @@ var BootstrapMixin = {
     bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES))
   },
 
-  getBsClassSet: function () {
+  getBsClassSet: function (noprefix) {
     var classes = {};
 
     var bsClass = this.props.bsClass && constants.CLASSES[this.props.bsClass];
     if (bsClass) {
       classes[bsClass] = true;
 
-      var prefix = bsClass + '-';
+      var prefix = noprefix ? '' : bsClass + '-';
 
       var bsSize = this.props.bsSize && constants.SIZES[this.props.bsSize];
       if (bsSize) {

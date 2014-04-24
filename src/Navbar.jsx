@@ -16,6 +16,12 @@ var Navbar = React.createClass({
     inverse: React.PropTypes.bool
   },
 
+  getInitialState: function() {
+    return {
+      collapsed: true
+    };
+  },
+
   getDefaultProps: function () {
     return {
       bsClass: 'navbar',
@@ -23,8 +29,23 @@ var Navbar = React.createClass({
     };
   },
 
+  handleCollapse: function() {
+    var collapsed = !this.state.collapsed;
+    this.setState({collapsed: collapsed});
+  },
+
   render: function () {
     var classes = this.getBsClassSet();
+
+    var toggleClass = classSet({
+      "navbar-toggle": true,
+      "collapsed": this.state.collapsed
+    });
+    var collapseClass = classSet({
+      "navbar-collapse": true,
+      "collapse": true,
+      "in": !this.state.collapsed
+    });
 
     classes['navbar-fixed-top'] = this.props.fixedTop;
     classes['navbar-fixed-bottom'] = this.props.fixedBottom;
@@ -33,7 +54,23 @@ var Navbar = React.createClass({
 
     return this.transferPropsTo(
       <nav className={classSet(classes)} role="navigation">
-        {this.props.children}
+        <div className="container-fluid">
+
+          <div className="navbar-header">
+            <button type="button" className={toggleClass} data-toggle="collapse"
+                data-target={'#' + this.props.target} onClick={this.handleCollapse}>
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <a className="navbar-brand" href="#">{this.props.brand}</a>
+          </div>
+
+          <div className={collapseClass} id={this.props.target}>
+            {this.props.children}
+          </div>
+        </div>
       </nav>
     );
   }

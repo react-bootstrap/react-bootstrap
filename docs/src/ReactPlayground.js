@@ -19,6 +19,7 @@ var Glyphicon = require('../../cjs/Glyphicon');
 var Jumbotron = require('../../cjs/Jumbotron');
 var Label = require('../../cjs/Label');
 var Nav = require('../../cjs/Nav');
+var Navbar = require('../../cjs/Navbar');
 var NavItem = require('../../cjs/NavItem');
 var MenuItem = require('../../cjs/MenuItem');
 var Modal = require('../../cjs/Modal');
