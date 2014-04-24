@@ -13,7 +13,8 @@ var Navbar = React.createClass({
     fixedTop: React.PropTypes.bool,
     fixedBottom: React.PropTypes.bool,
     staticTop: React.PropTypes.bool,
-    inverse: React.PropTypes.bool
+    inverse: React.PropTypes.bool,
+    noClasses: React.PropTypes.bool
   },
 
   getInitialState: function() {
@@ -26,7 +27,9 @@ var Navbar = React.createClass({
     return {
       bsClass: 'navbar',
       bsStyle: 'default',
-      brandlink: '#'
+      brandlink: '#',
+      noClasses: false,
+      target: "default-navbar"
     };
   },
 
@@ -36,7 +39,16 @@ var Navbar = React.createClass({
   },
 
   render: function () {
-    var classes = this.getBsClassSet();
+    var classes;
+
+    if (!this.props.noClasses) {
+      classes = this.getBsClassSet();
+
+      classes['navbar-fixed-top'] = this.props.fixedTop;
+      classes['navbar-fixed-bottom'] = this.props.fixedBottom;
+      classes['navbar-static-top'] = this.props.staticTop;
+      classes['navbar-inverse'] = this.props.inverse;
+    }
 
     var toggleClass = classSet({
       "navbar-toggle": true,
@@ -48,29 +60,21 @@ var Navbar = React.createClass({
       "in": !this.state.collapsed
     });
 
-    classes['navbar-fixed-top'] = this.props.fixedTop;
-    classes['navbar-fixed-bottom'] = this.props.fixedBottom;
-    classes['navbar-static-top'] = this.props.staticTop;
-    classes['navbar-inverse'] = this.props.inverse;
-
     return this.transferPropsTo(
       <nav className={classSet(classes)} role="navigation">
-        <div className="container-fluid">
+        <div className="navbar-header">
+          <button type="button" className={toggleClass} data-toggle="collapse"
+              data-target={'#' + this.props.target} onClick={this.handleCollapse}>
+            <span className="sr-only">Toggle navigation</span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
+          </button>
+          <a className="navbar-brand" href={this.props.brandlink}>{this.props.brand}</a>
+        </div>
 
-          <div className="navbar-header">
-            <button type="button" className={toggleClass} data-toggle="collapse"
-                data-target={'#' + this.props.target} onClick={this.handleCollapse}>
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href={this.props.brandlink}>{this.props.brand}</a>
-          </div>
-
-          <div className={collapseClass} id={this.props.target}>
-            {this.props.children}
-          </div>
+        <div className={collapseClass} id={this.props.target}>
+          {this.props.children}
         </div>
       </nav>
     );
