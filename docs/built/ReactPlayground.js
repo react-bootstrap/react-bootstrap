@@ -14,6 +14,7 @@ var DropdownButton = require('../../cjs/DropdownButton');
 var SplitButton = require('../../cjs/SplitButton');
 var Nav = require('../../cjs/Nav');
 var Navbar = require('../../cjs/Navbar');
+var Form = require('../../cjs/Form');
 var NavItem = require('../../cjs/NavItem');
 var MenuItem = require('../../cjs/MenuItem');
 var Modal = require('../../cjs/Modal');
