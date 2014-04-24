@@ -15,6 +15,7 @@ var Nav = React.createClass({
     justified: React.PropTypes.bool,
     navbar: React.PropTypes.bool,
     right: React.PropTypes.bool,
+    dropdown: React.PropTypes.bool,
     onSelect: React.PropTypes.func
   },
 
@@ -31,8 +32,13 @@ var Nav = React.createClass({
     classes['nav-stacked'] = this.props.stacked;
     classes['nav-justified'] = this.props.justified;
     classes['navbar-right'] = this.props.right;
+    classes['dropdown-menu'] = this.props.dropdown;
 
-    if (!this.props.navbar) {
+    if (this.props.dropdown) {
+      classes['nav'] = false;
+    }
+
+    if (!this.props.navbar && !this.props.dropdown) {
       return this.transferPropsTo(
         <nav>
           <NavItemRender classes={classes} children={this.props.children} renderNavItem={this.renderNavItem} />
