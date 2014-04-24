@@ -43,7 +43,6 @@ var Modal = React.createClass({
         role="dialog"
         style={modalStyle}
         className={classSet(classes)}
-        onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
         ref="modal">
         <div className="modal-dialog">
           <div className="modal-content">
@@ -66,9 +65,12 @@ var Modal = React.createClass({
 
     classes['in'] = !this.props.animation || !document.querySelectorAll;
 
+    var onClick = this.props.backdrop === true ?
+      this.handleBackdropClick : null;
+
     return (
       <div>
-        <div className={classSet(classes)} ref="backdrop" />
+        <div className={classSet(classes)} ref="backdrop" onClick={onClick} />
         {modal}
       </div>
     );
