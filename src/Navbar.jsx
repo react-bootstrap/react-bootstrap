@@ -25,7 +25,8 @@ var Navbar = React.createClass({
   getDefaultProps: function () {
     return {
       bsClass: 'navbar',
-      bsStyle: 'default'
+      bsStyle: 'default',
+      brandlink: '#'
     };
   },
 
@@ -64,7 +65,7 @@ var Navbar = React.createClass({
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="#">{this.props.brand}</a>
+            <a className="navbar-brand" href={this.props.brandlink}>{this.props.brand}</a>
           </div>
 
           <div className={collapseClass} id={this.props.target}>

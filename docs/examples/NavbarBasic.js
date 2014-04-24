@@ -5,7 +5,7 @@ function handleSelect (selectedKey) {
 }
 
 var navbarInstance = (
-    <Navbar brand="ENCODE" target="example-navbar">
+    <Navbar brand="ENCODE" brandlink="/" target="example-navbar">
       <Nav navbar={true} bsStyle="navbar-nav" activeKey={1} onSelect={handleSelect}>
         <NavItem key={1} href="/home">NavItem 1</NavItem>
         <NavItem key={2} title="Item" dropdown={true}>
