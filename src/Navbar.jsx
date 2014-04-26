@@ -3,7 +3,7 @@
 import React          from './react-es6';
 import classSet       from './react-es6/lib/cx';
 import BootstrapMixin from './BootstrapMixin';
-import utils          from './utils';
+import PropTypes      from './PropTypes';
 
 
 var Navbar = React.createClass({
@@ -13,18 +13,23 @@ var Navbar = React.createClass({
     fixedTop: React.PropTypes.bool,
     fixedBottom: React.PropTypes.bool,
     staticTop: React.PropTypes.bool,
-    inverse: React.PropTypes.bool
+    inverse: React.PropTypes.bool,
+    role: React.PropTypes.string,
+    componentClass: PropTypes.componentClass
   },
 
   getDefaultProps: function () {
     return {
       bsClass: 'navbar',
-      bsStyle: 'default'
+      bsStyle: 'default',
+      role: 'navigation',
+      componentClass: React.DOM.nav
     };
   },
 
   render: function () {
     var classes = this.getBsClassSet();
+    var componentClass = this.props.componentClass;
 
     classes['navbar-fixed-top'] = this.props.fixedTop;
     classes['navbar-fixed-bottom'] = this.props.fixedBottom;
@@ -32,9 +37,9 @@ var Navbar = React.createClass({
     classes['navbar-inverse'] = this.props.inverse;
 
     return this.transferPropsTo(
-      <nav className={classSet(classes)} role="navigation">
+      <componentClass className={classSet(classes)} role={this.props.role}>
         {this.props.children}
-      </nav>
+      </componentClass>
     );
   }
 });

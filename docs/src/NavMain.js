@@ -4,6 +4,7 @@
 
 var React = require('react');
 var Router = require('react-router-component');
+var Navbar = require('../../cjs/Navbar');
 
 var InternalLink = Router.Link;
 
@@ -25,7 +26,7 @@ var NavMain = React.createClass({
 
   render: function () {
     return (
-      <header className="navbar navbar-static-top bs-docs-nav" role="banner">
+      <Navbar componentClass={React.DOM.header} staticTop className="bs-docs-nav" role="banner">
         <div className="container">
           <div className="navbar-header">
             <button className="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
@@ -42,7 +43,7 @@ var NavMain = React.createClass({
             </ul>
           </nav>
         </div>
-      </header>
+      </Navbar>
       );
   },
 

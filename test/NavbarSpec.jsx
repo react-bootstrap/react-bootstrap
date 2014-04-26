@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 /*global describe, it, assert */
 
+var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var Nav            = require('../cjs/Navbar');
 
@@ -42,5 +43,19 @@ describe('Nav', function () {
           <Nav inverse />
         );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-inverse'));
+  });
+
+  it('Should override role attribute', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          <Nav role="banner"/>
+        );
+    assert.ok(instance.getDOMNode().getAttribute('role'), 'banner');
+  });
+
+  it('Should override node class', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          <Nav componentClass={React.DOM.header}/>
+        );
+    assert.ok(instance.getDOMNode().nodeName, 'HEADER');
   });
 });

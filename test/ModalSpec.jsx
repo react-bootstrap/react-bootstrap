@@ -8,7 +8,9 @@ var Modal          = require('../cjs/Modal');
 describe('Modal', function () {
 
   it('Should render the modal content', function() {
-    var instance = ReactTestUtils.renderIntoDocument(Modal({}, <strong>Message</strong>));
+    var instance = ReactTestUtils.renderIntoDocument(Modal({
+      onRequestHide: function () {}
+    }, <strong>Message</strong>));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
