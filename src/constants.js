@@ -1,20 +1,21 @@
 export default = {
   CLASSES: {
-    'column': 'col',
+    'alert': 'alert',
     'button': 'btn',
     'button-group': 'btn-group',
     'button-toolbar': 'btn-toolbar',
-    'label': 'label',
-    'alert': 'alert',
+    'column': 'col',
     'input-group': 'input-group',
     'form': 'form',
+    'glyphicon': 'glyphicon',
+    'label': 'label',
     'panel': 'panel',
     'panel-group': 'panel-group',
     'progress-bar': 'progress-bar',
     'nav': 'nav',
     'navbar': 'navbar',
     'modal': 'modal',
-    'glyphicon': 'glyphicon',
+    'row': 'row',
     'well': 'well'
   },
   STYLES: {

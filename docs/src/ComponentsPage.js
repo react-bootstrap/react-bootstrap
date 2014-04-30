@@ -347,6 +347,14 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/CarouselControlled.js', 'utf8')} exampleClassName="bs-example-tabs" />
                 </div>
 
+                {/* Grids */}
+                <div className="bs-docs-section">
+                  <h1 id="grids" className="page-header">Grids <small>Grid, Row, Col</small></h1>
+                  <h2 id="grids-examples">Example grids</h2>
+
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/GridBasic.js', 'utf8')} exampleClassName="bs-example-tabs" />
+                </div>
+
                 {/* Labels */}
                 <div className="bs-docs-section">
                   <h1 id="labels" className="page-header">Labels</h1>
@@ -427,12 +435,13 @@ var ComponentsPage = React.createClass({
                     <NavItem href="#tabs" key={10}>Togglable tabs</NavItem>
                     <NavItem href="#alerts" key={11}>Alerts</NavItem>
                     <NavItem href="#carousels" key={12}>Carousels</NavItem>
-                    <NavItem href="#labels" key={13}>Labels</NavItem>
-                    <NavItem href="#badges" key={14}>Badges</NavItem>
-                    <NavItem href="#jumbotron" key={15}>Jumbotron</NavItem>
-                    <NavItem href="#page-header" key={16}>Page Header</NavItem>
-                    <NavItem href="#wells" key={17}>Wells</NavItem>
-                    <NavItem href="#glyphicons" key={18}>Glyphicons</NavItem>
+                    <NavItem href="#grids" key={13}>Grids</NavItem>
+                    <NavItem href="#labels" key={14}>Labels</NavItem>
+                    <NavItem href="#badges" key={15}>Badges</NavItem>
+                    <NavItem href="#jumbotron" key={16}>Jumbotron</NavItem>
+                    <NavItem href="#page-header" key={17}>Page Header</NavItem>
+                    <NavItem href="#wells" key={18}>Wells</NavItem>
+                    <NavItem href="#glyphicons" key={19}>Glyphicons</NavItem>
                   </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top
