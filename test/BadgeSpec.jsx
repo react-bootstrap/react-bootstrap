@@ -16,4 +16,9 @@ describe('Badge', function () {
     assert.ok(instance.getDOMNode().className.match(/\bbadge\b/));
   });
 
+  it('Should not have a badge class when empty', function () {
+    var instance = ReactTestUtils.renderIntoDocument(Badge({}));
+    assert.notOk(instance.getDOMNode().className.match(/\bbadge\b/));
+  });
+
 });

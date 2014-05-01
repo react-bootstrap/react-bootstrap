@@ -373,6 +373,10 @@ var ComponentsPage = React.createClass({
                   <p>Easily highlight new or unread items by adding a <code>{'<Badge>'}</code> to links, Bootstrap navs, and more.</p>
                   <h2 id="badge-static">Example</h2>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/Badge.js', 'utf8')} />
+                  <div class="bs-callout bs-callout-info">
+                    <h4>Cross-browser compatibility</h4>
+                    <p>Unlike regular Bootstrap badges self collapse even in Internet Explorer 8.</p>
+                  </div>
                 </div>
 
                 {/* Jumbotron */}
