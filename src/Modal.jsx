@@ -19,6 +19,7 @@ var Modal = React.createClass({
     backdrop: React.PropTypes.oneOf(['static', true, false]),
     keyboard: React.PropTypes.bool,
     closeButton: React.PropTypes.bool,
+    animation: React.PropTypes.bool,
     onRequestHide: React.PropTypes.func.isRequired
   },
 
