@@ -39,6 +39,7 @@ var Modal = React.createClass({
 
     var modal = this.transferPropsTo(
       <div
+        title={null}
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
