@@ -18,6 +18,7 @@ var Modal = React.createClass({
     title: React.PropTypes.renderable,
     backdrop: React.PropTypes.oneOf(['static', true, false]),
     keyboard: React.PropTypes.bool,
+    closeButton: React.PropTypes.bool,
     onRequestHide: React.PropTypes.func.isRequired
   },
 
@@ -26,7 +27,8 @@ var Modal = React.createClass({
       bsClass: 'modal',
       backdrop: true,
       keyboard: true,
-      animation: true
+      animation: true,
+      closeButton: true
     };
   },
 
@@ -77,9 +79,16 @@ var Modal = React.createClass({
   },
 
   renderHeader: function () {
+    var closeButton;
+    if (this.props.closeButton) {
+      closeButton = (
+          <button type="button" className="close" aria-hidden="true" onClick={this.props.onRequestHide}>&times;</button>
+        );
+    }
+
     return (
       <div className="modal-header">
-        <button type="button" className="close" aria-hidden="true" onClick={this.props.onRequestHide}>&times;</button>
+        {closeButton}
         {this.renderTitle()}
       </div>
     );
