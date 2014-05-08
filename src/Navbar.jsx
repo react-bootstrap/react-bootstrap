@@ -4,6 +4,7 @@ import React          from './react-es6';
 import classSet       from './react-es6/lib/cx';
 import BootstrapMixin from './BootstrapMixin';
 import PropTypes      from './PropTypes';
+import utils          from './utils';
 
 
 var Navbar = React.createClass({
@@ -15,7 +16,8 @@ var Navbar = React.createClass({
     staticTop: React.PropTypes.bool,
     inverse: React.PropTypes.bool,
     role: React.PropTypes.string,
-    componentClass: PropTypes.componentClass
+    componentClass: PropTypes.componentClass,
+    brand: React.PropTypes.renderable
   },
 
   getDefaultProps: function () {
@@ -38,8 +40,26 @@ var Navbar = React.createClass({
 
     return this.transferPropsTo(
       <componentClass className={classSet(classes)} role={this.props.role}>
+        {this.props.brand ? this.renderHeader() : null}
         {this.props.children}
       </componentClass>
+    );
+  },
+
+  renderHeader: function () {
+    var brand;
+
+    if (this.props.brand) {
+      brand = React.isValidComponent(this.props.brand) ?
+          utils.cloneWithProps(this.props.brand, {
+            className: 'navbar-brand'
+          }) : <span className="navbar-brand">{this.props.brand}</span>;
+    }
+
+    return (
+      <div className="navbar-header">
+        {brand}
+      </div>
     );
   }
 });

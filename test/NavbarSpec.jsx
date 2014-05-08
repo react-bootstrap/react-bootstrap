@@ -3,13 +3,13 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Nav            = require('../cjs/Navbar');
+var Navbar         = require('../cjs/Navbar');
 
 describe('Nav', function () {
 
   it('Should create nav element', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Nav />
+          <Navbar />
         );
     var nav = instance.getDOMNode();
     assert.equal(nav.nodeName, 'NAV');
@@ -19,43 +19,74 @@ describe('Nav', function () {
 
   it('Should add fixedTop variation class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Nav fixedTop />
+          <Navbar fixedTop />
         );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-fixed-top'));
   });
 
   it('Should add fixedBottom variation class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Nav fixedBottom />
+          <Navbar fixedBottom />
         );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-fixed-bottom'));
   });
 
   it('Should add staticTop variation class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Nav staticTop />
+          <Navbar staticTop />
         );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-static-top'));
   });
 
   it('Should add inverse variation class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Nav inverse />
+          <Navbar inverse />
         );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-inverse'));
   });
 
   it('Should override role attribute', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Nav role="banner"/>
+          <Navbar role="banner"/>
         );
     assert.ok(instance.getDOMNode().getAttribute('role'), 'banner');
   });
 
   it('Should override node class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Nav componentClass={React.DOM.header}/>
+          <Navbar componentClass={React.DOM.header}/>
         );
     assert.ok(instance.getDOMNode().nodeName, 'HEADER');
+  });
+
+  it('Should add header with brand', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          <Navbar brand="Brand" />
+        );
+
+    var header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
+
+    assert.ok(header);
+
+    var brand = ReactTestUtils.findRenderedDOMComponentWithClass(header, 'navbar-brand');
+
+    assert.ok(brand);
+    assert.equal(brand.getDOMNode().innerText, 'Brand');
+  });
+
+  it('Should add header with brand component', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          <Navbar brand={React.DOM.a(null, 'Brand')} />
+        );
+
+    var header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
+
+    assert.ok(header);
+
+    var brand = ReactTestUtils.findRenderedDOMComponentWithClass(header, 'navbar-brand');
+
+    assert.ok(brand);
+    assert.equal(brand.getDOMNode().nodeName, 'A');
+    assert.equal(brand.getDOMNode().innerText, 'Brand');
   });
 });
