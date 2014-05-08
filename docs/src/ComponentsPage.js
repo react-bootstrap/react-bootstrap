@@ -413,6 +413,18 @@ var ComponentsPage = React.createClass({
                   <h2 id="glyphicon-static">Example</h2>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/Glyphicon.js', 'utf8')} />
                 </div>
+
+                {/* Tables */}
+                <div className="bs-docs-section">
+                  <h1 id="tables" className="page-header">Tables</h1>
+
+                  <h2 id="table-basic">Example</h2>
+                  <p>Use the <code>striped</code>, <code>bordered</code>, <code>condensed</code> and <code>hover</code> props to customise the table.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TableBasic.js', 'utf8')} />
+                  <h2 id="table-responsive">Responsive</h2>
+                  <p>Add <code>responsive</code> prop to make them scroll horizontally up to small devices (under 768px). When viewing on anything larger than 768px wide, you will not see any difference in these tables.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TableResponsive.js', 'utf8')} />
+                </div>
               </div>
 
               <div className="col-md-3">
@@ -446,6 +458,7 @@ var ComponentsPage = React.createClass({
                     <NavItem href="#page-header" key={17}>Page Header</NavItem>
                     <NavItem href="#wells" key={18}>Wells</NavItem>
                     <NavItem href="#glyphicons" key={19}>Glyphicons</NavItem>
+                    <NavItem href="#tables" key={20}>Tables</NavItem>
                   </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top

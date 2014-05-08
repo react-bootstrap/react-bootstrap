@@ -35,6 +35,7 @@ var ProgressBar = require('../../cjs/ProgressBar');
 var Row = require('../../cjs/Row');
 var SplitButton = require('../../cjs/SplitButton');
 var TabbedArea = require('../../cjs/TabbedArea');
+var Table = require('../../cjs/Table');
 var TabPane = require('../../cjs/TabPane');
 var Tooltip = require('../../cjs/Tooltip');
 var Well = require('../../cjs/Well');

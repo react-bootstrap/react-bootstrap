@@ -43,6 +43,7 @@ define(function (require) {
     SplitButton: require('./SplitButton'),
     SubNav: require('./SubNav'),
     TabbedArea: require('./TabbedArea'),
+    Table: require('./Table'),
     TabPane: require('./TabPane'),
     Tooltip: require('./Tooltip'),
     Well: require('./Well')
