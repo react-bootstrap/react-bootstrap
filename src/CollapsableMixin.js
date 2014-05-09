@@ -17,7 +17,7 @@ var CollapsableMixin = {
   },
 
   componentWillReceiveProps: function (newProps) {
-    if (newProps.isOpen !== this.props.isOpen) {
+    if (this.props.isCollapsable && newProps.isOpen !== this.props.isOpen) {
       this._collapseEnd = false;
       this.setState({
         isCollapsing: true
@@ -71,6 +71,10 @@ var CollapsableMixin = {
   },
 
   _afterRender: function () {
+    if (!this.props.isCollapsable) {
+      return;
+    }
+
     this._addEndTransitionListener();
     setTimeout(this._updateDimensionAfterRender, 0);
   },

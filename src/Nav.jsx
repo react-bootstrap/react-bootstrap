@@ -40,7 +40,7 @@ var Nav = React.createClass({
   },
 
   render: function () {
-    var classes = this.getCollapsableClassSet(),
+    var classes = this.props.isCollapsable ? this.getCollapsableClassSet() : {},
         ulClasses = this.getBsClassSet();
 
     classes['navbar-collapse'] = this.props.isCollapsable;
