@@ -15,13 +15,21 @@ body {
 .bs-docs-nav .navbar-nav>li>a {
   color: #aaa;
   font-weight: normal;
-  border-bottom: 3px solid #222;
 }
 
 .bs-docs-nav .navbar-nav>li>a:hover,.bs-docs-nav .navbar-nav>.active>a, .bs-docs-nav .navbar-nav>.active>a:hover {
   background: #333;
   color: #fafafa;
-  border-bottom: 3px solid #cc7a6f;
+}
+
+@media (min-width: 768px) {
+
+  .bs-docs-nav .navbar-nav>li>a {
+    border-bottom: 3px solid #222;
+  }
+  .bs-docs-nav .navbar-nav>li>a:hover,.bs-docs-nav .navbar-nav>.active>a, .bs-docs-nav .navbar-nav>.active>a:hover {
+    border-bottom: 3px solid #cc7a6f;
+  }
 }
 
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {

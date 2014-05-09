@@ -1,19 +1,24 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import classSet       from './react-es6/lib/cx';
-import BootstrapMixin from './BootstrapMixin';
-import utils          from './utils';
+import React            from './react-es6';
+import classSet         from './react-es6/lib/cx';
+import BootstrapMixin   from './BootstrapMixin';
+import CollapsableMixin from './CollapsableMixin';
+import utils            from './utils';
+import domUtils         from './domUtils';
 
 
 var Nav = React.createClass({
-  mixins: [BootstrapMixin],
+  mixins: [BootstrapMixin, CollapsableMixin],
 
   propTypes: {
     bsStyle: React.PropTypes.oneOf(['tabs','pills']),
     stacked: React.PropTypes.bool,
     justified: React.PropTypes.bool,
-    onSelect: React.PropTypes.func
+    onSelect: React.PropTypes.func,
+    isCollapsable: React.PropTypes.bool,
+    isOpen: React.PropTypes.bool,
+    inNavbar: React.PropTypes.bool
   },
 
   getDefaultProps: function () {
@@ -22,15 +27,31 @@ var Nav = React.createClass({
     };
   },
 
-  render: function () {
-    var classes = this.getBsClassSet();
+  getCollapsableDOMNode: function () {
+    return this.getDOMNode();
+  },
 
-    classes['nav-stacked'] = this.props.stacked;
-    classes['nav-justified'] = this.props.justified;
+  getCollapsableDimensionValue: function () {
+    var node = this.refs.ul.getDOMNode(),
+        height = node.offsetHeight,
+        computedStyles = domUtils.getComputedStyles(node);
+
+    return height + parseInt(computedStyles.marginTop, 10) + parseInt(computedStyles.marginBottom, 10);
+  },
+
+  render: function () {
+    var classes = this.getCollapsableClassSet(),
+        ulClasses = this.getBsClassSet();
+
+    classes['navbar-collapse'] = this.props.isCollapsable;
+
+    ulClasses['nav-stacked'] = this.props.stacked;
+    ulClasses['nav-justified'] = this.props.justified;
+    ulClasses['navbar-nav'] = this.props.inNavbar;
 
     return this.transferPropsTo(
-      <nav>
-        <ul className={classSet(classes)}>
+      <nav className={classSet(classes)}>
+        <ul className={classSet(ulClasses)} ref="ul">
           {utils.modifyChildren(this.props.children, this.renderNavItem)}
         </ul>
       </nav>

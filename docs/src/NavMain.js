@@ -5,6 +5,7 @@
 var React = require('react');
 var Router = require('react-router-component');
 var Navbar = require('../../cjs/Navbar');
+var Nav = require('../../cjs/Nav');
 
 var InternalLink = Router.Link;
 
@@ -25,30 +26,20 @@ var NavMain = React.createClass({
   },
 
   render: function () {
+    var brand = <InternalLink href="/" className="navbar-brand">React Bootstrap</InternalLink>;
+
     return (
-      <Navbar componentClass={React.DOM.header} staticTop className="bs-docs-nav" role="banner">
-        <div className="container">
-          <div className="navbar-header">
-            <button className="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-              <span className="icon-bar" />
-            </button>
-            <InternalLink href="/" className="navbar-brand">React Bootstrap</InternalLink>
-          </div>
-          <nav className="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-            <ul className="nav navbar-nav">
-              {Object.keys(NAV_LINKS).map(this.renderNavItem)}
-            </ul>
-          </nav>
-        </div>
+      <Navbar componentClass={React.DOM.header} brand={brand} staticTop className="bs-docs-nav" role="banner" toggleNavKey={0}>
+        <Nav className="bs-navbar-collapse" role="navigation" key={0} id="top" inNavbar>
+          {Object.keys(NAV_LINKS).map(this.renderNavItem)}
+        </Nav>
       </Navbar>
-      );
+    );
   },
 
   renderNavItem: function (linkName) {
     var link = NAV_LINKS[linkName];
+
     return (
         <li className={this.props.activePage === linkName ? 'active' : null} key={linkName}>
           <InternalLink href={link.link}>{link.title}</InternalLink>
