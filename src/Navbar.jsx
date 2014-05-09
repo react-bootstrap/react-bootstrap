@@ -4,6 +4,8 @@ import React          from './react-es6';
 import classSet       from './react-es6/lib/cx';
 import BootstrapMixin from './BootstrapMixin';
 import PropTypes      from './PropTypes';
+import utils          from './utils';
+import Nav            from './Nav';
 
 
 var Navbar = React.createClass({
@@ -15,7 +17,11 @@ var Navbar = React.createClass({
     staticTop: React.PropTypes.bool,
     inverse: React.PropTypes.bool,
     role: React.PropTypes.string,
-    componentClass: PropTypes.componentClass
+    componentClass: PropTypes.componentClass,
+    brand: React.PropTypes.renderable,
+    toggleButton: React.PropTypes.renderable,
+    onToggle: React.PropTypes.func,
+    fluid: React.PropTypes.func
   },
 
   getDefaultProps: function () {
@@ -25,6 +31,33 @@ var Navbar = React.createClass({
       role: 'navigation',
       componentClass: React.DOM.nav
     };
+  },
+
+  getInitialState: function () {
+    return {
+      navOpen: this.props.defaultNavOpen
+    };
+  },
+
+  shouldComponentUpdate: function() {
+    // Defer any updates to this component during the `onSelect` handler.
+    return !this._isChanging;
+  },
+
+  handleToggle: function () {
+    if (this.props.onToggle) {
+      this._isChanging = true;
+      this.props.onToggle();
+      this._isChanging = false;
+    }
+
+    this.setState({
+      navOpen: !this.state.navOpen
+    });
+  },
+
+  isNavOpen: function () {
+    return this.props.navOpen != null ? this.props.navOpen : this.state.navOpen;
   },
 
   render: function () {
@@ -37,9 +70,67 @@ var Navbar = React.createClass({
     classes['navbar-inverse'] = this.props.inverse;
 
     return this.transferPropsTo(
-      <componentClass className={classSet(classes)} role={this.props.role}>
-        {this.props.children}
+      <componentClass className={classSet(classes)}>
+        <div className={this.props.fluid ? 'container-fluid' : 'container'}>
+          {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey) ? this.renderHeader() : null}
+          {this.props.toggleNavKey != null ?
+            React.Children.map(this.props.children, this.renderChild) : this.props.children}
+        </div>
       </componentClass>
+    );
+  },
+
+  renderChild: function (child) {
+    if (this.props.toggleNavKey === child.props.key) {
+      return utils.cloneWithProps(child, {
+        isCollapsable: true,
+        isOpen: this.isNavOpen()
+      });
+    }
+
+    return child;
+  },
+
+  renderHeader: function () {
+    var brand;
+
+    if (this.props.brand) {
+      brand = React.isValidComponent(this.props.brand) ?
+        utils.cloneWithProps(this.props.brand, {
+          className: 'navbar-brand'
+        }) : <span className="navbar-brand">{this.props.brand}</span>;
+    }
+
+    return (
+      <div className="navbar-header">
+        {brand}
+        {(this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderToggleButton() : null}
+      </div>
+    );
+  },
+
+  renderToggleButton: function () {
+    var children;
+
+    if (React.isValidComponent(this.props.toggleButton)) {
+      return utils.cloneWithProps(this.props.toggleButton, {
+        className: 'navbar-toggle',
+        onClick: utils.createChainedFunction(this.handleToggle, this.props.toggleButton.props.onClick)
+      });
+    }
+
+    children = (this.props.toggleButton != null) ?
+      this.props.toggleButton : [
+        <span className="sr-only" key={0}>Toggle navigation</span>,
+        <span className="icon-bar" key={1}></span>,
+        <span className="icon-bar" key={2}></span>,
+        <span className="icon-bar" key={3}></span>
+    ];
+
+    return (
+      <button className="navbar-toggle" type="button" onClick={this.handleToggle}>
+        {children}
+      </button>
     );
   }
 });
