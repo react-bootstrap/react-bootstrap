@@ -18,7 +18,7 @@ var Nav = React.createClass({
     onSelect: React.PropTypes.func,
     isCollapsable: React.PropTypes.bool,
     isOpen: React.PropTypes.bool,
-    inNavbar: React.PropTypes.bool
+    navbar: React.PropTypes.bool
   },
 
   getDefaultProps: function () {
@@ -40,21 +40,32 @@ var Nav = React.createClass({
   },
 
   render: function () {
-    var classes = this.props.isCollapsable ? this.getCollapsableClassSet() : {},
-        ulClasses = this.getBsClassSet();
+    var classes = this.props.isCollapsable ? this.getCollapsableClassSet() : {};
 
     classes['navbar-collapse'] = this.props.isCollapsable;
 
-    ulClasses['nav-stacked'] = this.props.stacked;
-    ulClasses['nav-justified'] = this.props.justified;
-    ulClasses['navbar-nav'] = this.props.inNavbar;
+    if (this.props.navbar) {
+      return this.renderUl();
+    }
 
     return this.transferPropsTo(
       <nav className={classSet(classes)}>
-        <ul className={classSet(ulClasses)} ref="ul">
-          {utils.modifyChildren(this.props.children, this.renderNavItem)}
-        </ul>
+        {this.renderUl()}
       </nav>
+    );
+  },
+
+  renderUl: function () {
+    var classes = this.getBsClassSet();
+
+    classes['nav-stacked'] = this.props.stacked;
+    classes['nav-justified'] = this.props.justified;
+    classes['navbar-nav'] = this.props.navbar;
+
+    return (
+      <ul className={classSet(classes)} ref="ul">
+        {utils.modifyChildren(this.props.children, this.renderNavItem)}
+      </ul>
     );
   },
 
@@ -85,7 +96,8 @@ var Nav = React.createClass({
         activeHref: this.props.activeHref,
         onSelect: utils.createChainedFunction(child.props.onSelect, this.props.onSelect),
         ref: child.props.ref,
-        key: child.props.key
+        key: child.props.key,
+        navItem: true
       }
     );
   }

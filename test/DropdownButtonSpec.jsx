@@ -130,4 +130,23 @@ describe('DropdownButton', function () {
       document.documentElement.dispatchEvent(evt);
     });
   });
+
+  it('Should render li when in nav', function () {
+    instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="Title" className="test-class" navItem>
+        <MenuItem key="1">MenuItem 1 content</MenuItem>
+        <MenuItem key="2">MenuItem 2 content</MenuItem>
+      </DropdownButton>
+    );
+
+    var li = instance.getDOMNode();
+    var button = instance.refs.dropdownButton.getDOMNode();
+    assert.equal(li.nodeName, 'LI');
+    assert.ok(li.className.match(/\bdropdown\b/));
+    assert.ok(button.className.match(/\btest-class\b/));
+    assert.equal(button.nodeName, 'A');
+    assert.ok(button.className.match(/\bdropdown-toggle\b/));
+    assert.ok(button.lastChild.className.match(/\bcaret\b/));
+    assert.equal(button.innerText.trim(), 'Title');
+  });
 });

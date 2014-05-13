@@ -95,4 +95,26 @@ describe('Button', function () {
 
     assert.ok(instance.getDOMNode().className.match(/\bactive\b/));
   });
+
+  it('Should render an anchor in a list item when in a nav', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          Button({navItem: true, active: true}, 'Title')
+        );
+
+    var li = instance.getDOMNode();
+    var anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
+    assert.equal(li.nodeName, 'LI');
+    assert.ok(li.className.match(/\bactive\b/));
+    assert.ok(anchor.props.href, '#');
+  });
+
+  it('Should render an anchor when in a navDropdown', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          Button({navDropdown: true}, 'Title')
+        );
+
+    var anchor = instance.getDOMNode();
+    assert.equal(anchor.nodeName, 'A');
+    assert.ok(anchor.getAttribute('href'), '#');
+  });
 });

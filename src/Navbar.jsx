@@ -73,22 +73,20 @@ var Navbar = React.createClass({
       <componentClass className={classSet(classes)}>
         <div className={this.props.fluid ? 'container-fluid' : 'container'}>
           {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey) ? this.renderHeader() : null}
-          {this.props.toggleNavKey != null ?
-            React.Children.map(this.props.children, this.renderChild) : this.props.children}
+          {React.Children.map(this.props.children, this.renderChild)}
         </div>
       </componentClass>
     );
   },
 
   renderChild: function (child) {
-    if (this.props.toggleNavKey === child.props.key) {
-      return utils.cloneWithProps(child, {
-        isCollapsable: true,
-        isOpen: this.isNavOpen()
-      });
-    }
-
-    return child;
+    return utils.cloneWithProps(child, {
+      navbar: true,
+      isCollapsable: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.key,
+      isOpen: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.key && this.isNavOpen(),
+      key: child.props.key,
+      ref: child.props.ref
+    });
   },
 
   renderHeader: function () {
