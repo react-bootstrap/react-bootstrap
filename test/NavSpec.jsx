@@ -5,6 +5,7 @@ var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var Nav            = require('../cjs/Nav');
 var NavItem        = require('../cjs/NavItem');
+var Button         = require('../cjs/Button');
 
 describe('Nav', function () {
   it('Should set the correct item active', function () {
@@ -72,5 +73,16 @@ describe('Nav', function () {
         );
     assert.ok(instance.refs.item2.props.active);
     assert.notOk(instance.refs.item1.props.active);
+  });
+
+  it('Should set navItem prop on passed in buttons', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          <Nav bsStyle="pills" activeHref="#item2">
+            <Button key={1} ref="item1">Button 1 content</Button>
+            <NavItem key={2} ref="item2" href="#item2">Pill 2 content</NavItem>
+          </Nav>
+        );
+
+    assert.ok(instance.refs.item1.props.navItem);
   });
 });

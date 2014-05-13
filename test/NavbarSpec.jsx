@@ -4,6 +4,7 @@
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var Navbar         = require('../cjs/Navbar');
+var Nav            = require('../cjs/Nav');
 
 describe('Nav', function () {
 
@@ -88,5 +89,15 @@ describe('Nav', function () {
     assert.ok(brand);
     assert.equal(brand.getDOMNode().nodeName, 'A');
     assert.equal(brand.getDOMNode().innerText, 'Brand');
+  });
+
+  it('Should pass navbar prop to navs', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          <Navbar brand="Brand">
+            <Nav ref="nav"/>
+          </Navbar>
+        );
+
+    assert.ok(instance.refs.nav.props.navbar);
   });
 });
