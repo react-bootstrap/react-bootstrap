@@ -43,13 +43,10 @@ var Page = React.createClass({
                   </div>
 
                   <h3>AMD</h3>
-                  <div className="bs-callout bs-callout-warning">
-                    <p>Currently <code>react-bootstrap</code> in Bower points to the source repo. For now, please use the <code>react-bootstrap-bower</code> repo directly from Github.</p>
-                  </div>
                   <div className="highlight">
                     <pre><code className="shell">{'\
   $ bower install react#v0.10.0\n\
-  $ bower install git://github.com/react-bootstrap/react-bootstrap-bower.git\n\
+  $ bower install react-bootstrap\n\
                     '}</code></pre>
                     <pre><code className="js">{'\
   var Alert = require(\'react-bootstrap/Alert\');\n\
