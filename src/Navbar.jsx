@@ -60,7 +60,7 @@ var Navbar = React.createClass({
       "in": !this.state.collapsed
     });
 
-    return this.transferPropsTo(
+    return (
       <nav className={classSet(classes)} role="navigation">
         <div className="navbar-header">
           <button type="button" className={toggleClass} data-toggle="collapse"
@@ -70,7 +70,7 @@ var Navbar = React.createClass({
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <a className="navbar-brand" href="{this.props.brandlink}">{this.props.brand}</a>
+          <a className="navbar-brand" href={this.props.brandlink}>{this.props.brand}</a>
         </div>
 
         <div className={collapseClass} id={this.props.target}>
