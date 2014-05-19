@@ -41,12 +41,12 @@ var Nav = React.createClass({
     if (!this.props.navbar && !this.props.dropdown) {
       return this.transferPropsTo(
         <nav>
-          <NavItemRender classes={classes} children={this.props.children} renderNavItem={this.renderNavItem} />
+          <NavItemRender classes={classes} children={this.props.children} renderNavItem={this.renderNavItem} id={this.props.id} />
         </nav>
       );
     } else {
       return (
-        <NavItemRender classes={classes} children={this.props.children} renderNavItem={this.renderNavItem} />
+        <NavItemRender classes={classes} children={this.props.children} renderNavItem={this.renderNavItem} id={this.props.id}  />
       );
     }
   },
@@ -86,7 +86,7 @@ var Nav = React.createClass({
 
 var NavItemRender = function (props) {
   return (
-    <ul className={classSet(props.classes)}>
+    <ul className={classSet(props.classes)} id={props.id}>
       {utils.modifyChildren(props.children, props.renderNavItem)}
     </ul>
   );

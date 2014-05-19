@@ -14,6 +14,7 @@ var NavItem = React.createClass({
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
+    trigger: React.PropTypes.string,
     dropdown: React.PropTypes.bool
   },
 
@@ -36,15 +37,15 @@ var NavItem = React.createClass({
 
     return this.transferPropsTo(
       <li className={classSet(classes)}>
+        {this.transferPropsTo(
         <a
           className={anchorClass}
-          href={this.props.href}
           title={this.props.title}
           onClick={this.handleClick}
           ref="anchor"
-          data-toggle={datatoggle}>
+          disabled={this.props.disabled}>
           {this.props.dropdown ? <span>{this.props.children[0]}<span className="caret"></span></span> : this.props.children}
-        </a>
+        </a>)}
         {this.props.dropdown ? this.props.children.slice(1) : null}
       </li>
     );
