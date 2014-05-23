@@ -15,7 +15,7 @@ var SubNav = React.createClass({
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
-    text: React.PropTypes.renderable,
+    text: React.PropTypes.renderable
   },
 
   getDefaultProps: function () {
