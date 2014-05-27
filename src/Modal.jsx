@@ -47,6 +47,7 @@ var Modal = React.createClass({
         role="dialog"
         style={modalStyle}
         className={classSet(classes)}
+        onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
         ref="modal">
         <div className="modal-dialog">
           <div className="modal-content">
