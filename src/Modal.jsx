@@ -51,7 +51,7 @@ var Modal = React.createClass({
         <div className="modal-dialog">
           <div className="modal-content">
             {this.props.title ? this.renderHeader() : null}
-            {this.props.children}
+            <div className="modal-body">{this.props.children}</div>
           </div>
         </div>
       </div>
