@@ -34,7 +34,7 @@ var DropdownButton = React.createClass({
         href={this.props.href}
         bsStyle={this.props.bsStyle}
         className={className}
-        onClick={this.handleOpenClick}
+        onClick={this.handleDropdownClick}
         id={this.props.id}
         key={0}
         navDropdown={this.props.navItem}>
@@ -81,10 +81,10 @@ var DropdownButton = React.createClass({
     );
   },
 
-  handleOpenClick: function (e) {
-    this.setDropdownState(true);
-
+  handleDropdownClick: function (e) {
     e.preventDefault();
+
+    this.setDropdownState(!this.state.open);
   },
 
   handleOptionSelect: function (key) {
