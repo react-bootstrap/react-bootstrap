@@ -16,10 +16,19 @@ describe('Modal', function () {
 
   it('Should close the modal when the backdrop is clicked', function (done) {
     var instance = ReactTestUtils.renderIntoDocument(Modal({
-      onRequestHide: function() { done(); },
+      onRequestHide: function() { done(); }
     }, <strong>Message</strong>));
 
     var backdrop = instance.getDOMNode().getElementsByClassName('modal-backdrop')[0];
+    ReactTestUtils.Simulate.click(backdrop);
+  });
+
+  it('Should close the modal when the modal background is clicked', function (done) {
+    var instance = ReactTestUtils.renderIntoDocument(Modal({
+      onRequestHide: function() { done(); }
+    }, <strong>Message</strong>));
+
+    var backdrop = instance.getDOMNode().getElementsByClassName('modal')[0];
     ReactTestUtils.Simulate.click(backdrop);
   });
 
