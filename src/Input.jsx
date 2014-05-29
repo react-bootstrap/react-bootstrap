@@ -72,8 +72,8 @@ var Input = React.createClass({
 
     return (
       <div className={classSet(classes)} onBlur={this.handleBlur} onFocus={this.handleFocus}>
-        {this.renderInput()}
         {this.renderLabel()}
+        {this.renderInput()}
       </div>
     );
   },
