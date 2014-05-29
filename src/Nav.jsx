@@ -1,11 +1,12 @@
 /** @jsx React.DOM */
 
-import React            from './react-es6';
-import classSet         from './react-es6/lib/cx';
-import BootstrapMixin   from './BootstrapMixin';
-import CollapsableMixin from './CollapsableMixin';
-import utils            from './utils';
-import domUtils         from './domUtils';
+import React                  from './react-es6';
+import classSet               from './react-es6/lib/cx';
+import BootstrapMixin         from './BootstrapMixin';
+import CollapsableMixin       from './CollapsableMixin';
+import utils                  from './utils';
+import domUtils               from './domUtils';
+import ValidComponentChildren from './ValidComponentChildren';
 
 
 var Nav = React.createClass({
@@ -64,7 +65,7 @@ var Nav = React.createClass({
 
     return (
       <ul className={classSet(classes)} ref="ul">
-        {utils.modifyChildren(this.props.children, this.renderNavItem)}
+        {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
       </ul>
     );
   },

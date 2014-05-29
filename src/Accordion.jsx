@@ -1,14 +1,14 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import PanelGroup     from './PanelGroup';
+import React      from './react-es6';
+import PanelGroup from './PanelGroup';
 
 var Accordion = React.createClass({
 
   render: function () {
     return this.transferPropsTo(
       <PanelGroup isAccordion={true}>
-          {this.props.children}
+        {this.props.children}
       </PanelGroup>
     );
   }

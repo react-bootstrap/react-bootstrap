@@ -1,11 +1,12 @@
 /** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
-var React          = require('react');
-var ReactTestUtils = require('react/lib/ReactTestUtils');
-var TabbedArea     = require('../cjs/TabbedArea');
-var TabPane        = require('../cjs/TabPane');
-var utils          = require('./utils');
+var React           = require('react');
+var ReactTestUtils  = require('react/lib/ReactTestUtils');
+var TabbedArea      = require('../cjs/TabbedArea');
+var TabPane         = require('../cjs/TabPane');
+var utils           = require('./utils');
+var ValidComponentChildren = require('../cjs/ValidComponentChildren');
 
 describe('TabbedArea', function () {
   it('Should show the correct tab', function () {
@@ -31,7 +32,7 @@ describe('TabbedArea', function () {
       </TabbedArea>
     );
 
-    assert.equal(instance.refs.tabs.props.children.length, 2);
+    assert.equal(ValidComponentChildren.numberOf(instance.refs.tabs.props.children), 2);
     assert.equal(instance.refs.tabs.props.activeKey, 3);
   });
 
@@ -106,6 +107,25 @@ describe('TabbedArea', function () {
     assert.equal(instance.refs.pane2.props.active, false);
 
     assert.equal(instance.refs.tabs.props.activeKey, 1);
+  });
+
+  it('Should show the correct first tab with `React.Children.map` children values', function () {
+    var panes = [
+      <div>Tab 1 content</div>,
+      <div>Tab 2 content</div>
+    ];
+    var paneComponents = React.Children.map(panes, function(child, index) {
+      return <TabPane key={index} tab={'Tab #' + index}>{child}</TabPane>;
+    });
+
+    var instance = ReactTestUtils.renderIntoDocument(
+      <TabbedArea>
+        {paneComponents}
+        {null}
+      </TabbedArea>
+    );
+
+    assert.equal(instance.refs.tabs.props.activeKey, 0);
   });
 
   it('Should show the correct tab when selected', function (done) {

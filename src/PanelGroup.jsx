@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import classSet       from './react-es6/lib/cx';
-import BootstrapMixin from './BootstrapMixin';
-import utils          from './utils';
+import React                  from './react-es6';
+import classSet               from './react-es6/lib/cx';
+import BootstrapMixin         from './BootstrapMixin';
+import utils                  from './utils';
+import ValidComponentChildren from './ValidComponentChildren';
 
 var PanelGroup = React.createClass({
   mixins: [BootstrapMixin],
@@ -29,7 +30,7 @@ var PanelGroup = React.createClass({
   render: function () {
     return this.transferPropsTo(
       <div className={classSet(this.getBsClassSet())}>
-          {utils.modifyChildren(this.props.children, this.renderPanel)}
+        {ValidComponentChildren.map(this.props.children, this.renderPanel)}
       </div>
     );
   },

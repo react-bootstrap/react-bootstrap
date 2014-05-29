@@ -1,8 +1,9 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import classSet       from './react-es6/lib/cx';
-import utils          from './utils';
+import React                  from './react-es6';
+import classSet               from './react-es6/lib/cx';
+import utils                  from './utils';
+import ValidComponentChildren from './ValidComponentChildren';
 
 var DropdownMenu = React.createClass({
   propTypes: {
@@ -20,7 +21,7 @@ var DropdownMenu = React.createClass({
         <ul
           className={classSet(classes)}
           role="menu">
-          {utils.modifyChildren(this.props.children, this.renderMenuItem)}
+          {ValidComponentChildren.map(this.props.children, this.renderMenuItem)}
         </ul>
       );
   },
