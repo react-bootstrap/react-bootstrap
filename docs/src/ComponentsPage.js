@@ -433,6 +433,33 @@ var ComponentsPage = React.createClass({
                   <p>Add <code>responsive</code> prop to make them scroll horizontally up to small devices (under 768px). When viewing on anything larger than 768px wide, you will not see any difference in these tables.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/TableResponsive.js', 'utf8')} />
                 </div>
+
+                {/* Input */}
+                <div className="bs-docs-section">
+                  <h1 id="input" className="page-header">Input</h1>
+                  <p>Renders an input in bootstrap wrappers. Supports label, help, text input add-ons, validation and use as wrapper.
+                  Use <code>getValue()</code> or <code>getChecked()</code> to get the current state.
+                  The helper method <code>getInputDOMNode()</code> returns the internal input element.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/Input.js', 'utf8')} />
+                  <h2 id="input-types">Types</h2>
+                  <p>Supports <code>select</code>, <code>textarea</code>, <code>static</code> as well as standard HTML input types.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/InputTypes.js', 'utf8')} />
+                  <h2 id="input-addons">Add-ons</h2>
+                  <p>Use <code>addonBefore</code> and <code>addonAfter</code>. Does not support buttons.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/InputAddons.js', 'utf8')} />
+                  <h2 id="input-validation">Validation</h2>
+                  <p>Set <code>bsStyle</code> to one of <code>success</code>, <code>warning</code> or <code>error</code>.
+                  Add <code>hasFeedback</code> to show glyphicon. Glyphicon may need additional styling if there is an add-on or no label.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/InputValidation.js', 'utf8')} />
+                  <h2 id="input-horizontal">Horizontal forms</h2>
+                  <p>Use <code>labelClassName</code> and <code>wrapperClassName</code> properties to add col classes manually.
+                  <code>checkbox</code> and <code>radio</code> types need special treatment because label wraps input.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/InputHorizontal.js', 'utf8')} />
+                  <h2 id="input-wrapper">Use as a wrapper</h2>
+                  <p>If <code>type</code> is not set, child element(s) will be rendered instead of an input element.
+                  <code>getValue()</code> will not work when used this way.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/InputWrapper.js', 'utf8')} />
+                </div>
               </div>
 
               <div className="col-md-3">
@@ -468,6 +495,7 @@ var ComponentsPage = React.createClass({
                     <NavItem href="#wells" key={19}>Wells</NavItem>
                     <NavItem href="#glyphicons" key={20}>Glyphicons</NavItem>
                     <NavItem href="#tables" key={21}>Tables</NavItem>
+                    <NavItem href="#input" key={22}>Input</NavItem>
                   </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top
