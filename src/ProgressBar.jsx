@@ -1,10 +1,11 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import classSet       from './react-es6/lib/cx';
-import Interpolate    from './Interpolate';
-import BootstrapMixin from './BootstrapMixin';
-import utils          from './utils';
+import React                  from './react-es6';
+import classSet               from './react-es6/lib/cx';
+import Interpolate            from './Interpolate';
+import BootstrapMixin         from './BootstrapMixin';
+import utils                  from './utils';
+import ValidComponentChildren from './ValidComponentChildren';
 
 
 var ProgressBar = React.createClass({
@@ -44,7 +45,7 @@ var ProgressBar = React.createClass({
       classes['progress-striped'] = true;
     }
 
-    if (!this.props.children) {
+    if (!ValidComponentChildren.hasValidComponent(this.props.children)) {
       if (!this.props.isChild) {
         return this.transferPropsTo(
           <div className={classSet(classes)}>
@@ -59,7 +60,7 @@ var ProgressBar = React.createClass({
     } else {
       return this.transferPropsTo(
         <div className={classSet(classes)}>
-          {utils.modifyChildren(this.props.children, this.renderChildBar)}
+          {ValidComponentChildren.map(this.props.children, this.renderChildBar)}
         </div>
       );
     }

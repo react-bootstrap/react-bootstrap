@@ -1,11 +1,12 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import classSet       from './react-es6/lib/cx';
-import BootstrapMixin from './BootstrapMixin';
-import PropTypes      from './PropTypes';
-import utils          from './utils';
-import Nav            from './Nav';
+import React                  from './react-es6';
+import classSet               from './react-es6/lib/cx';
+import BootstrapMixin         from './BootstrapMixin';
+import PropTypes              from './PropTypes';
+import utils                  from './utils';
+import Nav                    from './Nav';
+import ValidComponentChildren from './ValidComponentChildren';
 
 
 var Navbar = React.createClass({
@@ -73,7 +74,7 @@ var Navbar = React.createClass({
       <componentClass className={classSet(classes)}>
         <div className={this.props.fluid ? 'container-fluid' : 'container'}>
           {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey) ? this.renderHeader() : null}
-          {React.Children.map(this.props.children, this.renderChild)}
+          {ValidComponentChildren.map(this.props.children, this.renderChild)}
         </div>
       </componentClass>
     );

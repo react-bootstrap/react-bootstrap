@@ -1,9 +1,10 @@
 // https://www.npmjs.org/package/react-interpolate-component
 'use strict';
 
-import React          from './react-es6';
-import invariant      from './react-es6/lib/invariant';
-import utils          from './utils';
+import React                  from './react-es6';
+import invariant              from './react-es6/lib/invariant';
+import utils                  from './utils';
+import ValidComponentChildren from './ValidComponentChildren';
 
 function isString(object) {
   return Object.prototype.toString.call(object) === '[object String]';
@@ -19,7 +20,7 @@ var Interpolate = React.createClass({
   },
 
   render: function() {
-    var format = this.props.children || this.props.format;
+    var format = ValidComponentChildren.hasValidComponent(this.props.children) ? this.props.children : this.props.format;
     var parent = this.props.component;
     var unsafe = this.props.unsafe === true;
     var props  = utils.extend({}, this.props);
