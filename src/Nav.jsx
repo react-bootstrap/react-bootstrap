@@ -45,7 +45,7 @@ var Nav = React.createClass({
 
     classes['navbar-collapse'] = this.props.isCollapsable;
 
-    if (this.props.navbar) {
+    if (this.props.navbar && !this.props.isCollapsable) {
       return this.renderUl();
     }
 
