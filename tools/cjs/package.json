@@ -12,10 +12,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "stevoland/react-bootstrap"
+    "url": "react-bootstrap/react-bootstrap"
   },
   "bugs": {
-    "url": "https://github.com/stevoland/react-bootstrap/issues"
+    "url": "https://github.com/react-bootstrap/react-bootstrap/issues"
   },
   "peerDependencies": {
     "react": ">=0.9"
