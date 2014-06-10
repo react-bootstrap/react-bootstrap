@@ -4,9 +4,9 @@
 
 This repo contains built CommonJS modules for Node.js.
 
-There is a separate [source repo](https://github.com/stevoland/react-bootstrap).
+There is a separate [source repo](https://github.com/react-bootstrap/react-bootstrap).
 
 A [docs site](http://react-bootstrap.github.io) with live editable examples is a work in progress.
 
 
-[![Build Status](https://travis-ci.org/stevoland/react-bootstrap.png)](https://travis-ci.org/stevoland/react-bootstrap) [![NPM version](https://badge.fury.io/js/react-bootstrap.png)](http://badge.fury.io/js/react-bootstrap)
+[![Build Status](https://travis-ci.org/react-bootstrap/react-bootstrap.png)](https://travis-ci.org/react-bootstrap/react-bootstrap) [![NPM version](https://badge.fury.io/js/react-bootstrap.png)](http://badge.fury.io/js/react-bootstrap)
