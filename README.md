@@ -13,8 +13,9 @@ A [docs site](http://react-bootstrap.github.io) with live editable examples is a
 ## Authors
 
 - [Stephen J. Collings](https://github.com/stevoland)
-- [Matthew Honnibal](https://github.com/syllog1sm)
 - [Pieter Vanderwerff](https://github.com/pieterv)
+
+and many [contributors](https://github.com/react-bootstrap/react-bootstrap/graphs/contributors)
 
 ## Contributions
 
