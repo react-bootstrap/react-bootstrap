@@ -18,6 +18,7 @@ var Col = require('../../cjs/Col');
 var DropdownButton = require('../../cjs/DropdownButton');
 var Glyphicon = require('../../cjs/Glyphicon');
 var Grid = require('../../cjs/Grid');
+var Input = require('../../cjs/Input');
 var Jumbotron = require('../../cjs/Jumbotron');
 var Label = require('../../cjs/Label');
 var Nav = require('../../cjs/Nav');
