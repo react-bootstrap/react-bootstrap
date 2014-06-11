@@ -21,6 +21,15 @@ describe('Panel', function () {
     assert.ok(instance.getDOMNode().className.match(/\bpanel-default\b/));
   });
 
+  it('Should honour additional classes passed in, adding not overriding', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Panel className="bob"/>
+    );
+
+    assert.ok(instance.getDOMNode().className.match(/\bbob\b/));
+    assert.ok(instance.getDOMNode().className.match(/\bpanel\b/));
+  });
+
   it('Should have unwrapped header', function () {
     var instance = ReactTestUtils.renderIntoDocument(
           <Panel header="Heading">Panel content</Panel>
