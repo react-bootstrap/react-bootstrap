@@ -100,4 +100,14 @@ describe('Nav', function () {
 
     assert.ok(instance.refs.nav.props.navbar);
   });
+ 
+  it('Should pass nav prop to ul', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+            <Nav className="pull-right" />
+        );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pull-right'));
+    instance.setProps({navbar: true});
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pull-right'));
+  });
 });
