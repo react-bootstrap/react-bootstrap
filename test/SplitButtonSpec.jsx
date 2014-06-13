@@ -77,6 +77,20 @@ describe('SplitButton', function () {
     assert.ok(button.className.match(/\bbtn-primary\b/));
   });
 
+  it('Should pass disabled to both buttons', function() {
+    instance = ReactTestUtils.renderIntoDocument(
+      <SplitButton title="Test" disabled={true}>
+        <MenuItem key="1">MenuItem 1 content</MenuItem>
+        <MenuItem key="2">MenuItem 2 content</MenuItem>
+      </SplitButton>
+    );
+
+    var button = instance.refs.button.getDOMNode();
+    assert.ok(button.disabled);
+    var dropdownButton = instance.refs.dropdownButton.getDOMNode();
+    assert.ok(button.disabled);
+  });
+
   it('Should pass id to button group', function () {
     instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title" bsStyle="primary" id="testId">

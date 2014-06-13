@@ -17,7 +17,8 @@ var SplitButton = React.createClass({
     href:          React.PropTypes.string,
     dropdownTitle: React.PropTypes.renderable,
     onClick:       React.PropTypes.func,
-    onSelect:      React.PropTypes.func
+    onSelect:      React.PropTypes.func,
+    disabled:      React.PropTypes.bool
   },
 
   getDefaultProps: function () {
@@ -32,28 +33,35 @@ var SplitButton = React.createClass({
         'dropup': this.props.dropup
       };
 
+    var button = this.transferPropsTo(
+      <Button
+        ref="button"
+        onClick={this.handleButtonClick}
+        title={null}
+        id={null}>
+        {this.props.title}
+      </Button>
+    );
+
+    var dropdownButton = this.transferPropsTo(
+      <Button
+        ref="dropdownButton"
+        className="dropdown-toggle"
+        onClick={this.handleDropdownClick}
+        title={null}
+        id={null}>
+        <span className="sr-only">{this.props.dropdownTitle}</span>
+        <span className="caret" />
+      </Button>
+    );
+
     return (
       <ButtonGroup
         bsSize={this.props.bsSize}
         className={classSet(groupClasses)}
         id={this.props.id}>
-        <Button
-          ref="button"
-          href={this.props.href}
-          bsStyle={this.props.bsStyle}
-          onClick={this.handleButtonClick}>
-          {this.props.title}
-        </Button>
-
-        <Button
-          ref="dropdownButton"
-          bsStyle={this.props.bsStyle}
-          className="dropdown-toggle"
-          onClick={this.handleDropdownClick}>
-          <span className="sr-only">{this.props.dropdownTitle}</span>
-          <span className="caret" />
-        </Button>
-
+        {button}
+        {dropdownButton}
         <DropdownMenu
           ref="menu"
           onSelect={this.handleOptionSelect}
