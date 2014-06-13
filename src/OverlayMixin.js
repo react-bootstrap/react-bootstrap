@@ -13,9 +13,11 @@ export default = {
 
   componentWillUnmount: function () {
     this._unrenderOverlay();
-    this.getContainerDOMNode()
-      .removeChild(this._overlayTarget);
-    this._overlayTarget = null;
+    if (this._overlayTarget) {
+      this.getContainerDOMNode()
+        .removeChild(this._overlayTarget);
+      this._overlayTarget = null;
+    }
   },
 
   componentDidUpdate: function () {
