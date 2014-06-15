@@ -46,6 +46,13 @@ describe('Nav', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-inverse'));
   });
 
+  it('Should add fluid variation class', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          <Navbar fluid />
+        );
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'container-fluid'));
+  });
+
   it('Should override role attribute', function () {
     var instance = ReactTestUtils.renderIntoDocument(
           <Navbar role="banner"/>
