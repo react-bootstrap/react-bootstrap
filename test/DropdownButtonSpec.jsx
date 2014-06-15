@@ -6,6 +6,7 @@ var ReactTestUtils = require('react/lib/ReactTestUtils');
 var DropdownButton = require('../cjs/DropdownButton');
 var MenuItem       = require('../cjs/MenuItem');
 var DropdownMenu   = require('../cjs/DropdownMenu');
+var Button         = require('../cjs/Button');
 
 describe('DropdownButton', function () {
   var instance;
@@ -24,7 +25,7 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    var button = instance.refs.dropdownButton.getDOMNode();
+    var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
     assert.ok(instance.getDOMNode().className.match(/\bbtn-group\b/));
     assert.ok(button.className.match(/\bbtn\b/));
     assert.ok(button.className.match(/\btest-class\b/));
@@ -50,15 +51,16 @@ describe('DropdownButton', function () {
 
   it('Should pass props to button', function () {
     instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title" bsStyle="primary" id="testId">
+      <DropdownButton title="Title" bsStyle="primary" id="testId" disabled>
         <MenuItem key="1">MenuItem 1 content</MenuItem>
         <MenuItem key="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
-    var button = instance.refs.dropdownButton.getDOMNode();
+    var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
     assert.ok(button.className.match(/\bbtn-primary\b/));
     assert.equal(button.getAttribute('id'), 'testId');
+    assert.ok(button.disabled);
   });
 
   it('Should be closed by default', function () {
@@ -140,7 +142,7 @@ describe('DropdownButton', function () {
     );
 
     var li = instance.getDOMNode();
-    var button = instance.refs.dropdownButton.getDOMNode();
+    var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
     assert.equal(li.nodeName, 'LI');
     assert.ok(li.className.match(/\bdropdown\b/));
     assert.ok(button.className.match(/\btest-class\b/));

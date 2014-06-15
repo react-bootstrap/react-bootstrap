@@ -13,34 +13,35 @@ var DropdownButton = React.createClass({
   mixins: [BootstrapMixin, DropdownStateMixin],
 
   propTypes: {
-    pullRight:    React.PropTypes.bool,
-    title:    React.PropTypes.renderable,
-    href:     React.PropTypes.string,
-    onClick:  React.PropTypes.func,
-    onSelect: React.PropTypes.func,
-    navItem:  React.PropTypes.bool
+    pullRight: React.PropTypes.bool,
+    dropup:    React.PropTypes.bool,
+    title:     React.PropTypes.renderable,
+    href:      React.PropTypes.string,
+    onClick:   React.PropTypes.func,
+    onSelect:  React.PropTypes.func,
+    navItem:   React.PropTypes.bool
   },
 
   render: function () {
-    var className = this.props.className ?
-      this.props.className + ' dropdown-toggle' : 'dropdown-toggle';
+    var className = 'dropdown-toggle';
 
     var renderMethod = this.props.navItem ?
       'renderNavItem' : 'renderButtonGroup';
 
     return this[renderMethod]([
-      <Button
+      this.transferPropsTo(<Button
         ref="dropdownButton"
-        href={this.props.href}
-        bsStyle={this.props.bsStyle}
         className={className}
         onClick={this.handleDropdownClick}
-        id={this.props.id}
         key={0}
-        navDropdown={this.props.navItem}>
+        navDropdown={this.props.navItem}
+        navItem={null}
+        title={null}
+        pullRight={null}
+        dropup={null}>
         {this.props.title}{' '}
         <span className="caret" />
-      </Button>,
+      </Button>),
       <DropdownMenu
         ref="menu"
         aria-labelledby={this.props.id}
