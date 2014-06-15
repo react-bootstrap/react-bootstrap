@@ -43,7 +43,7 @@ describe('Panel', function () {
   it('Should have custom component header with anchor', function () {
     var header = <h3>Heading</h3>,
         instance = ReactTestUtils.renderIntoDocument(
-          <Panel header={header} isCollapsable={true}>Panel content</Panel>
+          <Panel header={header} collapsable={true}>Panel content</Panel>
         );
     header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading').getDOMNode();
     assert.equal(header.firstChild.nodeName, 'H3');
@@ -62,21 +62,21 @@ describe('Panel', function () {
 
   it('Should have collapse classes', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Panel isCollapsable={true} isOpen={true}>Panel content</Panel>
+          <Panel collapsable={true} expanded={true}>Panel content</Panel>
         );
     assert.ok(instance.getDOMNode().querySelector('.panel-collapse.collapse.in'));
   });
 
   it('Should pass through dom properties', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Panel isCollapsable={false} id="testid">Panel content</Panel>
+          <Panel collapsable={false} id="testid">Panel content</Panel>
         );
     assert.equal(instance.getDOMNode().id, 'testid');
   });
 
   it('Should pass id to panel-collapse', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Panel isCollapsable={true} id="testid" header="Heading">Panel content</Panel>
+          <Panel collapsable={true} id="testid" header="Heading">Panel content</Panel>
         );
     assert.notOk(instance.getDOMNode().id);
     var collapse = instance.getDOMNode().querySelector('.panel-collapse');
@@ -87,7 +87,7 @@ describe('Panel', function () {
 
   it('Should be open', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Panel isCollapsable={true} isOpen={true} header="Heading">Panel content</Panel>
+          <Panel collapsable={true} expanded={true} header="Heading">Panel content</Panel>
         );
     var collapse = instance.getDOMNode().querySelector('.panel-collapse');
     var anchor = instance.getDOMNode().querySelector('.panel-title a');
@@ -97,7 +97,7 @@ describe('Panel', function () {
 
   it('Should be closed', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Panel isCollapsable={true} isOpen={false} header="Heading">Panel content</Panel>
+          <Panel collapsable={true} expanded={false} header="Heading">Panel content</Panel>
         );
     var collapse = instance.getDOMNode().querySelector('.panel-collapse');
     var anchor = instance.getDOMNode().querySelector('.panel-title a');
@@ -111,7 +111,7 @@ describe('Panel', function () {
       done();
     }
     var instance = ReactTestUtils.renderIntoDocument(
-          <Panel isCollapsable={true} onSelect={handleSelect} header="Click me" key={1}>Panel content</Panel>
+          <Panel collapsable={true} onSelect={handleSelect} header="Click me" key={1}>Panel content</Panel>
         );
     var title = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-title');
     ReactTestUtils.Simulate.click(title.getDOMNode().firstChild);
@@ -119,13 +119,13 @@ describe('Panel', function () {
 
   it('Should toggle when uncontrolled', function (done) {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Panel isCollapsable={true} defaultOpen={false} header="Click me">Panel content</Panel>
+          <Panel collapsable={true} defaultExpanded={false} header="Click me">Panel content</Panel>
         );
 
-    assert.notOk(instance.state.isOpen);
+    assert.notOk(instance.state.expanded);
     // TODO: update to `ReactTestUtils#nextUpdate()`
     instance.componentDidUpdate = function () {
-      assert.ok(instance.state.isOpen);
+      assert.ok(instance.state.expanded);
       done();
     };
 

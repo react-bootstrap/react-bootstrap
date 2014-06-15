@@ -22,7 +22,9 @@ var Navbar = React.createClass({
     componentClass: PropTypes.componentClass,
     brand: React.PropTypes.renderable,
     toggleButton: React.PropTypes.renderable,
-    onToggle: React.PropTypes.func
+    onToggle: React.PropTypes.func,
+    navExpanded: React.PropTypes.bool,
+    defaultNavExpanded: React.PropTypes.bool
   },
 
   getDefaultProps: function () {
@@ -36,7 +38,7 @@ var Navbar = React.createClass({
 
   getInitialState: function () {
     return {
-      navOpen: this.props.defaultNavOpen
+      navExpanded: this.props.defaultNavExpanded
     };
   },
 

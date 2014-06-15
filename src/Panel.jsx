@@ -2,7 +2,6 @@
 
 import React                  from './react-es6';
 import classSet               from './react-es6/lib/cx';
-import ReactTransitionEvents  from './react-es6/lib/ReactTransitionEvents';
 import BootstrapMixin         from './BootstrapMixin';
 import CollapsableMixin       from './CollapsableMixin';
 import utils                  from './utils';
@@ -13,8 +12,6 @@ var Panel = React.createClass({
   propTypes: {
     header: React.PropTypes.renderable,
     footer: React.PropTypes.renderable,
-    isCollapsable: React.PropTypes.bool,
-    isOpen: React.PropTypes.bool,
     onClick: React.PropTypes.func
   },
 
@@ -35,7 +32,7 @@ var Panel = React.createClass({
     e.preventDefault();
 
     this.setState({
-      isOpen: !this.state.isOpen
+      expanded: !this.state.expanded
     });
   },
 
@@ -60,9 +57,9 @@ var Panel = React.createClass({
     classes['panel'] = true;
 
     return (
-      <div className={classSet(classes)} id={this.props.isCollapsable ? null : this.props.id}>
+      <div className={classSet(classes)} id={this.props.collapsable ? null : this.props.id}>
         {this.renderHeading()}
-        {this.props.isCollapsable ? this.renderCollapsableBody() : this.renderBody()}
+        {this.props.collapsable ? this.renderCollapsableBody() : this.renderBody()}
         {this.renderFooter()}
       </div>
     );
@@ -92,9 +89,9 @@ var Panel = React.createClass({
     }
 
     if (!React.isValidComponent(header) || Array.isArray(header)) {
-      header = this.props.isCollapsable ?
+      header = this.props.collapsable ?
         this.renderCollapsableTitle(header) : header;
-    } else if (this.props.isCollapsable) {
+    } else if (this.props.collapsable) {
       header = utils.cloneWithProps(header, {
         className: 'panel-title',
         children: this.renderAnchor(header.props.children)
@@ -116,7 +113,7 @@ var Panel = React.createClass({
     return (
       <a
         href={'#' + (this.props.id || '')}
-        className={this.isOpen() ? null : 'collapsed'}
+        className={this.isExpanded() ? null : 'collapsed'}
         onClick={this.handleSelect}>
         {header}
       </a>

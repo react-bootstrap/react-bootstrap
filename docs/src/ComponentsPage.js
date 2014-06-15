@@ -199,7 +199,7 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelGroupUncontrolled.js', 'utf8')} />
 
                   <h3 id="panels-accordion">Accordions</h3>
-                  <p><code>&lt;Accordion /&gt;</code> aliases <code>&lt;PanelGroup isAccordion /&gt;</code>.</p>
+                  <p><code>&lt;Accordion /&gt;</code> aliases <code>&lt;PanelGroup accordion /&gt;</code>.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelGroupAccordion.js', 'utf8')} />
                 </div>
 
