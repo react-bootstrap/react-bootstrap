@@ -17,12 +17,12 @@ var Navbar = React.createClass({
     fixedBottom: React.PropTypes.bool,
     staticTop: React.PropTypes.bool,
     inverse: React.PropTypes.bool,
+    fluid: React.PropTypes.bool,
     role: React.PropTypes.string,
     componentClass: PropTypes.componentClass,
     brand: React.PropTypes.renderable,
     toggleButton: React.PropTypes.renderable,
-    onToggle: React.PropTypes.func,
-    fluid: React.PropTypes.func
+    onToggle: React.PropTypes.func
   },
 
   getDefaultProps: function () {
