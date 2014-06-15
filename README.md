@@ -24,4 +24,4 @@ Yes please!
 - Run `npm install`, `npm run test-watch` to run tests while you develop (however this hides any build errors, you can see these with `grunt build`)
 - Add tests for any new or changed functionality
 - See [issues](https://github.com/stevoland/react-bootstrap/issues) for some ideas
-- Follow exisitng style
+- Follow existing style
