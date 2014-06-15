@@ -7,7 +7,7 @@ var Accordion = React.createClass({
 
   render: function () {
     return this.transferPropsTo(
-      <PanelGroup isAccordion={true}>
+      <PanelGroup accordion={true}>
         {this.props.children}
       </PanelGroup>
     );
