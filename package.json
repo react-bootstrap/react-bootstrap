@@ -4,8 +4,8 @@
   "description": "Bootstrap 3 components build with React",
   "scripts": {
     "build": "./node_modules/.bin/grunt build",
-    "test-watch": "./node_modules/.bin/grunt watch 2>&1 >/dev/null & karma start karma.dev.js",
-    "test": "./node_modules/.bin/grunt build && karma start karma.ci.js"
+    "test-watch": "./node_modules/.bin/grunt watch 2>&1 >/dev/null & ./node_modules/karma/bin/karma start karma.dev.js",
+    "test": "./node_modules/.bin/grunt build && ./node_modules/karma/bin/karma start karma.ci.js"
   },
   "keywords": [
     "react",
@@ -28,7 +28,7 @@
     "requirejs": "~2.1.9",
     "karma-requirejs": "~0.2.1",
     "karma-phantomjs-launcher": "~0.1.1",
-    "karma": "~0.10.9",
+    "karma": "~0.12.8",
     "karma-mocha": "~0.1.1",
     "react": "0.10.0",
     "envify": "~1.2.1",
