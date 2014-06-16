@@ -45,7 +45,7 @@ export default = {
     if (els.length) {
       this._fadeOutEl = document.createElement('div');
       document.body.appendChild(this._fadeOutEl);
-      this._fadeOutEl.innerHTML = this.getDOMNode().innerHTML;
+      this._fadeOutEl.appendChild(this.getDOMNode().cloneNode(true));
       // Firefox needs delay for transition to be triggered
       setTimeout(this._fadeOut, 20);
     }
