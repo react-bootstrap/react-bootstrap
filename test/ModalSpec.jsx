@@ -32,4 +32,14 @@ describe('Modal', function () {
     ReactTestUtils.Simulate.click(backdrop);
   });
 
+  it('Should pass bsSize to the dialog', function () {
+    var instance = ReactTestUtils.renderIntoDocument(Modal({
+      bsSize: 'small',
+      onRequestHide: function() {}
+    }, <strong>Message</strong>));
+
+    var dialog = instance.getDOMNode().getElementsByClassName('modal-dialog')[0];
+    assert.ok(dialog.className.match(/\bmodal-sm\b/));
+  });
+
 });
