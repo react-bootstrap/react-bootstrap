@@ -35,10 +35,15 @@ var Modal = React.createClass({
 
   render: function () {
     var modalStyle = {display: 'block'};
-    var classes = this.getBsClassSet();
+    var dialogClasses = this.getBsClassSet();
+    delete dialogClasses.modal;
+    dialogClasses['modal-dialog'] = true;
 
-    classes['fade'] = this.props.animation;
-    classes['in'] = !this.props.animation || !document.querySelectorAll;
+    var classes = {
+      modal: true,
+      fade: this.props.animation,
+      'in': !this.props.animation || !document.querySelectorAll
+    };
 
     var modal = this.transferPropsTo(
       <div
@@ -49,7 +54,7 @@ var Modal = React.createClass({
         className={classSet(classes)}
         onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
         ref="modal">
-        <div className="modal-dialog">
+        <div className={classSet(dialogClasses)}>
           <div className="modal-content">
             {this.props.title ? this.renderHeader() : null}
             {this.props.children}
