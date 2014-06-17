@@ -80,6 +80,15 @@ describe('Button', function () {
     assert.ok(instance.getDOMNode().className.match(/\bbtn-danger\b/));
   });
 
+  it('Should honour additional classes passed in, adding not overriding', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Button className="bob" bsStyle="danger">Title</Button>
+    );
+
+    assert.ok(instance.getDOMNode().className.match(/\bbob\b/));
+    assert.ok(instance.getDOMNode().className.match(/\bbtn-danger\b/));
+  });
+
   it('Should default to bsStyle="default"', function () {
     var instance = ReactTestUtils.renderIntoDocument(
           Button({bsStyle: 'default'}, 'Title')
