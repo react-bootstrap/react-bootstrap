@@ -195,7 +195,7 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelGroupControlled.js', 'utf8')} />
 
                   <h3 id="panels-uncontrolled">Uncontrolled PanelGroups</h3>
-                  <p><code>PanelGroup</code>s can also be uncontrolled where they manage their own state. The <code>defualtActiveKey</code> prop dictates which panel is open when initially.</p>
+                  <p><code>PanelGroup</code>s can also be uncontrolled where they manage their own state. The <code>defaultActiveKey</code> prop dictates which panel is open when initially.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelGroupUncontrolled.js', 'utf8')} />
 
                   <h3 id="panels-accordion">Accordions</h3>
