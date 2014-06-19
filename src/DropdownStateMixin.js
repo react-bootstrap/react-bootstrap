@@ -1,5 +1,5 @@
 import React          from './react-es6';
-import eventListener  from './react-es6/lib/EventListener';
+import EventListener  from './react-es6/lib/EventListener';
 
 /**
  * Checks whether a node is within
@@ -57,7 +57,7 @@ var DropdownStateMixin = {
 
   bind: function(target, eventType, callback) {
     this.eventListeners = this.eventListeners || [];
-    var listener = eventListener.listen(target, eventType, callback);
+    var listener = EventListener.listen(target, eventType, callback);
     this.eventListeners.push(listener);
   },
 
@@ -68,9 +68,10 @@ var DropdownStateMixin = {
 
   unbindRootCloseHandlers: function () {
     if (!this.eventListeners) return;
-    this.eventListeners.forEach(function(listener) {
+    var listener;
+    while (listener = this.eventListeners.shift()) {
       listener.remove();
-    });
+    }
   },
 
   componentWillUnmount: function () {
