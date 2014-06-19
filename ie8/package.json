@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "browserify": "^4.1.11",
+    "reactify": "^0.13.1",
+    "envify": "^1.2.1",
+    "react": "^0.10.0",
+    "watchify": "^0.10.2",
+    "http-server": "^0.6.1"
+  },
+  "scripts": {
+    "postinstall": "browserify -t reactify src.js > bundle.js",
+    "watch": "watchify -t reactify src.js -o bundle.js",
+    "start": "http-server"
+  }
+}
