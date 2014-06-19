@@ -1,4 +1,5 @@
-import React     from './react-es6';
+import React          from './react-es6';
+import eventListener  from './react-es6/lib/EventListener';
 
 /**
  * Checks whether a node is within
@@ -54,14 +55,22 @@ var DropdownStateMixin = {
     this.setDropdownState(false);
   },
 
+  bind: function(target, eventType, callback) {
+    this.eventListeners = this.eventListeners || [];
+    var listener = eventListener.listen(target, eventType, callback);
+    this.eventListeners.push(listener);
+  },
+
   bindRootCloseHandlers: function () {
-    document.addEventListener('click', this.handleDocumentClick);
-    document.addEventListener('keyup', this.handleKeyUp);
+    this.bind(document, 'click', this.handleDocumentClick);
+    this.bind(document, 'keyup', this.handleKeyUp);
   },
 
   unbindRootCloseHandlers: function () {
-    document.removeEventListener('click', this.handleDocumentClick);
-    document.removeEventListener('keyup', this.handleKeyUp);
+    if (!this.eventListeners) return;
+    this.eventListeners.forEach(function(listener) {
+      listener.remove();
+    });
   },
 
   componentWillUnmount: function () {
