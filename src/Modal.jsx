@@ -4,6 +4,7 @@ import React            from './react-es6';
 import classSet         from './react-es6/lib/cx';
 import BootstrapMixin   from './BootstrapMixin';
 import FadeMixin        from './FadeMixin';
+import EventListener    from './react-es6/lib/EventListener';
 
 
 // TODO:
@@ -110,11 +111,14 @@ var Modal = React.createClass({
   },
 
   componentDidMount: function () {
-    document.addEventListener('keyup', this.handleDocumentKeyUp);
+    if (this.keyUpListener) this.keyUpListener.remove();
+    this.keyUpListener = EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
   },
 
   componentWillUnmount: function () {
-    document.removeEventListener('keyup', this.handleDocumentKeyUp);
+    if (!this.keyUpListener) return;
+    this.keyUpListener.remove();
+    this.keyUpListener = undefined;
   },
 
   handleBackdropClick: function (e) {
