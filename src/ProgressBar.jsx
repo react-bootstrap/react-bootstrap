@@ -13,7 +13,7 @@ var ProgressBar = React.createClass({
     min: React.PropTypes.number,
     now: React.PropTypes.number,
     max: React.PropTypes.number,
-    label: React.PropTypes.string,
+    label: React.PropTypes.renderable,
     srOnly: React.PropTypes.bool,
     striped: React.PropTypes.bool,
     active: React.PropTypes.bool
@@ -83,9 +83,11 @@ var ProgressBar = React.createClass({
 
     var label;
 
-    if (this.props.label) {
+    if (typeof this.props.label === "string") {
       label = this.props.srOnly ?
         this.renderScreenReaderOnlyLabel(percentage) : this.renderLabel(percentage);
+    } else if (this.props.label) {
+      label = this.props.label;
     }
 
     return (
