@@ -23,12 +23,14 @@ var TabbedArea = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
+    bsStyle: React.PropTypes.oneOf(['tabs','pills']),
     animation: React.PropTypes.bool,
     onSelect: React.PropTypes.func
   },
 
   getDefaultProps: function () {
     return {
+      bsStyle: "tabs",
       animation: true
     };
   },
@@ -69,7 +71,7 @@ var TabbedArea = React.createClass({
     }
 
     var nav = this.transferPropsTo(
-      <Nav bsStyle="tabs" activeKey={activeKey} onSelect={this.handleSelect} ref="tabs">
+      <Nav activeKey={activeKey} onSelect={this.handleSelect} ref="tabs">
         {ValidComponentChildren.map(this.props.children, renderTabIfSet, this)}
       </Nav>
     );
