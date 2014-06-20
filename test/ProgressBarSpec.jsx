@@ -1,8 +1,9 @@
 /** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
+var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var ProgressBar         = require('../cjs/ProgressBar');
+var ProgressBar    = require('../cjs/ProgressBar');
 
 var getProgressBar = function (wrapper) {
   return ReactTestUtils.findRenderedDOMComponentWithClass(wrapper, 'progress-bar');
@@ -144,6 +145,46 @@ describe('ProgressBar', function () {
     var srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
 
     assert.equal(srLabel.getDOMNode().innerText, 'min:0, max:10, now:5, percent:50, bsStyle:primary');
+  });
+
+  it('Should have a label that is a React component', function () {
+    var customLabel = (
+      <strong className="special-label">My label</strong>
+    );
+
+    var instance = ReactTestUtils.renderIntoDocument(
+      ProgressBar({
+        min: 0,
+        max: 10,
+        now: 5,
+        bsStyle: 'primary',
+        label: customLabel
+      })
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'special-label'));
+  });
+
+  it('Should have screen reader only label that wraps a React component', function () {
+    var customLabel = (
+      <strong className="special-label">My label</strong>
+    );
+
+    var instance = ReactTestUtils.renderIntoDocument(
+      ProgressBar({
+        min: 0,
+        max: 10,
+        now: 5,
+        bsStyle: 'primary',
+        label: customLabel,
+        srOnly: true
+      })
+    );
+
+    var srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
+    var component = ReactTestUtils.findRenderedDOMComponentWithClass(srLabel, 'special-label');
+
+    assert.ok(component);
   });
 
   it('Should show striped bar', function () {
