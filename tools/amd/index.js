@@ -38,6 +38,8 @@ define(function (require) {
     PageHeader: require('./PageHeader'),
     Panel: require('./Panel'),
     PanelGroup: require('./PanelGroup'),
+    PageItem: require('./PageItem'),
+    Pager: require('./Pager'),
     Popover: require('./Popover'),
     ProgressBar: require('./ProgressBar'),
     Row: require('./Row'),
