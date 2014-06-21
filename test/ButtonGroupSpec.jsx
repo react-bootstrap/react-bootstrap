@@ -25,7 +25,7 @@ describe('ButtonGroup', function () {
     var instance = ReactTestUtils.renderIntoDocument(
           ButtonGroup({vertical: true}, Button(null, 'Title'))
         );
-    assert.ok(instance.getDOMNode().className.match(/\bbtn-group-vertical\b/));
+    assert.equal(instance.getDOMNode().className.trim(), 'btn-group-vertical');
   });
 
   it('Should add justified variation', function () {
