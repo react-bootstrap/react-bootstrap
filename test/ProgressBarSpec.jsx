@@ -165,6 +165,28 @@ describe('ProgressBar', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'special-label'));
   });
 
+  it('Should have screen reader only label that wraps a React component', function () {
+    var customLabel = (
+      <strong className="special-label">My label</strong>
+    );
+
+    var instance = ReactTestUtils.renderIntoDocument(
+      ProgressBar({
+        min: 0,
+        max: 10,
+        now: 5,
+        bsStyle: 'primary',
+        label: customLabel,
+        srOnly: true
+      })
+    );
+
+    var srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
+    var component = ReactTestUtils.findRenderedDOMComponentWithClass(srLabel, 'special-label');
+
+    assert.ok(component);
+  });
+
   it('Should show striped bar', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       ProgressBar({min: 1, max:11, now: 6, striped: true})

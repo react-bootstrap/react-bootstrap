@@ -84,10 +84,13 @@ var ProgressBar = React.createClass({
     var label;
 
     if (typeof this.props.label === "string") {
-      label = this.props.srOnly ?
-        this.renderScreenReaderOnlyLabel(percentage) : this.renderLabel(percentage);
+      label = this.renderLabel(percentage);
     } else if (this.props.label) {
       label = this.props.label;
+    }
+
+    if (this.props.srOnly) {
+      label = this.renderScreenReaderOnlyLabel(label);
     }
 
     return (
@@ -116,10 +119,10 @@ var ProgressBar = React.createClass({
     );
   },
 
-  renderScreenReaderOnlyLabel: function (percentage) {
+  renderScreenReaderOnlyLabel: function (label) {
     return (
       <span className="sr-only">
-        {this.renderLabel(percentage)}
+        {label}
       </span>
     );
   }
