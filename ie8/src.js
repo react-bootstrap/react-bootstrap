@@ -14,6 +14,7 @@ var TabbedArea = BS.TabbedArea
 var TabPane = BS.TabPane
 var Modal = BS.Modal
 var OverlayMixin = BS.OverlayMixin
+var Popover = BS.Popover
 
 
 
@@ -62,6 +63,26 @@ var positionerInstance = (
     </OverlayTrigger>
   </ButtonToolbar>
 );
+
+
+
+var popoverInstance = (
+  <ButtonToolbar>
+    <OverlayTrigger trigger="click" placement="left" overlay={<Popover title="Popover left"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
+      <Button bsStyle="default">Holy guacamole!</Button>
+    </OverlayTrigger>
+    <OverlayTrigger trigger="click" placement="top" overlay={<Popover title="Popover top"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
+      <Button bsStyle="default">Holy guacamole!</Button>
+    </OverlayTrigger>
+    <OverlayTrigger trigger="click" placement="bottom" overlay={<Popover title="Popover bottom"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
+      <Button bsStyle="default">Holy guacamole!</Button>
+    </OverlayTrigger>
+    <OverlayTrigger trigger="click" placement="right" overlay={<Popover title="Popover right"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
+      <Button bsStyle="default">Holy guacamole!</Button>
+    </OverlayTrigger>
+  </ButtonToolbar>
+);
+
 
 
 
@@ -162,8 +183,14 @@ var allTests = (
     <h2>Tooltips</h2>
     {positionerInstance}
 
+    <h2>Popovers</h2>
+    {popoverInstance}
+
     <h2>Tabs</h2>
     {tabbedAreaInstance}
+
+    <h2>Accordian</h2>
+    {accordionInstance}
 
     <h2>Alert</h2>
     <AlertAutoDismissable />
