@@ -39,7 +39,7 @@ var DropdownStateMixin = {
     }, onStateChangeComplete);
   },
 
-  handleKeyUp: function (e) {
+  handleDocumentKeyUp: function (e) {
     if (e.keyCode === 27) {
       this.setDropdownState(false);
     }
@@ -55,22 +55,20 @@ var DropdownStateMixin = {
     this.setDropdownState(false);
   },
 
-  bind: function(target, eventType, callback) {
-    this.eventListeners = this.eventListeners || [];
-    var listener = EventListener.listen(target, eventType, callback);
-    this.eventListeners.push(listener);
-  },
-
   bindRootCloseHandlers: function () {
-    this.bind(document, 'click', this.handleDocumentClick);
-    this.bind(document, 'keyup', this.handleKeyUp);
+    this._onDocumentClickListener =
+      EventListener.listen(document, 'click', this.handleDocumentClick);
+    this._onDocumentKeyupListener =
+      EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
   },
 
   unbindRootCloseHandlers: function () {
-    if (!this.eventListeners) return;
-    var listener;
-    while (listener = this.eventListeners.shift()) {
-      listener.remove();
+    if (this._onDocumentClickListener) {
+      this._onDocumentClickListener.remove();
+    }
+
+    if (this._onDocumentKeyupListener) {
+      this._onDocumentKeyupListener.remove();
     }
   },
 
