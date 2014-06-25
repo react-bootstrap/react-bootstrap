@@ -326,6 +326,24 @@ var ComponentsPage = React.createClass({
                   </div>
                 </div>
 
+                {/* Pager */}
+                <div className="bs-docs-section">
+                  <h1 id="pager" className="page-header">Pager<small> Pager, PageItem</small></h1>
+                  <p>Quick previous and next links.</p>
+
+                  <h3>Default</h3>
+                  <p>Centers by default.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PagerDefault.js', 'utf8')} />
+
+                  <h3>Aligned</h3>
+                  <p>Set the <code>previous</code> or <code>next</code> prop to <code>true</code>, to align left or right.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PagerAligned.js', 'utf8')} />
+
+                  <h3>Disabled</h3>
+                  <p>Set the <code>disabled</code> prop to <code>true</code> to disable the link.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PagerDisabled.js', 'utf8')} />
+                </div>
+
                 {/* Alerts */}
                 <div className="bs-docs-section">
                   <h1 id="alerts" className="page-header">Alert messages <small>Alert</small></h1>
@@ -485,17 +503,18 @@ var ComponentsPage = React.createClass({
                     <NavItem href="#navs" key={9}>Navs</NavItem>
                     <NavItem href="#navbars" key={10}>Navbars</NavItem>
                     <NavItem href="#tabs" key={11}>Togglable tabs</NavItem>
-                    <NavItem href="#alerts" key={12}>Alerts</NavItem>
-                    <NavItem href="#carousels" key={13}>Carousels</NavItem>
-                    <NavItem href="#grids" key={14}>Grids</NavItem>
-                    <NavItem href="#labels" key={15}>Labels</NavItem>
-                    <NavItem href="#badges" key={16}>Badges</NavItem>
-                    <NavItem href="#jumbotron" key={17}>Jumbotron</NavItem>
-                    <NavItem href="#page-header" key={18}>Page Header</NavItem>
-                    <NavItem href="#wells" key={19}>Wells</NavItem>
-                    <NavItem href="#glyphicons" key={20}>Glyphicons</NavItem>
-                    <NavItem href="#tables" key={21}>Tables</NavItem>
-                    <NavItem href="#input" key={22}>Input</NavItem>
+                    <NavItem href="#pager" key={12}>Pager</NavItem>
+                    <NavItem href="#alerts" key={13}>Alerts</NavItem>
+                    <NavItem href="#carousels" key={14}>Carousels</NavItem>
+                    <NavItem href="#grids" key={15}>Grids</NavItem>
+                    <NavItem href="#labels" key={16}>Labels</NavItem>
+                    <NavItem href="#badges" key={17}>Badges</NavItem>
+                    <NavItem href="#jumbotron" key={18}>Jumbotron</NavItem>
+                    <NavItem href="#page-header" key={19}>Page Header</NavItem>
+                    <NavItem href="#wells" key={20}>Wells</NavItem>
+                    <NavItem href="#glyphicons" key={21}>Glyphicons</NavItem>
+                    <NavItem href="#tables" key={22}>Tables</NavItem>
+                    <NavItem href="#input" key={23}>Input</NavItem>
                   </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top
