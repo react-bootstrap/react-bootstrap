@@ -2,7 +2,7 @@
 /*global describe, beforeEach, afterEach, it, assert */
 
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Table      = require('../cjs/Table');
+var Table          = require('../cjs/Table');
 
 describe('Table', function () {
   it('Should be a table', function () {

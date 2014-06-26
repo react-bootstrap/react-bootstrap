@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
-var React           = require('react');
-var ReactTestUtils  = require('react/lib/ReactTestUtils');
-var TabbedArea      = require('../cjs/TabbedArea');
-var TabPane         = require('../cjs/TabPane');
-var utils           = require('./utils');
+var React                  = require('react');
+var ReactTestUtils         = require('react/lib/ReactTestUtils');
+var TabbedArea             = require('../cjs/TabbedArea');
+var TabPane                = require('../cjs/TabPane');
+var utils                  = require('./utils');
 var ValidComponentChildren = require('../cjs/ValidComponentChildren');
 
 describe('TabbedArea', function () {
@@ -160,7 +160,7 @@ describe('TabbedArea', function () {
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-tabs'));
   });
-  
+
   it('Should pass bsStyle to Nav', function () {
     var instance = ReactTestUtils.renderIntoDocument(
         <TabbedArea bsStyle="pills" defaultActiveKey={1} animation={false}>
