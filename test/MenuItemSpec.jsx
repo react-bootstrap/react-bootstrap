@@ -2,7 +2,7 @@
 /*global describe, it, assert */
 
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var MenuItem        = require('../cjs/MenuItem');
+var MenuItem       = require('../cjs/MenuItem');
 
 
 describe('MenuItem', function () {

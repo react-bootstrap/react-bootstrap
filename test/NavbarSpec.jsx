@@ -107,7 +107,7 @@ describe('Nav', function () {
 
     assert.ok(instance.refs.nav.props.navbar);
   });
- 
+
   it('Should pass nav prop to ul', function () {
     var instance = ReactTestUtils.renderIntoDocument(
             <Nav className="pull-right" />

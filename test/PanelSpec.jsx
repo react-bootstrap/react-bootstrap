@@ -3,7 +3,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Panel        = require('../cjs/Panel');
+var Panel          = require('../cjs/Panel');
 
 describe('Panel', function () {
   it('Should have class and body', function () {
