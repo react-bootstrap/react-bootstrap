@@ -1,6 +1,9 @@
 import React  from './react-es6';
 import ReactTransitionEvents  from './react-es6/lib/ReactTransitionEvents';
 
+var isIE = (typeof navigator !== 'undefined' &&
+            navigator.appName.indexOf("Internet Explorer")!=-1)
+
 var CollapsableMixin = {
 
   propTypes: {
@@ -33,6 +36,7 @@ var CollapsableMixin = {
   },
 
   _addEndTransitionListener: function () {
+    if (isIE) return;
     var node = this.getCollapsableDOMNode();
 
     if (node) {
@@ -44,6 +48,7 @@ var CollapsableMixin = {
   },
 
   _removeEndTransitionListener: function () {
+    if (isIE) return;
     var node = this.getCollapsableDOMNode();
 
     if (node) {
