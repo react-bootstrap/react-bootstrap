@@ -9,4 +9,4 @@ There is a separate [source repo](https://github.com/react-bootstrap/react-boots
 A [docs site](http://react-bootstrap.github.io) with live editable examples is a work in progress.
 
 
-[![Build Status](https://travis-ci.org/react-bootstrap/react-bootstrap.png)](https://travis-ci.org/react-bootstrap/react-bootstrap) [![Bower version](https://badge.fury.io/bo/react-bootstrap.png)](http://badge.fury.io/bo/react-bootstrap)
+[![Build Status](https://travis-ci.org/react-bootstrap/react-bootstrap.svg)](https://travis-ci.org/react-bootstrap/react-bootstrap) [![Bower version](https://badge.fury.io/bo/react-bootstrap.svg)](http://badge.fury.io/bo/react-bootstrap)
