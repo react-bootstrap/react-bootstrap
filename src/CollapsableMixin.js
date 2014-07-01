@@ -73,8 +73,10 @@ var CollapsableMixin = {
     }
   },
 
-  componentDidUpdate: function () {
-    this._afterRender();
+  componentDidUpdate: function (prevProps, prevState) {
+    if (this.state.collapsing !== prevState.collapsing) {
+      this._afterRender();
+    }
   },
 
   _afterRender: function () {
