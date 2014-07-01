@@ -1,12 +1,14 @@
 /** @jsx React.DOM */
 
-import React              from './react-es6';
-import classSet           from './react-es6/lib/cx';
-import BootstrapMixin     from './BootstrapMixin';
-import DropdownStateMixin from './DropdownStateMixin';
-import Button             from './Button';
-import ButtonGroup        from './ButtonGroup';
-import DropdownMenu       from './DropdownMenu';
+import React                  from './react-es6';
+import classSet               from './react-es6/lib/cx';
+import BootstrapMixin         from './BootstrapMixin';
+import DropdownStateMixin     from './DropdownStateMixin';
+import Button                 from './Button';
+import ButtonGroup            from './ButtonGroup';
+import DropdownMenu           from './DropdownMenu';
+import utils                  from './utils';
+import ValidComponentChildren from './ValidComponentChildren';
 
 
 var DropdownButton = React.createClass({
@@ -45,10 +47,9 @@ var DropdownButton = React.createClass({
       <DropdownMenu
         ref="menu"
         aria-labelledby={this.props.id}
-        onSelect={this.handleOptionSelect}
         pullRight={this.props.pullRight}
         key={1}>
-        {this.props.children}
+        {ValidComponentChildren.map(this.props.children, this.renderMenuItem)}
       </DropdownMenu>
     ]);
   },
@@ -79,6 +80,26 @@ var DropdownButton = React.createClass({
       <li className={classSet(classes)}>
         {children}
       </li>
+    );
+  },
+
+  renderMenuItem: function (child) {
+    // Only handle the option selection if an onSelect prop has been set on the
+    // component or it's child, this allows a user not to pass an onSelect
+    // handler and have the browser preform the default action.
+    var handleOptionSelect = this.props.onSelect || child.props.onSelect ?
+      this.handleOptionSelect : null;
+
+    return utils.cloneWithProps(
+      child,
+      {
+        // Capture onSelect events
+        onSelect: utils.createChainedFunction(child.props.onSelect, handleOptionSelect),
+
+        // Force special props to be transferred
+        key: child.props.key,
+        ref: child.props.ref
+      }
     );
   },
 
