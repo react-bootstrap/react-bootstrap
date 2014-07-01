@@ -14,7 +14,8 @@ var TabbedArea = BS.TabbedArea
 var TabPane = BS.TabPane
 var Modal = BS.Modal
 var OverlayMixin = BS.OverlayMixin
-
+var Carousel = BS.Carousel
+var CarouselItem = BS.CarouselItem
 
 
 
@@ -151,7 +152,31 @@ var CustomModalTrigger = React.createClass({
   }
 });
 
-
+var carouselInstance = (
+    <Carousel style={{width: 900}}>
+      <CarouselItem>
+        <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
+        <div className="carousel-caption">
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </div>
+      </CarouselItem>
+      <CarouselItem>
+        <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
+        <div className="carousel-caption">
+          <h3>Second slide label</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </div>
+      </CarouselItem>
+      <CarouselItem>
+        <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
+        <div className="carousel-caption">
+          <h3>Third slide label</h3>
+          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+        </div>
+      </CarouselItem>
+    </Carousel>
+  );
 
 
 var allTests = (
@@ -170,6 +195,9 @@ var allTests = (
 
     <h2>Modal</h2>
     <CustomModalTrigger />
+
+    <h2>Carousel</h2>
+    {carouselInstance}
 
   </div>
 )
