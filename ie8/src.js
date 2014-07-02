@@ -1,35 +1,28 @@
 /** @jsx React.DOM */
-var React = require('react')
-var BS = require('../cjs')
-var Button = BS.Button
-var DropdownButton = BS.DropdownButton
-var MenuItem = BS.MenuItem
-var Accordion = BS.Accordion
-var Panel = BS.Panel
-var ButtonToolbar = BS.ButtonToolbar
-var OverlayTrigger = BS.OverlayTrigger
-var Tooltip = BS.Tooltip
-var Alert = BS.Alert
-var TabbedArea = BS.TabbedArea
-var TabPane = BS.TabPane
-var Modal = BS.Modal
-var OverlayMixin = BS.OverlayMixin
-var Popover = BS.Popover
-var Carousel = BS.Carousel
-var CarouselItem = BS.CarouselItem
-
-
-
+var React = require('react');
+var Button = require('../cjs/Button');
+var DropdownButton = require('../cjs/DropdownButton');
+var MenuItem = require('../cjs/MenuItem');
+var Accordion = require('../cjs/Accordion');
+var Panel = require('../cjs/Panel');
+var ButtonToolbar = require('../cjs/ButtonToolbar');
+var OverlayTrigger = require('../cjs/OverlayTrigger');
+var Tooltip = require('../cjs/Tooltip');
+var Alert = require('../cjs/Alert');
+var TabbedArea = require('../cjs/TabbedArea');
+var TabPane = require('../cjs/TabPane');
+var Modal = require('../cjs/Modal');
+var OverlayMixin = require('../cjs/OverlayMixin');
+var Popover = require('../cjs/Popover');
+var Carousel = require('../cjs/Carousel');
+var CarouselItem = require('../cjs/CarouselItem');
 
 var dropdownInstance = (
   <DropdownButton title="Dropdown">
     <MenuItem key="1">Item 1</MenuItem>
     <MenuItem key="2">Item 2</MenuItem>
   </DropdownButton>
-)
-
-
-
+);
 
 var accordionInstance = (
   <Accordion>
@@ -44,9 +37,6 @@ var accordionInstance = (
     </Panel>
   </Accordion>
 );
-
-
-
 
 var positionerInstance = (
   <ButtonToolbar>
@@ -65,8 +55,6 @@ var positionerInstance = (
   </ButtonToolbar>
 );
 
-
-
 var popoverInstance = (
   <ButtonToolbar>
     <OverlayTrigger trigger="click" placement="left" overlay={<Popover title="Popover left"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
@@ -84,19 +72,12 @@ var popoverInstance = (
   </ButtonToolbar>
 );
 
-
-
-
-
 var tabbedAreaInstance = (
   <TabbedArea defaultActiveKey={2}>
     <TabPane key={1} tab="Tab 1">TabPane 1 content</TabPane>
     <TabPane key={2} tab="Tab 2">TabPane 2 content</TabPane>
   </TabbedArea>
 );
-
-
-
 
 var AlertAutoDismissable = React.createClass({
   getInitialState: function() {
@@ -128,9 +109,6 @@ var AlertAutoDismissable = React.createClass({
     this.setState({alertVisible: true});
   }
 });
-
-
-
 
 var CustomModalTrigger = React.createClass({
   mixins: [OverlayMixin],
@@ -174,31 +152,30 @@ var CustomModalTrigger = React.createClass({
 });
 
 var carouselInstance = (
-    <Carousel style={{width: 900}}>
-      <CarouselItem>
-        <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
-        <div className="carousel-caption">
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
-        <div className="carousel-caption">
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-      </CarouselItem>
-      <CarouselItem>
-        <img width={900} height={500} alt="900x500" src="/assets/carousel.png"/>
-        <div className="carousel-caption">
-          <h3>Third slide label</h3>
-          <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-        </div>
-      </CarouselItem>
-    </Carousel>
-  );
-
+  <Carousel style={{width: 900}}>
+    <CarouselItem>
+      <img width={900} height={500} alt="900x500" src="assets/carousel.png"/>
+      <div className="carousel-caption">
+        <h3>First slide label</h3>
+        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+      </div>
+    </CarouselItem>
+    <CarouselItem>
+      <img width={900} height={500} alt="900x500" src="assets/carousel.png"/>
+      <div className="carousel-caption">
+        <h3>Second slide label</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </CarouselItem>
+    <CarouselItem>
+      <img width={900} height={500} alt="900x500" src="assets/carousel.png"/>
+      <div className="carousel-caption">
+        <h3>Third slide label</h3>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+      </div>
+    </CarouselItem>
+  </Carousel>
+);
 
 var allTests = (
   <div>
@@ -225,8 +202,7 @@ var allTests = (
 
     <h2>Carousel</h2>
     {carouselInstance}
-
   </div>
-)
+);
 
-React.renderComponent(allTests, document.body)
+React.renderComponent(allTests, document.body);
