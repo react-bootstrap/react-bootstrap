@@ -24,7 +24,7 @@ var Page = React.createClass({
             <div className="row">
               <div className="col-md-9" role="main">
                 <div className="bs-docs-section">
-                  <h1 id="setup" className="page-header">Setup</h1>
+                  <h2 id="setup" className="page-header">Setup</h2>
                   <p className="lead">You can import the lib with as AMD modules, CommonJS modules as a global JS script.</p>
 
                   <p>First add the bootstrap CSS to your project then:</p>
@@ -64,6 +64,24 @@ var Page = React.createClass({
   <script>\n\
     var Alert = ReactBootstrap.Alert;\n\
   </script>\
+                    '}</code></pre>
+                  </div>
+                </div>
+                <div className="bs-docs-section">
+                  <h2 id="browser-support" className="page-header">Browser support</h2>
+                  <p>We aim to support all browsers supported by both <a href="http://facebook.github.io/react/docs/working-with-the-browser.html#browser-support-and-polyfills">React</a> and <a href="http://getbootstrap.com/getting-started/#support">Bootstrap</a>.</p>
+
+                  <p>React requires <a href="http://facebook.github.io/react/docs/working-with-the-browser.html#browser-support-and-polyfills">polyfills for non-ES5 capable browsers.</a></p>
+
+                  <p><a href="http://jquery.com">jQuery</a> is currently required only for IE8 support for components which require reading element positions from the DOM: <code>Popover</code>, <code>Tooltip</code> when launched with <code>OverlayTrigger</code> and <code>Affix</code>. We would like to remove this dependency in future versions but for now, including the following snippet in your page should have you covered:</p>
+
+                  <div className="highlight">
+                    <pre><code className="html">{'\
+  <!--[if lt IE 9]>\n\
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>\n\
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>\n\
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>\n\
+  <![endif]-->\
                     '}</code></pre>
                   </div>
                 </div>
