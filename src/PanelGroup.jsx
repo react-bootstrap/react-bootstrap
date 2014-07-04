@@ -11,8 +11,8 @@ var PanelGroup = React.createClass({
 
   propTypes: {
     collapsable: React.PropTypes.bool,
-    activeKey: React.PropTypes.bool,
-    defaultActiveKey: React.PropTypes.bool,
+    activeKey: React.PropTypes.any,
+    defaultActiveKey: React.PropTypes.any,
     onSelect: React.PropTypes.func
   },
 
