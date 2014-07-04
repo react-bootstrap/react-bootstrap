@@ -73,7 +73,7 @@ var Page = React.createClass({
 
                   <p>React requires <a href="http://facebook.github.io/react/docs/working-with-the-browser.html#browser-support-and-polyfills">polyfills for non-ES5 capable browsers.</a></p>
 
-                  <p><a href="http://jquery.com">jQuery</a> is currently required only for IE8 support for components which require reading element positions from the DOM: <code>Popover</code>, <code>Tooltip</code> when launched with <code>OverlayTrigger</code> and <code>Affix</code>. We would like to remove this dependency in future versions but for now, including the following snippet in your page should have you covered:</p>
+                  <p><a href="http://jquery.com">jQuery</a> is currently required only for IE8 support for components which require reading element positions from the DOM: <code>Popover</code> and <code>Tooltip</code> when launched with <code>OverlayTrigger</code>. We would like to remove this dependency in future versions but for now, including the following snippet in your page should have you covered:</p>
 
                   <div className="highlight">
                     <pre><code className="html">{'\

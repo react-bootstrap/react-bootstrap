@@ -76,7 +76,18 @@ var Root = React.createClass({
     // when initialising the browser environment we can bootstrap from the
     // same props as what each page was rendered with.
     var browserInitScriptObj = {
-      __html: 'window.INITIAL_PROPS = ' + JSON.stringify(this.props) + ';'
+      __html:
+        "window.INITIAL_PROPS = " + JSON.stringify(this.props) + ";\n" +
+        // console noop shim for IE8/9
+        "(function (w) {\n" +
+        "  var noop = function () {};\n" +
+        "  if (!w.console) {\n" +
+        "    w.console = {};\n" +
+        "    ['log', 'info', 'warn', 'error'].forEach(function (method) {\n" +
+        "      w.console[method] = noop;\n" +
+        "    });\n" +
+        " }\n" +
+        "}(window));\n"
     };
 
     var head = {
