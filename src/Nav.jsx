@@ -62,6 +62,7 @@ var Nav = React.createClass({
     classes['nav-stacked'] = this.props.stacked;
     classes['nav-justified'] = this.props.justified;
     classes['navbar-nav'] = this.props.navbar;
+    classes['pull-right'] = this.props.pullRight;
 
     return (
       <ul className={classSet(classes)} ref="ul">
