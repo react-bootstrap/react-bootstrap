@@ -50,7 +50,7 @@ describe('Nav', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-justified'));
   });
   
-  it('Should adds pull-right class', function () {
+  it('Should add pull-right class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
           <Nav bsStyle="tabs" pullRight activeKey={1}>
             <NavItem key={1} ref="item1">Tab 1 content</NavItem>
