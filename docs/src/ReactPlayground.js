@@ -119,6 +119,7 @@ var ReactPlayground = React.createClass({
 
   propTypes: {
     codeText: React.PropTypes.string.isRequired,
+    show: React.PropTypes.bool,
     transformer: React.PropTypes.func,
     renderCode: React.PropTypes.bool
   },
@@ -133,7 +134,7 @@ var ReactPlayground = React.createClass({
 
   getInitialState: function() {
     return {
-      mode: this.MODES.NONE,
+      mode: this.props.show ? this.MODES.JSX : this.MODES.NONE,
       code: this.props.codeText
     };
   },
