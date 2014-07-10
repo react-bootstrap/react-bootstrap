@@ -31,22 +31,26 @@ var Page = React.createClass({
               <div className="col-md-9" role="main">
                 <div className="bs-docs-section">
 
-                  <h3>HTML/CSS Limit the Bootstrap API</h3>
                   <p>
-                    Let's say you want a small button that says "Register". With the Bootstrap framework, you would write this:
+                    Let's say you want a small button that says "Something". Bootstrap lets you write this:
                   </p>
-                  {StaticExample({codeText: '<button class="btn btn-success btn-sm">Some Text</button>'})}
+                  {StaticExample({codeText: '<button id="something-btn" type="button" class="btn btn-success btn-sm">\n\tSome Text\n</button>'})}
+                  <p className="lead">
+                    Compared to other HTML/CSS solutions, this is quite nice; but compared to what's possible in any other language, it's quite nasty. With React-Bootstrap, you can write:
+                  </p>
+                    {StaticExample({codeText: '<Button bsStyle="success" bsSize="small" onClick={someHandler}>\n\tSomething\n</Button>'})}
                   <p>
-                    Compared to raw HTML, this is quite nice; but compared to a normal GUI library, it's quite nasty. In Python, we might write <small>Button(size="large", style="success")</small>. With HTML/CSS, we write <small>btn</small> three times, within an element of type <small>button</small>! 
+                    This is rendered by React into an element with the same markup as the Bootstrap example, and the click event is handled with React's virtual event system.
                   </p>
 
-                  <h3>A better Bootstrap API using React.js</h3>
+                  <h2>A better Bootstrap API using React.js</h2>
                   <p>
-                    The problem is that HTML and CSS are under-powered for providing a library of reuseable components, as they are for many other tasks we want to accomplish on the web today.
+                    The Bootstrap code is so repetetive because HTML and CSS do not support the abstractions you need to write a nice library of components. That's why we have to write <small>btn</small> three times, within an element called <small>button</small>. 
                   </p>
-                  <p><strong>The React.js solution is to write directly in Javascript.</strong>   React.js takes over the page-rendering entirely; you just give it a tree of Javascript objects, and tell it how state is transmitted between them.</p> 
+          
+                  <p><strong>The React.js solution is to write directly in Javascript.</strong>   React takes over the page-rendering entirely; you just give it a tree of Javascript objects, and tell it how state is transmitted between them.</p> 
 
-                  <p>For instance, we might tell React.js to render a page displaying a single button, styled using the handy Bootstrap CSS:
+                  <p>For instance, we might tell React to render a page displaying a single button, styled using the handy Bootstrap CSS:
                   </p>
                   <ReactPlayground show={true} codeText={fs.readFileSync(__dirname + '/../comparisons/vanillaButton.js', 'utf8')} />
                   <p>
@@ -57,7 +61,7 @@ var Page = React.createClass({
                   React-Bootstrap is a library of such components, which you can also easily extend and enhance with your own functionality. 
                   <h3>JSX Syntax</h3>
                   <p>
-                    While each React component is really just a Javascript object, writing tree-structures that way gets tedious. React.js encourages the use of a syntactic-sugar called JSX, which lets you write the tree in an HTML-like syntax:
+                    While each React component is really just a Javascript object, writing tree-structures that way gets tedious. React encourages the use of a syntactic-sugar called JSX, which lets you write the tree in an HTML-like syntax:
                   </p>
                   <ReactPlayground show={true} codeText={fs.readFileSync(__dirname + '/../examples/ButtonGroupJustified.js', 'utf8')} />
                   <h3>No More DOM Selectors</h3>
