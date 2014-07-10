@@ -7,6 +7,7 @@ var Router = require('react-router-component');
 
 var HomePage = require('./HomePage');
 var GettingStartedPage = require('./GettingStartedPage');
+var IntroductionPage = require('./IntroductionPage');
 var ComponentsPage = require('./ComponentsPage');
 var NotFoundPage = require('./NotFoundPage');
 
@@ -20,6 +21,7 @@ var PagesHolder = React.createClass({
         <Locations contextual>
           <Location path="/" handler={HomePage} />
           <Location path="/index.html" handler={HomePage} />
+          <Location path="/introduction.html" handler={IntroductionPage} />
           <Location path="/getting-started.html" handler={GettingStartedPage} />
           <Location path="/components.html" handler={ComponentsPage} />
           <NotFound handler={NotFoundPage} />
