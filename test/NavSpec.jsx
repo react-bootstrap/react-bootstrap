@@ -57,7 +57,7 @@ describe('Nav', function () {
             <NavItem key={2} ref="item2">Tab 2 content</NavItem>
           </Nav>
         );
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-justified'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pull-right'));
   });
 
   it('Should call on select when item is selected', function (done) {
