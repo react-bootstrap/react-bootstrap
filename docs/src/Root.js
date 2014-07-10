@@ -53,7 +53,8 @@ var Root = React.createClass({
         'getting-started.html',
         'css.html',
         'components.html',
-        'javascript.html'
+        'javascript.html',
+        'introduction.html'
       ];
     },
 
