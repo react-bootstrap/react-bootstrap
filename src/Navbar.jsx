@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import classSet               from './react-es6/lib/cx';
-import BootstrapMixin         from './BootstrapMixin';
-import PropTypes              from './PropTypes';
-import utils                  from './utils';
-import Nav                    from './Nav';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var classSet = require('react/lib/cx');
+var BootstrapMixin = require('./BootstrapMixin');
+var PropTypes = require('./PropTypes');
+var utils = require('./utils');
+var Nav = require('./Nav');
+var ValidComponentChildren = require('./ValidComponentChildren');
 
 
 var Navbar = React.createClass({
@@ -136,4 +136,4 @@ var Navbar = React.createClass({
   }
 });
 
-export default = Navbar;
+module.exports = Navbar;

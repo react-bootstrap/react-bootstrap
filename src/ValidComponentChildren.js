@@ -1,4 +1,4 @@
-import React from './react-es6';
+var React = require('react');
 
 
 /**
@@ -83,7 +83,7 @@ function hasValidComponent(children) {
   return hasValid;
 }
 
-export default = {
+module.exports = {
   map: mapValidComponents,
   forEach: forEachValidComponents,
   numberOf: numberOfValidComponents,

@@ -1,10 +1,9 @@
 /** @jsx React.DOM */
 
-import React      from './react-es6';
-import PanelGroup from './PanelGroup';
+var React = require('react');
+var PanelGroup = require('./PanelGroup');
 
 var Accordion = React.createClass({
-
   render: function () {
     return this.transferPropsTo(
       <PanelGroup accordion={true}>
@@ -12,7 +11,6 @@ var Accordion = React.createClass({
       </PanelGroup>
     );
   }
-
 });
 
-export default = Accordion;
+module.exports = Accordion;

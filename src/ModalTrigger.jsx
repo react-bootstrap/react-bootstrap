@@ -1,9 +1,9 @@
 /** @jsx React.DOM */
 
-import React from './react-es6';
-import cloneWithProps from './react-es6/lib/cloneWithProps';
-import OverlayMixin from './OverlayMixin';
-import utils from './utils';
+var React = require('react');
+var cloneWithProps = require('react/lib/cloneWithProps');
+var OverlayMixin = require('./OverlayMixin');
+var utils = require('./utils');
 
 var ModalTrigger = React.createClass({
   mixins: [OverlayMixin],
@@ -60,4 +60,4 @@ var ModalTrigger = React.createClass({
   }
 });
 
-export default = ModalTrigger;
+module.exports = ModalTrigger;

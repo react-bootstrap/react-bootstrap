@@ -1,10 +1,10 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import classSet               from './react-es6/lib/cx';
-import BootstrapMixin         from './BootstrapMixin';
-import CollapsableMixin       from './CollapsableMixin';
-import utils                  from './utils';
+var React = require('react');
+var classSet = require('react/lib/cx');
+var BootstrapMixin = require('./BootstrapMixin');
+var CollapsableMixin = require('./CollapsableMixin');
+var utils = require('./utils');
 
 var Panel = React.createClass({
   mixins: [BootstrapMixin, CollapsableMixin],
@@ -141,4 +141,4 @@ var Panel = React.createClass({
   }
 });
 
-export default = Panel;
+module.exports = Panel;

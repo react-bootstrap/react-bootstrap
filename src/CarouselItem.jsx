@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
-import React                 from './react-es6';
-import classSet              from './react-es6/lib/cx';
-import ReactTransitionEvents from './react-es6/lib/ReactTransitionEvents';
+var React = require('react');
+var classSet = require('react/lib/cx');
+var ReactTransitionEvents = require('react/lib/ReactTransitionEvents');
 
 var CarouselItem = React.createClass({
   propTypes: {
@@ -91,4 +91,4 @@ var CarouselItem = React.createClass({
   }
 });
 
-export default = CarouselItem;
+module.exports = CarouselItem;

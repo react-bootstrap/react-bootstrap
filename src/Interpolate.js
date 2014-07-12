@@ -1,10 +1,10 @@
 // https://www.npmjs.org/package/react-interpolate-component
 'use strict';
 
-import React                  from './react-es6';
-import invariant              from './react-es6/lib/invariant';
-import utils                  from './utils';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var invariant = require('react/lib/invariant');
+var utils = require('./utils');
+var ValidComponentChildren = require('./ValidComponentChildren');
 
 function isString(object) {
   return Object.prototype.toString.call(object) === '[object String]';
@@ -80,4 +80,4 @@ var Interpolate = React.createClass({
   }
 });
 
-export default = Interpolate;
+module.exports = Interpolate;

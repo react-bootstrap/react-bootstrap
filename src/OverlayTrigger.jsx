@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
 
-import React from './react-es6';
-import cloneWithProps from './react-es6/lib/cloneWithProps';
-import merge from './react-es6/lib/merge';
-import OverlayMixin from './OverlayMixin';
-import domUtils from './domUtils';
-import utils from './utils';
+var React = require('react');
+var cloneWithProps = require('react/lib/cloneWithProps');
+var merge = require('react/lib/merge');
+var OverlayMixin = require('./OverlayMixin');
+var domUtils = require('./domUtils');
+var utils = require('./utils');
 
 /**
  * Check if value one is inside or equal to the of value
@@ -217,4 +217,4 @@ var OverlayTrigger = React.createClass({
   }
 });
 
-export default = OverlayTrigger;
+module.exports = OverlayTrigger;

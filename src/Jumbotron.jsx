@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import classSet       from './react-es6/lib/cx';
+var React = require('react');
+var classSet = require('react/lib/cx');
 
 var Jumbotron = React.createClass({
 
@@ -14,4 +14,4 @@ var Jumbotron = React.createClass({
   }
 });
 
-export default = Jumbotron;
+module.exports = Jumbotron;

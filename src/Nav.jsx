@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import classSet               from './react-es6/lib/cx';
-import BootstrapMixin         from './BootstrapMixin';
-import CollapsableMixin       from './CollapsableMixin';
-import utils                  from './utils';
-import domUtils               from './domUtils';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var classSet = require('react/lib/cx');
+var BootstrapMixin = require('./BootstrapMixin');
+var CollapsableMixin = require('./CollapsableMixin');
+var utils = require('./utils');
+var domUtils = require('./domUtils');
+var ValidComponentChildren = require('./ValidComponentChildren');
 
 
 var Nav = React.createClass({
@@ -105,4 +105,4 @@ var Nav = React.createClass({
   }
 });
 
-export default = Nav;
+module.exports = Nav;

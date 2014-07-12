@@ -1,10 +1,10 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import classSet               from './react-es6/lib/cx';
-import BootstrapMixin         from './BootstrapMixin';
-import utils                  from './utils';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var classSet = require('react/lib/cx');
+var BootstrapMixin = require('./BootstrapMixin');
+var utils = require('./utils');
+var ValidComponentChildren = require('./ValidComponentChildren');
 
 var PanelGroup = React.createClass({
   mixins: [BootstrapMixin],
@@ -82,4 +82,4 @@ var PanelGroup = React.createClass({
   }
 });
 
-export default = PanelGroup;
+module.exports = PanelGroup;

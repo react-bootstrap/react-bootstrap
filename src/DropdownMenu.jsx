@@ -1,9 +1,9 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import classSet               from './react-es6/lib/cx';
-import utils                  from './utils';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var classSet = require('react/lib/cx');
+var utils = require('./utils');
+var ValidComponentChildren = require('./ValidComponentChildren');
 
 var DropdownMenu = React.createClass({
   propTypes: {
@@ -41,4 +41,4 @@ var DropdownMenu = React.createClass({
   }
 });
 
-export default = DropdownMenu;
+module.exports = DropdownMenu;

@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import classSet       from './react-es6/lib/cx';
-import BootstrapMixin from './BootstrapMixin';
+var React = require('react');
+var classSet = require('react/lib/cx');
+var BootstrapMixin = require('./BootstrapMixin');
 
 var NavItem = React.createClass({
   mixins: [BootstrapMixin],
@@ -51,4 +51,4 @@ var NavItem = React.createClass({
   }
 });
 
-export default = NavItem;
+module.exports = NavItem;

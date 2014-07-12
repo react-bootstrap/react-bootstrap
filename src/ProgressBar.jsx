@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import classSet               from './react-es6/lib/cx';
-import Interpolate            from './Interpolate';
-import BootstrapMixin         from './BootstrapMixin';
-import utils                  from './utils';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var classSet = require('react/lib/cx');
+var Interpolate = require('./Interpolate');
+var BootstrapMixin = require('./BootstrapMixin');
+var utils = require('./utils');
+var ValidComponentChildren = require('./ValidComponentChildren');
 
 
 var ProgressBar = React.createClass({
@@ -128,4 +128,4 @@ var ProgressBar = React.createClass({
   }
 });
 
-export default ProgressBar;
+module.exports = ProgressBar;

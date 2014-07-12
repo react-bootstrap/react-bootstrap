@@ -1,4 +1,4 @@
-import cloneWithProps from './react-es6/lib/cloneWithProps';
+var cloneWithProps = require('react/lib/cloneWithProps');
 
 // From https://www.npmjs.org/package/extend
 var hasOwn = Object.prototype.hasOwnProperty;
@@ -22,7 +22,7 @@ function isPlainObject(obj) {
   return key === undefined || hasOwn.call( obj, key );
 };
 
-export default = {
+module.exports = {
 
   /**
    * Modify each item in a React children array without

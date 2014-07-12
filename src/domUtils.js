@@ -1,4 +1,4 @@
-export default = {
+module.exports = {
   getComputedStyles: function (elem) {
     return elem.ownerDocument.defaultView.getComputedStyle(elem, null);
   },

@@ -1,5 +1,5 @@
-import React     from './react-es6';
-import constants from './constants';
+var React = require('react');
+var constants = require('./constants');
 
 var BootstrapMixin = {
   propTypes: {
@@ -32,4 +32,4 @@ var BootstrapMixin = {
   }
 };
 
-export default = BootstrapMixin;
+module.exports = BootstrapMixin;

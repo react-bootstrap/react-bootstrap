@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import utils                  from './utils';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var utils = require('./utils');
+var ValidComponentChildren = require('./ValidComponentChildren');
 
 var Pager = React.createClass({
 
@@ -31,4 +31,4 @@ var Pager = React.createClass({
   }
 });
 
-export default = Pager;
+module.exports = Pager;

@@ -1,5 +1,5 @@
-import React  from './react-es6';
-import ReactTransitionEvents  from './react-es6/lib/ReactTransitionEvents';
+var React = require('react');
+var ReactTransitionEvents = require('react/lib/ReactTransitionEvents');
 
 var CollapsableMixin = {
 
@@ -123,4 +123,4 @@ var CollapsableMixin = {
   }
 };
 
-export default = CollapsableMixin;
+module.exports = CollapsableMixin;

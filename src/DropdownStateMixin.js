@@ -1,5 +1,5 @@
-import React          from './react-es6';
-import EventListener  from './react-es6/lib/EventListener';
+var React = require('react');
+var EventListener = require('react/lib/EventListener');
 
 /**
  * Checks whether a node is within
@@ -77,4 +77,4 @@ var DropdownStateMixin = {
   }
 };
 
-export default = DropdownStateMixin;
+module.exports = DropdownStateMixin;
