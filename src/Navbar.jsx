@@ -85,8 +85,8 @@ var Navbar = React.createClass({
   renderChild: function (child) {
     return utils.cloneWithProps(child, {
       navbar: true,
-      isCollapsable: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.key,
-      isOpen: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.key && this.isNavOpen(),
+      collapsable: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.key,
+      expanded: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.key && this.isNavOpen(),
       key: child.props.key,
       ref: child.props.ref
     });
