@@ -49,6 +49,16 @@ describe('Nav', function () {
         );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-justified'));
   });
+  
+  it('Should add pull-right class', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          <Nav bsStyle="tabs" pullRight activeKey={1}>
+            <NavItem key={1} ref="item1">Tab 1 content</NavItem>
+            <NavItem key={2} ref="item2">Tab 2 content</NavItem>
+          </Nav>
+        );
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pull-right'));
+  });
 
   it('Should call on select when item is selected', function (done) {
     function handleSelect(key) {
