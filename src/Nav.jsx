@@ -17,8 +17,8 @@ var Nav = React.createClass({
     stacked: React.PropTypes.bool,
     justified: React.PropTypes.bool,
     onSelect: React.PropTypes.func,
-    isCollapsable: React.PropTypes.bool,
-    isOpen: React.PropTypes.bool,
+    collapsable: React.PropTypes.bool,
+    expanded: React.PropTypes.bool,
     navbar: React.PropTypes.bool
   },
 
@@ -41,11 +41,11 @@ var Nav = React.createClass({
   },
 
   render: function () {
-    var classes = this.props.isCollapsable ? this.getCollapsableClassSet() : {};
+    var classes = this.props.collapsable ? this.getCollapsableClassSet() : {};
 
-    classes['navbar-collapse'] = this.props.isCollapsable;
+    classes['navbar-collapse'] = this.props.collapsable;
 
-    if (this.props.navbar && !this.props.isCollapsable) {
+    if (this.props.navbar && !this.props.collapsable) {
       return this.transferPropsTo(this.renderUl());
     }
 
