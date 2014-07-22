@@ -1,4 +1,4 @@
-var utils          = require('../cjs/utils');
+var createChainedFunction = require('../cjs/utils/createChainedFunction');
 
 module.exports = {
   // Should be replaced
@@ -16,7 +16,7 @@ module.exports = {
     }
 
     if (oldFn) {
-      newFn = wrappedCallback(utils.createChainedFunction(oldFn, callback));
+      newFn = wrappedCallback(createChainedFunction(oldFn, callback));
     } else {
       newFn = wrappedCallback(callback);
     }

@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var classSet = require('react/lib/cx');
-var utils = require('./utils');
-var ValidComponentChildren = require('./ValidComponentChildren');
+var classSet = require('./utils/classSet');
+var cloneWithProps = require('./utils/cloneWithProps');
+var createChainedFunction = require('./utils/createChainedFunction');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 var DropdownMenu = React.createClass({
   propTypes: {
@@ -27,11 +28,11 @@ var DropdownMenu = React.createClass({
   },
 
   renderMenuItem: function (child) {
-    return utils.cloneWithProps(
+    return cloneWithProps(
       child,
       {
         // Capture onSelect events
-        onSelect: utils.createChainedFunction(child.props.onSelect, this.props.onSelect),
+        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
 
         // Force special props to be transferred
         key: child.props.key,

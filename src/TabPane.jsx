@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var classSet = require('react/lib/cx');
-var ReactTransitionEvents = require('react/lib/ReactTransitionEvents');
+var classSet = require('./utils/classSet');
+var TransitionEvents = require('./utils/TransitionEvents');
 
 var TabPane = React.createClass({
   getDefaultProps: function () {
@@ -37,7 +37,7 @@ var TabPane = React.createClass({
       setTimeout(this.startAnimateIn, 0);
     }
     if (this.state.animateOut) {
-      ReactTransitionEvents.addEndEventListener(
+      TransitionEvents.addEndEventListener(
         this.getDOMNode(),
         this.stopAnimateOut
       );

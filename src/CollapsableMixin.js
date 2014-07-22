@@ -1,5 +1,5 @@
 var React = require('react');
-var ReactTransitionEvents = require('react/lib/ReactTransitionEvents');
+var TransitionEvents = require('./utils/TransitionEvents');
 
 var CollapsableMixin = {
 
@@ -36,7 +36,7 @@ var CollapsableMixin = {
     var node = this.getCollapsableDOMNode();
 
     if (node) {
-      ReactTransitionEvents.addEndEventListener(
+      TransitionEvents.addEndEventListener(
         node,
         this.handleTransitionEnd
       );
@@ -47,7 +47,7 @@ var CollapsableMixin = {
     var node = this.getCollapsableDOMNode();
 
     if (node) {
-      ReactTransitionEvents.addEndEventListener(
+      TransitionEvents.addEndEventListener(
         node,
         this.handleTransitionEnd
       );

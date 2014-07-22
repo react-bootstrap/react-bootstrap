@@ -1,10 +1,10 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var classSet = require('react/lib/cx');
+var classSet = require('./utils/classSet');
+var cloneWithProps = require('./utils/cloneWithProps');
 var BootstrapMixin = require('./BootstrapMixin');
-var utils = require('./utils');
-var ValidComponentChildren = require('./ValidComponentChildren');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 var PanelGroup = React.createClass({
   mixins: [BootstrapMixin],
@@ -54,7 +54,7 @@ var PanelGroup = React.createClass({
       props.onSelect = this.handleSelect;
     }
 
-    return utils.cloneWithProps(
+    return cloneWithProps(
       child,
       props
     );

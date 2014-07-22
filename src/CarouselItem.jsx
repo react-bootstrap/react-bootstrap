@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var classSet = require('react/lib/cx');
-var ReactTransitionEvents = require('react/lib/ReactTransitionEvents');
+var classSet = require('./utils/classSet');
+var TransitionEvents = require('./utils/TransitionEvents');
 
 var CarouselItem = React.createClass({
   propTypes: {
@@ -40,7 +40,7 @@ var CarouselItem = React.createClass({
 
   componentDidUpdate: function (prevProps) {
     if (!this.props.active && prevProps.active) {
-      ReactTransitionEvents.addEndEventListener(
+      TransitionEvents.addEndEventListener(
         this.getDOMNode(),
         this.handleAnimateOutEnd
       );

@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var classSet = require('react/lib/cx');
+var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var NavItem = React.createClass({

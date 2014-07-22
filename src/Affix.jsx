@@ -2,7 +2,7 @@
 
 var React = require('react');
 var AffixMixin = require('./AffixMixin');
-var domUtils = require('./domUtils');
+var domUtils = require('./utils/domUtils');
 
 var Affix = React.createClass({
   statics: {

@@ -1,8 +1,9 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var utils = require('./utils');
-var ValidComponentChildren = require('./ValidComponentChildren');
+var cloneWithProps = require('./utils/cloneWithProps');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
+var createChainedFunction = require('./utils/createChainedFunction');
 
 var Pager = React.createClass({
 
@@ -20,10 +21,10 @@ var Pager = React.createClass({
   },
 
   renderPageItem: function (child) {
-    return utils.cloneWithProps(
+    return cloneWithProps(
       child,
       {
-        onSelect: utils.createChainedFunction(child.props.onSelect, this.props.onSelect),
+        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
         ref: child.props.ref,
         key: child.props.key
       }

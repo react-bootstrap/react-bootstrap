@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var ValidComponentChildren = require('./ValidComponentChildren');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 var Badge = React.createClass({
   render: function () {

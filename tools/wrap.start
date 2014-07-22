@@ -7,5 +7,4 @@
         root.ReactBootstrap = factory(root.React);
     }
 }(this, function (React) {
-    var process = {env:{NODE_ENV:'production'}};
 

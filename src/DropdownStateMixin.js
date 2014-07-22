@@ -1,5 +1,5 @@
 var React = require('react');
-var EventListener = require('react/lib/EventListener');
+var EventListener = require('./utils/EventListener');
 
 /**
  * Checks whether a node is within

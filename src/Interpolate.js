@@ -2,18 +2,17 @@
 'use strict';
 
 var React = require('react');
-var invariant = require('react/lib/invariant');
-var utils = require('./utils');
-var ValidComponentChildren = require('./ValidComponentChildren');
-
-function isString(object) {
-  return Object.prototype.toString.call(object) === '[object String]';
-}
+var merge = require('./utils/merge');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 var REGEXP = /\%\((.+?)\)s/;
 
 var Interpolate = React.createClass({
   displayName: 'Interpolate',
+
+  propTypes: {
+    format: React.PropTypes.string
+  },
 
   getDefaultProps: function() {
     return { component: React.DOM.span };
@@ -23,14 +22,12 @@ var Interpolate = React.createClass({
     var format = ValidComponentChildren.hasValidComponent(this.props.children) ? this.props.children : this.props.format;
     var parent = this.props.component;
     var unsafe = this.props.unsafe === true;
-    var props  = utils.extend({}, this.props);
+    var props = merge(this.props);
 
     delete props.children;
     delete props.format;
     delete props.component;
     delete props.unsafe;
-
-    invariant(isString(format), 'Interpolate expects either a format string as only child or a `format` prop with a string value');
 
     if (unsafe) {
       var content = format.split(REGEXP).reduce(function(memo, match, index) {

@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var classSet = require('react/lib/cx');
 var Interpolate = require('./Interpolate');
 var BootstrapMixin = require('./BootstrapMixin');
-var utils = require('./utils');
-var ValidComponentChildren = require('./ValidComponentChildren');
+var classSet = require('./utils/classSet');
+var cloneWithProps = require('./utils/cloneWithProps');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 
 var ProgressBar = React.createClass({
@@ -67,7 +67,7 @@ var ProgressBar = React.createClass({
   },
 
   renderChildBar: function (child) {
-    return utils.cloneWithProps(child, {
+    return cloneWithProps(child, {
       isChild: true,
       key: child.props.key,
       ref: child.props.ref

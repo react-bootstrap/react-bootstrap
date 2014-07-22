@@ -2,10 +2,10 @@
 
 var React = require('react');
 var BootstrapMixin = require('./BootstrapMixin');
-var utils = require('./utils');
+var cloneWithProps = require('./utils/cloneWithProps');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var Nav = require('./Nav');
 var NavItem = require('./NavItem');
-var ValidComponentChildren = require('./ValidComponentChildren');
 
 function getDefaultActiveKeyFromChildren(children) {
   var defaultActiveKey;
@@ -93,7 +93,7 @@ var TabbedArea = React.createClass({
   renderPane: function (child) {
     var activeKey = this.getActiveKey();
 
-    return utils.cloneWithProps(
+    return cloneWithProps(
         child,
         {
           active: (child.props.key === activeKey &&

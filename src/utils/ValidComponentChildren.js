@@ -1,6 +1,5 @@
 var React = require('react');
 
-
 /**
  * Maps children that are typically specified as `props.children`,
  * but only iterates over children that are "valid components".
