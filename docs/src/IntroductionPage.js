@@ -82,7 +82,7 @@ var Page = React.createClass({
                   <p>
                     While each React component is really just a Javascript object, writing tree-structures that way gets tedious. React encourages the use of a syntactic-sugar called JSX, which lets you write the tree in an HTML-like syntax:
                   </p>
-                  <ReactPlayground show={true} codeText={fs.readFileSync(__dirname + '/../comparisons/ButtonToolbarDropdown.js', 'utf8')} />
+                  <ReactPlayground show={true} codeText={fs.readFileSync(__dirname + '/../comparisons/ButtonGroupDropdown.js', 'utf8')} />
 
                   <p>
                    Some people's first impression of React.js is that it seems messy to mix Javascript and HTML in this way. 
