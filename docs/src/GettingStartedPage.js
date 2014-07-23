@@ -22,29 +22,14 @@ var Page = React.createClass({
 
           <PageHeader
             title="Getting started"
-            subTitle="React-Bootstrap overview, installation and usage."/>
+            subTitle="React-Bootstrap installation and usage."/>
 
           <div className="container bs-docs-container">
             <div className="row">
               <div className="col-md-9" role="main">
                 <div className="bs-docs-section">
-                  <h2 id="overview" className="page-header">What and Why</h2>
-                  <p className="lead">
-                    React-Bootstrap is a library of front-end components drawn from Twitter Bootstrap, for use in React.js applications.  You get the responsive layout and consistency of a Bootstrap page, but with code that is much easier to read, maintain and extend.
-                  </p>
-                  <p>Here is how you create a simple tabbed-navigation area with React-Bootstrap, with the Bootstrap-only code given for comparison:</p>
-                  <TabbedArea defaultActiveKey={2}>
-                   <TabPane key={1} tab="With Bootstrap">               
-                       <pre style={preStyles}>
-                         {fs.readFileSync(__dirname + '/../comparisons/TabbedAreaBS.html', 'utf8')} 
-                       </pre>
-                   </TabPane>
-                   <TabPane key={2} tab="With React-Bootstrap">
-                      <pre style={preStyles}>{fs.readFileSync(__dirname + '/../examples/TabbedAreaUncontrolled.js', 'utf8')}</pre>
-                   </TabPane>
-                  </TabbedArea>
                   <h2 id="setup" className="page-header">Setup</h2>
-                  <p className="lead">You can import the lib with as AMD modules, CommonJS modules as a global JS script.</p>
+                  <p>You can import the lib with as AMD modules, CommonJS modules as a global JS script.</p>
 
                   <p>First add the bootstrap CSS to your project then:</p>
 
