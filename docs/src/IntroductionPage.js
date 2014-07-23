@@ -33,7 +33,7 @@ var Page = React.createClass({
                   <p className="lead">React-Bootstrap is a library of reuseable front-end components.  You'll get the look-and-feel of Twitter Bootstrap, but with much cleaner code, via Facebook's React.js framework.
                   </p>
                   <p>
-                    Let's say you want a small button that says "Something", to trigger the function someCallback. If were writing a native application, you might write something like:
+                    Let's say you want a small button that says "Something", to trigger the function someCallback. If you were writing a native application, you might write something like:
                   </p>
                    {StaticExample({codeText: 'button(size=SMALL, color=GREEN, text="Something", onClick=someCallback)'})}
                   <p>
