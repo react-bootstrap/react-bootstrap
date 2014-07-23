@@ -22,9 +22,9 @@ var HomePage = React.createClass({
               <span className="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline"></span>
               <p className="lead">The most popular front-end framework, rebuilt for React.</p>
               <ButtonToolbar bsSize="medium">
-                <Button bsStyle="primary" href="/getting-started.html">Get Started</Button>
-                <Button bsStyle="primary" href="http://github.com/react-bootstrap/">Github</Button>
                 <Button bsStyle="primary" href="/introduction.html">What is this?</Button>
+                <Button bsStyle="primary" href="/getting-started.html">Get Started</Button>
+                <Button bsStyle="primary" href="http://github.com/react-bootstrap/react-bootstrap">Github</Button>
               </ButtonToolbar>
             </div>
           </main>
