@@ -15,6 +15,7 @@
  *
  */
 
+var React = require('react');
 var merge = require('./merge');
 
 /**
@@ -152,6 +153,13 @@ function cloneWithProps(child, props) {
     child.props.hasOwnProperty(CHILDREN_PROP)) {
     newProps.children = child.props.children;
   }
+
+  // Huge hack to support both the 0.10 API and the new way of doing things
+  // TODO: remove when support for 0.10 is no longer needed
+  if (React.version.indexOf('0.10.') === 0) {
+    return child.constructor.ConvenienceConstructor(newProps);
+  }
+
 
   // The current API doesn't retain _owner and _context, which is why this
   // doesn't use ReactDescriptor.cloneAndReplaceProps.
