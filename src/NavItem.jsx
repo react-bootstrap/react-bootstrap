@@ -60,7 +60,7 @@ var NavItem = React.createClass({
                     className={anchorClass}
                     onClick={this.handleClick}
                     onFocus={this.handleFocus}
-                    onBlur={this.handleblur}
+                    onBlur={this.handleBlur}
                     ref="anchor">
                     {this.props.dropdown ? <span>{this.props.children[0]}<span className="caret"></span></span> : this.props.children}
                 </a>)}
