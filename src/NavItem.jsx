@@ -20,6 +20,7 @@ var NavItem = React.createClass({
     // Dropdown context using React context mechanism.
     contextTypes: {
         dropdownComponent: React.PropTypes.string,
+        activeComponent: React.PropTypes.string,
         onDropdownChange: React.PropTypes.func,
         onActiveChange: React.PropTypes.func
     },
@@ -58,7 +59,7 @@ var NavItem = React.createClass({
         var anchorClass = this.props.dropdown ? 'dropdown-toggle' : '';
 
         return (
-            <li className={classSet(classes)}>
+            <li className={classSet(classes)} aria-haspopup={this.props.dropdown}>
                 {this.transferPropsTo(
                 <a
                     className={anchorClass}

@@ -19,6 +19,12 @@ var Nav = React.createClass({
         onSelect: React.PropTypes.func
     },
 
+    // Dropdown context using React context mechanism.
+    contextTypes: {
+        dropdownComponent: React.PropTypes.string,
+        activeComponent: React.PropTypes.string
+    },
+
     getDefaultProps: function () {
         return {
             bsClass: 'nav',
@@ -41,7 +47,7 @@ var Nav = React.createClass({
         if (!this.props.navbar && !this.props.dropdown) {
             return this.transferPropsTo(
                 <nav>
-                    <NavItemRender classes={classes} children={this.props.children} renderNavItem={this.renderNavItem} id={this.props.id} />
+                    <NavItemRender classes={classes} children={this.props.children} renderNavItem={this.renderNavItem} id={this.props.id} topLevel={true} />
                 </nav>
             );
         } else {
