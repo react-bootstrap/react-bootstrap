@@ -61,6 +61,7 @@ var NavItem = React.createClass({
     handleClick: function (e) {
         if (this.props.dropdown) {
             e.preventDefault();
+            e.stopPropagation();
             this.setDropdownState(true);
         }
     }
