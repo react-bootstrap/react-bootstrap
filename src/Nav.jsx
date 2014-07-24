@@ -19,12 +19,6 @@ var Nav = React.createClass({
         onSelect: React.PropTypes.func
     },
 
-    // Dropdown context using React context mechanism.
-    contextTypes: {
-        dropdownComponent: React.PropTypes.string,
-        activeComponent: React.PropTypes.string
-    },
-
     getDefaultProps: function () {
         return {
             bsClass: 'nav',

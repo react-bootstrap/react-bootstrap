@@ -20,9 +20,7 @@ var NavItem = React.createClass({
     // Dropdown context using React context mechanism.
     contextTypes: {
         dropdownComponent: React.PropTypes.string,
-        activeComponent: React.PropTypes.string,
-        onDropdownChange: React.PropTypes.func,
-        onActiveChange: React.PropTypes.func
+        onDropdownChange: React.PropTypes.func
     },
 
     getDefaultProps: function () {
@@ -34,18 +32,6 @@ var NavItem = React.createClass({
     // Call app with our React node ID if opening drop-down menu, or undefined if closing
     setDropdownState: function (newState) {
         this.context.onDropdownChange(newState ? this._rootNodeID : undefined);
-    },
-
-    handleFocus: function() {
-        if (this.props.dropdown) {
-            this.context.onActiveChange(this._rootNodeID);
-        }
-    },
-
-    handleBlur: function() {
-        if (this.props.dropdown) {
-            this.context.onActiveChange(undefined);
-        }
     },
 
     render: function () {
@@ -64,8 +50,6 @@ var NavItem = React.createClass({
                 <a
                     className={anchorClass}
                     onClick={this.handleClick}
-                    onFocus={this.handleFocus}
-                    onBlur={this.handleBlur}
                     ref="anchor">
                     {this.props.dropdown ? <span>{this.props.children[0]}<span className="caret"></span></span> : this.props.children}
                 </a>)}
