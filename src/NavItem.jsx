@@ -36,11 +36,15 @@ var NavItem = React.createClass({
     },
 
     handleFocus: function() {
-        this.context.onActiveChange(this._rootNodeID);
+        if (this.props.dropdown) {
+            this.context.onActiveChange(this._rootNodeID);
+        }
     },
 
     handleBlur: function() {
-        this.context.onActiveChange(undefined);
+        if (this.props.dropdown) {
+            this.context.onActiveChange(undefined);
+        }
     },
 
     render: function () {
