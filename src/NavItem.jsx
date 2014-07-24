@@ -3,67 +3,78 @@
 import React              from './react-es6';
 import classSet           from './react-es6/lib/cx';
 import BootstrapMixin     from './BootstrapMixin';
-import DropdownStateMixin from './DropdownStateMixin';
 
 var NavItem = React.createClass({
-  mixins: [BootstrapMixin, DropdownStateMixin],
+    mixins: [BootstrapMixin],
 
-  propTypes: {
-    onSelect: React.PropTypes.func,
-    active: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    href: React.PropTypes.string,
-    title: React.PropTypes.string,
-    trigger: React.PropTypes.string,
-    dropdown: React.PropTypes.bool
-  },
+    propTypes: {
+        onSelect: React.PropTypes.func,
+        active: React.PropTypes.bool,
+        disabled: React.PropTypes.bool,
+        href: React.PropTypes.string,
+        title: React.PropTypes.string,
+        trigger: React.PropTypes.string,
+        dropdown: React.PropTypes.bool
+    },
 
-  getDefaultProps: function () {
-    return {
-      href: '#'
-    };
-  },
+    // Dropdown context using React context mechanism.
+    contextTypes: {
+        dropdownComponent: React.PropTypes.string,
+        onDropdownChange: React.PropTypes.func,
+        onActiveChange: React.PropTypes.func
+    },
 
-  render: function () {
-    var classes = {
-      'active': this.props.active,
-      'disabled': this.props.disabled,
-      'dropdown': this.props.dropdown,
-      'open': this.state.open
-    };
+    getDefaultProps: function () {
+        return {
+            href: '#'
+        };
+    },
 
-    var anchorClass = this.props.dropdown ? 'dropdown-toggle' : '';
+    // Call app with our React node ID if opening drop-down menu, or undefined if closing
+    setDropdownState: function (newState) {
+        this.context.onDropdownChange(newState ? this._rootNodeID : undefined);
+    },
 
-    return (
-      <li className={classSet(classes)}>
-        {this.transferPropsTo(
-        <a
-          className={anchorClass}
-          onClick={this.handleClick}
-          ref="anchor">
-          {this.props.dropdown ? <span>{this.props.children[0]}<span className="caret"></span></span> : this.props.children}
-        </a>)}
-        {this.props.dropdown ? this.props.children.slice(1) : null}
-      </li>
-    );
-  },
+    handleFocus: function() {
+        this.context.onActiveChange(this._rootNodeID);
+    },
 
-  handleOpenClick: function () {
-    this.setDropdownState(true);
-  },
+    handleBlur: function() {
+        this.context.onActiveChange(undefined);
+    },
 
-  handleClick: function (e) {
-    if (this.props.dropdown) {
-      e.preventDefault();
-      this.handleOpenClick();
-    } else if (this.props.onSelect) {
-      e.preventDefault();
+    render: function () {
+        var classes = {
+            'active': this.props.active,
+            'disabled': this.props.disabled,
+            'dropdown': this.props.dropdown,
+            'open': this.context.dropdownComponent === this._rootNodeID
+        };
 
-      if (!this.props.disabled) {
-        this.props.onSelect(this.props.key,this.props.href);
-      }
+        var anchorClass = this.props.dropdown ? 'dropdown-toggle' : '';
+
+        return (
+            <li className={classSet(classes)}>
+                {this.transferPropsTo(
+                <a
+                    className={anchorClass}
+                    onClick={this.handleClick}
+                    onFocus={this.handleFocus}
+                    onBlur={this.handleblur}
+                    ref="anchor">
+                    {this.props.dropdown ? <span>{this.props.children[0]}<span className="caret"></span></span> : this.props.children}
+                </a>)}
+                {this.props.dropdown ? this.props.children.slice(1) : null}
+            </li>
+        );
+    },
+
+    handleClick: function (e) {
+        if (this.props.dropdown) {
+            e.preventDefault();
+            this.setDropdownState(true);
+        }
     }
-  }
 });
 
 export default = NavItem;
