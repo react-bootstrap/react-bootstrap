@@ -156,10 +156,10 @@ describe('DropdownButton', function () {
     });
 
     it('should close on click', function (done) {
-      instance.componentDidUpdate = function () {
+      setTimeout(function () {
         assert.notOk(instance.getDOMNode().className.match(/\bopen\b/));
         done();
-      };
+      }, 50);
 
       var evt = document.createEvent('HTMLEvents');
       evt.initEvent('click', true, true);
