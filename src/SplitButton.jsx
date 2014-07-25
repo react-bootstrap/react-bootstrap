@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 
-import React              from './react-es6';
-import classSet           from './react-es6/lib/cx';
-import BootstrapMixin     from './BootstrapMixin';
-import DropdownStateMixin from './DropdownStateMixin';
-import Button             from './Button';
-import ButtonGroup        from './ButtonGroup';
-import DropdownMenu       from './DropdownMenu';
+var React = require('react');
+var classSet = require('./utils/classSet');
+var BootstrapMixin = require('./BootstrapMixin');
+var DropdownStateMixin = require('./DropdownStateMixin');
+var Button = require('./Button');
+var ButtonGroup = require('./ButtonGroup');
+var DropdownMenu = require('./DropdownMenu');
 
 var SplitButton = React.createClass({
   mixins: [BootstrapMixin, DropdownStateMixin],
@@ -98,4 +98,4 @@ var SplitButton = React.createClass({
   }
 });
 
-export default = SplitButton;
+module.exports = SplitButton;

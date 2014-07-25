@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import classSet       from './react-es6/lib/cx';
-import BootstrapMixin from './BootstrapMixin';
+var React = require('react');
+var classSet = require('./utils/classSet');
+var BootstrapMixin = require('./BootstrapMixin');
 
 var Well = React.createClass({
   mixins: [BootstrapMixin],
@@ -24,4 +24,4 @@ var Well = React.createClass({
   }
 });
 
-export default = Well;
+module.exports = Well;

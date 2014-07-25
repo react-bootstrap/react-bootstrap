@@ -1,9 +1,9 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import classSet       from './react-es6/lib/cx';
-import PropTypes      from './PropTypes';
-import constants      from './constants';
+var React = require('react');
+var classSet = require('./utils/classSet');
+var PropTypes = require('./PropTypes');
+var constants = require('./constants');
 
 
 var Col = React.createClass({
@@ -73,4 +73,4 @@ var Col = React.createClass({
   }
 });
 
-export default = Col;
+module.exports = Col;

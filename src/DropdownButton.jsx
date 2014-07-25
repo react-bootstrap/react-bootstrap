@@ -1,14 +1,15 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import classSet               from './react-es6/lib/cx';
-import BootstrapMixin         from './BootstrapMixin';
-import DropdownStateMixin     from './DropdownStateMixin';
-import Button                 from './Button';
-import ButtonGroup            from './ButtonGroup';
-import DropdownMenu           from './DropdownMenu';
-import utils                  from './utils';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var classSet = require('./utils/classSet');
+var cloneWithProps = require('./utils/cloneWithProps');
+var createChainedFunction = require('./utils/createChainedFunction');
+var BootstrapMixin = require('./BootstrapMixin');
+var DropdownStateMixin = require('./DropdownStateMixin');
+var Button = require('./Button');
+var ButtonGroup = require('./ButtonGroup');
+var DropdownMenu = require('./DropdownMenu');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 
 var DropdownButton = React.createClass({
@@ -90,11 +91,11 @@ var DropdownButton = React.createClass({
     var handleOptionSelect = this.props.onSelect || child.props.onSelect ?
       this.handleOptionSelect : null;
 
-    return utils.cloneWithProps(
+    return cloneWithProps(
       child,
       {
         // Capture onSelect events
-        onSelect: utils.createChainedFunction(child.props.onSelect, handleOptionSelect),
+        onSelect: createChainedFunction(child.props.onSelect, handleOptionSelect),
 
         // Force special props to be transferred
         key: child.props.key,
@@ -118,4 +119,4 @@ var DropdownButton = React.createClass({
   }
 });
 
-export default = DropdownButton;
+module.exports = DropdownButton;

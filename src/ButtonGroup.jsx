@@ -1,9 +1,9 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import classSet       from './react-es6/lib/cx';
-import BootstrapMixin from './BootstrapMixin';
-import Button         from './Button';
+var React = require('react');
+var classSet = require('./utils/classSet');
+var BootstrapMixin = require('./BootstrapMixin');
+var Button = require('./Button');
 
 var ButtonGroup = React.createClass({
   mixins: [BootstrapMixin],
@@ -34,4 +34,4 @@ var ButtonGroup = React.createClass({
   }
 });
 
-export default = ButtonGroup;
+module.exports = ButtonGroup;

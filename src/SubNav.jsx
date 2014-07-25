@@ -1,10 +1,11 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import classSet               from './react-es6/lib/cx';
-import BootstrapMixin         from './BootstrapMixin';
-import utils                  from './utils';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var classSet = require('./utils/classSet');
+var cloneWithProps = require('./utils/cloneWithProps');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
+var createChainedFunction = require('./utils/createChainedFunction');
+var BootstrapMixin = require('./BootstrapMixin');
 
 
 var SubNav = React.createClass({
@@ -112,11 +113,11 @@ var SubNav = React.createClass({
   },
 
   renderNavItem: function (child) {
-    return utils.cloneWithProps(
+    return cloneWithProps(
       child,
       {
         active: this.getChildActiveProp(child),
-        onSelect: utils.createChainedFunction(child.props.onSelect, this.props.onSelect),
+        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
         ref: child.props.ref,
         key: child.props.key
       }
@@ -124,4 +125,4 @@ var SubNav = React.createClass({
   }
 });
 
-export default = SubNav;
+module.exports = SubNav;

@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import PropTypes      from './PropTypes';
+var React = require('react');
+var PropTypes = require('./PropTypes');
 
 
 var Grid = React.createClass({
@@ -27,4 +27,4 @@ var Grid = React.createClass({
   }
 });
 
-export default = Grid;
+module.exports = Grid;

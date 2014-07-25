@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import AffixMixin     from './AffixMixin';
-import domUtils       from './domUtils';
+var React = require('react');
+var AffixMixin = require('./AffixMixin');
+var domUtils = require('./utils/domUtils');
 
 var Affix = React.createClass({
   statics: {
@@ -12,12 +12,13 @@ var Affix = React.createClass({
   mixins: [AffixMixin],
 
   render: function () {
+    var holderStyle = {top: this.state.affixPositionTop};
     return this.transferPropsTo(
-      <div className={this.state.affixClass} style={{top: this.state.affixPositionTop}}>
+      <div className={this.state.affixClass} style={holderStyle}>
         {this.props.children}
       </div>
     );
   }
 });
 
-export default = Affix;
+module.exports = Affix;

@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import BootstrapMixin         from './BootstrapMixin';
-import utils                  from './utils';
-import Nav                    from './Nav';
-import NavItem                from './NavItem';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var BootstrapMixin = require('./BootstrapMixin');
+var cloneWithProps = require('./utils/cloneWithProps');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
+var Nav = require('./Nav');
+var NavItem = require('./NavItem');
 
 function getDefaultActiveKeyFromChildren(children) {
   var defaultActiveKey;
@@ -93,7 +93,7 @@ var TabbedArea = React.createClass({
   renderPane: function (child) {
     var activeKey = this.getActiveKey();
 
-    return utils.cloneWithProps(
+    return cloneWithProps(
         child,
         {
           active: (child.props.key === activeKey &&
@@ -137,4 +137,4 @@ var TabbedArea = React.createClass({
   }
 });
 
-export default = TabbedArea;
+module.exports = TabbedArea;

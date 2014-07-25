@@ -1,9 +1,9 @@
 /** @jsx React.DOM */
 
-import React from './react-es6';
-import cloneWithProps from './react-es6/lib/cloneWithProps';
-import OverlayMixin from './OverlayMixin';
-import utils from './utils';
+var React = require('react');
+var OverlayMixin = require('./OverlayMixin');
+var cloneWithProps = require('./utils/cloneWithProps');
+var createChainedFunction = require('./utils/createChainedFunction');
 
 var ModalTrigger = React.createClass({
   mixins: [OverlayMixin],
@@ -54,10 +54,10 @@ var ModalTrigger = React.createClass({
     return cloneWithProps(
       child,
       {
-        onClick: utils.createChainedFunction(child.props.onClick, this.toggle)
+        onClick: createChainedFunction(child.props.onClick, this.toggle)
       }
     );
   }
 });
 
-export default = ModalTrigger;
+module.exports = ModalTrigger;

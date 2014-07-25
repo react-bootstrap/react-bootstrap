@@ -1,9 +1,9 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import classSet       from './react-es6/lib/cx';
-import BootstrapMixin from './BootstrapMixin';
-import constants      from './constants';
+var React = require('react');
+var classSet = require('./utils/classSet');
+var BootstrapMixin = require('./BootstrapMixin');
+var constants = require('./constants');
 
 var Glyphicon = React.createClass({
   mixins: [BootstrapMixin],
@@ -31,4 +31,4 @@ var Glyphicon = React.createClass({
   }
 });
 
-export default = Glyphicon;
+module.exports = Glyphicon;

@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import classSet       from './react-es6/lib/cx';
+var React = require('react');
+var classSet = require('./utils/classSet');
 
 var PageItem = React.createClass({
 
@@ -50,4 +50,4 @@ var PageItem = React.createClass({
   }
 });
 
-export default = PageItem;
+module.exports = PageItem;

@@ -1,4 +1,4 @@
-export default = {
+module.exports = {
   CLASSES: {
     'alert': 'alert',
     'button': 'btn',

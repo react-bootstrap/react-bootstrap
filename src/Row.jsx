@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-import React          from './react-es6';
-import PropTypes      from './PropTypes' ;
+var React = require('react');
+var PropTypes = require('./PropTypes');
 
 
 var Row = React.createClass({
@@ -26,4 +26,4 @@ var Row = React.createClass({
   }
 });
 
-export default = Row;
+module.exports = Row;

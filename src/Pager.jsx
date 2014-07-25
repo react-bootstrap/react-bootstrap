@@ -1,8 +1,9 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import utils                  from './utils';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var cloneWithProps = require('./utils/cloneWithProps');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
+var createChainedFunction = require('./utils/createChainedFunction');
 
 var Pager = React.createClass({
 
@@ -20,10 +21,10 @@ var Pager = React.createClass({
   },
 
   renderPageItem: function (child) {
-    return utils.cloneWithProps(
+    return cloneWithProps(
       child,
       {
-        onSelect: utils.createChainedFunction(child.props.onSelect, this.props.onSelect),
+        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
         ref: child.props.ref,
         key: child.props.key
       }
@@ -31,4 +32,4 @@ var Pager = React.createClass({
   }
 });
 
-export default = Pager;
+module.exports = Pager;

@@ -1,10 +1,10 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import classSet               from './react-es6/lib/cx';
-import BootstrapMixin         from './BootstrapMixin';
-import utils                  from './utils';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var classSet = require('./utils/classSet');
+var cloneWithProps = require('./utils/cloneWithProps');
+var BootstrapMixin = require('./BootstrapMixin');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 var Carousel = React.createClass({
   mixins: [BootstrapMixin],
@@ -244,7 +244,7 @@ var Carousel = React.createClass({
     var isPreviousActive = this.state.previousActiveIndex != null &&
             this.state.previousActiveIndex === index && this.props.slide;
 
-    return utils.cloneWithProps(
+    return cloneWithProps(
         child,
         {
           active: isActive,
@@ -287,4 +287,4 @@ var Carousel = React.createClass({
   }
 });
 
-export default = Carousel;
+module.exports = Carousel;

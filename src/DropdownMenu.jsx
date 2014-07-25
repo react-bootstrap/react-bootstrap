@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import classSet               from './react-es6/lib/cx';
-import utils                  from './utils';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var classSet = require('./utils/classSet');
+var cloneWithProps = require('./utils/cloneWithProps');
+var createChainedFunction = require('./utils/createChainedFunction');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 var DropdownMenu = React.createClass({
   propTypes: {
@@ -27,11 +28,11 @@ var DropdownMenu = React.createClass({
   },
 
   renderMenuItem: function (child) {
-    return utils.cloneWithProps(
+    return cloneWithProps(
       child,
       {
         // Capture onSelect events
-        onSelect: utils.createChainedFunction(child.props.onSelect, this.props.onSelect),
+        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
 
         // Force special props to be transferred
         key: child.props.key,
@@ -41,4 +42,4 @@ var DropdownMenu = React.createClass({
   }
 });
 
-export default = DropdownMenu;
+module.exports = DropdownMenu;

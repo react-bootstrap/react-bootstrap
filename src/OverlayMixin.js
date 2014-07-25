@@ -1,6 +1,6 @@
-import React from './react-es6';
+var React = require('react');
 
-export default = {
+module.exports = {
   propTypes: {
     container: React.PropTypes.object.isRequired
   },

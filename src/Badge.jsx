@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 var Badge = React.createClass({
   render: function () {
@@ -13,4 +13,4 @@ var Badge = React.createClass({
   }
 });
 
-export default = Badge;
+module.exports = Badge;

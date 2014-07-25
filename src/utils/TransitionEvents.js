@@ -1,25 +1,25 @@
 /**
+ * React TransitionEvents
+ *
  * Copyright 2013-2014 Facebook, Inc.
+ * @licence https://github.com/facebook/react/blob/0.11-stable/LICENSE
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This file contains a modified version of:
+ *  https://github.com/facebook/react/blob/0.11-stable/src/addons/transitions/ReactTransitionEvents.js
  *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @providesModule ReactTransitionEvents
  */
 
-"use strict";
+var canUseDOM = !!(
+  typeof window !== 'undefined' &&
+    window.document &&
+    window.document.createElement
+  );
 
-import ExecutionEnvironment from "./ExecutionEnvironment";
-
+/**
+ * EVENT_NAME_MAP is used to determine which event fired when a
+ * transition/animation ends, based on the style property used to
+ * define that event.
+ */
 var EVENT_NAME_MAP = {
   transitionend: {
     'transition': 'transitionend',
@@ -43,6 +43,20 @@ var endEvents = [];
 function detectEvents() {
   var testEl = document.createElement('div');
   var style = testEl.style;
+
+  // On some platforms, in particular some releases of Android 4.x,
+  // the un-prefixed "animation" and "transition" properties are defined on the
+  // style object but the events that fire will still be prefixed, so we need
+  // to check if the un-prefixed events are useable, and if not remove them
+  // from the map
+  if (!('AnimationEvent' in window)) {
+    delete EVENT_NAME_MAP.animationend.animation;
+  }
+
+  if (!('TransitionEvent' in window)) {
+    delete EVENT_NAME_MAP.transitionend.transition;
+  }
+
   for (var baseEventName in EVENT_NAME_MAP) {
     var baseEvents = EVENT_NAME_MAP[baseEventName];
     for (var styleName in baseEvents) {
@@ -54,7 +68,7 @@ function detectEvents() {
   }
 }
 
-if (ExecutionEnvironment.canUseDOM) {
+if (canUseDOM) {
   detectEvents();
 }
 
@@ -94,4 +108,4 @@ var ReactTransitionEvents = {
   }
 };
 
-export default = ReactTransitionEvents;
+module.exports = ReactTransitionEvents;

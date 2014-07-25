@@ -1,12 +1,13 @@
 /** @jsx React.DOM */
 
-import React                  from './react-es6';
-import classSet               from './react-es6/lib/cx';
-import BootstrapMixin         from './BootstrapMixin';
-import CollapsableMixin       from './CollapsableMixin';
-import utils                  from './utils';
-import domUtils               from './domUtils';
-import ValidComponentChildren from './ValidComponentChildren';
+var React = require('react');
+var BootstrapMixin = require('./BootstrapMixin');
+var CollapsableMixin = require('./CollapsableMixin');
+var classSet = require('./utils/classSet');
+var domUtils = require('./utils/domUtils');
+var cloneWithProps = require('./utils/cloneWithProps');
+var ValidComponentChildren = require('./utils/ValidComponentChildren');
+var createChainedFunction = require('./utils/createChainedFunction');
 
 
 var Nav = React.createClass({
@@ -90,13 +91,13 @@ var Nav = React.createClass({
   },
 
   renderNavItem: function (child) {
-    return utils.cloneWithProps(
+    return cloneWithProps(
       child,
       {
         active: this.getChildActiveProp(child),
         activeKey: this.props.activeKey,
         activeHref: this.props.activeHref,
-        onSelect: utils.createChainedFunction(child.props.onSelect, this.props.onSelect),
+        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
         ref: child.props.ref,
         key: child.props.key,
         navItem: true
@@ -105,4 +106,4 @@ var Nav = React.createClass({
   }
 });
 
-export default = Nav;
+module.exports = Nav;

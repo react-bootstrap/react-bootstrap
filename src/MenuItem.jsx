@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-import React    from './react-es6';
-import classSet from './react-es6/lib/cx';
+var React = require('react');
+var classSet = require('./utils/classSet');
 
 var MenuItem = React.createClass({
   propTypes: {
@@ -54,4 +54,4 @@ var MenuItem = React.createClass({
   }
 });
 
-export default = MenuItem;
+module.exports = MenuItem;

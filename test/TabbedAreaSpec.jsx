@@ -6,7 +6,7 @@ var ReactTestUtils         = require('react/lib/ReactTestUtils');
 var TabbedArea             = require('../cjs/TabbedArea');
 var TabPane                = require('../cjs/TabPane');
 var utils                  = require('./utils');
-var ValidComponentChildren = require('../cjs/ValidComponentChildren');
+var ValidComponentChildren = require('../cjs/utils/ValidComponentChildren');
 
 describe('TabbedArea', function () {
   it('Should show the correct tab', function () {

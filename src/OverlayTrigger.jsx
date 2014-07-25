@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
 
-import React from './react-es6';
-import cloneWithProps from './react-es6/lib/cloneWithProps';
-import merge from './react-es6/lib/merge';
-import OverlayMixin from './OverlayMixin';
-import domUtils from './domUtils';
-import utils from './utils';
+var React = require('react');
+var OverlayMixin = require('./OverlayMixin');
+var domUtils = require('./utils/domUtils');
+var cloneWithProps = require('./utils/cloneWithProps');
+var createChainedFunction = require('./utils/createChainedFunction');
+var merge = require('./utils/merge');
 
 /**
  * Check if value one is inside or equal to the of value
@@ -92,17 +92,17 @@ var OverlayTrigger = React.createClass({
     var props = {};
 
     if (isOneOf('click', this.props.trigger)) {
-      props.onClick = utils.createChainedFunction(this.toggle, this.props.onClick);
+      props.onClick = createChainedFunction(this.toggle, this.props.onClick);
     }
 
     if (isOneOf('hover', this.props.trigger)) {
-      props.onMouseOver = utils.createChainedFunction(this.handleDelayedShow, this.props.onMouseOver);
-      props.onMouseOut = utils.createChainedFunction(this.handleDelayedHide, this.props.onMouseOut);
+      props.onMouseOver = createChainedFunction(this.handleDelayedShow, this.props.onMouseOver);
+      props.onMouseOut = createChainedFunction(this.handleDelayedHide, this.props.onMouseOut);
     }
 
     if (isOneOf('focus', this.props.trigger)) {
-      props.onFocus = utils.createChainedFunction(this.handleDelayedShow, this.props.onFocus);
-      props.onBlur = utils.createChainedFunction(this.handleDelayedHide, this.props.onBlur);
+      props.onFocus = createChainedFunction(this.handleDelayedShow, this.props.onFocus);
+      props.onBlur = createChainedFunction(this.handleDelayedHide, this.props.onBlur);
     }
 
     return cloneWithProps(
@@ -217,4 +217,4 @@ var OverlayTrigger = React.createClass({
   }
 });
 
-export default = OverlayTrigger;
+module.exports = OverlayTrigger;

@@ -1,8 +1,8 @@
 /* global window, document */
 
-import React         from './react-es6';
-import domUtils      from './domUtils';
-import EventListener from './react-es6/lib/EventListener';
+var React = require('react');
+var domUtils = require('./utils/domUtils');
+var EventListener = require('./utils/EventListener');
 
 var AffixMixin = {
   propTypes: {
@@ -128,4 +128,4 @@ var AffixMixin = {
   }
 };
 
-export default = AffixMixin;
+module.exports = AffixMixin;
