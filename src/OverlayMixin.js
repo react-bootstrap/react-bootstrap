@@ -7,7 +7,12 @@ module.exports = {
 
   getDefaultProps: function () {
     return {
-      container: typeof document !== 'undefined' ? document.body : null
+      container: typeof document !== 'undefined' ? document.body : {
+        // If we are in an environment that doesnt have `document` defined it should be
+        // safe to assume that `componentDidMount` will not run and this will be needed,
+        // just provide enough fake API to pass the propType validation.
+        getDOMNode: function noop() {}
+      }
     };
   },
 
@@ -48,7 +53,7 @@ module.exports = {
     this._overlayInstance = null;
   },
 
-  getOverlayDOMNode: function() {
+  getOverlayDOMNode: function () {
     if (!this.isMounted()) {
       throw new Error('getOverlayDOMNode(): A component must be mounted to have a DOM node.');
     }
@@ -56,8 +61,8 @@ module.exports = {
     return this._overlayInstance.getDOMNode();
   },
 
-  getContainerDOMNode: function() {
-    return React.isValidComponent(this.props.container) ?
+  getContainerDOMNode: function () {
+    return this.props.container.getDOMNode ?
       this.props.container.getDOMNode() : this.props.container;
   }
 };
