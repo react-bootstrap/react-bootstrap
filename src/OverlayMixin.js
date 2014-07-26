@@ -1,8 +1,9 @@
 var React = require('react');
+var CustomPropTypes = require('./utils/CustomPropTypes');
 
 module.exports = {
   propTypes: {
-    container: React.PropTypes.object.isRequired
+    container: CustomPropTypes.mountable
   },
 
   getDefaultProps: function () {

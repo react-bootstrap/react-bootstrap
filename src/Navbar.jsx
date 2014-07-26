@@ -2,7 +2,7 @@
 
 var React = require('react');
 var BootstrapMixin = require('./BootstrapMixin');
-var PropTypes = require('./PropTypes');
+var CustomPropTypes = require('./utils/CustomPropTypes');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
@@ -20,7 +20,7 @@ var Navbar = React.createClass({
     inverse: React.PropTypes.bool,
     fluid: React.PropTypes.bool,
     role: React.PropTypes.string,
-    componentClass: PropTypes.componentClass,
+    componentClass: CustomPropTypes.componentClass,
     brand: React.PropTypes.renderable,
     toggleButton: React.PropTypes.renderable,
     onToggle: React.PropTypes.func,

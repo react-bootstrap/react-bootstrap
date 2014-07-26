@@ -2,7 +2,7 @@
 
 var React = require('react');
 var classSet = require('./utils/classSet');
-var PropTypes = require('./PropTypes');
+var CustomPropTypes = require('./utils/CustomPropTypes');
 var constants = require('./constants');
 
 
@@ -24,7 +24,7 @@ var Col = React.createClass({
     smPull: React.PropTypes.number,
     mdPull: React.PropTypes.number,
     lgPull: React.PropTypes.number,
-    componentClass: PropTypes.componentClass
+    componentClass: CustomPropTypes.componentClass
   },
 
   getDefaultProps: function () {
