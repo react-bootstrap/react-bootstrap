@@ -9,12 +9,6 @@ var Badge = React.createClass({
     pullRight: React.PropTypes.bool,
   },
 
-  getDefaultProps: function () {
-    return {
-      pullRight: false
-    };
-  },
-
   render: function () {
     var classes = {
       'pull-right': this.props.pullRight,

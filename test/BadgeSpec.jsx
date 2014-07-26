@@ -18,7 +18,7 @@ describe('Badge', function () {
 
   it('Should have a badge class pulled right', function () {
     var instance = ReactTestUtils.renderIntoDocument(Badge({pullRight: true}, 'Content'));
-    assert.ok(instance.getDOMNode().className.match(/\bpull-right badge\b/));
+    assert.ok(instance.getDOMNode().className.match(/\bpull-right\b/));
   });
 
   it('Should not have a badge class when empty', function () {
