@@ -381,6 +381,30 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/GridBasic.js', 'utf8')} exampleClassName="bs-example-tabs" />
                 </div>
 
+                {/* ListGroup */}
+                <div className="bs-docs-section">
+                  <h1 id="listgroup" className="page-header">List group<small> ListGroup, ListGroupItem</small></h1>
+                  <p>Quick previous and next links.</p>
+
+                  <h3>Default</h3>
+                  <p>Centers by default.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ListGroupDefault.js', 'utf8')} />
+
+                  <h3>Linked</h3>
+                  <p>Set the <code>href</code> or <code>onClick</code> prop on <code>ListGroupItem</code>, to create a linked or clickable element.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ListGroupLinked.js', 'utf8')} />
+
+                  <h3>Styling</h3>
+                  <p>Set the <code>active</code> or <code>disabled</code> prop to <code>true</code> to mark or disable the item.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ListGroupActive.js', 'utf8')} />
+                  <p>Set the <code>bsStyle</code> prop to style the item</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ListGroupStyle.js', 'utf8')} />
+
+                  <h3>With header</h3>
+                  <p>Set the <code>header</code> prop to create a structured item, with a heading and a body area.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ListGroupHeader.js', 'utf8')} />
+                </div>
+
                 {/* Labels */}
                 <div className="bs-docs-section">
                   <h1 id="labels" className="page-header">Labels</h1>
@@ -507,14 +531,15 @@ var ComponentsPage = React.createClass({
                     <NavItem href="#alerts" key={13}>Alerts</NavItem>
                     <NavItem href="#carousels" key={14}>Carousels</NavItem>
                     <NavItem href="#grids" key={15}>Grids</NavItem>
-                    <NavItem href="#labels" key={16}>Labels</NavItem>
-                    <NavItem href="#badges" key={17}>Badges</NavItem>
-                    <NavItem href="#jumbotron" key={18}>Jumbotron</NavItem>
-                    <NavItem href="#page-header" key={19}>Page Header</NavItem>
-                    <NavItem href="#wells" key={20}>Wells</NavItem>
-                    <NavItem href="#glyphicons" key={21}>Glyphicons</NavItem>
-                    <NavItem href="#tables" key={22}>Tables</NavItem>
-                    <NavItem href="#input" key={23}>Input</NavItem>
+                    <NavItem href="#listgroup" key={16}>List group</NavItem>
+                    <NavItem href="#labels" key={17}>Labels</NavItem>
+                    <NavItem href="#badges" key={18}>Badges</NavItem>
+                    <NavItem href="#jumbotron" key={19}>Jumbotron</NavItem>
+                    <NavItem href="#page-header" key={20}>Page Header</NavItem>
+                    <NavItem href="#wells" key={21}>Wells</NavItem>
+                    <NavItem href="#glyphicons" key={22}>Glyphicons</NavItem>
+                    <NavItem href="#tables" key={23}>Tables</NavItem>
+                    <NavItem href="#input" key={24}>Input</NavItem>
                   </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top
