@@ -73,7 +73,7 @@ describe('DropdownButton', function () {
     assert.notOk(instance.getDOMNode().className.match(/\bopen\b/));
   });
 
-  it('Should open when clicked', function (done) {
+  it('Should open when clicked', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
         <MenuItem key="1">MenuItem 1 content</MenuItem>
@@ -81,12 +81,8 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    instance.componentDidUpdate = function () {
-      assert.ok(instance.getDOMNode().className.match(/\bopen\b/));
-      done();
-    };
-
     ReactTestUtils.SimulateNative.click(instance.refs.dropdownButton.getDOMNode());
+    assert.ok(instance.getDOMNode().className.match(/\bopen\b/));
   });
 
   it('should call onSelect with key when MenuItem is clicked', function (done) {
@@ -144,7 +140,7 @@ describe('DropdownButton', function () {
   });
 
   describe('when open', function () {
-    beforeEach(function (done) {
+    beforeEach(function () {
       instance = ReactTestUtils.renderIntoDocument(
         <DropdownButton title="Title">
           <MenuItem key={1}>MenuItem 1 content</MenuItem>
@@ -152,18 +148,15 @@ describe('DropdownButton', function () {
         </DropdownButton>
       );
 
-      instance.setDropdownState(true, done);
+      instance.setDropdownState(true);
     });
 
-    it('should close on click', function (done) {
-      setTimeout(function () {
-        assert.notOk(instance.getDOMNode().className.match(/\bopen\b/));
-        done();
-      }, 50);
-
+    it('should close on click', function () {
       var evt = document.createEvent('HTMLEvents');
       evt.initEvent('click', true, true);
       document.documentElement.dispatchEvent(evt);
+
+      assert.notOk(instance.getDOMNode().className.match(/\bopen\b/));
     });
   });
 
