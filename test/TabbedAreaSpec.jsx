@@ -5,7 +5,6 @@ var React                  = require('react');
 var ReactTestUtils         = require('react/lib/ReactTestUtils');
 var TabbedArea             = require('../cjs/TabbedArea');
 var TabPane                = require('../cjs/TabPane');
-var utils                  = require('./utils');
 var ValidComponentChildren = require('../cjs/utils/ValidComponentChildren');
 
 describe('TabbedArea', function () {
@@ -128,7 +127,7 @@ describe('TabbedArea', function () {
     assert.equal(instance.refs.tabs.props.activeKey, 0);
   });
 
-  it('Should show the correct tab when selected', function (done) {
+  it('Should show the correct tab when selected', function () {
     var tab1 = <span className="tab1">Tab 1</span>;
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea defaultActiveKey={2} animation={false}>
@@ -137,17 +136,13 @@ describe('TabbedArea', function () {
       </TabbedArea>
     );
 
-    utils.nextUpdate(instance, function () {
-      assert.equal(instance.refs.pane1.props.active, true);
-      assert.equal(instance.refs.pane2.props.active, false);
-
-      assert.equal(instance.refs.tabs.props.activeKey, 1);
-      done();
-    });
-
     ReactTestUtils.Simulate.click(
       ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab1')
     );
+
+    assert.equal(instance.refs.pane1.props.active, true);
+    assert.equal(instance.refs.pane2.props.active, false);
+    assert.equal(instance.refs.tabs.props.activeKey, 1);
   });
 
   it('Should pass default bsStyle (of "tabs") to Nav', function () {
