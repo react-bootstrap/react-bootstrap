@@ -1,13 +1,13 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var PropTypes = require('./PropTypes');
+var CustomPropTypes = require('./utils/CustomPropTypes');
 
 
 var Grid = React.createClass({
   propTypes: {
     fluid: React.PropTypes.bool,
-    componentClass: PropTypes.componentClass
+    componentClass: CustomPropTypes.componentClass
   },
 
   getDefaultProps: function () {

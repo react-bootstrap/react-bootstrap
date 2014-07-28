@@ -2,7 +2,6 @@
 
 var React = require('react');
 var classSet = require('./utils/classSet');
-var PropTypes = require('./PropTypes');
 
 var Table = React.createClass({
   propTypes: {
