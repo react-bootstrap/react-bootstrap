@@ -40,6 +40,16 @@ describe('Input', function () {
     assert.equal(instance.getValue(), 'v');
   });
 
+  it('renders a submit button element when type=submit', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Input type="submit" bsStyle="danger" />
+    );
+
+    node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input').getDOMNode();
+    assert.equal(node.getAttribute('type'), 'submit');
+    assert.equal(node.getAttribute('class'), 'btn btn-danger');
+  });
+
   it('renders a p element when type=static', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <Input type="static" value="v" />

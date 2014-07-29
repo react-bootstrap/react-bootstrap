@@ -12,7 +12,8 @@ var Button = React.createClass({
     disabled: React.PropTypes.bool,
     block:    React.PropTypes.bool,
     navItem:    React.PropTypes.bool,
-    navDropdown: React.PropTypes.bool
+    navDropdown: React.PropTypes.bool,
+    componentClass: React.PropTypes.component
   },
 
   getDefaultProps: function () {
@@ -43,23 +44,26 @@ var Button = React.createClass({
   renderAnchor: function (classes) {
     var href = this.props.href || '#';
     classes['disabled'] = this.props.disabled;
+    var compenent = this.props.componentClass || React.DOM.a;
 
     return this.transferPropsTo(
-      <a
+      <compenent
         href={href}
         className={classSet(classes)}
         role="button">
         {this.props.children}
-      </a>
+      </compenent>
     );
   },
 
   renderButton: function (classes) {
+    var compenent = this.props.componentClass || React.DOM.button;
+
     return this.transferPropsTo(
-      <button
+      <compenent
         className={classSet(classes)}>
         {this.props.children}
-      </button>
+      </compenent>
     );
   },
 

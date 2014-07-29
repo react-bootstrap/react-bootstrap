@@ -2,6 +2,7 @@
 
 var React = require('react');
 var classSet = require('./utils/classSet');
+var Button = require('./Button');
 
 var Input = React.createClass({
   propTypes: {
@@ -10,7 +11,15 @@ var Input = React.createClass({
     help: React.PropTypes.renderable,
     addonBefore: React.PropTypes.renderable,
     addonAfter: React.PropTypes.renderable,
-    bsStyle: React.PropTypes.oneOf(['success', 'warning', 'error']),
+    bsStyle: function(props) {
+      if (props.type === 'submit') {
+        // Return early if `type=submit` as the `Button` component
+        // it transfers these props to has its own propType checks.
+        return;
+      }
+
+      return React.PropTypes.oneOf(['success', 'warning', 'error']).apply(null, arguments);
+    },
     hasFeedback: React.PropTypes.bool,
     groupClassName: React.PropTypes.string,
     wrapperClassName: React.PropTypes.string,
@@ -64,6 +73,11 @@ var Input = React.createClass({
           <p className="form-control-static" ref="input"  key="input">
             {this.props.value}
           </p>
+        );
+        break;
+      case 'submit':
+        input = this.transferPropsTo(
+          <Button componentClass={React.DOM.input} />
         );
         break;
       default:
