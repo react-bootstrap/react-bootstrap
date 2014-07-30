@@ -22,6 +22,8 @@ module.exports = {
   Interpolate: require('./Interpolate'),
   Jumbotron: require('./Jumbotron'),
   Label: require('./Label'),
+  ListGroup: require('./ListGroup'),
+  ListGroupItem: require('./ListGroupItem'),
   MenuItem: require('./MenuItem'),
   Modal: require('./Modal'),
   Nav: require('./Nav'),
