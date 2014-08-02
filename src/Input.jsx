@@ -9,12 +9,21 @@ var Input = React.createClass({
     label: React.PropTypes.renderable,
     help: React.PropTypes.renderable,
     addonBefore: React.PropTypes.renderable,
+    wrapAddonBefore: React.PropTypes.bool,
     addonAfter: React.PropTypes.renderable,
+    wrapAddonAfter: React.PropTypes.bool,
     bsStyle: React.PropTypes.oneOf(['success', 'warning', 'error']),
     hasFeedback: React.PropTypes.bool,
     groupClassName: React.PropTypes.string,
     wrapperClassName: React.PropTypes.string,
     labelClassName: React.PropTypes.string
+  },
+
+  getDefaultProps: function() {
+    return {
+      wrapAddonAfter: true,
+      wrapAddonBefore: true,
+    };
   },
 
   getInputDOMNode: function () {
@@ -75,17 +84,21 @@ var Input = React.createClass({
   },
 
   renderInputGroup: function (children) {
-    var addonBefore = this.props.addonBefore ? (
-      <span className="input-group-addon" key="addonBefore">
-        {this.props.addonBefore}
-      </span>
-    ) : null;
+    var addonBefore = this.props.addonBefore ?
+      this.props.wrapAddonBefore ? (
+        <span className="input-group-addon" key="addonBefore">
+          {this.props.addonBefore}
+        </span>
+      ) : this.props.addonBefore
+    : null;
 
-    var addonAfter = this.props.addonAfter ? (
-      <span className="input-group-addon" key="addonAfter">
-        {this.props.addonAfter}
-      </span>
-    ) : null;
+    var addonAfter = this.props.addonAfter ?
+      this.props.wrapAddonAfter ? (
+        <span className="input-group-addon" key="addonAfter">
+          {this.props.addonAfter}
+        </span>
+      ) : this.props.addonAfter
+    : null;
 
     return addonBefore || addonAfter ? (
       <div className="input-group" key="input-group">

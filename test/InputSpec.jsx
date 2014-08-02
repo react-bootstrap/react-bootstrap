@@ -90,7 +90,6 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'wrapper'));
   });
 
-
   it('renders input-group', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <Input addonBefore="$" />
@@ -99,6 +98,7 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group'));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-addon'));
   });
+
 
   it('renders help', function () {
     var instance = ReactTestUtils.renderIntoDocument(
@@ -152,5 +152,37 @@ describe('Input', function () {
     );
 
     assert.equal(instance.getChecked(), true);
+  });
+
+  it('renders addonBefore with overriden wrapper', function () {
+    var addonBeforeClass = 'overriden-wrapper';
+
+    var addonBefore = (
+      <div className={addonBeforeClass}>$</div>
+    );
+
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Input addonBefore={addonBefore} wrapAddonBefore={false} />
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group'));
+    assert.throws(function () { ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-addon') });
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, addonBeforeClass));
+  });
+
+  it('renders addonAfter with overriden wrapper', function () {
+    var addonAfterClass = 'overriden-wrapper';
+
+    var addonAfter = (
+      <div className={addonAfterClass}>$</div>
+    );
+
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Input addonBefore={addonAfter} wrapAddonBefore={false} />
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group'));
+    assert.throws(function () { ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-addon') });
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, addonAfterClass));
   });
 });
