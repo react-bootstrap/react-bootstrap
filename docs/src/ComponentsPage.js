@@ -291,16 +291,19 @@ var ComponentsPage = React.createClass({
                   <h1 id="navs" className="page-header">Navs <small>Nav, NavItem</small></h1>
                   <h2 id="navs-examples">Example navs</h2>
 
-                  <p>Navs come in two styles, <code>pills</code> and <code>tabs</code>. You can also disable a tab by adding <code>disabled</code>.
-                  You can also use dropdowns as long as you specify the <code>navItem</code> property</p>
+                  <p>Navs come in two styles, <code>pills</code> and <code>tabs</code>. Disable a tab by adding <code>disabled</code>.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavBasic.js', 'utf8')} />
 
-                  <h3>Nav Stacked</h3>
+                  <h3>Dropdown</h3>
+                  <p>Add dropdowns using the <code>DropdownButton</code> component. Just make sure to set <code>navItem</code> property to true.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavDropdown.js', 'utf8')} />
+
+                  <h3>Stacked</h3>
                   <p>They can also be <code>stacked</code> vertically.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavStacked.js', 'utf8')} />
 
-                  <h3>Nav Justified</h3>
-                  <p>They can be <code>justified</code>.</p>
+                  <h3>Justified</h3>
+                  <p>They can be <code>justified</code> to take the full width of their parent.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavJustified.js', 'utf8')} />
                 </div>
 
