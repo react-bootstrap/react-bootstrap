@@ -29,7 +29,7 @@ var CustomPropTypes = {
    * @returns {Error|undefined}
    */
   mountable: function (props, propName, componentName) {
-    if (typeof props[propName] !== 'object' ||
+    if (!props[propName] || typeof props[propName] !== 'object' ||
       typeof props[propName].getDOMNode !== 'function' && props[propName].nodeType !== 1) {
       return new Error('Invalid `' + propName + '` prop in `' + componentName + '`, expected be ' +
         'a DOM element or an object that has a `getDOMNode` method');

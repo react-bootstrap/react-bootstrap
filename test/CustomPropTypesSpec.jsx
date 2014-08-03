@@ -32,6 +32,7 @@ describe('CustomPropTypes', function () {
     it('Should return error with non mountable values', function() {
       assert.instanceOf(validate(), Error);
       assert.instanceOf(validate({}), Error);
+      assert.instanceOf(validate(null), Error);
     });
     it('Should return undefined with mountable values', function() {
       assert.isUndefined(validate(document.createElement('div')));

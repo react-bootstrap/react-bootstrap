@@ -212,7 +212,7 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalStatic.js', 'utf8')} />
 
                   <h3 id="modals-live">Live demo</h3>
-                  <p>Use <code>&lt;OverlayTrigger /&gt;</code> to create a real modal that's added to the document body when opened.</p>
+                  <p>Use <code>&lt;ModalTrigger /&gt;</code> to create a real modal that's added to the document body when opened.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalTrigger.js', 'utf8')} />
 
                   <h3 id="modals-custom">Custom trigger</h3>
