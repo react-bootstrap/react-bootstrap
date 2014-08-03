@@ -56,7 +56,7 @@ var Page = React.createClass({
                   </div>
 
                   <h3>Browser globals</h3>
-                  <p>The bower repo contains <code>react-bootstrap.js</code> and <code>react-botstrap.min.js</code> with all components exported in the <code>window.ReactBootstrap</code> object.</p>
+                  <p>The bower repo contains <code>react-bootstrap.js</code> and <code>react-bootstrap.min.js</code> with all components exported in the <code>window.ReactBootstrap</code> object.</p>
                   <div className="highlight">
                     <pre><code className="html">{'\
   <script src="http://fb.me/react-0.10.0.js"></script>\n\
