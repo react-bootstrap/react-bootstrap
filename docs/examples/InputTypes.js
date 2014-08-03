@@ -16,6 +16,7 @@ var inputTypeInstance = (
       </Input>
       <Input type="textarea" defaultValue="textarea" />
       <Input type="static" value="static" />
+      <Input type="submit" bsStyle='primary' value="Submit button" />
     </form>
   );
 
