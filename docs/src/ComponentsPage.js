@@ -250,6 +250,7 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PopoverPositionedContained.js', 'utf8')} exampleClassName="bs-example-scroll" />
                 </div>
 
+                {/* Progress Bar */}
                 <div className="bs-docs-section">
                   <h1 id="progress" className="page-header">Progress bars <small>ProgressBar</small></h1>
 
@@ -290,8 +291,17 @@ var ComponentsPage = React.createClass({
                   <h1 id="navs" className="page-header">Navs <small>Nav, NavItem</small></h1>
                   <h2 id="navs-examples">Example navs</h2>
 
-                  <p>Navs come in two styles, pills and tabs.</p>
+                  <p>Navs come in two styles, <code>pills</code> and <code>tabs</code>. You can also disable a tab by adding <code>disabled</code>.
+                  You can also use dropdowns as long as you specify the <code>navItem</code> property</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavBasic.js', 'utf8')} />
+
+                  <h3>Nav Stacked</h3>
+                  <p>They can also be <code>stacked</code> vertically.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavStacked.js', 'utf8')} />
+
+                  <h3>Nav Justified</h3>
+                  <p>They can be <code>justified</code>.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavJustified.js', 'utf8')} />
                 </div>
 
                 {/* Navbar */}
