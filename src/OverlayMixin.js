@@ -8,11 +8,15 @@ module.exports = {
 
   getDefaultProps: function () {
     return {
-      container: typeof document !== 'undefined' ? document.body : {
-        // If we are in an environment that doesnt have `document` defined it should be
-        // safe to assume that `componentDidMount` will not run and this will be needed,
-        // just provide enough fake API to pass the propType validation.
-        getDOMNode: function noop() {}
+      container: {
+        // Provide `getDOMNode` fn mocking a React component API. The `document.body`
+        // reference needs to be contained within this function so that it is not accessed
+        // in environments where it would not be defined, e.g. nodejs. Equally this is needed
+        // before the body is defined where `document.body === null`, this ensures
+        // `document.body` is only accessed after componentDidMount.
+        getDOMNode: function getDOMNode() {
+          return document.body;
+        }
       }
     };
   },
