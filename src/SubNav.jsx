@@ -6,7 +6,7 @@ var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
-
+var CustomPropTypes = require('./utils/CustomPropTypes');
 
 var SubNav = React.createClass({
   mixins: [BootstrapMixin],
@@ -17,7 +17,8 @@ var SubNav = React.createClass({
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
-    text: React.PropTypes.renderable
+    text: React.PropTypes.renderable,
+    componentClass: CustomPropTypes.componentClass
   },
 
   getDefaultProps: function () {
@@ -91,20 +92,23 @@ var SubNav = React.createClass({
   },
 
   render: function () {
+    var component = this.props.componentClass || React.DOM.a;
     var classes = {
       'active': this.isActive(),
       'disabled': this.props.disabled
     };
 
+    anchor = this.transferPropsTo(
+      <component
+        onClick={this.handleClick}
+        ref="anchor">
+        {this.props.text}
+      </component>
+    );
+
     return this.transferPropsTo(
       <li className={classSet(classes)}>
-        <a
-          href={this.props.href}
-          title={this.props.title}
-          onClick={this.handleClick}
-          ref="anchor">
-          {this.props.text}
-        </a>
+        {anchor}
         <ul className="nav">
           {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
         </ul>

@@ -47,4 +47,24 @@ describe('NavItem', function () {
     var instance = ReactTestUtils.renderIntoDocument(<NavItem disabled={true} onSelect={handleSelect}>{content}</NavItem>);
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
   });
+
+  it('Should render the anchor with the provided componentClass', function(done){
+    function handleSelect(key) {
+      assert.equal(key, 3);
+      done();
+    }
+    var content = <span>Item content</span>;
+    var instance = ReactTestUtils.renderIntoDocument(
+      <NavItem
+        key={3}
+        arbitrary='some arbitrary prop'
+        componentClass={React.DOM.div}
+        onSelect={handleSelect}>
+        {content}
+      </NavItem>
+    );
+
+    assert.equal(instance.refs.anchor.props.arbitrary, 'some arbitrary prop');
+    ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
+  });
 });
