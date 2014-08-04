@@ -38,7 +38,7 @@ var NavItem = React.createClass({
       </component>
     );
 
-    return this.transferPropsTo(
+    return (
       <li className={classSet(classes)}>
         {anchor}
       </li>

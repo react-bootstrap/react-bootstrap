@@ -106,7 +106,7 @@ var SubNav = React.createClass({
       </component>
     );
 
-    return this.transferPropsTo(
+    return (
       <li className={classSet(classes)}>
         {anchor}
         <ul className="nav">
