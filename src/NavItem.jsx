@@ -3,6 +3,7 @@
 var React = require('react');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
+var CustomPropTypes = require('./utils/CustomPropTypes');
 
 var NavItem = React.createClass({
   mixins: [BootstrapMixin],
@@ -12,7 +13,8 @@ var NavItem = React.createClass({
     active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    componentClass: CustomPropTypes.componentClass
   },
 
   getDefaultProps: function () {
@@ -22,20 +24,23 @@ var NavItem = React.createClass({
   },
 
   render: function () {
+    var component = this.props.componentClass || React.DOM.a;
     var classes = {
       'active': this.props.active,
       'disabled': this.props.disabled
     };
 
-    return this.transferPropsTo(
+    anchor = this.transferPropsTo(
+      <component
+        onClick={this.handleClick}
+        ref="anchor">
+        {this.props.children}
+      </component>
+    );
+
+    return (
       <li className={classSet(classes)}>
-        <a
-          href={this.props.href}
-          title={this.props.title}
-          onClick={this.handleClick}
-          ref="anchor">
-          {this.props.children}
-        </a>
+        {anchor}
       </li>
     );
   },
