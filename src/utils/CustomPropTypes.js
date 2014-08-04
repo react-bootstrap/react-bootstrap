@@ -1,5 +1,7 @@
 var React = require('react');
 
+var ANONYMOUS = '<<anonymous>>';
+
 var CustomPropTypes = {
   /**
    * Checks whether a prop is a valid React class
@@ -9,12 +11,7 @@ var CustomPropTypes = {
    * @param componentName
    * @returns {Error|undefined}
    */
-  componentClass: function (props, propName, componentName) {
-    if (!React.isValidClass(props[propName])) {
-      return new Error('Invalid `' + propName + '` prop in `' + componentName + '`, expected be ' +
-        'a valid React class');
-    }
-  },
+  componentClass: createComponentClassChecker(),
 
   /**
    * Checks whether a prop provides a DOM element
@@ -28,13 +25,61 @@ var CustomPropTypes = {
    * @param componentName
    * @returns {Error|undefined}
    */
-  mountable: function (props, propName, componentName) {
-    if (!props[propName] || typeof props[propName] !== 'object' ||
-      typeof props[propName].getDOMNode !== 'function' && props[propName].nodeType !== 1) {
-      return new Error('Invalid `' + propName + '` prop in `' + componentName + '`, expected be ' +
-        'a DOM element or an object that has a `getDOMNode` method');
+  mountable: createMountableChecker()
+};
+
+/**
+ * Create chain-able isRequired validator
+ *
+ * Largely copied directly from:
+ *  https://github.com/facebook/react/blob/0.11-stable/src/core/ReactPropTypes.js#L94
+ */
+function createChainableTypeChecker(validate) {
+  function checkType(isRequired, props, propName, componentName) {
+    componentName = componentName || ANONYMOUS;
+    if (props[propName] == null) {
+      if (isRequired) {
+        return new Error(
+          'Required prop `' + propName + '` was not specified in ' +
+            '`' + componentName + '`.'
+        );
+      }
+    } else {
+      return validate(props, propName, componentName, location);
     }
   }
-};
+
+  var chainedCheckType = checkType.bind(null, false);
+  chainedCheckType.isRequired = checkType.bind(null, true);
+
+  return chainedCheckType;
+}
+
+function createComponentClassChecker() {
+  function validate(props, propName, componentName) {
+    if (!React.isValidClass(props[propName])) {
+      return new Error(
+        'Invalid prop `' + propName + '` supplied to ' +
+          '`' + componentName + '`, expected a valid React class.'
+      );
+    }
+  }
+
+  return createChainableTypeChecker(validate);
+}
+
+function createMountableChecker() {
+  function validate(props, propName, componentName) {
+    if (typeof props[propName] !== 'object' ||
+      typeof props[propName].getDOMNode !== 'function' && props[propName].nodeType !== 1) {
+      return new Error(
+        'Invalid prop `' + propName + '` supplied to ' +
+          '`' + componentName + '`, expected a DOM element or an object that has a `getDOMNode` method'
+      );
+    }
+  }
+
+  return createChainableTypeChecker(validate);
+}
 
 module.exports = CustomPropTypes;
