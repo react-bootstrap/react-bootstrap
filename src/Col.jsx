@@ -24,7 +24,7 @@ var Col = React.createClass({
     smPull: React.PropTypes.number,
     mdPull: React.PropTypes.number,
     lgPull: React.PropTypes.number,
-    componentClass: CustomPropTypes.componentClass
+    componentClass: CustomPropTypes.componentClass.isRequired
   },
 
   getDefaultProps: function () {
