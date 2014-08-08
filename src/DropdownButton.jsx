@@ -88,14 +88,14 @@ var DropdownButton = React.createClass({
     // Only handle the option selection if an onSelect prop has been set on the
     // component or it's child, this allows a user not to pass an onSelect
     // handler and have the browser preform the default action.
-    var handleOptionSelect = this.props.onSelect || child.props.onSelect ?
-      this.handleOptionSelect : null;
+    var preventDefault = !!(this.props.onSelect || child.props.onSelect);
 
     return cloneWithProps(
       child,
       {
         // Capture onSelect events
-        onSelect: createChainedFunction(child.props.onSelect, handleOptionSelect),
+        onSelect: createChainedFunction(child.props.onSelect, this.handleOptionSelect),
+        preventDefault: preventDefault,
 
         // Force special props to be transferred
         key: child.props.key,
