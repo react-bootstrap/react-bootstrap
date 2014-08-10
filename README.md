@@ -17,6 +17,10 @@ A [docs site](http://react-bootstrap.github.io) with live editable examples is a
 
 and many [contributors](https://github.com/react-bootstrap/react-bootstrap/graphs/contributors)
 
+## Related modules
+
+- [react-router-bootstrap](https://github.com/mtscout6/react-router-bootstrap) - Integration with [react-router](https://github.com/rackt/react-router).
+
 ## Contributions
 
 Yes please!
