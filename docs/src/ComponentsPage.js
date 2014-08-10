@@ -250,6 +250,7 @@ var ComponentsPage = React.createClass({
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PopoverPositionedContained.js', 'utf8')} exampleClassName="bs-example-scroll" />
                 </div>
 
+                {/* Progress Bar */}
                 <div className="bs-docs-section">
                   <h1 id="progress" className="page-header">Progress bars <small>ProgressBar</small></h1>
 
@@ -290,8 +291,20 @@ var ComponentsPage = React.createClass({
                   <h1 id="navs" className="page-header">Navs <small>Nav, NavItem</small></h1>
                   <h2 id="navs-examples">Example navs</h2>
 
-                  <p>Navs come in two styles, pills and tabs.</p>
+                  <p>Navs come in two styles, <code>pills</code> and <code>tabs</code>. Disable a tab by adding <code>disabled</code>.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavBasic.js', 'utf8')} />
+
+                  <h3>Dropdown</h3>
+                  <p>Add dropdowns using the <code>DropdownButton</code> component. Just make sure to set <code>navItem</code> property to true.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavDropdown.js', 'utf8')} />
+
+                  <h3>Stacked</h3>
+                  <p>They can also be <code>stacked</code> vertically.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavStacked.js', 'utf8')} />
+
+                  <h3>Justified</h3>
+                  <p>They can be <code>justified</code> to take the full width of their parent.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavJustified.js', 'utf8')} />
                 </div>
 
                 {/* Navbar */}
@@ -487,7 +500,8 @@ var ComponentsPage = React.createClass({
                   <p>Supports <code>select</code>, <code>textarea</code>, <code>static</code> as well as standard HTML input types.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/InputTypes.js', 'utf8')} />
                   <h2 id="input-addons">Add-ons</h2>
-                  <p>Use <code>addonBefore</code> and <code>addonAfter</code>. Does not support buttons.</p>
+                  <p>Use <code>addonBefore</code> and <code>addonAfter</code>. Does not support buttons directly, but they support anything that is renderable.
+                  Exotic configurations may require some css on your side.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/InputAddons.js', 'utf8')} />
                   <h2 id="input-validation">Validation</h2>
                   <p>Set <code>bsStyle</code> to one of <code>success</code>, <code>warning</code> or <code>error</code>.
