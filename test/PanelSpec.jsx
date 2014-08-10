@@ -14,7 +14,7 @@ describe('Panel', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-body'));
   });
 
-  it('Should have boostrap style class', function () {
+  it('Should have bootstrap style class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
           <Panel bsStyle="default">Panel content</Panel>
         );

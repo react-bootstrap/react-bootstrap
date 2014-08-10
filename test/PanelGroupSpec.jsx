@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 /*global describe, it, assert */
 
+var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var PanelGroup     = require('../cjs/PanelGroup');
 var Panel          = require('../cjs/Panel');
@@ -28,5 +29,25 @@ describe('PanelGroup', function () {
     var panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
 
     assert.equal(panel.props.bsStyle, 'primary');
+  });
+
+  it('Should not collapse panel by bubbling onSelect callback', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <PanelGroup accordion>
+        <Panel>
+          <input type="text" className="changeme" />
+        </Panel>
+      </PanelGroup>
+    );
+
+    var panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
+
+    assert.notOk(panel.state.collapsing);
+
+    ReactTestUtils.Simulate.select(
+      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'changeme').getDOMNode()
+    );
+
+    assert.notOk(panel.state.collapsing);
   });
 });
