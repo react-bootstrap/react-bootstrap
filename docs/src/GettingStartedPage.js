@@ -10,22 +10,26 @@ var PageHeader = require('./PageHeader');
 var PageFooter = require('./PageFooter');
 var ReactPlayground = require('./ReactPlayground');
 
+var TabbedArea = require('../../cjs/TabbedArea');
+var TabPane = require('../../cjs/TabPane');
+
 var Page = React.createClass({
   render: function () {
+    var preStyles = {"overflow": true};
     return (
         <div>
           <NavMain activePage="getting-started" />
 
           <PageHeader
             title="Getting started"
-            subTitle="An overview of React-Bootstrap and how to install and use." />
+            subTitle="React-Bootstrap installation and usage."/>
 
           <div className="container bs-docs-container">
             <div className="row">
               <div className="col-md-9" role="main">
                 <div className="bs-docs-section">
                   <h2 id="setup" className="page-header">Setup</h2>
-                  <p className="lead">You can import the lib with as AMD modules, CommonJS modules as a global JS script.</p>
+                  <p>You can import the lib with as AMD modules, CommonJS modules as a global JS script.</p>
 
                   <p>First add the bootstrap CSS to your project then:</p>
 

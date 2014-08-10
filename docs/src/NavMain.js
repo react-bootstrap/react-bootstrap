@@ -10,6 +10,10 @@ var Nav = require('../../cjs/Nav');
 var InternalLink = Router.Link;
 
 var NAV_LINKS = {
+  'introduction': {
+    link: '/introduction.html',
+    title: 'Introduction'
+  },
   'getting-started': {
     link: '/getting-started.html',
     title: 'Getting started'

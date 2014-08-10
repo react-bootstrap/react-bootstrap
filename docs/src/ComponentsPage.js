@@ -54,8 +54,22 @@ var ComponentsPage = React.createClass({
             subTitle="" />
 
           <div className="container bs-docs-container">
+
             <div className="row">
               <div className="col-md-9" role="main">
+              <div className="lead">
+                This page lists the React-Bootstrap components. For each component, we provide:
+                <ul>
+                    <li>Usage instructions;</li>
+                    <li>An example code snippet;</li>
+                    <li>The rendered result of the example snippet.</li>
+                </ul>
+
+                <p>Click "show code" below the rendered component to reveal the snippet.</p>
+                <p>All snippets are editable, and changes will be reflected in the rendered component.
+                </p>
+
+              </div>
 
                 {/* Buttons */}
                 <div className="bs-docs-section">
