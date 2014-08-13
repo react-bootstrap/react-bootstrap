@@ -36,7 +36,7 @@ var Tooltip = React.createClass({
     arrowStyle['left'] = this.props.arrowOffsetLeft;
     arrowStyle['top'] = this.props.arrowOffsetTop;
 
-    return (
+    return this.transferPropsTo(
         <div className={classSet(classes)} style={style}>
           <div className="tooltip-arrow" style={arrowStyle} />
           <div className="tooltip-inner">
