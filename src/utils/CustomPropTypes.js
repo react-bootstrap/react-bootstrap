@@ -45,7 +45,7 @@ function createChainableTypeChecker(validate) {
         );
       }
     } else {
-      return validate(props, propName, componentName, location);
+      return validate(props, propName, componentName);
     }
   }
 
