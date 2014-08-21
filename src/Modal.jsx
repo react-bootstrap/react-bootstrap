@@ -1,4 +1,5 @@
 /** @jsx React.DOM */
+/* global document:false */
 
 var React = require('react');
 var classSet = require('./utils/classSet');
@@ -110,9 +111,27 @@ var Modal = React.createClass({
     );
   },
 
+  iosClickHack: function () {
+    // IOS only allows click events to be delegated to the document on elements
+    // it considers 'clickable' - anchors, buttons, etc. We fake a click handler on the
+    // DOM nodes themselves. Remove if handled by React: https://github.com/facebook/react/issues/1169
+    this.refs.modal.getDOMNode().onclick = function () {};
+    this.refs.backdrop.getDOMNode().onclick = function () {};
+  },
+
   componentDidMount: function () {
     this._onDocumentKeyupListener =
       EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
+
+    if (this.props.backdrop) {
+      this.iosClickHack();
+    }
+  },
+
+  componentDidUpdate: function (prevProps) {
+    if (this.props.backdrop && this.props.backdrop !== prevProps.backdrop) {
+      this.iosClickHack();
+    }
   },
 
   componentWillUnmount: function () {
