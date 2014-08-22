@@ -41,10 +41,11 @@ module.exports = {
   },
 
   componentWillUnmount: function () {
-    var els = this.getDOMNode().querySelectorAll('.fade');
+    var els = this.getDOMNode().querySelectorAll('.fade'),
+        container = (this.props.container && this.props.container.getDOMNode()) || document.body;
     if (els.length) {
       this._fadeOutEl = document.createElement('div');
-      document.body.appendChild(this._fadeOutEl);
+      container.appendChild(this._fadeOutEl);
       this._fadeOutEl.appendChild(this.getDOMNode().cloneNode(true));
       // Firefox needs delay for transition to be triggered
       setTimeout(this._fadeOut, 20);
