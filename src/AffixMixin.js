@@ -90,7 +90,7 @@ var AffixMixin = {
       this.getPinnedOffset(DOMNode) : null;
 
     if (affix === 'bottom') {
-      DOMNode.className = DOMNode.className.replace(/affix-top|affix-bottom|affix/, 'affix-top');
+      DOMNode.className = DOMNode.className.replace(/affix-top|affix-bottom|affix/, 'affix-bottom');
       affixPositionTop = scrollHeight - offsetBottom - DOMNode.offsetHeight - domUtils.getOffset(DOMNode).top;
     }
 
