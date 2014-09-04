@@ -70,7 +70,7 @@ function createComponentClassChecker() {
 
 function createMountableChecker() {
   function validate(props, propName, componentName) {
-    if (typeof props[propName] !== 'object' ||
+    if (typeof props[propName] !== 'object' || props[propName] === null ||
       typeof props[propName].getDOMNode !== 'function' && props[propName].nodeType !== 1) {
       return new Error(
         'Invalid prop `' + propName + '` supplied to ' +
