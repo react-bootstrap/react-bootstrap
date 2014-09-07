@@ -89,6 +89,10 @@ var OverlayTrigger = React.createClass({
   },
 
   render: function () {
+    if (this.props.trigger === 'manual') {
+      return React.Children.only(this.props.children);
+    }
+
     var props = {};
 
     if (isOneOf('click', this.props.trigger)) {

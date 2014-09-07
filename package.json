@@ -3,18 +3,21 @@
   "version": "0.11.1",
   "description": "Bootstrap 3 components build with React",
   "scripts": {
-    "build": "./node_modules/.bin/grunt build",
-    "test-watch": "./node_modules/.bin/grunt watch 2>&1 >/dev/null & ./node_modules/karma/bin/karma start karma.dev.js",
-    "test": "./node_modules/.bin/grunt build && ./node_modules/karma/bin/karma start karma.ci.js"
+    "build": "grunt build",
+    "test-watch": "grunt watch 2>&1 >/dev/null & ./node_modules/karma/bin/karma start karma.dev.js",
+    "test": "grunt build && ./node_modules/karma/bin/karma start karma.ci.js"
   },
   "keywords": [
     "react",
     "bootstrap"
   ],
-  "author": "Stephen J. Collings <stevoland@gmail.com>",
+  "author": {
+    "name": "Stephen J. Collings",
+    "email": "stevoland@gmail.com"
+  },
   "license": "MIT",
   "peerDependencies": {
-    "react": ">=0.9"
+    "react": "0.11.1"
   },
   "devDependencies": {
     "karma-chai": "0.0.2",
@@ -30,7 +33,7 @@
     "karma-phantomjs-launcher": "~0.1.1",
     "karma": "~0.12.8",
     "karma-mocha": "~0.1.1",
-    "react": "0.10.0",
+    "react": "0.11.1",
     "envify": "~1.2.1",
     "grunt": "~0.4.2",
     "grunt-contrib-uglify": "~0.3.2",
@@ -42,8 +45,12 @@
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-shell": "~0.6.4",
     "grunt-contrib-copy": "~0.5.0",
-    "react-async": "~0.8.0",
-    "react-router-component": "~0.15.0",
     "grunt-amd-wrap": "^1.0.1"
-  }
+  },
+  "readme": "# react-bootstrap\n\n[Bootstrap 3](http://getbootstrap.com) components built with [React](http://facebook.github.io/react/)\n\n[![Build Status](https://travis-ci.org/react-bootstrap/react-bootstrap.svg)](https://travis-ci.org/react-bootstrap/react-bootstrap) [![NPM version](https://badge.fury.io/js/react-bootstrap.svg)](http://badge.fury.io/js/react-bootstrap) [![Bower version](https://badge.fury.io/bo/react-bootstrap.svg)](http://badge.fury.io/bo/react-bootstrap)\n\nUnder active development - APIs will change.\n\n## Docs\n\nA [docs site](http://react-bootstrap.github.io) with live editable examples is a work in progress\n\n## Authors\n\n- [Stephen J. Collings](https://github.com/stevoland)\n- [Pieter Vanderwerff](https://github.com/pieterv)\n\nand many [contributors](https://github.com/react-bootstrap/react-bootstrap/graphs/contributors)\n\n## Related modules\n\n- [react-router-bootstrap](https://github.com/mtscout6/react-router-bootstrap) - Integration with [react-router](https://github.com/rackt/react-router).\n\n## Contributions\n\nYes please!\n\n- Run `npm install`, `npm run test-watch` to run tests while you develop (however this hides any build errors, you can see these with `grunt build`)\n- Add tests for any new or changed functionality\n- See [issues](https://github.com/stevoland/react-bootstrap/issues) for some ideas\n- Follow existing style\n",
+  "readmeFilename": "README.md",
+  "_id": "react-bootstrap@0.11.1",
+  "_shasum": "10d61cea470fe953266d72221fa1a03545c93c3d",
+  "_resolved": "git://github.com/graylog2/react-bootstrap#f73c893ba0010d445998c30e1df0379dab63a135",
+  "_from": "react-bootstrap@git://github.com/graylog2/react-bootstrap"
 }
