@@ -5,7 +5,7 @@ var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 var Button = require('./Button');
 
-var ButtonGroup = React.createClass({
+var ButtonToolbar = React.createClass({
   mixins: [BootstrapMixin],
 
   getDefaultProps: function () {
@@ -27,4 +27,4 @@ var ButtonGroup = React.createClass({
   }
 });
 
-module.exports = ButtonGroup;
+module.exports = ButtonToolbar;
