@@ -94,7 +94,7 @@ var CollapsableMixin = {
     var node = this.getCollapsableDOMNode();
 
     if (node) {
-        if(this.props.expanded && !this.state.collapsing) {
+        if(this.isExpanded() && !this.state.collapsing) {
             node.style[dimension] = 'auto';
         } else {
             node.style[dimension] = this.isExpanded() ?
