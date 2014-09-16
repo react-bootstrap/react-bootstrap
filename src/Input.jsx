@@ -23,7 +23,8 @@ var Input = React.createClass({
     hasFeedback: React.PropTypes.bool,
     groupClassName: React.PropTypes.string,
     wrapperClassName: React.PropTypes.string,
-    labelClassName: React.PropTypes.string
+    labelClassName: React.PropTypes.string,
+    disabled: React.PropTypes.bool
   },
 
   getInputDOMNode: function () {

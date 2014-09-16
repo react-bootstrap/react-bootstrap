@@ -163,4 +163,13 @@ describe('Input', function () {
 
     assert.equal(instance.getChecked(), true);
   });
+
+  it('renders a disabled input correctly', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Input type="text" disabled={true} />
+    );
+
+    var node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input').getDOMNode();
+    assert.isNotNull(node.getAttribute('disabled'));
+  });
 });
