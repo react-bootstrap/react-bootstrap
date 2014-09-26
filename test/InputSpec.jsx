@@ -6,6 +6,17 @@ var ReactTestUtils = require('react/lib/ReactTestUtils');
 var Input          = require('../cjs/Input');
 
 describe('Input', function () {
+  beforeEach(function() {
+    sinon.spy(console, 'warn');
+  })
+
+  afterEach(function() {
+    if (typeof console.warn.restore  === 'function') {
+      console.warn.called.should.be.false;
+      console.warn.restore();
+    }
+  });
+
   it('renders children when type is not set', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <Input>
@@ -42,7 +53,7 @@ describe('Input', function () {
 
   it('renders a submit button element when type=submit', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-      <Input type="submit" bsStyle="danger" />
+      <Input type="submit" bsStyle="danger" wrapperClassName='test' />
     );
 
     node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input').getDOMNode();

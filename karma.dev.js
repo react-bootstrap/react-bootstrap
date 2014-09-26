@@ -3,7 +3,11 @@ module.exports = function (config) {
 
     basePath: '',
 
-    frameworks: ['mocha', 'chai'],
+    frameworks: [
+      'mocha',
+      'chai',
+      'sinon'
+    ],
 
     files: [
       'test_bundle.js'
