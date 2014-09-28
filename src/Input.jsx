@@ -78,7 +78,7 @@ var Input = React.createClass({
         break;
       case 'submit':
         input = this.transferPropsTo(
-          <Button componentClass={React.DOM.input} />
+          <Button componentClass={React.DOM.input} ref='input' key='input' />
         );
         break;
       default:
