@@ -18,7 +18,7 @@ var Input = React.createClass({
         return;
       }
 
-      return React.PropTypes.oneOf(['success', 'warning', 'error']).apply(null, arguments);
+      return React.PropTypes.oneOf(['success', 'warning', 'error', '']).apply(null, arguments);
     },
     hasFeedback: React.PropTypes.bool,
     groupClassName: React.PropTypes.string,
