@@ -218,6 +218,20 @@ var ComponentsPage = React.createClass({
                   <h3 id="modals-custom">Custom trigger</h3>
                   <p>Use <code>&lt;OverlayMixin /&gt;</code> in a custom component to manage the modal's state yourself.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalOverlayMixin.js', 'utf8')} />
+
+                  <h3 id="modals-custom">Contained Modal</h3>
+                  <p>You will need to add the following css to your project and ensure that your container has the <code>modal-container</code> class.</p>
+                  <pre>
+                    {React.DOM.code(null,
+                      ".modal-container {\n" +
+                      "  position: relative;\n" +
+                      "}\n" +
+                      ".modal-container .modal, .modal-container .modal-backdrop {\n" +
+                      "  position: absolute;\n" +
+                      "}\n"
+                    )}
+                  </pre>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalContained.js', 'utf8')} />
                 </div>
 
                 {/* Tooltip */}

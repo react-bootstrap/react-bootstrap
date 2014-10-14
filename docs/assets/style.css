@@ -72,7 +72,7 @@ body {
   margin-top: 10px;
 }
 
-.bs-example .modal {
+.bs-example .static-modal .modal {
   position: relative;
   top: auto;
   right: auto;
@@ -137,3 +137,12 @@ body {
 .code-toggle.open {
   background: #f8f5ec;
 }
+
+// Minimal CSS Needed for contained modals
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}
+
