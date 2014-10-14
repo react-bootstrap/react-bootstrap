@@ -25,7 +25,8 @@ var Navbar = React.createClass({
     toggleButton: React.PropTypes.renderable,
     onToggle: React.PropTypes.func,
     navExpanded: React.PropTypes.bool,
-    defaultNavExpanded: React.PropTypes.bool
+    defaultNavExpanded: React.PropTypes.bool,
+    autoClose: React.PropTypes.bool
   },
 
   getDefaultProps: function () {
@@ -33,6 +34,7 @@ var Navbar = React.createClass({
       bsClass: 'navbar',
       bsStyle: 'default',
       role: 'navigation',
+      autoClose: true,
       componentClass: React.DOM.nav
     };
   },
@@ -89,7 +91,8 @@ var Navbar = React.createClass({
       collapsable: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.key,
       expanded: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.key && this.isNavExpanded(),
       key: child.props.key,
-      ref: child.props.ref
+      ref: child.props.ref,
+      onSelect: this.props.autoClose === true ? createChainedFunction(child.props.onSelect, this.handleToggle) : child.props.onSelect
     });
   },
 
