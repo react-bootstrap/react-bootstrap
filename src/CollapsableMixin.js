@@ -47,7 +47,7 @@ var CollapsableMixin = {
     var node = this.getCollapsableDOMNode();
 
     if (node) {
-      TransitionEvents.addEndEventListener(
+      TransitionEvents.removeEndEventListener(
         node,
         this.handleTransitionEnd
       );
