@@ -20,7 +20,8 @@ var Nav = React.createClass({
     onSelect: React.PropTypes.func,
     collapsable: React.PropTypes.bool,
     expanded: React.PropTypes.bool,
-    navbar: React.PropTypes.bool
+    navbar: React.PropTypes.bool,
+    right: React.PropTypes.bool,
   },
 
   getDefaultProps: function () {
@@ -64,6 +65,7 @@ var Nav = React.createClass({
     classes['nav-justified'] = this.props.justified;
     classes['navbar-nav'] = this.props.navbar;
     classes['pull-right'] = this.props.pullRight;
+    classes['navbar-right'] = this.props.right;
 
     return (
       <ul className={classSet(classes)} ref="ul">
