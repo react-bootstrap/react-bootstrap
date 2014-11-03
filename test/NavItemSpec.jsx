@@ -47,4 +47,12 @@ describe('NavItem', function () {
     var instance = ReactTestUtils.renderIntoDocument(<NavItem disabled={true} onSelect={handleSelect}>{content}</NavItem>);
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
   });
+
+  it('Should set target attribute on anchor', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          <NavItem href="/some/unique-thing/" target="_blank">Item content</NavItem>
+        );
+    var linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a').getDOMNode();
+    assert.equal(linkElement.target, '_blank');
+  });
 });

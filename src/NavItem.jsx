@@ -12,7 +12,8 @@ var NavItem = React.createClass({
     active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    target: React.PropTypes.string
   },
 
   getDefaultProps: function () {
@@ -32,6 +33,7 @@ var NavItem = React.createClass({
         <a
           href={this.props.href}
           title={this.props.title}
+          target={this.props.target}
           onClick={this.handleClick}
           ref="anchor">
           {this.props.children}
