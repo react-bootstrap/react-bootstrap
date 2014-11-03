@@ -14,13 +14,19 @@ if (development) {
 
   app = app
     .get('/assets/bundle.js', browserify('./client', {debug: true, watch: false}))
+    .set('views', __dirname)
+    .set('view engine', 'ejs')
     .use('/assets', express.static(path.join(__dirname, 'assets')))
     .use('/vendor', express.static(path.join(__dirname, 'vendor')))
     .use(function renderApp(req, res) {
       var fileName = url.parse(req.url).pathname;
-      var RootHTML = Root.renderToString({initialPath: fileName});
+      var props = {initialPath: fileName};
 
-      res.send(RootHTML);
+      res.render('layout', {
+        markup: Root.renderToString(props),
+        title: 'React Bootstrap',
+        initialProps: JSON.stringify(props)
+      });
     });
 } else {
   app = app

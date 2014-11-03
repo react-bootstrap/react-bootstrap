@@ -73,7 +73,7 @@ var Navbar = React.createClass({
     classes['navbar-static-top'] = this.props.staticTop;
     classes['navbar-inverse'] = this.props.inverse;
 
-    return this.transferPropsTo(
+    return ( //this.transferPropsTo(
       <componentClass className={classSet(classes)}>
         <div className={this.props.fluid ? 'container-fluid' : 'container'}>
           {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey) ? this.renderHeader() : null}
