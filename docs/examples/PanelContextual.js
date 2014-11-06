@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var title = (
     <h3>Panel title</h3>
   );
@@ -32,4 +30,4 @@ var panelsInstance = (
     </div>
   );
 
-React.renderComponent(panelsInstance, mountNode);
+React.render(panelsInstance, mountNode);

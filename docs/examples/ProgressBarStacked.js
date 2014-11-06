@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var progressInstance = (
     <ProgressBar>
       <ProgressBar bsStyle="success" now={35} key={1} />
@@ -8,4 +6,4 @@ var progressInstance = (
     </ProgressBar>
   );
 
-React.renderComponent(progressInstance, mountNode);
+React.render(progressInstance, mountNode);

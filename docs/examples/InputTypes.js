@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var inputTypeInstance = (
     <form>
       <Input type="text" defaultValue="text" />
@@ -20,4 +18,4 @@ var inputTypeInstance = (
     </form>
   );
 
-React.renderComponent(inputTypeInstance, mountNode);
+React.render(inputTypeInstance, mountNode);

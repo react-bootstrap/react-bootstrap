@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 /*global describe, it, assert */
 
 var React          = require('react');
@@ -10,8 +9,8 @@ describe('Nav', function () {
 
   it('Should create nav element', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Navbar />
-        );
+      <Navbar />
+    );
     var nav = instance.getDOMNode();
     assert.equal(nav.nodeName, 'NAV');
     assert.ok(nav.className.match(/\bnavbar\b/));
@@ -20,57 +19,57 @@ describe('Nav', function () {
 
   it('Should add fixedTop variation class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Navbar fixedTop />
-        );
+      <Navbar fixedTop />
+    );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-fixed-top'));
   });
 
   it('Should add fixedBottom variation class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Navbar fixedBottom />
-        );
+      <Navbar fixedBottom />
+    );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-fixed-bottom'));
   });
 
   it('Should add staticTop variation class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Navbar staticTop />
-        );
+      <Navbar staticTop />
+    );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-static-top'));
   });
 
   it('Should add inverse variation class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Navbar inverse />
-        );
+      <Navbar inverse />
+    );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-inverse'));
   });
 
   it('Should add fluid variation class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Navbar fluid />
-        );
+      <Navbar fluid />
+    );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'container-fluid'));
   });
 
   it('Should override role attribute', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Navbar role="banner"/>
-        );
+      <Navbar role="banner"/>
+    );
     assert.ok(instance.getDOMNode().getAttribute('role'), 'banner');
   });
 
   it('Should override node class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Navbar componentClass={React.DOM.header}/>
-        );
+      <Navbar componentClass={'header'}/>
+    );
     assert.ok(instance.getDOMNode().nodeName, 'HEADER');
   });
 
   it('Should add header with brand', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Navbar brand="Brand" />
-        );
+      <Navbar brand="Brand" />
+    );
 
     var header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
 
@@ -84,8 +83,8 @@ describe('Nav', function () {
 
   it('Should add header with brand component', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Navbar brand={React.DOM.a(null, 'Brand')} />
-        );
+      <Navbar brand={<a>Brand</a>} />
+    );
 
     var header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
 
@@ -100,21 +99,29 @@ describe('Nav', function () {
 
   it('Should pass navbar prop to navs', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Navbar brand="Brand">
-            <Nav ref="nav"/>
-          </Navbar>
-        );
+      <Navbar brand="Brand">
+        <Nav ref="nav"/>
+      </Navbar>
+    );
 
     assert.ok(instance.refs.nav.props.navbar);
   });
 
   it('Should pass nav prop to ul', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-            <Nav className="pull-right" />
-        );
+      <Nav />
+    );
 
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pull-right'));
+    var navNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav').getDOMNode();
+    assert.ok(navNode);
+    assert.equal(navNode.nodeName, 'UL');
+    assert.equal(navNode.parentNode.nodeName, 'NAV');
+
     instance.setProps({navbar: true});
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pull-right'));
+
+    navNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav').getDOMNode();
+    assert.ok(navNode);
+    assert.equal(navNode.nodeName, 'UL');
+    assert.equal(navNode.parentNode.nodeName, 'DIV');
   });
 });

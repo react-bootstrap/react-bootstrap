@@ -1,15 +1,14 @@
-/** @jsx React.DOM */
-
 var React = require('react');
-var classSet = require('./utils/classSet');
+var joinClasses = require('react/lib/joinClasses');
+var classSet = require('react/lib/cx');
 
 var MenuItem = React.createClass({
   propTypes: {
-    header:   React.PropTypes.bool,
-    divider:  React.PropTypes.bool,
-    href:     React.PropTypes.string,
-    title:    React.PropTypes.string,
-    onSelect: React.PropTypes.func
+    header:    React.PropTypes.bool,
+    divider:   React.PropTypes.bool,
+    href:      React.PropTypes.string,
+    title:     React.PropTypes.string,
+    onSelect:  React.PropTypes.func
   },
 
   getDefaultProps: function () {
@@ -21,7 +20,7 @@ var MenuItem = React.createClass({
   handleClick: function (e) {
     if (this.props.onSelect) {
       e.preventDefault();
-      this.props.onSelect(this.props.key);
+      this.props.onSelect(this._currentElement.key);
     }
   },
 
@@ -46,8 +45,9 @@ var MenuItem = React.createClass({
       children = this.renderAnchor();
     }
 
-    return this.transferPropsTo(
-      <li role="presentation" title={null} href={null} className={classSet(classes)}>
+    return (
+      <li {...this.props} role="presentation" title={null} href={null}
+        className={joinClasses(this.props.className, classSet(classes))}>
         {children}
       </li>
     );

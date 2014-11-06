@@ -1,15 +1,14 @@
-/** @jsx React.DOM */
-
 var React = require('react');
-var classSet = require('./utils/classSet');
-var TransitionEvents = require('./utils/TransitionEvents');
+var joinClasses = require('react/lib/joinClasses');
+var classSet = require('react/lib/cx');
+var TransitionEvents = require('react/lib/ReactTransitionEvents');
 
 var CarouselItem = React.createClass({
   propTypes: {
     direction: React.PropTypes.oneOf(['prev', 'next']),
     onAnimateOutEnd: React.PropTypes.func,
     active: React.PropTypes.bool,
-    caption: React.PropTypes.renderable
+    caption: React.PropTypes.node
   },
 
   getInitialState: function () {
@@ -74,8 +73,8 @@ var CarouselItem = React.createClass({
       classes[this.state.direction] = true;
     }
 
-    return this.transferPropsTo(
-      <div className={classSet(classes)}>
+    return (
+      <div {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
         {this.props.children}
         {this.props.caption ? this.renderCaption() : null}
       </div>

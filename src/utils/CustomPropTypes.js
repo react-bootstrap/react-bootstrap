@@ -4,16 +4,6 @@ var ANONYMOUS = '<<anonymous>>';
 
 var CustomPropTypes = {
   /**
-   * Checks whether a prop is a valid React class
-   *
-   * @param props
-   * @param propName
-   * @param componentName
-   * @returns {Error|undefined}
-   */
-  componentClass: createComponentClassChecker(),
-
-  /**
    * Checks whether a prop provides a DOM element
    *
    * The element can be provided in two forms:
@@ -53,19 +43,6 @@ function createChainableTypeChecker(validate) {
   chainedCheckType.isRequired = checkType.bind(null, true);
 
   return chainedCheckType;
-}
-
-function createComponentClassChecker() {
-  function validate(props, propName, componentName) {
-    if (!React.isValidClass(props[propName])) {
-      return new Error(
-        'Invalid prop `' + propName + '` supplied to ' +
-          '`' + componentName + '`, expected a valid React class.'
-      );
-    }
-  }
-
-  return createChainableTypeChecker(validate);
 }
 
 function createMountableChecker() {

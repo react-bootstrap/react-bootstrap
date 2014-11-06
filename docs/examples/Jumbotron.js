@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var jumbotronInstance = (
   <Jumbotron>
     <h1>Hello, world!</h1>
@@ -8,4 +6,4 @@ var jumbotronInstance = (
   </Jumbotron>
   );
 
-React.renderComponent(jumbotronInstance, mountNode);
+React.render(jumbotronInstance, mountNode);

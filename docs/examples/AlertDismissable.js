@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var AlertDismissable = React.createClass({
   getInitialState: function() {
     return {
@@ -35,4 +33,4 @@ var AlertDismissable = React.createClass({
   }
 });
 
-React.renderComponent(<AlertDismissable />, mountNode);
+React.render(<AlertDismissable />, mountNode);

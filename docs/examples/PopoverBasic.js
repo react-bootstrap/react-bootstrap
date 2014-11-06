@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var holderStyle = {height: 120};
 
 var popoverInstance = (
@@ -10,4 +8,4 @@ var popoverInstance = (
     </div>
   );
 
-React.renderComponent(popoverInstance, mountNode);
+React.render(popoverInstance, mountNode);

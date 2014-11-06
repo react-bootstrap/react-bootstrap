@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var listgroupInstance = (
     <ListGroup>
       <ListGroupItem bsStyle="success">Success</ListGroupItem>
@@ -9,4 +7,4 @@ var listgroupInstance = (
     </ListGroup>
   );
 
-React.renderComponent(listgroupInstance, mountNode);
+React.render(listgroupInstance, mountNode);

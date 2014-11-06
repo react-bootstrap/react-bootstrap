@@ -1,7 +1,6 @@
-/** @jsx React.DOM */
-
 var React = require('react');
-var classSet = require('./utils/classSet');
+var joinClasses = require('react/lib/joinClasses');
+var classSet = require('react/lib/cx');
 var BootstrapMixin = require('./BootstrapMixin');
 var Button = require('./Button');
 
@@ -25,9 +24,10 @@ var ButtonGroup = React.createClass({
     classes['btn-group-vertical'] = this.props.vertical;
     classes['btn-group-justified'] = this.props.justified;
 
-    return this.transferPropsTo(
+    return (
       <div
-        className={classSet(classes)}>
+        {...this.props}
+        className={joinClasses(this.props.className, classSet(classes))}>
         {this.props.children}
       </div>
     );

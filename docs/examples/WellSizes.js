@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var wellInstance = (
   <div>
     <Well bsSize="large">Look I'm in a large well!</Well>
@@ -7,4 +5,4 @@ var wellInstance = (
   </div>
 );
 
-React.renderComponent(wellInstance, mountNode);
+React.render(wellInstance, mountNode);

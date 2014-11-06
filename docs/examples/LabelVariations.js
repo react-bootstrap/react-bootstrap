@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var labelVariationInstance = (
   <div>
     <Label bsStyle="default">Default</Label>
@@ -11,4 +9,4 @@ var labelVariationInstance = (
   </div>
   );
 
-React.renderComponent(labelVariationInstance, mountNode);
+React.render(labelVariationInstance, mountNode);
