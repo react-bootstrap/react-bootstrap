@@ -17,12 +17,12 @@ var Grid = React.createClass({
   },
 
   render: function () {
-    var componentClass = this.props.componentClass;
+    var ComponentClass = this.props.componentClass;
 
     return this.transferPropsTo(
-      <componentClass className={this.props.fluid ? 'container-fluid' : 'container'}>
+      <ComponentClass className={this.props.fluid ? 'container-fluid' : 'container'}>
         {this.props.children}
-      </componentClass>
+      </ComponentClass>
     );
   }
 });

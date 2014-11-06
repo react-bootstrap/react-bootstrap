@@ -66,7 +66,7 @@ var Navbar = React.createClass({
 
   render: function () {
     var classes = this.getBsClassSet();
-    var componentClass = this.props.componentClass;
+    var ComponentClass = this.props.componentClass;
 
     classes['navbar-fixed-top'] = this.props.fixedTop;
     classes['navbar-fixed-bottom'] = this.props.fixedBottom;
@@ -74,12 +74,12 @@ var Navbar = React.createClass({
     classes['navbar-inverse'] = this.props.inverse;
 
     return ( //this.transferPropsTo(
-      <componentClass className={classSet(classes)}>
+      <ComponentClass className={classSet(classes)}>
         <div className={this.props.fluid ? 'container-fluid' : 'container'}>
           {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey) ? this.renderHeader() : null}
           {ValidComponentChildren.map(this.props.children, this.renderChild)}
         </div>
-      </componentClass>
+      </ComponentClass>
     );
   },
 

@@ -43,28 +43,28 @@ var Button = React.createClass({
   },
 
   renderAnchor: function (classes) {
-    var component = this.props.componentClass || React.DOM.a;
+    var Component = this.props.componentClass || React.DOM.a;
     var href = this.props.href || '#';
     classes['disabled'] = this.props.disabled;
 
     return this.transferPropsTo(
-      <component
+      <Component
         href={href}
         className={classSet(classes)}
         role="button">
         {this.props.children}
-      </component>
+      </Component>
     );
   },
 
   renderButton: function (classes) {
-    var component = this.props.componentClass || React.DOM.button;
+    var Component = this.props.componentClass || React.DOM.button;
 
     return this.transferPropsTo(
-      <component
+      <Component
         className={classSet(classes)}>
         {this.props.children}
-      </component>
+      </Component>
     );
   },
 
