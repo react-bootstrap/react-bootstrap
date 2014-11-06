@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
 var React          = require('react');
@@ -87,15 +86,15 @@ describe('DropdownButton', function () {
 
   it('should call onSelect with key when MenuItem is clicked', function (done) {
     function handleSelect(key) {
-      assert.equal(key, 2);
+      assert.equal(key, '2');
       assert.equal(instance.state.open, false);
       done();
     }
 
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title" onSelect={handleSelect}>
-        <MenuItem key={1}>MenuItem 1 content</MenuItem>
-        <MenuItem key={2}>MenuItem 2 content</MenuItem>
+        <MenuItem key='1'>MenuItem 1 content</MenuItem>
+        <MenuItem key='2'>MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -108,15 +107,15 @@ describe('DropdownButton', function () {
 
   it('should call MenuItem onSelect with key when MenuItem is clicked', function (done) {
     function handleSelect(key) {
-      assert.equal(key, 2);
+      assert.equal(key, '2');
       assert.equal(instance.state.open, false);
       done();
     }
 
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
-        <MenuItem key={1}>MenuItem 1 content</MenuItem>
-        <MenuItem key={2} onSelect={handleSelect}>MenuItem 2 content</MenuItem>
+        <MenuItem key='1'>MenuItem 1 content</MenuItem>
+        <MenuItem key='2' onSelect={handleSelect}>MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 

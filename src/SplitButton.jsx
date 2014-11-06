@@ -1,7 +1,6 @@
-/** @jsx React.DOM */
-
 var React = require('react');
-var classSet = require('./utils/classSet');
+var joinClasses = require('react/lib/joinClasses');
+var classSet = require('react/lib/cx');
 var BootstrapMixin = require('./BootstrapMixin');
 var DropdownStateMixin = require('./DropdownStateMixin');
 var Button = require('./Button');
@@ -13,9 +12,9 @@ var SplitButton = React.createClass({
 
   propTypes: {
     pullRight:     React.PropTypes.bool,
-    title:         React.PropTypes.renderable,
+    title:         React.PropTypes.node,
     href:          React.PropTypes.string,
-    dropdownTitle: React.PropTypes.renderable,
+    dropdownTitle: React.PropTypes.node,
     onClick:       React.PropTypes.func,
     onSelect:      React.PropTypes.func,
     disabled:      React.PropTypes.bool
@@ -33,8 +32,9 @@ var SplitButton = React.createClass({
         'dropup': this.props.dropup
       };
 
-    var button = this.transferPropsTo(
+    var button = (
       <Button
+        {...this.props}
         ref="button"
         onClick={this.handleButtonClick}
         title={null}
@@ -43,10 +43,11 @@ var SplitButton = React.createClass({
       </Button>
     );
 
-    var dropdownButton = this.transferPropsTo(
+    var dropdownButton = (
       <Button
+        {...this.props}
         ref="dropdownButton"
-        className="dropdown-toggle"
+        className={joinClasses(this.props.className, 'dropdown-toggle')}
         onClick={this.handleDropdownClick}
         title={null}
         id={null}>

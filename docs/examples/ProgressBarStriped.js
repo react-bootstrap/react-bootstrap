@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var progressInstance = (
     <div>
       <ProgressBar striped bsStyle="success" now={40} />
@@ -9,4 +7,4 @@ var progressInstance = (
     </div>
   );
 
-React.renderComponent(progressInstance, mountNode);
+React.render(progressInstance, mountNode);

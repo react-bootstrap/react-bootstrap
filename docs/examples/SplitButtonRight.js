@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var buttonsInstance = (
     <SplitButton title="Dropdown right" pullRight>
       <MenuItem key="1">Action</MenuItem>
@@ -10,4 +8,4 @@ var buttonsInstance = (
     </SplitButton>
   );
 
-React.renderComponent(buttonsInstance, mountNode);
+React.render(buttonsInstance, mountNode);

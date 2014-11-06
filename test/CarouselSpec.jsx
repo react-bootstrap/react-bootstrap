@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
 var React           = require('react');
@@ -8,6 +7,7 @@ var CarouselItem    = require('../cjs/CarouselItem');
 
 describe('Carousel', function () {
   it('Should show the correct item', function () {
+
     var instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={1}>
         <CarouselItem ref="item1">Item 1 content</CarouselItem>

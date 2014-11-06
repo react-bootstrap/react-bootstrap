@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 function handleSelect (selectedKey) {
   alert('selected ' + selectedKey);
 }
@@ -12,4 +10,4 @@ var navInstance = (
     </Nav>
   );
 
-React.renderComponent(navInstance, mountNode);
+React.render(navInstance, mountNode);

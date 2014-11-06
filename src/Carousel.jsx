@@ -1,8 +1,7 @@
-/** @jsx React.DOM */
-
 var React = require('react');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+var joinClasses = require('react/lib/joinClasses');
+var classSet = require('react/lib/cx');
+var cloneWithProps = require('react/lib/cloneWithProps');
 var BootstrapMixin = require('./BootstrapMixin');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
@@ -142,9 +141,10 @@ var Carousel = React.createClass({
       slide: this.props.slide
     };
 
-    return this.transferPropsTo(
+    return (
       <div
-        className={classSet(classes)}
+        {...this.props}
+        className={joinClasses(this.props.className, classSet(classes))}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}>
         {this.props.indicators ? this.renderIndicators() : null}
@@ -248,9 +248,8 @@ var Carousel = React.createClass({
         child,
         {
           active: isActive,
-          ref: child.props.ref,
-          key: child.props.key != null ?
-            child.props.key : index,
+          ref: child.ref,
+          key: child.key ? child.key : index,
           index: index,
           animateOut: isPreviousActive,
           animateIn: isActive && this.state.previousActiveIndex != null && this.props.slide,

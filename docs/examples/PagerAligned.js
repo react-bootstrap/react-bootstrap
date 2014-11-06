@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var pagerInstance = (
     <Pager>
       <PageItem previous href="#">&larr; Previous Page</PageItem>
@@ -7,4 +5,4 @@ var pagerInstance = (
     </Pager>
   );
 
-React.renderComponent(pagerInstance, mountNode);
+React.render(pagerInstance, mountNode);

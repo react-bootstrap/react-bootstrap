@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var positionerInstance = (
     <ButtonToolbar>
       <OverlayTrigger placement="left" overlay={<Tooltip><strong>Holy guacamole!</strong> Check this info.</Tooltip>}>
@@ -17,4 +15,4 @@ var positionerInstance = (
     </ButtonToolbar>
   );
 
-React.renderComponent(positionerInstance, mountNode);
+React.render(positionerInstance, mountNode);

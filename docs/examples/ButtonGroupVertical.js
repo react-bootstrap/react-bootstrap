@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var buttonGroupInstance = (
     <ButtonGroup vertical>
       <Button>Button</Button>
@@ -21,4 +19,4 @@ var buttonGroupInstance = (
     </ButtonGroup>
   );
 
-React.renderComponent(buttonGroupInstance, mountNode);
+React.render(buttonGroupInstance, mountNode);

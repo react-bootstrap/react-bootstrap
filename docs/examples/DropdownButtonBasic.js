@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var BUTTONS = ['Default', 'Primary', 'Success', 'Info', 'Warning', 'Danger', 'Link'];
 
 function renderDropdownButton(title) {
@@ -18,4 +16,4 @@ var buttonsInstance = (
     <ButtonToolbar>{BUTTONS.map(renderDropdownButton)}</ButtonToolbar>
   );
 
-React.renderComponent(buttonsInstance, mountNode);
+React.render(buttonsInstance, mountNode);

@@ -50,7 +50,7 @@ module.exports = {
     }
 
     // Save reference to help testing
-    this._overlayInstance = React.renderComponent(this.renderOverlay(), this._overlayTarget);
+    this._overlayInstance = React.render(this.renderOverlay(), this._overlayTarget);
   },
 
   _unrenderOverlay: function () {

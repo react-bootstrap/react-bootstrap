@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 function handleHide() {
   alert('Close me!')
 }
@@ -21,4 +19,4 @@ var modalInstance = (
     </div>
   );
 
-React.renderComponent(modalInstance, mountNode);
+React.render(modalInstance, mountNode);

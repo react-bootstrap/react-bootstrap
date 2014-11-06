@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var holderStyle = {height: 50};
 
 var tooltipInstance = (
@@ -10,4 +8,4 @@ var tooltipInstance = (
     </div>
   );
 
-React.renderComponent(tooltipInstance, mountNode);
+React.render(tooltipInstance, mountNode);

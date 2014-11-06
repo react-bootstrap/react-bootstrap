@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var positionerInstance = (
     <ButtonToolbar>
       <OverlayTrigger container={mountNode} trigger="click" placement="left" overlay={<Popover title="Popover left"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
@@ -17,4 +15,4 @@ var positionerInstance = (
     </ButtonToolbar>
   );
 
-React.renderComponent(positionerInstance, mountNode);
+React.render(positionerInstance, mountNode);

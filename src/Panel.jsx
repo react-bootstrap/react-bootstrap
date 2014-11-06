@@ -1,8 +1,8 @@
-/** @jsx React.DOM */
-
 var React = require('react');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+var joinClasses = require('react/lib/joinClasses');
+var classSet = require('react/lib/cx');
+var cloneWithProps = require('react/lib/cloneWithProps');
+
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
 
@@ -11,8 +11,8 @@ var Panel = React.createClass({
 
   propTypes: {
     onSelect: React.PropTypes.func,
-    header: React.PropTypes.renderable,
-    footer: React.PropTypes.renderable
+    header: React.PropTypes.node,
+    footer: React.PropTypes.node
   },
 
   getDefaultProps: function () {
@@ -25,7 +25,7 @@ var Panel = React.createClass({
   handleSelect: function (e) {
     if (this.props.onSelect) {
       this._isChanging = true;
-      this.props.onSelect(this.props.key);
+      this.props.onSelect(this._currentElement.key);
       this._isChanging = false;
     }
 
@@ -56,8 +56,9 @@ var Panel = React.createClass({
     var classes = this.getBsClassSet();
     classes['panel'] = true;
 
-    return this.transferPropsTo(
-      <div className={classSet(classes)} id={this.props.collapsable ? null : this.props.id} onSelect={null}>
+    return (
+      <div {...this.props} className={joinClasses(this.props.className, classSet(classes))}
+        id={this.props.collapsable ? null : this.props.id} onSelect={null}>
         {this.renderHeading()}
         {this.props.collapsable ? this.renderCollapsableBody() : this.renderBody()}
         {this.renderFooter()}
@@ -88,7 +89,7 @@ var Panel = React.createClass({
       return null;
     }
 
-    if (!React.isValidComponent(header) || Array.isArray(header)) {
+    if (!React.isValidElement(header) || Array.isArray(header)) {
       header = this.props.collapsable ?
         this.renderCollapsableTitle(header) : header;
     } else if (this.props.collapsable) {

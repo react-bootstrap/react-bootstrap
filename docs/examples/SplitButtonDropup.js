@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var buttonsInstance = (
     <div>
       <ButtonToolbar>
@@ -24,4 +22,4 @@ var buttonsInstance = (
     </div>
   );
 
-React.renderComponent(buttonsInstance, mountNode);
+React.render(buttonsInstance, mountNode);

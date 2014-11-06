@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var navbarInstance = (
     <Navbar>
       <Nav>
@@ -16,4 +14,4 @@ var navbarInstance = (
     </Navbar>
   );
 
-React.renderComponent(navbarInstance, mountNode);
+React.render(navbarInstance, mountNode);

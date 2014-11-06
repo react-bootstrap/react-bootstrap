@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var carouselInstance = (
     <Carousel>
       <CarouselItem>
@@ -26,4 +24,4 @@ var carouselInstance = (
     </Carousel>
   );
 
-React.renderComponent(carouselInstance, mountNode);
+React.render(carouselInstance, mountNode);

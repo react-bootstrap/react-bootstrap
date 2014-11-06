@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 var wellStyles = {maxWidth: 400, margin: '0 auto 10px'};
 
 var buttonsInstance = (
@@ -8,4 +7,4 @@ var buttonsInstance = (
     </div>
   );
 
-React.renderComponent(buttonsInstance, mountNode);
+React.render(buttonsInstance, mountNode);

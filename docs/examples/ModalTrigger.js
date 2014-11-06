@@ -1,9 +1,7 @@
-/** @jsx React.DOM */
-
 var MyModal = React.createClass({
   render: function() {
-    return this.transferPropsTo(
-        <Modal title="Modal heading" animation={false}>
+    return (
+        <Modal {...this.props} title="Modal heading" animation={false}>
           <div className="modal-body">
             <h4>Text in a modal</h4>
             <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
@@ -41,4 +39,4 @@ var overlayTriggerInstance = (
     </ModalTrigger>
   );
 
-React.renderComponent(overlayTriggerInstance, mountNode);
+React.render(overlayTriggerInstance, mountNode);

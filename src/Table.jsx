@@ -1,7 +1,6 @@
-/** @jsx React.DOM */
-
 var React = require('react');
-var classSet = require('./utils/classSet');
+var joinClasses = require('react/lib/joinClasses');
+var classSet = require('react/lib/cx');
 
 var Table = React.createClass({
   propTypes: {
@@ -20,8 +19,8 @@ var Table = React.createClass({
       'table-condensed': this.props.condensed,
       'table-hover': this.props.hover
     };
-    var table = this.transferPropsTo(
-      <table className={classSet(classes)}>
+    var table = (
+      <table {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
         {this.props.children}
       </table>
     );

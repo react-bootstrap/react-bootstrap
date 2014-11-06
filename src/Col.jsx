@@ -1,8 +1,6 @@
-/** @jsx React.DOM */
-
 var React = require('react');
-var classSet = require('./utils/classSet');
-var CustomPropTypes = require('./utils/CustomPropTypes');
+var joinClasses = require('react/lib/joinClasses');
+var classSet = require('react/lib/cx');
 var constants = require('./constants');
 
 
@@ -24,17 +22,17 @@ var Col = React.createClass({
     smPull: React.PropTypes.number,
     mdPull: React.PropTypes.number,
     lgPull: React.PropTypes.number,
-    componentClass: CustomPropTypes.componentClass.isRequired
+    componentClass: React.PropTypes.node.isRequired
   },
 
   getDefaultProps: function () {
     return {
-      componentClass: React.DOM.div
+      componentClass: 'div'
     };
   },
 
   render: function () {
-    var componentClass = this.props.componentClass;
+    var ComponentClass = this.props.componentClass;
     var classes = {};
 
     Object.keys(constants.SIZES).forEach(function (key) {
@@ -65,10 +63,10 @@ var Col = React.createClass({
       }
     }, this);
 
-    return this.transferPropsTo(
-      <componentClass className={classSet(classes)}>
+    return (
+      <ComponentClass {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
         {this.props.children}
-      </componentClass>
+      </ComponentClass>
     );
   }
 });

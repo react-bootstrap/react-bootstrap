@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 'use strict';
 
 var React = require('react');
@@ -55,7 +53,7 @@ var Root = React.createClass({
 
     renderToString: function (props) {
       return Root.getDoctype() +
-        React.renderComponentToString(Root(props));
+        React.renderToString(Root(props));
     },
 
     /**
