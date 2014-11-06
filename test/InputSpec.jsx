@@ -3,6 +3,9 @@
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var Input          = require('../cjs/Input');
+var Button         = require('../cjs/Button');
+var DropdownButton = require('../cjs/DropdownButton');
+var MenuItem       = require('../cjs/MenuItem');
 
 describe('Input', function () {
   beforeEach(function() {
@@ -119,6 +122,28 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group'));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-addon'));
   });
+
+  it('renders btn-group', function() {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Input buttonAfter={<Button>!</Button>} />
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-btn'));
+  })
+
+  it('renders btn-group with dropdown', function() {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Input buttonAfter={<DropdownButton title="dropdown">
+          <MenuItem key="1">One</MenuItem>
+      </DropdownButton>} />
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-btn'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'btn'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-menu'));
+  })
 
   it('renders help', function () {
     var instance = ReactTestUtils.renderIntoDocument(
