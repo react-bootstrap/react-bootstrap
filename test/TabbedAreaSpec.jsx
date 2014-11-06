@@ -16,6 +16,8 @@ describe('TabbedArea', function () {
       </TabbedArea>
     );
 
+    console.info(instance.refs.tabs.refs);
+    console.info(instance.refs.panes.refs);
     assert.equal(instance.refs.pane1.props.active, true);
     assert.equal(instance.refs.pane2.props.active, false);
 

@@ -25,8 +25,8 @@ var Pager = React.createClass({
       child,
       {
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.props.ref,
-        key: child.props.key
+        ref: child.ref,
+        key: child.key
       }
     );
   }

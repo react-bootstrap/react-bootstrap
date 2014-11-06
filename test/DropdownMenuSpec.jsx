@@ -23,8 +23,8 @@ describe('DropdownMenu', function () {
 
     var allMenuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
     assert.equal(allMenuItems.length, 2);
-    assert.equal(allMenuItems[0].props.key, '1');
-    assert.equal(allMenuItems[1].props.key, '2');
+    assert.equal(allMenuItems[0].key, '1');
+    assert.equal(allMenuItems[1].key, '2');
     assert.equal(allMenuItems[1], instance.refs.item2);
   });
 

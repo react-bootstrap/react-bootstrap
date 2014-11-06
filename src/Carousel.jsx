@@ -248,9 +248,9 @@ var Carousel = React.createClass({
         child,
         {
           active: isActive,
-          ref: child.props.ref,
-          key: child.props.key != null ?
-            child.props.key : index,
+          ref: child.ref,
+          key: child.key != null ?
+            child.key : index,
           index: index,
           animateOut: isPreviousActive,
           animateIn: isActive && this.state.previousActiveIndex != null && this.props.slide,

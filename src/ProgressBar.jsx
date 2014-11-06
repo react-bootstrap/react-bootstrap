@@ -69,8 +69,8 @@ var ProgressBar = React.createClass({
   renderChildBar: function (child) {
     return cloneWithProps(child, {
       isChild: true,
-      key: child.props.key,
-      ref: child.props.ref
+      key: child.key,
+      ref: child.ref
     });
   },
 

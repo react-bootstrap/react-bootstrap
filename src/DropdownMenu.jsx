@@ -35,8 +35,8 @@ var DropdownMenu = React.createClass({
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
 
         // Force special props to be transferred
-        key: child.props.key,
-        ref: child.props.ref
+        key: child.key,
+        ref: child.ref
       }
     );
   }

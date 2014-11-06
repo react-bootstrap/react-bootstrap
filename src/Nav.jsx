@@ -77,7 +77,7 @@ var Nav = React.createClass({
       return true;
     }
     if (this.props.activeKey != null) {
-      if (child.props.key === this.props.activeKey) {
+      if (child.key === this.props.activeKey) {
         return true;
       }
     }
@@ -98,8 +98,8 @@ var Nav = React.createClass({
         activeKey: this.props.activeKey,
         activeHref: this.props.activeHref,
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.props.ref,
-        key: child.props.key,
+        ref: child.ref,
+        key: child.key,
         navItem: true
       }
     );

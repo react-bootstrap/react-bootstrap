@@ -98,8 +98,8 @@ var DropdownButton = React.createClass({
         onSelect: createChainedFunction(child.props.onSelect, handleOptionSelect),
 
         // Force special props to be transferred
-        key: child.props.key,
-        ref: child.props.ref
+        key: child.key,
+        ref: child.ref
       }
     );
   },

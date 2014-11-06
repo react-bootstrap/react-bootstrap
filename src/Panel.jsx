@@ -25,7 +25,7 @@ var Panel = React.createClass({
   handleSelect: function (e) {
     if (this.props.onSelect) {
       this._isChanging = true;
-      this.props.onSelect(this.props.key);
+      this.props.onSelect(this.key);
       this._isChanging = false;
     }
 

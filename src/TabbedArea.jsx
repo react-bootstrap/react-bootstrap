@@ -12,7 +12,7 @@ function getDefaultActiveKeyFromChildren(children) {
 
   ValidComponentChildren.forEach(children, function(child) {
     if (defaultActiveKey == null) {
-      defaultActiveKey = child.props.key;
+      defaultActiveKey = child.key;
     }
   });
 
@@ -96,19 +96,19 @@ var TabbedArea = React.createClass({
     return cloneWithProps(
         child,
         {
-          active: (child.props.key === activeKey &&
+          active: (child.key === activeKey &&
             (this.state.previousActiveKey == null || !this.props.animation)),
-          ref: child.props.ref,
-          key: child.props.key,
+          ref: child.ref,
+          key: child.key,
           animation: this.props.animation,
           onAnimateOutEnd: (this.state.previousActiveKey != null &&
-            child.props.key === this.state.previousActiveKey) ? this.handlePaneAnimateOutEnd: null
+            child.key === this.state.previousActiveKey) ? this.handlePaneAnimateOutEnd: null
         }
       );
   },
 
   renderTab: function (child) {
-    var key = child.props.key;
+    var key = child.key;
     return (
       <NavItem
         ref={'tab' + key}

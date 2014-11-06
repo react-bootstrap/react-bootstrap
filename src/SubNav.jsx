@@ -31,7 +31,7 @@ var SubNav = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.key, this.props.href);
+        this.props.onSelect(this.key, this.props.href);
       }
     }
   },
@@ -45,7 +45,7 @@ var SubNav = React.createClass({
       return true;
     }
 
-    if (this.props.activeKey != null && this.props.activeKey === child.props.key) {
+    if (this.props.activeKey != null && this.props.activeKey === child.key) {
       return true;
     }
 
@@ -77,7 +77,7 @@ var SubNav = React.createClass({
       return true;
     }
     if (this.props.activeKey != null) {
-      if (child.props.key === this.props.activeKey) {
+      if (child.key === this.props.activeKey) {
         return true;
       }
     }
@@ -118,8 +118,8 @@ var SubNav = React.createClass({
       {
         active: this.getChildActiveProp(child),
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.props.ref,
-        key: child.props.key
+        ref: child.ref,
+        key: child.key
       }
     );
   }

@@ -22,8 +22,8 @@ var ListGroup = React.createClass({
   renderListItem: function (child) {
     return cloneWithProps(child, {
       onClick: createChainedFunction(child.props.onClick, this.props.onClick),
-      ref: child.props.ref,
-      key: child.props.key
+      ref: child.ref,
+      key: child.key
     });
   }
 });
