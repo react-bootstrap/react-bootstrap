@@ -11,6 +11,8 @@ var Input = React.createClass({
     help: React.PropTypes.renderable,
     addonBefore: React.PropTypes.renderable,
     addonAfter: React.PropTypes.renderable,
+    buttonBefore: React.PropTypes.renderable,
+    buttonAfter: React.PropTypes.renderable,
     bsStyle: function(props) {
       if (props.type === 'submit') {
         // Return early if `type=submit` as the `Button` component
@@ -102,11 +104,25 @@ var Input = React.createClass({
       </span>
     ) : null;
 
-    return addonBefore || addonAfter ? (
+    var buttonBefore = this.props.buttonBefore ? (
+      <span className="input-group-btn">
+        {this.props.buttonBefore}
+      </span>
+    ) : null;
+
+    var buttonAfter = this.props.buttonAfter ? (
+      <span className="input-group-btn">
+        {this.props.buttonAfter}
+      </span>
+    ) : null;
+
+    return addonBefore || addonAfter || buttonBefore || buttonAfter ? (
       <div className="input-group" key="input-group">
         {addonBefore}
+        {buttonBefore}
         {children}
         {addonAfter}
+        {buttonAfter}
       </div>
     ) : children;
   },
