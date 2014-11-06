@@ -68,15 +68,10 @@ var CollapsableMixin = {
     var node = this.getCollapsableDOMNode();
 
     this._removeEndTransitionListener();
-    if (node && nextProps.expanded !== this.props.expanded && this.props.expanded) {
-      node.style[dimension] = this.getCollapsableDimensionValue() + 'px';
-    }
   },
 
   componentDidUpdate: function (prevProps, prevState) {
-    if (this.state.collapsing !== prevState.collapsing) {
-      this._afterRender();
-    }
+    this._afterRender();
   },
 
   _afterRender: function () {
@@ -89,17 +84,12 @@ var CollapsableMixin = {
   },
 
   _updateDimensionAfterRender: function () {
-    var dimension = (typeof this.getCollapsableDimension === 'function') ?
-      this.getCollapsableDimension() : 'height';
     var node = this.getCollapsableDOMNode();
-
     if (node) {
-        if(this.isExpanded() && !this.state.collapsing) {
-            node.style[dimension] = 'auto';
-        } else {
-            node.style[dimension] = this.isExpanded() ?
-              this.getCollapsableDimensionValue() + 'px' : '0px';
-        }
+        var dimension = (typeof this.getCollapsableDimension === 'function') ?
+            this.getCollapsableDimension() : 'height';
+        node.style[dimension] = this.isExpanded() ?
+            this.getCollapsableDimensionValue() + 'px' : '0px';
     }
   },
 
