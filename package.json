@@ -27,7 +27,7 @@
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-contrib-uglify": "~0.3.2",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-react": "~0.6.0",
+    "grunt-react": "~0.10.0",
     "grunt-shell": "~0.6.4",
     "karma": "~0.12.8",
     "karma-chai": "0.0.2",
