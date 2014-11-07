@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Bootstrap 3 components build with React",
   "scripts": {
     "build": "./node_modules/.bin/grunt build",
@@ -14,7 +14,7 @@
   "author": "Stephen J. Collings <stevoland@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "react": ">=0.9"
+    "react": "~0.12.0"
   },
   "devDependencies": {
     "envify": "~1.2.1",
