@@ -1,8 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+var React = require('react/addons');
 var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
 var DropdownStateMixin = require('./DropdownStateMixin');
@@ -64,7 +62,7 @@ var DropdownButton = React.createClass({
     return (
       <ButtonGroup
         bsSize={this.props.bsSize}
-        className={classSet(groupClasses)}>
+        className={React.addons.classSet(groupClasses)}>
         {children}
       </ButtonGroup>
     );
@@ -78,7 +76,7 @@ var DropdownButton = React.createClass({
       };
 
     return (
-      <li className={classSet(classes)}>
+      <li className={React.addons.classSet(classes)}>
         {children}
       </li>
     );
@@ -91,7 +89,7 @@ var DropdownButton = React.createClass({
     var handleOptionSelect = this.props.onSelect || child.props.onSelect ?
       this.handleOptionSelect : null;
 
-    return cloneWithProps(
+    return React.addons.cloneWithProps(
       child,
       {
         // Capture onSelect events

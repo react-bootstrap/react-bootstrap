@@ -1,8 +1,6 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
 var createChainedFunction = require('./utils/createChainedFunction');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
@@ -20,7 +18,7 @@ var DropdownMenu = React.createClass({
 
     return this.transferPropsTo(
         <ul
-          className={classSet(classes)}
+          className={React.addons.classSet(classes)}
           role="menu">
           {ValidComponentChildren.map(this.props.children, this.renderMenuItem)}
         </ul>
@@ -28,7 +26,7 @@ var DropdownMenu = React.createClass({
   },
 
   renderMenuItem: function (child) {
-    return cloneWithProps(
+    return React.addons.cloneWithProps(
       child,
       {
         // Capture onSelect events

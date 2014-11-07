@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
 
 var MenuItem = React.createClass({
   propTypes: {
@@ -47,7 +46,7 @@ var MenuItem = React.createClass({
     }
 
     return this.transferPropsTo(
-      <li role="presentation" title={null} href={null} className={classSet(classes)}>
+      <li role="presentation" title={null} href={null} className={React.addons.classSet(classes)}>
         {children}
       </li>
     );

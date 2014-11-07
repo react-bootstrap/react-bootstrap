@@ -1,8 +1,7 @@
 /** @jsx React.DOM */
 
-var React = require('react');
+var React = require('react/addons');
 var BootstrapMixin = require('./BootstrapMixin');
-var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var Nav = require('./Nav');
 var NavItem = require('./NavItem');
@@ -93,7 +92,7 @@ var TabbedArea = React.createClass({
   renderPane: function (child) {
     var activeKey = this.getActiveKey();
 
-    return cloneWithProps(
+    return React.addons.cloneWithProps(
         child,
         {
           active: (child.key === activeKey &&

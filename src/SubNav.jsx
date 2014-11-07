@@ -1,8 +1,6 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -97,7 +95,7 @@ var SubNav = React.createClass({
     };
 
     return this.transferPropsTo(
-      <li className={classSet(classes)}>
+      <li className={React.addons.classSet(classes)}>
         <a
           href={this.props.href}
           title={this.props.title}
@@ -113,7 +111,7 @@ var SubNav = React.createClass({
   },
 
   renderNavItem: function (child) {
-    return cloneWithProps(
+    return React.addons.cloneWithProps(
       child,
       {
         active: this.getChildActiveProp(child),

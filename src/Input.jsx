@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
 var Button = require('./Button');
+var classSet = React.addons.classSet;
 
 var Input = React.createClass({
   propTypes: {
@@ -55,7 +55,7 @@ var Input = React.createClass({
     var input = null;
 
     if (!this.props.type) {
-      return this.props.children
+      return this.props.children;
     }
 
     switch (this.props.type) {

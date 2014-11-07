@@ -1,11 +1,9 @@
 /** @jsx React.DOM */
 
-var React = require('react');
+var React = require('react/addons');
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
-var classSet = require('./utils/classSet');
 var domUtils = require('./utils/domUtils');
-var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
@@ -51,7 +49,7 @@ var Nav = React.createClass({
     }
 
     return this.transferPropsTo(
-      <nav className={classSet(classes)}>
+      <nav className={React.addons.classSet(classes)}>
         {this.renderUl()}
       </nav>
     );
@@ -66,7 +64,7 @@ var Nav = React.createClass({
     classes['pull-right'] = this.props.pullRight;
 
     return (
-      <ul className={classSet(classes)} ref="ul">
+      <ul className={React.addons.classSet(classes)} ref="ul">
         {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
       </ul>
     );
@@ -91,7 +89,7 @@ var Nav = React.createClass({
   },
 
   renderNavItem: function (child) {
-    return cloneWithProps(
+    return React.addons.cloneWithProps(
       child,
       {
         active: this.getChildActiveProp(child),

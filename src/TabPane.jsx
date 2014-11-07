@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
 var TransitionEvents = require('./utils/TransitionEvents');
 
 var TabPane = React.createClass({
@@ -73,7 +72,7 @@ var TabPane = React.createClass({
     };
 
     return this.transferPropsTo(
-      <div className={classSet(classes)}>
+      <div className={React.addons.classSet(classes)}>
         {this.props.children}
       </div>
     );

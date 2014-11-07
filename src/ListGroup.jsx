@@ -1,8 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+var React = require('react/addons');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
@@ -20,7 +18,7 @@ var ListGroup = React.createClass({
   },
 
   renderListItem: function (child) {
-    return cloneWithProps(child, {
+    return React.addons.cloneWithProps(child, {
       onClick: createChainedFunction(child.props.onClick, this.props.onClick),
       ref: child.ref,
       key: child.key

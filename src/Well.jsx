@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var Well = React.createClass({
@@ -17,7 +16,7 @@ var Well = React.createClass({
     var classes = this.getBsClassSet();
 
     return this.transferPropsTo(
-      <div className={classSet(classes)}>
+      <div className={React.addons.classSet(classes)}>
         {this.props.children}
       </div>
     );

@@ -2,7 +2,6 @@
 
 var React = require('react');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
-var classSet = require('./utils/classSet');
 
 var Badge = React.createClass({
   propTypes: {
@@ -15,7 +14,7 @@ var Badge = React.createClass({
       'badge': ValidComponentChildren.hasValidComponent(this.props.children)
     };
     return this.transferPropsTo(
-      <span className={classSet(classes)}>
+      <span className={React.addons.classSet(classes)}>
         {this.props.children}
       </span>
     );

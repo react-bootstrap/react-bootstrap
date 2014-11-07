@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
 var BootstrapMixin = require('./BootstrapMixin');
 var CustomPropTypes = require('./utils/CustomPropTypes');
 
@@ -50,7 +49,7 @@ var Button = React.createClass({
     return this.transferPropsTo(
       <Component
         href={href}
-        className={classSet(classes)}
+        className={React.addons.classSet(classes)}
         role="button">
         {this.props.children}
       </Component>
@@ -62,7 +61,7 @@ var Button = React.createClass({
 
     return this.transferPropsTo(
       <Component
-        className={classSet(classes)}>
+        className={React.addons.classSet(classes)}>
         {this.props.children}
       </Component>
     );
@@ -74,7 +73,7 @@ var Button = React.createClass({
     };
 
     return (
-      <li className={classSet(liClasses)}>
+      <li className={React.addons.classSet(liClasses)}>
         {this.renderAnchor(classes)}
       </li>
     );

@@ -2,7 +2,7 @@
 /* global document:false */
 
 var React = require('react');
-var classSet = require('./utils/classSet');
+var classSet = React.classSet;
 var BootstrapMixin = require('./BootstrapMixin');
 var FadeMixin = require('./FadeMixin');
 var EventListener = require('./utils/EventListener');

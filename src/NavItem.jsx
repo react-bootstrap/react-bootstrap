@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var NavItem = React.createClass({
@@ -28,7 +27,7 @@ var NavItem = React.createClass({
     };
 
     return this.transferPropsTo(
-      <li className={classSet(classes)}>
+      <li className={React.addons.classSet(classes)}>
         <a
           href={this.props.href}
           title={this.props.title}

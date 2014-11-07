@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
 var TransitionEvents = require('./utils/TransitionEvents');
 
 var CarouselItem = React.createClass({
@@ -75,7 +74,7 @@ var CarouselItem = React.createClass({
     }
 
     return this.transferPropsTo(
-      <div className={classSet(classes)}>
+      <div className={React.addons.classSet(classes)}>
         {this.props.children}
         {this.props.caption ? this.renderCaption() : null}
       </div>
