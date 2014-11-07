@@ -13,9 +13,7 @@ describe('BootstrapMixin', function () {
       mixins: [BootstrapMixin],
 
       render: function () {
-        return this.transferPropsTo(
-          React.DOM.button()
-        );
+        return <button {...this.props} />;
       }
     });
   });

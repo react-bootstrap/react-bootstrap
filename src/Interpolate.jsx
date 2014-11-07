@@ -1,3 +1,4 @@
+/** @jsx React.DOM */
 // https://www.npmjs.org/package/react-interpolate-component
 'use strict';
 
@@ -15,18 +16,16 @@ var Interpolate = React.createClass({
   },
 
   getDefaultProps: function() {
-    return { component: React.DOM.span };
+    return {componentClass: 'span'};
   },
 
   render: function() {
     var format = ValidComponentChildren.hasValidComponent(this.props.children) ? this.props.children : this.props.format;
-    var parent = this.props.component;
     var unsafe = this.props.unsafe === true;
     var props = merge(this.props);
 
     delete props.children;
     delete props.format;
-    delete props.component;
     delete props.unsafe;
 
     if (unsafe) {
@@ -51,7 +50,7 @@ var Interpolate = React.createClass({
 
       props.dangerouslySetInnerHTML = { __html: content };
 
-      return parent(props);
+      return <this.props.componentClass {...props}>{content}</this.props.componentClass>;
     } else {
       var args = format.split(REGEXP).reduce(function(memo, match, index) {
         var child;
@@ -67,12 +66,10 @@ var Interpolate = React.createClass({
           delete props[match];
         }
 
-        memo.push(child);
+        return memo + child;
+      }, "");
 
-        return memo;
-      }, [props]);
-
-      return parent.apply(null, args);
+      return <this.props.componentClass {...props}>{args}</this.props.componentClass>;
     }
   }
 });

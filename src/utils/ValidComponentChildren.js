@@ -41,7 +41,7 @@ function forEachValidComponents(children, func, context) {
   var index = 0;
 
   return React.Children.forEach(children, function (child) {
-    if (React.isValidComponent(child)) {
+    if (React.isValidElement(child)) {
       func.call(context, child, index);
       index++;
     }
@@ -58,7 +58,7 @@ function numberOfValidComponents(children) {
   var count = 0;
 
   React.Children.forEach(children, function (child) {
-    if (React.isValidComponent(child)) { count++; }
+    if (React.isValidElement(child)) { count++; }
   });
 
   return count;
@@ -71,15 +71,14 @@ function numberOfValidComponents(children) {
  * @returns {boolean}
  */
 function hasValidComponent(children) {
-  var hasValid = false;
-
+  var hasValidElement = false;
   React.Children.forEach(children, function (child) {
-    if (!hasValid && React.isValidComponent(child)) {
-      hasValid = true;
+    if (React.isValidElement(child)) {
+      hasValidElement = true;
     }
   });
 
-  return hasValid;
+  return hasValidElement;
 }
 
 module.exports = {

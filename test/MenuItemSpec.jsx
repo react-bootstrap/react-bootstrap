@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 /*global describe, it, assert */
 
+var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var MenuItem       = require('../cjs/MenuItem');
 
@@ -44,14 +45,10 @@ describe('MenuItem', function () {
 
   it('should fire callback on click of link', function (done) {
     var instance = ReactTestUtils.renderIntoDocument(
-          MenuItem({
-            key: 1,
-            onSelect: function (key) {
+      <MenuItem navKey={1} onSelect={function (key) {
               assert.equal(key, 1);
               done();
-            }
-          }, 'Title')
-        );
+    }} /> , 'Title');
     var anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     ReactTestUtils.Simulate.click(anchor);
   });

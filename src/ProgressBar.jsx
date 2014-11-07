@@ -23,7 +23,8 @@ var ProgressBar = React.createClass({
     return {
       bsClass: 'progress-bar',
       min: 0,
-      max: 100
+      max: 100,
+      interpolateClass: Interpolate
     };
   },
 
@@ -45,20 +46,19 @@ var ProgressBar = React.createClass({
 
     if (!ValidComponentChildren.hasValidComponent(this.props.children)) {
       if (!this.props.isChild) {
-        return this.transferPropsTo(
-          <div className={React.addons.classSet(classes)}>
+        return (
+          <div {...this.props} className={React.addons.classSet(classes)}>
             {this.renderProgressBar()}
           </div>
         );
       } else {
-        return this.transferPropsTo(
-          this.renderProgressBar()
-        );
+        return this.renderProgressBar();
       }
     } else {
-      return this.transferPropsTo(
-        <div className={React.addons.classSet(classes)}>
-          {ValidComponentChildren.map(this.props.children, this.renderChildBar)}
+      console.info('has stack');
+      return (
+        <div {...this.props} className={React.addons.classSet(classes)}>
+          {React.Children.map(this.props.children, this.renderChildBar)}
         </div>
       );
     }
@@ -103,17 +103,14 @@ var ProgressBar = React.createClass({
   },
 
   renderLabel: function (percentage) {
-    var InterpolateClass = this.props.interpolateClass || Interpolate;
-
     return (
-      <InterpolateClass
+      <this.props.interpolateClass
         now={this.props.now}
         min={this.props.min}
         max={this.props.max}
         percent={percentage}
-        bsStyle={this.props.bsStyle}>
-        {this.props.label}
-      </InterpolateClass>
+        bsStyle={this.props.bsStyle}
+        format={this.props.label} />
     );
   },
 

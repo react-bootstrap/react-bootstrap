@@ -80,7 +80,7 @@ var ListGroupItem = React.createClass({
   handleClick: function (e) {
     if (this.props.onClick) {
       e.preventDefault();
-      this.props.onClick(this.key, this.props.href);
+      this.props.onClick(this.props.navKey, this.props.href);
     }
   }
 });

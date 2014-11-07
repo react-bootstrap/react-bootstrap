@@ -62,6 +62,7 @@ var Nav = React.createClass({
     classes['nav-justified'] = this.props.justified;
     classes['navbar-nav'] = this.props.navbar;
     classes['pull-right'] = this.props.pullRight;
+    classes[this.props.className] = true;
 
     return (
       <ul {...this.props} className={React.addons.classSet(classes)} ref="ul">

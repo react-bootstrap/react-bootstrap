@@ -15,9 +15,11 @@ var DropdownMenu = React.createClass({
         'dropdown-menu': true,
         'dropdown-menu-right': this.props.pullRight
       };
+    classes[this.props.className] = true;
 
-    return this.transferPropsTo(
+    return (
         <ul
+          {...this.props}
           className={React.addons.classSet(classes)}
           role="menu">
           {ValidComponentChildren.map(this.props.children, this.renderMenuItem)}

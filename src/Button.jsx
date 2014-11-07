@@ -2,7 +2,6 @@
 
 var React = require('react/addons');
 var BootstrapMixin = require('./BootstrapMixin');
-var CustomPropTypes = require('./utils/CustomPropTypes');
 
 var Button = React.createClass({
   mixins: [BootstrapMixin],
@@ -13,7 +12,7 @@ var Button = React.createClass({
     block:    React.PropTypes.bool,
     navItem:    React.PropTypes.bool,
     navDropdown: React.PropTypes.bool,
-    componentClass: CustomPropTypes.componentClass
+    componentClass: React.PropTypes.node
   },
 
   getDefaultProps: function () {
@@ -42,7 +41,7 @@ var Button = React.createClass({
   },
 
   renderAnchor: function (classes) {
-    var Component = this.props.componentClass || React.DOM.a;
+    var Component = this.props.componentClass || 'a';
     var href = this.props.href || '#';
     classes['disabled'] = this.props.disabled;
 
@@ -57,7 +56,7 @@ var Button = React.createClass({
   },
 
   renderButton: function (classes) {
-    var Component = this.props.componentClass || React.DOM.button;
+    var Component = this.props.componentClass || 'button';
 
     return this.transferPropsTo(
       <Component

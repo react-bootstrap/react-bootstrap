@@ -30,7 +30,7 @@ describe('ListGroup', function () {
   it('Should call "onClick" when child item is clicked', function (done) {
     var item1Called = false,
         item2Called = false;
-    function handleClick(key, href) {
+    function handleClick(key) {
       if (key === 1) {
         item1Called = true;
       } else if (key === 2) {
@@ -42,9 +42,9 @@ describe('ListGroup', function () {
     }
     var instance = ReactTestUtils.renderIntoDocument(
           <ListGroup onClick={handleClick}>
-            <ListGroupItem key={1} ref="item1">Item 1</ListGroupItem>
-            <ListGroupItem key={2} ref="item2">Item 2</ListGroupItem>
-            <ListGroupItem key={3} ref="item3">Item 3</ListGroupItem>
+            <ListGroupItem navKey={1} ref="item1">Item 1</ListGroupItem>
+            <ListGroupItem navKey={2} ref="item2">Item 2</ListGroupItem>
+            <ListGroupItem navKey={3} ref="item3">Item 3</ListGroupItem>
           </ListGroup>
         );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance.refs.item2, 'a'));

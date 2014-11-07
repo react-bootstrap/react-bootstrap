@@ -8,7 +8,8 @@ var MenuItem = React.createClass({
     divider:  React.PropTypes.bool,
     href:     React.PropTypes.string,
     title:    React.PropTypes.string,
-    onSelect: React.PropTypes.func
+    onSelect: React.PropTypes.func,
+    navKey:   React.PropTypes.string
   },
 
   getDefaultProps: function () {
@@ -20,7 +21,7 @@ var MenuItem = React.createClass({
   handleClick: function (e) {
     if (this.props.onSelect) {
       e.preventDefault();
-      this.props.onSelect(this.key);
+      this.props.onSelect(this.props.navKey);
     }
   },
 

@@ -24,15 +24,18 @@ var DropdownButton = React.createClass({
   },
 
   render: function () {
-    var className = 'dropdown-toggle';
-
+    var classes = {
+      'dropdown-toggle': true
+    };
+    classes[this.props.className] = true;
     var renderMethod = this.props.navItem ?
       'renderNavItem' : 'renderButtonGroup';
 
     return this[renderMethod]([
-      this.transferPropsTo(<Button
+      <Button
+        {...this.props}
         ref="dropdownButton"
-        className={className}
+        className={React.addons.classSet(classes)}
         onClick={this.handleDropdownClick}
         key={0}
         navDropdown={this.props.navItem}
@@ -42,7 +45,7 @@ var DropdownButton = React.createClass({
         dropup={null}>
         {this.props.title}{' '}
         <span className="caret" />
-      </Button>),
+      </Button>,
       <DropdownMenu
         ref="menu"
         aria-labelledby={this.props.id}

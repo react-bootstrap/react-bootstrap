@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-/*global describe, beforeEach, afterEach, it, assert */
+/*global describe, beforeEach, afterEach, it, assert, document */
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
@@ -20,8 +20,8 @@ describe('DropdownButton', function () {
   it('Should render button correctly', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title" className="test-class">
-        <MenuItem key="1">MenuItem 1 content</MenuItem>
-        <MenuItem key="2">MenuItem 2 content</MenuItem>
+        <MenuItem navKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem navKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -39,8 +39,8 @@ describe('DropdownButton', function () {
   it('Should render menu correctly', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
-        <MenuItem key="1">MenuItem 1 content</MenuItem>
-        <MenuItem key="2">MenuItem 2 content</MenuItem>
+        <MenuItem navKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem navKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -52,8 +52,8 @@ describe('DropdownButton', function () {
   it('Should pass props to button', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title" bsStyle="primary" id="testId" disabled>
-        <MenuItem key="1">MenuItem 1 content</MenuItem>
-        <MenuItem key="2">MenuItem 2 content</MenuItem>
+        <MenuItem navKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem navKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -66,8 +66,8 @@ describe('DropdownButton', function () {
   it('Should be closed by default', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
-        <MenuItem key="1">MenuItem 1 content</MenuItem>
-        <MenuItem key="2">MenuItem 2 content</MenuItem>
+        <MenuItem navKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem navKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>);
 
     assert.notOk(instance.getDOMNode().className.match(/\bopen\b/));
@@ -76,8 +76,8 @@ describe('DropdownButton', function () {
   it('Should open when clicked', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
-        <MenuItem key="1">MenuItem 1 content</MenuItem>
-        <MenuItem key="2">MenuItem 2 content</MenuItem>
+        <MenuItem navKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem navKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -85,17 +85,17 @@ describe('DropdownButton', function () {
     assert.ok(instance.getDOMNode().className.match(/\bopen\b/));
   });
 
-  it('should call onSelect with key when MenuItem is clicked', function (done) {
-    function handleSelect(key) {
-      assert.equal(key, 2);
+  it('should call onSelect with navKey when MenuItem is clicked', function (done) {
+    function handleSelect(navKey) {
+      assert.equal(navKey, 2);
       assert.equal(instance.state.open, false);
       done();
     }
 
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title" onSelect={handleSelect}>
-        <MenuItem key={1}>MenuItem 1 content</MenuItem>
-        <MenuItem key={2}>MenuItem 2 content</MenuItem>
+        <MenuItem navKey={1}>MenuItem 1 content</MenuItem>
+        <MenuItem navKey={2}>MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -106,17 +106,17 @@ describe('DropdownButton', function () {
     );
   });
 
-  it('should call MenuItem onSelect with key when MenuItem is clicked', function (done) {
-    function handleSelect(key) {
-      assert.equal(key, 2);
+  it('should call MenuItem onSelect with navKey when MenuItem is clicked', function (done) {
+    function handleSelect(navKey) {
+      assert.equal(navKey, 2);
       assert.equal(instance.state.open, false);
       done();
     }
 
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
-        <MenuItem key={1}>MenuItem 1 content</MenuItem>
-        <MenuItem key={2} onSelect={handleSelect}>MenuItem 2 content</MenuItem>
+        <MenuItem navKey={1}>MenuItem 1 content</MenuItem>
+        <MenuItem navKey={2} onSelect={handleSelect}>MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -130,8 +130,8 @@ describe('DropdownButton', function () {
   it('should not set onSelect to child with no onSelect prop', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
-        <MenuItem key={1}>MenuItem 1 content</MenuItem>
-        <MenuItem key={2}>MenuItem 2 content</MenuItem>
+        <MenuItem navKey={1}>MenuItem 1 content</MenuItem>
+        <MenuItem navKey={2}>MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -143,8 +143,8 @@ describe('DropdownButton', function () {
     beforeEach(function () {
       instance = ReactTestUtils.renderIntoDocument(
         <DropdownButton title="Title">
-          <MenuItem key={1}>MenuItem 1 content</MenuItem>
-          <MenuItem key={2}>MenuItem 2 content</MenuItem>
+          <MenuItem navKey={1}>MenuItem 1 content</MenuItem>
+          <MenuItem navKey={2}>MenuItem 2 content</MenuItem>
         </DropdownButton>
       );
 
@@ -163,19 +163,19 @@ describe('DropdownButton', function () {
   it('Should render li when in nav', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title" className="test-class" navItem>
-        <MenuItem key="1">MenuItem 1 content</MenuItem>
-        <MenuItem key="2">MenuItem 2 content</MenuItem>
+        <MenuItem navKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem navKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
     var li = instance.getDOMNode();
     var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
     assert.equal(li.nodeName, 'LI');
-    assert.ok(li.className.match(/\bdropdown\b/));
-    assert.ok(button.className.match(/\btest-class\b/));
+    assert.match(li.className, /\bdropdown\b/);
     assert.equal(button.nodeName, 'A');
-    assert.ok(button.className.match(/\bdropdown-toggle\b/));
-    assert.ok(button.lastChild.className.match(/\bcaret\b/));
+    assert.match(button.className, /\btest-class\b/);
+    assert.match(button.className, /\bdropdown-toggle\b/);
+    assert.match(button.lastChild.className, /\bcaret\b/);
     assert.equal(button.innerText.trim(), 'Title');
   });
 });

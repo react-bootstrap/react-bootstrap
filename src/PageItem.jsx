@@ -43,7 +43,7 @@ var PageItem = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.key, this.props.href);
+        this.props.onSelect(this.props.navKey, this.props.href);
       }
     }
   }

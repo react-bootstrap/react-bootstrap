@@ -32,8 +32,9 @@ var SplitButton = React.createClass({
         'dropup': this.props.dropup
       };
 
-    var button = this.transferPropsTo(
+    var button = (
       <Button
+        {...this.props}
         ref="button"
         onClick={this.handleButtonClick}
         title={null}

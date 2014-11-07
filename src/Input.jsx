@@ -77,9 +77,7 @@ var Input = React.createClass({
         );
         break;
       case 'submit':
-        input = this.transferPropsTo(
-          <Button componentClass={React.DOM.input} ref='input' key='input' />
-        );
+        input = <Button {...this.props} componentClass='input' ref='input' key='input' />;
         break;
       default:
         var className = this.isCheckboxOrRadio() ? '' : 'form-control';
