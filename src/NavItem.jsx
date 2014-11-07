@@ -11,7 +11,8 @@ var NavItem = React.createClass({
     active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    navKey: React.PropTypes.number
   },
 
   getDefaultProps: function () {
@@ -26,8 +27,8 @@ var NavItem = React.createClass({
       'disabled': this.props.disabled
     };
 
-    return this.transferPropsTo(
-      <li className={React.addons.classSet(classes)}>
+    return (
+      <li {...this.props} className={React.addons.classSet(classes)}>
         <a
           href={this.props.href}
           title={this.props.title}
@@ -44,7 +45,7 @@ var NavItem = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.key,this.props.href);
+        this.props.onSelect(this.props.navKey,this.props.href);
       }
     }
   }

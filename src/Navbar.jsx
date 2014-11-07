@@ -17,7 +17,7 @@ var Navbar = React.createClass({
     inverse: React.PropTypes.bool,
     fluid: React.PropTypes.bool,
     role: React.PropTypes.string,
-    componentClass: CustomPropTypes.componentClass.isRequired,
+    componentClass: React.PropTypes.node,
     brand: React.PropTypes.renderable,
     toggleButton: React.PropTypes.renderable,
     onToggle: React.PropTypes.func,
@@ -30,7 +30,7 @@ var Navbar = React.createClass({
       bsClass: 'navbar',
       bsStyle: 'default',
       role: 'navigation',
-      componentClass: React.DOM.nav
+      componentClass: 'nav'
     };
   },
 
@@ -63,20 +63,19 @@ var Navbar = React.createClass({
 
   render: function () {
     var classes = this.getBsClassSet();
-    var ComponentClass = this.props.componentClass;
 
     classes['navbar-fixed-top'] = this.props.fixedTop;
     classes['navbar-fixed-bottom'] = this.props.fixedBottom;
     classes['navbar-static-top'] = this.props.staticTop;
     classes['navbar-inverse'] = this.props.inverse;
 
-    return ( //this.transferPropsTo(
-      <ComponentClass className={React.addons.classSet(classes)}>
+    return (
+      <this.props.componentClass {...this.props} className={React.addons.classSet(classes)}>
         <div className={this.props.fluid ? 'container-fluid' : 'container'}>
           {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey) ? this.renderHeader() : null}
           {ValidComponentChildren.map(this.props.children, this.renderChild)}
         </div>
-      </ComponentClass>
+      </this.props.componentClass>
     );
   },
 

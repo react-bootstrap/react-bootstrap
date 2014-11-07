@@ -48,8 +48,8 @@ var Nav = React.createClass({
       return this.transferPropsTo(this.renderUl());
     }
 
-    return this.transferPropsTo(
-      <nav className={React.addons.classSet(classes)}>
+    return (
+      <nav {...this.props} className={React.addons.classSet(classes)}>
         {this.renderUl()}
       </nav>
     );
@@ -64,7 +64,7 @@ var Nav = React.createClass({
     classes['pull-right'] = this.props.pullRight;
 
     return (
-      <ul className={React.addons.classSet(classes)} ref="ul">
+      <ul {...this.props} className={React.addons.classSet(classes)} ref="ul">
         {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
       </ul>
     );
@@ -75,7 +75,7 @@ var Nav = React.createClass({
       return true;
     }
     if (this.props.activeKey != null) {
-      if (child.key === this.props.activeKey) {
+      if (child.props.navKey === this.props.activeKey) {
         return true;
       }
     }
@@ -93,8 +93,6 @@ var Nav = React.createClass({
       child,
       {
         active: this.getChildActiveProp(child),
-        activeKey: this.props.activeKey,
-        activeHref: this.props.activeHref,
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
         ref: child.ref,
         key: child.key,

@@ -62,15 +62,14 @@ var TabbedArea = React.createClass({
   },
 
   render: function () {
-    var activeKey =
-      this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+    var activeKey = this.getActiveKey();
 
     function renderTabIfSet(child) {
       return child.props.tab != null ? this.renderTab(child) : null;
     }
 
-    var nav = this.transferPropsTo(
-      <Nav activeKey={activeKey} onSelect={this.handleSelect} ref="tabs">
+    var nav = (
+      <Nav activeKey={activeKey} {...this.props} onSelect={this.handleSelect} ref="tabs">
         {ValidComponentChildren.map(this.props.children, renderTabIfSet, this)}
       </Nav>
     );
@@ -86,7 +85,7 @@ var TabbedArea = React.createClass({
   },
 
   getActiveKey: function () {
-    return this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+    return String(this.props.activeKey != null ? this.props.activeKey : this.state.activeKey);
   },
 
   renderPane: function (child) {
@@ -111,7 +110,7 @@ var TabbedArea = React.createClass({
     return (
       <NavItem
         ref={'tab' + key}
-        key={key}>
+        navKey={key}>
         {child.props.tab}
       </NavItem>
     );

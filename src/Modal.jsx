@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 /* global document:false */
 
-var React = require('react');
-var classSet = React.classSet;
+var React = require('react/addons');
+var classSet = React.addons.classSet;
 var BootstrapMixin = require('./BootstrapMixin');
 var FadeMixin = require('./FadeMixin');
 var EventListener = require('./utils/EventListener');
