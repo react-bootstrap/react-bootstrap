@@ -10,7 +10,7 @@ var ListGroupItem = React.createClass({
     bsStyle: React.PropTypes.oneOf(['danger','info','success','warning']),
     active: React.PropTypes.any,
     disabled: React.PropTypes.any,
-    header: React.PropTypes.renderable,
+    header: React.PropTypes.node,
     onClick: React.PropTypes.func
   },
 

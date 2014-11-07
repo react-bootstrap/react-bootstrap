@@ -17,7 +17,7 @@ var Modal = React.createClass({
   mixins: [BootstrapMixin, FadeMixin],
 
   propTypes: {
-    title: React.PropTypes.renderable,
+    title: React.PropTypes.node,
     backdrop: React.PropTypes.oneOf(['static', true, false]),
     keyboard: React.PropTypes.bool,
     closeButton: React.PropTypes.bool,

@@ -7,10 +7,10 @@ var classSet = React.addons.classSet;
 var Input = React.createClass({
   propTypes: {
     type: React.PropTypes.string,
-    label: React.PropTypes.renderable,
-    help: React.PropTypes.renderable,
-    addonBefore: React.PropTypes.renderable,
-    addonAfter: React.PropTypes.renderable,
+    label: React.PropTypes.node,
+    help: React.PropTypes.node,
+    addonBefore: React.PropTypes.node,
+    addonAfter: React.PropTypes.node,
     bsStyle: function(props) {
       if (props.type === 'submit') {
         // Return early if `type=submit` as the `Button` component

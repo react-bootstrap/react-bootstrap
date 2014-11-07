@@ -12,9 +12,9 @@ var SplitButton = React.createClass({
 
   propTypes: {
     pullRight:     React.PropTypes.bool,
-    title:         React.PropTypes.renderable,
+    title:         React.PropTypes.node,
     href:          React.PropTypes.string,
-    dropdownTitle: React.PropTypes.renderable,
+    dropdownTitle: React.PropTypes.node,
     onClick:       React.PropTypes.func,
     onSelect:      React.PropTypes.func,
     disabled:      React.PropTypes.bool

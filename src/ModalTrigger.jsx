@@ -8,7 +8,7 @@ var ModalTrigger = React.createClass({
   mixins: [OverlayMixin],
 
   propTypes: {
-    modal: React.PropTypes.renderable.isRequired
+    modal: React.PropTypes.node.isRequired
   },
 
   getInitialState: function () {

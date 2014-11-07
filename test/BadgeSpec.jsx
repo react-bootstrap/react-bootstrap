@@ -13,7 +13,6 @@ describe('Badge', function () {
 
   it('Should have a badge class', function () {
     var instance = ReactTestUtils.renderIntoDocument(<Badge>Content</Badge>);
-    console.info(instance.getDOMNode().className);
     assert.ok(instance.getDOMNode().className.match(/\bbadge\b/));
   });
 

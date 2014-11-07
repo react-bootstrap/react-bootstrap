@@ -2,7 +2,6 @@
 
 var React = require('react/addons');
 var BootstrapMixin = require('./BootstrapMixin');
-var CustomPropTypes = require('./utils/CustomPropTypes');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
@@ -18,8 +17,8 @@ var Navbar = React.createClass({
     fluid: React.PropTypes.bool,
     role: React.PropTypes.string,
     componentClass: React.PropTypes.node,
-    brand: React.PropTypes.renderable,
-    toggleButton: React.PropTypes.renderable,
+    brand: React.PropTypes.node,
+    toggleButton: React.PropTypes.node,
     onToggle: React.PropTypes.func,
     navExpanded: React.PropTypes.bool,
     defaultNavExpanded: React.PropTypes.bool

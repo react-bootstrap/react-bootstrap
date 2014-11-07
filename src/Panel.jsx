@@ -9,8 +9,8 @@ var Panel = React.createClass({
 
   propTypes: {
     onSelect: React.PropTypes.func,
-    header: React.PropTypes.renderable,
-    footer: React.PropTypes.renderable,
+    header: React.PropTypes.node,
+    footer: React.PropTypes.node,
     navKey: React.PropTypes.number
   },
 

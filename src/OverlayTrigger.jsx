@@ -33,7 +33,7 @@ var OverlayTrigger = React.createClass({
     delayShow: React.PropTypes.number,
     delayHide: React.PropTypes.number,
     defaultOverlayShown: React.PropTypes.bool,
-    overlay: React.PropTypes.renderable.isRequired
+    overlay: React.PropTypes.node.isRequired
   },
 
   getDefaultProps: function () {

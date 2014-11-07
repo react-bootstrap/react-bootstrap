@@ -2,32 +2,6 @@ var React = require('react');
 
 var ANONYMOUS = '<<anonymous>>';
 
-var CustomPropTypes = {
-  /**
-   * Checks whether a prop is a valid React class
-   *
-   * @param props
-   * @param propName
-   * @param componentName
-   * @returns {Error|undefined}
-   */
-  componentClass: createComponentClassChecker(),
-
-  /**
-   * Checks whether a prop provides a DOM element
-   *
-   * The element can be provided in two forms:
-   * - Directly passed
-   * - Or passed an object which has a `getDOMNode` method which will return the required DOM element
-   *
-   * @param props
-   * @param propName
-   * @param componentName
-   * @returns {Error|undefined}
-   */
-  mountable: createMountableChecker()
-};
-
 /**
  * Create chain-able isRequired validator
  *
@@ -81,5 +55,31 @@ function createMountableChecker() {
 
   return createChainableTypeChecker(validate);
 }
+
+var CustomPropTypes = {
+  /**
+   * Checks whether a prop is a valid React class
+   *
+   * @param props
+   * @param propName
+   * @param componentName
+   * @returns {Error|undefined}
+   */
+  componentClass: createComponentClassChecker(),
+
+  /**
+   * Checks whether a prop provides a DOM element
+   *
+   * The element can be provided in two forms:
+   * - Directly passed
+   * - Or passed an object which has a `getDOMNode` method which will return the required DOM element
+   *
+   * @param props
+   * @param propName
+   * @param componentName
+   * @returns {Error|undefined}
+   */
+  mountable: createMountableChecker()
+};
 
 module.exports = CustomPropTypes;

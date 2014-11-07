@@ -16,7 +16,7 @@ var DropdownButton = React.createClass({
   propTypes: {
     pullRight: React.PropTypes.bool,
     dropup:    React.PropTypes.bool,
-    title:     React.PropTypes.renderable,
+    title:     React.PropTypes.node,
     href:      React.PropTypes.string,
     onClick:   React.PropTypes.func,
     onSelect:  React.PropTypes.func,

@@ -11,7 +11,7 @@ var ProgressBar = React.createClass({
     min: React.PropTypes.number,
     now: React.PropTypes.number,
     max: React.PropTypes.number,
-    label: React.PropTypes.renderable,
+    label: React.PropTypes.node,
     srOnly: React.PropTypes.bool,
     striped: React.PropTypes.bool,
     active: React.PropTypes.bool
@@ -55,7 +55,6 @@ var ProgressBar = React.createClass({
         return this.renderProgressBar();
       }
     } else {
-      console.info('has stack');
       return (
         <div {...this.props} className={React.addons.classSet(classes)}>
           {React.Children.map(this.props.children, this.renderChildBar)}
