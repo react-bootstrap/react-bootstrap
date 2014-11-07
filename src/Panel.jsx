@@ -10,7 +10,8 @@ var Panel = React.createClass({
   propTypes: {
     onSelect: React.PropTypes.func,
     header: React.PropTypes.renderable,
-    footer: React.PropTypes.renderable
+    footer: React.PropTypes.renderable,
+    navKey: React.PropTypes.number
   },
 
   getDefaultProps: function () {
@@ -23,7 +24,7 @@ var Panel = React.createClass({
   handleSelect: function (e) {
     if (this.props.onSelect) {
       this._isChanging = true;
-      this.props.onSelect(this.key);
+      this.props.onSelect(this.props.navKey);
       this._isChanging = false;
     }
 
