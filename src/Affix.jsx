@@ -1,6 +1,5 @@
-/** @jsx React.DOM */
-
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var AffixMixin = require('./AffixMixin');
 var domUtils = require('./utils/domUtils');
 
@@ -13,8 +12,8 @@ var Affix = React.createClass({
 
   render: function () {
     var holderStyle = {top: this.state.affixPositionTop};
-    return this.transferPropsTo(
-      <div className={this.state.affixClass} style={holderStyle}>
+    return (
+      <div {...this.props} className={joinClasses(this.props.className, this.state.affixClass)} style={holderStyle}>
         {this.props.children}
       </div>
     );

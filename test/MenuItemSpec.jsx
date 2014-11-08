@@ -1,13 +1,17 @@
-/** @jsx React.DOM */
 /*global describe, it, assert */
 
+var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var MenuItem       = require('../cjs/MenuItem');
 
 
 describe('MenuItem', function () {
   it('should output an li', function () {
-    var instance = ReactTestUtils.renderIntoDocument(MenuItem({}, 'Title'));
+    var instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem>
+        Title
+      </MenuItem>
+    );
     assert.equal(instance.getDOMNode().nodeName, 'LI');
     assert.equal(instance.getDOMNode().getAttribute('role'), 'presentation');
   });
@@ -35,33 +39,35 @@ describe('MenuItem', function () {
 
   it('should have an anchor', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <MenuItem>Title</MenuItem>
-        );
+      <MenuItem>
+        Title
+      </MenuItem>
+    );
 
     var anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.equal(anchor.getDOMNode().getAttribute('tabIndex'), '-1');
   });
 
   it('should fire callback on click of link', function (done) {
+    var selectOp = function (selectedKey) {
+      assert.equal(selectedKey, '1');
+      done();
+    };
     var instance = ReactTestUtils.renderIntoDocument(
-          MenuItem({
-            key: 1,
-            onSelect: function (key) {
-              assert.equal(key, 1);
-              done();
-            }
-          }, 'Title')
-        );
+      <MenuItem selectKey='1' onSelect={selectOp}>
+        Title
+      </MenuItem>
+    );
     var anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     ReactTestUtils.Simulate.click(anchor);
   });
 
   it('should be a divider with no children', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          MenuItem({
-            divider: true
-          }, 'Title')
-        );
+      <MenuItem divider>
+        Title
+      </MenuItem>
+    );
 
     assert(instance.getDOMNode().className.match(/\bdivider\b/), 'Has no divider class');
     assert.equal(instance.getDOMNode().innerText, '');
@@ -69,10 +75,10 @@ describe('MenuItem', function () {
 
   it('should be a header with no anchor', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          MenuItem({
-            header: true
-          }, 'Title')
-        );
+      <MenuItem header>
+        Title
+      </MenuItem>
+    );
 
     assert(instance.getDOMNode().className.match(/\bdropdown-header\b/), 'Has no header class');
     assert.equal(instance.getDOMNode().innerHTML, 'Title');

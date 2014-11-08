@@ -1,6 +1,5 @@
-/** @jsx React.DOM */
-
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
@@ -14,7 +13,7 @@ var Popover = React.createClass({
     positionTop: React.PropTypes.number,
     arrowOffsetLeft: React.PropTypes.number,
     arrowOffsetTop: React.PropTypes.number,
-    title: React.PropTypes.renderable
+    title: React.PropTypes.node
   },
 
   getDefaultProps: function () {
@@ -38,8 +37,8 @@ var Popover = React.createClass({
     arrowStyle['left'] = this.props.arrowOffsetLeft;
     arrowStyle['top'] = this.props.arrowOffsetTop;
 
-    return this.transferPropsTo(
-      <div className={classSet(classes)} style={style} title={null}>
+    return (
+      <div {...this.props} className={joinClasses(this.props.className, classSet(classes))} style={style} title={null}>
         <div className="arrow" style={arrowStyle} />
         {this.props.title ? this.renderTitle() : null}
         <div className="popover-content">

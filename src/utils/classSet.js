@@ -1,12 +1,14 @@
 /**
- * React classSet
+ * Copyright 2013-2014, Facebook, Inc.
+ * All rights reserved.
  *
- * Copyright 2013-2014 Facebook, Inc.
- * @licence https://github.com/facebook/react/blob/0.11-stable/LICENSE
+ * This file contains an unmodified version of:
+ * https://github.com/facebook/react/blob/v0.12.0/src/vendor/stubs/cx.js
  *
- * This file is unmodified from:
- *  https://github.com/facebook/react/blob/0.11-stable/src/vendor/stubs/cx.js
- *
+ * This source code is licensed under the BSD-style license found here:
+ * https://github.com/facebook/react/blob/v0.12.0/LICENSE
+ * An additional grant of patent rights can be found here:
+ * https://github.com/facebook/react/blob/v0.12.0/PATENTS
  */
 
 /**

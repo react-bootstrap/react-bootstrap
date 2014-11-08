@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 /*global describe, it, assert, afterEach */
 
 var React          = require('react');

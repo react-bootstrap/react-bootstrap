@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var glyphInstance = (
   <div>
     <ButtonToolbar>
@@ -21,4 +19,4 @@ var glyphInstance = (
   </div>
 );
 
-React.renderComponent(glyphInstance, mountNode);
+React.render(glyphInstance, mountNode);

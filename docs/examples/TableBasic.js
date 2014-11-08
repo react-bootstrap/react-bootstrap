@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var tableInstance = (
     <Table striped bordered condensed hover>
       <thead>
@@ -32,4 +30,4 @@ var tableInstance = (
     </Table>
   );
 
-React.renderComponent(tableInstance, mountNode);
+React.render(tableInstance, mountNode);

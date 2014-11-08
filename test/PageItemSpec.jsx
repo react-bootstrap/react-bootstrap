@@ -1,14 +1,14 @@
-/** @jsx React.DOM */
 /*global describe, it, assert */
 
+var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var PageItem       = require('../cjs/PageItem');
 
 describe('PageItem', function () {
   it('Should output a "list item" as root element, and an "anchor" as a child item', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <PageItem href="#">Text</PageItem>
-        );
+      <PageItem href="#">Text</PageItem>
+    );
     assert.equal(instance.getDOMNode().nodeName, 'LI');
     assert.equal(instance.getDOMNode().children.length, 1);
     assert.equal(instance.getDOMNode().children[0].nodeName, 'A');
@@ -16,22 +16,22 @@ describe('PageItem', function () {
 
   it('Should output "disabled" attribute as a class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <PageItem disabled href="#">Text</PageItem>
-        );
+      <PageItem disabled href="#">Text</PageItem>
+    );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled'));
   });
 
   it('Should output "next" attribute as a class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <PageItem previous href="#">Previous</PageItem>
-        );
+      <PageItem previous href="#">Previous</PageItem>
+    );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'previous'));
   });
 
   it('Should output "previous" attribute as a class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <PageItem next href="#">Next</PageItem>
-        );
+      <PageItem next href="#">Next</PageItem>
+    );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'next'));
   });
 
@@ -42,8 +42,8 @@ describe('PageItem', function () {
       done();
     }
     var instance = ReactTestUtils.renderIntoDocument(
-          <PageItem key={1} onSelect={handleSelect}>Next</PageItem>
-        );
+      <PageItem selectKey={1} onSelect={handleSelect}>Next</PageItem>
+    );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });
 
@@ -52,8 +52,8 @@ describe('PageItem', function () {
       throw new Error('onSelect should not be called');
     }
     var instance = ReactTestUtils.renderIntoDocument(
-          <PageItem disabled onSelect={handleSelect}>Next</PageItem>
-        );
+      <PageItem disabled onSelect={handleSelect}>Next</PageItem>
+    );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });
 });

@@ -1,8 +1,8 @@
-/** @jsx React.DOM */
-
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -17,7 +17,7 @@ var SubNav = React.createClass({
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
-    text: React.PropTypes.renderable
+    text: React.PropTypes.node
   },
 
   getDefaultProps: function () {
@@ -31,7 +31,7 @@ var SubNav = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.key, this.props.href);
+        this.props.onSelect(this.props.selectKey, this.props.href);
       }
     }
   },
@@ -45,7 +45,7 @@ var SubNav = React.createClass({
       return true;
     }
 
-    if (this.props.activeKey != null && this.props.activeKey === child.props.key) {
+    if (this.props.activeKey != null && this.props.activeKey === child.props.selectKey) {
       return true;
     }
 
@@ -77,7 +77,7 @@ var SubNav = React.createClass({
       return true;
     }
     if (this.props.activeKey != null) {
-      if (child.props.key === this.props.activeKey) {
+      if (child.props.selectKey == this.props.activeKey) {
         return true;
       }
     }
@@ -96,8 +96,8 @@ var SubNav = React.createClass({
       'disabled': this.props.disabled
     };
 
-    return this.transferPropsTo(
-      <li className={classSet(classes)}>
+    return (
+      <li {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
         <a
           href={this.props.href}
           title={this.props.title}
@@ -112,14 +112,14 @@ var SubNav = React.createClass({
     );
   },
 
-  renderNavItem: function (child) {
+  renderNavItem: function (child, index) {
     return cloneWithProps(
       child,
       {
         active: this.getChildActiveProp(child),
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.props.ref,
-        key: child.props.key
+        ref: child.ref,
+        key: child.key ? child.key : index
       }
     );
   }

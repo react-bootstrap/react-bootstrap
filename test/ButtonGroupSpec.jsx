@@ -1,6 +1,6 @@
-/** @jsx React.DOM */
 /*global describe, it, assert */
 
+var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var ButtonGroup    = require('../cjs/ButtonGroup');
 var Button         = require('../cjs/Button');
@@ -8,30 +8,46 @@ var Button         = require('../cjs/Button');
 describe('ButtonGroup', function () {
   it('Should output a button group', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          ButtonGroup(null, Button(null, 'Title'))
-        );
+      <ButtonGroup>
+        <Button>
+          Title
+        </Button>
+      </ButtonGroup>
+    );
     assert.equal(instance.getDOMNode().nodeName, 'DIV');
     assert.ok(instance.getDOMNode().className.match(/\bbtn-group\b/));
   });
 
   it('Should add size', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          ButtonGroup({bsSize: 'large'}, Button(null, 'Title'))
-        );
+      <ButtonGroup bsSize='large'>
+        <Button>
+          Title
+        </Button>
+      </ButtonGroup>
+    );
     assert.ok(instance.getDOMNode().className.match(/\bbtn-group-lg\b/));
   });
 
   it('Should add vertical variation', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          ButtonGroup({vertical: true}, Button(null, 'Title'))
-        );
+      <ButtonGroup vertical>
+        <Button>
+          Title
+        </Button>
+      </ButtonGroup>
+    );
     assert.equal(instance.getDOMNode().className.trim(), 'btn-group-vertical');
   });
 
   it('Should add justified variation', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          ButtonGroup({justified: true}, Button(null, 'Title'))
-        );
+      <ButtonGroup justified>
+        <Button>
+          Title
+        </Button>
+      </ButtonGroup>
+    );
     assert.ok(instance.getDOMNode().className.match(/\bbtn-group-justified\b/));
   });
 });

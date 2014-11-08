@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var index = 0;
 var direction = null;
 
@@ -30,7 +28,7 @@ function renderCarousel () {
     </Carousel>
   );
 
-  React.renderComponent(carouselInstance, mountNode);
+  React.render(carouselInstance, mountNode);
 }
 
 function handleSelect (selectedIndex, selectedDirection) {

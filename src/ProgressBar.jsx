@@ -1,10 +1,10 @@
-/** @jsx React.DOM */
-
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var Interpolate = require('./Interpolate');
 var BootstrapMixin = require('./BootstrapMixin');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 
@@ -13,7 +13,7 @@ var ProgressBar = React.createClass({
     min: React.PropTypes.number,
     now: React.PropTypes.number,
     max: React.PropTypes.number,
-    label: React.PropTypes.renderable,
+    label: React.PropTypes.node,
     srOnly: React.PropTypes.bool,
     striped: React.PropTypes.bool,
     active: React.PropTypes.bool
@@ -47,30 +47,30 @@ var ProgressBar = React.createClass({
 
     if (!ValidComponentChildren.hasValidComponent(this.props.children)) {
       if (!this.props.isChild) {
-        return this.transferPropsTo(
-          <div className={classSet(classes)}>
+        return (
+          <div {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
             {this.renderProgressBar()}
           </div>
         );
       } else {
-        return this.transferPropsTo(
+        return (
           this.renderProgressBar()
         );
       }
     } else {
-      return this.transferPropsTo(
-        <div className={classSet(classes)}>
+      return (
+        <div {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
           {ValidComponentChildren.map(this.props.children, this.renderChildBar)}
         </div>
       );
     }
   },
 
-  renderChildBar: function (child) {
+  renderChildBar: function (child, index) {
     return cloneWithProps(child, {
       isChild: true,
-      key: child.props.key,
-      ref: child.props.ref
+      key: child.key ? child.key : index,
+      ref: child.ref
     });
   },
 
@@ -93,8 +93,10 @@ var ProgressBar = React.createClass({
       label = this.renderScreenReaderOnlyLabel(label);
     }
 
+    var classes = this.getBsClassSet();
+
     return (
-      <div className={classSet(this.getBsClassSet())} role="progressbar"
+      <div {...this.props} className={joinClasses(this.props.className, classSet(classes))} role="progressbar"
         style={{width: percentage + '%'}}
         aria-valuenow={this.props.now}
         aria-valuemin={this.props.min}

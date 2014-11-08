@@ -1,9 +1,9 @@
-/** @jsx React.DOM */
-
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var BootstrapMixin = require('./BootstrapMixin');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 var ListGroupItem = React.createClass({
@@ -13,8 +13,9 @@ var ListGroupItem = React.createClass({
     bsStyle: React.PropTypes.oneOf(['danger','info','success','warning']),
     active: React.PropTypes.any,
     disabled: React.PropTypes.any,
-    header: React.PropTypes.renderable,
-    onClick: React.PropTypes.func
+    header: React.PropTypes.node,
+    onClick: React.PropTypes.func,
+    clickKey: React.PropTypes.any
   },
 
   getDefaultProps: function () {
@@ -37,17 +38,18 @@ var ListGroupItem = React.createClass({
   },
 
   renderSpan: function (classes) {
-    return this.transferPropsTo(
-      <span className={classSet(classes)}>
+    return (
+      <span {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </span>
     );
   },
 
   renderAnchor: function (classes) {
-    return this.transferPropsTo(
+    return (
       <a
-        className={classSet(classes)}
+        {...this.props}
+        className={joinClasses(this.props.className, classSet(classes))}
         onClick={this.handleClick}>
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </a>
@@ -56,7 +58,7 @@ var ListGroupItem = React.createClass({
 
   renderStructuredContent: function () {
     var header;
-    if (React.isValidComponent(this.props.header)) {
+    if (React.isValidElement(this.props.header)) {
       header = cloneWithProps(this.props.header, {
         className: 'list-group-item-heading'
       });
@@ -83,7 +85,7 @@ var ListGroupItem = React.createClass({
   handleClick: function (e) {
     if (this.props.onClick) {
       e.preventDefault();
-      this.props.onClick(this.props.key, this.props.href);
+      this.props.onClick(this.props.clickKey, this.props.href);
     }
   }
 });

@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var tableInstance = (
     <Table responsive>
       <thead>
@@ -45,4 +43,4 @@ var tableInstance = (
     </Table>
   );
 
-React.renderComponent(tableInstance, mountNode);
+React.render(tableInstance, mountNode);

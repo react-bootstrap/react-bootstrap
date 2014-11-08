@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var buttonsInstance = (
     <ButtonToolbar>
       {/* Standard button */}
@@ -25,4 +23,4 @@ var buttonsInstance = (
     </ButtonToolbar>
   );
 
-React.renderComponent(buttonsInstance, mountNode);
+React.render(buttonsInstance, mountNode);

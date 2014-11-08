@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 /*global describe, it, assert, afterEach */
 
 var React           = require('react');
@@ -6,28 +5,7 @@ var ReactTestUtils  = require('react/lib/ReactTestUtils');
 var CustomPropTypes = require('../cjs/utils/CustomPropTypes');
 
 describe('CustomPropTypes', function () {
-  describe('componentClass', function () {
-    function validate(prop) {
-      return CustomPropTypes.componentClass({p: prop}, 'p', 'Component');
-    }
-    function validateRequired(prop) {
-      return CustomPropTypes.componentClass.isRequired({p: prop}, 'p', 'Component');
-    }
-    var nullClass = React.createClass({
-      render: function() { return <div />; }
-    });
 
-    it('Should return error with non componentClass', function() {
-      assert.instanceOf(validateRequired(), Error);
-      assert.instanceOf(validate({}), Error);
-      assert.instanceOf(validate(nullClass()), Error);
-    });
-    it('Should return undefined with componentClass', function() {
-      assert.isUndefined(validate());
-      assert.isUndefined(validate(React.DOM.div));
-      assert.isUndefined(validate(nullClass));
-    });
-  });
   describe('mountable', function () {
     function validate(prop) {
       return CustomPropTypes.mountable({p: prop}, 'p', 'Component');

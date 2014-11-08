@@ -1,6 +1,6 @@
-/** @jsx React.DOM */
 /*global describe, it, assert */
 
+var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var Pager          = require('../cjs/Pager');
 var PageItem       = require('../cjs/PageItem');
@@ -8,30 +8,30 @@ var PageItem       = require('../cjs/PageItem');
 describe('Pager', function () {
   it('Should output a unordered list as root element with class "pager"', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Pager/>
-        );
+      <Pager/>
+    );
     assert.equal(instance.getDOMNode().nodeName, 'UL');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pager'));
   });
 
   it('Should allow "PageItem" as child element', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Pager>
-            <PageItem href="#">Top</PageItem>
-          </Pager>
-        );
+      <Pager>
+        <PageItem href="#">Top</PageItem>
+      </Pager>
+    );
     assert.equal(instance.getDOMNode().children.length, 1);
     assert.equal(instance.getDOMNode().children[0].nodeName, 'LI');
   });
 
   it('Should allow multiple "PageItem" as child elements', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Pager>
-            <PageItem previous href="#">Previous</PageItem>
-            <PageItem disabled href="#">Top</PageItem>
-            <PageItem next href="#">Next</PageItem>
-          </Pager>
-        );
+      <Pager>
+        <PageItem previous href="#">Previous</PageItem>
+        <PageItem disabled href="#">Top</PageItem>
+        <PageItem next href="#">Next</PageItem>
+      </Pager>
+    );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'previous'));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled'));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'next'));
@@ -44,11 +44,11 @@ describe('Pager', function () {
       done();
     }
     var instance = ReactTestUtils.renderIntoDocument(
-          <Pager onSelect={handleSelect}>
-            <PageItem key={1} ref="item1" href="#prev">Previous</PageItem>
-            <PageItem key={2} ref="item2" href="#next">Next</PageItem>
-          </Pager>
-        );
+      <Pager onSelect={handleSelect}>
+        <PageItem selectKey={1} ref="item1" href="#prev">Previous</PageItem>
+        <PageItem selectKey={2} ref="item2" href="#next">Next</PageItem>
+      </Pager>
+    );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance.refs.item2, 'a'));
   });
 });

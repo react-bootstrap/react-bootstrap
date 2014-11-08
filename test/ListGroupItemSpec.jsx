@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
 var React          = require('react');
@@ -9,15 +8,15 @@ describe('ListGroupItem', function () {
 
   it('Should output a "span" with the class "list-group-item"', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <ListGroupItem>Text</ListGroupItem>
-        );
+      <ListGroupItem>Text</ListGroupItem>
+    );
     assert.equal(instance.getDOMNode().nodeName, "SPAN");
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
   });
 
   it('Should output a "anchor" if "href" prop is set', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <ListGroupItem href="#test">Achor</ListGroupItem>
+      <ListGroupItem href="#test">Achor</ListGroupItem>
     );
     assert.equal(instance.getDOMNode().nodeName, "A");
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
@@ -25,28 +24,28 @@ describe('ListGroupItem', function () {
 
   it('Should support "bsStyle" prop', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <ListGroupItem bsStyle="success">Item 1</ListGroupItem>
+      <ListGroupItem bsStyle="success">Item 1</ListGroupItem>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item-success'));
   });
 
   it('Should support "active" and "disabled" prop', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <ListGroupItem active>Item 1</ListGroupItem>
+      <ListGroupItem active>Item 1</ListGroupItem>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active'));
   });
 
   it('Should support "disabled" prop', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <ListGroupItem disabled>Item 2</ListGroupItem>
+      <ListGroupItem disabled>Item 2</ListGroupItem>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, "disabled"));
   });
 
   it('Should support "header" prop as a string', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <ListGroupItem header="Heading">Item text</ListGroupItem>
+      <ListGroupItem header="Heading">Item text</ListGroupItem>
     );
     assert.equal(instance.getDOMNode().firstChild.nodeName, "H4");
     assert.equal(instance.getDOMNode().firstChild.innerText, "Heading");
@@ -60,7 +59,7 @@ describe('ListGroupItem', function () {
     var header = <h2>Heading</h2>,
         instance = ReactTestUtils.renderIntoDocument(
           <ListGroupItem header={header}>Item text</ListGroupItem>
-    );
+        );
     assert.equal(instance.getDOMNode().firstChild.nodeName, "H2");
     assert.equal(instance.getDOMNode().firstChild.innerText, "Heading");
     assert.ok(instance.getDOMNode().firstChild.className.match(/\blist-group-item-heading\b/));
@@ -71,14 +70,13 @@ describe('ListGroupItem', function () {
 
   it('Should call "onClick" when item is clicked', function (done) {
     function handleClick(key, href) {
-      assert.equal(key, 2);
+      assert.equal(key, '2');
       assert.equal(href, "#link");
       done();
     }
     var instance = ReactTestUtils.renderIntoDocument(
-          <ListGroupItem onClick={handleClick} key={2} href="#link">Item</ListGroupItem>
-        );
+      <ListGroupItem onClick={handleClick} clickKey='2' href="#link">Item</ListGroupItem>
+    );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });
-
 });

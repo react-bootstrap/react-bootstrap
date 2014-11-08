@@ -1,7 +1,7 @@
-/** @jsx React.DOM */
 /* global document:false */
 
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 var FadeMixin = require('./FadeMixin');
@@ -17,7 +17,7 @@ var Modal = React.createClass({
   mixins: [BootstrapMixin, FadeMixin],
 
   propTypes: {
-    title: React.PropTypes.renderable,
+    title: React.PropTypes.node,
     backdrop: React.PropTypes.oneOf(['static', true, false]),
     keyboard: React.PropTypes.bool,
     closeButton: React.PropTypes.bool,
@@ -47,13 +47,14 @@ var Modal = React.createClass({
       'in': !this.props.animation || !document.querySelectorAll
     };
 
-    var modal = this.transferPropsTo(
+    var modal = (
       <div
+        {...this.props}
         title={null}
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
-        className={classSet(classes)}
+        className={joinClasses(this.props.className, classSet(classes))}
         onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
         ref="modal">
         <div className={classSet(dialogClasses)}>
@@ -106,7 +107,7 @@ var Modal = React.createClass({
 
   renderTitle: function () {
     return (
-      React.isValidComponent(this.props.title) ?
+      React.isValidElement(this.props.title) ?
         this.props.title : <h4 className="modal-title">{this.props.title}</h4>
     );
   },

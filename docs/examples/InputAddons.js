@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var inputAddonsInstance = (
     <form>
       <Input type="text" addonBefore="@" />
@@ -9,4 +7,4 @@ var inputAddonsInstance = (
     </form>
   );
 
-React.renderComponent(inputAddonsInstance, mountNode);
+React.render(inputAddonsInstance, mountNode);
