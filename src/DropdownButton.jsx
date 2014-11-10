@@ -8,6 +8,7 @@ var Button = require('./Button');
 var ButtonGroup = require('./ButtonGroup');
 var DropdownMenu = require('./DropdownMenu');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
+var joinClasses = require('react/lib/joinClasses');
 
 
 var DropdownButton = React.createClass({
@@ -24,21 +25,19 @@ var DropdownButton = React.createClass({
   },
 
   render: function () {
-    var classes = {
-      'dropdown-toggle': true
-    };
-    classes[this.props.className] = true;
-    var renderMethod = this.props.navItem ?
+    var {className, navItem, ...other} = this.props;
+
+    var renderMethod = navItem ?
       'renderNavItem' : 'renderButtonGroup';
 
     return this[renderMethod]([
       <Button
-        {...this.props}
+        {...other}
         ref="dropdownButton"
-        className={React.addons.classSet(classes)}
+        className={joinClasses(className, 'dropdown-toggle')}
         onClick={this.handleDropdownClick}
         key={0}
-        navDropdown={this.props.navItem}
+        navDropdown={navItem}
         navItem={null}
         title={null}
         pullRight={null}

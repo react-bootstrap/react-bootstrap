@@ -1,6 +1,8 @@
 /** @jsx React.DOM */
 
 var React = require('react/addons');
+var cx = React.addons.classSet;
+var joinClasses = require('react/lib/joinClasses');
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
 var domUtils = require('./utils/domUtils');
@@ -57,15 +59,15 @@ var Nav = React.createClass({
 
   renderUl: function () {
     var classes = this.getBsClassSet();
+    var {stacked, justified, navbar, pullRight, className, ...other} = this.props;
 
-    classes['nav-stacked'] = this.props.stacked;
-    classes['nav-justified'] = this.props.justified;
-    classes['navbar-nav'] = this.props.navbar;
-    classes['pull-right'] = this.props.pullRight;
-    classes[this.props.className] = true;
+    classes['nav-stacked'] = stacked;
+    classes['nav-justified'] = justified;
+    classes['navbar-nav'] = navbar;
+    classes['pull-right'] = pullRight;
 
     return (
-      <ul {...this.props} className={React.addons.classSet(classes)} ref="ul">
+      <ul {...other} className={joinClasses(className, cx(classes))} ref="ul">
         {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
       </ul>
     );

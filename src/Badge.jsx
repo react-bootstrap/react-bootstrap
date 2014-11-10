@@ -1,6 +1,8 @@
 /** @jsx React.DOM */
 
-var React = require('react');
+var React = require('react/addons');
+var cx    = React.addons.classSet;
+var joinClasses = require('react/lib/joinClasses');
 
 var Badge = React.createClass({
   propTypes: {
