@@ -1,9 +1,7 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
 var BootstrapMixin = require('./BootstrapMixin');
-var Button = require('./Button');
 
 var ButtonToolbar = React.createClass({
   mixins: [BootstrapMixin],
@@ -20,7 +18,7 @@ var ButtonToolbar = React.createClass({
     return this.transferPropsTo(
       <div
         role="toolbar"
-        className={classSet(classes)}>
+        className={React.addons.classSet(classes)}>
         {this.props.children}
       </div>
     );

@@ -1,8 +1,7 @@
 /** @jsx React.DOM */
 
-var React = require('react');
+var React = require('react/addons');
 var BootstrapMixin = require('./BootstrapMixin');
-var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var Nav = require('./Nav');
 var NavItem = require('./NavItem');
@@ -12,7 +11,7 @@ function getDefaultActiveKeyFromChildren(children) {
 
   ValidComponentChildren.forEach(children, function(child) {
     if (defaultActiveKey == null) {
-      defaultActiveKey = child.props.key;
+      defaultActiveKey = child.key;
     }
   });
 
@@ -63,15 +62,14 @@ var TabbedArea = React.createClass({
   },
 
   render: function () {
-    var activeKey =
-      this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+    var activeKey = this.getActiveKey();
 
     function renderTabIfSet(child) {
       return child.props.tab != null ? this.renderTab(child) : null;
     }
 
-    var nav = this.transferPropsTo(
-      <Nav activeKey={activeKey} onSelect={this.handleSelect} ref="tabs">
+    var nav = (
+      <Nav activeKey={activeKey} {...this.props} onSelect={this.handleSelect} ref="tabs">
         {ValidComponentChildren.map(this.props.children, renderTabIfSet, this)}
       </Nav>
     );
@@ -87,32 +85,32 @@ var TabbedArea = React.createClass({
   },
 
   getActiveKey: function () {
-    return this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+    return String(this.props.activeKey != null ? this.props.activeKey : this.state.activeKey);
   },
 
-  renderPane: function (child) {
+  renderPane: function (child, index) {
     var activeKey = this.getActiveKey();
 
-    return cloneWithProps(
+    return React.addons.cloneWithProps(
         child,
         {
-          active: (child.props.key === activeKey &&
+          active: (child.key === activeKey &&
             (this.state.previousActiveKey == null || !this.props.animation)),
-          ref: child.props.ref,
-          key: child.props.key,
+          ref: child.ref,
+          key: child.key != null ? child.key : index,
           animation: this.props.animation,
           onAnimateOutEnd: (this.state.previousActiveKey != null &&
-            child.props.key === this.state.previousActiveKey) ? this.handlePaneAnimateOutEnd: null
+            child.key === this.state.previousActiveKey) ? this.handlePaneAnimateOutEnd: null
         }
       );
   },
 
   renderTab: function (child) {
-    var key = child.props.key;
+    var key = child.key;
     return (
       <NavItem
         ref={'tab' + key}
-        key={key}>
+        navKey={key}>
         {child.props.tab}
       </NavItem>
     );

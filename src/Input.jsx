@@ -1,16 +1,16 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
 var Button = require('./Button');
+var classSet = React.addons.classSet;
 
 var Input = React.createClass({
   propTypes: {
     type: React.PropTypes.string,
-    label: React.PropTypes.renderable,
-    help: React.PropTypes.renderable,
-    addonBefore: React.PropTypes.renderable,
-    addonAfter: React.PropTypes.renderable,
+    label: React.PropTypes.node,
+    help: React.PropTypes.node,
+    addonBefore: React.PropTypes.node,
+    addonAfter: React.PropTypes.node,
     bsStyle: function(props) {
       if (props.type === 'submit') {
         // Return early if `type=submit` as the `Button` component
@@ -55,7 +55,7 @@ var Input = React.createClass({
     var input = null;
 
     if (!this.props.type) {
-      return this.props.children
+      return this.props.children;
     }
 
     switch (this.props.type) {
@@ -77,9 +77,7 @@ var Input = React.createClass({
         );
         break;
       case 'submit':
-        input = this.transferPropsTo(
-          <Button componentClass={React.DOM.input} ref='input' key='input' />
-        );
+        input = <Button {...this.props} componentClass='input' ref='input' key='input' />;
         break;
       default:
         var className = this.isCheckboxOrRadio() ? '' : 'form-control';

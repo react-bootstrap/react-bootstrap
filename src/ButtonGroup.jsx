@@ -1,9 +1,7 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
 var BootstrapMixin = require('./BootstrapMixin');
-var Button = require('./Button');
 
 var ButtonGroup = React.createClass({
   mixins: [BootstrapMixin],
@@ -27,7 +25,7 @@ var ButtonGroup = React.createClass({
 
     return this.transferPropsTo(
       <div
-        className={classSet(classes)}>
+        className={React.addons.classSet(classes)}>
         {this.props.children}
       </div>
     );

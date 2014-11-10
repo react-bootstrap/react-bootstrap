@@ -1,13 +1,9 @@
 /** @jsx React.DOM */
 
-var React = require('react');
+var React = require('react/addons');
 var BootstrapMixin = require('./BootstrapMixin');
-var CustomPropTypes = require('./utils/CustomPropTypes');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
-var Nav = require('./Nav');
 
 
 var Navbar = React.createClass({
@@ -20,9 +16,9 @@ var Navbar = React.createClass({
     inverse: React.PropTypes.bool,
     fluid: React.PropTypes.bool,
     role: React.PropTypes.string,
-    componentClass: CustomPropTypes.componentClass.isRequired,
-    brand: React.PropTypes.renderable,
-    toggleButton: React.PropTypes.renderable,
+    componentClass: React.PropTypes.node,
+    brand: React.PropTypes.node,
+    toggleButton: React.PropTypes.node,
     onToggle: React.PropTypes.func,
     navExpanded: React.PropTypes.bool,
     defaultNavExpanded: React.PropTypes.bool
@@ -33,7 +29,7 @@ var Navbar = React.createClass({
       bsClass: 'navbar',
       bsStyle: 'default',
       role: 'navigation',
-      componentClass: React.DOM.nav
+      componentClass: 'nav'
     };
   },
 
@@ -66,30 +62,29 @@ var Navbar = React.createClass({
 
   render: function () {
     var classes = this.getBsClassSet();
-    var componentClass = this.props.componentClass;
 
     classes['navbar-fixed-top'] = this.props.fixedTop;
     classes['navbar-fixed-bottom'] = this.props.fixedBottom;
     classes['navbar-static-top'] = this.props.staticTop;
     classes['navbar-inverse'] = this.props.inverse;
 
-    return ( //this.transferPropsTo(
-      <componentClass className={classSet(classes)}>
+    return (
+      <this.props.componentClass {...this.props} className={React.addons.classSet(classes)}>
         <div className={this.props.fluid ? 'container-fluid' : 'container'}>
           {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey) ? this.renderHeader() : null}
           {ValidComponentChildren.map(this.props.children, this.renderChild)}
         </div>
-      </componentClass>
+      </this.props.componentClass>
     );
   },
 
-  renderChild: function (child) {
-    return cloneWithProps(child, {
+  renderChild: function (child, index) {
+    return React.addons.cloneWithProps(child, {
       navbar: true,
-      collapsable: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.key,
-      expanded: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.key && this.isNavExpanded(),
-      key: child.props.key,
-      ref: child.props.ref
+      collapsable: this.props.toggleNavKey != null && this.props.toggleNavKey === child.key,
+      expanded: this.props.toggleNavKey != null && this.props.toggleNavKey === child.key && this.isNavExpanded(),
+      key: child.key != null ? child.key : index,
+      ref: child.ref
     });
   },
 
@@ -98,7 +93,7 @@ var Navbar = React.createClass({
 
     if (this.props.brand) {
       brand = React.isValidComponent(this.props.brand) ?
-        cloneWithProps(this.props.brand, {
+        React.addons.cloneWithProps(this.props.brand, {
           className: 'navbar-brand'
         }) : <span className="navbar-brand">{this.props.brand}</span>;
     }
@@ -115,7 +110,7 @@ var Navbar = React.createClass({
     var children;
 
     if (React.isValidComponent(this.props.toggleButton)) {
-      return cloneWithProps(this.props.toggleButton, {
+      return React.addons.cloneWithProps(this.props.toggleButton, {
         className: 'navbar-toggle',
         onClick: createChainedFunction(this.handleToggle, this.props.toggleButton.props.onClick)
       });

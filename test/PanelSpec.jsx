@@ -120,7 +120,7 @@ describe('Panel', function () {
       done();
     }
     var instance = ReactTestUtils.renderIntoDocument(
-          <Panel collapsable={true} onSelect={handleSelect} header="Click me" key={1}>Panel content</Panel>
+          <Panel collapsable={true} onSelect={handleSelect} header="Click me" navKey={1}>Panel content</Panel>
         );
     var title = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-title');
     ReactTestUtils.Simulate.click(title.getDOMNode().firstChild);

@@ -1,8 +1,6 @@
 /** @jsx React.DOM */
 
 var React = require('react');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
 var BootstrapMixin = require('./BootstrapMixin');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
@@ -32,29 +30,29 @@ var PanelGroup = React.createClass({
 
   render: function () {
     return this.transferPropsTo(
-      <div className={classSet(this.getBsClassSet())} onSelect={null}>
+      <div className={React.addons.classSet(this.getBsClassSet())} onSelect={null}>
         {ValidComponentChildren.map(this.props.children, this.renderPanel)}
       </div>
     );
   },
 
-  renderPanel: function (child) {
+  renderPanel: function (child, index) {
     var activeKey =
       this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
 
     var props = {
       bsStyle: child.props.bsStyle || this.props.bsStyle,
-      key: child.props.key,
-      ref: child.props.ref
+      key: child.key != null ? child.key : index,
+      ref: child.ref
     };
 
     if (this.props.accordion) {
       props.collapsable = true;
-      props.expanded = (child.props.key === activeKey);
+      props.expanded = (child.key === activeKey);
       props.onSelect = this.handleSelect;
     }
 
-    return cloneWithProps(
+    return React.addons.cloneWithProps(
       child,
       props
     );

@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 /*global describe, it, assert */
 
+var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var PageItem       = require('../cjs/PageItem');
 
@@ -42,7 +43,7 @@ describe('PageItem', function () {
       done();
     }
     var instance = ReactTestUtils.renderIntoDocument(
-          <PageItem key={1} onSelect={handleSelect}>Next</PageItem>
+          <PageItem navKey={1} onSelect={handleSelect}>Next</PageItem>
         );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });

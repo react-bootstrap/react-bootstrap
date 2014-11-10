@@ -3,8 +3,6 @@
 var React = require('react');
 var Interpolate = require('./Interpolate');
 var BootstrapMixin = require('./BootstrapMixin');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
 
@@ -13,7 +11,7 @@ var ProgressBar = React.createClass({
     min: React.PropTypes.number,
     now: React.PropTypes.number,
     max: React.PropTypes.number,
-    label: React.PropTypes.renderable,
+    label: React.PropTypes.node,
     srOnly: React.PropTypes.bool,
     striped: React.PropTypes.bool,
     active: React.PropTypes.bool
@@ -25,7 +23,8 @@ var ProgressBar = React.createClass({
     return {
       bsClass: 'progress-bar',
       min: 0,
-      max: 100
+      max: 100,
+      interpolateClass: Interpolate
     };
   },
 
@@ -47,30 +46,28 @@ var ProgressBar = React.createClass({
 
     if (!ValidComponentChildren.hasValidComponent(this.props.children)) {
       if (!this.props.isChild) {
-        return this.transferPropsTo(
-          <div className={classSet(classes)}>
+        return (
+          <div {...this.props} className={React.addons.classSet(classes)}>
             {this.renderProgressBar()}
           </div>
         );
       } else {
-        return this.transferPropsTo(
-          this.renderProgressBar()
-        );
+        return this.renderProgressBar();
       }
     } else {
-      return this.transferPropsTo(
-        <div className={classSet(classes)}>
-          {ValidComponentChildren.map(this.props.children, this.renderChildBar)}
+      return (
+        <div {...this.props} className={React.addons.classSet(classes)}>
+          {React.Children.map(this.props.children, this.renderChildBar)}
         </div>
       );
     }
   },
 
-  renderChildBar: function (child) {
-    return cloneWithProps(child, {
+  renderChildBar: function (child, index) {
+    return React.addons.cloneWithProps(child, {
       isChild: true,
-      key: child.props.key,
-      ref: child.props.ref
+      key: child.key != null ? child.key : index,
+      ref: child.ref
     });
   },
 
@@ -94,7 +91,7 @@ var ProgressBar = React.createClass({
     }
 
     return (
-      <div className={classSet(this.getBsClassSet())} role="progressbar"
+      <div className={React.addons.classSet(this.getBsClassSet())} role="progressbar"
         style={{width: percentage + '%'}}
         aria-valuenow={this.props.now}
         aria-valuemin={this.props.min}
@@ -105,17 +102,14 @@ var ProgressBar = React.createClass({
   },
 
   renderLabel: function (percentage) {
-    var InterpolateClass = this.props.interpolateClass || Interpolate;
-
     return (
-      <InterpolateClass
+      <this.props.interpolateClass
         now={this.props.now}
         min={this.props.min}
         max={this.props.max}
         percent={percentage}
-        bsStyle={this.props.bsStyle}>
-        {this.props.label}
-      </InterpolateClass>
+        bsStyle={this.props.bsStyle}
+        format={this.props.label} />
     );
   },
 

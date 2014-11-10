@@ -16,12 +16,12 @@ var Row = React.createClass({
   },
 
   render: function () {
-    var componentClass = this.props.componentClass;
+    var ComponentClass = this.props.componentClass;
 
     return this.transferPropsTo(
-      <componentClass className="row">
+      <ComponentClass className="row">
         {this.props.children}
-      </componentClass>
+      </ComponentClass>
     );
   }
 });

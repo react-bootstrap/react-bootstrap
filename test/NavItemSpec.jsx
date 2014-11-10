@@ -35,7 +35,7 @@ describe('NavItem', function () {
       done();
     }
     var content = <span>Item content</span>;
-    var instance = ReactTestUtils.renderIntoDocument(<NavItem key={2} onSelect={handleSelect}>{content}</NavItem>);
+    var instance = ReactTestUtils.renderIntoDocument(<NavItem navKey={2} onSelect={handleSelect}>{content}</NavItem>);
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
   });
 

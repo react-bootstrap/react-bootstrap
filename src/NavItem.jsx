@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var NavItem = React.createClass({
@@ -12,7 +11,8 @@ var NavItem = React.createClass({
     active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    navKey:   React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
   },
 
   getDefaultProps: function () {
@@ -27,8 +27,8 @@ var NavItem = React.createClass({
       'disabled': this.props.disabled
     };
 
-    return this.transferPropsTo(
-      <li className={classSet(classes)}>
+    return (
+      <li {...this.props} className={React.addons.classSet(classes)}>
         <a
           href={this.props.href}
           title={this.props.title}
@@ -45,7 +45,7 @@ var NavItem = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.key,this.props.href);
+        this.props.onSelect(this.props.navKey,this.props.href);
       }
     }
   }

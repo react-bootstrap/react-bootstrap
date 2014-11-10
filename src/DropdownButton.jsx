@@ -1,8 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+var React = require('react/addons');
 var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
 var DropdownStateMixin = require('./DropdownStateMixin');
@@ -10,6 +8,7 @@ var Button = require('./Button');
 var ButtonGroup = require('./ButtonGroup');
 var DropdownMenu = require('./DropdownMenu');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
+var joinClasses = require('react/lib/joinClasses');
 
 
 var DropdownButton = React.createClass({
@@ -18,7 +17,7 @@ var DropdownButton = React.createClass({
   propTypes: {
     pullRight: React.PropTypes.bool,
     dropup:    React.PropTypes.bool,
-    title:     React.PropTypes.renderable,
+    title:     React.PropTypes.node,
     href:      React.PropTypes.string,
     onClick:   React.PropTypes.func,
     onSelect:  React.PropTypes.func,
@@ -26,25 +25,26 @@ var DropdownButton = React.createClass({
   },
 
   render: function () {
-    var className = 'dropdown-toggle';
+    var {className, navItem, ...other} = this.props;
 
-    var renderMethod = this.props.navItem ?
+    var renderMethod = navItem ?
       'renderNavItem' : 'renderButtonGroup';
 
     return this[renderMethod]([
-      this.transferPropsTo(<Button
+      <Button
+        {...other}
         ref="dropdownButton"
-        className={className}
+        className={joinClasses(className, 'dropdown-toggle')}
         onClick={this.handleDropdownClick}
         key={0}
-        navDropdown={this.props.navItem}
+        navDropdown={navItem}
         navItem={null}
         title={null}
         pullRight={null}
         dropup={null}>
         {this.props.title}{' '}
         <span className="caret" />
-      </Button>),
+      </Button>,
       <DropdownMenu
         ref="menu"
         aria-labelledby={this.props.id}
@@ -64,7 +64,7 @@ var DropdownButton = React.createClass({
     return (
       <ButtonGroup
         bsSize={this.props.bsSize}
-        className={classSet(groupClasses)}>
+        className={React.addons.classSet(groupClasses)}>
         {children}
       </ButtonGroup>
     );
@@ -78,28 +78,28 @@ var DropdownButton = React.createClass({
       };
 
     return (
-      <li className={classSet(classes)}>
+      <li className={React.addons.classSet(classes)}>
         {children}
       </li>
     );
   },
 
-  renderMenuItem: function (child) {
+  renderMenuItem: function (child, index) {
     // Only handle the option selection if an onSelect prop has been set on the
     // component or it's child, this allows a user not to pass an onSelect
     // handler and have the browser preform the default action.
     var handleOptionSelect = this.props.onSelect || child.props.onSelect ?
       this.handleOptionSelect : null;
 
-    return cloneWithProps(
+    return React.addons.cloneWithProps(
       child,
       {
         // Capture onSelect events
         onSelect: createChainedFunction(child.props.onSelect, handleOptionSelect),
 
         // Force special props to be transferred
-        key: child.props.key,
-        ref: child.props.ref
+        key: child.key != null ? child.key : index,
+        ref: child.ref
       }
     );
   },

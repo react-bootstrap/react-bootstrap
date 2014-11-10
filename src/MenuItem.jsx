@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
 
 var MenuItem = React.createClass({
   propTypes: {
@@ -9,7 +8,8 @@ var MenuItem = React.createClass({
     divider:  React.PropTypes.bool,
     href:     React.PropTypes.string,
     title:    React.PropTypes.string,
-    onSelect: React.PropTypes.func
+    onSelect: React.PropTypes.func,
+    navKey:   React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
   },
 
   getDefaultProps: function () {
@@ -21,7 +21,7 @@ var MenuItem = React.createClass({
   handleClick: function (e) {
     if (this.props.onSelect) {
       e.preventDefault();
-      this.props.onSelect(this.props.key);
+      this.props.onSelect(this.props.navKey);
     }
   },
 
@@ -47,7 +47,7 @@ var MenuItem = React.createClass({
     }
 
     return this.transferPropsTo(
-      <li role="presentation" title={null} href={null} className={classSet(classes)}>
+      <li role="presentation" title={null} href={null} className={React.addons.classSet(classes)}>
         {children}
       </li>
     );

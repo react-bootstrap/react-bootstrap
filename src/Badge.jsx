@@ -1,8 +1,8 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-var classSet = require('./utils/classSet');
+var React = require('react/addons');
+var cx    = React.addons.classSet;
+var joinClasses = require('react/lib/joinClasses');
 
 var Badge = React.createClass({
   propTypes: {
@@ -12,10 +12,11 @@ var Badge = React.createClass({
   render: function () {
     var classes = {
       'pull-right': this.props.pullRight,
-      'badge': ValidComponentChildren.hasValidComponent(this.props.children)
+      'badge': this.props.children != null
     };
-    return this.transferPropsTo(
-      <span className={classSet(classes)}>
+    classes[this.props.className] = true;
+    return (
+      <span {...this.props} className={React.addons.classSet(classes)}>
         {this.props.children}
       </span>
     );

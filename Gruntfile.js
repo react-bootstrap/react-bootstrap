@@ -47,6 +47,9 @@ module.exports = function (grunt) {
     },
 
     react: {
+      options: {
+        harmony: true
+      },
       src: {
         files: [
           {

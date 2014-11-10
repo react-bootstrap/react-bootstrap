@@ -1,11 +1,11 @@
 /** @jsx React.DOM */
 
-var React = require('react');
+var React = require('react/addons');
+var cx = React.addons.classSet;
+var joinClasses = require('react/lib/joinClasses');
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
-var classSet = require('./utils/classSet');
 var domUtils = require('./utils/domUtils');
-var cloneWithProps = require('./utils/cloneWithProps');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
@@ -50,8 +50,8 @@ var Nav = React.createClass({
       return this.transferPropsTo(this.renderUl());
     }
 
-    return this.transferPropsTo(
-      <nav className={classSet(classes)}>
+    return (
+      <nav {...this.props} className={React.addons.classSet(classes)}>
         {this.renderUl()}
       </nav>
     );
@@ -59,14 +59,15 @@ var Nav = React.createClass({
 
   renderUl: function () {
     var classes = this.getBsClassSet();
+    var {stacked, justified, navbar, pullRight, className, ...other} = this.props;
 
-    classes['nav-stacked'] = this.props.stacked;
-    classes['nav-justified'] = this.props.justified;
-    classes['navbar-nav'] = this.props.navbar;
-    classes['pull-right'] = this.props.pullRight;
+    classes['nav-stacked'] = stacked;
+    classes['nav-justified'] = justified;
+    classes['navbar-nav'] = navbar;
+    classes['pull-right'] = pullRight;
 
     return (
-      <ul className={classSet(classes)} ref="ul">
+      <ul {...other} className={joinClasses(className, cx(classes))} ref="ul">
         {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
       </ul>
     );
@@ -77,7 +78,7 @@ var Nav = React.createClass({
       return true;
     }
     if (this.props.activeKey != null) {
-      if (child.props.key === this.props.activeKey) {
+      if (child.props.navKey === this.props.activeKey) {
         return true;
       }
     }
@@ -90,16 +91,14 @@ var Nav = React.createClass({
     return child.props.active;
   },
 
-  renderNavItem: function (child) {
-    return cloneWithProps(
+  renderNavItem: function (child, index) {
+    return React.addons.cloneWithProps(
       child,
       {
         active: this.getChildActiveProp(child),
-        activeKey: this.props.activeKey,
-        activeHref: this.props.activeHref,
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.props.ref,
-        key: child.props.key,
+        ref: child.ref,
+        key: child.key != null ? child.key : index,
         navItem: true
       }
     );

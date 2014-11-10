@@ -1,7 +1,6 @@
 /** @jsx React.DOM */
 
-var React = require('react');
-var cloneWithProps = require('./utils/cloneWithProps');
+var React = require('react/addons');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
@@ -20,13 +19,13 @@ var Pager = React.createClass({
     );
   },
 
-  renderPageItem: function (child) {
-    return cloneWithProps(
+  renderPageItem: function (child, index) {
+    return React.addons.cloneWithProps(
       child,
       {
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.props.ref,
-        key: child.props.key
+        key: child.key != null ? child.key : index,
+        ref: child.ref
       }
     );
   }

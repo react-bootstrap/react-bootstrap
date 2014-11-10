@@ -4,6 +4,7 @@
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var Pager          = require('../cjs/Pager');
 var PageItem       = require('../cjs/PageItem');
+var React          = require('react');
 
 describe('Pager', function () {
   it('Should output a unordered list as root element with class "pager"', function () {
@@ -45,8 +46,8 @@ describe('Pager', function () {
     }
     var instance = ReactTestUtils.renderIntoDocument(
           <Pager onSelect={handleSelect}>
-            <PageItem key={1} ref="item1" href="#prev">Previous</PageItem>
-            <PageItem key={2} ref="item2" href="#next">Next</PageItem>
+            <PageItem navKey={1} ref="item1" href="#prev">Previous</PageItem>
+            <PageItem navKey={2} ref="item2" href="#next">Next</PageItem>
           </Pager>
         );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance.refs.item2, 'a'));
