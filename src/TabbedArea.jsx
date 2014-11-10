@@ -88,7 +88,7 @@ var TabbedArea = React.createClass({
     return String(this.props.activeKey != null ? this.props.activeKey : this.state.activeKey);
   },
 
-  renderPane: function (child) {
+  renderPane: function (child, index) {
     var activeKey = this.getActiveKey();
 
     return React.addons.cloneWithProps(
@@ -97,7 +97,7 @@ var TabbedArea = React.createClass({
           active: (child.key === activeKey &&
             (this.state.previousActiveKey == null || !this.props.animation)),
           ref: child.ref,
-          key: child.key,
+          key: child.key != null ? child.key : index,
           animation: this.props.animation,
           onAnimateOutEnd: (this.state.previousActiveKey != null &&
             child.key === this.state.previousActiveKey) ? this.handlePaneAnimateOutEnd: null

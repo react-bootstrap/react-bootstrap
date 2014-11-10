@@ -17,11 +17,11 @@ var ListGroup = React.createClass({
     );
   },
 
-  renderListItem: function (child) {
+  renderListItem: function (child, index) {
     return React.addons.cloneWithProps(child, {
       onClick: createChainedFunction(child.props.onClick, this.props.onClick),
       ref: child.ref,
-      key: child.key
+      key: child.key != null ? child.key : index,
     });
   }
 });

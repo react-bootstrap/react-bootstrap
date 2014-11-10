@@ -84,7 +84,7 @@ var DropdownButton = React.createClass({
     );
   },
 
-  renderMenuItem: function (child) {
+  renderMenuItem: function (child, index) {
     // Only handle the option selection if an onSelect prop has been set on the
     // component or it's child, this allows a user not to pass an onSelect
     // handler and have the browser preform the default action.
@@ -98,7 +98,7 @@ var DropdownButton = React.createClass({
         onSelect: createChainedFunction(child.props.onSelect, handleOptionSelect),
 
         // Force special props to be transferred
-        key: child.key,
+        key: child.key != null ? child.key : index,
         ref: child.ref
       }
     );

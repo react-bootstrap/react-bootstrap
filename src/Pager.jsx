@@ -19,13 +19,13 @@ var Pager = React.createClass({
     );
   },
 
-  renderPageItem: function (child) {
+  renderPageItem: function (child, index) {
     return React.addons.cloneWithProps(
       child,
       {
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.ref,
-        key: child.key
+        key: child.key != null ? child.key : index,
+        ref: child.ref
       }
     );
   }

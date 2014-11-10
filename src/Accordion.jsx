@@ -5,8 +5,8 @@ var PanelGroup = require('./PanelGroup');
 
 var Accordion = React.createClass({
   render: function () {
-    return this.transferPropsTo(
-      <PanelGroup accordion={true}>
+    return (
+      <PanelGroup {...this.props} accordion={true}>
         {this.props.children}
       </PanelGroup>
     );

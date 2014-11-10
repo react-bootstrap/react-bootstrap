@@ -36,13 +36,13 @@ var PanelGroup = React.createClass({
     );
   },
 
-  renderPanel: function (child) {
+  renderPanel: function (child, index) {
     var activeKey =
       this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
 
     var props = {
       bsStyle: child.props.bsStyle || this.props.bsStyle,
-      key: child.key,
+      key: child.key != null ? child.key : index,
       ref: child.ref
     };
 

@@ -91,14 +91,14 @@ var Nav = React.createClass({
     return child.props.active;
   },
 
-  renderNavItem: function (child) {
+  renderNavItem: function (child, index) {
     return React.addons.cloneWithProps(
       child,
       {
         active: this.getChildActiveProp(child),
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
         ref: child.ref,
-        key: child.key,
+        key: child.key != null ? child.key : index,
         navItem: true
       }
     );

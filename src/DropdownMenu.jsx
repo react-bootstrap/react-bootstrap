@@ -30,7 +30,7 @@ var DropdownMenu = React.createClass({
       );
   },
 
-  renderMenuItem: function (child) {
+  renderMenuItem: function (child, index) {
     return React.addons.cloneWithProps(
       child,
       {
@@ -38,7 +38,7 @@ var DropdownMenu = React.createClass({
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
 
         // Force special props to be transferred
-        key: child.key,
+        key: child.key != null ? child.key : index,
         ref: child.ref
       }
     );

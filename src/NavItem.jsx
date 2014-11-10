@@ -12,7 +12,7 @@ var NavItem = React.createClass({
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
-    navKey: React.PropTypes.string
+    navKey:   React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
   },
 
   getDefaultProps: function () {

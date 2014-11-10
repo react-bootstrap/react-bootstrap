@@ -78,12 +78,12 @@ var Navbar = React.createClass({
     );
   },
 
-  renderChild: function (child) {
+  renderChild: function (child, index) {
     return React.addons.cloneWithProps(child, {
       navbar: true,
       collapsable: this.props.toggleNavKey != null && this.props.toggleNavKey === child.key,
       expanded: this.props.toggleNavKey != null && this.props.toggleNavKey === child.key && this.isNavExpanded(),
-      key: child.key,
+      key: child.key != null ? child.key : index,
       ref: child.ref
     });
   },

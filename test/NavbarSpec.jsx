@@ -62,7 +62,7 @@ describe('Nav', function () {
 
   it('Should override node class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-          <Navbar componentClass={React.DOM.header}/>
+          <Navbar componentClass='header'/>
         );
     assert.ok(instance.getDOMNode().nodeName, 'HEADER');
   });

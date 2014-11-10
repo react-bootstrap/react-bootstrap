@@ -9,7 +9,7 @@ var MenuItem = React.createClass({
     href:     React.PropTypes.string,
     title:    React.PropTypes.string,
     onSelect: React.PropTypes.func,
-    navKey:   React.PropTypes.string
+    navKey:   React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number])
   },
 
   getDefaultProps: function () {
