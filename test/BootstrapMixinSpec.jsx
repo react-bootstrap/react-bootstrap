@@ -91,13 +91,6 @@ describe('BootstrapMixin', function () {
       assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-default': true});
     });
 
-    it('should return "btn btn-default"', function () {
-      var instance = ReactTestUtils.renderIntoDocument(
-        Component({bsClass: 'button', bsStyle: 'default'}, 'content')
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-default': true});
-    });
-
     it('should return "btn btn-primary"', function () {
       var instance = ReactTestUtils.renderIntoDocument(
         Component({bsClass: 'button', bsStyle: 'primary'}, 'content')
