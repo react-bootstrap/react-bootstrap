@@ -127,7 +127,7 @@ describe('DropdownButton', function () {
     );
   });
 
-  it('should not set onSelect to child with no onSelect prop', function () {
+  it('should not set preventDefault on child with no onSelect prop', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
         <MenuItem key={1}>MenuItem 1 content</MenuItem>
@@ -136,7 +136,31 @@ describe('DropdownButton', function () {
     );
 
     var menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
-    assert.notOk(menuItems[0].props.onSelect);
+    assert.notOk(menuItems[0].props.preventDefault);
+  });
+
+  it('should set preventDefault on child with onSelect prop', function () {
+    instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="Title">
+        <MenuItem key={1} onSelect={function() {}}>MenuItem 1 content</MenuItem>
+        <MenuItem key={2}>MenuItem 2 content</MenuItem>
+      </DropdownButton>
+    );
+
+    var menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
+    assert.ok(menuItems[0].props.preventDefault);
+  });
+
+  it('should set preventDefault on child with own onSelect prop', function () {
+    instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="Title" onSelect={function() {}}>
+        <MenuItem key={1}>MenuItem 1 content</MenuItem>
+        <MenuItem key={2}>MenuItem 2 content</MenuItem>
+      </DropdownButton>
+    );
+
+    var menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
+    assert.ok(menuItems[0].props.preventDefault);
   });
 
   describe('when open', function () {
