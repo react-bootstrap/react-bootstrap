@@ -34,7 +34,8 @@ var OverlayTrigger = React.createClass({
     delayShow: React.PropTypes.number,
     delayHide: React.PropTypes.number,
     defaultOverlayShown: React.PropTypes.bool,
-    overlay: React.PropTypes.renderable.isRequired
+    getOverlayDOMNode: React.PropTypes.func,
+    overlay: React.PropTypes.renderable
   },
 
   getDefaultProps: function () {
@@ -178,6 +179,11 @@ var OverlayTrigger = React.createClass({
     var childOffset = this.getPosition();
 
     var overlayNode = this.getOverlayDOMNode();
+
+    if (this.props.getOverlayDOMNode) {
+      overlayNode = this.props.getOverlayDOMNode(overlayNode);
+    }
+
     var overlayHeight = overlayNode.offsetHeight;
     var overlayWidth = overlayNode.offsetWidth;
 
