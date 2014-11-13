@@ -51,6 +51,10 @@ var Input = React.createClass({
     return this.props.type === 'radio' || this.props.type === 'checkbox';
   },
 
+  isFile: function () {
+    return this.props.type === 'file';
+  },
+
   renderInput: function () {
     var input = null;
 
@@ -82,7 +86,7 @@ var Input = React.createClass({
         );
         break;
       default:
-        var className = this.isCheckboxOrRadio() ? '' : 'form-control';
+        var className = this.isCheckboxOrRadio() || this.isFile() ? '' : 'form-control';
         input = <input className={className} ref="input" key="input" />;
     }
 
