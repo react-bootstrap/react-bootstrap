@@ -17,7 +17,6 @@
  */
 
 var React = require('react');
-var ReactElement = require("./ReactElement");
 var joinClasses = require('./joinClasses');
 var assign = require("./Object.assign");
 
@@ -130,7 +129,10 @@ function cloneWithProps(child, props) {
 
   // The current API doesn't retain _owner and _context, which is why this
   // doesn't use ReactElement.cloneAndReplaceProps.
-  return ReactElement.createElement(child.type, newProps);
+  var mockLegacyFactory = function(){};
+  mockLegacyFactory.isReactLegacyFactory = true;
+  mockLegacyFactory.type = child.type;
+  return React.createElement(mockLegacyFactory, newProps);
 }
 
 module.exports = cloneWithProps;
