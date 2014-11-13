@@ -136,6 +136,21 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-control-feedback'));
   });
 
+  it('renders file correctly', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Input type="file" wrapperClassName="wrapper" label="Label" help="h" />
+    );
+
+    var node = instance.getDOMNode();
+    assert.include(node.className, 'form-group');
+    assert.equal(node.children[0].tagName.toLowerCase(), 'label');
+    assert.include(node.children[1].className, 'wrapper');
+    assert.equal(node.children[1].children[0].tagName.toLowerCase(), 'input');
+    assert.equal(node.children[1].children[0].className, '');
+    assert.equal(node.children[1].children[0].type, 'file');
+    assert.equal(node.children[1].children[1].className, 'help-block');
+  });
+
   it('renders checkbox/radio correctly', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <Input type="checkbox" wrapperClassName="wrapper" label="Label" help="h" />
