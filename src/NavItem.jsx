@@ -12,7 +12,7 @@ var NavItem = React.createClass({
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
-    selectKey: React.PropTypes.any
+    eventKey: React.PropTypes.any
   },
 
   getDefaultProps: function () {
@@ -45,7 +45,7 @@ var NavItem = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.selectKey, this.props.href);
+        this.props.onSelect(this.props.eventKey, this.props.href);
       }
     }
   }

@@ -13,7 +13,7 @@ var Panel = React.createClass({
     onSelect: React.PropTypes.func,
     header: React.PropTypes.node,
     footer: React.PropTypes.node,
-    selectKey: React.PropTypes.any
+    eventKey: React.PropTypes.any
   },
 
   getDefaultProps: function () {
@@ -26,7 +26,7 @@ var Panel = React.createClass({
   handleSelect: function (e) {
     if (this.props.onSelect) {
       this._isChanging = true;
-      this.props.onSelect(this.props.selectKey);
+      this.props.onSelect(this.props.eventKey);
       this._isChanging = false;
     }
 

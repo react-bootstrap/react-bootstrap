@@ -9,7 +9,7 @@ var MenuItem = React.createClass({
     href:      React.PropTypes.string,
     title:     React.PropTypes.string,
     onSelect:  React.PropTypes.func,
-    selectKey: React.PropTypes.any
+    eventKey: React.PropTypes.any
   },
 
   getDefaultProps: function () {
@@ -21,7 +21,7 @@ var MenuItem = React.createClass({
   handleClick: function (e) {
     if (this.props.onSelect) {
       e.preventDefault();
-      this.props.onSelect(this.props.selectKey);
+      this.props.onSelect(this.props.eventKey);
     }
   },
 

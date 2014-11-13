@@ -9,7 +9,7 @@ var PageItem = React.createClass({
     previous: React.PropTypes.bool,
     next: React.PropTypes.bool,
     onSelect: React.PropTypes.func,
-    selectKey: React.PropTypes.any
+    eventKey: React.PropTypes.any
   },
 
   getDefaultProps: function () {
@@ -45,7 +45,7 @@ var PageItem = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.selectKey, this.props.href);
+        this.props.onSelect(this.props.eventKey, this.props.href);
       }
     }
   }

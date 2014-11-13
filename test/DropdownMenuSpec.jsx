@@ -9,8 +9,8 @@ describe('DropdownMenu', function () {
   it('Should render menu correctly', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <DropdownMenu>
-        <MenuItem selectKey="1" ref="item1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2" ref="item2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1" ref="item1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2" ref="item2">MenuItem 2 content</MenuItem>
       </DropdownMenu>
     );
 
@@ -29,7 +29,7 @@ describe('DropdownMenu', function () {
   it('Should pass props to dropdown', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <DropdownMenu className="new-fancy-class">
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
       </DropdownMenu>
     );
 
@@ -37,16 +37,16 @@ describe('DropdownMenu', function () {
     assert.ok(node.className.match(/\bnew-fancy-class\b/));
   });
 
-  it('should call onSelect with selectKey when MenuItem is clicked', function (done) {
-    function handleSelect(selectKey) {
-      assert.equal(selectKey, '2');
+  it('should call onSelect with eventKey when MenuItem is clicked', function (done) {
+    function handleSelect(eventKey) {
+      assert.equal(eventKey, '2');
       done();
     }
 
     var instance = ReactTestUtils.renderIntoDocument(
       <DropdownMenu onSelect={handleSelect}>
-        <MenuItem selectKey='1'>MenuItem 1 content</MenuItem>
-        <MenuItem selectKey='2'>MenuItem 2 content</MenuItem>
+        <MenuItem eventKey='1'>MenuItem 1 content</MenuItem>
+        <MenuItem eventKey='2'>MenuItem 2 content</MenuItem>
       </DropdownMenu>
     );
 
@@ -59,8 +59,8 @@ describe('DropdownMenu', function () {
 
   it('should call all onSelect handlers when MenuItem is clicked', function (done) {
     var i = 0;
-    function handleSelect(selectKey) {
-      assert.equal(selectKey, '2');
+    function handleSelect(eventKey) {
+      assert.equal(eventKey, '2');
       i += 1;
       if ( i >= 2 ) {
         done();
@@ -69,8 +69,8 @@ describe('DropdownMenu', function () {
 
     var instance = ReactTestUtils.renderIntoDocument(
       <DropdownMenu onSelect={handleSelect}>
-        <MenuItem selectKey='1' onSelect={handleSelect}>MenuItem 1 content</MenuItem>
-        <MenuItem selectKey='2' onSelect={handleSelect}>MenuItem 2 content</MenuItem>
+        <MenuItem eventKey='1' onSelect={handleSelect}>MenuItem 1 content</MenuItem>
+        <MenuItem eventKey='2' onSelect={handleSelect}>MenuItem 2 content</MenuItem>
       </DropdownMenu>
     );
 
@@ -89,8 +89,8 @@ describe('DropdownMenu', function () {
 
     var instance = ReactTestUtils.renderIntoDocument(
       <DropdownMenu>
-        <MenuItem selectKey={1}>MenuItem 1 content</MenuItem>
-        <MenuItem selectKey={2} href="javascript:window.__someGlobalTestCallback();">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey={1}>MenuItem 1 content</MenuItem>
+        <MenuItem eventKey={2} href="javascript:window.__someGlobalTestCallback();">MenuItem 2 content</MenuItem>
       </DropdownMenu>
     );
 

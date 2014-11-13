@@ -1,14 +1,14 @@
 var navbarInstance = (
     <Navbar>
       <Nav>
-        <NavItem selectKey={1} href="#">Link</NavItem>
-        <NavItem selectKey={2} href="#">Link</NavItem>
-        <DropdownButton selectKey={3} title="Dropdown">
-          <MenuItem selectKey="1">Action</MenuItem>
-          <MenuItem selectKey="2">Another action</MenuItem>
-          <MenuItem selectKey="3">Something else here</MenuItem>
+        <NavItem eventKey={1} href="#">Link</NavItem>
+        <NavItem eventKey={2} href="#">Link</NavItem>
+        <DropdownButton eventKey={3} title="Dropdown">
+          <MenuItem eventKey="1">Action</MenuItem>
+          <MenuItem eventKey="2">Another action</MenuItem>
+          <MenuItem eventKey="3">Something else here</MenuItem>
           <MenuItem divider />
-          <MenuItem selectKey="4">Separated link</MenuItem>
+          <MenuItem eventKey="4">Separated link</MenuItem>
         </DropdownButton>
       </Nav>
     </Navbar>

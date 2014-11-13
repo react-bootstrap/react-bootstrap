@@ -4,9 +4,9 @@ function handleSelect (selectedKey) {
 
 var navInstance = (
     <Nav bsStyle="pills" stacked activeKey={1} onSelect={handleSelect}>
-      <NavItem selectKey={1} href="/home">NavItem 1 content</NavItem>
-      <NavItem selectKey={2} title="Item">NavItem 2 content</NavItem>
-      <NavItem selectKey={3} disabled={true}>NavItem 3 content</NavItem>
+      <NavItem eventKey={1} href="/home">NavItem 1 content</NavItem>
+      <NavItem eventKey={2} title="Item">NavItem 2 content</NavItem>
+      <NavItem eventKey={3} disabled={true}>NavItem 3 content</NavItem>
     </Nav>
   );
 

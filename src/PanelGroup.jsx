@@ -51,7 +51,7 @@ var PanelGroup = React.createClass({
 
     if (this.props.accordion) {
       props.collapsable = true;
-      props.expanded = (child.props.selectKey === activeKey);
+      props.expanded = (child.props.eventKey === activeKey);
       props.onSelect = this.handleSelect;
     }
 

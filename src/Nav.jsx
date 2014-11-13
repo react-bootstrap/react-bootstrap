@@ -21,7 +21,7 @@ var Nav = React.createClass({
     collapsable: React.PropTypes.bool,
     expanded: React.PropTypes.bool,
     navbar: React.PropTypes.bool,
-    selectKey: React.PropTypes.any
+    eventKey: React.PropTypes.any
   },
 
   getDefaultProps: function () {
@@ -78,7 +78,7 @@ var Nav = React.createClass({
       return true;
     }
     if (this.props.activeKey != null) {
-      if (child.props.selectKey == this.props.activeKey) {
+      if (child.props.eventKey == this.props.activeKey) {
         return true;
       }
     }

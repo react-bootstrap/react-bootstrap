@@ -75,7 +75,7 @@ describe('ListGroupItem', function () {
       done();
     }
     var instance = ReactTestUtils.renderIntoDocument(
-      <ListGroupItem onClick={handleClick} clickKey='2' href="#link">Item</ListGroupItem>
+      <ListGroupItem onClick={handleClick} eventKey='2' href="#link">Item</ListGroupItem>
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });

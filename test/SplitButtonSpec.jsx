@@ -16,8 +16,8 @@ describe('SplitButton', function () {
   it('Should render button correctly', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title">
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </SplitButton>
     );
 
@@ -37,8 +37,8 @@ describe('SplitButton', function () {
   it('Should render menu correctly', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title">
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </SplitButton>
     );
 
@@ -55,8 +55,8 @@ describe('SplitButton', function () {
     var CustomTitle = React.createClass({ render: function() { return <span />; } });
     instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title={<CustomTitle />} dropdownTitle={<CustomTitle />}>
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </SplitButton>
     );
 
@@ -67,8 +67,8 @@ describe('SplitButton', function () {
   it('Should pass props to button', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" bsStyle="primary">
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </SplitButton>
     );
 
@@ -79,8 +79,8 @@ describe('SplitButton', function () {
   it('Should pass disabled to both buttons', function() {
     instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Test" disabled={true}>
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </SplitButton>
     );
 
@@ -93,8 +93,8 @@ describe('SplitButton', function () {
   it('Should pass id to button group', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" bsStyle="primary" id="testId">
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </SplitButton>
     );
 
@@ -104,8 +104,8 @@ describe('SplitButton', function () {
   it('Should be closed by default', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title">
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </SplitButton>
     );
 
@@ -115,8 +115,8 @@ describe('SplitButton', function () {
   it('Should open when clicked', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title">
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </SplitButton>
     );
 
@@ -125,16 +125,16 @@ describe('SplitButton', function () {
     assert.ok(instance.getDOMNode().className.match(/\bopen\b/));
   });
 
-  it('should call onSelect with selectKey when MenuItem is clicked', function (done) {
-    function handleSelect(selectKey) {
-      assert.equal(selectKey, '2');
+  it('should call onSelect with eventKey when MenuItem is clicked', function (done) {
+    function handleSelect(eventKey) {
+      assert.equal(eventKey, '2');
       done();
     }
 
     instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" onSelect={handleSelect}>
-        <MenuItem selectKey='1'>MenuItem 1 content</MenuItem>
-        <MenuItem selectKey='2'>MenuItem 2 content</MenuItem>
+        <MenuItem eventKey='1'>MenuItem 1 content</MenuItem>
+        <MenuItem eventKey='2'>MenuItem 2 content</MenuItem>
       </SplitButton>
     );
 
@@ -148,8 +148,8 @@ describe('SplitButton', function () {
   it('Should have dropup class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" dropdownTitle="New title" dropup>
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </SplitButton>
     );
 
@@ -159,8 +159,8 @@ describe('SplitButton', function () {
   it('Should pass pullRight prop to menu', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" dropdownTitle="New title" pullRight>
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </SplitButton>
     );
 
@@ -171,8 +171,8 @@ describe('SplitButton', function () {
     beforeEach(function () {
       instance = ReactTestUtils.renderIntoDocument(
         <SplitButton title="Title">
-          <MenuItem selectKey={1}>MenuItem 1 content</MenuItem>
-          <MenuItem selectKey={2}>MenuItem 2 content</MenuItem>
+          <MenuItem eventKey={1}>MenuItem 1 content</MenuItem>
+          <MenuItem eventKey={2}>MenuItem 2 content</MenuItem>
         </SplitButton>
       );
 

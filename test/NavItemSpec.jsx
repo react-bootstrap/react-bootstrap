@@ -40,7 +40,7 @@ describe('NavItem', function () {
       done();
     }
     var instance = ReactTestUtils.renderIntoDocument(
-      <NavItem selectKey='2' onSelect={handleSelect}>
+      <NavItem eventKey='2' onSelect={handleSelect}>
         <span>Item content</span>
       </NavItem>
     );

@@ -54,7 +54,7 @@ describe('MenuItem', function () {
       done();
     };
     var instance = ReactTestUtils.renderIntoDocument(
-      <MenuItem selectKey='1' onSelect={selectOp}>
+      <MenuItem eventKey='1' onSelect={selectOp}>
         Title
       </MenuItem>
     );

@@ -15,7 +15,7 @@ var ListGroupItem = React.createClass({
     disabled: React.PropTypes.any,
     header: React.PropTypes.node,
     onClick: React.PropTypes.func,
-    clickKey: React.PropTypes.any
+    eventKey: React.PropTypes.any
   },
 
   getDefaultProps: function () {
@@ -85,7 +85,7 @@ var ListGroupItem = React.createClass({
   handleClick: function (e) {
     if (this.props.onClick) {
       e.preventDefault();
-      this.props.onClick(this.props.clickKey, this.props.href);
+      this.props.onClick(this.props.eventKey, this.props.href);
     }
   }
 });

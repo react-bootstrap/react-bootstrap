@@ -41,9 +41,9 @@ describe('ListGroup', function () {
     }
     var instance = ReactTestUtils.renderIntoDocument(
       <ListGroup onClick={handleClick}>
-        <ListGroupItem clickKey={1} ref="item1">Item 1</ListGroupItem>
-        <ListGroupItem clickKey={2} ref="item2">Item 2</ListGroupItem>
-        <ListGroupItem clickKey={3} ref="item3">Item 3</ListGroupItem>
+        <ListGroupItem eventKey={1} ref="item1">Item 1</ListGroupItem>
+        <ListGroupItem eventKey={2} ref="item2">Item 2</ListGroupItem>
+        <ListGroupItem eventKey={3} ref="item3">Item 3</ListGroupItem>
       </ListGroup>
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance.refs.item3, 'a'));

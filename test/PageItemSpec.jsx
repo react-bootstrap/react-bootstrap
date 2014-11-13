@@ -42,7 +42,7 @@ describe('PageItem', function () {
       done();
     }
     var instance = ReactTestUtils.renderIntoDocument(
-      <PageItem selectKey={1} onSelect={handleSelect}>Next</PageItem>
+      <PageItem eventKey={1} onSelect={handleSelect}>Next</PageItem>
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });

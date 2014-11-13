@@ -19,8 +19,8 @@ describe('DropdownButton', function () {
   it('Should render button correctly', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title" className="test-class">
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -38,8 +38,8 @@ describe('DropdownButton', function () {
   it('Should render menu correctly', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -51,8 +51,8 @@ describe('DropdownButton', function () {
   it('Should pass props to button', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title" bsStyle="primary" id="testId" disabled>
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -65,8 +65,8 @@ describe('DropdownButton', function () {
   it('Should be closed by default', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>);
 
     assert.notOk(instance.getDOMNode().className.match(/\bopen\b/));
@@ -75,8 +75,8 @@ describe('DropdownButton', function () {
   it('Should open when clicked', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -84,17 +84,17 @@ describe('DropdownButton', function () {
     assert.ok(instance.getDOMNode().className.match(/\bopen\b/));
   });
 
-  it('should call onSelect with selectKey when MenuItem is clicked', function (done) {
-    function handleSelect(selectKey) {
-      assert.equal(selectKey, '2');
+  it('should call onSelect with eventKey when MenuItem is clicked', function (done) {
+    function handleSelect(eventKey) {
+      assert.equal(eventKey, '2');
       assert.equal(instance.state.open, false);
       done();
     }
 
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title" onSelect={handleSelect}>
-        <MenuItem selectKey='1'>MenuItem 1 content</MenuItem>
-        <MenuItem selectKey='2'>MenuItem 2 content</MenuItem>
+        <MenuItem eventKey='1'>MenuItem 1 content</MenuItem>
+        <MenuItem eventKey='2'>MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -105,17 +105,17 @@ describe('DropdownButton', function () {
     );
   });
 
-  it('should call MenuItem onSelect with selectKey when MenuItem is clicked', function (done) {
-    function handleSelect(selectKey) {
-      assert.equal(selectKey, '2');
+  it('should call MenuItem onSelect with eventKey when MenuItem is clicked', function (done) {
+    function handleSelect(eventKey) {
+      assert.equal(eventKey, '2');
       assert.equal(instance.state.open, false);
       done();
     }
 
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
-        <MenuItem selectKey='1'>MenuItem 1 content</MenuItem>
-        <MenuItem selectKey='2' onSelect={handleSelect}>MenuItem 2 content</MenuItem>
+        <MenuItem eventKey='1'>MenuItem 1 content</MenuItem>
+        <MenuItem eventKey='2' onSelect={handleSelect}>MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -129,8 +129,8 @@ describe('DropdownButton', function () {
   it('should not set onSelect to child with no onSelect prop', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title">
-        <MenuItem selectKey={1}>MenuItem 1 content</MenuItem>
-        <MenuItem selectKey={2}>MenuItem 2 content</MenuItem>
+        <MenuItem eventKey={1}>MenuItem 1 content</MenuItem>
+        <MenuItem eventKey={2}>MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
@@ -142,8 +142,8 @@ describe('DropdownButton', function () {
     beforeEach(function () {
       instance = ReactTestUtils.renderIntoDocument(
         <DropdownButton title="Title">
-          <MenuItem selectKey={1}>MenuItem 1 content</MenuItem>
-          <MenuItem selectKey={2}>MenuItem 2 content</MenuItem>
+          <MenuItem eventKey={1}>MenuItem 1 content</MenuItem>
+          <MenuItem eventKey={2}>MenuItem 2 content</MenuItem>
         </DropdownButton>
       );
 
@@ -162,8 +162,8 @@ describe('DropdownButton', function () {
   it('Should render li when in nav', function () {
     instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title" className="test-class" navItem>
-        <MenuItem selectKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem selectKey="2">MenuItem 2 content</MenuItem>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
