@@ -1,6 +1,5 @@
-/** @jsx React.DOM */
-
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 var constants = require('./constants');
@@ -23,8 +22,8 @@ var Glyphicon = React.createClass({
 
     classes['glyphicon-' + this.props.glyph] = true;
 
-    return this.transferPropsTo(
-      <span className={classSet(classes)}>
+    return (
+      <span {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
         {this.props.children}
       </span>
     );

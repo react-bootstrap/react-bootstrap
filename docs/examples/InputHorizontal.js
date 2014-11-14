@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var inputHorizontalInstance = (
     <form className="form-horizontal">
       <Input type="text" label="Text" labelClassName="col-xs-2" wrapperClassName="col-xs-10" />
@@ -8,4 +6,4 @@ var inputHorizontalInstance = (
     </form>
   );
 
-React.renderComponent(inputHorizontalInstance, mountNode);
+React.render(inputHorizontalInstance, mountNode);

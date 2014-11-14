@@ -1,16 +1,15 @@
-/** @jsx React.DOM */
-
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var Button = require('./Button');
 
 var Input = React.createClass({
   propTypes: {
     type: React.PropTypes.string,
-    label: React.PropTypes.renderable,
-    help: React.PropTypes.renderable,
-    addonBefore: React.PropTypes.renderable,
-    addonAfter: React.PropTypes.renderable,
+    label: React.PropTypes.node,
+    help: React.PropTypes.node,
+    addonBefore: React.PropTypes.node,
+    addonAfter: React.PropTypes.node,
     bsStyle: function(props) {
       if (props.type === 'submit') {
         // Return early if `type=submit` as the `Button` component
@@ -65,32 +64,32 @@ var Input = React.createClass({
     switch (this.props.type) {
       case 'select':
         input = (
-          <select className="form-control" ref="input" key="input">
+          <select {...this.props} className={joinClasses(this.props.className, 'form-control')} ref="input" key="input">
             {this.props.children}
           </select>
         );
         break;
       case 'textarea':
-        input = <textarea className="form-control" ref="input" key="input" />;
+        input = <textarea {...this.props} className={joinClasses(this.props.className, 'form-control')} ref="input" key="input" />;
         break;
       case 'static':
         input = (
-          <p className="form-control-static" ref="input"  key="input">
+          <p {...this.props} className={joinClasses(this.props.className, 'form-control-static')} ref="input"  key="input">
             {this.props.value}
           </p>
         );
         break;
       case 'submit':
-        input = this.transferPropsTo(
-          <Button componentClass={React.DOM.input} ref='input' key='input' />
+        input = (
+          <Button {...this.props} componentClass='input' ref='input' key='input' />
         );
         break;
       default:
         var className = this.isCheckboxOrRadio() || this.isFile() ? '' : 'form-control';
-        input = <input className={className} ref="input" key="input" />;
+        input = <input {...this.props} className={joinClasses(this.props.className, className)} ref="input" key="input" />;
     }
 
-    return this.transferPropsTo(input);
+    return input;
   },
 
   renderInputGroup: function (children) {

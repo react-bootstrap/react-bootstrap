@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 var React = require('react');
 var classSet = require('react/lib/cx');
 var CodeMirror = global.CodeMirror;
@@ -233,7 +229,7 @@ var ReactPlayground = React.createClass({
     try {
       var compiledCode = this.compileCode();
       if (this.props.renderCode) {
-        React.renderComponent(
+        React.render(
           <CodeMirrorEditor codeText={compiledCode} readOnly={true} />,
           mountNode
         );
@@ -242,7 +238,7 @@ var ReactPlayground = React.createClass({
       }
     } catch (err) {
       this.setTimeout(function() {
-        React.renderComponent(
+        React.render(
           <Alert bsStyle="danger">{err.toString()}</Alert>,
           mountNode
         );

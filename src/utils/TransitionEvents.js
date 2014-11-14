@@ -1,12 +1,14 @@
 /**
- * React TransitionEvents
- *
- * Copyright 2013-2014 Facebook, Inc.
- * @licence https://github.com/facebook/react/blob/0.11-stable/LICENSE
+ * Copyright 2013-2014, Facebook, Inc.
+ * All rights reserved.
  *
  * This file contains a modified version of:
- *  https://github.com/facebook/react/blob/0.11-stable/src/addons/transitions/ReactTransitionEvents.js
+ * https://github.com/facebook/react/blob/v0.12.0/src/addons/transitions/ReactTransitionEvents.js
  *
+ * This source code is licensed under the BSD-style license found here:
+ * https://github.com/facebook/react/blob/v0.12.0/LICENSE
+ * An additional grant of patent rights can be found here:
+ * https://github.com/facebook/react/blob/v0.12.0/PATENTS
  */
 
 var canUseDOM = !!(

@@ -1,9 +1,7 @@
-/** @jsx React.DOM */
-
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
-var CustomPropTypes = require('./utils/CustomPropTypes');
 
 var Button = React.createClass({
   mixins: [BootstrapMixin],
@@ -14,7 +12,7 @@ var Button = React.createClass({
     block:    React.PropTypes.bool,
     navItem:    React.PropTypes.bool,
     navDropdown: React.PropTypes.bool,
-    componentClass: CustomPropTypes.componentClass
+    componentClass: React.PropTypes.node
   },
 
   getDefaultProps: function () {
@@ -43,28 +41,31 @@ var Button = React.createClass({
   },
 
   renderAnchor: function (classes) {
-    var component = this.props.componentClass || React.DOM.a;
+
+    var Component = this.props.componentClass || 'a';
     var href = this.props.href || '#';
     classes['disabled'] = this.props.disabled;
 
-    return this.transferPropsTo(
-      <component
+    return (
+      <Component
+        {...this.props}
         href={href}
-        className={classSet(classes)}
+        className={joinClasses(this.props.className, classSet(classes))}
         role="button">
         {this.props.children}
-      </component>
+      </Component>
     );
   },
 
   renderButton: function (classes) {
-    var component = this.props.componentClass || React.DOM.button;
+    var Component = this.props.componentClass || 'button';
 
-    return this.transferPropsTo(
-      <component
-        className={classSet(classes)}>
+    return (
+      <Component
+        {...this.props}
+        className={joinClasses(this.props.className, classSet(classes))}>
         {this.props.children}
-      </component>
+      </Component>
     );
   },
 

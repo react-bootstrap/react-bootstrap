@@ -1,8 +1,8 @@
-/** @jsx React.DOM */
-
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
 var DropdownStateMixin = require('./DropdownStateMixin');
@@ -18,7 +18,7 @@ var DropdownButton = React.createClass({
   propTypes: {
     pullRight: React.PropTypes.bool,
     dropup:    React.PropTypes.bool,
-    title:     React.PropTypes.renderable,
+    title:     React.PropTypes.node,
     href:      React.PropTypes.string,
     onClick:   React.PropTypes.func,
     onSelect:  React.PropTypes.func,
@@ -32,9 +32,10 @@ var DropdownButton = React.createClass({
       'renderNavItem' : 'renderButtonGroup';
 
     return this[renderMethod]([
-      this.transferPropsTo(<Button
+      <Button
+        {...this.props}
         ref="dropdownButton"
-        className={className}
+        className={joinClasses(this.props.className, className)}
         onClick={this.handleDropdownClick}
         key={0}
         navDropdown={this.props.navItem}
@@ -44,7 +45,7 @@ var DropdownButton = React.createClass({
         dropup={null}>
         {this.props.title}{' '}
         <span className="caret" />
-      </Button>),
+      </Button>,
       <DropdownMenu
         ref="menu"
         aria-labelledby={this.props.id}
@@ -84,7 +85,7 @@ var DropdownButton = React.createClass({
     );
   },
 
-  renderMenuItem: function (child) {
+  renderMenuItem: function (child, index) {
     // Only handle the option selection if an onSelect prop has been set on the
     // component or it's child, this allows a user not to pass an onSelect
     // handler and have the browser preform the default action.
@@ -98,8 +99,8 @@ var DropdownButton = React.createClass({
         onSelect: createChainedFunction(child.props.onSelect, handleOptionSelect),
 
         // Force special props to be transferred
-        key: child.props.key,
-        ref: child.props.ref
+        key: child.key ? child.key : index,
+        ref: child.ref
       }
     );
   },

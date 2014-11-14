@@ -2,8 +2,8 @@
 'use strict';
 
 var React = require('react');
-var merge = require('./utils/merge');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
+var assign = require('./utils/Object.assign');
 
 var REGEXP = /\%\((.+?)\)s/;
 
@@ -15,14 +15,16 @@ var Interpolate = React.createClass({
   },
 
   getDefaultProps: function() {
-    return { component: React.DOM.span };
+    return { component: 'span' };
   },
 
   render: function() {
-    var format = ValidComponentChildren.hasValidComponent(this.props.children) ? this.props.children : this.props.format;
+    var format = (ValidComponentChildren.hasValidComponent(this.props.children) ||
+        (typeof this.props.children === 'string')) ?
+        this.props.children : this.props.format;
     var parent = this.props.component;
     var unsafe = this.props.unsafe === true;
-    var props = merge(this.props);
+    var props = assign({}, this.props);
 
     delete props.children;
     delete props.format;
@@ -40,7 +42,7 @@ var Interpolate = React.createClass({
           delete props[match];
         }
 
-        if (React.isValidComponent(html)) {
+        if (React.isValidElement(html)) {
           throw new Error('cannot interpolate a React component into unsafe text');
         }
 
@@ -51,9 +53,9 @@ var Interpolate = React.createClass({
 
       props.dangerouslySetInnerHTML = { __html: content };
 
-      return parent(props);
+      return React.createElement(parent, props);
     } else {
-      var args = format.split(REGEXP).reduce(function(memo, match, index) {
+      var kids = format.split(REGEXP).reduce(function(memo, match, index) {
         var child;
 
         if (index % 2 === 0) {
@@ -70,9 +72,9 @@ var Interpolate = React.createClass({
         memo.push(child);
 
         return memo;
-      }, [props]);
+      }, []);
 
-      return parent.apply(null, args);
+      return React.createElement(parent, props, kids);
     }
   }
 });

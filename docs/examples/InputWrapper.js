@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var inputWrapperInstance = (
     <Input label="Input wrapper" help="Use this when you need something other than the available input types." wrapperClassName="wrapper">
       <Row>
@@ -13,4 +11,4 @@ var inputWrapperInstance = (
     </Input>
   );
 
-React.renderComponent(inputWrapperInstance, mountNode);
+React.render(inputWrapperInstance, mountNode);

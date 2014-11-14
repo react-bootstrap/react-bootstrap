@@ -16,7 +16,7 @@ function mapValidComponents(children, func, context) {
   var index = 0;
 
   return React.Children.map(children, function (child) {
-    if (React.isValidComponent(child)) {
+    if (React.isValidElement(child)) {
       var lastIndex = index;
       index++;
       return func.call(context, child, lastIndex);
@@ -41,7 +41,7 @@ function forEachValidComponents(children, func, context) {
   var index = 0;
 
   return React.Children.forEach(children, function (child) {
-    if (React.isValidComponent(child)) {
+    if (React.isValidElement(child)) {
       func.call(context, child, index);
       index++;
     }
@@ -58,7 +58,7 @@ function numberOfValidComponents(children) {
   var count = 0;
 
   React.Children.forEach(children, function (child) {
-    if (React.isValidComponent(child)) { count++; }
+    if (React.isValidElement(child)) { count++; }
   });
 
   return count;
@@ -74,7 +74,7 @@ function hasValidComponent(children) {
   var hasValid = false;
 
   React.Children.forEach(children, function (child) {
-    if (!hasValid && React.isValidComponent(child)) {
+    if (!hasValid && React.isValidElement(child)) {
       hasValid = true;
     }
   });

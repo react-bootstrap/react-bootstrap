@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var listgroupInstance = (
     <ListGroup>
       <ListGroupItem header="Heading 1">Some body text</ListGroupItem>
@@ -8,4 +6,4 @@ var listgroupInstance = (
     </ListGroup>
   );
 
-React.renderComponent(listgroupInstance, mountNode);
+React.render(listgroupInstance, mountNode);

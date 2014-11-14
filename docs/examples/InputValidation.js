@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var inputValidationInstance = (
     <form>
       <Input type="text" bsStyle="success" label="Success" hasFeedback />
@@ -8,4 +6,4 @@ var inputValidationInstance = (
     </form>
   );
 
-React.renderComponent(inputValidationInstance, mountNode);
+React.render(inputValidationInstance, mountNode);

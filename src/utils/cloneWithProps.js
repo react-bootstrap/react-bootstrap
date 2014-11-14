@@ -1,44 +1,24 @@
 /**
- * React cloneWithProps
- *
- * Copyright 2013-2014 Facebook, Inc.
- * @licence https://github.com/facebook/react/blob/0.11-stable/LICENSE
+ * Copyright 2013-2014, Facebook, Inc.
+ * All rights reserved.
  *
  * This file contains modified versions of:
- *  https://github.com/facebook/react/blob/0.11-stable/src/utils/cloneWithProps.js
- *  https://github.com/facebook/react/blob/0.11-stable/src/core/ReactPropTransferer.js
- *  https://github.com/facebook/react/blob/0.11-stable/src/utils/joinClasses.js
+ * https://github.com/facebook/react/blob/v0.12.0/src/utils/cloneWithProps.js
+ * https://github.com/facebook/react/blob/v0.12.0/src/core/ReactPropTransferer.js
+ *
+ * This source code is licensed under the BSD-style license found here:
+ * https://github.com/facebook/react/blob/v0.12.0/LICENSE
+ * An additional grant of patent rights can be found here:
+ * https://github.com/facebook/react/blob/v0.12.0/PATENTS
  *
  * TODO: This should be replaced as soon as cloneWithProps is available via
  *  the core React package or a separate package.
  *  @see https://github.com/facebook/react/issues/1906
- *
  */
 
 var React = require('react');
-var merge = require('./merge');
-
-/**
- * Combines multiple className strings into one.
- * http://jsperf.com/joinclasses-args-vs-array
- *
- * @param {...?string} classes
- * @return {string}
- */
-function joinClasses(className/*, ... */) {
-  if (!className) {
-    className = '';
-  }
-  var nextClass;
-  var argLength = arguments.length;
-  if (argLength > 1) {
-    for (var ii = 1; ii < argLength; ii++) {
-      nextClass = arguments[ii];
-      nextClass && (className += ' ' + nextClass);
-    }
-  }
-  return className;
-}
+var joinClasses = require('./joinClasses');
+var assign = require("./Object.assign");
 
 /**
  * Creates a transfer strategy that will merge prop values using the supplied
@@ -61,7 +41,7 @@ var transferStrategyMerge = createTransferStrategy(function(a, b) {
   // `merge` overrides the first object's (`props[key]` above) keys using the
   // second object's (`value`) keys. An object's style's existing `propA` would
   // get overridden. Flip the order here.
-  return merge(b, a);
+  return assign({}, b, a);
 });
 
 function emptyFunction() {}
@@ -80,14 +60,6 @@ var TransferStrategies = {
    * Transfer the `className` prop by merging them.
    */
   className: createTransferStrategy(joinClasses),
-  /**
-   * Never transfer the `key` prop.
-   */
-  key: emptyFunction,
-  /**
-   * Never transfer the `ref` prop.
-   */
-  ref: emptyFunction,
   /**
    * Transfer the `style` prop (which is an object) by merging them.
    */
@@ -127,8 +99,9 @@ function transferInto(props, newProps) {
  * @return {object} a new object containing both sets of props merged.
  */
 function mergeProps(oldProps, newProps) {
-  return transferInto(merge(oldProps), newProps);
+  return transferInto(assign({}, oldProps), newProps);
 }
+
 
 var ReactPropTransferer = {
   mergeProps: mergeProps
@@ -154,16 +127,12 @@ function cloneWithProps(child, props) {
     newProps.children = child.props.children;
   }
 
-  // Huge hack to support both the 0.10 API and the new way of doing things
-  // TODO: remove when support for 0.10 is no longer needed
-  if (React.version.indexOf('0.10.') === 0) {
-    return child.constructor.ConvenienceConstructor(newProps);
-  }
-
-
   // The current API doesn't retain _owner and _context, which is why this
-  // doesn't use ReactDescriptor.cloneAndReplaceProps.
-  return child.constructor(newProps);
+  // doesn't use ReactElement.cloneAndReplaceProps.
+  var mockLegacyFactory = function(){};
+  mockLegacyFactory.isReactLegacyFactory = true;
+  mockLegacyFactory.type = child.type;
+  return React.createElement(mockLegacyFactory, newProps);
 }
 
 module.exports = cloneWithProps;

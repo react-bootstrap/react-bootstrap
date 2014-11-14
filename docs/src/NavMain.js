@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 'use strict';
 
 var React = require('react');
@@ -29,7 +27,7 @@ var NavMain = React.createClass({
     var brand = <InternalLink href="/" className="navbar-brand">React Bootstrap</InternalLink>;
 
     return (
-      <Navbar componentClass={React.DOM.header} brand={brand} staticTop className="bs-docs-nav" role="banner" toggleNavKey={0}>
+      <Navbar componentClass='header' brand={brand} staticTop className="bs-docs-nav" role="banner" toggleNavKey={0}>
         <Nav className="bs-navbar-collapse" role="navigation" key={0} id="top">
           {Object.keys(NAV_LINKS).map(this.renderNavItem)}
         </Nav>

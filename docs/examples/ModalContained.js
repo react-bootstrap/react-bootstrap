@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 /**
  * You will want to include this bit of css
  *
@@ -14,8 +12,8 @@
 
 var ContainedModal = React.createClass({
   render: function() {
-    return this.transferPropsTo(
-      <Modal title='Contained Modal' animation>
+    return (
+      <Modal {...this.props} title='Contained Modal' animation>
         <div className="modal-body">
           Elit est explicabo ipsum eaque dolorem blanditiis doloribus sed id ipsam, beatae, rem fuga id earum? Inventore et facilis obcaecati.
         </div>
@@ -39,4 +37,4 @@ var Trigger = React.createClass({
   }
 });
 
-React.renderComponent(<Trigger />, mountNode);
+React.render(<Trigger />, mountNode);

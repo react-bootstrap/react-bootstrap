@@ -1,6 +1,3 @@
-/** @jsx React.DOM */
-
-
 var ExampleInput = React.createClass({
   getInitialState: function() {
     return {
@@ -42,4 +39,4 @@ var ExampleInput = React.createClass({
   }
 });
 
-React.renderComponent(ExampleInput(), mountNode);
+React.render(ExampleInput(), mountNode);
