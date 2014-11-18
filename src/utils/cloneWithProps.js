@@ -127,12 +127,17 @@ function cloneWithProps(child, props) {
     newProps.children = child.props.children;
   }
 
+  if (React.version.substr(0, 4) === '0.12'){
+    var mockLegacyFactory = function(){};
+    mockLegacyFactory.isReactLegacyFactory = true;
+    mockLegacyFactory.type = child.type;
+
+    return React.createElement(mockLegacyFactory, newProps);
+  }
+
   // The current API doesn't retain _owner and _context, which is why this
   // doesn't use ReactElement.cloneAndReplaceProps.
-  var mockLegacyFactory = function(){};
-  mockLegacyFactory.isReactLegacyFactory = true;
-  mockLegacyFactory.type = child.type;
-  return React.createElement(mockLegacyFactory, newProps);
+  return React.createElement(child.type, newProps);
 }
 
 module.exports = cloneWithProps;
