@@ -34,6 +34,17 @@ describe('NavItem', function () {
     assert.equal(linkElement.title, 'content');
   });
 
+  it('Should not add anchor properties to li', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <NavItem href='/hi' title='boom!'>
+        Item content
+      </NavItem>
+    );
+
+    assert.ok(!instance.getDOMNode().hasAttribute('href'));
+    assert.ok(!instance.getDOMNode().hasAttribute('title'));
+  });
+
   it('Should call `onSelect` when item is selected', function (done) {
     function handleSelect(key) {
       assert.equal(key, '2');
