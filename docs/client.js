@@ -6,4 +6,4 @@ var Root = require('./src/Root');
 // For React devtools
 window.React = React;
 
-React.render(Root(window.INITIAL_PROPS), document);
+React.render(React.createFactory(Root)(window.INITIAL_PROPS), document);

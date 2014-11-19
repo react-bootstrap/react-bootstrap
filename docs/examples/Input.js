@@ -39,4 +39,4 @@ var ExampleInput = React.createClass({
   }
 });
 
-React.render(ExampleInput(), mountNode);
+React.render(<ExampleInput />, mountNode);
