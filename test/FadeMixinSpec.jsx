@@ -13,21 +13,19 @@ describe('FadeMixin', function () {
       mixins: [ FadeMixin ],
 
       render: function () {
-        return this.transferPropsTo(
-          React.DOM.div({ className: 'fade' },
-            React.DOM.span({ className: 'fade' })
-          )
+        return (
+          <div {...this.props} className='fade'>
+            <span className='fade'/>
+          </div>
         );
       }
     });
   });
 
   it('Should add the in class to all elements', function (done) {
-    var instance = ReactTestUtils.renderIntoDocument(
-          Component()
-        );
+    var instance = ReactTestUtils.renderIntoDocument(<Component />);
 
-    var child = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span')
+    var child = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span');
 
     setTimeout(function(){
       assert.ok(instance.getDOMNode().className.match(/\bin\b/));
@@ -39,9 +37,7 @@ describe('FadeMixin', function () {
   });
 
   it('Should remove the in class for all elements', function (done) {
-    var instance = ReactTestUtils.renderIntoDocument(
-          Component()
-        );
+    var instance = ReactTestUtils.renderIntoDocument(<Component />);
 
     setTimeout(function(){
       instance.componentWillUnmount()
