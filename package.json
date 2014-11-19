@@ -2,6 +2,11 @@
   "name": "react-bootstrap",
   "version": "0.12.0",
   "description": "Bootstrap 3 components build with React",
+  "repository": {
+    "type": "git",
+    "url": "react-bootstrap/react-bootstrap"
+  },
+  "homepage": "http://react-bootstrap.github.io/",
   "scripts": {
     "build": "./node_modules/.bin/grunt build",
     "test-watch": "./node_modules/.bin/grunt watch 2>&1 >/dev/null & ./node_modules/karma/bin/karma start karma.dev.js",
@@ -9,6 +14,8 @@
   },
   "keywords": [
     "react",
+    "ecosystem-react",
+    "react-component",
     "bootstrap"
   ],
   "author": "Stephen J. Collings <stevoland@gmail.com>",
