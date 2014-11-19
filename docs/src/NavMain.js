@@ -28,7 +28,7 @@ var NavMain = React.createClass({
 
     return (
       <Navbar componentClass='header' brand={brand} staticTop className="bs-docs-nav" role="banner" toggleNavKey={0}>
-        <Nav className="bs-navbar-collapse" role="navigation" key={0} id="top">
+        <Nav className="bs-navbar-collapse" role="navigation" eventKey={0} id="top">
           {Object.keys(NAV_LINKS).map(this.renderNavItem)}
         </Nav>
       </Navbar>
