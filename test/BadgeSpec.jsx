@@ -23,6 +23,16 @@ describe('Badge', function () {
     assert.ok(instance.getDOMNode().className.match(/\bbadge\b/));
   });
 
+  it('Should have a badge using a number', function () {
+    var count = 42;
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Badge>
+        {count}
+      </Badge>
+    );
+    assert.ok(instance.getDOMNode().className.match(/\bbadge\b/));
+  });
+
   it('Should have a badge class pulled right', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <Badge pullRight>
