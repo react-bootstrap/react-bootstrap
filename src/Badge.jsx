@@ -8,11 +8,16 @@ var Badge = React.createClass({
     pullRight: React.PropTypes.bool
   },
 
+  hasContent: function () {
+    return ValidComponentChildren.hasValidComponent(this.props.children) ||
+      (typeof this.props.children === 'string') ||
+      (typeof this.props.children === 'number')
+  },
+
   render: function () {
     var classes = {
       'pull-right': this.props.pullRight,
-      'badge': (ValidComponentChildren.hasValidComponent(this.props.children)
-        || (typeof this.props.children === 'string'))
+      'badge': this.hasContent()
     };
     return (
       <span
