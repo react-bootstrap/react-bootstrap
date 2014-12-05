@@ -1,11 +1,11 @@
-/** @jsx React.DOM */
-
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
 var classSet = require('./utils/classSet');
 var domUtils = require('./utils/domUtils');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
 
@@ -20,7 +20,9 @@ var Nav = React.createClass({
     onSelect: React.PropTypes.func,
     collapsable: React.PropTypes.bool,
     expanded: React.PropTypes.bool,
-    navbar: React.PropTypes.bool
+    navbar: React.PropTypes.bool,
+    eventKey: React.PropTypes.any,
+    right: React.PropTypes.bool
   },
 
   getDefaultProps: function () {
@@ -47,11 +49,11 @@ var Nav = React.createClass({
     classes['navbar-collapse'] = this.props.collapsable;
 
     if (this.props.navbar && !this.props.collapsable) {
-      return this.transferPropsTo(this.renderUl());
+      return (this.renderUl());
     }
 
-    return this.transferPropsTo(
-      <nav className={classSet(classes)}>
+    return (
+      <nav {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
         {this.renderUl()}
       </nav>
     );
@@ -64,9 +66,10 @@ var Nav = React.createClass({
     classes['nav-justified'] = this.props.justified;
     classes['navbar-nav'] = this.props.navbar;
     classes['pull-right'] = this.props.pullRight;
+    classes['navbar-right'] = this.props.right;
 
     return (
-      <ul className={classSet(classes)} ref="ul">
+      <ul {...this.props} className={joinClasses(this.props.className, classSet(classes))} ref="ul">
         {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
       </ul>
     );
@@ -77,7 +80,7 @@ var Nav = React.createClass({
       return true;
     }
     if (this.props.activeKey != null) {
-      if (child.props.key === this.props.activeKey) {
+      if (child.props.eventKey == this.props.activeKey) {
         return true;
       }
     }
@@ -90,7 +93,7 @@ var Nav = React.createClass({
     return child.props.active;
   },
 
-  renderNavItem: function (child) {
+  renderNavItem: function (child, index) {
     return cloneWithProps(
       child,
       {
@@ -98,8 +101,8 @@ var Nav = React.createClass({
         activeKey: this.props.activeKey,
         activeHref: this.props.activeHref,
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.props.ref,
-        key: child.props.key,
+        ref: child.ref,
+        key: child.key ? child.key : index,
         navItem: true
       }
     );

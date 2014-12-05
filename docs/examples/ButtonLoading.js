@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var LoadingButton = React.createClass({
   getInitialState: function() {
     return {
@@ -31,4 +29,4 @@ var LoadingButton = React.createClass({
   }
 });
 
-React.renderComponent(LoadingButton(), mountNode);
+React.render(<LoadingButton />, mountNode);

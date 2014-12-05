@@ -1,14 +1,28 @@
-var React = require('react');
-
+/*global document */
 // TODO: listen for onTransitionEnd to remove el
+function getElementsAndSelf (root, classes){
+  var els = root.querySelectorAll('.' + classes.join('.'));
+
+  els = [].map.call(els, function(e){ return e; });
+
+  for(var i = 0; i < classes.length; i++){
+    if( !root.className.match(new RegExp('\\b' +  classes[i] + '\\b'))){
+      return els;
+    }
+  }
+  els.unshift(root);
+  return els;
+}
+
 module.exports = {
   _fadeIn: function () {
     var els;
 
     if (this.isMounted()) {
-      els = this.getDOMNode().querySelectorAll('.fade');
+      els = getElementsAndSelf(this.getDOMNode(), ['fade']);
+
       if (els.length) {
-        Array.prototype.forEach.call(els, function (el) {
+        els.forEach(function (el) {
           el.className += ' in';
         });
       }
@@ -16,10 +30,10 @@ module.exports = {
   },
 
   _fadeOut: function () {
-    var els = this._fadeOutEl.querySelectorAll('.fade.in');
+    var els = getElementsAndSelf(this._fadeOutEl, ['fade', 'in']);
 
     if (els.length) {
-      Array.prototype.forEach.call(els, function (el) {
+      els.forEach(function (el) {
         el.className = el.className.replace(/\bin\b/, '');
       });
     }
@@ -41,8 +55,9 @@ module.exports = {
   },
 
   componentWillUnmount: function () {
-    var els = this.getDOMNode().querySelectorAll('.fade'),
+    var els = getElementsAndSelf(this.getDOMNode(), ['fade']),
         container = (this.props.container && this.props.container.getDOMNode()) || document.body;
+
     if (els.length) {
       this._fadeOutEl = document.createElement('div');
       container.appendChild(this._fadeOutEl);

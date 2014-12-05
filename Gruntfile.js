@@ -6,6 +6,12 @@ module.exports = function (grunt) {
     amdwrap: {
       src: {
         expand: true,
+        cwd: 'src/',
+        src: ['**/*.js'],
+        dest: 'amd/'
+      },
+      transpiled: {
+        expand: true,
         cwd: 'transpiled/',
         src: ['**/*.js'],
         dest: 'amd/'
@@ -32,6 +38,12 @@ module.exports = function (grunt) {
             dest: 'cjs/'
           },
           {
+            expand: true,
+            cwd: 'src/',
+            src: ['**/*.js'],
+            dest: 'cjs/'
+          },
+          {
             src: ['**/*'],
             dest: 'cjs/',
             cwd: 'tools/cjs',
@@ -47,12 +59,15 @@ module.exports = function (grunt) {
     },
 
     react: {
+      options: {
+        harmony: true
+      },
       src: {
         files: [
           {
             expand: true,
             cwd: 'src',
-            src: ['**/*.*'],
+            src: ['**/*.jsx'],
             dest: 'transpiled',
             ext: '.js'
           }
@@ -63,7 +78,7 @@ module.exports = function (grunt) {
           {
             expand: true,
             cwd: 'test',
-            src: ['**/*.*'],
+            src: ['**/*.jsx'],
             dest: 'test-built',
             ext: '.js'
           }

@@ -1,6 +1,5 @@
-/** @jsx React.DOM */
-
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
@@ -13,6 +12,7 @@ var NavItem = React.createClass({
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
+    eventKey: React.PropTypes.any,
     target: React.PropTypes.string
   },
 
@@ -23,20 +23,28 @@ var NavItem = React.createClass({
   },
 
   render: function () {
-    var classes = {
-      'active': this.props.active,
-      'disabled': this.props.disabled
-    };
+    var { 
+        disabled,
+        active,
+        href,
+        title,
+        target,
+        children,
+        ...props } = this.props,
+        classes = {
+          'active': active,
+          'disabled': disabled
+        };
 
-    return this.transferPropsTo(
-      <li className={classSet(classes)}>
+    return (
+      <li {...props} className={joinClasses(props.className, classSet(classes))}>
         <a
-          href={this.props.href}
-          title={this.props.title}
-          target={this.props.target}
+          href={href}
+          title={title}
+          target={target}
           onClick={this.handleClick}
           ref="anchor">
-          {this.props.children}
+          { children }
         </a>
       </li>
     );
@@ -47,7 +55,7 @@ var NavItem = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.key,this.props.href);
+        this.props.onSelect(this.props.eventKey, this.props.href);
       }
     }
   }

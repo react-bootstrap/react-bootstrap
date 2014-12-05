@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var LinkWithTooltip = React.createClass({
   render: function () {
     var tooltip = <Tooltip>{this.props.tooltip}</Tooltip>;
@@ -19,4 +17,4 @@ var copyInstance = (
     </p>
   );
 
-React.renderComponent(copyInstance, mountNode);
+React.render(copyInstance, mountNode);

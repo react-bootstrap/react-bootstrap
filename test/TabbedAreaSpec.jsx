@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
 var React                  = require('react');
@@ -11,8 +10,8 @@ describe('TabbedArea', function () {
   it('Should show the correct tab', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea activeKey={1}>
-        <TabPane tab="Tab 1" key={1} ref="pane1">Tab 1 content</TabPane>
-        <TabPane tab="Tab 2" key={2} ref="pane2">Tab 2 content</TabPane>
+        <TabPane tab="Tab 1" eventKey={1} ref="pane1">Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2} ref="pane2">Tab 2 content</TabPane>
       </TabbedArea>
     );
 
@@ -25,9 +24,9 @@ describe('TabbedArea', function () {
   it('Should only show the tabs with `TabPane.props.tab` set', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea activeKey={3}>
-        <TabPane tab="Tab 1" key={1}>Tab 1 content</TabPane>
-        <TabPane key={2}>Tab 2 content</TabPane>
-        <TabPane tab="Tab 2" key={3}>Tab 3 content</TabPane>
+        <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
+        <TabPane eventKey={2}>Tab 2 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={3}>Tab 3 content</TabPane>
       </TabbedArea>
     );
 
@@ -41,8 +40,8 @@ describe('TabbedArea', function () {
     );
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea activeKey={2}>
-        <TabPane tab="Tab 1" key={1}>Tab 1 content</TabPane>
-        <TabPane tab={tabTitle} key={2}>Tab 2 content</TabPane>
+        <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
+        <TabPane tab={tabTitle} eventKey={2}>Tab 2 content</TabPane>
       </TabbedArea>
     );
 
@@ -51,15 +50,15 @@ describe('TabbedArea', function () {
 
   it('Should call onSelect when tab is selected', function (done) {
     function onSelect(key) {
-      assert.equal(key, 2);
+      assert.equal(key, '2');
       done();
     }
 
     var tab2 = <span className="tab2">Tab2</span>;
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea onSelect={onSelect} activeKey={1}>
-        <TabPane tab="Tab 1" key={1}>Tab 1 content</TabPane>
-        <TabPane tab={tab2} key={2} ref="tab2">Tab 2 content</TabPane>
+        <TabPane tab="Tab 1" eventKey='1'>Tab 1 content</TabPane>
+        <TabPane tab={tab2} eventKey='2' ref="tab2">Tab 2 content</TabPane>
       </TabbedArea>
     );
 
@@ -71,8 +70,8 @@ describe('TabbedArea', function () {
   it('Should have children with the correct DOM properties', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea activeKey={1}>
-        <TabPane tab="Tab 1" className="custom" id="pane0id" key={1} ref="pane1">Tab 1 content</TabPane>
-        <TabPane tab="Tab 2" key={2}>Tab 2 content</TabPane>
+        <TabPane tab="Tab 1" className="custom" id="pane0id" eventKey={1} ref="pane1">Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
       </TabbedArea>
     );
 
@@ -83,8 +82,8 @@ describe('TabbedArea', function () {
   it('Should show the correct initial pane', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea defaultActiveKey={2}>
-        <TabPane tab="Tab 1" key={1} ref="pane1">Tab 1 content</TabPane>
-        <TabPane tab="Tab 2" key={2} ref="pane2">Tab 2 content</TabPane>
+        <TabPane tab="Tab 1" eventKey={1} ref="pane1">Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2} ref="pane2">Tab 2 content</TabPane>
       </TabbedArea>
     );
 
@@ -97,8 +96,8 @@ describe('TabbedArea', function () {
   it('Should show the correct first tab with no active key value', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea>
-        <TabPane tab="Tab 1" key={1} ref="pane1">Tab 1 content</TabPane>
-        <TabPane tab="Tab 2" key={2} ref="pane2">Tab 2 content</TabPane>
+        <TabPane tab="Tab 1" eventKey={1} ref="pane1">Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2} ref="pane2">Tab 2 content</TabPane>
       </TabbedArea>
     );
 
@@ -114,7 +113,7 @@ describe('TabbedArea', function () {
       <div>Tab 2 content</div>
     ];
     var paneComponents = React.Children.map(panes, function(child, index) {
-      return <TabPane key={index} tab={'Tab #' + index}>{child}</TabPane>;
+      return <TabPane eventKey={index} tab={'Tab #' + index}>{child}</TabPane>;
     });
 
     var instance = ReactTestUtils.renderIntoDocument(
@@ -131,8 +130,8 @@ describe('TabbedArea', function () {
     var tab1 = <span className="tab1">Tab 1</span>;
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea defaultActiveKey={2} animation={false}>
-        <TabPane tab={tab1} key={1} ref="pane1">Tab 1 content</TabPane>
-        <TabPane tab="Tab 2" key={2} ref="pane2">Tab 2 content</TabPane>
+        <TabPane tab={tab1} eventKey={1} ref="pane1">Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2} ref="pane2">Tab 2 content</TabPane>
       </TabbedArea>
     );
 
@@ -147,10 +146,10 @@ describe('TabbedArea', function () {
 
   it('Should pass default bsStyle (of "tabs") to Nav', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-        <TabbedArea defaultActiveKey={1} animation={false}>
-            <TabPane tab="Tab 1" key={1} ref="panel1">Tab 1 content</TabPane>
-            <TabPane tab="Tab 2" key={2} ref="panel2">Tab 2 content</TabPane>
-        </TabbedArea>
+      <TabbedArea defaultActiveKey={1} animation={false}>
+        <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
+      </TabbedArea>
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-tabs'));
@@ -158,10 +157,10 @@ describe('TabbedArea', function () {
 
   it('Should pass bsStyle to Nav', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-        <TabbedArea bsStyle="pills" defaultActiveKey={1} animation={false}>
-            <TabPane tab="Tab 1" key={1} ref="panel1">Tab 1 content</TabPane>
-            <TabPane tab="Tab 2" key={2} ref="panel2">Tab 2 content</TabPane>
-        </TabbedArea>
+      <TabbedArea bsStyle="pills" defaultActiveKey={1} animation={false}>
+        <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
+      </TabbedArea>
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-pills'));

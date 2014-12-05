@@ -1,7 +1,12 @@
 {
   "name": "react-bootstrap",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "description": "Bootstrap 3 components build with React",
+  "repository": {
+    "type": "git",
+    "url": "react-bootstrap/react-bootstrap"
+  },
+  "homepage": "http://react-bootstrap.github.io/",
   "scripts": {
     "build": "./node_modules/.bin/grunt build",
     "test-watch": "./node_modules/.bin/grunt watch 2>&1 >/dev/null & ./node_modules/karma/bin/karma start karma.dev.js",
@@ -9,12 +14,14 @@
   },
   "keywords": [
     "react",
+    "ecosystem-react",
+    "react-component",
     "bootstrap"
   ],
   "author": "Stephen J. Collings <stevoland@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "react": ">=0.9"
+    "react": ">=0.12"
   },
   "devDependencies": {
     "envify": "~1.2.1",
@@ -27,7 +34,7 @@
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-contrib-uglify": "~0.3.2",
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-react": "~0.6.0",
+    "grunt-react": "~0.10.0",
     "grunt-shell": "~0.6.4",
     "karma": "~0.12.8",
     "karma-chai": "0.0.2",
@@ -42,9 +49,9 @@
     "karma-script-launcher": "~0.1.0",
     "karma-sinon": "^1.0.3",
     "mocha": "~1.16.2",
-    "react": "0.10.0",
-    "react-async": "~0.8.0",
-    "react-router-component": "~0.15.0",
+    "react": "~0.12.0",
+    "react-async": "~2.0.0",
+    "react-router-component": "git://github.com/STRML/react-router-component#react-0.12",
     "requirejs": "~2.1.9",
     "sinon": "^1.10.3"
   }

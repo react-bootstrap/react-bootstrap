@@ -1,15 +1,14 @@
-/** @jsx React.DOM */
-
 var React = require('react');
 var OverlayMixin = require('./OverlayMixin');
 var cloneWithProps = require('./utils/cloneWithProps');
+
 var createChainedFunction = require('./utils/createChainedFunction');
 
 var ModalTrigger = React.createClass({
   mixins: [OverlayMixin],
 
   propTypes: {
-    modal: React.PropTypes.renderable.isRequired
+    modal: React.PropTypes.node.isRequired
   },
 
   getInitialState: function () {

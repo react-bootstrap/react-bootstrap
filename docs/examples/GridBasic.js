@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var navInstance = (
     <Grid>
         <Row className="show-grid">
@@ -24,4 +22,4 @@ var navInstance = (
     </Grid>
   );
 
-React.renderComponent(navInstance, mountNode);
+React.render(navInstance, mountNode);

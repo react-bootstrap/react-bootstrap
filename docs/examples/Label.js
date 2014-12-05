@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var labelInstance = (
   <div>
     <h1>Label <Label>New</Label></h1>
@@ -11,4 +9,4 @@ var labelInstance = (
   </div>
 );
 
-React.renderComponent(labelInstance, mountNode);
+React.render(labelInstance, mountNode);

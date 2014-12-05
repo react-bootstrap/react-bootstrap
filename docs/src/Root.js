@@ -1,14 +1,12 @@
-/** @jsx React.DOM */
-
 'use strict';
 
 var React = require('react');
 var Router = require('react-router-component');
 
-var HomePage = require('./HomePage');
-var GettingStartedPage = require('./GettingStartedPage');
-var ComponentsPage = require('./ComponentsPage');
-var NotFoundPage = require('./NotFoundPage');
+var HomePage = React.createFactory(require('./HomePage'));
+var GettingStartedPage = React.createFactory(require('./GettingStartedPage'));
+var ComponentsPage = React.createFactory(require('./ComponentsPage'));
+var NotFoundPage = React.createFactory(require('./NotFoundPage'));
 
 var Locations = Router.Locations;
 var Location = Router.Location;
@@ -55,7 +53,7 @@ var Root = React.createClass({
 
     renderToString: function (props) {
       return Root.getDoctype() +
-        React.renderComponentToString(Root(props));
+        React.renderToString(<Root {...props} />);
     },
 
     /**
@@ -113,7 +111,7 @@ var Root = React.createClass({
 
           <body>
             <Locations path={Root.getBaseUrl() + this.props.initialPath}>
-              <Location path={Root.getBaseUrl() + '*'} handler={PagesHolder} />
+              <Location path={Root.getBaseUrl() + '*'} handler={React.createFactory(PagesHolder)} />
             </Locations>
 
             <script dangerouslySetInnerHTML={browserInitScriptObj} />

@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var buttonsInstance = (
     <ButtonToolbar>
       <Button bsStyle="primary" bsSize="large" disabled>Primary button</Button>
@@ -7,4 +5,4 @@ var buttonsInstance = (
     </ButtonToolbar>
   );
 
-React.renderComponent(buttonsInstance, mountNode);
+React.render(buttonsInstance, mountNode);

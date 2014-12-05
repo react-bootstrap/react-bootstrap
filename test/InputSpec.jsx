@@ -1,9 +1,11 @@
-/** @jsx React.DOM */
 /*global describe, beforeEach, afterEach, it, assert */
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var Input          = require('../cjs/Input');
+var Button         = require('../cjs/Button');
+var DropdownButton = require('../cjs/DropdownButton');
+var MenuItem       = require('../cjs/MenuItem');
 
 describe('Input', function () {
   beforeEach(function() {
@@ -121,6 +123,28 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-addon'));
   });
 
+  it('renders btn-group', function() {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Input buttonAfter={<Button>!</Button>} />
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-btn'));
+  })
+
+  it('renders btn-group with dropdown', function() {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Input buttonAfter={<DropdownButton title="dropdown">
+          <MenuItem key="1">One</MenuItem>
+      </DropdownButton>} />
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-btn'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'btn'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-menu'));
+  })
+
   it('renders help', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <Input help="Help" />
@@ -135,6 +159,21 @@ describe('Input', function () {
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-control-feedback'));
+  });
+
+  it('renders file correctly', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Input type="file" wrapperClassName="wrapper" label="Label" help="h" />
+    );
+
+    var node = instance.getDOMNode();
+    assert.include(node.className, 'form-group');
+    assert.equal(node.children[0].tagName.toLowerCase(), 'label');
+    assert.include(node.children[1].className, 'wrapper');
+    assert.equal(node.children[1].children[0].tagName.toLowerCase(), 'input');
+    assert.equal(node.children[1].children[0].className, '');
+    assert.equal(node.children[1].children[0].type, 'file');
+    assert.equal(node.children[1].children[1].className, 'help-block');
   });
 
   it('renders checkbox/radio correctly', function () {

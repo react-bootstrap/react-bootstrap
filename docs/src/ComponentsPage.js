@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 'use strict';
 
 var React = require('react');
@@ -514,7 +512,7 @@ var ComponentsPage = React.createClass({
                   <p>Supports <code>select</code>, <code>textarea</code>, <code>static</code> as well as standard HTML input types.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/InputTypes.js', 'utf8')} />
                   <h2 id="input-addons">Add-ons</h2>
-                  <p>Use <code>addonBefore</code> and <code>addonAfter</code>. Does not support buttons directly, but they support anything that is renderable.
+                  <p>Use <code>addonBefore</code> and <code>addonAfter</code> for normal addons, <code>buttonBefore</code> and <code>buttonAfter</code> for button addons.
                   Exotic configurations may require some css on your side.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/InputAddons.js', 'utf8')} />
                   <h2 id="input-validation">Validation</h2>

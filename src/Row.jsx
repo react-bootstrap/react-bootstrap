@@ -1,27 +1,24 @@
-/** @jsx React.DOM */
-
 var React = require('react');
-var CustomPropTypes = require('./utils/CustomPropTypes');
-
+var joinClasses = require('./utils/joinClasses');
 
 var Row = React.createClass({
   propTypes: {
-    componentClass: CustomPropTypes.componentClass.isRequired
+    componentClass: React.PropTypes.node.isRequired
   },
 
   getDefaultProps: function () {
     return {
-      componentClass: React.DOM.div
+      componentClass: 'div'
     };
   },
 
   render: function () {
-    var componentClass = this.props.componentClass;
+    var ComponentClass = this.props.componentClass;
 
-    return this.transferPropsTo(
-      <componentClass className="row">
+    return (
+      <ComponentClass {...this.props} className={joinClasses(this.props.className, 'row')}>
         {this.props.children}
-      </componentClass>
+      </ComponentClass>
     );
   }
 });

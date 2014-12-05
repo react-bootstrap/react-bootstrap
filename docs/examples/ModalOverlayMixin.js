@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 // Our custom component is managing whether the Modal is visible
 var CustomModalTrigger = React.createClass({
   mixins: [OverlayMixin],
@@ -42,4 +40,4 @@ var CustomModalTrigger = React.createClass({
   }
 });
 
-React.renderComponent(<CustomModalTrigger />, mountNode);
+React.render(<CustomModalTrigger />, mountNode);

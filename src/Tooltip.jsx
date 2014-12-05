@@ -1,6 +1,5 @@
-/** @jsx React.DOM */
-
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var BootstrapMixin = require('./BootstrapMixin');
 
@@ -36,8 +35,8 @@ var Tooltip = React.createClass({
     arrowStyle['left'] = this.props.arrowOffsetLeft;
     arrowStyle['top'] = this.props.arrowOffsetTop;
 
-    return this.transferPropsTo(
-        <div className={classSet(classes)} style={style}>
+    return (
+        <div {...this.props} className={joinClasses(this.props.className, classSet(classes))} style={style}>
           <div className="tooltip-arrow" style={arrowStyle} />
           <div className="tooltip-inner">
             {this.props.children}

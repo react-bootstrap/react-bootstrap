@@ -1,28 +1,28 @@
-/** @jsx React.DOM */
-
 var React = require('react');
-var CustomPropTypes = require('./utils/CustomPropTypes');
-
+var joinClasses = require('./utils/joinClasses');
 
 var Grid = React.createClass({
   propTypes: {
     fluid: React.PropTypes.bool,
-    componentClass: CustomPropTypes.componentClass.isRequired
+    componentClass: React.PropTypes.node.isRequired
   },
 
   getDefaultProps: function () {
     return {
-      componentClass: React.DOM.div
+      componentClass: 'div'
     };
   },
 
   render: function () {
-    var componentClass = this.props.componentClass;
+    var ComponentClass = this.props.componentClass;
+    var className = this.props.fluid ? 'container-fluid' : 'container';
 
-    return this.transferPropsTo(
-      <componentClass className={this.props.fluid ? 'container-fluid' : 'container'}>
+    return (
+      <ComponentClass
+        {...this.props}
+        className={joinClasses(this.props.className, className)}>
         {this.props.children}
-      </componentClass>
+      </ComponentClass>
     );
   }
 });
