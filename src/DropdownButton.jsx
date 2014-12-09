@@ -62,10 +62,15 @@ var DropdownButton = React.createClass({
         'dropup': this.props.dropup
       };
 
+    var className = classSet(groupClasses);
+    if (this.props.parentClassName) {
+      className += (' ' + this.props.parentClassName);
+    }
+
     return (
       <ButtonGroup
         bsSize={this.props.bsSize}
-        className={classSet(groupClasses)}>
+        className={className}>
         {children}
       </ButtonGroup>
     );
@@ -78,8 +83,13 @@ var DropdownButton = React.createClass({
         'dropup': this.props.dropup
       };
 
+    var className = classSet(classes);
+    if (this.props.parentClassName) {
+      className += (' ' + this.props.parentClassName);
+    }
+
     return (
-      <li className={classSet(classes)}>
+      <li className={className}>
         {children}
       </li>
     );
