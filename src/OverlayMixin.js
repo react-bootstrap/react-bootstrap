@@ -53,7 +53,7 @@ module.exports = {
 
     // Save reference to help testing
     if (overlay !== null) {
-      this._overlayInstance = React.render(this.renderOverlay(), this._overlayTarget);
+      this._overlayInstance = React.render(overlay, this._overlayTarget);
     }
   },
 
