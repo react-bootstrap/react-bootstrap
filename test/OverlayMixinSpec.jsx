@@ -48,4 +48,18 @@ describe('OverlayMixin', function () {
 
     assert.equal(instance.getDOMNode().querySelectorAll('#test1').length, 1);
   });
+
+  it('Should not render a null overlay', function() {
+    var Container = React.createClass({
+      render: function() {
+        return <Overlay ref='overlay' container={this} overlay={null} />;
+      }
+    });
+
+    instance = ReactTestUtils.renderIntoDocument(
+      <Container />
+    );
+
+    assert.equal(instance.refs.overlay.getOverlayDOMNode(), null);
+  });
 });
