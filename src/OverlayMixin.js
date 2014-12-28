@@ -54,6 +54,9 @@ module.exports = {
     // Save reference to help testing
     if (overlay !== null) {
       this._overlayInstance = React.render(overlay, this._overlayTarget);
+    } else {
+      // Unrender if the component is null for transitions to null
+      this._unrenderOverlay();
     }
   },
 
