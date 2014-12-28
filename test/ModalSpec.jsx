@@ -16,6 +16,39 @@ describe('Modal', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
+  it('Should add modal-open class to the modal container while open', function(done) {
+
+    var Container = React.createClass({
+      getInitialState: function() {
+        return {modalOpen: true};
+      },
+      handleCloseModal: function() {
+        this.setState({modalOpen: false});
+      },
+      render: function() {
+        if (this.state.modalOpen) {
+          return <Modal onRequestHide={this.handleCloseModal} container={this}>
+            <strong>Message</strong>
+          </Modal>;
+        } else {
+          return <span/>;
+        }
+      }
+    });
+    var instance = ReactTestUtils.renderIntoDocument(
+        <Container />
+    );
+    assert.ok(instance.getDOMNode().className.match(/\modal-open\b/));
+
+    var backdrop = instance.getDOMNode().getElementsByClassName('modal-backdrop')[0];
+    ReactTestUtils.Simulate.click(backdrop);
+    setTimeout(function(){
+      assert.equal(instance.getDOMNode().className.length, 0);
+      done();
+    }, 0);
+
+  });
+
   it('Should close the modal when the backdrop is clicked', function (done) {
     var doneOp = function () { done(); };
     var instance = ReactTestUtils.renderIntoDocument(
