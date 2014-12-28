@@ -126,6 +126,10 @@ var Modal = React.createClass({
 
     if (this.props.backdrop) {
       this.iosClickHack();
+      if (document && document.body) {
+        var orig = document.body.className;
+        document.body.className = orig + (orig ? ' ' : '') + 'modal-open';
+      }
     }
   },
 
@@ -137,6 +141,9 @@ var Modal = React.createClass({
 
   componentWillUnmount: function () {
     this._onDocumentKeyupListener.remove();
+    if (document && document.body) {
+      document.body.className = document.body.className.replace(/ ?modal-open/, '');
+    }
   },
 
   handleBackdropClick: function (e) {
