@@ -36,7 +36,7 @@ var Modal = React.createClass({
   },
 
   render: function () {
-    var modalStyle = {display: 'block'};
+    var modalStyle = {display: 'block', overflowY: 'auto'};
     var dialogClasses = this.getBsClassSet();
     delete dialogClasses.modal;
     dialogClasses['modal-dialog'] = true;
