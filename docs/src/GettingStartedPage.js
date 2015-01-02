@@ -34,7 +34,7 @@ var Page = React.createClass({
   $ npm install react-bootstrap\n\
                     '}</code></pre>
                     <pre><code className="js">{'\
-  var Alert = require(\'react-bootstrap/Alert\');\n\
+  var Alert = require(\'react-bootstrap/lib/Alert\');\n\
   // or\n\
   var Alert = require(\'react-bootstrap\').Alert;\
                     '}</code></pre>
@@ -47,7 +47,7 @@ var Page = React.createClass({
   $ bower install react-bootstrap\n\
                     '}</code></pre>
                     <pre><code className="js">{'\
-  var Alert = require(\'react-bootstrap/Alert\');\n\
+  var Alert = require(\'react-bootstrap/lib/Alert\');\n\
   // or\n\
   var Alert = require(\'react-bootstrap\').Alert;\
                     '}</code></pre>

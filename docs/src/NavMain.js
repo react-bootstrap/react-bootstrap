@@ -2,8 +2,8 @@
 
 var React = require('react');
 var Router = require('react-router-component');
-var Navbar = require('../../cjs/Navbar');
-var Nav = require('../../cjs/Nav');
+var Navbar = require('../../lib/Navbar');
+var Nav = require('../../lib/Nav');
 
 var InternalLink = Router.Link;
 

@@ -2,10 +2,10 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Input          = require('../cjs/Input');
-var Button         = require('../cjs/Button');
-var DropdownButton = require('../cjs/DropdownButton');
-var MenuItem       = require('../cjs/MenuItem');
+var Input          = require('../lib/Input');
+var Button         = require('../lib/Button');
+var DropdownButton = require('../lib/DropdownButton');
+var MenuItem       = require('../lib/MenuItem');
 
 describe('Input', function () {
   beforeEach(function() {

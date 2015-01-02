@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var PageHeader     = require('../cjs/PageHeader');
+var PageHeader     = require('../lib/PageHeader');
 
 describe('PageHeader', function () {
   it('Should output a div with content', function () {

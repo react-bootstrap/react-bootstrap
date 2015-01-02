@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var PageItem       = require('../cjs/PageItem');
+var PageItem       = require('../lib/PageItem');
 
 describe('PageItem', function () {
   it('Should output a "list item" as root element, and an "anchor" as a child item', function () {

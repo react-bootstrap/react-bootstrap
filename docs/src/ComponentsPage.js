@@ -3,10 +3,10 @@
 var React = require('react');
 var fs = require('fs');
 
-var Affix = require('../../cjs/Affix');
-var Nav = require('../../cjs/Nav');
-var SubNav = require('../../cjs/SubNav');
-var NavItem = require('../../cjs/NavItem');
+var Affix = require('../../lib/Affix');
+var Nav = require('../../lib/Nav');
+var SubNav = require('../../lib/SubNav');
+var NavItem = require('../../lib/NavItem');
 
 var NavMain = require('./NavMain');
 var PageHeader = require('./PageHeader');

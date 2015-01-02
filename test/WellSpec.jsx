@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Well           = require('../cjs/Well');
+var Well           = require('../lib/Well');
 
 describe('Well', function () {
   it('Should output a well with content', function () {

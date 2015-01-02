@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Modal          = require('../cjs/Modal');
+var Modal          = require('../lib/Modal');
 
 describe('Modal', function () {
 

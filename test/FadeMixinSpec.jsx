@@ -3,7 +3,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var FadeMixin = require('../cjs/FadeMixin');
+var FadeMixin = require('../lib/FadeMixin');
 
 var Component;
 

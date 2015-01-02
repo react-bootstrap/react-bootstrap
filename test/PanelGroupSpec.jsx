@@ -2,8 +2,8 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var PanelGroup     = require('../cjs/PanelGroup');
-var Panel          = require('../cjs/Panel');
+var PanelGroup     = require('../lib/PanelGroup');
+var Panel          = require('../lib/Panel');
 
 describe('PanelGroup', function () {
   it('Should pass bsStyle to Panels', function () {

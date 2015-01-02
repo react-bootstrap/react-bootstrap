@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var ProgressBar    = require('../cjs/ProgressBar');
+var ProgressBar    = require('../lib/ProgressBar');
 
 var getProgressBar = function (wrapper) {
   return ReactTestUtils.findRenderedDOMComponentWithClass(wrapper, 'progress-bar');

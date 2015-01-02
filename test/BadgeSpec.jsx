@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Badge          = require('../cjs/Badge');
+var Badge          = require('../lib/Badge');
 
 describe('Badge', function () {
   it('Should output a badge with content', function () {

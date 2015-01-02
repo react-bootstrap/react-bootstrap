@@ -8,13 +8,13 @@ module.exports = function (grunt) {
         expand: true,
         cwd: 'src/',
         src: ['**/*.js'],
-        dest: 'amd/'
+        dest: 'amd/lib'
       },
       transpiled: {
         expand: true,
         cwd: 'transpiled/',
         src: ['**/*.js'],
-        dest: 'amd/'
+        dest: 'amd/lib'
       }
     },
 
@@ -35,17 +35,17 @@ module.exports = function (grunt) {
             expand: true,
             cwd: 'transpiled/',
             src: ['**/*.js'],
-            dest: 'cjs/'
+            dest: 'lib/'
           },
           {
             expand: true,
             cwd: 'src/',
             src: ['**/*.js'],
-            dest: 'cjs/'
+            dest: 'lib/'
           },
           {
             src: ['**/*'],
-            dest: 'cjs/',
+            dest: 'lib/',
             cwd: 'tools/cjs',
             expand: true
           }
@@ -88,7 +88,7 @@ module.exports = function (grunt) {
 
     clean: {
       transpiled: ['transpiled'],
-      cjs: ['cjs'],
+      cjs: ['lib'],
       amd: ['amd'],
       test: ['test-built']
     },

@@ -2,10 +2,10 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var DropdownButton = require('../cjs/DropdownButton');
-var MenuItem       = require('../cjs/MenuItem');
-var DropdownMenu   = require('../cjs/DropdownMenu');
-var Button         = require('../cjs/Button');
+var DropdownButton = require('../lib/DropdownButton');
+var MenuItem       = require('../lib/MenuItem');
+var DropdownMenu   = require('../lib/DropdownMenu');
+var Button         = require('../lib/Button');
 
 describe('DropdownButton', function () {
   var instance;

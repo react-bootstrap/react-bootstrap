@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Button         = require('../cjs/Button');
+var Button         = require('../lib/Button');
 
 describe('Button', function () {
   it('Should output a button', function () {

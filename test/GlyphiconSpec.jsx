@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Glyphicon      = require('../cjs/Glyphicon');
+var Glyphicon      = require('../lib/Glyphicon');
 
 describe('Glyphicon', function () {
   it('Should have correct class', function () {

@@ -2,8 +2,8 @@
 
 var React           = require('react');
 var ReactTestUtils  = require('react/lib/ReactTestUtils');
-var Carousel        = require('../cjs/Carousel');
-var CarouselItem    = require('../cjs/CarouselItem');
+var Carousel        = require('../lib/Carousel');
+var CarouselItem    = require('../lib/CarouselItem');
 
 describe('Carousel', function () {
   it('Should show the correct item', function () {

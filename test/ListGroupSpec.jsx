@@ -2,8 +2,8 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var ListGroup      = require('../cjs/ListGroup');
-var ListGroupItem  = require('../cjs/ListGroupItem');
+var ListGroup      = require('../lib/ListGroup');
+var ListGroupItem  = require('../lib/ListGroupItem');
 
 describe('ListGroup', function () {
 

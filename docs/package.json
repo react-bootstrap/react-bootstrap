@@ -24,7 +24,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "supervisor -w .,../cjs -i node_modules server.js",
+    "start": "supervisor -w .,../lib -i node_modules server.js",
     "build": "node build.js && browserify client.js | uglifyjs -cm 2>/dev/null > ./assets/bundle.js",
     "start-prod": "NODE_ENV=production node server.js"
   },

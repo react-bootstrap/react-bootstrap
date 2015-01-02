@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var OverlayMixin   = require('../cjs/OverlayMixin');
+var OverlayMixin   = require('../lib/OverlayMixin');
 
 describe('OverlayMixin', function () {
   var instance;

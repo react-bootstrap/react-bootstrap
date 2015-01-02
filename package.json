@@ -10,7 +10,12 @@
   "scripts": {
     "build": "./node_modules/.bin/grunt build",
     "test-watch": "./node_modules/.bin/grunt watch 2>&1 >/dev/null & ./node_modules/karma/bin/karma start karma.dev.js",
-    "test": "./node_modules/.bin/grunt build && ./node_modules/karma/bin/karma start karma.ci.js"
+    "test": "./node_modules/.bin/grunt build && ./node_modules/karma/bin/karma start karma.ci.js",
+    "prepublish": "./node_modules/.bin/grunt build"
+  },
+  "main": "lib/main.js",
+  "directories": {
+    "lib": "lib/"
   },
   "keywords": [
     "react",

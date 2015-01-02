@@ -2,9 +2,9 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var ButtonToolbar  = require('../cjs/ButtonToolbar');
-var ButtonGroup    = require('../cjs/ButtonGroup');
-var Button         = require('../cjs/Button');
+var ButtonToolbar  = require('../lib/ButtonToolbar');
+var ButtonGroup    = require('../lib/ButtonGroup');
+var Button         = require('../lib/Button');
 
 describe('ButtonToolbar', function () {
   it('Should output a button toolbar', function () {

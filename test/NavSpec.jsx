@@ -2,9 +2,9 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Nav            = require('../cjs/Nav');
-var NavItem        = require('../cjs/NavItem');
-var Button         = require('../cjs/Button');
+var Nav            = require('../lib/Nav');
+var NavItem        = require('../lib/NavItem');
+var Button         = require('../lib/Button');
 
 describe('Nav', function () {
   it('Should set the correct item active', function () {

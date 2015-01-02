@@ -2,9 +2,9 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var SplitButton    = require('../cjs/SplitButton');
-var MenuItem       = require('../cjs/MenuItem');
-var Button       = require('../cjs/Button');
+var SplitButton    = require('../lib/SplitButton');
+var MenuItem       = require('../lib/MenuItem');
+var Button       = require('../lib/Button');
 
 describe('SplitButton', function () {
   var instance;

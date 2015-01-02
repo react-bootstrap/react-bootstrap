@@ -11,3 +11,4 @@ docs/assets/bundle.js
 cjs/*
 amd/*
 ie8/bundle.js
+lib/*

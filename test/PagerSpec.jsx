@@ -2,8 +2,8 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Pager          = require('../cjs/Pager');
-var PageItem       = require('../cjs/PageItem');
+var Pager          = require('../lib/Pager');
+var PageItem       = require('../lib/PageItem');
 
 describe('Pager', function () {
   it('Should output a unordered list as root element with class "pager"', function () {

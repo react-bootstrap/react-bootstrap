@@ -2,9 +2,9 @@
 
 var React                  = require('react');
 var ReactTestUtils         = require('react/lib/ReactTestUtils');
-var TabbedArea             = require('../cjs/TabbedArea');
-var TabPane                = require('../cjs/TabPane');
-var ValidComponentChildren = require('../cjs/utils/ValidComponentChildren');
+var TabbedArea             = require('../lib/TabbedArea');
+var TabPane                = require('../lib/TabPane');
+var ValidComponentChildren = require('../lib/utils/ValidComponentChildren');
 
 describe('TabbedArea', function () {
   it('Should show the correct tab', function () {

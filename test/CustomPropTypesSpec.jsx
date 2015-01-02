@@ -2,7 +2,7 @@
 
 var React           = require('react');
 var ReactTestUtils  = require('react/lib/ReactTestUtils');
-var CustomPropTypes = require('../cjs/utils/CustomPropTypes');
+var CustomPropTypes = require('../lib/utils/CustomPropTypes');
 
 describe('CustomPropTypes', function () {
 

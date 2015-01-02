@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var TabPane        = require('../cjs/TabPane');
+var TabPane        = require('../lib/TabPane');
 
 describe('TabPane', function () {
   it('Should have class', function () {

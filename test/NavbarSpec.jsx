@@ -2,8 +2,8 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Navbar         = require('../cjs/Navbar');
-var Nav            = require('../cjs/Nav');
+var Navbar         = require('../lib/Navbar');
+var Nav            = require('../lib/Nav');
 
 describe('Nav', function () {
 

@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Table          = require('../cjs/Table');
+var Table          = require('../lib/Table');
 
 describe('Table', function () {
   it('Should be a table', function () {

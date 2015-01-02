@@ -2,8 +2,8 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var ButtonGroup    = require('../cjs/ButtonGroup');
-var Button         = require('../cjs/Button');
+var ButtonGroup    = require('../lib/ButtonGroup');
+var Button         = require('../lib/Button');
 
 describe('ButtonGroup', function () {
   it('Should output a button group', function () {

@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Jumbotron      = require('../cjs/Jumbotron');
+var Jumbotron      = require('../lib/Jumbotron');
 
 describe('Jumbotron', function () {
   it('Should output a div with content', function () {

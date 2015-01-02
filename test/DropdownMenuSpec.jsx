@@ -2,8 +2,8 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var DropdownMenu   = require('../cjs/DropdownMenu');
-var MenuItem       = require('../cjs/MenuItem');
+var DropdownMenu   = require('../lib/DropdownMenu');
+var MenuItem       = require('../lib/MenuItem');
 
 describe('DropdownMenu', function () {
   it('Should render menu correctly', function () {

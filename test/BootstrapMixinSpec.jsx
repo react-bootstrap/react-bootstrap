@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var BootstrapMixin = require('../cjs/BootstrapMixin');
+var BootstrapMixin = require('../lib/BootstrapMixin');
 
 var Component;
 

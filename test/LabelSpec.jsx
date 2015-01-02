@@ -2,7 +2,7 @@
 
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
-var Label          = require('../cjs/Label');
+var Label          = require('../lib/Label');
 
 describe('Label', function () {
 
