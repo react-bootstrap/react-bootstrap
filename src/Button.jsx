@@ -12,7 +12,9 @@ var Button = React.createClass({
     block:    React.PropTypes.bool,
     navItem:    React.PropTypes.bool,
     navDropdown: React.PropTypes.bool,
-    componentClass: React.PropTypes.node
+    componentClass: React.PropTypes.node,
+    href: React.PropTypes.string,
+    target: React.PropTypes.string
   },
 
   getDefaultProps: function () {
@@ -34,7 +36,7 @@ var Button = React.createClass({
       return this.renderNavItem(classes);
     }
 
-    renderFuncName = this.props.href || this.props.navDropdown ?
+    renderFuncName = this.props.href || this.props.target || this.props.navDropdown ?
       'renderAnchor' : 'renderButton';
 
     return this[renderFuncName](classes);
