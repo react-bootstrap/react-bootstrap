@@ -28,7 +28,7 @@ var NavItem = React.createClass({
         active,
         href,
         title,
-		target,
+	target,
         children,
         ...props } = this.props,
         classes = {
