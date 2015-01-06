@@ -69,4 +69,26 @@ describe('NavItem', function () {
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
   });
+
+  it('Should set target attribute on anchor', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          <NavItem href="/some/unique-thing/" target="_blank">Item content</NavItem>
+        );
+    var linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a').getDOMNode();
+    assert.equal(linkElement.target, '_blank');
+  });
+
+  it('Should call `onSelect` with the target when item is selected', function () {
+    var target = undefined;
+    function handleSelect(_, __, _target) {
+      target = _target;
+    }
+    var instance = ReactTestUtils.renderIntoDocument(
+      <NavItem target="_blank" onSelect={handleSelect}>
+        <span>Item content</span>
+      </NavItem>
+    );
+    ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
+    assert.equal(target, '_blank');
+  });
 });
