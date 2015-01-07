@@ -8,8 +8,9 @@ var MenuItem = React.createClass({
     divider:   React.PropTypes.bool,
     href:      React.PropTypes.string,
     title:     React.PropTypes.string,
+    target:    React.PropTypes.string,
     onSelect:  React.PropTypes.func,
-    eventKey: React.PropTypes.any
+    eventKey:  React.PropTypes.any
   },
 
   getDefaultProps: function () {
@@ -21,13 +22,13 @@ var MenuItem = React.createClass({
   handleClick: function (e) {
     if (this.props.onSelect) {
       e.preventDefault();
-      this.props.onSelect(this.props.eventKey);
+      this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
     }
   },
 
   renderAnchor: function () {
     return (
-      <a onClick={this.handleClick} href={this.props.href} title={this.props.title} tabIndex="-1">
+      <a onClick={this.handleClick} href={this.props.href} target={this.props.target} title={this.props.title} tabIndex="-1">
         {this.props.children}
       </a>
     );

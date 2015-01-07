@@ -56,4 +56,24 @@ describe('PageItem', function () {
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });
+
+  it('Should set target attribute on anchor', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <PageItem next href="#" target="_blank">Next</PageItem>
+    );
+
+    var anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
+    assert.equal(anchor.getDOMNode().getAttribute('target'), '_blank');
+  });
+
+  it('Should call "onSelect" with target attribute', function (done) {
+    function handleSelect(key, href, target) {
+      assert.equal(target, "_blank");
+      done();
+    }
+    var instance = ReactTestUtils.renderIntoDocument(
+      <PageItem eventKey={1} onSelect={handleSelect} target="_blank">Next</PageItem>
+    );
+    ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+  });
 });

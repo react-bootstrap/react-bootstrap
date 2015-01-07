@@ -14,6 +14,7 @@ var SplitButton = React.createClass({
     pullRight:     React.PropTypes.bool,
     title:         React.PropTypes.node,
     href:          React.PropTypes.string,
+    target:        React.PropTypes.string,
     dropdownTitle: React.PropTypes.node,
     onClick:       React.PropTypes.func,
     onSelect:      React.PropTypes.func,
@@ -50,6 +51,8 @@ var SplitButton = React.createClass({
         className={joinClasses(this.props.className, 'dropdown-toggle')}
         onClick={this.handleDropdownClick}
         title={null}
+        href={null}
+        target={null}
         id={null}>
         <span className="sr-only">{this.props.dropdownTitle}</span>
         <span className="caret" />
@@ -80,7 +83,7 @@ var SplitButton = React.createClass({
     }
 
     if (this.props.onClick) {
-      this.props.onClick(e);
+      this.props.onClick(e, this.props.href, this.props.target);
     }
   },
 

@@ -64,6 +64,17 @@ describe('Button', function () {
     assert.equal(instance.getDOMNode().getAttribute('href'), href);
   });
 
+  it('Should output an anchor if called with a target', function () {
+    var target = '_blank';
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Button target={target}>
+        Title
+      </Button>
+    );
+    assert.equal(instance.getDOMNode().nodeName, 'A');
+    assert.equal(instance.getDOMNode().getAttribute('target'), target);
+  });
+
   it('Should call onClick callback', function (done) {
     var doneOp = function () {
       done();

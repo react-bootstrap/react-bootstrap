@@ -4,6 +4,7 @@ var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var SplitButton    = require('../cjs/SplitButton');
 var MenuItem       = require('../cjs/MenuItem');
+var Button       = require('../cjs/Button');
 
 describe('SplitButton', function () {
   var instance;
@@ -165,6 +166,34 @@ describe('SplitButton', function () {
     );
 
     assert.ok(instance.refs.menu.props.pullRight);
+  });
+
+  it('Should set target attribute on anchor', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <SplitButton title="Title" dropdownTitle="New title" href="/some/unique-thing/" target="_blank">
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+      </SplitButton>
+    );
+
+    var anchors = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
+    assert.equal(anchors.length, 2);
+    var linkElement = anchors[0].getDOMNode();
+    assert.equal(linkElement.target, '_blank');
+  });
+
+  it('Should call `onClick` with target attribute', function (done) {
+    function handleClick(key, href, target) {
+      assert.equal(target, '_blank');
+      done();
+    }
+    var instance = ReactTestUtils.renderIntoDocument(
+      <SplitButton title="Title" dropdownTitle="New title" href="/some/unique-thing/" target="_blank" onClick={handleClick}>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+      </SplitButton>
+    );
+
+    var buttons = ReactTestUtils.scryRenderedComponentsWithType(instance, Button);
+    ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(buttons[0], 'a'));
   });
 
   describe('when open', function () {

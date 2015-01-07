@@ -17,7 +17,8 @@ var SubNav = React.createClass({
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
-    text: React.PropTypes.node
+    text: React.PropTypes.node,
+    target: React.PropTypes.string
   },
 
   getDefaultProps: function () {
@@ -31,7 +32,7 @@ var SubNav = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href);
+        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
       }
     }
   },
@@ -101,6 +102,7 @@ var SubNav = React.createClass({
         <a
           href={this.props.href}
           title={this.props.title}
+          target={this.props.target}
           onClick={this.handleClick}
           ref="anchor">
           {this.props.text}
