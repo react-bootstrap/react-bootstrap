@@ -47,7 +47,7 @@ var Modal = React.createClass({
       'in': !this.props.animation || !document.querySelectorAll
     };
 
-    var modal = (
+    return (
       <div
         {...this.props}
         title={null}
@@ -57,6 +57,7 @@ var Modal = React.createClass({
         className={joinClasses(this.props.className, classSet(classes))}
         onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
         ref="modal">
+        {this.props.backdrop ? this.renderBackdrop() : null}
         <div className={classSet(dialogClasses)}>
           <div className="modal-content">
             {this.props.title ? this.renderHeader() : null}
@@ -65,12 +66,9 @@ var Modal = React.createClass({
         </div>
       </div>
     );
-
-    return this.props.backdrop ?
-      this.renderBackdrop(modal) : modal;
   },
 
-  renderBackdrop: function (modal) {
+  renderBackdrop: function () {
     var classes = {
       'modal-backdrop': true,
       'fade': this.props.animation
@@ -82,10 +80,7 @@ var Modal = React.createClass({
       this.handleBackdropClick : null;
 
     return (
-      <div>
-        <div className={classSet(classes)} ref="backdrop" onClick={onClick} />
-        {modal}
-      </div>
+      <div className={classSet(classes)} ref="backdrop" onClick={onClick} />
     );
   },
 
