@@ -7,6 +7,7 @@ var modalInstance = (
       <Modal title="Modal title"
         backdrop={false}
         animation={false}
+        container={mountNode}
         onRequestHide={handleHide}>
         <div className="modal-body">
           One fine body...

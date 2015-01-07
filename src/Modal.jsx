@@ -124,6 +124,9 @@ var Modal = React.createClass({
     this._onDocumentKeyupListener =
       EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
 
+    var container = (this.props.container && this.props.container.getDOMNode()) || document.body;
+    container.className += container.className.length ? ' modal-open' : 'modal-open';
+
     if (this.props.backdrop) {
       this.iosClickHack();
     }
@@ -137,6 +140,8 @@ var Modal = React.createClass({
 
   componentWillUnmount: function () {
     this._onDocumentKeyupListener.remove();
+    var container = (this.props.container && this.props.container.getDOMNode()) || document.body;
+    container.className = container.className.replace(/ ?modal-open/, '');
   },
 
   handleBackdropClick: function (e) {
