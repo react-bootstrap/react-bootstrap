@@ -321,7 +321,7 @@ var ComponentsPage = React.createClass({
 
                 {/* Navbar */}
                 <div className="bs-docs-section">
-                  <h1 id="navbars" className="page-header">Navbars <small>Navbar, Nav, NavItem</small></h1>
+                  <h1 id="navbars" className="page-header">Navbars <small>Navbar, Nav, NavItem, Brand</small></h1>
                   <h2 id="navbars-examples">Example navbars</h2>
 
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavbarBasic.js', 'utf8')} />
