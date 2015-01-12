@@ -554,8 +554,8 @@ var ComponentsPage = React.createClass({
                     <NavItem href="#progress" key={8}>Progress bars</NavItem>
                     <NavItem href="#navs" key={9}>Navs</NavItem>
                     <SubNav href="#navbars" key={10} text="Navbars">
-                      <NavItem href="#navbars-basic" key={10.1}>Default Navbar</NavItem>
-                      <NavItem href="#navbars-button" key={10.2}>Buttons</NavItem>
+                      <NavItem href="#navbars-basic" key={25}>Default Navbar</NavItem>
+                      <NavItem href="#navbars-button" key={26}>Buttons</NavItem>
                     </SubNav>
                     <NavItem href="#tabs" key={11}>Togglable tabs</NavItem>
                     <NavItem href="#pager" key={12}>Pager</NavItem>
