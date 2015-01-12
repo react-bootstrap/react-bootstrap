@@ -322,9 +322,11 @@ var ComponentsPage = React.createClass({
                 {/* Navbar */}
                 <div className="bs-docs-section">
                   <h1 id="navbars" className="page-header">Navbars <small>Navbar, Nav, NavItem, Brand</small></h1>
-                  <h2 id="navbars-examples">Example navbars</h2>
-
+                  <h2 id="navbars-basic">Default navbars</h2>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavbarBasic.js', 'utf8')} />
+                
+                  <h2 id="navbars-button">Buttons</h2>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavbarButtons.js', 'utf8')} />
                 </div>
 
                 {/* Tabbed Areas */}
@@ -551,7 +553,10 @@ var ComponentsPage = React.createClass({
                     <NavItem href="#popovers" key={7}>Popovers</NavItem>
                     <NavItem href="#progress" key={8}>Progress bars</NavItem>
                     <NavItem href="#navs" key={9}>Navs</NavItem>
-                    <NavItem href="#navbars" key={10}>Navbars</NavItem>
+                    <SubNav href="#navbars" key={10} text="Navbars">
+                      <NavItem href="#navbars-basic" key={10.1}>Default Navbar</NavItem>
+                      <NavItem href="#navbars-button" key={10.2}>Buttons</NavItem>
+                    </SubNav>
                     <NavItem href="#tabs" key={11}>Togglable tabs</NavItem>
                     <NavItem href="#pager" key={12}>Pager</NavItem>
                     <NavItem href="#alerts" key={13}>Alerts</NavItem>

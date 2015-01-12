@@ -70,13 +70,14 @@ var Button = React.createClass({
   },
 
   renderNavItem: function (classes) {
+    classes['navbar-btn'] = true;
     var liClasses = {
       active: this.props.active
     };
 
     return (
       <li className={classSet(liClasses)}>
-        {this.renderAnchor(classes)}
+        {this.renderButton(classes)}
       </li>
     );
   }
