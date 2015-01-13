@@ -144,6 +144,28 @@ describe('TabbedArea', function () {
     assert.equal(instance.refs.tabs.props.activeKey, 1);
   });
 
+  it('Should allow tabs to show after tab content', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <TabbedArea tabsLast={true} defaultActiveKey={2} animation={false}>
+        <TabPane tab="Tab 1" eventKey={1} ref="pane1">Tab 1 content</TabPane>
+      </TabbedArea>
+    );
+
+    assert.equal(instance.getDOMNode().children[0].classList.contains('tab-content'), true);
+    assert.equal(instance.getDOMNode().children[1].tagName, 'NAV');
+  });
+
+  it('Should default to tabs showing before tab content', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <TabbedArea defaultActiveKey={2} animation={false}>
+        <TabPane tab="Tab 1" eventKey={1} ref="pane1">Tab 1 content</TabPane>
+      </TabbedArea>
+    );
+
+    assert.equal(instance.getDOMNode().children[0].tagName, 'NAV');
+    assert.equal(instance.getDOMNode().children[1].classList.contains('tab-content'), true);
+  });
+
   it('Should pass default bsStyle (of "tabs") to Nav', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea defaultActiveKey={1} animation={false}>
