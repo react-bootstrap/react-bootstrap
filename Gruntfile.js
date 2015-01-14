@@ -48,6 +48,24 @@ module.exports = function (grunt) {
             dest: 'cjs/',
             cwd: 'tools/cjs',
             expand: true
+          },
+          {
+            expand: true,
+            cwd: 'transpiled/',
+            src: ['**/*.js'],
+            dest: ''
+          },
+          {
+            expand: true,
+            cwd: 'src/',
+            src: ['**/*.js'],
+            dest: ''
+          },
+          {
+            src: ['**/*'],
+            dest: '',
+            cwd: 'tools/cjs',
+            expand: true
           }
         ]
       },
