@@ -18,7 +18,7 @@ function getDefaultActiveKeyFromChildren(children) {
   return defaultActiveKey;
 }
 
-var TabbedArea = React.createClass({
+var TabbedArea = React.createClass({displayName: "TabbedArea",
   mixins: [BootstrapMixin],
 
   propTypes: {
@@ -71,22 +71,22 @@ var TabbedArea = React.createClass({
     }
 
     var nav = (
-      <Nav {...this.props} activeKey={activeKey} key={1} onSelect={this.handleSelect} ref="tabs">
-        {ValidComponentChildren.map(this.props.children, renderTabIfSet, this)}
-      </Nav>
+      React.createElement(Nav, React.__spread({},  this.props, {activeKey: activeKey, key: 1, onSelect: this.handleSelect, ref: "tabs"}), 
+        ValidComponentChildren.map(this.props.children, renderTabIfSet, this)
+      )
     ),
     tabContent = (
-      <div id={this.props.id} key={2} className="tab-content" ref="panes">
-        {ValidComponentChildren.map(this.props.children, this.renderPane)}
-      </div>
+      React.createElement("div", {id: this.props.id, key: 2, className: "tab-content", ref: "panes"}, 
+        ValidComponentChildren.map(this.props.children, this.renderPane)
+      )
     );
 
     var content = this.props.tabsLast ? [tabContent, nav] : [nav, tabContent];
 
     return (
-      <div>
-        {content}
-      </div>
+      React.createElement("div", null, 
+        content
+      )
     );
   },
 
@@ -114,11 +114,11 @@ var TabbedArea = React.createClass({
   renderTab: function (child) {
     var key = child.props.eventKey;
     return (
-      <NavItem
-        ref={'tab' + key}
-        eventKey={key}>
-        {child.props.tab}
-      </NavItem>
+      React.createElement(NavItem, {
+        ref: 'tab' + key, 
+        eventKey: key}, 
+        child.props.tab
+      )
     );
   },
 
