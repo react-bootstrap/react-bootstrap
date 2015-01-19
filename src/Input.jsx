@@ -37,7 +37,11 @@ var Input = React.createClass({
       return this.props.value;
     }
     else if (this.props.type) {
-      return this.getInputDOMNode().value;
+      if (this.props.type == "select" && this.props.multiple) {
+        return this.getSelectedOptions();
+      } else {
+        return this.getInputDOMNode().value;
+      }
     }
     else {
       throw Error('Cannot use getValue without specifying input type.');
@@ -46,6 +50,23 @@ var Input = React.createClass({
 
   getChecked: function () {
     return this.getInputDOMNode().checked;
+  },
+
+  getSelectedOptions: function () {
+    var values = [];
+
+    Array.prototype.forEach.call(
+      this.getInputDOMNode().getElementsByTagName('option'),
+      function (option) {
+        if (option.selected) {
+          var value = option.getAttribute('value') || option.innerHTML;
+
+          values.push(value);
+        }
+      }
+    );
+
+    return values;
   },
 
   isCheckboxOrRadio: function () {

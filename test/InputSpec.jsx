@@ -214,6 +214,30 @@ describe('Input', function () {
     assert.equal(instance.getChecked(), true);
   });
 
+  it('returns the only selected option for select', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Input type="select" value={'one'}>
+        <option value="one">one</option>
+        <option value="two">two</option>
+        <option value="three">three</option>
+      </Input>
+    );
+
+    assert.equal(instance.getValue(), 'one');
+  })
+
+  it('returns all selected options for multiple select', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Input type="select" multiple value={['one','two']}>
+        <option value="one">one</option>
+        <option value="two">two</option>
+        <option value="three">three</option>
+      </Input>
+    );
+
+    assert.deepEqual(instance.getValue(), ['one', 'two']);
+  })
+
   it('renders a disabled input correctly', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <Input type="text" disabled={true} />
