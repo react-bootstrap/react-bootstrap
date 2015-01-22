@@ -177,4 +177,30 @@ describe('DropdownButton', function () {
     assert.ok(button.lastChild.className.match(/\bcaret\b/));
     assert.equal(button.innerText.trim(), 'Title');
   });
+
+  it('should render a caret by default', function() {
+    instance = ReactTestUtils.renderIntoDocument(
+        <DropdownButton title="Title">
+          <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+          <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+        </DropdownButton>
+    );
+
+    var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
+    var carets = button.getElementsByClassName('caret');
+    assert.equal(carets.length, 1);
+  });
+
+  it('should not render a caret if noCaret prop is given', function() {
+    instance = ReactTestUtils.renderIntoDocument(
+        <DropdownButton title="Title" noCaret>
+          <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+          <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+        </DropdownButton>
+    );
+
+    var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
+    var carets = button.getElementsByClassName('caret');
+    assert.equal(carets.length, 0);
+  });
 });
