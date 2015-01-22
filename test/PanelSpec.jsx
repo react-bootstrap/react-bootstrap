@@ -3,6 +3,7 @@
 var React          = require('react');
 var ReactTestUtils = require('react/lib/ReactTestUtils');
 var Panel          = require('../cjs/Panel');
+var Table          = require('../cjs/Table');
 
 describe('Panel', function () {
   it('Should have class and body', function () {
@@ -137,4 +138,19 @@ describe('Panel', function () {
 
     assert.ok(instance.state.expanded);
   });
+
+  it('Should not wrap panel-filling tables in a panel body', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Panel>
+        Panel content
+        <Table fill />
+        More panel content
+      </Panel>
+    );
+
+    var children = instance.getDOMNode().children;
+    assert.equal(children[0].nodeName, 'DIV');
+    assert.equal(children[1].nodeName, 'TABLE');
+    assert.equal(children[2].nodeName, 'DIV');
+  })
 });

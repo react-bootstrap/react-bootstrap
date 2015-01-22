@@ -76,11 +76,62 @@ var Panel = React.createClass({
   },
 
   renderBody: function () {
-    return (
-      <div className="panel-body" ref="body">
-        {this.props.children}
-      </div>
-    );
+    var allChildren = this.props.children;
+    var bodyElements = [];
+
+    function getProps() {
+      var index = bodyElements.length;
+      var props = {key: index};
+
+      // Arbitrarily assign the body ref to the first element. We can't wrap
+      // all body elements in a single DOM node anyway, because the fill
+      // styling depends on the table or list group element being a direct
+      // descendant of the panel.
+      if (index == 0) {
+        props.ref = 'body';
+      }
+
+      return props;
+    }
+
+    function addPanelBody (children) {
+      bodyElements.push(
+        <div className="panel-body" {...getProps()}>
+          {children}
+        </div>
+      );
+    }
+
+    // Handle edge cases where we should not iterate through children.
+    if (!Array.isArray(allChildren) || allChildren.length == 0) {
+      addPanelBody(allChildren);
+    } else {
+      var panelBodyChildren = [];
+
+      function maybeRenderPanelBody () {
+        if (panelBodyChildren.length == 0) {
+          return;
+        }
+
+        addPanelBody(panelBodyChildren);
+        panelBodyChildren = [];
+      }
+
+      allChildren.forEach(function(child) {
+        if (React.isValidElement(child) && child.props.fill != null) {
+          maybeRenderPanelBody();
+
+          // Separately add the filled element.
+          bodyElements.push(cloneWithProps(child, getProps()));
+        } else {
+          panelBodyChildren.push(child);
+        }
+      });
+
+      maybeRenderPanelBody();
+    }
+
+    return bodyElements;
   },
 
   renderHeading: function () {
