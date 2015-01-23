@@ -25,7 +25,7 @@ var Page = React.createClass({
                   <h2 id="setup" className="page-header">Setup</h2>
                   <p className="lead">You can import the lib with as AMD modules, CommonJS modules as a global JS script.</p>
 
-                  <p>First add the bootstrap CSS to your project then:</p>
+                  <p>First add the Bootstrap CSS to your project; check <a href="http://getbootstrap.com/getting-started/" name="Bootstrap Docs">here</a> if you have not already done that. Then:</p>
 
                   <h3>CommonJS</h3>
                   <div className="highlight">

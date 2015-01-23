@@ -118,6 +118,10 @@ var OverlayTrigger = React.createClass({
     clearTimeout(this._hoverDelay);
   },
 
+  componentDidMount: function() {
+    this.updateOverlayPosition();
+  },
+
   handleDelayedShow: function () {
     if (this._hoverDelay != null) {
       clearTimeout(this._hoverDelay);

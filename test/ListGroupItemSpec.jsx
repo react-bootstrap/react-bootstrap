@@ -79,4 +79,15 @@ describe('ListGroupItem', function () {
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });
+
+  it('Should call "onClick" with target attribute', function (done) {
+    function handleClick(key, href, target) {
+      assert.equal(target, '_blank');
+      done();
+    }
+    var instance = ReactTestUtils.renderIntoDocument(
+      <ListGroupItem onClick={handleClick} eventKey='2' href="#link" target='_blank'>Item</ListGroupItem>
+    );
+    ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+  });
 });
