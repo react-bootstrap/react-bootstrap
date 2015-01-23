@@ -149,8 +149,14 @@ describe('Panel', function () {
     );
 
     var children = instance.getDOMNode().children;
+
     assert.equal(children[0].nodeName, 'DIV');
+    assert.ok(children[0].className.match(/\bpanel-body\b/));
+
     assert.equal(children[1].nodeName, 'TABLE');
+    assert.notOk(children[1].className.match(/\bpanel-body\b/));
+
     assert.equal(children[2].nodeName, 'DIV');
+    assert.ok(children[2].className.match(/\bpanel-body\b/));
   })
 });
