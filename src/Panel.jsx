@@ -84,9 +84,10 @@ var Panel = React.createClass({
       var props = {key: index};
 
       // Arbitrarily assign the body ref to the first element. We can't wrap
-      // all body elements in a single DOM node anyway, because the fill
-      // styling depends on the table or list group element being a direct
-      // descendant of the panel.
+      // all body elements in a single DOM node, because the selector for the
+      // panel-filling behavior in Bootstrap looks like ".panel>.list-group",
+      // which will not work if there are any DOM nodes between the ".panel"
+      // element and the ".list-group" element.
       if (index == 0) {
         props.ref = 'body';
       }
