@@ -160,6 +160,10 @@ var ComponentsPage = React.createClass({
                   <p>Button dropdowns work with buttons of all sizes.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/DropdownButtonSizes.js', 'utf8')} />
 
+                  <h3 id="btn-dropdown-nocaret">No caret variation</h3>
+                  <p>Remove the caret using the <code>noCaret</code> prop.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/DropdownButtonNoCaret.js', 'utf8')} />
+
                   <h3 id="btn-dropdowns-dropup">Dropup variation</h3>
                   <p>Trigger dropdown menus that site above the button by adding the <code>dropup</code> prop.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/SplitButtonDropup.js', 'utf8')} />
