@@ -18,7 +18,7 @@ describe('DropdownButton', function () {
 
   it('Should render button correctly', function () {
     instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title" className="test-class">
+      <DropdownButton title="Title" className="test-class" parentClassName="parent-class">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
         <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
@@ -26,6 +26,7 @@ describe('DropdownButton', function () {
 
     var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
     assert.ok(instance.getDOMNode().className.match(/\bbtn-group\b/));
+    assert.ok(instance.getDOMNode().className.match(/\bparent-class\b/));
     assert.ok(button.className.match(/\bbtn\b/));
     assert.ok(button.className.match(/\btest-class\b/));
     assert.equal(button.nodeName, 'BUTTON');
@@ -161,7 +162,7 @@ describe('DropdownButton', function () {
 
   it('Should render li when in nav', function () {
     instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title" className="test-class" navItem>
+      <DropdownButton title="Title" className="test-class" parentClassName="parent-class" navItem>
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
         <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
@@ -171,6 +172,7 @@ describe('DropdownButton', function () {
     var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
     assert.equal(li.nodeName, 'LI');
     assert.ok(li.className.match(/\bdropdown\b/));
+    assert.ok(li.className.match(/\bparent-class\b/));
     assert.ok(button.className.match(/\btest-class\b/));
     assert.equal(button.nodeName, 'A');
     assert.ok(button.className.match(/\bdropdown-toggle\b/));
