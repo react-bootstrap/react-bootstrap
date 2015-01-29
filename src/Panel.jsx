@@ -42,7 +42,7 @@ var Panel = React.createClass({
   },
 
   getCollapsableDimensionValue: function () {
-    return this.refs.body.getDOMNode().offsetHeight;
+    return this.refs.panel.getDOMNode().scrollHeight;
   },
 
   getCollapsableDOMNode: function () {
@@ -80,19 +80,7 @@ var Panel = React.createClass({
     var bodyElements = [];
 
     function getProps() {
-      var index = bodyElements.length;
-      var props = {key: index};
-
-      // Arbitrarily assign the body ref to the first element. We can't wrap
-      // all body elements in a single DOM node, because the selector for the
-      // panel-filling behavior in Bootstrap looks like ".panel>.list-group",
-      // which will not work if there are any DOM nodes between the ".panel"
-      // element and the ".list-group" element.
-      if (index == 0) {
-        props.ref = 'body';
-      }
-
-      return props;
+      return {key: bodyElements.length};
     }
 
     function addPanelBody (children) {

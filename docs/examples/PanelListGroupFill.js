@@ -1,5 +1,5 @@
 var panelInstance = (
-    <Panel header="Panel heading">
+    <Panel collapsable defaultExpanded header="Panel heading">
       Some default panel content here.
       <ListGroup fill>
         <ListGroupItem>Item 1</ListGroupItem>
