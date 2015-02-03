@@ -192,6 +192,10 @@ var ComponentsPage = React.createClass({
                   <p>Like other components, easily make a panel more meaningful to a particular context by adding a <code>bsStyle</code> prop.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelContextual.js', 'utf8')} />
 
+                  <h3 id="panels-contextual">With tables and list groups</h3>
+                  <p>Add the <code>fill</code> prop to <code>&lt;Table /&gt;</code> or <code>&lt;ListGroup /&gt;</code> elements to make them fill the panel.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelListGroupFill.js', 'utf8')} />
+
                   <h3 id="panels-controlled">Controlled PanelGroups</h3>
                   <p><code>PanelGroup</code>s can be controlled by a parent component. The <code>activeKey</code> prop dictates which panel is open.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelGroupControlled.js', 'utf8')} />
