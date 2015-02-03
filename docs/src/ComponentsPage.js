@@ -517,7 +517,7 @@ var ComponentsPage = React.createClass({
                   The helper method <code>getInputDOMNode()</code> returns the internal input element.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/Input.js', 'utf8')} />
                   <h2 id="input-types">Types</h2>
-                  <p>Supports <code>select</code>, <code>textarea</code>, <code>static</code> as well as standard HTML input types.</p>
+                  <p>Supports <code>select</code>, <code>textarea</code>, <code>static</code> as well as standard HTML input types. <code>getValue()</code> returns an array for multiple select.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/InputTypes.js', 'utf8')} />
                   <h2 id="input-addons">Add-ons</h2>
                   <p>Use <code>addonBefore</code> and <code>addonAfter</code> for normal addons, <code>buttonBefore</code> and <code>buttonAfter</code> for button addons.
