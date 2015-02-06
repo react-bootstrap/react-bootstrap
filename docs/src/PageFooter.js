@@ -11,7 +11,7 @@ var PageHeader = React.createClass({
             <div className="bs-docs-social">
               <ul className="bs-docs-social-buttons">
                 <li>
-                  <iframe className="github-btn" src={'http://ghbtns.com/github-btn.html?user=react-bootstrap&repo=react-bootstrap&type=watch&count=true'} width={90} height={20} title="Star on GitHub" />
+                  <iframe className="github-btn" src={'http://ghbtns.com/github-btn.html?user=react-bootstrap&repo=react-bootstrap&type=watch&count=true'} width={95} height={20} title="Star on GitHub" />
                 </li>
                 <li>
                   <iframe className="github-btn" src={'http://ghbtns.com/github-btn.html?user=react-bootstrap&repo=react-bootstrap&type=fork&count=true'} width={92} height={20} title="Fork on GitHub" />
