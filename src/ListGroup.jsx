@@ -1,4 +1,5 @@
 var React = require('react');
+var joinClasses = require('./utils/joinClasses');
 var classSet = require('./utils/classSet');
 var cloneWithProps = require('./utils/cloneWithProps');
 
@@ -12,7 +13,7 @@ var ListGroup = React.createClass({
 
   render: function () {
     return (
-      <div className="list-group">
+      <div className={joinClasses(this.props.className, "list-group")}>
         {ValidComponentChildren.map(this.props.children, this.renderListItem)}
       </div>
     );
