@@ -16,6 +16,7 @@ module.exports = {
     'nav': 'nav',
     'navbar': 'navbar',
     'modal': 'modal',
+    'modal-lg':'modal-lg',
     'row': 'row',
     'well': 'well'
   },
