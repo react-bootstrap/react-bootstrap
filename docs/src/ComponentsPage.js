@@ -213,6 +213,10 @@ var ComponentsPage = React.createClass({
                   <p>Use <code>&lt;ModalTrigger /&gt;</code> to create a real modal that's added to the document body when opened.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalTrigger.js', 'utf8')} />
 
+                  <h3 id="modals-large">Large Modal</h3>
+                  <p>Passing <code>bsClass="modal-lg"</code> to the modal opens a wide modal</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalLarge.js', 'utf8')} />
+
                   <h3 id="modals-custom">Custom trigger</h3>
                   <p>Use <code>&lt;OverlayMixin /&gt;</code> in a custom component to manage the modal's state yourself.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/ModalOverlayMixin.js', 'utf8')} />
