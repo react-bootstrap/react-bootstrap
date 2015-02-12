@@ -83,6 +83,10 @@ var Panel = React.createClass({
       return {key: bodyElements.length};
     }
 
+    function addPanelChild (child) {
+      bodyElements.push(cloneWithProps(child, getProps()));
+    }
+
     function addPanelBody (children) {
       bodyElements.push(
         <div className="panel-body" {...getProps()}>
@@ -93,7 +97,11 @@ var Panel = React.createClass({
 
     // Handle edge cases where we should not iterate through children.
     if (!Array.isArray(allChildren) || allChildren.length == 0) {
-      addPanelBody(allChildren);
+      if (this.shouldRenderFill(allChildren)) {
+        addPanelChild(allChildren);
+      } else {
+        addPanelBody(allChildren);
+      }
     } else {
       var panelBodyChildren = [];
 
@@ -107,20 +115,24 @@ var Panel = React.createClass({
       }
 
       allChildren.forEach(function(child) {
-        if (React.isValidElement(child) && child.props.fill != null) {
+        if (this.shouldRenderFill(child)) {
           maybeRenderPanelBody();
 
           // Separately add the filled element.
-          bodyElements.push(cloneWithProps(child, getProps()));
+          addPanelChild(child);
         } else {
           panelBodyChildren.push(child);
         }
-      });
+      }.bind(this));
 
       maybeRenderPanelBody();
     }
 
     return bodyElements;
+  },
+
+  shouldRenderFill: function (child) {
+    return React.isValidElement(child) && child.props.fill != null
   },
 
   renderHeading: function () {
