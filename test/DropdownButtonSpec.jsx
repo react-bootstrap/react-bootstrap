@@ -26,8 +26,8 @@ describe('DropdownButton', function () {
 
     var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
     assert.ok(instance.getDOMNode().className.match(/\bbtn-group\b/));
+    assert.ok(instance.getDOMNode().className.match(/\btest-class\b/));
     assert.ok(button.className.match(/\bbtn\b/));
-    assert.ok(button.className.match(/\btest-class\b/));
     assert.equal(button.nodeName, 'BUTTON');
     assert.equal(button.type, 'button');
     assert.ok(button.className.match(/\bdropdown-toggle\b/));
@@ -171,7 +171,7 @@ describe('DropdownButton', function () {
     var button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
     assert.equal(li.nodeName, 'LI');
     assert.ok(li.className.match(/\bdropdown\b/));
-    assert.ok(button.className.match(/\btest-class\b/));
+    assert.ok(li.className.match(/\btest-class\b/));
     assert.equal(button.nodeName, 'A');
     assert.ok(button.className.match(/\bdropdown-toggle\b/));
     assert.ok(button.lastChild.className.match(/\bcaret\b/));
