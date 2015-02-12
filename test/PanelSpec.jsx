@@ -149,6 +149,7 @@ describe('Panel', function () {
     );
 
     var children = instance.getDOMNode().children;
+    assert.equal(children.length, 3);
 
     assert.equal(children[0].nodeName, 'DIV');
     assert.ok(children[0].className.match(/\bpanel-body\b/));
@@ -158,5 +159,19 @@ describe('Panel', function () {
 
     assert.equal(children[2].nodeName, 'DIV');
     assert.ok(children[2].className.match(/\bpanel-body\b/));
-  })
+  });
+
+  it('Should not wrap single panel-fill table in a panel body', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Panel>
+        <Table fill />
+      </Panel>
+    );
+
+    var children = instance.getDOMNode().children;
+    assert.equal(children.length, 1);
+
+    assert.equal(children[0].nodeName, 'TABLE');
+    assert.notOk(children[0].className.match(/\bpanel-body\b/));
+  });
 });
