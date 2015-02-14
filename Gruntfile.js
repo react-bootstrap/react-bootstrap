@@ -26,6 +26,12 @@ module.exports = function (grunt) {
             dest: 'amd/',
             cwd: 'tools/amd',
             expand: true
+          },
+          {
+            src: ['.gitignore-template'],
+            dest: 'amd/',
+            cwd: 'tools/amd',
+            expand: true
           }
         ]
       },
@@ -156,8 +162,7 @@ module.exports = function (grunt) {
         src: 'amd/<%= pkg.name %>.js',
         dest: 'amd/<%= pkg.name %>.min.js'
       }
-    }
-
+    },
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -182,6 +187,8 @@ module.exports = function (grunt) {
     'uglify:build',
     'clean:transpiled'
   ]);
+
+  require('./tools/release/tasks')(grunt);
 
   grunt.registerTask('default', ['build']);
 

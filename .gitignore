@@ -12,3 +12,5 @@ cjs/*
 amd/*
 ie8/bundle.js
 lib/*
+tmp-bower-repo/
+tmp-docs-repo/

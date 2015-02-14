@@ -10,8 +10,7 @@
   "scripts": {
     "build": "./node_modules/.bin/grunt build",
     "test-watch": "./node_modules/.bin/grunt watch 2>&1 >/dev/null & ./node_modules/karma/bin/karma start karma.dev.js",
-    "test": "./node_modules/.bin/grunt build && ./node_modules/karma/bin/karma start karma.ci.js",
-    "prepublish": "./node_modules/.bin/grunt build"
+    "test": "./node_modules/.bin/grunt build && ./node_modules/karma/bin/karma start karma.ci.js"
   },
   "main": "lib/main.js",
   "directories": {
@@ -29,6 +28,7 @@
     "react": ">=0.12"
   },
   "devDependencies": {
+    "async": "~0.2.9",
     "envify": "~1.2.1",
     "grunt": "~0.4.2",
     "grunt-amd-wrap": "^1.0.1",
@@ -58,6 +58,7 @@
     "react-async": "~2.0.0",
     "react-router-component": "git://github.com/STRML/react-router-component#react-0.12",
     "requirejs": "~2.1.9",
+    "semver": "~2.0.7",
     "sinon": "^1.10.3"
   }
 }
