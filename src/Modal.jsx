@@ -40,6 +40,7 @@ var Modal = React.createClass({
     var dialogClasses = this.getBsClassSet();
     delete dialogClasses.modal;
     dialogClasses['modal-dialog'] = true;
+    dialogClasses['modal-lg'] = this.props.large;
 
     var classes = {
       modal: true,
