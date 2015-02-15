@@ -56,6 +56,14 @@ module.exports = function(grunt) {
         next();
       },
 
+      // Generate Changelog
+      function(next) {
+        execSeries([
+          ['node_modules/.bin/changelog', ['-t', 'v' + version]],
+          ['git', ['add', path.join(repoRoot, 'CHANGELOG.md')]],
+        ], next);
+      },
+
       // Add and commit
       function(next) {
         execSeries([
@@ -109,7 +117,7 @@ module.exports = function(grunt) {
 
       function(next) {
         ReleaseRepo(docsRepo, docsRoot, tmpDocsRepo, version, next);
-      },
+      }
 
     ], complete);
   });

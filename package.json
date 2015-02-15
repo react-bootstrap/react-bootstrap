@@ -58,6 +58,7 @@
     "react-async": "~2.0.0",
     "react-router-component": "git://github.com/STRML/react-router-component#react-0.12",
     "requirejs": "~2.1.9",
+    "rf-changelog": "^0.4.0",
     "semver": "~2.0.7",
     "sinon": "^1.10.3"
   }
