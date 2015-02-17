@@ -205,8 +205,8 @@ var ReactPlayground = React.createClass({
           <div ref="mount" />
         </div>
         {editor}
-        <a className={classSet(toggleClasses)} onClick={this.handleToggleJS} href="#">{this.state.mode !== this.MODES.JS ? 'show js' : 'hide js'}</a>
-        <a className={classSet(toggleClasses)} onClick={this.handleToggleJSX} href="#">{this.state.mode !== this.MODES.JSX ? 'show jsx' : 'hide jsx'}</a>
+        <a className={classSet(toggleClasses)} onClick={this.handleToggleJS} href="#">{this.state.mode !== this.MODES.JS ? 'Show Compiled JS' : 'Hide Compiled JS'}</a>
+        <a className={classSet(toggleClasses)} onClick={this.handleToggleJSX} href="#">{this.state.mode !== this.MODES.JSX ? 'Show JSX Editor' : 'Hide JSX Editor'}</a>
       </div>
       );
   },
