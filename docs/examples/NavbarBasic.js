@@ -1,5 +1,8 @@
+var Brand = (
+    <a className="navbar-brand" href="#">Brand</a>
+  );
 var navbarInstance = (
-    <Navbar>
+    <Navbar brand={Brand}>
       <Nav>
         <NavItem eventKey={1} href="#">Link</NavItem>
         <NavItem eventKey={2} href="#">Link</NavItem>
