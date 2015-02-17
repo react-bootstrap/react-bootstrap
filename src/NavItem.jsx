@@ -11,7 +11,7 @@ var NavItem = React.createClass({
     active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
-    title: React.PropTypes.string,
+    title: React.PropTypes.node,
     eventKey: React.PropTypes.any,
     target: React.PropTypes.string
   },
