@@ -1,0 +1,11 @@
+node_modules/
+docs/
+test-built/
+test/
+tools/
+.gitignore
+.travis.yml
+Gruntfile.js
+karma.ci.js
+karma.dev.js
+test_bundle.js
