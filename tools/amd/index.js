@@ -51,6 +51,18 @@ define(function (require) {
     Table: require('./lib/Table'),
     TabPane: require('./lib/TabPane'),
     Tooltip: require('./lib/Tooltip'),
-    Well: require('./lib/Well')
+    Well: require('./lib/Well'),
+    utils: {
+        classSet: require('./lib/utils/classSet'),
+        cloneWithProps: require('./lib/utils/cloneWithProps'),
+        createChainedFunction: require('./lib/utils/createChainedFunction'),
+        CustomPropTypes: require('./lib/utils/CustomPropTypes'),
+        domUtils: require('./lib/utils/domUtils'),
+        EventListener: require('./lib/utils/EventListener'),
+        joinClasses: require('./lib/utils/joinClasses'),
+        Objectassign: require('./lib/utils/Object.assign'),
+        TransitionEvents: require('./lib/utils/TransitionEvents'),
+        ValidComponentChildren: require('./lib/utils/ValidComponentChildren')
+    }
   };
 });
