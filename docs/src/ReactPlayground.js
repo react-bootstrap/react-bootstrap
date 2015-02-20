@@ -9,6 +9,7 @@ var Button = require('../../lib/Button');
 var ButtonGroup = require('../../lib/ButtonGroup');
 var ButtonToolbar = require('../../lib/ButtonToolbar');
 var CollapsableMixin = require('../../lib/CollapsableMixin');
+var CollapsableNav = require('../../lib/CollapsableNav');
 var Carousel = require('../../lib/Carousel');
 var CarouselItem = require('../../lib/CarouselItem');
 var Col = require('../../lib/Col');

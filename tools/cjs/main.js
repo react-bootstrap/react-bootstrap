@@ -11,6 +11,7 @@ module.exports = {
   Carousel: require('./Carousel'),
   CarouselItem: require('./CarouselItem'),
   Col: require('./Col'),
+  CollapsableNav: require('./CollapsableNav'),
   CollapsableMixin: require('./CollapsableMixin'),
   DropdownButton: require('./DropdownButton'),
   DropdownMenu: require('./DropdownMenu'),

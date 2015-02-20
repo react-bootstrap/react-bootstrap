@@ -16,6 +16,7 @@ define(function (require) {
     Carousel: require('./lib/Carousel'),
     CarouselItem: require('./lib/CarouselItem'),
     Col: require('./lib/Col'),
+    CollapsableNav: require('./lib/CollapsableNav'),
     CollapsableMixin: require('./lib/CollapsableMixin'),
     DropdownButton: require('./lib/DropdownButton'),
     DropdownMenu: require('./lib/DropdownMenu'),
