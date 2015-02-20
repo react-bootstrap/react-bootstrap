@@ -46,5 +46,17 @@ module.exports = {
   Table: require('./Table'),
   TabPane: require('./TabPane'),
   Tooltip: require('./Tooltip'),
-  Well: require('./Well')
+  Well: require('./Well'),
+  utils: {
+    classSet: require('./utils/classSet'),
+    cloneWithProps: require('./utils/cloneWithProps'),
+    createChainedFunction: require('./utils/createChainedFunction'),
+    CustomPropTypes: require('./utils/CustomPropTypes'),
+    domUtils: require('./utils/domUtils'),
+    EventListener: require('./utils/EventListener'),
+    joinClasses: require('./utils/joinClasses'),
+    Objectassign: require('./utils/Object.assign'),
+    TransitionEvents: require('./utils/TransitionEvents'),
+    ValidComponentChildren: require('./utils/ValidComponentChildren')
+  }
 };
