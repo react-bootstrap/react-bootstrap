@@ -5,6 +5,7 @@ function handleHide() {
 var modalInstance = (
     <div className="static-modal">
       <Modal title="Modal title"
+        bsStyle="primary"
         backdrop={false}
         animation={false}
         container={mountNode}
