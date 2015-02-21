@@ -97,8 +97,17 @@ var Modal = React.createClass({
         );
     }
 
+    var style = this.props.bsStyle;
+    var classes = {
+      'modal-header': true
+    };
+    classes['bg-' + style] = style;
+    classes['text-' + style] = style;
+
+    var className = classSet(classes);
+
     return (
-      <div className="modal-header">
+      <div className={className}>
         {closeButton}
         {this.renderTitle()}
       </div>
