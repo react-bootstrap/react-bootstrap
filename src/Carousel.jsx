@@ -173,7 +173,7 @@ var Carousel = React.createClass({
   },
 
   renderControls: function () {
-    if (this.props.wrap) {
+    if (!this.props.wrap) {
       var activeIndex = this.getActiveIndex();
       var count = ValidComponentChildren.numberOf(this.props.children);
 
