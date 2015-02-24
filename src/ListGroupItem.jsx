@@ -52,7 +52,7 @@ var ListGroupItem = React.createClass({
       <a
         {...this.props}
         className={joinClasses(this.props.className, classSet(classes))}
-        onClick={this.handleClick}>
+      >
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </a>
     );
@@ -82,13 +82,6 @@ var ListGroupItem = React.createClass({
       header: header,
       content: content
     };
-  },
-
-  handleClick: function (e) {
-    if (this.props.onClick) {
-      e.preventDefault();
-      this.props.onClick(this.props.eventKey, this.props.href, this.props.target);
-    }
   }
 });
 
