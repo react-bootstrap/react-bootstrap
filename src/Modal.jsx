@@ -58,7 +58,7 @@ var Modal = React.createClass({
         onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
         ref="modal">
         <div className={classSet(dialogClasses)}>
-          <div className="modal-content">
+          <div className="modal-content" style={{overflow: 'hidden'}}>
             {this.props.title ? this.renderHeader() : null}
             {this.props.children}
           </div>
