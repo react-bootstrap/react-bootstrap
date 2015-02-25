@@ -163,6 +163,16 @@ module.exports = function (grunt) {
         dest: 'amd/<%= pkg.name %>.min.js'
       }
     },
+
+    karma: {
+      unit: {
+        configFile: 'karma.ci.js'
+      },
+      dev: {
+        configFile: 'karma.dev.js'
+      }
+    },
+
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -173,6 +183,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.registerTask('build', [
     'clean:amd',
@@ -186,6 +197,16 @@ module.exports = function (grunt) {
     'requirejs:dev',
     'uglify:build',
     'clean:transpiled'
+  ]);
+
+  grunt.registerTask('test', [
+    'build',
+    'karma:unit'
+  ]);
+
+  grunt.registerTask('test-watch', [
+    'build',
+    'karma:dev'
   ]);
 
   require('./tools/release/tasks')(grunt);
