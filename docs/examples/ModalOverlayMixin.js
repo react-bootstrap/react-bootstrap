@@ -28,7 +28,7 @@ var CustomModalTrigger = React.createClass({
     }
 
     return (
-        <Modal title="Modal heading" onRequestHide={this.handleToggle}>
+        <Modal bsStyle="primary" title="Modal heading" onRequestHide={this.handleToggle}>
           <div className="modal-body">
             This modal is controlled by our custom trigger component.
           </div>
