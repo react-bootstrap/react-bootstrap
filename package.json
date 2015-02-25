@@ -9,8 +9,8 @@
   "homepage": "http://react-bootstrap.github.io/",
   "scripts": {
     "build": "./node_modules/.bin/grunt build",
-    "test-watch": "./node_modules/.bin/grunt watch 2>&1 >/dev/null & ./node_modules/karma/bin/karma start karma.dev.js",
-    "test": "./node_modules/.bin/grunt build && ./node_modules/karma/bin/karma start karma.ci.js"
+    "test-watch": "./node_modules/.bin/grunt test-watch",
+    "test": "./node_modules/.bin/grunt test"
   },
   "main": "lib/main.js",
   "directories": {
@@ -39,6 +39,7 @@
     "grunt-contrib-requirejs": "~0.4.1",
     "grunt-contrib-uglify": "~0.3.2",
     "grunt-contrib-watch": "~0.5.3",
+    "grunt-karma": "^0.10.1",
     "grunt-react": "~0.10.0",
     "grunt-shell": "~0.6.4",
     "karma": "~0.12.8",
