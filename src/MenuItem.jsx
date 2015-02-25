@@ -21,7 +21,9 @@ var MenuItem = React.createClass({
 
   handleClick: function (e) {
     if (this.props.onSelect) {
-      e.preventDefault();
+      if (!this.props.href) {
+        e.preventDefault();
+      }
       this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
     }
   },
