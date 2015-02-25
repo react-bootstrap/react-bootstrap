@@ -331,8 +331,28 @@ var ComponentsPage = React.createClass({
                 <div className="bs-docs-section">
                   <h1 id="navbars" className="page-header">Navbars <small>Navbar, Nav, NavItem</small></h1>
                   <h2 id="navbars-examples">Example navbars</h2>
+                  <p>You can specify a brand by passing a renderable component or string in <code>brand</code></p>
+                  <p>Navbars are by default accessible and will provide <code>role="navigation"</code>.</p>
+                  <p>They also supports all the different Bootstrap classes as properties. Just camelCase the css class and remove navbar from it. For example <code>navbar-fixed-top</code> becomes the property <code>fixedTop</code>. The different properties are <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>, <code>inverse</code>, <code>fluid</code>.</p>
+                  <p>You can drag elements to the right by specifying the <code>right</code> property on a nav group.</p>
 
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavbarBasic.js', 'utf8')} />
+
+                  <h3>Mobile Friendly</h3>
+                  <p>To have a mobile friendly Navbar, specify the property <code>toggleNavKey</code> on the Navbar with a value corresponding to an <code>eventKey</code> of one of his <code>Nav</code> children. This child will be the one collapsed.</p>
+                  <p>By setting the property {React.DOM.code(null, "defaultNavExpanded={true}")} the Navbar will start expanded by default.</p>
+                  <div className="bs-callout bs-callout-info">
+                    <h4>Scrollbar overflow</h4>
+                    <p>The height of the collapsable is slightly smaller than the real height. To hide the scroll bar, add the following css to your style files.</p>
+                    <pre>
+                      {React.DOM.code(null,
+                        ".navbar-collapse {\n" +
+                        "  overflow: hidden;\n" +
+                        "}\n"
+                      )}
+                    </pre>
+                  </div>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavbarCollapsable.js', 'utf8')} />
                 </div>
 
                 {/* Tabbed Areas */}
