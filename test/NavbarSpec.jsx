@@ -124,4 +124,30 @@ describe('Nav', function () {
     assert.equal(navNode.nodeName, 'UL');
     assert.equal(navNode.parentNode.nodeName, 'DIV');
   });
+
+  it('Should add header when toggleNavKey is 0', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Navbar toggleNavKey={0}>
+        <Nav eventKey={0}>
+        </Nav>
+      </Navbar>
+    );
+
+    var header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
+
+    assert.ok(header);
+  });
+
+  it('Should add header when toggleNavKey is 1', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Navbar toggleNavKey={1}>
+        <Nav eventKey={1}>
+        </Nav>
+      </Navbar>
+    );
+
+    var header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
+
+    assert.ok(header);
+  });
 });

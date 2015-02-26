@@ -75,7 +75,7 @@ var Navbar = React.createClass({
     return (
       <ComponentClass {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
         <div className={this.props.fluid ? 'container-fluid' : 'container'}>
-          {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey) ? this.renderHeader() : null}
+          {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderHeader() : null}
           {ValidComponentChildren.map(this.props.children, this.renderChild)}
         </div>
       </ComponentClass>
