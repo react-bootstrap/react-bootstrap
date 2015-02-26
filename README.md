@@ -10,6 +10,10 @@ Under active development - APIs will change.
 
 A [docs site](http://react-bootstrap.github.io) with live editable examples is a work in progress
 
+### Bootstrap Version
+
+Currently supports v3.2.0, but v3.3+ support is coming soon.
+
 ## Authors
 
 - [Stephen J. Collings](https://github.com/stevoland)
