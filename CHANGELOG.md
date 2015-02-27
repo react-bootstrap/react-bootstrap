@@ -6,10 +6,6 @@ v0.16.0 - Fri, 27 Feb 2015 14:01:37 GMT
 - [13f395d](../../commit/13f395d) [added] bsStyle prop support for Modal to set the header color
 - [c822837](../../commit/c822837) [removed] non-standard onClick props for ListGroup and ListGroupItem
 - [1556e63](../../commit/1556e63) [added] Example for collapsable Navbar in docs.
-- [587a34f](../../commit/587a34f) [fixed] Include .npmignore so compile lib dir is published
-- [1ef51cb](../../commit/1ef51cb) [added] Changelog generation from commit messages
-- [13baeaa](../../commit/13baeaa) [added] Release task to push and tag docs and bower repos
-- [0193046](../../commit/0193046) [changed] Move built components to lib directory
 
 
 v0.15.1 - Tue, 17 Feb 2015 14:30:54 GMT
