@@ -22,6 +22,10 @@ var Navbar = React.createClass({
     componentClass: React.PropTypes.node.isRequired,
     brand: React.PropTypes.node,
     toggleButton: React.PropTypes.node,
+    toggleNavKey: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     onToggle: React.PropTypes.func,
     navExpanded: React.PropTypes.bool,
     defaultNavExpanded: React.PropTypes.bool
@@ -75,7 +79,7 @@ var Navbar = React.createClass({
     return (
       <ComponentClass {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
         <div className={this.props.fluid ? 'container-fluid' : 'container'}>
-          {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey) ? this.renderHeader() : null}
+          {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderHeader() : null}
           {ValidComponentChildren.map(this.props.children, this.renderChild)}
         </div>
       </ComponentClass>
