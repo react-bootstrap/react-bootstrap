@@ -150,4 +150,17 @@ describe('Nav', function () {
 
     assert.ok(header);
   });
+
+  it('Should add header when toggleNavKey is string', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+      <Navbar toggleNavKey={'string'}>
+        <Nav eventKey={'string'}>
+        </Nav>
+      </Navbar>
+    );
+
+    var header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
+
+    assert.ok(header);
+  });
 });
