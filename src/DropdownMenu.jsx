@@ -1,7 +1,7 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var createChainedFunction = require('./utils/createChainedFunction');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
@@ -21,7 +21,7 @@ var DropdownMenu = React.createClass({
     return (
         <ul
           {...this.props}
-          className={joinClasses(this.props.className, classSet(classes))}
+          className={classSet(this.props.className, classes)}
           role="menu">
           {ValidComponentChildren.map(this.props.children, this.renderMenuItem)}
         </ul>
@@ -29,7 +29,7 @@ var DropdownMenu = React.createClass({
   },
 
   renderMenuItem: function (child, index) {
-    return cloneWithProps(
+    return cloneElement(
       child,
       {
         // Capture onSelect events
@@ -37,7 +37,6 @@ var DropdownMenu = React.createClass({
 
         // Force special props to be transferred
         key: child.key ? child.key : index,
-        ref: child.ref
       }
     );
   }

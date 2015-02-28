@@ -1,7 +1,7 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var createChainedFunction = require('./utils/createChainedFunction');
 var BootstrapMixin = require('./BootstrapMixin');
@@ -67,7 +67,7 @@ var DropdownButton = React.createClass({
     return (
       <ButtonGroup
         bsSize={this.props.bsSize}
-        className={joinClasses(this.props.className, classSet(groupClasses))}>
+        className={classSet(this.props.className, groupClasses)}>
         {children}
       </ButtonGroup>
     );
@@ -81,7 +81,7 @@ var DropdownButton = React.createClass({
       };
 
     return (
-      <li className={joinClasses(this.props.className, classSet(classes))}>
+      <li className={classSet(this.props.className, classes)}>
         {children}
       </li>
     );
@@ -94,15 +94,12 @@ var DropdownButton = React.createClass({
     var handleOptionSelect = this.props.onSelect || child.props.onSelect ?
       this.handleOptionSelect : null;
 
-    return cloneWithProps(
+    return cloneElement(
       child,
       {
         // Capture onSelect events
         onSelect: createChainedFunction(child.props.onSelect, handleOptionSelect),
-
-        // Force special props to be transferred
         key: child.key ? child.key : index,
-        ref: child.ref
       }
     );
   },

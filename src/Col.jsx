@@ -1,6 +1,6 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+
+var classSet = require('classnames');
 var constants = require('./constants');
 
 
@@ -64,7 +64,7 @@ var Col = React.createClass({
     }, this);
 
     return (
-      <ComponentClass {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
+      <ComponentClass {...this.props} className={classSet(this.props.className, classes)}>
         {this.props.children}
       </ComponentClass>
     );

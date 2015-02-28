@@ -6,21 +6,6 @@ module.exports = {
     container: CustomPropTypes.mountable
   },
 
-  getDefaultProps: function () {
-    return {
-      container: {
-        // Provide `getDOMNode` fn mocking a React component API. The `document.body`
-        // reference needs to be contained within this function so that it is not accessed
-        // in environments where it would not be defined, e.g. nodejs. Equally this is needed
-        // before the body is defined where `document.body === null`, this ensures
-        // `document.body` is only accessed after componentDidMount.
-        getDOMNode: function getDOMNode() {
-          return document.body;
-        }
-      }
-    };
-  },
-
   componentWillUnmount: function () {
     this._unrenderOverlay();
     if (this._overlayTarget) {
@@ -71,14 +56,13 @@ module.exports = {
     }
 
     if (this._overlayInstance) {
-      return this._overlayInstance.getDOMNode();
+      return React.findDOMNode(this._overlayInstance);
     }
 
     return null;
   },
 
   getContainerDOMNode: function () {
-    return this.props.container.getDOMNode ?
-      this.props.container.getDOMNode() : this.props.container;
+    return React.findDOMNode(this.props.container || document.body);
   }
 };

@@ -1,9 +1,15 @@
 'use strict';
 
 var React = require('react');
-var Root = require('./src/Root');
+var Router = require('react-router');
+var routes = require('./src/Routes');
 
 // For React devtools
 window.React = React;
 
-React.render(React.createFactory(Root)(window.INITIAL_PROPS), document);
+Router.run(routes, Router.RefreshLocation, function (Handler) {
+  React.render(
+    React.createElement(Handler, window.INITIAL_PROPS), document);
+})
+
+

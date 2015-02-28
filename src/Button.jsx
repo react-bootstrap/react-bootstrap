@@ -1,6 +1,6 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var Button = React.createClass({
@@ -52,7 +52,7 @@ var Button = React.createClass({
       <Component
         {...this.props}
         href={href}
-        className={joinClasses(this.props.className, classSet(classes))}
+        className={classSet(this.props.className, classes)}
         role="button">
         {this.props.children}
       </Component>
@@ -65,7 +65,7 @@ var Button = React.createClass({
     return (
       <Component
         {...this.props}
-        className={joinClasses(this.props.className, classSet(classes))}>
+        className={classSet(this.props.className, classes)}>
         {this.props.children}
       </Component>
     );

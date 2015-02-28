@@ -1,6 +1,6 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 var DropdownStateMixin = require('./DropdownStateMixin');
 var Button = require('./Button');
@@ -48,7 +48,7 @@ var SplitButton = React.createClass({
       <Button
         {...this.props}
         ref="dropdownButton"
-        className={joinClasses(this.props.className, 'dropdown-toggle')}
+        className={classSet(this.props.className, 'dropdown-toggle')}
         onClick={this.handleDropdownClick}
         title={null}
         href={null}

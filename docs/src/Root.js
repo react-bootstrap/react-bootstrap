@@ -1,30 +1,7 @@
 'use strict';
 
 var React = require('react');
-var Router = require('react-router-component');
-
-var HomePage = React.createFactory(require('./HomePage'));
-var GettingStartedPage = React.createFactory(require('./GettingStartedPage'));
-var ComponentsPage = React.createFactory(require('./ComponentsPage'));
-var NotFoundPage = React.createFactory(require('./NotFoundPage'));
-
-var Locations = Router.Locations;
-var Location = Router.Location;
-var NotFound = Router.NotFound;
-
-var PagesHolder = React.createClass({
-  render: function () {
-    return (
-        <Locations contextual>
-          <Location path="/" handler={HomePage} />
-          <Location path="/index.html" handler={HomePage} />
-          <Location path="/getting-started.html" handler={GettingStartedPage} />
-          <Location path="/components.html" handler={ComponentsPage} />
-          <NotFound handler={NotFoundPage} />
-        </Locations>
-      );
-  }
-});
+var Router = require('react-router');
 
 var Root = React.createClass({
   statics: {
@@ -110,9 +87,7 @@ var Root = React.createClass({
           <head dangerouslySetInnerHTML={head} />
 
           <body>
-            <Locations path={Root.getBaseUrl() + this.props.initialPath}>
-              <Location path={Root.getBaseUrl() + '*'} handler={React.createFactory(PagesHolder)} />
-            </Locations>
+            <Router.RouteHandler />
 
             <script dangerouslySetInnerHTML={browserInitScriptObj} />
             <script src="vendor/codemirror/codemirror.js" />
@@ -124,5 +99,6 @@ var Root = React.createClass({
       );
   }
 });
+
 
 module.exports = Root;

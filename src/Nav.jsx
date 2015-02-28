@@ -1,10 +1,10 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
-var classSet = require('./utils/classSet');
+var classSet = require('classnames');
 var domUtils = require('./utils/domUtils');
-var cloneWithProps = require('./utils/cloneWithProps');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
@@ -32,11 +32,11 @@ var Nav = React.createClass({
   },
 
   getCollapsableDOMNode: function () {
-    return this.getDOMNode();
+    return React.findDOMNode(this);
   },
 
   getCollapsableDimensionValue: function () {
-    var node = this.refs.ul.getDOMNode(),
+    var node = React.findDOMNode(this.refs.ul),
         height = node.offsetHeight,
         computedStyles = domUtils.getComputedStyles(node);
 
@@ -53,7 +53,7 @@ var Nav = React.createClass({
     }
 
     return (
-      <nav {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
+      <nav {...this.props} className={classSet(this.props.className, classes)}>
         {this.renderUl()}
       </nav>
     );
@@ -69,7 +69,7 @@ var Nav = React.createClass({
     classes['navbar-right'] = this.props.right;
 
     return (
-      <ul {...this.props} className={joinClasses(this.props.className, classSet(classes))} ref="ul">
+      <ul {...this.props} className={classSet(this.props.className, classes)} ref="ul">
         {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
       </ul>
     );
@@ -94,14 +94,13 @@ var Nav = React.createClass({
   },
 
   renderNavItem: function (child, index) {
-    return cloneWithProps(
+    return cloneElement(
       child,
       {
         active: this.getChildActiveProp(child),
         activeKey: this.props.activeKey,
         activeHref: this.props.activeHref,
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.ref,
         key: child.key ? child.key : index,
         navItem: true
       }

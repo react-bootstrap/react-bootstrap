@@ -1,6 +1,5 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+var classSet = require('classnames');
 var TransitionEvents = require('./utils/TransitionEvents');
 
 var TabPane = React.createClass({
@@ -37,7 +36,7 @@ var TabPane = React.createClass({
     }
     if (this.state.animateOut) {
       TransitionEvents.addEndEventListener(
-        this.getDOMNode(),
+        React.findDOMNode(this),
         this.stopAnimateOut
       );
     }
@@ -72,7 +71,7 @@ var TabPane = React.createClass({
     };
 
     return (
-      <div {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
+      <div {...this.props} className={classSet(this.props.className, classes)}>
         {this.props.children}
       </div>
     );

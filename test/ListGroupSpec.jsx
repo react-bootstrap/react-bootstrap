@@ -18,12 +18,15 @@ describe('ListGroup', function () {
   it('Should support "ListGroupItem" childs', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <ListGroup>
-        <ListGroupItem ref="child1">1st Child</ListGroupItem>
-        <ListGroupItem ref="child2">2nd Child</ListGroupItem>
+        <ListGroupItem>1st Child</ListGroupItem>
+        <ListGroupItem>2nd Child</ListGroupItem>
       </ListGroup>
     );
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.child1, 'list-group-item'));
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.child2, 'list-group-item'));
+
+    var items = ReactTestUtils.scryRenderedComponentsWithType(instance, ListGroupItem);
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(items[0], 'list-group-item'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(items[1], 'list-group-item'));
   });
 
 });

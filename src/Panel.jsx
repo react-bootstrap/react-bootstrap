@@ -1,7 +1,7 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var BootstrapMixin = require('./BootstrapMixin');
 var CollapsableMixin = require('./CollapsableMixin');
@@ -42,7 +42,7 @@ var Panel = React.createClass({
   },
 
   getCollapsableDimensionValue: function () {
-    return this.refs.panel.getDOMNode().scrollHeight;
+    return React.findDOMNode(this.refs.panel).scrollHeight;
   },
 
   getCollapsableDOMNode: function () {
@@ -50,7 +50,7 @@ var Panel = React.createClass({
       return null;
     }
 
-    return this.refs.panel.getDOMNode();
+    return React.findDOMNode(this.refs.panel);
   },
 
   render: function () {
@@ -58,7 +58,7 @@ var Panel = React.createClass({
     classes['panel'] = true;
 
     return (
-      <div {...this.props} className={joinClasses(this.props.className, classSet(classes))}
+      <div {...this.props} className={classSet(this.props.className, classes)}
         id={this.props.collapsable ? null : this.props.id} onSelect={null}>
         {this.renderHeading()}
         {this.props.collapsable ? this.renderCollapsableBody() : this.renderBody()}
@@ -84,7 +84,7 @@ var Panel = React.createClass({
     }
 
     function addPanelChild (child) {
-      bodyElements.push(cloneWithProps(child, getProps()));
+      bodyElements.push(cloneElement(child, getProps()));
     }
 
     function addPanelBody (children) {
@@ -146,13 +146,15 @@ var Panel = React.createClass({
       header = this.props.collapsable ?
         this.renderCollapsableTitle(header) : header;
     } else if (this.props.collapsable) {
-      header = cloneWithProps(header, {
-        className: 'panel-title',
+
+      header = cloneElement(header, {
+        className: classSet(header.props.className, 'panel-title'),
         children: this.renderAnchor(header.props.children)
       });
     } else {
-      header = cloneWithProps(header, {
-        className: 'panel-title'
+
+      header = cloneElement(header, {
+        className: classSet(header.props.className, 'panel-title')
       });
     }
 

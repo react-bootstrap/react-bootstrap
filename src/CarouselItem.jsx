@@ -1,6 +1,6 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+
+var classSet = require('classnames');
 var TransitionEvents = require('./utils/TransitionEvents');
 
 var CarouselItem = React.createClass({
@@ -40,7 +40,7 @@ var CarouselItem = React.createClass({
   componentDidUpdate: function (prevProps) {
     if (!this.props.active && prevProps.active) {
       TransitionEvents.addEndEventListener(
-        this.getDOMNode(),
+        React.findDOMNode(this),
         this.handleAnimateOutEnd
       );
     }
@@ -74,7 +74,7 @@ var CarouselItem = React.createClass({
     }
 
     return (
-      <div {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
+      <div {...this.props} className={classSet(this.props.className, classes)}>
         {this.props.children}
         {this.props.caption ? this.renderCaption() : null}
       </div>

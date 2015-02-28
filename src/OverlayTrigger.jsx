@@ -1,7 +1,7 @@
 var React = require('react');
 var OverlayMixin = require('./OverlayMixin');
 var domUtils = require('./utils/domUtils');
-var cloneWithProps = require('./utils/cloneWithProps');
+var cloneElement = React.cloneElement;
 
 var createChainedFunction = require('./utils/createChainedFunction');
 var assign = require('./utils/Object.assign');
@@ -76,7 +76,7 @@ var OverlayTrigger = React.createClass({
       return <span />;
     }
 
-    return cloneWithProps(
+    return cloneElement(
       this.props.overlay,
       {
         onRequestHide: this.hide,
@@ -108,7 +108,7 @@ var OverlayTrigger = React.createClass({
       props.onBlur = createChainedFunction(this.handleDelayedHide, this.props.onBlur);
     }
 
-    return cloneWithProps(
+    return cloneElement(
       React.Children.only(this.props.children),
       props
     );
@@ -211,7 +211,7 @@ var OverlayTrigger = React.createClass({
   },
 
   getPosition: function () {
-    var node = this.getDOMNode();
+    var node = React.findDOMNode(this);
     var container = this.getContainerDOMNode();
 
     var offset = container.tagName == 'BODY' ?

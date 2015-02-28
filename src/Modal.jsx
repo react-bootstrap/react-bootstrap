@@ -1,8 +1,8 @@
 /* global document:false */
 
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 var FadeMixin = require('./FadeMixin');
 var EventListener = require('./utils/EventListener');
@@ -54,7 +54,7 @@ var Modal = React.createClass({
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
-        className={joinClasses(this.props.className, classSet(classes))}
+        className={classSet(this.props.className, classes)}
         onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
         ref="modal">
         <div className={classSet(dialogClasses)}>
@@ -125,15 +125,15 @@ var Modal = React.createClass({
     // IOS only allows click events to be delegated to the document on elements
     // it considers 'clickable' - anchors, buttons, etc. We fake a click handler on the
     // DOM nodes themselves. Remove if handled by React: https://github.com/facebook/react/issues/1169
-    this.refs.modal.getDOMNode().onclick = function () {};
-    this.refs.backdrop.getDOMNode().onclick = function () {};
+    React.findDOMNode(this.refs.modal).onclick = function () {};
+    React.findDOMNode(this.refs.backdrop).onclick = function () {};
   },
 
   componentDidMount: function () {
     this._onDocumentKeyupListener =
       EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
 
-    var container = (this.props.container && this.props.container.getDOMNode()) || document.body;
+    var container = (this.props.container && React.findDOMNode(this.props.container)) || document.body;
     container.className += container.className.length ? ' modal-open' : 'modal-open';
 
     if (this.props.backdrop) {
@@ -149,7 +149,8 @@ var Modal = React.createClass({
 
   componentWillUnmount: function () {
     this._onDocumentKeyupListener.remove();
-    var container = (this.props.container && this.props.container.getDOMNode()) || document.body;
+    var container = (this.props.container && React.findDOMNode(this.props.container)) || document.body;
+
     container.className = container.className.replace(/ ?modal-open/, '');
   },
 

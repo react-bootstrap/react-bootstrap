@@ -136,7 +136,8 @@ module.exports = function (grunt) {
             almond: "../tools/vendor/almond"
           },
           packages: [
-            {	name: 'react', location: '../node_modules/react', main: './react' }
+            {	name: 'react', location: '../node_modules/react', main: './react' },
+            { name: 'classnames', location: '../node_modules/classnames', main: './index' }
           ],
           include: ["almond", "react-bootstrap"],
           exclude: ["react"],

@@ -1,6 +1,6 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+
+var classSet = require('classnames');
 
 var MenuItem = React.createClass({
   propTypes: {
@@ -49,7 +49,7 @@ var MenuItem = React.createClass({
 
     return (
       <li {...this.props} role="presentation" title={null} href={null}
-        className={joinClasses(this.props.className, classSet(classes))}>
+        className={classSet(this.props.className, classes)}>
         {children}
       </li>
     );

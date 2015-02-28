@@ -1,6 +1,6 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 
 
@@ -38,7 +38,7 @@ var Popover = React.createClass({
     arrowStyle['top'] = this.props.arrowOffsetTop;
 
     return (
-      <div {...this.props} className={joinClasses(this.props.className, classSet(classes))} style={style} title={null}>
+      <div {...this.props} className={classSet(this.props.className, classes)} style={style} title={null}>
         <div className="arrow" style={arrowStyle} />
         {this.props.title ? this.renderTitle() : null}
         <div className="popover-content">

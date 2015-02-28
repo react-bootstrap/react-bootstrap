@@ -100,11 +100,13 @@ describe('Nav', function () {
   it('Should pass navbar prop to navs', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <Navbar brand="Brand">
-        <Nav ref="nav"/>
+        <Nav />
       </Navbar>
     );
 
-    assert.ok(instance.refs.nav.props.navbar);
+    var nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav)
+
+    assert.ok(nav.props.navbar);
   });
 
   it('Should pass nav prop to ul', function () {

@@ -1,9 +1,9 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+
 var Interpolate = require('./Interpolate');
 var BootstrapMixin = require('./BootstrapMixin');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
@@ -48,7 +48,7 @@ var ProgressBar = React.createClass({
     if (!ValidComponentChildren.hasValidComponent(this.props.children)) {
       if (!this.props.isChild) {
         return (
-          <div {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
+          <div {...this.props} className={classSet(this.props.className, classes)}>
             {this.renderProgressBar()}
           </div>
         );
@@ -59,7 +59,7 @@ var ProgressBar = React.createClass({
       }
     } else {
       return (
-        <div {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
+        <div {...this.props} className={classSet(this.props.className, classes)}>
           {ValidComponentChildren.map(this.props.children, this.renderChildBar)}
         </div>
       );
@@ -67,10 +67,9 @@ var ProgressBar = React.createClass({
   },
 
   renderChildBar: function (child, index) {
-    return cloneWithProps(child, {
+    return cloneElement(child, {
       isChild: true,
-      key: child.key ? child.key : index,
-      ref: child.ref
+      key: child.key ? child.key : index
     });
   },
 
@@ -96,7 +95,7 @@ var ProgressBar = React.createClass({
     var classes = this.getBsClassSet();
 
     return (
-      <div {...this.props} className={joinClasses(this.props.className, classSet(classes))} role="progressbar"
+      <div {...this.props} className={classSet(this.props.className, classes)} role="progressbar"
         style={{width: percentage + '%'}}
         aria-valuenow={this.props.now}
         aria-valuemin={this.props.min}

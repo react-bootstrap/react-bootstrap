@@ -1,5 +1,5 @@
 var React = require('react');
-var classSet = require('react/lib/cx');
+var classSet = require('classnames');
 var CodeMirror = global.CodeMirror;
 var JSXTransformer = global.JSXTransformer;
 var Accordion = require('../../lib/Accordion');

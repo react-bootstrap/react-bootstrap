@@ -1,7 +1,7 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var BootstrapMixin = require('./BootstrapMixin');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
@@ -33,7 +33,7 @@ var PanelGroup = React.createClass({
   render: function () {
     var classes = this.getBsClassSet();
     return (
-      <div {...this.props} className={joinClasses(this.props.className, classSet(classes))} onSelect={null}>
+      <div {...this.props} className={classSet(this.props.className, classes)} onSelect={null}>
         {ValidComponentChildren.map(this.props.children, this.renderPanel)}
       </div>
     );
@@ -55,7 +55,7 @@ var PanelGroup = React.createClass({
       props.onSelect = this.handleSelect;
     }
 
-    return cloneWithProps(
+    return cloneElement(
       child,
       props
     );

@@ -48,7 +48,7 @@ var DropdownStateMixin = {
   handleDocumentClick: function (e) {
     // If the click originated from within this component
     // don't do anything.
-    if (isNodeInRoot(e.target, this.getDOMNode())) {
+    if (isNodeInRoot(e.target, React.findDOMNode(this))) {
       return;
     }
 

@@ -1,6 +1,6 @@
 var React = require('react');
 var BootstrapMixin = require('./BootstrapMixin');
-var cloneWithProps = require('./utils/cloneWithProps');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var Nav = require('./Nav');
@@ -92,12 +92,11 @@ var TabbedArea = React.createClass({
   renderPane: function (child, index) {
     var activeKey = this.getActiveKey();
 
-    return cloneWithProps(
+    return cloneElement(
         child,
         {
           active: (child.props.eventKey === activeKey &&
             (this.state.previousActiveKey == null || !this.props.animation)),
-          ref: child.ref,
           key: child.key ? child.key : index,
           animation: this.props.animation,
           onAnimateOutEnd: (this.state.previousActiveKey != null &&

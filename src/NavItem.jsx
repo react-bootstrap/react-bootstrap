@@ -1,6 +1,6 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var NavItem = React.createClass({
@@ -37,7 +37,7 @@ var NavItem = React.createClass({
         };
 
     return (
-      <li {...props} className={joinClasses(props.className, classSet(classes))}>
+      <li {...props} className={classSet(props.className, classes)}>
         <a
           href={href}
           title={title}

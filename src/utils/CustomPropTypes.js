@@ -48,10 +48,10 @@ function createChainableTypeChecker(validate) {
 function createMountableChecker() {
   function validate(props, propName, componentName) {
     if (typeof props[propName] !== 'object' ||
-      typeof props[propName].getDOMNode !== 'function' && props[propName].nodeType !== 1) {
+      typeof props[propName].render !== 'function' && props[propName].nodeType !== 1) {
       return new Error(
         'Invalid prop `' + propName + '` supplied to ' +
-          '`' + componentName + '`, expected a DOM element or an object that has a `getDOMNode` method'
+          '`' + componentName + '`, expected a DOM element or an object that has a `render` method'
       );
     }
   }

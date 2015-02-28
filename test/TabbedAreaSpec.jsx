@@ -10,15 +10,19 @@ describe('TabbedArea', function () {
   it('Should show the correct tab', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea activeKey={1}>
-        <TabPane tab="Tab 1" eventKey={1} ref="pane1">Tab 1 content</TabPane>
-        <TabPane tab="Tab 2" eventKey={2} ref="pane2">Tab 2 content</TabPane>
+        <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
       </TabbedArea>
     );
 
-    assert.equal(instance.refs.pane1.props.active, true);
-    assert.equal(instance.refs.pane2.props.active, false);
+    var panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane)
 
-    assert.equal(instance.refs.tabs.props.activeKey, 1);
+    assert.equal(panes[0].props.active, true);
+    assert.equal(panes[1].props.active, false);
+
+    var tabbedArea = ReactTestUtils.findRenderedComponentWithType(instance, TabbedArea);
+
+    assert.equal(tabbedArea.refs.tabs.props.activeKey, 1);
   });
 
   it('Should only show the tabs with `TabPane.props.tab` set', function () {
@@ -30,8 +34,10 @@ describe('TabbedArea', function () {
       </TabbedArea>
     );
 
+    var tabbedArea = ReactTestUtils.findRenderedComponentWithType(instance, TabbedArea);
+
     assert.equal(ValidComponentChildren.numberOf(instance.refs.tabs.props.children), 2);
-    assert.equal(instance.refs.tabs.props.activeKey, 3);
+    assert.equal(tabbedArea.refs.tabs.props.activeKey, 3);
   });
 
   it('Should allow tab to have React components', function () {
@@ -58,9 +64,10 @@ describe('TabbedArea', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea onSelect={onSelect} activeKey={1}>
         <TabPane tab="Tab 1" eventKey='1'>Tab 1 content</TabPane>
-        <TabPane tab={tab2} eventKey='2' ref="tab2">Tab 2 content</TabPane>
+        <TabPane tab={tab2} eventKey='2'>Tab 2 content</TabPane>
       </TabbedArea>
     );
+
 
     ReactTestUtils.Simulate.click(
       ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab2')
@@ -70,41 +77,50 @@ describe('TabbedArea', function () {
   it('Should have children with the correct DOM properties', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea activeKey={1}>
-        <TabPane tab="Tab 1" className="custom" id="pane0id" eventKey={1} ref="pane1">Tab 1 content</TabPane>
+        <TabPane tab="Tab 1" className="custom" id="pane0id" eventKey={1}>Tab 1 content</TabPane>
         <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
       </TabbedArea>
     );
 
-    assert.ok(instance.refs.pane1.getDOMNode().className.match(/\bcustom\b/));
-    assert.equal(instance.refs.pane1.getDOMNode().id, 'pane0id');
+    var panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane)
+
+    assert.ok(panes[0].getDOMNode().className.match(/\bcustom\b/));
+    assert.equal(panes[0].getDOMNode().id, 'pane0id');
   });
 
   it('Should show the correct initial pane', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea defaultActiveKey={2}>
-        <TabPane tab="Tab 1" eventKey={1} ref="pane1">Tab 1 content</TabPane>
-        <TabPane tab="Tab 2" eventKey={2} ref="pane2">Tab 2 content</TabPane>
+        <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
       </TabbedArea>
     );
 
-    assert.equal(instance.refs.pane1.props.active, false);
-    assert.equal(instance.refs.pane2.props.active, true);
+    var tabbedArea = ReactTestUtils.findRenderedComponentWithType(instance, TabbedArea);
 
-    assert.equal(instance.refs.tabs.props.activeKey, 2);
+    var panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane)
+
+    assert.equal(panes[0].props.active, false);
+    assert.equal(panes[1].props.active, true);
+
+    assert.equal(tabbedArea.refs.tabs.props.activeKey, 2);
   });
 
   it('Should show the correct first tab with no active key value', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea>
-        <TabPane tab="Tab 1" eventKey={1} ref="pane1">Tab 1 content</TabPane>
-        <TabPane tab="Tab 2" eventKey={2} ref="pane2">Tab 2 content</TabPane>
+        <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
       </TabbedArea>
     );
 
-    assert.equal(instance.refs.pane1.props.active, true);
-    assert.equal(instance.refs.pane2.props.active, false);
+    var tabbedArea = ReactTestUtils.findRenderedComponentWithType(instance, TabbedArea);
+    var panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane)
 
-    assert.equal(instance.refs.tabs.props.activeKey, 1);
+    assert.equal(panes[0].props.active, true);
+    assert.equal(panes[1].props.active, false);
+
+    assert.equal(tabbedArea.refs.tabs.props.activeKey, 1);
   });
 
   it('Should show the correct first tab with `React.Children.map` children values', function () {
@@ -130,26 +146,29 @@ describe('TabbedArea', function () {
     var tab1 = <span className="tab1">Tab 1</span>;
     var instance = ReactTestUtils.renderIntoDocument(
       <TabbedArea defaultActiveKey={2} animation={false}>
-        <TabPane tab={tab1} eventKey={1} ref="pane1">Tab 1 content</TabPane>
-        <TabPane tab="Tab 2" eventKey={2} ref="pane2">Tab 2 content</TabPane>
+        <TabPane tab={tab1} eventKey={1}>Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
       </TabbedArea>
     );
+
+    var tabbedArea = ReactTestUtils.findRenderedComponentWithType(instance, TabbedArea);
+    var panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane)
 
     ReactTestUtils.Simulate.click(
       ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab1')
     );
 
-    assert.equal(instance.refs.pane1.props.active, true);
-    assert.equal(instance.refs.pane2.props.active, false);
-    assert.equal(instance.refs.tabs.props.activeKey, 1);
+    assert.equal(panes[0].props.active, true);
+    assert.equal(panes[1].props.active, false);
+    assert.equal(tabbedArea.refs.tabs.props.activeKey, 1);
   });
 
   it('Should pass default bsStyle (of "tabs") to Nav', function () {
     var instance = ReactTestUtils.renderIntoDocument(
-      <TabbedArea defaultActiveKey={1} animation={false}>
-        <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
-        <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
-      </TabbedArea>
+        <TabbedArea defaultActiveKey={1} animation={false}>
+          <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
+          <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
+        </TabbedArea>
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-tabs'));

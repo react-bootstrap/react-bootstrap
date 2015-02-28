@@ -1,6 +1,6 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+
+var classSet = require('classnames');
 
 var PageItem = React.createClass({
 
@@ -30,7 +30,7 @@ var PageItem = React.createClass({
     return (
       <li
         {...this.props}
-        className={joinClasses(this.props.className, classSet(classes))}>
+        className={classSet(this.props.className, classes)}>
         <a
           href={this.props.href}
           title={this.props.title}

@@ -40,6 +40,7 @@ describe('FadeMixin', function () {
     var instance = ReactTestUtils.renderIntoDocument(<Component />);
 
     setTimeout(function(){
+
       instance.componentWillUnmount()
       var element = instance._fadeOutEl.children[0]
       var child   = element.children[0]

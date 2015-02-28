@@ -1,5 +1,5 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+var classSet = require('classnames');
 
 var Row = React.createClass({
   propTypes: {
@@ -16,7 +16,7 @@ var Row = React.createClass({
     var ComponentClass = this.props.componentClass;
 
     return (
-      <ComponentClass {...this.props} className={joinClasses(this.props.className, 'row')}>
+      <ComponentClass {...this.props} className={classSet(this.props.className, 'row')}>
         {this.props.children}
       </ComponentClass>
     );

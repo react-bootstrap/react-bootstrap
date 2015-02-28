@@ -1,6 +1,5 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+var classSet = require('classnames');
 var BootstrapMixin = require('./BootstrapMixin');
 
 var Well = React.createClass({
@@ -16,7 +15,7 @@ var Well = React.createClass({
     var classes = this.getBsClassSet();
 
     return (
-      <div {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
+      <div {...this.props} className={classSet(this.props.className, classes)}>
         {this.props.children}
       </div>
     );

@@ -1,7 +1,6 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
@@ -98,7 +97,7 @@ var SubNav = React.createClass({
     };
 
     return (
-      <li {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
+      <li {...this.props} className={classSet(this.props.className, classes)}>
         <a
           href={this.props.href}
           title={this.props.title}
@@ -115,12 +114,11 @@ var SubNav = React.createClass({
   },
 
   renderNavItem: function (child, index) {
-    return cloneWithProps(
+    return cloneElement(
       child,
       {
         active: this.getChildActiveProp(child),
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: child.ref,
         key: child.key ? child.key : index
       }
     );

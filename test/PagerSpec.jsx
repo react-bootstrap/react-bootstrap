@@ -45,10 +45,15 @@ describe('Pager', function () {
     }
     var instance = ReactTestUtils.renderIntoDocument(
       <Pager onSelect={handleSelect}>
-        <PageItem eventKey={1} ref="item1" href="#prev">Previous</PageItem>
-        <PageItem eventKey={2} ref="item2" href="#next">Next</PageItem>
+        <PageItem eventKey={1} href="#prev">Previous</PageItem>
+        <PageItem eventKey={2} href="#next">Next</PageItem>
       </Pager>
     );
-    ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance.refs.item2, 'a'));
+
+    var items = ReactTestUtils.scryRenderedComponentsWithType(instance, PageItem);
+
+    ReactTestUtils.Simulate.click(
+      ReactTestUtils.findRenderedDOMComponentWithTag(items[1], 'a')
+    );
   });
 });

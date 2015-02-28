@@ -1,6 +1,6 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
+
+var classSet = require('classnames');
 var Button = require('./Button');
 
 var Input = React.createClass({
@@ -29,7 +29,7 @@ var Input = React.createClass({
   },
 
   getInputDOMNode: function () {
-    return this.refs.input.getDOMNode();
+    return React.findDOMNode(this.refs.input);
   },
 
   getValue: function () {
@@ -87,17 +87,17 @@ var Input = React.createClass({
     switch (this.props.type) {
       case 'select':
         input = (
-          <select {...this.props} className={joinClasses(this.props.className, 'form-control')} ref="input" key="input">
+          <select {...this.props} className={classSet(this.props.className, 'form-control')} ref="input" key="input">
             {this.props.children}
           </select>
         );
         break;
       case 'textarea':
-        input = <textarea {...this.props} className={joinClasses(this.props.className, 'form-control')} ref="input" key="input" />;
+        input = <textarea {...this.props} className={classSet(this.props.className, 'form-control')} ref="input" key="input" />;
         break;
       case 'static':
         input = (
-          <p {...this.props} className={joinClasses(this.props.className, 'form-control-static')} ref="input"  key="input">
+          <p {...this.props} className={classSet(this.props.className, 'form-control-static')} ref="input"  key="input">
             {this.props.value}
           </p>
         );
@@ -109,7 +109,7 @@ var Input = React.createClass({
         break;
       default:
         var className = this.isCheckboxOrRadio() || this.isFile() ? '' : 'form-control';
-        input = <input {...this.props} className={joinClasses(this.props.className, className)} ref="input" key="input" />;
+        input = <input {...this.props} className={classSet(this.props.className, className)} ref="input" key="input" />;
     }
 
     return input;

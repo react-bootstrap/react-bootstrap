@@ -1,6 +1,6 @@
 var React = require('react');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var createChainedFunction = require('./utils/createChainedFunction');
@@ -19,8 +19,7 @@ var ListGroup = React.createClass({
   },
 
   renderListItem: function (child, index) {
-    return cloneWithProps(child, {
-      ref: child.ref,
+    return cloneElement(child, {
       key: child.key ? child.key : index
     });
   }

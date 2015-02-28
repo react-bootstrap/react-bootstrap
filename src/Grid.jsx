@@ -1,5 +1,5 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+var classSet = require('classnames');
 
 var Grid = React.createClass({
   propTypes: {
@@ -20,7 +20,7 @@ var Grid = React.createClass({
     return (
       <ComponentClass
         {...this.props}
-        className={joinClasses(this.props.className, className)}>
+        className={classSet(this.props.className, className)}>
         {this.props.children}
       </ComponentClass>
     );

@@ -7,11 +7,19 @@ var MenuItem       = require('../lib/MenuItem');
 
 describe('DropdownMenu', function () {
   it('Should render menu correctly', function () {
+    var Parent = React.createClass({
+      render: function(){
+        return (
+          <DropdownMenu>
+            <MenuItem eventKey="1" ref="item1">MenuItem 1 content</MenuItem>
+            <MenuItem eventKey="2" ref="item2">MenuItem 2 content</MenuItem>
+          </DropdownMenu>
+        )
+      }
+    })
+
     var instance = ReactTestUtils.renderIntoDocument(
-      <DropdownMenu>
-        <MenuItem eventKey="1" ref="item1">MenuItem 1 content</MenuItem>
-        <MenuItem eventKey="2" ref="item2">MenuItem 2 content</MenuItem>
-      </DropdownMenu>
+      <Parent/>
     );
 
     var node = instance.getDOMNode();

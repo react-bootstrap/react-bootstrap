@@ -1,7 +1,7 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 var BootstrapMixin = require('./BootstrapMixin');
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
@@ -144,7 +144,7 @@ var Carousel = React.createClass({
     return (
       <div
         {...this.props}
-        className={joinClasses(this.props.className, classSet(classes))}
+        className={classSet(this.props.className, classes)}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}>
         {this.props.indicators ? this.renderIndicators() : null}
@@ -244,7 +244,7 @@ var Carousel = React.createClass({
     var isPreviousActive = this.state.previousActiveIndex != null &&
             this.state.previousActiveIndex === index && this.props.slide;
 
-    return cloneWithProps(
+    return cloneElement(
         child,
         {
           active: isActive,

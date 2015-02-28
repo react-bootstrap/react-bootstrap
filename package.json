@@ -25,7 +25,7 @@
   "author": "Stephen J. Collings <stevoland@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "react": ">=0.12"
+    "react": ">=0.13"
   },
   "devDependencies": {
     "async": "~0.2.9",
@@ -55,12 +55,13 @@
     "karma-script-launcher": "~0.1.0",
     "karma-sinon": "^1.0.3",
     "mocha": "~1.16.2",
-    "react": "~0.12.0",
-    "react-async": "~2.0.0",
-    "react-router-component": "git://github.com/STRML/react-router-component#react-0.12",
+    "react": "0.13.0",
     "requirejs": "~2.1.9",
     "rf-changelog": "^0.4.0",
     "semver": "~2.0.7",
     "sinon": "^1.10.3"
+  },
+  "dependencies": {
+    "classnames": "^1.1.4"
   }
 }

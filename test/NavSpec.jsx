@@ -10,12 +10,15 @@ describe('Nav', function () {
   it('Should set the correct item active', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <Nav bsStyle="pills" activeKey={1}>
-        <NavItem eventKey={1} ref="item1">Pill 1 content</NavItem>
-        <NavItem eventKey={2} ref="item2">Pill 2 content</NavItem>
+        <NavItem eventKey={1}>Pill 1 content</NavItem>
+        <NavItem eventKey={2}>Pill 2 content</NavItem>
       </Nav>
     );
-    assert.ok(instance.refs.item1.props.active);
-    assert.notOk(instance.refs.item2.props.active);
+
+    var items = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
+
+    assert.ok(items[0].props.active);
+    assert.notOk(items[1].props.active);
   });
 
   it('Should adds style class', function () {
@@ -62,10 +65,11 @@ describe('Nav', function () {
   it('Should add navbar-right class', function () {
     var instance = ReactTestUtils.renderIntoDocument(
           <Nav bsStyle="tabs" right activeKey={1}>
-            <NavItem key={1} ref="item1">Tab 1 content</NavItem>
-            <NavItem key={2} ref="item2">Tab 2 content</NavItem>
+            <NavItem key={1}>Tab 1 content</NavItem>
+            <NavItem key={2}>Tab 2 content</NavItem>
           </Nav>
         );
+
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-right'));
   });
 
@@ -75,32 +79,41 @@ describe('Nav', function () {
       done();
     }
     var instance = ReactTestUtils.renderIntoDocument(
-      <Nav bsStyle="tabs" activeKey={1} onSelect={handleSelect}>
-        <NavItem eventKey={1} ref="item1">Tab 1 content</NavItem>
-        <NavItem eventKey={2} ref="item2"><span>Tab 2 content</span></NavItem>
-      </Nav>
-    );
-    ReactTestUtils.Simulate.click(instance.refs.item2.refs.anchor);
+          <Nav bsStyle="tabs" activeKey={1} onSelect={handleSelect}>
+            <NavItem eventKey={1}>Tab 1 content</NavItem>
+            <NavItem eventKey={2}><span>Tab 2 content</span></NavItem>
+          </Nav>
+        );
+
+    var items = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
+
+    ReactTestUtils.Simulate.click(items[1].refs.anchor);
   });
 
   it('Should set the correct item active by href', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <Nav bsStyle="pills" activeHref="#item2">
-        <NavItem eventKey={1} ref="item1" href="#item1">Pill 1 content</NavItem>
-        <NavItem eventKey={2} ref="item2" href="#item2">Pill 2 content</NavItem>
+        <NavItem eventKey={1} href="#item1">Pill 1 content</NavItem>
+        <NavItem eventKey={2} href="#item2">Pill 2 content</NavItem>
       </Nav>
     );
-    assert.ok(instance.refs.item2.props.active);
-    assert.notOk(instance.refs.item1.props.active);
+
+    var items = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
+
+    assert.ok(items[1].props.active);
+    assert.notOk(items[0].props.active);
   });
 
   it('Should set navItem prop on passed in buttons', function () {
     var instance = ReactTestUtils.renderIntoDocument(
       <Nav bsStyle="pills" activeHref="#item2">
-        <Button eventKey={1} ref="item1">Button 1 content</Button>
-        <NavItem eventKey={2} ref="item2" href="#item2">Pill 2 content</NavItem>
+        <Button eventKey={1}>Button 1 content</Button>
+        <NavItem eventKey={2} href="#item2">Pill 2 content</NavItem>
       </Nav>
     );
-    assert.ok(instance.refs.item1.props.navItem);
+
+    var items = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
+
+    assert.ok(items[0].props.navItem);
   });
 });

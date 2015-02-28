@@ -1,8 +1,8 @@
 var React = require('react');
-var joinClasses = require('./utils/joinClasses');
+
 var BootstrapMixin = require('./BootstrapMixin');
-var classSet = require('./utils/classSet');
-var cloneWithProps = require('./utils/cloneWithProps');
+var classSet = require('classnames');
+var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 
@@ -41,7 +41,7 @@ var ListGroupItem = React.createClass({
 
   renderSpan: function (classes) {
     return (
-      <span {...this.props} className={joinClasses(this.props.className, classSet(classes))}>
+      <span {...this.props} className={classSet(this.props.className, classes)}>
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </span>
     );
@@ -51,7 +51,7 @@ var ListGroupItem = React.createClass({
     return (
       <a
         {...this.props}
-        className={joinClasses(this.props.className, classSet(classes))}
+        className={classSet(this.props.className, classes)}
       >
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </a>
@@ -61,27 +61,25 @@ var ListGroupItem = React.createClass({
   renderStructuredContent: function () {
     var header;
     if (React.isValidElement(this.props.header)) {
-      header = cloneWithProps(this.props.header, {
-        className: 'list-group-item-heading'
+      header = cloneElement(this.props.header, {
+        key: 'header',
+        className: classSet(this.props.header.props.className, 'list-group-item-heading')
       });
     } else {
       header = (
-        <h4 className="list-group-item-heading">
+        <h4 key='header' className="list-group-item-heading">
           {this.props.header}
         </h4>
       );
     }
 
     var content = (
-      <p className="list-group-item-text">
+      <p key='content' className="list-group-item-text">
         {this.props.children}
       </p>
     );
 
-    return {
-      header: header,
-      content: content
-    };
+    return [header, content];
   }
 });
 
