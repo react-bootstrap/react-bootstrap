@@ -10,6 +10,7 @@ var Panel = React.createClass({
   mixins: [BootstrapMixin, CollapsableMixin],
 
   propTypes: {
+    collapsable: React.PropTypes.bool,
     onSelect: React.PropTypes.func,
     header: React.PropTypes.node,
     footer: React.PropTypes.node,
@@ -23,22 +24,22 @@ var Panel = React.createClass({
     };
   },
 
-  handleSelect: function (e) {
+  handleSelect: function(e){
+    e.selected = true;
+
     if (this.props.onSelect) {
-      this._isChanging = true;
-      this.props.onSelect(this.props.eventKey);
-      this._isChanging = false;
+      this.props.onSelect(e, this.props.eventKey);
+    } else {
+      e.preventDefault();
     }
 
-    e.preventDefault();
-
-    this.setState({
-      expanded: !this.state.expanded
-    });
+    if (e.selected) {
+      this.handleToggle();
+    }
   },
 
-  shouldComponentUpdate: function () {
-    return !this._isChanging;
+  handleToggle: function(){
+    this.setState({expanded:!this.state.expanded});
   },
 
   getCollapsableDimensionValue: function () {
@@ -69,7 +70,11 @@ var Panel = React.createClass({
 
   renderCollapsableBody: function () {
     return (
-      <div className={classSet(this.getCollapsableClassSet('panel-collapse'))} id={this.props.id} ref="panel">
+      <div
+        className={classSet(this.getCollapsableClassSet('panel-collapse'))}
+        id={this.props.id}
+        ref="panel"
+        aria-expanded={this.isExpanded() ? 'true' : 'false'}>
         {this.renderBody()}
       </div>
     );
@@ -78,6 +83,7 @@ var Panel = React.createClass({
   renderBody: function () {
     var allChildren = this.props.children;
     var bodyElements = [];
+    var panelBodyChildren = [];
 
     function getProps() {
       return {key: bodyElements.length};
@@ -95,24 +101,23 @@ var Panel = React.createClass({
       );
     }
 
+    function maybeRenderPanelBody () {
+      if (panelBodyChildren.length === 0) {
+        return;
+      }
+
+      addPanelBody(panelBodyChildren);
+      panelBodyChildren = [];
+    }
+
     // Handle edge cases where we should not iterate through children.
-    if (!Array.isArray(allChildren) || allChildren.length == 0) {
+    if (!Array.isArray(allChildren) || allChildren.length === 0) {
       if (this.shouldRenderFill(allChildren)) {
         addPanelChild(allChildren);
       } else {
         addPanelBody(allChildren);
       }
     } else {
-      var panelBodyChildren = [];
-
-      function maybeRenderPanelBody () {
-        if (panelBodyChildren.length == 0) {
-          return;
-        }
-
-        addPanelBody(panelBodyChildren);
-        panelBodyChildren = [];
-      }
 
       allChildren.forEach(function(child) {
         if (this.shouldRenderFill(child)) {
@@ -132,7 +137,7 @@ var Panel = React.createClass({
   },
 
   shouldRenderFill: function (child) {
-    return React.isValidElement(child) && child.props.fill != null
+    return React.isValidElement(child) && child.props.fill != null;
   },
 
   renderHeading: function () {
@@ -168,6 +173,7 @@ var Panel = React.createClass({
       <a
         href={'#' + (this.props.id || '')}
         className={this.isExpanded() ? null : 'collapsed'}
+        aria-expanded={this.isExpanded() ? 'true' : 'false'}
         onClick={this.handleSelect}>
         {header}
       </a>
