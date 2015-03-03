@@ -1,3 +1,9 @@
+v0.16.1 - Tue, 03 Mar 2015 23:04:19 GMT
+---------------------------------------
+
+- [71ff264](../../commit/71ff264) [added] bsSize prop to Input, supporting input groups
+
+
 v0.16.0 - Fri, 27 Feb 2015 14:01:37 GMT
 ---------------------------------------
 
