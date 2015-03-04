@@ -16,7 +16,7 @@ $ cd react-bootstrap/docs
 $ npm install
 ```
 
-You must have previously run `npm install` from the main directory. 
+You must have previously run `grunt build` and `npm install` from the main directory. 
 
 ### Instructions
 
