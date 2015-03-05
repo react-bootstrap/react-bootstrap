@@ -23,7 +23,7 @@ var NavItem = React.createClass({
   },
 
   render: function () {
-    var { 
+    var {
         disabled,
         active,
         href,
@@ -34,16 +34,22 @@ var NavItem = React.createClass({
         classes = {
           'active': active,
           'disabled': disabled
+        },
+        linkProps = {
+          href,
+          title,
+          target,
+          onClick: this.handleClick,
+          ref: 'anchor'
         };
+
+    if (href === '#') {
+      linkProps.role = 'button';
+    }
 
     return (
       <li {...props} className={joinClasses(props.className, classSet(classes))}>
-        <a
-          href={href}
-          title={title}
-          target={target}
-          onClick={this.handleClick}
-          ref="anchor">
+        <a {...linkProps}>
           { children }
         </a>
       </li>
