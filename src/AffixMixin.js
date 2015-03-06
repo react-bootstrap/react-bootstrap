@@ -26,7 +26,6 @@ var AffixMixin = {
     DOMNode.className += DOMNode.className.length ? ' affix' : 'affix';
 
     this.pinnedOffset = domUtils.getOffset(DOMNode).top - window.pageYOffset;
-
     return this.pinnedOffset;
   },
 
@@ -54,6 +53,19 @@ var AffixMixin = {
       this.props.offsetTop : this.props.offset;
     offsetBottom = this.props.offsetBottom != null ?
       this.props.offsetBottom : this.props.offset;
+
+    if (this.affixed === 'top' && scrollTop < offsetTop) {
+      return;
+    }
+
+    if (this.affixed === 'bottom') {
+      if (scrollTop + this.unpin > position.top) {
+        return;
+      }
+      if (scrollTop + DOMNode.offsetHeight > scrollHeight - offsetBottom) {
+        return;
+      }
+    }
 
     if (offsetTop == null && offsetBottom == null) {
       return;
