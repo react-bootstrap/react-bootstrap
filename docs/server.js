@@ -1,39 +1,43 @@
-'use strict';
+import React from 'react';
+import express from 'express';
+import path from 'path';
+import url from 'url';
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackConfigBuilder from '../webpack/webpack.config';
+import Router from 'react-router';
+import routes from './src/Routes';
 
-var express = require('express');
-
-
-var development = process.env.NODE_ENV !== 'production';
-var app = express();
+const development = process.env.NODE_ENV !== 'production';
+let app = express();
 
 if (development) {
-  var React = require('react');
-  var path = require('path');
-  var url = require('url');
-  var browserify = require('connect-browserify');
-  var nodejsx = require('node-jsx').install();
+  let webpackConfig = webpackConfigBuilder({
+    development: development,
+    docs: true
+  });
+  let publicPath = webpackConfig.output.publicPath;
 
-  var routes = require('./src/Routes');
-  var Router = require('react-router');
+  webpackConfig.output.path = '/';
+  webpackConfig.output.publicPath = undefined;
 
   app = app
-    .get('/assets/bundle.js', browserify('./client', {debug: true, watch: false}))
-    .use('/assets', express.static(path.join(__dirname, 'assets')))
-    .use('/vendor', express.static(path.join(__dirname, 'vendor')))
+    .use(webpackMiddleware(webpack(webpackConfig), {
+      noInfo: false,
+      publicPath: publicPath,
+      stats: {
+          colors: true
+      }
+    }))
     .use(function renderApp(req, res) {
-      var fileName = url.parse(req.url).pathname;
-
-      Router.run(routes, req.url, function (Handler) {
-        var RootHTML = React.renderToString(React.createElement(Handler));
-
-        res.send(RootHTML);
-      })
-
-      
+      Router.run(routes, req.url, Handler => {
+        let html = React.renderToString(<Handler />);
+        res.send(html);
+      });
     });
 } else {
   app = app
-    .use(express.static(__dirname));
+    .use(express.static(path.join(__dirname, '../docs-built')));
 }
 
 app

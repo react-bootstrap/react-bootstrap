@@ -1,12 +1,9 @@
-'use strict';
+import React from 'react';
 
-var React = require('react');
+import NavMain from './NavMain';
+import PageFooter from './PageFooter';
 
-var NavMain = require('./NavMain');
-var PageHeader = require('./PageHeader');
-var PageFooter = require('./PageFooter');
-
-var HomePage = React.createClass({
+const HomePage = React.createClass({
   render: function () {
     return (
         <div>
@@ -25,4 +22,4 @@ var HomePage = React.createClass({
   }
 });
 
-module.exports = HomePage;
+export default HomePage;

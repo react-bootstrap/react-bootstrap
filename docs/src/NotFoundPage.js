@@ -1,20 +1,18 @@
-'use strict';
+import React from 'react';
 
-var React = require('react');
+import NavMain from './NavMain';
+import PageHeader from './PageHeader';
+import PageFooter from './PageFooter';
 
-var NavMain = require('./NavMain');
-var PageHeader = require('./PageHeader');
-var PageFooter = require('./PageFooter');
-
-var NotFoundPage = React.createClass({
-  render: function () {
+const NotFoundPage = React.createClass({
+  render() {
     return (
         <div>
-          <NavMain activePage="" />
+          <NavMain activePage='' />
 
           <PageHeader
-            title="404"
-            subTitle="Hmmm this is awkward." />
+            title='404'
+            subTitle='Hmmm this is awkward.' />
 
           <PageFooter />
         </div>
@@ -22,4 +20,4 @@ var NotFoundPage = React.createClass({
   }
 });
 
-module.exports = NotFoundPage;
+export default NotFoundPage;

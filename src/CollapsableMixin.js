@@ -1,15 +1,15 @@
-var React = require('react');
-var TransitionEvents = require('react/lib/ReactTransitionEvents');
+import React from 'react';
+import TransitionEvents from 'react/lib/ReactTransitionEvents';
 
-var CollapsableMixin = {
+const CollapsableMixin = {
 
   propTypes: {
     defaultExpanded: React.PropTypes.bool,
     expanded: React.PropTypes.bool
   },
 
-  getInitialState: function(){
-    var defaultExpanded = this.props.defaultExpanded != null ?
+  getInitialState(){
+    let defaultExpanded = this.props.defaultExpanded != null ?
       this.props.defaultExpanded :
         this.props.expanded != null ?
         this.props.expanded :
@@ -21,8 +21,8 @@ var CollapsableMixin = {
     };
   },
 
-  componentWillUpdate: function(nextProps, nextState){
-    var willExpanded = nextProps.expanded != null ? nextProps.expanded : nextState.expanded;
+  componentWillUpdate(nextProps, nextState){
+    let willExpanded = nextProps.expanded != null ? nextProps.expanded : nextState.expanded;
     if (willExpanded === this.isExpanded()) {
       return;
     }
@@ -32,9 +32,9 @@ var CollapsableMixin = {
     // the collapsing class is applied (after collapsing is applied the in class
     // is removed and the node's dimension will be wrong)
 
-    var node = this.getCollapsableDOMNode();
-    var dimension = this.dimension();
-    var value = '0';
+    let node = this.getCollapsableDOMNode();
+    let dimension = this.dimension();
+    let value = '0';
 
     if(!willExpanded){
       value = this.getCollapsableDimensionValue();
@@ -45,29 +45,29 @@ var CollapsableMixin = {
     this._afterWillUpdate();
   },
 
-  componentDidUpdate: function(prevProps, prevState){
+  componentDidUpdate(prevProps, prevState){
     // check if expanded is being toggled; if so, set collapsing
     this._checkToggleCollapsing(prevProps, prevState);
 
     // check if collapsing was turned on; if so, start animation
-    this._checkStartAnimation(); 
+    this._checkStartAnimation();
   },
 
   // helps enable test stubs
-  _afterWillUpdate: function(){
+  _afterWillUpdate(){
   },
 
-  _checkStartAnimation: function(){
+  _checkStartAnimation(){
     if(!this.state.collapsing) {
       return;
     }
 
-    var node = this.getCollapsableDOMNode();
-    var dimension = this.dimension();
-    var value = this.getCollapsableDimensionValue();
+    let node = this.getCollapsableDOMNode();
+    let dimension = this.dimension();
+    let value = this.getCollapsableDimensionValue();
 
     // setting the dimension here starts the transition animation
-    var result;
+    let result;
     if(this.isExpanded()) {
       result = value + 'px';
     } else {
@@ -76,9 +76,9 @@ var CollapsableMixin = {
     node.style[dimension] = result;
   },
 
-  _checkToggleCollapsing: function(prevProps, prevState){
-    var wasExpanded = prevProps.expanded != null ? prevProps.expanded : prevState.expanded;
-    var isExpanded = this.isExpanded();
+  _checkToggleCollapsing(prevProps, prevState){
+    let wasExpanded = prevProps.expanded != null ? prevProps.expanded : prevState.expanded;
+    let isExpanded = this.isExpanded();
     if(wasExpanded !== isExpanded){
       if(wasExpanded) {
         this._handleCollapse();
@@ -88,11 +88,11 @@ var CollapsableMixin = {
     }
   },
 
-  _handleExpand: function(){
-    var node = this.getCollapsableDOMNode();
-    var dimension = this.dimension();
+  _handleExpand(){
+    let node = this.getCollapsableDOMNode();
+    let dimension = this.dimension();
 
-    var complete = (function (){
+    let complete = () => {
       this._removeEndEventListener(node, complete);
       // remove dimension value - this ensures the collapsable item can grow
       // in dimension after initial display (such as an image loading)
@@ -100,7 +100,7 @@ var CollapsableMixin = {
       this.setState({
         collapsing:false
       });
-    }).bind(this);
+    };
 
     this._addEndEventListener(node, complete);
 
@@ -109,15 +109,15 @@ var CollapsableMixin = {
     });
   },
 
-  _handleCollapse: function(){
-    var node = this.getCollapsableDOMNode();
+  _handleCollapse(){
+    let node = this.getCollapsableDOMNode();
 
-    var complete = (function (){
+    let complete = () => {
       this._removeEndEventListener(node, complete);
       this.setState({
         collapsing: false
       });
-    }).bind(this);
+    };
 
     this._addEndEventListener(node, complete);
 
@@ -127,42 +127,42 @@ var CollapsableMixin = {
   },
 
   // helps enable test stubs
-  _addEndEventListener: function(node, complete){
+  _addEndEventListener(node, complete){
     TransitionEvents.addEndEventListener(node, complete);
   },
 
   // helps enable test stubs
-  _removeEndEventListener: function(node, complete){
+  _removeEndEventListener(node, complete){
     TransitionEvents.removeEndEventListener(node, complete);
   },
 
-  dimension: function(){
+  dimension(){
     return (typeof this.getCollapsableDimension === 'function') ?
       this.getCollapsableDimension() :
       'height';
   },
 
-  isExpanded: function(){
+  isExpanded(){
     return this.props.expanded != null ? this.props.expanded : this.state.expanded;
   },
 
-  getCollapsableClassSet: function (className) {
-    var classes = {};
+  getCollapsableClassSet(className) {
+    let classes = {};
 
     if (typeof className === 'string') {
-      className.split(' ').forEach(function (className) {
-        if (className) {
-          classes[className] = true;
+      className.split(' ').forEach(subClasses => {
+        if (subClasses) {
+          classes[subClasses] = true;
         }
       });
     }
 
     classes.collapsing = this.state.collapsing;
     classes.collapse = !this.state.collapsing;
-    classes['in'] = this.isExpanded() && !this.state.collapsing;
+    classes.in = this.isExpanded() && !this.state.collapsing;
 
     return classes;
   }
 };
 
-module.exports = CollapsableMixin;
+export default CollapsableMixin;

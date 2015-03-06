@@ -1,23 +1,21 @@
-/* global window, document */
+import React from 'react';
+import domUtils from './utils/domUtils';
+import EventListener from './utils/EventListener';
 
-var React = require('react');
-var domUtils = require('./utils/domUtils');
-var EventListener = require('./utils/EventListener');
-
-var AffixMixin = {
+const AffixMixin = {
   propTypes: {
     offset: React.PropTypes.number,
     offsetTop: React.PropTypes.number,
     offsetBottom: React.PropTypes.number
   },
 
-  getInitialState: function () {
+  getInitialState() {
     return {
       affixClass: 'affix-top'
     };
   },
 
-  getPinnedOffset: function (DOMNode) {
+  getPinnedOffset(DOMNode) {
     if (this.pinnedOffset) {
       return this.pinnedOffset;
     }
@@ -30,8 +28,8 @@ var AffixMixin = {
     return this.pinnedOffset;
   },
 
-  checkPosition: function () {
-    var DOMNode, scrollHeight, scrollTop, position, offsetTop, offsetBottom,
+  checkPosition() {
+    let DOMNode, scrollHeight, scrollTop, position, offsetTop, offsetBottom,
         affix, affixType, affixPositionTop;
 
     // TODO: or not visible
@@ -43,8 +41,6 @@ var AffixMixin = {
     scrollHeight = document.documentElement.offsetHeight;
     scrollTop = window.pageYOffset;
     position = domUtils.getOffset(DOMNode);
-    offsetTop;
-    offsetBottom;
 
     if (this.affixed === 'top') {
       position.top += scrollTop;
@@ -100,18 +96,18 @@ var AffixMixin = {
     });
   },
 
-  checkPositionWithEventLoop: function () {
+  checkPositionWithEventLoop() {
     setTimeout(this.checkPosition, 0);
   },
 
-  componentDidMount: function () {
+  componentDidMount() {
     this._onWindowScrollListener =
       EventListener.listen(window, 'scroll', this.checkPosition);
     this._onDocumentClickListener =
       EventListener.listen(document, 'click', this.checkPositionWithEventLoop);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount() {
     if (this._onWindowScrollListener) {
       this._onWindowScrollListener.remove();
     }
@@ -121,11 +117,11 @@ var AffixMixin = {
     }
   },
 
-  componentDidUpdate: function (prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevState.affixClass === this.state.affixClass) {
       this.checkPositionWithEventLoop();
     }
   }
 };
 
-module.exports = AffixMixin;
+export default AffixMixin;

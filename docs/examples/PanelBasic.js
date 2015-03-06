@@ -1,7 +1,7 @@
-var panelInstance = (
-    <Panel>
-      Basic panel example
-    </Panel>
-  );
+const panelInstance = (
+  <Panel>
+    Basic panel example
+  </Panel>
+);
 
 React.render(panelInstance, mountNode);

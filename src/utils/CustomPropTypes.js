@@ -1,8 +1,6 @@
-var React = require('react');
+const ANONYMOUS = '<<anonymous>>';
 
-var ANONYMOUS = '<<anonymous>>';
-
-var CustomPropTypes = {
+let CustomPropTypes = {
   /**
    * Checks whether a prop provides a DOM element
    *
@@ -39,7 +37,7 @@ function createChainableTypeChecker(validate) {
     }
   }
 
-  var chainedCheckType = checkType.bind(null, false);
+  let chainedCheckType = checkType.bind(null, false);
   chainedCheckType.isRequired = checkType.bind(null, true);
 
   return chainedCheckType;
@@ -59,4 +57,4 @@ function createMountableChecker() {
   return createChainableTypeChecker(validate);
 }
 
-module.exports = CustomPropTypes;
+export default CustomPropTypes;

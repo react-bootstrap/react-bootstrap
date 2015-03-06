@@ -1,15 +1,19 @@
-'use strict';
+import from 'bootstrap/less/bootstrap.less';
+import from 'bootstrap/docs/assets/css/_src/docs.css';
+import from './assets/style.css';
 
-var React = require('react');
-var Router = require('react-router');
-var routes = require('./src/Routes');
+import from './assets/carousel.png';
+import from './assets/logo.png';
 
+import React from 'react';
+import Router from 'react-router';
+import routes from './src/Routes';
+
+// TODO: Move this to Webpack
 // For React devtools
 window.React = React;
 
-Router.run(routes, Router.RefreshLocation, function (Handler) {
+Router.run(routes, Router.RefreshLocation, Handler => {
   React.render(
     React.createElement(Handler, window.INITIAL_PROPS), document);
-})
-
-
+});

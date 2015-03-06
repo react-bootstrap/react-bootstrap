@@ -1,4 +1,4 @@
-var labelInstance = (
+const labelInstance = (
   <div>
     <h1>Label <Label>New</Label></h1>
     <h2>Label <Label>New</Label></h2>

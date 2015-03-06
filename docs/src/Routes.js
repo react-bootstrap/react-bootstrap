@@ -1,21 +1,20 @@
-var React = require('react');
+import React from 'react';
 
-var Root = require('./Root');
-var HomePage = require('./HomePage');
-var GettingStartedPage = require('./GettingStartedPage');
-var ComponentsPage = require('./ComponentsPage');
-var NotFoundPage = require('./NotFoundPage');
+import Root from './Root';
+import HomePage from './HomePage';
+import GettingStartedPage from './GettingStartedPage';
+import ComponentsPage from './ComponentsPage';
+import NotFoundPage from './NotFoundPage';
 
-var Router = require('react-router');
+import {Route, DefaultRoute, NotFoundRoute} from 'react-router';
 
+export default (
+  <Route name='app' path='/' handler={Root}>
+    <DefaultRoute handler={HomePage}/>
+    <NotFoundRoute handler={NotFoundPage} />
 
-module.exports = (
-  <Router.Route name="app" path="/" handler={Root}>
-    <Router.DefaultRoute handler={HomePage}/>
-    <Router.NotFoundRoute handler={NotFoundPage} />
-
-    <Router.Route name='home' path="index.html" handler={HomePage} />
-    <Router.Route name='getting-started' path="getting-started.html" handler={GettingStartedPage} />
-    <Router.Route name='components' path="components.html" handler={ComponentsPage} />  
-  </Router.Route>
+    <Route name='home' path='index.html' handler={HomePage} />
+    <Route name='getting-started' path='getting-started.html' handler={GettingStartedPage} />
+    <Route name='components' path='components.html' handler={ComponentsPage} />
+  </Route>
 )
