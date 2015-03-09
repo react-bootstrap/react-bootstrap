@@ -23,7 +23,7 @@ var Page = React.createClass({
               <div className="col-md-9" role="main">
                 <div className="bs-docs-section">
                   <h2 id="setup" className="page-header">Setup</h2>
-                  <p className="lead">You can import the lib with as AMD modules, CommonJS modules as a global JS script.</p>
+                  <p className="lead">You can import the lib as AMD modules, CommonJS modules, or as a global JS script.</p>
 
                   <p>First add the Bootstrap CSS to your project; check <a href="http://getbootstrap.com/getting-started/" name="Bootstrap Docs">here</a> if you have not already done that. Then:</p>
 
