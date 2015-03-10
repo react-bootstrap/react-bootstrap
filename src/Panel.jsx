@@ -56,10 +56,10 @@ var Panel = React.createClass({
 
   render: function () {
     var classes = this.getBsClassSet();
-    classes['panel'] = true;
 
     return (
-      <div {...this.props} className={joinClasses(this.props.className, classSet(classes))}
+      <div {...this.props}
+        className={joinClasses(this.props.className, classSet(classes))}
         id={this.props.collapsable ? null : this.props.id} onSelect={null}>
         {this.renderHeading()}
         {this.props.collapsable ? this.renderCollapsableBody() : this.renderBody()}
@@ -69,11 +69,13 @@ var Panel = React.createClass({
   },
 
   renderCollapsableBody: function () {
+    var collapseClass = this.prefixClass('collapse');
+
     return (
       <div
-        className={classSet(this.getCollapsableClassSet('panel-collapse'))}
+        className={classSet(this.getCollapsableClassSet(collapseClass))}
         id={this.props.id}
-        ref="panel"
+        ref='panel'
         aria-expanded={this.isExpanded() ? 'true' : 'false'}>
         {this.renderBody()}
       </div>
@@ -84,6 +86,7 @@ var Panel = React.createClass({
     var allChildren = this.props.children;
     var bodyElements = [];
     var panelBodyChildren = [];
+    var bodyClass = this.prefixClass('body');
 
     function getProps() {
       return {key: bodyElements.length};
@@ -95,7 +98,7 @@ var Panel = React.createClass({
 
     function addPanelBody (children) {
       bodyElements.push(
-        <div className="panel-body" {...getProps()}>
+        <div className={bodyClass} {...getProps()}>
           {children}
         </div>
       );
@@ -152,17 +155,17 @@ var Panel = React.createClass({
         this.renderCollapsableTitle(header) : header;
     } else if (this.props.collapsable) {
       header = cloneWithProps(header, {
-        className: 'panel-title',
+        className: this.prefixClass('title'),
         children: this.renderAnchor(header.props.children)
       });
     } else {
       header = cloneWithProps(header, {
-        className: 'panel-title'
+        className: this.prefixClass('title')
       });
     }
 
     return (
-      <div className="panel-heading">
+      <div className={this.prefixClass('heading')}>
         {header}
       </div>
     );
@@ -182,7 +185,7 @@ var Panel = React.createClass({
 
   renderCollapsableTitle: function (header) {
     return (
-      <h4 className="panel-title">
+      <h4 className={this.prefixClass('title')}>
         {this.renderAnchor(header)}
       </h4>
     );
@@ -194,7 +197,7 @@ var Panel = React.createClass({
     }
 
     return (
-      <div className="panel-footer">
+      <div className={this.prefixClass('footer')}>
         {this.props.footer}
       </div>
     );

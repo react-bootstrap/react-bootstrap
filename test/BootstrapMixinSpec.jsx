@@ -188,5 +188,14 @@ describe('BootstrapMixin', function () {
       );
       assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-xs': true});
     });
+
+    it('should return  "btn-title"', function () {
+      var instance = ReactTestUtils.renderIntoDocument(
+        <Component bsClass='button'>
+          content
+        </Component>
+      );
+      assert.equal(instance.prefixClass('title'), 'btn-title');
+    });
   });
 });
