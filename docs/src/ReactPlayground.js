@@ -8,6 +8,7 @@ var Badge = require('../../lib/Badge');
 var Button = require('../../lib/Button');
 var ButtonGroup = require('../../lib/ButtonGroup');
 var ButtonToolbar = require('../../lib/ButtonToolbar');
+var CollapsableMixin = require('../../lib/CollapsableMixin');
 var Carousel = require('../../lib/Carousel');
 var CarouselItem = require('../../lib/CarouselItem');
 var Col = require('../../lib/Col');

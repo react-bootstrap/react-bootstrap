@@ -207,6 +207,10 @@ var ComponentsPage = React.createClass({
                   <h3 id="panels-accordion">Accordions</h3>
                   <p><code>&lt;Accordion /&gt;</code> aliases <code>&lt;PanelGroup accordion /&gt;</code>.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelGroupAccordion.js', 'utf8')} />
+
+                  <h3 id="panels-collapsable">Collapsable Mixin</h3>
+                  <p><code>CollapsableMixin</code> can be used to create your own components with collapse functionality.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/CollapsableParagraph.js', 'utf8')} />
                 </div>
 
                 <div className="bs-docs-section">

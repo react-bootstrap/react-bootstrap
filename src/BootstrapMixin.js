@@ -29,6 +29,10 @@ var BootstrapMixin = {
     }
 
     return classes;
+  },
+
+  prefixClass: function(subClass) {
+    return constants.CLASSES[this.props.bsClass] + '-' + subClass;
   }
 };
 
