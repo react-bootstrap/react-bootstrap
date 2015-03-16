@@ -143,25 +143,18 @@ var ReactPlayground = React.createClass({
     this.executeCode();
   },
 
-  handleCodeModeSwitch: function(mode) {
-    this.setState({mode: mode});
-  },
-
-  handleCodeModeToggle: function(e) {
-    var mode;
-
+  handleToggleJSX: function(e) {
     e.preventDefault();
 
-    switch (this.state.mode) {
-      case this.MODES.NONE:
-        mode = this.MODES.JSX;
-        break;
-      case this.MODES.JSX:
-      default:
-        mode = this.MODES.NONE;
-    }
+    var newMode = this.state.mode === this.MODES.JSX ? this.MODES.NONE : this.MODES.JSX;
+    this.setState({mode: newMode});
+  },
 
-    this.setState({mode: mode});
+  handleToggleJS: function(e) {
+    e.preventDefault();
+
+    var newMode = this.state.mode === this.MODES.JS ? this.MODES.NONE : this.MODES.JS;
+    this.setState({mode: newMode});
   },
 
   compileCode: function() {
@@ -181,23 +174,41 @@ var ReactPlayground = React.createClass({
       classes[this.props.exampleClassName] = true;
     }
 
-    if (this.state.mode !== this.MODES.NONE) {
-       editor = (
-           <CodeMirrorEditor
-             key="jsx"
-             onChange={this.handleCodeChange}
-             className="highlight"
-             codeText={this.state.code}/>
+    switch (this.state.mode) {
+      case this.MODES.JSX:
+        editor = (
+			<CodeMirrorEditor
+			  key="jsx"
+			  onChange={this.handleCodeChange}
+			  className="highlight"
+			  codeText={this.state.code}/>
         );
-       toggleClasses.open = true;
+        break;
+      case this.MODES.JS:
+        var compiledCode = 'Unable to compile JSX.';
+        try {
+          compiledCode = this.compileCode();
+        } catch (err) {
+        }
+        editor = (
+			<CodeMirrorEditor
+			  key="js"
+			  onChange={this.handleCodeChange}
+			  className="highlight"
+			  codeText={compiledCode}
+			  readOnly={true}/>
+        );
+
     }
+   toggleClasses.open = true;
     return (
       <div className="playground">
         <div className={classSet(classes)}>
           <div ref="mount" />
         </div>
         {editor}
-        <a className={classSet(toggleClasses)} onClick={this.handleCodeModeToggle} href="#">{this.state.mode === this.MODES.NONE ? 'show code' : 'hide code'}</a>
+        <a className={classSet(toggleClasses)} onClick={this.handleToggleJS} href="#">{this.state.mode !== this.MODES.JS ? 'Show Compiled JS' : 'Hide Compiled JS'}</a>
+        <a className={classSet(toggleClasses)} onClick={this.handleToggleJSX} href="#">{this.state.mode !== this.MODES.JSX ? 'Show JSX Editor' : 'Hide JSX Editor'}</a>
       </div>
       );
   },
