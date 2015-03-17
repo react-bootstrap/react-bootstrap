@@ -30,6 +30,5 @@ and many [contributors](https://github.com/react-bootstrap/react-bootstrap/graph
 Yes please!
 
 - Run `npm install`, `npm run test-watch` to run tests while you develop (however this hides any build errors, you can see these with `grunt build`)
-- Add tests for any new or changed functionality
+- Review the [contributing guidelines](https://github.com/react-bootstrap/react-bootstrap/blob/master/CONTRIBUTING.md)
 - See [issues](https://github.com/stevoland/react-bootstrap/issues) for some ideas
-- Follow existing style
