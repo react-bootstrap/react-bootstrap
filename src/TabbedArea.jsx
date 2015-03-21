@@ -109,7 +109,7 @@ var TabbedArea = React.createClass({
 
   renderTab: function (child) {
     var key = child.props.eventKey;
-    var badge = chilf.props.badge ? <Badge>{child.props.badge}</Badge> : '';
+    var badge = child.props.badge ? <Badge>{child.props.badge}</Badge> : '';
     return (
       <NavItem
         ref={'tab' + key}
