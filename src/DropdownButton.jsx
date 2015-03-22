@@ -111,6 +111,11 @@ var DropdownButton = React.createClass({
     e.preventDefault();
 
     this.setDropdownState(!this.state.open);
+    if(this.props.onClick && this.props.noCaret ){
+	  this.props.onClick(e);
+      }
+
+
   },
 
   handleOptionSelect: function (key) {
