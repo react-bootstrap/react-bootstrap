@@ -29,10 +29,12 @@ describe('SplitButton', function () {
     assert.equal(button.nodeName, 'BUTTON');
     assert.equal(button.type, 'button');
     assert.ok(dropdownButton.className.match(/\bdropdown-toggle\b/));
-    assert.ok(dropdownButton.lastChild.className.match(/\bcaret\b/));
     assert.equal(button.innerText.trim(), 'Title');
-    assert.ok(dropdownButton.firstChild.className.match(/\bsr-only\b/));
-    assert.equal(dropdownButton.firstChild.innerText.trim(), 'Toggle dropdown');
+    assert.ok(dropdownButton.childNodes[0].className.match(/\bsr-only\b/));
+    assert.equal(dropdownButton.childNodes[0].innerText.trim(), 'Toggle dropdown');
+    assert.ok(dropdownButton.childNodes[1].className.match(/\bcaret\b/));
+    assert.equal(dropdownButton.childNodes[2].style.letterSpacing, '-0.3em');
+    assert.equal(dropdownButton.childNodes.length, 3);
   });
 
   it('Should render menu correctly', function () {

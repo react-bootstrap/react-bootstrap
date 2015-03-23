@@ -56,6 +56,7 @@ var SplitButton = React.createClass({
         id={null}>
         <span className="sr-only">{this.props.dropdownTitle}</span>
         <span className="caret" />
+        <span style={{letterSpacing: '-.3em'}}>&nbsp;</span>
       </Button>
     );
 
