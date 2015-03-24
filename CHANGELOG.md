@@ -1,3 +1,14 @@
+v0.18.0 - Tue, 24 Mar 2015 02:56:15 GMT
+---------------------------------------
+
+- [728c2b0](../../commit/728c2b0) [fixed] docs CodeMirror scroll height too big
+- [d282621](../../commit/d282621) [fixed] Split buttons with React 0.13
+- [549da6e](../../commit/549da6e) [added] react-router dependency for docs
+- [804c24a](../../commit/804c24a) [added] Support for React 0.13.x
+- [4c26075](../../commit/4c26075) [fixed] Build status badge
+- [70f8596](../../commit/70f8596) [added] Travis CI Optimization
+
+
 v0.17.0 - Tue, 17 Mar 2015 15:03:27 GMT
 ---------------------------------------
 
