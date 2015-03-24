@@ -69,8 +69,8 @@ describe('Modal', function () {
       </Modal>
     );
 
-    var backdrop = instance.getDOMNode().getElementsByClassName('modal')[0];
-    ReactTestUtils.Simulate.click(backdrop);
+    var modal = instance.getDOMNode();
+    ReactTestUtils.Simulate.click(modal);
   });
 
   it('Should pass bsSize to the dialog', function () {
