@@ -46,19 +46,19 @@ var Col = React.createClass({
 
       prop = size + 'Offset';
       classPart = size + '-offset-';
-      if (this.props[prop]) {
+      if (this.props[prop] >= 0) {
         classes['col-' + classPart + this.props[prop]] = true;
       }
 
       prop = size + 'Push';
       classPart = size + '-push-';
-      if (this.props[prop]) {
+      if (this.props[prop] >= 0) {
         classes['col-' + classPart + this.props[prop]] = true;
       }
 
       prop = size + 'Pull';
       classPart = size + '-pull-';
-      if (this.props[prop]) {
+      if (this.props[prop] >= 0) {
         classes['col-' + classPart + this.props[prop]] = true;
       }
     }, this);

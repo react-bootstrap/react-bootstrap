@@ -66,7 +66,9 @@ var PanelGroup = React.createClass({
     return !this._isChanging;
   },
 
-  handleSelect: function (key) {
+  handleSelect: function (e, key) {
+    e.preventDefault();
+      
     if (this.props.onSelect) {
       this._isChanging = true;
       this.props.onSelect(key);

@@ -1,3 +1,20 @@
+v0.17.0 - Tue, 17 Mar 2015 15:03:27 GMT
+---------------------------------------
+
+- [4fae871](../../commit/4fae871) [added] CollapsableNav implements bootstrap markup for navbar-collapse
+- [befed83](../../commit/befed83) [fixed] All panel-* classes dynamic based on bsStyle prop
+- [de6f7dd](../../commit/de6f7dd) [fixed] CollapsableMixin fixed size
+- [7cc4747](../../commit/7cc4747) [fixed] Added role="button" to NavItem for aria compliance.
+- [3b6ba7a](../../commit/3b6ba7a) [fixed] Col Offset/Pull/Push of zero. Fixes #406
+- [66c439f](../../commit/66c439f) [fixed] OverlayTrigger improvement related to #353 . Helps reduce browser reflows for lots of multiple OverlayTriggers being rendered at once. Before: http://i.imgur.com/e4UZ5l6.png , http://i.imgur.com/Tw39F9t.png After: http://i.imgur.com/bU0f7VY.png
+
+
+v0.16.1 - Tue, 03 Mar 2015 23:04:19 GMT
+---------------------------------------
+
+- [71ff264](../../commit/71ff264) [added] bsSize prop to Input, supporting input groups
+
+
 v0.16.0 - Fri, 27 Feb 2015 14:01:37 GMT
 ---------------------------------------
 

@@ -90,4 +90,22 @@ describe('NavItem', function () {
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
   });
+
+  it('Should set role="button" when href=="#"', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          <NavItem href="#" target="_blank">Item content</NavItem>
+        );
+
+    var linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a').getDOMNode();
+    assert(linkElement.outerHTML.match('role="button"'), true);
+  });
+
+  it('Should not set role when href!="#"', function () {
+    var instance = ReactTestUtils.renderIntoDocument(
+          <NavItem href="/path/to/stuff" target="_blank">Item content</NavItem>
+        );
+
+    var linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a').getDOMNode();
+    assert.equal(linkElement.outerHTML.match('role="button"'), null);
+  });
 });

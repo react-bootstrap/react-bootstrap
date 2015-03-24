@@ -119,7 +119,9 @@ var OverlayTrigger = React.createClass({
   },
 
   componentDidMount: function() {
-    this.updateOverlayPosition();
+    if (this.props.defaultOverlayShown) {
+      this.updateOverlayPosition();
+    }
   },
 
   handleDelayedShow: function () {

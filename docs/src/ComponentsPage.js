@@ -207,6 +207,10 @@ var ComponentsPage = React.createClass({
                   <h3 id="panels-accordion">Accordions</h3>
                   <p><code>&lt;Accordion /&gt;</code> aliases <code>&lt;PanelGroup accordion /&gt;</code>.</p>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/PanelGroupAccordion.js', 'utf8')} />
+
+                  <h3 id="panels-collapsable">Collapsable Mixin</h3>
+                  <p><code>CollapsableMixin</code> can be used to create your own components with collapse functionality.</p>
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/CollapsableParagraph.js', 'utf8')} />
                 </div>
 
                 <div className="bs-docs-section">
@@ -353,6 +357,16 @@ var ComponentsPage = React.createClass({
                     </pre>
                   </div>
                   <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/NavbarCollapsable.js', 'utf8')} />
+
+                  <h3>Mobile Friendly (Multiple Nav Components)</h3>
+                  <p>To have a mobile friendly Navbar that handles multiple <code>Nav</code> components use <code>CollapsableNav</code>. The <code>toggleNavKey</code> must still be set, however, the corresponding <code>eventKey</code> must now be on the <code>CollapsableNav</code> component.</p>
+                  <div className="bs-callout bs-callout-info">
+                    <h4>Div collapse</h4>
+                    <p>The <code>navbar-collapse</code> div gets created as the collapsable element which follows the <a href="http://getbootstrap.com/components/#navbar-default">bootstrap</a> collapsable navbar documentation.</p>
+                    <pre>&lt;div class="collapse navbar-collapse"&gt;&lt;/div&gt;</pre>
+                  </div>
+
+                  <ReactPlayground codeText={fs.readFileSync(__dirname + '/../examples/CollapsableNav.js', 'utf8')} />
                 </div>
 
                 {/* Tabbed Areas */}
