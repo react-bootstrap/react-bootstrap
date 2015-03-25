@@ -1,14 +1,9 @@
-'use strict';
+import React from 'react';
+import Router, { Link } from 'react-router';
+import Navbar from '../../src/Navbar';
+import Nav from '../../src/Nav';
 
-var React = require('react');
-var Router = require('react-router');
-var Navbar = require('../../lib/Navbar');
-var Nav = require('../../lib/Nav');
-
-
-var InternalLink = Router.Link;
-
-var NAV_LINKS = {
+const NAV_LINKS = {
   'getting-started': {
     link: 'getting-started',
     title: 'Getting started'
@@ -19,32 +14,37 @@ var NAV_LINKS = {
   }
 };
 
-var NavMain = React.createClass({
+const NavMain = React.createClass({
   propTypes: {
     activePage: React.PropTypes.string
   },
 
-  render: function () {
-    var brand = <InternalLink to='home' className="navbar-brand">React Bootstrap</InternalLink>;
+  render() {
+    let brand = <Link to='home' className="navbar-brand">React Bootstrap</Link>;
+    let links = Object.keys(NAV_LINKS).map(this.renderNavItem).concat([
+      <li key='github-link'>
+        <a href='https://github.com/react-bootstrap/react-bootstrap' target='_blank'>GitHub</a>
+      </li>
+    ]);
 
     return (
       <Navbar componentClass='header' brand={brand} staticTop className="bs-docs-nav" role="banner" toggleNavKey={0}>
         <Nav className="bs-navbar-collapse" role="navigation" eventKey={0} id="top">
-          {Object.keys(NAV_LINKS).map(this.renderNavItem)}
+          {links}
         </Nav>
       </Navbar>
     );
   },
 
-  renderNavItem: function (linkName) {
-    var link = NAV_LINKS[linkName];
+  renderNavItem(linkName) {
+    let link = NAV_LINKS[linkName];
 
     return (
         <li className={this.props.activePage === linkName ? 'active' : null} key={linkName}>
-          <InternalLink to={link.link}>{link.title}</InternalLink>
+          <Link to={link.link}>{link.title}</Link>
         </li>
       );
   }
 });
 
-module.exports = NavMain;
+export default NavMain;

@@ -1,0 +1,15 @@
+.cm-s-solarized.CodeMirror {
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.highlight, .code-toggle.open {
+  background-color: #fdf6e3;
+}
+
+.cm-s-solarized .cm-comment { color: #93a1a1; }
+
+.CodeMirror, .CodeMirror-scroll {
+  height: auto;
+}

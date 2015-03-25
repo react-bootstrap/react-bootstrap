@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+require('../register-babel');
+require('./release-scripts/release');
+
