@@ -4,6 +4,7 @@ var cloneElement = React.cloneElement;
 
 var ValidComponentChildren = require('./utils/ValidComponentChildren');
 var Nav = require('./Nav');
+var Badge = require('./Badge');
 var NavItem = require('./NavItem');
 
 function getDefaultActiveKeyFromChildren(children) {
@@ -107,11 +108,13 @@ var TabbedArea = React.createClass({
 
   renderTab: function (child) {
     var key = child.props.eventKey;
+    var badge = child.props.badge ? <Badge>{child.props.badge}</Badge> : '';
     return (
       <NavItem
         ref={'tab' + key}
         eventKey={key}>
         {child.props.tab}
+        {badge}
       </NavItem>
     );
   },
