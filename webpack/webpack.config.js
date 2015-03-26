@@ -21,7 +21,7 @@ export default (options) => {
 
   const config = {
     entry: {
-      'react-bootstrap': './src/main.js'
+      'react-bootstrap': './src/index.js'
     },
 
     output: {

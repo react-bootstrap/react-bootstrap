@@ -17,7 +17,7 @@
     "docs-prod": "webpack --config webpack.docs.js -p --progress && NODE_ENV=production ./run-babel docs/server.js",
     "ie8": "./run-babel ie8/server.js"
   },
-  "main": "lib/main.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib/"
   },
