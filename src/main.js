@@ -7,6 +7,7 @@ import Badge from './Badge';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 import ButtonToolbar from './ButtonToolbar';
+import CollapsableNav from './CollapsableNav';
 import Carousel from './Carousel';
 import CarouselItem from './CarouselItem';
 import Col from './Col';
@@ -57,6 +58,7 @@ export default {
   Button,
   ButtonGroup,
   ButtonToolbar,
+  CollapsableNav,
   Carousel,
   CarouselItem,
   Col,
