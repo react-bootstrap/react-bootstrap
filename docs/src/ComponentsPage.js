@@ -548,7 +548,7 @@ const ComponentsPage = React.createClass({
                   <h1 id='input' className='page-header'>Input</h1>
                   <p>Renders an input in bootstrap wrappers. Supports label, help, text input add-ons, validation and use as wrapper.
                   Use <code>getValue()</code> or <code>getChecked()</code> to get the current state.
-                  The helper method <code>getInputDOMNode()</code> returns the internal input element.</p>
+                  The helper method <code>getInputDOMNode()</code> returns the internal input element. If you don't want the <code>form-group</code> class applied apply the prop named <code>standalone</code>.</p>
                   <ReactPlayground codeText={Samples.Input} />
                   <h2 id='input-types'>Types</h2>
                   <p>Supports <code>select</code>, <code>textarea</code>, <code>static</code> as well as standard HTML input types. <code>getValue()</code> returns an array for multiple select.</p>

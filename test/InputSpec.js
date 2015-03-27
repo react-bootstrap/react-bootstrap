@@ -167,6 +167,30 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'help-block'));
   });
 
+  it('renders form-group class', function() {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Input />
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
+  });
+
+  it('renders no form-group class', function() {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Input standalone />
+    );
+
+    assert.equal(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'form-group').length, 0);
+  });
+
+  it('renders custom-form-group class', function() {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Input groupClassName='custom-form-class' />
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'custom-form-class'));
+  });
+
   it('renders feedback icon', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input hasFeedback={true} bsStyle="error" />

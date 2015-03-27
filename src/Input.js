@@ -1,6 +1,7 @@
 import React from 'react';
 import classSet from 'classnames';
 import Button from './Button';
+import FormGroup from './FormGroup';
 
 const Input = React.createClass({
 
@@ -215,38 +216,21 @@ const Input = React.createClass({
     ) : children;
   },
 
-  renderFormGroup(children) {
-    let classes = {
-      'form-group': true,
-      'has-feedback': this.props.hasFeedback,
-      'has-success': this.props.bsStyle === 'success',
-      'has-warning': this.props.bsStyle === 'warning',
-      'has-error': this.props.bsStyle === 'error'
-    };
-    classes[this.props.groupClassName] = this.props.groupClassName;
-
-    return (
-      <div className={classSet(classes)}>
-        {children}
-      </div>
-    );
-  },
-
   render() {
+    let children;
+
     if (this.isCheckboxOrRadio()) {
-      return this.renderFormGroup(
-        this.renderWrapper([
-          this.renderCheckboxandRadioWrapper(
-            this.renderLabel(
-              this.renderInput()
-            )
-          ),
-          this.renderHelp()
-        ])
-      );
+      children = this.renderWrapper([
+        this.renderCheckboxandRadioWrapper(
+          this.renderLabel(
+            this.renderInput()
+          )
+        ),
+        this.renderHelp()
+      ]);
     }
     else {
-      return this.renderFormGroup([
+      children = [
         this.renderLabel(),
         this.renderWrapper([
           this.renderInputGroup(
@@ -255,8 +239,10 @@ const Input = React.createClass({
           this.renderIcon(),
           this.renderHelp()
         ])
-      ]);
+      ];
     }
+
+    return <FormGroup {...this.props}>{children}</FormGroup>;
   }
 });
 
