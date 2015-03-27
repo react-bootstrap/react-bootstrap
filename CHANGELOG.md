@@ -1,3 +1,15 @@
+v0.19.1 - Thu, 26 Mar 2015 19:37:01 GMT
+---------------------------------------
+
+- [2b7d235](../../commit/2b7d235) [fixed] Re-added CollapsableNav to public API
+
+
+v0.19.0 - Wed, 25 Mar 2015 21:25:57 GMT
+---------------------------------------
+
+- [98ee978](../../commit/98ee978) [changed] Source to ES6 using Babel and Webpack
+
+
 v0.18.0 - Tue, 24 Mar 2015 02:56:15 GMT
 ---------------------------------------
 

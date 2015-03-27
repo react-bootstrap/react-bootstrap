@@ -1,14 +1,13 @@
-/*global document */
-var React = require('react');
+import React from 'react';
 
 // TODO: listen for onTransitionEnd to remove el
 function getElementsAndSelf (root, classes){
-  var els = root.querySelectorAll('.' + classes.join('.'));
+  let els = root.querySelectorAll('.' + classes.join('.'));
 
   els = [].map.call(els, function(e){ return e; });
 
-  for(var i = 0; i < classes.length; i++){
-    if( !root.className.match(new RegExp('\\b' +  classes[i] + '\\b'))){
+  for(let i = 0; i < classes.length; i++){
+    if( !root.className.match(new RegExp('\\b' + classes[i] + '\\b'))){
       return els;
     }
   }
@@ -16,9 +15,9 @@ function getElementsAndSelf (root, classes){
   return els;
 }
 
-module.exports = {
-  _fadeIn: function () {
-    var els;
+export default {
+  _fadeIn() {
+    let els;
 
     if (this.isMounted()) {
       els = getElementsAndSelf(React.findDOMNode(this), ['fade']);
@@ -31,8 +30,8 @@ module.exports = {
     }
   },
 
-  _fadeOut: function () {
-    var els = getElementsAndSelf(this._fadeOutEl, ['fade', 'in']);
+  _fadeOut() {
+    let els = getElementsAndSelf(this._fadeOutEl, ['fade', 'in']);
 
     if (els.length) {
       els.forEach(function (el) {
@@ -43,13 +42,13 @@ module.exports = {
     setTimeout(this._handleFadeOutEnd, 300);
   },
 
-  _handleFadeOutEnd: function () {
+  _handleFadeOutEnd() {
     if (this._fadeOutEl && this._fadeOutEl.parentNode) {
       this._fadeOutEl.parentNode.removeChild(this._fadeOutEl);
     }
   },
 
-  componentDidMount: function () {
+  componentDidMount() {
     if (document.querySelectorAll) {
       // Firefox needs delay for transition to be triggered
       setTimeout(this._fadeIn, 20);
@@ -57,7 +56,7 @@ module.exports = {
   },
 
   componentWillUnmount: function () {
-    var els = getElementsAndSelf(React.findDOMNode(this), ['fade']),
+    let els = getElementsAndSelf(React.findDOMNode(this), ['fade']),
         container = (this.props.container && React.findDOMNode(this.props.container)) || document.body;
 
     if (els.length) {

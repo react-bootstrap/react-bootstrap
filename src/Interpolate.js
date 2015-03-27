@@ -1,30 +1,30 @@
 // https://www.npmjs.org/package/react-interpolate-component
-'use strict';
+// TODO: Drop this in favor of es6 string interpolation
 
-var React = require('react');
-var ValidComponentChildren = require('./utils/ValidComponentChildren');
-var assign = require('./utils/Object.assign');
+import React from 'react';
+import ValidComponentChildren from './utils/ValidComponentChildren';
+import assign from './utils/Object.assign';
 
-var REGEXP = /\%\((.+?)\)s/;
+const REGEXP = /\%\((.+?)\)s/;
 
-var Interpolate = React.createClass({
+const Interpolate = React.createClass({
   displayName: 'Interpolate',
 
   propTypes: {
     format: React.PropTypes.string
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return { component: 'span' };
   },
 
-  render: function() {
-    var format = (ValidComponentChildren.hasValidComponent(this.props.children) ||
+  render() {
+    let format = (ValidComponentChildren.hasValidComponent(this.props.children) ||
         (typeof this.props.children === 'string')) ?
         this.props.children : this.props.format;
-    var parent = this.props.component;
-    var unsafe = this.props.unsafe === true;
-    var props = assign({}, this.props);
+    let parent = this.props.component;
+    let unsafe = this.props.unsafe === true;
+    let props = assign({}, this.props);
 
     delete props.children;
     delete props.format;
@@ -32,8 +32,8 @@ var Interpolate = React.createClass({
     delete props.unsafe;
 
     if (unsafe) {
-      var content = format.split(REGEXP).reduce(function(memo, match, index) {
-        var html;
+      let content = format.split(REGEXP).reduce(function(memo, match, index) {
+        let html;
 
         if (index % 2 === 0) {
           html = match;
@@ -55,8 +55,8 @@ var Interpolate = React.createClass({
 
       return React.createElement(parent, props);
     } else {
-      var kids = format.split(REGEXP).reduce(function(memo, match, index) {
-        var child;
+      let kids = format.split(REGEXP).reduce(function(memo, match, index) {
+        let child;
 
         if (index % 2 === 0) {
           if (match.length === 0) {
@@ -79,4 +79,4 @@ var Interpolate = React.createClass({
   }
 });
 
-module.exports = Interpolate;
+export default Interpolate;

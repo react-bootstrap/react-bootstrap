@@ -1,23 +1,39 @@
-'use strict';
+import React from 'react';
+import path from 'path';
+import Router from 'react-router';
+import routes from './src/Routes';
+import Root from './src/Root';
+import fsp from 'fs-promise';
+import { exec, spawn } from 'child-process-promise';
 
-var fs = require('fs');
-var path = require('path');
+const repoRoot = path.resolve(__dirname, '../');
+const docsBuilt = path.join(repoRoot, 'docs-built');
 
-require('node-jsx').install();
+const license = path.join(repoRoot, 'LICENSE');
+const readmeSrc = path.join(__dirname, 'README.docs.md');
+const readmeDest = path.join(docsBuilt, 'README.md');
 
-var React = require('react');
-var routes = require('./src/Routes');
-var Router = require('react-router');
+export default function BuildDocs() {
+  console.log('Building: '.cyan + 'docs'.green);
 
-var Root = require('./src/Root');
+  return exec(`rm -rf ${docsBuilt}`)
+    .then(() => fsp.mkdir(docsBuilt))
+    .then(() => {
+      let writes = Root
+        .getPages()
+        .map(fileName => new Promise((resolve, reject) => {
+          Router.run(routes, '/' + fileName, Handler => {
+            let RootHTML = React.renderToString(React.createElement(Handler));
+            let write = fsp.writeFile(path.join(docsBuilt, fileName), RootHTML);
+            resolve(write);
+          });
+        }));
 
-Root.getPages()
-  .forEach(function (fileName) {
-
-    Router.run(routes, '/' + fileName, function (Handler) {
-      var RootHTML = React.renderToString(React.createElement(Handler));
-
-      fs.writeFileSync(
-        path.join(__dirname, fileName), RootHTML);
+      return Promise.all(writes.concat([
+        exec(`webpack --config webpack.docs.js -p --bail`),
+        exec(`cp ${license} ${docsBuilt}`),
+        exec(`cp ${readmeSrc} ${readmeDest}`)
+      ]));
     })
-  });
+    .then(() => console.log('Built: '.cyan + 'docs'.green));
+}

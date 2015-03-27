@@ -3,9 +3,26 @@
 We welcome community support with both pull requests and reporting bugs. Please
 don't hesitate to jump in.
 
+## Current Issues
+
+Feel free to tackle any currently open
+[issue](https://github.com/react-bootstrap/react-bootstrap/issues). The issues
+tagged with "help wanted" are especially open.
+
 ## Tests
 
 All commits that fix bugs or add features need a test.
+
+## Code Style
+
+Please adhere to the current code styling. We have included an `.editorconfig`
+at the repo's root to facilitate uniformity regardless of your editor. See the
+[editor config site](http://editorconfig.org/) for integration details.
+
+We use [ESLint](http://eslint.org/) for all JavaScript Linting. There should be
+no linting errors and no new warnings for new work. You are welcome to configure
+your editor to use ESLint or the `npm test` command will run unit tests and the
+linter.
 
 ## Commit Subjects for Public API Changes
 

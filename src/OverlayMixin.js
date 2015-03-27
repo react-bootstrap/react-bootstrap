@@ -1,12 +1,12 @@
-var React = require('react');
-var CustomPropTypes = require('./utils/CustomPropTypes');
+import React from 'react';
+import CustomPropTypes from './utils/CustomPropTypes';
 
-module.exports = {
+export default {
   propTypes: {
     container: CustomPropTypes.mountable
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount() {
     this._unrenderOverlay();
     if (this._overlayTarget) {
       this.getContainerDOMNode()
@@ -15,26 +15,26 @@ module.exports = {
     }
   },
 
-  componentDidUpdate: function () {
+  componentDidUpdate() {
     this._renderOverlay();
   },
 
-  componentDidMount: function () {
+  componentDidMount() {
     this._renderOverlay();
   },
 
-  _mountOverlayTarget: function () {
+  _mountOverlayTarget() {
     this._overlayTarget = document.createElement('div');
     this.getContainerDOMNode()
       .appendChild(this._overlayTarget);
   },
 
-  _renderOverlay: function () {
+  _renderOverlay() {
     if (!this._overlayTarget) {
       this._mountOverlayTarget();
     }
 
-    var overlay = this.renderOverlay();
+    let overlay = this.renderOverlay();
 
     // Save reference to help testing
     if (overlay !== null) {
@@ -45,12 +45,12 @@ module.exports = {
     }
   },
 
-  _unrenderOverlay: function () {
+  _unrenderOverlay() {
     React.unmountComponentAtNode(this._overlayTarget);
     this._overlayInstance = null;
   },
 
-  getOverlayDOMNode: function () {
+  getOverlayDOMNode() {
     if (!this.isMounted()) {
       throw new Error('getOverlayDOMNode(): A component must be mounted to have a DOM node.');
     }
@@ -62,7 +62,7 @@ module.exports = {
     return null;
   },
 
-  getContainerDOMNode: function () {
+  getContainerDOMNode() {
     return React.findDOMNode(this.props.container || document.body);
   }
 };
