@@ -73,14 +73,14 @@ describe('Carousel', function () {
   });
 
   it('Should show all controls on the first/last image if wrap is true', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={0} controls={true} wrap={true}>
         <CarouselItem ref="item1">Item 1 content</CarouselItem>
         <CarouselItem ref="item2">Item 2 content</CarouselItem>
       </Carousel>
     );
 
-    var backButton = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'left');
+    let backButton = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'left');
 
     assert.ok(backButton);
     assert.equal(backButton.props.href, '#prev');
@@ -92,22 +92,22 @@ describe('Carousel', function () {
       </Carousel>
     );
 
-    var nextButton = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'right');
+    let nextButton = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'right');
 
     assert.ok(nextButton);
     assert.equal(nextButton.props.href, '#next');
   });
 
   it('Should not show the prev button on the first image if wrap is false', function () {
-    var instance = ReactTestUtils.renderIntoDocument(
+    let instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={0} controls={true} wrap={false}>
         <CarouselItem ref="item1">Item 1 content</CarouselItem>
         <CarouselItem ref="item2">Item 2 content</CarouselItem>
       </Carousel>
     );
 
-    var backButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'left');
-    var nextButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'right');
+    let backButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'left');
+    let nextButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'right');
 
     assert.equal(backButtons.length, 0);
     assert.equal(nextButtons.length, 1);
