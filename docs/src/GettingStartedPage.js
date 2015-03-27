@@ -26,7 +26,7 @@ const Page = React.createClass({
                   <h3>CommonJS</h3>
                   <div className="highlight">
                     <pre><code className="shell">{`
-  $ npm install react@v0.10.0
+  $ npm install react
   $ npm install react-bootstrap
                     `}</code></pre>
                     <pre><code className="js">{`
@@ -39,7 +39,7 @@ const Page = React.createClass({
                   <h3>AMD</h3>
                   <div className="highlight">
                     <pre><code className="shell">{`
-  $ bower install react#v0.10.0
+  $ bower install react
   $ bower install react-bootstrap
                     `}</code></pre>
                     <pre><code className="js">{`
@@ -53,7 +53,7 @@ const Page = React.createClass({
                   <p>The bower repo contains <code>react-bootstrap.js</code> and <code>react-bootstrap.min.js</code> with all components exported in the <code>window.ReactBootstrap</code> object.</p>
                   <div className="highlight">
                     <pre><code className="html">{`
-  <script src="http://fb.me/react-0.10.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react.js"></script>
   <script src="path/to/react-bootstrap-bower/react-bootstrap.min.js"></script>
   <script>
     var Alert = ReactBootstrap.Alert;
