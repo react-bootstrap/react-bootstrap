@@ -1,8 +1,6 @@
-var React = require('react');
+const ANONYMOUS = '<<anonymous>>';
 
-var ANONYMOUS = '<<anonymous>>';
-
-var CustomPropTypes = {
+let CustomPropTypes = {
   /**
    * Checks whether a prop provides a DOM element
    *
@@ -39,7 +37,7 @@ function createChainableTypeChecker(validate) {
     }
   }
 
-  var chainedCheckType = checkType.bind(null, false);
+  let chainedCheckType = checkType.bind(null, false);
   chainedCheckType.isRequired = checkType.bind(null, true);
 
   return chainedCheckType;
@@ -48,10 +46,10 @@ function createChainableTypeChecker(validate) {
 function createMountableChecker() {
   function validate(props, propName, componentName) {
     if (typeof props[propName] !== 'object' ||
-      typeof props[propName].getDOMNode !== 'function' && props[propName].nodeType !== 1) {
+      typeof props[propName].render !== 'function' && props[propName].nodeType !== 1) {
       return new Error(
         'Invalid prop `' + propName + '` supplied to ' +
-          '`' + componentName + '`, expected a DOM element or an object that has a `getDOMNode` method'
+          '`' + componentName + '`, expected a DOM element or an object that has a `render` method'
       );
     }
   }
@@ -59,4 +57,4 @@ function createMountableChecker() {
   return createChainableTypeChecker(validate);
 }
 
-module.exports = CustomPropTypes;
+export default CustomPropTypes;

@@ -9,8 +9,8 @@
  * @returns {function|null}
  */
 function createChainedFunction(one, two) {
-  var hasOne = typeof one === 'function';
-  var hasTwo = typeof two === 'function';
+  let hasOne = typeof one === 'function';
+  let hasTwo = typeof two === 'function';
 
   if (!hasOne && !hasTwo) { return null; }
   if (!hasOne) { return two; }
@@ -22,4 +22,4 @@ function createChainedFunction(one, two) {
   };
 }
 
-module.exports = createChainedFunction;
+export default createChainedFunction;

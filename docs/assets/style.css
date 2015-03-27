@@ -68,7 +68,7 @@ body {
 }
 
 
-.CodeMirror {
+.CodeMirror, .CodeMirror-scroll {
   height: auto;
 }
 

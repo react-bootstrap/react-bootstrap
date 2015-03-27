@@ -23,7 +23,7 @@
 /**
  * Does not take into account specific nature of platform.
  */
-var EventListener = {
+const EventListener = {
   /**
    * Listen to DOM events during the bubble phase.
    *
@@ -51,4 +51,4 @@ var EventListener = {
   }
 };
 
-module.exports = EventListener;
+export default EventListener;

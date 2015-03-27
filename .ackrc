@@ -1,0 +1,6 @@
+--ignore-dir=lib
+--ignore-dir=amd
+--ignore-dir=docs/assets
+--ignore-dir=test-built
+--ignore-file=match:test_bundle.js
+--ignore-file=match:components.html

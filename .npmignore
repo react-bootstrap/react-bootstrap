@@ -1,0 +1,11 @@
+node_modules/
+docs/
+docs-built/
+test-built/
+test/
+tools/
+.gitignore
+.travis.yml
+karma.conf.js
+tmp-docs-repo/
+tmp-bower-repo/
