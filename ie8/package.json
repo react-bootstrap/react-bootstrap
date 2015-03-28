@@ -3,12 +3,12 @@
     "browserify": "^4.1.11",
     "reactify": "^0.13.1",
     "envify": "^1.2.1",
-    "react": "^0.10.0",
+    "react": "^0.13.0",
     "http-server": "^0.6.1"
   },
   "scripts": {
     "postinstall": "npm run build",
     "start": "http-server -c-1",
-    "build": "grunt --gruntfile ../Gruntfile.js && browserify -t reactify src.js > bundle.js"
+    "build": "grunt --gruntfile ../Gruntfile.js && browserify -t reactify src.js > bundle.js --harmony"
   }
 }

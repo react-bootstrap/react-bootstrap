@@ -3,14 +3,11 @@
 A simple page with several React Bootstrap components for testing in ie8.
 
 ```
-npm install
-npm start
+npm run ie8
 ```
 
-Look for the port number in console (usually 8080).
-
-If you make changes to either `src.js` or any react-bootstrap source code,
-run `npm run build` in this directory to build both.
+Look for the port number in console (usually 4000). This will watch for file
+changes and recompile. Simply refresh your browser.
 
 If you do not have the pleasure of operating a vintage Windows machine,
 you can download virtual machines at [modern.ie](https://modern.ie/)

@@ -1,5 +1,5 @@
-var React = require('react');
-var EventListener = require('./utils/EventListener');
+import React from 'react';
+import EventListener from './utils/EventListener';
 
 /**
  * Checks whether a node is within
@@ -20,14 +20,14 @@ function isNodeInRoot(node, root) {
   return false;
 }
 
-var DropdownStateMixin = {
-  getInitialState: function () {
+const DropdownStateMixin = {
+  getInitialState() {
     return {
       open: false
     };
   },
 
-  setDropdownState: function (newState, onStateChangeComplete) {
+  setDropdownState(newState, onStateChangeComplete) {
     if (newState) {
       this.bindRootCloseHandlers();
     } else {
@@ -39,30 +39,30 @@ var DropdownStateMixin = {
     }, onStateChangeComplete);
   },
 
-  handleDocumentKeyUp: function (e) {
+  handleDocumentKeyUp(e) {
     if (e.keyCode === 27) {
       this.setDropdownState(false);
     }
   },
 
-  handleDocumentClick: function (e) {
+  handleDocumentClick(e) {
     // If the click originated from within this component
     // don't do anything.
-    if (isNodeInRoot(e.target, this.getDOMNode())) {
+    if (isNodeInRoot(e.target, React.findDOMNode(this))) {
       return;
     }
 
     this.setDropdownState(false);
   },
 
-  bindRootCloseHandlers: function () {
+  bindRootCloseHandlers() {
     this._onDocumentClickListener =
       EventListener.listen(document, 'click', this.handleDocumentClick);
     this._onDocumentKeyupListener =
       EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
   },
 
-  unbindRootCloseHandlers: function () {
+  unbindRootCloseHandlers() {
     if (this._onDocumentClickListener) {
       this._onDocumentClickListener.remove();
     }
@@ -72,9 +72,9 @@ var DropdownStateMixin = {
     }
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount() {
     this.unbindRootCloseHandlers();
   }
 };
 
-module.exports = DropdownStateMixin;
+export default DropdownStateMixin;

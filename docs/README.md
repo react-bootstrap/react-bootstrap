@@ -1,48 +1,20 @@
 # React Bootstrap Documentation Website
 
-This website is single page app built on [React](http://facebook.github.io/react/), with styles and structure taken from the [Bootstrap](http://getbootstrap.com/) docs website.
-The app is statically generated to HTML via node and then hosted it by pushing HTML to [GitHub Pages](http://pages.github.com/).
+This website is single page app built on
+[React](http://facebook.github.io/react/), with styles and structure taken from
+the [Bootstrap](http://getbootstrap.com/) docs website.  The app is statically
+generated to HTML via node and then hosted it by pushing HTML to [GitHub
+Pages](http://pages.github.com/).
 
-## Installation
+## Development
 
-If you are working on the site, you will want to install and run a local copy of it.
+From the repository root run `npm run docs` and navigate your browser to
+`http://localhost:4000`. This will start an express base node server with
+webpack-dev middleware that will watch your file changes and recompile all the
+static assets needed to generate the site. 
 
-### Dependencies
+## Production
 
-All dependencies are installed with npm, just:
-
-```sh
-$ cd react-bootstrap/docs
-$ npm install
-```
-
-### Instructions
-
-#### Development
-
-The site uses React bootstrap components, so first make sure you've installed and built the project (via `grunt`). Then:
-
-```sh
-$ cd react-bootstrap/docs
-$ npm start
-$ open http://localhost:4000/
-```
-
-This will start an express based node server which will generate static html content and the js bundle on request. After making any modifications the server should restart and regenerate any necessary files on the next request.
-
-#### Production
-
-This site is statically published on github pages, to do this the static assets need to be generated.
-
-```sh
-$ cd react-bootstrap/docs
-$ npm run build
-```
-
-To test the static files you can use the included express based static file server.
-
-```sh
-$ cd react-bootstrap/docs
-$ npm run start-prod
-$ open http://localhost:4000/
-```
+This site is statically published on github pages, to do this the static assets
+need to be generated. You can simulate a similar experience with `npm run
+docs-prod` and navigating your browser to `http://localhost:4000`

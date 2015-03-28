@@ -8,7 +8,11 @@ Under active development - APIs will change.
 
 ## Docs
 
-A [docs site](http://react-bootstrap.github.io) with live editable examples is a work in progress
+See the [documentation](http://react-bootstrap.github.io) with live editable examples.
+
+### Bootstrap Version
+
+Currently supports v3.2.0, but v3.3+ support is coming soon.
 
 ## Authors
 
@@ -21,11 +25,15 @@ and many [contributors](https://github.com/react-bootstrap/react-bootstrap/graph
 
 - [react-router-bootstrap](https://github.com/mtscout6/react-router-bootstrap) - Integration with [react-router](https://github.com/rackt/react-router).
 
+## Local Setup
+
+- Install the dependencies with `npm install`
+- Run tests `npm test`
+- Run tests in watch mode `npm run test-watch`
+- Run the docs site in development mode with `npm run docs`. This will watch
+  for file changes as you work. Simply refresh the page to see the updates.
+- Build with `npm run build`
+
 ## Contributions
 
-Yes please!
-
-- Run `npm install`, `npm run test-watch` to run tests while you develop (however this hides any build errors, you can see these with `grunt build`)
-- Add tests for any new or changed functionality
-- See [issues](https://github.com/stevoland/react-bootstrap/issues) for some ideas
-- Follow existing style
+Yes please! See the [contributing guidelines](https://github.com/react-bootstrap/react-bootstrap/blob/master/CONTRIBUTING.md) for details.

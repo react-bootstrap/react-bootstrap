@@ -11,7 +11,7 @@
  * https://github.com/facebook/react/blob/v0.12.0/PATENTS
  */
 
-var canUseDOM = !!(
+const canUseDOM = !!(
   typeof window !== 'undefined' &&
     window.document &&
     window.document.createElement
@@ -22,7 +22,7 @@ var canUseDOM = !!(
  * transition/animation ends, based on the style property used to
  * define that event.
  */
-var EVENT_NAME_MAP = {
+const EVENT_NAME_MAP = {
   transitionend: {
     'transition': 'transitionend',
     'WebkitTransition': 'webkitTransitionEnd',
@@ -40,11 +40,11 @@ var EVENT_NAME_MAP = {
   }
 };
 
-var endEvents = [];
+let endEvents = [];
 
 function detectEvents() {
-  var testEl = document.createElement('div');
-  var style = testEl.style;
+  let testEl = document.createElement('div');
+  let style = testEl.style;
 
   // On some platforms, in particular some releases of Android 4.x,
   // the un-prefixed "animation" and "transition" properties are defined on the
@@ -59,9 +59,9 @@ function detectEvents() {
     delete EVENT_NAME_MAP.transitionend.transition;
   }
 
-  for (var baseEventName in EVENT_NAME_MAP) {
-    var baseEvents = EVENT_NAME_MAP[baseEventName];
-    for (var styleName in baseEvents) {
+  for (let baseEventName in EVENT_NAME_MAP) {
+    let baseEvents = EVENT_NAME_MAP[baseEventName];
+    for (let styleName in baseEvents) {
       if (styleName in style) {
         endEvents.push(baseEvents[styleName]);
         break;
@@ -87,7 +87,7 @@ function removeEventListener(node, eventName, eventListener) {
   node.removeEventListener(eventName, eventListener, false);
 }
 
-var ReactTransitionEvents = {
+const ReactTransitionEvents = {
   addEndEventListener: function(node, eventListener) {
     if (endEvents.length === 0) {
       // If CSS transitions are not supported, trigger an "end animation"
@@ -110,4 +110,4 @@ var ReactTransitionEvents = {
   }
 };
 
-module.exports = ReactTransitionEvents;
+export default ReactTransitionEvents;
