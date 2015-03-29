@@ -68,7 +68,7 @@
     "less-loader": "^2.1.0",
     "lodash": "^3.5.0",
     "mocha": "~1.16.2",
-    "react": "0.13.0",
+    "react": "^0.13.1",
     "react-router": "^0.13.1",
     "rf-changelog": "^0.4.0",
     "semver": "^4.3.1",
