@@ -223,7 +223,9 @@ const ReactPlayground = React.createClass({
     let mountNode = this.refs.mount.getDOMNode();
     try {
       React.unmountComponentAtNode(mountNode);
-    } catch (e) { }
+    } catch (e) {
+      console.error(e);
+    }
   },
 
   executeCode() {
@@ -231,7 +233,9 @@ const ReactPlayground = React.createClass({
 
     try {
       React.unmountComponentAtNode(mountNode);
-    } catch (e) { }
+    } catch (e) {
+      console.error(e);
+    }
 
     try {
       let compiledCode = this.compileCode();

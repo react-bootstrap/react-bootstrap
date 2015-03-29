@@ -45,7 +45,7 @@
     "colors": "^1.0.3",
     "css-loader": "^0.9.1",
     "es5-shim": "^4.1.0",
-    "eslint": "^0.17.1",
+    "eslint": "^0.18.0",
     "eslint-plugin-react": "^1.6.0",
     "express": "^3.4.8",
     "extract-text-webpack-plugin": "^0.3.8",
