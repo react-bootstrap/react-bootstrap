@@ -37,7 +37,7 @@
     "babel-core": "^4.7.4",
     "babel-eslint": "^2.0.2",
     "babel-loader": "^4.1.0",
-    "bootstrap": "3.2.0",
+    "bootstrap": "^3.3.4",
     "brfs": "^1.4.0",
     "child-process-promise": "^1.0.1",
     "client-loader": "0.0.1",

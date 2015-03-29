@@ -1,5 +1,5 @@
 import from 'bootstrap/less/bootstrap.less';
-import from 'bootstrap/docs/assets/css/_src/docs.css';
+import from './assets/docs.css';
 import from './assets/style.css';
 
 import from './assets/carousel.png';
