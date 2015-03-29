@@ -72,7 +72,7 @@
     "rf-changelog": "^0.4.0",
     "semver": "^4.3.1",
     "sinon": "^1.10.3",
-    "style-loader": "^0.8.3",
+    "style-loader": "^0.9.0",
     "transform-loader": "^0.2.1",
     "webpack": "^1.7.2",
     "webpack-dev-middleware": "^1.0.11",
