@@ -3,6 +3,7 @@
 [Bootstrap 3](http://getbootstrap.com) components built with [React](http://facebook.github.io/react/)
 
 [![Build Status](https://travis-ci.org/react-bootstrap/react-bootstrap.svg)](https://travis-ci.org/react-bootstrap/react-bootstrap) [![NPM version](https://badge.fury.io/js/react-bootstrap.svg)](http://badge.fury.io/js/react-bootstrap) [![Bower version](https://badge.fury.io/bo/react-bootstrap.svg)](http://badge.fury.io/bo/react-bootstrap) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/react-bootstrap/react-bootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Dependency Status](https://david-dm.org/react-bootstrap/react-bootstrap.svg)](https://david-dm.org/react-bootstrap/react-bootstrap) [![devDependency Status](https://david-dm.org/react-bootstrap/react-bootstrap/dev-status.svg)](https://david-dm.org/react-bootstrap/react-bootstrap#info=devDependencies) [![peerDependency Status](https://david-dm.org/react-bootstrap/react-bootstrap/peer-status.svg)](https://david-dm.org/react-bootstrap/react-bootstrap#info=peerDependencies)
 
 Under active development - APIs will change.
