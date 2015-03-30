@@ -21,7 +21,7 @@ function getOffset(DOMNode) {
     return window.jQuery(DOMNode).offset();
   }
 
-  let docElem = document.documentElement;
+  let docElem = DOMNode.ownerDocument.documentElement;
   let box = { top: 0, left: 0 };
 
   // If we don't have gBCR, just use 0,0 rather than error
@@ -89,7 +89,7 @@ function getPosition(elem, offsetParent) {
  * @returns {HTMLElement}
  */
 function offsetParentFunc(elem) {
-  let docElem = document.documentElement;
+  let docElem = elem.ownerDocument.documentElement;
   let offsetParent = elem.offsetParent || docElem;
 
   while ( offsetParent && ( offsetParent.nodeName !== 'HTML' &&

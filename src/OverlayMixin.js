@@ -63,6 +63,6 @@ export default {
   },
 
   getContainerDOMNode() {
-    return React.findDOMNode(this.props.container || document.body);
+    return React.findDOMNode(this.props.container || React.findDOMNode(this).ownerDocument.body);
   }
 };
