@@ -1,16 +1,22 @@
 # react-bootstrap
 
-[Bootstrap 3](http://getbootstrap.com) components built with [React](http://facebook.github.io/react/)
+[Bootstrap 3][bootstrap] components built with [React][react]
 
-[![Build Status](https://travis-ci.org/react-bootstrap/react-bootstrap.svg)](https://travis-ci.org/react-bootstrap/react-bootstrap) [![NPM version](https://badge.fury.io/js/react-bootstrap.svg)](http://badge.fury.io/js/react-bootstrap) [![Bower version](https://badge.fury.io/bo/react-bootstrap.svg)](http://badge.fury.io/bo/react-bootstrap) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/react-bootstrap/react-bootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status][build-badge]][build]
+[![NPM version][npm-badge]][npm]
+[![Bower version][bower-badge]][bower]
+[![HuBoard][huboard-badge]][huboard]
+[![Gitter][gitter-badge]][gitter]
 
-[![Dependency Status](https://david-dm.org/react-bootstrap/react-bootstrap.svg)](https://david-dm.org/react-bootstrap/react-bootstrap) [![devDependency Status](https://david-dm.org/react-bootstrap/react-bootstrap/dev-status.svg)](https://david-dm.org/react-bootstrap/react-bootstrap#info=devDependencies) [![peerDependency Status](https://david-dm.org/react-bootstrap/react-bootstrap/peer-status.svg)](https://david-dm.org/react-bootstrap/react-bootstrap#info=peerDependencies)
+[![Dependency Status][deps-badge]][deps]
+[![devDependency Status][dev-deps-badge]][dev-deps]
+[![peerDependency Status][peer-deps-badge]][peer-deps]
 
 Under active development - APIs will change.
 
 ## Docs
 
-See the [documentation](http://react-bootstrap.github.io) with live editable examples.
+See the [documentation][documentation] with live editable examples.
 
 ## Authors
 
@@ -21,7 +27,7 @@ and many [contributors](https://github.com/react-bootstrap/react-bootstrap/graph
 
 ## Related modules
 
-- [react-router-bootstrap](https://github.com/mtscout6/react-router-bootstrap) - Integration with [react-router](https://github.com/rackt/react-router).
+- [react-router-bootstrap][react-router-bootstrap] - Integration with [react-router][react-router].
 
 ## Local Setup
 
@@ -34,4 +40,37 @@ and many [contributors](https://github.com/react-bootstrap/react-bootstrap/graph
 
 ## Contributions
 
-Yes please! See the [contributing guidelines](https://github.com/react-bootstrap/react-bootstrap/blob/master/CONTRIBUTING.md) for details.
+Yes please! See the [contributing guidelines][contributing] for details.
+
+[bootstrap]: http://getbootstrap.com
+[react]: http://facebook.github.io/react/
+
+[documentation]: http://react-bootstrap.github.io
+[contributing]: https://github.com/react-bootstrap/react-bootstrap/blob/master/CONTRIBUTING.md
+
+[build-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg
+[build]: https://travis-ci.org/react-bootstrap/react-bootstrap
+
+[npm-badge]: https://badge.fury.io/js/react-bootstrap.svg
+[npm]: http://badge.fury.io/js/react-bootstrap
+
+[bower-badge]: https://badge.fury.io/bo/react-bootstrap.svg
+[bower]: http://badge.fury.io/bo/react-bootstrap 
+
+[gitter-badge]: https://badges.gitter.im/Join%20Chat.svg
+[gitter]: https://gitter.im/react-bootstrap/react-bootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+
+[deps-badge]: https://david-dm.org/react-bootstrap/react-bootstrap.svg
+[deps]: https://david-dm.org/react-bootstrap/react-bootstrap
+
+[dev-deps-badge]: https://david-dm.org/react-bootstrap/react-bootstrap/dev-status.svg
+[dev-deps]: https://david-dm.org/react-bootstrap/react-bootstrap#info=devDependencies
+
+[peer-deps-badge]: https://david-dm.org/react-bootstrap/react-bootstrap/peer-status.svg
+[peer-deps]: https://david-dm.org/react-bootstrap/react-bootstrap#info=peerDependencies 
+
+[react-router-bootstrap]: https://github.com/mtscout6/react-router-bootstrap
+[react-router]: https://github.com/rackt/react-router
+
+[huboard-badge]: https://img.shields.io/badge/Hu-Board-7965cc.svg
+[huboard]: https://huboard.com/react-bootstrap/react-bootstrap

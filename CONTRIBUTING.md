@@ -5,9 +5,11 @@ don't hesitate to jump in.
 
 ## Current Issues
 
-Feel free to tackle any currently open
-[issue](https://github.com/react-bootstrap/react-bootstrap/issues). The issues
-tagged with "help wanted" are especially open.
+[![HuBoard][huboard-badge]][huboard]
+
+We use HuBoard to triage issues and prioritize the backlog for the core dev
+team. Feel free to tackle any currently open [issue][issues]. The issues tagged
+with "help wanted" and especially those high in the backlog are fair game.
 
 ## Tests
 
@@ -17,11 +19,11 @@ All commits that fix bugs or add features need a test.
 
 Please adhere to the current code styling. We have included an `.editorconfig`
 at the repo's root to facilitate uniformity regardless of your editor. See the
-[editor config site](http://editorconfig.org/) for integration details.
+[editor config site][editorconfig] for integration details.
 
-We use [ESLint](http://eslint.org/) for all JavaScript Linting. There should be
-no linting errors and no new warnings for new work. You are welcome to configure
-your editor to use ESLint or the `npm test` command will run unit tests and the
+We use [ESLint][eslint] for all JavaScript Linting. There should be no linting
+errors and no new warnings for new work. You are welcome to configure your
+editor to use ESLint or the `npm test` command will run unit tests and the
 linter.
 
 ## Commit Subjects for Public API Changes
@@ -43,10 +45,19 @@ change the public API.
 Please include an upgrade path with example code in the commit message.  If it
 doesn't make sense to do this, then it doesn't make sense to use `[changed]` or
 `[removed]` :). For further reading on writing a well formed commit message,
-check out these [5 useful tips for a better commit
-message](http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message)
+check out these [5 useful tips for a better commit message][commit-message]
 
 ## Docs
 
 Please update the docs with any API changes, the code and docs should always be
 in sync.
+
+[huboard-badge]: https://img.shields.io/badge/Hu-Board-7965cc.svg
+[huboard]: https://huboard.com/react-bootstrap/react-bootstrap
+
+[issues]: https://github.com/react-bootstrap/react-bootstrap/issues
+
+[editorconfig]: http://editorconfig.org
+[eslint]: http://eslint.org
+[commit-message]: http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
+
