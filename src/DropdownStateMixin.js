@@ -56,10 +56,12 @@ const DropdownStateMixin = {
   },
 
   bindRootCloseHandlers() {
+    let doc = React.findDOMNode(this).ownerDocument;
+
     this._onDocumentClickListener =
-      EventListener.listen(document, 'click', this.handleDocumentClick);
+      EventListener.listen(doc, 'click', this.handleDocumentClick);
     this._onDocumentKeyupListener =
-      EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
+      EventListener.listen(doc, 'keyup', this.handleDocumentKeyUp);
   },
 
   unbindRootCloseHandlers() {

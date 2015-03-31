@@ -128,9 +128,9 @@ const Modal = React.createClass({
 
   componentDidMount() {
     this._onDocumentKeyupListener =
-      EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
+      EventListener.listen(React.findDOMNode(this).ownerDocument, 'keyup', this.handleDocumentKeyUp);
 
-    let container = (this.props.container && React.findDOMNode(this.props.container)) || document.body;
+    let container = (this.props.container && React.findDOMNode(this.props.container)) || React.findDOMNode(this).ownerDocument.body;
     container.className += container.className.length ? ' modal-open' : 'modal-open';
 
     if (this.props.backdrop) {
@@ -146,7 +146,7 @@ const Modal = React.createClass({
 
   componentWillUnmount() {
     this._onDocumentKeyupListener.remove();
-    let container = (this.props.container && React.findDOMNode(this.props.container)) || document.body;
+    let container = (this.props.container && React.findDOMNode(this.props.container)) || React.findDOMNode(this).ownerDocument.body;
     container.className = container.className.replace(/ ?modal-open/, '');
   },
 
