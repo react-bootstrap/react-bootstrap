@@ -11,7 +11,6 @@ const ListGroupItem = React.createClass({
     active: React.PropTypes.any,
     disabled: React.PropTypes.any,
     header: React.PropTypes.node,
-    badge: React.PropTypes.node,
     onClick: React.PropTypes.func,
     eventKey: React.PropTypes.any,
     href: React.PropTypes.string,
