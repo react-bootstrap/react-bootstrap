@@ -5,12 +5,11 @@ import ListGroupItem from '../src/ListGroupItem';
 
 describe('ListGroup', function () {
 
-  // TODO: Why div, shouldn't it be a ul?
-  it('Should output a "div" with the class "list-group"', function () {
+  it('Should output a "ul" with the class "list-group"', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ListGroup />
+      <ListGroup/>
     );
-    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
+    assert.equal(React.findDOMNode(instance).nodeName, 'UL');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
   });
 
@@ -28,4 +27,28 @@ describe('ListGroup', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(items[1], 'list-group-item'));
   });
 
+  it('Should output a "ul" when children are list items', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroup>
+        <ListGroupItem>1st Child</ListGroupItem>
+        <ListGroupItem>2nd Child</ListGroupItem>
+      </ListGroup>
+    );
+    assert.equal(React.findDOMNode(instance).nodeName, 'UL');
+    assert.equal(React.findDOMNode(instance).firstChild.nodeName, 'LI');
+  });
+
+
+  it('Should output a "div" when "ListGroupItem" children are anchors', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroup>
+        <ListGroupItem href="#test">1st Child</ListGroupItem>
+        <ListGroupItem href="#test">2nd Child</ListGroupItem>
+      </ListGroup>
+    );
+    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
+    assert.equal(React.findDOMNode(instance).firstChild.nodeName, 'A');
+    assert.equal(React.findDOMNode(instance).lastChild.nodeName, 'A');
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
+  });
 });

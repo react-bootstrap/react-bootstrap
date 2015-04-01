@@ -4,15 +4,15 @@ import ListGroupItem from '../src/ListGroupItem';
 
 describe('ListGroupItem', function () {
 
-  it('Should output a "span" with the class "list-group-item"', function () {
+  it('Should output a "li" with the class "list-group-item"', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem>Text</ListGroupItem>
     );
-    assert.equal(instance.getDOMNode().nodeName, 'SPAN');
+    assert.equal(instance.getDOMNode().nodeName, 'LI');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
   });
 
-  it('Should output a "anchor" if "href" prop is set', function () {
+  it('Should output an "anchor" if "href" prop is set', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem href='#test'>Achor</ListGroupItem>
     );
@@ -65,5 +65,4 @@ describe('ListGroupItem', function () {
     assert.equal(instance.getDOMNode().lastChild.innerText, 'Item text');
     assert.ok(instance.getDOMNode().lastChild.className.match(/\blist-group-item-text\b/));
   });
-
 });

@@ -11,6 +11,7 @@ const ListGroupItem = React.createClass({
     active: React.PropTypes.any,
     disabled: React.PropTypes.any,
     header: React.PropTypes.node,
+    badge: React.PropTypes.node,
     onClick: React.PropTypes.func,
     eventKey: React.PropTypes.any,
     href: React.PropTypes.string,
@@ -32,15 +33,16 @@ const ListGroupItem = React.createClass({
     if (this.props.href || this.props.target || this.props.onClick) {
       return this.renderAnchor(classes);
     } else {
-      return this.renderSpan(classes);
+      return this.renderLi(classes);
     }
   },
 
-  renderSpan(classes) {
+  renderLi(classes) {
     return (
-      <span {...this.props} className={classSet(this.props.className, classes)}>
+      <li
+        {...this.props} className={classSet(this.props.className, classes)}>
         {this.props.header ? this.renderStructuredContent() : this.props.children}
-      </span>
+      </li>
     );
   },
 
