@@ -1,13 +1,19 @@
 /* eslint no-process-exit: 0 */
 
 import from 'colors';
+import path from 'path';
 import bower from './amd/build';
 import lib from './lib/build';
 import docs from '../docs/build';
 import dist from './dist/build';
+import { copy } from './fs-utils';
 import { exec, spawn } from 'child-process-promise';
 
 import yargs from 'yargs';
+
+const repoRoot = path.resolve(__dirname, '../');
+const distFolder = path.join(repoRoot, 'dist');
+const amdFolder = path.join(repoRoot, 'amd');
 
 const argv = yargs
   .option('docs-only', {
@@ -26,12 +32,15 @@ export default function Build(noExitOnFailure) {
       dist(),
       docs()
     ])
-    .then(() => exec(`cp -R dist/ amd`));
+    .then(() => copy(distFolder, amdFolder));
 
     if (!noExitOnFailure) {
       result = result
         .catch(err => {
           console.error(err.toString().red);
+          if (err.stack) {
+            console.error(err.stack.red);
+          }
           process.exit(1);
         });
     }

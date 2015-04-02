@@ -4,6 +4,7 @@ import Router from 'react-router';
 import routes from './src/Routes';
 import Root from './src/Root';
 import fsp from 'fs-promise';
+import { copy } from '../tools/fs-utils';
 import { exec, spawn } from 'child-process-promise';
 
 const repoRoot = path.resolve(__dirname, '../');
@@ -16,7 +17,7 @@ const readmeDest = path.join(docsBuilt, 'README.md');
 export default function BuildDocs() {
   console.log('Building: '.cyan + 'docs'.green);
 
-  return exec(`rm -rf ${docsBuilt}`)
+  return exec(`rimraf ${docsBuilt}`)
     .then(() => fsp.mkdir(docsBuilt))
     .then(() => {
       let writes = Root
@@ -31,8 +32,8 @@ export default function BuildDocs() {
 
       return Promise.all(writes.concat([
         exec(`webpack --config webpack.docs.js -p --bail`),
-        exec(`cp ${license} ${docsBuilt}`),
-        exec(`cp ${readmeSrc} ${readmeDest}`)
+        copy(license, docsBuilt),
+        copy(readmeSrc, readmeDest)
       ]));
     })
     .then(() => console.log('Built: '.cyan + 'docs'.green));

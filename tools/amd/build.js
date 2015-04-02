@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import path from 'path';
 import fsp from 'fs-promise';
+import { copy } from '../fs-utils';
 import { exec, spawn } from 'child-process-promise';
 
 const repoRoot = path.resolve(__dirname, '../../');
@@ -28,13 +29,13 @@ function bowerConfig() {
 export default function BuildBower() {
   console.log('Building: '.cyan + 'bower module'.green);
 
-  return exec(`rm -rf ${amd}`)
+  return exec(`rimraf ${amd}`)
     .then(() => fsp.mkdir(amd))
     .then(() => Promise.all([
       bowerConfig(),
       exec(`babel --modules amd --optional es7.objectRestSpread ${src} --out-dir ${path.join(amd, 'lib')}`),
-      exec(`cp ${readme} ${amd}`),
-      exec(`cp ${license} ${amd}`)
+      copy(readme, amd),
+      copy(license, amd)
     ]))
     .then(() => console.log('Built: '.cyan + 'bower module'.green));
 }
