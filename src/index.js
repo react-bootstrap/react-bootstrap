@@ -47,6 +47,7 @@ import Table from './Table';
 import TabPane from './TabPane';
 import Tooltip from './Tooltip';
 import Well from './Well';
+import constants from './constants';
 
 export default {
   Accordion,
@@ -97,5 +98,6 @@ export default {
   Table,
   TabPane,
   Tooltip,
-  Well
+  Well,
+  constants
 };
