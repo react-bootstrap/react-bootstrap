@@ -3,7 +3,6 @@
 [Bootstrap 3][bootstrap] components built with [React][react]
 
 [![Travis Build Status][build-badge]][build]
-[![AppVeyor Build Status][appveyor-badge]][appveyor]
 [![NPM version][npm-badge]][npm]
 [![Bower version][bower-badge]][bower]
 [![HuBoard][huboard-badge]][huboard]
