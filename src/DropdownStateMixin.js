@@ -1,4 +1,5 @@
 import React from 'react';
+import domUtils from './utils/domUtils';
 import EventListener from './utils/EventListener';
 
 /**
@@ -56,7 +57,7 @@ const DropdownStateMixin = {
   },
 
   bindRootCloseHandlers() {
-    let doc = React.findDOMNode(this).ownerDocument;
+    let doc = domUtils.ownerDocument(this);
 
     this._onDocumentClickListener =
       EventListener.listen(doc, 'click', this.handleDocumentClick);

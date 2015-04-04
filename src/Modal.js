@@ -2,6 +2,7 @@ import React from 'react';
 import classSet from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import FadeMixin from './FadeMixin';
+import domUtils from './utils/domUtils';
 import EventListener from './utils/EventListener';
 
 
@@ -128,9 +129,10 @@ const Modal = React.createClass({
 
   componentDidMount() {
     this._onDocumentKeyupListener =
-      EventListener.listen(React.findDOMNode(this).ownerDocument, 'keyup', this.handleDocumentKeyUp);
+      EventListener.listen(domUtils.ownerDocument(this), 'keyup', this.handleDocumentKeyUp);
 
-    let container = (this.props.container && React.findDOMNode(this.props.container)) || React.findDOMNode(this).ownerDocument.body;
+    let container = (this.props.container && React.findDOMNode(this.props.container)) ||
+          domUtils.ownerDocument(this).body;
     container.className += container.className.length ? ' modal-open' : 'modal-open';
 
     if (this.props.backdrop) {
@@ -146,7 +148,8 @@ const Modal = React.createClass({
 
   componentWillUnmount() {
     this._onDocumentKeyupListener.remove();
-    let container = (this.props.container && React.findDOMNode(this.props.container)) || React.findDOMNode(this).ownerDocument.body;
+    let container = (this.props.container && React.findDOMNode(this.props.container)) ||
+          domUtils.ownerDocument(this).body;
     container.className = container.className.replace(/ ?modal-open/, '');
   },
 
