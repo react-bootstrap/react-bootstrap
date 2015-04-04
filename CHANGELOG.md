@@ -1,3 +1,9 @@
+v0.20.1 - Sat, 04 Apr 2015 14:22:18 GMT
+---------------------------------------
+
+- [a060fbc](../../commit/a060fbc) [fixed] Re-add missing constants to public API
+
+
 v0.20.0 - Tue, 31 Mar 2015 13:04:40 GMT
 ---------------------------------------
 
