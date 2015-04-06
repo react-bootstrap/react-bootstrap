@@ -13,6 +13,7 @@ const SplitButton = React.createClass({
     pullRight:     React.PropTypes.bool,
     title:         React.PropTypes.node,
     href:          React.PropTypes.string,
+    id:            React.PropTypes.string,
     target:        React.PropTypes.string,
     dropdownTitle: React.PropTypes.node,
     onClick:       React.PropTypes.func,

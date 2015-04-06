@@ -25,6 +25,7 @@ const TabbedArea = React.createClass({
     defaultActiveKey: React.PropTypes.any,
     bsStyle: React.PropTypes.oneOf(['tabs', 'pills']),
     animation: React.PropTypes.bool,
+    id: React.PropTypes.string,
     onSelect: React.PropTypes.func
   },
 

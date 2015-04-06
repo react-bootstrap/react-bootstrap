@@ -24,6 +24,7 @@ const Input = React.createClass({
       return React.PropTypes.oneOf(['success', 'warning', 'error']).apply(null, arguments);
     },
     hasFeedback: React.PropTypes.bool,
+    id: React.PropTypes.string,
     groupClassName: React.PropTypes.string,
     wrapperClassName: React.PropTypes.string,
     labelClassName: React.PropTypes.string,
