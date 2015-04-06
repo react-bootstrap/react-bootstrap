@@ -3,6 +3,10 @@ import classSet from 'classnames';
 import TransitionEvents from './utils/TransitionEvents';
 
 const TabPane = React.createClass({
+  propTypes: {
+    active: React.PropTypes.bool
+  },
+
   getDefaultProps() {
     return {
       animation: true
