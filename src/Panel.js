@@ -11,6 +11,7 @@ const Panel = React.createClass({
     collapsable: React.PropTypes.bool,
     onSelect: React.PropTypes.func,
     header: React.PropTypes.node,
+    id: React.PropTypes.string,
     footer: React.PropTypes.node,
     eventKey: React.PropTypes.any
   },

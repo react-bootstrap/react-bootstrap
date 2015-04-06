@@ -12,6 +12,7 @@ const Nav = React.createClass({
   mixins: [BootstrapMixin, CollapsableMixin],
 
   propTypes: {
+    activeHref: React.PropTypes.string,
     activeKey: React.PropTypes.any,
     bsStyle: React.PropTypes.oneOf(['tabs', 'pills']),
     stacked: React.PropTypes.bool,
