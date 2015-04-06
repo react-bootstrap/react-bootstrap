@@ -12,6 +12,7 @@ const CollapsableNav = React.createClass({
 
   propTypes: {
     onSelect: React.PropTypes.func,
+    activeKey: React.PropTypes.any,
     expanded: React.PropTypes.bool,
     eventKey: React.PropTypes.any
   },

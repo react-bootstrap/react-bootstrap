@@ -11,6 +11,7 @@ const SubNav = React.createClass({
   propTypes: {
     onSelect: React.PropTypes.func,
     active: React.PropTypes.bool,
+    activeKey: React.PropTypes.any,
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
