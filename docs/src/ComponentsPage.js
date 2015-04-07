@@ -449,6 +449,20 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.GridBasic} exampleClassName='bs-example-tabs' />
                 </div>
 
+                {/* Thumbnail */}
+                <div className='bs-docs-section'>
+                <h1 id='thumbnail' className='page-header'>Thumbnail</h1>
+                <p>Thumbnails are designed to showcase linked images with minimal required markup. You can extend the grid component with thumbnails.</p>
+
+                  <h3>Anchor Thumbnail</h3>
+                  <p>Creates an anchor wrapping an image.</p>
+                  <ReactPlayground codeText={Samples.ThumbnailAnchor} />
+
+                  <h3>Divider Thumbnail</h3>
+                  <p>Creates a divider wrapping an image and other children elements.</p>
+                  <ReactPlayground codeText={Samples.ThumbnailDiv} />
+                </div>
+
                 {/* ListGroup */}
                 <div className='bs-docs-section'>
                   <h1 id='listgroup' className='page-header'>List group<small> ListGroup, ListGroupItem</small></h1>
@@ -606,15 +620,16 @@ const ComponentsPage = React.createClass({
                     <NavItem href='#alerts' key={13}>Alerts</NavItem>
                     <NavItem href='#carousels' key={14}>Carousels</NavItem>
                     <NavItem href='#grids' key={15}>Grids</NavItem>
-                    <NavItem href='#listgroup' key={16}>List group</NavItem>
-                    <NavItem href='#labels' key={17}>Labels</NavItem>
-                    <NavItem href='#badges' key={18}>Badges</NavItem>
-                    <NavItem href='#jumbotron' key={19}>Jumbotron</NavItem>
-                    <NavItem href='#page-header' key={20}>Page Header</NavItem>
-                    <NavItem href='#wells' key={21}>Wells</NavItem>
-                    <NavItem href='#glyphicons' key={22}>Glyphicons</NavItem>
-                    <NavItem href='#tables' key={23}>Tables</NavItem>
-                    <NavItem href='#input' key={24}>Input</NavItem>
+                    <NavItem href='#thumbnail' key={16}>Thumbnail</NavItem>
+                    <NavItem href='#listgroup' key={17}>List group</NavItem>
+                    <NavItem href='#labels' key={18}>Labels</NavItem>
+                    <NavItem href='#badges' key={19}>Badges</NavItem>
+                    <NavItem href='#jumbotron' key={20}>Jumbotron</NavItem>
+                    <NavItem href='#page-header' key={21}>Page Header</NavItem>
+                    <NavItem href='#wells' key={22}>Wells</NavItem>
+                    <NavItem href='#glyphicons' key={23}>Glyphicons</NavItem>
+                    <NavItem href='#tables' key={24}>Tables</NavItem>
+                    <NavItem href='#input' key={25}>Input</NavItem>
                   </Nav>
                   <a className='back-to-top' href='#top'>
                   Back to top

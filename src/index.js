@@ -48,6 +48,7 @@ import SubNav from './SubNav';
 import TabbedArea from './TabbedArea';
 import Table from './Table';
 import TabPane from './TabPane';
+import Thumbnail from './Thumbnail';
 import Tooltip from './Tooltip';
 import Well from './Well';
 import styleMaps from './styleMaps';
@@ -103,6 +104,7 @@ export default {
   TabbedArea,
   Table,
   TabPane,
+  Thumbnail,
   Tooltip,
   Well,
   styleMaps

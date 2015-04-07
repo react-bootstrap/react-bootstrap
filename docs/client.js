@@ -5,6 +5,8 @@ import './assets/style.css';
 import './assets/carousel.png';
 import './assets/logo.png';
 import './assets/favicon.ico';
+import './assets/thumbnail.png';
+import './assets/thumbnaildiv.png';
 
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/theme/solarized.css';
