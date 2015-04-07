@@ -1,3 +1,13 @@
+v0.20.2 - Tue, 07 Apr 2015 01:51:55 GMT
+---------------------------------------
+
+- [723ee4d](../../commit/723ee4d) [fixed] Release scripts usage of rimraf
+- [7175431](../../commit/7175431) [fixed] Don't try to access .ownerDocument on null
+- [a58cff9](../../commit/a58cff9) [fixed] Numerous ESlint warnings (Removes 145 warnings)
+- [c6c4108](../../commit/c6c4108) [added] Twitter follow link to docs page footer
+- [20472b9](../../commit/20472b9) [fixed] Windows build
+
+
 v0.20.1 - Sat, 04 Apr 2015 14:22:18 GMT
 ---------------------------------------
 
