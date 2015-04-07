@@ -1,4 +1,5 @@
 import React from 'react';
+import domUtils from './utils/domUtils';
 
 // TODO: listen for onTransitionEnd to remove el
 function getElementsAndSelf (root, classes){
@@ -57,7 +58,8 @@ export default {
 
   componentWillUnmount: function () {
     let els = getElementsAndSelf(React.findDOMNode(this), ['fade']),
-        container = (this.props.container && React.findDOMNode(this.props.container)) || React.findDOMNode(this).ownerDocument.body;
+        container = (this.props.container && React.findDOMNode(this.props.container)) ||
+          domUtils.ownerDocument(this).body;
 
     if (els.length) {
       this._fadeOutEl = document.createElement('div');

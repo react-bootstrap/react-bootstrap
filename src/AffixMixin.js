@@ -104,7 +104,7 @@ const AffixMixin = {
     this._onWindowScrollListener =
       EventListener.listen(window, 'scroll', this.checkPosition);
     this._onDocumentClickListener =
-      EventListener.listen(React.findDOMNode(this).ownerDocument, 'click', this.checkPositionWithEventLoop);
+      EventListener.listen(domUtils.ownerDocument(this), 'click', this.checkPositionWithEventLoop);
   },
 
   componentWillUnmount() {
