@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 import BootstrapMixin from './BootstrapMixin';
 import CollapsableMixin from './CollapsableMixin';
@@ -58,7 +58,7 @@ const Panel = React.createClass({
 
     return (
       <div {...this.props}
-        className={classSet(this.props.className, classes)}
+        className={classNames(this.props.className, classes)}
         id={this.props.collapsable ? null : this.props.id} onSelect={null}>
         {this.renderHeading()}
         {this.props.collapsable ? this.renderCollapsableBody() : this.renderBody()}
@@ -72,7 +72,7 @@ const Panel = React.createClass({
 
     return (
       <div
-        className={classSet(this.getCollapsableClassSet(collapseClass))}
+        className={classNames(this.getCollapsableClassSet(collapseClass))}
         id={this.props.id}
         ref='panel'
         aria-expanded={this.isExpanded() ? 'true' : 'false'}>
@@ -155,13 +155,13 @@ const Panel = React.createClass({
     } else if (this.props.collapsable) {
 
       header = cloneElement(header, {
-        className: classSet(this.prefixClass('title')),
+        className: classNames(this.prefixClass('title')),
         children: this.renderAnchor(header.props.children)
       });
     } else {
 
       header = cloneElement(header, {
-        className: classSet(this.prefixClass('title'))
+        className: classNames(this.prefixClass('title'))
       });
     }
 

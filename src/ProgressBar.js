@@ -1,7 +1,7 @@
 import React, { cloneElement } from 'react';
 import Interpolate from './Interpolate';
 import BootstrapMixin from './BootstrapMixin';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
@@ -45,7 +45,7 @@ const ProgressBar = React.createClass({
     if (!ValidComponentChildren.hasValidComponent(this.props.children)) {
       if (!this.props.isChild) {
         return (
-          <div {...this.props} className={classSet(this.props.className, classes)}>
+          <div {...this.props} className={classNames(this.props.className, classes)}>
             {this.renderProgressBar()}
           </div>
         );
@@ -56,7 +56,7 @@ const ProgressBar = React.createClass({
       }
     } else {
       return (
-        <div {...this.props} className={classSet(this.props.className, classes)}>
+        <div {...this.props} className={classNames(this.props.className, classes)}>
           {ValidComponentChildren.map(this.props.children, this.renderChildBar)}
         </div>
       );
@@ -92,7 +92,7 @@ const ProgressBar = React.createClass({
     let classes = this.getBsClassSet();
 
     return (
-      <div {...this.props} className={classSet(this.props.className, classes)} role="progressbar"
+      <div {...this.props} className={classNames(this.props.className, classes)} role="progressbar"
         style={{width: percentage + '%'}}
         aria-valuenow={this.props.now}
         aria-valuemin={this.props.min}

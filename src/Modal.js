@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import FadeMixin from './FadeMixin';
 import domUtils from './utils/domUtils';
@@ -52,10 +52,10 @@ const Modal = React.createClass({
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
-        className={classSet(this.props.className, classes)}
+        className={classNames(this.props.className, classes)}
         onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
         ref="modal">
-        <div className={classSet(dialogClasses)}>
+        <div className={classNames(dialogClasses)}>
           <div className="modal-content" style={{overflow: 'hidden'}}>
             {this.props.title ? this.renderHeader() : null}
             {this.props.children}
@@ -81,7 +81,7 @@ const Modal = React.createClass({
 
     return (
       <div>
-        <div className={classSet(classes)} ref="backdrop" onClick={onClick} />
+        <div className={classNames(classes)} ref="backdrop" onClick={onClick} />
         {modal}
       </div>
     );
@@ -102,7 +102,7 @@ const Modal = React.createClass({
     classes['bg-' + style] = style;
     classes['text-' + style] = style;
 
-    let className = classSet(classes);
+    let className = classNames(classes);
 
     return (
       <div className={className}>

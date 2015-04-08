@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import Accordion from '../../src/Accordion';
 import Alert from '../../src/Alert';
 import Badge from '../../src/Badge';
@@ -198,11 +198,11 @@ const ReactPlayground = React.createClass({
     }
     return (
       <div className='playground'>
-        <div className={classSet(classes)}>
+        <div className={classNames(classes)}>
           <div ref='mount' />
         </div>
         {editor}
-        <a className={classSet(toggleClasses)} onClick={this.handleCodeModeToggle} href='#'>{this.state.mode === this.MODES.NONE ? 'show code' : 'hide code'}</a>
+        <a className={classNames(toggleClasses)} onClick={this.handleCodeModeToggle} href='#'>{this.state.mode === this.MODES.NONE ? 'show code' : 'hide code'}</a>
       </div>
       );
   },

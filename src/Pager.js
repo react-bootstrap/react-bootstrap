@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
@@ -14,7 +14,7 @@ const Pager = React.createClass({
     return (
       <ul
         {...this.props}
-        className={classSet(this.props.className, 'pager')}>
+        className={classNames(this.props.className, 'pager')}>
         {ValidComponentChildren.map(this.props.children, this.renderPageItem)}
       </ul>
     );

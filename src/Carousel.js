@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
@@ -142,7 +142,7 @@ const Carousel = React.createClass({
     return (
       <div
         {...this.props}
-        className={classSet(this.props.className, classes)}
+        className={classNames(this.props.className, classes)}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}>
         {this.props.indicators ? this.renderIndicators() : null}

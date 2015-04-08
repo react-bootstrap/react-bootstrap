@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import Button from './Button';
 import FormGroup from './FormGroup';
 
@@ -90,17 +90,17 @@ const Input = React.createClass({
     switch (this.props.type) {
       case 'select':
         input = (
-          <select {...this.props} className={classSet(this.props.className, 'form-control')} ref="input" key="input">
+          <select {...this.props} className={classNames(this.props.className, 'form-control')} ref="input" key="input">
             {this.props.children}
           </select>
         );
         break;
       case 'textarea':
-        input = <textarea {...this.props} className={classSet(this.props.className, 'form-control')} ref="input" key="input" />;
+        input = <textarea {...this.props} className={classNames(this.props.className, 'form-control')} ref="input" key="input" />;
         break;
       case 'static':
         input = (
-          <p {...this.props} className={classSet(this.props.className, 'form-control-static')} ref="input" key="input">
+          <p {...this.props} className={classNames(this.props.className, 'form-control-static')} ref="input" key="input">
             {this.props.value}
           </p>
         );
@@ -112,7 +112,7 @@ const Input = React.createClass({
         break;
       default:
         let className = this.isCheckboxOrRadio() || this.isFile() ? '' : 'form-control';
-        input = <input {...this.props} className={classSet(this.props.className, className)} ref="input" key="input" />;
+        input = <input {...this.props} className={classNames(this.props.className, className)} ref="input" key="input" />;
     }
 
     return input;
@@ -150,7 +150,7 @@ const Input = React.createClass({
     }
 
     return addonBefore || addonAfter || buttonBefore || buttonAfter ? (
-      <div className={classSet(inputGroupClassName, 'input-group')} key="input-group">
+      <div className={classNames(inputGroupClassName, 'input-group')} key="input-group">
         {addonBefore}
         {buttonBefore}
         {children}
@@ -170,7 +170,7 @@ const Input = React.createClass({
     };
 
     return this.props.hasFeedback ? (
-      <span className={classSet(classes)} key="icon" />
+      <span className={classNames(classes)} key="icon" />
     ) : null;
   },
 
@@ -189,7 +189,7 @@ const Input = React.createClass({
     };
 
     return (
-      <div className={classSet(classes)} key="checkboxRadioWrapper">
+      <div className={classNames(classes)} key="checkboxRadioWrapper">
         {children}
       </div>
     );
@@ -210,7 +210,7 @@ const Input = React.createClass({
     classes[this.props.labelClassName] = this.props.labelClassName;
 
     return this.props.label ? (
-      <label htmlFor={this.props.id} className={classSet(classes)} key="label">
+      <label htmlFor={this.props.id} className={classNames(classes)} key="label">
         {children}
         {this.props.label}
       </label>

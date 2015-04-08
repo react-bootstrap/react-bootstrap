@@ -1,7 +1,7 @@
 import React, { cloneElement } from 'react';
 import BootstrapMixin from './BootstrapMixin';
 import CollapsableMixin from './CollapsableMixin';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import domUtils from './utils/domUtils';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
@@ -52,7 +52,7 @@ const CollapsableNav = React.createClass({
     }
 
     return (
-      <div eventKey={this.props.eventKey} className={classSet(this.props.className, classes)} >
+      <div eventKey={this.props.eventKey} className={classNames(this.props.className, classes)} >
         {ValidComponentChildren.map(this.props.children, this.props.collapsable ? this.renderCollapsableNavChildren : this.renderChildren )}
       </div>
     );

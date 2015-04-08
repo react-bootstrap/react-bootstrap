@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import CollapsableMixin from '../src/CollapsableMixin';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 describe('CollapsableMixin', function () {
 
@@ -23,7 +23,7 @@ describe('CollapsableMixin', function () {
         let styles = this.getCollapsableClassSet();
         return (
           <div>
-            <div ref="panel" className={classSet(styles)}>
+            <div ref="panel" className={classNames(styles)}>
               {this.props.children}
             </div>
           </div>

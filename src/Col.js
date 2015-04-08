@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import constants from './constants';
 
 const Col = React.createClass({
@@ -62,7 +62,7 @@ const Col = React.createClass({
     }, this);
 
     return (
-      <ComponentClass {...this.props} className={classSet(this.props.className, classes)}>
+      <ComponentClass {...this.props} className={classNames(this.props.className, classes)}>
         {this.props.children}
       </ComponentClass>
     );

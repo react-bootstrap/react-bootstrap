@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import AffixMixin from './AffixMixin';
 import domUtils from './utils/domUtils';
 
@@ -15,7 +15,7 @@ const Affix = React.createClass({
 
     return (
       <div {...this.props}
-        className={classSet(this.props.className, this.state.affixClass)}
+        className={classNames(this.props.className, this.state.affixClass)}
         style={holderStyle}>
         {this.props.children}
       </div>

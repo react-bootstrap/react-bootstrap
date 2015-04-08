@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
@@ -19,7 +19,7 @@ const DropdownMenu = React.createClass({
     return (
         <ul
           {...this.props}
-          className={classSet(this.props.className, classes)}
+          className={classNames(this.props.className, classes)}
           role="menu">
           {ValidComponentChildren.map(this.props.children, this.renderMenuItem)}
         </ul>

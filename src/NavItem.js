@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 
 const NavItem = React.createClass({
@@ -47,7 +47,7 @@ const NavItem = React.createClass({
     }
 
     return (
-      <li {...props} className={classSet(props.className, classes)}>
+      <li {...props} className={classNames(props.className, classes)}>
         <a {...linkProps}>
           { children }
         </a>

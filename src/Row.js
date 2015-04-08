@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 const Row = React.createClass({
   propTypes: {
@@ -16,7 +16,7 @@ const Row = React.createClass({
     let ComponentClass = this.props.componentClass;
 
     return (
-      <ComponentClass {...this.props} className={classSet(this.props.className, 'row')}>
+      <ComponentClass {...this.props} className={classNames(this.props.className, 'row')}>
         {this.props.children}
       </ComponentClass>
     );

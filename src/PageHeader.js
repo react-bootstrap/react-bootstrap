@@ -1,10 +1,10 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 const PageHeader = React.createClass({
   render() {
     return (
-      <div {...this.props} className={classSet(this.props.className, 'page-header')}>
+      <div {...this.props} className={classNames(this.props.className, 'page-header')}>
         <h1>{this.props.children}</h1>
       </div>
     );

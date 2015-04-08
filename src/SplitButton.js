@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import DropdownStateMixin from './DropdownStateMixin';
 import Button from './Button';
@@ -48,7 +48,7 @@ const SplitButton = React.createClass({
       <Button
         {...this.props}
         ref="dropdownButton"
-        className={classSet(this.props.className, 'dropdown-toggle')}
+        className={classNames(this.props.className, 'dropdown-toggle')}
         onClick={this.handleDropdownClick}
         title={null}
         href={null}
@@ -63,7 +63,7 @@ const SplitButton = React.createClass({
     return (
       <ButtonGroup
         bsSize={this.props.bsSize}
-        className={classSet(groupClasses)}
+        className={classNames(groupClasses)}
         id={this.props.id}>
         {button}
         {dropdownButton}

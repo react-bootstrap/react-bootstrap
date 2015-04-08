@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import TransitionEvents from './utils/TransitionEvents';
 
 const CarouselItem = React.createClass({
@@ -73,7 +73,7 @@ const CarouselItem = React.createClass({
     }
 
     return (
-      <div {...this.props} className={classSet(this.props.className, classes)}>
+      <div {...this.props} className={classNames(this.props.className, classes)}>
         {this.props.children}
         {this.props.caption ? this.renderCaption() : null}
       </div>

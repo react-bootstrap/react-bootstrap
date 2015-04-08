@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 
 const ButtonToolbar = React.createClass({
@@ -18,7 +18,7 @@ const ButtonToolbar = React.createClass({
       <div
         {...this.props}
         role="toolbar"
-        className={classSet(this.props.className, classes)}>
+        className={classNames(this.props.className, classes)}>
         {this.props.children}
       </div>
     );

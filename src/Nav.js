@@ -1,7 +1,7 @@
 import React, { cloneElement } from 'react';
 import BootstrapMixin from './BootstrapMixin';
 import CollapsableMixin from './CollapsableMixin';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import domUtils from './utils/domUtils';
 
 
@@ -53,7 +53,7 @@ const Nav = React.createClass({
     }
 
     return (
-      <nav {...this.props} className={classSet(this.props.className, classes)}>
+      <nav {...this.props} className={classNames(this.props.className, classes)}>
         {this.renderUl()}
       </nav>
     );
@@ -69,7 +69,7 @@ const Nav = React.createClass({
     classes['navbar-right'] = this.props.right;
 
     return (
-      <ul {...this.props} className={classSet(this.props.className, classes)} ref="ul">
+      <ul {...this.props} className={classNames(this.props.className, classes)} ref="ul">
         {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
       </ul>
     );
