@@ -8,7 +8,7 @@ const dist = path.join(repoRoot, 'dist');
 export default function BuildDistributable() {
   console.log('Building: '.cyan + 'distributable'.green);
 
-  return exec(`rm -rf ${dist}`)
+  return exec(`rimraf ${dist}`)
     .then(() => Promise.all([
       exec('webpack --bail'),
       exec('webpack --bail -p')
