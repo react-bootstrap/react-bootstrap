@@ -10,7 +10,7 @@ const src = path.join(repoRoot, 'src');
 export default function BuildCommonJs() {
   console.log('Building: '.cyan + 'npm module'.green);
 
-  return exec(`rm -rf ${lib}`)
+  return exec(`rimraf ${lib}`)
     .then(() => exec(`babel --optional es7.objectRestSpread ${src} --out-dir ${lib}`))
     .then(() => console.log('Built: '.cyan + 'npm module'.green));
 }
