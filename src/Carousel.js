@@ -9,6 +9,7 @@ const Carousel = React.createClass({
   propTypes: {
     slide: React.PropTypes.bool,
     indicators: React.PropTypes.bool,
+    interval: React.PropTypes.number,
     controls: React.PropTypes.bool,
     pauseOnHover: React.PropTypes.bool,
     wrap: React.PropTypes.bool,
