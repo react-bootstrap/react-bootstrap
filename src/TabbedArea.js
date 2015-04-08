@@ -31,7 +31,7 @@ const TabbedArea = React.createClass({
 
   getDefaultProps() {
     return {
-      bsStyle: "tabs",
+      bsStyle: 'tabs',
       animation: true
     };
   },
