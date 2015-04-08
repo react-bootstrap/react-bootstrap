@@ -1,3 +1,5 @@
+var classNames = require('classNames');
+
 const CollapsableParagraph = React.createClass({
   mixins: [CollapsableMixin],
 
@@ -20,7 +22,7 @@ const CollapsableParagraph = React.createClass({
     return (
       <div>
         <Button onClick={this.onHandleToggle}>{text} Content</Button>
-        <div ref='panel' className={classSet(styles)}>
+        <div ref='panel' className={classNames(styles)}>
           {this.props.children}
         </div>
       </div>
