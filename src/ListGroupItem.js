@@ -8,9 +8,11 @@ const ListGroupItem = React.createClass({
 
   propTypes: {
     bsStyle: React.PropTypes.oneOf(['danger', 'info', 'success', 'warning']),
+    className: React.PropTypes.string,
     active: React.PropTypes.any,
     disabled: React.PropTypes.any,
     header: React.PropTypes.node,
+    listItem: React.PropTypes.node,
     onClick: React.PropTypes.func,
     eventKey: React.PropTypes.any,
     href: React.PropTypes.string,
@@ -31,8 +33,10 @@ const ListGroupItem = React.createClass({
 
     if (this.props.href || this.props.target || this.props.onClick) {
       return this.renderAnchor(classes);
-    } else {
+    } else if (this.props.listItem) {
       return this.renderLi(classes);
+    } else {
+      return this.renderSpan(classes);
     }
   },
 
@@ -53,6 +57,15 @@ const ListGroupItem = React.createClass({
       >
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </a>
+    );
+  },
+
+  renderSpan(classes) {
+    return (
+      <span
+        {...this.props} className={classSet(this.props.className, classes)}>
+        {this.props.header ? this.renderStructuredContent() : this.props.children}
+      </span>
     );
   },
 

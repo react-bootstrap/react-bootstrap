@@ -9,19 +9,26 @@ class ListGroup extends React.Component {
       (item, index) => cloneElement(item, { key: item.key ? item.key : index })
     );
 
-    let child;
+    let childrenAnchors = false;
 
-    if (this.props.children) {
+    if (!this.props.children) {
+      return this.renderDiv(items);
+    } else {
+
       if (Array.isArray(this.props.children)) {
-        child = this.props.children[0];
+        this.props.children.forEach((child) => {
+          if (child.props.href) {
+            childrenAnchors = true;
+          }
+        });
       } else {
-        child = this.props.children;
+        if (this.props.children.props.href) {
+          childrenAnchors = true;
+        }
       }
     }
 
-    // If child has an href prop, it is an
-    // 'anchor' tag and ListGroup should be a Div.
-    if (child && child.props.href){
+    if (childrenAnchors){
       return this.renderDiv(items);
     } else {
       return this.renderUL(items);
@@ -29,9 +36,13 @@ class ListGroup extends React.Component {
   }
 
   renderUL(items) {
+    let listItems = ValidComponentChildren.map(items,
+      (item, index) => cloneElement(item, { listItem: true })
+    );
+
     return (
       <ul className={classSet(this.props.className, 'list-group')}>
-        {items}
+        {listItems}
       </ul>
     );
   }
