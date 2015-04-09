@@ -22,6 +22,7 @@ const Nav = React.createClass({
     expanded: React.PropTypes.bool,
     navbar: React.PropTypes.bool,
     eventKey: React.PropTypes.any,
+    pullRight: React.PropTypes.bool,
     right: React.PropTypes.bool
   },
 
