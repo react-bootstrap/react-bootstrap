@@ -6,6 +6,7 @@ const PageItem = React.createClass({
   propTypes: {
     href: React.PropTypes.string,
     target: React.PropTypes.string,
+    title: React.PropTypes.string,
     disabled: React.PropTypes.bool,
     previous: React.PropTypes.bool,
     next: React.PropTypes.bool,
