@@ -28,7 +28,9 @@ const Input = React.createClass({
     groupClassName: React.PropTypes.string,
     wrapperClassName: React.PropTypes.string,
     labelClassName: React.PropTypes.string,
-    disabled: React.PropTypes.bool
+    multiple: React.PropTypes.bool,
+    disabled: React.PropTypes.bool,
+    value: React.PropTypes.any
   },
 
   getInputDOMNode() {
