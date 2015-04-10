@@ -4,7 +4,9 @@ import TransitionEvents from './utils/TransitionEvents';
 
 const TabPane = React.createClass({
   propTypes: {
-    active: React.PropTypes.bool
+    active:          React.PropTypes.bool,
+    animation:       React.PropTypes.bool,
+    onAnimateOutEnd: React.PropTypes.func
   },
 
   getDefaultProps() {
@@ -60,7 +62,7 @@ const TabPane = React.createClass({
         animateOut: false
       });
 
-      if (typeof this.props.onAnimateOutEnd === 'function') {
+      if (this.props.onAnimateOutEnd) {
         this.props.onAnimateOutEnd();
       }
     }
