@@ -62,7 +62,7 @@ const TabPane = React.createClass({
         animateOut: false
       });
 
-      if (typeof this.props.onAnimateOutEnd === 'function') {
+      if (this.props.onAnimateOutEnd) {
         this.props.onAnimateOutEnd();
       }
     }
