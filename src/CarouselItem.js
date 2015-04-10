@@ -7,7 +7,10 @@ const CarouselItem = React.createClass({
     direction: React.PropTypes.oneOf(['prev', 'next']),
     onAnimateOutEnd: React.PropTypes.func,
     active: React.PropTypes.bool,
-    caption: React.PropTypes.node
+    animateIn: React.PropTypes.bool,
+    animateOut: React.PropTypes.bool,
+    caption: React.PropTypes.node,
+    index: React.PropTypes.number
   },
 
   getInitialState() {
