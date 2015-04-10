@@ -14,6 +14,7 @@ const SubNav = React.createClass({
     activeHref: React.PropTypes.string,
     activeKey: React.PropTypes.any,
     disabled: React.PropTypes.bool,
+    eventKey: React.PropTypes.any,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
     text: React.PropTypes.node,
