@@ -1,3 +1,11 @@
+v0.20.3 - Fri, 10 Apr 2015 19:50:22 GMT
+---------------------------------------
+
+- [3ecd393](../../commit/3ecd393) [fixed] Missing PropType Validations
+- [8a9e95c](../../commit/8a9e95c) [fixed] Include missing PropType validations
+- [6dfcf36](../../commit/6dfcf36) [changed] Internal variables classSet to classNames
+
+
 v0.20.2 - Tue, 07 Apr 2015 01:51:55 GMT
 ---------------------------------------
 
