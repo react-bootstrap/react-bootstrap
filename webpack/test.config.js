@@ -1,3 +1,3 @@
 import config from './webpack.config';
 
-export default config({test: true});
+export default config({test: true, development: true});
