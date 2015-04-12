@@ -111,6 +111,7 @@ const Input = React.createClass({
         input = (
           <Button {...this.props} componentClass='input' ref='input' key='input' />
         );
+        delete this.props.bsStyle;
         break;
       default:
         let className = this.isCheckboxOrRadio() || this.isFile() ? '' : 'form-control';
