@@ -51,6 +51,25 @@ describe('Input', function () {
     assert.equal(instance.getValue(), 'v');
   });
 
+  // for fixing bug #507
+  it('does not throw warning bsStyle=danger when type=submit', function () {
+    ReactTestUtils.renderIntoDocument(
+      <Input type="submit" bsStyle="danger" />
+    );
+
+    console.warn.called.should.be.false;
+  });
+
+  it('throws warning about wrong type for bsStyle=error when type=submit', function () {
+    ReactTestUtils.renderIntoDocument(
+      <Input type="submit" bsStyle="error" />
+    );
+
+    console.warn.called.should.be.true;
+    console.warn.calledWithMatch('propType: Invalid').should.be.true;
+    console.warn.reset(); // reset spy state for afterEach()
+  });
+
   it('renders a submit button element when type=submit', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="submit" bsStyle="danger" wrapperClassName='test' />
