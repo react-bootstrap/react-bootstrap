@@ -6,17 +6,6 @@ import DropdownButton from '../src/DropdownButton';
 import MenuItem from '../src/MenuItem';
 
 describe('Input', function () {
-  beforeEach(function() {
-    sinon.spy(console, 'warn');
-  });
-
-  afterEach(function() {
-    if (typeof console.warn.restore === 'function') {
-      console.warn.called.should.be.false;
-      console.warn.restore();
-    }
-  });
-
   it('renders children when type is not set', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input>
