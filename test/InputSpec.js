@@ -51,7 +51,7 @@ describe('Input', function () {
     assert.equal(instance.getValue(), 'v');
   });
 
-  it('renders a submit button element when type=submit', function () {
+  it.skip('renders a submit button element when type=submit', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="submit" bsStyle="danger" wrapperClassName='test' />
     );
