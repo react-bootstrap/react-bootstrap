@@ -1,4 +1,4 @@
-import { exec, spawn } from 'child-process-promise';
+import { exec } from 'child-process-promise';
 
 export default (version) => {
   console.log('Releasing: '.cyan + 'npm module'.green);

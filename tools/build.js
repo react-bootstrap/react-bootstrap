@@ -7,7 +7,6 @@ import lib from './lib/build';
 import docs from '../docs/build';
 import dist from './dist/build';
 import { copy } from './fs-utils';
-import { exec, spawn } from 'child-process-promise';
 
 import yargs from 'yargs';
 
@@ -48,4 +47,3 @@ export default function Build(noExitOnFailure) {
     return result;
   }
 }
-

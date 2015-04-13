@@ -1,6 +1,6 @@
 import from 'colors';
 import path from 'path';
-import { exec, spawn } from 'child-process-promise';
+import { exec } from 'child-process-promise';
 
 export default (repoRoot, version) => {
   return exec(`node_modules/.bin/changelog -t v${version}`)
