@@ -60,4 +60,4 @@ export default (options) => {
   return strategies.reduce((conf, strategy) => {
     return strategy(conf, options);
   }, config);
-}
+};

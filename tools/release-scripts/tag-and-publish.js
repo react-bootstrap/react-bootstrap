@@ -8,4 +8,4 @@ export default (version) => {
     .then(() => exec(`git push --tags`))
     .then(() => exec('npm publish'))
     .then(() => console.log('Released: '.cyan + 'npm module'.green));
-}
+};

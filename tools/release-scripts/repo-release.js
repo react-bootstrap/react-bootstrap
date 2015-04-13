@@ -30,4 +30,4 @@ export default (repo, srcFolder, tmpFolder, version) => {
     .then(() => exec(`cd ${tmpFolder} && git push --tags`))
     .then(() => exec(`rimraf ${tmpFolder}`))
     .then(() => console.log('Released: '.cyan + repo.green));
-}
+};

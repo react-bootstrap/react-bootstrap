@@ -9,4 +9,4 @@ import from './CodeMirror.css';
 export default {
   IS_NODE: false,
   CodeMirror
-}
+};
