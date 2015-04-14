@@ -13,19 +13,17 @@ class ListGroup extends React.Component {
 
     if (!this.props.children) {
       return this.renderDiv(items);
+    } else if (React.Children.count(this.props.children) === 1) {
+      let child = this.props.children;
+
+      childrenAnchors = child.props.href ? true : false;
+
     } else {
 
-      if (Array.isArray(this.props.children)) {
-        this.props.children.forEach((child) => {
-          if (child.props.href) {
-            childrenAnchors = true;
-          }
-        });
-      } else {
-        if (this.props.children.props.href) {
-          childrenAnchors = true;
-        }
-      }
+      childrenAnchors = Array.prototype.some.call(this.props.children, (child) => {
+        return child.props.href;
+      });
+
     }
 
     if (childrenAnchors){

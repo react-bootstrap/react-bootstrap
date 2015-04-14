@@ -13,7 +13,41 @@ describe('ListGroup', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
   });
 
-  it('Should support "ListGroupItem" children', function () {
+  it('Should support a single "ListGroupItem" child', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroup>
+        <ListGroupItem>Only Child</ListGroupItem>
+      </ListGroup>
+    );
+
+    let items = ReactTestUtils.scryRenderedComponentsWithType(instance, ListGroupItem);
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(items[0], 'list-group-item'));
+  });
+
+  it('Should output a "ul" when single "ListGroupItem" child is a list item', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroup>
+        <ListGroupItem>Only Child</ListGroupItem>
+      </ListGroup>
+    );
+
+    assert.equal(React.findDOMNode(instance).nodeName, 'UL');
+    assert.equal(React.findDOMNode(instance).firstChild.nodeName, 'LI');
+  });
+
+  it('Should output a "div" when single "ListGroupItem" child is an anchor', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroup>
+        <ListGroupItem href="#test">Only Child</ListGroupItem>
+      </ListGroup>
+    );
+
+    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
+    assert.equal(React.findDOMNode(instance).firstChild.nodeName, 'A');
+  });
+
+  it('Should support multiple "ListGroupItem" children', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroup>
         <ListGroupItem>1st Child</ListGroupItem>
