@@ -35,7 +35,7 @@
   "devDependencies": {
     "babel": "^4.7.0",
     "babel-core": "^4.7.4",
-    "babel-eslint": "^2.0.2",
+    "babel-eslint": "^3.0.1",
     "babel-loader": "^4.1.0",
     "bootstrap": "^3.3.4",
     "brfs": "^1.4.0",
