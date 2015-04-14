@@ -1,6 +1,6 @@
 /* eslint no-process-exit: 0 */
 
-import from 'colors';
+import 'colors';
 import path from 'path';
 import bower from './amd/build';
 import lib from './lib/build';
