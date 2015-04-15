@@ -15,7 +15,7 @@ Package.onUse(function(api) {
   api.use('reactjs:react@0.2.1');
   api.use('twbs:bootstrap@3.3.4', 'client');
   api.addFiles('dist/react-bootstrap.js');
-  api.export(['ReactBootstrap']); 
+  api.export(['ReactBootstrap']);
 });
 
 Package.onTest(function(api) {
