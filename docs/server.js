@@ -1,7 +1,6 @@
 import React from 'react';
 import express from 'express';
 import path from 'path';
-import url from 'url';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackConfigBuilder from '../webpack/webpack.config';

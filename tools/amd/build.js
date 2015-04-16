@@ -2,7 +2,7 @@ import _ from 'lodash';
 import path from 'path';
 import fsp from 'fs-promise';
 import { copy } from '../fs-utils';
-import { exec, spawn } from 'child-process-promise';
+import { exec } from 'child-process-promise';
 
 const repoRoot = path.resolve(__dirname, '../../');
 const amd = path.join(repoRoot, 'amd');
