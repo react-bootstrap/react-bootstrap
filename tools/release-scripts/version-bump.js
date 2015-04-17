@@ -1,4 +1,4 @@
-import from 'colors';
+import 'colors';
 import path from 'path';
 import fsp from 'fs-promise';
 import semver from 'semver';

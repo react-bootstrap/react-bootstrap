@@ -1,4 +1,4 @@
-import from 'colors';
+import 'colors';
 import { exec } from 'child-process-promise';
 
 function test() {
