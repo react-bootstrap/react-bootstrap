@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import constants from './constants';
+import styleMaps from './styleMaps';
 
 const Col = React.createClass({
   propTypes: {
@@ -33,8 +33,8 @@ const Col = React.createClass({
     let ComponentClass = this.props.componentClass;
     let classes = {};
 
-    Object.keys(constants.SIZES).forEach(function (key) {
-      let size = constants.SIZES[key];
+    Object.keys(styleMaps.SIZES).forEach(function (key) {
+      let size = styleMaps.SIZES[key];
       let prop = size;
       let classPart = size + '-';
 
