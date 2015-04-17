@@ -35,7 +35,7 @@
   "devDependencies": {
     "babel": "^4.7.0",
     "babel-core": "^4.7.4",
-    "babel-eslint": "^2.0.2",
+    "babel-eslint": "^3.0.1",
     "babel-loader": "^4.1.0",
     "bootstrap": "^3.3.4",
     "brfs": "^1.4.0",
@@ -46,7 +46,7 @@
     "colors": "^1.0.3",
     "css-loader": "^0.9.1",
     "es5-shim": "^4.1.0",
-    "eslint": "^0.18.0",
+    "eslint": "^0.19.0",
     "eslint-plugin-react": "^2.1.0",
     "express": "^4.12.3",
     "extract-text-webpack-plugin": "^0.3.8",

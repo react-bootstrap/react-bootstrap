@@ -1,7 +1,6 @@
-import from 'colors';
+import 'colors';
 import path from 'path';
-import fsp from 'fs-promise';
-import { exec, spawn } from 'child-process-promise';
+import { exec } from 'child-process-promise';
 
 const repoRoot = path.resolve(__dirname, '../../');
 const lib = path.join(repoRoot, 'lib');

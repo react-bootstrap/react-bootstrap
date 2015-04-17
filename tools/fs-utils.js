@@ -36,4 +36,4 @@ function copy(src, dest, options) {
 
 export default {
   copy
-}
+};

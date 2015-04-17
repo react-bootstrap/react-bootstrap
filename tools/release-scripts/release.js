@@ -2,7 +2,7 @@
 
 import path from 'path';
 import yargs from 'yargs';
-import { exec, spawn } from 'child-process-promise';
+import { exec } from 'child-process-promise';
 
 import preConditions from './pre-conditions';
 import versionBump from './version-bump';

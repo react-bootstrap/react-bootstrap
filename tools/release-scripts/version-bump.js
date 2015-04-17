@@ -1,8 +1,8 @@
-import from 'colors';
+import 'colors';
 import path from 'path';
 import fsp from 'fs-promise';
 import semver from 'semver';
-import { exec, spawn } from 'child-process-promise';
+import { exec } from 'child-process-promise';
 
 export default function(repoRoot, { preid, type }) {
   const packagePath = path.join(repoRoot, 'package.json');

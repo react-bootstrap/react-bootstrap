@@ -1,5 +1,5 @@
-import from 'colors';
-import { exec, spawn } from 'child-process-promise';
+import 'colors';
+import { exec } from 'child-process-promise';
 
 function test() {
   console.log('Running: '.cyan + 'tests'.green);

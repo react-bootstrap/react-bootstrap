@@ -1,7 +1,7 @@
-import from 'colors';
+import 'colors';
 import path from 'path';
 import fsp from 'fs-promise';
-import { exec, spawn } from 'child-process-promise';
+import { exec } from 'child-process-promise';
 import { copy } from '../fs-utils';
 
 const repoRoot = path.resolve(__dirname, '../../');
@@ -30,4 +30,4 @@ export default (repo, srcFolder, tmpFolder, version) => {
     .then(() => exec(`cd ${tmpFolder} && git push --tags`))
     .then(() => exec(`rimraf ${tmpFolder}`))
     .then(() => console.log('Released: '.cyan + repo.green));
-}
+};
