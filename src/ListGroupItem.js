@@ -12,7 +12,7 @@ const ListGroupItem = React.createClass({
     active: React.PropTypes.any,
     disabled: React.PropTypes.any,
     header: React.PropTypes.node,
-    listItem: React.PropTypes.node,
+    listItem: React.PropTypes.bool,
     onClick: React.PropTypes.func,
     eventKey: React.PropTypes.any,
     href: React.PropTypes.string,
@@ -43,7 +43,7 @@ const ListGroupItem = React.createClass({
   renderLi(classes) {
     return (
       <li
-        {...this.props} className={classSet(this.props.className, classes)}>
+        {...this.props} className={classNames(this.props.className, classes)}>
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </li>
     );
@@ -63,7 +63,7 @@ const ListGroupItem = React.createClass({
   renderSpan(classes) {
     return (
       <span
-        {...this.props} className={classSet(this.props.className, classes)}>
+        {...this.props} className={classNames(this.props.className, classes)}>
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </span>
     );

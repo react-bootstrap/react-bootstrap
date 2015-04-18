@@ -39,7 +39,7 @@ class ListGroup extends React.Component {
     );
 
     return (
-      <ul className={classSet(this.props.className, 'list-group')}>
+      <ul className={classNames(this.props.className, 'list-group')}>
         {listItems}
       </ul>
     );
