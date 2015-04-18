@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 const Grid = React.createClass({
   propTypes: {
@@ -20,7 +20,7 @@ const Grid = React.createClass({
     return (
       <ComponentClass
         {...this.props}
-        className={classSet(this.props.className, className)}>
+        className={classNames(this.props.className, className)}>
         {this.props.children}
       </ComponentClass>
     );

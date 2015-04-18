@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 import createChainedFunction from './utils/createChainedFunction';
 import BootstrapMixin from './BootstrapMixin';
@@ -64,7 +64,7 @@ const DropdownButton = React.createClass({
     return (
       <ButtonGroup
         bsSize={this.props.bsSize}
-        className={classSet(this.props.className, groupClasses)}>
+        className={classNames(this.props.className, groupClasses)}>
         {children}
       </ButtonGroup>
     );
@@ -78,7 +78,7 @@ const DropdownButton = React.createClass({
       };
 
     return (
-      <li className={classSet(this.props.className, classes)}>
+      <li className={classNames(this.props.className, classes)}>
         {children}
       </li>
     );

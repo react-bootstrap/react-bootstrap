@@ -60,4 +60,24 @@ describe('OverlayMixin', function () {
 
     assert.equal(instance.refs.overlay.getOverlayDOMNode(), null);
   });
+
+  it('Should render only an overlay', function() {
+    let OnlyOverlay = React.createClass({
+      mixins: [OverlayMixin],
+
+      render: function() {
+        return null;
+      },
+
+      renderOverlay: function() {
+        return this.props.overlay;
+      }
+    });
+
+    let overlayInstance = ReactTestUtils.renderIntoDocument(
+      <OnlyOverlay overlay={<div id="test1" />} />
+    );
+
+    assert.equal(overlayInstance.getOverlayDOMNode().nodeName, 'DIV');
+  });
 });

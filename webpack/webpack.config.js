@@ -17,7 +17,8 @@ const defaultOptions = {
 
 export default (options) => {
   options = _.merge({}, defaultOptions, options);
-  const environment = options.development ? 'development' : 'production';
+  const environment = options.test || options.development ?
+    'development' : 'production';
 
   const config = {
     entry: {
@@ -60,4 +61,4 @@ export default (options) => {
   return strategies.reduce((conf, strategy) => {
     return strategy(conf, options);
   }, config);
-}
+};

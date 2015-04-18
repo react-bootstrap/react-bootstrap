@@ -1,11 +1,12 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 const PageItem = React.createClass({
 
   propTypes: {
     href: React.PropTypes.string,
     target: React.PropTypes.string,
+    title: React.PropTypes.string,
     disabled: React.PropTypes.bool,
     previous: React.PropTypes.bool,
     next: React.PropTypes.bool,
@@ -29,7 +30,7 @@ const PageItem = React.createClass({
     return (
       <li
         {...this.props}
-        className={classSet(this.props.className, classes)}>
+        className={classNames(this.props.className, classes)}>
         <a
           href={this.props.href}
           title={this.props.title}

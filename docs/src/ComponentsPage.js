@@ -1,4 +1,4 @@
-/* eslint no-path-concat: 0 */
+/* eslint no-path-concat: 0, react/no-did-mount-set-state: 0 */
 
 import React from 'react';
 

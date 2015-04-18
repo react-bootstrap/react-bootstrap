@@ -1,6 +1,6 @@
 import React from 'react';
 import ValidComponentChildren from './utils/ValidComponentChildren';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 
 const Badge = React.createClass({
@@ -22,7 +22,7 @@ const Badge = React.createClass({
     return (
       <span
         {...this.props}
-        className={classSet(this.props.className, classes)}>
+        className={classNames(this.props.className, classes)}>
         {this.props.children}
       </span>
     );

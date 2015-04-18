@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 
 const Popover = React.createClass({
@@ -39,7 +39,7 @@ const Popover = React.createClass({
     };
 
     return (
-      <div {...this.props} className={classSet(this.props.className, classes)} style={style} title={null}>
+      <div {...this.props} className={classNames(this.props.className, classes)} style={style} title={null}>
         <div className="arrow" style={arrowStyle} />
         {this.props.title ? this.renderTitle() : null}
         <div className="popover-content">

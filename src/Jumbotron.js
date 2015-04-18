@@ -1,10 +1,10 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 const Jumbotron = React.createClass({
   render() {
     return (
-      <div {...this.props} className={classSet(this.props.className, 'jumbotron')}>
+      <div {...this.props} className={classNames(this.props.className, 'jumbotron')}>
         {this.props.children}
       </div>
     );

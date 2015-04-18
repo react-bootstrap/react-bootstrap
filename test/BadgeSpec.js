@@ -42,7 +42,7 @@ describe('Badge', function () {
 
   it('Should not have a badge class when empty', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Badge></Badge>
+      <Badge />
     );
     assert.notOk(instance.getDOMNode().className.match(/\bbadge\b/));
   });

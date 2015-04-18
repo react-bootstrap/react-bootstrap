@@ -3,17 +3,6 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import FormGroup from '../src/FormGroup';
 
 describe('FormGroup', function() {
-  beforeEach(function() {
-    sinon.spy(console, 'warn');
-  });
-
-  afterEach(function() {
-    if (typeof console.warn.restore === 'function') {
-      console.warn.called.should.be.false;
-      console.warn.restore();
-    }
-  });
-
   it('renders children', function() {
     let instance = ReactTestUtils.renderIntoDocument(
       <FormGroup>

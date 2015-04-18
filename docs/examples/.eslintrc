@@ -6,7 +6,7 @@
   "globals": {
     "mountNode",
     "React",
-    "classSet",
+    "classNames",
     "Accordion",
     "Alert",
     "Badge",

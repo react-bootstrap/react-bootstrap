@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 
 const Button = React.createClass({
@@ -54,7 +54,7 @@ const Button = React.createClass({
       <Component
         {...this.props}
         href={href}
-        className={classSet(this.props.className, classes)}
+        className={classNames(this.props.className, classes)}
         role="button">
         {this.props.children}
       </Component>
@@ -67,7 +67,7 @@ const Button = React.createClass({
     return (
       <Component
         {...this.props}
-        className={classSet(this.props.className, classes)}>
+        className={classNames(this.props.className, classes)}>
         {this.props.children}
       </Component>
     );
@@ -79,7 +79,7 @@ const Button = React.createClass({
     };
 
     return (
-      <li className={classSet(liClasses)}>
+      <li className={classNames(liClasses)}>
         {this.renderAnchor(classes)}
       </li>
     );

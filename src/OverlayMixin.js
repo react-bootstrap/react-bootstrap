@@ -1,5 +1,6 @@
 import React from 'react';
 import CustomPropTypes from './utils/CustomPropTypes';
+import domUtils from './utils/domUtils';
 
 export default {
   propTypes: {
@@ -63,6 +64,6 @@ export default {
   },
 
   getContainerDOMNode() {
-    return React.findDOMNode(this.props.container || document.body);
+    return React.findDOMNode(this.props.container) || domUtils.ownerDocument(this).body;
   }
 };

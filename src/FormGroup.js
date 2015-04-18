@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 class FormGroup extends React.Component {
   render() {
@@ -12,7 +12,7 @@ class FormGroup extends React.Component {
     };
 
     return (
-      <div className={classSet(classes, this.props.groupClassName)}>
+      <div className={classNames(classes, this.props.groupClassName)}>
         {this.props.children}
       </div>
     );

@@ -4,3 +4,10 @@ node_js:
   - "0.10"
   - "0.12"
   - "iojs"
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/006ca15725d53eab80e5
+    on_success: always
+    on_failure: always
+    on_start: false

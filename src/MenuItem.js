@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 const MenuItem = React.createClass({
   propTypes: {
@@ -48,7 +48,7 @@ const MenuItem = React.createClass({
 
     return (
       <li {...this.props} role="presentation" title={null} href={null}
-        className={classSet(this.props.className, classes)}>
+        className={classNames(this.props.className, classes)}>
         {children}
       </li>
     );

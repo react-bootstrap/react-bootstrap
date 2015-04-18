@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 class ListGroup extends React.Component {
@@ -47,7 +47,7 @@ class ListGroup extends React.Component {
 
   renderDiv(items) {
     return (
-      <div className={classSet(this.props.className, 'list-group')}>
+      <div className={classNames(this.props.className, 'list-group')}>
         {items}
       </div>
     );

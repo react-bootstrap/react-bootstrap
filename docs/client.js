@@ -1,9 +1,9 @@
-import from 'bootstrap/less/bootstrap.less';
-import from 'bootstrap/docs/assets/css/_src/docs.css';
-import from './assets/style.css';
+import 'bootstrap/less/bootstrap.less';
+import './assets/docs.css';
+import './assets/style.css';
 
-import from './assets/carousel.png';
-import from './assets/logo.png';
+import './assets/carousel.png';
+import './assets/logo.png';
 
 import React from 'react';
 import Router from 'react-router';

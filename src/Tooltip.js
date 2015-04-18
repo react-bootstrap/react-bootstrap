@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 
 const Tooltip = React.createClass({
@@ -37,7 +37,7 @@ const Tooltip = React.createClass({
     };
 
     return (
-        <div {...this.props} className={classSet(this.props.className, classes)} style={style}>
+        <div {...this.props} className={classNames(this.props.className, classes)} style={style}>
           <div className="tooltip-arrow" style={arrowStyle} />
           <div className="tooltip-inner">
             {this.props.children}

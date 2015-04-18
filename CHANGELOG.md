@@ -1,3 +1,47 @@
+v0.20.3 - Fri, 10 Apr 2015 19:50:22 GMT
+---------------------------------------
+
+- [3ecd393](../../commit/3ecd393) [fixed] Missing PropType Validations
+- [8a9e95c](../../commit/8a9e95c) [fixed] Include missing PropType validations
+- [6dfcf36](../../commit/6dfcf36) [changed] Internal variables classSet to classNames
+
+
+v0.20.2 - Tue, 07 Apr 2015 01:51:55 GMT
+---------------------------------------
+
+- [723ee4d](../../commit/723ee4d) [fixed] Release scripts usage of rimraf
+- [7175431](../../commit/7175431) [fixed] Don't try to access .ownerDocument on null
+- [a58cff9](../../commit/a58cff9) [fixed] Numerous ESlint warnings (Removes 145 warnings)
+- [c6c4108](../../commit/c6c4108) [added] Twitter follow link to docs page footer
+- [20472b9](../../commit/20472b9) [fixed] Windows build
+
+
+v0.20.1 - Sat, 04 Apr 2015 14:22:18 GMT
+---------------------------------------
+
+- [a060fbc](../../commit/a060fbc) [fixed] Re-add missing constants to public API
+
+
+v0.20.0 - Tue, 31 Mar 2015 13:04:40 GMT
+---------------------------------------
+
+- [f1438b5](../../commit/f1438b5) [changed] Updated eslint-plugin-react dev-dependency
+- [c8dda3f](../../commit/c8dda3f) [added] HuBoard badge and link
+- [ee0382e](../../commit/ee0382e) [fixed] Use .ownerDocument instead of root document
+- [182344a](../../commit/182344a) [changed] Updated express dev-dependency
+- [6edadbd](../../commit/6edadbd) [changed] Updated mocha dev-dependency
+- [64ac86d](../../commit/64ac86d) [changed] React dependency from 0.13.0 -> 0.13.1
+- [367b870](../../commit/367b870) [changed] Updated karma-chai dev-dependency
+- [1956d2a](../../commit/1956d2a) [changed] Updated style-loader dev-dependency
+- [76c87bf](../../commit/76c87bf) [changed] Updated ESLint dev-dependency
+- [84b9113](../../commit/84b9113) [changed] Update Bootstrap to 3.3.4
+- [bfb3e6c](../../commit/bfb3e6c) [added] `standalone` prop to Input, which will not render the `form-group` class
+- [721aacc](../../commit/721aacc) [fixed] Documentation on react install
+- [6907e03](../../commit/6907e03) [changed] Renamed src/main.js -> src/index.js
+- [5118b42](../../commit/5118b42) [added] Test for carousel control behaviour with wrap=true
+- [ea479db](../../commit/ea479db) [fixed] show carousel controls if wrap is enabled
+
+
 v0.19.1 - Thu, 26 Mar 2015 19:37:01 GMT
 ---------------------------------------
 

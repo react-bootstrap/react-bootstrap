@@ -1,5 +1,5 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 const Table = React.createClass({
   propTypes: {
@@ -19,7 +19,7 @@ const Table = React.createClass({
       'table-hover': this.props.hover
     };
     let table = (
-      <table {...this.props} className={classSet(this.props.className, classes)}>
+      <table {...this.props} className={classNames(this.props.className, classes)}>
         {this.props.children}
       </table>
     );

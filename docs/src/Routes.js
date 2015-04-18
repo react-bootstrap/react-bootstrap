@@ -17,4 +17,4 @@ export default (
     <Route name='getting-started' path='getting-started.html' handler={GettingStartedPage} />
     <Route name='components' path='components.html' handler={ComponentsPage} />
   </Route>
-)
+);

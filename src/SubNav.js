@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
@@ -11,7 +11,10 @@ const SubNav = React.createClass({
   propTypes: {
     onSelect: React.PropTypes.func,
     active: React.PropTypes.bool,
+    activeHref: React.PropTypes.string,
+    activeKey: React.PropTypes.any,
     disabled: React.PropTypes.bool,
+    eventKey: React.PropTypes.any,
     href: React.PropTypes.string,
     title: React.PropTypes.string,
     text: React.PropTypes.node,
@@ -95,7 +98,7 @@ const SubNav = React.createClass({
     };
 
     return (
-      <li {...this.props} className={classSet(this.props.className, classes)}>
+      <li {...this.props} className={classNames(this.props.className, classes)}>
         <a
           href={this.props.href}
           title={this.props.title}

@@ -1,8 +1,14 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import TransitionEvents from './utils/TransitionEvents';
 
 const TabPane = React.createClass({
+  propTypes: {
+    active:          React.PropTypes.bool,
+    animation:       React.PropTypes.bool,
+    onAnimateOutEnd: React.PropTypes.func
+  },
+
   getDefaultProps() {
     return {
       animation: true
@@ -56,7 +62,7 @@ const TabPane = React.createClass({
         animateOut: false
       });
 
-      if (typeof this.props.onAnimateOutEnd === 'function') {
+      if (this.props.onAnimateOutEnd) {
         this.props.onAnimateOutEnd();
       }
     }
@@ -71,7 +77,7 @@ const TabPane = React.createClass({
     };
 
     return (
-      <div {...this.props} className={classSet(this.props.className, classes)}>
+      <div {...this.props} className={classNames(this.props.className, classes)}>
         {this.props.children}
       </div>
     );

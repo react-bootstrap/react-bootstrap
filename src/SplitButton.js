@@ -1,5 +1,7 @@
+/* eslint react/prop-types: [1, {ignore: ["children", "className", "bsSize"]}]*/
+/* BootstrapMixin contains `bsSize` type validation */
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import DropdownStateMixin from './DropdownStateMixin';
 import Button from './Button';
@@ -13,8 +15,10 @@ const SplitButton = React.createClass({
     pullRight:     React.PropTypes.bool,
     title:         React.PropTypes.node,
     href:          React.PropTypes.string,
+    id:            React.PropTypes.string,
     target:        React.PropTypes.string,
     dropdownTitle: React.PropTypes.node,
+    dropup:        React.PropTypes.bool,
     onClick:       React.PropTypes.func,
     onSelect:      React.PropTypes.func,
     disabled:      React.PropTypes.bool
@@ -47,7 +51,7 @@ const SplitButton = React.createClass({
       <Button
         {...this.props}
         ref="dropdownButton"
-        className={classSet(this.props.className, 'dropdown-toggle')}
+        className={classNames(this.props.className, 'dropdown-toggle')}
         onClick={this.handleDropdownClick}
         title={null}
         href={null}
@@ -62,7 +66,7 @@ const SplitButton = React.createClass({
     return (
       <ButtonGroup
         bsSize={this.props.bsSize}
-        className={classSet(groupClasses)}
+        className={classNames(groupClasses)}
         id={this.props.id}>
         {button}
         {dropdownButton}

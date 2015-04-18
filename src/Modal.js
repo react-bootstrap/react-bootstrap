@@ -1,7 +1,8 @@
 import React from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import FadeMixin from './FadeMixin';
+import domUtils from './utils/domUtils';
 import EventListener from './utils/EventListener';
 
 
@@ -51,10 +52,10 @@ const Modal = React.createClass({
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
-        className={classSet(this.props.className, classes)}
+        className={classNames(this.props.className, classes)}
         onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
         ref="modal">
-        <div className={classSet(dialogClasses)}>
+        <div className={classNames(dialogClasses)}>
           <div className="modal-content" style={{overflow: 'hidden'}}>
             {this.props.title ? this.renderHeader() : null}
             {this.props.children}
@@ -80,7 +81,7 @@ const Modal = React.createClass({
 
     return (
       <div>
-        <div className={classSet(classes)} ref="backdrop" onClick={onClick} />
+        <div className={classNames(classes)} ref="backdrop" onClick={onClick} />
         {modal}
       </div>
     );
@@ -101,7 +102,7 @@ const Modal = React.createClass({
     classes['bg-' + style] = style;
     classes['text-' + style] = style;
 
-    let className = classSet(classes);
+    let className = classNames(classes);
 
     return (
       <div className={className}>
@@ -128,9 +129,10 @@ const Modal = React.createClass({
 
   componentDidMount() {
     this._onDocumentKeyupListener =
-      EventListener.listen(document, 'keyup', this.handleDocumentKeyUp);
+      EventListener.listen(domUtils.ownerDocument(this), 'keyup', this.handleDocumentKeyUp);
 
-    let container = (this.props.container && React.findDOMNode(this.props.container)) || document.body;
+    let container = (this.props.container && React.findDOMNode(this.props.container)) ||
+          domUtils.ownerDocument(this).body;
     container.className += container.className.length ? ' modal-open' : 'modal-open';
 
     if (this.props.backdrop) {
@@ -146,7 +148,8 @@ const Modal = React.createClass({
 
   componentWillUnmount() {
     this._onDocumentKeyupListener.remove();
-    let container = (this.props.container && React.findDOMNode(this.props.container)) || document.body;
+    let container = (this.props.container && React.findDOMNode(this.props.container)) ||
+          domUtils.ownerDocument(this).body;
     container.className = container.className.replace(/ ?modal-open/, '');
   },
 

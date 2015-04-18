@@ -16,7 +16,7 @@ import Popover from '../src/Popover';
 import Carousel from '../src/Carousel';
 import CarouselItem from '../src/CarouselItem';
 
-import from './assets/carousel.png';
+import './assets/carousel.png';
 
 const dropdownInstance = (
   <DropdownButton title='Dropdown'>

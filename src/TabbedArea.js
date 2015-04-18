@@ -21,14 +21,17 @@ const TabbedArea = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
-    bsStyle: React.PropTypes.oneOf(['tabs','pills']),
+    activeKey: React.PropTypes.any,
+    defaultActiveKey: React.PropTypes.any,
+    bsStyle: React.PropTypes.oneOf(['tabs', 'pills']),
     animation: React.PropTypes.bool,
+    id: React.PropTypes.string,
     onSelect: React.PropTypes.func
   },
 
   getDefaultProps() {
     return {
-      bsStyle: "tabs",
+      bsStyle: 'tabs',
       animation: true
     };
   },

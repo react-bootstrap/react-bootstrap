@@ -1,6 +1,6 @@
 import React, { cloneElement } from 'react';
 import BootstrapMixin from './BootstrapMixin';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 
 const ListGroupItem = React.createClass({
@@ -53,7 +53,7 @@ const ListGroupItem = React.createClass({
     return (
       <a
         {...this.props}
-        className={classSet(this.props.className, classes)}
+        className={classNames(this.props.className, classes)}
       >
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </a>
@@ -74,7 +74,7 @@ const ListGroupItem = React.createClass({
     if (React.isValidElement(this.props.header)) {
       header = cloneElement(this.props.header, {
         key: 'header',
-        className: classSet(this.props.header.props.className, 'list-group-item-heading')
+        className: classNames(this.props.header.props.className, 'list-group-item-heading')
       });
     } else {
       header = (

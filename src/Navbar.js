@@ -1,6 +1,6 @@
 import React, { cloneElement } from 'react';
 import BootstrapMixin from './BootstrapMixin';
-import classSet from 'classnames';
+import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
@@ -73,7 +73,7 @@ const Navbar = React.createClass({
     classes['navbar-inverse'] = this.props.inverse;
 
     return (
-      <ComponentClass {...this.props} className={classSet(this.props.className, classes)}>
+      <ComponentClass {...this.props} className={classNames(this.props.className, classes)}>
         <div className={this.props.fluid ? 'container-fluid' : 'container'}>
           {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderHeader() : null}
           {ValidComponentChildren.map(this.props.children, this.renderChild)}
@@ -97,7 +97,7 @@ const Navbar = React.createClass({
     if (this.props.brand) {
       if (React.isValidElement(this.props.brand)) {
         brand = cloneElement(this.props.brand, {
-          className: classSet(this.props.brand.props.className, 'navbar-brand')
+          className: classNames(this.props.brand.props.className, 'navbar-brand')
         });
       } else {
         brand = <span className="navbar-brand">{this.props.brand}</span>;
@@ -118,7 +118,7 @@ const Navbar = React.createClass({
     if (React.isValidElement(this.props.toggleButton)) {
 
       return cloneElement(this.props.toggleButton, {
-        className: classSet(this.props.toggleButton.props.className, 'navbar-toggle'),
+        className: classNames(this.props.toggleButton.props.className, 'navbar-toggle'),
         onClick: createChainedFunction(this.handleToggle, this.props.toggleButton.props.onClick)
       });
     }

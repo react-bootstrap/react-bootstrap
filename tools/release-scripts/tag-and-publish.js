@@ -1,4 +1,4 @@
-import { exec, spawn } from 'child-process-promise';
+import { exec } from 'child-process-promise';
 
 export default (version) => {
   console.log('Releasing: '.cyan + 'npm module'.green);
@@ -8,4 +8,4 @@ export default (version) => {
     .then(() => exec(`git push --tags`))
     .then(() => exec('npm publish'))
     .then(() => console.log('Released: '.cyan + 'npm module'.green));
-}
+};

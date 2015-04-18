@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import classSet from 'classnames';
+import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
@@ -9,6 +9,7 @@ const Carousel = React.createClass({
   propTypes: {
     slide: React.PropTypes.bool,
     indicators: React.PropTypes.bool,
+    interval: React.PropTypes.number,
     controls: React.PropTypes.bool,
     pauseOnHover: React.PropTypes.bool,
     wrap: React.PropTypes.bool,
@@ -142,7 +143,7 @@ const Carousel = React.createClass({
     return (
       <div
         {...this.props}
-        className={classSet(this.props.className, classes)}
+        className={classNames(this.props.className, classes)}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}>
         {this.props.indicators ? this.renderIndicators() : null}
