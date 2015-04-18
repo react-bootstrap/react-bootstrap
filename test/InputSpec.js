@@ -40,7 +40,7 @@ describe('Input', function () {
     assert.equal(instance.getValue(), 'v');
   });
 
-  it.skip('renders a submit button element when type=submit', function () {
+  it('renders a submit button element when type=submit', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="submit" bsStyle="danger" wrapperClassName='test' />
     );
@@ -48,6 +48,24 @@ describe('Input', function () {
     let node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input').getDOMNode();
     assert.equal(node.getAttribute('type'), 'submit');
     assert.equal(node.getAttribute('class'), 'btn btn-danger');
+  });
+
+  it('must not throw warning when bsStyle=danger and type=submit', function () {
+    ReactTestUtils.renderIntoDocument(
+      <Input type="submit" bsStyle="danger" />
+    );
+
+    console.warn.called.should.be.false;
+  });
+
+  it('throws warning about wrong type for bsStyle=error when type=submit', function () {
+    ReactTestUtils.renderIntoDocument(
+      <Input type="submit" bsStyle="error" />
+    );
+
+    console.warn.called.should.be.true;
+    console.warn.calledWithMatch('propType: Invalid').should.be.true;
+    console.warn.reset(); // reset state for afterEach()
   });
 
   it('renders a p element when type=static', function () {

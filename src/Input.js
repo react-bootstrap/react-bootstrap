@@ -245,7 +245,12 @@ const Input = React.createClass({
       ];
     }
 
-    return <FormGroup {...this.props}>{children}</FormGroup>;
+    if (this.props.type === 'submit') {
+      let {bsStyle, ...other} = this.props; /* eslint no-unused-vars: 0 */
+      return <FormGroup {...other}>{children}</FormGroup>;
+    } else {
+      return <FormGroup {...this.props}>{children}</FormGroup>;
+    }
   }
 });
 
