@@ -250,6 +250,7 @@ const ReactPlayground = React.createClass({
         /* eslint-enable */
       }
     } catch (err) {
+      console.log(err);
       this.setTimeout(() => {
         React.render(
           <Alert bsStyle='danger'>{err.toString()}</Alert>,
