@@ -33,10 +33,10 @@
     "react": ">=0.13"
   },
   "devDependencies": {
-    "babel": "^4.7.0",
-    "babel-core": "^4.7.4",
+    "babel": "^5.1.10",
+    "babel-core": "^5.1.10",
     "babel-eslint": "^3.0.1",
-    "babel-loader": "^4.1.0",
+    "babel-loader": "^5.0.0",
     "bootstrap": "^3.3.4",
     "brfs": "^1.4.0",
     "chai": "^2.2.0",
