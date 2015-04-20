@@ -18,13 +18,6 @@ Under active development - APIs will change.
 
 See the [documentation][documentation] with live editable examples.
 
-## Authors
-
-- [Stephen J. Collings](https://github.com/stevoland)
-- [Pieter Vanderwerff](https://github.com/pieterv)
-
-and many [contributors](https://github.com/react-bootstrap/react-bootstrap/graphs/contributors)
-
 ## Related modules
 
 - [react-router-bootstrap][react-router-bootstrap] - Integration with [react-router][react-router].

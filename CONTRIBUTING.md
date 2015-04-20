@@ -3,6 +3,13 @@
 We welcome community support with both pull requests and reporting bugs. Please
 don't hesitate to jump in.
 
+## Review others work
+
+Check out the list of outstanding pull requests if there is something you might
+be interested in. Maybe somebody is trying to fix that stupid bug that bothers
+you. Review the PR. Do you have any better ideas how to fix this problem? Let us
+know...
+
 ## Current Issues
 
 [![HuBoard][huboard-badge]][huboard]
@@ -52,6 +59,10 @@ check out these [5 useful tips for a better commit message][commit-message]
 Please update the docs with any API changes, the code and docs should always be
 in sync.
 
+## Collaborators
+
+Please see the [Maintaining](./MAINTAINING.md) documentation.
+
 [huboard-badge]: https://img.shields.io/badge/Hu-Board-7965cc.svg
 [huboard]: https://huboard.com/react-bootstrap/react-bootstrap
 
@@ -60,4 +71,3 @@ in sync.
 [editorconfig]: http://editorconfig.org
 [eslint]: http://eslint.org
 [commit-message]: http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message
-
