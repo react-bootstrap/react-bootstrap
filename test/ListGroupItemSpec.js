@@ -12,11 +12,19 @@ describe('ListGroupItem', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
   });
 
-  it('Should output a "anchor" if "href" prop is set', function () {
+  it('Should output an "anchor" if "href" prop is set', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ListGroupItem href='#test'>Achor</ListGroupItem>
+      <ListGroupItem href='#test'>Anchor</ListGroupItem>
     );
     assert.equal(instance.getDOMNode().nodeName, 'A');
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
+  });
+
+  it('Should output an "li" if "listItem" prop is set', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroupItem listItem>Item 1</ListGroupItem>
+    );
+    assert.equal(instance.getDOMNode().nodeName, 'LI');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
   });
 
@@ -65,5 +73,4 @@ describe('ListGroupItem', function () {
     assert.equal(instance.getDOMNode().lastChild.innerText, 'Item text');
     assert.ok(instance.getDOMNode().lastChild.className.match(/\blist-group-item-text\b/));
   });
-
 });
