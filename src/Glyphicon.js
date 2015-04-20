@@ -1,13 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
-import constants from './constants';
+import styleMaps from './styleMaps';
 
 const Glyphicon = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
-    glyph: React.PropTypes.oneOf(constants.GLYPHS).isRequired
+    glyph: React.PropTypes.oneOf(styleMaps.GLYPHS).isRequired
   },
 
   getDefaultProps() {

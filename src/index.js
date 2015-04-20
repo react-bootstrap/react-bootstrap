@@ -47,7 +47,7 @@ import Table from './Table';
 import TabPane from './TabPane';
 import Tooltip from './Tooltip';
 import Well from './Well';
-import constants from './constants';
+import styleMaps from './styleMaps';
 
 export default {
   Accordion,
@@ -99,5 +99,5 @@ export default {
   TabPane,
   Tooltip,
   Well,
-  constants
+  styleMaps
 };

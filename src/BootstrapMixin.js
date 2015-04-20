@@ -1,28 +1,28 @@
-import React from 'react';
-import constants from './constants';
+import styleMaps from './styleMaps';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 const BootstrapMixin = {
   propTypes: {
-    bsClass: React.PropTypes.oneOf(Object.keys(constants.CLASSES)),
-    bsStyle: React.PropTypes.oneOf(Object.keys(constants.STYLES)),
-    bsSize: React.PropTypes.oneOf(Object.keys(constants.SIZES))
+    bsClass: CustomPropTypes.keyOf(styleMaps.CLASSES),
+    bsStyle: CustomPropTypes.keyOf(styleMaps.STYLES),
+    bsSize: CustomPropTypes.keyOf(styleMaps.SIZES)
   },
 
   getBsClassSet() {
     let classes = {};
 
-    let bsClass = this.props.bsClass && constants.CLASSES[this.props.bsClass];
+    let bsClass = this.props.bsClass && styleMaps.CLASSES[this.props.bsClass];
     if (bsClass) {
       classes[bsClass] = true;
 
       let prefix = bsClass + '-';
 
-      let bsSize = this.props.bsSize && constants.SIZES[this.props.bsSize];
+      let bsSize = this.props.bsSize && styleMaps.SIZES[this.props.bsSize];
       if (bsSize) {
         classes[prefix + bsSize] = true;
       }
 
-      let bsStyle = this.props.bsStyle && constants.STYLES[this.props.bsStyle];
+      let bsStyle = this.props.bsStyle && styleMaps.STYLES[this.props.bsStyle];
       if (this.props.bsStyle) {
         classes[prefix + bsStyle] = true;
       }
@@ -32,7 +32,7 @@ const BootstrapMixin = {
   },
 
   prefixClass(subClass) {
-    return constants.CLASSES[this.props.bsClass] + '-' + subClass;
+    return styleMaps.CLASSES[this.props.bsClass] + '-' + subClass;
   }
 };
 
