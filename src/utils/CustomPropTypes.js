@@ -13,7 +13,16 @@ let CustomPropTypes = {
    * @param componentName
    * @returns {Error|undefined}
    */
-  mountable: createMountableChecker()
+  mountable: createMountableChecker(),
+  /**
+   * Checks whether a prop matches a key of an associated object
+   *
+   * @param props
+   * @param propName
+   * @param componentName
+   * @returns {Error|undefined}
+   */
+  keyOf: createKeyOfChecker
 };
 
 /**
@@ -54,6 +63,20 @@ function createMountableChecker() {
     }
   }
 
+  return createChainableTypeChecker(validate);
+}
+
+function createKeyOfChecker(obj) {
+  function validate(props, propName, componentName) {
+    let propValue = props[propName];
+    if (!obj.hasOwnProperty(propValue)) {
+      let valuesString = JSON.stringify(Object.keys(obj));
+      return new Error(
+        `Invalid prop '${propName}' of value '${propValue}' ` +
+        `supplied to '${componentName}', expected one of ${valuesString}.`
+      );
+    }
+  }
   return createChainableTypeChecker(validate);
 }
 

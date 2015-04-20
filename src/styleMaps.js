@@ -1,4 +1,4 @@
-export default {
+const styleMaps = {
   CLASSES: {
     'alert': 'alert',
     'button': 'btn',
@@ -30,6 +30,9 @@ export default {
     'inline': 'inline',
     'tabs': 'tabs',
     'pills': 'pills'
+  },
+  addStyle: function(name) {
+    styleMaps.STYLES[name] = name;
   },
   SIZES: {
     'large': 'lg',
@@ -299,3 +302,5 @@ export default {
     'menu-up'
   ]
 };
+
+export default styleMaps;
