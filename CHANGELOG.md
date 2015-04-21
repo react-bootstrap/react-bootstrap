@@ -1,3 +1,17 @@
+v0.21.0 - Tue, 21 Apr 2015 13:38:38 GMT
+---------------------------------------
+
+- [e92a64b](../../commit/e92a64b) [fixed] Handle multiple children in Badge
+- [c1b189f](../../commit/c1b189f) [changed] Updated babel* tools. dev-dependency
+- [a58eab5](../../commit/a58eab5) [fixed] Fix 'import from' => 'import'
+- [276c2bc](../../commit/276c2bc) [fixed] ProgressBar percentage issue when stacked
+- [e1c95b3](../../commit/e1c95b3) [changed] Renamed constants to styleMaps and added styleMaps.addStyle()
+- [20b608f](../../commit/20b608f) [fixed] Add missed semicolons.
+- [2111799](../../commit/2111799) [fixed] Remove unused variables.
+- [0e6b62a](../../commit/0e6b62a) [fixed] typo
+- [0c87128](../../commit/0c87128) [fixed] ListGroup outputs <ul> or <div> depending on ListGroupItem (defaults to <ul> if no ListGroupItem). ListGroupItem outputs <li> or <a> if href prop is set.
+
+
 v0.20.3 - Fri, 10 Apr 2015 19:50:22 GMT
 ---------------------------------------
 
