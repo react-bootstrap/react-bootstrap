@@ -9,7 +9,7 @@ v0.21.0 - Tue, 21 Apr 2015 13:38:38 GMT
 - [20b608f](../../commit/20b608f) [fixed] Add missed semicolons.
 - [2111799](../../commit/2111799) [fixed] Remove unused variables.
 - [0e6b62a](../../commit/0e6b62a) [fixed] typo
-- [0c87128](../../commit/0c87128) [fixed] ListGroup outputs <ul> or <div> depending on ListGroupItem (defaults to <ul> if no ListGroupItem). ListGroupItem outputs <li> or <a> if href prop is set.
+- [0c87128](../../commit/0c87128) [fixed] `ListGroup` outputs `<ul>` or `<div>` depending on `ListGroupItem` (defaults to `<ul>` if no `ListGroupItem`). `ListGroupItem` outputs `<li>` or `<a>` if `href` prop is set.
 
 
 v0.20.3 - Fri, 10 Apr 2015 19:50:22 GMT
