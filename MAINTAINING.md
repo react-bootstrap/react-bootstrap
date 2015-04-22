@@ -18,7 +18,7 @@ style board to track and prioritize issues.
 
 ## Merging a pull request
 
-Please, make sure: 
+Please, make sure:
 
 - Travis build is green
 - At least one collaborator (other than you) approves the PR
@@ -84,3 +84,38 @@ guidelines are followed. If it is discovered that we have pushed a release in
 violation of semver, than a patch release reverting the offending change should
 be pushed as soon as possible to correct the error. The offending change can
 then be re-applied and released with the proper version bump.
+
+## Live releasing the documentation
+
+The documentation release script does a similar job to the release script except
+that it doesn't publish to npm. It will auto tag the current branch with
+a pre "docs" tag, and will push to documentation repository.
+
+For a given tag (lets say `0.22.1`) the first docs tag would be `0.22.1-docs.0`.
+In order to tags to be incremental and in order to include all the previous docs
+changes, make sure that if a docs tags exists for the current release,
+that you start from that tag.
+
+To live patch the documentation in between release follow these steps
+
+0. Find the latest documentation release.
+  - Check the latest release tag (lets say `v0.22.1`).
+  - Look for a docs-release tag for that version ex: `v0.22.1-docs.X`
+  - If one exists, check-it-out. If not checkout the latest release tag.
+  - *Note: Checkout the tag and not master directly because some live
+   documentation changes on master that could related to new components
+   or updates for the upcoming release*
+0. Create a new branch from there (for example `git checkout -b docs/v0.22.1`)
+0. Cherry-pick the commits you want to include in the live update
+`git cherry-pick <commit-ish>...`
+0. Use the release-docs script to push and tag to the documentation repository.
+
+*Note: The branch name you checkout to cherry-picked the commit is not enforced.
+Though keeping similar names ex: `docs/<version>` helps finding the branch
+easily.*
+
+Example usage of release-docs script:
+
+```bash
+$ ./tools/release-docs
+```
