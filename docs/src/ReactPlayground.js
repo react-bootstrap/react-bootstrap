@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classnames';
+import * as modClassNames from 'classnames';
 import * as modAccordion from '../../src/Accordion';
 import * as modAlert from '../../src/Alert';
 import * as modBadge from '../../src/Badge';
@@ -45,6 +45,7 @@ import * as modWell from '../../src/Well';
 import {CodeMirror, IS_NODE} from './CodeMirror';
 import babel from 'babel-core/browser';
 
+const classNames = modClassNames.default;
 /* eslint-disable */
 const Accordion = modAccordion.default;
 const Alert = modAlert.default;
@@ -279,8 +280,8 @@ const ReactPlayground = React.createClass({
       console.error(e);
     }
 
+    let compiledCode = this.compileCode();
     try {
-      let compiledCode = this.compileCode();
       if (this.props.renderCode) {
         React.render(
           <CodeMirrorEditor codeText={compiledCode} readOnly={true} />,
@@ -292,7 +293,7 @@ const ReactPlayground = React.createClass({
         /* eslint-enable */
       }
     } catch (err) {
-      console.log(err);
+      console.log(err, compiledCode);
       this.setTimeout(() => {
         React.render(
           <Alert bsStyle='danger'>{err.toString()}</Alert>,
