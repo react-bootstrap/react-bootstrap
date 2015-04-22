@@ -32,7 +32,7 @@ const Navbar = React.createClass({
       bsClass: 'navbar',
       bsStyle: 'default',
       role: 'navigation',
-      componentClass: 'Nav'
+      componentClass: 'nav'
     };
   },
 
