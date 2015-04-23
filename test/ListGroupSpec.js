@@ -25,6 +25,19 @@ describe('ListGroup', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(items[0], 'list-group-item'));
   });
 
+  it('Should support a single "ListGroupItem" child contained in an array', function () {
+    let child = [<ListGroupItem key={42}>Only Child in array</ListGroupItem>];
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroup>
+        {child}
+      </ListGroup>
+    );
+
+    let items = ReactTestUtils.scryRenderedComponentsWithType(instance, ListGroupItem);
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(items[0], 'list-group-item'));
+  });
+
   it('Should output a "ul" when single "ListGroupItem" child is a list item', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroup>
@@ -52,6 +65,26 @@ describe('ListGroup', function () {
       <ListGroup>
         <ListGroupItem>1st Child</ListGroupItem>
         <ListGroupItem>2nd Child</ListGroupItem>
+      </ListGroup>
+    );
+
+    let items = ReactTestUtils.scryRenderedComponentsWithType(instance, ListGroupItem);
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(items[0], 'list-group-item'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(items[1], 'list-group-item'));
+  });
+
+  it('Should support multiple "ListGroupItem" children including a subset contained in an array', function () {
+    let itemArray = [
+      <ListGroupItem key={0}>2nd Child nested</ListGroupItem>,
+      <ListGroupItem key={1}>3rd Child nested</ListGroupItem>
+    ];
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroup>
+        <ListGroupItem>1st Child</ListGroupItem>
+        {itemArray}
+        <ListGroupItem>4th Child</ListGroupItem>
       </ListGroup>
     );
 

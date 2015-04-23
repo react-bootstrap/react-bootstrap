@@ -13,7 +13,7 @@ class ListGroup extends React.Component {
 
     if (!this.props.children) {
       return this.renderDiv(items);
-    } else if (React.Children.count(this.props.children) === 1) {
+    } else if (React.Children.count(this.props.children) === 1 && !Array.isArray(this.props.children)) {
       let child = this.props.children;
 
       childrenAnchors = child.props.href ? true : false;
@@ -21,7 +21,9 @@ class ListGroup extends React.Component {
     } else {
 
       childrenAnchors = Array.prototype.some.call(this.props.children, (child) => {
-        return child.props.href;
+        return !Array.isArray(child) ? child.props.href : Array.prototype.some.call(child, (subChild) => {
+            return subChild.props.href;
+        });
       });
 
     }
