@@ -1,6 +1,4 @@
 /* eslint no-process-exit: 0 */
-
-import path from 'path';
 import yargs from 'yargs';
 import { exec } from 'child-process-promise';
 
@@ -11,6 +9,8 @@ import repoRelease from './repo-release';
 import tagAndPublish from './tag-and-publish';
 import test from './test';
 import build from '../build';
+
+import { repoRoot, bowerRepo, bowerRoot, tmpBowerRepo, docsRoot, docsRepo, tmpDocsRepo } from './constants';
 
 const yargsConf = yargs
   .usage('Usage: $0 <version> [--preid <identifier>]')
@@ -30,16 +30,6 @@ const yargsConf = yargs
 const argv = yargsConf.argv;
 
 let version;
-const repoRoot = path.resolve(__dirname, '../../');
-
-const bowerRepo = 'git@github.com:react-bootstrap/react-bootstrap-bower.git';
-const docsRepo = 'git@github.com:react-bootstrap/react-bootstrap.github.io.git';
-
-const bowerRoot = path.join(repoRoot, 'amd/');
-const docsRoot = path.join(repoRoot, 'docs-built/');
-
-const tmpBowerRepo = path.join(repoRoot, 'tmp-bower-repo');
-const tmpDocsRepo = path.join(repoRoot, 'tmp-docs-repo');
 
 const versionBumpOptions = {
   preid: argv.preid,
