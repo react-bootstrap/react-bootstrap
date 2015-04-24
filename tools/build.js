@@ -7,6 +7,7 @@ import lib from './lib/build';
 import docs from '../docs/build';
 import dist from './dist/build';
 import { copy } from './fs-utils';
+import { setExecOptions } from './exec';
 
 import yargs from 'yargs';
 
@@ -19,7 +20,14 @@ const argv = yargs
     demand: false,
     default: false
   })
+  .option('verbose', {
+    demand: false,
+    default: false,
+    describe: 'Increased debug output'
+  })
   .argv;
+
+setExecOptions(argv);
 
 export default function Build(noExitOnFailure) {
   if (argv.docsOnly) {

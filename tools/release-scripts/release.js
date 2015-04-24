@@ -1,6 +1,6 @@
 /* eslint no-process-exit: 0 */
 import yargs from 'yargs';
-import { exec } from 'child-process-promise';
+import { exec, safeExec, setExecOptions } from '../exec';
 
 import preConditions from './pre-conditions';
 import versionBump from './version-bump';
@@ -10,12 +10,13 @@ import tagAndPublish from './tag-and-publish';
 import test from './test';
 import build from '../build';
 
-import { repoRoot, bowerRepo, bowerRoot, tmpBowerRepo, docsRoot, docsRepo, tmpDocsRepo } from './constants';
+import { repoRoot, bowerRepo, bowerRoot, tmpBowerRepo, docsRoot, docsRepo, tmpDocsRepo } from '../constants';
 
 const yargsConf = yargs
   .usage('Usage: $0 <version> [--preid <identifier>]')
   .example('$0 minor --preid beta', 'Release with minor version bump with pre-release tag')
   .example('$0 major', 'Release with major version bump')
+  .example('$0 major --dry-run', 'Release dry run with patch version bump')
   .example('$0 --preid beta', 'Release same version with pre-release bump')
   .command('patch', 'Release patch')
   .command('minor', 'Release minor')
@@ -25,9 +26,21 @@ const yargsConf = yargs
     demand: false,
     describe: 'pre-release identifier',
     type: 'string'
+  })
+  .option('dry-run', {
+    alias: 'n',
+    demand: false,
+    default: false,
+    describe: 'Execute command in dry run mode. Will not commit, tag, push, or publish anything. Userful for testing.'
+  })
+  .option('verbose', {
+    demand: false,
+    default: false,
+    describe: 'Increased debug output'
   });
 
 const argv = yargsConf.argv;
+setExecOptions(argv);
 
 let version;
 
@@ -61,7 +74,7 @@ preConditions()
           });
       });
   })
-  .then(() => exec(`git commit -m "Release v${version}"`))
+  .then(() => safeExec(`git commit -m "Release v${version}"`))
   .then(() => Promise.all([
     tagAndPublish(version),
     repoRelease(bowerRepo, bowerRoot, tmpBowerRepo, version),
@@ -70,7 +83,11 @@ preConditions()
   .then(() => console.log('Version '.cyan + `v${version}`.green + ' released!'.cyan))
   .catch(err => {
     if (!err.__handled) {
-      console.error(err.message.red);
+      if (argv.verbose) {
+        console.error(err.stack.red);
+      } else {
+        console.error(err.toString().red);
+      }
     }
 
     process.exit(1);

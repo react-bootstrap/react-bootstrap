@@ -2,7 +2,7 @@ import 'colors';
 import path from 'path';
 import fsp from 'fs-promise';
 import semver from 'semver';
-import { exec } from 'child-process-promise';
+import { safeExec } from '../exec';
 
 export default function(repoRoot, { preid, type }) {
   const packagePath = path.join(repoRoot, 'package.json');
@@ -35,7 +35,7 @@ export default function(repoRoot, { preid, type }) {
       json.version = version;
 
       return fsp.writeFile(packagePath, JSON.stringify(json, null, 2))
-        .then(() => exec(`git add ${packagePath}`))
+        .then(() => safeExec(`git add ${packagePath}`))
         .then(() => json.version);
     });
 }
