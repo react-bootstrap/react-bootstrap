@@ -51,6 +51,7 @@ export default {
   NavStacked:                    require('fs').readFileSync(__dirname + '/../examples/NavStacked.js', 'utf8'),
   NavJustified:                  require('fs').readFileSync(__dirname + '/../examples/NavJustified.js', 'utf8'),
   NavbarBasic:                   require('fs').readFileSync(__dirname + '/../examples/NavbarBasic.js', 'utf8'),
+  NavbarBrand:                   require('fs').readFileSync(__dirname + '/../examples/NavbarBrand.js', 'utf8'),
   NavbarCollapsable:             require('fs').readFileSync(__dirname + '/../examples/NavbarCollapsable.js', 'utf8'),
   CollapsableNav:                require('fs').readFileSync(__dirname + '/../examples/CollapsableNav.js', 'utf8'),
   TabbedAreaUncontrolled:        require('fs').readFileSync(__dirname + '/../examples/TabbedAreaUncontrolled.js', 'utf8'),
