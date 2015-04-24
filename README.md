@@ -12,7 +12,7 @@
 [![devDependency Status][dev-deps-badge]][dev-deps]
 [![peerDependency Status][peer-deps-badge]][peer-deps]
 
-Under active development - APIs will change.
+__Under active development - APIs will change.__ Check out the [1.0.0 Roadmap](https://github.com/react-bootstrap/react-bootstrap/wiki#100-roadmap) and [Contributing Guidelines][contributing] to see where you can help out.  
 
 ## Docs
 
