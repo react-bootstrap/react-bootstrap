@@ -335,12 +335,16 @@ const ComponentsPage = React.createClass({
                 <div className='bs-docs-section'>
                   <h1 id='navbars' className='page-header'>Navbars <small>Navbar, Nav, NavItem</small></h1>
                   <h2 id='navbars-examples'>Example navbars</h2>
-                  <p>You can specify a brand by passing a renderable component or string in <code>brand</code></p>
                   <p>Navbars are by default accessible and will provide <code>role='navigation'</code>.</p>
                   <p>They also supports all the different Bootstrap classes as properties. Just camelCase the css class and remove navbar from it. For example <code>navbar-fixed-top</code> becomes the property <code>fixedTop</code>. The different properties are <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>, <code>inverse</code>, <code>fluid</code>.</p>
                   <p>You can drag elements to the right by specifying the <code>right</code> property on a nav group.</p>
 
+                  <h3>Navbar Basic Example</h3>
                   <ReactPlayground codeText={Samples.NavbarBasic} />
+
+                  <h3>Navbar Brand Example</h3>
+                  <p>You can specify a brand by passing in a string to <code>brand</code>, or you can pass in a renderable component.</p>
+                  <ReactPlayground codeText={Samples.NavbarBrand} />
 
                   <h3>Mobile Friendly</h3>
                   <p>To have a mobile friendly Navbar, specify the property <code>toggleNavKey</code> on the Navbar with a value corresponding to an <code>eventKey</code> of one of his <code>Nav</code> children. This child will be the one collapsed.</p>
