@@ -10,7 +10,7 @@
   "scripts": {
     "build": "node run-babel tools/build.js",
     "test-watch": "karma start",
-    "test": "karma start --single-run && npm run lint && npm run build",
+    "test": "npm run lint && npm run build && karma start --single-run",
     "lint": "eslint src test docs ie8 tools webpack karma.conf.js webpack.config.js webpack.docs.js",
     "docs-build": "node run-babel tools/build.js --docs-only",
     "docs": "node run-babel docs/server.js",

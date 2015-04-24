@@ -1,0 +1,9 @@
+<% _.forEach(components, function (component) { %>
+import <%= component %> from './<%= component %>';
+<% }); %>
+
+export default {
+<% _.forEach(components, function (component) { %>
+  <%= component %>,
+<% }); %>
+}
