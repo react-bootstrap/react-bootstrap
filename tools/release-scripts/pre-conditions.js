@@ -1,5 +1,5 @@
 import 'colors';
-import { exec } from 'child-process-promise';
+import { exec } from '../exec';
 
 function ensureClean() {
   return exec('git diff-index --name-only HEAD --')

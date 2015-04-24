@@ -5,7 +5,7 @@ import routes from './src/Routes';
 import Root from './src/Root';
 import fsp from 'fs-promise';
 import { copy } from '../tools/fs-utils';
-import { exec } from 'child-process-promise';
+import { exec } from '../tools/exec';
 
 const repoRoot = path.resolve(__dirname, '../');
 const docsBuilt = path.join(repoRoot, 'docs-built');

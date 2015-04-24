@@ -1,5 +1,5 @@
 import path from 'path';
-import { exec } from 'child-process-promise';
+import { exec } from '../exec';
 
 const repoRoot = path.resolve(__dirname, '../../');
 const dist = path.join(repoRoot, 'dist');

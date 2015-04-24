@@ -1,7 +1,7 @@
 import 'colors';
 import path from 'path';
 import fsp from 'fs-promise';
-import { exec } from 'child-process-promise';
+import { exec, safeExec } from '../exec';
 import { copy } from '../fs-utils';
 
 const repoRoot = path.resolve(__dirname, '../../');
@@ -23,11 +23,11 @@ export default (repo, srcFolder, tmpFolder, version) => {
     })
     .then(() => copy(srcFolder, tmpFolder))
     .then(() => copy(license, tmpFolder))
-    .then(() => exec(`cd ${tmpFolder} && git add -A .`))
-    .then(() => exec(`cd ${tmpFolder} && git commmit -m "Release v${version}"`))
-    .then(() => exec(`cd ${tmpFolder} && git tag -a --message=v${version} v${version}`))
-    .then(() => exec(`cd ${tmpFolder} && git push`))
-    .then(() => exec(`cd ${tmpFolder} && git push --tags`))
-    .then(() => exec(`rimraf ${tmpFolder}`))
+    .then(() => safeExec(`cd ${tmpFolder} && git add -A .`))
+    .then(() => safeExec(`cd ${tmpFolder} && git commmit -m "Release v${version}"`))
+    .then(() => safeExec(`cd ${tmpFolder} && git tag -a --message=v${version} v${version}`))
+    .then(() => safeExec(`cd ${tmpFolder} && git push`))
+    .then(() => safeExec(`cd ${tmpFolder} && git push --tags`))
+    .then(() => safeExec(`rimraf ${tmpFolder}`))
     .then(() => console.log('Released: '.cyan + repo.green));
 };

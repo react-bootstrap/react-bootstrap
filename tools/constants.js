@@ -1,6 +1,6 @@
 import path from 'path';
 
-const repoRoot = path.resolve(__dirname, '../../');
+const repoRoot = path.resolve(__dirname, '../');
 
 const bowerRepo = 'git@github.com:react-bootstrap/react-bootstrap-bower.git';
 const docsRepo = 'git@github.com:react-bootstrap/react-bootstrap.github.io.git';

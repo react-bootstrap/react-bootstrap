@@ -1,10 +1,10 @@
-import { exec } from 'child-process-promise';
+import { safeExec } from '../exec';
 import tag from './tag';
 
 export default (version) => {
   console.log('Releasing: '.cyan + 'npm module'.green);
 
-  return tag()
-    .then(() => exec('npm publish'))
+  return tag(version)
+    .then(() => safeExec('npm publish'))
     .then(() => console.log('Released: '.cyan + 'npm module'.green));
 };
