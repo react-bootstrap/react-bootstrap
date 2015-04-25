@@ -14,7 +14,7 @@ class ListGroup extends React.Component {
     if (!this.props.children) {
       return this.renderDiv(items);
     } else if (React.Children.count(this.props.children) === 1) {
-      let child = this.props.children;
+      let child = this.props.children[0];
 
       childrenAnchors = child.props.href ? true : false;
 
