@@ -1,13 +1,10 @@
-import path from 'path';
 import { exec } from '../exec';
-
-const repoRoot = path.resolve(__dirname, '../../');
-const dist = path.join(repoRoot, 'dist');
+import { distRoot } from '../constants';
 
 export default function BuildDistributable() {
   console.log('Building: '.cyan + 'distributable'.green);
 
-  return exec(`rimraf ${dist}`)
+  return exec(`rimraf ${distRoot}`)
     .then(() => Promise.all([
       exec('webpack --bail'),
       exec('webpack --bail -p')

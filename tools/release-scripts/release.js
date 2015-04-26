@@ -10,7 +10,7 @@ import tagAndPublish from './tag-and-publish';
 import test from './test';
 import build from '../build';
 
-import { repoRoot, bowerRepo, bowerRoot, tmpBowerRepo, docsRoot, docsRepo, tmpDocsRepo } from '../constants';
+import { bowerRepo, bowerRoot, tmpBowerRepo, docsRoot, docsRepo, tmpDocsRepo } from '../constants';
 
 const yargsConf = yargs
   .usage('Usage: $0 <version> [--preid <identifier>]')
@@ -57,9 +57,9 @@ if (versionBumpOptions.type === undefined && versionBumpOptions.preid === undefi
 
 preConditions()
   .then(test)
-  .then(versionBump(repoRoot, versionBumpOptions))
+  .then(versionBump(versionBumpOptions))
   .then(v => { version = v; })
-  .then(() => addChangelog(repoRoot, version))
+  .then(() => addChangelog(version))
   .then(() => {
     return build(true)
       .catch(err => {

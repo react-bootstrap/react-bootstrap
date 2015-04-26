@@ -1,15 +1,11 @@
 import 'colors';
-import path from 'path';
 import { exec } from '../exec';
-
-const repoRoot = path.resolve(__dirname, '../../');
-const lib = path.join(repoRoot, 'lib');
-const src = path.join(repoRoot, 'src');
+import { srcRoot, libRoot } from '../constants';
 
 export default function BuildCommonJs() {
   console.log('Building: '.cyan + 'npm module'.green);
 
-  return exec(`rimraf ${lib}`)
-    .then(() => exec(`babel --optional es7.objectRestSpread ${src} --out-dir ${lib}`))
+  return exec(`rimraf ${libRoot}`)
+    .then(() => exec(`babel --optional es7.objectRestSpread ${srcRoot} --out-dir ${libRoot}`))
     .then(() => console.log('Built: '.cyan + 'npm module'.green));
 }

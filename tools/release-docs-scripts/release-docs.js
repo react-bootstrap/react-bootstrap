@@ -10,7 +10,7 @@ import repoRelease from '../release-scripts/repo-release';
 import tag from '../release-scripts/tag';
 import { lint } from '../release-scripts/test';
 
-import { repoRoot, docsRoot, docsRepo, tmpDocsRepo } from '../constants';
+import { docsRoot, docsRepo, tmpDocsRepo } from '../constants';
 
 const yargsConf = yargs
   .usage('Usage: $0 [-n|--dry-run] [--verbose]')
@@ -37,7 +37,7 @@ const versionBumpOptions = {
 
 preConditions()
   .then(lint)
-  .then(versionBump(repoRoot, versionBumpOptions))
+  .then(versionBump(versionBumpOptions))
   .then(v => { version = v; })
   .then(() => {
     return exec(`npm run docs-build${ argv.verbose ? ' -- --verbose' : '' }`)

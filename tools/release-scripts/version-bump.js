@@ -3,8 +3,9 @@ import path from 'path';
 import fsp from 'fs-promise';
 import semver from 'semver';
 import { safeExec } from '../exec';
+import { repoRoot } from './constants';
 
-export default function(repoRoot, { preid, type }) {
+export default function({ preid, type }) {
   const packagePath = path.join(repoRoot, 'package.json');
 
   return () => fsp.readFile(packagePath, { encoding: 'utf8' })

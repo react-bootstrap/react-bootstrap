@@ -1,19 +1,15 @@
 /* eslint no-process-exit: 0 */
 
 import 'colors';
-import path from 'path';
 import bower from './amd/build';
 import lib from './lib/build';
 import docs from '../docs/build';
 import dist from './dist/build';
 import { copy } from './fs-utils';
 import { setExecOptions } from './exec';
+import { distRoot, bowerRoot } from './constants';
 
 import yargs from 'yargs';
-
-const repoRoot = path.resolve(__dirname, '../');
-const distFolder = path.join(repoRoot, 'dist');
-const amdFolder = path.join(repoRoot, 'amd');
 
 const argv = yargs
   .option('docs-only', {
@@ -39,7 +35,7 @@ export default function Build(noExitOnFailure) {
       dist(),
       docs()
     ])
-    .then(() => copy(distFolder, amdFolder));
+    .then(() => copy(distRoot, bowerRoot));
 
     if (!noExitOnFailure) {
       result = result
