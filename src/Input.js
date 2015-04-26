@@ -3,122 +3,51 @@ import classNames from 'classnames';
 import Button from './Button';
 import FormGroup from './FormGroup';
 
-const Input = React.createClass({
-
-  propTypes: {
-    type: React.PropTypes.string,
-    label: React.PropTypes.node,
-    help: React.PropTypes.node,
-    addonBefore: React.PropTypes.node,
-    addonAfter: React.PropTypes.node,
-    buttonBefore: React.PropTypes.node,
-    buttonAfter: React.PropTypes.node,
-    bsSize: React.PropTypes.oneOf(['small', 'medium', 'large']),
-    bsStyle(props) {
-      if (props.type === 'submit') {
-        // Return early if `type=submit` as the `Button` component
-        // it transfers these props to has its own propType checks.
-        return null;
-      }
-
-      return React.PropTypes.oneOf(['success', 'warning', 'error']).apply(null, arguments);
-    },
-    hasFeedback: React.PropTypes.bool,
-    id: React.PropTypes.string,
-    groupClassName: React.PropTypes.string,
-    wrapperClassName: React.PropTypes.string,
-    labelClassName: React.PropTypes.string,
-    multiple: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    value: React.PropTypes.any
-  },
-
+class Input extends React.Component {
   getInputDOMNode() {
     return React.findDOMNode(this.refs.input);
-  },
+  }
 
   getValue() {
     if (this.props.type === 'static') {
       return this.props.value;
-    }
-    else if (this.props.type) {
+    } else if (this.props.type) {
       if (this.props.type === 'select' && this.props.multiple) {
         return this.getSelectedOptions();
       } else {
         return this.getInputDOMNode().value;
       }
-    }
-    else {
+    } else {
       throw 'Cannot use getValue without specifying input type.';
     }
-  },
+  }
 
   getChecked() {
     return this.getInputDOMNode().checked;
-  },
+  }
 
   getSelectedOptions() {
     let values = [];
 
     Array.prototype.forEach.call(
       this.getInputDOMNode().getElementsByTagName('option'),
-      function (option) {
+      (option) => {
         if (option.selected) {
-          let value = option.getAttribute('value') || option.innerHTML;
-
+          let value = option.getAttribute('value') || option.innerHtml;
           values.push(value);
         }
-      }
-    );
+      });
 
     return values;
-  },
+  }
 
   isCheckboxOrRadio() {
-    return this.props.type === 'radio' || this.props.type === 'checkbox';
-  },
+    return this.props.type === 'checkbox' || this.props.type === 'radio';
+  }
 
   isFile() {
     return this.props.type === 'file';
-  },
-
-  renderInput() {
-    let input = null;
-
-    if (!this.props.type) {
-      return this.props.children;
-    }
-
-    switch (this.props.type) {
-      case 'select':
-        input = (
-          <select {...this.props} className={classNames(this.props.className, 'form-control')} ref="input" key="input">
-            {this.props.children}
-          </select>
-        );
-        break;
-      case 'textarea':
-        input = <textarea {...this.props} className={classNames(this.props.className, 'form-control')} ref="input" key="input" />;
-        break;
-      case 'static':
-        input = (
-          <p {...this.props} className={classNames(this.props.className, 'form-control-static')} ref="input" key="input">
-            {this.props.value}
-          </p>
-        );
-        break;
-      case 'submit':
-        input = (
-          <Button {...this.props} componentClass='input' ref='input' key='input' />
-        );
-        break;
-      default:
-        let className = this.isCheckboxOrRadio() || this.isFile() ? '' : 'form-control';
-        input = <input {...this.props} className={classNames(this.props.className, className)} ref="input" key="input" />;
-    }
-
-    return input;
-  },
+  }
 
   renderInputGroup(children) {
     let addonBefore = this.props.addonBefore ? (
@@ -160,7 +89,7 @@ const Input = React.createClass({
         {buttonAfter}
       </div>
     ) : children;
-  },
+  }
 
   renderIcon() {
     let classes = {
@@ -174,7 +103,7 @@ const Input = React.createClass({
     return this.props.hasFeedback ? (
       <span className={classNames(classes)} key="icon" />
     ) : null;
-  },
+  }
 
   renderHelp() {
     return this.props.help ? (
@@ -182,9 +111,9 @@ const Input = React.createClass({
         {this.props.help}
       </span>
     ) : null;
-  },
+  }
 
-  renderCheckboxandRadioWrapper(children) {
+  renderCheckboxAndRadioWrapper(children) {
     let classes = {
       'checkbox': this.props.type === 'checkbox',
       'radio': this.props.type === 'radio'
@@ -195,7 +124,7 @@ const Input = React.createClass({
         {children}
       </div>
     );
-  },
+  }
 
   renderWrapper(children) {
     return this.props.wrapperClassName ? (
@@ -203,7 +132,7 @@ const Input = React.createClass({
         {children}
       </div>
     ) : children;
-  },
+  }
 
   renderLabel(children) {
     let classes = {
@@ -217,41 +146,94 @@ const Input = React.createClass({
         {this.props.label}
       </label>
     ) : children;
-  },
+  }
 
-  render() {
-    let children;
-
-    if (this.isCheckboxOrRadio()) {
-      children = this.renderWrapper([
-        this.renderCheckboxandRadioWrapper(
-          this.renderLabel(
-            this.renderInput()
-          )
-        ),
-        this.renderHelp()
-      ]);
-    }
-    else {
-      children = [
-        this.renderLabel(),
-        this.renderWrapper([
-          this.renderInputGroup(
-            this.renderInput()
-          ),
-          this.renderIcon(),
-          this.renderHelp()
-        ])
-      ];
+  renderInput() {
+    if (!this.props.type) {
+      return this.props.children;
     }
 
+    switch (this.props.type) {
+      case 'select':
+        return (
+          <select {...this.props} className={classNames(this.props.className, 'form-control')} ref="input" key="input">
+            {this.props.children}
+          </select>
+        );
+      case 'textarea':
+        return <textarea {...this.props} className={classNames(this.props.className, 'form-control')} ref="input" key="input" />;
+      case 'static':
+        return (
+          <p {...this.props} className={classNames(this.props.className, 'form-control-static')} ref="input" key="input">
+            {this.props.value}
+          </p>
+        );
+      case 'submit':
+        return <Button {...this.props} componentClass="input" ref="input" key="input" />;
+    }
+
+    let className = this.isCheckboxOrRadio() || this.isFile() ? '' : 'form-control';
+    return <input {...this.props} className={classNames(this.props.className, className)} ref="input" key="input" />;
+  }
+
+  renderFormGroup(children) {
     if (this.props.type === 'submit') {
       let {bsStyle, ...other} = this.props; /* eslint no-unused-vars: 0 */
       return <FormGroup {...other}>{children}</FormGroup>;
-    } else {
-      return <FormGroup {...this.props}>{children}</FormGroup>;
     }
+
+    return <FormGroup {...this.props}>{children}</FormGroup>;
   }
-});
+
+  renderChildren() {
+    return !this.isCheckboxOrRadio() ? [
+      this.renderLabel(),
+      this.renderWrapper([
+        this.renderInputGroup(
+          this.renderInput()
+        ),
+        this.renderIcon(),
+        this.renderHelp()
+      ])
+    ] : this.renderWrapper([
+      this.renderCheckboxAndRadioWrapper(
+        this.renderLabel(
+          this.renderInput()
+        )
+      ),
+      this.renderHelp()
+    ]);
+  }
+
+  render() {
+    let children = this.renderChildren();
+    return this.renderFormGroup(children);
+  }
+}
+
+Input.propTypes = {
+  type: React.PropTypes.string,
+  label: React.PropTypes.node,
+  help: React.PropTypes.node,
+  addonBefore: React.PropTypes.node,
+  addonAfter: React.PropTypes.node,
+  buttonBefore: React.PropTypes.node,
+  buttonAfter: React.PropTypes.node,
+  bsSize: React.PropTypes.oneOf(['small', 'medium', 'large']),
+  bsStyle(props) {
+    if (props.type === 'submit') {
+      return null;
+    }
+    return React.PropTypes.oneOf(['success', 'warning', 'error']).apply(null, arguments);
+  },
+  hasFeedback: React.PropTypes.bool,
+  id: React.PropTypes.string,
+  groupClassName: React.PropTypes.string,
+  wrapperClassName: React.PropTypes.string,
+  labelClassName: React.PropTypes.string,
+  multiple: React.PropTypes.bool,
+  disabled: React.PropTypes.bool,
+  value: React.PropTypes.any
+};
 
 export default Input;
