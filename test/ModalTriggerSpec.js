@@ -42,4 +42,34 @@ describe('ModalTrigger', function() {
     ReactTestUtils.Simulate.mouseOut(modalTrigger);
     assert.equal(called, true);
   });
+
+  it('Should pass ModalTrigger onFocus prop to children', function() {
+    let called = false;
+    let callback = function() {
+      called = true;
+    };
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ModalTrigger modal={<div>test</div>} onFocus={callback}>
+        <button>button</button>
+      </ModalTrigger>
+    );
+    let modalTrigger = instance.getDOMNode();
+    ReactTestUtils.Simulate.focus(modalTrigger);
+    assert.equal(called, true);
+  });
+
+  it('Should pass ModalTrigger onBlur prop to children', function() {
+    let called = false;
+    let callback = function() {
+      called = true;
+    };
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ModalTrigger modal={<div>test</div>} onBlur={callback}>
+        <button>button</button>
+      </ModalTrigger>
+    );
+    let modalTrigger = instance.getDOMNode();
+    ReactTestUtils.Simulate.blur(modalTrigger);
+    assert.equal(called, true);
+  });
 });
