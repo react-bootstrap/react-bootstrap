@@ -13,7 +13,7 @@ describe('ModalTrigger', function() {
     assert.equal(modalTrigger.nodeName, 'BUTTON');
   });
 
-  it('Should pass ModalTrigger onMouseOver prop to children', function() {
+  it('Should pass ModalTrigger onMouseOver prop to child', function() {
     let called = false;
     let callback = function() {
       called = true;
@@ -28,7 +28,7 @@ describe('ModalTrigger', function() {
     assert.equal(called, true);
   });
 
-  it('Should pass ModalTrigger onMouseOut prop to children', function() {
+  it('Should pass ModalTrigger onMouseOut prop to child', function() {
     let called = false;
     let callback = function() {
       called = true;
@@ -43,7 +43,7 @@ describe('ModalTrigger', function() {
     assert.equal(called, true);
   });
 
-  it('Should pass ModalTrigger onFocus prop to children', function() {
+  it('Should pass ModalTrigger onFocus prop to child', function() {
     let called = false;
     let callback = function() {
       called = true;
@@ -58,7 +58,7 @@ describe('ModalTrigger', function() {
     assert.equal(called, true);
   });
 
-  it('Should pass ModalTrigger onBlur prop to children', function() {
+  it('Should pass ModalTrigger onBlur prop to child', function() {
     let called = false;
     let callback = function() {
       called = true;
