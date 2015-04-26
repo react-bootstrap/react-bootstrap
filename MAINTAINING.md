@@ -121,3 +121,11 @@ Example usage of release-docs script:
 ```bash
 $ ./tools/release-docs
 ```
+
+## Check everything is OK before releasing
+
+Release tools have a very useful option `--dry-run`.
+
+You can use it
+- to learn how releasing tools are working.
+- to ensure there are no side issues before you release anything.
