@@ -16,14 +16,15 @@ class ListGroup extends React.Component {
     } else if (React.Children.count(this.props.children) === 1 && !Array.isArray(this.props.children)) {
       let child = this.props.children;
 
-      childrenAnchors = child.props.href ? true : false;
+      childrenAnchors = this.isAnchor(child.props);
 
     } else {
 
       childrenAnchors = Array.prototype.some.call(this.props.children, (child) => {
-        return !Array.isArray(child) ? child.props.href : Array.prototype.some.call(child, (subChild) => {
-            return subChild.props.href;
+        return !Array.isArray(child) ? this.isAnchor(child.props) : Array.prototype.some.call(child, (subChild) => {
+            return this.isAnchor(subChild.props);
         });
+
       });
 
     }
@@ -33,6 +34,10 @@ class ListGroup extends React.Component {
     } else {
       return this.renderUL(items);
     }
+  }
+
+  isAnchor(props){
+    return (props.href || props.onClick);
   }
 
   renderUL(items) {
