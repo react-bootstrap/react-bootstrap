@@ -90,14 +90,16 @@ const OverlayTrigger = React.createClass({
   },
 
   render() {
+    let child = React.Children.only(this.props.children);
     if (this.props.trigger === 'manual') {
-      return React.Children.only(this.props.children);
+      return child;
     }
 
     let props = {};
 
+    props.onClick = createChainedFunction(child.props.onClick, this.props.onClick);
     if (isOneOf('click', this.props.trigger)) {
-      props.onClick = createChainedFunction(this.toggle, this.props.onClick);
+      props.onClick = createChainedFunction(this.toggle, props.onClick);
     }
 
     if (isOneOf('hover', this.props.trigger)) {
@@ -111,7 +113,7 @@ const OverlayTrigger = React.createClass({
     }
 
     return cloneElement(
-      React.Children.only(this.props.children),
+      child,
       props
     );
   },
