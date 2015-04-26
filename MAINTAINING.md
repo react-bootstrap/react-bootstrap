@@ -69,6 +69,8 @@ happening again. In order to run the release script you will need permission to
 publish to the package to npm. Those with this permission are in the [publishers
 team](https://github.com/orgs/react-bootstrap/teams/publishers)
 
+*Note: The publishers team does exist. If you see 404 that means you just have no permissions to publish.*
+
 Example usages of the release script:
 
 ```bash
