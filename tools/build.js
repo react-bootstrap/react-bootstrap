@@ -6,8 +6,8 @@ import lib from './lib/build';
 import docs from '../docs/build';
 import dist from './dist/build';
 import { copy } from './fs-utils';
-import { setExecOptions } from './exec';
 import { distRoot, bowerRoot } from './constants';
+import { exec, setExecOptions } from './exec';
 
 import yargs from 'yargs';
 
@@ -33,7 +33,7 @@ export default function Build(noExitOnFailure) {
       lib(),
       bower(),
       dist(),
-      docs()
+      exec(`npm run docs-build`)
     ])
     .then(() => copy(distRoot, bowerRoot));
 

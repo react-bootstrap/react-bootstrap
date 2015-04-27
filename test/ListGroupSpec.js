@@ -120,4 +120,20 @@ describe('ListGroup', function () {
     assert.equal(React.findDOMNode(instance).lastChild.nodeName, 'SPAN');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
   });
+
+
+
+  it('Should output a "div" when "ListGroupItem" children have an onClick handler', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroup>
+        <ListGroupItem onClick={() => null}>1st Child</ListGroupItem>
+        <ListGroupItem>2nd Child</ListGroupItem>
+      </ListGroup>
+    );
+    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
+    assert.equal(React.findDOMNode(instance).firstChild.nodeName, 'A');
+    assert.equal(React.findDOMNode(instance).lastChild.nodeName, 'SPAN');
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
+  });
+
 });

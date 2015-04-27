@@ -31,7 +31,7 @@ const ListGroupItem = React.createClass({
     classes.active = this.props.active;
     classes.disabled = this.props.disabled;
 
-    if (this.props.href || this.props.target || this.props.onClick) {
+    if (this.props.href || this.props.onClick) {
       return this.renderAnchor(classes);
     } else if (this.props.listItem) {
       return this.renderLi(classes);

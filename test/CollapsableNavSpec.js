@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import Navbar from '../lib/Navbar';
-import CollapsableNav from '../lib/CollapsableNav';
-import Nav from '../lib/Nav';
-import NavItem from '../lib/NavItem';
+import Navbar from '../src/Navbar';
+import CollapsableNav from '../src/CollapsableNav';
+import Nav from '../src/Nav';
+import NavItem from '../src/NavItem';
 
 describe('CollapsableNav', function () {
   it('Should create div and add collapse class', function () {
