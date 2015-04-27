@@ -49,12 +49,15 @@ const ModalTrigger = React.createClass({
 
   render() {
     let child = React.Children.only(this.props.children);
-    return cloneElement(
-      child,
-      {
-        onClick: createChainedFunction(child.props.onClick, this.toggle)
-      }
-    );
+    let props = {};
+
+    props.onClick = createChainedFunction(child.props.onClick, this.toggle);
+    props.onMouseOver = createChainedFunction(child.props.onMouseOver, this.props.onMouseOver);
+    props.onMouseOut = createChainedFunction(child.props.onMouseOut, this.props.onMouseOut);
+    props.onFocus = createChainedFunction(child.props.onFocus, this.props.onFocus);
+    props.onBlur = createChainedFunction(child.props.onBlur, this.props.onBlur);
+
+    return cloneElement(child, props);
   }
 });
 
