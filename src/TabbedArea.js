@@ -105,12 +105,13 @@ const TabbedArea = React.createClass({
   },
 
   renderTab(child) {
-    let key = child.props.eventKey;
+    let {eventKey, className, tab } = child.props;
     return (
       <NavItem
-        ref={'tab' + key}
-        eventKey={key}>
-        {child.props.tab}
+        ref={'tab' + eventKey}
+        eventKey={eventKey}
+        className={className} >
+        {tab}
       </NavItem>
     );
   },
