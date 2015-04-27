@@ -2,10 +2,10 @@ import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 
 import BootstrapMixin from './BootstrapMixin';
-import CollapsableMixin from './CollapsableMixin';
+import CollapsibleMixin from './CollapsibleMixin';
 
 const Panel = React.createClass({
-  mixins: [BootstrapMixin, CollapsableMixin],
+  mixins: [BootstrapMixin, CollapsibleMixin],
 
   propTypes: {
     collapsable: React.PropTypes.bool,
@@ -41,11 +41,11 @@ const Panel = React.createClass({
     this.setState({expanded:!this.state.expanded});
   },
 
-  getCollapsableDimensionValue() {
+  getCollapsibleDimensionValue() {
     return React.findDOMNode(this.refs.panel).scrollHeight;
   },
 
-  getCollapsableDOMNode() {
+  getCollapsibleDOMNode() {
     if (!this.isMounted() || !this.refs || !this.refs.panel) {
       return null;
     }
@@ -72,7 +72,7 @@ const Panel = React.createClass({
 
     return (
       <div
-        className={classNames(this.getCollapsableClassSet(collapseClass))}
+        className={classNames(this.getCollapsibleClassSet(collapseClass))}
         id={this.props.id}
         ref='panel'
         aria-expanded={this.isExpanded() ? 'true' : 'false'}>

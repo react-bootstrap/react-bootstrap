@@ -95,7 +95,7 @@ const CollapsibleMixin = {
 
     let complete = () => {
       this._removeEndEventListener(node, complete);
-      // remove dimension value - this ensures the collapsable item can grow
+      // remove dimension value - this ensures the collapsible item can grow
       // in dimension after initial display (such as an image loading)
       node.style[dimension] = '';
       this.setState({

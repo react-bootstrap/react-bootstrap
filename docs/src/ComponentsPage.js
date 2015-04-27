@@ -208,9 +208,9 @@ const ComponentsPage = React.createClass({
                   <p><code>&lt;Accordion /&gt;</code> aliases <code>&lt;PanelGroup accordion /&gt;</code>.</p>
                   <ReactPlayground codeText={Samples.PanelGroupAccordion} />
 
-                  <h3 id='panels-collapsable'>Collapsable Mixin</h3>
-                  <p><code>CollapsableMixin</code> can be used to create your own components with collapse functionality.</p>
-                  <ReactPlayground codeText={Samples.CollapsableParagraph} />
+                  <h3 id='panels-collapsible'>Collapsible Mixin</h3>
+                  <p><code>CollapsibleMixin</code> can be used to create your own components with collapse functionality.</p>
+                  <ReactPlayground codeText={Samples.CollapsibleParagraph} />
                 </div>
 
                 <div className='bs-docs-section'>

@@ -14,7 +14,7 @@
     "ButtonGroup",
     "ButtonToolbar",
     "CollapsableNav",
-    "CollapsableMixin",
+    "CollapsibleMixin",
     "Carousel",
     "CarouselItem",
     "Col",
