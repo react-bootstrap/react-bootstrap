@@ -4,6 +4,7 @@ import Input from '../src/Input';
 import Button from '../src/Button';
 import DropdownButton from '../src/DropdownButton';
 import MenuItem from '../src/MenuItem';
+import {shouldWarn} from './helpers';
 
 describe('Input', function () {
   it('renders children when type is not set', function () {
@@ -63,9 +64,7 @@ describe('Input', function () {
       <Input type="submit" bsStyle="error" />
     );
 
-    console.warn.called.should.be.true;
-    console.warn.calledWithMatch('propType: Invalid').should.be.true;
-    console.warn.reset(); // reset state for afterEach()
+    shouldWarn('propType: Invalid');
   });
 
   it('renders a p element when type=static', function () {

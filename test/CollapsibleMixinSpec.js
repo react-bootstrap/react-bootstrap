@@ -1,27 +1,27 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import CollapsableMixin from '../src/CollapsableMixin';
+import CollapsibleMixin from '../src/CollapsibleMixin';
 import classNames from 'classnames';
 import {shouldWarn} from './helpers';
 
-describe('CollapsableMixin', function () {
+describe('CollapsibleMixin', function () {
 
   let Component, instance;
 
   beforeEach(function(){
     Component = React.createClass({
-      mixins: [CollapsableMixin],
+      mixins: [CollapsibleMixin],
 
-      getCollapsableDOMNode: function(){
+      getCollapsibleDOMNode: function(){
         return this.refs.panel.getDOMNode();
       },
 
-      getCollapsableDimensionValue: function(){
+      getCollapsibleDimensionValue: function(){
         return 15;
       },
 
       render: function(){
-        let styles = this.getCollapsableClassSet();
+        let styles = this.getCollapsibleClassSet();
         return (
           <div>
             <div ref="panel" className={classNames(styles)}>
@@ -40,7 +40,6 @@ describe('CollapsableMixin', function () {
       );
       let state = instance.getInitialState();
       assert.ok(state.expanded === true);
-      shouldWarn('deprecated');
     });
 
     it('Should default collapsing to false', function () {
@@ -49,7 +48,6 @@ describe('CollapsableMixin', function () {
       );
       let state = instance.getInitialState();
       assert.ok(state.collapsing === false);
-      shouldWarn('deprecated');
     });
   });
 
@@ -59,7 +57,6 @@ describe('CollapsableMixin', function () {
         <Component>Panel content</Component>
       );
       assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'collapse'));
-      shouldWarn('deprecated');
     });
   });
 
@@ -72,13 +69,12 @@ describe('CollapsableMixin', function () {
 
     it('Should have collapsing class', function () {
       instance.setProps({expanded:true});
-      let node = instance.getCollapsableDOMNode();
+      let node = instance.getCollapsibleDOMNode();
       assert.equal(node.className, 'collapsing');
-      shouldWarn('deprecated');
     });
 
     it('Should set initial 0px height', function () {
-      let node = instance.getCollapsableDOMNode();
+      let node = instance.getCollapsibleDOMNode();
       assert.equal(node.style.height, '');
 
       instance._afterWillUpdate = function(){
@@ -86,16 +82,14 @@ describe('CollapsableMixin', function () {
       };
 
       instance.setProps({expanded:true});
-      shouldWarn('deprecated');
     });
 
     it('Should set transition to height', function () {
-      let node = instance.getCollapsableDOMNode();
+      let node = instance.getCollapsibleDOMNode();
       assert.equal(node.styled, undefined);
 
       instance.setProps({expanded:true});
       assert.equal(node.style.height, '15px');
-      shouldWarn('deprecated');
     });
 
     it('Should transition from collapsing to not collapsing', function (done) {
@@ -103,7 +97,6 @@ describe('CollapsableMixin', function () {
         setTimeout(function(){
           complete();
           assert.ok(!instance.state.collapsing);
-          shouldWarn('deprecated');
           done();
         }, 100);
       };
@@ -112,13 +105,12 @@ describe('CollapsableMixin', function () {
     });
 
     it('Should clear height after transition complete', function (done) {
-      let node = instance.getCollapsableDOMNode();
+      let node = instance.getCollapsibleDOMNode();
 
       instance._addEndEventListener = function(nodeInner, complete){
         setTimeout(function(){
           complete();
           assert.equal(nodeInner.style.height, '');
-          shouldWarn('deprecated');
           done();
         }, 100);
       };
@@ -138,13 +130,12 @@ describe('CollapsableMixin', function () {
 
     it('Should have collapsing class', function () {
       instance.setProps({expanded:false});
-      let node = instance.getCollapsableDOMNode();
+      let node = instance.getCollapsibleDOMNode();
       assert.equal(node.className, 'collapsing');
-      shouldWarn('deprecated');
     });
 
     it('Should set initial height', function () {
-      let node = instance.getCollapsableDOMNode();
+      let node = instance.getCollapsibleDOMNode();
 
       instance._afterWillUpdate = function(){
         assert.equal(node.style.height, '15px');
@@ -152,16 +143,14 @@ describe('CollapsableMixin', function () {
 
       assert.equal(node.style.height, '');
       instance.setProps({expanded:false});
-      shouldWarn('deprecated');
     });
 
     it('Should set transition to height', function () {
-      let node = instance.getCollapsableDOMNode();
+      let node = instance.getCollapsibleDOMNode();
       assert.equal(node.style.height, '');
 
       instance.setProps({expanded:false});
       assert.equal(node.style.height, '0px');
-      shouldWarn('deprecated');
     });
 
     it('Should transition from collapsing to not collapsing', function (done) {
@@ -169,7 +158,6 @@ describe('CollapsableMixin', function () {
         setTimeout(function(){
           complete();
           assert.ok(!instance.state.collapsing);
-          shouldWarn('deprecated');
           done();
         }, 100);
       };
@@ -178,13 +166,12 @@ describe('CollapsableMixin', function () {
     });
 
     it('Should have 0px height after transition complete', function (done) {
-      let node = instance.getCollapsableDOMNode();
+      let node = instance.getCollapsibleDOMNode();
 
       instance._addEndEventListener = function(nodeInner, complete){
         setTimeout(function(){
           complete();
           assert.ok(nodeInner.style.height === '0px');
-          shouldWarn('deprecated');
           done();
         }, 100);
       };
@@ -201,7 +188,6 @@ describe('CollapsableMixin', function () {
         <Component expanded={true}>Panel content</Component>
       );
       assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'collapse in'));
-      shouldWarn('deprecated');
     });
 
     it('Should have collapse and in class with defaultExpanded', function () {
@@ -209,7 +195,6 @@ describe('CollapsableMixin', function () {
         <Component defaultExpanded>Panel content</Component>
       );
       assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'collapse in'));
-      shouldWarn('deprecated');
     });
   });
 
@@ -222,15 +207,53 @@ describe('CollapsableMixin', function () {
 
     it('Defaults to height', function(){
       assert.equal(instance.dimension(), 'height');
-      shouldWarn('deprecated');
     });
 
-    it('Uses getCollapsableDimension if exists', function(){
-      instance.getCollapsableDimension = function(){
+    it('Uses getCollapsibleDimension if exists', function(){
+      instance.getCollapsibleDimension = function(){
         return 'whatevs';
       };
       assert.equal(instance.dimension(), 'whatevs');
+    });
+  });
+
+  describe('deprecations', function() {
+    it('warns about getCollaps_a_bleDimension() deprecation', function () {
+      Component = React.createClass({
+        mixins: [CollapsibleMixin],
+
+        getCollapsableDimension: function(){},
+
+        render: function(){
+          return ( <div /> );
+        }
+      });
+
+      instance = ReactTestUtils.renderIntoDocument(
+        <Component />
+      );
+
+      instance.dimension();
       shouldWarn('deprecated');
+    });
+
+    it('does not warn about getCollaps_i_bleDimension() use', function () {
+      Component = React.createClass({
+        mixins: [CollapsibleMixin],
+
+        getCollapsibleDimension: function(){},
+
+        render: function(){
+          return ( <div /> );
+        }
+      });
+
+      instance = ReactTestUtils.renderIntoDocument(
+        <Component />
+      );
+
+      instance.dimension();
+      console.warn.called.should.be.false;
     });
   });
 });
