@@ -141,7 +141,8 @@ const CollapsibleMixin = {
     if (typeof this.getCollapsableDimension === 'function') {
       deprecationWarning(
         'CollapsableMixin.getCollapsableDimension()',
-        'CollapsibleMixin.getCollapsibleDimension()'
+        'CollapsibleMixin.getCollapsibleDimension()',
+        'https://github.com/react-bootstrap/react-bootstrap/issues/425#issuecomment-97110963'
       );
       return this.getCollapsableDimension();
     }

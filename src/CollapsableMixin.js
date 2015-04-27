@@ -2,11 +2,14 @@ import assign from './utils/Object.assign';
 import deprecationWarning from './utils/deprecationWarning';
 import CollapsibleMixin from './CollapsibleMixin';
 
+let link = 'https://github.com/react-bootstrap/react-bootstrap/issues/425#issuecomment-97110963';
+
 const CollapsableMixin = assign({}, CollapsibleMixin, {
   getCollapsableClassSet(className) {
     deprecationWarning(
       'CollapsableMixin.getCollapsableClassSet()',
-      'CollapsibleMixin.getCollapsibleClassSet()'
+      'CollapsibleMixin.getCollapsibleClassSet()',
+      link
     );
     return CollapsibleMixin.getCollapsibleClassSet.call(this, className);
   },
@@ -14,7 +17,8 @@ const CollapsableMixin = assign({}, CollapsibleMixin, {
   getCollapsibleDOMNode() {
     deprecationWarning(
       'CollapsableMixin.getCollapsableDOMNode()',
-      'CollapsibleMixin.getCollapsibleDOMNode()'
+      'CollapsibleMixin.getCollapsibleDOMNode()',
+      link
     );
     return this.getCollapsableDOMNode();
   },
@@ -22,12 +26,13 @@ const CollapsableMixin = assign({}, CollapsibleMixin, {
   getCollapsibleDimensionValue() {
     deprecationWarning(
       'CollapsableMixin.getCollapsableDimensionValue()',
-      'CollapsibleMixin.getCollapsibleDimensionValue()'
+      'CollapsibleMixin.getCollapsibleDimensionValue()',
+      link
     );
     return this.getCollapsableDimensionValue();
   }
 });
 
-deprecationWarning('CollapsableMixin', 'CollapsibleMixin');
+deprecationWarning('CollapsableMixin', 'CollapsibleMixin', link);
 
 export default CollapsableMixin;

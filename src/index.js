@@ -13,6 +13,7 @@ import Carousel from './Carousel';
 import CarouselItem from './CarouselItem';
 import Col from './Col';
 import CollapsableMixin from './CollapsableMixin';
+import CollapsibleMixin from './CollapsibleMixin';
 import DropdownButton from './DropdownButton';
 import DropdownMenu from './DropdownMenu';
 import DropdownStateMixin from './DropdownStateMixin';
@@ -66,6 +67,7 @@ export default {
   CarouselItem,
   Col,
   CollapsableMixin,
+  CollapsibleMixin,
   DropdownButton,
   DropdownMenu,
   DropdownStateMixin,
