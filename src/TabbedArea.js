@@ -40,9 +40,6 @@ const TabbedArea = React.createClass({
     let defaultActiveKey = this.props.defaultActiveKey != null ?
       this.props.defaultActiveKey : getDefaultActiveKeyFromChildren(this.props.children);
 
-    // TODO: In __DEV__ mode warn via `console.warn` if no `defaultActiveKey` has
-    // been set by this point, invalid children or missing key properties are likely the cause.
-
     return {
       activeKey: defaultActiveKey,
       previousActiveKey: null
