@@ -24,7 +24,7 @@ const Page = React.createClass({
                   <p>First add the Bootstrap CSS to your project; check <a href="http://getbootstrap.com/getting-started/" name="Bootstrap Docs">here</a> if you have not already done that. Note that:</p>
                   <ul>
                     <li>Because many folks use custom bootstrap themes, we do not directly depend on Bootstrap. It is up to you to to determine how you get and link to the bootstrap css and fonts.</li>
-                    <li>React-Bootstrap doesn't really depend on any bootstrap version (unless there are big breaking changes in the main lib, which are pretty rare). Just have bootstrap in your dependencies and ensure your build can read your less/sass/scss entry point.</li>
+                    <li>React-Bootstrap doesn't depend on a very precise version of Bootstrap. Just pull the latest and, in case of trouble, take hints on the version used by this documentation page. Then, have bootstrap in your dependencies and ensure your build can read your less/sass/scss entry point.</li>
                   </ul>
                   <p>Then:</p>
 
