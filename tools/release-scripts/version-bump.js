@@ -3,7 +3,7 @@ import path from 'path';
 import fsp from 'fs-promise';
 import semver from 'semver';
 import { safeExec } from '../exec';
-import { repoRoot } from './constants';
+import { repoRoot } from '../constants';
 
 export default function({ preid, type }) {
   const packagePath = path.join(repoRoot, 'package.json');

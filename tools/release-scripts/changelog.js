@@ -1,7 +1,7 @@
 import 'colors';
 import path from 'path';
 import { exec, safeExec } from '../exec';
-import { repoRoot } from './constants';
+import { repoRoot } from '../constants';
 
 export default (version) => {
   return exec(`node_modules/.bin/changelog -t v${version}`)
