@@ -92,7 +92,7 @@ describe('Input', function () {
       <Input groupClassName="group" bsStyle="error" />
     );
 
-    let node = instance.getDOMNode();
+    let node = React.findDOMNode(instance);
     assert.include(node.className, 'form-group');
     assert.include(node.className, 'group');
     assert.include(node.className, 'has-error');
@@ -211,7 +211,7 @@ describe('Input', function () {
       <Input type="file" wrapperClassName="wrapper" label="Label" help="h" />
     );
 
-    let node = instance.getDOMNode();
+    let node = React.findDOMNode(instance);
     assert.include(node.className, 'form-group');
     assert.equal(node.children[0].tagName.toLowerCase(), 'label');
     assert.include(node.children[1].className, 'wrapper');
@@ -226,7 +226,7 @@ describe('Input', function () {
       <Input type="checkbox" wrapperClassName="wrapper" label="Label" help="h" />
     );
 
-    let node = instance.getDOMNode();
+    let node = React.findDOMNode(instance);
     assert.include(node.className, 'form-group');
     assert.include(node.children[0].className, 'wrapper');
     assert.include(node.children[0].children[0].className, 'checkbox');
@@ -240,7 +240,7 @@ describe('Input', function () {
       <Input type="text" label="l" wrapperClassName="wrapper" addonAfter="a" hasFeedback={true} help="h"/>
     );
 
-    let node = instance.getDOMNode();
+    let node = React.findDOMNode(instance);
     assert.include(node.className, 'form-group');
     assert.equal(node.children[0].tagName.toLowerCase(), 'label');
     assert.include(node.children[1].className, 'wrapper');
