@@ -13,7 +13,7 @@
     "Button",
     "ButtonGroup",
     "ButtonToolbar",
-    "CollapsableNav",
+    "CollapsibleNav",
     "CollapsibleMixin",
     "Carousel",
     "CarouselItem",

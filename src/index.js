@@ -8,6 +8,7 @@ import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 import ButtonToolbar from './ButtonToolbar';
 import CollapsableNav from './CollapsableNav';
+import CollapsibleNav from './CollapsibleNav';
 import Carousel from './Carousel';
 import CarouselItem from './CarouselItem';
 import Col from './Col';
@@ -60,6 +61,7 @@ export default {
   ButtonGroup,
   ButtonToolbar,
   CollapsableNav,
+  CollapsibleNav,
   Carousel,
   CarouselItem,
   Col,

@@ -1,6 +1,6 @@
 const navbarInstance = (
   <Navbar brand='React-Bootstrap' toggleNavKey={0}>
-    <CollapsableNav eventKey={0}> {/* This is the eventKey referenced */}
+    <CollapsibleNav eventKey={0}> {/* This is the eventKey referenced */}
       <Nav navbar>
         <NavItem eventKey={1} href='#'>Link</NavItem>
         <NavItem eventKey={2} href='#'>Link</NavItem>
@@ -16,7 +16,7 @@ const navbarInstance = (
         <NavItem eventKey={1} href='#'>Link Right</NavItem>
         <NavItem eventKey={2} href='#'>Link Right</NavItem>
       </Nav>
-    </CollapsableNav>
+    </CollapsibleNav>
   </Navbar>
 );
 
