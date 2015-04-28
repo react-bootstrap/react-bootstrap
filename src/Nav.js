@@ -1,6 +1,6 @@
 import React, { cloneElement } from 'react';
 import BootstrapMixin from './BootstrapMixin';
-import CollapsableMixin from './CollapsableMixin';
+import CollapsibleMixin from './CollapsibleMixin';
 import classNames from 'classnames';
 import domUtils from './utils/domUtils';
 
@@ -9,7 +9,7 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
 
 const Nav = React.createClass({
-  mixins: [BootstrapMixin, CollapsableMixin],
+  mixins: [BootstrapMixin, CollapsibleMixin],
 
   propTypes: {
     activeHref: React.PropTypes.string,
@@ -32,11 +32,11 @@ const Nav = React.createClass({
     };
   },
 
-  getCollapsableDOMNode() {
+  getCollapsibleDOMNode() {
     return React.findDOMNode(this);
   },
 
-  getCollapsableDimensionValue: function () {
+  getCollapsibleDimensionValue: function () {
     let node = React.findDOMNode(this.refs.ul),
         height = node.offsetHeight,
         computedStyles = domUtils.getComputedStyles(node);
@@ -45,7 +45,7 @@ const Nav = React.createClass({
   },
 
   render() {
-    let classes = this.props.collapsable ? this.getCollapsableClassSet() : {};
+    let classes = this.props.collapsable ? this.getCollapsibleClassSet() : {};
 
     classes['navbar-collapse'] = this.props.collapsable;
 

@@ -1,22 +1,22 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Navbar from '../src/Navbar';
-import CollapsableNav from '../src/CollapsableNav';
+import CollapsibleNav from '../src/CollapsibleNav';
 import Nav from '../src/Nav';
 import NavItem from '../src/NavItem';
 
-describe('CollapsableNav', function () {
+describe('CollapsibleNav', function () {
   it('Should create div and add collapse class', function () {
     let Parent = React.createClass({
       render: function() {
         return (
           <Navbar toggleNavKey={1}>
-            <CollapsableNav eventKey={1}>
+            <CollapsibleNav eventKey={1}>
               <Nav>
                 <NavItem eventKey={1} ref='item1'>Item 1 content</NavItem>
                 <NavItem eventKey={2} ref='item2'>Item 2 content</NavItem>
               </Nav>
-            </CollapsableNav>
+            </CollapsibleNav>
             </Navbar>
         );
       }
@@ -30,7 +30,7 @@ describe('CollapsableNav', function () {
       render: function() {
         return (
           <Navbar toggleNavKey={1}>
-            <CollapsableNav eventKey={1} ref='collapsable_object'>
+            <CollapsibleNav eventKey={1} ref='collapsible_object'>
               <Nav>
                 <NavItem eventKey={1} ref='item1'>Item 1 content</NavItem>
                 <NavItem eventKey={2} ref='item2'>Item 2 content</NavItem>
@@ -39,33 +39,33 @@ describe('CollapsableNav', function () {
                 <NavItem eventKey={1} ref='item1'>Item 1 content</NavItem>
                 <NavItem eventKey={2} ref='item2'>Item 2 content</NavItem>
               </Nav>
-            </CollapsableNav>
+            </CollapsibleNav>
           </Navbar>
         );
       }
     });
     let instance = ReactTestUtils.renderIntoDocument(<Parent />);
-    assert.ok(ReactTestUtils.findRenderedComponentWithType(instance.refs.collapsable_object.refs.collapsable_0, Nav));
-    assert.ok(ReactTestUtils.findRenderedComponentWithType(instance.refs.collapsable_object.refs.collapsable_1, Nav));
+    assert.ok(ReactTestUtils.findRenderedComponentWithType(instance.refs.collapsible_object.refs.collapsible_0, Nav));
+    assert.ok(ReactTestUtils.findRenderedComponentWithType(instance.refs.collapsible_object.refs.collapsible_1, Nav));
   });
 
   it('Should just render children and move along if not in <Navbar>', function () {
     let Parent = React.createClass({
       render: function() {
         return (
-          <CollapsableNav eventKey={1}>
+          <CollapsibleNav eventKey={1}>
             <Nav>
               <NavItem eventKey={1} ref='item1'>Item 1 content</NavItem>
               <NavItem eventKey={2} ref='item2'>Item 2 content</NavItem>
             </Nav>
-          </CollapsableNav>
+          </CollapsibleNav>
         );
       }
     });
     let instance = ReactTestUtils.renderIntoDocument(<Parent />);
-    let collapsableNav = ReactTestUtils.findRenderedComponentWithType(instance, CollapsableNav);
-    assert.notOk(collapsableNav.getDOMNode().className.match(/\navbar-collapse\b/));
-    let nav = ReactTestUtils.findRenderedComponentWithType(collapsableNav.refs.nocollapse_0, Nav);
+    let collapsibleNav = ReactTestUtils.findRenderedComponentWithType(instance, CollapsibleNav);
+    assert.notOk(collapsibleNav.getDOMNode().className.match(/\navbar-collapse\b/));
+    let nav = ReactTestUtils.findRenderedComponentWithType(collapsibleNav.refs.nocollapse_0, Nav);
     assert.ok(nav);
   });
 
@@ -74,20 +74,20 @@ describe('CollapsableNav', function () {
       render: function() {
         return (
           <Navbar toggleNavKey={1}>
-            <CollapsableNav eventKey={1} ref='collapsable_object'>
+            <CollapsibleNav eventKey={1} ref='collapsible_object'>
               <Nav>
                 <NavItem eventKey={1} ref='item1' className='foo bar'>Item 1 content</NavItem>
                 <NavItem eventKey={2} ref='item2' className='baz'>Item 2 content</NavItem>
               </Nav>
-            </CollapsableNav>
+            </CollapsibleNav>
           </Navbar>
         );
       }
     });
     let instance = ReactTestUtils.renderIntoDocument(<Parent />);
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.collapsable_object.refs.collapsable_0, 'foo'));
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.collapsable_object.refs.collapsable_0, 'bar'));
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.collapsable_object.refs.collapsable_0, 'baz'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.collapsible_object.refs.collapsible_0, 'foo'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.collapsible_object.refs.collapsible_0, 'bar'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.collapsible_object.refs.collapsible_0, 'baz'));
   });
 
   it('Should should not duplicate classes', function () {
@@ -95,18 +95,18 @@ describe('CollapsableNav', function () {
       render: function() {
         return (
           <Navbar toggleNavKey={1}>
-            <CollapsableNav eventKey={1} ref='collapsable_object' className='foo navbar-collapse'>
+            <CollapsibleNav eventKey={1} ref='collapsible_object' className='foo navbar-collapse'>
               <Nav>
                 <NavItem eventKey={1} ref='item1' className='foo bar'>Item 1 content</NavItem>
                 <NavItem eventKey={2} ref='item2' className='baz'>Item 2 content</NavItem>
               </Nav>
-            </CollapsableNav>
+            </CollapsibleNav>
           </Navbar>
         );
       }
     });
     let instance = ReactTestUtils.renderIntoDocument(<Parent />);
-    let classDOM = ReactTestUtils.findRenderedDOMComponentWithTag(instance.refs.collapsable_object, 'DIV').props.className
+    let classDOM = ReactTestUtils.findRenderedDOMComponentWithTag(instance.refs.collapsible_object, 'DIV').props.className
         , classArray = classDOM.split(' ')
         , idx = classArray.indexOf('navbar-collapse');
     assert.equal(classArray.indexOf('navbar-collapse', idx+1), -1);
