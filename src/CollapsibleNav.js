@@ -110,7 +110,7 @@ const CollapsibleNav = React.createClass({
         activeKey: this.props.activeKey,
         activeHref: this.props.activeHref,
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        ref: 'collapsable_' + key,
+        ref: 'collapsible_' + key,
         key: key,
         navItem: true
       }
