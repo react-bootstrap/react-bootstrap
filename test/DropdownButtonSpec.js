@@ -201,4 +201,16 @@ describe('DropdownButton', function () {
     let carets = button.getElementsByClassName('caret');
     assert.equal(carets.length, 0);
   });
+
+  it('should set button class when buttonClassName is given', function() {
+    instance = ReactTestUtils.renderIntoDocument(
+        <DropdownButton buttonClassName="test-class">
+          <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+          <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+        </DropdownButton>
+    );
+
+    let button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
+    assert.ok(button.className.match(/\btest-class\b/));
+  });
 });
