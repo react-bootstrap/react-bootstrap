@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import keycode from 'keycode';
 import uuid from 'uuid';
+import MenuItem from './MenuItem';
 
 export default class DropdownButton extends React.Component {
   constructor(props) {
@@ -105,17 +106,12 @@ export default class DropdownButton extends React.Component {
 
     let items = [0, 1, 2, 3].map((index) => {
       return (
-        <li key={index} role='presentation'>
-          <a ref={`item${index}`}
-            role='menuitem'
-            className={`item-${index}`}
-            tabIndex='-1'
-            href='#'
-            onKeyDown={this.handleKeyDown}
-            onBlur={this.handleBlur}>
-            Action
-          </a>
-        </li> );
+        <MenuItem
+          key={index}
+          onKeyDown={this.handleKeyDown}>
+          Action
+        </MenuItem>
+      );
     });
 
     return (
