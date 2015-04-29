@@ -201,4 +201,37 @@ describe('DropdownButton', function () {
     let carets = button.getElementsByClassName('caret');
     assert.equal(carets.length, 0);
   });
+
+  it('should focus dropdown items when pressing cursor up and down keys', function () {
+
+    // Have to run this in actual DOM to verify focus
+    let testContainer = document.createElement('div');
+    document.body.appendChild(testContainer);
+
+    // Create instance as normal, only in DOM
+    instance = React.render(
+        <DropdownButton title="Title">
+          <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+          <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+        </DropdownButton>
+    , testContainer);
+
+    let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
+    ReactTestUtils.Simulate.click(instance.refs.dropdownButton);
+
+    let menu = React.findDOMNode(instance.refs.menu);
+
+    ReactTestUtils.Simulate.keyDown(menu, {keyCode: 40});
+    assert.equal(document.activeElement, items[0].getDOMNode());
+    ReactTestUtils.Simulate.keyDown(menu, {keyCode: 40});
+    assert.equal(document.activeElement, items[1].getDOMNode());
+    ReactTestUtils.Simulate.keyDown(menu, {keyCode: 38});
+    assert.equal(document.activeElement, items[0].getDOMNode());
+
+    // Clean up
+    React.unmountComponentAtNode(testContainer);
+    document.body.removeChild(testContainer);
+
+  });
+
 });

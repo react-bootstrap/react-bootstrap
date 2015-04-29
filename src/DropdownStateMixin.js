@@ -1,6 +1,7 @@
 import React from 'react';
 import domUtils from './utils/domUtils';
 import EventListener from './utils/EventListener';
+import createChainedFunction from './utils/createChainedFunction';
 
 /**
  * Checks whether a node is within
@@ -37,7 +38,11 @@ const DropdownStateMixin = {
 
     this.setState({
       open: newState
-    }, onStateChangeComplete);
+    }, newState && !this.state.open ? createChainedFunction(this.focusMenu, onStateChangeComplete) : onStateChangeComplete);
+  },
+
+  focusMenu() {
+    this.refs.menu.getDOMNode().focus();
   },
 
   handleDocumentKeyUp(e) {
