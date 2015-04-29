@@ -44,6 +44,7 @@
     "babel-core": "^5.1.10",
     "babel-eslint": "^3.0.1",
     "babel-loader": "^5.0.0",
+    "babel-runtime": "^5.1.11",
     "bootstrap": "^3.3.4",
     "brfs": "^1.4.0",
     "chai": "^2.2.0",
@@ -100,6 +101,8 @@
     "yargs": "^3.5.4"
   },
   "dependencies": {
-    "classnames": "^2.0.0"
+    "classnames": "^2.0.0",
+    "keycode": "^2.0.0",
+    "uuid": "^2.0.1"
   }
 }
