@@ -59,6 +59,16 @@ check out these [5 useful tips for a better commit message][commit-message]
 Please update the docs with any API changes, the code and docs should always be
 in sync.
 
+## Implement additional components and features
+
+This project is seeking parity with the core Bootstrap library.
+Component by component to the extent it is possible.
+
+Also Bootstrap mentions http://getbootstrap.com/getting-started/#examples
+as examples of things you can do, but they are not part of the core library,
+therefore this project is the wrong place to implement them.
+
+
 ## Collaborators
 
 Please see the [Maintaining](./MAINTAINING.md) documentation.
