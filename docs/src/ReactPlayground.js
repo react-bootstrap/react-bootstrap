@@ -33,6 +33,7 @@ const Modal = require('../../src/Modal');
 const Nav = require('../../src/Nav');
 const Navbar = require('../../src/Navbar');
 const NavItem = require('../../src/NavItem');
+const NavDropdown = require('../../src/NavDropdown');
 const Overlay = require('../../src/Overlay');
 const OverlayTrigger = require('../../src/OverlayTrigger');
 const PageHeader = require('../../src/PageHeader');

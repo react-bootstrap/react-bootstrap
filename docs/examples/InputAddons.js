@@ -1,7 +1,7 @@
 const innerGlyphicon = <Glyphicon glyph='music' />;
 const innerButton = <Button>Before</Button>;
 const innerDropdown = (
-  <DropdownButton title='Action'>
+  <DropdownButton title='Action' id='input-dropdown-addon'>
     <MenuItem key='1'>Item</MenuItem>
   </DropdownButton>
 );

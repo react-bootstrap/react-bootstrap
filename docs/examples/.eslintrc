@@ -30,6 +30,7 @@
     "ListGroupItem",
     "Nav",
     "Navbar",
+    "NavDropdown",
     "NavItem",
     "MenuItem",
     "Modal",

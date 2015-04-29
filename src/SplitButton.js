@@ -1,112 +1,85 @@
-/* eslint react/prop-types: [2, {ignore: "bsSize"}] */
-/* BootstrapMixin contains `bsSize` type validation */
-
-import React from 'react';
+import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
-import DropdownStateMixin from './DropdownStateMixin';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
-import DropdownMenu from './DropdownMenu';
+import CustomPropTypes from './utils/CustomPropTypes';
+import DropdownBase, { singleMenuValidation, menuWithMenuItemSiblings } from './DropdownBase';
+import MenuItem from './MenuItem';
+import SplitToggle from './SplitToggle';
+import createChainedFunction from './utils/createChainedFunction';
 
-const SplitButton = React.createClass({
-  mixins: [BootstrapMixin, DropdownStateMixin],
+class SplitButtonButton extends Button { }
 
-  propTypes: {
-    pullRight:     React.PropTypes.bool,
-    title:         React.PropTypes.node,
-    href:          React.PropTypes.string,
-    id:            React.PropTypes.string,
-    target:        React.PropTypes.string,
-    dropdownTitle: React.PropTypes.node,
-    dropup:        React.PropTypes.bool,
-    onClick:       React.PropTypes.func,
-    onSelect:      React.PropTypes.func,
-    disabled:      React.PropTypes.bool,
-    className:     React.PropTypes.string,
-    children:      React.PropTypes.node
-  },
+export default class SplitButton extends DropdownBase {
+  constructor(props) {
+    super(props, SplitToggle);
 
-  getDefaultProps() {
-    return {
-      dropdownTitle: 'Toggle dropdown'
-    };
-  },
+    this.refineButton = this.refineButton.bind(this);
+
+    this.childExtractors = [{
+        key: 'button',
+        matches: child => child.type === SplitButton.Button,
+        refine: this.refineButton
+      },
+      ...this.childExtractors
+    ];
+  }
 
   render() {
-    let groupClasses = {
-        'open': this.state.open,
-        'dropup': this.props.dropup
-      };
+    let {
+      toggle,
+      menu,
+      button,
+      open
+    } = this.extractChildren();
 
-    let button = (
-      <Button
-        {...this.props}
-        ref="button"
-        onClick={this.handleButtonClick}
-        title={null}
-        id={null}>
-        {this.props.title}
-      </Button>
-    );
-
-    let dropdownButton = (
-      <Button
-        {...this.props}
-        ref="dropdownButton"
-        className={classNames(this.props.className, 'dropdown-toggle')}
-        onClick={this.handleDropdownClick}
-        title={null}
-        href={null}
-        target={null}
-        id={null}>
-        <span className="sr-only">{this.props.dropdownTitle}</span>
-        <span className="caret" />
-        <span style={{letterSpacing: '-.3em'}}>&nbsp;</span>
-      </Button>
-    );
+    const rootClasses = {
+      open,
+      dropdown: !this.props.dropup,
+      dropup: this.props.dropup
+    };
 
     return (
       <ButtonGroup
         bsSize={this.props.bsSize}
-        className={classNames(groupClasses)}
-        id={this.props.id}>
+        className={classNames(this.props.className, rootClasses)}>
         {button}
-        {dropdownButton}
-        <DropdownMenu
-          ref="menu"
-          onSelect={this.handleOptionSelect}
-          aria-labelledby={this.props.id}
-          pullRight={this.props.pullRight}>
-          {this.props.children}
-        </DropdownMenu>
+        {toggle}
+        {menu}
       </ButtonGroup>
     );
-  },
-
-  handleButtonClick(e) {
-    if (this.state.open) {
-      this.setDropdownState(false);
-    }
-
-    if (this.props.onClick) {
-      this.props.onClick(e, this.props.href, this.props.target);
-    }
-  },
-
-  handleDropdownClick(e) {
-    e.preventDefault();
-
-    this.setDropdownState(!this.state.open);
-  },
-
-  handleOptionSelect(key) {
-    if (this.props.onSelect) {
-      this.props.onSelect(key);
-    }
-
-    this.setDropdownState(false);
   }
-});
 
-export default SplitButton;
+  refineButton(button, children, open) {
+    if (button === undefined) {
+      return (
+        <Button
+          onClick={this.props.onClick}
+          bsStyle={this.props.bsStyle}>
+          {this.props.title}
+        </Button>
+      );
+    }
+
+    return cloneElement(button, {
+      onClick: createChainedFunction(button.props.onClick, this.props.onClick)
+    });
+  }
+}
+
+SplitButton.propTypes = {
+  dropup: React.PropTypes.bool,
+  ...DropdownBase.propTypes,
+  ...BootstrapMixin.propTypes,
+
+  title: React.PropTypes.string,
+
+  children: CustomPropTypes.all([
+    singleMenuValidation(DropdownBase.Toggle, MenuItem, SplitButtonButton),
+    menuWithMenuItemSiblings(DropdownBase.Toggle, SplitButtonButton, SplitToggle)
+  ])
+};
+
+SplitButton.Toggle = SplitToggle;
+SplitButton.Button = SplitButtonButton;

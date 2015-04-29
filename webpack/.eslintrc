@@ -1,0 +1,12 @@
+{
+  "env": {
+    "node": true
+  },
+  "parser": "babel-eslint",
+  "plugins": [
+    "lodash"
+  ],
+  "rules": {
+    "lodash/import": 0
+  }
+}

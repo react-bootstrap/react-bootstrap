@@ -15,7 +15,6 @@ export CollapsibleMixin from './CollapsibleMixin';
 export CollapsibleNav from './CollapsibleNav';
 export DropdownButton from './DropdownButton';
 export DropdownMenu from './DropdownMenu';
-export DropdownStateMixin from './DropdownStateMixin';
 export FadeMixin from './FadeMixin';
 export Glyphicon from './Glyphicon';
 export Grid from './Grid';
