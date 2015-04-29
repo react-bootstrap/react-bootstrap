@@ -67,7 +67,7 @@ function applyPropDoclets(props, propName){
 }
 
 
-export default function generate(destination, options = { mixins: true }){
+export default function generate(destination, options = { mixins: true, inferComponent: true }){
 
   return globp(__dirname + '/../src/**/*.js') //eslint-disable-line no-path-concat
     .then( files => {

@@ -7,7 +7,6 @@
     "lodash"
   ],
   "rules": {
-    "lodash/import": 0,
-    "no-console": 0
+    "lodash/import": 0
   }
 }
