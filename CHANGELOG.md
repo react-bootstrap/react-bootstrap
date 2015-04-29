@@ -1,3 +1,28 @@
+v0.21.1 - Wed, 29 Apr 2015 21:44:50 GMT
+---------------------------------------
+
+- [3767c43](../../commit/3767c43) [added] Added buttonClassName to DropdownButton
+- [e59c4f8](../../commit/e59c4f8) [added] Clarification about implementing components.
+- [0105127](../../commit/0105127) [changed] Renamed Collapsable* => Collapsible*
+- [6b9c250](../../commit/6b9c250) [fixed] Fix for bug 547 in tools/release.
+- [b86e03e](../../commit/b86e03e) [fixed] ListGroup rendering a ul when ListGroupItem has onClick handler
+- [ddc8a85](../../commit/ddc8a85) [changed] Updated eslint dev-dependency
+- [18c22ba](../../commit/18c22ba) [changed] Updated style-loader dev-dependency
+- [01c16c1](../../commit/01c16c1) [changed] Updated css-loader dev-dependency
+- [c295a9a](../../commit/c295a9a) [fixed] ModalTrigger passes onFocus prop and onBlur prop to child
+- [131669b](../../commit/131669b) [fixed] ModalTrigger passes onMouseOver prop and onMouseOut prop to child
+- [1249eff](../../commit/1249eff) [fixed] OverlayTrigger passes onClick prop to child
+- [5f565b9](../../commit/5f565b9) [added] Docs example of passing component to navbar brand.
+- [7811ce2](../../commit/7811ce2) [added] Dry run and verbose options to release process
+- [22da8f9](../../commit/22da8f9) [fixed] ListGroup children array bugs. Fixes #548
+- [b17a7b3](../../commit/b17a7b3) [added] release-docs script
+- [4fedc95](../../commit/4fedc95) [fixed] Bug in Server vs Client side rendering of Navbar
+- [1d8b7c7](../../commit/1d8b7c7) [fixes] #516 [added] TabbedArea NavItem renderTab() className
+- [725deaa](../../commit/725deaa) [changed] Updated css-loader dev-dependency
+- [eb29b11](../../commit/eb29b11) [changed] Updated style-loader dev-dependency
+- [bc8cd5c](../../commit/bc8cd5c) [fixed] Fix for bug507.
+
+
 v0.21.0 - Tue, 21 Apr 2015 13:38:38 GMT
 ---------------------------------------
 
