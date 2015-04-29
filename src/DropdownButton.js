@@ -20,7 +20,8 @@ const DropdownButton = React.createClass({
     onClick:   React.PropTypes.func,
     onSelect:  React.PropTypes.func,
     navItem:   React.PropTypes.bool,
-    noCaret:   React.PropTypes.bool
+    noCaret:   React.PropTypes.bool,
+    buttonClassName: React.PropTypes.string
   },
 
   render() {
@@ -34,7 +35,7 @@ const DropdownButton = React.createClass({
       <Button
         {...this.props}
         ref="dropdownButton"
-        className="dropdown-toggle"
+        className={classNames('dropdown-toggle', this.props.buttonClassName)}
         onClick={this.handleDropdownClick}
         key={0}
         navDropdown={this.props.navItem}
