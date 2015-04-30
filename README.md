@@ -21,6 +21,7 @@ See the [documentation][documentation] with live editable examples.
 ## Related modules
 
 - [react-router-bootstrap][react-router-bootstrap] - Integration with [react-router][react-router].
+- [react-mount][react-mount] - Use custom tags to place react components directly in html.
 
 ## Local Setup
 
@@ -64,6 +65,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [react-router-bootstrap]: https://github.com/mtscout6/react-router-bootstrap
 [react-router]: https://github.com/rackt/react-router
+[react-mount]: https://github.com/greenish/react-mount
 
 [huboard-badge]: https://img.shields.io/badge/Hu-Board-7965cc.svg
 [huboard]: https://huboard.com/react-bootstrap/react-bootstrap
