@@ -21,6 +21,8 @@ See the [documentation][documentation] with live editable examples.
 ## Related modules
 
 - [react-router-bootstrap][react-router-bootstrap] - Integration with [react-router][react-router].
+- [Complementary Tools][complementary-tools] - List of complementary tools that
+  can be used with React.
 
 ## Local Setup
 
@@ -64,6 +66,8 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [react-router-bootstrap]: https://github.com/mtscout6/react-router-bootstrap
 [react-router]: https://github.com/rackt/react-router
+
+[complementary-tools]: https://github.com/facebook/react/wiki/Complementary-Tools
 
 [huboard-badge]: https://img.shields.io/badge/Hu-Board-7965cc.svg
 [huboard]: https://huboard.com/react-bootstrap/react-bootstrap
