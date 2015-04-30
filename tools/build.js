@@ -25,6 +25,15 @@ const argv = yargs
 
 setExecOptions(argv);
 
+function forkAndBuildDocs(fork) {
+  console.log('Building: '.cyan + 'docs'.green);
+
+  let options = argv.verbose ? ' -- --verbose' : '';
+
+  return exec(`npm run docs-build${options}`)
+    .then(() => console.log('Built: '.cyan + 'docs'.green));
+}
+
 export default function Build(noExitOnFailure) {
   if (argv.docsOnly) {
     return docs();
@@ -33,7 +42,7 @@ export default function Build(noExitOnFailure) {
       lib(),
       bower(),
       dist(),
-      exec(`npm run docs-build`)
+      forkAndBuildDocs()
     ])
     .then(() => copy(distRoot, bowerRoot));
 
