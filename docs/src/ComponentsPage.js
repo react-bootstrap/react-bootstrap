@@ -217,7 +217,7 @@ const ComponentsPage = React.createClass({
                   <h1 id='modals' className='page-header'>Modals <small>Modal</small></h1>
 
                   <h3 id='modals-static'>A static example</h3>
-                  <p>A rendered modal with header, body, and set of actions in the footer.</p>
+                  <p>A rendered modal with header, body, and set of actions in the footer. An optional <code>contentStyles</code> property can be set to override the styles on <code>.modal-content</code>.</p>
                   <p>The header is added automatically if you pass in a <code>title</code> prop.</p>
                   <ReactPlayground codeText={Samples.ModalStatic} />
 

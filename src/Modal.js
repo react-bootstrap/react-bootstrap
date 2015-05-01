@@ -45,6 +45,8 @@ const Modal = React.createClass({
       'in': !this.props.animation || !document.querySelectorAll
     };
 
+    let contentStyle = this.props.contentStyle || {overflow: 'hidden'};
+
     let modal = (
       <div
         {...this.props}
@@ -56,7 +58,7 @@ const Modal = React.createClass({
         onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
         ref="modal">
         <div className={classNames(dialogClasses)}>
-          <div className="modal-content" style={{overflow: 'hidden'}}>
+          <div className="modal-content" style={contentStyle}>
             {this.props.title ? this.renderHeader() : null}
             {this.props.children}
           </div>
