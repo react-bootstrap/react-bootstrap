@@ -3,6 +3,7 @@ import BootstrapMixin from './BootstrapMixin';
 import CollapsibleMixin from './CollapsibleMixin';
 import classNames from 'classnames';
 import domUtils from './utils/domUtils';
+import deprecationWarning from './utils/deprecationWarning';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
@@ -40,6 +41,16 @@ const CollapsibleNav = React.createClass({
       }
     }
     return height;
+  },
+
+  componentDidMount() {
+    if (this.constructor.__deprecated__) {
+      deprecationWarning(
+        'CollapsableNav',
+        'CollapsibleNav',
+        'https://github.com/react-bootstrap/react-bootstrap/issues/425#issuecomment-97110963'
+      );
+    }
   },
 
   render() {
