@@ -136,4 +136,15 @@ describe('ListGroup', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
   });
 
+  it('Should support an element id through "id" prop', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroup id="testItem">
+        <ListGroupItem>Child</ListGroupItem>
+      </ListGroup>
+    );
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
+    assert.equal(React.findDOMNode(instance).nodeName, 'UL');
+    assert.equal(React.findDOMNode(instance).id, 'testItem');
+  });
+
 });

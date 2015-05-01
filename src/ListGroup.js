@@ -46,7 +46,9 @@ class ListGroup extends React.Component {
     );
 
     return (
-      <ul className={classNames(this.props.className, 'list-group')}>
+      <ul
+        {...this.props}
+        className={classNames(this.props.className, 'list-group')}>
         {listItems}
       </ul>
     );
@@ -54,7 +56,9 @@ class ListGroup extends React.Component {
 
   renderDiv(items) {
     return (
-      <div className={classNames(this.props.className, 'list-group')}>
+      <div
+        {...this.props}
+        className={classNames(this.props.className, 'list-group')}>
         {items}
       </div>
     );
@@ -62,7 +66,8 @@ class ListGroup extends React.Component {
 }
 
 ListGroup.propTypes = {
-  className: React.PropTypes.string
+  className: React.PropTypes.string,
+  id: React.PropTypes.string
 };
 
 export default ListGroup;
