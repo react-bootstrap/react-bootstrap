@@ -30,9 +30,11 @@ const CollapsableMixin = assign({}, CollapsibleMixin, {
       link
     );
     return this.getCollapsableDimensionValue();
+  },
+
+  componentDidMount() {
+    deprecationWarning('CollapsableMixin', 'CollapsibleMixin', link);
   }
 });
-
-deprecationWarning('CollapsableMixin', 'CollapsibleMixin', link);
 
 export default CollapsableMixin;
