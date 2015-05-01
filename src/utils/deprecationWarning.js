@@ -1,16 +1,14 @@
-function warn(message) {
-  if (window.console && (typeof console.warn === 'function')) {
-    console.warn(message);
-  }
-}
-
 export default function deprecationWarning(oldname, newname, link) {
   if (process.env.NODE_ENV !== 'production') {
+    if (!window.console && (typeof console.warn !== 'function')) {
+      return;
+    }
+
     let message = `${oldname} is deprecated. Use ${newname} instead.`;
-    warn(message);
+    console.warn(message);
 
     if (link) {
-      warn(`You can read more about it here ${link}`);
+      console.warn(`You can read more about it here ${link}`);
     }
   }
 }
