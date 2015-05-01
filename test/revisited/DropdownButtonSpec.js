@@ -1,11 +1,21 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import DropdownButton from '../../src/revisited/DropdownButton';
+import MenuItem from '../../src/revisited/MenuItem';
 import keycode from 'keycode';
 
 describe.only('DropdownButton revisited', function() {
+  let simpleDropdown = (
+    <DropdownButton>
+      <MenuItem>Item 1</MenuItem>
+      <MenuItem>Item 2</MenuItem>
+      <MenuItem>Item 3</MenuItem>
+      <MenuItem>Item 4</MenuItem>
+    </DropdownButton>
+  );
+
   it('renders div with dropdown class', function() {
-    let instance = ReactTestUtils.renderIntoDocument(<DropdownButton />);
+    let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     let node = React.findDOMNode(instance);
 
     node.tagName.should.equal('DIV');
@@ -13,7 +23,7 @@ describe.only('DropdownButton revisited', function() {
   });
 
   it('renders dropdown toggle button', function() {
-    let instance = ReactTestUtils.renderIntoDocument(<DropdownButton />);
+    let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     let node = React.findDOMNode(instance);
     let buttonNode = node.children[0];
 
@@ -27,7 +37,7 @@ describe.only('DropdownButton revisited', function() {
   });
 
   it('renders dropdown toggle button caret', function() {
-    let instance = ReactTestUtils.renderIntoDocument(<DropdownButton />);
+    let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     let node = React.findDOMNode(instance);
     let caretNode = node.children[0].children[1];
 
@@ -39,7 +49,7 @@ describe.only('DropdownButton revisited', function() {
   // keys as well since the component is a button. I cannot figure out how to
   // get ReactTestUtils to simulate such though.
   it('toggles open/closed when clicked', function() {
-    let instance = ReactTestUtils.renderIntoDocument(<DropdownButton />);
+    let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     let node = React.findDOMNode(instance);
     let buttonNode = React.findDOMNode(node.children[0]);
 
@@ -58,7 +68,7 @@ describe.only('DropdownButton revisited', function() {
   });
 
   it('when focused and closed toggles open when the key "down" is pressed', function() {
-    let instance = ReactTestUtils.renderIntoDocument(<DropdownButton />);
+    let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     let node = React.findDOMNode(instance);
     let buttonNode = React.findDOMNode(node.children[0]);
 
@@ -69,8 +79,8 @@ describe.only('DropdownButton revisited', function() {
   });
 
   it('generates a random id if one is not provided', function() {
-    let instance1 = ReactTestUtils.renderIntoDocument(<DropdownButton />);
-    let instance2 = ReactTestUtils.renderIntoDocument(<DropdownButton />);
+    let instance1 = ReactTestUtils.renderIntoDocument(simpleDropdown);
+    let instance2 = ReactTestUtils.renderIntoDocument(simpleDropdown);
     let node1 = ReactTestUtils.findRenderedDOMComponentWithTag(instance1, 'BUTTON').getDOMNode();
     let node2 = ReactTestUtils.findRenderedDOMComponentWithTag(instance2, 'BUTTON').getDOMNode();
 
@@ -91,7 +101,7 @@ describe.only('DropdownButton revisited', function() {
     });
 
     it('when focused and closed sets focus on first menu item when the key "down" is pressed', function() {
-      let instance = React.render(<DropdownButton />, focusableContainer);
+      let instance = React.render(simpleDropdown, focusableContainer);
       let node = React.findDOMNode(instance);
       let buttonNode = React.findDOMNode(node.children[0]);
 
@@ -103,7 +113,7 @@ describe.only('DropdownButton revisited', function() {
     });
 
     it('when focused and open sets focus on first menu item when the key "down" is pressed', function() {
-      let instance = React.render(<DropdownButton />, focusableContainer);
+      let instance = React.render(simpleDropdown, focusableContainer);
       let node = React.findDOMNode(instance);
       let buttonNode = React.findDOMNode(node.children[0]);
 
@@ -116,7 +126,7 @@ describe.only('DropdownButton revisited', function() {
     });
 
     it('when focused and open does not toggle closed when the key "down" is pressed', function() {
-      let instance = ReactTestUtils.renderIntoDocument(<DropdownButton />);
+      let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
       let node = React.findDOMNode(instance);
       let buttonNode = React.findDOMNode(node.children[0]);
 
@@ -128,7 +138,7 @@ describe.only('DropdownButton revisited', function() {
     });
 
     it('when focused and an item is selected sets focus on next menu item when the key "down" is pressed', function() {
-      let instance = React.render(<DropdownButton />, focusableContainer);
+      let instance = React.render(simpleDropdown, focusableContainer);
       let node = React.findDOMNode(instance);
       let buttonNode = React.findDOMNode(node.children[0]);
 
@@ -146,7 +156,7 @@ describe.only('DropdownButton revisited', function() {
     });
 
     it('when focused and last item is selected sets focus on first menu item when the key "down" is pressed', function() {
-      let instance = React.render(<DropdownButton />, focusableContainer);
+      let instance = React.render(simpleDropdown, focusableContainer);
       let node = React.findDOMNode(instance);
       let buttonNode = React.findDOMNode(node.children[0]);
 
@@ -166,7 +176,7 @@ describe.only('DropdownButton revisited', function() {
     });
 
     it('when focused and item is selected sets focus on previous menu item when the key "up" is pressed', function() {
-      let instance = React.render(<DropdownButton />, focusableContainer);
+      let instance = React.render(simpleDropdown, focusableContainer);
       let node = React.findDOMNode(instance);
       let buttonNode = React.findDOMNode(node.children[0]);
 
@@ -181,7 +191,7 @@ describe.only('DropdownButton revisited', function() {
     });
 
     it('when focused and the first item is selected sets focus on last menu item when the key "up" is pressed', function() {
-      let instance = React.render(<DropdownButton />, focusableContainer);
+      let instance = React.render(simpleDropdown, focusableContainer);
       let node = React.findDOMNode(instance);
       let buttonNode = React.findDOMNode(node.children[0]);
 
@@ -198,7 +208,7 @@ describe.only('DropdownButton revisited', function() {
     });
 
     it('when open and the key "esc" is pressed the menu is closed and focus is returned to the button', function() {
-      let instance = React.render(<DropdownButton />, focusableContainer);
+      let instance = React.render(simpleDropdown, focusableContainer);
       let node = React.findDOMNode(instance);
       let buttonNode = React.findDOMNode(node.children[0]);
       let firstMenuItemAnchor = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0].getDOMNode();
@@ -213,7 +223,7 @@ describe.only('DropdownButton revisited', function() {
     it('when open and the key "tab" is pressed the menu is closed and focus is progress to the next focusable element', function() {
       let instance = React.render(
         <div>
-          <DropdownButton />
+          {simpleDropdown}
           <input type='text' id='next-focusable' />
         </div>, focusableContainer);
 
@@ -236,7 +246,7 @@ describe.only('DropdownButton revisited', function() {
 
   describe('DropdownMenu', function() {
     it('has aria-labelled by same id as toggle button', function() {
-      let instance = ReactTestUtils.renderIntoDocument(<DropdownButton />);
+      let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
       let node = React.findDOMNode(instance);
       let buttonNode = node.children[0];
       let menuNode = node.children[1];

@@ -7,9 +7,9 @@ export default class MenuItem extends React.Component {
         <a
           role='menuitem'
           tabIndex='-1'
-          href='#'
+          href={this.props.href}
           onKeyDown={this.props.onKeyDown}>
-          Action
+          {this.props.children}
         </a>
       </li>
     );
@@ -17,5 +17,6 @@ export default class MenuItem extends React.Component {
 }
 
 MenuItem.propTypes = {
+  href: React.PropTypes.string,
   onKeyDown: React.PropTypes.func
 };

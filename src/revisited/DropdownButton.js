@@ -2,7 +2,6 @@ import React from 'react';
 import classNames from 'classnames';
 import keycode from 'keycode';
 import uuid from 'uuid';
-import MenuItem from './MenuItem';
 
 export default class DropdownButton extends React.Component {
   constructor(props) {
@@ -26,7 +25,7 @@ export default class DropdownButton extends React.Component {
   }
 
   handleKeyDown(event) {
-    //console.log(`KEY DOWN ${event.key} [${event.keyCode}]`);
+    //console.log(`KEY DOWN ${event.key} [${event.keyCode}] ${event.target}`);
     switch(event.keyCode) {
       case keycode.codes.down:
         if (!this.state.open) {
@@ -104,14 +103,8 @@ export default class DropdownButton extends React.Component {
       open: this.state.open
     };
 
-    let items = [0, 1, 2, 3].map((index) => {
-      return (
-        <MenuItem
-          key={index}
-          onKeyDown={this.handleKeyDown}>
-          Action
-        </MenuItem>
-      );
+    let children = React.Children.map(this.props.children, child => {
+      return React.cloneElement(child, { onKeyDown: this.handleKeyDown }, child.children);
     });
 
     return (
@@ -130,7 +123,7 @@ export default class DropdownButton extends React.Component {
           <span className='caret'></span>
         </button>
         <ul ref='menu' className='dropdown-menu' role='menu' aria-labelledby={id}>
-          {items}
+          {children}
         </ul>
       </div>
     );
