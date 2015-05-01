@@ -1,3 +1,10 @@
+v0.21.2 - Fri, 01 May 2015 19:36:56 GMT
+---------------------------------------
+
+- [a07aa20](../../commit/a07aa20) [fixed] Bug introduced by new deprecation code.
+- [fef8984](../../commit/fef8984) [fixed] #597 able to set ID on ListGroup
+
+
 v0.21.1 - Wed, 29 Apr 2015 21:44:50 GMT
 ---------------------------------------
 
