@@ -3,6 +3,7 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Nav from '../src/Nav';
 import NavItem from '../src/NavItem';
 import Button from '../src/Button';
+import {shouldWarn} from './helpers';
 
 describe('Nav', function () {
   it('Should set the correct item active', function () {
@@ -113,5 +114,31 @@ describe('Nav', function () {
     let items = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
     assert.ok(items[0].props.navItem);
+  });
+
+  it('Should not warn about deprecation when collaps_i_ble property is used', function () {
+    let Component = React.createClass({
+      render: function() {
+        return (
+          <Nav collapsible />
+        );
+      }
+    });
+    ReactTestUtils.renderIntoDocument(<Component />);
+
+    console.warn.called.should.be.false;
+  });
+
+  it('Should warn about deprecation when collaps_a_ble property is used', function () {
+    let Component = React.createClass({
+      render: function() {
+        return (
+          <Nav collapsable />
+        );
+      }
+    });
+    ReactTestUtils.renderIntoDocument(<Component />);
+
+    shouldWarn('deprecated');
   });
 });

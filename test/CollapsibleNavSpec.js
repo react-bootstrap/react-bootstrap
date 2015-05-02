@@ -4,6 +4,7 @@ import Navbar from '../src/Navbar';
 import CollapsibleNav from '../src/CollapsibleNav';
 import Nav from '../src/Nav';
 import NavItem from '../src/NavItem';
+import {shouldWarn} from './helpers';
 
 describe('CollapsibleNav', function () {
   it('Should create div and add collapse class', function () {
@@ -17,7 +18,7 @@ describe('CollapsibleNav', function () {
                 <NavItem eventKey={2} ref='item2'>Item 2 content</NavItem>
               </Nav>
             </CollapsibleNav>
-            </Navbar>
+          </Navbar>
         );
       }
     });
@@ -110,5 +111,31 @@ describe('CollapsibleNav', function () {
         , classArray = classDOM.split(' ')
         , idx = classArray.indexOf('navbar-collapse');
     assert.equal(classArray.indexOf('navbar-collapse', idx+1), -1);
+  });
+
+  it('Should not warn about deprecation when collaps_i_ble property is used', function () {
+    let Component = React.createClass({
+      render: function() {
+        return (
+          <CollapsibleNav collapsible />
+        );
+      }
+    });
+    ReactTestUtils.renderIntoDocument(<Component />);
+
+    console.warn.called.should.be.false;
+  });
+
+  it('Should warn about deprecation when collaps_a_ble property is used', function () {
+    let Component = React.createClass({
+      render: function() {
+        return (
+          <CollapsibleNav collapsable />
+        );
+      }
+    });
+    ReactTestUtils.renderIntoDocument(<Component />);
+
+    shouldWarn('deprecated');
   });
 });
