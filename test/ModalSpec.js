@@ -98,4 +98,28 @@ describe('Modal', function () {
     assert.ok(header.className.match(/\btext-danger\b/));
   });
 
+  it('Should default to overflow hidden on content', function () {
+    let noOp = function () {};
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Modal title="Title" onRequestHide={noOp}>
+        <strong>Message</strong>
+      </Modal>
+    );
+
+    let content = instance.getDOMNode().getElementsByClassName('modal-content')[0];
+    assert.ok(content.style.overflow.match(/hidden/));
+  });
+
+  it('Should allow setting content overflow property', function () {
+    let noOp = function () {};
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Modal title="Title" onRequestHide={noOp} contentStyle={{overflow: 'visible'}}>
+        <strong>Message</strong>
+      </Modal>
+    );
+
+    let content = instance.getDOMNode().getElementsByClassName('modal-content')[0];
+    assert.ok(content.style.overflow.match(/visible/));
+  });
+
 });
