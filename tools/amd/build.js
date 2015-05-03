@@ -3,7 +3,6 @@ import path from 'path';
 import fsp from 'fs-promise';
 import { copy } from '../fs-utils';
 import { exec } from '../exec';
-import generateFactories from '../generateFactories';
 import { repoRoot, srcRoot, bowerRoot } from '../constants';
 
 const packagePath = path.join(repoRoot, 'package.json');
@@ -12,10 +11,6 @@ const bowerJson = path.join(bowerRoot, 'bower.json');
 
 const readme = path.join(__dirname, 'README.md');
 const license = path.join(repoRoot, 'LICENSE');
-
-const babelOptions = '--modules amd --optional es7.objectRestSpread';
-
-const factoriesDestination = path.join(bowerRoot, 'factories');
 
 function bowerConfig() {
   return Promise.all([
@@ -32,11 +27,10 @@ export default function BuildBower() {
   console.log('Building: '.cyan + 'bower module'.green);
 
   return exec(`rimraf ${bowerRoot}`)
-    .then(() => fsp.mkdirs(factoriesDestination))
+    .then(() => fsp.mkdir(bowerRoot))
     .then(() => Promise.all([
       bowerConfig(),
-      generateFactories(babelOptions, factoriesDestination),
-      exec(`babel ${babelOptions} ${srcRoot} --out-dir ${bowerRoot}`),
+      exec(`babel --modules amd --optional es7.objectRestSpread ${srcRoot} --out-dir ${path.join(bowerRoot, 'lib')}`),
       copy(readme, bowerRoot),
       copy(license, bowerRoot)
     ]))

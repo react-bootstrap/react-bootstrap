@@ -65,16 +65,6 @@ const Page = React.createClass({
   </script>
                     `}</code></pre>
                   </div>
-
-                  <h3>Without JSX</h3>
-                  <p>If you do not use JSX and just call components as functions, you must explicitly <a href="https://facebook.github.io/react/blog/2014/10/14/introducing-react-elements.html#deprecated-auto-generated-factories">create a factory before calling it</a>. React-bootstrap provides factories for you in <code>lib/factories</code>:</p>
-                  <div className="highlight">
-                    <pre><code className="js">{`
-  var Alert = require('react-bootstrap/lib/factories').Alert;
-  // or
-  var Alert = require('react-bootstrap/lib/factories/Alert');
-                    `}</code></pre>
-                  </div>
                 </div>
                 <div className="bs-docs-section">
                   <h2 id="browser-support" className="page-header">Browser support</h2>
