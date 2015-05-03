@@ -4,6 +4,7 @@ import Navbar from '../src/Navbar';
 import CollapsibleNav from '../src/CollapsibleNav';
 import Nav from '../src/Nav';
 import NavItem from '../src/NavItem';
+import {shouldWarn} from './helpers';
 
 describe('CollapsibleNav', function () {
   it('Should create div and add collapse class', function () {
@@ -110,5 +111,44 @@ describe('CollapsibleNav', function () {
         , classArray = classDOM.split(' ')
         , idx = classArray.indexOf('navbar-collapse');
     assert.equal(classArray.indexOf('navbar-collapse', idx+1), -1);
+  });
+
+  it('Should warn about getCollapsableDOMNode', function () {
+    let Parent = React.createClass({
+      render: function() {
+        return (
+          <Navbar toggleNavKey={1}>
+            <CollapsibleNav ref='collapsible_object' eventKey={1}>
+              <Nav>
+                <NavItem eventKey={1} ref='item1'>Item 1 content</NavItem>
+                <NavItem eventKey={2} ref='item2'>Item 2 content</NavItem>
+              </Nav>
+            </CollapsibleNav>
+            </Navbar>
+        );
+      }
+    });
+    let instance = ReactTestUtils.renderIntoDocument(<Parent />);
+    instance.refs.collapsible_object.getCollapsableDOMNode();
+    shouldWarn('deprecated');
+  });
+  it('Should warn about getCollapsableDimensionValue', function () {
+    let Parent = React.createClass({
+      render: function() {
+        return (
+          <Navbar toggleNavKey={1}>
+            <CollapsibleNav ref='collapsible_object' eventKey={1}>
+              <Nav>
+                <NavItem eventKey={1} ref='item1'>Item 1 content</NavItem>
+                <NavItem eventKey={2} ref='item2'>Item 2 content</NavItem>
+              </Nav>
+            </CollapsibleNav>
+            </Navbar>
+        );
+      }
+    });
+    let instance = ReactTestUtils.renderIntoDocument(<Parent />);
+    instance.refs.collapsible_object.getCollapsableDimensionValue();
+    shouldWarn('deprecated');
   });
 });
