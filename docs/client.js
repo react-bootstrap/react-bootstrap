@@ -4,14 +4,11 @@ import './assets/style.css';
 
 import './assets/carousel.png';
 import './assets/logo.png';
+import './assets/favicon.ico';
 
 import React from 'react';
 import Router from 'react-router';
 import routes from './src/Routes';
-
-// TODO: Move this to Webpack
-// For React devtools
-window.React = React;
 
 Router.run(routes, Router.RefreshLocation, Handler => {
   React.render(
