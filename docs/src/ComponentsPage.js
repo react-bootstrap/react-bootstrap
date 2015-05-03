@@ -170,6 +170,25 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.SplitButtonRight} />
                 </div>
 
+                {/* Menu Item */}
+                <div className='bs-docs-section'>
+                  <h1 id='menu-item' className='page-header'>Menu Item <small> MenudItem</small></h1>
+                  <p>This is a component used in other components (see <a href="buttons">Buttons</a>, <a href="#navbars">Navbars</a>).</p>
+                  <p>It supports the basic anchor properties <code>href</code>, <code>target</code>, <code>title</code>.</p>
+                  <p>It also supports different properties of the normal Bootstrap MenuItem.
+                    <ul>
+                      <li><code>header</code>: To add a header label to sections</li>
+                      <li><code>divider</code>: Adds an horizontal divider between sections</li>
+                      <li><code>disabled</code>: shows the item as disabled, and prevents the onclick</li>
+                      <li><code>eventKey</code>: passed to the callback</li>
+                      <li><code>onSelect</code>: a callback that is called when the user clicks the item.</li>
+                    </ul>
+                  <p>The callback is called with the following arguments: <code>eventKey</code>, <code>href</code> and <code>target</code></p>
+                  </p>
+                  <ReactPlayground codeText={Samples.MenuItem} />
+                </div>
+
+              {/* Panels */}
                 <div className='bs-docs-section'>
                   <h1 id='panels' className='page-header'>Panels <small>Panel, PanelGroup, Accordion</small></h1>
 
@@ -607,6 +626,7 @@ const ComponentsPage = React.createClass({
                   <code>getValue()</code> will not work when used this way.</p>
                   <ReactPlayground codeText={Samples.InputWrapper} />
                 </div>
+
               </div>
 
               <div className='col-md-3'>
@@ -623,6 +643,7 @@ const ComponentsPage = React.createClass({
                     <SubNav href='#buttons' key={1} text='Buttons'>
                       <NavItem href='#btn-groups' key={2}>Button groups</NavItem>
                       <NavItem href='#btn-dropdowns' key={3}>Button dropdowns</NavItem>
+                      <NavItem href='#menu-item' key={25}>Menu Item</NavItem>
                     </SubNav>
                     <NavItem href='#panels' key={4}>Panels</NavItem>
                     <NavItem href='#modals' key={5}>Modals</NavItem>

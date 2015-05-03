@@ -107,4 +107,13 @@ describe('MenuItem', function () {
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });
+
+  it('Should be `disabled` link', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem disabled>
+        Title
+      </MenuItem>
+    );
+    assert.ok(instance.getDOMNode().className.match(/\bdisabled\b/));
+  });
 });
