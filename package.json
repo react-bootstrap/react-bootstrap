@@ -82,6 +82,6 @@
     "yargs": "^3.5.4"
   },
   "dependencies": {
-    "classnames": "^1.1.4"
+    "classnames": "^2.0.0"
   }
 }
