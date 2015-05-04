@@ -39,7 +39,7 @@ export default (config, options) => {
             { test: /\.less$/, loader: ExtractTextPlugin.extract('style', `css${cssSourceMap}!less${cssSourceMap}`) },
             { test: /\.json$/, loader: 'json' },
 
-            { test: /\.jpe?g$|\.gif$|\.png$/, loader: 'file?name=[name].[ext]' },
+            { test: /\.jpe?g$|\.gif$|\.png|\.ico$/, loader: 'file?name=[name].[ext]' },
             { test: /\.eot$|\.ttf$|\.svg$|\.woff2?$/, loader: 'file?name=[name].[ext]' }
           ])
       },
