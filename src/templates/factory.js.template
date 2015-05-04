@@ -1,0 +1,4 @@
+import React from 'react';
+import <%= name %> from '../<%= name %>';
+
+export default React.createFactory(<%= name %>);
