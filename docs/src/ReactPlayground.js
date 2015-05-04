@@ -1,4 +1,4 @@
-import React from 'react';
+import * as modReact from 'react';
 import * as modClassNames from 'classnames';
 import * as modAccordion from '../../src/Accordion';
 import * as modAlert from '../../src/Alert';
@@ -47,6 +47,7 @@ import babel from 'babel-core/browser';
 
 const classNames = modClassNames.default;
 /* eslint-disable */
+const React = modReact.default;
 const Accordion = modAccordion.default;
 const Alert = modAlert.default;
 const Badge = modBadge.default;
