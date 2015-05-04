@@ -10,7 +10,6 @@ const PanelGroup = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
-    collapsable: React.PropTypes.bool,
     accordion: React.PropTypes.bool,
     activeKey: React.PropTypes.any,
     defaultActiveKey: React.PropTypes.any,
@@ -51,7 +50,7 @@ const PanelGroup = React.createClass({
     };
 
     if (this.props.accordion) {
-      props.collapsable = true;
+      props.collapsible = true;
       props.expanded = (child.props.eventKey === activeKey);
       props.onSelect = this.handleSelect;
     }

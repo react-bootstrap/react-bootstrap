@@ -17,7 +17,7 @@ describe('CollapsibleNav', function () {
                 <NavItem eventKey={2} ref='item2'>Item 2 content</NavItem>
               </Nav>
             </CollapsibleNav>
-            </Navbar>
+          </Navbar>
         );
       }
     });

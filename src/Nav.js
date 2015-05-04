@@ -3,7 +3,7 @@ import BootstrapMixin from './BootstrapMixin';
 import CollapsibleMixin from './CollapsibleMixin';
 import classNames from 'classnames';
 import domUtils from './utils/domUtils';
-
+import collapsable from './utils/deprecatedProperty';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
@@ -18,7 +18,8 @@ const Nav = React.createClass({
     stacked: React.PropTypes.bool,
     justified: React.PropTypes.bool,
     onSelect: React.PropTypes.func,
-    collapsable: React.PropTypes.bool,
+    collapsable,
+    collapsible: React.PropTypes.bool,
     expanded: React.PropTypes.bool,
     navbar: React.PropTypes.bool,
     eventKey: React.PropTypes.any,
@@ -45,11 +46,12 @@ const Nav = React.createClass({
   },
 
   render() {
-    let classes = this.props.collapsable ? this.getCollapsibleClassSet() : {};
+    const collapsible = this.props.collapsible || this.props.collapsable;
+    let classes = collapsible ? this.getCollapsibleClassSet() : {};
 
-    classes['navbar-collapse'] = this.props.collapsable;
+    classes['navbar-collapse'] = collapsible;
 
-    if (this.props.navbar && !this.props.collapsable) {
+    if (this.props.navbar && !collapsible) {
       return (this.renderUl());
     }
 
