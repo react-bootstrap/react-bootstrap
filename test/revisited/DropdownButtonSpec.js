@@ -87,6 +87,14 @@ describe.only('DropdownButton revisited', function() {
     node1.getAttribute('id').should.not.equal(node2.getAttribute('id'));
   });
 
+  it('button has aria-haspopup attribute (As per W3C WAI-ARIA Spec)', function() {
+    let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
+    let node = React.findDOMNode(instance);
+    let buttonNode = React.findDOMNode(node.children[0]);
+
+    buttonNode.getAttribute('aria-haspopup').should.equal('true');
+  });
+
   describe('focusable state', function() {
     let focusableContainer;
 

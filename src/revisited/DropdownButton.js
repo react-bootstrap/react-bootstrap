@@ -118,6 +118,7 @@ export default class DropdownButton extends React.Component {
           type='button'
           id={id}
           tabIndex='0'
+          aria-haspopup={true}
           aria-expanded={this.state.open}>
           <span>Dropdown </span>
           <span className='caret'></span>
