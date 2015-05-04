@@ -49,7 +49,7 @@ describe('Panel', function () {
   it('Should have custom component header with anchor', function () {
     let header = <h3>Heading</h3>,
         instance = ReactTestUtils.renderIntoDocument(
-          <Panel header={header} collapsable={true}>Panel content</Panel>
+          <Panel header={header} collapsible={true}>Panel content</Panel>
         );
     header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading').getDOMNode();
     assert.equal(header.firstChild.nodeName, 'H3');
@@ -68,21 +68,21 @@ describe('Panel', function () {
 
   it('Should have collapse classes', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Panel collapsable={true} expanded={true}>Panel content</Panel>
+      <Panel collapsible={true} expanded={true}>Panel content</Panel>
     );
     assert.ok(instance.getDOMNode().querySelector('.panel-collapse.collapse.in'));
   });
 
   it('Should pass through dom properties', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Panel collapsable={false} id="testid">Panel content</Panel>
+      <Panel collapsible={false} id="testid">Panel content</Panel>
     );
     assert.equal(instance.getDOMNode().id, 'testid');
   });
 
   it('Should pass id to panel-collapse', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Panel collapsable={true} id="testid" header="Heading">Panel content</Panel>
+      <Panel collapsible={true} id="testid" header="Heading">Panel content</Panel>
     );
     assert.notOk(instance.getDOMNode().id);
     let collapse = instance.getDOMNode().querySelector('.panel-collapse');
@@ -93,7 +93,7 @@ describe('Panel', function () {
 
   it('Should be open', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Panel collapsable={true} expanded={true} header="Heading">Panel content</Panel>
+      <Panel collapsible={true} expanded={true} header="Heading">Panel content</Panel>
     );
     let collapse = instance.getDOMNode().querySelector('.panel-collapse');
     let anchor = instance.getDOMNode().querySelector('.panel-title a');
@@ -103,7 +103,7 @@ describe('Panel', function () {
 
   it('Should be closed', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Panel collapsable={true} expanded={false} header="Heading">Panel content</Panel>
+      <Panel collapsible={true} expanded={false} header="Heading">Panel content</Panel>
     );
     let collapse = instance.getDOMNode().querySelector('.panel-collapse');
     let anchor = instance.getDOMNode().querySelector('.panel-title a');
@@ -113,7 +113,7 @@ describe('Panel', function () {
 
   it('Should be aria-expanded=true', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Panel collapsable={true} expanded={true} header="Heading">Panel content</Panel>
+      <Panel collapsible={true} expanded={true} header="Heading">Panel content</Panel>
     );
     let collapse = instance.getDOMNode().querySelector('.panel-collapse');
     let anchor = instance.getDOMNode().querySelector('.panel-title a');
@@ -123,7 +123,7 @@ describe('Panel', function () {
 
   it('Should be aria-expanded=false', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Panel collapsable={true} expanded={false} header="Heading">Panel content</Panel>
+      <Panel collapsible={true} expanded={false} header="Heading">Panel content</Panel>
     );
     let collapse = instance.getDOMNode().querySelector('.panel-collapse');
     let anchor = instance.getDOMNode().querySelector('.panel-title a');
@@ -137,7 +137,7 @@ describe('Panel', function () {
       done();
     }
     let instance = ReactTestUtils.renderIntoDocument(
-      <Panel collapsable={true} onSelect={handleSelect} header="Click me" eventKey='1'>Panel content</Panel>
+      <Panel collapsible={true} onSelect={handleSelect} header="Click me" eventKey='1'>Panel content</Panel>
     );
     let title = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-title');
     ReactTestUtils.Simulate.click(title.getDOMNode().firstChild);
@@ -145,7 +145,7 @@ describe('Panel', function () {
 
   it('Should toggle when uncontrolled', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Panel collapsable={true} defaultExpanded={false} header="Click me">Panel content</Panel>
+      <Panel collapsible={true} defaultExpanded={false} header="Click me">Panel content</Panel>
     );
 
     assert.notOk(instance.state.expanded);

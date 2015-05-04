@@ -3,12 +3,14 @@ import classNames from 'classnames';
 
 import BootstrapMixin from './BootstrapMixin';
 import CollapsibleMixin from './CollapsibleMixin';
+import collapsable from './utils/deprecatedProperty';
 
 const Panel = React.createClass({
   mixins: [BootstrapMixin, CollapsibleMixin],
 
   propTypes: {
-    collapsable: React.PropTypes.bool,
+    collapsable,
+    collapsible: React.PropTypes.bool,
     onSelect: React.PropTypes.func,
     header: React.PropTypes.node,
     id: React.PropTypes.string,
@@ -55,13 +57,14 @@ const Panel = React.createClass({
 
   render() {
     let classes = this.getBsClassSet();
+    const collapsible = this.props.collapsible || this.props.collapsable;
 
     return (
       <div {...this.props}
         className={classNames(this.props.className, classes)}
-        id={this.props.collapsable ? null : this.props.id} onSelect={null}>
+        id={collapsible ? null : this.props.id} onSelect={null}>
         {this.renderHeading()}
-        {this.props.collapsable ? this.renderCollapsableBody() : this.renderBody()}
+        {collapsible ? this.renderCollapsableBody() : this.renderBody()}
         {this.renderFooter()}
       </div>
     );
@@ -144,15 +147,16 @@ const Panel = React.createClass({
 
   renderHeading() {
     let header = this.props.header;
+    const collapsible = this.props.collapsible || this.props.collapsable;
 
     if (!header) {
       return null;
     }
 
     if (!React.isValidElement(header) || Array.isArray(header)) {
-      header = this.props.collapsable ?
+      header = collapsible ?
         this.renderCollapsableTitle(header) : header;
-    } else if (this.props.collapsable) {
+    } else if (collapsible) {
 
       header = cloneElement(header, {
         className: classNames(this.prefixClass('title')),
