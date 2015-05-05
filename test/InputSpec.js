@@ -165,6 +165,28 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-menu'));
   });
 
+  it('renders custom before', function() {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Input customBefore={<span className="custom"></span>} />
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'custom'));
+    assert.equal(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'input-group-addon').length, 0);
+    assert.equal(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'input-group-btn').length, 0);
+  });
+
+  it('renders custom after', function() {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Input customAfter={<span className="custom"></span>} />
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'custom'));
+    assert.equal(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'input-group-addon').length, 0);
+    assert.equal(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'input-group-btn').length, 0);
+  });
+
   it('renders help', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input help="Help" />

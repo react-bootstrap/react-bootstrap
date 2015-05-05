@@ -74,19 +74,24 @@ class Input extends React.Component {
       </span>
     ) : null;
 
+    let customBefore = this.props.customBefore;
+    let customAfter = this.props.customAfter;
+
     let inputGroupClassName;
     switch (this.props.bsSize) {
       case 'small': inputGroupClassName = 'input-group-sm'; break;
       case 'large': inputGroupClassName = 'input-group-lg'; break;
     }
 
-    return addonBefore || addonAfter || buttonBefore || buttonAfter ? (
+    return addonBefore || addonAfter || buttonBefore || buttonAfter || customBefore || customAfter ? (
       <div className={classNames(inputGroupClassName, 'input-group')} key="input-group">
         {addonBefore}
         {buttonBefore}
+        {customBefore}
         {children}
         {addonAfter}
         {buttonAfter}
+        {customAfter}
       </div>
     ) : children;
   }

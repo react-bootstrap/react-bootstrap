@@ -6,6 +6,18 @@ const innerDropdown = (
   </DropdownButton>
 );
 
+const customBefore = (
+  <span className="input-group-addon hidden-xs">
+    Hide this on narrow view
+  </span>
+);
+
+const customAfter = (
+  <span className="input-group-addon hidden-xs">
+    <Button>Search</Button>
+  </span>
+);
+
 const inputAddonsInstance = (
   <form>
     <Input type='text' addonBefore='@' />
@@ -14,6 +26,8 @@ const inputAddonsInstance = (
     <Input type='text' addonAfter={innerGlyphicon} />
     <Input type='text' buttonBefore={innerButton} />
     <Input type='text' buttonAfter={innerDropdown} />
+    <Input type='text' customBefore={customBefore} />
+    <Input type='text' customBefore={customAfter} />
   </form>
 );
 
