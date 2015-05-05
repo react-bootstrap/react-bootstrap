@@ -11,8 +11,6 @@ export default class DropdownButton extends React.Component {
     this.toggleOpen = this.toggleOpen.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
-    this.getFocusableMenuItems = this.getFocusableMenuItems.bind(this);
-    this.getItemsAndActiveIndex = this.getItemsAndActiveIndex.bind(this);
 
     this.state = {
       open: false,
@@ -32,12 +30,12 @@ export default class DropdownButton extends React.Component {
         if (!this.state.open) {
           this.toggleOpen(event);
         }
-        this.focusNext();
+        this.refs.menu.focusNext();
         event.preventDefault();
         break;
       case keycode.codes.up:
         if (this.state.open) {
-          this.focusPrevious();
+          this.refs.menu.focusPrevious();
           event.preventDefault();
         }
         break;
@@ -60,46 +58,6 @@ export default class DropdownButton extends React.Component {
   handleBlur(event) {
     //console.log(`Blur ${event.target}`);
     // TODO: Collapse when focus is lost on everything.
-  }
-
-  focusNext() {
-    let { items, activeItemIndex } = this.getItemsAndActiveIndex();
-
-    if (activeItemIndex === items.length - 1) {
-      items[0].focus();
-      return;
-    }
-
-    items[activeItemIndex + 1].focus();
-  }
-
-  focusPrevious() {
-    let { items, activeItemIndex } = this.getItemsAndActiveIndex();
-
-    if (activeItemIndex === 0) {
-      items[items.length - 1].focus();
-      return;
-    }
-
-    items[activeItemIndex - 1].focus();
-  }
-
-  getItemsAndActiveIndex() {
-    let items = this.getFocusableMenuItems();
-    let activeElement = document.activeElement;
-    let activeItemIndex = items.indexOf(activeElement);
-
-    return {items, activeItemIndex};
-  }
-
-  getFocusableMenuItems() {
-    let menuNode = React.findDOMNode(this.refs.menu);
-
-    if (menuNode === undefined) {
-      return [];
-    }
-
-    return [].slice.call(menuNode.querySelectorAll('[tabIndex="-1"]'), 0);
   }
 
   render() {
