@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import keycode from 'keycode';
 import uuid from 'uuid';
+import DropdownMenu from './DropdownMenu';
 
 export default class DropdownButton extends React.Component {
   constructor(props) {
@@ -92,7 +93,13 @@ export default class DropdownButton extends React.Component {
   }
 
   getFocusableMenuItems() {
-    return [].slice.call(this.refs.menu.getDOMNode().querySelectorAll('[tabIndex="-1"]'), 0);
+    let menuNode = React.findDOMNode(this.refs.menu);
+
+    if (menuNode === undefined) {
+      return [];
+    }
+
+    return [].slice.call(menuNode.querySelectorAll('[tabIndex="-1"]'), 0);
   }
 
   render() {
@@ -102,10 +109,6 @@ export default class DropdownButton extends React.Component {
       dropdown: true,
       open: this.state.open
     };
-
-    let children = React.Children.map(this.props.children, child => {
-      return React.cloneElement(child, { onKeyDown: this.handleKeyDown }, child.children);
-    });
 
     return (
       <div className={classNames(rootClasses)}>
@@ -123,9 +126,12 @@ export default class DropdownButton extends React.Component {
           <span>Dropdown </span>
           <span className='caret'></span>
         </button>
-        <ul ref='menu' className='dropdown-menu' role='menu' aria-labelledby={id}>
-          {children}
-        </ul>
+        <DropdownMenu
+          ref='menu'
+          onKeyDown={this.handleKeyDown}
+          labelledBy={id}>
+          {this.props.children}
+        </DropdownMenu>
       </div>
     );
   }
