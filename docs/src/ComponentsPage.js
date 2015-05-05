@@ -558,7 +558,7 @@ const ComponentsPage = React.createClass({
                   <p>Supports <code>select</code>, <code>textarea</code>, <code>static</code> as well as standard HTML input types. <code>getValue()</code> returns an array for multiple select.</p>
                   <ReactPlayground codeText={Samples.InputTypes} />
                   <h2 id='input-addons'>Add-ons</h2>
-                  <p>Use <code>addonBefore</code> and <code>addonAfter</code> for normal addons, <code>buttonBefore</code> and <code>buttonAfter</code> for button addons.
+                  <p>Use <code>addonBefore</code> and <code>addonAfter</code> for normal addons, <code>buttonBefore</code> and <code>buttonAfter</code> for button addons, and <code>customBefore</code> and <code>customAfter</code> for custom (unwrapped) addons.
                   Exotic configurations may require some css on your side.</p>
                   <ReactPlayground codeText={Samples.InputAddons} />
                   <h2 id='input-validation'>Validation</h2>
