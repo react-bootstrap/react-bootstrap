@@ -52,7 +52,9 @@ class DropdownMenu extends React.Component {
 
   render() {
     let children = React.Children.map(this.props.children, child => {
-      return React.cloneElement(child, { onKeyDown: this.props.onKeyDown }, child.children);
+      return React.cloneElement(child, {
+        onKeyDown: this.props.onKeyDown,
+      }, child.props.children);
     });
 
     return (

@@ -1,5 +1,7 @@
 import React from 'react';
 
+// TODO: Dividers
+
 export default class MenuItem extends React.Component {
   render() {
     return (
