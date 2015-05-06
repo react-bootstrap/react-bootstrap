@@ -9,7 +9,7 @@ const templatePath = path.join(srcRoot, 'templates');
 const factoryTemplatePath = path.join(templatePath, 'factory.js.template');
 const indexTemplatePath = path.join(templatePath, 'factory.index.js.template');
 
-export default function generateFactories(babelOptions, destination) {
+export default function generateFactories(destination, babelOptions='') {
 
   let generateCompiledFile = function (file, content) {
     let outpath = path.join(destination, `${file}.js`);

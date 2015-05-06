@@ -45,7 +45,7 @@ export default (options) => {
 
     module: {
       loaders: [
-        { test: /\.js/, loader: 'babel?optional=es7.objectRestSpread', exclude: /node_modules/ }
+        { test: /\.js/, loader: 'babel', exclude: /node_modules/ }
       ]
     },
 
