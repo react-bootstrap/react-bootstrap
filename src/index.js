@@ -6,6 +6,7 @@ import BootstrapMixin from './BootstrapMixin';
 import Badge from './Badge';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
+import ButtonInput from './ButtonInput';
 import ButtonToolbar from './ButtonToolbar';
 import CollapsableNav from './CollapsableNav';
 import CollapsibleNav from './CollapsibleNav';
@@ -60,6 +61,7 @@ export default {
   Badge,
   Button,
   ButtonGroup,
+  ButtonInput,
   ButtonToolbar,
   CollapsableNav,
   CollapsibleNav,
