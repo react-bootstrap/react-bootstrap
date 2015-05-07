@@ -19,6 +19,7 @@ if (development) {
 
   webpackConfig.output.path = '/';
   webpackConfig.output.publicPath = undefined;
+  webpackConfig.module.noParse = /babel-core\/browser/;
 
   app = app
     .use(webpackMiddleware(webpack(webpackConfig), {
