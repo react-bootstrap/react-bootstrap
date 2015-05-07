@@ -95,23 +95,8 @@ const Modal = React.createClass({
         );
     }
 
-    let bsStyle = this.props.bsStyle;
-    let classes = {
-      'modal-header': true
-    };
-    classes['bg-' + bsStyle] = bsStyle;
-    classes['text-' + bsStyle] = bsStyle;
-
-    let className = classNames(classes);
-
-    let style = {};
-    if (this.props.bsStyle) {
-      style.borderTopLeftRadius = 'inherit';
-      style.borderTopRightRadius = 'inherit';
-    }
-
     return (
-      <div className={className} style={style}>
+      <div className="modal-header">
         {closeButton}
         {this.renderTitle()}
       </div>
