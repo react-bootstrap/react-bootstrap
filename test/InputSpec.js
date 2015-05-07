@@ -127,6 +127,22 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-addon'));
   });
 
+  it('renders form-group with sm or lg class when bsSize is small or large', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Input bsSize="small" />
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group-sm'));
+
+    instance = ReactTestUtils.renderIntoDocument(
+      <Input bsSize="large" />
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group-lg'));
+  });
+
   it('renders input-group with sm or lg class name when bsSize is small or large', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input addonBefore="$" bsSize="small" />
