@@ -61,7 +61,7 @@ preConditions()
   .then(v => { version = v; })
   .then(() => addChangelog(version))
   .then(() => {
-    return build(true)
+    return build(argv.verbose)
       .catch(err => {
         console.log('Build failed, reverting version bump'.red);
 

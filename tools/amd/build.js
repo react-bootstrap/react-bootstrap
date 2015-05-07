@@ -13,7 +13,7 @@ const bowerJson = path.join(bowerRoot, 'bower.json');
 const readme = path.join(__dirname, 'README.md');
 const license = path.join(repoRoot, 'LICENSE');
 
-const babelOptions = '--modules amd --optional es7.objectRestSpread';
+const babelOptions = '--modules amd';
 
 const factoriesDestination = path.join(bowerRoot, 'factories');
 
@@ -35,7 +35,7 @@ export default function BuildBower() {
     .then(() => fsp.mkdirs(factoriesDestination))
     .then(() => Promise.all([
       bowerConfig(),
-      generateFactories(babelOptions, factoriesDestination),
+      generateFactories(factoriesDestination, babelOptions),
       exec(`babel ${babelOptions} ${srcRoot} --out-dir ${bowerRoot}`),
       copy(readme, bowerRoot),
       copy(license, bowerRoot)

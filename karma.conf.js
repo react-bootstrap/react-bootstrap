@@ -1,5 +1,5 @@
 /* eslint no-var: 0 */
-require('./register-babel');
+require('babel/register');
 
 var webpackConfig = require('./webpack/test.config.js');
 var isCI = process.env.CONTINUOUS_INTEGRATION === 'true';
@@ -46,7 +46,7 @@ module.exports = function (config) {
     browsers: [ isCI ? 'PhantomJS' : 'Chrome' ],
 
     captureTimeout: 60000,
-    browserNoActivityTimeout: 30000,
+    browserNoActivityTimeout: 45000,
 
     singleRun: isCI
   });

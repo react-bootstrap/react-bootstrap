@@ -8,14 +8,14 @@
   },
   "homepage": "http://react-bootstrap.github.io/",
   "scripts": {
-    "build": "node run-babel tools/build.js",
+    "build": "babel-node tools/build-cli.js",
     "test-watch": "karma start",
     "test": "npm run lint && npm run build && karma start --single-run",
     "lint": "eslint src test docs ie8 tools webpack karma.conf.js webpack.config.js webpack.docs.js",
-    "docs-build": "node run-babel tools/build.js --docs-only",
-    "docs": "node run-babel docs/server.js",
-    "docs-prod": "webpack --config webpack.docs.js -p --progress && NODE_ENV=production node run-babel docs/server.js",
-    "ie8": "node run-babel ie8/server.js"
+    "docs-build": "babel-node tools/build-cli.js --docs-only",
+    "docs": "babel-node docs/server.js",
+    "docs-prod": "webpack --config webpack.docs.js -p --progress && NODE_ENV=production babel-node docs/server.js",
+    "ie8": "babel-node ie8/server.js"
   },
   "main": "lib/index.js",
   "directories": {
