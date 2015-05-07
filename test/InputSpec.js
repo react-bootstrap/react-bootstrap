@@ -41,30 +41,28 @@ describe('Input', function () {
     assert.equal(instance.getValue(), 'v');
   });
 
-  it('renders a submit button element when type=submit', function () {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Input type="submit" bsStyle="danger" wrapperClassName='test' />
+  it('throws a deprecation warning on type=button', function () {
+    ReactTestUtils.renderIntoDocument(
+      <Input type="button" />
     );
 
-    let node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input').getDOMNode();
-    assert.equal(node.getAttribute('type'), 'submit');
-    assert.equal(node.getAttribute('class'), 'btn btn-danger');
+    shouldWarn('deprecated');
   });
 
-  it('must not throw warning when bsStyle=danger and type=submit', function () {
+  it('throws a deprecation warning on type=reset', function () {
     ReactTestUtils.renderIntoDocument(
-      <Input type="submit" bsStyle="danger" />
+      <Input type="reset" />
     );
 
-    console.warn.called.should.be.false;
+    shouldWarn('deprecated');
   });
 
-  it('throws warning about wrong type for bsStyle=error when type=submit', function () {
+  it('throws a deprecation warning on type=submit', function () {
     ReactTestUtils.renderIntoDocument(
-      <Input type="submit" bsStyle="error" />
+      <Input type="submit" />
     );
 
-    shouldWarn('propType: Invalid');
+    shouldWarn('deprecated');
   });
 
   it('renders a p element when type=static', function () {
