@@ -32,7 +32,6 @@ const ExampleInput = React.createClass({
         hasFeedback
         ref='input'
         groupClassName='group-class'
-        wrapperClassName='wrapper-class'
         labelClassName='label-class'
         onChange={this.handleChange} />
     );
