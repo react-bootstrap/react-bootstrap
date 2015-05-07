@@ -25,6 +25,26 @@ describe('FormGroup', function() {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
   });
 
+  it('renders form-group with sm or lg class when bsSize is small or large', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <FormGroup bsSize="small">
+        <span />
+      </FormGroup>
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group-sm'));
+
+    instance = ReactTestUtils.renderIntoDocument(
+      <FormGroup bsSize="large">
+        <span />
+      </FormGroup>
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group-lg'));
+  });
+
   it('renders no form-group class when standalone', function() {
     let instance = ReactTestUtils.renderIntoDocument(
       <FormGroup standalone>
