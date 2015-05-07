@@ -12,7 +12,7 @@
 const ContainedModal = React.createClass({
   render() {
     return (
-      <Modal {...this.props} bsStyle='primary' title='Contained Modal' animation>
+      <Modal {...this.props} title='Contained Modal' animation>
         <div className='modal-body'>
           Elit est explicabo ipsum eaque dolorem blanditiis doloribus sed id ipsam, beatae, rem fuga id earum? Inventore et facilis obcaecati.
         </div>

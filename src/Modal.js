@@ -56,7 +56,7 @@ const Modal = React.createClass({
         onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
         ref="modal">
         <div className={classNames(dialogClasses)}>
-          <div className="modal-content" style={{overflow: 'hidden'}}>
+          <div className="modal-content">
             {this.props.title ? this.renderHeader() : null}
             {this.props.children}
           </div>
@@ -95,17 +95,8 @@ const Modal = React.createClass({
         );
     }
 
-    let style = this.props.bsStyle;
-    let classes = {
-      'modal-header': true
-    };
-    classes['bg-' + style] = style;
-    classes['text-' + style] = style;
-
-    let className = classNames(classes);
-
     return (
-      <div className={className}>
+      <div className="modal-header">
         {closeButton}
         {this.renderTitle()}
       </div>

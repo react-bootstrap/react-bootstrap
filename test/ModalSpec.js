@@ -85,17 +85,4 @@ describe('Modal', function () {
     assert.ok(dialog.className.match(/\bmodal-sm\b/));
   });
 
-  it('Should pass bsStyle to the header', function () {
-    let noOp = function () {};
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Modal bsStyle='danger' title="Title" onRequestHide={noOp}>
-        <strong>Message</strong>
-      </Modal>
-    );
-
-    let header = instance.getDOMNode().getElementsByClassName('modal-header')[0];
-    assert.ok(header.className.match(/\bbg-danger\b/));
-    assert.ok(header.className.match(/\btext-danger\b/));
-  });
-
 });
