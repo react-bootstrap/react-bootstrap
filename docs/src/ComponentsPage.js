@@ -561,6 +561,9 @@ const ComponentsPage = React.createClass({
                   <p>Use <code>addonBefore</code> and <code>addonAfter</code> for normal addons, <code>buttonBefore</code> and <code>buttonAfter</code> for button addons.
                   Exotic configurations may require some css on your side.</p>
                   <ReactPlayground codeText={Samples.InputAddons} />
+                  <h2 id='input-sizes'>Sizes</h2>
+                  <p>Use <code>bsSize</code> to change the size of inputs. It also works with addons and most other options.</p>
+                  <ReactPlayground codeText={Samples.InputSizes} />
                   <h2 id='input-validation'>Validation</h2>
                   <p>Set <code>bsStyle</code> to one of <code>success</code>, <code>warning</code> or <code>error</code>.
                   Add <code>hasFeedback</code> to show glyphicon. Glyphicon may need additional styling if there is an add-on or no label.</p>

@@ -84,6 +84,7 @@ export default {
   Input:                         require('fs').readFileSync(__dirname + '/../examples/Input.js', 'utf8'),
   InputTypes:                    require('fs').readFileSync(__dirname + '/../examples/InputTypes.js', 'utf8'),
   InputAddons:                   require('fs').readFileSync(__dirname + '/../examples/InputAddons.js', 'utf8'),
+  InputSizes:                    require('fs').readFileSync(__dirname + '/../examples/InputSizes.js', 'utf8'),
   InputValidation:               require('fs').readFileSync(__dirname + '/../examples/InputValidation.js', 'utf8'),
   InputHorizontal:               require('fs').readFileSync(__dirname + '/../examples/InputHorizontal.js', 'utf8'),
   InputWrapper:                  require('fs').readFileSync(__dirname + '/../examples/InputWrapper.js', 'utf8')

@@ -28,7 +28,13 @@ FormGroup.defaultProps = {
 FormGroup.propTypes = {
   standalone: React.PropTypes.bool,
   hasFeedback: React.PropTypes.bool,
-  bsSize: React.PropTypes.oneOf(['small', 'medium', 'large']),
+  bsSize (props) {
+    if (props.standalone) {
+      return new Error('bsSize will not be used when `standalone` is set.');
+    }
+
+    return React.PropTypes.oneOf(['small', 'medium', 'large']).apply(null, arguments);
+  },
   bsStyle: React.PropTypes.oneOf(['success', 'warning', 'error']),
   groupClassName: React.PropTypes.string
 };
