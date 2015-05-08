@@ -21,6 +21,7 @@ const Root = React.createClass({
     getPages() {
       return [
         'index.html',
+        'introduction.html',
         'getting-started.html',
         'components.html'
       ];

@@ -4,6 +4,10 @@ import Navbar from '../../src/Navbar';
 import Nav from '../../src/Nav';
 
 const NAV_LINKS = {
+  'introduction': {
+    link: 'introduction',
+    title: 'Introduction'
+  },
   'getting-started': {
     link: 'getting-started',
     title: 'Getting started'

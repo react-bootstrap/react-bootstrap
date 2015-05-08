@@ -129,8 +129,8 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.ButtonGroupNested} />
 
                   <h3 id='btn-groups-vertical'>Vertical variation</h3>
-                  <p>Make a set of buttons appear vertically stacked rather than horizontally.
-                    <strong className='text-danger'>Split button dropdowns are not supported here.</strong></p>
+                  <p>Make a set of buttons appear vertically stacked rather than horizontally. <strong
+                    className='text-danger'>Split button dropdowns are not supported here.</strong></p>
                   <p>Just add <code>vertical</code> to the <code>{'<ButtonGroup />'}</code>.</p>
                   <ReactPlayground codeText={Samples.ButtonGroupVertical} />
 
