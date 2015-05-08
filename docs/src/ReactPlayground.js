@@ -42,7 +42,6 @@ import * as modTabPane from '../../src/TabPane';
 import * as modTooltip from '../../src/Tooltip';
 import * as modWell from '../../src/Well';
 
-import {CodeMirror, IS_NODE} from './CodeMirror';
 import babel from 'babel-core/browser';
 
 const classNames = modClassNames.default;
@@ -103,7 +102,7 @@ const IS_MOBILE = typeof navigator !== 'undefined' && (
 
 const CodeMirrorEditor = React.createClass({
   componentDidMount() {
-    if (IS_MOBILE || IS_NODE) {
+    if (IS_MOBILE || CodeMirror === undefined) {
       return;
     }
 

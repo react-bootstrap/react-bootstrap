@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 export default (config, options) => {
-  if (options.development) {
+  if (options.development && !options.docs) {
     config = _.extend({}, config, {
       devtool: 'sourcemap'
     });

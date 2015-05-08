@@ -27,7 +27,6 @@ export default (config, options) => {
               jsLoader = value.loader;
 
               return _.extend({}, value, {
-                loader: jsLoader + '!client',
                 exclude: /node_modules|Samples\.js/
               });
             }
