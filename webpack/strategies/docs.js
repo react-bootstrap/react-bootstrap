@@ -20,6 +20,7 @@ export default (config, options) => {
         extensions: ['', '.js', '.json']
       },
       module: {
+        noParse: /babel-core\/browser/,
         loaders: config.module.loaders
           .map(value => {
             if (/\.js\/$/.test(value.test.toString())) {
