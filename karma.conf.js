@@ -43,14 +43,7 @@ module.exports = function (config) {
 
     autoWatch: true,
 
-    browsers: [ isCI ? 'ChromeTravisCI' : 'Chrome' ],
-
-    customLaunchers: {
-      ChromeTravisCI: {
-        base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
-    },
+    browsers: [ isCI ? 'PhantomJS' : 'Chrome' ],
 
     captureTimeout: 60000,
     browserNoActivityTimeout: 45000,
