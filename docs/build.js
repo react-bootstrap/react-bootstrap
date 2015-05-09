@@ -14,24 +14,33 @@ const license = path.join(repoRoot, 'LICENSE');
 const readmeSrc = path.join(__dirname, 'README.docs.md');
 const readmeDest = path.join(docsBuilt, 'README.md');
 
+/**
+ * Generates HTML code for `fileName` page.
+ *
+ * @param {string} fileName Path for Router.Route
+ * @return {Promise} promise
+ * @internal
+ */
+function generateHTML(fileName) {
+  return new Promise((resolve, reject) => {
+    Router.run(routes, '/' + fileName, Handler => {
+      let html = React.renderToString(React.createElement(Handler));
+      html = '<!doctype html>' + html;
+      let write = fsp.writeFile(path.join(docsBuilt, fileName), html);
+      resolve(write);
+    });
+  });
+}
+
 export default function BuildDocs() {
   console.log('Building: '.cyan + 'docs'.green);
 
   return exec(`rimraf ${docsBuilt}`)
     .then(() => fsp.mkdir(docsBuilt))
     .then(() => {
-      let writes = Root
-        .getPages()
-        .map(fileName => new Promise((resolve, reject) => {
-          Router.run(routes, '/' + fileName, Handler => {
-            let RootHTML = React.renderToString(React.createElement(Handler));
-            RootHTML = '<!doctype html>' + RootHTML;
-            let write = fsp.writeFile(path.join(docsBuilt, fileName), RootHTML);
-            resolve(write);
-          });
-        }));
+      let pagesGenerators = Root.getPages().map(generateHTML);
 
-      return Promise.all(writes.concat([
+      return Promise.all(pagesGenerators.concat([
         exec(`webpack --config webpack.docs.js -p --bail`),
         copy(license, docsBuilt),
         copy(readmeSrc, readmeDest)
