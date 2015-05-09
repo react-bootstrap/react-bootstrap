@@ -26,7 +26,7 @@ if (development) {
 
     Router.run(routes, req.url, Handler => {
       let html = React.renderToString(<Handler assetBaseUrl={target} />);
-      res.send(html);
+      res.send('<!doctype html>' + html);
     });
   });
 

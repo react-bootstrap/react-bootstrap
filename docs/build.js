@@ -25,6 +25,7 @@ export default function BuildDocs() {
         .map(fileName => new Promise((resolve, reject) => {
           Router.run(routes, '/' + fileName, Handler => {
             let RootHTML = React.renderToString(React.createElement(Handler));
+            RootHTML = '<!doctype html>' + RootHTML;
             let write = fsp.writeFile(path.join(docsBuilt, fileName), RootHTML);
             resolve(write);
           });
