@@ -29,11 +29,12 @@ FormGroup.propTypes = {
   standalone: React.PropTypes.bool,
   hasFeedback: React.PropTypes.bool,
   bsSize (props) {
-    if (props.standalone) {
+    if (props.standalone && props.bsSize !== undefined) {
       return new Error('bsSize will not be used when `standalone` is set.');
     }
 
-    return React.PropTypes.oneOf(['small', 'medium', 'large']).apply(null, arguments);
+    return React.PropTypes.oneOf(['small', 'medium', 'large'])
+      .apply(null, arguments);
   },
   bsStyle: React.PropTypes.oneOf(['success', 'warning', 'error']),
   groupClassName: React.PropTypes.string
