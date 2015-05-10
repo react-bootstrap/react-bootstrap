@@ -216,7 +216,7 @@ const OverlayTrigger = React.createClass({
     }
   },
 
-  getPosition: function () {
+  getPosition() {
     let node = React.findDOMNode(this);
     let container = this.getContainerDOMNode();
 

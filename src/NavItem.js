@@ -29,10 +29,10 @@ const NavItem = React.createClass({
         title,
         target,
         children,
-        ...props } = this.props;
+        ...props } = this.props; // eslint-disable-line object-shorthand
     let classes = {
-          'active': active,
-          'disabled': disabled
+          active,
+          disabled
         };
     let linkProps = {
           href,

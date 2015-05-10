@@ -20,11 +20,11 @@ export default function generateFactories(destination, babelOptions='') {
     fsp.readFile(factoryTemplatePath)
       .then(template => {
         Promise.all(components.map(name => {
-          generateCompiledFile(name, _.template(template)({name: name}));
+          generateCompiledFile(name, _.template(template)({name}));
         }));
       }),
     fsp.readFile(indexTemplatePath)
-      .then(template => _.template(template)({components: components}))
+      .then(template => _.template(template)({components}))
       .then(content => generateCompiledFile('index', content))
   ]);
 

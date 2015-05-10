@@ -12,15 +12,15 @@ describe('CollapsibleMixin', function () {
     Component = React.createClass({
       mixins: [CollapsibleMixin],
 
-      getCollapsibleDOMNode: function(){
+      getCollapsibleDOMNode(){
         return this.refs.panel.getDOMNode();
       },
 
-      getCollapsibleDimensionValue: function(){
+      getCollapsibleDimensionValue(){
         return 15;
       },
 
-      render: function(){
+      render(){
         let styles = this.getCollapsibleClassSet();
         return (
           <div>
@@ -222,9 +222,9 @@ describe('CollapsibleMixin', function () {
       Component = React.createClass({
         mixins: [CollapsibleMixin],
 
-        getCollapsableDimension: function(){},
+        getCollapsableDimension(){},
 
-        render: function(){
+        render(){
           return ( <div /> );
         }
       });
@@ -241,9 +241,9 @@ describe('CollapsibleMixin', function () {
       Component = React.createClass({
         mixins: [CollapsibleMixin],
 
-        getCollapsibleDimension: function(){},
+        getCollapsibleDimension(){},
 
-        render: function(){
+        render(){
           return ( <div /> );
         }
       });

@@ -249,7 +249,7 @@ const Carousel = React.createClass({
           active: isActive,
           ref: child.ref,
           key: child.key ? child.key : index,
-          index: index,
+          index,
           animateOut: isPreviousActive,
           animateIn: isActive && this.state.previousActiveIndex != null && this.props.slide,
           direction: this.state.direction,
@@ -278,8 +278,8 @@ const Carousel = React.createClass({
 
       this.setState({
         activeIndex: index,
-        previousActiveIndex: previousActiveIndex,
-        direction: direction
+        previousActiveIndex,
+        direction
       });
     }
   }

@@ -37,7 +37,7 @@ const Nav = React.createClass({
     return React.findDOMNode(this);
   },
 
-  getCollapsibleDimensionValue: function () {
+  getCollapsibleDimensionValue() {
     let node = React.findDOMNode(this.refs.ul),
         height = node.offsetHeight,
         computedStyles = domUtils.getComputedStyles(node);

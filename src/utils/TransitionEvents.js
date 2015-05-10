@@ -88,7 +88,7 @@ function removeEventListener(node, eventName, eventListener) {
 }
 
 const ReactTransitionEvents = {
-  addEndEventListener: function(node, eventListener) {
+  addEndEventListener(node, eventListener) {
     if (endEvents.length === 0) {
       // If CSS transitions are not supported, trigger an "end animation"
       // event immediately.
@@ -100,7 +100,7 @@ const ReactTransitionEvents = {
     });
   },
 
-  removeEndEventListener: function(node, eventListener) {
+  removeEndEventListener(node, eventListener) {
     if (endEvents.length === 0) {
       return;
     }

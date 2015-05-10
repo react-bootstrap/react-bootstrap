@@ -92,7 +92,7 @@ const AffixMixin = {
 
     this.setState({
       affixClass: affixType,
-      affixPositionTop: affixPositionTop
+      affixPositionTop
     });
   },
 

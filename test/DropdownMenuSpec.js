@@ -6,7 +6,7 @@ import MenuItem from '../src/MenuItem';
 describe('DropdownMenu', function () {
   it('Should render menu correctly', function () {
     let Parent = React.createClass({
-      render: function(){
+      render(){
         return (
           <DropdownMenu>
             <MenuItem eventKey="1" ref="item1">MenuItem 1 content</MenuItem>

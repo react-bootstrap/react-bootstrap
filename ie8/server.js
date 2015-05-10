@@ -9,7 +9,7 @@ let app = express();
 
 if (development) {
   let webpackConfig = webpackConfigBuilder({
-    development: development,
+    development,
     ie8: true
   });
   let publicPath = webpackConfig.output.publicPath;
@@ -23,7 +23,7 @@ if (development) {
   app = app
     .use(webpackMiddleware(webpack(webpackConfig), {
       noInfo: false,
-      publicPath: publicPath,
+      publicPath,
       stats: {
           colors: true
       }

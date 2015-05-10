@@ -178,7 +178,7 @@ class Input extends React.Component {
 
   renderFormGroup(children) {
     if (this.props.type === 'submit') {
-      let {bsStyle, ...other} = this.props; /* eslint no-unused-vars: 0 */
+      let {bsStyle, ...other} = this.props; /* eslint no-unused-vars: 0 object-shorthand: 0 */
       return <FormGroup {...other}>{children}</FormGroup>;
     }
 

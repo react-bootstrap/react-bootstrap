@@ -192,7 +192,7 @@ const ReactPlayground = React.createClass({
   },
 
   handleCodeModeSwitch(mode) {
-    this.setState({mode: mode});
+    this.setState({mode});
   },
 
   handleCodeModeToggle(e) {
@@ -209,7 +209,7 @@ const ReactPlayground = React.createClass({
         mode = this.MODES.NONE;
     }
 
-    this.setState({mode: mode});
+    this.setState({mode});
   },
 
   compileCode() {

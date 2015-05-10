@@ -86,5 +86,5 @@ export default {
   map: mapValidComponents,
   forEach: forEachValidComponents,
   numberOf: numberOfValidComponents,
-  hasValidComponent: hasValidComponent
+  hasValidComponent
 };

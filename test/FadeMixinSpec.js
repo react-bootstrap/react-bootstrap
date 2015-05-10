@@ -9,7 +9,7 @@ describe('FadeMixin', function () {
     Component = React.createClass({
       mixins: [ FadeMixin ],
 
-      render: function () {
+      render() {
         return (
           <div {...this.props} className='fade'>
             <span className='fade'/>

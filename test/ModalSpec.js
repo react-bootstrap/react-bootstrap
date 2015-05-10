@@ -17,13 +17,13 @@ describe('Modal', function () {
   it('Should add modal-open class to the modal container while open', function(done) {
 
     let Container = React.createClass({
-      getInitialState: function() {
+      getInitialState() {
         return {modalOpen: true};
       },
-      handleCloseModal: function() {
+      handleCloseModal() {
         this.setState({modalOpen: false});
       },
-      render: function() {
+      render() {
         if (this.state.modalOpen) {
           return (
             <Modal onRequestHide={this.handleCloseModal} container={this}>
