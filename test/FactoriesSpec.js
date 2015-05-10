@@ -3,7 +3,7 @@ import components from '../tools/public-components';
 
 let props = {
   Glyphicon: {glyph: 'star'},
-  Modal: {onRequestHide: function() {}},
+  Modal: {onRequestHide() {}},
   ModalTrigger: {modal: React.DOM.div(null)},
   OverlayTrigger: {overlay: React.DOM.div(null)}
 };

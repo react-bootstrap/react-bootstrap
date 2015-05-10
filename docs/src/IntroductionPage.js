@@ -5,7 +5,7 @@ import PageHeader from './PageHeader';
 import PageFooter from './PageFooter';
 
 const IntroductionPage = React.createClass({
-  render: function () {
+  render() {
     return (
       <div>
         <NavMain activePage="introduction" />

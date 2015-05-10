@@ -53,7 +53,7 @@ describe('SplitButton', function () {
   });
 
   it('Should pass dropdownTitle to dropdown button', function () {
-    let CustomTitle = React.createClass({ render: function() { return <span />; } });
+    let CustomTitle = React.createClass({ render() { return <span />; } });
     instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title={<CustomTitle />} dropdownTitle={<CustomTitle />}>
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>

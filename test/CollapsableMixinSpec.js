@@ -12,15 +12,15 @@ describe('CollapsableMixin', function () {
     Component = React.createClass({
       mixins: [CollapsableMixin],
 
-      getCollapsableDOMNode: function(){
+      getCollapsableDOMNode(){
         return this.refs.panel.getDOMNode();
       },
 
-      getCollapsableDimensionValue: function(){
+      getCollapsableDimensionValue(){
         return 15;
       },
 
-      render: function(){
+      render(){
         let styles = this.getCollapsableClassSet();
         return (
           <div>

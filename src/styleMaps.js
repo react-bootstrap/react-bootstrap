@@ -31,7 +31,7 @@ const styleMaps = {
     'tabs': 'tabs',
     'pills': 'pills'
   },
-  addStyle: function(name) {
+  addStyle(name) {
     styleMaps.STYLES[name] = name;
   },
   SIZES: {

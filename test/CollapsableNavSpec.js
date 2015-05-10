@@ -8,7 +8,7 @@ import {shouldWarn} from './helpers';
 describe('Deprecations for collapsable property in CollapsibleNav', function () {
   it('Should not warn about deprecation when collaps_i_ble property is used', function () {
     let Component = React.createClass({
-      render: function() {
+      render() {
         return (
           <CollapsibleNav collapsible />
         );
@@ -21,7 +21,7 @@ describe('Deprecations for collapsable property in CollapsibleNav', function () 
 
   it('Should warn about deprecation when collaps_a_ble property is used', function () {
     let Component = React.createClass({
-      render: function() {
+      render() {
         return (
           <CollapsibleNav collapsable />
         );
@@ -36,7 +36,7 @@ describe('Deprecations for collapsable property in CollapsibleNav', function () 
 describe('Deprecations for collapsable property in Panel', function () {
   it('Should not warn about deprecation when collaps_i_ble property is used', function () {
     let Component = React.createClass({
-      render: function() {
+      render() {
         return (
           <Panel collapsible />
         );
@@ -49,7 +49,7 @@ describe('Deprecations for collapsable property in Panel', function () {
 
   it('Should warn about deprecation when collaps_a_ble property is used', function () {
     let Component = React.createClass({
-      render: function() {
+      render() {
         return (
           <Panel collapsable />
         );
@@ -64,7 +64,7 @@ describe('Deprecations for collapsable property in Panel', function () {
 describe('Deprecations for collapsable property in Nav', function () {
   it('Should not warn about deprecation when collaps_i_ble property is used', function () {
     let Component = React.createClass({
-      render: function() {
+      render() {
         return (
           <Nav collapsible />
         );
@@ -77,7 +77,7 @@ describe('Deprecations for collapsable property in Nav', function () {
 
   it('Should warn about deprecation when collaps_a_ble property is used', function () {
     let Component = React.createClass({
-      render: function() {
+      render() {
         return (
           <Nav collapsable />
         );

@@ -10,7 +10,7 @@ describe('BootstrapMixin', function () {
     Component = React.createClass({
       mixins: [BootstrapMixin],
 
-      render: function () {
+      render() {
         return React.DOM.button(this.props);
       }
     });

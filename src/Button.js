@@ -31,7 +31,7 @@ const Button = React.createClass({
     classes = {
       active: this.props.active,
       'btn-block': this.props.block,
-      ...classes
+      ...classes // eslint-disable-line object-shorthand
     };
 
     if (this.props.navItem) {

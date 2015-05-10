@@ -98,7 +98,7 @@ const specCollapsibleNav = {
         activeKey: this.props.activeKey,
         activeHref: this.props.activeHref,
         ref: 'nocollapse_' + key,
-        key: key,
+        key,
         navItem: true
       }
     );
@@ -114,7 +114,7 @@ const specCollapsibleNav = {
         activeHref: this.props.activeHref,
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
         ref: 'collapsible_' + key,
-        key: key,
+        key,
         navItem: true
       }
     );

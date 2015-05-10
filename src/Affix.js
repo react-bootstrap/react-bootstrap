@@ -5,7 +5,7 @@ import domUtils from './utils/domUtils';
 
 const Affix = React.createClass({
   statics: {
-    domUtils: domUtils
+    domUtils
   },
 
   mixins: [AffixMixin],

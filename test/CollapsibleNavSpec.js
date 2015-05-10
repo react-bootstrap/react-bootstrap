@@ -8,7 +8,7 @@ import NavItem from '../src/NavItem';
 describe('CollapsibleNav', function () {
   it('Should create div and add collapse class', function () {
     let Parent = React.createClass({
-      render: function() {
+      render() {
         return (
           <Navbar toggleNavKey={1}>
             <CollapsibleNav eventKey={1}>
@@ -27,7 +27,7 @@ describe('CollapsibleNav', function () {
 
   it('Should handle multiple Nav elements', function () {
     let Parent = React.createClass({
-      render: function() {
+      render() {
         return (
           <Navbar toggleNavKey={1}>
             <CollapsibleNav eventKey={1} ref='collapsible_object'>
@@ -51,7 +51,7 @@ describe('CollapsibleNav', function () {
 
   it('Should just render children and move along if not in <Navbar>', function () {
     let Parent = React.createClass({
-      render: function() {
+      render() {
         return (
           <CollapsibleNav eventKey={1}>
             <Nav>
@@ -71,7 +71,7 @@ describe('CollapsibleNav', function () {
 
   it('Should retain childrens classes set by className', function () {
     let Parent = React.createClass({
-      render: function() {
+      render() {
         return (
           <Navbar toggleNavKey={1}>
             <CollapsibleNav eventKey={1} ref='collapsible_object'>
@@ -92,7 +92,7 @@ describe('CollapsibleNav', function () {
 
   it('Should should not duplicate classes', function () {
     let Parent = React.createClass({
-      render: function() {
+      render() {
         return (
           <Navbar toggleNavKey={1}>
             <CollapsibleNav eventKey={1} ref='collapsible_object' className='foo navbar-collapse'>

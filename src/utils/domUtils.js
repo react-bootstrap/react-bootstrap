@@ -114,9 +114,9 @@ function offsetParentFunc(elem) {
 }
 
 export default {
-  ownerDocument: ownerDocument,
-  getComputedStyles: getComputedStyles,
-  getOffset: getOffset,
-  getPosition: getPosition,
+  ownerDocument,
+  getComputedStyles,
+  getOffset,
+  getPosition,
   offsetParent: offsetParentFunc
 };

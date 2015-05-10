@@ -1,20 +1,20 @@
 const CollapsibleParagraph = React.createClass({
   mixins: [CollapsibleMixin],
 
-  getCollapsibleDOMNode: function(){
+  getCollapsibleDOMNode(){
     return this.refs.panel.getDOMNode();
   },
 
-  getCollapsibleDimensionValue: function(){
+  getCollapsibleDimensionValue(){
     return this.refs.panel.getDOMNode().scrollHeight;
   },
 
-  onHandleToggle: function(e){
+  onHandleToggle(e){
     e.preventDefault();
     this.setState({expanded:!this.state.expanded});
   },
 
-  render: function(){
+  render(){
     let styles = this.getCollapsibleClassSet();
     let text = this.isExpanded() ? 'Hide' : 'Show';
     return (
