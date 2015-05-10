@@ -6,8 +6,8 @@ import Grid from '../../src/Grid';
 import Alert from '../../src/Alert';
 import Glyphicon from '../../src/Glyphicon';
 
-const HomePage = React.createClass({
-  render: function () {
+export default class HomePage extends React.Component{
+  render() {
     return (
       <div>
         <NavMain activePage="home" />
@@ -34,6 +34,4 @@ const HomePage = React.createClass({
       </div>
     );
   }
-});
-
-export default HomePage;
+}

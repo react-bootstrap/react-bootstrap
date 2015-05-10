@@ -21,8 +21,11 @@ if (development) {
   });
 
   app.use(function renderApp(req, res) {
+    res.header('Access-Control-Allow-Origin', target);
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+
     Router.run(routes, req.url, Handler => {
-      let html = React.renderToString(<Handler />);
+      let html = React.renderToString(<Handler assetBaseUrl={target} />);
       res.send(html);
     });
   });

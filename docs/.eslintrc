@@ -3,5 +3,8 @@
     "comma-spacing": 0,
     "react/no-multi-comp": 0,
     "react/prop-types": 0
+  },
+  "globals": {
+    "CodeMirror": true
   }
 }
