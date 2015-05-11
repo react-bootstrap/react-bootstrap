@@ -48,7 +48,7 @@
     "eslint": "^0.21.0",
     "eslint-plugin-react": "^2.1.0",
     "express": "^4.12.3",
-    "extract-text-webpack-plugin": "^0.3.8",
+    "extract-text-webpack-plugin": "^0.8.0",
     "file-loader": "^0.8.1",
     "fs-extra": "^0.18.0",
     "fs-promise": "^0.3.1",
