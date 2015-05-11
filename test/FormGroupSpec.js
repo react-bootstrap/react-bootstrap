@@ -46,6 +46,15 @@ describe('FormGroup', function() {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group-lg'));
   });
 
+  // This test case must come first, since the error only gets logged once.
+  it('throws no warning without bsSize when standalone', function () {
+    ReactTestUtils.renderIntoDocument(
+      <FormGroup standalone />
+    );
+
+    // Warning thrown above would lead to failure from index.
+  });
+
   it('throws warning about bsSize when standalone', function () {
     ReactTestUtils.renderIntoDocument(
       <FormGroup standalone bsSize="large" />
