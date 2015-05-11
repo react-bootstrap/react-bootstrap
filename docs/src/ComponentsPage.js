@@ -59,8 +59,7 @@ const ComponentsPage = React.createClass({
                 <div className='bs-docs-section'>
                   <h1 id='buttons' className='page-header'>Buttons <small>Button</small></h1>
                   <h2 id='buttons-options'>Options</h2>
-                  <p>Use any of the available button style types to quickly create a styled button. Just modify the
-                    <code>bsStyle</code> prop.</p>
+                  <p>Use any of the available button style types to quickly create a styled button. Just modify the <code>bsStyle</code> prop.</p>
                   <ReactPlayground codeText={Samples.ButtonTypes} />
                   <div className='bs-callout bs-callout-warning'>
                     <h4>Button spacing</h4>
@@ -69,11 +68,10 @@ const ComponentsPage = React.createClass({
                     button group in <code>{'<ButtonToolbar />'}</code>.</p>
                   </div>
                   <h2 id='buttons-sizes'>Sizes</h2>
-                  <p>Fancy larger or smaller buttons? Add <code>bsSize='large'</code>, <code>bsSize='small'</code>, or <code>bsSize='xsmall'</code> for additional sizes.</p>
+                  <p>Fancy larger or smaller buttons? Add <code>bsSize="large"</code>, <code>bsSize="small"</code>, or <code>bsSize="xsmall"</code> for additional sizes.</p>
                   <ReactPlayground codeText={Samples.ButtonSizes} />
 
-                  <p>Create block level buttons—those that span the full width of a parent— by adding the
-                      <code>block</code> prop.</p>
+                  <p>Create block level buttons—those that span the full width of a parent— by adding the <code>block</code> prop.</p>
                   <ReactPlayground codeText={Samples.ButtonBlock} />
 
                   <h2 id='buttons-active'>Active state</h2>
@@ -81,8 +79,7 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.ButtonActive} />
 
                   <h2 id='buttons-disabled'>Disabled state</h2>
-                  <p>Make buttons look unclickable by fading them back 50%. To do this add the <code>disabled</code>
-                    attribute to buttons.</p>
+                  <p>Make buttons look unclickable by fading them back 50%. To do this add the <code>disabled</code> attribute to buttons.</p>
                   <ReactPlayground codeText={Samples.ButtonDisabled} />
 
                   <div className='bs-callout bs-callout-warning'>
@@ -92,15 +89,15 @@ const ComponentsPage = React.createClass({
                   </div>
 
                   <h2 id='buttons-tags'>Button tags</h2>
-                  <p>The DOM element tag is choosen automaticly for you based on the props you supply. Passing a
-                    <code>href</code> will result in the button using a <code>{'<a />'}</code> element otherwise a
-                    <code>{'<button />'}</code> element will be used.</p>
+                  <p>The DOM element tag is choosen automaticly for you based on the props you supply. Passing
+                    a <code>href</code> will result in the button using a <code>{'<a />'}</code> element otherwise
+                    a <code>{'<button />'}</code> element will be used.</p>
                   <ReactPlayground codeText={Samples.ButtonTagTypes} />
 
                   <h2 id='buttons-tags'>Button loading state</h2>
                   <p>When activating an asynchronous action from a button it is a good UX pattern to give the user
-                    feedback as to the loading state, this can easily be done by updating your
-                    <code>{'<Button />'}</code>&#8217;s props from a state change like below.</p>
+                    feedback as to the loading state, this can easily be done by updating
+                    your <code>{'<Button />'}</code>&#8217;s props from a state change like below.</p>
                   <ReactPlayground codeText={Samples.ButtonLoading} />
                 </div>
 
@@ -110,22 +107,19 @@ const ComponentsPage = React.createClass({
                   <p className='lead'>Group a series of buttons together on a single line with the button group.</p>
 
                   <h3 id='btn-groups-single'>Basic example</h3>
-                  <p>Wrap a series of <code>{'<Button />'}</code>&#8217;s in a <code>{'<ButtonGroup />'}</code>.</p>
+                  <p>Wrap a series of <code>{'<Button />'}</code>s in a <code>{'<ButtonGroup />'}</code>.</p>
                   <ReactPlayground codeText={Samples.ButtonGroupBasic} />
 
                   <h3 id='btn-groups-toolbar'>Button toolbar</h3>
-                  <p>Combine sets of <code>{'<ButtonGroup />'}</code>&#8217;s into a <code>{'<ButtonToolbar />'}</code>
-                    for more complex components.</p>
+                  <p>Combine sets of <code>{'<ButtonGroup />'}</code>s into a <code>{'<ButtonToolbar />'}</code> for more complex components.</p>
                   <ReactPlayground codeText={Samples.ButtonToolbarBasic} />
 
                   <h3 id='btn-groups-sizing'>Sizing</h3>
-                  <p>Instead of applying button sizing props to every button in a group, just add <code>bsSize</code>
-                    prop to the <code>{'<ButtonGroup />'}</code>.</p>
+                  <p>Instead of applying button sizing props to every button in a group, just add <code>bsSize</code> prop to the <code>{'<ButtonGroup />'}</code>.</p>
                   <ReactPlayground codeText={Samples.ButtonGroupSizes} />
 
                   <h3 id='btn-groups-nested'>Nesting</h3>
-                  <p>You can place other button types within the <code>{'<ButtonGroup />'}</code> like
-                    <code>{'<DropdownButton />'}</code>&#8217;s.</p>
+                  <p>You can place other button types within the <code>{'<ButtonGroup />'}</code> like <code>{'<DropdownButton />'}</code>s.</p>
                   <ReactPlayground codeText={Samples.ButtonGroupNested} />
 
                   <h3 id='btn-groups-vertical'>Vertical variation</h3>
@@ -226,7 +220,7 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.ModalTrigger} />
 
                   <h3 id='modals-custom'>Custom trigger</h3>
-                  <p>Use <code>&lt;OverlayMixin /&gt;</code> in a custom component to manage the modal's state yourself.</p>
+                  <p>Use <code>OverlayMixin</code> in a custom component to manage the modal's state yourself.</p>
                   <ReactPlayground codeText={Samples.ModalOverlayMixin} />
 
                   <h3 id='modals-custom'>Contained Modal</h3>
@@ -335,7 +329,7 @@ const ComponentsPage = React.createClass({
                 <div className='bs-docs-section'>
                   <h1 id='navbars' className='page-header'>Navbars <small>Navbar, Nav, NavItem</small></h1>
                   <h2 id='navbars-examples'>Example navbars</h2>
-                  <p>Navbars are by default accessible and will provide <code>role='navigation'</code>.</p>
+                  <p>Navbars are by default accessible and will provide <code>role="navigation"</code>.</p>
                   <p>They also supports all the different Bootstrap classes as properties. Just camelCase the css class and remove navbar from it. For example <code>navbar-fixed-top</code> becomes the property <code>fixedTop</code>. The different properties are <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>, <code>inverse</code>, <code>fluid</code>.</p>
                   <p>You can drag elements to the right by specifying the <code>right</code> property on a nav group.</p>
 
