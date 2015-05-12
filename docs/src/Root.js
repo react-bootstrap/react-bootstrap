@@ -5,15 +5,6 @@ const Root = React.createClass({
   statics: {
 
     /**
-     * Get the doctype the page expects to be rendered with
-     *
-     * @returns {string}
-     */
-    getDoctype() {
-      return '<!doctype html>';
-    },
-
-    /**
      * Get the list of pages that are renderable
      *
      * @returns {Array}
@@ -25,21 +16,6 @@ const Root = React.createClass({
         'getting-started.html',
         'components.html'
       ];
-    },
-
-    renderToString(props) {
-      return Root.getDoctype() +
-        React.renderToString(<Root {...props} />);
-    },
-
-    /**
-     * Get the Base url this app sits at
-     * This url is appended to all app urls to make absolute url's within the app.
-     *
-     * @returns {string}
-     */
-    getBaseUrl() {
-      return '/';
     }
   },
 
@@ -84,19 +60,19 @@ const Root = React.createClass({
     };
 
     return (
-        <html>
-          <head dangerouslySetInnerHTML={head} />
+      <html>
+        <head dangerouslySetInnerHTML={head} />
 
-          <body>
-            <Router.RouteHandler />
+        <body>
+          <Router.RouteHandler />
 
-            <script dangerouslySetInnerHTML={browserInitScriptObj} />
-            <script src={`${this.props.assetBaseUrl}/assets/bundle.js`} />
-          </body>
-        </html>
-      );
+          <script dangerouslySetInnerHTML={browserInitScriptObj} />
+          <script src={`${this.props.assetBaseUrl}/assets/bundle.js`} />
+        </body>
+      </html>
+    );
   }
 });
 
 
-module.exports = Root;
+export default Root;
