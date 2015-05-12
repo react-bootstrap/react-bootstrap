@@ -10,7 +10,9 @@ export default class MenuItem extends React.Component {
           role='menuitem'
           tabIndex='-1'
           href={this.props.href}
-          onKeyDown={this.props.onKeyDown}>
+          onKeyDown={this.props.onKeyDown}
+          onFocus={this.props.onFocus}
+          onBlur={this.props.onBlur}>
           {this.props.children}
         </a>
       </li>

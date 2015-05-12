@@ -10,7 +10,7 @@ export default class DropdownButton extends React.Component {
 
     this.toggleOpen = this.toggleOpen.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
+    this.handleRequestClose = this.handleRequestClose.bind(this);
 
     this.state = {
       open: false,
@@ -30,34 +30,32 @@ export default class DropdownButton extends React.Component {
         if (!this.state.open) {
           this.toggleOpen(event);
         }
-        this.refs.menu.focusNext();
+        if (this.refs.menu.focusNext) {
+          this.refs.menu.focusNext();
+        }
         event.preventDefault();
         break;
-      case keycode.codes.up:
-        if (this.state.open) {
-          this.refs.menu.focusPrevious();
-          event.preventDefault();
-        }
-        break;
       case keycode.codes.esc:
-        if (this.state.open) {
-          this.toggleOpen(event);
-          this.refs['toggle-btn'].getDOMNode().focus();
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        break;
       case keycode.codes.tab:
         if (this.state.open) {
-          this.toggleOpen(event);
+          this.handleRequestClose(event);
         }
         break;
     }
   }
 
-  handleBlur(event) {
-    //console.log(`Blur ${event.target}`);
-    // TODO: Collapse when focus is lost on everything.
+  handleRequestClose(event) {
+    if (!this.state.open) {
+      return;
+    }
+
+    this.toggleOpen();
+
+    if (event && event.type === 'keydown' && event.keyCode === keycode.codes.esc) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.refs['toggle-btn'].getDOMNode().focus();
+    }
   }
 
   render() {
@@ -75,7 +73,6 @@ export default class DropdownButton extends React.Component {
           className='btn btn-default dropdown-toggle'
           onClick={this.toggleOpen}
           onKeyDown={this.handleKeyDown}
-          onBlur={this.handleBlur}
           type='button'
           id={id}
           tabIndex='0'
@@ -86,7 +83,8 @@ export default class DropdownButton extends React.Component {
         </button>
         <DropdownMenu
           ref='menu'
-          onKeyDown={this.handleKeyDown}
+          open={this.state.open}
+          requestClose={this.handleRequestClose}
           labelledBy={id}>
           {this.props.children}
         </DropdownMenu>

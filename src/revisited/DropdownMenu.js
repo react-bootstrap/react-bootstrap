@@ -1,4 +1,7 @@
 import React from 'react';
+import domUtils from '../utils/domUtils';
+import EventListener from '../utils/EventListener';
+import keycode from 'keycode';
 
 class DropdownMenu extends React.Component {
   constructor(props) {
@@ -8,6 +11,65 @@ class DropdownMenu extends React.Component {
     this.focusPrevious = this.focusPrevious.bind(this);
     this.getFocusableMenuItems = this.getFocusableMenuItems.bind(this);
     this.getItemsAndActiveIndex = this.getItemsAndActiveIndex.bind(this);
+
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+
+    this.bindRootCloseHandler = this.bindRootCloseHandler.bind(this);
+    this.unbindRootCloseHandler = this.unbindRootCloseHandler.bind(this);
+    this.handleDocumentClick = this.handleDocumentClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.componentDidUpdate();
+  }
+
+  componentDidUpdate() {
+    if (this.props.open) {
+      this.bindRootCloseHandler();
+    } else {
+      this.unbindRootCloseHandler();
+    }
+  }
+
+  bindRootCloseHandler() {
+    let ownerDocument = domUtils.ownerDocument(this);
+
+    this._onDocumentClickListener =
+      EventListener.listen(ownerDocument, 'click', this.handleDocumentClick);
+  }
+
+  unbindRootCloseHandler() {
+    if (this._onDocumentClickListener) {
+      this._onDocumentClickListener.remove();
+    }
+  }
+
+  componentWillUnmount() {
+    this.unbindRootCloseHandler();
+  }
+
+  handleDocumentClick(event) {
+    let inTree = domUtils.isNodeInTree(event.target, React.findDOMNode(this));
+    if (this.props.requestClose && !inTree) {
+      this.props.requestClose();
+    }
+  }
+
+  handleKeyDown(event) {
+    switch(event.keyCode) {
+      case keycode.codes.down:
+        this.focusNext();
+        event.preventDefault();
+        break;
+      case keycode.codes.up:
+        this.focusPrevious();
+        event.preventDefault();
+        break;
+      case keycode.codes.esc:
+      case keycode.codes.tab:
+        this.props.requestClose(event);
+        break;
+    }
   }
 
   focusNext() {
@@ -53,7 +115,7 @@ class DropdownMenu extends React.Component {
   render() {
     let children = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
-        onKeyDown: this.props.onKeyDown,
+        onKeyDown: this.handleKeyDown
       }, child.props.children);
     });
 
@@ -66,7 +128,6 @@ class DropdownMenu extends React.Component {
 }
 
 DropdownMenu.propTypes = {
-  onKeyDown: React.PropTypes.func,
   labelledBy: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number

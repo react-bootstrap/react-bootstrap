@@ -4,7 +4,7 @@ import DropdownButton from '../../src/revisited/DropdownButton';
 import MenuItem from '../../src/revisited/MenuItem';
 import keycode from 'keycode';
 
-describe.only('DropdownButton revisited', function() {
+describe('DropdownButton revisited', function() {
   let simpleDropdown = (
     <DropdownButton>
       <MenuItem>Item 1</MenuItem>
@@ -145,76 +145,6 @@ describe.only('DropdownButton revisited', function() {
       buttonNode.getAttribute('aria-expanded').should.equal('true');
     });
 
-    it('when focused and an item is selected sets focus on next menu item when the key "down" is pressed', function() {
-      let instance = React.render(simpleDropdown, focusableContainer);
-      let node = React.findDOMNode(instance);
-      let buttonNode = React.findDOMNode(node.children[0]);
-
-      buttonNode.focus();
-      ReactTestUtils.Simulate.click(buttonNode);
-
-      let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
-
-      items.forEach((item, index) => {
-        ReactTestUtils.Simulate.keyDown(document.activeElement, { keyCode: keycode('down') });
-
-        let itemAnchor = item.getDOMNode();
-        document.activeElement.should.equal(itemAnchor);
-      });
-    });
-
-    it('when focused and last item is selected sets focus on first menu item when the key "down" is pressed', function() {
-      let instance = React.render(simpleDropdown, focusableContainer);
-      let node = React.findDOMNode(instance);
-      let buttonNode = React.findDOMNode(node.children[0]);
-
-      buttonNode.focus();
-      ReactTestUtils.Simulate.click(buttonNode);
-
-      let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
-
-      items.forEach((item, index) => {
-        ReactTestUtils.Simulate.keyDown(document.activeElement, { keyCode: keycode('down') });
-      });
-
-      ReactTestUtils.Simulate.keyDown(document.activeElement, { keyCode: keycode('down') });
-
-      let firstMenuItemAnchor = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0].getDOMNode();
-      document.activeElement.should.equal(firstMenuItemAnchor);
-    });
-
-    it('when focused and item is selected sets focus on previous menu item when the key "up" is pressed', function() {
-      let instance = React.render(simpleDropdown, focusableContainer);
-      let node = React.findDOMNode(instance);
-      let buttonNode = React.findDOMNode(node.children[0]);
-
-      buttonNode.focus();
-
-      ['down', 'down', 'up'].forEach(direction => {
-        ReactTestUtils.Simulate.keyDown(document.activeElement, { keyCode: keycode(direction) });
-      });
-
-      let firstMenuItemAnchor = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0].getDOMNode();
-      document.activeElement.should.equal(firstMenuItemAnchor);
-    });
-
-    it('when focused and the first item is selected sets focus on last menu item when the key "up" is pressed', function() {
-      let instance = React.render(simpleDropdown, focusableContainer);
-      let node = React.findDOMNode(instance);
-      let buttonNode = React.findDOMNode(node.children[0]);
-
-      buttonNode.focus();
-
-      ['down', 'up'].forEach(direction => {
-        ReactTestUtils.Simulate.keyDown(document.activeElement, { keyCode: keycode(direction) });
-      });
-
-      let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
-
-      let lastMenuItemAnchor = items[items.length-1].getDOMNode();
-      document.activeElement.should.equal(lastMenuItemAnchor);
-    });
-
     it('when open and the key "esc" is pressed the menu is closed and focus is returned to the button', function() {
       let instance = React.render(simpleDropdown, focusableContainer);
       let node = React.findDOMNode(instance);
@@ -223,7 +153,7 @@ describe.only('DropdownButton revisited', function() {
 
       buttonNode.focus();
       ReactTestUtils.Simulate.keyDown(buttonNode, { keyCode: keycode('down') });
-      ReactTestUtils.Simulate.keyDown(firstMenuItemAnchor, { keyCode: keycode('esc') });
+      ReactTestUtils.Simulate.keyDown(firstMenuItemAnchor, { type: 'keydown', keyCode: keycode('esc') });
 
       document.activeElement.should.equal(buttonNode);
     });
@@ -253,7 +183,7 @@ describe.only('DropdownButton revisited', function() {
   });
 
   describe('DropdownMenu', function() {
-    it('has aria-labelled by same id as toggle button', function() {
+    it('has aria-labelledby same id as toggle button', function() {
       let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
       let node = React.findDOMNode(instance);
       let buttonNode = node.children[0];
