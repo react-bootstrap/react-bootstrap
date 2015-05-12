@@ -64,7 +64,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [peer-deps-badge]: https://david-dm.org/react-bootstrap/react-bootstrap/peer-status.svg
 [peer-deps]: https://david-dm.org/react-bootstrap/react-bootstrap#info=peerDependencies 
 
-[react-router-bootstrap]: https://github.com/mtscout6/react-router-bootstrap
+[react-router-bootstrap]: https://github.com/react-bootstrap/react-router-bootstrap
 [react-router]: https://github.com/rackt/react-router
 
 [complementary-tools]: https://github.com/facebook/react/wiki/Complementary-Tools
