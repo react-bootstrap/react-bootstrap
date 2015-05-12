@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import keycode from 'keycode';
 import uuid from 'uuid';
+import DropdownButtonTitle from './DropdownButtonTitle';
 import DropdownMenu from './DropdownMenu';
 
 export default class DropdownButton extends React.Component {
