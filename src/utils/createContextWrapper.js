@@ -12,7 +12,7 @@ export default function createContextWrapper(Trigger, propName) {
 
       render() {
         // Strip injected props from below.
-        const {wrapped, ...props} = this.props;
+        const {wrapped, ...props} = this.props; // eslint-disable-line object-shorthand
         delete props.context;
 
         return React.cloneElement(wrapped, props);
