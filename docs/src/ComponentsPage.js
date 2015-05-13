@@ -258,14 +258,17 @@ const ComponentsPage = React.createClass({
                   <h1 id='popovers' className='page-header'>Popovers <small>Popover</small></h1>
                   <h2 id='popovers-examples'>Example popovers</h2>
 
-                  <p>Popovers component.</p>
+                  <p>Popover component.</p>
                   <ReactPlayground codeText={Samples.PopoverBasic} />
 
-                  <p>Popovers component.</p>
+                  <p>Positioned popover component.</p>
                   <ReactPlayground codeText={Samples.PopoverPositioned} />
 
-                  <p>Popovers scrolling.</p>
-                  <ReactPlayground codeText={Samples.PopoverPositionedContained} exampleClassName='bs-example-scroll' />
+                  <p>Popover component in container.</p>
+                  <ReactPlayground codeText={Samples.PopoverContained} exampleClassName='bs-example-popover-contained' />
+
+                  <p>Positioned popover components in scrolling container.</p>
+                  <ReactPlayground codeText={Samples.PopoverPositionedScrolling} exampleClassName='bs-example-popover-scroll' />
                 </div>
 
                 {/* Progress Bar */}
