@@ -6,7 +6,8 @@ const TabPane = React.createClass({
   propTypes: {
     active:          React.PropTypes.bool,
     animation:       React.PropTypes.bool,
-    onAnimateOutEnd: React.PropTypes.func
+    onAnimateOutEnd: React.PropTypes.func,
+    disabled:        React.PropTypes.bool
   },
 
   getDefaultProps() {

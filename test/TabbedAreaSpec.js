@@ -197,5 +197,37 @@ describe('TabbedArea', function () {
     assert.equal(tabPane[1].getDOMNode().getAttribute('class').match(/pull-right/)[0], 'pull-right');
   });
 
+  it('Should pass disabled to NavItem', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <TabbedArea activeKey={1}>
+        <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2} disabled={true}>Tab 2 content</TabPane>
+      </TabbedArea>
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled'));
+  });
+
+  it('Should not show content when clicking disabled tab', function () {
+    let tab1 = <span className="tab1">Tab 1</span>;
+    let instance = ReactTestUtils.renderIntoDocument(
+      <TabbedArea defaultActiveKey={2} animation={false}>
+        <TabPane tab={tab1} eventKey={1} disabled={true}>Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
+      </TabbedArea>
+    );
+
+    let tabbedArea = ReactTestUtils.findRenderedComponentWithType(instance, TabbedArea);
+    let panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
+
+    ReactTestUtils.Simulate.click(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab1')
+    );
+
+    assert.equal(panes[0].props.active, false);
+    assert.equal(panes[1].props.active, true);
+    assert.equal(tabbedArea.refs.tabs.props.activeKey, 2);
+  });
+
 
 });
