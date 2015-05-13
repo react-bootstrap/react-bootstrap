@@ -1,3 +1,19 @@
+v0.22.0 - Wed, 13 May 2015 18:31:52 GMT
+---------------------------------------
+
+- [061bef2](../../commit/061bef2) [fixed] update link to react-router-bootstrap in README
+- [0fb9b57](../../commit/0fb9b57) [changed] Updated extract-text-webpack-plugin. Dev dependency.
+- [ca689c0](../../commit/ca689c0) [changed] Updated eslint dev-dependency
+- [0f90799](../../commit/0f90799) [added] react-hot-loader when developing docs
+- [4cd5845](../../commit/4cd5845) [added] FormGroup/Input bsSize now propgates correctly as form-group-\* classes
+- [6ce8870](../../commit/6ce8870) [added] Introduction Page.
+- [1c6c74b](../../commit/1c6c74b) [fixed] Modal div.modal-content should not have hidden class
+- [51a205f](../../commit/51a205f) [changed] collapsable => collapsible property
+- [f77c955](../../commit/f77c955) [changed] Updated classnames dependency
+- [5a76e94](../../commit/5a76e94) [added] favicon
+- [8da11b4](../../commit/8da11b4) [added] convenience factories for non-JSX users in lib/factories
+
+
 v0.21.2 - Fri, 01 May 2015 19:36:56 GMT
 ---------------------------------------
 
