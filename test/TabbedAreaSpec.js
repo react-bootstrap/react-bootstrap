@@ -199,7 +199,7 @@ describe('TabbedArea', function () {
   
   it('Should pass disabled to NavItem', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <TabbedArea activeKey={3}>
+      <TabbedArea activeKey={1}>
         <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
         <TabPane tab="Tab 2" eventKey={2} disabled={true}>Tab 2 content</TabPane>
       </TabbedArea>
