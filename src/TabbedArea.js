@@ -110,7 +110,7 @@ const TabbedArea = React.createClass({
       <NavItem
         ref={'tab' + eventKey}
         eventKey={eventKey}
-        className={className} 
+        className={className}
         disabled={disabled}>
         {tab}
       </NavItem>
