@@ -9,8 +9,12 @@ const Popover = React.createClass({
     placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
     positionLeft: React.PropTypes.number,
     positionTop: React.PropTypes.number,
-    arrowOffsetLeft: React.PropTypes.number,
-    arrowOffsetTop: React.PropTypes.number,
+    arrowOffsetLeft: React.PropTypes.oneOfType([
+      React.PropTypes.number, React.PropTypes.string
+    ]),
+    arrowOffsetTop: React.PropTypes.oneOfType([
+      React.PropTypes.number, React.PropTypes.string
+    ]),
     title: React.PropTypes.node
   },
 
@@ -21,19 +25,19 @@ const Popover = React.createClass({
   },
 
   render() {
-    let classes = {
+    const classes = {
       'popover': true,
       [this.props.placement]: true,
       'in': this.props.positionLeft != null || this.props.positionTop != null
     };
 
-    let style = {
+    const style = {
       'left': this.props.positionLeft,
       'top': this.props.positionTop,
       'display': 'block'
     };
 
-    let arrowStyle = {
+    const arrowStyle = {
       'left': this.props.arrowOffsetLeft,
       'top': this.props.arrowOffsetTop
     };
