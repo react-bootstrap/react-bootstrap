@@ -5,7 +5,9 @@ export default (config, options) => {
     config = _.extend({}, config, {
       output: _.extend({}, config.output, {
         filename: '[name].min.js'
-      })
+      }),
+
+      devtool: 'source-map'
     });
 
     return config;
