@@ -2,6 +2,7 @@ import React from 'react';
 import components from '../tools/public-components';
 
 let props = {
+  ButtonInput: {value: 'button'},
   Glyphicon: {glyph: 'star'},
   Modal: {onRequestHide() {}},
   ModalTrigger: {modal: React.DOM.div(null)},

@@ -12,6 +12,7 @@
     "Badge",
     "Button",
     "ButtonGroup",
+    "ButtonInput",
     "ButtonToolbar",
     "CollapsibleNav",
     "CollapsibleMixin",

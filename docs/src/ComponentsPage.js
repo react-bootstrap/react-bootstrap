@@ -551,6 +551,9 @@ const ComponentsPage = React.createClass({
                   <h2 id='input-types'>Types</h2>
                   <p>Supports <code>select</code>, <code>textarea</code>, <code>static</code> as well as standard HTML input types. <code>getValue()</code> returns an array for multiple select.</p>
                   <ReactPlayground codeText={Samples.InputTypes} />
+                  <h2 id='button-input-types'>Button Input Types</h2>
+                  <p>Form buttons are encapsulated by <code>ButtonInput</code>. Pass in <code>type="reset"</code> or <code>type="submit"</code> to suit your needs. Styling is the same as <code>Button</code>.</p>
+                  <ReactPlayground codeText={Samples.ButtonInput} />
                   <h2 id='input-addons'>Add-ons</h2>
                   <p>Use <code>addonBefore</code> and <code>addonAfter</code> for normal addons, <code>buttonBefore</code> and <code>buttonAfter</code> for button addons.
                   Exotic configurations may require some css on your side.</p>

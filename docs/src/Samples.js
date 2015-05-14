@@ -83,6 +83,7 @@ export default {
   TableResponsive:               require('fs').readFileSync(__dirname + '/../examples/TableResponsive.js', 'utf8'),
   Input:                         require('fs').readFileSync(__dirname + '/../examples/Input.js', 'utf8'),
   InputTypes:                    require('fs').readFileSync(__dirname + '/../examples/InputTypes.js', 'utf8'),
+  ButtonInput:                   require('fs').readFileSync(__dirname + '/../examples/ButtonInput.js', 'utf8'),
   InputAddons:                   require('fs').readFileSync(__dirname + '/../examples/InputAddons.js', 'utf8'),
   InputSizes:                    require('fs').readFileSync(__dirname + '/../examples/InputSizes.js', 'utf8'),
   InputValidation:               require('fs').readFileSync(__dirname + '/../examples/InputValidation.js', 'utf8'),
