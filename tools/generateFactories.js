@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { template } from 'lodash';
 import path from 'path';
 import fsp from 'fs-promise';
 import { exec } from './exec';
@@ -18,13 +18,13 @@ export default function generateFactories(destination, babelOptions='') {
 
   return Promise.all([
     fsp.readFile(factoryTemplatePath)
-      .then(template => {
+      .then(templateString => {
         Promise.all(components.map(name => {
-          generateCompiledFile(name, _.template(template)({name}));
+          generateCompiledFile(name, template(templateString)({name}));
         }));
       }),
     fsp.readFile(indexTemplatePath)
-      .then(template => _.template(template)({components}))
+      .then(templateString => template(templateString)({components}))
       .then(content => generateCompiledFile('index', content))
   ]);
 

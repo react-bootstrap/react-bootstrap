@@ -1,16 +1,14 @@
-import _ from 'lodash';
+import { extend } from 'lodash';
 
 export default (config, options) => {
   if (options.optimize) {
-    config = _.extend({}, config, {
-      output: _.extend({}, config.output, {
+    config = extend({}, config, {
+      output: extend({}, config.output, {
         filename: '[name].min.js'
       }),
 
       devtool: 'source-map'
     });
-
-    return config;
   }
 
   return config;

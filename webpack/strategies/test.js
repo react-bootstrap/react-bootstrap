@@ -1,8 +1,8 @@
-import _ from 'lodash';
+import { extend } from 'lodash';
 
 export default (config, options) => {
   if (options.test) {
-    config = _.extend({}, config, {
+    config = extend({}, config, {
       devtool: 'inline-source-map',
       entry: undefined,
       output: {
@@ -10,8 +10,6 @@ export default (config, options) => {
       },
       externals: undefined
     });
-
-    return config;
   }
 
   return config;

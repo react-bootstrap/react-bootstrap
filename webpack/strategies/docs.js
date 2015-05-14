@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { extend } from 'lodash';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 export default (config, options) => {
@@ -6,7 +6,7 @@ export default (config, options) => {
     let jsLoader = '';
     let cssSourceMap = options.development ? '?sourceMap' : '';
 
-    config = _.extend({}, config, {
+    config = extend({}, config, {
       entry: {
         bundle: './docs/client.js'
       },
@@ -23,10 +23,10 @@ export default (config, options) => {
         noParse: /babel-core\/browser/,
         loaders: config.module.loaders
           .map(value => {
-            if (/\.js\/$/.test(value.test.toString())) {
+            if (/js/.test(value.test.toString())) {
               jsLoader = value.loader;
 
-              return _.extend({}, value, {
+              return extend({}, value, {
                 exclude: /node_modules|Samples\.js/
               });
             }
@@ -47,8 +47,6 @@ export default (config, options) => {
         new ExtractTextPlugin('[name].css')
       ])
     });
-
-    return config;
   }
 
   return config;
