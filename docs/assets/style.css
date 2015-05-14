@@ -98,12 +98,20 @@ body {
   height: 200px;
 }
 
-.bs-example-scroll {
+.bs-example-popover-contained {
+  height: 200px;
+}
+
+.bs-example-popover-contained > div {
+  position: relative;
+}
+
+.bs-example-popover-scroll {
   overflow: scroll;
   height: 200px;
 }
 
-.bs-example-scroll > div {
+.bs-example-popover-scroll > div {
   position: relative;
   padding: 100px 0;
 }
