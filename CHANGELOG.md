@@ -1,3 +1,10 @@
+v0.22.2 - Thu, 14 May 2015 20:36:17 GMT
+---------------------------------------
+
+- [03211db](../../commit/03211db) [fixed] Fit overlay within viewport boundary
+- [576827f](../../commit/576827f) [changed] Introducing ButtonInput
+
+
 v0.22.1 - Thu, 14 May 2015 17:54:32 GMT
 ---------------------------------------
 
