@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import OverlayTrigger from '../src/OverlayTrigger';
+import Popover from '../src/Popover';
+import Tooltip from '../src/Tooltip';
 
 describe('OverlayTrigger', function() {
   it('Should create OverlayTrigger element', function() {
@@ -157,6 +159,36 @@ describe('OverlayTrigger', function() {
           });
 
           checkPosition(testCase.offsetAfter);
+        });
+      });
+    });
+  });
+
+  describe('overlay types', function() {
+    [
+      {
+        name: 'Popover',
+        overlay: (<Popover>test</Popover>)
+      },
+      {
+        name: 'Tooltip',
+        overlay: (<Tooltip>test</Tooltip>)
+      }
+    ].forEach(function(testCase) {
+      describe(testCase.name, function() {
+        let instance, overlayTrigger;
+
+        beforeEach(function() {
+          instance = ReactTestUtils.renderIntoDocument(
+            <OverlayTrigger trigger="click" overlay={testCase.overlay}>
+              <button>button</button>
+            </OverlayTrigger>
+          );
+          overlayTrigger = React.findDOMNode(instance);
+        });
+
+        it('Should handle trigger without warnings', function() {
+          ReactTestUtils.Simulate.click(overlayTrigger);
         });
       });
     });
