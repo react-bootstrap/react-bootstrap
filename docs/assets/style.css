@@ -146,7 +146,7 @@ body {
   background: #f8f5ec;
 }
 
-// Minimal CSS Needed for contained modals
+/* Minimal CSS Needed for contained modals */
 .modal-container {
   position: relative;
 }
