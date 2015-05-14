@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { extend } from 'lodash';
 import webpack from 'webpack';
 import strategies from './strategies';
 import yargs from 'yargs';
@@ -16,7 +16,7 @@ const defaultOptions = {
 };
 
 export default (options) => {
-  options = _.merge({}, defaultOptions, options);
+  options = extend({}, defaultOptions, options);
   const environment = options.test || options.development ?
     'development' : 'production';
 

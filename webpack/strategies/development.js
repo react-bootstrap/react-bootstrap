@@ -1,12 +1,10 @@
-import _ from 'lodash';
+import { extend } from 'lodash';
 
 export default (config, options) => {
   if (options.development && !options.docs) {
-    config = _.extend({}, config, {
+    config = extend({}, config, {
       devtool: 'sourcemap'
     });
-
-    return config;
   }
 
   return config;

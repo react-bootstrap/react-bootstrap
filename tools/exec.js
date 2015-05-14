@@ -1,5 +1,5 @@
 import 'colors';
-import _ from 'lodash';
+import { extend } from 'lodash';
 import { exec } from 'child-process-promise';
 
 let executionOptions = {
@@ -52,7 +52,7 @@ function safeExec(command, options = {}) {
 }
 
 function setExecOptions(options) {
-  executionOptions = _.extend({}, executionOptions, options);
+  executionOptions = extend({}, executionOptions, options);
 }
 
 export default {

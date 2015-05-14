@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { template } from 'lodash';
 import path from 'path';
 import fsp from 'fs-promise';
 import { copy } from '../fs-utils';
@@ -22,9 +22,9 @@ function bowerConfig() {
     fsp.readFile(packagePath)
       .then(json => JSON.parse(json)),
     fsp.readFile(bowerTemplate)
-      .then(template => _.template(template))
+      .then(templateString => template(templateString))
   ])
-  .then(([pkg, template]) => template({ pkg }))
+  .then(([pkg, compiledTemplateFunc]) => compiledTemplateFunc({ pkg }))
   .then(config => fsp.writeFile(bowerJson, config));
 }
 

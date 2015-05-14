@@ -1,8 +1,8 @@
-import _ from 'lodash';
+import { extend } from 'lodash';
 
 export default (config, options) => {
   if (options.ie8) {
-    config = _.extend({}, config, {
+    config = extend({}, config, {
       entry: {
         bundle: './ie8/src.js'
       },
@@ -18,8 +18,6 @@ export default (config, options) => {
         ])
       }
     });
-
-    return config;
   }
 
   return config;
