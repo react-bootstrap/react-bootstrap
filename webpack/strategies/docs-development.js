@@ -17,7 +17,7 @@ export default (config, options) => {
       }),
       module: _.extend({}, config.module, {
         loaders: config.module.loaders.map(value => {
-          if (/js/.test(value.test.toString())) {
+          if (/\.js\/$/.test(value.test.toString())) {
             return _.extend({}, value, {
               loader: 'react-hot!' + value.loader
             });
