@@ -577,8 +577,10 @@ const ComponentsPage = React.createClass({
                   The helper method <code>getInputDOMNode()</code> returns the internal input element. If you don't want the <code>form-group</code> class applied apply the prop named <code>standalone</code>.</p>
                   <ReactPlayground codeText={Samples.Input} />
                   <h2 id='input-types'>Types</h2>
-                  <p>Supports <code>select</code>, <code>textarea</code>, <code>static</code> as well as standard HTML input types. <code>getValue()</code> returns an array for multiple select.</p>
+                  <p>Supports <code>select</code>, <code>textarea</code>, as well as standard HTML input types. <code>getValue()</code> returns an array for multiple select.</p>
                   <ReactPlayground codeText={Samples.InputTypes} />
+                  <p>Static text can be added to your form controls through the use of the <code>FormControls.Static</code> component.</p>
+                  <ReactPlayground codeText={Samples.StaticText} />
                   <h2 id='button-input-types'>Button Input Types</h2>
                   <p>Form buttons are encapsulated by <code>ButtonInput</code>. Pass in <code>type="reset"</code> or <code>type="submit"</code> to suit your needs. Styling is the same as <code>Button</code>.</p>
                   <ReactPlayground codeText={Samples.ButtonInput} />
