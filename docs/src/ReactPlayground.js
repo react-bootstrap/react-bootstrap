@@ -156,7 +156,7 @@ const selfCleaningTimeout = {
     clearTimeout(this.timeoutID);
   },
 
-  setTimeout() {
+  updateTimeout() {
     clearTimeout(this.timeoutID);
     this.timeoutID = setTimeout.apply(null, arguments);
   }
@@ -282,8 +282,10 @@ const ReactPlayground = React.createClass({
       console.error(e);
     }
 
-    let compiledCode = this.compileCode();
+    let compiledCode = null;
     try {
+      compiledCode = this.compileCode();
+
       if (this.props.renderCode) {
         React.render(
           <CodeMirrorEditor codeText={compiledCode} readOnly={true} />,
@@ -295,8 +297,13 @@ const ReactPlayground = React.createClass({
         /* eslint-enable */
       }
     } catch (err) {
-      console.log(err, compiledCode);
-      this.setTimeout(() => {
+      if (compiledCode !== null) {
+        console.log(err, compiledCode);
+      } else {
+        console.log(err);
+      }
+
+      this.updateTimeout(() => {
         React.render(
           <Alert bsStyle='danger'>{err.toString()}</Alert>,
           mountNode
