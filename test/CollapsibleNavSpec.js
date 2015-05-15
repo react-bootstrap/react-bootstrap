@@ -109,6 +109,6 @@ describe('CollapsibleNav', function () {
     let classDOM = ReactTestUtils.findRenderedDOMComponentWithTag(instance.refs.collapsible_object, 'DIV').props.className
         , classArray = classDOM.split(' ')
         , idx = classArray.indexOf('navbar-collapse');
-    assert.equal(classArray.indexOf('navbar-collapse', idx+1), -1);
+    assert.equal(classArray.indexOf('navbar-collapse', idx + 1), -1);
   });
 });
