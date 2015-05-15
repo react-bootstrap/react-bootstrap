@@ -1,0 +1,35 @@
+#!/usr/bin/env babel-node
+/* eslint no-process-exit: 0 */
+import { inspect } from 'util';
+import path from 'path';
+
+/**
+ * -p and --debug cannot be used by itself,
+ * because they are legitimate options for `babel-node`
+ */
+
+if (!process.argv[2]) {
+  console.log('webpack-mock path_to_config <p, d>');
+  process.exit(0);
+}
+
+const pathOption = process.argv[2];
+
+let argv;
+switch (process.argv[3]) {
+ case 'p':
+   argv = ['-p'];
+   break;
+ case 'd':
+   argv = ['--debug'];
+   break;
+ default:
+   argv = [];
+}
+
+/* clean args for sure */
+process.argv = process.argv.slice(0, 2).concat(argv);
+
+const confFile = path.join(__dirname, '../../', pathOption);
+const configObject = require(confFile);
+console.log(inspect(configObject, { depth: null }));
