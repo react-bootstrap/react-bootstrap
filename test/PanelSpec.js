@@ -58,6 +58,18 @@ describe('Panel', function () {
     assert.equal(header.firstChild.firstChild.innerHTML, 'Heading');
   });
 
+  it('Should have custom component header with custom class', function () {
+    let header = <h3 className="custom-class">Heading</h3>,
+        instance = ReactTestUtils.renderIntoDocument(
+          <Panel header={header}>Panel content</Panel>
+        );
+    header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading').getDOMNode();
+    assert.equal(header.firstChild.nodeName, 'H3');
+    assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
+    assert.ok(header.firstChild.className.match(/\bcustom-class\b/));
+    assert.equal(header.firstChild.innerHTML, 'Heading');
+  });
+
   it('Should have footer', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel footer="Footer">Panel content</Panel>
