@@ -12,12 +12,12 @@ function valueValidation({children, value}, propName, componentName) {
 
 class ButtonInput extends InputBase {
   renderFormGroup(children) {
-    let {bsStyle, value, ...other} = this.props; /* eslint no-unused-vars: 0 object-shorthand: 0 */
+    let {bsStyle, value, ...other} = this.props; // eslint-disable-line object-shorthand, no-unused-vars
     return <FormGroup {...other}>{children}</FormGroup>;
   }
 
   renderInput() {
-    let {children, value, ...other} = this.props;
+    let {children, value, ...other} = this.props; // eslint-disable-line object-shorthand
     let val = children ? children : value;
     return <Button {...other} componentClass="input" ref="input" key="input" value={val} />;
   }
