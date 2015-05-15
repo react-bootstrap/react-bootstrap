@@ -11,7 +11,7 @@
     "build": "babel-node tools/build-cli.js",
     "test-watch": "karma start",
     "test": "npm run lint && npm run build && karma start --single-run",
-    "lint": "eslint src test docs ie8 tools webpack karma.conf.js webpack.config.js webpack.docs.js",
+    "lint": "eslint ./",
     "docs-build": "babel-node tools/build-cli.js --docs-only",
     "docs": "docs/dev-run",
     "docs-prod": "webpack --config webpack.docs.js -p --progress && NODE_ENV=production babel-node docs/server.js",
