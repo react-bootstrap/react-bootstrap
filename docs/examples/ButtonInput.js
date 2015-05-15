@@ -2,14 +2,14 @@ const ButtonInputExample = React.createClass({
   getInitialState() {
     return {
       disabled: true,
-      style: ''
+      style: null
     };
   },
 
   resetValidation() {
     this.setState({
       disabled: true,
-      style: ''
+      style: null
     });
   },
 
