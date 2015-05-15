@@ -253,7 +253,7 @@ const Carousel = React.createClass({
           animateOut: isPreviousActive,
           animateIn: isActive && this.state.previousActiveIndex != null && this.props.slide,
           direction: this.state.direction,
-          onAnimateOutEnd: isPreviousActive ? this.handleItemAnimateOutEnd: null
+          onAnimateOutEnd: isPreviousActive ? this.handleItemAnimateOutEnd : null
         }
       );
   },

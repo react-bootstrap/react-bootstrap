@@ -99,7 +99,7 @@ const TabbedArea = React.createClass({
           key: child.key ? child.key : index,
           animation: this.props.animation,
           onAnimateOutEnd: (this.state.previousActiveKey != null &&
-            child.props.eventKey === this.state.previousActiveKey) ? this.handlePaneAnimateOutEnd: null
+            child.props.eventKey === this.state.previousActiveKey) ? this.handlePaneAnimateOutEnd : null
         }
       );
   },
