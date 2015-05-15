@@ -5,6 +5,8 @@ const innerDropdown = (
     <MenuItem key='1'>Item</MenuItem>
   </DropdownButton>
 );
+const innerRadio = <input type='radio' aria-label='...' />;
+const innerCheckbox = <input type='checkbox' aria-label='...' />;
 
 const inputAddonsInstance = (
   <form>
@@ -14,6 +16,8 @@ const inputAddonsInstance = (
     <Input type='text' addonAfter={innerGlyphicon} />
     <Input type='text' buttonBefore={innerButton} />
     <Input type='text' buttonAfter={innerDropdown} />
+    <Input type='text' addonBefore={innerRadio} />
+    <Input type='text' addonBefore={innerCheckbox} />
   </form>
 );
 
