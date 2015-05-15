@@ -156,17 +156,19 @@ const Panel = React.createClass({
     if (!React.isValidElement(header) || Array.isArray(header)) {
       header = collapsible ?
         this.renderCollapsableTitle(header) : header;
-    } else if (collapsible) {
-
-      header = cloneElement(header, {
-        className: classNames(this.prefixClass('title')),
-        children: this.renderAnchor(header.props.children)
-      });
     } else {
+      const className = classNames(
+        this.prefixClass('title'), header.props.className
+      );
 
-      header = cloneElement(header, {
-        className: classNames(this.prefixClass('title'))
-      });
+      if (collapsible) {
+        header = cloneElement(header, {
+          className,
+          children: this.renderAnchor(header.props.children)
+        });
+      } else {
+        header = cloneElement(header, {className});
+      }
     }
 
     return (
