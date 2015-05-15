@@ -36,7 +36,7 @@ const DropdownButton = React.createClass({
         {...this.props}
         ref="dropdownButton"
         className={classNames('dropdown-toggle', this.props.buttonClassName)}
-        onClick={this.handleDropdownClick}
+        onClick={createChainedFunction(this.props.onClick, this.handleDropdownClick)}
         key={0}
         navDropdown={this.props.navItem}
         navItem={null}

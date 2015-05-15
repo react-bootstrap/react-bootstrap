@@ -213,4 +213,22 @@ describe('DropdownButton', function () {
     let button = ReactTestUtils.findRenderedComponentWithType(instance, Button).getDOMNode();
     assert.ok(button.className.match(/\btest-class\b/));
   });
+
+  it('should set onClick on Button', function (done) {
+    function handleClick() {
+      done();
+    }
+
+    instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="Title" onClick={handleClick}>
+        <MenuItem eventKey='1'>MenuItem 1 content</MenuItem>
+        <MenuItem eventKey='2'>MenuItem 2 content</MenuItem>
+      </DropdownButton>
+    );
+
+    let button = ReactTestUtils.findRenderedComponentWithType(instance, Button);
+    ReactTestUtils.SimulateNative.click(
+      ReactTestUtils.findRenderedDOMComponentWithClass(button, 'dropdown-toggle')
+    );
+  });
 });
