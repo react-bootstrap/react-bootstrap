@@ -47,4 +47,24 @@ describe('CustomPropTypes', function () {
       assert.isUndefined(validate('bar'));
     });
   });
+
+  describe('singlePropFrom', function () {
+    function validate(testProps) {
+      const propList = ['children', 'value'];
+
+      return CustomPropTypes.singlePropFrom(propList)(testProps, 'value', 'Component');
+    }
+
+    it('Should return undefined if only one listed prop in used', function () {
+      const testProps = {value: 5};
+
+      assert.isUndefined(validate(testProps));
+    });
+
+    it('Should return error if multiple of the listed properties have values', function () {
+      const testProps = {value: 5, children: 5};
+
+      validate(testProps).should.be.instanceOf(Error);
+    });
+  });
 });
