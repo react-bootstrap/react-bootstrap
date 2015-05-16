@@ -17,6 +17,6 @@
   ],
   "dependencies": {
     "react": ">= 0.13.0",
-    "classnames": "1.1.4"
+    "classnames": "^2.0.0"
   }
 }
