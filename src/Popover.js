@@ -1,9 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
+import FadeMixin from './FadeMixin';
 
 const Popover = React.createClass({
-  mixins: [BootstrapMixin],
+  mixins: [BootstrapMixin, FadeMixin],
 
   propTypes: {
     placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
@@ -15,20 +16,24 @@ const Popover = React.createClass({
     arrowOffsetTop: React.PropTypes.oneOfType([
       React.PropTypes.number, React.PropTypes.string
     ]),
-    title: React.PropTypes.node
+    title: React.PropTypes.node,
+    animation: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
+      animation: true,
       placement: 'right'
     };
   },
 
   render() {
     const classes = {
+      'fade': this.props.animation,
       'popover': true,
       [this.props.placement]: true,
-      'in': this.props.positionLeft != null || this.props.positionTop != null
+      'in': !this.props.animation &&
+            (this.props.positionLeft != null || this.props.positionTop != null)
     };
 
     const style = {
