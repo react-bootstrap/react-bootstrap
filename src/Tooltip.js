@@ -1,9 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
+import FadeMixin from './FadeMixin';
 
 const Tooltip = React.createClass({
-  mixins: [BootstrapMixin],
+  mixins: [BootstrapMixin, FadeMixin],
 
   propTypes: {
     placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
@@ -14,12 +15,14 @@ const Tooltip = React.createClass({
     ]),
     arrowOffsetTop: React.PropTypes.oneOfType([
       React.PropTypes.number, React.PropTypes.string
-    ])
+    ]),
+    animation: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
-      placement: 'right'
+      placement: 'right',
+      animation: true
     };
   },
 
@@ -27,7 +30,9 @@ const Tooltip = React.createClass({
     const classes = {
       'tooltip': true,
       [this.props.placement]: true,
-      'in': this.props.positionLeft != null || this.props.positionTop != null
+      // in class will be added by the FadeMixin when the animation property is true
+      'in': !this.props.animation && (this.props.positionLeft != null || this.props.positionTop != null),
+      'fade': this.props.animation
     };
 
     const style = {
