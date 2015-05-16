@@ -1,5 +1,5 @@
 import React from 'react';
-import TransitionEvents from 'react/lib/ReactTransitionEvents';
+import TransitionEvents from './utils/TransitionEvents';
 import deprecationWarning from './utils/deprecationWarning';
 
 const CollapsibleMixin = {
