@@ -18,7 +18,8 @@ describe('MenuItem', function () {
       <MenuItem
         className="test-class"
         href="#hi-mom!"
-        title="hi mom!">
+        title="hi mom!"
+        active={true}>
         Title
       </MenuItem>
     );
@@ -27,6 +28,7 @@ describe('MenuItem', function () {
     assert(node.className.match(/\btest-class\b/));
     assert.equal(node.getAttribute('href'), null);
     assert.equal(node.getAttribute('title'), null);
+    assert.ok(node.className.match(/\bactive\b/));
 
     let anchorNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a').getDOMNode();
     assert.notOk(anchorNode.className.match(/\btest-class\b/));
