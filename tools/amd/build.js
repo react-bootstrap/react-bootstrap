@@ -15,7 +15,8 @@ const license = path.join(repoRoot, 'LICENSE');
 
 const babelOptions = '--modules amd';
 
-const factoriesDestination = path.join(bowerRoot, 'factories');
+const libDestination = path.join(bowerRoot, 'lib');
+const factoriesDestination = path.join(libDestination, 'factories');
 
 function bowerConfig() {
   return Promise.all([
@@ -36,7 +37,7 @@ export default function BuildBower() {
     .then(() => Promise.all([
       bowerConfig(),
       generateFactories(factoriesDestination, babelOptions),
-      exec(`babel ${babelOptions} ${srcRoot} --out-dir ${bowerRoot}`),
+      exec(`babel ${babelOptions} ${srcRoot} --out-dir ${libDestination}`),
       copy(readme, bowerRoot),
       copy(license, bowerRoot)
     ]))
