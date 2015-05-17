@@ -17,11 +17,16 @@ const argv = yargs
     default: false,
     describe: 'Increased debug output'
   })
+  .option('dev', {
+    demand: false,
+    default: false,
+    describe: 'Only used when supplied with the --docs-only flag'
+  })
   .argv;
 
 setExecOptions(argv);
 
-let buildProcess = argv.docsOnly ? docs() : build();
+let buildProcess = argv.docsOnly ? docs(argv) : build();
 
 buildProcess
   .catch(err => {

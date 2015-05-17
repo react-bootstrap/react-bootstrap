@@ -17,8 +17,7 @@ const defaultOptions = {
 
 export default (options) => {
   options = _.merge({}, defaultOptions, options);
-  const environment = options.test || options.development ?
-    'development' : 'production';
+  const environment = options.optimize ? 'production' : 'development';
 
   const config = {
     entry: {
