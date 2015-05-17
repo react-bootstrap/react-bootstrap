@@ -32,8 +32,8 @@ function generateHTML(fileName) {
   });
 }
 
-export default function BuildDocs() {
-  console.log('Building: '.cyan + 'docs'.green);
+export default function BuildDocs({ dev }) {
+  console.log('Building: '.cyan + 'docs'.green + (dev ? ' [DEV]'.grey : ''));
 
   return exec(`rimraf ${docsBuilt}`)
     .then(() => fsp.mkdir(docsBuilt))
@@ -41,10 +41,10 @@ export default function BuildDocs() {
       let pagesGenerators = Root.getPages().map(generateHTML);
 
       return Promise.all(pagesGenerators.concat([
-        exec(`webpack --config webpack.docs.js -p --bail`),
+        exec(`webpack --config webpack.docs.js ${dev ? '' : '-p '}--bail`),
         copy(license, docsBuilt),
         copy(readmeSrc, readmeDest)
       ]));
     })
-    .then(() => console.log('Built: '.cyan + 'docs'.green));
+    .then(() => console.log('Built: '.cyan + 'docs'.green + (dev ? ' [DEV]'.grey : '')));
 }
