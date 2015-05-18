@@ -8,6 +8,7 @@ import './assets/favicon.ico';
 import './assets/thumbnail.png';
 import './assets/thumbnaildiv.png';
 
+import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/theme/solarized.css';
 import 'codemirror/lib/codemirror.css';
@@ -15,6 +16,7 @@ import './assets/CodeMirror.css';
 
 import React from 'react';
 import CodeMirror from 'codemirror';
+import 'codemirror/addon/runmode/runmode';
 import Router from 'react-router';
 import routes from './src/Routes';
 
