@@ -1,3 +1,17 @@
+v0.22.4 - Mon, 18 May 2015 16:53:06 GMT
+---------------------------------------
+
+- [9d17d56](../../commit/9d17d56) [added] Thumbnail component
+- [db018fa](../../commit/db018fa) [fixed] Put AMD modules under correct path
+- [0904adc](../../commit/0904adc) [added] Active property to MenuItem component
+- [1658142](../../commit/1658142) [added] Property for animation on Popover and Tooltip
+- [4f37560](../../commit/4f37560) [fixed] Update classnames dep version for Bower
+- [f6e7d67](../../commit/f6e7d67) [fixed] Bower cannot use code from react/lib.
+- [1531ac9](../../commit/1531ac9) [added] DropdownButton now applies onClick prop to Button
+- [ecb0861](../../commit/ecb0861) [fixed] Fix propType warning in ButtonInputExample
+- [592a346](../../commit/592a346) [fixed] Forward classes to panel title
+
+
 v0.22.3 - Thu, 14 May 2015 22:19:11 GMT
 ---------------------------------------
 
