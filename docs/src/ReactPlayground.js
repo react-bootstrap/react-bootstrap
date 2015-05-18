@@ -40,6 +40,7 @@ import * as modSplitButton from '../../src/SplitButton';
 import * as modTabbedArea from '../../src/TabbedArea';
 import * as modTable from '../../src/Table';
 import * as modTabPane from '../../src/TabPane';
+import * as modThumbnail from '../../src/Thumbnail';
 import * as modTooltip from '../../src/Tooltip';
 import * as modWell from '../../src/Well';
 
@@ -88,6 +89,7 @@ const SplitButton = modSplitButton.default;
 const TabbedArea = modTabbedArea.default;
 const Table = modTable.default;
 const TabPane = modTabPane.default;
+const Thumbnail = modThumbnail.default;
 const Tooltip = modTooltip.default;
 const Well = modWell.default;
 /* eslint-enable */

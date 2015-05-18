@@ -9,6 +9,7 @@ const styleMaps = {
     'form': 'form',
     'glyphicon': 'glyphicon',
     'label': 'label',
+    'thumbnail': 'thumbnail',
     'list-group-item': 'list-group-item',
     'panel': 'panel',
     'panel-group': 'panel-group',
