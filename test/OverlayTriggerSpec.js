@@ -27,6 +27,18 @@ describe('OverlayTrigger', function() {
     callback.called.should.be.true;
   });
 
+  it('Should show after click trigger', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <OverlayTrigger trigger='click' overlay={<div>test</div>}>
+        <button>button</button>
+      </OverlayTrigger>
+    );
+    const overlayTrigger = React.findDOMNode(instance);
+    ReactTestUtils.Simulate.click(overlayTrigger);
+
+    instance.state.isOverlayShown.should.be.true;
+  });
+
   it('Should forward requested context', function() {
     const contextTypes = {
       key: React.PropTypes.string
@@ -189,6 +201,46 @@ describe('OverlayTrigger', function() {
 
         it('Should handle trigger without warnings', function() {
           ReactTestUtils.Simulate.click(overlayTrigger);
+        });
+      });
+    });
+  });
+
+  describe('rootClose', function() {
+    [
+      {
+        label: 'true',
+        rootClose: true,
+        shownAfterClick: false
+      },
+      {
+        label: 'default (false)',
+        rootClose: null,
+        shownAfterClick: true
+      }
+    ].forEach(function(testCase) {
+      describe(testCase.label, function() {
+        let instance;
+
+        beforeEach(function () {
+          instance = ReactTestUtils.renderIntoDocument(
+            <OverlayTrigger
+              overlay={<div>test</div>}
+              trigger='click' rootClose={testCase.rootClose}
+              >
+              <button>button</button>
+            </OverlayTrigger>
+          );
+          const overlayTrigger = React.findDOMNode(instance);
+          ReactTestUtils.Simulate.click(overlayTrigger);
+        });
+
+        it('Should have correct isOverlayShown state', function () {
+          const event = document.createEvent('HTMLEvents');
+          event.initEvent('click', true, true);
+          document.documentElement.dispatchEvent(event);
+
+          instance.state.isOverlayShown.should.equal(testCase.shownAfterClick);
         });
       });
     });
