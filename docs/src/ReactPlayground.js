@@ -46,6 +46,8 @@ import * as modWell from '../../src/Well';
 
 import babel from 'babel-core/browser';
 
+import CodeExample from './CodeExample';
+
 const classNames = modClassNames.default;
 /* eslint-disable */
 const React = modReact.default;
@@ -104,7 +106,7 @@ const IS_MOBILE = typeof navigator !== 'undefined' && (
     || navigator.userAgent.match(/Windows Phone/i)
   );
 
-const CodeMirrorEditor = React.createClass({
+class CodeMirrorEditor extends React.Component {
   componentDidMount() {
     if (IS_MOBILE || CodeMirror === undefined) {
       return;
@@ -120,19 +122,19 @@ const CodeMirrorEditor = React.createClass({
       readOnly: this.props.readOnly
     });
     this.editor.on('change', this.handleChange);
-  },
+  }
 
   componentDidUpdate() {
     if (this.props.readOnly) {
       this.editor.setValue(this.props.codeText);
     }
-  },
+  }
 
   handleChange() {
     if (!this.props.readOnly && this.props.onChange) {
       this.props.onChange(this.editor.getValue());
     }
-  },
+  }
 
   render() {
     // wrap in a div to fully contain CodeMirror
@@ -140,7 +142,12 @@ const CodeMirrorEditor = React.createClass({
 
     if (IS_MOBILE) {
       let preStyles = {overflow: 'scroll'};
-      editor = <pre style={preStyles}>{this.props.codeText}</pre>;
+      editor = (
+        <CodeExample
+          mode='javascript'
+          codeText={this.props.codeText}
+        />
+      );
     } else {
       editor = <textarea ref='editor' defaultValue={this.props.codeText} />;
     }
@@ -151,7 +158,7 @@ const CodeMirrorEditor = React.createClass({
       </div>
       );
   }
-});
+}
 
 const selfCleaningTimeout = {
   componentDidUpdate() {

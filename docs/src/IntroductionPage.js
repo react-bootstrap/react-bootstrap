@@ -1,5 +1,6 @@
 import React from 'react';
 
+import CodeExample from './CodeExample';
 import NavMain from './NavMain';
 import PageHeader from './PageHeader';
 import PageFooter from './PageFooter';
@@ -32,9 +33,12 @@ const IntroductionPage = React.createClass({
                 </p>
 
                 <div className="highlight">
-                  <pre><code className="js">{`
-button(size=SMALL, color=GREEN, text="Something", onClick=someCallback)
-                  `}</code></pre>
+                  <CodeExample
+                    mode="javascript"
+                    codeText={
+`button(size=SMALL, color=GREEN, text="Something", onClick=someCallback)`
+                    }
+                  />
                 </div>
 
                 <p>
@@ -43,11 +47,14 @@ button(size=SMALL, color=GREEN, text="Something", onClick=someCallback)
                 </p>
 
                 <div className="highlight">
-                  <pre><code className="js">{`
-<button id="something-btn" type="button" class="btn btn-success btn-sm">
+                  <CodeExample
+                    mode="htmlmixed"
+                    codeText={
+`<button id="something-btn" type="button" class="btn btn-success btn-sm">
   Something
-</button>
-                  `}</code></pre>
+</button>`
+                    }
+                  />
                 </div>
 
                 <p>
@@ -65,11 +72,14 @@ button(size=SMALL, color=GREEN, text="Something", onClick=someCallback)
                 </p>
 
                 <div className="highlight">
-                  <pre><code className="js">{`
-<Button bsStyle="success" bsSize="small" onClick={someCallback}>
+                  <CodeExample
+                    mode="javascript"
+                    codeText={
+`<Button bsStyle="success" bsSize="small" onClick={someCallback}>
   Something
-</Button>
-                  `}</code></pre>
+</Button>`
+                    }
+                  />
                 </div>
 
                 <p>
@@ -101,14 +111,17 @@ button(size=SMALL, color=GREEN, text="Something", onClick=someCallback)
                 </p>
 
                 <div className="highlight">
-                  <pre><code className="js">{`
-var button = React.DOM.button({
+                  <CodeExample
+                    mode="javascript"
+                    codeText={
+`var button = React.DOM.button({
   className: "btn btn-lg btn-success",
   children: "Register"
 });
 
-React.render(button, mountNode);
-                  `}</code></pre>
+React.render(button, mountNode);`
+                    }
+                  />
                 </div>
 
                 <p>
@@ -117,15 +130,18 @@ React.render(button, mountNode);
                 </p>
 
                 <div className="highlight">
-                  <pre><code className="js">{`
-var button = ReactBootstrap.Button({
+                  <CodeExample
+                    mode="javascript"
+                    codeText={
+`var button = ReactBootstrap.Button({
   bsStyle: "success",
   bsSize: "large",
   children: "Register"
 });
 
-React.render(button, mountNode);
-                  `}</code></pre>
+React.render(button, mountNode);`
+                    }
+                  />
                 </div>
 
                 <p>
@@ -144,8 +160,10 @@ React.render(button, mountNode);
                 </p>
 
                 <div className="highlight">
-                  <pre><code className="js">{`
-var buttonGroupInstance = (
+                  <CodeExample
+                    mode="javascript"
+                    codeText={
+`var buttonGroupInstance = (
   <ButtonGroup>
     <DropdownButton bsStyle="success" title="Dropdown">
       <MenuItem key="1">Dropdown link</MenuItem>
@@ -156,8 +174,9 @@ var buttonGroupInstance = (
   </ButtonGroup>
 );
 
-React.render(buttonGroupInstance, mountNode);
-                  `}</code></pre>
+React.render(buttonGroupInstance, mountNode);`
+                    }
+                  />
                 </div>
 
                 <p>
