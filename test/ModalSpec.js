@@ -85,4 +85,16 @@ describe('Modal', function () {
     assert.ok(dialog.className.match(/\bmodal-sm\b/));
   });
 
+  it('Should pass dialogClassName to the dialog', function () {
+    let noOp = function () {};
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Modal dialogClassName="testCss" onRequestHide={noOp}>
+        <strong>Message</strong>
+      </Modal>
+    );
+
+    let dialog = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'modal-dialog');
+    assert.match(dialog.props.className, /\btestCss\b/);
+  });
+
 });

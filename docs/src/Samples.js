@@ -33,6 +33,8 @@ export default {
   ModalTrigger:                  require('fs').readFileSync(__dirname + '/../examples/ModalTrigger.js', 'utf8'),
   ModalOverlayMixin:             require('fs').readFileSync(__dirname + '/../examples/ModalOverlayMixin.js', 'utf8'),
   ModalContained:                require('fs').readFileSync(__dirname + '/../examples/ModalContained.js', 'utf8'),
+  ModalDefaultSizing:            require('fs').readFileSync(__dirname + '/../examples/ModalDefaultSizing.js', 'utf8'),
+  ModalCustomSizing:             require('fs').readFileSync(__dirname + '/../examples/ModalCustomSizing.js', 'utf8'),
   TooltipBasic:                  require('fs').readFileSync(__dirname + '/../examples/TooltipBasic.js', 'utf8'),
   TooltipPositioned:             require('fs').readFileSync(__dirname + '/../examples/TooltipPositioned.js', 'utf8'),
   TooltipInCopy:                 require('fs').readFileSync(__dirname + '/../examples/TooltipInCopy.js', 'utf8'),
