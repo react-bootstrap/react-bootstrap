@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import DropdownButton from '../../src/revisited/DropdownButton';
+import DropdownButtonTitle from '../../src/revisited/DropdownButtonTitle';
 import MenuItem from '../../src/revisited/MenuItem';
 import keycode from 'keycode';
 
 describe('DropdownButton revisited', function() {
   let simpleDropdown = (
-    <DropdownButton>
+    <DropdownButton title='Simple Dropdown'>
       <MenuItem>Item 1</MenuItem>
       <MenuItem>Item 2</MenuItem>
       <MenuItem>Item 3</MenuItem>
@@ -20,6 +21,30 @@ describe('DropdownButton revisited', function() {
 
     node.tagName.should.equal('DIV');
     node.className.should.match(/\bdropdown\b/);
+  });
+
+  it('renders title prop', function() {
+    let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
+    let node = React.findDOMNode(instance);
+    let buttonNode = node.children[0];
+
+    buttonNode.innerText.should.match(/Simple Dropdown/);
+  });
+
+  it('renders title with DropdownButtonTitle', function() {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton>
+        <DropdownButtonTitle>Child Title</DropdownButtonTitle>
+        <MenuItem>Item 1</MenuItem>
+        <MenuItem>Item 2</MenuItem>
+        <MenuItem>Item 3</MenuItem>
+        <MenuItem>Item 4</MenuItem>
+      </DropdownButton>
+    );
+    let node = React.findDOMNode(instance);
+    let buttonNode = node.children[0];
+
+    buttonNode.innerText.should.match(/Child Title/);
   });
 
   it('renders dropdown toggle button', function() {
@@ -38,11 +63,9 @@ describe('DropdownButton revisited', function() {
 
   it('renders dropdown toggle button caret', function() {
     let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
-    let node = React.findDOMNode(instance);
-    let caretNode = node.children[0].children[1];
+    let caretNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'caret').getDOMNode();
 
     caretNode.tagName.should.equal('SPAN');
-    caretNode.className.should.match(/\bcaret\b/);
   });
 
   // NOTE: The onClick event handler is invoked for both the Enter and Space
@@ -93,6 +116,67 @@ describe('DropdownButton revisited', function() {
     let buttonNode = React.findDOMNode(node.children[0]);
 
     buttonNode.getAttribute('aria-haspopup').should.equal('true');
+  });
+
+  describe('PropType validation', function() {
+    ['title', 'children'].forEach(type => {
+      describe(type, function() {
+        it('validates successfully', function() {
+          const props = { title: 'some title' };
+          DropdownButton.propTypes.title(props, type, 'DropdownButton');
+        });
+
+        it('validates with single child of type DropdownButtonTitle', function() {
+          const title = {
+            type: DropdownButtonTitle
+          }
+          const props = {
+            children: [
+              title
+            ]
+          };
+          DropdownButton.propTypes.title(props, type, 'DropdownButton');
+        });
+
+        it('validation fails with no title', function() {
+          const props = { other: 'some title' };
+
+          expect(() => {
+            DropdownButton.propTypes.title(props, type, 'DropdownButton');
+          }).to.throw(/Must provide.*title.*or.*DropdownButtonTitle/);
+        });
+
+        it('validation fails with two DropdownButtonTitle children', function() {
+          const title = {
+            type: DropdownButtonTitle
+          }
+          const props = {
+            children: [
+              title,
+              title
+            ]
+          };
+          expect(() => {
+            DropdownButton.propTypes.title(props, type, 'DropdownButton');
+          }).to.throw(/Should only use one DropdownButtonTitle/);
+        });
+
+        it('validation fails with both title and DropdownButtonTitle', function() {
+          const title = {
+            type: DropdownButtonTitle
+          }
+          const props = {
+            title: 'some title',
+            children: [
+              title
+            ]
+          };
+          expect(() => {
+            DropdownButton.propTypes.title(props, type, 'DropdownButton');
+          }).to.throw(/Must provide.*title.*or.*DropdownButtonTitle.*not both/);
+        });
+      });
+    });
   });
 
   describe('focusable state', function() {

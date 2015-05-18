@@ -12,6 +12,7 @@ export default class DropdownButton extends React.Component {
     this.toggleOpen = this.toggleOpen.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleRequestClose = this.handleRequestClose.bind(this);
+    this.extractChildren = this.extractChildren.bind(this);
 
     this.state = {
       open: false,
@@ -61,11 +62,14 @@ export default class DropdownButton extends React.Component {
 
   render() {
     let id = this.props.id || this.state.id;
+    let { title, children } = this.extractChildren();
 
     const rootClasses = {
       dropdown: true,
       open: this.state.open
     };
+
+    title = this.props.title || title;
 
     return (
       <div className={classNames(rootClasses)}>
@@ -79,18 +83,57 @@ export default class DropdownButton extends React.Component {
           tabIndex='0'
           aria-haspopup={true}
           aria-expanded={this.state.open}>
-          <span>Dropdown </span>
-          <span className='caret'></span>
+          {title} <span className='caret'></span>
         </button>
         <DropdownMenu
           ref='menu'
           open={this.state.open}
           requestClose={this.handleRequestClose}
           labelledBy={id}>
-          {this.props.children}
+          {children}
         </DropdownMenu>
       </div>
     );
+  }
+
+  extractChildren() {
+    let title;
+    let children = [];
+
+    React.Children.forEach(this.props.children, child => {
+      if (child.type === DropdownButtonTitle) {
+        title = title || child;
+      } else {
+        children.push(child);
+      }
+    });
+
+    return {
+      title,
+      children
+    };
+  }
+}
+
+function titleRequired(props, propName, component) {
+  let titles = [];
+
+  if (props.children) {
+    titles = props.children.filter(child => child.type === DropdownButtonTitle);
+  }
+
+  if (titles.length > 1) {
+    throw new Error(`(title|children) ${component} - Should only use one DropdownButtonTitle child component, only the first DropdownButtonTitle will be used`);
+  }
+
+  let title = titles[0];
+
+  if (props.title !== undefined && title !== undefined) {
+    throw new Error(`(title|children) ${component} - Must provide either a 'title' prop or a 'DropdownButtonTitle' child, not both.`);
+  }
+
+  if (props.title === undefined && title === undefined) {
+    throw new Error(`(title|children) ${component} - Must provide either a 'title' prop or a 'DropdownButtonTitle' child`);
   }
 }
 
@@ -98,5 +141,9 @@ DropdownButton.propTypes = {
   id: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
-  ])
+  ]),
+
+  title: titleRequired,
+
+  children: titleRequired
 };
