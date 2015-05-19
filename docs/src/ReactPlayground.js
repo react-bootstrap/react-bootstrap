@@ -141,7 +141,6 @@ class CodeMirrorEditor extends React.Component {
     let editor;
 
     if (IS_MOBILE) {
-      let preStyles = {overflow: 'scroll'};
       editor = (
         <CodeExample
           mode='javascript'
