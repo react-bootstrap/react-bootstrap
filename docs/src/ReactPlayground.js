@@ -112,7 +112,7 @@ class CodeMirrorEditor extends React.Component {
       return;
     }
 
-    this.editor = CodeMirror.fromTextArea(this.refs.editor.getDOMNode(), {
+    this.editor = CodeMirror.fromTextArea(React.findDOMNode(this.refs.editor), {
       mode: 'javascript',
       lineNumbers: false,
       lineWrapping: false,
@@ -273,7 +273,7 @@ const ReactPlayground = React.createClass({
   },
 
   componentWillUnmount() {
-    let mountNode = this.refs.mount.getDOMNode();
+    let mountNode = React.findDOMNode(this.refs.mount);
     try {
       React.unmountComponentAtNode(mountNode);
     } catch (e) {
@@ -282,7 +282,7 @@ const ReactPlayground = React.createClass({
   },
 
   executeCode() {
-    let mountNode = this.refs.mount.getDOMNode();
+    let mountNode = React.findDOMNode(this.refs.mount);
 
     try {
       React.unmountComponentAtNode(mountNode);
