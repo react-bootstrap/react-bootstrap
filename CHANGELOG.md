@@ -1,3 +1,10 @@
+v0.22.5 - Tue, 19 May 2015 20:40:51 GMT
+---------------------------------------
+
+- [dc7ef19](../../commit/dc7ef19) [added] dialogClassName prop to modal to be able to pass custom css class to modal-dialog div
+- [658fa39](../../commit/658fa39) [fixed] Remove unused variable
+
+
 v0.22.4 - Mon, 18 May 2015 16:53:06 GMT
 ---------------------------------------
 
