@@ -40,6 +40,7 @@ export default {
   TooltipInCopy:                 require('fs').readFileSync(__dirname + '/../examples/TooltipInCopy.js', 'utf8'),
   PopoverBasic:                  require('fs').readFileSync(__dirname + '/../examples/PopoverBasic.js', 'utf8'),
   PopoverPositioned:             require('fs').readFileSync(__dirname + '/../examples/PopoverPositioned.js', 'utf8'),
+  PopoverTriggerBehaviors:       require('fs').readFileSync(__dirname + '/../examples/PopoverTriggerBehaviors.js', 'utf8'),
   PopoverContained:              require('fs').readFileSync(__dirname + '/../examples/PopoverContained.js', 'utf8'),
   PopoverPositionedScrolling:    require('fs').readFileSync(__dirname + '/../examples/PopoverPositionedScrolling.js', 'utf8'),
   ProgressBarBasic:              require('fs').readFileSync(__dirname + '/../examples/ProgressBarBasic.js', 'utf8'),

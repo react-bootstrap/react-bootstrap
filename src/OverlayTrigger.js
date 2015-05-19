@@ -1,10 +1,12 @@
 import React, { cloneElement } from 'react';
+
 import OverlayMixin from './OverlayMixin';
-import domUtils from './utils/domUtils';
+import RootCloseWrapper from './RootCloseWrapper';
 
 import createChainedFunction from './utils/createChainedFunction';
-import assign from './utils/Object.assign';
 import createContextWrapper from './utils/createContextWrapper';
+import domUtils from './utils/domUtils';
+import assign from './utils/Object.assign';
 
 /**
  * Check if value one is inside or equal to the of value
@@ -34,7 +36,8 @@ const OverlayTrigger = React.createClass({
     delayHide: React.PropTypes.number,
     defaultOverlayShown: React.PropTypes.bool,
     overlay: React.PropTypes.node.isRequired,
-    containerPadding: React.PropTypes.number
+    containerPadding: React.PropTypes.number,
+    rootClose: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -83,7 +86,7 @@ const OverlayTrigger = React.createClass({
       return <span />;
     }
 
-    return cloneElement(
+    const overlay = cloneElement(
       this.props.overlay,
       {
         onRequestHide: this.hide,
@@ -94,6 +97,16 @@ const OverlayTrigger = React.createClass({
         arrowOffsetTop: this.state.arrowOffsetTop
       }
     );
+
+    if (this.props.rootClose) {
+      return (
+        <RootCloseWrapper onRootClose={this.hide}>
+          {overlay}
+        </RootCloseWrapper>
+      );
+    } else {
+      return overlay;
+    }
   },
 
   render() {

@@ -272,6 +272,9 @@ const ComponentsPage = React.createClass({
                   <p>Positioned popover component.</p>
                   <ReactPlayground codeText={Samples.PopoverPositioned} />
 
+                  <p>Trigger behaviors. It's inadvisable to use <code>"hover"</code> or <code>"focus"</code> triggers for popovers, because they have poor accessibility from keyboard and on mobile devices.</p>
+                  <ReactPlayground codeText={Samples.PopoverTriggerBehaviors} />
+
                   <p>Popover component in container.</p>
                   <ReactPlayground codeText={Samples.PopoverContained} exampleClassName='bs-example-popover-contained' />
 
