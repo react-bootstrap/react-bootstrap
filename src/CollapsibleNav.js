@@ -22,7 +22,7 @@ const specCollapsibleNav = {
   },
 
   getCollapsibleDOMNode() {
-    return this.getDOMNode();
+    return React.findDOMNode(this);
   },
 
   getCollapsibleDimensionValue() {
@@ -31,7 +31,7 @@ const specCollapsibleNav = {
     for (let key in nodes) {
       if (nodes.hasOwnProperty(key)) {
 
-        let n = nodes[key].getDOMNode()
+        let n = React.findDOMNode(nodes[key])
           , h = n.offsetHeight
           , computedStyles = domUtils.getComputedStyles(n);
 

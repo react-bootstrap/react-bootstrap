@@ -2,11 +2,11 @@ const CollapsibleParagraph = React.createClass({
   mixins: [CollapsibleMixin],
 
   getCollapsibleDOMNode(){
-    return this.refs.panel.getDOMNode();
+    return React.findDOMNode(this.refs.panel);
   },
 
   getCollapsibleDimensionValue(){
-    return this.refs.panel.getDOMNode().scrollHeight;
+    return React.findDOMNode(this.refs.panel).scrollHeight;
   },
 
   onHandleToggle(e){
