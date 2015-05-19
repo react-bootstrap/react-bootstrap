@@ -1077,6 +1077,9 @@ h1[id] {
   margin-right: auto;
   margin-left: auto;
 }
+.custom-modal {
+  width: 90%;
+}
 
 /* Example dropdowns */
 .bs-example > .dropdown > .dropdown-toggle {

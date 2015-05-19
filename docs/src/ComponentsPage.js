@@ -236,6 +236,14 @@ const ComponentsPage = React.createClass({
                     )}
                   </pre>
                   <ReactPlayground codeText={Samples.ModalContained} />
+
+                  <h3 id='modal-default-sizing'>Sizing modals using standard Bootstrap props</h3>
+                  <p>You can specify a bootstrap large or small modal by using the "bsSize" prop.</p>
+                  <ReactPlayground codeText={Samples.ModalDefaultSizing} />
+
+                  <h3 id='modal-custom-sizing'>Sizing modals using custom css</h3>
+                  <p>You can apply custom css to the modal dialog div using the "dialogClassName" prop. Example is using a custom css class with width set to 90%.</p>
+                  <ReactPlayground codeText={Samples.ModalCustomSizing} />
                 </div>
 
                 {/* Tooltip */}
