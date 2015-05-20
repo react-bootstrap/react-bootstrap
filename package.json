@@ -15,8 +15,7 @@
     "docs-build": "babel-node tools/build-cli.js --docs-only",
     "docs": "docs/dev-run",
     "docs-prod": "npm run docs-build && NODE_ENV=production babel-node docs/server.js",
-    "docs-prod-unoptimized": "npm run docs-build -- --dev && NODE_ENV=production babel-node docs/server.js",
-    "ie8": "babel-node ie8/server.js"
+    "docs-prod-unoptimized": "npm run docs-build -- --dev && NODE_ENV=production babel-node docs/server.js"
   },
   "main": "lib/index.js",
   "directories": {

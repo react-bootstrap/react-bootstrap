@@ -1,3 +1,10 @@
-import config from './webpack.config';
+import _ from 'lodash';
+import baseConfig from './base.config';
 
-export default config({test: true});
+export default _.extend({}, baseConfig, {
+  output: {
+    pathinfo: true
+  },
+
+  devtool: 'eval'
+});
