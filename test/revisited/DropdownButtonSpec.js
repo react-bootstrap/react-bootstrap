@@ -141,9 +141,8 @@ describe('DropdownButton revisited', function() {
         it('validation fails with no title', function() {
           const props = { other: 'some title' };
 
-          expect(() => {
-            DropdownButton.propTypes.title(props, type, 'DropdownButton');
-          }).to.throw(/Must provide.*title.*or.*DropdownButtonTitle/);
+          DropdownButton.propTypes.title(props, type, 'DropdownButton')
+            .message.should.match(/Must provide.*title.*or.*DropdownButtonTitle/);
         });
 
         it('validation fails with two DropdownButtonTitle children', function() {
@@ -156,9 +155,9 @@ describe('DropdownButton revisited', function() {
               title
             ]
           };
-          expect(() => {
-            DropdownButton.propTypes.title(props, type, 'DropdownButton');
-          }).to.throw(/Should only use one DropdownButtonTitle/);
+
+          DropdownButton.propTypes.title(props, type, 'DropdownButton')
+            .message.should.match(/Should only use one DropdownButtonTitle/);
         });
 
         it('validation fails with both title and DropdownButtonTitle', function() {
@@ -171,9 +170,9 @@ describe('DropdownButton revisited', function() {
               title
             ]
           };
-          expect(() => {
-            DropdownButton.propTypes.title(props, type, 'DropdownButton');
-          }).to.throw(/Must provide.*title.*or.*DropdownButtonTitle.*not both/);
+
+          DropdownButton.propTypes.title(props, type, 'DropdownButton')
+            .message.should.match(/Must provide.*title.*or.*DropdownButtonTitle.*not both/);
         });
       });
     });

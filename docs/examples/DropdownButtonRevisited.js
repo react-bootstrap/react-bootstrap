@@ -3,8 +3,8 @@ const buttonsInstance = (
     <input placeholder='Before' type='text' />
     <DropdownButtonRevisited>
       <DropdownButtonTitleRevisited>Custom Title</DropdownButtonTitleRevisited>
-      <DropdownButtonTitleRevisited>Custom Title</DropdownButtonTitleRevisited>
       <MenuItemRevisited eventKey='1'>Action</MenuItemRevisited>
+      <MenuItemRevisited header>Some Header</MenuItemRevisited>
       <MenuItemRevisited eventKey='2'>Another action</MenuItemRevisited>
       <MenuItemRevisited eventKey='3'>Something else here</MenuItemRevisited>
       <MenuItemRevisited divider />

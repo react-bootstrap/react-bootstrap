@@ -123,17 +123,17 @@ function titleRequired(props, propName, component) {
   }
 
   if (titles.length > 1) {
-    throw new Error(`(title|children) ${component} - Should only use one DropdownButtonTitle child component, only the first DropdownButtonTitle will be used`);
+    return new Error(`(title|children) ${component} - Should only use one DropdownButtonTitle child component, only the first DropdownButtonTitle will be used`);
   }
 
   let title = titles[0];
 
   if (props.title !== undefined && title !== undefined) {
-    throw new Error(`(title|children) ${component} - Must provide either a 'title' prop or a 'DropdownButtonTitle' child, not both.`);
+    return new Error(`(title|children) ${component} - Must provide either a 'title' prop or a 'DropdownButtonTitle' child, not both.`);
   }
 
   if (props.title === undefined && title === undefined) {
-    throw new Error(`(title|children) ${component} - Must provide either a 'title' prop or a 'DropdownButtonTitle' child`);
+    return new Error(`(title|children) ${component} - Must provide either a 'title' prop or a 'DropdownButtonTitle' child`);
   }
 }
 
