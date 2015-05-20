@@ -19,6 +19,10 @@ const navInstance = (
       <Col md={6} mdPush={6}><code>&lt;{'Col md={6} mdPush={6}'} /&gt;</code></Col>
       <Col md={6} mdPull={6}><code>&lt;{'Col md={6} mdPull={6}'} /&gt;</code></Col>
     </Row>
+
+    <Row className='show-grid' fluid>
+      <Col xs={12}><code>&lt;{'Col xs={12} in a *fluid* Row'} /&gt;</code></Col>
+    </Row>
   </Grid>
 );
 
