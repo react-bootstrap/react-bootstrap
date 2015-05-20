@@ -1,3 +1,10 @@
+v0.22.6 - Wed, 20 May 2015 16:46:29 GMT
+---------------------------------------
+
+- [2a35eab](../../commit/2a35eab) [fixed] Fix CodeMirrorEditor binding
+- [5dc0ac2](../../commit/5dc0ac2) [added] Enable rootClose for OverlayTrigger
+
+
 v0.22.5 - Tue, 19 May 2015 20:40:51 GMT
 ---------------------------------------
 
