@@ -107,6 +107,12 @@ const IS_MOBILE = typeof navigator !== 'undefined' && (
   );
 
 class CodeMirrorEditor extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
   componentDidMount() {
     if (IS_MOBILE || CodeMirror === undefined) {
       return;
