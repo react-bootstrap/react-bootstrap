@@ -12,3 +12,4 @@ docs-built/
 ie8/bundle.js
 tmp-bower-repo/
 tmp-docs-repo/
+.babel-cache/
