@@ -6,7 +6,13 @@ import yargs from 'yargs';
 const babelCache = path.resolve(path.join(__dirname, '../.babel-cache'));
 
 if (!fs.existsSync(babelCache)) {
-  fs.mkdirSync(babelCache);
+  try {
+    fs.mkdirSync(babelCache);
+  } catch (err) {
+    if (err.code !== 'EEXIST') {
+      console.error(err.stack);
+    }
+  }
 }
 
 export const options = yargs
