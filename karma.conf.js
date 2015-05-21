@@ -3,6 +3,7 @@ require('babel/register');
 
 var webpackConfig = require('./webpack/test.config.js');
 var isCI = process.env.CONTINUOUS_INTEGRATION === 'true';
+var devBrowser = process.env.PHANTOM ? 'PhantomJS' : 'Chrome';
 
 module.exports = function (config) {
   config.set({
@@ -43,7 +44,7 @@ module.exports = function (config) {
 
     autoWatch: true,
 
-    browsers: [ isCI ? 'ChromeTravisCI' : 'Chrome' ],
+    browsers: [ isCI ? 'ChromeTravisCI' : devBrowser ],
 
     customLaunchers: {
       ChromeTravisCI: {
