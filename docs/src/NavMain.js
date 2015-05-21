@@ -28,9 +28,6 @@ const NavMain = React.createClass({
     let links = Object.keys(NAV_LINKS).map(this.renderNavItem).concat([
       <li key='github-link'>
         <a href='https://github.com/react-bootstrap/react-bootstrap' target='_blank'>GitHub</a>
-      </li>,
-      <li key='new-logo-survey'>
-        <a href='https://www.surveymonkey.com/s/X7Q9VX7' style={{color: '#CECE00'}} target='_blank'>Take the New Logo Survey!</a>
       </li>
     ]);
 
