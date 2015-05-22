@@ -10,7 +10,7 @@
   "scripts": {
     "build": "babel-node tools/build-cli.js",
     "test-watch": "karma start",
-    "test": "npm run lint && npm run build && karma start --single-run",
+    "test": "npm run lint && npm run build && karma start --single-run && _mocha --compilers js:babel-core/register './test/server/*Spec.js'",
     "lint": "eslint ./",
     "docs-build": "babel-node tools/build-cli.js --docs-only",
     "docs": "docs/dev-run",

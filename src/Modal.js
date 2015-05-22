@@ -43,7 +43,7 @@ const Modal = React.createClass({
     let classes = {
       modal: true,
       fade: this.props.animation,
-      'in': !this.props.animation || !document.querySelectorAll
+      'in': !this.props.animation
     };
 
     let modal = (
@@ -72,10 +72,9 @@ const Modal = React.createClass({
   renderBackdrop(modal) {
     let classes = {
       'modal-backdrop': true,
-      'fade': this.props.animation
+      fade: this.props.animation,
+      'in': !this.props.animation
     };
-
-    classes.in = !this.props.animation || !document.querySelectorAll;
 
     let onClick = this.props.backdrop === true ?
       this.handleBackdropClick : null;
