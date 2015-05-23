@@ -89,7 +89,7 @@ const ComponentsPage = React.createClass({
                   </div>
 
                   <h2 id='buttons-tags'>Button tags</h2>
-                  <p>The DOM element tag is choosen automaticly for you based on the props you supply. Passing
+                  <p>The DOM element tag is choosen automatically for you based on the props you supply. Passing
                     a <code>href</code> will result in the button using a <code>{'<a />'}</code> element otherwise
                     a <code>{'<button />'}</code> element will be used.</p>
                   <ReactPlayground codeText={Samples.ButtonTagTypes} />
