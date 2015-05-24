@@ -281,19 +281,21 @@ const OverlayTrigger = React.createClass({
 
   _getContainerDimensions() {
     const containerNode = this.getContainerDOMNode();
-    let width, height;
+    let width, height, scroll;
+
     if (containerNode.tagName === 'BODY') {
       width = window.innerWidth;
       height = window.innerHeight;
+      scroll =
+        domUtils.ownerDocument(containerNode).documentElement.scrollTop ||
+        containerNode.scrollTop;
     } else {
       width = containerNode.offsetWidth;
       height = containerNode.offsetHeight;
+      scroll = containerNode.scrollTop;
     }
 
-    return {
-      width, height,
-      scroll: containerNode.scrollTop
-    };
+    return {width, height, scroll};
   },
 
   getPosition() {
