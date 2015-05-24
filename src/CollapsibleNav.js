@@ -46,20 +46,10 @@ const specCollapsibleNav = {
 
   render() {
     /*
-     * this.props.collapsible is set in NavBar when a eventKey is supplied.
+     * this.props.collapsible is set in NavBar when an eventKey is supplied.
      */
     const collapsible = this.props.collapsible || this.props.collapsable;
-    let classes = collapsible ? this.getCollapsibleClassSet() : {};
-    /*
-     * prevent duplicating navbar-collapse call if passed as prop.
-     * kind of overkill...
-     * good cadidate to have check implemented as an util that can
-     * also be used elsewhere.
-     */
-    if (this.props.className === undefined ||
-      this.props.className.split(' ').indexOf('navbar-collapse') === -2) {
-      classes['navbar-collapse'] = collapsible;
-    }
+    let classes = collapsible ? this.getCollapsibleClassSet('navbar-collapse') : null;
 
     return (
       <div eventKey={this.props.eventKey} className={classNames(this.props.className, classes)} >

@@ -64,7 +64,7 @@ describe('CollapsibleNav', function () {
     });
     let instance = ReactTestUtils.renderIntoDocument(<Parent />);
     let collapsibleNav = ReactTestUtils.findRenderedComponentWithType(instance, CollapsibleNav);
-    assert.notOk(collapsibleNav.getDOMNode().className.match(/\navbar-collapse\b/));
+    assert.notOk(React.findDOMNode(collapsibleNav).className.match(/\navbar-collapse\b/));
     let nav = ReactTestUtils.findRenderedComponentWithType(collapsibleNav.refs.nocollapse_0, Nav);
     assert.ok(nav);
   });
@@ -88,27 +88,5 @@ describe('CollapsibleNav', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.collapsible_object.refs.collapsible_0, 'foo'));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.collapsible_object.refs.collapsible_0, 'bar'));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.collapsible_object.refs.collapsible_0, 'baz'));
-  });
-
-  it('Should should not duplicate classes', function () {
-    let Parent = React.createClass({
-      render() {
-        return (
-          <Navbar toggleNavKey={1}>
-            <CollapsibleNav eventKey={1} ref='collapsible_object' className='foo navbar-collapse'>
-              <Nav>
-                <NavItem eventKey={1} ref='item1' className='foo bar'>Item 1 content</NavItem>
-                <NavItem eventKey={2} ref='item2' className='baz'>Item 2 content</NavItem>
-              </Nav>
-            </CollapsibleNav>
-          </Navbar>
-        );
-      }
-    });
-    let instance = ReactTestUtils.renderIntoDocument(<Parent />);
-    let classDOM = ReactTestUtils.findRenderedDOMComponentWithTag(instance.refs.collapsible_object, 'DIV').props.className
-        , classArray = classDOM.split(' ')
-        , idx = classArray.indexOf('navbar-collapse');
-    assert.equal(classArray.indexOf('navbar-collapse', idx + 1), -1);
   });
 });
