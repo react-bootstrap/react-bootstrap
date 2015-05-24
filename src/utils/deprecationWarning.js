@@ -1,6 +1,6 @@
 export default function deprecationWarning(oldname, newname, link) {
   if (process.env.NODE_ENV !== 'production') {
-    if (!window.console && (typeof console.warn !== 'function')) {
+    if ((typeof console === 'undefined') || (typeof console.warn !== 'function')) {
       return;
     }
 
