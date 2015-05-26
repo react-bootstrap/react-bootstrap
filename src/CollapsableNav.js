@@ -1,9 +1,9 @@
 import React from 'react';
 import deprecationWarning from './utils/deprecationWarning';
 import assign from './utils/Object.assign';
-import {specCollapsibleNav} from './CollapsibleNav';
+import CollapsibleNav from './CollapsibleNav';
 
-const specCollapsableNav = assign({}, specCollapsibleNav, {
+const specCollapsableNav = assign({}, CollapsibleNav._spec, {
   componentDidMount() {
     deprecationWarning(
       'CollapsableNav',

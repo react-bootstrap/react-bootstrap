@@ -112,6 +112,6 @@ const specCollapsibleNav = {
 };
 
 const CollapsibleNav = React.createClass(specCollapsibleNav);
+CollapsibleNav._spec = specCollapsibleNav;
 
-export {specCollapsibleNav};
 export default CollapsibleNav;
