@@ -65,13 +65,12 @@ describe('Input', function () {
     shouldWarn('deprecated');
   });
 
-  it('renders a p element when type=static', function () {
-    let instance = ReactTestUtils.renderIntoDocument(
+  it('throws a warning when type=static', function () {
+    ReactTestUtils.renderIntoDocument(
       <Input type="static" value="v" />
     );
 
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'p'));
-    assert.equal(instance.getValue(), 'v');
+    shouldWarn('deprecated');
   });
 
   it('renders an input element of given type when type is anything else', function () {

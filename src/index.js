@@ -17,6 +17,7 @@ import DropdownButton from './DropdownButton';
 import DropdownMenu from './DropdownMenu';
 import DropdownStateMixin from './DropdownStateMixin';
 import FadeMixin from './FadeMixin';
+import FormControls from './FormControls';
 import Glyphicon from './Glyphicon';
 import Grid from './Grid';
 import Input from './Input';
@@ -71,6 +72,7 @@ export default {
   DropdownMenu,
   DropdownStateMixin,
   FadeMixin,
+  FormControls,
   Glyphicon,
   Grid,
   Input,

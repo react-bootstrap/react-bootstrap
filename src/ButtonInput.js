@@ -2,13 +2,7 @@ import React from 'react';
 import Button from './Button';
 import FormGroup from './FormGroup';
 import InputBase from './InputBase';
-
-function valueValidation({children, value}, propName, componentName) {
-  if (children && value) {
-    return new Error('Both value and children cannot be passed to ButtonInput');
-  }
-  return React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).call(null, {children, value}, propName, componentName);
-}
+import childrenValueValidation from './utils/childrenValueInputValidation';
 
 class ButtonInput extends InputBase {
   renderFormGroup(children) {
@@ -23,18 +17,20 @@ class ButtonInput extends InputBase {
   }
 }
 
+ButtonInput.types = ['button', 'reset', 'submit'];
+
 ButtonInput.defaultProps = {
   type: 'button'
 };
 
 ButtonInput.propTypes = {
-  type: React.PropTypes.oneOf(['button', 'reset', 'submit']),
+  type: React.PropTypes.oneOf(ButtonInput.types),
   bsStyle(props) {
     //defer to Button propTypes of bsStyle
     return null;
   },
-  children: valueValidation,
-  value: valueValidation
+  children: childrenValueValidation,
+  value: childrenValueValidation
 };
 
 export default ButtonInput;
