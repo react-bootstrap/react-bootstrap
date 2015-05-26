@@ -1,3 +1,18 @@
+v0.23.0 - Tue, 26 May 2015 19:32:52 GMT
+---------------------------------------
+
+- [fd24317](../../commit/fd24317) [changed] Removed `collapsable` deprecated functionality.
+- [3ebac95](../../commit/3ebac95) [fixed] bug #731. `babel ES6 import` + `React` quirk.
+- [0c61f46](../../commit/0c61f46) [changed] Moving type=static out of Input
+- [2749cfd](../../commit/2749cfd) [added] CustomPropTypes.singlePropFrom
+- [536c3e0](../../commit/536c3e0) [fixed] Replaced document with ownerDocument in Modal
+- [91f0222](../../commit/91f0222) [changed] Update css-loader. Dev dependency.
+- [66e41a4](../../commit/66e41a4) [fixed] Fix scroll top calculation for overlays
+- [5313abe](../../commit/5313abe) [fixed] Modal is focused when opened, for improved accessibility
+- [50d058a](../../commit/50d058a) [fixed] server side rendering for Modal component
+- [c57d6b0](../../commit/c57d6b0) [changed] Update css-loader. Dev dependency.
+
+
 v0.22.6 - Wed, 20 May 2015 16:46:29 GMT
 ---------------------------------------
 
