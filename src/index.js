@@ -8,12 +8,10 @@ import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 import ButtonInput from './ButtonInput';
 import ButtonToolbar from './ButtonToolbar';
-import CollapsableNav from './CollapsableNav';
 import CollapsibleNav from './CollapsibleNav';
 import Carousel from './Carousel';
 import CarouselItem from './CarouselItem';
 import Col from './Col';
-import CollapsableMixin from './CollapsableMixin';
 import CollapsibleMixin from './CollapsibleMixin';
 import DropdownButton from './DropdownButton';
 import DropdownMenu from './DropdownMenu';
@@ -64,12 +62,10 @@ export default {
   ButtonGroup,
   ButtonInput,
   ButtonToolbar,
-  CollapsableNav,
   CollapsibleNav,
   Carousel,
   CarouselItem,
   Col,
-  CollapsableMixin,
   CollapsibleMixin,
   DropdownButton,
   DropdownMenu,
