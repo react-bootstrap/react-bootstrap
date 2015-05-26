@@ -41,30 +41,6 @@ describe('Input', function () {
     assert.equal(instance.getValue(), 'v');
   });
 
-  it('throws a deprecation warning on type=button', function () {
-    ReactTestUtils.renderIntoDocument(
-      <Input type="button" />
-    );
-
-    shouldWarn('deprecated');
-  });
-
-  it('throws a deprecation warning on type=reset', function () {
-    ReactTestUtils.renderIntoDocument(
-      <Input type="reset" />
-    );
-
-    shouldWarn('deprecated');
-  });
-
-  it('throws a deprecation warning on type=submit', function () {
-    ReactTestUtils.renderIntoDocument(
-      <Input type="submit" />
-    );
-
-    shouldWarn('deprecated');
-  });
-
   it('throws a warning when type=static', function () {
     ReactTestUtils.renderIntoDocument(
       <Input type="static" value="v" />
