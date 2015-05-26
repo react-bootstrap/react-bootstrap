@@ -2,7 +2,6 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import CollapsibleMixin from '../src/CollapsibleMixin';
 import classNames from 'classnames';
-import {shouldWarn} from './helpers';
 
 describe('CollapsibleMixin', function () {
 
@@ -214,46 +213,6 @@ describe('CollapsibleMixin', function () {
         return 'whatevs';
       };
       assert.equal(instance.dimension(), 'whatevs');
-    });
-  });
-
-  describe('deprecations', function() {
-    it('warns about getCollaps_a_bleDimension() deprecation', function () {
-      Component = React.createClass({
-        mixins: [CollapsibleMixin],
-
-        getCollapsableDimension(){},
-
-        render(){
-          return ( <div /> );
-        }
-      });
-
-      instance = ReactTestUtils.renderIntoDocument(
-        <Component />
-      );
-
-      instance.dimension();
-      shouldWarn('deprecated');
-    });
-
-    it('does not warn about getCollaps_i_bleDimension() use', function () {
-      Component = React.createClass({
-        mixins: [CollapsibleMixin],
-
-        getCollapsibleDimension(){},
-
-        render(){
-          return ( <div /> );
-        }
-      });
-
-      instance = ReactTestUtils.renderIntoDocument(
-        <Component />
-      );
-
-      instance.dimension();
-      console.warn.called.should.be.false;
     });
   });
 });

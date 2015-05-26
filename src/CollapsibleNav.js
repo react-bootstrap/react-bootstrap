@@ -3,19 +3,17 @@ import BootstrapMixin from './BootstrapMixin';
 import CollapsibleMixin from './CollapsibleMixin';
 import classNames from 'classnames';
 import domUtils from './utils/domUtils';
-import collapsable from './utils/deprecatedProperty';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
 
-const specCollapsibleNav = {
+const CollapsibleNav = React.createClass({
   mixins: [BootstrapMixin, CollapsibleMixin],
 
   propTypes: {
     onSelect: React.PropTypes.func,
     activeHref: React.PropTypes.string,
     activeKey: React.PropTypes.any,
-    collapsable,
     collapsible: React.PropTypes.bool,
     expanded: React.PropTypes.bool,
     eventKey: React.PropTypes.any
@@ -48,16 +46,12 @@ const specCollapsibleNav = {
     /*
      * this.props.collapsible is set in NavBar when an eventKey is supplied.
      */
-    const collapsible = this.props.collapsible || this.props.collapsable;
-    let classes = collapsible ? this.getCollapsibleClassSet('navbar-collapse') : null;
+    const classes = this.props.collapsible ? this.getCollapsibleClassSet('navbar-collapse') : null;
+    const renderChildren = this.props.collapsible ? this.renderCollapsibleNavChildren : this.renderChildren;
 
     return (
       <div eventKey={this.props.eventKey} className={classNames(this.props.className, classes)} >
-        {ValidComponentChildren.map(this.props.children,
-          collapsible ?
-          this.renderCollapsibleNavChildren :
-          this.renderChildren
-        )}
+        {ValidComponentChildren.map(this.props.children, renderChildren)}
       </div>
     );
   },
@@ -109,9 +103,6 @@ const specCollapsibleNav = {
       }
     );
   }
-};
-
-const CollapsibleNav = React.createClass(specCollapsibleNav);
-CollapsibleNav._spec = specCollapsibleNav;
+});
 
 export default CollapsibleNav;

@@ -1,6 +1,5 @@
 import React from 'react';
 import TransitionEvents from './utils/TransitionEvents';
-import deprecationWarning from './utils/deprecationWarning';
 
 const CollapsibleMixin = {
 
@@ -138,15 +137,6 @@ const CollapsibleMixin = {
   },
 
   dimension(){
-    if (typeof this.getCollapsableDimension === 'function') {
-      deprecationWarning(
-        'CollapsableMixin.getCollapsableDimension()',
-        'CollapsibleMixin.getCollapsibleDimension()',
-        'https://github.com/react-bootstrap/react-bootstrap/issues/425#issuecomment-97110963'
-      );
-      return this.getCollapsableDimension();
-    }
-
     return (typeof this.getCollapsibleDimension === 'function') ?
       this.getCollapsibleDimension() :
       'height';

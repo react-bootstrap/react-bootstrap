@@ -3,13 +3,11 @@ import classNames from 'classnames';
 
 import BootstrapMixin from './BootstrapMixin';
 import CollapsibleMixin from './CollapsibleMixin';
-import collapsable from './utils/deprecatedProperty';
 
 const Panel = React.createClass({
   mixins: [BootstrapMixin, CollapsibleMixin],
 
   propTypes: {
-    collapsable,
     collapsible: React.PropTypes.bool,
     onSelect: React.PropTypes.func,
     header: React.PropTypes.node,
@@ -56,21 +54,18 @@ const Panel = React.createClass({
   },
 
   render() {
-    let classes = this.getBsClassSet();
-    const collapsible = this.props.collapsible || this.props.collapsable;
-
     return (
       <div {...this.props}
-        className={classNames(this.props.className, classes)}
-        id={collapsible ? null : this.props.id} onSelect={null}>
+        className={classNames(this.props.className, this.getBsClassSet())}
+        id={this.props.collapsible ? null : this.props.id} onSelect={null}>
         {this.renderHeading()}
-        {collapsible ? this.renderCollapsableBody() : this.renderBody()}
+        {this.props.collapsible ? this.renderCollapsibleBody() : this.renderBody()}
         {this.renderFooter()}
       </div>
     );
   },
 
-  renderCollapsableBody() {
+  renderCollapsibleBody() {
     let collapseClass = this.prefixClass('collapse');
 
     return (
@@ -147,21 +142,20 @@ const Panel = React.createClass({
 
   renderHeading() {
     let header = this.props.header;
-    const collapsible = this.props.collapsible || this.props.collapsable;
 
     if (!header) {
       return null;
     }
 
     if (!React.isValidElement(header) || Array.isArray(header)) {
-      header = collapsible ?
-        this.renderCollapsableTitle(header) : header;
+      header = this.props.collapsible ?
+        this.renderCollapsibleTitle(header) : header;
     } else {
       const className = classNames(
         this.prefixClass('title'), header.props.className
       );
 
-      if (collapsible) {
+      if (this.props.collapsible) {
         header = cloneElement(header, {
           className,
           children: this.renderAnchor(header.props.children)
@@ -190,7 +184,7 @@ const Panel = React.createClass({
     );
   },
 
-  renderCollapsableTitle(header) {
+  renderCollapsibleTitle(header) {
     return (
       <h4 className={this.prefixClass('title')}>
         {this.renderAnchor(header)}
