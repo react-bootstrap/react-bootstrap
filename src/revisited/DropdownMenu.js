@@ -128,6 +128,8 @@ class DropdownMenu extends React.Component {
 }
 
 DropdownMenu.propTypes = {
+  open: React.PropTypes.bool,
+  requestClose: React.PropTypes.func,
   labelledBy: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number

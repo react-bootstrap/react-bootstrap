@@ -75,7 +75,6 @@ describe('DropdownMenu revisited', function() {
     describe('Keyboard Navigation', function() {
       it('sets focus on next menu item when the key "down" is pressed', function() {
         let instance = React.render(simpleMenu, focusableContainer);
-        let node = React.findDOMNode(instance);
 
         let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
         items.length.should.equal(4);
@@ -89,7 +88,6 @@ describe('DropdownMenu revisited', function() {
 
       it('with last item is focused when the key "down" is pressed first item gains focus', function() {
         let instance = React.render(simpleMenu, focusableContainer);
-        let node = React.findDOMNode(instance);
 
         let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
         items.length.should.equal(4);
@@ -101,7 +99,6 @@ describe('DropdownMenu revisited', function() {
 
       it('sets focus on previous menu item when the key "up" is pressed', function() {
         let instance = React.render(simpleMenu, focusableContainer);
-        let node = React.findDOMNode(instance);
 
         let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
         items.length.should.equal(4);
@@ -115,7 +112,6 @@ describe('DropdownMenu revisited', function() {
 
       it('with first item focused when the key "up" is pressed last item gains focus', function() {
         let instance = React.render(simpleMenu, focusableContainer);
-        let node = React.findDOMNode(instance);
 
         let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
         items.length.should.equal(4);

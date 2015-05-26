@@ -129,7 +129,7 @@ describe('DropdownButton revisited', function() {
         it('validates with single child of type DropdownButtonTitle', function() {
           const title = {
             type: DropdownButtonTitle
-          }
+          };
           const props = {
             children: [
               title
@@ -148,7 +148,7 @@ describe('DropdownButton revisited', function() {
         it('validation fails with two DropdownButtonTitle children', function() {
           const title = {
             type: DropdownButtonTitle
-          }
+          };
           const props = {
             children: [
               title,
@@ -163,7 +163,7 @@ describe('DropdownButton revisited', function() {
         it('validation fails with both title and DropdownButtonTitle', function() {
           const title = {
             type: DropdownButtonTitle
-          }
+          };
           const props = {
             title: 'some title',
             children: [
