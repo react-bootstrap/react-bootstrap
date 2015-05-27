@@ -10,13 +10,15 @@ const MenuItem = React.createClass({
     target:    React.PropTypes.string,
     onSelect:  React.PropTypes.func,
     eventKey:  React.PropTypes.any,
-    active:    React.PropTypes.bool
+    active:    React.PropTypes.bool,
+    tabIndex:  React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
       href: '#',
-      active: false
+      active: false,
+      tabIndex: null
     };
   },
 
@@ -29,7 +31,7 @@ const MenuItem = React.createClass({
 
   renderAnchor() {
     return (
-      <a onClick={this.handleClick} href={this.props.href} target={this.props.target} title={this.props.title} tabIndex="-1">
+      <a onClick={this.handleClick} href={this.props.href} target={this.props.target} title={this.props.title} tabIndex={this.props.tabIndex}>
         {this.props.children}
       </a>
     );
@@ -50,7 +52,7 @@ const MenuItem = React.createClass({
     }
 
     return (
-      <li {...this.props} role="presentation" title={null} href={null}
+      <li {...this.props} role="menuitem" title={null} href={null}
         className={classNames(this.props.className, classes)}>
         {children}
       </li>

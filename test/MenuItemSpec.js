@@ -10,7 +10,7 @@ describe('MenuItem', function () {
       </MenuItem>
     );
     assert.equal(instance.getDOMNode().nodeName, 'LI');
-    assert.equal(instance.getDOMNode().getAttribute('role'), 'presentation');
+    assert.equal(instance.getDOMNode().getAttribute('role'), 'menuitem');
   });
 
   it('should pass through props', function () {
@@ -44,7 +44,18 @@ describe('MenuItem', function () {
     );
 
     let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
-    assert.equal(anchor.getDOMNode().getAttribute('tabIndex'), '-1');
+    assert.equal(anchor.getDOMNode().getAttribute('tabIndex'), null);
+  });
+
+  it('should have have a tabIndex if supplied', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem tabIndex='1'>
+        Title
+      </MenuItem>
+    );
+
+    let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
+    assert.equal(anchor.getDOMNode().getAttribute('tabIndex'), '1');
   });
 
   it('should fire callback on click of link', function (done) {
