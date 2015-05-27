@@ -3,7 +3,6 @@ import createChainedFunction from './createChainedFunction';
 import createContextWrapper from './createContextWrapper';
 import CustomPropTypes from './CustomPropTypes';
 import domUtils from './domUtils';
-import EventListener from './EventListener';
 import ValidComponentChildren from './ValidComponentChildren';
 
 export default {
@@ -12,6 +11,5 @@ export default {
   createContextWrapper,
   CustomPropTypes,
   domUtils,
-  EventListener,
   ValidComponentChildren
 };
