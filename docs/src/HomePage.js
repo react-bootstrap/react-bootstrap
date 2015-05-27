@@ -26,7 +26,8 @@ export default class HomePage extends React.Component{
             href='https://github.com/react-bootstrap/react-bootstrap/wiki#100-roadmap'>1.0.0
             Roadmap</a> and <a
             href='https://github.com/react-bootstrap/react-bootstrap/blob/master/CONTRIBUTING.md'>Contributing
-            Guidelines</a> to see where you can help out.
+            Guidelines</a> to see where you can help out. Prior to the 1.0.0 release, breaking changes should
+            result in a Minor version bump.
           </Alert>
         </Grid>
 
