@@ -1,6 +1,6 @@
 const ANONYMOUS = '<<anonymous>>';
 
-let CustomPropTypes = {
+const CustomPropTypes = {
   /**
    * Checks whether a prop provides a DOM element
    *
@@ -14,6 +14,7 @@ let CustomPropTypes = {
    * @returns {Error|undefined}
    */
   mountable: createMountableChecker(),
+
   /**
    * Checks whether a prop matches a key of an associated object
    *
@@ -32,7 +33,9 @@ let CustomPropTypes = {
    * @param componentName
    * @returns {Error|undefined}
    */
-  singlePropFrom: createSinglePropFromChecker
+  singlePropFrom: createSinglePropFromChecker,
+
+  all
 };
 
 /**
@@ -106,6 +109,30 @@ function createSinglePropFromChecker(arrOfProps) {
     }
   }
   return validate;
+}
+
+function all(propTypes) {
+  if (propTypes === undefined) {
+    throw new Error('No validations provided');
+  }
+
+  if (!(propTypes instanceof Array)) {
+    throw new Error('Invalid argument must be an array');
+  }
+
+  if (propTypes.length === 0) {
+    throw new Error('No validations provided');
+  }
+
+  return function(props, propName, componentName) {
+    for(let i = 0; i < propTypes.length; i++) {
+      let result = propTypes[i](props, propName, componentName);
+
+      if (result !== undefined && result !== null) {
+        return result;
+      }
+    }
+  };
 }
 
 export default CustomPropTypes;

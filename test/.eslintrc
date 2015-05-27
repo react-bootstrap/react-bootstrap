@@ -4,6 +4,7 @@
   },
   "globals": {
     "assert": true,
+    "expect": true,
     "sinon": true
   },
   "plugins": [
