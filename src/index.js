@@ -49,6 +49,7 @@ import Table from './Table';
 import TabPane from './TabPane';
 import Thumbnail from './Thumbnail';
 import Tooltip from './Tooltip';
+import utils from './utils';
 import Well from './Well';
 import styleMaps from './styleMaps';
 
@@ -104,6 +105,7 @@ export default {
   TabPane,
   Thumbnail,
   Tooltip,
+  utils,
   Well,
   styleMaps
 };
