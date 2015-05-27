@@ -21,6 +21,14 @@
   "directories": {
     "lib": "lib/"
   },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "lib",
+    "src",
+    "dist"
+  ],
   "keywords": [
     "react",
     "ecosystem-react",
