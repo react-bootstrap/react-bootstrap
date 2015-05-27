@@ -127,6 +127,9 @@ const ComponentsPage = React.createClass({
                     className='text-danger'>Split button dropdowns are not supported here.</strong></p>
                   <p>Just add <code>vertical</code> to the <code>{'<ButtonGroup />'}</code>.</p>
                   <ReactPlayground codeText={Samples.ButtonGroupVertical} />
+                  <br />
+                  <p>Moreover, you can have buttons be block level elements so they take the full width of their container, just add <code>block</code> to the <code>{'<ButtonGroup />'}</code>, in addition to the <code>vertical</code> you just added.</p>
+                  <ReactPlayground codeText={Samples.ButtonGroupBlock} />
 
                   <h3 id='btn-groups-justified'>Justified button groups</h3>
                   <p>Make a group of buttons stretch at equal sizes to span the entire width of its parent. Also works with button dropdowns within the button group.</p>
