@@ -26,7 +26,6 @@
     "README.md",
     "CHANGELOG.md",
     "lib",
-    "src",
     "dist"
   ],
   "keywords": [
