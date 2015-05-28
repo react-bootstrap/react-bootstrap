@@ -87,7 +87,18 @@ violation of semver, than a patch release reverting the offending change should
 be pushed as soon as possible to correct the error. The offending change can
 then be re-applied and released with the proper version bump.
 
-## Live releasing the documentation
+### Release Candidates
+
+In an effort to reduce the frequency with which we introduce breaking changes we
+should do our best to first push deprecation warnings in a Minor or Patch
+release. Also, Pull Requests with breaking changes should be submitted against
+the `vX-rc` branch, where X is the next Major version. Which we will in turn
+release as an `alpha` release of the next Major version. When we are ready to
+release the next Major version bump we will merge the `vX-rc` branch into the
+`master` branch and cut a `beta` release.  Once bugs have been addressed with
+the `beta` release then we will release the Major version bump.
+
+### Live releasing the documentation
 
 The documentation release script does a similar job to the release script except
 that it doesn't publish to npm. It will auto tag the current branch with
@@ -122,7 +133,7 @@ Example usage of release-docs script:
 $ ./tools/release-docs
 ```
 
-## Check everything is OK before releasing
+### Check everything is OK before releasing
 
 Release tools have a very useful option `--dry-run`.
 
