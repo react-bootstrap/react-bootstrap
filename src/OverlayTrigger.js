@@ -6,7 +6,6 @@ import RootCloseWrapper from './RootCloseWrapper';
 import createChainedFunction from './utils/createChainedFunction';
 import createContextWrapper from './utils/createContextWrapper';
 import domUtils from './utils/domUtils';
-import assign from './utils/Object.assign';
 
 /**
  * Check if value one is inside or equal to the of value
@@ -305,7 +304,7 @@ const OverlayTrigger = React.createClass({
     const offset = container.tagName === 'BODY' ?
       domUtils.getOffset(node) : domUtils.getPosition(node, container);
 
-    return assign({}, offset, {
+    return Object.assign({}, offset, {
       height: node.offsetHeight,
       width: node.offsetWidth
     });
