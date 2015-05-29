@@ -3,7 +3,6 @@
 
 import React from 'react';
 import ValidComponentChildren from './utils/ValidComponentChildren';
-import assign from './utils/Object.assign';
 
 const REGEXP = /\%\((.+?)\)s/;
 
@@ -24,7 +23,7 @@ const Interpolate = React.createClass({
         this.props.children : this.props.format;
     let parent = this.props.component;
     let unsafe = this.props.unsafe === true;
-    let props = assign({}, this.props);
+    let props = Object.assign({}, this.props);
 
     delete props.children;
     delete props.format;
