@@ -1,19 +1,19 @@
 import _ from 'lodash';
 import path from 'path';
 import fsp from 'fs-promise';
-import { exec } from './exec';
 import { srcRoot } from './constants';
 import components from './public-components';
+import { buildContent } from './buildBabel';
 
 const templatePath = path.join(srcRoot, 'templates');
 const factoryTemplatePath = path.join(templatePath, 'factory.js.template');
 const indexTemplatePath = path.join(templatePath, 'factory.index.js.template');
 
-export default function generateFactories(destination, babelOptions='') {
+export default function generateFactories(destination, babelOptions={}) {
 
   let generateCompiledFile = function (file, content) {
     let outpath = path.join(destination, `${file}.js`);
-    return exec(`babel ${babelOptions} --out-file ${outpath} <<EOF\n ${content}`);
+    buildContent(content, __dirname, outpath, babelOptions);
   };
 
   return Promise.all([

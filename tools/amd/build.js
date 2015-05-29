@@ -5,6 +5,7 @@ import { copy } from '../fs-utils';
 import { exec } from '../exec';
 import generateFactories from '../generateFactories';
 import { repoRoot, srcRoot, bowerRoot } from '../constants';
+import { buildFolder } from '../buildBabel';
 
 const packagePath = path.join(repoRoot, 'package.json');
 const bowerTemplate = path.join(__dirname, 'bower.json');
@@ -13,7 +14,7 @@ const bowerJson = path.join(bowerRoot, 'bower.json');
 const readme = path.join(__dirname, 'README.md');
 const license = path.join(repoRoot, 'LICENSE');
 
-const babelOptions = '--modules amd';
+const babelOptions = {modules: 'amd'};
 
 const libDestination = path.join(bowerRoot, 'lib');
 const factoriesDestination = path.join(libDestination, 'factories');
@@ -37,7 +38,7 @@ export default function BuildBower() {
     .then(() => Promise.all([
       bowerConfig(),
       generateFactories(factoriesDestination, babelOptions),
-      exec(`babel ${babelOptions} ${srcRoot} --out-dir ${libDestination}`),
+      buildFolder(srcRoot, libDestination, babelOptions),
       copy(readme, bowerRoot),
       copy(license, bowerRoot)
     ]))
