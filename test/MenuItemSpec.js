@@ -44,7 +44,19 @@ describe('MenuItem', function () {
     );
 
     let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
-    assert.equal(anchor.getDOMNode().getAttribute('tabIndex'), '-1');
+    assert.equal(anchor.getDOMNode().getAttribute('tabIndex'), null);
+    assert.equal(anchor.getDOMNode().getAttribute('role'), 'menuitem');
+  });
+
+  it('should have have a tabIndex if supplied', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem tabIndex='1'>
+        Title
+      </MenuItem>
+    );
+
+    let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
+    assert.equal(anchor.getDOMNode().getAttribute('tabIndex'), '1');
   });
 
   it('should fire callback on click of link', function (done) {
