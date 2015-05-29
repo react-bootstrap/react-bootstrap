@@ -24,7 +24,7 @@ const NavMain = React.createClass({
   },
 
   render() {
-    let brand = <Link to='home' className="navbar-brand">React Bootstrap</Link>;
+    let brand = <Link to='home' className="navbar-brand">React-Bootstrap</Link>;
     let links = Object.keys(NAV_LINKS).map(this.renderNavItem).concat([
       <li key='github-link'>
         <a href='https://github.com/react-bootstrap/react-bootstrap' target='_blank'>GitHub</a>

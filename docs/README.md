@@ -1,4 +1,4 @@
-# React Bootstrap Documentation Website
+# React-Bootstrap Documentation Website
 
 This website is single page app built on
 [React](http://facebook.github.io/react/), with styles and structure taken from
