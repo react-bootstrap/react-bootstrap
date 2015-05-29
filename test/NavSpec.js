@@ -83,9 +83,9 @@ describe('Nav', function () {
           </Nav>
         );
 
-    let items = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
+    let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
 
-    ReactTestUtils.Simulate.click(items[1].refs.anchor);
+    ReactTestUtils.Simulate.click(items[1]);
   });
 
   it('Should set the correct item active by href', function () {
