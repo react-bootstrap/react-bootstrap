@@ -62,6 +62,7 @@
     "fs-extra": "^0.18.0",
     "fs-promise": "^0.3.1",
     "http-proxy": "^1.11.1",
+    "ip": "^0.3.2",
     "json-loader": "^0.5.1",
     "karma": "~0.12.32",
     "karma-chai": "^0.1.0",
