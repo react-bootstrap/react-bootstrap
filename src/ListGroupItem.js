@@ -1,7 +1,7 @@
 import React, { cloneElement } from 'react';
 import BootstrapMixin from './BootstrapMixin';
 import classNames from 'classnames';
-
+import SafeAnchor from './SafeAnchor';
 
 const ListGroupItem = React.createClass({
   mixins: [BootstrapMixin],
@@ -51,12 +51,12 @@ const ListGroupItem = React.createClass({
 
   renderAnchor(classes) {
     return (
-      <a
+      <SafeAnchor
         {...this.props}
         className={classNames(this.props.className, classes)}
       >
         {this.props.header ? this.renderStructuredContent() : this.props.children}
-      </a>
+      </SafeAnchor>
     );
   },
 
