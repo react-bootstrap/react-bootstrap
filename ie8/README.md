@@ -1,6 +1,6 @@
 # ie8 tests
 
-A simple page with several React Bootstrap components for testing in ie8.
+A simple page with several React-Bootstrap components for testing in ie8.
 
 ```
 npm run ie8

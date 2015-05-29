@@ -2,8 +2,9 @@ import _ from 'lodash';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import baseConfig, { options, jsLoader } from './base.config';
+import ip from 'ip';
 
-const webpackDevServerAddress = `http://localhost:${options.port}`;
+const webpackDevServerAddress = `http://${ip.address()}:${options.port}`;
 const cssSourceMap = options.debug ? '?sourceMap' : '';
 const reactHot = options.debug ? 'react-hot!' : '';
 

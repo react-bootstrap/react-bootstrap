@@ -26,7 +26,6 @@
     "README.md",
     "CHANGELOG.md",
     "lib",
-    "src",
     "dist"
   ],
   "keywords": [
@@ -45,6 +44,7 @@
     "babel-core": "^5.1.10",
     "babel-eslint": "^3.0.1",
     "babel-loader": "^5.0.0",
+    "babel-plugin-object-assign": "^1.1.0",
     "bootstrap": "^3.3.4",
     "brfs": "^1.4.0",
     "chai": "^2.2.0",
@@ -62,6 +62,7 @@
     "fs-extra": "^0.18.0",
     "fs-promise": "^0.3.1",
     "http-proxy": "^1.11.1",
+    "ip": "^0.3.2",
     "json-loader": "^0.5.1",
     "karma": "~0.12.32",
     "karma-chai": "^0.1.0",
