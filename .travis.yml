@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-  - "iojs"
+  - "iojs-v2.1.0"
 notifications:
   webhooks:
     urls:
