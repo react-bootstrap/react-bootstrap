@@ -49,7 +49,9 @@ const DropdownStateMixin = {
   handleDocumentClick(e) {
     // If the click originated from within this component
     // don't do anything.
-    if (isNodeInRoot(e.target, React.findDOMNode(this))) {
+    // e.srcElement is required for IE8 as e.target is undefined
+    let target = e.target || e.srcElement;
+    if (isNodeInRoot(target, React.findDOMNode(this))) {
       return;
     }
 
