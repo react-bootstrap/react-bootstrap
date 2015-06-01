@@ -304,10 +304,11 @@ const OverlayTrigger = React.createClass({
     const offset = container.tagName === 'BODY' ?
       domUtils.getOffset(node) : domUtils.getPosition(node, container);
 
-    return Object.assign({}, offset, {
+    return {
+      ...offset, // eslint-disable-line object-shorthand
       height: node.offsetHeight,
       width: node.offsetWidth
-    });
+    };
   }
 });
 
