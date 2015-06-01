@@ -1,8 +1,5 @@
 {
   "optional": [
     "es7.objectRestSpread"
-  ],
-  "plugins": [
-    "object-assign"
   ]
 }

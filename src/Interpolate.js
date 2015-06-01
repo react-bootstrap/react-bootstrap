@@ -23,7 +23,7 @@ const Interpolate = React.createClass({
         this.props.children : this.props.format;
     let parent = this.props.component;
     let unsafe = this.props.unsafe === true;
-    let props = Object.assign({}, this.props);
+    let props = {...this.props};
 
     delete props.children;
     delete props.format;
