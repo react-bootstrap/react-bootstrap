@@ -13,7 +13,10 @@ export default function generateFactories(destination, babelOptions='') {
 
   let generateCompiledFile = function (file, content) {
     let outpath = path.join(destination, `${file}.js`);
-    return exec(`babel ${babelOptions} --out-file ${outpath} <<EOF\n ${content}`);
+    return fsp.writeFile(outpath + '_temp', content)
+        .then(() => exec(`babel ${babelOptions} --out-file ${outpath} ${outpath}_temp`)
+          .then(() => fsp.remove(outpath + '_temp'))
+        );
   };
 
   return Promise.all([
