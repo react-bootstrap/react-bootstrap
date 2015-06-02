@@ -1,3 +1,20 @@
+v0.23.1 - Tue, 02 Jun 2015 16:57:57 GMT
+---------------------------------------
+
+- [4d265f0](../../commit/4d265f0) [fixed] Use babel api to avoid command line conflicts between Linux and Windows
+- [0cfbf3b](../../commit/0cfbf3b) [fixed] IE8 will now close an open DropdownButton menu when clicking button
+- [d105749](../../commit/d105749) [added] utils object to exported src/index
+- [29bc64f](../../commit/29bc64f) [changed] Remove Dev dependency babel-plugin-object-assign.
+- [1fec852](../../commit/1fec852) [changed] Update karma-phantomjs-launcher. Dev dependency.
+- [f494604](../../commit/f494604) [changed] Update eslint. Dev dependency.
+- [a4331ed](../../commit/a4331ed) [changed] Make the brand name consistent.
+- [b213be0](../../commit/b213be0) [changed] Remove ES6 sources from npm distribution.
+- [73c5ec9](../../commit/73c5ec9) [changed] Remove extraneous utils/Object.assign.js
+- [935171f](../../commit/935171f) [added] Now accepting a `block` property on the ButtonGroup component. Closes #240.
+- [dfec023](../../commit/dfec023) [added] CustomPropType.all to allow multiple validations
+
+
+
 v0.23.0 - Tue, 26 May 2015 19:32:52 GMT
 ---------------------------------------
 

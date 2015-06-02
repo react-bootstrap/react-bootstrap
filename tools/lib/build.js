@@ -4,6 +4,7 @@ import path from 'path';
 import fsp from 'fs-promise';
 import { srcRoot, libRoot } from '../constants';
 import generateFactories from '../generateFactories';
+import { buildFolder } from '../buildBabel';
 
 const factoryDestination = path.join(libRoot, 'factories');
 
@@ -14,7 +15,7 @@ export default function BuildCommonJs() {
     .then(() => fsp.mkdirs(factoryDestination))
     .then(() => Promise.all([
       generateFactories(factoryDestination),
-      exec(`babel ${srcRoot} --out-dir ${libRoot}`)
+      buildFolder(srcRoot, libRoot)
     ]))
     .then(() => console.log('Built: '.cyan + 'npm module'.green));
 }

@@ -14,9 +14,20 @@ const docsRoot = path.join(repoRoot, 'docs-built/');
 const tmpBowerRepo = path.join(repoRoot, 'tmp-bower-repo');
 const tmpDocsRepo = path.join(repoRoot, 'tmp-docs-repo');
 
+const changelog = path.join(repoRoot, 'CHANGELOG.md');
+const alphaChangelog = path.join(repoRoot, 'CHANGELOG-alpha.md');
+
 export {
   repoRoot,
-  srcRoot, distRoot, libRoot,
-  bowerRepo, bowerRoot, tmpBowerRepo,
-  docsRoot, docsRepo, tmpDocsRepo,
+  srcRoot,
+  distRoot,
+  libRoot,
+  bowerRepo,
+  bowerRoot,
+  tmpBowerRepo,
+  docsRoot,
+  docsRepo,
+  tmpDocsRepo,
+  changelog,
+  alphaChangelog
 };
