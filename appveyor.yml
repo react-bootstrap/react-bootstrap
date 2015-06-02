@@ -1,0 +1,17 @@
+version: '{build}'
+
+# Install scripts. (runs after repo cloning)
+install:
+  # Get the latest stable version of io.js
+  - ps: Install-Product node ''
+  - npm -g install npm@latest
+  - set PATH=%APPDATA%\npm;%PATH%
+  - node --version
+  - npm --version
+  - npm install
+
+# No need for MSBuild on this project
+build: off
+
+test_script:
+  - npm test
