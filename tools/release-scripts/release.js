@@ -80,11 +80,18 @@ preConditions()
       });
   })
   .then(() => safeExec(`git commit -m "Release v${version}"`))
-  .then(() => Promise.all([
-    tagAndPublish(version),
-    repoRelease(bowerRepo, bowerRoot, tmpBowerRepo, version),
-    repoRelease(docsRepo, docsRoot, tmpDocsRepo, version)
-  ]))
+  .then(() => {
+    let releases = [
+      tagAndPublish(version),
+      repoRelease(bowerRepo, bowerRoot, tmpBowerRepo, version)
+    ];
+
+    if (!argv.preid) {
+      releases.push(repoRelease(docsRepo, docsRoot, tmpDocsRepo, version));
+    }
+
+    return Promise.all(releases);
+  })
   .then(() => console.log('Version '.cyan + `v${version}`.green + ' released!'.cyan))
   .catch(err => {
     if (!err.__handled) {
