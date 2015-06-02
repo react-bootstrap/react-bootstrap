@@ -1,12 +1,10 @@
 import React from 'react';
-import semver from 'semver';
 import packageJSON from '../../package.json';
 
-let parsed = semver.parse(packageJSON.version);
 let version = packageJSON.version;
 
-if (parsed.prerelease.length > 0 && parsed.prerelease[0] === 'docs') {
-  version = `${parsed.major}.${parsed.minor}.${parsed.patch}`;
+if (/docs/.test(version)) {
+  version = version.split('-')[0];
 }
 
 const PageHeader = React.createClass({
