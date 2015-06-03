@@ -1,7 +1,11 @@
+const handleSelect = (event, selectEvent) => {
+  console.log(`SELECTED ${selectEvent.eventKey}`);
+};
+
 const buttonsInstance = (
   <div>
     <input placeholder='Before' type='text' />
-    <DropdownButtonRevisited>
+    <DropdownButtonRevisited onSelect={handleSelect}>
       <DropdownButtonTitleRevisited>Custom Title</DropdownButtonTitleRevisited>
       <MenuItemRevisited eventKey='1'>Action</MenuItemRevisited>
       <MenuItemRevisited header>Some Header</MenuItemRevisited>

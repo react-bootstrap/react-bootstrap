@@ -12,6 +12,7 @@ export default class DropdownButton extends React.Component {
     this.toggleOpen = this.toggleOpen.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleRequestClose = this.handleRequestClose.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
     this.extractChildren = this.extractChildren.bind(this);
 
     this.state = {
@@ -60,6 +61,18 @@ export default class DropdownButton extends React.Component {
     }
   }
 
+  handleSelect(event, selectEvent) {
+    if (this.props.onSelect) {
+      this.props.onSelect(event, selectEvent);
+    }
+
+    if (selectEvent.isSelectionPrevented()) {
+      return;
+    }
+
+    this.handleRequestClose(event);
+  }
+
   render() {
     let id = this.props.id || this.state.id;
     let { title, children } = this.extractChildren();
@@ -68,8 +81,6 @@ export default class DropdownButton extends React.Component {
       dropdown: true,
       open: this.state.open
     };
-
-    title = this.props.title || title;
 
     return (
       <div className={classNames(rootClasses)}>
@@ -89,6 +100,7 @@ export default class DropdownButton extends React.Component {
           ref='menu'
           open={this.state.open}
           requestClose={this.handleRequestClose}
+          onSelect={this.handleSelect}
           labelledBy={id}>
           {children}
         </DropdownMenu>
@@ -97,7 +109,7 @@ export default class DropdownButton extends React.Component {
   }
 
   extractChildren() {
-    let title;
+    let title = this.props.title;
     let children = [];
 
     React.Children.forEach(this.props.children, child => {
@@ -119,7 +131,11 @@ function titleRequired(props, propName, component) {
   let titles = [];
 
   if (props.children) {
-    titles = props.children.filter(child => child.type === DropdownButtonTitle);
+    if (props.children instanceof Array) {
+      titles = props.children.filter(child => child.type === DropdownButtonTitle);
+    } else if(props.children.type === DropdownButtonTitle) {
+      titles.push(props.children);
+    }
   }
 
   if (titles.length > 1) {
@@ -145,5 +161,7 @@ DropdownButton.propTypes = {
 
   title: titleRequired,
 
-  children: titleRequired
+  children: titleRequired,
+
+  onSelect: React.PropTypes.func
 };

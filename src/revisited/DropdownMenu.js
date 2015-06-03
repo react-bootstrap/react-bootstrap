@@ -115,7 +115,8 @@ class DropdownMenu extends React.Component {
   render() {
     let children = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
-        onKeyDown: this.handleKeyDown
+        onKeyDown: this.handleKeyDown,
+        onSelect: this.props.onSelect
       }, child.props.children);
     });
 
@@ -133,7 +134,8 @@ DropdownMenu.propTypes = {
   labelledBy: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
-  ])
+  ]),
+  onSelect: React.PropTypes.func
 };
 
 export default DropdownMenu;

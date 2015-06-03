@@ -54,4 +54,47 @@ describe('MenuItem revisited', function() {
 
     ReactTestUtils.Simulate.keyDown(anchor, { keyCode: 1 });
   });
+
+  it('click handling with onSelect prop', function(done) {
+    const handleSelect = (event, selectedEvent) => {
+      selectedEvent.eventKey.should.equal('1');
+      done();
+    };
+    const instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem onSelect={handleSelect} eventKey='1'>Item</MenuItem>
+    );
+    const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
+
+    ReactTestUtils.Simulate.click(anchor);
+  });
+
+  it('does not fire onSelect when divider is clicked', function(done) {
+    const handleSelect = (event, selectedEvent) => {
+      done(new Error('Should not invoke onSelect with divider flag applied'));
+    };
+    const instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem onSelect={handleSelect} divider />
+    );
+    ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A').length.should.equal(0);
+    const li = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'li');
+
+    ReactTestUtils.Simulate.click(li);
+
+    setTimeout(done, 100);
+  });
+
+  it('does not fire onSelect when header is clicked', function(done) {
+    const handleSelect = (event, selectedEvent) => {
+      done(new Error('Should not invoke onSelect with divider flag applied'));
+    };
+    const instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem onSelect={handleSelect} header>Header content</MenuItem>
+    );
+    ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A').length.should.equal(0);
+    const li = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'li');
+
+    ReactTestUtils.Simulate.click(li);
+
+    setTimeout(done, 100);
+  });
 });

@@ -25,8 +25,7 @@ describe('DropdownButton revisited', function() {
 
   it('renders title prop', function() {
     let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
-    let node = React.findDOMNode(instance);
-    let buttonNode = node.children[0];
+    let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
 
     buttonNode.innerText.should.match(/Simple Dropdown/);
   });
@@ -41,16 +40,14 @@ describe('DropdownButton revisited', function() {
         <MenuItem>Item 4</MenuItem>
       </DropdownButton>
     );
-    let node = React.findDOMNode(instance);
-    let buttonNode = node.children[0];
+    let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
 
     buttonNode.innerText.should.match(/Child Title/);
   });
 
   it('renders dropdown toggle button', function() {
     let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
-    let node = React.findDOMNode(instance);
-    let buttonNode = node.children[0];
+    let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
 
     buttonNode.tagName.should.equal('BUTTON');
     buttonNode.className.should.match(/\bbtn[ $]/);
@@ -59,6 +56,16 @@ describe('DropdownButton revisited', function() {
     buttonNode.getAttribute('type').should.equal('button');
     buttonNode.getAttribute('aria-expanded').should.equal('false');
     buttonNode.getAttribute('id').should.be.ok;
+  });
+
+  it('renders single MenuItem child', function() {
+    // Assertion is in the afterEach call that performs prop type validation,
+    // there should be no errors.
+    ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='Single child'>
+        <MenuItem>Item 1</MenuItem>
+      </DropdownButton>
+    );
   });
 
   it('renders dropdown toggle button caret', function() {
@@ -74,7 +81,7 @@ describe('DropdownButton revisited', function() {
   it('toggles open/closed when clicked', function() {
     let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     let node = React.findDOMNode(instance);
-    let buttonNode = React.findDOMNode(node.children[0]);
+    let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
 
     node.className.should.not.match(/\bopen\b/);
     buttonNode.getAttribute('aria-expanded').should.equal('false');
@@ -93,7 +100,7 @@ describe('DropdownButton revisited', function() {
   it('when focused and closed toggles open when the key "down" is pressed', function() {
     let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     let node = React.findDOMNode(instance);
-    let buttonNode = React.findDOMNode(node.children[0]);
+    let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
 
     ReactTestUtils.Simulate.keyDown(buttonNode, { keyCode: keycode('down') });
 
@@ -112,10 +119,74 @@ describe('DropdownButton revisited', function() {
 
   it('button has aria-haspopup attribute (As per W3C WAI-ARIA Spec)', function() {
     let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
-    let node = React.findDOMNode(instance);
-    let buttonNode = React.findDOMNode(node.children[0]);
+    let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
 
     buttonNode.getAttribute('aria-haspopup').should.equal('true');
+  });
+
+  it('forwards onSelect handler to MenuItems', function(done) {
+    let selectedEvents = [];
+    let onSelect = (event, selectEvent) => {
+      selectedEvents.push(selectEvent.eventKey);
+
+      if (selectedEvents.length === 4) {
+        selectedEvents.should.eql(['1', '2', '3', '4']);
+        done();
+      }
+    };
+    let instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='Simple Dropdown' onSelect={onSelect}>
+        <MenuItem eventKey='1'>Item 1</MenuItem>
+        <MenuItem eventKey='2'>Item 2</MenuItem>
+        <MenuItem eventKey='3'>Item 3</MenuItem>
+        <MenuItem eventKey='4'>Item 4</MenuItem>
+      </DropdownButton>
+    );
+
+    let menuItems = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
+
+    menuItems.forEach(item => {
+      ReactTestUtils.Simulate.click(item);
+    });
+  });
+
+  it('closes when child MenuItem is selected', function() {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='Simple Dropdown'>
+        <MenuItem eventKey='1'>Item 1</MenuItem>
+      </DropdownButton>
+    );
+    let node = React.findDOMNode(instance);
+    let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
+
+    let menuItem = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
+
+    ReactTestUtils.Simulate.click(buttonNode);
+    node.className.should.match(/\bopen\b/);
+    ReactTestUtils.Simulate.click(menuItem);
+
+    node.className.should.not.match(/\bopen\b/);
+  });
+
+  it('does not close when selection is prevented', function() {
+    let handleSelect = (event, selectEvent) => {
+      selectEvent.preventSelection();
+    };
+    let instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='Simple Dropdown' onSelect={handleSelect}>
+        <MenuItem eventKey='1'>Item 1</MenuItem>
+      </DropdownButton>
+    );
+    let node = React.findDOMNode(instance);
+    let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
+
+    let menuItem = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
+
+    ReactTestUtils.Simulate.click(buttonNode);
+    node.className.should.match(/\bopen\b/);
+    ReactTestUtils.Simulate.click(menuItem);
+
+    node.className.should.match(/\bopen\b/);
   });
 
   describe('PropType validation', function() {
@@ -193,8 +264,7 @@ describe('DropdownButton revisited', function() {
 
     it('when focused and closed sets focus on first menu item when the key "down" is pressed', function() {
       let instance = React.render(simpleDropdown, focusableContainer);
-      let node = React.findDOMNode(instance);
-      let buttonNode = React.findDOMNode(node.children[0]);
+      let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
 
       buttonNode.focus();
       ReactTestUtils.Simulate.keyDown(buttonNode, { keyCode: keycode('down') });
@@ -205,8 +275,7 @@ describe('DropdownButton revisited', function() {
 
     it('when focused and open sets focus on first menu item when the key "down" is pressed', function() {
       let instance = React.render(simpleDropdown, focusableContainer);
-      let node = React.findDOMNode(instance);
-      let buttonNode = React.findDOMNode(node.children[0]);
+      let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
 
       buttonNode.focus();
       ReactTestUtils.Simulate.click(buttonNode);
@@ -219,7 +288,7 @@ describe('DropdownButton revisited', function() {
     it('when focused and open does not toggle closed when the key "down" is pressed', function() {
       let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
       let node = React.findDOMNode(instance);
-      let buttonNode = React.findDOMNode(node.children[0]);
+      let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
 
       ReactTestUtils.Simulate.click(buttonNode);
       ReactTestUtils.Simulate.keyDown(buttonNode, { keyCode: keycode('down') });
@@ -230,8 +299,7 @@ describe('DropdownButton revisited', function() {
 
     it('when open and the key "esc" is pressed the menu is closed and focus is returned to the button', function() {
       let instance = React.render(simpleDropdown, focusableContainer);
-      let node = React.findDOMNode(instance);
-      let buttonNode = React.findDOMNode(node.children[0]);
+      let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
       let firstMenuItemAnchor = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0].getDOMNode();
 
       buttonNode.focus();
@@ -269,7 +337,7 @@ describe('DropdownButton revisited', function() {
     it('has aria-labelledby same id as toggle button', function() {
       let instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
       let node = React.findDOMNode(instance);
-      let buttonNode = node.children[0];
+      let buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
       let menuNode = node.children[1];
 
       buttonNode.getAttribute('id').should.equal(menuNode.getAttribute('aria-labelledby'));

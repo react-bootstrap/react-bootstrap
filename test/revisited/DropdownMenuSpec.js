@@ -7,10 +7,10 @@ import keycode from 'keycode';
 describe('DropdownMenu revisited', function() {
   let simpleMenu = (
     <DropdownMenu>
-      <MenuItem>Item 1</MenuItem>
-      <MenuItem>Item 2</MenuItem>
-      <MenuItem>Item 3</MenuItem>
-      <MenuItem>Item 4</MenuItem>
+      <MenuItem eventKey='1'>Item 1</MenuItem>
+      <MenuItem eventKey='2'>Item 2</MenuItem>
+      <MenuItem eventKey='3'>Item 3</MenuItem>
+      <MenuItem eventKey='4'>Item 4</MenuItem>
     </DropdownMenu>
   );
 
@@ -37,6 +37,32 @@ describe('DropdownMenu revisited', function() {
 
     node1.getAttribute('aria-labelledby').should.equal('herpa');
     node2.getAttribute('aria-labelledby').should.equal('derpa');
+  });
+
+  it('forwards onSelect handler to MenuItems', function(done) {
+    let selectedEvents = [];
+    let onSelect = (event, selectEvent) => {
+      selectedEvents.push(selectEvent.eventKey);
+
+      if (selectedEvents.length === 4) {
+        selectedEvents.should.eql(['1', '2', '3', '4']);
+        done();
+      }
+    };
+    let instance = ReactTestUtils.renderIntoDocument(
+      <DropdownMenu onSelect={onSelect}>
+        <MenuItem eventKey='1'>Item 1</MenuItem>
+        <MenuItem eventKey='2'>Item 2</MenuItem>
+        <MenuItem eventKey='3'>Item 3</MenuItem>
+        <MenuItem eventKey='4'>Item 4</MenuItem>
+      </DropdownMenu>
+    );
+
+    let menuItems = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
+
+    menuItems.forEach(item => {
+      ReactTestUtils.Simulate.click(item);
+    });
   });
 
   describe('focusable state', function() {
