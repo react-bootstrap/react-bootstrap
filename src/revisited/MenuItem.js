@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import createSelectedEvent from '../utils/createSelectedEvent';
 import CustomPropTypes from '../utils/CustomPropTypes';
 import SafeAnchor from '../SafeAnchor';
@@ -11,8 +12,12 @@ export default class MenuItem extends React.Component {
   }
 
   handleClick(event) {
-    if (!this.props.href) {
+    if (!this.props.href || this.props.disabled) {
       event.preventDefault();
+    }
+
+    if (this.props.disabled) {
+      return;
     }
 
     if (this.props.onSelect) {
@@ -33,8 +38,13 @@ export default class MenuItem extends React.Component {
       );
     }
 
+    const classes = {
+      disabled: this.props.disabled
+    };
+
     return (
-      <li role='presentation'>
+      <li role='presentation'
+        className={classnames(this.props.className, classes)}>
         <SafeAnchor
           role='menuitem'
           tabIndex='-1'
@@ -49,6 +59,7 @@ export default class MenuItem extends React.Component {
 }
 
 MenuItem.propTypes = {
+  disabled: React.PropTypes.bool,
   divider: CustomPropTypes.all([
     React.PropTypes.bool,
     function(props, propName, componentName) {

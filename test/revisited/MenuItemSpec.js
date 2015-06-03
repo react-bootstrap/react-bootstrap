@@ -68,6 +68,19 @@ describe('MenuItem revisited', function() {
     ReactTestUtils.Simulate.click(anchor);
   });
 
+  xit('click handling with onSelect prop (no eventKey)', function(done) {
+    //const handleSelect = (event, selectedEvent) => {
+      //selectedEvent.eventKey.should.equal('1');
+      //done();
+    //};
+    //const instance = ReactTestUtils.renderIntoDocument(
+      //<MenuItem onSelect={handleSelect} eventKey='1'>Item</MenuItem>
+    //);
+    //const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
+
+    //ReactTestUtils.Simulate.click(anchor);
+  });
+
   it('does not fire onSelect when divider is clicked', function(done) {
     const handleSelect = (event, selectedEvent) => {
       done(new Error('Should not invoke onSelect with divider flag applied'));
@@ -96,5 +109,20 @@ describe('MenuItem revisited', function() {
     ReactTestUtils.Simulate.click(li);
 
     setTimeout(done, 100);
+  });
+
+  it('disabled link', function() {
+    const handleSelect = (event, selectEvent) => {
+      throw new Error('Should not invoke onSelect event');
+    };
+    const instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem onSelect={handleSelect} disabled>Text</MenuItem>
+    );
+    const node = React.findDOMNode(instance);
+    const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
+
+    node.className.should.match(/\bdisabled\b/);
+
+    ReactTestUtils.Simulate.click(anchor);
   });
 });
