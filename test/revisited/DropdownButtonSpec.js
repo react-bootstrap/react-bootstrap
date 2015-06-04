@@ -27,7 +27,6 @@ describe('DropdownButton revisited', function() {
   );
 
   // TODO
-  it('does not render caret');
   it('works with dropup');
 
   it('renders div with dropdown class', function() {
@@ -88,6 +87,17 @@ describe('DropdownButton revisited', function() {
     const caretNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'caret').getDOMNode();
 
     caretNode.tagName.should.equal('SPAN');
+  });
+
+  it('does not render toggle button caret', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='Single child' noCaret>
+        <MenuItem>Item 1</MenuItem>
+      </DropdownButton>
+    );
+    const caretNode = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'caret');
+
+    caretNode.length.should.equal(0);
   });
 
   it('renders custom menu', function() {

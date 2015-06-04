@@ -8,6 +8,8 @@ import MenuItem from './MenuItem';
 import CustomPropTypes from '../utils/CustomPropTypes';
 import createChainedFunction from '../utils/createChainedFunction';
 
+const CARET = <span> <span className='caret' /></span>;
+
 export default class DropdownButton extends React.Component {
   constructor(props) {
     super(props);
@@ -98,6 +100,8 @@ export default class DropdownButton extends React.Component {
       labelledBy: id
     };
 
+    const caret = this.props.noCaret ? null : CARET;
+
     if (menu === undefined) {
       menu = (
         <DropdownMenu {...menuProps}>
@@ -120,7 +124,7 @@ export default class DropdownButton extends React.Component {
           tabIndex='0'
           aria-haspopup={true}
           aria-expanded={this.state.open}>
-          {title} <span className='caret'></span>
+          {title}{caret}
         </button>
         {menu}
       </div>
@@ -206,6 +210,8 @@ DropdownButton.propTypes = {
     titleRequired,
     singleMenuValidation
   ]),
+
+  noCaret: React.PropTypes.bool,
 
   pullRight: React.PropTypes.bool,
 
