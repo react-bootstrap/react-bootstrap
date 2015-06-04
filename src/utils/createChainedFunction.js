@@ -16,9 +16,9 @@ function createChainedFunction(one, two) {
   if (!hasOne) { return two; }
   if (!hasTwo) { return one; }
 
-  return function chainedFunction() {
-    one.apply(this, arguments);
-    two.apply(this, arguments);
+  return function chainedFunction(...args) {
+    one.apply(this, args);
+    two.apply(this, args);
   };
 }
 

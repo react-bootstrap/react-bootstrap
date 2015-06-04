@@ -6,12 +6,14 @@ import DropdownButtonTitle from './DropdownButtonTitle';
 import DropdownMenu from './DropdownMenu';
 import MenuItem from './MenuItem';
 import CustomPropTypes from '../utils/CustomPropTypes';
+import createChainedFunction from '../utils/createChainedFunction';
 
 export default class DropdownButton extends React.Component {
   constructor(props) {
     super(props);
 
     this.toggleOpen = this.toggleOpen.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleRequestClose = this.handleRequestClose.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
@@ -23,16 +25,24 @@ export default class DropdownButton extends React.Component {
     };
   }
 
-  toggleOpen(event) {
+  toggleOpen() {
     let open = !this.state.open;
     this.setState({open});
+  }
+
+  handleClick(event) {
+    if (event.defaultPrevented) {
+      return;
+    }
+
+    this.toggleOpen();
   }
 
   handleKeyDown(event) {
     switch(event.keyCode) {
       case keycode.codes.down:
         if (!this.state.open) {
-          this.toggleOpen(event);
+          this.toggleOpen();
         }
         if (this.refs.menu.focusNext) {
           this.refs.menu.focusNext();
@@ -63,10 +73,6 @@ export default class DropdownButton extends React.Component {
   }
 
   handleSelect(event, selectEvent) {
-    if (this.props.onSelect) {
-      this.props.onSelect(event, selectEvent);
-    }
-
     if (selectEvent.isSelectionPrevented()) {
       return;
     }
@@ -88,7 +94,7 @@ export default class DropdownButton extends React.Component {
       open: this.state.open,
       pullRight: this.props.pullRight,
       requestClose: this.handleRequestClose,
-      onSelect: this.handleSelect,
+      onSelect: createChainedFunction(this.props.onSelect, this.handleSelect),
       labelledBy: id
     };
 
@@ -107,7 +113,7 @@ export default class DropdownButton extends React.Component {
         <button
           ref='toggle-btn'
           className='btn btn-default dropdown-toggle'
-          onClick={this.toggleOpen}
+          onClick={createChainedFunction(this.props.onClick, this.handleClick)}
           onKeyDown={this.handleKeyDown}
           type='button'
           id={id}
@@ -203,5 +209,6 @@ DropdownButton.propTypes = {
 
   pullRight: React.PropTypes.bool,
 
+  onClick: React.PropTypes.func,
   onSelect: React.PropTypes.func
 };
