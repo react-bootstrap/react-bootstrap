@@ -68,7 +68,7 @@ export default class DropdownButton extends React.Component {
     if (event && event.type === 'keydown' && event.keyCode === keycode.codes.esc) {
       event.preventDefault();
       event.stopPropagation();
-      this.refs['toggle-btn'].getDOMNode().focus();
+      React.findDOMNode(this.refs['toggle-btn']).focus();
     }
   }
 
