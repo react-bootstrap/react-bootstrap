@@ -2,6 +2,16 @@ const handleSelect = (event, selectEvent) => {
   console.log(`SELECTED ${selectEvent.eventKey}`);
 };
 
+class CustomMenu extends React.Component {
+  render() {
+    return (
+      <ul className='dropdown-menu' style={{backgroundColor: 'red'}}>
+        {this.props.children}
+      </ul>
+    );
+  }
+}
+
 const buttonsInstance = (
   <div>
     <input placeholder='Before' type='text' />
@@ -15,6 +25,12 @@ const buttonsInstance = (
       <MenuItemRevisited eventKey='4'>Separated link</MenuItemRevisited>
     </DropdownButtonRevisited>
     <input placeholder='After' type='text' />
+    <DropdownButtonRevisited>
+      <DropdownButtonRevisited.Title>Custom Title</DropdownButtonRevisited.Title>
+      <CustomMenu>
+        <div>hello</div>
+      </CustomMenu>
+    </DropdownButtonRevisited>
   </div>
 );
 

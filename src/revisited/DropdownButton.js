@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 import keycode from 'keycode';
 import uuid from 'uuid';
 import DropdownButtonTitle from './DropdownButtonTitle';
 import DropdownMenu from './DropdownMenu';
+import MenuItem from './MenuItem';
+import CustomPropTypes from '../utils/CustomPropTypes';
 
 export default class DropdownButton extends React.Component {
   constructor(props) {
@@ -73,13 +75,31 @@ export default class DropdownButton extends React.Component {
   }
 
   render() {
-    let id = this.props.id || this.state.id;
-    let { title, children } = this.extractChildren();
+    const id = this.props.id || this.state.id;
+    let { title, menu, children } = this.extractChildren();
 
     const rootClasses = {
       dropdown: true,
       open: this.state.open
     };
+
+    const menuProps = {
+      ref: 'menu',
+      open: this.state.open,
+      requestClose: this.handleRequestClose,
+      onSelect: this.handleSelect,
+      labelledBy: id
+    };
+
+    if (menu === undefined) {
+      menu = (
+        <DropdownMenu {...menuProps}>
+          {children}
+        </DropdownMenu>
+      );
+    } else {
+      menu = cloneElement(menu, menuProps, menu.props.children);
+    }
 
     return (
       <div className={classNames(rootClasses)}>
@@ -95,14 +115,7 @@ export default class DropdownButton extends React.Component {
           aria-expanded={this.state.open}>
           {title} <span className='caret'></span>
         </button>
-        <DropdownMenu
-          ref='menu'
-          open={this.state.open}
-          requestClose={this.handleRequestClose}
-          onSelect={this.handleSelect}
-          labelledBy={id}>
-          {children}
-        </DropdownMenu>
+        {menu}
       </div>
     );
   }
@@ -110,10 +123,13 @@ export default class DropdownButton extends React.Component {
   extractChildren() {
     let title = this.props.title;
     let children = [];
+    let menu;
 
     React.Children.forEach(this.props.children, child => {
       if (child.type === DropdownButtonTitle) {
         title = title || child;
+      } else if (child.type === DropdownMenu || child.type !== MenuItem) {
+        menu = menu || child;
       } else {
         children.push(child);
       }
@@ -155,6 +171,22 @@ function titleRequired(props, propName, component) {
   }
 }
 
+function singleMenuValidation(props, propName, component) {
+  let menus = [];
+
+  if (props.children) {
+    if (props.children instanceof Array) {
+      menus = props.children.filter(child => child.type !== DropdownButton.Title && child.type !== MenuItem);
+    } else if(props.children.type === DropdownButton.Title) {
+      menus.push(props.children);
+    }
+  }
+
+  if (menus.length > 1) {
+    return new Error(`(children) ${component} - Only one menu permitted (Either DropdownMenu or a custom menu)`);
+  }
+}
+
 DropdownButton.propTypes = {
   id: React.PropTypes.oneOfType([
     React.PropTypes.string,
@@ -163,7 +195,10 @@ DropdownButton.propTypes = {
 
   title: titleRequired,
 
-  children: titleRequired,
+  children: CustomPropTypes.all([
+    titleRequired,
+    singleMenuValidation
+  ]),
 
   onSelect: React.PropTypes.func
 };
