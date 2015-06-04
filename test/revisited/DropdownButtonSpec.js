@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import DropdownButton from '../../src/revisited/DropdownButton';
-import DropdownButtonTitle from '../../src/revisited/DropdownButtonTitle';
 import MenuItem from '../../src/revisited/MenuItem';
 import keycode from 'keycode';
 
@@ -30,10 +29,10 @@ describe('DropdownButton revisited', function() {
     buttonNode.innerText.should.match(/Simple Dropdown/);
   });
 
-  it('renders title with DropdownButtonTitle', function() {
-    let instance = ReactTestUtils.renderIntoDocument(
+  it('renders title with DropdownButton.Title', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton>
-        <DropdownButtonTitle>Child Title</DropdownButtonTitle>
+        <DropdownButton.Title>Child Title</DropdownButton.Title>
         <MenuItem>Item 1</MenuItem>
         <MenuItem>Item 2</MenuItem>
         <MenuItem>Item 3</MenuItem>
@@ -197,9 +196,9 @@ describe('DropdownButton revisited', function() {
           DropdownButton.propTypes.title(props, type, 'DropdownButton');
         });
 
-        it('validates with single child of type DropdownButtonTitle', function() {
+        it('validates with single child of type DropdownButton.Title', function() {
           const title = {
-            type: DropdownButtonTitle
+            type: DropdownButton.Title
           };
           const props = {
             children: [
@@ -213,12 +212,12 @@ describe('DropdownButton revisited', function() {
           const props = { other: 'some title' };
 
           DropdownButton.propTypes.title(props, type, 'DropdownButton')
-            .message.should.match(/Must provide.*title.*or.*DropdownButtonTitle/);
+            .message.should.match(/Must provide.*title.*or.*DropdownButton\.Title/);
         });
 
-        it('validation fails with two DropdownButtonTitle children', function() {
+        it('validation fails with two DropdownButton.Title children', function() {
           const title = {
-            type: DropdownButtonTitle
+            type: DropdownButton.Title
           };
           const props = {
             children: [
@@ -228,12 +227,12 @@ describe('DropdownButton revisited', function() {
           };
 
           DropdownButton.propTypes.title(props, type, 'DropdownButton')
-            .message.should.match(/Should only use one DropdownButtonTitle/);
+            .message.should.match(/Should only use one DropdownButton\.Title/);
         });
 
-        it('validation fails with both title and DropdownButtonTitle', function() {
+        it('validation fails with both title and DropdownButton.Title', function() {
           const title = {
-            type: DropdownButtonTitle
+            type: DropdownButton.Title
           };
           const props = {
             title: 'some title',
@@ -243,7 +242,7 @@ describe('DropdownButton revisited', function() {
           };
 
           DropdownButton.propTypes.title(props, type, 'DropdownButton')
-            .message.should.match(/Must provide.*title.*or.*DropdownButtonTitle.*not both/);
+            .message.should.match(/Must provide.*title.*or.*DropdownButton\.Title.*not both/);
         });
       });
     });

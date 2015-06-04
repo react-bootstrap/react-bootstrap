@@ -27,7 +27,6 @@ export default class DropdownButton extends React.Component {
   }
 
   handleKeyDown(event) {
-    //console.log(`KEY DOWN ${event.key} [${event.keyCode}] ${event.target}`);
     switch(event.keyCode) {
       case keycode.codes.down:
         if (!this.state.open) {
@@ -122,10 +121,13 @@ export default class DropdownButton extends React.Component {
 
     return {
       title,
+      menu,
       children
     };
   }
 }
+
+DropdownButton.Title = DropdownButtonTitle;
 
 function titleRequired(props, propName, component) {
   let titles = [];
@@ -139,17 +141,17 @@ function titleRequired(props, propName, component) {
   }
 
   if (titles.length > 1) {
-    return new Error(`(title|children) ${component} - Should only use one DropdownButtonTitle child component, only the first DropdownButtonTitle will be used`);
+    return new Error(`(title|children) ${component} - Should only use one DropdownButton.Title child component, only the first DropdownButton.Title will be used`);
   }
 
   let title = titles[0];
 
   if (props.title !== undefined && title !== undefined) {
-    return new Error(`(title|children) ${component} - Must provide either a 'title' prop or a 'DropdownButtonTitle' child, not both.`);
+    return new Error(`(title|children) ${component} - Must provide either a 'title' prop or a 'DropdownButton.Title' child, not both.`);
   }
 
   if (props.title === undefined && title === undefined) {
-    return new Error(`(title|children) ${component} - Must provide either a 'title' prop or a 'DropdownButtonTitle' child`);
+    return new Error(`(title|children) ${component} - Must provide either a 'title' prop or a 'DropdownButton.Title' child`);
   }
 }
 

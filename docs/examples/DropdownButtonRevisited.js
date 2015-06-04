@@ -6,7 +6,7 @@ const buttonsInstance = (
   <div>
     <input placeholder='Before' type='text' />
     <DropdownButtonRevisited onSelect={handleSelect}>
-      <DropdownButtonTitleRevisited>Custom Title</DropdownButtonTitleRevisited>
+      <DropdownButtonRevisited.Title>Custom Title</DropdownButtonRevisited.Title>
       <MenuItemRevisited eventKey='1'>Action</MenuItemRevisited>
       <MenuItemRevisited header>Some Header</MenuItemRevisited>
       <MenuItemRevisited eventKey='2'>Another action</MenuItemRevisited>
