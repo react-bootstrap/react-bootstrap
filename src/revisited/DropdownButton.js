@@ -84,33 +84,14 @@ export default class DropdownButton extends React.Component {
 
   render() {
     const id = this.props.id || this.state.id;
-    let { title, menu, children } = this.extractChildren();
+    let { title, menu } = this.extractChildren(id);
 
     const rootClasses = {
       dropdown: true,
       open: this.state.open
     };
 
-    const menuProps = {
-      ref: 'menu',
-      open: this.state.open,
-      pullRight: this.props.pullRight,
-      requestClose: this.handleRequestClose,
-      onSelect: createChainedFunction(this.props.onSelect, this.handleSelect),
-      labelledBy: id
-    };
-
     const caret = this.props.noCaret ? null : CARET;
-
-    if (menu === undefined) {
-      menu = (
-        <DropdownMenu {...menuProps}>
-          {children}
-        </DropdownMenu>
-      );
-    } else {
-      menu = cloneElement(menu, menuProps, menu.props.children);
-    }
 
     return (
       <div className={classNames(rootClasses)}>
@@ -131,7 +112,7 @@ export default class DropdownButton extends React.Component {
     );
   }
 
-  extractChildren() {
+  extractChildren(id) {
     let title = this.props.title;
     let children = [];
     let menu;
@@ -146,10 +127,28 @@ export default class DropdownButton extends React.Component {
       }
     });
 
+    const menuProps = {
+      ref: 'menu',
+      open: this.state.open,
+      pullRight: this.props.pullRight,
+      requestClose: this.handleRequestClose,
+      onSelect: createChainedFunction(this.props.onSelect, this.handleSelect),
+      labelledBy: id
+    };
+
+    if (menu === undefined) {
+      menu = (
+        <DropdownMenu {...menuProps}>
+          {children}
+        </DropdownMenu>
+      );
+    } else {
+      menu = cloneElement(menu, menuProps, menu.props.children);
+    }
+
     return {
       title,
-      menu,
-      children
+      menu
     };
   }
 }
