@@ -5,7 +5,7 @@ import MenuItem from '../../src/revisited/MenuItem';
 import keycode from 'keycode';
 
 describe('DropdownMenu revisited', function() {
-  let simpleMenu = (
+  const simpleMenu = (
     <DropdownMenu>
       <MenuItem eventKey='1'>Item 1</MenuItem>
       <MenuItem eventKey='2'>Item 2</MenuItem>
@@ -15,33 +15,33 @@ describe('DropdownMenu revisited', function() {
   );
 
   it('renders ul with dropdown-menu class', function() {
-    let instance = ReactTestUtils.renderIntoDocument(simpleMenu);
-    let node = React.findDOMNode(instance);
+    const instance = ReactTestUtils.renderIntoDocument(simpleMenu);
+    const node = React.findDOMNode(instance);
 
     node.tagName.should.equal('UL');
     node.className.should.match(/\bdropdown-menu\b/);
   });
 
   it('has role="menu"', function() {
-    let instance = ReactTestUtils.renderIntoDocument(simpleMenu);
-    let node = React.findDOMNode(instance);
+    const instance = ReactTestUtils.renderIntoDocument(simpleMenu);
+    const node = React.findDOMNode(instance);
 
     node.getAttribute('role').should.equal('menu');
   });
 
   it('has aria-labelledby=<id>', function() {
-    let instance1 = ReactTestUtils.renderIntoDocument(<DropdownMenu labelledBy='herpa' />);
-    let instance2 = ReactTestUtils.renderIntoDocument(<DropdownMenu labelledBy='derpa' />);
-    let node1 = React.findDOMNode(instance1);
-    let node2 = React.findDOMNode(instance2);
+    const instance1 = ReactTestUtils.renderIntoDocument(<DropdownMenu labelledBy='herpa' />);
+    const instance2 = ReactTestUtils.renderIntoDocument(<DropdownMenu labelledBy='derpa' />);
+    const node1 = React.findDOMNode(instance1);
+    const node2 = React.findDOMNode(instance2);
 
     node1.getAttribute('aria-labelledby').should.equal('herpa');
     node2.getAttribute('aria-labelledby').should.equal('derpa');
   });
 
   it('forwards onSelect handler to MenuItems', function(done) {
-    let selectedEvents = [];
-    let onSelect = (event, selectEvent) => {
+    const selectedEvents = [];
+    const onSelect = (event, selectEvent) => {
       selectedEvents.push(selectEvent.eventKey);
 
       if (selectedEvents.length === 4) {
@@ -49,7 +49,7 @@ describe('DropdownMenu revisited', function() {
         done();
       }
     };
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <DropdownMenu onSelect={onSelect}>
         <MenuItem eventKey='1'>Item 1</MenuItem>
         <MenuItem eventKey='2'>Item 2</MenuItem>
@@ -58,11 +58,22 @@ describe('DropdownMenu revisited', function() {
       </DropdownMenu>
     );
 
-    let menuItems = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
+    const menuItems = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
 
     menuItems.forEach(item => {
       ReactTestUtils.Simulate.click(item);
     });
+  });
+
+  it('applies pull right', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownMenu pullRight>
+        <MenuItem>Item</MenuItem>
+      </DropdownMenu>
+    );
+    const node = React.findDOMNode(instance);
+
+    node.className.should.match(/\bdropdown-menu-right\b/);
   });
 
   describe('focusable state', function() {
@@ -79,8 +90,8 @@ describe('DropdownMenu revisited', function() {
     });
 
     it('clicking anything outside the menu will request close', function() {
-      let requestClose = sinon.stub();
-      let instance = React.render(
+      const requestClose = sinon.stub();
+      const instance = React.render(
         <div>
           <button>Something to click</button>
           <DropdownMenu requestClose={requestClose} open>
@@ -88,9 +99,9 @@ describe('DropdownMenu revisited', function() {
           </DropdownMenu>
         </div>, focusableContainer);
 
-      let button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
+      const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON').getDOMNode();
 
-      let evt = document.createEvent('MouseEvent');
+      const evt = document.createEvent('MouseEvent');
       evt.initMouseEvent('click', true, true);
       button.dispatchEvent(evt);
 
@@ -100,9 +111,9 @@ describe('DropdownMenu revisited', function() {
 
     describe('Keyboard Navigation', function() {
       it('sets focus on next menu item when the key "down" is pressed', function() {
-        let instance = React.render(simpleMenu, focusableContainer);
+        const instance = React.render(simpleMenu, focusableContainer);
 
-        let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
+        const items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
         items.length.should.equal(4);
         items[0].getDOMNode().focus();
 
@@ -113,9 +124,9 @@ describe('DropdownMenu revisited', function() {
       });
 
       it('with last item is focused when the key "down" is pressed first item gains focus', function() {
-        let instance = React.render(simpleMenu, focusableContainer);
+        const instance = React.render(simpleMenu, focusableContainer);
 
-        let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
+        const items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
         items.length.should.equal(4);
         items[3].getDOMNode().focus();
 
@@ -124,9 +135,9 @@ describe('DropdownMenu revisited', function() {
       });
 
       it('sets focus on previous menu item when the key "up" is pressed', function() {
-        let instance = React.render(simpleMenu, focusableContainer);
+        const instance = React.render(simpleMenu, focusableContainer);
 
-        let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
+        const items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
         items.length.should.equal(4);
         items[3].getDOMNode().focus();
 
@@ -137,9 +148,9 @@ describe('DropdownMenu revisited', function() {
       });
 
       it('with first item focused when the key "up" is pressed last item gains focus', function() {
-        let instance = React.render(simpleMenu, focusableContainer);
+        const instance = React.render(simpleMenu, focusableContainer);
 
-        let items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
+        const items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
         items.length.should.equal(4);
         items[0].getDOMNode().focus();
 
@@ -149,13 +160,13 @@ describe('DropdownMenu revisited', function() {
 
       ['esc', 'tab'].forEach(key => {
         it(`when the key "${key}" is pressed the requestClose prop is invoked with the originating event`, function() {
-          let requestClose = sinon.spy();
-          let instance = React.render(
+          const requestClose = sinon.spy();
+          const instance = React.render(
             <DropdownMenu requestClose={requestClose}>
               <MenuItem>Item</MenuItem>
             </DropdownMenu>, focusableContainer);
 
-          let item = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A').getDOMNode();
+          const item = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A').getDOMNode();
 
           ReactTestUtils.Simulate.keyDown(item, { keyCode: keycode(key) });
 

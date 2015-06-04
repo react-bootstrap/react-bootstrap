@@ -2,6 +2,7 @@ import React from 'react';
 import domUtils from '../utils/domUtils';
 import EventListener from '../utils/EventListener';
 import keycode from 'keycode';
+import classNames from 'classnames';
 
 class DropdownMenu extends React.Component {
   constructor(props) {
@@ -113,15 +114,19 @@ class DropdownMenu extends React.Component {
   }
 
   render() {
-    let children = React.Children.map(this.props.children, child => {
+    const children = React.Children.map(this.props.children, child => {
       return React.cloneElement(child, {
         onKeyDown: this.handleKeyDown,
         onSelect: this.props.onSelect
       }, child.props.children);
     });
+    const classes = {
+      'dropdown-menu': true,
+      'dropdown-menu-right': this.props.pullRight
+    };
 
     return (
-      <ul className='dropdown-menu' role='menu' aria-labelledby={this.props.labelledBy}>
+      <ul className={classNames(classes)} role='menu' aria-labelledby={this.props.labelledBy}>
         {children}
       </ul>
     );
@@ -130,6 +135,7 @@ class DropdownMenu extends React.Component {
 
 DropdownMenu.propTypes = {
   open: React.PropTypes.bool,
+  pullRight: React.PropTypes.bool,
   requestClose: React.PropTypes.func,
   labelledBy: React.PropTypes.oneOfType([
     React.PropTypes.string,

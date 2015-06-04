@@ -29,7 +29,6 @@ describe('DropdownButton revisited', function() {
   // TODO
   it('does not render caret');
   it('works with dropup');
-  it('pulls to the right');
 
   it('renders div with dropdown class', function() {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
@@ -134,6 +133,19 @@ describe('DropdownButton revisited', function() {
     );
 
     ReactTestUtils.scryRenderedComponentsWithType(instance, DropdownMenu).length.should.equal(1);
+  });
+
+  it('forwards pullRight to menu', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton pullRight title='blah'>
+        <CustomMenu>
+          <div>Test</div>
+        </CustomMenu>
+      </DropdownButton>
+    );
+    const menu = ReactTestUtils.findRenderedComponentWithType(instance, CustomMenu);
+
+    menu.props.pullRight.should.be.true;
   });
 
   // NOTE: The onClick event handler is invoked for both the Enter and Space

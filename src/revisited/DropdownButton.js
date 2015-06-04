@@ -86,6 +86,7 @@ export default class DropdownButton extends React.Component {
     const menuProps = {
       ref: 'menu',
       open: this.state.open,
+      pullRight: this.props.pullRight,
       requestClose: this.handleRequestClose,
       onSelect: this.handleSelect,
       labelledBy: id
@@ -199,6 +200,8 @@ DropdownButton.propTypes = {
     titleRequired,
     singleMenuValidation
   ]),
+
+  pullRight: React.PropTypes.bool,
 
   onSelect: React.PropTypes.func
 };
