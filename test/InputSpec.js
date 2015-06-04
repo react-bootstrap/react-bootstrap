@@ -28,7 +28,7 @@ describe('Input', function () {
 
     let select = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'select');
     assert.ok(select);
-    assert.equal(select.getDOMNode().children.length, 2);
+    assert.equal(React.findDOMNode(select).children.length, 2);
     assert.equal(instance.getValue(), 'v');
   });
 
@@ -78,7 +78,7 @@ describe('Input', function () {
       <Input type="text" defaultValue="v" />
     );
 
-    let node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input').getDOMNode();
+    let node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'));
     assert.equal(node.getAttribute('type'), 'text');
     assert.equal(instance.getValue(), 'v');
   });
@@ -99,7 +99,7 @@ describe('Input', function () {
       <Input label="Label" labelClassName="label" id="input" />
     );
 
-    let node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'label').getDOMNode();
+    let node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'label'));
     assert.ok(node);
     assert.include(node.className, 'label');
     assert.equal(node.textContent, 'Label');
@@ -300,7 +300,7 @@ describe('Input', function () {
       <Input type="text" disabled={true} />
     );
 
-    let node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input').getDOMNode();
+    let node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'));
     assert.isNotNull(node.getAttribute('disabled'));
   });
 });

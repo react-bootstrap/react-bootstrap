@@ -38,12 +38,12 @@ describe('Modal', function () {
     let instance = ReactTestUtils.renderIntoDocument(
         <Container />
     );
-    assert.ok(instance.getDOMNode().className.match(/\modal-open\b/));
+    assert.ok(React.findDOMNode(instance).className.match(/\modal-open\b/));
 
-    let backdrop = instance.getDOMNode().getElementsByClassName('modal-backdrop')[0];
+    let backdrop = React.findDOMNode(instance).getElementsByClassName('modal-backdrop')[0];
     ReactTestUtils.Simulate.click(backdrop);
     setTimeout(function(){
-      assert.equal(instance.getDOMNode().className.length, 0);
+      assert.equal(React.findDOMNode(instance).className.length, 0);
       done();
     }, 0);
 
@@ -57,7 +57,7 @@ describe('Modal', function () {
       </Modal>
     );
 
-    let backdrop = instance.getDOMNode().getElementsByClassName('modal-backdrop')[0];
+    let backdrop = React.findDOMNode(instance).getElementsByClassName('modal-backdrop')[0];
     ReactTestUtils.Simulate.click(backdrop);
   });
 
@@ -69,7 +69,7 @@ describe('Modal', function () {
       </Modal>
     );
 
-    let backdrop = instance.getDOMNode().getElementsByClassName('modal')[0];
+    let backdrop = React.findDOMNode(instance).getElementsByClassName('modal')[0];
     ReactTestUtils.Simulate.click(backdrop);
   });
 
@@ -81,7 +81,7 @@ describe('Modal', function () {
       </Modal>
     );
 
-    let dialog = instance.getDOMNode().getElementsByClassName('modal-dialog')[0];
+    let dialog = React.findDOMNode(instance).getElementsByClassName('modal-dialog')[0];
     assert.ok(dialog.className.match(/\bmodal-sm\b/));
   });
 
@@ -147,11 +147,11 @@ describe('Modal', function () {
 
       setTimeout(function () {
         // modal should be focused when opened
-        let modal = instance.getDOMNode().getElementsByClassName('modal')[0];
+        let modal = React.findDOMNode(instance).getElementsByClassName('modal')[0];
         document.activeElement.should.equal(modal);
 
         // close the modal
-        let backdrop = instance.getDOMNode().getElementsByClassName('modal-backdrop')[0];
+        let backdrop = React.findDOMNode(instance).getElementsByClassName('modal-backdrop')[0];
         ReactTestUtils.Simulate.click(backdrop);
       }, 0);
     });

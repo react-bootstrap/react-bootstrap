@@ -7,7 +7,7 @@ describe('Thumbnail', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Thumbnail href="#" src="#" alt="test" />
     );
-    assert.ok(instance.getDOMNode().className.match(/\bthumbnail\b/));
+    assert.ok(React.findDOMNode(instance).className.match(/\bthumbnail\b/));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });
 
@@ -22,8 +22,8 @@ describe('Thumbnail', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Thumbnail src="#" alt="test" />
     );
-    assert.ok(instance.getDOMNode().className.match(/\bthumbnail\b/));
-    assert.equal(instance.getDOMNode().nodeName, 'DIV');
+    assert.ok(React.findDOMNode(instance).className.match(/\bthumbnail\b/));
+    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
   });
 
     it('Should have an image', function () {
@@ -42,6 +42,6 @@ describe('Thumbnail', function () {
         </div>
       </Thumbnail>
     );
-    assert.ok(instance.getDOMNode().lastChild.className.match(/\bcaption\b/));
+    assert.ok(React.findDOMNode(instance).lastChild.className.match(/\bcaption\b/));
   });
 });

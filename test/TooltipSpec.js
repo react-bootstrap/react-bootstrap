@@ -19,6 +19,6 @@ describe('Tooltip', function () {
         <strong>Tooltip Content</strong>
       </Tooltip>
     );
-    assert.equal(instance.getDOMNode().className.match(/\bfade\b/), null, 'The fade class should not be present');
+    assert.equal(React.findDOMNode(instance).className.match(/\bfade\b/), null, 'The fade class should not be present');
   });
 });

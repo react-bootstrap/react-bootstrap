@@ -8,7 +8,7 @@ describe('Col', function () {
       <Col xsOffset={0} smOffset={0} mdOffset={0} lgOffset={0} />
     );
 
-    let instanceClassName = instance.getDOMNode().className;
+    let instanceClassName = React.findDOMNode(instance).className;
     assert.ok(instanceClassName.match(/\bcol-xs-offset-0\b/));
     assert.ok(instanceClassName.match(/\bcol-sm-offset-0\b/));
     assert.ok(instanceClassName.match(/\bcol-md-offset-0\b/));
@@ -20,7 +20,7 @@ describe('Col', function () {
       <Col xsPull={0} smPull={0} mdPull={0} lgPull={0} />
     );
 
-    let instanceClassName = instance.getDOMNode().className;
+    let instanceClassName = React.findDOMNode(instance).className;
     assert.ok(instanceClassName.match(/\bcol-xs-pull-0\b/));
     assert.ok(instanceClassName.match(/\bcol-sm-pull-0\b/));
     assert.ok(instanceClassName.match(/\bcol-md-pull-0\b/));
@@ -32,7 +32,7 @@ describe('Col', function () {
       <Col xsPush={0} smPush={0} mdPush={0} lgPush={0} />
     );
 
-    let instanceClassName = instance.getDOMNode().className;
+    let instanceClassName = React.findDOMNode(instance).className;
     assert.ok(instanceClassName.match(/\bcol-xs-push-0\b/));
     assert.ok(instanceClassName.match(/\bcol-sm-push-0\b/));
     assert.ok(instanceClassName.match(/\bcol-md-push-0\b/));
