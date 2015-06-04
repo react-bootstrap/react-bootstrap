@@ -10,7 +10,8 @@ const MenuItem = React.createClass({
     target:    React.PropTypes.string,
     onSelect:  React.PropTypes.func,
     eventKey:  React.PropTypes.any,
-    active:    React.PropTypes.bool
+    active:    React.PropTypes.bool,
+    disabled:  React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -21,6 +22,10 @@ const MenuItem = React.createClass({
   },
 
   handleClick(e) {
+    if (this.props.disabled) {
+      e.preventDefault();
+      return;
+    }
     if (this.props.onSelect) {
       e.preventDefault();
       this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
@@ -39,7 +44,8 @@ const MenuItem = React.createClass({
     let classes = {
         'dropdown-header': this.props.header,
         'divider': this.props.divider,
-        'active': this.props.active
+        'active': this.props.active,
+        'disabled': this.props.disabled
       };
 
     let children = null;
