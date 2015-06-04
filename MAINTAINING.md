@@ -51,7 +51,7 @@ helping out.
 
 GitHub by default does not publicly state that you are a member of the
 organization. Please feel free to change that setting for yourself so others
-will know who's helping out. That can be configured on [organization
+will know who's helping out. That can be configured on the [organization
 list](https://github.com/orgs/react-bootstrap/people) page.
 
 Being a maintainer is not an obligation. You can help when you have time and be
@@ -77,7 +77,7 @@ Example usages of the release script:
 $ ./tools/release patch
 $ ./tools/release minor
 $ ./tools/release major
-$ ./tools/release minor --pre beta
+$ ./tools/release minor --preid beta
 ```
 
 Note that the above commands will bump the [semver](http://semver.org) version
