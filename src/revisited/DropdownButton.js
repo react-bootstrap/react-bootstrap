@@ -181,19 +181,47 @@ function titleRequired(props, propName, component) {
   }
 }
 
+function childrenAsArray(children) {
+  if (children === undefined) {
+    return [];
+  }
+
+  if (children instanceof Array) {
+    return children;
+  }
+
+
+  return [children];
+}
+
 function singleMenuValidation(props, propName, component) {
+  let children = childrenAsArray(props.children);
   let menus = [];
 
-  if (props.children) {
-    if (props.children instanceof Array) {
-      menus = props.children.filter(child => child.type !== DropdownButton.Title && child.type !== MenuItem);
-    } else if(props.children.type === DropdownButton.Title) {
-      menus.push(props.children);
-    }
-  }
+  menus = children.filter(child => child.type !== DropdownButton.Title && child.type !== MenuItem);
 
   if (menus.length > 1) {
     return new Error(`(children) ${component} - Only one menu permitted (Either DropdownMenu or a custom menu)`);
+  }
+}
+
+function menuWithMenuItemSiblings(props, propName, component) {
+  let children = childrenAsArray(props.children);
+  let items = false;
+  let menu = false;
+
+  for (let i = 0; i < children.length; i++) {
+    let child = children[i];
+
+    if (child.type === MenuItem) {
+      items = true;
+    } else if (child.type !== DropdownButton.Title) {
+      menu = true;
+    }
+
+    if (items && menu) {
+      return new Error(`(children) ${component} - MenuItems with a Menu are not allowed. MenuItems outside the Menu will be ignored.`);
+    }
   }
 }
 
@@ -207,7 +235,8 @@ DropdownButton.propTypes = {
 
   children: CustomPropTypes.all([
     titleRequired,
-    singleMenuValidation
+    singleMenuValidation,
+    menuWithMenuItemSiblings
   ]),
 
   noCaret: React.PropTypes.bool,

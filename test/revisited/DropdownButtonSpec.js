@@ -145,6 +145,22 @@ describe('DropdownButton revisited', function() {
     ReactTestUtils.scryRenderedComponentsWithType(instance, DropdownMenu).length.should.equal(1);
   });
 
+  it('children outside explicit menu are ignored', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='Single child'>
+        <MenuItem>Ignored</MenuItem>
+        <DropdownMenu>
+          <MenuItem>Item 1</MenuItem>
+        </DropdownMenu>
+      </DropdownButton>
+    );
+
+    ReactTestUtils.scryRenderedComponentsWithType(instance, DropdownMenu).length.should.equal(1);
+    ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem).length.should.equal(1);
+
+    shouldWarn('MenuItems with a Menu are not allowed');
+  });
+
   it('forwards pullRight to menu', function() {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton pullRight title='blah'>
