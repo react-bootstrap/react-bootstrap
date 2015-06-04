@@ -8,7 +8,7 @@ describe('Pager', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pager/>
     );
-    assert.equal(instance.getDOMNode().nodeName, 'UL');
+    assert.equal(React.findDOMNode(instance).nodeName, 'UL');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pager'));
   });
 
@@ -18,8 +18,8 @@ describe('Pager', function () {
         <PageItem href="#">Top</PageItem>
       </Pager>
     );
-    assert.equal(instance.getDOMNode().children.length, 1);
-    assert.equal(instance.getDOMNode().children[0].nodeName, 'LI');
+    assert.equal(React.findDOMNode(instance).children.length, 1);
+    assert.equal(React.findDOMNode(instance).children[0].nodeName, 'LI');
   });
 
   it('Should allow multiple "PageItem" as child elements', function () {

@@ -9,7 +9,7 @@ describe('ButtonInput', () =>{
       <ButtonInput value="button" bsStyle="danger" wrapperClassName="test" />
     );
 
-    const node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input').getDOMNode();
+    const node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'));
     assert.equal(node.getAttribute('type'), 'button');
     assert.equal(node.getAttribute('class'), 'btn btn-danger');
   });
@@ -19,14 +19,14 @@ describe('ButtonInput', () =>{
       <ButtonInput value="button" type="reset" />
     );
 
-    let node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input').getDOMNode();
+    let node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'));
     assert.equal(node.getAttribute('type'), 'reset');
 
     instance = ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" type="submit" />
     );
 
-    node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input').getDOMNode();
+    node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'));
     assert.equal(node.getAttribute('type'), 'submit');
   });
 

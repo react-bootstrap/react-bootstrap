@@ -8,7 +8,7 @@ describe('ListGroupItem', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem>Text</ListGroupItem>
     );
-    assert.equal(instance.getDOMNode().nodeName, 'SPAN');
+    assert.equal(React.findDOMNode(instance).nodeName, 'SPAN');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
   });
 
@@ -16,7 +16,7 @@ describe('ListGroupItem', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem href='#test'>Anchor</ListGroupItem>
     );
-    assert.equal(instance.getDOMNode().nodeName, 'A');
+    assert.equal(React.findDOMNode(instance).nodeName, 'A');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
   });
 
@@ -24,7 +24,7 @@ describe('ListGroupItem', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem listItem>Item 1</ListGroupItem>
     );
-    assert.equal(instance.getDOMNode().nodeName, 'LI');
+    assert.equal(React.findDOMNode(instance).nodeName, 'LI');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
   });
 
@@ -53,24 +53,28 @@ describe('ListGroupItem', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem header='Heading'>Item text</ListGroupItem>
     );
-    assert.equal(instance.getDOMNode().firstChild.nodeName, 'H4');
-    assert.equal(instance.getDOMNode().firstChild.innerText, 'Heading');
-    assert.ok(instance.getDOMNode().firstChild.className.match(/\blist-group-item-heading\b/));
-    assert.equal(instance.getDOMNode().lastChild.nodeName, 'P');
-    assert.equal(instance.getDOMNode().lastChild.innerText, 'Item text');
-    assert.ok(instance.getDOMNode().lastChild.className.match(/\blist-group-item-text\b/));
+
+    let node = React.findDOMNode(instance);
+    assert.equal(node.firstChild.nodeName, 'H4');
+    assert.equal(node.firstChild.innerText, 'Heading');
+    assert.ok(node.firstChild.className.match(/\blist-group-item-heading\b/));
+    assert.equal(node.lastChild.nodeName, 'P');
+    assert.equal(node.lastChild.innerText, 'Item text');
+    assert.ok(node.lastChild.className.match(/\blist-group-item-text\b/));
   });
 
   it('Should support "header" prop as a ReactComponent', function () {
-    let header = <h2>Heading</h2>,
-        instance = ReactTestUtils.renderIntoDocument(
-          <ListGroupItem header={header}>Item text</ListGroupItem>
-        );
-    assert.equal(instance.getDOMNode().firstChild.nodeName, 'H2');
-    assert.equal(instance.getDOMNode().firstChild.innerText, 'Heading');
-    assert.ok(instance.getDOMNode().firstChild.className.match(/\blist-group-item-heading\b/));
-    assert.equal(instance.getDOMNode().lastChild.nodeName, 'P');
-    assert.equal(instance.getDOMNode().lastChild.innerText, 'Item text');
-    assert.ok(instance.getDOMNode().lastChild.className.match(/\blist-group-item-text\b/));
+    let header = <h2>Heading</h2>;
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroupItem header={header}>Item text</ListGroupItem>
+    );
+
+    let node = React.findDOMNode(instance);
+    assert.equal(node.firstChild.nodeName, 'H2');
+    assert.equal(node.firstChild.innerText, 'Heading');
+    assert.ok(node.firstChild.className.match(/\blist-group-item-heading\b/));
+    assert.equal(node.lastChild.nodeName, 'P');
+    assert.equal(node.lastChild.innerText, 'Item text');
+    assert.ok(node.lastChild.className.match(/\blist-group-item-text\b/));
   });
 });

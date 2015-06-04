@@ -25,10 +25,10 @@ describe('FadeMixin', function () {
     let child = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span');
 
     setTimeout(function(){
-      assert.ok(instance.getDOMNode().className.match(/\bin\b/));
-      assert.ok(instance.getDOMNode().className.match(/\bfade\b/));
-      assert.ok(child.getDOMNode().className.match(/\bin\b/));
-      assert.ok(child.getDOMNode().className.match(/\bfade\b/));
+      assert.ok(React.findDOMNode(instance).className.match(/\bin\b/));
+      assert.ok(React.findDOMNode(instance).className.match(/\bfade\b/));
+      assert.ok(React.findDOMNode(child).className.match(/\bin\b/));
+      assert.ok(React.findDOMNode(child).className.match(/\bfade\b/));
       done();
     }, 25);
   });

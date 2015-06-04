@@ -27,7 +27,7 @@ describe('NavItem', function () {
         Item content
       </NavItem>
     );
-    let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a').getDOMNode();
+    let linkElement = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
     assert.ok(linkElement.href.indexOf('/some/unique-thing/') >= 0);
     assert.equal(linkElement.title, 'content');
   });
@@ -39,8 +39,8 @@ describe('NavItem', function () {
       </NavItem>
     );
 
-    assert.ok(!instance.getDOMNode().hasAttribute('href'));
-    assert.ok(!instance.getDOMNode().hasAttribute('title'));
+    assert.ok(!React.findDOMNode(instance).hasAttribute('href'));
+    assert.ok(!React.findDOMNode(instance).hasAttribute('title'));
   });
 
   it('Should call `onSelect` when item is selected', function (done) {
@@ -72,7 +72,7 @@ describe('NavItem', function () {
     let instance = ReactTestUtils.renderIntoDocument(
           <NavItem href="/some/unique-thing/" target="_blank">Item content</NavItem>
         );
-    let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a').getDOMNode();
+    let linkElement = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
     assert.equal(linkElement.target, '_blank');
   });
 
@@ -94,7 +94,7 @@ describe('NavItem', function () {
           <NavItem href="#" target="_blank">Item content</NavItem>
         );
 
-    let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a').getDOMNode();
+    let linkElement = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
     assert(linkElement.outerHTML.match('role="button"'), true);
   });
 
@@ -103,7 +103,7 @@ describe('NavItem', function () {
           <NavItem href="/path/to/stuff" target="_blank">Item content</NavItem>
         );
 
-    let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a').getDOMNode();
+    let linkElement = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
     assert.equal(linkElement.outerHTML.match('role="button"'), null);
   });
 });

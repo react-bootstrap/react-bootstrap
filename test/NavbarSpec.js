@@ -9,7 +9,7 @@ describe('Nav', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar />
     );
-    let nav = instance.getDOMNode();
+    let nav = React.findDOMNode(instance);
     assert.equal(nav.nodeName, 'NAV');
     assert.ok(nav.className.match(/\bnavbar\b/));
     assert.ok(nav.getAttribute('role'), 'navigation');
@@ -54,14 +54,14 @@ describe('Nav', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar role="banner"/>
     );
-    assert.ok(instance.getDOMNode().getAttribute('role'), 'banner');
+    assert.ok(React.findDOMNode(instance).getAttribute('role'), 'banner');
   });
 
   it('Should override node class', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar componentClass={'header'}/>
     );
-    assert.ok(instance.getDOMNode().nodeName, 'HEADER');
+    assert.ok(React.findDOMNode(instance).nodeName, 'HEADER');
   });
 
   it('Should add header with brand', function () {
@@ -76,7 +76,7 @@ describe('Nav', function () {
     let brand = ReactTestUtils.findRenderedDOMComponentWithClass(header, 'navbar-brand');
 
     assert.ok(brand);
-    assert.equal(brand.getDOMNode().innerText, 'Brand');
+    assert.equal(React.findDOMNode(brand).innerText, 'Brand');
   });
 
   it('Should add header with brand component', function () {
@@ -91,8 +91,8 @@ describe('Nav', function () {
     let brand = ReactTestUtils.findRenderedDOMComponentWithClass(header, 'navbar-brand');
 
     assert.ok(brand);
-    assert.equal(brand.getDOMNode().nodeName, 'A');
-    assert.equal(brand.getDOMNode().innerText, 'Brand');
+    assert.equal(React.findDOMNode(brand).nodeName, 'A');
+    assert.equal(React.findDOMNode(brand).innerText, 'Brand');
   });
 
   it('Should pass navbar prop to navs', function () {
@@ -112,14 +112,14 @@ describe('Nav', function () {
       <Nav />
     );
 
-    let navNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav').getDOMNode();
+    let navNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav'));
     assert.ok(navNode);
     assert.equal(navNode.nodeName, 'UL');
     assert.equal(navNode.parentNode.nodeName, 'NAV');
 
     instance.setProps({navbar: true});
 
-    navNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav').getDOMNode();
+    navNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav'));
     assert.ok(navNode);
     assert.equal(navNode.nodeName, 'UL');
     assert.equal(navNode.parentNode.nodeName, 'DIV');

@@ -7,7 +7,7 @@ describe('Glyphicon', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Glyphicon glyph='star' />
     );
-    assert.ok(instance.getDOMNode().className.match(/\bglyphicon\b/));
-    assert.ok(instance.getDOMNode().className.match(/\bglyphicon-star\b/));
+    assert.ok(React.findDOMNode(instance).className.match(/\bglyphicon\b/));
+    assert.ok(React.findDOMNode(instance).className.match(/\bglyphicon-star\b/));
   });
 });
