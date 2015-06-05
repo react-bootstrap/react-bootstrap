@@ -112,4 +112,22 @@ describe('Carousel', function () {
     assert.equal(backButtons.length, 0);
     assert.equal(nextButtons.length, 1);
   });
+
+  it('Should allow user to specify a previous and next icon', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Carousel activeIndex={1} controls={true} wrap={false}
+        prevIcon={<span className='ficon ficon-left'/>}
+        nextIcon={<span className='ficon ficon-right'/>}>
+        <CarouselItem ref="item1">Item 1 content</CarouselItem>
+        <CarouselItem ref="item2">Item 2 content</CarouselItem>
+        <CarouselItem ref="item3">Item 3 content</CarouselItem>
+      </Carousel>
+    );
+
+    let backButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'ficon-left');
+    let nextButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'ficon-right');
+
+    assert.equal(backButtons.length, 1);
+    assert.equal(nextButtons.length, 1);
+  });
 });
