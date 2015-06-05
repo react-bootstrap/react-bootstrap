@@ -6,7 +6,7 @@ import childrenValueValidation from './utils/childrenValueInputValidation';
 
 class ButtonInput extends InputBase {
   renderFormGroup(children) {
-    let {bsStyle, value, ...other} = this.props; // eslint-disable-line object-shorthand
+    let {bsStyle, value, ...other} = this.props; // eslint-disable-line object-shorthand, no-unused-vars
     return <FormGroup {...other}>{children}</FormGroup>;
   }
 
