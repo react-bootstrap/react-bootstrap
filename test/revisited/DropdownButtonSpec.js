@@ -26,15 +26,26 @@ describe('DropdownButton revisited', function() {
     </DropdownButton>
   );
 
-  // TODO
-  it('works with dropup');
-
   it('renders div with dropdown class', function() {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     const node = React.findDOMNode(instance);
 
     node.tagName.should.equal('DIV');
     node.className.should.match(/\bdropdown\b/);
+    node.className.should.not.match(/\bdropup\b/);
+  });
+
+  it('renders div with dropup class', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='Dropup' dropup>
+        <MenuItem>Item</MenuItem>
+      </DropdownButton>
+    );
+    const node = React.findDOMNode(instance);
+
+    node.tagName.should.equal('DIV');
+    node.className.should.not.match(/\bdropdown\b/);
+    node.className.should.match(/\bdropup\b/);
   });
 
   it('renders title prop', function() {

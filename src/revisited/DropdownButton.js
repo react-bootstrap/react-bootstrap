@@ -87,7 +87,8 @@ export default class DropdownButton extends React.Component {
     let { title, menu } = this.extractChildren(id);
 
     const rootClasses = {
-      dropdown: true,
+      dropdown: !this.props.dropup,
+      dropup: this.props.dropup,
       open: this.state.open
     };
 
@@ -226,6 +227,8 @@ function menuWithMenuItemSiblings(props, propName, component) {
 }
 
 DropdownButton.propTypes = {
+  dropup: React.PropTypes.bool,
+
   id: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
