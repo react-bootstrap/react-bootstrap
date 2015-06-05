@@ -1,3 +1,6 @@
+/* eslint react/prop-types: [1, {ignore: ["className", "bsStyle"]}]*/
+/* BootstrapMixin contains `bsStyle` type validation */
+
 import React, { cloneElement, PropTypes } from 'react';
 import Interpolate from './Interpolate';
 import BootstrapMixin from './BootstrapMixin';
@@ -14,7 +17,9 @@ const ProgressBar = React.createClass({
     srOnly: PropTypes.bool,
     striped: PropTypes.bool,
     active: PropTypes.bool,
-    children: onlyProgressBar
+    children: onlyProgressBar,
+    interpolateClass: PropTypes.node,
+    isChild: PropTypes.bool
   },
 
   mixins: [BootstrapMixin],
