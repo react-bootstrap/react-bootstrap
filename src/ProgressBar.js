@@ -1,4 +1,7 @@
-import React, { cloneElement } from 'react';
+/* eslint react/prop-types: [1, {ignore: ["className", "bsStyle"]}]*/
+/* BootstrapMixin contains `bsStyle` type validation */
+
+import React, { cloneElement, PropTypes } from 'react';
 import Interpolate from './Interpolate';
 import BootstrapMixin from './BootstrapMixin';
 import classNames from 'classnames';
@@ -7,13 +10,16 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const ProgressBar = React.createClass({
   propTypes: {
-    min: React.PropTypes.number,
-    now: React.PropTypes.number,
-    max: React.PropTypes.number,
-    label: React.PropTypes.node,
-    srOnly: React.PropTypes.bool,
-    striped: React.PropTypes.bool,
-    active: React.PropTypes.bool
+    min: PropTypes.number,
+    now: PropTypes.number,
+    max: PropTypes.number,
+    label: PropTypes.node,
+    srOnly: PropTypes.bool,
+    striped: PropTypes.bool,
+    active: PropTypes.bool,
+    children: onlyProgressBar,
+    interpolateClass: PropTypes.node,
+    isChild: PropTypes.bool
   },
 
   mixins: [BootstrapMixin],
@@ -27,41 +33,34 @@ const ProgressBar = React.createClass({
   },
 
   getPercentage(now, min, max) {
-    let roundPrecision = 1000;
+    const roundPrecision = 1000;
     return Math.round(((now - min) / (max - min) * 100) * roundPrecision) / roundPrecision;
   },
 
   render() {
-    let classes = {
-        progress: true
-      };
-
-    if (this.props.active) {
-      classes['progress-striped'] = true;
-      classes.active = true;
-    } else if (this.props.striped) {
-      classes['progress-striped'] = true;
+    if (this.props.isChild) {
+      return this.renderProgressBar();
     }
 
-    if (!ValidComponentChildren.hasValidComponent(this.props.children)) {
-      if (!this.props.isChild) {
-        return (
-          <div {...this.props} className={classNames(this.props.className, classes)}>
-            {this.renderProgressBar()}
-          </div>
-        );
-      } else {
-        return (
-          this.renderProgressBar()
-        );
-      }
+    const classes = {
+      active: this.props.active,
+      progress: true,
+      'progress-striped': this.props.active || this.props.striped
+    };
+
+    let content;
+
+    if (this.props.children) {
+      content = ValidComponentChildren.map(this.props.children, this.renderChildBar);
     } else {
-      return (
-        <div {...this.props} className={classNames(this.props.className, classes)}>
-          {ValidComponentChildren.map(this.props.children, this.renderChildBar)}
-        </div>
-      );
+      content = this.renderProgressBar();
     }
+
+    return (
+      <div {...this.props} className={classNames(this.props.className, classes)}>
+        {content}
+      </div>
+    );
   },
 
   renderChildBar(child, index) {
@@ -72,28 +71,33 @@ const ProgressBar = React.createClass({
   },
 
   renderProgressBar() {
-    let percentage = this.getPercentage(
-        this.props.now,
-        this.props.min,
-        this.props.max
-      );
+    const percentage = this.getPercentage(
+      this.props.now,
+      this.props.min,
+      this.props.max
+    );
 
     let label;
 
     if (typeof this.props.label === 'string') {
       label = this.renderLabel(percentage);
-    } else if (this.props.label) {
+    } else {
       label = this.props.label;
     }
 
     if (this.props.srOnly) {
-      label = this.renderScreenReaderOnlyLabel(label);
+      label = (
+        <span className="sr-only">
+          {label}
+        </span>
+      );
     }
 
-    let classes = this.getBsClassSet();
-
     return (
-      <div {...this.props} className={classNames(this.props.className, classes)} role="progressbar"
+      <div
+        {...this.props}
+        className={classNames(this.props.className, this.getBsClassSet())}
+        role="progressbar"
         style={{width: percentage + '%'}}
         aria-valuenow={this.props.now}
         aria-valuemin={this.props.min}
@@ -104,7 +108,7 @@ const ProgressBar = React.createClass({
   },
 
   renderLabel(percentage) {
-    let InterpolateClass = this.props.interpolateClass || Interpolate;
+    const InterpolateClass = this.props.interpolateClass || Interpolate;
 
     return (
       <InterpolateClass
@@ -116,15 +120,25 @@ const ProgressBar = React.createClass({
         {this.props.label}
       </InterpolateClass>
     );
-  },
-
-  renderScreenReaderOnlyLabel(label) {
-    return (
-      <span className="sr-only">
-        {label}
-      </span>
-    );
   }
 });
+
+/**
+ * Custom propTypes checker
+ */
+function onlyProgressBar(props, propName, componentName) {
+  if (props[propName]) {
+    let error, childIdentifier;
+
+    React.Children.forEach(props[propName], (child) => {
+      if (child.type !== ProgressBar) {
+        childIdentifier = (child.type.displayName ? child.type.displayName : child.type);
+        error = new Error(`Children of ${componentName} can contain only ProgressBar components. Found ${childIdentifier}`);
+      }
+    });
+
+    return error;
+  }
+}
 
 export default ProgressBar;

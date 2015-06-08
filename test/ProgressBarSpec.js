@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ProgressBar from '../src/ProgressBar';
+import {shouldWarn} from './helpers';
 
 const getProgressBarNode = function (wrapper) {
   return React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(wrapper, 'progress-bar'));
@@ -181,4 +182,15 @@ describe('ProgressBar', function () {
     assert.equal(bar2.style.width, '30%');
   });
 
+  it('allows only ProgressBar in children', function () {
+    ReactTestUtils.renderIntoDocument(
+      <ProgressBar>
+        <ProgressBar key={1} />
+        <div />
+        <ProgressBar key={2} />
+      </ProgressBar>
+    );
+
+    shouldWarn('Failed propType');
+  });
 });
