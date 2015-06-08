@@ -35,6 +35,7 @@ import ModalTrigger from './ModalTrigger';
 import OverlayTrigger from './OverlayTrigger';
 import OverlayMixin from './OverlayMixin';
 import PageHeader from './PageHeader';
+import Pagination from './Pagination';
 import Panel from './Panel';
 import PanelGroup from './PanelGroup';
 import PageItem from './PageItem';
@@ -95,6 +96,7 @@ export default {
   PanelGroup,
   PageItem,
   Pager,
+  Pagination,
   Popover,
   ProgressBar,
   Row,

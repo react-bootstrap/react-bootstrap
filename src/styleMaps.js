@@ -13,6 +13,7 @@ const styleMaps = {
     'list-group-item': 'list-group-item',
     'panel': 'panel',
     'panel-group': 'panel-group',
+    'pagination': 'pagination',
     'progress-bar': 'progress-bar',
     'nav': 'nav',
     'navbar': 'navbar',
