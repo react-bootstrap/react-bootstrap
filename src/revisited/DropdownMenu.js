@@ -52,8 +52,8 @@ class DropdownMenu extends React.Component {
 
   handleDocumentClick(event) {
     let inTree = domUtils.isNodeInTree(event.target, React.findDOMNode(this));
-    if (this.props.requestClose && !inTree) {
-      this.props.requestClose();
+    if (this.props.onRequestClose && !inTree) {
+      this.props.onRequestClose();
     }
   }
 
@@ -69,7 +69,7 @@ class DropdownMenu extends React.Component {
         break;
       case keycode.codes.esc:
       case keycode.codes.tab:
-        this.props.requestClose(event);
+        this.props.onRequestClose(event);
         break;
     }
   }
@@ -144,7 +144,7 @@ class DropdownMenu extends React.Component {
 DropdownMenu.propTypes = {
   open: React.PropTypes.bool,
   pullRight: React.PropTypes.bool,
-  requestClose: React.PropTypes.func,
+  onRequestClose: React.PropTypes.func,
   labelledBy: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number

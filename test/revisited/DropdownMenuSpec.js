@@ -94,7 +94,7 @@ describe('DropdownMenu revisited', function() {
       const instance = React.render(
         <div>
           <button>Something to click</button>
-          <DropdownMenu requestClose={requestClose} open>
+          <DropdownMenu onRequestClose={requestClose} open>
             <MenuItem>Item</MenuItem>
           </DropdownMenu>
         </div>, focusableContainer);
@@ -162,7 +162,7 @@ describe('DropdownMenu revisited', function() {
         it(`when the key "${key}" is pressed the requestClose prop is invoked with the originating event`, function() {
           const requestClose = sinon.spy();
           const instance = React.render(
-            <DropdownMenu requestClose={requestClose}>
+            <DropdownMenu onRequestClose={requestClose}>
               <MenuItem>Item</MenuItem>
             </DropdownMenu>, focusableContainer);
 

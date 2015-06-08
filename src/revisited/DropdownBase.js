@@ -119,14 +119,28 @@ export default class DropdownBase extends React.Component {
         <DropdownMenu
           {...menuProps}
           pullRight={this.props.pullRight}
-          requestClose={this.handleRequestClose}
-          onSelect={createChainedFunction(this.props.onSelect, this.handleSelect)}>
+          onRequestClose={createChainedFunction(
+            this.props.onRequestClose,
+            this.handleRequestClose
+          )}
+          onSelect={createChainedFunction(
+            this.props.onSelect,
+            this.handleSelect
+          )}>
           {children}
         </DropdownMenu>
       );
     } else {
-      menuProps.requestClose = createChainedFunction(menu.props.handleRequestClose, this.handleRequestClose);
-      menuProps.onSelect = createChainedFunction(menu.props.onSelect, this.props.onSelect, this.handleSelect);
+      menuProps.onRequestClose = createChainedFunction(
+        menu.props.onRequestClose,
+        this.props.onRequestClose,
+        this.handleRequestClose
+      );
+      menuProps.onSelect = createChainedFunction(
+        menu.props.onSelect,
+        this.props.onSelect,
+        this.handleSelect
+      );
       menu = cloneElement(menu, menuProps, menu.props.children);
     }
 
@@ -144,14 +158,28 @@ export default class DropdownBase extends React.Component {
       toggle = (
         <DropdownToggle
           {...toggleProps}
-          onClick={createChainedFunction(this.props.onClick, this.handleClick)}
-          onKeyDown={this.handleKeyDown}
+          onClick={createChainedFunction(
+            this.props.onClick,
+            this.handleClick
+          )}
+          onKeyDown={createChainedFunction(
+            this.props.handleKeyDown,
+            this.handleKeyDown
+          )}
           noCaret={this.props.noCaret}
           title={this.props.title} />
       );
     } else {
-      toggleProps.onClick = createChainedFunction(toggle.props.onClick, this.props.onClick, this.handleClick);
-      toggleProps.onKeyDown = createChainedFunction(toggle.props.handleKeyDown, this.handleKeyDown);
+      toggleProps.onClick = createChainedFunction(
+        toggle.props.onClick,
+        this.props.onClick,
+        this.handleClick
+      );
+      toggleProps.onKeyDown = createChainedFunction(
+        toggle.props.handleKeyDown,
+        this.props.handleKeyDown,
+        this.handleKeyDown
+      );
       toggle = cloneElement(toggle, toggleProps, toggle.props.children);
     }
 
@@ -251,6 +279,7 @@ DropdownBase.propTypes = {
 
   pullRight: React.PropTypes.bool,
 
+  onRequestClose: React.PropTypes.func,
   onClick: React.PropTypes.func,
   onSelect: React.PropTypes.func
 };
