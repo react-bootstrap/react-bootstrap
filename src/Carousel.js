@@ -19,8 +19,8 @@ const Carousel = React.createClass({
     activeIndex: React.PropTypes.number,
     defaultActiveIndex: React.PropTypes.number,
     direction: React.PropTypes.oneOf(['prev', 'next']),
-    prevIcon: React.PropTypes.node.isRequired,
-    nextIcon: React.PropTypes.node.isRequired
+    prevIcon: React.PropTypes.node,
+    nextIcon: React.PropTypes.node
   },
 
   getDefaultProps() {
