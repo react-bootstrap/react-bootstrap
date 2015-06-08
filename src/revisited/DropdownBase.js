@@ -151,7 +151,8 @@ export default class DropdownBase extends React.Component {
     let toggleProps = {
       id,
       ref: TOGGLE_REF,
-      open: this.state.open
+      open: this.state.open,
+      bsStyle: this.props.bsStyle
     };
 
     if (toggle === undefined) {

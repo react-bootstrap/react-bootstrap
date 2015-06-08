@@ -184,6 +184,28 @@ describe('DropdownButton revisited', function() {
     menu.props.pullRight.should.be.true;
   });
 
+  it('renders bsSize', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='blah' bsSize='small'>
+        <MenuItem>Item 1</MenuItem>
+      </DropdownButton>
+    );
+    const node = React.findDOMNode(instance);
+
+    node.className.should.match(/\bbtn-group-sm\b/);
+  });
+
+  it('renders bsStyle', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='blah' bsStyle='success'>
+        <MenuItem>Item 1</MenuItem>
+      </DropdownButton>
+    );
+    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+
+    buttonNode.className.should.match(/\bbtn-success\b/);
+  });
+
   // NOTE: The onClick event handler is invoked for both the Enter and Space
   // keys as well since the component is a button. I cannot figure out how to
   // get ReactTestUtils to simulate such though.
