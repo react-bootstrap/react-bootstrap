@@ -34,7 +34,7 @@ const Pagination = React.createClass({
 
   renderPageButtons() {
     let pageButtons = [];
-    let startPage, endPage, hasHiddenPagesBefore, hasHiddenPagesAfter;
+    let startPage, endPage, hasHiddenPagesAfter;
     let {
       maxButtons,
       activePage,
@@ -149,11 +149,10 @@ const Pagination = React.createClass({
   },
 
   render() {
-    let classes = this.getBsClassSet();
     return (
       <ul
         {...this.props}
-        className={classNames(this.props.className, classes)}>
+        className={classNames(this.props.className, this.getBsClassSet())}>
         {this.renderFirst()}
         {this.renderPrev()}
         {this.renderPageButtons()}
