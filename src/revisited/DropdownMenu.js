@@ -115,12 +115,19 @@ class DropdownMenu extends React.Component {
   }
 
   render() {
-    const children = React.Children.map(this.props.children, child => {
+    const items = React.Children.map(this.props.children, child => {
+      let {
+        children,
+        onKeyDown,
+        onSelect
+      } = child.props || {};
+
       return React.cloneElement(child, {
-        onKeyDown: this.handleKeyDown,
-        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect)
-      }, child.props.children);
+        onKeyDown: createChainedFunction(onKeyDown, this.handleKeyDown),
+        onSelect: createChainedFunction(onSelect, this.props.onSelect)
+      }, children);
     });
+
     const classes = {
       'dropdown-menu': true,
       'dropdown-menu-right': this.props.pullRight
@@ -128,7 +135,7 @@ class DropdownMenu extends React.Component {
 
     return (
       <ul className={classNames(classes)} role='menu' aria-labelledby={this.props.labelledBy}>
-        {children}
+        {items}
       </ul>
     );
   }

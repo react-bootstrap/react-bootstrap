@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import DropdownButtonTitle from '../../src/revisited/DropdownButtonTitle';
+import DropdownTitle from '../../src/revisited/DropdownTitle';
 
-describe('DropdownButtonTitle', function() {
+describe('DropdownTitle', function() {
   it('renders single child string with wrapper', function() {
-    const title = <DropdownButtonTitle>Basic text</DropdownButtonTitle>;
+    const title = <DropdownTitle>Basic text</DropdownTitle>;
     const instance = ReactTestUtils.renderIntoDocument(title);
     const node = React.findDOMNode(instance);
 
@@ -12,7 +12,7 @@ describe('DropdownButtonTitle', function() {
   });
 
   it('renders single child component with no wrapper', function() {
-    const title = <DropdownButtonTitle><h1>Basic text</h1></DropdownButtonTitle>;
+    const title = <DropdownTitle><h1>Basic text</h1></DropdownTitle>;
     const instance = ReactTestUtils.renderIntoDocument(title);
     const node = React.findDOMNode(instance);
 
@@ -20,7 +20,7 @@ describe('DropdownButtonTitle', function() {
   });
 
   it('renders single child component, and className with wrapper', function() {
-    const title = <DropdownButtonTitle className='herpa derpa'><h1>Basic text</h1></DropdownButtonTitle>;
+    const title = <DropdownTitle className='herpa derpa'><h1>Basic text</h1></DropdownTitle>;
     const instance = ReactTestUtils.renderIntoDocument(title);
     const node = React.findDOMNode(instance);
 
