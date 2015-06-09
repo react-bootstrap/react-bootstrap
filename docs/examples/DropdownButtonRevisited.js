@@ -15,22 +15,24 @@ class CustomMenu extends React.Component {
 const buttonsInstance = (
   <div>
     <input placeholder='Before' type='text' />
-    <DropdownButtonRevisited onSelect={handleSelect}>
-      <DropdownButtonRevisited.Toggle>Custom Title</DropdownButtonRevisited.Toggle>
-      <MenuItemRevisited eventKey='1'>Action</MenuItemRevisited>
-      <MenuItemRevisited header>Some Header</MenuItemRevisited>
-      <MenuItemRevisited eventKey='2'>Another action</MenuItemRevisited>
-      <MenuItemRevisited eventKey='3'>Something else here</MenuItemRevisited>
-      <MenuItemRevisited divider />
-      <MenuItemRevisited eventKey='4'>Separated link</MenuItemRevisited>
-    </DropdownButtonRevisited>
+    <ButtonToolbar>
+      <DropdownButtonRevisited onSelect={handleSelect}>
+        <DropdownButtonRevisited.Toggle>Custom Title</DropdownButtonRevisited.Toggle>
+        <MenuItemRevisited eventKey='1'>Action</MenuItemRevisited>
+        <MenuItemRevisited header>Some Header</MenuItemRevisited>
+        <MenuItemRevisited eventKey='2'>Another action</MenuItemRevisited>
+        <MenuItemRevisited eventKey='3'>Something else here</MenuItemRevisited>
+        <MenuItemRevisited divider />
+        <MenuItemRevisited eventKey='4'>Separated link</MenuItemRevisited>
+      </DropdownButtonRevisited>
+      <DropdownButtonRevisited>
+        <DropdownButtonRevisited.Toggle>Custom Title</DropdownButtonRevisited.Toggle>
+        <CustomMenu>
+          <div>hello</div>
+        </CustomMenu>
+      </DropdownButtonRevisited>
+    </ButtonToolbar>
     <input placeholder='After' type='text' />
-    <DropdownButtonRevisited>
-      <DropdownButtonRevisited.Toggle>Custom Title</DropdownButtonRevisited.Toggle>
-      <CustomMenu>
-        <div>hello</div>
-      </CustomMenu>
-    </DropdownButtonRevisited>
   </div>
 );
 
