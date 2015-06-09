@@ -42,7 +42,7 @@ describe('PanelGroup', function () {
     assert.notOk(panel.state.collapsing);
 
     ReactTestUtils.Simulate.select(
-      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'changeme').getDOMNode()
+      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'changeme')
     );
 
     assert.notOk(panel.state.collapsing);

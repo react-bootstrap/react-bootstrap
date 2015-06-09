@@ -39,6 +39,7 @@
     "PageHeader",
     "PageItem",
     "Pager",
+    "Pagination",
     "Panel",
     "PanelGroup",
     "Popover",

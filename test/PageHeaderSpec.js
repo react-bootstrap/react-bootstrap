@@ -18,7 +18,7 @@ describe('PageHeader', function () {
         Content
       </PageHeader>
     );
-    assert.ok(instance.getDOMNode().className.match(/\bpage-header\b/));
+    assert.ok(React.findDOMNode(instance).className.match(/\bpage-header\b/));
   });
 
 });

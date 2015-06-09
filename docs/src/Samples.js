@@ -14,7 +14,7 @@ export default {
   ButtonGroupNested:             require('fs').readFileSync(__dirname + '/../examples/ButtonGroupNested.js', 'utf8'),
   ButtonGroupVertical:           require('fs').readFileSync(__dirname + '/../examples/ButtonGroupVertical.js', 'utf8'),
   ButtonGroupJustified:          require('fs').readFileSync(__dirname + '/../examples/ButtonGroupJustified.js', 'utf8'),
-  ButtonGroupBlock:          require('fs').readFileSync(__dirname + '/../examples/ButtonGroupBlock.js', 'utf8'),
+  ButtonGroupBlock:              require('fs').readFileSync(__dirname + '/../examples/ButtonGroupBlock.js', 'utf8'),
   DropdownButtonBasic:           require('fs').readFileSync(__dirname + '/../examples/DropdownButtonBasic.js', 'utf8'),
   SplitButtonBasic:              require('fs').readFileSync(__dirname + '/../examples/SplitButtonBasic.js', 'utf8'),
   DropdownButtonSizes:           require('fs').readFileSync(__dirname + '/../examples/DropdownButtonSizes.js', 'utf8'),
@@ -65,6 +65,8 @@ export default {
   PagerDefault:                  require('fs').readFileSync(__dirname + '/../examples/PagerDefault.js', 'utf8'),
   PagerAligned:                  require('fs').readFileSync(__dirname + '/../examples/PagerAligned.js', 'utf8'),
   PagerDisabled:                 require('fs').readFileSync(__dirname + '/../examples/PagerDisabled.js', 'utf8'),
+  PaginationBasic:               require('fs').readFileSync(__dirname + '/../examples/PaginationBasic.js', 'utf8'),
+  PaginationAdvanced:            require('fs').readFileSync(__dirname + '/../examples/PaginationAdvanced.js', 'utf8'),
   AlertBasic:                    require('fs').readFileSync(__dirname + '/../examples/AlertBasic.js', 'utf8'),
   AlertDismissable:              require('fs').readFileSync(__dirname + '/../examples/AlertDismissable.js', 'utf8'),
   AlertAutoDismissable:          require('fs').readFileSync(__dirname + '/../examples/AlertAutoDismissable.js', 'utf8'),
@@ -96,5 +98,6 @@ export default {
   InputSizes:                    require('fs').readFileSync(__dirname + '/../examples/InputSizes.js', 'utf8'),
   InputValidation:               require('fs').readFileSync(__dirname + '/../examples/InputValidation.js', 'utf8'),
   InputHorizontal:               require('fs').readFileSync(__dirname + '/../examples/InputHorizontal.js', 'utf8'),
-  InputWrapper:                  require('fs').readFileSync(__dirname + '/../examples/InputWrapper.js', 'utf8')
+  InputWrapper:                  require('fs').readFileSync(__dirname + '/../examples/InputWrapper.js', 'utf8'),
+  MenuItem:                      require('fs').readFileSync(__dirname + '/../examples/MenuItem.js', 'utf8')
 };

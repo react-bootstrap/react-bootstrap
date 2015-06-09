@@ -3,10 +3,13 @@
 [Bootstrap 3][bootstrap] components built with [React][react]
 
 [![Travis Build Status][build-badge]][build]
-[![NPM version][npm-badge]][npm]
-[![Bower version][bower-badge]][bower]
+[![Build status][appveyor-badge]][appveyor]
+
 [![HuBoard][huboard-badge]][huboard]
 [![Gitter][gitter-badge]][gitter]
+
+[![NPM version][npm-badge]][npm]
+[![Bower version][bower-badge]][bower]
 
 [![Dependency Status][deps-badge]][deps]
 [![devDependency Status][dev-deps-badge]][dev-deps]
@@ -73,4 +76,4 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [huboard]: https://huboard.com/react-bootstrap/react-bootstrap
 
 [appveyor-badge]: https://ci.appveyor.com/api/projects/status/ylitpyo6n5yq1s6i/branch/master?svg=true
-[appveyor]: https://ci.appveyor.com/project/mtscout6/react-bootstrap/branch/master
+[appveyor]: https://ci.appveyor.com/project/react-bootstrap/react-bootstrap/branch/master

@@ -18,7 +18,7 @@ describe('DropdownMenu', function () {
 
     let instance = ReactTestUtils.renderIntoDocument(<Parent/>);
 
-    let node = instance.getDOMNode();
+    let node = React.findDOMNode(instance);
 
     assert.ok(node.className.match(/\bdropdown-menu\b/));
     assert.equal(node.nodeName, 'UL');
@@ -37,7 +37,7 @@ describe('DropdownMenu', function () {
       </DropdownMenu>
     );
 
-    let node = instance.getDOMNode();
+    let node = React.findDOMNode(instance);
     assert.ok(node.className.match(/\bnew-fancy-class\b/));
   });
 
@@ -101,7 +101,7 @@ describe('DropdownMenu', function () {
     let menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
     let evt = document.createEvent('HTMLEvents');
     evt.initEvent('click', true, true);
-    ReactTestUtils.findRenderedDOMComponentWithTag(menuItems[1], 'a').getDOMNode()
+    React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(menuItems[1], 'a'))
       .dispatchEvent(evt);
   });
 });

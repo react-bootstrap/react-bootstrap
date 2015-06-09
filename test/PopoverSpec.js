@@ -21,6 +21,6 @@ describe('Popover', function () {
         <strong>Popover Content</strong>
       </Popover>
     );
-    assert.equal(instance.getDOMNode().className.match(/\bfade\b/), null, 'The fade class should not be present');
+    assert.equal(React.findDOMNode(instance).className.match(/\bfade\b/), null, 'The fade class should not be present');
   });
 });

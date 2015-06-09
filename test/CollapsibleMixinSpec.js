@@ -12,7 +12,7 @@ describe('CollapsibleMixin', function () {
       mixins: [CollapsibleMixin],
 
       getCollapsibleDOMNode(){
-        return this.refs.panel.getDOMNode();
+        return React.findDOMNode(this.refs.panel);
       },
 
       getCollapsibleDimensionValue(){

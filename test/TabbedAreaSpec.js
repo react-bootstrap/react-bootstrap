@@ -82,8 +82,8 @@ describe('TabbedArea', function () {
 
     let panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
 
-    assert.ok(panes[0].getDOMNode().className.match(/\bcustom\b/));
-    assert.equal(panes[0].getDOMNode().id, 'pane0id');
+    assert.ok(React.findDOMNode(panes[0]).className.match(/\bcustom\b/));
+    assert.equal(React.findDOMNode(panes[0]).id, 'pane0id');
   });
 
   it('Should show the correct initial pane', function () {
@@ -194,7 +194,7 @@ describe('TabbedArea', function () {
     let tabPane = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
 
     assert.equal(tabPane.length, 2);
-    assert.equal(tabPane[1].getDOMNode().getAttribute('class').match(/pull-right/)[0], 'pull-right');
+    assert.equal(React.findDOMNode(tabPane[1]).getAttribute('class').match(/pull-right/)[0], 'pull-right');
   });
 
   it('Should pass disabled to NavItem', function () {

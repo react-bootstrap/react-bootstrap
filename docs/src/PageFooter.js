@@ -1,6 +1,12 @@
 import React from 'react';
 import packageJSON from '../../package.json';
 
+let version = packageJSON.version;
+
+if (/docs/.test(version)) {
+  version = version.split('-')[0];
+}
+
 const PageHeader = React.createClass({
   render() {
     return (
@@ -36,7 +42,7 @@ const PageHeader = React.createClass({
             </div>
             <p>Code licensed under <a href='https://github.com/react-bootstrap/react-bootstrap/blob/master/LICENSE' target='_blank'>MIT</a>.</p>
             <ul className='bs-docs-footer-links muted'>
-              <li>Currently v{packageJSON.version}</li>
+              <li>Currently v{version}</li>
               <li>·</li>
               <li><a href='https://github.com/react-bootstrap/react-bootstrap/'>GitHub</a></li>
               <li>·</li>
