@@ -4,24 +4,6 @@ import EventListener from './utils/EventListener';
 
 // TODO: Merge this logic with dropdown logic once #526 is done.
 
-/**
- * Checks whether a node is within
- * a root nodes tree
- *
- * @param {DOMElement} node
- * @param {DOMElement} root
- * @returns {boolean}
- */
-function isNodeInRoot(node, root) {
-  while (node) {
-    if (node === root) {
-      return true;
-    }
-    node = node.parentNode;
-  }
-
-  return false;
-}
 
 export default class RootCloseWrapper extends React.Component {
   constructor(props) {
@@ -44,7 +26,7 @@ export default class RootCloseWrapper extends React.Component {
     // If the click originated from within this component, don't do anything.
     // e.srcElement is required for IE8 as e.target is undefined
     let target = e.target || e.srcElement;
-    if (isNodeInRoot(target, React.findDOMNode(this))) {
+    if (domUtils.contains(React.findDOMNode(this), target)) {
       return;
     }
 
