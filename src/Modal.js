@@ -11,7 +11,46 @@ import EventListener from './utils/EventListener';
 // - Add `modal-body` div if only one child passed in that doesn't already have it
 // - Tests
 
+/**
+ * Gets the correct clientHeight of the modal container
+ * when the body/window/document you need to use the docElement clientHeight
+ * @param  {HTMLElement} container
+ * @param  {ReactElement|HTMLElement} context
+ * @return {Number}
+ */
+function containerClientHeight(container, context) {
+  let doc = domUtils.ownerDocument(context);
+
+  return (container === doc.body || container === doc.documentElement)
+      ? doc.documentElement.clientHeight
+      : container.clientHeight;
+}
+
+function getContainer(context){
+  return (context.props.container && React.findDOMNode(context.props.container)) ||
+    domUtils.ownerDocument(context).body;
+}
+
+
+if ( domUtils.canUseDom) {
+  let scrollDiv = document.createElement('div');
+
+  scrollDiv.style.position = 'absolute';
+  scrollDiv.style.top = '-9999px';
+  scrollDiv.style.width = '50px';
+  scrollDiv.style.height = '50px';
+  scrollDiv.style.overflow = 'scroll';
+
+  document.body.appendChild(scrollDiv);
+
+  scrollbarSize = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+
+  document.body.removeChild(scrollDiv);
+  scrollDiv = null;
+}
+
 const Modal = React.createClass({
+
   mixins: [BootstrapMixin, FadeMixin],
 
   propTypes: {
@@ -35,8 +74,10 @@ const Modal = React.createClass({
   },
 
   render() {
-    let modalStyle = {display: 'block'};
+    let state = this.state;
+    let modalStyle = { ...state.dialogStyles, display: 'block'};
     let dialogClasses = this.getBsClassSet();
+
     delete dialogClasses.modal;
     dialogClasses['modal-dialog'] = true;
 
@@ -119,30 +160,47 @@ const Modal = React.createClass({
   },
 
   componentDidMount() {
-    this._onDocumentKeyupListener =
-      EventListener.listen(domUtils.ownerDocument(this), 'keyup', this.handleDocumentKeyUp);
+    const doc = domUtils.ownerDocument(this);
+    const win = domUtils.ownerWindow(this);
 
-    let container = (this.props.container && React.findDOMNode(this.props.container)) ||
-          domUtils.ownerDocument(this).body;
+    this._onDocumentKeyupListener =
+      EventListener.listen(doc, 'keyup', this.handleDocumentKeyUp);
+
+    this._onWindowResizeListener =
+        EventListener.listen(win, 'resize', this.handleWindowResize);
+
+    let container = getContainer(this);
+
     container.className += container.className.length ? ' modal-open' : 'modal-open';
 
-    this.focusModalContent();
+    this._containerIsOverflowing = container.scrollHeight > containerClientHeight(container, this);
 
     if (this.props.backdrop) {
       this.iosClickHack();
     }
+
+    this.setState(this._getStyles() //eslint-disable-line react/no-did-mount-set-state
+      , () => this.focusModalContent());
   },
 
   componentDidUpdate(prevProps) {
     if (this.props.backdrop && this.props.backdrop !== prevProps.backdrop) {
       this.iosClickHack();
+      this.setState(this._getStyles()); //eslint-disable-line react/no-did-update-set-state
+    }
+
+    if (this.props.container !== prevProps.container) {
+      let container = getContainer(this);
+      this._containerIsOverflowing = container.scrollHeight > containerClientHeight(container, this);
     }
   },
 
   componentWillUnmount() {
     this._onDocumentKeyupListener.remove();
-    let container = (this.props.container && React.findDOMNode(this.props.container)) ||
-          domUtils.ownerDocument(this).body;
+    this._onWindowResizeListener.remove();
+
+    let container = getContainer(this);
+
     container.className = container.className.replace(/ ?modal-open/, '');
 
     this.restoreLastFocus();
@@ -162,8 +220,12 @@ const Modal = React.createClass({
     }
   },
 
+  handleWindowResize() {
+    this.setState(this._getStyles());
+  },
+
   focusModalContent () {
-    this.lastFocus = domUtils.ownerDocument(this).activeElement;
+    this.lastFocus = domUtils.activeElement(this);
     let modalContent = React.findDOMNode(this.refs.modal);
     modalContent.focus();
   },
@@ -173,6 +235,23 @@ const Modal = React.createClass({
       this.lastFocus.focus();
       this.lastFocus = null;
     }
+  },
+
+  _getStyles() {
+    if ( !domUtils.canUseDom ) { return {}; }
+
+    let node = React.findDOMNode(this.refs.modal)
+      , scrollHt = node.scrollHeight
+      , container = getContainer(this)
+      , containerIsOverflowing = this._containerIsOverflowing
+      , modalIsOverflowing = scrollHt > containerClientHeight(container, this);
+
+    return {
+      dialogStyles: {
+        paddingRight: containerIsOverflowing && !modalIsOverflowing ? scrollbarSize : void 0,
+        paddingLeft:  !containerIsOverflowing && modalIsOverflowing ? scrollbarSize : void 0
+      }
+    };
   }
 });
 
