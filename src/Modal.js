@@ -207,6 +207,12 @@ const Modal = React.createClass({
 
     this._containerIsOverflowing = container.scrollHeight > containerClientHeight(container, this);
 
+    this._originalPadding = container.style.paddingRight;
+
+    if (this._containerIsOverflowing) {
+      container.style.paddingRight = parseInt(this._originalPadding || 0, 10) + scrollbarSize + 'px';
+    }
+
     if (this.props.backdrop) {
       this.iosClickHack();
     }
@@ -236,6 +242,8 @@ const Modal = React.createClass({
     }
 
     let container = getContainer(this);
+
+    container.style.paddingRight = this._originalPadding;
 
     container.className = container.className.replace(/ ?modal-open/, '');
 
