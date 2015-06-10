@@ -1,4 +1,5 @@
 import React from 'react';
+import createChainedFunction from './utils/createChainedFunction';
 
 /**
  * Note: This is intended as a stop-gap for accessibility concerns that the
@@ -16,17 +17,13 @@ export default class SafeAnchor extends React.Component {
     if (this.props.href === undefined) {
       event.preventDefault();
     }
-
-    if (this.props.onClick) {
-      this.props.onClick(event);
-    }
   }
 
   render() {
     return (
       <a role={this.props.href ? undefined : 'button'}
         {...this.props}
-        onClick={this.handleClick}
+        onClick={createChainedFunction(this.props.onClick, this.handleClick)}
         href={this.props.href || ''}/>
     );
   }
