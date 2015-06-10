@@ -1,6 +1,5 @@
 import React, { cloneElement } from 'react';
 import keycode from 'keycode';
-import uuid from 'uuid';
 import DropdownToggle from './DropdownToggle';
 import DropdownMenu from './DropdownMenu';
 import MenuItem from './MenuItem';
@@ -24,8 +23,7 @@ export default class DropdownBase extends React.Component {
     this.ensureToggleProps = this.ensureToggleProps.bind(this);
 
     this.state = {
-      open: false,
-      id: props.id || uuid.v4()
+      open: false
     };
   }
 
@@ -85,8 +83,6 @@ export default class DropdownBase extends React.Component {
   }
 
   extractChildren() {
-    const id = this.props.id || this.state.id;
-
     let children = [];
     let menu;
     let toggle;
@@ -102,16 +98,16 @@ export default class DropdownBase extends React.Component {
     });
 
     return {
-      toggle: this.ensureToggleProps(toggle, id),
-      menu: this.ensureMenuProps(menu, children, id)
+      toggle: this.ensureToggleProps(toggle),
+      menu: this.ensureMenuProps(menu, children)
     };
   }
 
-  ensureMenuProps(menu, children, id) {
+  ensureMenuProps(menu, children) {
     const menuProps = {
       ref: 'menu',
       open: this.state.open,
-      labelledBy: id
+      labelledBy: this.props.id
     };
 
     if (menu === undefined) {
@@ -147,9 +143,9 @@ export default class DropdownBase extends React.Component {
     return menu;
   }
 
-  ensureToggleProps(toggle, id) {
+  ensureToggleProps(toggle) {
     let toggleProps = {
-      id,
+      id: this.props.id,
       ref: TOGGLE_REF,
       open: this.state.open,
       bsStyle: this.props.bsStyle,
@@ -267,7 +263,7 @@ DropdownBase.propTypes = {
   id: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
-  ]),
+  ]).isRequired,
 
   title: titleRequired,
 

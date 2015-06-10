@@ -102,7 +102,6 @@
   },
   "dependencies": {
     "classnames": "^2.0.0",
-    "keycode": "^2.0.0",
-    "uuid": "^2.0.1"
+    "keycode": "^2.0.0"
   }
 }

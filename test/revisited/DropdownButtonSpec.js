@@ -18,7 +18,7 @@ class CustomMenu extends React.Component {
 
 describe('DropdownButton revisited', function() {
   const simpleDropdown = (
-    <DropdownButton title='Simple Dropdown'>
+    <DropdownButton title='Simple Dropdown' id='test-id'>
       <MenuItem>Item 1</MenuItem>
       <MenuItem>Item 2</MenuItem>
       <MenuItem>Item 3</MenuItem>
@@ -37,7 +37,7 @@ describe('DropdownButton revisited', function() {
 
   it('renders div with dropup class', function() {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Dropup' dropup>
+      <DropdownButton title='Dropup' dropup id='test-id'>
         <MenuItem>Item</MenuItem>
       </DropdownButton>
     );
@@ -57,7 +57,7 @@ describe('DropdownButton revisited', function() {
 
   it('renders toggle with DropdownButton.Toggle', function() {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton>
+      <DropdownButton id='test-id'>
         <DropdownButton.Toggle>Child Title</DropdownButton.Toggle>
         <MenuItem>Item 1</MenuItem>
         <MenuItem>Item 2</MenuItem>
@@ -88,7 +88,7 @@ describe('DropdownButton revisited', function() {
     // Assertion is in the afterEach call that performs prop type validation,
     // there should be no errors.
     ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Single child'>
+      <DropdownButton title='Single child' id='test-id'>
         <MenuItem>Item 1</MenuItem>
       </DropdownButton>
     );
@@ -103,7 +103,7 @@ describe('DropdownButton revisited', function() {
 
   it('does not render toggle button caret', function() {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Single child' noCaret>
+      <DropdownButton title='Single child' noCaret id='test-id'>
         <MenuItem>Item 1</MenuItem>
       </DropdownButton>
     );
@@ -114,7 +114,7 @@ describe('DropdownButton revisited', function() {
 
   it('renders custom menu', function() {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Single child'>
+      <DropdownButton title='Single child' id='test-id'>
         <CustomMenu>
           <MenuItem>Item 1</MenuItem>
         </CustomMenu>
@@ -129,7 +129,7 @@ describe('DropdownButton revisited', function() {
 
   it('only renders one custom menu', function() {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Single child'>
+      <DropdownButton title='Single child' id='test-id'>
         <CustomMenu>
           <MenuItem>Item 1</MenuItem>
         </CustomMenu>
@@ -147,7 +147,7 @@ describe('DropdownButton revisited', function() {
 
   it('renders explicit menu', function() {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Single child'>
+      <DropdownButton title='Single child' id='test-id'>
         <DropdownMenu>
           <MenuItem>Item 1</MenuItem>
         </DropdownMenu>
@@ -159,7 +159,7 @@ describe('DropdownButton revisited', function() {
 
   it('children outside explicit menu are ignored', function() {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Single child'>
+      <DropdownButton title='Single child' id='test-id'>
         <MenuItem>Ignored</MenuItem>
         <DropdownMenu>
           <MenuItem>Item 1</MenuItem>
@@ -175,7 +175,7 @@ describe('DropdownButton revisited', function() {
 
   it('forwards pullRight to menu', function() {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton pullRight title='blah'>
+      <DropdownButton pullRight title='blah' id='test-id'>
         <MenuItem>Item 1</MenuItem>
       </DropdownButton>
     );
@@ -186,7 +186,7 @@ describe('DropdownButton revisited', function() {
 
   it('renders bsSize', function() {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='blah' bsSize='small'>
+      <DropdownButton title='blah' bsSize='small' id='test-id'>
         <MenuItem>Item 1</MenuItem>
       </DropdownButton>
     );
@@ -197,7 +197,7 @@ describe('DropdownButton revisited', function() {
 
   it('renders bsStyle', function() {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='blah' bsStyle='success'>
+      <DropdownButton title='blah' bsStyle='success' id='test-id'>
         <MenuItem>Item 1</MenuItem>
       </DropdownButton>
     );
@@ -239,15 +239,6 @@ describe('DropdownButton revisited', function() {
     buttonNode.getAttribute('aria-expanded').should.equal('true');
   });
 
-  it('generates a random id if one is not provided', function() {
-    const instance1 = ReactTestUtils.renderIntoDocument(simpleDropdown);
-    const instance2 = ReactTestUtils.renderIntoDocument(simpleDropdown);
-    const node1 = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance1, 'BUTTON'));
-    const node2 = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance2, 'BUTTON'));
-
-    node1.getAttribute('id').should.not.equal(node2.getAttribute('id'));
-  });
-
   it('button has aria-haspopup attribute (As per W3C WAI-ARIA Spec)', function() {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
@@ -266,7 +257,7 @@ describe('DropdownButton revisited', function() {
       }
     };
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Simple Dropdown' onSelect={onSelect}>
+      <DropdownButton title='Simple Dropdown' onSelect={onSelect} id='test-id'>
         <MenuItem eventKey='1'>Item 1</MenuItem>
         <MenuItem eventKey='2'>Item 2</MenuItem>
         <MenuItem eventKey='3'>Item 3</MenuItem>
@@ -283,7 +274,7 @@ describe('DropdownButton revisited', function() {
 
   it('closes when child MenuItem is selected', function() {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Simple Dropdown'>
+      <DropdownButton title='Simple Dropdown' id='test-id'>
         <MenuItem eventKey='1'>Item 1</MenuItem>
       </DropdownButton>
     );
@@ -304,7 +295,7 @@ describe('DropdownButton revisited', function() {
       selectEvent.preventSelection();
     };
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Simple Dropdown' onSelect={handleSelect}>
+      <DropdownButton title='Simple Dropdown' onSelect={handleSelect} id='test-id'>
         <MenuItem eventKey='1'>Item 1</MenuItem>
       </DropdownButton>
     );
