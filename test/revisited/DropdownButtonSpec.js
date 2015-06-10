@@ -378,6 +378,18 @@ describe('DropdownButton revisited', function() {
         });
       });
     });
+
+    describe('navItem', function() {
+      it('deprecation warning', function() {
+        const props = {
+          title: 'some title',
+          navItem: true
+        };
+
+        DropdownButton.propTypes.navItem(props, 'navItem', 'DropdownButton');
+        shouldWarn(/navItem.*NavDropdown component/);
+      });
+    });
   });
 
   describe('focusable state', function() {

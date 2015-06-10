@@ -32,6 +32,17 @@ const buttonsInstance = (
         </CustomMenu>
       </DropdownButtonRevisited>
     </ButtonToolbar>
+    <Navbar>
+      <Nav>
+        <NavItem>Item 1</NavItem>
+        <NavDropdown>
+          <NavDropdown.Toggle>Custom Title</NavDropdown.Toggle>
+          <MenuItemRevisited eventKey='1'>Action</MenuItemRevisited>
+          <MenuItemRevisited header>Some Header</MenuItemRevisited>
+          <MenuItemRevisited eventKey='2'>Another action</MenuItemRevisited>
+        </NavDropdown>
+      </Nav>
+    </Navbar>
     <input placeholder='After' type='text' />
   </div>
 );

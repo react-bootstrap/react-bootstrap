@@ -4,6 +4,9 @@ import BootstrapMixin from '../BootstrapMixin';
 import ButtonGroup from '../ButtonGroup';
 import DropdownBase from './DropdownBase';
 import DropdownToggle from './DropdownToggle';
+import NavDropdown from './NavDropdown';
+import CustomPropTypes from '../utils/CustomPropTypes';
+import deprecationWarning from '../utils/deprecationWarning';
 
 export default class DropdownButton extends DropdownBase {
   constructor(props) {
@@ -11,6 +14,10 @@ export default class DropdownButton extends DropdownBase {
   }
 
   render() {
+    if (this.props.navItem) {
+      return <NavDropdown {...this.props} />;
+    }
+
     let { toggle, menu } = this.extractChildren();
 
     const rootClasses = {
@@ -31,6 +38,14 @@ export default class DropdownButton extends DropdownBase {
 }
 
 DropdownButton.propTypes = {
+  navItem: CustomPropTypes.all([
+    React.PropTypes.bool,
+    function(props, propName, componentName) {
+      if (props.navItem) {
+        deprecationWarning('navItem', 'NavDropdown component', 'https://github.com/react-bootstrap/react-bootstrap/issues/526');
+      }
+    }
+  ]),
   dropup: React.PropTypes.bool,
   ...DropdownBase.propTypes,
   ...BootstrapMixin.propTypes
