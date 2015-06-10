@@ -27,6 +27,20 @@ function ownerWindow(componentOrElement) {
 }
 
 /**
+ * get the active element, safe in IE
+ * @return {HTMLElement}
+ */
+function getActiveElement(componentOrElement){
+  let doc = ownerDocument(componentOrElement);
+
+  try {
+    return doc.activeElement || doc.body;
+  } catch (e) {
+    return doc.body;
+  }
+}
+
+/**
  * Shortcut to compute element style
  *
  * @param {HTMLElement} elem
@@ -160,5 +174,6 @@ export default {
   getComputedStyles,
   getOffset,
   getPosition,
+  activeElement: getActiveElement,
   offsetParent: offsetParentFunc
 };

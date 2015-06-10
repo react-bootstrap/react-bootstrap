@@ -31,6 +31,28 @@ function getContainer(context){
     domUtils.ownerDocument(context).body;
 }
 
+/**
+ * Firefox doesn't have a focusin event so using capture is easiest way to get bubbling
+ * IE8 can't do addEventListener, but does have onfocus in, so we use that in ie8
+ * @param  {ReactElement|HTMLElement} context
+ * @param  {Function} handler
+ */
+function onFocus(context, handler) {
+  let doc = domUtils.ownerDocument(context);
+  let useFocusin = !doc.addEventListener
+    , remove;
+
+  if (useFocusin) {
+    document.attachEvent('onfocusin', handler);
+    remove = () => document.detachEvent('onfocusin', handler);
+  } else {
+    document.addEventListener('focus', handler, true);
+    remove = () => document.removeEventListener('focus', handler, true);
+  }
+  return { remove };
+}
+
+let scrollbarSize;
 
 if ( domUtils.canUseDom) {
   let scrollDiv = document.createElement('div');
@@ -60,7 +82,8 @@ const Modal = React.createClass({
     closeButton: React.PropTypes.bool,
     animation: React.PropTypes.bool,
     onRequestHide: React.PropTypes.func.isRequired,
-    dialogClassName: React.PropTypes.string
+    dialogClassName: React.PropTypes.string,
+    enforceFocus: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -69,8 +92,13 @@ const Modal = React.createClass({
       backdrop: true,
       keyboard: true,
       animation: true,
-      closeButton: true
+      closeButton: true,
+      enforceFocus: true
     };
+  },
+
+  getInitialState(){
+    return { };
   },
 
   render() {
@@ -107,7 +135,7 @@ const Modal = React.createClass({
     );
 
     return this.props.backdrop ?
-      this.renderBackdrop(modal) : modal;
+      this.renderBackdrop(modal, state.backdropStyles) : modal;
   },
 
   renderBackdrop(modal) {
@@ -132,8 +160,8 @@ const Modal = React.createClass({
     let closeButton;
     if (this.props.closeButton) {
       closeButton = (
-          <button type="button" className="close" aria-hidden="true" onClick={this.props.onRequestHide}>&times;</button>
-        );
+        <button type="button" className="close" aria-hidden="true" onClick={this.props.onRequestHide}>&times;</button>
+      );
     }
 
     return (
@@ -169,6 +197,10 @@ const Modal = React.createClass({
     this._onWindowResizeListener =
         EventListener.listen(win, 'resize', this.handleWindowResize);
 
+    if (this.props.enforceFocus) {
+      this._onFocusinListener = onFocus(this, this.enforceFocus);
+    }
+
     let container = getContainer(this);
 
     container.className += container.className.length ? ' modal-open' : 'modal-open';
@@ -198,6 +230,10 @@ const Modal = React.createClass({
   componentWillUnmount() {
     this._onDocumentKeyupListener.remove();
     this._onWindowResizeListener.remove();
+
+    if (this._onFocusinListener) {
+      this._onFocusinListener.remove();
+    }
 
     let container = getContainer(this);
 
@@ -234,6 +270,19 @@ const Modal = React.createClass({
     if (this.lastFocus) {
       this.lastFocus.focus();
       this.lastFocus = null;
+    }
+  },
+
+  enforceFocus() {
+    if ( !this.isMounted() ) {
+      return;
+    }
+
+    let active = domUtils.activeElement(this)
+      , modal = React.findDOMNode(this.refs.modal);
+
+    if (modal !== active && !domUtils.contains(modal, active)){
+      modal.focus();
     }
   },
 
