@@ -8,7 +8,7 @@ export default function deprecationWarning(oldname, newname, link) {
     console.warn(message);
 
     if (link) {
-      console.warn(`You can read more about it here ${link}`);
+      console.warn(`You can read more about it at ${link}`);
     }
   }
 }

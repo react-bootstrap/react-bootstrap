@@ -171,6 +171,10 @@ const ComponentsPage = React.createClass({
                   <h3 id='btn-dropdowns-right'>Dropdown right variation</h3>
                   <p>Trigger dropdown menus that align to the right of the button using the <code>pullRight</code> prop.</p>
                   <ReactPlayground codeText={Samples.SplitButtonRight} />
+
+                  <h3 id='btn-dropdowns-single'>Controlling dropdown state</h3>
+                  <p>Use the <code>open</code> prop to control dropdown state from an owner component. Since the dropdown can be opened and closed on its own, keep the owner component in sync by providing a handler function as the prop <code>onOpenStateChange</code></p>
+                  <ReactPlayground codeText={Samples.DropdownButtonControlled} />
                 </div>
 
                 {/* Menu Item */}

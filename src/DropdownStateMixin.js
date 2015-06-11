@@ -24,11 +24,29 @@ function isNodeInRoot(node, root) {
 const DropdownStateMixin = {
   getInitialState() {
     return {
-      open: false
+      open: this.props.open
     };
   },
 
-  setDropdownState(newState, onStateChangeComplete) {
+  propTypes: {
+    open: React.PropTypes.bool,
+    onOpenStateChange: React.PropTypes.func
+  },
+
+  getDefaultProps() {
+    return {
+      open: false,
+      onOpenStateChange: function(){}
+    };
+  },
+
+  componentWillReceiveProps(props) {
+    if (typeof props.open !== 'undefined') {
+      this.setDropdownState(props.open, null, true);
+    }
+  },
+
+  setDropdownState(newState, onStateChangeComplete, fromProps) {
     if (newState) {
       this.bindRootCloseHandlers();
     } else {
@@ -38,6 +56,10 @@ const DropdownStateMixin = {
     this.setState({
       open: newState
     }, onStateChangeComplete);
+
+    if (!fromProps && typeof this.props.onOpenStateChange === 'function') {
+      this.props.onOpenStateChange(newState);
+    }
   },
 
   handleDocumentKeyUp(e) {
