@@ -16,7 +16,6 @@
     "**/.*"
   ],
   "dependencies": {
-    "react": ">= 0.13.0",
-    "classnames": "^2.0.0"
+    "react": ">= 0.13.0"
   }
 }
