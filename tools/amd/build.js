@@ -14,7 +14,10 @@ const bowerJson = path.join(bowerRoot, 'bower.json');
 const readme = path.join(__dirname, 'README.md');
 const license = path.join(repoRoot, 'LICENSE');
 
-const babelOptions = {modules: 'amd'};
+const babelOptions = {
+  __reactBootstrapDeprecationWarning: true,
+  modules: 'amd'
+};
 
 const libDestination = path.join(bowerRoot, 'lib');
 const factoriesDestination = path.join(libDestination, 'factories');
