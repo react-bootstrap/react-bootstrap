@@ -12,13 +12,7 @@ export function buildContent(content, filename, destination, babelOptions={}) {
 }
 
 export function buildFile(filename, destination, babelOptions={}) {
-  let content = fs.readFileSync(filename, {encoding: 'utf8'});
-  if (babelOptions.__reactBootstrapDeprecationWarning) {
-    content = `console.warn('This file is deprecated, and will be removed in v0.24.0. Use react-bootstrap.js or react-bootstrap.min.js instead.');
-console.warn('You can read more about it at https://github.com/react-bootstrap/react-bootstrap/issues/693');
-${content}`;
-  }
-
+  const content = fs.readFileSync(filename, {encoding: 'utf8'});
   if(babelUtil.canCompile(filename)) {
     // Get file basename without the extension (in case not .js)
     let outputName = path.basename(filename, path.extname(filename));
