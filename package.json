@@ -46,7 +46,7 @@
     "babel-loader": "^5.0.0",
     "bootstrap": "^3.3.4",
     "brfs": "^1.4.0",
-    "chai": "^2.2.0",
+    "chai": "^3.0.0",
     "child-process-promise": "^1.0.1",
     "codemirror": "^5.0.0",
     "colors": "^1.0.3",
