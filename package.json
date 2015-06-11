@@ -73,7 +73,7 @@
     "karma-mocha-reporter": "^1.0.2",
     "karma-phantomjs-launcher": "^0.2.0",
     "karma-sinon": "^1.0.3",
-    "karma-sinon-chai": "^0.3.0",
+    "karma-sinon-chai": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.4",
     "karma-webpack": "^1.5.0",
     "less": "^2.4.0",
