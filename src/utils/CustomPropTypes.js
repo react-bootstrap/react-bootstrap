@@ -6,7 +6,7 @@ const CustomPropTypes = {
    *
    * The element can be provided in two forms:
    * - Directly passed
-   * - Or passed an object which has a `getDOMNode` method which will return the required DOM element
+   * - Or passed an object that has a `render` method
    *
    * @param props
    * @param propName
