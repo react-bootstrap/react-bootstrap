@@ -18,12 +18,16 @@ export default class DropdownButton extends DropdownBase {
       return <NavDropdown {...this.props} />;
     }
 
-    let { toggle, menu } = this.extractChildren();
+    let {
+      toggle,
+      menu,
+      open
+    } = this.extractChildren();
 
     const rootClasses = {
+      open,
       dropdown: !this.props.dropup,
-      dropup: this.props.dropup,
-      open: this.state.open
+      dropup: this.props.dropup
     };
 
     return (

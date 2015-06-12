@@ -311,6 +311,45 @@ describe('DropdownButton revisited', function() {
     node.className.should.match(/\bopen\b/);
   });
 
+  it('is open with explicit prop', function() {
+    class OpenProp extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          open: false
+        };
+      }
+
+      render () {
+        return (
+          <div>
+            <button className='outer-button'
+              onClick={() => this.setState({open: !this.state.open})}>
+              Outer button
+            </button>
+            <DropdownButton
+              open={this.state.open}
+              title='Prop open control'
+              id='test-id'>
+              <MenuItem eventKey='1'>Item 1</MenuItem>
+            </DropdownButton>
+          </div>
+        );
+      }
+    }
+
+    const instance = ReactTestUtils.renderIntoDocument(<OpenProp />);
+    const outerToggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'outer-button');
+    const dropdownNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown'));
+
+    dropdownNode.className.should.not.match(/\bopen\b/);
+    ReactTestUtils.Simulate.click(outerToggle);
+    dropdownNode.className.should.match(/\bopen\b/);
+    ReactTestUtils.Simulate.click(outerToggle);
+    dropdownNode.className.should.not.match(/\bopen\b/);
+  });
+
   describe('PropType validation', function() {
     ['title', 'children'].forEach(type => {
       describe(type, function() {

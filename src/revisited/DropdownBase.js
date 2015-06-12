@@ -86,6 +86,7 @@ export default class DropdownBase extends React.Component {
     let children = [];
     let menu;
     let toggle;
+    let open = this.props.open !== undefined ? this.props.open : this.state.open;
 
     React.Children.forEach(this.props.children, child => {
       if (child.type === DropdownToggle) {
@@ -98,15 +99,16 @@ export default class DropdownBase extends React.Component {
     });
 
     return {
-      toggle: this.ensureToggleProps(toggle),
-      menu: this.ensureMenuProps(menu, children)
+      open,
+      toggle: this.ensureToggleProps(toggle, open),
+      menu: this.ensureMenuProps(menu, children, open)
     };
   }
 
-  ensureMenuProps(menu, children) {
+  ensureMenuProps(menu, children, open) {
     const menuProps = {
       ref: 'menu',
-      open: this.state.open,
+      open,
       labelledBy: this.props.id
     };
 
@@ -143,11 +145,11 @@ export default class DropdownBase extends React.Component {
     return menu;
   }
 
-  ensureToggleProps(toggle) {
+  ensureToggleProps(toggle, open) {
     let toggleProps = {
       id: this.props.id,
       ref: TOGGLE_REF,
-      open: this.state.open,
+      open,
       bsStyle: this.props.bsStyle,
       useAnchor: this.useAnchor
     };
@@ -276,6 +278,7 @@ DropdownBase.propTypes = {
   noCaret: React.PropTypes.bool,
 
   pullRight: React.PropTypes.bool,
+  open: React.PropTypes.bool,
 
   onRequestClose: React.PropTypes.func,
   onClick: React.PropTypes.func,

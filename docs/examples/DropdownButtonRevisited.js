@@ -1,3 +1,5 @@
+/* eslint react/jsx-no-undef: 0 */
+
 const handleSelect = (event, selectEvent) => {
   console.log(`SELECTED ${selectEvent.eventKey}`);
 };
