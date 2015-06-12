@@ -1,3 +1,14 @@
+v0.23.3 - Fri, 12 Jun 2015 21:46:30 GMT
+---------------------------------------
+
+- [9ca26e9](../../commit/9ca26e9) [added] contains "polyfill" to domUtils
+- [3a254a1](../../commit/3a254a1) [added] Deprecation warning for individual file use in the Bower release
+- [73c7705](../../commit/73c7705) [changed] Update chai. Dev dependency.
+- [3ca90c7](../../commit/3ca90c7) [changed] Update karma-sinon-chai. Dev dependency.
+- [cc4e820](../../commit/cc4e820) [changed] Update fs-extra. Dev dependency.
+
+
+
 v0.23.2 - Mon, 08 Jun 2015 18:56:48 GMT
 ---------------------------------------
 
