@@ -1,7 +1,8 @@
 const DropDownToggle = React.createClass({
   getInitialState: function() {
     return {
-      open: false
+      open: false,
+      inputFocused: false
     };
   },
   toggle: function() {
@@ -9,23 +10,51 @@ const DropDownToggle = React.createClass({
       open: !this.state.open
     });
   },
-  handleOpenStateChange(openState) {
+  handleClick(e, more) {
     this.setState({
-      open: openState
+      open: !this.state.open
+    });
+  },
+  handleClose(e) {
+    if (this.state.inputFocused) {
+      return;
+    }
+    this.setState({
+      open: false
+    });
+  },
+  handleFocus() {
+    this.setState({
+      open: true,
+      inputFocused: true
+    });
+  },
+  handleBlur() {
+    this.setState({
+      inputFocused: false
+    });
+  },
+  handleSelect(e, selected) {
+    this.setState({
+      open: false,
+      inputFocused: false
     });
   },
   render: function() {
     return (
       <ButtonToolbar>
         <Button onClick={this.toggle}>Toggle</Button>
-        <DropdownButton
+        <Input type="text" onFocus={this.handleFocus} onBlur={this.handleBlur}/>
+        <DropdownButtonRevisited
           title="Title"
           open={this.state.open}
-          onOpenStateChange={this.handleOpenStateChange}
+          onRequestClose={this.handleClose}
+          onClick={this.handleClick}
+          onSelect={this.handleSelect}
         >
-          <MenuItem eventKey="1">Action</MenuItem>
-          <MenuItem eventKey="2">Another action</MenuItem>
-        </DropdownButton>
+          <MenuItemRevisited eventKey="1">Action</MenuItemRevisited>
+          <MenuItemRevisited eventKey="2">Another action</MenuItemRevisited>
+        </DropdownButtonRevisited>
       </ButtonToolbar>
     );
   }
