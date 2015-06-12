@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
+import SafeAnchor from './SafeAnchor';
 
 const NavItem = React.createClass({
   mixins: [BootstrapMixin],
@@ -13,12 +14,6 @@ const NavItem = React.createClass({
     title: React.PropTypes.node,
     eventKey: React.PropTypes.any,
     target: React.PropTypes.string
-  },
-
-  getDefaultProps() {
-    return {
-      href: '#'
-    };
   },
 
   render() {
@@ -38,8 +33,7 @@ const NavItem = React.createClass({
           href,
           title,
           target,
-          onClick: this.handleClick,
-          ref: 'anchor'
+          onClick: this.handleClick
         };
 
     if (href === '#') {
@@ -48,9 +42,9 @@ const NavItem = React.createClass({
 
     return (
       <li {...props} className={classNames(props.className, classes)}>
-        <a {...linkProps}>
+        <SafeAnchor {...linkProps}>
           { children }
-        </a>
+        </SafeAnchor>
       </li>
     );
   },

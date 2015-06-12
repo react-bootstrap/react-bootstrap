@@ -231,4 +231,128 @@ describe('DropdownButton', function () {
       ReactTestUtils.findRenderedDOMComponentWithClass(button, 'dropdown-toggle')
     );
   });
+
+  it('Should be open when prop open is set to true', function () {
+    instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="Title" open={true}>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+      </DropdownButton>
+    );
+
+    assert.ok(React.findDOMNode(instance).className.match(/\bopen\b/));
+  });
+
+  it('Should be closed when prop open is set to false', function () {
+    instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="Title" open={false}>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+      </DropdownButton>
+    );
+
+    assert.ok(!React.findDOMNode(instance).className.match(/\bopen\b/));
+  });
+
+  it('Should close on click if prop open is set to true', function () {
+    instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="Title" open={true}>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+      </DropdownButton>
+    );
+
+    ReactTestUtils.SimulateNative.click(React.findDOMNode(instance.refs.dropdownButton));
+    assert.ok(!React.findDOMNode(instance).className.match(/\bopen\b/));
+  });
+
+  it('Should open on click if prop open is set to false', function () {
+    instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="Title" open={false}>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+      </DropdownButton>
+    );
+
+    ReactTestUtils.SimulateNative.click(React.findDOMNode(instance.refs.dropdownButton));
+    assert.ok(React.findDOMNode(instance).className.match(/\bopen\b/));
+  });
+
+  it('Should update open state on componentWillReceiveProps', function () {
+    let DropDownToggle = React.createClass({
+      getInitialState: function() {
+        return {
+          open: false
+        };
+      },
+      toggle: function() {
+        this.setState({
+          open: !this.state.open
+        });
+      },
+      render: function() {
+        return (
+          <div>
+            <Button ref="toggleButton" onClick={this.toggle}/>
+            <DropdownButton ref="dropdown" title="Title" open={this.state.open}>
+              <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+              <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+            </DropdownButton>
+          </div>
+        );
+      }
+    });
+
+    let toggleInstance = ReactTestUtils.renderIntoDocument(<DropDownToggle/>);
+
+    ReactTestUtils.SimulateNative.click(React.findDOMNode(toggleInstance.refs.toggleButton));
+    assert.ok(React.findDOMNode(toggleInstance.refs.dropdown).className.match(/\bopen\b/));
+    ReactTestUtils.SimulateNative.click(React.findDOMNode(toggleInstance.refs.toggleButton));
+    assert.ok(!React.findDOMNode(toggleInstance.refs.dropdown).className.match(/\bopen\b/));
+  });
+
+  it('Should call open state change handler', function () {
+    let DropDownToggle = React.createClass({
+      getInitialState: function() {
+        return {
+          open: false
+        };
+      },
+      toggle: function() {
+        this.setState({
+          open: !this.state.open
+        });
+      },
+      handleOpenStateChange: function(openState) {
+        this.setState({
+          open: openState
+        });
+      },
+      render: function() {
+        return (
+          <div>
+            <Button ref="toggleButton" onClick={this.toggle}/>
+            <DropdownButton
+              ref="dropdown"
+              title="Title"
+              open={this.state.open}
+              onOpenStateChange={this.handleOpenStateChange}
+            >
+              <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+              <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+            </DropdownButton>
+          </div>
+        );
+      }
+    });
+
+    let toggleInstance = ReactTestUtils.renderIntoDocument(<DropDownToggle/>);
+
+    // open via DropdownButton
+    ReactTestUtils.SimulateNative.click(React.findDOMNode(toggleInstance.refs.dropdown.refs.dropdownButton));
+    assert.ok(React.findDOMNode(toggleInstance.refs.dropdown).className.match(/\bopen\b/));
+    // should close via DropDownToggle
+    ReactTestUtils.SimulateNative.click(React.findDOMNode(toggleInstance.refs.toggleButton));
+    assert.ok(!React.findDOMNode(toggleInstance.refs.dropdown).className.match(/\bopen\b/));
+  });
 });

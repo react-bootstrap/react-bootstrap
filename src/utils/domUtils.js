@@ -12,6 +12,25 @@ function ownerDocument(componentOrElement) {
 }
 
 /**
+ * Checks whether a node is within
+ * a root nodes tree
+ *
+ * @param {DOMElement} node
+ * @param {DOMElement} treeRoot
+ * @returns {boolean}
+ */
+function isNodeInTree(node, treeRoot) {
+  while (node) {
+    if (node === treeRoot) {
+      return true;
+    }
+    node = node.parentNode;
+  }
+
+  return false;
+}
+
+/**
  * Shortcut to compute element style
  *
  * @param {HTMLElement} elem
@@ -140,6 +159,7 @@ function contains(elem, inner){
 export default {
   contains,
   ownerDocument,
+  isNodeInTree,
   getComputedStyles,
   getOffset,
   getPosition,

@@ -38,7 +38,7 @@ describe('PageItem', function () {
   it('Should call "onSelect" when item is clicked', function (done) {
     function handleSelect(key, href) {
       assert.equal(key, 1);
-      assert.equal(href, '#');
+      assert.equal(href, undefined);
       done();
     }
     let instance = ReactTestUtils.renderIntoDocument(

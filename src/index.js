@@ -43,6 +43,7 @@ import Pager from './Pager';
 import Popover from './Popover';
 import ProgressBar from './ProgressBar';
 import Row from './Row';
+import SafeAnchor from './SafeAnchor';
 import SplitButton from './SplitButton';
 import SubNav from './SubNav';
 import TabbedArea from './TabbedArea';
@@ -100,6 +101,7 @@ export default {
   Popover,
   ProgressBar,
   Row,
+  SafeAnchor,
   SplitButton,
   SubNav,
   TabbedArea,
