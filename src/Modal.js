@@ -33,14 +33,14 @@ function getContainer(context){
 
 /**
  * Firefox doesn't have a focusin event so using capture is easiest way to get bubbling
- * IE8 can't do addEventListener, but does have onfocus in, so we use that in ie8
+ * IE8 can't do addEventListener, but does have onfocusin, so we use that in ie8
  * @param  {ReactElement|HTMLElement} context
  * @param  {Function} handler
  */
 function onFocus(context, handler) {
   let doc = domUtils.ownerDocument(context);
-  let useFocusin = !doc.addEventListener
-    , remove;
+  let useFocusin = !doc.addEventListener;
+  let remove;
 
   if (useFocusin) {
     document.attachEvent('onfocusin', handler);
@@ -54,7 +54,7 @@ function onFocus(context, handler) {
 
 let scrollbarSize;
 
-if ( domUtils.canUseDom) {
+if (domUtils.canUseDom) {
   let scrollDiv = document.createElement('div');
 
   scrollDiv.style.position = 'absolute';
@@ -286,8 +286,8 @@ const Modal = React.createClass({
       return;
     }
 
-    let active = domUtils.activeElement(this)
-      , modal = React.findDOMNode(this.refs.modal);
+    let active = domUtils.activeElement(this);
+    let modal = React.findDOMNode(this.refs.modal);
 
     if (modal !== active && !domUtils.contains(modal, active)){
       modal.focus();
@@ -297,11 +297,11 @@ const Modal = React.createClass({
   _getStyles() {
     if ( !domUtils.canUseDom ) { return {}; }
 
-    let node = React.findDOMNode(this.refs.modal)
-      , scrollHt = node.scrollHeight
-      , container = getContainer(this)
-      , containerIsOverflowing = this._containerIsOverflowing
-      , modalIsOverflowing = scrollHt > containerClientHeight(container, this);
+    let node = React.findDOMNode(this.refs.modal);
+    let scrollHt = node.scrollHeight;
+    let container = getContainer(this);
+    let containerIsOverflowing = this._containerIsOverflowing;
+    let modalIsOverflowing = scrollHt > containerClientHeight(container, this);
 
     return {
       dialogStyles: {
