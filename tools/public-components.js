@@ -1,5 +1,5 @@
 import React from 'react';
-import index from '../src/index';
+import * as index from '../src/index';
 
 let components = [];
 Object.keys(index).forEach(function (item) {

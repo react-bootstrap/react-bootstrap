@@ -1,13 +1,5 @@
-import childrenValueInputValidation from './childrenValueInputValidation';
-import createChainedFunction from './createChainedFunction';
-import CustomPropTypes from './CustomPropTypes';
-import domUtils from './domUtils';
-import ValidComponentChildren from './ValidComponentChildren';
-
-export default {
-  childrenValueInputValidation,
-  createChainedFunction,
-  CustomPropTypes,
-  domUtils,
-  ValidComponentChildren
-};
+export childrenValueInputValidation from './childrenValueInputValidation';
+export createChainedFunction from './createChainedFunction';
+export CustomPropTypes from './CustomPropTypes';
+export domUtils from './domUtils';
+export ValidComponentChildren from './ValidComponentChildren';

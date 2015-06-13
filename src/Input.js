@@ -1,6 +1,6 @@
 import React from 'react';
 import InputBase from './InputBase';
-import FormControls from './FormControls';
+import * as FormControls from './FormControls';
 import deprecationWarning from './utils/deprecationWarning';
 
 class Input extends InputBase {
