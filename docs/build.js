@@ -23,7 +23,9 @@ const readmeDest = path.join(docsBuilt, 'README.md');
  */
 function generateHTML(fileName) {
   return new Promise((resolve, reject) => {
-    Router.run(routes, '/' + fileName, Handler => {
+    const urlSlug = fileName === 'index.html' ? '/' : `/${fileName}`;
+
+    Router.run(routes, urlSlug, Handler => {
       let html = React.renderToString(React.createElement(Handler));
       html = '<!doctype html>' + html;
       let write = fsp.writeFile(path.join(docsBuilt, fileName), html);
