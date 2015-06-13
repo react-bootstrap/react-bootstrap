@@ -8,15 +8,12 @@
     "react-bootstrap.js"
   ],
   "keywords": [
-    "react",
-    "react-component",
-    "bootstrap"
+    <%= _.map(pkg.keywords, function(keyword) { return '"' + keyword + '"' }).join(',\n    ')%>
   ],
   "ignore": [
     "**/.*"
   ],
   "dependencies": {
-    "react": ">= 0.13.0",
-    "classnames": "^2.0.0"
+    "react": "<%= pkg.peerDependencies.react %>"
   }
 }
