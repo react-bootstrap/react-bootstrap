@@ -6,7 +6,6 @@ amd/
 !tools/amd/
 lib/
 !tools/lib/
-dist/
 !tools/dist/
 docs-built/
 tmp-bower-repo/
