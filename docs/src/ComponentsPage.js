@@ -30,11 +30,11 @@ const ComponentsPage = React.createClass({
   },
 
   componentDidMount() {
-    let elem = React.findDOMNode(this.refs.sideNav),
-        domUtils = Affix.domUtils,
-        sideNavOffsetTop = domUtils.getOffset(elem).top,
-        sideNavMarginTop = parseInt(domUtils.getComputedStyles(elem.firstChild).marginTop, 10),
-        topNavHeight = React.findDOMNode(this.refs.topNav).offsetHeight;
+    let elem = React.findDOMNode(this.refs.sideNav);
+    let domUtils = Affix.domUtils;
+    let sideNavOffsetTop = domUtils.getOffset(elem).top;
+    let sideNavMarginTop = parseInt(domUtils.getComputedStyles(elem.firstChild).marginTop, 10);
+    let topNavHeight = React.findDOMNode(this.refs.topNav).offsetHeight;
 
     this.setState({
       navOffsetTop: sideNavOffsetTop - topNavHeight - sideNavMarginTop,

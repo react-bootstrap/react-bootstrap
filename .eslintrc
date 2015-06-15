@@ -12,6 +12,8 @@
   ],
   "rules": {
     "comma-spacing": 2,
+    "comma-style": [2, "last"],
+    "one-var": [2, { "initialized": "never" }],
     "key-spacing": 0,
     "no-underscore-dangle": 0,
     "no-unused-vars": [2, { "vars": "all", "args": "none" }],
