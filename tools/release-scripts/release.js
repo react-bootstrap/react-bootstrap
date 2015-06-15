@@ -15,6 +15,7 @@ import { bowerRepo, bowerRoot, tmpBowerRepo, docsRoot, docsRepo, tmpDocsRepo } f
 
 const yargsConf = yargs
   .usage('Usage: $0 <version> [--preid <identifier>]')
+  .help('h')
   .example('$0 minor --preid beta', 'Release with minor version bump with pre-release tag')
   .example('$0 major', 'Release with major version bump')
   .example('$0 major --dry-run', 'Release dry run with patch version bump')
@@ -32,7 +33,7 @@ const yargsConf = yargs
     alias: 'n',
     demand: false,
     default: false,
-    describe: 'Execute command in dry run mode. Will not commit, tag, push, or publish anything. Userful for testing.'
+    describe: 'Execute command in dry run mode. Will not commit, tag, push, or publish anything. Useful for testing.'
   })
   .option('verbose', {
     demand: false,
@@ -66,7 +67,8 @@ preConditions()
   .then(v => { version = v; })
   .then(() => addChangelog(version))
   .then(() => {
-    return build(argv.verbose)
+    // useCache implicitly defaults to false here.
+    return build(argv)
       .catch(err => {
         console.log('Build failed, reverting version bump'.red);
 

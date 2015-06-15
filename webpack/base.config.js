@@ -3,28 +3,35 @@ import path from 'path';
 import webpack from 'webpack';
 import yargs from 'yargs';
 
-const babelCache = path.resolve(path.join(__dirname, '../.babel-cache'));
-
-if (!fs.existsSync(babelCache)) {
-  try {
-    fs.mkdirSync(babelCache);
-  } catch (err) {
-    if (err.code !== 'EEXIST') {
-      console.error(err.stack);
-    }
-  }
-}
-
 export const options = yargs
   .alias('p', 'optimize-minimize')
   .alias('d', 'debug')
+  .option('use-cache', {
+    type: 'boolean',
+    default: true
+  })
   .option('port', {
     default: '8080',
     type: 'string'
   })
   .argv;
 
-export const jsLoader = `babel?cacheDirectory=${babelCache}`;
+export let jsLoader = 'babel';
+if (options.useCache) {
+  const babelCache = path.resolve(path.join(__dirname, '../.babel-cache'));
+
+  if (!fs.existsSync(babelCache)) {
+    try {
+      fs.mkdirSync(babelCache);
+    } catch (err) {
+      if (err.code !== 'EEXIST') {
+        console.error(err.stack);
+      }
+    }
+  }
+
+  jsLoader += `?cacheDirectory=${babelCache}`;
+}
 
 const baseConfig = {
   entry: undefined,
