@@ -37,7 +37,7 @@ export default {
 
     let overlay = this.renderOverlay();
 
-    // Save reference to help testing
+    // Save reference for future access.
     if (overlay !== null) {
       this._overlayInstance = React.render(overlay, this._overlayTarget);
     } else {
@@ -57,7 +57,11 @@ export default {
     }
 
     if (this._overlayInstance) {
-      return React.findDOMNode(this._overlayInstance);
+      if (this._overlayInstance.getWrappedDOMNode) {
+        return this._overlayInstance.getWrappedDOMNode();
+      } else {
+        return React.findDOMNode(this._overlayInstance);
+      }
     }
 
     return null;
