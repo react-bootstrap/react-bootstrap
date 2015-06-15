@@ -236,12 +236,65 @@ describe('OverlayTrigger', function() {
         });
 
         it('Should have correct isOverlayShown state', function () {
-          const event = document.createEvent('HTMLEvents');
-          event.initEvent('click', true, true);
-          document.documentElement.dispatchEvent(event);
+          document.documentElement.click();
 
+          // Need to click this way for it to propagate to document element.
           instance.state.isOverlayShown.should.equal(testCase.shownAfterClick);
         });
+      });
+    });
+
+    describe('replaced overlay', function () {
+      let instance;
+
+      beforeEach(function () {
+        class ReplacedOverlay extends React.Component {
+          constructor(props) {
+            super(props);
+
+            this.handleClick = this.handleClick.bind(this);
+            this.state = {replaced: false};
+          }
+
+          handleClick() {
+            this.setState({replaced: true});
+          }
+
+          render() {
+            if (this.state.replaced) {
+              return (
+                <div>replaced</div>
+              );
+            } else {
+              return (
+                <div>
+                  <a id="replace-overlay" onClick={this.handleClick}>
+                    original
+                  </a>
+                </div>
+              );
+            }
+          }
+        }
+
+        instance = ReactTestUtils.renderIntoDocument(
+          <OverlayTrigger
+            overlay={<ReplacedOverlay />}
+            trigger='click' rootClose={true}
+          >
+            <button>button</button>
+          </OverlayTrigger>
+        );
+        const overlayTrigger = React.findDOMNode(instance);
+        ReactTestUtils.Simulate.click(overlayTrigger);
+      });
+
+      it('Should still be shown', function () {
+        // Need to click this way for it to propagate to document element.
+        const replaceOverlay = document.getElementById('replace-overlay');
+        replaceOverlay.click();
+
+        instance.state.isOverlayShown.should.be.true;
       });
     });
   });
