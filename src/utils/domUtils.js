@@ -1,5 +1,13 @@
 import React from 'react';
 
+
+let canUseDom = !!(
+  typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement
+);
+
+
 /**
  * Get elements owner document
  *
@@ -9,6 +17,27 @@ import React from 'react';
 function ownerDocument(componentOrElement) {
   let elem = React.findDOMNode(componentOrElement);
   return (elem && elem.ownerDocument) || document;
+}
+
+function ownerWindow(componentOrElement) {
+  let doc = ownerDocument(componentOrElement);
+  return doc.defaultView
+       ? doc.defaultView
+       : doc.parentWindow;
+}
+
+/**
+ * get the active element, safe in IE
+ * @return {HTMLElement}
+ */
+function getActiveElement(componentOrElement){
+  let doc = ownerDocument(componentOrElement);
+
+  try {
+    return doc.activeElement || doc.body;
+  } catch (e) {
+    return doc.body;
+  }
 }
 
 /**
@@ -138,10 +167,13 @@ function contains(elem, inner){
 }
 
 export default {
+  canUseDom,
   contains,
+  ownerWindow,
   ownerDocument,
   getComputedStyles,
   getOffset,
   getPosition,
+  activeElement: getActiveElement,
   offsetParent: offsetParentFunc
 };
