@@ -269,9 +269,12 @@ const Modal = React.createClass({
   },
 
   focusModalContent () {
-    this.lastFocus = domUtils.activeElement(this);
-    let modalContent = React.findDOMNode(this.refs.modal);
-    modalContent.focus();
+    if (this.props.enforceFocus) {
+      this.lastFocus = domUtils.activeElement(this);
+
+      let modalContent = React.findDOMNode(this.refs.modal);
+      modalContent.focus();
+    }
   },
 
   restoreLastFocus () {
