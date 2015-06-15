@@ -8,9 +8,16 @@ import { setExecOptions } from './exec';
 import yargs from 'yargs';
 
 const argv = yargs
+  .help('h')
   .option('docs-only', {
     demand: false,
     default: false
+  })
+  .option('use-cache', {
+    type: 'boolean',
+    demand: false,
+    default: true,
+    describe: 'Use Babel cache when running webpack'
   })
   .option('verbose', {
     demand: false,
@@ -26,7 +33,7 @@ const argv = yargs
 
 setExecOptions(argv);
 
-let buildProcess = argv.docsOnly ? docs(argv) : build();
+let buildProcess = argv.docsOnly ? docs(argv) : build(argv);
 
 buildProcess
   .catch(err => {
