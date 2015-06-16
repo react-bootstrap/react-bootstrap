@@ -1,3 +1,19 @@
+v0.24.0-alpha.3 - Tue, 16 Jun 2015 00:43:49 GMT
+-----------------------------------------------
+
+- [d12d59e](../../commit/d12d59e) [changed] Enabled "loose" Babel transpilation
+- [0ce46b9](../../commit/0ce46b9) [changed] only autofocus modals when enforceFocus is true (the default)
+- [01c547f](../../commit/01c547f) [fixed] Do not use Babel cache for release build
+- [b67081b](../../commit/b67081b) [fixed] rootClose behavior on replaced elements
+- [c5855d2](../../commit/c5855d2) [changed] createChainedFunction to chain many functions, and to throw if non-functions are provided.
+- [d18dadb](../../commit/d18dadb) [fixed] container content no longer shifts when overflowing
+- [66f0f92](../../commit/66f0f92) [added] enforceFocus prop to Modal
+- [3869ca2](../../commit/3869ca2) [fixed] Modal doesn't "jump" when container is overflowing
+- [fbbb344](../../commit/fbbb344) [fixed] bower template.
+- [fafe46f](../../commit/fafe46f) [changed] Use named exports in index files
+
+
+
 v0.24.0-alpha.2 - Fri, 12 Jun 2015 21:52:11 GMT
 -----------------------------------------------
 
