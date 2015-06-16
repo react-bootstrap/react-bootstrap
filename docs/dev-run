@@ -1,4 +1,3 @@
-#!/usr/bin/env babel-node
 /* eslint no-process-exit: 0 */
 import 'colors';
 import portfinder from 'portfinder';

@@ -4,22 +4,26 @@
  * Will only create a new function if needed,
  * otherwise will pass back existing functions or null.
  *
- * @param {function} one
- * @param {function} two
+ * @param {function} functions to chain
  * @returns {function|null}
  */
-function createChainedFunction(one, two) {
-  let hasOne = typeof one === 'function';
-  let hasTwo = typeof two === 'function';
+function createChainedFunction(...funcs) {
+  return funcs
+    .filter(f => f != null)
+    .reduce((acc, f) => {
+      if (typeof f !== 'function') {
+        throw new Error('Invalid Argument Type, must only provide functions, undefined, or null.');
+      }
 
-  if (!hasOne && !hasTwo) { return null; }
-  if (!hasOne) { return two; }
-  if (!hasTwo) { return one; }
+      if (acc === null) {
+        return f;
+      }
 
-  return function chainedFunction() {
-    one.apply(this, arguments);
-    two.apply(this, arguments);
-  };
+      return function chainedFunction(...args) {
+        acc.apply(this, args);
+        f.apply(this, args);
+      };
+    }, null);
 }
 
 export default createChainedFunction;

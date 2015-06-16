@@ -36,10 +36,10 @@ describe('Panel', function () {
   });
 
   it('Should have custom component header', function () {
-    let header = <h3>Heading</h3>,
-        instance = ReactTestUtils.renderIntoDocument(
-          <Panel header={header}>Panel content</Panel>
-        );
+    let header = <h3>Heading</h3>;
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Panel header={header}>Panel content</Panel>
+    );
     header = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading'));
     assert.equal(header.firstChild.nodeName, 'H3');
     assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
@@ -47,10 +47,10 @@ describe('Panel', function () {
   });
 
   it('Should have custom component header with anchor', function () {
-    let header = <h3>Heading</h3>,
-        instance = ReactTestUtils.renderIntoDocument(
-          <Panel header={header} collapsible={true}>Panel content</Panel>
-        );
+    let header = <h3>Heading</h3>;
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Panel header={header} collapsible={true}>Panel content</Panel>
+    );
     header = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading'));
     assert.equal(header.firstChild.nodeName, 'H3');
     assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
@@ -59,10 +59,10 @@ describe('Panel', function () {
   });
 
   it('Should have custom component header with custom class', function () {
-    let header = <h3 className="custom-class">Heading</h3>,
-        instance = ReactTestUtils.renderIntoDocument(
-          <Panel header={header}>Panel content</Panel>
-        );
+    let header = <h3 className="custom-class">Heading</h3>;
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Panel header={header}>Panel content</Panel>
+    );
     header = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading'));
     assert.equal(header.firstChild.nodeName, 'H3');
     assert.ok(header.firstChild.className.match(/\bpanel-title\b/));

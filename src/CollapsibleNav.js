@@ -29,9 +29,9 @@ const CollapsibleNav = React.createClass({
     for (let key in nodes) {
       if (nodes.hasOwnProperty(key)) {
 
-        let n = React.findDOMNode(nodes[key])
-          , h = n.offsetHeight
-          , computedStyles = domUtils.getComputedStyles(n);
+        let n = React.findDOMNode(nodes[key]);
+        let h = n.offsetHeight;
+        let computedStyles = domUtils.getComputedStyles(n);
 
         height += (h +
           parseInt(computedStyles.marginTop, 10) +

@@ -13,7 +13,7 @@
     "test": "npm run lint && npm run build && karma start --single-run && _mocha --compilers js:babel-core/register test/server/*Spec.js",
     "lint": "eslint ./",
     "docs-build": "babel-node tools/build-cli.js --docs-only",
-    "docs": "docs/dev-run",
+    "docs": "babel-node docs/dev-run",
     "docs-prod": "npm run docs-build && NODE_ENV=production babel-node docs/server.js",
     "docs-prod-unoptimized": "npm run docs-build -- --dev && NODE_ENV=production babel-node docs/server.js"
   },

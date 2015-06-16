@@ -156,6 +156,36 @@ describe('Modal', function () {
       }, 0);
     });
 
+    it('Should not focus on the Modal when enforceFocus is false', function (done) {
+
+      document.activeElement.should.equal(focusableContainer);
+
+      let Container = React.createClass({
+        getInitialState() {
+          return {modalOpen: true};
+        },
+        render() {
+          if (this.state.modalOpen) {
+            return (
+              <Modal enforceFocus={false} onRequestHide={()=>{}} container={this}>
+                <strong>Message</strong>
+              </Modal>
+            );
+          } else {
+            return <span/>;
+          }
+        }
+      });
+
+      React.render(<Container />, focusableContainer);
+
+      setTimeout(function () {
+        // modal should be focused when opened
+        document.activeElement.should.equal(focusableContainer);
+        done();
+      }, 0);
+    });
   });
+
 
 });
