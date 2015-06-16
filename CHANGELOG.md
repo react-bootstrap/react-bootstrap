@@ -1,3 +1,14 @@
+v0.23.4 - Tue, 16 Jun 2015 00:37:04 GMT
+---------------------------------------
+
+- [0ce46b9](../../commit/0ce46b9) [changed] only autofocus modals when enforceFocus is true (the default)
+- [c5855d2](../../commit/c5855d2) [changed] createChainedFunction to chain many functions, and to throw if non-functions are provided.
+- [d18dadb](../../commit/d18dadb) [fixed] container content no longer shifts when overflowing
+- [66f0f92](../../commit/66f0f92) [added] enforceFocus prop to Modal
+- [3869ca2](../../commit/3869ca2) [fixed] Modal doesn't "jump" when container is overflowing
+
+
+
 v0.23.3 - Fri, 12 Jun 2015 21:46:30 GMT
 ---------------------------------------
 
