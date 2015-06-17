@@ -10,13 +10,27 @@ be interested in. Maybe somebody is trying to fix that stupid bug that bothers
 you. Review the PR. Do you have any better ideas how to fix this problem? Let us
 know...
 
-## Current Issues
+## Issues
 
-[![HuBoard][huboard-badge]][huboard]
+The issue tracker is the preferred channel for bug reports, features requests
+and submitting pull requests, but please respect the following restrictions:
 
-We use HuBoard to triage issues and prioritize the backlog for the core dev
-team. Feel free to tackle any currently open [issue][issues]. The issues tagged
-with "help wanted" and especially those high in the backlog are fair game.
+- Please do not use the issue tracker for personal support requests. Stack
+  Overflow ([react-bootstrap](http://stackoverflow.com/questions/tagged/react-bootstrap)
+  tag), [Slack](http://www.reactiflux.com/) or
+  [gitter](https://gitter.im/react-bootstrap/react-bootstrap) are better places
+  to get help.
+- Please do not open issues or pull requests regarding the code in React or
+  Bootstrap (open them in their respective repositories).
+
+_Note: Occasionally issues are opened that are unclear, or we cannot verify them. When
+the issue author has not responded to our questions for verification within 7
+days then we will close the issue._
+
+[![HuBoard][huboard-badge]][huboard] We use HuBoard to triage issues and
+prioritize the backlog for the core dev team. Feel free to tackle any currently
+open [issue][issues]. The issues tagged with "help wanted" and especially those
+high in the backlog are fair game.
 
 ## Tests
 
