@@ -1092,6 +1092,11 @@ h1[id] {
   margin-bottom: 5px;
   clear: left;
 }
+.custom-dropdown {
+  max-height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 
 /* Example tabbable tabs */
 .bs-example-tabs .nav-tabs {

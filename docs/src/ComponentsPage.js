@@ -157,6 +157,10 @@ const ComponentsPage = React.createClass({
                   <p>Button dropdowns work with buttons of all sizes.</p>
                   <ReactPlayground codeText={Samples.DropdownButtonSizes} />
 
+                  <h3 id='btn-dropdowns-custom-list'>Custom list styling</h3>
+                  <p>You can specify custom css to the ul tag itself by using the listClassName prop. Example uses custom css with a max-height and an overflow property.</p>
+                  <ReactPlayground codeText={Samples.DropdownButtonCustomList} />
+
                   <h3 id='btn-dropdown-nocaret'>No caret variation</h3>
                   <p>Remove the caret using the <code>noCaret</code> prop.</p>
                   <ReactPlayground codeText={Samples.DropdownButtonNoCaret} />
