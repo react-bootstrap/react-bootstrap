@@ -13,6 +13,10 @@ if (runCoverage) {
   webpackConfig = require('./webpack/test-coverage.config');
   preprocessors.push('coverage');
   reporters.push('coverage');
+
+  if (isCI) {
+    reporters.push('coveralls');
+  }
 }
 
 module.exports = function (config) {
@@ -48,8 +52,11 @@ module.exports = function (config) {
     },
 
     coverageReporter: {
-      type: 'html',
-      dir: '.coverage'
+      dir: '.coverage',
+      reporters: [
+        { type: 'html' },
+        { type: 'lcovonly' }
+      ]
     },
 
     port: 9876,
