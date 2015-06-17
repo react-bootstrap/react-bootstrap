@@ -18,6 +18,7 @@ export default {
   DropdownButtonBasic:           require('fs').readFileSync(__dirname + '/../examples/DropdownButtonBasic.js', 'utf8'),
   SplitButtonBasic:              require('fs').readFileSync(__dirname + '/../examples/SplitButtonBasic.js', 'utf8'),
   DropdownButtonSizes:           require('fs').readFileSync(__dirname + '/../examples/DropdownButtonSizes.js', 'utf8'),
+  DropdownButtonCustomList:      require('fs').readFileSync(__dirname + '/../examples/DropdownButtonCustomList.js', 'utf8'),
   DropdownButtonNoCaret:         require('fs').readFileSync(__dirname + '/../examples/DropdownButtonNoCaret.js', 'utf8'),
   SplitButtonDropup:             require('fs').readFileSync(__dirname + '/../examples/SplitButtonDropup.js', 'utf8'),
   SplitButtonRight:              require('fs').readFileSync(__dirname + '/../examples/SplitButtonRight.js', 'utf8'),

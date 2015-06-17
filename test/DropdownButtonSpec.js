@@ -231,4 +231,16 @@ describe('DropdownButton', function () {
       ReactTestUtils.findRenderedDOMComponentWithClass(button, 'dropdown-toggle')
     );
   });
+
+  it('should set ul class when listClassName is given', function() {
+    instance = ReactTestUtils.renderIntoDocument(
+        <DropdownButton listClassName="test-class">
+          <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        </DropdownButton>
+    );
+
+    let list = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul'));
+    console.log(list.className);
+    assert.ok(list.className.match(/\btest-class\b/));
+  });
 });
