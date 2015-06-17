@@ -30,9 +30,10 @@ let buildProcess = argv.docsOnly ? docs(argv) : build();
 
 buildProcess
   .catch(err => {
-    console.error(err.toString().red);
     if (err.stack) {
       console.error(err.stack.red);
+    } else {
+      console.error(err.toString().red);
     }
     process.exit(1);
   });
