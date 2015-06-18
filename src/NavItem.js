@@ -6,6 +6,7 @@ const NavItem = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
+    linkId: React.PropTypes.string,
     onSelect: React.PropTypes.func,
     active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
@@ -26,6 +27,7 @@ const NavItem = React.createClass({
   render() {
     let {
         role,
+        linkId,
         disabled,
         active,
         href,
@@ -43,6 +45,7 @@ const NavItem = React.createClass({
           href,
           title,
           target,
+          id: linkId,
           onClick: this.handleClick,
           ref: 'anchor'
         };
