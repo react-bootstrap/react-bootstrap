@@ -10,7 +10,7 @@ var preprocessors = ['webpack', 'sourcemap'];
 var reporters = ['mocha'];
 
 if (runCoverage) {
-  webpackConfig = require('./webpack/test-coverage.config');
+  webpackConfig = require('./webpack/test.config');
   preprocessors.push('coverage');
   reporters.push('coverage');
 

@@ -9,7 +9,7 @@ export default _.extend({}, baseConfig, {
   module: {
     loaders: [
       { test: /\.js/, loader: `${jsLoader}!isparta`, exclude: /node_modules|test[\/\\]/ },
-      { test: /\.js/, loader: `${jsLoader}`, include: /test[\/\\]/ }
+      { test: /\.js/, loader: jsLoader, include: /test[\/\\]/ }
     ]
   },
 
