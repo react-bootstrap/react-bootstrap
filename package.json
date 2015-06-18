@@ -56,6 +56,7 @@
     "eslint": "0.23.0",
     "eslint-plugin-mocha": "^0.2.2",
     "eslint-plugin-react": "^2.1.0",
+    "eslint-plugin-react-bootstrap-internal": "file:tools/eslint-rules",
     "express": "^4.12.3",
     "extract-text-webpack-plugin": "^0.8.0",
     "file-loader": "^0.8.1",
