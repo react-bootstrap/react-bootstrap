@@ -114,4 +114,23 @@ describe('Nav', function () {
 
     assert.ok(items[0].props.navItem);
   });
+
+
+  describe('Web Accessibility', function(){
+
+    it('Should have tablist and tab roles', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+          <Nav bsStyle="tabs" activeKey={1}>
+            <NavItem key={1}>Tab 1 content</NavItem>
+            <NavItem key={2}>Tab 2 content</NavItem>
+          </Nav>
+        );
+
+      let ul = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'ul')[0];
+      let navItem = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a')[0];
+
+      assert.equal(React.findDOMNode(ul).getAttribute('role'), 'tablist');
+      assert.equal(React.findDOMNode(navItem).getAttribute('role'), 'tab');
+    });
+  });
 });
