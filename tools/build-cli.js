@@ -3,6 +3,7 @@
 import 'colors';
 import build from './build';
 import docs from '../docs/build';
+import lib from './lib/build';
 import { setExecOptions } from './exec';
 
 import yargs from 'yargs';
@@ -11,6 +12,11 @@ const argv = yargs
   .option('docs-only', {
     demand: false,
     default: false
+  })
+  .option('lib-only', {
+    demand: false,
+    default: false,
+    describe: 'Used for factories testing'
   })
   .option('verbose', {
     demand: false,
@@ -26,7 +32,15 @@ const argv = yargs
 
 setExecOptions(argv);
 
-let buildProcess = argv.docsOnly ? docs(argv) : build();
+let buildProcess;
+
+if (argv.libOnly) {
+  buildProcess = lib();
+} else if (argv.docsOnly) {
+  buildProcess = docs(argv);
+} else {
+  buildProcess = build();
+}
 
 buildProcess
   .catch(err => {
