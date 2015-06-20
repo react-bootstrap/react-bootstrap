@@ -3,8 +3,7 @@ import path from 'path';
 import fsp from 'fs-promise';
 import { exec, safeExec } from '../exec';
 import { copy } from '../fs-utils';
-
-const repoRoot = path.resolve(__dirname, '../../');
+import { repoRoot } from '../constants';
 
 const license = path.join(repoRoot, 'LICENSE');
 
