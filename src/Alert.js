@@ -7,13 +7,15 @@ const Alert = React.createClass({
 
   propTypes: {
     onDismiss: React.PropTypes.func,
-    dismissAfter: React.PropTypes.number
+    dismissAfter: React.PropTypes.number,
+    closeLabel: React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
       bsClass: 'alert',
-      bsStyle: 'info'
+      bsStyle: 'info',
+      closeLabel: 'Close Alert'
     };
   },
 
@@ -22,9 +24,9 @@ const Alert = React.createClass({
       <button
         type="button"
         className="close"
-        onClick={this.props.onDismiss}
-        aria-hidden="true">
-        &times;
+        aria-label={this.props.closeLabel}
+        onClick={this.props.onDismiss}>
+        <span aria-hidden="true">&times;</span>
       </button>
     );
   },
@@ -36,7 +38,7 @@ const Alert = React.createClass({
     classes['alert-dismissable'] = isDismissable;
 
     return (
-      <div {...this.props} className={classNames(this.props.className, classes)}>
+      <div {...this.props} role='alert' className={classNames(this.props.className, classes)}>
         {isDismissable ? this.renderDismissButton() : null}
         {this.props.children}
       </div>

@@ -106,4 +106,40 @@ describe('NavItem', function () {
     let linkElement = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
     assert.equal(linkElement.outerHTML.match('role="button"'), null);
   });
+
+  describe('Web Accessibility', function(){
+
+    it('Should pass aria-controls to the link', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+          <NavItem href="/path/to/stuff" target="_blank" aria-controls='hi'>Item content</NavItem>
+        );
+
+      let linkElement = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+
+      assert.ok(linkElement.hasAttribute('aria-controls'));
+    });
+
+    it('Should add aria-selected to the link', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+          <NavItem active>Item content</NavItem>
+        );
+
+      let linkElement = React.findDOMNode(
+        ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+
+      assert.equal(linkElement.getAttribute('aria-selected'), 'true');
+    });
+
+    it('Should pass role down', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+          <NavItem role='tab'>Item content</NavItem>
+        );
+
+      let linkElement = React.findDOMNode(
+        ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+
+      assert.equal(linkElement.getAttribute('role'), 'tab');
+    });
+  });
+
 });
