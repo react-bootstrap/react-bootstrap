@@ -122,8 +122,8 @@ const OverlayTrigger = React.createClass({
     }
 
     if (isOneOf('hover', this.props.trigger)) {
-      props.onMouseOver = createChainedFunction(this.handleDelayedShow, this.props.onMouseOver);
-      props.onMouseOut = createChainedFunction(this.handleDelayedHide, this.props.onMouseOut);
+      props.onMouseEnter = createChainedFunction(this.handleDelayedShow, this.props.onMouseEnter);
+      props.onMouseLeave = createChainedFunction(this.handleDelayedHide, this.props.onMouseLeave);
     }
 
     if (isOneOf('focus', this.props.trigger)) {
