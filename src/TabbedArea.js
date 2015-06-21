@@ -64,7 +64,7 @@ const TabbedArea = React.createClass({
   },
 
   render() {
-    let { id, ...props } = this.props; // eslint-disable-line object-shorthand
+    let { id, ...props } = this.props;
 
     let activeKey =
       this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;

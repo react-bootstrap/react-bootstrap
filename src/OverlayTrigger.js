@@ -305,7 +305,7 @@ const OverlayTrigger = React.createClass({
       domUtils.getOffset(node) : domUtils.getPosition(node, container);
 
     return {
-      ...offset, // eslint-disable-line object-shorthand
+      ...offset,
       height: node.offsetHeight,
       width: node.offsetWidth
     };
