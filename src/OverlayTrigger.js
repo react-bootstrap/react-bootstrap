@@ -35,6 +35,11 @@ const OverlayTrigger = React.createClass({
     delayHide: React.PropTypes.number,
     defaultOverlayShown: React.PropTypes.bool,
     overlay: React.PropTypes.node.isRequired,
+    onBlur: React.PropTypes.func,
+    onClick: React.PropTypes.func,
+    onFocus: React.PropTypes.func,
+    onMouseEnter: React.PropTypes.func,
+    onMouseLeave: React.PropTypes.func,
     containerPadding: React.PropTypes.number,
     rootClose: React.PropTypes.bool
   },

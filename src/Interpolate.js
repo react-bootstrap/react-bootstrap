@@ -10,7 +10,9 @@ const Interpolate = React.createClass({
   displayName: 'Interpolate',
 
   propTypes: {
-    format: React.PropTypes.string
+    component: React.PropTypes.node,
+    format: React.PropTypes.string,
+    unsafe: React.PropTypes.bool
   },
 
   getDefaultProps() {

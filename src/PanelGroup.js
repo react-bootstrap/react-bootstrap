@@ -1,5 +1,6 @@
-/* eslint react/prop-types: [1, {ignore: ["children", "className", "bsStyle"]}]*/
+/* eslint react/prop-types: [2, {ignore: "bsStyle"}] */
 /* BootstrapMixin contains `bsStyle` type validation */
+
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 
@@ -12,6 +13,8 @@ const PanelGroup = React.createClass({
   propTypes: {
     accordion: React.PropTypes.bool,
     activeKey: React.PropTypes.any,
+    className: React.PropTypes.string,
+    children: React.PropTypes.node,
     defaultActiveKey: React.PropTypes.any,
     onSelect: React.PropTypes.func
   },
