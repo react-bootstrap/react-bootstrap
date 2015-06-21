@@ -8,7 +8,8 @@
   },
   "parser": "babel-eslint",
   "plugins": [
-    "react"
+    "react",
+    "babel"
   ],
   "rules": {
     "comma-spacing": 2,
@@ -18,7 +19,7 @@
     "no-underscore-dangle": 0,
     "no-unused-vars": [2, { "vars": "all", "args": "none" }],
     "no-var": 2,
-    "object-shorthand": 2,
+    "babel/object-shorthand": 2,
     "quotes": [2, "single", "avoid-escape"],
     "react/display-name": 0,
     "react/jsx-no-undef": 2,
@@ -26,7 +27,7 @@
     "react/no-did-mount-set-state": 2,
     "react/no-did-update-set-state": 2,
     "react/no-multi-comp": 2,
-    "react/prop-types": [2, { ignore: [children, className] }],
+    "react/prop-types": [2, { "ignore": [ "children", "className" ] }],
     "react/react-in-jsx-scope": 2,
     "react/self-closing-comp": 2,
     "react/wrap-multilines": 2,
