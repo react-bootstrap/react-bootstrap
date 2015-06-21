@@ -8,6 +8,12 @@ describe('OverlayMixin', function () {
   let Overlay = React.createClass({
     mixins: [OverlayMixin],
 
+    getInitialState() {
+      return {
+        isOverlayShown: true
+      };
+    },
+
     render() {
       return <div />;
     },
@@ -27,7 +33,7 @@ describe('OverlayMixin', function () {
     let container = document.createElement('div');
 
     instance = ReactTestUtils.renderIntoDocument(
-      <Overlay container={container} overlay={<div id="test1" />} />
+      <Overlay container={container} overlay={<div id="test1" />} isOverlayShown/>
     );
 
     assert.equal(container.querySelectorAll('#test1').length, 1);
@@ -64,6 +70,12 @@ describe('OverlayMixin', function () {
   it('Should render only an overlay', function() {
     let OnlyOverlay = React.createClass({
       mixins: [OverlayMixin],
+
+      getInitialState() {
+        return {
+          isOverlayShown: true
+        };
+      },
 
       render() {
         return null;

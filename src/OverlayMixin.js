@@ -7,8 +7,28 @@ export default {
     container: CustomPropTypes.mountable
   },
 
+  componentDidMount() {
+    this._renderOverlay();
+  },
+
   componentWillUnmount() {
     this._unrenderOverlay();
+    this._unmountOverlayTarget();
+  },
+
+  componentDidUpdate() {
+    this._renderOverlay();
+  },
+
+  _mountOverlayTarget() {
+    if (!this._overlayTarget) {
+      this._overlayTarget = document.createElement('div');
+      this.getContainerDOMNode()
+        .appendChild(this._overlayTarget);
+    }
+  },
+
+  _unmountOverlayTarget() {
     if (this._overlayTarget) {
       this.getContainerDOMNode()
         .removeChild(this._overlayTarget);
@@ -16,33 +36,23 @@ export default {
     }
   },
 
-  componentDidUpdate() {
-    this._renderOverlay();
-  },
-
-  componentDidMount() {
-    this._renderOverlay();
-  },
-
-  _mountOverlayTarget() {
-    this._overlayTarget = document.createElement('div');
-    this.getContainerDOMNode()
-      .appendChild(this._overlayTarget);
-  },
-
   _renderOverlay() {
-    if (!this._overlayTarget) {
+    if (this.state.isOverlayShown) {
       this._mountOverlayTarget();
+
+      let overlay = this.renderOverlay();
+
+      // Save reference to help testing
+      if (overlay !== null) {
+        this._overlayInstance = React.render(overlay, this._overlayTarget);
+      } else {
+        // Unrender if the component is null for transitions to null
+        this._unrenderOverlay();
+      }
     }
 
-    let overlay = this.renderOverlay();
-
-    // Save reference to help testing
-    if (overlay !== null) {
-      this._overlayInstance = React.render(overlay, this._overlayTarget);
-    } else {
-      // Unrender if the component is null for transitions to null
-      this._unrenderOverlay();
+    if (!this.state.isOverlayShown) {
+      this._unmountOverlayTarget();
     }
   },
 
