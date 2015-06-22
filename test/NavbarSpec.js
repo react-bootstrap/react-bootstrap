@@ -61,7 +61,7 @@ describe('Nav', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar componentClass={'header'}/>
     );
-    assert.ok(React.findDOMNode(instance).nodeName, 'HEADER');
+    assert.equal(React.findDOMNode(instance).nodeName, 'HEADER');
   });
 
   it('Should add header with brand', function () {
