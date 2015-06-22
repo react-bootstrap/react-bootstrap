@@ -20,7 +20,6 @@ const babelOptions = {
 };
 
 const libDestination = path.join(bowerRoot, 'lib');
-const factoriesDestination = path.join(libDestination, 'factories');
 
 function bowerConfig() {
   return Promise.all([
@@ -37,10 +36,10 @@ export default function BuildBower() {
   console.log('Building: '.cyan + 'bower module'.green);
 
   return exec(`rimraf ${bowerRoot}`)
-    .then(() => fsp.mkdirs(factoriesDestination))
+    .then(() => fsp.mkdirs(libDestination))
     .then(() => Promise.all([
       bowerConfig(),
-      generateFactories(factoriesDestination, babelOptions),
+      generateFactories(libDestination, babelOptions),
       buildFolder(srcRoot, libDestination, babelOptions),
       copy(readme, bowerRoot),
       copy(license, bowerRoot)
