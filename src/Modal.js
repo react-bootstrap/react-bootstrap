@@ -84,6 +84,7 @@ const Modal = React.createClass({
     backdrop: React.PropTypes.oneOf(['static', true, false]),
     keyboard: React.PropTypes.bool,
     closeButton: React.PropTypes.bool,
+    container: React.PropTypes.object,
     animation: React.PropTypes.bool,
     onRequestHide: React.PropTypes.func.isRequired,
     dialogClassName: React.PropTypes.string,

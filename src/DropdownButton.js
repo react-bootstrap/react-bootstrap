@@ -1,3 +1,6 @@
+/* eslint react/prop-types: [2, {ignore: "bsSize"}] */
+/* BootstrapMixin contains `bsSize` type validation */
+
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 
@@ -17,11 +20,14 @@ const DropdownButton = React.createClass({
     dropup:    React.PropTypes.bool,
     title:     React.PropTypes.node,
     href:      React.PropTypes.string,
+    id:        React.PropTypes.string,
     onClick:   React.PropTypes.func,
     onSelect:  React.PropTypes.func,
     navItem:   React.PropTypes.bool,
     noCaret:   React.PropTypes.bool,
-    buttonClassName: React.PropTypes.string
+    buttonClassName: React.PropTypes.string,
+    className: React.PropTypes.string,
+    children:  React.PropTypes.node
   },
 
   render() {
