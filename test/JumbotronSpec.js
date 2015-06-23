@@ -9,6 +9,8 @@ describe('Jumbotron', function () {
         <strong>Content</strong>
       </Jumbotron>
     );
+
+    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
@@ -19,5 +21,14 @@ describe('Jumbotron', function () {
       </Jumbotron>
     );
     assert.ok(React.findDOMNode(instance).className.match(/\bjumbotron\b/));
+  });
+
+  it('Should override node class', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Jumbotron componentClass='section'>
+        <strong>Content</strong>
+      </Jumbotron>
+    );
+    assert.equal(React.findDOMNode(instance).nodeName, 'SECTION');
   });
 });
