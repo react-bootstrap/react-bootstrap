@@ -17,9 +17,10 @@ and submitting pull requests, but please respect the following restrictions:
 
 - Please do not use the issue tracker for personal support requests. Stack
   Overflow ([react-bootstrap](http://stackoverflow.com/questions/tagged/react-bootstrap)
-  tag), [Slack](http://www.reactiflux.com/) or
-  [gitter](https://gitter.im/react-bootstrap/react-bootstrap) are better places
-  to get help.
+  tag), [Slack](http://www.reactiflux.com/), 
+  [gitter](https://gitter.im/react-bootstrap/react-bootstrap), or 
+  [Thinkful](http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap) 
+  are better places to get help.
 - Please do not open issues or pull requests regarding the code in React or
   Bootstrap (open them in their respective repositories).
 
