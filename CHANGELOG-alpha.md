@@ -1,3 +1,19 @@
+v0.24.0-alpha.4 - Tue, 23 Jun 2015 01:49:18 GMT
+-----------------------------------------------
+
+- [23f9d21](../../commit/23f9d21) [changed] Add missed prop types validations.
+- [320b7ab](../../commit/320b7ab) [changed] Update fs-extra. Dev dependency.
+- [2ffcf5d](../../commit/2ffcf5d) [fixed] Popovers flicker when moving mouse amongst children of the trigger
+- [ccc50e0](../../commit/ccc50e0) [fixed] Accessibility: Panel header uses aria-controls
+- [1e552cc](../../commit/1e552cc) [added] Accessibility: use appropriate ARIA's when an id is given to the tabbed area
+- [8752754](../../commit/8752754) [added] Add linkId prop to NavItem
+- [722969d](../../commit/722969d) [added] Accessibility, add tab roles when type "tabs"
+- [4adaa70](../../commit/4adaa70) [added] Accessibility: role 'alert' and aria-label to Alert component
+- [2594dce](../../commit/2594dce) [fixed] Modal Null Exception when react-bootstrap is loaded before the Body tag
+- [e77bf88](../../commit/e77bf88) [changed] Update eslint. Dev dependency.
+
+
+
 v0.24.0-alpha.3 - Tue, 16 Jun 2015 00:43:49 GMT
 -----------------------------------------------
 
