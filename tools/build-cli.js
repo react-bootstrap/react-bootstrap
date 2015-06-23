@@ -3,6 +3,7 @@
 import 'colors';
 import build from './build';
 import docs from '../docs/build';
+import lib from './lib/build';
 import { setExecOptions } from './exec';
 
 import yargs from 'yargs';
@@ -19,6 +20,11 @@ const argv = yargs
     default: true,
     describe: 'Use Babel cache when running webpack'
   })
+  .option('lib-only', {
+    demand: false,
+    default: false,
+    describe: 'Used for factories testing'
+  })
   .option('verbose', {
     demand: false,
     default: false,
@@ -33,13 +39,22 @@ const argv = yargs
 
 setExecOptions(argv);
 
-let buildProcess = argv.docsOnly ? docs(argv) : build(argv);
+let buildProcess;
+
+if (argv.libOnly) {
+  buildProcess = lib(argv);
+} else if (argv.docsOnly) {
+  buildProcess = docs(argv);
+} else {
+  buildProcess = build(argv);
+}
 
 buildProcess
   .catch(err => {
-    console.error(err.toString().red);
     if (err.stack) {
       console.error(err.stack.red);
+    } else {
+      console.error(err.toString().red);
     }
     process.exit(1);
   });

@@ -123,26 +123,6 @@ describe('Panel', function () {
     assert.ok(anchor.className.match(/\bcollapsed\b/));
   });
 
-  it('Should be aria-expanded=true', function () {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Panel collapsible={true} expanded={true} header="Heading">Panel content</Panel>
-    );
-    let collapse = React.findDOMNode(instance).querySelector('.panel-collapse');
-    let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
-    assert.equal(collapse.getAttribute('aria-expanded'), 'true');
-    assert.equal(anchor.getAttribute('aria-expanded'), 'true');
-  });
-
-  it('Should be aria-expanded=false', function () {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Panel collapsible={true} expanded={false} header="Heading">Panel content</Panel>
-    );
-    let collapse = React.findDOMNode(instance).querySelector('.panel-collapse');
-    let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
-    assert.equal(collapse.getAttribute('aria-expanded'), 'false');
-    assert.equal(anchor.getAttribute('aria-expanded'), 'false');
-  });
-
   it('Should call onSelect handler', function (done) {
     function handleSelect (e, key) {
       assert.equal(key, '1');
@@ -203,5 +183,41 @@ describe('Panel', function () {
 
     assert.equal(children[0].nodeName, 'TABLE');
     assert.notOk(children[0].className.match(/\bpanel-body\b/));
+  });
+
+  describe('Web Accessibility', function(){
+
+    it('Should be aria-expanded=true', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Panel collapsible={true} expanded={true} header="Heading">Panel content</Panel>
+      );
+      let collapse = React.findDOMNode(instance).querySelector('.panel-collapse');
+      let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
+      assert.equal(collapse.getAttribute('aria-expanded'), 'true');
+      assert.equal(anchor.getAttribute('aria-expanded'), 'true');
+    });
+
+    it('Should be aria-expanded=false', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Panel collapsible={true} expanded={false} header="Heading">Panel content</Panel>
+      );
+      let collapse = React.findDOMNode(instance).querySelector('.panel-collapse');
+      let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
+      assert.equal(collapse.getAttribute('aria-expanded'), 'false');
+      assert.equal(anchor.getAttribute('aria-expanded'), 'false');
+    });
+
+    it('Should add aria-controls with id', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Panel id='panel-1' collapsible expanded header="Heading">Panel content</Panel>
+      );
+
+      let collapse = React.findDOMNode(instance).querySelector('.panel-collapse');
+      let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
+
+      assert.equal(collapse.getAttribute('id'), 'panel-1');
+      assert.equal(anchor.getAttribute('aria-controls'), 'panel-1');
+    });
+
   });
 });

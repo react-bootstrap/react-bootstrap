@@ -52,7 +52,7 @@ const Nav = React.createClass({
 
     return (
       <nav {...this.props} className={classNames(this.props.className, classes)}>
-        {this.renderUl()}
+        { this.renderUl() }
       </nav>
     );
   },
@@ -67,7 +67,11 @@ const Nav = React.createClass({
     classes['navbar-right'] = this.props.right;
 
     return (
-      <ul {...this.props} className={classNames(this.props.className, classes)} ref="ul">
+      <ul {...this.props}
+        role={this.props.bsStyle === 'tabs' ? 'tablist' : null}
+        className={classNames(this.props.className, classes)}
+        ref="ul"
+      >
         {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
       </ul>
     );
@@ -95,6 +99,7 @@ const Nav = React.createClass({
     return cloneElement(
       child,
       {
+        role: this.props.bsStyle === 'tabs' ? 'tab' : null,
         active: this.getChildActiveProp(child),
         activeKey: this.props.activeKey,
         activeHref: this.props.activeHref,

@@ -7,42 +7,50 @@ const NavItem = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
+    linkId: React.PropTypes.string,
     onSelect: React.PropTypes.func,
     active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
+    role: React.PropTypes.string,
     title: React.PropTypes.node,
     eventKey: React.PropTypes.any,
-    target: React.PropTypes.string
+    target: React.PropTypes.string,
+    'aria-controls': React.PropTypes.string
   },
 
   render() {
     let {
+        role,
+        linkId,
         disabled,
         active,
         href,
         title,
         target,
         children,
-        ...props } = this.props; // eslint-disable-line object-shorthand
+        'aria-controls': ariaControls,  // eslint-disable-line react/prop-types
+        ...props } = this.props;
     let classes = {
           active,
           disabled
         };
     let linkProps = {
+          role,
           href,
           title,
           target,
+          id: linkId,
           onClick: this.handleClick
         };
 
-    if (href === '#') {
+    if (!role && href === '#') {
       linkProps.role = 'button';
     }
 
     return (
-      <li {...props} className={classNames(props.className, classes)}>
-        <SafeAnchor {...linkProps}>
+      <li {...props} role='presentation' className={classNames(props.className, classes)}>
+        <SafeAnchor {...linkProps} aria-selected={active} aria-controls={ariaControls}>
           { children }
         </SafeAnchor>
       </li>

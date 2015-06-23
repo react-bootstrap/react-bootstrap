@@ -16,4 +16,23 @@ describe('TabPane', function () {
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active'));
   });
+
+  describe('Web Accessibility', function(){
+
+    it('Should have aria-hidden', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <TabPane active>Item content</TabPane>
+      );
+
+      assert.equal(React.findDOMNode(instance).getAttribute('aria-hidden'), 'false');
+    });
+
+    it('Should have role', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <TabPane active>Item content</TabPane>
+      );
+
+      assert.equal(React.findDOMNode(instance).getAttribute('role'), 'tabpanel');
+    });
+  });
 });

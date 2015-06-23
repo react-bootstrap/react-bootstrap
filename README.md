@@ -46,7 +46,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [documentation]: http://react-bootstrap.github.io
 [contributing]: https://github.com/react-bootstrap/react-bootstrap/blob/master/CONTRIBUTING.md
 
-[build-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg
+[build-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg?branch=master
 [build]: https://travis-ci.org/react-bootstrap/react-bootstrap
 
 [npm-badge]: https://badge.fury.io/js/react-bootstrap.svg

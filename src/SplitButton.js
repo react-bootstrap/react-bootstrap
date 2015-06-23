@@ -1,5 +1,6 @@
-/* eslint react/prop-types: [1, {ignore: ["children", "className", "bsSize"]}]*/
+/* eslint react/prop-types: [2, {ignore: "bsSize"}] */
 /* BootstrapMixin contains `bsSize` type validation */
+
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
@@ -21,7 +22,9 @@ const SplitButton = React.createClass({
     dropup:        React.PropTypes.bool,
     onClick:       React.PropTypes.func,
     onSelect:      React.PropTypes.func,
-    disabled:      React.PropTypes.bool
+    disabled:      React.PropTypes.bool,
+    className:     React.PropTypes.string,
+    children:      React.PropTypes.node
   },
 
   getDefaultProps() {

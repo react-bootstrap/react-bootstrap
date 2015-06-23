@@ -35,6 +35,11 @@ const OverlayTrigger = React.createClass({
     delayHide: React.PropTypes.number,
     defaultOverlayShown: React.PropTypes.bool,
     overlay: React.PropTypes.node.isRequired,
+    onBlur: React.PropTypes.func,
+    onClick: React.PropTypes.func,
+    onFocus: React.PropTypes.func,
+    onMouseEnter: React.PropTypes.func,
+    onMouseLeave: React.PropTypes.func,
     containerPadding: React.PropTypes.number,
     rootClose: React.PropTypes.bool
   },
@@ -122,8 +127,8 @@ const OverlayTrigger = React.createClass({
     }
 
     if (isOneOf('hover', this.props.trigger)) {
-      props.onMouseOver = createChainedFunction(this.handleDelayedShow, this.props.onMouseOver);
-      props.onMouseOut = createChainedFunction(this.handleDelayedHide, this.props.onMouseOut);
+      props.onMouseEnter = createChainedFunction(this.handleDelayedShow, this.props.onMouseEnter);
+      props.onMouseLeave = createChainedFunction(this.handleDelayedHide, this.props.onMouseLeave);
     }
 
     if (isOneOf('focus', this.props.trigger)) {
@@ -305,7 +310,7 @@ const OverlayTrigger = React.createClass({
       domUtils.getOffset(node) : domUtils.getPosition(node, container);
 
     return {
-      ...offset, // eslint-disable-line object-shorthand
+      ...offset,
       height: node.offsetHeight,
       width: node.offsetWidth
     };

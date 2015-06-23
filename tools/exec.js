@@ -8,36 +8,31 @@ let executionOptions = {
 };
 
 function logWithPrefix(prefix, message) {
-  let formattedMessage = message.trim().split('\n')
-    .reduce((acc, line) => `${acc}${ acc !== '' ? '\n' : '' }${prefix} ${line}`, '');
-
-  console.log(formattedMessage);
+  console.log(
+    message.toString().trim()
+    .split('\n')
+    .map((line) => `${prefix.grey} ${line}`)
+    .join('\n')
+  );
 }
 
 function execWrapper(command, options = {}) {
   let proc = exec(command, options);
-  let title = options.title || command;
-  let log = message => logWithPrefix(`[${title}]`.grey, message);
-
-  if (executionOptions.verbose) {
-    let output = (data, type) => {
-      logWithPrefix(`[${title}] ${type}:`.grey, data.toString());
-    };
-    proc = proc.progress(({stdout, stderr}) => {
-      stdout.on('data', data => output(data, 'stdout'));
-      stderr.on('data', data => output(data, 'stderr'));
-    })
-    .then(result => {
-      log('Complete'.cyan);
-      return result;
-    })
-    .catch(err => {
-      log(`ERROR: ${err.toString()}`.red);
-      throw err;
-    });
+  if (!executionOptions.verbose) {
+    return proc;
   }
 
-  return proc;
+  let title = options.title || command;
+  let output = (data, type) => logWithPrefix(`[${title}] ${type}:`, data);
+
+  return proc.progress(({stdout, stderr}) => {
+    stdout.on('data', data => output(data, 'stdout'));
+    stderr.on('data', data => output(data, 'stderr'));
+  })
+  .then(result => {
+    logWithPrefix(`[${title}]`, 'Complete'.cyan);
+    return result;
+  });
 }
 
 function safeExec(command, options = {}) {

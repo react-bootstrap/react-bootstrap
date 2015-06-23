@@ -1,31 +1,23 @@
 import _ from 'lodash';
 import path from 'path';
-import fsp from 'fs-promise';
+import fs from 'fs';
 import { srcRoot } from './constants';
 import components from './public-components';
 import { buildContent } from './buildBabel';
 
-const templatePath = path.join(srcRoot, 'templates');
-const factoryTemplatePath = path.join(templatePath, 'factory.js.template');
-const indexTemplatePath = path.join(templatePath, 'factory.index.js.template');
-
 export default function generateFactories(destination, babelOptions={}) {
 
-  let generateCompiledFile = function (file, content) {
-    let outpath = path.join(destination, `${file}.js`);
+  function generateCompiledFile(file, content) {
+    const outpath = path.join(destination, 'factories', `${file}.js`);
     buildContent(content, __dirname, outpath, babelOptions);
-  };
+  }
 
-  return Promise.all([
-    fsp.readFile(factoryTemplatePath)
-      .then(template => {
-        Promise.all(components.map(name => {
-          generateCompiledFile(name, _.template(template)({name}));
-        }));
-      }),
-    fsp.readFile(indexTemplatePath)
-      .then(template => _.template(template)({components}))
-      .then(content => generateCompiledFile('index', content))
-  ]);
+  const indexTemplate = fs.readFileSync(path.join(srcRoot, 'templates', 'factory.index.js.template'));
+  const factoryTemplate = fs.readFileSync(path.join(srcRoot, 'templates', 'factory.js.template'));
 
+  generateCompiledFile( 'index', _.template(indexTemplate)({components}) );
+
+  return Promise.all(
+    components.map( name => generateCompiledFile( name, _.template(factoryTemplate)({name}) ))
+  );
 }

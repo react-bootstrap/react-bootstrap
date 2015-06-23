@@ -71,4 +71,26 @@ describe('Alert', function () {
     );
     assert.ok(React.findDOMNode(instance).className.match(/\balert-danger\b/));
   });
+
+  describe('Web Accessibility', function(){
+    it('Should have alert role', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Alert>Message</Alert>
+      );
+
+      assert.equal(React.findDOMNode(instance).getAttribute('role'), 'alert');
+    });
+
+    it('Should have add ARIAs to button', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Alert onDismiss={()=>{}} closeLabel='close'>Message</Alert>
+      );
+
+      let button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'button');
+
+      assert.equal(React.findDOMNode(button).getAttribute('aria-label'), 'close');
+      assert.equal(React.findDOMNode(button).children[0].getAttribute('aria-hidden'), 'true');
+    });
+
+  });
 });

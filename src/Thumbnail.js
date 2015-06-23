@@ -6,6 +6,12 @@ import SafeAnchor from './SafeAnchor';
 const Thumbnail = React.createClass({
   mixins: [BootstrapMixin],
 
+  propTypes: {
+    alt: React.PropTypes.string,
+    href: React.PropTypes.string,
+    src: React.PropTypes.string
+  },
+
   getDefaultProps() {
     return {
       bsClass: 'thumbnail'

@@ -35,7 +35,7 @@ export default function({ preid, type }) {
       console.log('Version changed from '.cyan + oldVersion.green + ' to '.cyan + version.green);
       json.version = version;
 
-      return fsp.writeFile(packagePath, JSON.stringify(json, null, 2))
+      return fsp.writeFile(packagePath, JSON.stringify(json, null, 2) + '\n')
         .then(() => safeExec(`git add ${packagePath}`))
         .then(() => json.version);
     });

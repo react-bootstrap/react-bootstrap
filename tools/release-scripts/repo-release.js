@@ -3,8 +3,7 @@ import path from 'path';
 import fsp from 'fs-promise';
 import { exec, safeExec } from '../exec';
 import { copy } from '../fs-utils';
-
-const repoRoot = path.resolve(__dirname, '../../');
+import { repoRoot } from '../constants';
 
 const license = path.join(repoRoot, 'LICENSE');
 
@@ -24,7 +23,7 @@ export default (repo, srcFolder, tmpFolder, version) => {
     .then(() => copy(srcFolder, tmpFolder))
     .then(() => copy(license, tmpFolder))
     .then(() => safeExec(`cd ${tmpFolder} && git add -A .`))
-    .then(() => safeExec(`cd ${tmpFolder} && git commmit -m "Release v${version}"`))
+    .then(() => safeExec(`cd ${tmpFolder} && git commit -m "Release v${version}"`))
     .then(() => safeExec(`cd ${tmpFolder} && git tag -a --message=v${version} v${version}`))
     .then(() => safeExec(`cd ${tmpFolder} && git push`))
     .then(() => safeExec(`cd ${tmpFolder} && git push --tags`))

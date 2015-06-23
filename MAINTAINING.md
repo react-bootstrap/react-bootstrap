@@ -16,6 +16,11 @@ room of the urgent issues. We are using
 [HuBoard](https://huboard.com/react-bootstrap/react-bootstrap) which is a kanban
 style board to track and prioritize issues.
 
+Some issues are opened that are just too vague to do anything about. If after
+attempting to get feedback from issue authors fails after 7 days, then close the
+issue. Please inform the issue author that they may re-open if they are able to
+present the requested information.
+
 ## Merging a pull request
 
 Please, make sure:

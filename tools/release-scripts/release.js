@@ -7,15 +7,17 @@ import preConditions from './pre-conditions';
 import versionBump from './version-bump';
 import addChangelog from './changelog';
 import repoRelease from './repo-release';
+import tag from './tag';
 import tagAndPublish from './tag-and-publish';
-import test from './test';
+import test, { lint } from '../release-scripts/test';
 import build from '../build';
 
 import { bowerRepo, bowerRoot, tmpBowerRepo, docsRoot, docsRepo, tmpDocsRepo } from '../constants';
 
 const yargsConf = yargs
-  .usage('Usage: $0 <version> [--preid <identifier>]')
+  .usage('Usage: $0 <version> [--preid <identifier>]\nor\nUsage: $0 --docs')
   .help('h')
+  .example('$0 --docs', 'Release only docs')
   .example('$0 minor --preid beta', 'Release with minor version bump with pre-release tag')
   .example('$0 major', 'Release with major version bump')
   .example('$0 major --dry-run', 'Release dry run with patch version bump')
@@ -24,6 +26,10 @@ const yargsConf = yargs
   .command('minor', 'Release minor')
   .command('major', 'Release major')
   .command('<version>', 'Release specific version')
+  .option('docs', {
+    demand: false,
+    describe: 'Release only docs'
+  })
   .option('preid', {
     demand: false,
     describe: 'pre-release identifier',
@@ -51,38 +57,23 @@ if (argv.dryRun) {
 let version;
 
 const versionBumpOptions = {
-  preid: argv.preid,
+  preid: argv.docs ? 'docs' : argv.preid,
   type: argv._[0]
 };
 
-if (versionBumpOptions.type === undefined && versionBumpOptions.preid === undefined) {
-  console.log('Must provide either a version bump type, preid, or both'.red);
+if (!argv.docs && versionBumpOptions.type === undefined && versionBumpOptions.preid === undefined) {
+  console.log('Must provide either --docs or a version bump type, preid (or both)'.red);
   console.log(yargsConf.help());
   process.exit(1);
 }
 
-preConditions()
-  .then(test)
-  .then(versionBump(versionBumpOptions))
-  .then(v => { version = v; })
-  .then(() => addChangelog(version))
-  .then(() => {
-    // useCache implicitly defaults to false here.
-    return build(argv)
-      .catch(err => {
-        console.log('Build failed, reverting version bump'.red);
-
-        return exec('git reset HEAD .')
-          .then(() => exec('git checkout package.json'))
-          .then(() => exec('git checkout CHANGELOG.md'))
-          .then(() => console.log('Version bump reverted'.red))
-          .then(() => {
-            throw err;
-          });
-      });
-  })
-  .then(() => safeExec(`git commit -m "Release v${version}"`))
-  .then(() => {
+function tagAndRelease() {
+  if (argv.docs) {
+    return Promise.all([
+      tag(version),
+      repoRelease(docsRepo, docsRoot, tmpDocsRepo, version)
+    ]);
+  } else {
     let releases = [
       tagAndPublish(version),
       repoRelease(bowerRepo, bowerRoot, tmpBowerRepo, version)
@@ -93,7 +84,33 @@ preConditions()
     }
 
     return Promise.all(releases);
-  })
+  }
+}
+
+function prepareRepo() {
+  if (argv.docs) {
+    return exec(`npm run docs-build${ argv.verbose ? ' -- --verbose' : '' }`);
+  } else {
+    return build(argv.verbose).then(() => addChangelog(version));
+  }
+}
+
+function revertAndThrow(err) {
+  console.log('Build failed, reverting version bump'.red);
+
+  return exec('git reset HEAD .')
+    .then(() => exec('git checkout package.json'))
+    .then(() => console.log('Version bump reverted'.red))
+    .then(() => { throw err; });
+}
+
+preConditions()
+  .then(argv.docs ? lint : test)
+  .then(versionBump(versionBumpOptions))
+  .then(v => { version = v; })
+  .then(() => prepareRepo().catch(err => revertAndThrow(err)))
+  .then(() => safeExec(`git commit -m "Release v${version}"`))
+  .then(tagAndRelease)
   .then(() => console.log('Version '.cyan + `v${version}`.green + ' released!'.cyan))
   .catch(err => {
     if (!err.__handled) {
