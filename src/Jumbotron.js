@@ -1,9 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 const Jumbotron = React.createClass({
   propTypes: {
-    componentClass: React.PropTypes.any.isRequired
+    componentClass: CustomPropTypes.elementType
   },
 
   getDefaultProps() {

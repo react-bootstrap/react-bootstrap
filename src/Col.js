@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import styleMaps from './styleMaps';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 const Col = React.createClass({
   propTypes: {
@@ -20,7 +21,7 @@ const Col = React.createClass({
     smPull: React.PropTypes.number,
     mdPull: React.PropTypes.number,
     lgPull: React.PropTypes.number,
-    componentClass: React.PropTypes.node.isRequired
+    componentClass: CustomPropTypes.elementType
   },
 
   getDefaultProps() {
