@@ -14,7 +14,8 @@ const Root = React.createClass({
         'index.html',
         'introduction.html',
         'getting-started.html',
-        'components.html'
+        'components.html',
+        'support.html'
       ];
     }
   },

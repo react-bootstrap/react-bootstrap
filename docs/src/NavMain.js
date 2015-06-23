@@ -15,6 +15,10 @@ const NAV_LINKS = {
   'components': {
     link: 'components',
     title: 'Components'
+  },
+  'support': {
+    link: 'support',
+    title: 'Support'
   }
 };
 
