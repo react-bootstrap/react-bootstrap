@@ -26,6 +26,14 @@ const Root = React.createClass({
     };
   },
 
+  childContextTypes: {
+    metadata: React.PropTypes.object
+  },
+
+  getChildContext(){
+    return { metadata: this.props.propData };
+  },
+
   render() {
     // Dump out our current props to a global object via a script tag so
     // when initialising the browser environment we can bootstrap from the
@@ -65,7 +73,7 @@ const Root = React.createClass({
         <head dangerouslySetInnerHTML={head} />
 
         <body>
-          <Router.RouteHandler />
+          <Router.RouteHandler propData={this.props.propData} />
 
           <script dangerouslySetInnerHTML={browserInitScriptObj} />
           <script src={`${this.props.assetBaseUrl}/assets/bundle.js`} />
