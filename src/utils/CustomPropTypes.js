@@ -1,3 +1,5 @@
+import React from 'react';
+
 const ANONYMOUS = '<<anonymous>>';
 
 const CustomPropTypes = {
@@ -14,6 +16,20 @@ const CustomPropTypes = {
    * @returns {Error|undefined}
    */
   mountable: createMountableChecker(),
+
+  /**
+   * Checks whether a prop provides a type of element.
+   *
+   * The type of element can be provided in two forms:
+   * - tag name (string)
+   * - a return value of React.createClass(...)
+   *
+   * @param props
+   * @param propName
+   * @param componentName
+   * @returns {Error|undefined}
+   */
+  elementType: createElementTypeChecker(),
 
   /**
    * Checks whether a prop matches a key of an associated object
@@ -38,6 +54,11 @@ const CustomPropTypes = {
   all
 };
 
+function errMsg(props, propName, componentName, msgContinuation) {
+  return `Invalid prop '${propName}' of value '${props[propName]}'` +
+    ` supplied to '${componentName}'${msgContinuation}`;
+}
+
 /**
  * Create chain-able isRequired validator
  *
@@ -50,8 +71,7 @@ function createChainableTypeChecker(validate) {
     if (props[propName] == null) {
       if (isRequired) {
         return new Error(
-          'Required prop `' + propName + '` was not specified in ' +
-            '`' + componentName + '`.'
+          `Required prop '${propName}' was not specified in '${componentName}'.`
         );
       }
     } else {
@@ -70,8 +90,8 @@ function createMountableChecker() {
     if (typeof props[propName] !== 'object' ||
       typeof props[propName].render !== 'function' && props[propName].nodeType !== 1) {
       return new Error(
-        'Invalid prop `' + propName + '` supplied to ' +
-          '`' + componentName + '`, expected a DOM element or an object that has a `render` method'
+        errMsg(props, propName, componentName,
+          ', expected a DOM element or an object that has a `render` method')
       );
     }
   }
@@ -85,8 +105,7 @@ function createKeyOfChecker(obj) {
     if (!obj.hasOwnProperty(propValue)) {
       let valuesString = JSON.stringify(Object.keys(obj));
       return new Error(
-        `Invalid prop '${propName}' of value '${propValue}' ` +
-        `supplied to '${componentName}', expected one of ${valuesString}.`
+        errMsg(props, propName, componentName, `, expected one of ${valuesString}.`)
       );
     }
   }
@@ -133,6 +152,26 @@ function all(propTypes) {
       }
     }
   };
+}
+
+function createElementTypeChecker() {
+  function validate(props, propName, componentName) {
+    let errBeginning = errMsg(props, propName, componentName,
+      '. Expected an Element `type`');
+
+    if (typeof props[propName] !== 'function') {
+      if (React.isValidElement(props[propName])) {
+        return new Error(errBeginning + ', not an actual Element');
+      }
+
+      if (typeof props[propName] !== 'string') {
+        return new Error(errBeginning +
+          ' such as a tag name or return value of React.createClass(...)');
+      }
+    }
+  }
+
+  return createChainableTypeChecker(validate);
 }
 
 export default CustomPropTypes;

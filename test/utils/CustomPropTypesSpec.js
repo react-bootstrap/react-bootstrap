@@ -26,6 +26,34 @@ describe('CustomPropTypes', function() {
     });
   });
 
+  describe('elementType', function () {
+    function validate(prop) {
+      return CustomPropTypes.elementType({p: prop}, 'p', 'TestComponent');
+    }
+
+    it('Should validate OK with undifined or null values', function() {
+      assert.isUndefined(validate());
+      assert.isUndefined(validate(null));
+    });
+
+    it('Should validate OK with elementType values', function() {
+      assert.isUndefined(validate('span'));
+      assert.isUndefined(validate(function(){}));
+    });
+
+    it('Should return error with not a string or function values', function() {
+      let err = validate({});
+      assert.instanceOf(err, Error);
+      assert.include(err.message, 'Expected an Element `type` such as a tag name or return value of React.createClass(...)');
+    });
+
+    it('Should return error with react element', function() {
+      let err = validate(React.createElement('span'));
+      assert.instanceOf(err, Error);
+      assert.include(err.message, 'Expected an Element `type`, not an actual Element');
+    });
+  });
+
   describe('keyOf', function () {
     let obj = {'foo': 1};
     function validate(prop) {

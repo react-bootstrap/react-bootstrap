@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 const Button = React.createClass({
   mixins: [BootstrapMixin],
@@ -11,7 +12,7 @@ const Button = React.createClass({
     block: React.PropTypes.bool,
     navItem: React.PropTypes.bool,
     navDropdown: React.PropTypes.bool,
-    componentClass: React.PropTypes.node,
+    componentClass: CustomPropTypes.elementType,
     href: React.PropTypes.string,
     target: React.PropTypes.string
   },
