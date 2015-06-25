@@ -1,6 +1,9 @@
-import React from 'react';
-import Table from '../../src/Table';
 import merge from 'lodash/object/merge';
+import React from 'react';
+
+import Label from '../../src/Label';
+import Table from '../../src/Table';
+
 
 let cleanDocletValue = str => str.replace(/^\{/, '').replace(/\}$/, '');
 
@@ -18,11 +21,12 @@ const PropTable = React.createClass({
     }
 
     return (
-      <Table bordered striped>
+      <Table bordered striped className="prop-table">
         <thead>
           <tr>
             <th>Name</th>
             <th>Type</th>
+            <th>Default</th>
             <th>Description</th>
           </tr>
         </thead>
@@ -59,25 +63,32 @@ const PropTable = React.createClass({
 
         return (
           <tr key={propName} className='prop-table-row'>
-            <td><code>{propName}</code></td>
             <td>
-              <div><code>{ this.getType(prop)}</code></div>
-              <div>
-                <strong>
-                  { prop.required && <small>(required) </small> }
-                  { prop.defaultValue && <small><em>{'default: ' + prop.defaultValue }</em></small> }
-                </strong>
-              </div>
+              {propName} {this.renderRequiredLabel(prop)}
             </td>
+            <td>
+              <div>{this.getType(prop)}</div>
+            </td>
+            <td>{prop.defaultValue}</td>
             <td>{prop.desc}</td>
           </tr>
         );
       });
   },
 
-  getType(prop){
+  renderRequiredLabel(prop) {
+    if (!prop.required) {
+      return null;
+    }
+
+    return (
+      <Label>required</Label>
+    );
+  },
+
+  getType(prop) {
     let type = prop.type;
-    let name = type.name;
+    let name = this.getDisplayTypeName(type.name);
     let doclets = prop.doclets || {};
 
     switch (name) {
@@ -85,16 +96,46 @@ const PropTable = React.createClass({
         return name;
       case 'union':
         return type.value.map(val => this.getType({ type: val })).join(' | ');
-
       case 'array':
-        return 'Array<' + type.value.name + '>';
+        return `array<${this.getDisplayTypeName(type.value.name)}>`;
       case 'enum':
-        return 'One Of: ' + (type.value || []).join(', ');
+        return this.renderEnum(type);
       case 'custom':
         return cleanDocletValue(doclets.type || name);
       default:
         return name;
     }
+  },
+
+  getDisplayTypeName(typeName) {
+    if (typeName === 'func') {
+      return 'function';
+    } else if (typeName === 'bool') {
+      return 'boolean';
+    } else {
+      return typeName;
+    }
+  },
+
+  renderEnum(enumType) {
+    const enumValues = enumType.value || [];
+
+    const renderedEnumValues = [];
+    enumValues.forEach(function renderEnumValue(enumValue, i) {
+      if (i > 0) {
+        renderedEnumValues.push(
+          <span key={`${i}c`}>, </span>
+        );
+      }
+
+      renderedEnumValues.push(
+        <code key={i}>{enumValue}</code>
+      );
+    });
+
+    return (
+      <span>one of: {renderedEnumValues}</span>
+    );
   }
 });
 
