@@ -6,32 +6,13 @@ import yargs from 'yargs';
 export const options = yargs
   .alias('p', 'optimize-minimize')
   .alias('d', 'debug')
-  .option('use-cache', {
-    type: 'boolean',
-    default: true
-  })
   .option('port', {
     default: '8080',
     type: 'string'
   })
   .argv;
 
-export let jsLoader = 'babel';
-if (options.useCache) {
-  const babelCache = path.resolve(path.join(__dirname, '../.babel-cache'));
-
-  if (!fs.existsSync(babelCache)) {
-    try {
-      fs.mkdirSync(babelCache);
-    } catch (err) {
-      if (err.code !== 'EEXIST') {
-        console.error(err.stack);
-      }
-    }
-  }
-
-  jsLoader += `?cacheDirectory=${babelCache}`;
-}
+export const jsLoader = 'babel?cacheDirectory';
 
 const baseConfig = {
   entry: undefined,

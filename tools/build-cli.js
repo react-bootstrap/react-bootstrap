@@ -14,12 +14,6 @@ const argv = yargs
     demand: false,
     default: false
   })
-  .option('use-cache', {
-    type: 'boolean',
-    demand: false,
-    default: true,
-    describe: 'Use Babel cache when running webpack'
-  })
   .option('lib-only', {
     demand: false,
     default: false,
