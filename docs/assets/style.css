@@ -162,10 +162,6 @@ body {
   position: absolute;
 }
 
-.table .prop-table-row code {
-  color: #282828;
-  font-size: 15px;
-  margin: 0;
-  padding: 0;
-  background-color: transparent;
+.prop-table {
+  background-color: white;
 }
