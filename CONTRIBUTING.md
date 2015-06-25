@@ -80,6 +80,34 @@ desired change easier.
 Please update the docs with any API changes, the code and docs should always be
 in sync.
 
+Component prop documentation is generated automatically from the React components 
+and their leading comments. Please make sure to provide comments for any `propTypes` you add 
+or change in a Component.
+
+```js
+propTypes: {
+    /**
+     * Sets the visibility of the Component
+     */
+    show: React.PropTypes.bool,
+
+    /**
+     * A callback fired when the visibility changes
+     * @type {func}
+     * @required
+     */
+    onHide: myCustomPropType
+}
+```
+
+There are a few caveats to this format that differ from conventional JSDoc comments.
+
+- Only specific doclets (the @ things) should be used, and only when the data cannot be parsed from the component itself
+    - `@type`: Override the "type", use the same names as the default React PropTypes: string, func, bool, number, object. You can express enum and oneOfType types, Like `{("optionA"|"optionB")}`.
+    - `@required`: to mark a prop as required (use the normal React isRequired if possible)
+    - `@private`: Will hide the prop in the documentation
+- All description text should be above the doclets.
+
 ## Implement additional components and features
 
 This project is seeking parity with the core Bootstrap library.
