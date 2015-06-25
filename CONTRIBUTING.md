@@ -69,6 +69,12 @@ doesn't make sense to do this, then it doesn't make sense to use `[changed]` or
 `[removed]` :). For further reading on writing a well formed commit message,
 check out these [5 useful tips for a better commit message][commit-message]
 
+## Visual Changes
+
+When making a visual change, if at all feasible please provide screenshots
+and/or screencasts of the proposed change. This will help us to understand the
+desired change easier.
+
 ## Docs
 
 Please update the docs with any API changes, the code and docs should always be
