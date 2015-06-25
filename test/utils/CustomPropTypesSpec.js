@@ -2,24 +2,36 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import CustomPropTypes from '../../src/utils/CustomPropTypes';
 
+function isChainableAndUndefinedOK(validatorUnderTest) {
+  it('Should validate OK with undefined or null values', function() {
+    assert.isUndefined(validatorUnderTest({}, 'p', 'Component'));
+    assert.isUndefined(validatorUnderTest({p: null}, 'p', 'Component'));
+  });
+
+  it('Should be able to chain', function() {
+    let err = validatorUnderTest.isRequired({}, 'p', 'Component');
+    assert.instanceOf(err, Error);
+    assert.include(err.message, 'Required prop');
+    assert.include(err.message, 'was not specified in');
+  });
+}
+
 describe('CustomPropTypes', function() {
 
   describe('mountable', function () {
     function validate(prop) {
       return CustomPropTypes.mountable({p: prop}, 'p', 'Component');
     }
-    function validateRequired(prop) {
-      return CustomPropTypes.mountable.isRequired({p: prop}, 'p', 'Component');
-    }
+
+    isChainableAndUndefinedOK(CustomPropTypes.mountable);
 
     it('Should return error with non mountable values', function() {
-      assert.instanceOf(validateRequired(), Error);
-      assert.instanceOf(validateRequired(null), Error);
-      assert.instanceOf(validate({}), Error);
+      let err = validate({});
+      assert.instanceOf(err, Error);
+      assert.include(err.message, 'expected a DOM element or an object that has a `render` method');
     });
+
     it('Should return undefined with mountable values', function() {
-      assert.isUndefined(validate());
-      assert.isUndefined(validate(null));
       assert.isUndefined(validate(document.createElement('div')));
       assert.isUndefined(validate(document.body));
       assert.isUndefined(validate(ReactTestUtils.renderIntoDocument(<div />)));
@@ -31,10 +43,7 @@ describe('CustomPropTypes', function() {
       return CustomPropTypes.elementType({p: prop}, 'p', 'TestComponent');
     }
 
-    it('Should validate OK with undifined or null values', function() {
-      assert.isUndefined(validate());
-      assert.isUndefined(validate(null));
-    });
+    isChainableAndUndefinedOK(CustomPropTypes.elementType);
 
     it('Should validate OK with elementType values', function() {
       assert.isUndefined(validate('span'));
@@ -59,17 +68,16 @@ describe('CustomPropTypes', function() {
     function validate(prop) {
       return CustomPropTypes.keyOf(obj)({p: prop}, 'p', 'Component');
     }
-    function validateRequired(prop) {
-      return CustomPropTypes.keyOf(obj).isRequired({p: prop}, 'p', 'Component');
-    }
+
+    isChainableAndUndefinedOK(CustomPropTypes.keyOf(obj));
 
     it('Should return error with non-key values', function() {
-      assert.instanceOf(validateRequired(), Error);
-      assert.instanceOf(validateRequired(null), Error);
-      assert.instanceOf(validate('bar'), Error);
+      let err = validate('bar');
+      assert.instanceOf(err, Error);
+      assert.include(err.message, 'expected one of ["foo"]');
     });
-    it('Should return undefined with key values', function() {
-      assert.isUndefined(validate());
+
+    it('Should validate OK with key values', function() {
       assert.isUndefined(validate('foo'));
       obj.bar = 2;
       assert.isUndefined(validate('bar'));
@@ -83,16 +91,16 @@ describe('CustomPropTypes', function() {
       return CustomPropTypes.singlePropFrom(propList)(testProps, 'value', 'Component');
     }
 
-    it('Should return undefined if only one listed prop in used', function () {
+    it('Should validate OK if only one listed prop in used', function () {
       const testProps = {value: 5};
 
       assert.isUndefined(validate(testProps));
     });
 
     it('Should return error if multiple of the listed properties have values', function () {
-      const testProps = {value: 5, children: 5};
-
-      validate(testProps).should.be.instanceOf(Error);
+      let err = validate({value: 5, children: 5});
+      assert.instanceOf(err, Error);
+      assert.include(err.message, 'only one of the following may be provided: value and children');
     });
   });
 
