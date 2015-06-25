@@ -95,13 +95,13 @@ then be re-applied and released with the proper version bump.
 ### Release Candidates
 
 In an effort to reduce the frequency with which we introduce breaking changes we
-should do our best to first push deprecation warnings in a Minor or Patch
-release. Also, Pull Requests with breaking changes should be submitted against
-the `vX-rc` branch, where X is the next Major version. Which we will in turn
-release as an `alpha` release of the next Major version. When we are ready to
-release the next Major version bump we will merge the `vX-rc` branch into the
-`master` branch and cut a `beta` release.  Once bugs have been addressed with
-the `beta` release then we will release the Major version bump.
+should do our best to first push deprecation warnings in a Minor release. Also,
+Pull Requests with breaking changes should be submitted against the `vX-rc`
+branch, where X is the next Major version. Which we will in turn release as an
+`alpha` release of the next Major version. When we are ready to release the next
+Major version bump we will merge the `vX-rc` branch into the `master` branch and
+cut a `beta` release.  Once bugs have been addressed with the `beta` release
+then we will release the Major version bump.
 
 ### Live releasing the documentation
 
