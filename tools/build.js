@@ -6,22 +6,21 @@ import { copy } from './fs-utils';
 import { distRoot, bowerRoot } from './constants';
 import { exec } from './exec';
 
-function forkAndBuildDocs({verbose, useCache}) {
+function forkAndBuildDocs({verbose}) {
   console.log('Building: '.cyan + 'docs'.green);
 
   const verboseOption = verbose ? '--verbose' : '';
-  const useCacheOption = `--use-cache=${Boolean(useCache)}`;
 
-  return exec(`npm run docs-build -- ${verboseOption} ${useCacheOption}`)
+  return exec(`npm run docs-build -- ${verboseOption}`)
     .then(() => console.log('Built: '.cyan + 'docs'.green));
 }
 
-export default function Build({verbose, useCache} = {}) {
+export default function Build(options) {
   return Promise.all([
       lib(),
       bower(),
-      dist({useCache}),
-      forkAndBuildDocs({verbose, useCache})
+      dist(),
+      forkAndBuildDocs(options)
     ])
     .then(() => copy(distRoot, bowerRoot));
 }
