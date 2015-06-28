@@ -792,7 +792,7 @@ const ComponentsPage = React.createClass({
                 <div className='bs-docs-section'>
                   <h1 id='utilities' className='page-header'>Utilities <small>Portal</small></h1>
 
-                  <h2 id='utilities-Portal'>Portal</h2>
+                  <h2 id='utilities-portal'>Portal</h2>
                   <p>
                     A Component that renders its children into a new React "subtree" or <code>container</code>. The Portal component kind of like the React
                     equivillent to jQuery's <code>.appendTo()</code>, which is helpful for components that need to be appended to a DOM node other than
@@ -801,6 +801,15 @@ const ComponentsPage = React.createClass({
                   <h3 id='utilities-props'>Props</h3>
 
                   <PropTable component='Portal'/>
+
+                  <h2 id='utilities-position'>Position</h2>
+                  <p>
+                    A Component that absolutely positions its child to a <code>target</code> component or DOM node. Useful for creating custom
+                    popups or tooltips. Used by the Overlay Components.
+                  </p>
+                  <h3 id='utilities-props'>Props</h3>
+
+                  <PropTable component='Position'/>
                 </div>
               </div>
 
@@ -845,7 +854,8 @@ const ComponentsPage = React.createClass({
                     <NavItem href='#glyphicons' key={24}>Glyphicons</NavItem>
                     <NavItem href='#tables' key={25}>Tables</NavItem>
                     <NavItem href='#input' key={26}>Input</NavItem>
-                    <NavItem href='#utilities' key={26}>Input</NavItem>
+
+                    <NavItem href='#utilities' key={26}>Utilities</NavItem>
                   </Nav>
                   <a className='back-to-top' href='#top'>
                   Back to top
