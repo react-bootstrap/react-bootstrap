@@ -54,6 +54,8 @@ import utils from './utils';
 import Well from './Well';
 import styleMaps from './styleMaps';
 
+import Portal from './Portal';
+
 export default {
   Accordion,
   Affix,
@@ -98,6 +100,7 @@ export default {
   Pager,
   Pagination,
   Popover,
+  Portal,
   ProgressBar,
   Row,
   SplitButton,
