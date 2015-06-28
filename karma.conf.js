@@ -11,7 +11,6 @@ var reporters = ['mocha'];
 
 if (runCoverage) {
   webpackConfig = require('./webpack/test-coverage.config');
-  preprocessors.push('coverage');
   reporters.push('coverage');
 
   if (isCI) {
