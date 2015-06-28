@@ -4,7 +4,7 @@ version: '{build}'
 install:
   # Get the latest stable version of io.js
   - ps: Install-Product node ''
-  - npm -g install npm@latest
+  - npm -g install npm@2.11.x
   - set PATH=%APPDATA%\npm;%PATH%
   - node --version
   - npm --version
