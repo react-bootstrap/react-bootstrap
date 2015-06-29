@@ -31,9 +31,16 @@ function getContainer(context){
     domUtils.ownerDocument(context).body;
 }
 
+
+
+let currentFocusListener;
+
 /**
  * Firefox doesn't have a focusin event so using capture is easiest way to get bubbling
  * IE8 can't do addEventListener, but does have onfocusin, so we use that in ie8
+ *
+ * We only allow one Listener at a time to avoid stack overflows
+ *
  * @param  {ReactElement|HTMLElement} context
  * @param  {Function} handler
  */
@@ -42,6 +49,9 @@ function onFocus(context, handler) {
   let useFocusin = !doc.addEventListener;
   let remove;
 
+  if ( currentFocusListener )
+    currentFocusListener.remove();
+
   if (useFocusin) {
     document.attachEvent('onfocusin', handler);
     remove = () => document.detachEvent('onfocusin', handler);
@@ -49,7 +59,10 @@ function onFocus(context, handler) {
     document.addEventListener('focus', handler, true);
     remove = () => document.removeEventListener('focus', handler, true);
   }
-  return { remove };
+
+  currentFocusListener = { remove }
+
+  return currentFocusListener;
 }
 
 let scrollbarSize;
