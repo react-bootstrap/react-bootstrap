@@ -39,6 +39,7 @@ import NavItem from './NavItem';
 import ModalTrigger from './ModalTrigger';
 import OverlayTrigger from './OverlayTrigger';
 import OverlayMixin from './OverlayMixin';
+import Overlay from './Overlay';
 import PageHeader from './PageHeader';
 import Pagination from './Pagination';
 import Panel from './Panel';
@@ -100,6 +101,7 @@ export default {
   Navbar,
   NavItem,
   ModalTrigger,
+  Overlay,
   OverlayTrigger,
   OverlayMixin,
   PageHeader,

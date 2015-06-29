@@ -5,7 +5,29 @@ import Label from '../../src/Label';
 import Table from '../../src/Table';
 
 
-let cleanDocletValue = str => str.replace(/^\{/, '').replace(/\}$/, '');
+let cleanDocletValue = str => str.trim().replace(/^\{/, '').replace(/\}$/, '');
+
+function getPropsData(componentData, metadata){
+
+  let props = componentData.props || {};
+
+  if (componentData.composes) {
+    componentData.composes.forEach( other => {
+      props = merge({}, getPropsData(metadata[other] || {}, metadata), props);
+
+    });
+  }
+
+  if (componentData.mixins) {
+    componentData.mixins.forEach( other => {
+      if ( componentData.composes.indexOf(other) === -1) {
+        props = merge({}, getPropsData(metadata[other] || {}, metadata), props);
+      }
+    });
+  }
+
+  return props;
+}
 
 const PropTable = React.createClass({
 
@@ -13,10 +35,16 @@ const PropTable = React.createClass({
     metadata: React.PropTypes.object
   },
 
-  render(){
-    let metadata = this.context.metadata[this.props.component] || {};
+  componentWillMount(){
+    let componentData = this.context.metadata[this.props.component] || {};
 
-    if ( !Object.keys(metadata.props || {}).length){
+    this.propsData = getPropsData(componentData, this.context.metadata);
+  },
+
+  render(){
+    let propsData = this.propsData;
+
+    if ( !Object.keys(propsData).length){
       return <span/>;
     }
 
@@ -31,46 +59,36 @@ const PropTable = React.createClass({
           </tr>
         </thead>
         <tbody>
-          { this._renderRows() }
+          { this._renderRows(propsData) }
         </tbody>
       </Table>
     );
   },
 
-  _renderRows(){
-    let metadata = this.context.metadata[this.props.component] || {};
-    let props = metadata.props || {};
+  _renderRows(propsData){
 
-    if (metadata.composes) {
-      metadata.composes.forEach( other => {
-        props = merge(props, (this.context.metadata[other] || {}).props);
-      });
-    }
-
-    if (metadata.mixins) {
-      metadata.mixins.forEach( other => {
-        if ( metadata.composes.indexOf(other) === -1) {
-          props = merge(props, (this.context.metadata[other] || {}).props);
-        }
-      });
-    }
-
-    return Object.keys(props)
+    return Object.keys(propsData)
       .sort()
-      .filter(propName => props[propName].type && !props[propName].doclets.private )
+      .filter(propName => propsData[propName].type && !propsData[propName].doclets.private )
       .map(propName => {
-        let prop = props[propName];
+        let propData = propsData[propName];
 
         return (
           <tr key={propName} className='prop-table-row'>
             <td>
-              {propName} {this.renderRequiredLabel(prop)}
+              {propName} {this.renderRequiredLabel(propData)}
             </td>
             <td>
-              <div>{this.getType(prop)}</div>
+              <div>{this.getType(propData)}</div>
             </td>
-            <td>{prop.defaultValue}</td>
-            <td>{prop.desc}</td>
+            <td>{propData.defaultValue}</td>
+
+            <td>
+              { propData.doclets.deprecated
+                && <div><strong className='text-danger'>{'Deprecated: ' + propData.doclets.deprecated + ' '}</strong></div>
+              }
+              { propData.desc }
+            </td>
           </tr>
         );
       });
@@ -87,7 +105,7 @@ const PropTable = React.createClass({
   },
 
   getType(prop) {
-    let type = prop.type;
+    let type = prop.type || {};
     let name = this.getDisplayTypeName(type.name);
     let doclets = prop.doclets || {};
 
@@ -95,9 +113,15 @@ const PropTable = React.createClass({
       case 'object':
         return name;
       case 'union':
-        return type.value.map(val => this.getType({ type: val })).join(' | ');
+        return type.value.reduce((current, val, i, list) => {
+          current = current.concat(this.getType({ type: val }));
+
+          return i === (list.length - 1) ? current : current.concat(' | ');
+        }, []);
       case 'array':
-        return `array<${this.getDisplayTypeName(type.value.name)}>`;
+        let child = this.getType({ type: type.value });
+
+        return <span>{'array<'}{ child }{'>'}</span>;
       case 'enum':
         return this.renderEnum(type);
       case 'custom':

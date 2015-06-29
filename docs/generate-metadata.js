@@ -21,7 +21,7 @@ let isLiteral = str => str.trim()[0] === '"' || str.trim()[0] === "'";
  * @param  {ComponentMetadata|PropMetadata} obj
  */
 function parseDoclets(obj){
-  obj.doclets = metadata.parseDoclets(obj.desc || '');
+  obj.doclets = metadata.parseDoclets(obj.desc || '') || {};
   obj.desc = cleanDoclets(obj.desc || '');
 }
 

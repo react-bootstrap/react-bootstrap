@@ -94,7 +94,7 @@
     "phantomjs": "^1.9.17",
     "portfinder": "^0.4.0",
     "react": "^0.13.1",
-    "react-component-metadata": "^1.1.1",
+    "react-component-metadata": "^1.2.1",
     "react-hot-loader": "^1.2.7",
     "react-router": "^0.13.1",
     "rimraf": "^2.3.2",
