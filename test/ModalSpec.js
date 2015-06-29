@@ -156,7 +156,7 @@ describe('Modal', function () {
       }, 0);
     });
 
-    it('Should not focus on the Modal when enforceFocus is false', function (done) {
+    it('Should not focus on the Modal when autoFocus is false', function (done) {
 
       document.activeElement.should.equal(focusableContainer);
 
@@ -167,7 +167,7 @@ describe('Modal', function () {
         render() {
           if (this.state.modalOpen) {
             return (
-              <Modal enforceFocus={false} onRequestHide={()=>{}} container={this}>
+              <Modal autoFocus={false} onRequestHide={()=>{}} container={this}>
                 <strong>Message</strong>
               </Modal>
             );
@@ -182,6 +182,38 @@ describe('Modal', function () {
       setTimeout(function () {
         // modal should be focused when opened
         document.activeElement.should.equal(focusableContainer);
+        done();
+      }, 0);
+    });
+
+    it('Should not focus Modal when child has focus', function (done) {
+
+      document.activeElement.should.equal(focusableContainer);
+
+      let Container = React.createClass({
+        getInitialState() {
+          return {modalOpen: true};
+        },
+        render() {
+          if (this.state.modalOpen) {
+            return (
+              <Modal onRequestHide={()=>{}} container={this}>
+                <input autoFocus />
+              </Modal>
+            );
+          } else {
+            return <span/>;
+          }
+        }
+      });
+
+      var instance = React.render(<Container />, focusableContainer);
+
+      setTimeout(function () {
+        let input = React.findDOMNode(
+          ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'))
+
+        document.activeElement.should.equal(input);
         done();
       }, 0);
     });
