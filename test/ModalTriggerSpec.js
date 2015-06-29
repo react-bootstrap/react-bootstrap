@@ -101,4 +101,19 @@ describe('ModalTrigger', function() {
 
     contextSpy.calledWith('value').should.be.true;
   });
+
+  it('Should pass children refs through', function () {
+    const TestComponent = React.createClass({
+      render() {
+        return (
+          <ModalTrigger modal={<div>test</div>}>
+            <button ref='customRef' />
+          </ModalTrigger>
+        );
+      }
+    });
+
+    const instance = ReactTestUtils.renderIntoDocument(<TestComponent />);
+    assert.isDefined(instance.refs.customRef);
+  });
 });
