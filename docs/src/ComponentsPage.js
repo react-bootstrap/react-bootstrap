@@ -306,49 +306,79 @@ const ComponentsPage = React.createClass({
 
                 </div>
 
-                {/* Tooltip */}
+                {/* overlays */}
                 <div className='bs-docs-section'>
-                  <h1 id='tooltips' className='page-header'>Tooltips <small>Tooltip</small></h1>
-                  <h2 id='tooltips-examples'>Example tooltips</h2>
+                  <h1 id='overlays' className='page-header'>Overlays <small>Overlay, Tooltip, Popover</small></h1>
 
-                  <p>Tooltip component.</p>
-                  <ReactPlayground codeText={Samples.TooltipBasic} />
+                  <h2 id='overlays-examples'>Overlay</h2>
+                  <p>
+                    Overlays allow components to be rendered and positioned to the left, right, top, or bottom of another component.
+                    They are perfect for simple tooltips or even more complicated popups.
+                  </p>
+                  <ReactPlayground codeText={Samples.Overlay} />
 
-                  <p>Positioned tooltip component.</p>
-                  <ReactPlayground codeText={Samples.TooltipPositioned} />
+                  <h2 id='overlays-examples'>Overlay Trigger</h2>
+                  <p>
+                    Often you will want to show or hide and Overlay in response to an action by its target, such as hovering over a link.
+                    Since this is such a common pattern we provide the <code>OverlayTrigger</code> component to reduce the amount of boilerplate
+                    you need to write to implement this pattern.
+                  </p>
+                  <ReactPlayground codeText={Samples.OverlayTrigger} />
 
-                  <p>Positioned tooltip in copy.</p>
-                  <ReactPlayground codeText={Samples.TooltipInCopy} />
+                  <h3 id='overlays-props'>Props</h3>
 
-                  <h3 id='tooltip-props'>Props</h3>
+                  <h4>Overlay</h4>
+                  <PropTable component='Overlay'/>
 
-                  <PropTable component='Tooltip'/>
+                  <h4>OverlayTrigger</h4>
+                  <PropTable component='OverlayTrigger'/>
 
-                </div>
+                  {/* Tooltip */}
+                  <div className='bs-docs-section'>
+                    <h2 id='tooltips' >Tooltip</h2>
+                    <p>
+                      You don't always need to create custom styling for your overlays. Bootstrap provides two great options out of the box.
+                      Tooltips can be used inside an <code>Overlay</code> Component, or an <code>OverlayTrigger</code>
+                    </p>
+                    <ReactPlayground codeText={Samples.TooltipBasic} exampleClassName='tooltip-static'/>
 
-                {/* Popover */}
-                <div className='bs-docs-section'>
-                  <h1 id='popovers' className='page-header'>Popovers <small>Popover</small></h1>
-                  <h2 id='popovers-examples'>Example popovers</h2>
+                    <p>Positioned tooltip component.</p>
+                    <ReactPlayground codeText={Samples.TooltipPositioned} />
 
-                  <p>Popover component.</p>
-                  <ReactPlayground codeText={Samples.PopoverBasic} />
+                    <p>Positioned tooltip in copy.</p>
+                    <ReactPlayground codeText={Samples.TooltipInCopy} />
 
-                  <p>Positioned popover component.</p>
-                  <ReactPlayground codeText={Samples.PopoverPositioned} />
+                    <h3 id='tooltips-props'>Props</h3>
+                    <PropTable component='Tooltip'/>
 
-                  <p>Trigger behaviors. It's inadvisable to use <code>"hover"</code> or <code>"focus"</code> triggers for popovers, because they have poor accessibility from keyboard and on mobile devices.</p>
-                  <ReactPlayground codeText={Samples.PopoverTriggerBehaviors} />
+                  </div>
 
-                  <p>Popover component in container.</p>
-                  <ReactPlayground codeText={Samples.PopoverContained} exampleClassName='bs-example-popover-contained' />
+                  {/* Popover */}
+                  <div className='bs-docs-section'>
+                    <h2 id='popovers'>Popovers</h2>
 
-                  <p>Positioned popover components in scrolling container.</p>
-                  <ReactPlayground codeText={Samples.PopoverPositionedScrolling} exampleClassName='bs-example-popover-scroll' />
+                    <p>
+                      The Popover component, like the Tooltip can be used with an <code>Overlay</code> Component, or an <code>OverlayTrigger</code>.
+                      Unlike the Tooltip popovers are designed to display more reobust information about their targets.
+                    </p>
+                    <ReactPlayground codeText={Samples.PopoverBasic}/>
 
-                  <h3 id='popover-props'>Props</h3>
+                    <p>Positioned popover component.</p>
+                    <ReactPlayground codeText={Samples.PopoverPositioned} />
 
-                  <PropTable component='Popover'/>
+                    <p>Trigger behaviors. It's inadvisable to use <code>"hover"</code> or <code>"focus"</code> triggers for popovers, because they have poor accessibility from keyboard and on mobile devices.</p>
+                    <ReactPlayground codeText={Samples.PopoverTriggerBehaviors} />
+
+                    <p>Popover component in container.</p>
+                    <ReactPlayground codeText={Samples.PopoverContained} exampleClassName='bs-example-popover-contained' />
+
+                    <p>Positioned popover components in scrolling container.</p>
+                    <ReactPlayground codeText={Samples.PopoverPositionedScrolling} exampleClassName='bs-example-popover-scroll' />
+
+                    <h3 id='popover-props'>Props</h3>
+
+                    <PropTable component='Popover'/>
+                  </div>
                 </div>
 
                 {/* Progress Bar */}
@@ -833,6 +863,7 @@ const ComponentsPage = React.createClass({
                     </SubNav>
                     <NavItem href='#panels' key={4}>Panels</NavItem>
                     <NavItem href='#modals' key={5}>Modals</NavItem>
+                    <NavItem href='#overlays' key={27}>Overlays</NavItem>
                     <NavItem href='#tooltips' key={6}>Tooltips</NavItem>
                     <NavItem href='#popovers' key={7}>Popovers</NavItem>
                     <NavItem href='#progress' key={8}>Progress bars</NavItem>
