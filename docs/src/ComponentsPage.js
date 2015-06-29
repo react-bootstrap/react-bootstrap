@@ -324,79 +324,79 @@ const ComponentsPage = React.createClass({
 
                 </div>
 
-                {/* overlays */}
+
+                {/* Tooltip */}
                 <div className='bs-docs-section'>
-                  <h1 id='overlays' className='page-header'>Overlays <small>Overlay, Tooltip, Popover</small></h1>
-
-                  <h2 id='overlays-examples'>Overlay</h2>
+                  <h2 id='tooltips' >Tooltip</h2>
                   <p>
-                    Overlays allow components to be rendered and positioned to the left, right, top, or bottom of another component.
-                    They are perfect for simple tooltips or even more complicated popups.
+                    Tooltip component for a more stylish alternative to that anchor tag <code>title</code> attribute.
                   </p>
-                  <ReactPlayground codeText={Samples.Overlay} />
+                  <ReactPlayground codeText={Samples.TooltipBasic} exampleClassName='tooltip-static'/>
 
-                  <h2 id='overlays-examples'>Overlay Trigger</h2>
-                  <p>
-                    Often you will want to show or hide and Overlay in response to an action by its target, such as hovering over a link.
-                    Since this is such a common pattern we provide the <code>OverlayTrigger</code> component to reduce the amount of boilerplate
-                    you need to write to implement this pattern.
-                  </p>
+                  <p>Use the Tooltip in combination with <code>OverlayTrigger</code> to add some interactivity to your tips.</p>
                   <ReactPlayground codeText={Samples.OverlayTrigger} />
+
+                  <p>Positioned tooltip component.</p>
+                  <ReactPlayground codeText={Samples.TooltipPositioned} />
+
+                  <p>Positioned tooltip in text copy.</p>
+                  <ReactPlayground codeText={Samples.TooltipInCopy} />
+
+                  <h3 id='tooltips-props'>Props</h3>
+
+                  <h4 id='overlays-trigger-props'>Overlay Trigger</h4>
+                  <PropTable component='OverlayTrigger'/>
+
+                  <h4 id='overlays-trigger-props'>Tooltip</h4>
+                  <PropTable component='Tooltip'/>
+                </div>
+
+                {/* Popover */}
+                <div className='bs-docs-section'>
+                  <h2 id='popovers'>Popovers</h2>
+
+                  <p>
+                    The Popover, offers a more robust alternative to the Tooltip for displaying overlays of content.
+                  </p>
+                  <ReactPlayground codeText={Samples.PopoverBasic}/>
+
+                  <p>The Popover component, like the Tooltip can be used with an <code>OverlayTrigger</code> Component, and positioned around it.</p>
+                  <ReactPlayground codeText={Samples.PopoverPositioned} />
+
+                  <p>Trigger behaviors. It's inadvisable to use <code>"hover"</code> or <code>"focus"</code> triggers for popovers, because they have poor accessibility from keyboard and on mobile devices.</p>
+                  <ReactPlayground codeText={Samples.PopoverTriggerBehaviors} />
+
+                  <p>Popover component in container.</p>
+                  <ReactPlayground codeText={Samples.PopoverContained} exampleClassName='bs-example-popover-contained' />
+
+                  <p>Positioned popover components in scrolling container.</p>
+                  <ReactPlayground codeText={Samples.PopoverPositionedScrolling} exampleClassName='bs-example-popover-scroll' />
+
+                  <h3 id='popover-props'>Props</h3>
+
+                  <PropTable component='Popover'/>
+                </div>
+
+                {/* Overlay */}
+                <div className='bs-docs-section'>
+                  <h2 id='overlays'>Overlay</h2>
+
+                  <p>
+                    The <code>OverlayTrigger</code> component is great for most use cases, but as a higher level abstraction it can lack the flexibility needed
+                    to build more nuanced or custom behaviors into your Overlay components. For these cases it can be helpful to forgo the trigger and use
+                    the <code>Overlay</code> component directly.
+                  </p>
+                  <ReactPlayground codeText={Samples.Overlay}/>
+
+                  <p>
+                    You don't need to use the provided <code>Tooltip</code> or <code>Popover</code> components. Creating custom overlays
+                    is as easy as wrapping some markup in an <code>Overlay</code> component
+                  </p>
+                  <ReactPlayground codeText={Samples.OverlayCustom} />
 
                   <h3 id='overlays-props'>Props</h3>
 
-                  <h4>Overlay</h4>
                   <PropTable component='Overlay'/>
-
-                  <h4>OverlayTrigger</h4>
-                  <PropTable component='OverlayTrigger'/>
-
-                  {/* Tooltip */}
-                  <div className='bs-docs-section'>
-                    <h2 id='tooltips' >Tooltip</h2>
-                    <p>
-                      You don't always need to create custom styling for your overlays. Bootstrap provides two great options out of the box.
-                      Tooltips can be used inside an <code>Overlay</code> Component, or an <code>OverlayTrigger</code>
-                    </p>
-                    <ReactPlayground codeText={Samples.TooltipBasic} exampleClassName='tooltip-static'/>
-
-                    <p>Positioned tooltip component.</p>
-                    <ReactPlayground codeText={Samples.TooltipPositioned} />
-
-                    <p>Positioned tooltip in copy.</p>
-                    <ReactPlayground codeText={Samples.TooltipInCopy} />
-
-                    <h3 id='tooltips-props'>Props</h3>
-                    <PropTable component='Tooltip'/>
-
-                  </div>
-
-                  {/* Popover */}
-                  <div className='bs-docs-section'>
-                    <h2 id='popovers'>Popovers</h2>
-
-                    <p>
-                      The Popover component, like the Tooltip can be used with an <code>Overlay</code> Component, or an <code>OverlayTrigger</code>.
-                      Unlike the Tooltip popovers are designed to display more reobust information about their targets.
-                    </p>
-                    <ReactPlayground codeText={Samples.PopoverBasic}/>
-
-                    <p>Positioned popover component.</p>
-                    <ReactPlayground codeText={Samples.PopoverPositioned} />
-
-                    <p>Trigger behaviors. It's inadvisable to use <code>"hover"</code> or <code>"focus"</code> triggers for popovers, because they have poor accessibility from keyboard and on mobile devices.</p>
-                    <ReactPlayground codeText={Samples.PopoverTriggerBehaviors} />
-
-                    <p>Popover component in container.</p>
-                    <ReactPlayground codeText={Samples.PopoverContained} exampleClassName='bs-example-popover-contained' />
-
-                    <p>Positioned popover components in scrolling container.</p>
-                    <ReactPlayground codeText={Samples.PopoverPositionedScrolling} exampleClassName='bs-example-popover-scroll' />
-
-                    <h3 id='popover-props'>Props</h3>
-
-                    <PropTable component='Popover'/>
-                  </div>
                 </div>
 
                 {/* Progress Bar */}
