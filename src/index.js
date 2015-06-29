@@ -28,6 +28,11 @@ import ListGroup from './ListGroup';
 import ListGroupItem from './ListGroupItem';
 import MenuItem from './MenuItem';
 import Modal from './Modal';
+import ModalHeader from './ModalHeader';
+import ModalTitle from './ModalTitle';
+import ModalBody from './ModalBody';
+import ModalFooter from './ModalFooter';
+
 import Nav from './Nav';
 import Navbar from './Navbar';
 import NavItem from './NavItem';
@@ -87,6 +92,10 @@ export default {
   ListGroupItem,
   MenuItem,
   Modal,
+  ModalHeader,
+  ModalTitle,
+  ModalBody,
+  ModalFooter,
   Nav,
   Navbar,
   NavItem,

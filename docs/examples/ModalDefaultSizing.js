@@ -1,8 +1,11 @@
 const MySmallModal = React.createClass({
   render() {
     return (
-      <Modal {...this.props} bsSize='small' title='Modal heading' animation={false}>
-        <div className='modal-body'>
+      <Modal {...this.props} bsSize='small' aria-labelledby='contained-modal-title-sm'>
+        <Modal.Header closeButton>
+          <Modal.Title id='contained-modal-title-sm'>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <h4>Wrapped Text</h4>
           <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
@@ -13,10 +16,10 @@ const MySmallModal = React.createClass({
           <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
           <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-        </div>
-        <div className='modal-footer'>
-          <Button onClick={this.props.onRequestHide}>Close</Button>
-        </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.props.onHide}>Close</Button>
+        </Modal.Footer>
       </Modal>
     );
   }
@@ -25,8 +28,11 @@ const MySmallModal = React.createClass({
 const MyLargeModal = React.createClass({
   render() {
     return (
-      <Modal {...this.props} bsSize='large' title='Modal heading' animation={false}>
-        <div className='modal-body'>
+      <Modal {...this.props} bsSize='large' aria-labelledby='contained-modal-title-lg'>
+        <Modal.Header closeButton>
+          <Modal.Title id='contained-modal-title-lg'>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <h4>Wrapped Text</h4>
           <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
@@ -37,24 +43,37 @@ const MyLargeModal = React.createClass({
           <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
           <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-        </div>
-        <div className='modal-footer'>
-          <Button onClick={this.props.onRequestHide}>Close</Button>
-        </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.props.onHide}>Close</Button>
+        </Modal.Footer>
       </Modal>
     );
   }
 });
 
-const overlayTriggerInstance = (
-  <ButtonToolbar>
-    <ModalTrigger modal={<MySmallModal />}>
-      <Button bsStyle='primary' bsSize='large'>Launch small demo modal</Button>
-    </ModalTrigger>
-    <ModalTrigger modal={<MyLargeModal />}>
-      <Button bsStyle='primary' bsSize='large'>Launch large demo modal</Button>
-    </ModalTrigger>
-  </ButtonToolbar>
-);
+const App = React.createClass({
+  getInitialState(){
+    return { smShow: false, lgShow: false };
+  },
+  render(){
+    let smClose = e => this.setState({ smShow: false });
+    let lgClose = e => this.setState({ lgShow: false });
 
-React.render(overlayTriggerInstance, mountNode);
+    return (
+      <ButtonToolbar>
+        <Button bsStyle='primary' onClick={()=>this.setState({ smShow: true })}>
+          Launch small demo modal
+        </Button>
+        <Button bsStyle='primary' onClick={()=>this.setState({ lgShow: true })}>
+          Launch large demo modal
+        </Button>
+
+        <MySmallModal show={this.state.smShow} onHide={smClose} />
+        <MyLargeModal show={this.state.lgShow} onHide={lgClose} />
+      </ButtonToolbar>
+    );
+  }
+});
+
+React.render(<App/>, mountNode);
