@@ -53,8 +53,8 @@ import Tooltip from './Tooltip';
 import utils from './utils';
 import Well from './Well';
 import styleMaps from './styleMaps';
-
 import Portal from './Portal';
+import Position from './Position';
 
 export default {
   Accordion,
@@ -101,6 +101,7 @@ export default {
   Pagination,
   Popover,
   Portal,
+  Position,
   ProgressBar,
   Row,
   SplitButton,
