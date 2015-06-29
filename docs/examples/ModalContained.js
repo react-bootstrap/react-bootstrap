@@ -9,28 +9,40 @@
  * }
  */
 
-const ContainedModal = React.createClass({
-  render() {
-    return (
-      <Modal {...this.props} title='Contained Modal' animation>
-        <div className='modal-body'>
-          Elit est explicabo ipsum eaque dolorem blanditiis doloribus sed id ipsam, beatae, rem fuga id earum? Inventore et facilis obcaecati.
-        </div>
-        <div className='modal-footer'>
-          <Button onClick={this.props.onRequestHide}>Close</Button>
-        </div>
-      </Modal>
-    );
-  }
-});
-
 const Trigger = React.createClass({
+  getInitialState(){
+    return { show: false };
+  },
+
   render() {
+    let close = e => this.setState({ show: false});
+
     return (
       <div className='modal-container' style={{height: 200}}>
-        <ModalTrigger modal={<ContainedModal container={this} />} container={this}>
-          <Button bsStyle='primary' bsSize='large'>Launch contained modal</Button>
-        </ModalTrigger>
+        <Button
+          bsStyle='primary'
+          bsSize='large'
+          onClick={e => this.setState({ show: true})}
+        >
+          Launch contained modal
+        </Button>
+
+        <Modal
+          show={this.state.show}
+          onHide={close}
+          container={this}
+          aria-labelledby='contained-modal-title'
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id='contained-modal-title'>Contained Modal</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Elit est explicabo ipsum eaque dolorem blanditiis doloribus sed id ipsam, beatae, rem fuga id earum? Inventore et facilis obcaecati.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={close}>Close</Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     );
   }
