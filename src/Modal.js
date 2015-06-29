@@ -101,6 +101,7 @@ const Modal = React.createClass({
     animation: React.PropTypes.bool,
     onRequestHide: React.PropTypes.func.isRequired,
     dialogClassName: React.PropTypes.string,
+    autoFocus: React.PropTypes.bool,
     enforceFocus: React.PropTypes.bool
   },
 
@@ -111,6 +112,8 @@ const Modal = React.createClass({
       keyboard: true,
       animation: true,
       closeButton: true,
+
+      autoFocus: true,
       enforceFocus: true
     };
   },
@@ -205,6 +208,10 @@ const Modal = React.createClass({
     React.findDOMNode(this.refs.backdrop).onclick = function () {};
   },
 
+  componentWillMount(){
+    this.checkForFocus();
+  },
+
   componentDidMount() {
     const doc = domUtils.ownerDocument(this);
     const win = domUtils.ownerWindow(this);
@@ -286,11 +293,23 @@ const Modal = React.createClass({
     this.setState(this._getStyles());
   },
 
-  focusModalContent () {
-    if (this.props.enforceFocus) {
-      this.lastFocus = domUtils.activeElement(this);
+  checkForFocus(){
+    if ( domUtils.canUseDom ) {
+      try {
+        this.lastFocus = document.activeElement;
+      }
+      catch (e) {}
+    }
+  },
 
-      let modalContent = React.findDOMNode(this.refs.modal);
+  focusModalContent () {
+    let modalContent = React.findDOMNode(this.refs.modal);
+    let current = domUtils.activeElement(this);
+    let focusInModal = current && domUtils.contains(modalContent, current);
+
+    if (this.props.autoFocus && !focusInModal) {
+      this.lastFocus = current;
+
       modalContent.focus();
     }
   },
