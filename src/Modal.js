@@ -49,8 +49,9 @@ function onFocus(context, handler) {
   let useFocusin = !doc.addEventListener;
   let remove;
 
-  if ( currentFocusListener )
+  if ( currentFocusListener ) {
     currentFocusListener.remove();
+  }
 
   if (useFocusin) {
     document.attachEvent('onfocusin', handler);
@@ -60,7 +61,7 @@ function onFocus(context, handler) {
     remove = () => document.removeEventListener('focus', handler, true);
   }
 
-  currentFocusListener = { remove }
+  currentFocusListener = { remove };
 
   return currentFocusListener;
 }
@@ -298,7 +299,7 @@ const Modal = React.createClass({
       try {
         this.lastFocus = document.activeElement;
       }
-      catch (e) {}
+      catch (e) {} // eslint-disable-line no-empty
     }
   },
 
