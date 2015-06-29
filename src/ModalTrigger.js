@@ -1,11 +1,20 @@
 import React, { cloneElement } from 'react';
-import OverlayMixin from './OverlayMixin';
+
+import deprecationWarning from './utils/deprecationWarning';
 
 import createChainedFunction from './utils/createChainedFunction';
 import createContextWrapper from './utils/createContextWrapper';
 
+function createHideDepreciationWrapper(hide){
+  return function(...args){
+    deprecationWarning(
+        'The Modal prop `onRequestHide`', 'the `onHide` prop');
+
+    return hide(...args);
+  };
+}
+
 const ModalTrigger = React.createClass({
-  mixins: [OverlayMixin],
 
   propTypes: {
     modal: React.PropTypes.node.isRequired,
@@ -39,15 +48,31 @@ const ModalTrigger = React.createClass({
     });
   },
 
-  renderOverlay() {
-    if (!this.state.isOverlayShown) {
-      return <span />;
-    }
+  componentDidMount(){
+    this._overlay = document.createElement('div');
+    React.render(this.getOverlay(), this._overlay);
+  },
+
+  componentWillUnmount() {
+    React.unmountComponentAtNode(this._overlay);
+    this._overlay = null;
+    clearTimeout(this._hoverDelay);
+  },
+
+  componentDidUpdate(){
+    React.render(this.getOverlay(), this._overlay);
+  },
+
+  getOverlay() {
+    let modal = this.props.modal;
 
     return cloneElement(
-      this.props.modal,
+      modal,
       {
-        onRequestHide: this.hide
+        show: this.state.isOverlayShown,
+        onHide: this.hide,
+        onRequestHide: createHideDepreciationWrapper(this.hide),
+        container: modal.props.container || this.props.container
       }
     );
   },
@@ -82,4 +107,19 @@ const ModalTrigger = React.createClass({
  */
 ModalTrigger.withContext = createContextWrapper(ModalTrigger, 'modal');
 
-export default ModalTrigger;
+let DepreciatedModalTrigger = React.createClass({
+  componentWillMount(){
+    deprecationWarning(
+        'The `ModalTrigger` component', 'the `Modal` component directly'
+      , 'http://react-bootstrap.github.io/components.html#modals');
+  },
+
+  render(){
+    return (<ModalTrigger {...this.props}/>);
+  }
+});
+
+DepreciatedModalTrigger.withContext = ModalTrigger.withContext;
+DepreciatedModalTrigger.ModalTrigger = ModalTrigger;
+
+export default DepreciatedModalTrigger;

@@ -1,8 +1,27 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ModalTrigger from '../src/ModalTrigger';
+import { shouldWarn } from './helpers';
+
 
 describe('ModalTrigger', function() {
+
+  afterEach(()=> {
+    if ( console.warn.called ) {
+      shouldWarn('The `ModalTrigger` component is deprecated');
+    }
+  });
+
+  it('Should warn about deprecated Component', function() {
+    ReactTestUtils.renderIntoDocument(
+      <ModalTrigger modal={<div>test</div>}>
+        <button>button</button>
+      </ModalTrigger>
+    );
+
+    shouldWarn('The `ModalTrigger` component is deprecated');
+  });
+
   it('Should create ModalTrigger element', function() {
     const instance = ReactTestUtils.renderIntoDocument(
       <ModalTrigger modal={<div>test</div>}>

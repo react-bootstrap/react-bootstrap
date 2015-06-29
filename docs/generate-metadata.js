@@ -26,7 +26,7 @@ let isLiteral = str => (/^('|")/).test(str.trim());
  * @param  {ComponentMetadata|PropMetadata} obj
  */
 function parseDoclets(obj){
-  obj.doclets = metadata.parseDoclets(obj.desc || '');
+  obj.doclets = metadata.parseDoclets(obj.desc || '') || {};
   obj.desc = cleanDoclets(obj.desc || '');
   obj.descHtml = marked(obj.desc || '');
 }
