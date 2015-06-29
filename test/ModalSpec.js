@@ -207,11 +207,11 @@ describe('Modal', function () {
         }
       });
 
-      var instance = React.render(<Container />, focusableContainer);
+      let instance = React.render(<Container />, focusableContainer);
 
       setTimeout(function () {
         let input = React.findDOMNode(
-          ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'))
+          ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'));
 
         document.activeElement.should.equal(input);
         done();
