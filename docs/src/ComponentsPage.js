@@ -838,12 +838,12 @@ const ComponentsPage = React.createClass({
 
                 {/* Utilities */}
                 <div className='bs-docs-section'>
-                  <h1 id='utilities' className='page-header'>Utilities <small>Portal</small></h1>
+                  <h1 id='utilities' className='page-header'>Utilities <small>Portal, Position</small></h1>
 
                   <h2 id='utilities-portal'>Portal</h2>
                   <p>
                     A Component that renders its children into a new React "subtree" or <code>container</code>. The Portal component kind of like the React
-                    equivillent to jQuery's <code>.appendTo()</code>, which is helpful for components that need to be appended to a DOM node other than
+                    equivalent to jQuery's <code>.appendTo()</code>, which is helpful for components that need to be appended to a DOM node other than
                     the component's direct parent. The Modal, and Overlay components use the Portal component internally.
                   </p>
                   <h3 id='utilities-props'>Props</h3>
@@ -903,8 +903,7 @@ const ComponentsPage = React.createClass({
                     <NavItem href='#glyphicons' key={24}>Glyphicons</NavItem>
                     <NavItem href='#tables' key={25}>Tables</NavItem>
                     <NavItem href='#input' key={26}>Input</NavItem>
-
-                    <NavItem href='#utilities' key={26}>Utilities</NavItem>
+                    <NavItem href='#utilities' key={28}>Utilities</NavItem>
                   </Nav>
                   <a className='back-to-top' href='#top'>
                   Back to top

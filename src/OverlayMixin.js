@@ -1,3 +1,4 @@
+/*eslint-disable react/prop-types */
 import React from 'react';
 import CustomPropTypes from './utils/CustomPropTypes';
 import domUtils from './utils/domUtils';
@@ -40,9 +41,6 @@ export const OverlayMixin = {
   },
 
   _renderOverlay() {
-    if (!this._overlayTarget) {
-      this._mountOverlayTarget();
-    }
 
     let overlay = this.renderOverlay();
 
@@ -58,8 +56,10 @@ export const OverlayMixin = {
   },
 
   _unrenderOverlay() {
-    React.unmountComponentAtNode(this._overlayTarget);
-    this._overlayInstance = null;
+    if (this._overlayTarget) {
+      React.unmountComponentAtNode(this._overlayTarget);
+      this._overlayInstance = null;
+    }
   },
 
   getOverlayDOMNode() {
@@ -86,6 +86,6 @@ export default {
   componentWillMount() {
     deprecationWarning(
         'Overlay mixin', 'the `<Portal/>` Component'
-      , 'http://react-bootstrap.github.io/components.html#modals-custom');
+      , 'http://react-bootstrap.github.io/components.html#utilities-portal');
   }
 };

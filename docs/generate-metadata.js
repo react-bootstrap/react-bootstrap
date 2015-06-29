@@ -11,7 +11,7 @@ let cleanDoclets = desc => {
   return (idx === -1 ? desc : desc.substr(0, idx )).trim();
 };
 
-let cleanDocletValue = str => str.replace(/^\{/, '').replace(/\}$/, '');
+let cleanDocletValue = str => str.trim().replace(/^\{/, '').replace(/\}$/, '');
 
 let isLiteral = str => str.trim()[0] === '"' || str.trim()[0] === "'";
 

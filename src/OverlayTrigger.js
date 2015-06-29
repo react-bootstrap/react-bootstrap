@@ -1,8 +1,8 @@
+/*eslint-disable react/prop-types */
 import React, { cloneElement } from 'react';
 
 import createChainedFunction from './utils/createChainedFunction';
 import createContextWrapper from './utils/createContextWrapper';
-import CustomPropTypes from './utils/CustomPropTypes';
 import Overlay from './Overlay';
 import position from './utils/overlayPositionUtils';
 
@@ -26,8 +26,11 @@ function isOneOf(one, of) {
 const OverlayTrigger = React.createClass({
 
   propTypes: {
-    /**
-     * The event or action that toggles the overlay visibility.
+
+    ...Overlay.propTypes,
+
+     /**
+     * Specify which action or actions trigger Overlay visibility
      */
     trigger: React.PropTypes.oneOfType([
       React.PropTypes.oneOf(['manual', 'click', 'hover', 'focus']),
@@ -57,6 +60,7 @@ const OverlayTrigger = React.createClass({
      * An element or text to overlay next to the target.
      */
     overlay: React.PropTypes.node.isRequired,
+
     /**
      * @private
      */
@@ -78,12 +82,19 @@ const OverlayTrigger = React.createClass({
      */
     onMouseLeave: React.PropTypes.func,
 
-    container: CustomPropTypes.mountable,
-
-    containerPadding: React.PropTypes.number,
-    placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-
-    rootClose: React.PropTypes.bool
+    //override specific overlay props
+    /**
+     * @private
+     */
+    target(){},
+     /**
+     * @private
+     */
+    onHide(){},
+    /**
+     * @private
+     */
+    show(){}
   },
 
   getDefaultProps() {

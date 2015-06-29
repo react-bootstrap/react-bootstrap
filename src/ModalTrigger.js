@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-
+import CustomPropTypes from './utils/CustomPropTypes';
 import deprecationWarning from './utils/deprecationWarning';
 
 import createChainedFunction from './utils/createChainedFunction';
@@ -18,6 +18,10 @@ const ModalTrigger = React.createClass({
 
   propTypes: {
     modal: React.PropTypes.node.isRequired,
+    /**
+     * The DOM Node that the Component will render it's children into
+     */
+    container: CustomPropTypes.mountable,
     onBlur: React.PropTypes.func,
     onFocus: React.PropTypes.func,
     onMouseOut: React.PropTypes.func,
