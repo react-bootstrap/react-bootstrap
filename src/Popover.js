@@ -1,9 +1,11 @@
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import FadeMixin from './FadeMixin';
 
 const Popover = React.createClass({
+
   mixins: [BootstrapMixin, FadeMixin],
 
   propTypes: {
@@ -48,7 +50,7 @@ const Popover = React.createClass({
     };
 
     return (
-      <div {...this.props} className={classNames(this.props.className, classes)} style={style} title={null}>
+      <div role='tooltip' {...this.props} className={classNames(this.props.className, classes)} style={style} title={null}>
         <div className="arrow" style={arrowStyle} />
         {this.props.title ? this.renderTitle() : null}
         <div className="popover-content">

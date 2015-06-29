@@ -1,21 +1,33 @@
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import FadeMixin from './FadeMixin';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 const Tooltip = React.createClass({
   mixins: [BootstrapMixin, FadeMixin],
 
   propTypes: {
+    /**
+     * An html id attribute, necessary for accessibility
+     * @type {string}
+     * @required
+     */
+    id: CustomPropTypes.isRequiredForA11y(React.PropTypes.string),
+
     placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
     positionLeft: React.PropTypes.number,
     positionTop: React.PropTypes.number,
+
     arrowOffsetLeft: React.PropTypes.oneOfType([
       React.PropTypes.number, React.PropTypes.string
     ]),
+
     arrowOffsetTop: React.PropTypes.oneOfType([
       React.PropTypes.number, React.PropTypes.string
     ]),
+
     animation: React.PropTypes.bool
   },
 
@@ -46,7 +58,7 @@ const Tooltip = React.createClass({
     };
 
     return (
-        <div {...this.props} className={classNames(this.props.className, classes)} style={style}>
+        <div role='tooltip' {...this.props} className={classNames(this.props.className, classes)} style={style}>
           <div className="tooltip-arrow" style={arrowStyle} />
           <div className="tooltip-inner">
             {this.props.children}
