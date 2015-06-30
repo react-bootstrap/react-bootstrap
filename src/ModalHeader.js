@@ -1,3 +1,4 @@
+
 import React from 'react';
 import classnames from 'classnames';
 
@@ -12,7 +13,7 @@ class ModalHeader extends React.Component {
         { this.props.closeButton &&
           <button
             className='close'
-            aria-label={this.props['aria-label'] || 'Close'}
+            aria-label={this.props['aria-label'] || 'Close'} //eslint-disable-line react/prop-types
             onClick={this.props.onHide}
             style={{ marginTop: -2 }}
           >

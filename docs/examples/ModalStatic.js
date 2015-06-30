@@ -2,6 +2,7 @@ const modalInstance = (
   <div className='static-modal'>
     <Modal
       enforceFocus={false}
+      autoFocus={false}
       backdrop={false}
       animation={false}
       container={mountNode}

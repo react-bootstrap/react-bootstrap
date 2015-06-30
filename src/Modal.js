@@ -1,3 +1,4 @@
+/*eslint-disable react/prop-types */
 import React, { cloneElement } from 'react';
 
 import classNames from 'classnames';
@@ -141,8 +142,17 @@ const ModalMarkup = React.createClass({
     animation: React.PropTypes.bool,
     /**
      * A Callback fired when the header closeButton or non-static backdrop is clicked.
+     * @type {function}
+     * @required
      */
     onHide: requiredIfNot('onRequestHide', React.PropTypes.func),
+
+    /**
+     * A Callback fired when the header closeButton or non-static backdrop is clicked.
+     * @deprecated Replaced by `onHide`.
+     */
+    onRequestHide:  React.PropTypes.func,
+
     /**
      * A css class to apply to the Modal dialog DOM node.
      */

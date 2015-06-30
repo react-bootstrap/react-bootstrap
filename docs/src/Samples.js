@@ -102,5 +102,5 @@ export default {
   MenuItem:                      require('fs').readFileSync(__dirname + '/../examples/MenuItem.js', 'utf8'),
 
   Overlay:                       require('fs').readFileSync(__dirname + '/../examples/Overlay.js', 'utf8'),
-  OverlayTrigger:                require('fs').readFileSync(__dirname + '/../examples/OverlayTrigger.js', 'utf8')
+  OverlayCustom:                 require('fs').readFileSync(__dirname + '/../examples/OverlayCustom.js', 'utf8')
 };

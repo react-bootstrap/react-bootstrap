@@ -1,8 +1,11 @@
 const MyModal = React.createClass({
   render() {
     return (
-      <Modal {...this.props} dialogClassName='custom-modal' title='Modal heading' animation={false}>
-        <div className='modal-body'>
+      <Modal {...this.props} dialogClassName='custom-modal'>
+        <Modal.Header closeButton>
+          <Modal.Title id='contained-modal-title-lg'>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           <h4>Wrapped Text</h4>
           <p>Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae unde commodi aspernatur enim, consectetur. Cumque deleniti temporibus ipsam atque a dolores quisquam quisquam adipisci possimus laboriosam. Quibusdam facilis doloribus debitis! Sit quasi quod accusamus eos quod. Ab quos consequuntur eaque quo rem!
            Mollitia reiciendis porro quo magni incidunt dolore amet atque facilis ipsum deleniti rem! Dolores debitis voluptatibus ipsum dicta. Dolor quod amet ab sint esse distinctio tenetur. Veritatis laudantium quibusdam quidem corporis architecto veritatis. Ex facilis minima beatae sunt perspiciatis placeat. Quasi corporis
@@ -19,10 +22,10 @@ const MyModal = React.createClass({
            magni delectus maxime. Sit odit provident vel magnam quod. Possimus eligendi non corrupti tenetur culpa accusantium quod quis. Voluptatum quaerat animi dolore maiores molestias voluptate? Necessitatibus illo omnis laborum hic enim minima! Similique. Dolor voluptatum reprehenderit nihil adipisci aperiam voluptatem soluta
            magnam accusamus iste incidunt tempore consequatur illo illo odit. Asperiores nesciunt iusto nemo animi ratione. Sunt odit similique doloribus temporibus reiciendis! Ullam. Dolor dolores veniam animi sequi dolores molestias voluptatem iure velit. Elit dolore quaerat incidunt enim aut distinctio. Ratione molestiae laboriosam
            similique laboriosam eum et nemo expedita. Consequuntur perspiciatis cumque dolorem.</p>
-        </div>
-        <div className='modal-footer'>
-          <Button onClick={this.props.onRequestHide}>Close</Button>
-        </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={this.props.onHide}>Close</Button>
+        </Modal.Footer>
       </Modal>
     );
   }

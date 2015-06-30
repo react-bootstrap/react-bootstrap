@@ -16,18 +16,38 @@ const Tooltip = React.createClass({
      */
     id: CustomPropTypes.isRequiredForA11y(React.PropTypes.string),
 
+    /**
+     * Sets the direction the Tooltip is positioned towards.
+     */
     placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-    positionLeft: React.PropTypes.number,
-    positionTop: React.PropTypes.number,
 
+    /**
+     * The "left" position value for the Tooltip.
+     */
+    positionLeft: React.PropTypes.number,
+    /**
+     * The "top" position value for the Tooltip.
+     */
+    positionTop: React.PropTypes.number,
+    /**
+     * The "left" position value for the Tooltip arrow.
+     */
     arrowOffsetLeft: React.PropTypes.oneOfType([
       React.PropTypes.number, React.PropTypes.string
     ]),
-
+    /**
+     * The "top" position value for the Tooltip arrow.
+     */
     arrowOffsetTop: React.PropTypes.oneOfType([
       React.PropTypes.number, React.PropTypes.string
     ]),
-
+    /**
+     * Title text
+     */
+    title: React.PropTypes.node,
+    /**
+     * Specify whether the Tooltip should be use show and hide animations.
+     */
     animation: React.PropTypes.bool
   },
 

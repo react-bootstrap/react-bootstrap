@@ -4,9 +4,15 @@ const Example = React.createClass({
     return { showModal: false };
   },
 
-  render() {
-    let closeModal = e => this.setState({ showModal: false });
+  close(){
+    this.setState({ showModal: false });
+  },
 
+  open(){
+    this.setState({ showModal: true });
+  },
+
+  render() {
     let popover = <Popover title='popover'>very popover. such engagement</Popover>;
     let tooltip = <Tooltip>wow.</Tooltip>;
 
@@ -17,12 +23,12 @@ const Example = React.createClass({
         <Button
           bsStyle='primary'
           bsSize='large'
-          onClick={e => this.setState({ showModal: true })}
+          onClick={this.open}
         >
           Launch demo modal
         </Button>
 
-        <Modal show={this.state.showModal} onHide={closeModal}>
+        <Modal show={this.state.showModal} onHide={this.close}>
           <Modal.Header closeButton>
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>
@@ -50,7 +56,7 @@ const Example = React.createClass({
             <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={closeModal}>Close</Button>
+            <Button onClick={this.close}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>

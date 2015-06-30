@@ -9,31 +9,31 @@ const Example = React.createClass({
   },
 
   render(){
-    const style = {
-      position: 'absolute',
-      backgroundColor: '#EEE',
-      border: '1px solid #CCC',
-      borderRadius: 3,
-      marginLeft: 5,
-      padding: 10
+    const tooltip = <Tooltip>Tooltip overload!</Tooltip>;
+
+    const sharedProps = {
+      show: this.state.show,
+      container: this,
+      target: props => React.findDOMNode(this.refs.target)
     };
 
     return (
-      <div style={{ height: 100, position: 'relative' }}>
+      <div style={{ height: 100, paddingLeft: 150, position: 'relative' }}>
         <Button ref='target' onClick={this.toggle}>
-          I am an Overlay target
+          Click me!
         </Button>
 
-        <Overlay
-          show={this.state.show}
-          onHide={() => this.setState({ show: false })}
-          placement="right"
-          container={this}
-          target={ props => React.findDOMNode(this.refs.target)}
-        >
-          <div style={style}>
-            <strong>Holy guacamole!</strong> Check this info.
-          </div>
+        <Overlay {...sharedProps} placement="left">
+          { tooltip }
+        </Overlay>
+        <Overlay {...sharedProps} placement="top">
+          { tooltip }
+        </Overlay>
+        <Overlay {...sharedProps} placement="right">
+          { tooltip }
+        </Overlay>
+        <Overlay {...sharedProps} placement="bottom">
+          { tooltip }
         </Overlay>
       </div>
     );
