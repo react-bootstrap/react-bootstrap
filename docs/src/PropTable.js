@@ -70,7 +70,7 @@ const PropTable = React.createClass({
               <div>{this.getType(prop)}</div>
             </td>
             <td>{prop.defaultValue}</td>
-            <td>{prop.desc}</td>
+            <td dangerouslySetInnerHTML={{__html: prop.descHtml }}></td>
           </tr>
         );
       });

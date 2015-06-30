@@ -2,6 +2,11 @@ import metadata from 'react-component-metadata';
 import glob from 'glob';
 import fsp from 'fs-promise';
 import promisify from '../tools/promisify';
+import marked from 'marked';
+
+marked.setOptions({
+  xhtml: true
+});
 
 let globp = promisify(glob);
 
@@ -23,6 +28,7 @@ let isLiteral = str => str.trim()[0] === '"' || str.trim()[0] === "'";
 function parseDoclets(obj){
   obj.doclets = metadata.parseDoclets(obj.desc || '');
   obj.desc = cleanDoclets(obj.desc || '');
+  obj.descHtml = marked(obj.desc || '');
 }
 
 /**
