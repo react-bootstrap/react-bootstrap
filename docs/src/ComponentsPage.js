@@ -333,10 +333,7 @@ const ComponentsPage = React.createClass({
                   </p>
                   <ReactPlayground codeText={Samples.TooltipBasic} exampleClassName='tooltip-static'/>
 
-                  <p>Use the Tooltip in combination with <code>OverlayTrigger</code> to add some interactivity to your tips.</p>
-                  <ReactPlayground codeText={Samples.OverlayTrigger} />
-
-                  <p>Positioned tooltip component.</p>
+                  <p>Attach and position tooltips with <code>OverlayTrigger</code>.</p>
                   <ReactPlayground codeText={Samples.TooltipPositioned} />
 
                   <p>Positioned tooltip in text copy.</p>
@@ -881,9 +878,9 @@ const ComponentsPage = React.createClass({
                     </SubNav>
                     <NavItem href='#panels' key={4}>Panels</NavItem>
                     <NavItem href='#modals' key={5}>Modals</NavItem>
-                    <NavItem href='#overlays' key={27}>Overlays</NavItem>
                     <NavItem href='#tooltips' key={6}>Tooltips</NavItem>
                     <NavItem href='#popovers' key={7}>Popovers</NavItem>
+                    <NavItem href='#overlays' key={27}>Overlays</NavItem>
                     <NavItem href='#progress' key={8}>Progress bars</NavItem>
                     <NavItem href='#navs' key={9}>Navs</NavItem>
                     <NavItem href='#navbars' key={10}>Navbars</NavItem>
