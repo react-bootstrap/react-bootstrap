@@ -16,7 +16,8 @@ let cleanDoclets = desc => {
   return (idx === -1 ? desc : desc.substr(0, idx )).trim();
 };
 
-let cleanDocletValue = str => str.replace(/^\{|\}$/g, '');
+let cleanDocletValue = str => str.trim().replace(/^\{/, '').replace(/\}$/, '');
+
 
 let isLiteral = str => (/^('|")/).test(str.trim());
 
@@ -26,7 +27,7 @@ let isLiteral = str => (/^('|")/).test(str.trim());
  * @param  {ComponentMetadata|PropMetadata} obj
  */
 function parseDoclets(obj){
-  obj.doclets = metadata.parseDoclets(obj.desc || '');
+  obj.doclets = metadata.parseDoclets(obj.desc || '') || {};
   obj.desc = cleanDoclets(obj.desc || '');
   obj.descHtml = marked(obj.desc || '');
 }

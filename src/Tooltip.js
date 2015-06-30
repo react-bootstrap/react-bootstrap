@@ -1,21 +1,53 @@
+/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import FadeMixin from './FadeMixin';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 const Tooltip = React.createClass({
   mixins: [BootstrapMixin, FadeMixin],
 
   propTypes: {
+    /**
+     * An html id attribute, necessary for accessibility
+     * @type {string}
+     * @required
+     */
+    id: CustomPropTypes.isRequiredForA11y(React.PropTypes.string),
+
+    /**
+     * Sets the direction the Tooltip is positioned towards.
+     */
     placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+
+    /**
+     * The "left" position value for the Tooltip.
+     */
     positionLeft: React.PropTypes.number,
+    /**
+     * The "top" position value for the Tooltip.
+     */
     positionTop: React.PropTypes.number,
+    /**
+     * The "left" position value for the Tooltip arrow.
+     */
     arrowOffsetLeft: React.PropTypes.oneOfType([
       React.PropTypes.number, React.PropTypes.string
     ]),
+    /**
+     * The "top" position value for the Tooltip arrow.
+     */
     arrowOffsetTop: React.PropTypes.oneOfType([
       React.PropTypes.number, React.PropTypes.string
     ]),
+    /**
+     * Title text
+     */
+    title: React.PropTypes.node,
+    /**
+     * Specify whether the Tooltip should be use show and hide animations.
+     */
     animation: React.PropTypes.bool
   },
 
@@ -46,7 +78,7 @@ const Tooltip = React.createClass({
     };
 
     return (
-        <div {...this.props} className={classNames(this.props.className, classes)} style={style}>
+        <div role='tooltip' {...this.props} className={classNames(this.props.className, classes)} style={style}>
           <div className="tooltip-arrow" style={arrowStyle} />
           <div className="tooltip-inner">
             {this.props.children}

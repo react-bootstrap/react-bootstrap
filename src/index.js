@@ -28,12 +28,18 @@ import ListGroup from './ListGroup';
 import ListGroupItem from './ListGroupItem';
 import MenuItem from './MenuItem';
 import Modal from './Modal';
+import ModalHeader from './ModalHeader';
+import ModalTitle from './ModalTitle';
+import ModalBody from './ModalBody';
+import ModalFooter from './ModalFooter';
+
 import Nav from './Nav';
 import Navbar from './Navbar';
 import NavItem from './NavItem';
 import ModalTrigger from './ModalTrigger';
 import OverlayTrigger from './OverlayTrigger';
 import OverlayMixin from './OverlayMixin';
+import Overlay from './Overlay';
 import PageHeader from './PageHeader';
 import Pagination from './Pagination';
 import Panel from './Panel';
@@ -53,6 +59,8 @@ import Tooltip from './Tooltip';
 import utils from './utils';
 import Well from './Well';
 import styleMaps from './styleMaps';
+import Portal from './Portal';
+import Position from './Position';
 
 export default {
   Accordion,
@@ -85,10 +93,15 @@ export default {
   ListGroupItem,
   MenuItem,
   Modal,
+  ModalHeader,
+  ModalTitle,
+  ModalBody,
+  ModalFooter,
   Nav,
   Navbar,
   NavItem,
   ModalTrigger,
+  Overlay,
   OverlayTrigger,
   OverlayMixin,
   PageHeader,
@@ -98,6 +111,8 @@ export default {
   Pager,
   Pagination,
   Popover,
+  Portal,
+  Position,
   ProgressBar,
   Row,
   SplitButton,

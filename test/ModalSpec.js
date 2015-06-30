@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Modal from '../src/Modal';
+import { shouldWarn } from './helpers';
 
 describe('Modal', function () {
 
   it('Should render the modal content', function() {
     let noOp = function () {};
     let instance = ReactTestUtils.renderIntoDocument(
-      <Modal onRequestHide={noOp}>
+      <Modal onHide={noOp}>
         <strong>Message</strong>
       </Modal>
     );
@@ -18,21 +19,19 @@ describe('Modal', function () {
 
     let Container = React.createClass({
       getInitialState() {
-        return {modalOpen: true};
+        return { modalOpen: true };
       },
       handleCloseModal() {
-        this.setState({modalOpen: false});
+        this.setState({ modalOpen: false });
       },
       render() {
-        if (this.state.modalOpen) {
-          return (
-            <Modal onRequestHide={this.handleCloseModal} container={this}>
+        return (
+          <div>
+            <Modal show={this.state.modalOpen} onHide={this.handleCloseModal} container={this}>
               <strong>Message</strong>
             </Modal>
-          );
-        } else {
-          return <span/>;
-        }
+          </div>
+        );
       }
     });
     let instance = ReactTestUtils.renderIntoDocument(
@@ -41,6 +40,7 @@ describe('Modal', function () {
     assert.ok(React.findDOMNode(instance).className.match(/\modal-open\b/));
 
     let backdrop = React.findDOMNode(instance).getElementsByClassName('modal-backdrop')[0];
+
     ReactTestUtils.Simulate.click(backdrop);
     setTimeout(function(){
       assert.equal(React.findDOMNode(instance).className.length, 0);
@@ -52,7 +52,7 @@ describe('Modal', function () {
   it('Should close the modal when the backdrop is clicked', function (done) {
     let doneOp = function () { done(); };
     let instance = ReactTestUtils.renderIntoDocument(
-      <Modal onRequestHide={doneOp}>
+      <Modal onHide={doneOp}>
         <strong>Message</strong>
       </Modal>
     );
@@ -64,7 +64,7 @@ describe('Modal', function () {
   it('Should close the modal when the modal background is clicked', function (done) {
     let doneOp = function () { done(); };
     let instance = ReactTestUtils.renderIntoDocument(
-      <Modal onRequestHide={doneOp}>
+      <Modal onHide={doneOp}>
         <strong>Message</strong>
       </Modal>
     );
@@ -76,7 +76,7 @@ describe('Modal', function () {
   it('Should pass bsSize to the dialog', function () {
     let noOp = function () {};
     let instance = ReactTestUtils.renderIntoDocument(
-      <Modal bsSize='small' onRequestHide={noOp}>
+      <Modal bsSize='small' onHide={noOp}>
         <strong>Message</strong>
       </Modal>
     );
@@ -88,7 +88,7 @@ describe('Modal', function () {
   it('Should pass dialogClassName to the dialog', function () {
     let noOp = function () {};
     let instance = ReactTestUtils.renderIntoDocument(
-      <Modal dialogClassName="testCss" onRequestHide={noOp}>
+      <Modal dialogClassName="testCss" onHide={noOp}>
         <strong>Message</strong>
       </Modal>
     );
@@ -133,7 +133,7 @@ describe('Modal', function () {
         render() {
           if (this.state.modalOpen) {
             return (
-              <Modal onRequestHide={this.handleCloseModal} container={this}>
+              <Modal onHide={this.handleCloseModal} container={this}>
                 <strong>Message</strong>
               </Modal>
             );
@@ -167,7 +167,8 @@ describe('Modal', function () {
         render() {
           if (this.state.modalOpen) {
             return (
-              <Modal autoFocus={false} onRequestHide={()=>{}} container={this}>
+
+              <Modal autoFocus={false} onHide={()=>{}} container={this}>
                 <strong>Message</strong>
               </Modal>
             );
@@ -220,4 +221,32 @@ describe('Modal', function () {
   });
 
 
+  describe('deprecations', function(){
+    it('Should render the modal header and title', function() {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Modal title='hello' onHide={()=>{}}>
+          <strong>Message</strong>
+        </Modal>
+      );
+
+      (()=> {
+        ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'button');
+        ReactTestUtils.findRenderedComponentWithType(instance, Modal.Header);
+        ReactTestUtils.findRenderedComponentWithType(instance, Modal.Title);
+      }).should.not.throw();
+
+      shouldWarn(
+        'Specifying `closeButton` or `title` Modal props is deprecated');
+    });
+
+    it('Should warn about onRequestHide', function() {
+      ReactTestUtils.renderIntoDocument(
+        <Modal onRequestHide={()=>{}}>
+          <Modal.Header closeButton/>
+        </Modal>
+      );
+
+      shouldWarn('The Modal prop `onRequestHide` is deprecated');
+    });
+  });
 });
