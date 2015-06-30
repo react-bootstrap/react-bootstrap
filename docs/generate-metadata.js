@@ -16,9 +16,9 @@ let cleanDoclets = desc => {
   return (idx === -1 ? desc : desc.substr(0, idx )).trim();
 };
 
-let cleanDocletValue = str => str.replace(/^\{/, '').replace(/\}$/, '');
+let cleanDocletValue = str => str.replace(/^\{|\}$/g, '');
 
-let isLiteral = str => str.trim()[0] === '"' || str.trim()[0] === "'";
+let isLiteral = str => (/^('|")/).test(str.trim());
 
 /**
  * parse out description doclets to an object and remove the comment
