@@ -114,7 +114,11 @@ const PropTable = React.createClass({
         return name;
       case 'union':
         return type.value.reduce((current, val, i, list) => {
-          current = current.concat(this.getType({ type: val }));
+          let item = this.getType({ type: val });
+          if (React.isValidElement(item)) {
+            item = React.cloneElement(item, {key: i});
+          }
+          current = current.concat(item);
 
           return i === (list.length - 1) ? current : current.concat(' | ');
         }, []);
