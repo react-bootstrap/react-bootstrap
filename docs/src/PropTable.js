@@ -5,7 +5,7 @@ import Label from '../../src/Label';
 import Table from '../../src/Table';
 
 
-let cleanDocletValue = str => str.replace(/^\{/, '').replace(/\}$/, '');
+let cleanDocletValue = str => str.replace(/^\{|\}$/g, '');
 
 const PropTable = React.createClass({
 
