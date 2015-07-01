@@ -1,3 +1,10 @@
+v0.23.7 - Wed, 01 Jul 2015 15:18:30 GMT
+---------------------------------------
+
+- [35ea201](../../commit/35ea201) [fixed] Accidental breaking change in Modal trigger
+
+
+
 v0.23.6 - Wed, 01 Jul 2015 00:48:02 GMT
 ---------------------------------------
 
