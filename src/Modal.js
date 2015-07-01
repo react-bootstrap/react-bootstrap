@@ -449,7 +449,7 @@ const Modal = React.createClass({
       <ModalMarkup {...props}>{this.props.children}</ModalMarkup>
     );
     // I can't think of another way to not break back compat while defaulting container
-    if ( show != null ){
+    if ( !this.props.__isUsedInModalTrigger && show != null ){
       return (
         <Portal container={props.container} >
           { show && modal }

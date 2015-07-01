@@ -4,6 +4,7 @@ import deprecationWarning from './utils/deprecationWarning';
 
 import createChainedFunction from './utils/createChainedFunction';
 import createContextWrapper from './utils/createContextWrapper';
+import { OverlayMixin } from './OverlayMixin';
 
 function createHideDepreciationWrapper(hide){
   return function(...args){
@@ -16,6 +17,8 @@ function createHideDepreciationWrapper(hide){
 
 const ModalTrigger = React.createClass({
 
+  mixins: [ OverlayMixin ],
+
   propTypes: {
     modal: React.PropTypes.node.isRequired,
     /**
@@ -27,6 +30,7 @@ const ModalTrigger = React.createClass({
     onMouseOut: React.PropTypes.func,
     onMouseOver: React.PropTypes.func
   },
+
 
   getInitialState() {
     return {
@@ -52,31 +56,19 @@ const ModalTrigger = React.createClass({
     });
   },
 
-  componentDidMount(){
-    this._overlay = document.createElement('div');
-    React.render(this.getOverlay(), this._overlay);
-  },
-
-  componentWillUnmount() {
-    React.unmountComponentAtNode(this._overlay);
-    this._overlay = null;
-    clearTimeout(this._hoverDelay);
-  },
-
-  componentDidUpdate(){
-    React.render(this.getOverlay(), this._overlay);
-  },
-
-  getOverlay() {
+  renderOverlay() {
     let modal = this.props.modal;
+
+    if (!this.state.isOverlayShown) {
+      return <span />;
+    }
 
     return cloneElement(
       modal,
       {
-        show: this.state.isOverlayShown,
         onHide: this.hide,
         onRequestHide: createHideDepreciationWrapper(this.hide),
-        container: modal.props.container || this.props.container
+        __isUsedInModalTrigger: true
       }
     );
   },
