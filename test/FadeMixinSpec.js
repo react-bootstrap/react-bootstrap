@@ -56,7 +56,7 @@ describe('FadeMixin', function () {
     }, 25);
   });
 
-  it('Should be b of the textarea value', function (done) {
+  it('should retain the same input value throughout transition', function (done) {
     let instance = ReactTestUtils.renderIntoDocument(<Component />);
     let textarea = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'textarea');
 
@@ -69,7 +69,7 @@ describe('FadeMixin', function () {
       let child = element.children[1];
 
       setTimeout(function(){
-        assert.equal(child.value, 'b')
+        assert.equal(child.value, 'b');
         done();
       }, 25);
     }, 25);
