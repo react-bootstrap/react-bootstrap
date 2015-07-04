@@ -3,8 +3,20 @@ import CustomPropTypes from './utils/CustomPropTypes';
 
 const BootstrapMixin = {
   propTypes: {
+    /**
+     * bootstrap className
+     * @private
+     */
     bsClass: CustomPropTypes.keyOf(styleMaps.CLASSES),
+    /**
+     * Style variants
+     * @type {("default"|"primary"|"success"|"info"|"warning"|"danger"|"link")}
+     */
     bsStyle: CustomPropTypes.keyOf(styleMaps.STYLES),
+    /**
+     * Size variants
+     * @type {("xsmall"|"small"|"medium"|"large")}
+     */
     bsSize: CustomPropTypes.keyOf(styleMaps.SIZES)
   },
 

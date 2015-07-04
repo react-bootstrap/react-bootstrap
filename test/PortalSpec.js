@@ -1,31 +1,26 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import OverlayMixin from '../src/OverlayMixin';
-import { shouldWarn } from './helpers';
+import Portal from '../src/Portal';
 
-describe('OverlayMixin', function () {
+describe('Portal', function () {
   let instance;
 
   let Overlay = React.createClass({
-    mixins: [OverlayMixin],
-
     render() {
-      return <div />;
+      return (
+        <div>
+          <Portal ref='p' {...this.props}>{this.props.overlay}</Portal>
+        </div>
+      );
     },
-
-    renderOverlay() {
-      return this.props.overlay;
+    getOverlayDOMNode(){
+      return this.refs.p.getOverlayDOMNode();
     }
   });
-
 
   afterEach(function() {
     if (instance && ReactTestUtils.isCompositeComponent(instance) && instance.isMounted()) {
       React.unmountComponentAtNode(React.findDOMNode(instance));
-    }
-
-    if ( console.warn.called ) {
-      shouldWarn('Overlay mixin is deprecated');
     }
   });
 
@@ -69,14 +64,8 @@ describe('OverlayMixin', function () {
 
   it('Should render only an overlay', function() {
     let OnlyOverlay = React.createClass({
-      mixins: [OverlayMixin],
-
       render() {
-        return null;
-      },
-
-      renderOverlay() {
-        return this.props.overlay;
+        return <Portal ref='p' {...this.props}>{this.props.overlay}</Portal>;
       }
     });
 
@@ -84,6 +73,6 @@ describe('OverlayMixin', function () {
       <OnlyOverlay overlay={<div id="test1" />} />
     );
 
-    assert.equal(overlayInstance.getOverlayDOMNode().nodeName, 'DIV');
+    assert.equal(overlayInstance.refs.p.getOverlayDOMNode().nodeName, 'DIV');
   });
 });

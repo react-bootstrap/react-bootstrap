@@ -7,6 +7,7 @@
 
 [![HuBoard][huboard-badge]][huboard]
 [![Gitter][gitter-badge]][gitter]
+[![Thinkful][thinkful-badge]][thinkful]
 
 [![NPM version][npm-badge]][npm]
 [![Bower version][bower-badge]][bower]
@@ -74,6 +75,9 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [huboard-badge]: https://img.shields.io/badge/Hu-Board-7965cc.svg
 [huboard]: https://huboard.com/react-bootstrap/react-bootstrap
+
+[thinkful-badge]: https://tf-assets-staging.s3.amazonaws.com/badges/thinkful_repo_badge.svg
+[thinkful]: http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap
 
 [appveyor-badge]: https://ci.appveyor.com/api/projects/status/ylitpyo6n5yq1s6i/branch/master?svg=true
 [appveyor]: https://ci.appveyor.com/project/react-bootstrap/react-bootstrap/branch/master

@@ -9,6 +9,10 @@ const ButtonGroup = React.createClass({
   propTypes: {
     vertical:  React.PropTypes.bool,
     justified: React.PropTypes.bool,
+    /**
+     * Display block buttons, only useful when used with the "vertical" prop.
+     * @type {bool}
+     */
     block: CustomPropTypes.all([
       React.PropTypes.bool,
       function(props, propName, componentName) {

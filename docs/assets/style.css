@@ -162,3 +162,13 @@ body {
   position: absolute;
 }
 
+.prop-table {
+  background-color: white;
+}
+
+.bs-example.tooltip-static .tooltip {
+  position: relative;
+  display: inline-block;
+  margin: 5px 10px;
+
+}

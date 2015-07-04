@@ -1,3 +1,32 @@
+v0.23.7 - Wed, 01 Jul 2015 15:18:30 GMT
+---------------------------------------
+
+- [35ea201](../../commit/35ea201) [fixed] Accidental breaking change in Modal trigger
+
+
+
+v0.23.6 - Wed, 01 Jul 2015 00:48:02 GMT
+---------------------------------------
+
+- [1b1af04](../../commit/1b1af04) [changed] deprecate ModalTrigger
+- [83b4cbc](../../commit/83b4cbc) [changed] Modal doesn't require ModalTrigger
+- [d70f617](../../commit/d70f617) [changed] tooltips and popovers required id's for a11y
+- [389cf3f](../../commit/389cf3f) [changed] Deprecate OverlayTrigger positioning api and "manual" trigger
+- [5eb8666](../../commit/5eb8666) [added] Overlay component
+- [1638f69](../../commit/1638f69) [added] Position component for custom Overlays
+- [f799110](../../commit/f799110) [added] Portal component; replaces OverlayMixin
+- [97ef415](../../commit/97ef415) [fixed] Modal won't steal focus from children
+- [a8b177a](../../commit/a8b177a) [fixed] Stack overflow with nested Modals
+- [3caa866](../../commit/3caa866) [changed] Update babel-loader
+- [6ffa325](../../commit/6ffa325) [fixed] 'componentClass' property type is 'elementType' now
+- [0e5980f](../../commit/0e5980f) [added] 'elementType' custom prop type validator
+- [8f582d2](../../commit/8f582d2) [changed] Update karma-chrome-launcher. Dev dependency
+- [d4089d0](../../commit/d4089d0) [changed] Update eslint-plugin-mocha. Dev dependency
+- [fd547f4](../../commit/fd547f4) [changed] Update karma-mocha. Dev dependency.
+- [c5797e8](../../commit/c5797e8) [added] componentClass prop to Jumbotron
+
+
+
 v0.23.5 - Tue, 23 Jun 2015 01:31:35 GMT
 ---------------------------------------
 

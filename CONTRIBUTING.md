@@ -17,9 +17,10 @@ and submitting pull requests, but please respect the following restrictions:
 
 - Please do not use the issue tracker for personal support requests. Stack
   Overflow ([react-bootstrap](http://stackoverflow.com/questions/tagged/react-bootstrap)
-  tag), [Slack](http://www.reactiflux.com/) or
-  [gitter](https://gitter.im/react-bootstrap/react-bootstrap) are better places
-  to get help.
+  tag), [Slack](http://www.reactiflux.com/),
+  [gitter](https://gitter.im/react-bootstrap/react-bootstrap), or
+  [Thinkful](http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap)
+  are better places to get help.
 - Please do not open issues or pull requests regarding the code in React or
   Bootstrap (open them in their respective repositories).
 
@@ -68,10 +69,51 @@ doesn't make sense to do this, then it doesn't make sense to use `[changed]` or
 `[removed]` :). For further reading on writing a well formed commit message,
 check out these [5 useful tips for a better commit message][commit-message]
 
+### Using `[changed]` with development dependencies updates
+
+Use `[changed]` if dev-dependency has impact on the resulting code or API.
+`babel` is a good example of such dev-dependency.
+`chai`, `colors`, `express` or `eslint` are good examples when there is
+no need to add `[changed]`.
+
+## Visual Changes
+
+When making a visual change, if at all feasible please provide screenshots
+and/or screencasts of the proposed change. This will help us to understand the
+desired change easier.
+
 ## Docs
 
 Please update the docs with any API changes, the code and docs should always be
 in sync.
+
+Component prop documentation is generated automatically from the React components
+and their leading comments. Please make sure to provide comments for any `propTypes` you add
+or change in a Component.
+
+```js
+propTypes: {
+    /**
+     * Sets the visibility of the Component
+     */
+    show: React.PropTypes.bool,
+
+    /**
+     * A callback fired when the visibility changes
+     * @type {func}
+     * @required
+     */
+    onHide: myCustomPropType
+}
+```
+
+There are a few caveats to this format that differ from conventional JSDoc comments.
+
+- Only specific doclets (the @ things) should be used, and only when the data cannot be parsed from the component itself
+    - `@type`: Override the "type", use the same names as the default React PropTypes: string, func, bool, number, object. You can express enum and oneOfType types, Like `{("optionA"|"optionB")}`.
+    - `@required`: to mark a prop as required (use the normal React isRequired if possible)
+    - `@private`: Will hide the prop in the documentation
+- All description text should be above the doclets.
 
 ## Implement additional components and features
 

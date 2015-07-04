@@ -1,12 +1,23 @@
 import React from 'react';
 import classNames from 'classnames';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 const Jumbotron = React.createClass({
+  propTypes: {
+    componentClass: CustomPropTypes.elementType
+  },
+
+  getDefaultProps() {
+    return { componentClass: 'div' };
+  },
+
   render() {
+    const ComponentClass = this.props.componentClass;
+
     return (
-      <div {...this.props} className={classNames(this.props.className, 'jumbotron')}>
+      <ComponentClass {...this.props} className={classNames(this.props.className, 'jumbotron')}>
         {this.props.children}
-      </div>
+      </ComponentClass>
     );
   }
 });

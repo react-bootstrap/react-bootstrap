@@ -36,6 +36,7 @@
     "ModalTrigger",
     "OverlayTrigger",
     "OverlayMixin",
+    "Overlay",
     "PageHeader",
     "PageItem",
     "Pager",

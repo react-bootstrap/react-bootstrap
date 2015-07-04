@@ -6,6 +6,7 @@ import Root from './src/Root';
 import fsp from 'fs-promise';
 import { copy } from '../tools/fs-utils';
 import { exec } from '../tools/exec';
+import metadata from './generate-metadata';
 
 const repoRoot = path.resolve(__dirname, '../');
 const docsBuilt = path.join(repoRoot, 'docs-built');
@@ -21,12 +22,12 @@ const readmeDest = path.join(docsBuilt, 'README.md');
  * @return {Promise} promise
  * @internal
  */
-function generateHTML(fileName) {
+function generateHTML(fileName, propData) {
   return new Promise((resolve, reject) => {
     const urlSlug = fileName === 'index.html' ? '/' : `/${fileName}`;
 
     Router.run(routes, urlSlug, Handler => {
-      let html = React.renderToString(React.createElement(Handler));
+      let html = React.renderToString(React.createElement(Handler, { propData }));
       html = '<!doctype html>' + html;
       let write = fsp.writeFile(path.join(docsBuilt, fileName), html);
       resolve(write);
@@ -41,8 +42,10 @@ export default function BuildDocs({dev}) {
 
   return exec(`rimraf ${docsBuilt}`)
     .then(() => fsp.mkdir(docsBuilt))
-    .then(() => {
-      let pagesGenerators = Root.getPages().map(generateHTML);
+    .then(metadata)
+    .then(propData => {
+
+      let pagesGenerators = Root.getPages().map( page => generateHTML(page, propData));
 
       return Promise.all(pagesGenerators.concat([
         exec(`webpack --config webpack.docs.js --bail ${devOption}`),

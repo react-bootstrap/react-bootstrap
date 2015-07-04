@@ -14,7 +14,8 @@ const Root = React.createClass({
         'index.html',
         'introduction.html',
         'getting-started.html',
-        'components.html'
+        'components.html',
+        'support.html'
       ];
     }
   },
@@ -23,6 +24,14 @@ const Root = React.createClass({
     return {
       assetBaseUrl: ''
     };
+  },
+
+  childContextTypes: {
+    metadata: React.PropTypes.object
+  },
+
+  getChildContext(){
+    return { metadata: this.props.propData };
   },
 
   render() {
@@ -64,7 +73,7 @@ const Root = React.createClass({
         <head dangerouslySetInnerHTML={head} />
 
         <body>
-          <Router.RouteHandler />
+          <Router.RouteHandler propData={this.props.propData} />
 
           <script dangerouslySetInnerHTML={browserInitScriptObj} />
           <script src={`${this.props.assetBaseUrl}/assets/bundle.js`} />

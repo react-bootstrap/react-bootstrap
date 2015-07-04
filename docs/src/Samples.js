@@ -32,7 +32,7 @@ export default {
   CollapsibleParagraph:          require('fs').readFileSync(__dirname + '/../examples/CollapsibleParagraph.js', 'utf8'),
   ModalStatic:                   require('fs').readFileSync(__dirname + '/../examples/ModalStatic.js', 'utf8'),
   ModalTrigger:                  require('fs').readFileSync(__dirname + '/../examples/ModalTrigger.js', 'utf8'),
-  ModalOverlayMixin:             require('fs').readFileSync(__dirname + '/../examples/ModalOverlayMixin.js', 'utf8'),
+
   ModalContained:                require('fs').readFileSync(__dirname + '/../examples/ModalContained.js', 'utf8'),
   ModalDefaultSizing:            require('fs').readFileSync(__dirname + '/../examples/ModalDefaultSizing.js', 'utf8'),
   ModalCustomSizing:             require('fs').readFileSync(__dirname + '/../examples/ModalCustomSizing.js', 'utf8'),
@@ -99,5 +99,8 @@ export default {
   InputValidation:               require('fs').readFileSync(__dirname + '/../examples/InputValidation.js', 'utf8'),
   InputHorizontal:               require('fs').readFileSync(__dirname + '/../examples/InputHorizontal.js', 'utf8'),
   InputWrapper:                  require('fs').readFileSync(__dirname + '/../examples/InputWrapper.js', 'utf8'),
-  MenuItem:                      require('fs').readFileSync(__dirname + '/../examples/MenuItem.js', 'utf8')
+  MenuItem:                      require('fs').readFileSync(__dirname + '/../examples/MenuItem.js', 'utf8'),
+
+  Overlay:                       require('fs').readFileSync(__dirname + '/../examples/Overlay.js', 'utf8'),
+  OverlayCustom:                 require('fs').readFileSync(__dirname + '/../examples/OverlayCustom.js', 'utf8')
 };

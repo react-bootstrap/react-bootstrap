@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 const Navbar = React.createClass({
   mixins: [BootstrapMixin],
@@ -15,7 +16,7 @@ const Navbar = React.createClass({
     inverse: React.PropTypes.bool,
     fluid: React.PropTypes.bool,
     role: React.PropTypes.string,
-    componentClass: React.PropTypes.node.isRequired,
+    componentClass: CustomPropTypes.elementType,
     brand: React.PropTypes.node,
     toggleButton: React.PropTypes.node,
     toggleNavKey: React.PropTypes.oneOfType([

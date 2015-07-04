@@ -1,4 +1,4 @@
-/* eslint no-path-concat: 0, react/no-did-mount-set-state: 0 */
+/* eslint react/no-did-mount-set-state: 0 */
 
 import React from 'react';
 
@@ -9,6 +9,7 @@ import NavItem from '../../src/NavItem';
 
 import NavMain from './NavMain';
 import PageHeader from './PageHeader';
+import PropTable from './PropTable';
 import PageFooter from './PageFooter';
 import ReactPlayground from './ReactPlayground';
 import Samples from './Samples';
@@ -67,6 +68,7 @@ const ComponentsPage = React.createClass({
                     flush against each other. To preserve the spacing between multiple inline buttons, wrap your
                     button group in <code>{'<ButtonToolbar />'}</code>.</p>
                   </div>
+
                   <h2 id='buttons-sizes'>Sizes</h2>
                   <p>Fancy larger or smaller buttons? Add <code>bsSize="large"</code>, <code>bsSize="small"</code>, or <code>bsSize="xsmall"</code> for additional sizes.</p>
                   <ReactPlayground codeText={Samples.ButtonSizes} />
@@ -99,6 +101,10 @@ const ComponentsPage = React.createClass({
                     feedback as to the loading state, this can easily be done by updating
                     your <code>{'<Button />'}</code>&#8217;s props from a state change like below.</p>
                   <ReactPlayground codeText={Samples.ButtonLoading} />
+
+                  <h3 id='buttons-props'>Props</h3>
+                  <PropTable component='Button'/>
+
                 </div>
 
                 {/* Button Groups */}
@@ -139,6 +145,9 @@ const ComponentsPage = React.createClass({
                   </div>
                   <p>Just add <code>justified</code> to the <code>{'<ButtonGroup />'}</code>.</p>
                   <ReactPlayground codeText={Samples.ButtonGroupJustified} />
+
+                  <h3 id='btn-groups-props'>Props</h3>
+                  <PropTable component='ButtonGroup'/>
                 </div>
 
                 <div className='bs-docs-section'>
@@ -168,11 +177,19 @@ const ComponentsPage = React.createClass({
                   <h3 id='btn-dropdowns-right'>Dropdown right variation</h3>
                   <p>Trigger dropdown menus that align to the right of the button using the <code>pullRight</code> prop.</p>
                   <ReactPlayground codeText={Samples.SplitButtonRight} />
+
+                  <h3 id='btn-dropdowns-props'>Props</h3>
+
+                  <h4>DropdownButton</h4>
+                  <PropTable component='DropdownButton'/>
+
+                  <h4>SplitButton</h4>
+                  <PropTable component='SplitButton'/>
                 </div>
 
                 {/* Menu Item */}
                 <div className='bs-docs-section'>
-                  <h1 id='menu-item' className='page-header'>Menu Item <small> MenudItem</small></h1>
+                  <h1 id='menu-item' className='page-header'>Menu Item <small> MenuItem</small></h1>
                   <p>This is a component used in other components (see <a href="buttons">Buttons</a>, <a href="#navbars">Navbars</a>).</p>
                   <p>It supports the basic anchor properties <code>href</code>, <code>target</code>, <code>title</code>.</p>
                   <p>It also supports different properties of the normal Bootstrap MenuItem.
@@ -186,6 +203,9 @@ const ComponentsPage = React.createClass({
                   <p>The callback is called with the following arguments: <code>eventKey</code>, <code>href</code> and <code>target</code></p>
                   </p>
                   <ReactPlayground codeText={Samples.MenuItem} />
+
+                  <h3 id='menu-item-props'>Props</h3>
+                  <PropTable component='MenuItem'/>
                 </div>
 
               {/* Panels */}
@@ -227,25 +247,40 @@ const ComponentsPage = React.createClass({
                   <h3 id='panels-collapsible'>Collapsible Mixin</h3>
                   <p><code>CollapsibleMixin</code> can be used to create your own components with collapse functionality.</p>
                   <ReactPlayground codeText={Samples.CollapsibleParagraph} />
+
+                  <h3 id='panels-props'>Props</h3>
+
+                  <h4>Panels, Accordion</h4>
+                  <PropTable component='Panel'/>
+
+                  <h4>PanelGroup</h4>
+                  <PropTable component='PanelGroup'/>
+
                 </div>
 
                 <div className='bs-docs-section'>
                   <h1 id='modals' className='page-header'>Modals <small>Modal</small></h1>
 
                   <h3 id='modals-static'>A static example</h3>
-                  <p>A rendered modal with header, body, and set of actions in the footer.</p>
-                  <p>The header is added automatically if you pass in a <code>title</code> prop.</p>
+                  <p>
+                    A rendered modal with header, body, and set of actions in the footer. The <code>{'<Modal/>'}</code> Component comes with
+                    a few convenient "sub components": <code>{'<Modal.Header/>'}</code>, <code>{'<Modal.Title/>'}</code>, <code>{'<Modal.Body/>'}</code>,
+                    and <code>{'<Modal.Footer/>'}</code>, which you can use to build the Modal content.
+                  </p>
+                  <div className='bs-callout bs-callout-info'>
+                    <h4>Additional Import Options</h4>
+                    <p>
+                      The Modal Header, Title, Body, and Footer components are available as static properties the <code>{'<Modal/>'}</code> component, but you can also,
+                      import them directly from the <code>/lib</code> directory like: <code>{"require('react-bootstrap/lib/ModalHeader')"}</code>.
+                    </p>
+                  </div>
                   <ReactPlayground codeText={Samples.ModalStatic} />
 
                   <h3 id='modals-live'>Live demo</h3>
-                  <p>Use <code>&lt;ModalTrigger /&gt;</code> to create a real modal that's added to the document body when opened.</p>
+                  <p>Use <code>{'<Modal/>'}</code> in combination with other components to show or hide your Modal.</p>
                   <ReactPlayground codeText={Samples.ModalTrigger} />
 
-                  <h3 id='modals-custom'>Custom trigger</h3>
-                  <p>Use <code>OverlayMixin</code> in a custom component to manage the modal's state yourself.</p>
-                  <ReactPlayground codeText={Samples.ModalOverlayMixin} />
-
-                  <h3 id='modals-custom'>Contained Modal</h3>
+                  <h3 id='modals-contained'>Contained Modal</h3>
                   <p>You will need to add the following css to your project and ensure that your container has the <code>modal-container</code> class.</p>
                   <pre>
                     {React.DOM.code(null,
@@ -266,32 +301,63 @@ const ComponentsPage = React.createClass({
                   <h3 id='modal-custom-sizing'>Sizing modals using custom css</h3>
                   <p>You can apply custom css to the modal dialog div using the "dialogClassName" prop. Example is using a custom css class with width set to 90%.</p>
                   <ReactPlayground codeText={Samples.ModalCustomSizing} />
+
+                  <h3 id='modals-props'>Props</h3>
+
+                  <h4>Modal</h4>
+                  <PropTable component='Modal'/>
+
+                  <h4>Modal.Header</h4>
+                  <PropTable component='ModalHeader'/>
+
+                  <h4>Modal.Title</h4>
+                  <PropTable component='ModalTitle'/>
+
+                  <h4>Modal.Body</h4>
+                  <PropTable component='ModalBody'/>
+
+                  <h4>Modal.Footer</h4>
+                  <PropTable component='ModalFooter'/>
+
+                  <h4>ModalTrigger <strong className='text-danger'>Deprecated: use the Modal directly to manage it's visibility</strong></h4>
+                  <PropTable component='ModalTrigger'/>
+
                 </div>
+
 
                 {/* Tooltip */}
                 <div className='bs-docs-section'>
-                  <h1 id='tooltips' className='page-header'>Tooltips <small>Tooltip</small></h1>
-                  <h2 id='tooltips-examples'>Example tooltips</h2>
+                  <h2 id='tooltips' >Tooltip</h2>
+                  <p>
+                    Tooltip component for a more stylish alternative to that anchor tag <code>title</code> attribute.
+                  </p>
+                  <ReactPlayground codeText={Samples.TooltipBasic} exampleClassName='tooltip-static'/>
 
-                  <p>Tooltip component.</p>
-                  <ReactPlayground codeText={Samples.TooltipBasic} />
-
-                  <p>Positioned tooltip component.</p>
+                  <p>Attach and position tooltips with <code>OverlayTrigger</code>.</p>
                   <ReactPlayground codeText={Samples.TooltipPositioned} />
 
-                  <p>Positioned tooltip in copy.</p>
+                  <p>Positioned tooltip in text copy.</p>
                   <ReactPlayground codeText={Samples.TooltipInCopy} />
+
+                  <h3 id='tooltips-props'>Props</h3>
+
+                  <h4 id='overlays-trigger-props'>Overlay Trigger</h4>
+                  <PropTable component='OverlayTrigger'/>
+
+                  <h4 id='overlays-trigger-props'>Tooltip</h4>
+                  <PropTable component='Tooltip'/>
                 </div>
 
                 {/* Popover */}
                 <div className='bs-docs-section'>
-                  <h1 id='popovers' className='page-header'>Popovers <small>Popover</small></h1>
-                  <h2 id='popovers-examples'>Example popovers</h2>
+                  <h2 id='popovers'>Popovers</h2>
 
-                  <p>Popover component.</p>
-                  <ReactPlayground codeText={Samples.PopoverBasic} />
+                  <p>
+                    The Popover, offers a more robust alternative to the Tooltip for displaying overlays of content.
+                  </p>
+                  <ReactPlayground codeText={Samples.PopoverBasic}/>
 
-                  <p>Positioned popover component.</p>
+                  <p>The Popover component, like the Tooltip can be used with an <code>OverlayTrigger</code> Component, and positioned around it.</p>
                   <ReactPlayground codeText={Samples.PopoverPositioned} />
 
                   <p>Trigger behaviors. It's inadvisable to use <code>"hover"</code> or <code>"focus"</code> triggers for popovers, because they have poor accessibility from keyboard and on mobile devices.</p>
@@ -302,6 +368,32 @@ const ComponentsPage = React.createClass({
 
                   <p>Positioned popover components in scrolling container.</p>
                   <ReactPlayground codeText={Samples.PopoverPositionedScrolling} exampleClassName='bs-example-popover-scroll' />
+
+                  <h3 id='popover-props'>Props</h3>
+
+                  <PropTable component='Popover'/>
+                </div>
+
+                {/* Overlay */}
+                <div className='bs-docs-section'>
+                  <h2 id='overlays'>Overlay</h2>
+
+                  <p>
+                    The <code>OverlayTrigger</code> component is great for most use cases, but as a higher level abstraction it can lack the flexibility needed
+                    to build more nuanced or custom behaviors into your Overlay components. For these cases it can be helpful to forgo the trigger and use
+                    the <code>Overlay</code> component directly.
+                  </p>
+                  <ReactPlayground codeText={Samples.Overlay}/>
+
+                  <p>
+                    You don't need to use the provided <code>Tooltip</code> or <code>Popover</code> components. Creating custom overlays
+                    is as easy as wrapping some markup in an <code>Overlay</code> component
+                  </p>
+                  <ReactPlayground codeText={Samples.OverlayCustom} />
+
+                  <h3 id='overlays-props'>Props</h3>
+
+                  <PropTable component='Overlay'/>
                 </div>
 
                 {/* Progress Bar */}
@@ -338,6 +430,10 @@ const ComponentsPage = React.createClass({
                   <h2 id='progress-stacked'>Stacked</h2>
                   <p>Nest <code>&lt;ProgressBar /&gt;</code>s to stack them.</p>
                   <ReactPlayground codeText={Samples.ProgressBarStacked} />
+
+                  <h3 id='progress-props'>ProgressBar</h3>
+
+                  <PropTable component='ProgressBar'/>
                 </div>
 
                 {/* Nav */}
@@ -359,6 +455,15 @@ const ComponentsPage = React.createClass({
                   <h3>Justified</h3>
                   <p>They can be <code>justified</code> to take the full width of their parent.</p>
                   <ReactPlayground codeText={Samples.NavJustified} />
+
+                  <h3 id='navs-props'>Props</h3>
+
+                  <h4>Nav</h4>
+                  <PropTable component='Nav'/>
+
+                  <h4>NavItem</h4>
+                  <PropTable component='NavItem'/>
+
                 </div>
 
                 {/* Navbar */}
@@ -401,6 +506,10 @@ const ComponentsPage = React.createClass({
                   </div>
 
                   <ReactPlayground codeText={Samples.CollapsibleNav} />
+                  <h3 id='navbar-props'>Props</h3>
+
+                  <h4>Navbar</h4>
+                  <PropTable component='Navbar'/>
                 </div>
 
                 {/* Tabbed Areas */}
@@ -425,6 +534,14 @@ const ComponentsPage = React.createClass({
                     <h4>Extends tabbed navigation</h4>
                     <p>This plugin extends the <a href='#navs'>tabbed navigation component</a> to add tabbable areas.</p>
                   </div>
+
+                  <h3 id='tabs-props'>Tabs</h3>
+
+                  <h4>TabbedArea</h4>
+                  <PropTable component='TabbedArea'/>
+
+                  <h4>TabPane</h4>
+                  <PropTable component='TabPane'/>
                 </div>
 
                 {/* Pager */}
@@ -443,6 +560,14 @@ const ComponentsPage = React.createClass({
                   <h3>Disabled</h3>
                   <p>Set the <code>disabled</code> prop to <code>true</code> to disable the link.</p>
                   <ReactPlayground codeText={Samples.PagerDisabled} />
+
+                  <h3 id='pager-props'>Pager</h3>
+
+                  <h4>Pager</h4>
+                  <PropTable component='Pager'/>
+
+                  <h4>PageItem</h4>
+                  <PropTable component='PageItem'/>
                 </div>
 
                 {/* Pagination */}
@@ -456,6 +581,9 @@ const ComponentsPage = React.createClass({
                   <p>More options such as <code>first</code>, <code>last</code>, <code>previous</code>, <code>next</code> and <code>ellipsis</code>.</p>
                   <ReactPlayground codeText={Samples.PaginationAdvanced} />
 
+                  <h3 id='pagination-props'>Pagination</h3>
+
+                  <PropTable component='Pagination'/>
                 </div>
 
                 {/* Alerts */}
@@ -471,6 +599,10 @@ const ComponentsPage = React.createClass({
 
                   <p>Auto close after a set time with <code>dismissAfter</code> prop.</p>
                   <ReactPlayground codeText={Samples.AlertAutoDismissable} />
+
+                  <h3 id='alert-props'>Alert</h3>
+
+                  <PropTable component='Alert'/>
                 </div>
 
                 {/* Carousels */}
@@ -485,6 +617,15 @@ const ComponentsPage = React.createClass({
                   <h3>Controlled</h3>
                   <p>Pass down the active state on render via props.</p>
                   <ReactPlayground codeText={Samples.CarouselControlled} exampleClassName='bs-example-tabs' />
+
+                  <h3 id='carousels-props'>Props</h3>
+
+                  <h4>Carousel</h4>
+                  <PropTable component='Carousel'/>
+
+                  <h4>CarouselItem</h4>
+                  <PropTable component='CarouselItem'/>
+
                 </div>
 
                 {/* Grids */}
@@ -493,6 +634,17 @@ const ComponentsPage = React.createClass({
                   <h2 id='grids-examples'>Example grids</h2>
 
                   <ReactPlayground codeText={Samples.GridBasic} exampleClassName='bs-example-tabs' />
+
+                  <h3 id='grids-props'>Props</h3>
+
+                  <h4>Grid</h4>
+                  <PropTable component='Grid'/>
+
+                  <h4>Row</h4>
+                  <PropTable component='Row'/>
+
+                  <h4>Col</h4>
+                  <PropTable component='Col'/>
                 </div>
 
                 {/* Thumbnail */}
@@ -507,6 +659,11 @@ const ComponentsPage = React.createClass({
                   <h3>Divider Thumbnail</h3>
                   <p>Creates a divider wrapping an image and other children elements.</p>
                   <ReactPlayground codeText={Samples.ThumbnailDiv} />
+
+                  <h3 id='grids-props'>Props</h3>
+
+                  <PropTable component='Thumbnail'/>
+
                 </div>
 
                 {/* ListGroup */}
@@ -531,6 +688,14 @@ const ComponentsPage = React.createClass({
                   <h3>With header</h3>
                   <p>Set the <code>header</code> prop to create a structured item, with a heading and a body area.</p>
                   <ReactPlayground codeText={Samples.ListGroupHeader} />
+
+                  <h3 id='listgroup-props'>Props</h3>
+
+                  <h4>ListGroup</h4>
+                  <PropTable component='ListGroup'/>
+
+                  <h4>ListGroupItem</h4>
+                  <PropTable component='ListGroupItem'/>
                 </div>
 
                 {/* Labels */}
@@ -543,6 +708,10 @@ const ComponentsPage = React.createClass({
                   <h2 id='label-static'>Available variations</h2>
                   <p>Add any of the below mentioned modifier classes to change the appearance of a label.</p>
                   <ReactPlayground codeText={Samples.LabelVariations} />
+
+                  <h3 id='label-props'>Props</h3>
+
+                  <PropTable component='Label'/>
                 </div>
 
                 {/* Badges */}
@@ -555,6 +724,10 @@ const ComponentsPage = React.createClass({
                     <h4>Cross-browser compatibility</h4>
                     <p>Unlike regular Bootstrap badges self collapse even in Internet Explorer 8.</p>
                   </div>
+
+                  <h3 id='badges-props'>Props</h3>
+
+                  <PropTable component='Badge'/>
                 </div>
 
                 {/* Jumbotron */}
@@ -563,6 +736,10 @@ const ComponentsPage = React.createClass({
                   <p>A lightweight, flexible component that can optionally extend the entire viewport to showcase key content on your site.</p>
                   <h2 id='page-header-static'>Example</h2>
                   <ReactPlayground codeText={Samples.Jumbotron} />
+
+                  <h3 id='jumbotron-props'>Props</h3>
+
+                  <PropTable component='Jumbotron'/>
                 </div>
 
                 {/* Page Header */}
@@ -582,6 +759,10 @@ const ComponentsPage = React.createClass({
                   <h2 id='well-optins-static'>Optional classes</h2>
                   <p>Control padding and rounded corners with two optional modifier classes.</p>
                   <ReactPlayground codeText={Samples.WellSizes} />
+
+                  <h3 id='wells-props'>Props</h3>
+
+                  <PropTable component='Well'/>
                 </div>
 
                 {/* Glyphicons */}
@@ -590,6 +771,10 @@ const ComponentsPage = React.createClass({
                   <p>Use them in buttons, button groups for a toolbar, navigation, or prepended form inputs.</p>
                   <h2 id='glyphicon-static'>Example</h2>
                   <ReactPlayground codeText={Samples.Glyphicon} />
+
+                  <h3 id='glyphicons-props'>Props</h3>
+
+                  <PropTable component='Glyphicon'/>
                 </div>
 
                 {/* Tables */}
@@ -602,6 +787,10 @@ const ComponentsPage = React.createClass({
                   <h2 id='table-responsive'>Responsive</h2>
                   <p>Add <code>responsive</code> prop to make them scroll horizontally up to small devices (under 768px). When viewing on anything larger than 768px wide, you will not see any difference in these tables.</p>
                   <ReactPlayground codeText={Samples.TableResponsive} />
+
+                  <h3 id='table-props'>Props</h3>
+
+                  <PropTable component='Table'/>
                 </div>
 
                 {/* Input */}
@@ -638,9 +827,38 @@ const ComponentsPage = React.createClass({
                   <p>If <code>type</code> is not set, child element(s) will be rendered instead of an input element.
                   <code>getValue()</code> will not work when used this way.</p>
                   <ReactPlayground codeText={Samples.InputWrapper} />
+
+                  <h3 id='input-props'>Props</h3>
+
+                  <PropTable component='InputBase'/>
                 </div>
 
+                {/* Utilities */}
+                <div className='bs-docs-section'>
+                  <h1 id='utilities' className='page-header'>Utilities <small>Portal, Position</small></h1>
+
+                  <h2 id='utilities-portal'>Portal</h2>
+                  <p>
+                    A Component that renders its children into a new React "subtree" or <code>container</code>. The Portal component kind of like the React
+                    equivalent to jQuery's <code>.appendTo()</code>, which is helpful for components that need to be appended to a DOM node other than
+                    the component's direct parent. The Modal, and Overlay components use the Portal component internally.
+                  </p>
+                  <h3 id='utilities-props'>Props</h3>
+
+                  <PropTable component='Portal'/>
+
+                  <h2 id='utilities-position'>Position</h2>
+                  <p>
+                    A Component that absolutely positions its child to a <code>target</code> component or DOM node. Useful for creating custom
+                    popups or tooltips. Used by the Overlay Components.
+                  </p>
+                  <h3 id='utilities-props'>Props</h3>
+
+                  <PropTable component='Position'/>
+                </div>
               </div>
+
+
 
               <div className='col-md-3'>
                 <Affix
@@ -662,6 +880,7 @@ const ComponentsPage = React.createClass({
                     <NavItem href='#modals' key={5}>Modals</NavItem>
                     <NavItem href='#tooltips' key={6}>Tooltips</NavItem>
                     <NavItem href='#popovers' key={7}>Popovers</NavItem>
+                    <NavItem href='#overlays' key={27}>Overlays</NavItem>
                     <NavItem href='#progress' key={8}>Progress bars</NavItem>
                     <NavItem href='#navs' key={9}>Navs</NavItem>
                     <NavItem href='#navbars' key={10}>Navbars</NavItem>
@@ -681,6 +900,7 @@ const ComponentsPage = React.createClass({
                     <NavItem href='#glyphicons' key={24}>Glyphicons</NavItem>
                     <NavItem href='#tables' key={25}>Tables</NavItem>
                     <NavItem href='#input' key={26}>Input</NavItem>
+                    <NavItem href='#utilities' key={28}>Utilities</NavItem>
                   </Nav>
                   <a className='back-to-top' href='#top'>
                   Back to top
