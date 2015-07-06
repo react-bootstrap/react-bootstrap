@@ -19,7 +19,6 @@ class Position extends React.Component {
     this._needsFlush = true;
   }
 
-  // ToDo: add tests
   componentWillReceiveProps(){
     this._needsFlush = true;
   }
