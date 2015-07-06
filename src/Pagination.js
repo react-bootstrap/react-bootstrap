@@ -112,7 +112,7 @@ const Pagination = React.createClass({
       <PaginationButton
         key='next'
         eventKey={this.props.activePage + 1}
-        disabled={this.props.activePage === this.props.items}
+        disabled={this.props.activePage >= this.props.items}
         onSelect={this.props.onSelect}>
         <span aria-label='Next'>&rsaquo;</span>
       </PaginationButton>
@@ -144,7 +144,7 @@ const Pagination = React.createClass({
       <PaginationButton
         key='last'
         eventKey={this.props.items}
-        disabled={this.props.activePage === this.props.items}
+        disabled={this.props.activePage >= this.props.items}
         onSelect={this.props.onSelect}>
         <span aria-label='Last'>&raquo;</span>
       </PaginationButton>
