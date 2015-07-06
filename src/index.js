@@ -28,7 +28,6 @@ export ListGroupItem from './ListGroupItem';
 export MenuItem from './MenuItem';
 
 export Modal from './Modal';
-export ModalTrigger from './ModalTrigger';
 export ModalHeader from './ModalHeader';
 export ModalTitle from './ModalTitle';
 export ModalBody from './ModalBody';
@@ -39,7 +38,6 @@ export Navbar from './Navbar';
 export NavItem from './NavItem';
 
 export Overlay from './Overlay';
-export OverlayMixin from './OverlayMixin';
 export OverlayTrigger from './OverlayTrigger';
 
 export PageHeader from './PageHeader';
