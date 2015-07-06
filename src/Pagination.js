@@ -51,6 +51,9 @@ const Pagination = React.createClass({
       if(!hasHiddenPagesAfter){
         endPage = items;
         startPage = items - maxButtons + 1;
+        if(startPage < 1){
+          startPage = 1;
+        }
       } else {
         endPage = startPage + maxButtons - 1;
       }
