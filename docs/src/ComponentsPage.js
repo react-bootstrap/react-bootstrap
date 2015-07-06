@@ -214,6 +214,7 @@ const ComponentsPage = React.createClass({
 
                   <h3 id='panels-basic'>Basic example</h3>
                   <p>By default, all the <code>&lt;Panel /&gt;</code> does is apply some basic border and padding to contain some content.</p>
+                  <p>You can pass on any additional properties you need, e.g. a custom <code>onClick</code> handler, as it is shown in the example code. They all will apply to the wrapper <code>div</code> element.</p>
                   <ReactPlayground codeText={Samples.PanelBasic} />
 
                   <h3 id='panels-heading'>Panel with heading</h3>
