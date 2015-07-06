@@ -18,6 +18,22 @@ const Nav = React.createClass({
     justified: React.PropTypes.bool,
     onSelect: React.PropTypes.func,
     collapsible: React.PropTypes.bool,
+    /**
+     * CSS classes for the wrapper `nav` element
+     */
+    className: React.PropTypes.string,
+    /**
+     * HTML id for the wrapper `nav` element
+     */
+    id: React.PropTypes.string,
+    /**
+     * CSS classes for the inner `ul` element
+     */
+    ulClassName: React.PropTypes.string,
+    /**
+     * HTML id for the inner `ul` element
+     */
+    ulId: React.PropTypes.string,
     expanded: React.PropTypes.bool,
     navbar: React.PropTypes.bool,
     eventKey: React.PropTypes.any,
@@ -69,7 +85,8 @@ const Nav = React.createClass({
     return (
       <ul {...this.props}
         role={this.props.bsStyle === 'tabs' ? 'tablist' : null}
-        className={classNames(this.props.className, classes)}
+        className={classNames(this.props.ulClassName, classes)}
+        id={this.props.ulId}
         ref="ul"
       >
         {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
