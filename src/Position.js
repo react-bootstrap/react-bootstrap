@@ -26,7 +26,7 @@ class Position extends React.Component {
   componentDidMount(){
     this._maybeUpdatePosition();
   }
-  componentDidUpate(){
+  componentDidUpdate(){
     this._maybeUpdatePosition();
   }
 
