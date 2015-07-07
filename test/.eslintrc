@@ -5,6 +5,7 @@
   "globals": {
     "assert": true,
     "expect": true,
+    "should": true,
     "sinon": true
   },
   "plugins": [

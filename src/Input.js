@@ -8,6 +8,9 @@ class Input extends InputBase {
     if (this.props.type === 'static') {
       deprecationWarning('Input type=static', 'StaticText');
       return <FormControls.Static {...this.props} />;
+    } else if (this.props.type === 'radio') {
+      deprecationWarning('Input type=radio', 'FormControls.RadioButton and FormControls.RadioGroup');
+      return <FormControls.RadioButton {...this.props} />;
     }
 
     return super.render();
