@@ -53,7 +53,7 @@
     "child-process-promise": "^1.0.1",
     "codemirror": "^5.0.0",
     "colors": "^1.0.3",
-    "css-loader": "^0.14.1",
+    "css-loader": "^0.15.2",
     "es5-shim": "^4.1.0",
     "eslint": "0.24.0",
     "eslint-plugin-babel": "^1.0.0",
