@@ -172,3 +172,25 @@ body {
   margin: 5px 10px;
 
 }
+
+.anchor,
+.anchor:hover,
+.anchor:active,
+.anchor:focus {
+  color: black;
+  text-decoration: none;
+  position: relative;
+}
+.anchor-icon {
+  font-size: 90%;
+  padding-top: 0.1em;
+  position: absolute;
+  left: -0.8em;
+  opacity: 0;
+}
+h1:hover .anchor-icon,
+h2:hover .anchor-icon,
+h3:hover .anchor-icon,
+h4:hover .anchor-icon {
+  opacity: 0.5;
+}
