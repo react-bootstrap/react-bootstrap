@@ -245,7 +245,7 @@ const ModalMarkup = React.createClass({
 
     return React.Children.map(children, child => {
       // TODO: use context in 0.14
-      if (child.type.__isModalHeader) {
+      if (child && child.type.__isModalHeader) {
         return cloneElement(child, {
           onHide: createChainedFunction(this._getHide(), child.props.onHide)
         });
