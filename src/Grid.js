@@ -4,7 +4,15 @@ import CustomPropTypes from './utils/CustomPropTypes';
 
 const Grid = React.createClass({
   propTypes: {
+    /**
+     * Turn any fixed-width grid layout into a full-width layout by this property.
+     *
+     * Adds `container-fluid` class.
+     */
     fluid: React.PropTypes.bool,
+    /**
+     * You can use a custom element for this component
+     */
     componentClass: CustomPropTypes.elementType
   },
 
