@@ -272,9 +272,6 @@ body {
 }
 
 @media (min-width: 768px) {
-  .bs-docs-masthead {
-    padding: 80px 0;
-  }
   .bs-docs-masthead h1 {
     font-size: 60px;
   }
