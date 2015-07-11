@@ -2,11 +2,10 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
-import FadeMixin from './FadeMixin';
 import CustomPropTypes from './utils/CustomPropTypes';
 
 const Tooltip = React.createClass({
-  mixins: [BootstrapMixin, FadeMixin],
+  mixins: [BootstrapMixin],
 
   propTypes: {
     /**
@@ -44,11 +43,7 @@ const Tooltip = React.createClass({
     /**
      * Title text
      */
-    title: React.PropTypes.node,
-    /**
-     * Specify whether the Tooltip should be use show and hide animations.
-     */
-    animation: React.PropTypes.bool
+    title: React.PropTypes.node
   },
 
   getDefaultProps() {
@@ -61,10 +56,7 @@ const Tooltip = React.createClass({
   render() {
     const classes = {
       'tooltip': true,
-      [this.props.placement]: true,
-      // in class will be added by the FadeMixin when the animation property is true
-      'in': !this.props.animation && (this.props.positionLeft != null || this.props.positionTop != null),
-      'fade': this.props.animation
+      [this.props.placement]: true
     };
 
     const style = {

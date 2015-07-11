@@ -4,11 +4,11 @@ import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 import createChainedFunction from './utils/createChainedFunction';
 import BootstrapMixin from './BootstrapMixin';
-import FadeMixin from './FadeMixin';
 import domUtils from './utils/domUtils';
 import EventListener from './utils/EventListener';
 
 import Portal from './Portal';
+import Fade from './Fade';
 
 import Body from './ModalBody';
 import Header from './ModalHeader';
@@ -90,12 +90,17 @@ function getScrollbarSize(){
   document.body.removeChild(scrollDiv);
 
   scrollDiv = null;
+  return scrollbarSize;
 }
 
 
 const ModalMarkup = React.createClass({
 
+<<<<<<< HEAD
   mixins: [ BootstrapMixin, FadeMixin ],
+=======
+  mixins: [ BootstrapMixin ],
+>>>>>>> [added] Fade Component, replaces FadeMixin
 
   propTypes: {
 
@@ -166,8 +171,7 @@ const ModalMarkup = React.createClass({
 
     let classes = {
       modal: true,
-      fade: this.props.animation,
-      'in': !this.props.animation
+      in: this.props.show && !this.props.animation
     };
 
     let modal = (
@@ -206,18 +210,22 @@ const ModalMarkup = React.createClass({
   },
 
   renderBackdrop(modal) {
-    let classes = {
-      'modal-backdrop': true,
-      fade: this.props.animation,
-      'in': !this.props.animation
-    };
+    let { animation } = this.props;
+    let duration = Modal.BACKDROP_TRANSITION_DURATION; //eslint-disable-line no-use-before-define
 
-    let onClick = this.props.backdrop === true ?
-      this.handleBackdropClick : null;
+    let backdrop = (
+      <div ref="backdrop"
+       className={classNames('modal-backdrop', { in: this.props.show && !animation })}
+       onClick={this.handleBackdropClick}
+      />
+    );
 
     return (
       <div>
-        <div className={classNames(classes)} ref="backdrop" onClick={onClick} />
+        { animation
+            ? <Fade transitionAppear in={this.props.show} duration={duration}>{backdrop}</Fade>
+            : backdrop
+        }
         {modal}
       </div>
     );
@@ -381,16 +389,40 @@ const Modal = React.createClass({
     ...ModalMarkup.propTypes
   },
 
+  getDefaultProps(){
+    return {
+      show: false,
+      animation: true
+    };
+  },
+
   render() {
-    let { show, ...props } = this.props;
+    let { children, ...props } = this.props;
+
+    let show = !!props.show;
 
     let modal = (
-      <ModalMarkup {...props} ref='modal'>{this.props.children}</ModalMarkup>
+      <ModalMarkup {...props} ref='modal'>
+        { children }
+      </ModalMarkup>
     );
 
     return (
-      <Portal container={props.container} >
-        { show && modal }
+      <Portal container={props.container}>
+        { props.animation
+            ? (
+              <Fade
+                in={show}
+                transitionAppear={show}
+                duration={Modal.TRANSITION_DURATION}
+                unmountOnExit
+              >
+                { modal }
+              </Fade>
+            )
+            : show && modal
+        }
+
       </Portal>
     );
   }
@@ -400,5 +432,8 @@ Modal.Body = Body;
 Modal.Header = Header;
 Modal.Title = Title;
 Modal.Footer = Footer;
+
+Modal.TRANSITION_DURATION = 300;
+Modal.BACKDROP_TRANSITION_DURATION = 150;
 
 export default Modal;

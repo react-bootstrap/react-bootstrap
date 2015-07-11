@@ -31,13 +31,13 @@ class Position extends React.Component {
   }
 
   render() {
-    let { placement, children } = this.props;
+    let { children, ...props } = this.props;
     let { positionLeft, positionTop, ...arrows } = this.props.target ? this.state : {};
 
     return cloneElement(
       React.Children.only(children), {
+        ...props,
         ...arrows,
-        placement,
         positionTop,
         positionLeft,
         style: {
@@ -61,13 +61,18 @@ class Position extends React.Component {
       return;
     }
 
+    let overlay = React.findDOMNode(this);
     let target = React.findDOMNode(this.props.target(this.props));
     let container = React.findDOMNode(this.props.container) || domUtils.ownerDocument(this).body;
+
+    // if ( !overlay || !target || !container ){
+    //   return;
+    // }
 
     this.setState(
       calcOverlayPosition(
           this.props.placement
-        , React.findDOMNode(this)
+        , overlay
         , target
         , container
         , this.props.containerPadding));
