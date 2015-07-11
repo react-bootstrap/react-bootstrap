@@ -43,12 +43,6 @@ const ProgressBar = React.createClass({
       return this.renderProgressBar();
     }
 
-    const classes = {
-      active: this.props.active,
-      progress: true,
-      'progress-striped': this.props.active || this.props.striped
-    };
-
     let content;
 
     if (this.props.children) {
@@ -58,7 +52,7 @@ const ProgressBar = React.createClass({
     }
 
     return (
-      <div {...this.props} className={classNames(this.props.className, classes)}>
+      <div {...this.props} className={classNames(this.props.className, 'progress')}>
         {content}
       </div>
     );
@@ -94,10 +88,15 @@ const ProgressBar = React.createClass({
       );
     }
 
+    const classes = classNames(this.props.className, this.getBsClassSet(), {
+      active: this.props.active,
+      'progress-bar-striped': this.props.active || this.props.striped
+    });
+
     return (
       <div
         {...this.props}
-        className={classNames(this.props.className, this.getBsClassSet())}
+        className={classes}
         role="progressbar"
         style={{width: percentage + '%'}}
         aria-valuenow={this.props.now}
