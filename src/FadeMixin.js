@@ -64,7 +64,16 @@ export default {
     if (els.length) {
       this._fadeOutEl = document.createElement('div');
       container.appendChild(this._fadeOutEl);
-      this._fadeOutEl.appendChild(React.findDOMNode(this).cloneNode(true));
+
+      let originNode = React.findDOMNode(this);
+      let cloneNode = originNode.cloneNode(true);
+      let originTextareaList = [].concat.apply([], originNode.querySelectorAll('textarea'));
+      let cloneTextareaList = cloneNode.querySelectorAll('textarea');
+      originTextareaList.forEach((item, index) => {
+        cloneTextareaList[index].value = item.value;
+      });
+
+      this._fadeOutEl.appendChild(cloneNode);
       // Firefox needs delay for transition to be triggered
       setTimeout(this._fadeOut, 20);
     }
