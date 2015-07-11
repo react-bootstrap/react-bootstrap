@@ -152,7 +152,7 @@ describe('ProgressBar', function () {
       <ProgressBar min={1} max={11} now={6} striped />
     );
 
-    assert.ok(React.findDOMNode(instance).className.match(/\bprogress-striped\b/));
+    assert.ok(React.findDOMNode(instance).firstChild.className.match(/\bprogress-bar-striped\b/));
   });
 
   it('Should show animated striped bar', function () {
@@ -160,8 +160,10 @@ describe('ProgressBar', function () {
       <ProgressBar min={1} max={11} now={6} active />
     );
 
-    assert.ok(React.findDOMNode(instance).className.match(/\bprogress-striped\b/));
-    assert.ok(React.findDOMNode(instance).className.match(/\bactive\b/));
+    const barClassName = React.findDOMNode(instance).firstChild.className;
+
+    assert.ok(barClassName.match(/\bprogress-bar-striped\b/));
+    assert.ok(barClassName.match(/\bactive\b/));
   });
 
   it('Should show stacked bars', function () {
@@ -180,6 +182,28 @@ describe('ProgressBar', function () {
     assert.equal(bar1.style.width, '50%');
     assert.ok(bar2.className.match(/\bprogress-bar\b/));
     assert.equal(bar2.style.width, '30%');
+  });
+
+  it('Should render active and striped children in stacked bar too', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ProgressBar>
+        <ProgressBar active key={1} now={50} />
+        <ProgressBar striped key={2} now={30} />
+      </ProgressBar>
+    );
+    let wrapper = React.findDOMNode(instance);
+    let bar1 = wrapper.firstChild;
+    let bar2 = wrapper.lastChild;
+
+    assert.ok(wrapper.className.match(/\bprogress\b/));
+
+    assert.ok(bar1.className.match(/\bprogress-bar\b/));
+    assert.ok(bar1.className.match(/\bactive\b/));
+    assert.ok(bar1.className.match(/\bprogress-bar-striped\b/));
+
+    assert.ok(bar2.className.match(/\bprogress-bar\b/));
+    assert.ok(bar2.className.match(/\bprogress-bar-striped\b/));
+    assert.notOk(bar2.className.match(/\bactive\b/));
   });
 
   it('allows only ProgressBar in children', function () {
