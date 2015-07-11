@@ -13,6 +13,9 @@ const Button = React.createClass({
     block: React.PropTypes.bool,
     navItem: React.PropTypes.bool,
     navDropdown: React.PropTypes.bool,
+    /**
+     * You can use a custom element for this component
+     */
     componentClass: CustomPropTypes.elementType,
     href: React.PropTypes.string,
     target: React.PropTypes.string,

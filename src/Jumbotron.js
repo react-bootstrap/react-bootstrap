@@ -4,6 +4,9 @@ import CustomPropTypes from './utils/CustomPropTypes';
 
 const Jumbotron = React.createClass({
   propTypes: {
+    /**
+     * You can use a custom element for this component
+     */
     componentClass: CustomPropTypes.elementType
   },
 
