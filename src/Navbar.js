@@ -16,6 +16,9 @@ const Navbar = React.createClass({
     inverse: React.PropTypes.bool,
     fluid: React.PropTypes.bool,
     role: React.PropTypes.string,
+    /**
+     * You can use a custom element for this component
+     */
     componentClass: CustomPropTypes.elementType,
     brand: React.PropTypes.node,
     toggleButton: React.PropTypes.node,
