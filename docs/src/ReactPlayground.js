@@ -6,13 +6,19 @@ import * as modBadge from '../../src/Badge';
 import * as modButton from '../../src/Button';
 import * as modButtonGroup from '../../src/ButtonGroup';
 import * as modButtonInput from '../../src/ButtonInput';
+
 import * as modButtonToolbar from '../../src/ButtonToolbar';
+import * as modCollapse from '../../src/Collapse';
+
 import * as modCollapsibleNav from '../../src/CollapsibleNav';
 import * as modCollapsibleMixin from '../../src/CollapsibleMixin';
 import * as modCarousel from '../../src/Carousel';
 import * as modCarouselItem from '../../src/CarouselItem';
 import * as modCol from '../../src/Col';
 import * as modDropdownButton from '../../src/DropdownButton';
+
+import * as modFade from '../../src/Fade';
+
 import * as modFormControls from '../../src/FormControls';
 import * as modGlyphicon from '../../src/Glyphicon';
 import * as modGrid from '../../src/Grid';
@@ -57,8 +63,13 @@ import CodeExample from './CodeExample';
 
 
 const classNames = modClassNames.default;
+
 /* eslint-disable */
+
 const Portal = modPortal.default;
+const Collapse = modCollapse.default;
+const Fade = modFade.default;
+
 
 const React = modReact.default;
 const Accordion = modAccordion.default;

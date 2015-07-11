@@ -130,7 +130,7 @@ Collapse.propTypes = {
   /**
    * Specifies the dimension used when collapsing.
    *
-   * _Note: Bootstrap only partially supports this!
+   * _Note: Bootstrap only partially supports 'width'!
    * You will need to supply your own css animation for the `.width` css class._
    */
   dimension: React.PropTypes.oneOfType([
