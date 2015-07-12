@@ -19,6 +19,13 @@ describe('FadeMixin', function () {
     });
   });
 
+  afterEach(()=> {
+    if (console.warn.calledWithMatch('FadeMixin is deprecated')){
+      console.warn.reset();
+    }
+  });
+
+
   it('Should add the in class to all elements', function (done) {
     let instance = ReactTestUtils.renderIntoDocument(<Component />);
 

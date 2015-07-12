@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import TransitionEvents from './utils/TransitionEvents';
 import classnames from 'classnames';
@@ -163,8 +162,8 @@ class Transition extends React.Component {
 
     let classes = '';
 
-    // for whatever reason classnames() doesn't actually work here,
-    // maybe because they aren't always single classes?
+    // using `classnames()` here causes a subtle bug,
+    // hence the verbose if/else if sequence.
     if (this.state.in && !this.state.transitioning) {
       classes = this.props.enteredClassName;
     }
@@ -184,9 +183,9 @@ class Transition extends React.Component {
     return React.cloneElement(child, {
       ...childProps,
       className: classnames(
-          child.props.className
-        , this.props.className
-        , classes)
+        child.props.className,
+        this.props.className,
+        classes)
     });
   }
 }
@@ -208,7 +207,7 @@ Transition.propTypes = {
   transitionAppear: React.PropTypes.bool,
 
   /**
-   * Provide the durration of the animation in milliseconds, used to ensure that finishing callbacks are fired even if the
+   * Provide the duration of the animation in milliseconds, used to ensure that finishing callbacks are fired even if the
    * original browser transition end events are canceled.
    */
   duration:          React.PropTypes.number,

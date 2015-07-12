@@ -19,25 +19,6 @@ const CollapsibleNav = React.createClass({
   },
 
 
-  // getCollapsibleDimensionValue() {
-  //   let height = 0;
-  //   let nodes = this.refs;
-  //   for (let key in nodes) {
-  //     if (nodes.hasOwnProperty(key)) {
-
-  //       let n = React.findDOMNode(nodes[key]);
-  //       let h = n.offsetHeight;
-  //       let computedStyles = domUtils.getComputedStyles(n);
-
-  //       height += (h +
-  //         parseInt(computedStyles.marginTop, 10) +
-  //         parseInt(computedStyles.marginBottom, 10)
-  //       );
-  //     }
-  //   }
-  //   return height;
-  // },
-
   render() {
     /*
      * this.props.collapsible is set in NavBar when an eventKey is supplied.

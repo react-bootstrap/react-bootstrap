@@ -1,4 +1,3 @@
-'use strict';
 import React from 'react';
 import Transition from './Transition';
 
@@ -30,7 +29,7 @@ Fade.propTypes = {
   in:       React.PropTypes.bool,
 
   /**
-   * Provide the durration of the animation in milliseconds, used to ensure that finishing callbacks are fired even if the
+   * Provide the duration of the animation in milliseconds, used to ensure that finishing callbacks are fired even if the
    * original browser transition end events are canceled.
    */
   duration:          React.PropTypes.number,

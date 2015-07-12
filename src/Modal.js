@@ -96,11 +96,7 @@ function getScrollbarSize(){
 
 const ModalMarkup = React.createClass({
 
-<<<<<<< HEAD
-  mixins: [ BootstrapMixin, FadeMixin ],
-=======
   mixins: [ BootstrapMixin ],
->>>>>>> [added] Fade Component, replaces FadeMixin
 
   propTypes: {
 

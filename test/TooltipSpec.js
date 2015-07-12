@@ -13,12 +13,4 @@ describe('Tooltip', function () {
 
   });
 
-  // it('Should not have the fade class if animation is false', function () {
-  //   let instance = ReactTestUtils.renderIntoDocument(
-  //     <Tooltip animation={false}>
-  //       <strong>Tooltip Content</strong>
-  //     </Tooltip>
-  //   );
-  //   assert.equal(React.findDOMNode(instance).className.match(/\bfade\b/), null, 'The fade class should not be present');
-  // });
 });

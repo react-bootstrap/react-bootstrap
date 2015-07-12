@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Fade from '../src/Fade';
-//import classNames from 'classnames';
 
 describe('Fade', function () {
 

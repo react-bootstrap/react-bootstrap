@@ -65,10 +65,6 @@ class Position extends React.Component {
     let target = React.findDOMNode(this.props.target(this.props));
     let container = React.findDOMNode(this.props.container) || domUtils.ownerDocument(this).body;
 
-    // if ( !overlay || !target || !container ){
-    //   return;
-    // }
-
     this.setState(
       calcOverlayPosition(
           this.props.placement

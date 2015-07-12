@@ -1,5 +1,3 @@
-/*eslint-disable react/prop-types */
-'use strict';
 import React from 'react';
 import Transition from './Transition';
 import domUtils from './utils/domUtils';
@@ -122,7 +120,7 @@ Collapse.propTypes = {
   in:       React.PropTypes.bool,
 
   /**
-   * Provide the durration of the animation in milliseconds, used to ensure that finishing callbacks are fired even if the
+   * Provide the duration of the animation in milliseconds, used to ensure that finishing callbacks are fired even if the
    * original browser transition end events are canceled.
    */
   duration:          React.PropTypes.number,
@@ -140,7 +138,7 @@ Collapse.propTypes = {
 
   /**
    * A function that returns the height or width of the animating DOM node. Allows for providing some custom logic how much
-   * Collapse component should animation in its specified dimension.
+   * Collapse component should animate in its specified dimension.
    *
    * `getDimensionValue` is called with the current dimension prop value and the DOM node.
    */
