@@ -48,7 +48,7 @@ ModalHeader.propTypes = {
    */
   modalClassName: React.PropTypes.string,
   /**
-   * Specify whether the Component should contain a close button
+   * Specify whether the Component should contain a close button, or alternatively specify a custom ReactElement to use
    */
   closeButton: React.PropTypes.oneOfType([
     React.PropTypes.bool,
