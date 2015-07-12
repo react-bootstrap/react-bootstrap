@@ -220,6 +220,24 @@ describe('Modal', function () {
     });
   });
 
+  it('Should allow a custom close button', function (done) {
+    let doneOp = function () { done(); };
+
+    const customCloseButton = (
+      <button className='custom-close-button'>Close</button>
+    );
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Modal onHide={doneOp}>
+        <Modal.Header closeButton={customCloseButton}></Modal.Header>
+        <strong>Message</strong>
+      </Modal>
+    );
+
+    let closeButtonElement = React.findDOMNode(instance).getElementsByClassName('custom-close-button')[0];
+    ReactTestUtils.Simulate.click(closeButtonElement);
+  });
+
 
   describe('deprecations', function(){
     it('Should render the modal header and title', function() {
