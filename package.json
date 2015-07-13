@@ -88,7 +88,7 @@
     "lodash": "^3.5.0",
     "marked": "^0.3.3",
     "mocha": "^2.2.1",
-    "mt-changelog": "^0.5.2",
+    "mt-changelog": "^0.6.1",
     "node-libs-browser": "^0.5.2",
     "nodemon": "^1.3.7",
     "output-file-sync": "^1.1.0",
