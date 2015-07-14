@@ -27,76 +27,24 @@ describe('BootstrapMixin', function () {
       assert.deepEqual(instance.getBsClassSet(), {});
     });
 
-    it('should return "col"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='column'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'col': true});
-    });
+    it('maps and validates OK default classes', function () {
+      function instanceClassSet(bsClass) {
+        let instance = ReactTestUtils.renderIntoDocument(
+          <Component bsClass={bsClass}>
+            content
+          </Component>
+        );
+        return instance.getBsClassSet();
+      }
 
-    it('should return "btn"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true});
-    });
-
-    it('should return "btn-group"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button-group'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn-group': true});
-    });
-
-    it('should return "label"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='label'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'label': true});
-    });
-
-    it('should return "alert"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='alert'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'alert': true});
-    });
-
-    it('should return "input-group"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='input-group'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'input-group': true});
-    });
-
-    it('should return "form"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='form'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'form': true});
-    });
-
-    it('should return "panel"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='panel'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'panel': true});
+      assert.deepEqual(instanceClassSet('column'), {'col': true});
+      assert.deepEqual(instanceClassSet('button'), {'btn': true});
+      assert.deepEqual(instanceClassSet('button-group'), {'btn-group': true});
+      assert.deepEqual(instanceClassSet('label'), {'label': true});
+      assert.deepEqual(instanceClassSet('alert'), {'alert': true});
+      assert.deepEqual(instanceClassSet('input-group'), {'input-group': true});
+      assert.deepEqual(instanceClassSet('form'), {'form': true});
+      assert.deepEqual(instanceClassSet('panel'), {'panel': true});
     });
 
     describe('Predefined Bootstrap styles', function () {
