@@ -99,58 +99,24 @@ describe('BootstrapMixin', function () {
       assert.deepEqual(instance.getBsClassSet(), {'panel': true});
     });
 
-    it('should return "btn btn-default"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button' bsStyle='default'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-default': true});
-    });
+    describe('Predefined Bootstrap styles', function () {
+      it('maps and validates OK default styles', function () {
+        function instanceClassSet(style) {
+          let instance = ReactTestUtils.renderIntoDocument(
+            <Component bsClass='button' bsStyle={style}>
+              content
+            </Component>
+          );
+          return instance.getBsClassSet();
+        }
 
-    it('should return "btn btn-primary"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button' bsStyle='primary'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-primary': true});
-    });
-
-    it('should return "btn btn-success"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button' bsStyle='success'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-success': true});
-    });
-
-    it('should return "btn btn-info"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button' bsStyle='info'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-info': true});
-    });
-
-    it('should return "btn btn-link"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button' bsStyle='link'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-link': true});
-    });
-
-    it('should return "btn btn-inline"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button' bsStyle='inline'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-inline': true});
+        assert.deepEqual(instanceClassSet('default'), {'btn': true, 'btn-default': true});
+        assert.deepEqual(instanceClassSet('primary'), {'btn': true, 'btn-primary': true});
+        assert.deepEqual(instanceClassSet('success'), {'btn': true, 'btn-success': true});
+        assert.deepEqual(instanceClassSet('info'), {'btn': true, 'btn-info': true});
+        assert.deepEqual(instanceClassSet('link'), {'btn': true, 'btn-link': true});
+        assert.deepEqual(instanceClassSet('inline'), {'btn': true, 'btn-inline': true});
+      });
     });
 
     describe('Sizes', function () {
