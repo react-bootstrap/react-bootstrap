@@ -34,9 +34,13 @@ const BootstrapMixin = {
         classes[prefix + bsSize] = true;
       }
 
-      let bsStyle = this.props.bsStyle && styleMaps.STYLES[this.props.bsStyle];
       if (this.props.bsStyle) {
-        classes[prefix + bsStyle] = true;
+        let bsStyle = styleMaps.STYLES[this.props.bsStyle];
+        if (bsStyle) {
+          classes[prefix + bsStyle] = true;
+        } else {
+          classes[this.props.bsStyle] = true;
+        }
       }
     }
 

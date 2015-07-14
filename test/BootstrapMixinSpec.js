@@ -2,6 +2,7 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import BootstrapMixin from '../src/BootstrapMixin';
 import styleMaps from '../src/styleMaps';
+import { shouldWarn } from './helpers';
 
 let Component;
 
@@ -197,14 +198,28 @@ describe('BootstrapMixin', function () {
       assert.equal(instance.prefixClass('title'), 'btn-title');
     });
 
-    it('should return "btn btn-wacky"', function () {
-      styleMaps.addStyle('wacky');
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button' bsStyle='wacky'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-wacky': true});
+    describe('Custom styles', function () {
+      it('should validate OK custom styles added via "addStyle()"', function () {
+
+        styleMaps.addStyle('wacky');
+
+        let instance = ReactTestUtils.renderIntoDocument(
+          <Component bsClass='button' bsStyle='wacky'>
+            content
+          </Component>
+        );
+        assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-wacky': true});
+      });
+
+      it('should allow custom styles as is but with validation warning', function () {
+        let instance = ReactTestUtils.renderIntoDocument(
+          <Component bsClass='button' bsStyle='my-custom-class'>
+            content
+          </Component>
+        );
+        assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'my-custom-class': true});
+        shouldWarn('Invalid prop `bsStyle` of value `my-custom-class`');
+      });
     });
   });
 });
