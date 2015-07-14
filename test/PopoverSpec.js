@@ -11,16 +11,8 @@ describe('Popover', function () {
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'popover-title'));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'popover-content'));
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'fade'));
+
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
-  it('Should not have the fade class if animation is false', function () {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Popover title="Popover title" animation={false}>
-        <strong>Popover Content</strong>
-      </Popover>
-    );
-    assert.equal(React.findDOMNode(instance).className.match(/\bfade\b/), null, 'The fade class should not be present');
-  });
 });

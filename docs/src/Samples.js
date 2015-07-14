@@ -1,6 +1,9 @@
 /* eslint no-path-concat: 0, no-var: 0 */
 
 export default {
+  Collapse:                      require('fs').readFileSync(__dirname + '/../examples/Collapse.js', 'utf8'),
+  Fade:                          require('fs').readFileSync(__dirname + '/../examples/Fade.js', 'utf8'),
+
   ButtonTypes:                   require('fs').readFileSync(__dirname + '/../examples/ButtonTypes.js', 'utf8'),
   ButtonSizes:                   require('fs').readFileSync(__dirname + '/../examples/ButtonSizes.js', 'utf8'),
   ButtonBlock:                   require('fs').readFileSync(__dirname + '/../examples/ButtonBlock.js', 'utf8'),

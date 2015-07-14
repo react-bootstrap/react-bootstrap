@@ -56,6 +56,7 @@ const ComponentsPage = React.createClass({
             <div className='row'>
               <div className='col-md-9' role='main'>
 
+
                 {/* Buttons */}
                 <div className='bs-docs-section'>
                   <h1 id='buttons' className='page-header'>Buttons <small>Button</small></h1>
@@ -843,7 +844,7 @@ const ComponentsPage = React.createClass({
                     equivalent to jQuery's <code>.appendTo()</code>, which is helpful for components that need to be appended to a DOM node other than
                     the component's direct parent. The Modal, and Overlay components use the Portal component internally.
                   </p>
-                  <h3 id='utilities-props'>Props</h3>
+                  <h3 id='utilities-portal-props'>Props</h3>
 
                   <PropTable component='Portal'/>
 
@@ -852,9 +853,25 @@ const ComponentsPage = React.createClass({
                     A Component that absolutely positions its child to a <code>target</code> component or DOM node. Useful for creating custom
                     popups or tooltips. Used by the Overlay Components.
                   </p>
-                  <h3 id='utilities-props'>Props</h3>
+                  <h3 id='utilities-position-props'>Props</h3>
 
                   <PropTable component='Position'/>
+
+                  <h2 id='utilities-transitions'>Transitions</h2>
+
+                  <h3 id='utilities-collapse'>Collapse</h3>
+                  <p>Add a collapse toggle animation to an element or component.</p>
+                  <ReactPlayground codeText={Samples.Collapse} />
+
+                  <h4 id='utilities-collapse-props'>Props</h4>
+                  <PropTable component='Collapse'/>
+
+                  <h3 id='utilities-fade'>Fade</h3>
+                  <p>Add a fade animation to a child element or component.</p>
+                  <ReactPlayground codeText={Samples.Fade} />
+
+                  <h4 id='utilities-fade-props'>Props</h4>
+                  <PropTable component='Fade'/>
                 </div>
               </div>
 

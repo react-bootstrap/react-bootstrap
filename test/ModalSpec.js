@@ -3,6 +3,7 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Modal from '../src/Modal';
 import { render } from './helpers';
 
+
 describe('Modal', function () {
   let mountPoint;
 
@@ -172,10 +173,8 @@ describe('Modal', function () {
       document.activeElement.should.equal(focusableContainer);
     });
 
+
     it('Should not focus on the Modal when autoFocus is false', function () {
-
-      document.activeElement.should.equal(focusableContainer);
-
       render(
         <Modal show autoFocus={false} onHide={()=>{}} animation={false}>
           <strong>Message</strong>
