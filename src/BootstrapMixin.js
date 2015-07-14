@@ -35,7 +35,7 @@ const BootstrapMixin = {
       }
 
       let bsStyle = this.props.bsStyle && styleMaps.STYLES[this.props.bsStyle];
-      if (this.props.bsStyle) {
+      if (bsStyle) {
         classes[prefix + bsStyle] = true;
       }
     }
