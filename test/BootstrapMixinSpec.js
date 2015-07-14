@@ -85,15 +85,6 @@ describe('BootstrapMixin', function () {
       });
     });
 
-    it('should return  "btn-title"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button'>
-          content
-        </Component>
-      );
-      assert.equal(instance.prefixClass('title'), 'btn-title');
-    });
-
     describe('Custom styles', function () {
       it('should validate OK custom styles added via "addStyle()"', function () {
 
