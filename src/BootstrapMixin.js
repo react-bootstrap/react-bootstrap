@@ -1,3 +1,4 @@
+import React from 'react';
 import styleMaps from './styleMaps';
 import CustomPropTypes from './utils/CustomPropTypes';
 
@@ -12,7 +13,7 @@ const BootstrapMixin = {
      * Style variants
      * @type {("default"|"primary"|"success"|"info"|"warning"|"danger"|"link")}
      */
-    bsStyle: CustomPropTypes.keyOf(styleMaps.STYLES),
+    bsStyle: React.PropTypes.oneOf(styleMaps.STYLES),
     /**
      * Size variants
      * @type {("xsmall"|"small"|"medium"|"large")}
@@ -35,9 +36,8 @@ const BootstrapMixin = {
       }
 
       if (this.props.bsStyle) {
-        let bsStyle = styleMaps.STYLES[this.props.bsStyle];
-        if (bsStyle) {
-          classes[prefix + bsStyle] = true;
+        if (styleMaps.STYLES.indexOf(this.props.bsStyle) >= 0) {
+          classes[prefix + this.props.bsStyle] = true;
         } else {
           classes[this.props.bsStyle] = true;
         }

@@ -222,4 +222,16 @@ describe('BootstrapMixin', function () {
       });
     });
   });
+
+  // todo: fix bad naming
+  describe('#prefixClass', function () {
+    it('allows custom sub-classes', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Component bsClass='button'>
+          content
+        </Component>
+      );
+      assert.equal(instance.prefixClass('title'), 'btn-title');
+    });
+  });
 });
