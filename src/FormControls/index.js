@@ -1,5 +1,1 @@
-import Static from './Static';
-
-export default {
-  Static
-};
+export Static from './Static';

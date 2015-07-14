@@ -4,9 +4,6 @@ import React, { cloneElement } from 'react';
 import createChainedFunction from './utils/createChainedFunction';
 import createContextWrapper from './utils/createContextWrapper';
 import Overlay from './Overlay';
-import position from './utils/overlayPositionUtils';
-
-import deprecationWarning from './utils/deprecationWarning';
 import warning from 'react/lib/warning';
 
 /**
@@ -33,7 +30,7 @@ const OverlayTrigger = React.createClass({
      * Specify which action or actions trigger Overlay visibility
      */
     trigger: React.PropTypes.oneOfType([
-      React.PropTypes.oneOf(['manual', 'click', 'hover', 'focus']),
+      React.PropTypes.oneOf(['click', 'hover', 'focus']),
       React.PropTypes.arrayOf(React.PropTypes.oneOf(['click', 'hover', 'focus']))
     ]),
 
@@ -178,30 +175,24 @@ const OverlayTrigger = React.createClass({
     // create in render otherwise owner is lost...
     this._overlay = this.getOverlay();
 
-    if (this.props.trigger !== 'manual') {
+    props.onClick = createChainedFunction(trigger.props.onClick, this.props.onClick);
 
-      props.onClick = createChainedFunction(trigger.props.onClick, this.props.onClick);
-
-      if (isOneOf('click', this.props.trigger)) {
-        props.onClick = createChainedFunction(this.toggle, props.onClick);
-      }
-
-      if (isOneOf('hover', this.props.trigger)) {
-        warning(!(this.props.trigger === 'hover'),
-          '[react-bootstrap] Specifying only the `"hover"` trigger limits the visibilty of the overlay to just mouse users. ' +
-          'Consider also including the `"focus"` trigger so that touch and keyboard only users can see the overlay as well.');
-
-        props.onMouseOver = createChainedFunction(this.handleDelayedShow, this.props.onMouseOver);
-        props.onMouseOut = createChainedFunction(this.handleDelayedHide, this.props.onMouseOut);
-      }
-
-      if (isOneOf('focus', this.props.trigger)) {
-        props.onFocus = createChainedFunction(this.handleDelayedShow, this.props.onFocus);
-        props.onBlur = createChainedFunction(this.handleDelayedHide, this.props.onBlur);
-      }
+    if (isOneOf('click', this.props.trigger)) {
+      props.onClick = createChainedFunction(this.toggle, props.onClick);
     }
-    else {
-      deprecationWarning('"manual" trigger type', ' the Overlay component');
+
+    if (isOneOf('hover', this.props.trigger)) {
+      warning(!(this.props.trigger === 'hover'),
+        '[react-bootstrap] Specifying only the `"hover"` trigger limits the visibilty of the overlay to just mouse users. ' +
+        'Consider also including the `"focus"` trigger so that touch and keyboard only users can see the overlay as well.');
+
+      props.onMouseOver = createChainedFunction(this.handleDelayedShow, this.props.onMouseOver);
+      props.onMouseOut = createChainedFunction(this.handleDelayedHide, this.props.onMouseOut);
+    }
+
+    if (isOneOf('focus', this.props.trigger)) {
+      props.onFocus = createChainedFunction(this.handleDelayedShow, this.props.onFocus);
+      props.onBlur = createChainedFunction(this.handleDelayedHide, this.props.onBlur);
     }
 
     return cloneElement(
@@ -250,32 +241,6 @@ const OverlayTrigger = React.createClass({
       this._hoverDelay = null;
       this.hide();
     }, delay);
-  },
-
-  // deprecated Methods
-  calcOverlayPosition() {
-    let overlay = this.props.overlay;
-
-    deprecationWarning('OverlayTrigger.calcOverlayPosition()', 'utils/overlayPositionUtils');
-
-    return position.calcOverlayPosition(
-        overlay.props.placement || this.props.placement
-      , React.findDOMNode(overlay)
-      , React.findDOMNode(this)
-      , React.findDOMNode(overlay.props.container || this.props.container)
-      , overlay.props.containerPadding || this.props.containerPadding
-    );
-  },
-
-  getPosition() {
-    deprecationWarning('OverlayTrigger.getPosition()', 'utils/overlayPositionUtils');
-
-    let overlay = this.props.overlay;
-
-    return position.getPosition(
-        React.findDOMNode(this)
-      , React.findDOMNode(overlay.props.container || this.props.container)
-    );
   }
 
 });

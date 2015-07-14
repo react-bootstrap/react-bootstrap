@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import FormControls from '../src/FormControls';
+import * as FormControls from '../src/FormControls';
 
 describe('Form Controls', function () {
   describe('Static', function () {

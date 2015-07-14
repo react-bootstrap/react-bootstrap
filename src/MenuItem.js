@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import SafeAnchor from './SafeAnchor';
 
 const MenuItem = React.createClass({
   propTypes: {
@@ -16,7 +17,6 @@ const MenuItem = React.createClass({
 
   getDefaultProps() {
     return {
-      href: '#',
       active: false
     };
   },
@@ -34,9 +34,9 @@ const MenuItem = React.createClass({
 
   renderAnchor() {
     return (
-      <a onClick={this.handleClick} href={this.props.href} target={this.props.target} title={this.props.title} tabIndex="-1">
+      <SafeAnchor onClick={this.handleClick} href={this.props.href} target={this.props.target} title={this.props.title} tabIndex="-1">
         {this.props.children}
-      </a>
+      </SafeAnchor>
     );
   },
 

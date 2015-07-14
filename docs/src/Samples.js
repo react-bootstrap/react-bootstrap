@@ -1,6 +1,9 @@
 /* eslint no-path-concat: 0, no-var: 0 */
 
 export default {
+  Collapse:                      require('fs').readFileSync(__dirname + '/../examples/Collapse.js', 'utf8'),
+  Fade:                          require('fs').readFileSync(__dirname + '/../examples/Fade.js', 'utf8'),
+
   ButtonTypes:                   require('fs').readFileSync(__dirname + '/../examples/ButtonTypes.js', 'utf8'),
   ButtonSizes:                   require('fs').readFileSync(__dirname + '/../examples/ButtonSizes.js', 'utf8'),
   ButtonBlock:                   require('fs').readFileSync(__dirname + '/../examples/ButtonBlock.js', 'utf8'),
@@ -31,8 +34,7 @@ export default {
   PanelGroupAccordion:           require('fs').readFileSync(__dirname + '/../examples/PanelGroupAccordion.js', 'utf8'),
   CollapsibleParagraph:          require('fs').readFileSync(__dirname + '/../examples/CollapsibleParagraph.js', 'utf8'),
   ModalStatic:                   require('fs').readFileSync(__dirname + '/../examples/ModalStatic.js', 'utf8'),
-  ModalTrigger:                  require('fs').readFileSync(__dirname + '/../examples/ModalTrigger.js', 'utf8'),
-
+  Modal:                         require('fs').readFileSync(__dirname + '/../examples/Modal.js', 'utf8'),
   ModalContained:                require('fs').readFileSync(__dirname + '/../examples/ModalContained.js', 'utf8'),
   ModalDefaultSizing:            require('fs').readFileSync(__dirname + '/../examples/ModalDefaultSizing.js', 'utf8'),
   ModalCustomSizing:             require('fs').readFileSync(__dirname + '/../examples/ModalCustomSizing.js', 'utf8'),

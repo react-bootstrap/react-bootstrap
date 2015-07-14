@@ -35,8 +35,10 @@ function generateHTML(fileName, propData) {
   });
 }
 
-export default function BuildDocs({ dev }) {
+export default function BuildDocs({dev}) {
   console.log('Building: '.cyan + 'docs'.green + (dev ? ' [DEV]'.grey : ''));
+
+  const devOption = dev ? '' : '-p';
 
   return exec(`rimraf ${docsBuilt}`)
     .then(() => fsp.mkdir(docsBuilt))
@@ -46,7 +48,7 @@ export default function BuildDocs({ dev }) {
       let pagesGenerators = Root.getPages().map( page => generateHTML(page, propData));
 
       return Promise.all(pagesGenerators.concat([
-        exec(`webpack --config webpack.docs.js ${dev ? '' : '-p '}--bail`),
+        exec(`webpack --config webpack.docs.js --bail ${devOption}`),
         copy(license, docsBuilt),
         copy(readmeSrc, readmeDest)
       ]));

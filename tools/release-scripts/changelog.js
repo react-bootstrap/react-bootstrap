@@ -29,11 +29,9 @@ export default (version) => {
     .then(() => exec(`node_modules/.bin/changelog --title v${version} --out ${output}${additionalArgs}`))
     .then(() => safeExec(`git add ${changelog}`))
     .then(() => {
-      if (!removedAlphaChangelog) {
-        return null;
+      if (removedAlphaChangelog || isPrerelease) {
+        return safeExec(`git add -A ${alphaChangelog}`);
       }
-
-      return safeExec(`git add -A ${alphaChangelog}`);
     })
     .then(() => console.log('Generated Changelog'.cyan));
 };

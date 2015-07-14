@@ -57,6 +57,7 @@ const ComponentsPage = React.createClass({
             <div className='row'>
               <div className='col-md-9' role='main'>
 
+
                 {/* Buttons */}
                 <div className='bs-docs-section'>
                   <h1 className='page-header'><Anchor id='buttons'>Buttons</Anchor> <small>Button</small></h1>
@@ -855,6 +856,22 @@ const ComponentsPage = React.createClass({
 
                   <h3><Anchor id='utilities-position-props'>Props</Anchor></h3>
                   <PropTable component='Position'/>
+
+                  <h2><Anchor id='utilities-transitions'>Transitions</Anchor></h2>
+
+                  <h3><Anchor id='utilities-collapse'>Collapse</Anchor></h3>
+                  <p>Add a collapse toggle animation to an element or component.</p>
+                  <ReactPlayground codeText={Samples.Collapse} />
+
+                  <h4><Anchor id='utilities-collapse-props'>Props</Anchor></h4>
+                  <PropTable component='Collapse'/>
+
+                  <h3><Anchor id='utilities-fade'>Fade</Anchor></h3>
+                  <p>Add a fade animation to a child element or component.</p>
+                  <ReactPlayground codeText={Samples.Fade} />
+
+                  <h4><Anchor id='utilities-fade-props'>Props</Anchor></h4>
+                  <PropTable component='Fade'/>
                 </div>
               </div>
 

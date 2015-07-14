@@ -109,6 +109,7 @@
     "yargs": "^3.5.4"
   },
   "dependencies": {
+    "babel-runtime": "^5.1.10",
     "classnames": "^2.0.0"
   }
 }

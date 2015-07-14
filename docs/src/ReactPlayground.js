@@ -3,16 +3,22 @@ import * as modClassNames from 'classnames';
 import * as modAccordion from '../../src/Accordion';
 import * as modAlert from '../../src/Alert';
 import * as modBadge from '../../src/Badge';
-import * as modmodButton from '../../src/Button';
+import * as modButton from '../../src/Button';
 import * as modButtonGroup from '../../src/ButtonGroup';
 import * as modButtonInput from '../../src/ButtonInput';
-import * as modmodButtonToolbar from '../../src/ButtonToolbar';
+
+import * as modButtonToolbar from '../../src/ButtonToolbar';
+import * as modCollapse from '../../src/Collapse';
+
 import * as modCollapsibleNav from '../../src/CollapsibleNav';
 import * as modCollapsibleMixin from '../../src/CollapsibleMixin';
 import * as modCarousel from '../../src/Carousel';
 import * as modCarouselItem from '../../src/CarouselItem';
 import * as modCol from '../../src/Col';
 import * as modDropdownButton from '../../src/DropdownButton';
+
+import * as modFade from '../../src/Fade';
+
 import * as modFormControls from '../../src/FormControls';
 import * as modGlyphicon from '../../src/Glyphicon';
 import * as modGrid from '../../src/Grid';
@@ -26,9 +32,7 @@ import * as modNavbar from '../../src/Navbar';
 import * as modNavItem from '../../src/NavItem';
 import * as modMenuItem from '../../src/MenuItem';
 import * as modModal from '../../src/Modal';
-import * as modModalTrigger from '../../src/ModalTrigger';
 import * as modOverlayTrigger from '../../src/OverlayTrigger';
-import * as modOverlayMixin from '../../src/OverlayMixin';
 import * as modPageHeader from '../../src/PageHeader';
 import * as modPageItem from '../../src/PageItem';
 import * as modPager from '../../src/Pager';
@@ -58,24 +62,29 @@ import CodeExample from './CodeExample';
 
 
 const classNames = modClassNames.default;
+
 /* eslint-disable */
+
 const Portal = modPortal.default;
+const Collapse = modCollapse.default;
+const Fade = modFade.default;
+
 
 const React = modReact.default;
 const Accordion = modAccordion.default;
 const Alert = modAlert.default;
 const Badge = modBadge.default;
-const Button = modmodButton.default;
+const Button = modButton.default;
 const ButtonGroup = modButtonGroup.default;
 const ButtonInput = modButtonInput.default;
-const ButtonToolbar = modmodButtonToolbar.default;
+const ButtonToolbar = modButtonToolbar.default;
 const CollapsibleNav = modCollapsibleNav.default;
 const CollapsibleMixin = modCollapsibleMixin.default;
 const Carousel = modCarousel.default;
 const CarouselItem = modCarouselItem.default;
 const Col = modCol.default;
 const DropdownButton = modDropdownButton.default;
-const FormControls = modFormControls.default;
+const FormControls = modFormControls;
 const Glyphicon = modGlyphicon.default;
 const Grid = modGrid.default;
 const Input = modInput.default;
@@ -88,9 +97,9 @@ const Navbar = modNavbar.default;
 const NavItem = modNavItem.default;
 const MenuItem = modMenuItem.default;
 const Modal = modModal.default;
-const ModalTrigger = modModalTrigger.default;
+
 const OverlayTrigger = modOverlayTrigger.default;
-const OverlayMixin = modOverlayMixin.default;
+
 const PageHeader = modPageHeader.default;
 const PageItem = modPageItem.default;
 const Pagination = modPagination.default;

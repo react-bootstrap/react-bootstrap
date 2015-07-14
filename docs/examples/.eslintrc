@@ -52,6 +52,8 @@
     "TabPane",
     "Tooltip",
     "Well",
-    "Thumbnail"
+    "Thumbnail",
+    "Collapse",
+    "Fade"
   }
 }

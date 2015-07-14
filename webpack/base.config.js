@@ -1,19 +1,5 @@
-import fs from 'fs';
-import path from 'path';
 import webpack from 'webpack';
 import yargs from 'yargs';
-
-const babelCache = path.resolve(path.join(__dirname, '../.babel-cache'));
-
-if (!fs.existsSync(babelCache)) {
-  try {
-    fs.mkdirSync(babelCache);
-  } catch (err) {
-    if (err.code !== 'EEXIST') {
-      console.error(err.stack);
-    }
-  }
-}
 
 export const options = yargs
   .alias('p', 'optimize-minimize')
@@ -24,7 +10,7 @@ export const options = yargs
   })
   .argv;
 
-export const jsLoader = `babel?cacheDirectory=${babelCache}`;
+export const jsLoader = 'babel?cacheDirectory';
 
 const baseConfig = {
   entry: undefined,

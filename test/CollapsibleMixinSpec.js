@@ -32,6 +32,12 @@ describe('CollapsibleMixin', function () {
     });
   });
 
+  afterEach(()=> {
+    if (console.warn.calledWithMatch('CollapsibleMixin is deprecated')){
+      console.warn.reset();
+    }
+  });
+
   describe('getInitialState', function(){
     it('Should check defaultExpanded', function () {
       instance = ReactTestUtils.renderIntoDocument(
