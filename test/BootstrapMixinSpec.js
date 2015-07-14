@@ -153,40 +153,22 @@ describe('BootstrapMixin', function () {
       assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-inline': true});
     });
 
-    it('should return "btn btn-lg"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button' bsSize='large'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-lg': true});
-    });
+    describe('Sizes', function () {
+      it('maps english words for sizes to bootstrap sizes constants', function () {
+        function instanceClassSet(size) {
+          let instance = ReactTestUtils.renderIntoDocument(
+            <Component bsClass='button' bsSize={size}>
+              content
+            </Component>
+          );
+          return instance.getBsClassSet();
+        }
 
-    it('should return "btn btn-md"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button' bsSize='medium'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-md': true});
-    });
-
-    it('should return "btn btn-sm"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button' bsSize='small'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-sm': true});
-    });
-
-    it('should return "btn btn-xs"', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Component bsClass='button' bsSize='xsmall'>
-          content
-        </Component>
-      );
-      assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-xs': true});
+        assert.deepEqual(instanceClassSet('large'), {'btn': true, 'btn-lg': true});
+        assert.deepEqual(instanceClassSet('small'), {'btn': true, 'btn-sm': true});
+        assert.deepEqual(instanceClassSet('medium'), {'btn': true, 'btn-md': true});
+        assert.deepEqual(instanceClassSet('xsmall'), {'btn': true, 'btn-xs': true});
+      });
     });
 
     it('should return  "btn-title"', function () {
