@@ -34,6 +34,8 @@
     "react/self-closing-comp": 2,
     "react/wrap-multilines": 2,
     "react/jsx-uses-vars": 2,
+    /* disable till https://github.com/eslint/eslint/issues/3016 is resolved */
+    "space-infix-ops": 0,
     "strict": 0
   }
 }
