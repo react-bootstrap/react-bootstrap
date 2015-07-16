@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import styleMaps from './styleMaps';
-import CustomPropTypes from './utils/CustomPropTypes';
+import { elementType } from 'react-prop-types';
 
 const Col = React.createClass({
   propTypes: {
@@ -136,7 +136,7 @@ const Col = React.createClass({
     /**
      * You can use a custom element for this component
      */
-    componentClass: CustomPropTypes.elementType
+    componentClass: elementType
   },
 
   getDefaultProps() {

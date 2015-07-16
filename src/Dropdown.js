@@ -9,6 +9,7 @@ import CustomPropTypes from './utils/CustomPropTypes';
 import createChainedFunction from './utils/createChainedFunction';
 import find from 'lodash/collection/find';
 import omit from 'lodash/object/omit';
+import { all, elementType, isRequiredForA11y } from 'react-prop-types';
 
 const TOGGLE_REF = 'toggle-btn';
 
@@ -229,20 +230,20 @@ Dropdown.propTypes = {
    * @type {string|number}
    * @required
    */
-  id: CustomPropTypes.isRequiredForA11y(
+  id: isRequiredForA11y(
     React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.number
     ])
   ),
 
-  componentClass: CustomPropTypes.elementType,
+  componentClass: elementType,
 
   /**
    * The children of a Dropdown may be a `<Dropdown.Toggle/>` or a `<Dropdown.Menu/>`.
    * @type {node}
    */
-  children: CustomPropTypes.all([
+  children: all([
     CustomPropTypes.requiredRoles(TOGGLE_ROLE, MENU_ROLE),
     CustomPropTypes.exclusiveRoles(MENU_ROLE)
   ]),

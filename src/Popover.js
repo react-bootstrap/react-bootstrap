@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
-import CustomPropTypes from './utils/CustomPropTypes';
+import { isRequiredForA11y } from 'react-prop-types';
 
 const Popover = React.createClass({
 
@@ -13,7 +13,7 @@ const Popover = React.createClass({
      * @type {string}
      * @required
      */
-    id: CustomPropTypes.isRequiredForA11y(React.PropTypes.string),
+    id: isRequiredForA11y(React.PropTypes.string),
 
     /**
      * Sets the direction the Popover is positioned towards.

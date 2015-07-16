@@ -3,7 +3,7 @@
 
 import React, { cloneElement } from 'react';
 import BaseOverlay from 'react-overlays/lib/Overlay';
-import CustomPropTypes from './utils/CustomPropTypes';
+import { elementType } from 'react-prop-types';
 import Fade from './Fade';
 import classNames from 'classnames';
 
@@ -57,7 +57,7 @@ Overlay.propTypes = {
    */
   animation: React.PropTypes.oneOfType([
       React.PropTypes.bool,
-      CustomPropTypes.elementType
+      elementType
   ]),
 
   /**

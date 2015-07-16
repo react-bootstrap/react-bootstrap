@@ -1,5 +1,5 @@
 import React from 'react';
-import { singlePropFrom } from './CustomPropTypes';
+import { singlePropFrom } from 'react-prop-types';
 
 const propList = ['children', 'value'];
 const typeList = [React.PropTypes.number, React.PropTypes.string];

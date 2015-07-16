@@ -5,7 +5,7 @@ import domUtils from './utils/domUtils';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import EventListener from './utils/EventListener';
 import createChainedFunction from './utils/createChainedFunction';
-import CustomPropTypes from './utils/CustomPropTypes';
+import { elementType } from 'react-prop-types';
 
 import Portal from 'react-overlays/lib/Portal';
 import Fade from './Fade';
@@ -93,7 +93,7 @@ const Modal = React.createClass({
      * A Component type that provides the modal content Markup. This is a useful prop when you want to use your own
      * styles and markup to create a custom modal component.
      */
-    dialogComponent: CustomPropTypes.elementType,
+    dialogComponent: elementType,
 
     /**
      * When `true` The modal will automatically shift focus to itself when it opens, and replace it to the last focused element when it closes.

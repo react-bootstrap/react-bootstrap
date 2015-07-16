@@ -1,7 +1,7 @@
 import React from 'react';
 import Transition from 'react-overlays/lib/Transition';
 import domUtils from './utils/domUtils';
-import CustomPropTypes from './utils/CustomPropTypes';
+import { all } from 'react-prop-types';
 import deprecationWarning from './utils/deprecationWarning';
 import createChainedFunction from './utils/createChainedFunction';
 
@@ -145,7 +145,7 @@ Collapse.propTypes = {
    * duration
    * @private
    */
-  duration: CustomPropTypes.all([
+  duration: all([
     React.PropTypes.number,
     (props)=> {
       if (props.duration != null){
