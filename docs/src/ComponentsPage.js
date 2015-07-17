@@ -481,7 +481,7 @@ const ComponentsPage = React.createClass({
 
                   <h3><Anchor id='navbars-mobile-friendly'>Mobile Friendly</Anchor></h3>
                   <p>To have a mobile friendly Navbar, specify the property <code>toggleNavKey</code> on the Navbar with a value corresponding to an <code>eventKey</code> of one of his <code>Nav</code> children. This child will be the one collapsed.</p>
-                  <p>By setting the property {React.DOM.code(null, 'defaultNavExpanded={true}')} the Navbar will start expanded by default.</p>
+                  <p>By setting the property {React.DOM.code(null, 'defaultNavExpanded')} the Navbar will start expanded by default.</p>
                   <div className='bs-callout bs-callout-info'>
                     <h4>Scrollbar overflow</h4>
                     <p>The height of the collapsible is slightly smaller than the real height. To hide the scroll bar, add the following css to your style files.</p>

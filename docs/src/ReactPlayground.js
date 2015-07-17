@@ -328,7 +328,7 @@ const ReactPlayground = React.createClass({
 
       if (this.props.renderCode) {
         React.render(
-          <CodeMirrorEditor codeText={compiledCode} readOnly={true} />,
+          <CodeMirrorEditor codeText={compiledCode} readOnly />,
           mountNode
         );
       } else {

@@ -9,7 +9,7 @@ const positionerInstance = (
     <OverlayTrigger trigger='focus' placement='bottom' overlay={<Popover title='Popover bottom'><strong>Holy guacamole!</strong> Check this info.</Popover>}>
       <Button bsStyle='default'>Focus</Button>
     </OverlayTrigger>
-    <OverlayTrigger trigger='click' rootClose={true} placement='bottom' overlay={<Popover title='Popover bottom'><strong>Holy guacamole!</strong> Check this info.</Popover>}>
+    <OverlayTrigger trigger='click' rootClose placement='bottom' overlay={<Popover title='Popover bottom'><strong>Holy guacamole!</strong> Check this info.</Popover>}>
       <Button bsStyle='default'>Click + rootClose</Button>
     </OverlayTrigger>
   </ButtonToolbar>
