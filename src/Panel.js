@@ -80,7 +80,7 @@ const Panel = React.createClass({
           className={collapseClass}
           id={this.props.id}
           ref='panel'
-          aria-expanded={this.isExpanded() ? 'true' : 'false'}>
+          aria-expanded={this.isExpanded()}>
           {this.renderBody()}
 
         </div>
@@ -187,7 +187,7 @@ const Panel = React.createClass({
         href={'#' + (this.props.id || '')}
         aria-controls={this.props.collapsible ? this.props.id : null}
         className={this.isExpanded() ? null : 'collapsed'}
-        aria-expanded={this.isExpanded() ? 'true' : 'false'}
+        aria-expanded={this.isExpanded()}
         onClick={this.handleSelect}>
         {header}
       </a>
