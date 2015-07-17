@@ -10,9 +10,6 @@ const bowerTemplate = path.join(__dirname, 'bower.json');
 const bowerJson = path.join(bowerRoot, 'bower.json');
 
 const readme = path.join(__dirname, 'README.md');
-const license = path.join(repoRoot, 'LICENSE');
-
-const libDestination = path.join(bowerRoot, 'lib');
 
 function bowerConfig() {
   return Promise.all([
@@ -29,11 +26,10 @@ export default function BuildBower() {
   console.log('Building: '.cyan + 'bower module'.green);
 
   return exec(`rimraf ${bowerRoot}`)
-    .then(() => fsp.mkdirs(libDestination))
+    .then(() => fsp.mkdirs(bowerRoot))
     .then(() => Promise.all([
       bowerConfig(),
-      copy(readme, bowerRoot),
-      copy(license, bowerRoot)
+      copy(readme, bowerRoot)
     ]))
     .then(() => console.log('Built: '.cyan + 'bower module'.green));
 }
