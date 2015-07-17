@@ -1,21 +1,27 @@
 const Example = React.createClass({
-
-  getInitialState(){
-    return { show: false };
+  getInitialState() {
+    return {show: false};
   },
 
-  render(){
-    let close = e => this.setState({ show: false });
+  showModal() {
+    this.setState({show: true});
+  },
 
+  hideModal() {
+    this.setState({show: false});
+  },
+
+  render() {
     return (
       <ButtonToolbar>
-        <Button bsStyle='primary' onClick={()=>this.setState({ show: true })}>
+        <Button bsStyle='primary' onClick={this.showModal}>
           Launch demo modal
         </Button>
 
         <Modal
           {...this.props}
-          onHide={close}
+          show={this.state.show}
+          onHide={this.hideModal}
           dialogClassName='custom-modal'
         >
           <Modal.Header closeButton>
@@ -40,13 +46,12 @@ const Example = React.createClass({
              similique laboriosam eum et nemo expedita. Consequuntur perspiciatis cumque dolorem.</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={close}>Close</Button>
+            <Button onClick={this.hideModal}>Close</Button>
           </Modal.Footer>
         </Modal>
       </ButtonToolbar>
     );
   }
 });
-
 
 React.render(<Example/>, mountNode);
