@@ -21,7 +21,6 @@ function isOneOf(one, of) {
 }
 
 const OverlayTrigger = React.createClass({
-
   propTypes: {
 
     ...Overlay.propTypes,
@@ -142,12 +141,17 @@ const OverlayTrigger = React.createClass({
     React.render(this._overlay, this._mountNode);
   },
 
-  getOverlay(){
+  getOverlayTarget() {
+    return React.findDOMNode(this);
+  },
+
+  getOverlay() {
     let props = {
       show:      this.state.isOverlayShown,
       onHide:    this.hide,
       rootClose: this.props.rootClose,
-      target:    ()=> React.findDOMNode(this),
+      animation: this.props.animation,
+      target: this.getOverlayTarget,
       placement: this.props.placement,
       container: this.props.container,
       containerPadding: this.props.containerPadding
