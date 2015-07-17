@@ -24,6 +24,7 @@
     "babel/object-shorthand": 2,
     "quotes": [2, "single", "avoid-escape"],
     "react/display-name": 0,
+    "react/jsx-boolean-value": [2, "never"],
     "react/jsx-no-undef": 2,
     "react/jsx-uses-react": 2,
     "react/no-did-mount-set-state": 2,
