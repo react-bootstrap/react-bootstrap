@@ -26,7 +26,7 @@ export default (version) => {
   }
 
   return result
-    .then(() => exec(`node_modules/.bin/changelog --title v${version} --out ${output}${additionalArgs}`))
+    .then(() => exec(`changelog --title v${version} --out ${output}${additionalArgs}`))
     .then(() => safeExec(`git add ${changelog}`))
     .then(() => {
       if (removedAlphaChangelog || isPrerelease) {

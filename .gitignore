@@ -1,6 +1,6 @@
 *~
 .DS_Store
-npm-debug.log
+npm-debug.log*
 node_modules
 amd/
 !tools/amd/
