@@ -24,7 +24,7 @@ let Portal = React.createClass({
 
   componentWillUnmount() {
     this._unrenderOverlay();
-    this._mountOverlayTarget();
+    this._unmountOverlayTarget();
   },
 
   _mountOverlayTarget() {
