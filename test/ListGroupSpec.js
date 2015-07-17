@@ -147,4 +147,22 @@ describe('ListGroup', function () {
     assert.equal(React.findDOMNode(instance).id, 'testItem');
   });
 
-});
+  it('Should support an iterator as child', function() {
+    let childArray = [<ListGroupItem key={42}>Only Child in array</ListGroupItem>];
+    let childIterator = {};
+
+    childIterator[Symbol.iterator] = childArray[Symbol.iterator].bind(childArray);
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroup>
+        {childIterator}
+      </ListGroup>
+    );
+
+    let items = ReactTestUtils.scryRenderedComponentsWithType(instance, ListGroupItem);
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(items[0], 'list-group-item'));
+  });
+
+})
+;
