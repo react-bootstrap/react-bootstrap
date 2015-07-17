@@ -277,7 +277,7 @@ const ComponentsPage = React.createClass({
 
                   <h3><Anchor id='modals-live'>Live demo</Anchor></h3>
                   <p>Use <code>{'<Modal/>'}</code> in combination with other components to show or hide your Modal.</p>
-                  <ReactPlayground codeText={Samples.ModalTrigger} />
+                  <ReactPlayground codeText={Samples.Modal} />
 
                   <h3><Anchor id='modals-contained'>Contained Modal</Anchor></h3>
                   <p>You will need to add the following css to your project and ensure that your container has the <code>modal-container</code> class.</p>
