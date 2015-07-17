@@ -6,19 +6,15 @@ import * as modBadge from '../../src/Badge';
 import * as modButton from '../../src/Button';
 import * as modButtonGroup from '../../src/ButtonGroup';
 import * as modButtonInput from '../../src/ButtonInput';
-
 import * as modButtonToolbar from '../../src/ButtonToolbar';
 import * as modCollapse from '../../src/Collapse';
-
 import * as modCollapsibleNav from '../../src/CollapsibleNav';
 import * as modCollapsibleMixin from '../../src/CollapsibleMixin';
 import * as modCarousel from '../../src/Carousel';
 import * as modCarouselItem from '../../src/CarouselItem';
 import * as modCol from '../../src/Col';
 import * as modDropdownButton from '../../src/DropdownButton';
-
 import * as modFade from '../../src/Fade';
-
 import * as modFormControls from '../../src/FormControls';
 import * as modGlyphicon from '../../src/Glyphicon';
 import * as modGrid from '../../src/Grid';
@@ -40,7 +36,6 @@ import * as modPagination from '../../src/Pagination';
 import * as modPanel from '../../src/Panel';
 import * as modPanelGroup from '../../src/PanelGroup';
 import * as modPopover from '../../src/Popover';
-//import * as modPopoverTrigger from '../../src/PopoverTrigger';
 import * as modProgressBar from '../../src/ProgressBar';
 import * as modRow from '../../src/Row';
 import * as modSplitButton from '../../src/SplitButton';
@@ -49,9 +44,7 @@ import * as modTable from '../../src/Table';
 import * as modTabPane from '../../src/TabPane';
 import * as modThumbnail from '../../src/Thumbnail';
 import * as modTooltip from '../../src/Tooltip';
-//import * as modTooltipTrigger from '../../src/TooltipTrigger';
 import * as modWell from '../../src/Well';
-
 import * as modPortal from '../../src/Portal';
 import * as modOverlay from '../../src/Overlay';
 
@@ -68,8 +61,6 @@ const classNames = modClassNames.default;
 const Portal = modPortal.default;
 const Collapse = modCollapse.default;
 const Fade = modFade.default;
-
-
 const React = modReact.default;
 const Accordion = modAccordion.default;
 const Alert = modAlert.default;
@@ -97,9 +88,7 @@ const Navbar = modNavbar.default;
 const NavItem = modNavItem.default;
 const MenuItem = modMenuItem.default;
 const Modal = modModal.default;
-
 const OverlayTrigger = modOverlayTrigger.default;
-
 const PageHeader = modPageHeader.default;
 const PageItem = modPageItem.default;
 const Pagination = modPagination.default;
@@ -107,7 +96,6 @@ const Pager = modPager.default;
 const Panel = modPanel.default;
 const PanelGroup = modPanelGroup.default;
 const Popover = modPopover.default;
-//const PopoverTrigger = modPopoverTrigger.default;
 const ProgressBar = modProgressBar.default;
 const Row = modRow.default;
 const SplitButton = modSplitButton.default;
@@ -116,7 +104,6 @@ const Table = modTable.default;
 const TabPane = modTabPane.default;
 const Thumbnail = modThumbnail.default;
 const Tooltip = modTooltip.default;
-//const TooltipTrigger = modTooltipTrigger.default;
 const Well = modWell.default;
 const Overlay = modOverlay.default;
 
