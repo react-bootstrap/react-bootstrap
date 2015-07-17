@@ -319,8 +319,6 @@ const ComponentsPage = React.createClass({
                   <PropTable component='ModalFooter'/>
 
                   <h4>ModalTrigger <strong className='text-danger'>Deprecated: use the Modal directly to manage it's visibility</strong></h4>
-                  <PropTable component='ModalTrigger'/>
-
                 </div>
 
 
