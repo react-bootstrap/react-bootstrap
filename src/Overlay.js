@@ -18,9 +18,17 @@ class Overlay extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.show){
-      this.setState({ exited: false });
+    let state = {};
+
+    if ( !nextProps.show && this.props.show ){
+      state.exiting = true;
     }
+
+    if (nextProps.show) {
+      state = { exited: false, exiting: false };
+    }
+
+    this.setState(state);
   }
 
   render(){
@@ -40,7 +48,7 @@ class Overlay extends React.Component {
       Transition = Fade;
     }
 
-    if (props.show || (Transition && !this.state.exited)) {
+    if (props.show || (Transition && this.state.exiting && !this.state.exited)) {
 
       child = children;
 
@@ -57,14 +65,14 @@ class Overlay extends React.Component {
               unmountOnExit
               in={props.show}
               transitionAppear={props.show}
-              onHidden={this.onHiddenListener}
+              onExited={this.onHiddenListener}
             >
               { child }
             </Transition>
           )
           : cloneElement(child, { className: classNames('in', child.className) });
 
-
+      //Adds a wrapping div so it cannot be before Transition
       if (rootClose) {
         child = (
           <RootCloseWrapper onRootClose={props.onHide}>
@@ -74,6 +82,7 @@ class Overlay extends React.Component {
       }
     }
 
+
     return (
       <Portal container={container}>
         { child }
@@ -82,7 +91,7 @@ class Overlay extends React.Component {
   }
 
   handleHidden(){
-    this.setState({ exited: true });
+    this.setState({ exited: true, exiting: false });
   }
 }
 
