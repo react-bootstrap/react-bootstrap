@@ -5,7 +5,7 @@ class ModalTitle extends React.Component {
 
   render() {
     return (
-      <h4 {...this.props} className={classnames(this.props.className, 'modal-title')}>
+      <h4 {...this.props} className={classnames(this.props.className, this.props.modalClassName)}>
         { this.props.children }
       </h4>
     );
