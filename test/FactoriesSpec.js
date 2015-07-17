@@ -4,7 +4,7 @@ import components from '../tools/public-components';
 let props = {
   ButtonInput: {value: 'button'},
   Glyphicon: {glyph: 'star'},
-  Modal: {onRequestHide() {}},
+  Modal: {onHide() {}},
   ModalTrigger: {modal: React.DOM.div(null)},
   OverlayTrigger: {overlay: React.DOM.div(null)}
 };

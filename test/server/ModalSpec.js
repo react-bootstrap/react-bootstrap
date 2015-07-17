@@ -8,7 +8,7 @@ describe('Modal', () => {
 
     assert.doesNotThrow(function renderOnServerSide() {
       return React.renderToString(
-        <Modal onRequestHide={noOp}>
+        <Modal onHide={noOp}>
           <strong>Message</strong>
         </Modal>
       );

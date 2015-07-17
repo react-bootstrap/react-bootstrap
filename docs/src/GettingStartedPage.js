@@ -43,7 +43,12 @@ $ npm install react-bootstrap`
                       codeText={
 `var Alert = require('react-bootstrap/lib/Alert');
 // or
-var Alert = require('react-bootstrap').Alert;`
+var Alert = require('react-bootstrap').Alert;
+
+// with ES6 modules
+import Alert from 'react-bootstrap/lib/Alert';
+// or
+import {Alert} from 'react-bootstrap';`
                       }
                     />
                   </div>

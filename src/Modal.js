@@ -4,12 +4,11 @@ import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 import createChainedFunction from './utils/createChainedFunction';
 import BootstrapMixin from './BootstrapMixin';
-import FadeMixin from './FadeMixin';
 import domUtils from './utils/domUtils';
 import EventListener from './utils/EventListener';
-import deprecationWarning from './utils/deprecationWarning';
 
 import Portal from './Portal';
+import Fade from './Fade';
 
 import Body from './ModalBody';
 import Header from './ModalHeader';
@@ -35,23 +34,6 @@ function containerClientHeight(container, context) {
 function getContainer(context){
   return (context.props.container && React.findDOMNode(context.props.container)) ||
     domUtils.ownerDocument(context).body;
-}
-
-function requiredIfNot(key, type){
-  return function(props, propName, componentName){
-    let propType = type;
-
-    if ( props[ key] === undefined ){
-      propType = propType.isRequired;
-    }
-    return propType(props, propName, componentName);
-  };
-}
-
-function toChildArray(children){
-  let result = [];
-  React.Children.forEach(children, c => result.push(c));
-  return result;
 }
 
 
@@ -108,19 +90,15 @@ function getScrollbarSize(){
   document.body.removeChild(scrollDiv);
 
   scrollDiv = null;
+  return scrollbarSize;
 }
 
 
 const ModalMarkup = React.createClass({
 
-  mixins: [BootstrapMixin, FadeMixin],
+  mixins: [ BootstrapMixin ],
 
   propTypes: {
-    /**
-     * The Modal title text
-     * @deprecated Use the "Modal.Header" component instead
-     */
-    title: React.PropTypes.node,
     /**
      * Include a backdrop component. Specify 'static' for a backdrop that doesn't trigger an "onHide" when clicked.
      */
@@ -131,12 +109,6 @@ const ModalMarkup = React.createClass({
     keyboard: React.PropTypes.bool,
 
     /**
-     * Specify whether the Modal heading should contain a close button
-     * @deprecated Use the "Modal.Header" Component instead
-     */
-    closeButton: React.PropTypes.bool,
-
-    /**
      * Open and close the Modal with a slide and fade animation.
      */
     animation: React.PropTypes.bool,
@@ -145,13 +117,7 @@ const ModalMarkup = React.createClass({
      * @type {function}
      * @required
      */
-    onHide: requiredIfNot('onRequestHide', React.PropTypes.func),
-
-    /**
-     * A Callback fired when the header closeButton or non-static backdrop is clicked.
-     * @deprecated Replaced by `onHide`.
-     */
-    onRequestHide:  React.PropTypes.func,
+    onHide: React.PropTypes.func.isRequired,
 
     /**
      * A css class to apply to the Modal dialog DOM node.
@@ -199,8 +165,7 @@ const ModalMarkup = React.createClass({
 
     let classes = {
       modal: true,
-      fade: this.props.animation,
-      'in': !this.props.animation
+      in: this.props.show && !this.props.animation
     };
 
     let modal = (
@@ -226,28 +191,11 @@ const ModalMarkup = React.createClass({
   },
 
   renderContent() {
-    let children = toChildArray(this.props.children); // b/c createFragment is in addons and children can be a key'd object
-    let hasNewHeader = children.some( c => c.type.__isModalHeader);
-
-    if (!hasNewHeader && this.props.title != null){
-      deprecationWarning(
-        'Specifying `closeButton` or `title` Modal props',
-        'the new Modal.Header, and Modal.Title components');
-
-      children.unshift(
-        <Header closeButton={this.props.closeButton} onHide={this._getHide()}>
-          { this.props.title &&
-            <Title>{this.props.title}</Title>
-          }
-        </Header>
-      );
-    }
-
-    return React.Children.map(children, child => {
+    return React.Children.map(this.props.children, child => {
       // TODO: use context in 0.14
       if (child.type.__isModalHeader) {
         return cloneElement(child, {
-          onHide: createChainedFunction(this._getHide(), child.props.onHide)
+          onHide: createChainedFunction(this.props.onHide, child.props.onHide)
         });
       }
       return child;
@@ -255,29 +203,25 @@ const ModalMarkup = React.createClass({
   },
 
   renderBackdrop(modal) {
-    let classes = {
-      'modal-backdrop': true,
-      fade: this.props.animation,
-      'in': !this.props.animation
-    };
+    let { animation } = this.props;
+    let duration = Modal.BACKDROP_TRANSITION_DURATION; //eslint-disable-line no-use-before-define
 
-    let onClick = this.props.backdrop === true ?
-      this.handleBackdropClick : null;
+    let backdrop = (
+      <div ref="backdrop"
+       className={classNames('modal-backdrop', { in: this.props.show && !animation })}
+       onClick={this.handleBackdropClick}
+      />
+    );
 
     return (
       <div>
-        <div className={classNames(classes)} ref="backdrop" onClick={onClick} />
+        { animation
+            ? <Fade transitionAppear in={this.props.show} duration={duration}>{backdrop}</Fade>
+            : backdrop
+        }
         {modal}
       </div>
     );
-  },
-
-  _getHide(){
-    if ( !this.props.onHide && this.props.onRequestHide){
-      deprecationWarning('The Modal prop `onRequestHide`', 'the `onHide` prop');
-    }
-
-    return this.props.onHide || this.props.onRequestHide;
   },
 
   iosClickHack() {
@@ -360,12 +304,12 @@ const ModalMarkup = React.createClass({
       return;
     }
 
-    this._getHide()();
+    this.props.onHide();
   },
 
   handleDocumentKeyUp(e) {
     if (this.props.keyboard && e.keyCode === 27) {
-      this._getHide()();
+      this.props.onHide();
     }
   },
 
@@ -438,26 +382,42 @@ const Modal = React.createClass({
     ...ModalMarkup.propTypes
   },
 
-  defaultProps: {
-    show: null
+  getDefaultProps(){
+    return {
+      show: false,
+      animation: true
+    };
   },
 
   render() {
-    let { show, ...props } = this.props;
+    let { children, ...props } = this.props;
+
+    let show = !!props.show;
 
     let modal = (
-      <ModalMarkup {...props}>{this.props.children}</ModalMarkup>
+      <ModalMarkup {...props} ref='modal'>
+        { children }
+      </ModalMarkup>
     );
-    // I can't think of another way to not break back compat while defaulting container
-    if ( !this.props.__isUsedInModalTrigger && show != null ){
-      return (
-        <Portal container={props.container} >
-          { show && modal }
-        </Portal>
-      );
-    } else {
-      return modal;
-    }
+
+    return (
+      <Portal container={props.container}>
+        { props.animation
+            ? (
+              <Fade
+                in={show}
+                transitionAppear={show}
+                duration={Modal.TRANSITION_DURATION}
+                unmountOnExit
+              >
+                { modal }
+              </Fade>
+            )
+            : show && modal
+        }
+
+      </Portal>
+    );
   }
 });
 
@@ -465,5 +425,8 @@ Modal.Body = Body;
 Modal.Header = Header;
 Modal.Title = Title;
 Modal.Footer = Footer;
+
+Modal.TRANSITION_DURATION = 300;
+Modal.BACKDROP_TRANSITION_DURATION = 150;
 
 export default Modal;

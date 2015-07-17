@@ -1,6 +1,7 @@
 import React from 'react';
 import classSet from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
+import SafeAnchor from './SafeAnchor';
 
 const Thumbnail = React.createClass({
   mixins: [BootstrapMixin],
@@ -22,9 +23,9 @@ const Thumbnail = React.createClass({
 
     if(this.props.href) {
       return (
-        <a {...this.props} href={this.props.href} className={classSet(this.props.className, classes)}>
+        <SafeAnchor {...this.props} href={this.props.href} className={classSet(this.props.className, classes)}>
           <img src={this.props.src} alt={this.props.alt} />
-        </a>
+        </SafeAnchor>
       );
     }
     else {

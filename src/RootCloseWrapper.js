@@ -4,6 +4,15 @@ import EventListener from './utils/EventListener';
 
 // TODO: Merge this logic with dropdown logic once #526 is done.
 
+// TODO: Consider using an ES6 symbol here, once we use babel-runtime.
+const CLICK_WAS_INSIDE = '__click_was_inside';
+
+function suppressRootClose(event) {
+  // Tag the native event to prevent the root close logic on document click.
+  // This seems safer than using event.nativeEvent.stopImmediatePropagation(),
+  // which is only supported in IE >= 9.
+  event.nativeEvent[CLICK_WAS_INSIDE] = true;
+}
 
 export default class RootCloseWrapper extends React.Component {
   constructor(props) {
@@ -23,10 +32,8 @@ export default class RootCloseWrapper extends React.Component {
   }
 
   handleDocumentClick(e) {
-    // If the click originated from within this component, don't do anything.
-    // e.srcElement is required for IE8 as e.target is undefined
-    let target = e.target || e.srcElement;
-    if (domUtils.contains(React.findDOMNode(this), target)) {
+    // This is now the native event.
+    if (e[CLICK_WAS_INSIDE]) {
       return;
     }
 
@@ -54,7 +61,21 @@ export default class RootCloseWrapper extends React.Component {
   }
 
   render() {
-    return React.Children.only(this.props.children);
+    // Wrap the child in a new element, so the child won't have to handle
+    // potentially combining multiple onClick listeners.
+    return (
+      <div onClick={suppressRootClose}>
+        {React.Children.only(this.props.children)}
+      </div>
+    );
+  }
+
+  getWrappedDOMNode() {
+    // We can't use a ref to identify the wrapped child, since we might be
+    // stealing the ref from the owner, but we know exactly the DOM structure
+    // that will be rendered, so we can just do this to get the child's DOM
+    // node for doing size calculations in OverlayMixin.
+    return React.findDOMNode(this).children[0];
   }
 
   componentWillUnmount() {

@@ -9,6 +9,7 @@ import { setExecOptions } from './exec';
 import yargs from 'yargs';
 
 const argv = yargs
+  .help('h')
   .option('docs-only', {
     demand: false,
     default: false
@@ -35,11 +36,11 @@ setExecOptions(argv);
 let buildProcess;
 
 if (argv.libOnly) {
-  buildProcess = lib();
+  buildProcess = lib(argv);
 } else if (argv.docsOnly) {
   buildProcess = docs(argv);
 } else {
-  buildProcess = build();
+  buildProcess = build(argv);
 }
 
 buildProcess

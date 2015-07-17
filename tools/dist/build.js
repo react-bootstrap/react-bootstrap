@@ -6,8 +6,8 @@ export default function BuildDistributable() {
 
   return exec(`rimraf ${distRoot}`)
     .then(() => Promise.all([
-      exec('webpack --bail'),
-      exec('webpack --bail -p')
+      exec(`webpack --bail`),
+      exec(`webpack --bail -p`)
     ]))
     .then(() => console.log('Built: '.cyan + 'distributable'.green));
 }
