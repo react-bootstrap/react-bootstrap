@@ -260,12 +260,15 @@ const ComponentsPage = React.createClass({
                 <div className='bs-docs-section'>
                   <h1 className='page-header'><Anchor id='modals'>Modals</Anchor> <small>Modal</small></h1>
 
-                  <h3><Anchor id='modals-static'>A static example</Anchor></h3>
+                  <h3><Anchor id='modals-live'>Basic example</Anchor></h3>
+                  <p></p>
                   <p>
-                    A rendered modal with header, body, and set of actions in the footer. The <code>{'<Modal/>'}</code> Component comes with
+                    A modal with header, body, and set of actions in the footer. Use <code>{'<Modal/>'}</code> in combination with other components to
+                    show or hide your Modal. The <code>{'<Modal/>'}</code> Component comes with
                     a few convenient "sub components": <code>{'<Modal.Header/>'}</code>, <code>{'<Modal.Title/>'}</code>, <code>{'<Modal.Body/>'}</code>,
                     and <code>{'<Modal.Footer/>'}</code>, which you can use to build the Modal content.
                   </p>
+                  <ReactPlayground codeText={Samples.Modal} />
                   <div className='bs-callout bs-callout-info'>
                     <h4>Additional Import Options</h4>
                     <p>
@@ -273,11 +276,6 @@ const ComponentsPage = React.createClass({
                       import them directly from the <code>/lib</code> directory like: <code>{"require('react-bootstrap/lib/ModalHeader')"}</code>.
                     </p>
                   </div>
-                  <ReactPlayground codeText={Samples.ModalStatic} />
-
-                  <h3><Anchor id='modals-live'>Live demo</Anchor></h3>
-                  <p>Use <code>{'<Modal/>'}</code> in combination with other components to show or hide your Modal.</p>
-                  <ReactPlayground codeText={Samples.Modal} />
 
                   <h3><Anchor id='modals-contained'>Contained Modal</Anchor></h3>
                   <p>You will need to add the following css to your project and ensure that your container has the <code>modal-container</code> class.</p>

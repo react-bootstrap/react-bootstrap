@@ -33,7 +33,6 @@ export default {
   PanelGroupUncontrolled:        require('fs').readFileSync(__dirname + '/../examples/PanelGroupUncontrolled.js', 'utf8'),
   PanelGroupAccordion:           require('fs').readFileSync(__dirname + '/../examples/PanelGroupAccordion.js', 'utf8'),
   CollapsibleParagraph:          require('fs').readFileSync(__dirname + '/../examples/CollapsibleParagraph.js', 'utf8'),
-  ModalStatic:                   require('fs').readFileSync(__dirname + '/../examples/ModalStatic.js', 'utf8'),
   Modal:                         require('fs').readFileSync(__dirname + '/../examples/Modal.js', 'utf8'),
   ModalContained:                require('fs').readFileSync(__dirname + '/../examples/ModalContained.js', 'utf8'),
   ModalDefaultSizing:            require('fs').readFileSync(__dirname + '/../examples/ModalDefaultSizing.js', 'utf8'),
