@@ -2,6 +2,8 @@
 import <%= component %> from './<%= component %>';
 <% }); %>
 
+console.warn('Support for factories will be removed in v0.25, for details see https://github.com/react-bootstrap/react-bootstrap/issues/825');
+
 export default {
 <% _.forEach(components, function (component) { %>
   <%= component %>,
