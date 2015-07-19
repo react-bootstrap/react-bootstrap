@@ -9,9 +9,8 @@
   "homepage": "http://react-bootstrap.github.io/",
   "scripts": {
     "build": "babel-node tools/build-cli.js",
-    "lib-build": "babel-node tools/build-cli.js --lib-only",
-    "test-watch": "npm run lib-build && karma start",
-    "test-coverage": "npm run lib-build && COVERAGE=true karma start --single-run",
+    "test-watch": "karma start",
+    "test-coverage": "COVERAGE=true karma start --single-run",
     "test": "npm run lint && npm run build && npm run tests-set",
     "tests-set": "karma start --single-run && _mocha --compilers js:babel-core/register test/server/*Spec.js",
     "lint": "eslint ./",
