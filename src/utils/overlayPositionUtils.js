@@ -25,7 +25,7 @@ const utils = {
       domUtils.getOffset(target) : domUtils.getPosition(target, container);
 
     return {
-      ...offset, // eslint-disable-line object-shorthand
+      ...offset,
       height: target.offsetHeight,
       width: target.offsetWidth
     };

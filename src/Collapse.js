@@ -7,7 +7,7 @@ let capitalize = str => str[0].toUpperCase() + str.substr(1);
 
 // reading a dimension prop will cause the browser to recalculate,
 // which will let our animations work
-let triggerBrowserReflow = node => node.offsetHeight; //eslint-disable-line no-unused-expressions
+let triggerBrowserReflow = node => node.offsetHeight;
 
 const MARGINS = {
   height: ['marginTop', 'marginBottom'],
