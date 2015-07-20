@@ -15,7 +15,6 @@ class ModalHeader extends React.Component {
             className='close'
             aria-label={this.props['aria-label'] || 'Close'} //eslint-disable-line react/prop-types
             onClick={this.props.onHide}
-            style={{ marginTop: -2 }}
           >
             <span aria-hidden="true">
               &times;
