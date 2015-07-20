@@ -58,7 +58,7 @@ describe('Modal', function () {
 
     let modal = ReactTestUtils.findRenderedComponentWithType(instance, Modal);
 
-    assert.ok(React.findDOMNode(instance).className.match(/\modal-open\b/));
+    assert.ok(React.findDOMNode(instance).className.match(/\bmodal-open\b/));
 
     let backdrop = React.findDOMNode(modal.refs.modal).getElementsByClassName('modal-backdrop')[0];
 
