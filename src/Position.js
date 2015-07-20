@@ -4,9 +4,9 @@ import { calcOverlayPosition } from './utils/overlayPositionUtils';
 import CustomPropTypes from './utils/CustomPropTypes';
 
 class Position extends React.Component {
-
   constructor(props, context){
     super(props, context);
+
     this.state = {
       positionLeft: null,
       positionTop: null,
@@ -15,33 +15,35 @@ class Position extends React.Component {
     };
   }
 
-  componentWillMount(){
-    this._needsFlush = true;
+  componentDidMount() {
+    this.updatePosition(this.props, this.getTargetSafe(this.props));
   }
 
-  componentWillReceiveProps(){
-    this._needsFlush = true;
-  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.target !== this.props.target) {
+      const target = this.getTargetSafe(this.props);
+      const nextTarget = this.getTargetSafe(nextProps);
 
-  componentDidMount(){
-    this._maybeUpdatePosition();
-  }
-  componentDidUpdate(){
-    this._maybeUpdatePosition();
+      if (nextTarget !== target) {
+        this.updatePosition(nextProps, nextTarget);
+      }
+    }
   }
 
   render() {
-    let { children, ...props } = this.props;
-    let { positionLeft, positionTop, ...arrows } = this.props.target ? this.state : {};
+    const {children, ...props} = this.props;
+    const {positionLeft, positionTop, ...arrowPosition } = this.state;
 
+    const child = React.Children.only(children);
     return cloneElement(
-      React.Children.only(children), {
+      child,
+      {
         ...props,
-        ...arrows,
+        ...arrowPosition,
         positionTop,
         positionLeft,
         style: {
-          ...children.props.style,
+          ...child.props.style,
           left: positionLeft,
           top: positionTop
         }
@@ -49,55 +51,62 @@ class Position extends React.Component {
     );
   }
 
-  _maybeUpdatePosition(){
-    if ( this._needsFlush ) {
-      this._needsFlush = false;
-      this._updatePosition();
+  getTargetSafe(props) {
+    if (!props.target) {
+      return null;
     }
+
+    return props.target(props);
   }
 
-  _updatePosition() {
-    if ( this.props.target == null ){
+  updatePosition(props, target) {
+    if (!target) {
+      this.setState({
+        positionLeft: null,
+        positionTop: null,
+        arrowOffsetLeft: null,
+        arrowOffsetTop: null
+      });
+
       return;
     }
 
-    let overlay = React.findDOMNode(this);
-    let target = React.findDOMNode(this.props.target(this.props));
-    let container = React.findDOMNode(this.props.container) || domUtils.ownerDocument(this).body;
+    const overlay = React.findDOMNode(this);
+    const container =
+      React.findDOMNode(props.container) || domUtils.ownerDocument(this).body;
 
-    this.setState(
-      calcOverlayPosition(
-          this.props.placement
-        , overlay
-        , target
-        , container
-        , this.props.containerPadding));
+    this.setState(calcOverlayPosition(
+      props.placement,
+      overlay,
+      target,
+      container,
+      props.containerPadding
+    ));
   }
 }
 
 Position.propTypes = {
   /**
-   * The target DOM node the Component is positioned next too.
+   * Function mapping props to DOM node the component is positioned next to
    */
-  target:           React.PropTypes.func,
+  target: React.PropTypes.func,
   /**
-   * The "offsetParent" of the Component
+   * "offsetParent" of the component
    */
-  container:        CustomPropTypes.mountable,
+  container: CustomPropTypes.mountable,
   /**
-   * Distance in pixels the Component should be positioned to the edge of the Container.
+   * Minimum spacing in pixels between container border and component border
    */
   containerPadding: React.PropTypes.number,
   /**
-   * The location that the overlay should be positioned to its target.
+   * How to position the component relative to the target
    */
-  placement:        React.PropTypes.oneOf(['top', 'right', 'bottom', 'left'])
+  placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left'])
 };
 
 Position.defaultProps = {
   containerPadding: 0,
-  placement:        'right'
+  placement: 'right'
 };
-
 
 export default Position;

@@ -2,87 +2,77 @@ import React from 'react';
 import Transition from './Transition';
 
 class Fade extends React.Component {
-
-  constructor(props, context){
-    super(props, context);
-  }
-
   render() {
     return (
       <Transition
         {...this.props}
-        in={this.props.in}
         className='fade'
         enteredClassName='in'
         enteringClassName='in'
       >
-        { this.props.children }
+        {this.props.children}
       </Transition>
     );
   }
 }
 
+// Explicitly copied from Transition for doc generation.
+
 Fade.propTypes = {
   /**
-   * Fade the Component in or out.
+   * Whether the component is entered; triggers the enter or exit animation
    */
-  in:       React.PropTypes.bool,
+  in: React.PropTypes.bool,
 
   /**
-   * Provide the duration of the animation in milliseconds, used to ensure that finishing callbacks are fired even if the
-   * original browser transition end events are canceled.
+   * Whether the component should be unmounted (removed from DOM) when exited
    */
-  duration:          React.PropTypes.number,
+  unmountOnExit: React.PropTypes.bool,
 
   /**
-   * A Callback fired before the component starts to fade in.
+   * Whether transition in should run when the Transition component mounts, if
+   * the component is initially entered
+   */
+  transitionAppear: React.PropTypes.bool,
+
+  /**
+   * Duration of the animation in milliseconds, to ensure that finishing
+   * callbacks are fired even if the original browser transition end events are
+   * canceled
+   */
+  duration: React.PropTypes.number,
+
+  /**
+   * Callback fired before the "entering" classes are applied
    */
   onEnter: React.PropTypes.func,
-
   /**
-   * A Callback fired immediately after the component has started to faded in.
+   * Callback fired after the "entering" classes are applied
    */
   onEntering: React.PropTypes.func,
-
   /**
-   * A Callback fired after the component has faded in.
+   * Callback fired after the "enter" classes are applied
    */
   onEntered: React.PropTypes.func,
-
   /**
-   * A Callback fired before the component starts to fade out.
+   * Callback fired before the "exiting" classes are applied
    */
   onExit: React.PropTypes.func,
-
   /**
-   * A Callback fired immediately after the component has started to faded out.
+   * Callback fired after the "exiting" classes are applied
    */
   onExiting: React.PropTypes.func,
-
   /**
-   * A Callback fired after the component has faded out.
+   * Callback fired after the "exited" classes are applied
    */
-  onExited: React.PropTypes.func,
-
-
-  /**
-   * Specify whether the transitioning component should be unmounted (removed from the DOM) once the exit animation finishes.
-   */
-  unmountOnExit:     React.PropTypes.bool,
-
-  /**
-   * Specify whether the component should fade in or out when it mounts.
-   */
-  transitionAppear: React.PropTypes.bool
-
+  onExited: React.PropTypes.func
 };
 
 Fade.defaultProps = {
-  in:       false,
+  in: false,
   duration: 300,
-  dimension: 'height',
-  transitionAppear: false,
-  unmountOnExit: false
+  unmountOnExit: false,
+  transitionAppear: false
 };
 
 export default Fade;

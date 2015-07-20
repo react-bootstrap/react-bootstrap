@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import { render } from './helpers';
-import Transition from '../src/Transition';
-//import classNames from 'classnames';
+import Transition, {EXITED, ENTERING, ENTERED, EXITING} from
+  '../src/Transition';
 
 describe('Transition', function () {
-
-
   it('should not transition on mount', function(){
     let instance = render(
           <Transition in onEnter={()=> { throw new Error('should not Enter'); }}>
@@ -14,8 +12,7 @@ describe('Transition', function () {
           </Transition>
         );
 
-    instance.state.in.should.equal(true);
-    assert.ok(!instance.state.transitioning);
+    instance.state.status.should.equal(ENTERED);
   });
 
   it('should transition on mount with transitionAppear', done =>{
@@ -28,8 +25,7 @@ describe('Transition', function () {
           </Transition>
         );
 
-    instance.state.in.should.equal(true);
-    instance.state.transitioning.should.equal(true);
+    instance.state.status.should.equal(EXITED);
   });
 
   describe('entering', ()=> {
@@ -51,10 +47,9 @@ describe('Transition', function () {
       let onEnter = sinon.spy();
       let onEntering = sinon.spy();
 
-      instance.state.in.should.equal(false);
+      instance.state.status.should.equal(EXITED);
 
       instance = instance.renderWithProps({
-
         in: true,
 
         onEnter,
@@ -73,27 +68,23 @@ describe('Transition', function () {
     it('should move to each transition state', done => {
       let count = 0;
 
-      instance.state.in.should.equal(false);
+      instance.state.status.should.equal(EXITED);
 
       instance = instance.renderWithProps({
-
         in: true,
 
         onEnter(){
           count++;
-          instance.state.in.should.equal(false);
-          instance.state.transitioning.should.equal(false);
+          instance.state.status.should.equal(EXITED);
         },
 
         onEntering(){
           count++;
-          instance.state.in.should.equal(true);
-          instance.state.transitioning.should.equal(true);
+          instance.state.status.should.equal(ENTERING);
         },
 
         onEntered(){
-          instance.state.in.should.equal(true);
-          instance.state.transitioning.should.equal(false);
+          instance.state.status.should.equal(ENTERED);
           assert.ok(count === 2);
           done();
         }
@@ -103,10 +94,9 @@ describe('Transition', function () {
     it('should apply classes at each transition state', done => {
       let count = 0;
 
-      instance.state.in.should.equal(false);
+      instance.state.status.should.equal(EXITED);
 
       instance = instance.renderWithProps({
-
         in: true,
 
         onEnter(node){
@@ -126,9 +116,7 @@ describe('Transition', function () {
         }
       });
     });
-
   });
-
 
   describe('exiting', ()=> {
     let instance;
@@ -150,10 +138,9 @@ describe('Transition', function () {
       let onExit = sinon.spy();
       let onExiting = sinon.spy();
 
-      instance.state.in.should.equal(true);
+      instance.state.status.should.equal(ENTERED);
 
       instance = instance.renderWithProps({
-
         in: false,
 
         onExit,
@@ -172,27 +159,23 @@ describe('Transition', function () {
     it('should move to each transition state', done => {
       let count = 0;
 
-      instance.state.in.should.equal(true);
+      instance.state.status.should.equal(ENTERED);
 
       instance = instance.renderWithProps({
-
         in: false,
 
         onExit(){
           count++;
-          instance.state.in.should.equal(true);
-          instance.state.transitioning.should.equal(false);
+          instance.state.status.should.equal(ENTERED);
         },
 
         onExiting(){
           count++;
-          instance.state.in.should.equal(false);
-          instance.state.transitioning.should.equal(true);
+          instance.state.status.should.equal(EXITING);
         },
 
         onExited(){
-          instance.state.in.should.equal(false);
-          instance.state.transitioning.should.equal(false);
+          instance.state.status.should.equal(EXITED);
           //assert.ok(count === 2);
           done();
         }
@@ -202,10 +185,9 @@ describe('Transition', function () {
     it('should apply classes at each transition state', done => {
       let count = 0;
 
-      instance.state.in.should.equal(true);
+      instance.state.status.should.equal(ENTERED);
 
       instance = instance.renderWithProps({
-
         in: false,
 
         onExit(node){
@@ -225,7 +207,5 @@ describe('Transition', function () {
         }
       });
     });
-
   });
-
 });

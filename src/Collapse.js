@@ -115,21 +115,58 @@ class Collapse extends React.Component {
 
 Collapse.propTypes = {
   /**
-   * Collapse the Component in or out.
+   * Whether the component is entered; triggers the enter or exit animation
    */
-  in:       React.PropTypes.bool,
+  in: React.PropTypes.bool,
 
   /**
-   * Provide the duration of the animation in milliseconds, used to ensure that finishing callbacks are fired even if the
-   * original browser transition end events are canceled.
+   * Whether the component should be unmounted (removed from DOM) when exited
    */
-  duration:          React.PropTypes.number,
+  unmountOnExit: React.PropTypes.bool,
 
   /**
-   * Specifies the dimension used when collapsing.
+   * Whether transition in should run when the Transition component mounts, if
+   * the component is initially entered
+   */
+  transitionAppear: React.PropTypes.bool,
+
+  /**
+   * Duration of the animation in milliseconds, to ensure that finishing
+   * callbacks are fired even if the original browser transition end events are
+   * canceled
+   */
+  duration: React.PropTypes.number,
+
+  /**
+   * Callback fired before the "entering" classes are applied
+   */
+  onEnter: React.PropTypes.func,
+  /**
+   * Callback fired after the "entering" classes are applied
+   */
+  onEntering: React.PropTypes.func,
+  /**
+   * Callback fired after the "enter" classes are applied
+   */
+  onEntered: React.PropTypes.func,
+  /**
+   * Callback fired before the "exiting" classes are applied
+   */
+  onExit: React.PropTypes.func,
+  /**
+   * Callback fired after the "exiting" classes are applied
+   */
+  onExiting: React.PropTypes.func,
+  /**
+   * Callback fired after the "exited" classes are applied
+   */
+  onExited: React.PropTypes.func,
+
+  /**
+   * The dimension used when collapsing
    *
    * _Note: Bootstrap only partially supports 'width'!
-   * You will need to supply your own css animation for the `.width` css class._
+   * You will need to supply your own CSS animation for the `.width` CSS class._
    */
   dimension: React.PropTypes.oneOfType([
     React.PropTypes.oneOf(['height', 'width']),
@@ -137,62 +174,23 @@ Collapse.propTypes = {
   ]),
 
   /**
-   * A function that returns the height or width of the animating DOM node. Allows for providing some custom logic how much
-   * Collapse component should animate in its specified dimension.
+   * Function that returns the height or width of the animating DOM node
    *
-   * `getDimensionValue` is called with the current dimension prop value and the DOM node.
+   * Allows for providing some custom logic for how much the Collapse component
+   * should animate in its specified dimension. Called with the current
+   * dimension prop value and the DOM node.
    */
-  getDimensionValue: React.PropTypes.func,
-
-  /**
-   * A Callback fired before the component starts to expand.
-   */
-  onEnter: React.PropTypes.func,
-
-  /**
-   * A Callback fired immediately after the component starts to expand.
-   */
-  onEntering: React.PropTypes.func,
-
-  /**
-   * A Callback fired after the component has expanded.
-   */
-  onEntered: React.PropTypes.func,
-
-  /**
-   * A Callback fired before the component starts to collapse.
-   */
-  onExit: React.PropTypes.func,
-
-  /**
-   * A Callback fired immediately after the component starts to collapse.
-   */
-  onExiting: React.PropTypes.func,
-
-  /**
-   * A Callback fired after the component has collapsed.
-   */
-  onExited: React.PropTypes.func,
-
-  /**
-   * Specify whether the transitioning component should be unmounted (removed from the DOM) once the exit animation finishes.
-   */
-  unmountOnExit:     React.PropTypes.bool,
-
-  /**
-   * Specify whether the component should collapse or expand when it mounts.
-   */
-  transitionAppear: React.PropTypes.bool
+  getDimensionValue: React.PropTypes.func
 };
 
 Collapse.defaultProps = {
-  in:       false,
+  in: false,
   duration: 300,
-  dimension: 'height',
-  transitionAppear: false,
   unmountOnExit: false,
+  transitionAppear: false,
+
+  dimension: 'height',
   getDimensionValue
 };
 
 export default Collapse;
-
