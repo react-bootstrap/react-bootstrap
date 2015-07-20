@@ -43,7 +43,11 @@ const Tooltip = React.createClass({
     /**
      * Title text
      */
-    title: React.PropTypes.node
+    title: React.PropTypes.node,
+    /**
+     * Style hash
+     */
+    style: React.PropTypes.object
   },
 
   getDefaultProps() {
@@ -60,7 +64,8 @@ const Tooltip = React.createClass({
 
     const style = {
       'left': this.props.positionLeft,
-      'top': this.props.positionTop
+      'top': this.props.positionTop,
+      ...this.props.style
     };
 
     const arrowStyle = {
