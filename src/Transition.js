@@ -2,7 +2,7 @@ import React from 'react';
 import TransitionEvents from './utils/TransitionEvents';
 import classnames from 'classnames';
 
-const UNMOUNTED = 0;
+export const UNMOUNTED = 0;
 export const EXITED = 1;
 export const ENTERING = 2;
 export const ENTERED = 3;
