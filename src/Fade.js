@@ -17,53 +17,54 @@ class Fade extends React.Component {
 }
 
 // Explicitly copied from Transition for doc generation.
+// TODO: Remove duplication once #977 is resolved.
 
 Fade.propTypes = {
   /**
-   * Whether the component is entered; triggers the enter or exit animation
+   * Whether the component is faded in
    */
   in: React.PropTypes.bool,
 
   /**
-   * Whether the component should be unmounted (removed from DOM) when exited
+   * Whether the component should be unmounted (removed from DOM) when faded
+   * out
    */
   unmountOnExit: React.PropTypes.bool,
 
   /**
-   * Whether transition in should run when the Transition component mounts, if
-   * the component is initially entered
+   * Whether the component should fade in after mounting
    */
   transitionAppear: React.PropTypes.bool,
 
   /**
-   * Duration of the animation in milliseconds, to ensure that finishing
+   * Duration of the fade animation in milliseconds, to ensure that finishing
    * callbacks are fired even if the original browser transition end events are
    * canceled
    */
   duration: React.PropTypes.number,
 
   /**
-   * Callback fired before the "entering" classes are applied
+   * Callback fired before the component fades in
    */
   onEnter: React.PropTypes.func,
   /**
-   * Callback fired after the "entering" classes are applied
+   * Callback fired after the component starts to fade in
    */
   onEntering: React.PropTypes.func,
   /**
-   * Callback fired after the "enter" classes are applied
+   * Callback fired after the has component faded in
    */
   onEntered: React.PropTypes.func,
   /**
-   * Callback fired before the "exiting" classes are applied
+   * Callback fired before the component fades out
    */
   onExit: React.PropTypes.func,
   /**
-   * Callback fired after the "exiting" classes are applied
+   * Callback fired after the component starts to fade out
    */
   onExiting: React.PropTypes.func,
   /**
-   * Callback fired after the "exited" classes are applied
+   * Callback fired after the component has faded out
    */
   onExited: React.PropTypes.func
 };

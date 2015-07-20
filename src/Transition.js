@@ -14,7 +14,7 @@ class Transition extends React.Component {
 
     let initialStatus;
     if (props.in) {
-      // Perform enter in performNextTransition from componentDidMount.
+      // Start enter transition in componentDidMount.
       initialStatus = props.transitionAppear ? EXITED : ENTERED;
     } else {
       initialStatus = props.unmountOnExit ? UNMOUNTED : EXITED;
@@ -25,7 +25,9 @@ class Transition extends React.Component {
   }
 
   componentDidMount() {
-    this.performNextTransition();
+    if (this.props.transitionAppear && this.props.in) {
+      this.performEnter(this.props);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,8 +36,8 @@ class Transition extends React.Component {
       if (status === EXITING) {
         this.performEnter(nextProps);
       } else if (this.props.unmountOnExit) {
-        // Perform enter in performNextTransition.
         if (status === UNMOUNTED) {
+          // Start enter transition in componentDidUpdate.
           this.setState({status: EXITED});
         }
       } else if (status === EXITED) {
@@ -53,22 +55,19 @@ class Transition extends React.Component {
   }
 
   componentDidUpdate() {
-    this.performNextTransition();
+    if (this.props.unmountOnExit && this.state.status === EXITED) {
+      // EXITED is always a transitional state to either ENTERING or UNMOUNTED
+      // when using unmountOnExit.
+      if (this.props.in) {
+        this.performEnter(this.props);
+      } else {
+        this.setState({status: UNMOUNTED});
+      }
+    }
   }
 
   componentWillUnmount() {
     this.cancelNextCallback();
-  }
-
-  performNextTransition() {
-    if (this.state.status === EXITED) {
-      if (this.props.in) {
-        // Either because of transitionAppear or unmountOnExit.
-        this.performEnter(this.props);
-      } else if (this.props.unmountOnExit) {
-        this.setState({status: UNMOUNTED});
-      }
-    }
   }
 
   performEnter(props) {
@@ -157,7 +156,7 @@ class Transition extends React.Component {
       return null;
     }
 
-    const {children, className, style, ...childProps} = this.props;
+    const {children, className, ...childProps} = this.props;
     Object.keys(Transition.propTypes).forEach(key => delete childProps[key]);
 
     let transitionClassName;
@@ -180,8 +179,7 @@ class Transition extends React.Component {
           child.props.className,
           className,
           transitionClassName
-        ),
-        style: {...child.props.style, ...style}
+        )
       }
     );
   }
@@ -189,7 +187,7 @@ class Transition extends React.Component {
 
 Transition.propTypes = {
   /**
-   * Whether the component is entered; triggers the enter or exit animation
+   * Whether the component is shown; triggers the enter or exit animation
    */
   in: React.PropTypes.bool,
 
@@ -200,7 +198,7 @@ Transition.propTypes = {
 
   /**
    * Whether transition in should run when the Transition component mounts, if
-   * the component is initially entered
+   * the component is initially shown
    */
   transitionAppear: React.PropTypes.bool,
 

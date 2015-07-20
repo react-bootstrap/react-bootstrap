@@ -41,7 +41,6 @@ class Overlay extends React.Component {
 
     // Don't un-render the overlay while it's transitioning out.
     const mountOverlay = props.show || (Transition && !this.state.exited);
-
     if (!mountOverlay) {
       // Don't bother showing anything if we don't have to.
       return null;
@@ -49,8 +48,17 @@ class Overlay extends React.Component {
 
     let child = children;
 
+    // Position is be inner-most because it adds inline styles into the child,
+    // which the other wrappers don't forward correctly.
+    child = (
+      <Position {...{container, containerPadding, target, placement}}>
+        {child}
+      </Position>
+    );
+
     if (Transition) {
-      // This animates the child by injecting props, so it must be inner-most.
+      // This animates the child node by injecting props, so it must precede
+      // anything that adds a wrapping div.
       child = (
         <Transition
           in={props.show}
@@ -66,13 +74,6 @@ class Overlay extends React.Component {
         {className: classNames('in', child.className)}
       );
     }
-
-    // This must wrap the transition to avoid position recalculations.
-    child = (
-      <Position {...{container, containerPadding, target, placement}}>
-        {child}
-      </Position>
-    );
 
     // This goes after everything else because it adds a wrapping div.
     if (rootClose) {

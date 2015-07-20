@@ -113,57 +113,61 @@ class Collapse extends React.Component {
   }
 }
 
+// Explicitly copied from Transition for doc generation.
+// TODO: Remove duplication once #977 is resolved.
+
 Collapse.propTypes = {
   /**
-   * Whether the component is entered; triggers the enter or exit animation
+   * Whether the component is expanded
    */
   in: React.PropTypes.bool,
 
   /**
-   * Whether the component should be unmounted (removed from DOM) when exited
+   * Whether the component should be unmounted (removed from DOM) when
+   * collapsed
    */
   unmountOnExit: React.PropTypes.bool,
 
   /**
-   * Whether transition in should run when the Transition component mounts, if
-   * the component is initially entered
+   * Whether the component should expand after mounting
    */
   transitionAppear: React.PropTypes.bool,
 
   /**
-   * Duration of the animation in milliseconds, to ensure that finishing
-   * callbacks are fired even if the original browser transition end events are
-   * canceled
+   * Duration of the collapse animation in milliseconds, to ensure that
+   * finishing callbacks are fired even if the original browser transition end
+   * events are canceled
    */
   duration: React.PropTypes.number,
 
   /**
-   * Callback fired before the "entering" classes are applied
+   * Callback fired before the component expands
    */
   onEnter: React.PropTypes.func,
   /**
-   * Callback fired after the "entering" classes are applied
+   * Callback fired after the component starts to expand
    */
   onEntering: React.PropTypes.func,
   /**
-   * Callback fired after the "enter" classes are applied
+   * Callback fired after the component has expanded
    */
   onEntered: React.PropTypes.func,
   /**
-   * Callback fired before the "exiting" classes are applied
+   * Callback fired before the component collapses
    */
   onExit: React.PropTypes.func,
   /**
-   * Callback fired after the "exiting" classes are applied
+   * Callback fired after the component starts to collapse
    */
   onExiting: React.PropTypes.func,
   /**
-   * Callback fired after the "exited" classes are applied
+   * Callback fired after the component has collapsed
    */
   onExited: React.PropTypes.func,
 
   /**
-   * The dimension used when collapsing
+   * The dimension used when collapsing, or a function that returns the
+   * dimension
    *
    * _Note: Bootstrap only partially supports 'width'!
    * You will need to supply your own CSS animation for the `.width` CSS class._
