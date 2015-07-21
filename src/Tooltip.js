@@ -43,11 +43,7 @@ const Tooltip = React.createClass({
     /**
      * Title text
      */
-    title: React.PropTypes.node,
-    /**
-     * Style hash
-     */
-    style: React.PropTypes.object
+    title: React.PropTypes.node
   },
 
   getDefaultProps() {
@@ -65,7 +61,8 @@ const Tooltip = React.createClass({
     const style = {
       'left': this.props.positionLeft,
       'top': this.props.positionTop,
-      ...this.props.style
+      // we don't want to expose the `style` property
+      ...this.props.style // eslint-disable-line react/prop-types
     };
 
     const arrowStyle = {
