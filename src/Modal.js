@@ -104,7 +104,7 @@ const ModalMarkup = React.createClass({
      */
     backdrop: React.PropTypes.oneOf(['static', true, false]),
     /**
-     * Include a backdrop component. Specify 'static' for a backdrop that doesn't trigger an "onHide" when clicked.
+     * Close the modal when escape key is pressed
      */
     keyboard: React.PropTypes.bool,
 
