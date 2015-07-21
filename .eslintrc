@@ -25,6 +25,7 @@
     "quotes": [2, "single", "avoid-escape"],
     "react/display-name": 0,
     "react/jsx-boolean-value": [2, "never"],
+    "react/jsx-no-duplicate-props": 2,
     "react/jsx-no-undef": 2,
     "react/jsx-uses-react": 2,
     "react/no-did-mount-set-state": 2,
