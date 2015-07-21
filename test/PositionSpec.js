@@ -27,89 +27,65 @@ describe('Position', function () {
   describe('position recalculation', function () {
     beforeEach(function () {
       sinon.spy(overlayPositionUtils, 'calcOverlayPosition');
-      sinon.spy(Position.prototype, 'render');
+      sinon.spy(Position.prototype, 'componentWillReceiveProps');
     });
 
     afterEach(function () {
       overlayPositionUtils.calcOverlayPosition.restore();
-      Position.prototype.render.restore();
+      Position.prototype.componentWillReceiveProps.restore();
     });
 
-    it('should recalculate when target changes', function () {
+    it('Should only recalculate when target changes', function () {
       class TargetChanger extends React.Component {
         constructor(props) {
           super(props);
 
-          this.state = {target: 'foo'};
+          this.state = {
+            target: 'foo',
+            fakeProp: 0
+          };
         }
 
         render() {
           return (
             <div>
-              {this.renderTarget()}
+              <div ref="foo" />
+              <div ref="bar" />
 
-              <Position target={() => this.refs[this.state.target]}>
+              <Position
+                target={() => this.refs[this.state.target]}
+                fakeProp={this.state.fakeProp}
+              >
                 <div />
               </Position>
             </div>
           );
         }
-
-        renderTarget() {
-          if (this.state.target === 'foo') {
-            return (<div ref="foo" style={{width: 100}} />);
-          } else if (this.state.target === 'bar') {
-            return (<div ref="bar" style={{width: 200}} />);
-          }
-        }
       }
 
       const instance = ReactTestUtils.renderIntoDocument(<TargetChanger />);
 
-      expect(overlayPositionUtils.calcOverlayPosition).to.have.been.calledOnce;
+      // Position calculates initial position.
+      expect(Position.prototype.componentWillReceiveProps)
+        .to.have.not.been.called;
+      expect(overlayPositionUtils.calcOverlayPosition)
+        .to.have.been.calledOnce;
 
       instance.setState({target: 'bar'});
 
+      // Position receives new props and recalculates position.
+      expect(Position.prototype.componentWillReceiveProps)
+        .to.have.been.calledOnce;
       expect(overlayPositionUtils.calcOverlayPosition)
         .to.have.been.calledTwice;
-    });
 
-    it('should not recalculate when target doesn\'t change', function () {
-      class FooChanger extends React.Component {
-        constructor(props) {
-          super(props);
+      instance.setState({fakeProp: 1});
 
-          this.getTarget = this.getTarget.bind(this);
-
-          this.state = {foo: 0};
-        }
-
-        getTarget() {
-          return this.refs.target;
-        }
-
-        render() {
-          return (
-            <div>
-              <div ref="target" style={{width: 100}} />
-
-              <Position target={this.getTarget} foo={this.state.foo}>
-                <div target="positioned" />
-              </Position>
-            </div>
-          );
-        }
-      }
-
-      const instance = ReactTestUtils.renderIntoDocument(<FooChanger />);
-
-      expect(overlayPositionUtils.calcOverlayPosition).to.have.been.calledOnce;
-      expect(Position.prototype.render).to.have.been.calledTwice;
-
-      instance.setState({foo: 1});
-
-      expect(overlayPositionUtils.calcOverlayPosition).to.have.been.calledOnce;
-      expect(Position.prototype.render).to.have.been.calledThrice;
+      // Position receives new props but should not recalculate position.
+      expect(Position.prototype.componentWillReceiveProps)
+        .to.have.been.calledTwice;
+      expect(overlayPositionUtils.calcOverlayPosition)
+        .to.have.been.calledTwice;
     });
   });
 

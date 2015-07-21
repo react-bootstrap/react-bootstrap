@@ -4,7 +4,7 @@ import { calcOverlayPosition } from './utils/overlayPositionUtils';
 import CustomPropTypes from './utils/CustomPropTypes';
 
 class Position extends React.Component {
-  constructor(props, context){
+  constructor(props, context) {
     super(props, context);
 
     this.state = {
@@ -15,16 +15,15 @@ class Position extends React.Component {
     };
 
     this._needsFlush = false;
+    this._lastTarget = null;
   }
 
   componentDidMount() {
     this.updatePosition();
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.target !== this.props.target) {
-      this._needsFlush = true;
-    }
+  componentWillReceiveProps() {
+    this._needsFlush = true;
   }
 
   componentDidUpdate() {
@@ -34,9 +33,15 @@ class Position extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    // Probably not necessary, but just in case holding a reference to the
+    // target causes problems somewhere.
+    this._lastTarget = null;
+  }
+
   render() {
     const {children, ...props} = this.props;
-    const {positionLeft, positionTop, ...arrowPosition } = this.state;
+    const {positionLeft, positionTop, ...arrowPosition} = this.state;
 
     const child = React.Children.only(children);
     return cloneElement(
@@ -60,11 +65,21 @@ class Position extends React.Component {
       return null;
     }
 
-    return this.props.target(this.props);
+    const target = this.props.target(this.props);
+    if (!target) {
+      // This is so we can just use === check below on all falsy targets.
+      return null;
+    }
+
+    return target;
   }
 
   updatePosition() {
     const target = this.getTargetSafe();
+    if (target === this._lastTarget) {
+      return;
+    }
+    this._lastTarget = target;
 
     if (!target) {
       this.setState({
