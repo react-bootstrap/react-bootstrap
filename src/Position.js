@@ -13,20 +13,24 @@ class Position extends React.Component {
       arrowOffsetLeft: null,
       arrowOffsetTop: null
     };
+
+    this._needsFlush = false;
   }
 
   componentDidMount() {
-    this.updatePosition(this.props, this.getTargetSafe(this.props));
+    this.updatePosition();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.target !== this.props.target) {
-      const target = this.getTargetSafe(this.props);
-      const nextTarget = this.getTargetSafe(nextProps);
+      this._needsFlush = true;
+    }
+  }
 
-      if (nextTarget !== target) {
-        this.updatePosition(nextProps, nextTarget);
-      }
+  componentDidUpdate() {
+    if (this._needsFlush) {
+      this._needsFlush = false;
+      this.updatePosition();
     }
   }
 
@@ -51,15 +55,17 @@ class Position extends React.Component {
     );
   }
 
-  getTargetSafe(props) {
-    if (!props.target) {
+  getTargetSafe() {
+    if (!this.props.target) {
       return null;
     }
 
-    return props.target(props);
+    return this.props.target(this.props);
   }
 
-  updatePosition(props, target) {
+  updatePosition() {
+    const target = this.getTargetSafe();
+
     if (!target) {
       this.setState({
         positionLeft: null,
@@ -73,14 +79,15 @@ class Position extends React.Component {
 
     const overlay = React.findDOMNode(this);
     const container =
-      React.findDOMNode(props.container) || domUtils.ownerDocument(this).body;
+      React.findDOMNode(this.props.container) ||
+      domUtils.ownerDocument(this).body;
 
     this.setState(calcOverlayPosition(
-      props.placement,
+      this.props.placement,
       overlay,
       target,
       container,
-      props.containerPadding
+      this.props.containerPadding
     ));
   }
 }
