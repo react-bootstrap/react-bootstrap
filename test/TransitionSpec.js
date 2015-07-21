@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import { render } from './helpers';
-import Transition from '../src/Transition';
-//import classNames from 'classnames';
+import Transition, {UNMOUNTED, EXITED, ENTERING, ENTERED, EXITING} from
+  '../src/Transition';
 
 describe('Transition', function () {
-
-
   it('should not transition on mount', function(){
     let instance = render(
           <Transition in onEnter={()=> { throw new Error('should not Enter'); }}>
@@ -14,8 +12,7 @@ describe('Transition', function () {
           </Transition>
         );
 
-    instance.state.in.should.equal(true);
-    assert.ok(!instance.state.transitioning);
+    expect(instance.state.status).to.equal(ENTERED);
   });
 
   it('should transition on mount with transitionAppear', done =>{
@@ -28,8 +25,7 @@ describe('Transition', function () {
           </Transition>
         );
 
-    instance.state.in.should.equal(true);
-    instance.state.transitioning.should.equal(true);
+    expect(instance.state.status).to.equal(EXITED);
   });
 
   describe('entering', ()=> {
@@ -51,10 +47,9 @@ describe('Transition', function () {
       let onEnter = sinon.spy();
       let onEntering = sinon.spy();
 
-      instance.state.in.should.equal(false);
+      expect(instance.state.status).to.equal(EXITED);
 
       instance = instance.renderWithProps({
-
         in: true,
 
         onEnter,
@@ -62,9 +57,9 @@ describe('Transition', function () {
         onEntering,
 
         onEntered(){
-          assert.ok(onEnter.calledOnce);
-          assert.ok(onEntering.calledOnce);
-          assert.ok(onEnter.calledBefore(onEntering));
+          expect(onEnter.calledOnce).to.be.ok;
+          expect(onEntering.calledOnce).to.be.ok;
+          expect(onEnter.calledBefore(onEntering)).to.be.ok;
           done();
         }
       });
@@ -73,28 +68,24 @@ describe('Transition', function () {
     it('should move to each transition state', done => {
       let count = 0;
 
-      instance.state.in.should.equal(false);
+      expect(instance.state.status).to.equal(EXITED);
 
       instance = instance.renderWithProps({
-
         in: true,
 
         onEnter(){
           count++;
-          instance.state.in.should.equal(false);
-          instance.state.transitioning.should.equal(false);
+          expect(instance.state.status).to.equal(EXITED);
         },
 
         onEntering(){
           count++;
-          instance.state.in.should.equal(true);
-          instance.state.transitioning.should.equal(true);
+          expect(instance.state.status).to.equal(ENTERING);
         },
 
         onEntered(){
-          instance.state.in.should.equal(true);
-          instance.state.transitioning.should.equal(false);
-          assert.ok(count === 2);
+          expect(instance.state.status).to.equal(ENTERED);
+          expect(count).to.equal(2);
           done();
         }
       });
@@ -103,32 +94,29 @@ describe('Transition', function () {
     it('should apply classes at each transition state', done => {
       let count = 0;
 
-      instance.state.in.should.equal(false);
+      expect(instance.state.status).to.equal(EXITED);
 
       instance = instance.renderWithProps({
-
         in: true,
 
         onEnter(node){
           count++;
-          assert.equal(node.className, '');
+          expect(node.className).to.equal('');
         },
 
         onEntering(node){
           count++;
-          assert.equal(node.className, 'test-entering');
+          expect(node.className).to.equal('test-entering');
         },
 
         onEntered(node){
-          assert.equal(node.className, 'test-enter');
-          assert.ok(count === 2);
+          expect(node.className).to.equal('test-enter');
+          expect(count).to.equal(2);
           done();
         }
       });
     });
-
   });
-
 
   describe('exiting', ()=> {
     let instance;
@@ -150,10 +138,9 @@ describe('Transition', function () {
       let onExit = sinon.spy();
       let onExiting = sinon.spy();
 
-      instance.state.in.should.equal(true);
+      expect(instance.state.status).to.equal(ENTERED);
 
       instance = instance.renderWithProps({
-
         in: false,
 
         onExit,
@@ -161,9 +148,9 @@ describe('Transition', function () {
         onExiting,
 
         onExited(){
-          assert.ok(onExit.calledOnce);
-          assert.ok(onExiting.calledOnce);
-          assert.ok(onExit.calledBefore(onExiting));
+          expect(onExit.calledOnce).to.be.ok;
+          expect(onExiting.calledOnce).to.be.ok;
+          expect(onExit.calledBefore(onExiting)).to.be.ok;
           done();
         }
       });
@@ -172,28 +159,24 @@ describe('Transition', function () {
     it('should move to each transition state', done => {
       let count = 0;
 
-      instance.state.in.should.equal(true);
+      expect(instance.state.status).to.equal(ENTERED);
 
       instance = instance.renderWithProps({
-
         in: false,
 
         onExit(){
           count++;
-          instance.state.in.should.equal(true);
-          instance.state.transitioning.should.equal(false);
+          expect(instance.state.status).to.equal(ENTERED);
         },
 
         onExiting(){
           count++;
-          instance.state.in.should.equal(false);
-          instance.state.transitioning.should.equal(true);
+          expect(instance.state.status).to.equal(EXITING);
         },
 
         onExited(){
-          instance.state.in.should.equal(false);
-          instance.state.transitioning.should.equal(false);
-          //assert.ok(count === 2);
+          expect(instance.state.status).to.equal(EXITED);
+          expect(count).to.equal(2);
           done();
         }
       });
@@ -202,30 +185,95 @@ describe('Transition', function () {
     it('should apply classes at each transition state', done => {
       let count = 0;
 
-      instance.state.in.should.equal(true);
+      expect(instance.state.status).to.equal(ENTERED);
 
       instance = instance.renderWithProps({
-
         in: false,
 
         onExit(node){
           count++;
-          assert.equal(node.className, '');
+          expect(node.className).to.equal('');
         },
 
         onExiting(node){
           count++;
-          assert.equal(node.className, 'test-exiting');
+          expect(node.className).to.equal('test-exiting');
         },
 
         onExited(node){
-          assert.equal(node.className, 'test-exit');
-          assert.ok(count === 2);
+          expect(node.className).to.equal('test-exit');
+          expect(count).to.equal(2);
           done();
         }
       });
     });
-
   });
 
+  describe('unmountOnExit', () => {
+    class UnmountTransition extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {in: props.initialIn};
+      }
+
+      render() {
+        return (
+          <Transition
+            ref="transition"
+            unmountOnExit
+            in={this.state.in}
+            duration={10}
+            {...this.props}
+          >
+            <div />
+          </Transition>
+        );
+      }
+
+      getStatus() {
+        return this.refs.transition.state.status;
+      }
+    }
+
+    it('should mount when entering', done => {
+      const instance = render(
+        <UnmountTransition
+          initialIn={false}
+
+          onEnter={() => {
+            expect(instance.getStatus()).to.equal(EXITED);
+            expect(React.findDOMNode(instance)).to.exist;
+
+            done();
+          }}
+        />
+      );
+
+      expect(instance.getStatus()).to.equal(UNMOUNTED);
+      expect(React.findDOMNode(instance)).to.not.exist;
+
+      instance.setState({in: true});
+    });
+
+    it('should unmount after exiting', done => {
+      const instance = render(
+        <UnmountTransition
+          initialIn={true}
+
+          onExited={() => {
+            expect(instance.getStatus()).to.equal(UNMOUNTED);
+            expect(React.findDOMNode(instance)).to.not.exist;
+
+            done();
+          }}
+        />
+      );
+
+      expect(instance.getStatus()).to.equal(ENTERED);
+      expect(React.findDOMNode(instance)).to.exist;
+
+      instance.setState({in: false});
+    });
+  });
 });
