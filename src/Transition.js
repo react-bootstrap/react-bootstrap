@@ -187,18 +187,18 @@ class Transition extends React.Component {
 
 Transition.propTypes = {
   /**
-   * Whether the component is shown; triggers the enter or exit animation
+   * Show the component; triggers the enter or exit animation
    */
   in: React.PropTypes.bool,
 
   /**
-   * Whether the component should be unmounted (removed from DOM) when exited
+   * Unmount the component (remove it from the DOM) when it is not shown
    */
   unmountOnExit: React.PropTypes.bool,
 
   /**
-   * Whether transition in should run when the Transition component mounts, if
-   * the component is initially shown
+   * Run the enter animation when the component mounts, if it is initially
+   * shown
    */
   transitionAppear: React.PropTypes.bool,
 

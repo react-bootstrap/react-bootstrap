@@ -118,18 +118,18 @@ class Collapse extends React.Component {
 
 Collapse.propTypes = {
   /**
-   * Whether the component is expanded
+   * Show the component; triggers the expand or collapse animation
    */
   in: React.PropTypes.bool,
 
   /**
-   * Whether the component should be unmounted (removed from DOM) when
-   * collapsed
+   * Unmount the component (remove it from the DOM) when it is collapsed
    */
   unmountOnExit: React.PropTypes.bool,
 
   /**
-   * Whether the component should expand after mounting
+   * Run the expand animation when the component mounts, if it is initially
+   * shown
    */
   transitionAppear: React.PropTypes.bool,
 

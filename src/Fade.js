@@ -21,18 +21,18 @@ class Fade extends React.Component {
 
 Fade.propTypes = {
   /**
-   * Whether the component is faded in
+   * Show the component; triggers the fade in or fade out animation
    */
   in: React.PropTypes.bool,
 
   /**
-   * Whether the component should be unmounted (removed from DOM) when faded
-   * out
+   * Unmount the component (remove it from the DOM) when it is faded out
    */
   unmountOnExit: React.PropTypes.bool,
 
   /**
-   * Whether the component should fade in after mounting
+   * Run the fade in animation when the component mounts, if it is initially
+   * shown
    */
   transitionAppear: React.PropTypes.bool,
 
