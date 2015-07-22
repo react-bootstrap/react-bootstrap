@@ -26,8 +26,8 @@ const utils = {
 
     return {
       ...offset, // eslint-disable-line object-shorthand
-      height: target.offsetHeight,
-      width: target.offsetWidth
+      height: target.offsetHeight || 0,
+      width: target.offsetWidth || 0
     };
   },
 
