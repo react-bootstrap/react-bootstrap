@@ -141,6 +141,7 @@ const Modal = React.createClass({
 
   render() {
     let { children, animation, backdrop, ...props } = this.props;
+    let { onExit, onExiting, onEnter, onEntering, onEntered } = props;
 
     let show = !!props.show;
 
@@ -166,7 +167,12 @@ const Modal = React.createClass({
           unmountOnExit
           in={show}
           duration={Modal.TRANSITION_DURATION}
+          onExit={onExit}
+          onExiting={onExiting}
           onExited={this.handleHidden}
+          onEnter={onEnter}
+          onEntering={onEntering}
+          onEntered={onEntered}
         >
           { modal }
         </Fade>
@@ -316,6 +322,9 @@ const Modal = React.createClass({
 
     this.onHide();
 
+    if (this.props.onExited) {
+      this.props.onExited(...args);
+    }
   },
 
   handleBackdropClick(e) {
