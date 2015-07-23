@@ -1,4 +1,6 @@
-/*eslint-disable object-shorthand, react/prop-types */
+/* eslint react/prop-types: [2, {ignore: ["container", "containerPadding", "target", "placement", "children"] }] */
+/* These properties are validated in 'Portal' and 'Position' components */
+
 import React, { cloneElement } from 'react';
 import Portal from './Portal';
 import Position from './Position';

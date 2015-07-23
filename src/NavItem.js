@@ -29,7 +29,7 @@ const NavItem = React.createClass({
         title,
         target,
         children,
-        'aria-controls': ariaControls,  // eslint-disable-line react/prop-types
+        'aria-controls': ariaControls,
         ...props } = this.props;
     let classes = {
           active,

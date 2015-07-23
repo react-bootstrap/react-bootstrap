@@ -41,7 +41,7 @@ const PaginationButton = React.createClass({
 
     let {
       className,
-      ...anchorProps // eslint-disable-line object-shorthand
+      ...anchorProps
     } = this.props;
 
     return (

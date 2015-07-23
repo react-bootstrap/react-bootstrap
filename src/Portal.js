@@ -1,4 +1,3 @@
-/*eslint-disable react/prop-types */
 import React from 'react';
 import CustomPropTypes from './utils/CustomPropTypes';
 import domUtils from './utils/domUtils';
