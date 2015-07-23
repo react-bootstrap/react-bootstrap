@@ -49,7 +49,7 @@ describe('OverlayTrigger', function() {
     const overlayTrigger = React.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
 
-    expect(document.getElementsByClassName('test-overlay').length).to.equal(1)
+    expect(document.getElementsByClassName('test-overlay').length).to.equal(1);
   });
 
   it('Should pass transition callbacks to Transition', function (done) {
