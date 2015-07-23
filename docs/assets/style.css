@@ -188,9 +188,14 @@ body {
   left: -0.8em;
   opacity: 0;
 }
+
 h1:hover .anchor-icon,
+h1 a:focus .anchor-icon,
 h2:hover .anchor-icon,
+h2 a:focus .anchor-icon,
 h3:hover .anchor-icon,
-h4:hover .anchor-icon {
+h3 a:focus .anchor-icon,
+h4:hover .anchor-icon,
+h4 a:focus .anchor-icon {
   opacity: 0.5;
 }
