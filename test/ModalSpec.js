@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Modal from '../src/Modal';
-import { render } from './helpers';
+import { render, shouldWarn } from './helpers';
 
 describe('Modal', function () {
   let mountPoint;
@@ -113,6 +113,27 @@ describe('Modal', function () {
         .getElementsByClassName('close')[0];
 
     ReactTestUtils.Simulate.click(button);
+  });
+
+  it('Should use bsClass on the dialog', function () {
+    let noOp = function () {};
+    let instance = render(
+      <Modal show bsClass='mymodal' onHide={noOp}>
+        <strong>Message</strong>
+      </Modal>
+    , mountPoint);
+
+    let dialog = React.findDOMNode(instance.refs.dialog);
+    let backdrop = React.findDOMNode(instance.refs.backdrop);
+
+    assert.ok(dialog.className.match(/\bmymodal\b/));
+    assert.ok(dialog.children[0].className.match(/\bmymodal-dialog\b/));
+    assert.ok(dialog.children[0].children[0].className.match(/\bmymodal-content\b/));
+
+    assert.ok(backdrop.className.match(/\bmymodal-backdrop\b/));
+
+
+    shouldWarn("Invalid prop 'bsClass' of value 'mymodal'");
   });
 
   it('Should pass bsSize to the dialog', function () {

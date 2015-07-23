@@ -126,6 +126,7 @@ const Modal = React.createClass({
 
   getDefaultProps(){
     return {
+      bsClass: 'modal',
       show: false,
       animation: true,
       backdrop: true,
@@ -203,12 +204,12 @@ const Modal = React.createClass({
   },
 
   renderBackdrop(modal) {
-    let { animation } = this.props;
+    let { animation, bsClass } = this.props;
     let duration = Modal.BACKDROP_TRANSITION_DURATION;
 
     let backdrop = (
       <div ref="backdrop"
-       className={classNames('modal-backdrop', { in: this.props.show && !animation })}
+       className={classNames(`${bsClass}-backdrop`, { in: this.props.show && !animation })}
        onClick={this.handleBackdropClick}
       />
     );
