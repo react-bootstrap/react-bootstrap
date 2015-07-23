@@ -1,4 +1,5 @@
 import React, { cloneElement } from 'react';
+import classNames from 'classnames';
 import domUtils from './utils/domUtils';
 import { calcOverlayPosition } from './utils/overlayPositionUtils';
 import CustomPropTypes from './utils/CustomPropTypes';
@@ -40,7 +41,7 @@ class Position extends React.Component {
   }
 
   render() {
-    const {children, ...props} = this.props;
+    const {children, className, ...props} = this.props;
     const {positionLeft, positionTop, ...arrowPosition} = this.state;
 
     const child = React.Children.only(children);
@@ -51,6 +52,7 @@ class Position extends React.Component {
         ...arrowPosition,
         positionTop,
         positionLeft,
+        className: classNames(className, child.props.className),
         style: {
           ...child.props.style,
           left: positionLeft,

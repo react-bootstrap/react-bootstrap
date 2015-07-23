@@ -39,6 +39,19 @@ describe('OverlayTrigger', function() {
     instance.state.isOverlayShown.should.be.true;
   });
 
+  it('Should maintain overlay classname', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <OverlayTrigger trigger='click' overlay={<div className='test-overlay'>test</div>}>
+        <button>button</button>
+      </OverlayTrigger>
+    );
+
+    const overlayTrigger = React.findDOMNode(instance);
+    ReactTestUtils.Simulate.click(overlayTrigger);
+
+    expect(document.getElementsByClassName('test-overlay').length).to.equal(1)
+  });
+
   it('Should pass transition callbacks to Transition', function (done) {
     let count = 0;
     let increment = ()=> count++;
