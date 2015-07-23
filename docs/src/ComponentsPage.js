@@ -260,6 +260,10 @@ const ComponentsPage = React.createClass({
                 <div className='bs-docs-section'>
                   <h1 className='page-header'><Anchor id='modals'>Modals</Anchor> <small>Modal</small></h1>
 
+                  <h3><Anchor id='modals-static'>Static Markup</Anchor></h3>
+                  <p>A modal dialog component</p>
+                  <ReactPlayground codeText={Samples.ModalStatic} />
+
                   <h3><Anchor id='modals-live'>Basic example</Anchor></h3>
                   <p></p>
                   <p>

@@ -52,6 +52,7 @@ describe('Modal', function () {
         );
       }
     });
+
     let instance = render(
           <Container />
         , mountPoint);
@@ -60,7 +61,7 @@ describe('Modal', function () {
 
     assert.ok(React.findDOMNode(instance).className.match(/\bmodal-open\b/));
 
-    let backdrop = React.findDOMNode(modal.refs.modal).getElementsByClassName('modal-backdrop')[0];
+    let backdrop = React.findDOMNode(modal.refs.backdrop);
 
     ReactTestUtils.Simulate.click(backdrop);
 
@@ -74,18 +75,17 @@ describe('Modal', function () {
   it('Should close the modal when the backdrop is clicked', function (done) {
     let doneOp = function () { done(); };
     let instance = render(
-      <Modal show onHide={doneOp}>
+      <Modal show onHide={doneOp} animation={false}>
         <strong>Message</strong>
       </Modal>
     , mountPoint);
 
-    let backdrop = React.findDOMNode(instance.refs.modal)
-      .getElementsByClassName('modal-backdrop')[0];
+    let backdrop = React.findDOMNode(instance.refs.backdrop);
 
     ReactTestUtils.Simulate.click(backdrop);
   });
 
-  it('Should close the modal when the modal background is clicked', function (done) {
+  it('Should close the modal when the modal dialog is clicked', function (done) {
     let doneOp = function () { done(); };
 
     let instance = render(
@@ -94,10 +94,9 @@ describe('Modal', function () {
       </Modal>
     , mountPoint);
 
-    let backdrop = React.findDOMNode(instance.refs.modal)
-        .getElementsByClassName('modal')[0];
+    let dialog = React.findDOMNode(instance.refs.dialog);
 
-    ReactTestUtils.Simulate.click(backdrop);
+    ReactTestUtils.Simulate.click(dialog);
   });
 
   it('Should close the modal when the modal close button is clicked', function (done) {
@@ -138,6 +137,32 @@ describe('Modal', function () {
 
     let dialog = ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.modal, 'modal-dialog');
     assert.match(dialog.props.className, /\btestCss\b/);
+  });
+
+  it('Should pass transition callbacks to Transition', function (done) {
+    let count = 0;
+    let increment = ()=> count++;
+
+    let instance = render(
+      <Modal show
+        onHide={()=>{}}
+        onExit={increment}
+        onExiting={increment}
+        onExited={()=> {
+          increment();
+          expect(count).to.equal(6);
+          done();
+        }}
+        onEnter={increment}
+        onEntering={increment}
+        onEntered={()=> {
+          increment();
+          instance.setProps({ show: false });
+        }}
+      >
+        <strong>Message</strong>
+      </Modal>
+      , mountPoint);
   });
 
   describe('Focused state', function () {
