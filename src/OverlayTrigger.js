@@ -5,7 +5,7 @@ import createChainedFunction from './utils/createChainedFunction';
 import createContextWrapper from './utils/createContextWrapper';
 import Overlay from './Overlay';
 import warning from 'react/lib/warning';
-
+import pick from 'lodash/object/pick';
 /**
  * Check if value one is inside or equal to the of value
  *
@@ -146,24 +146,26 @@ const OverlayTrigger = React.createClass({
   },
 
   getOverlay() {
-    let props = {
-      show:      this.state.isOverlayShown,
-      onHide:    this.hide,
-      rootClose: this.props.rootClose,
-      animation: this.props.animation,
+    let overlayProps = {
+      ...pick(this.props, Object.keys(Overlay.propTypes)),
+      show: this.state.isOverlayShown,
+      onHide: this.hide,
       target: this.getOverlayTarget,
-      placement: this.props.placement,
-      container: this.props.container,
-      containerPadding: this.props.containerPadding
+      onExit: this.props.onExit,
+      onExiting: this.props.onExiting,
+      onExited: this.props.onExited,
+      onEnter: this.props.onEnter,
+      onEntering: this.props.onEntering,
+      onEntered: this.props.onEntered
     };
 
     let overlay = cloneElement(this.props.overlay, {
-      placement: props.placement,
-      container: props.container
+      placement: overlayProps.placement,
+      container: overlayProps.container
     });
 
     return (
-      <Overlay {...props}>
+      <Overlay {...overlayProps}>
         { overlay }
       </Overlay>
     );

@@ -39,6 +39,41 @@ describe('OverlayTrigger', function() {
     instance.state.isOverlayShown.should.be.true;
   });
 
+  it('Should pass transition callbacks to Transition', function (done) {
+    let count = 0;
+    let increment = ()=> count++;
+
+    let overlayTrigger;
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <OverlayTrigger
+        trigger='click'
+        overlay={<div>test</div>}
+        onHide={()=>{}}
+        onExit={increment}
+        onExiting={increment}
+        onExited={()=> {
+          increment();
+          expect(count).to.equal(6);
+          done();
+        }}
+        onEnter={increment}
+        onEntering={increment}
+        onEntered={()=> {
+          increment();
+          ReactTestUtils.Simulate.click(overlayTrigger);
+        }}
+      >
+        <button>button</button>
+      </OverlayTrigger>
+    );
+
+    overlayTrigger = React.findDOMNode(instance);
+
+    ReactTestUtils.Simulate.click(overlayTrigger);
+  });
+
+
   it('Should forward requested context', function() {
     const contextTypes = {
       key: React.PropTypes.string
