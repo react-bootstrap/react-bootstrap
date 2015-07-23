@@ -138,7 +138,9 @@ const OverlayTrigger = React.createClass({
   },
 
   componentDidUpdate(){
-    React.render(this._overlay, this._mountNode);
+    if (this._mountNode) {
+      React.render(this._overlay, this._mountNode);
+    }
   },
 
   getOverlayTarget() {
