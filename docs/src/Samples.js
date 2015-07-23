@@ -25,6 +25,7 @@ export default {
   SplitButtonDropup:             require('fs').readFileSync(__dirname + '/../examples/SplitButtonDropup.js', 'utf8'),
   SplitButtonRight:              require('fs').readFileSync(__dirname + '/../examples/SplitButtonRight.js', 'utf8'),
   PanelBasic:                    require('fs').readFileSync(__dirname + '/../examples/PanelBasic.js', 'utf8'),
+  PanelCollapsible:              require('fs').readFileSync(__dirname + '/../examples/PanelCollapsible.js', 'utf8'),
   PanelWithHeading:              require('fs').readFileSync(__dirname + '/../examples/PanelWithHeading.js', 'utf8'),
   PanelWithFooter:               require('fs').readFileSync(__dirname + '/../examples/PanelWithFooter.js', 'utf8'),
   PanelContextual:               require('fs').readFileSync(__dirname + '/../examples/PanelContextual.js', 'utf8'),
