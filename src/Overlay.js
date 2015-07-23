@@ -78,10 +78,9 @@ class Overlay extends React.Component {
         </Transition>
       );
     } else {
-      child = cloneElement(
-        child,
-        {className: classNames('in', child.className)}
-      );
+      child = cloneElement(child, {
+        className: classNames('in', child.props.className)
+      });
     }
 
     // This goes after everything else because it adds a wrapping div.
