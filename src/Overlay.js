@@ -59,13 +59,20 @@ class Overlay extends React.Component {
     );
 
     if (Transition) {
+      let { onExit, onExiting, onEnter, onEntering, onEntered } = props;
+
       // This animates the child node by injecting props, so it must precede
       // anything that adds a wrapping div.
       child = (
         <Transition
           in={props.show}
           transitionAppear
+          onExit={onExit}
+          onExiting={onExiting}
           onExited={this.onHiddenListener}
+          onEnter={onEnter}
+          onEntering={onEntering}
+          onEntered={onEntered}
         >
           {child}
         </Transition>
@@ -93,8 +100,12 @@ class Overlay extends React.Component {
     );
   }
 
-  handleHidden() {
+  handleHidden(...args) {
     this.setState({exited: true});
+
+    if (this.props.onExited) {
+      this.props.onExited(...args);
+    }
   }
 }
 
@@ -120,7 +131,37 @@ Overlay.propTypes = {
   animation: React.PropTypes.oneOfType([
       React.PropTypes.bool,
       CustomPropTypes.elementType
-  ])
+  ]),
+
+  /**
+   * Callback fired before the Overlay transitions in
+   */
+  onEnter: React.PropTypes.func,
+
+  /**
+   * Callback fired as the Overlay begins to transition in
+   */
+  onEntering: React.PropTypes.func,
+
+  /**
+   * Callback fired after the Overlay finishes transitioning in
+   */
+  onEntered: React.PropTypes.func,
+
+  /**
+   * Callback fired right before the Overlay transitions out
+   */
+  onExit: React.PropTypes.func,
+
+  /**
+   * Callback fired as the Overlay begins to transition out
+   */
+  onExiting: React.PropTypes.func,
+
+  /**
+   * Callback fired after the Overlay finishes transitioning out
+   */
+  onExited: React.PropTypes.func
 };
 
 Overlay.defaultProps = {
