@@ -51,8 +51,22 @@ const TabbedArea = React.createClass({
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.activeKey != null && nextProps.activeKey !== this.props.activeKey) {
+      // check if the 'previousActiveKey' child still exists
+      let previousActiveKey = this.props.activeKey;
+      React.Children.forEach(nextProps.children, (child) => {
+        if (React.isValidElement(child)) {
+          if (child.props.eventKey === previousActiveKey) {
+            this.setState({
+              previousActiveKey
+            });
+            return;
+          }
+        }
+      });
+
+      // if the 'previousActiveKey' child does not exist anymore
       this.setState({
-        previousActiveKey: this.props.activeKey
+        previousActiveKey: null
       });
     }
   },
@@ -66,15 +80,12 @@ const TabbedArea = React.createClass({
   render() {
     let { id, ...props } = this.props;
 
-    let activeKey =
-      this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
-
     function renderTabIfSet(child) {
       return child.props.tab != null ? this.renderTab(child) : null;
     }
 
     let nav = (
-      <Nav {...props} activeKey={activeKey} onSelect={this.handleSelect} ref="tabs">
+      <Nav {...props} activeKey={this.getActiveKey()} onSelect={this.handleSelect} ref="tabs">
         {ValidComponentChildren.map(this.props.children, renderTabIfSet, this)}
       </Nav>
     );
@@ -94,21 +105,22 @@ const TabbedArea = React.createClass({
   },
 
   renderPane(child, index) {
-    let activeKey = this.getActiveKey();
+    let previousActiveKey = this.state.previousActiveKey;
 
-    let active = (child.props.eventKey === activeKey &&
-            (this.state.previousActiveKey == null || !this.props.animation));
+    let shouldPaneBeSetActive = child.props.eventKey === this.getActiveKey();
+    let thereIsNoActivePane = previousActiveKey == null;
+
+    let paneIsAlreadyActive = previousActiveKey != null && child.props.eventKey === previousActiveKey;
 
     return cloneElement(
         child,
         {
-          active,
+          active: shouldPaneBeSetActive && (thereIsNoActivePane || !this.props.animation),
           id: panelId(this.props, child),
           'aria-labelledby': tabId(this.props, child),
           key: child.key ? child.key : index,
           animation: this.props.animation,
-          onAnimateOutEnd: (this.state.previousActiveKey != null &&
-            child.props.eventKey === this.state.previousActiveKey) ? this.handlePaneAnimateOutEnd : null
+          onAnimateOutEnd: paneIsAlreadyActive ? this.handlePaneAnimateOutEnd : null
         }
       );
   },
@@ -134,15 +146,20 @@ const TabbedArea = React.createClass({
     return !this._isChanging;
   },
 
-  handleSelect(key) {
+  handleSelect(selectedKey) {
     if (this.props.onSelect) {
       this._isChanging = true;
-      this.props.onSelect(key);
+      this.props.onSelect(selectedKey);
       this._isChanging = false;
-    } else if (key !== this.getActiveKey()) {
+      return;
+    }
+
+    // if there is no external handler, then use embedded one
+    let previousActiveKey = this.getActiveKey();
+    if (selectedKey !== previousActiveKey) {
       this.setState({
-        activeKey: key,
-        previousActiveKey: this.getActiveKey()
+        activeKey: selectedKey,
+        previousActiveKey
       });
     }
   }
