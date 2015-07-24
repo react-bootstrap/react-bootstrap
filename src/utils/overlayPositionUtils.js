@@ -26,8 +26,11 @@ const utils = {
 
     return {
       ...offset,
-      height: target.offsetHeight,
-      width: target.offsetWidth
+
+      // In Firefox, the target does not have a offsetHeight or offsetWidth
+      // property. For now, default them to 0 to keep code from breaking.
+      height: target.offsetHeight || 0,
+      width: target.offsetWidth || 0
     };
   },
 
