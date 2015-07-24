@@ -2,6 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import PaginationButton from './PaginationButton';
+import CustomPropTypes from './utils/CustomPropTypes';
+import SafeAnchor from './SafeAnchor';
 
 const Pagination = React.createClass({
   mixins: [BootstrapMixin],
@@ -15,7 +17,11 @@ const Pagination = React.createClass({
     last: React.PropTypes.bool,
     prev: React.PropTypes.bool,
     next: React.PropTypes.bool,
-    onSelect: React.PropTypes.func
+    onSelect: React.PropTypes.func,
+    /**
+     * You can use a custom element for the buttons
+     */
+    buttonComponentClass: CustomPropTypes.elementType
   },
 
   getDefaultProps() {
@@ -28,6 +34,7 @@ const Pagination = React.createClass({
       prev: false,
       next: false,
       ellipsis: true,
+      buttonComponentClass: SafeAnchor,
       bsClass: 'pagination'
     };
   },
@@ -40,7 +47,8 @@ const Pagination = React.createClass({
       activePage,
       items,
       onSelect,
-      ellipsis
+      ellipsis,
+      buttonComponentClass
     } = this.props;
 
     if(maxButtons){
@@ -68,7 +76,8 @@ const Pagination = React.createClass({
           key={pagenumber}
           eventKey={pagenumber}
           active={pagenumber === activePage}
-          onSelect={onSelect}>
+          onSelect={onSelect}
+          buttonComponentClass={buttonComponentClass}>
           {pagenumber}
         </PaginationButton>
       );
@@ -78,7 +87,8 @@ const Pagination = React.createClass({
       pageButtons.push(
         <PaginationButton
           key='ellipsis'
-          disabled>
+          disabled
+          buttonComponentClass={buttonComponentClass}>
           <span aria-label='More'>...</span>
         </PaginationButton>
       );
@@ -97,7 +107,8 @@ const Pagination = React.createClass({
         key='prev'
         eventKey={this.props.activePage - 1}
         disabled={this.props.activePage === 1}
-        onSelect={this.props.onSelect}>
+        onSelect={this.props.onSelect}
+        buttonComponentClass={this.props.buttonComponentClass}>
         <span aria-label='Previous'>&lsaquo;</span>
       </PaginationButton>
     );
@@ -113,7 +124,8 @@ const Pagination = React.createClass({
         key='next'
         eventKey={this.props.activePage + 1}
         disabled={this.props.activePage >= this.props.items}
-        onSelect={this.props.onSelect}>
+        onSelect={this.props.onSelect}
+        buttonComponentClass={this.props.buttonComponentClass}>
         <span aria-label='Next'>&rsaquo;</span>
       </PaginationButton>
     );
@@ -129,7 +141,8 @@ const Pagination = React.createClass({
         key='first'
         eventKey={1}
         disabled={this.props.activePage === 1 }
-        onSelect={this.props.onSelect}>
+        onSelect={this.props.onSelect}
+        buttonComponentClass={this.props.buttonComponentClass}>
         <span aria-label='First'>&laquo;</span>
       </PaginationButton>
     );
@@ -145,7 +158,8 @@ const Pagination = React.createClass({
         key='last'
         eventKey={this.props.items}
         disabled={this.props.activePage >= this.props.items}
-        onSelect={this.props.onSelect}>
+        onSelect={this.props.onSelect}
+        buttonComponentClass={this.props.buttonComponentClass}>
         <span aria-label='Last'>&raquo;</span>
       </PaginationButton>
     );
