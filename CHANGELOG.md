@@ -1,3 +1,18 @@
+v0.24.1 - Fri, 24 Jul 2015 23:12:09 GMT
+---------------------------------------
+
+- [e5155c6](../../commit/e5155c6) [fixed] ensure last focused item can be focused
+- [6a541ff](../../commit/6a541ff) [added] buttonComponentClass prop for Pagination
+- [29fe417](../../commit/29fe417) [fixed] overlay classNames are maintained by overlayTrigget
+- [d272389](../../commit/d272389) [added] Overlay and OverlayTrigger accept Transition callbacks
+- [596f40c](../../commit/596f40c) [fixed] Modal uses bsClass prop to set its classes
+- [86d3feb](../../commit/86d3feb) [fixed] added missed 'aria-label' prop type validation for 'ModalHeader'
+- [58eaab0](../../commit/58eaab0) [changed] pass transition callbacks to Modal Transition
+- [abccff9](../../commit/abccff9) [changed] expose static Modal Dialog component
+- [b5c1893](../../commit/b5c1893) [changed] unfix 'babel' back.
+
+
+
 v0.24.0 - Tue, 21 Jul 2015 22:13:05 GMT
 ---------------------------------------
 
