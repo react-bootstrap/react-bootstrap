@@ -360,15 +360,14 @@ const Modal = React.createClass({
     let current = domUtils.activeElement(this);
     let focusInModal = current && domUtils.contains(modalContent, current);
 
-    if (this.props.autoFocus && !focusInModal) {
+    if (modalContent && this.props.autoFocus && !focusInModal) {
       this.lastFocus = current;
-
       modalContent.focus();
     }
   },
 
   restoreLastFocus () {
-    if (this.lastFocus) {
+    if (this.lastFocus && this.lastFocus.focus) {
       this.lastFocus.focus();
       this.lastFocus = null;
     }
@@ -382,7 +381,7 @@ const Modal = React.createClass({
     let active = domUtils.activeElement(this);
     let modal = React.findDOMNode(this.refs.dialog);
 
-    if (modal !== active && !domUtils.contains(modal, active)){
+    if (modal && modal !== active && !domUtils.contains(modal, active)){
       modal.focus();
     }
   },
