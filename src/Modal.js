@@ -4,10 +4,11 @@ import classNames from 'classnames';
 import domUtils from './utils/domUtils';
 import EventListener from './utils/EventListener';
 import createChainedFunction from './utils/createChainedFunction';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 import Portal from './Portal';
 import Fade from './Fade';
-import Dialog from './ModalDialog';
+import ModalDialog from './ModalDialog';
 import Body from './ModalBody';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
@@ -94,7 +95,7 @@ function getScrollbarSize(){
 const Modal = React.createClass({
   propTypes: {
     ...Portal.propTypes,
-    ...Dialog.propTypes,
+    ...ModalDialog.propTypes,
 
     /**
      * Include a backdrop component. Specify 'static' for a backdrop that doesn't trigger an "onHide" when clicked.
@@ -109,6 +110,12 @@ const Modal = React.createClass({
      * Open and close the Modal with a slide and fade animation.
      */
     animation: React.PropTypes.bool,
+
+    /**
+     * A Component type that provides the modal content Markup. This is a useful prop when you want to use your own
+     * styles and markup to create a custom modal component.
+     */
+    dialogComponent: CustomPropTypes.elementType,
 
     /**
      * When `true` The modal will automatically shift focus to itself when it opens, and replace it to the last focused element when it closes.
@@ -127,6 +134,7 @@ const Modal = React.createClass({
   getDefaultProps(){
     return {
       bsClass: 'modal',
+      dialogComponent: ModalDialog,
       show: false,
       animation: true,
       backdrop: true,
@@ -145,6 +153,7 @@ const Modal = React.createClass({
     let { onExit, onExiting, onEnter, onEntering, onEntered } = props;
 
     let show = !!props.show;
+    let Dialog = props.dialogComponent;
 
     const mountModal = show || (animation && !this.state.exited);
     if (!mountModal) {
@@ -434,7 +443,7 @@ Modal.Header = Header;
 Modal.Title = Title;
 Modal.Footer = Footer;
 
-Modal.Dialog = Dialog;
+Modal.Dialog = ModalDialog;
 
 Modal.TRANSITION_DURATION = 300;
 Modal.BACKDROP_TRANSITION_DURATION = 150;
