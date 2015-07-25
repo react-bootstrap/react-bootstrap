@@ -148,6 +148,44 @@ describe('Modal', function () {
     assert.ok(dialog.className.match(/\bmodal-sm\b/));
   });
 
+  it('Should find nested Refs', function () {
+    let noOp = function () {};
+    let headerMsg = 'Header Message';
+    let titleMsg = 'Title Message';
+    let bodyMsg = 'Body Message';
+    let footerMsg = 'Footer Message';
+    let Xxx = React.createClass({
+      render(){
+        return (
+          <div>
+            <Modal show bsSize='small' onHide={noOp} ref='modal'>
+              <Modal.Header ref="header">
+                <Modal.Title ref="title">
+                  <strong ref='titleMsg'>{titleMsg}</strong>
+                </Modal.Title>
+                <strong ref='headerMsg'>{headerMsg}</strong>
+              </Modal.Header>
+              <Modal.Body ref='body'>
+                <strong ref='bodyMsg'>{bodyMsg}</strong>
+              </Modal.Body>
+              <Modal.Footer ref='footer'>
+                <strong ref='footerMsg'>{footerMsg}</strong>
+              </Modal.Footer>
+            </Modal>
+          </div>
+        );
+      }
+    });
+    let instance = render(
+      <Xxx/>
+    , mountPoint);
+
+    assert.ok(instance.refs.modal.refs.header.refs.headerMsg.props.children.match(headerMsg));
+    assert.ok(instance.refs.modal.refs.header.refs.title.refs.titleMsg.props.children.match(titleMsg));
+    assert.ok(instance.refs.modal.refs.body.refs.bodyMsg.props.children.match(bodyMsg));
+    assert.ok(instance.refs.modal.refs.footer.refs.footerMsg.props.children.match(footerMsg));
+  });
+
   it('Should pass dialogClassName to the dialog', function () {
     let noOp = function () {};
     let instance = render(

@@ -5,6 +5,9 @@ import classnames from 'classnames';
 class ModalHeader extends React.Component {
 
   render() {
+    let children = React.Children.map(this.props.children, function (child) {
+      return React.cloneElement(child, {ref: child.ref});
+    });
     return (
       <div
         {...this.props}
@@ -20,7 +23,7 @@ class ModalHeader extends React.Component {
             </span>
           </button>
         }
-        { this.props.children }
+        { children }
       </div>
     );
   }
