@@ -206,6 +206,11 @@ const ComponentsPage = React.createClass({
                   </p>
                   <ReactPlayground codeText={Samples.MenuItem} />
 
+                  <h3><Anchor id='menu-item-custom-anchor'>Custom anchor</Anchor></h3>
+                  <p>You can use your own custom component for inner anchor via <code>anchorComponentClass</code> property.</p>
+                  <p>By using your custom component you can set any additional custom property you need.</p>
+                  <ReactPlayground codeText={Samples.MenuItemCustomAnchor} />
+
                   <h3><Anchor id='menu-item-props'>Props</Anchor></h3>
                   <PropTable component='MenuItem'/>
                 </div>

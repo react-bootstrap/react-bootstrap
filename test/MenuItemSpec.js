@@ -36,17 +36,6 @@ describe('MenuItem', function () {
     assert.equal(anchorNode.getAttribute('title'), 'hi mom!');
   });
 
-  it('should have an anchor', function () {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <MenuItem>
-        Title
-      </MenuItem>
-    );
-
-    let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
-    assert.equal(React.findDOMNode(anchor).getAttribute('tabIndex'), '-1');
-  });
-
   it('should fire callback on click of link', function (done) {
     let selectOp = function (selectedKey) {
       assert.equal(selectedKey, '1');
@@ -115,5 +104,74 @@ describe('MenuItem', function () {
       </MenuItem>
     );
     assert.ok(React.findDOMNode(instance).className.match(/\bdisabled\b/));
+  });
+
+  describe('anchorComponentClass', function () {
+    it('uses SafeAnchor by default', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <MenuItem>
+          Title
+        </MenuItem>
+      );
+
+      let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
+      assert.equal(React.findDOMNode(anchor).getAttribute('tabIndex'), '-1');
+    });
+
+    it('should use a custom anchor component provided via anchorComponentClass', function () {
+      class CustomAnchor extends React.Component {
+        render() {
+          return <a {...this.props} className='my-custom'/>;
+        }
+      }
+
+      let instance = ReactTestUtils.renderIntoDocument(
+        <MenuItem anchorComponentClass={CustomAnchor}>
+          Title
+        </MenuItem>
+      );
+
+      assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-custom'));
+    });
+
+    it('should allow custom props and pass through existing ones', function () {
+      class CustomAnchor extends React.Component {
+        render() {
+          return (
+            <a {...this.props}
+              className='custom-anchor-class'
+              style={{color: 'red'}}
+              download='filename'
+              type='audio/vorbis'
+              rel='nofollow' />
+          );
+        }
+      }
+
+      let instance = ReactTestUtils.renderIntoDocument(
+        <MenuItem
+          anchorComponentClass={CustomAnchor}
+          href='/song.ogg'
+          title='title for menu item'
+          className='menu-item-class'>
+          Title
+        </MenuItem>
+      );
+
+      let node = React.findDOMNode(instance);
+      assert(node.className.match(/\bmenu-item-class\b/));
+      assert.equal(node.getAttribute('href'), null);
+      assert.equal(node.getAttribute('title'), null);
+
+      let anchorNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+      // custom properties
+      assert(anchorNode.className.match(/\bcustom-anchor-class\b/));
+      assert.equal(anchorNode.getAttribute('download'), 'filename');
+      assert.equal(anchorNode.getAttribute('rel'), 'nofollow');
+      assert.equal(anchorNode.style.color, 'red');
+      // pass through properties
+      assert.equal(anchorNode.getAttribute('href'), '/song.ogg');
+      assert.equal(anchorNode.getAttribute('title'), 'title for menu item');
+    });
   });
 });
