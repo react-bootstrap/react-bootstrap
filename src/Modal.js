@@ -196,9 +196,11 @@ const Modal = React.createClass({
       // TODO: use context in 0.14
       if (child && child.type && child.type.__isModalHeader) {
         return cloneElement(child, {
-          onHide: createChainedFunction(this.props.onHide, child.props.onHide)
+          onHide: createChainedFunction(this.props.onHide, child.props.onHide),
+          ref: child.ref
         });
       }
+      child = React.cloneElement(child, {ref: child.ref});
       return child;
     });
   },

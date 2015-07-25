@@ -4,9 +4,12 @@ import classnames from 'classnames';
 class ModalTitle extends React.Component {
 
   render() {
+    let children = React.Children.map(this.props.children, function (child) {
+      return React.cloneElement(child, {ref: child.ref});
+    });
     return (
       <h4 {...this.props} className={classnames(this.props.className, this.props.modalClassName)}>
-        { this.props.children }
+        { children }
       </h4>
     );
   }
