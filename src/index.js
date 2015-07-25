@@ -67,4 +67,17 @@ export Collapse from './Collapse';
 export Fade from './Collapse';
 
 export * as FormControls from './FormControls';
-export * as utils from './utils';
+
+import childrenValueInputValidation from './utils/childrenValueInputValidation';
+import createChainedFunction from './utils/createChainedFunction';
+import domUtils from './utils/domUtils';
+import ValidComponentChildren from './utils/ValidComponentChildren';
+import CustomPropTypes from './utils/CustomPropTypes';
+
+export const utils = {
+  childrenValueInputValidation,
+  createChainedFunction,
+  domUtils,
+  ValidComponentChildren,
+  CustomPropTypes
+};
