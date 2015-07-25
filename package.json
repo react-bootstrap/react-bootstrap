@@ -84,7 +84,6 @@
     "karma-webpack": "^1.5.0",
     "less": "^2.4.0",
     "less-loader": "^2.1.0",
-    "lodash": "^3.5.0",
     "marked": "^0.3.3",
     "mocha": "^2.2.1",
     "mt-changelog": "^0.6.1",
@@ -109,6 +108,7 @@
   },
   "dependencies": {
     "babel-runtime": "^5.1.10",
+    "lodash": "^3.5.0",
     "classnames": "^2.0.0"
   }
 }
