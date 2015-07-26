@@ -40,7 +40,11 @@ const styleMaps = {
     'large': 'lg',
     'medium': 'md',
     'small': 'sm',
-    'xsmall': 'xs'
+    'xsmall': 'xs',
+    'lg': 'lg',
+    'md': 'md',
+    'sm': 'sm',
+    'xs': 'xs'
   },
   GLYPHS: [
     'asterisk',

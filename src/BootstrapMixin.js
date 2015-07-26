@@ -16,7 +16,7 @@ const BootstrapMixin = {
     bsStyle: React.PropTypes.oneOf(styleMaps.STYLES),
     /**
      * Size variants
-     * @type {("xsmall"|"small"|"medium"|"large")}
+     * @type {("xsmall"|"small"|"medium"|"large"|"xs"|"sm"|"md"|"lg")}
      */
     bsSize: CustomPropTypes.keyOf(styleMaps.SIZES)
   },
