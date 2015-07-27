@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import SafeAnchor from './SafeAnchor';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 const MenuItem = React.createClass({
   propTypes: {
@@ -12,12 +13,17 @@ const MenuItem = React.createClass({
     onSelect:  React.PropTypes.func,
     eventKey:  React.PropTypes.any,
     active:    React.PropTypes.bool,
-    disabled:  React.PropTypes.bool
+    disabled:  React.PropTypes.bool,
+    /**
+     * You can use a custom element for inner anchor component
+     */
+    anchorComponentClass: CustomPropTypes.elementType
   },
 
   getDefaultProps() {
     return {
-      active: false
+      active: false,
+      anchorComponentClass: SafeAnchor
     };
   },
 
@@ -33,10 +39,11 @@ const MenuItem = React.createClass({
   },
 
   renderAnchor() {
+    let AnchorComponentClass = this.props.anchorComponentClass;
     return (
-      <SafeAnchor onClick={this.handleClick} href={this.props.href} target={this.props.target} title={this.props.title} tabIndex="-1">
+      <AnchorComponentClass onClick={this.handleClick} href={this.props.href} target={this.props.target} title={this.props.title} tabIndex="-1">
         {this.props.children}
-      </SafeAnchor>
+      </AnchorComponentClass>
     );
   },
 
