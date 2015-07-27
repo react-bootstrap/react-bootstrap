@@ -79,6 +79,15 @@ function getOffset(DOMNode) {
 }
 
 /**
+ * Get the height of the document
+ *
+ * @returns {documentHeight: number}
+ */
+function getDocumentHeight() {
+  return Math.max(document.documentElement.offsetHeight, document.height, document.body.scrollHeight, document.body.offsetHeight);
+}
+
+/**
  * Get elements position
  *
  * TODO: REMOVE JQUERY!
@@ -186,6 +195,7 @@ export default {
   ownerDocument,
   getComputedStyles,
   getOffset,
+  getDocumentHeight,
   getPosition,
   activeElement: getActiveElement,
   offsetParent: offsetParentFunc

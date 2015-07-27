@@ -38,7 +38,7 @@ const AffixMixin = {
     }
 
     DOMNode = React.findDOMNode(this);
-    scrollHeight = document.documentElement.offsetHeight;
+    scrollHeight = domUtils.getDocumentHeight();
     scrollTop = window.pageYOffset;
     position = domUtils.getOffset(DOMNode);
 
