@@ -226,6 +226,16 @@ const Modal = React.createClass({
   },
 
   _setDialogRef(ref){
+    // issue #1074
+    // due to: https://github.com/facebook/react/blob/v0.13.3/src/core/ReactCompositeComponent.js#L842
+    //
+    // when backdrop is `false` react hasn't had a chance to reassign the refs to a usable object, b/c there are no other
+    // "classic" refs on the component (or they haven't been processed yet)
+    // TODO: Remove the need for this in next breaking release
+    if (Object.isFrozen(this.refs) && !Object.keys(this.refs).length) {
+      this.refs = {};
+    }
+
     this.refs.dialog = ref;
 
     //maintains backwards compat with older component breakdown
