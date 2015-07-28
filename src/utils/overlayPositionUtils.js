@@ -3,42 +3,35 @@ import domUtils from './domUtils';
 const utils = {
 
   getContainerDimensions(containerNode) {
-    let width, height, scroll;
+    let size, scroll;
 
     if (containerNode.tagName === 'BODY') {
-      width = window.innerWidth;
-      height = window.innerHeight;
+      size = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
       scroll =
         domUtils.ownerDocument(containerNode).documentElement.scrollTop ||
         containerNode.scrollTop;
     } else {
-      width = containerNode.offsetWidth;
-      height = containerNode.offsetHeight;
+      size = domUtils.getSize(containerNode);
       scroll = containerNode.scrollTop;
     }
 
-    return {width, height, scroll};
+    return {...size, scroll};
   },
 
   getPosition(target, container) {
     const offset = container.tagName === 'BODY' ?
       domUtils.getOffset(target) : domUtils.getPosition(target, container);
-
-    return {
-      ...offset,
-
-      // In Firefox, the target does not have a offsetHeight or offsetWidth
-      // property. For now, default them to 0 to keep code from breaking.
-      height: target.offsetHeight || 0,
-      width: target.offsetWidth || 0
-    };
+    const size = domUtils.getSize(target);
+    return {...offset, ...size};
   },
 
   calcOverlayPosition(placement, overlayNode, target, container, padding) {
     const childOffset = utils.getPosition(target, container);
 
-    const overlayHeight = overlayNode.offsetHeight;
-    const overlayWidth = overlayNode.offsetWidth;
+    const {height: overlayHeight, width: overlayWidth} = domUtils.getSize(overlayNode);
 
     let positionLeft, positionTop, arrowOffsetLeft, arrowOffsetTop;
 
