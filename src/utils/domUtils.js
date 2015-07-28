@@ -145,8 +145,8 @@ function getPosition(elem, offsetParent) {
  */
 function getSize(elem) {
   let rect = {
-    width: elem.offsetWidth,
-    height: elem.offsetHeight
+    width: elem.offsetWidth || 0,
+    height: elem.offsetHeight || 0
   };
   if (typeof elem.getBoundingClientRect !== 'undefined') {
     let {width, height} = elem.getBoundingClientRect();
