@@ -160,6 +160,17 @@ describe('Modal', function () {
     assert.match(dialog.props.className, /\btestCss\b/);
   });
 
+  it('Should assign refs correctly when no backdrop', function () {
+
+    let test = () => render(
+      <Modal show backdrop={false} onHide={function () {}}>
+        <strong>Message</strong>
+      </Modal>
+    , mountPoint);
+
+    expect(test).not.to.throw();
+  });
+
   it('Should pass transition callbacks to Transition', function (done) {
     let count = 0;
     let increment = ()=> count++;
