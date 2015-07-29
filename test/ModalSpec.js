@@ -197,6 +197,22 @@ describe('Modal', function () {
       , mountPoint);
   });
 
+  it('Should unbind listeners when unmounted', function() {
+    render(
+        <div>
+          <Modal show onHide={() => null} animation={false}>
+            <strong>Foo bar</strong>
+          </Modal>
+        </div>
+    , mountPoint);
+
+    assert.include(document.body.className, 'modal-open');
+
+    render(<div />, mountPoint);
+
+    assert.notInclude(document.body.className, 'modal-open');
+  });
+
   describe('Focused state', function () {
     let focusableContainer = null;
 
