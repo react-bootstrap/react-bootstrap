@@ -219,5 +219,14 @@ describe('Panel', function () {
       assert.equal(anchor.getAttribute('aria-controls'), 'panel-1');
     });
 
+    it('Should add role="note"', function() {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Panel id='panel-1' collapsible expanded header="Heading">Panel content</Panel>
+      );
+
+      let collapse = React.findDOMNode(instance).querySelector('.panel-collapse');
+
+      assert.equal(collapse.getAttribute('role'), 'note');
+    });
   });
 });
