@@ -277,6 +277,12 @@ const Modal = React.createClass({
     }
   },
 
+  componentWillUnmount() {
+    if (this.props.show) {
+      this.onHide();
+    }
+  },
+
   onShow() {
     const doc = domUtils.ownerDocument(this);
     const win = domUtils.ownerWindow(this);
