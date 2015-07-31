@@ -99,6 +99,21 @@ describe('Modal', function () {
     ReactTestUtils.Simulate.click(dialog);
   });
 
+  it('Should not close the modal when the "static" backdrop is clicked', function () {
+    let onHideSpy = sinon.spy();
+    let instance = render(
+      <Modal show onHide={onHideSpy} backdrop='static'>
+        <strong>Message</strong>
+      </Modal>
+    , mountPoint);
+
+    let backdrop = React.findDOMNode(instance.refs.backdrop);
+
+    ReactTestUtils.Simulate.click(backdrop);
+
+    expect(onHideSpy).to.not.have.been.called;
+  });
+
   it('Should close the modal when the modal close button is clicked', function (done) {
     let doneOp = function () { done(); };
 
