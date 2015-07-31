@@ -216,10 +216,14 @@ const Modal = React.createClass({
     let { animation, bsClass } = this.props;
     let duration = Modal.BACKDROP_TRANSITION_DURATION;
 
+    // Don't handle clicks for "static" backdrops
+    let onClick = this.props.backdrop === true ?
+      this.handleBackdropClick : null;
+
     let backdrop = (
       <div ref="backdrop"
        className={classNames(`${bsClass}-backdrop`, { in: this.props.show && !animation })}
-       onClick={this.handleBackdropClick}
+       onClick={onClick}
       />
     );
 
