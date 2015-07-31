@@ -13,9 +13,7 @@ class ModalHeader extends React.Component {
         { this.props.closeButton &&
           <button
             className='close'
-            aria-label={this.props['aria-label'] || 'Close'} //eslint-disable-line react/prop-types
             onClick={this.props.onHide}
-            style={{ marginTop: -2 }}
           >
             <span aria-hidden="true">
               &times;
@@ -33,6 +31,11 @@ ModalHeader.__isModalHeader = true;
 
 ModalHeader.propTypes = {
   /**
+   * The 'aria-label' attribute is used to define a string that labels the current element.
+   * It is used for Assistive Technology when the label text is not visible on screen.
+   */
+  'aria-label': React.PropTypes.string,
+  /**
    * A css class applied to the Component
    */
   modalClassName: React.PropTypes.string,
@@ -48,6 +51,7 @@ ModalHeader.propTypes = {
 };
 
 ModalHeader.defaultProps = {
+  'aria-label': 'Close',
   modalClassName: 'modal-header',
   closeButton: false
 };

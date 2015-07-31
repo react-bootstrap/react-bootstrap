@@ -1,6 +1,6 @@
 class Example extends React.Component {
-  constructor(props, context){
-    super(props, context);
+  constructor(...args){
+    super(...args);
     this.state = { show: false };
   }
   render(){

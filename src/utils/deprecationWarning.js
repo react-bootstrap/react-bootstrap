@@ -1,14 +1,11 @@
+import warning from 'react/lib/warning';
+
 export default function deprecationWarning(oldname, newname, link) {
-  if (process.env.NODE_ENV !== 'production') {
-    if ((typeof console === 'undefined') || (typeof console.warn !== 'function')) {
-      return;
-    }
+  let message = `${oldname} is deprecated. Use ${newname} instead.`;
 
-    let message = `${oldname} is deprecated. Use ${newname} instead.`;
-    console.warn(message);
-
-    if (link) {
-      console.warn(`You can read more about it at ${link}`);
-    }
+  if (link) {
+    message += `\nYou can read more about it at ${link}`;
   }
+
+  warning(false, message);
 }

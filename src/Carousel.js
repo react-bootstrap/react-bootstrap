@@ -266,26 +266,28 @@ const Carousel = React.createClass({
   handleSelect(index, direction) {
     clearTimeout(this.timeout);
 
-    let previousActiveIndex = this.getActiveIndex();
-    direction = direction || this.getDirection(previousActiveIndex, index);
+    if (this.isMounted()) {
+      let previousActiveIndex = this.getActiveIndex();
+      direction = direction || this.getDirection(previousActiveIndex, index);
 
-    if (this.props.onSelect) {
-      this.props.onSelect(index, direction);
-    }
-
-    if (this.props.activeIndex == null && index !== previousActiveIndex) {
-      if (this.state.previousActiveIndex != null) {
-        // If currently animating don't activate the new index.
-        // TODO: look into queuing this canceled call and
-        // animating after the current animation has ended.
-        return;
+      if (this.props.onSelect) {
+        this.props.onSelect(index, direction);
       }
 
-      this.setState({
-        activeIndex: index,
-        previousActiveIndex,
-        direction
-      });
+      if (this.props.activeIndex == null && index !== previousActiveIndex) {
+        if (this.state.previousActiveIndex != null) {
+          // If currently animating don't activate the new index.
+          // TODO: look into queuing this canceled call and
+          // animating after the current animation has ended.
+          return;
+        }
+
+        this.setState({
+          activeIndex: index,
+          previousActiveIndex,
+          direction
+        });
+      }
     }
   }
 });

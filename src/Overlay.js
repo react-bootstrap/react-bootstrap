@@ -1,4 +1,6 @@
-/*eslint-disable object-shorthand, react/prop-types */
+/* eslint react/prop-types: [2, {ignore: ["container", "containerPadding", "target", "placement", "children"] }] */
+/* These properties are validated in 'Portal' and 'Position' components */
+
 import React, { cloneElement } from 'react';
 import Portal from './Portal';
 import Position from './Position';
@@ -7,31 +9,24 @@ import CustomPropTypes from './utils/CustomPropTypes';
 import Fade from './Fade';
 import classNames from 'classnames';
 
-
 class Overlay extends React.Component {
-
-  constructor(props, context){
+  constructor(props, context) {
     super(props, context);
 
-    this.state = { exited: false };
+    this.state = {exited: !props.show};
     this.onHiddenListener = this.handleHidden.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    let state = {};
-
-    if ( !nextProps.show && this.props.show ){
-      state.exiting = true;
-    }
-
     if (nextProps.show) {
-      state = { exited: false, exiting: false };
+      this.setState({exited: false});
+    } else if (!nextProps.animation) {
+      // Otherwise let handleHidden take care of marking exited.
+      this.setState({exited: true});
     }
-
-    this.setState(state);
   }
 
-  render(){
+  render() {
     let {
         container
       , containerPadding
@@ -42,56 +37,74 @@ class Overlay extends React.Component {
       , animation: Transition
       , ...props } = this.props;
 
-    let child = null;
-
-    if ( Transition === true ){
+    if (Transition === true) {
       Transition = Fade;
     }
 
-    if (props.show || (Transition && this.state.exiting && !this.state.exited)) {
-
-      child = children;
-
-      // Position the child before the animation to avoid `null` DOM nodes
-      child = (
-        <Position {...{ container, containerPadding, target, placement }}>
-          { child }
-        </Position>
-      );
-
-      child = Transition
-          ? (
-            <Transition
-              unmountOnExit
-              in={props.show}
-              transitionAppear={props.show}
-              onExited={this.onHiddenListener}
-            >
-              { child }
-            </Transition>
-          )
-          : cloneElement(child, { className: classNames('in', child.className) });
-
-      //Adds a wrapping div so it cannot be before Transition
-      if (rootClose) {
-        child = (
-          <RootCloseWrapper onRootClose={props.onHide}>
-            { child }
-          </RootCloseWrapper>
-        );
-      }
+    // Don't un-render the overlay while it's transitioning out.
+    const mountOverlay = props.show || (Transition && !this.state.exited);
+    if (!mountOverlay) {
+      // Don't bother showing anything if we don't have to.
+      return null;
     }
 
+    let child = children;
+
+    // Position is be inner-most because it adds inline styles into the child,
+    // which the other wrappers don't forward correctly.
+    child = (
+      <Position {...{container, containerPadding, target, placement}}>
+        {child}
+      </Position>
+    );
+
+    if (Transition) {
+      let { onExit, onExiting, onEnter, onEntering, onEntered } = props;
+
+      // This animates the child node by injecting props, so it must precede
+      // anything that adds a wrapping div.
+      child = (
+        <Transition
+          in={props.show}
+          transitionAppear
+          onExit={onExit}
+          onExiting={onExiting}
+          onExited={this.onHiddenListener}
+          onEnter={onEnter}
+          onEntering={onEntering}
+          onEntered={onEntered}
+        >
+          {child}
+        </Transition>
+      );
+    } else {
+      child = cloneElement(child, {
+        className: classNames('in', child.props.className)
+      });
+    }
+
+    // This goes after everything else because it adds a wrapping div.
+    if (rootClose) {
+      child = (
+        <RootCloseWrapper onRootClose={props.onHide}>
+          {child}
+        </RootCloseWrapper>
+      );
+    }
 
     return (
       <Portal container={container}>
-        { child }
+        {child}
       </Portal>
     );
   }
 
-  handleHidden(){
-    this.setState({ exited: true, exiting: false });
+  handleHidden(...args) {
+    this.setState({exited: true});
+
+    if (this.props.onExited) {
+      this.props.onExited(...args);
+    }
   }
 }
 
@@ -117,7 +130,37 @@ Overlay.propTypes = {
   animation: React.PropTypes.oneOfType([
       React.PropTypes.bool,
       CustomPropTypes.elementType
-  ])
+  ]),
+
+  /**
+   * Callback fired before the Overlay transitions in
+   */
+  onEnter: React.PropTypes.func,
+
+  /**
+   * Callback fired as the Overlay begins to transition in
+   */
+  onEntering: React.PropTypes.func,
+
+  /**
+   * Callback fired after the Overlay finishes transitioning in
+   */
+  onEntered: React.PropTypes.func,
+
+  /**
+   * Callback fired right before the Overlay transitions out
+   */
+  onExit: React.PropTypes.func,
+
+  /**
+   * Callback fired as the Overlay begins to transition out
+   */
+  onExiting: React.PropTypes.func,
+
+  /**
+   * Callback fired after the Overlay finishes transitioning out
+   */
+  onExited: React.PropTypes.func
 };
 
 Overlay.defaultProps = {

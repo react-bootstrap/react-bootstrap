@@ -38,7 +38,7 @@ const PageItem = React.createClass({
   },
 
   handleSelect(e) {
-    if (this.props.onSelect) {
+    if (this.props.onSelect || this.props.disabled) {
       e.preventDefault();
 
       if (!this.props.disabled) {

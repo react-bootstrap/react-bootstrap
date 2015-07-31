@@ -3,39 +3,35 @@ import domUtils from './domUtils';
 const utils = {
 
   getContainerDimensions(containerNode) {
-    let width, height, scroll;
+    let size, scroll;
 
     if (containerNode.tagName === 'BODY') {
-      width = window.innerWidth;
-      height = window.innerHeight;
+      size = {
+        width: window.innerWidth,
+        height: window.innerHeight
+      };
       scroll =
         domUtils.ownerDocument(containerNode).documentElement.scrollTop ||
         containerNode.scrollTop;
     } else {
-      width = containerNode.offsetWidth;
-      height = containerNode.offsetHeight;
+      size = domUtils.getSize(containerNode);
       scroll = containerNode.scrollTop;
     }
 
-    return {width, height, scroll};
+    return {...size, scroll};
   },
 
   getPosition(target, container) {
     const offset = container.tagName === 'BODY' ?
       domUtils.getOffset(target) : domUtils.getPosition(target, container);
-
-    return {
-      ...offset, // eslint-disable-line object-shorthand
-      height: target.offsetHeight,
-      width: target.offsetWidth
-    };
+    const size = domUtils.getSize(target);
+    return {...offset, ...size};
   },
 
   calcOverlayPosition(placement, overlayNode, target, container, padding) {
     const childOffset = utils.getPosition(target, container);
 
-    const overlayHeight = overlayNode.offsetHeight;
-    const overlayWidth = overlayNode.offsetWidth;
+    const {height: overlayHeight, width: overlayWidth} = domUtils.getSize(overlayNode);
 
     let positionLeft, positionTop, arrowOffsetLeft, arrowOffsetTop;
 

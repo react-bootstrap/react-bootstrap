@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import createSelectedEvent from './utils/createSelectedEvent';
-import SafeAnchor from './SafeAnchor';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 const PaginationButton = React.createClass({
   mixins: [BootstrapMixin],
@@ -15,7 +15,11 @@ const PaginationButton = React.createClass({
     ]),
     onSelect: React.PropTypes.func,
     disabled: React.PropTypes.bool,
-    active: React.PropTypes.bool
+    active: React.PropTypes.bool,
+    /**
+     * You can use a custom element for this component
+     */
+    buttonComponentClass: CustomPropTypes.elementType
   },
 
   getDefaultProps() {
@@ -41,12 +45,14 @@ const PaginationButton = React.createClass({
 
     let {
       className,
-      ...anchorProps // eslint-disable-line object-shorthand
+      ...anchorProps
     } = this.props;
+
+    let ButtonComponentClass = this.props.buttonComponentClass;
 
     return (
       <li className={classNames(className, classes)}>
-        <SafeAnchor
+        <ButtonComponentClass
           {...anchorProps}
           onClick={this.handleClick} />
       </li>

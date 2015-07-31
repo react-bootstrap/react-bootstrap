@@ -21,26 +21,30 @@ const styleMaps = {
     'row': 'row',
     'well': 'well'
   },
-  STYLES: {
-    'default': 'default',
-    'primary': 'primary',
-    'success': 'success',
-    'info': 'info',
-    'warning': 'warning',
-    'danger': 'danger',
-    'link': 'link',
-    'inline': 'inline',
-    'tabs': 'tabs',
-    'pills': 'pills'
-  },
+  STYLES: [
+    'default',
+    'primary',
+    'success',
+    'info',
+    'warning',
+    'danger',
+    'link',
+    'inline',
+    'tabs',
+    'pills'
+  ],
   addStyle(name) {
-    styleMaps.STYLES[name] = name;
+    styleMaps.STYLES.push(name);
   },
   SIZES: {
     'large': 'lg',
     'medium': 'md',
     'small': 'sm',
-    'xsmall': 'xs'
+    'xsmall': 'xs',
+    'lg': 'lg',
+    'md': 'md',
+    'sm': 'sm',
+    'xs': 'xs'
   },
   GLYPHS: [
     'asterisk',

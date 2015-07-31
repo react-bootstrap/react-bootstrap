@@ -1,3 +1,79 @@
+v0.24.3 - Fri, 31 Jul 2015 18:09:54 GMT
+---------------------------------------
+
+- [02f8966](../../commit/02f8966) [changed] Update dependencies
+- [bae8ba9](../../commit/bae8ba9) [fixed] Carousel checks if it is mounted before setting state
+- [fd8d4d2](../../commit/fd8d4d2) [fixed] regression when clicking "static" modal backdrops
+- [0f46a97](../../commit/0f46a97) [added] Allow custom Modal dialog components
+- [a4ce7e1](../../commit/a4ce7e1) [fixed] added finalisation for the Modal when it was unbound from the tree
+- [d89d5f3](../../commit/d89d5f3) [fixed] Modal error when backdrop is `false`
+- [f410904](../../commit/f410904) [added] 'xs, sm, md, lg' values for 'bsSize'
+- [2558f32](../../commit/2558f32) [fixed] TabbedArea panes rendering with animation
+- [90aece6](../../commit/90aece6) [changed] Simplify 'styleMaps.STYLES' to be of Array type
+- [860d168](../../commit/860d168) [fixed] allow totally custom styles via 'bsStyle'
+- [74da76a](../../commit/74da76a) [fixed] Prevent click on PageItem if disabled
+
+
+
+v0.24.2 - Sat, 25 Jul 2015 00:47:07 GMT
+---------------------------------------
+
+- [4271eb3](../../commit/4271eb3) [fixed] add lodash as direct dependency
+
+
+
+v0.24.1 - Fri, 24 Jul 2015 23:12:09 GMT
+---------------------------------------
+
+- [e5155c6](../../commit/e5155c6) [fixed] ensure last focused item can be focused
+- [6a541ff](../../commit/6a541ff) [added] buttonComponentClass prop for Pagination
+- [29fe417](../../commit/29fe417) [fixed] overlay classNames are maintained by overlayTrigget
+- [d272389](../../commit/d272389) [added] Overlay and OverlayTrigger accept Transition callbacks
+- [596f40c](../../commit/596f40c) [fixed] Modal uses bsClass prop to set its classes
+- [86d3feb](../../commit/86d3feb) [fixed] added missed 'aria-label' prop type validation for 'ModalHeader'
+- [58eaab0](../../commit/58eaab0) [changed] pass transition callbacks to Modal Transition
+- [abccff9](../../commit/abccff9) [changed] expose static Modal Dialog component
+- [b5c1893](../../commit/b5c1893) [changed] unfix 'babel' back.
+
+
+
+v0.24.0 - Tue, 21 Jul 2015 22:13:05 GMT
+---------------------------------------
+
+- [924f8fb](../../commit/924f8fb) [fixed] Tooltip accepts a style prop
+- [dd064ad](../../commit/dd064ad) [fixed] remove extraneous styling
+- [c837d8d](../../commit/c837d8d) [fixed] Only calculate overlay position on display
+- [fbf9ed6](../../commit/fbf9ed6) [changed] Add deprecation warning that factories will be removed
+- [a4385d3](../../commit/a4385d3) [fixed] Portal doesn't mount extra node
+- [6744b94](../../commit/6744b94) [fixed] 'modalClassName' property for 'ModalTitle'
+- [3e6523a](../../commit/3e6523a) [added] ListGroup supports iterator as child
+- [ec368f0](../../commit/ec368f0) [added] Fade Component, replaces FadeMixin
+- [0503507](../../commit/0503507) [added] Collapse Component, replaces CollapsibleMixin
+- [4fb7e0d](../../commit/4fb7e0d) [changed] Remove Overlay and Modal deprecations
+- [0683df7](../../commit/0683df7) [fixed] 'stacked' progress with 'active' and 'striped' children
+- [a3c5400](../../commit/a3c5400) [fixed] Add missed 'type' property React.PropTypes.<type> checking
+- [a4c065e](../../commit/a4c065e) [added] links to every component / example on Components page
+- [eb0c323](../../commit/eb0c323) [fixed] Position.js typo `componentDidUpate`
+- [9feddf9](../../commit/9feddf9) [fixed] 'componentWillReceiveProps' method name of Position component
+- [c64679f](../../commit/c64679f) [fixed] Active Next and Last button in Pagination when ellipsis=true and items=0
+- [9dae734](../../commit/9dae734) [fixed] Negative page number in Pagination when ellipsis=true and items=1
+- [ffbcf39](../../commit/ffbcf39) [fixed] html id and class attributes handling for Nav
+- [89ea6ed](../../commit/89ea6ed) [fixed] Add missed propType validation for Button 'type' property
+- [b1b6a4c](../../commit/b1b6a4c) [changed] Add two-release deprecation policy
+- [e89b9bc](../../commit/e89b9bc) [removed] Don't need to disable Babel cache
+- [d12d59e](../../commit/d12d59e) [changed] Enabled "loose" Babel transpilation
+- [01c547f](../../commit/01c547f) [fixed] Do not use Babel cache for release build
+- [b67081b](../../commit/b67081b) [fixed] rootClose behavior on replaced elements
+- [fbbb344](../../commit/fbbb344) [fixed] bower template.
+- [fafe46f](../../commit/fafe46f) [changed] Use named exports in index files
+- [6e985b0](../../commit/6e985b0) [removed] Individual files in bower release
+- [598b9d8](../../commit/598b9d8) [fixed] SafeAnchor event ordering
+- [beaa1fa](../../commit/beaa1fa) [changed] `PaginationButton` to use `SafeAnchor`
+- [9c09e2a](../../commit/9c09e2a) [fixed] Keyboard accessibility for anchors serving as buttons
+- [ce5b436](../../commit/ce5b436) [removed] Input type=submit deprecation warning.
+
+
+
 v0.23.7 - Wed, 01 Jul 2015 15:18:30 GMT
 ---------------------------------------
 

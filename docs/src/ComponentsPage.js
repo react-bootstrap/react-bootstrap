@@ -219,6 +219,9 @@ const ComponentsPage = React.createClass({
                   <p>You can pass on any additional properties you need, e.g. a custom <code>onClick</code> handler, as it is shown in the example code. They all will apply to the wrapper <code>div</code> element.</p>
                   <ReactPlayground codeText={Samples.PanelBasic} />
 
+                  <h3><Anchor id='panels-collapsible'>Collapsible Panel</Anchor></h3>
+                  <ReactPlayground codeText={Samples.PanelCollapsible} />
+
                   <h3><Anchor id='panels-heading'>Panel with heading</Anchor></h3>
                   <p>Easily add a heading container to your panel with the <code>header</code> prop.</p>
                   <ReactPlayground codeText={Samples.PanelWithHeading} />
@@ -259,6 +262,10 @@ const ComponentsPage = React.createClass({
 
                 <div className='bs-docs-section'>
                   <h1 className='page-header'><Anchor id='modals'>Modals</Anchor> <small>Modal</small></h1>
+
+                  <h3><Anchor id='modals-static'>Static Markup</Anchor></h3>
+                  <p>A modal dialog component</p>
+                  <ReactPlayground codeText={Samples.ModalStatic} />
 
                   <h3><Anchor id='modals-live'>Basic example</Anchor></h3>
                   <p></p>

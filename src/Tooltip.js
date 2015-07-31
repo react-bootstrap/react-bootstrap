@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
@@ -60,7 +59,9 @@ const Tooltip = React.createClass({
 
     const style = {
       'left': this.props.positionLeft,
-      'top': this.props.positionTop
+      'top': this.props.positionTop,
+      // we don't want to expose the `style` property
+      ...this.props.style // eslint-disable-line react/prop-types
     };
 
     const arrowStyle = {
