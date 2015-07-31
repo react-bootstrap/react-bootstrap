@@ -80,7 +80,8 @@ const Panel = React.createClass({
           className={collapseClass}
           id={this.props.id}
           ref='panel'
-          aria-expanded={this.isExpanded()}>
+          aria-expanded={this.isExpanded()}
+          role='note'>
           {this.renderBody()}
 
         </div>
