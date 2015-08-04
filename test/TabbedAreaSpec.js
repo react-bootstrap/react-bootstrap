@@ -185,18 +185,16 @@ describe('TabbedArea', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-pills'));
   });
 
-  it('Should pass className to rendered Tab NavItem', function () {
+  it('Should not pass className to NavItem', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <TabbedArea activeKey={3}>
-        <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
-        <TabPane className="pull-right" tab="Tab 2" eventKey={3}>Tab 3 content</TabPane>
+      <TabbedArea bsStyle="pills" defaultActiveKey={1} animation={false}>
+        <TabPane tab="Tab 1" eventKey={1} className="my-tab-class">Tab 1 content</TabPane>
+        <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
       </TabbedArea>
     );
-
-    let tabPane = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
-
-    assert.equal(tabPane.length, 2);
-    assert.equal(React.findDOMNode(tabPane[1]).getAttribute('class').match(/pull-right/)[0], 'pull-right');
+    let myTabClass = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-tab-class');
+    let myNavItem = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'nav-pills')[0];
+    assert.notDeepEqual(myTabClass, myNavItem);
   });
 
   it('Should pass disabled to NavItem', function () {
@@ -208,6 +206,18 @@ describe('TabbedArea', function () {
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled'));
+  });
+
+  it('Should pass className, Id, and style to TabbedArea', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <TabbedArea bsStyle="pills" defaultActiveKey={1} animation={false}
+            className="my-tabs-class" id="my-tabs-id" style={{opacity: 0.5}}>
+      </TabbedArea>
+    );
+    assert.equal(React.findDOMNode(instance).getAttribute('class'), 'my-tabs-class');
+    assert.equal(React.findDOMNode(instance).getAttribute('id'), 'my-tabs-id');
+    assert.deepEqual(React.findDOMNode(instance).getAttribute('style'), 'opacity:0.5;');
+
   });
 
   it('Should not show content when clicking disabled tab', function () {

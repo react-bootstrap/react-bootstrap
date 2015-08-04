@@ -21,15 +21,14 @@ function getDefaultActiveKeyFromChildren(children) {
 }
 
 const TabbedArea = React.createClass({
-  mixins: [BootstrapMixin],
-
   propTypes: {
     activeKey: React.PropTypes.any,
     defaultActiveKey: React.PropTypes.any,
     bsStyle: React.PropTypes.oneOf(['tabs', 'pills']),
     animation: React.PropTypes.bool,
     id: React.PropTypes.string,
-    onSelect: React.PropTypes.func
+    onSelect: React.PropTypes.func,
+    className: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -78,7 +77,11 @@ const TabbedArea = React.createClass({
   },
 
   render() {
-    let { id, ...props } = this.props;
+    let {
+      id,
+      className,
+      style, // eslint-disable-line react/prop-types
+      ...props } = this.props;
 
     function renderTabIfSet(child) {
       return child.props.tab != null ? this.renderTab(child) : null;
@@ -91,9 +94,9 @@ const TabbedArea = React.createClass({
     );
 
     return (
-      <div>
+      <div id={id} className={className} style={style}>
         {nav}
-        <div id={id} className="tab-content" ref="panes">
+        <div className="tab-content" ref="panes">
           {ValidComponentChildren.map(this.props.children, this.renderPane)}
         </div>
       </div>
@@ -126,7 +129,7 @@ const TabbedArea = React.createClass({
   },
 
   renderTab(child) {
-    let {eventKey, className, tab, disabled } = child.props;
+    let {eventKey, tab, disabled } = child.props;
 
     return (
       <NavItem
@@ -134,7 +137,6 @@ const TabbedArea = React.createClass({
         ref={'tab' + eventKey}
         aria-controls={panelId(this.props, child)}
         eventKey={eventKey}
-        className={className}
         disabled={disabled}>
         {tab}
       </NavItem>
