@@ -30,7 +30,7 @@ const PaginationButton = React.createClass({
   },
 
   handleClick(event) {
-    if (this.props.onSelect) {
+    if (!this.props.disabled && this.props.onSelect) {
       let selectedEvent = createSelectedEvent(this.props.eventKey);
       this.props.onSelect(event, selectedEvent);
     }
