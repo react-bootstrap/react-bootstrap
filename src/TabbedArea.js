@@ -4,6 +4,8 @@ import BootstrapMixin from './BootstrapMixin';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import Nav from './Nav';
 import NavItem from './NavItem';
+import deprecationWarning from './utils/deprecationWarning';
+
 
 let panelId = (props, child) => child.props.id ? child.props.id : props.id && (props.id + '___panel___' + child.props.eventKey);
 let tabId = (props, child) => child.props.id ? child.props.id + '___tab' : props.id && (props.id + '___tab___' + child.props.eventKey);
@@ -89,6 +91,8 @@ const TabbedArea = React.createClass({
         {ValidComponentChildren.map(this.props.children, renderTabIfSet, this)}
       </Nav>
     );
+
+    deprecationWarning('TabbedArea', 'Tabs');
 
     return (
       <div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import TransitionEvents from './utils/TransitionEvents';
+import deprecationWarning from './utils/deprecationWarning';
 
 const TabPane = React.createClass({
   propTypes: {
@@ -76,6 +77,8 @@ const TabPane = React.createClass({
       'active': this.props.active || this.state.animateOut,
       'in': this.props.active && !this.state.animateIn
     };
+
+    deprecationWarning('TabPane', 'Tab');
 
     return (
       <div {...this.props}
