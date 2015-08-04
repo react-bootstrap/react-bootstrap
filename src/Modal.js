@@ -163,7 +163,7 @@ const Modal = React.createClass({
     let modal = (
       <Dialog {...props}
         ref={this._setDialogRef}
-        className={classNames({ in: show && !animation })}
+        className={classNames(this.props.className, { in: show && !animation })}
         onClick={backdrop === true ? this.handleBackdropClick : null}
       >
         { this.renderContent() }

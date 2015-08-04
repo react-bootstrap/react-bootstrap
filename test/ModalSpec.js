@@ -130,6 +130,19 @@ describe('Modal', function () {
     ReactTestUtils.Simulate.click(button);
   });
 
+  it('Should pass className to the dialog', function () {
+    let noOp = function () {};
+    let instance = render(
+      <Modal show className='mymodal' onHide={noOp}>
+        <strong>Message</strong>
+      </Modal>
+    , mountPoint);
+
+    let dialog = React.findDOMNode(instance.refs.dialog);
+
+    assert.ok(dialog.className.match(/\bmymodal\b/));
+  });
+
   it('Should use bsClass on the dialog', function () {
     let noOp = function () {};
     let instance = render(
