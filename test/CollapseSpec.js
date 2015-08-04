@@ -213,4 +213,24 @@ describe('Collapse', function () {
       assert.equal(instance.collapse._dimension(), 'whatevs');
     });
   });
+
+  describe('with a role', function() {
+    beforeEach(function(){
+      instance = ReactTestUtils.renderIntoDocument(
+        <Component role="note">Panel content</Component>
+      );
+    });
+
+    it('sets aria-expanded true when expanded', function() {
+      let node = React.findDOMNode(instance);
+      instance.setProps({ in: true});
+      assert.equal(node.getAttribute('aria-expanded'), 'true');
+    });
+
+    it('sets aria-expanded false when collapsed', function() {
+      let node = React.findDOMNode(instance);
+      instance.setProps({ in: false});
+      assert.equal(node.getAttribute('aria-expanded'), 'false');
+    });
+  });
 });
