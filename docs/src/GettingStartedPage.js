@@ -65,9 +65,7 @@ $ bower install react-bootstrap`
                     <CodeExample
                       mode="javascript"
                       codeText={
-`define(['react-bootstrap/lib/Alert'], function(Alert) { ... });
-// or
-define(['react-bootstrap'], function(ReactBootstrap) { var Alert = ReactBootstrap.Alert; ... });`
+`define(['react-bootstrap'], function(ReactBootstrap) { var Alert = ReactBootstrap.Alert; ... });`
                       }
                     />
                   </div>
