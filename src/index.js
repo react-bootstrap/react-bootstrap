@@ -53,9 +53,11 @@ export SafeAnchor from './SafeAnchor';
 export SplitButton from './SplitButton';
 export styleMaps from './styleMaps';
 export SubNav from './SubNav';
+export Tab from './Tab';
 export TabbedArea from './TabbedArea';
 export Table from './Table';
 export TabPane from './TabPane';
+export Tabs from './Tabs';
 export Thumbnail from './Thumbnail';
 export Tooltip from './Tooltip';
 export Well from './Well';
@@ -67,4 +69,17 @@ export Collapse from './Collapse';
 export Fade from './Collapse';
 
 export * as FormControls from './FormControls';
-export * as utils from './utils';
+
+import childrenValueInputValidation from './utils/childrenValueInputValidation';
+import createChainedFunction from './utils/createChainedFunction';
+import domUtils from './utils/domUtils';
+import ValidComponentChildren from './utils/ValidComponentChildren';
+import CustomPropTypes from './utils/CustomPropTypes';
+
+export const utils = {
+  childrenValueInputValidation,
+  createChainedFunction,
+  domUtils,
+  ValidComponentChildren,
+  CustomPropTypes
+};
