@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import FormGroup from './FormGroup';
+import Glyphicon from './Glyphicon';
 
 class InputBase extends React.Component {
   getInputDOMNode() {
@@ -91,17 +92,20 @@ class InputBase extends React.Component {
   }
 
   renderIcon() {
-    let classes = {
-      'glyphicon': true,
-      'form-control-feedback': true,
-      'glyphicon-ok': this.props.bsStyle === 'success',
-      'glyphicon-warning-sign': this.props.bsStyle === 'warning',
-      'glyphicon-remove': this.props.bsStyle === 'error'
-    };
+    if (this.props.hasFeedback) {
+      if (this.props.feedbackIcon) {
+        return React.cloneElement(this.props.feedbackIcon, { formControlFeedback: true });
+      }
 
-    return this.props.hasFeedback ? (
-      <span className={classNames(classes)} key="icon" />
-    ) : null;
+      switch (this.props.bsStyle) {
+        case 'success': return <Glyphicon formControlFeedback glyph="ok" key="icon" />;
+        case 'warning': return <Glyphicon formControlFeedback glyph="warning-sign" key="icon" />;
+        case 'error': return <Glyphicon formControlFeedback glyph="remove" key="icon" />;
+        default: return <span className="form-control-feedback" key="icon" />;
+      }
+    } else {
+      return null;
+    }
   }
 
   renderHelp() {
@@ -214,6 +218,7 @@ InputBase.propTypes = {
   bsSize: React.PropTypes.oneOf(['small', 'medium', 'large']),
   bsStyle: React.PropTypes.oneOf(['success', 'warning', 'error']),
   hasFeedback: React.PropTypes.bool,
+  feedbackIcon: React.PropTypes.node,
   id: React.PropTypes.string,
   groupClassName: React.PropTypes.string,
   wrapperClassName: React.PropTypes.string,
