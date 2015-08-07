@@ -63,7 +63,7 @@
     "express": "^4.13.1",
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
-    "fs-extra": "^0.22.1",
+    "fs-extra": "^0.23.0",
     "fs-promise": "^0.3.1",
     "glob": "^5.0.14",
     "http-proxy": "^1.11.1",
