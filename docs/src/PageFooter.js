@@ -16,21 +16,21 @@ const PageHeader = React.createClass({
               <ul className='bs-docs-social-buttons'>
                 <li>
                   <iframe className='github-btn'
-                    src='http://ghbtns.com/github-btn.html?user=react-bootstrap&repo=react-bootstrap&type=watch&count=true'
+                    src='https://ghbtns.com/github-btn.html?user=react-bootstrap&repo=react-bootstrap&type=watch&count=true'
                     width={95}
                     height={20}
                     title='Star on GitHub' />
                 </li>
                 <li>
                   <iframe className='github-btn'
-                    src='http://ghbtns.com/github-btn.html?user=react-bootstrap&repo=react-bootstrap&type=fork&count=true'
+                    src='https://ghbtns.com/github-btn.html?user=react-bootstrap&repo=react-bootstrap&type=fork&count=true'
                     width={92}
                     height={20}
                     title='Fork on GitHub' />
                 </li>
                 <li>
                   <iframe
-                    src="http://platform.twitter.com/widgets/follow_button.html?screen_name=react_bootstrap&show_screen_name=true"
+                    src="https://platform.twitter.com/widgets/follow_button.html?screen_name=react_bootstrap&show_screen_name=true"
                     width={230}
                     height={20}
                     allowTransparency="true"
