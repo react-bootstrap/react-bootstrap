@@ -3,7 +3,6 @@ import CustomPropTypes from './utils/CustomPropTypes';
 import { OverlayMixin } from './OverlayMixin';
 
 let Portal = React.createClass({
-
   displayName: 'Portal',
 
   propTypes: {
@@ -15,7 +14,7 @@ let Portal = React.createClass({
 
   // we use the mixin for now, to avoid duplicating a bunch of code.
   // when the deprecation is removed we need to move the logic here from OverlayMixin
-  mixins: [ OverlayMixin ],
+  mixins: [OverlayMixin],
 
   renderOverlay() {
     if (!this.props.children) {

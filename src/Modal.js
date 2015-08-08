@@ -16,7 +16,6 @@ import Header from './ModalHeader';
 import Title from './ModalTitle';
 import Footer from './ModalFooter';
 
-
 /**
  * Gets the correct clientHeight of the modal container
  * when the body/window/document you need to use the docElement clientHeight
@@ -32,28 +31,27 @@ function containerClientHeight(container, context) {
       : container.clientHeight;
 }
 
-function getContainer(context){
+function getContainer(context) {
   return (context.props.container && React.findDOMNode(context.props.container)) ||
     domUtils.ownerDocument(context).body;
 }
 
-function requiredIfNot(key, type){
-  return function(props, propName, componentName){
+function requiredIfNot(key, type) {
+  return function(props, propName, componentName) {
     let propType = type;
 
-    if ( props[ key] === undefined ){
+    if (props[key] === undefined) {
       propType = propType.isRequired;
     }
     return propType(props, propName, componentName);
   };
 }
 
-function toChildArray(children){
+function toChildArray(children) {
   let result = [];
   React.Children.forEach(children, c => result.push(c));
   return result;
 }
-
 
 let currentFocusListener;
 
@@ -71,7 +69,7 @@ function onFocus(context, handler) {
   let useFocusin = !doc.addEventListener;
   let remove;
 
-  if ( currentFocusListener ) {
+  if (currentFocusListener) {
     currentFocusListener.remove();
   }
 
@@ -90,8 +88,8 @@ function onFocus(context, handler) {
 
 let scrollbarSize;
 
-function getScrollbarSize(){
-  if ( scrollbarSize !== undefined ){
+function getScrollbarSize() {
+  if (scrollbarSize !== undefined) {
     return scrollbarSize;
   }
 
@@ -121,12 +119,14 @@ const ModalMarkup = React.createClass({
      * @deprecated Use the "Modal.Header" component instead
      */
     title: React.PropTypes.node,
+
     /**
      * Include a backdrop component. Specify 'static' for a backdrop that doesn't trigger an "onHide" when clicked.
      */
     backdrop: React.PropTypes.oneOf(['static', true, false]),
+
     /**
-     * Include a backdrop component. Specify 'static' for a backdrop that doesn't trigger an "onHide" when clicked.
+     * Enable keyboard support. Close the modal when escape key is pressed.
      */
     keyboard: React.PropTypes.bool,
 
@@ -140,6 +140,7 @@ const ModalMarkup = React.createClass({
      * Open and close the Modal with a slide and fade animation.
      */
     animation: React.PropTypes.bool,
+
     /**
      * A Callback fired when the header closeButton or non-static backdrop is clicked.
      * @type {function}
@@ -185,21 +186,21 @@ const ModalMarkup = React.createClass({
     };
   },
 
-  getInitialState(){
+  getInitialState() {
     return { };
   },
 
   render() {
     let state = this.state;
-    let modalStyle = { ...state.dialogStyles, display: 'block'};
+    let modalStyle = { ...state.dialogStyles, display: 'block' };
     let dialogClasses = this.getBsClassSet();
 
     delete dialogClasses.modal;
     dialogClasses['modal-dialog'] = true;
 
     let classes = {
-      modal: true,
-      fade: this.props.animation,
+      'modal': true,
+      'fade': this.props.animation,
       'in': !this.props.animation
     };
 
@@ -227,9 +228,9 @@ const ModalMarkup = React.createClass({
 
   renderContent() {
     let children = toChildArray(this.props.children); // b/c createFragment is in addons and children can be a key'd object
-    let hasNewHeader = children.some( c => c.type.__isModalHeader);
+    let hasNewHeader = children.some(c => c.type.__isModalHeader);
 
-    if (!hasNewHeader && this.props.title != null){
+    if (!hasNewHeader && this.props.title != null) {
       deprecationWarning(
         'Specifying `closeButton` or `title` Modal props',
         'the new Modal.Header, and Modal.Title components');
@@ -257,7 +258,7 @@ const ModalMarkup = React.createClass({
   renderBackdrop(modal) {
     let classes = {
       'modal-backdrop': true,
-      fade: this.props.animation,
+      'fade': this.props.animation,
       'in': !this.props.animation
     };
 
@@ -272,8 +273,8 @@ const ModalMarkup = React.createClass({
     );
   },
 
-  _getHide(){
-    if ( !this.props.onHide && this.props.onRequestHide){
+  _getHide() {
+    if (!this.props.onHide && this.props.onRequestHide) {
       deprecationWarning('The Modal prop `onRequestHide`', 'the `onHide` prop');
     }
 
@@ -288,7 +289,7 @@ const ModalMarkup = React.createClass({
     React.findDOMNode(this.refs.backdrop).onclick = function () {};
   },
 
-  componentWillMount(){
+  componentWillMount() {
     this.checkForFocus();
   },
 
@@ -373,8 +374,8 @@ const ModalMarkup = React.createClass({
     this.setState(this._getStyles());
   },
 
-  checkForFocus(){
-    if ( domUtils.canUseDom ) {
+  checkForFocus() {
+    if (domUtils.canUseDom) {
       try {
         this.lastFocus = document.activeElement;
       }
@@ -382,7 +383,7 @@ const ModalMarkup = React.createClass({
     }
   },
 
-  focusModalContent () {
+  focusModalContent() {
     let modalContent = React.findDOMNode(this.refs.modal);
     let current = domUtils.activeElement(this);
     let focusInModal = current && domUtils.contains(modalContent, current);
@@ -394,7 +395,7 @@ const ModalMarkup = React.createClass({
     }
   },
 
-  restoreLastFocus () {
+  restoreLastFocus() {
     if (this.lastFocus) {
       this.lastFocus.focus();
       this.lastFocus = null;
@@ -402,20 +403,22 @@ const ModalMarkup = React.createClass({
   },
 
   enforceFocus() {
-    if ( !this.isMounted() ) {
+    if (!this.isMounted()) {
       return;
     }
 
     let active = domUtils.activeElement(this);
     let modal = React.findDOMNode(this.refs.modal);
 
-    if (modal !== active && !domUtils.contains(modal, active)){
+    if (modal !== active && !domUtils.contains(modal, active)) {
       modal.focus();
     }
   },
 
   _getStyles() {
-    if ( !domUtils.canUseDom ) { return {}; }
+    if (!domUtils.canUseDom) {
+      return {};
+    }
 
     let node = React.findDOMNode(this.refs.modal);
     let scrollHt = node.scrollHeight;
@@ -449,7 +452,7 @@ const Modal = React.createClass({
       <ModalMarkup {...props}>{this.props.children}</ModalMarkup>
     );
     // I can't think of another way to not break back compat while defaulting container
-    if ( !this.props.__isUsedInModalTrigger && show != null ){
+    if (!this.props.__isUsedInModalTrigger && show != null) {
       return (
         <Portal container={props.container} >
           { show && modal }

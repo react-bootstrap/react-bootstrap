@@ -6,10 +6,8 @@ import deprecationWarning from './utils/deprecationWarning';
 
 export const OverlayMixin = {
   propTypes: {
-
     container: CustomPropTypes.mountable
   },
-
 
   componentDidMount() {
     this._renderOverlay();
@@ -41,7 +39,6 @@ export const OverlayMixin = {
   },
 
   _renderOverlay() {
-
     let overlay = this.renderOverlay();
 
     // Save reference to help testing
@@ -80,7 +77,6 @@ export const OverlayMixin = {
 };
 
 export default {
-
   ...OverlayMixin,
 
   componentWillMount() {

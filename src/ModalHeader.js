@@ -1,22 +1,18 @@
-
 import React from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 class ModalHeader extends React.Component {
-
   render() {
     return (
       <div
         {...this.props}
-        className={classnames(this.props.className, this.props.modalClassName)}
-      >
+        className={classNames(this.props.className, this.props.modalClassName)}>
         { this.props.closeButton &&
           <button
             className='close'
             aria-label={this.props['aria-label'] || 'Close'} //eslint-disable-line react/prop-types
             onClick={this.props.onHide}
-            style={{ marginTop: -2 }}
-          >
+            style={{ marginTop: -2 }}>
             <span aria-hidden="true">
               &times;
             </span>
