@@ -175,4 +175,33 @@ describe('Pagination', function () {
       ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'div')[2]
     );
   });
+
+  it('should not fire "onSelect" event on disabled buttons', function () {
+    function onSelect() {
+      throw Error('this event should not happen');
+    }
+
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Pagination
+        onSelect={onSelect}
+        last
+        next
+        ellipsis
+        maxButtons={1}
+        activePage={1}
+        items={0} />
+    );
+    const liElements = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+
+    // buttons are disabled
+    assert.include(React.findDOMNode(liElements[0]).className, 'disabled');
+    assert.include(React.findDOMNode(liElements[1]).className, 'disabled');
+
+    const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
+    const nextButton = pageButtons[0];
+    const lastButton = pageButtons[1];
+
+    ReactTestUtils.Simulate.click( nextButton );
+    ReactTestUtils.Simulate.click( lastButton );
+  });
 });
