@@ -5,6 +5,7 @@ import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 import CustomPropTypes from './utils/CustomPropTypes';
 import DropdownBase, { singleMenuValidation, menuWithMenuItemSiblings } from './DropdownBase';
+import DropdownMenu from './DropdownMenu';
 import MenuItem from './MenuItem';
 import SplitToggle from './SplitToggle';
 import createChainedFunction from './utils/createChainedFunction';
@@ -83,3 +84,4 @@ SplitButton.propTypes = {
 
 SplitButton.Toggle = SplitToggle;
 SplitButton.Button = SplitButtonButton;
+SplitButton.Menu = DropdownMenu;

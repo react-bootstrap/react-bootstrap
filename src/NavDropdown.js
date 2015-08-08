@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import DropdownBase from './DropdownBase';
 import DropdownToggle from './DropdownToggle';
+import DropdownMenu from './DropdownMenu';
 
 export default class NavDropdown extends DropdownBase {
   constructor(props) {
@@ -38,3 +39,4 @@ NavDropdown.propTypes = {
 };
 
 NavDropdown.Toggle = DropdownToggle;
+NavDropdown.Menu = DropdownMenu;
