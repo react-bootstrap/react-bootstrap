@@ -134,7 +134,7 @@ class DropdownMenu extends React.Component {
     };
 
     return (
-      <ul className={classNames(classes)} role='menu' aria-labelledby={this.props.labelledBy}>
+      <ul className={classNames(this.props.className, classes)} role='menu' aria-labelledby={this.props.labelledBy}>
         {items}
       </ul>
     );
