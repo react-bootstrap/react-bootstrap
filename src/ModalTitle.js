@@ -1,11 +1,12 @@
 import React from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 class ModalTitle extends React.Component {
-
   render() {
     return (
-      <h4 {...this.props} className={classnames(this.props.className, this.props.modalClassName)}>
+      <h4
+        {...this.props}
+        className={classNames(this.props.className, this.props.modalClassName)}>
         { this.props.children }
       </h4>
     );
