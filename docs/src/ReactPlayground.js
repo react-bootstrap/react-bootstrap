@@ -19,6 +19,7 @@ const Collapse = require('../../src/Collapse');
 const CollapsibleMixin = require('../../src/CollapsibleMixin');
 const CollapsibleNav = require('../../src/CollapsibleNav');
 const DropdownButton = require('../../src/DropdownButton');
+const DropdownMenu = require('../../src/DropdownMenu');
 const Fade = require('../../src/Fade');
 const FormControls = require('../../src/FormControls');
 const Glyphicon = require('../../src/Glyphicon');

@@ -20,6 +20,7 @@
     "CarouselItem",
     "Col",
     "DropdownButton",
+    "DropdownMenu",
     "FormControls",
     "Glyphicon",
     "Grid",
