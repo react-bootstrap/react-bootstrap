@@ -4,11 +4,9 @@ import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 
 const ModalDialog = React.createClass({
-
-  mixins: [ BootstrapMixin ],
+  mixins: [BootstrapMixin],
 
   propTypes: {
-
     /**
      * A Callback fired when the header closeButton or non-static backdrop is clicked.
      * @type {function}
@@ -31,7 +29,7 @@ const ModalDialog = React.createClass({
   },
 
   render() {
-    let modalStyle = { display: 'block'};
+    let modalStyle = { display: 'block' };
     let bsClass = this.props.bsClass;
     let dialogClasses = this.getBsClassSet();
 
@@ -45,8 +43,7 @@ const ModalDialog = React.createClass({
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
-        className={classNames(this.props.className, bsClass)}
-      >
+        className={classNames(this.props.className, bsClass)}>
         <div className={classNames(this.props.dialogClassName, dialogClasses)}>
           <div className={`${bsClass}-content`} role='document'>
             { this.props.children }
