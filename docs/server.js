@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 import 'colors';
 import React from 'react';
 import express from 'express';

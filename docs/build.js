@@ -1,3 +1,5 @@
+/* eslint no-console: 0 */
+
 import React from 'react';
 import path from 'path';
 import Router from 'react-router';

@@ -265,7 +265,7 @@ const ReactPlayground = React.createClass({
     try {
       React.unmountComponentAtNode(mountNode);
     } catch (e) {
-      console.error(e);
+      console.error(e); // eslint-disable-line no-console
     }
 
     return mountNode;
@@ -283,9 +283,9 @@ const ReactPlayground = React.createClass({
       /* eslint-enable */
     } catch (err) {
       if (compiledCode !== null) {
-        console.log(err, compiledCode);
+        console.log(err, compiledCode); // eslint-disable-line no-console
       } else {
-        console.log(err);
+        console.log(err); // eslint-disable-line no-console
       }
 
       this.updateTimeout(
