@@ -529,6 +529,10 @@ const ComponentsPage = React.createClass({
                   <p>Set the <code>animation</code> prop to <code>false</code></p>
                   <ReactPlayground codeText={Samples.TabsNoAnimation} exampleClassName='bs-example-tabs' />
 
+                  <h3><Anchor id='left-tabs'>Left tabs</Anchor></h3>
+                  <p>Set <code>position</code> to <code>'left'</code>. Optionally, <code>tabWidth</code> can be passed the number of columns for the tabs.</p>
+                  <ReactPlayground codeText={Samples.LeftTabs} exampleClassName='bs-example-tabs' />
+
                   <div className='bs-callout bs-callout-info'>
                     <h4>Extends tabbed navigation</h4>
                     <p>This plugin extends the <a href='#navs'>tabbed navigation component</a> to add tabbable areas.</p>
