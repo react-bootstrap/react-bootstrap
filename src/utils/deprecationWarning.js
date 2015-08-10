@@ -1,6 +1,13 @@
 import warning from 'react/lib/warning';
 
+const warned = {};
+
 export default function deprecationWarning(oldname, newname, link) {
+  const warnKey = `${oldname}\n${newname}`;
+  if (warned[warnKey]) {
+    return;
+  }
+
   let message = `${oldname} is deprecated. Use ${newname} instead.`;
 
   if (link) {
@@ -8,4 +15,5 @@ export default function deprecationWarning(oldname, newname, link) {
   }
 
   warning(false, message);
+  warned[warnKey] = true;
 }

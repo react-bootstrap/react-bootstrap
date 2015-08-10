@@ -1,10 +1,12 @@
 import React from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 class ModalBody extends React.Component {
   render() {
     return (
-      <div {...this.props} className={classnames(this.props.className, this.props.modalClassName)}>
+      <div
+        {...this.props}
+        className={classNames(this.props.className, this.props.modalClassName)}>
         {this.props.children}
       </div>
     );

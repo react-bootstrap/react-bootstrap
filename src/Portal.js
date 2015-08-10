@@ -43,7 +43,6 @@ let Portal = React.createClass({
   },
 
   _renderOverlay() {
-
     let overlay = !this.props.children
       ? null
       : React.Children.only(this.props.children);

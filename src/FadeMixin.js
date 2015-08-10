@@ -17,14 +17,9 @@ function getElementsAndSelf (root, classes){
   return els;
 }
 
-let warned = false;
-
 export default {
   componentWillMount(){
-    if ( !warned ){
-      deprecationWarning('FadeMixin', 'Fade Component');
-      warned = true;
-    }
+    deprecationWarning('FadeMixin', 'Fade Component');
   },
 
   _fadeIn() {

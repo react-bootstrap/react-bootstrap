@@ -48,7 +48,7 @@ class Collapse extends React.Component {
       <Transition
         ref='transition'
         {...this.props}
-        aria-expanded={this.props.in}
+        aria-expanded={this.props.role ? this.props.in : null}
         className={this._dimension() === 'width' ? 'width' : ''}
         exitedClassName='collapse'
         exitingClassName='collapsing'
@@ -184,7 +184,12 @@ Collapse.propTypes = {
    * should animate in its specified dimension. Called with the current
    * dimension prop value and the DOM node.
    */
-  getDimensionValue: React.PropTypes.func
+  getDimensionValue: React.PropTypes.func,
+
+  /**
+   * ARIA role of collapsible element
+   */
+  role: React.PropTypes.string
 };
 
 Collapse.defaultProps = {
