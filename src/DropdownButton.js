@@ -27,7 +27,8 @@ const DropdownButton = React.createClass({
     noCaret:   React.PropTypes.bool,
     buttonClassName: React.PropTypes.string,
     className: React.PropTypes.string,
-    children:  React.PropTypes.node
+    children:  React.PropTypes.node,
+    disabled:  React.PropTypes.bool
   },
 
   render() {
@@ -81,7 +82,8 @@ const DropdownButton = React.createClass({
     let classes = {
         'dropdown': true,
         'open': this.state.open,
-        'dropup': this.props.dropup
+        'dropup': this.props.dropup,
+        'disabled': this.props.disabled
       };
 
     return (
@@ -111,7 +113,9 @@ const DropdownButton = React.createClass({
   handleDropdownClick(e) {
     e.preventDefault();
 
-    this.setDropdownState(!this.state.open);
+    if (!this.props.disabled) {
+      this.setDropdownState(!this.state.open);
+    }
   },
 
   handleOptionSelect(key) {
