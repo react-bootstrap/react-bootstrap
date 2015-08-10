@@ -7,12 +7,14 @@ const Glyphicon = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
-    glyph: React.PropTypes.oneOf(styleMaps.GLYPHS).isRequired
+    glyph: React.PropTypes.oneOf(styleMaps.GLYPHS).isRequired,
+    formControlFeedback: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
-      bsClass: 'glyphicon'
+      bsClass: 'glyphicon',
+      formControlFeedback: false
     };
   },
 
@@ -20,6 +22,7 @@ const Glyphicon = React.createClass({
     let classes = this.getBsClassSet();
 
     classes['glyphicon-' + this.props.glyph] = true;
+    classes['form-control-feedback'] = this.props.formControlFeedback;
 
     return (
       <span {...this.props} className={classNames(this.props.className, classes)}>
