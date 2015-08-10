@@ -4,6 +4,7 @@ import Input from '../src/Input';
 import Button from '../src/Button';
 import DropdownButton from '../src/DropdownButton';
 import MenuItem from '../src/MenuItem';
+import Glyphicon from '../src/Glyphicon';
 import {shouldWarn} from './helpers';
 
 describe('Input', function () {
@@ -278,5 +279,57 @@ describe('Input', function () {
 
     let node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'));
     assert.isNotNull(node.getAttribute('disabled'));
+  });
+
+  context('when Input listens to feedback', function () {
+    it('renders success feedback as Glyphicon', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Input hasFeedback={true} bsStyle="success" />
+      );
+
+      assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon'));
+      assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon-ok'));
+    });
+
+    it('renders warning feedback as Glyphicon', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Input hasFeedback={true} bsStyle="warning" />
+      );
+
+      assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon'));
+      assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon-warning-sign'));
+    });
+
+    it('renders error feedback as Glyphicon', function () {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Input hasFeedback={true} bsStyle="error" />
+      );
+
+      assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon'));
+      assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon-remove'));
+    });
+
+    context('when using feedbackIcon', function () {
+      it('uses the feedbackIcon', function () {
+        let customIcon = <Glyphicon glyph="star" />;
+
+        let instance = ReactTestUtils.renderIntoDocument(
+            <Input feedbackIcon={customIcon} hasFeedback={true} bsStyle="success" />
+        );
+
+        assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon'));
+        assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon-star'));
+      });
+
+      it('adds the .form-control-feedback class for Glyphicons', function () {
+        let customIcon = <Glyphicon glyph="star" />;
+
+        let instance = ReactTestUtils.renderIntoDocument(
+            <Input feedbackIcon={customIcon} hasFeedback={true} bsStyle="success" />
+        );
+
+        assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-control-feedback'));
+      });
+    });
   });
 });
