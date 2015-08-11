@@ -92,10 +92,9 @@
     "output-file-sync": "^1.1.0",
     "phantomjs": "^1.9.17",
     "portfinder": "^0.4.0",
-    "react": "^0.13.1",
+    "react": ">=0.14.0-beta",
     "react-component-metadata": "^1.2.1",
     "react-hot-loader": "^1.2.7",
-    "react-router": "^0.13.1",
     "rimraf": "^2.3.2",
     "semver": "^5.0.0",
     "sinon": "^1.10.3",
@@ -107,6 +106,7 @@
     "yargs": "^3.5.4"
   },
   "dependencies": {
-    "classnames": "^2.0.0"
+    "classnames": "^2.0.0",
+    "fbjs": "0.1.0-alpha.7"
   }
 }

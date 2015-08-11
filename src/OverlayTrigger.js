@@ -7,7 +7,7 @@ import Overlay from './Overlay';
 import position from './utils/overlayPositionUtils';
 
 import deprecationWarning from './utils/deprecationWarning';
-import warning from 'react/lib/warning';
+import warning from 'fbjs/lib/warning';
 
 /**
  * Check if value one is inside or equal to the of value
