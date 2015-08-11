@@ -19,6 +19,12 @@ const Alert = React.createClass({
     };
   },
 
+  _initDismissTimer() {
+    if (this.props.dismissAfter && this.props.onDismiss) {
+      this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter);
+    }
+  },
+
   renderDismissButton() {
     return (
       <button
@@ -46,9 +52,12 @@ const Alert = React.createClass({
   },
 
   componentDidMount() {
-    if (this.props.dismissAfter && this.props.onDismiss) {
-      this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter);
-    }
+    this._initDismissTimer();
+  },
+
+  componentDidUpdate() {
+    clearTimeout(this.dismissTimer);
+    this._initDismissTimer();
   },
 
   componentWillUnmount() {
