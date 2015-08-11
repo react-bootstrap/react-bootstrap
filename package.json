@@ -106,6 +106,7 @@
     "yargs": "^3.5.4"
   },
   "dependencies": {
-    "classnames": "^2.0.0"
+    "classnames": "^2.0.0",
+    "fbjs": "0.0.0"
   }
 }
