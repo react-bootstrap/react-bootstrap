@@ -29,7 +29,10 @@ const ModalDialog = React.createClass({
   },
 
   render() {
-    let modalStyle = { display: 'block' };
+    let modalStyle = {
+      display: 'block',
+      ...this.props.style
+    };
     let bsClass = this.props.bsClass;
     let dialogClasses = this.getBsClassSet();
 

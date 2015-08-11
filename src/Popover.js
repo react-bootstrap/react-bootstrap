@@ -61,7 +61,9 @@ const Popover = React.createClass({
     const style = {
       'left': this.props.positionLeft,
       'top': this.props.positionTop,
-      'display': 'block'
+      'display': 'block',
+      // we don't want to expose the `style` property
+      ...this.props.style // eslint-disable-line react/prop-types
     };
 
     const arrowStyle = {
