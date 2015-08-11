@@ -18,6 +18,12 @@ const Alert = React.createClass({
       closeLabel: 'Close Alert'
     };
   },
+  
+  _initDismissTimer() {
+    if (this.props.dismissAfter && this.props.onDismiss) {
+      this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter);
+    }
+  },
 
   renderDismissButton() {
     return (
@@ -44,13 +50,16 @@ const Alert = React.createClass({
       </div>
     );
   },
-
+  
   componentDidMount() {
-    if (this.props.dismissAfter && this.props.onDismiss) {
-      this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter);
-    }
+    this._initDismissTimer();
   },
-
+  
+  componentDidUpdate() {
+    clearTimeout(this.dismissTimer);
+    this._initDismissTimer();
+  },
+  
   componentWillUnmount() {
     clearTimeout(this.dismissTimer);
   }
