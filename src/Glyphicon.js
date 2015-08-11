@@ -9,7 +9,7 @@ const Glyphicon = React.createClass({
      */
     bsClass: React.PropTypes.string,
     /**
-     * An icon name
+     * An icon name. See e.g. http://getbootstrap.com/components/#glyphicons
      */
     glyph: React.PropTypes.string.isRequired,
     /**
