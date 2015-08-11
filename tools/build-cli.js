@@ -2,7 +2,6 @@
 
 import 'colors';
 import build from './build';
-import docs from '../docs/build';
 import lib from './lib/build';
 import { setExecOptions } from './exec';
 
@@ -37,7 +36,7 @@ let buildProcess;
 if (argv.libOnly) {
   buildProcess = lib();
 } else if (argv.docsOnly) {
-  buildProcess = docs(argv);
+  throw new Error('docs build had been termporarily disabled due to react-router incompatibility with react 0.14');
 } else {
   buildProcess = build();
 }
