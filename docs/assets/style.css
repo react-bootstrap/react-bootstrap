@@ -192,6 +192,10 @@ body {
       color-stop(100%, rgba(255, 0, 0, 1)));
 }
 
+/*.bs-example .custom-menu > ul > li {
+    padding: 0 20px;
+}*/
+
 .anchor,
 .anchor:hover,
 .anchor:active,

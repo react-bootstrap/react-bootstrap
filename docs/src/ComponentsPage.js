@@ -183,7 +183,7 @@ const ComponentsPage = React.createClass({
                   <h3><Anchor id='btn-dropdowns-custom'>Dropdown Customization</Anchor></h3>
                   <p>
                     If the default handling of the dropdown menu and toggle components aren't to your liking, you can
-                    customize the them, by explicitly specifying a Toggle or Menu as children.
+                    customize them, by explicitly specifying a Toggle or Menu as children.
                   </p>
                   <div className='bs-callout bs-callout-info'>
                     <h4>Additional Import Options</h4>
@@ -195,6 +195,10 @@ const ComponentsPage = React.createClass({
                     </p>
                   </div>
                   <ReactPlayground codeText={Samples.DropdownButtonCustom} />
+
+                  <h4>Custom Menus</h4>
+                  <p>You can even create your own menu implementation.</p>
+                  <ReactPlayground codeText={Samples.DropdownButtonCustomMenu} />
 
                   <h3><Anchor id='btn-dropdowns-props'>Props</Anchor></h3>
 

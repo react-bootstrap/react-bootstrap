@@ -474,24 +474,6 @@ describe('DropdownButton', function() {
 
       document.activeElement.should.equal(firstMenuItemAnchor);
     });
-// <div>
-//   <div class="open dropdown btn-group" data-reactid=".3x">
-//     <button id="test-id" title="Simple Dropdown" class="dropdown-toggle btn btn-default" type="button" aria-haspopup="true" aria-expanded="true" data-reactid=".3x.0">
-//     <span data-reactid=".3x.0.0">Simple Dropdown</span>
-//     <span data-reactid=".3x.0.1"><span data-reactid=".3x.0.1.0"> </span>
-//     <span class="caret" data-reactid=".3x.0.1.1"></span></span></button>
-//     <ul class="dropdown-menu" role="menu" aria-labelledby="test-id" data-reactid=".3x.1">
-//       <li role="presentation" class="" data-reactid=".3x.1.$=10:0">
-//       <a role="menuitem" tabindex="-1" href="" data-reactid=".3x.1.$=10:0.0">Item 1</a></li>
-//       <li role="presentation" class="" data-reactid=".3x.1.$=11:0">
-//       <a role="menuitem" tabindex="-1" href="" data-reactid=".3x.1.$=11:0.0">Item 2</a></li>
-//       <li role="presentation" class="" data-reactid=".3x.1.$=12:0">
-//         <a role="menuitem" tabindex="-1" href="" data-reactid=".3x.1.$=12:0.0">Item 3</a></li>
-//       <li role="presentation" class="" data-reactid=".3x.1.$=13:0">
-//       <a role="menuitem" tabindex="-1" href="" data-reactid=".3x.1.$=13:0.0">Item 4</a></li>
-//     </ul>
-//   </div>
-//</div>
 
     it('when focused and open sets focus on first menu item when the key "down" is pressed', function() {
       const instance = React.render(simpleDropdown, focusableContainer);
@@ -517,8 +499,11 @@ describe('DropdownButton', function() {
       buttonNode.getAttribute('aria-expanded').should.equal('true');
     });
 
-    // I am not sure why this test has to be so convoluted.
-    // the naive approach would fail _only_ if the entire test suite was run together, but I couldn't isolate it any more
+    // This test is more complicated then it appears to need. This is
+    // because there was an intermittent failure of the test when not structured this way
+    // The failure occured when all tests in the suite were run together, but not a subset of the tests.
+    //
+    // I am fairly confident that the failure is due to a test specific conflict and not an actual bug.
     it('when open and the key "esc" is pressed the menu is closed and focus is returned to the button', function(done) {
 
       const instance = React.render(simpleDropdown, focusableContainer);
