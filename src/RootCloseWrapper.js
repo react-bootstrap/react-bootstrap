@@ -1,6 +1,7 @@
 import React from 'react';
 import domUtils from './utils/domUtils';
 import EventListener from './utils/EventListener';
+import createChainedFunction from './utils/createChainedFunction';
 
 // TODO: Merge this logic with dropdown logic once #526 is done.
 
@@ -61,11 +62,20 @@ export default class RootCloseWrapper extends React.Component {
   }
 
   render() {
+    let noWrap = this.props.noWrap;
+    let child = React.Children.only(this.props.children);
+
+    if (noWrap) {
+      return React.cloneElement(child, {
+        onClick: createChainedFunction(suppressRootClose, child.props.onClick)
+      });
+    }
+
     // Wrap the child in a new element, so the child won't have to handle
     // potentially combining multiple onClick listeners.
     return (
       <div onClick={suppressRootClose}>
-        {React.Children.only(this.props.children)}
+        {child}
       </div>
     );
   }
@@ -75,13 +85,23 @@ export default class RootCloseWrapper extends React.Component {
     // stealing the ref from the owner, but we know exactly the DOM structure
     // that will be rendered, so we can just do this to get the child's DOM
     // node for doing size calculations in OverlayMixin.
-    return React.findDOMNode(this).children[0];
+    return this.props.noWrap
+      ? React.findDOMNode(this)
+      : React.findDOMNode(this).children[0];
   }
 
   componentWillUnmount() {
     this.unbindRootCloseHandlers();
   }
 }
+
 RootCloseWrapper.propTypes = {
-  onRootClose: React.PropTypes.func.isRequired
+  onRootClose: React.PropTypes.func.isRequired,
+
+  /**
+   * Passes the suppress click handler directly to the child component instead of
+   * placing it on a wrapping div. Only use when you can be sure the child will properly handle the
+   * click event.
+   */
+  noWrap: React.PropTypes.bool
 };
