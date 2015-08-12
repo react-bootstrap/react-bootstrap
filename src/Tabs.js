@@ -85,7 +85,7 @@ const Tabs = React.createClass({
     }
 
     let nav = (
-      <Nav {...props} activeKey={this.getActiveKey()} onSelect={this.handleSelect} ref="tabs">
+      <Nav {...props} activeKey={this.getActiveKey()} onSelect={this.handleSelect} ref="tabs" role="tablist">
         {ValidComponentChildren.map(this.props.children, renderTabIfSet, this)}
       </Nav>
     );
