@@ -5,8 +5,11 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 import deprecationWarning from './utils/deprecationWarning';
 
 const TabbedArea = React.createClass({
-  componentDidMount() {
-    deprecationWarning('TabbedArea', 'Tabs', 'https://github.com/react-bootstrap/react-bootstrap/pull/1091');
+  componentWillMount() {
+    deprecationWarning(
+      'TabbedArea', 'Tabs',
+      'https://github.com/react-bootstrap/react-bootstrap/pull/1091'
+    );
   },
 
   render() {
