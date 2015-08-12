@@ -1,9 +1,8 @@
 import React from 'react';
-import domUtils from './utils/domUtils';
-import EventListener from './utils/EventListener';
 import keycode from 'keycode';
 import classNames from 'classnames';
 import createChainedFunction from './utils/createChainedFunction';
+import RootCloseWrapper from './RootCloseWrapper';
 
 class DropdownMenu extends React.Component {
   constructor(props) {
@@ -15,49 +14,10 @@ class DropdownMenu extends React.Component {
     this.getItemsAndActiveIndex = this.getItemsAndActiveIndex.bind(this);
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
-
-    this.bindRootCloseHandler = this.bindRootCloseHandler.bind(this);
-    this.unbindRootCloseHandler = this.unbindRootCloseHandler.bind(this);
-    this.handleDocumentClick = this.handleDocumentClick.bind(this);
-  }
-
-  componentDidMount() {
-    this.componentDidUpdate();
-  }
-
-  componentDidUpdate() {
-    if (this.props.open) {
-      this.bindRootCloseHandler();
-    } else {
-      this.unbindRootCloseHandler();
-    }
-  }
-
-  bindRootCloseHandler() {
-    let ownerDocument = domUtils.ownerDocument(this);
-
-    this._onDocumentClickListener =
-      EventListener.listen(ownerDocument, 'click', this.handleDocumentClick);
-  }
-
-  unbindRootCloseHandler() {
-    if (this._onDocumentClickListener) {
-      this._onDocumentClickListener.remove();
-    }
-  }
-
-  componentWillUnmount() {
-    this.unbindRootCloseHandler();
-  }
-
-  handleDocumentClick(event) {
-    let inTree = domUtils.isNodeInTree(event.target, React.findDOMNode(this));
-    if (this.props.onRequestClose && !inTree) {
-      this.props.onRequestClose();
-    }
   }
 
   handleKeyDown(event) {
+
     switch(event.keyCode) {
       case keycode.codes.down:
         this.focusNext();
@@ -133,11 +93,25 @@ class DropdownMenu extends React.Component {
       'dropdown-menu-right': this.props.pullRight
     };
 
-    return (
-      <ul className={classNames(classes)} role='menu' aria-labelledby={this.props.labelledBy}>
+    let list = (
+      <ul
+        className={classNames(this.props.className, classes)}
+        role='menu'
+        aria-labelledby={this.props.labelledBy}
+      >
         {items}
       </ul>
     );
+
+    if (this.props.open) {
+      list = (
+        <RootCloseWrapper noWrap onRootClose={this.props.onRequestClose}>
+          {list}
+        </RootCloseWrapper>
+      )
+    }
+
+    return list;
   }
 }
 

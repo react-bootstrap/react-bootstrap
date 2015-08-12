@@ -4,6 +4,7 @@ import BootstrapMixin from './BootstrapMixin';
 import ButtonGroup from './ButtonGroup';
 import DropdownBase from './DropdownBase';
 import DropdownToggle from './DropdownToggle';
+import DropdownMenu from './DropdownMenu';
 import NavDropdown from './NavDropdown';
 import CustomPropTypes from './utils/CustomPropTypes';
 import deprecationWarning from './utils/deprecationWarning';
@@ -56,3 +57,4 @@ DropdownButton.propTypes = {
 };
 
 DropdownButton.Toggle = DropdownToggle;
+DropdownButton.Menu = DropdownMenu;

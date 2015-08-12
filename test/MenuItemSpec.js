@@ -120,9 +120,49 @@ describe('MenuItem', function() {
     ReactTestUtils.Simulate.click(anchor);
   });
 
-  // TODO: From old specs
-  it('should pass through props');
-  it('Should set target attribute on anchor');
-  it('should output an li');
-  it('Should call `onSelect` with target attribute');
+  it('should pass through props', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem
+        className="test-class"
+        href="#hi-mom!"
+        title="hi mom!"
+      >
+        Title
+      </MenuItem>
+    );
+
+    let node = React.findDOMNode(instance);
+
+    assert(node.className.match(/\btest-class\b/));
+    assert.equal(node.getAttribute('href'), null);
+    assert.equal(node.getAttribute('title'), null);
+
+    let anchorNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+
+    assert.notOk(anchorNode.className.match(/\btest-class\b/));
+    assert.equal(anchorNode.getAttribute('href'), '#hi-mom!');
+    assert.equal(anchorNode.getAttribute('title'), 'hi mom!');
+  });
+
+  it('Should set target attribute on anchor', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem target="_blank">
+        Title
+      </MenuItem>
+    );
+
+    let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
+    assert.equal(React.findDOMNode(anchor).getAttribute('target'), '_blank');
+  });
+
+  it('should output an li', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem>
+        Title
+      </MenuItem>
+    );
+    assert.equal(React.findDOMNode(instance).nodeName, 'LI');
+    assert.equal(React.findDOMNode(instance).getAttribute('role'), 'presentation');
+  });
+
 });

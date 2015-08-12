@@ -180,6 +180,26 @@ const ComponentsPage = React.createClass({
                   <p>Trigger dropdown menus that align to the right of the button using the <code>pullRight</code> prop.</p>
                   <ReactPlayground codeText={Samples.SplitButtonRight} />
 
+                  <h3><Anchor id='btn-dropdowns-custom'>Dropdown Customization</Anchor></h3>
+                  <p>
+                    If the default handling of the dropdown menu and toggle components aren't to your liking, you can
+                    customize them, by explicitly specifying a Toggle or Menu as children.
+                  </p>
+                  <div className='bs-callout bs-callout-info'>
+                    <h4>Additional Import Options</h4>
+                    <p>
+                      Each of dropdown variants (SplitButton, DropdownButton, and NavDropdown) have their
+                      Toggle and Menu components available as static properties as a convenience.
+                      However, you can also import them directly, if you prefer, from
+                      the <code>/lib</code> directory like: <code>{"require('react-bootstrap/lib/SplitToggle')"}</code>.
+                    </p>
+                  </div>
+                  <ReactPlayground codeText={Samples.DropdownButtonCustom} />
+
+                  <h4>Custom Menus</h4>
+                  <p>You can even create your own menu implementation.</p>
+                  <ReactPlayground codeText={Samples.DropdownButtonCustomMenu} />
+
                   <h3><Anchor id='btn-dropdowns-props'>Props</Anchor></h3>
 
                   <h4><Anchor id='btn-dropdowns-props-dropdown'>DropdownButton</Anchor></h4>

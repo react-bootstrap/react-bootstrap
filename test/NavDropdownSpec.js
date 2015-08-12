@@ -4,7 +4,24 @@ import NavDropdown from '../src/NavDropdown';
 import MenuItem from '../src/MenuItem';
 
 describe('NavDropdown', function() {
-  it('NavDropdown specific tests');
+
+  it('Should render li when in nav', function () {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <NavDropdown title="Title" className="test-class" id='nav-test'>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+      </NavDropdown>
+    );
+
+    let li = React.findDOMNode(instance);
+    let button = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle'));
+
+    assert.equal(li.nodeName, 'LI');
+    assert.ok(li.className.match(/\bdropdown\b/));
+    assert.ok(li.className.match(/\btest-class\b/));
+    assert.equal(button.nodeName, 'A');
+    assert.equal(button.innerText.trim(), 'Title');
+  });
 
   it('is open with explicit prop', function() {
     class OpenProp extends React.Component {

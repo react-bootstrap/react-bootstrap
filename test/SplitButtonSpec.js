@@ -50,7 +50,7 @@ describe('SplitButton', function() {
   it('should invoke onClick when SplitButton.Button is clicked (child)', function(done) {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton id='test-id'>
-        <SplitButton.Button onClick={ () => done() }>Title</SplitButton.Button>
+        <SplitButton.Button onClick={ () => done()}>Title</SplitButton.Button>
         <MenuItem>Item 1</MenuItem>
       </SplitButton>
     );
@@ -74,12 +74,54 @@ describe('SplitButton', function() {
     setTimeout(done, 100);
   });
 
-  it('should invoke onClick when SplitButton.Toggle is clicked (child)');
+  it('should invoke onClick when SplitButton.Toggle is clicked (child)', function(done) {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <SplitButton id='test-id' title='hi'>
+        <SplitButton.Toggle onClick={() => done()}>Title</SplitButton.Toggle>
+        <MenuItem>Item 1</MenuItem>
+      </SplitButton>
+    );
 
-  it('should fail prop validation if title prop or SplitButton.Button child is not provided');
+    const toggleNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle'));
+    ReactTestUtils.Simulate.click(toggleNode);
+  });
+
+  it('should fail prop validation if title prop or SplitButton.Button child is not provided', function() {
+    const props = { other: 'some title' };
+
+    SplitButton.propTypes.title(props, 'title', 'SplitButton')
+      .message.should.match(/Must provide.*title.*or.*SplitButton\.Button/);
+  });
 
   // TODO: From old specs
-  it('Should pass disabled to both buttons');
+  it('Should pass disabled to both buttons', function () {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <SplitButton title='Title' id='test-id' disabled>
+        <MenuItem>Item 1</MenuItem>
+      </SplitButton>
+    );
 
-  it('Should set target attribute on anchor');
+    const toggleNode = React.findDOMNode(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle'));
+
+    const buttonNode = React.findDOMNode(
+      ReactTestUtils.scryRenderedComponentsWithType(instance, Button)[0]);
+
+    expect(toggleNode.disabled).to.be.true;
+    expect(buttonNode.disabled).to.be.true;
+  });
+
+  it('Should set target attribute on anchor', function () {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <SplitButton title="Title" id='test-id' href="/some/unique-thing/" target="_blank">
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+      </SplitButton>
+    );
+
+    let anchors = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
+    let linkElement = React.findDOMNode(anchors[0]);
+
+    assert.equal(linkElement.target, '_blank');
+  });
+
 });

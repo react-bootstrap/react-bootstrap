@@ -19,6 +19,8 @@ export default {
   ButtonGroupJustified:          require('fs').readFileSync(__dirname + '/../examples/ButtonGroupJustified.js', 'utf8'),
   ButtonGroupBlock:              require('fs').readFileSync(__dirname + '/../examples/ButtonGroupBlock.js', 'utf8'),
   DropdownButtonBasic:           require('fs').readFileSync(__dirname + '/../examples/DropdownButtonBasic.js', 'utf8'),
+  DropdownButtonCustom:          require('fs').readFileSync(__dirname + '/../examples/DropdownButtonCustom.js', 'utf8'),
+  DropdownButtonCustomMenu:      require('fs').readFileSync(__dirname + '/../examples/DropdownButtonCustomMenu.js', 'utf8'),
   SplitButtonBasic:              require('fs').readFileSync(__dirname + '/../examples/SplitButtonBasic.js', 'utf8'),
   DropdownButtonSizes:           require('fs').readFileSync(__dirname + '/../examples/DropdownButtonSizes.js', 'utf8'),
   DropdownButtonNoCaret:         require('fs').readFileSync(__dirname + '/../examples/DropdownButtonNoCaret.js', 'utf8'),

@@ -297,12 +297,12 @@ describe('DropdownButton', function() {
     const node = React.findDOMNode(instance);
     const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
 
-    const menuItem = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
+    const menuItem = React.findDOMNode(
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A'));
 
     ReactTestUtils.Simulate.click(buttonNode);
     node.className.should.match(/\bopen\b/);
     ReactTestUtils.Simulate.click(menuItem);
-
     node.className.should.not.match(/\bopen\b/);
   });
 
@@ -318,7 +318,8 @@ describe('DropdownButton', function() {
     const node = React.findDOMNode(instance);
     const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
 
-    const menuItem = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
+    const menuItem = React.findDOMNode(
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A'));
 
     ReactTestUtils.Simulate.click(buttonNode);
     node.className.should.match(/\bopen\b/);
@@ -452,13 +453,25 @@ describe('DropdownButton', function() {
     });
 
     it('when focused and closed sets focus on first menu item when the key "down" is pressed', function() {
+      const simpleDropdown = (
+        <DropdownButton title='Simple Dropdown' id='test-id'>
+          <MenuItem>Item 1</MenuItem>
+          <MenuItem>Item 2</MenuItem>
+          <MenuItem>Item 3</MenuItem>
+          <MenuItem>Item 4</MenuItem>
+        </DropdownButton>
+      );
+
       const instance = React.render(simpleDropdown, focusableContainer);
       const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
 
       buttonNode.focus();
+
       ReactTestUtils.Simulate.keyDown(buttonNode, { keyCode: keycode('down') });
 
-      const firstMenuItemAnchor = React.findDOMNode(ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0]);
+      const firstMenuItemAnchor = React.findDOMNode(
+        ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0])
+
       document.activeElement.should.equal(firstMenuItemAnchor);
     });
 
@@ -486,19 +499,30 @@ describe('DropdownButton', function() {
       buttonNode.getAttribute('aria-expanded').should.equal('true');
     });
 
-    it('when open and the key "esc" is pressed the menu is closed and focus is returned to the button', function() {
+    // This test is more complicated then it appears to need. This is
+    // because there was an intermittent failure of the test when not structured this way
+    // The failure occured when all tests in the suite were run together, but not a subset of the tests.
+    //
+    // I am fairly confident that the failure is due to a test specific conflict and not an actual bug.
+    it('when open and the key "esc" is pressed the menu is closed and focus is returned to the button', function(done) {
+
       const instance = React.render(simpleDropdown, focusableContainer);
       const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
-      const firstMenuItemAnchor = React.findDOMNode(ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0]);
 
       buttonNode.focus();
-      ReactTestUtils.Simulate.keyDown(buttonNode, { keyCode: keycode('down') });
-      ReactTestUtils.Simulate.keyDown(firstMenuItemAnchor, { type: 'keydown', keyCode: keycode('esc') });
 
-      document.activeElement.should.equal(buttonNode);
+      instance.setState({ open: true }, ()=>{
+        const firstMenuItemAnchor = React.findDOMNode(ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0]);
+
+        firstMenuItemAnchor.focus()
+
+        ReactTestUtils.Simulate.keyDown(firstMenuItemAnchor, { type: 'keydown', keyCode: keycode('esc') });
+        document.activeElement.should.equal(buttonNode);
+        done()
+      })
     });
 
-    it('when open and the key "tab" is pressed the menu is closed and focus is progress to the next focusable element', function() {
+    it('when open and the key "tab" is pressed the menu is closed and focus is progress to the next focusable element', () => {
       const instance = React.render(
         <div>
           {simpleDropdown}
@@ -506,8 +530,7 @@ describe('DropdownButton', function() {
         </div>, focusableContainer);
 
       const node = ReactTestUtils.findRenderedComponentWithType(instance, DropdownButton);
-      // See TODO below
-      //const nextFocusable = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'INPUT'));
+
       const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(node, 'BUTTON'));
 
       ReactTestUtils.Simulate.click(buttonNode);
@@ -516,9 +539,9 @@ describe('DropdownButton', function() {
       ReactTestUtils.Simulate.keyDown(buttonNode, { key: keycode('tab'), keyCode: keycode('tab') });
       buttonNode.getAttribute('aria-expanded').should.equal('false');
 
-      // TODO: I can't figure out how to make this assertion work in test, it
-      // works fine when testing manually.
-      //document.activeElement.should.equal(nextFocusable);
+      // simulating a tab event doesn't actually shift focus.
+      // at least that seems to be the case according to SO.
+      // hence no assert on the input having focus.
     });
   });
 
@@ -533,7 +556,20 @@ describe('DropdownButton', function() {
     });
   });
 
-  // TODO: From old spec
-  it('Should pass props to button'); // ie disabled prop
-  it('should not set onSelect to child with no onSelect prop'); // I don't know how much this one really matters??
+
+  it('Should pass props to button', function () {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="Title" bsStyle="primary" id="testId" disabled>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+      </DropdownButton>
+    );
+
+    const buttonNode = React.findDOMNode(
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+
+    assert.ok(buttonNode.className.match(/\bbtn-primary\b/));
+    assert.equal(buttonNode.getAttribute('id'), 'testId');
+    assert.ok(buttonNode.disabled);
+  });
 });
