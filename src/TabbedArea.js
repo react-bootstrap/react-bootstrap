@@ -14,7 +14,7 @@ const TabbedArea = React.createClass({
 
     tabTitles = ValidComponentChildren.map(function(child) {
       let {tab, ...others} = child.props;
-      tabTitles.push(<TabPane title={tab} {...others}/>);
+      return (<TabPane title={tab} {...others} />);
     });
 
     return (
