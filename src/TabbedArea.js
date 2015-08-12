@@ -8,17 +8,17 @@ const TabbedArea = React.createClass({
   componentDidMount() {
     deprecationWarning('TabbedArea', 'Tabs', 'https://github.com/react-bootstrap/react-bootstrap/pull/1091');
   },
-  render() {
-    let {children, ...props} = this.props;
-    let tabTitles = [];
 
-    tabTitles = ValidComponentChildren.map(function(child) {
-      let {tab, ...others} = child.props;
-      tabTitles.push(<TabPane title={tab} {...others}/>);
+  render() {
+    const {children, ...props} = this.props;
+
+    const tabs = ValidComponentChildren.map(children, function (child) {
+      const {tab: title, ...others} = child.props;
+      return <TabPane title={title} {...others} />;
     });
 
     return (
-      <Tabs {...props} >{tabTitles}</Tabs>
+      <Tabs {...props}>{tabs}</Tabs>
     );
   }
 });
