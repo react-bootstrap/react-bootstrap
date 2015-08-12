@@ -49,7 +49,7 @@ describe('SplitButton', function() {
 
   it('should invoke onClick when SplitButton.Button is clicked (child)', function(done) {
     const instance = ReactTestUtils.renderIntoDocument(
-      <SplitButton id='test-id'>
+      <SplitButton id='test-id' >
         <SplitButton.Button onClick={ () => done()}>Title</SplitButton.Button>
         <MenuItem>Item 1</MenuItem>
       </SplitButton>
@@ -89,7 +89,7 @@ describe('SplitButton', function() {
   it('should fail prop validation if title prop or SplitButton.Button child is not provided', function() {
     const props = { other: 'some title' };
 
-    SplitButton.propTypes.title(props, 'title', 'SplitButton')
+    SplitButton.ControlledComponent.propTypes.title(props, 'title', 'SplitButton')
       .message.should.match(/Must provide.*title.*or.*SplitButton\.Button/);
   });
 

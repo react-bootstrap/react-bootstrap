@@ -1,6 +1,5 @@
 import React from 'react';
 import classnames from 'classnames';
-import createSelectedEvent from './utils/createSelectedEvent';
 import CustomPropTypes from './utils/CustomPropTypes';
 import SafeAnchor from './SafeAnchor';
 
@@ -21,9 +20,7 @@ export default class MenuItem extends React.Component {
     }
 
     if (this.props.onSelect) {
-      let selectedEvent = createSelectedEvent(this.props.eventKey);
-
-      this.props.onSelect(event, selectedEvent);
+      this.props.onSelect(event, this.props.eventKey);
     }
   }
 
