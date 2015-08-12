@@ -55,13 +55,19 @@ export default class DropdownBase extends React.Component {
   }
 
   handleKeyDown(event) {
+    let focusNext = ()=> {
+      if (this.refs.menu.focusNext) {
+        this.refs.menu.focusNext();
+      }
+    }
+
     switch(event.keyCode) {
       case keycode.codes.down:
         if (!this.state.open) {
-          this.toggleOpen();
+          this.setState({ open: true }, focusNext);
         }
-        if (this.refs.menu.focusNext) {
-          this.refs.menu.focusNext();
+        else {
+          focusNext()
         }
         event.preventDefault();
         break;
@@ -163,10 +169,11 @@ export default class DropdownBase extends React.Component {
 
   refineToggle(toggle, children, open) {
     let toggleProps = {
+      open,
       id: this.props.id,
       ref: TOGGLE_REF,
-      open,
       bsStyle: this.props.bsStyle,
+      disabled: this.props.disabled,
       useAnchor: this.useAnchor
     };
 

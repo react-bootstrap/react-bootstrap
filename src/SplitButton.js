@@ -54,11 +54,16 @@ export default class SplitButton extends DropdownBase {
 
   refineButton(button, children, open) {
     if (button === undefined) {
+      let { target, href, bsStyle, onClick, disabled, title } = this.props;
       return (
         <Button
-          onClick={this.props.onClick}
-          bsStyle={this.props.bsStyle}>
-          {this.props.title}
+          onClick={onClick}
+          bsStyle={bsStyle}
+          disabled={disabled}
+          target={target}
+          href={href}
+        >
+          {title}
         </Button>
       );
     }
@@ -69,12 +74,38 @@ export default class SplitButton extends DropdownBase {
   }
 }
 
+function titleRequired(props, propName, component) {
+  let titles = [];
+
+  if (props.children) {
+    if (props.children instanceof Array) {
+      titles = props.children.filter(child => child.type === SplitButton.Button);
+    } else if(props.children.type === SplitButton.Button) {
+      titles.push(props.children);
+    }
+  }
+
+  if (titles.length > 1) {
+    return new Error(`(title|children) ${component} - Should only use one ${component}.Button child component, only the first ${component}.Toggle will be used`);
+  }
+
+  let title = titles[0];
+
+  if (props.title !== undefined && title !== undefined) {
+    return new Error(`(title|children) ${component} - Must provide either a 'title' prop or a '${component}.Button' child, not both.`);
+  }
+
+  if (props.title === undefined && title === undefined) {
+    return new Error(`(title|children) ${component} - Must provide either a 'title' prop or a '${component}.Button' child`);
+  }
+}
+
 SplitButton.propTypes = {
   dropup: React.PropTypes.bool,
   ...DropdownBase.propTypes,
   ...BootstrapMixin.propTypes,
 
-  title: React.PropTypes.string,
+  title: titleRequired,
 
   children: CustomPropTypes.all([
     singleMenuValidation(DropdownBase.Toggle, MenuItem, SplitButtonButton),

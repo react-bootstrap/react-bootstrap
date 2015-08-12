@@ -177,6 +177,14 @@ describe('DropdownMenu', function() {
     });
   });
 
-  // TODO: From old spec
-  it('Should pass props to dropdown'); // ie custom className
+  it('Should pass props to dropdown', function () {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <DropdownMenu className="new-fancy-class">
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+      </DropdownMenu>
+    );
+
+    let node = React.findDOMNode(instance);
+    assert.ok(node.className.match(/\bnew-fancy-class\b/));
+  });
 });

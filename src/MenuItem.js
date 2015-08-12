@@ -44,10 +44,14 @@ export default class MenuItem extends React.Component {
 
     return (
       <li role='presentation'
-        className={classnames(this.props.className, classes)}>
+        className={classnames(this.props.className, classes)}
+        style={this.props.style}
+      >
         <SafeAnchor
           role='menuitem'
           tabIndex='-1'
+          target={this.props.target}
+          title={this.props.title}
           href={this.props.href || ''}
           onKeyDown={this.props.onKeyDown}
           onClick={this.handleClick}>
@@ -74,6 +78,7 @@ MenuItem.propTypes = {
   ]),
   header: React.PropTypes.bool,
   href: React.PropTypes.string,
+  title: React.PropTypes.string,
   onKeyDown: React.PropTypes.func,
   onSelect: React.PropTypes.func
 };
