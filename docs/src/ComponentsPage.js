@@ -513,7 +513,7 @@ const ComponentsPage = React.createClass({
 
                 {/* Tabbed Areas */}
                 <div className='bs-docs-section'>
-                  <h1 className='page-header'><Anchor id='tabs'>Togglable tabs</Anchor> <small>TabbedArea, TabPane</small></h1>
+                  <h1 className='page-header'><Anchor id='tabs'>Togglable tabs</Anchor> <small>Tabs, Tab</small></h1>
 
                   <p>Add quick, dynamic tab functionality to transition through panes of local content, even via dropdown menus.</p>
 
