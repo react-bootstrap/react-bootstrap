@@ -515,7 +515,7 @@ const ComponentsPage = React.createClass({
                 <div className='bs-docs-section'>
                   <h1 className='page-header'><Anchor id='tabs'>Togglable tabs</Anchor> <small>TabbedArea, TabPane</small></h1>
 
-                  <p>Add quick, dynamic tab functionality to transition through panes of local content, even via dropdown menus.</p>
+                  <p>Add quick, dynamic tab functionality to transition through panes of local content.</p>
 
                   <h3><Anchor id='tabs-uncontrolled'>Uncontrolled</Anchor></h3>
                   <p>Allow the component to control its own state.</p>
@@ -528,11 +528,6 @@ const ComponentsPage = React.createClass({
                   <h3><Anchor id='tabs-no-animation'>No animation</Anchor></h3>
                   <p>Set the <code>animation</code> prop to <code>false</code></p>
                   <ReactPlayground codeText={Samples.TabbedAreaNoAnimation} exampleClassName='bs-example-tabs' />
-
-                  <div className='bs-callout bs-callout-info'>
-                    <h4>Extends tabbed navigation</h4>
-                    <p>This plugin extends the <a href='#navs'>tabbed navigation component</a> to add tabbable areas.</p>
-                  </div>
 
                   <h3><Anchor id='tabs-props'>Props</Anchor></h3>
 
@@ -898,7 +893,7 @@ const ComponentsPage = React.createClass({
                     <NavItem href='#progress' key={8}>Progress bars</NavItem>
                     <NavItem href='#navs' key={9}>Navs</NavItem>
                     <NavItem href='#navbars' key={10}>Navbars</NavItem>
-                    <NavItem href='#tabs' key={11}>Togglable tabs</NavItem>
+                    <NavItem href='#tabs' key={11}>Tabs</NavItem>
                     <NavItem href='#pager' key={12}>Pager</NavItem>
                     <NavItem href='#pagination' key={13}>Pagination</NavItem>
                     <NavItem href='#alerts' key={14}>Alerts</NavItem>
