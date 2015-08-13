@@ -48,4 +48,4 @@ const Trigger = React.createClass({
   }
 });
 
-React.render(<Trigger />, mountNode);
+ReactDOM.render(<Trigger />, mountNode);

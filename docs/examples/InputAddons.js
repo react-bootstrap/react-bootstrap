@@ -21,4 +21,4 @@ const inputAddonsInstance = (
   </form>
 );
 
-React.render(inputAddonsInstance, mountNode);
+ReactDOM.render(inputAddonsInstance, mountNode);

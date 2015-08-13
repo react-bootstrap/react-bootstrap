@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import ListGroup from '../src/ListGroup';
 import ListGroupItem from '../src/ListGroupItem';
 
@@ -9,7 +11,7 @@ describe('ListGroup', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroup/>
     );
-    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
   });
 
@@ -45,8 +47,8 @@ describe('ListGroup', function () {
       </ListGroup>
     );
 
-    assert.equal(React.findDOMNode(instance).nodeName, 'UL');
-    assert.equal(React.findDOMNode(instance).firstChild.nodeName, 'LI');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'UL');
+    assert.equal(ReactDOM.findDOMNode(instance).firstChild.nodeName, 'LI');
   });
 
   it('Should output a "div" when single "ListGroupItem" child is an anchor', function () {
@@ -56,8 +58,8 @@ describe('ListGroup', function () {
       </ListGroup>
     );
 
-    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
-    assert.equal(React.findDOMNode(instance).firstChild.nodeName, 'A');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
+    assert.equal(ReactDOM.findDOMNode(instance).firstChild.nodeName, 'A');
   });
 
   it('Should support multiple "ListGroupItem" children', function () {
@@ -102,9 +104,9 @@ describe('ListGroup', function () {
       </ListGroup>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
-    assert.equal(React.findDOMNode(instance).nodeName, 'UL');
-    assert.equal(React.findDOMNode(instance).firstChild.nodeName, 'LI');
-    assert.equal(React.findDOMNode(instance).lastChild.nodeName, 'LI');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'UL');
+    assert.equal(ReactDOM.findDOMNode(instance).firstChild.nodeName, 'LI');
+    assert.equal(ReactDOM.findDOMNode(instance).lastChild.nodeName, 'LI');
   });
 
 
@@ -115,9 +117,9 @@ describe('ListGroup', function () {
         <ListGroupItem>2nd Child</ListGroupItem>
       </ListGroup>
     );
-    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
-    assert.equal(React.findDOMNode(instance).firstChild.nodeName, 'A');
-    assert.equal(React.findDOMNode(instance).lastChild.nodeName, 'SPAN');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
+    assert.equal(ReactDOM.findDOMNode(instance).firstChild.nodeName, 'A');
+    assert.equal(ReactDOM.findDOMNode(instance).lastChild.nodeName, 'SPAN');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
   });
 
@@ -130,9 +132,9 @@ describe('ListGroup', function () {
         <ListGroupItem>2nd Child</ListGroupItem>
       </ListGroup>
     );
-    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
-    assert.equal(React.findDOMNode(instance).firstChild.nodeName, 'A');
-    assert.equal(React.findDOMNode(instance).lastChild.nodeName, 'SPAN');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
+    assert.equal(ReactDOM.findDOMNode(instance).firstChild.nodeName, 'A');
+    assert.equal(ReactDOM.findDOMNode(instance).lastChild.nodeName, 'SPAN');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
   });
 
@@ -143,8 +145,8 @@ describe('ListGroup', function () {
       </ListGroup>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
-    assert.equal(React.findDOMNode(instance).nodeName, 'UL');
-    assert.equal(React.findDOMNode(instance).id, 'testItem');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'UL');
+    assert.equal(ReactDOM.findDOMNode(instance).id, 'testItem');
   });
 
 });

@@ -6,4 +6,4 @@ const inputValidationInstance = (
   </form>
 );
 
-React.render(inputValidationInstance, mountNode);
+ReactDOM.render(inputValidationInstance, mountNode);

@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+
 import ButtonInput from '../src/ButtonInput';
+
 import {shouldWarn} from './helpers';
 
 describe('ButtonInput', () =>{
@@ -9,7 +11,7 @@ describe('ButtonInput', () =>{
       <ButtonInput value="button" bsStyle="danger" wrapperClassName="test" />
     );
 
-    const node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'));
+    const node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input');
     assert.equal(node.getAttribute('type'), 'button');
     assert.equal(node.getAttribute('class'), 'btn btn-danger');
   });
@@ -19,14 +21,14 @@ describe('ButtonInput', () =>{
       <ButtonInput value="button" type="reset" />
     );
 
-    let node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'));
+    let node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input');
     assert.equal(node.getAttribute('type'), 'reset');
 
     instance = ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" type="submit" />
     );
 
-    node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'));
+    node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input');
     assert.equal(node.getAttribute('type'), 'submit');
   });
 
@@ -42,8 +44,6 @@ describe('ButtonInput', () =>{
     ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" bsStyle="danger" />
     );
-
-    console.warn.called.should.be.false;
   });
 
   it('throws warning about wrong type for bsStyle=error', function () {

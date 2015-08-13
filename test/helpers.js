@@ -1,10 +1,10 @@
-import React from 'react';
-import { cloneElement } from 'react';
+import {cloneElement} from 'react';
+import ReactDOM from 'react-dom';
 
 export function shouldWarn(about) {
-  console.warn.called.should.be.true;
-  console.warn.calledWithMatch(about).should.be.true;
-  console.warn.reset();
+  console.error.called.should.be.true;
+  console.error.calledWithMatch(about).should.be.true;
+  console.error.reset();
 }
 
 /**
@@ -16,7 +16,7 @@ export function shouldWarn(about) {
  */
 export function render(element, mountPoint){
   let mount = mountPoint || document.createElement('div');
-  let instance = React.render(element, mount);
+  let instance = ReactDOM.render(element, mount);
 
   if (!instance.renderWithProps) {
     instance.renderWithProps = function(newProps) {
@@ -27,4 +27,9 @@ export function render(element, mountPoint){
   }
 
   return instance;
+}
+
+export function getOne(collection) {
+  expect(collection.length).to.equal(1);
+  return collection[0];
 }

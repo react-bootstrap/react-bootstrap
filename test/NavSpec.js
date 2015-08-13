@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+
+import Button from '../src/Button';
 import Nav from '../src/Nav';
 import NavItem from '../src/NavItem';
-import Button from '../src/Button';
 
 describe('Nav', function () {
   it('Should set the correct item active', function () {
@@ -123,10 +124,10 @@ describe('Nav', function () {
       </Nav>
     );
 
-    let ulNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul'));
+    let ulNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul');
     assert.notInclude(ulNode.className, 'nav-specific');
 
-    let navNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav'));
+    let navNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav');
     assert.include(navNode.className, 'nav-specific');
   });
 
@@ -138,11 +139,11 @@ describe('Nav', function () {
       </Nav>
     );
 
-    let ulNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul'));
+    let ulNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul');
     assert.include(ulNode.className, 'ul-specific');
     assert.notInclude(ulNode.className, 'nav-specific');
 
-    let navNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav'));
+    let navNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav');
     assert.notInclude(navNode.className, 'ul-specific');
     assert.include(navNode.className, 'nav-specific');
   });
@@ -155,10 +156,10 @@ describe('Nav', function () {
       </Nav>
     );
 
-    let navNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav'));
+    let navNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav');
     assert.equal(navNode.id, 'nav-id');
 
-    let ulNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul'));
+    let ulNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul');
     assert.notEqual(ulNode.id, 'nav-id');
   });
 
@@ -170,10 +171,10 @@ describe('Nav', function () {
       </Nav>
     );
 
-    let ulNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul'));
+    let ulNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul');
     assert.equal(ulNode.id, 'ul-id');
 
-    let navNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav'));
+    let navNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav');
     assert.equal(navNode.id, 'nav-id');
   });
 
@@ -191,8 +192,8 @@ describe('Nav', function () {
       let ul = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'ul')[0];
       let navItem = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a')[0];
 
-      assert.equal(React.findDOMNode(ul).getAttribute('role'), 'tablist');
-      assert.equal(React.findDOMNode(navItem).getAttribute('role'), 'tab');
+      assert.equal(ul.getAttribute('role'), 'tablist');
+      assert.equal(navItem.getAttribute('role'), 'tab');
     });
   });
 });

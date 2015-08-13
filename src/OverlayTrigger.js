@@ -1,11 +1,15 @@
 /*eslint-disable react/prop-types */
+
+import pick from 'lodash/object/pick';
 import React, { cloneElement } from 'react';
+import ReactDOM from 'react-dom';
+import warning from 'warning';
+
+import Overlay from './Overlay';
 
 import createChainedFunction from './utils/createChainedFunction';
 import createContextWrapper from './utils/createContextWrapper';
-import Overlay from './Overlay';
-import warning from 'react/lib/warning';
-import pick from 'lodash/object/pick';
+
 /**
  * Check if value one is inside or equal to the of value
  *
@@ -128,23 +132,29 @@ const OverlayTrigger = React.createClass({
 
   componentDidMount(){
     this._mountNode = document.createElement('div');
-    React.render(this._overlay, this._mountNode);
+    this.renderOverlay();
+  },
+
+  renderOverlay() {
+    ReactDOM.unstable_renderSubtreeIntoContainer(
+      this, this._overlay, this._mountNode
+    );
   },
 
   componentWillUnmount() {
-    React.unmountComponentAtNode(this._mountNode);
+    ReactDOM.unmountComponentAtNode(this._mountNode);
     this._mountNode = null;
     clearTimeout(this._hoverDelay);
   },
 
   componentDidUpdate(){
     if (this._mountNode) {
-      React.render(this._overlay, this._mountNode);
+      this.renderOverlay();
     }
   },
 
   getOverlayTarget() {
-    return React.findDOMNode(this);
+    return ReactDOM.findDOMNode(this);
   },
 
   getOverlay() {

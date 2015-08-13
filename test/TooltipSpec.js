@@ -1,5 +1,7 @@
+import pick from 'lodash/object/pick';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+
 import Tooltip from '../src/Tooltip';
 
 describe('Tooltip', function () {
@@ -12,7 +14,8 @@ describe('Tooltip', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
 
     const tooltip = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tooltip');
-    assert.deepEqual(tooltip.props.style, {top: 10, left: 20});
+    expect(pick(tooltip.style, ['top', 'left']))
+      .to.eql({top: '10px', left: '20px'});
   });
 
   describe('When a style property is provided', function () {
@@ -23,7 +26,8 @@ describe('Tooltip', function () {
         </Tooltip>
       );
       const tooltip = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tooltip');
-      assert.deepEqual(tooltip.props.style, {opacity: 0.9, top: 10, left: 20});
+      expect(pick(tooltip.style, ['opacity', 'top', 'left']))
+        .to.eql({opacity: '0.9', top: '10px', left: '20px'});
     });
   });
 });

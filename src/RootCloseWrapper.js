@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import domUtils from './utils/domUtils';
 import EventListener from './utils/EventListener';
 
@@ -75,7 +77,7 @@ export default class RootCloseWrapper extends React.Component {
     // stealing the ref from the owner, but we know exactly the DOM structure
     // that will be rendered, so we can just do this to get the child's DOM
     // node for doing size calculations in OverlayMixin.
-    return React.findDOMNode(this).children[0];
+    return ReactDOM.findDOMNode(this).children[0];
   }
 
   componentWillUnmount() {

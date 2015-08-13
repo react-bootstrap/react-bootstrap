@@ -1,15 +1,15 @@
 import 'es5-shim';
 
 beforeEach(function() {
-  sinon.stub(console, 'warn');
+  sinon.stub(console, 'error');
 });
 
 afterEach(function() {
-  if (typeof console.warn.restore === 'function') {
-    assert(!console.warn.called, () => {
-      return `${console.warn.getCall(0).args[0]} \nIn '${this.currentTest.fullTitle()}'`;
+  if (typeof console.error.restore === 'function') {
+    assert(!console.error.called, () => {
+      return `${console.error.getCall(0).args[0]} \nIn '${this.currentTest.fullTitle()}'`;
     });
-    console.warn.restore();
+    console.error.restore();
   }
 });
 

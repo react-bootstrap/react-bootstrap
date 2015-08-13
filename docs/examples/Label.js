@@ -9,4 +9,4 @@ const labelInstance = (
   </div>
 );
 
-React.render(labelInstance, mountNode);
+ReactDOM.render(labelInstance, mountNode);

@@ -1,6 +1,7 @@
 /* eslint react/no-did-mount-set-state: 0 */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 import Affix from '../../src/Affix';
 import Nav from '../../src/Nav';
@@ -32,15 +33,15 @@ const ComponentsPage = React.createClass({
   },
 
   componentDidMount() {
-    let elem = React.findDOMNode(this.refs.sideNav);
+    let elem = ReactDOM.findDOMNode(this.refs.sideNav);
     let domUtils = Affix.domUtils;
     let sideNavOffsetTop = domUtils.getOffset(elem).top;
     let sideNavMarginTop = parseInt(domUtils.getComputedStyles(elem.firstChild).marginTop, 10);
-    let topNavHeight = React.findDOMNode(this.refs.topNav).offsetHeight;
+    let topNavHeight = ReactDOM.findDOMNode(this.refs.topNav).offsetHeight;
 
     this.setState({
       navOffsetTop: sideNavOffsetTop - topNavHeight - sideNavMarginTop,
-      navOffsetBottom: React.findDOMNode(this.refs.footer).offsetHeight
+      navOffsetBottom: ReactDOM.findDOMNode(this.refs.footer).offsetHeight
     });
   },
 

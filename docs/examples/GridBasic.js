@@ -22,4 +22,4 @@ const navInstance = (
   </Grid>
 );
 
-React.render(navInstance, mountNode);
+ReactDOM.render(navInstance, mountNode);

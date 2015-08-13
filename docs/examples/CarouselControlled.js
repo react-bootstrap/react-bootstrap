@@ -43,4 +43,4 @@ const ControlledCarousel = React.createClass({
   }
 });
 
-React.render(<ControlledCarousel />, mountNode);
+ReactDOM.render(<ControlledCarousel />, mountNode);

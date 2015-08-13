@@ -19,4 +19,4 @@ const buttonGroupInstance = (
   </ButtonToolbar>
 );
 
-React.render(buttonGroupInstance, mountNode);
+ReactDOM.render(buttonGroupInstance, mountNode);

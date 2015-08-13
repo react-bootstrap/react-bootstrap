@@ -1,4 +1,5 @@
-import React from 'react';
+import ReactDOM from 'react-dom';
+
 import domUtils from './utils/domUtils';
 import EventListener from './utils/EventListener';
 
@@ -51,7 +52,7 @@ const DropdownStateMixin = {
     // don't do anything.
     // e.srcElement is required for IE8 as e.target is undefined
     let target = e.target || e.srcElement;
-    if (isNodeInRoot(target, React.findDOMNode(this))) {
+    if (isNodeInRoot(target, ReactDOM.findDOMNode(this))) {
       return;
     }
 

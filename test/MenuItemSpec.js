@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import MenuItem from '../src/MenuItem';
 
 describe('MenuItem', function () {
@@ -9,8 +11,8 @@ describe('MenuItem', function () {
         Title
       </MenuItem>
     );
-    assert.equal(React.findDOMNode(instance).nodeName, 'LI');
-    assert.equal(React.findDOMNode(instance).getAttribute('role'), 'presentation');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'LI');
+    assert.equal(ReactDOM.findDOMNode(instance).getAttribute('role'), 'presentation');
   });
 
   it('should pass through props', function () {
@@ -24,13 +26,13 @@ describe('MenuItem', function () {
       </MenuItem>
     );
 
-    let node = React.findDOMNode(instance);
+    let node = ReactDOM.findDOMNode(instance);
     assert(node.className.match(/\btest-class\b/));
     assert.equal(node.getAttribute('href'), null);
     assert.equal(node.getAttribute('title'), null);
     assert.ok(node.className.match(/\bactive\b/));
 
-    let anchorNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+    let anchorNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.notOk(anchorNode.className.match(/\btest-class\b/));
     assert.equal(anchorNode.getAttribute('href'), '#hi-mom!');
     assert.equal(anchorNode.getAttribute('title'), 'hi mom!');
@@ -44,7 +46,7 @@ describe('MenuItem', function () {
     );
 
     let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
-    assert.equal(React.findDOMNode(anchor).getAttribute('tabIndex'), '-1');
+    assert.equal(anchor.getAttribute('tabIndex'), '-1');
   });
 
   it('should fire callback on click of link', function (done) {
@@ -68,8 +70,8 @@ describe('MenuItem', function () {
       </MenuItem>
     );
 
-    assert(React.findDOMNode(instance).className.match(/\bdivider\b/), 'Has no divider class');
-    assert.equal(React.findDOMNode(instance).innerText, '');
+    assert(ReactDOM.findDOMNode(instance).className.match(/\bdivider\b/), 'Has no divider class');
+    assert.equal(ReactDOM.findDOMNode(instance).innerText, '');
   });
 
   it('should be a header with no anchor', function () {
@@ -79,8 +81,8 @@ describe('MenuItem', function () {
       </MenuItem>
     );
 
-    assert(React.findDOMNode(instance).className.match(/\bdropdown-header\b/), 'Has no header class');
-    assert.equal(React.findDOMNode(instance).innerHTML, 'Title');
+    assert(ReactDOM.findDOMNode(instance).className.match(/\bdropdown-header\b/), 'Has no header class');
+    assert.equal(ReactDOM.findDOMNode(instance).innerHTML, 'Title');
   });
 
   it('Should set target attribute on anchor', function () {
@@ -91,7 +93,7 @@ describe('MenuItem', function () {
     );
 
     let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
-    assert.equal(React.findDOMNode(anchor).getAttribute('target'), '_blank');
+    assert.equal(anchor.getAttribute('target'), '_blank');
   });
 
   it('Should call `onSelect` with target attribute', function (done) {
@@ -114,6 +116,6 @@ describe('MenuItem', function () {
         Title
       </MenuItem>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bdisabled\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bdisabled\b/));
   });
 });

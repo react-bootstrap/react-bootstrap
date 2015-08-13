@@ -13,4 +13,4 @@ const panelsInstance = (
   </div>
 );
 
-React.render(panelsInstance, mountNode);
+ReactDOM.render(panelsInstance, mountNode);

@@ -29,4 +29,4 @@ const AlertAutoDismissable = React.createClass({
   }
 });
 
-React.render(<AlertAutoDismissable />, mountNode);
+ReactDOM.render(<AlertAutoDismissable />, mountNode);

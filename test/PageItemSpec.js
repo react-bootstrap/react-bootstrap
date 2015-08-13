@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import PageItem from '../src/PageItem';
 
 describe('PageItem', function () {
@@ -8,7 +10,7 @@ describe('PageItem', function () {
       <PageItem href="#">Text</PageItem>
     );
 
-    let node = React.findDOMNode(instance);
+    let node = ReactDOM.findDOMNode(instance);
     assert.equal(node.nodeName, 'LI');
     assert.equal(node.children.length, 1);
     assert.equal(node.children[0].nodeName, 'A');
@@ -63,7 +65,7 @@ describe('PageItem', function () {
     );
 
     let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
-    assert.equal(React.findDOMNode(anchor).getAttribute('target'), '_blank');
+    assert.equal(anchor.getAttribute('target'), '_blank');
   });
 
   it('Should call "onSelect" with target attribute', function (done) {

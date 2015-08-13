@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import Navbar from '../src/Navbar';
+import ReactDOM from 'react-dom';
+
 import CollapsibleNav from '../src/CollapsibleNav';
 import Nav from '../src/Nav';
+import Navbar from '../src/Navbar';
 import NavItem from '../src/NavItem';
 
 describe('CollapsibleNav', function () {
@@ -64,7 +66,7 @@ describe('CollapsibleNav', function () {
     });
     let instance = ReactTestUtils.renderIntoDocument(<Parent />);
     let collapsibleNav = ReactTestUtils.findRenderedComponentWithType(instance, CollapsibleNav);
-    assert.notOk(React.findDOMNode(collapsibleNav).className.match(/\navbar-collapse\b/));
+    assert.notOk(ReactDOM.findDOMNode(collapsibleNav).className.match(/\navbar-collapse\b/));
     let nav = ReactTestUtils.findRenderedComponentWithType(collapsibleNav.refs.nocollapse_0, Nav);
     assert.ok(nav);
   });

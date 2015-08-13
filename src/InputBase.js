@@ -1,11 +1,12 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+
 import FormGroup from './FormGroup';
 import Glyphicon from './Glyphicon';
 
 class InputBase extends React.Component {
   getInputDOMNode() {
-    return React.findDOMNode(this.refs.input);
+    return this.refs.input;
   }
 
   getValue() {

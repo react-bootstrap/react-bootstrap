@@ -1,7 +1,10 @@
+import classNames from 'classnames';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+
 import CollapsibleMixin from '../src/CollapsibleMixin';
-import classNames from 'classnames';
+
+import {render} from './helpers';
 
 describe('CollapsibleMixin', function () {
 
@@ -12,7 +15,7 @@ describe('CollapsibleMixin', function () {
       mixins: [CollapsibleMixin],
 
       getCollapsibleDOMNode(){
-        return React.findDOMNode(this.refs.panel);
+        return this.refs.panel;
       },
 
       getCollapsibleDimensionValue(){
@@ -33,8 +36,8 @@ describe('CollapsibleMixin', function () {
   });
 
   afterEach(()=> {
-    if (console.warn.calledWithMatch('CollapsibleMixin is deprecated')){
-      console.warn.reset();
+    if (console.error.calledWithMatch('CollapsibleMixin is deprecated')){
+      console.error.reset();
     }
   });
 
@@ -67,13 +70,13 @@ describe('CollapsibleMixin', function () {
 
   describe('from collapsed to expanded', function(){
     beforeEach(function(){
-      instance = ReactTestUtils.renderIntoDocument(
+      instance = render(
         <Component>Panel content</Component>
       );
     });
 
     it('Should have collapsing class', function () {
-      instance.setProps({expanded:true});
+      instance = instance.renderWithProps({expanded:true});
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.className, 'collapsing');
     });
@@ -86,14 +89,14 @@ describe('CollapsibleMixin', function () {
         assert.equal(node.style.height, '0px');
       };
 
-      instance.setProps({expanded:true});
+      instance.renderWithProps({expanded:true});
     });
 
     it('Should set transition to height', function () {
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.styled, undefined);
 
-      instance.setProps({expanded:true});
+      instance.renderWithProps({expanded:true});
       assert.equal(node.style.height, '15px');
     });
 
@@ -105,7 +108,7 @@ describe('CollapsibleMixin', function () {
           done();
         }, 100);
       };
-      instance.setProps({expanded:true});
+      instance = instance.renderWithProps({expanded:true});
       assert.ok(instance.state.collapsing);
     });
 
@@ -121,20 +124,20 @@ describe('CollapsibleMixin', function () {
       };
 
       assert.equal(node.style.height, '');
-      instance.setProps({expanded:true});
+      instance.renderWithProps({expanded:true});
       assert.equal(node.style.height, '15px');
     });
   });
 
   describe('from expanded to collapsed', function(){
     beforeEach(function(){
-      instance = ReactTestUtils.renderIntoDocument(
+      instance = render(
         <Component defaultExpanded>Panel content</Component>
       );
     });
 
     it('Should have collapsing class', function () {
-      instance.setProps({expanded:false});
+      instance = instance.renderWithProps({expanded:false});
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.className, 'collapsing');
     });
@@ -147,14 +150,14 @@ describe('CollapsibleMixin', function () {
       };
 
       assert.equal(node.style.height, '');
-      instance.setProps({expanded:false});
+      instance.renderWithProps({expanded:false});
     });
 
     it('Should set transition to height', function () {
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.style.height, '');
 
-      instance.setProps({expanded:false});
+      instance.renderWithProps({expanded:false});
       assert.equal(node.style.height, '0px');
     });
 
@@ -166,7 +169,7 @@ describe('CollapsibleMixin', function () {
           done();
         }, 100);
       };
-      instance.setProps({expanded:false});
+      instance = instance.renderWithProps({expanded:false});
       assert.ok(instance.state.collapsing);
     });
 
@@ -182,7 +185,7 @@ describe('CollapsibleMixin', function () {
       };
 
       assert.equal(node.style.height, '');
-      instance.setProps({expanded:false});
+      instance.renderWithProps({expanded:false});
       assert.equal(node.style.height, '0px');
     });
   });
@@ -192,14 +195,14 @@ describe('CollapsibleMixin', function () {
       instance = ReactTestUtils.renderIntoDocument(
         <Component expanded={true}>Panel content</Component>
       );
-      assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'collapse in'));
+      expect(instance.refs.panel.className).to.match(/\bcollapse in\b/);
     });
 
     it('Should have collapse and in class with defaultExpanded', function () {
       instance = ReactTestUtils.renderIntoDocument(
         <Component defaultExpanded>Panel content</Component>
       );
-      assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'collapse in'));
+      expect(instance.refs.panel.className).to.match(/\bcollapse in\b/);
     });
   });
 

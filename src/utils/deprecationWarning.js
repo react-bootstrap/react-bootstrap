@@ -1,4 +1,4 @@
-import warning from 'react/lib/warning';
+import warning from 'warning';
 
 const warned = {};
 

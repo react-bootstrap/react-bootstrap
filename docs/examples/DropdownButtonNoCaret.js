@@ -10,4 +10,4 @@ const buttonInstance = (
   </ButtonToolbar>
 );
 
-React.render(buttonInstance, mountNode);
+ReactDOM.render(buttonInstance, mountNode);

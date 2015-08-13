@@ -5,4 +5,4 @@ const pagerInstance = (
   </Pager>
 );
 
-React.render(pagerInstance, mountNode);
+ReactDOM.render(pagerInstance, mountNode);

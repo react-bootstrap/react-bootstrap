@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import Pager from '../src/Pager';
+import ReactDOM from 'react-dom';
+
 import PageItem from '../src/PageItem';
+import Pager from '../src/Pager';
 
 describe('Pager', function () {
   it('Should output a unordered list as root element with class "pager"', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pager/>
     );
-    assert.equal(React.findDOMNode(instance).nodeName, 'UL');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'UL');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pager'));
   });
 
@@ -18,8 +20,8 @@ describe('Pager', function () {
         <PageItem href="#">Top</PageItem>
       </Pager>
     );
-    assert.equal(React.findDOMNode(instance).children.length, 1);
-    assert.equal(React.findDOMNode(instance).children[0].nodeName, 'LI');
+    assert.equal(ReactDOM.findDOMNode(instance).children.length, 1);
+    assert.equal(ReactDOM.findDOMNode(instance).children[0].nodeName, 'LI');
   });
 
   it('Should allow multiple "PageItem" as child elements', function () {
