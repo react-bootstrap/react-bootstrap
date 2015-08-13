@@ -12,16 +12,6 @@ describe('Button', function () {
     assert.equal(React.findDOMNode(instance).nodeName, 'BUTTON');
   });
 
-  it('Should output a component with button classes', function () {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Button componentClass='input'>
-        Title
-      </Button>
-    );
-    assert.equal(React.findDOMNode(instance).nodeName, 'INPUT');
-    assert.equal(React.findDOMNode(instance).getAttribute('class'), 'btn btn-default');
-  });
-
   it('Should have type=button by default', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button>
@@ -48,17 +38,6 @@ describe('Button', function () {
       </Button>
     );
     assert.equal(React.findDOMNode(instance).nodeName, 'A');
-    assert.equal(React.findDOMNode(instance).getAttribute('href'), href);
-  });
-
-  it('Should output an input if called with a href and an input component', function () {
-    let href = '/url';
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Button href={href} componentClass='input'>
-        Title
-      </Button>
-    );
-    assert.equal(React.findDOMNode(instance).nodeName, 'INPUT');
     assert.equal(React.findDOMNode(instance).getAttribute('href'), href);
   });
 
