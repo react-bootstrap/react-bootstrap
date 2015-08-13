@@ -29,7 +29,10 @@ const SplitButton = React.createClass({
 
   getDefaultProps() {
     return {
-      dropdownTitle: 'Toggle dropdown'
+      dropdownTitle: 'Toggle dropdown',
+      disabled: false,
+      dropup: false,
+      pullRight: false
     };
   },
 

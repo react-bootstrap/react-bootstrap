@@ -10,6 +10,12 @@ const DropdownMenu = React.createClass({
     onSelect: React.PropTypes.func
   },
 
+  getDefaultProps() {
+    return {
+      pullRight: false
+    };
+  },
+
   render() {
     let classes = {
         'dropdown-menu': true,

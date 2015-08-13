@@ -25,7 +25,10 @@ const ButtonGroup = React.createClass({
 
   getDefaultProps() {
     return {
-      bsClass: 'button-group'
+      block: false,
+      bsClass: 'button-group',
+      justified: false,
+      vertical: false
     };
   },
 

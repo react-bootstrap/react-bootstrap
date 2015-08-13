@@ -164,7 +164,9 @@ Overlay.propTypes = {
 };
 
 Overlay.defaultProps = {
-  animation: Fade
+  animation: Fade,
+  rootClose: false,
+  show: false
 };
 
 export default Overlay;
