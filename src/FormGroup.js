@@ -22,6 +22,7 @@ class FormGroup extends React.Component {
 }
 
 FormGroup.defaultProps = {
+  hasFeedback: false,
   standalone: false
 };
 

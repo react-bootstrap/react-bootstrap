@@ -8,6 +8,12 @@ const Badge = React.createClass({
     pullRight: React.PropTypes.bool
   },
 
+  getDefaultProps() {
+    return {
+      pullRight: false
+    };
+  },
+
   hasContent() {
     return ValidComponentChildren.hasValidComponent(this.props.children) ||
       (React.Children.count(this.props.children) > 1) ||

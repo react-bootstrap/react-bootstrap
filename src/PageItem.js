@@ -15,6 +15,14 @@ const PageItem = React.createClass({
     eventKey: React.PropTypes.any
   },
 
+  getDefaultProps() {
+    return {
+      disabled: false,
+      previous: false,
+      next: false
+    };
+  },
+
   render() {
     let classes = {
       'disabled': this.props.disabled,

@@ -18,6 +18,12 @@ const CollapsibleNav = React.createClass({
     eventKey: React.PropTypes.any
   },
 
+  getDefaultProps() {
+    return {
+      collapsible: false,
+      expanded: false
+    };
+  },
 
   render() {
     /*

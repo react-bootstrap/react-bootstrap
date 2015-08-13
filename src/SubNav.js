@@ -24,7 +24,9 @@ const SubNav = React.createClass({
 
   getDefaultProps() {
     return {
-      bsClass: 'nav'
+      bsClass: 'nav',
+      active: false,
+      disabled: false
     };
   },
 

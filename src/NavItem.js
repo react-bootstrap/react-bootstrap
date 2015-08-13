@@ -19,6 +19,13 @@ const NavItem = React.createClass({
     'aria-controls': React.PropTypes.string
   },
 
+  getDefaultProps() {
+    return {
+      active: false,
+      disabled: false
+    };
+  },
+
   render() {
     let {
         role,

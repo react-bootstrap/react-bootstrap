@@ -21,6 +21,7 @@ const PanelGroup = React.createClass({
 
   getDefaultProps() {
     return {
+      accordion: false,
       bsClass: 'panel-group'
     };
   },

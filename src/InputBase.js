@@ -228,4 +228,10 @@ InputBase.propTypes = {
   value: React.PropTypes.any
 };
 
+InputBase.defaultProps = {
+  disabled: false,
+  hasFeedback: false,
+  multiple: false
+};
+
 export default InputBase;

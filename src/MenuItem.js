@@ -17,7 +17,10 @@ const MenuItem = React.createClass({
 
   getDefaultProps() {
     return {
-      active: false
+      active: false,
+      divider: false,
+      disabled: false,
+      header: false
     };
   },
 

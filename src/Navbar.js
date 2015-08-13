@@ -36,7 +36,13 @@ const Navbar = React.createClass({
       bsClass: 'navbar',
       bsStyle: 'default',
       role: 'navigation',
-      componentClass: 'nav'
+      componentClass: 'nav',
+      fixedTop: false,
+      fixedBottom: false,
+      staticTop: false,
+      inverse: false,
+      fluid: false,
+      defaultNavExpanded: false
     };
   },
 
