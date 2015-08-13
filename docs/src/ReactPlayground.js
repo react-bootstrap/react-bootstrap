@@ -42,7 +42,6 @@ const Pagination = require('../../src/Pagination');
 const Panel = require('../../src/Panel');
 const PanelGroup = require('../../src/PanelGroup');
 const Popover = require('../../src/Popover');
-const Portal = require('../../src/Portal');
 const ProgressBar = require('../../src/ProgressBar');
 const Row = require('../../src/Row');
 const SplitButton = require('../../src/SplitButton');
