@@ -71,7 +71,7 @@ publish` BY ITSELF__. The release script will do that. We want to prevent issues
 like [#325](https://github.com/react-bootstrap/react-bootstrap/issues/325) and
 [#218](https://github.com/react-bootstrap/react-bootstrap/issues/218) from ever
 happening again. In order to run the release script you will need permission to
-publish to the package to npm. Those with this permission are in the [publishers
+publish the package to npm. Those with this permission are in the [publishers
 team](https://github.com/orgs/react-bootstrap/teams/publishers)
 
 *Note: The publishers team does exist. If you see 404 that means you just have no permissions to publish.*
@@ -82,7 +82,8 @@ Example usages of the release script:
 $ ./tools/release patch
 $ ./tools/release minor
 $ ./tools/release major
-$ ./tools/release minor --preid beta
+$ ./tools/release minor --preid beta   Use both bump and preid for first prerelease
+$ ./tools/release --preid beta         For follow on prereleases of the next version just use this
 ```
 
 Note that the above commands will bump the [semver](http://semver.org) version
@@ -95,13 +96,13 @@ then be re-applied and released with the proper version bump.
 ### Release Candidates
 
 In an effort to reduce the frequency with which we introduce breaking changes we
-should do our best to first push deprecation warnings in a Minor or Patch
-release. Also, Pull Requests with breaking changes should be submitted against
-the `vX-rc` branch, where X is the next Major version. Which we will in turn
-release as an `alpha` release of the next Major version. When we are ready to
-release the next Major version bump we will merge the `vX-rc` branch into the
-`master` branch and cut a `beta` release.  Once bugs have been addressed with
-the `beta` release then we will release the Major version bump.
+should do our best to first push deprecation warnings in a Minor release. Also,
+Pull Requests with breaking changes should be submitted against the `vX-rc`
+branch, where X is the next Major version. Which we will in turn release as an
+`alpha` release of the next Major version. When we are ready to release the next
+Major version bump we will merge the `vX-rc` branch into the `master` branch and
+cut a `beta` release.  Once bugs have been addressed with the `beta` release
+then we will release the Major version bump.
 
 ### Live releasing the documentation
 

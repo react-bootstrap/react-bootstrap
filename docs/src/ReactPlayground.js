@@ -1,117 +1,65 @@
-import * as modReact from 'react';
-import * as modClassNames from 'classnames';
-import * as modAccordion from '../../src/Accordion';
-import * as modAlert from '../../src/Alert';
-import * as modBadge from '../../src/Badge';
-import * as modmodButton from '../../src/Button';
-import * as modButtonGroup from '../../src/ButtonGroup';
-import * as modButtonInput from '../../src/ButtonInput';
-import * as modmodButtonToolbar from '../../src/ButtonToolbar';
-import * as modCollapsibleNav from '../../src/CollapsibleNav';
-import * as modCollapsibleMixin from '../../src/CollapsibleMixin';
-import * as modCarousel from '../../src/Carousel';
-import * as modCarouselItem from '../../src/CarouselItem';
-import * as modCol from '../../src/Col';
-import * as modDropdownButton from '../../src/DropdownButton';
-import * as modFormControls from '../../src/FormControls';
-import * as modGlyphicon from '../../src/Glyphicon';
-import * as modGrid from '../../src/Grid';
-import * as modInput from '../../src/Input';
-import * as modJumbotron from '../../src/Jumbotron';
-import * as modLabel from '../../src/Label';
-import * as modListGroup from '../../src/ListGroup';
-import * as modListGroupItem from '../../src/ListGroupItem';
-import * as modNav from '../../src/Nav';
-import * as modNavbar from '../../src/Navbar';
-import * as modNavItem from '../../src/NavItem';
-import * as modMenuItem from '../../src/MenuItem';
-import * as modModal from '../../src/Modal';
-import * as modModalTrigger from '../../src/ModalTrigger';
-import * as modOverlayTrigger from '../../src/OverlayTrigger';
-import * as modOverlayMixin from '../../src/OverlayMixin';
-import * as modPageHeader from '../../src/PageHeader';
-import * as modPageItem from '../../src/PageItem';
-import * as modPager from '../../src/Pager';
-import * as modPagination from '../../src/Pagination';
-import * as modPanel from '../../src/Panel';
-import * as modPanelGroup from '../../src/PanelGroup';
-import * as modPopover from '../../src/Popover';
-//import * as modPopoverTrigger from '../../src/PopoverTrigger';
-import * as modProgressBar from '../../src/ProgressBar';
-import * as modRow from '../../src/Row';
-import * as modSplitButton from '../../src/SplitButton';
-import * as modTabbedArea from '../../src/TabbedArea';
-import * as modTable from '../../src/Table';
-import * as modTabPane from '../../src/TabPane';
-import * as modThumbnail from '../../src/Thumbnail';
-import * as modTooltip from '../../src/Tooltip';
-//import * as modTooltipTrigger from '../../src/TooltipTrigger';
-import * as modWell from '../../src/Well';
+// These do not use ES6 imports, because the evaluated code requires un-mangled
+// variable names.
 
-import * as modPortal from '../../src/Portal';
-import * as modOverlay from '../../src/Overlay';
+/* eslint-disable */
+const classNames = require('classnames');
+const React = require('react');
+
+const Accordion = require('../../src/Accordion');
+const Alert = require('../../src/Alert');
+const Badge = require('../../src/Badge');
+const Button = require('../../src/Button');
+const ButtonGroup = require('../../src/ButtonGroup');
+const ButtonInput = require('../../src/ButtonInput');
+const ButtonToolbar = require('../../src/ButtonToolbar');
+const Carousel = require('../../src/Carousel');
+const CarouselItem = require('../../src/CarouselItem');
+const Col = require('../../src/Col');
+const Collapse = require('../../src/Collapse');
+const CollapsibleMixin = require('../../src/CollapsibleMixin');
+const CollapsibleNav = require('../../src/CollapsibleNav');
+const DropdownButton = require('../../src/DropdownButton');
+const Fade = require('../../src/Fade');
+const FormControls = require('../../src/FormControls');
+const Glyphicon = require('../../src/Glyphicon');
+const Grid = require('../../src/Grid');
+const Input = require('../../src/Input');
+const Jumbotron = require('../../src/Jumbotron');
+const Label = require('../../src/Label');
+const ListGroup = require('../../src/ListGroup');
+const ListGroupItem = require('../../src/ListGroupItem');
+const MenuItem = require('../../src/MenuItem');
+const Modal = require('../../src/Modal');
+const Nav = require('../../src/Nav');
+const Navbar = require('../../src/Navbar');
+const NavItem = require('../../src/NavItem');
+const Overlay = require('../../src/Overlay');
+const OverlayTrigger = require('../../src/OverlayTrigger');
+const PageHeader = require('../../src/PageHeader');
+const PageItem = require('../../src/PageItem');
+const Pager = require('../../src/Pager');
+const Pagination = require('../../src/Pagination');
+const Panel = require('../../src/Panel');
+const PanelGroup = require('../../src/PanelGroup');
+const Popover = require('../../src/Popover');
+const Portal = require('../../src/Portal');
+const ProgressBar = require('../../src/ProgressBar');
+const Row = require('../../src/Row');
+const SplitButton = require('../../src/SplitButton');
+const TabbedArea = require('../../src/TabbedArea');
+const Table = require('../../src/Table');
+const TabPane = require('../../src/TabPane');
+const Thumbnail = require('../../src/Thumbnail');
+const Tooltip = require('../../src/Tooltip');
+const Well = require('../../src/Well');
+/* eslint-enable */
 
 import babel from 'babel-core/browser';
-
 import CodeExample from './CodeExample';
 
-
-
-const classNames = modClassNames.default;
-/* eslint-disable */
-const Portal = modPortal.default;
-
-const React = modReact.default;
-const Accordion = modAccordion.default;
-const Alert = modAlert.default;
-const Badge = modBadge.default;
-const Button = modmodButton.default;
-const ButtonGroup = modButtonGroup.default;
-const ButtonInput = modButtonInput.default;
-const ButtonToolbar = modmodButtonToolbar.default;
-const CollapsibleNav = modCollapsibleNav.default;
-const CollapsibleMixin = modCollapsibleMixin.default;
-const Carousel = modCarousel.default;
-const CarouselItem = modCarouselItem.default;
-const Col = modCol.default;
-const DropdownButton = modDropdownButton.default;
-const FormControls = modFormControls.default;
-const Glyphicon = modGlyphicon.default;
-const Grid = modGrid.default;
-const Input = modInput.default;
-const Jumbotron = modJumbotron.default;
-const Label = modLabel.default;
-const ListGroup = modListGroup.default;
-const ListGroupItem = modListGroupItem.default;
-const Nav = modNav.default;
-const Navbar = modNavbar.default;
-const NavItem = modNavItem.default;
-const MenuItem = modMenuItem.default;
-const Modal = modModal.default;
-const ModalTrigger = modModalTrigger.default;
-const OverlayTrigger = modOverlayTrigger.default;
-const OverlayMixin = modOverlayMixin.default;
-const PageHeader = modPageHeader.default;
-const PageItem = modPageItem.default;
-const Pagination = modPagination.default;
-const Pager = modPager.default;
-const Panel = modPanel.default;
-const PanelGroup = modPanelGroup.default;
-const Popover = modPopover.default;
-//const PopoverTrigger = modPopoverTrigger.default;
-const ProgressBar = modProgressBar.default;
-const Row = modRow.default;
-const SplitButton = modSplitButton.default;
-const TabbedArea = modTabbedArea.default;
-const Table = modTable.default;
-const TabPane = modTabPane.default;
-const Thumbnail = modThumbnail.default;
-const Tooltip = modTooltip.default;
-//const TooltipTrigger = modTooltipTrigger.default;
-const Well = modWell.default;
-const Overlay = modOverlay.default;
-
-/* eslint-enable */
+// This is only used for the ReactPlayground component, not for any of the
+// examples, so it's fine to import like this.
+import SafeAnchor from '../../src/SafeAnchor';
 
 const IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)
@@ -196,12 +144,9 @@ const selfCleaningTimeout = {
 const ReactPlayground = React.createClass({
   mixins: [selfCleaningTimeout],
 
-  MODES: {JSX: 'JSX', JS: 'JS', NONE: null},
-
   propTypes: {
     codeText: React.PropTypes.string.isRequired,
-    transformer: React.PropTypes.func,
-    renderCode: React.PropTypes.bool
+    transformer: React.PropTypes.func
   },
 
   getDefaultProps() {
@@ -214,132 +159,146 @@ const ReactPlayground = React.createClass({
 
   getInitialState() {
     return {
-      mode: this.MODES.NONE,
-      code: this.props.codeText
+      code: this.props.codeText,
+      codeChanged: false,
+      showCode: false
     };
   },
 
-  handleCodeChange(value) {
-    this.setState({code: value});
-    this.executeCode();
-  },
+  componentWillMount() {
+    // For the initial render, we can hijack React.render to intercept the
+    // example element and render it normally. This is safe because it's code
+    // that we supply, so we can ensure ahead of time that it won't throw an
+    // exception while rendering.
+    const originalReactRender = React.render;
+    React.render = (element) => this._initialExample = element;
 
-  handleCodeModeSwitch(mode) {
-    this.setState({mode});
-  },
+    // Stub out mountNode for the example code.
+    const mountNode = null;  // eslint-disable-line no-unused-vars
 
-  handleCodeModeToggle(e) {
-    let mode;
+    try {
+      const compiledCode = this.props.transformer(this.props.codeText);
 
-    e.preventDefault();
-
-    switch (this.state.mode) {
-      case this.MODES.NONE:
-        mode = this.MODES.JSX;
-        break;
-      case this.MODES.JSX:
-      default:
-        mode = this.MODES.NONE;
-    }
-
-    this.setState({mode});
-  },
-
-  compileCode() {
-    return this.props.transformer(this.state.code);
-  },
-
-  render() {
-    let classes = {
-      'bs-example': true
-    };
-    let toggleClasses = {
-      'code-toggle': true
-    };
-    let editor;
-
-    if (this.props.exampleClassName){
-      classes[this.props.exampleClassName] = true;
-    }
-
-    if (this.state.mode !== this.MODES.NONE) {
-       editor = (
-           <CodeMirrorEditor
-             key='jsx'
-             onChange={this.handleCodeChange}
-             className='highlight'
-             codeText={this.state.code}/>
-        );
-       toggleClasses.open = true;
-    }
-    return (
-      <div className='playground'>
-        <div className={classNames(classes)}>
-          <div ref='mount' />
-        </div>
-        {editor}
-        <a className={classNames(toggleClasses)} onClick={this.handleCodeModeToggle} href='#'>{this.state.mode === this.MODES.NONE ? 'show code' : 'hide code'}</a>
-      </div>
-      );
-  },
-
-  componentDidMount() {
-    this.executeCode();
-  },
-
-  componentWillUpdate(nextProps, nextState) {
-    // execute code only when the state's not being updated by switching tab
-    // this avoids re-displaying the error, which comes after a certain delay
-    if (this.state.code !== nextState.code) {
-      this.executeCode();
+      /* eslint-disable */
+      eval(compiledCode);
+      /* eslint-enable */
+    } finally {
+      React.render = originalReactRender;
     }
   },
 
   componentWillUnmount() {
-    let mountNode = React.findDOMNode(this.refs.mount);
+    this.clearExample();
+  },
+
+  handleCodeChange(value) {
+    this.setState(
+      {code: value, codeChanged: true},
+      this.executeCode
+    );
+  },
+
+  handleCodeModeToggle() {
+    this.setState({
+      showCode: !this.state.showCode
+    });
+  },
+
+  render() {
+    return (
+      <div className='playground'>
+        {this.renderExample()}
+
+        {this.renderEditor()}
+        {this.renderToggle()}
+      </div>
+    );
+  },
+
+  renderExample() {
+    let example;
+    if (this.state.codeChanged) {
+      example = (
+        <div ref='mount' />
+      );
+    } else {
+      example = (
+        <div>{this._initialExample}</div>
+      );
+    }
+
+    return (
+      <div className={classNames('bs-example', this.props.exampleClassName)}>
+        {example}
+      </div>
+    );
+  },
+
+  renderEditor() {
+    if (!this.state.showCode) {
+      return null;
+    }
+
+    return (
+      <CodeMirrorEditor
+        key='jsx'
+        onChange={this.handleCodeChange}
+        className='highlight'
+        codeText={this.state.code}
+      />
+    );
+  },
+
+  renderToggle() {
+    return (
+      <SafeAnchor
+        className={classNames('code-toggle', {'open': this.state.showCode})}
+        onClick={this.handleCodeModeToggle}
+      >
+        {this.state.showCode ? 'hide code' : 'show code'}
+      </SafeAnchor>
+    );
+  },
+
+  clearExample() {
+    const mountNode = React.findDOMNode(this.refs.mount);
     try {
       React.unmountComponentAtNode(mountNode);
     } catch (e) {
-      console.error(e);
+      console.error(e); // eslint-disable-line no-console
     }
+
+    return mountNode;
   },
 
   executeCode() {
-    let mountNode = React.findDOMNode(this.refs.mount);
-
-    try {
-      React.unmountComponentAtNode(mountNode);
-    } catch (e) {
-      console.error(e);
-    }
+    const mountNode = this.clearExample();
 
     let compiledCode = null;
     try {
-      compiledCode = this.compileCode();
+      compiledCode = this.props.transformer(this.state.code);
 
-      if (this.props.renderCode) {
-        React.render(
-          <CodeMirrorEditor codeText={compiledCode} readOnly={true} />,
-          mountNode
-        );
-      } else {
-        /* eslint-disable */
-        eval(compiledCode);
-        /* eslint-enable */
-      }
+      /* eslint-disable */
+      eval(compiledCode);
+      /* eslint-enable */
     } catch (err) {
       if (compiledCode !== null) {
-        console.log(err, compiledCode);
+        console.log(err, compiledCode); // eslint-disable-line no-console
       } else {
-        console.log(err);
+        console.log(err); // eslint-disable-line no-console
       }
 
-      this.updateTimeout(() => {
-        React.render(
-          <Alert bsStyle='danger'>{err.toString()}</Alert>,
-          mountNode
-        );
-      }, 500);
+      this.updateTimeout(
+        () => {
+          React.render(
+            <Alert bsStyle='danger'>
+              {err.toString()}
+            </Alert>,
+            mountNode
+          );
+        },
+        500
+      );
     }
   }
 });

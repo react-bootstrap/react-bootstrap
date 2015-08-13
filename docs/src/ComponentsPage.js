@@ -57,6 +57,7 @@ const ComponentsPage = React.createClass({
             <div className='row'>
               <div className='col-md-9' role='main'>
 
+
                 {/* Buttons */}
                 <div className='bs-docs-section'>
                   <h1 className='page-header'><Anchor id='buttons'>Buttons</Anchor> <small>Button</small></h1>
@@ -218,6 +219,9 @@ const ComponentsPage = React.createClass({
                   <p>You can pass on any additional properties you need, e.g. a custom <code>onClick</code> handler, as it is shown in the example code. They all will apply to the wrapper <code>div</code> element.</p>
                   <ReactPlayground codeText={Samples.PanelBasic} />
 
+                  <h3><Anchor id='panels-collapsible'>Collapsible Panel</Anchor></h3>
+                  <ReactPlayground codeText={Samples.PanelCollapsible} />
+
                   <h3><Anchor id='panels-heading'>Panel with heading</Anchor></h3>
                   <p>Easily add a heading container to your panel with the <code>header</code> prop.</p>
                   <ReactPlayground codeText={Samples.PanelWithHeading} />
@@ -246,10 +250,6 @@ const ComponentsPage = React.createClass({
                   <p><code>&lt;Accordion /&gt;</code> aliases <code>&lt;PanelGroup accordion /&gt;</code>.</p>
                   <ReactPlayground codeText={Samples.PanelGroupAccordion} />
 
-                  <h3><Anchor id='panels-collapsible'>Collapsible Mixin</Anchor></h3>
-                  <p><code>CollapsibleMixin</code> can be used to create your own components with collapse functionality.</p>
-                  <ReactPlayground codeText={Samples.CollapsibleParagraph} />
-
                   <h3><Anchor id='panels-props'>Props</Anchor></h3>
 
                   <h4><Anchor id='panels-props-accordion'>Panels, Accordion</Anchor></h4>
@@ -263,12 +263,19 @@ const ComponentsPage = React.createClass({
                 <div className='bs-docs-section'>
                   <h1 className='page-header'><Anchor id='modals'>Modals</Anchor> <small>Modal</small></h1>
 
-                  <h3><Anchor id='modals-static'>A static example</Anchor></h3>
+                  <h3><Anchor id='modals-static'>Static Markup</Anchor></h3>
+                  <p>A modal dialog component</p>
+                  <ReactPlayground codeText={Samples.ModalStatic} />
+
+                  <h3><Anchor id='modals-live'>Basic example</Anchor></h3>
+                  <p></p>
                   <p>
-                    A rendered modal with header, body, and set of actions in the footer. The <code>{'<Modal/>'}</code> Component comes with
+                    A modal with header, body, and set of actions in the footer. Use <code>{'<Modal/>'}</code> in combination with other components to
+                    show or hide your Modal. The <code>{'<Modal/>'}</code> Component comes with
                     a few convenient "sub components": <code>{'<Modal.Header/>'}</code>, <code>{'<Modal.Title/>'}</code>, <code>{'<Modal.Body/>'}</code>,
                     and <code>{'<Modal.Footer/>'}</code>, which you can use to build the Modal content.
                   </p>
+                  <ReactPlayground codeText={Samples.Modal} />
                   <div className='bs-callout bs-callout-info'>
                     <h4>Additional Import Options</h4>
                     <p>
@@ -276,11 +283,6 @@ const ComponentsPage = React.createClass({
                       import them directly from the <code>/lib</code> directory like: <code>{"require('react-bootstrap/lib/ModalHeader')"}</code>.
                     </p>
                   </div>
-                  <ReactPlayground codeText={Samples.ModalStatic} />
-
-                  <h3><Anchor id='modals-live'>Live demo</Anchor></h3>
-                  <p>Use <code>{'<Modal/>'}</code> in combination with other components to show or hide your Modal.</p>
-                  <ReactPlayground codeText={Samples.ModalTrigger} />
 
                   <h3><Anchor id='modals-contained'>Contained Modal</Anchor></h3>
                   <p>You will need to add the following css to your project and ensure that your container has the <code>modal-container</code> class.</p>
@@ -300,7 +302,7 @@ const ComponentsPage = React.createClass({
                   <p>You can specify a bootstrap large or small modal by using the "bsSize" prop.</p>
                   <ReactPlayground codeText={Samples.ModalDefaultSizing} />
 
-                  <h3><Anchor id='modal-custom-sizing'>Sizing modals using custom css</Anchor></h3>
+                  <h3><Anchor id='modal-custom-sizing'>Sizing modals using custom CSS</Anchor></h3>
                   <p>You can apply custom css to the modal dialog div using the "dialogClassName" prop. Example is using a custom css class with width set to 90%.</p>
                   <ReactPlayground codeText={Samples.ModalCustomSizing} />
 
@@ -320,10 +322,6 @@ const ComponentsPage = React.createClass({
 
                   <h4><Anchor id='modals-props-modal-footer'>Modal.Footer</Anchor></h4>
                   <PropTable component='ModalFooter'/>
-
-                  <h4>ModalTrigger <strong className='text-danger'>Deprecated: use the Modal directly to manage it's visibility</strong></h4>
-                  <PropTable component='ModalTrigger'/>
-
                 </div>
 
 
@@ -486,7 +484,7 @@ const ComponentsPage = React.createClass({
 
                   <h3><Anchor id='navbars-mobile-friendly'>Mobile Friendly</Anchor></h3>
                   <p>To have a mobile friendly Navbar, specify the property <code>toggleNavKey</code> on the Navbar with a value corresponding to an <code>eventKey</code> of one of his <code>Nav</code> children. This child will be the one collapsed.</p>
-                  <p>By setting the property {React.DOM.code(null, 'defaultNavExpanded={true}')} the Navbar will start expanded by default.</p>
+                  <p>By setting the property {React.DOM.code(null, 'defaultNavExpanded')} the Navbar will start expanded by default.</p>
                   <div className='bs-callout bs-callout-info'>
                     <h4>Scrollbar overflow</h4>
                     <p>The height of the collapsible is slightly smaller than the real height. To hide the scroll bar, add the following css to your style files.</p>
@@ -517,7 +515,7 @@ const ComponentsPage = React.createClass({
                 <div className='bs-docs-section'>
                   <h1 className='page-header'><Anchor id='tabs'>Togglable tabs</Anchor> <small>TabbedArea, TabPane</small></h1>
 
-                  <p>Add quick, dynamic tab functionality to transition through panes of local content, even via dropdown menus.</p>
+                  <p>Add quick, dynamic tab functionality to transition through panes of local content.</p>
 
                   <h3><Anchor id='tabs-uncontrolled'>Uncontrolled</Anchor></h3>
                   <p>Allow the component to control its own state.</p>
@@ -530,11 +528,6 @@ const ComponentsPage = React.createClass({
                   <h3><Anchor id='tabs-no-animation'>No animation</Anchor></h3>
                   <p>Set the <code>animation</code> prop to <code>false</code></p>
                   <ReactPlayground codeText={Samples.TabbedAreaNoAnimation} exampleClassName='bs-example-tabs' />
-
-                  <div className='bs-callout bs-callout-info'>
-                    <h4>Extends tabbed navigation</h4>
-                    <p>This plugin extends the <a href='#navs'>tabbed navigation component</a> to add tabbable areas.</p>
-                  </div>
 
                   <h3><Anchor id='tabs-props'>Props</Anchor></h3>
 
@@ -855,6 +848,22 @@ const ComponentsPage = React.createClass({
 
                   <h3><Anchor id='utilities-position-props'>Props</Anchor></h3>
                   <PropTable component='Position'/>
+
+                  <h2><Anchor id='utilities-transitions'>Transitions</Anchor></h2>
+
+                  <h3><Anchor id='utilities-collapse'>Collapse</Anchor></h3>
+                  <p>Add a collapse toggle animation to an element or component.</p>
+                  <ReactPlayground codeText={Samples.Collapse} />
+
+                  <h4><Anchor id='utilities-collapse-props'>Props</Anchor></h4>
+                  <PropTable component='Collapse'/>
+
+                  <h3><Anchor id='utilities-fade'>Fade</Anchor></h3>
+                  <p>Add a fade animation to a child element or component.</p>
+                  <ReactPlayground codeText={Samples.Fade} />
+
+                  <h4><Anchor id='utilities-fade-props'>Props</Anchor></h4>
+                  <PropTable component='Fade'/>
                 </div>
               </div>
 
@@ -884,7 +893,7 @@ const ComponentsPage = React.createClass({
                     <NavItem href='#progress' key={8}>Progress bars</NavItem>
                     <NavItem href='#navs' key={9}>Navs</NavItem>
                     <NavItem href='#navbars' key={10}>Navbars</NavItem>
-                    <NavItem href='#tabs' key={11}>Togglable tabs</NavItem>
+                    <NavItem href='#tabs' key={11}>Tabs</NavItem>
                     <NavItem href='#pager' key={12}>Pager</NavItem>
                     <NavItem href='#pagination' key={13}>Pagination</NavItem>
                     <NavItem href='#alerts' key={14}>Alerts</NavItem>

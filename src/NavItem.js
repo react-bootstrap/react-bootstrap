@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
+import SafeAnchor from './SafeAnchor';
 
 const NavItem = React.createClass({
   mixins: [BootstrapMixin],
@@ -18,12 +19,6 @@ const NavItem = React.createClass({
     'aria-controls': React.PropTypes.string
   },
 
-  getDefaultProps() {
-    return {
-      href: '#'
-    };
-  },
-
   render() {
     let {
         role,
@@ -34,7 +29,7 @@ const NavItem = React.createClass({
         title,
         target,
         children,
-        'aria-controls': ariaControls,  // eslint-disable-line react/prop-types
+        'aria-controls': ariaControls,
         ...props } = this.props;
     let classes = {
           active,
@@ -46,8 +41,7 @@ const NavItem = React.createClass({
           title,
           target,
           id: linkId,
-          onClick: this.handleClick,
-          ref: 'anchor'
+          onClick: this.handleClick
         };
 
     if (!role && href === '#') {
@@ -56,9 +50,9 @@ const NavItem = React.createClass({
 
     return (
       <li {...props} role='presentation' className={classNames(props.className, classes)}>
-        <a {...linkProps} aria-selected={active} aria-controls={ariaControls}>
+        <SafeAnchor {...linkProps} aria-selected={active} aria-controls={ariaControls}>
           { children }
-        </a>
+        </SafeAnchor>
       </li>
     );
   },

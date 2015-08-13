@@ -1,5 +1,6 @@
 import React from 'react';
 import domUtils from './utils/domUtils';
+import deprecationWarning from './utils/deprecationWarning';
 
 // TODO: listen for onTransitionEnd to remove el
 function getElementsAndSelf (root, classes){
@@ -17,6 +18,10 @@ function getElementsAndSelf (root, classes){
 }
 
 export default {
+  componentWillMount(){
+    deprecationWarning('FadeMixin', 'Fade Component');
+  },
+
   _fadeIn() {
     let els;
 

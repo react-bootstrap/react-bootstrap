@@ -2,10 +2,10 @@ import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 
 import BootstrapMixin from './BootstrapMixin';
-import CollapsibleMixin from './CollapsibleMixin';
+import Collapse from './Collapse';
 
 const Panel = React.createClass({
-  mixins: [BootstrapMixin, CollapsibleMixin],
+  mixins: [BootstrapMixin],
 
   propTypes: {
     collapsible: React.PropTypes.bool,
@@ -13,6 +13,8 @@ const Panel = React.createClass({
     header: React.PropTypes.node,
     id: React.PropTypes.string,
     footer: React.PropTypes.node,
+    defaultExpanded: React.PropTypes.bool,
+    expanded: React.PropTypes.bool,
     eventKey: React.PropTypes.any
   },
 
@@ -20,6 +22,18 @@ const Panel = React.createClass({
     return {
       bsClass: 'panel',
       bsStyle: 'default'
+    };
+  },
+
+  getInitialState(){
+    let defaultExpanded = this.props.defaultExpanded != null ?
+      this.props.defaultExpanded :
+        this.props.expanded != null ?
+        this.props.expanded :
+        false;
+
+    return {
+      expanded: defaultExpanded
     };
   },
 
@@ -38,19 +52,11 @@ const Panel = React.createClass({
   },
 
   handleToggle(){
-    this.setState({expanded:!this.state.expanded});
+    this.setState({ expanded: !this.state.expanded});
   },
 
-  getCollapsibleDimensionValue() {
-    return React.findDOMNode(this.refs.panel).scrollHeight;
-  },
-
-  getCollapsibleDOMNode() {
-    if (!this.isMounted() || !this.refs || !this.refs.panel) {
-      return null;
-    }
-
-    return React.findDOMNode(this.refs.panel);
+  isExpanded(){
+    return this.props.expanded != null ? this.props.expanded : this.state.expanded;
   },
 
   render() {
@@ -69,13 +75,15 @@ const Panel = React.createClass({
     let collapseClass = this.prefixClass('collapse');
 
     return (
-      <div
-        className={classNames(this.getCollapsibleClassSet(collapseClass))}
-        id={this.props.id}
-        ref='panel'
-        aria-expanded={this.isExpanded() ? 'true' : 'false'}>
-        {this.renderBody()}
-      </div>
+      <Collapse in={this.isExpanded()}>
+        <div
+          className={collapseClass}
+          id={this.props.id}
+          ref='panel'>
+          {this.renderBody()}
+
+        </div>
+      </Collapse>
     );
   },
 
@@ -178,7 +186,7 @@ const Panel = React.createClass({
         href={'#' + (this.props.id || '')}
         aria-controls={this.props.collapsible ? this.props.id : null}
         className={this.isExpanded() ? null : 'collapsed'}
-        aria-expanded={this.isExpanded() ? 'true' : 'false'}
+        aria-expanded={this.isExpanded()}
         onClick={this.handleSelect}>
         {header}
       </a>

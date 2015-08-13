@@ -1,14 +1,8 @@
+
 const modalInstance = (
   <div className='static-modal'>
-    <Modal
-      enforceFocus={false}
-      autoFocus={false}
-      backdrop={false}
-      animation={false}
-      container={mountNode}
-      onHide={function(){}}>
-
-      <Modal.Header closeButton>
+    <Modal.Dialog>
+      <Modal.Header>
         <Modal.Title>Modal title</Modal.Title>
       </Modal.Header>
 
@@ -20,7 +14,8 @@ const modalInstance = (
         <Button>Close</Button>
         <Button bsStyle='primary'>Save changes</Button>
       </Modal.Footer>
-    </Modal>
+
+    </Modal.Dialog>
   </div>
 );
 

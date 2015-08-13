@@ -4,6 +4,7 @@ import TabbedArea from '../src/TabbedArea';
 import NavItem from '../src/NavItem';
 import TabPane from '../src/TabPane';
 import ValidComponentChildren from '../src/utils/ValidComponentChildren';
+import { render } from './helpers';
 
 describe('TabbedArea', function () {
   it('Should show the correct tab', function () {
@@ -228,6 +229,48 @@ describe('TabbedArea', function () {
     assert.equal(panes[0].props.active, false);
     assert.equal(panes[1].props.active, true);
     assert.equal(tabbedArea.refs.tabs.props.activeKey, 2);
+  });
+
+  describe('animation', function () {
+    let mountPoint;
+
+    beforeEach(()=>{
+      mountPoint = document.createElement('div');
+      document.body.appendChild(mountPoint);
+    });
+
+    afterEach(function () {
+      React.unmountComponentAtNode(mountPoint);
+      document.body.removeChild(mountPoint);
+    });
+
+    function checkTabRemovingWithAnimation(animation) {
+      it(`should correctly set "active" after tabPane is removed with "animation=${animation}"`, function() {
+        let instance = render(
+          <TabbedArea activeKey={2} animation={animation}>
+            <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
+            <TabPane tab="Tab 2" eventKey={2}>Tab 2 content</TabPane>
+          </TabbedArea>
+        , mountPoint);
+
+        let panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
+
+        assert.equal(panes[0].props.active, false);
+        assert.equal(panes[1].props.active, true);
+
+        // second tab has been removed
+        render(
+          <TabbedArea activeKey={1} animation={animation}>
+            <TabPane tab="Tab 1" eventKey={1}>Tab 1 content</TabPane>
+          </TabbedArea>
+        , mountPoint);
+
+        assert.equal(panes[0].props.active, true);
+      });
+    }
+
+    checkTabRemovingWithAnimation(true);
+    checkTabRemovingWithAnimation(false);
   });
 
   describe('Web Accessibility', function(){

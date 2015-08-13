@@ -124,6 +124,16 @@ Also Bootstrap mentions http://getbootstrap.com/getting-started/#examples
 as examples of things you can do, but they are not part of the core library,
 therefore this project is the wrong place to implement them.
 
+## Breaking changes
+
+Breaking changes should be accompanied with deprecations of removed
+functionality. Prior to the 1.0.0 release, we aim to follow React's example of
+taking two Minor releases to break old functionality. As such, changes that
+intend to remove or change public APIs should be be submitted against the
+`vX-rc` branch, and should be accompanied with deprecation warnings on the old
+APIs. The deprecated APIs themselves should not be removed until the Minor
+release after that.
+
 ## Notes for lodash functions usage in the code
 
 You can use `lodash` but keep it to things where it actually needs it, i.e. don't use `lodash`'s `forEach` when `Array.prototype.forEach` is fine.

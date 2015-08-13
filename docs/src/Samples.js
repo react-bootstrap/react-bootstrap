@@ -1,6 +1,9 @@
 /* eslint no-path-concat: 0, no-var: 0 */
 
 export default {
+  Collapse:                      require('fs').readFileSync(__dirname + '/../examples/Collapse.js', 'utf8'),
+  Fade:                          require('fs').readFileSync(__dirname + '/../examples/Fade.js', 'utf8'),
+
   ButtonTypes:                   require('fs').readFileSync(__dirname + '/../examples/ButtonTypes.js', 'utf8'),
   ButtonSizes:                   require('fs').readFileSync(__dirname + '/../examples/ButtonSizes.js', 'utf8'),
   ButtonBlock:                   require('fs').readFileSync(__dirname + '/../examples/ButtonBlock.js', 'utf8'),
@@ -22,6 +25,7 @@ export default {
   SplitButtonDropup:             require('fs').readFileSync(__dirname + '/../examples/SplitButtonDropup.js', 'utf8'),
   SplitButtonRight:              require('fs').readFileSync(__dirname + '/../examples/SplitButtonRight.js', 'utf8'),
   PanelBasic:                    require('fs').readFileSync(__dirname + '/../examples/PanelBasic.js', 'utf8'),
+  PanelCollapsible:              require('fs').readFileSync(__dirname + '/../examples/PanelCollapsible.js', 'utf8'),
   PanelWithHeading:              require('fs').readFileSync(__dirname + '/../examples/PanelWithHeading.js', 'utf8'),
   PanelWithFooter:               require('fs').readFileSync(__dirname + '/../examples/PanelWithFooter.js', 'utf8'),
   PanelContextual:               require('fs').readFileSync(__dirname + '/../examples/PanelContextual.js', 'utf8'),
@@ -29,10 +33,8 @@ export default {
   PanelGroupControlled:          require('fs').readFileSync(__dirname + '/../examples/PanelGroupControlled.js', 'utf8'),
   PanelGroupUncontrolled:        require('fs').readFileSync(__dirname + '/../examples/PanelGroupUncontrolled.js', 'utf8'),
   PanelGroupAccordion:           require('fs').readFileSync(__dirname + '/../examples/PanelGroupAccordion.js', 'utf8'),
-  CollapsibleParagraph:          require('fs').readFileSync(__dirname + '/../examples/CollapsibleParagraph.js', 'utf8'),
+  Modal:                         require('fs').readFileSync(__dirname + '/../examples/Modal.js', 'utf8'),
   ModalStatic:                   require('fs').readFileSync(__dirname + '/../examples/ModalStatic.js', 'utf8'),
-  ModalTrigger:                  require('fs').readFileSync(__dirname + '/../examples/ModalTrigger.js', 'utf8'),
-
   ModalContained:                require('fs').readFileSync(__dirname + '/../examples/ModalContained.js', 'utf8'),
   ModalDefaultSizing:            require('fs').readFileSync(__dirname + '/../examples/ModalDefaultSizing.js', 'utf8'),
   ModalCustomSizing:             require('fs').readFileSync(__dirname + '/../examples/ModalCustomSizing.js', 'utf8'),

@@ -1,5 +1,6 @@
 import React from 'react';
 import TransitionEvents from './utils/TransitionEvents';
+import deprecationWarning from './utils/deprecationWarning';
 
 const CollapsibleMixin = {
 
@@ -19,6 +20,10 @@ const CollapsibleMixin = {
       expanded: defaultExpanded,
       collapsing: false
     };
+  },
+
+  componentWillMount(){
+    deprecationWarning('CollapsibleMixin', 'Collapse Component');
   },
 
   componentWillUpdate(nextProps, nextState){

@@ -1,0 +1,8 @@
+{
+  "plugins": [
+    "lodash"
+  ],
+  "rules": {
+    "lodash/import": 2
+  }
+}

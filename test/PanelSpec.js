@@ -191,9 +191,7 @@ describe('Panel', function () {
       let instance = ReactTestUtils.renderIntoDocument(
         <Panel collapsible={true} expanded={true} header="Heading">Panel content</Panel>
       );
-      let collapse = React.findDOMNode(instance).querySelector('.panel-collapse');
       let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
-      assert.equal(collapse.getAttribute('aria-expanded'), 'true');
       assert.equal(anchor.getAttribute('aria-expanded'), 'true');
     });
 
@@ -201,9 +199,7 @@ describe('Panel', function () {
       let instance = ReactTestUtils.renderIntoDocument(
         <Panel collapsible={true} expanded={false} header="Heading">Panel content</Panel>
       );
-      let collapse = React.findDOMNode(instance).querySelector('.panel-collapse');
       let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
-      assert.equal(collapse.getAttribute('aria-expanded'), 'false');
       assert.equal(anchor.getAttribute('aria-expanded'), 'false');
     });
 

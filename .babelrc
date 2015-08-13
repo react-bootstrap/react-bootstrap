@@ -1,5 +1,5 @@
 {
-  "optional": [
-    "es7.objectRestSpread"
-  ]
+  "stage": 1,
+  "optional": ["runtime"],
+  "loose": ["all"]
 }

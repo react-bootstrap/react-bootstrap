@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import createSelectedEvent from './utils/createSelectedEvent';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 const PaginationButton = React.createClass({
   mixins: [BootstrapMixin],
@@ -14,7 +15,11 @@ const PaginationButton = React.createClass({
     ]),
     onSelect: React.PropTypes.func,
     disabled: React.PropTypes.bool,
-    active: React.PropTypes.bool
+    active: React.PropTypes.bool,
+    /**
+     * You can use a custom element for this component
+     */
+    buttonComponentClass: CustomPropTypes.elementType
   },
 
   getDefaultProps() {
@@ -25,8 +30,9 @@ const PaginationButton = React.createClass({
   },
 
   handleClick(event) {
-    // This would go away once SafeAnchor is available
-    event.preventDefault();
+    if (this.props.disabled) {
+      return;
+    }
 
     if (this.props.onSelect) {
       let selectedEvent = createSelectedEvent(this.props.eventKey);
@@ -35,14 +41,24 @@ const PaginationButton = React.createClass({
   },
 
   render() {
-    let classes = this.getBsClassSet();
+    let classes = {
+      active: this.props.active,
+      disabled: this.props.disabled,
+      ...this.getBsClassSet()
+    };
 
-    classes.active = this.props.active;
-    classes.disabled = this.props.disabled;
+    let {
+      className,
+      ...anchorProps
+    } = this.props;
+
+    let ButtonComponentClass = this.props.buttonComponentClass;
 
     return (
-      <li className={classNames(this.props.className, classes)}>
-        <a href='#' onClick={this.handleClick}>{this.props.children}</a>
+      <li className={classNames(className, classes)}>
+        <ButtonComponentClass
+          {...anchorProps}
+          onClick={this.handleClick} />
       </li>
     );
   }

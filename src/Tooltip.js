@@ -1,12 +1,10 @@
-/* eslint-disable react/no-multi-comp */
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
-import FadeMixin from './FadeMixin';
 import CustomPropTypes from './utils/CustomPropTypes';
 
 const Tooltip = React.createClass({
-  mixins: [BootstrapMixin, FadeMixin],
+  mixins: [BootstrapMixin],
 
   propTypes: {
     /**
@@ -44,32 +42,26 @@ const Tooltip = React.createClass({
     /**
      * Title text
      */
-    title: React.PropTypes.node,
-    /**
-     * Specify whether the Tooltip should be use show and hide animations.
-     */
-    animation: React.PropTypes.bool
+    title: React.PropTypes.node
   },
 
   getDefaultProps() {
     return {
-      placement: 'right',
-      animation: true
+      placement: 'right'
     };
   },
 
   render() {
     const classes = {
       'tooltip': true,
-      [this.props.placement]: true,
-      // in class will be added by the FadeMixin when the animation property is true
-      'in': !this.props.animation && (this.props.positionLeft != null || this.props.positionTop != null),
-      'fade': this.props.animation
+      [this.props.placement]: true
     };
 
     const style = {
       'left': this.props.positionLeft,
-      'top': this.props.positionTop
+      'top': this.props.positionTop,
+      // we don't want to expose the `style` property
+      ...this.props.style // eslint-disable-line react/prop-types
     };
 
     const arrowStyle = {

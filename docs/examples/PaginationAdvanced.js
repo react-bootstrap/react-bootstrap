@@ -14,11 +14,11 @@ const PaginationAdvanced = React.createClass({
   render() {
     return (
       <Pagination
-        prev={true}
-        next={true}
-        first={true}
-        last={true}
-        ellipsis={true}
+        prev
+        next
+        first
+        last
+        ellipsis
         items={20}
         maxButtons={5}
         activePage={this.state.activePage}

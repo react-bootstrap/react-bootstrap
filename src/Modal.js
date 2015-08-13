@@ -1,21 +1,18 @@
 /*eslint-disable react/prop-types */
 import React, { cloneElement } from 'react';
-
 import classNames from 'classnames';
-import createChainedFunction from './utils/createChainedFunction';
-import BootstrapMixin from './BootstrapMixin';
-import FadeMixin from './FadeMixin';
 import domUtils from './utils/domUtils';
 import EventListener from './utils/EventListener';
-import deprecationWarning from './utils/deprecationWarning';
+import createChainedFunction from './utils/createChainedFunction';
+import CustomPropTypes from './utils/CustomPropTypes';
 
 import Portal from './Portal';
-
+import Fade from './Fade';
+import ModalDialog from './ModalDialog';
 import Body from './ModalBody';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
 import Footer from './ModalFooter';
-
 
 /**
  * Gets the correct clientHeight of the modal container
@@ -32,28 +29,10 @@ function containerClientHeight(container, context) {
       : container.clientHeight;
 }
 
-function getContainer(context){
+function getContainer(context) {
   return (context.props.container && React.findDOMNode(context.props.container)) ||
     domUtils.ownerDocument(context).body;
 }
-
-function requiredIfNot(key, type){
-  return function(props, propName, componentName){
-    let propType = type;
-
-    if ( props[ key] === undefined ){
-      propType = propType.isRequired;
-    }
-    return propType(props, propName, componentName);
-  };
-}
-
-function toChildArray(children){
-  let result = [];
-  React.Children.forEach(children, c => result.push(c));
-  return result;
-}
-
 
 let currentFocusListener;
 
@@ -71,7 +50,7 @@ function onFocus(context, handler) {
   let useFocusin = !doc.addEventListener;
   let remove;
 
-  if ( currentFocusListener ) {
+  if (currentFocusListener) {
     currentFocusListener.remove();
   }
 
@@ -90,8 +69,8 @@ function onFocus(context, handler) {
 
 let scrollbarSize;
 
-function getScrollbarSize(){
-  if ( scrollbarSize !== undefined ){
+function getScrollbarSize() {
+  if (scrollbarSize !== undefined) {
     return scrollbarSize;
   }
 
@@ -108,55 +87,34 @@ function getScrollbarSize(){
   document.body.removeChild(scrollDiv);
 
   scrollDiv = null;
+  return scrollbarSize;
 }
 
-
-const ModalMarkup = React.createClass({
-
-  mixins: [BootstrapMixin, FadeMixin],
-
+const Modal = React.createClass({
   propTypes: {
-    /**
-     * The Modal title text
-     * @deprecated Use the "Modal.Header" component instead
-     */
-    title: React.PropTypes.node,
+    ...Portal.propTypes,
+    ...ModalDialog.propTypes,
+
     /**
      * Include a backdrop component. Specify 'static' for a backdrop that doesn't trigger an "onHide" when clicked.
      */
     backdrop: React.PropTypes.oneOf(['static', true, false]),
-    /**
-     * Include a backdrop component. Specify 'static' for a backdrop that doesn't trigger an "onHide" when clicked.
-     */
-    keyboard: React.PropTypes.bool,
 
     /**
-     * Specify whether the Modal heading should contain a close button
-     * @deprecated Use the "Modal.Header" Component instead
+     * Close the modal when escape key is pressed
      */
-    closeButton: React.PropTypes.bool,
+    keyboard: React.PropTypes.bool,
 
     /**
      * Open and close the Modal with a slide and fade animation.
      */
     animation: React.PropTypes.bool,
-    /**
-     * A Callback fired when the header closeButton or non-static backdrop is clicked.
-     * @type {function}
-     * @required
-     */
-    onHide: requiredIfNot('onRequestHide', React.PropTypes.func),
 
     /**
-     * A Callback fired when the header closeButton or non-static backdrop is clicked.
-     * @deprecated Replaced by `onHide`.
+     * A Component type that provides the modal content Markup. This is a useful prop when you want to use your own
+     * styles and markup to create a custom modal component.
      */
-    onRequestHide:  React.PropTypes.func,
-
-    /**
-     * A css class to apply to the Modal dialog DOM node.
-     */
-    dialogClassName: React.PropTypes.string,
+    dialogComponent: CustomPropTypes.elementType,
 
     /**
      * When `true` The modal will automatically shift focus to itself when it opens, and replace it to the last focused element when it closes.
@@ -175,79 +133,79 @@ const ModalMarkup = React.createClass({
   getDefaultProps() {
     return {
       bsClass: 'modal',
+      dialogComponent: ModalDialog,
+      show: false,
+      animation: true,
       backdrop: true,
       keyboard: true,
-      animation: true,
-      closeButton: true,
-
       autoFocus: true,
       enforceFocus: true
     };
   },
 
-  getInitialState(){
-    return { };
+  getInitialState() {
+    return {
+      exited: !this.props.show
+    };
   },
 
   render() {
-    let state = this.state;
-    let modalStyle = { ...state.dialogStyles, display: 'block'};
-    let dialogClasses = this.getBsClassSet();
+    let { children, animation, backdrop, ...props } = this.props;
+    let { onExit, onExiting, onEnter, onEntering, onEntered } = props;
 
-    delete dialogClasses.modal;
-    dialogClasses['modal-dialog'] = true;
+    let show = !!props.show;
+    let Dialog = props.dialogComponent;
 
-    let classes = {
-      modal: true,
-      fade: this.props.animation,
-      'in': !this.props.animation
-    };
+    const mountModal = show || (animation && !this.state.exited);
+    if (!mountModal) {
+      return null;
+    }
 
     let modal = (
-      <div
-        {...this.props}
-        title={null}
-        tabIndex="-1"
-        role="dialog"
-        style={modalStyle}
-        className={classNames(this.props.className, classes)}
-        onClick={this.props.backdrop === true ? this.handleBackdropClick : null}
-        ref="modal">
-        <div className={classNames(this.props.dialogClassName, dialogClasses)}>
-          <div className="modal-content" role='document'>
-            { this.renderContent() }
-          </div>
-        </div>
-      </div>
+      <Dialog
+        {...props}
+        ref={this._setDialogRef}
+        className={classNames(this.props.className, { in: show && !animation })}
+        onClick={backdrop === true ? this.handleBackdropClick : null}>
+        { this.renderContent() }
+      </Dialog>
     );
 
-    return this.props.backdrop ?
-      this.renderBackdrop(modal, state.backdropStyles) : modal;
-  },
-
-  renderContent() {
-    let children = toChildArray(this.props.children); // b/c createFragment is in addons and children can be a key'd object
-    let hasNewHeader = children.some( c => c.type.__isModalHeader);
-
-    if (!hasNewHeader && this.props.title != null){
-      deprecationWarning(
-        'Specifying `closeButton` or `title` Modal props',
-        'the new Modal.Header, and Modal.Title components');
-
-      children.unshift(
-        <Header closeButton={this.props.closeButton} onHide={this._getHide()}>
-          { this.props.title &&
-            <Title>{this.props.title}</Title>
-          }
-        </Header>
+    if (animation) {
+      modal = (
+        <Fade
+          transitionAppear
+          unmountOnExit
+          in={show}
+          duration={Modal.TRANSITION_DURATION}
+          onExit={onExit}
+          onExiting={onExiting}
+          onExited={this.handleHidden}
+          onEnter={onEnter}
+          onEntering={onEntering}
+          onEntered={onEntered}>
+          { modal }
+        </Fade>
       );
     }
 
-    return React.Children.map(children, child => {
+    if (backdrop) {
+      modal = this.renderBackdrop(modal);
+    }
+
+    return (
+      <Portal container={props.container}>
+        { modal }
+      </Portal>
+    );
+  },
+
+  renderContent() {
+    return React.Children.map(this.props.children, child => {
       // TODO: use context in 0.14
-      if (child.type.__isModalHeader) {
+      if (child && child.type && child.type.__isModalHeader) {
         return cloneElement(child, {
-          onHide: createChainedFunction(this._getHide(), child.props.onHide)
+          onHide: createChainedFunction(this.props.onHide, child.props.onHide)
         });
       }
       return child;
@@ -255,44 +213,90 @@ const ModalMarkup = React.createClass({
   },
 
   renderBackdrop(modal) {
-    let classes = {
-      'modal-backdrop': true,
-      fade: this.props.animation,
-      'in': !this.props.animation
-    };
+    let { animation, bsClass } = this.props;
+    let duration = Modal.BACKDROP_TRANSITION_DURATION;
 
+    // Don't handle clicks for "static" backdrops
     let onClick = this.props.backdrop === true ?
       this.handleBackdropClick : null;
 
+    let backdrop = (
+      <div
+        ref="backdrop"
+        className={classNames(`${bsClass}-backdrop`, { in: this.props.show && !animation })}
+        onClick={onClick}/>
+    );
+
     return (
-      <div>
-        <div className={classNames(classes)} ref="backdrop" onClick={onClick} />
+      <div
+        ref='modal'>
+        { animation
+            ? <Fade transitionAppear in={this.props.show} duration={duration}>{backdrop}</Fade>
+            : backdrop
+        }
         {modal}
       </div>
     );
   },
 
-  _getHide(){
-    if ( !this.props.onHide && this.props.onRequestHide){
-      deprecationWarning('The Modal prop `onRequestHide`', 'the `onHide` prop');
+  _setDialogRef(ref) {
+    // issue #1074
+    // due to: https://github.com/facebook/react/blob/v0.13.3/src/core/ReactCompositeComponent.js#L842
+    //
+    // when backdrop is `false` react hasn't had a chance to reassign the refs to a usable object, b/c there are no other
+    // "classic" refs on the component (or they haven't been processed yet)
+    // TODO: Remove the need for this in next breaking release
+    if (Object.isFrozen(this.refs) && !Object.keys(this.refs).length) {
+      this.refs = {};
     }
 
-    return this.props.onHide || this.props.onRequestHide;
+    this.refs.dialog = ref;
+
+    //maintains backwards compat with older component breakdown
+    if (!this.props.backdrop) {
+      this.refs.modal = ref;
+    }
   },
 
-  iosClickHack() {
-    // IOS only allows click events to be delegated to the document on elements
-    // it considers 'clickable' - anchors, buttons, etc. We fake a click handler on the
-    // DOM nodes themselves. Remove if handled by React: https://github.com/facebook/react/issues/1169
-    React.findDOMNode(this.refs.modal).onclick = function () {};
-    React.findDOMNode(this.refs.backdrop).onclick = function () {};
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.show) {
+      this.setState({exited: false});
+    } else if (!nextProps.animation) {
+      // Otherwise let handleHidden take care of marking exited.
+      this.setState({exited: true});
+    }
   },
 
-  componentWillMount(){
-    this.checkForFocus();
+  componentWillUpdate(nextProps) {
+    if (nextProps.show) {
+      this.checkForFocus();
+    }
   },
 
   componentDidMount() {
+    if (this.props.show) {
+      this.onShow();
+    }
+  },
+
+  componentDidUpdate(prevProps) {
+    let { animation } = this.props;
+
+    if (prevProps.show && !this.props.show && !animation) {
+      //otherwise handleHidden will call this.
+      this.onHide();
+    } else if (!prevProps.show && this.props.show) {
+      this.onShow();
+    }
+  },
+
+  componentWillUnmount() {
+    if (this.props.show) {
+      this.onHide();
+    }
+  },
+
+  onShow() {
     const doc = domUtils.ownerDocument(this);
     const win = domUtils.ownerWindow(this);
 
@@ -300,7 +304,7 @@ const ModalMarkup = React.createClass({
       EventListener.listen(doc, 'keyup', this.handleDocumentKeyUp);
 
     this._onWindowResizeListener =
-        EventListener.listen(win, 'resize', this.handleWindowResize);
+      EventListener.listen(win, 'resize', this.handleWindowResize);
 
     if (this.props.enforceFocus) {
       this._onFocusinListener = onFocus(this, this.enforceFocus);
@@ -326,19 +330,7 @@ const ModalMarkup = React.createClass({
       , () => this.focusModalContent());
   },
 
-  componentDidUpdate(prevProps) {
-    if (this.props.backdrop && this.props.backdrop !== prevProps.backdrop) {
-      this.iosClickHack();
-      this.setState(this._getStyles()); //eslint-disable-line react/no-did-update-set-state
-    }
-
-    if (this.props.container !== prevProps.container) {
-      let container = getContainer(this);
-      this._containerIsOverflowing = container.scrollHeight > containerClientHeight(container, this);
-    }
-  },
-
-  componentWillUnmount() {
+  onHide() {
     this._onDocumentKeyupListener.remove();
     this._onWindowResizeListener.remove();
 
@@ -355,17 +347,27 @@ const ModalMarkup = React.createClass({
     this.restoreLastFocus();
   },
 
+  handleHidden(...args) {
+    this.setState({ exited: true });
+
+    this.onHide();
+
+    if (this.props.onExited) {
+      this.props.onExited(...args);
+    }
+  },
+
   handleBackdropClick(e) {
     if (e.target !== e.currentTarget) {
       return;
     }
 
-    this._getHide()();
+    this.props.onHide();
   },
 
   handleDocumentKeyUp(e) {
     if (this.props.keyboard && e.keyCode === 27) {
-      this._getHide()();
+      this.props.onHide();
     }
   },
 
@@ -373,8 +375,8 @@ const ModalMarkup = React.createClass({
     this.setState(this._getStyles());
   },
 
-  checkForFocus(){
-    if ( domUtils.canUseDom ) {
+  checkForFocus() {
+    if (domUtils.canUseDom) {
       try {
         this.lastFocus = document.activeElement;
       }
@@ -382,40 +384,49 @@ const ModalMarkup = React.createClass({
     }
   },
 
-  focusModalContent () {
-    let modalContent = React.findDOMNode(this.refs.modal);
+  focusModalContent() {
+    let modalContent = React.findDOMNode(this.refs.dialog);
     let current = domUtils.activeElement(this);
     let focusInModal = current && domUtils.contains(modalContent, current);
 
-    if (this.props.autoFocus && !focusInModal) {
+    if (modalContent && this.props.autoFocus && !focusInModal) {
       this.lastFocus = current;
-
       modalContent.focus();
     }
   },
 
-  restoreLastFocus () {
-    if (this.lastFocus) {
+  restoreLastFocus() {
+    if (this.lastFocus && this.lastFocus.focus) {
       this.lastFocus.focus();
       this.lastFocus = null;
     }
   },
 
   enforceFocus() {
-    if ( !this.isMounted() ) {
+    if (!this.isMounted()) {
       return;
     }
 
     let active = domUtils.activeElement(this);
-    let modal = React.findDOMNode(this.refs.modal);
+    let modal = React.findDOMNode(this.refs.dialog);
 
-    if (modal !== active && !domUtils.contains(modal, active)){
+    if (modal && modal !== active && !domUtils.contains(modal, active)) {
       modal.focus();
     }
   },
 
+  iosClickHack() {
+    // IOS only allows click events to be delegated to the document on elements
+    // it considers 'clickable' - anchors, buttons, etc. We fake a click handler on the
+    // DOM nodes themselves. Remove if handled by React: https://github.com/facebook/react/issues/1169
+    React.findDOMNode(this.refs.modal).onclick = function () {};
+    React.findDOMNode(this.refs.backdrop).onclick = function () {};
+  },
+
   _getStyles() {
-    if ( !domUtils.canUseDom ) { return {}; }
+    if (!domUtils.canUseDom) {
+      return {};
+    }
 
     let node = React.findDOMNode(this.refs.modal);
     let scrollHt = node.scrollHeight;
@@ -430,40 +441,17 @@ const ModalMarkup = React.createClass({
       }
     };
   }
-});
 
-const Modal = React.createClass({
-  propTypes: {
-    ...Portal.propTypes,
-    ...ModalMarkup.propTypes
-  },
-
-  defaultProps: {
-    show: null
-  },
-
-  render() {
-    let { show, ...props } = this.props;
-
-    let modal = (
-      <ModalMarkup {...props}>{this.props.children}</ModalMarkup>
-    );
-    // I can't think of another way to not break back compat while defaulting container
-    if ( !this.props.__isUsedInModalTrigger && show != null ){
-      return (
-        <Portal container={props.container} >
-          { show && modal }
-        </Portal>
-      );
-    } else {
-      return modal;
-    }
-  }
 });
 
 Modal.Body = Body;
 Modal.Header = Header;
 Modal.Title = Title;
 Modal.Footer = Footer;
+
+Modal.Dialog = ModalDialog;
+
+Modal.TRANSITION_DURATION = 300;
+Modal.BACKDROP_TRANSITION_DURATION = 150;
 
 export default Modal;
