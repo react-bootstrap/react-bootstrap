@@ -3,6 +3,7 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Tabs from '../src/Tabs';
 import Tab from '../src/Tab';
 import NavItem from '../src/NavItem';
+import Nav from '../src/Nav';
 import ValidComponentChildren from '../src/utils/ValidComponentChildren';
 import { render } from './helpers';
 
@@ -25,7 +26,7 @@ describe('Tabs', function () {
     assert.equal(tabs.refs.tabs.props.activeKey, 1);
   });
 
-  it('Should only show the tabs with `Tab.props.tab` set', function () {
+  it('Should only show the tabs with `Tab.props.title` set', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs activeKey={3}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
@@ -260,15 +261,17 @@ describe('Tabs', function () {
   });
 
   describe('Web Accessibility', function(){
-
-    it('Should generate ids from parent id', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
+    let instance;
+    beforeEach(function(){
+      instance = ReactTestUtils.renderIntoDocument(
         <Tabs defaultActiveKey={2} id='tabs'>
-          <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
-          <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
+          <Tab id='pane-1' title="Tab 1" eventKey={1}>Tab 1 content</Tab>
+          <Tab id='pane-2' title="Tab 2" eventKey={2}>Tab 2 content</Tab>
         </Tabs>
       );
+    });
 
+    it('Should generate ids from parent id', function () {
       let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
       tabs.every(tab =>
@@ -276,13 +279,6 @@ describe('Tabs', function () {
     });
 
     it('Should add aria-controls', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Tabs defaultActiveKey={2} id='tabs'>
-          <Tab id='pane-1' title="Tab 1" eventKey={1}>Tab 1 content</Tab>
-          <Tab id='pane-2' title="Tab 2" eventKey={2}>Tab 2 content</Tab>
-        </Tabs>
-      );
-
       let panes = ReactTestUtils.scryRenderedComponentsWithType(instance, Tab);
 
       assert.equal(panes[0].props['aria-labelledby'], 'pane-1___tab');
@@ -290,19 +286,26 @@ describe('Tabs', function () {
     });
 
     it('Should add aria-controls', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Tabs defaultActiveKey={2} id='tabs'>
-          <Tab id='pane-1' title="Tab 1" eventKey={1}>Tab 1 content</Tab>
-          <Tab id='pane-2' title="Tab 2" eventKey={2}>Tab 2 content</Tab>
-        </Tabs>
-      );
-
       let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
       assert.equal(tabs[0].props['aria-controls'], 'pane-1');
       assert.equal(tabs[1].props['aria-controls'], 'pane-2');
     });
 
+    it('Should add role=tablist to the nav', function () {
+      let nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
+
+      assert.equal(nav.props.role, 'tablist');
+    });
+
+    it('Should add aria-selected to the nav item for the selected tab', function() {
+      let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
+      let link1 = ReactTestUtils.findRenderedDOMComponentWithTag(tabs[0], 'a');
+      let link2 = ReactTestUtils.findRenderedDOMComponentWithTag(tabs[1], 'a');
+
+      assert.equal(link1.props['aria-selected'], undefined);
+      assert.equal(link2.props['aria-selected'], true);
+    });
   });
 
   it('Should not pass className to Nav', function () {
