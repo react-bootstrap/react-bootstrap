@@ -325,10 +325,6 @@ const Modal = React.createClass({
       container.style.paddingRight = parseInt(this._originalPadding || 0, 10) + getScrollbarSize() + 'px';
     }
 
-    if (this.props.backdrop) {
-      this.iosClickHack();
-    }
-
     this.setState(this._getStyles() //eslint-disable-line react/no-did-mount-set-state
       , () => this.focusModalContent());
   },
@@ -416,14 +412,6 @@ const Modal = React.createClass({
     if (modal && modal !== active && !domUtils.contains(modal, active)) {
       modal.focus();
     }
-  },
-
-  iosClickHack() {
-    // IOS only allows click events to be delegated to the document on elements
-    // it considers 'clickable' - anchors, buttons, etc. We fake a click handler on the
-    // DOM nodes themselves. Remove if handled by React: https://github.com/facebook/react/issues/1169
-    this.refs.modal.onclick = function () {};
-    this.refs.backdrop.onclick = function () {};
   },
 
   _getStyles() {

@@ -103,7 +103,6 @@ describe('OverlayTrigger', function() {
     }
     ContextReader.contextTypes = contextTypes;
 
-    const TriggerWithContext = OverlayTrigger.withContext(contextTypes);
     class ContextHolder extends React.Component {
       getChildContext() {
         return {key: 'value'};
@@ -111,12 +110,12 @@ describe('OverlayTrigger', function() {
 
       render() {
         return (
-          <TriggerWithContext
+          <OverlayTrigger
             trigger="click"
             overlay={<ContextReader />}
           >
             <button>button</button>
-          </TriggerWithContext>
+          </OverlayTrigger>
         );
       }
     }

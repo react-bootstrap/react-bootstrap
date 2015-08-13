@@ -8,7 +8,6 @@ import warning from 'warning';
 import Overlay from './Overlay';
 
 import createChainedFunction from './utils/createChainedFunction';
-import createContextWrapper from './utils/createContextWrapper';
 
 /**
  * Check if value one is inside or equal to the of value
@@ -262,21 +261,5 @@ const OverlayTrigger = React.createClass({
   }
 
 });
-
-/**
- * Creates a new OverlayTrigger class that forwards the relevant context
- *
- * This static method should only be called at the module level, instead of in
- * e.g. a render() method, because it's expensive to create new classes.
- *
- * For example, you would want to have:
- *
- * > export default OverlayTrigger.withContext({
- * >   myContextKey: React.PropTypes.object
- * > });
- *
- * and import this when needed.
- */
-OverlayTrigger.withContext = createContextWrapper(OverlayTrigger, 'overlay');
 
 export default OverlayTrigger;
