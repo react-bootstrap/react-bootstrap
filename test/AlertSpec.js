@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Alert from '../src/Alert';
 
 describe('Alert', function () {
@@ -18,7 +20,7 @@ describe('Alert', function () {
         Message
       </Alert>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\balert\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\balert\b/));
   });
 
   it('Should have dismissable style with onDismiss', function () {
@@ -28,7 +30,7 @@ describe('Alert', function () {
         Message
       </Alert>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\balert-dismissable\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\balert-dismissable\b/));
   });
 
   it('Should call onDismiss callback on dismiss click', function (done) {
@@ -40,7 +42,7 @@ describe('Alert', function () {
         Message
       </Alert>
     );
-    ReactTestUtils.Simulate.click(React.findDOMNode(instance).children[0]);
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(instance).children[0]);
   });
 
   it('Should call onDismiss callback on dismissAfter time', function (done) {
@@ -60,7 +62,7 @@ describe('Alert', function () {
         Message
       </Alert>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\balert-\w+\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\balert-\w+\b/));
   });
 
   it('Should have use bsStyle class', function () {
@@ -69,7 +71,7 @@ describe('Alert', function () {
         Message
       </Alert>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\balert-danger\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\balert-danger\b/));
   });
 
   describe('Web Accessibility', function(){
@@ -78,7 +80,7 @@ describe('Alert', function () {
         <Alert>Message</Alert>
       );
 
-      assert.equal(React.findDOMNode(instance).getAttribute('role'), 'alert');
+      assert.equal(ReactDOM.findDOMNode(instance).getAttribute('role'), 'alert');
     });
 
     it('Should have add ARIAs to button', function () {
@@ -88,8 +90,8 @@ describe('Alert', function () {
 
       let button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'button');
 
-      assert.equal(React.findDOMNode(button).getAttribute('aria-label'), 'close');
-      assert.equal(React.findDOMNode(button).children[0].getAttribute('aria-hidden'), 'true');
+      assert.equal(button.getAttribute('aria-label'), 'close');
+      assert.equal(button.children[0].getAttribute('aria-hidden'), 'true');
     });
 
   });

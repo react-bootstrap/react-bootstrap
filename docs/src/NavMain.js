@@ -5,19 +5,19 @@ import Nav from '../../src/Nav';
 
 const NAV_LINKS = {
   'introduction': {
-    link: 'introduction',
+    link: '/introduction.html',
     title: 'Introduction'
   },
   'getting-started': {
-    link: 'getting-started',
+    link: '/getting-started.html',
     title: 'Getting started'
   },
   'components': {
-    link: 'components',
+    link: '/components.html',
     title: 'Components'
   },
   'support': {
-    link: 'support',
+    link: '/support.html',
     title: 'Support'
   }
 };
@@ -28,7 +28,7 @@ const NavMain = React.createClass({
   },
 
   render() {
-    let brand = <Link to='home' className="navbar-brand">React-Bootstrap</Link>;
+    let brand = <Link to='/' className="navbar-brand">React-Bootstrap</Link>;
     let links = Object.keys(NAV_LINKS).map(this.renderNavItem).concat([
       <li key='github-link'>
         <a href='https://github.com/react-bootstrap/react-bootstrap' target='_blank'>GitHub</a>

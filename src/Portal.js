@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import CustomPropTypes from './utils/CustomPropTypes';
 import domUtils from './utils/domUtils';
 
@@ -50,7 +52,9 @@ let Portal = React.createClass({
     // Save reference for future access.
     if (overlay !== null) {
       this._mountOverlayTarget();
-      this._overlayInstance = React.render(overlay, this._overlayTarget);
+      this._overlayInstance = ReactDOM.unstable_renderSubtreeIntoContainer(
+        this, overlay, this._overlayTarget
+      );
     } else {
       // Unrender if the component is null for transitions to null
       this._unrenderOverlay();
@@ -60,7 +64,7 @@ let Portal = React.createClass({
 
   _unrenderOverlay() {
     if (this._overlayTarget) {
-      React.unmountComponentAtNode(this._overlayTarget);
+      ReactDOM.unmountComponentAtNode(this._overlayTarget);
       this._overlayInstance = null;
     }
   },
@@ -78,7 +82,7 @@ let Portal = React.createClass({
       if (this._overlayInstance.getWrappedDOMNode) {
         return this._overlayInstance.getWrappedDOMNode();
       } else {
-        return React.findDOMNode(this._overlayInstance);
+        return ReactDOM.findDOMNode(this._overlayInstance);
       }
     }
 
@@ -86,7 +90,7 @@ let Portal = React.createClass({
   },
 
   getContainerDOMNode() {
-    return React.findDOMNode(this.props.container) || domUtils.ownerDocument(this).body;
+    return ReactDOM.findDOMNode(this.props.container) || domUtils.ownerDocument(this).body;
   }
 });
 

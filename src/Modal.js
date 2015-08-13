@@ -1,10 +1,8 @@
 /*eslint-disable react/prop-types */
-import React, { cloneElement } from 'react';
+
 import classNames from 'classnames';
-import domUtils from './utils/domUtils';
-import EventListener from './utils/EventListener';
-import createChainedFunction from './utils/createChainedFunction';
-import CustomPropTypes from './utils/CustomPropTypes';
+import React, {cloneElement} from 'react';
+import ReactDOM from 'react-dom';
 
 import Portal from './Portal';
 import Fade from './Fade';
@@ -13,6 +11,11 @@ import Body from './ModalBody';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
 import Footer from './ModalFooter';
+
+import createChainedFunction from './utils/createChainedFunction';
+import CustomPropTypes from './utils/CustomPropTypes';
+import domUtils from './utils/domUtils';
+import EventListener from './utils/EventListener';
 
 /**
  * Gets the correct clientHeight of the modal container
@@ -30,7 +33,7 @@ function containerClientHeight(container, context) {
 }
 
 function getContainer(context) {
-  return (context.props.container && React.findDOMNode(context.props.container)) ||
+  return (context.props.container && ReactDOM.findDOMNode(context.props.container)) ||
     domUtils.ownerDocument(context).body;
 }
 
@@ -322,10 +325,6 @@ const Modal = React.createClass({
       container.style.paddingRight = parseInt(this._originalPadding || 0, 10) + getScrollbarSize() + 'px';
     }
 
-    if (this.props.backdrop) {
-      this.iosClickHack();
-    }
-
     this.setState(this._getStyles() //eslint-disable-line react/no-did-mount-set-state
       , () => this.focusModalContent());
   },
@@ -385,7 +384,7 @@ const Modal = React.createClass({
   },
 
   focusModalContent() {
-    let modalContent = React.findDOMNode(this.refs.dialog);
+    let modalContent = ReactDOM.findDOMNode(this.refs.dialog);
     let current = domUtils.activeElement(this);
     let focusInModal = current && domUtils.contains(modalContent, current);
 
@@ -408,19 +407,11 @@ const Modal = React.createClass({
     }
 
     let active = domUtils.activeElement(this);
-    let modal = React.findDOMNode(this.refs.dialog);
+    let modal = ReactDOM.findDOMNode(this.refs.dialog);
 
     if (modal && modal !== active && !domUtils.contains(modal, active)) {
       modal.focus();
     }
-  },
-
-  iosClickHack() {
-    // IOS only allows click events to be delegated to the document on elements
-    // it considers 'clickable' - anchors, buttons, etc. We fake a click handler on the
-    // DOM nodes themselves. Remove if handled by React: https://github.com/facebook/react/issues/1169
-    React.findDOMNode(this.refs.modal).onclick = function () {};
-    React.findDOMNode(this.refs.backdrop).onclick = function () {};
   },
 
   _getStyles() {
@@ -428,7 +419,7 @@ const Modal = React.createClass({
       return {};
     }
 
-    let node = React.findDOMNode(this.refs.modal);
+    let node = ReactDOM.findDOMNode(this.refs.modal);
     let scrollHt = node.scrollHeight;
     let container = getContainer(this);
     let containerIsOverflowing = this._containerIsOverflowing;

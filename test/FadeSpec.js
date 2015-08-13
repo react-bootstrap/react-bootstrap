@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Fade from '../src/Fade';
 
 describe('Fade', function () {
@@ -14,7 +16,7 @@ describe('Fade', function () {
 
         return (
           <Fade ref={r => this.fade = r}
-            {...props}
+            {...props} {...this.state}
           >
             <div>
               {children}
@@ -43,7 +45,7 @@ describe('Fade', function () {
       instance.fade.props.in === false);
 
     assert.equal(
-      React.findDOMNode(instance).className, 'fade');
+      ReactDOM.findDOMNode(instance).className, 'fade');
 
   });
 
@@ -53,14 +55,14 @@ describe('Fade', function () {
     );
 
     function onEntering(){
-      assert.equal(React.findDOMNode(instance).className, 'fade in');
+      assert.equal(ReactDOM.findDOMNode(instance).className, 'fade in');
       done();
     }
 
     assert.ok(
       instance.fade.props.in === false);
 
-    instance.setProps({ in: true, onEntering });
+    instance.setState({ in: true, onEntering });
   });
 
   it('Should remove "in" class when exiting', done => {
@@ -69,13 +71,13 @@ describe('Fade', function () {
     );
 
     function onExiting(){
-      assert.equal(React.findDOMNode(instance).className, 'fade');
+      assert.equal(ReactDOM.findDOMNode(instance).className, 'fade');
       done();
     }
 
     assert.equal(
-      React.findDOMNode(instance).className, 'fade in');
+      ReactDOM.findDOMNode(instance).className, 'fade in');
 
-    instance.setProps({ in: false, onExiting });
+    instance.setState({ in: false, onExiting });
   });
 });

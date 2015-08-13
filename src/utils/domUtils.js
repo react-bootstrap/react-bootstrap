@@ -1,4 +1,4 @@
-import React from 'react';
+import ReactDOM from 'react-dom';
 
 
 let canUseDom = !!(
@@ -15,7 +15,7 @@ let canUseDom = !!(
  * @returns {HTMLElement}
  */
 function ownerDocument(componentOrElement) {
-  let elem = React.findDOMNode(componentOrElement);
+  let elem = ReactDOM.findDOMNode(componentOrElement);
   return (elem && elem.ownerDocument) || document;
 }
 

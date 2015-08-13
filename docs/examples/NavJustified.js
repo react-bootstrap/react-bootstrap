@@ -22,4 +22,4 @@ const NavJustified = React.createClass({
   }
 });
 
-React.render(<NavJustified />, mountNode);
+ReactDOM.render(<NavJustified />, mountNode);

@@ -38,4 +38,4 @@ const ExampleInput = React.createClass({
   }
 });
 
-React.render(<ExampleInput />, mountNode);
+ReactDOM.render(<ExampleInput />, mountNode);

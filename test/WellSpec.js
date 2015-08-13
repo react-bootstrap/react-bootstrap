@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Well from '../src/Well';
 
 describe('Well', function () {
@@ -18,7 +20,7 @@ describe('Well', function () {
         Content
       </Well>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bwell\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bwell\b/));
   });
 
   it('Should accept bsSize arguments', function () {
@@ -27,6 +29,6 @@ describe('Well', function () {
         Content
       </Well>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bwell-sm\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bwell-sm\b/));
   });
 });

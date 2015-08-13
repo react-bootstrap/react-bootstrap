@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+
 import Pagination from '../src/Pagination';
 
 describe('Pagination', function () {
@@ -18,7 +19,7 @@ describe('Pagination', function () {
     );
     let pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     assert.equal(pageButtons.length, 5);
-    React.findDOMNode(pageButtons[2]).className.should.match(/\bactive\b/);
+    pageButtons[2].className.should.match(/\bactive\b/);
   });
 
   it('Should call onSelect when page button is selected', function (done) {
@@ -48,8 +49,8 @@ describe('Pagination', function () {
     assert.equal(pageButtons.length, 10);
 
     // active button is the second one
-    assert.equal(React.findDOMNode(pageButtons[0]).firstChild.innerText, '6');
-    React.findDOMNode(pageButtons[4]).className.should.match(/\bactive\b/);
+    assert.equal(pageButtons[0].firstChild.innerText, '6');
+    pageButtons[4].className.should.match(/\bactive\b/);
   });
 
   it('Should show the ellipsis, first, last, prev and next button', function () {
@@ -67,11 +68,11 @@ describe('Pagination', function () {
     // add first, last, prev, next and ellipsis button
     assert.equal(pageButtons.length, 8);
 
-    assert.equal(React.findDOMNode(pageButtons[0]).innerText, '«');
-    assert.equal(React.findDOMNode(pageButtons[1]).innerText, '‹');
-    assert.equal(React.findDOMNode(pageButtons[5]).innerText, '...');
-    assert.equal(React.findDOMNode(pageButtons[6]).innerText, '›');
-    assert.equal(React.findDOMNode(pageButtons[7]).innerText, '»');
+    assert.equal(pageButtons[0].innerText, '«');
+    assert.equal(pageButtons[1].innerText, '‹');
+    assert.equal(pageButtons[5].innerText, '...');
+    assert.equal(pageButtons[6].innerText, '›');
+    assert.equal(pageButtons[7].innerText, '»');
 
   });
 
@@ -89,11 +90,11 @@ describe('Pagination', function () {
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
-    assert.equal(React.findDOMNode(pageButtons[0]).innerText, '«');
-    assert.equal(React.findDOMNode(pageButtons[1]).innerText, '‹');
-    assert.equal(React.findDOMNode(pageButtons[2]).innerText, '1');
-    assert.equal(React.findDOMNode(pageButtons[3]).innerText, '›');
-    assert.equal(React.findDOMNode(pageButtons[4]).innerText, '»');
+    assert.equal(pageButtons[0].innerText, '«');
+    assert.equal(pageButtons[1].innerText, '‹');
+    assert.equal(pageButtons[2].innerText, '1');
+    assert.equal(pageButtons[3].innerText, '›');
+    assert.equal(pageButtons[4].innerText, '»');
   });
 
   it('Should render next and last buttons as disabled when items=0 and ellipsis=true', function () {
@@ -108,11 +109,11 @@ describe('Pagination', function () {
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
-    assert.equal(React.findDOMNode(pageButtons[0]).innerText, '›');
-    assert.equal(React.findDOMNode(pageButtons[1]).innerText, '»');
+    assert.equal(pageButtons[0].innerText, '›');
+    assert.equal(pageButtons[1].innerText, '»');
 
-    assert.include(React.findDOMNode(pageButtons[0]).className, 'disabled');
-    assert.include(React.findDOMNode(pageButtons[1]).className, 'disabled');
+    assert.include(pageButtons[0].className, 'disabled');
+    assert.include(pageButtons[1].className, 'disabled');
   });
 
   it('Should wrap buttons in SafeAnchor when no buttonComponentClass prop is supplied', function () {
@@ -126,11 +127,11 @@ describe('Pagination', function () {
 
     let tagName = 'A';
 
-    assert.equal(React.findDOMNode(pageButtons[0]).children[0].tagName, tagName);
-    assert.equal(React.findDOMNode(pageButtons[1]).children[0].tagName, tagName);
+    assert.equal(pageButtons[0].children[0].tagName, tagName);
+    assert.equal(pageButtons[1].children[0].tagName, tagName);
 
-    assert.equal(React.findDOMNode(pageButtons[0]).children[0].getAttribute('href'), '');
-    assert.equal(React.findDOMNode(pageButtons[1]).children[0].getAttribute('href'), '');
+    assert.equal(pageButtons[0].children[0].getAttribute('href'), '');
+    assert.equal(pageButtons[1].children[0].getAttribute('href'), '');
   });
 
   it('Should wrap each button in a buttonComponentClass when it is present', function () {
@@ -151,8 +152,8 @@ describe('Pagination', function () {
 
     let tagName = 'DIV';
 
-    assert.equal(React.findDOMNode(pageButtons[0]).children[0].tagName, tagName);
-    assert.equal(React.findDOMNode(pageButtons[1]).children[0].tagName, tagName);
+    assert.equal(pageButtons[0].children[0].tagName, tagName);
+    assert.equal(pageButtons[1].children[0].tagName, tagName);
   });
 
   it('Should call onSelect with custom buttonComponentClass', function (done) {
@@ -194,8 +195,8 @@ describe('Pagination', function () {
     const liElements = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
     // buttons are disabled
-    assert.include(React.findDOMNode(liElements[0]).className, 'disabled');
-    assert.include(React.findDOMNode(liElements[1]).className, 'disabled');
+    assert.include(liElements[0].className, 'disabled');
+    assert.include(liElements[1].className, 'disabled');
 
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
     const nextButton = pageButtons[0];

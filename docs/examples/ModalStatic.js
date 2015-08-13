@@ -19,4 +19,4 @@ const modalInstance = (
   </div>
 );
 
-React.render(modalInstance, mountNode);
+ReactDOM.render(modalInstance, mountNode);

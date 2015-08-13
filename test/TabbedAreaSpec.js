@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import TabbedArea from '../src/TabbedArea';
+import ReactDOM from 'react-dom';
+
 import NavItem from '../src/NavItem';
+import TabbedArea from '../src/TabbedArea';
 import TabPane from '../src/TabPane';
 import ValidComponentChildren from '../src/utils/ValidComponentChildren';
+
 import { render } from './helpers';
 
 describe('TabbedArea', function () {
@@ -84,8 +87,8 @@ describe('TabbedArea', function () {
 
     let panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
 
-    assert.ok(React.findDOMNode(panes[0]).className.match(/\bcustom\b/));
-    assert.equal(React.findDOMNode(panes[0]).id, 'pane0id');
+    assert.ok(ReactDOM.findDOMNode(panes[0]).className.match(/\bcustom\b/));
+    assert.equal(ReactDOM.findDOMNode(panes[0]).id, 'pane0id');
   });
 
   it('Should show the correct initial pane', function () {
@@ -196,7 +199,7 @@ describe('TabbedArea', function () {
     let tabPane = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
 
     assert.equal(tabPane.length, 2);
-    assert.equal(React.findDOMNode(tabPane[1]).getAttribute('class').match(/pull-right/)[0], 'pull-right');
+    assert.equal(ReactDOM.findDOMNode(tabPane[1]).getAttribute('class').match(/pull-right/)[0], 'pull-right');
   });
 
   it('Should pass disabled to NavItem', function () {
@@ -240,7 +243,7 @@ describe('TabbedArea', function () {
     });
 
     afterEach(function () {
-      React.unmountComponentAtNode(mountPoint);
+      ReactDOM.unmountComponentAtNode(mountPoint);
       document.body.removeChild(mountPoint);
     });
 

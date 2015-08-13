@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import { render } from './helpers';
+import ReactDOM from 'react-dom';
+
 import Transition, {UNMOUNTED, EXITED, ENTERING, ENTERED, EXITING} from
   '../src/Transition';
+
+import {render} from './helpers';
 
 describe('Transition', function () {
   it('should not transition on mount', function(){
     let instance = render(
-          <Transition in onEnter={()=> { throw new Error('should not Enter'); }}>
-            <div></div>
-          </Transition>
-        );
+      <Transition in onEnter={()=> { throw new Error('should not Enter'); }}>
+        <div></div>
+      </Transition>
+    );
 
     expect(instance.state.status).to.equal(ENTERED);
   });
@@ -243,7 +246,7 @@ describe('Transition', function () {
 
           onEnter={() => {
             expect(instance.getStatus()).to.equal(EXITED);
-            expect(React.findDOMNode(instance)).to.exist;
+            expect(ReactDOM.findDOMNode(instance)).to.exist;
 
             done();
           }}
@@ -251,7 +254,7 @@ describe('Transition', function () {
       );
 
       expect(instance.getStatus()).to.equal(UNMOUNTED);
-      expect(React.findDOMNode(instance)).to.not.exist;
+      expect(ReactDOM.findDOMNode(instance)).to.not.exist;
 
       instance.setState({in: true});
     });
@@ -263,7 +266,7 @@ describe('Transition', function () {
 
           onExited={() => {
             expect(instance.getStatus()).to.equal(UNMOUNTED);
-            expect(React.findDOMNode(instance)).to.not.exist;
+            expect(ReactDOM.findDOMNode(instance)).to.not.exist;
 
             done();
           }}
@@ -271,7 +274,7 @@ describe('Transition', function () {
       );
 
       expect(instance.getStatus()).to.equal(ENTERED);
-      expect(React.findDOMNode(instance)).to.exist;
+      expect(ReactDOM.findDOMNode(instance)).to.exist;
 
       instance.setState({in: false});
     });

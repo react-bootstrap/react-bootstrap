@@ -21,4 +21,4 @@ const inputTypeInstance = (
   </form>
 );
 
-React.render(inputTypeInstance, mountNode);
+ReactDOM.render(inputTypeInstance, mountNode);

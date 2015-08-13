@@ -38,4 +38,4 @@ const PaginationBasic = React.createClass({
   }
 });
 
-React.render(<PaginationBasic />, mountNode);
+ReactDOM.render(<PaginationBasic />, mountNode);

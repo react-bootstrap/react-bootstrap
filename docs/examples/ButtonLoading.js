@@ -29,4 +29,4 @@ const LoadingButton = React.createClass({
   }
 });
 
-React.render(<LoadingButton />, mountNode);
+ReactDOM.render(<LoadingButton />, mountNode);

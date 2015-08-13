@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import FadeMixin from '../src/FadeMixin';
 
 let Component;
@@ -20,8 +22,8 @@ describe('FadeMixin', function () {
   });
 
   afterEach(()=> {
-    if (console.warn.calledWithMatch('FadeMixin is deprecated')){
-      console.warn.reset();
+    if (console.error.calledWithMatch('FadeMixin is deprecated')){
+      console.error.reset();
     }
   });
 
@@ -32,10 +34,10 @@ describe('FadeMixin', function () {
     let child = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span');
 
     setTimeout(function(){
-      assert.ok(React.findDOMNode(instance).className.match(/\bin\b/));
-      assert.ok(React.findDOMNode(instance).className.match(/\bfade\b/));
-      assert.ok(React.findDOMNode(child).className.match(/\bin\b/));
-      assert.ok(React.findDOMNode(child).className.match(/\bfade\b/));
+      assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bin\b/));
+      assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bfade\b/));
+      assert.ok(child.className.match(/\bin\b/));
+      assert.ok(child.className.match(/\bfade\b/));
       done();
     }, 25);
   });

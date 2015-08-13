@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import OverlayTrigger from '../src/OverlayTrigger';
 import Popover from '../src/Popover';
 import Tooltip from '../src/Tooltip';
@@ -11,7 +13,7 @@ describe('OverlayTrigger', function() {
         <button>button</button>
       </OverlayTrigger>
     );
-    const overlayTrigger = React.findDOMNode(instance);
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
     assert.equal(overlayTrigger.nodeName, 'BUTTON');
   });
 
@@ -22,7 +24,7 @@ describe('OverlayTrigger', function() {
         <button>button</button>
       </OverlayTrigger>
     );
-    const overlayTrigger = React.findDOMNode(instance);
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
     callback.called.should.be.true;
   });
@@ -33,7 +35,7 @@ describe('OverlayTrigger', function() {
         <button>button</button>
       </OverlayTrigger>
     );
-    const overlayTrigger = React.findDOMNode(instance);
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
 
     instance.state.isOverlayShown.should.be.true;
@@ -46,7 +48,7 @@ describe('OverlayTrigger', function() {
       </OverlayTrigger>
     );
 
-    const overlayTrigger = React.findDOMNode(instance);
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
 
     expect(document.getElementsByClassName('test-overlay').length).to.equal(1);
@@ -81,7 +83,7 @@ describe('OverlayTrigger', function() {
       </OverlayTrigger>
     );
 
-    overlayTrigger = React.findDOMNode(instance);
+    overlayTrigger = ReactDOM.findDOMNode(instance);
 
     ReactTestUtils.Simulate.click(overlayTrigger);
   });
@@ -101,7 +103,6 @@ describe('OverlayTrigger', function() {
     }
     ContextReader.contextTypes = contextTypes;
 
-    const TriggerWithContext = OverlayTrigger.withContext(contextTypes);
     class ContextHolder extends React.Component {
       getChildContext() {
         return {key: 'value'};
@@ -109,19 +110,19 @@ describe('OverlayTrigger', function() {
 
       render() {
         return (
-          <TriggerWithContext
+          <OverlayTrigger
             trigger="click"
             overlay={<ContextReader />}
           >
             <button>button</button>
-          </TriggerWithContext>
+          </OverlayTrigger>
         );
       }
     }
     ContextHolder.childContextTypes = contextTypes;
 
     const instance = ReactTestUtils.renderIntoDocument(<ContextHolder />);
-    const overlayTrigger = React.findDOMNode(instance);
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
 
     contextSpy.calledWith('value').should.be.true;
@@ -147,7 +148,7 @@ describe('OverlayTrigger', function() {
               <button>button</button>
             </OverlayTrigger>
           );
-          overlayTrigger = React.findDOMNode(instance);
+          overlayTrigger = ReactDOM.findDOMNode(instance);
         });
 
         it('Should handle trigger without warnings', function() {
@@ -182,7 +183,7 @@ describe('OverlayTrigger', function() {
             <button>button</button>
             </OverlayTrigger>
           );
-          const overlayTrigger = React.findDOMNode(instance);
+          const overlayTrigger = ReactDOM.findDOMNode(instance);
           ReactTestUtils.Simulate.click(overlayTrigger);
         });
 
@@ -236,7 +237,7 @@ describe('OverlayTrigger', function() {
             <button>button</button>
           </OverlayTrigger>
         );
-        const overlayTrigger = React.findDOMNode(instance);
+        const overlayTrigger = ReactDOM.findDOMNode(instance);
         ReactTestUtils.Simulate.click(overlayTrigger);
       });
 

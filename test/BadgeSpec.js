@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Badge from '../src/Badge';
 
 describe('Badge', function () {
@@ -18,7 +20,7 @@ describe('Badge', function () {
         Content
       </Badge>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bbadge\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
 
   it('Should have a badge using a number', function () {
@@ -28,7 +30,7 @@ describe('Badge', function () {
         {count}
       </Badge>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bbadge\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
 
   it('Should have a badge using a a mix of content', function () {
@@ -38,7 +40,7 @@ describe('Badge', function () {
         £{count}
       </Badge>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bbadge\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
 
   it('Should have a badge class pulled right', function () {
@@ -47,13 +49,13 @@ describe('Badge', function () {
         Content
       </Badge>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bpull-right\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpull-right\b/));
   });
 
   it('Should not have a badge class when empty', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge />
     );
-    assert.notOk(React.findDOMNode(instance).className.match(/\bbadge\b/));
+    assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
 });

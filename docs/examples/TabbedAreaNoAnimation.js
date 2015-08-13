@@ -6,4 +6,4 @@ const tabbedAreaInstance = (
   </TabbedArea>
 );
 
-React.render(tabbedAreaInstance, mountNode);
+ReactDOM.render(tabbedAreaInstance, mountNode);

@@ -1,16 +1,18 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import DropdownButton from '../src/DropdownButton';
-import MenuItem from '../src/MenuItem';
-import DropdownMenu from '../src/DropdownMenu';
+import ReactDOM from 'react-dom';
+
 import Button from '../src/Button';
+import DropdownButton from '../src/DropdownButton';
+import DropdownMenu from '../src/DropdownMenu';
+import MenuItem from '../src/MenuItem';
 
 describe('DropdownButton', function () {
   let instance;
 
   afterEach(function() {
     if (instance && ReactTestUtils.isCompositeComponent(instance) && instance.isMounted()) {
-      React.unmountComponentAtNode(React.findDOMNode(instance));
+      ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(instance));
     }
   });
 
@@ -22,9 +24,9 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    let button = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
-    assert.ok(React.findDOMNode(instance).className.match(/\bbtn-group\b/));
-    assert.ok(React.findDOMNode(instance).className.match(/\btest-class\b/));
+    let button = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-group\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\btest-class\b/));
     assert.ok(button.className.match(/\bbtn\b/));
     assert.equal(button.nodeName, 'BUTTON');
     assert.equal(button.type, 'button');
@@ -54,7 +56,7 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    let button = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
+    let button = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
     assert.ok(button.className.match(/\bbtn-primary\b/));
     assert.equal(button.getAttribute('id'), 'testId');
     assert.ok(button.disabled);
@@ -67,7 +69,7 @@ describe('DropdownButton', function () {
         <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>);
 
-    assert.notOk(React.findDOMNode(instance).className.match(/\bopen\b/));
+    assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bopen\b/));
   });
 
   it('Should open when clicked', function () {
@@ -78,8 +80,8 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    ReactTestUtils.SimulateNative.click(React.findDOMNode(instance.refs.dropdownButton));
-    assert.ok(React.findDOMNode(instance).className.match(/\bopen\b/));
+    ReactTestUtils.SimulateNative.click(ReactDOM.findDOMNode(instance.refs.dropdownButton));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bopen\b/));
   });
 
   it('should call onSelect with eventKey when MenuItem is clicked', function (done) {
@@ -153,7 +155,7 @@ describe('DropdownButton', function () {
       evt.initEvent('click', true, true);
       document.documentElement.dispatchEvent(evt);
 
-      assert.notOk(React.findDOMNode(instance).className.match(/\bopen\b/));
+      assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bopen\b/));
     });
   });
 
@@ -165,8 +167,8 @@ describe('DropdownButton', function () {
       </DropdownButton>
     );
 
-    let li = React.findDOMNode(instance);
-    let button = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
+    let li = ReactDOM.findDOMNode(instance);
+    let button = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
     assert.equal(li.nodeName, 'LI');
     assert.ok(li.className.match(/\bdropdown\b/));
     assert.ok(li.className.match(/\btest-class\b/));
@@ -184,7 +186,7 @@ describe('DropdownButton', function () {
         </DropdownButton>
     );
 
-    let button = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
+    let button = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
     let carets = button.getElementsByClassName('caret');
     assert.equal(carets.length, 1);
   });
@@ -197,7 +199,7 @@ describe('DropdownButton', function () {
         </DropdownButton>
     );
 
-    let button = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
+    let button = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
     let carets = button.getElementsByClassName('caret');
     assert.equal(carets.length, 0);
   });
@@ -210,7 +212,7 @@ describe('DropdownButton', function () {
         </DropdownButton>
     );
 
-    let button = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
+    let button = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
     assert.ok(button.className.match(/\btest-class\b/));
   });
 

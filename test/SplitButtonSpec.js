@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import SplitButton from '../src/SplitButton';
-import MenuItem from '../src/MenuItem';
+import ReactDOM from 'react-dom';
+
 import Button from '../src/Button';
+import MenuItem from '../src/MenuItem';
+import SplitButton from '../src/SplitButton';
 
 describe('SplitButton', function () {
   let instance;
   afterEach(function() {
     if (instance && ReactTestUtils.isCompositeComponent(instance) && instance.isMounted()) {
-      React.unmountComponentAtNode(React.findDOMNode(instance));
+      ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(instance));
     }
   });
 
@@ -20,9 +22,9 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    let button = React.findDOMNode(instance.refs.button);
-    let dropdownButton = React.findDOMNode(instance.refs.dropdownButton);
-    assert.ok(React.findDOMNode(instance).className.match(/\bbtn-group\b/));
+    let button = ReactDOM.findDOMNode(instance.refs.button);
+    let dropdownButton = ReactDOM.findDOMNode(instance.refs.dropdownButton);
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-group\b/));
     assert.ok(button.className.match(/\bbtn\b/));
     assert.equal(button.nodeName, 'BUTTON');
     assert.equal(button.type, 'button');
@@ -43,7 +45,7 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    let menu = React.findDOMNode(instance.refs.menu);
+    let menu = ReactDOM.findDOMNode(instance.refs.menu);
     assert.ok(menu.className.match(/\bdropdown-menu\b/));
     assert.equal(menu.getAttribute('role'), 'menu');
     assert.equal(menu.firstChild.nodeName, 'LI');
@@ -73,7 +75,7 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    let button = React.findDOMNode(instance.refs.button);
+    let button = ReactDOM.findDOMNode(instance.refs.button);
     assert.ok(button.className.match(/\bbtn-primary\b/));
   });
 
@@ -85,9 +87,9 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    let button = React.findDOMNode(instance.refs.button);
+    let button = ReactDOM.findDOMNode(instance.refs.button);
     assert.ok(button.disabled);
-    let dropdownButton = React.findDOMNode(instance.refs.dropdownButton);
+    let dropdownButton = ReactDOM.findDOMNode(instance.refs.dropdownButton);
     assert.ok(dropdownButton.disabled);
   });
 
@@ -99,7 +101,7 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    assert.equal(React.findDOMNode(instance).getAttribute('id'), 'testId');
+    assert.equal(ReactDOM.findDOMNode(instance).getAttribute('id'), 'testId');
   });
 
   it('Should be closed by default', function () {
@@ -110,7 +112,7 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    assert.notOk(React.findDOMNode(instance).className.match(/\bopen\b/));
+    assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bopen\b/));
   });
 
   it('Should open when clicked', function () {
@@ -121,9 +123,9 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    ReactTestUtils.SimulateNative.click(React.findDOMNode(instance.refs.dropdownButton));
+    ReactTestUtils.SimulateNative.click(ReactDOM.findDOMNode(instance.refs.dropdownButton));
 
-    assert.ok(React.findDOMNode(instance).className.match(/\bopen\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bopen\b/));
   });
 
   it('should call onSelect with eventKey when MenuItem is clicked', function (done) {
@@ -154,7 +156,7 @@ describe('SplitButton', function () {
       </SplitButton>
     );
 
-    assert.ok(React.findDOMNode(instance).className.match(/\bdropup\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bdropup\b/));
   });
 
   it('Should pass pullRight prop to menu', function () {
@@ -177,7 +179,7 @@ describe('SplitButton', function () {
 
     let anchors = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
     assert.equal(anchors.length, 2);
-    let linkElement = React.findDOMNode(anchors[0]);
+    let linkElement = anchors[0];
     assert.equal(linkElement.target, '_blank');
   });
 
@@ -213,7 +215,7 @@ describe('SplitButton', function () {
       evt.initEvent('click', true, true);
       document.documentElement.dispatchEvent(evt);
 
-      assert.notOk(React.findDOMNode(instance).className.match(/\bopen\b/));
+      assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bopen\b/));
     });
   });
 });
