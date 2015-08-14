@@ -4,6 +4,9 @@ import TransitionEvents from './utils/TransitionEvents';
 
 const Tab = React.createClass({
   propTypes: {
+    /**
+     * @private
+     */
     active:          React.PropTypes.bool,
     animation:       React.PropTypes.bool,
     onAnimateOutEnd: React.PropTypes.func,
