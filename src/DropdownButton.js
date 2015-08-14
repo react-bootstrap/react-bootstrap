@@ -30,6 +30,15 @@ const DropdownButton = React.createClass({
     children:  React.PropTypes.node
   },
 
+  getDefaultProps() {
+    return {
+      pullRight: false,
+      dropup: false,
+      navItem: false,
+      noCaret: false
+    };
+  },
+
   render() {
     let renderMethod = this.props.navItem ?
       'renderNavItem' : 'renderButtonGroup';

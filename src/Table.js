@@ -10,6 +10,16 @@ const Table = React.createClass({
     responsive: React.PropTypes.bool
   },
 
+  getDefaultProps() {
+    return {
+      bordered: false,
+      condensed: false,
+      hover: false,
+      responsive: false,
+      striped: false
+    };
+  },
+
   render() {
     let classes = {
       'table': true,

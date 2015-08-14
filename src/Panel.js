@@ -21,19 +21,14 @@ const Panel = React.createClass({
   getDefaultProps() {
     return {
       bsClass: 'panel',
-      bsStyle: 'default'
+      bsStyle: 'default',
+      defaultExpanded: false
     };
   },
 
   getInitialState(){
-    let defaultExpanded = this.props.defaultExpanded != null ?
-      this.props.defaultExpanded :
-        this.props.expanded != null ?
-        this.props.expanded :
-        false;
-
     return {
-      expanded: defaultExpanded
+      expanded: this.props.defaultExpanded
     };
   },
 

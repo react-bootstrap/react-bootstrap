@@ -21,7 +21,8 @@ const ListGroupItem = React.createClass({
 
   getDefaultProps() {
     return {
-      bsClass: 'list-group-item'
+      bsClass: 'list-group-item',
+      listItem: false
     };
   },
 

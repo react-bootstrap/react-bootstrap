@@ -16,7 +16,10 @@ const Interpolate = React.createClass({
   },
 
   getDefaultProps() {
-    return { component: 'span' };
+    return {
+      component: 'span',
+      unsafe: false
+    };
   },
 
   render() {

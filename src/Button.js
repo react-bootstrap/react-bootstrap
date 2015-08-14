@@ -28,8 +28,13 @@ const Button = React.createClass({
 
   getDefaultProps() {
     return {
+      active: false,
+      block: false,
       bsClass: 'button',
-      bsStyle: 'default'
+      bsStyle: 'default',
+      disabled: false,
+      navItem: false,
+      navDropdown: false
     };
   },
 

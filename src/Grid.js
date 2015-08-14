@@ -18,7 +18,8 @@ const Grid = React.createClass({
 
   getDefaultProps() {
     return {
-      componentClass: 'div'
+      componentClass: 'div',
+      fluid: false
     };
   },
 
