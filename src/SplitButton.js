@@ -1,5 +1,6 @@
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
+import uncontrollable from 'uncontrollable';
 import BootstrapMixin from './BootstrapMixin';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
@@ -12,7 +13,7 @@ import createChainedFunction from './utils/createChainedFunction';
 
 class SplitButtonButton extends Button { }
 
-export default class SplitButton extends DropdownBase {
+class SplitButton extends DropdownBase {
   constructor(props) {
     super(props, SplitToggle);
 
@@ -20,7 +21,7 @@ export default class SplitButton extends DropdownBase {
 
     this.childExtractors = [{
         key: 'button',
-        matches: child => child.type === SplitButton.Button,
+        matches: child => child.type === SplitButtonButton,
         refine: this.refineButton
       },
       ...this.childExtractors
@@ -79,14 +80,14 @@ function titleRequired(props, propName, component) {
 
   if (props.children) {
     if (props.children instanceof Array) {
-      titles = props.children.filter(child => child.type === SplitButton.Button);
-    } else if(props.children.type === SplitButton.Button) {
+      titles = props.children.filter(child => child.type === SplitButtonButton);
+    } else if(props.children.type === SplitButtonButton) {
       titles.push(props.children);
     }
   }
 
   if (titles.length > 1) {
-    return new Error(`(title|children) ${component} - Should only use one ${component}.Button child component, only the first ${component}.Toggle will be used`);
+    return new Error(`(title|children) ${component} - Should only use one ${component}.Button child component, only the first ${component}.Toggle will be used.`);
   }
 
   let title = titles[0];
@@ -96,23 +97,27 @@ function titleRequired(props, propName, component) {
   }
 
   if (props.title === undefined && title === undefined) {
-    return new Error(`(title|children) ${component} - Must provide either a 'title' prop or a '${component}.Button' child`);
+    return new Error(`(title|children) ${component} - Must provide either a 'title' prop or a '${component}.Button' child.`);
   }
 }
 
 SplitButton.propTypes = {
-  dropup: React.PropTypes.bool,
+  //dropup: React.PropTypes.bool,
   ...DropdownBase.propTypes,
   ...BootstrapMixin.propTypes,
 
   title: titleRequired,
 
   children: CustomPropTypes.all([
-    singleMenuValidation(DropdownBase.Toggle, MenuItem, SplitButtonButton),
+    singleMenuValidation(DropdownBase.Toggle, MenuItem, SplitToggle, SplitButtonButton),
     menuWithMenuItemSiblings(DropdownBase.Toggle, SplitButtonButton, SplitToggle)
   ])
 };
 
-SplitButton.Toggle = SplitToggle;
-SplitButton.Button = SplitButtonButton;
-SplitButton.Menu = DropdownMenu;
+let UncontrolledSplitButton = uncontrollable(SplitButton, { open: 'onToggle' })
+
+UncontrolledSplitButton.Toggle = SplitToggle;
+UncontrolledSplitButton.Button = SplitButtonButton;
+UncontrolledSplitButton.Menu = DropdownMenu;
+
+export default UncontrolledSplitButton;

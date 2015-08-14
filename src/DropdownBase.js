@@ -19,8 +19,7 @@ export default class DropdownBase extends React.Component {
     this.toggleOpen = this.toggleOpen.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleRequestClose = this.handleRequestClose.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
+    this.handleClose = this.handleClose.bind(this);
     this.extractChildren = this.extractChildren.bind(this);
 
     this.refineMenu = this.refineMenu.bind(this);
@@ -36,18 +35,33 @@ export default class DropdownBase extends React.Component {
       refine: this.refineMenu
     }];
 
-    this.state = {
-      open: false
-    };
+    this.state = {};
+  }
+
+  componentDidMount() {
+    let menu = this.refs.menu;
+    if (this.props.open && menu.focusNext) {
+      menu.focusNext()
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    let menu = this.refs.menu;
+    if (this.props.open && !prevProps.open && menu.focusNext) {
+      menu.focusNext()
+    }
   }
 
   toggleOpen() {
-    let open = !this.state.open;
-    this.setState({open});
+    let open = !this.props.open;
+
+    if (this.props.onToggle){
+      this.props.onToggle(open)
+    }
   }
 
   handleClick(event) {
-    if (event.defaultPrevented) {
+    if (this.props.disabled) {
       return;
     }
 
@@ -63,8 +77,8 @@ export default class DropdownBase extends React.Component {
 
     switch(event.keyCode) {
       case keycode.codes.down:
-        if (!this.state.open) {
-          this.setState({ open: true }, focusNext);
+        if (!this.props.open) {
+          this.toggleOpen();
         }
         else {
           focusNext()
@@ -73,37 +87,38 @@ export default class DropdownBase extends React.Component {
         break;
       case keycode.codes.esc:
       case keycode.codes.tab:
-        if (this.state.open) {
-          this.handleRequestClose(event);
+        if (this.props.open) {
+          this.handleClose(event);
         }
         break;
     }
   }
 
-  handleRequestClose(event) {
-    if (!this.state.open) {
+  handleClose(event) {
+    if (!this.props.open) {
       return;
     }
 
-    this.toggleOpen();
+    // we need to let the current event finish before closing the menu.
+    // otherwise the menu may close, shifting focus to document.body, before focus has moved
+    // to the next focusable input
+    if (event && event.keyCode === keycode.codes.tab){
+      setTimeout(this.toggleOpen);
+    }
+    else {
+      this.toggleOpen();
+    }
 
     if (event && event.type === 'keydown' && event.keyCode === keycode.codes.esc) {
+      let toggle = React.findDOMNode(this.refs[TOGGLE_REF])
       event.preventDefault();
       event.stopPropagation();
-      React.findDOMNode(this.refs[TOGGLE_REF]).focus();
+      toggle.focus();
     }
-  }
-
-  handleSelect(event, selectEvent) {
-    if (selectEvent.isSelectionPrevented()) {
-      return;
-    }
-
-    this.handleRequestClose(event);
   }
 
   extractChildren() {
-    let open = this.props.open !== undefined ? this.props.open : this.state.open;
+    let open = !!this.props.open;
     let children = [];
     let set = {};
 
@@ -139,28 +154,30 @@ export default class DropdownBase extends React.Component {
         <DropdownMenu
           {...menuProps}
           pullRight={this.props.pullRight}
-          onRequestClose={createChainedFunction(
-            this.props.onRequestClose,
-            this.handleRequestClose
+          onClose={createChainedFunction(
+            this.props.onClose,
+            this.handleClose
           )}
           onSelect={createChainedFunction(
             this.props.onSelect,
-            this.handleSelect
-          )}>
+            this.handleClose
+          )}
+        >
           {children}
         </DropdownMenu>
       );
     } else {
-      menuProps.onRequestClose = createChainedFunction(
-        menu.props.onRequestClose,
-        this.props.onRequestClose,
-        this.handleRequestClose
+      menuProps.onClose = createChainedFunction(
+        menu.props.onClose,
+        this.props.onClose,
+        this.handleClose
       );
       menuProps.onSelect = createChainedFunction(
         menu.props.onSelect,
         this.props.onSelect,
-        this.handleSelect
+        this.handleClose
       );
+
       menu = cloneElement(menu, menuProps, menu.props.children);
     }
 
@@ -288,27 +305,80 @@ export function menuWithMenuItemSiblings(...nonMenuTypes) {
 }
 
 DropdownBase.propTypes = {
+  /**
+   * The menu will open above the dropdown button, instead of below it.
+   */
   dropup: React.PropTypes.bool,
 
-  id: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number
-  ]).isRequired,
+  /**
+     * An html id attribute, necessary for assistive technologies, such as screen readers.
+     * @type {string|number}
+     * @required
+     */
+  id: CustomPropTypes.isRequiredForA11y(
+    React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ])
+  ),
 
+  /**
+   * Specify the content of the Dropdown button.
+   * @type {node}
+   */
   title: titleRequired,
 
+  /**
+   * The children of a Dropdown may be `<MenuItem/>`s, a `<Dropdown.Toggle/>` or a `<DropdownMenu/>`.
+   * @type {node}
+   */
   children: CustomPropTypes.all([
     titleRequired,
     singleMenuValidation(DropdownToggle, MenuItem),
     menuWithMenuItemSiblings(DropdownToggle)
   ]),
 
+  /**
+   * When used with the `title` prop, the noCaret option will not render a caret icon, in the toggle element.
+   */
   noCaret: React.PropTypes.bool,
 
+  /**
+   * Align the menu to the right  side of the Dropdown toggle
+   */
   pullRight: React.PropTypes.bool,
+
+  /**
+   * Whether or not the Dropdown is visible.
+   *
+   * @controllable onToggle
+   */
   open: React.PropTypes.bool,
 
-  onRequestClose: React.PropTypes.func,
+  /**
+   * A callback fired when the Dropdown wishes to change visibility. Called with the requested
+   * `open` value.
+   *
+   * ```js
+   * function(Boolean isOpen){}
+   * ```
+   * @controllable open
+   */
+  onToggle: React.PropTypes.func,
+
+
+  /**
+   * @private
+   */
   onClick: React.PropTypes.func,
+
+  /**
+   * A callback fired when a menu item is selected.
+   *
+   * ```js
+   * function(Object event, Any eventKey)
+   * ```
+   */
   onSelect: React.PropTypes.func
 };
+

@@ -17,6 +17,8 @@ class CustomMenu extends React.Component {
 }
 
 describe('DropdownButton', function() {
+  let BaseDropdown = DropdownButton.ControlledComponent;
+
   const simpleDropdown = (
     <DropdownButton title='Simple Dropdown' id='test-id'>
       <MenuItem>Item 1</MenuItem>
@@ -139,7 +141,7 @@ describe('DropdownButton', function() {
       )]
     };
 
-    let err = DropdownButton.propTypes.children(props, 'children', 'DropdownButton');
+    let err = BaseDropdown.propTypes.children(props, 'children', 'DropdownButton');
     err.message.should.match(/Only one.*menu permitted/);
   });
 
@@ -264,8 +266,9 @@ describe('DropdownButton', function() {
 
   it('forwards onSelect handler to MenuItems', function(done) {
     const selectedEvents = [];
-    const onSelect = (event, selectEvent) => {
-      selectedEvents.push(selectEvent.eventKey);
+
+    const onSelect = (event, eventKey) => {
+      selectedEvents.push(eventKey);
 
       if (selectedEvents.length === 4) {
         selectedEvents.should.eql(['1', '2', '3', '4']);
@@ -306,15 +309,15 @@ describe('DropdownButton', function() {
     node.className.should.not.match(/\bopen\b/);
   });
 
-  it('does not close when selection is prevented', function() {
-    const handleSelect = (event, selectEvent) => {
-      selectEvent.preventSelection();
-    };
+  it('does not close when onToggle is controlled', function() {
+    const handleSelect = () => {};
+
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Simple Dropdown' onSelect={handleSelect} id='test-id'>
+      <DropdownButton title='Simple Dropdown' open={true} onToggle={handleSelect} id='test-id'>
         <MenuItem eventKey='1'>Item 1</MenuItem>
       </DropdownButton>
     );
+
     const node = React.findDOMNode(instance);
     const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
 
@@ -347,8 +350,10 @@ describe('DropdownButton', function() {
             </button>
             <DropdownButton
               open={this.state.open}
+              onToggle={()=>{}}
               title='Prop open control'
-              id='test-id'>
+              id='test-id'
+            >
               <MenuItem eventKey='1'>Item 1</MenuItem>
             </DropdownButton>
           </div>
@@ -369,10 +374,11 @@ describe('DropdownButton', function() {
 
   describe('PropType validation', function() {
     ['title', 'children'].forEach(type => {
+
       describe(type, function() {
         it('validates successfully', function() {
           const props = { title: 'some title' };
-          DropdownButton.propTypes.title(props, type, 'DropdownButton');
+          BaseDropdown.propTypes.title(props, type, 'DropdownButton');
         });
 
         it('validates with single child of type DropdownButton.Toggle', function() {
@@ -384,13 +390,13 @@ describe('DropdownButton', function() {
               title
             ]
           };
-          DropdownButton.propTypes.title(props, type, 'DropdownButton');
+          BaseDropdown.propTypes.title(props, type, 'DropdownButton');
         });
 
         it('validation fails with no title', function() {
           const props = { other: 'some title' };
 
-          DropdownButton.propTypes.title(props, type, 'DropdownButton')
+          BaseDropdown.propTypes.title(props, type, 'DropdownButton')
             .message.should.match(/Must provide.*title.*or.*DropdownButton\.Toggle/);
         });
 
@@ -405,7 +411,7 @@ describe('DropdownButton', function() {
             ]
           };
 
-          DropdownButton.propTypes.title(props, type, 'DropdownButton')
+          BaseDropdown.propTypes.title(props, type, 'DropdownButton')
             .message.should.match(/Should only use one DropdownButton\.Toggle/);
         });
 
@@ -420,7 +426,7 @@ describe('DropdownButton', function() {
             ]
           };
 
-          DropdownButton.propTypes.title(props, type, 'DropdownButton')
+          BaseDropdown.propTypes.title(props, type, 'DropdownButton')
             .message.should.match(/Must provide.*title.*or.*DropdownButton\.Toggle.*not both/);
         });
       });
@@ -433,7 +439,7 @@ describe('DropdownButton', function() {
           navItem: true
         };
 
-        DropdownButton.propTypes.navItem(props, 'navItem', 'DropdownButton');
+        BaseDropdown.propTypes.navItem(props, 'navItem', 'DropdownButton');
         shouldWarn(/navItem.*NavDropdown component/);
       });
     });
@@ -475,17 +481,6 @@ describe('DropdownButton', function() {
       document.activeElement.should.equal(firstMenuItemAnchor);
     });
 
-    it('when focused and open sets focus on first menu item when the key "down" is pressed', function() {
-      const instance = React.render(simpleDropdown, focusableContainer);
-      const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
-
-      buttonNode.focus();
-      ReactTestUtils.Simulate.click(buttonNode);
-      ReactTestUtils.Simulate.keyDown(buttonNode, { keyCode: keycode('down') });
-
-      const firstMenuItemAnchor = React.findDOMNode(ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0]);
-      document.activeElement.should.equal(firstMenuItemAnchor);
-    });
 
     it('when focused and open does not toggle closed when the key "down" is pressed', function() {
       const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
@@ -504,25 +499,25 @@ describe('DropdownButton', function() {
     // The failure occured when all tests in the suite were run together, but not a subset of the tests.
     //
     // I am fairly confident that the failure is due to a test specific conflict and not an actual bug.
-    it('when open and the key "esc" is pressed the menu is closed and focus is returned to the button', function(done) {
+    it('when open and the key "esc" is pressed the menu is closed and focus is returned to the button', function() {
+      const instance = React.render(
+        <DropdownButton title='Simple Dropdown' defaultOpen id='test-id'>
+          <MenuItem>Item 1</MenuItem>
+          <MenuItem>Item 2</MenuItem>
+        </DropdownButton>
+      , focusableContainer);
 
-      const instance = React.render(simpleDropdown, focusableContainer);
       const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+      const firstMenuItemAnchor = React.findDOMNode(ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0]);
 
-      buttonNode.focus();
+      document.activeElement.should.equal(firstMenuItemAnchor);
 
-      instance.setState({ open: true }, ()=>{
-        const firstMenuItemAnchor = React.findDOMNode(ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0]);
+      ReactTestUtils.Simulate.keyDown(firstMenuItemAnchor, { type: 'keydown', keyCode: keycode('esc') });
 
-        firstMenuItemAnchor.focus()
-
-        ReactTestUtils.Simulate.keyDown(firstMenuItemAnchor, { type: 'keydown', keyCode: keycode('esc') });
-        document.activeElement.should.equal(buttonNode);
-        done()
-      })
+      document.activeElement.should.equal(buttonNode);
     });
 
-    it('when open and the key "tab" is pressed the menu is closed and focus is progress to the next focusable element', () => {
+    it('when open and the key "tab" is pressed the menu is closed and focus is progress to the next focusable element', done => {
       const instance = React.render(
         <div>
           {simpleDropdown}
@@ -537,7 +532,12 @@ describe('DropdownButton', function() {
       buttonNode.getAttribute('aria-expanded').should.equal('true');
 
       ReactTestUtils.Simulate.keyDown(buttonNode, { key: keycode('tab'), keyCode: keycode('tab') });
-      buttonNode.getAttribute('aria-expanded').should.equal('false');
+
+      setTimeout(() => {
+        buttonNode.getAttribute('aria-expanded').should.equal('false');
+        done()
+      })
+
 
       // simulating a tab event doesn't actually shift focus.
       // at least that seems to be the case according to SO.

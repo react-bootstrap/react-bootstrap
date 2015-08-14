@@ -41,8 +41,8 @@ describe('DropdownMenu', function() {
 
   it('forwards onSelect handler to MenuItems', function(done) {
     const selectedEvents = [];
-    const onSelect = (event, selectEvent) => {
-      selectedEvents.push(selectEvent.eventKey);
+    const onSelect = (event, eventKey) => {
+      selectedEvents.push(eventKey);
 
       if (selectedEvents.length === 4) {
         selectedEvents.should.eql(['1', '2', '3', '4']);
@@ -94,7 +94,7 @@ describe('DropdownMenu', function() {
       const instance = React.render(
         <div>
           <button>Something to click</button>
-          <DropdownMenu onRequestClose={requestClose} open>
+          <DropdownMenu onClose={requestClose} open>
             <MenuItem>Item</MenuItem>
           </DropdownMenu>
         </div>, focusableContainer);
@@ -162,7 +162,7 @@ describe('DropdownMenu', function() {
         it(`when the key "${key}" is pressed the requestClose prop is invoked with the originating event`, function() {
           const requestClose = sinon.spy();
           const instance = React.render(
-            <DropdownMenu onRequestClose={requestClose}>
+            <DropdownMenu onClose={requestClose}>
               <MenuItem>Item</MenuItem>
             </DropdownMenu>, focusableContainer);
 

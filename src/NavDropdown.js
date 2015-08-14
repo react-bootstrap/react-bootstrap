@@ -1,10 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
+import uncontrollable from 'uncontrollable';
 import DropdownBase from './DropdownBase';
 import DropdownToggle from './DropdownToggle';
 import DropdownMenu from './DropdownMenu';
 
-export default class NavDropdown extends DropdownBase {
+class NavDropdown extends DropdownBase {
   constructor(props) {
     super(props);
 
@@ -38,5 +39,9 @@ NavDropdown.propTypes = {
   ...DropdownBase.propTypes
 };
 
-NavDropdown.Toggle = DropdownToggle;
-NavDropdown.Menu = DropdownMenu;
+let UncontrolledNavDropdown = uncontrollable(NavDropdown, { open: 'onToggle' })
+
+UncontrolledNavDropdown.Toggle = DropdownToggle;
+UncontrolledNavDropdown.Menu = DropdownMenu;
+
+export default UncontrolledNavDropdown

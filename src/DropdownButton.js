@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import uncontrollable from 'uncontrollable';
 import BootstrapMixin from './BootstrapMixin';
 import ButtonGroup from './ButtonGroup';
 import DropdownBase from './DropdownBase';
@@ -9,7 +10,7 @@ import NavDropdown from './NavDropdown';
 import CustomPropTypes from './utils/CustomPropTypes';
 import deprecationWarning from './utils/deprecationWarning';
 
-export default class DropdownButton extends DropdownBase {
+class DropdownButton extends DropdownBase {
   constructor(props) {
     super(props);
   }
@@ -43,6 +44,12 @@ export default class DropdownButton extends DropdownBase {
 }
 
 DropdownButton.propTypes = {
+  /**
+   * Specify whether this Dropdown is part of a Nav component
+   *
+   * @type {bool}
+   * @deprecated Use the `NavDropdown` instead.
+   */
   navItem: CustomPropTypes.all([
     React.PropTypes.bool,
     function(props, propName, componentName) {
@@ -56,5 +63,9 @@ DropdownButton.propTypes = {
   ...BootstrapMixin.propTypes
 };
 
-DropdownButton.Toggle = DropdownToggle;
-DropdownButton.Menu = DropdownMenu;
+let UncontrolledDropdown = uncontrollable(DropdownButton, { open: 'onToggle' })
+
+UncontrolledDropdown.Toggle = DropdownToggle;
+UncontrolledDropdown.Menu = DropdownMenu;
+
+export default UncontrolledDropdown

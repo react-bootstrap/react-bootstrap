@@ -29,7 +29,7 @@ class DropdownMenu extends React.Component {
         break;
       case keycode.codes.esc:
       case keycode.codes.tab:
-        this.props.onRequestClose(event);
+        this.props.onClose(event);
         break;
     }
   }
@@ -105,7 +105,7 @@ class DropdownMenu extends React.Component {
 
     if (this.props.open) {
       list = (
-        <RootCloseWrapper noWrap onRootClose={this.props.onRequestClose}>
+        <RootCloseWrapper noWrap onRootClose={this.props.onClose}>
           {list}
         </RootCloseWrapper>
       )
@@ -118,7 +118,7 @@ class DropdownMenu extends React.Component {
 DropdownMenu.propTypes = {
   open: React.PropTypes.bool,
   pullRight: React.PropTypes.bool,
-  onRequestClose: React.PropTypes.func,
+  onClose: React.PropTypes.func,
   labelledBy: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
