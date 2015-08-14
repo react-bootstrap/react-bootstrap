@@ -1,123 +1,64 @@
-import React, { cloneElement } from 'react';
-import classNames from 'classnames';
-import uncontrollable from 'uncontrollable';
+import React from 'react';
 import BootstrapMixin from './BootstrapMixin';
 import Button from './Button';
-import ButtonGroup from './ButtonGroup';
-import CustomPropTypes from './utils/CustomPropTypes';
-import DropdownBase, { singleMenuValidation, menuWithMenuItemSiblings } from './DropdownBase';
-import DropdownMenu from './DropdownMenu';
-import MenuItem from './MenuItem';
+import Dropdown from './Dropdown';
 import SplitToggle from './SplitToggle';
-import createChainedFunction from './utils/createChainedFunction';
 
-class SplitButtonButton extends Button { }
-
-class SplitButton extends DropdownBase {
-  constructor(props) {
-    super(props, SplitToggle);
-
-    this.refineButton = this.refineButton.bind(this);
-
-    this.childExtractors = [{
-        key: 'button',
-        matches: child => child.type === SplitButtonButton,
-        refine: this.refineButton
-      },
-      ...this.childExtractors
-    ];
-  }
+class SplitButton extends React.Component {
 
   render() {
     let {
-      toggle,
-      menu,
-      button,
-      open
-    } = this.extractChildren();
+      children, title, onClick, target, href, bsStyle, ...props } = this.props;
 
-    const rootClasses = {
-      open,
-      dropdown: !this.props.dropup,
-      dropup: this.props.dropup
-    };
+     let { disabled } = props;
+
+    let button = (
+      <Button
+        onClick={onClick}
+        bsStyle={bsStyle}
+        disabled={disabled}
+        target={target}
+        href={href}
+      >
+        {title}
+      </Button>
+    );
 
     return (
-      <ButtonGroup
-        bsSize={this.props.bsSize}
-        className={classNames(this.props.className, rootClasses)}>
+      <Dropdown {...props}>
         {button}
-        {toggle}
-        {menu}
-      </ButtonGroup>
-    );
-  }
 
-  refineButton(button, children, open) {
-    if (button === undefined) {
-      let { target, href, bsStyle, onClick, disabled, title } = this.props;
-      return (
-        <Button
-          onClick={onClick}
+        <SplitToggle
+          aria-label={title}
           bsStyle={bsStyle}
           disabled={disabled}
-          target={target}
-          href={href}
-        >
-          {title}
-        </Button>
-      );
-    }
-
-    return cloneElement(button, {
-      onClick: createChainedFunction(button.props.onClick, this.props.onClick)
-    });
+        />
+        <Dropdown.Menu>
+          {children}
+        </Dropdown.Menu>
+      </Dropdown>
+    );
   }
 }
 
-function titleRequired(props, propName, component) {
-  let titles = [];
-
-  if (props.children) {
-    if (props.children instanceof Array) {
-      titles = props.children.filter(child => child.type === SplitButtonButton);
-    } else if(props.children.type === SplitButtonButton) {
-      titles.push(props.children);
-    }
-  }
-
-  if (titles.length > 1) {
-    return new Error(`(title|children) ${component} - Should only use one ${component}.Button child component, only the first ${component}.Toggle will be used.`);
-  }
-
-  let title = titles[0];
-
-  if (props.title !== undefined && title !== undefined) {
-    return new Error(`(title|children) ${component} - Must provide either a 'title' prop or a '${component}.Button' child, not both.`);
-  }
-
-  if (props.title === undefined && title === undefined) {
-    return new Error(`(title|children) ${component} - Must provide either a 'title' prop or a '${component}.Button' child.`);
-  }
-}
 
 SplitButton.propTypes = {
   //dropup: React.PropTypes.bool,
-  ...DropdownBase.propTypes,
+  ...Dropdown.propTypes,
   ...BootstrapMixin.propTypes,
 
-  title: titleRequired,
-
-  children: CustomPropTypes.all([
-    singleMenuValidation(DropdownBase.Toggle, MenuItem, SplitToggle, SplitButtonButton),
-    menuWithMenuItemSiblings(DropdownBase.Toggle, SplitButtonButton, SplitToggle)
-  ])
+  /**
+   * @private
+   */
+  onClick(){},
+  target: React.PropTypes.string,
+  href: React.PropTypes.string,
+  /**
+   * The content of the split button.
+   */
+  title: React.PropTypes.node.isRequired
 };
 
-let UncontrolledSplitButton = uncontrollable(SplitButton, { open: 'onToggle' })
+SplitButton.Toggle = SplitToggle;
 
-UncontrolledSplitButton.Toggle = SplitToggle;
-UncontrolledSplitButton.Button = SplitButtonButton;
-UncontrolledSplitButton.Menu = DropdownMenu;
-
-export default UncontrolledSplitButton;
+export default SplitButton;

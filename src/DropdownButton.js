@@ -1,49 +1,45 @@
 import React from 'react';
-import classNames from 'classnames';
-import uncontrollable from 'uncontrollable';
 import BootstrapMixin from './BootstrapMixin';
-import ButtonGroup from './ButtonGroup';
-import DropdownBase from './DropdownBase';
-import DropdownToggle from './DropdownToggle';
-import DropdownMenu from './DropdownMenu';
+import Dropdown from './Dropdown';
 import NavDropdown from './NavDropdown';
 import CustomPropTypes from './utils/CustomPropTypes';
 import deprecationWarning from './utils/deprecationWarning';
+import omit from 'lodash/object/omit';
 
-class DropdownButton extends DropdownBase {
+class DropdownButton extends React.Component {
+
   constructor(props) {
     super(props);
   }
 
   render() {
-    if (this.props.navItem) {
-      return <NavDropdown {...this.props} />;
+    let { title, navItem, ...props } = this.props;
+
+    let toggleProps = omit(props, Dropdown.ControlledComponent.propTypes);
+
+    if (navItem){
+      return <NavDropdown {...this.props}/>
     }
 
-    let {
-      toggle,
-      menu,
-      open
-    } = this.extractChildren();
-
-    const rootClasses = {
-      open,
-      dropdown: !this.props.dropup,
-      dropup: this.props.dropup
-    };
-
     return (
-      <ButtonGroup
-        bsSize={this.props.bsSize}
-        className={classNames(this.props.className, rootClasses)}>
-        {toggle}
-        {menu}
-      </ButtonGroup>
+      <Dropdown {...props}>
+        <Dropdown.Toggle {...toggleProps}>
+          {title}
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          {this.props.children}
+        </Dropdown.Menu>
+      </Dropdown>
     );
   }
 }
 
 DropdownButton.propTypes = {
+  /**
+   * When used with the `title` prop, the noCaret option will not render a caret icon, in the toggle element.
+   */
+  noCaret: React.PropTypes.bool,
+
   /**
    * Specify whether this Dropdown is part of a Nav component
    *
@@ -58,14 +54,9 @@ DropdownButton.propTypes = {
       }
     }
   ]),
-  dropup: React.PropTypes.bool,
-  ...DropdownBase.propTypes,
+  title: React.PropTypes.node.isRequired,
+  ...Dropdown.propTypes,
   ...BootstrapMixin.propTypes
 };
 
-let UncontrolledDropdown = uncontrollable(DropdownButton, { open: 'onToggle' })
-
-UncontrolledDropdown.Toggle = DropdownToggle;
-UncontrolledDropdown.Menu = DropdownMenu;
-
-export default UncontrolledDropdown
+export default DropdownButton

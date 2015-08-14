@@ -48,22 +48,27 @@ class CustomMenu extends React.Component {
   focusNext() {
     let input = React.findDOMNode(this.input);
 
-    if (input){
-      input.focus()
+    if (input) {
+      input.focus();
     }
   }
 }
 
+let preventDefault = e => e.preventDefault();
 
 let dropdownExample = (
-    <DropdownButton title='click me!' id='dropdown-custom-menu'>
-      <CustomMenu>
+    <Dropdown id='dropdown-custom-menu'>
+      <a href='#' bsRole='toggle' onClick={preventDefault}>
+        custom Toggle
+      </a>
+
+      <CustomMenu bsRole='menu'>
         <MenuItem eventKey='1'>Red</MenuItem>
         <MenuItem eventKey='2'>Blue</MenuItem>
         <MenuItem eventKey='3' active>Orange</MenuItem>
         <MenuItem eventKey='1'>Red-Orange</MenuItem>
       </CustomMenu>
-    </DropdownButton>
+    </Dropdown>
   )
 
 React.render(dropdownExample, mountNode);

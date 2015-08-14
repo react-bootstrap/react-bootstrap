@@ -1,47 +1,32 @@
 import React from 'react';
-import classNames from 'classnames';
-import uncontrollable from 'uncontrollable';
-import DropdownBase from './DropdownBase';
-import DropdownToggle from './DropdownToggle';
-import DropdownMenu from './DropdownMenu';
+import Dropdown from './Dropdown';
 
-class NavDropdown extends DropdownBase {
-  constructor(props) {
-    super(props);
-
-    this.useAnchor = true;
-  }
+class NavDropdown extends React.Component {
 
   render() {
-    let {
-      toggle,
-      menu,
-      open
-    } = this.extractChildren();
-
-    const rootClasses = {
-      open,
-      dropdown: !this.props.dropup,
-      dropup: this.props.dropup
-    };
+    let { children, title, noCaret, bsStyle, ...props } = this.props;
 
     return (
-      <li className={classNames(this.props.className, rootClasses)}>
-        {toggle}
-        {menu}
-      </li>
+      <Dropdown {...props} componentClass='li'>
+        <Dropdown.Toggle
+          useAnchor
+          bsStyle={bsStyle}
+          disabled={props.disabled}
+          noCaret={noCaret}
+        >
+          {title}
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          {children}
+        </Dropdown.Menu>
+      </Dropdown>
     );
   }
 }
 
 NavDropdown.propTypes = {
-  dropup: React.PropTypes.bool,
-  ...DropdownBase.propTypes
+  title: React.PropTypes.node.isRequired,
+  ...Dropdown.propTypes
 };
 
-let UncontrolledNavDropdown = uncontrollable(NavDropdown, { open: 'onToggle' })
-
-UncontrolledNavDropdown.Toggle = DropdownToggle;
-UncontrolledNavDropdown.Menu = DropdownMenu;
-
-export default UncontrolledNavDropdown
+export default NavDropdown

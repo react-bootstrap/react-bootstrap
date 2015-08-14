@@ -6,20 +6,11 @@ export default class SplitToggle extends React.Component {
     return (
       <DropdownToggle
         {...this.props}
-        title={undefined}
-        useAnchor={false}>
-        <span className="sr-only">
-          {this.props.title}
-        </span>
-      </DropdownToggle>
+        useAnchor={false}
+        noCaret={false}
+      />
     );
   }
 }
 
-SplitToggle.propTypes = {
-  title: React.PropTypes.string
-};
-
-SplitToggle.isToggle = true;
-SplitToggle.titleProp = 'dropdownTitle';
-SplitToggle.onClickProp = 'handleDropdownClick';
+SplitToggle.defaultProps = DropdownToggle.defaultProps

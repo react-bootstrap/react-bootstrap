@@ -19,6 +19,7 @@
     "Carousel",
     "CarouselItem",
     "Col",
+    "Dropdown",
     "DropdownButton",
     "DropdownMenu",
     "FormControls",

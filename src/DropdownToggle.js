@@ -36,10 +36,12 @@ const titleAndChildrenValidation = CustomPropTypes.singlePropFrom([
 
 DropdownToggle.defaultProps = {
   open: false,
-  useAnchor: false
+  useAnchor: false,
+  bsRole: 'toggle'
 };
 
 DropdownToggle.propTypes = {
+  bsRole: React.PropTypes.string,
   children: titleAndChildrenValidation,
   noCaret: React.PropTypes.bool,
   open: React.PropTypes.bool,

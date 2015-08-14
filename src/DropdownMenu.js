@@ -115,6 +115,10 @@ class DropdownMenu extends React.Component {
   }
 }
 
+DropdownMenu.defaultProps = {
+  bsRole: 'menu'
+}
+
 DropdownMenu.propTypes = {
   open: React.PropTypes.bool,
   pullRight: React.PropTypes.bool,

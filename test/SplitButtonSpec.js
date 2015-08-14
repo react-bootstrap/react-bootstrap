@@ -47,53 +47,31 @@ describe('SplitButton', function() {
     ReactTestUtils.Simulate.click(buttonNode);
   });
 
-  it('should invoke onClick when SplitButton.Button is clicked (child)', function(done) {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <SplitButton id='test-id' >
-        <SplitButton.Button onClick={ () => done()}>Title</SplitButton.Button>
-        <MenuItem>Item 1</MenuItem>
-      </SplitButton>
-    );
-
-    const buttons = ReactTestUtils.scryRenderedComponentsWithType(instance, SplitButton.Button);
-
-    const buttonNode = React.findDOMNode(buttons[0]);
-    ReactTestUtils.Simulate.click(buttonNode);
-  });
 
   it('should not invoke onClick when SplitButton.Toggle is clicked (prop)', function(done) {
+    let onClickSpy = sinon.spy();
+
     const instance = ReactTestUtils.renderIntoDocument(
-      <SplitButton title='Title' id='test-id'
-        onClick={ () => done(new Error('Should not get called')) }>
+      <SplitButton
+        title='Title'
+        id='test-id'
+        onClick={onClickSpy}
+      >
         <MenuItem>Item 1</MenuItem>
       </SplitButton>
     );
 
-    const toggleNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle'));
+    const toggleNode = React.findDOMNode(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle'));
+
     ReactTestUtils.Simulate.click(toggleNode);
-    setTimeout(done, 100);
+
+    setTimeout(()=> {
+      onClickSpy.should.not.have.been.called
+      done()
+    }, 10);
   });
 
-  it('should invoke onClick when SplitButton.Toggle is clicked (child)', function(done) {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <SplitButton id='test-id' title='hi'>
-        <SplitButton.Toggle onClick={() => done()}>Title</SplitButton.Toggle>
-        <MenuItem>Item 1</MenuItem>
-      </SplitButton>
-    );
-
-    const toggleNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle'));
-    ReactTestUtils.Simulate.click(toggleNode);
-  });
-
-  it('should fail prop validation if title prop or SplitButton.Button child is not provided', function() {
-    const props = { other: 'some title' };
-
-    SplitButton.ControlledComponent.propTypes.title(props, 'title', 'SplitButton')
-      .message.should.match(/Must provide.*title.*or.*SplitButton\.Button/);
-  });
-
-  // TODO: From old specs
   it('Should pass disabled to both buttons', function () {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title='Title' id='test-id' disabled>
