@@ -1,6 +1,8 @@
 import React from 'react';
 import Transition from 'react-overlays/lib/Transition';
 import domUtils from './utils/domUtils';
+import CustomPropTypes from './utils/CustomPropTypes';
+import deprecationWarning from './deprecationWarning';
 import createChainedFunction from './utils/createChainedFunction';
 
 let capitalize = str => str[0].toUpperCase() + str.substr(1);
@@ -139,6 +141,20 @@ Collapse.propTypes = {
    * events are canceled
    */
   timeout: React.PropTypes.number,
+
+  /**
+   * duration
+   * @private
+   */
+  duration: CustomPropTypes.all([
+    React.PropTypes.number,
+    (props)=> {
+      if (props.duration != null){
+        deprecationWarning('Collapse `duration`', 'the `timeout` prop');
+      }
+      return null;
+    }
+  ]),
 
   /**
    * Callback fired before the component expands

@@ -1,11 +1,16 @@
 import React from 'react';
 import Transition from 'react-overlays/lib/Transition';
+import CustomPropTypes from './utils/CustomPropTypes';
+import deprecationWarning from './deprecationWarning';
 
 class Fade extends React.Component {
   render() {
+    let timeout = this.props.timeout || this.props.duration;
+
     return (
       <Transition
         {...this.props}
+        timeout={timeout}
         className='fade'
         enteredClassName='in'
         enteringClassName='in'
@@ -18,7 +23,6 @@ class Fade extends React.Component {
 
 // Explicitly copied from Transition for doc generation.
 // TODO: Remove duplication once #977 is resolved.
-
 Fade.propTypes = {
   /**
    * Show the component; triggers the fade in or fade out animation
@@ -42,6 +46,20 @@ Fade.propTypes = {
    * canceled
    */
   timeout: React.PropTypes.number,
+
+  /**
+   * duration
+   * @private
+   */
+  duration: CustomPropTypes.all([
+    React.PropTypes.number,
+    (props)=> {
+      if (props.duration != null){
+        deprecationWarning('Fade `duration`', 'the `timeout` prop');
+      }
+      return null;
+    }
+  ]),
 
   /**
    * Callback fired before the component fades in
