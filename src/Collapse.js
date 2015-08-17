@@ -2,7 +2,7 @@ import React from 'react';
 import Transition from 'react-overlays/lib/Transition';
 import domUtils from './utils/domUtils';
 import CustomPropTypes from './utils/CustomPropTypes';
-import deprecationWarning from './deprecationWarning';
+import deprecationWarning from './utils/deprecationWarning';
 import createChainedFunction from './utils/createChainedFunction';
 
 let capitalize = str => str[0].toUpperCase() + str.substr(1);

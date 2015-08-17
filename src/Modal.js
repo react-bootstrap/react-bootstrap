@@ -177,7 +177,7 @@ const Modal = React.createClass({
           transitionAppear
           unmountOnExit
           in={show}
-          duration={Modal.TRANSITION_DURATION}
+          timeout={Modal.TRANSITION_DURATION}
           onExit={onExit}
           onExiting={onExiting}
           onExited={this.handleHidden}
@@ -231,7 +231,7 @@ const Modal = React.createClass({
       <div
         ref='modal'>
         { animation
-            ? <Fade transitionAppear in={this.props.show} duration={duration}>{backdrop}</Fade>
+            ? <Fade transitionAppear in={this.props.show} timeout={duration}>{backdrop}</Fade>
             : backdrop
         }
         {modal}
