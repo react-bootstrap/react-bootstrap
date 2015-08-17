@@ -1,5 +1,5 @@
 {
-  "extends": ["defaults"],
+  "extends": ["semistandard"],
   "env": {
     "browser": true,
     "node": true
@@ -13,12 +13,17 @@
     "babel"
   ],
   "rules": {
+    "arrow-spacing": 0,
+    "brace-style": 0,
     "constructor-super": 2,
     "comma-spacing": 2,
     "comma-style": [2, "last"],
+    "indent": 0,
     "one-var": [2, { "initialized": "never" }],
     "key-spacing": 0,
+    "no-multiple-empty-lines": 0,
     "no-this-before-super": 2,
+    "no-throw-literal": 0,
     "no-underscore-dangle": 0,
     "no-unused-vars": [2, { "vars": "all", "args": "none" }],
     "no-var": 2,
@@ -37,7 +42,12 @@
     "react/self-closing-comp": 2,
     "react/wrap-multilines": 2,
     "react/jsx-uses-vars": 2,
+    "space-after-keywords": 0,
+    "space-before-blocks": 0,
+    "space-before-function-paren": 0,
+    "spaced-comment": 0,
     "space-infix-ops": 2,
+    "space-in-parens": 0,
     "strict": [2, "never"]
   }
 }

@@ -1,6 +1,7 @@
 {
   "rules": {
     "comma-spacing": 0,
+    "operator-linebreak": 0,
     "react/no-multi-comp": 0,
     "react/prop-types": 0
   },

@@ -223,13 +223,13 @@ describe('Collapse', function () {
 
     it('sets aria-expanded true when expanded', function() {
       let node = React.findDOMNode(instance);
-      instance.setProps({ in: true});
+      instance.setProps({ in: true });
       assert.equal(node.getAttribute('aria-expanded'), 'true');
     });
 
     it('sets aria-expanded false when collapsed', function() {
       let node = React.findDOMNode(instance);
-      instance.setProps({ in: false});
+      instance.setProps({ in: false });
       assert.equal(node.getAttribute('aria-expanded'), 'false');
     });
   });
