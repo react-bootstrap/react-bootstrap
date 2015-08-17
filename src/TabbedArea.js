@@ -63,11 +63,6 @@ const TabbedArea = React.createClass({
           }
         }
       });
-
-      // if the 'previousActiveKey' child does not exist anymore
-      this.setState({
-        previousActiveKey: null
-      });
     }
   },
 
