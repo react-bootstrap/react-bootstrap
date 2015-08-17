@@ -57,7 +57,7 @@ describe('Position', function () {
               <div ref="bar" />
 
               <Position
-                target={() => this.refs[this.state.target]}
+                target={() => React.findDOMNode(this.refs[this.state.target])}
                 fakeProp={this.state.fakeProp}
               >
                 <div />
