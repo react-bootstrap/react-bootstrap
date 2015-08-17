@@ -133,7 +133,12 @@ const Modal = React.createClass({
      * Hide this from automatic props documentation generation.
      * @private
      */
-    bsStyle: React.PropTypes.string
+    bsStyle: React.PropTypes.string,
+
+    /**
+     * When `true` The modal will show itself.
+     */
+    show: React.PropTypes.bool
   },
 
   getDefaultProps() {
