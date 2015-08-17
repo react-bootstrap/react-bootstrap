@@ -23,6 +23,11 @@ function ownerWindow(componentOrElement) {
   return getOwnerWindow(doc);
 }
 
+//TODO remove in 0.26
+function getComputedStyles(elem) {
+  return ownerDocument(elem).defaultView.getComputedStyle(elem, null);
+}
+
 /**
  * Get an element's size
  *
@@ -45,6 +50,7 @@ function getSize(elem) {
 export default {
   canUseDom,
   css,
+  getComputedStyles,
   contains,
   ownerWindow,
   ownerDocument,

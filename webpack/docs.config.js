@@ -21,6 +21,7 @@ if (options.debug) {
 }
 
 export default _.extend({}, baseConfig, {
+
   entry: {
     bundle: options.debug ? devEntryBundle : entryFile
   },

@@ -1,3 +1,5 @@
+import deprecationWarning from './utils/deprecationWarning';
+
 export Accordion from './Accordion';
 export Affix from './Affix';
 export AffixMixin from './AffixMixin';
@@ -70,16 +72,36 @@ export Fade from './Collapse';
 
 export * as FormControls from './FormControls';
 
+import domUtils from './utils/domUtils';
 import childrenValueInputValidation from './utils/childrenValueInputValidation';
 import createChainedFunction from './utils/createChainedFunction';
-import domUtils from './utils/domUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import CustomPropTypes from './utils/CustomPropTypes';
 
 export const utils = {
   childrenValueInputValidation,
   createChainedFunction,
-  domUtils,
   ValidComponentChildren,
-  CustomPropTypes
+  CustomPropTypes,
+  domUtils: createDeprecationWrapper(domUtils, 'utils/domUtils', 'npm install dom-helpers'),
 };
+
+function createDeprecationWrapper(obj, deprecated, instead, link){
+  let wrapper = {};
+
+  if (process.env.NODE_ENV === 'production'){
+    return obj;
+  }
+
+  Object.keys(obj).forEach(key => {
+    Object.defineProperty(wrapper, key, {
+      get(){
+        deprecationWarning(deprecated, instead, link);
+        return obj[key];
+      },
+      set(x){ obj[key] = x; }
+    });
+  });
+
+  return wrapper;
+}
