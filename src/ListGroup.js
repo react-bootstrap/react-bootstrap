@@ -9,28 +9,26 @@ class ListGroup extends React.Component {
       (item, index) => cloneElement(item, { key: item.key ? item.key : index })
     );
 
-    let childrenAnchors = false;
+    let shouldRenderDiv = false;
 
     if (!this.props.children) {
-      return this.renderDiv(items);
+      shouldRenderDiv = true;
     } else {
       React.Children.forEach(this.props.children, (child) => {
-        if (this.isAnchor(child.props)) {
-          childrenAnchors = true;
+        if (this.isAnchorOrButton(child.props)) {
+          shouldRenderDiv = true;
         }
-
       });
-
     }
 
-    if (childrenAnchors){
+    if (shouldRenderDiv){
       return this.renderDiv(items);
     } else {
       return this.renderUL(items);
     }
   }
 
-  isAnchor(props){
+  isAnchorOrButton(props){
     return (props.href || props.onClick);
   }
 

@@ -20,6 +20,15 @@ describe('ListGroupItem', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
   });
 
+  it('Should output a "button" if an "onClick" handler is set', function () {
+    let noop = function () {};
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroupItem onClick={noop}>Button</ListGroupItem>
+    );
+    assert.equal(React.findDOMNode(instance).nodeName, 'BUTTON');
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
+  });
+
   it('Should output an "li" if "listItem" prop is set', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem listItem>Item 1</ListGroupItem>
