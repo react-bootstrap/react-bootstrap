@@ -6,7 +6,7 @@ import EventListener from './utils/EventListener';
 import createChainedFunction from './utils/createChainedFunction';
 import CustomPropTypes from './utils/CustomPropTypes';
 
-import Portal from './Portal';
+import Portal from 'react-overlays/lib/Portal';
 import Fade from './Fade';
 import ModalDialog from './ModalDialog';
 import Body from './ModalBody';

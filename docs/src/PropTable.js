@@ -7,21 +7,22 @@ import Table from '../../src/Table';
 
 let cleanDocletValue = str => str.trim().replace(/^\{/, '').replace(/\}$/, '');
 
-function getPropsData(componentData, metadata){
-
+function getPropsData(component, metadata){
+  let componentData = metadata[component] || {};
   let props = componentData.props || {};
 
   if (componentData.composes) {
-    componentData.composes.forEach( other => {
-      props = merge({}, getPropsData(metadata[other] || {}, metadata), props);
-
+    componentData.composes.forEach(other => {
+      if (other !== component) {
+        props = merge({}, getPropsData(other, metadata), props);
+      }
     });
   }
 
   if (componentData.mixins) {
     componentData.mixins.forEach( other => {
-      if ( componentData.composes.indexOf(other) === -1) {
-        props = merge({}, getPropsData(metadata[other] || {}, metadata), props);
+      if (other !== component && componentData.composes.indexOf(other) === -1) {
+        props = merge({}, getPropsData(other, metadata), props);
       }
     });
   }
@@ -36,9 +37,7 @@ const PropTable = React.createClass({
   },
 
   componentWillMount(){
-    let componentData = this.context.metadata[this.props.component] || {};
-
-    this.propsData = getPropsData(componentData, this.context.metadata);
+    this.propsData = getPropsData(this.props.component, this.context.metadata);
   },
 
   render(){

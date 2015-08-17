@@ -1,5 +1,5 @@
 import React from 'react';
-import Transition from './Transition';
+import Transition from 'react-overlays/lib/Transition';
 
 class Fade extends React.Component {
   render() {
@@ -41,7 +41,7 @@ Fade.propTypes = {
    * callbacks are fired even if the original browser transition end events are
    * canceled
    */
-  duration: React.PropTypes.number,
+  timeout: React.PropTypes.number,
 
   /**
    * Callback fired before the component fades in
@@ -71,7 +71,7 @@ Fade.propTypes = {
 
 Fade.defaultProps = {
   in: false,
-  duration: 300,
+  timeout: 300,
   unmountOnExit: false,
   transitionAppear: false
 };

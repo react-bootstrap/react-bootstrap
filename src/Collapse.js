@@ -1,5 +1,5 @@
 import React from 'react';
-import Transition from './Transition';
+import Transition from 'react-overlays/lib/Transition';
 import domUtils from './utils/domUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
@@ -138,7 +138,7 @@ Collapse.propTypes = {
    * finishing callbacks are fired even if the original browser transition end
    * events are canceled
    */
-  duration: React.PropTypes.number,
+  timeout: React.PropTypes.number,
 
   /**
    * Callback fired before the component expands
@@ -194,7 +194,7 @@ Collapse.propTypes = {
 
 Collapse.defaultProps = {
   in: false,
-  duration: 300,
+  timeout: 300,
   unmountOnExit: false,
   transitionAppear: false,
 
