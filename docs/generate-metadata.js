@@ -64,6 +64,11 @@ function applyPropDoclets(props, propName){
   if ( doclets.required) {
     prop.required = true;
   }
+
+  // Use @defaultValue to provide a prop's default value
+  if (doclets.defaultValue) {
+    prop.defaultValue = cleanDocletValue(doclets.defaultValue);
+  }
 }
 
 
