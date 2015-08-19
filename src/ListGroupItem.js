@@ -64,7 +64,7 @@ const ListGroupItem = React.createClass({
 
   renderButton(classes) {
     return (
-      <button 
+      <button
         type='button'
         {...this.props}
         className={classNames(this.props.className, classes)}>

@@ -5,7 +5,7 @@ import { srcRoot } from './constants';
 import components from './public-components';
 import { buildContent } from './buildBabel';
 
-export default function generateFactories(destination, babelOptions={}) {
+export default function generateFactories(destination, babelOptions = {}) {
 
   function generateCompiledFile(file, content) {
     const outpath = path.join(destination, 'factories', `${file}.js`);

@@ -4,13 +4,13 @@ import fs from 'fs';
 import path from 'path';
 import outputFileSync from 'output-file-sync';
 
-export function buildContent(content, filename, destination, babelOptions={}) {
+export function buildContent(content, filename, destination, babelOptions = {}) {
   babelOptions.filename = filename;
   const result = transform(content, babelOptions);
   outputFileSync(destination, result.code, {encoding: 'utf8'});
 }
 
-export function buildFile(filename, destination, babelOptions={}) {
+export function buildFile(filename, destination, babelOptions = {}) {
   const content = fs.readFileSync(filename, {encoding: 'utf8'});
   // We only have .js files that we need to build
   if(path.extname(filename) === '.js') {
@@ -20,7 +20,7 @@ export function buildFile(filename, destination, babelOptions={}) {
   }
 }
 
-export function buildFolder(folderPath, destination, babelOptions={}, firstFolder=true) {
+export function buildFolder(folderPath, destination, babelOptions = {}, firstFolder = true) {
   let stats = fs.statSync(folderPath);
 
   if(stats.isFile()) {
@@ -32,11 +32,10 @@ export function buildFolder(folderPath, destination, babelOptions={}, firstFolde
   }
 }
 
-export function buildGlob(filesGlob, destination, babelOptions={}) {
+export function buildGlob(filesGlob, destination, babelOptions = {}) {
   let files = glob.sync(filesGlob);
   if (!files.length) {
     files = [filesGlob];
   }
   files.forEach(filename => buildFolder(filename, destination, babelOptions, true));
 }
-

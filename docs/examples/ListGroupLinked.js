@@ -1,5 +1,5 @@
 function alertClicked () {
-  alert('You clicked the third ListGroupItem'); 
+  alert('You clicked the third ListGroupItem');
 }
 
 const listgroupInstance = (
