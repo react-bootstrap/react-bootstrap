@@ -1,9 +1,15 @@
 import React, { cloneElement } from 'react';
-import ValidComponentChildren from './utils/ValidComponentChildren';
+
+import Col from './Col';
+import Grid from './Grid';
 import Nav from './Nav';
 import NavItem from './NavItem';
+import Row from './Row';
+import styleMaps from './styleMaps';
 
-let panelId = (props, child) => child.props.id ? child.props.id : props.id && (props.id + '___panel___' + child.props.eventKey);
+import ValidComponentChildren from './utils/ValidComponentChildren';
+
+let paneId = (props, child) => child.props.id ? child.props.id : props.id && (props.id + '___pane___' + child.props.eventKey);
 let tabId = (props, child) => child.props.id ? child.props.id + '___tab' : props.id && (props.id + '___tab___' + child.props.eventKey);
 
 function getDefaultActiveKeyFromChildren(children) {
@@ -22,16 +28,44 @@ const Tabs = React.createClass({
   propTypes: {
     activeKey: React.PropTypes.any,
     defaultActiveKey: React.PropTypes.any,
+    /**
+     * Navigation style for tabs
+     *
+     * If not specified, it will be treated as `'tabs'` when vertically
+     * positioned and `'pills'` when horizontally positioned.
+     */
     bsStyle: React.PropTypes.oneOf(['tabs', 'pills']),
     animation: React.PropTypes.bool,
     id: React.PropTypes.string,
-    onSelect: React.PropTypes.func
+    onSelect: React.PropTypes.func,
+    position: React.PropTypes.oneOf(['top', 'left', 'right']),
+    /**
+     * Number of grid columns for the tabs if horizontally positioned
+     *
+     * This accepts either a single width or a mapping of size to width.
+     */
+    tabWidth: React.PropTypes.oneOfType([
+      React.PropTypes.number,
+      React.PropTypes.object
+    ]),
+    /**
+     * Number of grid columns for the panes if horizontally positioned
+     *
+     * This accepts either a single width or a mapping of size to width. If not
+     * specified, it will be treated as `styleMaps.GRID_COLUMNS` minus
+     * `tabWidth`.
+     */
+    paneWidth: React.PropTypes.oneOfType([
+      React.PropTypes.number,
+      React.PropTypes.object
+    ])
   },
 
   getDefaultProps() {
     return {
-      bsStyle: 'tabs',
-      animation: true
+      animation: true,
+      tabWidth: 2,
+      position: 'top'
     };
   },
 
@@ -73,26 +107,89 @@ const Tabs = React.createClass({
       id,
       className,
       style, // eslint-disable-line react/prop-types
-      ...props } = this.props;
+      position,
+      bsStyle,
+      tabWidth,
+      paneWidth,
+      children,
+      ...props
+    } = this.props;
 
-    function renderTabIfSet(child) {
-      return child.props.title != null ? this.renderTab(child) : null;
+    const isHorizontal = position === 'left' || position === 'right';
+
+    if (bsStyle == null) {
+      bsStyle = isHorizontal ? 'pills' : 'tabs';
     }
 
-    let nav = (
-      <Nav {...props} activeKey={this.getActiveKey()} onSelect={this.handleSelect} ref="tabs" role="tablist">
-        {ValidComponentChildren.map(this.props.children, renderTabIfSet, this)}
-      </Nav>
-    );
+    const containerProps = {id, className, style};
 
-    return (
-      <div id={id} className={className} style={style}>
-        {nav}
-        <div className="tab-content" ref="panes">
-          {ValidComponentChildren.map(this.props.children, this.renderPane)}
+    const tabsProps = {
+      ...props,
+      bsStyle,
+      stacked: isHorizontal,
+      activeKey: this.getActiveKey(),
+      onSelect: this.handleSelect,
+      ref: 'tabs',
+      role: 'tablist'
+    };
+    const childTabs = ValidComponentChildren.map(children, this.renderTab);
+
+    const panesProps = {
+      className: 'tab-content',
+      ref: 'panes'
+    };
+    const childPanes = ValidComponentChildren.map(children, this.renderPane);
+
+    if (isHorizontal) {
+      const {tabsColProps, panesColProps} =
+        this.getColProps({tabWidth, paneWidth});
+
+      const tabs = (
+        <Col componentClass={Nav} {...tabsProps} {...tabsColProps}>
+          {childTabs}
+        </Col>
+      );
+      const panes = (
+        <Col {...panesProps} {...panesColProps}>
+          {childPanes}
+        </Col>
+      );
+
+      let body;
+      if (position === 'left') {
+        body = (
+          <Row {...containerProps}>
+            {tabs}
+            {panes}
+          </Row>
+        );
+      } else {
+        body = (
+          <Row {...containerProps}>
+            {panes}
+            {tabs}
+          </Row>
+        );
+      }
+
+      return (
+        <Grid>
+          {body}
+        </Grid>
+      );
+    } else {
+      return (
+        <div {...containerProps}>
+          <Nav {...tabsProps}>
+            {childTabs}
+          </Nav>
+
+          <div {...panesProps}>
+            {childPanes}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   },
 
   getActiveKey() {
@@ -111,7 +208,7 @@ const Tabs = React.createClass({
         child,
         {
           active: shouldPaneBeSetActive && (thereIsNoActivePane || !this.props.animation),
-          id: panelId(this.props, child),
+          id: paneId(this.props, child),
           'aria-labelledby': tabId(this.props, child),
           key: child.key ? child.key : index,
           animation: this.props.animation,
@@ -121,18 +218,45 @@ const Tabs = React.createClass({
   },
 
   renderTab(child) {
-    let {eventKey, title, disabled } = child.props;
+    if (child.props.title == null) {
+      return null;
+    }
+
+    let {eventKey, title, disabled} = child.props;
 
     return (
       <NavItem
         linkId={tabId(this.props, child)}
         ref={'tab' + eventKey}
-        aria-controls={panelId(this.props, child)}
+        aria-controls={paneId(this.props, child)}
         eventKey={eventKey}
         disabled={disabled}>
         {title}
       </NavItem>
     );
+  },
+
+  getColProps({tabWidth, paneWidth}) {
+    let tabsColProps;
+    if (tabWidth instanceof Object) {
+      tabsColProps = tabWidth;
+    } else {
+      tabsColProps = {xs: tabWidth};
+    }
+
+    let panesColProps;
+    if (paneWidth == null) {
+      panesColProps = {};
+      Object.keys(tabsColProps).forEach(function (size) {
+        panesColProps[size] = styleMaps.GRID_COLUMNS - tabsColProps[size];
+      });
+    } else if (paneWidth instanceof Object) {
+      panesColProps = paneWidth;
+    } else {
+      panesColProps = {xs: paneWidth};
+    }
+
+    return {tabsColProps, panesColProps};
   },
 
   shouldComponentUpdate() {

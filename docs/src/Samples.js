@@ -64,6 +64,7 @@ export default {
   TabsUncontrolled:              require('fs').readFileSync(__dirname + '/../examples/TabsUncontrolled.js', 'utf8'),
   TabsControlled:                require('fs').readFileSync(__dirname + '/../examples/TabsControlled.js', 'utf8'),
   TabsNoAnimation:               require('fs').readFileSync(__dirname + '/../examples/TabsNoAnimation.js', 'utf8'),
+  LeftTabs:                      require('fs').readFileSync(__dirname + '/../examples/LeftTabs.js', 'utf8'),
   PagerDefault:                  require('fs').readFileSync(__dirname + '/../examples/PagerDefault.js', 'utf8'),
   PagerAligned:                  require('fs').readFileSync(__dirname + '/../examples/PagerAligned.js', 'utf8'),
   PagerDisabled:                 require('fs').readFileSync(__dirname + '/../examples/PagerDisabled.js', 'utf8'),
