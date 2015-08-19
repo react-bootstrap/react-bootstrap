@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
 import CustomPropTypes from './utils/CustomPropTypes';
+import deprecationWarning from './utils/deprecationWarning';
 
 const Navbar = React.createClass({
   mixins: [BootstrapMixin],
@@ -57,6 +58,12 @@ const Navbar = React.createClass({
     return !this._isChanging;
   },
 
+  componentDidMount() {
+    if (this.props.brand) {
+      deprecationWarning('Navbar brand attribute', 'NavBrand Component');
+    }
+  },
+
   handleToggle() {
     if (this.props.onToggle) {
       this._isChanging = true;
@@ -73,6 +80,19 @@ const Navbar = React.createClass({
     return this.props.navExpanded != null ? this.props.navExpanded : this.state.navExpanded;
   },
 
+  navbrandChild() {
+    let navChild =
+      ValidComponentChildren.findValidComponents(this.props.children, child => {
+        return child.props.bsRole === 'brand';
+      });
+
+    return navChild;
+  },
+
+  hasNavbrandChild() {
+    return this.navbrandChild().length > 0;
+  },
+
   render() {
     let classes = this.getBsClassSet();
     let ComponentClass = this.props.componentClass;
@@ -82,14 +102,28 @@ const Navbar = React.createClass({
     classes['navbar-static-top'] = this.props.staticTop;
     classes['navbar-inverse'] = this.props.inverse;
 
+    let displayHeader = (this.props.brand || this.props.toggleButton || this.props.toggleNavKey != null) && !this.hasNavbrandChild();
+
     return (
       <ComponentClass {...this.props} className={classNames(this.props.className, classes)}>
         <div className={this.props.fluid ? 'container-fluid' : 'container'}>
-          {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderHeader() : null}
-          {ValidComponentChildren.map(this.props.children, this.renderChild)}
+          {displayHeader ? this.renderHeader() : null}
+          {ValidComponentChildren.map(this.props.children, this.renderChildren)}
         </div>
       </ComponentClass>
     );
+  },
+
+  renderNavBrand(child, index) {
+    let navbrandEl = cloneElement(child, {
+      navbar: true,
+      toggleNavKey: this.props.toggleNavKey,
+      toggleButton: this.props.toggleButton,
+      handleToggle: this.handleToggle,
+      key: child.key ? child.key : index
+    });
+
+    return this.renderHeader(navbrandEl);
   },
 
   renderChild(child, index) {
@@ -101,10 +135,14 @@ const Navbar = React.createClass({
     });
   },
 
-  renderHeader() {
-    let brand;
+  renderChildren(child, index) {
+    return (child.props.navbrand) ? this.renderNavBrand(child, index) : this.renderChild(child, index);
+  },
 
-    if (this.props.brand) {
+  renderHeader(navbrandEl) {
+    let brand = navbrandEl || '';
+
+    if (!brand && this.props.brand) {
       if (React.isValidElement(this.props.brand)) {
         brand = cloneElement(this.props.brand, {
           className: classNames(this.props.brand.props.className, 'navbar-brand')
@@ -146,6 +184,7 @@ const Navbar = React.createClass({
       </button>
     );
   }
+
 });
 
 export default Navbar;

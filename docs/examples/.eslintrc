@@ -31,6 +31,7 @@
     "ListGroup",
     "ListGroupItem",
     "Nav",
+    "NavBrand",
     "Navbar",
     "NavDropdown",
     "NavItem",

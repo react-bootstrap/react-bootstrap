@@ -34,6 +34,7 @@ const ListGroupItem = require('../../src/ListGroupItem');
 const MenuItem = require('../../src/MenuItem');
 const Modal = require('../../src/Modal');
 const Nav = require('../../src/Nav');
+const NavBrand = require('../../src/NavBrand');
 const Navbar = require('../../src/Navbar');
 const NavItem = require('../../src/NavItem');
 const NavDropdown = require('../../src/NavDropdown');

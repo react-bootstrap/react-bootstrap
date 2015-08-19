@@ -39,6 +39,7 @@ export ModalBody from './ModalBody';
 export ModalFooter from './ModalFooter';
 
 export Nav from './Nav';
+export NavBrand from './NavBrand';
 export Navbar from './Navbar';
 export NavItem from './NavItem';
 
