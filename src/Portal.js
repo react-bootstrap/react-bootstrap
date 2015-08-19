@@ -1,6 +1,7 @@
 import React from 'react';
 import CustomPropTypes from './utils/CustomPropTypes';
 import domUtils from './utils/domUtils';
+import classNames from 'classnames';
 
 let Portal = React.createClass({
 
@@ -10,7 +11,8 @@ let Portal = React.createClass({
     /**
      * The DOM Node that the Component will render it's children into
      */
-    container: CustomPropTypes.mountable
+    container: CustomPropTypes.mountable,
+    className: React.PropTypes.string
   },
 
   componentDidMount() {
@@ -29,6 +31,11 @@ let Portal = React.createClass({
   _mountOverlayTarget() {
     if (!this._overlayTarget) {
       this._overlayTarget = document.createElement('div');
+
+      if (this.props.className) {
+        this._overlayTarget.className = classNames(this.props.className);
+      }
+
       this.getContainerDOMNode()
         .appendChild(this._overlayTarget);
     }

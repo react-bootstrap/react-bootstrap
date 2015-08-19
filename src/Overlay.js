@@ -34,6 +34,7 @@ class Overlay extends React.Component {
       , placement
       , rootClose
       , children
+      , portalClassName
       , animation: Transition
       , ...props } = this.props;
 
@@ -93,7 +94,7 @@ class Overlay extends React.Component {
     }
 
     return (
-      <Portal container={container}>
+      <Portal className={portalClassName} container={container}>
         {child}
       </Portal>
     );
@@ -160,7 +161,12 @@ Overlay.propTypes = {
   /**
    * Callback fired after the Overlay finishes transitioning out
    */
-  onExited: React.PropTypes.func
+  onExited: React.PropTypes.func,
+
+  /**
+   * The class name(s) to apply to the Portal component in the overlay
+   */
+  portalClassName: React.PropTypes.string
 };
 
 Overlay.defaultProps = {
