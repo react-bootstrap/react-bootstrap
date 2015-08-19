@@ -87,7 +87,7 @@ const PropTable = React.createClass({
               { propData.doclets.deprecated
                 && <div><strong className='text-danger'>{'Deprecated: ' + propData.doclets.deprecated + ' '}</strong></div>
               }
-              <div dangerouslySetInnerHTML={{__html: propData.descHtml }} />
+              <div dangerouslySetInnerHTML={{ __html: propData.descHtml }} />
             </td>
           </tr>
         );

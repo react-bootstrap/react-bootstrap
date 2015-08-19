@@ -47,7 +47,7 @@ const Panel = React.createClass({
   },
 
   handleToggle(){
-    this.setState({ expanded: !this.state.expanded});
+    this.setState({ expanded: !this.state.expanded });
   },
 
   isExpanded(){
