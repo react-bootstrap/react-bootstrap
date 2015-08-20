@@ -1,8 +1,19 @@
 import React from 'react';
+import warning from 'react/lib/warning';
 
 const ANONYMOUS = '<<anonymous>>';
 
 const CustomPropTypes = {
+
+  deprecated(propType, explanation){
+    return function(props, propName, componentName){
+      if (props[propName] != null) {
+        warning(false, `"${propName}" property of "${componentName}" has been deprecated.\n${explanation}`);
+      }
+
+      return propType(props, propName, componentName);
+    };
+  },
 
   isRequiredForA11y(propType){
     return function(props, propName, componentName){
