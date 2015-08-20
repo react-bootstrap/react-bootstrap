@@ -1,12 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import AffixMixin from './AffixMixin';
-import domUtils from './utils/domUtils';
 
 const Affix = React.createClass({
-  statics: {
-    domUtils
-  },
 
   mixins: [AffixMixin],
 
