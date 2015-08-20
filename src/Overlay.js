@@ -35,6 +35,7 @@ class Overlay extends React.Component {
       , rootClose
       , children
       , animation: Transition
+      , needsPositionUpdate
       , ...props } = this.props;
 
     if (Transition === true) {
@@ -53,7 +54,7 @@ class Overlay extends React.Component {
     // Position is be inner-most because it adds inline styles into the child,
     // which the other wrappers don't forward correctly.
     child = (
-      <Position {...{container, containerPadding, target, placement}}>
+      <Position {...{container, containerPadding, target, placement, needsPositionUpdate}}>
         {child}
       </Position>
     );
@@ -160,13 +161,19 @@ Overlay.propTypes = {
   /**
    * Callback fired after the Overlay finishes transitioning out
    */
-  onExited: React.PropTypes.func
+  onExited: React.PropTypes.func,
+
+  /**
+   * Set if the position needs to be updated manually
+   */
+  needsPositionUpdate: React.PropTypes.bool
 };
 
 Overlay.defaultProps = {
   animation: Fade,
   rootClose: false,
-  show: false
+  show: false,
+  needsPositionUpdate: false
 };
 
 export default Overlay;

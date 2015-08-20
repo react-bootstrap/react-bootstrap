@@ -46,7 +46,8 @@ describe('Position', function () {
 
           this.state = {
             target: 'foo',
-            fakeProp: 0
+            fakeProp: 0,
+            needsPositionUpdate: false
           };
         }
 
@@ -59,6 +60,7 @@ describe('Position', function () {
               <Position
                 target={() => this.refs[this.state.target]}
                 fakeProp={this.state.fakeProp}
+                needsPositionUpdate={this.state.needsPositionUpdate}
               >
                 <div />
               </Position>
@@ -90,6 +92,14 @@ describe('Position', function () {
         .to.have.been.calledTwice;
       expect(overlayPositionUtils.calcOverlayPosition)
         .to.have.been.calledTwice;
+
+      instance.setState({needsPositionUpdate: true});
+
+      // Position receives manual update flag and recalculates position.
+      expect(Position.prototype.componentWillReceiveProps)
+        .to.have.been.calledThrice;
+      expect(overlayPositionUtils.calcOverlayPosition)
+        .to.have.been.calledThrice;
     });
   });
 
