@@ -17,6 +17,7 @@ class Position extends React.Component {
 
     this._needsFlush = false;
     this._lastTarget = null;
+    this._lastChildren = null;
   }
 
   componentDidMount() {
@@ -77,11 +78,19 @@ class Position extends React.Component {
   }
 
   updatePosition() {
+    let changed = false;
     const target = this.getTargetSafe();
-    if (target === this._lastTarget) {
+    if (target !== this._lastTarget) {
+      this._lastTarget = target;
+      changed = true;
+    }
+    if (this.props.children !== this._lastChildren) {
+      this._lastChildren = this.props.children;
+      changed = true;
+    }
+    if (!changed) {
       return;
     }
-    this._lastTarget = target;
 
     if (!target) {
       this.setState({
