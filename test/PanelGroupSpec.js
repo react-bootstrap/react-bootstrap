@@ -47,4 +47,58 @@ describe('PanelGroup', function () {
 
     assert.notOk(panel.state.collapsing);
   });
+
+  describe('Web Accessibility', function() {
+    let instance, panelBodies, panelGroup, links;
+
+    beforeEach(function() {
+      instance = ReactTestUtils.renderIntoDocument(
+        <PanelGroup defaultActiveKey='1' accordion>
+          <Panel header='Collapsible Group Item #1' eventKey='1' id='Panel1ID'>Panel 1</Panel>
+          <Panel header='Collapsible Group Item #2' eventKey='2' id='Panel2ID'>Panel 2</Panel>
+        </PanelGroup>
+      );
+      let accordion = ReactTestUtils.findRenderedComponentWithType(instance, PanelGroup);
+      panelGroup = ReactTestUtils.findRenderedDOMComponentWithClass(accordion, 'panel-group');
+      panelBodies = ReactTestUtils.scryRenderedDOMComponentsWithClass(panelGroup, 'panel-collapse');
+      links = ReactTestUtils.scryRenderedDOMComponentsWithClass(panelGroup, 'panel-heading')
+        .map(function(header) {
+          return ReactTestUtils.findRenderedDOMComponentWithTag(header, 'a');
+        });
+    });
+
+    it('Should have a role of tablist', function() {
+      assert.equal(panelGroup.props.role, 'tablist');
+    });
+
+    it('Should provide each header tab with role of tab', function() {
+      assert.equal(links[0].props.role, 'tab');
+      assert.equal(links[1].props.role, 'tab');
+    });
+
+    it('Should provide the panelBodies with role of tabpanel', function() {
+      assert.equal(panelBodies[0].props.role, 'tabpanel');
+    });
+
+    it('Should provide each panel with an aria-labelledby referencing the corresponding header', function() {
+      assert.equal(panelBodies[0].props.id, links[0].props['aria-controls']);
+      assert.equal(panelBodies[1].props.id, links[1].props['aria-controls']);
+    });
+
+    it('Should maintain each tab aria-selected state', function() {
+      assert.equal(links[0].props['aria-selected'], true);
+      assert.equal(links[1].props['aria-selected'], false);
+    });
+
+    it('Should maintain each tab aria-hidden state', function() {
+      assert.equal(panelBodies[0].props['aria-hidden'], false);
+      assert.equal(panelBodies[1].props['aria-hidden'], true);
+    });
+
+    afterEach(function() {
+      if (instance && ReactTestUtils.isCompositeComponent(instance) && instance.isMounted()) {
+        React.unmountComponentAtNode(React.findDOMNode(instance));
+      }
+    });
+  });
 });
