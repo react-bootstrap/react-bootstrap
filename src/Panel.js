@@ -15,7 +15,9 @@ const Panel = React.createClass({
     footer: React.PropTypes.node,
     defaultExpanded: React.PropTypes.bool,
     expanded: React.PropTypes.bool,
-    eventKey: React.PropTypes.any
+    eventKey: React.PropTypes.any,
+    headerRole: React.PropTypes.string,
+    panelRole: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -203,7 +205,7 @@ const Panel = React.createClass({
 
   renderCollapsibleTitle(header, headerRole) {
     return (
-      <h4 className={this.prefixClass('title')}>
+      <h4 className={this.prefixClass('title')} role="presentation">
         {this.renderAnchor(header, headerRole)}
       </h4>
     );
