@@ -13,15 +13,12 @@
     "babel"
   ],
   "rules": {
-    "brace-style": 0,
     "constructor-super": 2,
     "comma-dangle": 0,
     "comma-spacing": 2,
     "comma-style": [2, "last"],
-    "default-case": 0,
     "func-names": 0,
     "guard-for-in": 0,
-    "indent": 0,
     "one-var": [2, { "initialized": "never" }],
     "padded-blocks": 0,
     "prefer-const": 0,
