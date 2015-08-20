@@ -205,16 +205,16 @@ const Tabs = React.createClass({
     let paneIsAlreadyActive = previousActiveKey != null && child.props.eventKey === previousActiveKey;
 
     return cloneElement(
-        child,
-        {
-          active: shouldPaneBeSetActive && (thereIsNoActivePane || !this.props.animation),
-          id: paneId(this.props, child),
-          'aria-labelledby': tabId(this.props, child),
-          key: child.key ? child.key : index,
-          animation: this.props.animation,
-          onAnimateOutEnd: paneIsAlreadyActive ? this.handlePaneAnimateOutEnd : null
-        }
-      );
+      child,
+      {
+        active: shouldPaneBeSetActive && (thereIsNoActivePane || !this.props.animation),
+        id: paneId(this.props, child),
+        'aria-labelledby': tabId(this.props, child),
+        key: child.key ? child.key : index,
+        animation: this.props.animation,
+        onAnimateOutEnd: paneIsAlreadyActive ? this.handlePaneAnimateOutEnd : null
+      }
+    );
   },
 
   renderTab(child) {

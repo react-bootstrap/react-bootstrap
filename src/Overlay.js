@@ -56,8 +56,8 @@ Overlay.propTypes = {
    * Use animation
    */
   animation: React.PropTypes.oneOfType([
-      React.PropTypes.bool,
-      CustomPropTypes.elementType
+    React.PropTypes.bool,
+    CustomPropTypes.elementType
   ]),
 
   /**

@@ -249,18 +249,18 @@ const Carousel = React.createClass({
             this.state.previousActiveIndex === index && this.props.slide;
 
     return cloneElement(
-        child,
-        {
-          active: isActive,
-          ref: child.ref,
-          key: child.key ? child.key : index,
-          index,
-          animateOut: isPreviousActive,
-          animateIn: isActive && this.state.previousActiveIndex != null && this.props.slide,
-          direction: this.state.direction,
-          onAnimateOutEnd: isPreviousActive ? this.handleItemAnimateOutEnd : null
-        }
-      );
+      child,
+      {
+        active: isActive,
+        ref: child.ref,
+        key: child.key ? child.key : index,
+        index,
+        animateOut: isPreviousActive,
+        animateIn: isActive && this.state.previousActiveIndex != null && this.props.slide,
+        direction: this.state.direction,
+        onAnimateOutEnd: isPreviousActive ? this.handleItemAnimateOutEnd : null
+      }
+    );
   },
 
   handleSelect(index, direction) {

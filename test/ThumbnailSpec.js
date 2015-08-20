@@ -26,14 +26,14 @@ describe('Thumbnail', function () {
     assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
   });
 
-    it('Should have an image', function () {
+  it('Should have an image', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Thumbnail src="#" alt="test" />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'img'));
   });
 
-    it('Should have an inner div with class caption', function () {
+  it('Should have an inner div with class caption', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <Thumbnail src="#" alt="test">
         Test
