@@ -15,9 +15,12 @@ export CarouselItem from './CarouselItem';
 export Col from './Col';
 export CollapsibleMixin from './CollapsibleMixin';
 export CollapsibleNav from './CollapsibleNav';
+
+export Dropdown from './Dropdown';
 export DropdownButton from './DropdownButton';
-export DropdownMenu from './DropdownMenu';
-export DropdownStateMixin from './DropdownStateMixin';
+export NavDropdown from './NavDropdown';
+export SplitButton from './SplitButton';
+
 export FadeMixin from './FadeMixin';
 export Glyphicon from './Glyphicon';
 export Grid from './Grid';
