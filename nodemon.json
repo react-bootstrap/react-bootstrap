@@ -1,0 +1,13 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    "tmp-bower-repo",
+    "tmp-docs-repo",
+    "docs-built",
+    "amd",
+    "lib",
+    "dist",
+    ".coverage",
+    "tools"
+  ]
+}
