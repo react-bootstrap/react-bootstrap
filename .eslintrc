@@ -10,8 +10,7 @@
   "parser": "babel-eslint",
   "plugins": [
     "react",
-    "babel",
-    "lodash"
+    "babel"
   ],
   "rules": {
     "constructor-super": 2,
@@ -38,7 +37,6 @@
     "react/self-closing-comp": 2,
     "react/wrap-multilines": 2,
     "react/jsx-uses-vars": 2,
-    "lodash/import": 2,
     "space-infix-ops": 2,
     "strict": [2, "never"]
   }
