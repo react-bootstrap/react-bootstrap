@@ -314,6 +314,25 @@ describe('Modal', function () {
 
       document.activeElement.should.equal(input);
     });
+
+    it('Should not focus last active element when restoreFocus is false', function () {
+      document.activeElement.should.equal(focusableContainer);
+
+      let instance = render(
+        <div>
+          <input autoFocus />
+          <Modal show restoreFocus={false} onHide={()=>{}} animation={false}>
+            <strong>Message</strong>
+          </Modal>
+        </div>
+        , focusableContainer);
+
+      instance.renderWithProps({ show: false });
+
+      let input = document.getElementsByTagName('input')[0];
+
+      document.activeElement.should.not.equal(input);
+    });
   });
 
 });

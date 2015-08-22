@@ -130,6 +130,11 @@ const Modal = React.createClass({
     enforceFocus: React.PropTypes.bool,
 
     /**
+     * When `true` The modal will automatically restore focus to the last active element when it closes.
+     */
+    restoreFocus: React.PropTypes.bool,
+
+    /**
      * Hide this from automatic props documentation generation.
      * @private
      */
@@ -150,7 +155,8 @@ const Modal = React.createClass({
       backdrop: true,
       keyboard: true,
       autoFocus: true,
-      enforceFocus: true
+      enforceFocus: true,
+      restoreFocus: true
     };
   },
 
@@ -355,7 +361,9 @@ const Modal = React.createClass({
 
     container.className = container.className.replace(/ ?modal-open/, '');
 
-    this.restoreLastFocus();
+    if (this.props.restoreFocus) {
+      this.restoreLastFocus();
+    }
   },
 
   handleHidden(...args) {
