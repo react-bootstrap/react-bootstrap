@@ -8,7 +8,14 @@ class SplitButton extends React.Component {
 
   render() {
     let {
-      children, title, onClick, target, href, bsStyle, ...props } = this.props;
+      children,
+      title,
+      onClick,
+      target,
+      href,
+      // bsStyle is validated by 'Button' component
+      bsStyle, // eslint-disable-line
+      ...props } = this.props;
 
      let { disabled } = props;
 
