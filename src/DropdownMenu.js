@@ -1,8 +1,9 @@
 import React from 'react';
 import keycode from 'keycode';
 import classNames from 'classnames';
+import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
+
 import createChainedFunction from './utils/createChainedFunction';
-import RootCloseWrapper from './RootCloseWrapper';
 
 class DropdownMenu extends React.Component {
   constructor(props) {
