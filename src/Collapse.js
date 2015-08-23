@@ -18,12 +18,11 @@ const MARGINS = {
 
 function getDimensionValue(dimension, elem){
   let value = elem[`offset${capitalize(dimension)}`];
-  let computedStyles = domUtils.getComputedStyles(elem);
   let margins = MARGINS[dimension];
 
   return (value +
-    parseInt(computedStyles[margins[0]], 10) +
-    parseInt(computedStyles[margins[1]], 10)
+    parseInt(domUtils.css(elem, margins[0]), 10) +
+    parseInt(domUtils.css(elem, margins[1]), 10)
   );
 }
 

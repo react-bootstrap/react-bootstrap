@@ -1,7 +1,7 @@
 const buttonsInstance = (
   <div>
     <ButtonToolbar>
-      <SplitButton title='Dropup' dropup>
+      <SplitButton title='Dropup' dropup id='split-button-dropup'>
         <MenuItem eventKey='1'>Action</MenuItem>
         <MenuItem eventKey='2'>Another action</MenuItem>
         <MenuItem eventKey='3'>Something else here</MenuItem>
@@ -11,7 +11,7 @@ const buttonsInstance = (
     </ButtonToolbar>
 
     <ButtonToolbar>
-      <SplitButton bsStyle='primary' title='Right dropup' dropup pullRight>
+      <SplitButton bsStyle='primary' title='Right dropup' dropup pullRight id='split-button-dropup-pull-right'>
         <MenuItem eventKey='1'>Action</MenuItem>
         <MenuItem eventKey='2'>Another action</MenuItem>
         <MenuItem eventKey='3'>Something else here</MenuItem>

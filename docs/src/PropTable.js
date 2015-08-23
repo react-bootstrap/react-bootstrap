@@ -1,11 +1,12 @@
 import merge from 'lodash/object/merge';
 import React from 'react';
-
+import Glyphicon from '../../src/Glyphicon';
 import Label from '../../src/Label';
 import Table from '../../src/Table';
 
 
 let cleanDocletValue = str => str.trim().replace(/^\{/, '').replace(/\}$/, '');
+let capitalize = str => str[0].toUpperCase() + str.substr(1);
 
 function getPropsData(component, metadata){
   let componentData = metadata[component] || {};
@@ -29,6 +30,8 @@ function getPropsData(component, metadata){
 
   return props;
 }
+
+
 
 const PropTable = React.createClass({
 
@@ -84,9 +87,12 @@ const PropTable = React.createClass({
 
             <td>
               { propData.doclets.deprecated
-                && <div><strong className='text-danger'>{'Deprecated: ' + propData.doclets.deprecated + ' '}</strong></div>
+                && <div className='prop-desc-heading'>
+                  <strong className='text-danger'>{'Deprecated: ' + propData.doclets.deprecated + ' '}</strong>
+                </div>
               }
-              <div dangerouslySetInnerHTML={{__html: propData.descHtml }} />
+              { this.renderControllableNote(propData, propName) }
+              <div className='prop-desc' dangerouslySetInnerHTML={{__html: propData.descHtml }} />
             </td>
           </tr>
         );
@@ -100,6 +106,37 @@ const PropTable = React.createClass({
 
     return (
       <Label>required</Label>
+    );
+  },
+
+  renderControllableNote(prop, propName){
+    let controllable = prop.doclets.controllable;
+    let isHandler = this.getDisplayTypeName(prop.type.name) === 'function';
+
+    if (!controllable) {
+      return false;
+    }
+
+    let text = isHandler ? (
+      <span>
+        controls <code>{controllable}</code>
+      </span>
+    ) : (
+      <span>
+        controlled by: <code>{controllable}</code>,
+        initial prop: <code>{'default' + capitalize(propName)}</code>
+      </span>
+    );
+
+    return (
+      <div className='prop-desc-heading'>
+        <small>
+          <em className='text-info'>
+            <Glyphicon glyph='info-sign'/>
+            &nbsp;{ text }
+          </em>
+        </small>
+      </div>
     );
   },
 
