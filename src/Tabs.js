@@ -106,7 +106,7 @@ const Tabs = React.createClass({
     let {
       id,
       className,
-      style, // eslint-disable-line react/prop-types
+      style,
       position,
       bsStyle,
       tabWidth,

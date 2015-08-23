@@ -75,6 +75,7 @@ MenuItem.propTypes = {
   ]),
   header: React.PropTypes.bool,
   href: React.PropTypes.string,
+  target: React.PropTypes.string,
   title: React.PropTypes.string,
   onKeyDown: React.PropTypes.func,
   onSelect: React.PropTypes.func

@@ -4,13 +4,12 @@ import Dropdown from './Dropdown';
 class NavDropdown extends React.Component {
 
   render() {
-    let { children, title, noCaret, bsStyle, ...props } = this.props;
+    let { children, title, noCaret, ...props } = this.props;
 
     return (
       <Dropdown {...props} componentClass='li'>
         <Dropdown.Toggle
           useAnchor
-          bsStyle={bsStyle}
           disabled={props.disabled}
           noCaret={noCaret}
         >
@@ -25,6 +24,7 @@ class NavDropdown extends React.Component {
 }
 
 NavDropdown.propTypes = {
+  noCaret: React.PropTypes.bool,
   title: React.PropTypes.node.isRequired,
   ...Dropdown.propTypes
 };

@@ -305,8 +305,7 @@ const Modal = React.createClass({
       this.iosClickHack();
     }
 
-    this.setState(this._getStyles() //eslint-disable-line react/no-did-mount-set-state
-      , () => this.focusModalContent());
+    this.setState(this._getStyles(), () => this.focusModalContent());
   },
 
   onHide() {

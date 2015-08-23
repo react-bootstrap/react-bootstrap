@@ -248,6 +248,11 @@ Dropdown.propTypes = {
   ]),
 
   /**
+   * Whether or not component is disabled.
+   */
+  disabled: React.PropTypes.bool,
+
+  /**
    * Align the menu to the right  side of the Dropdown toggle
    */
   pullRight: React.PropTypes.bool,
@@ -258,6 +263,11 @@ Dropdown.propTypes = {
    * @controllable onToggle
    */
   open: React.PropTypes.bool,
+
+  /**
+   * A callback fired when the Dropdown closes.
+   */
+  onClose: React.PropTypes.func,
 
   /**
    * A callback fired when the Dropdown wishes to change visibility. Called with the requested
