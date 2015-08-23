@@ -1,6 +1,10 @@
 {
+  "plugins": [
+    "lodash"
+  ],
   "rules": {
     "comma-spacing": 0,
+    "lodash/import": 2,
     "react/no-multi-comp": 0,
     "react/prop-types": 0
   },

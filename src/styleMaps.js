@@ -306,7 +306,8 @@ const styleMaps = {
     'menu-right',
     'menu-down',
     'menu-up'
-  ]
+  ],
+  GRID_COLUMNS: 12
 };
 
 export default styleMaps;

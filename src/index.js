@@ -1,3 +1,5 @@
+import deprecationWarning from './utils/deprecationWarning';
+
 export Accordion from './Accordion';
 export Affix from './Affix';
 export AffixMixin from './AffixMixin';
@@ -13,9 +15,12 @@ export CarouselItem from './CarouselItem';
 export Col from './Col';
 export CollapsibleMixin from './CollapsibleMixin';
 export CollapsibleNav from './CollapsibleNav';
+
+export Dropdown from './Dropdown';
 export DropdownButton from './DropdownButton';
-export DropdownMenu from './DropdownMenu';
-export DropdownStateMixin from './DropdownStateMixin';
+export NavDropdown from './NavDropdown';
+export SplitButton from './SplitButton';
+
 export FadeMixin from './FadeMixin';
 export Glyphicon from './Glyphicon';
 export Grid from './Grid';
@@ -70,16 +75,36 @@ export Fade from './Collapse';
 
 export * as FormControls from './FormControls';
 
+import domUtils from './utils/domUtils';
 import childrenValueInputValidation from './utils/childrenValueInputValidation';
 import createChainedFunction from './utils/createChainedFunction';
-import domUtils from './utils/domUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import CustomPropTypes from './utils/CustomPropTypes';
 
 export const utils = {
   childrenValueInputValidation,
   createChainedFunction,
-  domUtils,
   ValidComponentChildren,
-  CustomPropTypes
+  CustomPropTypes,
+  domUtils: createDeprecationWrapper(domUtils, 'utils/domUtils', 'npm install dom-helpers'),
 };
+
+function createDeprecationWrapper(obj, deprecated, instead, link){
+  let wrapper = {};
+
+  if (process.env.NODE_ENV === 'production'){
+    return obj;
+  }
+
+  Object.keys(obj).forEach(key => {
+    Object.defineProperty(wrapper, key, {
+      get(){
+        deprecationWarning(deprecated, instead, link);
+        return obj[key];
+      },
+      set(x){ obj[key] = x; }
+    });
+  });
+
+  return wrapper;
+}
