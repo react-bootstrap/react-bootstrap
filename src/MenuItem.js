@@ -39,13 +39,10 @@ export default class MenuItem extends React.Component {
       disabled: this.props.disabled
     };
 
-    // we don't want to expose the `style` property
-    const style = this.props.style; // eslint-disable-line react/prop-types
-
     return (
       <li role='presentation'
         className={classnames(this.props.className, classes)}
-        style={style}
+        style={this.props.style}
       >
         <SafeAnchor
           role='menuitem'
