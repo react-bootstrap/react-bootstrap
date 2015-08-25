@@ -21,6 +21,9 @@ if (options.debug) {
 }
 
 export default _.extend({}, baseConfig, {
+
+  devtool: options.debug ? 'source-map' : null,
+
   entry: {
     bundle: options.debug ? devEntryBundle : entryFile
   },

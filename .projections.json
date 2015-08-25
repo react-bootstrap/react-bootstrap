@@ -1,0 +1,4 @@
+{
+  "src/*.js": { "alternate": "test/{}Spec.js" },
+  "test/*Spec.js": { "alternate": "src/{}.js" }
+}

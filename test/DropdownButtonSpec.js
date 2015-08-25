@@ -1,234 +1,181 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import DropdownButton from '../src/DropdownButton';
-import MenuItem from '../src/MenuItem';
 import DropdownMenu from '../src/DropdownMenu';
-import Button from '../src/Button';
+import MenuItem from '../src/MenuItem';
+import { shouldWarn } from './helpers';
 
-describe('DropdownButton', function () {
-  let instance;
 
-  afterEach(function() {
-    if (instance && ReactTestUtils.isCompositeComponent(instance) && instance.isMounted()) {
-      React.unmountComponentAtNode(React.findDOMNode(instance));
-    }
+describe('DropdownButton', function() {
+
+  const simpleDropdown = (
+    <DropdownButton title='Simple Dropdown' id='test-id'>
+      <MenuItem>Item 1</MenuItem>
+      <MenuItem>Item 2</MenuItem>
+      <MenuItem>Item 3</MenuItem>
+      <MenuItem>Item 4</MenuItem>
+    </DropdownButton>
+  );
+
+  it('renders title prop', function() {
+    const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
+    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+
+    buttonNode.innerText.should.match(/Simple Dropdown/);
   });
 
-  it('Should render button correctly', function () {
-    instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title" className="test-class">
-        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+  it('renders dropdown toggle button', function() {
+    const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
+
+    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+
+    buttonNode.tagName.should.equal('BUTTON');
+    buttonNode.className.should.match(/\bbtn[ $]/);
+    buttonNode.className.should.match(/\bbtn-default\b/);
+    buttonNode.className.should.match(/\bdropdown-toggle\b/);
+    buttonNode.getAttribute('type').should.equal('button');
+    buttonNode.getAttribute('aria-expanded').should.equal('false');
+    buttonNode.getAttribute('id').should.be.ok;
+  });
+
+  it('renders single MenuItem child', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='Single child' id='test-id'>
+        <MenuItem>Item 1</MenuItem>
       </DropdownButton>
     );
 
-    let button = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
-    assert.ok(React.findDOMNode(instance).className.match(/\bbtn-group\b/));
-    assert.ok(React.findDOMNode(instance).className.match(/\btest-class\b/));
-    assert.ok(button.className.match(/\bbtn\b/));
-    assert.equal(button.nodeName, 'BUTTON');
-    assert.equal(button.type, 'button');
-    assert.ok(button.className.match(/\bdropdown-toggle\b/));
-    assert.ok(button.lastChild.className.match(/\bcaret\b/));
-    assert.equal(button.innerText.trim(), 'Title');
+    const menuNode = React.findDOMNode(
+      ReactTestUtils.findRenderedComponentWithType(instance, DropdownMenu));
+
+    expect(menuNode.children.length).to.equal(1);
   });
 
-  it('Should render menu correctly', function () {
-    instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title">
-        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+
+  it('forwards pullRight to menu', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton pullRight title='blah' id='test-id'>
+        <MenuItem>Item 1</MenuItem>
+      </DropdownButton>
+    );
+    const menu = ReactTestUtils.findRenderedComponentWithType(instance, DropdownMenu);
+
+    menu.props.pullRight.should.be.true;
+  });
+
+  it('renders bsSize', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='blah' bsSize='small' id='test-id'>
+        <MenuItem>Item 1</MenuItem>
+      </DropdownButton>
+    );
+    const node = React.findDOMNode(instance);
+
+    node.className.should.match(/\bbtn-group-sm\b/);
+  });
+
+  it('renders bsStyle', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='blah' bsStyle='success' id='test-id'>
+        <MenuItem>Item 1</MenuItem>
+      </DropdownButton>
+    );
+    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+
+    buttonNode.className.should.match(/\bbtn-success\b/);
+  });
+
+
+  it('forwards onSelect handler to MenuItems', function(done) {
+    const selectedEvents = [];
+
+    const onSelect = (event, eventKey) => {
+      selectedEvents.push(eventKey);
+
+      if (selectedEvents.length === 4) {
+        selectedEvents.should.eql(['1', '2', '3', '4']);
+        done();
+      }
+    };
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='Simple Dropdown' onSelect={onSelect} id='test-id'>
+        <MenuItem eventKey='1'>Item 1</MenuItem>
+        <MenuItem eventKey='2'>Item 2</MenuItem>
+        <MenuItem eventKey='3'>Item 3</MenuItem>
+        <MenuItem eventKey='4'>Item 4</MenuItem>
       </DropdownButton>
     );
 
-    let menu = ReactTestUtils.findRenderedComponentWithType(instance, DropdownMenu);
-    let allMenuItems = ReactTestUtils.scryRenderedComponentsWithType(menu, MenuItem);
-    assert.equal(allMenuItems.length, 2);
+    const menuItems = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
+
+    menuItems.forEach(item => {
+      ReactTestUtils.Simulate.click(item);
+    });
+  });
+
+  it('closes when child MenuItem is selected', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='Simple Dropdown' id='test-id'>
+        <MenuItem eventKey='1'>Item 1</MenuItem>
+      </DropdownButton>
+    );
+    const node = React.findDOMNode(instance);
+    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+
+    const menuItem = React.findDOMNode(
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A'));
+
+    ReactTestUtils.Simulate.click(buttonNode);
+    node.className.should.match(/\bopen\b/);
+    ReactTestUtils.Simulate.click(menuItem);
+    node.className.should.not.match(/\bopen\b/);
+  });
+
+  it('does not close when onToggle is controlled', function() {
+    const handleSelect = () => {};
+
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title='Simple Dropdown' open={true} onToggle={handleSelect} id='test-id'>
+        <MenuItem eventKey='1'>Item 1</MenuItem>
+      </DropdownButton>
+    );
+
+    const node = React.findDOMNode(instance);
+    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+
+    const menuItem = React.findDOMNode(
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A'));
+
+    ReactTestUtils.Simulate.click(buttonNode);
+    node.className.should.match(/\bopen\b/);
+    ReactTestUtils.Simulate.click(menuItem);
+
+    node.className.should.match(/\bopen\b/);
+  });
+
+  it('warn about the navItem deprecation', function() {
+    const props = {
+      title: 'some title',
+      navItem: true
+    };
+
+    DropdownButton.propTypes.navItem(props, 'navItem', 'DropdownButton');
+    shouldWarn(/navItem.*NavDropdown component/);
   });
 
   it('Should pass props to button', function () {
-    instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title" bsStyle="primary" id="testId" disabled>
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
         <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </DropdownButton>
     );
 
-    let button = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
-    assert.ok(button.className.match(/\bbtn-primary\b/));
-    assert.equal(button.getAttribute('id'), 'testId');
-    assert.ok(button.disabled);
-  });
+    const buttonNode = React.findDOMNode(
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
 
-  it('Should be closed by default', function () {
-    instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title">
-        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
-      </DropdownButton>);
-
-    assert.notOk(React.findDOMNode(instance).className.match(/\bopen\b/));
-  });
-
-  it('Should open when clicked', function () {
-    instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title">
-        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
-      </DropdownButton>
-    );
-
-    ReactTestUtils.SimulateNative.click(React.findDOMNode(instance.refs.dropdownButton));
-    assert.ok(React.findDOMNode(instance).className.match(/\bopen\b/));
-  });
-
-  it('should call onSelect with eventKey when MenuItem is clicked', function (done) {
-    function handleSelect(eventKey) {
-      assert.equal(eventKey, '2');
-      assert.equal(instance.state.open, false);
-      done();
-    }
-
-    instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title" onSelect={handleSelect}>
-        <MenuItem eventKey='1'>MenuItem 1 content</MenuItem>
-        <MenuItem eventKey='2'>MenuItem 2 content</MenuItem>
-      </DropdownButton>
-    );
-
-    let menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
-    assert.equal(menuItems.length, 2);
-    ReactTestUtils.SimulateNative.click(
-      ReactTestUtils.findRenderedDOMComponentWithTag(menuItems[1], 'a')
-    );
-  });
-
-  it('should call MenuItem onSelect with eventKey when MenuItem is clicked', function (done) {
-    function handleSelect(eventKey) {
-      assert.equal(eventKey, '2');
-      assert.equal(instance.state.open, false);
-      done();
-    }
-
-    instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title">
-        <MenuItem eventKey='1'>MenuItem 1 content</MenuItem>
-        <MenuItem eventKey='2' onSelect={handleSelect}>MenuItem 2 content</MenuItem>
-      </DropdownButton>
-    );
-
-    let menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
-    assert.equal(menuItems.length, 2);
-    ReactTestUtils.SimulateNative.click(
-      ReactTestUtils.findRenderedDOMComponentWithTag(menuItems[1], 'a')
-    );
-  });
-
-  it('should not set onSelect to child with no onSelect prop', function () {
-    instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title">
-        <MenuItem eventKey={1}>MenuItem 1 content</MenuItem>
-        <MenuItem eventKey={2}>MenuItem 2 content</MenuItem>
-      </DropdownButton>
-    );
-
-    let menuItems = ReactTestUtils.scryRenderedComponentsWithType(instance, MenuItem);
-    assert.notOk(menuItems[0].props.onSelect);
-  });
-
-  describe('when open', function () {
-    beforeEach(function () {
-      instance = ReactTestUtils.renderIntoDocument(
-        <DropdownButton title="Title">
-          <MenuItem eventKey={1}>MenuItem 1 content</MenuItem>
-          <MenuItem eventKey={2}>MenuItem 2 content</MenuItem>
-        </DropdownButton>
-      );
-
-      instance.setDropdownState(true);
-    });
-
-    it('should close on click', function () {
-      let evt = document.createEvent('HTMLEvents');
-      evt.initEvent('click', true, true);
-      document.documentElement.dispatchEvent(evt);
-
-      assert.notOk(React.findDOMNode(instance).className.match(/\bopen\b/));
-    });
-  });
-
-  it('Should render li when in nav', function () {
-    instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title" className="test-class" navItem>
-        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
-      </DropdownButton>
-    );
-
-    let li = React.findDOMNode(instance);
-    let button = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
-    assert.equal(li.nodeName, 'LI');
-    assert.ok(li.className.match(/\bdropdown\b/));
-    assert.ok(li.className.match(/\btest-class\b/));
-    assert.equal(button.nodeName, 'A');
-    assert.ok(button.className.match(/\bdropdown-toggle\b/));
-    assert.ok(button.lastChild.className.match(/\bcaret\b/));
-    assert.equal(button.innerText.trim(), 'Title');
-  });
-
-  it('should render a caret by default', function() {
-    instance = ReactTestUtils.renderIntoDocument(
-        <DropdownButton title="Title">
-          <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-          <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
-        </DropdownButton>
-    );
-
-    let button = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
-    let carets = button.getElementsByClassName('caret');
-    assert.equal(carets.length, 1);
-  });
-
-  it('should not render a caret if noCaret prop is given', function() {
-    instance = ReactTestUtils.renderIntoDocument(
-        <DropdownButton title="Title" noCaret>
-          <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-          <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
-        </DropdownButton>
-    );
-
-    let button = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
-    let carets = button.getElementsByClassName('caret');
-    assert.equal(carets.length, 0);
-  });
-
-  it('should set button class when buttonClassName is given', function() {
-    instance = ReactTestUtils.renderIntoDocument(
-        <DropdownButton buttonClassName="test-class">
-          <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-          <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
-        </DropdownButton>
-    );
-
-    let button = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Button));
-    assert.ok(button.className.match(/\btest-class\b/));
-  });
-
-  it('should set onClick on Button', function (done) {
-    function handleClick() {
-      done();
-    }
-
-    instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title="Title" onClick={handleClick}>
-        <MenuItem eventKey='1'>MenuItem 1 content</MenuItem>
-        <MenuItem eventKey='2'>MenuItem 2 content</MenuItem>
-      </DropdownButton>
-    );
-
-    let button = ReactTestUtils.findRenderedComponentWithType(instance, Button);
-    ReactTestUtils.SimulateNative.click(
-      ReactTestUtils.findRenderedDOMComponentWithClass(button, 'dropdown-toggle')
-    );
+    assert.ok(buttonNode.className.match(/\bbtn-primary\b/));
+    assert.equal(buttonNode.getAttribute('id'), 'testId');
+    assert.ok(buttonNode.disabled);
   });
 });

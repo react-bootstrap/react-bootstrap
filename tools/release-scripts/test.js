@@ -4,7 +4,7 @@ import { exec } from '../exec';
 function test() {
   console.log('Running: '.cyan + 'tests'.green);
 
-  return exec('npm run lib-build && npm run tests-set')
+  return exec('npm run tests-set')
     .then(() => console.log('Completed: '.cyan + 'tests'.green));
 }
 

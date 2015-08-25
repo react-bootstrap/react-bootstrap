@@ -36,9 +36,11 @@ const PanelGroup = React.createClass({
 
   render() {
     let classes = this.getBsClassSet();
+    let {className, ...props} = this.props;
+    if (this.props.accordion) { props.role = 'tablist'; }
     return (
-      <div {...this.props} className={classNames(this.props.className, classes)} onSelect={null}>
-        {ValidComponentChildren.map(this.props.children, this.renderPanel)}
+      <div {...props} className={classNames(className, classes)} onSelect={null}>
+        {ValidComponentChildren.map(props.children, this.renderPanel)}
       </div>
     );
   },
@@ -54,6 +56,8 @@ const PanelGroup = React.createClass({
     };
 
     if (this.props.accordion) {
+      props.headerRole = 'tab';
+      props.panelRole = 'tabpanel';
       props.collapsible = true;
       props.expanded = (child.props.eventKey === activeKey);
       props.onSelect = this.handleSelect;
