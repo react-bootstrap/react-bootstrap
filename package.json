@@ -112,7 +112,7 @@
     "dom-helpers": "^2.2.4",
     "keycode": "^2.0.0",
     "lodash": "^3.10.0",
-    "react-overlays": "^0.4.3",
+    "react-overlays": "^0.4.4",
     "uncontrollable": "^3.0.0"
   }
 }
