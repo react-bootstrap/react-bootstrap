@@ -15,7 +15,9 @@ const Panel = React.createClass({
     footer: React.PropTypes.node,
     defaultExpanded: React.PropTypes.bool,
     expanded: React.PropTypes.bool,
-    eventKey: React.PropTypes.any
+    eventKey: React.PropTypes.any,
+    headerRole: React.PropTypes.string,
+    panelRole: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -55,26 +57,32 @@ const Panel = React.createClass({
   },
 
   render() {
+    let {headerRole, panelRole, ...props} = this.props;
     return (
-      <div {...this.props}
+      <div {...props}
         className={classNames(this.props.className, this.getBsClassSet())}
         id={this.props.collapsible ? null : this.props.id} onSelect={null}>
-        {this.renderHeading()}
-        {this.props.collapsible ? this.renderCollapsibleBody() : this.renderBody()}
+        {this.renderHeading(headerRole)}
+        {this.props.collapsible ? this.renderCollapsibleBody(panelRole) : this.renderBody()}
         {this.renderFooter()}
       </div>
     );
   },
 
-  renderCollapsibleBody() {
-    let collapseClass = this.prefixClass('collapse');
+  renderCollapsibleBody(panelRole) {
+    let props = {
+      className: this.prefixClass('collapse'),
+      id: this.props.id,
+      ref: 'panel',
+      'aria-hidden': !this.isExpanded()
+    };
+    if (panelRole) {
+      props.role = panelRole;
+    }
 
     return (
       <Collapse in={this.isExpanded()}>
-        <div
-          className={collapseClass}
-          id={this.props.id}
-          ref='panel'>
+        <div {...props}>
           {this.renderBody()}
 
         </div>
@@ -143,7 +151,7 @@ const Panel = React.createClass({
     return React.isValidElement(child) && child.props.fill != null;
   },
 
-  renderHeading() {
+  renderHeading(headerRole) {
     let header = this.props.header;
 
     if (!header) {
@@ -152,7 +160,7 @@ const Panel = React.createClass({
 
     if (!React.isValidElement(header) || Array.isArray(header)) {
       header = this.props.collapsible ?
-        this.renderCollapsibleTitle(header) : header;
+        this.renderCollapsibleTitle(header, headerRole) : header;
     } else {
       const className = classNames(
         this.prefixClass('title'), header.props.className
@@ -161,7 +169,7 @@ const Panel = React.createClass({
       if (this.props.collapsible) {
         header = cloneElement(header, {
           className,
-          children: this.renderAnchor(header.props.children)
+          children: this.renderAnchor(header.props.children, headerRole)
         });
       } else {
         header = cloneElement(header, {className});
@@ -175,23 +183,25 @@ const Panel = React.createClass({
     );
   },
 
-  renderAnchor(header) {
+  renderAnchor(header, headerRole) {
     return (
       <a
         href={'#' + (this.props.id || '')}
         aria-controls={this.props.collapsible ? this.props.id : null}
         className={this.isExpanded() ? null : 'collapsed'}
         aria-expanded={this.isExpanded()}
-        onClick={this.handleSelect}>
+        aria-selected={this.isExpanded()}
+        onClick={this.handleSelect}
+        role={headerRole}>
         {header}
       </a>
     );
   },
 
-  renderCollapsibleTitle(header) {
+  renderCollapsibleTitle(header, headerRole) {
     return (
-      <h4 className={this.prefixClass('title')}>
-        {this.renderAnchor(header)}
+      <h4 className={this.prefixClass('title')} role="presentation">
+        {this.renderAnchor(header, headerRole)}
       </h4>
     );
   },

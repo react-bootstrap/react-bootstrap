@@ -45,7 +45,8 @@ const styleMaps = {
     'md': 'md',
     'sm': 'sm',
     'xs': 'xs'
-  }
+  },
+  GRID_COLUMNS: 12
 };
 
 export default styleMaps;

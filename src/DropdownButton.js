@@ -1,135 +1,69 @@
-/* eslint react/prop-types: [2, {ignore: "bsSize"}] */
-/* BootstrapMixin contains `bsSize` type validation */
-
-import React, { cloneElement } from 'react';
-import classNames from 'classnames';
-
-import createChainedFunction from './utils/createChainedFunction';
+import React from 'react';
 import BootstrapMixin from './BootstrapMixin';
-import DropdownStateMixin from './DropdownStateMixin';
-import Button from './Button';
-import ButtonGroup from './ButtonGroup';
-import DropdownMenu from './DropdownMenu';
-import ValidComponentChildren from './utils/ValidComponentChildren';
+import Dropdown from './Dropdown';
+import NavDropdown from './NavDropdown';
+import CustomPropTypes from './utils/CustomPropTypes';
+import deprecationWarning from './utils/deprecationWarning';
+import omit from 'lodash/object/omit';
 
-const DropdownButton = React.createClass({
-  mixins: [BootstrapMixin, DropdownStateMixin],
+class DropdownButton extends React.Component {
 
-  propTypes: {
-    pullRight: React.PropTypes.bool,
-    dropup:    React.PropTypes.bool,
-    title:     React.PropTypes.node,
-    href:      React.PropTypes.string,
-    id:        React.PropTypes.string,
-    onClick:   React.PropTypes.func,
-    onSelect:  React.PropTypes.func,
-    navItem:   React.PropTypes.bool,
-    noCaret:   React.PropTypes.bool,
-    buttonClassName: React.PropTypes.string,
-    className: React.PropTypes.string,
-    children:  React.PropTypes.node
-  },
-
-  getDefaultProps() {
-    return {
-      pullRight: false,
-      dropup: false,
-      navItem: false,
-      noCaret: false
-    };
-  },
+  constructor(props) {
+    super(props);
+  }
 
   render() {
-    let renderMethod = this.props.navItem ?
-      'renderNavItem' : 'renderButtonGroup';
+    let { title, navItem, ...props } = this.props;
 
-    let caret = this.props.noCaret ?
-        null : (<span className="caret" />);
+    let toggleProps = omit(props, Dropdown.ControlledComponent.propTypes);
 
-    return this[renderMethod]([
-      <Button
-        {...this.props}
-        ref="dropdownButton"
-        className={classNames('dropdown-toggle', this.props.buttonClassName)}
-        onClick={createChainedFunction(this.props.onClick, this.handleDropdownClick)}
-        key={0}
-        navDropdown={this.props.navItem}
-        navItem={null}
-        title={null}
-        pullRight={null}
-        dropup={null}>
-        {this.props.title}{' '}
-        {caret}
-      </Button>,
-      <DropdownMenu
-        ref="menu"
-        aria-labelledby={this.props.id}
-        pullRight={this.props.pullRight}
-        key={1}>
-        {ValidComponentChildren.map(this.props.children, this.renderMenuItem)}
-      </DropdownMenu>
-    ]);
-  },
-
-  renderButtonGroup(children) {
-    let groupClasses = {
-        'open': this.state.open,
-        'dropup': this.props.dropup
-      };
-
-    return (
-      <ButtonGroup
-        bsSize={this.props.bsSize}
-        className={classNames(this.props.className, groupClasses)}>
-        {children}
-      </ButtonGroup>
-    );
-  },
-
-  renderNavItem(children) {
-    let classes = {
-        'dropdown': true,
-        'open': this.state.open,
-        'dropup': this.props.dropup
-      };
-
-    return (
-      <li className={classNames(this.props.className, classes)}>
-        {children}
-      </li>
-    );
-  },
-
-  renderMenuItem(child, index) {
-    // Only handle the option selection if an onSelect prop has been set on the
-    // component or it's child, this allows a user not to pass an onSelect
-    // handler and have the browser preform the default action.
-    let handleOptionSelect = this.props.onSelect || child.props.onSelect ?
-      this.handleOptionSelect : null;
-
-    return cloneElement(
-      child,
-      {
-        // Capture onSelect events
-        onSelect: createChainedFunction(child.props.onSelect, handleOptionSelect),
-        key: child.key ? child.key : index
-      }
-    );
-  },
-
-  handleDropdownClick(e) {
-    e.preventDefault();
-
-    this.setDropdownState(!this.state.open);
-  },
-
-  handleOptionSelect(key) {
-    if (this.props.onSelect) {
-      this.props.onSelect(key);
+    if (navItem){
+      return <NavDropdown {...this.props}/>;
     }
 
-    this.setDropdownState(false);
+    return (
+      <Dropdown {...props}>
+        <Dropdown.Toggle {...toggleProps}>
+          {title}
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          {this.props.children}
+        </Dropdown.Menu>
+      </Dropdown>
+    );
   }
-});
+}
+
+DropdownButton.propTypes = {
+  /**
+   * When used with the `title` prop, the noCaret option will not render a caret icon, in the toggle element.
+   */
+  noCaret: React.PropTypes.bool,
+
+  /**
+   * Specify whether this Dropdown is part of a Nav component
+   *
+   * @type {bool}
+   * @deprecated Use the `NavDropdown` instead.
+   */
+  navItem: CustomPropTypes.all([
+    React.PropTypes.bool,
+    function(props, propName, componentName) {
+      if (props.navItem) {
+        deprecationWarning('navItem', 'NavDropdown component', 'https://github.com/react-bootstrap/react-bootstrap/issues/526');
+      }
+    }
+  ]),
+  title: React.PropTypes.node.isRequired,
+  ...Dropdown.propTypes,
+  ...BootstrapMixin.propTypes
+};
+
+DropdownButton.defaultProps = {
+  pullRight: false,
+  dropup: false,
+  navItem: false,
+  noCaret: false
+};
 
 export default DropdownButton;
