@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "0.25.100",
+  "version": "0.25.100-react-pre.0",
   "description": "Bootstrap 3 components build with React",
   "repository": {
     "type": "git",
