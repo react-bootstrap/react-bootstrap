@@ -28,7 +28,7 @@ describe('Carousel', function () {
     assert.equal(instance.refs.item2.props.active, true);
     assert.equal(
       ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
-        .querySelectorAll('li').length, 2
+        .getElementsByTagName('li').length, 2
     );
   });
 
@@ -46,7 +46,7 @@ describe('Carousel', function () {
     assert.equal(instance.refs.item2.props.active, true);
     assert.equal(
       ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
-        .querySelectorAll('li').length, 2
+        .getElementsByTagName('li').length, 2
     );
   });
 
@@ -66,7 +66,7 @@ describe('Carousel', function () {
 
     ReactTestUtils.Simulate.click(
       ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
-        .querySelector('li')
+        .getElementsByTagName('li')[0]
     );
   });
 

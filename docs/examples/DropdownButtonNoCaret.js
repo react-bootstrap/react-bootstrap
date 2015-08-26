@@ -1,6 +1,6 @@
 const buttonInstance = (
   <ButtonToolbar>
-    <DropdownButton bsStyle='default' title='No caret' noCaret>
+    <DropdownButton bsStyle='default' title='No caret' noCaret id='dropdown-no-caret'>
       <MenuItem eventKey='1'>Action</MenuItem>
       <MenuItem eventKey='2'>Another action</MenuItem>
       <MenuItem eventKey='3'>Something else here</MenuItem>

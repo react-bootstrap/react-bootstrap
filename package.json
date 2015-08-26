@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "0.24.5-react-pre.0",
+  "version": "0.25.100",
   "description": "Bootstrap 3 components build with React",
   "repository": {
     "type": "git",
@@ -9,9 +9,8 @@
   "homepage": "http://react-bootstrap.github.io/",
   "scripts": {
     "build": "babel-node tools/build-cli.js",
-    "lib-build": "babel-node tools/build-cli.js --lib-only",
-    "test-watch": "npm run lib-build && karma start",
-    "test-coverage": "npm run lib-build && COVERAGE=true karma start --single-run",
+    "test-watch": "karma start",
+    "test-coverage": "COVERAGE=true karma start --single-run",
     "test": "npm run lint && npm run build && npm run tests-set",
     "tests-set": "karma start --single-run && _mocha --compilers js:babel-core/register test/server/*Spec.js",
     "lint": "eslint ./",
@@ -54,10 +53,10 @@
     "child-process-promise": "^1.1.0",
     "codemirror": "^5.5.0",
     "colors": "^1.1.2",
-    "css-loader": "^0.15.6",
+    "css-loader": "^0.16.0",
     "es5-shim": "^4.1.10",
     "eslint": "^1.1.0",
-    "eslint-config-defaults": "^4.0.1",
+    "eslint-config-airbnb": "0.0.7",
     "eslint-plugin-babel": "^2.0.0",
     "eslint-plugin-lodash": "^0.1.3",
     "eslint-plugin-mocha": "^0.4.0",
@@ -95,7 +94,7 @@
     "phantomjs": "^1.9.17",
     "portfinder": "^0.4.0",
     "react": "^0.14.0-beta3",
-    "react-component-metadata": "^1.2.1",
+    "react-component-metadata": "^1.3.0",
     "react-dom": "^0.14.0-beta3",
     "react-hot-loader": "^1.2.8",
     "react-router": "^1.0.0-beta3",
@@ -112,7 +111,11 @@
   "dependencies": {
     "babel-runtime": "^5.8.19",
     "classnames": "^2.1.3",
+    "dom-helpers": "^2.2.4",
+    "keycode": "^2.0.0",
     "lodash": "^3.10.0",
+    "react-overlays": "^0.50.0-alpha3",
+    "uncontrollable": "^3.0.0",
     "warning": "^2.0.0"
   }
 }

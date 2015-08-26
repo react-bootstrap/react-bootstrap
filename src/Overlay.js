@@ -2,115 +2,43 @@
 /* These properties are validated in 'Portal' and 'Position' components */
 
 import React, { cloneElement } from 'react';
-import Portal from './Portal';
-import Position from './Position';
-import RootCloseWrapper from './RootCloseWrapper';
+import BaseOverlay from 'react-overlays/lib/Overlay';
 import CustomPropTypes from './utils/CustomPropTypes';
 import Fade from './Fade';
 import classNames from 'classnames';
 
 class Overlay extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {exited: !props.show};
-    this.onHiddenListener = this.handleHidden.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.show) {
-      this.setState({exited: false});
-    } else if (!nextProps.animation) {
-      // Otherwise let handleHidden take care of marking exited.
-      this.setState({exited: true});
-    }
-  }
 
   render() {
     let {
-        container
-      , containerPadding
-      , target
-      , placement
-      , rootClose
-      , children
-      , animation: Transition
+        children: child
+      , animation: transition
       , ...props } = this.props;
 
-    if (Transition === true) {
-      Transition = Fade;
+    if (transition === true) {
+      transition = Fade;
     }
 
-    // Don't un-render the overlay while it's transitioning out.
-    const mountOverlay = props.show || (Transition && !this.state.exited);
-    if (!mountOverlay) {
-      // Don't bother showing anything if we don't have to.
-      return null;
-    }
-
-    let child = children;
-
-    // Position is be inner-most because it adds inline styles into the child,
-    // which the other wrappers don't forward correctly.
-    child = (
-      <Position {...{container, containerPadding, target, placement}}>
-        {child}
-      </Position>
-    );
-
-    if (Transition) {
-      let { onExit, onExiting, onEnter, onEntering, onEntered } = props;
-
-      // This animates the child node by injecting props, so it must precede
-      // anything that adds a wrapping div.
-      child = (
-        <Transition
-          in={props.show}
-          transitionAppear
-          onExit={onExit}
-          onExiting={onExiting}
-          onExited={this.onHiddenListener}
-          onEnter={onEnter}
-          onEntering={onEntering}
-          onEntered={onEntered}
-        >
-          {child}
-        </Transition>
-      );
-    } else {
+    if (!transition) {
       child = cloneElement(child, {
         className: classNames('in', child.props.className)
       });
     }
 
-    // This goes after everything else because it adds a wrapping div.
-    if (rootClose) {
-      child = (
-        <RootCloseWrapper onRootClose={props.onHide}>
-          {child}
-        </RootCloseWrapper>
-      );
-    }
-
     return (
-      <Portal container={container}>
+      <BaseOverlay
+        {...props}
+        transition={transition}
+      >
         {child}
-      </Portal>
+      </BaseOverlay>
     );
-  }
-
-  handleHidden(...args) {
-    this.setState({exited: true});
-
-    if (this.props.onExited) {
-      this.props.onExited(...args);
-    }
   }
 }
 
 Overlay.propTypes = {
-  ...Portal.propTypes,
-  ...Position.propTypes,
+  ...BaseOverlay.propTypes,
+
   /**
    * Set the visibility of the Overlay
    */

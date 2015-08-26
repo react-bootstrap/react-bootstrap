@@ -52,7 +52,7 @@ const Pagination = React.createClass({
     } = this.props;
 
     if(maxButtons){
-      let hiddenPagesBefore = activePage - parseInt(maxButtons / 2);
+      let hiddenPagesBefore = activePage - parseInt(maxButtons / 2, 10);
       startPage = hiddenPagesBefore > 1 ? hiddenPagesBefore : 1;
       hasHiddenPagesAfter = startPage + maxButtons <= items;
 

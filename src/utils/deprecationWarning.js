@@ -2,18 +2,40 @@ import warning from 'warning';
 
 const warned = {};
 
-export default function deprecationWarning(oldname, newname, link) {
-  const warnKey = `${oldname}\n${newname}`;
-  if (warned[warnKey]) {
+function deprecationWarning(oldname, newname, link) {
+  let message;
+
+  if (typeof oldname === 'object'){
+    message = oldname.message;
+  }
+  else {
+    message = `${oldname} is deprecated. Use ${newname} instead.`;
+
+    if (link) {
+      message += `\nYou can read more about it at ${link}`;
+    }
+  }
+
+  if (warned[message]) {
     return;
   }
 
-  let message = `${oldname} is deprecated. Use ${newname} instead.`;
-
-  if (link) {
-    message += `\nYou can read more about it at ${link}`;
-  }
-
   warning(false, message);
-  warned[warnKey] = true;
+  warned[message] = true;
 }
+
+
+deprecationWarning.wrapper = function(Component, ...args){
+  return class DeprecatedComponent extends Component {
+    componentWillMount(...methodArgs){
+      deprecationWarning(...args);
+
+      if (super.componentWillMount) {
+        super.componentWillMount(...methodArgs);
+      }
+    }
+  };
+};
+
+export default deprecationWarning;
+

@@ -2,19 +2,19 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
 
-import TabPane from '../src/TabPane';
+import Tab from '../src/Tab';
 
-describe('TabPane', function () {
+describe('Tab', function () {
   it('Should have class', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <TabPane>Item content</TabPane>
+      <Tab>Item content</Tab>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab-pane'));
   });
 
   it('Should add active class', function () {
     let instance = ReactTestUtils.renderIntoDocument(
-      <TabPane active={true}>Item content</TabPane>
+      <Tab active={true}>Item content</Tab>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active'));
   });
@@ -23,7 +23,7 @@ describe('TabPane', function () {
 
     it('Should have aria-hidden', function () {
       let instance = ReactTestUtils.renderIntoDocument(
-        <TabPane active>Item content</TabPane>
+        <Tab active>Item content</Tab>
       );
 
       assert.equal(ReactDOM.findDOMNode(instance).getAttribute('aria-hidden'), 'false');
@@ -31,7 +31,7 @@ describe('TabPane', function () {
 
     it('Should have role', function () {
       let instance = ReactTestUtils.renderIntoDocument(
-        <TabPane active>Item content</TabPane>
+        <Tab active>Item content</Tab>
       );
 
       assert.equal(ReactDOM.findDOMNode(instance).getAttribute('role'), 'tabpanel');
