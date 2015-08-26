@@ -1,6 +1,8 @@
 /* eslint react/no-did-mount-set-state: 0 */
 
 import React from 'react';
+import getOffset from 'dom-helpers/query/offset';
+import css from 'dom-helpers/style';
 
 import Affix from '../../src/Affix';
 import Nav from '../../src/Nav';
@@ -33,9 +35,8 @@ const ComponentsPage = React.createClass({
 
   componentDidMount() {
     let elem = React.findDOMNode(this.refs.sideNav);
-    let domUtils = Affix.domUtils;
-    let sideNavOffsetTop = domUtils.getOffset(elem).top;
-    let sideNavMarginTop = parseInt(domUtils.getComputedStyles(elem.firstChild).marginTop, 10);
+    let sideNavOffsetTop = getOffset(elem).top;
+    let sideNavMarginTop = parseInt(css(elem.firstChild, 'marginTop'), 10);
     let topNavHeight = React.findDOMNode(this.refs.topNav).offsetHeight;
 
     this.setState({
@@ -180,13 +181,42 @@ const ComponentsPage = React.createClass({
                   <p>Trigger dropdown menus that align to the right of the button using the <code>pullRight</code> prop.</p>
                   <ReactPlayground codeText={Samples.SplitButtonRight} />
 
+                  <h3><Anchor id='btn-dropdowns-custom'>Dropdown Customization</Anchor></h3>
+                  <p>
+                    If the default handling of the dropdown menu and toggle components aren't to your liking, you can
+                    customize them, by using the more basic <code>Dropdown</code> Component to explicitly specify
+                    the Toggle and Menu components
+                  </p>
+                  <div className='bs-callout bs-callout-info'>
+                    <h4>Additional Import Options</h4>
+                    <p>
+                      As a convenience Toggle and Menu components available as static properties
+                      on the Dropdown component. However, you can also import them directly, from
+                      the <code>/lib</code> directory like: <code>{"require('react-bootstrap/lib/DropdownToggle')"}</code>.
+                    </p>
+                  </div>
+                  <ReactPlayground codeText={Samples.DropdownButtonCustom} />
+
+                  <h4>Custom Dropdown Components</h4>
+
+                  <p>
+                    For those that want to customize everything, you can forgo the included Toggle and Menu components,
+                    and create your own. In order to tell the Dropdown component what role your custom components play
+                    add a special prop <code>bsRole</code> to your menu or toggle components. The Dropdown expects
+                    at least one component with <code>bsRole='toggle'</code> and exactly one with <code>bsRole='menu'</code>.
+                  </p>
+                  <ReactPlayground codeText={Samples.DropdownButtonCustomMenu} />
+
                   <h3><Anchor id='btn-dropdowns-props'>Props</Anchor></h3>
 
-                  <h4><Anchor id='btn-dropdowns-props-dropdown'>DropdownButton</Anchor></h4>
+                  <h4><Anchor id='btn-dropdowns-props-dropdown-button'>DropdownButton</Anchor></h4>
                   <PropTable component='DropdownButton'/>
 
                   <h4><Anchor id='btn-dropdowns-props-split'>SplitButton</Anchor></h4>
                   <PropTable component='SplitButton'/>
+
+                  <h4><Anchor id='btn-dropdowns-props-dropdown'>Dropdown</Anchor></h4>
+                  <PropTable component='Dropdown'/>
                 </div>
 
                 {/* Menu Item */}
@@ -513,34 +543,33 @@ const ComponentsPage = React.createClass({
 
                 {/* Tabbed Areas */}
                 <div className='bs-docs-section'>
-                  <h1 className='page-header'><Anchor id='tabs'>Togglable tabs</Anchor> <small>TabbedArea, TabPane</small></h1>
+                  <h1 className='page-header'><Anchor id='tabs'>Togglable tabs</Anchor> <small>Tabs, Tab</small></h1>
 
-                  <p>Add quick, dynamic tab functionality to transition through panes of local content, even via dropdown menus.</p>
+                  <p>Add quick, dynamic tab functionality to transition through panes of local content.</p>
 
                   <h3><Anchor id='tabs-uncontrolled'>Uncontrolled</Anchor></h3>
                   <p>Allow the component to control its own state.</p>
-                  <ReactPlayground codeText={Samples.TabbedAreaUncontrolled} exampleClassName='bs-example-tabs' />
+                  <ReactPlayground codeText={Samples.TabsUncontrolled} exampleClassName='bs-example-tabs' />
 
                   <h3><Anchor id='tabs-controlled'>Controlled</Anchor></h3>
                   <p>Pass down the active state on render via props.</p>
-                  <ReactPlayground codeText={Samples.TabbedAreaControlled} exampleClassName='bs-example-tabs' />
+                  <ReactPlayground codeText={Samples.TabsControlled} exampleClassName='bs-example-tabs' />
 
                   <h3><Anchor id='tabs-no-animation'>No animation</Anchor></h3>
                   <p>Set the <code>animation</code> prop to <code>false</code></p>
-                  <ReactPlayground codeText={Samples.TabbedAreaNoAnimation} exampleClassName='bs-example-tabs' />
+                  <ReactPlayground codeText={Samples.TabsNoAnimation} exampleClassName='bs-example-tabs' />
 
-                  <div className='bs-callout bs-callout-info'>
-                    <h4>Extends tabbed navigation</h4>
-                    <p>This plugin extends the <a href='#navs'>tabbed navigation component</a> to add tabbable areas.</p>
-                  </div>
+                  <h3><Anchor id='left-tabs'>Left tabs</Anchor></h3>
+                  <p>Set <code>position</code> to <code>'left'</code>. Optionally, <code>tabWidth</code> can be passed the number of columns for the tabs.</p>
+                  <ReactPlayground codeText={Samples.LeftTabs} exampleClassName='bs-example-tabs' />
 
                   <h3><Anchor id='tabs-props'>Props</Anchor></h3>
 
-                  <h4><Anchor id='tabs-props-area'>TabbedArea</Anchor></h4>
-                  <PropTable component='TabbedArea'/>
+                  <h4><Anchor id='tabs-props-area'>Tabs</Anchor></h4>
+                  <PropTable component='Tabs'/>
 
-                  <h4><Anchor id='tabs-props-pane'>TabPane</Anchor></h4>
-                  <PropTable component='TabPane'/>
+                  <h4><Anchor id='tabs-props-pane'>Tab</Anchor></h4>
+                  <PropTable component='Tab'/>
                 </div>
 
                 {/* Pager */}
@@ -898,7 +927,7 @@ const ComponentsPage = React.createClass({
                     <NavItem href='#progress' key={8}>Progress bars</NavItem>
                     <NavItem href='#navs' key={9}>Navs</NavItem>
                     <NavItem href='#navbars' key={10}>Navbars</NavItem>
-                    <NavItem href='#tabs' key={11}>Togglable tabs</NavItem>
+                    <NavItem href='#tabs' key={11}>Tabs</NavItem>
                     <NavItem href='#pager' key={12}>Pager</NavItem>
                     <NavItem href='#pagination' key={13}>Pagination</NavItem>
                     <NavItem href='#alerts' key={14}>Alerts</NavItem>

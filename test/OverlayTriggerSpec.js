@@ -82,7 +82,6 @@ describe('OverlayTrigger', function() {
     );
 
     overlayTrigger = React.findDOMNode(instance);
-
     ReactTestUtils.Simulate.click(overlayTrigger);
   });
 

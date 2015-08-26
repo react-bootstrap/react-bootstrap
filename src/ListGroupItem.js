@@ -1,7 +1,6 @@
 import React, { cloneElement } from 'react';
 import BootstrapMixin from './BootstrapMixin';
 import classNames from 'classnames';
-import SafeAnchor from './SafeAnchor';
 
 const ListGroupItem = React.createClass({
   mixins: [BootstrapMixin],
@@ -21,7 +20,8 @@ const ListGroupItem = React.createClass({
 
   getDefaultProps() {
     return {
-      bsClass: 'list-group-item'
+      bsClass: 'list-group-item',
+      listItem: false
     };
   },
 
@@ -31,8 +31,10 @@ const ListGroupItem = React.createClass({
     classes.active = this.props.active;
     classes.disabled = this.props.disabled;
 
-    if (this.props.href || this.props.onClick) {
+    if (this.props.href) {
       return this.renderAnchor(classes);
+    } else if (this.props.onClick) {
+      return this.renderButton(classes);
     } else if (this.props.listItem) {
       return this.renderLi(classes);
     } else {
@@ -51,12 +53,23 @@ const ListGroupItem = React.createClass({
 
   renderAnchor(classes) {
     return (
-      <SafeAnchor
+      <a
         {...this.props}
         className={classNames(this.props.className, classes)}
       >
         {this.props.header ? this.renderStructuredContent() : this.props.children}
-      </SafeAnchor>
+      </a>
+    );
+  },
+
+  renderButton(classes) {
+    return (
+      <button
+        type='button'
+        {...this.props}
+        className={classNames(this.props.className, classes)}>
+        {this.props.children}
+      </button>
     );
   },
 

@@ -20,6 +20,9 @@ const ProgressBar = React.createClass({
     children: onlyProgressBar,
     className: React.PropTypes.string,
     interpolateClass: PropTypes.node,
+    /**
+     * @private
+     */
     isChild: PropTypes.bool
   },
 
@@ -29,7 +32,11 @@ const ProgressBar = React.createClass({
     return {
       bsClass: 'progress-bar',
       min: 0,
-      max: 100
+      max: 100,
+      active: false,
+      isChild: false,
+      srOnly: false,
+      striped: false
     };
   },
 

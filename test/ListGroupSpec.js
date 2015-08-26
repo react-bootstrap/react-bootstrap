@@ -131,7 +131,7 @@ describe('ListGroup', function () {
       </ListGroup>
     );
     assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
-    assert.equal(React.findDOMNode(instance).firstChild.nodeName, 'A');
+    assert.equal(React.findDOMNode(instance).firstChild.nodeName, 'BUTTON');
     assert.equal(React.findDOMNode(instance).lastChild.nodeName, 'SPAN');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
   });

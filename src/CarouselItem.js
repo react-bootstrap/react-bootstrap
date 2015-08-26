@@ -21,7 +21,9 @@ const CarouselItem = React.createClass({
 
   getDefaultProps() {
     return {
-      animation: true
+      active: false,
+      animateIn: false,
+      animateOut: false
     };
   },
 

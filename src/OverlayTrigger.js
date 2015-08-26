@@ -95,14 +95,14 @@ const OverlayTrigger = React.createClass({
 
   getDefaultProps() {
     return {
+      defaultOverlayShown: false,
       trigger: ['hover', 'focus']
     };
   },
 
   getInitialState() {
     return {
-      isOverlayShown: this.props.defaultOverlayShown == null ?
-        false : this.props.defaultOverlayShown
+      isOverlayShown: this.props.defaultOverlayShown
     };
   },
 

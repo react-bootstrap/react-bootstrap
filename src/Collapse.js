@@ -1,6 +1,8 @@
 import React from 'react';
-import Transition from './Transition';
+import Transition from 'react-overlays/lib/Transition';
 import domUtils from './utils/domUtils';
+import CustomPropTypes from './utils/CustomPropTypes';
+import deprecationWarning from './utils/deprecationWarning';
 import createChainedFunction from './utils/createChainedFunction';
 
 let capitalize = str => str[0].toUpperCase() + str.substr(1);
@@ -16,12 +18,11 @@ const MARGINS = {
 
 function getDimensionValue(dimension, elem){
   let value = elem[`offset${capitalize(dimension)}`];
-  let computedStyles = domUtils.getComputedStyles(elem);
   let margins = MARGINS[dimension];
 
   return (value +
-    parseInt(computedStyles[margins[0]], 10) +
-    parseInt(computedStyles[margins[1]], 10)
+    parseInt(domUtils.css(elem, margins[0]), 10) +
+    parseInt(domUtils.css(elem, margins[1]), 10)
   );
 }
 
@@ -138,7 +139,21 @@ Collapse.propTypes = {
    * finishing callbacks are fired even if the original browser transition end
    * events are canceled
    */
-  duration: React.PropTypes.number,
+  timeout: React.PropTypes.number,
+
+  /**
+   * duration
+   * @private
+   */
+  duration: CustomPropTypes.all([
+    React.PropTypes.number,
+    (props)=> {
+      if (props.duration != null){
+        deprecationWarning('Collapse `duration`', 'the `timeout` prop');
+      }
+      return null;
+    }
+  ]),
 
   /**
    * Callback fired before the component expands
@@ -194,7 +209,7 @@ Collapse.propTypes = {
 
 Collapse.defaultProps = {
   in: false,
-  duration: 300,
+  timeout: 300,
   unmountOnExit: false,
   transitionAppear: false,
 

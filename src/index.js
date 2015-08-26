@@ -1,3 +1,5 @@
+import deprecationWarning from './utils/deprecationWarning';
+
 export Accordion from './Accordion';
 export Affix from './Affix';
 export AffixMixin from './AffixMixin';
@@ -13,9 +15,12 @@ export CarouselItem from './CarouselItem';
 export Col from './Col';
 export CollapsibleMixin from './CollapsibleMixin';
 export CollapsibleNav from './CollapsibleNav';
+
+export Dropdown from './Dropdown';
 export DropdownButton from './DropdownButton';
-export DropdownMenu from './DropdownMenu';
-export DropdownStateMixin from './DropdownStateMixin';
+export NavDropdown from './NavDropdown';
+export SplitButton from './SplitButton';
+
 export FadeMixin from './FadeMixin';
 export Glyphicon from './Glyphicon';
 export Grid from './Grid';
@@ -53,9 +58,11 @@ export SafeAnchor from './SafeAnchor';
 export SplitButton from './SplitButton';
 export styleMaps from './styleMaps';
 export SubNav from './SubNav';
+export Tab from './Tab';
 export TabbedArea from './TabbedArea';
 export Table from './Table';
 export TabPane from './TabPane';
+export Tabs from './Tabs';
 export Thumbnail from './Thumbnail';
 export Tooltip from './Tooltip';
 export Well from './Well';
@@ -64,7 +71,40 @@ export Portal from './Portal';
 export Position from './Position';
 
 export Collapse from './Collapse';
-export Fade from './Collapse';
+export Fade from './Fade';
 
 export * as FormControls from './FormControls';
-export * as utils from './utils';
+
+import domUtils from './utils/domUtils';
+import childrenValueInputValidation from './utils/childrenValueInputValidation';
+import createChainedFunction from './utils/createChainedFunction';
+import ValidComponentChildren from './utils/ValidComponentChildren';
+import CustomPropTypes from './utils/CustomPropTypes';
+
+export const utils = {
+  childrenValueInputValidation,
+  createChainedFunction,
+  ValidComponentChildren,
+  CustomPropTypes,
+  domUtils: createDeprecationWrapper(domUtils, 'utils/domUtils', 'npm install dom-helpers'),
+};
+
+function createDeprecationWrapper(obj, deprecated, instead, link){
+  let wrapper = {};
+
+  if (process.env.NODE_ENV === 'production'){
+    return obj;
+  }
+
+  Object.keys(obj).forEach(key => {
+    Object.defineProperty(wrapper, key, {
+      get(){
+        deprecationWarning(deprecated, instead, link);
+        return obj[key];
+      },
+      set(x){ obj[key] = x; }
+    });
+  });
+
+  return wrapper;
+}

@@ -43,7 +43,13 @@ const Nav = React.createClass({
   getDefaultProps() {
     return {
       bsClass: 'nav',
-      expanded: true
+      collapsible: false,
+      expanded: true,
+      justified: false,
+      navbar: false,
+      pullRight: false,
+      right: false,
+      stacked: false
     };
   },
 

@@ -64,10 +64,15 @@ function applyPropDoclets(props, propName){
   if ( doclets.required) {
     prop.required = true;
   }
+
+  // Use @defaultValue to provide a prop's default value
+  if (doclets.defaultValue) {
+    prop.defaultValue = cleanDocletValue(doclets.defaultValue);
+  }
 }
 
 
-export default function generate(destination, options = { mixins: true }){
+export default function generate(destination, options = { mixins: true, inferComponent: true }){
 
   return globp(__dirname + '/../src/**/*.js') //eslint-disable-line no-path-concat
     .then( files => {

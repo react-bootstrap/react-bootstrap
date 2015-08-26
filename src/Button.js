@@ -22,14 +22,20 @@ const Button = React.createClass({
     /**
      * Defines HTML button type Attribute
      * @type {("button"|"reset"|"submit")}
+     * @defaultValue 'button'
      */
     type: React.PropTypes.oneOf(ButtonInput.types)
   },
 
   getDefaultProps() {
     return {
+      active: false,
+      block: false,
       bsClass: 'button',
-      bsStyle: 'default'
+      bsStyle: 'default',
+      disabled: false,
+      navItem: false,
+      navDropdown: false
     };
   },
 

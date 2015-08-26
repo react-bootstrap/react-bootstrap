@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import CustomPropTypes from '../../src/utils/CustomPropTypes';
+import {shouldWarn} from '../helpers';
 
 function isChainableAndUndefinedOK(validatorUnderTest) {
   it('Should validate OK with undefined or null values', function() {
@@ -182,6 +183,25 @@ describe('CustomPropTypes', function() {
       let err = validate(null);
       assert.instanceOf(err, Error);
       assert.include(err.message, 'accessible for users using assistive technologies such as screen readers');
+    });
+  });
+
+  describe('deprecated', function () {
+    function validate(prop) {
+      return CustomPropTypes.deprecated(React.PropTypes.string, 'Read more at link')({pName: prop}, 'pName', 'ComponentName');
+    }
+
+    it('Should warn about deprecation and validate OK', function() {
+      let err = validate('value');
+      shouldWarn('"pName" property of "ComponentName" has been deprecated.\nRead more at link');
+      assert.notInstanceOf(err, Error);
+    });
+
+    it('Should warn about deprecation and throw validation error when property value is not OK', function() {
+      let err = validate({});
+      shouldWarn('"pName" property of "ComponentName" has been deprecated.\nRead more at link');
+      assert.instanceOf(err, Error);
+      assert.include(err.message, 'Invalid undefined `pName` of type `object` supplied to `ComponentName`');
     });
   });
 });

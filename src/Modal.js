@@ -2,11 +2,12 @@
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 import domUtils from './utils/domUtils';
+import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import EventListener from './utils/EventListener';
 import createChainedFunction from './utils/createChainedFunction';
 import CustomPropTypes from './utils/CustomPropTypes';
 
-import Portal from './Portal';
+import Portal from 'react-overlays/lib/Portal';
 import Fade from './Fade';
 import ModalDialog from './ModalDialog';
 import Body from './ModalBody';
@@ -67,28 +68,6 @@ function onFocus(context, handler) {
   return currentFocusListener;
 }
 
-let scrollbarSize;
-
-function getScrollbarSize() {
-  if (scrollbarSize !== undefined) {
-    return scrollbarSize;
-  }
-
-  let scrollDiv = document.createElement('div');
-
-  scrollDiv.style.position = 'absolute';
-  scrollDiv.style.top = '-9999px';
-  scrollDiv.style.width = '50px';
-  scrollDiv.style.height = '50px';
-  scrollDiv.style.overflow = 'scroll';
-
-  document.body.appendChild(scrollDiv);
-  scrollbarSize = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-  document.body.removeChild(scrollDiv);
-
-  scrollDiv = null;
-  return scrollbarSize;
-}
 
 const Modal = React.createClass({
   propTypes: {
@@ -127,7 +106,18 @@ const Modal = React.createClass({
      * Consider leaving the default value here, as it is necessary to make the Modal work well with assistive technologies,
      * such as screen readers.
      */
-    enforceFocus: React.PropTypes.bool
+    enforceFocus: React.PropTypes.bool,
+
+    /**
+     * Hide this from automatic props documentation generation.
+     * @private
+     */
+    bsStyle: React.PropTypes.string,
+
+    /**
+     * When `true` The modal will show itself.
+     */
+    show: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -177,7 +167,7 @@ const Modal = React.createClass({
           transitionAppear
           unmountOnExit
           in={show}
-          duration={Modal.TRANSITION_DURATION}
+          timeout={Modal.TRANSITION_DURATION}
           onExit={onExit}
           onExiting={onExiting}
           onExited={this.handleHidden}
@@ -231,7 +221,7 @@ const Modal = React.createClass({
       <div
         ref='modal'>
         { animation
-            ? <Fade transitionAppear in={this.props.show} duration={duration}>{backdrop}</Fade>
+            ? <Fade transitionAppear in={this.props.show} timeout={duration}>{backdrop}</Fade>
             : backdrop
         }
         {modal}
@@ -326,8 +316,7 @@ const Modal = React.createClass({
       this.iosClickHack();
     }
 
-    this.setState(this._getStyles() //eslint-disable-line react/no-did-mount-set-state
-      , () => this.focusModalContent());
+    this.setState(this._getStyles(), () => this.focusModalContent());
   },
 
   onHide() {
@@ -377,17 +366,15 @@ const Modal = React.createClass({
 
   checkForFocus() {
     if (domUtils.canUseDom) {
-      try {
-        this.lastFocus = document.activeElement;
-      }
-      catch (e) {} // eslint-disable-line no-empty
+      this.lastFocus = domUtils.activeElement(document);
     }
   },
 
   focusModalContent() {
     let modalContent = React.findDOMNode(this.refs.dialog);
-    let current = domUtils.activeElement(this);
+    let current = domUtils.activeElement(domUtils.ownerDocument(this));
     let focusInModal = current && domUtils.contains(modalContent, current);
+
 
     if (modalContent && this.props.autoFocus && !focusInModal) {
       this.lastFocus = current;
@@ -407,7 +394,7 @@ const Modal = React.createClass({
       return;
     }
 
-    let active = domUtils.activeElement(this);
+    let active = domUtils.activeElement(domUtils.ownerDocument(this));
     let modal = React.findDOMNode(this.refs.dialog);
 
     if (modal && modal !== active && !domUtils.contains(modal, active)) {
