@@ -38,6 +38,10 @@ class DropdownMenu extends React.Component {
   focusNext() {
     let { items, activeItemIndex } = this.getItemsAndActiveIndex();
 
+    if (items.length === 0) {
+      return;
+    }
+
     if (activeItemIndex === items.length - 1) {
       items[0].focus();
       return;
