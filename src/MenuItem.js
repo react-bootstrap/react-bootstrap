@@ -47,6 +47,7 @@ export default class MenuItem extends React.Component {
         <SafeAnchor
           role='menuitem'
           tabIndex='-1'
+          id={this.props.id}
           target={this.props.target}
           title={this.props.title}
           href={this.props.href || ''}
@@ -78,7 +79,11 @@ MenuItem.propTypes = {
   target: React.PropTypes.string,
   title: React.PropTypes.string,
   onKeyDown: React.PropTypes.func,
-  onSelect: React.PropTypes.func
+  onSelect: React.PropTypes.func,
+  id: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ])
 };
 
 MenuItem.defaultProps = {
