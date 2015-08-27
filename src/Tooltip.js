@@ -12,7 +12,12 @@ const Tooltip = React.createClass({
      * @type {string}
      * @required
      */
-    id: CustomPropTypes.isRequiredForA11y(React.PropTypes.string),
+    id: CustomPropTypes.isRequiredForA11y(
+      React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.number
+      ])
+    ),
 
     /**
      * Sets the direction the Tooltip is positioned towards.

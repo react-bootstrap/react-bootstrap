@@ -59,7 +59,10 @@ class ListGroup extends React.Component {
 
 ListGroup.propTypes = {
   className: React.PropTypes.string,
-  id: React.PropTypes.string
+  id: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ])
 };
 
 export default ListGroup;
