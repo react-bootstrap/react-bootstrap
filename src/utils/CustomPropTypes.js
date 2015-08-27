@@ -44,7 +44,7 @@ const CustomPropTypes = {
 
   isRequiredForA11y(propType){
     return function(props, propName, componentName){
-      if (props[propName] === null) {
+      if (props[propName] == null) {
         return new Error(
           'The prop `' + propName + '` is required to make ' + componentName + ' accessible ' +
             'for users using assistive technologies such as screen readers `'
