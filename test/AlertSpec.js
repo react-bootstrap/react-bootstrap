@@ -81,16 +81,16 @@ describe('Alert', function () {
       assert.equal(React.findDOMNode(instance).getAttribute('role'), 'alert');
     });
 
-    it('Should have add ARIAs to button', function () {
+    it('Should call onDismiss callback when the sr-only dismiss link is activated', function(done) {
+      let doneOp = function () {
+        done();
+      };
       let instance = ReactTestUtils.renderIntoDocument(
-        <Alert onDismiss={()=>{}} closeLabel='close'>Message</Alert>
+        <Alert onDismiss={doneOp}>
+          Message
+        </Alert>
       );
-
-      let button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'button');
-
-      assert.equal(React.findDOMNode(button).getAttribute('aria-label'), 'close');
-      assert.equal(React.findDOMNode(button).children[0].getAttribute('aria-hidden'), 'true');
+      ReactTestUtils.Simulate.click(React.findDOMNode(instance).getElementsByClassName('sr-only')[0]);
     });
-
   });
 });
