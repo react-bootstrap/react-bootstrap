@@ -36,7 +36,10 @@ const Tabs = React.createClass({
      */
     bsStyle: React.PropTypes.oneOf(['tabs', 'pills']),
     animation: React.PropTypes.bool,
-    id: React.PropTypes.string,
+    id: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     onSelect: React.PropTypes.func,
     position: React.PropTypes.oneOf(['top', 'left', 'right']),
     /**
