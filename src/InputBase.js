@@ -220,7 +220,10 @@ InputBase.propTypes = {
   bsStyle: React.PropTypes.oneOf(['success', 'warning', 'error']),
   hasFeedback: React.PropTypes.bool,
   feedbackIcon: React.PropTypes.node,
-  id: React.PropTypes.string,
+  id: React.PropTypes.oneOfType([
+    React.PropTypes.string,
+    React.PropTypes.number
+  ]),
   groupClassName: React.PropTypes.string,
   wrapperClassName: React.PropTypes.string,
   labelClassName: React.PropTypes.string,

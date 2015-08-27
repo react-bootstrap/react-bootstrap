@@ -11,7 +11,10 @@ const Panel = React.createClass({
     collapsible: React.PropTypes.bool,
     onSelect: React.PropTypes.func,
     header: React.PropTypes.node,
-    id: React.PropTypes.string,
+    id: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     footer: React.PropTypes.node,
     defaultExpanded: React.PropTypes.bool,
     expanded: React.PropTypes.bool,
