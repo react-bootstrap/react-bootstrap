@@ -39,17 +39,17 @@ const NavItem = React.createClass({
         'aria-controls': ariaControls,
         ...props } = this.props;
     let classes = {
-          active,
-          disabled
-        };
+      active,
+      disabled
+    };
     let linkProps = {
-          role,
-          href,
-          title,
-          target,
-          id: linkId,
-          onClick: this.handleClick
-        };
+      role,
+      href,
+      title,
+      target,
+      id: linkId,
+      onClick: this.handleClick
+    };
 
     if (!role && href === '#') {
       linkProps.role = 'button';

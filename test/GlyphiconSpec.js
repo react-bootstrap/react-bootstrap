@@ -12,11 +12,11 @@ describe('Glyphicon', function () {
   });
 
   it('renders without the .form-control-feedback class', function () {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Glyphicon glyph='star' />
-      );
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Glyphicon glyph='star' />
+    );
 
-      assert.notOk(React.findDOMNode(instance).className.match(/\bform-control-feedback\b/));
+    assert.notOk(React.findDOMNode(instance).className.match(/\bform-control-feedback\b/));
   });
 
   context('when setting the formControlFeedback prop', function () {
