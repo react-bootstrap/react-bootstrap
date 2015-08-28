@@ -2,7 +2,7 @@ import React from 'react';
 import keycode from 'keycode';
 import classNames from 'classnames';
 import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
-
+import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
 
 class DropdownMenu extends React.Component {
@@ -77,7 +77,7 @@ class DropdownMenu extends React.Component {
   }
 
   render() {
-    const items = React.Children.map(this.props.children, child => {
+    const items = ValidComponentChildren.map(this.props.children, child => {
       let {
         children,
         onKeyDown,
