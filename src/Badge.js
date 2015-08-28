@@ -16,7 +16,7 @@ const Badge = React.createClass({
 
   hasContent() {
     return ValidComponentChildren.hasValidComponent(this.props.children) ||
-      (React.Children.count(this.props.children) > 1) ||
+      (React.Children.count(this.props.children) > 0) ||
       (typeof this.props.children === 'string') ||
       (typeof this.props.children === 'number');
   },
