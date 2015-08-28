@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import CustomPropTypes from './utils/CustomPropTypes';
+import { all } from 'react-prop-types';
 import SafeAnchor from './SafeAnchor';
 
 export default class MenuItem extends React.Component {
@@ -62,7 +62,7 @@ export default class MenuItem extends React.Component {
 
 MenuItem.propTypes = {
   disabled: React.PropTypes.bool,
-  divider: CustomPropTypes.all([
+  divider: all([
     React.PropTypes.bool,
     function(props, propName, componentName) {
       if (props.divider && props.children) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
-import CustomPropTypes from './utils/CustomPropTypes';
+import { all } from 'react-prop-types';
 
 const ButtonGroup = React.createClass({
   mixins: [BootstrapMixin],
@@ -13,7 +13,7 @@ const ButtonGroup = React.createClass({
      * Display block buttons, only useful when used with the "vertical" prop.
      * @type {bool}
      */
-    block: CustomPropTypes.all([
+    block: all([
       React.PropTypes.bool,
       function(props, propName, componentName) {
         if (props.block && !props.vertical) {

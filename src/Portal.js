@@ -8,4 +8,3 @@ export default deprecationWarning.wrapper(Portal, {
     'http://react-bootstrap.github.io/react-overlays/examples/#portal and ' +
     'https://github.com/react-bootstrap/react-bootstrap/issues/1084'
 });
-

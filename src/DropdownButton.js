@@ -2,7 +2,7 @@ import React from 'react';
 import BootstrapMixin from './BootstrapMixin';
 import Dropdown from './Dropdown';
 import NavDropdown from './NavDropdown';
-import CustomPropTypes from './utils/CustomPropTypes';
+import { all } from 'react-prop-types';
 import deprecationWarning from './utils/deprecationWarning';
 import omit from 'lodash/object/omit';
 
@@ -46,7 +46,7 @@ DropdownButton.propTypes = {
    * @type {bool}
    * @deprecated Use the `NavDropdown` instead.
    */
-  navItem: CustomPropTypes.all([
+  navItem: all([
     React.PropTypes.bool,
     function(props, propName, componentName) {
       if (props.navItem) {

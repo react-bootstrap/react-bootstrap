@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
-import CustomPropTypes from './utils/CustomPropTypes';
+import { elementType } from 'react-prop-types';
 
 const Navbar = React.createClass({
   mixins: [BootstrapMixin],
@@ -19,7 +19,7 @@ const Navbar = React.createClass({
     /**
      * You can use a custom element for this component
      */
-    componentClass: CustomPropTypes.elementType,
+    componentClass: elementType,
     brand: React.PropTypes.node,
     toggleButton: React.PropTypes.node,
     toggleNavKey: React.PropTypes.oneOfType([
