@@ -1,3 +1,16 @@
+v0.25.1 - Fri, 28 Aug 2015 18:30:59 GMT
+---------------------------------------
+
+- [478300a](../../commit/478300a) [fixed] Handle falsey DropdownMenu  children correctly
+- [c450e96](../../commit/c450e96) [fixed] stop rendering extra attributes on Progress bar dom nodes
+- [3ceb7af](../../commit/3ceb7af) [fixed] allow null activeKey (empty) selection
+- [a7f93ae](../../commit/a7f93ae) [fixed] title is not passed to tab pane DOM node
+- [1bee466](../../commit/1bee466) [changed] 'id' prop-type made uniform throughout the project
+- [e438250](../../commit/e438250) [fixed] 'isRequireForA11y' undefined/null checking
+- [664b465](../../commit/664b465) [fixed] id passthrough for MenuItem
+
+
+
 v0.25.0 - Tue, 25 Aug 2015 18:56:33 GMT
 ---------------------------------------
 
