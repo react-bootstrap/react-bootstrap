@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
-import { all } from 'react-prop-types';
+import all from 'react-prop-types/lib/all';
 
 const ButtonGroup = React.createClass({
   mixins: [BootstrapMixin],

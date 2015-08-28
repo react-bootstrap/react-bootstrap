@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Button from './Button';
-import { singlePropFrom } from 'react-prop-types';
+import singlePropFrom from 'react-prop-types/lib/singlePropFrom';
 import SafeAnchor from './SafeAnchor';
 
 const CARET = <span> <span className='caret' /></span>;

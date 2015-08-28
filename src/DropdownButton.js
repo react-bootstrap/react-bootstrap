@@ -2,7 +2,7 @@ import React from 'react';
 import BootstrapMixin from './BootstrapMixin';
 import Dropdown from './Dropdown';
 import NavDropdown from './NavDropdown';
-import { all } from 'react-prop-types';
+import all from 'react-prop-types/lib/all';
 import deprecationWarning from './utils/deprecationWarning';
 import omit from 'lodash/object/omit';
 

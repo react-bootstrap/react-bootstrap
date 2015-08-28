@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import styleMaps from './styleMaps';
-import { elementType } from 'react-prop-types';
+import elementType from 'react-prop-types/lib/elementType';
 
 const Col = React.createClass({
   propTypes: {

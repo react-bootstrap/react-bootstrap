@@ -9,7 +9,9 @@ import CustomPropTypes from './utils/CustomPropTypes';
 import createChainedFunction from './utils/createChainedFunction';
 import find from 'lodash/collection/find';
 import omit from 'lodash/object/omit';
-import { all, elementType, isRequiredForA11y } from 'react-prop-types';
+import all from 'react-prop-types/lib/all';
+import elementType from 'react-prop-types/lib/elementType';
+import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
 const TOGGLE_REF = 'toggle-btn';
 

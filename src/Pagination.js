@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import PaginationButton from './PaginationButton';
-import { elementType } from 'react-prop-types';
+import elementType from 'react-prop-types/lib/elementType';
 import SafeAnchor from './SafeAnchor';
 
 const Pagination = React.createClass({

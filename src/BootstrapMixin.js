@@ -1,6 +1,6 @@
 import React from 'react';
 import styleMaps from './styleMaps';
-import { keyOf } from 'react-prop-types';
+import keyOf from 'react-prop-types/lib/keyOf';
 
 const BootstrapMixin = {
   propTypes: {

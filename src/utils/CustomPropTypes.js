@@ -1,32 +1,5 @@
+import { createChainableTypeChecker } from 'react-prop-types/lib/common';
 import childrenToArray from './childrenToArray';
-
-const ANONYMOUS = '<<anonymous>>';
-
-/**
- * Create chain-able isRequired validator
- *
- * Largely copied directly from:
- *  https://github.com/facebook/react/blob/0.11-stable/src/core/ReactPropTypes.js#L94
- */
-function createChainableTypeChecker(validate) {
-  function checkType(isRequired, props, propName, componentName) {
-    componentName = componentName || ANONYMOUS;
-    if (props[propName] == null) {
-      if (isRequired) {
-        return new Error(
-          `Required prop '${propName}' was not specified in '${componentName}'.`
-        );
-      }
-    } else {
-      return validate(props, propName, componentName);
-    }
-  }
-
-  let chainedCheckType = checkType.bind(null, false);
-  chainedCheckType.isRequired = checkType.bind(null, true);
-
-  return chainedCheckType;
-}
 
 export default {
 

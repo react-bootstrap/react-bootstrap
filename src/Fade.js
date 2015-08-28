@@ -1,6 +1,6 @@
 import React from 'react';
 import Transition from 'react-overlays/lib/Transition';
-import { all } from 'react-prop-types';
+import all from 'react-prop-types/lib/all';
 import deprecationWarning from './utils/deprecationWarning';
 
 class Fade extends React.Component {
