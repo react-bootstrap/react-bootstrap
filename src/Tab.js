@@ -87,6 +87,7 @@ const Tab = React.createClass({
 
     return (
       <div {...this.props}
+        title={undefined}
         role='tabpanel'
         aria-hidden={!this.props.active}
         className={classNames(this.props.className, classes)}
