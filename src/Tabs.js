@@ -196,7 +196,7 @@ const Tabs = React.createClass({
   },
 
   getActiveKey() {
-    return this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+    return this.props.activeKey !== undefined ? this.props.activeKey : this.state.activeKey;
   },
 
   renderPane(child, index) {
