@@ -171,6 +171,17 @@ describe('Tabs', function () {
     assert.equal(tabs.refs.tabs.props.activeKey, 1);
   });
 
+  it('Should treat active key of null as nothing selected', function () {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Tabs activeKey={null}>
+        <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
+        <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
+      </Tabs>
+    );
+
+    expect(instance.getActiveKey()).to.not.exist;
+  });
+
   it('Should pass default bsStyle (of "tabs") to Nav', function () {
     let instance = ReactTestUtils.renderIntoDocument(
         <Tabs defaultActiveKey={1} animation={false}>

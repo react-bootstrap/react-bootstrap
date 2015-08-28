@@ -11,6 +11,10 @@ const Tab = React.createClass({
      */
     active:          React.PropTypes.bool,
     animation:       React.PropTypes.bool,
+    /**
+     * It is used by 'Tabs' - parent component
+     * @private
+     */
     onAnimateOutEnd: React.PropTypes.func,
     disabled:        React.PropTypes.bool,
     title:           React.PropTypes.node
@@ -85,6 +89,7 @@ const Tab = React.createClass({
 
     return (
       <div {...this.props}
+        title={undefined}
         role='tabpanel'
         aria-hidden={!this.props.active}
         className={classNames(this.props.className, classes)}

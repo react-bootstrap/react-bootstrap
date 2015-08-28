@@ -32,7 +32,7 @@ const AffixMixin = {
 
   checkPosition() {
     let DOMNode, scrollHeight, scrollTop, position, offsetTop, offsetBottom,
-        affix, affixType, affixPositionTop;
+      affix, affixType, affixPositionTop;
 
     // TODO: or not visible
     if (!this.isMounted()) {

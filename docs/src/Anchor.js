@@ -2,7 +2,10 @@ import React from 'react';
 
 const Anchor = React.createClass({
   propTypes: {
-    id: React.PropTypes.string
+    id: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ])
   },
   render() {
     return (

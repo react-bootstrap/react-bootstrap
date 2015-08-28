@@ -17,8 +17,8 @@ const ButtonInputExample = React.createClass({
     let length = this.refs.input.getValue().length;
     let style = 'danger';
 
-    if (length > 10) { style = 'success'; }
-    else if (length > 5) { style = 'warning'; }
+    if (length > 10) style = 'success';
+    else if (length > 5) style = 'warning';
 
     let disabled = style !== 'success';
 

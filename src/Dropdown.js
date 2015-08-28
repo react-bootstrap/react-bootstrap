@@ -108,21 +108,21 @@ class Dropdown extends React.Component {
     };
 
     switch(event.keyCode) {
-      case keycode.codes.down:
-        if (!this.props.open) {
-          this.toggleOpen();
-        }
-        else {
-          focusNext();
-        }
-        event.preventDefault();
-        break;
-      case keycode.codes.esc:
-      case keycode.codes.tab:
-        if (this.props.open) {
-          this.handleClose(event);
-        }
-        break;
+    case keycode.codes.down:
+      if (!this.props.open) {
+        this.toggleOpen();
+      } else {
+        focusNext();
+      }
+      event.preventDefault();
+      break;
+    case keycode.codes.esc:
+    case keycode.codes.tab:
+      if (this.props.open) {
+        this.handleClose(event);
+      }
+      break;
+    default:
     }
   }
 
@@ -136,8 +136,7 @@ class Dropdown extends React.Component {
     // to the next focusable input
     if (event && event.keyCode === keycode.codes.tab){
       setTimeout(this.toggleOpen);
-    }
-    else {
+    } else {
       this.toggleOpen();
     }
 

@@ -3,7 +3,7 @@ import keycode from 'keycode';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
-
+import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
 
 class DropdownMenu extends React.Component {
@@ -21,18 +21,19 @@ class DropdownMenu extends React.Component {
   handleKeyDown(event) {
 
     switch(event.keyCode) {
-      case keycode.codes.down:
-        this.focusNext();
-        event.preventDefault();
-        break;
-      case keycode.codes.up:
-        this.focusPrevious();
-        event.preventDefault();
-        break;
-      case keycode.codes.esc:
-      case keycode.codes.tab:
-        this.props.onClose(event);
-        break;
+    case keycode.codes.down:
+      this.focusNext();
+      event.preventDefault();
+      break;
+    case keycode.codes.up:
+      this.focusPrevious();
+      event.preventDefault();
+      break;
+    case keycode.codes.esc:
+    case keycode.codes.tab:
+      this.props.onClose(event);
+      break;
+    default:
     }
   }
 
@@ -77,7 +78,7 @@ class DropdownMenu extends React.Component {
   }
 
   render() {
-    const items = React.Children.map(this.props.children, child => {
+    const items = ValidComponentChildren.map(this.props.children, child => {
       let {
         children,
         onKeyDown,
