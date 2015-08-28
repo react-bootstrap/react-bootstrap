@@ -27,8 +27,7 @@ const Thumbnail = React.createClass({
           <img src={this.props.src} alt={this.props.alt} />
         </SafeAnchor>
       );
-    }
-    else {
+    } else {
       if(this.props.children) {
         return (
           <div {...this.props} className={classSet(this.props.className, classes)}>
@@ -38,8 +37,7 @@ const Thumbnail = React.createClass({
             </div>
           </div>
         );
-      }
-      else {
+      } else {
         return (
           <div {...this.props} className={classSet(this.props.className, classes)}>
             <img src={this.props.src} alt={this.props.alt} />

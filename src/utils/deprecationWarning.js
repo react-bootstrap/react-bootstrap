@@ -7,8 +7,7 @@ function deprecationWarning(oldname, newname, link) {
 
   if (typeof oldname === 'object'){
     message = oldname.message;
-  }
-  else {
+  } else {
     message = `${oldname} is deprecated. Use ${newname} instead.`;
 
     if (link) {
@@ -38,4 +37,3 @@ deprecationWarning.wrapper = function(Component, ...args){
 };
 
 export default deprecationWarning;
-

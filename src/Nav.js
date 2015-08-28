@@ -24,7 +24,10 @@ const Nav = React.createClass({
     /**
      * HTML id for the wrapper `nav` element
      */
-    id: React.PropTypes.string,
+    id: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     /**
      * CSS classes for the inner `ul` element
      */

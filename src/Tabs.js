@@ -36,7 +36,10 @@ const Tabs = React.createClass({
      */
     bsStyle: React.PropTypes.oneOf(['tabs', 'pills']),
     animation: React.PropTypes.bool,
-    id: React.PropTypes.string,
+    id: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
     onSelect: React.PropTypes.func,
     position: React.PropTypes.oneOf(['top', 'left', 'right']),
     /**
@@ -193,7 +196,7 @@ const Tabs = React.createClass({
   },
 
   getActiveKey() {
-    return this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
+    return this.props.activeKey !== undefined ? this.props.activeKey : this.state.activeKey;
   },
 
   renderPane(child, index) {
@@ -205,16 +208,16 @@ const Tabs = React.createClass({
     let paneIsAlreadyActive = previousActiveKey != null && child.props.eventKey === previousActiveKey;
 
     return cloneElement(
-        child,
-        {
-          active: shouldPaneBeSetActive && (thereIsNoActivePane || !this.props.animation),
-          id: paneId(this.props, child),
-          'aria-labelledby': tabId(this.props, child),
-          key: child.key ? child.key : index,
-          animation: this.props.animation,
-          onAnimateOutEnd: paneIsAlreadyActive ? this.handlePaneAnimateOutEnd : null
-        }
-      );
+      child,
+      {
+        active: shouldPaneBeSetActive && (thereIsNoActivePane || !this.props.animation),
+        id: paneId(this.props, child),
+        'aria-labelledby': tabId(this.props, child),
+        key: child.key ? child.key : index,
+        animation: this.props.animation,
+        onAnimateOutEnd: paneIsAlreadyActive ? this.handlePaneAnimateOutEnd : null
+      }
+    );
   },
 
   renderTab(child) {

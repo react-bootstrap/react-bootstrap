@@ -17,7 +17,7 @@ class SplitButton extends React.Component {
       bsStyle, // eslint-disable-line
       ...props } = this.props;
 
-     let { disabled } = props;
+    let { disabled } = props;
 
     let button = (
       <Button
