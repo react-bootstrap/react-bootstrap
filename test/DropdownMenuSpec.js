@@ -76,6 +76,15 @@ describe('DropdownMenu', function() {
     node.className.should.match(/\bdropdown-menu-right\b/);
   });
 
+  it('handles empty children', function() {
+    ReactTestUtils.renderIntoDocument(
+      <DropdownMenu pullRight>
+        <MenuItem>Item</MenuItem>
+        { false && <MenuItem>Item 2</MenuItem> }
+      </DropdownMenu>
+    );
+  });
+
   describe('focusable state', function() {
     let focusableContainer;
 
