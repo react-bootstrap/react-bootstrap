@@ -17,7 +17,10 @@
     "docs-build": "babel-node tools/build-cli.js --docs-only",
     "docs": "babel-node docs/dev-run",
     "docs-prod": "npm run docs-build && NODE_ENV=production babel-node docs/server.js",
-    "docs-prod-unoptimized": "npm run docs-build -- --dev && NODE_ENV=production babel-node docs/server.js"
+    "docs-prod-unoptimized": "npm run docs-build -- --dev && NODE_ENV=production babel-node docs/server.js",
+
+    "minor": "node ./tools/release minor",
+    "patch": "node ./tools/release patch"
   },
   "main": "lib/index.js",
   "directories": {
