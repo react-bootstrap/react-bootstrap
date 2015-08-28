@@ -43,6 +43,20 @@ describe('NavItem', function () {
     assert.ok(!React.findDOMNode(instance).hasAttribute('title'));
   });
 
+  it('Should pass tabIndex to the anchor', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <NavItem href='/hi' tabIndex='3' title='boom!'>
+        Item content
+      </NavItem>
+    );
+
+    let node = React.findDOMNode(instance);
+
+    expect(node.hasAttribute('tabindex')).to.equal(false);
+    expect(node.firstChild.getAttribute('tabindex')).to.equal('3');
+
+  });
+
   it('Should call `onSelect` when item is selected', function (done) {
     function handleSelect(key) {
       assert.equal(key, '2');

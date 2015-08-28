@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import keycode from 'keycode';
 
 import Col from '../src/Col';
 import Nav from '../src/Nav';
@@ -430,6 +431,63 @@ describe('Tabs', function () {
 
     checkTabRemovingWithAnimation(true);
     checkTabRemovingWithAnimation(false);
+  });
+
+  describe('keyboard navigation', function() {
+    let instance;
+
+    beforeEach(function() {
+      instance = render(
+        <Tabs defaultActiveKey={1} id='tabs'>
+          <Tab id='pane-1' title="Tab 1" eventKey={1}>Tab 1 content</Tab>
+          <Tab id='pane-2' title="Tab 2" eventKey={2} disabled>Tab 2 content</Tab>
+          <Tab id='pane-2' title="Tab 3" eventKey={3}>Tab 3 content</Tab>
+        </Tabs>
+      , document.body);
+    });
+
+    afterEach(function() {
+      instance = React.unmountComponentAtNode(document.body);
+    });
+
+    it('only the active tab should be focusable', () => {
+      let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
+
+      expect(React.findDOMNode(tabs[0]).firstChild.getAttribute('tabindex')).to.equal('0');
+
+      expect(React.findDOMNode(tabs[1]).firstChild.getAttribute('tabindex')).to.equal('-1');
+      expect(React.findDOMNode(tabs[2]).firstChild.getAttribute('tabindex')).to.equal('-1');
+    });
+
+    it('should focus the next tab on arrow key', () => {
+      let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
+
+      let firstAnchor = React.findDOMNode(tabs[0]).firstChild;
+      let lastAnchor = React.findDOMNode(tabs[2]).firstChild; // skip disabled
+
+      firstAnchor.focus();
+
+      ReactTestUtils.Simulate.keyDown(firstAnchor, { keyCode: keycode('right') });
+
+      expect(instance.getActiveKey() === 2);
+      expect(document.activeElement).to.equal(lastAnchor);
+    });
+
+    it('should focus the previous tab on arrow key', () => {
+      instance.setState({ activeKey: 3 });
+
+      let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
+
+      let firstAnchor = React.findDOMNode(tabs[0]).firstChild;
+      let lastAnchor = React.findDOMNode(tabs[2]).firstChild;
+
+      lastAnchor.focus();
+
+      ReactTestUtils.Simulate.keyDown(lastAnchor, { keyCode: keycode('left') });
+
+      expect(instance.getActiveKey() === 2);
+      expect(document.activeElement).to.equal(firstAnchor);
+    });
   });
 
   describe('Web Accessibility', function() {
