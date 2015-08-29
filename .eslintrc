@@ -26,7 +26,6 @@
     "no-else-return": 0,
     "no-param-reassign": 0,
     "no-this-before-super": 2,
-    "no-throw-literal": 0,
     "no-underscore-dangle": 0,
     "no-undef": 2,
     "no-unused-vars": [2, { "vars": "all", "args": "none" }],
