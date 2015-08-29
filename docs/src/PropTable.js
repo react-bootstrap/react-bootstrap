@@ -74,7 +74,7 @@ const PropTable = React.createClass({
         let propData = propsData[propName];
 
         return (
-          <tr key={propName} className='prop-table-row'>
+          <tr key={propName} className="prop-table-row">
             <td>
               {propName} {this.renderRequiredLabel(propData)}
             </td>
@@ -85,12 +85,12 @@ const PropTable = React.createClass({
 
             <td>
               { propData.doclets.deprecated
-                && <div className='prop-desc-heading'>
-                  <strong className='text-danger'>{'Deprecated: ' + propData.doclets.deprecated + ' '}</strong>
+                && <div className="prop-desc-heading">
+                  <strong className="text-danger">{'Deprecated: ' + propData.doclets.deprecated + ' '}</strong>
                 </div>
               }
               { this.renderControllableNote(propData, propName) }
-              <div className='prop-desc' dangerouslySetInnerHTML={{__html: propData.descHtml }} />
+              <div className="prop-desc" dangerouslySetInnerHTML={{__html: propData.descHtml }} />
             </td>
           </tr>
         );
@@ -127,10 +127,10 @@ const PropTable = React.createClass({
     );
 
     return (
-      <div className='prop-desc-heading'>
+      <div className="prop-desc-heading">
         <small>
-          <em className='text-info'>
-            <Glyphicon glyph='info-sign'/>
+          <em className="text-info">
+            <Glyphicon glyph="info-sign"/>
             &nbsp;{ text }
           </em>
         </small>

@@ -13,7 +13,7 @@ const Example = React.createClass({
   },
 
   render() {
-    let popover = <Popover title='popover'>very popover. such engagement</Popover>;
+    let popover = <Popover title="popover">very popover. such engagement</Popover>;
     let tooltip = <Tooltip>wow.</Tooltip>;
 
     return (
@@ -21,8 +21,8 @@ const Example = React.createClass({
         <p>Click to get the full Modal experience!</p>
 
         <Button
-          bsStyle='primary'
-          bsSize='large'
+          bsStyle="primary"
+          bsSize="large"
           onClick={this.open}
         >
           Launch demo modal
@@ -37,10 +37,10 @@ const Example = React.createClass({
             <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
 
             <h4>Popover in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={popover}><a href='#'>popover</a></OverlayTrigger> here</p>
+            <p>there is a <OverlayTrigger overlay={popover}><a href="#">popover</a></OverlayTrigger> here</p>
 
             <h4>Tooltips in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={tooltip}><a href='#'>tooltip</a></OverlayTrigger> here</p>
+            <p>there is a <OverlayTrigger overlay={tooltip}><a href="#">tooltip</a></OverlayTrigger> here</p>
 
             <hr />
 

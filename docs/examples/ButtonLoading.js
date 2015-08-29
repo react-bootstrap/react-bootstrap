@@ -9,7 +9,7 @@ const LoadingButton = React.createClass({
     let isLoading = this.state.isLoading;
     return (
       <Button
-        bsStyle='primary'
+        bsStyle="primary"
         disabled={isLoading}
         onClick={!isLoading ? this.handleClick : null}>
         {isLoading ? 'Loading...' : 'Loading state'}

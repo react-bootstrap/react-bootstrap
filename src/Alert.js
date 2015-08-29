@@ -38,7 +38,7 @@ const Alert = React.createClass({
     classes['alert-dismissable'] = isDismissable;
 
     return (
-      <div {...this.props} role='alert' className={classNames(this.props.className, classes)}>
+      <div {...this.props} role="alert" className={classNames(this.props.className, classes)}>
         {isDismissable ? this.renderDismissButton() : null}
         {this.props.children}
       </div>

@@ -4,7 +4,7 @@ import Button from './Button';
 import CustomPropTypes from './utils/CustomPropTypes';
 import SafeAnchor from './SafeAnchor';
 
-const CARET = <span> <span className='caret' /></span>;
+const CARET = <span> <span className="caret" /></span>;
 
 export default class DropdownToggle extends React.Component {
   render() {
@@ -20,7 +20,7 @@ export default class DropdownToggle extends React.Component {
       <Component
         {...this.props}
         className={classNames(classes, this.props.className)}
-        type='button'
+        type="button"
         aria-haspopup
         aria-expanded={this.props.open}>
         {this.props.title || this.props.children}{caret}

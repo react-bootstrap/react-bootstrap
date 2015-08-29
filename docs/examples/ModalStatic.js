@@ -1,6 +1,6 @@
 
 const modalInstance = (
-  <div className='static-modal'>
+  <div className="static-modal">
     <Modal.Dialog>
       <Modal.Header>
         <Modal.Title>Modal title</Modal.Title>
@@ -12,7 +12,7 @@ const modalInstance = (
 
       <Modal.Footer>
         <Button>Close</Button>
-        <Button bsStyle='primary'>Save changes</Button>
+        <Button bsStyle="primary">Save changes</Button>
       </Modal.Footer>
 
     </Modal.Dialog>

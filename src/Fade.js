@@ -11,9 +11,9 @@ class Fade extends React.Component {
       <Transition
         {...this.props}
         timeout={timeout}
-        className='fade'
-        enteredClassName='in'
-        enteringClassName='in'
+        className="fade"
+        enteredClassName="in"
+        enteringClassName="in"
       >
         {this.props.children}
       </Transition>
@@ -95,4 +95,3 @@ Fade.defaultProps = {
 };
 
 export default Fade;
-
