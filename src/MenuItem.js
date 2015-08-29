@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { all } from 'react-prop-types';
+import all from 'react-prop-types/lib/all';
 import SafeAnchor from './SafeAnchor';
 
 export default class MenuItem extends React.Component {

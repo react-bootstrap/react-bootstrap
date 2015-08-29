@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import createSelectedEvent from './utils/createSelectedEvent';
-import { elementType } from 'react-prop-types';
+import elementType from 'react-prop-types/lib/elementType';
 
 const PaginationButton = React.createClass({
   mixins: [BootstrapMixin],

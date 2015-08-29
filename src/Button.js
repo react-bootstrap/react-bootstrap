@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
-import { elementType } from 'react-prop-types';
+import elementType from 'react-prop-types/lib/elementType';
 import ButtonInput from './ButtonInput';
 
 const Button = React.createClass({

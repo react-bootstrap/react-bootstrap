@@ -5,7 +5,7 @@ import domUtils from './utils/domUtils';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import EventListener from './utils/EventListener';
 import createChainedFunction from './utils/createChainedFunction';
-import { elementType } from 'react-prop-types';
+import elementType from 'react-prop-types/lib/elementType';
 
 import Portal from 'react-overlays/lib/Portal';
 import Fade from './Fade';

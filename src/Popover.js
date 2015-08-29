@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
-import { isRequiredForA11y } from 'react-prop-types';
+import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
 const Popover = React.createClass({
 

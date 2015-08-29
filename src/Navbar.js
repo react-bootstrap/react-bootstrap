@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
-import { elementType } from 'react-prop-types';
+import elementType from 'react-prop-types/lib/elementType';
 
 const Navbar = React.createClass({
   mixins: [BootstrapMixin],

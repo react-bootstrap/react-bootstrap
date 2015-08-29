@@ -3,7 +3,7 @@
 
 import React, { cloneElement } from 'react';
 import BaseOverlay from 'react-overlays/lib/Overlay';
-import { elementType } from 'react-prop-types';
+import elementType from 'react-prop-types/lib/elementType';
 import Fade from './Fade';
 import classNames from 'classnames';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import { elementType } from 'react-prop-types';
+import elementType from 'react-prop-types/lib/elementType';
 
 const Row = React.createClass({
   propTypes: {
