@@ -4,7 +4,6 @@ class Example extends React.Component {
     this.state = { show: false };
   }
   render(){
-
     return (
       <ButtonToolbar>
         <Button

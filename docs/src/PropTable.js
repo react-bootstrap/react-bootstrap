@@ -68,7 +68,6 @@ const PropTable = React.createClass({
   },
 
   _renderRows(propsData){
-
     return Object.keys(propsData)
       .sort()
       .filter(propName => propsData[propName].type && !propsData[propName].doclets.private )

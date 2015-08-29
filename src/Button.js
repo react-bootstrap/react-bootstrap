@@ -60,7 +60,6 @@ const Button = React.createClass({
   },
 
   renderAnchor(classes) {
-
     let Component = this.props.componentClass || 'a';
     let href = this.props.href || '#';
     classes.disabled = this.props.disabled;

@@ -20,7 +20,6 @@
     "func-names": 0,
     "guard-for-in": 0,
     "one-var": [2, { "initialized": "never" }],
-    "padded-blocks": 0,
     "prefer-const": 0,
     "key-spacing": 0,
     "no-eq-null": 0,

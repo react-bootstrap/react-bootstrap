@@ -18,7 +18,6 @@ class DropdownMenu extends React.Component {
   }
 
   handleKeyDown(event) {
-
     switch(event.keyCode) {
     case keycode.codes.down:
       this.focusNext();
