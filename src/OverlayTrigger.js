@@ -175,6 +175,7 @@ const OverlayTrigger = React.createClass({
 
   render() {
     const trigger = React.Children.only(this.props.children);
+    const triggerProps = trigger.props;
 
     const props = {
       'aria-describedby': this.props.overlay.props.id
@@ -183,7 +184,7 @@ const OverlayTrigger = React.createClass({
     // create in render otherwise owner is lost...
     this._overlay = this.getOverlay();
 
-    props.onClick = createChainedFunction(trigger.props.onClick, this.props.onClick);
+    props.onClick = createChainedFunction(triggerProps.onClick, this.props.onClick);
 
     if (isOneOf('click', this.props.trigger)) {
       props.onClick = createChainedFunction(this.toggle, props.onClick);
@@ -194,13 +195,13 @@ const OverlayTrigger = React.createClass({
         '[react-bootstrap] Specifying only the `"hover"` trigger limits the visibilty of the overlay to just mouse users. ' +
         'Consider also including the `"focus"` trigger so that touch and keyboard only users can see the overlay as well.');
 
-      props.onMouseOver = createChainedFunction(this.handleDelayedShow, this.props.onMouseOver);
-      props.onMouseOut = createChainedFunction(this.handleDelayedHide, this.props.onMouseOut);
+      props.onMouseOver = createChainedFunction(this.handleDelayedShow, this.props.onMouseOver, triggerProps.onMouseOver);
+      props.onMouseOut = createChainedFunction(this.handleDelayedHide, this.props.onMouseOut, triggerProps.onMouseOut);
     }
 
     if (isOneOf('focus', this.props.trigger)) {
-      props.onFocus = createChainedFunction(this.handleDelayedShow, this.props.onFocus);
-      props.onBlur = createChainedFunction(this.handleDelayedHide, this.props.onBlur);
+      props.onFocus = createChainedFunction(this.handleDelayedShow, this.props.onFocus, triggerProps.onFocus);
+      props.onBlur = createChainedFunction(this.handleDelayedHide, this.props.onBlur, triggerProps.onBlur);
     }
 
     return cloneElement(
