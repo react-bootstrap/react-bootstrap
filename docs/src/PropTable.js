@@ -32,7 +32,6 @@ function getPropsData(component, metadata){
 }
 
 
-
 const PropTable = React.createClass({
 
   contextTypes: {
@@ -201,7 +200,6 @@ const PropTable = React.createClass({
     );
   }
 });
-
 
 
 export default PropTable;

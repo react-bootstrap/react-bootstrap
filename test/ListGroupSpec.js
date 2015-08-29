@@ -122,7 +122,6 @@ describe('ListGroup', function () {
   });
 
 
-
   it('Should output a "div" when "ListGroupItem" children have an onClick handler', function () {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroup>

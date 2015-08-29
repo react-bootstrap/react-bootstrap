@@ -902,7 +902,6 @@ const ComponentsPage = React.createClass({
               </div>
 
 
-
               <div className='col-md-3'>
                 <Affix
                   className='bs-docs-sidebar hidden-print'
