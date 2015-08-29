@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils from './utils/bootstrapUtils';
 import Collapse from './Collapse';
 import classNames from 'classnames';
 
@@ -7,9 +7,10 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
 
 const Nav = React.createClass({
-  mixins: [BootstrapMixin],
+
 
   propTypes: {
+    ...bootstrapUtils.propTypes,
     activeHref: React.PropTypes.string,
     activeKey: React.PropTypes.any,
     bsStyle: React.PropTypes.oneOf(['tabs', 'pills']),
@@ -73,7 +74,7 @@ const Nav = React.createClass({
   },
 
   renderUl() {
-    const classes = this.getBsClassSet();
+    const classes = bootstrapUtils.getClassSet(this.props);
 
     classes['nav-stacked'] = this.props.stacked;
     classes['nav-justified'] = this.props.justified;

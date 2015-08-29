@@ -4,13 +4,14 @@
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const PanelGroup = React.createClass({
-  mixins: [BootstrapMixin],
+
 
   propTypes: {
+    ...bootstrapUtils.propTypes,
     accordion: React.PropTypes.bool,
     activeKey: React.PropTypes.any,
     className: React.PropTypes.string,
@@ -35,7 +36,7 @@ const PanelGroup = React.createClass({
   },
 
   render() {
-    let classes = this.getBsClassSet();
+    let classes = bootstrapUtils.getClassSet(this.props);
     let {className, ...props} = this.props;
     if (this.props.accordion) { props.role = 'tablist'; }
     return (

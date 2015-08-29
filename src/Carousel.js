@@ -1,11 +1,9 @@
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import Glyphicon from './Glyphicon';
 
 const Carousel = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
     slide: React.PropTypes.bool,

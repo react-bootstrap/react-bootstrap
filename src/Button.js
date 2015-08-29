@@ -1,13 +1,14 @@
 import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils from './utils/bootstrapUtils';
 import elementType from 'react-prop-types/lib/elementType';
 import ButtonInput from './ButtonInput';
 
 const Button = React.createClass({
-  mixins: [BootstrapMixin],
+
 
   propTypes: {
+    ...bootstrapUtils.propTypes,
     active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     block: React.PropTypes.bool,
@@ -40,7 +41,7 @@ const Button = React.createClass({
   },
 
   render() {
-    let classes = this.props.navDropdown ? {} : this.getBsClassSet();
+    let classes = this.props.navDropdown ? {} : bootstrapUtils.getClassSet(this.props);
     let renderFuncName;
 
     classes = {

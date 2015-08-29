@@ -1,5 +1,5 @@
 import React from 'react';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils from './utils/bootstrapUtils';
 import Button from './Button';
 import Dropdown from './Dropdown';
 import SplitToggle from './SplitToggle';
@@ -51,7 +51,7 @@ class SplitButton extends React.Component {
 SplitButton.propTypes = {
   //dropup: React.PropTypes.bool,
   ...Dropdown.propTypes,
-  ...BootstrapMixin.propTypes,
+  ...bootstrapUtils.propTypes,
 
   /**
    * @private

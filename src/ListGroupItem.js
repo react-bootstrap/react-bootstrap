@@ -1,11 +1,12 @@
 import React, { cloneElement } from 'react';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils from './utils/bootstrapUtils';
 import classNames from 'classnames';
 
 const ListGroupItem = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
+    ...bootstrapUtils.propTypes,
+
     bsStyle: React.PropTypes.oneOf(['danger', 'info', 'success', 'warning']),
     className: React.PropTypes.string,
     active: React.PropTypes.any,
@@ -26,7 +27,7 @@ const ListGroupItem = React.createClass({
   },
 
   render() {
-    let classes = this.getBsClassSet();
+    let classes = bootstrapUtils.getClassSet(this.props);
 
     classes.active = this.props.active;
     classes.disabled = this.props.disabled;

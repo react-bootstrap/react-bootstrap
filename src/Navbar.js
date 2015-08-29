@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils from './utils/bootstrapUtils';
 import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
@@ -7,9 +7,9 @@ import createChainedFunction from './utils/createChainedFunction';
 import elementType from 'react-prop-types/lib/elementType';
 
 const Navbar = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
+    ...bootstrapUtils.propTypes,
     fixedTop: React.PropTypes.bool,
     fixedBottom: React.PropTypes.bool,
     staticTop: React.PropTypes.bool,
@@ -74,7 +74,7 @@ const Navbar = React.createClass({
   },
 
   render() {
-    let classes = this.getBsClassSet();
+    let classes = bootstrapUtils.getClassSet(this.props);
     let ComponentClass = this.props.componentClass;
 
     classes['navbar-fixed-top'] = this.props.fixedTop;

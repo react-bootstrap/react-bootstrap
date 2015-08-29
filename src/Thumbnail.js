@@ -1,12 +1,13 @@
 import React from 'react';
 import classSet from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
 import SafeAnchor from './SafeAnchor';
+import bootstrapUtils from './utils/bootstrapUtils';
 
 const Thumbnail = React.createClass({
-  mixins: [BootstrapMixin],
+
 
   propTypes: {
+    ...bootstrapUtils.propTypes,
     alt: React.PropTypes.string,
     href: React.PropTypes.string,
     src: React.PropTypes.string
@@ -19,7 +20,7 @@ const Thumbnail = React.createClass({
   },
 
   render() {
-    let classes = this.getBsClassSet();
+    let classes = bootstrapUtils.getClassSet(this.props);
 
     if(this.props.href) {
       return (

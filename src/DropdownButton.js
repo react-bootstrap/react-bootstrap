@@ -1,5 +1,5 @@
 import React from 'react';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils from './utils/bootstrapUtils';
 import Dropdown from './Dropdown';
 import NavDropdown from './NavDropdown';
 import all from 'react-prop-types/lib/all';
@@ -56,7 +56,7 @@ DropdownButton.propTypes = {
   ]),
   title: React.PropTypes.node.isRequired,
   ...Dropdown.propTypes,
-  ...BootstrapMixin.propTypes
+  ...bootstrapUtils.propTypes
 };
 
 DropdownButton.defaultProps = {

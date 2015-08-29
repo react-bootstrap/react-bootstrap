@@ -1,9 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils from './utils/bootstrapUtils';
 
 const Label = React.createClass({
-  mixins: [BootstrapMixin],
+
+  propTypes: {
+    ...bootstrapUtils.propTypes
+  },
 
   getDefaultProps() {
     return {
@@ -13,7 +16,7 @@ const Label = React.createClass({
   },
 
   render() {
-    let classes = this.getBsClassSet();
+    let classes = bootstrapUtils.getClassSet(this.props);
 
     return (
       <span {...this.props} className={classNames(this.props.className, classes)}>

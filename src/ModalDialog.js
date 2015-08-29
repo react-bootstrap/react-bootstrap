@@ -1,12 +1,12 @@
 /*eslint-disable react/prop-types */
 import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils from './utils/bootstrapUtils';
 
 const ModalDialog = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
+    ...bootstrapUtils.propTypes,
     /**
      * A Callback fired when the header closeButton or non-static backdrop is clicked.
      * @type {function}
@@ -34,7 +34,7 @@ const ModalDialog = React.createClass({
       ...this.props.style
     };
     let bsClass = this.props.bsClass;
-    let dialogClasses = this.getBsClassSet();
+    let dialogClasses = bootstrapUtils.getClassSet(this.props);
 
     delete dialogClasses.modal;
     dialogClasses[`${bsClass}-dialog`] = true;

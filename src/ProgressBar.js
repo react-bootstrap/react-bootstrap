@@ -3,13 +3,15 @@
 
 import React, { cloneElement, PropTypes } from 'react';
 import Interpolate from './Interpolate';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils from './utils/bootstrapUtils';
 import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const ProgressBar = React.createClass({
+
   propTypes: {
+    ...bootstrapUtils.propTypes,
     min: PropTypes.number,
     now: PropTypes.number,
     max: PropTypes.number,
@@ -25,8 +27,6 @@ const ProgressBar = React.createClass({
      */
     isChild: PropTypes.bool
   },
-
-  mixins: [BootstrapMixin],
 
   getDefaultProps() {
     return {
@@ -98,7 +98,7 @@ const ProgressBar = React.createClass({
       );
     }
 
-    const classes = classNames(className, this.getBsClassSet(), {
+    const classes = classNames(className, bootstrapUtils.getClassSet(this.props), {
       active: this.props.active,
       'progress-bar-striped': this.props.active || this.props.striped
     });

@@ -1,11 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils from './utils/bootstrapUtils';
 
 const Alert = React.createClass({
-  mixins: [BootstrapMixin],
+
 
   propTypes: {
+    ...bootstrapUtils.propTypes,
     onDismiss: React.PropTypes.func,
     dismissAfter: React.PropTypes.number,
     closeLabel: React.PropTypes.string
@@ -32,7 +33,7 @@ const Alert = React.createClass({
   },
 
   render() {
-    let classes = this.getBsClassSet();
+    let classes = bootstrapUtils.getClassSet(this.props);
     let isDismissable = !!this.props.onDismiss;
 
     classes['alert-dismissable'] = isDismissable;
