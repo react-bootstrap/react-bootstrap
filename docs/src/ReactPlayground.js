@@ -16,7 +16,6 @@ const Carousel = require('../../src/Carousel');
 const CarouselItem = require('../../src/CarouselItem');
 const Col = require('../../src/Col');
 const Collapse = require('../../src/Collapse');
-const CollapsibleMixin = require('../../src/CollapsibleMixin');
 const CollapsibleNav = require('../../src/CollapsibleNav');
 const Dropdown = require('../../src/Dropdown').default;
 const DropdownButton = require('../../src/DropdownButton');

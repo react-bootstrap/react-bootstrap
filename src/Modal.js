@@ -7,7 +7,12 @@ import EventListener from './utils/EventListener';
 import createChainedFunction from './utils/createChainedFunction';
 import elementType from 'react-prop-types/lib/elementType';
 
+import canUseDOM from 'dom-helpers/util/inDOM';
+import contains from 'dom-helpers/query/contains';
+import activeElement from 'dom-helpers/activeElement';
+
 import Portal from 'react-overlays/lib/Portal';
+
 import Fade from './Fade';
 import ModalDialog from './ModalDialog';
 import Body from './ModalBody';
@@ -365,15 +370,15 @@ const Modal = React.createClass({
   },
 
   checkForFocus() {
-    if (domUtils.canUseDom) {
-      this.lastFocus = domUtils.activeElement(document);
+    if (canUseDOM) {
+      this.lastFocus = activeElement(document);
     }
   },
 
   focusModalContent() {
     let modalContent = React.findDOMNode(this.refs.dialog);
-    let current = domUtils.activeElement(domUtils.ownerDocument(this));
-    let focusInModal = current && domUtils.contains(modalContent, current);
+    let current = activeElement(domUtils.ownerDocument(this));
+    let focusInModal = current && contains(modalContent, current);
 
 
     if (modalContent && this.props.autoFocus && !focusInModal) {
@@ -394,10 +399,10 @@ const Modal = React.createClass({
       return;
     }
 
-    let active = domUtils.activeElement(domUtils.ownerDocument(this));
+    let active = activeElement(domUtils.ownerDocument(this));
     let modal = React.findDOMNode(this.refs.dialog);
 
-    if (modal && modal !== active && !domUtils.contains(modal, active)) {
+    if (modal && modal !== active && !contains(modal, active)) {
       modal.focus();
     }
   },
@@ -411,7 +416,7 @@ const Modal = React.createClass({
   },
 
   _getStyles() {
-    if (!domUtils.canUseDom) {
+    if (!canUseDOM) {
       return {};
     }
 

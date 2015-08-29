@@ -1,17 +1,6 @@
 import React from 'react';
-import canUseDom from 'dom-helpers/util/inDOM';
-
 import getOwnerDocument from 'dom-helpers/ownerDocument';
 import getOwnerWindow from 'dom-helpers/ownerWindow';
-
-import contains from 'dom-helpers/query/contains';
-import activeElement from 'dom-helpers/activeElement';
-
-import getOffset from 'dom-helpers/query/offset';
-import offsetParent from 'dom-helpers/query/offsetParent';
-import getPosition from 'dom-helpers/query/position';
-
-import css from 'dom-helpers/style';
 
 function ownerDocument(componentOrElement) {
   let elem = React.findDOMNode(componentOrElement);
@@ -21,11 +10,6 @@ function ownerDocument(componentOrElement) {
 function ownerWindow(componentOrElement) {
   let doc = ownerDocument(componentOrElement);
   return getOwnerWindow(doc);
-}
-
-//TODO remove in 0.26
-function getComputedStyles(elem) {
-  return ownerDocument(elem).defaultView.getComputedStyle(elem, null);
 }
 
 /**
@@ -57,16 +41,8 @@ function getSize(elem) {
 }
 
 export default {
-  canUseDom,
-  css,
-  getComputedStyles,
-  contains,
   ownerWindow,
   ownerDocument,
-  getOffset,
   getDocumentHeight,
-  getPosition,
   getSize,
-  activeElement,
-  offsetParent
 };
