@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import tbsUtils from './utils/bootstrapUtils';
+import tbsUtils, { bsClass } from './utils/bootstrapUtils';
 
 class ModalTitle extends React.Component {
   render() {
@@ -14,12 +14,5 @@ class ModalTitle extends React.Component {
   }
 }
 
-ModalTitle.propTypes = {
-  bsClass: React.PropTypes.string
-};
 
-ModalTitle.defaultProps = {
-  bsClass: 'modal'
-};
-
-export default ModalTitle;
+export default bsClass('modal', ModalTitle);

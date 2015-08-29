@@ -1,18 +1,23 @@
 import React from 'react';
 import classNames from 'classnames';
-import tbsUtils from './utils/bootstrapUtils';
+import tbsUtils, { bsClass } from './utils/bootstrapUtils';
+import createChainedFunction from './utils/createChainedFunction';
 
 class ModalHeader extends React.Component {
+
   render() {
+    let onHide = createChainedFunction(this.context.$bs_onModalHide, this.props.onHide);
+
     return (
       <div
         {...this.props}
-        className={classNames(this.props.className, tbsUtils.prefix(this.props, 'header'))}>
+        className={classNames(this.props.className, tbsUtils.prefix(this.props, 'header'))}
+      >
         { this.props.closeButton &&
           <button
             type="button"
             className="close"
-            onClick={this.props.onHide}>
+            onClick={onHide}>
             <span aria-hidden="true">
               &times;
             </span>
@@ -23,9 +28,6 @@ class ModalHeader extends React.Component {
     );
   }
 }
-
-// used in liue of parent contexts right now to auto wire the close button
-ModalHeader.__isModalHeader = true;
 
 ModalHeader.propTypes = {
   /**
@@ -48,11 +50,14 @@ ModalHeader.propTypes = {
   onHide: React.PropTypes.func
 };
 
+ModalHeader.contextTypes = {
+  '$bs_onModalHide': React.PropTypes.func
+};
+
 ModalHeader.defaultProps = {
   'aria-label': 'Close',
-  bsClass: 'modal',
   closeButton: false
 };
 
 
-export default ModalHeader;
+export default bsClass('modal', ModalHeader);
