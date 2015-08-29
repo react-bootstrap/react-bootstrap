@@ -30,7 +30,101 @@ function createChainableTypeChecker(validate) {
   return chainedCheckType;
 }
 
-const CustomPropTypes = {
+function errMsg(props, propName, componentName, msgContinuation) {
+  return `Invalid prop '${propName}' of value '${props[propName]}'` +
+    ` supplied to '${componentName}'${msgContinuation}`;
+}
+
+function createMountableChecker() {
+  function validate(props, propName, componentName) {
+    if (typeof props[propName] !== 'object' ||
+      typeof props[propName].render !== 'function' && props[propName].nodeType !== 1) {
+      return new Error(
+        errMsg(props, propName, componentName,
+          ', expected a DOM element or an object that has a `render` method')
+      );
+    }
+  }
+
+  return createChainableTypeChecker(validate);
+}
+
+function createKeyOfChecker(obj) {
+  function validate(props, propName, componentName) {
+    let propValue = props[propName];
+    if (!obj.hasOwnProperty(propValue)) {
+      let valuesString = JSON.stringify(Object.keys(obj));
+      return new Error(
+        errMsg(props, propName, componentName, `, expected one of ${valuesString}.`)
+      );
+    }
+  }
+  return createChainableTypeChecker(validate);
+}
+
+function createSinglePropFromChecker(arrOfProps) {
+  function validate(props, propName, componentName) {
+    const usedPropCount = arrOfProps
+      .map(listedProp => props[listedProp])
+      .reduce((acc, curr) => acc + (curr !== undefined ? 1 : 0), 0);
+
+    if (usedPropCount > 1) {
+      const [first, ...others] = arrOfProps;
+      const message = `${others.join(', ')} and ${first}`;
+      return new Error(
+        `Invalid prop '${propName}', only one of the following ` +
+        `may be provided: ${message}`
+      );
+    }
+  }
+  return validate;
+}
+
+function all(propTypes) {
+  if (propTypes === undefined) {
+    throw new Error('No validations provided');
+  }
+
+  if (!(propTypes instanceof Array)) {
+    throw new Error('Invalid argument must be an array');
+  }
+
+  if (propTypes.length === 0) {
+    throw new Error('No validations provided');
+  }
+
+  return function(props, propName, componentName) {
+    for(let i = 0; i < propTypes.length; i++) {
+      let result = propTypes[i](props, propName, componentName);
+
+      if (result !== undefined && result !== null) {
+        return result;
+      }
+    }
+  };
+}
+
+function createElementTypeChecker() {
+  function validate(props, propName, componentName) {
+    let errBeginning = errMsg(props, propName, componentName,
+      '. Expected an Element `type`');
+
+    if (typeof props[propName] !== 'function') {
+      if (React.isValidElement(props[propName])) {
+        return new Error(errBeginning + ', not an actual Element');
+      }
+
+      if (typeof props[propName] !== 'string') {
+        return new Error(errBeginning +
+          ' such as a tag name or return value of React.createClass(...)');
+      }
+    }
+  }
+
+  return createChainableTypeChecker(validate);
+}
+
+export default {
 
   deprecated(propType, explanation){
     return function(props, propName, componentName){
@@ -152,99 +246,3 @@ const CustomPropTypes = {
 
   all
 };
-
-function errMsg(props, propName, componentName, msgContinuation) {
-  return `Invalid prop '${propName}' of value '${props[propName]}'` +
-    ` supplied to '${componentName}'${msgContinuation}`;
-}
-
-function createMountableChecker() {
-  function validate(props, propName, componentName) {
-    if (typeof props[propName] !== 'object' ||
-      typeof props[propName].render !== 'function' && props[propName].nodeType !== 1) {
-      return new Error(
-        errMsg(props, propName, componentName,
-          ', expected a DOM element or an object that has a `render` method')
-      );
-    }
-  }
-
-  return createChainableTypeChecker(validate);
-}
-
-function createKeyOfChecker(obj) {
-  function validate(props, propName, componentName) {
-    let propValue = props[propName];
-    if (!obj.hasOwnProperty(propValue)) {
-      let valuesString = JSON.stringify(Object.keys(obj));
-      return new Error(
-        errMsg(props, propName, componentName, `, expected one of ${valuesString}.`)
-      );
-    }
-  }
-  return createChainableTypeChecker(validate);
-}
-
-function createSinglePropFromChecker(arrOfProps) {
-  function validate(props, propName, componentName) {
-    const usedPropCount = arrOfProps
-      .map(listedProp => props[listedProp])
-      .reduce((acc, curr) => acc + (curr !== undefined ? 1 : 0), 0);
-
-    if (usedPropCount > 1) {
-      const [first, ...others] = arrOfProps;
-      const message = `${others.join(', ')} and ${first}`;
-      return new Error(
-        `Invalid prop '${propName}', only one of the following ` +
-        `may be provided: ${message}`
-      );
-    }
-  }
-  return validate;
-}
-
-function all(propTypes) {
-  if (propTypes === undefined) {
-    throw new Error('No validations provided');
-  }
-
-  if (!(propTypes instanceof Array)) {
-    throw new Error('Invalid argument must be an array');
-  }
-
-  if (propTypes.length === 0) {
-    throw new Error('No validations provided');
-  }
-
-  return function(props, propName, componentName) {
-    for(let i = 0; i < propTypes.length; i++) {
-      let result = propTypes[i](props, propName, componentName);
-
-      if (result !== undefined && result !== null) {
-        return result;
-      }
-    }
-  };
-}
-
-function createElementTypeChecker() {
-  function validate(props, propName, componentName) {
-    let errBeginning = errMsg(props, propName, componentName,
-      '. Expected an Element `type`');
-
-    if (typeof props[propName] !== 'function') {
-      if (React.isValidElement(props[propName])) {
-        return new Error(errBeginning + ', not an actual Element');
-      }
-
-      if (typeof props[propName] !== 'string') {
-        return new Error(errBeginning +
-          ' such as a tag name or return value of React.createClass(...)');
-      }
-    }
-  }
-
-  return createChainableTypeChecker(validate);
-}
-
-export default CustomPropTypes;

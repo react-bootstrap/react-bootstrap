@@ -81,14 +81,6 @@ import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import CustomPropTypes from './utils/CustomPropTypes';
 
-export const utils = {
-  childrenValueInputValidation,
-  createChainedFunction,
-  ValidComponentChildren,
-  CustomPropTypes,
-  domUtils: createDeprecationWrapper(domUtils, 'utils/domUtils', 'npm install dom-helpers'),
-};
-
 function createDeprecationWrapper(obj, deprecated, instead, link){
   let wrapper = {};
 
@@ -108,3 +100,11 @@ function createDeprecationWrapper(obj, deprecated, instead, link){
 
   return wrapper;
 }
+
+export const utils = {
+  childrenValueInputValidation,
+  createChainedFunction,
+  ValidComponentChildren,
+  CustomPropTypes,
+  domUtils: createDeprecationWrapper(domUtils, 'utils/domUtils', 'npm install dom-helpers'),
+};
