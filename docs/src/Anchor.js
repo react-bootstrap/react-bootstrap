@@ -9,8 +9,8 @@ const Anchor = React.createClass({
   },
   render() {
     return (
-      <a id={this.props.id} href={'#' + this.props.id} className='anchor'>
-        <span className='anchor-icon'>#</span>
+      <a id={this.props.id} href={'#' + this.props.id} className="anchor">
+        <span className="anchor-icon">#</span>
         {this.props.children}
       </a>
     );

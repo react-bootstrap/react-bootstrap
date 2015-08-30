@@ -65,7 +65,7 @@ const ListGroupItem = React.createClass({
   renderButton(classes) {
     return (
       <button
-        type='button'
+        type="button"
         {...this.props}
         className={classNames(this.props.className, classes)}>
         {this.props.children}
@@ -91,14 +91,14 @@ const ListGroupItem = React.createClass({
       });
     } else {
       header = (
-        <h4 key='header' className="list-group-item-heading">
+        <h4 key="header" className="list-group-item-heading">
           {this.props.header}
         </h4>
       );
     }
 
     let content = (
-      <p key='content' className="list-group-item-text">
+      <p key="content" className="list-group-item-text">
         {this.props.children}
       </p>
     );

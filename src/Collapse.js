@@ -47,14 +47,14 @@ class Collapse extends React.Component {
 
     return (
       <Transition
-        ref='transition'
+        ref="transition"
         {...this.props}
         aria-expanded={this.props.role ? this.props.in : null}
         className={this._dimension() === 'width' ? 'width' : ''}
-        exitedClassName='collapse'
-        exitingClassName='collapsing'
-        enteredClassName='collapse in'
-        enteringClassName='collapsing'
+        exitedClassName="collapse"
+        exitingClassName="collapsing"
+        enteredClassName="collapse in"
+        enteringClassName="collapsing"
         onEnter={enter}
         onEntering={entering}
         onEntered={entered}

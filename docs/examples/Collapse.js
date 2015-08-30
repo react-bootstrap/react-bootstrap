@@ -6,7 +6,6 @@ class Example extends React.Component {
   }
 
   render(){
-
     return (
       <div>
         <Button onClick={ ()=> this.setState({ open: !this.state.open })}>

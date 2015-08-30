@@ -47,7 +47,6 @@ export default {
             `(children) ${component} - Duplicate children detected of bsRole: ${duplicate}. ` +
             `Only one child each allowed with the following bsRoles: ${roles.join(', ')}`);
         }
-
       });
   }
 };

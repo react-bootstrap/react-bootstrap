@@ -17,7 +17,7 @@ const ProgressBar = React.createClass({
     srOnly: PropTypes.bool,
     striped: PropTypes.bool,
     active: PropTypes.bool,
-    children: onlyProgressBar,
+    children: onlyProgressBar, // eslint-disable-line no-use-before-define
     className: React.PropTypes.string,
     interpolateClass: PropTypes.node,
     /**

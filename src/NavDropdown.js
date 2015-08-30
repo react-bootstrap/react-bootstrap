@@ -7,7 +7,7 @@ class NavDropdown extends React.Component {
     let { children, title, noCaret, ...props } = this.props;
 
     return (
-      <Dropdown {...props} componentClass='li'>
+      <Dropdown {...props} componentClass="li">
         <Dropdown.Toggle
           useAnchor
           disabled={props.disabled}

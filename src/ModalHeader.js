@@ -9,7 +9,7 @@ class ModalHeader extends React.Component {
         className={classNames(this.props.className, this.props.modalClassName)}>
         { this.props.closeButton &&
           <button
-            className='close'
+            className="close"
             onClick={this.props.onHide}>
             <span aria-hidden="true">
               &times;

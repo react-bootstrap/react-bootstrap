@@ -45,7 +45,6 @@ if (development) {
       });
     });
   });
-
 } else {
   app.use(express.static(path.join(__dirname, '../docs-built')));
 }

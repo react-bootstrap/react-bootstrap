@@ -19,7 +19,7 @@ const Example = React.createClass({
 
     return (
       <div style={{ height: 100, paddingLeft: 150, position: 'relative' }}>
-        <Button ref='target' onClick={this.toggle}>
+        <Button ref="target" onClick={this.toggle}>
           Click me!
         </Button>
 
