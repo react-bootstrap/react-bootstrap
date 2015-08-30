@@ -1,26 +1,5 @@
 const styleMaps = {
-  CLASSES: {
-    'alert': 'alert',
-    'button': 'btn',
-    'button-group': 'btn-group',
-    'button-toolbar': 'btn-toolbar',
-    'column': 'col',
-    'input-group': 'input-group',
-    'form': 'form',
-    'glyphicon': 'glyphicon',
-    'label': 'label',
-    'thumbnail': 'thumbnail',
-    'list-group-item': 'list-group-item',
-    'panel': 'panel',
-    'panel-group': 'panel-group',
-    'pagination': 'pagination',
-    'progress-bar': 'progress-bar',
-    'nav': 'nav',
-    'navbar': 'navbar',
-    'modal': 'modal',
-    'row': 'row',
-    'well': 'well'
-  },
+
   STYLES: [
     'default',
     'primary',
