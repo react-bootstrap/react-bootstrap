@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import tbsUtils from './utils/bootstrapUtils';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
 const Popover = React.createClass({
@@ -51,13 +52,14 @@ const Popover = React.createClass({
 
   getDefaultProps() {
     return {
-      placement: 'right'
+      placement: 'right',
+      bsClass: 'popover'
     };
   },
 
   render() {
     const classes = {
-      'popover': true,
+      [tbsUtils.prefix(this.props)]: true,
       [this.props.placement]: true
     };
 
@@ -78,7 +80,7 @@ const Popover = React.createClass({
       <div role='tooltip' {...this.props} className={classNames(this.props.className, classes)} style={style} title={null}>
         <div className="arrow" style={arrowStyle} />
         {this.props.title ? this.renderTitle() : null}
-        <div className="popover-content">
+        <div className={tbsUtils.prefix(this.props, 'content')}>
           {this.props.children}
         </div>
       </div>
@@ -87,7 +89,9 @@ const Popover = React.createClass({
 
   renderTitle() {
     return (
-      <h3 className="popover-title">{this.props.title}</h3>
+      <h3 className={tbsUtils.prefix(this.props, 'title')}>
+        {this.props.title}
+      </h3>
     );
   }
 });

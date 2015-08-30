@@ -1,6 +1,12 @@
 import { PropTypes } from 'react';
 import styleMaps from '../styleMaps';
 import keyOf from 'react-prop-types/lib/keyOf';
+import invariant from 'react/lib/invariant';
+
+function prefix(props = {}, variant) {
+  invariant((props.bsClass || '').trim(), 'Must provide a bsClass for components');
+  return props.bsClass + (variant ? '-' + variant : '');
+}
 
 export default {
 
@@ -23,38 +29,26 @@ export default {
     bsSize: keyOf(styleMaps.SIZES)
   },
 
+  prefix,
+
   getClassSet(props) {
     let classes = {};
-    let bsClass;
-
-    if (props.bsClass && styleMaps.CLASSES[props.bsClass]) {
-      bsClass = styleMaps.CLASSES[props.bsClass];
-    }
+    let bsClass = (props.bsClass || '').trim();
 
     if (bsClass) {
       classes[bsClass] = true;
 
-      let prefix = bsClass + '-';
-
       let bsSize = props.bsSize && styleMaps.SIZES[props.bsSize];
 
       if (bsSize) {
-        classes[prefix + bsSize] = true;
+        classes[prefix(props, bsSize)] = true;
       }
 
       if (props.bsStyle) {
-        if (styleMaps.STYLES.indexOf(props.bsStyle) >= 0) {
-          classes[prefix + props.bsStyle] = true;
-        } else {
-          classes[props.bsStyle] = true;
-        }
+        classes[prefix(props, props.bsStyle)] = true;
       }
     }
 
     return classes;
-  },
-
-  prefix(props, variant) {
-    return styleMaps.CLASSES[props.bsClass] + '-' + variant;
   }
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import tbsUtils from './utils/bootstrapUtils';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
 const Tooltip = React.createClass({
@@ -51,13 +52,14 @@ const Tooltip = React.createClass({
 
   getDefaultProps() {
     return {
+      bsClass: 'tooltip',
       placement: 'right'
     };
   },
 
   render() {
     const classes = {
-      'tooltip': true,
+      [tbsUtils.prefix(this.props)]: true,
       [this.props.placement]: true
     };
 
@@ -74,8 +76,8 @@ const Tooltip = React.createClass({
 
     return (
         <div role='tooltip' {...this.props} className={classNames(this.props.className, classes)} style={style}>
-          <div className="tooltip-arrow" style={arrowStyle} />
-          <div className="tooltip-inner">
+          <div className={tbsUtils.prefix(this.props, 'arrow')} style={arrowStyle} />
+          <div className={tbsUtils.prefix(this.props, 'inner')}>
             {this.props.children}
           </div>
         </div>

@@ -10,7 +10,7 @@ const ButtonToolbar = React.createClass({
 
   getDefaultProps() {
     return {
-      bsClass: 'button-toolbar'
+      bsClass: 'btn-toolbar'
     };
   },
 

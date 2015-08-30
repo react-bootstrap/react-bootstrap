@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import bootstrapUtils from './utils/bootstrapUtils';
+import tbsUtils from './utils/bootstrapUtils';
 import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
@@ -9,7 +9,7 @@ import elementType from 'react-prop-types/lib/elementType';
 const Navbar = React.createClass({
 
   propTypes: {
-    ...bootstrapUtils.propTypes,
+    ...tbsUtils.propTypes,
     fixedTop: React.PropTypes.bool,
     fixedBottom: React.PropTypes.bool,
     staticTop: React.PropTypes.bool,
@@ -74,13 +74,13 @@ const Navbar = React.createClass({
   },
 
   render() {
-    let classes = bootstrapUtils.getClassSet(this.props);
+    let classes = tbsUtils.getClassSet(this.props);
     let ComponentClass = this.props.componentClass;
 
-    classes['navbar-fixed-top'] = this.props.fixedTop;
-    classes['navbar-fixed-bottom'] = this.props.fixedBottom;
-    classes['navbar-static-top'] = this.props.staticTop;
-    classes['navbar-inverse'] = this.props.inverse;
+    classes[tbsUtils.prefix(this.props, 'fixed-top')] = this.props.fixedTop;
+    classes[tbsUtils.prefix(this.props, 'fixed-bottom')] = this.props.fixedBottom;
+    classes[tbsUtils.prefix(this.props, 'static-top')] = this.props.staticTop;
+    classes[tbsUtils.prefix(this.props, 'inverse')] = this.props.inverse;
 
     return (
       <ComponentClass {...this.props} className={classNames(this.props.className, classes)}>
@@ -103,19 +103,21 @@ const Navbar = React.createClass({
 
   renderHeader() {
     let brand;
+    let headerClass = tbsUtils.prefix(this.props, 'header');
+    let brandClass = tbsUtils.prefix(this.props, 'brand');
 
     if (this.props.brand) {
       if (React.isValidElement(this.props.brand)) {
         brand = cloneElement(this.props.brand, {
-          className: classNames(this.props.brand.props.className, 'navbar-brand')
+          className: classNames(this.props.brand.props.className, brandClass)
         });
       } else {
-        brand = <span className="navbar-brand">{this.props.brand}</span>;
+        brand = <span className={brandClass}>{this.props.brand}</span>;
       }
     }
 
     return (
-      <div className="navbar-header">
+      <div className={headerClass}>
         {brand}
         {(this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderToggleButton() : null}
       </div>
@@ -124,11 +126,12 @@ const Navbar = React.createClass({
 
   renderToggleButton() {
     let children;
+    let toggleClass =  tbsUtils.prefix(this.props, 'toggle');
 
     if (React.isValidElement(this.props.toggleButton)) {
 
       return cloneElement(this.props.toggleButton, {
-        className: classNames(this.props.toggleButton.props.className, 'navbar-toggle'),
+        className: classNames(this.props.toggleButton.props.className, toggleClass),
         onClick: createChainedFunction(this.handleToggle, this.props.toggleButton.props.onClick)
       });
     }
@@ -142,7 +145,7 @@ const Navbar = React.createClass({
       ];
 
     return (
-      <button className="navbar-toggle" type="button" onClick={this.handleToggle}>
+      <button className={toggleClass} type="button" onClick={this.handleToggle}>
         {children}
       </button>
     );

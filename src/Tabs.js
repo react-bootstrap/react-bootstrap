@@ -6,7 +6,7 @@ import Nav from './Nav';
 import NavItem from './NavItem';
 import Row from './Row';
 import styleMaps from './styleMaps';
-
+import tbsUtils from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 let paneId = (props, child) => child.props.id ? child.props.id : props.id && (props.id + '___pane___' + child.props.eventKey);
@@ -66,6 +66,7 @@ const Tabs = React.createClass({
 
   getDefaultProps() {
     return {
+      bsClass: 'tab',
       animation: true,
       tabWidth: 2,
       position: 'top'
@@ -129,6 +130,7 @@ const Tabs = React.createClass({
     const tabsProps = {
       ...props,
       bsStyle,
+      bsClass: undefined,
       stacked: isHorizontal,
       activeKey: this.getActiveKey(),
       onSelect: this.handleSelect,
@@ -138,7 +140,7 @@ const Tabs = React.createClass({
     const childTabs = ValidComponentChildren.map(children, this.renderTab);
 
     const panesProps = {
-      className: 'tab-content',
+      className: tbsUtils.prefix(this.props, 'content'),
       ref: 'panes'
     };
     const childPanes = ValidComponentChildren.map(children, this.renderPane);

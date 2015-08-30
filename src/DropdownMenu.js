@@ -1,6 +1,7 @@
 import React from 'react';
 import keycode from 'keycode';
 import classNames from 'classnames';
+import bootstrapUtils from './utils/bootstrapUtils';
 import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
@@ -81,18 +82,20 @@ class DropdownMenu extends React.Component {
       let {
         children,
         onKeyDown,
-        onSelect
+        onSelect,
+        bsClass
       } = child.props || {};
 
       return React.cloneElement(child, {
+        bsClass: bsClass || this.props.bsClass,
         onKeyDown: createChainedFunction(onKeyDown, this.handleKeyDown),
         onSelect: createChainedFunction(onSelect, this.props.onSelect)
       }, children);
     });
 
     const classes = {
-      'dropdown-menu': true,
-      'dropdown-menu-right': this.props.pullRight
+      [bootstrapUtils.prefix(this.props, 'menu')]: true,
+      [bootstrapUtils.prefix(this.props, 'menu-right')]: this.props.pullRight
     };
 
     let list = (
@@ -119,6 +122,7 @@ class DropdownMenu extends React.Component {
 
 DropdownMenu.defaultProps = {
   bsRole: 'menu',
+  bsClass: 'dropdown',
   pullRight: false
 };
 

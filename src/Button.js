@@ -32,7 +32,7 @@ const Button = React.createClass({
     return {
       active: false,
       block: false,
-      bsClass: 'button',
+      bsClass: 'btn',
       bsStyle: 'default',
       disabled: false,
       navItem: false,
@@ -44,9 +44,11 @@ const Button = React.createClass({
     let classes = this.props.navDropdown ? {} : bootstrapUtils.getClassSet(this.props);
     let renderFuncName;
 
+    let blockClass = bootstrapUtils.prefix(this.props, 'block');
+
     classes = {
       active: this.props.active,
-      'btn-block': this.props.block,
+      [blockClass]: this.props.block,
       ...classes
     };
 

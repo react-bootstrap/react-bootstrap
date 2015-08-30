@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import tbsUtils from './utils/bootstrapUtils';
 import TransitionEvents from './utils/TransitionEvents';
 
 const Tab = React.createClass({
@@ -20,6 +21,7 @@ const Tab = React.createClass({
 
   getDefaultProps() {
     return {
+      bsClass: 'tab',
       animation: true
     };
   },
@@ -79,7 +81,7 @@ const Tab = React.createClass({
 
   render() {
     let classes = {
-      'tab-pane': true,
+      [tbsUtils.prefix(this.props, 'pane')]: true,
       'fade': true,
       'active': this.props.active || this.state.animateOut,
       'in': this.props.active && !this.state.animateIn

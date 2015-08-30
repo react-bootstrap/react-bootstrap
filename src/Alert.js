@@ -36,7 +36,7 @@ const Alert = React.createClass({
     let classes = bootstrapUtils.getClassSet(this.props);
     let isDismissable = !!this.props.onDismiss;
 
-    classes['alert-dismissable'] = isDismissable;
+    classes[bootstrapUtils.prefix(this.props, 'dismissable')] = isDismissable;
 
     return (
       <div {...this.props} role='alert' className={classNames(this.props.className, classes)}>

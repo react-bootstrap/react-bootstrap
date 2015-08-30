@@ -100,7 +100,7 @@ const ProgressBar = React.createClass({
 
     const classes = classNames(className, bootstrapUtils.getClassSet(this.props), {
       active: this.props.active,
-      'progress-bar-striped': this.props.active || this.props.striped
+      [bootstrapUtils.prefix(this.props, 'striped')]: this.props.active || this.props.striped
     });
 
     return (

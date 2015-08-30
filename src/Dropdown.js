@@ -2,6 +2,7 @@ import React, { cloneElement } from 'react';
 import keycode from 'keycode';
 import classNames from 'classnames';
 import uncontrollable from 'uncontrollable';
+import bootstrapUtils from './utils/bootstrapUtils';
 import ButtonGroup from './ButtonGroup';
 import DropdownToggle from './DropdownToggle';
 import DropdownMenu from './DropdownMenu';
@@ -66,11 +67,12 @@ class Dropdown extends React.Component {
     let children = this.extractChildren();
     let Component = this.props.componentClass;
 
-    let props = omit(this.props, ['id']);
+    let props = omit(this.props, ['id', 'bsClass']);
+    let className = bootstrapUtils.prefix(this.props);
 
     const rootClasses = {
       open: this.props.open,
-      dropdown: !this.props.dropup,
+      [className]: !this.props.dropup,
       dropup: this.props.dropup
     };
 
@@ -173,7 +175,8 @@ class Dropdown extends React.Component {
       ref: 'menu',
       open,
       labelledBy: this.props.id,
-      pullRight: this.props.pullRight
+      pullRight: this.props.pullRight,
+      bsClass: this.props.bsClass
     };
 
     menuProps.onClose = createChainedFunction(
@@ -217,10 +220,14 @@ Dropdown.Toggle = DropdownToggle;
 Dropdown.TOGGLE_REF = TOGGLE_REF;
 
 Dropdown.defaultProps = {
-  componentClass: ButtonGroup
+  componentClass: ButtonGroup,
+  bsClass: 'dropdown'
 };
 
 Dropdown.propTypes = {
+
+  bsClass: React.PropTypes.string,
+
   /**
    * The menu will open above the dropdown button, instead of below it.
    */

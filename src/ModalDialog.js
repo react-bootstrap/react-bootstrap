@@ -33,11 +33,11 @@ const ModalDialog = React.createClass({
       display: 'block',
       ...this.props.style
     };
-    let bsClass = this.props.bsClass;
+    let prefix = bootstrapUtils.prefix(this.props);
     let dialogClasses = bootstrapUtils.getClassSet(this.props);
 
     delete dialogClasses.modal;
-    dialogClasses[`${bsClass}-dialog`] = true;
+    dialogClasses[`${prefix}-dialog`] = true;
 
     return (
       <div
@@ -46,9 +46,9 @@ const ModalDialog = React.createClass({
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
-        className={classNames(this.props.className, bsClass)}>
+        className={classNames(this.props.className, prefix)}>
         <div className={classNames(this.props.dialogClassName, dialogClasses)}>
-          <div className={`${bsClass}-content`} role='document'>
+          <div className={`${prefix}-content`} role='document'>
             { this.props.children }
           </div>
         </div>

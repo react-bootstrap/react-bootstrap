@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import bootstrapUtils from './utils/bootstrapUtils';
 import all from 'react-prop-types/lib/all';
 import SafeAnchor from './SafeAnchor';
 
@@ -25,13 +26,15 @@ export default class MenuItem extends React.Component {
   }
 
   render() {
+    let headerClass = bootstrapUtils.prefix(this.props, 'header');
+
     if (this.props.divider) {
       return <li role='separator' className='divider' />;
     }
 
     if (this.props.header) {
       return (
-        <li role='heading' className='dropdown-header'>{this.props.children}</li>
+        <li role='heading' className={headerClass}>{this.props.children}</li>
       );
     }
 
@@ -61,6 +64,8 @@ export default class MenuItem extends React.Component {
 }
 
 MenuItem.propTypes = {
+  bsClass: React.PropTypes.string,
+
   disabled: React.PropTypes.bool,
   divider: all([
     React.PropTypes.bool,
@@ -89,5 +94,6 @@ MenuItem.propTypes = {
 MenuItem.defaultProps = {
   divider: false,
   disabled: false,
-  header: false
+  header: false,
+  bsClass: 'dropdown'
 };

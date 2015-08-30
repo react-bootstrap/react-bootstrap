@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import bootstrapUtils from './utils/bootstrapUtils';
+import tbsUtils from './utils/bootstrapUtils';
 import Collapse from './Collapse';
 import classNames from 'classnames';
 
@@ -8,9 +8,8 @@ import createChainedFunction from './utils/createChainedFunction';
 
 const Nav = React.createClass({
 
-
   propTypes: {
-    ...bootstrapUtils.propTypes,
+    ...tbsUtils.propTypes,
     activeHref: React.PropTypes.string,
     activeKey: React.PropTypes.any,
     bsStyle: React.PropTypes.oneOf(['tabs', 'pills']),
@@ -74,10 +73,11 @@ const Nav = React.createClass({
   },
 
   renderUl() {
-    const classes = bootstrapUtils.getClassSet(this.props);
+    const classes = tbsUtils.getClassSet(this.props);
 
-    classes['nav-stacked'] = this.props.stacked;
-    classes['nav-justified'] = this.props.justified;
+    //TODO: need to pass navbar bsClass down...
+    classes[tbsUtils.prefix(this.props, 'stacked')] = this.props.stacked;
+    classes[tbsUtils.prefix(this.props, 'justified')] = this.props.justified;
     classes['navbar-nav'] = this.props.navbar;
     classes['pull-right'] = this.props.pullRight;
     classes['navbar-right'] = this.props.right;

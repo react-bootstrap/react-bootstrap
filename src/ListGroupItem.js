@@ -85,21 +85,23 @@ const ListGroupItem = React.createClass({
 
   renderStructuredContent() {
     let header;
+    let headingClass = bootstrapUtils.prefix(this.props, 'heading');
+
     if (React.isValidElement(this.props.header)) {
       header = cloneElement(this.props.header, {
         key: 'header',
-        className: classNames(this.props.header.props.className, 'list-group-item-heading')
+        className: classNames(this.props.header.props.className, headingClass)
       });
     } else {
       header = (
-        <h4 key='header' className="list-group-item-heading">
+        <h4 key='header' className={headingClass}>
           {this.props.header}
         </h4>
       );
     }
 
     let content = (
-      <p key='content' className="list-group-item-text">
+      <p key='content' className={bootstrapUtils.prefix(this.props, 'text')}>
         {this.props.children}
       </p>
     );
