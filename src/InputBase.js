@@ -18,7 +18,7 @@ class InputBase extends React.Component {
         return this.getInputDOMNode().value;
       }
     } else {
-      throw 'Cannot use getValue without specifying input type.';
+      throw new Error('Cannot use getValue without specifying input type.');
     }
   }
 

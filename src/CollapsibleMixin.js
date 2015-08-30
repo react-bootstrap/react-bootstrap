@@ -10,11 +10,8 @@ const CollapsibleMixin = {
   },
 
   getInitialState(){
-    let defaultExpanded = this.props.defaultExpanded != null ?
-      this.props.defaultExpanded :
-        this.props.expanded != null ?
-        this.props.expanded :
-        false;
+    const defaultExpanded = this.props.defaultExpanded != null ?
+      this.props.defaultExpanded : !!this.props.expanded;
 
     return {
       expanded: defaultExpanded,

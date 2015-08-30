@@ -56,7 +56,7 @@ const NavItem = React.createClass({
     }
 
     return (
-      <li {...props} role='presentation' className={classNames(props.className, classes)}>
+      <li {...props} role="presentation" className={classNames(props.className, classes)}>
         <SafeAnchor {...linkProps} aria-selected={active} aria-controls={ariaControls}>
           { children }
         </SafeAnchor>

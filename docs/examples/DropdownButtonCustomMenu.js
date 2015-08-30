@@ -12,18 +12,18 @@ class CustomMenu extends React.Component {
 
     return (
       <div
-        className={'dropdown-menu'}
-        style={{ padding: '5px 10px'}}
+        className={"dropdown-menu"}
+        style={{ padding: ''}}
       >
         <input
           ref={input => this.input = input}
-          type='text'
-          className='form-control'
-          placeholder='type to filter...'
+          type="text"
+          className="form-control"
+          placeholder="type to filter..."
           onChange={this.onChange}
           value={this.state.value}
         />
-        <ul className='list-unstyled'>
+        <ul className="list-unstyled">
           { this.filterChildren() }
         </ul>
       </div>
@@ -58,16 +58,16 @@ class CustomMenu extends React.Component {
 let preventDefault = e => e.preventDefault();
 
 let dropdownExample = (
-    <Dropdown id='dropdown-custom-menu'>
-      <a href='#' bsRole='toggle' onClick={preventDefault}>
+    <Dropdown id="dropdown-custom-menu">
+      <a href="#" bsRole="toggle" onClick={preventDefault}>
         custom Toggle
       </a>
 
-      <CustomMenu bsRole='menu'>
-        <MenuItem eventKey='1'>Red</MenuItem>
-        <MenuItem eventKey='2'>Blue</MenuItem>
-        <MenuItem eventKey='3' active>Orange</MenuItem>
-        <MenuItem eventKey='1'>Red-Orange</MenuItem>
+      <CustomMenu bsRole="menu">
+        <MenuItem eventKey="1">Red</MenuItem>
+        <MenuItem eventKey="2">Blue</MenuItem>
+        <MenuItem eventKey="3" active>Orange</MenuItem>
+        <MenuItem eventKey="1">Red-Orange</MenuItem>
       </CustomMenu>
     </Dropdown>
   );

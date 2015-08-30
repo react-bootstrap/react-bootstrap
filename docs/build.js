@@ -46,7 +46,6 @@ export default function BuildDocs({dev}) {
     .then(() => fsp.mkdir(docsBuilt))
     .then(metadata)
     .then(propData => {
-
       let pagesGenerators = Root.getPages().map( page => generateHTML(page, propData));
 
       return Promise.all(pagesGenerators.concat([

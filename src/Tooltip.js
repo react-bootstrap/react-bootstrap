@@ -74,7 +74,7 @@ const Tooltip = React.createClass({
     };
 
     return (
-        <div role='tooltip' {...this.props} className={classNames(this.props.className, classes)} style={style}>
+        <div role="tooltip" {...this.props} className={classNames(this.props.className, classes)} style={style}>
           <div className="tooltip-arrow" style={arrowStyle} />
           <div className="tooltip-inner">
             {this.props.children}

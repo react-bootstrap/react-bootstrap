@@ -10,23 +10,23 @@ if (/docs/.test(version)) {
 const PageHeader = React.createClass({
   render() {
     return (
-        <footer className='bs-docs-footer' role='contentinfo'>
-          <div className='container'>
-            <div className='bs-docs-social'>
-              <ul className='bs-docs-social-buttons'>
+        <footer className="bs-docs-footer" role="contentinfo">
+          <div className="container">
+            <div className="bs-docs-social">
+              <ul className="bs-docs-social-buttons">
                 <li>
-                  <iframe className='github-btn'
-                    src='https://ghbtns.com/github-btn.html?user=react-bootstrap&repo=react-bootstrap&type=watch&count=true'
+                  <iframe className="github-btn"
+                    src="https://ghbtns.com/github-btn.html?user=react-bootstrap&repo=react-bootstrap&type=watch&count=true"
                     width={95}
                     height={20}
-                    title='Star on GitHub' />
+                    title="Star on GitHub" />
                 </li>
                 <li>
-                  <iframe className='github-btn'
-                    src='https://ghbtns.com/github-btn.html?user=react-bootstrap&repo=react-bootstrap&type=fork&count=true'
+                  <iframe className="github-btn"
+                    src="https://ghbtns.com/github-btn.html?user=react-bootstrap&repo=react-bootstrap&type=fork&count=true"
                     width={92}
                     height={20}
-                    title='Fork on GitHub' />
+                    title="Fork on GitHub" />
                 </li>
                 <li>
                   <iframe
@@ -34,21 +34,21 @@ const PageHeader = React.createClass({
                     width={230}
                     height={20}
                     allowTransparency="true"
-                    frameBorder='0'
-                    scrolling='no'>
+                    frameBorder="0"
+                    scrolling="no">
                   </iframe>
                 </li>
               </ul>
             </div>
-            <p>Code licensed under <a href='https://github.com/react-bootstrap/react-bootstrap/blob/master/LICENSE' target='_blank'>MIT</a>.</p>
-            <ul className='bs-docs-footer-links muted'>
+            <p>Code licensed under <a href="https://github.com/react-bootstrap/react-bootstrap/blob/master/LICENSE" target="_blank">MIT</a>.</p>
+            <ul className="bs-docs-footer-links muted">
               <li>Currently v{version}</li>
               <li>·</li>
-              <li><a href='https://github.com/react-bootstrap/react-bootstrap/'>GitHub</a></li>
+              <li><a href="https://github.com/react-bootstrap/react-bootstrap/">GitHub</a></li>
               <li>·</li>
-              <li><a href='https://github.com/react-bootstrap/react-bootstrap/issues?state=open'>Issues</a></li>
+              <li><a href="https://github.com/react-bootstrap/react-bootstrap/issues?state=open">Issues</a></li>
               <li>·</li>
-              <li><a href='https://github.com/react-bootstrap/react-bootstrap/releases'>Releases</a></li>
+              <li><a href="https://github.com/react-bootstrap/react-bootstrap/releases">Releases</a></li>
             </ul>
           </div>
         </footer>

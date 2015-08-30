@@ -18,7 +18,6 @@ class DropdownMenu extends React.Component {
   }
 
   handleKeyDown(event) {
-
     switch(event.keyCode) {
     case keycode.codes.down:
       this.focusNext();
@@ -98,7 +97,7 @@ class DropdownMenu extends React.Component {
     let list = (
       <ul
         className={classNames(this.props.className, classes)}
-        role='menu'
+        role="menu"
         aria-labelledby={this.props.labelledBy}
       >
         {items}

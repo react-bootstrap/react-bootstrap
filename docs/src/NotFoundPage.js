@@ -8,11 +8,11 @@ const NotFoundPage = React.createClass({
   render() {
     return (
         <div>
-          <NavMain activePage='' />
+          <NavMain activePage="" />
 
           <PageHeader
-            title='404'
-            subTitle='Hmmm this is awkward.' />
+            title="404"
+            subTitle="Hmmm this is awkward." />
 
           <PageFooter />
         </div>

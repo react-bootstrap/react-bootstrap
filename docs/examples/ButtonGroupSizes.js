@@ -1,7 +1,7 @@
 const buttonGroupInstance = (
   <div>
     <ButtonToolbar>
-      <ButtonGroup bsSize='large'>
+      <ButtonGroup bsSize="large">
         <Button>Left</Button>
         <Button>Middle</Button>
         <Button>Right</Button>
@@ -17,7 +17,7 @@ const buttonGroupInstance = (
     </ButtonToolbar>
 
     <ButtonToolbar>
-      <ButtonGroup bsSize='small'>
+      <ButtonGroup bsSize="small">
         <Button>Left</Button>
         <Button>Middle</Button>
         <Button>Right</Button>
@@ -25,7 +25,7 @@ const buttonGroupInstance = (
     </ButtonToolbar>
 
     <ButtonToolbar>
-      <ButtonGroup bsSize='xsmall'>
+      <ButtonGroup bsSize="xsmall">
         <Button>Left</Button>
         <Button>Middle</Button>
         <Button>Right</Button>

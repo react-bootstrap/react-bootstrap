@@ -6,15 +6,15 @@ const NavJustified = React.createClass({
   render() {
     return (
       <div>
-        <Nav bsStyle='tabs' justified activeKey={1} onSelect={this.handleSelect}>
-          <NavItem eventKey={1} href='/home'>NavItem 1 content</NavItem>
-          <NavItem eventKey={2} title='Item'>NavItem 2 content</NavItem>
+        <Nav bsStyle="tabs" justified activeKey={1} onSelect={this.handleSelect}>
+          <NavItem eventKey={1} href="/home">NavItem 1 content</NavItem>
+          <NavItem eventKey={2} title="Item">NavItem 2 content</NavItem>
           <NavItem eventKey={3} disabled>NavItem 3 content</NavItem>
         </Nav>
         <br />
-        <Nav bsStyle='pills' justified activeKey={1} onSelect={this.handleSelect}>
-          <NavItem eventKey={1} href='/home'>NavItem 1 content</NavItem>
-          <NavItem eventKey={2} title='Item'>NavItem 2 content</NavItem>
+        <Nav bsStyle="pills" justified activeKey={1} onSelect={this.handleSelect}>
+          <NavItem eventKey={1} href="/home">NavItem 1 content</NavItem>
+          <NavItem eventKey={2} title="Item">NavItem 2 content</NavItem>
           <NavItem eventKey={3} disabled>NavItem 3 content</NavItem>
         </Nav>
       </div>
