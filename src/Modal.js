@@ -219,7 +219,7 @@ const Modal = React.createClass({
 
     return (
       <div
-        ref='modal'>
+        ref="modal">
         { animation
             ? <Fade transitionAppear in={this.props.show} timeout={duration}>{backdrop}</Fade>
             : backdrop

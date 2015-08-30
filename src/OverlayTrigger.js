@@ -1,6 +1,6 @@
 /*eslint-disable react/prop-types */
 import React, { cloneElement } from 'react';
-
+import contains from 'dom-helpers/query/contains';
 import createChainedFunction from './utils/createChainedFunction';
 import createContextWrapper from './utils/createContextWrapper';
 import Overlay from './Overlay';
@@ -126,6 +126,11 @@ const OverlayTrigger = React.createClass({
     }
   },
 
+  componentWillMount() {
+    this.handleMouseOver = this.handleMouseOverOut.bind(null, this.handleDelayedShow);
+    this.handleMouseOut = this.handleMouseOverOut.bind(null, this.handleDelayedHide);
+  },
+
   componentDidMount(){
     this._mountNode = document.createElement('div');
     React.render(this._overlay, this._mountNode);
@@ -195,8 +200,8 @@ const OverlayTrigger = React.createClass({
         '[react-bootstrap] Specifying only the `"hover"` trigger limits the visibilty of the overlay to just mouse users. ' +
         'Consider also including the `"focus"` trigger so that touch and keyboard only users can see the overlay as well.');
 
-      props.onMouseOver = createChainedFunction(this.handleDelayedShow, this.props.onMouseOver, triggerProps.onMouseOver);
-      props.onMouseOut = createChainedFunction(this.handleDelayedHide, this.props.onMouseOut, triggerProps.onMouseOut);
+      props.onMouseOver = createChainedFunction(this.handleMouseOver, this.props.onMouseOver, triggerProps.onMouseOver);
+      props.onMouseOut = createChainedFunction(this.handleMouseOut, this.props.onMouseOut, triggerProps.onMouseOut);
     }
 
     if (isOneOf('focus', this.props.trigger)) {
@@ -250,6 +255,19 @@ const OverlayTrigger = React.createClass({
       this._hoverDelay = null;
       this.hide();
     }, delay);
+  },
+
+  // Simple implementation of mouseEnter and mouseLeave.
+  // React's built version is broken: https://github.com/facebook/react/issues/4251
+  // for cases when the trigger is disabled and mouseOut/Over can cause flicker moving
+  // from one child element to another.
+  handleMouseOverOut(handler, e){
+    let target = e.currentTarget;
+    let related = e.relatedTarget || e.nativeEvent.toElement;
+
+    if (!related || related !== target && !contains(target, related)){
+      handler(e);
+    }
   }
 
 });

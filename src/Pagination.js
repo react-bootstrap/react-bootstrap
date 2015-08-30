@@ -86,10 +86,10 @@ const Pagination = React.createClass({
     if(maxButtons && hasHiddenPagesAfter && ellipsis){
       pageButtons.push(
         <PaginationButton
-          key='ellipsis'
+          key="ellipsis"
           disabled
           buttonComponentClass={buttonComponentClass}>
-          <span aria-label='More'>...</span>
+          <span aria-label="More">...</span>
         </PaginationButton>
       );
     }
@@ -104,12 +104,12 @@ const Pagination = React.createClass({
 
     return (
       <PaginationButton
-        key='prev'
+        key="prev"
         eventKey={this.props.activePage - 1}
         disabled={this.props.activePage === 1}
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label='Previous'>&lsaquo;</span>
+        <span aria-label="Previous">&lsaquo;</span>
       </PaginationButton>
     );
   },
@@ -121,12 +121,12 @@ const Pagination = React.createClass({
 
     return (
       <PaginationButton
-        key='next'
+        key="next"
         eventKey={this.props.activePage + 1}
         disabled={this.props.activePage >= this.props.items}
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label='Next'>&rsaquo;</span>
+        <span aria-label="Next">&rsaquo;</span>
       </PaginationButton>
     );
   },
@@ -138,12 +138,12 @@ const Pagination = React.createClass({
 
     return (
       <PaginationButton
-        key='first'
+        key="first"
         eventKey={1}
         disabled={this.props.activePage === 1 }
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label='First'>&laquo;</span>
+        <span aria-label="First">&laquo;</span>
       </PaginationButton>
     );
   },
@@ -155,12 +155,12 @@ const Pagination = React.createClass({
 
     return (
       <PaginationButton
-        key='last'
+        key="last"
         eventKey={this.props.items}
         disabled={this.props.activePage >= this.props.items}
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label='Last'>&raquo;</span>
+        <span aria-label="Last">&raquo;</span>
       </PaginationButton>
     );
   },

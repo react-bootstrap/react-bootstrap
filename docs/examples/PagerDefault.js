@@ -1,7 +1,7 @@
 const pagerInstance = (
   <Pager>
-    <PageItem href='#'>Previous</PageItem>
-    <PageItem href='#'>Next</PageItem>
+    <PageItem href="#">Previous</PageItem>
+    <PageItem href="#">Next</PageItem>
   </Pager>
 );
 
