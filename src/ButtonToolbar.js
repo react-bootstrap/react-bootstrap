@@ -1,11 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 import bootstrapUtils from './utils/bootstrapUtils';
+import Button from './Button';
 
 const ButtonToolbar = React.createClass({
 
   propTypes: {
-    ...bootstrapUtils.propTypes
+    bsSize: Button.propTypes.bsSize
   },
 
   getDefaultProps() {

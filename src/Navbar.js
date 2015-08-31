@@ -34,7 +34,6 @@ const Navbar = React.createClass({
   getDefaultProps() {
     return {
       bsClass: 'navbar',
-      bsStyle: 'default',
       role: 'navigation',
       componentClass: 'nav',
       fixedTop: false,

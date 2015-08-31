@@ -5,12 +5,9 @@ import NavDropdown from './NavDropdown';
 import all from 'react-prop-types/lib/all';
 import deprecationWarning from './utils/deprecationWarning';
 import omit from 'lodash/object/omit';
+import Button from './Button';
 
 class DropdownButton extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let { title, navItem, ...props } = this.props;
@@ -35,6 +32,11 @@ class DropdownButton extends React.Component {
 }
 
 DropdownButton.propTypes = {
+  ...Dropdown.propTypes,
+
+  bsStyle: Button.propTypes.bsStyle,
+  bsSize: Button.propTypes.bsSize,
+
   /**
    * When used with the `title` prop, the noCaret option will not render a caret icon, in the toggle element.
    */
@@ -54,9 +56,7 @@ DropdownButton.propTypes = {
       }
     }
   ]),
-  title: React.PropTypes.node.isRequired,
-  ...Dropdown.propTypes,
-  ...bootstrapUtils.propTypes
+  title: React.PropTypes.node.isRequired
 };
 
 DropdownButton.defaultProps = {

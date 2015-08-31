@@ -1,12 +1,12 @@
 /*eslint-disable react/prop-types */
 import React from 'react';
 import classNames from 'classnames';
-import bootstrapUtils from './utils/bootstrapUtils';
+import bootstrapUtils, { bsSizes } from './utils/bootstrapUtils';
+import { Sizes } from './styleMaps';
 
 const ModalDialog = React.createClass({
 
   propTypes: {
-    ...bootstrapUtils.propTypes,
     /**
      * A Callback fired when the header closeButton or non-static backdrop is clicked.
      * @type {function}
@@ -57,4 +57,4 @@ const ModalDialog = React.createClass({
   }
 });
 
-export default ModalDialog;
+export default bsSizes([Sizes.LARGE, Sizes.SMALL], ModalDialog);

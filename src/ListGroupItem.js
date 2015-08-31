@@ -1,30 +1,11 @@
 import React, { cloneElement } from 'react';
-import bootstrapUtils from './utils/bootstrapUtils';
+import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
+import { State } from './styleMaps';
 import classNames from 'classnames';
 
-const ListGroupItem = React.createClass({
-
-  propTypes: {
-    ...bootstrapUtils.propTypes,
-
-    bsStyle: React.PropTypes.oneOf(['danger', 'info', 'success', 'warning']),
-    className: React.PropTypes.string,
-    active: React.PropTypes.any,
-    disabled: React.PropTypes.any,
-    header: React.PropTypes.node,
-    listItem: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
-    eventKey: React.PropTypes.any,
-    href: React.PropTypes.string,
-    target: React.PropTypes.string
-  },
-
-  getDefaultProps() {
-    return {
-      bsClass: 'list-group-item',
-      listItem: false
-    };
-  },
+@bsClass('list-group-item')
+@bsStyles(State.values())
+class ListGroupItem extends React.Component {
 
   render() {
     let classes = bootstrapUtils.getClassSet(this.props);
@@ -41,7 +22,7 @@ const ListGroupItem = React.createClass({
     } else {
       return this.renderSpan(classes);
     }
-  },
+  }
 
   renderLi(classes) {
     return (
@@ -50,7 +31,7 @@ const ListGroupItem = React.createClass({
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </li>
     );
-  },
+  }
 
   renderAnchor(classes) {
     return (
@@ -61,7 +42,7 @@ const ListGroupItem = React.createClass({
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </a>
     );
-  },
+  }
 
   renderButton(classes) {
     return (
@@ -72,7 +53,7 @@ const ListGroupItem = React.createClass({
         {this.props.children}
       </button>
     );
-  },
+  }
 
   renderSpan(classes) {
     return (
@@ -81,7 +62,7 @@ const ListGroupItem = React.createClass({
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </span>
     );
-  },
+  }
 
   renderStructuredContent() {
     let header;
@@ -108,6 +89,24 @@ const ListGroupItem = React.createClass({
 
     return [header, content];
   }
-});
+}
+
+ListGroupItem.propTypes = {
+  ...ListGroupItem.propTypes,
+  className: React.PropTypes.string,
+  active: React.PropTypes.any,
+  disabled: React.PropTypes.any,
+  header: React.PropTypes.node,
+  listItem: React.PropTypes.bool,
+  onClick: React.PropTypes.func,
+  eventKey: React.PropTypes.any,
+  href: React.PropTypes.string,
+  target: React.PropTypes.string
+};
+
+ListGroupItem.defaultTypes = {
+  ...ListGroupItem.defaultTypes,
+  listItem: false
+};
 
 export default ListGroupItem;

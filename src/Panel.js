@@ -1,10 +1,10 @@
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
-
-import bootstrapUtils from './utils/bootstrapUtils';
+import bootstrapUtils, { bsStyles } from './utils/bootstrapUtils';
+import { State, PRIMARY, DEFAULT } from './styleMaps';
 import Collapse from './Collapse';
 
-const Panel = React.createClass({
+let Panel = React.createClass({
 
   propTypes: {
     ...bootstrapUtils.propTypes,
@@ -26,7 +26,6 @@ const Panel = React.createClass({
   getDefaultProps() {
     return {
       bsClass: 'panel',
-      bsStyle: 'default',
       defaultExpanded: false
     };
   },
@@ -221,5 +220,7 @@ const Panel = React.createClass({
     );
   }
 });
+
+Panel = bsStyles(State.values().concat(DEFAULT, PRIMARY), DEFAULT, Panel);
 
 export default Panel;

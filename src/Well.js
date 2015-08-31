@@ -1,19 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import bootstrapUtils from './utils/bootstrapUtils';
+import bootstrapUtils, { bsSizes, bsClass } from './utils/bootstrapUtils';
+import { Sizes } from './styleMaps';
 
-const Well = React.createClass({
-
-  propTypes: {
-    ...bootstrapUtils.propTypes
-  },
-
-  getDefaultProps() {
-    return {
-      bsClass: 'well'
-    };
-  },
-
+@bsClass('well')
+@bsSizes([Sizes.LARGE, Sizes.SMALL])
+class Well extends React.Component {
   render() {
     let classes = bootstrapUtils.getClassSet(this.props);
 
@@ -23,6 +15,6 @@ const Well = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default Well;

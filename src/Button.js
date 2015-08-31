@@ -1,14 +1,15 @@
 import React from 'react';
 import classNames from 'classnames';
-import bootstrapUtils from './utils/bootstrapUtils';
 import elementType from 'react-prop-types/lib/elementType';
 import ButtonInput from './ButtonInput';
+import bootstrapUtils, { bsStyles, bsSizes } from './utils/bootstrapUtils';
+import { Sizes, State, DEFAULT, PRIMARY, LINK } from './styleMaps';
 
-const Button = React.createClass({
+const ButtonStyles = State.values().concat(DEFAULT, PRIMARY, LINK);
 
+let Button = React.createClass({
 
   propTypes: {
-    ...bootstrapUtils.propTypes,
     active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     block: React.PropTypes.bool,
@@ -33,7 +34,6 @@ const Button = React.createClass({
       active: false,
       block: false,
       bsClass: 'btn',
-      bsStyle: 'default',
       disabled: false,
       navItem: false,
       navDropdown: false
@@ -104,5 +104,8 @@ const Button = React.createClass({
     );
   }
 });
+
+Button = bsStyles(ButtonStyles, DEFAULT, Button);
+Button = bsSizes([Sizes.LARGE, Sizes.SMALL, Sizes.XSMALL], Button);
 
 export default Button;

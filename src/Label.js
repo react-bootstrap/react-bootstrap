@@ -1,19 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import bootstrapUtils from './utils/bootstrapUtils';
+import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
+import { State, DEFAULT, PRIMARY } from './styleMaps';
 
-const Label = React.createClass({
-
-  propTypes: {
-    ...bootstrapUtils.propTypes
-  },
-
-  getDefaultProps() {
-    return {
-      bsClass: 'label',
-      bsStyle: 'default'
-    };
-  },
+@bsClass('label')
+@bsStyles(State.values().concat(DEFAULT, PRIMARY), DEFAULT)
+class Label extends React.Component {
 
   render() {
     let classes = bootstrapUtils.getClassSet(this.props);
@@ -24,6 +16,6 @@ const Label = React.createClass({
       </span>
     );
   }
-});
+}
 
 export default Label;

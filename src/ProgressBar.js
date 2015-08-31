@@ -1,49 +1,38 @@
 /* eslint react/prop-types: [2, {ignore: "bsStyle"}] */
 /* BootstrapMixin contains `bsStyle` type validation */
-
 import React, { cloneElement, PropTypes } from 'react';
 import Interpolate from './Interpolate';
-import bootstrapUtils from './utils/bootstrapUtils';
+import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
+import { State } from './styleMaps';
 import classNames from 'classnames';
-
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
-const ProgressBar = React.createClass({
+/**
+ * Custom propTypes checker
+ */
+function onlyProgressBar(props, propName, componentName) {
+  if (props[propName]) {
+    let error, childIdentifier;
 
-  propTypes: {
-    ...bootstrapUtils.propTypes,
-    min: PropTypes.number,
-    now: PropTypes.number,
-    max: PropTypes.number,
-    label: PropTypes.node,
-    srOnly: PropTypes.bool,
-    striped: PropTypes.bool,
-    active: PropTypes.bool,
-    children: onlyProgressBar,
-    className: React.PropTypes.string,
-    interpolateClass: PropTypes.node,
-    /**
-     * @private
-     */
-    isChild: PropTypes.bool
-  },
+    React.Children.forEach(props[propName], (child) => {
+      if (child.type !== ProgressBar) {
+        childIdentifier = (child.type.displayName ? child.type.displayName : child.type);
+        error = new Error(`Children of ${componentName} can contain only ProgressBar components. Found ${childIdentifier}`);
+      }
+    });
 
-  getDefaultProps() {
-    return {
-      bsClass: 'progress-bar',
-      min: 0,
-      max: 100,
-      active: false,
-      isChild: false,
-      srOnly: false,
-      striped: false
-    };
-  },
+    return error;
+  }
+}
+
+@bsClass('progress-bar')
+@bsStyles(State.values())
+class ProgressBar extends React.Component {
 
   getPercentage(now, min, max) {
     const roundPrecision = 1000;
     return Math.round(((now - min) / (max - min) * 100) * roundPrecision) / roundPrecision;
-  },
+  }
 
   render() {
     if (this.props.isChild) {
@@ -70,14 +59,14 @@ const ProgressBar = React.createClass({
         {content}
       </div>
     );
-  },
+  }
 
   renderChildBar(child, index) {
     return cloneElement(child, {
       isChild: true,
       key: child.key ? child.key : index
     });
-  },
+  }
 
   renderProgressBar() {
     let { className, label, now, min, max, ...props } = this.props;
@@ -115,7 +104,7 @@ const ProgressBar = React.createClass({
         {label}
       </div>
     );
-  },
+  }
 
   renderLabel(percentage) {
     const InterpolateClass = this.props.interpolateClass || Interpolate;
@@ -131,24 +120,34 @@ const ProgressBar = React.createClass({
       </InterpolateClass>
     );
   }
-});
-
-/**
- * Custom propTypes checker
- */
-function onlyProgressBar(props, propName, componentName) {
-  if (props[propName]) {
-    let error, childIdentifier;
-
-    React.Children.forEach(props[propName], (child) => {
-      if (child.type !== ProgressBar) {
-        childIdentifier = (child.type.displayName ? child.type.displayName : child.type);
-        error = new Error(`Children of ${componentName} can contain only ProgressBar components. Found ${childIdentifier}`);
-      }
-    });
-
-    return error;
-  }
 }
+
+ProgressBar.propTypes = {
+  ...ProgressBar.propTypes,
+  min: PropTypes.number,
+  now: PropTypes.number,
+  max: PropTypes.number,
+  label: PropTypes.node,
+  srOnly: PropTypes.bool,
+  striped: PropTypes.bool,
+  active: PropTypes.bool,
+  children: onlyProgressBar,
+  className: React.PropTypes.string,
+  interpolateClass: PropTypes.node,
+  /**
+   * @private
+   */
+  isChild: PropTypes.bool
+};
+
+ProgressBar.defaultProps = {
+  ...ProgressBar.defaultProps,
+  min: 0,
+  max: 100,
+  active: false,
+  isChild: false,
+  srOnly: false,
+  striped: false
+};
 
 export default ProgressBar;

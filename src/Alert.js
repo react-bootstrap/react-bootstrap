@@ -1,12 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import bootstrapUtils from './utils/bootstrapUtils';
+import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
+import { State } from './styleMaps';
 
-const Alert = React.createClass({
-
+let Alert = React.createClass({
 
   propTypes: {
-    ...bootstrapUtils.propTypes,
     onDismiss: React.PropTypes.func,
     dismissAfter: React.PropTypes.number,
     closeLabel: React.PropTypes.string
@@ -14,8 +13,6 @@ const Alert = React.createClass({
 
   getDefaultProps() {
     return {
-      bsClass: 'alert',
-      bsStyle: 'info',
       closeLabel: 'Close Alert'
     };
   },
@@ -57,4 +54,7 @@ const Alert = React.createClass({
   }
 });
 
-export default Alert;
+
+export default bsStyles(State.values(), State.INFO,
+  bsClass('alert', Alert)
+);
