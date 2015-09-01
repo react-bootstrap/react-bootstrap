@@ -36,7 +36,8 @@ export default class MenuItem extends React.Component {
     }
 
     const classes = {
-      disabled: this.props.disabled
+      disabled: this.props.disabled,
+      active: this.props.active
     };
 
     return (
@@ -62,6 +63,7 @@ export default class MenuItem extends React.Component {
 
 MenuItem.propTypes = {
   disabled: React.PropTypes.bool,
+  active: React.PropTypes.bool,
   divider: CustomPropTypes.all([
     React.PropTypes.bool,
     function(props, propName, componentName) {
