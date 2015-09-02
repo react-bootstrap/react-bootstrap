@@ -10,6 +10,8 @@
     "Accordion",
     "Alert",
     "Badge",
+    "Breadcrumb",
+    "BreadcrumbItem",
     "Button",
     "ButtonGroup",
     "ButtonInput",
