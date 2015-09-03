@@ -3,8 +3,6 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import DropdownButton from '../src/DropdownButton';
 import DropdownMenu from '../src/DropdownMenu';
 import MenuItem from '../src/MenuItem';
-import { shouldWarn } from './helpers';
-
 
 describe('DropdownButton', function() {
 
@@ -151,16 +149,6 @@ describe('DropdownButton', function() {
     ReactTestUtils.Simulate.click(menuItem);
 
     node.className.should.match(/\bopen\b/);
-  });
-
-  it('warn about the navItem deprecation', function() {
-    const props = {
-      title: 'some title',
-      navItem: true
-    };
-
-    DropdownButton.propTypes.navItem(props, 'navItem', 'DropdownButton');
-    shouldWarn(/navItem.*NavDropdown component/);
   });
 
   it('Should pass props to button', function () {

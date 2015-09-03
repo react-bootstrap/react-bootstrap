@@ -1,6 +1,6 @@
 import React from 'react';
 import Transition from 'react-overlays/lib/Transition';
-import domUtils from './utils/domUtils';
+import css from 'dom-helpers/style';
 import all from 'react-prop-types/lib/all';
 import deprecationWarning from './utils/deprecationWarning';
 import createChainedFunction from './utils/createChainedFunction';
@@ -21,8 +21,8 @@ function getDimensionValue(dimension, elem){
   let margins = MARGINS[dimension];
 
   return (value +
-    parseInt(domUtils.css(elem, margins[0]), 10) +
-    parseInt(domUtils.css(elem, margins[1]), 10)
+    parseInt(css(elem, margins[0]), 10) +
+    parseInt(css(elem, margins[1]), 10)
   );
 }
 
