@@ -31,13 +31,13 @@ const Panel = React.createClass({
     };
   },
 
-  getInitialState(){
+  getInitialState() {
     return {
       expanded: this.props.defaultExpanded
     };
   },
 
-  handleSelect(e){
+  handleSelect(e) {
     e.selected = true;
 
     if (this.props.onSelect) {
@@ -51,11 +51,11 @@ const Panel = React.createClass({
     }
   },
 
-  handleToggle(){
+  handleToggle() {
     this.setState({ expanded: !this.state.expanded});
   },
 
-  isExpanded(){
+  isExpanded() {
     return this.props.expanded != null ? this.props.expanded : this.state.expanded;
   },
 

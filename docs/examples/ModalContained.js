@@ -10,7 +10,7 @@
  */
 
 const Trigger = React.createClass({
-  getInitialState(){
+  getInitialState() {
     return { show: false };
   },
 

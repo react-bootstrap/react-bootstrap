@@ -5,7 +5,7 @@ const warned = {};
 function deprecationWarning(oldname, newname, link) {
   let message;
 
-  if (typeof oldname === 'object'){
+  if (typeof oldname === 'object') {
     message = oldname.message;
   } else {
     message = `${oldname} is deprecated. Use ${newname} instead.`;
@@ -24,9 +24,9 @@ function deprecationWarning(oldname, newname, link) {
 }
 
 
-deprecationWarning.wrapper = function(Component, ...args){
+deprecationWarning.wrapper = function(Component, ...args) {
   return class DeprecatedComponent extends Component {
-    componentWillMount(...methodArgs){
+    componentWillMount(...methodArgs) {
       deprecationWarning(...args);
 
       if (super.componentWillMount) {

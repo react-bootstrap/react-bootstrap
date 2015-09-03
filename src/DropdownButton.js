@@ -17,7 +17,7 @@ class DropdownButton extends React.Component {
 
     let toggleProps = omit(props, Dropdown.ControlledComponent.propTypes);
 
-    if (navItem){
+    if (navItem) {
       return <NavDropdown {...this.props}/>;
     }
 

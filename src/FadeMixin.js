@@ -3,13 +3,13 @@ import domUtils from './utils/domUtils';
 import deprecationWarning from './utils/deprecationWarning';
 
 // TODO: listen for onTransitionEnd to remove el
-function getElementsAndSelf (root, classes){
+function getElementsAndSelf (root, classes) {
   let els = root.querySelectorAll('.' + classes.join('.'));
 
-  els = [].map.call(els, function(e){ return e; });
+  els = [].map.call(els, function(e) { return e; });
 
-  for (let i = 0; i < classes.length; i++){
-    if ( !root.className.match(new RegExp('\\b' + classes[i] + '\\b'))){
+  for (let i = 0; i < classes.length; i++) {
+    if ( !root.className.match(new RegExp('\\b' + classes[i] + '\\b'))) {
       return els;
     }
   }
@@ -18,7 +18,7 @@ function getElementsAndSelf (root, classes){
 }
 
 export default {
-  componentWillMount(){
+  componentWillMount() {
     deprecationWarning('FadeMixin', 'Fade Component');
   },
 

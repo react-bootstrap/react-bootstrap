@@ -21,14 +21,14 @@ class ListGroup extends React.Component {
       });
     }
 
-    if (shouldRenderDiv){
+    if (shouldRenderDiv) {
       return this.renderDiv(items);
     } else {
       return this.renderUL(items);
     }
   }
 
-  isAnchorOrButton(props){
+  isAnchorOrButton(props) {
     return (props.href || props.onClick);
   }
 

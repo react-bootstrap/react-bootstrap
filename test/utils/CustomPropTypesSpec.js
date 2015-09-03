@@ -48,7 +48,7 @@ describe('CustomPropTypes', function() {
 
     it('Should validate OK with elementType values', function() {
       assert.isUndefined(validate('span'));
-      assert.isUndefined(validate(function(){}));
+      assert.isUndefined(validate(function() {}));
     });
 
     it('Should return error with not a string or function values', function() {

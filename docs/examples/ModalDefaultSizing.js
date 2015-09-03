@@ -53,10 +53,10 @@ const MyLargeModal = React.createClass({
 });
 
 const App = React.createClass({
-  getInitialState(){
+  getInitialState() {
     return { smShow: false, lgShow: false };
   },
-  render(){
+  render() {
     let smClose = () => this.setState({ smShow: false });
     let lgClose = () => this.setState({ lgShow: false });
 

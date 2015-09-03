@@ -263,7 +263,7 @@ describe('Dropdown', function() {
             </button>
             <Dropdown
               open={this.state.open}
-              onToggle={()=>{}}
+              onToggle={() => {}}
               title='Prop open control'
               id='test-id'
             >

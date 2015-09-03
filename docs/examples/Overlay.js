@@ -1,14 +1,14 @@
 
 const Example = React.createClass({
-  getInitialState(){
+  getInitialState() {
     return { show: true };
   },
 
-  toggle(){
+  toggle() {
     this.setState({ show: !this.state.show });
   },
 
-  render(){
+  render() {
     const tooltip = <Tooltip>Tooltip overload!</Tooltip>;
 
     const sharedProps = {

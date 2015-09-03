@@ -38,7 +38,7 @@ const CollapsibleNav = React.createClass({
       </div>
     );
 
-    if ( this.props.collapsible ){
+    if ( this.props.collapsible ) {
       return (
         <Collapse in={this.props.expanded}>
           { nav }

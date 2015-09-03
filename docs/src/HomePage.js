@@ -7,7 +7,7 @@ import Alert from '../../src/Alert';
 import Glyphicon from '../../src/Glyphicon';
 import Label from '../../src/Label';
 
-export default class HomePage extends React.Component{
+export default class HomePage extends React.Component {
   render() {
     return (
       <div>

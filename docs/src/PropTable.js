@@ -8,7 +8,7 @@ import Table from '../../src/Table';
 let cleanDocletValue = str => str.trim().replace(/^\{/, '').replace(/\}$/, '');
 let capitalize = str => str[0].toUpperCase() + str.substr(1);
 
-function getPropsData(component, metadata){
+function getPropsData(component, metadata) {
   let componentData = metadata[component] || {};
   let props = componentData.props || {};
 
@@ -38,14 +38,14 @@ const PropTable = React.createClass({
     metadata: React.PropTypes.object
   },
 
-  componentWillMount(){
+  componentWillMount() {
     this.propsData = getPropsData(this.props.component, this.context.metadata);
   },
 
-  render(){
+  render() {
     let propsData = this.propsData;
 
-    if ( !Object.keys(propsData).length){
+    if ( !Object.keys(propsData).length) {
       return <span/>;
     }
 
@@ -66,7 +66,7 @@ const PropTable = React.createClass({
     );
   },
 
-  _renderRows(propsData){
+  _renderRows(propsData) {
     return Object.keys(propsData)
       .sort()
       .filter(propName => propsData[propName].type && !propsData[propName].doclets.private )
@@ -107,7 +107,7 @@ const PropTable = React.createClass({
     );
   },
 
-  renderControllableNote(prop, propName){
+  renderControllableNote(prop, propName) {
     let controllable = prop.doclets.controllable;
     let isHandler = this.getDisplayTypeName(prop.type.name) === 'function';
 

@@ -72,7 +72,7 @@ describe('Alert', function () {
     assert.ok(React.findDOMNode(instance).className.match(/\balert-danger\b/));
   });
 
-  describe('Web Accessibility', function(){
+  describe('Web Accessibility', function() {
     it('Should have alert role', function () {
       let instance = ReactTestUtils.renderIntoDocument(
         <Alert>Message</Alert>

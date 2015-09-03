@@ -56,7 +56,7 @@ SplitButton.propTypes = {
   /**
    * @private
    */
-  onClick(){},
+  onClick() {},
   target: React.PropTypes.string,
   href: React.PropTypes.string,
   /**
