@@ -103,11 +103,11 @@ const Panel = React.createClass({
       return {key: bodyElements.length};
     }
 
-    function addPanelChild (child) {
+    function addPanelChild(child) {
       bodyElements.push(cloneElement(child, getProps()));
     }
 
-    function addPanelBody (children) {
+    function addPanelBody(children) {
       bodyElements.push(
         <div className={bodyClass} {...getProps()}>
           {children}
@@ -115,7 +115,7 @@ const Panel = React.createClass({
       );
     }
 
-    function maybeRenderPanelBody () {
+    function maybeRenderPanelBody() {
       if (panelBodyChildren.length === 0) {
         return;
       }

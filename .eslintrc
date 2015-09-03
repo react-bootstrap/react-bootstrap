@@ -30,7 +30,6 @@
     "react/jsx-no-duplicate-props": 2,
     "react/prop-types": [2, { "ignore": [ "children", "className", "style" ] }],
     "react/sort-comp": 0,
-    "space-before-function-paren": 0,
     "spaced-comment": 0,
     "vars-on-top": 0
   }

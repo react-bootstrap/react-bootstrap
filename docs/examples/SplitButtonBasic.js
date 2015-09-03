@@ -1,6 +1,6 @@
 const BUTTONS = ['Default', 'Primary', 'Success', 'Info', 'Warning', 'Danger'];
 
-function renderDropdownButton (title, i) {
+function renderDropdownButton(title, i) {
   return (
     <SplitButton bsStyle={title.toLowerCase()} title={title} key={i} id={`split-button-basic-${i}`}>
       <MenuItem eventKey="1">Action</MenuItem>

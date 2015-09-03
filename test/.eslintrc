@@ -19,6 +19,7 @@
     "react/jsx-quotes": 0,
     "react/no-multi-comp": 0,
     "react/prop-types": 0,
+    "space-before-function-paren": 0,
     "mocha/no-exclusive-tests": 2
   }
 }

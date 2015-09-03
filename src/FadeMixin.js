@@ -3,7 +3,7 @@ import domUtils from './utils/domUtils';
 import deprecationWarning from './utils/deprecationWarning';
 
 // TODO: listen for onTransitionEnd to remove el
-function getElementsAndSelf (root, classes) {
+function getElementsAndSelf(root, classes) {
   let els = root.querySelectorAll('.' + classes.join('.'));
 
   els = [].map.call(els, function(e) { return e; });
@@ -29,7 +29,7 @@ export default {
       els = getElementsAndSelf(React.findDOMNode(this), ['fade']);
 
       if (els.length) {
-        els.forEach(function (el) {
+        els.forEach(function(el) {
           el.className += ' in';
         });
       }
@@ -40,7 +40,7 @@ export default {
     let els = getElementsAndSelf(this._fadeOutEl, ['fade', 'in']);
 
     if (els.length) {
-      els.forEach(function (el) {
+      els.forEach(function(el) {
         el.className = el.className.replace(/\bin\b/, '');
       });
     }

@@ -1,5 +1,5 @@
 export default function promisify(fn) {
-  return function (...args) {
+  return function(...args) {
     return new Promise(function(resolve, reject) {
       function finish(err, result) {
         if (err) {
