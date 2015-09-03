@@ -33,6 +33,10 @@ export default class HomePage extends React.Component{
             <p><Glyphicon glyph="warning-sign" /> The project is under active development, and APIs will change. </p>
             <p><Glyphicon glyph="bullhorn" /> Prior to the 1.0.0 release, breaking changes should result in a Minor version bump.</p>
           </Alert>
+          <Alert bsStyle="info">
+            <p><Glyphicon glyph="bullhorn" /> If you want to try / play with <b>React-0.14</b> betas, we cut releases from the <b>react-14</b> branch. They're on the <b>react-pre</b> tag.</p>
+            <p><kbd>$ npm install react-bootstrap@react-pre</kbd></p>
+          </Alert>
         </Grid>
 
         <PageFooter />
