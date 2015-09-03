@@ -57,8 +57,8 @@ const App = React.createClass({
     return { smShow: false, lgShow: false };
   },
   render(){
-    let smClose = e => this.setState({ smShow: false });
-    let lgClose = e => this.setState({ lgShow: false });
+    let smClose = () => this.setState({ smShow: false });
+    let lgClose = () => this.setState({ lgShow: false });
 
     return (
       <ButtonToolbar>

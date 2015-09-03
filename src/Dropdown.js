@@ -113,7 +113,7 @@ class Dropdown extends React.Component {
     }
   }
 
-  handleClick(event) {
+  handleClick() {
     if (this.props.disabled) {
       return;
     }
@@ -145,7 +145,7 @@ class Dropdown extends React.Component {
     }
   }
 
-  handleClose(event) {
+  handleClose() {
     if (!this.props.open) {
       return;
     }

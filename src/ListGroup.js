@@ -34,7 +34,7 @@ class ListGroup extends React.Component {
 
   renderUL(items) {
     let listItems = ValidComponentChildren.map(items,
-      (item, index) => cloneElement(item, { listItem: true })
+      (item) => cloneElement(item, { listItem: true })
     );
 
     return (

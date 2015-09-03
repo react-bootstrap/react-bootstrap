@@ -31,7 +31,7 @@ const Example = React.createClass({
           onHide={() => this.setState({ show: false })}
           placement="right"
           container={this}
-          target={ props => React.findDOMNode(this.refs.target)}
+          target={() => React.findDOMNode(this.refs.target)}
         >
           <div style={style}>
             <strong>Holy guacamole!</strong> Check this info.

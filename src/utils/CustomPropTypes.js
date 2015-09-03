@@ -63,7 +63,7 @@ function createKeyOfChecker(obj) {
 }
 
 function createSinglePropFromChecker(arrOfProps) {
-  function validate(props, propName, componentName) {
+  function validate(props, propName) {
     const usedPropCount = arrOfProps
       .map(listedProp => props[listedProp])
       .reduce((acc, curr) => acc + (curr !== undefined ? 1 : 0), 0);

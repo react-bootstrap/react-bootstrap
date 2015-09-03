@@ -14,7 +14,7 @@ const Example = React.createClass({
     const sharedProps = {
       show: this.state.show,
       container: this,
-      target: props => React.findDOMNode(this.refs.target)
+      target: () => React.findDOMNode(this.refs.target)
     };
 
     return (
