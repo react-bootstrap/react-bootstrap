@@ -97,7 +97,7 @@ class Dropdown extends React.Component {
     return (
       <Component
         {...props}
-        tabIndex='-1'
+        tabIndex="-1"
         className={classNames(this.props.className, rootClasses)}
       >
         { children }
