@@ -49,7 +49,6 @@ class SplitButton extends React.Component {
 }
 
 SplitButton.propTypes = {
-  //dropup: React.PropTypes.bool,
   ...Dropdown.propTypes,
   ...BootstrapMixin.propTypes,
 

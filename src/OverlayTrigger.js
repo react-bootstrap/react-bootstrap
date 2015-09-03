@@ -1,4 +1,4 @@
-/*eslint-disable react/prop-types */
+/* eslint-disable react/prop-types */
 import React, { cloneElement } from 'react';
 import contains from 'dom-helpers/query/contains';
 import createChainedFunction from './utils/createChainedFunction';
@@ -78,7 +78,7 @@ const OverlayTrigger = React.createClass({
      */
     onMouseLeave: React.PropTypes.func,
 
-    //override specific overlay props
+    // override specific overlay props
     /**
      * @private
      */

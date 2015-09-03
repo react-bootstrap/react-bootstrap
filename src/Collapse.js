@@ -104,7 +104,7 @@ class Collapse extends React.Component {
       : this.props.dimension;
   }
 
-  //for testing
+  // for testing
   _getTransitionInstance() {
     return this.refs.transition;
   }

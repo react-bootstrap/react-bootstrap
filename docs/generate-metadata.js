@@ -73,7 +73,7 @@ function applyPropDoclets(props, propName) {
 
 
 export default function generate(destination, options = { mixins: true, inferComponent: true }) {
-  return globp(__dirname + '/../src/**/*.js') //eslint-disable-line no-path-concat
+  return globp(__dirname + '/../src/**/*.js') // eslint-disable-line no-path-concat
     .then( files => {
       let results = files.map(
         filename => fsp.readFile(filename).then(content => metadata(content, options)) );
@@ -96,7 +96,7 @@ export default function generate(destination, options = { mixins: true, inferCom
               });
             });
 
-            //combine all the component metadata into one large object
+            // combine all the component metadata into one large object
             result = { ...result, ...components };
           });
 

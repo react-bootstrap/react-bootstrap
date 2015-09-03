@@ -1,4 +1,4 @@
-/*eslint-disable react/prop-types */
+/* eslint-disable react/prop-types */
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 import domUtils from './utils/domUtils';
@@ -242,7 +242,7 @@ const Modal = React.createClass({
 
     this.refs.dialog = ref;
 
-    //maintains backwards compat with older component breakdown
+    // maintains backwards compat with older component breakdown
     if (!this.props.backdrop) {
       this.refs.modal = ref;
     }
@@ -273,7 +273,7 @@ const Modal = React.createClass({
     let { animation } = this.props;
 
     if (prevProps.show && !this.props.show && !animation) {
-      //otherwise handleHidden will call this.
+      // otherwise handleHidden will call this.
       this.onHide();
     } else if (!prevProps.show && this.props.show) {
       this.onShow();
