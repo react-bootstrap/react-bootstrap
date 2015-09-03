@@ -128,7 +128,7 @@ class Dropdown extends React.Component {
       }
     };
 
-    switch(event.keyCode) {
+    switch (event.keyCode) {
     case keycode.codes.down:
       if (!this.props.open) {
         this.toggleOpen();

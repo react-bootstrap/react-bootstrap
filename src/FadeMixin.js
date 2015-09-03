@@ -8,8 +8,8 @@ function getElementsAndSelf (root, classes){
 
   els = [].map.call(els, function(e){ return e; });
 
-  for(let i = 0; i < classes.length; i++){
-    if( !root.className.match(new RegExp('\\b' + classes[i] + '\\b'))){
+  for (let i = 0; i < classes.length; i++){
+    if ( !root.className.match(new RegExp('\\b' + classes[i] + '\\b'))){
       return els;
     }
   }

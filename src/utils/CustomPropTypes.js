@@ -94,7 +94,7 @@ function all(propTypes) {
   }
 
   return function(props, propName, componentName) {
-    for(let i = 0; i < propTypes.length; i++) {
+    for (let i = 0; i < propTypes.length; i++) {
       let result = propTypes[i](props, propName, componentName);
 
       if (result !== undefined && result !== null) {

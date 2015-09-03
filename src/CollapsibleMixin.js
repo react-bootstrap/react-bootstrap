@@ -38,7 +38,7 @@ const CollapsibleMixin = {
     let dimension = this.dimension();
     let value = '0';
 
-    if(!willExpanded){
+    if (!willExpanded){
       value = this.getCollapsibleDimensionValue();
     }
 
@@ -60,7 +60,7 @@ const CollapsibleMixin = {
   },
 
   _checkStartAnimation(){
-    if(!this.state.collapsing) {
+    if (!this.state.collapsing) {
       return;
     }
 
@@ -70,7 +70,7 @@ const CollapsibleMixin = {
 
     // setting the dimension here starts the transition animation
     let result;
-    if(this.isExpanded()) {
+    if (this.isExpanded()) {
       result = value + 'px';
     } else {
       result = '0px';
@@ -81,8 +81,8 @@ const CollapsibleMixin = {
   _checkToggleCollapsing(prevProps, prevState){
     let wasExpanded = prevProps.expanded != null ? prevProps.expanded : prevState.expanded;
     let isExpanded = this.isExpanded();
-    if(wasExpanded !== isExpanded){
-      if(wasExpanded) {
+    if (wasExpanded !== isExpanded){
+      if (wasExpanded) {
         this._handleCollapse();
       } else {
         this._handleExpand();
