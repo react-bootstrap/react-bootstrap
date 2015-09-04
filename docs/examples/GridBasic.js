@@ -1,4 +1,4 @@
-const navInstance = (
+const gridInstance = (
   <Grid>
     <Row className="show-grid">
       <Col xs={12} md={8}><code>&lt;{'Col xs={12} md={8}'} /&gt;</code></Col>
@@ -22,4 +22,4 @@ const navInstance = (
   </Grid>
 );
 
-React.render(navInstance, mountNode);
+React.render(gridInstance, mountNode);

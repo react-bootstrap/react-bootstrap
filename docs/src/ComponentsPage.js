@@ -623,6 +623,11 @@ const ComponentsPage = React.createClass({
                   <p>just pass in a <code>onDismiss</code> function.</p>
                   <ReactPlayground codeText={Samples.AlertDismissable} />
 
+                  <div className="bs-callout bs-callout-info">
+                    <h4>Screen Reader Accessibility</h4>
+                  <p>Unlike regular Bootstrap, alerts have an sr-only dismiss button after the content.</p>
+                  </div>
+
                   <h4><Anchor id="alerts-auto-closeable">Auto closeable</Anchor></h4>
                   <p>Auto close after a set time with <code>dismissAfter</code> prop.</p>
                   <ReactPlayground codeText={Samples.AlertAutoDismissable} />
