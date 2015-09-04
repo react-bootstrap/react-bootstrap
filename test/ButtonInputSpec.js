@@ -42,8 +42,6 @@ describe('ButtonInput', () =>{
     ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" bsStyle="danger" />
     );
-
-    console.warn.called.should.be.false;
   });
 
   it('throws warning about wrong type for bsStyle=error', function () {
@@ -72,11 +70,9 @@ describe('ButtonInput', () =>{
     assert.notInstanceOf(result, Error);
   });
 
-  it('does not allow elements for children', function () {
+  it('allows elements as children', function () {
     ReactTestUtils.renderIntoDocument(
       <ButtonInput><span>blah</span></ButtonInput>
     );
-
-    shouldWarn('propType: Invalid');
   });
 });
