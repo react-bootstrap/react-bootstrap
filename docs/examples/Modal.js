@@ -1,14 +1,14 @@
 const Example = React.createClass({
 
-  getInitialState(){
+  getInitialState() {
     return { showModal: false };
   },
 
-  close(){
+  close() {
     this.setState({ showModal: false });
   },
 
-  open(){
+  open() {
     this.setState({ showModal: true });
   },
 

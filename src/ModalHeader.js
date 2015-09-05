@@ -22,7 +22,7 @@ class ModalHeader extends React.Component {
   }
 }
 
-//used in liue of parent contexts right now to auto wire the close button
+// used in liue of parent contexts right now to auto wire the close button
 ModalHeader.__isModalHeader = true;
 
 ModalHeader.propTypes = {

@@ -49,14 +49,13 @@ class SplitButton extends React.Component {
 }
 
 SplitButton.propTypes = {
-  //dropup: React.PropTypes.bool,
   ...Dropdown.propTypes,
   ...BootstrapMixin.propTypes,
 
   /**
    * @private
    */
-  onClick(){},
+  onClick() {},
   target: React.PropTypes.string,
   href: React.PropTypes.string,
   /**

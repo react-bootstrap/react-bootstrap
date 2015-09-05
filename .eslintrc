@@ -25,16 +25,10 @@
     "no-param-reassign": 0,
     "no-this-before-super": 2,
     "no-undef": 2,
-    "no-unused-vars": [2, { "vars": "all", "args": "none" }],
     "babel/object-shorthand": 2,
     "react/jsx-boolean-value": [2, "never"],
     "react/jsx-no-duplicate-props": 2,
     "react/prop-types": [2, { "ignore": [ "children", "className", "style" ] }],
-    "react/sort-comp": 0,
-    "space-after-keywords": 0,
-    "space-before-blocks": 0,
-    "space-before-function-paren": 0,
-    "spaced-comment": 0,
-    "vars-on-top": 0
+    "react/sort-comp": 0
   }
 }

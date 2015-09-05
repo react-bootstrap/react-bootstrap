@@ -1,13 +1,13 @@
 
 class CustomMenu extends React.Component {
 
-  constructor(...args){
+  constructor(...args) {
     super(...args);
     this.state = { value: '' };
     this.onChange = e => this.setState({ value: e.target.value });
   }
 
-  render(){
+  render() {
     let { className, ...props } = this.props;
 
     return (
@@ -30,7 +30,7 @@ class CustomMenu extends React.Component {
     );
   }
 
-  filterChildren(){
+  filterChildren() {
     let { children } = this.props;
     let { value } = this.state;
     let filtered = [];

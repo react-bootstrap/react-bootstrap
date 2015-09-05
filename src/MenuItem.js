@@ -36,7 +36,8 @@ export default class MenuItem extends React.Component {
     }
 
     const classes = {
-      disabled: this.props.disabled
+      disabled: this.props.disabled,
+      active: this.props.active
     };
 
     return (
@@ -61,10 +62,11 @@ export default class MenuItem extends React.Component {
 }
 
 MenuItem.propTypes = {
+  active: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
   divider: all([
     React.PropTypes.bool,
-    function(props, propName, componentName) {
+    function(props) {
       if (props.divider && props.children) {
         return new Error('Children will not be rendered for dividers');
       }
