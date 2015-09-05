@@ -77,6 +77,7 @@ export default {
   AlertAutoDismissable:          require('fs').readFileSync(__dirname + '/../examples/AlertAutoDismissable.js', 'utf8'),
   CarouselUncontrolled:          require('fs').readFileSync(__dirname + '/../examples/CarouselUncontrolled.js', 'utf8'),
   CarouselControlled:            require('fs').readFileSync(__dirname + '/../examples/CarouselControlled.js', 'utf8'),
+  Affix:                         require('fs').readFileSync(__dirname + '/../examples/Affix.js', 'utf8'),
   GridBasic:                     require('fs').readFileSync(__dirname + '/../examples/GridBasic.js', 'utf8'),
   ThumbnailAnchor:               require('fs').readFileSync(__dirname + '/../examples/ThumbnailAnchor.js', 'utf8'),
   ThumbnailDiv:                  require('fs').readFileSync(__dirname + '/../examples/ThumbnailDiv.js', 'utf8'),

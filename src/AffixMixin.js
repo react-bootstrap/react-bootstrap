@@ -4,8 +4,15 @@ import EventListener from './utils/EventListener';
 
 const AffixMixin = {
   propTypes: {
+    /**
+     * Pixels to offset from screen when calculating position of scroll.
+     */
     offset: React.PropTypes.number,
+    /**
+     * To provide a unique, bottom and top offset just set this props and offsetBottom.
+     */
     offsetTop: React.PropTypes.number,
+
     offsetBottom: React.PropTypes.number
   },
 

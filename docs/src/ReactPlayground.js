@@ -4,8 +4,11 @@
 /* eslint-disable */
 const classNames = require('classnames');
 const React = require('react');
+const getOffset = require('dom-helpers/query/offset');
+const css = require('dom-helpers/style');
 
 const Accordion = require('../../src/Accordion');
+const Affix = require('../../src/Affix');
 const Alert = require('../../src/Alert');
 const Badge = require('../../src/Badge');
 const Button = require('../../src/Button');
@@ -48,6 +51,7 @@ const Popover = require('../../src/Popover');
 const ProgressBar = require('../../src/ProgressBar');
 const Row = require('../../src/Row');
 const SplitButton = require('../../src/SplitButton');
+const SubNav=require('../../src/SubNav');
 const Tab = require('../../src/Tab');
 const Table = require('../../src/Table');
 const Tabs = require('../../src/Tabs');
@@ -148,7 +152,8 @@ const ReactPlayground = React.createClass({
 
   propTypes: {
     codeText: React.PropTypes.string.isRequired,
-    transformer: React.PropTypes.func
+    transformer: React.PropTypes.func,
+    mountTarget: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -229,6 +234,14 @@ const ReactPlayground = React.createClass({
       );
     }
 
+    let {mountTarget}=this.props;
+    if(mountTarget!==undefined){
+      if(typeof document!='undefined'){
+        React.render(example,document.getElementById(mountTarget));
+      }
+      return  <div className={classNames('bs-example', this.props.exampleClassName)}></div>;
+    }
+
     return (
       <div className={classNames('bs-example', this.props.exampleClassName)}>
         {example}
@@ -263,7 +276,8 @@ const ReactPlayground = React.createClass({
   },
 
   clearExample() {
-    const mountNode = React.findDOMNode(this.refs.mount);
+    let {mountTarget}=this.props;
+    const mountNode = mountTarget===undefined? React.findDOMNode(this.refs.mount):document.getElementById(mountTarget);
     try {
       React.unmountComponentAtNode(mountNode);
     } catch (e) {
