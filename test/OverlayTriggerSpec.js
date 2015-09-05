@@ -279,4 +279,24 @@ describe('OverlayTrigger', () => {
       });
     });
   });
+
+  it('Should forward onHide to overlay', () => {
+    let props;
+    class PropsSpy extends React.Component {
+      render() {
+        props = this.props;
+        return <div>test</div>;
+      }
+    }
+
+    const instance = ReactTestUtils.renderIntoDocument(
+      <OverlayTrigger trigger="click" overlay={<PropsSpy />}>
+        <button>button</button>
+      </OverlayTrigger>
+    );
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
+    ReactTestUtils.Simulate.click(overlayTrigger);
+
+    expect(props.onHide).to.equal(instance.hide);
+  });
 });
