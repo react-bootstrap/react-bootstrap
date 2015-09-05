@@ -62,6 +62,7 @@ export default class MenuItem extends React.Component {
 }
 
 MenuItem.propTypes = {
+  active: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
   divider: all([
     React.PropTypes.bool,
