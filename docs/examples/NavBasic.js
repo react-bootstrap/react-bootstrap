@@ -1,4 +1,4 @@
-function handleSelect (selectedKey) {
+function handleSelect(selectedKey) {
   alert('selected ' + selectedKey);
 }
 

@@ -1,12 +1,12 @@
 
 class Example extends React.Component {
 
-  constructor(...args){
+  constructor(...args) {
     super(...args);
     this.state = {};
   }
 
-  render(){
+  render() {
     return (
       <div>
         <Button onClick={()=> this.setState({ open: !this.state.open })}>

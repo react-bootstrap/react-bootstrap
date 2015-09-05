@@ -80,7 +80,7 @@ describe('OverlayTrigger', function() {
       <OverlayTrigger
         trigger='click'
         overlay={<div>test</div>}
-        onHide={()=>{}}
+        onHide={() => {}}
         onExit={increment}
         onExiting={increment}
         onExited={()=> {

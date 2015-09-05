@@ -51,15 +51,15 @@ const Pagination = React.createClass({
       buttonComponentClass
     } = this.props;
 
-    if(maxButtons){
+    if (maxButtons) {
       let hiddenPagesBefore = activePage - parseInt(maxButtons / 2, 10);
       startPage = hiddenPagesBefore > 1 ? hiddenPagesBefore : 1;
       hasHiddenPagesAfter = startPage + maxButtons <= items;
 
-      if(!hasHiddenPagesAfter){
+      if (!hasHiddenPagesAfter) {
         endPage = items;
         startPage = items - maxButtons + 1;
-        if(startPage < 1){
+        if (startPage < 1) {
           startPage = 1;
         }
       } else {
@@ -70,7 +70,7 @@ const Pagination = React.createClass({
       endPage = items;
     }
 
-    for(let pagenumber = startPage; pagenumber <= endPage; pagenumber++){
+    for (let pagenumber = startPage; pagenumber <= endPage; pagenumber++) {
       pageButtons.push(
         <PaginationButton
           key={pagenumber}
@@ -83,7 +83,7 @@ const Pagination = React.createClass({
       );
     }
 
-    if(maxButtons && hasHiddenPagesAfter && ellipsis){
+    if (maxButtons && hasHiddenPagesAfter && ellipsis) {
       pageButtons.push(
         <PaginationButton
           key="ellipsis"
@@ -98,7 +98,7 @@ const Pagination = React.createClass({
   },
 
   renderPrev() {
-    if(!this.props.prev){
+    if (!this.props.prev) {
       return null;
     }
 
@@ -115,7 +115,7 @@ const Pagination = React.createClass({
   },
 
   renderNext() {
-    if(!this.props.next){
+    if (!this.props.next) {
       return null;
     }
 
@@ -132,7 +132,7 @@ const Pagination = React.createClass({
   },
 
   renderFirst() {
-    if(!this.props.first){
+    if (!this.props.first) {
       return null;
     }
 
@@ -149,7 +149,7 @@ const Pagination = React.createClass({
   },
 
   renderLast() {
-    if(!this.props.last){
+    if (!this.props.last) {
       return null;
     }
 

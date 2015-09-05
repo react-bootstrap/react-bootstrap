@@ -1,4 +1,4 @@
-function onSelectAlert(eventKey, href, target) {
+function onSelectAlert(eventKey, href) {
   alert('Alert from menu item.\neventKey: "' + eventKey + '"\nhref: "' + href + '"');
 }
 

@@ -81,20 +81,20 @@ import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import CustomPropTypes from './utils/CustomPropTypes';
 
-function createDeprecationWrapper(obj, deprecated, instead, link){
+function createDeprecationWrapper(obj, deprecated, instead, link) {
   let wrapper = {};
 
-  if (process.env.NODE_ENV === 'production'){
+  if (process.env.NODE_ENV === 'production') {
     return obj;
   }
 
   Object.keys(obj).forEach(key => {
     Object.defineProperty(wrapper, key, {
-      get(){
+      get() {
         deprecationWarning(deprecated, instead, link);
         return obj[key];
       },
-      set(x){ obj[key] = x; }
+      set(x) { obj[key] = x; }
     });
   });
 

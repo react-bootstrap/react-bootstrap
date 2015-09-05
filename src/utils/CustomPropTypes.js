@@ -63,7 +63,7 @@ function createKeyOfChecker(obj) {
 }
 
 function createSinglePropFromChecker(arrOfProps) {
-  function validate(props, propName, componentName) {
+  function validate(props, propName) {
     const usedPropCount = arrOfProps
       .map(listedProp => props[listedProp])
       .reduce((acc, curr) => acc + (curr !== undefined ? 1 : 0), 0);
@@ -94,7 +94,7 @@ function all(propTypes) {
   }
 
   return function(props, propName, componentName) {
-    for(let i = 0; i < propTypes.length; i++) {
+    for (let i = 0; i < propTypes.length; i++) {
       let result = propTypes[i](props, propName, componentName);
 
       if (result !== undefined && result !== null) {
@@ -126,8 +126,8 @@ function createElementTypeChecker() {
 
 export default {
 
-  deprecated(propType, explanation){
-    return function(props, propName, componentName){
+  deprecated(propType, explanation) {
+    return function(props, propName, componentName) {
       if (props[propName] != null) {
         warning(false, `"${propName}" property of "${componentName}" has been deprecated.\n${explanation}`);
       }
@@ -136,8 +136,8 @@ export default {
     };
   },
 
-  isRequiredForA11y(propType){
-    return function(props, propName, componentName){
+  isRequiredForA11y(propType) {
+    return function(props, propName, componentName) {
       if (props[propName] == null) {
         return new Error(
           'The prop `' + propName + '` is required to make ' + componentName + ' accessible ' +
@@ -158,7 +158,7 @@ export default {
         let inRole = (role, child) => role === child.props.bsRole;
 
         roles.every(role => {
-          if (!children.some(child => inRole(role, child))){
+          if (!children.some(child => inRole(role, child))) {
             missing = role;
             return false;
           }
@@ -181,7 +181,7 @@ export default {
         roles.every(role => {
           let childrenWithRole = children.filter(child => child.props.bsRole === role);
 
-          if (childrenWithRole.length > 1){
+          if (childrenWithRole.length > 1) {
             duplicate = role;
             return false;
           }

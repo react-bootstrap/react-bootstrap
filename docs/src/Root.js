@@ -30,7 +30,7 @@ const Root = React.createClass({
     metadata: React.PropTypes.object
   },
 
-  getChildContext(){
+  getChildContext() {
     return { metadata: this.props.propData };
   },
 

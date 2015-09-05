@@ -390,7 +390,7 @@ describe('Tabs', function () {
   describe('animation', function () {
     let mountPoint;
 
-    beforeEach(()=>{
+    beforeEach(() => {
       mountPoint = document.createElement('div');
       document.body.appendChild(mountPoint);
     });
@@ -429,9 +429,9 @@ describe('Tabs', function () {
     checkTabRemovingWithAnimation(false);
   });
 
-  describe('Web Accessibility', function(){
+  describe('Web Accessibility', function() {
     let instance;
-    beforeEach(function(){
+    beforeEach(function() {
       instance = ReactTestUtils.renderIntoDocument(
         <Tabs defaultActiveKey={2} id='tabs'>
           <Tab id='pane-1' title="Tab 1" eventKey={1}>Tab 1 content</Tab>

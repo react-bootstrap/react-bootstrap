@@ -3,7 +3,7 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ButtonInput from '../src/ButtonInput';
 import {shouldWarn} from './helpers';
 
-describe('ButtonInput', () =>{
+describe('ButtonInput', () => {
   it('renders an input button element with type=button', function () {
     const instance = ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" bsStyle="danger" wrapperClassName="test" />

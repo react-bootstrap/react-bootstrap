@@ -1,4 +1,4 @@
-/*eslint-disable react/prop-types */
+/* eslint-disable react/prop-types */
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 import domUtils from './utils/domUtils';
@@ -242,7 +242,7 @@ const Modal = React.createClass({
 
     this.refs.dialog = ref;
 
-    //maintains backwards compat with older component breakdown
+    // maintains backwards compat with older component breakdown
     if (!this.props.backdrop) {
       this.refs.modal = ref;
     }
@@ -273,7 +273,7 @@ const Modal = React.createClass({
     let { animation } = this.props;
 
     if (prevProps.show && !this.props.show && !animation) {
-      //otherwise handleHidden will call this.
+      // otherwise handleHidden will call this.
       this.onHide();
     } else if (!prevProps.show && this.props.show) {
       this.onShow();
@@ -406,8 +406,8 @@ const Modal = React.createClass({
     // IOS only allows click events to be delegated to the document on elements
     // it considers 'clickable' - anchors, buttons, etc. We fake a click handler on the
     // DOM nodes themselves. Remove if handled by React: https://github.com/facebook/react/issues/1169
-    React.findDOMNode(this.refs.modal).onclick = function () {};
-    React.findDOMNode(this.refs.backdrop).onclick = function () {};
+    React.findDOMNode(this.refs.modal).onclick = function() {};
+    React.findDOMNode(this.refs.backdrop).onclick = function() {};
   },
 
   _getStyles() {

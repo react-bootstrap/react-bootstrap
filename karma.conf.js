@@ -1,4 +1,4 @@
-/* eslint no-var: 0, babel/object-shorthand: 0 */
+/* eslint no-var: 0, babel/object-shorthand: 0, vars-on-top: 0 */
 require('babel/register');
 
 var webpackConfig = require('./webpack/test.config.js');
@@ -18,7 +18,7 @@ if (runCoverage) {
   }
 }
 
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
 
     basePath: '',

@@ -1,9 +1,9 @@
 class Example extends React.Component {
-  constructor(...args){
+  constructor(...args) {
     super(...args);
     this.state = { show: false };
   }
-  render(){
+  render() {
     return (
       <ButtonToolbar>
         <Button

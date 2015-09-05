@@ -107,7 +107,7 @@ describe('NavItem', function () {
     assert.equal(linkElement.outerHTML.match('role="button"'), null);
   });
 
-  describe('Web Accessibility', function(){
+  describe('Web Accessibility', function() {
 
     it('Should pass aria-controls to the link', function () {
       let instance = ReactTestUtils.renderIntoDocument(
