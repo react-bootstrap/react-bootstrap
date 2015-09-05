@@ -235,8 +235,8 @@ const ReactPlayground = React.createClass({
     }
 
     let {mountTarget} = this.props;
-    if(mountTarget !== undefined){
-      if(typeof document !== 'undefined'){
+    if (mountTarget !== undefined) {
+      if (typeof document !== 'undefined') {
         React.render(example,document.getElementById(mountTarget));
       }
       return  <div className={classNames('bs-example', this.props.exampleClassName)}></div>;

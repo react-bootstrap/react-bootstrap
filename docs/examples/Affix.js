@@ -1,6 +1,6 @@
 const AffixInstance = React.createClass({
 
-  render(){
+  render() {
     return (
       <Affix
         className="bs-docs-sidebar hidden-print"
