@@ -234,9 +234,9 @@ const ReactPlayground = React.createClass({
       );
     }
 
-    let {mountTarget}=this.props;
-    if(mountTarget!==undefined){
-      if(typeof document!='undefined'){
+    let {mountTarget} = this.props;
+    if(mountTarget !== undefined){
+      if(typeof document !== 'undefined'){
         React.render(example,document.getElementById(mountTarget));
       }
       return  <div className={classNames('bs-example', this.props.exampleClassName)}></div>;
@@ -276,8 +276,8 @@ const ReactPlayground = React.createClass({
   },
 
   clearExample() {
-    let {mountTarget}=this.props;
-    const mountNode = mountTarget===undefined? React.findDOMNode(this.refs.mount):document.getElementById(mountTarget);
+    let {mountTarget} = this.props;
+    const mountNode = mountTarget === undefined ? React.findDOMNode(this.refs.mount) : document.getElementById(mountTarget);
     try {
       React.unmountComponentAtNode(mountNode);
     } catch (e) {

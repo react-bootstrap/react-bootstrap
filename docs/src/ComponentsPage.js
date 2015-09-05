@@ -1,14 +1,6 @@
 /* eslint react/no-did-mount-set-state: 0 */
 
 import React from 'react';
-import getOffset from 'dom-helpers/query/offset';
-import css from 'dom-helpers/style';
-
-import Affix from '../../src/Affix';
-import Input from '../../src/Input';
-import Nav from '../../src/Nav';
-import SubNav from '../../src/SubNav';
-import NavItem from '../../src/NavItem';
 
 import NavMain from './NavMain';
 import PageHeader from './PageHeader';
@@ -1126,7 +1118,7 @@ const ComponentsPage = React.createClass({
             </div>
 
 
-            <div id='affix-target' className="col-md-3">
+            <div id="affix-target" className="col-md-3">
             </div>
           </div>
         </div>
