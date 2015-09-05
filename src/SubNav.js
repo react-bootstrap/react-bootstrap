@@ -62,7 +62,7 @@ const SubNav = React.createClass({
 
       ValidComponentChildren.forEach(
         child.props.children,
-        function (grandchild) {
+        function(grandchild) {
           if (this.isChildActive(grandchild)) {
             isActive = true;
           }

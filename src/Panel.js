@@ -31,13 +31,13 @@ const Panel = React.createClass({
     };
   },
 
-  getInitialState(){
+  getInitialState() {
     return {
       expanded: this.props.defaultExpanded
     };
   },
 
-  handleSelect(e){
+  handleSelect(e) {
     e.selected = true;
 
     if (this.props.onSelect) {
@@ -51,11 +51,11 @@ const Panel = React.createClass({
     }
   },
 
-  handleToggle(){
+  handleToggle() {
     this.setState({ expanded: !this.state.expanded});
   },
 
-  isExpanded(){
+  isExpanded() {
     return this.props.expanded != null ? this.props.expanded : this.state.expanded;
   },
 
@@ -103,11 +103,11 @@ const Panel = React.createClass({
       return {key: bodyElements.length};
     }
 
-    function addPanelChild (child) {
+    function addPanelChild(child) {
       bodyElements.push(cloneElement(child, getProps()));
     }
 
-    function addPanelBody (children) {
+    function addPanelBody(children) {
       bodyElements.push(
         <div className={bodyClass} {...getProps()}>
           {children}
@@ -115,7 +115,7 @@ const Panel = React.createClass({
       );
     }
 
-    function maybeRenderPanelBody () {
+    function maybeRenderPanelBody() {
       if (panelBodyChildren.length === 0) {
         return;
       }

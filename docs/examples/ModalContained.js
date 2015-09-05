@@ -10,19 +10,19 @@
  */
 
 const Trigger = React.createClass({
-  getInitialState(){
+  getInitialState() {
     return { show: false };
   },
 
   render() {
-    let close = e => this.setState({ show: false});
+    let close = () => this.setState({ show: false});
 
     return (
       <div className="modal-container" style={{height: 200}}>
         <Button
           bsStyle="primary"
           bsSize="large"
-          onClick={e => this.setState({ show: true})}
+          onClick={() => this.setState({ show: true})}
         >
           Launch contained modal
         </Button>

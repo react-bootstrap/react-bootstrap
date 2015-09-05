@@ -12,7 +12,7 @@ export default {
         let inRole = (role, child) => role === child.props.bsRole;
 
         roles.every(role => {
-          if (!children.some(child => inRole(role, child))){
+          if (!children.some(child => inRole(role, child))) {
             missing = role;
             return false;
           }
@@ -35,7 +35,7 @@ export default {
         roles.every(role => {
           let childrenWithRole = children.filter(child => child.props.bsRole === role);
 
-          if (childrenWithRole.length > 1){
+          if (childrenWithRole.length > 1) {
             duplicate = role;
             return false;
           }

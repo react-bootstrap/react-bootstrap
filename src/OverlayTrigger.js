@@ -1,4 +1,4 @@
-/*eslint-disable react/prop-types */
+/* eslint-disable react/prop-types */
 import React, { cloneElement } from 'react';
 import contains from 'dom-helpers/query/contains';
 import createChainedFunction from './utils/createChainedFunction';
@@ -78,19 +78,19 @@ const OverlayTrigger = React.createClass({
      */
     onMouseLeave: React.PropTypes.func,
 
-    //override specific overlay props
+    // override specific overlay props
     /**
      * @private
      */
-    target(){},
+    target() {},
      /**
      * @private
      */
-    onHide(){},
+    onHide() {},
     /**
      * @private
      */
-    show(){}
+    show() {}
   },
 
   getDefaultProps() {
@@ -131,7 +131,7 @@ const OverlayTrigger = React.createClass({
     this.handleMouseOut = this.handleMouseOverOut.bind(null, this.handleDelayedHide);
   },
 
-  componentDidMount(){
+  componentDidMount() {
     this._mountNode = document.createElement('div');
     React.render(this._overlay, this._mountNode);
   },
@@ -142,7 +142,7 @@ const OverlayTrigger = React.createClass({
     clearTimeout(this._hoverDelay);
   },
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     if (this._mountNode) {
       React.render(this._overlay, this._mountNode);
     }
@@ -261,11 +261,11 @@ const OverlayTrigger = React.createClass({
   // React's built version is broken: https://github.com/facebook/react/issues/4251
   // for cases when the trigger is disabled and mouseOut/Over can cause flicker moving
   // from one child element to another.
-  handleMouseOverOut(handler, e){
+  handleMouseOverOut(handler, e) {
     let target = e.currentTarget;
     let related = e.relatedTarget || e.nativeEvent.toElement;
 
-    if (!related || related !== target && !contains(target, related)){
+    if (!related || related !== target && !contains(target, related)) {
       handler(e);
     }
   }

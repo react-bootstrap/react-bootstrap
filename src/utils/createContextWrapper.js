@@ -4,7 +4,7 @@ import React from 'react';
  * Creates new trigger class that injects context into overlay.
  */
 export default function createContextWrapper(Trigger, propName) {
-  return function (contextTypes) {
+  return function(contextTypes) {
     class ContextWrapper extends React.Component {
       getChildContext() {
         return this.props.context;

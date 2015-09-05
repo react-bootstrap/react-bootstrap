@@ -250,7 +250,7 @@ const Tabs = React.createClass({
     let panesColProps;
     if (paneWidth == null) {
       panesColProps = {};
-      Object.keys(tabsColProps).forEach(function (size) {
+      Object.keys(tabsColProps).forEach(function(size) {
         panesColProps[size] = styleMaps.GRID_COLUMNS - tabsColProps[size];
       });
     } else if (paneWidth instanceof Object) {

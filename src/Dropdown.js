@@ -116,7 +116,7 @@ class Dropdown extends React.Component {
     }
   }
 
-  handleClick(event) {
+  handleClick() {
     if (this.props.disabled) {
       return;
     }
@@ -131,7 +131,7 @@ class Dropdown extends React.Component {
       }
     };
 
-    switch(event.keyCode) {
+    switch (event.keyCode) {
     case keycode.codes.down:
       if (!this.props.open) {
         this.toggleOpen();
@@ -148,7 +148,7 @@ class Dropdown extends React.Component {
     }
   }
 
-  handleClose(event) {
+  handleClose() {
     if (!this.props.open) {
       return;
     }
@@ -156,7 +156,7 @@ class Dropdown extends React.Component {
     this.toggleOpen();
   }
 
-  focus(){
+  focus() {
     let toggle = React.findDOMNode(this.refs[TOGGLE_REF]);
 
     if (toggle && toggle.focus) {
@@ -172,7 +172,7 @@ class Dropdown extends React.Component {
       let extractor = find(this.childExtractors, x => x.matches(child));
 
       if (extractor) {
-        if (seen[extractor.key]){
+        if (seen[extractor.key]) {
           return false;
         }
 
@@ -292,7 +292,7 @@ Dropdown.propTypes = {
    * `open` value.
    *
    * ```js
-   * function(Boolean isOpen){}
+   * function(Boolean isOpen) {}
    * ```
    * @controllable open
    */

@@ -32,7 +32,7 @@ describe('SafeAnchor', function() {
   });
 
   it('forwards onClick handler', function(done) {
-    const handleClick = (event) => {
+    const handleClick = () => {
       done();
     };
     const instance = ReactTestUtils.renderIntoDocument(<SafeAnchor onClick={handleClick} />);

@@ -53,12 +53,12 @@ const MyLargeModal = React.createClass({
 });
 
 const App = React.createClass({
-  getInitialState(){
+  getInitialState() {
     return { smShow: false, lgShow: false };
   },
-  render(){
-    let smClose = e => this.setState({ smShow: false });
-    let lgClose = e => this.setState({ lgShow: false });
+  render() {
+    let smClose = () => this.setState({ smShow: false });
+    let lgClose = () => this.setState({ lgShow: false });
 
     return (
       <ButtonToolbar>

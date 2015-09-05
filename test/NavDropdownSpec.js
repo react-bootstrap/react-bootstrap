@@ -42,7 +42,7 @@ describe('NavDropdown', function() {
             </button>
             <NavDropdown
               open={this.state.open}
-              onToggle={()=>{}}
+              onToggle={() => {}}
               title='Prop open control'
               id='test-id'>
               <MenuItem eventKey='1'>Item 1</MenuItem>

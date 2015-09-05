@@ -54,7 +54,7 @@ Fade.propTypes = {
   duration: all([
     React.PropTypes.number,
     (props)=> {
-      if (props.duration != null){
+      if (props.duration != null) {
         deprecationWarning('Fade `duration`', 'the `timeout` prop');
       }
       return null;

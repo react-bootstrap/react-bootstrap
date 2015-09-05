@@ -1,4 +1,4 @@
-function alertClicked () {
+function alertClicked() {
   alert('You clicked the third ListGroupItem');
 }
 
