@@ -90,6 +90,7 @@ class Dropdown extends React.Component {
 
     const rootClasses = {
       open: this.props.open,
+      disabled: this.props.disabled,
       dropdown: !this.props.dropup,
       dropup: this.props.dropup
     };
