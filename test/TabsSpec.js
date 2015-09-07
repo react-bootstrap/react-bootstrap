@@ -2,10 +2,8 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
 import Col from '../src/Col';
-import Grid from '../src/Grid';
 import Nav from '../src/Nav';
 import NavItem from '../src/NavItem';
-import Row from '../src/Row';
 import Tab from '../src/Tab';
 import Tabs from '../src/Tabs';
 
@@ -263,18 +261,10 @@ describe('Tabs', function () {
     });
 
     it('doesn\'t render grid elements', function () {
-      const grids = ReactTestUtils.scryRenderedComponentsWithType(
-        instance, Grid
-      );
-      const rows = ReactTestUtils.scryRenderedComponentsWithType(
-        instance, Row
-      );
       const cols = ReactTestUtils.scryRenderedComponentsWithType(
         instance, Col
       );
 
-      expect(grids).to.be.empty;
-      expect(rows).to.be.empty;
       expect(cols).to.be.empty;
     });
   });
@@ -308,19 +298,15 @@ describe('Tabs', function () {
       });
 
       it('renders grid elements', function () {
-        const grids = ReactTestUtils.scryRenderedComponentsWithType(
-          instance, Grid
-        );
-        const rows = ReactTestUtils.scryRenderedComponentsWithType(
-          instance, Row
-        );
         const cols = ReactTestUtils.scryRenderedComponentsWithType(
           instance, Col
         );
 
-        expect(grids).to.have.length(1);
-        expect(rows).to.have.length(1);
         expect(cols).to.have.length(2);
+      });
+
+      it('should render with clearfix', function() {
+        expect(React.findDOMNode(instance).className).to.match(/\bclearfix\b/);
       });
     });
 
@@ -383,6 +369,23 @@ describe('Tabs', function () {
           .to.match(/\bcol-xs-4\b/).and.to.match(/\bcol-md-3\b/);
         expect(React.findDOMNode(panes).className)
           .to.match(/\bcol-xs-7\b/).and.to.match(/\bcol-md-8\b/);
+      });
+    });
+
+    describe('when standalone', function() {
+      let instance;
+
+      beforeEach(function () {
+        instance = ReactTestUtils.renderIntoDocument(
+          <Tabs defaultActiveKey={1} position="left" standalone>
+            <Tab title="A Tab" eventKey={1}>Tab content</Tab>
+          </Tabs>
+        );
+      });
+
+      it('should not render with clearfix', function() {
+        expect(React.findDOMNode(instance).className)
+          .to.not.match(/\bclearfix\b/);
       });
     });
   });
