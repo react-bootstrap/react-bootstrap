@@ -1,10 +1,9 @@
+import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 
 import Col from './Col';
-import Grid from './Grid';
 import Nav from './Nav';
 import NavItem from './NavItem';
-import Row from './Row';
 import styleMaps from './styleMaps';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
@@ -61,14 +60,19 @@ const Tabs = React.createClass({
     paneWidth: React.PropTypes.oneOfType([
       React.PropTypes.number,
       React.PropTypes.object
-    ])
+    ]),
+    /**
+     * Render without clearfix if horizontally positioned
+     */
+    standalone: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
       animation: true,
       tabWidth: 2,
-      position: 'top'
+      position: 'top',
+      standalone: false
     };
   },
 
@@ -114,6 +118,7 @@ const Tabs = React.createClass({
       bsStyle,
       tabWidth,
       paneWidth,
+      standalone,
       children,
       ...props
     } = this.props;
@@ -144,6 +149,11 @@ const Tabs = React.createClass({
     const childPanes = ValidComponentChildren.map(children, this.renderPane);
 
     if (isHorizontal) {
+      if (!standalone) {
+        containerProps.className =
+          classNames(containerProps.className, 'clearfix');
+      }
+
       const {tabsColProps, panesColProps} =
         this.getColProps({tabWidth, paneWidth});
 
@@ -158,28 +168,21 @@ const Tabs = React.createClass({
         </Col>
       );
 
-      let body;
       if (position === 'left') {
-        body = (
-          <Row {...containerProps}>
+        return (
+          <div {...containerProps}>
             {tabs}
             {panes}
-          </Row>
+          </div>
         );
       } else {
-        body = (
-          <Row {...containerProps}>
+        return (
+          <div {...containerProps}>
             {panes}
             {tabs}
-          </Row>
+          </div>
         );
       }
-
-      return (
-        <Grid>
-          {body}
-        </Grid>
-      );
     } else {
       return (
         <div {...containerProps}>
