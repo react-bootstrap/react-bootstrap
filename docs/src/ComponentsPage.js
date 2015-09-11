@@ -476,7 +476,7 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.NavBasic} />
 
                   <h3><Anchor id="navs-dropdown">Dropdown</Anchor></h3>
-                  <p>Add dropdowns using the <code>DropdownButton</code> component. Just make sure to set <code>navItem</code> property to true.</p>
+                  <p>Add dropdowns using the <code>NavDropdown</code> component.</p>
                   <ReactPlayground codeText={Samples.NavDropdown} />
 
                   <h3><Anchor id="navs-stacked">Stacked</Anchor></h3>
