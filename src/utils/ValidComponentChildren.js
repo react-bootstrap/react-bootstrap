@@ -82,9 +82,22 @@ function hasValidComponent(children) {
   return hasValid;
 }
 
+function find(children, finder) {
+  let child;
+
+  forEachValidComponents(children, (c, idx)=> {
+    if (!child && finder(c, idx, children)) {
+      child = c;
+    }
+  });
+
+  return child;
+}
+
 export default {
   map: mapValidComponents,
   forEach: forEachValidComponents,
   numberOf: numberOfValidComponents,
+  find,
   hasValidComponent
 };

@@ -36,6 +36,7 @@ const NavItem = React.createClass({
         title,
         target,
         children,
+        tabIndex, //eslint-disable-line
         'aria-controls': ariaControls,
         ...props } = this.props;
     let classes = {
@@ -47,6 +48,7 @@ const NavItem = React.createClass({
       href,
       title,
       target,
+      tabIndex,
       id: linkId,
       onClick: this.handleClick
     };
