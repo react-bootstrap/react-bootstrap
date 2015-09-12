@@ -118,7 +118,7 @@
     "keycode": "^2.0.0",
     "lodash": "^3.10.0",
     "react-overlays": "^0.50.0-alpha3",
-    "uncontrollable": "^3.0.0",
+    "uncontrollable": "^3.1.1",
     "warning": "^2.0.0"
   }
 }
