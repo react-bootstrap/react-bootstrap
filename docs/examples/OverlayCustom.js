@@ -1,13 +1,13 @@
 const Example = React.createClass({
-  getInitialState(){
+  getInitialState() {
     return { show: true };
   },
 
-  toggle(){
+  toggle() {
     this.setState({ show: !this.state.show });
   },
 
-  render(){
+  render() {
     const style = {
       position: 'absolute',
       backgroundColor: '#EEE',
@@ -21,7 +21,7 @@ const Example = React.createClass({
 
     return (
       <div style={{ height: 100, position: 'relative' }}>
-        <Button ref='target' onClick={this.toggle}>
+        <Button ref="target" onClick={this.toggle}>
           I am an Overlay target
         </Button>
 
@@ -30,7 +30,7 @@ const Example = React.createClass({
           onHide={() => this.setState({ show: false })}
           placement="right"
           container={this}
-          target={ props => ReactDOM.findDOMNode(this.refs.target)}
+          target={() => ReactDOM.findDOMNode(this.refs.target)}
         >
           <div style={style}>
             <strong>Holy guacamole!</strong> Check this info.

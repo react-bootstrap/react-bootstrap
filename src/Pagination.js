@@ -51,15 +51,15 @@ const Pagination = React.createClass({
       buttonComponentClass
     } = this.props;
 
-    if(maxButtons){
+    if (maxButtons) {
       let hiddenPagesBefore = activePage - parseInt(maxButtons / 2, 10);
       startPage = hiddenPagesBefore > 1 ? hiddenPagesBefore : 1;
       hasHiddenPagesAfter = startPage + maxButtons <= items;
 
-      if(!hasHiddenPagesAfter){
+      if (!hasHiddenPagesAfter) {
         endPage = items;
         startPage = items - maxButtons + 1;
-        if(startPage < 1){
+        if (startPage < 1) {
           startPage = 1;
         }
       } else {
@@ -70,7 +70,7 @@ const Pagination = React.createClass({
       endPage = items;
     }
 
-    for(let pagenumber = startPage; pagenumber <= endPage; pagenumber++){
+    for (let pagenumber = startPage; pagenumber <= endPage; pagenumber++) {
       pageButtons.push(
         <PaginationButton
           key={pagenumber}
@@ -83,13 +83,13 @@ const Pagination = React.createClass({
       );
     }
 
-    if(maxButtons && hasHiddenPagesAfter && ellipsis){
+    if (maxButtons && hasHiddenPagesAfter && ellipsis) {
       pageButtons.push(
         <PaginationButton
-          key='ellipsis'
+          key="ellipsis"
           disabled
           buttonComponentClass={buttonComponentClass}>
-          <span aria-label='More'>...</span>
+          <span aria-label="More">...</span>
         </PaginationButton>
       );
     }
@@ -98,69 +98,69 @@ const Pagination = React.createClass({
   },
 
   renderPrev() {
-    if(!this.props.prev){
+    if (!this.props.prev) {
       return null;
     }
 
     return (
       <PaginationButton
-        key='prev'
+        key="prev"
         eventKey={this.props.activePage - 1}
         disabled={this.props.activePage === 1}
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label='Previous'>&lsaquo;</span>
+        <span aria-label="Previous">&lsaquo;</span>
       </PaginationButton>
     );
   },
 
   renderNext() {
-    if(!this.props.next){
+    if (!this.props.next) {
       return null;
     }
 
     return (
       <PaginationButton
-        key='next'
+        key="next"
         eventKey={this.props.activePage + 1}
         disabled={this.props.activePage >= this.props.items}
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label='Next'>&rsaquo;</span>
+        <span aria-label="Next">&rsaquo;</span>
       </PaginationButton>
     );
   },
 
   renderFirst() {
-    if(!this.props.first){
+    if (!this.props.first) {
       return null;
     }
 
     return (
       <PaginationButton
-        key='first'
+        key="first"
         eventKey={1}
         disabled={this.props.activePage === 1 }
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label='First'>&laquo;</span>
+        <span aria-label="First">&laquo;</span>
       </PaginationButton>
     );
   },
 
   renderLast() {
-    if(!this.props.last){
+    if (!this.props.last) {
       return null;
     }
 
     return (
       <PaginationButton
-        key='last'
+        key="last"
         eventKey={this.props.items}
         disabled={this.props.activePage >= this.props.items}
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label='Last'>&raquo;</span>
+        <span aria-label="Last">&raquo;</span>
       </PaginationButton>
     );
   },

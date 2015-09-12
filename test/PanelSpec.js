@@ -187,7 +187,7 @@ describe('Panel', function () {
     assert.notOk(children[0].className.match(/\bpanel-body\b/));
   });
 
-  describe('Web Accessibility', function(){
+  describe('Web Accessibility', function() {
 
     it('Should be aria-expanded=true', function () {
       let instance = ReactTestUtils.renderIntoDocument(

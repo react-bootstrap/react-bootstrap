@@ -9,7 +9,7 @@ import {getOne, render, shouldWarn} from './helpers';
 describe('Modal', function () {
   let mountPoint;
 
-  beforeEach(()=>{
+  beforeEach(() => {
     mountPoint = document.createElement('div');
     document.body.appendChild(mountPoint);
   });
@@ -65,7 +65,7 @@ describe('Modal', function () {
 
     ReactTestUtils.Simulate.click(modal.refs.backdrop);
 
-    setTimeout(function(){
+    setTimeout(function() {
       assert.equal(ReactDOM.findDOMNode(instance).className.length, 0);
       done();
     }, 0);
@@ -197,7 +197,7 @@ describe('Modal', function () {
     let noOp = function () {};
 
     class CustomDialog {
-      render(){ return <div {...this.props}/>; }
+      render() { return <div {...this.props}/>; }
     }
 
     let instance = render(
@@ -215,7 +215,7 @@ describe('Modal', function () {
 
     let instance = render(
       <Modal show
-        onHide={()=>{}}
+        onHide={() => {}}
         onExit={increment}
         onExiting={increment}
         onExited={()=> {
@@ -254,7 +254,7 @@ describe('Modal', function () {
   describe('Focused state', function () {
     let focusableContainer = null;
 
-    beforeEach(()=>{
+    beforeEach(() => {
       focusableContainer = document.createElement('div');
       focusableContainer.tabIndex = 0;
       document.body.appendChild(focusableContainer);
@@ -271,7 +271,7 @@ describe('Modal', function () {
       document.activeElement.should.equal(focusableContainer);
 
       let instance = render(
-        <Modal show onHide={()=>{}} animation={false}>
+        <Modal show onHide={() => {}} animation={false}>
           <strong>Message</strong>
         </Modal>
         , focusableContainer);
@@ -286,7 +286,7 @@ describe('Modal', function () {
 
     it('Should not focus on the Modal when autoFocus is false', function () {
       render(
-        <Modal show autoFocus={false} onHide={()=>{}} animation={false}>
+        <Modal show autoFocus={false} onHide={() => {}} animation={false}>
           <strong>Message</strong>
         </Modal>
         , focusableContainer);
@@ -299,7 +299,7 @@ describe('Modal', function () {
       document.activeElement.should.equal(focusableContainer);
 
       render(
-        <Modal show onHide={()=>{}} animation={false}>
+        <Modal show onHide={() => {}} animation={false}>
           <input autoFocus />
         </Modal>
         , focusableContainer);

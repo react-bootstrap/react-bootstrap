@@ -36,6 +36,7 @@ const NavItem = React.createClass({
         title,
         target,
         children,
+        tabIndex, //eslint-disable-line
         'aria-controls': ariaControls,
         ...props } = this.props;
     let classes = {
@@ -47,6 +48,7 @@ const NavItem = React.createClass({
       href,
       title,
       target,
+      tabIndex,
       id: linkId,
       onClick: this.handleClick
     };
@@ -56,7 +58,7 @@ const NavItem = React.createClass({
     }
 
     return (
-      <li {...props} role='presentation' className={classNames(props.className, classes)}>
+      <li {...props} role="presentation" className={classNames(props.className, classes)}>
         <SafeAnchor {...linkProps} aria-selected={active} aria-controls={ariaControls}>
           { children }
         </SafeAnchor>

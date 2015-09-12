@@ -14,7 +14,7 @@ const Example = React.createClass({
   render() {
     return (
       <ButtonToolbar>
-        <Button bsStyle='primary' onClick={this.showModal}>
+        <Button bsStyle="primary" onClick={this.showModal}>
           Launch demo modal
         </Button>
 
@@ -22,10 +22,10 @@ const Example = React.createClass({
           {...this.props}
           show={this.state.show}
           onHide={this.hideModal}
-          dialogClassName='custom-modal'
+          dialogClassName="custom-modal"
         >
           <Modal.Header closeButton>
-            <Modal.Title id='contained-modal-title-lg'>Modal heading</Modal.Title>
+            <Modal.Title id="contained-modal-title-lg">Modal heading</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <h4>Wrapped Text</h4>

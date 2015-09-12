@@ -6,21 +6,21 @@ import Portal from '../src/Portal';
 
 import { shouldWarn } from './helpers';
 
-describe('Components moved to react-overlays', ()=>{
+describe('Components moved to react-overlays', () => {
 
-  it('should warn about Position', ()=>{
+  it('should warn about Position', () => {
     ReactTestUtils.renderIntoDocument(<Position><div/></Position>);
 
     shouldWarn(/Position component is deprecated/);
   });
 
-  it('should warn about Transition', ()=>{
+  it('should warn about Transition', () => {
     ReactTestUtils.renderIntoDocument(<Transition><div/></Transition>);
 
     shouldWarn(/Transition component is deprecated/);
   });
 
-  it('should warn about Portal', ()=>{
+  it('should warn about Portal', () => {
     ReactTestUtils.renderIntoDocument(<Portal><div/></Portal>);
 
     shouldWarn(/Portal component is deprecated/);

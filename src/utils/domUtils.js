@@ -23,7 +23,7 @@ function ownerWindow(componentOrElement) {
   return getOwnerWindow(doc);
 }
 
-//TODO remove in 0.26
+// TODO remove in 0.26
 function getComputedStyles(elem) {
   return ownerDocument(elem).defaultView.getComputedStyle(elem, null);
 }

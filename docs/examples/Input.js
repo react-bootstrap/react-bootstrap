@@ -23,16 +23,16 @@ const ExampleInput = React.createClass({
   render() {
     return (
       <Input
-        type='text'
+        type="text"
         value={this.state.value}
-        placeholder='Enter text'
-        label='Working example with validation'
-        help='Validation is based on string length.'
+        placeholder="Enter text"
+        label="Working example with validation"
+        help="Validation is based on string length."
         bsStyle={this.validationState()}
         hasFeedback
-        ref='input'
-        groupClassName='group-class'
-        labelClassName='label-class'
+        ref="input"
+        groupClassName="group-class"
+        labelClassName="label-class"
         onChange={this.handleChange} />
     );
   }

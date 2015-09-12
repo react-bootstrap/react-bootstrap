@@ -1,4 +1,4 @@
-/*eslint-disable react/prop-types */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
@@ -48,7 +48,7 @@ const ModalDialog = React.createClass({
         style={modalStyle}
         className={classNames(this.props.className, bsClass)}>
         <div className={classNames(this.props.dialogClassName, dialogClasses)}>
-          <div className={`${bsClass}-content`} role='document'>
+          <div className={`${bsClass}-content`} role="document">
             { this.props.children }
           </div>
         </div>

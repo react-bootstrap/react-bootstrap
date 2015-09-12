@@ -1,24 +1,24 @@
 const Example = React.createClass({
-  getInitialState(){
+  getInitialState() {
     return { show: true };
   },
 
-  toggle(){
+  toggle() {
     this.setState({ show: !this.state.show });
   },
 
-  render(){
+  render() {
     const tooltip = <Tooltip>Tooltip overload!</Tooltip>;
 
     const sharedProps = {
       show: this.state.show,
       container: this,
-      target: props => ReactDOM.findDOMNode(this.refs.target)
+      target: () => ReactDOM.findDOMNode(this.refs.target)
     };
 
     return (
       <div style={{ height: 100, paddingLeft: 150, position: 'relative' }}>
-        <Button ref='target' onClick={this.toggle}>
+        <Button ref="target" onClick={this.toggle}>
           Click me!
         </Button>
 

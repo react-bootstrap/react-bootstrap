@@ -1,16 +1,19 @@
+import classNames from 'classnames';
 import React, { cloneElement } from 'react';
+import ReactDOM from 'react-dom';
 
 import Col from './Col';
-import Grid from './Grid';
 import Nav from './Nav';
 import NavItem from './NavItem';
-import Row from './Row';
 import styleMaps from './styleMaps';
-
+import keycode from 'keycode';
+import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 let paneId = (props, child) => child.props.id ? child.props.id : props.id && (props.id + '___pane___' + child.props.eventKey);
 let tabId = (props, child) => child.props.id ? child.props.id + '___tab' : props.id && (props.id + '___tab___' + child.props.eventKey);
+
+let findChild = ValidComponentChildren.find;
 
 function getDefaultActiveKeyFromChildren(children) {
   let defaultActiveKey;
@@ -22,6 +25,30 @@ function getDefaultActiveKeyFromChildren(children) {
   });
 
   return defaultActiveKey;
+}
+
+function move(children, currentKey, keys, moveNext) {
+  let lastIdx = keys.length - 1;
+  let stopAt = keys[moveNext ? Math.max(lastIdx, 0) : 0];
+  let nextKey = currentKey;
+
+  function getNext() {
+    let idx = keys.indexOf(nextKey);
+    nextKey = moveNext
+      ? keys[Math.min(lastIdx, idx + 1)]
+      : keys[Math.max(0, idx - 1)];
+
+    return findChild(children,
+      _child => _child.props.eventKey === nextKey);
+  }
+
+  let next = getNext();
+
+  while (next.props.eventKey !== stopAt && next.props.disabled) {
+    next = getNext();
+  }
+
+  return next.props.disabled ? currentKey : next.props.eventKey;
 }
 
 const Tabs = React.createClass({
@@ -61,14 +88,19 @@ const Tabs = React.createClass({
     paneWidth: React.PropTypes.oneOfType([
       React.PropTypes.number,
       React.PropTypes.object
-    ])
+    ]),
+    /**
+     * Render without clearfix if horizontally positioned
+     */
+    standalone: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
       animation: true,
       tabWidth: 2,
-      position: 'top'
+      position: 'top',
+      standalone: false
     };
   },
 
@@ -99,6 +131,22 @@ const Tabs = React.createClass({
     }
   },
 
+  componentDidUpdate() {
+    let tabs = this._tabs;
+    let tabIdx = this._eventKeys().indexOf(this.getActiveKey());
+
+    if (this._needsRefocus) {
+      this._needsRefocus = false;
+      if (tabs && tabIdx !== -1) {
+        let tabNode = ReactDOM.findDOMNode(tabs[tabIdx]);
+
+        if (tabNode) {
+          tabNode.firstChild.focus();
+        }
+      }
+    }
+  },
+
   handlePaneAnimateOutEnd() {
     this.setState({
       previousActiveKey: null
@@ -114,6 +162,7 @@ const Tabs = React.createClass({
       bsStyle,
       tabWidth,
       paneWidth,
+      standalone,
       children,
       ...props
     } = this.props;
@@ -144,6 +193,11 @@ const Tabs = React.createClass({
     const childPanes = ValidComponentChildren.map(children, this.renderPane);
 
     if (isHorizontal) {
+      if (!standalone) {
+        containerProps.className =
+          classNames(containerProps.className, 'clearfix');
+      }
+
       const {tabsColProps, panesColProps} =
         this.getColProps({tabWidth, paneWidth});
 
@@ -158,28 +212,21 @@ const Tabs = React.createClass({
         </Col>
       );
 
-      let body;
       if (position === 'left') {
-        body = (
-          <Row {...containerProps}>
+        return (
+          <div {...containerProps}>
             {tabs}
             {panes}
-          </Row>
+          </div>
         );
       } else {
-        body = (
-          <Row {...containerProps}>
+        return (
+          <div {...containerProps}>
             {panes}
             {tabs}
-          </Row>
+          </div>
         );
       }
-
-      return (
-        <Grid>
-          {body}
-        </Grid>
-      );
     } else {
       return (
         <div {...containerProps}>
@@ -220,20 +267,23 @@ const Tabs = React.createClass({
     );
   },
 
-  renderTab(child) {
+  renderTab(child, index) {
     if (child.props.title == null) {
       return null;
     }
 
-    let {eventKey, title, disabled} = child.props;
+    let { eventKey, title, disabled, onKeyDown, tabIndex = 0 } = child.props;
+    let isActive = this.getActiveKey() === eventKey;
 
     return (
       <NavItem
         linkId={tabId(this.props, child)}
-        ref={'tab' + eventKey}
+        ref={ref => (this._tabs || (this._tabs = []))[index] = ref}
         aria-controls={paneId(this.props, child)}
+        onKeyDown={createChainedFunction(this.handleKeyDown, onKeyDown)}
         eventKey={eventKey}
-        disabled={disabled}>
+        tabIndex={isActive ? tabIndex : -1}
+        disabled={disabled }>
         {title}
       </NavItem>
     );
@@ -250,7 +300,7 @@ const Tabs = React.createClass({
     let panesColProps;
     if (paneWidth == null) {
       panesColProps = {};
-      Object.keys(tabsColProps).forEach(function (size) {
+      Object.keys(tabsColProps).forEach(function(size) {
         panesColProps[size] = styleMaps.GRID_COLUMNS - tabsColProps[size];
       });
     } else if (paneWidth instanceof Object) {
@@ -283,6 +333,46 @@ const Tabs = React.createClass({
         previousActiveKey
       });
     }
+  },
+
+  handleKeyDown(event) {
+    let keys = this._eventKeys();
+    let currentKey = this.getActiveKey() || keys[0];
+    let next;
+
+    switch (event.keyCode) {
+
+    case keycode.codes.left:
+    case keycode.codes.up:
+      next = move(this.props.children, currentKey, keys, false);
+
+      if (next && next !== currentKey) {
+        event.preventDefault();
+        this.handleSelect(next);
+        this._needsRefocus = true;
+      }
+      break;
+    case keycode.codes.right:
+    case keycode.codes.down:
+      next = move(this.props.children, currentKey, keys, true);
+
+      if (next && next !== currentKey) {
+        event.preventDefault();
+        this.handleSelect(next);
+        this._needsRefocus = true;
+      }
+      break;
+    default:
+    }
+  },
+
+  _eventKeys() {
+    let keys = [];
+
+    ValidComponentChildren.forEach(this.props.children,
+      ({props: { eventKey }}) => keys.push(eventKey));
+
+    return keys;
   }
 });
 

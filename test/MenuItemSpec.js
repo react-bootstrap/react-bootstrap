@@ -83,7 +83,7 @@ describe('MenuItem', function() {
   });
 
   it('does not fire onSelect when divider is clicked', function() {
-    const handleSelect = (event, selectedEvent) => {
+    const handleSelect = () => {
       throw new Error('Should not invoke onSelect with divider flag applied');
     };
     const instance = ReactTestUtils.renderIntoDocument(
@@ -96,7 +96,7 @@ describe('MenuItem', function() {
   });
 
   it('does not fire onSelect when header is clicked', function() {
-    const handleSelect = (event, selectedEvent) => {
+    const handleSelect = () => {
       throw new Error('Should not invoke onSelect with divider flag applied');
     };
     const instance = ReactTestUtils.renderIntoDocument(
@@ -109,7 +109,7 @@ describe('MenuItem', function() {
   });
 
   it('disabled link', function() {
-    const handleSelect = (event, selectEvent) => {
+    const handleSelect = () => {
       throw new Error('Should not invoke onSelect event');
     };
     const instance = ReactTestUtils.renderIntoDocument(

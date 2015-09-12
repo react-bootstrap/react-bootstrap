@@ -58,7 +58,7 @@
     "colors": "^1.1.2",
     "css-loader": "^0.16.0",
     "es5-shim": "^4.1.10",
-    "eslint": "^1.1.0",
+    "eslint": "1.2.x",
     "eslint-config-airbnb": "0.0.8",
     "eslint-plugin-babel": "^2.0.0",
     "eslint-plugin-lodash": "^0.1.3",

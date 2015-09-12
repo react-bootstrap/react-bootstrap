@@ -19,7 +19,7 @@ describe('Tab', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active'));
   });
 
-  describe('Web Accessibility', function(){
+  describe('Web Accessibility', function() {
 
     it('Should have aria-hidden', function () {
       let instance = ReactTestUtils.renderIntoDocument(

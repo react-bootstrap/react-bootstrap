@@ -1,4 +1,6 @@
 import classNames from 'classnames';
+import activeElement from 'dom-helpers/activeElement';
+import contains from 'dom-helpers/query/contains';
 import keycode from 'keycode';
 import find from 'lodash/collection/find';
 import omit from 'lodash/object/omit';
@@ -12,6 +14,7 @@ import DropdownToggle from './DropdownToggle';
 
 import createChainedFunction from './utils/createChainedFunction';
 import CustomPropTypes from './utils/CustomPropTypes';
+import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const TOGGLE_REF = 'toggle-btn';
 
@@ -55,10 +58,29 @@ class Dropdown extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentWillUpdate(nextProps) {
+    if (!nextProps.open && this.props.open) {
+      this._focusInDropdown = contains(
+        ReactDOM.findDOMNode(this.refs.menu),
+        activeElement(document)
+      );
+    }
+  }
+
+  componentDidUpdate(prevProps) {
     let menu = this.refs.menu;
+
     if (this.props.open && !prevProps.open && menu.focusNext) {
       menu.focusNext();
+    }
+
+    if (!this.props.open && prevProps.open) {
+      // if focus hasn't already moved from the menu lets return it
+      // to the toggle
+      if (this._focusInDropdown) {
+        this._focusInDropdown = false;
+        this.focus();
+      }
     }
   }
 
@@ -77,6 +99,7 @@ class Dropdown extends React.Component {
     return (
       <Component
         {...props}
+        tabIndex="-1"
         className={classNames(this.props.className, rootClasses)}
       >
         { children }
@@ -87,12 +110,12 @@ class Dropdown extends React.Component {
   toggleOpen() {
     let open = !this.props.open;
 
-    if (this.props.onToggle){
+    if (this.props.onToggle) {
       this.props.onToggle(open);
     }
   }
 
-  handleClick(event) {
+  handleClick() {
     if (this.props.disabled) {
       return;
     }
@@ -107,7 +130,7 @@ class Dropdown extends React.Component {
       }
     };
 
-    switch(event.keyCode) {
+    switch (event.keyCode) {
     case keycode.codes.down:
       if (!this.props.open) {
         this.toggleOpen();
@@ -118,32 +141,24 @@ class Dropdown extends React.Component {
       break;
     case keycode.codes.esc:
     case keycode.codes.tab:
-      if (this.props.open) {
-        this.handleClose(event);
-      }
+      this.handleClose(event);
       break;
     default:
     }
   }
 
-  handleClose(event) {
+  handleClose() {
     if (!this.props.open) {
       return;
     }
 
-    // we need to let the current event finish before closing the menu.
-    // otherwise the menu may close, shifting focus to document.body, before focus has moved
-    // to the next focusable input
-    if (event && event.keyCode === keycode.codes.tab){
-      setTimeout(this.toggleOpen);
-    } else {
-      this.toggleOpen();
-    }
+    this.toggleOpen();
+  }
 
-    if (event && event.type === 'keydown' && event.keyCode === keycode.codes.esc) {
-      let toggle = ReactDOM.findDOMNode(this.refs[TOGGLE_REF]);
-      event.preventDefault();
-      event.stopPropagation();
+  focus() {
+    let toggle = ReactDOM.findDOMNode(this.refs[TOGGLE_REF]);
+
+    if (toggle && toggle.focus) {
       toggle.focus();
     }
   }
@@ -152,11 +167,11 @@ class Dropdown extends React.Component {
     let open = !!this.props.open;
     let seen = {};
 
-    return React.Children.map(this.props.children, child => {
+    return ValidComponentChildren.map(this.props.children, child => {
       let extractor = find(this.childExtractors, x => x.matches(child));
 
       if (extractor) {
-        if (seen[extractor.key]){
+        if (seen[extractor.key]) {
           return false;
         }
 
@@ -276,7 +291,7 @@ Dropdown.propTypes = {
    * `open` value.
    *
    * ```js
-   * function(Boolean isOpen){}
+   * function(Boolean isOpen) {}
    * ```
    * @controllable open
    */

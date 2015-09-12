@@ -26,27 +26,28 @@ export default class MenuItem extends React.Component {
 
   render() {
     if (this.props.divider) {
-      return <li role='separator' className='divider' />;
+      return <li role="separator" className="divider" />;
     }
 
     if (this.props.header) {
       return (
-        <li role='heading' className='dropdown-header'>{this.props.children}</li>
+        <li role="heading" className="dropdown-header">{this.props.children}</li>
       );
     }
 
     const classes = {
-      disabled: this.props.disabled
+      disabled: this.props.disabled,
+      active: this.props.active
     };
 
     return (
-      <li role='presentation'
+      <li role="presentation"
         className={classnames(this.props.className, classes)}
         style={this.props.style}
       >
         <SafeAnchor
-          role='menuitem'
-          tabIndex='-1'
+          role="menuitem"
+          tabIndex="-1"
           id={this.props.id}
           target={this.props.target}
           title={this.props.title}
@@ -62,9 +63,10 @@ export default class MenuItem extends React.Component {
 
 MenuItem.propTypes = {
   disabled: React.PropTypes.bool,
+  active: React.PropTypes.bool,
   divider: CustomPropTypes.all([
     React.PropTypes.bool,
-    function(props, propName, componentName) {
+    function(props) {
       if (props.divider && props.children) {
         return new Error('Children will not be rendered for dividers');
       }

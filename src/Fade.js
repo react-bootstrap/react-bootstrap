@@ -11,9 +11,9 @@ class Fade extends React.Component {
       <Transition
         {...this.props}
         timeout={timeout}
-        className='fade'
-        enteredClassName='in'
-        enteringClassName='in'
+        className="fade"
+        enteredClassName="in"
+        enteringClassName="in"
       >
         {this.props.children}
       </Transition>
@@ -54,7 +54,7 @@ Fade.propTypes = {
   duration: CustomPropTypes.all([
     React.PropTypes.number,
     (props)=> {
-      if (props.duration != null){
+      if (props.duration != null) {
         deprecationWarning('Fade `duration`', 'the `timeout` prop');
       }
       return null;
@@ -95,4 +95,3 @@ Fade.defaultProps = {
 };
 
 export default Fade;
-

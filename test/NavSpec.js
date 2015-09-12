@@ -179,7 +179,7 @@ describe('Nav', function () {
   });
 
 
-  describe('Web Accessibility', function(){
+  describe('Web Accessibility', function() {
 
     it('Should have tablist and tab roles', function () {
       let instance = ReactTestUtils.renderIntoDocument(

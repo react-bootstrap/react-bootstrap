@@ -117,12 +117,12 @@ class CodeMirrorEditor extends React.Component {
     if (IS_MOBILE) {
       editor = (
         <CodeExample
-          mode='javascript'
+          mode="javascript"
           codeText={this.props.codeText}
         />
       );
     } else {
-      editor = <textarea ref='editor' defaultValue={this.props.codeText} />;
+      editor = <textarea ref="editor" defaultValue={this.props.codeText} />;
     }
 
     return (
@@ -209,7 +209,7 @@ const ReactPlayground = React.createClass({
 
   render() {
     return (
-      <div className='playground'>
+      <div className="playground">
         {this.renderExample()}
 
         {this.renderEditor()}
@@ -222,7 +222,7 @@ const ReactPlayground = React.createClass({
     let example;
     if (this.state.codeChanged) {
       example = (
-        <div ref='mount' />
+        <div ref="mount" />
       );
     } else {
       example = (
@@ -244,9 +244,9 @@ const ReactPlayground = React.createClass({
 
     return (
       <CodeMirrorEditor
-        key='jsx'
+        key="jsx"
         onChange={this.handleCodeChange}
-        className='highlight'
+        className="highlight"
         codeText={this.state.code}
       />
     );
@@ -298,7 +298,7 @@ const ReactPlayground = React.createClass({
       this.updateTimeout(
         () => {
           ReactDOM.render(
-            <Alert bsStyle='danger'>
+            <Alert bsStyle="danger">
               {err.toString()}
             </Alert>,
             mountNode

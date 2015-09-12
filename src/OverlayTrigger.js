@@ -1,5 +1,6 @@
-/*eslint-disable react/prop-types */
+/* eslint-disable react/prop-types */
 
+import contains from 'dom-helpers/query/contains';
 import pick from 'lodash/object/pick';
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
@@ -81,19 +82,19 @@ const OverlayTrigger = React.createClass({
      */
     onMouseLeave: React.PropTypes.func,
 
-    //override specific overlay props
+    // override specific overlay props
     /**
      * @private
      */
-    target(){},
+    target() {},
      /**
      * @private
      */
-    onHide(){},
+    onHide() {},
     /**
      * @private
      */
-    show(){}
+    show() {}
   },
 
   getDefaultProps() {
@@ -129,7 +130,12 @@ const OverlayTrigger = React.createClass({
     }
   },
 
-  componentDidMount(){
+  componentWillMount() {
+    this.handleMouseOver = this.handleMouseOverOut.bind(null, this.handleDelayedShow);
+    this.handleMouseOut = this.handleMouseOverOut.bind(null, this.handleDelayedHide);
+  },
+
+  componentDidMount() {
     this._mountNode = document.createElement('div');
     this.renderOverlay();
   },
@@ -146,7 +152,7 @@ const OverlayTrigger = React.createClass({
     clearTimeout(this._hoverDelay);
   },
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     if (this._mountNode) {
       this.renderOverlay();
     }
@@ -184,6 +190,7 @@ const OverlayTrigger = React.createClass({
 
   render() {
     const trigger = React.Children.only(this.props.children);
+    const triggerProps = trigger.props;
 
     const props = {
       'aria-describedby': this.props.overlay.props.id
@@ -192,7 +199,7 @@ const OverlayTrigger = React.createClass({
     // create in render otherwise owner is lost...
     this._overlay = this.getOverlay();
 
-    props.onClick = createChainedFunction(trigger.props.onClick, this.props.onClick);
+    props.onClick = createChainedFunction(triggerProps.onClick, this.props.onClick);
 
     if (isOneOf('click', this.props.trigger)) {
       props.onClick = createChainedFunction(this.toggle, props.onClick);
@@ -203,13 +210,13 @@ const OverlayTrigger = React.createClass({
         '[react-bootstrap] Specifying only the `"hover"` trigger limits the visibilty of the overlay to just mouse users. ' +
         'Consider also including the `"focus"` trigger so that touch and keyboard only users can see the overlay as well.');
 
-      props.onMouseOver = createChainedFunction(this.handleDelayedShow, this.props.onMouseOver);
-      props.onMouseOut = createChainedFunction(this.handleDelayedHide, this.props.onMouseOut);
+      props.onMouseOver = createChainedFunction(this.handleMouseOver, this.props.onMouseOver, triggerProps.onMouseOver);
+      props.onMouseOut = createChainedFunction(this.handleMouseOut, this.props.onMouseOut, triggerProps.onMouseOut);
     }
 
     if (isOneOf('focus', this.props.trigger)) {
-      props.onFocus = createChainedFunction(this.handleDelayedShow, this.props.onFocus);
-      props.onBlur = createChainedFunction(this.handleDelayedHide, this.props.onBlur);
+      props.onFocus = createChainedFunction(this.handleDelayedShow, this.props.onFocus, triggerProps.onFocus);
+      props.onBlur = createChainedFunction(this.handleDelayedHide, this.props.onBlur, triggerProps.onBlur);
     }
 
     return cloneElement(
@@ -258,6 +265,19 @@ const OverlayTrigger = React.createClass({
       this._hoverDelay = null;
       this.hide();
     }, delay);
+  },
+
+  // Simple implementation of mouseEnter and mouseLeave.
+  // React's built version is broken: https://github.com/facebook/react/issues/4251
+  // for cases when the trigger is disabled and mouseOut/Over can cause flicker moving
+  // from one child element to another.
+  handleMouseOverOut(handler, e) {
+    let target = e.currentTarget;
+    let related = e.relatedTarget || e.nativeEvent.toElement;
+
+    if (!related || related !== target && !contains(target, related)) {
+      handler(e);
+    }
   }
 
 });

@@ -5,7 +5,7 @@ import ButtonInput from '../src/ButtonInput';
 
 import {shouldWarn} from './helpers';
 
-describe('ButtonInput', () =>{
+describe('ButtonInput', () => {
   it('renders an input button element with type=button', function () {
     const instance = ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" bsStyle="danger" wrapperClassName="test" />
@@ -72,11 +72,9 @@ describe('ButtonInput', () =>{
     assert.notInstanceOf(result, Error);
   });
 
-  it('does not allow elements for children', function () {
+  it('allows elements as children', function () {
     ReactTestUtils.renderIntoDocument(
       <ButtonInput><span>blah</span></ButtonInput>
     );
-
-    shouldWarn('propType: Invalid');
   });
 });

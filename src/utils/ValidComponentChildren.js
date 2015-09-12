@@ -15,7 +15,7 @@ import React from 'react';
 function mapValidComponents(children, func, context) {
   let index = 0;
 
-  return React.Children.map(children, function (child) {
+  return React.Children.map(children, function(child) {
     if (React.isValidElement(child)) {
       let lastIndex = index;
       index++;
@@ -40,7 +40,7 @@ function mapValidComponents(children, func, context) {
 function forEachValidComponents(children, func, context) {
   let index = 0;
 
-  return React.Children.forEach(children, function (child) {
+  return React.Children.forEach(children, function(child) {
     if (React.isValidElement(child)) {
       func.call(context, child, index);
       index++;
@@ -57,7 +57,7 @@ function forEachValidComponents(children, func, context) {
 function numberOfValidComponents(children) {
   let count = 0;
 
-  React.Children.forEach(children, function (child) {
+  React.Children.forEach(children, function(child) {
     if (React.isValidElement(child)) { count++; }
   });
 
@@ -73,7 +73,7 @@ function numberOfValidComponents(children) {
 function hasValidComponent(children) {
   let hasValid = false;
 
-  React.Children.forEach(children, function (child) {
+  React.Children.forEach(children, function(child) {
     if (!hasValid && React.isValidElement(child)) {
       hasValid = true;
     }
@@ -82,9 +82,22 @@ function hasValidComponent(children) {
   return hasValid;
 }
 
+function find(children, finder) {
+  let child;
+
+  forEachValidComponents(children, (c, idx)=> {
+    if (!child && finder(c, idx, children)) {
+      child = c;
+    }
+  });
+
+  return child;
+}
+
 export default {
   map: mapValidComponents,
   forEach: forEachValidComponents,
   numberOf: numberOfValidComponents,
+  find,
   hasValidComponent
 };

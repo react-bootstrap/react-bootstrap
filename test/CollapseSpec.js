@@ -8,10 +8,10 @@ describe('Collapse', function () {
 
   let Component, instance;
 
-  beforeEach(function(){
+  beforeEach(function() {
 
     Component = React.createClass({
-      render(){
+      render() {
         let { children, ...props } = this.props;
 
         return (
@@ -42,7 +42,7 @@ describe('Collapse', function () {
   });
 
 
-  describe('collapsed', function(){
+  describe('collapsed', function() {
 
     it('Should have collapse class', function () {
       instance = ReactTestUtils.renderIntoDocument(
@@ -53,10 +53,10 @@ describe('Collapse', function () {
     });
   });
 
-  describe('from collapsed to expanded', function(){
+  describe('from collapsed to expanded', function() {
     let scrollHeightStub;
 
-    beforeEach(function(){
+    beforeEach(function() {
       instance = ReactTestUtils.renderIntoDocument(
         <Component>Panel content</Component>
       );
@@ -78,7 +78,7 @@ describe('Collapse', function () {
     it('Should set initial 0px height', function (done) {
       let node = ReactDOM.findDOMNode(instance);
 
-      function onEnter(){
+      function onEnter() {
         assert.equal(node.style.height, '0px');
         done();
       }
@@ -100,7 +100,7 @@ describe('Collapse', function () {
     it('Should transition from collapsing to not collapsing', function (done) {
       let node = ReactDOM.findDOMNode(instance);
 
-      function onEntered(){
+      function onEntered() {
         assert.equal(node.className, 'collapse in');
         done();
       }
@@ -113,7 +113,7 @@ describe('Collapse', function () {
     it('Should clear height after transition complete', function (done) {
       let node = ReactDOM.findDOMNode(instance);
 
-      function onEntered(){
+      function onEntered() {
         assert.equal(node.style.height, '');
         done();
       }
@@ -125,8 +125,8 @@ describe('Collapse', function () {
     });
   });
 
-  describe('from expanded to collapsed', function(){
-    beforeEach(function(){
+  describe('from expanded to collapsed', function() {
+    beforeEach(function() {
       instance = ReactTestUtils.renderIntoDocument(
         <Component in>Panel content</Component>
       );
@@ -141,7 +141,7 @@ describe('Collapse', function () {
     it('Should set initial height', function () {
       let node = ReactDOM.findDOMNode(instance);
 
-      function onExit(){
+      function onExit() {
         assert.equal(node.style.height, '15px');
       }
 
@@ -160,7 +160,7 @@ describe('Collapse', function () {
     it('Should transition from collapsing to not collapsing', function (done) {
       let node = ReactDOM.findDOMNode(instance);
 
-      function onExited(){
+      function onExited() {
         assert.equal(node.className, 'collapse');
         done();
       }
@@ -173,7 +173,7 @@ describe('Collapse', function () {
     it('Should have 0px height after transition complete', function (done) {
       let node = ReactDOM.findDOMNode(instance);
 
-      function onExited(){
+      function onExited() {
         assert.ok(node.style.height === '0px');
         done();
       }
@@ -184,7 +184,7 @@ describe('Collapse', function () {
     });
   });
 
-  describe('expanded', function(){
+  describe('expanded', function() {
 
     it('Should have collapse and in class', function () {
       instance = ReactTestUtils.renderIntoDocument(
@@ -196,20 +196,20 @@ describe('Collapse', function () {
     });
   });
 
-  describe('dimension', function(){
-    beforeEach(function(){
+  describe('dimension', function() {
+    beforeEach(function() {
       instance = ReactTestUtils.renderIntoDocument(
         <Component>Panel content</Component>
       );
     });
 
-    it('Defaults to height', function(){
+    it('Defaults to height', function() {
       assert.equal(instance.collapse._dimension(), 'height');
     });
 
-    it('Uses getCollapsibleDimension if exists', function(){
+    it('Uses getCollapsibleDimension if exists', function() {
 
-      function dimension(){
+      function dimension() {
         return 'whatevs';
       }
 
@@ -220,7 +220,7 @@ describe('Collapse', function () {
   });
 
   describe('with a role', function() {
-    beforeEach(function(){
+    beforeEach(function() {
       instance = ReactTestUtils.renderIntoDocument(
         <Component role="note">Panel content</Component>
       );

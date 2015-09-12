@@ -1,5 +1,5 @@
 const panelInstance = (
-  <Panel footer='Panel footer'>
+  <Panel footer="Panel footer">
     Panel content
   </Panel>
 );

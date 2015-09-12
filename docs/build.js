@@ -30,7 +30,7 @@ const readmeDest = path.join(docsBuilt, 'README.md');
  * @internal
  */
 function generateHTML(fileName) {
-  return new Promise((resolve) => {
+  return new Promise( resolve => {
     const urlSlug = fileName === 'index.html' ? '/' : `/${fileName}`;
 
     Router.run(routes, new Location(urlSlug), (error, initialState) => {

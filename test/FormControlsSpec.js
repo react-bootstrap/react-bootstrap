@@ -33,5 +33,11 @@ describe('Form Controls', function () {
 
       result.should.be.instanceOf(Error);
     });
+
+    it('allows elements as children', function () {
+      ReactTestUtils.renderIntoDocument(
+        <FormControls.Static><span>blah</span></FormControls.Static>
+      );
+    });
   });
 });

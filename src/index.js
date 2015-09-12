@@ -81,6 +81,26 @@ import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import CustomPropTypes from './utils/CustomPropTypes';
 
+function createDeprecationWrapper(obj, deprecated, instead, link) {
+  let wrapper = {};
+
+  if (process.env.NODE_ENV === 'production') {
+    return obj;
+  }
+
+  Object.keys(obj).forEach(key => {
+    Object.defineProperty(wrapper, key, {
+      get() {
+        deprecationWarning(deprecated, instead, link);
+        return obj[key];
+      },
+      set(x) { obj[key] = x; }
+    });
+  });
+
+  return wrapper;
+}
+
 export const utils = {
   childrenValueInputValidation,
   createChainedFunction,
@@ -88,23 +108,3 @@ export const utils = {
   CustomPropTypes,
   domUtils: createDeprecationWrapper(domUtils, 'utils/domUtils', 'npm install dom-helpers'),
 };
-
-function createDeprecationWrapper(obj, deprecated, instead, link){
-  let wrapper = {};
-
-  if (process.env.NODE_ENV === 'production'){
-    return obj;
-  }
-
-  Object.keys(obj).forEach(key => {
-    Object.defineProperty(wrapper, key, {
-      get(){
-        deprecationWarning(deprecated, instead, link);
-        return obj[key];
-      },
-      set(x){ obj[key] = x; }
-    });
-  });
-
-  return wrapper;
-}

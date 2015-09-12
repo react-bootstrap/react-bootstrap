@@ -1,3 +1,32 @@
+v0.25.2 - Sat, 12 Sep 2015 15:59:13 GMT
+---------------------------------------
+
+- [f2c3b68](../../commit/f2c3b68) [changed] tab keyboard navigation to be more inline with ARIA spec
+- [0c27403](../../commit/0c27403) [fixed] Don't render Grid or Row with Tabs
+- [b847dec](../../commit/b847dec) [added] active prop on MenuItem (again)
+- [3a369cc](../../commit/3a369cc) [fixed] Error on opening dropdown without focusable items
+- [bad277e](../../commit/bad277e) [changed] Use PropTypes.node for validation and fix/add tests
+- [533530a](../../commit/533530a) [added] Adds a callout to the sr-only button in `Closable Alerts`
+- [1f29000](../../commit/1f29000) [fixed] screen-reader accessible dismiss button on alerts
+- [c8a59c6](../../commit/c8a59c6) [fixed] OverlayTrigger hover triggers on mousenter/leave
+- [9c69271](../../commit/9c69271) [fixed] OverlayTrigger event handlers are properly maintained
+- [da1d0bc](../../commit/da1d0bc) [fixed] focus returns to the toggle by default onClose
+
+
+
+v0.25.1 - Fri, 28 Aug 2015 18:30:59 GMT
+---------------------------------------
+
+- [478300a](../../commit/478300a) [fixed] Handle falsey DropdownMenu  children correctly
+- [c450e96](../../commit/c450e96) [fixed] stop rendering extra attributes on Progress bar dom nodes
+- [3ceb7af](../../commit/3ceb7af) [fixed] allow null activeKey (empty) selection
+- [a7f93ae](../../commit/a7f93ae) [fixed] title is not passed to tab pane DOM node
+- [1bee466](../../commit/1bee466) [changed] 'id' prop-type made uniform throughout the project
+- [e438250](../../commit/e438250) [fixed] 'isRequireForA11y' undefined/null checking
+- [664b465](../../commit/664b465) [fixed] id passthrough for MenuItem
+
+
+
 v0.25.0 - Tue, 25 Aug 2015 18:56:33 GMT
 ---------------------------------------
 

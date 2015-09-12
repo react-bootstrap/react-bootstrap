@@ -19,8 +19,7 @@ class DropdownMenu extends React.Component {
   }
 
   handleKeyDown(event) {
-
-    switch(event.keyCode) {
+    switch (event.keyCode) {
     case keycode.codes.down:
       this.focusNext();
       event.preventDefault();
@@ -39,6 +38,10 @@ class DropdownMenu extends React.Component {
 
   focusNext() {
     let { items, activeItemIndex } = this.getItemsAndActiveIndex();
+
+    if (items.length === 0) {
+      return;
+    }
 
     if (activeItemIndex === items.length - 1) {
       items[0].focus();
@@ -99,7 +102,7 @@ class DropdownMenu extends React.Component {
     let list = (
       <ul
         className={classNames(this.props.className, classes)}
-        role='menu'
+        role="menu"
         aria-labelledby={this.props.labelledBy}
       >
         {items}

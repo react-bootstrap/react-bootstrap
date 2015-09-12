@@ -11,7 +11,7 @@ import SupportPage from './SupportPage';
 
 export default (
   <Route component={Root}>
-    <Route path="/" component={HomePage}/>
+    <Route path="/" component={HomePage} />
     <Route path="/introduction.html" component={IntroductionPage} />
     <Route path="/getting-started.html" component={GettingStartedPage} />
     <Route path="/components.html" component={ComponentsPage} />

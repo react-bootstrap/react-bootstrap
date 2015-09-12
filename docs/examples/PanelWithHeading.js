@@ -4,7 +4,7 @@ const title = (
 
 const panelsInstance = (
   <div>
-    <Panel header='Panel heading without title'>
+    <Panel header="Panel heading without title">
       Panel content
     </Panel>
     <Panel header={title}>

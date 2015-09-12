@@ -190,6 +190,21 @@ describe('Dropdown', function() {
     buttonNode.getAttribute('aria-expanded').should.equal('false');
   });
 
+  it('opens if dropdown contains no focusable menu item', function() {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Dropdown title='custom child' id='dropdown'>
+        <Dropdown.Toggle>Toggle</Dropdown.Toggle>
+        <Dropdown.Menu>
+          <li>Some custom nonfocusable content</li>
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+    const node = ReactDOM.findDOMNode(instance);
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
+    ReactTestUtils.Simulate.click(buttonNode);
+    node.className.should.match(/\bopen\b/);
+  });
+
   it('when focused and closed toggles open when the key "down" is pressed', function() {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     const node = ReactDOM.findDOMNode(instance);
@@ -265,7 +280,7 @@ describe('Dropdown', function() {
             </button>
             <Dropdown
               open={this.state.open}
-              onToggle={()=>{}}
+              onToggle={() => {}}
               title='Prop open control'
               id='test-id'
             >

@@ -26,7 +26,7 @@ let isLiteral = str => (/^('|")/).test(str.trim());
  *
  * @param  {ComponentMetadata|PropMetadata} obj
  */
-function parseDoclets(obj){
+function parseDoclets(obj) {
   obj.doclets = metadata.parseDoclets(obj.desc || '') || {};
   obj.desc = cleanDoclets(obj.desc || '');
   obj.descHtml = marked(obj.desc || '');
@@ -39,7 +39,7 @@ function parseDoclets(obj){
  * @param  {Object} props     Object Hash of the prop metadata
  * @param  {String} propName
  */
-function applyPropDoclets(props, propName){
+function applyPropDoclets(props, propName) {
   let prop = props[propName];
   let doclets = prop.doclets;
   let value;
@@ -72,11 +72,9 @@ function applyPropDoclets(props, propName){
 }
 
 
-export default function generate(destination, options = { mixins: true, inferComponent: true }){
-
-  return globp(__dirname + '/../src/**/*.js') //eslint-disable-line no-path-concat
+export default function generate(destination, options = { mixins: true, inferComponent: true }) {
+  return globp(__dirname + '/../src/**/*.js') // eslint-disable-line no-path-concat
     .then( files => {
-
       let results = files.map(
         filename => fsp.readFile(filename).then(content => metadata(content, options)) );
 
@@ -98,7 +96,7 @@ export default function generate(destination, options = { mixins: true, inferCom
               });
             });
 
-            //combine all the component metadata into one large object
+            // combine all the component metadata into one large object
             result = { ...result, ...components };
           });
 

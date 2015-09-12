@@ -8,10 +8,10 @@ describe('Fade', function () {
 
   let Component, instance;
 
-  beforeEach(function(){
+  beforeEach(function() {
 
     Component = React.createClass({
-      render(){
+      render() {
         let { children, ...props } = this.props;
 
         return (
@@ -54,7 +54,7 @@ describe('Fade', function () {
       <Component>Panel content</Component>
     );
 
-    function onEntering(){
+    function onEntering() {
       assert.equal(ReactDOM.findDOMNode(instance).className, 'fade in');
       done();
     }
@@ -70,7 +70,7 @@ describe('Fade', function () {
       <Component in>Panel content</Component>
     );
 
-    function onExiting(){
+    function onExiting() {
       assert.equal(ReactDOM.findDOMNode(instance).className, 'fade');
       done();
     }

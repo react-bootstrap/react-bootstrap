@@ -27,8 +27,8 @@ if (development) {
   const target = `http://${ip.address()}:${webpackPort}`;
   Root.assetBaseUrl = target;
 
-  app.get('/assets/*', function (req, res) {
-    proxy.web(req, res, {target});
+  app.get('/assets/*', function(req, res) {
+    proxy.web(req, res, { target });
   });
 
   proxy.on('error', function(e) {
@@ -58,7 +58,7 @@ if (development) {
   app.use(express.static(path.join(__dirname, '../docs-built')));
 }
 
-app.listen(port, function () {
+app.listen(port, function() {
   console.log(`Server started at:`);
   console.log(`- http://localhost:${port}`);
   console.log(`- http://${ip.address()}:${port}`);

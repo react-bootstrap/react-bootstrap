@@ -14,27 +14,27 @@ class ListGroup extends React.Component {
     if (!this.props.children) {
       shouldRenderDiv = true;
     } else {
-      React.Children.forEach(this.props.children, (child) => {
+      ValidComponentChildren.forEach(this.props.children, (child) => {
         if (this.isAnchorOrButton(child.props)) {
           shouldRenderDiv = true;
         }
       });
     }
 
-    if (shouldRenderDiv){
+    if (shouldRenderDiv) {
       return this.renderDiv(items);
     } else {
       return this.renderUL(items);
     }
   }
 
-  isAnchorOrButton(props){
+  isAnchorOrButton(props) {
     return (props.href || props.onClick);
   }
 
   renderUL(items) {
     let listItems = ValidComponentChildren.map(items,
-      (item, index) => cloneElement(item, { listItem: true })
+      (item) => cloneElement(item, { listItem: true })
     );
 
     return (
