@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route} from 'react-router';
+import {IndexRoute, Route} from 'react-router';
 
 import ComponentsPage from './ComponentsPage';
 import GettingStartedPage from './GettingStartedPage';
@@ -10,12 +10,12 @@ import Root from './Root';
 import SupportPage from './SupportPage';
 
 export default (
-  <Route component={Root}>
-    <Route path="/" component={HomePage} />
-    <Route path="/introduction.html" component={IntroductionPage} />
-    <Route path="/getting-started.html" component={GettingStartedPage} />
-    <Route path="/components.html" component={ComponentsPage} />
-    <Route path="/support.html" component={SupportPage} />
+  <Route path="/" component={Root}>
+    <IndexRoute component={HomePage} />
+    <Route path="introduction.html" component={IntroductionPage} />
+    <Route path="getting-started.html" component={GettingStartedPage} />
+    <Route path="components.html" component={ComponentsPage} />
+    <Route path="support.html" component={SupportPage} />
 
     <Route path="*" component={NotFoundPage} />
   </Route>

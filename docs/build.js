@@ -1,11 +1,11 @@
 /* eslint no-console: 0 */
 
 import fsp from 'fs-promise';
+import createLocation from 'history/lib/createLocation';
 import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import Router from 'react-router';
-import Location from 'react-router/lib/Location';
+import {match, RoutingContext} from 'react-router';
 
 import Root from './src/Root';
 import routes from './src/Routes';
@@ -32,10 +32,11 @@ const readmeDest = path.join(docsBuilt, 'README.md');
 function generateHTML(fileName) {
   return new Promise( resolve => {
     const urlSlug = fileName === 'index.html' ? '/' : `/${fileName}`;
+    const location = createLocation(urlSlug);
 
-    Router.run(routes, new Location(urlSlug), (error, initialState) => {
+    match({routes, location}, (error, redirectLocation, renderProps) => {
       let html = ReactDOMServer.renderToString(
-        <Router {...initialState} />
+        <RoutingContext {...renderProps} />
       );
       html = '<!doctype html>' + html;
       let write = fsp.writeFile(path.join(docsBuilt, fileName), html);

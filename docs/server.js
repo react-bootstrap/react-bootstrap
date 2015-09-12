@@ -2,13 +2,13 @@
 
 import 'colors';
 import express from 'express';
+import createLocation from 'history/lib/createLocation';
 import httpProxy from 'http-proxy';
 import ip from 'ip';
 import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import Router from 'react-router';
-import Location from 'react-router/lib/Location';
+import {match, RoutingContext} from 'react-router';
 
 import Root from './src/Root';
 import routes from './src/Routes';
@@ -46,9 +46,10 @@ if (development) {
       res.header('Access-Control-Allow-Origin', target);
       res.header('Access-Control-Allow-Headers', 'X-Requested-With');
 
-      Router.run(routes, new Location(req.url), (error, initialState) => {
+      const location = createLocation(req.url);
+      match({routes, location}, (error, redirectLocation, renderProps) => {
         const html = ReactDOMServer.renderToString(
-          <Router {...initialState} />
+          <RoutingContext {...renderProps} />
         );
         res.send('<!doctype html>' + html);
       });
