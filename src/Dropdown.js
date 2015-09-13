@@ -260,10 +260,10 @@ Dropdown.propTypes = {
    * The children of a Dropdown may be a `<Dropdown.Toggle/>` or a `<Dropdown.Menu/>`.
    * @type {node}
    */
-  children: all([
+  children: all(
     CustomPropTypes.requiredRoles(TOGGLE_ROLE, MENU_ROLE),
     CustomPropTypes.exclusiveRoles(MENU_ROLE)
-  ]),
+  ),
 
   /**
    * Whether or not component is disabled.
