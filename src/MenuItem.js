@@ -64,14 +64,14 @@ export default class MenuItem extends React.Component {
 MenuItem.propTypes = {
   active: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
-  divider: all([
+  divider: all(
     React.PropTypes.bool,
     function(props) {
       if (props.divider && props.children) {
         return new Error('Children will not be rendered for dividers');
       }
     }
-  ]),
+  ),
   eventKey: React.PropTypes.oneOfType([
     React.PropTypes.number,
     React.PropTypes.string

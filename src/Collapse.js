@@ -145,7 +145,7 @@ Collapse.propTypes = {
    * duration
    * @private
    */
-  duration: all([
+  duration: all(
     React.PropTypes.number,
     (props)=> {
       if (props.duration != null) {
@@ -153,7 +153,7 @@ Collapse.propTypes = {
       }
       return null;
     }
-  ]),
+  ),
 
   /**
    * Callback fired before the component expands

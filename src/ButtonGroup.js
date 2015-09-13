@@ -13,14 +13,14 @@ const ButtonGroup = React.createClass({
      * Display block buttons, only useful when used with the "vertical" prop.
      * @type {bool}
      */
-    block: all([
+    block: all(
       React.PropTypes.bool,
       function(props) {
         if (props.block && !props.vertical) {
           return new Error('The block property requires the vertical property to be set to have any effect');
         }
       }
-    ])
+    )
   },
 
   getDefaultProps() {

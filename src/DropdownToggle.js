@@ -29,10 +29,10 @@ export default class DropdownToggle extends React.Component {
   }
 }
 
-const titleAndChildrenValidation = singlePropFrom([
+const titleAndChildrenValidation = singlePropFrom(
   'title',
   'children'
-]);
+);
 
 DropdownToggle.defaultProps = {
   open: false,
