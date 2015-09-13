@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import ReactDOM from 'react-dom';
 
 import Panel from '../src/Panel';
 import PanelGroup from '../src/PanelGroup';
@@ -97,12 +96,6 @@ describe('PanelGroup', function () {
     it('Should maintain each tab aria-hidden state', function() {
       assert.equal(panelBodies[0].getAttribute('aria-hidden'), 'false');
       assert.equal(panelBodies[1].getAttribute('aria-hidden'), 'true');
-    });
-
-    afterEach(function() {
-      if (instance && ReactTestUtils.isCompositeComponent(instance) && instance.isMounted()) {
-        ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(instance));
-      }
     });
   });
 });

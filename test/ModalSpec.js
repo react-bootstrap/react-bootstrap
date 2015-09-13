@@ -196,7 +196,7 @@ describe('Modal', function () {
   it('Should use dialogComponent', function () {
     let noOp = function () {};
 
-    class CustomDialog {
+    class CustomDialog extends React.Component {
       render() { return <div {...this.props}/>; }
     }
 
