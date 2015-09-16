@@ -66,25 +66,27 @@ less active when you don't. If you get a new job and get busy, that's alright.
 
 Releases should include documentation, git tag, bower package preparation and
 finally the actual npm module publish. We have all of this automated by running
-`./tools/release` from the root of the repository. __PLEASE DO NOT RUN `npm
-publish` BY ITSELF__. The release script will do that. We want to prevent issues
+`npm run release`. __PLEASE DO NOT RUN `npm
+publish` BY ITSELF__. The `release-script` will do that. We want to prevent issues
 like [#325](https://github.com/react-bootstrap/react-bootstrap/issues/325) and
 [#218](https://github.com/react-bootstrap/react-bootstrap/issues/218) from ever
-happening again. In order to run the release script you will need permission to
+happening again. In order to run the `release-script` you will need permission to
 publish the package to npm. Those with this permission are in the [publishers
 team](https://github.com/orgs/react-bootstrap/teams/publishers)
 
 *Note: The publishers team does exist. If you see 404 that means you just have no permissions to publish.*
 
-Example usages of the release script:
+Example usages of the `release-script`:
 
 ```bash
-$ ./tools/release patch
-$ ./tools/release minor
-$ ./tools/release major
-$ ./tools/release minor --preid beta   Use both bump and preid for first prerelease
-$ ./tools/release --preid beta         For follow on prereleases of the next version just use this
+$ npm run release patch
+$ npm run release minor
+$ npm run release major
+$ npm run release minor -- --preid beta   Use both bump and preid for first prerelease
+$ npm run release -- --preid beta         For follow on prereleases of the next version just use this
 ```
+
+*Note additional `--` double-dash. It is important.*
 
 Note that the above commands will bump the [semver](http://semver.org) version
 programmatically so you don't need to. Please be mindful to ensure that semver
@@ -127,17 +129,16 @@ To live patch the documentation in between release follow these steps
 0. Create a new branch from there (for example `git checkout -b docs/v0.22.1`)
 0. Cherry-pick the commits you want to include in the live update
 `git cherry-pick <commit-ish>...`
-0. Use the release-docs script to push and tag to the documentation repository.
+0. Use the
+```bash
+$ npm run release -- --only-docs
+```
+to push and tag to the documentation repository.
 
 *Note: The branch name you checkout to cherry-picked the commit is not enforced.
 Though keeping similar names ex: `docs/<version>` helps finding the branch
 easily.*
 
-Example usage of release-docs script:
-
-```bash
-$ ./tools/release-docs
-```
 
 ### Check everything is OK before releasing
 
@@ -146,3 +147,8 @@ Release tools have a very useful option `--dry-run`.
 You can use it
 - to learn how releasing tools are working.
 - to ensure there are no side issues before you release anything.
+```bash
+$ npm run release -- --only-docs --dry-run
+$ npm run release major -- --dry-run
+$ npm run release minor -- --preid beta --dry-run
+```
