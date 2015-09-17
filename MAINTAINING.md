@@ -79,14 +79,27 @@ team](https://github.com/orgs/react-bootstrap/teams/publishers)
 Example usages of the `release-script`:
 
 ```bash
-$ npm run release patch
-$ npm run release minor
-$ npm run release major
-$ npm run release minor -- --preid beta   Use both bump and preid for first prerelease
-$ npm run release -- --preid beta         For follow on prereleases of the next version just use this
+$ npm run release patch // without "--run" it will run in "dry run" mode
+$ npm run release patch -- --run
+$ npm run release minor -- --run
+$ npm run release major -- --run
+$ npm run release minor -- --preid beta --run  Use both bump and preid for first prerelease
+$ npm run release -- --preid beta --run        For follow on prereleases of the next version just use this
 ```
 
 *Note additional `--` double-dash. It is important.*
+
+Or if you have this line
+```sh
+export PATH="./node_modules/.bin:$PATH"
+```
+in your shell config, then you can run it just as:
+```bash
+$ release patch // without "--run" it will run in "dry run" mode
+$ release patch --run
+$ release minor --preid beta --run
+$ release --preid beta --run
+```
 
 Note that the above commands will bump the [semver](http://semver.org) version
 programmatically so you don't need to. Please be mindful to ensure that semver
@@ -131,7 +144,9 @@ To live patch the documentation in between release follow these steps
 `git cherry-pick <commit-ish>...`
 0. Use the
 ```bash
-$ npm run release -- --only-docs
+$ npm run release -- --only-docs --run
+// or
+$ release --only-docs --run
 ```
 to push and tag to the documentation repository.
 
@@ -142,13 +157,18 @@ easily.*
 
 ### Check everything is OK before releasing
 
-Release tools have a very useful option `--dry-run`.
+Release tools are run in "dry run" mode by default.
+It prevents `danger` steps (`git push`, `npm publish` etc) from accidental running.
 
 You can use it
 - to learn how releasing tools are working.
 - to ensure there are no side issues before you release anything.
 ```bash
-$ npm run release -- --only-docs --dry-run
-$ npm run release major -- --dry-run
-$ npm run release minor -- --preid beta --dry-run
+$ npm run release -- --only-docs
+$ npm run release major
+$ npm run release minor -- --preid beta
+// or
+$ release --only-docs
+$ release major
+$ release minor --preid beta
 ```
