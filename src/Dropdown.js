@@ -15,9 +15,8 @@ import activeElement from 'dom-helpers/activeElement';
 import contains from 'dom-helpers/query/contains';
 
 const TOGGLE_REF = 'toggle-btn';
-
-export const TOGGLE_ROLE = DropdownToggle.defaultProps.bsRole;
-export const MENU_ROLE = DropdownMenu.defaultProps.bsRole;
+const TOGGLE_ROLE = DropdownToggle.defaultProps.bsRole;
+const MENU_ROLE = DropdownMenu.defaultProps.bsRole;
 
 class Dropdown extends React.Component {
 
@@ -228,6 +227,8 @@ class Dropdown extends React.Component {
 Dropdown.Toggle = DropdownToggle;
 
 Dropdown.TOGGLE_REF = TOGGLE_REF;
+Dropdown.TOGGLE_ROLE = TOGGLE_ROLE;
+Dropdown.MENU_ROLE = MENU_ROLE;
 
 Dropdown.defaultProps = {
   componentClass: ButtonGroup
