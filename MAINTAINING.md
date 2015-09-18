@@ -66,24 +66,39 @@ less active when you don't. If you get a new job and get busy, that's alright.
 
 Releases should include documentation, git tag, bower package preparation and
 finally the actual npm module publish. We have all of this automated by running
-`./tools/release` from the root of the repository. __PLEASE DO NOT RUN `npm
-publish` BY ITSELF__. The release script will do that. We want to prevent issues
+`npm run release`. __PLEASE DO NOT RUN `npm
+publish` BY ITSELF__. The `release-script` will do that. We want to prevent issues
 like [#325](https://github.com/react-bootstrap/react-bootstrap/issues/325) and
 [#218](https://github.com/react-bootstrap/react-bootstrap/issues/218) from ever
-happening again. In order to run the release script you will need permission to
+happening again. In order to run the `release-script` you will need permission to
 publish the package to npm. Those with this permission are in the [publishers
 team](https://github.com/orgs/react-bootstrap/teams/publishers)
 
 *Note: The publishers team does exist. If you see 404 that means you just have no permissions to publish.*
 
-Example usages of the release script:
+Example usages of the `release-script`:
 
 ```bash
-$ ./tools/release patch
-$ ./tools/release minor
-$ ./tools/release major
-$ ./tools/release minor --preid beta   Use both bump and preid for first prerelease
-$ ./tools/release --preid beta         For follow on prereleases of the next version just use this
+$ npm run release patch // without "--run" it will run in "dry run" mode
+$ npm run release patch -- --run
+$ npm run release minor -- --run
+$ npm run release major -- --run
+$ npm run release minor -- --preid beta --run  Use both bump and preid for first prerelease
+$ npm run release -- --preid beta --run        For follow on prereleases of the next version just use this
+```
+
+*Note additional `--` double-dash. It is important.*
+
+Or if you have this line
+```sh
+export PATH="./node_modules/.bin:$PATH"
+```
+in your shell config, then you can run it just as:
+```bash
+$ release patch // without "--run" it will run in "dry run" mode
+$ release patch --run
+$ release minor --preid beta --run
+$ release --preid beta --run
 ```
 
 Note that the above commands will bump the [semver](http://semver.org) version
@@ -127,22 +142,33 @@ To live patch the documentation in between release follow these steps
 0. Create a new branch from there (for example `git checkout -b docs/v0.22.1`)
 0. Cherry-pick the commits you want to include in the live update
 `git cherry-pick <commit-ish>...`
-0. Use the release-docs script to push and tag to the documentation repository.
+0. Use the
+```bash
+$ npm run release -- --only-docs --run
+// or
+$ release --only-docs --run
+```
+to push and tag to the documentation repository.
 
 *Note: The branch name you checkout to cherry-picked the commit is not enforced.
 Though keeping similar names ex: `docs/<version>` helps finding the branch
 easily.*
 
-Example usage of release-docs script:
-
-```bash
-$ ./tools/release-docs
-```
 
 ### Check everything is OK before releasing
 
-Release tools have a very useful option `--dry-run`.
+Release tools are run in "dry run" mode by default.
+It prevents `danger` steps (`git push`, `npm publish` etc) from accidental running.
 
 You can use it
 - to learn how releasing tools are working.
 - to ensure there are no side issues before you release anything.
+```bash
+$ npm run release -- --only-docs
+$ npm run release major
+$ npm run release minor -- --preid beta
+// or
+$ release --only-docs
+$ release major
+$ release minor --preid beta
+```
