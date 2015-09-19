@@ -21,7 +21,6 @@
     "prefer-const": 0,
     "key-spacing": 0,
     "no-eq-null": 0,
-    "no-else-return": 0,
     "no-param-reassign": 0,
     "no-this-before-super": 2,
     "no-undef": 2,

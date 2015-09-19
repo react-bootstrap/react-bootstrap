@@ -58,28 +58,27 @@ const Interpolate = React.createClass({
       props.dangerouslySetInnerHTML = { __html: content };
 
       return React.createElement(parent, props);
-    } else {
-      let kids = format.split(REGEXP).reduce((memo, match, index) => {
-        let child;
+    }
+    let kids = format.split(REGEXP).reduce((memo, match, index) => {
+      let child;
 
-        if (index % 2 === 0) {
-          if (match.length === 0) {
-            return memo;
-          }
-
-          child = match;
-        } else {
-          child = props[match];
-          delete props[match];
+      if (index % 2 === 0) {
+        if (match.length === 0) {
+          return memo;
         }
 
-        memo.push(child);
+        child = match;
+      } else {
+        child = props[match];
+        delete props[match];
+      }
 
-        return memo;
-      }, []);
+      memo.push(child);
 
-      return React.createElement(parent, props, kids);
-    }
+      return memo;
+    }, []);
+
+    return React.createElement(parent, props, kids);
   }
 });
 

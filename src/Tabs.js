@@ -218,27 +218,27 @@ const Tabs = React.createClass({
             {panes}
           </div>
         );
-      } else {
-        return (
-          <div {...containerProps}>
-            {panes}
-            {tabs}
-          </div>
-        );
       }
-    } else {
+
       return (
         <div {...containerProps}>
-          <Nav {...tabsProps}>
-            {childTabs}
-          </Nav>
-
-          <div {...panesProps}>
-            {childPanes}
-          </div>
+          {panes}
+          {tabs}
         </div>
       );
     }
+
+    return (
+      <div {...containerProps}>
+        <Nav {...tabsProps}>
+          {childTabs}
+        </Nav>
+
+        <div {...panesProps}>
+          {childPanes}
+        </div>
+      </div>
+    );
   },
 
   getActiveKey() {

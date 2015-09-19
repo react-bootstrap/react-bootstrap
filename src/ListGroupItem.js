@@ -35,9 +35,8 @@ const ListGroupItem = React.createClass({
       return this.renderButton(classes);
     } else if (this.props.listItem) {
       return this.renderLi(classes);
-    } else {
-      return this.renderSpan(classes);
     }
+    return this.renderSpan(classes);
   },
 
   renderLi(classes) {

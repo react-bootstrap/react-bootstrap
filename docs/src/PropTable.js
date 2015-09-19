@@ -174,9 +174,9 @@ const PropTable = React.createClass({
       return 'function';
     } else if (typeName === 'bool') {
       return 'boolean';
-    } else {
-      return typeName;
     }
+
+    return typeName;
   },
 
   renderEnum(enumType) {

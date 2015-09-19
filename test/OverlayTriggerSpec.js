@@ -233,15 +233,15 @@ describe('OverlayTrigger', () => {
               return (
                 <div>replaced</div>
               );
-            } else {
-              return (
-                <div>
-                  <a id="replace-overlay" onClick={this.handleClick}>
-                    original
-                  </a>
-                </div>
-              );
             }
+
+            return (
+              <div>
+                <a id="replace-overlay" onClick={this.handleClick}>
+                  original
+                </a>
+              </div>
+            );
           }
         }
 

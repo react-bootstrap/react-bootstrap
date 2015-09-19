@@ -44,9 +44,8 @@ const CollapsibleNav = React.createClass({
           { nav }
         </Collapse>
       );
-    } else {
-      return nav;
     }
+    return nav;
   },
 
   getChildActiveProp(child) {
