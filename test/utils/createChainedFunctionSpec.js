@@ -1,17 +1,17 @@
 /* eslint no-new-func: 0 */
 import createChainedFunction from '../../src/utils/createChainedFunction';
 
-describe('createChainedFunction', function() {
-  it('returns null with no arguments', function() {
+describe('createChainedFunction', () => {
+  it('returns null with no arguments', () => {
     expect(createChainedFunction()).to.equal(null);
   });
 
-  it('returns original function when single function is provided', function() {
+  it('returns original function when single function is provided', () => {
     const func1 = sinon.stub();
     createChainedFunction(func1).should.equal(func1);
   });
 
-  it('wraps two functions with another that invokes both when called', function() {
+  it('wraps two functions with another that invokes both when called', () => {
     const func1 = sinon.stub();
     const func2 = sinon.stub();
     const chained = createChainedFunction(func1, func2);
@@ -29,7 +29,7 @@ describe('createChainedFunction', function() {
     func2.should.have.been.calledOnce;
   });
 
-  it('wraps multiple functions and invokes them in the order provided', function() {
+  it('wraps multiple functions and invokes them in the order provided', () => {
     const results = [];
     const func1 = () => results.push(1);
     const func2 = () => results.push(2);
@@ -39,7 +39,7 @@ describe('createChainedFunction', function() {
     results.should.eql([1, 2, 3]);
   });
 
-  it('forwards arguments to all chained functions', function() {
+  it('forwards arguments to all chained functions', () => {
     const in1 = 'herpa derpa';
     const in2 = {
       herpa: 'derpa'
@@ -54,13 +54,13 @@ describe('createChainedFunction', function() {
     chained(in1, in2);
   });
 
-  it('throws when func is not provided', function() {
+  it('throws when func is not provided', () => {
     expect(() => {
       createChainedFunction({ herpa: 'derpa' });
     }).to.throw(/Invalid Argument Type/);
   });
 
-  it('works with new Function call', function() {
+  it('works with new Function call', () => {
     const results = [];
     const func1 = new Function('results', 'results.push(1);');
     const func2 = new Function('results', 'results.push(2);');

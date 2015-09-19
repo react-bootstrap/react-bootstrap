@@ -21,11 +21,11 @@ if (development) {
   let webpackPort = process.env.WEBPACK_DEV_PORT;
   let target = `http://${ip.address()}:${webpackPort}`;
 
-  app.get('/assets/*', function(req, res) {
+  app.get('/assets/*', (req, res) => {
     proxy.web(req, res, { target });
   });
 
-  proxy.on('error', function(e) {
+  proxy.on('error', e => {
     console.log('Could not connect to webpack proxy'.red);
     console.log(e.toString().red);
   });
@@ -49,7 +49,7 @@ if (development) {
   app.use(express.static(path.join(__dirname, '../docs-built')));
 }
 
-app.listen(port, function() {
+app.listen(port, () => {
   console.log(`Server started at:`);
   console.log(`- http://localhost:${port}`);
   console.log(`- http://${ip.address()}:${port}`);

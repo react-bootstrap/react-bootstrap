@@ -48,7 +48,7 @@ DropdownButton.propTypes = {
    */
   navItem: CustomPropTypes.all([
     React.PropTypes.bool,
-    function(props) {
+    props => {
       if (props.navItem) {
         deprecationWarning('navItem', 'NavDropdown component', 'https://github.com/react-bootstrap/react-bootstrap/issues/526');
       }

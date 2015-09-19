@@ -15,7 +15,7 @@ const TabbedArea = React.createClass({
   render() {
     const {children, ...props} = this.props;
 
-    const tabs = ValidComponentChildren.map(children, function(child) {
+    const tabs = ValidComponentChildren.map(children, child => {
       const {tab: title, ...others} = child.props;
       return <TabPane title={title} {...others} />;
     });

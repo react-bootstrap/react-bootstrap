@@ -3,8 +3,8 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import MenuItem from '../src/MenuItem';
 import { shouldWarn } from './helpers';
 
-describe('MenuItem', function() {
-  it('renders divider', function() {
+describe('MenuItem', () => {
+  it('renders divider', () => {
     const instance = ReactTestUtils.renderIntoDocument(<MenuItem divider />);
     const node = React.findDOMNode(instance);
 
@@ -12,7 +12,7 @@ describe('MenuItem', function() {
     node.getAttribute('role').should.equal('separator');
   });
 
-  it('renders divider not children', function() {
+  it('renders divider not children', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <MenuItem divider>
         Some child
@@ -25,7 +25,7 @@ describe('MenuItem', function() {
     shouldWarn('Children will not be rendered for dividers');
   });
 
-  it('renders header', function() {
+  it('renders header', () => {
     const instance = ReactTestUtils.renderIntoDocument(<MenuItem header>Header Text</MenuItem>);
     const node = React.findDOMNode(instance);
 
@@ -34,7 +34,7 @@ describe('MenuItem', function() {
     node.innerHTML.should.match(/Header Text/);
   });
 
-  it('renders menu item link', function(done) {
+  it('renders menu item link', (done) => {
     const instance = ReactTestUtils.renderIntoDocument(
       <MenuItem
         onKeyDown={() => done()}
@@ -55,7 +55,7 @@ describe('MenuItem', function() {
     ReactTestUtils.Simulate.keyDown(anchor, { keyCode: 1 });
   });
 
-  it('click handling with onSelect prop', function() {
+  it('click handling with onSelect prop', () => {
     const handleSelect = (event, eventKey) => {
       eventKey.should.equal('1');
     };
@@ -67,7 +67,7 @@ describe('MenuItem', function() {
     ReactTestUtils.Simulate.click(anchor);
   });
 
-  it('click handling with onSelect prop (no eventKey)', function() {
+  it('click handling with onSelect prop (no eventKey)', () => {
     const handleSelect = (event, eventKey) => {
       expect(eventKey).to.be.undefined;
     };
@@ -79,7 +79,7 @@ describe('MenuItem', function() {
     ReactTestUtils.Simulate.click(anchor);
   });
 
-  it('does not fire onSelect when divider is clicked', function() {
+  it('does not fire onSelect when divider is clicked', () => {
     const handleSelect = () => {
       throw new Error('Should not invoke onSelect with divider flag applied');
     };
@@ -92,7 +92,7 @@ describe('MenuItem', function() {
     ReactTestUtils.Simulate.click(li);
   });
 
-  it('does not fire onSelect when header is clicked', function() {
+  it('does not fire onSelect when header is clicked', () => {
     const handleSelect = () => {
       throw new Error('Should not invoke onSelect with divider flag applied');
     };
@@ -105,7 +105,7 @@ describe('MenuItem', function() {
     ReactTestUtils.Simulate.click(li);
   });
 
-  it('disabled link', function() {
+  it('disabled link', () => {
     const handleSelect = () => {
       throw new Error('Should not invoke onSelect event');
     };
@@ -120,7 +120,7 @@ describe('MenuItem', function() {
     ReactTestUtils.Simulate.click(anchor);
   });
 
-  it('should pass through props', function () {
+  it('should pass through props', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <MenuItem
         className="test-class"
@@ -144,7 +144,7 @@ describe('MenuItem', function() {
     assert.equal(anchorNode.getAttribute('title'), 'hi mom!');
   });
 
-  it('Should set target attribute on anchor', function () {
+  it('Should set target attribute on anchor', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <MenuItem target="_blank">
         Title
@@ -155,7 +155,7 @@ describe('MenuItem', function() {
     assert.equal(React.findDOMNode(anchor).getAttribute('target'), '_blank');
   });
 
-  it('should output an li', function () {
+  it('should output an li', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <MenuItem>
         Title

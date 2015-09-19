@@ -4,8 +4,8 @@ import ButtonToolbar from '../src/ButtonToolbar';
 import ButtonGroup from '../src/ButtonGroup';
 import Button from '../src/Button';
 
-describe('ButtonToolbar', function () {
-  it('Should output a button toolbar', function () {
+describe('ButtonToolbar', () => {
+  it('Should output a button toolbar', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ButtonToolbar>
         <ButtonGroup>

@@ -17,7 +17,7 @@ let findChild = ValidComponentChildren.find;
 function getDefaultActiveKeyFromChildren(children) {
   let defaultActiveKey;
 
-  ValidComponentChildren.forEach(children, function(child) {
+  ValidComponentChildren.forEach(children, child => {
     if (defaultActiveKey == null) {
       defaultActiveKey = child.props.eventKey;
     }
@@ -299,7 +299,7 @@ const Tabs = React.createClass({
     let panesColProps;
     if (paneWidth == null) {
       panesColProps = {};
-      Object.keys(tabsColProps).forEach(function(size) {
+      Object.keys(tabsColProps).forEach( size => {
         panesColProps[size] = styleMaps.GRID_COLUMNS - tabsColProps[size];
       });
     } else if (paneWidth instanceof Object) {

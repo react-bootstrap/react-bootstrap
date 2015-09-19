@@ -2,15 +2,15 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Pagination from '../src/Pagination';
 
-describe('Pagination', function () {
-  it('Should have class', function () {
+describe('Pagination', () => {
+  it('Should have class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination>Item content</Pagination>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pagination'));
   });
 
-  it('Should show the correct active button', function () {
+  it('Should show the correct active button', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         items={5}
@@ -21,7 +21,7 @@ describe('Pagination', function () {
     React.findDOMNode(pageButtons[2]).className.should.match(/\bactive\b/);
   });
 
-  it('Should call onSelect when page button is selected', function (done) {
+  it('Should call onSelect when page button is selected', (done) => {
     function onSelect(event, selectedEvent) {
       assert.equal(selectedEvent.eventKey, 2);
       done();
@@ -36,7 +36,7 @@ describe('Pagination', function () {
     );
   });
 
-  it('Should only show part of buttons and active button in the middle of buttons when given maxButtons', function () {
+  it('Should only show part of buttons and active button in the middle of buttons when given maxButtons', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         items={30}
@@ -52,7 +52,7 @@ describe('Pagination', function () {
     React.findDOMNode(pageButtons[4]).className.should.match(/\bactive\b/);
   });
 
-  it('Should show the ellipsis, first, last, prev and next button', function () {
+  it('Should show the ellipsis, first, last, prev and next button', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         first={true}
@@ -75,7 +75,7 @@ describe('Pagination', function () {
 
   });
 
-  it('Should enumerate pagenums correctly when ellipsis=true', function () {
+  it('Should enumerate pagenums correctly when ellipsis=true', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         first
@@ -96,7 +96,7 @@ describe('Pagination', function () {
     assert.equal(React.findDOMNode(pageButtons[4]).innerText, '»');
   });
 
-  it('Should render next and last buttons as disabled when items=0 and ellipsis=true', function () {
+  it('Should render next and last buttons as disabled when items=0 and ellipsis=true', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         last
@@ -115,7 +115,7 @@ describe('Pagination', function () {
     assert.include(React.findDOMNode(pageButtons[1]).className, 'disabled');
   });
 
-  it('Should wrap buttons in SafeAnchor when no buttonComponentClass prop is supplied', function () {
+  it('Should wrap buttons in SafeAnchor when no buttonComponentClass prop is supplied', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         maxButtons={2}
@@ -133,7 +133,7 @@ describe('Pagination', function () {
     assert.equal(React.findDOMNode(pageButtons[1]).children[0].getAttribute('href'), '');
   });
 
-  it('Should wrap each button in a buttonComponentClass when it is present', function () {
+  it('Should wrap each button in a buttonComponentClass when it is present', () => {
     class DummyElement extends React.Component {
       render() {
         return <div {...this.props}/>;
@@ -155,7 +155,7 @@ describe('Pagination', function () {
     assert.equal(React.findDOMNode(pageButtons[1]).children[0].tagName, tagName);
   });
 
-  it('Should call onSelect with custom buttonComponentClass', function (done) {
+  it('Should call onSelect with custom buttonComponentClass', (done) => {
     class DummyElement extends React.Component {
       render() {
         return <div {...this.props}/>;
@@ -176,7 +176,7 @@ describe('Pagination', function () {
     );
   });
 
-  it('should not fire "onSelect" event on disabled buttons', function () {
+  it('should not fire "onSelect" event on disabled buttons', () => {
     function onSelect() {
       throw Error('this event should not happen');
     }

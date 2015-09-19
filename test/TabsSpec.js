@@ -12,8 +12,8 @@ import ValidComponentChildren from '../src/utils/ValidComponentChildren';
 
 import { render } from './helpers';
 
-describe('Tabs', function () {
-  it('Should show the correct tab', function () {
+describe('Tabs', () => {
+  it('Should show the correct tab', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs activeKey={1}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
@@ -31,7 +31,7 @@ describe('Tabs', function () {
     assert.equal(tabs.refs.tabs.props.activeKey, 1);
   });
 
-  it('Should only show the tabs with `Tab.props.title` set', function () {
+  it('Should only show the tabs with `Tab.props.title` set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs activeKey={3}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
@@ -46,7 +46,7 @@ describe('Tabs', function () {
     assert.equal(tabs.refs.tabs.props.activeKey, 3);
   });
 
-  it('Should allow tab to have React components', function () {
+  it('Should allow tab to have React components', () => {
     let tabTitle = (
       <strong className="special-tab">Tab 2</strong>
     );
@@ -60,7 +60,7 @@ describe('Tabs', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.tabs, 'special-tab'));
   });
 
-  it('Should call onSelect when tab is selected', function (done) {
+  it('Should call onSelect when tab is selected', (done) => {
     function onSelect(key) {
       assert.equal(key, '2');
       done();
@@ -80,7 +80,7 @@ describe('Tabs', function () {
     );
   });
 
-  it('Should have children with the correct DOM properties', function () {
+  it('Should have children with the correct DOM properties', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs activeKey={1}>
         <Tab title="Tab 1" className="custom" id="pane0id" eventKey={1}>Tab 1 content</Tab>
@@ -94,7 +94,7 @@ describe('Tabs', function () {
     assert.equal(React.findDOMNode(panes[0]).id, 'pane0id');
   });
 
-  it('Should show the correct initial pane', function () {
+  it('Should show the correct initial pane', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs defaultActiveKey={2}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
@@ -112,7 +112,7 @@ describe('Tabs', function () {
     assert.equal(tabs.refs.tabs.props.activeKey, 2);
   });
 
-  it('Should show the correct first tab with no active key value', function () {
+  it('Should show the correct first tab with no active key value', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
@@ -129,12 +129,12 @@ describe('Tabs', function () {
     assert.equal(tabs.refs.tabs.props.activeKey, 1);
   });
 
-  it('Should show the correct first tab with `React.Children.map` children values', function () {
+  it('Should show the correct first tab with `React.Children.map` children values', () => {
     let panes = [
       <div>Tab 1 content</div>,
       <div>Tab 2 content</div>
     ];
-    let paneComponents = React.Children.map(panes, function(child, index) {
+    let paneComponents = React.Children.map(panes, (child, index) => {
       return <Tab eventKey={index} tab={'Tab #' + index}>{child}</Tab>;
     });
 
@@ -148,7 +148,7 @@ describe('Tabs', function () {
     assert.equal(instance.refs.tabs.props.activeKey, 0);
   });
 
-  it('Should show the correct tab when selected', function () {
+  it('Should show the correct tab when selected', () => {
     let tab1 = <span className="tab1">Tab 1</span>;
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs defaultActiveKey={2} animation={false}>
@@ -169,7 +169,7 @@ describe('Tabs', function () {
     assert.equal(tabs.refs.tabs.props.activeKey, 1);
   });
 
-  it('Should treat active key of null as nothing selected', function () {
+  it('Should treat active key of null as nothing selected', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Tabs activeKey={null}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
@@ -180,7 +180,7 @@ describe('Tabs', function () {
     expect(instance.getActiveKey()).to.not.exist;
   });
 
-  it('Should pass default bsStyle (of "tabs") to Nav', function () {
+  it('Should pass default bsStyle (of "tabs") to Nav', () => {
     let instance = ReactTestUtils.renderIntoDocument(
         <Tabs defaultActiveKey={1} animation={false}>
           <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
@@ -191,7 +191,7 @@ describe('Tabs', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-tabs'));
   });
 
-  it('Should pass bsStyle to Nav', function () {
+  it('Should pass bsStyle to Nav', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs bsStyle="pills" defaultActiveKey={1} animation={false}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
@@ -202,7 +202,7 @@ describe('Tabs', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-pills'));
   });
 
-  it('Should pass disabled to Nav', function () {
+  it('Should pass disabled to Nav', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs activeKey={1}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
@@ -213,7 +213,7 @@ describe('Tabs', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled'));
   });
 
-  it('Should not show content when clicking disabled tab', function () {
+  it('Should not show content when clicking disabled tab', () => {
     let tab1 = <span className="tab1">Tab 1</span>;
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs defaultActiveKey={2} animation={false}>
@@ -235,10 +235,10 @@ describe('Tabs', function () {
   });
 
 
-  describe('when the position prop is not provided', function() {
+  describe('when the position prop is not provided', () => {
     let instance;
 
-    beforeEach(function() {
+    beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
         <Tabs defaultActiveKey={1}>
           <Tab title="A Tab" eventKey={1}>Tab content</Tab>
@@ -246,14 +246,14 @@ describe('Tabs', function () {
       );
     });
 
-    it('doesn\'t stack the tabs', function () {
+    it('doesn\'t stack the tabs', () => {
       let nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
 
       expect(nav.props.bsStyle).to.equal('tabs');
       expect(nav.props.stacked).to.not.be.ok;
     });
 
-    it('doesn\'t apply column styling', function () {
+    it('doesn\'t apply column styling', () => {
       let tabs = instance.refs.tabs;
       let panes = instance.refs.panes;
 
@@ -261,7 +261,7 @@ describe('Tabs', function () {
       expect(React.findDOMNode(panes).className).to.not.match(/\bcol\b/);
     });
 
-    it('doesn\'t render grid elements', function () {
+    it('doesn\'t render grid elements', () => {
       const cols = ReactTestUtils.scryRenderedComponentsWithType(
         instance, Col
       );
@@ -271,11 +271,11 @@ describe('Tabs', function () {
   });
 
 
-  describe('when the position prop is "left"', function() {
-    describe('when tabWidth is not provided', function() {
+  describe('when the position prop is "left"', () => {
+    describe('when tabWidth is not provided', () => {
       let instance;
 
-      beforeEach(function () {
+      beforeEach(() => {
         instance = ReactTestUtils.renderIntoDocument(
           <Tabs defaultActiveKey={1} position="left">
             <Tab title="A Tab" eventKey={1}>Tab content</Tab>
@@ -283,14 +283,14 @@ describe('Tabs', function () {
         );
       });
 
-      it('Should stack the tabs', function () {
+      it('Should stack the tabs', () => {
         let nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
 
         expect(nav.props.bsStyle).to.equal('pills');
         expect(nav.props.stacked).to.be.ok;
       });
 
-      it('Should have a left nav with a width of 2', function() {
+      it('Should have a left nav with a width of 2', () => {
         let tabs = instance.refs.tabs;
         let panes = instance.refs.panes;
 
@@ -298,7 +298,7 @@ describe('Tabs', function () {
         expect(React.findDOMNode(panes).className).to.match(/\bcol-xs-10\b/);
       });
 
-      it('renders grid elements', function () {
+      it('renders grid elements', () => {
         const cols = ReactTestUtils.scryRenderedComponentsWithType(
           instance, Col
         );
@@ -306,13 +306,13 @@ describe('Tabs', function () {
         expect(cols).to.have.length(2);
       });
 
-      it('should render with clearfix', function() {
+      it('should render with clearfix', () => {
         expect(React.findDOMNode(instance).className).to.match(/\bclearfix\b/);
       });
     });
 
-    describe('when only tabWidth is provided', function() {
-      it('Should have a left nav with the width that was provided', function() {
+    describe('when only tabWidth is provided', () => {
+      it('Should have a left nav with the width that was provided', () => {
         let instance = ReactTestUtils.renderIntoDocument(
           <Tabs defaultActiveKey={1} position="left" tabWidth={3}>
             <Tab title="A Tab" eventKey={1}>Tab content</Tab>
@@ -327,10 +327,10 @@ describe('Tabs', function () {
       });
     });
 
-    describe('when simple tabWidth and paneWidth are provided', function() {
+    describe('when simple tabWidth and paneWidth are provided', () => {
       let instance;
 
-      beforeEach(function () {
+      beforeEach(() => {
         instance = ReactTestUtils.renderIntoDocument(
           <Tabs position="left" tabWidth={4} paneWidth={7}>
             <Tab title="A Tab" eventKey={1}>Tab content</Tab>
@@ -338,7 +338,7 @@ describe('Tabs', function () {
         );
       });
 
-      it('Should have the provided widths', function() {
+      it('Should have the provided widths', () => {
         let tabs = instance.refs.tabs;
         let panes = instance.refs.panes;
 
@@ -347,10 +347,10 @@ describe('Tabs', function () {
       });
     });
 
-    describe('when complex tabWidth and paneWidth are provided', function() {
+    describe('when complex tabWidth and paneWidth are provided', () => {
       let instance;
 
-      beforeEach(function () {
+      beforeEach(() => {
         instance = ReactTestUtils.renderIntoDocument(
           <Tabs
             position="left"
@@ -362,7 +362,7 @@ describe('Tabs', function () {
         );
       });
 
-      it('Should have the provided widths', function() {
+      it('Should have the provided widths', () => {
         let tabs = instance.refs.tabs;
         let panes = instance.refs.panes;
 
@@ -373,10 +373,10 @@ describe('Tabs', function () {
       });
     });
 
-    describe('when standalone', function() {
+    describe('when standalone', () => {
       let instance;
 
-      beforeEach(function () {
+      beforeEach(() => {
         instance = ReactTestUtils.renderIntoDocument(
           <Tabs defaultActiveKey={1} position="left" standalone>
             <Tab title="A Tab" eventKey={1}>Tab content</Tab>
@@ -384,14 +384,14 @@ describe('Tabs', function () {
         );
       });
 
-      it('should not render with clearfix', function() {
+      it('should not render with clearfix', () => {
         expect(React.findDOMNode(instance).className)
           .to.not.match(/\bclearfix\b/);
       });
     });
   });
 
-  describe('animation', function () {
+  describe('animation', () => {
     let mountPoint;
 
     beforeEach(() => {
@@ -399,13 +399,13 @@ describe('Tabs', function () {
       document.body.appendChild(mountPoint);
     });
 
-    afterEach(function () {
+    afterEach(() => {
       React.unmountComponentAtNode(mountPoint);
       document.body.removeChild(mountPoint);
     });
 
     function checkTabRemovingWithAnimation(animation) {
-      it(`should correctly set "active" after Tab is removed with "animation=${animation}"`, function() {
+      it(`should correctly set "active" after Tab is removed with "animation=${animation}"`, () => {
         let instance = render(
           <Tabs activeKey={2} animation={animation}>
             <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
@@ -433,10 +433,10 @@ describe('Tabs', function () {
     checkTabRemovingWithAnimation(false);
   });
 
-  describe('keyboard navigation', function() {
+  describe('keyboard navigation', () => {
     let instance;
 
-    beforeEach(function() {
+    beforeEach(() => {
       instance = render(
         <Tabs defaultActiveKey={1} id='tabs'>
           <Tab id='pane-1' title="Tab 1" eventKey={1}>Tab 1 content</Tab>
@@ -446,7 +446,7 @@ describe('Tabs', function () {
       , document.body);
     });
 
-    afterEach(function() {
+    afterEach(() => {
       instance = React.unmountComponentAtNode(document.body);
     });
 
@@ -490,9 +490,9 @@ describe('Tabs', function () {
     });
   });
 
-  describe('Web Accessibility', function() {
+  describe('Web Accessibility', () => {
     let instance;
-    beforeEach(function() {
+    beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
         <Tabs defaultActiveKey={2} id='tabs'>
           <Tab id='pane-1' title="Tab 1" eventKey={1}>Tab 1 content</Tab>
@@ -501,34 +501,34 @@ describe('Tabs', function () {
       );
     });
 
-    it('Should generate ids from parent id', function () {
+    it('Should generate ids from parent id', () => {
       let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
       tabs.every(tab =>
         assert.ok(tab.props['aria-controls'] && tab.props.linkId));
     });
 
-    it('Should add aria-controls', function () {
+    it('Should add aria-controls', () => {
       let panes = ReactTestUtils.scryRenderedComponentsWithType(instance, Tab);
 
       assert.equal(panes[0].props['aria-labelledby'], 'pane-1___tab');
       assert.equal(panes[1].props['aria-labelledby'], 'pane-2___tab');
     });
 
-    it('Should add aria-controls', function () {
+    it('Should add aria-controls', () => {
       let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
       assert.equal(tabs[0].props['aria-controls'], 'pane-1');
       assert.equal(tabs[1].props['aria-controls'], 'pane-2');
     });
 
-    it('Should add role=tablist to the nav', function () {
+    it('Should add role=tablist to the nav', () => {
       let nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
 
       assert.equal(nav.props.role, 'tablist');
     });
 
-    it('Should add aria-selected to the nav item for the selected tab', function() {
+    it('Should add aria-selected to the nav item for the selected tab', () => {
       let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
       let link1 = ReactTestUtils.findRenderedDOMComponentWithTag(tabs[0], 'a');
       let link2 = ReactTestUtils.findRenderedDOMComponentWithTag(tabs[1], 'a');
@@ -538,7 +538,7 @@ describe('Tabs', function () {
     });
   });
 
-  it('Should not pass className to Nav', function () {
+  it('Should not pass className to Nav', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs bsStyle="pills" defaultActiveKey={1} animation={false}>
         <Tab title="Tab 1" eventKey={1} className="my-tab-class">Tab 1 content</Tab>
@@ -550,7 +550,7 @@ describe('Tabs', function () {
     assert.notDeepEqual(myTabClass, myNavItem);
   });
 
-  it('Should pass className, Id, and style to Tabs', function () {
+  it('Should pass className, Id, and style to Tabs', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs bsStyle="pills" defaultActiveKey={1} animation={false}
                   className="my-tabs-class" id="my-tabs-id" style={{opacity: 0.5}} />

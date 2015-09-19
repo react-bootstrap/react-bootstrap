@@ -149,7 +149,7 @@ const Col = React.createClass({
     let ComponentClass = this.props.componentClass;
     let classes = {};
 
-    Object.keys(styleMaps.SIZES).forEach(function(key) {
+    Object.keys(styleMaps.SIZES).forEach( key => {
       let size = styleMaps.SIZES[key];
       let prop = size;
       let classPart = size + '-';

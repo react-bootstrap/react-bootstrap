@@ -95,7 +95,7 @@ const ReactTransitionEvents = {
       window.setTimeout(eventListener, 0);
       return;
     }
-    endEvents.forEach(function(endEvent) {
+    endEvents.forEach(endEvent => {
       addEventListener(node, endEvent, eventListener);
     });
   },
@@ -104,7 +104,7 @@ const ReactTransitionEvents = {
     if (endEvents.length === 0) {
       return;
     }
-    endEvents.forEach(function(endEvent) {
+    endEvents.forEach(endEvent => {
       removeEventListener(node, endEvent, eventListener);
     });
   }

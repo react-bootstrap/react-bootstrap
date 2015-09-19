@@ -1,4 +1,4 @@
-/* eslint no-var: 0, babel/object-shorthand: 0, vars-on-top: 0 */
+/* eslint no-var: 0, babel/object-shorthand: 0, vars-on-top: 0, func-names: 0 */
 require('babel/register');
 
 var webpackConfig = require('./webpack/test.config.js');

@@ -36,7 +36,7 @@ const Interpolate = React.createClass({
     delete props.unsafe;
 
     if (unsafe) {
-      let content = format.split(REGEXP).reduce(function(memo, match, index) {
+      let content = format.split(REGEXP).reduce((memo, match, index) => {
         let html;
 
         if (index % 2 === 0) {
@@ -59,7 +59,7 @@ const Interpolate = React.createClass({
 
       return React.createElement(parent, props);
     } else {
-      let kids = format.split(REGEXP).reduce(function(memo, match, index) {
+      let kids = format.split(REGEXP).reduce((memo, match, index) => {
         let child;
 
         if (index % 2 === 0) {

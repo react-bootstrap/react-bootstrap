@@ -6,7 +6,7 @@ import deprecationWarning from './utils/deprecationWarning';
 function getElementsAndSelf(root, classes) {
   let els = root.querySelectorAll('.' + classes.join('.'));
 
-  els = [].map.call(els, function(e) { return e; });
+  els = [].map.call(els, e => e );
 
   for (let i = 0; i < classes.length; i++) {
     if ( !root.className.match(new RegExp('\\b' + classes[i] + '\\b'))) {
@@ -29,7 +29,7 @@ export default {
       els = getElementsAndSelf(React.findDOMNode(this), ['fade']);
 
       if (els.length) {
-        els.forEach(function(el) {
+        els.forEach( el => {
           el.className += ' in';
         });
       }
@@ -40,7 +40,7 @@ export default {
     let els = getElementsAndSelf(this._fadeOutEl, ['fade', 'in']);
 
     if (els.length) {
-      els.forEach(function(el) {
+      els.forEach( el => {
         el.className = el.className.replace(/\bin\b/, '');
       });
     }
