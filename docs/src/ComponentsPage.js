@@ -836,7 +836,13 @@ const ComponentsPage = React.createClass({
                   <h3><Anchor id="button-input-types">Button Input Types</Anchor></h3>
                   <p>Form buttons are encapsulated by <code>ButtonInput</code>. Pass in <code>type="reset"</code> or <code>type="submit"</code> to suit your needs. Styling is the same as <code>Button</code>.</p>
                   <ReactPlayground codeText={Samples.ButtonInput} />
-
+                  <h3><Anchor id="radio-group">Radio Group</Anchor></h3>
+                  <p>Radio buttons can be created with <code>FormControls.RadioButton</code>. <code>FormControls.RadioGroup</code> will wrap your group of radio buttons in a fieldset.</p>
+                  <ReactPlayground codeText={Samples.RadioButtonGroup} />
+                  <h4><Anchor id="radio-group-props"><code>FormControls.RadioGroup</code> Props</Anchor></h4>
+                  <PropTable component="RadioGroup" />
+                  <h4><Anchor id="radio-button-props"><code>FormControls.RadioButton</code> Props</Anchor></h4>
+                  <PropTable component="RadioButton" />
                   <h3><Anchor id="input-addons">Add-ons</Anchor></h3>
                   <p>Use <code>addonBefore</code> and <code>addonAfter</code> for normal addons, <code>buttonBefore</code> and <code>buttonAfter</code> for button addons.
                   Exotic configurations may require some css on your side.</p>

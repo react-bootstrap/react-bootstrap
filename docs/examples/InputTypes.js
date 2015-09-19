@@ -5,7 +5,7 @@ const inputTypeInstance = (
     <Input type="password" label="Password" />
     <Input type="file" label="File" help="[Optional] Block level help text" />
     <Input type="checkbox" label="Checkbox" checked readOnly />
-    <Input type="radio" label="Radio" checked readOnly />
+    <FormControls.RadioButton label="Radio" checked readOnly />
     <Input type="select" label="Select" placeholder="select">
       <option value="select">select</option>
       <option value="other">...</option>
