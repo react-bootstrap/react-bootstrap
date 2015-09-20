@@ -2,9 +2,9 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Image from '../src/Image';
 
-describe('Image', function() {
+describe('Image', () => {
 
-  it('should be an image', function() {
+  it('should be an image', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Image />
     );
@@ -13,7 +13,7 @@ describe('Image', function() {
     image.nodeName.should.equal('IMG');
   });
 
-  it('should provide src and alt prop', function() {
+  it('should provide src and alt prop', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Image src="image.jpg" alt="this is alt" />
     );
@@ -23,7 +23,7 @@ describe('Image', function() {
     assert.equal(image.getAttribute('alt'), 'this is alt');
   });
 
-  it('should have correct class when responsive prop is set', function() {
+  it('should have correct class when responsive prop is set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Image responsive />
     );
@@ -32,7 +32,7 @@ describe('Image', function() {
     imageClassName.should.match(/\bimg-responsive\b/);
   });
 
-  it('should have correct class when rounded prop is set', function() {
+  it('should have correct class when rounded prop is set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Image rounded />
     );
@@ -41,7 +41,7 @@ describe('Image', function() {
     imageClassName.should.match(/\bimg-rounded\b/);
   });
 
-  it('should have correct class when circle prop is set', function() {
+  it('should have correct class when circle prop is set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Image circle />
     );
@@ -50,7 +50,7 @@ describe('Image', function() {
     imageClassName.should.match(/\bimg-circle\b/);
   });
 
-  it('should have correct class when thumbnail prop is set', function() {
+  it('should have correct class when thumbnail prop is set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Image thumbnail />
     );
