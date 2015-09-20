@@ -93,7 +93,7 @@ function all(propTypes) {
     throw new Error('No validations provided');
   }
 
-  return function(props, propName, componentName) {
+  return function validate(props, propName, componentName) {
     for (let i = 0; i < propTypes.length; i++) {
       let result = propTypes[i](props, propName, componentName);
 
@@ -127,7 +127,7 @@ function createElementTypeChecker() {
 export default {
 
   deprecated(propType, explanation) {
-    return function(props, propName, componentName) {
+    return function validate(props, propName, componentName) {
       if (props[propName] != null) {
         warning(false, `"${propName}" property of "${componentName}" has been deprecated.\n${explanation}`);
       }
@@ -137,7 +137,7 @@ export default {
   },
 
   isRequiredForA11y(propType) {
-    return function(props, propName, componentName) {
+    return function validate(props, propName, componentName) {
       if (props[propName] == null) {
         return new Error(
           'The prop `' + propName + '` is required to make ' + componentName + ' accessible ' +

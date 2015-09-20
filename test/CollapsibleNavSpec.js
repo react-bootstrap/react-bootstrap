@@ -5,8 +5,8 @@ import CollapsibleNav from '../src/CollapsibleNav';
 import Nav from '../src/Nav';
 import NavItem from '../src/NavItem';
 
-describe('CollapsibleNav', function () {
-  it('Should create div and add collapse class', function () {
+describe('CollapsibleNav', () => {
+  it('Should create div and add collapse class', () => {
     let Parent = React.createClass({
       render() {
         return (
@@ -25,7 +25,7 @@ describe('CollapsibleNav', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-collapse'));
   });
 
-  it('Should handle multiple Nav elements', function () {
+  it('Should handle multiple Nav elements', () => {
     let Parent = React.createClass({
       render() {
         return (
@@ -49,7 +49,7 @@ describe('CollapsibleNav', function () {
     assert.ok(ReactTestUtils.findRenderedComponentWithType(instance.refs.collapsible_object.refs.collapsible_1, Nav));
   });
 
-  it('Should just render children and move along if not in <Navbar>', function () {
+  it('Should just render children and move along if not in <Navbar>', () => {
     let Parent = React.createClass({
       render() {
         return (
@@ -69,7 +69,7 @@ describe('CollapsibleNav', function () {
     assert.ok(nav);
   });
 
-  it('Should retain childrens classes set by className', function () {
+  it('Should retain childrens classes set by className', () => {
     let Parent = React.createClass({
       render() {
         return (

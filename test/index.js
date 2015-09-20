@@ -1,10 +1,10 @@
 import 'es5-shim';
 
-beforeEach(function() {
+beforeEach(() => {
   sinon.stub(console, 'warn');
 });
 
-afterEach(function() {
+afterEach(() => {
   if (typeof console.warn.restore === 'function') {
     assert(!console.warn.called, () => {
       return `${console.warn.getCall(0).args[0]} \nIn '${this.currentTest.fullTitle()}'`;
@@ -13,8 +13,8 @@ afterEach(function() {
   }
 });
 
-describe('Process environment for tests', function () {
-  it('Should be development for React console warnings', function () {
+describe('Process environment for tests', () => {
+  it('Should be development for React console warnings', () => {
     assert.equal(process.env.NODE_ENV, 'development');
   });
 });

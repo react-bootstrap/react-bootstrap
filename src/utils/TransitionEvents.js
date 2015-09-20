@@ -59,7 +59,7 @@ function detectEvents() {
     delete EVENT_NAME_MAP.transitionend.transition;
   }
 
-  for (let baseEventName in EVENT_NAME_MAP) {
+  for (let baseEventName in EVENT_NAME_MAP) { // eslint-disable-line guard-for-in
     let baseEvents = EVENT_NAME_MAP[baseEventName];
     for (let styleName in baseEvents) {
       if (styleName in style) {
@@ -95,7 +95,7 @@ const ReactTransitionEvents = {
       window.setTimeout(eventListener, 0);
       return;
     }
-    endEvents.forEach(function(endEvent) {
+    endEvents.forEach(endEvent => {
       addEventListener(node, endEvent, eventListener);
     });
   },
@@ -104,7 +104,7 @@ const ReactTransitionEvents = {
     if (endEvents.length === 0) {
       return;
     }
-    endEvents.forEach(function(endEvent) {
+    endEvents.forEach(endEvent => {
       removeEventListener(node, endEvent, eventListener);
     });
   }

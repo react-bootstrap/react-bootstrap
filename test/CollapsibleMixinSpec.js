@@ -3,11 +3,11 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import CollapsibleMixin from '../src/CollapsibleMixin';
 import classNames from 'classnames';
 
-describe('CollapsibleMixin', function () {
+describe('CollapsibleMixin', () => {
 
   let Component, instance;
 
-  beforeEach(function() {
+  beforeEach(() => {
     Component = React.createClass({
       mixins: [CollapsibleMixin],
 
@@ -38,8 +38,8 @@ describe('CollapsibleMixin', function () {
     }
   });
 
-  describe('getInitialState', function() {
-    it('Should check defaultExpanded', function () {
+  describe('getInitialState', () => {
+    it('Should check defaultExpanded', () => {
       instance = ReactTestUtils.renderIntoDocument(
         <Component defaultExpanded>Panel content</Component>
       );
@@ -47,7 +47,7 @@ describe('CollapsibleMixin', function () {
       assert.ok(state.expanded === true);
     });
 
-    it('Should default collapsing to false', function () {
+    it('Should default collapsing to false', () => {
       instance = ReactTestUtils.renderIntoDocument(
         <Component>Panel content</Component>
       );
@@ -56,8 +56,8 @@ describe('CollapsibleMixin', function () {
     });
   });
 
-  describe('collapsed', function() {
-    it('Should have collapse class', function () {
+  describe('collapsed', () => {
+    it('Should have collapse class', () => {
       instance = ReactTestUtils.renderIntoDocument(
         <Component>Panel content</Component>
       );
@@ -65,31 +65,31 @@ describe('CollapsibleMixin', function () {
     });
   });
 
-  describe('from collapsed to expanded', function() {
-    beforeEach(function() {
+  describe('from collapsed to expanded', () => {
+    beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
         <Component>Panel content</Component>
       );
     });
 
-    it('Should have collapsing class', function () {
+    it('Should have collapsing class', () => {
       instance.setProps({expanded:true});
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.className, 'collapsing');
     });
 
-    it('Should set initial 0px height', function () {
+    it('Should set initial 0px height', () => {
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.style.height, '');
 
-      instance._afterWillUpdate = function() {
+      instance._afterWillUpdate = () => {
         assert.equal(node.style.height, '0px');
       };
 
       instance.setProps({expanded:true});
     });
 
-    it('Should set transition to height', function () {
+    it('Should set transition to height', () => {
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.styled, undefined);
 
@@ -97,9 +97,9 @@ describe('CollapsibleMixin', function () {
       assert.equal(node.style.height, '15px');
     });
 
-    it('Should transition from collapsing to not collapsing', function (done) {
-      instance._addEndEventListener = function(node, complete) {
-        setTimeout(function() {
+    it('Should transition from collapsing to not collapsing', (done) => {
+      instance._addEndEventListener = (node, complete) => {
+        setTimeout(() => {
           complete();
           assert.ok(!instance.state.collapsing);
           done();
@@ -109,11 +109,11 @@ describe('CollapsibleMixin', function () {
       assert.ok(instance.state.collapsing);
     });
 
-    it('Should clear height after transition complete', function (done) {
+    it('Should clear height after transition complete', (done) => {
       let node = instance.getCollapsibleDOMNode();
 
-      instance._addEndEventListener = function(nodeInner, complete) {
-        setTimeout(function() {
+      instance._addEndEventListener = (nodeInner, complete) => {
+        setTimeout(() => {
           complete();
           assert.equal(nodeInner.style.height, '');
           done();
@@ -126,23 +126,23 @@ describe('CollapsibleMixin', function () {
     });
   });
 
-  describe('from expanded to collapsed', function() {
-    beforeEach(function() {
+  describe('from expanded to collapsed', () => {
+    beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
         <Component defaultExpanded>Panel content</Component>
       );
     });
 
-    it('Should have collapsing class', function () {
+    it('Should have collapsing class', () => {
       instance.setProps({expanded:false});
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.className, 'collapsing');
     });
 
-    it('Should set initial height', function () {
+    it('Should set initial height', () => {
       let node = instance.getCollapsibleDOMNode();
 
-      instance._afterWillUpdate = function() {
+      instance._afterWillUpdate = () => {
         assert.equal(node.style.height, '15px');
       };
 
@@ -150,7 +150,7 @@ describe('CollapsibleMixin', function () {
       instance.setProps({expanded:false});
     });
 
-    it('Should set transition to height', function () {
+    it('Should set transition to height', () => {
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.style.height, '');
 
@@ -158,9 +158,9 @@ describe('CollapsibleMixin', function () {
       assert.equal(node.style.height, '0px');
     });
 
-    it('Should transition from collapsing to not collapsing', function (done) {
-      instance._addEndEventListener = function(node, complete) {
-        setTimeout(function() {
+    it('Should transition from collapsing to not collapsing', (done) => {
+      instance._addEndEventListener = (node, complete) => {
+        setTimeout(() => {
           complete();
           assert.ok(!instance.state.collapsing);
           done();
@@ -170,11 +170,11 @@ describe('CollapsibleMixin', function () {
       assert.ok(instance.state.collapsing);
     });
 
-    it('Should have 0px height after transition complete', function (done) {
+    it('Should have 0px height after transition complete', (done) => {
       let node = instance.getCollapsibleDOMNode();
 
-      instance._addEndEventListener = function(nodeInner, complete) {
-        setTimeout(function() {
+      instance._addEndEventListener = (nodeInner, complete) => {
+        setTimeout(() => {
           complete();
           assert.ok(nodeInner.style.height === '0px');
           done();
@@ -187,15 +187,15 @@ describe('CollapsibleMixin', function () {
     });
   });
 
-  describe('expanded', function() {
-    it('Should have collapse and in class', function () {
+  describe('expanded', () => {
+    it('Should have collapse and in class', () => {
       instance = ReactTestUtils.renderIntoDocument(
         <Component expanded={true}>Panel content</Component>
       );
       assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'collapse in'));
     });
 
-    it('Should have collapse and in class with defaultExpanded', function () {
+    it('Should have collapse and in class with defaultExpanded', () => {
       instance = ReactTestUtils.renderIntoDocument(
         <Component defaultExpanded>Panel content</Component>
       );
@@ -203,19 +203,19 @@ describe('CollapsibleMixin', function () {
     });
   });
 
-  describe('dimension', function() {
-    beforeEach(function() {
+  describe('dimension', () => {
+    beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
         <Component>Panel content</Component>
       );
     });
 
-    it('Defaults to height', function() {
+    it('Defaults to height', () => {
       assert.equal(instance.dimension(), 'height');
     });
 
-    it('Uses getCollapsibleDimension if exists', function() {
-      instance.getCollapsibleDimension = function() {
+    it('Uses getCollapsibleDimension if exists', () => {
+      instance.getCollapsibleDimension = () => {
         return 'whatevs';
       };
       assert.equal(instance.dimension(), 'whatevs');

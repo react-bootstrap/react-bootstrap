@@ -4,8 +4,8 @@ import ButtonGroup from '../src/ButtonGroup';
 import Button from '../src/Button';
 import { shouldWarn } from './helpers';
 
-describe('ButtonGroup', function () {
-  it('Should output a button group', function () {
+describe('ButtonGroup', () => {
+  it('Should output a button group', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ButtonGroup>
         <Button>
@@ -17,7 +17,7 @@ describe('ButtonGroup', function () {
     assert.ok(React.findDOMNode(instance).className.match(/\bbtn-group\b/));
   });
 
-  it('Should add size', function () {
+  it('Should add size', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ButtonGroup bsSize='large'>
         <Button>
@@ -28,7 +28,7 @@ describe('ButtonGroup', function () {
     assert.ok(React.findDOMNode(instance).className.match(/\bbtn-group-lg\b/));
   });
 
-  it('Should add vertical variation', function () {
+  it('Should add vertical variation', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ButtonGroup vertical>
         <Button>
@@ -39,7 +39,7 @@ describe('ButtonGroup', function () {
     assert.equal(React.findDOMNode(instance).className.trim(), 'btn-group-vertical');
   });
 
-  it('Should add block variation', function () {
+  it('Should add block variation', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ButtonGroup vertical block>
         <Button>
@@ -50,7 +50,7 @@ describe('ButtonGroup', function () {
     assert.ok(React.findDOMNode(instance).className.match(/\bbtn-block\b/));
   });
 
-  it('Should warn about block without vertical', function () {
+  it('Should warn about block without vertical', () => {
     ReactTestUtils.renderIntoDocument(
       <ButtonGroup block>
         <Button>
@@ -61,7 +61,7 @@ describe('ButtonGroup', function () {
     shouldWarn('The block property requires the vertical property to be set to have any effect');
   });
 
-  it('Should add justified variation', function () {
+  it('Should add justified variation', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ButtonGroup justified>
         <Button>

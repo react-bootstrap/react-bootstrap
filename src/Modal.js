@@ -406,8 +406,8 @@ const Modal = React.createClass({
     // IOS only allows click events to be delegated to the document on elements
     // it considers 'clickable' - anchors, buttons, etc. We fake a click handler on the
     // DOM nodes themselves. Remove if handled by React: https://github.com/facebook/react/issues/1169
-    React.findDOMNode(this.refs.modal).onclick = function() {};
-    React.findDOMNode(this.refs.backdrop).onclick = function() {};
+    React.findDOMNode(this.refs.modal).onclick = () => {};
+    React.findDOMNode(this.refs.backdrop).onclick = () => {};
   },
 
   _getStyles() {

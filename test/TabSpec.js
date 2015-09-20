@@ -2,24 +2,24 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Tab from '../src/Tab';
 
-describe('Tab', function () {
-  it('Should have class', function () {
+describe('Tab', () => {
+  it('Should have class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tab>Item content</Tab>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab-pane'));
   });
 
-  it('Should add active class', function () {
+  it('Should add active class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tab active={true}>Item content</Tab>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active'));
   });
 
-  describe('Web Accessibility', function() {
+  describe('Web Accessibility', () => {
 
-    it('Should have aria-hidden', function () {
+    it('Should have aria-hidden', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Tab active>Item content</Tab>
       );
@@ -27,7 +27,7 @@ describe('Tab', function () {
       assert.equal(React.findDOMNode(instance).getAttribute('aria-hidden'), 'false');
     });
 
-    it('Should have role', function () {
+    it('Should have role', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Tab active>Item content</Tab>
       );

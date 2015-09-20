@@ -7,8 +7,8 @@ import MenuItem from '../src/MenuItem';
 import Glyphicon from '../src/Glyphicon';
 import {shouldWarn} from './helpers';
 
-describe('Input', function () {
-  it('renders children when type is not set', function () {
+describe('Input', () => {
+  it('renders children when type is not set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input>
         <span />
@@ -19,7 +19,7 @@ describe('Input', function () {
     assert.throw(instance.getValue);
   });
 
-  it('renders a select element when type=select', function () {
+  it('renders a select element when type=select', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="select" defaultValue="v">
         <option value="v" />
@@ -33,7 +33,7 @@ describe('Input', function () {
     assert.equal(instance.getValue(), 'v');
   });
 
-  it('renders a textarea element when type=textarea', function () {
+  it('renders a textarea element when type=textarea', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="textarea" defaultValue="v" />
     );
@@ -42,7 +42,7 @@ describe('Input', function () {
     assert.equal(instance.getValue(), 'v');
   });
 
-  it('throws a warning when type=static', function () {
+  it('throws a warning when type=static', () => {
     ReactTestUtils.renderIntoDocument(
       <Input type="static" value="v" />
     );
@@ -50,7 +50,7 @@ describe('Input', function () {
     shouldWarn('deprecated');
   });
 
-  it('renders an input element of given type when type is anything else', function () {
+  it('renders an input element of given type when type is anything else', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="text" defaultValue="v" />
     );
@@ -60,7 +60,7 @@ describe('Input', function () {
     assert.equal(instance.getValue(), 'v');
   });
 
-  it('renders form-group wrapper', function () {
+  it('renders form-group wrapper', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input groupClassName="group" bsStyle="error" />
     );
@@ -71,7 +71,7 @@ describe('Input', function () {
     assert.include(node.className, 'has-error');
   });
 
-  it('renders label', function () {
+  it('renders label', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input label="Label" labelClassName="label" id="input" />
     );
@@ -83,7 +83,7 @@ describe('Input', function () {
     assert.equal(node.getAttribute('for'), 'input');
   });
 
-  it('renders wrapper', function () {
+  it('renders wrapper', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input wrapperClassName="wrapper" />
     );
@@ -92,7 +92,7 @@ describe('Input', function () {
   });
 
 
-  it('renders input-group', function () {
+  it('renders input-group', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input addonBefore="$" />
     );
@@ -101,7 +101,7 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-addon'));
   });
 
-  it('renders form-group with sm or lg class when bsSize is small or large', function () {
+  it('renders form-group with sm or lg class when bsSize is small or large', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input bsSize="small" />
     );
@@ -117,7 +117,7 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group-lg'));
   });
 
-  it('renders input-group with sm or lg class name when bsSize is small or large', function () {
+  it('renders input-group with sm or lg class name when bsSize is small or large', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input addonBefore="$" bsSize="small" />
     );
@@ -133,7 +133,7 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-lg'));
   });
 
-  it('renders btn-group', function() {
+  it('renders btn-group', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input buttonAfter={<Button>!</Button>} />
     );
@@ -142,7 +142,7 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'input-group-btn'));
   });
 
-  it('renders btn-group with dropdown', function() {
+  it('renders btn-group with dropdown', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input buttonAfter={<DropdownButton title='dropdown' id='herpa-derpa'>
           <MenuItem key='1'>One</MenuItem>
@@ -155,7 +155,7 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-menu'));
   });
 
-  it('renders help', function () {
+  it('renders help', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input help="Help" />
     );
@@ -163,7 +163,7 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'help-block'));
   });
 
-  it('renders form-group class', function() {
+  it('renders form-group class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input />
     );
@@ -171,7 +171,7 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
   });
 
-  it('renders no form-group class', function() {
+  it('renders no form-group class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input standalone />
     );
@@ -179,7 +179,7 @@ describe('Input', function () {
     assert.equal(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'form-group').length, 0);
   });
 
-  it('renders custom-form-group class', function() {
+  it('renders custom-form-group class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input groupClassName='custom-form-class' />
     );
@@ -187,7 +187,7 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'custom-form-class'));
   });
 
-  it('renders feedback icon', function () {
+  it('renders feedback icon', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input hasFeedback={true} bsStyle="error" />
     );
@@ -195,7 +195,7 @@ describe('Input', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-control-feedback'));
   });
 
-  it('renders file correctly', function () {
+  it('renders file correctly', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="file" wrapperClassName="wrapper" label="Label" help="h" />
     );
@@ -210,7 +210,7 @@ describe('Input', function () {
     assert.equal(node.children[1].children[1].className, 'help-block');
   });
 
-  it('renders checkbox/radio correctly', function () {
+  it('renders checkbox/radio correctly', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="checkbox" wrapperClassName="wrapper" label="Label" help="h" />
     );
@@ -224,7 +224,7 @@ describe('Input', function () {
     assert.include(node.children[0].children[1].className, 'help-block');
   });
 
-  it('renders non-checkbox/radio correctly', function () {
+  it('renders non-checkbox/radio correctly', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="text" label="l" wrapperClassName="wrapper" addonAfter="a" hasFeedback={true} help="h"/>
     );
@@ -240,7 +240,7 @@ describe('Input', function () {
     assert.include(node.children[1].children[2].className, 'help-block');
   });
 
-  it('returns checked value for checkbox/radio', function () {
+  it('returns checked value for checkbox/radio', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="checkbox" checked readOnly />
     );
@@ -248,7 +248,7 @@ describe('Input', function () {
     assert.equal(instance.getChecked(), true);
   });
 
-  it('returns the only selected option for select', function () {
+  it('returns the only selected option for select', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="select" value={'one'}>
         <option value="one">one</option>
@@ -260,7 +260,7 @@ describe('Input', function () {
     assert.equal(instance.getValue(), 'one');
   });
 
-  it('returns all selected options for multiple select', function () {
+  it('returns all selected options for multiple select', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="select" multiple value={['one', 'two']}>
         <option value="one">one</option>
@@ -272,7 +272,7 @@ describe('Input', function () {
     assert.deepEqual(instance.getValue(), ['one', 'two']);
   });
 
-  it('renders a disabled input correctly', function () {
+  it('renders a disabled input correctly', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input type="text" disabled={true} />
     );
@@ -281,8 +281,8 @@ describe('Input', function () {
     assert.isNotNull(node.getAttribute('disabled'));
   });
 
-  context('when Input listens to feedback', function () {
-    it('renders success feedback as Glyphicon', function () {
+  context('when Input listens to feedback', () => {
+    it('renders success feedback as Glyphicon', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Input hasFeedback={true} bsStyle="success" />
       );
@@ -291,7 +291,7 @@ describe('Input', function () {
       assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon-ok'));
     });
 
-    it('renders warning feedback as Glyphicon', function () {
+    it('renders warning feedback as Glyphicon', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Input hasFeedback={true} bsStyle="warning" />
       );
@@ -300,7 +300,7 @@ describe('Input', function () {
       assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon-warning-sign'));
     });
 
-    it('renders error feedback as Glyphicon', function () {
+    it('renders error feedback as Glyphicon', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Input hasFeedback={true} bsStyle="error" />
       );
@@ -309,8 +309,8 @@ describe('Input', function () {
       assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon-remove'));
     });
 
-    context('when using feedbackIcon', function () {
-      it('uses the feedbackIcon', function () {
+    context('when using feedbackIcon', () => {
+      it('uses the feedbackIcon', () => {
         let customIcon = <Glyphicon glyph="star" />;
 
         let instance = ReactTestUtils.renderIntoDocument(
@@ -321,7 +321,7 @@ describe('Input', function () {
         assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon-star'));
       });
 
-      it('adds the .form-control-feedback class for Glyphicons', function () {
+      it('adds the .form-control-feedback class for Glyphicons', () => {
         let customIcon = <Glyphicon glyph="star" />;
 
         let instance = ReactTestUtils.renderIntoDocument(

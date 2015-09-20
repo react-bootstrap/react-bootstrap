@@ -3,9 +3,9 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Navbar from '../src/Navbar';
 import Nav from '../src/Nav';
 
-describe('Nav', function () {
+describe('Nav', () => {
 
-  it('Should create nav element', function () {
+  it('Should create nav element', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar />
     );
@@ -15,56 +15,56 @@ describe('Nav', function () {
     assert.ok(nav.getAttribute('role'), 'navigation');
   });
 
-  it('Should add fixedTop variation class', function () {
+  it('Should add fixedTop variation class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar fixedTop />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-fixed-top'));
   });
 
-  it('Should add fixedBottom variation class', function () {
+  it('Should add fixedBottom variation class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar fixedBottom />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-fixed-bottom'));
   });
 
-  it('Should add staticTop variation class', function () {
+  it('Should add staticTop variation class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar staticTop />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-static-top'));
   });
 
-  it('Should add inverse variation class', function () {
+  it('Should add inverse variation class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar inverse />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-inverse'));
   });
 
-  it('Should add fluid variation class', function () {
+  it('Should add fluid variation class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar fluid />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'container-fluid'));
   });
 
-  it('Should override role attribute', function () {
+  it('Should override role attribute', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar role="banner"/>
     );
     assert.ok(React.findDOMNode(instance).getAttribute('role'), 'banner');
   });
 
-  it('Should override node class', function () {
+  it('Should override node class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar componentClass={'header'}/>
     );
     assert.equal(React.findDOMNode(instance).nodeName, 'HEADER');
   });
 
-  it('Should add header with brand', function () {
+  it('Should add header with brand', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar brand="Brand" />
     );
@@ -79,7 +79,7 @@ describe('Nav', function () {
     assert.equal(React.findDOMNode(brand).innerText, 'Brand');
   });
 
-  it('Should add header with brand component', function () {
+  it('Should add header with brand component', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar brand={<a>Brand</a>} />
     );
@@ -95,7 +95,7 @@ describe('Nav', function () {
     assert.equal(React.findDOMNode(brand).innerText, 'Brand');
   });
 
-  it('Should pass navbar prop to navs', function () {
+  it('Should pass navbar prop to navs', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar brand="Brand">
         <Nav />
@@ -107,7 +107,7 @@ describe('Nav', function () {
     assert.ok(nav.props.navbar);
   });
 
-  it('Should pass nav prop to ul', function () {
+  it('Should pass nav prop to ul', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Nav />
     );
@@ -125,7 +125,7 @@ describe('Nav', function () {
     assert.equal(navNode.parentNode.nodeName, 'DIV');
   });
 
-  it('Should add header when toggleNavKey is 0', function () {
+  it('Should add header when toggleNavKey is 0', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar toggleNavKey={0}>
         <Nav eventKey={0} />
@@ -137,7 +137,7 @@ describe('Nav', function () {
     assert.ok(header);
   });
 
-  it('Should add header when toggleNavKey is 1', function () {
+  it('Should add header when toggleNavKey is 1', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar toggleNavKey={1}>
         <Nav eventKey={1} />
@@ -149,7 +149,7 @@ describe('Nav', function () {
     assert.ok(header);
   });
 
-  it('Should add header when toggleNavKey is string', function () {
+  it('Should add header when toggleNavKey is string', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar toggleNavKey={'string'}>
         <Nav eventKey={'string'} />
