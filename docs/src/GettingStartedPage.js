@@ -104,6 +104,8 @@ $ bower install react-bootstrap`
                 <div className="bs-docs-section">
                   <h2 className="page-header"><Anchor id="browser-support">Browser support</Anchor></h2>
                   <p>We aim to support all browsers supported by both <a href="http://facebook.github.io/react/docs/working-with-the-browser.html#browser-support-and-polyfills">React</a> and <a href="http://getbootstrap.com/getting-started/#support">Bootstrap</a>.</p>
+                  <p>Unfortunately, due to the lack of resources and the will of dedicating the efforts to modern browsers and getting closer to Bootstrap's features, we will not be testing <code>react-bootstrap</code> against IE8 anymore.
+                    <br/>We will however continue supporting IE8 as long as people submit PRs addressing compatibility issues with it.</p>
 
                   <p>React requires <a href="http://facebook.github.io/react/docs/working-with-the-browser.html#browser-support-and-polyfills">polyfills for non-ES5 capable browsers.</a></p>
 
