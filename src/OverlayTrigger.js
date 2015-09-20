@@ -5,7 +5,7 @@ import createChainedFunction from './utils/createChainedFunction';
 import createContextWrapper from './utils/createContextWrapper';
 import Overlay from './Overlay';
 import warning from 'react/lib/warning';
-import pick from 'lodash/object/pick';
+import pick from 'lodash-compat/object/pick';
 /**
  * Check if value one is inside or equal to the of value
  *

@@ -8,8 +8,8 @@ import DropdownMenu from './DropdownMenu';
 import CustomPropTypes from './utils/CustomPropTypes';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
-import find from 'lodash/collection/find';
-import omit from 'lodash/object/omit';
+import find from 'lodash-compat/collection/find';
+import omit from 'lodash-compat/object/omit';
 
 import activeElement from 'dom-helpers/activeElement';
 import contains from 'dom-helpers/query/contains';

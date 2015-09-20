@@ -4,7 +4,7 @@ import Dropdown from './Dropdown';
 import NavDropdown from './NavDropdown';
 import CustomPropTypes from './utils/CustomPropTypes';
 import deprecationWarning from './utils/deprecationWarning';
-import omit from 'lodash/object/omit';
+import omit from 'lodash-compat/object/omit';
 
 class DropdownButton extends React.Component {
 
