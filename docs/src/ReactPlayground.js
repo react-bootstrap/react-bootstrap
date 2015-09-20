@@ -26,6 +26,7 @@ const FormControls = require('../../src/FormControls');
 const Glyphicon = require('../../src/Glyphicon');
 const Grid = require('../../src/Grid');
 const Input = require('../../src/Input');
+const Image = require('../../src/Image');
 const Jumbotron = require('../../src/Jumbotron');
 const Label = require('../../src/Label');
 const ListGroup = require('../../src/ListGroup');
