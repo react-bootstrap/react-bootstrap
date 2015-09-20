@@ -257,6 +257,13 @@ describe('Modal', () => {
     assert.notInclude(document.body.className, 'modal-open');
   });
 
+  it('Should call onShow if it is supplied as a property', () => {
+    let count = 0;
+    let onShowCallback = ()=> count++;
+    render(<Modal show onShow={onShowCallback} onHide={() => {}} animation={false}>Test</Modal>);
+    expect(count).to.equal(1);
+  });
+
   describe('Focused state', () => {
     let focusableContainer = null;
 

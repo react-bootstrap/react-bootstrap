@@ -117,7 +117,12 @@ const Modal = React.createClass({
     /**
      * When `true` The modal will show itself.
      */
-    show: React.PropTypes.bool
+    show: React.PropTypes.bool,
+
+    /**
+     * When supplied this function will be called upon showing the modal.
+     */
+     onShow: React.PropTypes.func
   },
 
   getDefaultProps() {
@@ -314,6 +319,10 @@ const Modal = React.createClass({
 
     if (this.props.backdrop) {
       this.iosClickHack();
+    }
+
+    if (this.props.onShow) {
+      this.props.onShow();
     }
 
     this.setState(this._getStyles(), () => this.focusModalContent());
