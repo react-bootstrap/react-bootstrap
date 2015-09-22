@@ -1,4 +1,4 @@
-import merge from 'lodash/object/merge';
+import merge from 'lodash-compat/object/merge';
 import React from 'react';
 import Glyphicon from '../../src/Glyphicon';
 import Label from '../../src/Label';
