@@ -675,6 +675,22 @@ const ComponentsPage = React.createClass({
                   <PropTable component="Col"/>
                 </div>
 
+                {/* Images */}
+                <div className="bs-docs-section">
+                  <h1 className="page-header"><Anchor id="images">Images</Anchor></h1>
+
+                  <h3><Anchor id="image-shape">Shape</Anchor></h3>
+                  <p>Use the <code>rounded</code>, <code>circle</code> and <code>thumbnail</code> props to customise the image.</p>
+                  <ReactPlayground codeText={Samples.ImageShape} />
+
+                  <h3><Anchor id="image-responsive">Responsive</Anchor></h3>
+                  <p>Use the <code>responsive</code> to scale image nicely to the parent element.</p>
+                  <ReactPlayground codeText={Samples.ImageResponsive} />
+
+                  <h3><Anchor id="image-props">Props</Anchor></h3>
+                  <PropTable component="Image"/>
+                </div>
+
                 {/* Thumbnail */}
                 <div className="bs-docs-section">
                   <h1 className="page-header"><Anchor id="thumbnail">Thumbnail</Anchor></h1>
@@ -904,22 +920,6 @@ const ComponentsPage = React.createClass({
                   <h4><Anchor id="utilities-fade-props">Props</Anchor></h4>
                   <PropTable component="Fade"/>
                 </div>
-
-                {/* Images */}
-                <div className="bs-docs-section">
-                  <h1 className="page-header"><Anchor id="images">Images</Anchor></h1>
-
-                  <h3><Anchor id="image-shape">Shape</Anchor></h3>
-                  <p>Use the <code>rounded</code>, <code>circle</code> and <code>thumbnail</code> props to customise the image.</p>
-                  <ReactPlayground codeText={Samples.ImageShape} />
-
-                  <h3><Anchor id="image-responsive">Responsive</Anchor></h3>
-                  <p>Use the <code>responsive</code> to scale image nicely to the parent element.</p>
-                  <ReactPlayground codeText={Samples.ImageResponsive} />
-
-                  <h3><Anchor id="image-props">Props</Anchor></h3>
-                  <PropTable component="Image"/>
-                </div>
               </div>
 
 
@@ -953,6 +953,7 @@ const ComponentsPage = React.createClass({
                     <NavItem href="#alerts" key={14}>Alerts</NavItem>
                     <NavItem href="#carousels" key={15}>Carousels</NavItem>
                     <NavItem href="#grids" key={16}>Grids</NavItem>
+                    <NavItem href="#images" key={29}>Images</NavItem>
                     <NavItem href="#thumbnail" key={17}>Thumbnail</NavItem>
                     <NavItem href="#listgroup" key={18}>List group</NavItem>
                     <NavItem href="#labels" key={19}>Labels</NavItem>
@@ -964,7 +965,6 @@ const ComponentsPage = React.createClass({
                     <NavItem href="#tables" key={25}>Tables</NavItem>
                     <NavItem href="#input" key={26}>Input</NavItem>
                     <NavItem href="#utilities" key={28}>Utilities</NavItem>
-                    <NavItem href="#images" key={29}>Images</NavItem>
                   </Nav>
                   <a className="back-to-top" href="#top">
                   Back to top
