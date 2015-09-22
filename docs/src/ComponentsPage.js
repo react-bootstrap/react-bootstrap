@@ -541,6 +541,23 @@ const ComponentsPage = React.createClass({
                   <PropTable component="Navbar"/>
                 </div>
 
+                {/* Breadcrumb */}
+                <div className="bs-docs-section">
+                  <h1 className="page-header"><Anchor id="breadcrumbs">Breadcrumbs</Anchor> <small>Breadcrumb, BreadcrumbItems</small></h1>
+                  <p>Breadcrumbs are used to indicate the current page's location. An <code>active</code> class is added to a <code>BreadcrumbItem</code> if there's no <code>href</code> property for it.</p>
+
+                  <h3><Anchor id="breadcrumbs-example">Breadcrumbs Example</Anchor></h3>
+                  <ReactPlayground codeText={Samples.Breadcrumb} />
+
+                  <h3><Anchor id="breadcrumbs-props">Props</Anchor></h3>
+
+                  <h4><Anchor id="breadcrumbs-props-breadcrumb">Breadcrumb</Anchor></h4>
+                  <PropTable component="Breadcrumb"/>
+
+                  <h4><Anchor id="breadcrumbs-props-breadcrumbItem">BreadcrumbItem</Anchor></h4>
+                  <PropTable component="BreadcrumbItem"/>
+                </div>
+
                 {/* Tabbed Areas */}
                 <div className="bs-docs-section">
                   <h1 className="page-header"><Anchor id="tabs">Togglable tabs</Anchor> <small>Tabs, Tab</small></h1>
@@ -947,6 +964,7 @@ const ComponentsPage = React.createClass({
                     <NavItem href="#progress" key={8}>Progress bars</NavItem>
                     <NavItem href="#navs" key={9}>Navs</NavItem>
                     <NavItem href="#navbars" key={10}>Navbars</NavItem>
+                    <NavItem href="#breadcrumbs" key={29}>Breadcrumbs</NavItem>
                     <NavItem href="#tabs" key={11}>Tabs</NavItem>
                     <NavItem href="#pager" key={12}>Pager</NavItem>
                     <NavItem href="#pagination" key={13}>Pagination</NavItem>
