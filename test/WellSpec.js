@@ -2,8 +2,8 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Well from '../src/Well';
 
-describe('Well', function () {
-  it('Should output a well with content', function () {
+describe('Well', () => {
+  it('Should output a well with content', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Well>
         <strong>Content</strong>
@@ -12,7 +12,7 @@ describe('Well', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
-  it('Should have a well class', function () {
+  it('Should have a well class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Well>
         Content
@@ -21,7 +21,7 @@ describe('Well', function () {
     assert.ok(React.findDOMNode(instance).className.match(/\bwell\b/));
   });
 
-  it('Should accept bsSize arguments', function () {
+  it('Should accept bsSize arguments', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Well bsSize='small'>
         Content

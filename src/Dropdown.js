@@ -8,19 +8,17 @@ import DropdownMenu from './DropdownMenu';
 import CustomPropTypes from './utils/CustomPropTypes';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
-import find from 'lodash/collection/find';
-import omit from 'lodash/object/omit';
+import find from 'lodash-compat/collection/find';
+import omit from 'lodash-compat/object/omit';
 import all from 'react-prop-types/lib/all';
 import elementType from 'react-prop-types/lib/elementType';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
-
 import activeElement from 'dom-helpers/activeElement';
 import contains from 'dom-helpers/query/contains';
 
 const TOGGLE_REF = 'toggle-btn';
-
-export const TOGGLE_ROLE = DropdownToggle.defaultProps.bsRole;
-export const MENU_ROLE = DropdownMenu.defaultProps.bsRole;
+const TOGGLE_ROLE = DropdownToggle.defaultProps.bsRole;
+const MENU_ROLE = DropdownMenu.defaultProps.bsRole;
 
 class Dropdown extends React.Component {
 
@@ -231,6 +229,8 @@ class Dropdown extends React.Component {
 Dropdown.Toggle = DropdownToggle;
 
 Dropdown.TOGGLE_REF = TOGGLE_REF;
+Dropdown.TOGGLE_ROLE = TOGGLE_ROLE;
+Dropdown.MENU_ROLE = MENU_ROLE;
 
 Dropdown.defaultProps = {
   componentClass: ButtonGroup

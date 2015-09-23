@@ -2,11 +2,11 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Fade from '../src/Fade';
 
-describe('Fade', function () {
+describe('Fade', () => {
 
   let Component, instance;
 
-  beforeEach(function() {
+  beforeEach(() => {
 
     Component = React.createClass({
       render() {
@@ -25,7 +25,7 @@ describe('Fade', function () {
     });
   });
 
-  it('Should default to hidden', function () {
+  it('Should default to hidden', () => {
     instance = ReactTestUtils.renderIntoDocument(
       <Component>Panel content</Component>
     );

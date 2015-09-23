@@ -132,7 +132,7 @@ const Panel = React.createClass({
         addPanelBody(allChildren);
       }
     } else {
-      allChildren.forEach(function(child) {
+      allChildren.forEach( child => {
         if (this.shouldRenderFill(child)) {
           maybeRenderPanelBody();
 
@@ -141,7 +141,7 @@ const Panel = React.createClass({
         } else {
           panelBodyChildren.push(child);
         }
-      }.bind(this));
+      });
 
       maybeRenderPanelBody();
     }

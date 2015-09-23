@@ -23,9 +23,8 @@ class ListGroup extends React.Component {
 
     if (shouldRenderDiv) {
       return this.renderDiv(items);
-    } else {
-      return this.renderUL(items);
     }
+    return this.renderUL(items);
   }
 
   isAnchorOrButton(props) {

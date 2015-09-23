@@ -3,7 +3,7 @@ import {assert} from 'chai';
 import Modal from '../../src/Modal.js';
 
 describe('Modal', () => {
-  it('Should be rendered on the server side', function () {
+  it('Should be rendered on the server side', () => {
     let noOp = () => {};
 
     assert.doesNotThrow(function renderOnServerSide() {

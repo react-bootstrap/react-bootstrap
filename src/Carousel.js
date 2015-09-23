@@ -208,7 +208,7 @@ const Carousel = React.createClass({
   renderIndicators() {
     let indicators = [];
     ValidComponentChildren
-      .forEach(this.props.children, function(child, index) {
+      .forEach(this.props.children, (child, index) => {
         indicators.push(
           this.renderIndicator(child, index),
 
@@ -233,7 +233,7 @@ const Carousel = React.createClass({
     this.setState({
       previousActiveIndex: null,
       direction: null
-    }, function() {
+    }, () => {
       this.waitForNext();
 
       if (this.props.onSlideEnd) {

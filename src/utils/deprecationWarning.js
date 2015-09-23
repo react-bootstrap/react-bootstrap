@@ -24,7 +24,7 @@ function deprecationWarning(oldname, newname, link) {
 }
 
 
-deprecationWarning.wrapper = function(Component, ...args) {
+deprecationWarning.wrapper = (Component, ...args) => {
   return class DeprecatedComponent extends Component {
     componentWillMount(...methodArgs) {
       deprecationWarning(...args);
