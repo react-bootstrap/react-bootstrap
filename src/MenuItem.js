@@ -66,7 +66,7 @@ MenuItem.propTypes = {
   disabled: React.PropTypes.bool,
   divider: all(
     React.PropTypes.bool,
-    function(props) {
+    props => {
       if (props.divider && props.children) {
         return new Error('Children will not be rendered for dividers');
       }

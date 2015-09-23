@@ -6,8 +6,8 @@ import { shouldWarn } from './helpers';
 
 let Component;
 
-describe('BootstrapMixin', function () {
-  beforeEach(function() {
+describe('BootstrapMixin', () => {
+  beforeEach(() => {
     Component = React.createClass({
       mixins: [BootstrapMixin],
 
@@ -17,8 +17,8 @@ describe('BootstrapMixin', function () {
     });
   });
 
-  describe('#getBsClassSet', function () {
-    it('should return blank', function () {
+  describe('#getBsClassSet', () => {
+    it('should return blank', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Component>
           content
@@ -27,7 +27,7 @@ describe('BootstrapMixin', function () {
       assert.deepEqual(instance.getBsClassSet(), {});
     });
 
-    it('maps and validates OK default classes', function () {
+    it('maps and validates OK default classes', () => {
       function instanceClassSet(bsClass) {
         let instance = ReactTestUtils.renderIntoDocument(
           <Component bsClass={bsClass}>
@@ -47,8 +47,8 @@ describe('BootstrapMixin', function () {
       assert.deepEqual(instanceClassSet('panel'), {'panel': true});
     });
 
-    describe('Predefined Bootstrap styles', function () {
-      it('maps and validates OK default styles', function () {
+    describe('Predefined Bootstrap styles', () => {
+      it('maps and validates OK default styles', () => {
         function instanceClassSet(style) {
           let instance = ReactTestUtils.renderIntoDocument(
             <Component bsClass='button' bsStyle={style}>
@@ -67,8 +67,8 @@ describe('BootstrapMixin', function () {
       });
     });
 
-    describe('Sizes', function () {
-      it('maps english words for sizes to bootstrap sizes constants', function () {
+    describe('Sizes', () => {
+      it('maps english words for sizes to bootstrap sizes constants', () => {
         function instanceClassSet(size) {
           let instance = ReactTestUtils.renderIntoDocument(
             <Component bsClass='button' bsSize={size}>
@@ -85,8 +85,8 @@ describe('BootstrapMixin', function () {
       });
     });
 
-    describe('Custom styles', function () {
-      it('should validate OK custom styles added via "addStyle()"', function () {
+    describe('Custom styles', () => {
+      it('should validate OK custom styles added via "addStyle()"', () => {
 
         styleMaps.addStyle('wacky');
 
@@ -98,7 +98,7 @@ describe('BootstrapMixin', function () {
         assert.deepEqual(instance.getBsClassSet(), {'btn': true, 'btn-wacky': true});
       });
 
-      it('should allow custom styles as is but with validation warning', function () {
+      it('should allow custom styles as is but with validation warning', () => {
         let instance = ReactTestUtils.renderIntoDocument(
           <Component bsClass='button' bsStyle='my-custom-class'>
             content
@@ -111,8 +111,8 @@ describe('BootstrapMixin', function () {
   });
 
   // todo: fix bad naming
-  describe('#prefixClass', function () {
-    it('allows custom sub-classes', function () {
+  describe('#prefixClass', () => {
+    it('allows custom sub-classes', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Component bsClass='button'>
           content

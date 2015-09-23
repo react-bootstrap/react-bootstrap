@@ -15,7 +15,7 @@ const ButtonGroup = React.createClass({
      */
     block: all(
       React.PropTypes.bool,
-      function(props) {
+      props => {
         if (props.block && !props.vertical) {
           return new Error('The block property requires the vertical property to be set to have any effect');
         }

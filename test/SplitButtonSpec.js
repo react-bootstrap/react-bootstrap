@@ -4,7 +4,7 @@ import SplitButton from '../src/SplitButton';
 import MenuItem from '../src/MenuItem';
 import Button from '../src/Button';
 
-describe('SplitButton', function() {
+describe('SplitButton', () => {
   const simple = (
     <SplitButton title='Title' id='test-id'>
       <MenuItem>Item 1</MenuItem>
@@ -14,7 +14,7 @@ describe('SplitButton', function() {
     </SplitButton>
   );
 
-  it('should open the menu when dropdown button is clicked', function () {
+  it('should open the menu when dropdown button is clicked', () => {
     const instance = ReactTestUtils.renderIntoDocument(simple);
 
     const toggleNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle'));
@@ -25,7 +25,7 @@ describe('SplitButton', function() {
     splitButtonNode.className.should.match(/open/);
   });
 
-  it('should not open the menu when other button is clicked', function() {
+  it('should not open the menu when other button is clicked', () => {
     const instance = ReactTestUtils.renderIntoDocument(simple);
 
     const buttonNode = React.findDOMNode(ReactTestUtils.scryRenderedComponentsWithType(instance, Button)[0]);
@@ -36,7 +36,7 @@ describe('SplitButton', function() {
     splitButtonNode.className.should.not.match(/open/);
   });
 
-  it('should invoke onClick when SplitButton.Button is clicked (prop)', function(done) {
+  it('should invoke onClick when SplitButton.Button is clicked (prop)', (done) => {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title='Title' id='test-id' onClick={ () => done() }>
         <MenuItem>Item 1</MenuItem>
@@ -48,7 +48,7 @@ describe('SplitButton', function() {
   });
 
 
-  it('should not invoke onClick when SplitButton.Toggle is clicked (prop)', function(done) {
+  it('should not invoke onClick when SplitButton.Toggle is clicked (prop)', (done) => {
     let onClickSpy = sinon.spy();
 
     const instance = ReactTestUtils.renderIntoDocument(
@@ -72,7 +72,7 @@ describe('SplitButton', function() {
     }, 10);
   });
 
-  it('Should pass disabled to both buttons', function () {
+  it('Should pass disabled to both buttons', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title='Title' id='test-id' disabled>
         <MenuItem>Item 1</MenuItem>
@@ -89,7 +89,7 @@ describe('SplitButton', function() {
     expect(buttonNode.disabled).to.be.true;
   });
 
-  it('Should set target attribute on anchor', function () {
+  it('Should set target attribute on anchor', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" id='test-id' href="/some/unique-thing/" target="_blank">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>

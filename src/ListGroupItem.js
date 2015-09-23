@@ -13,9 +13,7 @@ const ListGroupItem = React.createClass({
     header: React.PropTypes.node,
     listItem: React.PropTypes.bool,
     onClick: React.PropTypes.func,
-    eventKey: React.PropTypes.any,
-    href: React.PropTypes.string,
-    target: React.PropTypes.string
+    href: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -37,9 +35,8 @@ const ListGroupItem = React.createClass({
       return this.renderButton(classes);
     } else if (this.props.listItem) {
       return this.renderLi(classes);
-    } else {
-      return this.renderSpan(classes);
     }
+    return this.renderSpan(classes);
   },
 
   renderLi(classes) {

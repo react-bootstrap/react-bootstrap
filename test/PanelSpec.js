@@ -3,8 +3,8 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Panel from '../src/Panel';
 import Table from '../src/Table';
 
-describe('Panel', function () {
-  it('Should have class and body', function () {
+describe('Panel', () => {
+  it('Should have class and body', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel>Panel content</Panel>
     );
@@ -12,14 +12,14 @@ describe('Panel', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-body'));
   });
 
-  it('Should have bootstrap style class', function () {
+  it('Should have bootstrap style class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel bsStyle="default">Panel content</Panel>
     );
     assert.ok(React.findDOMNode(instance).className.match(/\bpanel-default\b/));
   });
 
-  it('Should honour additional classes passed in, adding not overriding', function () {
+  it('Should honour additional classes passed in, adding not overriding', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel className="bob"/>
     );
@@ -27,7 +27,7 @@ describe('Panel', function () {
     assert.ok(React.findDOMNode(instance).className.match(/\bpanel\b/));
   });
 
-  it('Should have unwrapped header', function () {
+  it('Should have unwrapped header', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel header="Heading">Panel content</Panel>
     );
@@ -35,7 +35,7 @@ describe('Panel', function () {
     assert.equal(header.innerHTML, 'Heading');
   });
 
-  it('Should have custom component header', function () {
+  it('Should have custom component header', () => {
     let header = <h3>Heading</h3>;
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel header={header}>Panel content</Panel>
@@ -46,7 +46,7 @@ describe('Panel', function () {
     assert.equal(header.firstChild.innerHTML, 'Heading');
   });
 
-  it('Should have custom component header with anchor', function () {
+  it('Should have custom component header with anchor', () => {
     let header = <h3>Heading</h3>;
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel header={header} collapsible={true}>Panel content</Panel>
@@ -58,7 +58,7 @@ describe('Panel', function () {
     assert.equal(header.firstChild.firstChild.innerHTML, 'Heading');
   });
 
-  it('Should have custom component header with custom class', function () {
+  it('Should have custom component header with custom class', () => {
     let header = <h3 className="custom-class">Heading</h3>;
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel header={header}>Panel content</Panel>
@@ -70,7 +70,7 @@ describe('Panel', function () {
     assert.equal(header.firstChild.innerHTML, 'Heading');
   });
 
-  it('Should have footer', function () {
+  it('Should have footer', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel footer="Footer">Panel content</Panel>
     );
@@ -78,21 +78,21 @@ describe('Panel', function () {
     assert.equal(footer.innerText, 'Footer');
   });
 
-  it('Should have collapse classes', function () {
+  it('Should have collapse classes', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel collapsible={true} expanded={true}>Panel content</Panel>
     );
     assert.ok(React.findDOMNode(instance).querySelector('.panel-collapse.collapse.in'));
   });
 
-  it('Should pass through dom properties', function () {
+  it('Should pass through dom properties', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel collapsible={false} id="testid">Panel content</Panel>
     );
     assert.equal(React.findDOMNode(instance).id, 'testid');
   });
 
-  it('Should pass id to panel-collapse', function () {
+  it('Should pass id to panel-collapse', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel collapsible={true} id="testid" header="Heading">Panel content</Panel>
     );
@@ -103,7 +103,7 @@ describe('Panel', function () {
     assert.equal(anchor.getAttribute('href'), '#testid');
   });
 
-  it('Should be open', function () {
+  it('Should be open', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel collapsible={true} expanded={true} header="Heading">Panel content</Panel>
     );
@@ -113,7 +113,7 @@ describe('Panel', function () {
     assert.notOk(anchor.className.match(/\bcollapsed\b/));
   });
 
-  it('Should be closed', function () {
+  it('Should be closed', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel collapsible={true} expanded={false} header="Heading">Panel content</Panel>
     );
@@ -123,7 +123,7 @@ describe('Panel', function () {
     assert.ok(anchor.className.match(/\bcollapsed\b/));
   });
 
-  it('Should call onSelect handler', function (done) {
+  it('Should call onSelect handler', (done) => {
     function handleSelect (e, key) {
       assert.equal(key, '1');
       done();
@@ -135,7 +135,7 @@ describe('Panel', function () {
     ReactTestUtils.Simulate.click(React.findDOMNode(title).firstChild);
   });
 
-  it('Should toggle when uncontrolled', function () {
+  it('Should toggle when uncontrolled', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel collapsible={true} defaultExpanded={false} header="Click me">Panel content</Panel>
     );
@@ -149,7 +149,7 @@ describe('Panel', function () {
     assert.ok(instance.state.expanded);
   });
 
-  it('Should not wrap panel-filling tables in a panel body', function () {
+  it('Should not wrap panel-filling tables in a panel body', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel>
         Panel content
@@ -171,7 +171,7 @@ describe('Panel', function () {
     assert.ok(children[2].className.match(/\bpanel-body\b/));
   });
 
-  it('Should not wrap single panel-fill table in a panel body', function () {
+  it('Should not wrap single panel-fill table in a panel body', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel>
         <Table fill />
@@ -185,9 +185,9 @@ describe('Panel', function () {
     assert.notOk(children[0].className.match(/\bpanel-body\b/));
   });
 
-  describe('Web Accessibility', function() {
+  describe('Web Accessibility', () => {
 
-    it('Should be aria-expanded=true', function () {
+    it('Should be aria-expanded=true', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Panel collapsible={true} expanded={true} header="Heading">Panel content</Panel>
       );
@@ -195,7 +195,7 @@ describe('Panel', function () {
       assert.equal(anchor.getAttribute('aria-expanded'), 'true');
     });
 
-    it('Should be aria-expanded=false', function () {
+    it('Should be aria-expanded=false', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Panel collapsible={true} expanded={false} header="Heading">Panel content</Panel>
       );
@@ -203,7 +203,7 @@ describe('Panel', function () {
       assert.equal(anchor.getAttribute('aria-expanded'), 'false');
     });
 
-    it('Should add aria-controls with id', function () {
+    it('Should add aria-controls with id', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Panel id='panel-1' collapsible expanded header="Heading">Panel content</Panel>
       );

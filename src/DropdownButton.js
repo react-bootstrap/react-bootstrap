@@ -1,7 +1,7 @@
 import React from 'react';
 import BootstrapMixin from './BootstrapMixin';
 import Dropdown from './Dropdown';
-import omit from 'lodash/object/omit';
+import omit from 'lodash-compat/object/omit';
 
 class DropdownButton extends React.Component {
 
