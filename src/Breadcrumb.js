@@ -1,10 +1,15 @@
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const Breadcrumb = React.createClass({
-  mixins: [BootstrapMixin],
+  propTypes: {
+    /**
+     * bootstrap className
+     * @private
+     */
+    bsClass: React.PropTypes.string
+  },
 
   getDefaultProps() {
     return {
@@ -13,24 +18,21 @@ const Breadcrumb = React.createClass({
   },
 
   render() {
-    const classes = this.getBsClassSet();
     const { className, ...props } = this.props;
 
     return (
-      <ol {...props} role="navigation" aria-label="breadcrumbs" className={classNames(className, classes)}>
+      <ol
+        {...props}
+        role="navigation"
+        aria-label="breadcrumbs"
+        className={classNames(className, this.props.bsClass)}>
         {ValidComponentChildren.map(this.props.children, this.renderBreadcrumbItem)}
       </ol>
     );
   },
 
   renderBreadcrumbItem(child, index) {
-    return cloneElement(
-      child,
-      {
-        key: child.key ? child.key : index,
-        navItem: true
-      }
-    );
+    return cloneElement( child, { key: child.key ? child.key : index } );
   }
 });
 

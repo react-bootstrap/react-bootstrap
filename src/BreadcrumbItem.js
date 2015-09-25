@@ -1,18 +1,39 @@
 import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
 import SafeAnchor from './SafeAnchor';
 import warning from 'react/lib/warning';
 
 const BreadcrumbItem = React.createClass({
-  mixins: [BootstrapMixin],
-
   propTypes: {
-    id: React.PropTypes.string,
+    /**
+     * If set to true, renders `span` instead of `a`
+     */
     active: React.PropTypes.bool,
-    linkId: React.PropTypes.string,
+    /**
+     * HTML id for the wrapper `li` element
+     */
+    id: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
+    /**
+     * HTML id for the inner `a` element
+     */
+    linkId: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number
+    ]),
+    /**
+     * `href` attribute for the inner `a` element
+     */
     href: React.PropTypes.string,
+    /**
+     * `title` attribute for the inner `a` element
+     */
     title: React.PropTypes.node,
+    /**
+     * `target` attribute for the inner `a` element
+     */
     target: React.PropTypes.string
   },
 
@@ -23,18 +44,19 @@ const BreadcrumbItem = React.createClass({
   },
 
   render() {
-    warning(!(this.props.href && this.props.active), '[react-bootstrap] href and active properties cannot be set at the same time');
-
     const {
-      id,
       active,
+      className,
+      id,
       linkId,
       children,
       href,
       title,
       target,
       ...props } = this.props;
-    const classes = { active };
+
+    warning(!(href && active), '[react-bootstrap] `href` and `active` properties cannot be set at the same time');
+
     const linkProps = {
       href,
       title,
@@ -43,7 +65,7 @@ const BreadcrumbItem = React.createClass({
     };
 
     return (
-      <li id={id} className={classNames(props.className, classes)}>
+      <li id={id} className={classNames(className, { active })}>
         {
           active ?
             <span {...props}>

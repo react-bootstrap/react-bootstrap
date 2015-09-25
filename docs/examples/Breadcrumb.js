@@ -6,7 +6,7 @@ const breadcrumbInstance = (
     <BreadcrumbItem href="http://getbootstrap.com/components/#breadcrumbs">
       Library
     </BreadcrumbItem>
-    <BreadcrumbItem>
+    <BreadcrumbItem active>
       Data
     </BreadcrumbItem>
   </Breadcrumb>

@@ -1,7 +1,6 @@
 const styleMaps = {
   CLASSES: {
     'alert': 'alert',
-    'breadcrumb': 'breadcrumb',
     'button': 'btn',
     'button-group': 'btn-group',
     'button-toolbar': 'btn-toolbar',
