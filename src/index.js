@@ -8,6 +8,8 @@ export Button from './Button';
 export ButtonGroup from './ButtonGroup';
 export ButtonInput from './ButtonInput';
 export ButtonToolbar from './ButtonToolbar';
+export Breadcrumb from './Breadcrumb';
+export BreadcrumbItem from './BreadcrumbItem';
 export Carousel from './Carousel';
 export CarouselItem from './CarouselItem';
 export Col from './Col';

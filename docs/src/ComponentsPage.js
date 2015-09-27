@@ -541,6 +541,22 @@ const ComponentsPage = React.createClass({
                   <PropTable component="Navbar"/>
                 </div>
 
+                {/* Breadcrumb */}
+                <div className="bs-docs-section">
+                  <h1 className="page-header"><Anchor id="breadcrumbs">Breadcrumbs</Anchor> <small>Breadcrumb, BreadcrumbItems</small></h1>
+                  <p>Breadcrumbs are used to indicate the current page's location. Add <code>active</code> attribute to active <code>BreadcrumbItem</code>.</p>
+                  <p>Do not set both <code>active</code> and <code>href</code> attributes. <code>active</code> overrides <code>href</code> and <code>span</code> element is rendered instead of <code>a</code>.</p>
+
+                  <h3><Anchor id="breadcrumbs-example">Breadcrumbs Example</Anchor></h3>
+                  <ReactPlayground codeText={Samples.Breadcrumb} />
+
+                  <h3><Anchor id="breadcrumbs-props">Props</Anchor></h3>
+                  <p><code>Breadcrumb</code> component itself doesn't have any specific public properties</p>
+
+                  <h4><Anchor id="breadcrumbs-props-breadcrumbItem">BreadcrumbItem</Anchor></h4>
+                  <PropTable component="BreadcrumbItem"/>
+                </div>
+
                 {/* Tabbed Areas */}
                 <div className="bs-docs-section">
                   <h1 className="page-header"><Anchor id="tabs">Togglable tabs</Anchor> <small>Tabs, Tab</small></h1>
@@ -947,6 +963,7 @@ const ComponentsPage = React.createClass({
                     <NavItem href="#progress" key={8}>Progress bars</NavItem>
                     <NavItem href="#navs" key={9}>Navs</NavItem>
                     <NavItem href="#navbars" key={10}>Navbars</NavItem>
+                    <NavItem href="#breadcrumbs" key={30}>Breadcrumbs</NavItem>
                     <NavItem href="#tabs" key={11}>Tabs</NavItem>
                     <NavItem href="#pager" key={12}>Pager</NavItem>
                     <NavItem href="#pagination" key={13}>Pagination</NavItem>
