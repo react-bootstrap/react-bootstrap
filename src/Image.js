@@ -44,7 +44,7 @@ const Image = React.createClass({
     };
 
     return (
-      <img {...this.props}  className={classNames(this.props.className, classes)} />
+      <img {...this.props} className={classNames(this.props.className, classes)} />
     );
   }
 });

@@ -73,7 +73,7 @@ describe('CollapsibleMixin', () => {
     });
 
     it('Should have collapsing class', () => {
-      instance.setProps({expanded:true});
+      instance.setProps({expanded: true});
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.className, 'collapsing');
     });
@@ -86,14 +86,14 @@ describe('CollapsibleMixin', () => {
         assert.equal(node.style.height, '0px');
       };
 
-      instance.setProps({expanded:true});
+      instance.setProps({expanded: true});
     });
 
     it('Should set transition to height', () => {
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.styled, undefined);
 
-      instance.setProps({expanded:true});
+      instance.setProps({expanded: true});
       assert.equal(node.style.height, '15px');
     });
 
@@ -105,7 +105,7 @@ describe('CollapsibleMixin', () => {
           done();
         }, 100);
       };
-      instance.setProps({expanded:true});
+      instance.setProps({expanded: true});
       assert.ok(instance.state.collapsing);
     });
 
@@ -121,7 +121,7 @@ describe('CollapsibleMixin', () => {
       };
 
       assert.equal(node.style.height, '');
-      instance.setProps({expanded:true});
+      instance.setProps({expanded: true});
       assert.equal(node.style.height, '15px');
     });
   });
@@ -134,7 +134,7 @@ describe('CollapsibleMixin', () => {
     });
 
     it('Should have collapsing class', () => {
-      instance.setProps({expanded:false});
+      instance.setProps({expanded: false});
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.className, 'collapsing');
     });
@@ -147,14 +147,14 @@ describe('CollapsibleMixin', () => {
       };
 
       assert.equal(node.style.height, '');
-      instance.setProps({expanded:false});
+      instance.setProps({expanded: false});
     });
 
     it('Should set transition to height', () => {
       let node = instance.getCollapsibleDOMNode();
       assert.equal(node.style.height, '');
 
-      instance.setProps({expanded:false});
+      instance.setProps({expanded: false});
       assert.equal(node.style.height, '0px');
     });
 
@@ -166,7 +166,7 @@ describe('CollapsibleMixin', () => {
           done();
         }, 100);
       };
-      instance.setProps({expanded:false});
+      instance.setProps({expanded: false});
       assert.ok(instance.state.collapsing);
     });
 
@@ -182,7 +182,7 @@ describe('CollapsibleMixin', () => {
       };
 
       assert.equal(node.style.height, '');
-      instance.setProps({expanded:false});
+      instance.setProps({expanded: false});
       assert.equal(node.style.height, '0px');
     });
   });
