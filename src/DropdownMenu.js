@@ -83,7 +83,7 @@ class DropdownMenu extends React.Component {
     let {children, onSelect, pullRight, className, labelledBy, open, onClose, ...props} = this.props;
 
     const items = ValidComponentChildren.map(children, child => {
-      let childProps  = child.props || {};
+      let childProps = child.props || {};
 
       return React.cloneElement(child, {
         onKeyDown: createChainedFunction(childProps.onKeyDown, this.handleKeyDown),

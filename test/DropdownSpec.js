@@ -269,7 +269,7 @@ describe('Dropdown', () => {
         };
       }
 
-      render () {
+      render() {
         return (
           <div>
             <button className='outer-button'

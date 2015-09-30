@@ -7,15 +7,15 @@ const Tab = React.createClass({
     /**
      * @private
      */
-    active:          React.PropTypes.bool,
-    animation:       React.PropTypes.bool,
+    active: React.PropTypes.bool,
+    animation: React.PropTypes.bool,
     /**
      * It is used by 'Tabs' - parent component
      * @private
      */
     onAnimateOutEnd: React.PropTypes.func,
-    disabled:        React.PropTypes.bool,
-    title:           React.PropTypes.node
+    disabled: React.PropTypes.bool,
+    title: React.PropTypes.node
   },
 
   getDefaultProps() {

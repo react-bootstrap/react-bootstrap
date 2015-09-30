@@ -7,7 +7,7 @@ const ButtonGroup = React.createClass({
   mixins: [BootstrapMixin],
 
   propTypes: {
-    vertical:  React.PropTypes.bool,
+    vertical: React.PropTypes.bool,
     justified: React.PropTypes.bool,
     /**
      * Display block buttons, only useful when used with the "vertical" prop.

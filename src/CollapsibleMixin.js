@@ -100,7 +100,7 @@ const CollapsibleMixin = {
       // in dimension after initial display (such as an image loading)
       node.style[dimension] = '';
       this.setState({
-        collapsing:false
+        collapsing: false
       });
     };
 
