@@ -749,6 +749,15 @@ const ComponentsPage = React.createClass({
                   <p>Set the <code>header</code> prop to create a structured item, with a heading and a body area.</p>
                   <ReactPlayground codeText={Samples.ListGroupHeader} />
 
+                  <h3><Anchor id="listgroup-with-custom-children">With custom component children</Anchor></h3>
+                  <p>
+                    When using ListGroupItems directly, ListGroup looks at whether the items have href
+                    or onClick props to determine which DOM elements to emit. However, with custom item
+                    components as children to <code>ListGroup</code>, set the
+                    <code>componentClass</code> prop to specify which element <code>ListGroup</code> should output.
+                  </p>
+                  <ReactPlayground codeText={Samples.ListGroupCustom} />
+
                   <h3><Anchor id="listgroup-props">Props</Anchor></h3>
 
                   <h4><Anchor id="listgroup-props-group">ListGroup</Anchor></h4>
