@@ -65,7 +65,7 @@ const ListGroupItem = React.createClass({
         type="button"
         {...this.props}
         className={classNames(this.props.className, classes)}>
-        {this.props.children}
+        {this.props.header ? this.renderStructuredContent() : this.props.children}
       </button>
     );
   },
