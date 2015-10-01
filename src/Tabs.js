@@ -88,7 +88,6 @@ const Tabs = React.createClass({
       React.PropTypes.number,
       React.PropTypes.object
     ]),
-    className: React.PropTypes.string,
     /**
      * Render without clearfix if horizontally positioned
      */

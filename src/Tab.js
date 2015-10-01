@@ -15,7 +15,11 @@ const Tab = React.createClass({
      */
     onAnimateOutEnd: React.PropTypes.func,
     disabled: React.PropTypes.bool,
-    title: React.PropTypes.node
+    title: React.PropTypes.node,
+    /**
+     * tabClassName is used as className for the associated NavItem
+     */
+    tabClassName: React.PropTypes.string
   },
 
   getDefaultProps() {
