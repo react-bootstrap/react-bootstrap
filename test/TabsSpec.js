@@ -84,13 +84,15 @@ describe('Tabs', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tabs activeKey={1}>
         <Tab title="Tab 1" className="custom" id="pane0id" eventKey={1}>Tab 1 content</Tab>
-        <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
+        <Tab title="Tab 2" tabClassName="tcustom" eventKey={2}>Tab 2 content</Tab>
       </Tabs>
     );
 
     let panes = ReactTestUtils.scryRenderedComponentsWithType(instance, Tab);
+    let navs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
     assert.ok(React.findDOMNode(panes[0]).className.match(/\bcustom\b/));
+    assert.ok(React.findDOMNode(navs[1]).className.match(/\btcustom\b/));
     assert.equal(React.findDOMNode(panes[0]).id, 'pane0id');
   });
 
