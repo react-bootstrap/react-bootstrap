@@ -9,12 +9,9 @@ const CollapsibleMixin = {
     expanded: React.PropTypes.bool
   },
 
-  getInitialState(){
-    let defaultExpanded = this.props.defaultExpanded != null ?
-      this.props.defaultExpanded :
-        this.props.expanded != null ?
-        this.props.expanded :
-        false;
+  getInitialState() {
+    const defaultExpanded = this.props.defaultExpanded != null ?
+      this.props.defaultExpanded : !!this.props.expanded;
 
     return {
       expanded: defaultExpanded,
@@ -22,11 +19,11 @@ const CollapsibleMixin = {
     };
   },
 
-  componentWillMount(){
+  componentWillMount() {
     deprecationWarning('CollapsibleMixin', 'Collapse Component');
   },
 
-  componentWillUpdate(nextProps, nextState){
+  componentWillUpdate(nextProps, nextState) {
     let willExpanded = nextProps.expanded != null ? nextProps.expanded : nextState.expanded;
     if (willExpanded === this.isExpanded()) {
       return;
@@ -41,7 +38,7 @@ const CollapsibleMixin = {
     let dimension = this.dimension();
     let value = '0';
 
-    if(!willExpanded){
+    if (!willExpanded) {
       value = this.getCollapsibleDimensionValue();
     }
 
@@ -50,7 +47,7 @@ const CollapsibleMixin = {
     this._afterWillUpdate();
   },
 
-  componentDidUpdate(prevProps, prevState){
+  componentDidUpdate(prevProps, prevState) {
     // check if expanded is being toggled; if so, set collapsing
     this._checkToggleCollapsing(prevProps, prevState);
 
@@ -59,11 +56,11 @@ const CollapsibleMixin = {
   },
 
   // helps enable test stubs
-  _afterWillUpdate(){
+  _afterWillUpdate() {
   },
 
-  _checkStartAnimation(){
-    if(!this.state.collapsing) {
+  _checkStartAnimation() {
+    if (!this.state.collapsing) {
       return;
     }
 
@@ -73,7 +70,7 @@ const CollapsibleMixin = {
 
     // setting the dimension here starts the transition animation
     let result;
-    if(this.isExpanded()) {
+    if (this.isExpanded()) {
       result = value + 'px';
     } else {
       result = '0px';
@@ -81,11 +78,11 @@ const CollapsibleMixin = {
     node.style[dimension] = result;
   },
 
-  _checkToggleCollapsing(prevProps, prevState){
+  _checkToggleCollapsing(prevProps, prevState) {
     let wasExpanded = prevProps.expanded != null ? prevProps.expanded : prevState.expanded;
     let isExpanded = this.isExpanded();
-    if(wasExpanded !== isExpanded){
-      if(wasExpanded) {
+    if (wasExpanded !== isExpanded) {
+      if (wasExpanded) {
         this._handleCollapse();
       } else {
         this._handleExpand();
@@ -93,7 +90,7 @@ const CollapsibleMixin = {
     }
   },
 
-  _handleExpand(){
+  _handleExpand() {
     let node = this.getCollapsibleDOMNode();
     let dimension = this.dimension();
 
@@ -114,7 +111,7 @@ const CollapsibleMixin = {
     });
   },
 
-  _handleCollapse(){
+  _handleCollapse() {
     let node = this.getCollapsibleDOMNode();
 
     let complete = () => {
@@ -132,22 +129,22 @@ const CollapsibleMixin = {
   },
 
   // helps enable test stubs
-  _addEndEventListener(node, complete){
+  _addEndEventListener(node, complete) {
     TransitionEvents.addEndEventListener(node, complete);
   },
 
   // helps enable test stubs
-  _removeEndEventListener(node, complete){
+  _removeEndEventListener(node, complete) {
     TransitionEvents.removeEndEventListener(node, complete);
   },
 
-  dimension(){
+  dimension() {
     return (typeof this.getCollapsibleDimension === 'function') ?
       this.getCollapsibleDimension() :
       'height';
   },
 
-  isExpanded(){
+  isExpanded() {
     return this.props.expanded != null ? this.props.expanded : this.state.expanded;
   },
 

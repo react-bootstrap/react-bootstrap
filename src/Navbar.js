@@ -126,7 +126,6 @@ const Navbar = React.createClass({
     let children;
 
     if (React.isValidElement(this.props.toggleButton)) {
-
       return cloneElement(this.props.toggleButton, {
         className: classNames(this.props.toggleButton.props.className, 'navbar-toggle'),
         onClick: createChainedFunction(this.handleToggle, this.props.toggleButton.props.onClick)
@@ -139,7 +138,7 @@ const Navbar = React.createClass({
         <span className="icon-bar" key={1}></span>,
         <span className="icon-bar" key={2}></span>,
         <span className="icon-bar" key={3}></span>
-    ];
+      ];
 
     return (
       <button className="navbar-toggle" type="button" onClick={this.handleToggle}>

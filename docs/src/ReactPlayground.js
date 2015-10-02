@@ -18,7 +18,9 @@ const Col = require('../../src/Col');
 const Collapse = require('../../src/Collapse');
 const CollapsibleMixin = require('../../src/CollapsibleMixin');
 const CollapsibleNav = require('../../src/CollapsibleNav');
+const Dropdown = require('../../src/Dropdown').default;
 const DropdownButton = require('../../src/DropdownButton');
+const DropdownMenu = require('../../src/DropdownMenu');
 const Fade = require('../../src/Fade');
 const FormControls = require('../../src/FormControls');
 const Glyphicon = require('../../src/Glyphicon');
@@ -33,6 +35,7 @@ const Modal = require('../../src/Modal');
 const Nav = require('../../src/Nav');
 const Navbar = require('../../src/Navbar');
 const NavItem = require('../../src/NavItem');
+const NavDropdown = require('../../src/NavDropdown');
 const Overlay = require('../../src/Overlay');
 const OverlayTrigger = require('../../src/OverlayTrigger');
 const PageHeader = require('../../src/PageHeader');
@@ -42,13 +45,12 @@ const Pagination = require('../../src/Pagination');
 const Panel = require('../../src/Panel');
 const PanelGroup = require('../../src/PanelGroup');
 const Popover = require('../../src/Popover');
-const Portal = require('../../src/Portal');
 const ProgressBar = require('../../src/ProgressBar');
 const Row = require('../../src/Row');
 const SplitButton = require('../../src/SplitButton');
-const TabbedArea = require('../../src/TabbedArea');
+const Tab = require('../../src/Tab');
 const Table = require('../../src/Table');
-const TabPane = require('../../src/TabPane');
+const Tabs = require('../../src/Tabs');
 const Thumbnail = require('../../src/Thumbnail');
 const Tooltip = require('../../src/Tooltip');
 const Well = require('../../src/Well');
@@ -114,12 +116,12 @@ class CodeMirrorEditor extends React.Component {
     if (IS_MOBILE) {
       editor = (
         <CodeExample
-          mode='javascript'
+          mode="javascript"
           codeText={this.props.codeText}
         />
       );
     } else {
-      editor = <textarea ref='editor' defaultValue={this.props.codeText} />;
+      editor = <textarea ref="editor" defaultValue={this.props.codeText} />;
     }
 
     return (
@@ -206,7 +208,7 @@ const ReactPlayground = React.createClass({
 
   render() {
     return (
-      <div className='playground'>
+      <div className="playground">
         {this.renderExample()}
 
         {this.renderEditor()}
@@ -219,7 +221,7 @@ const ReactPlayground = React.createClass({
     let example;
     if (this.state.codeChanged) {
       example = (
-        <div ref='mount' />
+        <div ref="mount" />
       );
     } else {
       example = (
@@ -241,9 +243,9 @@ const ReactPlayground = React.createClass({
 
     return (
       <CodeMirrorEditor
-        key='jsx'
+        key="jsx"
         onChange={this.handleCodeChange}
-        className='highlight'
+        className="highlight"
         codeText={this.state.code}
       />
     );
@@ -291,7 +293,7 @@ const ReactPlayground = React.createClass({
       this.updateTimeout(
         () => {
           React.render(
-            <Alert bsStyle='danger'>
+            <Alert bsStyle="danger">
               {err.toString()}
             </Alert>,
             mountNode

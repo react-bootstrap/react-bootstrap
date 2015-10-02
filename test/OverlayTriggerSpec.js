@@ -4,6 +4,8 @@ import OverlayTrigger from '../src/OverlayTrigger';
 import Popover from '../src/Popover';
 import Tooltip from '../src/Tooltip';
 
+import { render } from './helpers';
+
 describe('OverlayTrigger', function() {
   it('Should create OverlayTrigger element', function() {
     const instance = ReactTestUtils.renderIntoDocument(
@@ -39,6 +41,21 @@ describe('OverlayTrigger', function() {
     instance.state.isOverlayShown.should.be.true;
   });
 
+  it('Should keep trigger handlers', function(done) {
+    const instance = render(
+      <div>
+        <OverlayTrigger trigger='focus' overlay={<div>test</div>}>
+          <button onBlur={()=> done()}>button</button>
+        </OverlayTrigger>
+        <input id='target'/>
+      </div>
+    , document.body);
+
+    const overlayTrigger = React.findDOMNode(instance).firstChild;
+
+    ReactTestUtils.Simulate.blur(overlayTrigger);
+  });
+
   it('Should maintain overlay classname', function() {
     const instance = ReactTestUtils.renderIntoDocument(
       <OverlayTrigger trigger='click' overlay={<div className='test-overlay'>test</div>}>
@@ -47,6 +64,7 @@ describe('OverlayTrigger', function() {
     );
 
     const overlayTrigger = React.findDOMNode(instance);
+
     ReactTestUtils.Simulate.click(overlayTrigger);
 
     expect(document.getElementsByClassName('test-overlay').length).to.equal(1);
@@ -62,7 +80,7 @@ describe('OverlayTrigger', function() {
       <OverlayTrigger
         trigger='click'
         overlay={<div>test</div>}
-        onHide={()=>{}}
+        onHide={() => {}}
         onExit={increment}
         onExiting={increment}
         onExited={()=> {
@@ -82,7 +100,6 @@ describe('OverlayTrigger', function() {
     );
 
     overlayTrigger = React.findDOMNode(instance);
-
     ReactTestUtils.Simulate.click(overlayTrigger);
   });
 

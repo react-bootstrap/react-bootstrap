@@ -21,15 +21,14 @@ const Thumbnail = React.createClass({
   render() {
     let classes = this.getBsClassSet();
 
-    if(this.props.href) {
+    if (this.props.href) {
       return (
         <SafeAnchor {...this.props} href={this.props.href} className={classSet(this.props.className, classes)}>
           <img src={this.props.src} alt={this.props.alt} />
         </SafeAnchor>
       );
-    }
-    else {
-      if(this.props.children) {
+    } else {
+      if (this.props.children) {
         return (
           <div {...this.props} className={classSet(this.props.className, classes)}>
             <img src={this.props.src} alt={this.props.alt} />
@@ -38,8 +37,7 @@ const Thumbnail = React.createClass({
             </div>
           </div>
         );
-      }
-      else {
+      } else {
         return (
           <div {...this.props} className={classSet(this.props.className, classes)}>
             <img src={this.props.src} alt={this.props.alt} />

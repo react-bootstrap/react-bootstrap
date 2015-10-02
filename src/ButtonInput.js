@@ -25,8 +25,8 @@ ButtonInput.defaultProps = {
 
 ButtonInput.propTypes = {
   type: React.PropTypes.oneOf(ButtonInput.types),
-  bsStyle(props) {
-    //defer to Button propTypes of bsStyle
+  bsStyle() {
+    // defer to Button propTypes of bsStyle
     return null;
   },
   children: childrenValueValidation,

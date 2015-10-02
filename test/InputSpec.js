@@ -144,8 +144,8 @@ describe('Input', function () {
 
   it('renders btn-group with dropdown', function() {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Input buttonAfter={<DropdownButton title="dropdown">
-          <MenuItem key="1">One</MenuItem>
+      <Input buttonAfter={<DropdownButton title='dropdown' id='herpa-derpa'>
+          <MenuItem key='1'>One</MenuItem>
       </DropdownButton>} />
     );
 

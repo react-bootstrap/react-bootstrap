@@ -10,19 +10,19 @@
  */
 
 const Trigger = React.createClass({
-  getInitialState(){
+  getInitialState() {
     return { show: false };
   },
 
   render() {
-    let close = e => this.setState({ show: false});
+    let close = () => this.setState({ show: false});
 
     return (
-      <div className='modal-container' style={{height: 200}}>
+      <div className="modal-container" style={{height: 200}}>
         <Button
-          bsStyle='primary'
-          bsSize='large'
-          onClick={e => this.setState({ show: true})}
+          bsStyle="primary"
+          bsSize="large"
+          onClick={() => this.setState({ show: true})}
         >
           Launch contained modal
         </Button>
@@ -31,10 +31,10 @@ const Trigger = React.createClass({
           show={this.state.show}
           onHide={close}
           container={this}
-          aria-labelledby='contained-modal-title'
+          aria-labelledby="contained-modal-title"
         >
           <Modal.Header closeButton>
-            <Modal.Title id='contained-modal-title'>Contained Modal</Modal.Title>
+            <Modal.Title id="contained-modal-title">Contained Modal</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             Elit est explicabo ipsum eaque dolorem blanditiis doloribus sed id ipsam, beatae, rem fuga id earum? Inventore et facilis obcaecati.

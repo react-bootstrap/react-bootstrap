@@ -1,3 +1,4 @@
+--ignore-dir=.coverage
 --ignore-dir=lib
 --ignore-dir=dist
 --ignore-dir=amd
@@ -7,3 +8,4 @@
 --ignore-dir=tmp-bower-repo
 --ignore-file=match:test_bundle.js
 --ignore-file=match:components.html
+--ignore-file=match:.orig

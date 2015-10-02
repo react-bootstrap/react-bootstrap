@@ -1,10 +1,10 @@
 const buttonGroupInstance = (
   <ButtonGroup justified>
-    <Button href='#'>Left</Button>
-    <Button href='#'>Middle</Button>
-    <DropdownButton title='Dropdown'>
-      <MenuItem eventKey='1'>Dropdown link</MenuItem>
-      <MenuItem eventKey='2'>Dropdown link</MenuItem>
+    <Button href="#">Left</Button>
+    <Button href="#">Middle</Button>
+    <DropdownButton title="Dropdown" id="bg-justified-dropdown">
+      <MenuItem eventKey="1">Dropdown link</MenuItem>
+      <MenuItem eventKey="2">Dropdown link</MenuItem>
     </DropdownButton>
   </ButtonGroup>
 );

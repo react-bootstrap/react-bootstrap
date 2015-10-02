@@ -13,7 +13,12 @@ const Popover = React.createClass({
      * @type {string}
      * @required
      */
-    id: CustomPropTypes.isRequiredForA11y(React.PropTypes.string),
+    id: CustomPropTypes.isRequiredForA11y(
+      React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.number
+      ])
+    ),
 
     /**
      * Sets the direction the Popover is positioned towards.
@@ -72,7 +77,7 @@ const Popover = React.createClass({
     };
 
     return (
-      <div role='tooltip' {...this.props} className={classNames(this.props.className, classes)} style={style} title={null}>
+      <div role="tooltip" {...this.props} className={classNames(this.props.className, classes)} style={style} title={null}>
         <div className="arrow" style={arrowStyle} />
         {this.props.title ? this.renderTitle() : null}
         <div className="popover-content">

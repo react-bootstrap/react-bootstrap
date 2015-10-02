@@ -22,6 +22,7 @@ const Button = React.createClass({
     /**
      * Defines HTML button type Attribute
      * @type {("button"|"reset"|"submit")}
+     * @defaultValue 'button'
      */
     type: React.PropTypes.oneOf(ButtonInput.types)
   },
@@ -59,7 +60,6 @@ const Button = React.createClass({
   },
 
   renderAnchor(classes) {
-
     let Component = this.props.componentClass || 'a';
     let href = this.props.href || '#';
     classes.disabled = this.props.disabled;

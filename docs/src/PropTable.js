@@ -1,27 +1,29 @@
 import merge from 'lodash/object/merge';
 import React from 'react';
-
+import Glyphicon from '../../src/Glyphicon';
 import Label from '../../src/Label';
 import Table from '../../src/Table';
 
 
 let cleanDocletValue = str => str.trim().replace(/^\{/, '').replace(/\}$/, '');
+let capitalize = str => str[0].toUpperCase() + str.substr(1);
 
-function getPropsData(componentData, metadata){
-
+function getPropsData(component, metadata) {
+  let componentData = metadata[component] || {};
   let props = componentData.props || {};
 
   if (componentData.composes) {
-    componentData.composes.forEach( other => {
-      props = merge({}, getPropsData(metadata[other] || {}, metadata), props);
-
+    componentData.composes.forEach(other => {
+      if (other !== component) {
+        props = merge({}, getPropsData(other, metadata), props);
+      }
     });
   }
 
   if (componentData.mixins) {
     componentData.mixins.forEach( other => {
-      if ( componentData.composes.indexOf(other) === -1) {
-        props = merge({}, getPropsData(metadata[other] || {}, metadata), props);
+      if (other !== component && componentData.composes.indexOf(other) === -1) {
+        props = merge({}, getPropsData(other, metadata), props);
       }
     });
   }
@@ -29,22 +31,21 @@ function getPropsData(componentData, metadata){
   return props;
 }
 
+
 const PropTable = React.createClass({
 
   contextTypes: {
     metadata: React.PropTypes.object
   },
 
-  componentWillMount(){
-    let componentData = this.context.metadata[this.props.component] || {};
-
-    this.propsData = getPropsData(componentData, this.context.metadata);
+  componentWillMount() {
+    this.propsData = getPropsData(this.props.component, this.context.metadata);
   },
 
-  render(){
+  render() {
     let propsData = this.propsData;
 
-    if ( !Object.keys(propsData).length){
+    if ( !Object.keys(propsData).length) {
       return <span/>;
     }
 
@@ -65,8 +66,7 @@ const PropTable = React.createClass({
     );
   },
 
-  _renderRows(propsData){
-
+  _renderRows(propsData) {
     return Object.keys(propsData)
       .sort()
       .filter(propName => propsData[propName].type && !propsData[propName].doclets.private )
@@ -74,7 +74,7 @@ const PropTable = React.createClass({
         let propData = propsData[propName];
 
         return (
-          <tr key={propName} className='prop-table-row'>
+          <tr key={propName} className="prop-table-row">
             <td>
               {propName} {this.renderRequiredLabel(propData)}
             </td>
@@ -85,9 +85,12 @@ const PropTable = React.createClass({
 
             <td>
               { propData.doclets.deprecated
-                && <div><strong className='text-danger'>{'Deprecated: ' + propData.doclets.deprecated + ' '}</strong></div>
+                && <div className="prop-desc-heading">
+                  <strong className="text-danger">{'Deprecated: ' + propData.doclets.deprecated + ' '}</strong>
+                </div>
               }
-              <div dangerouslySetInnerHTML={{__html: propData.descHtml }} />
+              { this.renderControllableNote(propData, propName) }
+              <div className="prop-desc" dangerouslySetInnerHTML={{__html: propData.descHtml }} />
             </td>
           </tr>
         );
@@ -104,34 +107,65 @@ const PropTable = React.createClass({
     );
   },
 
+  renderControllableNote(prop, propName) {
+    let controllable = prop.doclets.controllable;
+    let isHandler = this.getDisplayTypeName(prop.type.name) === 'function';
+
+    if (!controllable) {
+      return false;
+    }
+
+    let text = isHandler ? (
+      <span>
+        controls <code>{controllable}</code>
+      </span>
+    ) : (
+      <span>
+        controlled by: <code>{controllable}</code>,
+        initial prop: <code>{'default' + capitalize(propName)}</code>
+      </span>
+    );
+
+    return (
+      <div className="prop-desc-heading">
+        <small>
+          <em className="text-info">
+            <Glyphicon glyph="info-sign"/>
+            &nbsp;{ text }
+          </em>
+        </small>
+      </div>
+    );
+  },
+
   getType(prop) {
     let type = prop.type || {};
     let name = this.getDisplayTypeName(type.name);
     let doclets = prop.doclets || {};
 
     switch (name) {
-      case 'object':
-        return name;
-      case 'union':
-        return type.value.reduce((current, val, i, list) => {
-          let item = this.getType({ type: val });
-          if (React.isValidElement(item)) {
-            item = React.cloneElement(item, {key: i});
-          }
-          current = current.concat(item);
+    case 'object':
+      return name;
+    case 'union':
+      return type.value.reduce((current, val, i, list) => {
+        let item = this.getType({ type: val });
+        if (React.isValidElement(item)) {
+          item = React.cloneElement(item, {key: i});
+        }
+        current = current.concat(item);
 
-          return i === (list.length - 1) ? current : current.concat(' | ');
-        }, []);
-      case 'array':
-        let child = this.getType({ type: type.value });
+        return i === (list.length - 1) ? current : current.concat(' | ');
+      }, []);
+    case 'array':
+      let child = this.getType({ type: type.value });
 
-        return <span>{'array<'}{ child }{'>'}</span>;
-      case 'enum':
-        return this.renderEnum(type);
-      case 'custom':
-        return cleanDocletValue(doclets.type || name);
-      default:
-        return name;
+      return <span>{'array<'}{ child }{'>'}</span>;
+    case 'enum':
+      return this.renderEnum(type);
+    case 'custom':
+      return cleanDocletValue(doclets.type || name);
+    default:
+      return name;
     }
   },
 
@@ -166,7 +200,6 @@ const PropTable = React.createClass({
     );
   }
 });
-
 
 
 export default PropTable;

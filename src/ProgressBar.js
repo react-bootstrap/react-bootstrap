@@ -17,7 +17,7 @@ const ProgressBar = React.createClass({
     srOnly: PropTypes.bool,
     striped: PropTypes.bool,
     active: PropTypes.bool,
-    children: onlyProgressBar,
+    children: onlyProgressBar, // eslint-disable-line no-use-before-define
     className: React.PropTypes.string,
     interpolateClass: PropTypes.node,
     /**
@@ -59,7 +59,14 @@ const ProgressBar = React.createClass({
     }
 
     return (
-      <div {...this.props} className={classNames(this.props.className, 'progress')}>
+      <div
+        {...this.props}
+        className={classNames(this.props.className, 'progress')}
+        min={null}
+        max={null}
+        label={null}
+        aria-valuetext={null}
+      >
         {content}
       </div>
     );
@@ -73,18 +80,14 @@ const ProgressBar = React.createClass({
   },
 
   renderProgressBar() {
+    let { className, label, now, min, max, ...props } = this.props;
+
     const percentage = this.getPercentage(
-      this.props.now,
-      this.props.min,
-      this.props.max
+      now, min, max
     );
 
-    let label;
-
-    if (typeof this.props.label === 'string') {
+    if (typeof label === 'string') {
       label = this.renderLabel(percentage);
-    } else {
-      label = this.props.label;
     }
 
     if (this.props.srOnly) {
@@ -95,17 +98,17 @@ const ProgressBar = React.createClass({
       );
     }
 
-    const classes = classNames(this.props.className, this.getBsClassSet(), {
+    const classes = classNames(className, this.getBsClassSet(), {
       active: this.props.active,
       'progress-bar-striped': this.props.active || this.props.striped
     });
 
     return (
       <div
-        {...this.props}
+        {...props}
         className={classes}
         role="progressbar"
-        style={{width: percentage + '%'}}
+        style={{ width: percentage + '%' }}
         aria-valuenow={this.props.now}
         aria-valuemin={this.props.min}
         aria-valuemax={this.props.max}>

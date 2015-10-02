@@ -16,7 +16,7 @@ export default function({ preid, type }) {
 
       if (type === undefined) {
         if (!preid) {
-          throw 'Must specify version bump type';
+          throw new Error('Must specify version bump type');
         }
 
         version = oldVersion;

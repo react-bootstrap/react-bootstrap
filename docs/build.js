@@ -25,7 +25,7 @@ const readmeDest = path.join(docsBuilt, 'README.md');
  * @internal
  */
 function generateHTML(fileName, propData) {
-  return new Promise((resolve, reject) => {
+  return new Promise( resolve => {
     const urlSlug = fileName === 'index.html' ? '/' : `/${fileName}`;
 
     Router.run(routes, urlSlug, Handler => {
@@ -46,7 +46,6 @@ export default function BuildDocs({dev}) {
     .then(() => fsp.mkdir(docsBuilt))
     .then(metadata)
     .then(propData => {
-
       let pagesGenerators = Root.getPages().map( page => generateHTML(page, propData));
 
       return Promise.all(pagesGenerators.concat([

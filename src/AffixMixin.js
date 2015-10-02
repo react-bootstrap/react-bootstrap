@@ -30,7 +30,7 @@ const AffixMixin = {
 
   checkPosition() {
     let DOMNode, scrollHeight, scrollTop, position, offsetTop, offsetBottom,
-        affix, affixType, affixPositionTop;
+      affix, affixType, affixPositionTop;
 
     // TODO: or not visible
     if (!this.isMounted()) {
@@ -38,7 +38,7 @@ const AffixMixin = {
     }
 
     DOMNode = React.findDOMNode(this);
-    scrollHeight = document.documentElement.offsetHeight;
+    scrollHeight = domUtils.getDocumentHeight();
     scrollTop = window.pageYOffset;
     position = domUtils.getOffset(DOMNode);
 

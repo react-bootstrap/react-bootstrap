@@ -1,9 +1,9 @@
 const MySmallModal = React.createClass({
   render() {
     return (
-      <Modal {...this.props} bsSize='small' aria-labelledby='contained-modal-title-sm'>
+      <Modal {...this.props} bsSize="small" aria-labelledby="contained-modal-title-sm">
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-sm'>Modal heading</Modal.Title>
+          <Modal.Title id="contained-modal-title-sm">Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h4>Wrapped Text</h4>
@@ -28,9 +28,9 @@ const MySmallModal = React.createClass({
 const MyLargeModal = React.createClass({
   render() {
     return (
-      <Modal {...this.props} bsSize='large' aria-labelledby='contained-modal-title-lg'>
+      <Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-lg">
         <Modal.Header closeButton>
-          <Modal.Title id='contained-modal-title-lg'>Modal heading</Modal.Title>
+          <Modal.Title id="contained-modal-title-lg">Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <h4>Wrapped Text</h4>
@@ -53,19 +53,19 @@ const MyLargeModal = React.createClass({
 });
 
 const App = React.createClass({
-  getInitialState(){
+  getInitialState() {
     return { smShow: false, lgShow: false };
   },
-  render(){
-    let smClose = e => this.setState({ smShow: false });
-    let lgClose = e => this.setState({ lgShow: false });
+  render() {
+    let smClose = () => this.setState({ smShow: false });
+    let lgClose = () => this.setState({ lgShow: false });
 
     return (
       <ButtonToolbar>
-        <Button bsStyle='primary' onClick={()=>this.setState({ smShow: true })}>
+        <Button bsStyle="primary" onClick={()=>this.setState({ smShow: true })}>
           Launch small demo modal
         </Button>
-        <Button bsStyle='primary' onClick={()=>this.setState({ lgShow: true })}>
+        <Button bsStyle="primary" onClick={()=>this.setState({ lgShow: true })}>
           Launch large demo modal
         </Button>
 

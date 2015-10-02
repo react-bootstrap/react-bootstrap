@@ -8,23 +8,23 @@ const panelsInstance = (
       Panel content
     </Panel>
 
-    <Panel header={title} bsStyle='primary'>
+    <Panel header={title} bsStyle="primary">
       Panel content
     </Panel>
 
-    <Panel header={title} bsStyle='success'>
+    <Panel header={title} bsStyle="success">
       Panel content
     </Panel>
 
-    <Panel header={title} bsStyle='info'>
+    <Panel header={title} bsStyle="info">
       Panel content
     </Panel>
 
-    <Panel header={title} bsStyle='warning'>
+    <Panel header={title} bsStyle="warning">
       Panel content
     </Panel>
 
-    <Panel header={title} bsStyle='danger'>
+    <Panel header={title} bsStyle="danger">
       Panel content
     </Panel>
   </div>
