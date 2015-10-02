@@ -67,10 +67,6 @@ class Dropdown extends React.Component {
   componentDidUpdate(prevProps) {
     let menu = this.refs.menu;
 
-    if (this.props.open && !prevProps.open && menu.focusNext) {
-      menu.focusNext();
-    }
-
     if (!this.props.open && prevProps.open) {
       // if focus hasn't already moved from the menu lets return it
       // to the toggle
