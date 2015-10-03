@@ -52,6 +52,7 @@ export Panel from './Panel';
 export PanelGroup from './PanelGroup';
 export Popover from './Popover';
 export ProgressBar from './ProgressBar';
+export ResponsiveEmbed from './ResponsiveEmbed';
 export Row from './Row';
 export SafeAnchor from './SafeAnchor';
 export SplitButton from './SplitButton';

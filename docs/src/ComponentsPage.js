@@ -807,6 +807,19 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.PageHeader} />
                 </div>
 
+                {/* Responsive embed */}
+                <div className="bs-docs-section">
+                  <h1 className="page-header"><Anchor id="responsive-embed">Responsive embed</Anchor></h1>
+
+                  <p>Allow browsers to determine video or slideshow dimensions based on the width of their containing block by creating an intrinsic ratio that will properly scale on any device.</p>
+                  <p>You don't need to include <code>frameborder="0"</code> in your <code>iframe</code>s.</p>
+                  <p className="bg-warning">Either <b>16by9</b> or <b>4by3</b> aspect ratio via <code>a16by9</code> or <code>a4by3</code> attribute must be set.</p>
+                  <ReactPlayground codeText={Samples.ResponsiveEmbed} />
+
+                  <h3><Anchor id="responsive-embed-props">Props</Anchor></h3>
+                  <PropTable component="ResponsiveEmbed"/>
+                </div>
+
                 {/* Wells */}
                 <div className="bs-docs-section">
                   <h1 className="page-header"><Anchor id="wells">Wells</Anchor></h1>
@@ -977,6 +990,7 @@ const ComponentsPage = React.createClass({
                     <NavItem href="#badges" key={20}>Badges</NavItem>
                     <NavItem href="#jumbotron" key={21}>Jumbotron</NavItem>
                     <NavItem href="#page-header" key={22}>Page Header</NavItem>
+                    <NavItem href="#responsive-embed" key={31}>Responsive embed</NavItem>
                     <NavItem href="#wells" key={23}>Wells</NavItem>
                     <NavItem href="#glyphicons" key={24}>Glyphicons</NavItem>
                     <NavItem href="#tables" key={25}>Tables</NavItem>

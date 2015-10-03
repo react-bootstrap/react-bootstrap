@@ -48,6 +48,7 @@ const Panel = require('../../src/Panel');
 const PanelGroup = require('../../src/PanelGroup');
 const Popover = require('../../src/Popover');
 const ProgressBar = require('../../src/ProgressBar');
+const ResponsiveEmbed = require('../../src/ResponsiveEmbed');
 const Row = require('../../src/Row');
 const SplitButton = require('../../src/SplitButton');
 const Tab = require('../../src/Tab');

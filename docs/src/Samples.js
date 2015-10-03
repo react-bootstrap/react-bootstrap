@@ -108,6 +108,7 @@ export default {
   MenuItem:                      require('fs').readFileSync(__dirname + '/../examples/MenuItem.js', 'utf8'),
   ImageResponsive:               require('fs').readFileSync(__dirname + '/../examples/ImageResponsive.js', 'utf8'),
   ImageShape:                    require('fs').readFileSync(__dirname + '/../examples/ImageShape.js', 'utf8'),
+  ResponsiveEmbed:               require('fs').readFileSync(__dirname + '/../examples/ResponsiveEmbed.js', 'utf8'),
 
   Overlay:                       require('fs').readFileSync(__dirname + '/../examples/Overlay.js', 'utf8'),
   OverlayCustom:                 require('fs').readFileSync(__dirname + '/../examples/OverlayCustom.js', 'utf8')

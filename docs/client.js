@@ -7,6 +7,7 @@ import './assets/logo.png';
 import './assets/favicon.ico';
 import './assets/thumbnail.png';
 import './assets/thumbnaildiv.png';
+import './assets/TheresaKnott_castle.svg';
 
 import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/mode/javascript/javascript';
