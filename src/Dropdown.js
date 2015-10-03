@@ -46,13 +46,13 @@ class Dropdown extends React.Component {
     }];
 
     this.state = {};
+
+    this.lastOpenEventType = null;
+    this.isKeyboardClick = false;
   }
 
   componentDidMount() {
-    let menu = this.refs.menu;
-    if (this.props.open && menu.focusNext) {
-      menu.focusNext();
-    }
+    this.focusNextOnOpen();
   }
 
   componentWillUpdate(nextProps) {
@@ -65,10 +65,8 @@ class Dropdown extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    let menu = this.refs.menu;
-
-    if (this.props.open && !prevProps.open && menu.focusNext) {
-      menu.focusNext();
+    if (this.props.open && !prevProps.open) {
+      this.focusNextOnOpen();
     }
 
     if (!this.props.open && prevProps.open) {
@@ -105,8 +103,12 @@ class Dropdown extends React.Component {
     );
   }
 
-  toggleOpen() {
+  toggleOpen(eventType = null) {
     let open = !this.props.open;
+
+    if (open) {
+      this.lastOpenEventType = eventType;
+    }
 
     if (this.props.onToggle) {
       this.props.onToggle(open);
@@ -118,28 +120,31 @@ class Dropdown extends React.Component {
       return;
     }
 
-    this.toggleOpen();
+    this.toggleOpen(this.isKeyboardClick ? 'keydown' : 'click');
+    this.isKeyboardClick = false;
   }
 
   handleKeyDown(event) {
-    let focusNext = () => {
-      if (this.refs.menu.focusNext) {
-        this.refs.menu.focusNext();
-      }
-    };
+    if (this.props.disabled) {
+      return;
+    }
 
     switch (event.keyCode) {
     case keycode.codes.down:
       if (!this.props.open) {
-        this.toggleOpen();
-      } else {
-        focusNext();
+        this.toggleOpen('keydown');
+      } else if (this.refs.menu.focusNext) {
+        this.refs.menu.focusNext();
       }
       event.preventDefault();
       break;
     case keycode.codes.esc:
     case keycode.codes.tab:
       this.handleClose(event);
+      break;
+    case keycode.codes.space:
+    case keycode.codes.enter:
+      this.isKeyboardClick = true;
       break;
     default:
     }
@@ -151,6 +156,20 @@ class Dropdown extends React.Component {
     }
 
     this.toggleOpen();
+  }
+
+  focusNextOnOpen() {
+    const {menu} = this.refs;
+    if (!menu.focusNext) {
+      return;
+    }
+
+    if (
+      this.lastOpenEventType === 'keydown' ||
+      this.props.alwaysFocusNextOnOpen
+    ) {
+      menu.focusNext();
+    }
   }
 
   focus() {
@@ -232,7 +251,8 @@ Dropdown.TOGGLE_ROLE = TOGGLE_ROLE;
 Dropdown.MENU_ROLE = MENU_ROLE;
 
 Dropdown.defaultProps = {
-  componentClass: ButtonGroup
+  componentClass: ButtonGroup,
+  alwaysFocusNextOnOpen: false
 };
 
 Dropdown.propTypes = {
@@ -270,7 +290,7 @@ Dropdown.propTypes = {
   disabled: React.PropTypes.bool,
 
   /**
-   * Align the menu to the right  side of the Dropdown toggle
+   * Align the menu to the right side of the Dropdown toggle
    */
   pullRight: React.PropTypes.bool,
 
@@ -304,7 +324,12 @@ Dropdown.propTypes = {
    * function(Object event, Any eventKey)
    * ```
    */
-  onSelect: React.PropTypes.func
+  onSelect: React.PropTypes.func,
+
+  /**
+   * Focus first menu item on menu open on all events, not just keydown events.
+   */
+  alwaysFocusNextOnOpen: React.PropTypes.bool
 };
 
 Dropdown = uncontrollable(Dropdown, { open: 'onToggle' });
