@@ -17,6 +17,11 @@ const Pagination = React.createClass({
     last: React.PropTypes.bool,
     prev: React.PropTypes.bool,
     next: React.PropTypes.bool,
+    firstLabel: React.PropTypes.node,
+    lastLabel: React.PropTypes.node,
+    prevLabel: React.PropTypes.node,
+    nextLabel: React.PropTypes.node,
+    ellipsisLabel: React.PropTypes.node,
     onSelect: React.PropTypes.func,
     /**
      * You can use a custom element for the buttons
@@ -34,6 +39,11 @@ const Pagination = React.createClass({
       prev: false,
       next: false,
       ellipsis: true,
+      firstLabel: '\u00ab',
+      lastLabel: '\u00bb',
+      prevLabel: '\u2039',
+      nextLabel: '\u203a',
+      ellipsisLabel: '...',
       buttonComponentClass: SafeAnchor,
       bsClass: 'pagination'
     };
@@ -89,7 +99,7 @@ const Pagination = React.createClass({
           key="ellipsis"
           disabled
           buttonComponentClass={buttonComponentClass}>
-          <span aria-label="More">...</span>
+          <span aria-label="More">{this.props.ellipsisLabel}</span>
         </PaginationButton>
       );
     }
@@ -109,7 +119,7 @@ const Pagination = React.createClass({
         disabled={this.props.activePage === 1}
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label="Previous">&lsaquo;</span>
+        <span aria-label="Previous">{this.props.prevLabel}</span>
       </PaginationButton>
     );
   },
@@ -126,7 +136,7 @@ const Pagination = React.createClass({
         disabled={this.props.activePage >= this.props.items}
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label="Next">&rsaquo;</span>
+        <span aria-label="Next">{this.props.nextLabel}</span>
       </PaginationButton>
     );
   },
@@ -143,7 +153,7 @@ const Pagination = React.createClass({
         disabled={this.props.activePage === 1 }
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label="First">&laquo;</span>
+        <span aria-label="First">{this.props.firstLabel}</span>
       </PaginationButton>
     );
   },
@@ -160,7 +170,7 @@ const Pagination = React.createClass({
         disabled={this.props.activePage >= this.props.items}
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label="Last">&raquo;</span>
+        <span aria-label="Last">{this.props.lastLabel}</span>
       </PaginationButton>
     );
   },
