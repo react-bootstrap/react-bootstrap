@@ -48,7 +48,6 @@ class Dropdown extends React.Component {
     this.state = {};
 
     this.lastOpenEventType = null;
-    this.isKeyboardClick = false;
   }
 
   componentDidMount() {
@@ -83,7 +82,7 @@ class Dropdown extends React.Component {
     let children = this.extractChildren();
     let Component = this.props.componentClass;
 
-    let props = omit(this.props, ['id']);
+    let props = omit(this.props, ['id', 'role']);
 
     const rootClasses = {
       open: this.props.open,
@@ -120,8 +119,7 @@ class Dropdown extends React.Component {
       return;
     }
 
-    this.toggleOpen(this.isKeyboardClick ? 'keydown' : 'click');
-    this.isKeyboardClick = false;
+    this.toggleOpen('click');
   }
 
   handleKeyDown(event) {
@@ -141,10 +139,6 @@ class Dropdown extends React.Component {
     case keycode.codes.esc:
     case keycode.codes.tab:
       this.handleClose(event);
-      break;
-    case keycode.codes.space:
-    case keycode.codes.enter:
-      this.isKeyboardClick = true;
       break;
     default:
     }
@@ -166,7 +160,7 @@ class Dropdown extends React.Component {
 
     if (
       this.lastOpenEventType === 'keydown' ||
-      this.props.alwaysFocusNextOnOpen
+      this.props.role === 'menuitem'
     ) {
       menu.focusNext();
     }
@@ -227,7 +221,8 @@ class Dropdown extends React.Component {
     let toggleProps = {
       open,
       id: this.props.id,
-      ref: TOGGLE_REF
+      ref: TOGGLE_REF,
+      role: this.props.role
     };
 
     toggleProps.onClick = createChainedFunction(
@@ -327,9 +322,10 @@ Dropdown.propTypes = {
   onSelect: React.PropTypes.func,
 
   /**
-   * Focus first menu item on menu open on all events, not just keydown events.
+   * If `'menuitem'`, causes the dropdown to behave like a menu item rather than
+   * a menu button.
    */
-  alwaysFocusNextOnOpen: React.PropTypes.bool
+  role: React.PropTypes.string
 };
 
 Dropdown = uncontrollable(Dropdown, { open: 'onToggle' });
