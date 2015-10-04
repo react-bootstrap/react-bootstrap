@@ -116,7 +116,7 @@
     "jquery": "^2.1.4",
     "keycode": "^2.0.0",
     "lodash": "^3.10.0",
-    "react-overlays": "HPate-Riptide/react-overlays#c831325b9822d03f316babefd0460a9541bc8c74",
+    "react-overlays": "HPate-Riptide/react-overlays#9c39f992e5cc98a454349d61f6e62b690b67baa6",
     "uncontrollable": "^3.0.0"
   }
 }
