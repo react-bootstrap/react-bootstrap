@@ -13,7 +13,7 @@ let triggerBrowserReflow = node => node.offsetHeight;
 
 const MARGINS = {
   height: ['marginTop', 'marginBottom'],
-  width:  ['marginLeft', 'marginRight']
+  width: ['marginLeft', 'marginRight']
 };
 
 function getDimensionValue(dimension, elem) {

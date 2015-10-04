@@ -1,4 +1,4 @@
-/* eslint no-path-concat: 0, no-var: 0 */
+/* eslint no-path-concat: 0, no-var: 0, key-spacing: 0 */
 
 export default {
   Collapse:                      require('fs').readFileSync(__dirname + '/../examples/Collapse.js', 'utf8'),
@@ -81,6 +81,7 @@ export default {
   GridBasic:                     require('fs').readFileSync(__dirname + '/../examples/GridBasic.js', 'utf8'),
   ThumbnailAnchor:               require('fs').readFileSync(__dirname + '/../examples/ThumbnailAnchor.js', 'utf8'),
   ThumbnailDiv:                  require('fs').readFileSync(__dirname + '/../examples/ThumbnailDiv.js', 'utf8'),
+  ListGroupCustom:               require('fs').readFileSync(__dirname + '/../examples/ListGroupCustom.js', 'utf8'),
   ListGroupDefault:              require('fs').readFileSync(__dirname + '/../examples/ListGroupDefault.js', 'utf8'),
   ListGroupLinked:               require('fs').readFileSync(__dirname + '/../examples/ListGroupLinked.js', 'utf8'),
   ListGroupActive:               require('fs').readFileSync(__dirname + '/../examples/ListGroupActive.js', 'utf8'),

@@ -269,7 +269,7 @@ describe('Dropdown', () => {
         };
       }
 
-      render () {
+      render() {
         return (
           <div>
             <button className='outer-button'
@@ -416,7 +416,7 @@ describe('Dropdown', () => {
     // I am fairly confident that the failure is due to a test specific conflict and not an actual bug.
     it('when open and the key "esc" is pressed the menu is closed and focus is returned to the button', () => {
       const instance = React.render(
-        <Dropdown defaultOpen id='test-id'>
+        <Dropdown defaultOpen role="menuitem" id="test-id">
           {dropdownChildren}
         </Dropdown>
       , focusableContainer);

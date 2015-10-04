@@ -124,7 +124,7 @@ describe('Panel', () => {
   });
 
   it('Should call onSelect handler', (done) => {
-    function handleSelect (e, key) {
+    function handleSelect(e, key) {
       assert.equal(key, '1');
       done();
     }

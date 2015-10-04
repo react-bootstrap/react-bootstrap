@@ -271,7 +271,7 @@ const Tabs = React.createClass({
       return null;
     }
 
-    let { eventKey, title, disabled, onKeyDown, tabIndex = 0 } = child.props;
+    let { eventKey, title, disabled, onKeyDown, tabClassName, tabIndex = 0 } = child.props;
     let isActive = this.getActiveKey() === eventKey;
 
     return (
@@ -282,7 +282,8 @@ const Tabs = React.createClass({
         onKeyDown={createChainedFunction(this.handleKeyDown, onKeyDown)}
         eventKey={eventKey}
         tabIndex={isActive ? tabIndex : -1}
-        disabled={disabled }>
+        disabled={disabled }
+        className={tabClassName}>
         {title}
       </NavItem>
     );
