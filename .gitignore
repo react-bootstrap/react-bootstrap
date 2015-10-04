@@ -5,6 +5,7 @@ node_modules
 amd/
 !tools/amd/
 !tools/lib/
+lib
 dist/
 !tools/dist/
 docs-built/

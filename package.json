@@ -17,7 +17,8 @@
     "docs-build": "babel-node tools/build-cli.js --docs-only",
     "docs": "babel-node docs/dev-run",
     "docs-prod": "npm run docs-build && NODE_ENV=production babel-node docs/server.js",
-    "docs-prod-unoptimized": "npm run docs-build -- --dev && NODE_ENV=production babel-node docs/server.js"
+    "docs-prod-unoptimized": "npm run docs-build -- --dev && NODE_ENV=production babel-node docs/server.js",
+    "postinstall": "npm run build"
   },
   "main": "lib/index.js",
   "directories": {
@@ -28,7 +29,8 @@
     "README.md",
     "CHANGELOG.md",
     "lib",
-    "dist"
+    "dist",
+    "src"
   ],
   "keywords": [
     "react",
