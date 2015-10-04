@@ -499,7 +499,7 @@ const ComponentsPage = React.createClass({
 
                 {/* Navbar */}
                 <div className="bs-docs-section">
-                  <h1 className="page-header"><Anchor id="navbars">Navbars</Anchor> <small>Navbar, Nav, NavItem</small></h1>
+                  <h1 className="page-header"><Anchor id="navbars">Navbars</Anchor> <small>Navbar, NavBrand, Nav, NavItem</small></h1>
 
                   <p>Navbars are by default accessible and will provide <code>role="navigation"</code>.</p>
                   <p>They also supports all the different Bootstrap classes as properties. Just camelCase the css class and remove navbar from it. For example <code>navbar-fixed-top</code> becomes the property <code>fixedTop</code>. The different properties are <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>, <code>inverse</code>, <code>fluid</code>.</p>
@@ -509,7 +509,9 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.NavbarBasic} />
 
                   <h3><Anchor id="navbars-brand">Navbar Brand Example</Anchor></h3>
-                  <p>You can specify a brand by passing in a string to <code>brand</code>, or you can pass in a renderable component.</p>
+                  <p>You can specify a brand by passing a <code>NavBrand</code> component as a child to the <code>Navbar</code> component.</p>
+                  <p><code>NavBrand</code> accepts either string or a renderable component as a child.</p>
+                  <p><em>Note: <code>brand</code> attribute of <code>Navbar</code> component has been deprecated. Use <code>NavBrand</code> component instead.</em></p>
                   <ReactPlayground codeText={Samples.NavbarBrand} />
 
                   <h3><Anchor id="navbars-mobile-friendly">Mobile Friendly</Anchor></h3>
