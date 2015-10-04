@@ -97,8 +97,7 @@ describe('FormGroup', () => {
   }, {
     className: 'custom-group',
     props: { groupClassName: 'custom-group' }
-  }
-].forEach( testCase => {
+  }].forEach( testCase => {
     it(`does not render ${testCase.className} class`, () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <FormGroup>

@@ -94,10 +94,39 @@ function find(children, finder) {
   return child;
 }
 
+/**
+ * Finds children that are typically specified as `props.children`,
+ * but only iterates over children that are "valid components".
+ *
+ * The provided forEachFunc(child, index) will be called for each
+ * leaf child with the index reflecting the position relative to "valid components".
+ *
+ * @param {?*} children Children tree container.
+ * @param {function(*, int)} findFunc.
+ * @param {*} findContext Context for findContext.
+ * @returns {array} of children that meet the findFunc return statement
+ */
+function findValidComponents(children, func, context) {
+  let index = 0;
+  let returnChildren = [];
+
+  React.Children.forEach(children, child => {
+    if (React.isValidElement(child)) {
+      if (func.call(context, child, index)) {
+        returnChildren.push(child);
+      }
+      index++;
+    }
+  });
+
+  return returnChildren;
+}
+
 export default {
   map: mapValidComponents,
   forEach: forEachValidComponents,
   numberOf: numberOfValidComponents,
   find,
+  findValidComponents,
   hasValidComponent
 };

@@ -429,7 +429,7 @@ const Modal = React.createClass({
     return {
       dialogStyles: {
         paddingRight: containerIsOverflowing && !modalIsOverflowing ? getScrollbarSize() : void 0,
-        paddingLeft:  !containerIsOverflowing && modalIsOverflowing ? getScrollbarSize() : void 0
+        paddingLeft: !containerIsOverflowing && modalIsOverflowing ? getScrollbarSize() : void 0
       }
     };
   }
