@@ -21,7 +21,7 @@ export default class Page extends React.Component {
               <div className="col-md-9" role="main">
                 <div className="bs-docs-section">
                   <h2 className="page-header"><Anchor id="setup">Setup</Anchor></h2>
-                  <p className="lead">You can import the lib as AMD modules, CommonJS modules, or as a global JS script.</p>
+                  <p className="lead">You can import the library as CommonJS modules, as ES6 modules via Babel, as AMD modules, or as a global JS script.</p>
 
                   <p>First add the Bootstrap CSS to your project; check <a href="http://getbootstrap.com/getting-started/" name="Bootstrap Docs">here</a> if you have not already done that. Note that:</p>
                   <ul>
@@ -31,11 +31,12 @@ export default class Page extends React.Component {
                   <p>Then:</p>
 
                   <h3><Anchor id="commonjs">CommonJS</Anchor></h3>
+                  <p>If you install React-Bootstrap using NPM, you can import individual components under <code>react-bootstrap/lib</code> rather than the entire library. Doing so pulls in only the specific components that you use, which will reduce the size of your client bundle.</p>
+
                   <div className="highlight">
                     <CodeExample
                       codeText={
-`$ npm install react
-$ npm install react-bootstrap`
+`$ npm install react react-bootstrap`
                       }
                     />
                     <br />
@@ -53,8 +54,7 @@ var Alert = require('react-bootstrap').Alert;`
                   <div className="highlight">
                     <CodeExample
                       codeText={
-`$ npm install react
-$ npm install react-bootstrap`
+`$ npm install react react-bootstrap`
                       }
                     />
                     <br />
@@ -72,8 +72,7 @@ import { Button } from 'react-bootstrap';`
                   <div className="highlight">
                     <CodeExample
                       codeText={
-`$ bower install react
-$ bower install react-bootstrap`
+`$ bower install react react-bootstrap`
                       }
                     />
                     <br />
@@ -85,8 +84,8 @@ $ bower install react-bootstrap`
                     />
                   </div>
 
-                  <h3 className="page-header"><Anchor id="browser-globals">Browser globals</Anchor></h3>
-                  <p>The bower repo contains <code>react-bootstrap.js</code> and <code>react-bootstrap.min.js</code> with all components exported in the <code>window.ReactBootstrap</code> object.</p>
+                  <h3><Anchor id="browser-globals">Browser globals</Anchor></h3>
+                  <p>The Bower repo contains <code>react-bootstrap.js</code> and <code>react-bootstrap.min.js</code> with all components exported in the <code>window.ReactBootstrap</code> object.</p>
                   <div className="highlight">
                     <CodeExample
                       mode="htmlmixed"
