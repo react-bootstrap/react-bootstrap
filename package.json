@@ -117,6 +117,7 @@
     "keycode": "^2.0.0",
     "lodash-compat": "^3.10.1",
     "react-overlays": "^0.4.4",
+    "react-prop-types": "^0.3.0",
     "uncontrollable": "^3.1.1"
   },
   "release-script": {
