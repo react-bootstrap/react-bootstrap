@@ -48,7 +48,8 @@ Overlay.propTypes = {
    */
   rootClose: React.PropTypes.bool,
   /**
-   * A Callback fired by the Overlay when it wishes to be hidden.
+   * A callback invoked by the overlay when it wishes to be hidden. Required if
+   * `rootClose` is specified.
    */
   onHide: React.PropTypes.func,
 
