@@ -147,30 +147,6 @@ describe('Navbar', () => {
     assert.equal(React.findDOMNode(brands[0]).innerText, 'Brand');
   });
 
-  it('Should pass navbar prop to navbrand', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Navbar>
-        <NavBrand>Brand</NavBrand>
-      </Navbar>
-    );
-
-    let brand = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-brand');
-
-    assert.ok(brand.props.navbar);
-  });
-
-  it('Should pass navbar prop to navbrand inner element', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Navbar>
-        <NavBrand><a href>Brand</a></NavBrand>
-      </Navbar>
-    );
-
-    let brand = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-brand');
-
-    assert.ok(brand.props.navbar);
-  });
-
   it('Should pass navbar prop to navs', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
@@ -235,5 +211,19 @@ describe('Navbar', () => {
     let header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
 
     assert.ok(header);
+  });
+
+  it('Should show toggle button when using NavBrand', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar toggleNavKey={0}>
+        <NavBrand>Brand</NavBrand>
+        <Nav eventKey={0} />
+      </Navbar>
+    );
+
+    const toggle = ReactTestUtils.findRenderedDOMComponentWithClass(
+      instance, 'navbar-toggle'
+    );
+    expect(toggle).to.be.ok;
   });
 });
