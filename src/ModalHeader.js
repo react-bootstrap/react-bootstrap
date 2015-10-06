@@ -10,6 +10,7 @@ class ModalHeader extends React.Component {
         { this.props.closeButton &&
           <button
             className="close"
+            title={this.props['aria-label']}
             onClick={this.props.onHide}>
             <span aria-hidden="true">
               &times;
