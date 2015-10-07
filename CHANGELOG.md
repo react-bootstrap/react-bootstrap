@@ -1,3 +1,11 @@
+v0.26.2 - Wed, 07 Oct 2015 16:43:16 GMT
+---------------------------------------
+
+- [ca52c30](../../commit/ca52c30) [fixed] Actually export the Image component
+- [73daba7](../../commit/73daba7) [fixed] Show toggle button when using NavBrand
+
+
+
 v0.26.1 - Mon, 05 Oct 2015 02:04:27 GMT
 ---------------------------------------
 
