@@ -6,10 +6,7 @@ import DropdownButton from '../src/DropdownButton';
 import DropdownMenu from '../src/DropdownMenu';
 import MenuItem from '../src/MenuItem';
 
-import { shouldWarn } from './helpers';
-
-
-describe('DropdownButton', function() {
+describe('DropdownButton', () => {
 
   const simpleDropdown = (
     <DropdownButton title='Simple Dropdown' id='test-id'>
@@ -20,14 +17,14 @@ describe('DropdownButton', function() {
     </DropdownButton>
   );
 
-  it('renders title prop', function() {
+  it('renders title prop', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     buttonNode.innerText.should.match(/Simple Dropdown/);
   });
 
-  it('renders dropdown toggle button', function() {
+  it('renders dropdown toggle button', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
 
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
@@ -41,7 +38,7 @@ describe('DropdownButton', function() {
     buttonNode.getAttribute('id').should.be.ok;
   });
 
-  it('renders single MenuItem child', function() {
+  it('renders single MenuItem child', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title='Single child' id='test-id'>
         <MenuItem>Item 1</MenuItem>
@@ -55,7 +52,7 @@ describe('DropdownButton', function() {
   });
 
 
-  it('forwards pullRight to menu', function() {
+  it('forwards pullRight to menu', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton pullRight title='blah' id='test-id'>
         <MenuItem>Item 1</MenuItem>
@@ -66,7 +63,7 @@ describe('DropdownButton', function() {
     menu.props.pullRight.should.be.true;
   });
 
-  it('renders bsSize', function() {
+  it('renders bsSize', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title='blah' bsSize='small' id='test-id'>
         <MenuItem>Item 1</MenuItem>
@@ -77,7 +74,7 @@ describe('DropdownButton', function() {
     node.className.should.match(/\bbtn-group-sm\b/);
   });
 
-  it('renders bsStyle', function() {
+  it('renders bsStyle', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title='blah' bsStyle='success' id='test-id'>
         <MenuItem>Item 1</MenuItem>
@@ -89,7 +86,7 @@ describe('DropdownButton', function() {
   });
 
 
-  it('forwards onSelect handler to MenuItems', function(done) {
+  it('forwards onSelect handler to MenuItems', (done) => {
     const selectedEvents = [];
 
     const onSelect = (event, eventKey) => {
@@ -116,7 +113,7 @@ describe('DropdownButton', function() {
     });
   });
 
-  it('closes when child MenuItem is selected', function() {
+  it('closes when child MenuItem is selected', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title='Simple Dropdown' id='test-id'>
         <MenuItem eventKey='1'>Item 1</MenuItem>
@@ -134,7 +131,7 @@ describe('DropdownButton', function() {
     node.className.should.not.match(/\bopen\b/);
   });
 
-  it('does not close when onToggle is controlled', function() {
+  it('does not close when onToggle is controlled', () => {
     const handleSelect = () => {};
 
     const instance = ReactTestUtils.renderIntoDocument(
@@ -155,17 +152,7 @@ describe('DropdownButton', function() {
     node.className.should.match(/\bopen\b/);
   });
 
-  it('warn about the navItem deprecation', function() {
-    const props = {
-      title: 'some title',
-      navItem: true
-    };
-
-    DropdownButton.propTypes.navItem(props, 'navItem', 'DropdownButton');
-    shouldWarn(/navItem.*NavDropdown component/);
-  });
-
-  it('Should pass props to button', function () {
+  it('Should pass props to button', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title" bsStyle="primary" id="testId" disabled>
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>

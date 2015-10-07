@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 
 import Row from '../src/Row';
 
-describe('Row', function () {
-  it('uses "div" by default', function () {
+describe('Row', () => {
+  it('uses "div" by default', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Row />
     );
@@ -13,14 +13,14 @@ describe('Row', function () {
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
   });
 
-  it('has "row" class', function () {
+  it('has "row" class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Row>Row content</Row>
     );
     assert.equal(ReactDOM.findDOMNode(instance).className, 'row');
   });
 
-  it('Should merge additional classes passed in', function () {
+  it('Should merge additional classes passed in', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Row className="bob"/>
     );
@@ -28,7 +28,7 @@ describe('Row', function () {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\brow\b/));
   });
 
-  it('allows custom elements instead of "div"', function () {
+  it('allows custom elements instead of "div"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Row componentClass='section' />
     );

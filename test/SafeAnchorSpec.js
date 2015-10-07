@@ -4,29 +4,29 @@ import ReactDOM from 'react-dom';
 
 import SafeAnchor from '../src/SafeAnchor';
 
-describe('SafeAnchor', function() {
-  it('renders an anchor tag', function() {
+describe('SafeAnchor', () => {
+  it('renders an anchor tag', () => {
     const instance = ReactTestUtils.renderIntoDocument(<SafeAnchor />);
     const node = ReactDOM.findDOMNode(instance);
 
     node.tagName.should.equal('A');
   });
 
-  it('forwards provided href', function() {
+  it('forwards provided href', () => {
     const instance = ReactTestUtils.renderIntoDocument(<SafeAnchor href='http://google.com' />);
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
     anchor.getAttribute('href').should.equal('http://google.com');
   });
 
-  it('ensures that an href is provided', function() {
+  it('ensures that an href is provided', () => {
     const instance = ReactTestUtils.renderIntoDocument(<SafeAnchor />);
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
     anchor.getAttribute('href').should.equal('');
   });
 
-  it('forwards onClick handler', function(done) {
+  it('forwards onClick handler', (done) => {
     const handleClick = () => {
       done();
     };
@@ -36,7 +36,7 @@ describe('SafeAnchor', function() {
     ReactTestUtils.Simulate.click(anchor);
   });
 
-  it('prevents default when no href is provided', function(done) {
+  it('prevents default when no href is provided', (done) => {
     const handleClick = (event) => {
       expect(event.isDefaultPrevented()).to.not.be.ok;
 
@@ -51,7 +51,7 @@ describe('SafeAnchor', function() {
     ReactTestUtils.Simulate.click(anchor);
   });
 
-  it('does not prevent default when href is provided', function(done) {
+  it('does not prevent default when href is provided', (done) => {
     const handleClick = (event) => {
       expect(event.isDefaultPrevented()).to.not.be.ok;
 
@@ -66,28 +66,28 @@ describe('SafeAnchor', function() {
     ReactTestUtils.Simulate.click(anchor);
   });
 
-  it('forwards provided role', function () {
+  it('forwards provided role', () => {
     const instance = ReactTestUtils.renderIntoDocument(<SafeAnchor role='test' />);
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
     anchor.getAttribute('role').should.equal('test');
   });
 
-  it('forwards provided role with href', function () {
+  it('forwards provided role with href', () => {
     const instance = ReactTestUtils.renderIntoDocument(<SafeAnchor role='test' href='http://google.com' />);
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
     anchor.getAttribute('role').should.equal('test');
   });
 
-  it('set role=button with no provided href', function () {
+  it('set role=button with no provided href', () => {
     const instance = ReactTestUtils.renderIntoDocument(<SafeAnchor />);
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
     anchor.getAttribute('role').should.equal('button');
   });
 
-  it('sets no role with provided href', function () {
+  it('sets no role with provided href', () => {
     const instance = ReactTestUtils.renderIntoDocument(<SafeAnchor href='http://google.com' />);
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 

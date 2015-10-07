@@ -27,24 +27,24 @@ const Thumbnail = React.createClass({
           <img src={this.props.src} alt={this.props.alt} />
         </SafeAnchor>
       );
-    } else {
-      if (this.props.children) {
-        return (
-          <div {...this.props} className={classSet(this.props.className, classes)}>
-            <img src={this.props.src} alt={this.props.alt} />
-            <div className="caption">
-              {this.props.children}
-            </div>
-          </div>
-        );
-      } else {
-        return (
-          <div {...this.props} className={classSet(this.props.className, classes)}>
-            <img src={this.props.src} alt={this.props.alt} />
-          </div>
-        );
-      }
     }
+
+    if (this.props.children) {
+      return (
+        <div {...this.props} className={classSet(this.props.className, classes)}>
+          <img src={this.props.src} alt={this.props.alt} />
+          <div className="caption">
+            {this.props.children}
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div {...this.props} className={classSet(this.props.className, classes)}>
+        <img src={this.props.src} alt={this.props.alt} />
+      </div>
+    );
   }
 });
 

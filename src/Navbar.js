@@ -1,10 +1,14 @@
-import React, { cloneElement } from 'react';
-import BootstrapMixin from './BootstrapMixin';
 import classNames from 'classnames';
+import React from 'react';
+import elementType from 'react-prop-types/lib/elementType';
 
-import ValidComponentChildren from './utils/ValidComponentChildren';
+import BootstrapMixin from './BootstrapMixin';
+import Grid from './Grid';
+import NavBrand from './NavBrand';
+
 import createChainedFunction from './utils/createChainedFunction';
-import CustomPropTypes from './utils/CustomPropTypes';
+import deprecationWarning from './utils/deprecationWarning';
+import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const Navbar = React.createClass({
   mixins: [BootstrapMixin],
@@ -19,7 +23,7 @@ const Navbar = React.createClass({
     /**
      * You can use a custom element for this component
      */
-    componentClass: CustomPropTypes.elementType,
+    componentClass: elementType,
     brand: React.PropTypes.node,
     toggleButton: React.PropTypes.node,
     toggleNavKey: React.PropTypes.oneOfType([
@@ -57,6 +61,13 @@ const Navbar = React.createClass({
     return !this._isChanging;
   },
 
+  componentWillMount() {
+    // TODO: Use the `deprecated` PropType once we're on React 0.14.
+    if (this.props.brand) {
+      deprecationWarning('Navbar brand attribute', 'NavBrand Component');
+    }
+  },
+
   handleToggle() {
     if (this.props.onToggle) {
       this._isChanging = true;
@@ -73,79 +84,123 @@ const Navbar = React.createClass({
     return this.props.navExpanded != null ? this.props.navExpanded : this.state.navExpanded;
   },
 
-  render() {
-    let classes = this.getBsClassSet();
-    let ComponentClass = this.props.componentClass;
+  hasNavBrandChild() {
+    return ValidComponentChildren.findValidComponents(
+      this.props.children, child => child.props.bsRole === 'brand'
+    ).length > 0;
+  },
 
-    classes['navbar-fixed-top'] = this.props.fixedTop;
-    classes['navbar-fixed-bottom'] = this.props.fixedBottom;
-    classes['navbar-static-top'] = this.props.staticTop;
-    classes['navbar-inverse'] = this.props.inverse;
+  render() {
+    const {
+      brand,
+      toggleButton,
+      toggleNavKey,
+      fixedTop,
+      fixedBottom,
+      staticTop,
+      inverse,
+      componentClass: ComponentClass,
+      fluid,
+      className,
+      children,
+      ...props
+    } = this.props;
+
+    const classes = this.getBsClassSet();
+    classes['navbar-fixed-top'] = fixedTop;
+    classes['navbar-fixed-bottom'] = fixedBottom;
+    classes['navbar-static-top'] = staticTop;
+    classes['navbar-inverse'] = inverse;
+
+    const showHeader =
+      (brand || toggleButton || toggleNavKey != null) &&
+      !this.hasNavBrandChild();
 
     return (
-      <ComponentClass {...this.props} className={classNames(this.props.className, classes)}>
-        <div className={this.props.fluid ? 'container-fluid' : 'container'}>
-          {(this.props.brand || this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderHeader() : null}
-          {ValidComponentChildren.map(this.props.children, this.renderChild)}
-        </div>
+      <ComponentClass {...props} className={classNames(className, classes)}>
+        <Grid fluid={fluid}>
+          {showHeader ? this.renderBrandHeader() : null}
+          {ValidComponentChildren.map(children, this.renderChild)}
+        </Grid>
       </ComponentClass>
     );
   },
 
-  renderChild(child, index) {
-    return cloneElement(child, {
-      navbar: true,
-      collapsible: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.eventKey,
-      expanded: this.props.toggleNavKey != null && this.props.toggleNavKey === child.props.eventKey && this.isNavExpanded(),
-      key: child.key ? child.key : index
-    });
+  renderBrandHeader() {
+    let {brand} = this.props;
+    if (brand) {
+      brand = <NavBrand>{brand}</NavBrand>;
+    }
+
+    return this.renderHeader(brand);
   },
 
-  renderHeader() {
-    let brand;
-
-    if (this.props.brand) {
-      if (React.isValidElement(this.props.brand)) {
-        brand = cloneElement(this.props.brand, {
-          className: classNames(this.props.brand.props.className, 'navbar-brand')
-        });
-      } else {
-        brand = <span className="navbar-brand">{this.props.brand}</span>;
-      }
-    }
+  renderHeader(brand) {
+    const hasToggle =
+      this.props.toggleButton || this.props.toggleNavKey != null;
 
     return (
       <div className="navbar-header">
         {brand}
-        {(this.props.toggleButton || this.props.toggleNavKey != null) ? this.renderToggleButton() : null}
+        {hasToggle ? this.renderToggleButton() : null}
       </div>
     );
   },
 
-  renderToggleButton() {
-    let children;
+  renderChild(child, index) {
+    const key = child.key != null ? child.key : index;
 
-    if (React.isValidElement(this.props.toggleButton)) {
-      return cloneElement(this.props.toggleButton, {
-        className: classNames(this.props.toggleButton.props.className, 'navbar-toggle'),
-        onClick: createChainedFunction(this.handleToggle, this.props.toggleButton.props.onClick)
+    if (child.props.bsRole === 'brand') {
+      return React.cloneElement(this.renderHeader(child), {key});
+    }
+
+    const {toggleNavKey} = this.props;
+    const collapsible =
+      toggleNavKey != null && toggleNavKey === child.props.eventKey;
+
+    return React.cloneElement(child, {
+      navbar: true,
+      collapsible,
+      expanded: collapsible && this.isNavExpanded(),
+      key
+    });
+  },
+
+  renderToggleButton() {
+    const {toggleButton} = this.props;
+
+    if (React.isValidElement(toggleButton)) {
+      return React.cloneElement(toggleButton, {
+        className: classNames(toggleButton.props.className, 'navbar-toggle'),
+        onClick: createChainedFunction(
+          this.handleToggle, toggleButton.props.onClick
+        )
       });
     }
 
-    children = (this.props.toggleButton != null) ?
-      this.props.toggleButton : [
+    let children;
+    if (toggleButton != null) {
+      children = toggleButton;
+    } else {
+      children = [
         <span className="sr-only" key={0}>Toggle navigation</span>,
         <span className="icon-bar" key={1}></span>,
         <span className="icon-bar" key={2}></span>,
         <span className="icon-bar" key={3}></span>
       ];
+    }
 
     return (
-      <button className="navbar-toggle" type="button" onClick={this.handleToggle}>
+      <button
+        type="button"
+        onClick={this.handleToggle}
+        className="navbar-toggle"
+      >
         {children}
       </button>
     );
   }
+
 });
 
 export default Navbar;

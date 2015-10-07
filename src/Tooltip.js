@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
-
-import CustomPropTypes from './utils/CustomPropTypes';
+import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
 export default class Tooltip extends React.Component {
   render() {
@@ -43,7 +42,7 @@ Tooltip.propTypes = {
    * @type {string}
    * @required
    */
-  id: CustomPropTypes.isRequiredForA11y(
+  id: isRequiredForA11y(
     React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.number

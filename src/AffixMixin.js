@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import domUtils from './utils/domUtils';
+import getOffset from 'dom-helpers/query/offset';
 import EventListener from './utils/EventListener';
 
 const AffixMixin = {
@@ -25,7 +26,7 @@ const AffixMixin = {
     DOMNode.className = DOMNode.className.replace(/affix-top|affix-bottom|affix/, '');
     DOMNode.className += DOMNode.className.length ? ' affix' : 'affix';
 
-    this.pinnedOffset = domUtils.getOffset(DOMNode).top - window.pageYOffset;
+    this.pinnedOffset = getOffset(DOMNode).top - window.pageYOffset;
 
     return this.pinnedOffset;
   },
@@ -42,7 +43,7 @@ const AffixMixin = {
     DOMNode = ReactDOM.findDOMNode(this);
     scrollHeight = domUtils.getDocumentHeight();
     scrollTop = window.pageYOffset;
-    position = domUtils.getOffset(DOMNode);
+    position = getOffset(DOMNode);
 
     if (this.affixed === 'top') {
       position.top += scrollTop;
@@ -89,7 +90,7 @@ const AffixMixin = {
 
     if (affix === 'bottom') {
       DOMNode.className = DOMNode.className.replace(/affix-top|affix-bottom|affix/, 'affix-bottom');
-      affixPositionTop = scrollHeight - offsetBottom - DOMNode.offsetHeight - domUtils.getOffset(DOMNode).top;
+      affixPositionTop = scrollHeight - offsetBottom - DOMNode.offsetHeight - getOffset(DOMNode).top;
     }
 
     this.setState({

@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 
 import Badge from '../src/Badge';
 
-describe('Badge', function () {
-  it('Should output a badge with content', function () {
+describe('Badge', () => {
+  it('Should output a badge with content', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         <strong>Content</strong>
@@ -14,7 +14,7 @@ describe('Badge', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
-  it('Should have a badge class', function () {
+  it('Should have a badge class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         Content
@@ -23,7 +23,7 @@ describe('Badge', function () {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
 
-  it('Should have a badge using a number', function () {
+  it('Should have a badge using a number', () => {
     let count = 42;
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
@@ -33,7 +33,7 @@ describe('Badge', function () {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
 
-  it('Should have a badge using a a mix of content', function () {
+  it('Should have a badge using a a mix of content', () => {
     let count = 42;
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
@@ -43,7 +43,7 @@ describe('Badge', function () {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
 
-  it('Should have a badge class pulled right', function () {
+  it('Should have a badge class pulled right', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge pullRight>
         Content
@@ -52,7 +52,7 @@ describe('Badge', function () {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpull-right\b/));
   });
 
-  it('Should not have a badge class when empty', function () {
+  it('Should not have a badge class when empty', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge />
     );

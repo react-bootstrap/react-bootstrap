@@ -1,7 +1,7 @@
 import deprecationWarning from '../../src/utils/deprecationWarning';
 
-describe('deprecationWarning', function () {
-  it('warns exactly once', function () {
+describe('deprecationWarning', () => {
+  it('warns exactly once', () => {
     // console.error has already been stubbed out by test setup.
 
     deprecationWarning('foo', 'bar');

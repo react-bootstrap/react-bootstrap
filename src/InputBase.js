@@ -15,12 +15,10 @@ class InputBase extends React.Component {
     } else if (this.props.type) {
       if (this.props.type === 'select' && this.props.multiple) {
         return this.getSelectedOptions();
-      } else {
-        return this.getInputDOMNode().value;
       }
-    } else {
-      throw new Error('Cannot use getValue without specifying input type.');
+      return this.getInputDOMNode().value;
     }
+    throw new Error('Cannot use getValue without specifying input type.');
   }
 
   getChecked() {

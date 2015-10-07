@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
-import CustomPropTypes from './utils/CustomPropTypes';
+import elementType from 'react-prop-types/lib/elementType';
 import ButtonInput from './ButtonInput';
 
 const Button = React.createClass({
@@ -16,7 +16,7 @@ const Button = React.createClass({
     /**
      * You can use a custom element for this component
      */
-    componentClass: CustomPropTypes.elementType,
+    componentClass: elementType,
     href: React.PropTypes.string,
     target: React.PropTypes.string,
     /**

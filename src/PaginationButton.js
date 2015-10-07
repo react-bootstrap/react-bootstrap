@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import createSelectedEvent from './utils/createSelectedEvent';
-import CustomPropTypes from './utils/CustomPropTypes';
+import elementType from 'react-prop-types/lib/elementType';
 
 const PaginationButton = React.createClass({
   mixins: [BootstrapMixin],
@@ -19,7 +19,7 @@ const PaginationButton = React.createClass({
     /**
      * You can use a custom element for this component
      */
-    buttonComponentClass: CustomPropTypes.elementType
+    buttonComponentClass: elementType
   },
 
   getDefaultProps() {

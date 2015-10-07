@@ -1,3 +1,40 @@
+v0.26.2 - Wed, 07 Oct 2015 16:43:16 GMT
+---------------------------------------
+
+- [ca52c30](../../commit/ca52c30) [fixed] Actually export the Image component
+- [73daba7](../../commit/73daba7) [fixed] Show toggle button when using NavBrand
+
+
+
+v0.26.1 - Mon, 05 Oct 2015 02:04:27 GMT
+---------------------------------------
+
+
+
+
+
+v0.26.0 - Sun, 04 Oct 2015 21:21:22 GMT
+---------------------------------------
+
+- [b7853bb](../../commit/b7853bb) [fixed] Dropdown focus behavior on click
+- [dbb0385](../../commit/dbb0385) [added] #1320 allow NavItem class to be set
+- [3d13dda](../../commit/3d13dda) [fixed] #1287 ListGroupItem with onClick and header properly displays header
+- [3f5c6e3](../../commit/3f5c6e3) [added] #1181 ListGroup supports componentClass prop
+- [b5a9f3a](../../commit/b5a9f3a)     [added] NavBrand Component
+- [ac37698](../../commit/ac37698) [added] 'Responsive embed' component
+- [1c2d054](../../commit/1c2d054) [fixed] Set the disabled css class so that the text is greyed out.
+- [0348274](../../commit/0348274) [fixed] Breadcrumb and BreadcrumbItem components
+- [3c710f9](../../commit/3c710f9) [added] Breadcrumb component
+- [99d333f](../../commit/99d333f) [changed] use `lodash-compat` for IE8 compatibility and `lodash` for dev
+- [ce564cb](../../commit/ce564cb) [fixed] any props not known by DropdownMenu are passed through to the underlying ul
+- [674d67e](../../commit/674d67e) [added] images component
+- [deee09d](../../commit/deee09d) [fixed] stop rendering extra attributes on Progress bar dom nodes
+- [02f1fec](../../commit/02f1fec) [fixed] allow null activeKey (empty) selection
+- [656f40d](../../commit/656f40d) [changed] 'id' prop-type made uniform throughout the project
+- [b9a4477](../../commit/b9a4477) [changed] use 'react-prop-types' instead of 'utils/CustomPropTypes'
+
+
+
 v0.25.2 - Sat, 12 Sep 2015 15:59:13 GMT
 ---------------------------------------
 

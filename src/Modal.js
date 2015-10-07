@@ -7,9 +7,14 @@ import domUtils from './utils/domUtils';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import EventListener from './utils/EventListener';
 import createChainedFunction from './utils/createChainedFunction';
-import CustomPropTypes from './utils/CustomPropTypes';
+import elementType from 'react-prop-types/lib/elementType';
+
+import canUseDOM from 'dom-helpers/util/inDOM';
+import contains from 'dom-helpers/query/contains';
+import activeElement from 'dom-helpers/activeElement';
 
 import Portal from 'react-overlays/lib/Portal';
+
 import Fade from './Fade';
 import ModalDialog from './ModalDialog';
 import Body from './ModalBody';
@@ -95,7 +100,7 @@ const Modal = React.createClass({
      * A Component type that provides the modal content Markup. This is a useful prop when you want to use your own
      * styles and markup to create a custom modal component.
      */
-    dialogComponent: CustomPropTypes.elementType,
+    dialogComponent: elementType,
 
     /**
      * When `true` The modal will automatically shift focus to itself when it opens, and replace it to the last focused element when it closes.
@@ -363,16 +368,15 @@ const Modal = React.createClass({
   },
 
   checkForFocus() {
-    if (domUtils.canUseDom) {
-      this.lastFocus = domUtils.activeElement(document);
+    if (canUseDOM) {
+      this.lastFocus = activeElement(document);
     }
   },
 
   focusModalContent() {
     let modalContent = ReactDOM.findDOMNode(this.refs.dialog);
-    let current = domUtils.activeElement(domUtils.ownerDocument(this));
-    let focusInModal = current && domUtils.contains(modalContent, current);
-
+    let current = activeElement(domUtils.ownerDocument(this));
+    let focusInModal = current && contains(modalContent, current);
 
     if (modalContent && this.props.autoFocus && !focusInModal) {
       this.lastFocus = current;
@@ -392,16 +396,16 @@ const Modal = React.createClass({
       return;
     }
 
-    let active = domUtils.activeElement(domUtils.ownerDocument(this));
+    let active = activeElement(domUtils.ownerDocument(this));
     let modal = ReactDOM.findDOMNode(this.refs.dialog);
 
-    if (modal && modal !== active && !domUtils.contains(modal, active)) {
+    if (modal && modal !== active && !contains(modal, active)) {
       modal.focus();
     }
   },
 
   _getStyles() {
-    if (!domUtils.canUseDom) {
+    if (!canUseDOM) {
       return {};
     }
 
@@ -414,7 +418,7 @@ const Modal = React.createClass({
     return {
       dialogStyles: {
         paddingRight: containerIsOverflowing && !modalIsOverflowing ? getScrollbarSize() : void 0,
-        paddingLeft:  !containerIsOverflowing && modalIsOverflowing ? getScrollbarSize() : void 0
+        paddingLeft: !containerIsOverflowing && modalIsOverflowing ? getScrollbarSize() : void 0
       }
     };
   }

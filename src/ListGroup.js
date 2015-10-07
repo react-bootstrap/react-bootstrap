@@ -1,4 +1,5 @@
 import React, { cloneElement } from 'react';
+import ListGroupItem from './ListGroupItem';
 import classNames from 'classnames';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
@@ -8,6 +9,17 @@ class ListGroup extends React.Component {
       this.props.children,
       (item, index) => cloneElement(item, { key: item.key ? item.key : index })
     );
+
+    if (this.areCustomChildren(items)) {
+      let Component = this.props.componentClass;
+      return (
+        <Component
+          {...this.props}
+          className={classNames(this.props.className, 'list-group')}>
+          {items}
+        </Component>
+      );
+    }
 
     let shouldRenderDiv = false;
 
@@ -21,15 +33,23 @@ class ListGroup extends React.Component {
       });
     }
 
-    if (shouldRenderDiv) {
-      return this.renderDiv(items);
-    } else {
-      return this.renderUL(items);
-    }
+    return shouldRenderDiv ? this.renderDiv(items) : this.renderUL(items);
   }
 
   isAnchorOrButton(props) {
     return (props.href || props.onClick);
+  }
+
+  areCustomChildren(children) {
+    let customChildren = false;
+
+    ValidComponentChildren.forEach(children, (child) => {
+      if (child.type !== ListGroupItem) {
+        customChildren = true;
+      }
+    }, this);
+
+    return customChildren;
   }
 
   renderUL(items) {
@@ -57,8 +77,18 @@ class ListGroup extends React.Component {
   }
 }
 
+ListGroup.defaultProps = {
+  componentClass: 'div'
+};
+
 ListGroup.propTypes = {
   className: React.PropTypes.string,
+  /**
+   * The element for ListGroup if children are
+   * user-defined custom components.
+   * @type {("ul"|"div")}
+   */
+  componentClass: React.PropTypes.oneOf(['ul', 'div']),
   id: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number

@@ -20,7 +20,7 @@ class CustomMenu extends React.Component {
   }
 }
 
-describe('Dropdown', function() {
+describe('Dropdown', () => {
   let BaseDropdown = Dropdown.ControlledComponent;
 
   const dropdownChildren = [
@@ -41,7 +41,7 @@ describe('Dropdown', function() {
     </Dropdown>
   );
 
-  it('renders div with dropdown class', function() {
+  it('renders div with dropdown class', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     const node = ReactDOM.findDOMNode(instance);
 
@@ -50,7 +50,7 @@ describe('Dropdown', function() {
     node.className.should.not.match(/\bdropup\b/);
   });
 
-  it('renders div with dropup class', function() {
+  it('renders div with dropup class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown title='Dropup' dropup id='test-id'>
         {dropdownChildren}
@@ -63,7 +63,7 @@ describe('Dropdown', function() {
     node.className.should.match(/\bdropup\b/);
   });
 
-  it('renders toggle with Dropdown.Toggle', function() {
+  it('renders toggle with Dropdown.Toggle', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       simpleDropdown
     );
@@ -82,14 +82,14 @@ describe('Dropdown', function() {
   });
 
 
-  it('renders dropdown toggle button caret', function() {
+  it('renders dropdown toggle button caret', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     const caretNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'caret');
 
     caretNode.tagName.should.equal('SPAN');
   });
 
-  it('does not render toggle button caret', function() {
+  it('does not render toggle button caret', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown.Toggle noCaret>
         Child Text
@@ -100,7 +100,7 @@ describe('Dropdown', function() {
     caretNode.length.should.equal(0);
   });
 
-  it('renders custom menu', function() {
+  it('renders custom menu', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown title='Single child' id='test-id'>
         <Dropdown.Toggle>Child Text</Dropdown.Toggle>
@@ -115,7 +115,7 @@ describe('Dropdown', function() {
     ReactTestUtils.scryRenderedComponentsWithType(instance, CustomMenu).length.should.equal(1);
   });
 
-  it('prop validation with multiple menus', function() {
+  it('prop validation with multiple menus', () => {
     const props = {
       title: 'herpa derpa',
       children: [(
@@ -135,7 +135,7 @@ describe('Dropdown', function() {
     err.message.should.match(/Duplicate children.*bsRole: menu/);
   });
 
-  it('only renders one menu', function() {
+  it('only renders one menu', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown title='Single child' id='test-id'>
         <Dropdown.Toggle>Child Text</Dropdown.Toggle>
@@ -156,7 +156,7 @@ describe('Dropdown', function() {
   });
 
 
-  it('forwards pullRight to menu', function() {
+  it('forwards pullRight to menu', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown pullRight id='test-id'>
         {dropdownChildren}
@@ -171,7 +171,7 @@ describe('Dropdown', function() {
   // NOTE: The onClick event handler is invoked for both the Enter and Space
   // keys as well since the component is a button. I cannot figure out how to
   // get ReactTestUtils to simulate such though.
-  it('toggles open/closed when clicked', function() {
+  it('toggles open/closed when clicked', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     const node = ReactDOM.findDOMNode(instance);
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
@@ -190,7 +190,7 @@ describe('Dropdown', function() {
     buttonNode.getAttribute('aria-expanded').should.equal('false');
   });
 
-  it('opens if dropdown contains no focusable menu item', function() {
+  it('opens if dropdown contains no focusable menu item', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown title='custom child' id='dropdown'>
         <Dropdown.Toggle>Toggle</Dropdown.Toggle>
@@ -205,7 +205,7 @@ describe('Dropdown', function() {
     node.className.should.match(/\bopen\b/);
   });
 
-  it('when focused and closed toggles open when the key "down" is pressed', function() {
+  it('when focused and closed toggles open when the key "down" is pressed', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     const node = ReactDOM.findDOMNode(instance);
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
@@ -216,7 +216,7 @@ describe('Dropdown', function() {
     buttonNode.getAttribute('aria-expanded').should.equal('true');
   });
 
-  it('button has aria-haspopup attribute (As per W3C WAI-ARIA Spec)', function() {
+  it('button has aria-haspopup attribute (As per W3C WAI-ARIA Spec)', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
@@ -224,7 +224,7 @@ describe('Dropdown', function() {
   });
 
 
-  it('closes when child MenuItem is selected', function() {
+  it('closes when child MenuItem is selected', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       simpleDropdown
     );
@@ -240,7 +240,7 @@ describe('Dropdown', function() {
     node.className.should.not.match(/\bopen\b/);
   });
 
-  it('does not close when onToggle is controlled', function() {
+  it('does not close when onToggle is controlled', () => {
     const handleSelect = () => {};
 
     const instance = ReactTestUtils.renderIntoDocument(
@@ -261,7 +261,7 @@ describe('Dropdown', function() {
     node.className.should.match(/\bopen\b/);
   });
 
-  it('is open with explicit prop', function() {
+  it('is open with explicit prop', () => {
     class OpenProp extends React.Component {
       constructor(props) {
         super(props);
@@ -271,7 +271,7 @@ describe('Dropdown', function() {
         };
       }
 
-      render () {
+      render() {
         return (
           <div>
             <button className='outer-button'
@@ -302,7 +302,7 @@ describe('Dropdown', function() {
     dropdownNode.className.should.not.match(/\bopen\b/);
   });
 
-  it('has aria-labelledby same id as toggle button', function() {
+  it('has aria-labelledby same id as toggle button', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     const node = ReactDOM.findDOMNode(instance);
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
@@ -311,11 +311,11 @@ describe('Dropdown', function() {
     buttonNode.getAttribute('id').should.equal(menuNode.getAttribute('aria-labelledby'));
   });
 
-  describe('PropType validation', function() {
+  describe('PropType validation', () => {
 
-    describe('children', function() {
+    describe('children', () => {
 
-      it('menu is exclusive', function() {
+      it('menu is exclusive', () => {
 
         const props = {
           children: [
@@ -328,7 +328,7 @@ describe('Dropdown', function() {
           .message.should.match(/Duplicate children.*bsRole: menu/);
       });
 
-      it('menu is required', function() {
+      it('menu is required', () => {
 
         const props = {
           children: [
@@ -340,7 +340,7 @@ describe('Dropdown', function() {
           .message.should.match(/Missing a required child.*bsRole: menu/);
       });
 
-      it('toggles are not exclusive', function() {
+      it('toggles are not exclusive', () => {
 
         const props = {
           children: [
@@ -354,7 +354,7 @@ describe('Dropdown', function() {
           .to.not.exist;
       });
 
-      it('toggle is required', function() {
+      it('toggle is required', () => {
 
         const props = {
           children: [
@@ -371,20 +371,20 @@ describe('Dropdown', function() {
   });
 
 
-  describe('focusable state', function() {
+  describe('focusable state', () => {
     let focusableContainer;
 
-    beforeEach(function() {
+    beforeEach(() => {
       focusableContainer = document.createElement('div');
       document.body.appendChild(focusableContainer);
     });
 
-    afterEach(function() {
+    afterEach(() => {
       ReactDOM.unmountComponentAtNode(focusableContainer);
       document.body.removeChild(focusableContainer);
     });
 
-    it('when focused and closed sets focus on first menu item when the key "down" is pressed', function() {
+    it('when focused and closed sets focus on first menu item when the key "down" is pressed', () => {
       const instance = ReactDOM.render(simpleDropdown, focusableContainer);
       const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
@@ -398,7 +398,7 @@ describe('Dropdown', function() {
     });
 
 
-    it('when focused and open does not toggle closed when the key "down" is pressed', function() {
+    it('when focused and open does not toggle closed when the key "down" is pressed', () => {
       const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
       const node = ReactDOM.findDOMNode(instance);
       const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
@@ -415,9 +415,9 @@ describe('Dropdown', function() {
     // The failure occured when all tests in the suite were run together, but not a subset of the tests.
     //
     // I am fairly confident that the failure is due to a test specific conflict and not an actual bug.
-    it('when open and the key "esc" is pressed the menu is closed and focus is returned to the button', function() {
+    it('when open and the key "esc" is pressed the menu is closed and focus is returned to the button', () => {
       const instance = ReactDOM.render(
-        <Dropdown defaultOpen id='test-id'>
+        <Dropdown defaultOpen role="menuitem" id="test-id">
           {dropdownChildren}
         </Dropdown>
       , focusableContainer);

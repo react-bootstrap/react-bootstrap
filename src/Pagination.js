@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import PaginationButton from './PaginationButton';
-import CustomPropTypes from './utils/CustomPropTypes';
+import elementType from 'react-prop-types/lib/elementType';
 import SafeAnchor from './SafeAnchor';
 
 const Pagination = React.createClass({
@@ -21,7 +21,7 @@ const Pagination = React.createClass({
     /**
      * You can use a custom element for the buttons
      */
-    buttonComponentClass: CustomPropTypes.elementType
+    buttonComponentClass: elementType
   },
 
   getDefaultProps() {

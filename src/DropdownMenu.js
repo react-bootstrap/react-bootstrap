@@ -81,37 +81,36 @@ class DropdownMenu extends React.Component {
   }
 
   render() {
-    const items = ValidComponentChildren.map(this.props.children, child => {
-      let {
-        children,
-        onKeyDown,
-        onSelect
-      } = child.props || {};
+    let {children, onSelect, pullRight, className, labelledBy, open, onClose, ...props} = this.props;
+
+    const items = ValidComponentChildren.map(children, child => {
+      let childProps = child.props || {};
 
       return React.cloneElement(child, {
-        onKeyDown: createChainedFunction(onKeyDown, this.handleKeyDown),
-        onSelect: createChainedFunction(onSelect, this.props.onSelect)
-      }, children);
+        onKeyDown: createChainedFunction(childProps.onKeyDown, this.handleKeyDown),
+        onSelect: createChainedFunction(childProps.onSelect, onSelect)
+      }, childProps.children);
     });
 
     const classes = {
       'dropdown-menu': true,
-      'dropdown-menu-right': this.props.pullRight
+      'dropdown-menu-right': pullRight
     };
 
     let list = (
       <ul
-        className={classNames(this.props.className, classes)}
+        className={classNames(className, classes)}
         role="menu"
-        aria-labelledby={this.props.labelledBy}
+        aria-labelledby={labelledBy}
+        {...props}
       >
         {items}
       </ul>
     );
 
-    if (this.props.open) {
+    if (open) {
       list = (
-        <RootCloseWrapper noWrap onRootClose={this.props.onClose}>
+        <RootCloseWrapper noWrap onRootClose={onClose}>
           {list}
         </RootCloseWrapper>
       );

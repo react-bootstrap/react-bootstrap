@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import Button from './Button';
-import CustomPropTypes from './utils/CustomPropTypes';
+import singlePropFrom from 'react-prop-types/lib/singlePropFrom';
 import SafeAnchor from './SafeAnchor';
 
 const CARET = <span> <span className="caret" /></span>;
@@ -29,10 +29,10 @@ export default class DropdownToggle extends React.Component {
   }
 }
 
-const titleAndChildrenValidation = CustomPropTypes.singlePropFrom([
+const titleAndChildrenValidation = singlePropFrom(
   'title',
   'children'
-]);
+);
 
 DropdownToggle.defaultProps = {
   open: false,

@@ -2,10 +2,13 @@ import classNames from 'classnames';
 import activeElement from 'dom-helpers/activeElement';
 import contains from 'dom-helpers/query/contains';
 import keycode from 'keycode';
-import find from 'lodash/collection/find';
-import omit from 'lodash/object/omit';
+import find from 'lodash-compat/collection/find';
+import omit from 'lodash-compat/object/omit';
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
+import all from 'react-prop-types/lib/all';
+import elementType from 'react-prop-types/lib/elementType';
+import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 import uncontrollable from 'uncontrollable';
 
 import ButtonGroup from './ButtonGroup';
@@ -17,9 +20,8 @@ import CustomPropTypes from './utils/CustomPropTypes';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const TOGGLE_REF = 'toggle-btn';
-
-export const TOGGLE_ROLE = DropdownToggle.defaultProps.bsRole;
-export const MENU_ROLE = DropdownMenu.defaultProps.bsRole;
+const TOGGLE_ROLE = DropdownToggle.defaultProps.bsRole;
+const MENU_ROLE = DropdownMenu.defaultProps.bsRole;
 
 class Dropdown extends React.Component {
 
@@ -49,13 +51,12 @@ class Dropdown extends React.Component {
     }];
 
     this.state = {};
+
+    this.lastOpenEventType = null;
   }
 
   componentDidMount() {
-    let menu = this.refs.menu;
-    if (this.props.open && menu.focusNext) {
-      menu.focusNext();
-    }
+    this.focusNextOnOpen();
   }
 
   componentWillUpdate(nextProps) {
@@ -68,10 +69,8 @@ class Dropdown extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    let menu = this.refs.menu;
-
-    if (this.props.open && !prevProps.open && menu.focusNext) {
-      menu.focusNext();
+    if (this.props.open && !prevProps.open) {
+      this.focusNextOnOpen();
     }
 
     if (!this.props.open && prevProps.open) {
@@ -88,10 +87,11 @@ class Dropdown extends React.Component {
     let children = this.extractChildren();
     let Component = this.props.componentClass;
 
-    let props = omit(this.props, ['id']);
+    let props = omit(this.props, ['id', 'role']);
 
     const rootClasses = {
       open: this.props.open,
+      disabled: this.props.disabled,
       dropdown: !this.props.dropup,
       dropup: this.props.dropup
     };
@@ -107,8 +107,12 @@ class Dropdown extends React.Component {
     );
   }
 
-  toggleOpen() {
+  toggleOpen(eventType = null) {
     let open = !this.props.open;
+
+    if (open) {
+      this.lastOpenEventType = eventType;
+    }
 
     if (this.props.onToggle) {
       this.props.onToggle(open);
@@ -120,22 +124,20 @@ class Dropdown extends React.Component {
       return;
     }
 
-    this.toggleOpen();
+    this.toggleOpen('click');
   }
 
   handleKeyDown(event) {
-    let focusNext = () => {
-      if (this.refs.menu.focusNext) {
-        this.refs.menu.focusNext();
-      }
-    };
+    if (this.props.disabled) {
+      return;
+    }
 
     switch (event.keyCode) {
     case keycode.codes.down:
       if (!this.props.open) {
-        this.toggleOpen();
-      } else {
-        focusNext();
+        this.toggleOpen('keydown');
+      } else if (this.refs.menu.focusNext) {
+        this.refs.menu.focusNext();
       }
       event.preventDefault();
       break;
@@ -153,6 +155,20 @@ class Dropdown extends React.Component {
     }
 
     this.toggleOpen();
+  }
+
+  focusNextOnOpen() {
+    const {menu} = this.refs;
+    if (!menu.focusNext) {
+      return;
+    }
+
+    if (
+      this.lastOpenEventType === 'keydown' ||
+      this.props.role === 'menuitem'
+    ) {
+      menu.focusNext();
+    }
   }
 
   focus() {
@@ -210,7 +226,8 @@ class Dropdown extends React.Component {
     let toggleProps = {
       open,
       id: this.props.id,
-      ref: TOGGLE_REF
+      ref: TOGGLE_REF,
+      role: this.props.role
     };
 
     toggleProps.onClick = createChainedFunction(
@@ -230,9 +247,12 @@ class Dropdown extends React.Component {
 Dropdown.Toggle = DropdownToggle;
 
 Dropdown.TOGGLE_REF = TOGGLE_REF;
+Dropdown.TOGGLE_ROLE = TOGGLE_ROLE;
+Dropdown.MENU_ROLE = MENU_ROLE;
 
 Dropdown.defaultProps = {
-  componentClass: ButtonGroup
+  componentClass: ButtonGroup,
+  alwaysFocusNextOnOpen: false
 };
 
 Dropdown.propTypes = {
@@ -246,23 +266,23 @@ Dropdown.propTypes = {
    * @type {string|number}
    * @required
    */
-  id: CustomPropTypes.isRequiredForA11y(
+  id: isRequiredForA11y(
     React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.number
     ])
   ),
 
-  componentClass: CustomPropTypes.elementType,
+  componentClass: elementType,
 
   /**
    * The children of a Dropdown may be a `<Dropdown.Toggle/>` or a `<Dropdown.Menu/>`.
    * @type {node}
    */
-  children: CustomPropTypes.all([
+  children: all(
     CustomPropTypes.requiredRoles(TOGGLE_ROLE, MENU_ROLE),
     CustomPropTypes.exclusiveRoles(MENU_ROLE)
-  ]),
+  ),
 
   /**
    * Whether or not component is disabled.
@@ -270,7 +290,7 @@ Dropdown.propTypes = {
   disabled: React.PropTypes.bool,
 
   /**
-   * Align the menu to the right  side of the Dropdown toggle
+   * Align the menu to the right side of the Dropdown toggle
    */
   pullRight: React.PropTypes.bool,
 
@@ -304,7 +324,13 @@ Dropdown.propTypes = {
    * function(Object event, Any eventKey)
    * ```
    */
-  onSelect: React.PropTypes.func
+  onSelect: React.PropTypes.func,
+
+  /**
+   * If `'menuitem'`, causes the dropdown to behave like a menu item rather than
+   * a menu button.
+   */
+  role: React.PropTypes.string
 };
 
 Dropdown = uncontrollable(Dropdown, { open: 'onToggle' });

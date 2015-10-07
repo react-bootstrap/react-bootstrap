@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 import contains from 'dom-helpers/query/contains';
-import pick from 'lodash/object/pick';
+import pick from 'lodash-compat/object/pick';
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
 import warning from 'warning';

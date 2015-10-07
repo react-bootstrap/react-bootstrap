@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 
 import Col from '../src/Col';
 
-describe('Col', function () {
-  it('Should set Offset of zero', function () {
+describe('Col', () => {
+  it('Should set Offset of zero', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Col xsOffset={0} smOffset={0} mdOffset={0} lgOffset={0} />
     );
@@ -17,7 +17,7 @@ describe('Col', function () {
     assert.ok(instanceClassName.match(/\bcol-lg-offset-0\b/));
   });
 
-  it('Should set Pull of zero', function () {
+  it('Should set Pull of zero', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Col xsPull={0} smPull={0} mdPull={0} lgPull={0} />
     );
@@ -29,7 +29,7 @@ describe('Col', function () {
     assert.ok(instanceClassName.match(/\bcol-lg-pull-0\b/));
   });
 
-  it('Should set Push of zero', function () {
+  it('Should set Push of zero', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Col xsPush={0} smPush={0} mdPush={0} lgPush={0} />
     );

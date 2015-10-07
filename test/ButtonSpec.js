@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 
 import Button from '../src/Button';
 
-describe('Button', function () {
-  it('Should output a button', function () {
+describe('Button', () => {
+  it('Should output a button', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button>
         Title
@@ -14,7 +14,7 @@ describe('Button', function () {
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'BUTTON');
   });
 
-  it('Should have type=button by default', function () {
+  it('Should have type=button by default', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button>
         Title
@@ -23,7 +23,7 @@ describe('Button', function () {
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('type'), 'button');
   });
 
-  it('Should show the type if passed one', function () {
+  it('Should show the type if passed one', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button type='submit'>
         Title
@@ -32,7 +32,7 @@ describe('Button', function () {
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('type'), 'submit');
   });
 
-  it('Should output an anchor if called with a href', function () {
+  it('Should output an anchor if called with a href', () => {
     let href = '/url';
     let instance = ReactTestUtils.renderIntoDocument(
       <Button href={href}>
@@ -43,7 +43,7 @@ describe('Button', function () {
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('href'), href);
   });
 
-  it('Should output an anchor if called with a target', function () {
+  it('Should output an anchor if called with a target', () => {
     let target = '_blank';
     let instance = ReactTestUtils.renderIntoDocument(
       <Button target={target}>
@@ -54,8 +54,8 @@ describe('Button', function () {
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('target'), target);
   });
 
-  it('Should call onClick callback', function (done) {
-    let doneOp = function () {
+  it('Should call onClick callback', (done) => {
+    let doneOp = () => {
       done();
     };
     let instance = ReactTestUtils.renderIntoDocument(
@@ -66,7 +66,7 @@ describe('Button', function () {
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(instance));
   });
 
-  it('Should be disabled', function () {
+  it('Should be disabled', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button disabled>
         Title
@@ -75,7 +75,7 @@ describe('Button', function () {
     assert.ok(ReactDOM.findDOMNode(instance).disabled);
   });
 
-  it('Should be disabled link', function () {
+  it('Should be disabled link', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button disabled href='#'>
         Title
@@ -84,7 +84,7 @@ describe('Button', function () {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bdisabled\b/));
   });
 
-  it('Should have block class', function () {
+  it('Should have block class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button block>
         Title
@@ -93,7 +93,7 @@ describe('Button', function () {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-block\b/));
   });
 
-  it('Should apply bsStyle class', function () {
+  it('Should apply bsStyle class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button bsStyle='danger'>
         Title
@@ -102,7 +102,7 @@ describe('Button', function () {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-danger\b/));
   });
 
-  it('Should honour additional classes passed in, adding not overriding', function () {
+  it('Should honour additional classes passed in, adding not overriding', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button className="bob" bsStyle="danger">
         Title
@@ -112,7 +112,7 @@ describe('Button', function () {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-danger\b/));
   });
 
-  it('Should default to bsStyle="default"', function () {
+  it('Should default to bsStyle="default"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button bsStyle='default'>
         Title
@@ -121,7 +121,7 @@ describe('Button', function () {
     assert.equal(instance.props.bsStyle, 'default');
   });
 
-  it('Should be active', function () {
+  it('Should be active', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button active>
         Title
@@ -130,7 +130,7 @@ describe('Button', function () {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bactive\b/));
   });
 
-  it('Should render an anchor in a list item when in a nav', function () {
+  it('Should render an anchor in a list item when in a nav', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button navItem active>
         Title
@@ -144,7 +144,7 @@ describe('Button', function () {
     assert.ok(anchor.getAttribute('href'), '#');
   });
 
-  it('Should render an anchor when in a navDropdown', function () {
+  it('Should render an anchor when in a navDropdown', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button navDropdown>
         Title

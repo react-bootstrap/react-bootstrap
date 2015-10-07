@@ -1,7 +1,7 @@
 import React from 'react';
 import Transition from 'react-overlays/lib/Transition';
-import domUtils from './utils/domUtils';
-import CustomPropTypes from './utils/CustomPropTypes';
+import css from 'dom-helpers/style';
+import all from 'react-prop-types/lib/all';
 import deprecationWarning from './utils/deprecationWarning';
 import createChainedFunction from './utils/createChainedFunction';
 
@@ -13,7 +13,7 @@ let triggerBrowserReflow = node => node.offsetHeight;
 
 const MARGINS = {
   height: ['marginTop', 'marginBottom'],
-  width:  ['marginLeft', 'marginRight']
+  width: ['marginLeft', 'marginRight']
 };
 
 function getDimensionValue(dimension, elem) {
@@ -21,8 +21,8 @@ function getDimensionValue(dimension, elem) {
   let margins = MARGINS[dimension];
 
   return (value +
-    parseInt(domUtils.css(elem, margins[0]), 10) +
-    parseInt(domUtils.css(elem, margins[1]), 10)
+    parseInt(css(elem, margins[0]), 10) +
+    parseInt(css(elem, margins[1]), 10)
   );
 }
 
@@ -145,7 +145,7 @@ Collapse.propTypes = {
    * duration
    * @private
    */
-  duration: CustomPropTypes.all([
+  duration: all(
     React.PropTypes.number,
     (props)=> {
       if (props.duration != null) {
@@ -153,7 +153,7 @@ Collapse.propTypes = {
       }
       return null;
     }
-  ]),
+  ),
 
   /**
    * Callback fired before the component expands

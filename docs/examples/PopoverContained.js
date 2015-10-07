@@ -17,7 +17,7 @@ class Example extends React.Component {
           show={this.state.show}
           target={()=> React.findDOMNode(this.state.target)}
           placement="bottom"
-          container={mountNode}
+          container={this}
           containerPadding={20}
         >
           <Popover title="Popover bottom">
@@ -29,4 +29,4 @@ class Example extends React.Component {
   }
 }
 
-ReactDOM.render(<Example/>, mountNode);
+ReactDOM.render(<Example />, mountNode);

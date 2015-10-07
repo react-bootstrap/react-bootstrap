@@ -6,7 +6,7 @@ import Modal from '../src/Modal';
 
 import {getOne, render, shouldWarn} from './helpers';
 
-describe('Modal', function () {
+describe('Modal', () => {
   let mountPoint;
 
   beforeEach(() => {
@@ -14,13 +14,13 @@ describe('Modal', function () {
     document.body.appendChild(mountPoint);
   });
 
-  afterEach(function () {
+  afterEach(() => {
     ReactDOM.unmountComponentAtNode(mountPoint);
     document.body.removeChild(mountPoint);
   });
 
-  it('Should render the modal content', function() {
-    let noOp = function () {};
+  it('Should render the modal content', () => {
+    let noOp = () => {};
     let instance = render(
       <Modal show onHide={noOp} animation={false}>
         <strong>Message</strong>
@@ -30,7 +30,7 @@ describe('Modal', function () {
     assert.ok(getOne(instance.refs.modal.querySelectorAll('strong')));
   });
 
-  it('Should add modal-open class to the modal container while open', function(done) {
+  it('Should add modal-open class to the modal container while open', (done) => {
 
     let Container = React.createClass({
       getInitialState() {
@@ -65,15 +65,15 @@ describe('Modal', function () {
 
     ReactTestUtils.Simulate.click(modal.refs.backdrop);
 
-    setTimeout(function() {
+    setTimeout(() => {
       assert.equal(ReactDOM.findDOMNode(instance).className.length, 0);
       done();
     }, 0);
 
   });
 
-  it('Should close the modal when the backdrop is clicked', function (done) {
-    let doneOp = function () { done(); };
+  it('Should close the modal when the backdrop is clicked', (done) => {
+    let doneOp = () => { done(); };
     let instance = render(
       <Modal show onHide={doneOp} animation={false}>
         <strong>Message</strong>
@@ -83,8 +83,8 @@ describe('Modal', function () {
     ReactTestUtils.Simulate.click(instance.refs.backdrop);
   });
 
-  it('Should close the modal when the modal dialog is clicked', function (done) {
-    let doneOp = function () { done(); };
+  it('Should close the modal when the modal dialog is clicked', (done) => {
+    let doneOp = () => { done(); };
 
     let instance = render(
       <Modal show onHide={doneOp}>
@@ -97,7 +97,7 @@ describe('Modal', function () {
     ReactTestUtils.Simulate.click(dialog);
   });
 
-  it('Should not close the modal when the "static" backdrop is clicked', function () {
+  it('Should not close the modal when the "static" backdrop is clicked', () => {
     let onHideSpy = sinon.spy();
     let instance = render(
       <Modal show onHide={onHideSpy} backdrop='static'>
@@ -110,8 +110,8 @@ describe('Modal', function () {
     expect(onHideSpy).to.not.have.been.called;
   });
 
-  it('Should close the modal when the modal close button is clicked', function (done) {
-    let doneOp = function () { done(); };
+  it('Should close the modal when the modal close button is clicked', (done) => {
+    let doneOp = () => { done(); };
 
     let instance = render(
       <Modal show onHide={doneOp}>
@@ -125,8 +125,8 @@ describe('Modal', function () {
     ReactTestUtils.Simulate.click(button);
   });
 
-  it('Should pass className to the dialog', function () {
-    let noOp = function () {};
+  it('Should pass className to the dialog', () => {
+    let noOp = () => {};
     let instance = render(
       <Modal show className='mymodal' onHide={noOp}>
         <strong>Message</strong>
@@ -138,8 +138,8 @@ describe('Modal', function () {
     assert.ok(dialog.className.match(/\bmymodal\b/));
   });
 
-  it('Should use bsClass on the dialog', function () {
-    let noOp = function () {};
+  it('Should use bsClass on the dialog', () => {
+    let noOp = () => {};
     let instance = render(
       <Modal show bsClass='mymodal' onHide={noOp}>
         <strong>Message</strong>
@@ -158,8 +158,8 @@ describe('Modal', function () {
     shouldWarn("Invalid prop 'bsClass' of value 'mymodal'");
   });
 
-  it('Should pass bsSize to the dialog', function () {
-    let noOp = function () {};
+  it('Should pass bsSize to the dialog', () => {
+    let noOp = () => {};
     let instance = render(
       <Modal show bsSize='small' onHide={noOp}>
         <strong>Message</strong>
@@ -170,8 +170,8 @@ describe('Modal', function () {
     assert.ok(dialog.className.match(/\bmodal-sm\b/));
   });
 
-  it('Should pass dialogClassName to the dialog', function () {
-    let noOp = function () {};
+  it('Should pass dialogClassName to the dialog', () => {
+    let noOp = () => {};
     let instance = render(
       <Modal show dialogClassName="testCss" onHide={noOp}>
         <strong>Message</strong>
@@ -182,10 +182,10 @@ describe('Modal', function () {
     assert.match(dialog.className, /\btestCss\b/);
   });
 
-  it('Should assign refs correctly when no backdrop', function () {
+  it('Should assign refs correctly when no backdrop', () => {
 
     let test = () => render(
-      <Modal show backdrop={false} onHide={function () {}}>
+      <Modal show backdrop={false} onHide={() => {}}>
         <strong>Message</strong>
       </Modal>
     , mountPoint);
@@ -193,8 +193,8 @@ describe('Modal', function () {
     expect(test).not.to.throw();
   });
 
-  it('Should use dialogComponent', function () {
-    let noOp = function () {};
+  it('Should use dialogComponent', () => {
+    let noOp = () => {};
 
     class CustomDialog extends React.Component {
       render() { return <div {...this.props}/>; }
@@ -209,7 +209,7 @@ describe('Modal', function () {
     assert.ok(instance.refs.dialog instanceof CustomDialog);
   });
 
-  it('Should pass transition callbacks to Transition', function (done) {
+  it('Should pass transition callbacks to Transition', (done) => {
     let count = 0;
     let increment = ()=> count++;
 
@@ -235,7 +235,7 @@ describe('Modal', function () {
       , mountPoint);
   });
 
-  it('Should unbind listeners when unmounted', function() {
+  it('Should unbind listeners when unmounted', () => {
     render(
         <div>
           <Modal show onHide={() => null} animation={false}>
@@ -251,7 +251,7 @@ describe('Modal', function () {
     assert.notInclude(document.body.className, 'modal-open');
   });
 
-  describe('Focused state', function () {
+  describe('Focused state', () => {
     let focusableContainer = null;
 
     beforeEach(() => {
@@ -261,12 +261,12 @@ describe('Modal', function () {
       focusableContainer.focus();
     });
 
-    afterEach(function () {
+    afterEach(() => {
       ReactDOM.unmountComponentAtNode(focusableContainer);
       document.body.removeChild(focusableContainer);
     });
 
-    it('Should focus on the Modal when it is opened', function () {
+    it('Should focus on the Modal when it is opened', () => {
 
       document.activeElement.should.equal(focusableContainer);
 
@@ -284,7 +284,7 @@ describe('Modal', function () {
     });
 
 
-    it('Should not focus on the Modal when autoFocus is false', function () {
+    it('Should not focus on the Modal when autoFocus is false', () => {
       render(
         <Modal show autoFocus={false} onHide={() => {}} animation={false}>
           <strong>Message</strong>
@@ -294,7 +294,7 @@ describe('Modal', function () {
       document.activeElement.should.equal(focusableContainer);
     });
 
-    it('Should not focus Modal when child has focus', function () {
+    it('Should not focus Modal when child has focus', () => {
 
       document.activeElement.should.equal(focusableContainer);
 

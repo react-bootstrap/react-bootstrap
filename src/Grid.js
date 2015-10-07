@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import CustomPropTypes from './utils/CustomPropTypes';
+import elementType from 'react-prop-types/lib/elementType';
 
 const Grid = React.createClass({
   propTypes: {
@@ -13,7 +13,7 @@ const Grid = React.createClass({
     /**
      * You can use a custom element for this component
      */
-    componentClass: CustomPropTypes.elementType
+    componentClass: elementType
   },
 
   getDefaultProps() {

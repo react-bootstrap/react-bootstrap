@@ -1,6 +1,6 @@
 import React from 'react';
 import Transition from 'react-overlays/lib/Transition';
-import CustomPropTypes from './utils/CustomPropTypes';
+import all from 'react-prop-types/lib/all';
 import deprecationWarning from './utils/deprecationWarning';
 
 class Fade extends React.Component {
@@ -51,7 +51,7 @@ Fade.propTypes = {
    * duration
    * @private
    */
-  duration: CustomPropTypes.all([
+  duration: all(
     React.PropTypes.number,
     (props)=> {
       if (props.duration != null) {
@@ -59,7 +59,7 @@ Fade.propTypes = {
       }
       return null;
     }
-  ]),
+  ),
 
   /**
    * Callback fired before the component fades in

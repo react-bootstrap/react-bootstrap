@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 
 import PageItem from '../src/PageItem';
 
-describe('PageItem', function () {
-  it('Should output a "list item" as root element, and an "anchor" as a child item', function () {
+describe('PageItem', () => {
+  it('Should output a "list item" as root element, and an "anchor" as a child item', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PageItem href="#">Text</PageItem>
     );
@@ -16,28 +16,28 @@ describe('PageItem', function () {
     assert.equal(node.children[0].nodeName, 'A');
   });
 
-  it('Should output "disabled" attribute as a class', function () {
+  it('Should output "disabled" attribute as a class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PageItem disabled href="#">Text</PageItem>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled'));
   });
 
-  it('Should output "next" attribute as a class', function () {
+  it('Should output "next" attribute as a class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PageItem previous href="#">Previous</PageItem>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'previous'));
   });
 
-  it('Should output "previous" attribute as a class', function () {
+  it('Should output "previous" attribute as a class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PageItem next href="#">Next</PageItem>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'next'));
   });
 
-  it('Should call "onSelect" when item is clicked', function (done) {
+  it('Should call "onSelect" when item is clicked', (done) => {
     function handleSelect(key, href) {
       assert.equal(key, 1);
       assert.equal(href, undefined);
@@ -49,7 +49,7 @@ describe('PageItem', function () {
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });
 
-  it('Should not call "onSelect" when item disabled and is clicked', function () {
+  it('Should not call "onSelect" when item disabled and is clicked', () => {
     function handleSelect() {
       throw new Error('onSelect should not be called');
     }
@@ -59,7 +59,7 @@ describe('PageItem', function () {
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });
 
-  it('Should set target attribute on anchor', function () {
+  it('Should set target attribute on anchor', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PageItem next href="#" target="_blank">Next</PageItem>
     );
@@ -68,7 +68,7 @@ describe('PageItem', function () {
     assert.equal(anchor.getAttribute('target'), '_blank');
   });
 
-  it('Should call "onSelect" with target attribute', function (done) {
+  it('Should call "onSelect" with target attribute', (done) => {
     function handleSelect(key, href, target) {
       assert.equal(target, '_blank');
       done();

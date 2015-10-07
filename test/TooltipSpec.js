@@ -4,8 +4,8 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 
 import Tooltip from '../src/Tooltip';
 
-describe('Tooltip', function () {
-  it('Should output a tooltip with content', function () {
+describe('Tooltip', () => {
+  it('Should output a tooltip with content', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tooltip positionTop={10} positionLeft={20}>
         <strong>Tooltip Content</strong>
@@ -18,8 +18,8 @@ describe('Tooltip', function () {
       .to.eql({top: '10px', left: '20px'});
   });
 
-  describe('When a style property is provided', function () {
-    it('Should render a tooltip with merged styles', function () {
+  describe('When a style property is provided', () => {
+    it('Should render a tooltip with merged styles', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Tooltip style={{opacity: 0.9}} positionTop={10} positionLeft={20}>
           <strong>Tooltip Content</strong>

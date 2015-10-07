@@ -1,13 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
-import CustomPropTypes from './utils/CustomPropTypes';
+import elementType from 'react-prop-types/lib/elementType';
 
 const Row = React.createClass({
   propTypes: {
     /**
      * You can use a custom element for this component
      */
-    componentClass: CustomPropTypes.elementType
+    componentClass: elementType
   },
 
   getDefaultProps() {

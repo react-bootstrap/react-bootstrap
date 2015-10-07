@@ -5,9 +5,9 @@ import ReactDOM from 'react-dom';
 import MenuItem from '../src/MenuItem';
 import NavDropdown from '../src/NavDropdown';
 
-describe('NavDropdown', function() {
+describe('NavDropdown', () => {
 
-  it('Should render li when in nav', function () {
+  it('Should render li when in nav', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <NavDropdown title="Title" className="test-class" id='nav-test'>
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
@@ -25,7 +25,7 @@ describe('NavDropdown', function() {
     assert.equal(button.innerText.trim(), 'Title');
   });
 
-  it('is open with explicit prop', function() {
+  it('is open with explicit prop', () => {
     class OpenProp extends React.Component {
       constructor(props) {
         super(props);
@@ -35,7 +35,7 @@ describe('NavDropdown', function() {
         };
       }
 
-      render () {
+      render() {
         return (
           <div>
             <button className='outer-button'

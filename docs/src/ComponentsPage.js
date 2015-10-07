@@ -500,7 +500,7 @@ const ComponentsPage = React.createClass({
 
                 {/* Navbar */}
                 <div className="bs-docs-section">
-                  <h1 className="page-header"><Anchor id="navbars">Navbars</Anchor> <small>Navbar, Nav, NavItem</small></h1>
+                  <h1 className="page-header"><Anchor id="navbars">Navbars</Anchor> <small>Navbar, NavBrand, Nav, NavItem</small></h1>
 
                   <p>Navbars are by default accessible and will provide <code>role="navigation"</code>.</p>
                   <p>They also supports all the different Bootstrap classes as properties. Just camelCase the css class and remove navbar from it. For example <code>navbar-fixed-top</code> becomes the property <code>fixedTop</code>. The different properties are <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>, <code>inverse</code>, <code>fluid</code>.</p>
@@ -510,7 +510,9 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.NavbarBasic} />
 
                   <h3><Anchor id="navbars-brand">Navbar Brand Example</Anchor></h3>
-                  <p>You can specify a brand by passing in a string to <code>brand</code>, or you can pass in a renderable component.</p>
+                  <p>You can specify a brand by passing a <code>NavBrand</code> component as a child to the <code>Navbar</code> component.</p>
+                  <p><code>NavBrand</code> accepts either string or a renderable component as a child.</p>
+                  <p><em>Note: <code>brand</code> attribute of <code>Navbar</code> component has been deprecated. Use <code>NavBrand</code> component instead.</em></p>
                   <ReactPlayground codeText={Samples.NavbarBrand} />
 
                   <h3><Anchor id="navbars-mobile-friendly">Mobile Friendly</Anchor></h3>
@@ -540,6 +542,22 @@ const ComponentsPage = React.createClass({
 
                   <h3><Anchor id="navbar-props">Props</Anchor></h3>
                   <PropTable component="Navbar"/>
+                </div>
+
+                {/* Breadcrumb */}
+                <div className="bs-docs-section">
+                  <h1 className="page-header"><Anchor id="breadcrumbs">Breadcrumbs</Anchor> <small>Breadcrumb, BreadcrumbItems</small></h1>
+                  <p>Breadcrumbs are used to indicate the current page's location. Add <code>active</code> attribute to active <code>BreadcrumbItem</code>.</p>
+                  <p>Do not set both <code>active</code> and <code>href</code> attributes. <code>active</code> overrides <code>href</code> and <code>span</code> element is rendered instead of <code>a</code>.</p>
+
+                  <h3><Anchor id="breadcrumbs-example">Breadcrumbs Example</Anchor></h3>
+                  <ReactPlayground codeText={Samples.Breadcrumb} />
+
+                  <h3><Anchor id="breadcrumbs-props">Props</Anchor></h3>
+                  <p><code>Breadcrumb</code> component itself doesn't have any specific public properties</p>
+
+                  <h4><Anchor id="breadcrumbs-props-breadcrumbItem">BreadcrumbItem</Anchor></h4>
+                  <PropTable component="BreadcrumbItem"/>
                 </div>
 
                 {/* Tabbed Areas */}
@@ -676,6 +694,22 @@ const ComponentsPage = React.createClass({
                   <PropTable component="Col"/>
                 </div>
 
+                {/* Images */}
+                <div className="bs-docs-section">
+                  <h1 className="page-header"><Anchor id="images">Images</Anchor></h1>
+
+                  <h3><Anchor id="image-shape">Shape</Anchor></h3>
+                  <p>Use the <code>rounded</code>, <code>circle</code> and <code>thumbnail</code> props to customise the image.</p>
+                  <ReactPlayground codeText={Samples.ImageShape} />
+
+                  <h3><Anchor id="image-responsive">Responsive</Anchor></h3>
+                  <p>Use the <code>responsive</code> to scale image nicely to the parent element.</p>
+                  <ReactPlayground codeText={Samples.ImageResponsive} />
+
+                  <h3><Anchor id="image-props">Props</Anchor></h3>
+                  <PropTable component="Image"/>
+                </div>
+
                 {/* Thumbnail */}
                 <div className="bs-docs-section">
                   <h1 className="page-header"><Anchor id="thumbnail">Thumbnail</Anchor></h1>
@@ -717,6 +751,15 @@ const ComponentsPage = React.createClass({
                   <h3><Anchor id="listgroup-with-header">With header</Anchor></h3>
                   <p>Set the <code>header</code> prop to create a structured item, with a heading and a body area.</p>
                   <ReactPlayground codeText={Samples.ListGroupHeader} />
+
+                  <h3><Anchor id="listgroup-with-custom-children">With custom component children</Anchor></h3>
+                  <p>
+                    When using ListGroupItems directly, ListGroup looks at whether the items have href
+                    or onClick props to determine which DOM elements to emit. However, with custom item
+                    components as children to <code>ListGroup</code>, set the
+                    <code>componentClass</code> prop to specify which element <code>ListGroup</code> should output.
+                  </p>
+                  <ReactPlayground codeText={Samples.ListGroupCustom} />
 
                   <h3><Anchor id="listgroup-props">Props</Anchor></h3>
 
@@ -774,6 +817,19 @@ const ComponentsPage = React.createClass({
 
                   <p>A simple shell for an <code>h1</code> to appropriately space out and segment sections of content on a page. It can utilize the <code>h1</code>&#8217;s default <code>small</code> element, as well as most other components (with additional styles).</p>
                   <ReactPlayground codeText={Samples.PageHeader} />
+                </div>
+
+                {/* Responsive embed */}
+                <div className="bs-docs-section">
+                  <h1 className="page-header"><Anchor id="responsive-embed">Responsive embed</Anchor></h1>
+
+                  <p>Allow browsers to determine video or slideshow dimensions based on the width of their containing block by creating an intrinsic ratio that will properly scale on any device.</p>
+                  <p>You don't need to include <code>frameborder="0"</code> in your <code>iframe</code>s.</p>
+                  <p className="bg-warning">Either <b>16by9</b> or <b>4by3</b> aspect ratio via <code>a16by9</code> or <code>a4by3</code> attribute must be set.</p>
+                  <ReactPlayground codeText={Samples.ResponsiveEmbed} />
+
+                  <h3><Anchor id="responsive-embed-props">Props</Anchor></h3>
+                  <PropTable component="ResponsiveEmbed"/>
                 </div>
 
                 {/* Wells */}
@@ -932,18 +988,21 @@ const ComponentsPage = React.createClass({
                     <NavItem href="#progress" key={8}>Progress bars</NavItem>
                     <NavItem href="#navs" key={9}>Navs</NavItem>
                     <NavItem href="#navbars" key={10}>Navbars</NavItem>
+                    <NavItem href="#breadcrumbs" key={30}>Breadcrumbs</NavItem>
                     <NavItem href="#tabs" key={11}>Tabs</NavItem>
                     <NavItem href="#pager" key={12}>Pager</NavItem>
                     <NavItem href="#pagination" key={13}>Pagination</NavItem>
                     <NavItem href="#alerts" key={14}>Alerts</NavItem>
                     <NavItem href="#carousels" key={15}>Carousels</NavItem>
                     <NavItem href="#grids" key={16}>Grids</NavItem>
+                    <NavItem href="#images" key={29}>Images</NavItem>
                     <NavItem href="#thumbnail" key={17}>Thumbnail</NavItem>
                     <NavItem href="#listgroup" key={18}>List group</NavItem>
                     <NavItem href="#labels" key={19}>Labels</NavItem>
                     <NavItem href="#badges" key={20}>Badges</NavItem>
                     <NavItem href="#jumbotron" key={21}>Jumbotron</NavItem>
                     <NavItem href="#page-header" key={22}>Page Header</NavItem>
+                    <NavItem href="#responsive-embed" key={31}>Responsive embed</NavItem>
                     <NavItem href="#wells" key={23}>Wells</NavItem>
                     <NavItem href="#glyphicons" key={24}>Glyphicons</NavItem>
                     <NavItem href="#tables" key={25}>Tables</NavItem>

@@ -1,9 +1,10 @@
-/* eslint no-path-concat: 0, no-var: 0 */
+/* eslint no-path-concat: 0, no-var: 0, key-spacing: 0 */
 
 export default {
   Collapse:                      require('fs').readFileSync(__dirname + '/../examples/Collapse.js', 'utf8'),
   Fade:                          require('fs').readFileSync(__dirname + '/../examples/Fade.js', 'utf8'),
 
+  Breadcrumb:                    require('fs').readFileSync(__dirname + '/../examples/Breadcrumb.js', 'utf8'),
   ButtonTypes:                   require('fs').readFileSync(__dirname + '/../examples/ButtonTypes.js', 'utf8'),
   ButtonSizes:                   require('fs').readFileSync(__dirname + '/../examples/ButtonSizes.js', 'utf8'),
   ButtonBlock:                   require('fs').readFileSync(__dirname + '/../examples/ButtonBlock.js', 'utf8'),
@@ -80,6 +81,7 @@ export default {
   GridBasic:                     require('fs').readFileSync(__dirname + '/../examples/GridBasic.js', 'utf8'),
   ThumbnailAnchor:               require('fs').readFileSync(__dirname + '/../examples/ThumbnailAnchor.js', 'utf8'),
   ThumbnailDiv:                  require('fs').readFileSync(__dirname + '/../examples/ThumbnailDiv.js', 'utf8'),
+  ListGroupCustom:               require('fs').readFileSync(__dirname + '/../examples/ListGroupCustom.js', 'utf8'),
   ListGroupDefault:              require('fs').readFileSync(__dirname + '/../examples/ListGroupDefault.js', 'utf8'),
   ListGroupLinked:               require('fs').readFileSync(__dirname + '/../examples/ListGroupLinked.js', 'utf8'),
   ListGroupActive:               require('fs').readFileSync(__dirname + '/../examples/ListGroupActive.js', 'utf8'),
@@ -105,6 +107,9 @@ export default {
   InputHorizontal:               require('fs').readFileSync(__dirname + '/../examples/InputHorizontal.js', 'utf8'),
   InputWrapper:                  require('fs').readFileSync(__dirname + '/../examples/InputWrapper.js', 'utf8'),
   MenuItem:                      require('fs').readFileSync(__dirname + '/../examples/MenuItem.js', 'utf8'),
+  ImageResponsive:               require('fs').readFileSync(__dirname + '/../examples/ImageResponsive.js', 'utf8'),
+  ImageShape:                    require('fs').readFileSync(__dirname + '/../examples/ImageShape.js', 'utf8'),
+  ResponsiveEmbed:               require('fs').readFileSync(__dirname + '/../examples/ResponsiveEmbed.js', 'utf8'),
 
   Overlay:                       require('fs').readFileSync(__dirname + '/../examples/Overlay.js', 'utf8'),
   OverlayCustom:                 require('fs').readFileSync(__dirname + '/../examples/OverlayCustom.js', 'utf8')

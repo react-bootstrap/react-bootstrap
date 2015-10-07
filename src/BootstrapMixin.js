@@ -1,6 +1,6 @@
 import React from 'react';
 import styleMaps from './styleMaps';
-import CustomPropTypes from './utils/CustomPropTypes';
+import keyOf from 'react-prop-types/lib/keyOf';
 
 const BootstrapMixin = {
   propTypes: {
@@ -8,7 +8,7 @@ const BootstrapMixin = {
      * bootstrap className
      * @private
      */
-    bsClass: CustomPropTypes.keyOf(styleMaps.CLASSES),
+    bsClass: keyOf(styleMaps.CLASSES),
     /**
      * Style variants
      * @type {("default"|"primary"|"success"|"info"|"warning"|"danger"|"link")}
@@ -18,7 +18,7 @@ const BootstrapMixin = {
      * Size variants
      * @type {("xsmall"|"small"|"medium"|"large"|"xs"|"sm"|"md"|"lg")}
      */
-    bsSize: CustomPropTypes.keyOf(styleMaps.SIZES)
+    bsSize: keyOf(styleMaps.SIZES)
   },
 
   getBsClassSet() {

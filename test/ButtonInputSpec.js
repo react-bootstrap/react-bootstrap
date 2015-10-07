@@ -6,7 +6,7 @@ import ButtonInput from '../src/ButtonInput';
 import {shouldWarn} from './helpers';
 
 describe('ButtonInput', () => {
-  it('renders an input button element with type=button', function () {
+  it('renders an input button element with type=button', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" bsStyle="danger" wrapperClassName="test" />
     );
@@ -16,7 +16,7 @@ describe('ButtonInput', () => {
     assert.equal(node.getAttribute('class'), 'btn btn-danger');
   });
 
-  it('supports type=reset and type=submit', function () {
+  it('supports type=reset and type=submit', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" type="reset" />
     );
@@ -32,7 +32,7 @@ describe('ButtonInput', () => {
     assert.equal(node.getAttribute('type'), 'submit');
   });
 
-  it('throws warning about unsupported type', function () {
+  it('throws warning about unsupported type', () => {
     ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" type="password" />
     );
@@ -40,13 +40,13 @@ describe('ButtonInput', () => {
     shouldWarn('propType: Invalid');
   });
 
-  it('must not throw warning when bsStyle=danger', function () {
+  it('must not throw warning when bsStyle=danger', () => {
     ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" bsStyle="danger" />
     );
   });
 
-  it('throws warning about wrong type for bsStyle=error', function () {
+  it('throws warning about wrong type for bsStyle=error', () => {
     ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" bsStyle="submit" />
     );
@@ -54,7 +54,7 @@ describe('ButtonInput', () => {
     shouldWarn('propType: Invalid');
   });
 
-  it('throws a warning if given both children and a value property', function () {
+  it('throws a warning if given both children and a value property', () => {
     const testData = { value: 5, children: 'button' };
     const result = ButtonInput.propTypes.value(testData, 'value', 'ButtonInput');
 
@@ -62,7 +62,7 @@ describe('ButtonInput', () => {
     result.message.should.have.string('value and children');
   });
 
-  it('does not throw an error for strings and numbers', function () {
+  it('does not throw an error for strings and numbers', () => {
     let testData = { children: 'EUREKA' };
     let result = ButtonInput.propTypes.children(testData, 'children', 'ButtonInput');
     assert.notInstanceOf(result, Error);
@@ -72,7 +72,7 @@ describe('ButtonInput', () => {
     assert.notInstanceOf(result, Error);
   });
 
-  it('allows elements as children', function () {
+  it('allows elements as children', () => {
     ReactTestUtils.renderIntoDocument(
       <ButtonInput><span>blah</span></ButtonInput>
     );

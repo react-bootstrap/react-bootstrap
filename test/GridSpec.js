@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 
 import Grid from '../src/Grid';
 
-describe('Grid', function () {
-  it('uses "div" by default', function () {
+describe('Grid', () => {
+  it('uses "div" by default', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Grid />
     );
@@ -13,21 +13,21 @@ describe('Grid', function () {
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
   });
 
-  it('has "container" class by default', function () {
+  it('has "container" class by default', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Grid />
     );
     assert.equal(ReactDOM.findDOMNode(instance).className, 'container');
   });
 
-  it('turns grid into "full-width" layout via "fluid" property set', function () {
+  it('turns grid into "full-width" layout via "fluid" property set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Grid fluid />
     );
     assert.equal(ReactDOM.findDOMNode(instance).className, 'container-fluid');
   });
 
-  it('should merge additional classes passed in', function () {
+  it('should merge additional classes passed in', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Grid className="whatever" fluid />
     );
@@ -35,7 +35,7 @@ describe('Grid', function () {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bcontainer-fluid\b/));
   });
 
-  it('allows custom elements instead of "div"', function () {
+  it('allows custom elements instead of "div"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Grid componentClass='section' />
     );

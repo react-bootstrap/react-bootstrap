@@ -2,9 +2,9 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import * as FormControls from '../src/FormControls';
 
-describe('Form Controls', function () {
-  describe('Static', function () {
-    it('renders a p element wrapped around the given value', function () {
+describe('Form Controls', () => {
+  describe('Static', () => {
+    it('renders a p element wrapped around the given value', () => {
       const instance = ReactTestUtils.renderIntoDocument(
         <FormControls.Static value='v' />
       );
@@ -13,7 +13,7 @@ describe('Form Controls', function () {
       result.innerHTML.should.equal('v');
     });
 
-    it('getValue() pulls from either value or children', function () {
+    it('getValue() pulls from either value or children', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <FormControls.Static value='v' />
       );
@@ -27,14 +27,14 @@ describe('Form Controls', function () {
       instance.getValue().should.equal('5');
     });
 
-    it('throws an error if both value and children are provided', function () {
+    it('throws an error if both value and children are provided', () => {
       const testData = { value: 'blah', children: 'meh' };
       const result = FormControls.Static.propTypes.children(testData, 'children', 'Static');
 
       result.should.be.instanceOf(Error);
     });
 
-    it('allows elements as children', function () {
+    it('allows elements as children', () => {
       ReactTestUtils.renderIntoDocument(
         <FormControls.Static><span>blah</span></FormControls.Static>
       );

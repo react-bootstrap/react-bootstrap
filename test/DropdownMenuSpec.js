@@ -8,7 +8,7 @@ import MenuItem from '../src/MenuItem';
 
 import {getOne} from './helpers';
 
-describe('DropdownMenu', function() {
+describe('DropdownMenu', () => {
   const simpleMenu = (
     <DropdownMenu>
       <MenuItem eventKey='1'>Item 1</MenuItem>
@@ -18,7 +18,7 @@ describe('DropdownMenu', function() {
     </DropdownMenu>
   );
 
-  it('renders ul with dropdown-menu class', function() {
+  it('renders ul with dropdown-menu class', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleMenu);
     const node = ReactDOM.findDOMNode(instance);
 
@@ -26,14 +26,14 @@ describe('DropdownMenu', function() {
     node.className.should.match(/\bdropdown-menu\b/);
   });
 
-  it('has role="menu"', function() {
+  it('has role="menu"', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleMenu);
     const node = ReactDOM.findDOMNode(instance);
 
     node.getAttribute('role').should.equal('menu');
   });
 
-  it('has aria-labelledby=<id>', function() {
+  it('has aria-labelledby=<id>', () => {
     const instance1 = ReactTestUtils.renderIntoDocument(<DropdownMenu labelledBy='herpa' />);
     const instance2 = ReactTestUtils.renderIntoDocument(<DropdownMenu labelledBy='derpa' />);
     const node1 = ReactDOM.findDOMNode(instance1);
@@ -43,7 +43,7 @@ describe('DropdownMenu', function() {
     node2.getAttribute('aria-labelledby').should.equal('derpa');
   });
 
-  it('forwards onSelect handler to MenuItems', function(done) {
+  it('forwards onSelect handler to MenuItems', (done) => {
     const selectedEvents = [];
     const onSelect = (event, eventKey) => {
       selectedEvents.push(eventKey);
@@ -69,7 +69,7 @@ describe('DropdownMenu', function() {
     });
   });
 
-  it('applies pull right', function() {
+  it('applies pull right', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownMenu pullRight>
         <MenuItem>Item</MenuItem>
@@ -80,7 +80,7 @@ describe('DropdownMenu', function() {
     node.className.should.match(/\bdropdown-menu-right\b/);
   });
 
-  it('handles empty children', function() {
+  it('handles empty children', () => {
     ReactTestUtils.renderIntoDocument(
       <DropdownMenu pullRight>
         <MenuItem>Item</MenuItem>
@@ -89,20 +89,20 @@ describe('DropdownMenu', function() {
     );
   });
 
-  describe('focusable state', function() {
+  describe('focusable state', () => {
     let focusableContainer;
 
-    beforeEach(function() {
+    beforeEach(() => {
       focusableContainer = document.createElement('div');
       document.body.appendChild(focusableContainer);
     });
 
-    afterEach(function() {
+    afterEach(() => {
       ReactDOM.unmountComponentAtNode(focusableContainer);
       document.body.removeChild(focusableContainer);
     });
 
-    it('clicking anything outside the menu will request close', function() {
+    it('clicking anything outside the menu will request close', () => {
       const requestClose = sinon.stub();
       const instance = ReactDOM.render(
         <div>
@@ -122,8 +122,8 @@ describe('DropdownMenu', function() {
       requestClose.getCall(0).args.length.should.equal(0);
     });
 
-    describe('Keyboard Navigation', function() {
-      it('sets focus on next menu item when the key "down" is pressed', function() {
+    describe('Keyboard Navigation', () => {
+      it('sets focus on next menu item when the key "down" is pressed', () => {
         const instance = ReactDOM.render(simpleMenu, focusableContainer);
 
         const items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
@@ -136,7 +136,7 @@ describe('DropdownMenu', function() {
         }
       });
 
-      it('with last item is focused when the key "down" is pressed first item gains focus', function() {
+      it('with last item is focused when the key "down" is pressed first item gains focus', () => {
         const instance = ReactDOM.render(simpleMenu, focusableContainer);
 
         const items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
@@ -147,7 +147,7 @@ describe('DropdownMenu', function() {
         document.activeElement.should.equal(items[0]);
       });
 
-      it('sets focus on previous menu item when the key "up" is pressed', function() {
+      it('sets focus on previous menu item when the key "up" is pressed', () => {
         const instance = ReactDOM.render(simpleMenu, focusableContainer);
 
         const items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
@@ -160,7 +160,7 @@ describe('DropdownMenu', function() {
         }
       });
 
-      it('with first item focused when the key "up" is pressed last item gains focus', function() {
+      it('with first item focused when the key "up" is pressed last item gains focus', () => {
         const instance = ReactDOM.render(simpleMenu, focusableContainer);
 
         const items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
@@ -172,7 +172,7 @@ describe('DropdownMenu', function() {
       });
 
       ['esc', 'tab'].forEach(key => {
-        it(`when the key "${key}" is pressed the requestClose prop is invoked with the originating event`, function() {
+        it(`when the key "${key}" is pressed the requestClose prop is invoked with the originating event`, () => {
           const requestClose = sinon.spy();
           const instance = ReactDOM.render(
             <DropdownMenu onClose={requestClose}>
@@ -190,7 +190,7 @@ describe('DropdownMenu', function() {
     });
   });
 
-  it('Should pass props to dropdown', function () {
+  it('Should pass props to dropdown', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <DropdownMenu className="new-fancy-class">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>

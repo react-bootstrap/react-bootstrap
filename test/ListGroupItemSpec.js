@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 
 import ListGroupItem from '../src/ListGroupItem';
 
-describe('ListGroupItem', function () {
+describe('ListGroupItem', () => {
 
-  it('Should output a "span" with the class "list-group-item"', function () {
+  it('Should output a "span" with the class "list-group-item"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem>Text</ListGroupItem>
     );
@@ -14,7 +14,7 @@ describe('ListGroupItem', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
   });
 
-  it('Should output an "anchor" if "href" prop is set', function () {
+  it('Should output an "anchor" if "href" prop is set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem href='#test'>Anchor</ListGroupItem>
     );
@@ -22,8 +22,8 @@ describe('ListGroupItem', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
   });
 
-  it('Should output a "button" if an "onClick" handler is set', function () {
-    let noop = function () {};
+  it('Should output a "button" if an "onClick" handler is set', () => {
+    let noop = () => {};
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem onClick={noop}>Button</ListGroupItem>
     );
@@ -31,7 +31,7 @@ describe('ListGroupItem', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
   });
 
-  it('Should output an "li" if "listItem" prop is set', function () {
+  it('Should output an "li" if "listItem" prop is set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem listItem>Item 1</ListGroupItem>
     );
@@ -39,28 +39,28 @@ describe('ListGroupItem', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
   });
 
-  it('Should support "bsStyle" prop', function () {
+  it('Should support "bsStyle" prop', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem bsStyle='success'>Item 1</ListGroupItem>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item-success'));
   });
 
-  it('Should support "active" and "disabled" prop', function () {
+  it('Should support "active" and "disabled" prop', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem active>Item 1</ListGroupItem>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active'));
   });
 
-  it('Should support "disabled" prop', function () {
+  it('Should support "disabled" prop', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem disabled>Item 2</ListGroupItem>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled'));
   });
 
-  it('Should support "header" prop as a string', function () {
+  it('Should support "header" prop as a string', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem header='Heading'>Item text</ListGroupItem>
     );
@@ -74,7 +74,7 @@ describe('ListGroupItem', function () {
     assert.ok(node.lastChild.className.match(/\blist-group-item-text\b/));
   });
 
-  it('Should support "header" prop as a ReactComponent', function () {
+  it('Should support "header" prop as a ReactComponent', () => {
     let header = <h2>Heading</h2>;
     let instance = ReactTestUtils.renderIntoDocument(
       <ListGroupItem header={header}>Item text</ListGroupItem>

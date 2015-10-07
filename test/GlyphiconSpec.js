@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom';
 
 import Glyphicon from '../src/Glyphicon';
 
-describe('Glyphicon', function () {
-  it('Should have correct class', function () {
+describe('Glyphicon', () => {
+  it('Should have correct class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Glyphicon glyph='star' />
     );
@@ -13,7 +13,7 @@ describe('Glyphicon', function () {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bglyphicon-star\b/));
   });
 
-  it('renders without the .form-control-feedback class', function () {
+  it('renders without the .form-control-feedback class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Glyphicon glyph='star' />
     );
@@ -21,8 +21,8 @@ describe('Glyphicon', function () {
     assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bform-control-feedback\b/));
   });
 
-  context('when setting the formControlFeedback prop', function () {
-    it('should have the .form-control-feedback class set', function () {
+  context('when setting the formControlFeedback prop', () => {
+    it('should have the .form-control-feedback class set', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Glyphicon formControlFeedback glyph='star' />
       );
