@@ -1,7 +1,7 @@
 {
   "name": "react-bootstrap",
   "version": "0.26.2",
-  "description": "Bootstrap 3 components build with React",
+  "description": "Bootstrap 3 components built with React",
   "repository": {
     "type": "git",
     "url": "react-bootstrap/react-bootstrap"
@@ -18,7 +18,9 @@
     "docs-build": "babel-node tools/build-cli.js --docs-only",
     "docs": "babel-node docs/dev-run",
     "docs-prod": "npm run docs-build && NODE_ENV=production babel-node docs/server.js",
-    "docs-prod-unoptimized": "npm run docs-build -- --dev && NODE_ENV=production babel-node docs/server.js"
+    "docs-prod-unoptimized": "npm run docs-build -- --dev && NODE_ENV=production babel-node docs/server.js",
+    "minor": "node ./tools/release minor",
+    "patch": "node ./tools/release patch"
   },
   "main": "lib/index.js",
   "directories": {
@@ -40,7 +42,8 @@
   "author": "Stephen J. Collings <stevoland@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "react": ">=0.13"
+    "react": ">=0.14.0",
+    "react-dom": ">=0.14.0"
   },
   "devDependencies": {
     "babel": "^5.8.23",
@@ -67,6 +70,7 @@
     "fs-extra": "^0.23.0",
     "fs-promise": "^0.3.1",
     "glob": "^5.0.14",
+    "history": "^1.9.0",
     "http-proxy": "^1.11.1",
     "ip": "^1.0.1",
     "isparta-loader": "^1.0.0",
@@ -94,11 +98,11 @@
     "output-file-sync": "^1.1.1",
     "phantomjs": "^1.9.17",
     "portfinder": "^0.4.0",
-    "react": "^0.13.3",
+    "react": "^0.14.0",
     "react-component-metadata": "^1.3.0",
+    "react-dom": "^0.14.0",
     "react-hot-loader": "^1.2.8",
-    "react-prop-types": "^0.3.0",
-    "react-router": "^0.13.3",
+    "react-router": "^1.0.0-rc1",
     "release-script": "^0.5.0",
     "rimraf": "^2.4.2",
     "semver": "^5.0.1",
@@ -116,9 +120,10 @@
     "dom-helpers": "^2.2.4",
     "keycode": "^2.0.0",
     "lodash-compat": "^3.10.1",
-    "react-overlays": "^0.4.4",
+    "react-overlays": "^0.5.0",
+    "uncontrollable": "^3.1.1",
     "react-prop-types": "^0.3.0",
-    "uncontrollable": "^3.1.1"
+    "warning": "^2.0.0"
   },
   "release-script": {
     "skipBuildStep": "true",

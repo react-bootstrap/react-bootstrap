@@ -72,4 +72,4 @@ let dropdownExample = (
     </Dropdown>
   );
 
-React.render(dropdownExample, mountNode);
+ReactDOM.render(dropdownExample, mountNode);

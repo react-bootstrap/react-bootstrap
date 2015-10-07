@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Breadcrumb from '../src/Breadcrumb';
 
 describe('Breadcrumb', () => {
@@ -8,7 +10,7 @@ describe('Breadcrumb', () => {
       <Breadcrumb id="custom-id" />
     );
 
-    let olNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ol'));
+    let olNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ol');
     assert.equal(olNode.id, 'custom-id');
   });
 
@@ -17,7 +19,7 @@ describe('Breadcrumb', () => {
       <Breadcrumb />
     );
 
-    let olNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ol'));
+    let olNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ol');
     assert.include(olNode.className, 'breadcrumb');
   });
 
@@ -26,7 +28,7 @@ describe('Breadcrumb', () => {
       <Breadcrumb className="custom-one custom-two" />
     );
 
-    let olNode = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Breadcrumb));
+    let olNode = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Breadcrumb));
 
     let classes = olNode.className;
     assert.include(classes, 'breadcrumb');
@@ -39,7 +41,7 @@ describe('Breadcrumb', () => {
       <Breadcrumb />
     );
 
-    let olNode = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Breadcrumb));
+    let olNode = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Breadcrumb));
     assert.equal(olNode.getAttribute('role'), 'navigation');
   });
 
@@ -48,7 +50,7 @@ describe('Breadcrumb', () => {
       <Breadcrumb />
     );
 
-    let olNode = React.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Breadcrumb));
+    let olNode = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Breadcrumb));
     assert.equal(olNode.getAttribute('aria-label'), 'breadcrumbs');
   });
 });

@@ -6,4 +6,4 @@ const staticTextExample = (
   </form>
 );
 
-React.render(staticTextExample, mountNode);
+ReactDOM.render(staticTextExample, mountNode);

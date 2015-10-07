@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import PageHeader from '../src/PageHeader';
 
 describe('PageHeader', () => {
@@ -18,7 +20,7 @@ describe('PageHeader', () => {
         Content
       </PageHeader>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bpage-header\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpage-header\b/));
   });
 
 });

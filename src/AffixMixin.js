@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import domUtils from './utils/domUtils';
 import getOffset from 'dom-helpers/query/offset';
 import EventListener from './utils/EventListener';
@@ -38,7 +40,7 @@ const AffixMixin = {
       return;
     }
 
-    DOMNode = React.findDOMNode(this);
+    DOMNode = ReactDOM.findDOMNode(this);
     scrollHeight = domUtils.getDocumentHeight();
     scrollTop = window.pageYOffset;
     position = getOffset(DOMNode);

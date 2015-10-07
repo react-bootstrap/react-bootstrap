@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
 import Image from '../src/Image';
 
 describe('Image', () => {
@@ -8,7 +9,7 @@ describe('Image', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Image />
     );
-    let image = React.findDOMNode(instance);
+    let image = ReactDOM.findDOMNode(instance);
 
     image.nodeName.should.equal('IMG');
   });
@@ -17,7 +18,7 @@ describe('Image', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Image src="image.jpg" alt="this is alt" />
     );
-    let image = React.findDOMNode(instance);
+    let image = ReactDOM.findDOMNode(instance);
 
     assert.equal(image.getAttribute('src'), 'image.jpg');
     assert.equal(image.getAttribute('alt'), 'this is alt');
@@ -27,7 +28,7 @@ describe('Image', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Image responsive />
     );
-    let imageClassName = React.findDOMNode(instance).className;
+    let imageClassName = ReactDOM.findDOMNode(instance).className;
 
     imageClassName.should.match(/\bimg-responsive\b/);
   });
@@ -36,7 +37,7 @@ describe('Image', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Image rounded />
     );
-    let imageClassName = React.findDOMNode(instance).className;
+    let imageClassName = ReactDOM.findDOMNode(instance).className;
 
     imageClassName.should.match(/\bimg-rounded\b/);
   });
@@ -45,7 +46,7 @@ describe('Image', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Image circle />
     );
-    let imageClassName = React.findDOMNode(instance).className;
+    let imageClassName = ReactDOM.findDOMNode(instance).className;
 
     imageClassName.should.match(/\bimg-circle\b/);
   });
@@ -54,7 +55,7 @@ describe('Image', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Image thumbnail />
     );
-    let imageClassName = React.findDOMNode(instance).className;
+    let imageClassName = ReactDOM.findDOMNode(instance).className;
 
     imageClassName.should.match(/\bimg-thumbnail\b/);
   });

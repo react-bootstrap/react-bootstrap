@@ -22,4 +22,4 @@ const NavDropdownExample = React.createClass({
   }
 });
 
-React.render(<NavDropdownExample />, mountNode);
+ReactDOM.render(<NavDropdownExample />, mountNode);

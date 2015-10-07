@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import Navbar from '../src/Navbar';
-import NavBrand from '../src/NavBrand';
+import ReactDOM from 'react-dom';
+
 import Nav from '../src/Nav';
-import {shouldWarn} from './helpers';
+import NavBrand from '../src/NavBrand';
+import Navbar from '../src/Navbar';
+
+import {getOne, render, shouldWarn} from './helpers';
 
 describe('Navbar', () => {
 
@@ -11,7 +14,7 @@ describe('Navbar', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar />
     );
-    let nav = React.findDOMNode(instance);
+    let nav = ReactDOM.findDOMNode(instance);
     assert.equal(nav.nodeName, 'NAV');
     assert.ok(nav.className.match(/\bnavbar\b/));
     assert.ok(nav.getAttribute('role'), 'navigation');
@@ -56,14 +59,14 @@ describe('Navbar', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar role="banner"/>
     );
-    assert.ok(React.findDOMNode(instance).getAttribute('role'), 'banner');
+    assert.ok(ReactDOM.findDOMNode(instance).getAttribute('role'), 'banner');
   });
 
   it('Should override node class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar componentClass={'header'}/>
     );
-    assert.equal(React.findDOMNode(instance).nodeName, 'HEADER');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'HEADER');
   });
 
   it('Should throw a deprecation warning message when brand is passed', () => {
@@ -82,11 +85,13 @@ describe('Navbar', () => {
 
     assert.ok(header);
 
-    let brand = ReactTestUtils.findRenderedDOMComponentWithClass(header, 'navbar-brand');
+    let brand = getOne(header.getElementsByClassName('navbar-brand'));
 
     assert.ok(brand);
-    assert.equal(React.findDOMNode(brand).nodeName, 'SPAN');
-    assert.equal(React.findDOMNode(brand).innerText, 'Brand');
+    assert.equal(brand.nodeName, 'SPAN');
+    assert.equal(brand.innerText, 'Brand');
+
+    shouldWarn('deprecated');
   });
 
   it('Should add span element with navbar-brand class using NavBrand Component', () => {
@@ -99,8 +104,8 @@ describe('Navbar', () => {
     let brand = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-brand');
 
     assert.ok(brand);
-    assert.equal(React.findDOMNode(brand).nodeName, 'SPAN');
-    assert.equal(React.findDOMNode(brand).innerText, 'Brand');
+    assert.equal(brand.nodeName, 'SPAN');
+    assert.equal(brand.innerText, 'Brand');
   });
 
   it('Should add header with brand component', () => {
@@ -112,11 +117,13 @@ describe('Navbar', () => {
 
     assert.ok(header);
 
-    let brand = ReactTestUtils.findRenderedDOMComponentWithClass(header, 'navbar-brand');
+    let brand = getOne(header.getElementsByClassName('navbar-brand'));
 
     assert.ok(brand);
-    assert.equal(React.findDOMNode(brand).nodeName, 'A');
-    assert.equal(React.findDOMNode(brand).innerText, 'Brand');
+    assert.equal(brand.nodeName, 'A');
+    assert.equal(brand.innerText, 'Brand');
+
+    shouldWarn('deprecated');
   });
 
   it('Should add link element with navbar-brand class using NavBrand Component', () => {
@@ -129,8 +136,8 @@ describe('Navbar', () => {
     let brand = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-brand');
 
     assert.ok(brand);
-    assert.equal(React.findDOMNode(brand).nodeName, 'A');
-    assert.equal(React.findDOMNode(brand).innerText, 'Brand');
+    assert.equal(brand.nodeName, 'A');
+    assert.equal(brand.innerText, 'Brand');
   });
 
   it('Should add only one element with navbar-brand class using NavBrand Component', () => {
@@ -143,8 +150,10 @@ describe('Navbar', () => {
     let brands = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'navbar-brand');
 
     assert.equal(brands.length, 1);
-    assert.equal(React.findDOMNode(brands[0]).nodeName, 'SPAN');
-    assert.equal(React.findDOMNode(brands[0]).innerText, 'Brand');
+    assert.equal(brands[0].nodeName, 'SPAN');
+    assert.equal(brands[0].innerText, 'Brand');
+
+    shouldWarn('deprecated');
   });
 
   it('Should pass navbar prop to navs', () => {
@@ -160,18 +169,16 @@ describe('Navbar', () => {
   });
 
   it('Should pass nav prop to ul', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Nav />
-    );
+    let instance = render(<Nav />);
 
-    let navNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav'));
+    let navNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav');
     assert.ok(navNode);
     assert.equal(navNode.nodeName, 'UL');
     assert.equal(navNode.parentNode.nodeName, 'NAV');
 
-    instance.setProps({navbar: true});
+    instance = instance.renderWithProps({navbar: true});
 
-    navNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav'));
+    navNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav');
     assert.ok(navNode);
     assert.equal(navNode.nodeName, 'UL');
     assert.equal(navNode.parentNode.nodeName, 'DIV');

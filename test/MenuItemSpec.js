@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import MenuItem from '../src/MenuItem';
+
 import { shouldWarn } from './helpers';
 
 describe('MenuItem', () => {
   it('renders divider', () => {
     const instance = ReactTestUtils.renderIntoDocument(<MenuItem divider />);
-    const node = React.findDOMNode(instance);
+    const node = ReactDOM.findDOMNode(instance);
 
     node.className.should.match(/\bdivider\b/);
     node.getAttribute('role').should.equal('separator');
@@ -18,7 +21,7 @@ describe('MenuItem', () => {
         Some child
       </MenuItem>
     );
-    const node = React.findDOMNode(instance);
+    const node = ReactDOM.findDOMNode(instance);
 
     node.className.should.match(/\bdivider\b/);
     node.innerHTML.should.not.match(/Some child/);
@@ -27,7 +30,7 @@ describe('MenuItem', () => {
 
   it('renders header', () => {
     const instance = ReactTestUtils.renderIntoDocument(<MenuItem header>Header Text</MenuItem>);
-    const node = React.findDOMNode(instance);
+    const node = ReactDOM.findDOMNode(instance);
 
     node.className.should.match(/\bdropdown-header\b/);
     node.getAttribute('role').should.equal('heading');
@@ -42,8 +45,8 @@ describe('MenuItem', () => {
         Item
       </MenuItem>
     );
-    const node = React.findDOMNode(instance);
-    const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A').getDOMNode();
+    const node = ReactDOM.findDOMNode(instance);
+    const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
     node.getAttribute('role').should.equal('presentation');
     anchor.getAttribute('role').should.equal('menuitem');
@@ -112,7 +115,7 @@ describe('MenuItem', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <MenuItem onSelect={handleSelect} disabled>Text</MenuItem>
     );
-    const node = React.findDOMNode(instance);
+    const node = ReactDOM.findDOMNode(instance);
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
     node.className.should.match(/\bdisabled\b/);
@@ -131,13 +134,13 @@ describe('MenuItem', () => {
       </MenuItem>
     );
 
-    let node = React.findDOMNode(instance);
+    let node = ReactDOM.findDOMNode(instance);
 
     assert(node.className.match(/\btest-class\b/));
     assert.equal(node.getAttribute('href'), null);
     assert.equal(node.getAttribute('title'), null);
 
-    let anchorNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+    let anchorNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
 
     assert.notOk(anchorNode.className.match(/\btest-class\b/));
     assert.equal(anchorNode.getAttribute('href'), '#hi-mom!');
@@ -152,7 +155,7 @@ describe('MenuItem', () => {
     );
 
     let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
-    assert.equal(React.findDOMNode(anchor).getAttribute('target'), '_blank');
+    assert.equal(anchor.getAttribute('target'), '_blank');
   });
 
   it('should output an li', () => {
@@ -161,8 +164,8 @@ describe('MenuItem', () => {
         Title
       </MenuItem>
     );
-    assert.equal(React.findDOMNode(instance).nodeName, 'LI');
-    assert.equal(React.findDOMNode(instance).getAttribute('role'), 'presentation');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'LI');
+    assert.equal(ReactDOM.findDOMNode(instance).getAttribute('role'), 'presentation');
   });
 
 });

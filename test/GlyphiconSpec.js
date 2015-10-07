@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Glyphicon from '../src/Glyphicon';
 
 describe('Glyphicon', () => {
@@ -7,8 +9,8 @@ describe('Glyphicon', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Glyphicon glyph='star' />
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bglyphicon\b/));
-    assert.ok(React.findDOMNode(instance).className.match(/\bglyphicon-star\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bglyphicon\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bglyphicon-star\b/));
   });
 
   it('renders without the .form-control-feedback class', () => {
@@ -16,7 +18,7 @@ describe('Glyphicon', () => {
       <Glyphicon glyph='star' />
     );
 
-    assert.notOk(React.findDOMNode(instance).className.match(/\bform-control-feedback\b/));
+    assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bform-control-feedback\b/));
   });
 
   context('when setting the formControlFeedback prop', () => {
@@ -25,7 +27,7 @@ describe('Glyphicon', () => {
         <Glyphicon formControlFeedback glyph='star' />
       );
 
-      assert.ok(React.findDOMNode(instance).className.match(/\bform-control-feedback\b/));
+      assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bform-control-feedback\b/));
     });
   });
 });

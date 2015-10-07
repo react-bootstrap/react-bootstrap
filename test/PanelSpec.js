@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Panel from '../src/Panel';
 import Table from '../src/Table';
 
@@ -8,7 +10,7 @@ describe('Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel>Panel content</Panel>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bpanel\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpanel\b/));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-body'));
   });
 
@@ -16,22 +18,22 @@ describe('Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel bsStyle="default">Panel content</Panel>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bpanel-default\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpanel-default\b/));
   });
 
   it('Should honour additional classes passed in, adding not overriding', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel className="bob"/>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bbob\b/));
-    assert.ok(React.findDOMNode(instance).className.match(/\bpanel\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbob\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpanel\b/));
   });
 
   it('Should have unwrapped header', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel header="Heading">Panel content</Panel>
     );
-    let header = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading'));
+    let header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading');
     assert.equal(header.innerHTML, 'Heading');
   });
 
@@ -40,7 +42,7 @@ describe('Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel header={header}>Panel content</Panel>
     );
-    header = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading'));
+    header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading');
     assert.equal(header.firstChild.nodeName, 'H3');
     assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
     assert.equal(header.firstChild.innerHTML, 'Heading');
@@ -51,7 +53,7 @@ describe('Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel header={header} collapsible={true}>Panel content</Panel>
     );
-    header = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading'));
+    header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading');
     assert.equal(header.firstChild.nodeName, 'H3');
     assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
     assert.equal(header.firstChild.firstChild.nodeName, 'A');
@@ -63,7 +65,7 @@ describe('Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel header={header}>Panel content</Panel>
     );
-    header = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading'));
+    header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading');
     assert.equal(header.firstChild.nodeName, 'H3');
     assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
     assert.ok(header.firstChild.className.match(/\bcustom-class\b/));
@@ -74,7 +76,7 @@ describe('Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel footer="Footer">Panel content</Panel>
     );
-    let footer = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-footer'));
+    let footer = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-footer');
     assert.equal(footer.innerText, 'Footer');
   });
 
@@ -82,23 +84,23 @@ describe('Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel collapsible={true} expanded={true}>Panel content</Panel>
     );
-    assert.ok(React.findDOMNode(instance).querySelector('.panel-collapse.collapse.in'));
+    assert.ok(ReactDOM.findDOMNode(instance).querySelector('.panel-collapse.collapse.in'));
   });
 
   it('Should pass through dom properties', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel collapsible={false} id="testid">Panel content</Panel>
     );
-    assert.equal(React.findDOMNode(instance).id, 'testid');
+    assert.equal(ReactDOM.findDOMNode(instance).id, 'testid');
   });
 
   it('Should pass id to panel-collapse', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel collapsible={true} id="testid" header="Heading">Panel content</Panel>
     );
-    assert.notOk(React.findDOMNode(instance).id);
-    let collapse = React.findDOMNode(instance).querySelector('.panel-collapse');
-    let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
+    assert.notOk(ReactDOM.findDOMNode(instance).id);
+    let collapse = ReactDOM.findDOMNode(instance).querySelector('.panel-collapse');
+    let anchor = ReactDOM.findDOMNode(instance).querySelector('.panel-title a');
     assert.equal(collapse.id, 'testid');
     assert.equal(anchor.getAttribute('href'), '#testid');
   });
@@ -107,8 +109,8 @@ describe('Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel collapsible={true} expanded={true} header="Heading">Panel content</Panel>
     );
-    let collapse = React.findDOMNode(instance).querySelector('.panel-collapse');
-    let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
+    let collapse = ReactDOM.findDOMNode(instance).querySelector('.panel-collapse');
+    let anchor = ReactDOM.findDOMNode(instance).querySelector('.panel-title a');
     assert.ok(collapse.className.match(/\bin\b/));
     assert.notOk(anchor.className.match(/\bcollapsed\b/));
   });
@@ -117,8 +119,8 @@ describe('Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Panel collapsible={true} expanded={false} header="Heading">Panel content</Panel>
     );
-    let collapse = React.findDOMNode(instance).querySelector('.panel-collapse');
-    let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
+    let collapse = ReactDOM.findDOMNode(instance).querySelector('.panel-collapse');
+    let anchor = ReactDOM.findDOMNode(instance).querySelector('.panel-title a');
     assert.notOk(collapse.className.match(/\bin\b/));
     assert.ok(anchor.className.match(/\bcollapsed\b/));
   });
@@ -132,7 +134,7 @@ describe('Panel', () => {
       <Panel collapsible={true} onSelect={handleSelect} header="Click me" eventKey='1'>Panel content</Panel>
     );
     let title = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-title');
-    ReactTestUtils.Simulate.click(React.findDOMNode(title).firstChild);
+    ReactTestUtils.Simulate.click(title.firstChild);
   });
 
   it('Should toggle when uncontrolled', () => {
@@ -143,7 +145,7 @@ describe('Panel', () => {
     assert.notOk(instance.state.expanded);
 
     ReactTestUtils.Simulate.click(
-      React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-title')).firstChild
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-title').firstChild
     );
 
     assert.ok(instance.state.expanded);
@@ -158,7 +160,7 @@ describe('Panel', () => {
       </Panel>
     );
 
-    let children = React.findDOMNode(instance).children;
+    let children = ReactDOM.findDOMNode(instance).children;
     assert.equal(children.length, 3);
 
     assert.equal(children[0].nodeName, 'DIV');
@@ -178,7 +180,7 @@ describe('Panel', () => {
       </Panel>
     );
 
-    let children = React.findDOMNode(instance).children;
+    let children = ReactDOM.findDOMNode(instance).children;
     assert.equal(children.length, 1);
 
     assert.equal(children[0].nodeName, 'TABLE');
@@ -191,7 +193,7 @@ describe('Panel', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Panel collapsible={true} expanded={true} header="Heading">Panel content</Panel>
       );
-      let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
+      let anchor = ReactDOM.findDOMNode(instance).querySelector('.panel-title a');
       assert.equal(anchor.getAttribute('aria-expanded'), 'true');
     });
 
@@ -199,7 +201,7 @@ describe('Panel', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Panel collapsible={true} expanded={false} header="Heading">Panel content</Panel>
       );
-      let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
+      let anchor = ReactDOM.findDOMNode(instance).querySelector('.panel-title a');
       assert.equal(anchor.getAttribute('aria-expanded'), 'false');
     });
 
@@ -208,8 +210,8 @@ describe('Panel', () => {
         <Panel id='panel-1' collapsible expanded header="Heading">Panel content</Panel>
       );
 
-      let collapse = React.findDOMNode(instance).querySelector('.panel-collapse');
-      let anchor = React.findDOMNode(instance).querySelector('.panel-title a');
+      let collapse = ReactDOM.findDOMNode(instance).querySelector('.panel-collapse');
+      let anchor = ReactDOM.findDOMNode(instance).querySelector('.panel-title a');
 
       assert.equal(collapse.getAttribute('id'), 'panel-1');
       assert.equal(anchor.getAttribute('aria-controls'), 'panel-1');

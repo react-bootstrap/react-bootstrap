@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import ProgressBar from '../src/ProgressBar';
-import {shouldWarn} from './helpers';
+import ReactDOM from 'react-dom';
 
-const getProgressBarNode = wrapper => {
-  return React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(wrapper, 'progress-bar'));
-};
+import ProgressBar from '../src/ProgressBar';
+
+import {getOne, shouldWarn} from './helpers';
+
+function getProgressBarNode(wrapper) {
+  return ReactTestUtils.findRenderedDOMComponentWithClass(wrapper, 'progress-bar');
+}
 
 describe('ProgressBar', () => {
   it('Should output a progress bar with wrapper', () => {
@@ -13,8 +16,8 @@ describe('ProgressBar', () => {
       <ProgressBar min={0} max={10} now={0} />
     );
 
-    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
-    assert.ok(React.findDOMNode(instance).className.match(/\bprogress\b/));
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bprogress\b/));
     assert.ok(getProgressBarNode(instance).className.match(/\bprogress-bar\b/));
     assert.equal(getProgressBarNode(instance).getAttribute('role'), 'progressbar');
   });
@@ -98,7 +101,7 @@ describe('ProgressBar', () => {
       <ProgressBar min={0} max={10} now={5} bsStyle='primary' />
     );
 
-    assert.equal(React.findDOMNode(instance).innerText, '');
+    assert.equal(ReactDOM.findDOMNode(instance).innerText, '');
   });
 
   it('Should have label', () => {
@@ -107,7 +110,7 @@ describe('ProgressBar', () => {
         label='min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s' />
     );
 
-    assert.equal(React.findDOMNode(instance).innerText, 'min:0, max:10, now:5, percent:50, bsStyle:primary');
+    assert.equal(ReactDOM.findDOMNode(instance).innerText, 'min:0, max:10, now:5, percent:50, bsStyle:primary');
   });
 
   it('Should have screen reader only label', () => {
@@ -117,7 +120,7 @@ describe('ProgressBar', () => {
     );
     let srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
 
-    assert.equal(React.findDOMNode(srLabel).innerText, 'min:0, max:10, now:5, percent:50, bsStyle:primary');
+    assert.equal(srLabel.innerText, 'min:0, max:10, now:5, percent:50, bsStyle:primary');
   });
 
   it('Should have a label that is a React component', () => {
@@ -142,7 +145,7 @@ describe('ProgressBar', () => {
     );
 
     let srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
-    let component = ReactTestUtils.findRenderedDOMComponentWithClass(srLabel, 'special-label');
+    let component = getOne(srLabel.getElementsByClassName('special-label'));
 
     assert.ok(component);
   });
@@ -152,7 +155,7 @@ describe('ProgressBar', () => {
       <ProgressBar min={1} max={11} now={6} striped />
     );
 
-    assert.ok(React.findDOMNode(instance).firstChild.className.match(/\bprogress-bar-striped\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).firstChild.className.match(/\bprogress-bar-striped\b/));
   });
 
   it('Should show animated striped bar', () => {
@@ -160,7 +163,7 @@ describe('ProgressBar', () => {
       <ProgressBar min={1} max={11} now={6} active />
     );
 
-    const barClassName = React.findDOMNode(instance).firstChild.className;
+    const barClassName = ReactDOM.findDOMNode(instance).firstChild.className;
 
     assert.ok(barClassName.match(/\bprogress-bar-striped\b/));
     assert.ok(barClassName.match(/\bactive\b/));
@@ -173,7 +176,7 @@ describe('ProgressBar', () => {
         <ProgressBar key={2} now={30} />
       </ProgressBar>
     );
-    let wrapper = React.findDOMNode(instance);
+    let wrapper = ReactDOM.findDOMNode(instance);
     let bar1 = wrapper.firstChild;
     let bar2 = wrapper.lastChild;
 
@@ -191,7 +194,7 @@ describe('ProgressBar', () => {
         <ProgressBar striped key={2} now={30} />
       </ProgressBar>
     );
-    let wrapper = React.findDOMNode(instance);
+    let wrapper = ReactDOM.findDOMNode(instance);
     let bar1 = wrapper.firstChild;
     let bar2 = wrapper.lastChild;
 

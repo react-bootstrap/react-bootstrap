@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Modal from '../src/Modal';
-import { render, shouldWarn } from './helpers';
+
+import {getOne, render, shouldWarn} from './helpers';
 
 describe('Modal', () => {
   let mountPoint;
@@ -12,7 +15,7 @@ describe('Modal', () => {
   });
 
   afterEach(() => {
-    React.unmountComponentAtNode(mountPoint);
+    ReactDOM.unmountComponentAtNode(mountPoint);
     document.body.removeChild(mountPoint);
   });
 
@@ -24,8 +27,7 @@ describe('Modal', () => {
       </Modal>
     , mountPoint);
 
-    assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance.refs.modal, 'strong'));
+    assert.ok(getOne(instance.refs.modal.querySelectorAll('strong')));
   });
 
   it('Should add modal-open class to the modal container while open', (done) => {
@@ -59,14 +61,12 @@ describe('Modal', () => {
 
     let modal = ReactTestUtils.findRenderedComponentWithType(instance, Modal);
 
-    assert.ok(React.findDOMNode(instance).className.match(/\bmodal-open\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bmodal-open\b/));
 
-    let backdrop = React.findDOMNode(modal.refs.backdrop);
-
-    ReactTestUtils.Simulate.click(backdrop);
+    ReactTestUtils.Simulate.click(modal.refs.backdrop);
 
     setTimeout(() => {
-      assert.equal(React.findDOMNode(instance).className.length, 0);
+      assert.equal(ReactDOM.findDOMNode(instance).className.length, 0);
       done();
     }, 0);
 
@@ -80,9 +80,7 @@ describe('Modal', () => {
       </Modal>
     , mountPoint);
 
-    let backdrop = React.findDOMNode(instance.refs.backdrop);
-
-    ReactTestUtils.Simulate.click(backdrop);
+    ReactTestUtils.Simulate.click(instance.refs.backdrop);
   });
 
   it('Should close the modal when the modal dialog is clicked', (done) => {
@@ -94,7 +92,7 @@ describe('Modal', () => {
       </Modal>
     , mountPoint);
 
-    let dialog = React.findDOMNode(instance.refs.dialog);
+    let dialog = ReactDOM.findDOMNode(instance.refs.dialog);
 
     ReactTestUtils.Simulate.click(dialog);
   });
@@ -107,9 +105,7 @@ describe('Modal', () => {
       </Modal>
     , mountPoint);
 
-    let backdrop = React.findDOMNode(instance.refs.backdrop);
-
-    ReactTestUtils.Simulate.click(backdrop);
+    ReactTestUtils.Simulate.click(instance.refs.backdrop);
 
     expect(onHideSpy).to.not.have.been.called;
   });
@@ -124,8 +120,7 @@ describe('Modal', () => {
       </Modal>
     , mountPoint);
 
-    let button = React.findDOMNode(instance.refs.modal)
-        .getElementsByClassName('close')[0];
+    let button = instance.refs.modal.getElementsByClassName('close')[0];
 
     ReactTestUtils.Simulate.click(button);
   });
@@ -138,7 +133,7 @@ describe('Modal', () => {
       </Modal>
     , mountPoint);
 
-    let dialog = React.findDOMNode(instance.refs.dialog);
+    let dialog = ReactDOM.findDOMNode(instance.refs.dialog);
 
     assert.ok(dialog.className.match(/\bmymodal\b/));
   });
@@ -151,14 +146,13 @@ describe('Modal', () => {
       </Modal>
     , mountPoint);
 
-    let dialog = React.findDOMNode(instance.refs.dialog);
-    let backdrop = React.findDOMNode(instance.refs.backdrop);
+    let dialog = ReactDOM.findDOMNode(instance.refs.dialog);
 
     assert.ok(dialog.className.match(/\bmymodal\b/));
     assert.ok(dialog.children[0].className.match(/\bmymodal-dialog\b/));
     assert.ok(dialog.children[0].children[0].className.match(/\bmymodal-content\b/));
 
-    assert.ok(backdrop.className.match(/\bmymodal-backdrop\b/));
+    assert.ok(instance.refs.backdrop.className.match(/\bmymodal-backdrop\b/));
 
 
     shouldWarn("Invalid prop 'bsClass' of value 'mymodal'");
@@ -172,7 +166,7 @@ describe('Modal', () => {
       </Modal>
     , mountPoint);
 
-    let dialog = React.findDOMNode(instance.refs.modal).getElementsByClassName('modal-dialog')[0];
+    let dialog = getOne(instance.refs.modal.getElementsByClassName('modal-dialog'));
     assert.ok(dialog.className.match(/\bmodal-sm\b/));
   });
 
@@ -184,8 +178,8 @@ describe('Modal', () => {
       </Modal>
     , mountPoint);
 
-    let dialog = ReactTestUtils.findRenderedDOMComponentWithClass(instance.refs.modal, 'modal-dialog');
-    assert.match(dialog.props.className, /\btestCss\b/);
+    let dialog = instance.refs.modal.querySelector('.modal-dialog');
+    assert.match(dialog.className, /\btestCss\b/);
   });
 
   it('Should assign refs correctly when no backdrop', () => {
@@ -202,7 +196,7 @@ describe('Modal', () => {
   it('Should use dialogComponent', () => {
     let noOp = () => {};
 
-    class CustomDialog {
+    class CustomDialog extends React.Component {
       render() { return <div {...this.props}/>; }
     }
 
@@ -233,7 +227,7 @@ describe('Modal', () => {
         onEntering={increment}
         onEntered={()=> {
           increment();
-          instance.setProps({ show: false });
+          instance.renderWithProps({ show: false });
         }}
       >
         <strong>Message</strong>
@@ -268,7 +262,7 @@ describe('Modal', () => {
     });
 
     afterEach(() => {
-      React.unmountComponentAtNode(focusableContainer);
+      ReactDOM.unmountComponentAtNode(focusableContainer);
       document.body.removeChild(focusableContainer);
     });
 

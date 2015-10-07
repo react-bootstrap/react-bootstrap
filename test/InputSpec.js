@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import Input from '../src/Input';
+import ReactDOM from 'react-dom';
+
 import Button from '../src/Button';
 import DropdownButton from '../src/DropdownButton';
-import MenuItem from '../src/MenuItem';
 import Glyphicon from '../src/Glyphicon';
+import Input from '../src/Input';
+import MenuItem from '../src/MenuItem';
+
 import {shouldWarn} from './helpers';
 
 describe('Input', () => {
@@ -29,7 +32,7 @@ describe('Input', () => {
 
     let select = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'select');
     assert.ok(select);
-    assert.equal(React.findDOMNode(select).children.length, 2);
+    assert.equal(select.children.length, 2);
     assert.equal(instance.getValue(), 'v');
   });
 
@@ -55,7 +58,7 @@ describe('Input', () => {
       <Input type="text" defaultValue="v" />
     );
 
-    let node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'));
+    let node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input');
     assert.equal(node.getAttribute('type'), 'text');
     assert.equal(instance.getValue(), 'v');
   });
@@ -65,7 +68,7 @@ describe('Input', () => {
       <Input groupClassName="group" bsStyle="error" />
     );
 
-    let node = React.findDOMNode(instance);
+    let node = ReactDOM.findDOMNode(instance);
     assert.include(node.className, 'form-group');
     assert.include(node.className, 'group');
     assert.include(node.className, 'has-error');
@@ -76,7 +79,7 @@ describe('Input', () => {
       <Input label="Label" labelClassName="label" id="input" />
     );
 
-    let node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'label'));
+    let node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'label');
     assert.ok(node);
     assert.include(node.className, 'label');
     assert.equal(node.textContent, 'Label');
@@ -200,7 +203,7 @@ describe('Input', () => {
       <Input type="file" wrapperClassName="wrapper" label="Label" help="h" />
     );
 
-    let node = React.findDOMNode(instance);
+    let node = ReactDOM.findDOMNode(instance);
     assert.include(node.className, 'form-group');
     assert.equal(node.children[0].tagName.toLowerCase(), 'label');
     assert.include(node.children[1].className, 'wrapper');
@@ -215,7 +218,7 @@ describe('Input', () => {
       <Input type="checkbox" wrapperClassName="wrapper" label="Label" help="h" />
     );
 
-    let node = React.findDOMNode(instance);
+    let node = ReactDOM.findDOMNode(instance);
     assert.include(node.className, 'form-group');
     assert.include(node.children[0].className, 'wrapper');
     assert.include(node.children[0].children[0].className, 'checkbox');
@@ -229,7 +232,7 @@ describe('Input', () => {
       <Input type="text" label="l" wrapperClassName="wrapper" addonAfter="a" hasFeedback={true} help="h"/>
     );
 
-    let node = React.findDOMNode(instance);
+    let node = ReactDOM.findDOMNode(instance);
     assert.include(node.className, 'form-group');
     assert.equal(node.children[0].tagName.toLowerCase(), 'label');
     assert.include(node.children[1].className, 'wrapper');
@@ -277,7 +280,7 @@ describe('Input', () => {
       <Input type="text" disabled={true} />
     );
 
-    let node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input'));
+    let node = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'input');
     assert.isNotNull(node.getAttribute('disabled'));
   });
 

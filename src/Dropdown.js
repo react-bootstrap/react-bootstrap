@@ -1,20 +1,23 @@
-import React, { cloneElement } from 'react';
-import keycode from 'keycode';
 import classNames from 'classnames';
-import uncontrollable from 'uncontrollable';
-import ButtonGroup from './ButtonGroup';
-import DropdownToggle from './DropdownToggle';
-import DropdownMenu from './DropdownMenu';
-import CustomPropTypes from './utils/CustomPropTypes';
-import ValidComponentChildren from './utils/ValidComponentChildren';
-import createChainedFunction from './utils/createChainedFunction';
+import activeElement from 'dom-helpers/activeElement';
+import contains from 'dom-helpers/query/contains';
+import keycode from 'keycode';
 import find from 'lodash-compat/collection/find';
 import omit from 'lodash-compat/object/omit';
+import React, { cloneElement } from 'react';
+import ReactDOM from 'react-dom';
 import all from 'react-prop-types/lib/all';
 import elementType from 'react-prop-types/lib/elementType';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
-import activeElement from 'dom-helpers/activeElement';
-import contains from 'dom-helpers/query/contains';
+import uncontrollable from 'uncontrollable';
+
+import ButtonGroup from './ButtonGroup';
+import DropdownMenu from './DropdownMenu';
+import DropdownToggle from './DropdownToggle';
+
+import createChainedFunction from './utils/createChainedFunction';
+import CustomPropTypes from './utils/CustomPropTypes';
+import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const TOGGLE_REF = 'toggle-btn';
 const TOGGLE_ROLE = DropdownToggle.defaultProps.bsRole;
@@ -59,7 +62,7 @@ class Dropdown extends React.Component {
   componentWillUpdate(nextProps) {
     if (!nextProps.open && this.props.open) {
       this._focusInDropdown = contains(
-        React.findDOMNode(this.refs.menu),
+        ReactDOM.findDOMNode(this.refs.menu),
         activeElement(document)
       );
     }
@@ -169,7 +172,7 @@ class Dropdown extends React.Component {
   }
 
   focus() {
-    let toggle = React.findDOMNode(this.refs[TOGGLE_REF]);
+    let toggle = ReactDOM.findDOMNode(this.refs[TOGGLE_REF]);
 
     if (toggle && toggle.focus) {
       toggle.focus();

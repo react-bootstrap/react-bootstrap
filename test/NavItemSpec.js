@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import NavItem from '../src/NavItem';
 
 describe('NavItem', () => {
@@ -27,7 +29,7 @@ describe('NavItem', () => {
         Item content
       </NavItem>
     );
-    let linkElement = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+    let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.ok(linkElement.href.indexOf('/some/unique-thing/') >= 0);
     assert.equal(linkElement.title, 'content');
   });
@@ -39,8 +41,8 @@ describe('NavItem', () => {
       </NavItem>
     );
 
-    assert.ok(!React.findDOMNode(instance).hasAttribute('href'));
-    assert.ok(!React.findDOMNode(instance).hasAttribute('title'));
+    assert.ok(!ReactDOM.findDOMNode(instance).hasAttribute('href'));
+    assert.ok(!ReactDOM.findDOMNode(instance).hasAttribute('title'));
   });
 
   it('Should pass tabIndex to the anchor', () => {
@@ -50,7 +52,7 @@ describe('NavItem', () => {
       </NavItem>
     );
 
-    let node = React.findDOMNode(instance);
+    let node = ReactDOM.findDOMNode(instance);
 
     expect(node.hasAttribute('tabindex')).to.equal(false);
     expect(node.firstChild.getAttribute('tabindex')).to.equal('3');
@@ -86,7 +88,7 @@ describe('NavItem', () => {
     let instance = ReactTestUtils.renderIntoDocument(
           <NavItem href="/some/unique-thing/" target="_blank">Item content</NavItem>
         );
-    let linkElement = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+    let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.equal(linkElement.target, '_blank');
   });
 
@@ -108,7 +110,7 @@ describe('NavItem', () => {
           <NavItem href="#" target="_blank">Item content</NavItem>
         );
 
-    let linkElement = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+    let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert(linkElement.outerHTML.match('role="button"'), true);
   });
 
@@ -117,7 +119,7 @@ describe('NavItem', () => {
           <NavItem href="/path/to/stuff" target="_blank">Item content</NavItem>
         );
 
-    let linkElement = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+    let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.equal(linkElement.outerHTML.match('role="button"'), null);
   });
 
@@ -128,7 +130,7 @@ describe('NavItem', () => {
           <NavItem href="/path/to/stuff" target="_blank" aria-controls='hi'>Item content</NavItem>
         );
 
-      let linkElement = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+      let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
 
       assert.ok(linkElement.hasAttribute('aria-controls'));
     });
@@ -138,8 +140,7 @@ describe('NavItem', () => {
           <NavItem active>Item content</NavItem>
         );
 
-      let linkElement = React.findDOMNode(
-        ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+      let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
 
       assert.equal(linkElement.getAttribute('aria-selected'), 'true');
     });
@@ -149,8 +150,7 @@ describe('NavItem', () => {
           <NavItem role='tab'>Item content</NavItem>
         );
 
-      let linkElement = React.findDOMNode(
-        ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+      let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
 
       assert.equal(linkElement.getAttribute('role'), 'tab');
     });

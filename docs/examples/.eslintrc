@@ -6,6 +6,7 @@
   "globals": {
     "mountNode",
     "React",
+    "ReactDOM",
     "classNames",
     "Accordion",
     "Alert",

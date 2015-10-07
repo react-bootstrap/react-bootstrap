@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Button from '../src/Button';
 
 describe('Button', () => {
@@ -9,7 +11,7 @@ describe('Button', () => {
         Title
       </Button>
     );
-    assert.equal(React.findDOMNode(instance).nodeName, 'BUTTON');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'BUTTON');
   });
 
   it('Should have type=button by default', () => {
@@ -18,7 +20,7 @@ describe('Button', () => {
         Title
       </Button>
     );
-    assert.equal(React.findDOMNode(instance).getAttribute('type'), 'button');
+    assert.equal(ReactDOM.findDOMNode(instance).getAttribute('type'), 'button');
   });
 
   it('Should show the type if passed one', () => {
@@ -27,7 +29,7 @@ describe('Button', () => {
         Title
       </Button>
     );
-    assert.equal(React.findDOMNode(instance).getAttribute('type'), 'submit');
+    assert.equal(ReactDOM.findDOMNode(instance).getAttribute('type'), 'submit');
   });
 
   it('Should output an anchor if called with a href', () => {
@@ -37,8 +39,8 @@ describe('Button', () => {
         Title
       </Button>
     );
-    assert.equal(React.findDOMNode(instance).nodeName, 'A');
-    assert.equal(React.findDOMNode(instance).getAttribute('href'), href);
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'A');
+    assert.equal(ReactDOM.findDOMNode(instance).getAttribute('href'), href);
   });
 
   it('Should output an anchor if called with a target', () => {
@@ -48,8 +50,8 @@ describe('Button', () => {
         Title
       </Button>
     );
-    assert.equal(React.findDOMNode(instance).nodeName, 'A');
-    assert.equal(React.findDOMNode(instance).getAttribute('target'), target);
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'A');
+    assert.equal(ReactDOM.findDOMNode(instance).getAttribute('target'), target);
   });
 
   it('Should call onClick callback', (done) => {
@@ -61,7 +63,7 @@ describe('Button', () => {
         Title
       </Button>
     );
-    ReactTestUtils.Simulate.click(React.findDOMNode(instance));
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(instance));
   });
 
   it('Should be disabled', () => {
@@ -70,7 +72,7 @@ describe('Button', () => {
         Title
       </Button>
     );
-    assert.ok(React.findDOMNode(instance).disabled);
+    assert.ok(ReactDOM.findDOMNode(instance).disabled);
   });
 
   it('Should be disabled link', () => {
@@ -79,7 +81,7 @@ describe('Button', () => {
         Title
       </Button>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bdisabled\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bdisabled\b/));
   });
 
   it('Should have block class', () => {
@@ -88,7 +90,7 @@ describe('Button', () => {
         Title
       </Button>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bbtn-block\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-block\b/));
   });
 
   it('Should apply bsStyle class', () => {
@@ -97,7 +99,7 @@ describe('Button', () => {
         Title
       </Button>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bbtn-danger\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-danger\b/));
   });
 
   it('Should honour additional classes passed in, adding not overriding', () => {
@@ -106,8 +108,8 @@ describe('Button', () => {
         Title
       </Button>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bbob\b/));
-    assert.ok(React.findDOMNode(instance).className.match(/\bbtn-danger\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbob\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-danger\b/));
   });
 
   it('Should default to bsStyle="default"', () => {
@@ -125,7 +127,7 @@ describe('Button', () => {
         Title
       </Button>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bactive\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bactive\b/));
   });
 
   it('Should render an anchor in a list item when in a nav', () => {
@@ -135,11 +137,11 @@ describe('Button', () => {
       </Button>
     );
 
-    let li = React.findDOMNode(instance);
+    let li = ReactDOM.findDOMNode(instance);
     let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.equal(li.nodeName, 'LI');
     assert.ok(li.className.match(/\bactive\b/));
-    assert.ok(anchor.props.href, '#');
+    assert.ok(anchor.getAttribute('href'), '#');
   });
 
   it('Should render an anchor when in a navDropdown', () => {
@@ -149,7 +151,7 @@ describe('Button', () => {
       </Button>
     );
 
-    let anchor = React.findDOMNode(instance);
+    let anchor = ReactDOM.findDOMNode(instance);
     assert.equal(anchor.nodeName, 'A');
     assert.ok(anchor.getAttribute('href'), '#');
   });

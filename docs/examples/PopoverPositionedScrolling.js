@@ -19,4 +19,4 @@ class Positioner extends React.Component {
   }
 }
 
-React.render(<Positioner />, mountNode);
+ReactDOM.render(<Positioner />, mountNode);

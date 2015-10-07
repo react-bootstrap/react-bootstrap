@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Label from '../src/Label';
 
 describe('Label', () => {
@@ -19,7 +21,7 @@ describe('Label', () => {
         Message
       </Label>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\blabel\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\blabel\b/));
   });
 
   it('Should have bsStyle by default', () => {
@@ -28,7 +30,7 @@ describe('Label', () => {
         Message
       </Label>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\blabel-default\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\blabel-default\b/));
   });
 
 });

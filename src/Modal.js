@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
-import React, { cloneElement } from 'react';
+
 import classNames from 'classnames';
+import React, {cloneElement} from 'react';
+import ReactDOM from 'react-dom';
 import domUtils from './utils/domUtils';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import EventListener from './utils/EventListener';
@@ -36,7 +38,7 @@ function containerClientHeight(container, context) {
 }
 
 function getContainer(context) {
-  return (context.props.container && React.findDOMNode(context.props.container)) ||
+  return (context.props.container && ReactDOM.findDOMNode(context.props.container)) ||
     domUtils.ownerDocument(context).body;
 }
 
@@ -317,10 +319,6 @@ const Modal = React.createClass({
       container.style.paddingRight = parseInt(this._originalPadding || 0, 10) + getScrollbarSize() + 'px';
     }
 
-    if (this.props.backdrop) {
-      this.iosClickHack();
-    }
-
     this.setState(this._getStyles(), () => this.focusModalContent());
   },
 
@@ -376,10 +374,9 @@ const Modal = React.createClass({
   },
 
   focusModalContent() {
-    let modalContent = React.findDOMNode(this.refs.dialog);
+    let modalContent = ReactDOM.findDOMNode(this.refs.dialog);
     let current = activeElement(domUtils.ownerDocument(this));
     let focusInModal = current && contains(modalContent, current);
-
 
     if (modalContent && this.props.autoFocus && !focusInModal) {
       this.lastFocus = current;
@@ -400,19 +397,11 @@ const Modal = React.createClass({
     }
 
     let active = activeElement(domUtils.ownerDocument(this));
-    let modal = React.findDOMNode(this.refs.dialog);
+    let modal = ReactDOM.findDOMNode(this.refs.dialog);
 
     if (modal && modal !== active && !contains(modal, active)) {
       modal.focus();
     }
-  },
-
-  iosClickHack() {
-    // IOS only allows click events to be delegated to the document on elements
-    // it considers 'clickable' - anchors, buttons, etc. We fake a click handler on the
-    // DOM nodes themselves. Remove if handled by React: https://github.com/facebook/react/issues/1169
-    React.findDOMNode(this.refs.modal).onclick = () => {};
-    React.findDOMNode(this.refs.backdrop).onclick = () => {};
   },
 
   _getStyles() {
@@ -420,7 +409,7 @@ const Modal = React.createClass({
       return {};
     }
 
-    let node = React.findDOMNode(this.refs.modal);
+    let node = ReactDOM.findDOMNode(this.refs.modal);
     let scrollHt = node.scrollHeight;
     let container = getContainer(this);
     let containerIsOverflowing = this._containerIsOverflowing;

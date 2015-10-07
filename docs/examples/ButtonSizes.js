@@ -19,4 +19,4 @@ const buttonsInstance = (
   </div>
 );
 
-React.render(buttonsInstance, mountNode);
+ReactDOM.render(buttonsInstance, mountNode);

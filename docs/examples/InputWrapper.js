@@ -11,4 +11,4 @@ const inputWrapperInstance = (
   </Input>
 );
 
-React.render(inputWrapperInstance, mountNode);
+ReactDOM.render(inputWrapperInstance, mountNode);

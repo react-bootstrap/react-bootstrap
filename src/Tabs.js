@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { cloneElement, findDOMNode } from 'react';
+import React, { cloneElement } from 'react';
+import ReactDOM from 'react-dom';
 
 import Col from './Col';
 import Nav from './Nav';
@@ -137,7 +138,7 @@ const Tabs = React.createClass({
     if (this._needsRefocus) {
       this._needsRefocus = false;
       if (tabs && tabIdx !== -1) {
-        let tabNode = findDOMNode(tabs[tabIdx]);
+        let tabNode = ReactDOM.findDOMNode(tabs[tabIdx]);
 
         if (tabNode) {
           tabNode.firstChild.focus();

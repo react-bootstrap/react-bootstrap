@@ -1,6 +1,7 @@
-import React from 'react';
-import keycode from 'keycode';
 import classNames from 'classnames';
+import keycode from 'keycode';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
@@ -70,7 +71,7 @@ class DropdownMenu extends React.Component {
   }
 
   getFocusableMenuItems() {
-    let menuNode = React.findDOMNode(this);
+    let menuNode = ReactDOM.findDOMNode(this);
 
     if (menuNode === undefined) {
       return [];

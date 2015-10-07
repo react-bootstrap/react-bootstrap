@@ -10,7 +10,7 @@ describe('Form Controls', () => {
       );
 
       const result = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'p');
-      result.props.children.should.equal('v');
+      result.innerHTML.should.equal('v');
     });
 
     it('getValue() pulls from either value or children', () => {

@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Tab from '../src/Tab';
 
 describe('Tab', () => {
@@ -24,7 +26,7 @@ describe('Tab', () => {
         <Tab active>Item content</Tab>
       );
 
-      assert.equal(React.findDOMNode(instance).getAttribute('aria-hidden'), 'false');
+      assert.equal(ReactDOM.findDOMNode(instance).getAttribute('aria-hidden'), 'false');
     });
 
     it('Should have role', () => {
@@ -32,7 +34,7 @@ describe('Tab', () => {
         <Tab active>Item content</Tab>
       );
 
-      assert.equal(React.findDOMNode(instance).getAttribute('role'), 'tabpanel');
+      assert.equal(ReactDOM.findDOMNode(instance).getAttribute('role'), 'tabpanel');
     });
   });
 });

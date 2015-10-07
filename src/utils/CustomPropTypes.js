@@ -1,4 +1,5 @@
 import { createChainableTypeChecker } from 'react-prop-types/lib/common';
+
 import childrenToArray from './childrenToArray';
 
 export default {

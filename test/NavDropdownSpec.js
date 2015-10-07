@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import NavDropdown from '../src/NavDropdown';
+import ReactDOM from 'react-dom';
+
 import MenuItem from '../src/MenuItem';
+import NavDropdown from '../src/NavDropdown';
 
 describe('NavDropdown', () => {
 
@@ -13,8 +15,8 @@ describe('NavDropdown', () => {
       </NavDropdown>
     );
 
-    let li = React.findDOMNode(instance);
-    let button = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle'));
+    let li = ReactDOM.findDOMNode(instance);
+    let button = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
 
     assert.equal(li.nodeName, 'LI');
     assert.ok(li.className.match(/\bdropdown\b/));
@@ -54,7 +56,7 @@ describe('NavDropdown', () => {
 
     const instance = ReactTestUtils.renderIntoDocument(<OpenProp />);
     const outerToggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'outer-button');
-    const dropdownNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown'));
+    const dropdownNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown');
 
     dropdownNode.className.should.not.match(/\bopen\b/);
     ReactTestUtils.Simulate.click(outerToggle);

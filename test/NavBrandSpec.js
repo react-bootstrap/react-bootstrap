@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-// import Navbar from '../src/Navbar';
+import ReactDOM from 'react-dom';
+
 import NavBrand from '../src/NavBrand';
 
 describe('Navbrand', () => {
@@ -10,7 +11,7 @@ describe('Navbrand', () => {
       <NavBrand>Brand</NavBrand>
     );
 
-    let brand = React.findDOMNode(instance);
+    let brand = ReactDOM.findDOMNode(instance);
 
     assert.equal(brand.nodeName, 'SPAN');
     assert.ok(brand.className.match(/\bnavbar-brand\b/));
@@ -22,7 +23,7 @@ describe('Navbrand', () => {
       <NavBrand><a href>BrandLink</a></NavBrand>
     );
 
-    let brand = React.findDOMNode(instance);
+    let brand = ReactDOM.findDOMNode(instance);
 
     assert.equal(brand.nodeName, 'A');
     assert.ok(brand.className.match(/\bnavbar-brand\b/));

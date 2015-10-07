@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Jumbotron from '../src/Jumbotron';
 
 describe('Jumbotron', () => {
@@ -10,7 +12,7 @@ describe('Jumbotron', () => {
       </Jumbotron>
     );
 
-    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
@@ -20,7 +22,7 @@ describe('Jumbotron', () => {
         Content
       </Jumbotron>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bjumbotron\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bjumbotron\b/));
   });
 
   it('Should override node class', () => {
@@ -29,6 +31,6 @@ describe('Jumbotron', () => {
         <strong>Content</strong>
       </Jumbotron>
     );
-    assert.equal(React.findDOMNode(instance).nodeName, 'SECTION');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');
   });
 });

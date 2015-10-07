@@ -1,4 +1,3 @@
-
 const Example = React.createClass({
   getInitialState() {
     return { show: true };
@@ -14,7 +13,7 @@ const Example = React.createClass({
     const sharedProps = {
       show: this.state.show,
       container: this,
-      target: () => React.findDOMNode(this.refs.target)
+      target: () => ReactDOM.findDOMNode(this.refs.target)
     };
 
     return (
@@ -40,4 +39,4 @@ const Example = React.createClass({
   }
 });
 
-React.render(<Example/>, mountNode);
+ReactDOM.render(<Example/>, mountNode);

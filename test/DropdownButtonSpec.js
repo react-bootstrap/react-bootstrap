@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import DropdownButton from '../src/DropdownButton';
 import DropdownMenu from '../src/DropdownMenu';
 import MenuItem from '../src/MenuItem';
@@ -17,7 +19,7 @@ describe('DropdownButton', () => {
 
   it('renders title prop', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
-    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     buttonNode.innerText.should.match(/Simple Dropdown/);
   });
@@ -25,7 +27,7 @@ describe('DropdownButton', () => {
   it('renders dropdown toggle button', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
 
-    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     buttonNode.tagName.should.equal('BUTTON');
     buttonNode.className.should.match(/\bbtn[ $]/);
@@ -43,7 +45,7 @@ describe('DropdownButton', () => {
       </DropdownButton>
     );
 
-    const menuNode = React.findDOMNode(
+    const menuNode = ReactDOM.findDOMNode(
       ReactTestUtils.findRenderedComponentWithType(instance, DropdownMenu));
 
     expect(menuNode.children.length).to.equal(1);
@@ -67,7 +69,7 @@ describe('DropdownButton', () => {
         <MenuItem>Item 1</MenuItem>
       </DropdownButton>
     );
-    const node = React.findDOMNode(instance);
+    const node = ReactDOM.findDOMNode(instance);
 
     node.className.should.match(/\bbtn-group-sm\b/);
   });
@@ -78,7 +80,7 @@ describe('DropdownButton', () => {
         <MenuItem>Item 1</MenuItem>
       </DropdownButton>
     );
-    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     buttonNode.className.should.match(/\bbtn-success\b/);
   });
@@ -117,14 +119,14 @@ describe('DropdownButton', () => {
         <MenuItem eventKey='1'>Item 1</MenuItem>
       </DropdownButton>
     );
-    const node = React.findDOMNode(instance);
-    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
 
-    const menuItem = React.findDOMNode(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A'));
+    const node = ReactDOM.findDOMNode(instance);
 
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
     ReactTestUtils.Simulate.click(buttonNode);
     node.className.should.match(/\bopen\b/);
+
+    const menuItem = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
     ReactTestUtils.Simulate.click(menuItem);
     node.className.should.not.match(/\bopen\b/);
   });
@@ -138,11 +140,10 @@ describe('DropdownButton', () => {
       </DropdownButton>
     );
 
-    const node = React.findDOMNode(instance);
-    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const node = ReactDOM.findDOMNode(instance);
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
-    const menuItem = React.findDOMNode(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A'));
+    const menuItem = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
     ReactTestUtils.Simulate.click(buttonNode);
     node.className.should.match(/\bopen\b/);
@@ -159,8 +160,7 @@ describe('DropdownButton', () => {
       </DropdownButton>
     );
 
-    const buttonNode = React.findDOMNode(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     assert.ok(buttonNode.className.match(/\bbtn-primary\b/));
     assert.equal(buttonNode.getAttribute('id'), 'testId');

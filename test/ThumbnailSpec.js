@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Thumbnail from '../src/Thumbnail';
 
 describe('Thumbnail', () => {
@@ -7,7 +9,7 @@ describe('Thumbnail', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Thumbnail href="#" src="#" alt="test" />
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bthumbnail\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bthumbnail\b/));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });
 
@@ -22,8 +24,8 @@ describe('Thumbnail', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Thumbnail src="#" alt="test" />
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bthumbnail\b/));
-    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bthumbnail\b/));
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
   });
 
   it('Should have an image', () => {
@@ -42,6 +44,6 @@ describe('Thumbnail', () => {
         </div>
       </Thumbnail>
     );
-    assert.ok(React.findDOMNode(instance).lastChild.className.match(/\bcaption\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).lastChild.className.match(/\bcaption\b/));
   });
 });

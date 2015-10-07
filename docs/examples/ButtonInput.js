@@ -41,4 +41,4 @@ const ButtonInputExample = React.createClass({
   }
 });
 
-React.render(<ButtonInputExample />, mountNode);
+ReactDOM.render(<ButtonInputExample />, mountNode);

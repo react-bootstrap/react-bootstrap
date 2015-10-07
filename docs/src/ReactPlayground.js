@@ -4,6 +4,7 @@
 /* eslint-disable */
 const classNames = require('classnames');
 const React = require('react');
+const ReactDOM = require('react-dom');
 
 const Accordion = require('../../src/Accordion');
 const Alert = require('../../src/Alert');
@@ -89,7 +90,7 @@ class CodeMirrorEditor extends React.Component {
       return;
     }
 
-    this.editor = CodeMirror.fromTextArea(React.findDOMNode(this.refs.editor), {
+    this.editor = CodeMirror.fromTextArea(this.refs.editor, {
       mode: 'javascript',
       lineNumbers: false,
       lineWrapping: false,
@@ -176,8 +177,8 @@ const ReactPlayground = React.createClass({
     // example element and render it normally. This is safe because it's code
     // that we supply, so we can ensure ahead of time that it won't throw an
     // exception while rendering.
-    const originalReactRender = React.render;
-    React.render = (element) => this._initialExample = element;
+    const originalRender = ReactDOM.render;
+    ReactDOM.render = (element) => this._initialExample = element;
 
     // Stub out mountNode for the example code.
     const mountNode = null;  // eslint-disable-line no-unused-vars
@@ -189,7 +190,7 @@ const ReactPlayground = React.createClass({
       eval(compiledCode);
       /* eslint-enable */
     } finally {
-      React.render = originalReactRender;
+      ReactDOM.render = originalRender;
     }
   },
 
@@ -267,9 +268,13 @@ const ReactPlayground = React.createClass({
   },
 
   clearExample() {
-    const mountNode = React.findDOMNode(this.refs.mount);
+    if (!this.state.codeChanged) {
+      return null;
+    }
+
+    const mountNode = this.refs.mount;
     try {
-      React.unmountComponentAtNode(mountNode);
+      ReactDOM.unmountComponentAtNode(mountNode);
     } catch (e) {
       console.error(e); // eslint-disable-line no-console
     }
@@ -296,7 +301,7 @@ const ReactPlayground = React.createClass({
 
       this.updateTimeout(
         () => {
-          React.render(
+          ReactDOM.render(
             <Alert bsStyle="danger">
               {err.toString()}
             </Alert>,

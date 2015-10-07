@@ -6,4 +6,4 @@ const inputHorizontalInstance = (
   </form>
 );
 
-React.render(inputHorizontalInstance, mountNode);
+ReactDOM.render(inputHorizontalInstance, mountNode);

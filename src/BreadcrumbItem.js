@@ -1,7 +1,8 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+import warning from 'warning';
+
 import SafeAnchor from './SafeAnchor';
-import warning from 'react/lib/warning';
 
 const BreadcrumbItem = React.createClass({
   propTypes: {

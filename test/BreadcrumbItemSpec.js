@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import BreadcrumbItem from '../src/BreadcrumbItem';
+
 import { shouldWarn } from './helpers';
 
 describe('BreadcrumbItem', () => {
@@ -22,7 +25,7 @@ describe('BreadcrumbItem', () => {
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
-    assert.notInclude(React.findDOMNode(instance).className, 'active');
+    assert.notInclude(ReactDOM.findDOMNode(instance).className, 'active');
   });
 
   it('Should add `active` class with `active` attribute set.', () => {
@@ -32,7 +35,7 @@ describe('BreadcrumbItem', () => {
       </BreadcrumbItem>
     );
 
-    assert.include(React.findDOMNode(instance).className, 'active');
+    assert.include(ReactDOM.findDOMNode(instance).className, 'active');
   });
 
   it('Should render `span` as inner element when is active', () => {
@@ -52,7 +55,7 @@ describe('BreadcrumbItem', () => {
       </BreadcrumbItem>
     );
 
-    const classes = React.findDOMNode(instance).className;
+    const classes = ReactDOM.findDOMNode(instance).className;
     assert.include(classes, 'custom-one');
     assert.include(classes, 'custom-two');
   });
@@ -79,7 +82,7 @@ describe('BreadcrumbItem', () => {
       </BreadcrumbItem>
     );
 
-    assert.equal(React.findDOMNode(instance).id, 'test-li-id');
+    assert.equal(ReactDOM.findDOMNode(instance).id, 'test-li-id');
   });
 
   it('Should apply id onto `a` inner alement via `linkId` property', () => {
@@ -89,7 +92,7 @@ describe('BreadcrumbItem', () => {
       </BreadcrumbItem>
     );
 
-    const linkNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+    const linkNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.equal(linkNode.id, 'test-link-id');
   });
 
@@ -100,7 +103,7 @@ describe('BreadcrumbItem', () => {
       </BreadcrumbItem>
     );
 
-    const linkNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+    const linkNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.equal(linkNode.href, 'http://getbootstrap.com/components/#breadcrumbs');
   });
 
@@ -111,7 +114,7 @@ describe('BreadcrumbItem', () => {
       </BreadcrumbItem>
     );
 
-    const linkNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+    const linkNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.equal(linkNode.title, 'test-title');
   });
 
@@ -122,7 +125,7 @@ describe('BreadcrumbItem', () => {
       </BreadcrumbItem>
     );
 
-    const liNode = React.findDOMNode(instance);
+    const liNode = ReactDOM.findDOMNode(instance);
     assert.notOk(liNode.hasAttribute('href'));
     assert.notOk(liNode.hasAttribute('title'));
   });
@@ -134,7 +137,7 @@ describe('BreadcrumbItem', () => {
       </BreadcrumbItem>
     );
 
-    const linkNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
+    const linkNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.equal(linkNode.target, '_blank');
   });
 });

@@ -27,4 +27,4 @@ const PaginationAdvanced = React.createClass({
   }
 });
 
-React.render(<PaginationAdvanced />, mountNode);
+ReactDOM.render(<PaginationAdvanced />, mountNode);

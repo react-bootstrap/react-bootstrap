@@ -76,4 +76,4 @@ const App = React.createClass({
   }
 });
 
-React.render(<App/>, mountNode);
+ReactDOM.render(<App/>, mountNode);

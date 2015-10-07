@@ -1,6 +1,7 @@
-import React, { PropTypes, cloneElement } from 'react';
-import warning from 'react/lib/warning';
 import classNames from 'classnames';
+import React, { PropTypes, cloneElement } from 'react';
+
+import warning from 'warning';
 
 class ResponsiveEmbed extends React.Component {
   render() {

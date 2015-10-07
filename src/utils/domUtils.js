@@ -1,9 +1,9 @@
-import React from 'react';
+import ReactDOM from 'react-dom';
 import getOwnerDocument from 'dom-helpers/ownerDocument';
 import getOwnerWindow from 'dom-helpers/ownerWindow';
 
 function ownerDocument(componentOrElement) {
-  let elem = React.findDOMNode(componentOrElement);
+  let elem = ReactDOM.findDOMNode(componentOrElement);
   return getOwnerDocument((elem && elem.ownerDocument) || document);
 }
 

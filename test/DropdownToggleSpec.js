@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+
 import DropdownToggle from '../src/DropdownToggle';
+
+import {getOne} from './helpers';
 
 describe('DropdownToggle', () => {
   const simpleToggle = <DropdownToggle open={false} title='herpa derpa' />;
 
   it('renders toggle button', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleToggle);
-    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     buttonNode.className.should.match(/\bbtn[ $]/);
     buttonNode.className.should.match(/\bbtn-default\b/);
@@ -17,7 +20,7 @@ describe('DropdownToggle', () => {
 
   it('renders title prop', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleToggle);
-    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     buttonNode.innerText.should.match(/herpa derpa/);
   });
@@ -29,14 +32,14 @@ describe('DropdownToggle', () => {
       </DropdownToggle>
     );
     const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
-    const h3Node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(button, 'H3'));
+    const h3Node = getOne(button.getElementsByTagName('h3'));
 
     h3Node.innerText.should.match(/herpa derpa/);
   });
 
   it('renders dropdown toggle button caret', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleToggle);
-    const caretNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'caret').getDOMNode();
+    const caretNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'caret');
 
     caretNode.tagName.should.equal('SPAN');
   });
@@ -68,7 +71,7 @@ describe('DropdownToggle', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownToggle id={id} open={false} title='id forwards' />
     );
-    const button = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     button.getAttribute('id').should.equal(id);
   });
@@ -78,7 +81,7 @@ describe('DropdownToggle', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownToggle bsStyle={style} open={false} title='bsStyle forwards' />
     );
-    const button = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     button.className.should.match(/\bbtn-success\b/);
   });
@@ -87,7 +90,7 @@ describe('DropdownToggle', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownToggle bsSize='small' open={false} title='bsSize forwards' />
     );
-    const button = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     button.className.should.match(/\bbtn-sm\b/);
   });

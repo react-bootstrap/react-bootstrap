@@ -1,5 +1,7 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import TransitionEvents from './utils/TransitionEvents';
 
 const Tab = React.createClass({
@@ -55,7 +57,7 @@ const Tab = React.createClass({
     }
     if (this.state.animateOut) {
       TransitionEvents.addEndEventListener(
-        React.findDOMNode(this),
+        ReactDOM.findDOMNode(this),
         this.stopAnimateOut
       );
     }

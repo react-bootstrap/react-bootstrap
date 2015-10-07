@@ -6,4 +6,4 @@ const inputSizeInstance = (
   </form>
 );
 
-React.render(inputSizeInstance, mountNode);
+ReactDOM.render(inputSizeInstance, mountNode);

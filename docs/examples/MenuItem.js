@@ -21,4 +21,4 @@ const MenuItems = (
   </div>
 );
 
-React.render(MenuItems, mountNode);
+ReactDOM.render(MenuItems, mountNode);

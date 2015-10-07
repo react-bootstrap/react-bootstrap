@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Alert from '../src/Alert';
 
 describe('Alert', () => {
@@ -18,7 +20,7 @@ describe('Alert', () => {
         Message
       </Alert>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\balert\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\balert\b/));
   });
 
   it('Should have dismissable style with onDismiss', () => {
@@ -28,7 +30,7 @@ describe('Alert', () => {
         Message
       </Alert>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\balert-dismissable\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\balert-dismissable\b/));
   });
 
   it('Should call onDismiss callback on dismiss click', (done) => {
@@ -40,7 +42,7 @@ describe('Alert', () => {
         Message
       </Alert>
     );
-    ReactTestUtils.Simulate.click(React.findDOMNode(instance).children[0]);
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(instance).children[0]);
   });
 
   it('Should call onDismiss callback on dismissAfter time', (done) => {
@@ -60,7 +62,7 @@ describe('Alert', () => {
         Message
       </Alert>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\balert-\w+\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\balert-\w+\b/));
   });
 
   it('Should have use bsStyle class', () => {
@@ -69,7 +71,7 @@ describe('Alert', () => {
         Message
       </Alert>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\balert-danger\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\balert-danger\b/));
   });
 
   describe('Web Accessibility', () => {
@@ -78,7 +80,7 @@ describe('Alert', () => {
         <Alert>Message</Alert>
       );
 
-      assert.equal(React.findDOMNode(instance).getAttribute('role'), 'alert');
+      assert.equal(ReactDOM.findDOMNode(instance).getAttribute('role'), 'alert');
     });
 
     it('Should call onDismiss callback when the sr-only dismiss link is activated', (done) => {
@@ -90,7 +92,8 @@ describe('Alert', () => {
           Message
         </Alert>
       );
-      ReactTestUtils.Simulate.click(React.findDOMNode(instance).getElementsByClassName('sr-only')[0]);
+
+      ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(instance).getElementsByClassName('sr-only')[0]);
     });
   });
 });

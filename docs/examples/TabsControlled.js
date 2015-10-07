@@ -21,4 +21,4 @@ const ControlledTabs = React.createClass({
   }
 });
 
-React.render(<ControlledTabs />, mountNode);
+ReactDOM.render(<ControlledTabs />, mountNode);

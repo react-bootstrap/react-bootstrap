@@ -1,5 +1,7 @@
-import React from 'react';
 import {assert} from 'chai';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+
 import Modal from '../../src/Modal.js';
 
 describe('Modal', () => {
@@ -7,7 +9,7 @@ describe('Modal', () => {
     let noOp = () => {};
 
     assert.doesNotThrow(function renderOnServerSide() {
-      return React.renderToString(
+      return ReactDOMServer.renderToString(
         <Modal onHide={noOp}>
           <strong>Message</strong>
         </Modal>

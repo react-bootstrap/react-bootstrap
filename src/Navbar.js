@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import deprecated from 'react-prop-types/lib/deprecated';
 import elementType from 'react-prop-types/lib/elementType';
 
 import BootstrapMixin from './BootstrapMixin';
@@ -7,7 +8,6 @@ import Grid from './Grid';
 import NavBrand from './NavBrand';
 
 import createChainedFunction from './utils/createChainedFunction';
-import deprecationWarning from './utils/deprecationWarning';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const Navbar = React.createClass({
@@ -24,7 +24,7 @@ const Navbar = React.createClass({
      * You can use a custom element for this component
      */
     componentClass: elementType,
-    brand: React.PropTypes.node,
+    brand: deprecated(React.PropTypes.node, 'Use the `NavBrand` component.'),
     toggleButton: React.PropTypes.node,
     toggleNavKey: React.PropTypes.oneOfType([
       React.PropTypes.string,
@@ -59,13 +59,6 @@ const Navbar = React.createClass({
   shouldComponentUpdate() {
     // Defer any updates to this component during the `onSelect` handler.
     return !this._isChanging;
-  },
-
-  componentWillMount() {
-    // TODO: Use the `deprecated` PropType once we're on React 0.14.
-    if (this.props.brand) {
-      deprecationWarning('Navbar brand attribute', 'NavBrand Component');
-    }
   },
 
   handleToggle() {

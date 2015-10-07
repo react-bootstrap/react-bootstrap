@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import SplitButton from '../src/SplitButton';
 import MenuItem from '../src/MenuItem';
 import Button from '../src/Button';
@@ -17,8 +19,8 @@ describe('SplitButton', () => {
   it('should open the menu when dropdown button is clicked', () => {
     const instance = ReactTestUtils.renderIntoDocument(simple);
 
-    const toggleNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle'));
-    const splitButtonNode = React.findDOMNode(instance);
+    const toggleNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
+    const splitButtonNode = ReactDOM.findDOMNode(instance);
 
     splitButtonNode.className.should.not.match(/open/);
     ReactTestUtils.Simulate.click(toggleNode);
@@ -28,8 +30,8 @@ describe('SplitButton', () => {
   it('should not open the menu when other button is clicked', () => {
     const instance = ReactTestUtils.renderIntoDocument(simple);
 
-    const buttonNode = React.findDOMNode(ReactTestUtils.scryRenderedComponentsWithType(instance, Button)[0]);
-    const splitButtonNode = React.findDOMNode(instance);
+    const buttonNode = ReactDOM.findDOMNode(ReactTestUtils.scryRenderedComponentsWithType(instance, Button)[0]);
+    const splitButtonNode = ReactDOM.findDOMNode(instance);
 
     splitButtonNode.className.should.not.match(/open/);
     ReactTestUtils.Simulate.click(buttonNode);
@@ -43,7 +45,7 @@ describe('SplitButton', () => {
       </SplitButton>
     );
 
-    const buttonNode = React.findDOMNode(ReactTestUtils.scryRenderedComponentsWithType(instance, Button)[0]);
+    const buttonNode = ReactDOM.findDOMNode(ReactTestUtils.scryRenderedComponentsWithType(instance, Button)[0]);
     ReactTestUtils.Simulate.click(buttonNode);
   });
 
@@ -61,8 +63,7 @@ describe('SplitButton', () => {
       </SplitButton>
     );
 
-    const toggleNode = React.findDOMNode(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle'));
+    const toggleNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
 
     ReactTestUtils.Simulate.click(toggleNode);
 
@@ -79,11 +80,9 @@ describe('SplitButton', () => {
       </SplitButton>
     );
 
-    const toggleNode = React.findDOMNode(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle'));
+    const toggleNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
 
-    const buttonNode = React.findDOMNode(
-      ReactTestUtils.scryRenderedComponentsWithType(instance, Button)[0]);
+    const buttonNode = ReactDOM.findDOMNode(ReactTestUtils.scryRenderedComponentsWithType(instance, Button)[0]);
 
     expect(toggleNode.disabled).to.be.true;
     expect(buttonNode.disabled).to.be.true;
@@ -97,7 +96,7 @@ describe('SplitButton', () => {
     );
 
     let anchors = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
-    let linkElement = React.findDOMNode(anchors[0]);
+    let linkElement = anchors[0];
 
     assert.equal(linkElement.target, '_blank');
   });

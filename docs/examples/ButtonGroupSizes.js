@@ -34,4 +34,4 @@ const buttonGroupInstance = (
   </div>
 );
 
-React.render(buttonGroupInstance, mountNode);
+ReactDOM.render(buttonGroupInstance, mountNode);

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+
 import Carousel from '../src/Carousel';
 import CarouselItem from '../src/CarouselItem';
 
@@ -26,9 +27,8 @@ describe('Carousel', () => {
     assert.equal(instance.refs.item1.props.active, false);
     assert.equal(instance.refs.item2.props.active, true);
     assert.equal(
-      ReactTestUtils.scryRenderedDOMComponentsWithTag(
-        ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators'), 'li'
-      ).length, 2
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
+        .getElementsByTagName('li').length, 2
     );
   });
 
@@ -45,9 +45,8 @@ describe('Carousel', () => {
     assert.equal(instance.refs.item1.props.active, false);
     assert.equal(instance.refs.item2.props.active, true);
     assert.equal(
-      ReactTestUtils.scryRenderedDOMComponentsWithTag(
-        ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators'), 'li'
-      ).length, 2
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
+        .getElementsByTagName('li').length, 2
     );
   });
 
@@ -66,9 +65,8 @@ describe('Carousel', () => {
     );
 
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.scryRenderedDOMComponentsWithTag(
-        ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators'), 'li'
-      )[0]
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
+        .getElementsByTagName('li')[0]
     );
   });
 
@@ -83,7 +81,7 @@ describe('Carousel', () => {
     let backButton = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'left');
 
     assert.ok(backButton);
-    assert.equal(backButton.props.href, '#prev');
+    assert.equal(backButton.getAttribute('href'), '#prev');
 
     instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={1} controls={true} wrap={true}>
@@ -95,7 +93,7 @@ describe('Carousel', () => {
     let nextButton = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'right');
 
     assert.ok(nextButton);
-    assert.equal(nextButton.props.href, '#next');
+    assert.equal(nextButton.getAttribute('href'), '#next');
   });
 
   it('Should not show the prev button on the first image if wrap is false', () => {

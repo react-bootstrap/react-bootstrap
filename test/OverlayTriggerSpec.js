@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import OverlayTrigger from '../src/OverlayTrigger';
 import Popover from '../src/Popover';
 import Tooltip from '../src/Tooltip';
@@ -13,7 +15,7 @@ describe('OverlayTrigger', () => {
         <button>button</button>
       </OverlayTrigger>
     );
-    const overlayTrigger = React.findDOMNode(instance);
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
     assert.equal(overlayTrigger.nodeName, 'BUTTON');
   });
 
@@ -24,7 +26,7 @@ describe('OverlayTrigger', () => {
         <button>button</button>
       </OverlayTrigger>
     );
-    const overlayTrigger = React.findDOMNode(instance);
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
     callback.called.should.be.true;
   });
@@ -35,25 +37,38 @@ describe('OverlayTrigger', () => {
         <button>button</button>
       </OverlayTrigger>
     );
-    const overlayTrigger = React.findDOMNode(instance);
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
 
     instance.state.isOverlayShown.should.be.true;
   });
 
-  it('Should keep trigger handlers', (done) => {
-    const instance = render(
-      <div>
-        <OverlayTrigger trigger='focus' overlay={<div>test</div>}>
-          <button onBlur={()=> done()}>button</button>
-        </OverlayTrigger>
-        <input id='target'/>
-      </div>
-    , document.body);
+  describe('trigger handlers', () => {
+    let mountPoint;
 
-    const overlayTrigger = React.findDOMNode(instance).firstChild;
+    beforeEach(() => {
+      mountPoint = document.createElement('div');
+      document.body.appendChild(mountPoint);
+    });
 
-    ReactTestUtils.Simulate.blur(overlayTrigger);
+    afterEach(() => {
+      ReactDOM.unmountComponentAtNode(mountPoint);
+      document.body.removeChild(mountPoint);
+    });
+
+    it('Should keep trigger handlers', (done) => {
+      const instance = render(
+        <div>
+          <OverlayTrigger trigger='focus' overlay={<div>test</div>}>
+            <button onBlur={()=> done()}>button</button>
+          </OverlayTrigger>
+          <input id='target' />
+        </div>
+      , mountPoint);
+
+      const overlayTrigger = instance.firstChild;
+      ReactTestUtils.Simulate.blur(overlayTrigger);
+    });
   });
 
   it('Should maintain overlay classname', () => {
@@ -63,8 +78,7 @@ describe('OverlayTrigger', () => {
       </OverlayTrigger>
     );
 
-    const overlayTrigger = React.findDOMNode(instance);
-
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
 
     expect(document.getElementsByClassName('test-overlay').length).to.equal(1);
@@ -99,7 +113,7 @@ describe('OverlayTrigger', () => {
       </OverlayTrigger>
     );
 
-    overlayTrigger = React.findDOMNode(instance);
+    overlayTrigger = ReactDOM.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
   });
 
@@ -118,7 +132,6 @@ describe('OverlayTrigger', () => {
     }
     ContextReader.contextTypes = contextTypes;
 
-    const TriggerWithContext = OverlayTrigger.withContext(contextTypes);
     class ContextHolder extends React.Component {
       getChildContext() {
         return {key: 'value'};
@@ -126,19 +139,19 @@ describe('OverlayTrigger', () => {
 
       render() {
         return (
-          <TriggerWithContext
+          <OverlayTrigger
             trigger="click"
             overlay={<ContextReader />}
           >
             <button>button</button>
-          </TriggerWithContext>
+          </OverlayTrigger>
         );
       }
     }
     ContextHolder.childContextTypes = contextTypes;
 
     const instance = ReactTestUtils.renderIntoDocument(<ContextHolder />);
-    const overlayTrigger = React.findDOMNode(instance);
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
 
     contextSpy.calledWith('value').should.be.true;
@@ -164,7 +177,7 @@ describe('OverlayTrigger', () => {
               <button>button</button>
             </OverlayTrigger>
           );
-          overlayTrigger = React.findDOMNode(instance);
+          overlayTrigger = ReactDOM.findDOMNode(instance);
         });
 
         it('Should handle trigger without warnings', () => {
@@ -199,7 +212,7 @@ describe('OverlayTrigger', () => {
             <button>button</button>
             </OverlayTrigger>
           );
-          const overlayTrigger = React.findDOMNode(instance);
+          const overlayTrigger = ReactDOM.findDOMNode(instance);
           ReactTestUtils.Simulate.click(overlayTrigger);
         });
 
@@ -253,7 +266,7 @@ describe('OverlayTrigger', () => {
             <button>button</button>
           </OverlayTrigger>
         );
-        const overlayTrigger = React.findDOMNode(instance);
+        const overlayTrigger = ReactDOM.findDOMNode(instance);
         ReactTestUtils.Simulate.click(overlayTrigger);
       });
 

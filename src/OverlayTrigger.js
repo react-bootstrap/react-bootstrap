@@ -1,11 +1,15 @@
 /* eslint-disable react/prop-types */
-import React, { cloneElement } from 'react';
+
 import contains from 'dom-helpers/query/contains';
-import createChainedFunction from './utils/createChainedFunction';
-import createContextWrapper from './utils/createContextWrapper';
-import Overlay from './Overlay';
-import warning from 'react/lib/warning';
 import pick from 'lodash-compat/object/pick';
+import React, { cloneElement } from 'react';
+import ReactDOM from 'react-dom';
+import warning from 'warning';
+
+import Overlay from './Overlay';
+
+import createChainedFunction from './utils/createChainedFunction';
+
 /**
  * Check if value one is inside or equal to the of value
  *
@@ -133,23 +137,29 @@ const OverlayTrigger = React.createClass({
 
   componentDidMount() {
     this._mountNode = document.createElement('div');
-    React.render(this._overlay, this._mountNode);
+    this.renderOverlay();
+  },
+
+  renderOverlay() {
+    ReactDOM.unstable_renderSubtreeIntoContainer(
+      this, this._overlay, this._mountNode
+    );
   },
 
   componentWillUnmount() {
-    React.unmountComponentAtNode(this._mountNode);
+    ReactDOM.unmountComponentAtNode(this._mountNode);
     this._mountNode = null;
     clearTimeout(this._hoverDelay);
   },
 
   componentDidUpdate() {
     if (this._mountNode) {
-      React.render(this._overlay, this._mountNode);
+      this.renderOverlay();
     }
   },
 
   getOverlayTarget() {
-    return React.findDOMNode(this);
+    return ReactDOM.findDOMNode(this);
   },
 
   getOverlay() {
@@ -271,21 +281,5 @@ const OverlayTrigger = React.createClass({
   }
 
 });
-
-/**
- * Creates a new OverlayTrigger class that forwards the relevant context
- *
- * This static method should only be called at the module level, instead of in
- * e.g. a render() method, because it's expensive to create new classes.
- *
- * For example, you would want to have:
- *
- * > export default OverlayTrigger.withContext({
- * >   myContextKey: React.PropTypes.object
- * > });
- *
- * and import this when needed.
- */
-OverlayTrigger.withContext = createContextWrapper(OverlayTrigger, 'overlay');
 
 export default OverlayTrigger;

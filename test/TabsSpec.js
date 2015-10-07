@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
 import keycode from 'keycode';
 
 import Col from '../src/Col';
@@ -91,9 +92,9 @@ describe('Tabs', () => {
     let panes = ReactTestUtils.scryRenderedComponentsWithType(instance, Tab);
     let navs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
-    assert.ok(React.findDOMNode(panes[0]).className.match(/\bcustom\b/));
-    assert.ok(React.findDOMNode(navs[1]).className.match(/\btcustom\b/));
-    assert.equal(React.findDOMNode(panes[0]).id, 'pane0id');
+    assert.ok(ReactDOM.findDOMNode(panes[0]).className.match(/\bcustom\b/));
+    assert.ok(ReactDOM.findDOMNode(navs[1]).className.match(/\btcustom\b/));
+    assert.equal(ReactDOM.findDOMNode(panes[0]).id, 'pane0id');
   });
 
   it('Should show the correct initial pane', () => {
@@ -259,8 +260,8 @@ describe('Tabs', () => {
       let tabs = instance.refs.tabs;
       let panes = instance.refs.panes;
 
-      expect(React.findDOMNode(tabs).className).to.not.match(/\bcol\b/);
-      expect(React.findDOMNode(panes).className).to.not.match(/\bcol\b/);
+      expect(ReactDOM.findDOMNode(tabs).className).to.not.match(/\bcol\b/);
+      expect(ReactDOM.findDOMNode(panes).className).to.not.match(/\bcol\b/);
     });
 
     it('doesn\'t render grid elements', () => {
@@ -296,8 +297,8 @@ describe('Tabs', () => {
         let tabs = instance.refs.tabs;
         let panes = instance.refs.panes;
 
-        expect(React.findDOMNode(tabs).className).to.match(/\bcol-xs-2\b/);
-        expect(React.findDOMNode(panes).className).to.match(/\bcol-xs-10\b/);
+        expect(ReactDOM.findDOMNode(tabs).className).to.match(/\bcol-xs-2\b/);
+        expect(ReactDOM.findDOMNode(panes).className).to.match(/\bcol-xs-10\b/);
       });
 
       it('renders grid elements', () => {
@@ -309,7 +310,7 @@ describe('Tabs', () => {
       });
 
       it('should render with clearfix', () => {
-        expect(React.findDOMNode(instance).className).to.match(/\bclearfix\b/);
+        expect(ReactDOM.findDOMNode(instance).className).to.match(/\bclearfix\b/);
       });
     });
 
@@ -324,8 +325,8 @@ describe('Tabs', () => {
         let tabs = instance.refs.tabs;
         let panes = instance.refs.panes;
 
-        expect(React.findDOMNode(tabs).className).to.match(/\bcol-xs-3\b/);
-        expect(React.findDOMNode(panes).className).to.match(/\bcol-xs-9\b/);
+        expect(ReactDOM.findDOMNode(tabs).className).to.match(/\bcol-xs-3\b/);
+        expect(ReactDOM.findDOMNode(panes).className).to.match(/\bcol-xs-9\b/);
       });
     });
 
@@ -344,8 +345,8 @@ describe('Tabs', () => {
         let tabs = instance.refs.tabs;
         let panes = instance.refs.panes;
 
-        expect(React.findDOMNode(tabs).className).to.match(/\bcol-xs-4\b/);
-        expect(React.findDOMNode(panes).className).to.match(/\bcol-xs-7\b/);
+        expect(ReactDOM.findDOMNode(tabs).className).to.match(/\bcol-xs-4\b/);
+        expect(ReactDOM.findDOMNode(panes).className).to.match(/\bcol-xs-7\b/);
       });
     });
 
@@ -368,9 +369,9 @@ describe('Tabs', () => {
         let tabs = instance.refs.tabs;
         let panes = instance.refs.panes;
 
-        expect(React.findDOMNode(tabs).className)
+        expect(ReactDOM.findDOMNode(tabs).className)
           .to.match(/\bcol-xs-4\b/).and.to.match(/\bcol-md-3\b/);
-        expect(React.findDOMNode(panes).className)
+        expect(ReactDOM.findDOMNode(panes).className)
           .to.match(/\bcol-xs-7\b/).and.to.match(/\bcol-md-8\b/);
       });
     });
@@ -387,7 +388,7 @@ describe('Tabs', () => {
       });
 
       it('should not render with clearfix', () => {
-        expect(React.findDOMNode(instance).className)
+        expect(ReactDOM.findDOMNode(instance).className)
           .to.not.match(/\bclearfix\b/);
       });
     });
@@ -402,7 +403,7 @@ describe('Tabs', () => {
     });
 
     afterEach(() => {
-      React.unmountComponentAtNode(mountPoint);
+      ReactDOM.unmountComponentAtNode(mountPoint);
       document.body.removeChild(mountPoint);
     });
 
@@ -436,36 +437,41 @@ describe('Tabs', () => {
   });
 
   describe('keyboard navigation', () => {
+    let mountPoint;
     let instance;
 
     beforeEach(() => {
+      mountPoint = document.createElement('div');
+      document.body.appendChild(mountPoint);
+
       instance = render(
         <Tabs defaultActiveKey={1} id='tabs'>
           <Tab id='pane-1' title="Tab 1" eventKey={1}>Tab 1 content</Tab>
           <Tab id='pane-2' title="Tab 2" eventKey={2} disabled>Tab 2 content</Tab>
           <Tab id='pane-2' title="Tab 3" eventKey={3}>Tab 3 content</Tab>
         </Tabs>
-      , document.body);
+      , mountPoint);
     });
 
     afterEach(() => {
-      instance = React.unmountComponentAtNode(document.body);
+      ReactDOM.unmountComponentAtNode(mountPoint);
+      document.body.removeChild(mountPoint);
     });
 
     it('only the active tab should be focusable', () => {
       let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
-      expect(React.findDOMNode(tabs[0]).firstChild.getAttribute('tabindex')).to.equal('0');
+      expect(ReactDOM.findDOMNode(tabs[0]).firstChild.getAttribute('tabindex')).to.equal('0');
 
-      expect(React.findDOMNode(tabs[1]).firstChild.getAttribute('tabindex')).to.equal('-1');
-      expect(React.findDOMNode(tabs[2]).firstChild.getAttribute('tabindex')).to.equal('-1');
+      expect(ReactDOM.findDOMNode(tabs[1]).firstChild.getAttribute('tabindex')).to.equal('-1');
+      expect(ReactDOM.findDOMNode(tabs[2]).firstChild.getAttribute('tabindex')).to.equal('-1');
     });
 
     it('should focus the next tab on arrow key', () => {
       let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
-      let firstAnchor = React.findDOMNode(tabs[0]).firstChild;
-      let lastAnchor = React.findDOMNode(tabs[2]).firstChild; // skip disabled
+      let firstAnchor = ReactDOM.findDOMNode(tabs[0]).firstChild;
+      let lastAnchor = ReactDOM.findDOMNode(tabs[2]).firstChild; // skip disabled
 
       firstAnchor.focus();
 
@@ -480,8 +486,8 @@ describe('Tabs', () => {
 
       let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
-      let firstAnchor = React.findDOMNode(tabs[0]).firstChild;
-      let lastAnchor = React.findDOMNode(tabs[2]).firstChild;
+      let firstAnchor = ReactDOM.findDOMNode(tabs[0]).firstChild;
+      let lastAnchor = ReactDOM.findDOMNode(tabs[2]).firstChild;
 
       lastAnchor.focus();
 
@@ -535,8 +541,8 @@ describe('Tabs', () => {
       let link1 = ReactTestUtils.findRenderedDOMComponentWithTag(tabs[0], 'a');
       let link2 = ReactTestUtils.findRenderedDOMComponentWithTag(tabs[1], 'a');
 
-      assert.equal(link1.props['aria-selected'], false);
-      assert.equal(link2.props['aria-selected'], true);
+      assert.equal(link1.getAttribute('aria-selected'), 'false');
+      assert.equal(link2.getAttribute('aria-selected'), 'true');
     });
   });
 
@@ -557,9 +563,9 @@ describe('Tabs', () => {
       <Tabs bsStyle="pills" defaultActiveKey={1} animation={false}
                   className="my-tabs-class" id="my-tabs-id" style={{opacity: 0.5}} />
     );
-    assert.equal(React.findDOMNode(instance).getAttribute('class'), 'my-tabs-class');
-    assert.equal(React.findDOMNode(instance).getAttribute('id'), 'my-tabs-id');
-    assert.deepEqual(React.findDOMNode(instance).getAttribute('style'), 'opacity:0.5;');
+    assert.equal(ReactDOM.findDOMNode(instance).getAttribute('class'), 'my-tabs-class');
+    assert.equal(ReactDOM.findDOMNode(instance).getAttribute('id'), 'my-tabs-id');
+    assert.deepEqual(ReactDOM.findDOMNode(instance).getAttribute('style'), 'opacity:0.5;');
 
   });
 });

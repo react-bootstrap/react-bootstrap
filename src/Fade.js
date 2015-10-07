@@ -1,7 +1,6 @@
 import React from 'react';
 import Transition from 'react-overlays/lib/Transition';
-import all from 'react-prop-types/lib/all';
-import deprecationWarning from './utils/deprecationWarning';
+import deprecated from 'react-prop-types/lib/deprecated';
 
 class Fade extends React.Component {
   render() {
@@ -51,15 +50,7 @@ Fade.propTypes = {
    * duration
    * @private
    */
-  duration: all(
-    React.PropTypes.number,
-    (props)=> {
-      if (props.duration != null) {
-        deprecationWarning('Fade `duration`', 'the `timeout` prop');
-      }
-      return null;
-    }
-  ),
+  duration: deprecated(React.PropTypes.number, 'Use `timeout`.'),
 
   /**
    * Callback fired before the component fades in

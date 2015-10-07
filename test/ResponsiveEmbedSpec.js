@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import ResponsiveEmbed from '../src/ResponsiveEmbed';
+
 import { shouldWarn } from './helpers';
 
 describe('ResponsiveEmbed', () => {
@@ -11,7 +14,7 @@ describe('ResponsiveEmbed', () => {
       </ResponsiveEmbed>
     );
 
-    let instanceClassName = React.findDOMNode(instance).className;
+    let instanceClassName = ReactDOM.findDOMNode(instance).className;
     assert.ok(instanceClassName, 'embed-responsive');
   });
 
@@ -42,7 +45,7 @@ describe('ResponsiveEmbed', () => {
       </ResponsiveEmbed>
     );
 
-    let child = React.findDOMNode(instance).firstChild;
+    let child = ReactDOM.findDOMNode(instance).firstChild;
     assert.ok(child.className.match(/\bembed-responsive-item\b/));
   });
 
@@ -53,7 +56,7 @@ describe('ResponsiveEmbed', () => {
       </ResponsiveEmbed>
     );
 
-    let child = React.findDOMNode(instance).firstChild;
+    let child = ReactDOM.findDOMNode(instance).firstChild;
     assert.ok(child.className.match(/\bcustom-class\b/));
   });
 
@@ -64,7 +67,7 @@ describe('ResponsiveEmbed', () => {
       </ResponsiveEmbed>
     );
 
-    let child = React.findDOMNode(instance).firstChild;
+    let child = ReactDOM.findDOMNode(instance).firstChild;
     assert.equal(child.style.color, 'white');
   });
 
@@ -75,7 +78,7 @@ describe('ResponsiveEmbed', () => {
       </ResponsiveEmbed>
     );
 
-    let wrapper = React.findDOMNode(instance);
+    let wrapper = ReactDOM.findDOMNode(instance);
     assert.ok(wrapper.className.match(/\bembed-responsive-16by9\b/));
   });
 
@@ -86,7 +89,7 @@ describe('ResponsiveEmbed', () => {
       </ResponsiveEmbed>
     );
 
-    let wrapper = React.findDOMNode(instance);
+    let wrapper = ReactDOM.findDOMNode(instance);
     assert.ok(wrapper.className.match(/\bembed-responsive-4by3\b/));
   });
 });
