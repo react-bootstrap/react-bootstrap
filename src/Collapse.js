@@ -1,8 +1,8 @@
+import css from 'dom-helpers/style';
 import React from 'react';
 import Transition from 'react-overlays/lib/Transition';
-import css from 'dom-helpers/style';
-import all from 'react-prop-types/lib/all';
-import deprecationWarning from './utils/deprecationWarning';
+import deprecated from 'react-prop-types/lib/deprecated';
+
 import createChainedFunction from './utils/createChainedFunction';
 
 let capitalize = str => str[0].toUpperCase() + str.substr(1);
@@ -145,15 +145,7 @@ Collapse.propTypes = {
    * duration
    * @private
    */
-  duration: all(
-    React.PropTypes.number,
-    (props)=> {
-      if (props.duration != null) {
-        deprecationWarning('Collapse `duration`', 'the `timeout` prop');
-      }
-      return null;
-    }
-  ),
+  duration: deprecated(React.PropTypes.number, 'Use `timeout`.'),
 
   /**
    * Callback fired before the component expands

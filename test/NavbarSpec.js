@@ -90,6 +90,8 @@ describe('Navbar', () => {
     assert.ok(brand);
     assert.equal(brand.nodeName, 'SPAN');
     assert.equal(brand.innerText, 'Brand');
+
+    shouldWarn('deprecated');
   });
 
   it('Should add span element with navbar-brand class using NavBrand Component', () => {
@@ -120,6 +122,8 @@ describe('Navbar', () => {
     assert.ok(brand);
     assert.equal(brand.nodeName, 'A');
     assert.equal(brand.innerText, 'Brand');
+
+    shouldWarn('deprecated');
   });
 
   it('Should add link element with navbar-brand class using NavBrand Component', () => {
@@ -148,6 +152,8 @@ describe('Navbar', () => {
     assert.equal(brands.length, 1);
     assert.equal(brands[0].nodeName, 'SPAN');
     assert.equal(brands[0].innerText, 'Brand');
+
+    shouldWarn('deprecated');
   });
 
   it('Should pass navbar prop to navs', () => {
