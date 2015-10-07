@@ -1,38 +1,32 @@
-import React, { cloneElement } from 'react';
-import BootstrapMixin from './BootstrapMixin';
 import classNames from 'classnames';
+import React from 'react';
 
-const NavBrand = React.createClass({
-  mixins: [BootstrapMixin],
-
-  propTypes: {
-    bsRole: React.PropTypes.string,
-    navbar: React.PropTypes.bool
-  },
-
-  getDefaultProps() {
-    return {
-      bsRole: 'brand',
-      navbar: false
-    };
-  },
-
+class NavBrand extends React.Component {
   render() {
-    let brand;
+    const {className, children, ...props} = this.props;
 
-    if (React.isValidElement(this.props.children)) {
-      brand = cloneElement(this.props.children, {
-        className: classNames(this.props.children.props.className, 'navbar-brand'),
-        bsRole: this.props.bsRole,
-        navbar: this.props.navbar
+    if (React.isValidElement(children)) {
+      return React.cloneElement(children, {
+        className: classNames(
+          children.props.className, className, 'navbar-brand'
+        )
       });
-    } else {
-      brand = <span {...this.props} className="navbar-brand">{this.props.children}</span>;
     }
 
-    return brand;
+    return (
+      <span {...props} className={classNames(className, 'navbar-brand')}>
+        {children}
+      </span>
+    );
   }
+}
 
-});
+NavBrand.propTypes = {
+  bsRole: React.PropTypes.string
+};
+
+NavBrand.defaultProps = {
+  bsRole: 'brand'
+};
 
 export default NavBrand;
