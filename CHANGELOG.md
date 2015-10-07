@@ -1,3 +1,11 @@
+v0.27.0 - Wed, 07 Oct 2015 21:49:21 GMT
+---------------------------------------
+
+- [583febb](../../commit/583febb) [removed] unnecessary functionality in React v0.14
+- [049e538](../../commit/049e538) [changed] Update for React v0.14
+
+
+
 v0.26.2 - Wed, 07 Oct 2015 16:43:16 GMT
 ---------------------------------------
 
