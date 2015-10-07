@@ -14,8 +14,7 @@ const Pagination = React.createClass({
     maxButtons: React.PropTypes.number,
     /**
      * When `true`, will display the default node value ('...').
-     * When exactly `false`, will not display the element at all.
-     * Every other value (`truthy` or `null`) will be passed "as is".
+     * Otherwise, will display provided node (when specified).
      */
     ellipsis: React.PropTypes.oneOfType([
       React.PropTypes.bool,
@@ -23,8 +22,7 @@ const Pagination = React.createClass({
     ]),
     /**
      * When `true`, will display the default node value ('&laquo;').
-     * When exactly `false`, will not display the element at all.
-     * Every other value (`truthy` or `null`) will be passed "as is".
+     * Otherwise, will display provided node (when specified).
      */
     first: React.PropTypes.oneOfType([
       React.PropTypes.bool,
@@ -32,8 +30,7 @@ const Pagination = React.createClass({
     ]),
     /**
      * When `true`, will display the default node value ('&raquo;').
-     * When exactly `false`, will not display the element at all.
-     * Every other value (`truthy` or `null`) will be passed "as is".
+     * Otherwise, will display provided node (when specified).
      */
     last: React.PropTypes.oneOfType([
       React.PropTypes.bool,
@@ -41,8 +38,7 @@ const Pagination = React.createClass({
     ]),
     /**
      * When `true`, will display the default node value ('&lsaquo;').
-     * When exactly `false`, will not display the element at all.
-     * Every other value (`truthy` or `null`) will be passed "as is".
+     * Otherwise, will display provided node (when specified).
      */
     prev: React.PropTypes.oneOfType([
       React.PropTypes.bool,
@@ -50,8 +46,7 @@ const Pagination = React.createClass({
     ]),
     /**
      * When `true`, will display the default node value ('&rsaquo;').
-     * When exactly `false`, will not display the element at all.
-     * Every other value (`truthy` or `null`) will be passed "as is".
+     * Otherwise, will display provided node (when specified).
      */
     next: React.PropTypes.oneOfType([
       React.PropTypes.bool,
@@ -123,7 +118,7 @@ const Pagination = React.createClass({
       );
     }
 
-    if (maxButtons && hasHiddenPagesAfter && ellipsis !== false) {
+    if (maxButtons && hasHiddenPagesAfter && ellipsis) {
       pageButtons.push(
         <PaginationButton
           key="ellipsis"
@@ -140,7 +135,7 @@ const Pagination = React.createClass({
   },
 
   renderPrev() {
-    if (this.props.prev === false) {
+    if (!this.props.prev) {
       return null;
     }
 
@@ -159,7 +154,7 @@ const Pagination = React.createClass({
   },
 
   renderNext() {
-    if (this.props.next === false) {
+    if (!this.props.next) {
       return null;
     }
 
@@ -178,7 +173,7 @@ const Pagination = React.createClass({
   },
 
   renderFirst() {
-    if (this.props.first === false) {
+    if (!this.props.first) {
       return null;
     }
 
@@ -197,7 +192,7 @@ const Pagination = React.createClass({
   },
 
   renderLast() {
-    if (this.props.last === false) {
+    if (!this.props.last) {
       return null;
     }
 
