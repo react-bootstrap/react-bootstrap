@@ -2,7 +2,6 @@
 
 import 'colors';
 import express from 'express';
-import createLocation from 'history/lib/createLocation';
 import httpProxy from 'http-proxy';
 import ip from 'ip';
 import path from 'path';
@@ -46,7 +45,7 @@ if (development) {
       res.header('Access-Control-Allow-Origin', target);
       res.header('Access-Control-Allow-Headers', 'X-Requested-With');
 
-      const location = createLocation(req.url);
+      const location = req.url;
       match({routes, location}, (error, redirectLocation, renderProps) => {
         const html = ReactDOMServer.renderToString(
           <RoutingContext {...renderProps} />
