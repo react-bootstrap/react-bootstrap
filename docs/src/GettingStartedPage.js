@@ -85,13 +85,14 @@ import { Button } from 'react-bootstrap';`
                   </div>
 
                   <h3><Anchor id="browser-globals">Browser globals</Anchor></h3>
-                  <p>The Bower repo contains <code>react-bootstrap.js</code> and <code>react-bootstrap.min.js</code> with all components exported in the <code>window.ReactBootstrap</code> object.</p>
+                  <p>We provide <code>react-bootstrap.js</code> and <code>react-bootstrap.min.js</code> bundles with all components exported on the <code>window.ReactBootstrap</code> object. These bundles are available on <a href="https://cdnjs.com/libraries/react-bootstrap">CDNJS</a>, and in both the Bower and NPM packages.</p>
                   <div className="highlight">
                     <CodeExample
                       mode="htmlmixed"
                       codeText={
-`<script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react.js"></script>
-<script src="path/to/react-bootstrap-bower/react-bootstrap.min.js"></script>
+`<script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react-dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/<version>/react-bootstrap.min.js"></script>
 <script>
   var Alert = ReactBootstrap.Alert;
 </script>`
