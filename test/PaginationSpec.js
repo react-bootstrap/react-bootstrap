@@ -93,12 +93,11 @@ describe('Pagination', () => {
     // add first, last, prev, next and ellipsis button
     assert.equal(pageButtons.length, 8);
 
-    assert.equal(React.findDOMNode(pageButtons[0]).innerText, 'first');
-    assert.equal(React.findDOMNode(pageButtons[1]).innerText, 'prev');
-    assert.equal(React.findDOMNode(pageButtons[5]).innerText, 'more');
-    assert.equal(React.findDOMNode(pageButtons[6]).innerText, 'next');
-    assert.equal(React.findDOMNode(pageButtons[7]).innerText, 'last');
-
+    assert.equal(pageButtons[0].innerText, 'first');
+    assert.equal(pageButtons[1].innerText, 'prev');
+    assert.equal(pageButtons[5].innerText, 'more');
+    assert.equal(pageButtons[6].innerText, 'next');
+    assert.equal(pageButtons[7].innerText, 'last');
   });
 
   it('Should enumerate pagenums correctly when ellipsis=true', () => {
