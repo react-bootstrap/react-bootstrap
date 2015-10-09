@@ -53,13 +53,14 @@ describe('Pagination', () => {
     pageButtons[4].className.should.match(/\bactive\b/);
   });
 
-  it('Should show the ellipsis, first, last, prev and next button', () => {
+  it('Should show the ellipsis, first, last, prev and next button with default labels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         first={true}
         last={true}
         prev={true}
         next={true}
+        ellipsis={true}
         maxButtons={3}
         activePage={10}
         items={20} />
@@ -73,6 +74,30 @@ describe('Pagination', () => {
     assert.equal(pageButtons[5].innerText, '...');
     assert.equal(pageButtons[6].innerText, '›');
     assert.equal(pageButtons[7].innerText, '»');
+
+  });
+
+  it('Should show the ellipsis, first, last, prev and next button with custom labels', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Pagination
+        first='first'
+        last='last'
+        prev='prev'
+        next='next'
+        ellipsis='more'
+        maxButtons={3}
+        activePage={10}
+        items={20} />
+    );
+    let pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+    // add first, last, prev, next and ellipsis button
+    assert.equal(pageButtons.length, 8);
+
+    assert.equal(React.findDOMNode(pageButtons[0]).innerText, 'first');
+    assert.equal(React.findDOMNode(pageButtons[1]).innerText, 'prev');
+    assert.equal(React.findDOMNode(pageButtons[5]).innerText, 'more');
+    assert.equal(React.findDOMNode(pageButtons[6]).innerText, 'next');
+    assert.equal(React.findDOMNode(pageButtons[7]).innerText, 'last');
 
   });
 

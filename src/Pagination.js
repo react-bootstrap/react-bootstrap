@@ -12,11 +12,46 @@ const Pagination = React.createClass({
     activePage: React.PropTypes.number,
     items: React.PropTypes.number,
     maxButtons: React.PropTypes.number,
-    ellipsis: React.PropTypes.bool,
-    first: React.PropTypes.bool,
-    last: React.PropTypes.bool,
-    prev: React.PropTypes.bool,
-    next: React.PropTypes.bool,
+    /**
+     * When `true`, will display the default node value ('...').
+     * Otherwise, will display provided node (when specified).
+     */
+    ellipsis: React.PropTypes.oneOfType([
+      React.PropTypes.bool,
+      React.PropTypes.node
+    ]),
+    /**
+     * When `true`, will display the default node value ('&laquo;').
+     * Otherwise, will display provided node (when specified).
+     */
+    first: React.PropTypes.oneOfType([
+      React.PropTypes.bool,
+      React.PropTypes.node
+    ]),
+    /**
+     * When `true`, will display the default node value ('&raquo;').
+     * Otherwise, will display provided node (when specified).
+     */
+    last: React.PropTypes.oneOfType([
+      React.PropTypes.bool,
+      React.PropTypes.node
+    ]),
+    /**
+     * When `true`, will display the default node value ('&lsaquo;').
+     * Otherwise, will display provided node (when specified).
+     */
+    prev: React.PropTypes.oneOfType([
+      React.PropTypes.bool,
+      React.PropTypes.node
+    ]),
+    /**
+     * When `true`, will display the default node value ('&rsaquo;').
+     * Otherwise, will display provided node (when specified).
+     */
+    next: React.PropTypes.oneOfType([
+      React.PropTypes.bool,
+      React.PropTypes.node
+    ]),
     onSelect: React.PropTypes.func,
     /**
      * You can use a custom element for the buttons
@@ -89,7 +124,9 @@ const Pagination = React.createClass({
           key="ellipsis"
           disabled
           buttonComponentClass={buttonComponentClass}>
-          <span aria-label="More">...</span>
+          <span aria-label="More">
+            {this.props.ellipsis === true ? '...' : this.props.ellipsis}
+          </span>
         </PaginationButton>
       );
     }
@@ -109,7 +146,9 @@ const Pagination = React.createClass({
         disabled={this.props.activePage === 1}
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label="Previous">&lsaquo;</span>
+        <span aria-label="Previous">
+          {this.props.prev === true ? '\u2039' : this.props.prev}
+        </span>
       </PaginationButton>
     );
   },
@@ -126,7 +165,9 @@ const Pagination = React.createClass({
         disabled={this.props.activePage >= this.props.items}
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label="Next">&rsaquo;</span>
+        <span aria-label="Next">
+          {this.props.next === true ? '\u203a' : this.props.next}
+        </span>
       </PaginationButton>
     );
   },
@@ -143,7 +184,9 @@ const Pagination = React.createClass({
         disabled={this.props.activePage === 1 }
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label="First">&laquo;</span>
+        <span aria-label="First">
+          {this.props.first === true ? '\u00ab' : this.props.first}
+        </span>
       </PaginationButton>
     );
   },
@@ -160,7 +203,9 @@ const Pagination = React.createClass({
         disabled={this.props.activePage >= this.props.items}
         onSelect={this.props.onSelect}
         buttonComponentClass={this.props.buttonComponentClass}>
-        <span aria-label="Last">&raquo;</span>
+        <span aria-label="Last">
+          {this.props.last === true ? '\u00bb' : this.props.last}
+        </span>
       </PaginationButton>
     );
   },
