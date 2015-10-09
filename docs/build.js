@@ -1,7 +1,6 @@
 /* eslint no-console: 0 */
 
 import fsp from 'fs-promise';
-import createLocation from 'history/lib/createLocation';
 import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -31,9 +30,7 @@ const readmeDest = path.join(docsBuilt, 'README.md');
  */
 function generateHTML(fileName) {
   return new Promise( resolve => {
-    const urlSlug = fileName === 'index.html' ? '/' : `/${fileName}`;
-    const location = createLocation(urlSlug);
-
+    const location = fileName === 'index.html' ? '/' : `/${fileName}`;
     match({routes, location}, (error, redirectLocation, renderProps) => {
       let html = ReactDOMServer.renderToString(
         <RoutingContext {...renderProps} />
