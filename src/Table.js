@@ -7,7 +7,8 @@ const Table = React.createClass({
     bordered: React.PropTypes.bool,
     condensed: React.PropTypes.bool,
     hover: React.PropTypes.bool,
-    responsive: React.PropTypes.bool
+    responsive: React.PropTypes.bool,
+    headers: React.PropTypes.arrayOf(React.PropTypes.string)
   },
 
   getDefaultProps() {
@@ -16,7 +17,8 @@ const Table = React.createClass({
       condensed: false,
       hover: false,
       responsive: false,
-      striped: false
+      striped: false,
+      headers: []
     };
   },
 
@@ -28,11 +30,31 @@ const Table = React.createClass({
       'table-condensed': this.props.condensed,
       'table-hover': this.props.hover
     };
-    let table = (
-      <table {...this.props} className={classNames(this.props.className, classes)}>
-        {this.props.children}
-      </table>
-    );
+
+    let table;
+
+    if (this.props.headers) {
+      const headerCols = this.props.headers.map((header, index) => <th key={index}>{header}</th>);
+      table = (
+        <table {...this.props} className={classNames(this.props.className, classes)}>
+          <thead>
+            <tr>
+              {headerCols}
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.children}
+          </tbody>
+        </table>
+      );
+    } else {
+      table = (
+        <table {...this.props} className={classNames(this.props.className, classes)}>
+          {this.props.children}
+        </table>
+      );
+    }
+
 
     return this.props.responsive ? (
       <div className="table-responsive">
