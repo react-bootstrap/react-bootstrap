@@ -1,7 +1,9 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+
 import BootstrapMixin from './BootstrapMixin';
 import SafeAnchor from './SafeAnchor';
+import createChainedFunction from './utils/createChainedFunction';
 
 const NavItem = React.createClass({
   mixins: [BootstrapMixin],
@@ -12,6 +14,7 @@ const NavItem = React.createClass({
     active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
+    onClick: React.PropTypes.func,
     role: React.PropTypes.string,
     title: React.PropTypes.node,
     eventKey: React.PropTypes.any,
@@ -33,6 +36,7 @@ const NavItem = React.createClass({
         disabled,
         active,
         href,
+        onClick,
         title,
         target,
         children,
@@ -46,11 +50,11 @@ const NavItem = React.createClass({
     let linkProps = {
       role,
       href,
+      onClick: createChainedFunction(onClick, this.handleClick),
       title,
       target,
       tabIndex,
-      id: linkId,
-      onClick: this.handleClick
+      id: linkId
     };
 
     if (!role && href === '#') {
