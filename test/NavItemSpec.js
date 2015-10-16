@@ -135,14 +135,24 @@ describe('NavItem', () => {
       assert.ok(linkElement.hasAttribute('aria-controls'));
     });
 
-    it('Should add aria-selected to the link', () => {
+    it('Should add aria-selected to the link when role is "tab"', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-          <NavItem active>Item content</NavItem>
+          <NavItem role="tab" active>Item content</NavItem>
         );
 
       let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
 
-      assert.equal(linkElement.getAttribute('aria-selected'), 'true');
+      expect(linkElement.getAttribute('aria-selected')).to.equal('true');
+    });
+
+    it('Should not add aria-selected to the link when role is not "tab"', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+          <NavItem role="button" active>Item content</NavItem>
+        );
+
+      let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
+
+      expect(linkElement.getAttribute('aria-selected')).to.not.exist;
     });
 
     it('Should pass role down', () => {
