@@ -4,7 +4,7 @@ beforeEach(() => {
   sinon.stub(console, 'error');
 });
 
-afterEach(() => {
+afterEach(function checkNoUnexpectedWarnings() {
   if (typeof console.error.restore === 'function') {
     assert(!console.error.called, () => {
       return `${console.error.getCall(0).args[0]} \nIn '${this.currentTest.fullTitle()}'`;
