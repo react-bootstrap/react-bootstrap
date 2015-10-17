@@ -55,11 +55,13 @@ const NavItem = React.createClass({
 
     if (!role && href === '#') {
       linkProps.role = 'button';
+    } else if (role === 'tab') {
+      linkProps['aria-selected'] = active;
     }
 
     return (
       <li {...props} role="presentation" className={classNames(props.className, classes)}>
-        <SafeAnchor {...linkProps} aria-selected={active} aria-controls={ariaControls}>
+        <SafeAnchor {...linkProps} aria-controls={ariaControls}>
           { children }
         </SafeAnchor>
       </li>
