@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import Button from './Button';
-import singlePropFrom from 'react-prop-types/lib/singlePropFrom';
 import SafeAnchor from './SafeAnchor';
 
 const CARET = <span> <span className="caret" /></span>;
@@ -23,16 +22,11 @@ export default class DropdownToggle extends React.Component {
         type="button"
         aria-haspopup
         aria-expanded={this.props.open}>
-        {this.props.title || this.props.children}{caret}
+        {this.props.children || this.props.title}{caret}
       </Component>
     );
   }
 }
-
-const titleAndChildrenValidation = singlePropFrom(
-  'title',
-  'children'
-);
 
 DropdownToggle.defaultProps = {
   open: false,
@@ -42,10 +36,9 @@ DropdownToggle.defaultProps = {
 
 DropdownToggle.propTypes = {
   bsRole: React.PropTypes.string,
-  children: titleAndChildrenValidation,
   noCaret: React.PropTypes.bool,
   open: React.PropTypes.bool,
-  title: titleAndChildrenValidation,
+  title: React.PropTypes.string,
   useAnchor: React.PropTypes.bool
 };
 
