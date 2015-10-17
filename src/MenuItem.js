@@ -37,7 +37,7 @@ export default class MenuItem extends React.Component {
       );
     }
 
-    const {className, style, href, onClick, ...props} = this.props;
+    const {className, style, onClick, ...props} = this.props;
 
     const classes = {
       disabled: this.props.disabled,
@@ -53,7 +53,6 @@ export default class MenuItem extends React.Component {
           {...props}
           role="menuitem"
           tabIndex="-1"
-          href={href || ''}
           onClick={createChainedFunction(onClick, this.handleClick)}
         />
       </li>
