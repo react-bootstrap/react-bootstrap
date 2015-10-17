@@ -82,6 +82,21 @@ describe('MenuItem', () => {
     ReactTestUtils.Simulate.click(anchor);
   });
 
+  it('should call custom onClick', () => {
+    const handleClick = sinon.spy();
+    const handleSelect = sinon.spy();
+
+    const instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem onClick={handleClick} onSelect={handleSelect}>Item</MenuItem>
+    );
+    const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
+
+    ReactTestUtils.Simulate.click(anchor);
+
+    expect(handleClick).to.have.been.called;
+    expect(handleSelect).to.have.been.called;
+  });
+
   it('does not fire onSelect when divider is clicked', () => {
     const handleSelect = () => {
       throw new Error('Should not invoke onSelect with divider flag applied');
