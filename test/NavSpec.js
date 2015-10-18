@@ -5,6 +5,8 @@ import Button from '../src/Button';
 import Nav from '../src/Nav';
 import NavItem from '../src/NavItem';
 
+import {shouldWarn} from './helpers';
+
 describe('Nav', () => {
   it('Should set the correct item active', () => {
     let instance = ReactTestUtils.renderIntoDocument(
@@ -178,6 +180,13 @@ describe('Nav', () => {
     assert.equal(navNode.id, 'nav-id');
   });
 
+  it('Should warn when attempting to use a justified navbar nav', () => {
+    ReactTestUtils.renderIntoDocument(
+      <Nav navbar justified />
+    );
+
+    shouldWarn('justified navbar `Nav`s are not supported');
+  });
 
   describe('Web Accessibility', () => {
 
