@@ -68,7 +68,7 @@ describe('Table', () => {
     });
 
     it('Should have row in table head', () => {
-     const tr = ReactDOM.findDOMNode(instance).firstChild.firstChild;
+      const tr = ReactDOM.findDOMNode(instance).firstChild.firstChild;
       assert.equal(tr.nodeName, 'TR');
     });
 
