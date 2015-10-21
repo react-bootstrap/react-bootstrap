@@ -149,7 +149,8 @@ const OverlayTrigger = React.createClass({
   componentWillUnmount() {
     ReactDOM.unmountComponentAtNode(this._mountNode);
     this._mountNode = null;
-    clearTimeout(this._hoverDelay);
+    clearTimeout(this._hoverShowDelay);
+    clearTimeout(this._hoverHideDelay);
   },
 
   componentDidUpdate() {
@@ -226,9 +227,13 @@ const OverlayTrigger = React.createClass({
   },
 
   handleDelayedShow() {
-    if (this._hoverDelay != null) {
-      clearTimeout(this._hoverDelay);
-      this._hoverDelay = null;
+    if (this._hoverHideDelay != null) {
+      clearTimeout(this._hoverHideDelay);
+      this._hoverHideDelay = null;
+      return;
+    }
+
+    if (this.state.isOverlayShown || this._hoverShowDelay != null) {
       return;
     }
 
@@ -240,16 +245,20 @@ const OverlayTrigger = React.createClass({
       return;
     }
 
-    this._hoverDelay = setTimeout(() => {
-      this._hoverDelay = null;
+    this._hoverShowDelay = setTimeout(() => {
+      this._hoverShowDelay = null;
       this.show();
     }, delay);
   },
 
   handleDelayedHide() {
-    if (this._hoverDelay != null) {
-      clearTimeout(this._hoverDelay);
-      this._hoverDelay = null;
+    if (this._hoverShowDelay != null) {
+      clearTimeout(this._hoverShowDelay);
+      this._hoverShowDelay = null;
+      return;
+    }
+
+    if (!this.state.isOverlayShown || this._hoverHideDelay != null) {
       return;
     }
 
@@ -261,8 +270,8 @@ const OverlayTrigger = React.createClass({
       return;
     }
 
-    this._hoverDelay = setTimeout(() => {
-      this._hoverDelay = null;
+    this._hoverHideDelay = setTimeout(() => {
+      this._hoverHideDelay = null;
       this.hide();
     }, delay);
   },
