@@ -17,7 +17,7 @@ class ButtonInput extends InputBase {
   }
 }
 
-ButtonInput.types = ['button', 'reset', 'submit'];
+ButtonInput.types = Button.types;
 
 ButtonInput.defaultProps = {
   type: 'button'
