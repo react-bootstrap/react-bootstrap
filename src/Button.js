@@ -3,8 +3,6 @@ import classNames from 'classnames';
 import BootstrapMixin from './BootstrapMixin';
 import elementType from 'react-prop-types/lib/elementType';
 
-const types = ['button', 'reset', 'submit'];
-
 const Button = React.createClass({
   mixins: [BootstrapMixin],
 
@@ -25,7 +23,7 @@ const Button = React.createClass({
      * @type {("button"|"reset"|"submit")}
      * @defaultValue 'button'
      */
-    type: React.PropTypes.oneOf(types)
+    type: React.PropTypes.oneOf(Button.types)
   },
 
   getDefaultProps() {
@@ -102,6 +100,6 @@ const Button = React.createClass({
   }
 });
 
-Button.types = types;
+Button.types = ['button', 'reset', 'submit'];
 
 export default Button;
