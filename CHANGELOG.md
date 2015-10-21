@@ -1,3 +1,15 @@
+v0.27.2 - Sun, 18 Oct 2015 02:21:06 GMT
+---------------------------------------
+
+- [e333c3d](../../commit/e333c3d) [fixed] Falsy href handling on MenuItem
+- [4f4017e](../../commit/4f4017e) [fixed] DropdownTitle children v. title
+- [8612b91](../../commit/8612b91) [fixed] Respect onClick on MenuItem
+- [b64ed11](../../commit/b64ed11) [fixed] Put onClick on correct element on NavItem
+- [9e4c041](../../commit/9e4c041) [fixed] Incorrect 'aria-selected' on NavItem
+- [0b0ac36](../../commit/0b0ac36) [added] Custom labels for Pagination's special element (ellipsis, first, last, prev & next)
+
+
+
 v0.27.1 - Thu, 08 Oct 2015 17:48:24 GMT
 ---------------------------------------
 

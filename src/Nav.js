@@ -1,10 +1,12 @@
-import React, { cloneElement } from 'react';
-import BootstrapMixin from './BootstrapMixin';
-import Collapse from './Collapse';
 import classNames from 'classnames';
+import React, { cloneElement } from 'react';
+import all from 'react-prop-types/lib/all';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
+
+import BootstrapMixin from './BootstrapMixin';
+import Collapse from './Collapse';
 
 const Nav = React.createClass({
   mixins: [BootstrapMixin],
@@ -14,7 +16,17 @@ const Nav = React.createClass({
     activeKey: React.PropTypes.any,
     bsStyle: React.PropTypes.oneOf(['tabs', 'pills']),
     stacked: React.PropTypes.bool,
-    justified: React.PropTypes.bool,
+    /**
+     * Make `NavItem`s equal widths on small or larger displays and stacked
+     * otherwise. Not supported for `Nav`s in `Navbar`s.
+     */
+    justified: all(
+      React.PropTypes.bool,
+      ({justified, navbar}) => (
+        justified && navbar ?
+          Error('justified navbar `Nav`s are not supported') : null
+      )
+    ),
     onSelect: React.PropTypes.func,
     collapsible: React.PropTypes.bool,
     /**

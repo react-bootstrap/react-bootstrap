@@ -1,7 +1,9 @@
-import React from 'react';
 import classnames from 'classnames';
+import React from 'react';
 import all from 'react-prop-types/lib/all';
+
 import SafeAnchor from './SafeAnchor';
+import createChainedFunction from './utils/createChainedFunction';
 
 export default class MenuItem extends React.Component {
   constructor(props) {
@@ -35,6 +37,8 @@ export default class MenuItem extends React.Component {
       );
     }
 
+    const {className, style, onClick, ...props} = this.props;
+
     const classes = {
       disabled: this.props.disabled,
       active: this.props.active
@@ -42,20 +46,15 @@ export default class MenuItem extends React.Component {
 
     return (
       <li role="presentation"
-        className={classnames(this.props.className, classes)}
-        style={this.props.style}
+        className={classnames(className, classes)}
+        style={style}
       >
         <SafeAnchor
+          {...props}
           role="menuitem"
           tabIndex="-1"
-          id={this.props.id}
-          target={this.props.target}
-          title={this.props.title}
-          href={this.props.href || ''}
-          onKeyDown={this.props.onKeyDown}
-          onClick={this.handleClick}>
-          {this.props.children}
-        </SafeAnchor>
+          onClick={createChainedFunction(onClick, this.handleClick)}
+        />
       </li>
     );
   }
@@ -80,6 +79,7 @@ MenuItem.propTypes = {
   href: React.PropTypes.string,
   target: React.PropTypes.string,
   title: React.PropTypes.string,
+  onClick: React.PropTypes.func,
   onKeyDown: React.PropTypes.func,
   onSelect: React.PropTypes.func,
   id: React.PropTypes.oneOfType([
