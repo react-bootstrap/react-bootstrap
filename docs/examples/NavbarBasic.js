@@ -1,6 +1,6 @@
 const navbarInstance = (
   <Navbar>
-    <NavBrand>React-Bootstrap</NavBrand>
+    <NavBrand><a href="#">React-Bootstrap</a></NavBrand>
     <Nav>
       <NavItem eventKey={1} href="#">Link</NavItem>
       <NavItem eventKey={2} href="#">Link</NavItem>

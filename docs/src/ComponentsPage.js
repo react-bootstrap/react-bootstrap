@@ -504,16 +504,11 @@ const ComponentsPage = React.createClass({
 
                   <p>Navbars are by default accessible and will provide <code>role="navigation"</code>.</p>
                   <p>They also supports all the different Bootstrap classes as properties. Just camelCase the css class and remove navbar from it. For example <code>navbar-fixed-top</code> becomes the property <code>fixedTop</code>. The different properties are <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>, <code>inverse</code>, <code>fluid</code>.</p>
-                  <p>You can drag elements to the right by specifying the <code>right</code> property on a nav group.</p>
+                  <p>You can specify a brand node by wrapping it in a <code>NavBrand</code> element and passing it as a child to the <code>Navbar</code>.</p>
+                  <p>You can drag elements to the right by specifying the <code>right</code> property on the <code>Nav</code> component.</p>
 
                   <h3><Anchor id="navbars-basic">Navbar Basic Example</Anchor></h3>
                   <ReactPlayground codeText={Samples.NavbarBasic} />
-
-                  <h3><Anchor id="navbars-brand">Navbar Brand Example</Anchor></h3>
-                  <p>You can specify a brand by passing a <code>NavBrand</code> component as a child to the <code>Navbar</code> component.</p>
-                  <p><code>NavBrand</code> accepts either string or a renderable component as a child.</p>
-                  <p><em>Note: <code>brand</code> attribute of <code>Navbar</code> component has been deprecated. Use <code>NavBrand</code> component instead.</em></p>
-                  <ReactPlayground codeText={Samples.NavbarBrand} />
 
                   <h3><Anchor id="navbars-mobile-friendly">Mobile Friendly</Anchor></h3>
                   <p>To have a mobile friendly Navbar, specify the property <code>toggleNavKey</code> on the Navbar with a value corresponding to an <code>eventKey</code> of one of his <code>Nav</code> children. This child will be the one collapsed.</p>
@@ -541,7 +536,15 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.CollapsibleNav} />
 
                   <h3><Anchor id="navbar-props">Props</Anchor></h3>
+
+                  <h4><Anchor id="navs-props-navbar">Navbar</Anchor></h4>
                   <PropTable component="Navbar"/>
+
+                  <h4><Anchor id="navs-props-navbrand">NavBrand</Anchor></h4>
+                  <PropTable component="NavBrand"/>
+
+                  <h4><Anchor id="navs-props-collapsiblenav">CollapsibleNav</Anchor></h4>
+                  <PropTable component="CollapsibleNav"/>
                 </div>
 
                 {/* Breadcrumb */}
