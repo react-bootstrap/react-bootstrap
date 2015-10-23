@@ -1,6 +1,6 @@
 const navbarInstance = (
   <Navbar toggleNavKey={0}>
-    <NavBrand>React-Bootstrap</NavBrand>
+    <NavBrand><a href="#">React-Bootstrap</a></NavBrand>
     <CollapsibleNav eventKey={0}> {/* This is the eventKey referenced */}
       <Nav navbar>
         <NavItem eventKey={1} href="#">Link</NavItem>
