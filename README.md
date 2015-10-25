@@ -4,8 +4,9 @@
 
 [![Travis Build Status][build-badge]][build]
 [![Build status][appveyor-badge]][appveyor]
+[![Coverage Status][coveralls-badge]][coveralls]
 
-[![HuBoard][huboard-badge]][huboard]
+[![Discord][discord-badge]][discord]
 [![Gitter][gitter-badge]][gitter]
 [![Thinkful][thinkful-badge]][thinkful]
 
@@ -60,7 +61,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [bower-badge]: https://badge.fury.io/bo/react-bootstrap.svg
 [bower]: http://badge.fury.io/bo/react-bootstrap
 
-[gitter-badge]: https://badges.gitter.im/Join%20Chat.svg
+[gitter-badge]: https://img.shields.io/badge/Gitter-Join%20chat%20%E2%86%92-1dce73.svg
 [gitter]: https://gitter.im/react-bootstrap/react-bootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 [deps-badge]: https://david-dm.org/react-bootstrap/react-bootstrap.svg
@@ -77,11 +78,14 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [complementary-tools]: https://github.com/facebook/react/wiki/Complementary-Tools
 
-[huboard-badge]: https://img.shields.io/badge/Hu-Board-7965cc.svg
-[huboard]: https://huboard.com/react-bootstrap/react-bootstrap
-
 [thinkful-badge]: https://tf-assets-staging.s3.amazonaws.com/badges/thinkful_repo_badge.svg
 [thinkful]: http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap
 
 [appveyor-badge]: https://ci.appveyor.com/api/projects/status/ylitpyo6n5yq1s6i/branch/master?svg=true
 [appveyor]: https://ci.appveyor.com/project/react-bootstrap/react-bootstrap/branch/master
+
+[coveralls-badge]: https://coveralls.io/repos/react-bootstrap/react-bootstrap/badge.svg?branch=master&service=github
+[coveralls]: https://coveralls.io/github/react-bootstrap/react-bootstrap?branch=master
+
+[discord-badge]: https://img.shields.io/badge/Discord-Join%20chat%20%E2%86%92-738bd7.svg
+[discord]: https://discord.gg/0ZcbPKXt5bXLs9XK
