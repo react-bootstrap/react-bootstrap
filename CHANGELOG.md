@@ -1,3 +1,12 @@
+v0.27.3 - Mon, 26 Oct 2015 13:59:37 GMT
+---------------------------------------
+
+- [9d5df37](../../commit/9d5df37) [fixed] OverlayTrigger show/hide timeout management
+- [6e37b27](../../commit/6e37b27) [fixed] Remove cross import between Button & ButtonInput
+- [6bad1e8](../../commit/6bad1e8) [fixed] Explicitly disallow justified Navbar Navs
+
+
+
 v0.27.2 - Sun, 18 Oct 2015 02:21:06 GMT
 ---------------------------------------
 
