@@ -5,7 +5,7 @@ import warning from 'warning';
 
 class ResponsiveEmbed extends React.Component {
   render() {
-    const { bsClass, className, a16by9, a4by3, ...props } = this.props;
+    const { bsClass, className, a16by9, a4by3, children, ...props } = this.props;
     warning(!(!a16by9 && !a4by3), '`a16by9` or `a4by3` attribute must be set.');
     warning(!(a16by9 && a4by3), 'Either `a16by9` or `a4by3` attribute can be set. Not both.');
 
@@ -16,13 +16,10 @@ class ResponsiveEmbed extends React.Component {
 
     return (
       <div className={classNames(bsClass, aspectRatio)}>
-        {cloneElement(
-          this.props.children,
-          {
-            ...props,
-            className: classNames(className, 'embed-responsive-item')
-          }
-        )}
+        {cloneElement(children, {
+          ...props,
+          className: classNames(className, 'embed-responsive-item')
+        })}
       </div>
     );
   }
