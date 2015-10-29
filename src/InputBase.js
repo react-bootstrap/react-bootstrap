@@ -226,12 +226,14 @@ InputBase.propTypes = {
   groupClassName: React.PropTypes.string,
   wrapperClassName: React.PropTypes.string,
   labelClassName: React.PropTypes.string,
+  autoFocus: React.PropTypes.bool,
   multiple: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
   value: React.PropTypes.any
 };
 
 InputBase.defaultProps = {
+  autoFocus: false,
   disabled: false,
   hasFeedback: false,
   multiple: false
