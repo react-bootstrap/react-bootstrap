@@ -284,6 +284,11 @@ describe('Input', () => {
     assert.isNotNull(node.getAttribute('disabled'));
   });
 
+  it('renders a autofocus input correctly', () => {
+    let input = React.createElement(Input, {autoFocus: true});
+    assert.isNotNull(input.props.autoFocus);
+  });
+
   context('when Input listens to feedback', () => {
     it('renders success feedback as Glyphicon', () => {
       let instance = ReactTestUtils.renderIntoDocument(
