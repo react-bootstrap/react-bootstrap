@@ -952,6 +952,20 @@ const ComponentsPage = React.createClass({
 
                   <h3><Anchor id="utilities-collapse">Collapse</Anchor></h3>
                   <p>Add a collapse toggle animation to an element or component.</p>
+                  <div className="bs-callout bs-callout-info">
+                    <h4>Smoothing animations</h4>
+                    <p>
+                      If you're noticing choppy animations,
+                      and the component that's being collapsed
+                      has non-zero margin or padding,
+                      try wrapping the contents
+                      of your <code>&lt;Collapse&gt;</code>
+                      {" "}inside a node with no margin or padding,
+                      like the <code>&lt;div&gt;</code> in the example below.
+                      This will allow the height to be computed properly,
+                      so the animation can proceed smoothly.
+                    </p>
+                  </div>
                   <ReactPlayground codeText={Samples.Collapse} />
 
                   <h4><Anchor id="utilities-collapse-props">Props</Anchor></h4>
