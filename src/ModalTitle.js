@@ -1,12 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
+import tbsUtils from './utils/bootstrapUtils';
 
 class ModalTitle extends React.Component {
   render() {
     return (
       <h4
         {...this.props}
-        className={classNames(this.props.className, this.props.modalClassName)}>
+        className={classNames(this.props.className, tbsUtils.prefix(this.props, 'title'))}>
         { this.props.children }
       </h4>
     );
@@ -14,14 +15,11 @@ class ModalTitle extends React.Component {
 }
 
 ModalTitle.propTypes = {
-  /**
-   * A css class applied to the Component
-   */
-  modalClassName: React.PropTypes.string
+  bsClass: React.PropTypes.string
 };
 
 ModalTitle.defaultProps = {
-  modalClassName: 'modal-title'
+  bsClass: 'modal'
 };
 
 export default ModalTitle;

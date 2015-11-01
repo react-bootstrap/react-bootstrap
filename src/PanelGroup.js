@@ -1,14 +1,11 @@
-/* eslint react/prop-types: [2, {ignore: "bsStyle"}] */
-/* BootstrapMixin contains `bsStyle` type validation */
-
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils, { bsClass } from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const PanelGroup = React.createClass({
-  mixins: [BootstrapMixin],
+
 
   propTypes: {
     accordion: React.PropTypes.bool,
@@ -21,8 +18,7 @@ const PanelGroup = React.createClass({
 
   getDefaultProps() {
     return {
-      accordion: false,
-      bsClass: 'panel-group'
+      accordion: false
     };
   },
 
@@ -35,7 +31,7 @@ const PanelGroup = React.createClass({
   },
 
   render() {
-    let classes = this.getBsClassSet();
+    let classes = bootstrapUtils.getClassSet(this.props);
     let {className, ...props} = this.props;
     if (this.props.accordion) { props.role = 'tablist'; }
     return (
@@ -93,4 +89,4 @@ const PanelGroup = React.createClass({
   }
 });
 
-export default PanelGroup;
+export default bsClass('panel-group', PanelGroup);

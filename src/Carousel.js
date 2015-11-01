@@ -1,11 +1,10 @@
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import Glyphicon from './Glyphicon';
+import tbsUtils from './utils/bootstrapUtils';
 
 const Carousel = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
     slide: React.PropTypes.bool,
@@ -25,6 +24,7 @@ const Carousel = React.createClass({
 
   getDefaultProps() {
     return {
+      bsClass: 'carousel',
       slide: true,
       interval: 5000,
       pauseOnHover: true,
@@ -141,7 +141,7 @@ const Carousel = React.createClass({
 
   render() {
     let classes = {
-      carousel: true,
+      [tbsUtils.prefix(this.props)]: true,
       slide: this.props.slide
     };
 
@@ -151,8 +151,13 @@ const Carousel = React.createClass({
         className={classNames(this.props.className, classes)}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}>
-        {this.props.indicators ? this.renderIndicators() : null}
-        <div className="carousel-inner" ref="inner">
+        {
+          this.props.indicators ? this.renderIndicators() : null
+        }
+        <div
+          ref="inner"
+          className={tbsUtils.prefix(this.props, 'inner')}
+        >
           {ValidComponentChildren.map(this.props.children, this.renderItem)}
         </div>
         {this.props.controls ? this.renderControls() : null}
@@ -161,16 +166,20 @@ const Carousel = React.createClass({
   },
 
   renderPrev() {
+    let classes = 'left ' + tbsUtils.prefix(this.props, 'control');
+
     return (
-      <a className="left carousel-control" href="#prev" key={0} onClick={this.prev}>
+      <a className={classes} href="#prev" key={0} onClick={this.prev}>
         {this.props.prevIcon}
       </a>
     );
   },
 
   renderNext() {
+    let classes = 'right ' + tbsUtils.prefix(this.props, 'control');
+
     return (
-      <a className="right carousel-control" href="#next" key={1} onClick={this.next}>
+      <a className={classes} href="#next" key={1} onClick={this.next}>
         {this.props.nextIcon}
       </a>
     );
@@ -219,7 +228,7 @@ const Carousel = React.createClass({
       }, this);
 
     return (
-      <ol className="carousel-indicators">
+      <ol className={tbsUtils.prefix(this.props, 'indicators')}>
         {indicators}
       </ol>
     );

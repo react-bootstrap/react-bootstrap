@@ -1,12 +1,9 @@
-import classNames from 'classnames';
 import React from 'react';
-
-import BootstrapMixin from './BootstrapMixin';
+import classNames from 'classnames';
 import SafeAnchor from './SafeAnchor';
 import createChainedFunction from './utils/createChainedFunction';
 
 const NavItem = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
     linkId: React.PropTypes.string,

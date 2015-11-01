@@ -1,13 +1,9 @@
 import React from 'react';
-import BootstrapMixin from './BootstrapMixin';
 import Dropdown from './Dropdown';
 import omit from 'lodash-compat/object/omit';
+import Button from './Button';
 
 class DropdownButton extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     let { title, ...props } = this.props;
@@ -28,15 +24,16 @@ class DropdownButton extends React.Component {
 }
 
 DropdownButton.propTypes = {
+  bsStyle: Button.propTypes.bsStyle,
+  bsSize: Button.propTypes.bsSize,
+
   /**
    * When used with the `title` prop, the noCaret option will not render a caret icon, in the toggle element.
    */
   noCaret: React.PropTypes.bool,
-
   title: React.PropTypes.node.isRequired,
 
   ...Dropdown.propTypes,
-  ...BootstrapMixin.propTypes
 };
 
 DropdownButton.defaultProps = {

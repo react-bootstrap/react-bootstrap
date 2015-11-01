@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import React, {cloneElement} from 'react';
 import ReactDOM from 'react-dom';
 import domUtils from './utils/domUtils';
+import bootstrapUtils from './utils/bootstrapUtils';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import EventListener from './utils/EventListener';
 import createChainedFunction from './utils/createChainedFunction';
@@ -210,8 +211,9 @@ const Modal = React.createClass({
   },
 
   renderBackdrop(modal) {
-    let { animation, bsClass } = this.props;
+    let { animation } = this.props;
     let duration = Modal.BACKDROP_TRANSITION_DURATION;
+    let prefix = bootstrapUtils.prefix(this.props);
 
     // Don't handle clicks for "static" backdrops
     let onClick = this.props.backdrop === true ?
@@ -220,7 +222,7 @@ const Modal = React.createClass({
     let backdrop = (
       <div
         ref="backdrop"
-        className={classNames(`${bsClass}-backdrop`, { in: this.props.show && !animation })}
+        className={classNames(`${prefix}-backdrop`, { in: this.props.show && !animation })}
         onClick={onClick}/>
     );
 

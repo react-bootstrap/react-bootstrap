@@ -1,5 +1,4 @@
 import React, { cloneElement } from 'react';
-import BootstrapMixin from './BootstrapMixin';
 import Collapse from './Collapse';
 import classNames from 'classnames';
 
@@ -7,7 +6,6 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
 
 const CollapsibleNav = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
     onSelect: React.PropTypes.func,

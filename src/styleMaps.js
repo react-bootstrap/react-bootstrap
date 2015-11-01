@@ -1,41 +1,15 @@
+
+let constant = obj => {
+  return Object.assign(
+    Object.create({
+      values() {
+        return Object.keys(this).map(k => this[k]);
+      }
+    }), obj);
+};
+
 const styleMaps = {
-  CLASSES: {
-    'alert': 'alert',
-    'button': 'btn',
-    'button-group': 'btn-group',
-    'button-toolbar': 'btn-toolbar',
-    'column': 'col',
-    'input-group': 'input-group',
-    'form': 'form',
-    'glyphicon': 'glyphicon',
-    'label': 'label',
-    'thumbnail': 'thumbnail',
-    'list-group-item': 'list-group-item',
-    'panel': 'panel',
-    'panel-group': 'panel-group',
-    'pagination': 'pagination',
-    'progress-bar': 'progress-bar',
-    'nav': 'nav',
-    'navbar': 'navbar',
-    'modal': 'modal',
-    'row': 'row',
-    'well': 'well'
-  },
-  STYLES: [
-    'default',
-    'primary',
-    'success',
-    'info',
-    'warning',
-    'danger',
-    'link',
-    'inline',
-    'tabs',
-    'pills'
-  ],
-  addStyle(name) {
-    styleMaps.STYLES.push(name);
-  },
+
   SIZES: {
     'large': 'lg',
     'medium': 'md',
@@ -48,5 +22,24 @@ const styleMaps = {
   },
   GRID_COLUMNS: 12
 };
+
+export const Sizes = constant({
+  LARGE: 'large',
+  MEDIUM: 'medium',
+  SMALL: 'small',
+  XSMALL: 'xsmall'
+});
+
+export const State = constant({
+  SUCCESS: 'success',
+  WARNING: 'warning',
+  DANGER: 'danger',
+  INFO: 'info'
+});
+
+export const DEFAULT = 'default';
+export const PRIMARY = 'primary';
+export const LINK = 'link';
+export const INVERSE = 'inverse';
 
 export default styleMaps;

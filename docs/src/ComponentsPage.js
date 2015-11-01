@@ -225,16 +225,17 @@ const ComponentsPage = React.createClass({
                   <h1 className="page-header"><Anchor id="menu-item">Menu Item</Anchor> <small> MenuItem</small></h1>
                   <p>This is a component used in other components (see <a href="buttons">Buttons</a>, <a href="#navbars">Navbars</a>).</p>
                   <p>It supports the basic anchor properties <code>href</code>, <code>target</code>, <code>title</code>.</p>
-                  <p>It also supports different properties of the normal Bootstrap MenuItem.
-                    <ul>
-                      <li><code>header</code>: To add a header label to sections</li>
-                      <li><code>divider</code>: Adds an horizontal divider between sections</li>
-                      <li><code>disabled</code>: shows the item as disabled, and prevents the onclick</li>
-                      <li><code>eventKey</code>: passed to the callback</li>
-                      <li><code>onSelect</code>: a callback that is called when the user clicks the item.</li>
-                    </ul>
-                  <p>The callback is called with the following arguments: <code>eventKey</code>, <code>href</code> and <code>target</code></p>
+                  <p>
+                    It also supports different properties of the normal Bootstrap MenuItem.
                   </p>
+                  <ul>
+                    <li><code>header</code>: To add a header label to sections</li>
+                    <li><code>divider</code>: Adds an horizontal divider between sections</li>
+                    <li><code>disabled</code>: shows the item as disabled, and prevents the onclick</li>
+                    <li><code>eventKey</code>: passed to the callback</li>
+                    <li><code>onSelect</code>: a callback that is called when the user clicks the item.</li>
+                  </ul>
+                  <p>The callback is called with the following arguments: <code>eventKey</code>, <code>href</code> and <code>target</code></p>
                   <ReactPlayground codeText={Samples.MenuItem} />
 
                   <h3><Anchor id="menu-item-props">Props</Anchor></h3>

@@ -1,13 +1,13 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
-
 import Col from './Col';
 import Nav from './Nav';
 import NavItem from './NavItem';
 import styleMaps from './styleMaps';
 import keycode from 'keycode';
 import createChainedFunction from './utils/createChainedFunction';
+import tbsUtils from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 let paneId = (props, child) => child.props.id ? child.props.id : props.id && (props.id + '___pane___' + child.props.eventKey);
@@ -97,6 +97,7 @@ const Tabs = React.createClass({
 
   getDefaultProps() {
     return {
+      bsClass: 'tab',
       animation: true,
       tabWidth: 2,
       position: 'top',
@@ -178,6 +179,7 @@ const Tabs = React.createClass({
     const tabsProps = {
       ...props,
       bsStyle,
+      bsClass: undefined,
       stacked: isHorizontal,
       activeKey: this.getActiveKey(),
       onSelect: this.handleSelect,
@@ -187,7 +189,7 @@ const Tabs = React.createClass({
     const childTabs = ValidComponentChildren.map(children, this.renderTab);
 
     const panesProps = {
-      className: 'tab-content',
+      className: tbsUtils.prefix(this.props, 'content'),
       ref: 'panes'
     };
     const childPanes = ValidComponentChildren.map(children, this.renderPane);
