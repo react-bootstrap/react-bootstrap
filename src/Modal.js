@@ -87,6 +87,11 @@ const Modal = React.createClass({
     backdrop: React.PropTypes.oneOf(['static', true, false]),
 
     /**
+     * A css class to apply to the Modal backdrop's DOM node.
+     */
+    backdropClassName: React.PropTypes.string,
+
+    /**
      * Close the modal when escape key is pressed
      */
     keyboard: React.PropTypes.bool,
@@ -134,6 +139,7 @@ const Modal = React.createClass({
       show: false,
       animation: true,
       backdrop: true,
+      backdropClassName: '',
       keyboard: true,
       autoFocus: true,
       enforceFocus: true
@@ -210,7 +216,7 @@ const Modal = React.createClass({
   },
 
   renderBackdrop(modal) {
-    let { animation, bsClass } = this.props;
+    let { animation, bsClass, backdropClassName } = this.props;
     let duration = Modal.BACKDROP_TRANSITION_DURATION;
 
     // Don't handle clicks for "static" backdrops
@@ -220,7 +226,7 @@ const Modal = React.createClass({
     let backdrop = (
       <div
         ref="backdrop"
-        className={classNames(`${bsClass}-backdrop`, { in: this.props.show && !animation })}
+        className={classNames(`${backdropClassName} ${bsClass}-backdrop`, { in: this.props.show && !animation })}
         onClick={onClick}/>
     );
 
