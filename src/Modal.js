@@ -89,7 +89,7 @@ const Modal = React.createClass({
     /**
      * A css class to apply to the Modal backdrop's DOM node.
      */
-    backdropClassName: React.PropTypes.string
+    backdropClassName: React.PropTypes.string,
 
     /**
      * Close the modal when escape key is pressed
