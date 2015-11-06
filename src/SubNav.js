@@ -3,11 +3,10 @@ import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
-import BootstrapMixin from './BootstrapMixin';
 import SafeAnchor from './SafeAnchor';
 
 const SubNav = React.createClass({
-  mixins: [BootstrapMixin],
+
 
   propTypes: {
     onSelect: React.PropTypes.func,

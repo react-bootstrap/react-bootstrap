@@ -1,12 +1,15 @@
 import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
 import elementType from 'react-prop-types/lib/elementType';
 
 const types = ['button', 'reset', 'submit'];
 
-const Button = React.createClass({
-  mixins: [BootstrapMixin],
+import bootstrapUtils, { bsStyles, bsSizes, bsClass } from './utils/bootstrapUtils';
+import { Sizes, State, DEFAULT, PRIMARY, LINK } from './styleMaps';
+
+const ButtonStyles = State.values().concat(DEFAULT, PRIMARY, LINK);
+
+let Button = React.createClass({
 
   propTypes: {
     active: React.PropTypes.bool,
@@ -32,8 +35,6 @@ const Button = React.createClass({
     return {
       active: false,
       block: false,
-      bsClass: 'button',
-      bsStyle: 'default',
       disabled: false,
       navItem: false,
       navDropdown: false
@@ -41,12 +42,14 @@ const Button = React.createClass({
   },
 
   render() {
-    let classes = this.props.navDropdown ? {} : this.getBsClassSet();
+    let classes = this.props.navDropdown ? {} : bootstrapUtils.getClassSet(this.props);
     let renderFuncName;
+
+    let blockClass = bootstrapUtils.prefix(this.props, 'block');
 
     classes = {
       active: this.props.active,
-      'btn-block': this.props.block,
+      [blockClass]: this.props.block,
       ...classes
     };
 
@@ -104,4 +107,8 @@ const Button = React.createClass({
 
 Button.types = types;
 
-export default Button;
+export default bsStyles(ButtonStyles, DEFAULT,
+  bsSizes([Sizes.LARGE, Sizes.SMALL, Sizes.XSMALL],
+    bsClass('btn', Button)
+  )
+);

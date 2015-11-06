@@ -1,17 +1,17 @@
-import classNames from 'classnames';
 import React from 'react';
+import classNames from 'classnames';
 import deprecated from 'react-prop-types/lib/deprecated';
 import elementType from 'react-prop-types/lib/elementType';
 
-import BootstrapMixin from './BootstrapMixin';
 import Grid from './Grid';
 import NavBrand from './NavBrand';
 
+import tbsUtils, { bsClass, bsStyles } from './utils/bootstrapUtils';
+import { DEFAULT, INVERSE } from './styleMaps';
 import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const Navbar = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
     fixedTop: React.PropTypes.bool,
@@ -37,8 +37,6 @@ const Navbar = React.createClass({
 
   getDefaultProps() {
     return {
-      bsClass: 'navbar',
-      bsStyle: 'default',
       role: 'navigation',
       componentClass: 'nav',
       fixedTop: false,
@@ -99,11 +97,15 @@ const Navbar = React.createClass({
       ...props
     } = this.props;
 
-    const classes = this.getBsClassSet();
-    classes['navbar-fixed-top'] = fixedTop;
-    classes['navbar-fixed-bottom'] = fixedBottom;
-    classes['navbar-static-top'] = staticTop;
-    classes['navbar-inverse'] = inverse;
+    const classes = tbsUtils.getClassSet(this.props);
+
+    classes[tbsUtils.prefix(this.props, 'fixed-top')] = this.props.fixedTop;
+    classes[tbsUtils.prefix(this.props, 'fixed-bottom')] = this.props.fixedBottom;
+    classes[tbsUtils.prefix(this.props, 'static-top')] = this.props.staticTop;
+
+    // handle built-in styles manually to provide the convenience `inverse` prop
+    classes[tbsUtils.prefix(this.props, INVERSE)] = this.props.inverse;
+    classes[tbsUtils.prefix(this.props, DEFAULT)] = !this.props.inverse;
 
     const showHeader =
       (brand || toggleButton || toggleNavKey != null) &&
@@ -128,12 +130,13 @@ const Navbar = React.createClass({
     return this.renderHeader(brand);
   },
 
+
   renderHeader(brand) {
-    const hasToggle =
-      this.props.toggleButton || this.props.toggleNavKey != null;
+    const hasToggle = this.props.toggleButton || this.props.toggleNavKey != null;
+    const headerClass = tbsUtils.prefix(this.props, 'header');
 
     return (
-      <div className="navbar-header">
+      <div className={headerClass}>
         {brand}
         {hasToggle ? this.renderToggleButton() : null}
       </div>
@@ -161,10 +164,11 @@ const Navbar = React.createClass({
 
   renderToggleButton() {
     const {toggleButton} = this.props;
+    const toggleClass = tbsUtils.prefix(this.props, 'toggle');
 
     if (React.isValidElement(toggleButton)) {
       return React.cloneElement(toggleButton, {
-        className: classNames(toggleButton.props.className, 'navbar-toggle'),
+        className: classNames(toggleButton.props.className, toggleClass),
         onClick: createChainedFunction(
           this.handleToggle, toggleButton.props.onClick
         )
@@ -187,7 +191,7 @@ const Navbar = React.createClass({
       <button
         type="button"
         onClick={this.handleToggle}
-        className="navbar-toggle"
+        className={toggleClass}
       >
         {children}
       </button>
@@ -196,4 +200,10 @@ const Navbar = React.createClass({
 
 });
 
-export default Navbar;
+const NAVBAR_STATES = [DEFAULT, INVERSE];
+
+export default bsStyles(NAVBAR_STATES, DEFAULT,
+  bsClass('navbar',
+    Navbar
+  )
+);

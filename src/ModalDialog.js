@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils, { bsSizes } from './utils/bootstrapUtils';
+import { Sizes } from './styleMaps';
 
 const ModalDialog = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
     /**
@@ -33,11 +33,11 @@ const ModalDialog = React.createClass({
       display: 'block',
       ...this.props.style
     };
-    let bsClass = this.props.bsClass;
-    let dialogClasses = this.getBsClassSet();
+    let prefix = bootstrapUtils.prefix(this.props);
+    let dialogClasses = bootstrapUtils.getClassSet(this.props);
 
     delete dialogClasses.modal;
-    dialogClasses[`${bsClass}-dialog`] = true;
+    dialogClasses[`${prefix}-dialog`] = true;
 
     return (
       <div
@@ -46,9 +46,9 @@ const ModalDialog = React.createClass({
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
-        className={classNames(this.props.className, bsClass)}>
+        className={classNames(this.props.className, prefix)}>
         <div className={classNames(this.props.dialogClassName, dialogClasses)}>
-          <div className={`${bsClass}-content`} role="document">
+          <div className={`${prefix}-content`} role="document">
             { this.props.children }
           </div>
         </div>
@@ -57,4 +57,6 @@ const ModalDialog = React.createClass({
   }
 });
 
-export default ModalDialog;
+export default bsSizes([Sizes.LARGE, Sizes.SMALL],
+  ModalDialog
+);

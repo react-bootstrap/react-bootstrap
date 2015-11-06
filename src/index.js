@@ -3,7 +3,6 @@ export Affix from './Affix';
 export AffixMixin from './AffixMixin';
 export Alert from './Alert';
 export Badge from './Badge';
-export BootstrapMixin from './BootstrapMixin';
 export Breadcrumb from './Breadcrumb';
 export BreadcrumbItem from './BreadcrumbItem';
 export Button from './Button';
@@ -51,7 +50,6 @@ export Row from './Row';
 export SafeAnchor from './SafeAnchor';
 export SplitButton from './SplitButton';
 export SplitButton from './SplitButton';
-export styleMaps from './styleMaps';
 export SubNav from './SubNav';
 export Tab from './Tab';
 export Table from './Table';
@@ -68,9 +66,10 @@ export * as FormControls from './FormControls';
 import childrenValueInputValidation from './utils/childrenValueInputValidation';
 import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
-
+import bootstrapUtils from './utils/bootstrapUtils';
 
 export const utils = {
+  bootstrapUtils,
   childrenValueInputValidation,
   createChainedFunction,
   ValidComponentChildren

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Modal from '../src/Modal';
 
-import {getOne, render, shouldWarn} from './helpers';
+import {getOne, render } from './helpers';
 
 describe('Modal', () => {
   let mountPoint;
@@ -128,7 +128,7 @@ describe('Modal', () => {
   it('Should pass className to the dialog', () => {
     let noOp = () => {};
     let instance = render(
-      <Modal show className='mymodal' onHide={noOp}>
+      <Modal show className="mymodal" onHide={noOp}>
         <strong>Message</strong>
       </Modal>
     , mountPoint);
@@ -141,7 +141,7 @@ describe('Modal', () => {
   it('Should use bsClass on the dialog', () => {
     let noOp = () => {};
     let instance = render(
-      <Modal show bsClass='mymodal' onHide={noOp}>
+      <Modal show bsClass="mymodal" onHide={noOp}>
         <strong>Message</strong>
       </Modal>
     , mountPoint);
@@ -153,9 +153,6 @@ describe('Modal', () => {
     assert.ok(dialog.children[0].children[0].className.match(/\bmymodal-content\b/));
 
     assert.ok(instance.refs.backdrop.className.match(/\bmymodal-backdrop\b/));
-
-
-    shouldWarn("Invalid prop 'bsClass' of value 'mymodal'");
   });
 
   it('Should pass bsSize to the dialog', () => {

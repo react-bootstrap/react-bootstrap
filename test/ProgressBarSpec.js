@@ -24,23 +24,15 @@ describe('ProgressBar', () => {
 
   it('Should have the default class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} bsStyle='default' />
+      <ProgressBar min={0} max={10} now={0} />
     );
 
-    assert.ok(getProgressBarNode(instance).className.match(/\bprogress-bar-default\b/));
-  });
-
-  it('Should have the primary class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} bsStyle='primary' />
-    );
-
-    assert.ok(getProgressBarNode(instance).className.match(/\bprogress-bar-primary\b/));
+    assert.ok(getProgressBarNode(instance).className.match(/\bprogress-bar\b/));
   });
 
   it('Should have the success class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} bsStyle='success' />
+      <ProgressBar min={0} max={10} now={0} bsStyle="success" />
     );
 
     assert.ok(getProgressBarNode(instance).className.match(/\bprogress-bar-success\b/));
@@ -48,7 +40,7 @@ describe('ProgressBar', () => {
 
   it('Should have the warning class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} bsStyle='warning' />
+      <ProgressBar min={0} max={10} now={0} bsStyle="warning" />
     );
 
     assert.ok(getProgressBarNode(instance).className.match(/\bprogress-bar-warning\b/));
@@ -98,7 +90,7 @@ describe('ProgressBar', () => {
 
   it('Should not have label', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={5} bsStyle='primary' />
+      <ProgressBar min={0} max={10} now={5} />
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).innerText, '');
@@ -106,21 +98,21 @@ describe('ProgressBar', () => {
 
   it('Should have label', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={5} bsStyle='primary'
-        label='min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s' />
+      <ProgressBar min={0} max={10} now={5} bsStyle="success"
+        label="min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s" />
     );
 
-    assert.equal(ReactDOM.findDOMNode(instance).innerText, 'min:0, max:10, now:5, percent:50, bsStyle:primary');
+    assert.equal(ReactDOM.findDOMNode(instance).innerText, 'min:0, max:10, now:5, percent:50, bsStyle:success');
   });
 
   it('Should have screen reader only label', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={5} bsStyle='primary' srOnly
-        label='min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s' />
+      <ProgressBar min={0} max={10} now={5} srOnly bsStyle="success"
+        label="min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s" />
     );
     let srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
 
-    assert.equal(srLabel.innerText, 'min:0, max:10, now:5, percent:50, bsStyle:primary');
+    assert.equal(srLabel.innerText, 'min:0, max:10, now:5, percent:50, bsStyle:success');
   });
 
   it('Should have a label that is a React component', () => {
@@ -129,7 +121,7 @@ describe('ProgressBar', () => {
     );
 
     let instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={5} bsStyle='primary' label={customLabel} />
+      <ProgressBar min={0} max={10} now={5} label={customLabel} />
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'special-label'));
@@ -141,7 +133,7 @@ describe('ProgressBar', () => {
     );
 
     let instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={5} bsStyle='primary' label={customLabel} srOnly />
+      <ProgressBar min={0} max={10} now={5} label={customLabel} srOnly />
     );
 
     let srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');

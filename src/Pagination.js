@@ -1,12 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils, { bsClass } from './utils/bootstrapUtils';
 import PaginationButton from './PaginationButton';
 import elementType from 'react-prop-types/lib/elementType';
 import SafeAnchor from './SafeAnchor';
 
 const Pagination = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
     activePage: React.PropTypes.number,
@@ -214,7 +213,7 @@ const Pagination = React.createClass({
     return (
       <ul
         {...this.props}
-        className={classNames(this.props.className, this.getBsClassSet())}>
+        className={classNames(this.props.className, bootstrapUtils.getClassSet(this.props))}>
         {this.renderFirst()}
         {this.renderPrev()}
         {this.renderPageButtons()}
@@ -225,4 +224,4 @@ const Pagination = React.createClass({
   }
 });
 
-export default Pagination;
+export default bsClass('pagination', Pagination);
