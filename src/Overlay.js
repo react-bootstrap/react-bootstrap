@@ -19,6 +19,10 @@ class Overlay extends React.Component {
       transition = Fade;
     }
 
+    if (transition === false) {
+      transition = null;
+    }
+
     if (!transition) {
       child = cloneElement(child, {
         className: classNames('in', child.props.className)
