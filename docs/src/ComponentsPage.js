@@ -500,7 +500,7 @@ const ComponentsPage = React.createClass({
 
                 {/* Navbar */}
                 <div className="bs-docs-section">
-                  <h1 className="page-header"><Anchor id="navbars">Navbars</Anchor> <small>Navbar, NavBrand, Nav, NavItem</small></h1>
+                  <h1 className="page-header"><Anchor id="navbars">Navbars</Anchor> <small>Navbar, NavBrand, Nav, CollapsibleNav, NavItem</small></h1>
 
                   <p>Navbars are by default accessible and will provide <code>role="navigation"</code>.</p>
                   <p>They also supports all the different Bootstrap classes as properties. Just camelCase the css class and remove navbar from it. For example <code>navbar-fixed-top</code> becomes the property <code>fixedTop</code>. The different properties are <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>, <code>inverse</code>, <code>fluid</code>.</p>
