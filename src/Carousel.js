@@ -57,7 +57,7 @@ const Carousel = React.createClass({
   componentWillReceiveProps(nextProps) {
     let activeIndex = this.getActiveIndex();
 
-    if (nextProps.activeIndex != null && nextProps.activeIndex !== activeIndex) {
+    if (nextProps.activeIndex != null && nextProps.activeIndex !== this.props.activeIndex) {
       clearTimeout(this.timeout);
       this.setState({
         previousActiveIndex: activeIndex,
