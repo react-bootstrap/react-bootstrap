@@ -17,7 +17,16 @@ describe('Navbar', () => {
     let nav = ReactDOM.findDOMNode(instance);
     assert.equal(nav.nodeName, 'NAV');
     assert.ok(nav.className.match(/\bnavbar\b/));
-    assert.ok(nav.getAttribute('role'), 'navigation');
+    assert.ok(!nav.getAttribute('role'));
+  });
+
+  it('Should add "navigation" role when not using a `<nav>`', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Navbar componentClass='div' />
+    );
+    let nav = ReactDOM.findDOMNode(instance);
+    assert.equal(nav.nodeName, 'DIV');
+    assert.ok(nav.getAttribute('role') === 'navigation');
   });
 
   it('Should add fixedTop variation class', () => {

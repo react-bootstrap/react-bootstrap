@@ -39,7 +39,6 @@ const Navbar = React.createClass({
     return {
       bsClass: 'navbar',
       bsStyle: 'default',
-      role: 'navigation',
       componentClass: 'nav',
       fixedTop: false,
       fixedBottom: false,
@@ -108,6 +107,13 @@ const Navbar = React.createClass({
     const showHeader =
       (brand || toggleButton || toggleNavKey != null) &&
       !this.hasNavBrandChild();
+
+    // will result in some false positives but that seems better
+    // than false negatives. strict `undefined` check allows explicit
+    // "nulling" of the role if the user really doesn't want one
+    if (props.role === undefined && ComponentClass !== 'nav') {
+      props.role = 'navigation';
+    }
 
     return (
       <ComponentClass {...props} className={classNames(className, classes)}>
