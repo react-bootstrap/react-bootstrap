@@ -3,6 +3,8 @@ import classNames from 'classnames';
 
 class ModalHeader extends React.Component {
   render() {
+    let { 'aria-label': label, ...props } = this.props;
+
     return (
       <div
         {...this.props}
@@ -11,6 +13,7 @@ class ModalHeader extends React.Component {
           <button
             type="button"
             className="close"
+            aria-label={label}
             onClick={this.props.onHide}>
             <span aria-hidden="true">
               &times;
@@ -28,8 +31,8 @@ ModalHeader.__isModalHeader = true;
 
 ModalHeader.propTypes = {
   /**
-   * The 'aria-label' attribute is used to define a string that labels the current element.
-   * It is used for Assistive Technology when the label text is not visible on screen.
+   * The 'aria-label' attribute provides an accessible label for the close button.
+   * It is used for Assistive Technology when the label text is not readable.
    */
   'aria-label': React.PropTypes.string,
 
