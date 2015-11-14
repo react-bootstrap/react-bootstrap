@@ -6,7 +6,7 @@ import Nav from '../src/Nav';
 import NavBrand from '../src/NavBrand';
 import Navbar from '../src/Navbar';
 
-import {getOne, render, shouldWarn} from './helpers';
+import { getOne, shouldWarn } from './helpers';
 
 describe('Navbar', () => {
 
@@ -166,22 +166,6 @@ describe('Navbar', () => {
     let nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
 
     assert.ok(nav.props.navbar);
-  });
-
-  it('Should pass nav prop to ul', () => {
-    let instance = render(<Nav />);
-
-    let navNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav');
-    assert.ok(navNode);
-    assert.equal(navNode.nodeName, 'UL');
-    assert.equal(navNode.parentNode.nodeName, 'NAV');
-
-    instance = instance.renderWithProps({navbar: true});
-
-    navNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav');
-    assert.ok(navNode);
-    assert.equal(navNode.nodeName, 'UL');
-    assert.equal(navNode.parentNode.nodeName, 'DIV');
   });
 
   it('Should add header when toggleNavKey is 0', () => {

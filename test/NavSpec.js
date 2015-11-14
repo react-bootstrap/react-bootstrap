@@ -65,7 +65,7 @@ describe('Nav', () => {
 
   it('Should add navbar-right class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-          <Nav bsStyle="tabs" right activeKey={1}>
+          <Nav bsStyle="tabs" navbar right activeKey={1}>
             <NavItem key={1}>Tab 1 content</NavItem>
             <NavItem key={2}>Tab 2 content</NavItem>
           </Nav>
@@ -116,68 +116,6 @@ describe('Nav', () => {
     let items = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
     assert.ok(items[0].props.navItem);
-  });
-
-  it('Should apply className only to the wrapper nav element', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Nav bsStyle="tabs" activeKey={1} className="nav-specific">
-        <NavItem key={1}>Tab 1 content</NavItem>
-        <NavItem key={2}>Tab 2 content</NavItem>
-      </Nav>
-    );
-
-    let ulNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul');
-    assert.notInclude(ulNode.className, 'nav-specific');
-
-    let navNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav');
-    assert.include(navNode.className, 'nav-specific');
-  });
-
-  it('Should apply ulClassName to the inner ul element', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Nav bsStyle="tabs" activeKey={1} className="nav-specific" ulClassName="ul-specific">
-        <NavItem key={1}>Tab 1 content</NavItem>
-        <NavItem key={2}>Tab 2 content</NavItem>
-      </Nav>
-    );
-
-    let ulNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul');
-    assert.include(ulNode.className, 'ul-specific');
-    assert.notInclude(ulNode.className, 'nav-specific');
-
-    let navNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav');
-    assert.notInclude(navNode.className, 'ul-specific');
-    assert.include(navNode.className, 'nav-specific');
-  });
-
-  it('Should apply id to the wrapper nav element', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Nav bsStyle="tabs" activeKey={1} id="nav-id">
-        <NavItem key={1}>Tab 1 content</NavItem>
-        <NavItem key={2}>Tab 2 content</NavItem>
-      </Nav>
-    );
-
-    let navNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav');
-    assert.equal(navNode.id, 'nav-id');
-
-    let ulNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul');
-    assert.notEqual(ulNode.id, 'nav-id');
-  });
-
-  it('Should apply ulId to the inner ul element', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Nav bsStyle="tabs" activeKey={1} id="nav-id" ulId="ul-id">
-        <NavItem key={1}>Tab 1 content</NavItem>
-        <NavItem key={2}>Tab 2 content</NavItem>
-      </Nav>
-    );
-
-    let ulNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul');
-    assert.equal(ulNode.id, 'ul-id');
-
-    let navNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav');
-    assert.equal(navNode.id, 'nav-id');
   });
 
   it('Should warn when attempting to use a justified navbar nav', () => {

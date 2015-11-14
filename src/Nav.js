@@ -2,6 +2,7 @@ import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 import Collapse from './Collapse';
 import all from 'react-prop-types/lib/all';
+import deprecated from 'react-prop-types/lib/deprecated';
 import tbsUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
@@ -9,41 +10,45 @@ import createChainedFunction from './utils/createChainedFunction';
 class Nav extends React.Component {
 
   render() {
-    const classes = this.props.collapsible ? 'navbar-collapse' : null;
-
-    if (this.props.navbar && !this.props.collapsible) {
-      return (this.renderUl());
-    }
-
-    return (
-      <Collapse in={this.props.expanded}>
-        <nav {...this.props} className={classNames(this.props.className, classes)}>
-          {this.renderUl()}
-        </nav>
-      </Collapse>
-    );
-  }
-
-  renderUl() {
+    const { className, ulClassName, id, ulId } = this.props;
     const classes = tbsUtils.getClassSet(this.props);
 
-    // TODO: need to pass navbar bsClass down...
     classes[tbsUtils.prefix(this.props, 'stacked')] = this.props.stacked;
     classes[tbsUtils.prefix(this.props, 'justified')] = this.props.justified;
-    classes['navbar-nav'] = this.props.navbar;
-    classes['pull-right'] = this.props.pullRight;
-    classes['navbar-right'] = this.props.right;
 
-    return (
-      <ul {...this.props}
+    if (this.props.navbar) {
+      // TODO: need to pass navbar bsClass down...
+      classes['navbar-nav'] = this.props.navbar;
+      classes['navbar-right'] = this.props.right; // this is confusing along with `pullRight`
+    } else {
+      classes['pull-right'] = this.props.pullRight;
+    }
+
+    let list = (
+      <ul ref="ul"
+        {...this.props}
+        id={ulId || id}
         role={this.props.bsStyle === 'tabs' ? 'tablist' : null}
-        className={classNames(this.props.ulClassName, classes)}
-        id={this.props.ulId}
-        ref="ul"
+        className={classNames(className, ulClassName, classes)}
       >
         {ValidComponentChildren.map(this.props.children, this.renderNavItem, this)}
       </ul>
     );
+
+    if (this.props.collapsible) {
+      list = (
+        <Collapse
+          in={this.props.expanded}
+          className={this.props.navbar ? 'navbar-collapse' : void 0}
+        >
+          <div>
+            { list }
+          </div>
+        </Collapse>
+      );
+    }
+
+    return list;
   }
 
   getChildActiveProp(child) {
@@ -107,12 +112,19 @@ Nav.propTypes = {
   ]),
   /**
    * CSS classes for the inner `ul` element
+   *
+   * @deprecated
    */
-  ulClassName: React.PropTypes.string,
+  ulClassName: deprecated(React.PropTypes.string,
+    'The wrapping `<nav>` has been removed you can use `className` now'),
   /**
    * HTML id for the inner `ul` element
+   *
+   * @deprecated
    */
-  ulId: React.PropTypes.string,
+  ulId: deprecated(React.PropTypes.string,
+    'The wrapping `<nav>` has been removed you can use `id` now'),
+
   expanded: React.PropTypes.bool,
   navbar: React.PropTypes.bool,
   eventKey: React.PropTypes.any,
