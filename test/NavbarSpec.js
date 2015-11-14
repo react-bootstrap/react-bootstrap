@@ -186,7 +186,7 @@ describe('Navbar', () => {
     expect(collapse.context.$bs_navbar_navExpanded).to.equal(true);
   });
 
-  it.only('Should wire the toggle to the collapse', () => {
+  it('Should wire the toggle to the collapse', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
         <Navbar.Header>

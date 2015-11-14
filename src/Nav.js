@@ -18,11 +18,12 @@ class Nav extends React.Component {
     classes[tbsUtils.prefix(this.props, 'justified')] = this.props.justified;
 
 
-    if (this.props.navbar) {
+    if (isNavbar) {
       let bsClass = this.context.$bs_navbar_bsClass || 'navbar';
+      const navbarRight = this.props.right != null ? this.props.right : this.props.pullRight;
 
       classes[tbsUtils.prefix({ bsClass }, 'nav')] = true;
-      classes[tbsUtils.prefix({ bsClass }, 'right')] = isNavbar;
+      classes[tbsUtils.prefix({ bsClass }, 'right')] = navbarRight;
     } else {
       classes['pull-right'] = this.props.pullRight;
     }
@@ -119,7 +120,7 @@ Nav.propTypes = {
   navbar: React.PropTypes.bool,
   eventKey: React.PropTypes.any,
   pullRight: React.PropTypes.bool,
-  right: React.PropTypes.bool
+  right: deprecated(React.PropTypes.bool, 'Use the `pullRight` prop instead')
 };
 
 Nav.contextTypes = {
