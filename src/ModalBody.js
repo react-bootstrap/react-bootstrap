@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import tbsUtils from './utils/bootstrapUtils';
+import tbsUtils, { bsClass } from './utils/bootstrapUtils';
 
 class ModalBody extends React.Component {
   render() {
@@ -14,16 +14,5 @@ class ModalBody extends React.Component {
   }
 }
 
-ModalBody.propTypes = {
-  /**
-   * A css class applied to the Component
-   */
-  bsClass: React.PropTypes.string
-};
 
-ModalBody.defaultProps = {
-  bsClass: 'modal'
-};
-
-
-export default ModalBody;
+export default bsClass('modal', ModalBody);

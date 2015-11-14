@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import tbsUtils from './utils/bootstrapUtils';
+import tbsUtils, { bsClass } from './utils/bootstrapUtils';
 
 class ModalFooter extends React.Component {
   render() {
@@ -25,4 +25,4 @@ ModalFooter.defaultProps = {
   bsClass: 'modal'
 };
 
-export default ModalFooter;
+export default bsClass('modal', ModalFooter);
