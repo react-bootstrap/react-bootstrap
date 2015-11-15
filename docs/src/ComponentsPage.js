@@ -515,8 +515,8 @@ const ComponentsPage = React.createClass({
                     , <code>inverse</code>, <code>fluid</code>.
                   </p>
                   <p>
-                    You can also align elements to the right by specifying the <code>right</code> prop on
-                    the <code>Nav</code> component.
+                    You can also align elements to the right by specifying the <code>pullRight</code> prop on
+                    the <code>Nav</code>, and other sub-components.
                   </p>
 
                   <h3><Anchor id="navbars-basic">Navbar Basic Example</Anchor></h3>
