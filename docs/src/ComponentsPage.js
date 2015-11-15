@@ -56,28 +56,28 @@ const ComponentsPage = React.createClass({
                 {/* Buttons */}
                 <div className="bs-docs-section">
                   <h1 className="page-header"><Anchor id="buttons">Buttons</Anchor> <small>Button</small></h1>
-                  <h2><Anchor id="buttons-options">Options</Anchor></h2>
+                  <h3><Anchor id="buttons-options">Options</Anchor></h3>
                   <p>Use any of the available button style types to quickly create a styled button. Just modify the <code>bsStyle</code> prop.</p>
                   <ReactPlayground codeText={Samples.ButtonTypes} />
                   <div className="bs-callout bs-callout-warning">
                     <h4>Button spacing</h4>
-                    <p>Because React doesn"t output newlines between elements, buttons on the same line are displayed
+                    <p>Because React doesn't output newlines between elements, buttons on the same line are displayed
                     flush against each other. To preserve the spacing between multiple inline buttons, wrap your
                     button group in <code>{"<ButtonToolbar />"}</code>.</p>
                   </div>
 
-                  <h2><Anchor id="buttons-sizes">Sizes</Anchor></h2>
+                  <h3><Anchor id="buttons-sizes">Sizes</Anchor></h3>
                   <p>Fancy larger or smaller buttons? Add <code>bsSize="large"</code>, <code>bsSize="small"</code>, or <code>bsSize="xsmall"</code> for additional sizes.</p>
                   <ReactPlayground codeText={Samples.ButtonSizes} />
 
                   <p>Create block level buttons—those that span the full width of a parent— by adding the <code>block</code> prop.</p>
                   <ReactPlayground codeText={Samples.ButtonBlock} />
 
-                  <h2><Anchor id="buttons-active">Active state</Anchor></h2>
+                  <h3><Anchor id="buttons-active">Active state</Anchor></h3>
                   <p>To set a buttons active state simply set the components <code>active</code> prop.</p>
                   <ReactPlayground codeText={Samples.ButtonActive} />
 
-                  <h2><Anchor id="buttons-disabled">Disabled state</Anchor></h2>
+                  <h3><Anchor id="buttons-disabled">Disabled state</Anchor></h3>
                   <p>Make buttons look unclickable by fading them back 50%. To do this add the <code>disabled</code> attribute to buttons.</p>
                   <ReactPlayground codeText={Samples.ButtonDisabled} />
 
@@ -87,13 +87,13 @@ const ComponentsPage = React.createClass({
                       functionality. Use custom logic to disable the effect of the <code>onClick</code> handlers.</p>
                   </div>
 
-                  <h2><Anchor id="buttons-tags">Button tags</Anchor></h2>
+                  <h3><Anchor id="buttons-tags">Button tags</Anchor></h3>
                   <p>The DOM element tag is choosen automatically for you based on the props you supply. Passing
                     a <code>href</code> will result in the button using a <code>{"<a />"}</code> element otherwise
                     a <code>{"<button />"}</code> element will be used.</p>
                   <ReactPlayground codeText={Samples.ButtonTagTypes} />
 
-                  <h2><Anchor id="buttons-loading">Button loading state</Anchor></h2>
+                  <h3><Anchor id="buttons-loading">Button loading state</Anchor></h3>
                   <p>When activating an asynchronous action from a button it is a good UX pattern to give the user
                     feedback as to the loading state, this can easily be done by updating
                     your <code>{"<Button />"}</code>&#8217;s props from a state change like below.</p>
@@ -106,7 +106,7 @@ const ComponentsPage = React.createClass({
 
                 {/* Button Groups */}
                 <div className="bs-docs-section">
-                  <h1 className="page-header"><Anchor id="btn-groups">Button groups</Anchor> <small>ButtonGroup, ButtonToolbar</small></h1>
+                  <h2 className="page-header"><Anchor id="btn-groups">Button groups</Anchor> <small>ButtonGroup, ButtonToolbar</small></h2>
                   <p className="lead">Group a series of buttons together on a single line with the button group.</p>
 
                   <h3><Anchor id="btn-groups-single">Basic example</Anchor></h3>
@@ -148,7 +148,7 @@ const ComponentsPage = React.createClass({
                 </div>
 
                 <div className="bs-docs-section">
-                  <h1 className="page-header"><Anchor id="btn-dropdowns">Button dropdowns</Anchor></h1>
+                  <h2 className="page-header"><Anchor id="btn-dropdowns">Dropdowns</Anchor></h2>
                   <p className="lead">Use <code>{"<DropdownButton />"}</code> or <code>{"<SplitButton />"}</code> components to display a button with a dropdown menu.</p>
 
                   <h3><Anchor id="btn-dropdowns-single">Single button dropdowns</Anchor></h3>
@@ -160,7 +160,7 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.SplitButtonBasic} />
 
                   <h3><Anchor id="btn-dropdowns-sizing">Sizing</Anchor></h3>
-                  <p>Button dropdowns work with buttons of all sizes.</p>
+                  <p>Dropdowns work with buttons of all sizes.</p>
                   <ReactPlayground codeText={Samples.DropdownButtonSizes} />
 
                   <h3><Anchor id="btn-dropdowns-nocaret">No caret variation</Anchor></h3>
@@ -177,7 +177,7 @@ const ComponentsPage = React.createClass({
 
                   <h3><Anchor id="btn-dropdowns-custom">Dropdown Customization</Anchor></h3>
                   <p>
-                    If the default handling of the dropdown menu and toggle components aren"t to your liking, you can
+                    If the default handling of the dropdown menu and toggle components aren't to your liking, you can
                     customize them, by using the more basic <code>Dropdown</code> Component to explicitly specify
                     the Toggle and Menu components
                   </p>
@@ -213,10 +213,10 @@ const ComponentsPage = React.createClass({
                   <PropTable component="Dropdown"/>
                 </div>
 
-                {/* Menu Item */}
+                {/* Menu items */}
                 <div className="bs-docs-section">
-                  <h1 className="page-header"><Anchor id="menu-item">Menu Item</Anchor> <small> MenuItem</small></h1>
-                  <p>This is a component used in other components (see <a href="buttons">Buttons</a>, <a href="#navbars">Navbars</a>).</p>
+                  <h2 className="page-header"><Anchor id="menu-items">Menu items</Anchor> <small> MenuItem</small></h2>
+                  <p>This component represents a menu item in a dropdown.</p>
                   <p>It supports the basic anchor properties <code>href</code>, <code>target</code>, <code>title</code>.</p>
                   <p>
                     It also supports different properties of the normal Bootstrap MenuItem.
@@ -389,7 +389,7 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.PopoverPositioned} />
 
                   <h4><Anchor id="popovers-trigger-behaviors">Trigger behaviors</Anchor></h4>
-                  <p>It"s inadvisable to use <code>"hover"</code> or <code>"focus"</code> triggers for popovers, because they have poor accessibility from keyboard and on mobile devices.</p>
+                  <p>It's inadvisable to use <code>"hover"</code> or <code>"focus"</code> triggers for popovers, because they have poor accessibility from keyboard and on mobile devices.</p>
                   <ReactPlayground codeText={Samples.PopoverTriggerBehaviors} />
 
                   <h4><Anchor id="popovers-in-container">Popover component in container</Anchor></h4>
@@ -415,7 +415,7 @@ const ComponentsPage = React.createClass({
 
                   <h4><Anchor id="overlays-overlay">Use Overlay instead of Tooltip and Popover</Anchor></h4>
                   <p>
-                    You don"t need to use the provided <code>Tooltip</code> or <code>Popover</code> components. Creating custom overlays
+                    You don't need to use the provided <code>Tooltip</code> or <code>Popover</code> components. Creating custom overlays
                     is as easy as wrapping some markup in an <code>Overlay</code> component
                   </p>
                   <ReactPlayground codeText={Samples.OverlayCustom} />
@@ -435,7 +435,7 @@ const ComponentsPage = React.createClass({
                   <ReactPlayground codeText={Samples.ProgressBarBasic} />
 
                   <h2><Anchor id="progress-label">With label</Anchor></h2>
-                  <p>Add a <code>label</code> prop to show a visible percentage. For low percentages, consider adding a min-width to ensure the label"s text is fully visible.</p>
+                  <p>Add a <code>label</code> prop to show a visible percentage. For low percentages, consider adding a min-width to ensure the label's text is fully visible.</p>
                   <p>The following keys are interpolated with the current values: <code>%(min)s</code>, <code>%(max)s</code>, <code>%(now)s</code>, <code>%(percent)s</code>, <code>%(bsStyle)s</code></p>
                   <ReactPlayground codeText={Samples.ProgressBarWithLabel} />
 
@@ -658,7 +658,7 @@ const ComponentsPage = React.createClass({
                   <p>Basic alert styles.</p>
                   <ReactPlayground codeText={Samples.AlertBasic} />
 
-                  <h4><Anchor id="alerts-closeable">Closeable alerts</Anchor></h4>
+                  <h3><Anchor id="alerts-closeable">Closeable alerts</Anchor></h3>
                   <p>just pass in a <code>onDismiss</code> function.</p>
                   <ReactPlayground codeText={Samples.AlertDismissable} />
 
@@ -667,7 +667,7 @@ const ComponentsPage = React.createClass({
                   <p>Unlike regular Bootstrap, alerts have an sr-only dismiss button after the content.</p>
                   </div>
 
-                  <h4><Anchor id="alerts-auto-closeable">Auto closeable</Anchor></h4>
+                  <h3><Anchor id="alerts-auto-closeable">Auto closeable</Anchor></h3>
                   <p>Auto close after a set time with <code>dismissAfter</code> prop.</p>
                   <ReactPlayground codeText={Samples.AlertAutoDismissable} />
 
@@ -751,7 +751,7 @@ const ComponentsPage = React.createClass({
                 {/* ListGroup */}
                 <div className="bs-docs-section">
                   <h1 className="page-header"><Anchor id="listgroup">List group</Anchor> <small>ListGroup, ListGroupItem</small></h1>
-                  <p>Quick previous and next links.</p>
+                  <p>List groups are a flexible and powerful component for displaying not only simple lists of elements, but complex ones with custom content.</p>
 
                   <h3><Anchor id="listgroup-default">Centers by default</Anchor></h3>
                   <ReactPlayground codeText={Samples.ListGroupDefault} />
@@ -831,9 +831,9 @@ const ComponentsPage = React.createClass({
                   <PropTable component="Jumbotron"/>
                 </div>
 
-                {/* Page Header */}
+                {/* Page header */}
                 <div className="bs-docs-section">
-                  <h1 className="page-header"><Anchor id="page-header">Page Header</Anchor></h1>
+                  <h1 className="page-header"><Anchor id="page-header">Page header</Anchor></h1>
 
                   <p>A simple shell for an <code>h1</code> to appropriately space out and segment sections of content on a page. It can utilize the <code>h1</code>&#8217;s default <code>small</code> element, as well as most other components (with additional styles).</p>
                   <ReactPlayground codeText={Samples.PageHeader} />
@@ -899,7 +899,7 @@ const ComponentsPage = React.createClass({
 
                   <p>Renders an input in bootstrap wrappers. Supports label, help, text input add-ons, validation and use as wrapper.
                   Use <code>getValue()</code> or <code>getChecked()</code> to get the current state.
-                  The helper method <code>getInputDOMNode()</code> returns the internal input element. If you don"t want the <code>form-group</code> class applied apply the prop named <code>standalone</code>.</p>
+                  The helper method <code>getInputDOMNode()</code> returns the internal input element. If you don't want the <code>form-group</code> class applied apply the prop named <code>standalone</code>.</p>
                   <ReactPlayground codeText={Samples.Input} />
 
                   <h3><Anchor id="input-types">Types</Anchor></h3>
@@ -949,8 +949,8 @@ const ComponentsPage = React.createClass({
                   <h2><Anchor id="utilities-portal">Portal</Anchor></h2>
                   <p>
                     A Component that renders its children into a new React "subtree" or <code>container</code>. The Portal component kind of like the React
-                    equivalent to jQuery"s <code>.appendTo()</code>, which is helpful for components that need to be appended to a DOM node other than
-                    the component"s direct parent. The Modal, and Overlay components use the Portal component internally.
+                    equivalent to jQuery's <code>.appendTo()</code>, which is helpful for components that need to be appended to a DOM node other than
+                    the component's direct parent. The Modal, and Overlay components use the Portal component internally.
                   </p>
 
                   <h3><Anchor id="utilities-portal-props">Props</Anchor></h3>
@@ -1035,8 +1035,8 @@ const ComponentsPage = React.createClass({
                     >
                       <SubNav href="#buttons" key={1} text="Buttons">
                         <NavItem href="#btn-groups" key={2}>Button groups</NavItem>
-                        <NavItem href="#btn-dropdowns" key={3}>Button dropdowns</NavItem>
-                        <NavItem href="#menu-item" key={25}>Menu Item</NavItem>
+                        <NavItem href="#btn-dropdowns" key={3}>Dropdowns</NavItem>
+                        <NavItem href="#menu-items" key={25}>Menu items</NavItem>
                       </SubNav>
                       <NavItem href="#panels" key={4}>Panels</NavItem>
                       <NavItem href="#modals" key={5}>Modals</NavItem>
@@ -1059,7 +1059,7 @@ const ComponentsPage = React.createClass({
                       <NavItem href="#labels" key={19}>Labels</NavItem>
                       <NavItem href="#badges" key={20}>Badges</NavItem>
                       <NavItem href="#jumbotron" key={21}>Jumbotron</NavItem>
-                      <NavItem href="#page-header" key={22}>Page Header</NavItem>
+                      <NavItem href="#page-header" key={22}>Page header</NavItem>
                       <NavItem href="#responsive-embed" key={31}>Responsive embed</NavItem>
                       <NavItem href="#wells" key={23}>Wells</NavItem>
                       <NavItem href="#glyphicons" key={24}>Glyphicons</NavItem>
