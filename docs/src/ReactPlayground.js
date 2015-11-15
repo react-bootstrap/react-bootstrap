@@ -91,7 +91,7 @@ class CodeMirrorEditor extends React.Component {
     }
 
     this.editor = CodeMirror.fromTextArea(this.refs.editor, {
-      mode: 'javascript',
+      mode: 'text/jsx',
       lineNumbers: false,
       lineWrapping: false,
       matchBrackets: true,
