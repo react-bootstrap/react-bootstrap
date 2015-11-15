@@ -8,9 +8,7 @@ const navbarInstance = (
     </Navbar.Header>
     <Navbar.Collapse>
       <Navbar.Form pullLeft>
-        <div className="form-group">
-          <Input type="text" placeholder="Search"/>
-        </div>
+        <Input type="text" placeholder="Search"/>
         {' '}
         <Button type="submit">Submit</Button>
       </Navbar.Form>
