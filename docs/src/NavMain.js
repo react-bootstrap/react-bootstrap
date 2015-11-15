@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import Navbar from '../../src/Navbar';
-import NavBrand from '../../src/NavBrand';
 import Nav from '../../src/Nav';
 
 const NAV_LINKS = {
@@ -37,11 +36,19 @@ const NavMain = React.createClass({
     ]);
 
     return (
-      <Navbar componentClass="header" staticTop className="bs-docs-nav" role="banner" toggleNavKey={0}>
-        <NavBrand>{brand}</NavBrand>
-        <Nav className="bs-navbar-collapse" role="navigation" eventKey={0} id="top">
-          {links}
-        </Nav>
+      <Navbar staticTop
+        componentClass="header"
+        className="bs-docs-nav"
+        role="banner"
+      >
+        <Navbar.Header>
+          {brand}
+        </Navbar.Header>
+        <Navbar.Collapse className="bs-navbar-collapse" >
+          <Nav role="navigation" id="top">
+            {links}
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     );
   },

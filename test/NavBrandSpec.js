@@ -2,13 +2,13 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
 
-import NavBrand from '../src/NavBrand';
+import NavbarBrand from '../src/NavbarBrand';
 
-describe('Navbrand', () => {
+describe('NavbarBrand', () => {
 
-  it('Should create navbrand SPAN element', () => {
+  it('Should create NavbarBrand SPAN element', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <NavBrand>Brand</NavBrand>
+      <NavbarBrand>Brand</NavbarBrand>
     );
 
     let brand = ReactDOM.findDOMNode(instance);
@@ -18,9 +18,9 @@ describe('Navbrand', () => {
     assert.equal(brand.innerText, 'Brand');
   });
 
-  it('Should create navbrand A (link) element', () => {
+  it('Should create NavbarBrand A (link) element', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <NavBrand><a href>BrandLink</a></NavBrand>
+      <NavbarBrand><a href>BrandLink</a></NavbarBrand>
     );
 
     let brand = ReactDOM.findDOMNode(instance);

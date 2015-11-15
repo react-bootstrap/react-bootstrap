@@ -46,7 +46,7 @@ const PropTable = React.createClass({
     let propsData = this.propsData;
 
     if (!Object.keys(propsData).length) {
-      return <span/>;
+      return <div className="text-muted"><em>There are no public props for this component.</em></div>;
     }
 
     return (

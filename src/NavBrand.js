@@ -1,32 +1,8 @@
-import classNames from 'classnames';
-import React from 'react';
+import NavbarBrand from './NavbarBrand';
+import deprecationWarning from './utils/deprecationWarning';
 
-class NavBrand extends React.Component {
-  render() {
-    const {className, children, ...props} = this.props;
-
-    if (React.isValidElement(children)) {
-      return React.cloneElement(children, {
-        className: classNames(
-          children.props.className, className, 'navbar-brand'
-        )
-      });
-    }
-
-    return (
-      <span {...props} className={classNames(className, 'navbar-brand')}>
-        {children}
-      </span>
-    );
-  }
-}
-
-NavBrand.propTypes = {
-  bsRole: React.PropTypes.string
-};
-
-NavBrand.defaultProps = {
-  bsRole: 'brand'
-};
-
-export default NavBrand;
+export default deprecationWarning.wrapper(NavbarBrand, {
+  message:
+    'The `NavBrand` component has been renamed to: `NavbarBrand`. ' +
+    'Please use that component instead; this alias will be removed in an upcoming release'
+});

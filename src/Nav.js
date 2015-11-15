@@ -1,27 +1,34 @@
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
-import Collapse from './Collapse';
 import all from 'react-prop-types/lib/all';
 import deprecated from 'react-prop-types/lib/deprecated';
-import tbsUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
+import tbsUtils, { bsStyles, bsClass as _bsClass } from './utils/bootstrapUtils';
+
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
+
+import Collapse from './Collapse';
 
 class Nav extends React.Component {
 
   render() {
     const { className, ulClassName, id, ulId } = this.props;
+    const isNavbar = this.props.navbar != null ? this.props.navbar : this.context.$bs_navbar;
     const classes = tbsUtils.getClassSet(this.props);
 
     classes[tbsUtils.prefix(this.props, 'stacked')] = this.props.stacked;
     classes[tbsUtils.prefix(this.props, 'justified')] = this.props.justified;
 
-    if (this.props.navbar) {
-      // TODO: need to pass navbar bsClass down...
-      classes['navbar-nav'] = this.props.navbar;
-      classes['navbar-right'] = this.props.right; // this is confusing along with `pullRight`
+    if (isNavbar) {
+      let bsClass = this.context.$bs_navbar_bsClass || 'navbar';
+      const navbarRight = this.props.right != null ? this.props.right : this.props.pullRight;
+
+      classes[tbsUtils.prefix({ bsClass }, 'nav')] = true;
+      classes[tbsUtils.prefix({ bsClass }, 'right')] = navbarRight;
+      classes[tbsUtils.prefix({ bsClass }, 'left')] = this.props.pullLeft;
     } else {
       classes['pull-right'] = this.props.pullRight;
+      classes['pull-left'] = this.props.pullLeft;
     }
 
     let list = (
@@ -35,11 +42,12 @@ class Nav extends React.Component {
       </ul>
     );
 
-    if (this.props.collapsible) {
+    // TODO remove in 0.29
+    if (this.context.$bs_deprecated_navbar && this.props.collapsible) {
       list = (
         <Collapse
           in={this.props.expanded}
-          className={this.props.navbar ? 'navbar-collapse' : void 0}
+          className={isNavbar ? 'navbar-collapse' : void 0}
         >
           <div>
             { list }
@@ -98,7 +106,7 @@ Nav.propTypes = {
     )
   ),
   onSelect: React.PropTypes.func,
-  collapsible: React.PropTypes.bool,
+
   /**
    * CSS classes for the wrapper `nav` element
    */
@@ -122,27 +130,49 @@ Nav.propTypes = {
    *
    * @deprecated
    */
+
   ulId: deprecated(React.PropTypes.string,
     'The wrapping `<nav>` has been removed you can use `id` now'),
 
-  expanded: React.PropTypes.bool,
+  /**
+   * Apply styling an alignment for use in a Navbar. This prop will be set
+   * automatically when the Nav is used inside a Navbar.
+   */
   navbar: React.PropTypes.bool,
   eventKey: React.PropTypes.any,
   pullRight: React.PropTypes.bool,
-  right: React.PropTypes.bool
+  pullLeft: React.PropTypes.bool,
+
+  right: deprecated(React.PropTypes.bool,
+    'Use the `pullRight` prop instead'),
+
+  /**
+   * @private
+   */
+  expanded: React.PropTypes.bool,
+
+  /**
+   * @private
+   */
+  collapsible: deprecated(React.PropTypes.bool,
+    'Use `Navbar.Collapse` instead, to create collapsible Navbars'),
+};
+
+Nav.contextTypes = {
+  $bs_navbar: React.PropTypes.bool,
+  $bs_navbar_bsClass: React.PropTypes.string,
+
+  $bs_deprecated_navbar: React.PropTypes.bool
 };
 
 Nav.defaultProps = {
-  collapsible: false,
-  expanded: true,
   justified: false,
-  navbar: false,
   pullRight: false,
-  right: false,
+  pullLeft: false,
   stacked: false
 };
 
-export default bsClass('nav',
+export default _bsClass('nav',
   bsStyles(['tabs', 'pills'],
     Nav
   )

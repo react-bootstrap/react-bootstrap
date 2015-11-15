@@ -501,51 +501,72 @@ const ComponentsPage = React.createClass({
 
                 {/* Navbar */}
                 <div className="bs-docs-section">
-                  <h1 className="page-header"><Anchor id="navbars">Navbars</Anchor> <small>Navbar, NavBrand, Nav, NavItem</small></h1>
+                  <h1 className="page-header">
+                    <Anchor id="navbars">Navbars</Anchor>{' '}
+                    <small>Navbar, NavbarBrand, NavbarHeader, NavbarToggle, NavbarCollapse</small>
+                  </h1>
 
-                  <p>Navbars are by default accessible and will provide <code>role="navigation"</code>.</p>
-                  <p>They also supports all the different Bootstrap classes as properties. Just camelCase the css class and remove navbar from it. For example <code>navbar-fixed-top</code> becomes the property <code>fixedTop</code>. The different properties are <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>, <code>inverse</code>, <code>fluid</code>.</p>
-                  <p>You can specify a brand node by wrapping it in a <code>NavBrand</code> element and passing it as a child to the <code>Navbar</code>.</p>
-                  <p>You can drag elements to the right by specifying the <code>right</code> property on the <code>Nav</code> component.</p>
+                  <p>
+                    They also supports all the different Bootstrap classes as properties. Just camelCase
+                    the css class and remove navbar from it.
+
+                    For example <code>navbar-fixed-top</code> becomes the property <code>fixedTop</code>.
+                    The different properties are <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>
+                    , <code>inverse</code>, <code>fluid</code>.
+                  </p>
+                  <p>
+                    You can also align elements to the right by specifying the <code>pullRight</code> prop on
+                    the <code>Nav</code>, and other sub-components.
+                  </p>
 
                   <h3><Anchor id="navbars-basic">Navbar Basic Example</Anchor></h3>
                   <ReactPlayground codeText={Samples.NavbarBasic} />
-
-                  <h3><Anchor id="navbars-mobile-friendly">Mobile Friendly</Anchor></h3>
-                  <p>To have a mobile friendly Navbar, specify the property <code>toggleNavKey</code> on the Navbar with a value corresponding to an <code>eventKey</code> of one of his <code>Nav</code> children. This child will be the one collapsed.</p>
-                  <p>By setting the property {React.DOM.code(null, 'defaultNavExpanded')} the Navbar will start expanded by default.</p>
                   <div className="bs-callout bs-callout-info">
-                    <h4>Scrollbar overflow</h4>
-                    <p>The height of the collapsible is slightly smaller than the real height. To hide the scroll bar, add the following css to your style files.</p>
-                    <pre>
-                      {React.DOM.code(null,
-                        '.navbar-collapse {\n' +
-                        '  overflow: hidden;\n' +
-                        '}\n'
-                      )}
-                    </pre>
+                    <h4>Additional Import Options</h4>
+                    <p>
+                      The Navbar Header, Toggle, Brand, and Collapse components are available as static properties
+                      the <code>{"<Navbar/>"}</code> component but you can also import them directly from
+                      the <code>/lib</code> directory
+                      like: <code>{'require("react-bootstrap/lib/NavbarHeader")'}</code>.
+                    </p>
                   </div>
+
+                  <h3><Anchor id="navbars-mobile-friendly">Responsive Navbars</Anchor></h3>
+                  <p>
+                    To have a mobile friendly Navbar, Add a <code>Navbar.Toggle</code> to your Header and wrap your
+                    Navs in a <code>Navbar.Collapse</code> component. The <code>Navbar</code> will automatically wire
+                    the toggle and collapse together!
+                  </p>
+                  <p>
+                    By setting the prop <code>defaultNavExpanded</code> the Navbar will start
+                    expanded by default. You can also finely control the collapsing behavior by using
+                    the <code>expanded</code> and <code>onToggle</code> props.
+                  </p>
+
                   <ReactPlayground codeText={Samples.NavbarCollapsible} />
 
-                  <h3><Anchor id="navbars-mobile-friendly-multiple">Mobile Friendly (Multiple Nav Components)</Anchor></h3>
-                  <p>To have a mobile friendly Navbar that handles multiple <code>Nav</code> components use <code>CollapsibleNav</code>. The <code>toggleNavKey</code> must still be set, however, the corresponding <code>eventKey</code> must now be on the <code>CollapsibleNav</code> component.</p>
-                  <div className="bs-callout bs-callout-info">
-                    <h4>Div collapse</h4>
-                    <p>The <code>navbar-collapse</code> div gets created as the collapsible element which follows the <a href="http://getbootstrap.com/components/#navbar-default">bootstrap</a> collapsible navbar documentation.</p>
-                    <pre>&lt;div class="collapse navbar-collapse"&gt;&lt;/div&gt;</pre>
-                  </div>
-                  <ReactPlayground codeText={Samples.CollapsibleNav} />
+                  <h3><Anchor id="navbars-form">Forms</Anchor></h3>
+                  <p>
+                    Use the <code>Navbar.Form</code> convenience component to apply proper margins and alignment to
+                    form components.
+                  </p>
+                  <ReactPlayground codeText={Samples.NavbarForm} />
+
+                  <h3><Anchor id="navbars-text-link">Text and Non-nav links</Anchor></h3>
+                  <p>
+                    Loose text and links can be wraped in the convenience
+                    components: <code>Navbar.Link</code> and <code>Navbar.Text</code>
+                  </p>
+
+                  <ReactPlayground codeText={Samples.NavbarTextLink} />
 
                   <h3><Anchor id="navbar-props">Props</Anchor></h3>
 
                   <h4><Anchor id="navs-props-navbar">Navbar</Anchor></h4>
                   <PropTable component="Navbar"/>
 
-                  <h4><Anchor id="navs-props-navbrand">NavBrand</Anchor></h4>
-                  <PropTable component="NavBrand"/>
-
-                  <h4><Anchor id="navs-props-collapsiblenav">CollapsibleNav</Anchor></h4>
-                  <PropTable component="CollapsibleNav"/>
+                  <h4><Anchor id="navs-props-navbrand">NavbarToggle, Navbar.Toggle</Anchor></h4>
+                  <PropTable component="NavbarToggle"/>
                 </div>
 
                 {/* Breadcrumb */}

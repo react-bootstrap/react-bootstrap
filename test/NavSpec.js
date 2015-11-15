@@ -65,7 +65,7 @@ describe('Nav', () => {
 
   it('Should add navbar-right class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-          <Nav bsStyle="tabs" navbar right activeKey={1}>
+          <Nav bsStyle="tabs" navbar pullRight activeKey={1}>
             <NavItem key={1}>Tab 1 content</NavItem>
             <NavItem key={2}>Tab 2 content</NavItem>
           </Nav>
