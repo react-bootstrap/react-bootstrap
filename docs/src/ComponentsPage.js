@@ -1,13 +1,7 @@
-/* eslint react/no-did-mount-set-state: 0 */
-
 import React from 'react';
-import ReactDOM from 'react-dom';
-import getOffset from 'dom-helpers/query/offset';
-import css from 'dom-helpers/style';
+import AutoAffix from 'react-overlays/lib/AutoAffix';
 
-import Affix from '../../src/Affix';
 import Nav from '../../src/Nav';
-import SubNav from '../../src/SubNav';
 import NavItem from '../../src/NavItem';
 
 import NavMain from './NavMain';
@@ -17,32 +11,31 @@ import PageFooter from './PageFooter';
 import ReactPlayground from './ReactPlayground';
 import Samples from './Samples';
 import Anchor from './Anchor';
+import SubNav from './SubNav';
 
 const ComponentsPage = React.createClass({
   getInitialState() {
     return {
-      activeNavItemHref: null,
-      navOffsetTop: null
+      activeNavItemHref: null
     };
   },
 
-  handleNavItemSelect(key, href) {
-    this.setState({
-      activeNavItemHref: href
-    });
+  getMain() {
+    return this.refs.main;
+  },
 
+  handleNavItemSelect(key, href) {
     window.location = href;
+    this.setActiveNavItem();
   },
 
   componentDidMount() {
-    let elem = ReactDOM.findDOMNode(this.refs.sideNav);
-    let sideNavOffsetTop = getOffset(elem).top;
-    let sideNavMarginTop = parseInt(css(elem.firstChild, 'marginTop'), 10);
-    let topNavHeight = ReactDOM.findDOMNode(this.refs.topNav).offsetHeight;
+    this.setActiveNavItem();
+  },
 
+  setActiveNavItem() {
     this.setState({
-      navOffsetTop: sideNavOffsetTop - topNavHeight - sideNavMarginTop,
-      navOffsetBottom: ReactDOM.findDOMNode(this.refs.footer).offsetHeight
+      activeNavItemHref: window.location.hash
     });
   },
 
@@ -55,7 +48,7 @@ const ComponentsPage = React.createClass({
             title="Components"
             subTitle="" />
 
-          <div className="container bs-docs-container">
+          <div ref="main" className="container bs-docs-container">
             <div className="row">
               <div className="col-md-9" role="main">
 
@@ -986,58 +979,87 @@ const ComponentsPage = React.createClass({
                   <h4><Anchor id="utilities-fade-props">Props</Anchor></h4>
                   <PropTable component="Fade"/>
                 </div>
+
+                {/* Missing components */}
+                <div className="bs-docs-section">
+                  <h1 className="page-header"><Anchor id="missing">Missing components</Anchor></h1>
+
+                  <p className="lead">We've intentionally omitted a few components from React-Bootstrap. Don't worry, though &ndash; we cover what to do in this section.</p>
+                </div>
+
+                <div className="bs-docs-section">
+                  <h2 className="page-header"><Anchor id="affix">Affix</Anchor></h2>
+
+                  <p>Use <a href="http://react-bootstrap.github.io/react-overlays/examples/#affixes"><code>{'<AutoAffix>'}</code> or <code>{'<Affix>'}</code> from react-overlays</a>.</p>
+                  <p>There isn't really any additional Bootstrap markup associated with affixes, so we didn't add a Bootstrap-specific affix class. The upstream ones already give you everything you need.</p>
+                </div>
+
+                <div className="bs-docs-section">
+                  <h2 className="page-header"><Anchor id="scrollspy">Scrollspy</Anchor></h2>
+
+                  <p>Setting up a scrollspy in idiomatic React requires wiring up a number of components across your entire page, both to handle elements scrolling in and to wire that up to the navigation. It's a poor fit for a component library, because it's not a standalone component.</p>
+                  <p>To implement this functionality, use a library like <a href="http://brigade.github.io/react-waypoint/">React Waypoint</a> along with a bit of your own state management.</p>
+                </div>
               </div>
 
 
-              <div className="col-md-3">
-                <Affix
-                  className="bs-docs-sidebar hidden-print"
-                  role="complementary"
-                  offsetTop={this.state.navOffsetTop}
-                  offsetBottom={this.state.navOffsetBottom}>
-                  <Nav
-                    className="bs-docs-sidenav"
-                    activeHref={this.state.activeNavItemHref}
-                    onSelect={this.handleNavItemSelect}
-                    ref="sideNav">
-                    <SubNav href="#buttons" key={1} text="Buttons">
-                      <NavItem href="#btn-groups" key={2}>Button groups</NavItem>
-                      <NavItem href="#btn-dropdowns" key={3}>Button dropdowns</NavItem>
-                      <NavItem href="#menu-item" key={25}>Menu Item</NavItem>
-                    </SubNav>
-                    <NavItem href="#panels" key={4}>Panels</NavItem>
-                    <NavItem href="#modals" key={5}>Modals</NavItem>
-                    <NavItem href="#tooltips" key={6}>Tooltips</NavItem>
-                    <NavItem href="#popovers" key={7}>Popovers</NavItem>
-                    <NavItem href="#overlays" key={27}>Overlays</NavItem>
-                    <NavItem href="#progress" key={8}>Progress bars</NavItem>
-                    <NavItem href="#navs" key={9}>Navs</NavItem>
-                    <NavItem href="#navbars" key={10}>Navbars</NavItem>
-                    <NavItem href="#breadcrumbs" key={30}>Breadcrumbs</NavItem>
-                    <NavItem href="#tabs" key={11}>Tabs</NavItem>
-                    <NavItem href="#pager" key={12}>Pager</NavItem>
-                    <NavItem href="#pagination" key={13}>Pagination</NavItem>
-                    <NavItem href="#alerts" key={14}>Alerts</NavItem>
-                    <NavItem href="#carousels" key={15}>Carousels</NavItem>
-                    <NavItem href="#grids" key={16}>Grids</NavItem>
-                    <NavItem href="#images" key={29}>Images</NavItem>
-                    <NavItem href="#thumbnail" key={17}>Thumbnail</NavItem>
-                    <NavItem href="#listgroup" key={18}>List group</NavItem>
-                    <NavItem href="#labels" key={19}>Labels</NavItem>
-                    <NavItem href="#badges" key={20}>Badges</NavItem>
-                    <NavItem href="#jumbotron" key={21}>Jumbotron</NavItem>
-                    <NavItem href="#page-header" key={22}>Page Header</NavItem>
-                    <NavItem href="#responsive-embed" key={31}>Responsive embed</NavItem>
-                    <NavItem href="#wells" key={23}>Wells</NavItem>
-                    <NavItem href="#glyphicons" key={24}>Glyphicons</NavItem>
-                    <NavItem href="#tables" key={25}>Tables</NavItem>
-                    <NavItem href="#input" key={26}>Input</NavItem>
-                    <NavItem href="#utilities" key={28}>Utilities</NavItem>
-                  </Nav>
-                  <a className="back-to-top" href="#top">
-                  Back to top
-                  </a>
-                </Affix>
+              <div className="col-md-3 bs-docs-sidebar-holder">
+                <AutoAffix
+                  viewportOffsetTop={20}
+                  container={this.getMain}
+                >
+                  <div
+                    className="bs-docs-sidebar hidden-print"
+                    role="complementary"
+                  >
+                    <Nav
+                      className="bs-docs-sidenav"
+                      activeHref={this.state.activeNavItemHref}
+                      onSelect={this.handleNavItemSelect}
+                    >
+                      <SubNav href="#buttons" key={1} text="Buttons">
+                        <NavItem href="#btn-groups" key={2}>Button groups</NavItem>
+                        <NavItem href="#btn-dropdowns" key={3}>Button dropdowns</NavItem>
+                        <NavItem href="#menu-item" key={25}>Menu Item</NavItem>
+                      </SubNav>
+                      <NavItem href="#panels" key={4}>Panels</NavItem>
+                      <NavItem href="#modals" key={5}>Modals</NavItem>
+                      <NavItem href="#tooltips" key={6}>Tooltips</NavItem>
+                      <NavItem href="#popovers" key={7}>Popovers</NavItem>
+                      <NavItem href="#overlays" key={27}>Overlays</NavItem>
+                      <NavItem href="#progress" key={8}>Progress bars</NavItem>
+                      <NavItem href="#navs" key={9}>Navs</NavItem>
+                      <NavItem href="#navbars" key={10}>Navbars</NavItem>
+                      <NavItem href="#breadcrumbs" key={30}>Breadcrumbs</NavItem>
+                      <NavItem href="#tabs" key={11}>Tabs</NavItem>
+                      <NavItem href="#pager" key={12}>Pager</NavItem>
+                      <NavItem href="#pagination" key={13}>Pagination</NavItem>
+                      <NavItem href="#alerts" key={14}>Alerts</NavItem>
+                      <NavItem href="#carousels" key={15}>Carousels</NavItem>
+                      <NavItem href="#grids" key={16}>Grids</NavItem>
+                      <NavItem href="#images" key={29}>Images</NavItem>
+                      <NavItem href="#thumbnail" key={17}>Thumbnail</NavItem>
+                      <NavItem href="#listgroup" key={18}>List group</NavItem>
+                      <NavItem href="#labels" key={19}>Labels</NavItem>
+                      <NavItem href="#badges" key={20}>Badges</NavItem>
+                      <NavItem href="#jumbotron" key={21}>Jumbotron</NavItem>
+                      <NavItem href="#page-header" key={22}>Page Header</NavItem>
+                      <NavItem href="#responsive-embed" key={31}>Responsive embed</NavItem>
+                      <NavItem href="#wells" key={23}>Wells</NavItem>
+                      <NavItem href="#glyphicons" key={24}>Glyphicons</NavItem>
+                      <NavItem href="#tables" key={25}>Tables</NavItem>
+                      <NavItem href="#input" key={26}>Input</NavItem>
+                      <NavItem href="#utilities" key={28}>Utilities</NavItem>
+                      <SubNav href="#missing" key={32} text="Missing components">
+                        <NavItem href="#affix" key={33}>Affix</NavItem>
+                        <NavItem href="#scrollspy" key={34}>Scrollspy</NavItem>
+                      </SubNav>
+                    </Nav>
+                    <a className="back-to-top" href="#top">
+                    Back to top
+                    </a>
+                  </div>
+                </AutoAffix>
               </div>
             </div>
           </div>
