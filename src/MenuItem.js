@@ -71,10 +71,7 @@ MenuItem.propTypes = {
       }
     }
   ),
-  eventKey: React.PropTypes.oneOfType([
-    React.PropTypes.number,
-    React.PropTypes.string
-  ]),
+  eventKey: React.PropTypes.any,
   header: React.PropTypes.bool,
   href: React.PropTypes.string,
   target: React.PropTypes.string,
