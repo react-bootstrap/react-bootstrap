@@ -525,8 +525,8 @@ const ComponentsPage = React.createClass({
                     <h4>Additional Import Options</h4>
                     <p>
                       The Navbar Header, Toggle, Brand, and Collapse components are available as static properties
-                      the <code>{"<Navbar/>"}</code> component, but you can also,
-                      import them directly from the <code>/lib</code> directory
+                      the <code>{"<Navbar/>"}</code> component but you can also import them directly from
+                      the <code>/lib</code> directory
                       like: <code>{'require("react-bootstrap/lib/NavbarHeader")'}</code>.
                     </p>
                   </div>
@@ -540,7 +540,7 @@ const ComponentsPage = React.createClass({
                   <p>
                     By setting the prop <code>defaultNavExpanded</code> the Navbar will start
                     expanded by default. You can also finely control the collapsing behavior by using
-                    the <code>navExpanded</code> and <code>onToggle</code> props.
+                    the <code>expanded</code> and <code>onToggle</code> props.
                   </p>
 
                   <ReactPlayground codeText={Samples.NavbarCollapsible} />

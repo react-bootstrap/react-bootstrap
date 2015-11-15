@@ -1,7 +1,9 @@
+/* eslint react/no-multi-comp: 0 */
 import React, { PropTypes } from 'react';
 import uncontrollable from 'uncontrollable';
 import classNames from 'classnames';
 import elementType from 'react-prop-types/lib/elementType';
+import deprecated from 'react-prop-types/lib/deprecated';
 import deprecationWarning from './utils/deprecationWarning';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
@@ -20,9 +22,11 @@ let has = (obj, key) => obj && {}.hasOwnProperty.call(obj, key);
 function shouldRenderOldNavbar(component) {
   let props = component.props;
   return (
+    has(props, 'brand') ||
     has(props, 'toggleButton') ||
     has(props, 'toggleNavKey') ||
-    has(props, 'brand') ||
+    has(props, 'navExpanded') ||
+    has(props, 'defaultNavExpanded') ||
     // this should be safe b/c the new version requires wrapping in a Header
     ValidComponentChildren.findValidComponents(
       props.children, child => child.props.bsRole === 'brand'
@@ -72,14 +76,20 @@ let Navbar = React.createClass({
      *
      * @controllable onToggle
      */
-    navExpanded: React.PropTypes.bool
+    expanded: React.PropTypes.bool,
+
+    /**
+     * @deprecated
+     */
+    navExpanded: deprecated(React.PropTypes.bool,
+      'Use `expanded` and `defaultExpanded` instead.')
   },
 
   childContextTypes: {
     $bs_navbar: PropTypes.bool,
     $bs_navbar_bsClass: PropTypes.string,
     $bs_navbar_onToggle: PropTypes.func,
-    $bs_navbar_navExpanded: PropTypes.bool,
+    $bs_navbar_expanded: PropTypes.bool,
   },
 
   getDefaultProps() {
@@ -99,16 +109,16 @@ let Navbar = React.createClass({
       $bs_navbar: true,
       $bs_navbar_bsClass: this.props.bsClass,
       $bs_navbar_onToggle: this.handleToggle,
-      $bs_navbar_navExpanded: this.props.navExpanded
+      $bs_navbar_expanded: this.props.expanded
     };
   },
 
   handleToggle() {
-    this.props.onToggle(!this.props.navExpanded);
+    this.props.onToggle(!this.props.expanded);
   },
 
   isNavExpanded() {
-    return !!this.props.navExpanded;
+    return !!this.props.expanded;
   },
 
   render() {
@@ -127,7 +137,8 @@ let Navbar = React.createClass({
     if (shouldRenderOldNavbar(this)) {
       deprecationWarning({ message:
         'Rendering a deprecated version of the Navbar due to the use of deprecated ' +
-        'props. Please use the new Navbar api, and remove `toggleButton`, `toggleNavKey`, `brand` or ' +
+        'props. Please use the new Navbar api, and remove `toggleButton`, ' +
+        '`toggleNavKey`, `brand`, `navExpanded`, `defaultNavExpanded` props or the ' +
         'use of the `<NavBrand>` component outside of a `<Navbar.Header>`. \n\n' +
         'for more details see: http://react-bootstrap.github.io/components.html#navbars'
       });
@@ -159,7 +170,7 @@ const NAVBAR_STATES = [DEFAULT, INVERSE];
 
 Navbar = bsStyles(NAVBAR_STATES, DEFAULT,
   bsClasses('navbar',
-    uncontrollable(Navbar, { navExpanded: 'onToggle' })
+    uncontrollable(Navbar, { expanded: 'onToggle' })
   )
 );
 
@@ -177,8 +188,16 @@ function createSimpleWrapper(tag, suffix, displayName) {
 
   wrapper.displayName = displayName;
 
-  wrapper.propTypes = { componentClass: elementType};
-  wrapper.defaultProps = { componentClass: tag };
+  wrapper.propTypes = {
+    componentClass: elementType,
+    pullRight: React.PropTypes.bool,
+    pullLeft: React.PropTypes.bool,
+  };
+  wrapper.defaultProps = {
+    componentClass: tag,
+    pullRight: false,
+    pullLeft: false
+  };
 
   wrapper.contextTypes = {
     $bs_navbar_bsClass: PropTypes.string

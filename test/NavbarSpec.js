@@ -172,9 +172,9 @@ describe('Navbar', () => {
     ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-collapse');
   });
 
-  it('Should pass navExpanded to Collapse', () => {
+  it('Should pass expanded to Collapse', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Navbar defaultNavExpanded>
+      <Navbar defaultExpanded>
         <Navbar.Collapse>
           hello
         </Navbar.Collapse>
@@ -183,7 +183,7 @@ describe('Navbar', () => {
 
     let collapse = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Collapse);
 
-    expect(collapse.context.$bs_navbar_navExpanded).to.equal(true);
+    expect(collapse.context.$bs_navbar_expanded).to.equal(true);
   });
 
   it('Should wire the toggle to the collapse', () => {
@@ -201,11 +201,11 @@ describe('Navbar', () => {
     let toggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
     let collapse = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Collapse);
 
-    expect(collapse.context.$bs_navbar_navExpanded).to.not.be.ok;
+    expect(collapse.context.$bs_navbar_expanded).to.not.be.ok;
 
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(toggle));
 
-    expect(collapse.context.$bs_navbar_navExpanded).to.equal(true);
+    expect(collapse.context.$bs_navbar_expanded).to.equal(true);
   });
 
   it('Should pass `bsClass` down to sub components', () => {
