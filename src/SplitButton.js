@@ -1,5 +1,4 @@
 import React from 'react';
-import BootstrapMixin from './BootstrapMixin';
 import Button from './Button';
 import Dropdown from './Dropdown';
 import SplitToggle from './SplitToggle';
@@ -13,8 +12,7 @@ class SplitButton extends React.Component {
       onClick,
       target,
       href,
-      // bsStyle is validated by 'Button' component
-      bsStyle, // eslint-disable-line
+      bsStyle,
       ...props } = this.props;
 
     let { disabled } = props;
@@ -50,7 +48,7 @@ class SplitButton extends React.Component {
 
 SplitButton.propTypes = {
   ...Dropdown.propTypes,
-  ...BootstrapMixin.propTypes,
+  bsStyle: Button.propTypes.bsStyle,
 
   /**
    * @private

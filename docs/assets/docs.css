@@ -535,8 +535,10 @@ body {
  */
 
 /* By default it's not affixed in mobile views, so undo that */
-.bs-docs-sidebar.affix {
-  position: static;
+@media (max-width: 991px) {
+  .bs-docs-sidebar {
+    position: static !important;
+  }
 }
 @media (min-width: 768px) {
   .bs-docs-sidebar {
@@ -628,35 +630,17 @@ body {
 
 /* Show and affix the side nav when space allows it */
 @media (min-width: 992px) {
+  .bs-docs-sidebar-holder {
+    padding-top: 20px;
+  }
   .bs-docs-sidebar .nav > .active > ul {
     display: block;
   }
-  /* Widen the fixed sidebar */
-  .bs-docs-sidebar.affix,
-  .bs-docs-sidebar.affix-bottom {
-    width: 213px;
-  }
-  .bs-docs-sidebar.affix {
-    position: fixed; /* Undo the static from mobile first approach */
-    top: 20px;
-  }
-  .bs-docs-sidebar.affix-bottom {
-    position: absolute; /* Undo the static from mobile first approach */
-  }
-  .bs-docs-sidebar.affix-bottom .bs-docs-sidenav,
-  .bs-docs-sidebar.affix .bs-docs-sidenav {
+  .bs-docs-sidebar .bs-docs-sidenav {
     margin-top: 0;
     margin-bottom: 0;
   }
 }
-@media (min-width: 1200px) {
-  /* Widen the fixed sidebar again */
-  .bs-docs-sidebar.affix-bottom,
-  .bs-docs-sidebar.affix {
-    width: 263px;
-  }
-}
-
 
 /*
  * Docs sections

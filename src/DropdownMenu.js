@@ -1,7 +1,9 @@
-import classNames from 'classnames';
 import keycode from 'keycode';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import classNames from 'classnames';
+import bootstrapUtils from './utils/bootstrapUtils';
+
 import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
@@ -93,8 +95,8 @@ class DropdownMenu extends React.Component {
     });
 
     const classes = {
-      'dropdown-menu': true,
-      'dropdown-menu-right': pullRight
+      [bootstrapUtils.prefix(this.props, 'menu')]: true,
+      [bootstrapUtils.prefix(this.props, 'menu-right')]: pullRight
     };
 
     let list = (
@@ -122,6 +124,7 @@ class DropdownMenu extends React.Component {
 
 DropdownMenu.defaultProps = {
   bsRole: 'menu',
+  bsClass: 'dropdown',
   pullRight: false
 };
 

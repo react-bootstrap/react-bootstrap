@@ -1,11 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
 import createSelectedEvent from './utils/createSelectedEvent';
 import elementType from 'react-prop-types/lib/elementType';
 
 const PaginationButton = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
     className: React.PropTypes.string,
@@ -43,8 +41,7 @@ const PaginationButton = React.createClass({
   render() {
     let classes = {
       active: this.props.active,
-      disabled: this.props.disabled,
-      ...this.getBsClassSet()
+      disabled: this.props.disabled
     };
 
     let {

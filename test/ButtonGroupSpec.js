@@ -22,7 +22,7 @@ describe('ButtonGroup', () => {
 
   it('Should add size', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ButtonGroup bsSize='large'>
+      <ButtonGroup bsSize="large">
         <Button>
           Title
         </Button>

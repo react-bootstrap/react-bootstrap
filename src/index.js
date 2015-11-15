@@ -1,9 +1,6 @@
 export Accordion from './Accordion';
-export Affix from './Affix';
-export AffixMixin from './AffixMixin';
 export Alert from './Alert';
 export Badge from './Badge';
-export BootstrapMixin from './BootstrapMixin';
 export Breadcrumb from './Breadcrumb';
 export BreadcrumbItem from './BreadcrumbItem';
 export Button from './Button';
@@ -34,6 +31,7 @@ export ModalTitle from './ModalTitle';
 export Nav from './Nav';
 export Navbar from './Navbar';
 export NavBrand from './NavBrand';
+export NavbarBrand from './NavbarBrand';
 export NavDropdown from './NavDropdown';
 export NavItem from './NavItem';
 export Overlay from './Overlay';
@@ -51,8 +49,6 @@ export Row from './Row';
 export SafeAnchor from './SafeAnchor';
 export SplitButton from './SplitButton';
 export SplitButton from './SplitButton';
-export styleMaps from './styleMaps';
-export SubNav from './SubNav';
 export Tab from './Tab';
 export Table from './Table';
 export Tabs from './Tabs';
@@ -68,9 +64,10 @@ export * as FormControls from './FormControls';
 import childrenValueInputValidation from './utils/childrenValueInputValidation';
 import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
-
+import bootstrapUtils from './utils/bootstrapUtils';
 
 export const utils = {
+  bootstrapUtils,
   childrenValueInputValidation,
   createChainedFunction,
   ValidComponentChildren

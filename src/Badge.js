@@ -1,7 +1,7 @@
 import React from 'react';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import classNames from 'classnames';
-
+import tbsUtils from './utils/bootstrapUtils';
 
 const Badge = React.createClass({
   propTypes: {
@@ -10,7 +10,8 @@ const Badge = React.createClass({
 
   getDefaultProps() {
     return {
-      pullRight: false
+      pullRight: false,
+      bsClass: 'badge'
     };
   },
 
@@ -24,7 +25,7 @@ const Badge = React.createClass({
   render() {
     let classes = {
       'pull-right': this.props.pullRight,
-      'badge': this.hasContent()
+      [tbsUtils.prefix(this.props)]: this.hasContent()
     };
     return (
       <span
