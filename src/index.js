@@ -1,6 +1,4 @@
 export Accordion from './Accordion';
-export Affix from './Affix';
-export AffixMixin from './AffixMixin';
 export Alert from './Alert';
 export Badge from './Badge';
 export Breadcrumb from './Breadcrumb';
@@ -50,7 +48,6 @@ export Row from './Row';
 export SafeAnchor from './SafeAnchor';
 export SplitButton from './SplitButton';
 export SplitButton from './SplitButton';
-export SubNav from './SubNav';
 export Tab from './Tab';
 export Table from './Table';
 export Tabs from './Tabs';
