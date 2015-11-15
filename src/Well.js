@@ -1,18 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils, { bsSizes, bsClass } from './utils/bootstrapUtils';
+import { Sizes } from './styleMaps';
 
-const Well = React.createClass({
-  mixins: [BootstrapMixin],
-
-  getDefaultProps() {
-    return {
-      bsClass: 'well'
-    };
-  },
-
+@bsClass('well')
+@bsSizes([Sizes.LARGE, Sizes.SMALL])
+class Well extends React.Component {
   render() {
-    let classes = this.getBsClassSet();
+    let classes = bootstrapUtils.getClassSet(this.props);
 
     return (
       <div {...this.props} className={classNames(this.props.className, classes)}>
@@ -20,6 +15,6 @@ const Well = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default Well;

@@ -18,7 +18,7 @@ export function render(element, mountPoint) {
   let mount = mountPoint || document.createElement('div');
   let instance = ReactDOM.render(element, mount);
 
-  if (!instance.renderWithProps) {
+  if (instance && !instance.renderWithProps) {
     instance.renderWithProps = newProps => {
 
       return render(

@@ -1,18 +1,22 @@
 import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import bootstrapUtils from './utils/bootstrapUtils';
+import Button from './Button';
 
 const ButtonToolbar = React.createClass({
-  mixins: [BootstrapMixin],
+
+  propTypes: {
+    bsSize: Button.propTypes.bsSize
+  },
 
   getDefaultProps() {
     return {
-      bsClass: 'button-toolbar'
+      bsClass: 'btn-toolbar'
     };
   },
 
   render() {
-    let classes = this.getBsClassSet();
+    let classes = bootstrapUtils.getClassSet(this.props);
 
     return (
       <div

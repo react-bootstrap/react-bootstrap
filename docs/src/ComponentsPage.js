@@ -1,13 +1,7 @@
-/* eslint react/no-did-mount-set-state: 0 */
-
 import React from 'react';
-import ReactDOM from 'react-dom';
-import getOffset from 'dom-helpers/query/offset';
-import css from 'dom-helpers/style';
+import AutoAffix from 'react-overlays/lib/AutoAffix';
 
-import Affix from '../../src/Affix';
 import Nav from '../../src/Nav';
-import SubNav from '../../src/SubNav';
 import NavItem from '../../src/NavItem';
 
 import NavMain from './NavMain';
@@ -17,32 +11,31 @@ import PageFooter from './PageFooter';
 import ReactPlayground from './ReactPlayground';
 import Samples from './Samples';
 import Anchor from './Anchor';
+import SubNav from './SubNav';
 
 const ComponentsPage = React.createClass({
   getInitialState() {
     return {
-      activeNavItemHref: null,
-      navOffsetTop: null
+      activeNavItemHref: null
     };
   },
 
-  handleNavItemSelect(key, href) {
-    this.setState({
-      activeNavItemHref: href
-    });
+  getMain() {
+    return this.refs.main;
+  },
 
+  handleNavItemSelect(key, href) {
     window.location = href;
+    this.setActiveNavItem();
   },
 
   componentDidMount() {
-    let elem = ReactDOM.findDOMNode(this.refs.sideNav);
-    let sideNavOffsetTop = getOffset(elem).top;
-    let sideNavMarginTop = parseInt(css(elem.firstChild, 'marginTop'), 10);
-    let topNavHeight = ReactDOM.findDOMNode(this.refs.topNav).offsetHeight;
+    this.setActiveNavItem();
+  },
 
+  setActiveNavItem() {
     this.setState({
-      navOffsetTop: sideNavOffsetTop - topNavHeight - sideNavMarginTop,
-      navOffsetBottom: ReactDOM.findDOMNode(this.refs.footer).offsetHeight
+      activeNavItemHref: window.location.hash
     });
   },
 
@@ -55,7 +48,7 @@ const ComponentsPage = React.createClass({
             title="Components"
             subTitle="" />
 
-          <div className="container bs-docs-container">
+          <div ref="main" className="container bs-docs-container">
             <div className="row">
               <div className="col-md-9" role="main">
 
@@ -225,16 +218,17 @@ const ComponentsPage = React.createClass({
                   <h1 className="page-header"><Anchor id="menu-item">Menu Item</Anchor> <small> MenuItem</small></h1>
                   <p>This is a component used in other components (see <a href="buttons">Buttons</a>, <a href="#navbars">Navbars</a>).</p>
                   <p>It supports the basic anchor properties <code>href</code>, <code>target</code>, <code>title</code>.</p>
-                  <p>It also supports different properties of the normal Bootstrap MenuItem.
-                    <ul>
-                      <li><code>header</code>: To add a header label to sections</li>
-                      <li><code>divider</code>: Adds an horizontal divider between sections</li>
-                      <li><code>disabled</code>: shows the item as disabled, and prevents the onclick</li>
-                      <li><code>eventKey</code>: passed to the callback</li>
-                      <li><code>onSelect</code>: a callback that is called when the user clicks the item.</li>
-                    </ul>
-                  <p>The callback is called with the following arguments: <code>eventKey</code>, <code>href</code> and <code>target</code></p>
+                  <p>
+                    It also supports different properties of the normal Bootstrap MenuItem.
                   </p>
+                  <ul>
+                    <li><code>header</code>: To add a header label to sections</li>
+                    <li><code>divider</code>: Adds an horizontal divider between sections</li>
+                    <li><code>disabled</code>: shows the item as disabled, and prevents the onclick</li>
+                    <li><code>eventKey</code>: passed to the callback</li>
+                    <li><code>onSelect</code>: a callback that is called when the user clicks the item.</li>
+                  </ul>
+                  <p>The callback is called with the following arguments: <code>eventKey</code>, <code>href</code> and <code>target</code></p>
                   <ReactPlayground codeText={Samples.MenuItem} />
 
                   <h3><Anchor id="menu-item-props">Props</Anchor></h3>
@@ -500,51 +494,74 @@ const ComponentsPage = React.createClass({
 
                 {/* Navbar */}
                 <div className="bs-docs-section">
-                  <h1 className="page-header"><Anchor id="navbars">Navbars</Anchor> <small>Navbar, NavBrand, Nav, CollapsibleNav, NavItem</small></h1>
+                  <h1 className="page-header">
+                    <Anchor id="navbars">Navbars</Anchor>{' '}
+                    <small>Navbar, NavbarBrand, NavbarHeader, NavbarToggle, NavbarCollapse</small>
+                  </h1>
 
-                  <p>Navbars are by default accessible and will provide <code>role="navigation"</code>.</p>
-                  <p>They also supports all the different Bootstrap classes as properties. Just camelCase the css class and remove navbar from it. For example <code>navbar-fixed-top</code> becomes the property <code>fixedTop</code>. The different properties are <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>, <code>inverse</code>, <code>fluid</code>.</p>
-                  <p>You can specify a brand node by wrapping it in a <code>NavBrand</code> element and passing it as a child to the <code>Navbar</code>.</p>
-                  <p>You can drag elements to the right by specifying the <code>right</code> property on the <code>Nav</code> component.</p>
+                  <p>Navbars are responsive meta components that serve as navigation headers for your application or site.</p>
+                  <p>
+                    They also support all the different Bootstrap classes as properties. Just camelCase
+                    the css class and remove navbar from it.
+                  </p>
+                  <p>
+                    For example <code>navbar-fixed-top</code> becomes the property <code>fixedTop</code>.
+                    The different properties are <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>
+                    , <code>inverse</code>, and <code>fluid</code>.
+                  </p>
+                  <p>
+                    You can also align elements to the right by specifying the <code>pullRight</code> prop on
+                    the <code>Nav</code>, and other sub-components.
+                  </p>
 
                   <h3><Anchor id="navbars-basic">Navbar Basic Example</Anchor></h3>
                   <ReactPlayground codeText={Samples.NavbarBasic} />
-
-                  <h3><Anchor id="navbars-mobile-friendly">Mobile Friendly</Anchor></h3>
-                  <p>To have a mobile friendly Navbar, specify the property <code>toggleNavKey</code> on the Navbar with a value corresponding to an <code>eventKey</code> of one of his <code>Nav</code> children. This child will be the one collapsed.</p>
-                  <p>By setting the property {React.DOM.code(null, 'defaultNavExpanded')} the Navbar will start expanded by default.</p>
                   <div className="bs-callout bs-callout-info">
-                    <h4>Scrollbar overflow</h4>
-                    <p>The height of the collapsible is slightly smaller than the real height. To hide the scroll bar, add the following css to your style files.</p>
-                    <pre>
-                      {React.DOM.code(null,
-                        '.navbar-collapse {\n' +
-                        '  overflow: hidden;\n' +
-                        '}\n'
-                      )}
-                    </pre>
+                    <h4>Additional Import Options</h4>
+                    <p>
+                      The Navbar Header, Toggle, Brand, and Collapse components are available as static properties
+                      the <code>{"<Navbar/>"}</code> component but you can also import them directly from
+                      the <code>/lib</code> directory
+                      like: <code>{'require("react-bootstrap/lib/NavbarHeader")'}</code>.
+                    </p>
                   </div>
+
+                  <h3><Anchor id="navbars-mobile-friendly">Responsive Navbars</Anchor></h3>
+                  <p>
+                    To have a mobile friendly Navbar, Add a <code>Navbar.Toggle</code> to your Header and wrap your
+                    Navs in a <code>Navbar.Collapse</code> component. The <code>Navbar</code> will automatically wire
+                    the toggle and collapse together!
+                  </p>
+                  <p>
+                    By setting the prop <code>defaultNavExpanded</code> the Navbar will start
+                    expanded by default. You can also finely control the collapsing behavior by using
+                    the <code>expanded</code> and <code>onToggle</code> props.
+                  </p>
+
                   <ReactPlayground codeText={Samples.NavbarCollapsible} />
 
-                  <h3><Anchor id="navbars-mobile-friendly-multiple">Mobile Friendly (Multiple Nav Components)</Anchor></h3>
-                  <p>To have a mobile friendly Navbar that handles multiple <code>Nav</code> components use <code>CollapsibleNav</code>. The <code>toggleNavKey</code> must still be set, however, the corresponding <code>eventKey</code> must now be on the <code>CollapsibleNav</code> component.</p>
-                  <div className="bs-callout bs-callout-info">
-                    <h4>Div collapse</h4>
-                    <p>The <code>navbar-collapse</code> div gets created as the collapsible element which follows the <a href="http://getbootstrap.com/components/#navbar-default">bootstrap</a> collapsible navbar documentation.</p>
-                    <pre>&lt;div class="collapse navbar-collapse"&gt;&lt;/div&gt;</pre>
-                  </div>
-                  <ReactPlayground codeText={Samples.CollapsibleNav} />
+                  <h3><Anchor id="navbars-form">Forms</Anchor></h3>
+                  <p>
+                    Use the <code>Navbar.Form</code> convenience component to apply proper margins and alignment to
+                    form components.
+                  </p>
+                  <ReactPlayground codeText={Samples.NavbarForm} />
+
+                  <h3><Anchor id="navbars-text-link">Text and Non-nav links</Anchor></h3>
+                  <p>
+                    Loose text and links can be wraped in the convenience
+                    components: <code>Navbar.Link</code> and <code>Navbar.Text</code>
+                  </p>
+
+                  <ReactPlayground codeText={Samples.NavbarTextLink} />
 
                   <h3><Anchor id="navbar-props">Props</Anchor></h3>
 
                   <h4><Anchor id="navs-props-navbar">Navbar</Anchor></h4>
                   <PropTable component="Navbar"/>
 
-                  <h4><Anchor id="navs-props-navbrand">NavBrand</Anchor></h4>
-                  <PropTable component="NavBrand"/>
-
-                  <h4><Anchor id="navs-props-collapsiblenav">CollapsibleNav</Anchor></h4>
-                  <PropTable component="CollapsibleNav"/>
+                  <h4><Anchor id="navs-props-navbrand">NavbarToggle, Navbar.Toggle</Anchor></h4>
+                  <PropTable component="NavbarToggle"/>
                 </div>
 
                 {/* Breadcrumb */}
@@ -978,58 +995,87 @@ const ComponentsPage = React.createClass({
                   <h4><Anchor id="utilities-fade-props">Props</Anchor></h4>
                   <PropTable component="Fade"/>
                 </div>
+
+                {/* Missing components */}
+                <div className="bs-docs-section">
+                  <h1 className="page-header"><Anchor id="missing">Missing components</Anchor></h1>
+
+                  <p className="lead">We've intentionally omitted a few components from React-Bootstrap. Don't worry, though &ndash; we cover what to do in this section.</p>
+                </div>
+
+                <div className="bs-docs-section">
+                  <h2 className="page-header"><Anchor id="affix">Affix</Anchor></h2>
+
+                  <p>Use <a href="http://react-bootstrap.github.io/react-overlays/examples/#affixes"><code>{'<AutoAffix>'}</code> or <code>{'<Affix>'}</code> from react-overlays</a>.</p>
+                  <p>There isn't really any additional Bootstrap markup associated with affixes, so we didn't add a Bootstrap-specific affix class. The upstream ones already give you everything you need.</p>
+                </div>
+
+                <div className="bs-docs-section">
+                  <h2 className="page-header"><Anchor id="scrollspy">Scrollspy</Anchor></h2>
+
+                  <p>Setting up a scrollspy in idiomatic React requires wiring up a number of components across your entire page, both to handle elements scrolling in and to wire that up to the navigation. It's a poor fit for a component library, because it's not a standalone component.</p>
+                  <p>To implement this functionality, use a library like <a href="http://brigade.github.io/react-waypoint/">React Waypoint</a> along with a bit of your own state management.</p>
+                </div>
               </div>
 
 
-              <div className="col-md-3">
-                <Affix
-                  className="bs-docs-sidebar hidden-print"
-                  role="complementary"
-                  offsetTop={this.state.navOffsetTop}
-                  offsetBottom={this.state.navOffsetBottom}>
-                  <Nav
-                    className="bs-docs-sidenav"
-                    activeHref={this.state.activeNavItemHref}
-                    onSelect={this.handleNavItemSelect}
-                    ref="sideNav">
-                    <SubNav href="#buttons" key={1} text="Buttons">
-                      <NavItem href="#btn-groups" key={2}>Button groups</NavItem>
-                      <NavItem href="#btn-dropdowns" key={3}>Button dropdowns</NavItem>
-                      <NavItem href="#menu-item" key={25}>Menu Item</NavItem>
-                    </SubNav>
-                    <NavItem href="#panels" key={4}>Panels</NavItem>
-                    <NavItem href="#modals" key={5}>Modals</NavItem>
-                    <NavItem href="#tooltips" key={6}>Tooltips</NavItem>
-                    <NavItem href="#popovers" key={7}>Popovers</NavItem>
-                    <NavItem href="#overlays" key={27}>Overlays</NavItem>
-                    <NavItem href="#progress" key={8}>Progress bars</NavItem>
-                    <NavItem href="#navs" key={9}>Navs</NavItem>
-                    <NavItem href="#navbars" key={10}>Navbars</NavItem>
-                    <NavItem href="#breadcrumbs" key={30}>Breadcrumbs</NavItem>
-                    <NavItem href="#tabs" key={11}>Tabs</NavItem>
-                    <NavItem href="#pager" key={12}>Pager</NavItem>
-                    <NavItem href="#pagination" key={13}>Pagination</NavItem>
-                    <NavItem href="#alerts" key={14}>Alerts</NavItem>
-                    <NavItem href="#carousels" key={15}>Carousels</NavItem>
-                    <NavItem href="#grids" key={16}>Grids</NavItem>
-                    <NavItem href="#images" key={29}>Images</NavItem>
-                    <NavItem href="#thumbnail" key={17}>Thumbnail</NavItem>
-                    <NavItem href="#listgroup" key={18}>List group</NavItem>
-                    <NavItem href="#labels" key={19}>Labels</NavItem>
-                    <NavItem href="#badges" key={20}>Badges</NavItem>
-                    <NavItem href="#jumbotron" key={21}>Jumbotron</NavItem>
-                    <NavItem href="#page-header" key={22}>Page Header</NavItem>
-                    <NavItem href="#responsive-embed" key={31}>Responsive embed</NavItem>
-                    <NavItem href="#wells" key={23}>Wells</NavItem>
-                    <NavItem href="#glyphicons" key={24}>Glyphicons</NavItem>
-                    <NavItem href="#tables" key={25}>Tables</NavItem>
-                    <NavItem href="#input" key={26}>Input</NavItem>
-                    <NavItem href="#utilities" key={28}>Utilities</NavItem>
-                  </Nav>
-                  <a className="back-to-top" href="#top">
-                  Back to top
-                  </a>
-                </Affix>
+              <div className="col-md-3 bs-docs-sidebar-holder">
+                <AutoAffix
+                  viewportOffsetTop={20}
+                  container={this.getMain}
+                >
+                  <div
+                    className="bs-docs-sidebar hidden-print"
+                    role="complementary"
+                  >
+                    <Nav
+                      className="bs-docs-sidenav"
+                      activeHref={this.state.activeNavItemHref}
+                      onSelect={this.handleNavItemSelect}
+                    >
+                      <SubNav href="#buttons" key={1} text="Buttons">
+                        <NavItem href="#btn-groups" key={2}>Button groups</NavItem>
+                        <NavItem href="#btn-dropdowns" key={3}>Button dropdowns</NavItem>
+                        <NavItem href="#menu-item" key={25}>Menu Item</NavItem>
+                      </SubNav>
+                      <NavItem href="#panels" key={4}>Panels</NavItem>
+                      <NavItem href="#modals" key={5}>Modals</NavItem>
+                      <NavItem href="#tooltips" key={6}>Tooltips</NavItem>
+                      <NavItem href="#popovers" key={7}>Popovers</NavItem>
+                      <NavItem href="#overlays" key={27}>Overlays</NavItem>
+                      <NavItem href="#progress" key={8}>Progress bars</NavItem>
+                      <NavItem href="#navs" key={9}>Navs</NavItem>
+                      <NavItem href="#navbars" key={10}>Navbars</NavItem>
+                      <NavItem href="#breadcrumbs" key={30}>Breadcrumbs</NavItem>
+                      <NavItem href="#tabs" key={11}>Tabs</NavItem>
+                      <NavItem href="#pager" key={12}>Pager</NavItem>
+                      <NavItem href="#pagination" key={13}>Pagination</NavItem>
+                      <NavItem href="#alerts" key={14}>Alerts</NavItem>
+                      <NavItem href="#carousels" key={15}>Carousels</NavItem>
+                      <NavItem href="#grids" key={16}>Grids</NavItem>
+                      <NavItem href="#images" key={29}>Images</NavItem>
+                      <NavItem href="#thumbnail" key={17}>Thumbnail</NavItem>
+                      <NavItem href="#listgroup" key={18}>List group</NavItem>
+                      <NavItem href="#labels" key={19}>Labels</NavItem>
+                      <NavItem href="#badges" key={20}>Badges</NavItem>
+                      <NavItem href="#jumbotron" key={21}>Jumbotron</NavItem>
+                      <NavItem href="#page-header" key={22}>Page Header</NavItem>
+                      <NavItem href="#responsive-embed" key={31}>Responsive embed</NavItem>
+                      <NavItem href="#wells" key={23}>Wells</NavItem>
+                      <NavItem href="#glyphicons" key={24}>Glyphicons</NavItem>
+                      <NavItem href="#tables" key={25}>Tables</NavItem>
+                      <NavItem href="#input" key={26}>Input</NavItem>
+                      <NavItem href="#utilities" key={28}>Utilities</NavItem>
+                      <SubNav href="#missing" key={32} text="Missing components">
+                        <NavItem href="#affix" key={33}>Affix</NavItem>
+                        <NavItem href="#scrollspy" key={34}>Scrollspy</NavItem>
+                      </SubNav>
+                    </Nav>
+                    <a className="back-to-top" href="#top">
+                    Back to top
+                    </a>
+                  </div>
+                </AutoAffix>
               </div>
             </div>
           </div>

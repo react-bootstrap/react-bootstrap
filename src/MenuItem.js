@@ -1,11 +1,12 @@
 import classnames from 'classnames';
 import React from 'react';
+import bootstrapUtils, { bsClass } from './utils/bootstrapUtils';
 import all from 'react-prop-types/lib/all';
 
 import SafeAnchor from './SafeAnchor';
 import createChainedFunction from './utils/createChainedFunction';
 
-export default class MenuItem extends React.Component {
+class MenuItem extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,13 +28,15 @@ export default class MenuItem extends React.Component {
   }
 
   render() {
+    let headerClass = bootstrapUtils.prefix(this.props, 'header');
+
     if (this.props.divider) {
       return <li role="separator" className="divider" />;
     }
 
     if (this.props.header) {
       return (
-        <li role="heading" className="dropdown-header">{this.props.children}</li>
+        <li role="heading" className={headerClass}>{this.props.children}</li>
       );
     }
 
@@ -90,3 +93,5 @@ MenuItem.defaultProps = {
   disabled: false,
   header: false
 };
+
+export default bsClass('dropdown', MenuItem);
