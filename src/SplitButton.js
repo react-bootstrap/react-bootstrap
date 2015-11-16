@@ -2,6 +2,8 @@ import React from 'react';
 import Button from './Button';
 import Dropdown from './Dropdown';
 import SplitToggle from './SplitToggle';
+import omit from 'lodash-compat/object/omit';
+import pick from 'lodash-compat/object/pick';
 
 class SplitButton extends React.Component {
 
@@ -12,30 +14,32 @@ class SplitButton extends React.Component {
       onClick,
       target,
       href,
+      bsSize,
       bsStyle,
       ...props } = this.props;
 
     let { disabled } = props;
 
-    let button = (
-      <Button
-        onClick={onClick}
-        bsStyle={bsStyle}
-        disabled={disabled}
-        target={target}
-        href={href}
-      >
-        {title}
-      </Button>
-    );
+    let dropdownProps = pick(props, Object.keys(Dropdown.ControlledComponent.propTypes));
+    let buttonProps = omit(props, Object.keys(Dropdown.ControlledComponent.propTypes));
 
     return (
-      <Dropdown {...props}>
-        {button}
-
+      <Dropdown {...dropdownProps}>
+        <Button
+          {...buttonProps}
+          onClick={onClick}
+          bsStyle={bsStyle}
+          bsSize={bsSize}
+          disabled={disabled}
+          target={target}
+          href={href}
+        >
+          {title}
+        </Button>
         <SplitToggle
           aria-label={title}
           bsStyle={bsStyle}
+          bsSize={bsSize}
           disabled={disabled}
         />
         <Dropdown.Menu>
