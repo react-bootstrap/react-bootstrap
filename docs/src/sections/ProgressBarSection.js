@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function ProgressBarSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="progress">Progress bars</Anchor> <small>ProgressBar</small>
-      </h1>
+      </h2>
 
       <p className="lead">Provide up-to-date feedback on the progress of a workflow or action with simple yet flexible progress bars.</p>
 

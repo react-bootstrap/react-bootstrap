@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function JumbotronSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="jumbotron">Jumbotron</Anchor> <small>Jumbotron</small>
-      </h1>
+      </h2>
 
       <p>A lightweight, flexible component that can optionally extend the entire viewport to showcase key content on your site.</p>
       <ReactPlayground codeText={Samples.Jumbotron} />

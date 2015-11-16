@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function CarouselSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="carousels">Carousels</Anchor> <small>Carousel, CarouselItem</small>
-      </h1>
+      </h2>
 
       <h3><Anchor id="carousels-uncontrolled">Uncontrolled</Anchor></h3>
       <p>Allow the component to control its own state.</p>

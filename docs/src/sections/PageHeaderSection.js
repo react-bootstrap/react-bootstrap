@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function PageHeaderSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="page-header">Page header</Anchor> <small>PageHeader</small>
-      </h1>
+      </h2>
 
       <p>A simple shell for an <code>h1</code> to appropriately space out and segment sections of content on a page. It can utilize the <code>h1</code>&#8217;s default <code>small</code> element, as well as most other components (with additional styles).</p>
       <ReactPlayground codeText={Samples.PageHeader} />

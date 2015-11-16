@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function TableSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="tables">Tables</Anchor> <small>Table</small>
-      </h1>
+      </h2>
 
       <p>Use the <code>striped</code>, <code>bordered</code>, <code>condensed</code> and <code>hover</code> props to customise the table.</p>
       <ReactPlayground codeText={Samples.TableBasic} />

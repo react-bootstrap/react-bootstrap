@@ -16,10 +16,10 @@ import ButtonGroupSection from './sections/ButtonGroupSection';
 import ButtonSection from './sections/ButtonSection';
 import CarouselSection from './sections/CarouselSection';
 import DropdownSection from './sections/DropdownSection';
+import FormSection from './sections/FormSection';
 import GlyphiconSection from './sections/GlyphiconSection';
 import GridSection from './sections/GridSection';
 import ImageSection from './sections/ImageSection';
-import InputSection from './sections/InputSection';
 import JumbotronSection from './sections/JumbotronSection';
 import LabelSection from './sections/LabelSection';
 import ListGroupSection from './sections/ListGroupSection';
@@ -85,48 +85,78 @@ const ComponentsPage = React.createClass({
                 <DropdownSection />
                 <MenuItemSection />
 
-                <PanelSection />
+                <div className="bs-docs-section">
+                  <h1 className="page-header">
+                    <Anchor id="overlays">Overlays</Anchor>
+                  </h1>
+
+                  <p className="lead">React-Bootstrap offers a number of accessible overlay components built using <a href="http://react-bootstrap.github.io/react-overlays/examples/">react-overlays</a>.</p>
+                </div>
 
                 <ModalSection />
                 <TooltipSection />
                 <PopoverSection />
                 <OverlaySection />
 
-                <ProgressBarSection />
+                <div className="bs-docs-section">
+                  <h1 className="page-header">
+                    <Anchor id="navigation">Navigation</Anchor>
+                  </h1>
+
+                  <p className="lead">React-Bootstrap offers a variety of responsive, accessible components for setting up navigation both across your website and within your pages.</p>
+                </div>
 
                 <NavSection />
                 <NavbarSection />
                 <BreadcrumbSection />
                 <TabsSection />
-                <PagerSection />
                 <PaginationSection />
+                <PagerSection />
 
-                <AlertsSection />
+                <div className="bs-docs-section">
+                  <h1 className="page-header">
+                    <Anchor id="page-layout">Page layout</Anchor>
+                  </h1>
 
-                <CarouselSection />
+                  <p className="lead">The components in this section offer different ways to structure and present data on your page.</p>
+                </div>
 
                 <GridSection />
+                <JumbotronSection />
+                <PageHeaderSection />
+                <ListGroupSection />
+                <TableSection />
+                <PanelSection />
+                <WellSection />
+
+                <FormSection />
+
+                <div className="bs-docs-section">
+                  <h1 className="page-header">
+                    <Anchor id="media-content">Media content</Anchor>
+                  </h1>
+
+                  <p className="lead">The React-Bootstrap media content components offer ways to present images and other media to your users in a responsive way, along with support for styling those components.</p>
+                </div>
 
                 <ImageSection />
                 <ThumbnailSection />
-
-                <ListGroupSection />
-
-                <LabelSection />
-                <BadgeSection />
-
-                <JumbotronSection />
-                <PageHeaderSection />
-
                 <ResponsiveEmbedSection />
+                <CarouselSection />
 
-                <WellSection />
+                <div className="bs-docs-section">
+                  <h1 className="page-header">
+                    <Anchor id="misc">Miscellaneous components</Anchor>
+                  </h1>
+
+                  <p className="lead">React-Bootstrap also offers various standalone components that can be used to present specific, relevant kinds of information across your pages.</p>
+                </div>
 
                 <GlyphiconSection />
-
-                <TableSection />
-
-                <InputSection />
+                <LabelSection />
+                <BadgeSection />
+                <AlertsSection />
+                <ProgressBarSection />
 
                 <div className="bs-docs-section">
                   <h1 className="page-header">
@@ -185,43 +215,62 @@ const ComponentsPage = React.createClass({
                         <NavItem href="#btn-dropdowns">Dropdowns</NavItem>
                         <NavItem href="#menu-items">Menu items</NavItem>
                       </SubNav>
-                      <NavItem href="#panels">Panels</NavItem>
-                      <NavItem href="#modals">Modals</NavItem>
-                      <NavItem href="#tooltips">Tooltips</NavItem>
-                      <NavItem href="#popovers">Popovers</NavItem>
-                      <NavItem href="#overlays">Overlays</NavItem>
-                      <NavItem href="#progress">Progress bars</NavItem>
-                      <NavItem href="#navs">Navs</NavItem>
-                      <NavItem href="#navbars">Navbars</NavItem>
-                      <NavItem href="#breadcrumbs">Breadcrumbs</NavItem>
-                      <NavItem href="#tabs">Tabs</NavItem>
-                      <NavItem href="#pager">Pager</NavItem>
-                      <NavItem href="#pagination">Pagination</NavItem>
-                      <NavItem href="#alerts">Alerts</NavItem>
-                      <NavItem href="#carousels">Carousels</NavItem>
-                      <NavItem href="#grids">Grids</NavItem>
-                      <NavItem href="#images">Images</NavItem>
-                      <NavItem href="#thumbnail">Thumbnails</NavItem>
-                      <NavItem href="#listgroup">List group</NavItem>
-                      <NavItem href="#labels">Labels</NavItem>
-                      <NavItem href="#badges">Badges</NavItem>
-                      <NavItem href="#jumbotron">Jumbotron</NavItem>
-                      <NavItem href="#page-header">Page header</NavItem>
-                      <NavItem href="#responsive-embed">Responsive embed</NavItem>
-                      <NavItem href="#wells">Wells</NavItem>
-                      <NavItem href="#glyphicons">Glyphicons</NavItem>
-                      <NavItem href="#tables">Tables</NavItem>
-                      <NavItem href="#input">Input</NavItem>
+
+                      <SubNav href="#overlays" text="Overlays">
+                        <NavItem href="#modals">Modals</NavItem>
+                        <NavItem href="#tooltips">Tooltips</NavItem>
+                        <NavItem href="#popovers">Popovers</NavItem>
+                        <NavItem href="#custom-overlays">Custom overlays</NavItem>
+                      </SubNav>
+
+                      <SubNav href="#navigation" text="Navigation">
+                        <NavItem href="#navs">Navs</NavItem>
+                        <NavItem href="#navbars">Navbars</NavItem>
+                        <NavItem href="#breadcrumbs">Breadcrumbs</NavItem>
+                        <NavItem href="#tabs">Tabs</NavItem>
+                        <NavItem href="#pagination">Pagination</NavItem>
+                        <NavItem href="#pager">Pager</NavItem>
+                      </SubNav>
+
+                      <SubNav href="#page-layout" text="Page layout">
+                        <NavItem href="#grid">Grid system</NavItem>
+                        <NavItem href="#jumbotron">Jumbotron</NavItem>
+                        <NavItem href="#page-header">Page header</NavItem>
+                        <NavItem href="#listgroup">List group</NavItem>
+                        <NavItem href="#tables">Tables</NavItem>
+                        <NavItem href="#panels">Panels</NavItem>
+                        <NavItem href="#wells">Wells</NavItem>
+                      </SubNav>
+
+                      <NavItem href="#forms">Forms</NavItem>
+
+                      <SubNav href="#media-content" text="Media content">
+                        <NavItem href="#images">Images</NavItem>
+                        <NavItem href="#thumbnail">Thumbnails</NavItem>
+                        <NavItem href="#responsive-embed">Responsive embed</NavItem>
+                        <NavItem href="#carousels">Carousels</NavItem>
+                      </SubNav>
+
+                      <SubNav href="#misc" text="Miscellaneous">
+                        <NavItem href="#glyphicons">Glyphicons</NavItem>
+                        <NavItem href="#labels">Labels</NavItem>
+                        <NavItem href="#badges">Badges</NavItem>
+                        <NavItem href="#alerts">Alerts</NavItem>
+                        <NavItem href="#progress">Progress bars</NavItem>
+                      </SubNav>
+
                       <SubNav href="#utilities" text="Utilities">
                         <NavItem href="#transitions">Transitions</NavItem>
                       </SubNav>
+
                       <SubNav href="#missing" text="Missing components">
                         <NavItem href="#affix">Affix</NavItem>
                         <NavItem href="#scrollspy">Scrollspy</NavItem>
                       </SubNav>
                     </Nav>
+
                     <a className="back-to-top" href="#top">
-                    Back to top
+                      Back to top
                     </a>
                   </div>
                 </AutoAffix>

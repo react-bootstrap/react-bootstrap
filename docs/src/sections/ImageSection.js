@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function ImageSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="images">Images</Anchor> <small>Image</small>
-      </h1>
+      </h2>
 
       <h3><Anchor id="image-shape">Shape</Anchor></h3>
       <p>Use the <code>rounded</code>, <code>circle</code> and <code>thumbnail</code> props to customise the image.</p>

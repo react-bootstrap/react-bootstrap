@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function AlertsSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="alerts">Alert messages</Anchor> <small>Alert</small>
-      </h1>
+      </h2>
 
       <p>Basic alert styles.</p>
       <ReactPlayground codeText={Samples.AlertBasic} />

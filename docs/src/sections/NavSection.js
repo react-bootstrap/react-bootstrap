@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function NavSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="navs">Navs</Anchor> <small>Nav, NavItem</small>
-      </h1>
+      </h2>
 
       <p>Navs come in two styles, <code>pills</code> and <code>tabs</code>. Disable a tab by adding <code>disabled</code>.</p>
       <ReactPlayground codeText={Samples.NavBasic} />

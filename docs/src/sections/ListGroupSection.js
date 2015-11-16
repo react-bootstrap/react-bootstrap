@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function ListGroupSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="listgroup">List group</Anchor> <small>ListGroup, ListGroupItem</small>
-      </h1>
+      </h2>
 
       <p>List groups are a flexible and powerful component for displaying not only simple lists of elements, but complex ones with custom content.</p>
 

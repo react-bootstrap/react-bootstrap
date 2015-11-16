@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function PanelSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="panels">Panels</Anchor> <small>Panel, PanelGroup, Accordion</small>
-      </h1>
+      </h2>
 
       <h3><Anchor id="panels-basic">Basic example</Anchor></h3>
       <p>By default, all the <code>&lt;Panel /&gt;</code> does is apply some basic border and padding to contain some content.</p>

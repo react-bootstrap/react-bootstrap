@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function ModalSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="modals">Modals</Anchor> <small>Modal</small>
-      </h1>
+      </h2>
 
       <h3><Anchor id="modals-static">Static Markup</Anchor></h3>
       <p>A modal dialog component</p>

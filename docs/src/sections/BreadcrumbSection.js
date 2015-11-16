@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function BreadcrumbSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="breadcrumbs">Breadcrumbs</Anchor> <small>Breadcrumb, BreadcrumbItem</small>
-      </h1>
+      </h2>
 
       <p>Breadcrumbs are used to indicate the current page's location. Add <code>active</code> attribute to active <code>BreadcrumbItem</code>.</p>
       <p>Do not set both <code>active</code> and <code>href</code> attributes. <code>active</code> overrides <code>href</code> and <code>span</code> element is rendered instead of <code>a</code>.</p>

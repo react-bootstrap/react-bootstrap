@@ -5,14 +5,14 @@ import PropTable from '../PropTable';
 import ReactPlayground from '../ReactPlayground';
 import Samples from '../Samples';
 
-export default function InputSection() {
+export default function FormSection() {
   return (
     <div className="bs-docs-section">
       <h1 className="page-header">
-        <Anchor id="input">Input</Anchor> <small>Input, ButtonInput, FormControls</small>
+        <Anchor id="forms">Forms</Anchor> <small>Input, ButtonInput, FormControls</small>
       </h1>
 
-      <p>Renders an input in bootstrap wrappers. Supports label, help, text input add-ons, validation and use as wrapper.
+      <p>The <code>{'<Input>'}</code> component renders an input in Bootstrap wrappers. Supports label, help, text input add-ons, validation and use as wrapper.
       Use <code>getValue()</code> or <code>getChecked()</code> to get the current state.
       The helper method <code>getInputDOMNode()</code> returns the internal input element. If you don't want the <code>form-group</code> class applied apply the prop named <code>standalone</code>.</p>
       <ReactPlayground codeText={Samples.Input} />
@@ -21,7 +21,7 @@ export default function InputSection() {
       <p>Supports <code>select</code>, <code>textarea</code>, as well as standard HTML input types. <code>getValue()</code> returns an array for multiple select.</p>
       <ReactPlayground codeText={Samples.InputTypes} />
 
-      <h3><Anchor id="input-static">FormControls.Static</Anchor></h3>
+      <h3><Anchor id="forms-controls-static">FormControls.Static</Anchor></h3>
       <p>Static text can be added to your form controls through the use of the <code>FormControls.Static</code> component.</p>
       <ReactPlayground codeText={Samples.StaticText} />
 

@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function ThumbnailSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="thumbnail">Thumbnails</Anchor> <small>Thumbnail</small>
-      </h1>
+      </h2>
 
       <p>Thumbnails are designed to showcase linked images with minimal required markup. You can extend the grid component with thumbnails.</p>
 

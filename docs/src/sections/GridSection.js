@@ -8,21 +8,21 @@ import Samples from '../Samples';
 export default function GridSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
-        <Anchor id="grids">Grids</Anchor> <small>Grid, Row, Col</small>
-      </h1>
+      <h2 className="page-header">
+        <Anchor id="grid">Grid system</Anchor> <small>Grid, Row, Col</small>
+      </h2>
 
-      <ReactPlayground codeText={Samples.GridBasic} exampleClassName="bs-example-tabs" />
+      <ReactPlayground codeText={Samples.GridBasic} />
 
-      <h3><Anchor id="grids-props">Props</Anchor></h3>
+      <h3><Anchor id="grid-props">Props</Anchor></h3>
 
-      <h4><Anchor id="grids-props-grid">Grid</Anchor></h4>
+      <h4><Anchor id="grid-props-grid">Grid</Anchor></h4>
       <PropTable component="Grid"/>
 
-      <h4><Anchor id="grids-props-row">Row</Anchor></h4>
+      <h4><Anchor id="grid-props-row">Row</Anchor></h4>
       <PropTable component="Row"/>
 
-      <h4><Anchor id="grids-props-col">Col</Anchor></h4>
+      <h4><Anchor id="grid-props-col">Col</Anchor></h4>
       <PropTable component="Col"/>
     </div>
   );

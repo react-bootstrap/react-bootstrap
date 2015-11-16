@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function GlyphiconSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="glyphicons">Glyphicons</Anchor> <small>Glyphicon</small>
-      </h1>
+      </h2>
 
       <p>Use them in buttons, button groups for a toolbar, navigation, or prepended form inputs.</p>
       <ReactPlayground codeText={Samples.Glyphicon} />

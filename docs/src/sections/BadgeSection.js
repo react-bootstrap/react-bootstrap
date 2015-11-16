@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function BadgeSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="badges">Badges</Anchor> <small>Badge</small>
-      </h1>
+      </h2>
 
       <p>Easily highlight new or unread items by adding a <code>{"<Badge>"}</code> to links, Bootstrap navs, and more.</p>
       <ReactPlayground codeText={Samples.Badge} />

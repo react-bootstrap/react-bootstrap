@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function WellSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="wells">Wells</Anchor> <small>Well</small>
-      </h1>
+      </h2>
 
       <p>Use the well as a simple effect on an element to give it an inset effect.</p>
       <ReactPlayground codeText={Samples.Well} />

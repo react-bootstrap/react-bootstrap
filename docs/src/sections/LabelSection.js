@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function LabelSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="labels">Labels</Anchor> <small>Label</small>
-      </h1>
+      </h2>
 
       <p>Create a <code>{"<Label>label</Label>"}</code> to highlight information</p>
       <ReactPlayground codeText={Samples.Label} />

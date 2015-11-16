@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function TabsSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="tabs">Togglable tabs</Anchor> <small>Tabs, Tab</small>
-      </h1>
+      </h2>
 
       <p>Add quick, dynamic tab functionality to transition through panes of local content.</p>
 

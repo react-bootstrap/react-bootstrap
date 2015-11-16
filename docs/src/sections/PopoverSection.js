@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function PopoverSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="popovers">Popovers</Anchor> <small>Popover</small>
-      </h1>
+      </h2>
 
       <p>
         The Popover, offers a more robust alternative to the Tooltip for displaying overlays of content.

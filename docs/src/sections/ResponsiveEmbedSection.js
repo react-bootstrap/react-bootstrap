@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function ResponsiveEmbedSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="responsive-embed">Responsive embed</Anchor> <small>ResponsiveEmbed</small>
-      </h1>
+      </h2>
 
       <p>Allow browsers to determine video or slideshow dimensions based on the width of their containing block by creating an intrinsic ratio that will properly scale on any device.</p>
       <p>You don't need to include <code>frameborder="0"</code> in your <code>iframe</code>s.</p>

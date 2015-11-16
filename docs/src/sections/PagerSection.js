@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function PagerSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="pager">Pager</Anchor> <small>Pager, PageItem</small>
-      </h1>
+      </h2>
 
       <p>Quick previous and next links.</p>
 

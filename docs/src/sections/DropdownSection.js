@@ -12,8 +12,6 @@ export default function DropdownSection() {
         <Anchor id="btn-dropdowns">Dropdowns</Anchor> <small>DropdownButton, SplitButton, Dropdown</small>
       </h2>
 
-      <p className="lead">Use <code>{"<DropdownButton />"}</code> or <code>{"<SplitButton />"}</code> components to display a button with a dropdown menu.</p>
-
       <h3><Anchor id="btn-dropdowns-single">Single button dropdowns</Anchor></h3>
       <p>Create a dropdown button with the <code>{"<DropdownButton />"}</code> component.</p>
       <ReactPlayground codeText={Samples.DropdownButtonBasic} />

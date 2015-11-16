@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function OverlaySection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
-        <Anchor id="overlays">Overlays</Anchor> <small>Overlay</small>
-      </h1>
+      <h2 className="page-header">
+        <Anchor id="custom-overlays">Custom overlays</Anchor> <small>Overlay</small>
+      </h2>
 
       <p>
         The <code>OverlayTrigger</code> component is great for most use cases, but as a higher level abstraction it can lack the flexibility needed
@@ -19,14 +19,14 @@ export default function OverlaySection() {
       </p>
       <ReactPlayground codeText={Samples.Overlay}/>
 
-      <h4><Anchor id="overlays-overlay">Use Overlay instead of Tooltip and Popover</Anchor></h4>
+      <h4><Anchor id="custom-overlays-overlay">Use Overlay instead of Tooltip and Popover</Anchor></h4>
       <p>
         You don't need to use the provided <code>Tooltip</code> or <code>Popover</code> components. Creating custom overlays
         is as easy as wrapping some markup in an <code>Overlay</code> component
       </p>
       <ReactPlayground codeText={Samples.OverlayCustom} />
 
-      <h3><Anchor id="overlays-props">Props</Anchor></h3>
+      <h3><Anchor id="custom-overlays-props">Props</Anchor></h3>
       <PropTable component="Overlay"/>
     </div>
   );

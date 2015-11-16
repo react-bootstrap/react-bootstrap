@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function TooltipSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="tooltips">Tooltips</Anchor> <small>Tooltip</small>
-      </h1>
+      </h2>
 
       <p>
         Tooltip component for a more stylish alternative to that anchor tag <code>title</code> attribute.

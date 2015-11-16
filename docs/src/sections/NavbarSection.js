@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function NavbarSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="navbars">Navbars</Anchor> <small>Navbar</small>
-      </h1>
+      </h2>
 
       <p>Navbars are responsive meta components that serve as navigation headers for your application or site.</p>
       <p>

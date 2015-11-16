@@ -8,9 +8,9 @@ import Samples from '../Samples';
 export default function PaginationSection() {
   return (
     <div className="bs-docs-section">
-      <h1 className="page-header">
+      <h2 className="page-header">
         <Anchor id="pagination">Pagination</Anchor> <small>Pagination</small>
-      </h1>
+      </h2>
 
       <p>Provide pagination links for your site or app with the multi-page pagination component. Set <code>items</code> to the number of pages. <code>activePage</code> prop dictates which page is active</p>
       <ReactPlayground codeText={Samples.PaginationBasic} />
