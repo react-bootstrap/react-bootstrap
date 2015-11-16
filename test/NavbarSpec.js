@@ -6,6 +6,7 @@ import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
 
 import { getOne, shouldWarn } from './helpers';
+import utils from '../src/utils/bootstrapUtils';
 
 describe('Navbar', () => {
 
@@ -54,6 +55,17 @@ describe('Navbar', () => {
       <Navbar inverse />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-inverse'));
+  });
+
+  it('Should not add default class along with custom styles', () => {
+    utils.addStyle(Navbar, ['custom']);
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Navbar bsStyle='custom' />
+    );
+
+    expect(() => ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-default'))
+      .to.throw();
   });
 
   it('Should add fluid variation class', () => {

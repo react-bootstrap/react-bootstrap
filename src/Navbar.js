@@ -152,15 +152,15 @@ let Navbar = React.createClass({
       props.role = 'navigation';
     }
 
-    const classes = tbsUtils.getClassSet(this.props);
+    if (inverse) {
+      props.bsStyle = INVERSE;
+    }
+
+    const classes = tbsUtils.getClassSet(props);
 
     classes[tbsUtils.prefix(this.props, 'fixed-top')] = fixedTop;
     classes[tbsUtils.prefix(this.props, 'fixed-bottom')] = fixedBottom;
     classes[tbsUtils.prefix(this.props, 'static-top')] = staticTop;
-
-    // handle built-in styles manually to provide the convenience `inverse` prop
-    classes[tbsUtils.prefix(this.props, INVERSE)] = inverse;
-    classes[tbsUtils.prefix(this.props, DEFAULT)] = !inverse;
 
     return (
       <ComponentClass {...props} className={classNames(className, classes)}>
