@@ -1,4 +1,4 @@
-import merge from 'lodash-compat/object/merge';
+import _ from 'lodash-compat';
 import React from 'react';
 import Glyphicon from '../../src/Glyphicon';
 import Label from '../../src/Label';
@@ -15,7 +15,7 @@ function getPropsData(component, metadata) {
   if (componentData.composes) {
     componentData.composes.forEach(other => {
       if (other !== component) {
-        props = merge({}, getPropsData(other, metadata), props);
+        props = _.merge({}, getPropsData(other, metadata), props);
       }
     });
   }
@@ -23,7 +23,7 @@ function getPropsData(component, metadata) {
   if (componentData.mixins) {
     componentData.mixins.forEach( other => {
       if (other !== component && componentData.composes.indexOf(other) === -1) {
-        props = merge({}, getPropsData(other, metadata), props);
+        props = _.merge({}, getPropsData(other, metadata), props);
       }
     });
   }

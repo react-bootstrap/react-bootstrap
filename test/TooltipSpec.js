@@ -1,4 +1,4 @@
-import pick from 'lodash/object/pick';
+import _ from 'lodash-compat';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
@@ -14,7 +14,7 @@ describe('Tooltip', () => {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
 
     const tooltip = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tooltip');
-    expect(pick(tooltip.style, ['top', 'left']))
+    expect(_.pick(tooltip.style, ['top', 'left']))
       .to.eql({top: '10px', left: '20px'});
   });
 
@@ -26,7 +26,7 @@ describe('Tooltip', () => {
         </Tooltip>
       );
       const tooltip = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tooltip');
-      expect(pick(tooltip.style, ['opacity', 'top', 'left']))
+      expect(_.pick(tooltip.style, ['opacity', 'top', 'left']))
         .to.eql({opacity: '0.9', top: '10px', left: '20px'});
     });
   });
