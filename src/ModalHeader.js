@@ -11,7 +11,7 @@ class ModalHeader extends React.Component {
 
     return (
       <div
-        {...this.props}
+        {...props}
         className={classNames(this.props.className, tbsUtils.prefix(this.props, 'header'))}
       >
         { this.props.closeButton &&
