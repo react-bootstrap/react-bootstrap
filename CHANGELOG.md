@@ -1,3 +1,19 @@
+v0.28.0 - Mon, 16 Nov 2015 18:42:38 GMT
+---------------------------------------
+
+- [21cab20](../../commit/21cab20) [changed] dropdown props are passed through to the dropdown Button
+- [f9ea411](../../commit/f9ea411) [changed] navbar `navExpanded` to `expanded`
+- [0be007f](../../commit/0be007f) [removed] Nav `right` prop in favor of `pullRight`
+- [5dbafd3](../../commit/5dbafd3) [changed] Split the Navbar component into sub-components
+- [59c9571](../../commit/59c9571) [changed] remove extra wrapping `<nav>` element in Nav components
+- [229cb2c](../../commit/229cb2c) [fixed] aria-label properly passed to the Modal header button
+- [345f4b4](../../commit/345f4b4) [changed] Only add the `navigation` role to navbar when not using a <nav>
+- [44b3b9e](../../commit/44b3b9e) [fixed] when overlay animation is false the transition prop passed to base overlay should be null so that it does not trigger a React PropTypes warning
+- [0f3ee3e](../../commit/0f3ee3e) [removed] bootstrap mixin
+- [df2f1a3](../../commit/df2f1a3) [fixed] Don't clone children in ResponsiveEmbed
+
+
+
 v0.27.3 - Mon, 26 Oct 2015 13:59:37 GMT
 ---------------------------------------
 
