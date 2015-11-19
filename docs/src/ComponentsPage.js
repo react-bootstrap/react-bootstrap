@@ -141,7 +141,6 @@ const ComponentsPage = React.createClass({
           <PageHeader
             title="Components"
             subTitle="" />
-
           <div ref="main" className="container bs-docs-container">
             <div className="row">
               <div className="col-md-9" role="main">
@@ -388,7 +387,6 @@ const ComponentsPage = React.createClass({
               </div>
             </div>
           </div>
-
           <PageFooter ref="footer" />
         </div>
       );
