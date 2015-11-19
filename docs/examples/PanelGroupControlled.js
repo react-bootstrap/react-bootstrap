@@ -1,7 +1,7 @@
 const ControlledPanelGroup = React.createClass({
   getInitialState() {
     return {
-      activeKey: 1
+      activeKey: '1'
     };
   },
 
