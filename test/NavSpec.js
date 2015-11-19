@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import tsp from 'teaspoon';
+import keycode from 'keycode';
 
 import Button from '../src/Button';
 import Nav from '../src/Nav';
@@ -126,15 +128,68 @@ describe('Nav', () => {
     shouldWarn('justified navbar `Nav`s are not supported');
   });
 
+  describe('keyboard navigation', () => {
+    let instance;
+    let selectSpy;
+    beforeEach(() => {
+      selectSpy = sinon.spy(activeKey => instance.props({ activeKey }));
+      instance = tsp(
+        <Nav activeKey={1} onSelect={selectSpy} role='tablist'>
+          <NavItem eventKey={1}>NavItem 1 content</NavItem>
+          <NavItem eventKey={2} disabled>NavItem 2 content</NavItem>
+          <NavItem eventKey={3}>NavItem 3 content</NavItem>
+        </Nav>
+      )
+      .render(true);
+    });
+
+    afterEach(() => instance.unmount());
+
+    it('only the active tab should be focusable', () => {
+      let links = instance.find('a').dom();
+
+      expect(links[0].getAttribute('tabindex')).to.equal('0');
+      expect(links[1].getAttribute('tabindex')).to.equal('-1');
+      expect(links[2].getAttribute('tabindex')).to.equal('-1');
+    });
+
+    it('should focus the next tab on arrow key', () => {
+      let links = instance.find('a').dom();
+
+      let [firstAnchor, _, lastAnchor] = links;
+
+      firstAnchor.focus();
+
+      ReactTestUtils.Simulate.keyDown(firstAnchor, { keyCode: keycode('right') });
+
+      expect(instance[0].getActiveKey()).to.equal(3);
+      expect(document.activeElement).to.equal(lastAnchor);
+    });
+
+    it('should focus the previous tab on arrow key', () => {
+      instance.props({ activeKey: 3 });
+
+      let links = instance.find('a').dom();
+      let [firstAnchor, _, lastAnchor] = links;
+
+      lastAnchor.focus();
+
+      ReactTestUtils.Simulate.keyDown(lastAnchor, { keyCode: keycode('left') });
+
+      expect(instance[0].getActiveKey()).to.equal(1);
+      expect(document.activeElement).to.equal(firstAnchor);
+    });
+  });
+
   describe('Web Accessibility', () => {
 
     it('Should have tablist and tab roles', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-          <Nav bsStyle="tabs" activeKey={1}>
-            <NavItem key={1}>Tab 1 content</NavItem>
-            <NavItem key={2}>Tab 2 content</NavItem>
-          </Nav>
-        );
+        <Nav role='tablist' bsStyle="tabs" activeKey={1}>
+          <NavItem key={1}>Tab 1 content</NavItem>
+          <NavItem key={2}>Tab 2 content</NavItem>
+        </Nav>
+      );
 
       let ul = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'ul')[0];
       let navItem = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a')[0];
