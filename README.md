@@ -4,15 +4,12 @@
 
 [![Travis Build Status][build-badge]][build]
 [![Build status][appveyor-badge]][appveyor]
-[![Coverage Status][coveralls-badge]][coveralls]
-
+[![Coverage Status][coveralls-badge]][coveralls]  
 [![Discord][discord-badge]][discord]
 [![Gitter][gitter-badge]][gitter]
-[![Thinkful][thinkful-badge]][thinkful]
-
+[![Thinkful][thinkful-badge]][thinkful]  
 [![NPM version][npm-badge]][npm]
-[![Bower version][bower-badge]][bower]
-
+[![Bower version][bower-badge]][bower]  
 [![Dependency Status][deps-badge]][deps]
 [![devDependency Status][dev-deps-badge]][dev-deps]
 [![peerDependency Status][peer-deps-badge]][peer-deps]
