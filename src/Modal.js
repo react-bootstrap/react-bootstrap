@@ -146,6 +146,8 @@ const Modal = React.createClass({
           this._wrapper = (ref && ref.refs.modal);
           this._backdrop = (ref && ref.refs.backdrop);
         }}
+        style={props.wrapperStyle}
+        className={props.wrapperClassName}
         onEntering={this._onShow}
         onExited={this._onHide}
         backdropClassName={classNames(tbsUtils.prefix(props, 'backdrop'), inClass)}
