@@ -133,6 +133,32 @@ describe('Modal', () => {
     assert.ok(dialog.className.match(/\btestCss\b/));
   });
 
+  it('Should pass wrapperClassName to the react-overlay/Modal', () => {
+    let noOp = () => {};
+    let instance = render(
+      <Modal show wrapperClassName="testCss" onHide={noOp}>
+        <strong>Message</strong>
+      </Modal>
+    , mountPoint);
+
+    let wrapper = ReactDOM.findDOMNode(instance._wrapper);
+
+    assert.ok(wrapper.className.match(/\btestCss\b/));
+  });
+
+  it('Should pass wrapperStyle to the react-overlay/Modal', () => {
+    let noOp = () => {};
+    let instance = render(
+      <Modal show wrapperStyle={{zIndex: 123}} onHide={noOp}>
+        <strong>Message</strong>
+      </Modal>
+    , mountPoint);
+
+    let wrapper = ReactDOM.findDOMNode(instance._wrapper);
+
+    assert.ok(wrapper.style.zIndex === '123');
+  });
+
   it('Should use dialogComponent', () => {
     let noOp = () => {};
 
