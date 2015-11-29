@@ -100,6 +100,7 @@
     "react-dom": "^0.14.0",
     "react-hot-loader": "^1.3.0",
     "react-router": "^1.0.0-rc3",
+    "react-waypoint": "^1.1.2",
     "release-script": "^0.5.3",
     "rimraf": "^2.4.3",
     "semver": "^5.0.3",
