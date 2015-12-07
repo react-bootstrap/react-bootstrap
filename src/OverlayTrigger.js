@@ -150,7 +150,7 @@ const OverlayTrigger = React.createClass({
     ReactDOM.unmountComponentAtNode(this._mountNode);
     this._mountNode = null;
     if (this._hoverShowDelay > 0) {
-      clearTimeout(this._hoverShowDelay); 
+      clearTimeout(this._hoverShowDelay);
     }
     if (this._hoverHideDelay > 0) {
       clearTimeout(this._hoverHideDelay);
