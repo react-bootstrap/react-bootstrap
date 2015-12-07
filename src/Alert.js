@@ -23,7 +23,8 @@ let Alert = React.createClass({
         type="button"
         className="close"
         onClick={this.props.onDismiss}
-        aria-hidden="true">
+        aria-hidden="true"
+        tabIndex="-1">
         <span>&times;</span>
       </button>
     );
