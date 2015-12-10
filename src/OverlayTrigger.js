@@ -177,9 +177,13 @@ const OverlayTrigger = React.createClass({
       onEntered: this.props.onEntered
     };
 
+    let hoverOrFocus = isOneOf('focus', this.props.trigger) || isOneOf('hover', this.props.trigger);
+
     let overlay = cloneElement(this.props.overlay, {
       placement: overlayProps.placement,
-      container: overlayProps.container
+      container: overlayProps.container,
+      onMouseOver: hoverOrFocus ? this.handleDelayedShow : undefined,
+      onMouseLeave: hoverOrFocus ? this.handleDelayedHide : undefined
     });
 
     return (
