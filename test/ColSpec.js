@@ -40,4 +40,16 @@ describe('Col', () => {
     assert.ok(instanceClassName.match(/\bcol-md-push-0\b/));
     assert.ok(instanceClassName.match(/\bcol-lg-push-0\b/));
   });
+
+  it('Should set Hidden to true', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Col xsHidden smHidden mdHidden lgHidden />
+    );
+
+    let instanceClassName = ReactDOM.findDOMNode(instance).className;
+    assert.ok(instanceClassName.match(/\bhidden-xs\b/));
+    assert.ok(instanceClassName.match(/\bhidden-sm\b/));
+    assert.ok(instanceClassName.match(/\bhidden-md\b/));
+    assert.ok(instanceClassName.match(/\bhidden-lg\b/));
+  });
 });
