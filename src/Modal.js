@@ -106,6 +106,10 @@ const Modal = React.createClass({
     };
   },
 
+  componentWillUnmount() {
+    events.off(window, 'resize', this.handleWindowResize);
+  },
+
   render() {
     let {
         className
