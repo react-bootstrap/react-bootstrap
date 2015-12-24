@@ -149,8 +149,15 @@ const OverlayTrigger = React.createClass({
   componentWillUnmount() {
     ReactDOM.unmountComponentAtNode(this._mountNode);
     this._mountNode = null;
-    clearTimeout(this._hoverShowDelay);
-    clearTimeout(this._hoverHideDelay);
+
+    // It's harmless to clear a null handle, but this makes things consistent
+    // with the logic below.
+    if (this._hoverShowDelay != null) {
+      clearTimeout(this._hoverShowDelay);
+    }
+    if (this._hoverHideDelay != null) {
+      clearTimeout(this._hoverHideDelay);
+    }
   },
 
   componentDidUpdate() {
