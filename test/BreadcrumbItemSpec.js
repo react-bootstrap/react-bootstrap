@@ -4,19 +4,7 @@ import ReactDOM from 'react-dom';
 
 import BreadcrumbItem from '../src/BreadcrumbItem';
 
-import { shouldWarn } from './helpers';
-
 describe('BreadcrumbItem', () => {
-  it('Should warn if `active` and `href` attributes set', () => {
-    ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem href='#' active>
-        Crumb
-      </BreadcrumbItem>
-    );
-
-    shouldWarn('[react-bootstrap] `href` and `active` properties cannot be set at the same time');
-  });
-
   it('Should render `a` as inner element when is not active', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <BreadcrumbItem href='#'>
@@ -28,7 +16,7 @@ describe('BreadcrumbItem', () => {
     assert.notInclude(ReactDOM.findDOMNode(instance).className, 'active');
   });
 
-  it('Should add `active` class with `active` attribute set.', () => {
+  it('Should render `span.active` with `active` attribute set.', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <BreadcrumbItem active>
         Active Crumb
@@ -36,16 +24,23 @@ describe('BreadcrumbItem', () => {
     );
 
     assert.include(ReactDOM.findDOMNode(instance).className, 'active');
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
   });
 
-  it('Should render `span` as inner element when is active', () => {
+  it('Should render `span.active` when active and has href', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem active>
-        Crumb
+      <BreadcrumbItem href="#" active>
+        Active Crumb
       </BreadcrumbItem>
     );
 
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
+    assert.include(ReactDOM.findDOMNode(instance).className, 'active');
+
+    const spanNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span');
+    assert.ok(spanNode);
+    assert.notOk(spanNode.hasAttribute('href'));
+
+    assert.lengthOf(ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a'), 0);
   });
 
   it('Should add custom classes onto `li` wrapper element', () => {

@@ -32,7 +32,7 @@ const Breadcrumb = React.createClass({
   },
 
   renderBreadcrumbItem(child, index) {
-    return cloneElement( child, { key: child.key ? child.key : index } );
+    return cloneElement(child, { key: child.key || index });
   }
 });
 
