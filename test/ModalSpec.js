@@ -1,3 +1,4 @@
+import events from 'dom-helpers/events';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
@@ -175,4 +176,42 @@ describe('Modal', () => {
       , mountPoint);
   });
 
+  describe('cleanup', () => {
+    let offSpy;
+
+    beforeEach(() => {
+      offSpy = sinon.spy(events, 'off');
+    });
+
+    afterEach(() => {
+      events.off.restore();
+    });
+
+    it('should remove resize listener when unmounted', () => {
+      class Component extends React.Component {
+        constructor(props, context) {
+          super(props, context);
+
+          this.state = {
+            show: true,
+          };
+        }
+
+        render() {
+          if (!this.state.show) {
+            return null;
+          }
+
+          return (
+            <Modal show>Foo</Modal>
+          );
+        }
+      }
+
+      const instance = render(<Component />, mountPoint);
+      instance.setState({ show: false });
+
+      expect(offSpy).to.have.been.calledWith(window, 'resize');
+    });
+  });
 });
