@@ -49,7 +49,7 @@ class MenuItem extends React.Component {
 
     return (
       <li role="presentation"
-        className={classnames(className, classes)}
+        className={classnames(classes, className)}
         style={style}
       >
         <SafeAnchor
