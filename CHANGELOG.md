@@ -1,3 +1,13 @@
+v0.28.2 - Fri, 08 Jan 2016 06:38:06 GMT
+---------------------------------------
+
+- [1bee8a2](../../commit/1bee8a2) [added] responsively hiding columns
+- [653bb17](../../commit/653bb17) [fixed] a11y: setting tabIndex="-1" for the dismiss button of Alerts since aria-hidden="true"
+- [1d07197](../../commit/1d07197) [fixed] don't add aria-label to modal header and close button
+- [035e553](../../commit/035e553) [fixed] navbar-default not added for custom styles
+
+
+
 v0.28.1 - Mon, 16 Nov 2015 20:04:34 GMT
 ---------------------------------------
 
