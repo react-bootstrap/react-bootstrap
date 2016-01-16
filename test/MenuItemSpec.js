@@ -59,7 +59,7 @@ describe('MenuItem', () => {
   });
 
   it('click handling with onSelect prop', () => {
-    const handleSelect = (event, eventKey) => {
+    const handleSelect = (eventKey) => {
       eventKey.should.equal('1');
     };
     const instance = ReactTestUtils.renderIntoDocument(
@@ -71,7 +71,7 @@ describe('MenuItem', () => {
   });
 
   it('click handling with onSelect prop (no eventKey)', () => {
-    const handleSelect = (event, eventKey) => {
+    const handleSelect = (eventKey) => {
       expect(eventKey).to.be.undefined;
     };
     const instance = ReactTestUtils.renderIntoDocument(
