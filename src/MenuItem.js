@@ -23,7 +23,7 @@ class MenuItem extends React.Component {
     }
 
     if (this.props.onSelect) {
-      this.props.onSelect(event, this.props.eventKey);
+      this.props.onSelect(this.props.eventKey, event);
     }
   }
 

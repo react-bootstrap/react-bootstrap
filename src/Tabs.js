@@ -320,10 +320,10 @@ const Tabs = React.createClass({
     return !this._isChanging;
   },
 
-  handleSelect(selectedKey) {
+  handleSelect(selectedKey, event) {
     if (this.props.onSelect) {
       this._isChanging = true;
-      this.props.onSelect(selectedKey);
+      this.props.onSelect(selectedKey, event);
       this._isChanging = false;
       return;
     }
@@ -351,7 +351,7 @@ const Tabs = React.createClass({
 
       if (next && next !== currentKey) {
         event.preventDefault();
-        this.handleSelect(next);
+        this.handleSelect(next, event);
         this._needsRefocus = true;
       }
       break;
@@ -361,7 +361,7 @@ const Tabs = React.createClass({
 
       if (next && next !== currentKey) {
         event.preventDefault();
-        this.handleSelect(next);
+        this.handleSelect(next, event);
         this._needsRefocus = true;
       }
       break;
