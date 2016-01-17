@@ -1,5 +1,4 @@
 import React from 'react';
-import findIndex from 'lodash-compat/array/findIndex';
 import AutoAffix from 'react-overlays/lib/AutoAffix';
 import Waypoint from 'react-waypoint';
 
@@ -91,19 +90,11 @@ const sections = {
 };
 /* eslint-enable indent */
 
-function prevSection(href) {
-  let keys = Object.keys(sections);
-  let idx = findIndex(keys, k => sections[k] === href);
-  return sections[keys[Math.max(idx - 1, 0)]];
-}
-
-let ScrollSpy = ({ href, onSpy }) => (
+let ScrollSpy = ({ href, onBefore, onAfter }) => (
   <Waypoint
-    onEnter={(e, dir) => dir === 'above' && onSpy(href)}
-    onLeave={(e, dir) => {
-      if (dir === 'above') { onSpy(href); }
-      if (dir === 'below') { onSpy(prevSection(href)); }
-    }}
+    onEnter={(e, dir) => dir === 'above' && onBefore(href)}
+    onLeave={(e, dir) => dir === 'above' && onAfter(href)}
+    threshold={-0.02}
   />
 );
 
@@ -120,16 +111,68 @@ const ComponentsPage = React.createClass({
 
   handleNavItemSelect(key, href) {
     window.location = href;
-    this.setActiveNavItem();
   },
 
   componentDidMount() {
-    this.setActiveNavItem();
+    this.afterSections = {};
+    Object.keys(sections).forEach(
+      key => this.afterSections[sections[key]] = false
+    );
+
+    const { hash } = window.location;
+    if (this.afterSections[hash] !== undefined) {
+      for (const href of Object.keys(this.afterSections)) {
+        this.afterSections[href] = true;
+
+        if (href === hash) {
+          this.setActiveNavItem();
+          break;
+        }
+      }
+    }
   },
 
-  setActiveNavItem(href = window.location.hash) {
-    this.setState({
-      activeNavItemHref: href
+  setActiveNavItem() {
+    let activeNavItemHref = null;
+
+    for (const href of Object.keys(this.afterSections)) {
+      if (!this.afterSections[href]) {
+        this.setState({ activeNavItemHref });
+        return;
+      }
+
+      activeNavItemHref = href;
+    }
+  },
+
+  renderScrollSpy(href) {
+    return (
+      <ScrollSpy
+        href={href}
+        onBefore={this.onBefore}
+        onAfter={this.onAfter}
+      />
+    );
+  },
+
+  onBefore(href) {
+    this.afterSections[href] = false;
+    this.updateActiveHref();
+  },
+
+  onAfter(href) {
+    this.afterSections[href] = true;
+    this.updateActiveHref();
+  },
+
+  updateActiveHref() {
+    if (this.updateActiveHrefHandle != null) {
+      return;
+    }
+
+    this.updateActiveHrefHandle = setTimeout(() => {
+      this.updateActiveHrefHandle = null;
+      this.setActiveNavItem();
     });
   },
 
@@ -145,16 +188,16 @@ const ComponentsPage = React.createClass({
           <div ref="main" className="container bs-docs-container">
             <div className="row">
               <div className="col-md-9" role="main">
-                <ScrollSpy href={sections.buttons} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.buttons)}
                 <ButtonSection />
-                <ScrollSpy href={sections.btnGroups} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.btnGroups)}
                 <ButtonGroupSection />
-                <ScrollSpy href={sections.dropdowns} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.dropdowns)}
                 <DropdownSection />
-                <ScrollSpy href={sections.menuitems} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.menuitems)}
                 <MenuItemSection />
 
-                <ScrollSpy href={sections.overlays} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.overlays)}
                 <div className="bs-docs-section">
                   <h1 className="page-header">
                     <Anchor id="overlays">Overlays</Anchor>
@@ -163,16 +206,16 @@ const ComponentsPage = React.createClass({
                   <p className="lead">React-Bootstrap offers a number of accessible overlay components built using <a href="http://react-bootstrap.github.io/react-overlays/examples/">react-overlays</a>.</p>
                 </div>
 
-                <ScrollSpy href={sections.modals} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.modals)}
                 <ModalSection />
-                <ScrollSpy href={sections.tooltips} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.tooltips)}
                 <TooltipSection />
-                <ScrollSpy href={sections.popovers} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.popovers)}
                 <PopoverSection />
-                <ScrollSpy href={sections.customOverlays} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.customOverlays)}
                 <OverlaySection />
 
-                <ScrollSpy href={sections.navigation} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.navigation)}
                 <div className="bs-docs-section">
                   <h1 className="page-header">
                     <Anchor id="navigation">Navigation</Anchor>
@@ -181,20 +224,20 @@ const ComponentsPage = React.createClass({
                   <p className="lead">React-Bootstrap offers a variety of responsive, accessible components for setting up navigation both across your website and within your pages.</p>
                 </div>
 
-                <ScrollSpy href={sections.navs} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.navs)}
                 <NavSection />
-                <ScrollSpy href={sections.navbars} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.navbars)}
                 <NavbarSection />
-                <ScrollSpy href={sections.crumbs} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.crumbs)}
                 <BreadcrumbSection />
-                <ScrollSpy href={sections.tabs} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.tabs)}
                 <TabsSection />
-                <ScrollSpy href={sections.pagination} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.pagination)}
                 <PaginationSection />
-                <ScrollSpy href={sections.pager} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.pager)}
                 <PagerSection />
 
-                <ScrollSpy href={sections.layout} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.layout)}
                 <div className="bs-docs-section">
                   <h1 className="page-header">
                     <Anchor id="page-layout">Page layout</Anchor>
@@ -203,25 +246,25 @@ const ComponentsPage = React.createClass({
                   <p className="lead">The components in this section offer different ways to structure and present data on your page.</p>
                 </div>
 
-                <ScrollSpy href={sections.grid} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.grid)}
                 <GridSection />
-                <ScrollSpy href={sections.jumbotron} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.jumbotron)}
                 <JumbotronSection />
-                <ScrollSpy href={sections.pageHeader} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.pageHeader)}
                 <PageHeaderSection />
-                <ScrollSpy href={sections.listGroup} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.listGroup)}
                 <ListGroupSection />
-                <ScrollSpy href={sections.tables} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.tables)}
                 <TableSection />
-                <ScrollSpy href={sections.panels} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.panels)}
                 <PanelSection />
-                <ScrollSpy href={sections.wells} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.wells)}
                 <WellSection />
 
-                <ScrollSpy href={sections.forms} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.forms)}
                 <FormSection />
 
-                <ScrollSpy href={sections.media} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.media)}
                 <div className="bs-docs-section">
                   <h1 className="page-header">
                     <Anchor id="media-content">Media content</Anchor>
@@ -230,16 +273,16 @@ const ComponentsPage = React.createClass({
                   <p className="lead">The React-Bootstrap media content components offer ways to present images and other media to your users in a responsive way, along with support for styling those components.</p>
                 </div>
 
-                <ScrollSpy href={sections.images} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.images)}
                 <ImageSection />
-                <ScrollSpy href={sections.thumbnails} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.thumbnails)}
                 <ThumbnailSection />
-                <ScrollSpy href={sections.embed} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.embed)}
                 <ResponsiveEmbedSection />
-                <ScrollSpy href={sections.carousels} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.carousels)}
                 <CarouselSection />
 
-                <ScrollSpy href={sections.misc} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.misc)}
                 <div className="bs-docs-section">
                   <h1 className="page-header">
                     <Anchor id="misc">Miscellaneous components</Anchor>
@@ -248,19 +291,19 @@ const ComponentsPage = React.createClass({
                   <p className="lead">React-Bootstrap also offers various standalone components that can be used to present specific, relevant kinds of information across your pages.</p>
                 </div>
 
-                <ScrollSpy href={sections.icons} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.icons)}
                 <GlyphiconSection />
-                <ScrollSpy href={sections.labels} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.labels)}
                 <LabelSection />
-                <ScrollSpy href={sections.badges} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.badges)}
                 <BadgeSection />
-                <ScrollSpy href={sections.alerts} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.alerts)}
                 <AlertsSection />
-                <ScrollSpy href={sections.progress} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.progress)}
                 <ProgressBarSection />
 
 
-                <ScrollSpy href={sections.utilities} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.utilities)}
                 <div className="bs-docs-section">
                   <h1 className="page-header">
                     <Anchor id="utilities">Utilities</Anchor>
@@ -269,10 +312,10 @@ const ComponentsPage = React.createClass({
                   <p className="lead">React-Bootstrap also exposes certain utility components used internally. They can be used to enhance your own custom components as well.</p>
                 </div>
 
-                <ScrollSpy href={sections.transitions} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.transitions)}
                 <TransitionSection />
 
-                <ScrollSpy href={sections.missing} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.missing)}
                 <div className="bs-docs-section">
                   <h1 className="page-header">
                     <Anchor id="missing">Missing components</Anchor>
@@ -281,7 +324,7 @@ const ComponentsPage = React.createClass({
                   <p className="lead">We've intentionally omitted a few components from React-Bootstrap. Don't worry, though &ndash; we cover what to do in this section.</p>
                 </div>
 
-                <ScrollSpy href={sections.affix} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.affix)}
                 <div className="bs-docs-section">
                   <h2 className="page-header">
                     <Anchor id="affix">Affix</Anchor>
@@ -291,7 +334,7 @@ const ComponentsPage = React.createClass({
                   <p>There isn't really any additional Bootstrap markup associated with affixes, so we didn't add a Bootstrap-specific affix class. The upstream ones already give you everything you need.</p>
                 </div>
 
-                <ScrollSpy href={sections.scrollspy} onSpy={this.setActiveNavItem}/>
+                {this.renderScrollSpy(sections.scrollspy)}
                 <div className="bs-docs-section">
                   <h2 className="page-header">
                     <Anchor id="scrollspy">Scrollspy</Anchor>

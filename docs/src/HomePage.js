@@ -32,9 +32,6 @@ export default class HomePage extends React.Component {
             <p><Glyphicon glyph="warning-sign" /> The project is under active development, and APIs will change. </p>
             <p><Glyphicon glyph="bullhorn" /> Prior to the 1.0.0 release, breaking changes should result in a minor version bump.</p>
           </Alert>
-          <Alert bsStyle="info">
-            <p><Glyphicon glyph="bullhorn" /> <b>React v0.13 support:</b> Releases from v0.27.0 onward only support React v0.14. The latest releases compatible with React v0.13 are the v0.26.x releases.</p>
-          </Alert>
         </Grid>
 
         <PageFooter />
