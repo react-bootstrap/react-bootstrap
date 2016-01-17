@@ -30,7 +30,6 @@ export ModalHeader from './ModalHeader';
 export ModalTitle from './ModalTitle';
 export Nav from './Nav';
 export Navbar from './Navbar';
-export NavBrand from './NavBrand';
 export NavbarBrand from './NavbarBrand';
 export NavDropdown from './NavDropdown';
 export NavItem from './NavItem';
