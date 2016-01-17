@@ -16,10 +16,6 @@
 
 __Under active development - APIs will change.__ Check out the [1.0.0 Roadmap](https://github.com/react-bootstrap/react-bootstrap/wiki#100-roadmap) and [Contributing Guidelines][contributing] to see where you can help out. Prior to the 1.0.0 release, deprecations or breaking changes should result in a Minor version bump.
 
-## React v0.13 support
-
-Releases from v0.27.0 onward only support React v0.14. The latest releases compatible with React v0.13 are the v0.26.x releases.
-
 ## Docs
 
 See the [documentation][documentation] with live editable examples.
