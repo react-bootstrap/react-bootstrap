@@ -6,7 +6,6 @@
 [![Build status][appveyor-badge]][appveyor]
 [![Coverage Status][coveralls-badge]][coveralls]  
 [![Discord][discord-badge]][discord]
-[![Gitter][gitter-badge]][gitter]
 [![Thinkful][thinkful-badge]][thinkful]  
 [![NPM version][npm-badge]][npm]
 [![Bower version][bower-badge]][bower]  
@@ -53,9 +52,6 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [bower-badge]: https://badge.fury.io/bo/react-bootstrap.svg
 [bower]: http://badge.fury.io/bo/react-bootstrap
-
-[gitter-badge]: https://img.shields.io/badge/Gitter-Join%20chat%20%E2%86%92-1dce73.svg
-[gitter]: https://gitter.im/react-bootstrap/react-bootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 [deps-badge]: https://david-dm.org/react-bootstrap/react-bootstrap.svg
 [deps]: https://david-dm.org/react-bootstrap/react-bootstrap
