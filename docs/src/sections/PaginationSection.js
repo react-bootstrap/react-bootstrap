@@ -16,7 +16,7 @@ export default function PaginationSection() {
       <ReactPlayground codeText={Samples.PaginationBasic} />
 
       <h4><Anchor id="pagination-more">More options</Anchor></h4>
-      <p>such as <code>first</code>, <code>last</code>, <code>previous</code>, <code>next</code> and <code>ellipsis</code>.</p>
+      <p>such as <code>first</code>, <code>last</code>, <code>previous</code>, <code>next</code>, <code>boundaryLinks</code> and <code>ellipsis</code>.</p>
       <ReactPlayground codeText={Samples.PaginationAdvanced} />
 
       <h3><Anchor id="pagination-props">Props</Anchor></h3>

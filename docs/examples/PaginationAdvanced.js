@@ -19,6 +19,7 @@ const PaginationAdvanced = React.createClass({
         first
         last
         ellipsis
+        boundaryLinks
         items={20}
         maxButtons={5}
         activePage={this.state.activePage}
