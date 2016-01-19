@@ -71,7 +71,7 @@ describe('Pagination', () => {
 
     assert.equal(pageButtons[0].innerText, '«');
     assert.equal(pageButtons[1].innerText, '‹');
-    assert.equal(pageButtons[5].innerText, '...');
+    assert.equal(pageButtons[5].innerText, '…');
     assert.equal(pageButtons[6].innerText, '›');
     assert.equal(pageButtons[7].innerText, '»');
 
@@ -93,8 +93,8 @@ describe('Pagination', () => {
     let pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     // add first, last, prev, next and ellipsis button
     assert.equal(pageButtons[2].innerText, '1');
-    assert.equal(pageButtons[3].innerText, '...');
-    assert.equal(pageButtons[7].innerText, '...');
+    assert.equal(pageButtons[3].innerText, '…');
+    assert.equal(pageButtons[7].innerText, '…');
     assert.equal(pageButtons[8].innerText, '20');
   });
 
