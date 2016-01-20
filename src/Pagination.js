@@ -16,7 +16,7 @@ const Pagination = React.createClass({
      */
     boundaryLinks: React.PropTypes.bool,
     /**
-     * When `true`, will display the default node value ('...').
+     * When `true`, will display the default node value ('&hellip;').
      * Otherwise, will display provided node (when specified).
      */
     ellipsis: React.PropTypes.oneOfType([
@@ -130,7 +130,7 @@ const Pagination = React.createClass({
           disabled
           buttonComponentClass={buttonComponentClass}>
           <span aria-label="More">
-            {this.props.ellipsis === true ? '...' : this.props.ellipsis}
+            {this.props.ellipsis === true ? '\u2026' : this.props.ellipsis}
           </span>
         </PaginationButton>
       );
@@ -154,7 +154,7 @@ const Pagination = React.createClass({
           disabled
           buttonComponentClass={buttonComponentClass}>
           <span aria-label="More">
-            {this.props.ellipsis === true ? '...' : this.props.ellipsis}
+            {this.props.ellipsis === true ? '\u2026' : this.props.ellipsis}
           </span>
         </PaginationButton>
       );
