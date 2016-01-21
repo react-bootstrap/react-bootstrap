@@ -48,7 +48,6 @@ export ResponsiveEmbed from './ResponsiveEmbed';
 export Row from './Row';
 export SafeAnchor from './SafeAnchor';
 export SplitButton from './SplitButton';
-export SplitButton from './SplitButton';
 export Tab from './Tab';
 export Table from './Table';
 export Tabs from './Tabs';
