@@ -9,7 +9,7 @@ export default function TabsSection() {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
-        <Anchor id="tabs">Togglable tabs</Anchor> <small>Tabs, Tab</small>
+        <Anchor id="tabs">Togglable tabs</Anchor> <small>Tabs, Tab, TabContainer, TabContent, TabPane</small>
       </h2>
 
       <p>Add quick, dynamic tab functionality to transition through panes of local content.</p>
@@ -26,8 +26,17 @@ export default function TabsSection() {
       <p>Set the <code>animation</code> prop to <code>false</code></p>
       <ReactPlayground codeText={Samples.TabsNoAnimation} exampleClassName="bs-example-tabs" />
 
-      <h3><Anchor id="left-tabs">Left tabs</Anchor></h3>
-      <p>Set <code>position</code> to <code>"left"</code>. Optionally, <code>tabWidth</code> can be passed the number of columns for the tabs.</p>
+      <h3><Anchor id="tabs-custom-layout">Custom Tab Layout</Anchor></h3>
+      <p>
+        For more complex layouts the flexible <code>TabContainer</code>, <code>TabContent</code>, and
+        <code>TabPane</code> components along with any style of <code>Nav</code> allow you to quickly piece
+        together your own Tabs component with additional markup needed.
+      </p>
+      <p>
+        Just create a set of NavItems each with an <code>eventKey</code> corresponding to the eventKey
+        of a <code>TabPane</code>. Wrap the whole thing in a <code>TabContainer</code> and you have fully functioning
+        custom tabs component. Check out the below example making use of the grid system and pills.
+      </p>
       <ReactPlayground codeText={Samples.LeftTabs} exampleClassName="bs-example-tabs" />
 
       <h3><Anchor id="tabs-props">Props</Anchor></h3>
@@ -37,6 +46,15 @@ export default function TabsSection() {
 
       <h4><Anchor id="tabs-props-pane">Tab</Anchor></h4>
       <PropTable component="Tab"/>
+
+      <h4><Anchor id="tabs-props-pane">TabContainer</Anchor></h4>
+      <PropTable component="TabContainer"/>
+
+      <h4><Anchor id="tabs-props-pane">TabContent</Anchor></h4>
+      <PropTable component="TabContent"/>
+
+      <h4><Anchor id="tabs-props-pane">TabPane</Anchor></h4>
+      <PropTable component="TabPane"/>
     </div>
   );
 }
