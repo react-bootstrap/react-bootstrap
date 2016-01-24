@@ -101,4 +101,21 @@ describe('SplitButton', () => {
     assert.equal(linkElement.target, '_blank');
   });
 
+  it('should set aria-label on toggle from title', () => {
+    const instance = ReactTestUtils.renderIntoDocument(simple);
+
+    const toggleNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
+    expect(toggleNode.getAttribute('aria-label')).to.equal('Title');
+  });
+
+  it('should set aria-label on toggle from toggleLabel', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <SplitButton title='Title' id='test-id' toggleLabel='Label'>
+        <MenuItem>Item 1</MenuItem>
+      </SplitButton>
+    );
+
+    const toggleNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
+    expect(toggleNode.getAttribute('aria-label')).to.equal('Label');
+  });
 });
