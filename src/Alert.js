@@ -1,13 +1,15 @@
-import React from 'react';
 import classNames from 'classnames';
-import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
+import React from 'react';
+import deprecated from 'react-prop-types/lib/deprecated';
+
 import { State } from './styleMaps';
+import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
 
 let Alert = React.createClass({
 
   propTypes: {
     onDismiss: React.PropTypes.func,
-    dismissAfter: React.PropTypes.number,
+    dismissAfter: deprecated(React.PropTypes.number, 'No longer supported.'),
     closeLabel: React.PropTypes.string
   },
 
