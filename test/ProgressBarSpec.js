@@ -64,6 +64,14 @@ describe('ProgressBar', () => {
     assert.equal(getProgressBarNode(instance).style.width, '0%');
   });
 
+  it('Should have min-width of 15px', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ProgressBar min={0} max={10} now={0} minWidth={15} />
+    );
+
+    assert.equal(getProgressBarNode(instance).style.minWidth, '15px');
+  });
+
   it('Should have 10% computed width', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={1} />

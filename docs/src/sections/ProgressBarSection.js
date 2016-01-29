@@ -23,6 +23,9 @@ export default function ProgressBarSection() {
       <p>The following keys are interpolated with the current values: <code>%(min)s</code>, <code>%(max)s</code>, <code>%(now)s</code>, <code>%(percent)s</code>, <code>%(bsStyle)s</code></p>
       <ReactPlayground codeText={Samples.ProgressBarWithLabel} />
 
+      <p>To ensure that the label text remains legible even for low percentages, consider adding a minWidth to the progress bar.</p>
+      <ReactPlayground codeText={Samples.ProgressBarMinimumWidth} />
+
       <h2><Anchor id="progress-screenreader-label">Screenreader only label</Anchor></h2>
       <p>Add a <code>srOnly</code> prop to hide the label visually.</p>
       <ReactPlayground codeText={Samples.ProgressBarScreenreaderLabel} />
