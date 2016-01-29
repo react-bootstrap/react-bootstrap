@@ -56,6 +56,7 @@ export default {
   ProgressBarStriped:            require('fs').readFileSync(__dirname + '/../examples/ProgressBarStriped.js', 'utf8'),
   ProgressBarAnimated:           require('fs').readFileSync(__dirname + '/../examples/ProgressBarAnimated.js', 'utf8'),
   ProgressBarStacked:            require('fs').readFileSync(__dirname + '/../examples/ProgressBarStacked.js', 'utf8'),
+  ProgressBarMinimumWidth:       require('fs').readFileSync(__dirname + '/../examples/ProgressBarMinimumWidth.js', 'utf8'),
   NavBasic:                      require('fs').readFileSync(__dirname + '/../examples/NavBasic.js', 'utf8'),
   NavDropdown:                   require('fs').readFileSync(__dirname + '/../examples/NavDropdown.js', 'utf8'),
   NavStacked:                    require('fs').readFileSync(__dirname + '/../examples/NavStacked.js', 'utf8'),

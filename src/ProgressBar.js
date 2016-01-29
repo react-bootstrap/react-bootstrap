@@ -65,7 +65,7 @@ class ProgressBar extends React.Component {
   }
 
   renderProgressBar() {
-    let { className, label, now, min, max, ...props } = this.props;
+    let { className, label, now, min, max, minWidth, ...props } = this.props;
 
     const percentage = this.getPercentage(
       now, min, max
@@ -88,12 +88,17 @@ class ProgressBar extends React.Component {
       [bootstrapUtils.prefix(this.props, 'striped')]: this.props.active || this.props.striped
     });
 
+    const inlineStyles = {
+      width: percentage + '%',
+      minWidth: this.props.minWidth
+    };
+
     return (
       <div
         {...props}
         className={classes}
         role="progressbar"
-        style={{ width: percentage + '%' }}
+        style={inlineStyles}
         aria-valuenow={this.props.now}
         aria-valuemin={this.props.min}
         aria-valuemax={this.props.max}>
@@ -124,6 +129,10 @@ ProgressBar.propTypes = {
   now: PropTypes.number,
   max: PropTypes.number,
   label: PropTypes.node,
+  /**
+   * minimum width of the progressbar in px
+   */
+  minWidth: PropTypes.number,
   srOnly: PropTypes.bool,
   striped: PropTypes.bool,
   active: PropTypes.bool,
@@ -143,7 +152,8 @@ ProgressBar.defaultProps = {
   active: false,
   isChild: false,
   srOnly: false,
-  striped: false
+  striped: false,
+  minWidth: 0
 };
 
 export default bsStyles(State.values(),
