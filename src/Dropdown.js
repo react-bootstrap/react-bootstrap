@@ -331,9 +331,9 @@ Dropdown.propTypes = {
    * ```
    */
   onSelect: React.PropTypes.func,
-  
+
   /**
-   * If true, the dropdown will close automatically on select
+   * If false, the dropdown will not close automatically on select
    */
   closeOnSelect: React.PropTypes.bool,
 

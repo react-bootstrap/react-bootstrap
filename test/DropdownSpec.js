@@ -240,6 +240,24 @@ describe('Dropdown', () => {
     node.className.should.not.match(/\bopen\b/);
   });
 
+  it('does not close when closeOnSelect is false', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Dropdown id='test-id' closeOnSelect={false}>
+        {dropdownChildren}
+      </Dropdown>
+    );
+
+    const node = ReactDOM.findDOMNode(instance);
+
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
+    ReactTestUtils.Simulate.click(buttonNode);
+    node.className.should.match(/\bopen\b/);
+
+    const menuItem = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0];
+    ReactTestUtils.Simulate.click(menuItem);
+    node.className.should.match(/\bopen\b/);
+  });
+
   it('does not close when onToggle is controlled', () => {
     const handleSelect = () => {};
 
