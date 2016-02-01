@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 
 import Alert from '../src/Alert';
 
+import { shouldWarn } from './helpers';
+
 describe('Alert', () => {
   it('Should output a alert with message', () => {
     let instance = ReactTestUtils.renderIntoDocument(
@@ -54,6 +56,8 @@ describe('Alert', () => {
         Message
       </Alert>
     );
+
+    shouldWarn('deprecated');
   });
 
   it('Should have a default bsStyle class', () => {
