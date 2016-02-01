@@ -218,7 +218,7 @@ class Dropdown extends React.Component {
     menuProps.onSelect = createChainedFunction(
       menu.props.onSelect,
       this.props.onSelect,
-      this.handleClose
+      this.props.closeOnSelect ? this.handleClose : undefined
     );
 
     return cloneElement(menu, menuProps, menu.props.children);
@@ -254,7 +254,8 @@ Dropdown.MENU_ROLE = MENU_ROLE;
 
 Dropdown.defaultProps = {
   componentClass: ButtonGroup,
-  bsClass: 'dropdown'
+  bsClass: 'dropdown',
+  closeOnSelect: true
 };
 
 Dropdown.propTypes = {
@@ -330,6 +331,11 @@ Dropdown.propTypes = {
    * ```
    */
   onSelect: React.PropTypes.func,
+
+  /**
+   * If false, the dropdown will not close automatically on select
+   */
+  closeOnSelect: React.PropTypes.bool,
 
   /**
    * If `'menuitem'`, causes the dropdown to behave like a menu item rather than
