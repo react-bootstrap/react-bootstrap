@@ -218,7 +218,7 @@ class Dropdown extends React.Component {
     menuProps.onSelect = createChainedFunction(
       menu.props.onSelect,
       this.props.onSelect,
-      this.props.closeOnSelect && this.handleClose
+      this.props.closeOnSelect ? this.handleClose : undefined
     );
 
     return cloneElement(menu, menuProps, menu.props.children);
