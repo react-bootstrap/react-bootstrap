@@ -73,7 +73,7 @@ const sections = {
   forms: '#forms',
   media: '#media-content',
     images: '#images',
-    thumbnails: '#thumbnails',
+    thumbnails: '#thumbnail',
     embed: '#responsive-embed',
     carousels: '#carousels',
   misc: '#misc',
