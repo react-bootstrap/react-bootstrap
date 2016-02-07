@@ -66,7 +66,7 @@ const sections = {
     grid: '#grid',
     jumbotron: '#jumbotron',
     pageHeader: '#page-header',
-    listGroup: '#list-group',
+    listGroup: '#listgroup',
     tables: '#tables',
     panels: '#panels',
     wells: '#wells',
