@@ -39,5 +39,12 @@ describe('Form Controls', () => {
         <FormControls.Static><span>blah</span></FormControls.Static>
       );
     });
+    it('allows choosing non-default element tag', () => {
+      const instance = ReactTestUtils.renderIntoDocument(
+        <FormControls.Static componentClass="output" value="v" />
+      );
+      const result = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'output');
+      result.innerHTML.should.equal('v');
+    })
   });
 });
