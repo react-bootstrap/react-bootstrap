@@ -45,6 +45,6 @@ describe('Form Controls', () => {
       );
       const result = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'output');
       result.innerHTML.should.equal('v');
-    })
+    });
   });
 });
