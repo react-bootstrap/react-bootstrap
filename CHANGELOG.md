@@ -1,3 +1,13 @@
+v0.28.3 - Thu, 11 Feb 2016 00:00:42 GMT
+---------------------------------------
+
+- [922ecae](../../commit/922ecae) [fixed] Allow overriding aria-label on <SplitButton> toggle
+- [f187e04](../../commit/f187e04) [fixed] Use actual ellipsis in pagination
+- [f4c1525](../../commit/f4c1525) [added] pagination boundaryLinks
+- [9331141](../../commit/9331141) [fixed] remove extra tabIndex
+
+
+
 v0.28.2 - Fri, 08 Jan 2016 06:38:06 GMT
 ---------------------------------------
 
