@@ -64,8 +64,20 @@ class MenuItem extends React.Component {
 }
 
 MenuItem.propTypes = {
+
+  /**
+   * Highlight the menu item as active.
+   */
   active: React.PropTypes.bool,
+
+  /**
+   * Disable the menu item, making it unselectable.
+   */
   disabled: React.PropTypes.bool,
+
+  /**
+   * Make the menu item a divider.
+   */
   divider: all(
     React.PropTypes.bool,
     props => {
@@ -74,14 +86,51 @@ MenuItem.propTypes = {
       }
     }
   ),
+
+  /**
+   * Value passed to the `onSelect` handler, useful for identifying the selected menu item.
+   */
   eventKey: React.PropTypes.any,
+
+  /**
+   * Make the menu item a header.
+   */
   header: React.PropTypes.bool,
+
+  /**
+   * HTML `href` attribute corresponding to `a.href`.
+   */
   href: React.PropTypes.string,
+
+  /**
+   * HTML `target` attribute corresponding to `a.target`.
+   */
   target: React.PropTypes.string,
+
+  /**
+   * HTML `title` attribute corresponding to `a.title`.
+   */
   title: React.PropTypes.string,
+
+  /**
+   * Callback fired when the menu item is clicked.
+   */
   onClick: React.PropTypes.func,
+
   onKeyDown: React.PropTypes.func,
+
+  /**
+   * Callback fired when the menu item is selected.
+   *
+   * ```js
+   * function(Object event, Any eventKey)
+   * ```
+   */
   onSelect: React.PropTypes.func,
+
+  /**
+   * HTML `id` attribute.
+   */
   id: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
