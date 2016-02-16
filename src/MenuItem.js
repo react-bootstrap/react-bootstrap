@@ -76,7 +76,8 @@ MenuItem.propTypes = {
   disabled: React.PropTypes.bool,
 
   /**
-   * Make the menu item a divider.
+   * Styles the menu item as a horizontal rule, providing visual separation between
+   * groups of menu items.
    */
   divider: all(
     React.PropTypes.bool,
@@ -93,7 +94,7 @@ MenuItem.propTypes = {
   eventKey: React.PropTypes.any,
 
   /**
-   * Make the menu item a header.
+   * Styles the menu item as a header label, useful for describing a group of menu items.
    */
   header: React.PropTypes.bool,
 
