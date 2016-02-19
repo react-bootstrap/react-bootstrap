@@ -24,7 +24,7 @@ export default function MenuItemSection() {
         <li><code>eventKey</code>: passed to the callback</li>
         <li><code>onSelect</code>: a callback that is called when the user clicks the item.</li>
       </ul>
-      <p>The callback is called with the following arguments: <code>eventKey</code>, <code>href</code> and <code>target</code></p>
+      <p>The callback is called with the following arguments: <code>event</code> and <code>eventKey</code></p>
       <ReactPlayground codeText={Samples.MenuItem} />
 
       <h3><Anchor id="menu-item-props">Props</Anchor></h3>
