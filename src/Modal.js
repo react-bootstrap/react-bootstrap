@@ -145,6 +145,7 @@ const Modal = React.createClass({
         className
       , children
       , dialogClassName
+      , contentClassName
       , animation
       , ...props } = this.props;
 
@@ -166,6 +167,7 @@ const Modal = React.createClass({
         style={modalStyles}
         className={classNames(className, inClass)}
         dialogClassName={dialogClassName}
+        contentClassName={contentClassName}
         onClick={props.backdrop === true ? this.handleDialogClick : null}
       >
         { this.props.children }
