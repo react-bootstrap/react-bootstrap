@@ -187,6 +187,39 @@ describe('Panel', () => {
     assert.notOk(children[0].className.match(/\bpanel-body\b/));
   });
 
+  it('Should pass transition callbacks to Collapse', (done) => {
+    let count = 0;
+    let increment = ()=> count++;
+
+    let title;
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Panel
+        collapsible={true}
+        defaultExpanded={false}
+        header="Click me"
+        onExit={increment}
+        onExiting={increment}
+        onExited={()=> {
+          increment();
+          expect(count).to.equal(6);
+          done();
+        }}
+        onEnter={increment}
+        onEntering={increment}
+        onEntered={()=> {
+          increment();
+          ReactTestUtils.Simulate.click(title.firstChild);
+        }}
+      >
+        Panel content
+      </Panel>
+    );
+
+    title = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-title');
+    ReactTestUtils.Simulate.click(title.firstChild);
+  });
+
   describe('Web Accessibility', () => {
 
     it('Should be aria-expanded=true', () => {
