@@ -182,6 +182,20 @@ body {
   }
 }
 
+.bs-docs-single-col-container {
+  max-width: 900px
+}
+
+.bs-docs-code-panel .panel-body {
+  padding: 0;
+}
+
+.bs-docs-code-panel .panel-body > pre {
+  padding: 20px;
+  margin-bottom: 0;
+  border-radius: 0;
+  border-width: 0;
+}
 
 /*
  * Social buttons
@@ -695,22 +709,22 @@ h1[id] {
 
 /* Variations */
 .bs-callout-danger {
-  border-left-color: #d9534f;
+  border-left-color: #ce4844;
 }
 .bs-callout-danger h4 {
-  color: #d9534f;
+  color: #ce4844;
 }
 .bs-callout-warning {
-  border-left-color: #f0ad4e;
+  border-left-color: #aa6708;
 }
 .bs-callout-warning h4 {
-  color: #f0ad4e;
+  color: #aa6708;
 }
 .bs-callout-info {
-  border-left-color: #5bc0de;
+  border-left-color: #1b809e;
 }
 .bs-callout-info h4 {
-  color: #5bc0de;
+  color: #1b809e;
 }
 
 
