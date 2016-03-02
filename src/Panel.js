@@ -38,7 +38,9 @@ let Panel = React.createClass({
     e.selected = true;
 
     if (this.props.onSelect) {
-      this.props.onSelect(e, this.props.eventKey);
+      if (this.props.onSelect(this.props.eventKey, e) === false) {
+        e.selected = false;
+      }
     } else {
       e.preventDefault();
     }

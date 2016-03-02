@@ -126,7 +126,7 @@ describe('Panel', () => {
   });
 
   it('Should call onSelect handler', (done) => {
-    function handleSelect(e, key) {
+    function handleSelect(key) {
       assert.equal(key, '1');
       done();
     }
@@ -135,6 +135,32 @@ describe('Panel', () => {
     );
     let title = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-title');
     ReactTestUtils.Simulate.click(title.firstChild);
+  });
+
+  it('Should obey onSelect handler', () => {
+    function handleSelect(key, e) {
+      if (e.target.className.indexOf('ignoreme') > -1) {
+        return false;
+      }
+    }
+    let header = (
+      <div>
+        <span className="clickme">Click me</span>
+        <span className="ignoreme">Ignore me</span>
+      </div>
+    );
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Panel collapsible={true} onSelect={handleSelect} header={header} eventKey='1'>Panel content</Panel>
+    );
+    let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
+    ReactTestUtils.Simulate.click(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'ignoreme')
+    );
+    assert.notOk(panel.state.expanded);
+    ReactTestUtils.Simulate.click(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'clickme')
+    );
+    assert.ok(panel.state.expanded);
   });
 
   it('Should toggle when uncontrolled', () => {
