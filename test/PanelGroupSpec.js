@@ -54,7 +54,7 @@ describe('PanelGroup', () => {
   it('Should obey onSelect handler', () => {
     function handleSelect(eventKey, e) {
       if (e.target.className.indexOf('ignoreme') > -1) {
-        return false;
+        e.selected = false;
       }
     }
 

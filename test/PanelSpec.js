@@ -140,7 +140,7 @@ describe('Panel', () => {
   it('Should obey onSelect handler', () => {
     function handleSelect(key, e) {
       if (e.target.className.indexOf('ignoreme') > -1) {
-        return false;
+        e.selected = false;
       }
     }
     let header = (

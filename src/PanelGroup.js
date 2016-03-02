@@ -75,12 +75,8 @@ const PanelGroup = React.createClass({
 
     if (this.props.onSelect) {
       this._isChanging = true;
-      let setActiveKey = this.props.onSelect(key, e);
+      this.props.onSelect(key, e);
       this._isChanging = false;
-
-      if (setActiveKey === false) {
-        return false;
-      }
     }
 
     if (this.state.activeKey === key) {
