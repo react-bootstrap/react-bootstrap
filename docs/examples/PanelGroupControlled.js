@@ -5,7 +5,7 @@ const ControlledPanelGroup = React.createClass({
     };
   },
 
-  handleSelect(activeKey) {
+  handleSelect(e, activeKey) {
     this.setState({ activeKey });
   },
 
