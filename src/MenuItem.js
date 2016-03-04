@@ -31,7 +31,10 @@ class MenuItem extends React.Component {
     let headerClass = bootstrapUtils.prefix(this.props, 'header');
 
     if (this.props.divider) {
-      return <li role="separator" className="divider" />;
+      return (
+        <li role="separator"
+          className={classnames('divider', this.props.className)} />
+      );
     }
 
     if (this.props.header) {

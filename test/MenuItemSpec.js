@@ -15,6 +15,13 @@ describe('MenuItem', () => {
     node.getAttribute('role').should.equal('separator');
   });
 
+  it('renders divider className', () => {
+    const instance = ReactTestUtils.renderIntoDocument(<MenuItem divider className="foo bar" />);
+    const node = ReactDOM.findDOMNode(instance);
+
+    node.className.should.match(/\bdivider foo bar\b/);
+  });
+
   it('renders divider not children', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <MenuItem divider>
