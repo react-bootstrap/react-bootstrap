@@ -74,7 +74,6 @@ describe('DropdownButton', () => {
 
     menu.props.vertical.should.be.true;
     menu.props.block.should.be.true;
-    console.log(node.className);
     node.className.should.match(/\bdropdown btn-group-vertical btn-block\b/);
   });
 
