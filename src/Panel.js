@@ -192,7 +192,7 @@ let Panel = React.createClass({
     }
 
     return (
-      <div className={bootstrapUtils.prefix(this.props, 'heading')}>
+      <div className={bootstrapUtils.prefix(this.props, 'heading')} onClick={this.handleSelect}>
         {header}
       </div>
     );
