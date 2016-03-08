@@ -63,6 +63,21 @@ describe('DropdownButton', () => {
     menu.props.pullRight.should.be.true;
   });
 
+  it('renders block level with block prop', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="blah" id="test-id" block vertical>
+        <MenuItem eventKey="1">Action</MenuItem>
+      </DropdownButton>
+    );
+    const menu = ReactTestUtils.findRenderedComponentWithType(instance, DropdownButton);
+    const node = ReactDOM.findDOMNode(instance);
+
+    menu.props.vertical.should.be.true;
+    menu.props.block.should.be.true;
+    console.log(node.className);
+    node.className.should.match(/\bdropdown btn-group-vertical btn-block\b/);
+  });
+
   it('renders bsSize', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title='blah' bsSize='small' id='test-id'>

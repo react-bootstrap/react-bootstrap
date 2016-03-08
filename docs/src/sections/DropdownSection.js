@@ -52,6 +52,13 @@ export default function DropdownSection() {
       </div>
       <ReactPlayground codeText={Samples.DropdownButtonCustom} />
 
+      <h4>Display Block Buttons</h4>
+
+      <p>
+        Buttons can be displayed block by applying both the `block` and `vertical` properties.
+      </p>
+      <ReactPlayground codeText={Samples.DropdownButtonBlock} />
+
       <h4>Custom Dropdown Components</h4>
 
       <p>

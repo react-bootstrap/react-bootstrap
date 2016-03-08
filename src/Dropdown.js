@@ -335,7 +335,17 @@ Dropdown.propTypes = {
    * If `'menuitem'`, causes the dropdown to behave like a menu item rather than
    * a menu button.
    */
-  role: React.PropTypes.string
+  role: React.PropTypes.string,
+
+  /**
+   * Required to display button as block
+   */
+   vertical: React.PropTypes.bool,
+
+   /**
+    * If the button should be rendered block. If block is set, vertical must also be true
+    */
+    block: React.PropTypes.bool
 };
 
 Dropdown = uncontrollable(Dropdown, { open: 'onToggle' });
