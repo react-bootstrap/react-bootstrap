@@ -340,12 +340,12 @@ Dropdown.propTypes = {
   /**
    * Required to display button as block
    */
-   vertical: React.PropTypes.bool,
+  vertical: React.PropTypes.bool,
 
-   /**
-    * If the button should be rendered block. If block is set, vertical must also be true
-    */
-    block: React.PropTypes.bool
+  /**
+   * If the button should be rendered block. If block is set, vertical must also be true
+   */
+  block: React.PropTypes.bool
 };
 
 Dropdown = uncontrollable(Dropdown, { open: 'onToggle' });
