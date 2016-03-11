@@ -65,9 +65,6 @@ const NavItem = React.createClass({
       id: linkId
     };
 
-
-    // console.log(onToggle);
-
     if (!role && href === '#') {
       linkProps.role = 'button';
     } else if (role === 'tab') {
