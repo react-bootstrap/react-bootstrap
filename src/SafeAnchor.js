@@ -14,7 +14,7 @@ export default class SafeAnchor extends React.Component {
   }
 
   handleClick(event) {
-    if (this.props.href === undefined || this.props.href === "#") {
+    if (this.props.href === undefined || this.props.href === '#') {
       event.preventDefault();
     }
   }
