@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import SafeAnchor from './SafeAnchor';
 import createChainedFunction from './utils/createChainedFunction';
@@ -17,6 +17,12 @@ const NavItem = React.createClass({
     eventKey: React.PropTypes.any,
     target: React.PropTypes.string,
     'aria-controls': React.PropTypes.string
+  },
+
+  contextTypes: {
+    $bs_navbar_bsClass: PropTypes.string,
+    $bs_navbar_onToggle: PropTypes.func,
+    $bs_navbar_expanded: PropTypes.bool
   },
 
   getDefaultProps() {
@@ -44,15 +50,25 @@ const NavItem = React.createClass({
       active,
       disabled
     };
+
+    let {
+      $bs_navbar_bsClass: bsClass,
+      $bs_navbar_onToggle: onToggle,
+      $bs_navbar_expanded: expended
+    } = this.context;
+
     let linkProps = {
       role,
       href,
-      onClick: createChainedFunction(onClick, this.handleClick),
+      onClick: createChainedFunction(onClick, this.handleClick, () => { if (expended) onToggle(); }),
       title,
       target,
       tabIndex,
       id: linkId
     };
+
+
+    // console.log(onToggle);
 
     if (!role && href === '#') {
       linkProps.role = 'button';
