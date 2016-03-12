@@ -54,6 +54,7 @@ const NavItem = React.createClass({
 
     let {
       $bs_navbar_onToggle: onToggle,
+      $bs_navbar_expanded: expended,
       $bs_navbar_auto_collapse: autoCollapse
     } = this.context;
 
@@ -64,7 +65,7 @@ const NavItem = React.createClass({
     let linkProps = {
       role,
       href,
-      onClick: createChainedFunction(onClick, this.handleClick, () => { if (autoCollapse) onToggle(false); }),
+      onClick: createChainedFunction(onClick, this.handleClick, () => { if (expended && autoCollapse) onToggle(false); }),
       title,
       target,
       tabIndex,
