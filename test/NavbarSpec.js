@@ -257,6 +257,18 @@ describe('Navbar', () => {
     ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-navbar-right');
   });
 
+  it('Should add custom className to header', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Navbar>
+        <Navbar.Header className='test'>
+          <Navbar.Brand />
+        </Navbar.Header>
+      </Navbar>
+    );
+
+    ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'test');
+  });
+
   describe('deprecations', ()=> {
     it('Should add header with brand', () => {
       let instance = ReactTestUtils.renderIntoDocument(
