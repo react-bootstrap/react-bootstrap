@@ -23,6 +23,7 @@ export Label from './Label';
 export ListGroup from './ListGroup';
 export ListGroupItem from './ListGroupItem';
 export MenuItem from './MenuItem';
+export * from './Media';
 export Modal from './Modal';
 export ModalBody from './ModalBody';
 export ModalFooter from './ModalFooter';
