@@ -9,7 +9,7 @@ import Right from './MediaRight';
 import List from './MediaList';
 import ListItem from './MediaListItem';
 
-const Media = React.createClass({
+let Media = React.createClass({
   displayName: 'Media',
   propTypes: {
     /**
@@ -33,7 +33,7 @@ const Media = React.createClass({
   }
 });
 
-Object.assign(Media, { Heading, Body, Left, Right, List, ListItem });
+Media = Object.assign(Media, { Heading, Body, Left, Right, List, ListItem });
 
 export default Media;
 
