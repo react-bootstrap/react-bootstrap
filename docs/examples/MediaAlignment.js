@@ -1,6 +1,6 @@
 const mediaAlignmentInstance = (
   <div>
-    <Media.Media>
+    <Media>
       <Media.Left align="top">
         <img width={64} height={64} src="/assets/thumbnail.png" alt="Image"/>
       </Media.Left>
@@ -10,8 +10,8 @@ const mediaAlignmentInstance = (
 
         <p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
       </Media.Body>
-    </Media.Media>
-    <Media.Media>
+    </Media>
+    <Media>
       <Media.Left align="middle">
         <img width={64} height={64} src="/assets/thumbnail.png" alt="Image"/>
       </Media.Left>
@@ -21,8 +21,8 @@ const mediaAlignmentInstance = (
 
         <p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
       </Media.Body>
-    </Media.Media>
-    <Media.Media>
+    </Media>
+    <Media>
       <Media.Left align="bottom">
         <img width={64} height={64} src="/assets/thumbnail.png" alt="Image"/>
       </Media.Left>
@@ -32,7 +32,7 @@ const mediaAlignmentInstance = (
 
         <p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
       </Media.Body>
-    </Media.Media>
+    </Media>
   </div>
 );
 

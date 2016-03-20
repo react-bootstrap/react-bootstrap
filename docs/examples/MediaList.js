@@ -9,7 +9,7 @@ const mediaListInstance = (
           <Media.Heading>Media heading</Media.Heading>
           <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
 
-            <Media.Media>
+            <Media>
               <Media.Left>
                 <img width={64} height={64} src="/assets/thumbnail.png" alt="Image"/>
               </Media.Left>
@@ -17,7 +17,7 @@ const mediaListInstance = (
                 <Media.Heading>Nested media heading</Media.Heading>
                 <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
 
-                <Media.Media>
+                <Media>
                   <Media.Left>
                     <img width={64} height={64} src="/assets/thumbnail.png" alt="Image"/>
                   </Media.Left>
@@ -25,11 +25,11 @@ const mediaListInstance = (
                     <Media.Heading>Nested media heading</Media.Heading>
                     <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
                   </Media.Body>
-                </Media.Media>
+                </Media>
               </Media.Body>
-            </Media.Media>
+            </Media>
 
-            <Media.Media>
+            <Media>
               <Media.Left>
                 <img width={64} height={64} src="/assets/thumbnail.png" alt="Image"/>
               </Media.Left>
@@ -37,7 +37,7 @@ const mediaListInstance = (
                 <Media.Heading>Nested media heading</Media.Heading>
                 <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
               </Media.Body>
-            </Media.Media>
+            </Media>
         </Media.Body>
       </Media.ListItem>
     </Media.List>

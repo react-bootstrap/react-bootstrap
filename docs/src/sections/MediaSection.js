@@ -27,8 +27,8 @@ export default function MediaSection() {
 
       <h3><Anchor id="media-props">Props</Anchor></h3>
 
-      <h4><Anchor id="media-media-props">Media.Media</Anchor></h4>
-      <PropTable component="Media.Media"/>
+      <h4><Anchor id="media-media-props">Media</Anchor></h4>
+      <PropTable component="Media"/>
 
       <h4><Anchor id="media-left-props">Media.Left</Anchor></h4>
       <PropTable component="Media.Left"/>
