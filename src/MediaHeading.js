@@ -18,12 +18,10 @@ const MediaHeading = React.createClass({
   },
 
   render() {
-    const ComponentClass = this.props.componentClass;
+    const {componentClass: ComponentClass, className, ...props} = this.props;
 
     return (
-      <ComponentClass {...this.props} className={classNames(this.props.className, 'media-heading')}>
-        {this.props.children}
-      </ComponentClass>
+      <ComponentClass {...props} className={classNames(className, 'media-heading')}/>
     );
   }
 });

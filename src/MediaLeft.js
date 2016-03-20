@@ -12,18 +12,16 @@ const MediaLeft = React.createClass({
   },
 
   render() {
-    const {align} = this.props;
+    const {align, className, ...props} = this.props;
 
     const classes = classNames(
-      this.props.className,
+      className,
       'media-left',
       { [`media-${align}`]: Boolean(align) } // Only add the media-alignment class if align is passed in props
     );
 
     return (
-      <div {...this.props} className={classes}>
-        {this.props.children}
-      </div>
+      <div {...props} className={classes} />
     );
   }
 });

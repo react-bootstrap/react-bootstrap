@@ -4,10 +4,10 @@ import classNames from 'classnames';
 const MediaList = React.createClass({
   displayName: 'Media.List',
   render() {
+    const {className, ...props} = this.props;
+
     return (
-      <ul {...this.props} className={classNames(this.props.className, 'media-list')}>
-        {this.props.children}
-      </ul>
+      <ul {...props} className={classNames(className, 'media-list')}/>
     );
   }
 });
