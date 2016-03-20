@@ -10,7 +10,7 @@ import List from './MediaList';
 import ListItem from './MediaListItem';
 
 const Media = React.createClass({
-  displayName: 'Media.Media',
+  displayName: 'Media',
   propTypes: {
     /**
      * You can use a custom element for the media container
@@ -35,4 +35,8 @@ const Media = React.createClass({
   }
 });
 
-export default { Media, Heading, Body, Left, Right, List, ListItem };
+Object.assign(Media, { Heading, Body, Left, Right, List, ListItem });
+
+export default Media;
+
+export { Heading, Body, Left, Right, List, ListItem };
