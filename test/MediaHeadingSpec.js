@@ -4,41 +4,41 @@ import ReactDOM from 'react-dom';
 
 import Media from '../src/Media';
 
-describe(`Media.Media`, () => {
-  it(`uses "div" by default`, () => {
+describe(`Media.Heading`, () => {
+  it(`uses "h4" by default`, () => {
     let instance = ReactTestUtils.renderIntoDocument(
-        <Media.Media/>
+        <Media.Heading/>
       );
 
-    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'H4');
   });
-  it(`has "media" class`, () => {
+  it(`has "media-heading" class`, () => {
     let instance = ReactTestUtils.renderIntoDocument(
-        <Media.Media/>
+        <Media.Heading/>
       );
 
-    assert.include(ReactDOM.findDOMNode(instance).className, 'media');
+    assert.include(ReactDOM.findDOMNode(instance).className, 'media-heading');
   });
   it(`should merge additional classes passed in`, () => {
     let instance = ReactTestUtils.renderIntoDocument(
-        <Media.Media className="custom-class" />
+        <Media.Heading className="custom-class" />
       );
 
-    assert.include(ReactDOM.findDOMNode(instance).className, 'media');
+    assert.include(ReactDOM.findDOMNode(instance).className, 'media-heading');
     assert.include(ReactDOM.findDOMNode(instance).className, 'custom-class');
   });
-  it(`should allow custom elements instead of "div"`, () => {
+  it(`should allow custom elements instead of "h4"`, () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Media.Media componentClass='section' />
+      <Media.Heading componentClass='h2' />
     );
 
-    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'H2');
   });
   it(`should render children`, () => {
     let instance = ReactTestUtils.renderIntoDocument(
-        <Media.Media>
+        <Media.Heading>
           <strong>Children</strong>
-        </Media.Media>
+        </Media.Heading>
       );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });

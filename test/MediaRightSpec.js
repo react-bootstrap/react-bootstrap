@@ -2,80 +2,50 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
 
-import MediaRight from '../src/Media/MediaRight';
+import Media from '../src/Media';
 
-describe(`MediaRight`, () => {
+describe(`Media.Right`, () => {
   it(`uses "div"`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaRight/>
+        <Media.Right/>
       );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
   });
   it(`has "media-right" class`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaRight/>
+        <Media.Right/>
       );
 
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bmedia-right\b/));
   });
-  it(`should have align='top' by default`, () => {
+  it(`should be able to change alignment to middle`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaRight/>
-      );
-
-    assert.equal(instance.props.align, 'top');
-  });
-  it(`has "media-top" class by default`, () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-        <MediaRight/>
-      );
-
-    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bmedia-top\b/));
-  });
-  it(`should be able to change alignment class to media-middle`, () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-        <MediaRight align='middle'/>
+        <Media.Right align='middle'/>
       );
 
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bmedia-middle\b/));
   });
-  it(`should be able to change alignment class to media-bottom`, () => {
+  it(`should be able to change alignment to bottom`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaRight align='bottom'/>
+        <Media.Right align='bottom'/>
       );
 
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bmedia-bottom\b/));
   });
   it(`should merge additional classes passed in`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaRight className="my-custom-class" />
+        <Media.Right className="custom-class" />
       );
 
-    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bmedia-right\b/));
-    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bmedia-top\b/));
-    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bmy-custom-class\b/));
-  });
-  it(`should have href='#' by default`, () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-        <MediaRight />
-      );
-
-    assert.equal(instance.props.href, '#');
-  });
-  it(`should apply 'href' to inner anchor element`, () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-        <MediaRight href='http://test.com/'/>
-      );
-    const link = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
-
-    assert.equal(link.href, 'http://test.com/');
+    assert.include(ReactDOM.findDOMNode(instance).className, 'media-right');
+    assert.include(ReactDOM.findDOMNode(instance).className, 'custom-class');
   });
   it(`should render children`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaRight>
+        <Media.Right>
           <img/>
-        </MediaRight>
+        </Media.Right>
       );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'img'));
   });

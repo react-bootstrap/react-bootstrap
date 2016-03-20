@@ -2,26 +2,26 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
 
-import MediaList from '../src/Media/MediaList';
+import Media from '../src/Media';
 
-describe(`MediaList`, () => {
+describe(`Media.List`, () => {
   it(`uses "ul"`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaList/>
+        <Media.List/>
       );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'UL');
   });
   it(`has "media-list" class`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaList/>
+        <Media.List/>
       );
 
     assert.include(ReactDOM.findDOMNode(instance).className, 'media-list');
   });
   it(`should merge additional classes passed in`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaList className="custom-class" />
+        <Media.List className="custom-class" />
       );
     const classes = ReactDOM.findDOMNode(instance).className;
 
@@ -30,9 +30,9 @@ describe(`MediaList`, () => {
   });
   it(`should render children`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaList>
+        <Media.List>
           <strong>Content</strong>
-        </MediaList>
+        </Media.List>
       );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });

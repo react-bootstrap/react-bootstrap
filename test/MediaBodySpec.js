@@ -2,46 +2,44 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
 
-import MediaBody from '../src/Media/MediaBody';
+import Media from '../src/Media';
 
-describe(`MediaBody`, () => {
-  it(`uses "div"`, () => {
+describe(`Media.Body`, () => {
+  it(`uses "div" by default`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaBody/>
+        <Media.Body />
       );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
   });
   it(`has "media-body" class`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaBody/>
+        <Media.Body/>
       );
 
     assert.include(ReactDOM.findDOMNode(instance).className, 'media-body');
   });
-  it(`should have inner heading with 'media-heading' class`, () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-        <MediaBody/>
-      );
-
-    const heading = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'h4');
-
-    assert.include(heading.className, 'media-heading');
-  });
   it(`should merge additional classes passed in`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaBody className="custom-class" />
+        <Media.Body className="custom-class" />
       );
     const classes = ReactDOM.findDOMNode(instance).className;
 
     assert.include(classes, 'media-body');
     assert.include(classes, 'custom-class');
   });
+  it(`should allow custom elements instead of "div"`, () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Media.Media componentClass='section' />
+    );
+
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');
+  });
   it(`should render children`, () => {
     const instance = ReactTestUtils.renderIntoDocument(
-        <MediaBody>
+        <Media.Body>
           <strong>Content</strong>
-        </MediaBody>
+        </Media.Body>
       );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
