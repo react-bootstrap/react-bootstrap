@@ -33,6 +33,7 @@ const Jumbotron = require('../../src/Jumbotron');
 const Label = require('../../src/Label');
 const ListGroup = require('../../src/ListGroup');
 const ListGroupItem = require('../../src/ListGroupItem');
+const Media = require('../../src/Media').default;
 const MenuItem = require('../../src/MenuItem');
 const Modal = require('../../src/Modal');
 const Nav = require('../../src/Nav');

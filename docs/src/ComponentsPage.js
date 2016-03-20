@@ -24,6 +24,7 @@ import ImageSection from './sections/ImageSection';
 import JumbotronSection from './sections/JumbotronSection';
 import LabelSection from './sections/LabelSection';
 import ListGroupSection from './sections/ListGroupSection';
+import MediaSection from './sections/MediaSection';
 import MenuItemSection from './sections/MenuItemSection';
 import ModalSection from './sections/ModalSection';
 import NavbarSection from './sections/NavbarSection';
@@ -76,6 +77,7 @@ const sections = {
     thumbnails: '#thumbnail',
     embed: '#responsive-embed',
     carousels: '#carousels',
+    mediaObjects: '#media-objects',
   misc: '#misc',
     icons: '#glyphicons',
     labels: '#labels',
@@ -281,6 +283,8 @@ const ComponentsPage = React.createClass({
                 <ResponsiveEmbedSection />
                 {this.renderScrollSpy(sections.carousels)}
                 <CarouselSection />
+                {this.renderScrollSpy(sections.mediaObjects)}
+                <MediaSection />
 
                 {this.renderScrollSpy(sections.misc)}
                 <div className="bs-docs-section">
@@ -403,6 +407,7 @@ const ComponentsPage = React.createClass({
                         <NavItem href={sections.thumbnails}>Thumbnails</NavItem>
                         <NavItem href={sections.embed}>Responsive embed</NavItem>
                         <NavItem href={sections.carousels}>Carousels</NavItem>
+                        <NavItem href={sections.mediaObjects}>Media Objects</NavItem>
                       </SubNav>
 
                       <SubNav href={sections.misc} text="Miscellaneous">
