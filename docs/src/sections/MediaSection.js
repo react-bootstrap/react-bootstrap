@@ -9,7 +9,7 @@ export default function MediaSection() {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
-        <Anchor id="media-objects">Media Objects</Anchor> <small>Media, MediaLeft, MediaBody, MediaRight, MediaList, MediaListItem</small>
+        <Anchor id="media-objects">Media Objects</Anchor> <small>Media.Media, Media.Left, Media.Right, Media.Heading, Media.List, Media.ListItem</small>
       </h2>
 
       <p>Abstract object styles for building various types of components (like blog comments, Tweets, etc) that feature a <code>left</code> or <code>right</code> aligned image alongside textual content.</p>
@@ -27,14 +27,20 @@ export default function MediaSection() {
 
       <h3><Anchor id="media-props">Props</Anchor></h3>
 
-      <h4><Anchor id="media-body-props">MediaBody</Anchor></h4>
-      <PropTable component="MediaBody"/>
+      <h4><Anchor id="media-media-props">Media.Media</Anchor></h4>
+      <PropTable component="Media.Media"/>
 
-      <h4><Anchor id="media-left-props">MediaLeft</Anchor></h4>
-      <PropTable component="MediaLeft"/>
+      <h4><Anchor id="media-left-props">Media.Left</Anchor></h4>
+      <PropTable component="Media.Left"/>
 
-      <h4><Anchor id="media-right-props">MediaRight</Anchor></h4>
-      <PropTable component="MediaRight"/>
+      <h4><Anchor id="media-right-props">Media.Right</Anchor></h4>
+      <PropTable component="Media.Right"/>
+
+      <h4><Anchor id="media-heading-props">Media.Heading</Anchor></h4>
+      <PropTable component="Media.Heading"/>
+
+      <h4><Anchor id="media-body-props">Media.Body</Anchor></h4>
+      <PropTable component="Media.Body"/>
     </div>
   );
 }

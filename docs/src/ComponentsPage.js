@@ -77,7 +77,7 @@ const sections = {
     thumbnails: '#thumbnail',
     embed: '#responsive-embed',
     carousels: '#carousels',
-    'media-objects': '#media-objects',
+    mediaObjects: '#media-objects',
   misc: '#misc',
     icons: '#glyphicons',
     labels: '#labels',
@@ -283,7 +283,7 @@ const ComponentsPage = React.createClass({
                 <ResponsiveEmbedSection />
                 {this.renderScrollSpy(sections.carousels)}
                 <CarouselSection />
-                {this.renderScrollSpy(sections['media-objects'])}
+                {this.renderScrollSpy(sections.mediaObjects)}
                 <MediaSection />
 
                 {this.renderScrollSpy(sections.misc)}
@@ -407,7 +407,7 @@ const ComponentsPage = React.createClass({
                         <NavItem href={sections.thumbnails}>Thumbnails</NavItem>
                         <NavItem href={sections.embed}>Responsive embed</NavItem>
                         <NavItem href={sections.carousels}>Carousels</NavItem>
-                        <NavItem href={sections['media-objects']}>Media Objects</NavItem>
+                        <NavItem href={sections.mediaObjects}>Media Objects</NavItem>
                       </SubNav>
 
                       <SubNav href={sections.misc} text="Miscellaneous">
