@@ -11,6 +11,7 @@ const NavItem = React.createClass({
     active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
     href: React.PropTypes.string,
+    rel: React.PropTypes.string,
     onClick: React.PropTypes.func,
     role: React.PropTypes.string,
     title: React.PropTypes.node,
@@ -33,6 +34,7 @@ const NavItem = React.createClass({
         disabled,
         active,
         href,
+        rel,
         onClick,
         title,
         target,
@@ -47,6 +49,7 @@ const NavItem = React.createClass({
     let linkProps = {
       role,
       href,
+      rel,
       onClick: createChainedFunction(onClick, this.handleClick),
       title,
       target,

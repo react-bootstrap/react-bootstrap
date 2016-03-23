@@ -92,6 +92,14 @@ describe('NavItem', () => {
     assert.equal(linkElement.target, '_blank');
   });
 
+  it('Should set rel attribute on anchor', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+          <NavItem href="/some/unique-thing/" rel="nofollow">Item content</NavItem>
+        );
+    let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
+    assert.equal(linkElement.rel, 'nofollow');
+  });
+
   it('Should call `onSelect` with target attribute', (done) => {
     function handleSelect(key, href, target) {
       assert.equal(target, '_blank');
