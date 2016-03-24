@@ -112,5 +112,9 @@ export default {
   ResponsiveEmbed:               require('fs').readFileSync(__dirname + '/../examples/ResponsiveEmbed.js', 'utf8'),
 
   Overlay:                       require('fs').readFileSync(__dirname + '/../examples/Overlay.js', 'utf8'),
-  OverlayCustom:                 require('fs').readFileSync(__dirname + '/../examples/OverlayCustom.js', 'utf8')
+  OverlayCustom:                 require('fs').readFileSync(__dirname + '/../examples/OverlayCustom.js', 'utf8'),
+
+  MediaObject:                   require('fs').readFileSync(__dirname + '/../examples/MediaObject.js', 'utf8'),
+  MediaAlignment:                require('fs').readFileSync(__dirname + '/../examples/MediaAlignment.js', 'utf8'),
+  MediaList:                require('fs').readFileSync(__dirname + '/../examples/MediaList.js', 'utf8')
 };

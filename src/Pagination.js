@@ -12,7 +12,11 @@ const Pagination = React.createClass({
     items: React.PropTypes.number,
     maxButtons: React.PropTypes.number,
     /**
-     * When `true`, will display the default node value ('...').
+     * When `true`, will display the first and the last button page
+     */
+    boundaryLinks: React.PropTypes.bool,
+    /**
+     * When `true`, will display the default node value ('&hellip;').
      * Otherwise, will display provided node (when specified).
      */
     ellipsis: React.PropTypes.oneOfType([
@@ -68,6 +72,7 @@ const Pagination = React.createClass({
       prev: false,
       next: false,
       ellipsis: true,
+      boundaryLinks: false,
       buttonComponentClass: SafeAnchor,
       bsClass: 'pagination'
     };
@@ -82,7 +87,8 @@ const Pagination = React.createClass({
       items,
       onSelect,
       ellipsis,
-      buttonComponentClass
+      buttonComponentClass,
+      boundaryLinks
     } = this.props;
 
     if (maxButtons) {
@@ -117,6 +123,30 @@ const Pagination = React.createClass({
       );
     }
 
+    if (boundaryLinks && ellipsis && startPage !== 1) {
+      pageButtons.unshift(
+        <PaginationButton
+          key="ellipsisFirst"
+          disabled
+          buttonComponentClass={buttonComponentClass}>
+          <span aria-label="More">
+            {this.props.ellipsis === true ? '\u2026' : this.props.ellipsis}
+          </span>
+        </PaginationButton>
+      );
+
+      pageButtons.unshift(
+        <PaginationButton
+          key={1}
+          eventKey={1}
+          active={false}
+          onSelect={onSelect}
+          buttonComponentClass={buttonComponentClass}>
+          1
+        </PaginationButton>
+      );
+    }
+
     if (maxButtons && hasHiddenPagesAfter && ellipsis) {
       pageButtons.push(
         <PaginationButton
@@ -124,10 +154,23 @@ const Pagination = React.createClass({
           disabled
           buttonComponentClass={buttonComponentClass}>
           <span aria-label="More">
-            {this.props.ellipsis === true ? '...' : this.props.ellipsis}
+            {this.props.ellipsis === true ? '\u2026' : this.props.ellipsis}
           </span>
         </PaginationButton>
       );
+
+      if (boundaryLinks && endPage !== items) {
+        pageButtons.push(
+          <PaginationButton
+              key={items}
+              eventKey={items}
+              active={false}
+              onSelect={onSelect}
+              buttonComponentClass={buttonComponentClass}>
+              {items}
+          </PaginationButton>
+        );
+      }
     }
 
     return pageButtons;

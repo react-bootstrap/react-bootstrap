@@ -53,7 +53,7 @@ describe('Pagination', () => {
     pageButtons[4].className.should.match(/\bactive\b/);
   });
 
-  it('Should show the ellipsis, first, last, prev and next button with default labels', () => {
+  it('Should show the ellipsis, boundaryLinks, first, last, prev and next button with default labels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         first={true}
@@ -71,10 +71,31 @@ describe('Pagination', () => {
 
     assert.equal(pageButtons[0].innerText, '«');
     assert.equal(pageButtons[1].innerText, '‹');
-    assert.equal(pageButtons[5].innerText, '...');
+    assert.equal(pageButtons[5].innerText, '…');
     assert.equal(pageButtons[6].innerText, '›');
     assert.equal(pageButtons[7].innerText, '»');
 
+  });
+
+  it('Should show the boundaryLinks, first, last, prev and next button', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Pagination
+        first={true}
+        last={true}
+        prev={true}
+        next={true}
+        ellipsis={true}
+        boundaryLinks={true}
+        maxButtons={3}
+        activePage={10}
+        items={20} />
+    );
+    let pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+    // add first, last, prev, next and ellipsis button
+    assert.equal(pageButtons[2].innerText, '1');
+    assert.equal(pageButtons[3].innerText, '…');
+    assert.equal(pageButtons[7].innerText, '…');
+    assert.equal(pageButtons[8].innerText, '20');
   });
 
   it('Should show the ellipsis, first, last, prev and next button with custom labels', () => {

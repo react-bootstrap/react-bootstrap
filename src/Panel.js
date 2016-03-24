@@ -19,7 +19,14 @@ let Panel = React.createClass({
     expanded: React.PropTypes.bool,
     eventKey: React.PropTypes.any,
     headerRole: React.PropTypes.string,
-    panelRole: React.PropTypes.string
+    panelRole: React.PropTypes.string,
+
+    onEnter: Collapse.propTypes.onEnter,
+    onEntering: Collapse.propTypes.onEntering,
+    onEntered: Collapse.propTypes.onEntered,
+    onExit: Collapse.propTypes.onExit,
+    onExiting: Collapse.propTypes.onExiting,
+    onExited: Collapse.propTypes.onExited
   },
 
   getDefaultProps() {
@@ -70,6 +77,15 @@ let Panel = React.createClass({
   },
 
   renderCollapsibleBody(panelRole) {
+    let collapseProps = {
+      onEnter: this.props.onEnter,
+      onEntering: this.props.onEntering,
+      onEntered: this.props.onEntered,
+      onExit: this.props.onExit,
+      onExiting: this.props.onExiting,
+      onExited: this.props.onExited,
+      in: this.isExpanded()
+    };
     let props = {
       className: bootstrapUtils.prefix(this.props, 'collapse'),
       id: this.props.id,
@@ -81,7 +97,7 @@ let Panel = React.createClass({
     }
 
     return (
-      <Collapse in={this.isExpanded()}>
+      <Collapse {...collapseProps}>
         <div {...props}>
           {this.renderBody()}
 

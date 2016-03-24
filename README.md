@@ -6,7 +6,6 @@
 [![Build status][appveyor-badge]][appveyor]
 [![Coverage Status][coveralls-badge]][coveralls]  
 [![Discord][discord-badge]][discord]
-[![Gitter][gitter-badge]][gitter]
 [![Thinkful][thinkful-badge]][thinkful]  
 [![NPM version][npm-badge]][npm]
 [![Bower version][bower-badge]][bower]  
@@ -15,10 +14,6 @@
 [![peerDependency Status][peer-deps-badge]][peer-deps]
 
 __Under active development - APIs will change.__ Check out the [1.0.0 Roadmap](https://github.com/react-bootstrap/react-bootstrap/wiki#100-roadmap) and [Contributing Guidelines][contributing] to see where you can help out. Prior to the 1.0.0 release, deprecations or breaking changes should result in a Minor version bump.
-
-## React v0.13 support
-
-Releases from v0.27.0 onward only support React v0.14. The latest releases compatible with React v0.13 are the v0.26.x releases.
 
 ## Docs
 
@@ -57,9 +52,6 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [bower-badge]: https://badge.fury.io/bo/react-bootstrap.svg
 [bower]: http://badge.fury.io/bo/react-bootstrap
-
-[gitter-badge]: https://img.shields.io/badge/Gitter-Join%20chat%20%E2%86%92-1dce73.svg
-[gitter]: https://gitter.im/react-bootstrap/react-bootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 
 [deps-badge]: https://david-dm.org/react-bootstrap/react-bootstrap.svg
 [deps]: https://david-dm.org/react-bootstrap/react-bootstrap

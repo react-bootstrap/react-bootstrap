@@ -48,34 +48,6 @@ errors and no new warnings for new work. You are welcome to configure your
 editor to use ESLint or the `npm test` command will run unit tests and the
 linter.
 
-## Commit Subjects for Public API Changes
-
-If your patch **changes the API or fixes a bug** please use one of the following
-prefixes in your commit subject:
-
-- `[fixed] ...`
-- `[changed] ...`
-- `[added] ...`
-- `[removed] ...`
-
-That ensures the subject line of your commit makes it into the auto-generated
-changelog. Do not use these tags if your change doesn't fix a bug and doesn't
-change the public API.
-
-### When using `[changed]` or `[removed]`...
-
-Please include an upgrade path with example code in the commit message.  If it
-doesn't make sense to do this, then it doesn't make sense to use `[changed]` or
-`[removed]` :). For further reading on writing a well formed commit message,
-check out these [5 useful tips for a better commit message][commit-message]
-
-### Using `[changed]` with development dependencies updates
-
-Use `[changed]` if dev-dependency has impact on the resulting code or API.
-`babel` is a good example of such dev-dependency.
-`chai`, `colors`, `express` or `eslint` are good examples when there is
-no need to add `[changed]`.
-
 ## Visual Changes
 
 When making a visual change, if at all feasible please provide screenshots

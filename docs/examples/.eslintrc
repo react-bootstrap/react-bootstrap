@@ -41,6 +41,7 @@
     "Navbar",
     "NavDropdown",
     "NavItem",
+    "Media",
     "MenuItem",
     "Modal",
     "OverlayTrigger",

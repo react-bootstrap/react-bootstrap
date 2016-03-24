@@ -14,6 +14,7 @@ class SplitButton extends React.Component {
       onClick,
       target,
       href,
+      toggleLabel,
       bsSize,
       bsStyle,
       ...props } = this.props;
@@ -37,7 +38,7 @@ class SplitButton extends React.Component {
           {title}
         </Button>
         <SplitToggle
-          aria-label={title}
+          aria-label={toggleLabel || title}
           bsStyle={bsStyle}
           bsSize={bsSize}
           disabled={disabled}
@@ -63,7 +64,11 @@ SplitButton.propTypes = {
   /**
    * The content of the split button.
    */
-  title: React.PropTypes.node.isRequired
+  title: React.PropTypes.node.isRequired,
+  /**
+   * Accessible label for the toggle; the value of `title` if not specified.
+   */
+  toggleLabel: React.PropTypes.string
 };
 
 SplitButton.defaultProps = {
