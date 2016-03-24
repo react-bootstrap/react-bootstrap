@@ -1,3 +1,20 @@
+## [v0.28.4]
+> 2016-03-24
+
+- **Feature:** Add `componentClass` on `<FormControls.Static>` ([#1653])
+- **Feature:** Add transition hooks on collapsible `<Panel>` ([#1664])
+- **Feature:** Add `className` on `<MenuItem divider>` ([#1682])
+- **Feature:** Add `className` on `<Navbar.Header>` ([#1695])
+- **Feature:** Add `<Media>` and related components ([#1707])
+
+[v0.28.4]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.3...v0.28.4
+[#1653]: https://github.com/react-bootstrap/react-bootstrap/pull/1653
+[#1664]: https://github.com/react-bootstrap/react-bootstrap/pull/1664
+[#1682]: https://github.com/react-bootstrap/react-bootstrap/pull/1682
+[#1695]: https://github.com/react-bootstrap/react-bootstrap/pull/1695
+[#1707]: https://github.com/react-bootstrap/react-bootstrap/pull/1707
+
+
 v0.28.3 - Thu, 11 Feb 2016 00:00:42 GMT
 ---------------------------------------
 
