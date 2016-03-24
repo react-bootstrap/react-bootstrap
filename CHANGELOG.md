@@ -1,3 +1,20 @@
+## [v0.29.0-alpha.0]
+> 2016-03-24
+
+- **Breaking:** Change `onSelect` signature on `<MenuItem>`, `<NavItem>`, and `<Tabs>` to be consistent with other React-Bootstrap components ([#1604])
+- **Breaking:** Remove deprecated `duration` on transition components ([#1608])
+- **Breaking:** Remove deprecated functionality from `<Nav>`, `<Navbar>`, and related components ([#1608])
+- **Feature:** Add lower-level tab components ([#1607])
+- **Deprecation:** Deprecate horizontal layout support in `<Tabs>` ([#1607])
+- **Deprecation:** Deprecate `dismissAfter` on `<Alert>` ([#1636])
+
+[v0.29.0-alpha.0]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.4...v0.29.0-alpha.0
+[#1604]: https://github.com/react-bootstrap/react-bootstrap/pull/1604
+[#1607]: https://github.com/react-bootstrap/react-bootstrap/pull/1607
+[#1608]: https://github.com/react-bootstrap/react-bootstrap/pull/1608
+[#1636]: https://github.com/react-bootstrap/react-bootstrap/pull/1636
+
+
 ## [v0.28.4]
 > 2016-03-24
 
