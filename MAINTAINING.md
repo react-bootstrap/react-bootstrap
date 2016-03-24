@@ -11,10 +11,8 @@ the [Contributing Guide](./CONTRIBUTING.md).
 New issues pop up every day. We need to identify urgent issues (such as nobody
 can use a component, or install React-Bootstrap), close and link duplicates,
 answer questions, etc. Please alert the
-[gitter/react-bootstrap](https://gitter.im/react-bootstrap/react-bootstrap) chat
-room of the urgent issues. We are using
-[HuBoard](https://huboard.com/react-bootstrap/react-bootstrap) which is a kanban
-style board to track and prioritize issues.
+[reactiflux#react-bootstrap](https://discord.gg/0ZcbPKXt5bXLs9XK) chat room of
+the urgent issues.
 
 Some issues are opened that are just too vague to do anything about. If after
 attempting to get feedback from issue authors fails after 7 days, then close the
@@ -30,17 +28,10 @@ Please, make sure:
   - Commenting "LGTM" (Looks good to me) or something of similar sorts is
     sufficient.
   - If it's a simple docs change or a typo fix, feel free to skip this step.
-- Commits follow the convention prescribed in the [Contributing
-  Guide](./CONTRIBUTING.md).
-  - This is very important, because the release process uses this to generate
-    the [changelog](./CHANGELOG.md).
-  - Commits are squashed. Each change is a single commit.
-    - e.g. if the PR contains two changes such as `[fixed] Some Bug` and then
-      `[fixed] Some other unrelated bug` it should be two separate changes.
-    - e.g. if the first commit is `[fixed] Some bug` and the second commit is
-      `[fixed] failing tests for previous commit`, you should squash them into a
-      single commit
-  - It's alright to ask the author of the pull request to fix any of the above.
+
+After merging the PR, make sure to update the [changelog](./CHANGELOG.md)
+appropriately. It's fine to do this separately from the code change itself, as
+this will minimize trivial merge conflicts.
 
 ## Becoming a maintainer
 
