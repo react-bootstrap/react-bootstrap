@@ -1,6 +1,7 @@
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 import ValidComponentChildren from './utils/ValidComponentChildren';
+import BreadcrumbItem from './BreadcrumbItem';
 
 const Breadcrumb = React.createClass({
   propTypes: {
@@ -35,5 +36,7 @@ const Breadcrumb = React.createClass({
     return cloneElement(child, { key: child.key || index });
   }
 });
+
+Breadcrumb.Item = BreadcrumbItem;
 
 export default Breadcrumb;
