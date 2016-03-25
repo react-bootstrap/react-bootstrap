@@ -1,3 +1,12 @@
+## [HEAD] \(v0.28.5\)
+> Unreleased
+
+- **Bugfix:** Properly handle `style` on nested `<ProgressBar>` ([#1719])
+
+[HEAD]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.4...HEAD
+[#1719]: https://github.com/react-bootstrap/react-bootstrap/pull/1719
+
+
 ## [v0.28.4]
 > 2016-03-24
 

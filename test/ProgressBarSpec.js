@@ -201,6 +201,21 @@ describe('ProgressBar', () => {
     assert.notOk(bar2.className.match(/\bactive\b/));
   });
 
+  it('Should forward className and style to nested bars', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ProgressBar>
+        <ProgressBar now={1} className="bar1" />
+        <ProgressBar now={2} style={{ minWidth: 10 }} />
+      </ProgressBar>
+    );
+    let wrapper = ReactDOM.findDOMNode(instance);
+    let bar1 = wrapper.firstChild;
+    let bar2 = wrapper.lastChild;
+
+    assert.ok(bar1.className.match(/\bbar1\b/));
+    assert.equal(bar2.style.minWidth, '10px');
+  });
+
   it('allows only ProgressBar in children', () => {
     ReactTestUtils.renderIntoDocument(
       <ProgressBar>
