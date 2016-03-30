@@ -65,7 +65,7 @@ class ProgressBar extends React.Component {
   }
 
   renderProgressBar() {
-    let { className, label, now, min, max, ...props } = this.props;
+    let { className, label, now, min, max, style, ...props } = this.props;
 
     const percentage = this.getPercentage(
       now, min, max
@@ -93,7 +93,7 @@ class ProgressBar extends React.Component {
         {...props}
         className={classes}
         role="progressbar"
-        style={{ width: percentage + '%' }}
+        style={{ width: percentage + '%', ...style }}
         aria-valuenow={this.props.now}
         aria-valuemin={this.props.min}
         aria-valuemax={this.props.max}>
