@@ -1,5 +1,8 @@
 import React, { PropTypes } from 'react';
 import tbsUtils from './utils/bootstrapUtils';
+import createChainedFunction from './utils/createChainedFunction';
+import classNames from 'classnames';
+
 
 let NavbarToggle = React.createClass({
 
@@ -15,6 +18,14 @@ let NavbarToggle = React.createClass({
     $bs_navbar_onToggle: PropTypes.func,
   },
 
+  getInitialState: function(){
+    return {collapsed: true};
+  },
+
+  handleCollapsedState: function() {
+    this.setState({collapsed: !this.state.collapsed});
+  },
+
   render() {
     let { children, ...props } = this.props;
     let {
@@ -24,8 +35,8 @@ let NavbarToggle = React.createClass({
 
     return (
       <button type="button"
-        onClick={onToggle}
-        className={tbsUtils.prefix({ bsClass }, 'toggle')}
+        onClick={createChainedFunction(this.handleCollapsedState, onToggle)}
+        className={ classNames(tbsUtils.prefix({ bsClass }, 'toggle'), {'collapsed': this.state.collapsed}) }
       >
         { children || [
           <span className="sr-only" key={0}>Toggle navigation</span>,
