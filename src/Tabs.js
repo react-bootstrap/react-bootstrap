@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
+import Clearfix from './Clearfix';
 import Col from './Col';
 import Nav from './Nav';
 import NavItem from './NavItem';
@@ -90,7 +90,7 @@ const Tabs = React.createClass({
       React.PropTypes.object
     ]),
     /**
-     * Render without clearfix if horizontally positioned
+     * Do not wrap in a Clearfix if horizontally positioned
      */
     standalone: React.PropTypes.bool
   },
@@ -195,11 +195,6 @@ const Tabs = React.createClass({
     const childPanes = ValidComponentChildren.map(children, this.renderPane);
 
     if (isHorizontal) {
-      if (!standalone) {
-        containerProps.className =
-          classNames(containerProps.className, 'clearfix');
-      }
-
       const {tabsColProps, panesColProps} =
         this.getColProps({tabWidth, paneWidth});
 
@@ -214,21 +209,32 @@ const Tabs = React.createClass({
         </Col>
       );
 
+      let tabsAndPanes;
       if (position === 'left') {
-        return (
+        tabsAndPanes = (
           <div {...containerProps}>
             {tabs}
             {panes}
           </div>
         );
+      } else {
+        tabsAndPanes = (
+          <div {...containerProps}>
+            {panes}
+            {tabs}
+          </div>
+        );
       }
 
-      return (
-        <div {...containerProps}>
-          {panes}
-          {tabs}
-        </div>
-      );
+      if (!standalone) {
+        return (
+          <Clearfix>
+            {tabsAndPanes}
+          </Clearfix>
+        );
+      }
+
+      return tabsAndPanes;
     }
 
     return (
