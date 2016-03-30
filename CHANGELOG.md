@@ -3,12 +3,14 @@
 
 - **Feature:** Support `<Breadcrumb.Item>` in addition to `<BreadcrumbItem>` for breadcrumb items ([#1722])
 - **Feature:** Add `<Carousel.Caption>` for carousel captions ([#1734])
+- **Feature:** Support `<Carousel.Item>` in addition to `<CarouselItem>` for carousel items ([#1740])
 - **Bugfix:** Properly handle `style` on nested `<ProgressBar>` ([#1719])
 
 [HEAD]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.4...HEAD
 [#1719]: https://github.com/react-bootstrap/react-bootstrap/pull/1719
 [#1722]: https://github.com/react-bootstrap/react-bootstrap/pull/1722
 [#1734]: https://github.com/react-bootstrap/react-bootstrap/pull/1734
+[#1740]: https://github.com/react-bootstrap/react-bootstrap/pull/1740
 
 
 ## [v0.28.4]
