@@ -5,9 +5,9 @@ import elementType from 'react-prop-types/lib/elementType';
 const types = ['button', 'reset', 'submit'];
 
 import bootstrapUtils, { bsStyles, bsSizes, bsClass } from './utils/bootstrapUtils';
-import { Sizes, State, DEFAULT, PRIMARY, LINK } from './styleMaps';
+import { Sizes, State, DEFAULT, PRIMARY, SECONDARY, LINK } from './styleMaps';
 
-const ButtonStyles = State.values().concat(DEFAULT, PRIMARY, LINK);
+const ButtonStyles = State.values().concat(DEFAULT, PRIMARY, SECONDARY, LINK);
 
 let Button = React.createClass({
 

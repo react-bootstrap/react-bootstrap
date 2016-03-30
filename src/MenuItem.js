@@ -51,17 +51,14 @@ class MenuItem extends React.Component {
     };
 
     return (
-      <li role="presentation"
-        className={classnames(className, classes)}
+      <SafeAnchor
+        {...props}
+        role="menuitem"
+        tabIndex="-1"
+        className={classnames(className, classes).concat(' dropdown-item')}
         style={style}
-      >
-        <SafeAnchor
-          {...props}
-          role="menuitem"
-          tabIndex="-1"
-          onClick={createChainedFunction(onClick, this.handleClick)}
-        />
-      </li>
+        onClick={createChainedFunction(onClick, this.handleClick)}
+      />
     );
   }
 }

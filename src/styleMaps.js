@@ -39,6 +39,7 @@ export const State = constant({
 
 export const DEFAULT = 'default';
 export const PRIMARY = 'primary';
+export const SECONDARY = 'secondary';
 export const LINK = 'link';
 export const INVERSE = 'inverse';
 

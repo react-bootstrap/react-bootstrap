@@ -100,14 +100,14 @@ class DropdownMenu extends React.Component {
     };
 
     let list = (
-      <ul
+      <div
         className={classNames(className, classes)}
         role="menu"
         aria-labelledby={labelledBy}
         {...props}
       >
         {items}
-      </ul>
+      </div>
     );
 
     if (open) {
