@@ -306,5 +306,3 @@ let Carousel = React.createClass({
 Carousel = Object.assign(Carousel, { Caption });
 
 export default Carousel;
-
-export { Caption };
