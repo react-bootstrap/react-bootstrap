@@ -3,7 +3,7 @@ function onSelectAlert(eventKey, href) {
 }
 
 const MenuItems = (
-  <div className="clearfix">
+  <Clearfix>
     <ul className="dropdown-menu open">
       <MenuItem header>Header</MenuItem>
       <MenuItem>link</MenuItem>
@@ -18,7 +18,7 @@ const MenuItems = (
         link that alerts
       </MenuItem>
     </ul>
-  </div>
+  </Clearfix>
 );
 
 ReactDOM.render(MenuItems, mountNode);
