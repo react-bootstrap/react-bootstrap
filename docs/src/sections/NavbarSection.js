@@ -73,7 +73,7 @@ export default function NavbarSection() {
       <h4><Anchor id="navs-props-navbar">Navbar</Anchor></h4>
       <PropTable component="Navbar"/>
 
-      <h4><Anchor id="navs-props-navbrand">NavbarToggle, Navbar.Toggle</Anchor></h4>
+      <h4><Anchor id="navs-props-navbar-toggle">Navbar.Toggle</Anchor></h4>
       <PropTable component="NavbarToggle"/>
     </div>
   );
