@@ -88,4 +88,18 @@ describe('ListGroupItem', () => {
     assert.equal(node.lastChild.innerText, 'Item text');
     assert.ok(node.lastChild.className.match(/\blist-group-item-text\b/));
   });
+
+  it('Should support "div" child as a ReactComponent', () => {
+    let header = <h2>Heading</h2>;
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ListGroupItem header={header}><div>Item text</div></ListGroupItem>
+    );
+
+    let node = ReactDOM.findDOMNode(instance);
+    assert.equal(node.firstChild.nodeName, 'H2');
+    assert.equal(node.firstChild.innerText, 'Heading');
+    assert.ok(node.firstChild.className.match(/\blist-group-item-heading\b/));
+    assert.equal(node.lastChild.nodeName, 'DIV');
+    assert.equal(node.lastChild.innerText, 'Item text');
+  });
 });
