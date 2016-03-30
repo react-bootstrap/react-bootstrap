@@ -2,15 +2,14 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
 import Carousel from '../src/Carousel';
-import CarouselItem from '../src/CarouselItem';
 
 describe('Carousel', () => {
   it('Should show the correct item', () => {
 
     let instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={1}>
-        <CarouselItem ref="item1">Item 1 content</CarouselItem>
-        <CarouselItem ref="item2">Item 2 content</CarouselItem>
+        <Carousel.Item ref="item1">Item 1 content</Carousel.Item>
+        <Carousel.Item ref="item2">Item 2 content</Carousel.Item>
       </Carousel>
     );
 
@@ -19,8 +18,8 @@ describe('Carousel', () => {
 
     instance = ReactTestUtils.renderIntoDocument(
       <Carousel defaultActiveIndex={1}>
-        <CarouselItem ref="item1">Item 1 content</CarouselItem>
-        <CarouselItem ref="item2">Item 2 content</CarouselItem>
+        <Carousel.Item ref="item1">Item 1 content</Carousel.Item>
+        <Carousel.Item ref="item2">Item 2 content</Carousel.Item>
       </Carousel>
     );
 
@@ -35,10 +34,10 @@ describe('Carousel', () => {
   it('Should handle null children', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={1}>
-        <CarouselItem ref="item1">Item 1 content</CarouselItem>
+        <Carousel.Item ref="item1">Item 1 content</Carousel.Item>
         {null}
         {false}
-        <CarouselItem ref="item2">Item 2 content</CarouselItem>
+        <Carousel.Item ref="item2">Item 2 content</Carousel.Item>
       </Carousel>
     );
 
@@ -59,8 +58,8 @@ describe('Carousel', () => {
 
     let instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={1} onSelect={onSelect}>
-        <CarouselItem ref="item1">Item 1 content</CarouselItem>
-        <CarouselItem ref="item2">Item 2 content</CarouselItem>
+        <Carousel.Item ref="item1">Item 1 content</Carousel.Item>
+        <Carousel.Item ref="item2">Item 2 content</Carousel.Item>
       </Carousel>
     );
 
@@ -73,8 +72,8 @@ describe('Carousel', () => {
   it('Should show all controls on the first/last image if wrap is true', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={0} controls={true} wrap={true}>
-        <CarouselItem ref="item1">Item 1 content</CarouselItem>
-        <CarouselItem ref="item2">Item 2 content</CarouselItem>
+        <Carousel.Item ref="item1">Item 1 content</Carousel.Item>
+        <Carousel.Item ref="item2">Item 2 content</Carousel.Item>
       </Carousel>
     );
 
@@ -85,8 +84,8 @@ describe('Carousel', () => {
 
     instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={1} controls={true} wrap={true}>
-        <CarouselItem ref="item1">Item 1 content</CarouselItem>
-        <CarouselItem ref="item2">Item 2 content</CarouselItem>
+        <Carousel.Item ref="item1">Item 1 content</Carousel.Item>
+        <Carousel.Item ref="item2">Item 2 content</Carousel.Item>
       </Carousel>
     );
 
@@ -99,8 +98,8 @@ describe('Carousel', () => {
   it('Should not show the prev button on the first image if wrap is false', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={0} controls={true} wrap={false}>
-        <CarouselItem ref="item1">Item 1 content</CarouselItem>
-        <CarouselItem ref="item2">Item 2 content</CarouselItem>
+        <Carousel.Item ref="item1">Item 1 content</Carousel.Item>
+        <Carousel.Item ref="item2">Item 2 content</Carousel.Item>
       </Carousel>
     );
 
@@ -116,9 +115,9 @@ describe('Carousel', () => {
       <Carousel activeIndex={1} controls={true} wrap={false}
         prevIcon={<span className='ficon ficon-left'/>}
         nextIcon={<span className='ficon ficon-right'/>}>
-        <CarouselItem ref="item1">Item 1 content</CarouselItem>
-        <CarouselItem ref="item2">Item 2 content</CarouselItem>
-        <CarouselItem ref="item3">Item 3 content</CarouselItem>
+        <Carousel.Item ref="item1">Item 1 content</Carousel.Item>
+        <Carousel.Item ref="item2">Item 2 content</Carousel.Item>
+        <Carousel.Item ref="item3">Item 3 content</Carousel.Item>
       </Carousel>
     );
 

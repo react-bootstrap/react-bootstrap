@@ -1,14 +1,14 @@
 const breadcrumbInstance = (
   <Breadcrumb>
-    <BreadcrumbItem href="#">
+    <Breadcrumb.Item href="#">
       Home
-    </BreadcrumbItem>
-    <BreadcrumbItem href="http://getbootstrap.com/components/#breadcrumbs">
+    </Breadcrumb.Item>
+    <Breadcrumb.Item href="http://getbootstrap.com/components/#breadcrumbs">
       Library
-    </BreadcrumbItem>
-    <BreadcrumbItem active>
+    </Breadcrumb.Item>
+    <Breadcrumb.Item active>
       Data
-    </BreadcrumbItem>
+    </Breadcrumb.Item>
   </Breadcrumb>
 );
 

@@ -4,7 +4,8 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 import Glyphicon from './Glyphicon';
 import tbsUtils from './utils/bootstrapUtils';
 
-import Caption from './CarouselCaption.js';
+import Caption from './CarouselCaption';
+import Item from './CarouselItem';
 
 let Carousel = React.createClass({
 
@@ -303,6 +304,6 @@ let Carousel = React.createClass({
   }
 });
 
-Carousel = Object.assign(Carousel, { Caption });
+Carousel = Object.assign(Carousel, { Caption, Item });
 
 export default Carousel;
