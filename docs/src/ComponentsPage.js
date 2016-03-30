@@ -139,12 +139,13 @@ const ComponentsPage = React.createClass({
 
     for (const href of Object.keys(this.afterSections)) {
       if (!this.afterSections[href]) {
-        this.setState({ activeNavItemHref });
-        return;
+        break;
       }
 
       activeNavItemHref = href;
     }
+
+    this.setState({ activeNavItemHref });
   },
 
   renderScrollSpy(href) {
