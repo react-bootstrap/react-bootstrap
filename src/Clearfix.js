@@ -10,7 +10,7 @@ const Clearfix = React.createClass({
      */
     componentClass: elementType,
     /**
-     * Hide column
+     * Do not apply clearfix
      *
      * on Extra small devices Phones
      *
@@ -18,7 +18,7 @@ const Clearfix = React.createClass({
      */
     xsHidden: React.PropTypes.bool,
     /**
-     * Hide column
+     * Do not apply clearfix
      *
      * on Small devices Tablets
      *
@@ -26,7 +26,7 @@ const Clearfix = React.createClass({
      */
     smHidden: React.PropTypes.bool,
     /**
-     * Hide column
+     * Do not apply clearfix
      *
      * on Medium devices Desktops
      *
@@ -34,7 +34,7 @@ const Clearfix = React.createClass({
      */
     mdHidden: React.PropTypes.bool,
     /**
-     * Hide column
+     * Do not apply clearfix
      *
      * on Large devices Desktops
      *
