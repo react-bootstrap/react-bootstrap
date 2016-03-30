@@ -18,11 +18,11 @@ let NavbarToggle = React.createClass({
     $bs_navbar_onToggle: PropTypes.func,
   },
 
-  getInitialState: function(){
+  getInitialState() {
     return {collapsed: true};
   },
 
-  handleCollapsedState: function() {
+  handleCollapsedState() {
     this.setState({collapsed: !this.state.collapsed});
   },
 
