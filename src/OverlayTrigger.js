@@ -179,7 +179,8 @@ const OverlayTrigger = React.createClass({
 
     let overlay = cloneElement(this.props.overlay, {
       placement: overlayProps.placement,
-      container: overlayProps.container
+      container: overlayProps.container,
+      onHide: this.hide
     });
 
     return (

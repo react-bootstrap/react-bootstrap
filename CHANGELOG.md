@@ -4,6 +4,7 @@
 - **Feature:** Support `<Breadcrumb.Item>` in addition to `<BreadcrumbItem>` for breadcrumb items ([#1722])
 - **Feature:** Add `<Carousel.Caption>` for carousel captions ([#1734])
 - **Feature:** Support `<Carousel.Item>` in addition to `<CarouselItem>` for carousel items ([#1740])
+- **Feature:** Pass `onHide` callback to `<OverlayTrigger>` overlay ([#1742])
 - **Bugfix:** Properly handle `style` on nested `<ProgressBar>` ([#1719])
 - **Bugfix:** Fix CommonJS export for `<Media>` ([#1737])
 
@@ -13,6 +14,7 @@
 [#1734]: https://github.com/react-bootstrap/react-bootstrap/pull/1734
 [#1737]: https://github.com/react-bootstrap/react-bootstrap/pull/1737
 [#1740]: https://github.com/react-bootstrap/react-bootstrap/pull/1740
+[#1742]: https://github.com/react-bootstrap/react-bootstrap/pull/1742
 
 
 ## [v0.28.4]
