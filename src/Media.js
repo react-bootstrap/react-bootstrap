@@ -36,5 +36,3 @@ let Media = React.createClass({
 Media = Object.assign(Media, { Heading, Body, Left, Right, List, ListItem });
 
 export default Media;
-
-export { Heading, Body, Left, Right, List, ListItem };

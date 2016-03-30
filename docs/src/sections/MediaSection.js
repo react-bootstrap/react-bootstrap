@@ -9,7 +9,7 @@ export default function MediaSection() {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
-        <Anchor id="media-objects">Media Objects</Anchor> <small>Media.Media, Media.Left, Media.Right, Media.Heading, Media.List, Media.ListItem</small>
+        <Anchor id="media-objects">Media objects</Anchor> <small>Media, Media.Left, Media.Right, Media.Heading, Media.List, Media.ListItem</small>
       </h2>
 
       <p>Abstract object styles for building various types of components (like blog comments, Tweets, etc) that feature a <code>left</code> or <code>right</code> aligned image alongside textual content.</p>
