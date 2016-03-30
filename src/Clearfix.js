@@ -14,33 +14,33 @@ const Clearfix = React.createClass({
      *
      * on Extra small devices Phones
      *
-     * adds class `hidden-xs`
+     * adds class `visible-xs-block`
      */
-    xsHidden: React.PropTypes.bool,
+    visibleXsBlock: React.PropTypes.bool,
     /**
      * Do not apply clearfix
      *
      * on Small devices Tablets
      *
-     * adds class `hidden-sm`
+     * adds class `visible-sm-block`
      */
-    smHidden: React.PropTypes.bool,
+    visibleSmBlock: React.PropTypes.bool,
     /**
      * Do not apply clearfix
      *
      * on Medium devices Desktops
      *
-     * adds class `hidden-md`
+     * adds class `visible-md-block`
      */
-    mdHidden: React.PropTypes.bool,
+    visibleMdBlock: React.PropTypes.bool,
     /**
      * Do not apply clearfix
      *
      * on Large devices Desktops
      *
-     * adds class `hidden-lg`
+     * adds class `visible-lg-block`
      */
-    lgHidden: React.PropTypes.bool
+    visibleLgBlock: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -57,7 +57,7 @@ const Clearfix = React.createClass({
     Object.keys(styleMaps.SIZES).forEach( key => {
       let size = styleMaps.SIZES[key];
 
-      classes['hidden-' + size] = this.props[size + 'Hidden'];
+      classes['visible-' + size + '-block'] = this.props['visible' + size.charAt(0).toUpperCase() + size.slice(1) + 'Block'];
     }, this);
 
     return (

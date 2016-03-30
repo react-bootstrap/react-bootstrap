@@ -20,16 +20,28 @@ describe('Clearfix', () => {
     assert.equal(ReactDOM.findDOMNode(instance).className, 'clearfix');
   });
 
-  it('Should set Hidden to true', () => {
+  it('Defaults to no visible block classes', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Clearfix xsHidden smHidden mdHidden lgHidden />
+      <Clearfix />
     );
 
     let instanceClassName = ReactDOM.findDOMNode(instance).className;
-    assert.ok(instanceClassName.match(/\bhidden-xs\b/));
-    assert.ok(instanceClassName.match(/\bhidden-sm\b/));
-    assert.ok(instanceClassName.match(/\bhidden-md\b/));
-    assert.ok(instanceClassName.match(/\bhidden-lg\b/));
+    assert.ok(!instanceClassName.match(/\bvisible-xs-block\b/));
+    assert.ok(!instanceClassName.match(/\bvisible-sm-block\b/));
+    assert.ok(!instanceClassName.match(/\bvisible-md-block\b/));
+    assert.ok(!instanceClassName.match(/\bvisible-lg-block\b/));
+  });
+
+  it('Should apply visible block classes', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Clearfix visibleXsBlock visibleSmBlock visibleMdBlock visibleLgBlock />
+    );
+
+    let instanceClassName = ReactDOM.findDOMNode(instance).className;
+    assert.ok(instanceClassName.match(/\bvisible-xs-block\b/));
+    assert.ok(instanceClassName.match(/\bvisible-sm-block\b/));
+    assert.ok(instanceClassName.match(/\bvisible-md-block\b/));
+    assert.ok(instanceClassName.match(/\bvisible-lg-block\b/));
   });
 
   it('Should merge additional classes passed in', () => {

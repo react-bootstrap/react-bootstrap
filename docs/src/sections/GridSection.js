@@ -20,7 +20,7 @@ export default function GridSection() {
       <p>Below, the columns won't clear right in viewports <code>sm</code> or <code>xs</code> (less than 992px width).</p>
       <ReactPlayground codeText={Samples.GridWithoutClearfix} />
 
-      <p>Introduce <code>Clearfix</code>, excluding the viewports without issue, so that columns clear correctly.</p>
+      <p>Introduce <code>Clearfix</code>, blocking the smallest viewport without issue, so that columns clear correctly.</p>
       <ReactPlayground codeText={Samples.GridWithClearfix} />
 
       <h3><Anchor id="grid-props">Props</Anchor></h3>
