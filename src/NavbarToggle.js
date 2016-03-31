@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import tbsUtils from './utils/bootstrapUtils';
+import classNames from 'classnames';
+
 
 let NavbarToggle = React.createClass({
 
@@ -13,19 +15,21 @@ let NavbarToggle = React.createClass({
   contextTypes: {
     $bs_navbar_bsClass: PropTypes.string,
     $bs_navbar_onToggle: PropTypes.func,
+    $bs_navbar_expanded: PropTypes.bool
   },
 
   render() {
     let { children, ...props } = this.props;
     let {
       $bs_navbar_bsClass: bsClass = 'navbar',
-      $bs_navbar_onToggle: onToggle
+      $bs_navbar_onToggle: onToggle,
+      $bs_navbar_expanded: expanded
     } = this.context;
 
     return (
       <button type="button"
         onClick={onToggle}
-        className={tbsUtils.prefix({ bsClass }, 'toggle')}
+        className={ classNames(tbsUtils.prefix({ bsClass }, 'toggle'), {'collapsed': !expanded}) }
       >
         { children || [
           <span className="sr-only" key={0}>Toggle navigation</span>,
