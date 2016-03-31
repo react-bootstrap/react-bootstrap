@@ -16,6 +16,7 @@ let NavbarToggle = React.createClass({
   contextTypes: {
     $bs_navbar_bsClass: PropTypes.string,
     $bs_navbar_onToggle: PropTypes.func,
+    $bs_navbar_expanded: PropTypes.bool
   },
 
   getInitialState() {
