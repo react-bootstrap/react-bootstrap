@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 import Modal from '../src/Modal';
 
-import { render } from './helpers';
+import { render, shouldWarn } from './helpers';
 
 describe('Modal', () => {
   let mountPoint;
@@ -134,7 +134,23 @@ describe('Modal', () => {
     assert.ok(dialog.className.match(/\btestCss\b/));
   });
 
-  it('Should use dialogComponent', () => {
+  it('Should use dialogComponentClass', () => {
+    let noOp = () => {};
+
+    class CustomDialog extends React.Component {
+      render() { return <div {...this.props}/>; }
+    }
+
+    let instance = render(
+      <Modal show dialogComponentClass={CustomDialog} onHide={noOp}>
+        <strong>Message</strong>
+      </Modal>
+    , mountPoint);
+
+    assert.ok(instance._modal instanceof CustomDialog);
+  });
+
+  it('Should use deprecated dialogComponent', () => {
     let noOp = () => {};
 
     class CustomDialog extends React.Component {
@@ -148,6 +164,7 @@ describe('Modal', () => {
     , mountPoint);
 
     assert.ok(instance._modal instanceof CustomDialog);
+    shouldWarn('deprecated');
   });
 
   it('Should pass transition callbacks to Transition', (done) => {
