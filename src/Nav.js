@@ -295,7 +295,6 @@ Nav.propTypes = {
 Nav.contextTypes = {
   $bs_navbar: React.PropTypes.bool,
   $bs_navbar_bsClass: React.PropTypes.string,
-  $bs_deprecated_navbar: React.PropTypes.bool,
 
   $bs_tabcontainer: React.PropTypes.shape({
     activeKey: React.PropTypes.any,

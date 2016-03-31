@@ -1,13 +1,13 @@
 {
   "rules": {
-    "no-alert": 0,
-    "react/react-in-jsx-scope": 0
+    "no-alert": 0
   },
   "globals": {
     "mountNode",
     "React",
     "ReactDOM",
     "classNames",
+
     "Accordion",
     "Alert",
     "Badge",
@@ -17,8 +17,6 @@
     "ButtonGroup",
     "ButtonInput",
     "ButtonToolbar",
-    "CollapsibleNav",
-    "CollapsibleMixin",
     "Carousel",
     "CarouselItem",
     "Col",

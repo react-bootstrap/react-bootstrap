@@ -10,7 +10,6 @@ export ButtonToolbar from './ButtonToolbar';
 export Carousel from './Carousel';
 export CarouselItem from './CarouselItem';
 export Col from './Col';
-export CollapsibleNav from './CollapsibleNav';
 export Dropdown from './Dropdown';
 export DropdownButton from './DropdownButton';
 export Glyphicon from './Glyphicon';
