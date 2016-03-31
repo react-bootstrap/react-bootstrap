@@ -80,6 +80,18 @@ class ListGroupItem extends React.Component {
       );
     }
 
+    /**
+     * If (this.props.children) matches an invalid descendent of the <p>, skip wrapping the children with a <p>
+     * and instead render the children as-is. See validateDOMNesting for more details.
+     */
+    let invalidPTagDescendants = {
+      ul: true,
+      div: true
+    };
+    if (this.props.children && invalidPTagDescendants[this.props.children.type]) {
+      return [header, this.props.children];
+    }
+
     let content = (
       <p key="content" className={bootstrapUtils.prefix(this.props, 'text')}>
         {this.props.children}
