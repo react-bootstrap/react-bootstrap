@@ -10,7 +10,7 @@ const Clearfix = React.createClass({
      */
     componentClass: elementType,
     /**
-     * Do not apply clearfix
+     * Apply clearfix
      *
      * on Extra small devices Phones
      *
@@ -18,7 +18,7 @@ const Clearfix = React.createClass({
      */
     visibleXsBlock: React.PropTypes.bool,
     /**
-     * Do not apply clearfix
+     * Apply clearfix
      *
      * on Small devices Tablets
      *
@@ -26,7 +26,7 @@ const Clearfix = React.createClass({
      */
     visibleSmBlock: React.PropTypes.bool,
     /**
-     * Do not apply clearfix
+     * Apply clearfix
      *
      * on Medium devices Desktops
      *
@@ -34,7 +34,7 @@ const Clearfix = React.createClass({
      */
     visibleMdBlock: React.PropTypes.bool,
     /**
-     * Do not apply clearfix
+     * Apply clearfix
      *
      * on Large devices Desktops
      *

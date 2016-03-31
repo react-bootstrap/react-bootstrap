@@ -17,10 +17,10 @@ export default function GridSection() {
 
       <h3><Anchor id="grids-clearfix">Clearfix</Anchor></h3>
 
-      <p>Below, the columns won't clear right in viewports <code>sm</code> or <code>xs</code> (less than 992px width).</p>
+      <p>Below, the columns won't clear correctly in viewport <code>sm</code> (768px &le; width &lt; 992px).</p>
       <ReactPlayground codeText={Samples.GridWithoutClearfix} />
 
-      <p>Introduce <code>Clearfix</code>, blocking the smallest viewport without issue, so that columns clear correctly.</p>
+      <p>Introduce <code>Clearfix</code>, set to visible for the viewports with issue, so that columns clear correctly.</p>
       <ReactPlayground codeText={Samples.GridWithClearfix} />
 
       <h3><Anchor id="grid-props">Props</Anchor></h3>
