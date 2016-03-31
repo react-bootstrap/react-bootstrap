@@ -41,10 +41,9 @@ class Nav extends React.Component {
 
     if (isNavbar) {
       let bsClass = this.context.$bs_navbar_bsClass || 'navbar';
-      const navbarRight = this.props.pullRight;
 
       classes[tbsUtils.prefix({ bsClass }, 'nav')] = true;
-      classes[tbsUtils.prefix({ bsClass }, 'right')] = navbarRight;
+      classes[tbsUtils.prefix({ bsClass }, 'right')] = this.props.pullRight;
       classes[tbsUtils.prefix({ bsClass }, 'left')] = this.props.pullLeft;
     } else {
       classes['pull-right'] = this.props.pullRight;
