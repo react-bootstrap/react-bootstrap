@@ -19,25 +19,18 @@ let NavbarToggle = React.createClass({
     $bs_navbar_expanded: PropTypes.bool
   },
 
-  getInitialState() {
-    return {collapsed: true};
-  },
-
-  handleCollapsedState() {
-    this.setState({collapsed: !this.state.collapsed});
-  },
-
   render() {
     let { children, ...props } = this.props;
     let {
       $bs_navbar_bsClass: bsClass = 'navbar',
-      $bs_navbar_onToggle: onToggle
+      $bs_navbar_onToggle: onToggle,
+      $bs_navbar_expanded: expanded
     } = this.context;
 
     return (
       <button type="button"
         onClick={createChainedFunction(this.handleCollapsedState, onToggle)}
-        className={ classNames(tbsUtils.prefix({ bsClass }, 'toggle'), {'collapsed': this.state.collapsed}) }
+        className={ classNames(tbsUtils.prefix({ bsClass }, 'toggle'), {'collapsed': !expanded}) }
       >
         { children || [
           <span className="sr-only" key={0}>Toggle navigation</span>,
