@@ -22,7 +22,7 @@ describe('DropdownMenu', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleMenu);
     const node = ReactDOM.findDOMNode(instance);
 
-    node.tagName.should.equal('UL');
+    node.tagName.should.equal('DIV');
     node.className.should.match(/\bdropdown-menu\b/);
   });
 

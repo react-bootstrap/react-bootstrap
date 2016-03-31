@@ -53,16 +53,14 @@ describe('MenuItem', () => {
       </MenuItem>
     );
     const node = ReactDOM.findDOMNode(instance);
-    const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
-    node.getAttribute('role').should.equal('presentation');
-    anchor.getAttribute('role').should.equal('menuitem');
-    anchor.getAttribute('tabIndex').should.equal('-1');
-    anchor.getAttribute('href').should.equal('/herpa-derpa');
+    node.getAttribute('role').should.equal('menuitem');
+    node.getAttribute('tabIndex').should.equal('-1');
+    node.getAttribute('href').should.equal('/herpa-derpa');
 
-    anchor.innerHTML.should.match(/Item/);
+    node.innerHTML.should.match(/Item/);
 
-    ReactTestUtils.Simulate.keyDown(anchor, { keyCode: 1 });
+    ReactTestUtils.Simulate.keyDown(node, { keyCode: 1 });
   });
 
   it('click handling with onSelect prop', () => {
@@ -158,36 +156,31 @@ describe('MenuItem', () => {
 
     let node = ReactDOM.findDOMNode(instance);
 
+    assert.equal(node.getAttribute('href'), '#hi-mom!');
+    assert.equal(node.getAttribute('title'), 'hi mom!');
     assert(node.className.match(/\btest-class\b/));
-    assert.equal(node.getAttribute('href'), null);
-    assert.equal(node.getAttribute('title'), null);
-
-    let anchorNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
-
-    assert.notOk(anchorNode.className.match(/\btest-class\b/));
-    assert.equal(anchorNode.getAttribute('href'), '#hi-mom!');
-    assert.equal(anchorNode.getAttribute('title'), 'hi mom!');
+    assert(node.className.match(/\bdropdown-item\b/));
   });
 
-  it('Should set target attribute on anchor', () => {
+  it('Should set target attribute', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <MenuItem target="_blank">
         Title
       </MenuItem>
     );
 
-    let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
-    assert.equal(anchor.getAttribute('target'), '_blank');
+    let node = ReactDOM.findDOMNode(instance);
+    assert.equal(node.getAttribute('target'), '_blank');
   });
 
-  it('should output an li', () => {
+  it('should output an a', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <MenuItem>
         Title
       </MenuItem>
     );
-    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'LI');
-    assert.equal(ReactDOM.findDOMNode(instance).getAttribute('role'), 'presentation');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'A');
+    assert.equal(ReactDOM.findDOMNode(instance).getAttribute('role'), 'menuitem');
   });
 
 });
