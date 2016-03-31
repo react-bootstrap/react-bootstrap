@@ -51,6 +51,45 @@ describe('PanelGroup', () => {
     assert.notOk(panel.state.collapsing);
   });
 
+  it('Should obey onSelect handler', () => {
+    function handleSelect(eventKey, e) {
+      if (e.target.className.indexOf('ignoreme') > -1) {
+        e.selected = false;
+      }
+    }
+
+    let header = (
+      <div>
+        <span className="clickme">Click me</span>
+        <span className="ignoreme">Ignore me</span>
+      </div>
+    );
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <PanelGroup accordion onSelect={handleSelect}>
+        <Panel eventKey="1" header={header}>
+          <div>Panel body</div>
+        </Panel>
+      </PanelGroup>
+    );
+
+    let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
+
+    assert.notOk(panel.state.expanded);
+
+    ReactTestUtils.Simulate.click(
+      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'ignoreme')
+    );
+
+    assert.notOk(panel.state.expanded);
+
+    ReactTestUtils.Simulate.click(
+      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'clickme')
+    );
+
+    assert.ok(panel.state.expanded);
+  });
+
   describe('Web Accessibility', () => {
     let instance, panelBodies, panelGroup, links;
 
