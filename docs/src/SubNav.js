@@ -34,7 +34,7 @@ const SubNav = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
+        this.props.onSelect(this.props.eventKey, e);
       }
     }
   },
