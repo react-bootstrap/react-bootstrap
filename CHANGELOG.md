@@ -1,10 +1,10 @@
-## [0.29-rc] \(v0.29.0-alpha.1\)
+## [next] \(v0.29.0-alpha.1\)
 > Unreleased
 
 - **Breaking:** Change `onSelect` signature on `<Panel>` and `<PanelGroup>` to be consistent with other React-Bootstrap components ([#1677])
 - **Breaking:** Remove additional deprecated functionality from `<Nav>` and related components ([#1745])
 
-[0.29-rc]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.0-alpha.0...0.29-rc
+[next]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.0-alpha.0...next
 [#1677]: https://github.com/react-bootstrap/react-bootstrap/pull/1677
 [#1745]: https://github.com/react-bootstrap/react-bootstrap/pull/1745
 
