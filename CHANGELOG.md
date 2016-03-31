@@ -4,8 +4,9 @@
 - **Feature:** Support `<Breadcrumb.Item>` in addition to `<BreadcrumbItem>` for breadcrumb items ([#1722])
 - **Feature:** Add `<Carousel.Caption>` for carousel captions ([#1734])
 - **Feature:** Support `<Carousel.Item>` in addition to `<CarouselItem>` for carousel items ([#1740])
-- **Bugfix:** Properly handle `style` on nested `<ProgressBar>` ([#1719])
+- **Bugfix:** Support `style` on nested `<ProgressBar>` ([#1719])
 - **Bugfix:** Fix CommonJS export for `<Media>` ([#1737])
+- **Bugfix:** Support `className` and `style` on `<MenuItem header>` and `<MenuItem divider>` ([#1748])
 
 [HEAD]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.4...HEAD
 [#1719]: https://github.com/react-bootstrap/react-bootstrap/pull/1719
@@ -13,6 +14,7 @@
 [#1734]: https://github.com/react-bootstrap/react-bootstrap/pull/1734
 [#1737]: https://github.com/react-bootstrap/react-bootstrap/pull/1737
 [#1740]: https://github.com/react-bootstrap/react-bootstrap/pull/1740
+[#1748]: https://github.com/react-bootstrap/react-bootstrap/pull/1748
 
 
 ## [v0.28.4]
@@ -20,9 +22,9 @@
 
 - **Feature:** Add `componentClass` on `<FormControls.Static>` ([#1653])
 - **Feature:** Add transition hooks on collapsible `<Panel>` ([#1664])
-- **Feature:** Add `className` on `<MenuItem divider>` ([#1682])
-- **Feature:** Add `className` on `<Navbar.Header>` ([#1695])
 - **Feature:** Add `<Media>` and related components ([#1707])
+- **Bugfix:** Support `className` on `<MenuItem divider>` ([#1682])
+- **Bugfix:** Support `className` on `<Navbar.Header>` ([#1695])
 
 [v0.28.4]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.3...v0.28.4
 [#1653]: https://github.com/react-bootstrap/react-bootstrap/pull/1653
