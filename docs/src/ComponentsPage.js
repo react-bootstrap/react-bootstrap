@@ -111,8 +111,8 @@ const ComponentsPage = React.createClass({
     return this.refs.main;
   },
 
-  handleNavItemSelect(key, href) {
-    window.location = href;
+  handleNavItemSelect(key, e) {
+    window.location = e.target.href;
   },
 
   componentDidMount() {
