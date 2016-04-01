@@ -35,6 +35,8 @@
     "Label": false,
     "ListGroup": false,
     "ListGroupItem": false,
+    "ListGroupItemHeading": false,
+    "ListGroupItemText": false,
     "Media": false,
     "MenuItem": false,
     "Modal": false,

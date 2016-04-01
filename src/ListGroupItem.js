@@ -1,103 +1,52 @@
 import classNames from 'classnames';
-import React, { cloneElement } from 'react';
+import React from 'react';
+
+
+import OldListGroupItem from './deprecated/ListGroupItem';
+import deprecated from 'react-prop-types/lib/deprecated';
 
 import { State } from './styleMaps';
 import {
-  bsStyles, bsClass, getClassSet, prefix,
+  bsStyles, bsClass, getClassSet,
 } from './utils/bootstrapUtils';
 
 class ListGroupItem extends React.Component {
 
-
   render() {
     let classes = getClassSet(this.props);
+
+    let { componentClass, header } = this.props;
+    const ComponentClass = componentClass || 'span';
+
+    if (header) {
+      return <OldListGroupItem {...this.props} />;
+    }
 
     classes.active = this.props.active;
     classes.disabled = this.props.disabled;
 
-    if (this.props.href) {
-      return this.renderAnchor(classes);
-    } else if (this.props.onClick) {
-      return this.renderButton(classes);
-    } else if (this.props.listItem) {
-      return this.renderLi(classes);
-    }
+    let className = classNames(this.props.className, classes);
 
-    return this.renderSpan(classes);
-  }
+    const extendedProps = {
+      button: {type: 'button'}
+    };
 
-  renderLi(classes) {
+    let componentClassProps = Object.assign({}, this.props, { className }, extendedProps[componentClass]);
+
     return (
-      <li
-        {...this.props} className={classNames(this.props.className, classes)}>
-        {this.props.header ? this.renderStructuredContent() : this.props.children}
-      </li>
-    );
-  }
-
-  renderAnchor(classes) {
-    return (
-      <a
-        {...this.props}
-        className={classNames(this.props.className, classes)}
-      >
-        {this.props.header ? this.renderStructuredContent() : this.props.children}
-      </a>
-    );
-  }
-
-  renderButton(classes) {
-    return (
-      <button
-        type="button"
-        {...this.props}
-        className={classNames(this.props.className, classes)}>
-        {this.props.header ? this.renderStructuredContent() : this.props.children}
-      </button>
-    );
-  }
-
-  renderSpan(classes) {
-    return (
-      <span
-        {...this.props} className={classNames(this.props.className, classes)}>
-        {this.props.header ? this.renderStructuredContent() : this.props.children}
-      </span>
-    );
-  }
-
-  renderStructuredContent() {
-    let header;
-    let headingClass = prefix(this.props, 'heading');
-
-    if (React.isValidElement(this.props.header)) {
-      header = cloneElement(this.props.header, {
-        key: 'header',
-        className: classNames(this.props.header.props.className, headingClass)
-      });
-    } else {
-      header = (
-        <h4 key="header" className={headingClass}>
-          {this.props.header}
-        </h4>
-      );
-    }
-
-    let content = (
-      <p key="content" className={prefix(this.props, 'text')}>
+      <ComponentClass {...componentClassProps}>
         {this.props.children}
-      </p>
+      </ComponentClass>
     );
-
-    return [header, content];
   }
 }
 
 ListGroupItem.propTypes = {
   className: React.PropTypes.string,
+  componentClass: React.PropTypes.string,
   active: React.PropTypes.any,
   disabled: React.PropTypes.any,
-  header: React.PropTypes.node,
+  header: deprecated(React.PropTypes.node, 'Use the `ListGroupItemHeading` component'),
   listItem: React.PropTypes.bool,
   onClick: React.PropTypes.func,
   eventKey: React.PropTypes.any,

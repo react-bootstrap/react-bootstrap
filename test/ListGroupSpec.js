@@ -11,7 +11,7 @@ describe('ListGroup', () => {
 
     it('Should output a "div" with the class "list-group"', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <ListGroup/>
+        <ListGroup componentClass="div" />
       );
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
       assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
@@ -45,7 +45,7 @@ describe('ListGroup', () => {
     it('Should output a "ul" when single "ListGroupItem" child is a list item', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup>
-          <ListGroupItem>Only Child</ListGroupItem>
+          <ListGroupItem componentClass="li">Only Child</ListGroupItem>
         </ListGroup>
       );
 
@@ -56,7 +56,7 @@ describe('ListGroup', () => {
     it('Should output a "div" when single "ListGroupItem" child is an anchor', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup>
-          <ListGroupItem href="#test">Only Child</ListGroupItem>
+          <ListGroupItem componentClass="a" href="#test">Only Child</ListGroupItem>
         </ListGroup>
       );
 
@@ -101,8 +101,8 @@ describe('ListGroup', () => {
     it('Should output a "ul" when children are list items', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup>
-          <ListGroupItem>1st Child</ListGroupItem>
-          <ListGroupItem>2nd Child</ListGroupItem>
+          <ListGroupItem componentClass="li">1st Child</ListGroupItem>
+          <ListGroupItem componentClass="li">2nd Child</ListGroupItem>
         </ListGroup>
       );
       assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
@@ -115,8 +115,8 @@ describe('ListGroup', () => {
     it('Should output a "div" when "ListGroupItem" children are anchors and spans', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup>
-          <ListGroupItem href="#test">1st Child</ListGroupItem>
-          <ListGroupItem>2nd Child</ListGroupItem>
+          <ListGroupItem componentClass="a" href="#test">1st Child</ListGroupItem>
+          <ListGroupItem componentClass="span">2nd Child</ListGroupItem>
         </ListGroup>
       );
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
@@ -129,8 +129,8 @@ describe('ListGroup', () => {
     it('Should output a "div" when "ListGroupItem" children have an onClick handler', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup>
-          <ListGroupItem onClick={() => null}>1st Child</ListGroupItem>
-          <ListGroupItem>2nd Child</ListGroupItem>
+          <ListGroupItem onClick={() => null} componentClass="button">1st Child</ListGroupItem>
+          <ListGroupItem componentClass="span">2nd Child</ListGroupItem>
         </ListGroup>
       );
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
@@ -190,7 +190,7 @@ describe('ListGroup', () => {
           componentClass='ul'>
           <CustomComponent>Custom Child</CustomComponent>
           <CustomComponent>Custom Child</CustomComponent>
-          <ListGroupItem listItem>RB Child</ListGroupItem>
+          <ListGroupItem listItem componentClass="li">RB Child</ListGroupItem>
         </ListGroup>
       );
       assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));

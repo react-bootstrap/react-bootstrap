@@ -31,6 +31,8 @@ export Jumbotron from './Jumbotron';
 export Label from './Label';
 export ListGroup from './ListGroup';
 export ListGroupItem from './ListGroupItem';
+export ListGroupItemHeading from './ListGroupItemHeading';
+export ListGroupItemText from './ListGroupItemText';
 export Media from './Media';
 export MenuItem from './MenuItem';
 export Modal from './Modal';
