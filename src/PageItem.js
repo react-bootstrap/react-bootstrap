@@ -1,16 +1,16 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+
 import SafeAnchor from './SafeAnchor';
+import createChainedFunction from './utils/createChainedFunction';
 
 const PageItem = React.createClass({
 
   propTypes: {
-    href: React.PropTypes.string,
-    target: React.PropTypes.string,
-    title: React.PropTypes.string,
     disabled: React.PropTypes.bool,
     previous: React.PropTypes.bool,
     next: React.PropTypes.bool,
+    onClick: React.PropTypes.func,
     onSelect: React.PropTypes.func,
     eventKey: React.PropTypes.any
   },
@@ -24,24 +24,22 @@ const PageItem = React.createClass({
   },
 
   render() {
-    let classes = {
-      'disabled': this.props.disabled,
-      'previous': this.props.previous,
-      'next': this.props.next
-    };
+    const {
+      disabled, previous, next, onClick, className, style, ...props,
+    } = this.props;
+
+    delete props.onSelect;
+    delete props.eventKey;
 
     return (
       <li
-        {...this.props}
-        className={classNames(this.props.className, classes)}
+        className={classNames(className, { disabled, previous, next })}
+        style={style}
       >
         <SafeAnchor
-          href={this.props.href}
-          title={this.props.title}
-          target={this.props.target}
-          onClick={this.handleSelect}>
-          {this.props.children}
-        </SafeAnchor>
+          {...props}
+          onClick={createChainedFunction(onClick, this.handleSelect)}
+        />
       </li>
     );
   },
