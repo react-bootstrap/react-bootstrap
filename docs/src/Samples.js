@@ -75,7 +75,6 @@ export default {
   PaginationAdvanced:            require('fs').readFileSync(__dirname + '/../examples/PaginationAdvanced.js', 'utf8'),
   AlertBasic:                    require('fs').readFileSync(__dirname + '/../examples/AlertBasic.js', 'utf8'),
   AlertDismissable:              require('fs').readFileSync(__dirname + '/../examples/AlertDismissable.js', 'utf8'),
-  AlertAutoDismissable:          require('fs').readFileSync(__dirname + '/../examples/AlertAutoDismissable.js', 'utf8'),
   CarouselUncontrolled:          require('fs').readFileSync(__dirname + '/../examples/CarouselUncontrolled.js', 'utf8'),
   CarouselControlled:            require('fs').readFileSync(__dirname + '/../examples/CarouselControlled.js', 'utf8'),
   GridBasic:                     require('fs').readFileSync(__dirname + '/../examples/GridBasic.js', 'utf8'),

@@ -9,6 +9,9 @@ let Alert = React.createClass({
 
   propTypes: {
     onDismiss: React.PropTypes.func,
+    /**
+     * @private
+     */
     dismissAfter: deprecated(React.PropTypes.number, 'No longer supported.'),
     closeLabel: React.PropTypes.string
   },
