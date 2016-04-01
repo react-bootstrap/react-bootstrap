@@ -9,6 +9,7 @@ export ButtonInput from './ButtonInput';
 export ButtonToolbar from './ButtonToolbar';
 export Carousel from './Carousel';
 export CarouselItem from './CarouselItem';
+export Clearfix from './Clearfix';
 export Col from './Col';
 export Dropdown from './Dropdown';
 export DropdownButton from './DropdownButton';

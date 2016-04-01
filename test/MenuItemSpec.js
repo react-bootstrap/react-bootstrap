@@ -15,11 +15,18 @@ describe('MenuItem', () => {
     node.getAttribute('role').should.equal('separator');
   });
 
-  it('renders divider className', () => {
-    const instance = ReactTestUtils.renderIntoDocument(<MenuItem divider className="foo bar" />);
+  it('renders divider className and style', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem
+        divider
+        className="foo bar"
+        style={{ height: '100px' }}
+      />
+    );
     const node = ReactDOM.findDOMNode(instance);
 
     node.className.should.match(/\bdivider foo bar\b/);
+    node.style.height.should.equal('100px');
   });
 
   it('renders divider not children', () => {
@@ -42,6 +49,22 @@ describe('MenuItem', () => {
     node.className.should.match(/\bdropdown-header\b/);
     node.getAttribute('role').should.equal('heading');
     node.innerHTML.should.match(/Header Text/);
+  });
+
+  it('renders header className and style', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem
+        header
+        className="foo bar"
+        style={{ height: '100px' }}
+      >
+        Header Text
+      </MenuItem>
+    );
+    const node = ReactDOM.findDOMNode(instance);
+
+    node.className.should.match(/\bdropdown-header foo bar\b/);
+    node.style.height.should.equal('100px');
   });
 
   it('renders menu item link', (done) => {
@@ -151,6 +174,7 @@ describe('MenuItem', () => {
         className="test-class"
         href="#hi-mom!"
         title="hi mom!"
+        style={{ height: 100 }}
       >
         Title
       </MenuItem>
@@ -159,6 +183,7 @@ describe('MenuItem', () => {
     let node = ReactDOM.findDOMNode(instance);
 
     assert(node.className.match(/\btest-class\b/));
+    assert.equal(node.style.height, '100px');
     assert.equal(node.getAttribute('href'), null);
     assert.equal(node.getAttribute('title'), null);
 

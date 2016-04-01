@@ -9,14 +9,12 @@ let NavbarHeader = React.createClass({
   },
 
   render() {
-    let { className, children, ...props } = this.props;
+    let { className, ...props } = this.props;
     let { $bs_navbar_bsClass: bsClass = 'navbar' } = this.context;
     let headerClasses = tbsUtils.prefix({ bsClass }, 'header');
 
     return (
-      <div className={classNames(className, headerClasses)}>
-        { children }
-      </div>
+      <div {...props} className={classNames(className, headerClasses)} />
     );
   }
 });

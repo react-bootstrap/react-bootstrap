@@ -28,18 +28,27 @@ class MenuItem extends React.Component {
   }
 
   render() {
-    let headerClass = bootstrapUtils.prefix(this.props, 'header');
-
     if (this.props.divider) {
       return (
-        <li role="separator"
-          className={classnames('divider', this.props.className)} />
+        <li
+          role="separator"
+          className={classnames('divider', this.props.className)}
+          style={this.props.style}
+        />
       );
     }
 
     if (this.props.header) {
+      const headerClass = bootstrapUtils.prefix(this.props, 'header');
+
       return (
-        <li role="heading" className={headerClass}>{this.props.children}</li>
+        <li
+          role="heading"
+          className={classnames(headerClass, this.props.className)}
+          style={this.props.style}
+        >
+          {this.props.children}
+        </li>
       );
     }
 

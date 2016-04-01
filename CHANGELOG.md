@@ -8,6 +8,7 @@
 [#1677]: https://github.com/react-bootstrap/react-bootstrap/pull/1677
 [#1745]: https://github.com/react-bootstrap/react-bootstrap/pull/1745
 
+
 ## [v0.29.0-alpha.0]
 > 2016-03-24
 
@@ -18,11 +19,34 @@
 - **Deprecation:** Deprecate horizontal layout support in `<Tabs>` ([#1607])
 - **Deprecation:** Deprecate `dismissAfter` on `<Alert>` ([#1636])
 
-[v0.29.0-alpha.0]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.4...v0.29.0-alpha.0
+[v0.29.0-alpha.0]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.5...v0.29.0-alpha.0
 [#1604]: https://github.com/react-bootstrap/react-bootstrap/pull/1604
 [#1607]: https://github.com/react-bootstrap/react-bootstrap/pull/1607
 [#1608]: https://github.com/react-bootstrap/react-bootstrap/pull/1608
 [#1636]: https://github.com/react-bootstrap/react-bootstrap/pull/1636
+
+
+## [v0.28.5]
+> 2016-04-01
+
+- **Feature:** Support `<Breadcrumb.Item>` in addition to `<BreadcrumbItem>` for breadcrumb items ([#1722])
+- **Feature:** Add `<Carousel.Caption>` for carousel captions ([#1734])
+- **Feature:** Support `<Carousel.Item>` in addition to `<CarouselItem>` for carousel items ([#1740])
+- **Feature:** Add `<Clearfix>` for grids ([#1736])
+- **Bugfix:** Support `style` on nested `<ProgressBar>` ([#1719])
+- **Bugfix:** Fix CommonJS export for `<Media>` ([#1737])
+- **Bugfix:** Support `className` and `style` on `<MenuItem header>` and `<MenuItem divider>` ([#1748])
+- **Bugfix:** Support extra props for `<Navbar.Header>` and `<Navbar.Toggle>` ([#1754])
+
+[v0.28.5]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.4...v0.28.5
+[#1719]: https://github.com/react-bootstrap/react-bootstrap/pull/1719
+[#1722]: https://github.com/react-bootstrap/react-bootstrap/pull/1722
+[#1734]: https://github.com/react-bootstrap/react-bootstrap/pull/1734
+[#1736]: https://github.com/react-bootstrap/react-bootstrap/pull/1736
+[#1737]: https://github.com/react-bootstrap/react-bootstrap/pull/1737
+[#1740]: https://github.com/react-bootstrap/react-bootstrap/pull/1740
+[#1748]: https://github.com/react-bootstrap/react-bootstrap/pull/1748
+[#1754]: https://github.com/react-bootstrap/react-bootstrap/pull/1754
 
 
 ## [v0.28.4]
@@ -30,9 +54,9 @@
 
 - **Feature:** Add `componentClass` on `<FormControls.Static>` ([#1653])
 - **Feature:** Add transition hooks on collapsible `<Panel>` ([#1664])
-- **Feature:** Add `className` on `<MenuItem divider>` ([#1682])
-- **Feature:** Add `className` on `<Navbar.Header>` ([#1695])
 - **Feature:** Add `<Media>` and related components ([#1707])
+- **Bugfix:** Support `className` on `<MenuItem divider>` ([#1682])
+- **Bugfix:** Support `className` on `<Navbar.Header>` ([#1695])
 
 [v0.28.4]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.3...v0.28.4
 [#1653]: https://github.com/react-bootstrap/react-bootstrap/pull/1653

@@ -139,12 +139,13 @@ const ComponentsPage = React.createClass({
 
     for (const href of Object.keys(this.afterSections)) {
       if (!this.afterSections[href]) {
-        this.setState({ activeNavItemHref });
-        return;
+        break;
       }
 
       activeNavItemHref = href;
     }
+
+    this.setState({ activeNavItemHref });
   },
 
   renderScrollSpy(href) {
@@ -406,7 +407,7 @@ const ComponentsPage = React.createClass({
                         <NavItem href={sections.thumbnails}>Thumbnails</NavItem>
                         <NavItem href={sections.embed}>Responsive embed</NavItem>
                         <NavItem href={sections.carousels}>Carousels</NavItem>
-                        <NavItem href={sections.mediaObjects}>Media Objects</NavItem>
+                        <NavItem href={sections.mediaObjects}>Media objects</NavItem>
                       </SubNav>
 
                       <SubNav href={sections.misc} text="Miscellaneous">

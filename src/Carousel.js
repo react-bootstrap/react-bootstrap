@@ -4,7 +4,10 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 import Glyphicon from './Glyphicon';
 import tbsUtils from './utils/bootstrapUtils';
 
-const Carousel = React.createClass({
+import Caption from './CarouselCaption';
+import Item from './CarouselItem';
+
+let Carousel = React.createClass({
 
   propTypes: {
     slide: React.PropTypes.bool,
@@ -300,5 +303,7 @@ const Carousel = React.createClass({
     }
   }
 });
+
+Carousel = Object.assign(Carousel, { Caption, Item });
 
 export default Carousel;

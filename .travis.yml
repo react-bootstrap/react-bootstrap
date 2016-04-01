@@ -12,3 +12,4 @@ before_install:
 branches:
   only:
     - master
+    - next

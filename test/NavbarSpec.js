@@ -181,6 +181,30 @@ describe('Navbar', () => {
     expect(toggleSpy).to.be.calledWith(true);
   });
 
+  it('Should support custom props', () => {
+    let clickSpy = sinon.spy();
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Toggle
+            onClick={clickSpy}
+            className="foo bar"
+            style={{ height: 100 }}
+          />
+        </Navbar.Header>
+      </Navbar>
+    );
+
+    let toggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
+
+    expect(toggle.className).to.match(/foo bar/);
+    expect(toggle.style.height).to.equal('100px');
+
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(toggle));
+    expect(clickSpy).to.have.been.called;
+  });
+
   it('Should render collapse', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
