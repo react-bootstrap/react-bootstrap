@@ -11,8 +11,10 @@ export Carousel from './Carousel';
 export CarouselItem from './CarouselItem';
 export Clearfix from './Clearfix';
 export Col from './Col';
+export Collapse from './Collapse';
 export Dropdown from './Dropdown';
 export DropdownButton from './DropdownButton';
+export Fade from './Fade';
 export Glyphicon from './Glyphicon';
 export Grid from './Grid';
 export Image from './Image';
@@ -22,8 +24,8 @@ export Jumbotron from './Jumbotron';
 export Label from './Label';
 export ListGroup from './ListGroup';
 export ListGroupItem from './ListGroupItem';
-export MenuItem from './MenuItem';
 export Media from './Media';
+export MenuItem from './MenuItem';
 export Modal from './Modal';
 export ModalBody from './ModalBody';
 export ModalFooter from './ModalFooter';
@@ -49,25 +51,14 @@ export Row from './Row';
 export SafeAnchor from './SafeAnchor';
 export SplitButton from './SplitButton';
 export Tab from './Tab';
+export TabContainer from './TabContainer';
+export TabContent from './TabContent';
 export Table from './Table';
+export TabPane from './TabPane';
 export Tabs from './Tabs';
 export Thumbnail from './Thumbnail';
 export Tooltip from './Tooltip';
 export Well from './Well';
 
-export Collapse from './Collapse';
-export Fade from './Fade';
-
 export * as FormControls from './FormControls';
-
-import childrenValueInputValidation from './utils/childrenValueInputValidation';
-import createChainedFunction from './utils/createChainedFunction';
-import ValidComponentChildren from './utils/ValidComponentChildren';
-import bootstrapUtils from './utils/bootstrapUtils';
-
-export const utils = {
-  bootstrapUtils,
-  childrenValueInputValidation,
-  createChainedFunction,
-  ValidComponentChildren
-};
+export * as utils from './utils';
