@@ -6,6 +6,7 @@ const classNames = require('classnames');
 const React = require('react');
 const ReactDOM = require('react-dom');
 
+// Keep these in sync with src/index.js.
 const Accordion = require('../../src/Accordion');
 const Alert = require('../../src/Alert');
 const Badge = require('../../src/Badge');
@@ -21,13 +22,13 @@ const Col = require('../../src/Col');
 const Collapse = require('../../src/Collapse');
 const Dropdown = require('../../src/Dropdown');
 const DropdownButton = require('../../src/DropdownButton');
-const DropdownMenu = require('../../src/DropdownMenu');
 const Fade = require('../../src/Fade');
 const FormControls = require('../../src/FormControls');
 const Glyphicon = require('../../src/Glyphicon');
 const Grid = require('../../src/Grid');
-const Input = require('../../src/Input');
 const Image = require('../../src/Image');
+const Input = require('../../src/Input');
+const Interpolate = require('../../src/Interpolate');
 const Jumbotron = require('../../src/Jumbotron');
 const Label = require('../../src/Label');
 const ListGroup = require('../../src/ListGroup');
@@ -38,8 +39,8 @@ const Modal = require('../../src/Modal');
 const Nav = require('../../src/Nav');
 const Navbar = require('../../src/Navbar');
 const NavbarBrand = require('../../src/NavbarBrand');
-const NavItem = require('../../src/NavItem');
 const NavDropdown = require('../../src/NavDropdown');
+const NavItem = require('../../src/NavItem');
 const Overlay = require('../../src/Overlay');
 const OverlayTrigger = require('../../src/OverlayTrigger');
 const PageHeader = require('../../src/PageHeader');
@@ -52,13 +53,14 @@ const Popover = require('../../src/Popover');
 const ProgressBar = require('../../src/ProgressBar');
 const ResponsiveEmbed = require('../../src/ResponsiveEmbed');
 const Row = require('../../src/Row');
+const SafeAnchor = require('../../src/SafeAnchor');
 const SplitButton = require('../../src/SplitButton');
 const Tab = require('../../src/Tab');
-const Table = require('../../src/Table');
-const Tabs = require('../../src/Tabs');
 const TabContainer = require('../../src/TabContainer');
 const TabContent = require('../../src/TabContent');
+const Table = require('../../src/Table');
 const TabPane = require('../../src/TabPane');
+const Tabs = require('../../src/Tabs');
 const Thumbnail = require('../../src/Thumbnail');
 const Tooltip = require('../../src/Tooltip');
 const Well = require('../../src/Well');
@@ -66,10 +68,6 @@ const Well = require('../../src/Well');
 
 import babel from 'babel-core/browser';
 import CodeExample from './CodeExample';
-
-// This is only used for the ReactPlayground component, not for any of the
-// examples, so it's fine to import like this.
-import SafeAnchor from '../../src/SafeAnchor';
 
 const IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)
