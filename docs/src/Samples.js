@@ -79,6 +79,8 @@ export default {
   CarouselUncontrolled:          require('fs').readFileSync(__dirname + '/../examples/CarouselUncontrolled.js', 'utf8'),
   CarouselControlled:            require('fs').readFileSync(__dirname + '/../examples/CarouselControlled.js', 'utf8'),
   GridBasic:                     require('fs').readFileSync(__dirname + '/../examples/GridBasic.js', 'utf8'),
+  GridWithClearfix:              require('fs').readFileSync(__dirname + '/../examples/GridWithClearfix.js', 'utf8'),
+  GridWithoutClearfix:           require('fs').readFileSync(__dirname + '/../examples/GridWithoutClearfix.js', 'utf8'),
   ThumbnailAnchor:               require('fs').readFileSync(__dirname + '/../examples/ThumbnailAnchor.js', 'utf8'),
   ThumbnailDiv:                  require('fs').readFileSync(__dirname + '/../examples/ThumbnailDiv.js', 'utf8'),
   ListGroupCustom:               require('fs').readFileSync(__dirname + '/../examples/ListGroupCustom.js', 'utf8'),
