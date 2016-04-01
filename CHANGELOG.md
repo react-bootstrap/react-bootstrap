@@ -1,20 +1,24 @@
-## [HEAD] \(v0.28.5\)
-> Unreleased
+## [v0.28.5]
+> 2016-04-01
 
 - **Feature:** Support `<Breadcrumb.Item>` in addition to `<BreadcrumbItem>` for breadcrumb items ([#1722])
 - **Feature:** Add `<Carousel.Caption>` for carousel captions ([#1734])
 - **Feature:** Support `<Carousel.Item>` in addition to `<CarouselItem>` for carousel items ([#1740])
+- **Feature:** Add `<Clearfix>` for grids ([#1736])
 - **Bugfix:** Support `style` on nested `<ProgressBar>` ([#1719])
 - **Bugfix:** Fix CommonJS export for `<Media>` ([#1737])
 - **Bugfix:** Support `className` and `style` on `<MenuItem header>` and `<MenuItem divider>` ([#1748])
+- **Bugfix:** Support extra props for `<Navbar.Header>` and `<Navbar.Toggle>` ([#1754])
 
-[HEAD]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.4...HEAD
+[v0.28.5]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.4...v0.28.5
 [#1719]: https://github.com/react-bootstrap/react-bootstrap/pull/1719
 [#1722]: https://github.com/react-bootstrap/react-bootstrap/pull/1722
 [#1734]: https://github.com/react-bootstrap/react-bootstrap/pull/1734
+[#1736]: https://github.com/react-bootstrap/react-bootstrap/pull/1736
 [#1737]: https://github.com/react-bootstrap/react-bootstrap/pull/1737
 [#1740]: https://github.com/react-bootstrap/react-bootstrap/pull/1740
 [#1748]: https://github.com/react-bootstrap/react-bootstrap/pull/1748
+[#1754]: https://github.com/react-bootstrap/react-bootstrap/pull/1754
 
 
 ## [v0.28.4]
