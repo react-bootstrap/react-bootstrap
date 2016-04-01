@@ -6,7 +6,7 @@ const ControlledCarousel = React.createClass({
     };
   },
 
-  handleSelect(selectedIndex, selectedDirection) {
+  handleSelect(selectedIndex, e, selectedDirection) {
     alert('selected=' + selectedIndex + ', direction=' + selectedDirection);
     this.setState({
       index: selectedIndex,

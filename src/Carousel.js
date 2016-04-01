@@ -93,7 +93,7 @@ let Carousel = React.createClass({
       index = 0;
     }
 
-    this.handleSelect(index, 'next');
+    this.handleSelect(index, e, 'next');
   },
 
   prev(e) {
@@ -110,7 +110,7 @@ let Carousel = React.createClass({
       index = ValidComponentChildren.count(this.props.children) - 1;
     }
 
-    this.handleSelect(index, 'prev');
+    this.handleSelect(index, e, 'prev');
   },
 
   pause() {
@@ -213,7 +213,7 @@ let Carousel = React.createClass({
       <li
         key={index}
         className={className}
-        onClick={this.handleSelect.bind(this, index, null)} />
+        onClick={e => this.handleSelect(index, e, null)} />
     );
   },
 
@@ -275,7 +275,7 @@ let Carousel = React.createClass({
     );
   },
 
-  handleSelect(index, direction) {
+  handleSelect(index, e, direction) {
     clearTimeout(this.timeout);
 
     if (this.isMounted()) {
@@ -283,7 +283,7 @@ let Carousel = React.createClass({
       direction = direction || this.getDirection(previousActiveIndex, index);
 
       if (this.props.onSelect) {
-        this.props.onSelect(index, direction);
+        this.props.onSelect(index, e, direction);
       }
 
       if (this.props.activeIndex == null && index !== previousActiveIndex) {

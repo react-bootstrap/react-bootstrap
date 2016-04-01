@@ -23,8 +23,8 @@ describe('Pagination', () => {
   });
 
   it('Should call onSelect when page button is selected', (done) => {
-    function onSelect(event, selectedEvent) {
-      assert.equal(selectedEvent.eventKey, 2);
+    function onSelect(eventKey) {
+      assert.equal(eventKey, 2);
       done();
     }
 
@@ -208,8 +208,8 @@ describe('Pagination', () => {
       }
     }
 
-    function onSelect(event, selectedEvent) {
-      assert.equal(selectedEvent.eventKey, 3);
+    function onSelect(eventKey) {
+      assert.equal(eventKey, 3);
       done();
     }
 

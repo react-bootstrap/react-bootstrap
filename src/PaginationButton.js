@@ -1,16 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
-import createSelectedEvent from './utils/createSelectedEvent';
 import elementType from 'react-prop-types/lib/elementType';
 
 const PaginationButton = React.createClass({
 
   propTypes: {
     className: React.PropTypes.string,
-    eventKey: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ]),
+    eventKey: React.PropTypes.any,
     onSelect: React.PropTypes.func,
     disabled: React.PropTypes.bool,
     active: React.PropTypes.bool,
@@ -33,8 +29,7 @@ const PaginationButton = React.createClass({
     }
 
     if (this.props.onSelect) {
-      let selectedEvent = createSelectedEvent(this.props.eventKey);
-      this.props.onSelect(event, selectedEvent);
+      this.props.onSelect(this.props.eventKey, event);
     }
   },
 

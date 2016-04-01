@@ -50,9 +50,8 @@ describe('Carousel', () => {
   });
 
   it('Should call onSelect when indicator selected', (done) => {
-    function onSelect(index, direction) {
+    function onSelect(index) {
       assert.equal(index, 0);
-      assert.equal(direction, 'prev');
       done();
     }
 

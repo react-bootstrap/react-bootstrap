@@ -33,7 +33,8 @@ const PageItem = React.createClass({
     return (
       <li
         {...this.props}
-        className={classNames(this.props.className, classes)}>
+        className={classNames(this.props.className, classes)}
+      >
         <SafeAnchor
           href={this.props.href}
           title={this.props.title}
@@ -50,7 +51,7 @@ const PageItem = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
+        this.props.onSelect(this.props.eventKey, e);
       }
     }
   }
