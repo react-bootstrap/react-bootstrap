@@ -28,7 +28,6 @@ const NavMain = React.createClass({
   },
 
   render() {
-    let brand = <Link to="/" className="navbar-brand">React-Bootstrap</Link>;
     let links = Object.keys(NAV_LINKS).map(this.renderNavItem).concat([
       <li key="github-link">
         <a href="https://github.com/react-bootstrap/react-bootstrap" target="_blank">GitHub</a>
@@ -42,9 +41,12 @@ const NavMain = React.createClass({
         role="banner"
       >
         <Navbar.Header>
-          {brand}
+          <Navbar.Brand>
+            <Link to="/">React-Bootstrap</Link>
+          </Navbar.Brand>
+          <Navbar.Toggle />
         </Navbar.Header>
-        <Navbar.Collapse className="bs-navbar-collapse" >
+        <Navbar.Collapse className="bs-navbar-collapse">
           <Nav role="navigation" id="top">
             {links}
           </Nav>
