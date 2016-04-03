@@ -1,8 +1,10 @@
-import React, { cloneElement, PropTypes } from 'react';
-import Interpolate from './Interpolate';
-import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
-import { State } from './styleMaps';
 import classNames from 'classnames';
+import React, { cloneElement, PropTypes } from 'react';
+
+import Interpolate from './Interpolate';
+import { State } from './styleMaps';
+import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
+import deprecationWarning from './utils/deprecationWarning';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 /**
@@ -103,23 +105,32 @@ class ProgressBar extends React.Component {
   }
 
   renderLabel(percentage) {
-    const InterpolateClass = this.props.interpolateClass || Interpolate;
+    const { interpolateClass, now, min, max, bsStyle, label } = this.props;
+    const InterpolateClass = interpolateClass || Interpolate;
+
+    const { REGEXP } = InterpolateClass;
+    if (REGEXP && REGEXP.exec(label)) {
+      deprecationWarning(
+        'String interpolation in <ProgressBar label>',
+        'ES2015 template strings or other patterns'
+      );
+    }
 
     return (
       <InterpolateClass
-        now={this.props.now}
-        min={this.props.min}
-        max={this.props.max}
+        now={now}
+        min={min}
+        max={max}
         percent={percentage}
-        bsStyle={this.props.bsStyle}>
-        {this.props.label}
+        bsStyle={bsStyle}
+      >
+        {label}
       </InterpolateClass>
     );
   }
 }
 
 ProgressBar.propTypes = {
-  ...ProgressBar.propTypes,
   min: PropTypes.number,
   now: PropTypes.number,
   max: PropTypes.number,
@@ -137,7 +148,6 @@ ProgressBar.propTypes = {
 };
 
 ProgressBar.defaultProps = {
-  ...ProgressBar.defaultProps,
   min: 0,
   max: 100,
   active: false,

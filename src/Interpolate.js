@@ -82,4 +82,6 @@ const Interpolate = React.createClass({
   }
 });
 
+Object.assign(Interpolate, { REGEXP });
+
 export default Interpolate;

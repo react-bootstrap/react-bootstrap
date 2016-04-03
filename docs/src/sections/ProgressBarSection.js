@@ -20,7 +20,6 @@ export default function ProgressBarSection() {
 
       <h2><Anchor id="progress-label">With label</Anchor></h2>
       <p>Add a <code>label</code> prop to show a visible percentage. For low percentages, consider adding a min-width to ensure the label's text is fully visible.</p>
-      <p>The following keys are interpolated with the current values: <code>%(min)s</code>, <code>%(max)s</code>, <code>%(now)s</code>, <code>%(percent)s</code>, <code>%(bsStyle)s</code></p>
       <ReactPlayground codeText={Samples.ProgressBarWithLabel} />
 
       <h2><Anchor id="progress-screenreader-label">Screenreader only label</Anchor></h2>
