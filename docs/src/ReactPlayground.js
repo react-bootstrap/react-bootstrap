@@ -61,12 +61,22 @@ const Tooltip = require('../../src/Tooltip');
 const Well = require('../../src/Well');
 /* eslint-enable */
 
-import babel from 'babel-core/browser';
-import CodeExample from './CodeExample';
+const babel = require('babel-standalone');
+const BABEL_CONFIG = {
+  'presets': ['react', 'es2015', 'stage-1'],
+  'plugins': [
+    'transform-runtime',
+    'transform-decorators-legacy'
+  ]
+};
+
+//import CodeExample from './CodeExample';
+const CodeExample = require('./CodeExample');
 
 // This is only used for the ReactPlayground component, not for any of the
 // examples, so it's fine to import like this.
-import SafeAnchor from '../../src/SafeAnchor';
+//import SafeAnchor from '../../src/SafeAnchor';
+const SafeAnchor = require('../../src/SafeAnchor');
 
 const IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)
@@ -159,7 +169,7 @@ const ReactPlayground = React.createClass({
   getDefaultProps() {
     return {
       transformer(code) {
-        return babel.transform(code).code;
+        return babel.transform(code, BABEL_CONFIG).code;
       }
     };
   },
@@ -189,6 +199,8 @@ const ReactPlayground = React.createClass({
       /* eslint-disable */
       eval(compiledCode);
       /* eslint-enable */
+    } catch(err){
+      console.warn('something is not right', err);
     } finally {
       ReactDOM.render = originalRender;
     }
