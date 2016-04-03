@@ -1,31 +1,42 @@
-const title = (
-  <h3>Panel title</h3>
+const heading = (
+  <Panel.Heading>Panel title</Panel.Heading>
 );
 
 const panelsInstance = (
   <div>
-    <Panel header={title}>
-      Panel content
+    <Panel bsStyle="primary">
+      <Panel.Heading>Panel title</Panel.Heading>
+      <Panel.Body>
+        Panel content
+      </Panel.Body>
     </Panel>
 
-    <Panel header={title} bsStyle="primary">
-      Panel content
+    <Panel bsStyle="success">
+      <Panel.Heading>Panel title</Panel.Heading>
+      <Panel.Body>
+        Panel content
+      </Panel.Body>
     </Panel>
 
-    <Panel header={title} bsStyle="success">
-      Panel content
+    <Panel bsStyle="info">
+      <Panel.Heading>Panel title</Panel.Heading>
+      <Panel.Body>
+        Panel content
+      </Panel.Body>
     </Panel>
 
-    <Panel header={title} bsStyle="info">
-      Panel content
+    <Panel bsStyle="warning">
+      <Panel.Heading>Panel title</Panel.Heading>
+      <Panel.Body>
+        Panel content
+      </Panel.Body>
     </Panel>
 
-    <Panel header={title} bsStyle="warning">
-      Panel content
-    </Panel>
-
-    <Panel header={title} bsStyle="danger">
-      Panel content
+    <Panel bsStyle="danger">
+      <Panel.Heading>Panel title</Panel.Heading>
+      <Panel.Body>
+        Panel content
+      </Panel.Body>
     </Panel>
   </div>
 );

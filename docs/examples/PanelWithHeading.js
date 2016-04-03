@@ -1,14 +1,12 @@
-const title = (
-  <h3>Panel title</h3>
-);
-
 const panelsInstance = (
   <div>
-    <Panel header="Panel heading without title">
-      Panel content
-    </Panel>
-    <Panel header={title}>
-      Panel content
+    <Panel>
+      <Panel.Heading>
+        Panel heading without title
+      </Panel.Heading>
+      <Panel.Body>
+        Panel content
+      </Panel.Body>
     </Panel>
   </div>
 );
