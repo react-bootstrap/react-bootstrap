@@ -3,12 +3,14 @@
 
 - **Breaking:** Change `onSelect` signature on `<Panel>` and `<PanelGroup>` to be consistent with other React-Bootstrap components ([#1677])
 - **Breaking:** Remove additional deprecated functionality from `<Nav>` and related components ([#1745])
+- **Feature/Deprecation:** Deprecate `dialogComponent` in favor of new `dialogComponentClass` on `<Modal>` for consistency with other components ([#1753])
 - **Deprecation:** Deprecate label interpolation (e.g. `label="%(percent)s%"`) in `<ProgressBar>` ([#1751])
 
 [next]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.0-alpha.0...next
 [#1677]: https://github.com/react-bootstrap/react-bootstrap/pull/1677
 [#1745]: https://github.com/react-bootstrap/react-bootstrap/pull/1745
 [#1751]: https://github.com/react-bootstrap/react-bootstrap/pull/1751
+[#1753]: https://github.com/react-bootstrap/react-bootstrap/pull/1753
 
 
 ## [v0.29.0-alpha.0]
