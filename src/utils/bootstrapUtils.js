@@ -15,12 +15,18 @@ function curry(fn) {
   };
 }
 
-export function prefix(props, variant) {
+export function prefix(props, context = {}, variant) {
+  if (arguments.length === 2) {
+    variant = context;
+    context = {};
+  }
+
+  let bsClass = (props.bsClass || context.bsClass || '').trim();
   invariant(
-    props.bsClass != null,
+    bsClass != null,
     'A `bsClass` prop is required for this component'
   );
-  return props.bsClass + (variant ? `-${variant}` : '');
+  return bsClass + (variant ? `-${variant}` : '');
 }
 
 export const bsClass = curry((defaultClass, Component) => {
