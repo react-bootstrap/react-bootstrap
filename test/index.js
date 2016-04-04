@@ -1,5 +1,7 @@
 import 'es5-shim';
 
+import { _resetWarned } from '../src/utils/deprecationWarning';
+
 beforeEach(() => {
   sinon.stub(console, 'error');
 });
@@ -11,6 +13,8 @@ afterEach(function checkNoUnexpectedWarnings() {
     });
     console.error.restore();
   }
+
+  _resetWarned();
 });
 
 describe('Process environment for tests', () => {
