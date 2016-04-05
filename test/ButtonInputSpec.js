@@ -33,11 +33,13 @@ describe('ButtonInput', () => {
   });
 
   it('throws warning about unsupported type', () => {
+    shouldWarn('propType: Invalid');
+    shouldWarn('propType: Invalid');
+    shouldWarn('Failed form propType');
+
     ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" type="password" />
     );
-
-    shouldWarn('propType: Invalid');
   });
 
   it('must not throw warning when bsStyle=danger', () => {
@@ -47,11 +49,11 @@ describe('ButtonInput', () => {
   });
 
   it('throws warning about wrong type for bsStyle=error', () => {
+    shouldWarn('propType: Invalid');
+
     ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" bsStyle="submit" />
     );
-
-    shouldWarn('propType: Invalid');
   });
 
   it('throws a warning if given both children and a value property', () => {

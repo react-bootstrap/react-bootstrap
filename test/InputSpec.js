@@ -46,11 +46,11 @@ describe('Input', () => {
   });
 
   it('throws a warning when type=static', () => {
+    shouldWarn('deprecated');
+
     ReactTestUtils.renderIntoDocument(
       <Input type="static" value="v" />
     );
-
-    shouldWarn('deprecated');
   });
 
   it('renders an input element of given type when type is anything else', () => {

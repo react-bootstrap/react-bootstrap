@@ -56,11 +56,11 @@ describe('FormGroup', () => {
   });
 
   it('throws warning about bsSize when standalone', () => {
+    shouldWarn('Failed propType: bsSize');
+
     ReactTestUtils.renderIntoDocument(
       <FormGroup standalone bsSize="large" />
     );
-
-    shouldWarn('Failed propType: bsSize');
   });
 
   it('renders no form-group class when standalone', () => {
