@@ -1,5 +1,6 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+import deprecated from 'react-prop-types/lib/deprecated';
 
 const Glyphicon = React.createClass({
   propTypes: {
@@ -16,13 +17,15 @@ const Glyphicon = React.createClass({
      * Adds 'form-control-feedback' class
      * @private
      */
-    formControlFeedback: React.PropTypes.bool
+    formControlFeedback: deprecated(
+      React.PropTypes.bool,
+      'Use `<FormControl.Feedback>`.'
+    ),
   },
 
   getDefaultProps() {
     return {
       bsClass: 'glyphicon',
-      formControlFeedback: false
     };
   },
 

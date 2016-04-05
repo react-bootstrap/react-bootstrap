@@ -16,10 +16,14 @@ const Badge = React.createClass({
   },
 
   hasContent() {
-    return ValidComponentChildren.hasValidComponent(this.props.children) ||
-      (React.Children.count(this.props.children) > 1) ||
-      (typeof this.props.children === 'string') ||
-      (typeof this.props.children === 'number');
+    const { children } = this.props;
+
+    return (
+      ValidComponentChildren.count(children) > 0 ||
+      React.Children.count(children) > 1 ||
+      typeof children === 'string' ||
+      typeof children === 'number'
+    );
   },
 
   render() {

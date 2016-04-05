@@ -43,7 +43,7 @@ describe('Tabs', () => {
 
     let tabs = instance.refs.inner.refs.tabs;
 
-    assert.equal(ValidComponentChildren.numberOf(tabs.props.children), 2);
+    assert.equal(ValidComponentChildren.count(tabs.props.children), 2);
   });
 
   it('Should allow tab to have React components', () => {

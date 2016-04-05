@@ -3,6 +3,7 @@ import Button from './Button';
 import FormGroup from './FormGroup';
 import InputBase from './InputBase';
 import childrenValueValidation from './utils/childrenValueInputValidation';
+import deprecationWarning from './utils/deprecationWarning';
 
 class ButtonInput extends InputBase {
   renderFormGroup(children) {
@@ -33,4 +34,7 @@ ButtonInput.propTypes = {
   value: childrenValueValidation
 };
 
-export default ButtonInput;
+export default deprecationWarning.wrapper(ButtonInput,
+  '`<ButtonInput>`',
+  '`<Button>` directly'
+);

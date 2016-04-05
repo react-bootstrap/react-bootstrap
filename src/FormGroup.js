@@ -1,44 +1,102 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+import deprecated from 'react-prop-types/lib/deprecated';
+
+import { Sizes } from './styleMaps';
+import bootstrapUtils, { bsClass, bsSizes } from './utils/bootstrapUtils';
+import ValidComponentChildren from './utils/ValidComponentChildren';
+
+const propTypes = {
+  /**
+   * Sets `id` on `<FormControl>` and `htmlFor` on `<FormGroup.Label>`.
+   */
+  controlId: React.PropTypes.string,
+  /**
+   * @private
+   */
+  standalone: deprecated(
+    React.PropTypes.bool,
+    'Use a `<FormControl>` or `<InputGroup>` directly.'
+  ),
+  validationState: React.PropTypes.oneOf(['success', 'warning', 'error']),
+  /**
+   * @private
+   */
+  bsStyle: deprecated(
+    React.PropTypes.oneOf(['success', 'warning', 'error']),
+    'Use `validationState`'
+  ),
+  /**
+   * @private
+   */
+  hasFeedback: deprecated(
+    React.PropTypes.bool,
+    'Use a `<FormControl.Feedback>` element.'
+  ),
+  /**
+   * @private
+   */
+  groupClassName: deprecated(React.PropTypes.string, 'Use `className`.'),
+};
+
+const childContextTypes = {
+  $bs_formGroup: React.PropTypes.object.isRequired,
+};
 
 class FormGroup extends React.Component {
-  render() {
-    let classes = {
-      'form-group': !this.props.standalone,
-      'form-group-lg': !this.props.standalone && this.props.bsSize === 'large',
-      'form-group-sm': !this.props.standalone && this.props.bsSize === 'small',
-      'has-feedback': this.props.hasFeedback,
-      'has-success': this.props.bsStyle === 'success',
-      'has-warning': this.props.bsStyle === 'warning',
-      'has-error': this.props.bsStyle === 'error'
+  getChildContext() {
+    const { controlId, bsStyle, validationState = bsStyle } = this.props;
+
+    return {
+      $bs_formGroup: {
+        controlId,
+        validationState
+      },
     };
+  }
+
+  hasFeedback(children) {
+    return ValidComponentChildren.some(children, child => (
+      child.props.bsRole === 'feedback' ||
+      child.props.children && this.hasFeedback(child.props.children)
+    ));
+  }
+
+  render() {
+    const {
+      standalone,
+      bsStyle,
+      validationState = bsStyle,
+      groupClassName,
+      className = groupClassName,
+      children,
+      hasFeedback = this.hasFeedback(children),
+      ...props,
+    } = this.props;
+
+    delete props.bsClass;
+    delete props.bsSize;
+    delete props.controlId;
+
+    const classes = {
+      ...(!standalone && bootstrapUtils.getClassSet(this.props)),
+      'has-feedback': hasFeedback,
+    };
+    if (validationState) {
+      classes[`has-${validationState}`] = true;
+    }
 
     return (
-      <div className={classNames(classes, this.props.groupClassName)}>
-        {this.props.children}
+      <div {...props} className={classNames(className, classes)}>
+        {children}
       </div>
     );
   }
 }
 
-FormGroup.defaultProps = {
-  hasFeedback: false,
-  standalone: false
-};
+FormGroup.propTypes = propTypes;
+FormGroup.childContextTypes = childContextTypes;
 
-FormGroup.propTypes = {
-  standalone: React.PropTypes.bool,
-  hasFeedback: React.PropTypes.bool,
-  bsSize(props) {
-    if (props.standalone && props.bsSize !== undefined) {
-      return new Error('bsSize will not be used when `standalone` is set.');
-    }
-
-    return React.PropTypes.oneOf(['small', 'medium', 'large'])
-      .apply(null, arguments);
-  },
-  bsStyle: React.PropTypes.oneOf(['success', 'warning', 'error']),
-  groupClassName: React.PropTypes.string
-};
-
-export default FormGroup;
+export default bsClass('form-group',
+  bsSizes([Sizes.LARGE, Sizes.SMALL], FormGroup)
+);
