@@ -48,6 +48,8 @@ describe('Alert', () => {
   });
 
   it('Should call onDismiss callback on dismissAfter time', (done) => {
+    shouldWarn('deprecated');
+
     let doneOp = () => {
       done();
     };
@@ -56,8 +58,6 @@ describe('Alert', () => {
         Message
       </Alert>
     );
-
-    shouldWarn('deprecated');
   });
 
   it('Should have a default bsStyle class', () => {

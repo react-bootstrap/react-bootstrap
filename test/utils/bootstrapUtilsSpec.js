@@ -110,8 +110,10 @@ describe('bootstrapUtils', ()=> {
     });
 
     it('should work with es6 classes', ()=> {
+      shouldWarn(/expected one of \["minimal","boss","plaid"\]/);
+
       @bsStyles(['minimal', 'boss', 'plaid'], 'plaid')
-      class Component {
+      class Component extends React.Component {
         render() { return <span/>; }
       }
 
@@ -120,11 +122,11 @@ describe('bootstrapUtils', ()=> {
       expect(instance.props.bsStyle).to.equal('plaid');
 
       render(<Component bsStyle="not-plaid"/>);
-
-      shouldWarn(/expected one of \["minimal","boss","plaid"\]/);
     });
 
     it('should work with createClass', ()=> {
+      shouldWarn(/expected one of \["minimal","boss","plaid"\]/);
+
       let Component = bsStyles(['minimal', 'boss', 'plaid'], 'plaid')(
         React.createClass({
           render() { return <span/>; }
@@ -136,8 +138,6 @@ describe('bootstrapUtils', ()=> {
       expect(instance.props.bsStyle).to.equal('plaid');
 
       render(<Component bsStyle="not-plaid"/>);
-
-      shouldWarn(/expected one of \["minimal","boss","plaid"\]/);
     });
   });
 
@@ -176,8 +176,10 @@ describe('bootstrapUtils', ()=> {
     });
 
     it('should work with es6 classes', ()=> {
+      shouldWarn(/expected one of \["smallish","micro","planet"\]/);
+
       @bsSizes(['smallish', 'micro', 'planet'], 'smallish')
-      class Component {
+      class Component extends React.Component {
         render() { return <span/>; }
       }
 
@@ -186,11 +188,11 @@ describe('bootstrapUtils', ()=> {
       expect(instance.props.bsSize).to.equal('smallish');
 
       render(<Component bsSize="not-smallish"/>);
-
-      shouldWarn(/expected one of \["smallish","micro","planet"\]/);
     });
 
     it('should work with createClass', ()=> {
+      shouldWarn(/expected one of \["smallish","micro","planet"\]/);
+
       let Component = bsSizes(['smallish', 'micro', 'planet'], 'smallish')(
         React.createClass({
           render() { return <span/>; }
@@ -202,8 +204,6 @@ describe('bootstrapUtils', ()=> {
       expect(instance.props.bsSize).to.equal('smallish');
 
       render(<Component bsSize="not-smallish"/>);
-
-      shouldWarn(/expected one of \["smallish","micro","planet"\]/);
     });
   });
 });

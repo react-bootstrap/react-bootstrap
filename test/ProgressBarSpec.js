@@ -106,13 +106,14 @@ describe('ProgressBar', () => {
   });
 
   it('Should warn on deprecated label interpolation', () => {
+    shouldWarn('deprecated');
+
     let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={5} bsStyle="success"
         label="min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s" />
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).innerText, 'min:0, max:10, now:5, percent:50, bsStyle:success');
-    shouldWarn('deprecated');
   });
 
   it('Should have screen reader only label', () => {
@@ -227,6 +228,8 @@ describe('ProgressBar', () => {
   });
 
   it('allows only ProgressBar in children', () => {
+    shouldWarn('Failed propType');
+
     ReactTestUtils.renderIntoDocument(
       <ProgressBar>
         <ProgressBar key={1} />
@@ -234,7 +237,5 @@ describe('ProgressBar', () => {
         <ProgressBar key={2} />
       </ProgressBar>
     );
-
-    shouldWarn('Failed propType');
   });
 });

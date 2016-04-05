@@ -151,6 +151,8 @@ describe('Modal', () => {
   });
 
   it('Should use deprecated dialogComponent', () => {
+    shouldWarn('deprecated');
+
     let noOp = () => {};
 
     class CustomDialog extends React.Component {
@@ -164,7 +166,6 @@ describe('Modal', () => {
     , mountPoint);
 
     assert.ok(instance._modal instanceof CustomDialog);
-    shouldWarn('deprecated');
   });
 
   it('Should pass transition callbacks to Transition', (done) => {

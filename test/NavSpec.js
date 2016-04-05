@@ -121,11 +121,11 @@ describe('Nav', () => {
   });
 
   it('Should warn when attempting to use a justified navbar nav', () => {
+    shouldWarn('justified navbar `Nav`s are not supported');
+
     ReactTestUtils.renderIntoDocument(
       <Nav navbar justified />
     );
-
-    shouldWarn('justified navbar `Nav`s are not supported');
   });
 
   describe('keyboard navigation', () => {

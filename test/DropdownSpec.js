@@ -136,6 +136,8 @@ describe('Dropdown', () => {
   });
 
   it('only renders one menu', () => {
+    shouldWarn(/Duplicate children.*bsRole: menu/);
+
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown title='Single child' id='test-id'>
         <Dropdown.Toggle>Child Text</Dropdown.Toggle>
@@ -151,8 +153,6 @@ describe('Dropdown', () => {
 
     ReactTestUtils.scryRenderedComponentsWithType(instance, DropdownMenu).length.should.equal(0);
     ReactTestUtils.scryRenderedComponentsWithType(instance, CustomMenu).length.should.equal(1);
-
-    shouldWarn(/Duplicate children.*bsRole: menu/);
   });
 
 

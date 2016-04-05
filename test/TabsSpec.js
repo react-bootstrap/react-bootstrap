@@ -11,7 +11,7 @@ import Tabs from '../src/Tabs';
 
 import ValidComponentChildren from '../src/utils/ValidComponentChildren';
 
-import { render } from './helpers';
+import { render, shouldWarn } from './helpers';
 
 describe('Tabs', () => {
   it('Should show the correct tab', () => {
@@ -259,11 +259,8 @@ describe('Tabs', () => {
 
 
   describe('when the position prop is "left"', () => {
-    afterEach(() => {
-      if (console.error.called) {
-        console.error.calledWithMatch(/Horizontal Tabs.+are deprecated/).should.be.true;
-        console.error.reset();
-      }
+    beforeEach(() => {
+      shouldWarn('deprecated');
     });
 
     describe('when tabWidth is not provided', () => {

@@ -30,6 +30,8 @@ describe('MenuItem', () => {
   });
 
   it('renders divider not children', () => {
+    shouldWarn('Children will not be rendered for dividers');
+
     const instance = ReactTestUtils.renderIntoDocument(
       <MenuItem divider>
         Some child
@@ -39,7 +41,6 @@ describe('MenuItem', () => {
 
     node.className.should.match(/\bdivider\b/);
     node.innerHTML.should.not.match(/Some child/);
-    shouldWarn('Children will not be rendered for dividers');
   });
 
   it('renders header', () => {
