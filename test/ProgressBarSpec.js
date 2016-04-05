@@ -217,6 +217,8 @@ describe('ProgressBar', () => {
   });
 
   it('allows only ProgressBar in children', () => {
+    shouldWarn('Failed propType');
+
     ReactTestUtils.renderIntoDocument(
       <ProgressBar>
         <ProgressBar key={1} />
@@ -224,7 +226,5 @@ describe('ProgressBar', () => {
         <ProgressBar key={2} />
       </ProgressBar>
     );
-
-    shouldWarn('Failed propType');
   });
 });

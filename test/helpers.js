@@ -2,9 +2,7 @@ import {cloneElement} from 'react';
 import ReactDOM from 'react-dom';
 
 export function shouldWarn(about) {
-  console.error.called.should.be.true;
-  console.error.calledWithMatch(about).should.be.true;
-  console.error.reset();
+  console.error.expected.push(about);
 }
 
 /**
