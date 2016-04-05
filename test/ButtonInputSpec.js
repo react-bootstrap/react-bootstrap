@@ -34,7 +34,6 @@ describe('ButtonInput', () => {
 
   it('throws warning about unsupported type', () => {
     shouldWarn('propType: Invalid');
-    shouldWarn('propType: Invalid');
     shouldWarn('Failed form propType');
 
     ReactTestUtils.renderIntoDocument(

@@ -110,7 +110,7 @@ describe('bootstrapUtils', ()=> {
     });
 
     it('should work with es6 classes', ()=> {
-      shouldWarn(/expected one of \["minimal","boss","plaid"\]/);
+      shouldWarn('expected one of ["minimal","boss","plaid"]');
 
       @bsStyles(['minimal', 'boss', 'plaid'], 'plaid')
       class Component extends React.Component {
@@ -125,7 +125,7 @@ describe('bootstrapUtils', ()=> {
     });
 
     it('should work with createClass', ()=> {
-      shouldWarn(/expected one of \["minimal","boss","plaid"\]/);
+      shouldWarn('expected one of ["minimal","boss","plaid"]');
 
       let Component = bsStyles(['minimal', 'boss', 'plaid'], 'plaid')(
         React.createClass({
@@ -176,7 +176,7 @@ describe('bootstrapUtils', ()=> {
     });
 
     it('should work with es6 classes', ()=> {
-      shouldWarn(/expected one of \["smallish","micro","planet"\]/);
+      shouldWarn('expected one of ["smallish","micro","planet"]');
 
       @bsSizes(['smallish', 'micro', 'planet'], 'smallish')
       class Component extends React.Component {
@@ -191,7 +191,7 @@ describe('bootstrapUtils', ()=> {
     });
 
     it('should work with createClass', ()=> {
-      shouldWarn(/expected one of \["smallish","micro","planet"\]/);
+      shouldWarn('expected one of ["smallish","micro","planet"]');
 
       let Component = bsSizes(['smallish', 'micro', 'planet'], 'smallish')(
         React.createClass({

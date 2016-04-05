@@ -136,7 +136,7 @@ describe('Dropdown', () => {
   });
 
   it('only renders one menu', () => {
-    shouldWarn(/Duplicate children.*bsRole: menu/);
+    shouldWarn('Duplicate children');
 
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown title='Single child' id='test-id'>
