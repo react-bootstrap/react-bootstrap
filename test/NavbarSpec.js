@@ -296,8 +296,6 @@ describe('Navbar', () => {
   describe('deprecations', ()=> {
     it('Should add header with brand', () => {
       shouldWarn('deprecated');
-      shouldWarn('deprecated');
-      shouldWarn('has been renamed');
       shouldWarn('has been renamed');
 
       let instance = ReactTestUtils.renderIntoDocument(
@@ -316,7 +314,6 @@ describe('Navbar', () => {
     });
 
     it('Should add header when toggleNavKey is 0', () => {
-      shouldWarn('deprecated');
       shouldWarn('deprecated');
 
       let instance = ReactTestUtils.renderIntoDocument(

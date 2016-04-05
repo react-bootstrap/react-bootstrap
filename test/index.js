@@ -4,25 +4,24 @@ import { _resetWarned } from '../src/utils/deprecationWarning';
 
 beforeEach(() => {
   sinon.stub(console, 'error', msg => {
-    const nextExpected = console.error.expected.shift();
-    if (nextExpected) {
-      if (nextExpected instanceof RegExp) {
-        expect(msg).to.match(nextExpected);
-      } else {
-        expect(msg).to.contain(nextExpected);
+    for (const about of console.error.expected) {
+      if (msg.indexOf(about) !== -1) {
+        console.error.warned[about] = true;
+        return;
       }
-
-      return;
     }
 
     throw new Error(msg);
   });
 
   console.error.expected = [];
+  console.error.warned = Object.create(null);
 });
 
 afterEach(() => {
-  expect(console.error.expected).to.be.empty;
+  if (console.error.expected.length) {
+    expect(console.error.warned).to.have.keys(console.error.expected);
+  }
 
   console.error.restore();
   _resetWarned();
