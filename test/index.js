@@ -11,15 +11,17 @@ beforeEach(() => {
       }
     }
 
+    console.error.threw = true;
     throw new Error(msg);
   });
 
   console.error.expected = [];
   console.error.warned = Object.create(null);
+  console.error.threw = false;
 });
 
 afterEach(() => {
-  if (console.error.expected.length) {
+  if (!console.error.threw && console.error.expected.length) {
     expect(console.error.warned).to.have.keys(console.error.expected);
   }
 
