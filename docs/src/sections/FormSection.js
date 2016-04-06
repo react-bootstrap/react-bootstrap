@@ -9,52 +9,64 @@ export default function FormSection() {
   return (
     <div className="bs-docs-section">
       <h1 className="page-header">
-        <Anchor id="forms">Forms</Anchor> <small>Input, ButtonInput, FormControls</small>
+        <Anchor id="forms">Forms</Anchor> <small>FormGroup, FormControl, ControlLabel, Checkbox, Radio, HelpBlock, Form, InputGroup</small>
       </h1>
 
-      <p>The <code>{'<Input>'}</code> component renders an input in Bootstrap wrappers. Supports label, help, text input add-ons, validation and use as wrapper.
-      Use <code>getValue()</code> or <code>getChecked()</code> to get the current state.
-      The helper method <code>getInputDOMNode()</code> returns the internal input element. If you don't want the <code>form-group</code> class applied apply the prop named <code>standalone</code>.</p>
-      <ReactPlayground codeText={Samples.Input} />
+      <p>The <code>{'<FormControl>'}</code> component renders a form control with Bootstrap styling. The <code>{'<FormGroup>'}</code> component wraps a form control with proper spacing, along with support for a label, help text, and validation state. To ensure accessibility, set <code>controlId</code> on <code>{'<FormGroup>'}</code>, and use <code>{'<ControlLabel>'}</code> for the label.</p>
+      <ReactPlayground codeText={Samples.FormBasic} />
 
-      <h3><Anchor id="input-types">Types</Anchor></h3>
-      <p>Supports <code>select</code>, <code>textarea</code>, as well as standard HTML input types. <code>getValue()</code> returns an array for multiple select.</p>
-      <ReactPlayground codeText={Samples.InputTypes} />
+      <h3><Anchor id="forms-controls">Supported controls</Anchor></h3>
+      <p>Examples of standard form controls supported in an example form layout. Use <code>{'<FormControl>'}</code> for <code>{'<input>'}</code>, <code>{'<textarea>'}</code>, and <code>{'<select>'}</code>. Use <code>{'<Checkbox>'}</code> and <code>{'<Radio>'}</code> for checkboxes and radios respectively, optionally with <code>inline</code> to render multiple on the same line. Use <code>{'<FormControl.Static>'}</code> for static text.</p>
+      <ReactPlayground codeText={Samples.FormControls} />
 
-      <h3><Anchor id="forms-controls-static">FormControls.Static</Anchor></h3>
-      <p>Static text can be added to your form controls through the use of the <code>FormControls.Static</code> component.</p>
-      <ReactPlayground codeText={Samples.StaticText} />
+      <h3><Anchor id="forms-inline">Inline forms</Anchor></h3>
+      <p>Use <code>{'<Form inline>'}</code> instead of <code>{'<form>'}</code>. JSX strips whitespace between lines, so you will need to manually add spaces. Additionally, Bootstrap assigns inline form controls <code>width: auto</code> by default, so you may need to set custom widths.</p>
+      <ReactPlayground codeText={Samples.FormInline} />
 
-      <h3><Anchor id="button-input-types">Button Input Types</Anchor></h3>
-      <p>Form buttons are encapsulated by <code>ButtonInput</code>. Pass in <code>type="reset"</code> or <code>type="submit"</code> to suit your needs. Styling is the same as <code>Button</code>.</p>
-      <ReactPlayground codeText={Samples.ButtonInput} />
+      <h3><Anchor id="forms-horizontal">Horizontal forms</Anchor></h3>
+      <p>Use <code>{'<Form horizontal>'}</code> instead of <code>{'<form>'}</code>, then use <code>{'<Col>'}</code>s to align labels and controls. Do not use <code>{'<Row>'}</code> here, as <code>{'<FormGroup>'}</code> will already serve as a grid row in a horizontal form.</p>
+      <ReactPlayground codeText={Samples.FormHorizontal} />
 
-      <h3><Anchor id="input-addons">Add-ons</Anchor></h3>
-      <p>Use <code>addonBefore</code> and <code>addonAfter</code> for normal addons, <code>buttonBefore</code> and <code>buttonAfter</code> for button addons.
-      Exotic configurations may require some css on your side.</p>
-      <ReactPlayground codeText={Samples.InputAddons} />
+      <h3><Anchor id="forms-input-addons">Input add-ons</Anchor></h3>
+      <p>Wrap your form control in an <code>{'<InputGroup>'}</code>, then use for normal add-ons and for button add-ons. Exotic configurations may require CSS on your side.</p>
+      <ReactPlayground codeText={Samples.FormInputAddons} />
 
-      <h3><Anchor id="input-sizes">Sizes</Anchor></h3>
-      <p>Use <code>bsSize</code> to change the size of inputs. It also works with addons and most other options.</p>
-      <ReactPlayground codeText={Samples.InputSizes} />
+      <h3><Anchor id="forms-input-sizes">Input sizes</Anchor></h3>
+      <p>Use <code>bsSize</code> on <code>{'<FormGroup>'}</code> or <code>{'<InputGroup>'}</code> to change the size of inputs. It also works with add-ons and most other options.</p>
+      <ReactPlayground codeText={Samples.FormInputSizes} />
 
-      <h3><Anchor id="input-validation">Validation</Anchor></h3>
-      <p>Set <code>bsStyle</code> to one of <code>success</code>, <code>warning</code> or <code>error</code>.
-      Add <code>hasFeedback</code> to show glyphicon. Glyphicon may need additional styling if there is an add-on or no label.</p>
-      <ReactPlayground codeText={Samples.InputValidation} />
+      <h3><Anchor id="forms-validation">Validation states</Anchor></h3>
+      <p>Set <code>validationState</code> to one of <code>'success'</code>, <code>'warning'</code> or <code>'error'</code>. Add <code>{'<FormControl.Feedback>'}</code> for a feedback icon.</p>
+      <ReactPlayground codeText={Samples.FormValidation} />
 
-      <h3><Anchor id="input-horizontal">Horizontal forms</Anchor></h3>
-      <p>Use <code>labelClassName</code> and <code>wrapperClassName</code> properties to add col classes manually.
-      <code>checkbox</code> and <code>radio</code> types need special treatment because label wraps input.</p>
-      <ReactPlayground codeText={Samples.InputHorizontal} />
+      <h3><Anchor id="forms-props">Props</Anchor></h3>
 
-      <h3><Anchor id="input-wrapper">Use as a wrapper</Anchor></h3>
-      <p>If <code>type</code> is not set, child element(s) will be rendered instead of an input element.
-      <code>getValue()</code> will not work when used this way.</p>
-      <ReactPlayground codeText={Samples.InputWrapper} />
+      <h4><Anchor id="forms-props-form-group">FormGroup</Anchor></h4>
+      <PropTable component="FormGroup" />
 
-      <h3><Anchor id="input-props">Props</Anchor></h3>
-      <PropTable component="InputBase"/>
+      <h4><Anchor id="forms-props-form-control">FormControl</Anchor></h4>
+      <PropTable component="FormControl" />
+
+      <h4><Anchor id="forms-props-form-group">ControlLabel</Anchor></h4>
+      <PropTable component="ControlLabel" />
+
+      <h4><Anchor id="forms-props-checkbox">Checkbox</Anchor></h4>
+      <PropTable component="Checkbox" />
+
+      <h4><Anchor id="forms-props-radio">Radio</Anchor></h4>
+      <PropTable component="Radio" />
+
+      <h4><Anchor id="forms-props-form-control-static">FormControl.Static</Anchor></h4>
+      <PropTable component="FormControlStatic" />
+
+      <h4><Anchor id="forms-props-help-block">HelpBlock</Anchor></h4>
+      <PropTable component="HelpBlock" />
+
+      <h4><Anchor id="forms-props-form">Form</Anchor> <small>(only needed for horizontal or inline forms)</small></h4>
+      <PropTable component="Form" />
+
+      <h4><Anchor id="forms-props-form-control-feedback">FormControl.Feedback</Anchor></h4>
+      <PropTable component="FormControlFeedback" />
     </div>
   );
 }

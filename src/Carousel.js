@@ -84,7 +84,7 @@ let Carousel = React.createClass({
     }
 
     let index = this.getActiveIndex() + 1;
-    let count = ValidComponentChildren.numberOf(this.props.children);
+    let count = ValidComponentChildren.count(this.props.children);
 
     if (index > count - 1) {
       if (!this.props.wrap) {
@@ -107,7 +107,7 @@ let Carousel = React.createClass({
       if (!this.props.wrap) {
         return;
       }
-      index = ValidComponentChildren.numberOf(this.props.children) - 1;
+      index = ValidComponentChildren.count(this.props.children) - 1;
     }
 
     this.handleSelect(index, 'prev');
@@ -191,7 +191,7 @@ let Carousel = React.createClass({
   renderControls() {
     if (!this.props.wrap) {
       let activeIndex = this.getActiveIndex();
-      let count = ValidComponentChildren.numberOf(this.props.children);
+      let count = ValidComponentChildren.count(this.props.children);
 
       return [
         (activeIndex !== 0) ? this.renderPrev() : null,

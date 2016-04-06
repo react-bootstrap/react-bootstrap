@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import $ from 'teaspoon';
+
+import FormControl from '../src/FormControl';
 import FormGroup from '../src/FormGroup';
-import {shouldWarn} from './helpers';
+
+import { shouldWarn } from './helpers';
 
 describe('FormGroup', () => {
   it('renders children', () => {
@@ -46,17 +50,16 @@ describe('FormGroup', () => {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group-lg'));
   });
 
-  // This test case must come first, since the error only gets logged once.
   it('throws no warning without bsSize when standalone', () => {
+    shouldWarn('deprecated');
+
     ReactTestUtils.renderIntoDocument(
       <FormGroup standalone />
     );
-
-    // Warning thrown above would lead to failure from index.
   });
 
   it('throws warning about bsSize when standalone', () => {
-    shouldWarn('Failed propType: bsSize');
+    shouldWarn('deprecated');
 
     ReactTestUtils.renderIntoDocument(
       <FormGroup standalone bsSize="large" />
@@ -64,6 +67,8 @@ describe('FormGroup', () => {
   });
 
   it('renders no form-group class when standalone', () => {
+    shouldWarn('deprecated');
+
     let instance = ReactTestUtils.renderIntoDocument(
       <FormGroup standalone>
         <span />
@@ -74,6 +79,8 @@ describe('FormGroup', () => {
   });
 
   it('renders no form-group-* class when standalone', () => {
+    shouldWarn('deprecated');
+
     let instance = ReactTestUtils.renderIntoDocument(
       <FormGroup standalone bsSize="large" />
     );
@@ -82,40 +89,129 @@ describe('FormGroup', () => {
     assert.equal(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'form-group-lg').length, 0);
   });
 
-  [{
-    className: 'has-feedback',
-    props: { hasFeedback: true }
-  }, {
-    className: 'has-success',
-    props: { bsStyle: 'success' }
-  }, {
-    className: 'has-warning',
-    props: { bsStyle: 'warning' }
-  }, {
-    className: 'has-error',
-    props: { bsStyle: 'error' }
-  }, {
-    className: 'custom-group',
-    props: { groupClassName: 'custom-group' }
-  }].forEach( testCase => {
-    it(`does not render ${testCase.className} class`, () => {
-      let instance = ReactTestUtils.renderIntoDocument(
+  [
+    {
+      props: { hasFeedback: true },
+      className: 'has-feedback',
+    },
+    {
+      props: { bsStyle: 'success' },
+      className: 'has-success',
+    },
+    {
+      props: { bsStyle: 'warning' },
+      className: 'has-warning',
+    },
+    {
+      props: { bsStyle: 'error' },
+      className: 'has-error',
+    },
+    {
+      props: { groupClassName: 'custom-group' },
+      className: 'custom-group',
+    },
+  ].forEach(({ props, className }) => {
+    it(`does not render ${className} class`, () => {
+      $(
         <FormGroup>
           <span />
         </FormGroup>
-      );
-
-      assert.equal(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, testCase.className).length, 0);
+      )
+        .shallowRender()
+        .none(`.${className}`);
     });
 
-    it(`renders with ${testCase.className} class`, () => {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <FormGroup {...testCase.props}>
+    it(`renders with ${className} class`, () => {
+      shouldWarn('deprecated');
+
+      $(
+        <FormGroup {...props}>
           <span />
         </FormGroup>
-      );
+      )
+        .shallowRender()
+        .single(`.${className}`);
+    });
+  });
 
-      assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, testCase.className));
+  [
+    {
+      props: { validationState: 'success' },
+      className: 'has-success',
+    },
+    {
+      props: { validationState: 'warning' },
+      className: 'has-warning',
+    },
+    {
+      props: { validationState: 'error' },
+      className: 'has-error',
+    },
+    {
+      props: { className: 'custom-group' },
+      className: 'custom-group',
+    },
+  ].forEach(({ props, className }) => {
+    it(`does not render ${className} class`, () => {
+      $(
+        <FormGroup>
+          <span />
+        </FormGroup>
+      )
+        .shallowRender()
+        .none(`.${className}`);
+    });
+
+    it(`renders with ${className} class`, () => {
+      $(
+        <FormGroup {...props}>
+          <span />
+        </FormGroup>
+      )
+        .shallowRender()
+        .single(`.${className}`);
+    });
+  });
+
+  describe('feedback', () => {
+    it('should not have feedback without feedback component', () => {
+      $(
+        <FormGroup validationState="success" />
+      )
+        .shallowRender()
+        .none('.has-feedback');
+    });
+
+    it('should have feedback with feedback component', () => {
+      $(
+        <FormGroup validationState="success">
+          <FormControl.Feedback />
+        </FormGroup>
+      )
+        .shallowRender()
+        .single('.has-feedback');
+    });
+
+    it('should have feedback with nested feedback component', () => {
+      $(
+        <FormGroup validationState="success">
+          <div>
+            <FormControl.Feedback />
+          </div>
+        </FormGroup>
+      )
+        .shallowRender()
+        .single('.has-feedback');
+    });
+
+    it('should have feedback with custom feedback component', () => {
+      $(
+        <FormGroup validationState="success">
+          <div bsRole="feedback" />
+        </FormGroup>
+      )
+        .shallowRender()
+        .single('.has-feedback');
     });
   });
 });
