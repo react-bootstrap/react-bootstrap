@@ -34,7 +34,8 @@ const Tab = React.createClass({
   getInitialState() {
     return {
       animateIn: false,
-      animateOut: false
+      animateOut: false,
+      hasBeenActivated: this.props.active
     };
   },
 
@@ -67,7 +68,8 @@ const Tab = React.createClass({
   startAnimateIn() {
     if (this.isMounted()) {
       this.setState({
-        animateIn: false
+        animateIn: false,
+        hasBeenActivated: true
       });
     }
   },
@@ -92,6 +94,8 @@ const Tab = React.createClass({
       'in': this.props.active && !this.state.animateIn
     };
 
+    let tabContent = this.state.hasBeenActivated | this.props.active ? this.props.children : null;
+
     return (
       <div {...this.props}
         title={undefined}
@@ -99,7 +103,7 @@ const Tab = React.createClass({
         aria-hidden={!this.props.active}
         className={classNames(this.props.className, classes)}
       >
-        {this.props.children}
+        {tabContent}
       </div>
     );
   }
