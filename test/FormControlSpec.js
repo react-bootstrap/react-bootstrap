@@ -4,6 +4,8 @@ import $ from 'teaspoon';
 import FormControl from '../src/FormControl';
 import FormGroup from '../src/FormGroup';
 
+import { shouldWarn } from './helpers';
+
 describe('<FormControl>', () => {
   it('should render correctly', () => {
     $(
@@ -49,6 +51,8 @@ describe('<FormControl>', () => {
   });
 
   it('should prefer explicit id', () => {
+    shouldWarn('ignored');
+
     $(
       <FormGroup controlId="foo">
         <FormControl type="text" id="bar" />

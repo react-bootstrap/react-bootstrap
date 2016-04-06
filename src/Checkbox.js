@@ -32,9 +32,13 @@ class Checkbox extends React.Component {
         disabled,
       };
 
+      // Use a warning here instead of in propTypes to get better-looking
+      // generated documentation.
       warning(
         !validationState,
-        '`validationState` is invalid on `<Checkbox inline>`.'
+        '`validationState` is ignored on `<Checkbox inline>`. To display ' +
+        'validation state on an inline checkbox, set `validationState` on a ' +
+        'parent `<FormGroup>` or other element instead.'
       );
 
       return (

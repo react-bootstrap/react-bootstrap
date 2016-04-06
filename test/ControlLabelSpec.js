@@ -4,6 +4,8 @@ import $ from 'teaspoon';
 import ControlLabel from '../src/ControlLabel';
 import FormGroup from '../src/FormGroup';
 
+import { shouldWarn } from './helpers';
+
 describe('<ControlLabel>', () => {
   it('should render correctly', () => {
     expect(
@@ -39,6 +41,8 @@ describe('<ControlLabel>', () => {
   });
 
   it('should prefer explicit htmlFor', () => {
+    shouldWarn('ignored');
+
     $(
       <FormGroup controlId="foo">
         <ControlLabel htmlFor="bar">

@@ -42,7 +42,7 @@ describe('<Checkbox>', () => {
   });
 
   it('should not support validation state when inline', () => {
-    shouldWarn('invalid');
+    shouldWarn('ignored');
 
     $(
       <Checkbox inline validationState="success" />

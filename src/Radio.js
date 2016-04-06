@@ -32,9 +32,13 @@ class Radio extends React.Component {
         disabled,
       };
 
+      // Use a warning here instead of in propTypes to get better-looking
+      // generated documentation.
       warning(
         !validationState,
-        '`validationState` is invalid on `<Radio inline>`.'
+        '`validationState` is ignored on `<Radio inline>`. To display ' +
+        'validation state on an inline radio, set `validationState` on a ' +
+        'parent `<FormGroup>` or other element instead.'
       );
 
       return (

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
+import warning from 'warning';
 
 import bootstrapUtils, { bsClass } from './utils/bootstrapUtils';
 
@@ -28,18 +29,22 @@ const contextTypes = {
 };
 
 class FormControl extends React.Component {
-  getControlId(formGroup) {
-    return formGroup && formGroup.controlId;
-  }
-
   render() {
+    const formGroup = this.context.$bs_formGroup;
+    const controlId = formGroup && formGroup.controlId;
+
     const {
       componentClass: Component,
       type,
-      id = this.getControlId(this.context.$bs_formGroup),
+      id = controlId,
       className,
       ...props,
     } = this.props;
+
+    warning(
+      controlId == null || id === controlId,
+      '`controlId` is ignored on `<FormControl>` when `id` is specified.'
+    );
 
     delete props.bsClass;
 

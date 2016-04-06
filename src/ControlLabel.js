@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import warning from 'warning';
 
 import bootstrapUtils, { bsClass } from './utils/bootstrapUtils';
 
@@ -20,17 +21,21 @@ const contextTypes = {
 };
 
 class ControlLabel extends React.Component {
-  getControlId(formGroup) {
-    return formGroup && formGroup.controlId;
-  }
-
   render() {
+    const formGroup = this.context.$bs_formGroup;
+    const controlId = formGroup && formGroup.controlId;
+
     const {
-      htmlFor = this.getControlId(this.context.$bs_formGroup),
+      htmlFor = controlId,
       srOnly,
       className,
       ...props,
     } = this.props;
+
+    warning(
+      controlId == null || htmlFor === controlId,
+      '`controlId` is ignored on `<ControlLabel>` when `htmlFor` is specified.'
+    );
 
     delete props.bsClass;
 

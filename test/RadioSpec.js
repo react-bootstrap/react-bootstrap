@@ -42,7 +42,7 @@ describe('<Radio>', () => {
   });
 
   it('should not support validation state when inline', () => {
-    shouldWarn('invalid');
+    shouldWarn('ignored');
 
     $(
       <Radio inline validationState="success" />
