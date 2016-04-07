@@ -44,7 +44,7 @@ describe('Modal', () => {
 
     let dialog = ReactDOM.findDOMNode(instance._modal);
 
-    ReactTestUtils.Simulate.click(dialog);
+    ReactTestUtils.Simulate.mouseDown(dialog);
   });
 
   it('Should not close the modal when the "static" dialog is clicked', () => {

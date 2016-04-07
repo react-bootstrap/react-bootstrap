@@ -166,7 +166,7 @@ const Modal = React.createClass({
         style={modalStyles}
         className={classNames(className, inClass)}
         dialogClassName={dialogClassName}
-        onClick={props.backdrop === true ? this.handleDialogClick : null}
+        onMouseDown={props.backdrop === true ? this.handleDialogClick : null}
       >
         { this.props.children }
       </Dialog>
