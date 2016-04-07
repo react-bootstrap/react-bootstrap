@@ -1,3 +1,12 @@
+## [v0.29.0-alpha.2]
+> 2016-04-07
+
+- **Bugfix:** Do not assign `tabIndex` on non-`tablist` `<NavItem>`s ([#1784])
+
+[v0.29.0-alpha.2]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.5...v0.29.0-alpha.2
+[#1784]: https://github.com/react-bootstrap/react-bootstrap/pull/1784
+
+
 ## [v0.29.0-alpha.1]
 > 2016-04-06
 
