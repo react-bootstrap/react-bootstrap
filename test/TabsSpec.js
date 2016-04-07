@@ -565,7 +565,7 @@ describe('Tabs', () => {
     );
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('class'), 'my-tabs-class');
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('id'), 'my-tabs-id');
-    assert.deepEqual(ReactDOM.findDOMNode(instance).getAttribute('style'), 'opacity:0.5;');
+    assert.equal(ReactDOM.findDOMNode(instance).style.opacity, 0.5);
 
   });
 });
