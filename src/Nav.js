@@ -66,7 +66,7 @@ class Nav extends React.Component {
   renderNavItem(child, index) {
     let onSelect = chain(child.props.onSelect, this.props.onSelect);
     let active = this.isChildActive(child);
-    let tabProps = this.getTabProps(child, index, active, onSelect);
+    let tabProps = this.getTabProps(child, active, onSelect);
 
     return cloneElement(
       child,
@@ -80,20 +80,17 @@ class Nav extends React.Component {
     );
   }
 
-  getActiveKey(props = this.props, context = this.context) {
-    let activeKey = props.activeKey;
-
-    context = this.getContext('$bs_tabcontainer', context);
-
-    if (context.activeKey) {
-      warning(activeKey == null || props.activeHref,
-        'Specifing a Nav `activeKey` or `activeHref` prop in the context of a `TabContainer` is not supported. ' +
-        'Instead use `<TabContainer activeKey={' + activeKey + '} />`');
-
-      activeKey = context.activeKey;
+  getActiveKey() {
+    const context = this.context.$bs_tabcontainer;
+    if (!context) {
+      return this.props.activeKey;
     }
 
-    return activeKey;
+    warning(!(this.props.activeKey != null || this.props.activeHref),
+      'Specifing a Nav `activeKey` or `activeHref` prop in the context of a `TabContainer` is not supported. ' +
+      'Instead use `<TabContainer activeKey={' + this.props.activeKey + '} />`');
+
+    return context.activeKey;
   }
 
   isChildActive(child) {
@@ -124,7 +121,15 @@ class Nav extends React.Component {
     return child.props.active;
   }
 
-  getTabProps(child, idx, isActive, onSelect) {
+  getTabProps(child, isActive, onSelect) {
+    const navRole = this.getNavRole();
+    const context = this.context.$bs_tabcontainer;
+
+    if (!context && navRole !== 'tablist') {
+      // No tab props here.
+      return null;
+    }
+
     let {
         linkId
       , 'aria-controls': controls
@@ -133,10 +138,7 @@ class Nav extends React.Component {
       , onKeyDown
       , tabIndex = 0 } = child.props;
 
-    let navRole = this.getNavRole();
-    let context = this.getContext('$bs_tabcontainer');
-
-    if (context.getId) {
+    if (context && context.getId) {
       warning(!(linkId || controls),
         'In the context of a TabContainer, NavItems are given generated `linkId` and `aria-controls` ' +
         'attributes for the sake of proper component accessibility. Any provided ones will be ignored. ' +
@@ -154,6 +156,7 @@ class Nav extends React.Component {
         this.handleTabKeyDown.bind(this, onSelect || (()=>{})),
         onKeyDown
       );
+      tabIndex = isActive ? tabIndex : -1;
     }
 
     return {
@@ -162,7 +165,7 @@ class Nav extends React.Component {
       role,
       onKeyDown,
       'aria-controls': controls,
-      tabIndex: isActive ? tabIndex : -1
+      tabIndex,
     };
   }
 
@@ -206,10 +209,6 @@ class Nav extends React.Component {
 
   getNavRole() {
     return this.props.role || (this.context.$bs_tabcontainer ? 'tablist' : null);
-  }
-
-  getContext(key) {
-    return this.context[key] || {};
   }
 }
 
