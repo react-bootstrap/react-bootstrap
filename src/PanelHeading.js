@@ -1,11 +1,17 @@
 import React, { PropTypes, cloneElement } from 'react';
 import cn from 'classnames';
 import elementType from 'react-prop-types/lib/elementType';
+
 import { prefix, bsClass, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   componentClass: elementType,
-  title: PropTypes.bool
+  title: PropTypes.bool,
+  bsRole: PropTypes.string,
+};
+
+const defaultProps = {
+  bsRole: 'heading',
 };
 
 const contextTypes = {
@@ -50,6 +56,7 @@ class PanelHeading extends React.Component {
 }
 
 PanelHeading.propTypes = propTypes;
+PanelHeading.defaultProps = defaultProps;
 PanelHeading.contextTypes = contextTypes;
 
 export default bsClass('panel', PanelHeading);

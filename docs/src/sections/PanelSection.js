@@ -28,7 +28,7 @@ export default function PanelSection() {
       <p>Pass buttons or secondary text in the <code>footer</code> prop. Note that panel footers do not inherit colors and borders when using contextual variations as they are not meant to be in the foreground.</p>
       <ReactPlayground codeText={Samples.PanelWithFooter} />
 
-      <h3><Anchor id="panels-contextual">Contextual alternatives</Anchor></h3>
+      {/*<h3><Anchor id="panels-contextual">Contextual alternatives</Anchor></h3>
       <p>Like other components, easily make a panel more meaningful to a particular context by adding a <code>bsStyle</code> prop.</p>
       <ReactPlayground codeText={Samples.PanelContextual} />
 
@@ -46,7 +46,7 @@ export default function PanelSection() {
 
       <h3><Anchor id="panels-accordion">Accordions</Anchor></h3>
       <p><code>&lt;Accordion /&gt;</code> aliases <code>&lt;PanelGroup accordion /&gt;</code>.</p>
-      <ReactPlayground codeText={Samples.PanelGroupAccordion} />
+      <ReactPlayground codeText={Samples.PanelGroupAccordion} />*/}
 
       <h3><Anchor id="panels-props">Props</Anchor></h3>
 

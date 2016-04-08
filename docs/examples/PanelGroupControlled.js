@@ -17,17 +17,13 @@ const ControlledPanelGroup = React.createClass({
         onSelect={this.handleSelect}
         accordion
       >
-        <Panel eventKey="1">
-          <Panel.Heading title>
+        <Panel eventKey="1" >
+          <Panel.Heading>
             <h3>
               <Panel.Toggle>Panel heading 1</Panel.Toggle>
             </h3>
           </Panel.Heading>
-          <Panel.Collapse>
-            <Panel.Body>
-              Panel content 1
-            </Panel.Body>
-          </Panel.Collapse>
+          Panel content 1
         </Panel>
         <Panel eventKey="2">
           <Panel.Heading title>

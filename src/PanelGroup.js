@@ -1,14 +1,14 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
+import uncontrollable from 'uncontrollable';
 
 import { bsClass, getClassSet, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
-import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
-let idPropType = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number
+const idPropType = React.PropTypes.oneOfType([
+  React.PropTypes.string,
+  React.PropTypes.number
 ]);
 
 const propTypes = {
@@ -111,9 +111,10 @@ class PanelGroup extends React.Component {
         {...elementProps}
         className={classNames(className, classes)}
       >
-        {ValidComponentChildren.map(children, child => {
+        {ValidComponentChildren.map(children, (child, index) => {
           const childProps = {
             bsStyle: child.props.bsStyle || bsProps.bsStyle,
+            key: child.key ? child.key : index,
           };
 
           if (accordion) {
@@ -121,8 +122,8 @@ class PanelGroup extends React.Component {
               headerRole: 'tab',
               panelRole: 'tabpanel',
               collapsible: true,
-              expanded: (child.props.eventKey === activeKey);
-              onToggle: this.handleSelect.bind(null, child.props.eventKey);
+              expanded: (child.props.eventKey === activeKey),
+              onToggle: this.handleSelect.bind(null, child.props.eventKey),
             });
           }
 
