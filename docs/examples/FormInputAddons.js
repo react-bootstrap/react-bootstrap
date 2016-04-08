@@ -40,12 +40,13 @@ const formInstance = (
     <FormGroup>
       <InputGroup>
         <FormControl type="text" />
-        {/* Set z-index here to work around some layout quirks. */}
-        <InputGroup.Button style={{ zIndex: 1000 }}>
-          <DropdownButton title="Action" id="input-dropdown-addon">
-            <MenuItem key="1">Item</MenuItem>
-          </DropdownButton>
-        </InputGroup.Button>
+        <DropdownButton
+          componentClass={InputGroup.Button}
+          id="input-dropdown-addon"
+          title="Action"
+        >
+          <MenuItem key="1">Item</MenuItem>
+        </DropdownButton>
       </InputGroup>
     </FormGroup>
 
