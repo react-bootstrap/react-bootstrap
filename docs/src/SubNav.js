@@ -83,7 +83,6 @@ const SubNav = React.createClass({
       active: this.isActive(this),
       disabled: this.props.disabled
     };
-    console.log(this.props.href, this.isActive(this));
 
     return (
       <li {...this.props} className={classNames(this.props.className, classes)}>
