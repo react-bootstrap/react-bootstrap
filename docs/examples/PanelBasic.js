@@ -4,9 +4,7 @@ function handleClick() {
 
 const panelInstance = (
   <Panel onClick={ handleClick }>
-    <Panel.Body>
-      Basic panel example
-    </Panel.Body>
+    Basic panel example
   </Panel>
 );
 

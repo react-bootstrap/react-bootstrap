@@ -3,10 +3,17 @@ import cn from 'classnames';
 import { prefix, splitBsProps, bsClass } from './utils/bootstrapUtils';
 
 let PanelBody = React.createClass({
+  propTypes: {
+    bsRole: PropTypes.string
+  },
   contextTypes: {
     $bs_panel: PropTypes.shape({
       bsClass: PropTypes.string
     })
+  },
+
+  getDefaultProps() {
+    return { bsRole: 'body' };
   },
 
   render() {

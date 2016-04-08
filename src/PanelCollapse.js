@@ -3,6 +3,15 @@ import React from 'react';
 import { prefix, splitBsProps, bsClass } from './utils/bootstrapUtils';
 import Collapse from './Collapse';
 
+
+const propTypes = {
+  bsRole: React.PropTypes.string,
+};
+
+const defaultProps = {
+  bsRole: 'panel-collapse',
+};
+
 const contextTypes = {
   $bs_panel: React.PropTypes.shape({
     getIds: React.PropTypes.func,
@@ -38,6 +47,8 @@ class PanelCollapse extends React.Component {
   }
 }
 
-PanelCollapse.propTypes = contextTypes;
+PanelCollapse.propTypes = propTypes;
+PanelCollapse.defaultProps = defaultProps;
+PanelCollapse.contextTypes = contextTypes;
 
 export default bsClass('panel', PanelCollapse);
