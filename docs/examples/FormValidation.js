@@ -110,9 +110,11 @@ const formInstance = (
       <Checkbox inline>
         Checkbox
       </Checkbox>
+      {' '}
       <Checkbox inline>
         with
       </Checkbox>
+      {' '}
       <Checkbox inline>
         success
       </Checkbox>
