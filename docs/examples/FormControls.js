@@ -25,14 +25,15 @@ const formInstance = (
       Radio
     </Radio>
 
-    {/* This requires React 15's <span>-less spaces to be exactly correct. */}
     <FormGroup>
       <Checkbox inline>
         1
       </Checkbox>
+      {' '}
       <Checkbox inline>
         2
       </Checkbox>
+      {' '}
       <Checkbox inline>
         3
       </Checkbox>
@@ -41,9 +42,11 @@ const formInstance = (
       <Radio inline>
         1
       </Radio>
+      {' '}
       <Radio inline>
         2
       </Radio>
+      {' '}
       <Radio inline>
         3
       </Radio>

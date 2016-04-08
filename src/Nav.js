@@ -98,7 +98,7 @@ class Nav extends React.Component {
 
     if (this.context.$bs_tabcontainer) {
       warning(!child.props.active,
-        'Specifing a NavItem `active` prop in the context of a `TabContainer` is not supported. Instead ' +
+        'Specifying a NavItem `active` prop in the context of a `TabContainer` is not supported. Instead ' +
         'use `<TabContainer activeKey={' + child.props.eventKey + '} />`');
 
       return child.props.eventKey === activeKey;
