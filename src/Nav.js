@@ -72,6 +72,8 @@ class Nav extends React.Component {
       child,
       {
         active,
+        activeKey: this.props.activeKey,
+        activeHref: this.props.activeHref,
         onSelect,
         key: child.key || index,
         navItem: true,
