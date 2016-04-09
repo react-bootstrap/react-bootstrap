@@ -69,7 +69,7 @@ describe('TabContainer', () => {
       <TabContainer id="custom-id">
         <div>
           <Nav role='navigation' bsStyle='pills'>
-            <NavItem eventKey='1'>One</NavItem>
+            <NavItem href='#foo' eventKey='1'>One</NavItem>
           </Nav>
         </div>
       </TabContainer>
@@ -81,6 +81,7 @@ describe('TabContainer', () => {
       .getAttribute('role')
       .should.equal('navigation');
 
+    // make sure its not passed to the NavItem
     expect(instance
       .find(s`${NavItem} a`)[0]
       .getAttribute('role')).to.not.exist;
