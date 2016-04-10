@@ -16,6 +16,17 @@ let Carousel = React.createClass({
     controls: React.PropTypes.bool,
     pauseOnHover: React.PropTypes.bool,
     wrap: React.PropTypes.bool,
+    /**
+     * Callback fired when the active item changes.
+     *
+     * ```js
+     * (eventKey: any) => any | (eventKey: any, event: Object) => any
+     * ```
+     *
+     * If this callback takes two or more arguments, the second argument will
+     * be a persisted event object with `direction` set to the direction of the
+     * transition.
+     */
     onSelect: React.PropTypes.func,
     onSlideEnd: React.PropTypes.func,
     activeIndex: React.PropTypes.number,
@@ -93,7 +104,7 @@ let Carousel = React.createClass({
       index = 0;
     }
 
-    this.handleSelect(index, 'next');
+    this.handleSelect(index, e, 'next');
   },
 
   prev(e) {
@@ -110,7 +121,7 @@ let Carousel = React.createClass({
       index = ValidComponentChildren.count(this.props.children) - 1;
     }
 
-    this.handleSelect(index, 'prev');
+    this.handleSelect(index, e, 'prev');
   },
 
   pause() {
@@ -213,7 +224,7 @@ let Carousel = React.createClass({
       <li
         key={index}
         className={className}
-        onClick={this.handleSelect.bind(this, index, null)} />
+        onClick={e => this.handleSelect(index, e, null)} />
     );
   },
 
@@ -275,15 +286,28 @@ let Carousel = React.createClass({
     );
   },
 
-  handleSelect(index, direction) {
+  handleSelect(index, e, direction) {
     clearTimeout(this.timeout);
 
     if (this.isMounted()) {
       let previousActiveIndex = this.getActiveIndex();
       direction = direction || this.getDirection(previousActiveIndex, index);
 
-      if (this.props.onSelect) {
-        this.props.onSelect(index, direction);
+      const { onSelect } = this.props;
+
+      if (onSelect) {
+        if (onSelect.length > 1) {
+          // React SyntheticEvents are pooled, so we need to remove this event
+          // from the pool to add a custom property. To avoid unnecessarily
+          // removing objects from the pool, only do this when the listener
+          // actually wants the event.
+          e.persist();
+          e.direction = direction;
+
+          onSelect(index, e);
+        } else {
+          onSelect(index);
+        }
       }
 
       if (this.props.activeIndex == null && index !== previousActiveIndex) {

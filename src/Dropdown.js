@@ -326,7 +326,7 @@ Dropdown.propTypes = {
    * A callback fired when a menu item is selected.
    *
    * ```js
-   * function(Object event, Any eventKey)
+   * (eventKey: any, event: Object) => any
    * ```
    */
   onSelect: React.PropTypes.func,
