@@ -142,11 +142,11 @@ const Modal = React.createClass({
 
   render() {
     let {
-        className
-      , children
-      , dialogClassName
-      , animation
-      , ...props } = this.props;
+      className,
+      children,
+      dialogClassName,
+      animation,
+      ...props } = this.props;
 
     let { modalStyles } = this.state;
 
@@ -168,7 +168,7 @@ const Modal = React.createClass({
         dialogClassName={dialogClassName}
         onClick={props.backdrop === true ? this.handleDialogClick : null}
       >
-        { this.props.children }
+        { children }
       </Dialog>
     );
 

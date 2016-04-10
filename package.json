@@ -8,7 +8,7 @@
   },
   "homepage": "http://react-bootstrap.github.io/",
   "scripts": {
-    "babel-node": "babel-node --presets=es2015-loose stage-1 react",
+    "babel-node": "babel-node --presets=es2015 stage-1 react",
     "build": "babel-node tools/build-cli.js",
     "test-watch": "karma start",
     "test-coverage": "COVERAGE=true karma start --single-run",

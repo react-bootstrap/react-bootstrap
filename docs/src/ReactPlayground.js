@@ -70,12 +70,12 @@ const BABEL_CONFIG = {
   ]
 };
 
-//import CodeExample from './CodeExample';
+// import CodeExample from './CodeExample';
 const CodeExample = require('./CodeExample');
 
 // This is only used for the ReactPlayground component, not for any of the
 // examples, so it's fine to import like this.
-//import SafeAnchor from '../../src/SafeAnchor';
+// import SafeAnchor from '../../src/SafeAnchor';
 const SafeAnchor = require('../../src/SafeAnchor');
 
 const IS_MOBILE = typeof navigator !== 'undefined' && (
@@ -199,8 +199,6 @@ const ReactPlayground = React.createClass({
       /* eslint-disable */
       eval(compiledCode);
       /* eslint-enable */
-    } catch(err){
-      console.warn('something is not right', err);
     } finally {
       ReactDOM.render = originalRender;
     }

@@ -6,6 +6,7 @@ import childrenValueValidation from './utils/childrenValueInputValidation';
 
 class ButtonInput extends InputBase {
   renderFormGroup(children) {
+    /* eslint no-unused-vars:0 */
     let {bsStyle, value, ...other} = this.props;
     return <FormGroup {...other}>{children}</FormGroup>;
   }
