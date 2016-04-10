@@ -282,8 +282,21 @@ let Carousel = React.createClass({
       let previousActiveIndex = this.getActiveIndex();
       direction = direction || this.getDirection(previousActiveIndex, index);
 
-      if (this.props.onSelect) {
-        this.props.onSelect(index, e, direction);
+      const { onSelect } = this.props;
+
+      if (onSelect) {
+        if (onSelect.length > 1) {
+          // React SyntheticEvents are pooled, so we need to remove this event
+          // from the pool to add a custom property. To avoid unnecessarily
+          // removing objects from the pool, only do this when the listener
+          // actually wants the event.
+          e.persist();
+          e.direction = direction;
+
+          onSelect(index, e);
+        } else {
+          onSelect(index);
+        }
       }
 
       if (this.props.activeIndex == null && index !== previousActiveIndex) {

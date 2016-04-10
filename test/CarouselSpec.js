@@ -50,8 +50,36 @@ describe('Carousel', () => {
   });
 
   it('Should call onSelect when indicator selected', (done) => {
-    function onSelect(index) {
-      assert.equal(index, 0);
+    function onSelect(index, ...args) {
+      expect(index).to.equal(0);
+
+      // By using rest arguments here, we can avoid triggering the logic to
+      // persist and decorate the event.
+      const [event] = args;
+      expect(event).to.not.exist;
+
+      done();
+    }
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Carousel activeIndex={1} onSelect={onSelect}>
+        <Carousel.Item ref="item1">Item 1 content</Carousel.Item>
+        <Carousel.Item ref="item2">Item 2 content</Carousel.Item>
+      </Carousel>
+    );
+
+    ReactTestUtils.Simulate.click(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
+        .getElementsByTagName('li')[0]
+    );
+  });
+
+  it('Should call onSelect with direction', (done) => {
+    function onSelect(index, event) {
+      expect(index).to.equal(0);
+      expect(event.direction).to.equal('prev');
+      expect(event.isPersistent()).to.be.true;
+
       done();
     }
 
