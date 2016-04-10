@@ -136,7 +136,7 @@ MenuItem.propTypes = {
    * Callback fired when the menu item is selected.
    *
    * ```js
-   * function(Object event, Any eventKey)
+   * (eventKey: any, event: Object) => any
    * ```
    */
   onSelect: React.PropTypes.func,

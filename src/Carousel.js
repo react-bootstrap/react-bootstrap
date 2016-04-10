@@ -16,6 +16,17 @@ let Carousel = React.createClass({
     controls: React.PropTypes.bool,
     pauseOnHover: React.PropTypes.bool,
     wrap: React.PropTypes.bool,
+    /**
+     * Callback fired when the active item changes.
+     *
+     * ```js
+     * (eventKey: any) => any | (eventKey: any, event: Object) => any
+     * ```
+     *
+     * If this callback takes two or more arguments, the second argument will
+     * be a persisted event object with `direction` set to the direction of the
+     * transition.
+     */
     onSelect: React.PropTypes.func,
     onSlideEnd: React.PropTypes.func,
     activeIndex: React.PropTypes.number,
