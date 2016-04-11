@@ -38,6 +38,7 @@ const PageItem = React.createClass({
       >
         <SafeAnchor
           {...props}
+          disabled={disabled}
           onClick={createChainedFunction(onClick, this.handleSelect)}
         />
       </li>

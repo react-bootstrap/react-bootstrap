@@ -47,6 +47,7 @@ const NavItem = React.createClass({
       >
         <SafeAnchor
           {...props}
+          disabled={disabled}
           role={role}
           href={href}
           onClick={createChainedFunction(onClick, this.handleClick)}

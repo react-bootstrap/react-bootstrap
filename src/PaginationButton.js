@@ -57,6 +57,7 @@ const PaginationButton = React.createClass({
       >
         <ButtonComponentClass
           {...props}
+          disabled={disabled}
           onClick={createChainedFunction(onClick, this.handleClick)}
         />
       </li>
