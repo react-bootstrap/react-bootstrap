@@ -21,7 +21,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  if (!console.error.threw && console.error.expected.length) {
+  if (!console.error.threw && console.error.expected && console.error.expected.length) {
     expect(console.error.warned).to.have.keys(console.error.expected);
   }
 
