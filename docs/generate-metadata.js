@@ -112,12 +112,17 @@ export default function generate(destination, options = { mixins: true, inferCom
   return globp(__dirname + '/../src/**/*.js') // eslint-disable-line no-path-concat
     .then( files => {
       let results = files.map(
-        filename => fsp.readFile(filename).then(content => metadata(content, options)));
-
+		// metadata seems to be uncompatible with Babel 6+
+        filename => fsp.readFile(filename).then(content => {
+          try {
+            return metadata(content, options);
+          } catch (e) {
+            return {};
+          }
+        }));
       return Promise.all(results)
         .then( data => {
           let result = {};
-
           data.forEach(components => {
             Object.keys(components).forEach(key => {
               let Component;
@@ -125,7 +130,7 @@ export default function generate(destination, options = { mixins: true, inferCom
               try {
                 // require the actual component to inspect props we can only get a runtime
                 Component = require('../src/' + key);
-              } catch (e) {} //eslint-disable-line
+              } catch (e) { console.error(e); } //eslint-disable-line
 
               const component = components[key];
 
