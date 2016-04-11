@@ -117,13 +117,13 @@ const Navbar = React.createClass({
 
     const classes = tbsUtils.getClassSet(this.props);
 
-    classes[tbsUtils.prefix(this.props, 'fixed-top')] = this.props.fixedTop;
-    classes[tbsUtils.prefix(this.props, 'fixed-bottom')] = this.props.fixedBottom;
-    classes[tbsUtils.prefix(this.props, 'static-top')] = this.props.staticTop;
+    classes[tbsUtils.prefix(this.props, 'fixed-top')] = fixedTop;
+    classes[tbsUtils.prefix(this.props, 'fixed-bottom')] = fixedBottom;
+    classes[tbsUtils.prefix(this.props, 'static-top')] = staticTop;
 
     // handle built-in styles manually to provide the convenience `inverse` prop
-    classes[tbsUtils.prefix(this.props, INVERSE)] = this.props.inverse;
-    classes[tbsUtils.prefix(this.props, DEFAULT)] = !this.props.inverse;
+    classes[tbsUtils.prefix(this.props, INVERSE)] = inverse;
+    classes[tbsUtils.prefix(this.props, DEFAULT)] = !inverse;
 
     const showHeader =
       (brand || toggleButton || toggleNavKey != null) &&

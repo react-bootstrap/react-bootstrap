@@ -1,6 +1,15 @@
 {
-  "stage": 1,
-  "optional": ["runtime"],
-  "loose": ["all"],
-  "plugins": ["dev-expression"]
+  "presets": [
+    "react",
+    "es2015",
+    "stage-1"
+  ],
+
+  "plugins": [
+    "transform-runtime",
+    "add-module-exports",
+    "transform-decorators-legacy",
+    "dev-expression",
+    "transform-es3-modules-literals"
+  ]
 }

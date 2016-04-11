@@ -8,8 +8,6 @@ class CustomMenu extends React.Component {
   }
 
   render() {
-    let { className, ...props } = this.props;
-
     return (
       <div
         className={"dropdown-menu"}

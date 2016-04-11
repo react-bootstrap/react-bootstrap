@@ -10,7 +10,7 @@ export const options = yargs
   })
   .argv;
 
-export const jsLoader = 'babel?cacheDirectory';
+export const jsLoader = 'babel';
 
 const baseConfig = {
   entry: undefined,
@@ -20,9 +20,11 @@ const baseConfig = {
   externals: undefined,
 
   module: {
-    loaders: [
-      { test: /\.js/, loader: jsLoader, exclude: /node_modules/ }
-    ]
+    loaders: [{
+      test: /\.js/,
+      loader: jsLoader,
+      exclude: /node_modules/
+    }]
   },
 
   plugins: [
