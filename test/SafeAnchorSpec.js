@@ -51,7 +51,22 @@ describe('SafeAnchor', () => {
     ReactTestUtils.Simulate.click(anchor);
   });
 
-  it('does not prevent default when href is provided', (done) => {
+  it('does prevent default when href is provided and "#"', (done) => {
+    const handleClick = (event) => {
+      expect(event.isDefaultPrevented()).not.to.be.ok;
+
+      setTimeout(() => {
+        expect(event.isDefaultPrevented()).to.be.ok;
+        done();
+      });
+    };
+    const instance = ReactTestUtils.renderIntoDocument(<SafeAnchor href='#' onClick={handleClick} />);
+    const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
+
+    ReactTestUtils.Simulate.click(anchor);
+  });
+
+  it('does not prevent default when href is not provided or is not "#"', (done) => {
     const handleClick = (event) => {
       expect(event.isDefaultPrevented()).to.not.be.ok;
 
@@ -60,7 +75,7 @@ describe('SafeAnchor', () => {
         done();
       });
     };
-    const instance = ReactTestUtils.renderIntoDocument(<SafeAnchor href='#' onClick={handleClick} />);
+    const instance = ReactTestUtils.renderIntoDocument(<SafeAnchor href='' onClick={handleClick} />);
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
     ReactTestUtils.Simulate.click(anchor);

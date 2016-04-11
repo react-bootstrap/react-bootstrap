@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 import SafeAnchor from './SafeAnchor';
 import createChainedFunction from './utils/createChainedFunction';
@@ -16,7 +16,14 @@ const NavItem = React.createClass({
     title: React.PropTypes.node,
     eventKey: React.PropTypes.any,
     target: React.PropTypes.string,
+    autoCollapse: React.PropTypes.bool,
     'aria-controls': React.PropTypes.string
+  },
+
+  contextTypes: {
+    $bs_navbar_onToggle: PropTypes.func,
+    $bs_navbar_expanded: PropTypes.bool,
+    $bs_navbar_auto_collapse: PropTypes.bool
   },
 
   getDefaultProps() {
@@ -44,10 +51,21 @@ const NavItem = React.createClass({
       active,
       disabled
     };
+
+    let {
+      $bs_navbar_onToggle: onToggle,
+      $bs_navbar_expanded: expended,
+      $bs_navbar_auto_collapse: autoCollapse
+    } = this.context;
+
+    if (this.props.autoCollapse !== undefined) {
+      autoCollapse = this.props.autoCollapse;
+    }
+
     let linkProps = {
       role,
       href,
-      onClick: createChainedFunction(onClick, this.handleClick),
+      onClick: createChainedFunction(onClick, this.handleClick, () => { if (expended && autoCollapse) onToggle(false); }),
       title,
       target,
       tabIndex,
