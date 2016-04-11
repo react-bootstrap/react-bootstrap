@@ -7,7 +7,7 @@ import ip from 'ip';
 import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import {match, RoutingContext} from 'react-router';
+import {match, RouterContext} from 'react-router';
 
 import Root from './src/Root';
 import routes from './src/Routes';
@@ -48,7 +48,7 @@ if (development) {
       const location = req.url;
       match({routes, location}, (error, redirectLocation, renderProps) => {
         const html = ReactDOMServer.renderToString(
-          <RoutingContext {...renderProps} />
+          <RouterContext {...renderProps} />
         );
         res.send('<!doctype html>' + html);
       });
