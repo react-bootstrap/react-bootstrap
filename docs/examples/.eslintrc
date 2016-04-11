@@ -8,6 +8,7 @@
     "React",
     "ReactDOM",
     "classNames",
+    "bootstrapUtils",
     "Accordion",
     "Alert",
     "Badge",

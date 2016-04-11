@@ -6,6 +6,8 @@ const classNames = require('classnames');
 const React = require('react');
 const ReactDOM = require('react-dom');
 
+const bootstrapUtils = require('../../src/utils/bootstrapUtils.js').default;
+
 const Accordion = require('../../src/Accordion');
 const Alert = require('../../src/Alert');
 const Badge = require('../../src/Badge');
