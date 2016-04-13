@@ -22,6 +22,7 @@ export default {
   CustomButtonStyle:             require('fs').readFileSync(__dirname + '/../examples/CustomButtonStyle.js', 'utf8'),
   DropdownButtonBasic:           require('fs').readFileSync(__dirname + '/../examples/DropdownButtonBasic.js', 'utf8'),
   DropdownButtonCustom:          require('fs').readFileSync(__dirname + '/../examples/DropdownButtonCustom.js', 'utf8'),
+  DropdownButtonBlock:           require('fs').readFileSync(__dirname + '/../examples/DropdownButtonBlock.js', 'utf8'),
   DropdownButtonCustomMenu:      require('fs').readFileSync(__dirname + '/../examples/DropdownButtonCustomMenu.js', 'utf8'),
   SplitButtonBasic:              require('fs').readFileSync(__dirname + '/../examples/SplitButtonBasic.js', 'utf8'),
   DropdownButtonSizes:           require('fs').readFileSync(__dirname + '/../examples/DropdownButtonSizes.js', 'utf8'),
