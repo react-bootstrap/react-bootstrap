@@ -72,7 +72,7 @@ let Button = React.createClass({
       <Component
         {...this.props}
         href={href}
-        className={classNames(this.props.className, classes)}
+        className={classNames(classes, this.props.className)}
         role="button">
         {this.props.children}
       </Component>
