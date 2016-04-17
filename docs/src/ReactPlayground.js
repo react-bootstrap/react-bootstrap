@@ -6,8 +6,7 @@ const classNames = require('classnames');
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-const bootstrapUtils = require('../../src/utils/bootstrapUtils.js').default;
-
+// Keep these in sync with src/index.js.
 const Accordion = require('../../src/Accordion');
 const Alert = require('../../src/Alert');
 const Badge = require('../../src/Badge');
@@ -18,19 +17,25 @@ const ButtonInput = require('../../src/ButtonInput');
 const ButtonToolbar = require('../../src/ButtonToolbar');
 const Carousel = require('../../src/Carousel');
 const CarouselItem = require('../../src/CarouselItem');
+const Checkbox = require('../../src/Checkbox');
 const Clearfix = require('../../src/Clearfix');
 const Col = require('../../src/Col');
 const Collapse = require('../../src/Collapse');
-const CollapsibleNav = require('../../src/CollapsibleNav');
+const ControlLabel = require('../../src/ControlLabel');
 const Dropdown = require('../../src/Dropdown');
 const DropdownButton = require('../../src/DropdownButton');
-const DropdownMenu = require('../../src/DropdownMenu');
 const Fade = require('../../src/Fade');
+const Form = require('../../src/Form');
+const FormControl = require('../../src/FormControl');
 const FormControls = require('../../src/FormControls');
+const FormGroup = require('../../src/FormGroup');
 const Glyphicon = require('../../src/Glyphicon');
 const Grid = require('../../src/Grid');
-const Input = require('../../src/Input');
+const HelpBlock = require('../../src/HelpBlock');
 const Image = require('../../src/Image');
+const Input = require('../../src/Input');
+const InputGroup = require('../../src/InputGroup');
+const Interpolate = require('../../src/Interpolate');
 const Jumbotron = require('../../src/Jumbotron');
 const Label = require('../../src/Label');
 const ListGroup = require('../../src/ListGroup');
@@ -40,8 +45,9 @@ const MenuItem = require('../../src/MenuItem');
 const Modal = require('../../src/Modal');
 const Nav = require('../../src/Nav');
 const Navbar = require('../../src/Navbar');
-const NavItem = require('../../src/NavItem');
+const NavbarBrand = require('../../src/NavbarBrand');
 const NavDropdown = require('../../src/NavDropdown');
+const NavItem = require('../../src/NavItem');
 const Overlay = require('../../src/Overlay');
 const OverlayTrigger = require('../../src/OverlayTrigger');
 const PageHeader = require('../../src/PageHeader');
@@ -52,23 +58,26 @@ const Panel = require('../../src/Panel');
 const PanelGroup = require('../../src/PanelGroup');
 const Popover = require('../../src/Popover');
 const ProgressBar = require('../../src/ProgressBar');
+const Radio = require('../../src/Radio');
 const ResponsiveEmbed = require('../../src/ResponsiveEmbed');
 const Row = require('../../src/Row');
+const SafeAnchor = require('../../src/SafeAnchor');
 const SplitButton = require('../../src/SplitButton');
 const Tab = require('../../src/Tab');
+const TabContainer = require('../../src/TabContainer');
+const TabContent = require('../../src/TabContent');
 const Table = require('../../src/Table');
+const TabPane = require('../../src/TabPane');
 const Tabs = require('../../src/Tabs');
 const Thumbnail = require('../../src/Thumbnail');
 const Tooltip = require('../../src/Tooltip');
 const Well = require('../../src/Well');
+
+const bootstrapUtils = require('../../src/utils/bootstrapUtils.js').default;
 /* eslint-enable */
 
 import babel from 'babel-core/browser';
 import CodeExample from './CodeExample';
-
-// This is only used for the ReactPlayground component, not for any of the
-// examples, so it's fine to import like this.
-import SafeAnchor from '../../src/SafeAnchor';
 
 const IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)

@@ -70,12 +70,12 @@ const PanelGroup = React.createClass({
     return !this._isChanging;
   },
 
-  handleSelect(e, key) {
+  handleSelect(key, e) {
     e.preventDefault();
 
     if (this.props.onSelect) {
       this._isChanging = true;
-      this.props.onSelect(key);
+      this.props.onSelect(key, e);
       this._isChanging = false;
     }
 

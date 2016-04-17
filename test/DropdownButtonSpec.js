@@ -89,7 +89,7 @@ describe('DropdownButton', () => {
   it('forwards onSelect handler to MenuItems', (done) => {
     const selectedEvents = [];
 
-    const onSelect = (event, eventKey) => {
+    const onSelect = (eventKey) => {
       selectedEvents.push(eventKey);
 
       if (selectedEvents.length === 4) {

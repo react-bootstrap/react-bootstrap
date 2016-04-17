@@ -2,9 +2,13 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import * as FormControls from '../src/FormControls';
 
+import {shouldWarn} from './helpers';
+
 describe('Form Controls', () => {
   describe('Static', () => {
     it('renders a p element wrapped around the given value', () => {
+      shouldWarn('deprecated');
+
       const instance = ReactTestUtils.renderIntoDocument(
         <FormControls.Static value='v' />
       );
@@ -14,6 +18,8 @@ describe('Form Controls', () => {
     });
 
     it('getValue() pulls from either value or children', () => {
+      shouldWarn('deprecated');
+
       let instance = ReactTestUtils.renderIntoDocument(
         <FormControls.Static value='v' />
       );
@@ -35,11 +41,15 @@ describe('Form Controls', () => {
     });
 
     it('allows elements as children', () => {
+      shouldWarn('deprecated');
+
       ReactTestUtils.renderIntoDocument(
         <FormControls.Static><span>blah</span></FormControls.Static>
       );
     });
     it('allows choosing non-default element tag', () => {
+      shouldWarn('deprecated');
+
       const instance = ReactTestUtils.renderIntoDocument(
         <FormControls.Static componentClass="output" value="v" />
       );

@@ -2,7 +2,6 @@ import css from 'dom-helpers/style';
 import React from 'react';
 import classNames from 'classnames';
 import Transition from 'react-overlays/lib/Transition';
-import deprecated from 'react-prop-types/lib/deprecated';
 
 import createChainedFunction from './utils/createChainedFunction';
 
@@ -141,12 +140,6 @@ Collapse.propTypes = {
    * events are canceled
    */
   timeout: React.PropTypes.number,
-
-  /**
-   * duration
-   * @private
-   */
-  duration: deprecated(React.PropTypes.number, 'Use `timeout`.'),
 
   /**
    * Callback fired before the component expands

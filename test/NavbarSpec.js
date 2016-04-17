@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
 
-import { getOne, shouldWarn } from './helpers';
+import { getOne } from './helpers';
 import utils from '../src/utils/bootstrapUtils';
 
 describe('Navbar', () => {
@@ -291,40 +291,6 @@ describe('Navbar', () => {
     );
 
     ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'test');
-  });
-
-  describe('deprecations', ()=> {
-    it('Should add header with brand', () => {
-      shouldWarn('deprecated');
-      shouldWarn('has been renamed');
-
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Navbar brand="Brand" />
-      );
-
-      let header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
-
-      assert.ok(header);
-
-      let brand = getOne(header.getElementsByClassName('navbar-brand'));
-
-      assert.ok(brand);
-      assert.equal(brand.nodeName, 'SPAN');
-      assert.equal(brand.innerText, 'Brand');
-    });
-
-    it('Should add header when toggleNavKey is 0', () => {
-      shouldWarn('deprecated');
-
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Navbar toggleNavKey={0}>
-          <Nav eventKey={0} />
-        </Navbar>
-      );
-
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
-    });
   });
 
 });

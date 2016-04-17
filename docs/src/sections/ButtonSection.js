@@ -33,21 +33,26 @@ export default function ButtonSection() {
       <p>To set a buttons active state simply set the components <code>active</code> prop.</p>
       <ReactPlayground codeText={Samples.ButtonActive} />
 
+      <h3><Anchor id="buttons-tags">Button tags</Anchor></h3>
+      <p>The DOM element tag is choosen automatically for you based on the props you supply. Passing
+        a <code>href</code> will result in the button using a <code>{"<a />"}</code> element otherwise
+        a <code>{"<button />"}</code> element will be used.
+      </p>
+      <ReactPlayground codeText={Samples.ButtonTagTypes} />
+
       <h3><Anchor id="buttons-disabled">Disabled state</Anchor></h3>
       <p>Make buttons look unclickable by fading them back 50%. To do this add the <code>disabled</code> attribute to buttons.</p>
       <ReactPlayground codeText={Samples.ButtonDisabled} />
 
       <div className="bs-callout bs-callout-warning">
-        <h4>Event handler functionality not impacted</h4>
-        <p>This prop will only change the <code>{"<Button />"}</code>&#8217;s appearance, not its
-          functionality. Use custom logic to disable the effect of the <code>onClick</code> handlers.</p>
+        <h4>Cross-Browser compatibility</h4>
+        <p>
+          Because <code>{"<Button />"}</code> will render an <code>{'<a>'}</code> tag in certain situations.
+          Since anchor tags can't be <code>disabled</code>, the behavior is emulated as best it can be.
+          Specifically, <code>pointer-events: none;</code> style is added to the anchor to prevent focusing, which
+          is only supported in newer browser versions.
+        </p>
       </div>
-
-      <h3><Anchor id="buttons-tags">Button tags</Anchor></h3>
-      <p>The DOM element tag is choosen automatically for you based on the props you supply. Passing
-        a <code>href</code> will result in the button using a <code>{"<a />"}</code> element otherwise
-        a <code>{"<button />"}</code> element will be used.</p>
-      <ReactPlayground codeText={Samples.ButtonTagTypes} />
 
       <h3><Anchor id="buttons-loading">Button loading state</Anchor></h3>
       <p>When activating an asynchronous action from a button it is a good UX pattern to give the user

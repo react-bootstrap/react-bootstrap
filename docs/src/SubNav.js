@@ -6,8 +6,6 @@ import createChainedFunction from '../../src/utils/createChainedFunction';
 import SafeAnchor from '../../src/SafeAnchor';
 
 const SubNav = React.createClass({
-
-
   propTypes: {
     onSelect: React.PropTypes.func,
     active: React.PropTypes.bool,
@@ -34,48 +32,35 @@ const SubNav = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
+        this.props.onSelect(this.props.eventKey, e);
       }
     }
   },
 
-  isActive() {
-    return this.isChildActive(this);
-  },
-
-  isChildActive(child) {
-    if (child.props.active) {
+  isActive({ props }) {
+    if (props.active) {
       return true;
     }
 
-    if (this.props.activeKey != null && this.props.activeKey === child.props.eventKey) {
+    if (this.props.activeKey != null && this.props.activeKey === props.eventKey) {
       return true;
     }
 
-    if (this.props.activeHref != null && this.props.activeHref === child.props.href) {
+    if (this.props.activeHref != null && this.props.activeHref === props.href) {
       return true;
     }
 
-    if (child.props.children) {
-      let isActive = false;
-
-      ValidComponentChildren.forEach(
-        child.props.children,
-        grandchild => {
-          if (this.isChildActive(grandchild)) {
-            isActive = true;
-          }
-        },
-        this
+    if (props.children) {
+      return ValidComponentChildren.some(
+        props.children,
+        child => this.isActive(child)
       );
-
-      return isActive;
     }
 
     return false;
   },
 
-  getChildActiveProp(child) {
+  getChildActive(child) {
     if (child.props.active) {
       return true;
     }
@@ -94,9 +79,9 @@ const SubNav = React.createClass({
   },
 
   render() {
-    let classes = {
-      'active': this.isActive(),
-      'disabled': this.props.disabled
+    const classes = {
+      active: this.isActive(this),
+      disabled: this.props.disabled
     };
 
     return (
@@ -105,9 +90,11 @@ const SubNav = React.createClass({
           href={this.props.href}
           title={this.props.title}
           target={this.props.target}
-          onClick={this.handleClick}>
+          onClick={this.handleClick}
+        >
           {this.props.text}
         </SafeAnchor>
+
         <ul className="nav">
           {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
         </ul>
@@ -119,7 +106,7 @@ const SubNav = React.createClass({
     return cloneElement(
       child,
       {
-        active: this.getChildActiveProp(child),
+        active: this.getChildActive(child),
         onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
         key: child.key ? child.key : index
       }
