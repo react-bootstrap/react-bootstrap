@@ -11,6 +11,10 @@ class Static extends InputBase {
     const {children, value} = this.props;
     return children ? children : value;
   }
+  
+  get value() {
+    return this.getValue();
+  }
 
   renderInput() {
     const {componentClass: ComponentClass, ...props} = this.props;
