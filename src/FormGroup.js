@@ -3,7 +3,7 @@ import React from 'react';
 import deprecated from 'react-prop-types/lib/deprecated';
 
 import { Sizes } from './styleMaps';
-import bootstrapUtils, { bsClass, bsSizes } from './utils/bootstrapUtils';
+import { bsClass, bsSizes, getClassSet } from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const propTypes = {
@@ -79,7 +79,7 @@ class FormGroup extends React.Component {
     delete props.controlId;
 
     const classes = {
-      ...(!standalone && bootstrapUtils.getClassSet(this.props)),
+      ...(!standalone && getClassSet(this.props)),
       'has-feedback': hasFeedback,
     };
     if (validationState) {

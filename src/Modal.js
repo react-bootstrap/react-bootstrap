@@ -1,17 +1,18 @@
-
-/* eslint-disable react/prop-types */
 import classNames from 'classnames';
+import events from 'dom-helpers/events';
+import ownerDocument from 'dom-helpers/ownerDocument';
+import canUseDOM from 'dom-helpers/util/inDOM';
+import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
+import pick from 'lodash-compat/object/pick';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import tbsUtils, { bsClass, bsSizes } from './utils/bootstrapUtils';
-import { Sizes } from './styleMaps';
-
-import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import canUseDOM from 'dom-helpers/util/inDOM';
-import ownerDocument from 'dom-helpers/ownerDocument';
-import events from 'dom-helpers/events';
+import BaseModal from 'react-overlays/lib/Modal';
+import isOverflowing from 'react-overlays/lib/utils/isOverflowing';
 import deprecated from 'react-prop-types/lib/deprecated';
 import elementType from 'react-prop-types/lib/elementType';
+
+import { Sizes } from './styleMaps';
+import { bsClass, bsSizes, prefix } from './utils/bootstrapUtils';
 
 import Fade from './Fade';
 import ModalDialog from './ModalDialog';
@@ -20,10 +21,7 @@ import Header from './ModalHeader';
 import Title from './ModalTitle';
 import Footer from './ModalFooter';
 
-import BaseModal from 'react-overlays/lib/Modal';
-import isOverflowing from 'react-overlays/lib/utils/isOverflowing';
-import pick from 'lodash-compat/object/pick';
-
+/* eslint-disable react/prop-types */
 const Modal = React.createClass({
 
   propTypes: {
@@ -188,8 +186,8 @@ const Modal = React.createClass({
         }}
         onEntering={this._onShow}
         onExited={this._onHide}
-        backdropClassName={classNames(tbsUtils.prefix(props, 'backdrop'), inClass)}
-        containerClassName={tbsUtils.prefix(props, 'open')}
+        backdropClassName={classNames(prefix(props, 'backdrop'), inClass)}
+        containerClassName={prefix(props, 'open')}
         transition={animation ? Fade : undefined}
         dialogTransitionTimeout={Modal.TRANSITION_DURATION}
         backdropTransitionTimeout={Modal.BACKDROP_TRANSITION_DURATION}

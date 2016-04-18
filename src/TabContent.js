@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import invariant from 'invariant';
+import React, { PropTypes } from 'react';
 import elementType from 'react-prop-types/lib/elementType';
-import tbsUtils, { bsClass as setBsClass } from './utils/bootstrapUtils';
+
+import { bsClass as setBsClass, prefix } from './utils/bootstrapUtils';
 
 let animationPropType = PropTypes.oneOfType([
   PropTypes.bool,
@@ -96,7 +97,7 @@ let TabContent = React.createClass({
     let { className, children } = this.props;
     let Component = this.props.componentClass;
 
-    let contentClass = tbsUtils.prefix(this.props, 'content');
+    let contentClass = prefix(this.props, 'content');
 
     return (
       <Component className={cn(contentClass, className)}>

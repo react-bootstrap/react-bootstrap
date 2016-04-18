@@ -1,5 +1,9 @@
 import React from 'react';
-import tbsUtils, { bsStyles, bsSizes, _curry } from '../../src/utils/bootstrapUtils';
+
+import {
+  bsStyles, bsSizes, getClassSet, prefix, _curry,
+} from '../../src/utils/bootstrapUtils';
+
 import { render, shouldWarn } from '../helpers';
 
 describe('bootstrapUtils', ()=> {
@@ -15,39 +19,36 @@ describe('bootstrapUtils', ()=> {
   }
 
   it('should prefix with bsClass', ()=> {
-    expect(tbsUtils.prefix({ bsClass: 'yolo'}, 'pie')).to.equal('yolo-pie');
+    expect(prefix({ bsClass: 'yolo'}, 'pie')).to.equal('yolo-pie');
   });
 
   it('should return bsClass when there is no suffix', ()=> {
-    expect(tbsUtils.prefix({ bsClass: 'yolo'})).to.equal('yolo');
-    expect(tbsUtils.prefix({ bsClass: 'yolo'}, '')).to.equal('yolo');
-    expect(tbsUtils.prefix({ bsClass: 'yolo'}, null)).to.equal('yolo');
+    expect(prefix({ bsClass: 'yolo'})).to.equal('yolo');
+    expect(prefix({ bsClass: 'yolo'}, '')).to.equal('yolo');
+    expect(prefix({ bsClass: 'yolo'}, null)).to.equal('yolo');
   });
 
   it('returns a classSet of bsClass', ()=> {
-    expect(tbsUtils.getClassSet({ bsClass: 'btn' })).to.eql({'btn': true });
+    expect(getClassSet({ bsClass: 'btn' })).to.eql({'btn': true });
   });
 
   it('returns a classSet of bsClass and style', ()=> {
     expect(
-      tbsUtils.getClassSet({ bsClass: 'btn', bsStyle: 'primary' })
+      getClassSet({ bsClass: 'btn', bsStyle: 'primary' })
     )
     .to.eql({'btn': true, 'btn-primary': true });
   });
 
   it('returns a classSet of bsClass and size', ()=> {
-    expect(tbsUtils
-      .getClassSet({ bsClass: 'btn', bsSize: 'large' }))
+    expect(getClassSet({ bsClass: 'btn', bsSize: 'large' }))
         .to.eql({'btn': true, 'btn-lg': true });
 
-    expect(tbsUtils
-      .getClassSet({ bsClass: 'btn', bsSize: 'lg' }))
+    expect(getClassSet({ bsClass: 'btn', bsSize: 'lg' }))
         .to.eql({'btn': true, 'btn-lg': true });
   });
 
   it('returns a classSet of bsClass, style and size', ()=> {
-    expect(tbsUtils
-      .getClassSet({ bsClass: 'btn', bsSize: 'lg', bsStyle: 'primary' }))
+    expect(getClassSet({ bsClass: 'btn', bsSize: 'lg', bsStyle: 'primary' }))
         .to.eql({'btn': true, 'btn-lg': true, 'btn-primary': true });
   });
 

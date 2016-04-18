@@ -1,11 +1,12 @@
-import React, { cloneElement } from 'react';
 import classNames from 'classnames';
+import React, { cloneElement } from 'react';
+
+import { prefix } from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
-import Glyphicon from './Glyphicon';
-import tbsUtils from './utils/bootstrapUtils';
 
 import Caption from './CarouselCaption';
 import Item from './CarouselItem';
+import Glyphicon from './Glyphicon';
 
 let Carousel = React.createClass({
 
@@ -155,7 +156,7 @@ let Carousel = React.createClass({
 
   render() {
     let classes = {
-      [tbsUtils.prefix(this.props)]: true,
+      [prefix(this.props)]: true,
       slide: this.props.slide
     };
 
@@ -164,23 +165,24 @@ let Carousel = React.createClass({
         {...this.props}
         className={classNames(this.props.className, classes)}
         onMouseOver={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}>
-        {
-          this.props.indicators ? this.renderIndicators() : null
-        }
+        onMouseOut={this.handleMouseOut}
+      >
+        {this.props.indicators ? this.renderIndicators() : null}
+
         <div
           ref="inner"
-          className={tbsUtils.prefix(this.props, 'inner')}
+          className={prefix(this.props, 'inner')}
         >
           {ValidComponentChildren.map(this.props.children, this.renderItem)}
         </div>
+
         {this.props.controls ? this.renderControls() : null}
       </div>
     );
   },
 
   renderPrev() {
-    let classes = 'left ' + tbsUtils.prefix(this.props, 'control');
+    let classes = `left ${prefix(this.props, 'control')}`;
 
     return (
       <a className={classes} href="#prev" key={0} onClick={this.prev}>
@@ -190,7 +192,7 @@ let Carousel = React.createClass({
   },
 
   renderNext() {
-    let classes = 'right ' + tbsUtils.prefix(this.props, 'control');
+    let classes = `right ${prefix(this.props, 'control')}`;
 
     return (
       <a className={classes} href="#next" key={1} onClick={this.next}>
@@ -242,7 +244,7 @@ let Carousel = React.createClass({
       }, this);
 
     return (
-      <ol className={tbsUtils.prefix(this.props, 'indicators')}>
+      <ol className={prefix(this.props, 'indicators')}>
         {indicators}
       </ol>
     );

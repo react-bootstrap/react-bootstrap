@@ -1,14 +1,16 @@
+import classNames from 'classnames';
+import keycode from 'keycode';
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
-import classNames from 'classnames';
 import all from 'react-prop-types/lib/all';
 import warning from 'warning';
-import keycode from 'keycode';
-import tbsUtils, { bsStyles, bsClass as _bsClass } from './utils/bootstrapUtils';
-import { nextEnabled, TAB, PANE } from './utils/tabUtils';
 
-import ValidComponentChildren from './utils/ValidComponentChildren';
+import {
+  bsStyles, bsClass as _bsClass, getClassSet, prefix,
+} from './utils/bootstrapUtils';
 import chain from './utils/createChainedFunction';
+import { nextEnabled, TAB, PANE } from './utils/tabUtils';
+import ValidComponentChildren from './utils/ValidComponentChildren';
 
 class Nav extends React.Component {
 
@@ -34,17 +36,17 @@ class Nav extends React.Component {
     const { className } = this.props;
     const isNavbar = this.props.navbar != null ? this.props.navbar : this.context.$bs_navbar;
 
-    const classes = tbsUtils.getClassSet(this.props);
+    const classes = getClassSet(this.props);
 
-    classes[tbsUtils.prefix(this.props, 'stacked')] = this.props.stacked;
-    classes[tbsUtils.prefix(this.props, 'justified')] = this.props.justified;
+    classes[prefix(this.props, 'stacked')] = this.props.stacked;
+    classes[prefix(this.props, 'justified')] = this.props.justified;
 
     if (isNavbar) {
       let bsClass = this.context.$bs_navbar_bsClass || 'navbar';
 
-      classes[tbsUtils.prefix({ bsClass }, 'nav')] = true;
-      classes[tbsUtils.prefix({ bsClass }, 'right')] = this.props.pullRight;
-      classes[tbsUtils.prefix({ bsClass }, 'left')] = this.props.pullLeft;
+      classes[prefix({ bsClass }, 'nav')] = true;
+      classes[prefix({ bsClass }, 'right')] = this.props.pullRight;
+      classes[prefix({ bsClass }, 'left')] = this.props.pullLeft;
     } else {
       classes['pull-right'] = this.props.pullRight;
       classes['pull-left'] = this.props.pullLeft;

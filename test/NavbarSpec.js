@@ -6,7 +6,7 @@ import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
 
 import { getOne } from './helpers';
-import utils from '../src/utils/bootstrapUtils';
+import { addStyle } from '../src/utils/bootstrapUtils';
 
 describe('Navbar', () => {
 
@@ -58,7 +58,7 @@ describe('Navbar', () => {
   });
 
   it('Should not add default class along with custom styles', () => {
-    utils.addStyle(Navbar, ['custom']);
+    addStyle(Navbar, 'custom');
 
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar bsStyle='custom' />
