@@ -1,5 +1,5 @@
 ## [v0.29.0]
-> 2016-04-17
+> 2016-04-18
 
 - **Breaking:** Change `onSelect` signature to be `(eventKey: any, event: SyntheticEvent) => any` on all React-Bootstrap components, instead of the old inconsistent mishmash ([#1604], [#1677], [#1756])
 - **Breaking:** Remove deprecated `duration` on transition components ([#1608])
@@ -7,11 +7,13 @@
 - **Breaking:** Don't check for prefixed `bsStyle` in `bootstrapUtils.getClassSet` ([#1759])
 - **Breaking:** Disable click handlers on `disabled` components ([#1794])
 - **Breaking:** In components with wrapped anchors, pass through all props other than `className` and `style` to the wrapped anchor ([#1801])
+- **Breaking:** Use consistent exports from `bootstrapUtils` ([#1813])
 - **Feature/Deprecation:** Add lower-level tab components, and deprecate horizontal layout support in `<Tabs>` in favor of lower-level components ([#1607], [#1784])
 - **Feature/Deprecation:** Deprecate `dialogComponent` in favor of new `dialogComponentClass` on `<Modal>` for consistency with other components ([#1753])
 - **Feature/Deprecation:** Rewrite form and form control API, and deprecate the old API ([#1765])
 - **Deprecation:** Deprecate `dismissAfter` on `<Alert>` ([#1636])
 - **Deprecation:** Deprecate label interpolation (e.g. `label="%(percent)s%"`) in `<ProgressBar>` ([#1751])
+- **Bugfix:** Set `collapsed` class on `<Navbar.Toggle>` ([#1733])
 
 [v0.29.0]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.5...v0.29.0
 [#1604]: https://github.com/react-bootstrap/react-bootstrap/pull/1604
@@ -19,6 +21,7 @@
 [#1608]: https://github.com/react-bootstrap/react-bootstrap/pull/1608
 [#1636]: https://github.com/react-bootstrap/react-bootstrap/pull/1636
 [#1677]: https://github.com/react-bootstrap/react-bootstrap/pull/1677
+[#1733]: https://github.com/react-bootstrap/react-bootstrap/pull/1733
 [#1745]: https://github.com/react-bootstrap/react-bootstrap/pull/1745
 [#1751]: https://github.com/react-bootstrap/react-bootstrap/pull/1751
 [#1753]: https://github.com/react-bootstrap/react-bootstrap/pull/1753
@@ -28,6 +31,7 @@
 [#1784]: https://github.com/react-bootstrap/react-bootstrap/pull/1784
 [#1794]: https://github.com/react-bootstrap/react-bootstrap/pull/1794
 [#1801]: https://github.com/react-bootstrap/react-bootstrap/pull/1801
+[#1813]: https://github.com/react-bootstrap/react-bootstrap/pull/1813
 
 
 ## [v0.28.5]
