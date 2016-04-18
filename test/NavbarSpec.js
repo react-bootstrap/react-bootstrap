@@ -247,10 +247,12 @@ describe('Navbar', () => {
     let collapse = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Collapse);
 
     expect(collapse.context.$bs_navbar_expanded).to.not.be.ok;
+    expect(toggle.className).to.match(/collapsed/);
 
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(toggle));
 
     expect(collapse.context.$bs_navbar_expanded).to.equal(true);
+    expect(toggle.className).to.not.match(/collapsed/);
   });
 
   it('Should pass `bsClass` down to sub components', () => {
