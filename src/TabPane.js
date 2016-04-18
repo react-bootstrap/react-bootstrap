@@ -1,13 +1,14 @@
-import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import warning from 'warning';
-import Fade from './Fade';
 import addClass from 'dom-helpers/class/addClass';
+import React, { PropTypes } from 'react';
 import elementType from 'react-prop-types/lib/elementType';
+import warning from 'warning';
+
+import { bsClass as setBsClass, prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
-import tbsUtils, { bsClass as setBsClass } from './utils/bootstrapUtils';
 import { TAB, PANE } from './utils/tabUtils';
 
+import Fade from './Fade';
 
 let TabPane = React.createClass({
   propTypes: {
@@ -146,7 +147,7 @@ let TabPane = React.createClass({
 
     let classes = {
       active: visible,
-      [tbsUtils.prefix({ bsClass }, 'pane')]: true
+      [prefix({ bsClass }, 'pane')]: true
     };
 
     let {

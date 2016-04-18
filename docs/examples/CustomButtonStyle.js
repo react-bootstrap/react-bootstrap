@@ -1,4 +1,4 @@
-bootstrapUtils.addStyle(Button, ['custom']);
+bootstrapUtils.addStyle(Button, 'custom');
 
 const customButtonStyle = (
   <div>

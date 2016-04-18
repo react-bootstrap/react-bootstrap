@@ -73,7 +73,7 @@ const Thumbnail = require('../../src/Thumbnail');
 const Tooltip = require('../../src/Tooltip');
 const Well = require('../../src/Well');
 
-const bootstrapUtils = require('../../src/utils/bootstrapUtils.js').default;
+const bootstrapUtils = require('../../src/utils/bootstrapUtils');
 /* eslint-enable */
 
 import babel from 'babel-core/browser';

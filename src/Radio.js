@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import warning from 'warning';
 
-import bootstrapUtils, { bsClass } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, prefix } from './utils/bootstrapUtils';
 
 const propTypes = {
   inline: React.PropTypes.bool,
@@ -28,7 +28,7 @@ class Radio extends React.Component {
 
     if (inline) {
       const classes = {
-        [bootstrapUtils.prefix(this.props, 'inline')]: true,
+        [prefix(this.props, 'inline')]: true,
         disabled,
       };
 
@@ -50,7 +50,7 @@ class Radio extends React.Component {
     }
 
     const classes = {
-      ...bootstrapUtils.getClassSet(this.props),
+      ...getClassSet(this.props),
       disabled,
     };
     if (validationState) {

@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { prefix } from './utils/bootstrapUtils';
 import TransitionEvents from './utils/TransitionEvents';
-import tbsUtils from './utils/bootstrapUtils';
 
 const CarouselItem = React.createClass({
   propTypes: {
@@ -90,7 +90,7 @@ const CarouselItem = React.createClass({
   },
 
   renderCaption() {
-    let classes = tbsUtils.prefix(this.props, 'caption');
+    let classes = prefix(this.props, 'caption');
 
     return (
       <div className={classes}>
