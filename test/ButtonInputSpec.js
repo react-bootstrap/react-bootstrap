@@ -7,6 +7,8 @@ import {shouldWarn} from './helpers';
 
 describe('ButtonInput', () => {
   it('renders an input button element with type=button', () => {
+    shouldWarn('deprecated');
+
     const instance = ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" bsStyle="danger" wrapperClassName="test" />
     );
@@ -17,6 +19,8 @@ describe('ButtonInput', () => {
   });
 
   it('supports type=reset and type=submit', () => {
+    shouldWarn('deprecated');
+
     let instance = ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" type="reset" />
     );
@@ -33,6 +37,7 @@ describe('ButtonInput', () => {
   });
 
   it('throws warning about unsupported type', () => {
+    shouldWarn('deprecated');
     shouldWarn('propType: Invalid');
     shouldWarn('Failed form propType');
 
@@ -42,12 +47,15 @@ describe('ButtonInput', () => {
   });
 
   it('must not throw warning when bsStyle=danger', () => {
+    shouldWarn('deprecated');
+
     ReactTestUtils.renderIntoDocument(
       <ButtonInput value="button" bsStyle="danger" />
     );
   });
 
   it('throws warning about wrong type for bsStyle=error', () => {
+    shouldWarn('deprecated');
     shouldWarn('propType: Invalid');
 
     ReactTestUtils.renderIntoDocument(
@@ -74,6 +82,8 @@ describe('ButtonInput', () => {
   });
 
   it('allows elements as children', () => {
+    shouldWarn('deprecated');
+
     ReactTestUtils.renderIntoDocument(
       <ButtonInput><span>blah</span></ButtonInput>
     );

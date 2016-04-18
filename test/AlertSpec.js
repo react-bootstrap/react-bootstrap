@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 
 import Alert from '../src/Alert';
 
+import { shouldWarn } from './helpers';
+
 describe('Alert', () => {
   it('Should output a alert with message', () => {
     let instance = ReactTestUtils.renderIntoDocument(
@@ -46,6 +48,8 @@ describe('Alert', () => {
   });
 
   it('Should call onDismiss callback on dismissAfter time', (done) => {
+    shouldWarn('deprecated');
+
     let doneOp = () => {
       done();
     };

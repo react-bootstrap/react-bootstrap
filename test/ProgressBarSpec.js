@@ -99,6 +99,17 @@ describe('ProgressBar', () => {
   it('Should have label', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={5} bsStyle="success"
+        label="progress bar label" />
+    );
+
+    assert.equal(ReactDOM.findDOMNode(instance).innerText, 'progress bar label');
+  });
+
+  it('Should warn on deprecated label interpolation', () => {
+    shouldWarn('deprecated');
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ProgressBar min={0} max={10} now={5} bsStyle="success"
         label="min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s" />
     );
 
@@ -108,11 +119,11 @@ describe('ProgressBar', () => {
   it('Should have screen reader only label', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={5} srOnly bsStyle="success"
-        label="min:%(min)s, max:%(max)s, now:%(now)s, percent:%(percent)s, bsStyle:%(bsStyle)s" />
+        label="progress bar label" />
     );
     let srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
 
-    assert.equal(srLabel.innerText, 'min:0, max:10, now:5, percent:50, bsStyle:success');
+    assert.equal(srLabel.innerText, 'progress bar label');
   });
 
   it('Should have a label that is a React component', () => {

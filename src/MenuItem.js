@@ -23,7 +23,7 @@ class MenuItem extends React.Component {
     }
 
     if (this.props.onSelect) {
-      this.props.onSelect(event, this.props.eventKey);
+      this.props.onSelect(this.props.eventKey, event);
     }
   }
 
@@ -136,7 +136,7 @@ MenuItem.propTypes = {
    * Callback fired when the menu item is selected.
    *
    * ```js
-   * function(Object event, Any eventKey)
+   * (eventKey: any, event: Object) => any
    * ```
    */
   onSelect: React.PropTypes.func,

@@ -1,7 +1,6 @@
 import { PropTypes } from 'react';
 import styleMaps from '../styleMaps';
 import invariant from 'invariant';
-import warning from 'warning';
 
 function curry(fn) {
   return (...args) => {
@@ -14,8 +13,11 @@ function curry(fn) {
 }
 
 function prefix(props = {}, variant) {
-  invariant((props.bsClass || '').trim(), 'A `bsClass` prop is required for this component');
-  return props.bsClass + (variant ? '-' + variant : '');
+  invariant(
+    (props.bsClass || '').trim(),
+    'A `bsClass` prop is required for this component'
+  );
+  return props.bsClass + (variant ? `-${variant}` : '');
 }
 
 export let bsClass = curry((defaultClass, Component) => {
@@ -76,15 +78,17 @@ export let bsSizes = curry((sizes, defaultSize, Component) => {
     }
   });
 
-  let values = existing.reduce((result, size) => {
-    if (styleMaps.SIZES[size] && styleMaps.SIZES[size] !== size) {
-      result.push(styleMaps.SIZES[size]);
+  const values = [];
+  existing.forEach(size => {
+    const mappedSize = styleMaps.SIZES[size];
+    if (mappedSize && mappedSize !== size) {
+      values.push(mappedSize);
     }
-    return result.concat(size);
-  }, []);
 
-  let propType = PropTypes.oneOf(values);
+    values.push(size);
+  });
 
+  const propType = PropTypes.oneOf(values);
   propType._values = values;
 
   // expose the values on the propType function for documentation
@@ -96,45 +100,30 @@ export let bsSizes = curry((sizes, defaultSize, Component) => {
   };
 
   if (defaultSize !== undefined) {
-    let defaultProps = Component.defaultProps || (Component.defaultProps = {});
-    defaultProps.bsSize = defaultSize;
+    if (!Component.defaultProps) {
+      Component.defaultProps = {};
+    }
+    Component.defaultProps.bsSize = defaultSize;
   }
 
   return Component;
 });
 
 export default {
-
   prefix,
 
   getClassSet(props) {
-    let classes = {};
-    let bsClassName = prefix(props);
+    const classes = {
+      [prefix(props)]: true,
+    };
 
-    if (bsClassName) {
-      let bsSize;
+    if (props.bsSize) {
+      const bsSize = styleMaps.SIZES[props.bsSize] || bsSize;
+      classes[prefix(props, bsSize)] = true;
+    }
 
-      classes[bsClassName] = true;
-
-      if (props.bsSize) {
-        bsSize = styleMaps.SIZES[props.bsSize] || bsSize;
-      }
-
-      if (bsSize) {
-        classes[prefix(props, bsSize)] = true;
-      }
-
-      if (props.bsStyle) {
-        if (props.bsStyle.indexOf(prefix(props)) === 0) {
-          warning(false, // small migration convenience, since the old method required manual prefixing
-            'bsStyle will automatically prefix custom values with the bsClass, so there is no ' +
-            'need to append it manually. (bsStyle: ' + props.bsStyle + ', bsClass: ' + prefix(props) + ')'
-          );
-          classes[props.bsStyle] = true;
-        } else {
-          classes[prefix(props, props.bsStyle)] = true;
-        }
-      }
+    if (props.bsStyle) {
+      classes[prefix(props, props.bsStyle)] = true;
     }
 
     return classes;
@@ -149,4 +138,4 @@ export default {
   }
 };
 
-export let _curry = curry;
+export const _curry = curry;

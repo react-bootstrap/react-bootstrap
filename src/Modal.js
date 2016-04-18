@@ -10,6 +10,7 @@ import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import canUseDOM from 'dom-helpers/util/inDOM';
 import ownerDocument from 'dom-helpers/ownerDocument';
 import events from 'dom-helpers/events';
+import deprecated from 'react-prop-types/lib/deprecated';
 import elementType from 'react-prop-types/lib/elementType';
 
 import Fade from './Fade';
@@ -48,7 +49,12 @@ const Modal = React.createClass({
      * A Component type that provides the modal content Markup. This is a useful prop when you want to use your own
      * styles and markup to create a custom modal component.
      */
-    dialogComponent: elementType,
+    dialogComponentClass: elementType,
+
+    /**
+     * @private
+     */
+    dialogComponent: deprecated(elementType, 'Use `dialogComponentClass`.'),
 
     /**
      * When `true` The modal will automatically shift focus to itself when it opens, and replace it to the last focused element when it closes.
@@ -120,7 +126,7 @@ const Modal = React.createClass({
       ...BaseModal.defaultProps,
       bsClass: 'modal',
       animation: true,
-      dialogComponent: ModalDialog,
+      dialogComponentClass: ModalDialog,
     };
   },
 
@@ -151,7 +157,7 @@ const Modal = React.createClass({
     let { modalStyles } = this.state;
 
     let inClass = { in: props.show && !animation };
-    let Dialog = props.dialogComponent;
+    let Dialog = props.dialogComponent || props.dialogComponentClass;
 
     let parentProps = pick(props,
       Object.keys(BaseModal.propTypes).concat(

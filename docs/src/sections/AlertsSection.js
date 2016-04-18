@@ -24,10 +24,6 @@ export default function AlertsSection() {
       <p>Unlike regular Bootstrap, alerts have an sr-only dismiss button after the content.</p>
       </div>
 
-      <h3><Anchor id="alerts-auto-closeable">Auto closeable</Anchor></h3>
-      <p>Auto close after a set time with <code>dismissAfter</code> prop.</p>
-      <ReactPlayground codeText={Samples.AlertAutoDismissable} />
-
       <h3><Anchor id="alert-props">Props</Anchor></h3>
       <PropTable component="Alert"/>
     </div>

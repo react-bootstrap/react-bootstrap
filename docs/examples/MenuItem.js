@@ -1,5 +1,5 @@
-function onSelectAlert(eventKey, href) {
-  alert('Alert from menu item.\neventKey: "' + eventKey + '"\nhref: "' + href + '"');
+function onSelectAlert(eventKey) {
+  alert(`Alert from menu item.\neventKey: ${eventKey}`);
 }
 
 const MenuItems = (

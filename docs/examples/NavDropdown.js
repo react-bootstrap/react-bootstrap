@@ -1,7 +1,7 @@
 const NavDropdownExample = React.createClass({
-  handleSelect(event, selectedKey) {
+  handleSelect(eventKey) {
     event.preventDefault();
-    alert('selected ' + selectedKey);
+    alert(`selected ${eventKey}`);
   },
 
   render() {

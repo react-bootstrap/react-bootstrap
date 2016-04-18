@@ -3,12 +3,8 @@ import React, { PropTypes } from 'react';
 import uncontrollable from 'uncontrollable';
 import classNames from 'classnames';
 import elementType from 'react-prop-types/lib/elementType';
-import deprecated from 'react-prop-types/lib/deprecated';
-import deprecationWarning from './utils/deprecationWarning';
-import ValidComponentChildren from './utils/ValidComponentChildren';
 
 import Grid from './Grid';
-import OldNavbar from './deprecated/Navbar';
 import NavbarBrand from './NavbarBrand';
 import NavbarHeader from './NavbarHeader';
 import NavbarToggle from './NavbarToggle';
@@ -17,22 +13,6 @@ import NavbarCollapse from './NavbarCollapse';
 import tbsUtils, { bsClass as bsClasses, bsStyles } from './utils/bootstrapUtils';
 import { DEFAULT, INVERSE } from './styleMaps';
 
-let has = (obj, key) => obj && {}.hasOwnProperty.call(obj, key);
-
-function shouldRenderOldNavbar(component) {
-  let props = component.props;
-  return (
-    has(props, 'brand') ||
-    has(props, 'toggleButton') ||
-    has(props, 'toggleNavKey') ||
-    has(props, 'navExpanded') ||
-    has(props, 'defaultNavExpanded') ||
-    // this should be safe b/c the new version requires wrapping in a Header
-    ValidComponentChildren.findValidComponents(
-      props.children, child => child.props.bsRole === 'brand'
-    ).length > 0
-  );
-}
 
 let Navbar = React.createClass({
 
@@ -78,11 +58,6 @@ let Navbar = React.createClass({
      */
     expanded: React.PropTypes.bool,
 
-    /**
-     * @deprecated
-     */
-    navExpanded: deprecated(React.PropTypes.bool,
-      'Use `expanded` and `defaultExpanded` instead.')
   },
 
   childContextTypes: {
@@ -121,18 +96,6 @@ let Navbar = React.createClass({
   },
 
   render() {
-    if (shouldRenderOldNavbar(this)) {
-      deprecationWarning({ message:
-        'Rendering a deprecated version of the Navbar due to the use of deprecated ' +
-        'props. Please use the new Navbar api, and remove `toggleButton`, ' +
-        '`toggleNavKey`, `brand`, `navExpanded`, `defaultNavExpanded` props or the ' +
-        'use of the `<NavBrand>` component outside of a `<Navbar.Header>`. \n\n' +
-        'for more details see: http://react-bootstrap.github.io/components.html#navbars'
-      });
-
-      return <OldNavbar {...this.props}/>;
-    }
-
     const {
       fixedTop,
       fixedBottom,

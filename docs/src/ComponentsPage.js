@@ -18,7 +18,11 @@ import ButtonSection from './sections/ButtonSection';
 import CarouselSection from './sections/CarouselSection';
 import CustomStylesSection from './sections/CustomStylesSection';
 import DropdownSection from './sections/DropdownSection';
+import FormControlsSection from './sections/FormControlsSection';
+import FormInputGroupSection from './sections/FormInputGroupSection';
+import FormLayoutSection from './sections/FormLayoutSection';
 import FormSection from './sections/FormSection';
+import FormValidationSection from './sections/FormValidationSection';
 import GlyphiconSection from './sections/GlyphiconSection';
 import GridSection from './sections/GridSection';
 import ImageSection from './sections/ImageSection';
@@ -72,7 +76,11 @@ const sections = {
     tables: '#tables',
     panels: '#panels',
     wells: '#wells',
-  forms: '#forms',
+  form: '#forms',
+    formControls: '#forms-controls',
+    formLayout: '#forms-layout',
+    formInputGroup: '#forms-input-groups',
+    formValidation: '#forms-validation',
   media: '#media-content',
     images: '#images',
     thumbnails: '#thumbnail',
@@ -113,8 +121,8 @@ const ComponentsPage = React.createClass({
     return this.refs.main;
   },
 
-  handleNavItemSelect(key, href) {
-    window.location = href;
+  handleNavItemSelect(key, e) {
+    window.location = e.target.href;
   },
 
   componentDidMount() {
@@ -189,7 +197,6 @@ const ComponentsPage = React.createClass({
           <PageHeader
             title="Components"
             subTitle="" />
-
           <div ref="main" className="container bs-docs-container">
             <div className="row">
               <div className="col-md-9" role="main">
@@ -266,8 +273,16 @@ const ComponentsPage = React.createClass({
                 {this.renderScrollSpy(sections.wells)}
                 <WellSection />
 
-                {this.renderScrollSpy(sections.forms)}
+                {this.renderScrollSpy(sections.form)}
                 <FormSection />
+                {this.renderScrollSpy(sections.formControls)}
+                <FormControlsSection />
+                {this.renderScrollSpy(sections.formLayout)}
+                <FormLayoutSection />
+                {this.renderScrollSpy(sections.formInputGroup)}
+                <FormInputGroupSection />
+                {this.renderScrollSpy(sections.formValidation)}
+                <FormValidationSection />
 
                 {this.renderScrollSpy(sections.media)}
                 <div className="bs-docs-section">
@@ -406,7 +421,12 @@ const ComponentsPage = React.createClass({
                         <NavItem href={sections.wells}>Wells</NavItem>
                       </SubNav>
 
-                      <NavItem href={sections.forms}>Forms</NavItem>
+                      <SubNav href={sections.form} text="Forms">
+                        <NavItem href={sections.formControls}>Supported controls</NavItem>
+                        <NavItem href={sections.formLayout}>Form layout</NavItem>
+                        <NavItem href={sections.formInputGroup}>Input groups</NavItem>
+                        <NavItem href={sections.formValidation}>Validation states</NavItem>
+                      </SubNav>
 
                       <SubNav href={sections.media} text="Media content">
                         <NavItem href={sections.images}>Images</NavItem>
@@ -443,7 +463,6 @@ const ComponentsPage = React.createClass({
               </div>
             </div>
           </div>
-
           <PageFooter ref="footer" />
         </div>
       );
