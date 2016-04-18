@@ -17,20 +17,26 @@ const NavbarToggle = React.createClass({
   contextTypes: {
     $bs_navbar_bsClass: PropTypes.string,
     $bs_navbar_onToggle: PropTypes.func,
+    $bs_navbar_expanded: PropTypes.bool,
   },
 
   render() {
     const { onClick, className, children, ...props } = this.props;
     const {
       $bs_navbar_bsClass: bsClass = 'navbar',
-      $bs_navbar_onToggle: onToggle
+      $bs_navbar_onToggle: onToggle,
+      $bs_navbar_expanded: expanded,
     } = this.context;
 
     const buttonProps = {
       type: 'button',
       ...props,
       onClick: createChainedFunction(onClick, onToggle),
-      className: classNames(className, tbsUtils.prefix({ bsClass }, 'toggle'))
+      className: classNames(
+        className,
+        tbsUtils.prefix({ bsClass }, 'toggle'),
+        !expanded && 'collapsed'
+      )
     };
 
     if (children) {
