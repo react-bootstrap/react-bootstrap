@@ -10,7 +10,7 @@
 - **Breaking:** Use consistent exports from `bootstrapUtils` ([#1813])
 - **Feature/Deprecation:** Add lower-level tab components, and deprecate horizontal layout support in `<Tabs>` in favor of lower-level components ([#1607], [#1784])
 - **Feature/Deprecation:** Deprecate `dialogComponent` in favor of new `dialogComponentClass` on `<Modal>` for consistency with other components ([#1753])
-- **Feature/Deprecation:** Rewrite form and form control API, and deprecate the old API ([#1765])
+- **Feature/Deprecation:** Rewrite form and form control API (`<FormControl>`, &c.), and deprecate the old API (`<Input>`, &c.) ([#1765])
 - **Deprecation:** Deprecate `dismissAfter` on `<Alert>` ([#1636])
 - **Deprecation:** Deprecate label interpolation (e.g. `label="%(percent)s%"`) in `<ProgressBar>` ([#1751])
 - **Bugfix:** Set `collapsed` class on `<Navbar.Toggle>` ([#1733])
