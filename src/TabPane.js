@@ -62,12 +62,18 @@ let TabPane = React.createClass({
     /**
      * Transition onExited callback when animation is not `false`
      */
-    onExited: PropTypes.func
+    onExited: PropTypes.func,
+
+    /**
+     * Unmounts the tab (remove it from the DOM) when animation is not `false` and it is faded out
+     */
+    unmountOnExit: PropTypes.bool
   },
 
   contextTypes: {
     $bs_tabcontainer: PropTypes.shape({
-      getId: PropTypes.func
+      getId: PropTypes.func,
+      unmountOnExit: PropTypes.bool
     }),
     $bs_tabcontent: PropTypes.shape({
       bsClass: PropTypes.string,
@@ -77,7 +83,8 @@ let TabPane = React.createClass({
       ]),
       activeKey: PropTypes.any,
       onExited: PropTypes.func,
-      register: PropTypes.func
+      register: PropTypes.func,
+      unmountOnExit: PropTypes.bool
     }),
   },
 
@@ -131,6 +138,13 @@ let TabPane = React.createClass({
     return props.animation != null
       ? props.animation
       : context.animation;
+  },
+
+  getUnmountOnExit(props = this.props, context = this.context) {
+    context = this.getContext('$bs_tabcontent', context);
+    return props.unmountOnExit != null
+      ? props.unmountOnExit
+      : context.unmountOnExit;
   },
 
   isActive(props = this.props, context = this.context) {
@@ -192,6 +206,7 @@ let TabPane = React.createClass({
           onEnter={createChainedFunction(this.handleEnter, onEnter)}
           onEntering={onEntering}
           onEntered={onEntered}
+          unmountOnExit={this.getUnmountOnExit()}
         >
           { tabPane }
         </Transition>
