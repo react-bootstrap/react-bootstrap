@@ -200,6 +200,22 @@ const Tabs = React.createClass({
       );
     }
 
+    if (position === 'bottom') {
+      return (
+        <TabContainer {...containerProps}>
+          <div {...containerProps}>
+            <TabContent {...panesProps}>
+              {childPanes}
+            </TabContent>
+            
+            <Nav {...tabsProps}>
+              {childTabs}
+            </Nav>
+          </div>
+        </TabContainer>
+      );
+    }
+      
     return (
       <TabContainer {...containerProps}>
         <div {...containerProps}>
