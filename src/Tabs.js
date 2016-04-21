@@ -182,7 +182,7 @@ const Tabs = React.createClass({
       if (position === 'left') {
         return (
           <TabContainer {...containerProps}>
-            <div {...containerProps}>
+            <div>
               {tabs}
               {panes}
             </div>
@@ -192,7 +192,7 @@ const Tabs = React.createClass({
 
       return (
         <TabContainer {...containerProps}>
-          <div {...containerProps}>
+          <div>
             {panes}
             {tabs}
           </div>
@@ -202,7 +202,7 @@ const Tabs = React.createClass({
 
     return (
       <TabContainer {...containerProps}>
-        <div {...containerProps}>
+        <div>
           <Nav {...tabsProps}>
             {childTabs}
           </Nav>

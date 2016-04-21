@@ -22,7 +22,7 @@ let TabContainer = React.createClass({
 
         if (!error && !props.id) {
           error = new Error(
-            'In order to properly inialize Tabs in a way that is accessible to assistive technologies ' +
+            'In order to properly initialize Tabs in a way that is accessible to assistive technologies ' +
             '(such as screen readers) an `id` or a `generateChildId` prop to TabContainer is required');
         }
       }
@@ -64,25 +64,25 @@ let TabContainer = React.createClass({
     })
   },
 
-  getDefaultProps() {
-    return {
-      componentClass: 'div'
-    };
-  },
-
   getChildContext() {
+    const { activeKey, onSelect, generateChildId, id } = this.props;
+
     return {
       $bs_tabcontainer: {
-        activeKey: this.props.activeKey,
-        onSelect: this.props.onSelect,
-        getId: this.props.generateChildId
-          || ((key, type) => this.props.id ? `${this.props.id}-${type}-${key}` : null)
+        activeKey,
+        onSelect,
+        getId:
+          generateChildId ||
+          ((key, type) => (id ? `${id}-${type}-${key}` : null))
       },
     };
   },
 
   render() {
-    let { children, ...props } = this.props;
+    const { children, ...props } = this.props;
+    delete props.generateChildId;
+    delete props.onSelect;
+    delete props.activeKey;
 
     return React.cloneElement(React.Children.only(children), props);
   }
