@@ -1,3 +1,14 @@
+## [v0.29.1]
+> 2016-04-21
+
+- **Bugfix:** Don't incorrectly pass `onSelect` past `<TabContainer>` ([#1825])
+- **Bugfix:** Set `role` instead of `type` on `<Dropdown.Toggle>` button ([#1835])
+
+[v0.29.1]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.0...v0.29.1
+[#1825]: https://github.com/react-bootstrap/react-bootstrap/pull/1825
+[#1835]: https://github.com/react-bootstrap/react-bootstrap/pull/1835
+
+
 ## [v0.29.0]
 > 2016-04-18
 
