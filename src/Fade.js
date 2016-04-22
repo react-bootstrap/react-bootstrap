@@ -1,16 +1,16 @@
 import React from 'react';
+import classNames from 'classnames';
 import Transition from 'react-overlays/lib/Transition';
-import deprecated from 'react-prop-types/lib/deprecated';
 
 class Fade extends React.Component {
   render() {
-    let timeout = this.props.timeout || this.props.duration;
+    let timeout = this.props.timeout;
 
     return (
       <Transition
         {...this.props}
         timeout={timeout}
-        className="fade"
+        className={classNames(this.props.className, 'fade')}
         enteredClassName="in"
         enteringClassName="in"
       >
@@ -45,12 +45,6 @@ Fade.propTypes = {
    * canceled
    */
   timeout: React.PropTypes.number,
-
-  /**
-   * duration
-   * @private
-   */
-  duration: deprecated(React.PropTypes.number, 'Use `timeout`.'),
 
   /**
    * Callback fired before the component fades in

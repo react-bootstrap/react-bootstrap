@@ -1,16 +1,32 @@
 import 'es5-shim';
 
+import { _resetWarned } from '../src/utils/deprecationWarning';
+
 beforeEach(() => {
-  sinon.stub(console, 'error');
+  sinon.stub(console, 'error', msg => {
+    for (const about of console.error.expected) {
+      if (msg.indexOf(about) !== -1) {
+        console.error.warned[about] = true;
+        return;
+      }
+    }
+
+    console.error.threw = true;
+    throw new Error(msg);
+  });
+
+  console.error.expected = [];
+  console.error.warned = Object.create(null);
+  console.error.threw = false;
 });
 
 afterEach(() => {
-  if (typeof console.error.restore === 'function') {
-    assert(!console.error.called, () => {
-      return `${console.error.getCall(0).args[0]} \nIn '${this.currentTest.fullTitle()}'`;
-    });
-    console.error.restore();
+  if (!console.error.threw && console.error.expected.length) {
+    expect(console.error.warned).to.have.keys(console.error.expected);
   }
+
+  console.error.restore();
+  _resetWarned();
 });
 
 describe('Process environment for tests', () => {

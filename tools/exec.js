@@ -1,5 +1,5 @@
 import 'colors';
-import _ from 'lodash';
+import _ from 'lodash-compat';
 import { exec } from 'child-process-promise';
 
 let executionOptions = {

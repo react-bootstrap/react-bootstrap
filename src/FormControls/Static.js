@@ -1,7 +1,10 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+import elementType from 'react-prop-types/lib/elementType';
+
 import InputBase from '../InputBase';
 import childrenValueValidation from '../utils/childrenValueInputValidation';
+import deprecationWarning from '../utils/deprecationWarning';
 
 class Static extends InputBase {
   getValue() {
@@ -10,17 +13,29 @@ class Static extends InputBase {
   }
 
   renderInput() {
+    const {componentClass: ComponentClass, ...props} = this.props;
     return (
-      <p {...this.props} className={classNames(this.props.className, 'form-control-static')} ref="input" key="input">
+      <ComponentClass {...props} className={classNames(props.className, 'form-control-static')} ref="input" key="input">
         {this.getValue()}
-      </p>
+      </ComponentClass>
     );
   }
 }
 
 Static.propTypes = {
   value: childrenValueValidation,
+  /**
+   * You can override the default 'p' with a custom element
+   */
+  componentClass: elementType,
   children: childrenValueValidation
 };
 
-export default Static;
+Static.defaultProps = {
+  componentClass: 'p'
+};
+
+export default deprecationWarning.wrapper(Static,
+  '`<FormControls.Static>`',
+  '`<FormControl.Static>`'
+);

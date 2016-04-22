@@ -38,6 +38,38 @@ const Col = React.createClass({
      */
     lg: React.PropTypes.number,
     /**
+     * Hide column
+     *
+     * on Extra small devices Phones
+     *
+     * adds class `hidden-xs`
+     */
+    xsHidden: React.PropTypes.bool,
+    /**
+     * Hide column
+     *
+     * on Small devices Tablets
+     *
+     * adds class `hidden-sm`
+     */
+    smHidden: React.PropTypes.bool,
+    /**
+     * Hide column
+     *
+     * on Medium devices Desktops
+     *
+     * adds class `hidden-md`
+     */
+    mdHidden: React.PropTypes.bool,
+    /**
+     * Hide column
+     *
+     * on Large devices Desktops
+     *
+     * adds class `hidden-lg`
+     */
+    lgHidden: React.PropTypes.bool,
+    /**
      * Move columns to the right
      *
      * for Extra small devices Phones
@@ -157,6 +189,8 @@ const Col = React.createClass({
       if (this.props[prop]) {
         classes['col-' + classPart + this.props[prop]] = true;
       }
+
+      classes['hidden-' + size] = this.props[size + 'Hidden'];
 
       prop = size + 'Offset';
       classPart = size + '-offset-';

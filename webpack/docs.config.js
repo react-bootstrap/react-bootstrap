@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash-compat';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import baseConfig, { options, jsLoader } from './base.config';

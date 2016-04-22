@@ -1,6 +1,7 @@
 import React from 'react';
-import InputBase from './InputBase';
+
 import * as FormControls from './FormControls';
+import InputBase from './InputBase';
 import deprecationWarning from './utils/deprecationWarning';
 
 class Input extends InputBase {
@@ -18,4 +19,8 @@ Input.propTypes = {
   type: React.PropTypes.string
 };
 
-export default Input;
+export default deprecationWarning.wrapper(Input,
+  '`<Input>`',
+  '`<FormControl>`, `<Checkbox>`, or `<Radio>`, with `<FormGroup>` and/or ' +
+  '`<InputGroup>` as needed'
+);

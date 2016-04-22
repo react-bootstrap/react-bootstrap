@@ -1,8 +1,9 @@
 import React from 'react';
-import BootstrapMixin from './BootstrapMixin';
 import Button from './Button';
 import Dropdown from './Dropdown';
 import SplitToggle from './SplitToggle';
+import omit from 'lodash-compat/object/omit';
+import pick from 'lodash-compat/object/pick';
 
 class SplitButton extends React.Component {
 
@@ -13,31 +14,33 @@ class SplitButton extends React.Component {
       onClick,
       target,
       href,
-      // bsStyle is validated by 'Button' component
-      bsStyle, // eslint-disable-line
+      toggleLabel,
+      bsSize,
+      bsStyle,
       ...props } = this.props;
 
     let { disabled } = props;
 
-    let button = (
-      <Button
-        onClick={onClick}
-        bsStyle={bsStyle}
-        disabled={disabled}
-        target={target}
-        href={href}
-      >
-        {title}
-      </Button>
-    );
+    let dropdownProps = pick(props, Object.keys(Dropdown.ControlledComponent.propTypes));
+    let buttonProps = omit(props, Object.keys(Dropdown.ControlledComponent.propTypes));
 
     return (
-      <Dropdown {...props}>
-        {button}
-
-        <SplitToggle
-          aria-label={title}
+      <Dropdown {...dropdownProps}>
+        <Button
+          {...buttonProps}
+          onClick={onClick}
           bsStyle={bsStyle}
+          bsSize={bsSize}
+          disabled={disabled}
+          target={target}
+          href={href}
+        >
+          {title}
+        </Button>
+        <SplitToggle
+          aria-label={toggleLabel || title}
+          bsStyle={bsStyle}
+          bsSize={bsSize}
           disabled={disabled}
         />
         <Dropdown.Menu>
@@ -50,7 +53,7 @@ class SplitButton extends React.Component {
 
 SplitButton.propTypes = {
   ...Dropdown.propTypes,
-  ...BootstrapMixin.propTypes,
+  bsStyle: Button.propTypes.bsStyle,
 
   /**
    * @private
@@ -61,7 +64,11 @@ SplitButton.propTypes = {
   /**
    * The content of the split button.
    */
-  title: React.PropTypes.node.isRequired
+  title: React.PropTypes.node.isRequired,
+  /**
+   * Accessible label for the toggle; the value of `title` if not specified.
+   */
+  toggleLabel: React.PropTypes.string
 };
 
 SplitButton.defaultProps = {

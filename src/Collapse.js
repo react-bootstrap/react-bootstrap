@@ -1,7 +1,7 @@
 import css from 'dom-helpers/style';
 import React from 'react';
+import classNames from 'classnames';
 import Transition from 'react-overlays/lib/Transition';
-import deprecated from 'react-prop-types/lib/deprecated';
 
 import createChainedFunction from './utils/createChainedFunction';
 
@@ -50,7 +50,7 @@ class Collapse extends React.Component {
         ref="transition"
         {...this.props}
         aria-expanded={this.props.role ? this.props.in : null}
-        className={this._dimension() === 'width' ? 'width' : ''}
+        className={classNames(this.props.className, { width: this._dimension() === 'width' })}
         exitedClassName="collapse"
         exitingClassName="collapsing"
         enteredClassName="collapse in"
@@ -140,12 +140,6 @@ Collapse.propTypes = {
    * events are canceled
    */
   timeout: React.PropTypes.number,
-
-  /**
-   * duration
-   * @private
-   */
-  duration: deprecated(React.PropTypes.number, 'Use `timeout`.'),
 
   /**
    * Callback fired before the component expands

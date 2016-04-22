@@ -1,16 +1,14 @@
 import deprecationWarning from '../../src/utils/deprecationWarning';
 
+import { shouldWarn } from '../helpers';
+
 describe('deprecationWarning', () => {
   it('warns exactly once', () => {
     // console.error has already been stubbed out by test setup.
-
+    shouldWarn('deprecated');
     deprecationWarning('foo', 'bar');
-    expect(console.error).to.have.been.calledOnce;
 
+    // No second warning.
     deprecationWarning('foo', 'bar');
-    expect(console.error).to.have.been.calledOnce;
-
-    // Reset the stub to avoid unhandled warnings.
-    console.error.reset();
   });
 });

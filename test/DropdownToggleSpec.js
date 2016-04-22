@@ -27,7 +27,7 @@ describe('DropdownToggle', () => {
 
   it('renders title children', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle open={false}>
+      <DropdownToggle title="toggle" open={false}>
         <h3>herpa derpa</h3>
       </DropdownToggle>
     );

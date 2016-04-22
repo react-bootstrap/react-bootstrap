@@ -1,6 +1,6 @@
 import warning from 'warning';
 
-const warned = {};
+let warned = {};
 
 function deprecationWarning(oldname, newname, link) {
   let message;
@@ -37,3 +37,7 @@ deprecationWarning.wrapper = (Component, ...args) => {
 };
 
 export default deprecationWarning;
+
+export function _resetWarned() {
+  warned = {};
+}

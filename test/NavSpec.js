@@ -1,9 +1,13 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import tsp from 'teaspoon';
+import keycode from 'keycode';
 
 import Button from '../src/Button';
 import Nav from '../src/Nav';
 import NavItem from '../src/NavItem';
+
+import {shouldWarn} from './helpers';
 
 describe('Nav', () => {
   it('Should set the correct item active', () => {
@@ -63,7 +67,7 @@ describe('Nav', () => {
 
   it('Should add navbar-right class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-          <Nav bsStyle="tabs" right activeKey={1}>
+          <Nav bsStyle="tabs" navbar pullRight activeKey={1}>
             <NavItem key={1}>Tab 1 content</NavItem>
             <NavItem key={2}>Tab 2 content</NavItem>
           </Nav>
@@ -116,78 +120,76 @@ describe('Nav', () => {
     assert.ok(items[0].props.navItem);
   });
 
-  it('Should apply className only to the wrapper nav element', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Nav bsStyle="tabs" activeKey={1} className="nav-specific">
-        <NavItem key={1}>Tab 1 content</NavItem>
-        <NavItem key={2}>Tab 2 content</NavItem>
-      </Nav>
+  it('Should warn when attempting to use a justified navbar nav', () => {
+    shouldWarn('justified navbar `Nav`s are not supported');
+
+    ReactTestUtils.renderIntoDocument(
+      <Nav navbar justified />
     );
-
-    let ulNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul');
-    assert.notInclude(ulNode.className, 'nav-specific');
-
-    let navNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav');
-    assert.include(navNode.className, 'nav-specific');
   });
 
-  it('Should apply ulClassName to the inner ul element', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Nav bsStyle="tabs" activeKey={1} className="nav-specific" ulClassName="ul-specific">
-        <NavItem key={1}>Tab 1 content</NavItem>
-        <NavItem key={2}>Tab 2 content</NavItem>
-      </Nav>
-    );
+  describe('keyboard navigation', () => {
+    let instance;
+    let selectSpy;
+    beforeEach(() => {
+      selectSpy = sinon.spy(activeKey => instance.props({ activeKey }));
+      instance = tsp(
+        <Nav activeKey={1} onSelect={selectSpy} role='tablist'>
+          <NavItem eventKey={1}>NavItem 1 content</NavItem>
+          <NavItem eventKey={2} disabled>NavItem 2 content</NavItem>
+          <NavItem eventKey={3}>NavItem 3 content</NavItem>
+        </Nav>
+      )
+      .render(true);
+    });
 
-    let ulNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul');
-    assert.include(ulNode.className, 'ul-specific');
-    assert.notInclude(ulNode.className, 'nav-specific');
+    afterEach(() => instance.unmount());
 
-    let navNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav');
-    assert.notInclude(navNode.className, 'ul-specific');
-    assert.include(navNode.className, 'nav-specific');
+    it('only the active tab should be focusable', () => {
+      let links = instance.find('a').dom();
+
+      expect(links[0].getAttribute('tabindex')).to.equal('0');
+      expect(links[1].getAttribute('tabindex')).to.equal('-1');
+      expect(links[2].getAttribute('tabindex')).to.equal('-1');
+    });
+
+    it('should focus the next tab on arrow key', () => {
+      let links = instance.find('a').dom();
+
+      let [firstAnchor, _, lastAnchor] = links;
+
+      firstAnchor.focus();
+
+      ReactTestUtils.Simulate.keyDown(firstAnchor, { keyCode: keycode('right') });
+
+      expect(instance[0].getActiveKey()).to.equal(3);
+      expect(document.activeElement).to.equal(lastAnchor);
+    });
+
+    it('should focus the previous tab on arrow key', () => {
+      instance.props({ activeKey: 3 });
+
+      let links = instance.find('a').dom();
+      let [firstAnchor, _, lastAnchor] = links;
+
+      lastAnchor.focus();
+
+      ReactTestUtils.Simulate.keyDown(lastAnchor, { keyCode: keycode('left') });
+
+      expect(instance[0].getActiveKey()).to.equal(1);
+      expect(document.activeElement).to.equal(firstAnchor);
+    });
   });
-
-  it('Should apply id to the wrapper nav element', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Nav bsStyle="tabs" activeKey={1} id="nav-id">
-        <NavItem key={1}>Tab 1 content</NavItem>
-        <NavItem key={2}>Tab 2 content</NavItem>
-      </Nav>
-    );
-
-    let navNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav');
-    assert.equal(navNode.id, 'nav-id');
-
-    let ulNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul');
-    assert.notEqual(ulNode.id, 'nav-id');
-  });
-
-  it('Should apply ulId to the inner ul element', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Nav bsStyle="tabs" activeKey={1} id="nav-id" ulId="ul-id">
-        <NavItem key={1}>Tab 1 content</NavItem>
-        <NavItem key={2}>Tab 2 content</NavItem>
-      </Nav>
-    );
-
-    let ulNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ul');
-    assert.equal(ulNode.id, 'ul-id');
-
-    let navNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'nav');
-    assert.equal(navNode.id, 'nav-id');
-  });
-
 
   describe('Web Accessibility', () => {
 
     it('Should have tablist and tab roles', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-          <Nav bsStyle="tabs" activeKey={1}>
-            <NavItem key={1}>Tab 1 content</NavItem>
-            <NavItem key={2}>Tab 2 content</NavItem>
-          </Nav>
-        );
+        <Nav role='tablist' bsStyle="tabs" activeKey={1}>
+          <NavItem key={1}>Tab 1 content</NavItem>
+          <NavItem key={2}>Tab 2 content</NavItem>
+        </Nav>
+      );
 
       let ul = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'ul')[0];
       let navItem = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a')[0];

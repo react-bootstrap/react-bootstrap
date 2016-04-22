@@ -11,13 +11,14 @@ import elementType from 'react-prop-types/lib/elementType';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 import uncontrollable from 'uncontrollable';
 
-import ButtonGroup from './ButtonGroup';
-import DropdownMenu from './DropdownMenu';
-import DropdownToggle from './DropdownToggle';
-
+import { prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 import CustomPropTypes from './utils/CustomPropTypes';
 import ValidComponentChildren from './utils/ValidComponentChildren';
+
+import ButtonGroup from './ButtonGroup';
+import DropdownMenu from './DropdownMenu';
+import DropdownToggle from './DropdownToggle';
 
 const TOGGLE_REF = 'toggle-btn';
 const TOGGLE_ROLE = DropdownToggle.defaultProps.bsRole;
@@ -87,19 +88,19 @@ class Dropdown extends React.Component {
     let children = this.extractChildren();
     let Component = this.props.componentClass;
 
-    let props = omit(this.props, ['id', 'role']);
+    let props = omit(this.props, ['id', 'bsClass', 'role']);
+    let className = prefix(this.props);
 
     const rootClasses = {
       open: this.props.open,
       disabled: this.props.disabled,
-      dropdown: !this.props.dropup,
+      [className]: !this.props.dropup,
       dropup: this.props.dropup
     };
 
     return (
       <Component
         {...props}
-        tabIndex="-1"
         className={classNames(this.props.className, rootClasses)}
       >
         { children }
@@ -204,7 +205,8 @@ class Dropdown extends React.Component {
       ref: 'menu',
       open,
       labelledBy: this.props.id,
-      pullRight: this.props.pullRight
+      pullRight: this.props.pullRight,
+      bsClass: this.props.bsClass
     };
 
     menuProps.onClose = createChainedFunction(
@@ -252,10 +254,13 @@ Dropdown.MENU_ROLE = MENU_ROLE;
 
 Dropdown.defaultProps = {
   componentClass: ButtonGroup,
-  alwaysFocusNextOnOpen: false
+  bsClass: 'dropdown'
 };
 
 Dropdown.propTypes = {
+
+  bsClass: React.PropTypes.string,
+
   /**
    * The menu will open above the dropdown button, instead of below it.
    */
@@ -321,7 +326,7 @@ Dropdown.propTypes = {
    * A callback fired when a menu item is selected.
    *
    * ```js
-   * function(Object event, Any eventKey)
+   * (eventKey: any, event: Object) => any
    * ```
    */
   onSelect: React.PropTypes.func,

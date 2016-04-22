@@ -1,22 +1,19 @@
-import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import React from 'react';
+
 import SafeAnchor from './SafeAnchor';
+import createChainedFunction from './utils/createChainedFunction';
 
 const NavItem = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
-    linkId: React.PropTypes.string,
-    onSelect: React.PropTypes.func,
     active: React.PropTypes.bool,
     disabled: React.PropTypes.bool,
-    href: React.PropTypes.string,
     role: React.PropTypes.string,
-    title: React.PropTypes.node,
+    href: React.PropTypes.string,
+    onClick: React.PropTypes.func,
+    onSelect: React.PropTypes.func,
     eventKey: React.PropTypes.any,
-    target: React.PropTypes.string,
-    'aria-controls': React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -28,42 +25,33 @@ const NavItem = React.createClass({
 
   render() {
     let {
-        role,
-        linkId,
-        disabled,
-        active,
-        href,
-        title,
-        target,
-        children,
-        tabIndex, //eslint-disable-line
-        'aria-controls': ariaControls,
-        ...props } = this.props;
-    let classes = {
-      active,
-      disabled
-    };
-    let linkProps = {
-      role,
-      href,
-      title,
-      target,
-      tabIndex,
-      id: linkId,
-      onClick: this.handleClick
-    };
+      active, disabled, role, href, onClick, className, style, ...props,
+    } = this.props;
 
-    if (!role && href === '#') {
-      linkProps.role = 'button';
+    delete props.onSelect;
+    delete props.eventKey;
+
+    if (!role) {
+      if (href === '#') {
+        role = 'button';
+      }
     } else if (role === 'tab') {
-      linkProps['aria-selected'] = active;
+      props['aria-selected'] = active;
     }
 
     return (
-      <li {...props} role="presentation" className={classNames(props.className, classes)}>
-        <SafeAnchor {...linkProps} aria-controls={ariaControls}>
-          { children }
-        </SafeAnchor>
+      <li
+        role="presentation"
+        className={classNames(className, { active, disabled })}
+        style={style}
+      >
+        <SafeAnchor
+          {...props}
+          disabled={disabled}
+          role={role}
+          href={href}
+          onClick={createChainedFunction(onClick, this.handleClick)}
+        />
       </li>
     );
   },
@@ -73,7 +61,7 @@ const NavItem = React.createClass({
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
+        this.props.onSelect(this.props.eventKey, e);
       }
     }
   }

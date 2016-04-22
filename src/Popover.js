@@ -1,13 +1,13 @@
-import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import React from 'react';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
+
+import { prefix } from './utils/bootstrapUtils';
 
 const Popover = React.createClass({
 
-  mixins: [ BootstrapMixin ],
-
   propTypes: {
+
     /**
      * An html id attribute, necessary for accessibility
      * @type {string}
@@ -53,34 +53,43 @@ const Popover = React.createClass({
 
   getDefaultProps() {
     return {
-      placement: 'right'
+      placement: 'right',
+      bsClass: 'popover'
     };
   },
 
   render() {
     const classes = {
-      'popover': true,
+      [prefix(this.props)]: true,
       [this.props.placement]: true
     };
 
     const style = {
-      'left': this.props.positionLeft,
-      'top': this.props.positionTop,
-      'display': 'block',
+      left: this.props.positionLeft,
+      top: this.props.positionTop,
+      display: 'block',
       // we don't want to expose the `style` property
       ...this.props.style // eslint-disable-line react/prop-types
     };
 
     const arrowStyle = {
-      'left': this.props.arrowOffsetLeft,
-      'top': this.props.arrowOffsetTop
+      left: this.props.arrowOffsetLeft,
+      top: this.props.arrowOffsetTop
     };
 
     return (
-      <div role="tooltip" {...this.props} className={classNames(this.props.className, classes)} style={style} title={null}>
+      <div
+        role="tooltip"
+        {...this.props}
+        className={classNames(this.props.className, classes)}
+        style={style}
+        title={null}
+      >
         <div className="arrow" style={arrowStyle} />
+
         {this.props.title ? this.renderTitle() : null}
-        <div className="popover-content">
+
+        <div className={prefix(this.props, 'content')}>
           {this.props.children}
         </div>
       </div>
@@ -89,7 +98,9 @@ const Popover = React.createClass({
 
   renderTitle() {
     return (
-      <h3 className="popover-title">{this.props.title}</h3>
+      <h3 className={prefix(this.props, 'title')}>
+        {this.props.title}
+      </h3>
     );
   }
 });

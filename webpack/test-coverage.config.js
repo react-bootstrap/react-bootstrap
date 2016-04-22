@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash-compat';
 import path from 'path';
 import { jsLoader } from './base.config';
 import testConfig from './test.config';

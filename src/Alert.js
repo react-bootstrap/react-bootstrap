@@ -1,20 +1,25 @@
-import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import React from 'react';
+import deprecated from 'react-prop-types/lib/deprecated';
 
-const Alert = React.createClass({
-  mixins: [BootstrapMixin],
+import { State } from './styleMaps';
+import {
+  bsStyles, bsClass, getClassSet, prefix,
+} from './utils/bootstrapUtils';
+
+let Alert = React.createClass({
 
   propTypes: {
     onDismiss: React.PropTypes.func,
-    dismissAfter: React.PropTypes.number,
+    /**
+     * @private
+     */
+    dismissAfter: deprecated(React.PropTypes.number, 'No longer supported.'),
     closeLabel: React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
-      bsClass: 'alert',
-      bsStyle: 'info',
       closeLabel: 'Close Alert'
     };
   },
@@ -25,7 +30,9 @@ const Alert = React.createClass({
         type="button"
         className="close"
         onClick={this.props.onDismiss}
-        aria-hidden="true">
+        aria-hidden="true"
+        tabIndex="-1"
+      >
         <span>&times;</span>
       </button>
     );
@@ -36,20 +43,25 @@ const Alert = React.createClass({
       <button
         type="button"
         className="close sr-only"
-        onClick={this.props.onDismiss}>
+        onClick={this.props.onDismiss}
+      >
         {this.props.closeLabel}
       </button>
     );
   },
 
   render() {
-    let classes = this.getBsClassSet();
+    let classes = getClassSet(this.props);
     let isDismissable = !!this.props.onDismiss;
 
-    classes['alert-dismissable'] = isDismissable;
+    classes[prefix(this.props, 'dismissable')] = isDismissable;
 
     return (
-      <div {...this.props} role="alert" className={classNames(this.props.className, classes)}>
+      <div
+        {...this.props}
+        role="alert"
+        className={classNames(this.props.className, classes)}
+      >
         {isDismissable ? this.renderDismissButton() : null}
         {this.props.children}
         {isDismissable ? this.renderSrOnlyDismissButton() : null}
@@ -68,4 +80,7 @@ const Alert = React.createClass({
   }
 });
 
-export default Alert;
+
+export default bsStyles(State.values(), State.INFO,
+  bsClass('alert', Alert)
+);

@@ -11,6 +11,10 @@ import MenuItem from '../src/MenuItem';
 import {shouldWarn} from './helpers';
 
 describe('Input', () => {
+  beforeEach(() => {
+    shouldWarn('deprecated');
+  });
+
   it('renders children when type is not set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Input>
@@ -49,8 +53,6 @@ describe('Input', () => {
     ReactTestUtils.renderIntoDocument(
       <Input type="static" value="v" />
     );
-
-    shouldWarn('deprecated');
   });
 
   it('renders an input element of given type when type is anything else', () => {

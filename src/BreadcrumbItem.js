@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React from 'react';
-import warning from 'warning';
 
 import SafeAnchor from './SafeAnchor';
 
@@ -55,8 +54,6 @@ const BreadcrumbItem = React.createClass({
       title,
       target,
       ...props } = this.props;
-
-    warning(!(href && active), '[react-bootstrap] `href` and `active` properties cannot be set at the same time');
 
     const linkProps = {
       href,

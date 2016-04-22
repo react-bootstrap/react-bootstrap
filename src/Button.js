@@ -1,51 +1,33 @@
-import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
-import ButtonInput from './ButtonInput';
 
-const Button = React.createClass({
-  mixins: [BootstrapMixin],
+import { Sizes, State, DEFAULT, PRIMARY, LINK } from './styleMaps';
+import {
+  bsStyles, bsSizes, bsClass, getClassSet, prefix,
+} from './utils/bootstrapUtils';
 
-  propTypes: {
-    active: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    block: React.PropTypes.bool,
-    navItem: React.PropTypes.bool,
-    navDropdown: React.PropTypes.bool,
-    /**
-     * You can use a custom element for this component
-     */
-    componentClass: elementType,
-    href: React.PropTypes.string,
-    target: React.PropTypes.string,
-    /**
-     * Defines HTML button type Attribute
-     * @type {("button"|"reset"|"submit")}
-     * @defaultValue 'button'
-     */
-    type: React.PropTypes.oneOf(ButtonInput.types)
-  },
+import SafeAnchor from './SafeAnchor';
 
-  getDefaultProps() {
-    return {
-      active: false,
-      block: false,
-      bsClass: 'button',
-      bsStyle: 'default',
-      disabled: false,
-      navItem: false,
-      navDropdown: false
-    };
-  },
+const ButtonStyles = State.values().concat(DEFAULT, PRIMARY, LINK);
+
+const types = ['button', 'reset', 'submit'];
+
+class Button extends React.Component {
+
+  constructor(props, context) {
+    super(props, context);
+  }
 
   render() {
-    let classes = this.props.navDropdown ? {} : this.getBsClassSet();
+    let classes = this.props.navDropdown ? {} : getClassSet(this.props);
     let renderFuncName;
+
+    let blockClass = prefix(this.props, 'block');
 
     classes = {
       active: this.props.active,
-      'btn-block': this.props.block,
+      [blockClass]: this.props.block,
       ...classes
     };
 
@@ -57,23 +39,23 @@ const Button = React.createClass({
       'renderAnchor' : 'renderButton';
 
     return this[renderFuncName](classes);
-  },
+  }
 
   renderAnchor(classes) {
-    let Component = this.props.componentClass || 'a';
-    let href = this.props.href || '#';
-    classes.disabled = this.props.disabled;
+    let { disabled, href } = this.props;
+
+    classes.disabled = disabled;
 
     return (
-      <Component
+      <SafeAnchor
         {...this.props}
-        href={href}
+        href={href || '#'}
         className={classNames(this.props.className, classes)}
-        role="button">
+      >
         {this.props.children}
-      </Component>
+      </SafeAnchor>
     );
-  },
+  }
 
   renderButton(classes) {
     let Component = this.props.componentClass || 'button';
@@ -86,7 +68,7 @@ const Button = React.createClass({
         {this.props.children}
       </Component>
     );
-  },
+  }
 
   renderNavItem(classes) {
     let liClasses = {
@@ -99,6 +81,41 @@ const Button = React.createClass({
       </li>
     );
   }
-});
+}
 
-export default Button;
+Button.propTypes = {
+  active: React.PropTypes.bool,
+  disabled: React.PropTypes.bool,
+  block: React.PropTypes.bool,
+  navItem: React.PropTypes.bool,
+  navDropdown: React.PropTypes.bool,
+  onClick: React.PropTypes.func,
+  /**
+   * You can use a custom element for this component
+   */
+  componentClass: elementType,
+  href: React.PropTypes.string,
+  target: React.PropTypes.string,
+  /**
+   * Defines HTML button type Attribute
+   * @type {("button"|"reset"|"submit")}
+   * @defaultValue 'button'
+   */
+  type: React.PropTypes.oneOf(types)
+};
+
+Button.defaultProps = {
+  active: false,
+  block: false,
+  disabled: false,
+  navItem: false,
+  navDropdown: false
+};
+
+Button.types = types;
+
+export default bsStyles(ButtonStyles, DEFAULT,
+  bsSizes([Sizes.LARGE, Sizes.SMALL, Sizes.XSMALL],
+    bsClass('btn', Button)
+  )
+);

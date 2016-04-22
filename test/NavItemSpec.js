@@ -92,9 +92,9 @@ describe('NavItem', () => {
     assert.equal(linkElement.target, '_blank');
   });
 
-  it('Should call `onSelect` with target attribute', (done) => {
-    function handleSelect(key, href, target) {
-      assert.equal(target, '_blank');
+  it('Should call `onSelect` with event', (done) => {
+    function handleSelect(key, event) {
+      assert.ok(event.target.tagName === 'SPAN');
       done();
     }
     let instance = ReactTestUtils.renderIntoDocument(

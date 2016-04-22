@@ -1,10 +1,11 @@
-import React from 'react';
 import classSet from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import React from 'react';
+
+import { bsClass, getClassSet } from './utils/bootstrapUtils';
+
 import SafeAnchor from './SafeAnchor';
 
 const Thumbnail = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
     alt: React.PropTypes.string,
@@ -12,14 +13,8 @@ const Thumbnail = React.createClass({
     src: React.PropTypes.string
   },
 
-  getDefaultProps() {
-    return {
-      bsClass: 'thumbnail'
-    };
-  },
-
   render() {
-    let classes = this.getBsClassSet();
+    let classes = getClassSet(this.props);
 
     if (this.props.href) {
       return (
@@ -48,4 +43,4 @@ const Thumbnail = React.createClass({
   }
 });
 
-export default Thumbnail;
+export default bsClass('thumbnail', Thumbnail);

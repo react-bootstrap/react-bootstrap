@@ -2,57 +2,52 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
 
-import BreadcrumbItem from '../src/BreadcrumbItem';
+import Breadcrumb from '../src/Breadcrumb';
 
-import { shouldWarn } from './helpers';
-
-describe('BreadcrumbItem', () => {
-  it('Should warn if `active` and `href` attributes set', () => {
-    ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem href='#' active>
-        Crumb
-      </BreadcrumbItem>
-    );
-
-    shouldWarn('[react-bootstrap] `href` and `active` properties cannot be set at the same time');
-  });
-
+describe('Breadcrumb.Item', () => {
   it('Should render `a` as inner element when is not active', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem href='#'>
+      <Breadcrumb.Item href='#'>
         Crumb
-      </BreadcrumbItem>
+      </Breadcrumb.Item>
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
     assert.notInclude(ReactDOM.findDOMNode(instance).className, 'active');
   });
 
-  it('Should add `active` class with `active` attribute set.', () => {
+  it('Should render `span.active` with `active` attribute set.', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem active>
+      <Breadcrumb.Item active>
         Active Crumb
-      </BreadcrumbItem>
+      </Breadcrumb.Item>
     );
 
     assert.include(ReactDOM.findDOMNode(instance).className, 'active');
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
   });
 
-  it('Should render `span` as inner element when is active', () => {
+  it('Should render `span.active` when active and has href', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem active>
-        Crumb
-      </BreadcrumbItem>
+      <Breadcrumb.Item href="#" active>
+        Active Crumb
+      </Breadcrumb.Item>
     );
 
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
+    assert.include(ReactDOM.findDOMNode(instance).className, 'active');
+
+    const spanNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span');
+    assert.ok(spanNode);
+    assert.notOk(spanNode.hasAttribute('href'));
+
+    assert.lengthOf(ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a'), 0);
   });
 
   it('Should add custom classes onto `li` wrapper element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem className="custom-one custom-two">
+      <Breadcrumb.Item className="custom-one custom-two">
         Active Crumb
-      </BreadcrumbItem>
+      </Breadcrumb.Item>
     );
 
     const classes = ReactDOM.findDOMNode(instance).className;
@@ -66,9 +61,9 @@ describe('BreadcrumbItem', () => {
     };
 
     const instance = ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem href='#' onClick={handleClick}>
+      <Breadcrumb.Item href='#' onClick={handleClick}>
         Crumb
-      </BreadcrumbItem>
+      </Breadcrumb.Item>
     );
 
     const anchorNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
@@ -77,9 +72,9 @@ describe('BreadcrumbItem', () => {
 
   it('Should apply id onto `li` wrapper element via `id` property', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem href='#' id='test-li-id'>
+      <Breadcrumb.Item href='#' id='test-li-id'>
         Crumb
-      </BreadcrumbItem>
+      </Breadcrumb.Item>
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).id, 'test-li-id');
@@ -87,9 +82,9 @@ describe('BreadcrumbItem', () => {
 
   it('Should apply id onto `a` inner alement via `linkId` property', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem href='#' linkId='test-link-id'>
+      <Breadcrumb.Item href='#' linkId='test-link-id'>
         Crumb
-      </BreadcrumbItem>
+      </Breadcrumb.Item>
     );
 
     const linkNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
@@ -98,9 +93,9 @@ describe('BreadcrumbItem', () => {
 
   it('Should apply `href` property onto `a` inner element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem href='http://getbootstrap.com/components/#breadcrumbs'>
+      <Breadcrumb.Item href='http://getbootstrap.com/components/#breadcrumbs'>
         Crumb
-      </BreadcrumbItem>
+      </Breadcrumb.Item>
     );
 
     const linkNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
@@ -109,9 +104,9 @@ describe('BreadcrumbItem', () => {
 
   it('Should apply `title` property onto `a` inner element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem title='test-title' href='http://getbootstrap.com/components/#breadcrumbs'>
+      <Breadcrumb.Item title='test-title' href='http://getbootstrap.com/components/#breadcrumbs'>
         Crumb
-      </BreadcrumbItem>
+      </Breadcrumb.Item>
     );
 
     const linkNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
@@ -120,9 +115,9 @@ describe('BreadcrumbItem', () => {
 
   it('Should not apply properties for inner `anchor` onto `li` wrapper element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem title='test-title' href='/hi'>
+      <Breadcrumb.Item title='test-title' href='/hi'>
         Crumb
-      </BreadcrumbItem>
+      </Breadcrumb.Item>
     );
 
     const liNode = ReactDOM.findDOMNode(instance);
@@ -132,9 +127,9 @@ describe('BreadcrumbItem', () => {
 
   it('Should set `target` attribute on `anchor`', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <BreadcrumbItem target='_blank' href='http://getbootstrap.com/components/#breadcrumbs'>
+      <Breadcrumb.Item target='_blank' href='http://getbootstrap.com/components/#breadcrumbs'>
         Crumb
-      </BreadcrumbItem>
+      </Breadcrumb.Item>
     );
 
     const linkNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');

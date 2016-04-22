@@ -2,9 +2,7 @@ import {cloneElement} from 'react';
 import ReactDOM from 'react-dom';
 
 export function shouldWarn(about) {
-  console.error.called.should.be.true;
-  console.error.calledWithMatch(about).should.be.true;
-  console.error.reset();
+  console.error.expected.push(about);
 }
 
 /**
@@ -18,7 +16,7 @@ export function render(element, mountPoint) {
   let mount = mountPoint || document.createElement('div');
   let instance = ReactDOM.render(element, mount);
 
-  if (!instance.renderWithProps) {
+  if (instance && !instance.renderWithProps) {
     instance.renderWithProps = newProps => {
 
       return render(

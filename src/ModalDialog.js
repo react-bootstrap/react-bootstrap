@@ -1,31 +1,17 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import React from 'react';
 
+import { Sizes } from './styleMaps';
+import { bsClass, bsSizes, getClassSet, prefix } from './utils/bootstrapUtils';
+
+/* eslint-disable react/prop-types */
 const ModalDialog = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
-    /**
-     * A Callback fired when the header closeButton or non-static backdrop is clicked.
-     * @type {function}
-     * @required
-     */
-    onHide: React.PropTypes.func.isRequired,
-
     /**
      * A css class to apply to the Modal dialog DOM node.
      */
     dialogClassName: React.PropTypes.string
-
-  },
-
-  getDefaultProps() {
-    return {
-      bsClass: 'modal',
-      closeButton: true
-    };
   },
 
   render() {
@@ -33,11 +19,11 @@ const ModalDialog = React.createClass({
       display: 'block',
       ...this.props.style
     };
-    let bsClass = this.props.bsClass;
-    let dialogClasses = this.getBsClassSet();
+    let bsClassPrefix = prefix(this.props);
+    let dialogClasses = getClassSet(this.props);
 
-    delete dialogClasses.modal;
-    dialogClasses[`${bsClass}-dialog`] = true;
+    delete dialogClasses[bsClassPrefix];
+    dialogClasses[prefix(this.props, 'dialog')] = true;
 
     return (
       <div
@@ -46,9 +32,10 @@ const ModalDialog = React.createClass({
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
-        className={classNames(this.props.className, bsClass)}>
+        className={classNames(this.props.className, bsClassPrefix)}
+      >
         <div className={classNames(this.props.dialogClassName, dialogClasses)}>
-          <div className={`${bsClass}-content`} role="document">
+          <div className={prefix(this.props, 'content')} role="document">
             { this.props.children }
           </div>
         </div>
@@ -57,4 +44,6 @@ const ModalDialog = React.createClass({
   }
 });
 
-export default ModalDialog;
+export default bsSizes([Sizes.LARGE, Sizes.SMALL],
+  bsClass('modal', ModalDialog)
+);

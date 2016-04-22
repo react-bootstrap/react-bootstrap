@@ -1,10 +1,12 @@
-import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import React from 'react';
 import all from 'react-prop-types/lib/all';
 
+import { bsClass, getClassSet, prefix } from './utils/bootstrapUtils';
+
+import Button from './Button';
+
 const ButtonGroup = React.createClass({
-  mixins: [BootstrapMixin],
 
   propTypes: {
     vertical: React.PropTypes.bool,
@@ -26,27 +28,30 @@ const ButtonGroup = React.createClass({
   getDefaultProps() {
     return {
       block: false,
-      bsClass: 'button-group',
       justified: false,
       vertical: false
     };
   },
 
   render() {
-    let classes = this.getBsClassSet();
-    classes['btn-group'] = !this.props.vertical;
-    classes['btn-group-vertical'] = this.props.vertical;
-    classes['btn-group-justified'] = this.props.justified;
-    classes['btn-block'] = this.props.block;
+    let classes = getClassSet(this.props);
+
+    classes[prefix(this.props)] = !this.props.vertical;
+    classes[prefix(this.props, 'vertical')] = this.props.vertical;
+    classes[prefix(this.props, 'justified')] = this.props.justified;
+
+    // this is annoying, since the class is `btn-block` not `btn-group-block`
+    classes[prefix(Button.defaultProps, 'block')] = this.props.block;
 
     return (
       <div
         {...this.props}
-        className={classNames(this.props.className, classes)}>
+        className={classNames(this.props.className, classes)}
+      >
         {this.props.children}
       </div>
     );
   }
 });
 
-export default ButtonGroup;
+export default bsClass('btn-group', ButtonGroup);

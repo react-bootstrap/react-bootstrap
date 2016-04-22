@@ -2,9 +2,12 @@ import classNames from 'classnames';
 import keycode from 'keycode';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
-import ValidComponentChildren from './utils/ValidComponentChildren';
+
+import { prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
+import ValidComponentChildren from './utils/ValidComponentChildren';
+
+import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
 
 class DropdownMenu extends React.Component {
   constructor(props) {
@@ -93,8 +96,8 @@ class DropdownMenu extends React.Component {
     });
 
     const classes = {
-      'dropdown-menu': true,
-      'dropdown-menu-right': pullRight
+      [prefix(this.props, 'menu')]: true,
+      [prefix(this.props, 'menu-right')]: pullRight
     };
 
     let list = (
@@ -122,6 +125,7 @@ class DropdownMenu extends React.Component {
 
 DropdownMenu.defaultProps = {
   bsRole: 'menu',
+  bsClass: 'dropdown',
   pullRight: false
 };
 

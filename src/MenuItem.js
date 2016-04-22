@@ -1,9 +1,13 @@
-import React from 'react';
 import classnames from 'classnames';
+import React from 'react';
 import all from 'react-prop-types/lib/all';
+
+import { bsClass, prefix } from './utils/bootstrapUtils';
+import createChainedFunction from './utils/createChainedFunction';
+
 import SafeAnchor from './SafeAnchor';
 
-export default class MenuItem extends React.Component {
+class MenuItem extends React.Component {
   constructor(props) {
     super(props);
 
@@ -20,20 +24,36 @@ export default class MenuItem extends React.Component {
     }
 
     if (this.props.onSelect) {
-      this.props.onSelect(event, this.props.eventKey);
+      this.props.onSelect(this.props.eventKey, event);
     }
   }
 
   render() {
     if (this.props.divider) {
-      return <li role="separator" className="divider" />;
+      return (
+        <li
+          role="separator"
+          className={classnames('divider', this.props.className)}
+          style={this.props.style}
+        />
+      );
     }
 
     if (this.props.header) {
+      const headerClass = prefix(this.props, 'header');
+
       return (
-        <li role="heading" className="dropdown-header">{this.props.children}</li>
+        <li
+          role="heading"
+          className={classnames(headerClass, this.props.className)}
+          style={this.props.style}
+        >
+          {this.props.children}
+        </li>
       );
     }
+
+    const {className, style, onClick, ...props} = this.props;
 
     const classes = {
       disabled: this.props.disabled,
@@ -42,28 +62,36 @@ export default class MenuItem extends React.Component {
 
     return (
       <li role="presentation"
-        className={classnames(this.props.className, classes)}
-        style={this.props.style}
+        className={classnames(className, classes)}
+        style={style}
       >
         <SafeAnchor
+          {...props}
           role="menuitem"
           tabIndex="-1"
-          id={this.props.id}
-          target={this.props.target}
-          title={this.props.title}
-          href={this.props.href || ''}
-          onKeyDown={this.props.onKeyDown}
-          onClick={this.handleClick}>
-          {this.props.children}
-        </SafeAnchor>
+          onClick={createChainedFunction(onClick, this.handleClick)}
+        />
       </li>
     );
   }
 }
 
 MenuItem.propTypes = {
+
+  /**
+   * Highlight the menu item as active.
+   */
   active: React.PropTypes.bool,
+
+  /**
+   * Disable the menu item, making it unselectable.
+   */
   disabled: React.PropTypes.bool,
+
+  /**
+   * Styles the menu item as a horizontal rule, providing visual separation between
+   * groups of menu items.
+   */
   divider: all(
     React.PropTypes.bool,
     props => {
@@ -72,16 +100,51 @@ MenuItem.propTypes = {
       }
     }
   ),
-  eventKey: React.PropTypes.oneOfType([
-    React.PropTypes.number,
-    React.PropTypes.string
-  ]),
+
+  /**
+   * Value passed to the `onSelect` handler, useful for identifying the selected menu item.
+   */
+  eventKey: React.PropTypes.any,
+
+  /**
+   * Styles the menu item as a header label, useful for describing a group of menu items.
+   */
   header: React.PropTypes.bool,
+
+  /**
+   * HTML `href` attribute corresponding to `a.href`.
+   */
   href: React.PropTypes.string,
+
+  /**
+   * HTML `target` attribute corresponding to `a.target`.
+   */
   target: React.PropTypes.string,
+
+  /**
+   * HTML `title` attribute corresponding to `a.title`.
+   */
   title: React.PropTypes.string,
+
+  /**
+   * Callback fired when the menu item is clicked.
+   */
+  onClick: React.PropTypes.func,
+
   onKeyDown: React.PropTypes.func,
+
+  /**
+   * Callback fired when the menu item is selected.
+   *
+   * ```js
+   * (eventKey: any, event: Object) => any
+   * ```
+   */
   onSelect: React.PropTypes.func,
+
+  /**
+   * HTML `id` attribute.
+   */
   id: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.number
@@ -93,3 +156,5 @@ MenuItem.defaultProps = {
   disabled: false,
   header: false
 };
+
+export default bsClass('dropdown', MenuItem);

@@ -4,23 +4,16 @@
 
 [![Travis Build Status][build-badge]][build]
 [![Build status][appveyor-badge]][appveyor]
-
-[![HuBoard][huboard-badge]][huboard]
-[![Gitter][gitter-badge]][gitter]
-[![Thinkful][thinkful-badge]][thinkful]
-
+[![Coverage Status][coveralls-badge]][coveralls]  
+[![Discord][discord-badge]][discord]
+[![Thinkful][thinkful-badge]][thinkful]  
 [![NPM version][npm-badge]][npm]
-[![Bower version][bower-badge]][bower]
-
+[![Bower version][bower-badge]][bower]  
 [![Dependency Status][deps-badge]][deps]
 [![devDependency Status][dev-deps-badge]][dev-deps]
 [![peerDependency Status][peer-deps-badge]][peer-deps]
 
 __Under active development - APIs will change.__ Check out the [1.0.0 Roadmap](https://github.com/react-bootstrap/react-bootstrap/wiki#100-roadmap) and [Contributing Guidelines][contributing] to see where you can help out. Prior to the 1.0.0 release, deprecations or breaking changes should result in a Minor version bump.
-
-## React v0.13 support
-
-Releases from v0.27.0 onward only support React v0.14. The latest releases compatible with React v0.13 are the v0.26.x releases.
 
 ## Docs
 
@@ -60,9 +53,6 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [bower-badge]: https://badge.fury.io/bo/react-bootstrap.svg
 [bower]: http://badge.fury.io/bo/react-bootstrap
 
-[gitter-badge]: https://badges.gitter.im/Join%20Chat.svg
-[gitter]: https://gitter.im/react-bootstrap/react-bootstrap?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-
 [deps-badge]: https://david-dm.org/react-bootstrap/react-bootstrap.svg
 [deps]: https://david-dm.org/react-bootstrap/react-bootstrap
 
@@ -77,11 +67,14 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [complementary-tools]: https://github.com/facebook/react/wiki/Complementary-Tools
 
-[huboard-badge]: https://img.shields.io/badge/Hu-Board-7965cc.svg
-[huboard]: https://huboard.com/react-bootstrap/react-bootstrap
-
 [thinkful-badge]: https://tf-assets-staging.s3.amazonaws.com/badges/thinkful_repo_badge.svg
 [thinkful]: http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap
 
 [appveyor-badge]: https://ci.appveyor.com/api/projects/status/ylitpyo6n5yq1s6i/branch/master?svg=true
 [appveyor]: https://ci.appveyor.com/project/react-bootstrap/react-bootstrap/branch/master
+
+[coveralls-badge]: https://coveralls.io/repos/react-bootstrap/react-bootstrap/badge.svg?branch=master&service=github
+[coveralls]: https://coveralls.io/github/react-bootstrap/react-bootstrap?branch=master
+
+[discord-badge]: https://img.shields.io/badge/Discord-Join%20chat%20%E2%86%92-738bd7.svg
+[discord]: https://discord.gg/0ZcbPKXt5bXLs9XK

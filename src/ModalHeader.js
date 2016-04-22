@@ -1,16 +1,26 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+
+import { bsClass, prefix } from './utils/bootstrapUtils';
+import createChainedFunction from './utils/createChainedFunction';
 
 class ModalHeader extends React.Component {
+
   render() {
+    let { 'aria-label': label, ...props } = this.props;
+    let onHide = createChainedFunction(this.context.$bs_onModalHide, this.props.onHide);
+
     return (
       <div
-        {...this.props}
-        className={classNames(this.props.className, this.props.modalClassName)}>
+        {...props}
+        className={classNames(this.props.className, prefix(this.props, 'header'))}
+      >
         { this.props.closeButton &&
           <button
+            type="button"
             className="close"
-            onClick={this.props.onHide}>
+            aria-label={label}
+            onClick={onHide}>
             <span aria-hidden="true">
               &times;
             </span>
@@ -22,20 +32,14 @@ class ModalHeader extends React.Component {
   }
 }
 
-// used in liue of parent contexts right now to auto wire the close button
-ModalHeader.__isModalHeader = true;
-
 ModalHeader.propTypes = {
   /**
-   * The 'aria-label' attribute is used to define a string that labels the current element.
-   * It is used for Assistive Technology when the label text is not visible on screen.
+   * The 'aria-label' attribute provides an accessible label for the close button.
+   * It is used for Assistive Technology when the label text is not readable.
    */
   'aria-label': React.PropTypes.string,
 
-  /**
-   * A css class applied to the Component
-   */
-  modalClassName: React.PropTypes.string,
+  bsClass: React.PropTypes.string,
 
   /**
    * Specify whether the Component should contain a close button
@@ -49,11 +53,14 @@ ModalHeader.propTypes = {
   onHide: React.PropTypes.func
 };
 
+ModalHeader.contextTypes = {
+  '$bs_onModalHide': React.PropTypes.func
+};
+
 ModalHeader.defaultProps = {
   'aria-label': 'Close',
-  modalClassName: 'modal-header',
   closeButton: false
 };
 
 
-export default ModalHeader;
+export default bsClass('modal', ModalHeader);

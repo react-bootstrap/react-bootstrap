@@ -38,9 +38,9 @@ describe('Pager', () => {
   });
 
   it('Should call "onSelect" when item is clicked', (done) => {
-    function handleSelect(key, href) {
+    function handleSelect(key, e) {
       assert.equal(key, 2);
-      assert.equal(href, '#next');
+      assert.equal(e.target.hash, '#next');
       done();
     }
     let instance = ReactTestUtils.renderIntoDocument(

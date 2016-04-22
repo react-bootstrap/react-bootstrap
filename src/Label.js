@@ -1,26 +1,25 @@
-import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import React from 'react';
 
-const Label = React.createClass({
-  mixins: [BootstrapMixin],
+import { State, DEFAULT, PRIMARY } from './styleMaps';
+import { bsStyles, bsClass, getClassSet } from './utils/bootstrapUtils';
 
-  getDefaultProps() {
-    return {
-      bsClass: 'label',
-      bsStyle: 'default'
-    };
-  },
+@bsClass('label')
+@bsStyles(State.values().concat(DEFAULT, PRIMARY), DEFAULT)
+class Label extends React.Component {
 
   render() {
-    let classes = this.getBsClassSet();
+    let classes = getClassSet(this.props);
 
     return (
-      <span {...this.props} className={classNames(this.props.className, classes)}>
+      <span
+        {...this.props}
+        className={classNames(this.props.className, classes)}
+      >
         {this.props.children}
       </span>
     );
   }
-});
+}
 
 export default Label;

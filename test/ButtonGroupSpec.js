@@ -22,7 +22,7 @@ describe('ButtonGroup', () => {
 
   it('Should add size', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ButtonGroup bsSize='large'>
+      <ButtonGroup bsSize="large">
         <Button>
           Title
         </Button>
@@ -54,6 +54,8 @@ describe('ButtonGroup', () => {
   });
 
   it('Should warn about block without vertical', () => {
+    shouldWarn('The block property requires the vertical property to be set to have any effect');
+
     ReactTestUtils.renderIntoDocument(
       <ButtonGroup block>
         <Button>
@@ -61,7 +63,6 @@ describe('ButtonGroup', () => {
         </Button>
       </ButtonGroup>
     );
-    shouldWarn('The block property requires the vertical property to be set to have any effect');
   });
 
   it('Should add justified variation', () => {

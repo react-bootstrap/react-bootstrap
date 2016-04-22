@@ -38,9 +38,8 @@ describe('PageItem', () => {
   });
 
   it('Should call "onSelect" when item is clicked', (done) => {
-    function handleSelect(key, href) {
+    function handleSelect(key) {
       assert.equal(key, 1);
-      assert.equal(href, undefined);
       done();
     }
     let instance = ReactTestUtils.renderIntoDocument(
@@ -69,8 +68,8 @@ describe('PageItem', () => {
   });
 
   it('Should call "onSelect" with target attribute', (done) => {
-    function handleSelect(key, href, target) {
-      assert.equal(target, '_blank');
+    function handleSelect(key, e) {
+      assert.equal(e.target.target, '_blank');
       done();
     }
     let instance = ReactTestUtils.renderIntoDocument(
