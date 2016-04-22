@@ -1,3 +1,12 @@
+## [v0.29.2]
+> 2016-04-22
+
+- **Bugfix:** Don't always set `tabIndex` on `<SafeAnchor>` ([#1844])
+
+[v0.29.2]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.1...v0.29.2
+[#1844]: https://github.com/react-bootstrap/react-bootstrap/pull/1844
+
+
 ## [v0.29.1]
 > 2016-04-21
 
