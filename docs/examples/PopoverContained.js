@@ -15,7 +15,7 @@ class Example extends React.Component {
 
         <Overlay
           show={this.state.show}
-          target={()=> React.findDOMNode(this.state.target)}
+          target={()=> ReactDOM.findDOMNode(this.state.target)}
           placement="bottom"
           container={this}
           containerPadding={20}
