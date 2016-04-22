@@ -47,7 +47,7 @@ class CustomMenu extends React.Component {
   }
 
   focusNext() {
-    let input = React.findDOMNode(this.input);
+    let input = ReactDOM.findDOMNode(this.input);
 
     if (input) {
       input.focus();
