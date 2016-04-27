@@ -65,7 +65,7 @@ let TabPane = React.createClass({
     onExited: PropTypes.func,
 
     /**
-     * Unmounts the tab (remove it from the DOM) when animation is not `false` and it is faded out
+     * Unmount the tab (remove it from the DOM) when it is no longer visible
      */
     unmountOnExit: PropTypes.bool
   },
@@ -140,10 +140,10 @@ let TabPane = React.createClass({
       : context.animation;
   },
 
-  getUnmountOnExit(props = this.props, context = this.context) {
-    context = this.getContext('$bs_tabcontent', context);
-    return props.unmountOnExit != null
-      ? props.unmountOnExit
+  getUnmountOnExit() {
+    let context = this.getContext('$bs_tabcontent', this.context);
+    return this.props.unmountOnExit != null
+      ? this.props.unmountOnExit
       : context.unmountOnExit;
   },
 
@@ -158,6 +158,10 @@ let TabPane = React.createClass({
     let bsClass = this.props.bsClass || this.getContext('$bs_tabcontent').bsClass;
 
     let Transition = this.getTransition();
+
+    if (!visible && !Transition && this.getUnmountOnExit()) {
+      return null;
+    }
 
     let classes = {
       active: visible,

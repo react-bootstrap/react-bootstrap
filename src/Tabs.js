@@ -65,7 +65,7 @@ const Tabs = React.createClass({
     onSelect: React.PropTypes.func,
 
     /**
-     * Unmount tabs (remove it from the DOM) when animation is not `false` and it is faded out
+     * Unmount tabs (remove it from the DOM) when it is no longer visible
      */
     unmountOnExit: React.PropTypes.bool,
 

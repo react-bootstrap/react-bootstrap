@@ -30,7 +30,7 @@ let TabContent = React.createClass({
     ]),
 
     /**
-     * Unmounts the content (remove it from the DOM) when animation is not `false` and it is faded out
+     * Unmount the tab (remove it from the DOM) when it is no longer visible
      */
     unmountOnExit: PropTypes.bool,
   },
