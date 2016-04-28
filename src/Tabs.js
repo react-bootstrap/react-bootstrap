@@ -65,6 +65,11 @@ const Tabs = React.createClass({
     onSelect: React.PropTypes.func,
 
     /**
+     * Unmount tabs (remove it from the DOM) when it is no longer visible
+     */
+    unmountOnExit: React.PropTypes.bool,
+
+    /**
      * @deprecated Use TabContainer to create differently shaped tab layouts.
      */
     position: React.PropTypes.oneOf(['top', 'left', 'right']),
@@ -107,7 +112,8 @@ const Tabs = React.createClass({
       animation: true,
       tabWidth: 2,
       position: 'top',
-      standalone: false
+      standalone: false,
+      unmountOnExit: false
     };
   },
 
@@ -145,11 +151,13 @@ const Tabs = React.createClass({
       ref: 'tabs',
       role: 'tablist'
     };
+
     const childTabs = ValidComponentChildren.map(children, this.renderTab);
 
     const panesProps = {
       ref: 'panes',
-      animation: props.animation
+      animation: props.animation,
+      unmountOnExit: props.unmountOnExit
     };
 
     const childPanes = children;

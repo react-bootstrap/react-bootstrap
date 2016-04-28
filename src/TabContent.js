@@ -28,6 +28,11 @@ let TabContent = React.createClass({
       PropTypes.bool,
       elementType
     ]),
+
+    /**
+     * Unmount the tab (remove it from the DOM) when it is no longer visible
+     */
+    unmountOnExit: PropTypes.bool,
   },
 
   contextTypes: {
@@ -43,14 +48,16 @@ let TabContent = React.createClass({
       animation: animationPropType,
       activeKey: PropTypes.any,
       onExited: PropTypes.func,
-      register: PropTypes.func
+      register: PropTypes.func,
+      unmountOnExit: PropTypes.bool,
     }),
   },
 
   getDefaultProps() {
     return {
       componentClass: 'div',
-      animation: true
+      animation: true,
+      unmountOnExit: false
     };
   },
 
@@ -69,7 +76,8 @@ let TabContent = React.createClass({
         animation: this.props.animation,
         activeKey: exitingPane ? undefined : this.getActiveKey(),
         onExited: this.handlePaneExited,
-        register: this.registerPane
+        register: this.registerPane,
+        unmountOnExit: this.props.unmountOnExit
       }
     };
   },
