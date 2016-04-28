@@ -1,3 +1,17 @@
+## [v0.29.3]
+> 2016-04-28
+
+- **Feature:** Add `unmountOnExit` support to tabs ([#1823])
+- **Bugfix:** Do not pass `onSelect` to DOM nodes ([#1861])
+- **Bugfix:** Do not throw error when tab group has no panes ([#1862])
+- **Bugfix:** Fix setting `id` for `<NavItem>`s for tabs ([#1862])
+
+[v0.29.3]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.2...v0.29.3
+[#1823]: https://github.com/react-bootstrap/react-bootstrap/pull/1823
+[#1861]: https://github.com/react-bootstrap/react-bootstrap/pull/1861
+[#1862]: https://github.com/react-bootstrap/react-bootstrap/pull/1862
+
+
 ## [v0.29.2]
 > 2016-04-22
 
