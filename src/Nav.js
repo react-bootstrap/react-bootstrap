@@ -135,7 +135,7 @@ class Nav extends React.Component {
     }
 
     let {
-        linkId
+        id
       , 'aria-controls': controls
       , eventKey
       , role
@@ -143,13 +143,13 @@ class Nav extends React.Component {
       , tabIndex = 0 } = child.props;
 
     if (context && context.getId) {
-      warning(!(linkId || controls),
-        'In the context of a TabContainer, NavItems are given generated `linkId` and `aria-controls` ' +
+      warning(!(id || controls),
+        'In the context of a TabContainer, NavItems are given generated `id` and `aria-controls` ' +
         'attributes for the sake of proper component accessibility. Any provided ones will be ignored. ' +
         'To control these attributes directly provide a `generateChildId` prop to the parent TabContainer.'
       );
 
-      linkId = context.getId(eventKey, TAB) || null;
+      id = context.getId(eventKey, TAB) || null;
       controls = context.getId(eventKey, PANE) || null;
       onSelect = chain(onSelect, context.onSelect);
     }
@@ -165,7 +165,7 @@ class Nav extends React.Component {
 
     return {
       onSelect,
-      linkId,
+      id,
       role,
       onKeyDown,
       'aria-controls': controls,

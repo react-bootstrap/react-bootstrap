@@ -441,7 +441,7 @@ describe('Tabs', () => {
       let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
       tabs.every(tab =>
-        assert.ok(tab.props['aria-controls'] && tab.props.linkId));
+        assert.ok(tab.props['aria-controls'] && tab.props.id));
     });
 
     it('Should add aria-labelledby', () => {

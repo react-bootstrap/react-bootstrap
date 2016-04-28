@@ -74,6 +74,10 @@ let TabContent = React.createClass({
     };
   },
 
+  componentWillMount() {
+    this.panes = [];
+  },
+
   /**
    * This belongs in `componentWillReceiveProps()` but
    * 0.14.x contains a bug where cwrp isn't called when only context changes.
@@ -117,7 +121,7 @@ let TabContent = React.createClass({
    * TabContent to wait longingly forever for the handlePaneExited to be called.
    */
   registerPane(eventKey) {
-    let panes = this.panes || (this.panes = []);
+    let panes = this.panes;
 
     invariant(panes.indexOf(eventKey) === -1,
       'You cannot have multiple TabPanes of with the same `eventKey` in the same ' +
