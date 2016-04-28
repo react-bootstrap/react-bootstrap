@@ -41,6 +41,35 @@ describe('TabContainer', () => {
     expect(nested).to.not.exist;
   });
 
+  it('should match up ids', () => {
+    let instance = tsp(
+      <TabContainer id="custom-id">
+        <div>
+          <Nav>
+            <NavItem eventKey='1'>One</NavItem>
+          </Nav>
+          <TabContent>
+            <TabPane eventKey='1' />
+          </TabContent>
+        </div>
+      </TabContainer>
+    ).render();
+
+    let tabId = instance
+      .first(s`${NavItem} a`)
+      .props('id');
+
+    let paneId = instance
+      .first(s`${TabPane} div`)
+      .props('id');
+
+    expect(tabId).to.exist;
+    expect(paneId).to.exist;
+
+    instance.single(`a[aria-controls=${paneId}]`);
+    instance.single(`div[aria-labelledby=${tabId}]`);
+  });
+
   it('should default Nav role to tablist', () => {
     let instance = tsp(
       <TabContainer id="custom-id">
@@ -63,6 +92,7 @@ describe('TabContainer', () => {
       .getAttribute('role')
       .should.equal('tab');
   });
+
 
   it('should use explicit Nav role', () => {
     let instance = tsp(
