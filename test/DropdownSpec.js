@@ -2,6 +2,7 @@ import keycode from 'keycode';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
+import tsp from 'teaspoon';
 
 import Dropdown from '../src/Dropdown';
 import DropdownMenu from '../src/DropdownMenu';
@@ -223,6 +224,14 @@ describe('Dropdown', () => {
     buttonNode.getAttribute('aria-haspopup').should.equal('true');
   });
 
+  it('does not pass onSelect to DOM node', () => {
+    tsp(simpleDropdown)
+      .props('onSelect', () => {})
+      .shallowRender()
+      .tap(m => m.props().should.have.property('onSelect'))
+      .children()
+      .should.not.have.property('onSelect');
+  });
 
   it('closes when child MenuItem is selected', () => {
     const instance = ReactTestUtils.renderIntoDocument(
