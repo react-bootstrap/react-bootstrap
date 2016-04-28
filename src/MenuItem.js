@@ -55,6 +55,8 @@ class MenuItem extends React.Component {
 
     const {className, style, onClick, ...props} = this.props;
 
+    delete props.onSelect;
+
     const classes = {
       disabled: this.props.disabled,
       active: this.props.active

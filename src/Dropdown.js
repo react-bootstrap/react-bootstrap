@@ -88,7 +88,7 @@ class Dropdown extends React.Component {
     let children = this.extractChildren();
     let Component = this.props.componentClass;
 
-    let props = omit(this.props, ['id', 'bsClass', 'role']);
+    let props = omit(this.props, ['id', 'bsClass', 'role', 'onSelect']);
     let className = prefix(this.props);
 
     const rootClasses = {

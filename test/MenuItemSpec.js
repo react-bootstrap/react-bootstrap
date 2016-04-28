@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
-
+import tsp from 'teaspoon';
 import MenuItem from '../src/MenuItem';
 
 import { shouldWarn } from './helpers';
@@ -152,6 +152,26 @@ describe('MenuItem', () => {
     const li = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'li');
 
     ReactTestUtils.Simulate.click(li);
+  });
+
+  it('does not pass onClick to DOM node', () => {
+    tsp(
+      <MenuItem onSelect={()=>{}}>Item</MenuItem>
+    )
+    .shallowRender()
+    .children()
+    .props()
+    .should.not.have.property('onSelect');
+  });
+
+  it('does not pass onClick to children', () => {
+    tsp(
+      <MenuItem onSelect={()=>{}}>Item</MenuItem>
+    )
+    .shallowRender()
+    .find('SafeAnchor')
+    .props()
+    .should.not.have.property('onSelect');
   });
 
   it('disabled link', () => {

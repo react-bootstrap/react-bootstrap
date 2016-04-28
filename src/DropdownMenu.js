@@ -84,7 +84,9 @@ class DropdownMenu extends React.Component {
   }
 
   render() {
-    let {children, onSelect, pullRight, className, labelledBy, open, onClose, ...props} = this.props;
+    let {
+        children, onSelect, pullRight, className
+      , labelledBy, open, onClose, ...props } = this.props;
 
     const items = ValidComponentChildren.map(children, child => {
       let childProps = child.props || {};
