@@ -46,6 +46,7 @@ let Panel = React.createClass({
   },
 
   handleSelect(e) {
+    e.persist();
     e.selected = true;
 
     if (this.props.onSelect) {
