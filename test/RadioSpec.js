@@ -50,4 +50,17 @@ describe('<Radio>', () => {
       .shallowRender()
       .none('.has-success');
   });
+
+  it('should support inputRef', () => {
+    class Container extends React.Component {
+      render() {
+        return (
+          <Radio inputRef={ref => { this.input = ref; }} />
+        );
+      }
+    }
+
+    const instance = $(<Container />).render().unwrap();
+    expect(instance.input.tagName).to.equal('INPUT');
+  });
 });

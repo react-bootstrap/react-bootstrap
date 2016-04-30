@@ -11,6 +11,14 @@ const propTypes = {
    * Only valid if `inline` is not set.
    */
   validationState: React.PropTypes.oneOf(['success', 'warning', 'error']),
+  /**
+   * Attaches a ref to the `<input>` element. Only functions can be used here.
+   *
+   * ```js
+   * <Radio inputRef={ref => { this.input = ref; }} />
+   * ```
+   */
+  inputRef: React.PropTypes.func,
 };
 
 const defaultProps = {
@@ -21,10 +29,26 @@ const defaultProps = {
 class Radio extends React.Component {
   render() {
     const {
-      inline, disabled, validationState, className, style, children, ...props,
+      inline,
+      disabled,
+      validationState,
+      inputRef,
+      className,
+      style,
+      children,
+      ...props,
     } = this.props;
 
     delete props.bsClass;
+
+    const input = (
+      <input
+        {...props}
+        ref={inputRef}
+        type="radio"
+        disabled={disabled}
+      />
+    );
 
     if (inline) {
       const classes = {
@@ -43,7 +67,7 @@ class Radio extends React.Component {
 
       return (
         <label className={classNames(className, classes)} style={style}>
-          <input {...props} type="radio" disabled={disabled} />
+          {input}
           {children}
         </label>
       );
@@ -60,7 +84,7 @@ class Radio extends React.Component {
     return (
       <div className={classNames(className, classes)} style={style}>
         <label>
-          <input {...props} type="radio" disabled={disabled} />
+          {input}
           {children}
         </label>
       </div>
