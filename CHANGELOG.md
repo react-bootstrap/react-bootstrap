@@ -1,3 +1,16 @@
+## [v0.29.4]
+> 2016-05-10
+
+- **Feature:** Add `inputRef` to `<Checkbox>` and `<Radio>` ([#1865])
+- **Bugfix:** Persist `<Panel>` events before modifying them ([#1864])
+- **Bugfix:** Add back `eventKey` to props for custom pagination buttons ([#1876])
+
+[v0.29.4]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.3...v0.29.4
+[#1864]: https://github.com/react-bootstrap/react-bootstrap/pull/1864
+[#1865]: https://github.com/react-bootstrap/react-bootstrap/pull/1865
+[#1876]: https://github.com/react-bootstrap/react-bootstrap/pull/1876
+
+
 ## [v0.29.3]
 > 2016-04-28
 

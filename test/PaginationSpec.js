@@ -4,14 +4,14 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Pagination from '../src/Pagination';
 
 describe('Pagination', () => {
-  it('Should have class', () => {
+  it('should have class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination>Item content</Pagination>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pagination'));
   });
 
-  it('Should show the correct active button', () => {
+  it('should show the correct active button', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         items={5}
@@ -22,7 +22,7 @@ describe('Pagination', () => {
     pageButtons[2].className.should.match(/\bactive\b/);
   });
 
-  it('Should call onSelect when page button is selected', (done) => {
+  it('should call onSelect when page button is selected', (done) => {
     function onSelect(eventKey) {
       assert.equal(eventKey, 2);
       done();
@@ -37,7 +37,7 @@ describe('Pagination', () => {
     );
   });
 
-  it('Should only show part of buttons and active button in the middle of buttons when given maxButtons', () => {
+  it('should only show part of buttons and active button in the middle of buttons when given maxButtons', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         items={30}
@@ -53,7 +53,7 @@ describe('Pagination', () => {
     pageButtons[4].className.should.match(/\bactive\b/);
   });
 
-  it('Should show the ellipsis, boundaryLinks, first, last, prev and next button with default labels', () => {
+  it('should show the ellipsis, boundaryLinks, first, last, prev and next button with default labels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         first={true}
@@ -77,7 +77,7 @@ describe('Pagination', () => {
 
   });
 
-  it('Should show the boundaryLinks, first, last, prev and next button', () => {
+  it('should show the boundaryLinks, first, last, prev and next button', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         first={true}
@@ -98,7 +98,7 @@ describe('Pagination', () => {
     assert.equal(pageButtons[8].innerText, '20');
   });
 
-  it('Should show the ellipsis, first, last, prev and next button with custom labels', () => {
+  it('should show the ellipsis, first, last, prev and next button with custom labels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         first='first'
@@ -121,7 +121,7 @@ describe('Pagination', () => {
     assert.equal(pageButtons[7].innerText, 'last');
   });
 
-  it('Should enumerate pagenums correctly when ellipsis=true', () => {
+  it('should enumerate pagenums correctly when ellipsis=true', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         first
@@ -142,7 +142,7 @@ describe('Pagination', () => {
     assert.equal(pageButtons[4].innerText, '»');
   });
 
-  it('Should render next and last buttons as disabled when items=0 and ellipsis=true', () => {
+  it('should render next and last buttons as disabled when items=0 and ellipsis=true', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         last
@@ -161,7 +161,7 @@ describe('Pagination', () => {
     assert.include(pageButtons[1].className, 'disabled');
   });
 
-  it('Should wrap buttons in SafeAnchor when no buttonComponentClass prop is supplied', () => {
+  it('should wrap buttons in SafeAnchor when no buttonComponentClass prop is supplied', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         maxButtons={2}
@@ -179,7 +179,7 @@ describe('Pagination', () => {
     assert.equal(pageButtons[1].children[0].getAttribute('href'), '');
   });
 
-  it('Should wrap each button in a buttonComponentClass when it is present', () => {
+  it('should wrap each button in a buttonComponentClass when it is present', () => {
     class DummyElement extends React.Component {
       render() {
         return <div {...this.props}/>;
@@ -201,7 +201,7 @@ describe('Pagination', () => {
     assert.equal(pageButtons[1].children[0].tagName, tagName);
   });
 
-  it('Should call onSelect with custom buttonComponentClass', (done) => {
+  it('should call onSelect with custom buttonComponentClass', (done) => {
     class DummyElement extends React.Component {
       render() {
         return <div {...this.props}/>;
@@ -222,7 +222,7 @@ describe('Pagination', () => {
     );
   });
 
-  it('Should not fire "onSelect" event on disabled buttons', () => {
+  it('should not fire "onSelect" event on disabled buttons', () => {
     function onSelect() {
       throw Error('this event should not happen');
     }
@@ -251,7 +251,7 @@ describe('Pagination', () => {
     ReactTestUtils.Simulate.click( lastButton );
   });
 
-  it('Should pass page number to buttonComponentClass', () => {
+  it('should pass page number to buttonComponentClass', () => {
     class DummyElement extends React.Component {
       render() {
         return <a href={`?page=${this.props.eventKey}`}>{this.props.eventKey}</a>;
