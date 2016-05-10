@@ -222,7 +222,7 @@ describe('Pagination', () => {
     );
   });
 
-  it('should not fire "onSelect" event on disabled buttons', () => {
+  it('Should not fire "onSelect" event on disabled buttons', () => {
     function onSelect() {
       throw Error('this event should not happen');
     }
@@ -249,5 +249,21 @@ describe('Pagination', () => {
 
     ReactTestUtils.Simulate.click( nextButton );
     ReactTestUtils.Simulate.click( lastButton );
+  });
+
+  it('Should pass page number to buttonComponentClass', () => {
+    class DummyElement extends React.Component {
+      render() {
+        return <a href={`?page=${this.props.eventKey}`}>{this.props.eventKey}</a>;
+      }
+    }
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Pagination items={5} buttonComponentClass={DummyElement}/>
+    );
+
+    const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
+
+    assert.equal(pageButtons[1].getAttribute('href'), '?page=2');
   });
 });
