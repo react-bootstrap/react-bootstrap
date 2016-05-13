@@ -118,6 +118,10 @@ class Dropdown extends React.Component {
     if (this.props.onToggle) {
       this.props.onToggle(open);
     }
+
+    if (!open && this.props.onClose) {
+      this.props.onClose();
+    }
   }
 
   handleClick() {
@@ -211,7 +215,6 @@ class Dropdown extends React.Component {
 
     menuProps.onClose = createChainedFunction(
       menu.props.onClose,
-      this.props.onClose,
       this.handleClose
     );
 
