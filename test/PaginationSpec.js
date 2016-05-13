@@ -161,7 +161,7 @@ describe('Pagination', () => {
     assert.include(pageButtons[1].className, 'disabled');
   });
 
-  it('Should wrap buttons anchor', () => {
+  it('Should wrap buttons in anchor', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         maxButtons={2}
@@ -175,8 +175,8 @@ describe('Pagination', () => {
     assert.equal(pageButtons[0].children[0].tagName, tagName);
     assert.equal(pageButtons[1].children[0].tagName, tagName);
 
-    assert.equal(pageButtons[0].children[0].getAttribute('href'), '');
-    assert.equal(pageButtons[1].children[0].getAttribute('href'), '');
+    assert.equal(pageButtons[0].children[0].getAttribute('href'), null);
+    assert.equal(pageButtons[1].children[0].getAttribute('href'), null);
   });
 
   it('should not fire "onSelect" event on disabled buttons', () => {
