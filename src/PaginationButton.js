@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import createSelectedEvent from './utils/createSelectedEvent';
-import elementType from 'react-prop-types/lib/elementType';
 
 const PaginationButton = React.createClass({
 
@@ -13,11 +12,7 @@ const PaginationButton = React.createClass({
     ]),
     onSelect: React.PropTypes.func,
     disabled: React.PropTypes.bool,
-    active: React.PropTypes.bool,
-    /**
-     * You can use a custom element for this component
-     */
-    buttonComponentClass: elementType
+    active: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -46,16 +41,15 @@ const PaginationButton = React.createClass({
 
     let {
       className,
-      ...anchorProps
+      ...anchorProps,
+      children
     } = this.props;
 
-    let ButtonComponentClass = this.props.buttonComponentClass;
-
     return (
-      <li className={classNames(className, classes)}>
-        <ButtonComponentClass
-          {...anchorProps}
-          onClick={this.handleClick} />
+      <li className={classNames(className, classes, 'page-item')} style={{cursor: 'pointer'}}>
+        <a className="page-link" onClick={this.handleClick}>
+          {children}
+        </a>
       </li>
     );
   }

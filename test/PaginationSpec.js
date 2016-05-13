@@ -161,7 +161,7 @@ describe('Pagination', () => {
     assert.include(pageButtons[1].className, 'disabled');
   });
 
-  it('Should wrap buttons in SafeAnchor when no buttonComponentClass prop is supplied', () => {
+  it('Should wrap buttons in anchor', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         maxButtons={2}
@@ -174,52 +174,6 @@ describe('Pagination', () => {
 
     assert.equal(pageButtons[0].children[0].tagName, tagName);
     assert.equal(pageButtons[1].children[0].tagName, tagName);
-
-    assert.equal(pageButtons[0].children[0].getAttribute('href'), '');
-    assert.equal(pageButtons[1].children[0].getAttribute('href'), '');
-  });
-
-  it('Should wrap each button in a buttonComponentClass when it is present', () => {
-    class DummyElement extends React.Component {
-      render() {
-        return <div {...this.props}/>;
-      }
-    }
-
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Pagination
-        maxButtons={2}
-        activePage={1}
-        items={2}
-        buttonComponentClass={DummyElement} />
-    );
-    let pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
-
-    let tagName = 'DIV';
-
-    assert.equal(pageButtons[0].children[0].tagName, tagName);
-    assert.equal(pageButtons[1].children[0].tagName, tagName);
-  });
-
-  it('Should call onSelect with custom buttonComponentClass', (done) => {
-    class DummyElement extends React.Component {
-      render() {
-        return <div {...this.props}/>;
-      }
-    }
-
-    function onSelect(event, selectedEvent) {
-      assert.equal(selectedEvent.eventKey, 3);
-      done();
-    }
-
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Pagination items={5} onSelect={onSelect} buttonComponentClass={DummyElement}/>
-    );
-
-    ReactTestUtils.Simulate.click(
-      ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'div')[2]
-    );
   });
 
   it('should not fire "onSelect" event on disabled buttons', () => {
