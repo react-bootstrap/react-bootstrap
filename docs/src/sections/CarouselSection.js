@@ -9,7 +9,7 @@ export default function CarouselSection() {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
-        <Anchor id="carousels">Carousels</Anchor> <small>Carousel, CarouselItem</small>
+        <Anchor id="carousels">Carousels</Anchor> <small>Carousel, Carousel.Item, Carousel.Caption</small>
       </h2>
 
       <h3><Anchor id="carousels-uncontrolled">Uncontrolled</Anchor></h3>
@@ -25,8 +25,11 @@ export default function CarouselSection() {
       <h4><Anchor id="carousels-props-carousel">Carousel</Anchor></h4>
       <PropTable component="Carousel"/>
 
-      <h4><Anchor id="carousels-props-item">CarouselItem</Anchor></h4>
+      <h4><Anchor id="carousels-props-item">Carousel.Item</Anchor></h4>
       <PropTable component="CarouselItem"/>
+
+      <h4><Anchor id="carousels-props-caption">Carousel.Caption</Anchor></h4>
+      <PropTable component="Carousel.Caption"/>
     </div>
   );
 }

@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
 
-import { getOne, shouldWarn } from './helpers';
-import utils from '../src/utils/bootstrapUtils';
+import { getOne } from './helpers';
+import { addStyle } from '../src/utils/bootstrapUtils';
 
 describe('Navbar', () => {
 
@@ -58,7 +58,7 @@ describe('Navbar', () => {
   });
 
   it('Should not add default class along with custom styles', () => {
-    utils.addStyle(Navbar, ['custom']);
+    addStyle(Navbar, 'custom');
 
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar bsStyle='custom' />
@@ -181,6 +181,30 @@ describe('Navbar', () => {
     expect(toggleSpy).to.be.calledWith(true);
   });
 
+  it('Should support custom props', () => {
+    let clickSpy = sinon.spy();
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Navbar>
+        <Navbar.Header>
+          <Navbar.Toggle
+            onClick={clickSpy}
+            className="foo bar"
+            style={{ height: 100 }}
+          />
+        </Navbar.Header>
+      </Navbar>
+    );
+
+    let toggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
+
+    expect(toggle.className).to.match(/foo bar/);
+    expect(toggle.style.height).to.equal('100px');
+
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(toggle));
+    expect(clickSpy).to.have.been.called;
+  });
+
   it('Should render collapse', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
@@ -223,10 +247,12 @@ describe('Navbar', () => {
     let collapse = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Collapse);
 
     expect(collapse.context.$bs_navbar_expanded).to.not.be.ok;
+    expect(toggle.className).to.match(/collapsed/);
 
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(toggle));
 
     expect(collapse.context.$bs_navbar_expanded).to.equal(true);
+    expect(toggle.className).to.not.match(/collapsed/);
   });
 
   it('Should pass `bsClass` down to sub components', () => {
@@ -257,37 +283,16 @@ describe('Navbar', () => {
     ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-navbar-right');
   });
 
-  describe('deprecations', ()=> {
-    it('Should add header with brand', () => {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Navbar brand="Brand" />
-      );
+  it('Should add custom className to header', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Navbar>
+        <Navbar.Header className='test'>
+          <Navbar.Brand />
+        </Navbar.Header>
+      </Navbar>
+    );
 
-      let header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
-
-      assert.ok(header);
-
-      let brand = getOne(header.getElementsByClassName('navbar-brand'));
-
-      assert.ok(brand);
-      assert.equal(brand.nodeName, 'SPAN');
-      assert.equal(brand.innerText, 'Brand');
-
-      shouldWarn('deprecated');
-    });
-
-    it('Should add header when toggleNavKey is 0', () => {
-      let instance = ReactTestUtils.renderIntoDocument(
-        <Navbar toggleNavKey={0}>
-          <Nav eventKey={0} />
-        </Navbar>
-      );
-
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
-
-      shouldWarn('deprecated');
-    });
+    ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'test');
   });
 
 });

@@ -1,13 +1,20 @@
-import React from 'react';
 import classNames from 'classnames';
-import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
+import React from 'react';
+import deprecated from 'react-prop-types/lib/deprecated';
+
 import { State } from './styleMaps';
+import {
+  bsStyles, bsClass, getClassSet, prefix,
+} from './utils/bootstrapUtils';
 
 let Alert = React.createClass({
 
   propTypes: {
     onDismiss: React.PropTypes.func,
-    dismissAfter: React.PropTypes.number,
+    /**
+     * @private
+     */
+    dismissAfter: deprecated(React.PropTypes.number, 'No longer supported.'),
     closeLabel: React.PropTypes.string
   },
 
@@ -24,7 +31,8 @@ let Alert = React.createClass({
         className="close"
         onClick={this.props.onDismiss}
         aria-hidden="true"
-        tabIndex="-1">
+        tabIndex="-1"
+      >
         <span>&times;</span>
       </button>
     );
@@ -35,20 +43,25 @@ let Alert = React.createClass({
       <button
         type="button"
         className="close sr-only"
-        onClick={this.props.onDismiss}>
+        onClick={this.props.onDismiss}
+      >
         {this.props.closeLabel}
       </button>
     );
   },
 
   render() {
-    let classes = bootstrapUtils.getClassSet(this.props);
+    let classes = getClassSet(this.props);
     let isDismissable = !!this.props.onDismiss;
 
-    classes[bootstrapUtils.prefix(this.props, 'dismissable')] = isDismissable;
+    classes[prefix(this.props, 'dismissable')] = isDismissable;
 
     return (
-      <div {...this.props} role="alert" className={classNames(this.props.className, classes)}>
+      <div
+        {...this.props}
+        role="alert"
+        className={classNames(this.props.className, classes)}
+      >
         {isDismissable ? this.renderDismissButton() : null}
         {this.props.children}
         {isDismissable ? this.renderSrOnlyDismissButton() : null}

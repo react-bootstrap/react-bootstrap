@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
-
+import tsp from 'teaspoon';
 import MenuItem from '../src/MenuItem';
 
 import { shouldWarn } from './helpers';
@@ -15,7 +15,23 @@ describe('MenuItem', () => {
     node.getAttribute('role').should.equal('separator');
   });
 
+  it('renders divider className and style', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem
+        divider
+        className="foo bar"
+        style={{ height: '100px' }}
+      />
+    );
+    const node = ReactDOM.findDOMNode(instance);
+
+    node.className.should.match(/\bdivider foo bar\b/);
+    node.style.height.should.equal('100px');
+  });
+
   it('renders divider not children', () => {
+    shouldWarn('Children will not be rendered for dividers');
+
     const instance = ReactTestUtils.renderIntoDocument(
       <MenuItem divider>
         Some child
@@ -25,7 +41,6 @@ describe('MenuItem', () => {
 
     node.className.should.match(/\bdivider\b/);
     node.innerHTML.should.not.match(/Some child/);
-    shouldWarn('Children will not be rendered for dividers');
   });
 
   it('renders header', () => {
@@ -35,6 +50,22 @@ describe('MenuItem', () => {
     node.className.should.match(/\bdropdown-header\b/);
     node.getAttribute('role').should.equal('heading');
     node.innerHTML.should.match(/Header Text/);
+  });
+
+  it('renders header className and style', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <MenuItem
+        header
+        className="foo bar"
+        style={{ height: '100px' }}
+      >
+        Header Text
+      </MenuItem>
+    );
+    const node = ReactDOM.findDOMNode(instance);
+
+    node.className.should.match(/\bdropdown-header foo bar\b/);
+    node.style.height.should.equal('100px');
   });
 
   it('renders menu item link', (done) => {
@@ -59,7 +90,7 @@ describe('MenuItem', () => {
   });
 
   it('click handling with onSelect prop', () => {
-    const handleSelect = (event, eventKey) => {
+    const handleSelect = (eventKey) => {
       eventKey.should.equal('1');
     };
     const instance = ReactTestUtils.renderIntoDocument(
@@ -71,7 +102,7 @@ describe('MenuItem', () => {
   });
 
   it('click handling with onSelect prop (no eventKey)', () => {
-    const handleSelect = (event, eventKey) => {
+    const handleSelect = (eventKey) => {
       expect(eventKey).to.be.undefined;
     };
     const instance = ReactTestUtils.renderIntoDocument(
@@ -123,6 +154,26 @@ describe('MenuItem', () => {
     ReactTestUtils.Simulate.click(li);
   });
 
+  it('does not pass onClick to DOM node', () => {
+    tsp(
+      <MenuItem onSelect={()=>{}}>Item</MenuItem>
+    )
+    .shallowRender()
+    .children()
+    .props()
+    .should.not.have.property('onSelect');
+  });
+
+  it('does not pass onClick to children', () => {
+    tsp(
+      <MenuItem onSelect={()=>{}}>Item</MenuItem>
+    )
+    .shallowRender()
+    .find('SafeAnchor')
+    .props()
+    .should.not.have.property('onSelect');
+  });
+
   it('disabled link', () => {
     const handleSelect = () => {
       throw new Error('Should not invoke onSelect event');
@@ -144,6 +195,7 @@ describe('MenuItem', () => {
         className="test-class"
         href="#hi-mom!"
         title="hi mom!"
+        style={{ height: 100 }}
       >
         Title
       </MenuItem>
@@ -152,6 +204,7 @@ describe('MenuItem', () => {
     let node = ReactDOM.findDOMNode(instance);
 
     assert(node.className.match(/\btest-class\b/));
+    assert.equal(node.style.height, '100px');
     assert.equal(node.getAttribute('href'), null);
     assert.equal(node.getAttribute('title'), null);
 

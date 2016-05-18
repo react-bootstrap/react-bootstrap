@@ -1,5 +1,7 @@
+import classNames from 'classnames';
 import React, { PropTypes } from 'react';
-import tbsUtils from './utils/bootstrapUtils';
+
+import { prefix } from './utils/bootstrapUtils';
 
 let NavbarHeader = React.createClass({
 
@@ -8,15 +10,12 @@ let NavbarHeader = React.createClass({
   },
 
   render() {
-    let { children, ...props } = this.props;
-    let {
-      $bs_navbar_bsClass: bsClass = 'navbar',
-    } = this.context;
+    let { className, ...props } = this.props;
+    let { $bs_navbar_bsClass: bsClass = 'navbar' } = this.context;
+    let headerClasses = prefix({ bsClass }, 'header');
 
     return (
-      <div className={tbsUtils.prefix({ bsClass }, 'header')}>
-        { children }
-      </div>
+      <div {...props} className={classNames(className, headerClasses)} />
     );
   }
 });

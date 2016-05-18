@@ -16,14 +16,20 @@ import BreadcrumbSection from './sections/BreadcrumbSection';
 import ButtonGroupSection from './sections/ButtonGroupSection';
 import ButtonSection from './sections/ButtonSection';
 import CarouselSection from './sections/CarouselSection';
+import CustomStylesSection from './sections/CustomStylesSection';
 import DropdownSection from './sections/DropdownSection';
+import FormControlsSection from './sections/FormControlsSection';
+import FormInputGroupSection from './sections/FormInputGroupSection';
+import FormLayoutSection from './sections/FormLayoutSection';
 import FormSection from './sections/FormSection';
+import FormValidationSection from './sections/FormValidationSection';
 import GlyphiconSection from './sections/GlyphiconSection';
 import GridSection from './sections/GridSection';
 import ImageSection from './sections/ImageSection';
 import JumbotronSection from './sections/JumbotronSection';
 import LabelSection from './sections/LabelSection';
 import ListGroupSection from './sections/ListGroupSection';
+import MediaSection from './sections/MediaSection';
 import MenuItemSection from './sections/MenuItemSection';
 import ModalSection from './sections/ModalSection';
 import NavbarSection from './sections/NavbarSection';
@@ -70,12 +76,17 @@ const sections = {
     tables: '#tables',
     panels: '#panels',
     wells: '#wells',
-  forms: '#forms',
+  form: '#forms',
+    formControls: '#forms-controls',
+    formLayout: '#forms-layout',
+    formInputGroup: '#forms-input-groups',
+    formValidation: '#forms-validation',
   media: '#media-content',
     images: '#images',
     thumbnails: '#thumbnail',
     embed: '#responsive-embed',
     carousels: '#carousels',
+    mediaObjects: '#media-objects',
   misc: '#misc',
     icons: '#glyphicons',
     labels: '#labels',
@@ -84,6 +95,7 @@ const sections = {
     progress: '#progress',
   utilities: '#utilities',
     transitions: '#transitions',
+    customStyles: '#custom-styles',
   missing: '#missing',
     affix: '#affix',
     scrollspy: '#scrollspy'
@@ -109,8 +121,8 @@ const ComponentsPage = React.createClass({
     return this.refs.main;
   },
 
-  handleNavItemSelect(key, href) {
-    window.location = href;
+  handleNavItemSelect(key, e) {
+    window.location = e.target.href;
   },
 
   componentDidMount() {
@@ -137,12 +149,13 @@ const ComponentsPage = React.createClass({
 
     for (const href of Object.keys(this.afterSections)) {
       if (!this.afterSections[href]) {
-        this.setState({ activeNavItemHref });
-        return;
+        break;
       }
 
       activeNavItemHref = href;
     }
+
+    this.setState({ activeNavItemHref });
   },
 
   renderScrollSpy(href) {
@@ -184,7 +197,6 @@ const ComponentsPage = React.createClass({
           <PageHeader
             title="Components"
             subTitle="" />
-
           <div ref="main" className="container bs-docs-container">
             <div className="row">
               <div className="col-md-9" role="main">
@@ -261,8 +273,16 @@ const ComponentsPage = React.createClass({
                 {this.renderScrollSpy(sections.wells)}
                 <WellSection />
 
-                {this.renderScrollSpy(sections.forms)}
+                {this.renderScrollSpy(sections.form)}
                 <FormSection />
+                {this.renderScrollSpy(sections.formControls)}
+                <FormControlsSection />
+                {this.renderScrollSpy(sections.formLayout)}
+                <FormLayoutSection />
+                {this.renderScrollSpy(sections.formInputGroup)}
+                <FormInputGroupSection />
+                {this.renderScrollSpy(sections.formValidation)}
+                <FormValidationSection />
 
                 {this.renderScrollSpy(sections.media)}
                 <div className="bs-docs-section">
@@ -281,6 +301,8 @@ const ComponentsPage = React.createClass({
                 <ResponsiveEmbedSection />
                 {this.renderScrollSpy(sections.carousels)}
                 <CarouselSection />
+                {this.renderScrollSpy(sections.mediaObjects)}
+                <MediaSection />
 
                 {this.renderScrollSpy(sections.misc)}
                 <div className="bs-docs-section">
@@ -314,6 +336,9 @@ const ComponentsPage = React.createClass({
 
                 {this.renderScrollSpy(sections.transitions)}
                 <TransitionSection />
+
+                {this.renderScrollSpy(sections.customStyles)}
+                <CustomStylesSection />
 
                 {this.renderScrollSpy(sections.missing)}
                 <div className="bs-docs-section">
@@ -396,13 +421,19 @@ const ComponentsPage = React.createClass({
                         <NavItem href={sections.wells}>Wells</NavItem>
                       </SubNav>
 
-                      <NavItem href={sections.forms}>Forms</NavItem>
+                      <SubNav href={sections.form} text="Forms">
+                        <NavItem href={sections.formControls}>Supported controls</NavItem>
+                        <NavItem href={sections.formLayout}>Form layout</NavItem>
+                        <NavItem href={sections.formInputGroup}>Input groups</NavItem>
+                        <NavItem href={sections.formValidation}>Validation states</NavItem>
+                      </SubNav>
 
                       <SubNav href={sections.media} text="Media content">
                         <NavItem href={sections.images}>Images</NavItem>
                         <NavItem href={sections.thumbnails}>Thumbnails</NavItem>
                         <NavItem href={sections.embed}>Responsive embed</NavItem>
                         <NavItem href={sections.carousels}>Carousels</NavItem>
+                        <NavItem href={sections.mediaObjects}>Media objects</NavItem>
                       </SubNav>
 
                       <SubNav href={sections.misc} text="Miscellaneous">
@@ -415,6 +446,7 @@ const ComponentsPage = React.createClass({
 
                       <SubNav href={sections.utilities} text="Utilities">
                         <NavItem href={sections.transitions}>Transitions</NavItem>
+                        <NavItem href={sections.customStyles}>Custom Styles</NavItem>
                       </SubNav>
 
                       <SubNav href={sections.missing} text="Missing components">
@@ -431,7 +463,6 @@ const ComponentsPage = React.createClass({
               </div>
             </div>
           </div>
-
           <PageFooter ref="footer" />
         </div>
       );

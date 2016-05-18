@@ -2,6 +2,7 @@ import keycode from 'keycode';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
+import tsp from 'teaspoon';
 
 import Dropdown from '../src/Dropdown';
 import DropdownMenu from '../src/DropdownMenu';
@@ -136,6 +137,8 @@ describe('Dropdown', () => {
   });
 
   it('only renders one menu', () => {
+    shouldWarn('Duplicate children');
+
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown title='Single child' id='test-id'>
         <Dropdown.Toggle>Child Text</Dropdown.Toggle>
@@ -151,8 +154,6 @@ describe('Dropdown', () => {
 
     ReactTestUtils.scryRenderedComponentsWithType(instance, DropdownMenu).length.should.equal(0);
     ReactTestUtils.scryRenderedComponentsWithType(instance, CustomMenu).length.should.equal(1);
-
-    shouldWarn(/Duplicate children.*bsRole: menu/);
   });
 
 
@@ -223,6 +224,14 @@ describe('Dropdown', () => {
     buttonNode.getAttribute('aria-haspopup').should.equal('true');
   });
 
+  it('does not pass onSelect to DOM node', () => {
+    tsp(simpleDropdown)
+      .props('onSelect', () => {})
+      .shallowRender()
+      .tap(m => m.props().should.have.property('onSelect'))
+      .children()
+      .should.not.have.property('onSelect');
+  });
 
   it('closes when child MenuItem is selected', () => {
     const instance = ReactTestUtils.renderIntoDocument(

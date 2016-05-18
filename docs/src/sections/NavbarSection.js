@@ -46,7 +46,7 @@ export default function NavbarSection() {
         the toggle and collapse together!
       </p>
       <p>
-        By setting the prop <code>defaultNavExpanded</code> the Navbar will start
+        By setting the prop <code>defaultExpanded</code> the Navbar will start
         expanded by default. You can also finely control the collapsing behavior by using
         the <code>expanded</code> and <code>onToggle</code> props.
       </p>
@@ -73,7 +73,7 @@ export default function NavbarSection() {
       <h4><Anchor id="navs-props-navbar">Navbar</Anchor></h4>
       <PropTable component="Navbar"/>
 
-      <h4><Anchor id="navs-props-navbrand">NavbarToggle, Navbar.Toggle</Anchor></h4>
+      <h4><Anchor id="navs-props-navbar-toggle">Navbar.Toggle</Anchor></h4>
       <PropTable component="NavbarToggle"/>
     </div>
   );

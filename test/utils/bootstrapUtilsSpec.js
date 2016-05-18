@@ -1,5 +1,9 @@
 import React from 'react';
-import tbsUtils, { bsStyles, bsSizes, _curry } from '../../src/utils/bootstrapUtils';
+
+import {
+  bsStyles, bsSizes, getClassSet, prefix, _curry,
+} from '../../src/utils/bootstrapUtils';
+
 import { render, shouldWarn } from '../helpers';
 
 describe('bootstrapUtils', ()=> {
@@ -15,39 +19,36 @@ describe('bootstrapUtils', ()=> {
   }
 
   it('should prefix with bsClass', ()=> {
-    expect(tbsUtils.prefix({ bsClass: 'yolo'}, 'pie')).to.equal('yolo-pie');
+    expect(prefix({ bsClass: 'yolo'}, 'pie')).to.equal('yolo-pie');
   });
 
   it('should return bsClass when there is no suffix', ()=> {
-    expect(tbsUtils.prefix({ bsClass: 'yolo'})).to.equal('yolo');
-    expect(tbsUtils.prefix({ bsClass: 'yolo'}, '')).to.equal('yolo');
-    expect(tbsUtils.prefix({ bsClass: 'yolo'}, null)).to.equal('yolo');
+    expect(prefix({ bsClass: 'yolo'})).to.equal('yolo');
+    expect(prefix({ bsClass: 'yolo'}, '')).to.equal('yolo');
+    expect(prefix({ bsClass: 'yolo'}, null)).to.equal('yolo');
   });
 
   it('returns a classSet of bsClass', ()=> {
-    expect(tbsUtils.getClassSet({ bsClass: 'btn' })).to.eql({'btn': true });
+    expect(getClassSet({ bsClass: 'btn' })).to.eql({'btn': true });
   });
 
   it('returns a classSet of bsClass and style', ()=> {
     expect(
-      tbsUtils.getClassSet({ bsClass: 'btn', bsStyle: 'primary' })
+      getClassSet({ bsClass: 'btn', bsStyle: 'primary' })
     )
     .to.eql({'btn': true, 'btn-primary': true });
   });
 
   it('returns a classSet of bsClass and size', ()=> {
-    expect(tbsUtils
-      .getClassSet({ bsClass: 'btn', bsSize: 'large' }))
+    expect(getClassSet({ bsClass: 'btn', bsSize: 'large' }))
         .to.eql({'btn': true, 'btn-lg': true });
 
-    expect(tbsUtils
-      .getClassSet({ bsClass: 'btn', bsSize: 'lg' }))
+    expect(getClassSet({ bsClass: 'btn', bsSize: 'lg' }))
         .to.eql({'btn': true, 'btn-lg': true });
   });
 
   it('returns a classSet of bsClass, style and size', ()=> {
-    expect(tbsUtils
-      .getClassSet({ bsClass: 'btn', bsSize: 'lg', bsStyle: 'primary' }))
+    expect(getClassSet({ bsClass: 'btn', bsSize: 'lg', bsStyle: 'primary' }))
         .to.eql({'btn': true, 'btn-lg': true, 'btn-primary': true });
   });
 
@@ -110,8 +111,10 @@ describe('bootstrapUtils', ()=> {
     });
 
     it('should work with es6 classes', ()=> {
+      shouldWarn('expected one of ["minimal","boss","plaid"]');
+
       @bsStyles(['minimal', 'boss', 'plaid'], 'plaid')
-      class Component {
+      class Component extends React.Component {
         render() { return <span/>; }
       }
 
@@ -120,11 +123,11 @@ describe('bootstrapUtils', ()=> {
       expect(instance.props.bsStyle).to.equal('plaid');
 
       render(<Component bsStyle="not-plaid"/>);
-
-      shouldWarn(/expected one of \["minimal","boss","plaid"\]/);
     });
 
     it('should work with createClass', ()=> {
+      shouldWarn('expected one of ["minimal","boss","plaid"]');
+
       let Component = bsStyles(['minimal', 'boss', 'plaid'], 'plaid')(
         React.createClass({
           render() { return <span/>; }
@@ -136,8 +139,6 @@ describe('bootstrapUtils', ()=> {
       expect(instance.props.bsStyle).to.equal('plaid');
 
       render(<Component bsStyle="not-plaid"/>);
-
-      shouldWarn(/expected one of \["minimal","boss","plaid"\]/);
     });
   });
 
@@ -176,8 +177,10 @@ describe('bootstrapUtils', ()=> {
     });
 
     it('should work with es6 classes', ()=> {
+      shouldWarn('expected one of ["smallish","micro","planet"]');
+
       @bsSizes(['smallish', 'micro', 'planet'], 'smallish')
-      class Component {
+      class Component extends React.Component {
         render() { return <span/>; }
       }
 
@@ -186,11 +189,11 @@ describe('bootstrapUtils', ()=> {
       expect(instance.props.bsSize).to.equal('smallish');
 
       render(<Component bsSize="not-smallish"/>);
-
-      shouldWarn(/expected one of \["smallish","micro","planet"\]/);
     });
 
     it('should work with createClass', ()=> {
+      shouldWarn('expected one of ["smallish","micro","planet"]');
+
       let Component = bsSizes(['smallish', 'micro', 'planet'], 'smallish')(
         React.createClass({
           render() { return <span/>; }
@@ -202,8 +205,6 @@ describe('bootstrapUtils', ()=> {
       expect(instance.props.bsSize).to.equal('smallish');
 
       render(<Component bsSize="not-smallish"/>);
-
-      shouldWarn(/expected one of \["smallish","micro","planet"\]/);
     });
   });
 });

@@ -1,6 +1,7 @@
-import React from 'react';
 import classNames from 'classnames';
-import tbsUtils, { bsClass } from './utils/bootstrapUtils';
+import React from 'react';
+
+import { bsClass, prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
 class ModalHeader extends React.Component {
@@ -12,7 +13,7 @@ class ModalHeader extends React.Component {
     return (
       <div
         {...props}
-        className={classNames(this.props.className, tbsUtils.prefix(this.props, 'header'))}
+        className={classNames(this.props.className, prefix(this.props, 'header'))}
       >
         { this.props.closeButton &&
           <button

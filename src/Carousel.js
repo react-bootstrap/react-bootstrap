@@ -1,10 +1,14 @@
-import React, { cloneElement } from 'react';
 import classNames from 'classnames';
-import ValidComponentChildren from './utils/ValidComponentChildren';
-import Glyphicon from './Glyphicon';
-import tbsUtils from './utils/bootstrapUtils';
+import React, { cloneElement } from 'react';
 
-const Carousel = React.createClass({
+import { prefix } from './utils/bootstrapUtils';
+import ValidComponentChildren from './utils/ValidComponentChildren';
+
+import Caption from './CarouselCaption';
+import Item from './CarouselItem';
+import Glyphicon from './Glyphicon';
+
+let Carousel = React.createClass({
 
   propTypes: {
     slide: React.PropTypes.bool,
@@ -13,6 +17,17 @@ const Carousel = React.createClass({
     controls: React.PropTypes.bool,
     pauseOnHover: React.PropTypes.bool,
     wrap: React.PropTypes.bool,
+    /**
+     * Callback fired when the active item changes.
+     *
+     * ```js
+     * (eventKey: any) => any | (eventKey: any, event: Object) => any
+     * ```
+     *
+     * If this callback takes two or more arguments, the second argument will
+     * be a persisted event object with `direction` set to the direction of the
+     * transition.
+     */
     onSelect: React.PropTypes.func,
     onSlideEnd: React.PropTypes.func,
     activeIndex: React.PropTypes.number,
@@ -81,7 +96,7 @@ const Carousel = React.createClass({
     }
 
     let index = this.getActiveIndex() + 1;
-    let count = ValidComponentChildren.numberOf(this.props.children);
+    let count = ValidComponentChildren.count(this.props.children);
 
     if (index > count - 1) {
       if (!this.props.wrap) {
@@ -90,7 +105,7 @@ const Carousel = React.createClass({
       index = 0;
     }
 
-    this.handleSelect(index, 'next');
+    this.handleSelect(index, e, 'next');
   },
 
   prev(e) {
@@ -104,10 +119,10 @@ const Carousel = React.createClass({
       if (!this.props.wrap) {
         return;
       }
-      index = ValidComponentChildren.numberOf(this.props.children) - 1;
+      index = ValidComponentChildren.count(this.props.children) - 1;
     }
 
-    this.handleSelect(index, 'prev');
+    this.handleSelect(index, e, 'prev');
   },
 
   pause() {
@@ -141,7 +156,7 @@ const Carousel = React.createClass({
 
   render() {
     let classes = {
-      [tbsUtils.prefix(this.props)]: true,
+      [prefix(this.props)]: true,
       slide: this.props.slide
     };
 
@@ -150,23 +165,24 @@ const Carousel = React.createClass({
         {...this.props}
         className={classNames(this.props.className, classes)}
         onMouseOver={this.handleMouseOver}
-        onMouseOut={this.handleMouseOut}>
-        {
-          this.props.indicators ? this.renderIndicators() : null
-        }
+        onMouseOut={this.handleMouseOut}
+      >
+        {this.props.indicators ? this.renderIndicators() : null}
+
         <div
           ref="inner"
-          className={tbsUtils.prefix(this.props, 'inner')}
+          className={prefix(this.props, 'inner')}
         >
           {ValidComponentChildren.map(this.props.children, this.renderItem)}
         </div>
+
         {this.props.controls ? this.renderControls() : null}
       </div>
     );
   },
 
   renderPrev() {
-    let classes = 'left ' + tbsUtils.prefix(this.props, 'control');
+    let classes = `left ${prefix(this.props, 'control')}`;
 
     return (
       <a className={classes} href="#prev" key={0} onClick={this.prev}>
@@ -176,7 +192,7 @@ const Carousel = React.createClass({
   },
 
   renderNext() {
-    let classes = 'right ' + tbsUtils.prefix(this.props, 'control');
+    let classes = `right ${prefix(this.props, 'control')}`;
 
     return (
       <a className={classes} href="#next" key={1} onClick={this.next}>
@@ -188,7 +204,7 @@ const Carousel = React.createClass({
   renderControls() {
     if (!this.props.wrap) {
       let activeIndex = this.getActiveIndex();
-      let count = ValidComponentChildren.numberOf(this.props.children);
+      let count = ValidComponentChildren.count(this.props.children);
 
       return [
         (activeIndex !== 0) ? this.renderPrev() : null,
@@ -210,7 +226,7 @@ const Carousel = React.createClass({
       <li
         key={index}
         className={className}
-        onClick={this.handleSelect.bind(this, index, null)} />
+        onClick={e => this.handleSelect(index, e, null)} />
     );
   },
 
@@ -228,7 +244,7 @@ const Carousel = React.createClass({
       }, this);
 
     return (
-      <ol className={tbsUtils.prefix(this.props, 'indicators')}>
+      <ol className={prefix(this.props, 'indicators')}>
         {indicators}
       </ol>
     );
@@ -272,15 +288,28 @@ const Carousel = React.createClass({
     );
   },
 
-  handleSelect(index, direction) {
+  handleSelect(index, e, direction) {
     clearTimeout(this.timeout);
 
     if (this.isMounted()) {
       let previousActiveIndex = this.getActiveIndex();
       direction = direction || this.getDirection(previousActiveIndex, index);
 
-      if (this.props.onSelect) {
-        this.props.onSelect(index, direction);
+      const { onSelect } = this.props;
+
+      if (onSelect) {
+        if (onSelect.length > 1) {
+          // React SyntheticEvents are pooled, so we need to remove this event
+          // from the pool to add a custom property. To avoid unnecessarily
+          // removing objects from the pool, only do this when the listener
+          // actually wants the event.
+          e.persist();
+          e.direction = direction;
+
+          onSelect(index, e);
+        } else {
+          onSelect(index);
+        }
       }
 
       if (this.props.activeIndex == null && index !== previousActiveIndex) {
@@ -300,5 +329,7 @@ const Carousel = React.createClass({
     }
   }
 });
+
+Carousel = Object.assign(Carousel, { Caption, Item });
 
 export default Carousel;

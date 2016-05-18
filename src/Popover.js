@@ -1,7 +1,8 @@
-import React from 'react';
 import classNames from 'classnames';
-import tbsUtils from './utils/bootstrapUtils';
+import React from 'react';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
+
+import { prefix } from './utils/bootstrapUtils';
 
 const Popover = React.createClass({
 
@@ -59,28 +60,36 @@ const Popover = React.createClass({
 
   render() {
     const classes = {
-      [tbsUtils.prefix(this.props)]: true,
+      [prefix(this.props)]: true,
       [this.props.placement]: true
     };
 
     const style = {
-      'left': this.props.positionLeft,
-      'top': this.props.positionTop,
-      'display': 'block',
+      left: this.props.positionLeft,
+      top: this.props.positionTop,
+      display: 'block',
       // we don't want to expose the `style` property
       ...this.props.style // eslint-disable-line react/prop-types
     };
 
     const arrowStyle = {
-      'left': this.props.arrowOffsetLeft,
-      'top': this.props.arrowOffsetTop
+      left: this.props.arrowOffsetLeft,
+      top: this.props.arrowOffsetTop
     };
 
     return (
-      <div role="tooltip" {...this.props} className={classNames(this.props.className, classes)} style={style} title={null}>
+      <div
+        role="tooltip"
+        {...this.props}
+        className={classNames(this.props.className, classes)}
+        style={style}
+        title={null}
+      >
         <div className="arrow" style={arrowStyle} />
+
         {this.props.title ? this.renderTitle() : null}
-        <div className={tbsUtils.prefix(this.props, 'content')}>
+
+        <div className={prefix(this.props, 'content')}>
           {this.props.children}
         </div>
       </div>
@@ -89,7 +98,7 @@ const Popover = React.createClass({
 
   renderTitle() {
     return (
-      <h3 className={tbsUtils.prefix(this.props, 'title')}>
+      <h3 className={prefix(this.props, 'title')}>
         {this.props.title}
       </h3>
     );

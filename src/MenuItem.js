@@ -1,10 +1,11 @@
 import classnames from 'classnames';
 import React from 'react';
-import bootstrapUtils, { bsClass } from './utils/bootstrapUtils';
 import all from 'react-prop-types/lib/all';
 
-import SafeAnchor from './SafeAnchor';
+import { bsClass, prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
+
+import SafeAnchor from './SafeAnchor';
 
 class MenuItem extends React.Component {
   constructor(props) {
@@ -23,24 +24,38 @@ class MenuItem extends React.Component {
     }
 
     if (this.props.onSelect) {
-      this.props.onSelect(event, this.props.eventKey);
+      this.props.onSelect(this.props.eventKey, event);
     }
   }
 
   render() {
-    let headerClass = bootstrapUtils.prefix(this.props, 'header');
-
     if (this.props.divider) {
-      return <li role="separator" className="divider" />;
+      return (
+        <li
+          role="separator"
+          className={classnames('divider', this.props.className)}
+          style={this.props.style}
+        />
+      );
     }
 
     if (this.props.header) {
+      const headerClass = prefix(this.props, 'header');
+
       return (
-        <li role="heading" className={headerClass}>{this.props.children}</li>
+        <li
+          role="heading"
+          className={classnames(headerClass, this.props.className)}
+          style={this.props.style}
+        >
+          {this.props.children}
+        </li>
       );
     }
 
     const {className, style, onClick, ...props} = this.props;
+
+    delete props.onSelect;
 
     const classes = {
       disabled: this.props.disabled,
@@ -124,7 +139,7 @@ MenuItem.propTypes = {
    * Callback fired when the menu item is selected.
    *
    * ```js
-   * function(Object event, Any eventKey)
+   * (eventKey: any, event: Object) => any
    * ```
    */
   onSelect: React.PropTypes.func,

@@ -1,13 +1,14 @@
-import React from 'react';
 import classNames from 'classnames';
-import bootstrapUtils, { bsSizes, bsClass } from './utils/bootstrapUtils';
+import React from 'react';
+
 import { Sizes } from './styleMaps';
+import { bsSizes, bsClass, getClassSet } from './utils/bootstrapUtils';
 
 @bsClass('well')
 @bsSizes([Sizes.LARGE, Sizes.SMALL])
 class Well extends React.Component {
   render() {
-    let classes = bootstrapUtils.getClassSet(this.props);
+    let classes = getClassSet(this.props);
 
     return (
       <div {...this.props} className={classNames(this.props.className, classes)}>

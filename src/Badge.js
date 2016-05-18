@@ -1,7 +1,8 @@
-import React from 'react';
-import ValidComponentChildren from './utils/ValidComponentChildren';
 import classNames from 'classnames';
-import tbsUtils from './utils/bootstrapUtils';
+import React from 'react';
+
+import { prefix } from './utils/bootstrapUtils';
+import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const Badge = React.createClass({
   propTypes: {
@@ -16,21 +17,26 @@ const Badge = React.createClass({
   },
 
   hasContent() {
-    return ValidComponentChildren.hasValidComponent(this.props.children) ||
-      (React.Children.count(this.props.children) > 1) ||
-      (typeof this.props.children === 'string') ||
-      (typeof this.props.children === 'number');
+    const { children } = this.props;
+
+    return (
+      ValidComponentChildren.count(children) > 0 ||
+      React.Children.count(children) > 1 ||
+      typeof children === 'string' ||
+      typeof children === 'number'
+    );
   },
 
   render() {
     let classes = {
       'pull-right': this.props.pullRight,
-      [tbsUtils.prefix(this.props)]: this.hasContent()
+      [prefix(this.props)]: this.hasContent()
     };
     return (
       <span
         {...this.props}
-        className={classNames(this.props.className, classes)}>
+        className={classNames(this.props.className, classes)}
+      >
         {this.props.children}
       </span>
     );

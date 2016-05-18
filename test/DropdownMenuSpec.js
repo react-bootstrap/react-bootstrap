@@ -2,6 +2,7 @@ import keycode from 'keycode';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
+import tsp from 'teaspoon';
 
 import DropdownMenu from '../src/DropdownMenu';
 import MenuItem from '../src/MenuItem';
@@ -45,7 +46,7 @@ describe('DropdownMenu', () => {
 
   it('forwards onSelect handler to MenuItems', (done) => {
     const selectedEvents = [];
-    const onSelect = (event, eventKey) => {
+    const onSelect = (eventKey) => {
       selectedEvents.push(eventKey);
 
       if (selectedEvents.length === 4) {
@@ -67,6 +68,14 @@ describe('DropdownMenu', () => {
     menuItems.forEach(item => {
       ReactTestUtils.Simulate.click(item);
     });
+  });
+
+  it('does not pass onSelect to DOM node', () => {
+    tsp(<DropdownMenu onSelect={()=>{}}/>)
+      .shallowRender()
+      .tap(m => m.props().should.have.property('onSelect'))
+      .children()
+      .should.not.have.property('onSelect');
   });
 
   it('applies pull right', () => {

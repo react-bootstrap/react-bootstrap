@@ -1,7 +1,6 @@
 import { PropTypes } from 'react';
 import styleMaps from '../styleMaps';
 import invariant from 'invariant';
-import warning from 'warning';
 
 function curry(fn) {
   return (...args) => {
@@ -13,12 +12,15 @@ function curry(fn) {
   };
 }
 
-function prefix(props = {}, variant) {
-  invariant((props.bsClass || '').trim(), 'A `bsClass` prop is required for this component');
-  return props.bsClass + (variant ? '-' + variant : '');
+export function prefix(props = {}, variant) {
+  invariant(
+    (props.bsClass || '').trim(),
+    'A `bsClass` prop is required for this component'
+  );
+  return props.bsClass + (variant ? `-${variant}` : '');
 }
 
-export let bsClass = curry((defaultClass, Component) => {
+export const bsClass = curry((defaultClass, Component) => {
   let propTypes = Component.propTypes || (Component.propTypes = {});
   let defaultProps = Component.defaultProps || (Component.defaultProps = {});
 
@@ -28,7 +30,7 @@ export let bsClass = curry((defaultClass, Component) => {
   return Component;
 });
 
-export let bsStyles = curry((styles, defaultStyle, Component) => {
+export const bsStyles = curry((styles, defaultStyle, Component) => {
   if (typeof defaultStyle !== 'string') {
     Component = defaultStyle;
     defaultStyle = undefined;
@@ -61,7 +63,7 @@ export let bsStyles = curry((styles, defaultStyle, Component) => {
   return Component;
 });
 
-export let bsSizes = curry((sizes, defaultSize, Component) => {
+export const bsSizes = curry((sizes, defaultSize, Component) => {
   if (typeof defaultSize !== 'string') {
     Component = defaultSize;
     defaultSize = undefined;
@@ -76,15 +78,17 @@ export let bsSizes = curry((sizes, defaultSize, Component) => {
     }
   });
 
-  let values = existing.reduce((result, size) => {
-    if (styleMaps.SIZES[size] && styleMaps.SIZES[size] !== size) {
-      result.push(styleMaps.SIZES[size]);
+  const values = [];
+  existing.forEach(size => {
+    const mappedSize = styleMaps.SIZES[size];
+    if (mappedSize && mappedSize !== size) {
+      values.push(mappedSize);
     }
-    return result.concat(size);
-  }, []);
 
-  let propType = PropTypes.oneOf(values);
+    values.push(size);
+  });
 
+  const propType = PropTypes.oneOf(values);
   propType._values = values;
 
   // expose the values on the propType function for documentation
@@ -96,57 +100,38 @@ export let bsSizes = curry((sizes, defaultSize, Component) => {
   };
 
   if (defaultSize !== undefined) {
-    let defaultProps = Component.defaultProps || (Component.defaultProps = {});
-    defaultProps.bsSize = defaultSize;
+    if (!Component.defaultProps) {
+      Component.defaultProps = {};
+    }
+    Component.defaultProps.bsSize = defaultSize;
   }
 
   return Component;
 });
 
-export default {
+export function getClassSet(props) {
+  const classes = {
+    [prefix(props)]: true,
+  };
 
-  prefix,
-
-  getClassSet(props) {
-    let classes = {};
-    let bsClassName = prefix(props);
-
-    if (bsClassName) {
-      let bsSize;
-
-      classes[bsClassName] = true;
-
-      if (props.bsSize) {
-        bsSize = styleMaps.SIZES[props.bsSize] || bsSize;
-      }
-
-      if (bsSize) {
-        classes[prefix(props, bsSize)] = true;
-      }
-
-      if (props.bsStyle) {
-        if (props.bsStyle.indexOf(prefix(props)) === 0) {
-          warning(false, // small migration convenience, since the old method required manual prefixing
-            'bsStyle will automatically prefix custom values with the bsClass, so there is no ' +
-            'need to append it manually. (bsStyle: ' + props.bsStyle + ', bsClass: ' + prefix(props) + ')'
-          );
-          classes[props.bsStyle] = true;
-        } else {
-          classes[prefix(props, props.bsStyle)] = true;
-        }
-      }
-    }
-
-    return classes;
-  },
-
-  /**
-   * Add a style variant to a Component. Mutates the propTypes of the component
-   * in order to validate the new variant.
-   */
-  addStyle(Component, styleVariant) {
-    bsStyles(styleVariant, Component);
+  if (props.bsSize) {
+    const bsSize = styleMaps.SIZES[props.bsSize] || bsSize;
+    classes[prefix(props, bsSize)] = true;
   }
-};
 
-export let _curry = curry;
+  if (props.bsStyle) {
+    classes[prefix(props, props.bsStyle)] = true;
+  }
+
+  return classes;
+}
+
+/**
+ * Add a style variant to a Component. Mutates the propTypes of the component
+ * in order to validate the new variant.
+ */
+export function addStyle(Component, ...styleVariant) {
+  bsStyles(styleVariant, Component);
+}
+
+export const _curry = curry;

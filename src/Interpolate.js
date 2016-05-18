@@ -23,7 +23,7 @@ const Interpolate = React.createClass({
   },
 
   render() {
-    let format = (ValidComponentChildren.hasValidComponent(this.props.children) ||
+    let format = (ValidComponentChildren.count(this.props.children) > 0 ||
         (typeof this.props.children === 'string')) ?
         this.props.children : this.props.format;
     let parent = this.props.component;
@@ -81,5 +81,7 @@ const Interpolate = React.createClass({
     return React.createElement(parent, props, kids);
   }
 });
+
+Object.assign(Interpolate, { REGEXP });
 
 export default Interpolate;

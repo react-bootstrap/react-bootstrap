@@ -1,7 +1,6 @@
 import CodeMirror from 'codemirror';
 import 'codemirror/addon/runmode/runmode';
-import 'codemirror/mode/htmlmixed/htmlmixed';
-import './assets/javascript';
+import 'codemirror/mode/jsx/jsx';
 
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 import React from 'react';

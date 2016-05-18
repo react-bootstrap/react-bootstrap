@@ -32,7 +32,7 @@ function parseDoclets(obj, propName) {
   let desc = obj.desc || defaultDescriptions[propName] || '';
   obj.doclets = metadata.parseDoclets(desc) || {};
   obj.desc = cleanDoclets(desc);
-  obj.descHtml = marked(desc);
+  obj.descHtml = marked(obj.desc);
 }
 
 /**

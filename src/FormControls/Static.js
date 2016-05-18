@@ -1,8 +1,10 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+import elementType from 'react-prop-types/lib/elementType';
+
 import InputBase from '../InputBase';
 import childrenValueValidation from '../utils/childrenValueInputValidation';
-import elementType from 'react-prop-types/lib/elementType';
+import deprecationWarning from '../utils/deprecationWarning';
 
 class Static extends InputBase {
   getValue() {
@@ -33,4 +35,7 @@ Static.defaultProps = {
   componentClass: 'p'
 };
 
-export default Static;
+export default deprecationWarning.wrapper(Static,
+  '`<FormControls.Static>`',
+  '`<FormControl.Static>`'
+);

@@ -11,14 +11,14 @@ import elementType from 'react-prop-types/lib/elementType';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 import uncontrollable from 'uncontrollable';
 
-import bootstrapUtils from './utils/bootstrapUtils';
-import ButtonGroup from './ButtonGroup';
-import DropdownMenu from './DropdownMenu';
-import DropdownToggle from './DropdownToggle';
-
+import { prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 import CustomPropTypes from './utils/CustomPropTypes';
 import ValidComponentChildren from './utils/ValidComponentChildren';
+
+import ButtonGroup from './ButtonGroup';
+import DropdownMenu from './DropdownMenu';
+import DropdownToggle from './DropdownToggle';
 
 const TOGGLE_REF = 'toggle-btn';
 const TOGGLE_ROLE = DropdownToggle.defaultProps.bsRole;
@@ -88,8 +88,8 @@ class Dropdown extends React.Component {
     let children = this.extractChildren();
     let Component = this.props.componentClass;
 
-    let props = omit(this.props, ['id', 'bsClass', 'role']);
-    let className = bootstrapUtils.prefix(this.props);
+    let props = omit(this.props, ['id', 'bsClass', 'role', 'onSelect']);
+    let className = prefix(this.props);
 
     const rootClasses = {
       open: this.props.open,
@@ -326,7 +326,7 @@ Dropdown.propTypes = {
    * A callback fired when a menu item is selected.
    *
    * ```js
-   * function(Object event, Any eventKey)
+   * (eventKey: any, event: Object) => any
    * ```
    */
   onSelect: React.PropTypes.func,

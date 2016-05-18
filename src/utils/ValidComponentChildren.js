@@ -1,50 +1,50 @@
 import React from 'react';
 
+// FIXME: This should really be ValidElementChildren.
+
 /**
- * Maps children that are typically specified as `props.children`,
- * but only iterates over children that are "valid components".
+ * Iterates through children that are typically specified as `props.children`,
+ * but only maps over children that are "valid components".
  *
  * The mapFunction provided index will be normalised to the components mapped,
  * so an invalid component would not increase the index.
  *
  * @param {?*} children Children tree container.
- * @param {function(*, int)} mapFunction.
- * @param {*} mapContext Context for mapFunction.
+ * @param {function(*, int)} func.
+ * @param {*} context Context for func.
  * @return {object} Object containing the ordered map of results.
  */
-function mapValidComponents(children, func, context) {
+function map(children, func, context) {
   let index = 0;
 
   return React.Children.map(children, child => {
-    if (React.isValidElement(child)) {
-      let lastIndex = index;
-      index++;
-      return func.call(context, child, lastIndex);
+    if (!React.isValidElement(child)) {
+      return child;
     }
 
-    return child;
+    return func.call(context, child, index++);
   });
 }
 
 /**
- * Iterates through children that are typically specified as `props.children`,
- * but only iterates over children that are "valid components".
+ * Iterates through children that are "valid components".
  *
  * The provided forEachFunc(child, index) will be called for each
  * leaf child with the index reflecting the position relative to "valid components".
  *
  * @param {?*} children Children tree container.
- * @param {function(*, int)} forEachFunc.
- * @param {*} forEachContext Context for forEachContext.
+ * @param {function(*, int)} func.
+ * @param {*} context Context for context.
  */
-function forEachValidComponents(children, func, context) {
+function forEach(children, func, context) {
   let index = 0;
 
-  return React.Children.forEach(children, child => {
-    if (React.isValidElement(child)) {
-      func.call(context, child, index);
-      index++;
+  React.Children.forEach(children, child => {
+    if (!React.isValidElement(child)) {
+      return;
     }
+
+    func.call(context, child, index++);
   });
 }
 
@@ -54,44 +54,18 @@ function forEachValidComponents(children, func, context) {
  * @param {?*} children Children tree container.
  * @returns {number}
  */
-function numberOfValidComponents(children) {
-  let count = 0;
+function count(children) {
+  let result = 0;
 
   React.Children.forEach(children, child => {
-    if (React.isValidElement(child)) { count++; }
-  });
-
-  return count;
-}
-
-/**
- * Determine if the Child container has one or more "valid components".
- *
- * @param {?*} children Children tree container.
- * @returns {boolean}
- */
-function hasValidComponent(children) {
-  let hasValid = false;
-
-  React.Children.forEach(children, child => {
-    if (!hasValid && React.isValidElement(child)) {
-      hasValid = true;
+    if (!React.isValidElement(child)) {
+      return;
     }
+
+    ++result;
   });
 
-  return hasValid;
-}
-
-function find(children, finder) {
-  let child;
-
-  forEachValidComponents(children, (c, idx) => {
-    if (!child && finder(c, idx, children)) {
-      child = c;
-    }
-  });
-
-  return child;
+  return result;
 }
 
 /**
@@ -102,31 +76,72 @@ function find(children, finder) {
  * leaf child with the index reflecting the position relative to "valid components".
  *
  * @param {?*} children Children tree container.
- * @param {function(*, int)} findFunc.
- * @param {*} findContext Context for findContext.
- * @returns {array} of children that meet the findFunc return statement
+ * @param {function(*, int)} func.
+ * @param {*} context Context for func.
+ * @returns {array} of children that meet the func return statement
  */
-function findValidComponents(children, func, context) {
+function filter(children, func, context) {
   let index = 0;
-  let returnChildren = [];
+  let result = [];
 
   React.Children.forEach(children, child => {
-    if (React.isValidElement(child)) {
-      if (func.call(context, child, index)) {
-        returnChildren.push(child);
-      }
-      index++;
+    if (!React.isValidElement(child)) {
+      return;
+    }
+
+    if (func.call(context, child, index++)) {
+      result.push(child);
     }
   });
 
-  return returnChildren;
+  return result;
+}
+
+function find(children, func, context) {
+  let index = 0;
+  let result = undefined;
+
+  React.Children.forEach(children, child => {
+    if (result) {
+      return;
+    }
+    if (!React.isValidElement(child)) {
+      return;
+    }
+
+    if (func.call(context, child, index++)) {
+      result = child;
+    }
+  });
+
+  return result;
+}
+
+function some(children, func, context) {
+  let index = 0;
+  let result = false;
+
+  React.Children.forEach(children, child => {
+    if (result) {
+      return;
+    }
+    if (!React.isValidElement(child)) {
+      return;
+    }
+
+    if (func.call(context, child, index++)) {
+      result = true;
+    }
+  });
+
+  return result;
 }
 
 export default {
-  map: mapValidComponents,
-  forEach: forEachValidComponents,
-  numberOf: numberOfValidComponents,
+  map,
+  forEach,
+  count,
   find,
-  findValidComponents,
-  hasValidComponent
+  filter,
+  some,
 };

@@ -19,23 +19,23 @@ describe('ResponsiveEmbed', () => {
   });
 
   it('should warn if neither `a16by9` nor `a4by3` attribute is set', () => {
+    shouldWarn('`a16by9` or `a4by3` attribute must be set.');
+
     ReactTestUtils.renderIntoDocument(
       <ResponsiveEmbed>
         <div />
       </ResponsiveEmbed>
     );
-
-    shouldWarn('`a16by9` or `a4by3` attribute must be set.');
   });
 
   it('should warn about both `a16by9` or `a4by3` attributes set', () => {
+    shouldWarn('Either `a16by9` or `a4by3` attribute can be set. Not both.');
+
     ReactTestUtils.renderIntoDocument(
       <ResponsiveEmbed a16by9 a4by3>
         <div />
       </ResponsiveEmbed>
     );
-
-    shouldWarn('Either `a16by9` or `a4by3` attribute can be set. Not both.');
   });
 
   it('should add `embed-responsive-item` class to child element', () => {

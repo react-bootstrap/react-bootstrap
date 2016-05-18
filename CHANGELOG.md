@@ -1,3 +1,126 @@
+## [v0.29.4]
+> 2016-05-10
+
+- **Feature:** Add `inputRef` to `<Checkbox>` and `<Radio>` ([#1865])
+- **Bugfix:** Persist `<Panel>` events before modifying them ([#1864])
+- **Bugfix:** Add back `eventKey` to props for custom pagination buttons ([#1876])
+
+[v0.29.4]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.3...v0.29.4
+[#1864]: https://github.com/react-bootstrap/react-bootstrap/pull/1864
+[#1865]: https://github.com/react-bootstrap/react-bootstrap/pull/1865
+[#1876]: https://github.com/react-bootstrap/react-bootstrap/pull/1876
+
+
+## [v0.29.3]
+> 2016-04-28
+
+- **Feature:** Add `unmountOnExit` support to tabs ([#1823])
+- **Bugfix:** Do not pass `onSelect` to DOM nodes ([#1861])
+- **Bugfix:** Do not throw error when tab group has no panes ([#1862])
+- **Bugfix:** Fix setting `id` for `<NavItem>`s for tabs ([#1862])
+
+[v0.29.3]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.2...v0.29.3
+[#1823]: https://github.com/react-bootstrap/react-bootstrap/pull/1823
+[#1861]: https://github.com/react-bootstrap/react-bootstrap/pull/1861
+[#1862]: https://github.com/react-bootstrap/react-bootstrap/pull/1862
+
+
+## [v0.29.2]
+> 2016-04-22
+
+- **Bugfix:** Don't always set `tabIndex` on `<SafeAnchor>` ([#1844])
+
+[v0.29.2]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.1...v0.29.2
+[#1844]: https://github.com/react-bootstrap/react-bootstrap/pull/1844
+
+
+## [v0.29.1]
+> 2016-04-21
+
+- **Bugfix:** Don't incorrectly pass `onSelect` past `<TabContainer>` ([#1825])
+- **Bugfix:** Set `role` instead of `type` on `<Dropdown.Toggle>` button ([#1835])
+
+[v0.29.1]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.0...v0.29.1
+[#1825]: https://github.com/react-bootstrap/react-bootstrap/pull/1825
+[#1835]: https://github.com/react-bootstrap/react-bootstrap/pull/1835
+
+
+## [v0.29.0]
+> 2016-04-18
+
+- **Breaking:** Change `onSelect` signature to be `(eventKey: any, event: SyntheticEvent) => any` on all React-Bootstrap components, instead of the old inconsistent mishmash ([#1604], [#1677], [#1756])
+- **Breaking:** Remove deprecated `duration` on transition components ([#1608])
+- **Breaking:** Remove deprecated functionality from `<Nav>`, `<Navbar>`, and related components ([#1608], [#1745])
+- **Breaking:** Don't check for prefixed `bsStyle` in `bootstrapUtils.getClassSet` ([#1759])
+- **Breaking:** Disable click handlers on `disabled` components ([#1794])
+- **Breaking:** In components with wrapped anchors, pass through all props other than `className` and `style` to the wrapped anchor ([#1801])
+- **Breaking:** Use consistent exports from `bootstrapUtils` ([#1813])
+- **Feature/Deprecation:** Add lower-level tab components, and deprecate horizontal layout support in `<Tabs>` in favor of lower-level components ([#1607], [#1784])
+- **Feature/Deprecation:** Deprecate `dialogComponent` in favor of new `dialogComponentClass` on `<Modal>` for consistency with other components ([#1753])
+- **Feature/Deprecation:** Rewrite form and form control API (`<FormControl>`, &c.), and deprecate the old API (`<Input>`, &c.) ([#1765])
+- **Deprecation:** Deprecate `dismissAfter` on `<Alert>` ([#1636])
+- **Deprecation:** Deprecate label interpolation (e.g. `label="%(percent)s%"`) in `<ProgressBar>` ([#1751])
+- **Bugfix:** Set `collapsed` class on `<Navbar.Toggle>` ([#1733])
+
+[v0.29.0]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.5...v0.29.0
+[#1604]: https://github.com/react-bootstrap/react-bootstrap/pull/1604
+[#1607]: https://github.com/react-bootstrap/react-bootstrap/pull/1607
+[#1608]: https://github.com/react-bootstrap/react-bootstrap/pull/1608
+[#1636]: https://github.com/react-bootstrap/react-bootstrap/pull/1636
+[#1677]: https://github.com/react-bootstrap/react-bootstrap/pull/1677
+[#1733]: https://github.com/react-bootstrap/react-bootstrap/pull/1733
+[#1745]: https://github.com/react-bootstrap/react-bootstrap/pull/1745
+[#1751]: https://github.com/react-bootstrap/react-bootstrap/pull/1751
+[#1753]: https://github.com/react-bootstrap/react-bootstrap/pull/1753
+[#1756]: https://github.com/react-bootstrap/react-bootstrap/pull/1756
+[#1759]: https://github.com/react-bootstrap/react-bootstrap/pull/1759
+[#1765]: https://github.com/react-bootstrap/react-bootstrap/pull/1765
+[#1784]: https://github.com/react-bootstrap/react-bootstrap/pull/1784
+[#1794]: https://github.com/react-bootstrap/react-bootstrap/pull/1794
+[#1801]: https://github.com/react-bootstrap/react-bootstrap/pull/1801
+[#1813]: https://github.com/react-bootstrap/react-bootstrap/pull/1813
+
+
+## [v0.28.5]
+> 2016-04-01
+
+- **Feature:** Support `<Breadcrumb.Item>` in addition to `<BreadcrumbItem>` for breadcrumb items ([#1722])
+- **Feature:** Add `<Carousel.Caption>` for carousel captions ([#1734])
+- **Feature:** Support `<Carousel.Item>` in addition to `<CarouselItem>` for carousel items ([#1740])
+- **Feature:** Add `<Clearfix>` for grids ([#1736])
+- **Bugfix:** Support `style` on nested `<ProgressBar>` ([#1719])
+- **Bugfix:** Fix CommonJS export for `<Media>` ([#1737])
+- **Bugfix:** Support `className` and `style` on `<MenuItem header>` and `<MenuItem divider>` ([#1748])
+- **Bugfix:** Support extra props for `<Navbar.Header>` and `<Navbar.Toggle>` ([#1754])
+
+[v0.28.5]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.4...v0.28.5
+[#1719]: https://github.com/react-bootstrap/react-bootstrap/pull/1719
+[#1722]: https://github.com/react-bootstrap/react-bootstrap/pull/1722
+[#1734]: https://github.com/react-bootstrap/react-bootstrap/pull/1734
+[#1736]: https://github.com/react-bootstrap/react-bootstrap/pull/1736
+[#1737]: https://github.com/react-bootstrap/react-bootstrap/pull/1737
+[#1740]: https://github.com/react-bootstrap/react-bootstrap/pull/1740
+[#1748]: https://github.com/react-bootstrap/react-bootstrap/pull/1748
+[#1754]: https://github.com/react-bootstrap/react-bootstrap/pull/1754
+
+
+## [v0.28.4]
+> 2016-03-24
+
+- **Feature:** Add `componentClass` on `<FormControls.Static>` ([#1653])
+- **Feature:** Add transition hooks on collapsible `<Panel>` ([#1664])
+- **Feature:** Add `<Media>` and related components ([#1707])
+- **Bugfix:** Support `className` on `<MenuItem divider>` ([#1682])
+- **Bugfix:** Support `className` on `<Navbar.Header>` ([#1695])
+
+[v0.28.4]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.3...v0.28.4
+[#1653]: https://github.com/react-bootstrap/react-bootstrap/pull/1653
+[#1664]: https://github.com/react-bootstrap/react-bootstrap/pull/1664
+[#1682]: https://github.com/react-bootstrap/react-bootstrap/pull/1682
+[#1695]: https://github.com/react-bootstrap/react-bootstrap/pull/1695
+[#1707]: https://github.com/react-bootstrap/react-bootstrap/pull/1707
+
+
 v0.28.3 - Thu, 11 Feb 2016 00:00:42 GMT
 ---------------------------------------
 
