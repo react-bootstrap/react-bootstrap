@@ -36,7 +36,7 @@ const ModalDialog = React.createClass({
         className={classNames(this.props.className, bsClassPrefix)}
       >
         <div className={classNames(this.props.dialogClassName, dialogClasses)}>
-          <div className={classNames(this.props.contentClassName, tbsUtils.prefix(this.props, 'content'))} role="document">
+          <div className={classNames(this.props.contentClassName, prefix(this.props, 'content'))} role="document">
             { this.props.children }
           </div>
         </div>
