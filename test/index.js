@@ -1,6 +1,7 @@
 import 'es5-shim';
 
 import { _resetWarned } from '../src/utils/deprecationWarning';
+import deprecated from 'react-prop-types/lib/deprecated';
 
 beforeEach(() => {
   sinon.stub(console, 'error', msg => {
@@ -27,6 +28,7 @@ afterEach(() => {
 
   console.error.restore();
   _resetWarned();
+  deprecated._resetWarned && deprecated._resetWarned();
 });
 
 describe('Process environment for tests', () => {
