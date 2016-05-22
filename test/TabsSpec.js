@@ -532,7 +532,7 @@ describe('Tabs', () => {
     );
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('class'), 'my-tabs-class');
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('id'), 'my-tabs-id');
-    assert.equal(ReactDOM.findDOMNode(instance).style.opacity, 0.5);
-
+    // Decimal point string depends on locale
+    assert.equal(parseFloat(ReactDOM.findDOMNode(instance).style.opacity), 0.5);
   });
 });
