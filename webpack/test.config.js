@@ -1,4 +1,4 @@
-import _ from 'lodash-compat';
+import _ from 'lodash';
 import baseConfig from './base.config';
 
 export default _.extend({}, baseConfig, {
