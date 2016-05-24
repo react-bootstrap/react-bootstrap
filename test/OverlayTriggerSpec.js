@@ -31,6 +31,19 @@ describe('OverlayTrigger', () => {
     callback.called.should.be.true;
   });
 
+  it('Should pass OverlayTrigger onContextMenu prop to child', () => {
+    const callback = sinon.spy();
+    const instance = ReactTestUtils.renderIntoDocument(
+      <OverlayTrigger trigger='contextmenu' overlay={<div>test</div>} onContextMenu={callback}>
+        <button>button</button>
+      </OverlayTrigger>
+    );
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
+    ReactTestUtils.Simulate.contextMenu(overlayTrigger);
+
+    callback.called.should.be.true;
+  });
+
   it('Should show after click trigger', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <OverlayTrigger trigger='click' overlay={<div>test</div>}>
@@ -39,6 +52,18 @@ describe('OverlayTrigger', () => {
     );
     const overlayTrigger = ReactDOM.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
+
+    instance.state.isOverlayShown.should.be.true;
+  });
+
+  it('Should show after onContextMenu trigger', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <OverlayTrigger trigger='contextmenu' overlay={<div>test</div>}>
+        <button>button</button>
+      </OverlayTrigger>
+    );
+    const overlayTrigger = ReactDOM.findDOMNode(instance);
+    ReactTestUtils.Simulate.contextMenu(overlayTrigger);
 
     instance.state.isOverlayShown.should.be.true;
   });

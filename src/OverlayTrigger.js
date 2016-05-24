@@ -33,8 +33,8 @@ const OverlayTrigger = React.createClass({
      * Specify which action or actions trigger Overlay visibility
      */
     trigger: React.PropTypes.oneOfType([
-      React.PropTypes.oneOf(['click', 'hover', 'focus']),
-      React.PropTypes.arrayOf(React.PropTypes.oneOf(['click', 'hover', 'focus']))
+      React.PropTypes.oneOf(['click', 'contextmenu', 'hover', 'focus']),
+      React.PropTypes.arrayOf(React.PropTypes.oneOf(['contextmenu', 'click', 'hover', 'focus']))
     ]),
 
     /**
@@ -69,6 +69,10 @@ const OverlayTrigger = React.createClass({
      * @private
      */
     onClick: React.PropTypes.func,
+    /**
+     * @private
+     */
+    onContextMenu: React.PropTypes.func,
     /**
      * @private
      */
@@ -201,9 +205,14 @@ const OverlayTrigger = React.createClass({
     this._overlay = this.getOverlay();
 
     props.onClick = createChainedFunction(triggerProps.onClick, this.props.onClick);
+    props.onContextMenu = createChainedFunction(triggerProps.onContextMenu, this.props.onContextMenu);
 
     if (isOneOf('click', this.props.trigger)) {
       props.onClick = createChainedFunction(this.toggle, props.onClick);
+    }
+
+    if (isOneOf('contextmenu', this.props.trigger)) {
+      props.onContextMenu = createChainedFunction(this.toggle, props.onContextMenu);
     }
 
     if (isOneOf('hover', this.props.trigger)) {
@@ -292,3 +301,4 @@ const OverlayTrigger = React.createClass({
 });
 
 export default OverlayTrigger;
+
