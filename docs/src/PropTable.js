@@ -1,4 +1,4 @@
-import _ from 'lodash-compat';
+import _ from 'lodash';
 import React from 'react';
 import Glyphicon from '../../src/Glyphicon';
 import Label from '../../src/Label';

@@ -3,7 +3,7 @@ import events from 'dom-helpers/events';
 import ownerDocument from 'dom-helpers/ownerDocument';
 import canUseDOM from 'dom-helpers/util/inDOM';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import pick from 'lodash-compat/object/pick';
+import pick from 'lodash/pick';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import BaseModal from 'react-overlays/lib/Modal';
