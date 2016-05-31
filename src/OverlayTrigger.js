@@ -51,7 +51,7 @@ const OverlayTrigger = React.createClass({
     delayHide: React.PropTypes.number,
 
     /**
-     * The initial visibility state of the Overlay, for more nuanced visibility controll consider
+     * The initial visibility state of the Overlay, for more nuanced visibility control consider
      * using the Overlay component directly.
      */
     defaultOverlayShown: React.PropTypes.bool,
