@@ -51,6 +51,10 @@ class Button extends React.Component {
         {...this.props}
         href={href || '#'}
         className={classNames(this.props.className, classes)}
+        tabIndex="0"
+        role="button"
+        ariaLabel={this.props.ariaLabel}
+        onKeyUp={this.handleBtnKeyUp}
       >
         {this.props.children}
       </SafeAnchor>
@@ -64,7 +68,11 @@ class Button extends React.Component {
       <Component
         {...this.props}
         type={this.props.type || 'button'}
-        className={classNames(this.props.className, classes)}>
+        className={classNames(this.props.className, classes)}
+        tabIndex="0"
+        role="button"
+        ariaLabel={this.props.ariaLabel}
+      >
         {this.props.children}
       </Component>
     );
@@ -85,10 +93,17 @@ class Button extends React.Component {
 
 Button.propTypes = {
   active: React.PropTypes.bool,
+  ariaLabel: React.PropTypes.string,
   disabled: React.PropTypes.bool,
   block: React.PropTypes.bool,
   navItem: React.PropTypes.bool,
   navDropdown: React.PropTypes.bool,
+  /**
+   * [accessibility] allows screen readers to interpret buttons as buttons
+   * and use the Space Bar to trigger buttons.
+   * This practice is consistent with native buttons
+   */
+  onBtnKeyUp: React.PropTypes.func,
   onClick: React.PropTypes.func,
   /**
    * You can use a custom element for this component
