@@ -379,6 +379,43 @@ describe('Dropdown', () => {
 
   });
 
+  it('chains refs', () => {
+    class RefDropdown extends React.Component {
+      render() {
+        return (
+          <Dropdown ref={dropdown => this.dropdown = dropdown.refs.inner} id="test">
+            <Dropdown.Toggle ref={toggle => this.toggle = toggle} />
+            <Dropdown.Menu ref={menu => this.menu = menu} />
+          </Dropdown>
+        );
+      }
+    }
+
+    let inst = tsp(<RefDropdown />).render().unwrap();
+
+    inst.menu.should.exist;
+    inst.dropdown.menu.should.exist;
+
+    inst.toggle.should.exist;
+    inst.dropdown.toggle.should.exist;
+  });
+
+  it('warns when a string ref is specified', () => {
+    class RefDropdown extends React.Component {
+      render() {
+        return (
+          <Dropdown id="test">
+            <Dropdown.Toggle ref='toggle' />
+            <Dropdown.Menu />
+          </Dropdown>
+        );
+      }
+    }
+
+    shouldWarn('String refs are not supported');
+
+    tsp(<RefDropdown />).render().unwrap();
+  });
 
   describe('focusable state', () => {
     let focusableContainer;

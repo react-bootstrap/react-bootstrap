@@ -10,6 +10,7 @@ import all from 'react-prop-types/lib/all';
 import elementType from 'react-prop-types/lib/elementType';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 import uncontrollable from 'uncontrollable';
+import warning from 'warning';
 
 import { prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
@@ -20,7 +21,6 @@ import ButtonGroup from './ButtonGroup';
 import DropdownMenu from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
 
-const TOGGLE_REF = 'toggle-btn';
 const TOGGLE_ROLE = DropdownToggle.defaultProps.bsRole;
 const MENU_ROLE = DropdownMenu.defaultProps.bsRole;
 
@@ -63,7 +63,7 @@ class Dropdown extends React.Component {
   componentWillUpdate(nextProps) {
     if (!nextProps.open && this.props.open) {
       this._focusInDropdown = contains(
-        ReactDOM.findDOMNode(this.refs.menu),
+        ReactDOM.findDOMNode(this.menu),
         activeElement(document)
       );
     }
@@ -137,8 +137,8 @@ class Dropdown extends React.Component {
     case keycode.codes.down:
       if (!this.props.open) {
         this.toggleOpen('keydown');
-      } else if (this.refs.menu.focusNext) {
-        this.refs.menu.focusNext();
+      } else if (this.menu.focusNext) {
+        this.menu.focusNext();
       }
       event.preventDefault();
       break;
@@ -159,7 +159,8 @@ class Dropdown extends React.Component {
   }
 
   focusNextOnOpen() {
-    const {menu} = this.refs;
+    const menu = this.menu;
+
     if (!menu.focusNext) {
       return;
     }
@@ -173,7 +174,7 @@ class Dropdown extends React.Component {
   }
 
   focus() {
-    let toggle = ReactDOM.findDOMNode(this.refs[TOGGLE_REF]);
+    let toggle = ReactDOM.findDOMNode(this.toggle);
 
     if (toggle && toggle.focus) {
       toggle.focus();
@@ -201,8 +202,20 @@ class Dropdown extends React.Component {
   }
 
   refineMenu(menu, open) {
+    let ref = r => this.menu = r;
+
+    if (typeof menu.ref === 'string') {
+      warning(false,
+        'String refs are not supported on `<Dropdown.Menu>` components. ' +
+        'To apply a ref to the component use the callback signature: \n\n ' +
+        'https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute'
+      );
+    } else {
+      ref = createChainedFunction(menu.ref, ref);
+    }
+
     const menuProps = {
-      ref: 'menu',
+      ref,
       open,
       labelledBy: this.props.id,
       pullRight: this.props.pullRight,
@@ -225,10 +238,22 @@ class Dropdown extends React.Component {
   }
 
   refineToggle(toggle, open) {
+    let ref = r => this.toggle = r;
+
+    if (typeof toggle.ref === 'string') {
+      warning(false,
+        'String refs are not supported on `<Dropdown.Toggle>` components. ' +
+        'To apply a ref to the component use the callback signature: \n\n ' +
+        'https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute'
+      );
+    } else {
+      ref = createChainedFunction(toggle.ref, ref);
+    }
+
     let toggleProps = {
+      ref,
       open,
       id: this.props.id,
-      ref: TOGGLE_REF,
       role: this.props.role
     };
 
@@ -248,7 +273,6 @@ class Dropdown extends React.Component {
 
 Dropdown.Toggle = DropdownToggle;
 
-Dropdown.TOGGLE_REF = TOGGLE_REF;
 Dropdown.TOGGLE_ROLE = TOGGLE_ROLE;
 Dropdown.MENU_ROLE = MENU_ROLE;
 
