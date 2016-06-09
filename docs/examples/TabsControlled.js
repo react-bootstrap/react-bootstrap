@@ -6,7 +6,6 @@ const ControlledTabs = React.createClass({
   },
 
   handleSelect(key) {
-    alert('selected ' + key);
     this.setState({key});
   },
 
