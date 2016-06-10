@@ -140,6 +140,17 @@ let TabContent = React.createClass({
 
     return ()=> {
       panes.splice(panes.indexOf(eventKey), 1);
+
+      // #1892
+      // new active state can propagate down _before_
+      // the tab actually unmounts, so it will map be exiting.
+      // since an exiting tab won't complete, clear the bad state
+      if (eventKey === this._exitingPane) {
+        this.handlePaneExited();
+      }
+
+      // If the tab was active, we need to tell the container
+      // that it no longer exists and as such is not active.
       if (eventKey === this.getActiveKey()) {
         this.getContext('$bs_tabcontainer').onSelect();
       }

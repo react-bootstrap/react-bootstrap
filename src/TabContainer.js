@@ -65,17 +65,28 @@ let TabContainer = React.createClass({
   },
 
   getChildContext() {
-    const { activeKey, onSelect, generateChildId, id } = this.props;
+    const { activeKey, generateChildId, id } = this.props;
 
     return {
       $bs_tabcontainer: {
         activeKey,
-        onSelect,
+        onSelect: this.handleSelect,
         getId:
           generateChildId ||
           ((key, type) => (id ? `${id}-${type}-${key}` : null))
       },
     };
+  },
+
+  componentWillUnmount() {
+    // isMounted() isn't `true` at this point;
+    this.unmounting = true;
+  },
+
+  handleSelect(key) {
+    if (!this.unmounting) {
+      this.props.onSelect(key);
+    }
   },
 
   render() {
