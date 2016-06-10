@@ -50,6 +50,12 @@ const Modal = React.createClass({
     dialogComponentClass: elementType,
 
     /**
+     * Dynamic styles for inner Dialog component.
+     * Useful for dynamically controlling position of modal window dialog.
+     */
+    dialogStyle: React.PropTypes.object,
+
+    /**
      * @private
      */
     dialogComponent: deprecated(elementType, 'Use `dialogComponentClass`.'),
@@ -125,12 +131,13 @@ const Modal = React.createClass({
       bsClass: 'modal',
       animation: true,
       dialogComponentClass: ModalDialog,
+      dialogStyle: {}
     };
   },
 
   getInitialState() {
     return {
-      modalStyles: {}
+      modalStyles: this.props.dialogStyle
     };
   },
 
@@ -245,7 +252,8 @@ const Modal = React.createClass({
     return {
       modalStyles: {
         paddingRight: bodyIsOverflowing && !modalIsOverflowing ? getScrollbarSize() : void 0,
-        paddingLeft: !bodyIsOverflowing && modalIsOverflowing ? getScrollbarSize() : void 0
+        paddingLeft: !bodyIsOverflowing && modalIsOverflowing ? getScrollbarSize() : void 0,
+        ...this.props.dialogStyle
       }
     };
   }

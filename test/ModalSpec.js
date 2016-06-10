@@ -121,6 +121,20 @@ describe('Modal', () => {
 
   });
 
+  it('Should pass dialog style to the dialog', () => {
+    let noOp = () => {};
+    let instance = render(
+      <Modal show dialogStyle={{top: 1000}} onHide={noOp}>
+        <strong>Message</strong>
+      </Modal>
+    , mountPoint);
+
+    let dialog = ReactDOM.findDOMNode(instance._modal);
+
+    assert.ok(dialog.style.top === '1000px');
+
+  });
+
   it('Should pass dialogClassName to the dialog', () => {
     let noOp = () => {};
     let instance = render(
