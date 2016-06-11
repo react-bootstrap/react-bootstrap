@@ -124,7 +124,7 @@ describe('Modal', () => {
   it('Should pass dialog style to the dialog', () => {
     let noOp = () => {};
     let instance = render(
-      <Modal show dialogStyle={{top: 1000}} onHide={noOp}>
+      <Modal show style={{top: 1000}} onHide={noOp}>
         <strong>Message</strong>
       </Modal>
     , mountPoint);

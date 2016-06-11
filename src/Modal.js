@@ -4,6 +4,7 @@ import ownerDocument from 'dom-helpers/ownerDocument';
 import canUseDOM from 'dom-helpers/util/inDOM';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import pick from 'lodash-compat/object/pick';
+import merge from 'lodash-compat/object/merge';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import BaseModal from 'react-overlays/lib/Modal';
@@ -48,12 +49,6 @@ const Modal = React.createClass({
      * styles and markup to create a custom modal component.
      */
     dialogComponentClass: elementType,
-
-    /**
-     * Dynamic styles for inner Dialog component.
-     * Useful for dynamically controlling position of modal window dialog.
-     */
-    dialogStyle: React.PropTypes.object,
 
     /**
      * @private
@@ -131,13 +126,12 @@ const Modal = React.createClass({
       bsClass: 'modal',
       animation: true,
       dialogComponentClass: ModalDialog,
-      dialogStyle: {}
     };
   },
 
   getInitialState() {
     return {
-      modalStyles: this.props.dialogStyle
+      modalStyles: {}
     };
   },
 
@@ -157,9 +151,14 @@ const Modal = React.createClass({
       , children
       , dialogClassName
       , animation
+      , style
       , ...props } = this.props;
 
     let { modalStyles } = this.state;
+
+    if(style) {
+      modalStyles = merge(modalStyles, style);
+    }
 
     let inClass = { in: props.show && !animation };
     let Dialog = props.dialogComponent || props.dialogComponentClass;
@@ -252,8 +251,7 @@ const Modal = React.createClass({
     return {
       modalStyles: {
         paddingRight: bodyIsOverflowing && !modalIsOverflowing ? getScrollbarSize() : void 0,
-        paddingLeft: !bodyIsOverflowing && modalIsOverflowing ? getScrollbarSize() : void 0,
-        ...this.props.dialogStyle
+        paddingLeft: !bodyIsOverflowing && modalIsOverflowing ? getScrollbarSize() : void 0
       }
     };
   }
