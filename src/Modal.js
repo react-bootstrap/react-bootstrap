@@ -156,7 +156,7 @@ const Modal = React.createClass({
 
     let { modalStyles } = this.state;
 
-    if(style) {
+    if (style) {
       modalStyles = merge(modalStyles, style);
     }
 
