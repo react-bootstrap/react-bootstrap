@@ -1,3 +1,14 @@
+## [v0.29.5]
+> 2016-06-18
+
+- **Feature:** Allow function refs on dropdown components ([#1948])
+- **Bugfix:** Fix bugs with tab selection and state management ([#1956])
+
+[v0.29.5]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.4...v0.29.5
+[#1948]: https://github.com/react-bootstrap/react-bootstrap/pull/1948
+[#1956]: https://github.com/react-bootstrap/react-bootstrap/pull/1956
+
+
 ## [v0.29.4]
 > 2016-05-10
 
