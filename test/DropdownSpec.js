@@ -249,6 +249,26 @@ describe('Dropdown', () => {
     node.className.should.not.match(/\bopen\b/);
   });
 
+  it('calls onClose when toggle is clicked and menu is open, but not when menu is closed', () => {
+    let onCloseCalled = false;
+    const onCloseHandler = () => {onCloseCalled = true;};
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Dropdown onClose={onCloseHandler} id='test-id'>
+        {dropdownChildren}
+      </Dropdown>
+    );
+
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
+
+    onCloseCalled.should.be.false;
+
+    ReactTestUtils.Simulate.click(buttonNode);
+    onCloseCalled.should.be.false;
+
+    ReactTestUtils.Simulate.click(buttonNode);
+    onCloseCalled.should.be.true;
+  });
+
   it('does not close when onToggle is controlled', () => {
     const handleSelect = () => {};
 
