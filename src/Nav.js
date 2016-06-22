@@ -1,14 +1,16 @@
+import classNames from 'classnames';
+import keycode from 'keycode';
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
-import classNames from 'classnames';
 import all from 'react-prop-types/lib/all';
 import warning from 'warning';
-import keycode from 'keycode';
-import tbsUtils, { bsStyles, bsClass as _bsClass } from './utils/bootstrapUtils';
-import { nextEnabled, TAB, PANE } from './utils/tabUtils';
 
-import ValidComponentChildren from './utils/ValidComponentChildren';
+import {
+  bsStyles, bsClass as _bsClass, getClassSet, prefix,
+} from './utils/bootstrapUtils';
 import chain from './utils/createChainedFunction';
+import { nextEnabled, TAB, PANE } from './utils/tabUtils';
+import ValidComponentChildren from './utils/ValidComponentChildren';
 
 class Nav extends React.Component {
 
@@ -34,17 +36,17 @@ class Nav extends React.Component {
     const { className } = this.props;
     const isNavbar = this.props.navbar != null ? this.props.navbar : this.context.$bs_navbar;
 
-    const classes = tbsUtils.getClassSet(this.props);
+    const classes = getClassSet(this.props);
 
-    classes[tbsUtils.prefix(this.props, 'stacked')] = this.props.stacked;
-    classes[tbsUtils.prefix(this.props, 'justified')] = this.props.justified;
+    classes[prefix(this.props, 'stacked')] = this.props.stacked;
+    classes[prefix(this.props, 'justified')] = this.props.justified;
 
     if (isNavbar) {
       let bsClass = this.context.$bs_navbar_bsClass || 'navbar';
 
-      classes[tbsUtils.prefix({ bsClass }, 'nav')] = true;
-      classes[tbsUtils.prefix({ bsClass }, 'right')] = this.props.pullRight;
-      classes[tbsUtils.prefix({ bsClass }, 'left')] = this.props.pullLeft;
+      classes[prefix({ bsClass }, 'nav')] = true;
+      classes[prefix({ bsClass }, 'right')] = this.props.pullRight;
+      classes[prefix({ bsClass }, 'left')] = this.props.pullLeft;
     } else {
       classes['pull-right'] = this.props.pullRight;
       classes['pull-left'] = this.props.pullLeft;
@@ -133,7 +135,7 @@ class Nav extends React.Component {
     }
 
     let {
-        linkId
+        id
       , 'aria-controls': controls
       , eventKey
       , role
@@ -141,13 +143,13 @@ class Nav extends React.Component {
       , tabIndex = 0 } = child.props;
 
     if (context && context.getId) {
-      warning(!(linkId || controls),
-        'In the context of a TabContainer, NavItems are given generated `linkId` and `aria-controls` ' +
+      warning(!(id || controls),
+        'In the context of a TabContainer, NavItems are given generated `id` and `aria-controls` ' +
         'attributes for the sake of proper component accessibility. Any provided ones will be ignored. ' +
         'To control these attributes directly provide a `generateChildId` prop to the parent TabContainer.'
       );
 
-      linkId = context.getId(eventKey, TAB) || null;
+      id = context.getId(eventKey, TAB) || null;
       controls = context.getId(eventKey, PANE) || null;
       onSelect = chain(onSelect, context.onSelect);
     }
@@ -163,7 +165,7 @@ class Nav extends React.Component {
 
     return {
       onSelect,
-      linkId,
+      id,
       role,
       onKeyDown,
       'aria-controls': controls,

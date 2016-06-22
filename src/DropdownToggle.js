@@ -19,7 +19,7 @@ export default class DropdownToggle extends React.Component {
       <Component
         {...this.props}
         className={classNames(classes, this.props.className)}
-        type="button"
+        role="button"
         aria-haspopup
         aria-expanded={this.props.open}>
         {this.props.children || this.props.title}{caret}

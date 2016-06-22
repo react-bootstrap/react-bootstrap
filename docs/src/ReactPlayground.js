@@ -51,7 +51,6 @@ const NavItem = require('../../src/NavItem');
 const Overlay = require('../../src/Overlay');
 const OverlayTrigger = require('../../src/OverlayTrigger');
 const PageHeader = require('../../src/PageHeader');
-const PageItem = require('../../src/PageItem');
 const Pager = require('../../src/Pager');
 const Pagination = require('../../src/Pagination');
 const Panel = require('../../src/Panel');
@@ -72,6 +71,8 @@ const Tabs = require('../../src/Tabs');
 const Thumbnail = require('../../src/Thumbnail');
 const Tooltip = require('../../src/Tooltip');
 const Well = require('../../src/Well');
+
+const bootstrapUtils = require('../../src/utils/bootstrapUtils');
 /* eslint-enable */
 
 import babel from 'babel-core/browser';

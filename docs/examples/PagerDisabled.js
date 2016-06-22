@@ -1,7 +1,7 @@
 const pagerInstance = (
   <Pager>
-    <PageItem previous href="#">&larr; Previous</PageItem>
-    <PageItem disabled next href="#">Next &rarr;</PageItem>
+    <Pager.Item previous href="#">&larr; Previous</Pager.Item>
+    <Pager.Item disabled next href="#">Next &rarr;</Pager.Item>
   </Pager>
 );
 

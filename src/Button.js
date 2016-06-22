@@ -1,14 +1,17 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
+
+import { Sizes, State, DEFAULT, PRIMARY, LINK } from './styleMaps';
+import {
+  bsStyles, bsSizes, bsClass, getClassSet, prefix,
+} from './utils/bootstrapUtils';
+
 import SafeAnchor from './SafeAnchor';
 
-const types = ['button', 'reset', 'submit'];
-
-import bootstrapUtils, { bsStyles, bsSizes, bsClass } from './utils/bootstrapUtils';
-import { Sizes, State, DEFAULT, PRIMARY, LINK } from './styleMaps';
-
 const ButtonStyles = State.values().concat(DEFAULT, PRIMARY, LINK);
+
+const types = ['button', 'reset', 'submit'];
 
 class Button extends React.Component {
 
@@ -17,10 +20,10 @@ class Button extends React.Component {
   }
 
   render() {
-    let classes = this.props.navDropdown ? {} : bootstrapUtils.getClassSet(this.props);
+    let classes = this.props.navDropdown ? {} : getClassSet(this.props);
     let renderFuncName;
 
-    let blockClass = bootstrapUtils.prefix(this.props, 'block');
+    let blockClass = prefix(this.props, 'block');
 
     classes = {
       active: this.props.active,

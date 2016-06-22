@@ -26,8 +26,10 @@ describe('Tooltip', () => {
         </Tooltip>
       );
       const tooltip = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tooltip');
-      expect(_.pick(tooltip.style, ['opacity', 'top', 'left']))
-        .to.eql({opacity: '0.9', top: '10px', left: '20px'});
+      expect(_.pick(tooltip.style, ['top', 'left']))
+        .to.eql({top: '10px', left: '20px'});
+      // Decimal point string depends on locale
+      expect(parseFloat(tooltip.style.opacity)).to.eql(0.9);
     });
   });
 });

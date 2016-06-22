@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import invariant from 'invariant';
+import React, { PropTypes } from 'react';
 import elementType from 'react-prop-types/lib/elementType';
-import tbsUtils, { bsClass as setBsClass } from './utils/bootstrapUtils';
+
+import { bsClass as setBsClass, prefix } from './utils/bootstrapUtils';
 
 let animationPropType = PropTypes.oneOfType([
   PropTypes.bool,
@@ -27,6 +28,11 @@ let TabContent = React.createClass({
       PropTypes.bool,
       elementType
     ]),
+
+    /**
+     * Unmount the tab (remove it from the DOM) when it is no longer visible
+     */
+    unmountOnExit: PropTypes.bool,
   },
 
   contextTypes: {
@@ -42,14 +48,16 @@ let TabContent = React.createClass({
       animation: animationPropType,
       activeKey: PropTypes.any,
       onExited: PropTypes.func,
-      register: PropTypes.func
+      register: PropTypes.func,
+      unmountOnExit: PropTypes.bool,
     }),
   },
 
   getDefaultProps() {
     return {
       componentClass: 'div',
-      animation: true
+      animation: true,
+      unmountOnExit: false
     };
   },
 
@@ -68,9 +76,14 @@ let TabContent = React.createClass({
         animation: this.props.animation,
         activeKey: exitingPane ? undefined : this.getActiveKey(),
         onExited: this.handlePaneExited,
-        register: this.registerPane
+        register: this.registerPane,
+        unmountOnExit: this.props.unmountOnExit
       }
     };
+  },
+
+  componentWillMount() {
+    this.panes = [];
   },
 
   /**
@@ -96,7 +109,7 @@ let TabContent = React.createClass({
     let { className, children } = this.props;
     let Component = this.props.componentClass;
 
-    let contentClass = tbsUtils.prefix(this.props, 'content');
+    let contentClass = prefix(this.props, 'content');
 
     return (
       <Component className={cn(contentClass, className)}>
@@ -116,7 +129,7 @@ let TabContent = React.createClass({
    * TabContent to wait longingly forever for the handlePaneExited to be called.
    */
   registerPane(eventKey) {
-    let panes = this.panes || (this.panes = []);
+    let panes = this.panes;
 
     invariant(panes.indexOf(eventKey) === -1,
       'You cannot have multiple TabPanes of with the same `eventKey` in the same ' +
@@ -127,6 +140,17 @@ let TabContent = React.createClass({
 
     return ()=> {
       panes.splice(panes.indexOf(eventKey), 1);
+
+      // #1892
+      // new active state can propagate down _before_
+      // the tab actually unmounts, so it will map be exiting.
+      // since an exiting tab won't complete, clear the bad state
+      if (eventKey === this._exitingPane) {
+        this.handlePaneExited();
+      }
+
+      // If the tab was active, we need to tell the container
+      // that it no longer exists and as such is not active.
       if (eventKey === this.getActiveKey()) {
         this.getContext('$bs_tabcontainer').onSelect();
       }

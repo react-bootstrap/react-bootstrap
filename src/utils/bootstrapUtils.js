@@ -12,7 +12,7 @@ function curry(fn) {
   };
 }
 
-function prefix(props = {}, variant) {
+export function prefix(props = {}, variant) {
   invariant(
     (props.bsClass || '').trim(),
     'A `bsClass` prop is required for this component'
@@ -20,7 +20,7 @@ function prefix(props = {}, variant) {
   return props.bsClass + (variant ? `-${variant}` : '');
 }
 
-export let bsClass = curry((defaultClass, Component) => {
+export const bsClass = curry((defaultClass, Component) => {
   let propTypes = Component.propTypes || (Component.propTypes = {});
   let defaultProps = Component.defaultProps || (Component.defaultProps = {});
 
@@ -30,7 +30,7 @@ export let bsClass = curry((defaultClass, Component) => {
   return Component;
 });
 
-export let bsStyles = curry((styles, defaultStyle, Component) => {
+export const bsStyles = curry((styles, defaultStyle, Component) => {
   if (typeof defaultStyle !== 'string') {
     Component = defaultStyle;
     defaultStyle = undefined;
@@ -63,7 +63,7 @@ export let bsStyles = curry((styles, defaultStyle, Component) => {
   return Component;
 });
 
-export let bsSizes = curry((sizes, defaultSize, Component) => {
+export const bsSizes = curry((sizes, defaultSize, Component) => {
   if (typeof defaultSize !== 'string') {
     Component = defaultSize;
     defaultSize = undefined;
@@ -109,33 +109,29 @@ export let bsSizes = curry((sizes, defaultSize, Component) => {
   return Component;
 });
 
-export default {
-  prefix,
+export function getClassSet(props) {
+  const classes = {
+    [prefix(props)]: true,
+  };
 
-  getClassSet(props) {
-    const classes = {
-      [prefix(props)]: true,
-    };
-
-    if (props.bsSize) {
-      const bsSize = styleMaps.SIZES[props.bsSize] || bsSize;
-      classes[prefix(props, bsSize)] = true;
-    }
-
-    if (props.bsStyle) {
-      classes[prefix(props, props.bsStyle)] = true;
-    }
-
-    return classes;
-  },
-
-  /**
-   * Add a style variant to a Component. Mutates the propTypes of the component
-   * in order to validate the new variant.
-   */
-  addStyle(Component, styleVariant) {
-    bsStyles(styleVariant, Component);
+  if (props.bsSize) {
+    const bsSize = styleMaps.SIZES[props.bsSize] || bsSize;
+    classes[prefix(props, bsSize)] = true;
   }
-};
+
+  if (props.bsStyle) {
+    classes[prefix(props, props.bsStyle)] = true;
+  }
+
+  return classes;
+}
+
+/**
+ * Add a style variant to a Component. Mutates the propTypes of the component
+ * in order to validate the new variant.
+ */
+export function addStyle(Component, ...styleVariant) {
+  bsStyles(styleVariant, Component);
+}
 
 export const _curry = curry;

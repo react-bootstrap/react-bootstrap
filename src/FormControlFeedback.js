@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import bootstrapUtils, { bsClass } from './utils/bootstrapUtils';
+import { bsClass, getClassSet } from './utils/bootstrapUtils';
 
 import Glyphicon from './Glyphicon';
 
@@ -42,7 +42,7 @@ class FormControlFeedback extends React.Component {
     const { className, children, ...props } = this.props;
     delete props.bsClass;
 
-    const classes = bootstrapUtils.getClassSet(this.props);
+    const classes = getClassSet(this.props);
 
     if (!children) {
       return this.renderDefaultFeedback(

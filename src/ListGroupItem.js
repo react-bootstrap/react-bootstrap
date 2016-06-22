@@ -1,13 +1,16 @@
-import React, { cloneElement } from 'react';
-import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
-import { State } from './styleMaps';
 import classNames from 'classnames';
+import React, { cloneElement } from 'react';
+
+import { State } from './styleMaps';
+import {
+  bsStyles, bsClass, getClassSet, prefix,
+} from './utils/bootstrapUtils';
 
 class ListGroupItem extends React.Component {
 
 
   render() {
-    let classes = bootstrapUtils.getClassSet(this.props);
+    let classes = getClassSet(this.props);
 
     classes.active = this.props.active;
     classes.disabled = this.props.disabled;
@@ -65,7 +68,7 @@ class ListGroupItem extends React.Component {
 
   renderStructuredContent() {
     let header;
-    let headingClass = bootstrapUtils.prefix(this.props, 'heading');
+    let headingClass = prefix(this.props, 'heading');
 
     if (React.isValidElement(this.props.header)) {
       header = cloneElement(this.props.header, {
@@ -81,7 +84,7 @@ class ListGroupItem extends React.Component {
     }
 
     let content = (
-      <p key="content" className={bootstrapUtils.prefix(this.props, 'text')}>
+      <p key="content" className={prefix(this.props, 'text')}>
         {this.props.children}
       </p>
     );

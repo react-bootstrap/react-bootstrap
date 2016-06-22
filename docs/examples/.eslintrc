@@ -45,7 +45,6 @@
     "Overlay": false,
     "OverlayTrigger": false,
     "PageHeader": false,
-    "PageItem": false,
     "Pager": false,
     "Pagination": false,
     "Panel": false,
@@ -65,6 +64,8 @@
     "Thumbnail": false,
     "Tooltip": false,
     "Well": false,
+
+    "bootstrapUtils": false,
 
     "mountNode": false
   }
