@@ -51,10 +51,11 @@ class FormControlFeedback extends React.Component {
     }
 
     const child = React.Children.only(children);
-    return React.cloneElement(child, {
-      ...props,
-      className: classNames(child.props.className, className, classes),
-    });
+    return (
+      <span {...props} className={classNames(className, classes)}>
+        {child}
+      </span>
+    );
   }
 }
 

@@ -58,6 +58,6 @@ describe('<FormControl.Feedback>', () => {
       </FormControl.Feedback>
     )
       .render()
-      .single($.s`${MyComponent}.foo.form-control-feedback`);
+      .single($.s`span.form-control-feedback>${MyComponent}.foo`);
   });
 });
