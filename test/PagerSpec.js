@@ -2,7 +2,6 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
 
-import PageItem from '../src/PageItem';
 import Pager from '../src/Pager';
 
 describe('Pager', () => {
@@ -14,22 +13,22 @@ describe('Pager', () => {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pager'));
   });
 
-  it('Should allow "PageItem" as child element', () => {
+  it('Should allow "Pager.Item" as child element', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pager>
-        <PageItem href="#">Top</PageItem>
+        <Pager.Item href="#">Top</Pager.Item>
       </Pager>
     );
     assert.equal(ReactDOM.findDOMNode(instance).children.length, 1);
     assert.equal(ReactDOM.findDOMNode(instance).children[0].nodeName, 'LI');
   });
 
-  it('Should allow multiple "PageItem" as child elements', () => {
+  it('Should allow multiple "Pager.Item" as child elements', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pager>
-        <PageItem previous href="#">Previous</PageItem>
-        <PageItem disabled href="#">Top</PageItem>
-        <PageItem next href="#">Next</PageItem>
+        <Pager.Item previous href="#">Previous</Pager.Item>
+        <Pager.Item disabled href="#">Top</Pager.Item>
+        <Pager.Item next href="#">Next</Pager.Item>
       </Pager>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'previous'));
@@ -45,12 +44,12 @@ describe('Pager', () => {
     }
     let instance = ReactTestUtils.renderIntoDocument(
       <Pager onSelect={handleSelect}>
-        <PageItem eventKey={1} href="#prev">Previous</PageItem>
-        <PageItem eventKey={2} href="#next">Next</PageItem>
+        <Pager.Item eventKey={1} href="#prev">Previous</Pager.Item>
+        <Pager.Item eventKey={2} href="#next">Next</Pager.Item>
       </Pager>
     );
 
-    let items = ReactTestUtils.scryRenderedComponentsWithType(instance, PageItem);
+    let items = ReactTestUtils.scryRenderedComponentsWithType(instance, Pager.Item);
 
     ReactTestUtils.Simulate.click(
       ReactTestUtils.findRenderedDOMComponentWithTag(items[1], 'a')
