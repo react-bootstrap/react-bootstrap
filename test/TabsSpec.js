@@ -155,6 +155,45 @@ describe('Tabs', () => {
     assert.equal(tabs.refs.tabs.context.$bs_tabcontainer.activeKey, 1);
   });
 
+  it('Should mount initial tab and no others when unmountOnExit is true and animation is false', () => {
+    let tab1 = <span className="tab1">Tab 1</span>;
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Tabs id='test' defaultActiveKey={1} animation={false} unmountOnExit={true}>
+        <Tab title={tab1} eventKey={1}>Tab 1 content</Tab>
+        <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
+        <Tab title="Tab 3" eventKey={3}>Tab 3 content</Tab>
+      </Tabs>
+    );
+
+    let panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
+
+    expect(ReactDOM.findDOMNode(panes[0])).to.exist;
+    expect(ReactDOM.findDOMNode(panes[1])).to.not.exist;
+    expect(ReactDOM.findDOMNode(panes[2])).to.not.exist;
+  });
+
+  it('Should mount the correct tab when selected and unmount the previous when unmountOnExit is true and animation is false', () => {
+    let tab1 = <span className="tab1">Tab 1</span>;
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Tabs id='test' defaultActiveKey={2} animation={false} unmountOnExit={true}>
+        <Tab title={tab1} eventKey={1}>Tab 1 content</Tab>
+        <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
+      </Tabs>
+    );
+
+    let tabs = instance.refs.inner;
+    let panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
+
+    ReactTestUtils.Simulate.click(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab1')
+    );
+
+    expect(ReactDOM.findDOMNode(panes[0])).to.exist;
+    expect(ReactDOM.findDOMNode(panes[1])).to.not.exist;
+
+    assert.equal(tabs.refs.tabs.context.$bs_tabcontainer.activeKey, 1);
+  });
+
   it('Should treat active key of null as nothing selected', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Tabs id='test' activeKey={null} onSelect={()=>{}}>
@@ -441,7 +480,7 @@ describe('Tabs', () => {
       let tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
 
       tabs.every(tab =>
-        assert.ok(tab.props['aria-controls'] && tab.props.linkId));
+        assert.ok(tab.props['aria-controls'] && tab.props.id));
     });
 
     it('Should add aria-labelledby', () => {
@@ -493,7 +532,7 @@ describe('Tabs', () => {
     );
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('class'), 'my-tabs-class');
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('id'), 'my-tabs-id');
-    assert.equal(ReactDOM.findDOMNode(instance).style.opacity, 0.5);
-
+    // Decimal point string depends on locale
+    assert.equal(parseFloat(ReactDOM.findDOMNode(instance).style.opacity), 0.5);
   });
 });

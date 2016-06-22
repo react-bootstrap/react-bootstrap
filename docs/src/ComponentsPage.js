@@ -16,6 +16,7 @@ import BreadcrumbSection from './sections/BreadcrumbSection';
 import ButtonGroupSection from './sections/ButtonGroupSection';
 import ButtonSection from './sections/ButtonSection';
 import CarouselSection from './sections/CarouselSection';
+import CustomStylesSection from './sections/CustomStylesSection';
 import DropdownSection from './sections/DropdownSection';
 import FormControlsSection from './sections/FormControlsSection';
 import FormInputGroupSection from './sections/FormInputGroupSection';
@@ -94,6 +95,7 @@ const sections = {
     progress: '#progress',
   utilities: '#utilities',
     transitions: '#transitions',
+    customStyles: '#custom-styles',
   missing: '#missing',
     affix: '#affix',
     scrollspy: '#scrollspy'
@@ -335,6 +337,9 @@ const ComponentsPage = React.createClass({
                 {this.renderScrollSpy(sections.transitions)}
                 <TransitionSection />
 
+                {this.renderScrollSpy(sections.customStyles)}
+                <CustomStylesSection />
+
                 {this.renderScrollSpy(sections.missing)}
                 <div className="bs-docs-section">
                   <h1 className="page-header">
@@ -441,6 +446,7 @@ const ComponentsPage = React.createClass({
 
                       <SubNav href={sections.utilities} text="Utilities">
                         <NavItem href={sections.transitions}>Transitions</NavItem>
+                        <NavItem href={sections.customStyles}>Custom Styles</NavItem>
                       </SubNav>
 
                       <SubNav href={sections.missing} text="Missing components">

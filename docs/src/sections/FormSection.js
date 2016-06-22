@@ -12,7 +12,15 @@ export default function FormSection() {
         <Anchor id="forms">Forms</Anchor> <small>FormGroup, FormControl, ControlLabel</small>
       </h1>
 
-      <p>The <code>{'<FormControl>'}</code> component renders a form control with Bootstrap styling. The <code>{'<FormGroup>'}</code> component wraps a form control with proper spacing, along with support for a label, help text, and validation state. To ensure accessibility, set <code>controlId</code> on <code>{'<FormGroup>'}</code>, and use <code>{'<ControlLabel>'}</code> for the label.</p>
+      <p>
+        The <code>{'<FormControl>'}</code> component renders a form control with Bootstrap styling.
+        The <code>{'<FormGroup>'}</code> component wraps a form control with proper spacing, along with support for a label, help text, and validation state. To ensure accessibility, set <code>controlId</code> on <code>{'<FormGroup>'}</code>, and use <code>{'<ControlLabel>'}</code> for the label.
+      </p>
+      <p>
+        If you need the value of a <code>{'<FormControl>'}</code>, attach a <code>ref</code> to it.
+        Then call <code>getDOMNode</code> or <code>findDOMNode</code> to retrieve the <code>{'<FormControl>'}</code>'s node.
+      </p>
+
       <ReactPlayground codeText={Samples.FormBasic} />
 
       <h3><Anchor id="forms-props">Props</Anchor></h3>

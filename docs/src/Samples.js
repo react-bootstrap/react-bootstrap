@@ -22,6 +22,7 @@ export default {
   CarouselControlled:            require('fs').readFileSync(__dirname + '/../examples/CarouselControlled.js', 'utf8'),
   CarouselUncontrolled:          require('fs').readFileSync(__dirname + '/../examples/CarouselUncontrolled.js', 'utf8'),
   Collapse:                      require('fs').readFileSync(__dirname + '/../examples/Collapse.js', 'utf8'),
+  CustomButtonStyle:             require('fs').readFileSync(__dirname + '/../examples/CustomButtonStyle.js', 'utf8'),
   DropdownButtonBasic:           require('fs').readFileSync(__dirname + '/../examples/DropdownButtonBasic.js', 'utf8'),
   DropdownButtonCustom:          require('fs').readFileSync(__dirname + '/../examples/DropdownButtonCustom.js', 'utf8'),
   DropdownButtonCustomMenu:      require('fs').readFileSync(__dirname + '/../examples/DropdownButtonCustomMenu.js', 'utf8'),

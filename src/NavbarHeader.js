@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import tbsUtils from './utils/bootstrapUtils';
+import React, { PropTypes } from 'react';
+
+import { prefix } from './utils/bootstrapUtils';
 
 let NavbarHeader = React.createClass({
 
@@ -11,7 +12,7 @@ let NavbarHeader = React.createClass({
   render() {
     let { className, ...props } = this.props;
     let { $bs_navbar_bsClass: bsClass = 'navbar' } = this.context;
-    let headerClasses = tbsUtils.prefix({ bsClass }, 'header');
+    let headerClasses = prefix({ bsClass }, 'header');
 
     return (
       <div {...props} className={classNames(className, headerClasses)} />

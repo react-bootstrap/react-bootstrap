@@ -1,18 +1,19 @@
 /* eslint react/no-multi-comp: 0 */
-import React, { PropTypes } from 'react';
-import uncontrollable from 'uncontrollable';
 import classNames from 'classnames';
+import React, { PropTypes } from 'react';
 import elementType from 'react-prop-types/lib/elementType';
+import uncontrollable from 'uncontrollable';
+
+import { DEFAULT, INVERSE } from './styleMaps';
+import {
+  bsClass as bsClasses, bsStyles, getClassSet, prefix,
+} from './utils/bootstrapUtils';
 
 import Grid from './Grid';
 import NavbarBrand from './NavbarBrand';
+import NavbarCollapse from './NavbarCollapse';
 import NavbarHeader from './NavbarHeader';
 import NavbarToggle from './NavbarToggle';
-import NavbarCollapse from './NavbarCollapse';
-
-import tbsUtils, { bsClass as bsClasses, bsStyles } from './utils/bootstrapUtils';
-import { DEFAULT, INVERSE } from './styleMaps';
-
 
 let Navbar = React.createClass({
 
@@ -119,11 +120,11 @@ let Navbar = React.createClass({
       props.bsStyle = INVERSE;
     }
 
-    const classes = tbsUtils.getClassSet(props);
+    const classes = getClassSet(props);
 
-    classes[tbsUtils.prefix(this.props, 'fixed-top')] = fixedTop;
-    classes[tbsUtils.prefix(this.props, 'fixed-bottom')] = fixedBottom;
-    classes[tbsUtils.prefix(this.props, 'static-top')] = staticTop;
+    classes[prefix(this.props, 'fixed-top')] = fixedTop;
+    classes[prefix(this.props, 'fixed-bottom')] = fixedBottom;
+    classes[prefix(this.props, 'static-top')] = staticTop;
 
     return (
       <ComponentClass {...props} className={classNames(className, classes)}>
@@ -149,9 +150,9 @@ function createSimpleWrapper(tag, suffix, displayName) {
     { $bs_navbar_bsClass: bsClass = 'navbar' }
   ) =>
     <Tag {...props}
-      className={classNames(className, tbsUtils.prefix({ bsClass }, suffix), {
-        [tbsUtils.prefix({ bsClass }, 'right')]: props.pullRight,
-        [tbsUtils.prefix({ bsClass }, 'left')]: props.pullLeft
+      className={classNames(className, prefix({ bsClass }, suffix), {
+        [prefix({ bsClass }, 'right')]: props.pullRight,
+        [prefix({ bsClass }, 'left')]: props.pullLeft
       })}
     />;
 

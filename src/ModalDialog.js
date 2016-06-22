@@ -1,9 +1,10 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
 import classNames from 'classnames';
-import tbsUtils, { bsClass, bsSizes } from './utils/bootstrapUtils';
-import { Sizes } from './styleMaps';
+import React from 'react';
 
+import { Sizes } from './styleMaps';
+import { bsClass, bsSizes, getClassSet, prefix } from './utils/bootstrapUtils';
+
+/* eslint-disable react/prop-types */
 const ModalDialog = React.createClass({
 
   propTypes: {
@@ -18,11 +19,11 @@ const ModalDialog = React.createClass({
       display: 'block',
       ...this.props.style
     };
-    let prefix = tbsUtils.prefix(this.props);
-    let dialogClasses = tbsUtils.getClassSet(this.props);
+    let bsClassPrefix = prefix(this.props);
+    let dialogClasses = getClassSet(this.props);
 
-    delete dialogClasses[prefix];
-    dialogClasses[tbsUtils.prefix(this.props, 'dialog')] = true;
+    delete dialogClasses[bsClassPrefix];
+    dialogClasses[prefix(this.props, 'dialog')] = true;
 
     return (
       <div
@@ -31,10 +32,10 @@ const ModalDialog = React.createClass({
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
-        className={classNames(this.props.className, prefix)}
+        className={classNames(this.props.className, bsClassPrefix)}
       >
         <div className={classNames(this.props.dialogClassName, dialogClasses)}>
-          <div className={tbsUtils.prefix(this.props, 'content')} role="document">
+          <div className={prefix(this.props, 'content')} role="document">
             { this.props.children }
           </div>
         </div>

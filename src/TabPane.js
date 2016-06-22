@@ -1,13 +1,14 @@
-import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import warning from 'warning';
-import Fade from './Fade';
 import addClass from 'dom-helpers/class/addClass';
+import React, { PropTypes } from 'react';
 import elementType from 'react-prop-types/lib/elementType';
+import warning from 'warning';
+
+import { bsClass as setBsClass, prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
-import tbsUtils, { bsClass as setBsClass } from './utils/bootstrapUtils';
 import { TAB, PANE } from './utils/tabUtils';
 
+import Fade from './Fade';
 
 let TabPane = React.createClass({
   propTypes: {
@@ -61,12 +62,18 @@ let TabPane = React.createClass({
     /**
      * Transition onExited callback when animation is not `false`
      */
-    onExited: PropTypes.func
+    onExited: PropTypes.func,
+
+    /**
+     * Unmount the tab (remove it from the DOM) when it is no longer visible
+     */
+    unmountOnExit: PropTypes.bool
   },
 
   contextTypes: {
     $bs_tabcontainer: PropTypes.shape({
-      getId: PropTypes.func
+      getId: PropTypes.func,
+      unmountOnExit: PropTypes.bool
     }),
     $bs_tabcontent: PropTypes.shape({
       bsClass: PropTypes.string,
@@ -76,7 +83,8 @@ let TabPane = React.createClass({
       ]),
       activeKey: PropTypes.any,
       onExited: PropTypes.func,
-      register: PropTypes.func
+      register: PropTypes.func,
+      unmountOnExit: PropTypes.bool
     }),
   },
 
@@ -132,6 +140,13 @@ let TabPane = React.createClass({
       : context.animation;
   },
 
+  getUnmountOnExit() {
+    let context = this.getContext('$bs_tabcontent', this.context);
+    return this.props.unmountOnExit != null
+      ? this.props.unmountOnExit
+      : context.unmountOnExit;
+  },
+
   isActive(props = this.props, context = this.context) {
     return this.getContext('$bs_tabcontent', context).activeKey === props.eventKey;
   },
@@ -144,9 +159,13 @@ let TabPane = React.createClass({
 
     let Transition = this.getTransition();
 
+    if (!visible && !Transition && this.getUnmountOnExit()) {
+      return null;
+    }
+
     let classes = {
       active: visible,
-      [tbsUtils.prefix({ bsClass }, 'pane')]: true
+      [prefix({ bsClass }, 'pane')]: true
     };
 
     let {
@@ -191,6 +210,7 @@ let TabPane = React.createClass({
           onEnter={createChainedFunction(this.handleEnter, onEnter)}
           onEntering={onEntering}
           onEntered={onEntered}
+          unmountOnExit={this.getUnmountOnExit()}
         >
           { tabPane }
         </Transition>

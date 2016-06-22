@@ -1,6 +1,8 @@
-import React from 'react';
 import classNames from 'classnames';
-import bootstrapUtils from './utils/bootstrapUtils';
+import React from 'react';
+
+import { getClassSet } from './utils/bootstrapUtils';
+
 import Button from './Button';
 
 const ButtonToolbar = React.createClass({
@@ -16,13 +18,14 @@ const ButtonToolbar = React.createClass({
   },
 
   render() {
-    let classes = bootstrapUtils.getClassSet(this.props);
+    let classes = getClassSet(this.props);
 
     return (
       <div
         {...this.props}
         role="toolbar"
-        className={classNames(this.props.className, classes)}>
+        className={classNames(this.props.className, classes)}
+      >
         {this.props.children}
       </div>
     );

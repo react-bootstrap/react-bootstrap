@@ -1,5 +1,5 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
 const CarouselCaption = React.createClass({

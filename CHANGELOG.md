@@ -1,5 +1,63 @@
+## [v0.29.5]
+> 2016-06-18
+
+- **Feature:** Allow function refs on dropdown components ([#1948])
+- **Bugfix:** Fix bugs with tab selection and state management ([#1956])
+
+[v0.29.5]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.4...v0.29.5
+[#1948]: https://github.com/react-bootstrap/react-bootstrap/pull/1948
+[#1956]: https://github.com/react-bootstrap/react-bootstrap/pull/1956
+
+
+## [v0.29.4]
+> 2016-05-10
+
+- **Feature:** Add `inputRef` to `<Checkbox>` and `<Radio>` ([#1865])
+- **Bugfix:** Persist `<Panel>` events before modifying them ([#1864])
+- **Bugfix:** Add back `eventKey` to props for custom pagination buttons ([#1876])
+
+[v0.29.4]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.3...v0.29.4
+[#1864]: https://github.com/react-bootstrap/react-bootstrap/pull/1864
+[#1865]: https://github.com/react-bootstrap/react-bootstrap/pull/1865
+[#1876]: https://github.com/react-bootstrap/react-bootstrap/pull/1876
+
+
+## [v0.29.3]
+> 2016-04-28
+
+- **Feature:** Add `unmountOnExit` support to tabs ([#1823])
+- **Bugfix:** Do not pass `onSelect` to DOM nodes ([#1861])
+- **Bugfix:** Do not throw error when tab group has no panes ([#1862])
+- **Bugfix:** Fix setting `id` for `<NavItem>`s for tabs ([#1862])
+
+[v0.29.3]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.2...v0.29.3
+[#1823]: https://github.com/react-bootstrap/react-bootstrap/pull/1823
+[#1861]: https://github.com/react-bootstrap/react-bootstrap/pull/1861
+[#1862]: https://github.com/react-bootstrap/react-bootstrap/pull/1862
+
+
+## [v0.29.2]
+> 2016-04-22
+
+- **Bugfix:** Don't always set `tabIndex` on `<SafeAnchor>` ([#1844])
+
+[v0.29.2]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.1...v0.29.2
+[#1844]: https://github.com/react-bootstrap/react-bootstrap/pull/1844
+
+
+## [v0.29.1]
+> 2016-04-21
+
+- **Bugfix:** Don't incorrectly pass `onSelect` past `<TabContainer>` ([#1825])
+- **Bugfix:** Set `role` instead of `type` on `<Dropdown.Toggle>` button ([#1835])
+
+[v0.29.1]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.0...v0.29.1
+[#1825]: https://github.com/react-bootstrap/react-bootstrap/pull/1825
+[#1835]: https://github.com/react-bootstrap/react-bootstrap/pull/1835
+
+
 ## [v0.29.0]
-> 2016-04-17
+> 2016-04-18
 
 - **Breaking:** Change `onSelect` signature to be `(eventKey: any, event: SyntheticEvent) => any` on all React-Bootstrap components, instead of the old inconsistent mishmash ([#1604], [#1677], [#1756])
 - **Breaking:** Remove deprecated `duration` on transition components ([#1608])
@@ -7,11 +65,13 @@
 - **Breaking:** Don't check for prefixed `bsStyle` in `bootstrapUtils.getClassSet` ([#1759])
 - **Breaking:** Disable click handlers on `disabled` components ([#1794])
 - **Breaking:** In components with wrapped anchors, pass through all props other than `className` and `style` to the wrapped anchor ([#1801])
+- **Breaking:** Use consistent exports from `bootstrapUtils` ([#1813])
 - **Feature/Deprecation:** Add lower-level tab components, and deprecate horizontal layout support in `<Tabs>` in favor of lower-level components ([#1607], [#1784])
 - **Feature/Deprecation:** Deprecate `dialogComponent` in favor of new `dialogComponentClass` on `<Modal>` for consistency with other components ([#1753])
-- **Feature/Deprecation:** Rewrite form and form control API, and deprecate the old API ([#1765])
+- **Feature/Deprecation:** Rewrite form and form control API (`<FormControl>`, &c.), and deprecate the old API (`<Input>`, &c.) ([#1765])
 - **Deprecation:** Deprecate `dismissAfter` on `<Alert>` ([#1636])
 - **Deprecation:** Deprecate label interpolation (e.g. `label="%(percent)s%"`) in `<ProgressBar>` ([#1751])
+- **Bugfix:** Set `collapsed` class on `<Navbar.Toggle>` ([#1733])
 
 [v0.29.0]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.5...v0.29.0
 [#1604]: https://github.com/react-bootstrap/react-bootstrap/pull/1604
@@ -19,6 +79,7 @@
 [#1608]: https://github.com/react-bootstrap/react-bootstrap/pull/1608
 [#1636]: https://github.com/react-bootstrap/react-bootstrap/pull/1636
 [#1677]: https://github.com/react-bootstrap/react-bootstrap/pull/1677
+[#1733]: https://github.com/react-bootstrap/react-bootstrap/pull/1733
 [#1745]: https://github.com/react-bootstrap/react-bootstrap/pull/1745
 [#1751]: https://github.com/react-bootstrap/react-bootstrap/pull/1751
 [#1753]: https://github.com/react-bootstrap/react-bootstrap/pull/1753
@@ -28,6 +89,7 @@
 [#1784]: https://github.com/react-bootstrap/react-bootstrap/pull/1784
 [#1794]: https://github.com/react-bootstrap/react-bootstrap/pull/1794
 [#1801]: https://github.com/react-bootstrap/react-bootstrap/pull/1801
+[#1813]: https://github.com/react-bootstrap/react-bootstrap/pull/1813
 
 
 ## [v0.28.5]

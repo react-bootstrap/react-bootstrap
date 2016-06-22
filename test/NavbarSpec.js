@@ -6,7 +6,7 @@ import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
 
 import { getOne } from './helpers';
-import utils from '../src/utils/bootstrapUtils';
+import { addStyle } from '../src/utils/bootstrapUtils';
 
 describe('Navbar', () => {
 
@@ -58,7 +58,7 @@ describe('Navbar', () => {
   });
 
   it('Should not add default class along with custom styles', () => {
-    utils.addStyle(Navbar, ['custom']);
+    addStyle(Navbar, 'custom');
 
     let instance = ReactTestUtils.renderIntoDocument(
       <Navbar bsStyle='custom' />
@@ -247,10 +247,12 @@ describe('Navbar', () => {
     let collapse = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Collapse);
 
     expect(collapse.context.$bs_navbar_expanded).to.not.be.ok;
+    expect(toggle.className).to.match(/collapsed/);
 
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(toggle));
 
     expect(collapse.context.$bs_navbar_expanded).to.equal(true);
+    expect(toggle.className).to.not.match(/collapsed/);
   });
 
   it('Should pass `bsClass` down to sub components', () => {

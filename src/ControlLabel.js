@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import warning from 'warning';
 
-import bootstrapUtils, { bsClass } from './utils/bootstrapUtils';
+import { bsClass, getClassSet } from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
@@ -40,7 +40,7 @@ class ControlLabel extends React.Component {
     delete props.bsClass;
 
     const classes = {
-      ...bootstrapUtils.getClassSet(this.props),
+      ...getClassSet(this.props),
       'sr-only': srOnly,
     };
 

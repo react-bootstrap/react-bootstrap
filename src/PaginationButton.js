@@ -48,7 +48,6 @@ const PaginationButton = React.createClass({
     } = this.props;
 
     delete props.onSelect;
-    delete props.eventKey;
 
     return (
       <li

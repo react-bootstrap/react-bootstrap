@@ -1,11 +1,14 @@
 import classNames from 'classnames';
 import React, { cloneElement, PropTypes } from 'react';
 
-import Interpolate from './Interpolate';
 import { State } from './styleMaps';
-import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
+import {
+  bsStyles, bsClass, getClassSet, prefix,
+} from './utils/bootstrapUtils';
 import deprecationWarning from './utils/deprecationWarning';
 import ValidComponentChildren from './utils/ValidComponentChildren';
+
+import Interpolate from './Interpolate';
 
 /**
  * Custom propTypes checker
@@ -85,9 +88,9 @@ class ProgressBar extends React.Component {
       );
     }
 
-    const classes = classNames(className, bootstrapUtils.getClassSet(this.props), {
+    const classes = classNames(className, getClassSet(this.props), {
       active: this.props.active,
-      [bootstrapUtils.prefix(this.props, 'striped')]: this.props.active || this.props.striped
+      [prefix(this.props, 'striped')]: this.props.active || this.props.striped
     });
 
     return (
@@ -98,7 +101,8 @@ class ProgressBar extends React.Component {
         style={{ width: percentage + '%', ...style }}
         aria-valuenow={this.props.now}
         aria-valuemin={this.props.min}
-        aria-valuemax={this.props.max}>
+        aria-valuemax={this.props.max}
+      >
         {label}
       </div>
     );

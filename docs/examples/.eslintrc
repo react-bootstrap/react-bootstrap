@@ -66,6 +66,8 @@
     "Tooltip": false,
     "Well": false,
 
+    "bootstrapUtils": false,
+
     "mountNode": false
   }
 }

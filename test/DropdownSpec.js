@@ -2,6 +2,7 @@ import keycode from 'keycode';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
+import tsp from 'teaspoon';
 
 import Dropdown from '../src/Dropdown';
 import DropdownMenu from '../src/DropdownMenu';
@@ -223,6 +224,14 @@ describe('Dropdown', () => {
     buttonNode.getAttribute('aria-haspopup').should.equal('true');
   });
 
+  it('does not pass onSelect to DOM node', () => {
+    tsp(simpleDropdown)
+      .props('onSelect', () => {})
+      .shallowRender()
+      .tap(m => m.props().should.have.property('onSelect'))
+      .children()
+      .should.not.have.property('onSelect');
+  });
 
   it('closes when child MenuItem is selected', () => {
     const instance = ReactTestUtils.renderIntoDocument(
@@ -370,6 +379,43 @@ describe('Dropdown', () => {
 
   });
 
+  it('chains refs', () => {
+    class RefDropdown extends React.Component {
+      render() {
+        return (
+          <Dropdown ref={dropdown => this.dropdown = dropdown.refs.inner} id="test">
+            <Dropdown.Toggle ref={toggle => this.toggle = toggle} />
+            <Dropdown.Menu ref={menu => this.menu = menu} />
+          </Dropdown>
+        );
+      }
+    }
+
+    let inst = tsp(<RefDropdown />).render().unwrap();
+
+    inst.menu.should.exist;
+    inst.dropdown.menu.should.exist;
+
+    inst.toggle.should.exist;
+    inst.dropdown.toggle.should.exist;
+  });
+
+  it('warns when a string ref is specified', () => {
+    class RefDropdown extends React.Component {
+      render() {
+        return (
+          <Dropdown id="test">
+            <Dropdown.Toggle ref='toggle' />
+            <Dropdown.Menu />
+          </Dropdown>
+        );
+      }
+    }
+
+    shouldWarn('String refs are not supported');
+
+    tsp(<RefDropdown />).render().unwrap();
+  });
 
   describe('focusable state', () => {
     let focusableContainer;
