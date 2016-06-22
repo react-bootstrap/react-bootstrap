@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
+import PagerItem from './PagerItem';
 
 const Pager = React.createClass({
 
@@ -15,12 +16,12 @@ const Pager = React.createClass({
       <ul
         {...this.props}
         className={classNames(this.props.className, 'pager')}>
-        {ValidComponentChildren.map(this.props.children, this.renderPageItem)}
+        {ValidComponentChildren.map(this.props.children, this.renderPagerItem)}
       </ul>
     );
   },
 
-  renderPageItem(child, index) {
+  renderPagerItem(child, index) {
     return cloneElement(
       child,
       {
@@ -30,5 +31,7 @@ const Pager = React.createClass({
     );
   }
 });
+
+Pager.Item = PagerItem;
 
 export default Pager;
