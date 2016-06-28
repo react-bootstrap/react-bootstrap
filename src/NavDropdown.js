@@ -1,10 +1,15 @@
 import React from 'react';
 import Dropdown from './Dropdown';
+import Glyphicon from './Glyphicon';
 
 class NavDropdown extends React.Component {
 
   render() {
-    let { children, title, noCaret, ...props } = this.props;
+    let { children, title, noCaret, glyph, ...props } = this.props;
+
+    if (glyph !== null) {
+      title = ' ' + title;
+    }
 
     return (
       <Dropdown {...props} componentClass="li">
@@ -13,6 +18,8 @@ class NavDropdown extends React.Component {
           disabled={props.disabled}
           noCaret={noCaret}
         >
+          {glyph &&
+            <Glyphicon glyph={glyph} />}
           {title}
         </Dropdown.Toggle>
         <Dropdown.Menu>
@@ -26,6 +33,7 @@ class NavDropdown extends React.Component {
 NavDropdown.propTypes = {
   noCaret: React.PropTypes.bool,
   title: React.PropTypes.node.isRequired,
+  glyph: React.PropTypes.string,
   ...Dropdown.propTypes
 };
 
