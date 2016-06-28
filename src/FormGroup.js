@@ -37,6 +37,10 @@ const propTypes = {
    * @private
    */
   groupClassName: deprecated(React.PropTypes.string, 'Use `className`.'),
+  /**
+   * @private
+   */
+  required: React.PropTypes.bool,
 };
 
 const childContextTypes = {
@@ -45,12 +49,13 @@ const childContextTypes = {
 
 class FormGroup extends React.Component {
   getChildContext() {
-    const { controlId, bsStyle, validationState = bsStyle } = this.props;
+    const { controlId, bsStyle, validationState = bsStyle, required } = this.props;
 
     return {
       $bs_formGroup: {
         controlId,
-        validationState
+        validationState,
+        required
       },
     };
   }
@@ -71,6 +76,7 @@ class FormGroup extends React.Component {
       className = groupClassName,
       children,
       hasFeedback = this.hasFeedback(children),
+      required,
       ...props,
     } = this.props;
 
@@ -81,6 +87,7 @@ class FormGroup extends React.Component {
     const classes = {
       ...(!standalone && getClassSet(this.props)),
       'has-feedback': hasFeedback,
+      'required': required
     };
     if (validationState) {
       classes[`has-${validationState}`] = true;
