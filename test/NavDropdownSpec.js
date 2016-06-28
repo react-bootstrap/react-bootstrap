@@ -9,7 +9,7 @@ describe('NavDropdown', () => {
 
   it('Should render li when in nav', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <NavDropdown title="Title" className="test-class" id='nav-test'>
+      <NavDropdown title="Title" className="test-class" id='nav-test' glyph="comment">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
         <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
       </NavDropdown>
@@ -17,12 +17,14 @@ describe('NavDropdown', () => {
 
     let li = ReactDOM.findDOMNode(instance);
     let button = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
+    let glyphicon = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'glyphicon');
 
     assert.equal(li.nodeName, 'LI');
     assert.ok(li.className.match(/\bdropdown\b/));
     assert.ok(li.className.match(/\btest-class\b/));
     assert.equal(button.nodeName, 'A');
     assert.equal(button.innerText.trim(), 'Title');
+    assert.ok(glyphicon.className.match(/\bglyphicon glyphicon-comment\b/));
   });
 
   it('is open with explicit prop', () => {

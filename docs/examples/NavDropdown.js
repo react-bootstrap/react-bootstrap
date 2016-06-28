@@ -10,7 +10,7 @@ const NavDropdownExample = React.createClass({
         <NavItem eventKey={1} href="/home">NavItem 1 content</NavItem>
         <NavItem eventKey={2} title="Item">NavItem 2 content</NavItem>
         <NavItem eventKey={3} disabled>NavItem 3 content</NavItem>
-        <NavDropdown eventKey={4} title="Dropdown" id="nav-dropdown">
+        <NavDropdown eventKey={4} title="Dropdown" id="nav-dropdown" glyph="comment">
           <MenuItem eventKey="4.1">Action</MenuItem>
           <MenuItem eventKey="4.2">Another action</MenuItem>
           <MenuItem eventKey="4.3">Something else here</MenuItem>
