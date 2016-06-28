@@ -32,6 +32,7 @@ class FormControl extends React.Component {
   render() {
     const formGroup = this.context.$bs_formGroup;
     const controlId = formGroup && formGroup.controlId;
+    const required = formGroup && formGroup.required;
 
     const {
       componentClass: Component,
@@ -47,6 +48,7 @@ class FormControl extends React.Component {
     );
 
     delete props.bsClass;
+    props.required = required;
 
     // input[type="file"] should not have .form-control.
     let classes;
