@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Image = React.createClass({
 
   propTypes: {
@@ -43,8 +45,10 @@ const Image = React.createClass({
       'img-thumbnail': this.props.thumbnail
     };
 
+    const domProps = ensureDomProps(this.props, 'img');
+
     return (
-      <img {...this.props} className={classNames(this.props.className, classes)} />
+      <img {...domProps} className={classNames(this.props.className, classes)} />
     );
   }
 });

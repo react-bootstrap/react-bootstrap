@@ -7,6 +7,8 @@ import {
   bsStyles, bsClass, getClassSet, prefix,
 } from './utils/bootstrapUtils';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 let Alert = React.createClass({
 
   propTypes: {
@@ -56,9 +58,11 @@ let Alert = React.createClass({
 
     classes[prefix(this.props, 'dismissable')] = isDismissable;
 
+    let domProps = ensureDomProps(this.props, 'div');
+
     return (
       <div
-        {...this.props}
+        {...domProps}
         role="alert"
         className={classNames(this.props.className, classes)}
       >

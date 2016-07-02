@@ -4,6 +4,8 @@ import React, { cloneElement } from 'react';
 import { bsClass, getClassSet } from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const PanelGroup = React.createClass({
 
 
@@ -34,8 +36,9 @@ const PanelGroup = React.createClass({
     let classes = getClassSet(this.props);
     let {className, ...props} = this.props;
     if (this.props.accordion) { props.role = 'tablist'; }
+    const domProps = ensureDomProps(props, 'div');
     return (
-      <div {...props} className={classNames(className, classes)} onSelect={null}>
+      <div {...domProps} className={classNames(className, classes)} onSelect={null}>
         {ValidComponentChildren.map(props.children, this.renderPanel)}
       </div>
     );

@@ -4,6 +4,8 @@ import warning from 'warning';
 
 import { bsClass, getClassSet } from './utils/bootstrapUtils';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const propTypes = {
   /**
    * Uses `controlId` from `<FormGroup>` if not explicitly specified.
@@ -44,9 +46,11 @@ class ControlLabel extends React.Component {
       'sr-only': srOnly,
     };
 
+    const domProps = ensureDomProps(props, 'label');
+
     return (
       <label
-        {...props}
+        {...domProps}
         htmlFor={htmlFor}
         className={classNames(className, classes)}
       />

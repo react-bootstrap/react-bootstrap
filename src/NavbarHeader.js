@@ -3,6 +3,8 @@ import React, { PropTypes } from 'react';
 
 import { prefix } from './utils/bootstrapUtils';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 let NavbarHeader = React.createClass({
 
   contextTypes: {
@@ -13,9 +15,9 @@ let NavbarHeader = React.createClass({
     let { className, ...props } = this.props;
     let { $bs_navbar_bsClass: bsClass = 'navbar' } = this.context;
     let headerClasses = prefix({ bsClass }, 'header');
-
+    const domProps = ensureDomProps(props, 'div');
     return (
-      <div {...props} className={classNames(className, headerClasses)} />
+      <div {...domProps} className={classNames(className, headerClasses)} />
     );
   }
 });

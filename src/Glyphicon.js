@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import React from 'react';
 import deprecated from 'react-prop-types/lib/deprecated';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Glyphicon = React.createClass({
   propTypes: {
     /**
@@ -36,8 +38,10 @@ const Glyphicon = React.createClass({
       ['form-control-feedback']: this.props.formControlFeedback
     });
 
+    const domProps = ensureDomProps(this.props, 'span');
+
     return (
-      <span {...this.props} className={className}>
+      <span {...domProps} className={className}>
         {this.props.children}
       </span>
     );

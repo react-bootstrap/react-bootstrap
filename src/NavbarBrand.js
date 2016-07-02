@@ -3,6 +3,8 @@ import React from 'react';
 
 import { prefix } from './utils/bootstrapUtils';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 class NavbarBrand extends React.Component {
 
   render() {
@@ -18,8 +20,10 @@ class NavbarBrand extends React.Component {
       });
     }
 
+    const domProps = ensureDomProps(props, 'span');
+
     return (
-      <span {...props} className={classNames(className, brandClasses)}>
+      <span {...domProps} className={classNames(className, brandClasses)}>
         {children}
       </span>
     );

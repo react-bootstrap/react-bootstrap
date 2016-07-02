@@ -1,12 +1,15 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const MediaListItem = React.createClass({
   displayName: 'Media.ListItem',
   render() {
     const {className, ...props} = this.props;
+    const domProps = ensureDomProps(props, 'li');
     return (
-      <li {...props} className={classNames(className, 'media')}/>
+      <li {...domProps} className={classNames(className, 'media')}/>
     );
   }
 });

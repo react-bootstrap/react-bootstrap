@@ -6,6 +6,8 @@ import { bsClass, getClassSet, prefix } from './utils/bootstrapUtils';
 
 import Button from './Button';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const ButtonGroup = React.createClass({
 
   propTypes: {
@@ -43,9 +45,11 @@ const ButtonGroup = React.createClass({
     // this is annoying, since the class is `btn-block` not `btn-group-block`
     classes[prefix(Button.defaultProps, 'block')] = this.props.block;
 
+    const domProps = ensureDomProps(this.props, 'div');
+
     return (
       <div
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, classes)}
       >
         {this.props.children}

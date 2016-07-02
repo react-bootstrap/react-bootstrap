@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import BreadcrumbItem from './BreadcrumbItem';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Breadcrumb = React.createClass({
   propTypes: {
     /**
@@ -20,10 +22,10 @@ const Breadcrumb = React.createClass({
 
   render() {
     const { className, ...props } = this.props;
-
+    const domProps = ensureDomProps(props, 'ol');
     return (
       <ol
-        {...props}
+        {...domProps}
         role="navigation"
         aria-label="breadcrumbs"
         className={classNames(className, this.props.bsClass)}>

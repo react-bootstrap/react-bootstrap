@@ -4,6 +4,8 @@ import elementType from 'react-prop-types/lib/elementType';
 
 import { bsClass, getClassSet } from './utils/bootstrapUtils';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const propTypes = {
   componentClass: elementType,
 };
@@ -18,9 +20,9 @@ class FormControlStatic extends React.Component {
     delete props.bsClass;
 
     const classes = getClassSet(this.props);
-
+    const domProps = ensureDomProps(props, Component);
     return (
-      <Component {...props} className={classNames(className, classes)} />
+      <Component {...domProps} className={classNames(className, classes)} />
     );
   }
 }

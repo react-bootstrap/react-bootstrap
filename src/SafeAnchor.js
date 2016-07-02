@@ -1,6 +1,8 @@
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 function isTrivialHref(href) {
   return (
     !href ||
@@ -37,9 +39,11 @@ export default class SafeAnchor extends React.Component {
       style = { pointerEvents: 'none', ...style };
     }
 
+    const domProps = ensureDomProps(props, Component);
+
     return (
       <Component
-        {...props}
+        {...domProps}
         role={role}
         href={href}
         style={style}

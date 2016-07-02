@@ -4,6 +4,8 @@ import elementType from 'react-prop-types/lib/elementType';
 
 import createChainedFunction from './utils/createChainedFunction';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const PaginationButton = React.createClass({
 
   propTypes: {
@@ -49,13 +51,15 @@ const PaginationButton = React.createClass({
 
     delete props.onSelect;
 
+    const domProps = ensureDomProps(props, ButtonComponentClass);
+
     return (
       <li
         className={classNames(className, { active, disabled })}
         style={style}
       >
         <ButtonComponentClass
-          {...props}
+          {...domProps}
           disabled={disabled}
           onClick={createChainedFunction(onClick, this.handleClick)}
         />

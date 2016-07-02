@@ -10,6 +10,8 @@ import { TAB, PANE } from './utils/tabUtils';
 
 import Fade from './Fade';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 let TabPane = React.createClass({
   propTypes: {
 
@@ -188,8 +190,10 @@ let TabPane = React.createClass({
       labelledBy = getId(eventKey, TAB) || null;
     }
 
+    const domProps = ensureDomProps(this.props, 'div');
+
     let tabPane = (
-      <div {...this.props}
+      <div {...domProps}
         id={id}
         role="tabpanel"
         aria-hidden={!visible}

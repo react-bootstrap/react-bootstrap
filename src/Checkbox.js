@@ -4,6 +4,8 @@ import warning from 'warning';
 
 import { bsClass, getClassSet, prefix } from './utils/bootstrapUtils';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const propTypes = {
   inline: React.PropTypes.bool,
   disabled: React.PropTypes.bool,
@@ -41,9 +43,11 @@ class Checkbox extends React.Component {
 
     delete props.bsClass;
 
+    const domProps = ensureDomProps(props, 'input');
+
     const input = (
       <input
-        {...props}
+        {...domProps}
         ref={inputRef}
         type="checkbox"
         disabled={disabled}

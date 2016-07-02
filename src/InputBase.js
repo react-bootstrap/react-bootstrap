@@ -4,6 +4,8 @@ import React from 'react';
 import FormGroup from './FormGroup';
 import Glyphicon from './Glyphicon';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 class InputBase extends React.Component {
   getInputDOMNode() {
     return this.refs.input;
@@ -156,24 +158,29 @@ class InputBase extends React.Component {
       return this.props.children;
     }
 
+    let domProps;
     switch (this.props.type) {
     case 'select':
+      domProps = ensureDomProps(this.props, 'select');
       return (
-        <select {...this.props} className={classNames(this.props.className, 'form-control')} ref="input" key="input">
+        <select {...domProps} className={classNames(this.props.className, 'form-control')} ref="input" key="input">
           {this.props.children}
         </select>
       );
     case 'textarea':
-      return <textarea {...this.props} className={classNames(this.props.className, 'form-control')} ref="input" key="input" />;
+      domProps = ensureDomProps(this.props, 'textarea');
+      return <textarea {...domProps} className={classNames(this.props.className, 'form-control')} ref="input" key="input" />;
     case 'static':
+      domProps = ensureDomProps(this.props, 'p');
       return (
-        <p {...this.props} className={classNames(this.props.className, 'form-control-static')} ref="input" key="input">
+        <p {...domProps} className={classNames(this.props.className, 'form-control-static')} ref="input" key="input">
           {this.props.value}
         </p>
       );
     default:
       const className = this.isCheckboxOrRadio() || this.isFile() ? '' : 'form-control';
-      return <input {...this.props} className={classNames(this.props.className, className)} ref="input" key="input" />;
+      domProps = ensureDomProps(this.props, 'input');
+      return <input {...domProps} className={classNames(this.props.className, className)} ref="input" key="input" />;
     }
   }
 

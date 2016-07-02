@@ -4,6 +4,8 @@ import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
 import { prefix } from './utils/bootstrapUtils';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Tooltip = React.createClass({
 
   propTypes: {
@@ -74,10 +76,12 @@ const Tooltip = React.createClass({
       top: this.props.arrowOffsetTop
     };
 
+    const domProps = ensureDomProps(this.props, 'div');
+
     return (
       <div
         role="tooltip"
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, classes)}
         style={style}
       >

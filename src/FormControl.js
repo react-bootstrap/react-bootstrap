@@ -8,6 +8,8 @@ import { bsClass, getClassSet } from './utils/bootstrapUtils';
 import FormControlFeedback from './FormControlFeedback';
 import FormControlStatic from './FormControlStatic';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const propTypes = {
   componentClass: elementType,
   /**
@@ -54,9 +56,11 @@ class FormControl extends React.Component {
       classes = getClassSet(this.props);
     }
 
+    const domProps = ensureDomProps(props, Component);
+
     return (
       <Component
-        {...props}
+        {...domProps}
         type={type}
         id={id}
         className={classNames(className, classes)}

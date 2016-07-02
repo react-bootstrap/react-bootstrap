@@ -4,16 +4,18 @@ import React from 'react';
 import { State, DEFAULT, PRIMARY } from './styleMaps';
 import { bsStyles, bsClass, getClassSet } from './utils/bootstrapUtils';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 @bsClass('label')
 @bsStyles(State.values().concat(DEFAULT, PRIMARY), DEFAULT)
 class Label extends React.Component {
 
   render() {
     let classes = getClassSet(this.props);
-
+    const domProps = ensureDomProps(this.props, 'span');
     return (
       <span
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, classes)}
       >
         {this.props.children}

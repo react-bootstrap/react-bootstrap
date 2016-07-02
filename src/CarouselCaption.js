@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const CarouselCaption = React.createClass({
   displayName: 'Carousel.Caption',
   propTypes: {
@@ -19,9 +21,9 @@ const CarouselCaption = React.createClass({
 
   render() {
     let ComponentClass = this.props.componentClass;
-
+    const domProps = ensureDomProps(this.props, ComponentClass);
     return (
-      <ComponentClass {...this.props} className={classNames(this.props.className, 'carousel-caption')}>
+      <ComponentClass {...domProps} className={classNames(this.props.className, 'carousel-caption')}>
         {this.props.children}
       </ComponentClass>
     );

@@ -4,6 +4,8 @@ import React from 'react';
 import { prefix } from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Badge = React.createClass({
   propTypes: {
     pullRight: React.PropTypes.bool
@@ -32,9 +34,10 @@ const Badge = React.createClass({
       'pull-right': this.props.pullRight,
       [prefix(this.props)]: this.hasContent()
     };
+    const domProps = ensureDomProps(this.props, 'span');
     return (
       <span
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, classes)}
       >
         {this.props.children}

@@ -7,6 +7,8 @@ import { bsClass, bsSizes, getClassSet } from './utils/bootstrapUtils';
 import InputGroupAddon from './InputGroupAddon';
 import InputGroupButton from './InputGroupButton';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 class InputGroup extends React.Component {
   render() {
     const { className, ...props } = this.props;
@@ -14,9 +16,9 @@ class InputGroup extends React.Component {
     delete props.bsSize;
 
     const classes = getClassSet(this.props);
-
+    const domProps = ensureDomProps(props, 'span');
     return (
-      <span {...props} className={classNames(className, classes)} />
+      <span {...domProps} className={classNames(className, classes)} />
     );
   }
 }

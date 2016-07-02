@@ -9,6 +9,8 @@ import Right from './MediaRight';
 import List from './MediaList';
 import ListItem from './MediaListItem';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 let Media = React.createClass({
   displayName: 'Media',
   propTypes: {
@@ -26,9 +28,9 @@ let Media = React.createClass({
 
   render() {
     const {componentClass: ComponentClass, className, ...props} = this.props;
-
+    const domProps = ensureDomProps(props, ComponentClass);
     return (
-      <ComponentClass {...props} className={classNames(className, 'media')}/>
+      <ComponentClass {...domProps} className={classNames(className, 'media')}/>
     );
   }
 });

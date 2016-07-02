@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import styleMaps from './styleMaps';
 import elementType from 'react-prop-types/lib/elementType';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Col = React.createClass({
   propTypes: {
     /**
@@ -211,8 +213,10 @@ const Col = React.createClass({
       }
     }, this);
 
+    const domProps = ensureDomProps(this.props, ComponentClass);
+
     return (
-      <ComponentClass {...this.props} className={classNames(this.props.className, classes)}>
+      <ComponentClass {...domProps} className={classNames(this.props.className, classes)}>
         {this.props.children}
       </ComponentClass>
     );

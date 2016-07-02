@@ -2,6 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import elementType from 'react-prop-types/lib/elementType';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Grid = React.createClass({
   propTypes: {
     /**
@@ -26,10 +28,10 @@ const Grid = React.createClass({
   render() {
     let ComponentClass = this.props.componentClass;
     let className = this.props.fluid ? 'container-fluid' : 'container';
-
+    const domProps = ensureDomProps(this.props, ComponentClass);
     return (
       <ComponentClass
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, className)}>
         {this.props.children}
       </ComponentClass>

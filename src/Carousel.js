@@ -8,6 +8,8 @@ import Caption from './CarouselCaption';
 import Item from './CarouselItem';
 import Glyphicon from './Glyphicon';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 let Carousel = React.createClass({
 
   propTypes: {
@@ -159,10 +161,10 @@ let Carousel = React.createClass({
       [prefix(this.props)]: true,
       slide: this.props.slide
     };
-
+    const domProps = ensureDomProps(this.props, 'div');
     return (
       <div
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, classes)}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}

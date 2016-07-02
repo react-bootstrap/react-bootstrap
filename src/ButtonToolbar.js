@@ -5,6 +5,8 @@ import { getClassSet } from './utils/bootstrapUtils';
 
 import Button from './Button';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const ButtonToolbar = React.createClass({
 
   propTypes: {
@@ -19,10 +21,10 @@ const ButtonToolbar = React.createClass({
 
   render() {
     let classes = getClassSet(this.props);
-
+    const domProps = ensureDomProps(this.props, 'div');
     return (
       <div
-        {...this.props}
+        {...domProps}
         role="toolbar"
         className={classNames(this.props.className, classes)}
       >
