@@ -21,7 +21,7 @@ const reactProps = {
   onFocusOut: true,
 };
 
-const validateProperty = function(tagName, name) {
+const validateProperty = (tagName, name) => {
   let warnedProperties = {};
   if (DOMProperty.properties.hasOwnProperty(name) || DOMProperty.isCustomAttribute(name)) {
     return true;
@@ -35,13 +35,16 @@ const validateProperty = function(tagName, name) {
   }
   warnedProperties[name] = true;
   const lowerCasedName = name.toLowerCase();
-  const standardName = (
-    DOMProperty.isCustomAttribute(lowerCasedName) ?
-      lowerCasedName :
-      DOMProperty.getPossibleStandardName.hasOwnProperty(lowerCasedName) ?
-        DOMProperty.getPossibleStandardName[lowerCasedName] :
-        null
-  );
+  let standardName;
+  if (DOMProperty.isCustomAttribute(lowerCasedName)) {
+    standardName = lowerCasedName;
+  } else {
+    if (DOMProperty.getPossibleStandardName.hasOwnProperty(lowerCasedName)) {
+      standardName = DOMProperty.getPossibleStandardName[lowerCasedName];
+    } else {
+      standardName = null;
+    }
+  }
   const registrationName = (
     EventPluginRegistry.possibleRegistrationNames.hasOwnProperty(
       lowerCasedName
@@ -53,17 +56,18 @@ const validateProperty = function(tagName, name) {
     return true;
   } else if (registrationName != null) {
     return true;
-  } else {
-    return false;
   }
+  return false;
 };
 
 const ensureDomProps = (props, tagName) => {
   let validProps = {};
   for (const key in props) {
-    const isValid = validateProperty(tagName, key);
-    if (isValid) {
-      validProps[`${key}`] = props[key];
+    if ({}.hasOwnProperty.call(props, key)) {
+      const isValid = validateProperty(tagName, key);
+      if (isValid) {
+        validProps[`${key}`] = props[key];
+      }
     }
   }
   return validProps;
