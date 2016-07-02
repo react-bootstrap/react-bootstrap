@@ -4,6 +4,8 @@ import $ from 'teaspoon';
 import FormControl from '../src/FormControl';
 import FormGroup from '../src/FormGroup';
 
+import ensureDomProps from '../src/utils/ensureDomProps';
+
 describe('<FormControl.Feedback>', () => {
   it('should render default success', () => {
     $(
@@ -49,7 +51,8 @@ describe('<FormControl.Feedback>', () => {
 
   it('should render custom component', () => {
     function MyComponent(props) {
-      return <div {...props} />;
+      const domProps = ensureDomProps(props, 'div');
+      return <div {...domProps} />;
     }
 
     $(

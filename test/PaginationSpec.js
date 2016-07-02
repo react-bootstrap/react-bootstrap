@@ -3,6 +3,8 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 
 import Pagination from '../src/Pagination';
 
+import ensureDomProps from '../src/utils/ensureDomProps';
+
 describe('Pagination', () => {
   it('should have class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
@@ -182,7 +184,8 @@ describe('Pagination', () => {
   it('should wrap each button in a buttonComponentClass when it is present', () => {
     class DummyElement extends React.Component {
       render() {
-        return <div {...this.props}/>;
+        const domProps = ensureDomProps(this.props, 'div');
+        return <div {...domProps}/>;
       }
     }
 
@@ -204,7 +207,8 @@ describe('Pagination', () => {
   it('should call onSelect with custom buttonComponentClass', (done) => {
     class DummyElement extends React.Component {
       render() {
-        return <div {...this.props}/>;
+        const domProps = ensureDomProps(this.props, 'div');
+        return <div {...domProps}/>;
       }
     }
 
