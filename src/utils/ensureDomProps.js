@@ -61,6 +61,14 @@ const validateProperty = (tagName, name) => {
 };
 
 const ensureDomProps = (props, tagName) => {
+  if (typeof tagName !== 'string') {
+    if (tagName == null || typeof tagName.type !== 'string') {
+      return props;
+    }
+    if (tagName.type.indexOf('-') >= 0 || tagName.props.is) {
+      return props;
+    }
+  }
   let validProps = {};
   for (const key in props) {
     if ({}.hasOwnProperty.call(props, key)) {
