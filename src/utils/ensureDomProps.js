@@ -1,7 +1,5 @@
-import React from 'react';
 import DOMProperty from 'react/lib/DOMProperty';
 import EventPluginRegistry from 'react/lib/EventPluginRegistry';
-import ReactComponentTreeDevtool from 'react/lib/ReactComponentTreeDevtool';
 
 /*
  * Inspired from https://github.com/facebook/react/blob/master/src/renderers/dom/shared/devtools/ReactDOMUnknownPropertyDevtool.js
@@ -23,9 +21,8 @@ const reactProps = {
   onFocusOut: true,
 };
 
-let warnedProperties = {};
-
 const validateProperty = function(tagName, name) {
+  let warnedProperties = {};
   if (DOMProperty.properties.hasOwnProperty(name) || DOMProperty.isCustomAttribute(name)) {
     return true;
   }
@@ -66,7 +63,7 @@ const ensureDomProps = (props, tagName) => {
   for (const key in props) {
     const isValid = validateProperty(tagName, key);
     if (isValid) {
-      validProps = Object.assign(validProps, { [`${key}`]: props[key] });
+      validProps[`${key}`] = props[key];
     }
   }
   return validProps;
