@@ -153,16 +153,16 @@ function createSimpleWrapper(tag, suffix, displayName) {
     { componentClass: Tag, className, ...props },
     { $bs_navbar_bsClass: bsClass = 'navbar' }
   ) => {
-      const domProps = ensureDomProps(props, Tag);
-      return (
-        <Tag {...domProps}
-          className={classNames(className, prefix({ bsClass }, suffix), {
-            [prefix({ bsClass }, 'right')]: props.pullRight,
-            [prefix({ bsClass }, 'left')]: props.pullLeft
-          })}
-        />
-      );
-    }
+    const domProps = ensureDomProps(props, Tag);
+    return (
+      <Tag {...domProps}
+        className={classNames(className, prefix({ bsClass }, suffix), {
+          [prefix({ bsClass }, 'right')]: props.pullRight,
+          [prefix({ bsClass }, 'left')]: props.pullLeft
+        })}
+      />
+    );
+  };
 
   wrapper.displayName = displayName;
 
