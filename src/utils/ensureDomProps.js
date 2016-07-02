@@ -61,12 +61,12 @@ const validateProperty = function(tagName, name) {
   }
 };
 
-const ensureDomProps = (element) => {
+const ensureDomProps = (props, tagName) => {
   let validProps = {};
-  for (const key in element.props) {
-    const isValid = validateProperty(element.type, key);
+  for (const key in props) {
+    const isValid = validateProperty(tagName, key);
     if (isValid) {
-      validProps = Object.assign(validProps, { [`${key}`]: element.props[key] });
+      validProps = Object.assign(validProps, { [`${key}`]: props[key] });
     }
   }
   return validProps;
