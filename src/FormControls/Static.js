@@ -6,6 +6,8 @@ import InputBase from '../InputBase';
 import childrenValueValidation from '../utils/childrenValueInputValidation';
 import deprecationWarning from '../utils/deprecationWarning';
 
+import ensureDomProps from '../utils/ensureDomProps';
+
 class Static extends InputBase {
   getValue() {
     const {children, value} = this.props;
@@ -14,8 +16,9 @@ class Static extends InputBase {
 
   renderInput() {
     const {componentClass: ComponentClass, ...props} = this.props;
+    const domProps = ensureDomProps(props, ComponentClass);
     return (
-      <ComponentClass {...props} className={classNames(props.className, 'form-control-static')} ref="input" key="input">
+      <ComponentClass {...domProps} className={classNames(props.className, 'form-control-static')} ref="input" key="input">
         {this.getValue()}
       </ComponentClass>
     );

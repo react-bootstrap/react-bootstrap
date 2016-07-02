@@ -4,6 +4,8 @@
 import React from 'react';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const REGEXP = /\%\((.+?)\)s/;
 
 const Interpolate = React.createClass({
@@ -57,7 +59,9 @@ const Interpolate = React.createClass({
 
       props.dangerouslySetInnerHTML = { __html: content };
 
-      return React.createElement(parent, props);
+      const domProps = ensureDomProps(props, parent);
+
+      return React.createElement(parent, domProps);
     }
     let kids = format.split(REGEXP).reduce((memo, match, index) => {
       let child;
@@ -78,7 +82,9 @@ const Interpolate = React.createClass({
       return memo;
     }, []);
 
-    return React.createElement(parent, props, kids);
+    const domProps = ensureDomProps(props, parent);
+
+    return React.createElement(parent, domProps, kids);
   }
 });
 

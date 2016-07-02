@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom';
 
 import Modal from '../src/Modal';
 
+import ensureDomProps from '../src/utils/ensureDomProps';
+
+
 import { render, shouldWarn } from './helpers';
 
 describe('Modal', () => {
@@ -152,7 +155,10 @@ describe('Modal', () => {
     let noOp = () => {};
 
     class CustomDialog extends React.Component {
-      render() { return <div {...this.props}/>; }
+      render() {
+        const domProps = ensureDomProps(this.props, 'div');
+        return <div {...domProps}/>;
+      }
     }
 
     let instance = render(
@@ -170,7 +176,10 @@ describe('Modal', () => {
     let noOp = () => {};
 
     class CustomDialog extends React.Component {
-      render() { return <div {...this.props}/>; }
+      render() {
+        const domProps = ensureDomProps(this.props, 'div');
+        return <div {...domProps}/>;
+      }
     }
 
     let instance = render(
