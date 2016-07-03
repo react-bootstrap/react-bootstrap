@@ -70,19 +70,9 @@ describe('Breadcrumb.Item', () => {
     ReactTestUtils.Simulate.click(anchorNode);
   });
 
-  it('Should apply id onto `li` wrapper element via `id` property', () => {
+  it('Should apply id onto the anchor', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb.Item href='#' id='test-li-id'>
-        Crumb
-      </Breadcrumb.Item>
-    );
-
-    assert.equal(ReactDOM.findDOMNode(instance).id, 'test-li-id');
-  });
-
-  it('Should apply id onto `a` inner alement via `linkId` property', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb.Item href='#' linkId='test-link-id'>
+      <Breadcrumb.Item href='#' id='test-link-id'>
         Crumb
       </Breadcrumb.Item>
     );
