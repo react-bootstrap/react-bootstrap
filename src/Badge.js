@@ -32,9 +32,10 @@ const Badge = React.createClass({
       'pull-right': this.props.pullRight,
       [prefix(this.props)]: this.hasContent()
     };
+    const { pullRight, bsClass, ...rest } = this.props;
     return (
       <span
-        {...this.props}
+        {...rest}
         className={classNames(this.props.className, classes)}
       >
         {this.props.children}
