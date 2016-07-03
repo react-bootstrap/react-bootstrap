@@ -53,12 +53,13 @@ let Alert = React.createClass({
   render() {
     let classes = getClassSet(this.props);
     let isDismissable = !!this.props.onDismiss;
-
+    const { onDismiss, dismissAfter, closeLabel, ...rest } = this.props;
+    
     classes[prefix(this.props, 'dismissable')] = isDismissable;
 
     return (
       <div
-        {...this.props}
+        {...rest}
         role="alert"
         className={classNames(this.props.className, classes)}
       >
