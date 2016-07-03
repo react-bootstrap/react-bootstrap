@@ -8,8 +8,6 @@ const Example = React.createClass({
   },
 
   render() {
-    const tooltip = <Tooltip>Tooltip overload!</Tooltip>;
-
     const sharedProps = {
       show: this.state.show,
       container: this,
@@ -23,16 +21,16 @@ const Example = React.createClass({
         </Button>
 
         <Overlay {...sharedProps} placement="left">
-          { tooltip }
+          <Tooltip id="overload-left">Tooltip overload!</Tooltip>
         </Overlay>
         <Overlay {...sharedProps} placement="top">
-          { tooltip }
+          <Tooltip id="overload-top">Tooltip overload!</Tooltip>
         </Overlay>
         <Overlay {...sharedProps} placement="right">
-          { tooltip }
+          <Tooltip id="overload-right">Tooltip overload!</Tooltip>
         </Overlay>
         <Overlay {...sharedProps} placement="bottom">
-          { tooltip }
+          <Tooltip id="overload-bottom">Tooltip overload!</Tooltip>
         </Overlay>
       </div>
     );

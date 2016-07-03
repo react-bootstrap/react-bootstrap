@@ -150,9 +150,14 @@ const Modal = React.createClass({
       , children
       , dialogClassName
       , animation
+      , style
       , ...props } = this.props;
 
     let { modalStyles } = this.state;
+
+    if (style) {
+      modalStyles = { ...modalStyles, ...style };
+    }
 
     let inClass = { in: props.show && !animation };
     let Dialog = props.dialogComponent || props.dialogComponentClass;

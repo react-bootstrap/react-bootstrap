@@ -14,7 +14,7 @@ const Example = React.createClass({
 
   render() {
     let popover = <Popover title="popover">very popover. such engagement</Popover>;
-    let tooltip = <Tooltip>wow.</Tooltip>;
+    let tooltip = <Tooltip id="tooltip-modal">wow.</Tooltip>;
 
     return (
       <div>
