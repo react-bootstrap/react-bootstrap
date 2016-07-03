@@ -10,10 +10,11 @@ class Label extends React.Component {
 
   render() {
     let classes = getClassSet(this.props);
+    const { bsStyle, bsClass, ...rest } = this.props;
 
     return (
       <span
-        {...this.props}
+        {...rest}
         className={classNames(this.props.className, classes)}
       >
         {this.props.children}
