@@ -19,7 +19,7 @@ const Breadcrumb = React.createClass({
   },
 
   render() {
-    const { className, ...props } = this.props;
+    const { className, bsClass, ...props } = this.props;
 
     return (
       <ol
