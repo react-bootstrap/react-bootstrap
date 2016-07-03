@@ -1,19 +1,15 @@
-import classNames from 'classnames';
-import uncontrollable from 'uncontrollable';
 import React, { cloneElement } from 'react';
-import Col from './Col';
+import requiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
+import uncontrollable from 'uncontrollable';
+
 import Nav from './Nav';
 import NavItem from './NavItem';
-
 import styleMaps from './styleMaps';
-import requiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
-import deprecationWarning from './utils/deprecationWarning';
-import ValidComponentChildren from './utils/ValidComponentChildren';
-
 import UncontrolledTabContainer from './TabContainer';
 import TabContent from './TabContent';
+import ValidComponentChildren from './utils/ValidComponentChildren';
 
-let TabContainer = UncontrolledTabContainer.ControlledComponent;
+const TabContainer = UncontrolledTabContainer.ControlledComponent;
 
 function getDefaultActiveKeyFromChildren(children) {
   let defaultActiveKey;
@@ -68,47 +64,11 @@ const Tabs = React.createClass({
      * Unmount tabs (remove it from the DOM) when it is no longer visible
      */
     unmountOnExit: React.PropTypes.bool,
-
-    /**
-     * @deprecated Use TabContainer to create differently shaped tab layouts.
-     */
-    position: React.PropTypes.oneOf(['top', 'left', 'right']),
-
-    /**
-     * Number of grid columns for the tabs if horizontally positioned
-     *
-     * This accepts either a single width or a mapping of size to width.
-     *
-     * @deprecated Use TabContainer to create differently shaped tab layouts.
-     */
-    tabWidth: React.PropTypes.oneOfType([
-      React.PropTypes.number,
-      React.PropTypes.object
-    ]),
-    /**
-     * Number of grid columns for the panes if horizontally positioned
-     *
-     * This accepts either a single width or a mapping of size to width. If not
-     * specified, it will be treated as `styleMaps.GRID_COLUMNS` minus
-     * `tabWidth`.
-     *
-     * @deprecated Use TabContainer to create differently shaped tab layouts.
-     */
-    paneWidth: React.PropTypes.oneOfType([
-      React.PropTypes.number,
-      React.PropTypes.object
-    ]),
-    /**
-     * Render without clearfix if horizontally positioned
-     *
-     * @deprecated Use TabContainer to create differently shaped tab layouts.
-     */
-    standalone: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
-      bsClass: 'tab',
+      bsStyle: 'tabs',
       animation: true,
       tabWidth: 2,
       position: 'top',
@@ -122,11 +82,6 @@ const Tabs = React.createClass({
       id,
       className,
       style,
-      position,
-      bsStyle,
-      tabWidth,
-      paneWidth,
-      standalone,
       children,
       onSelect,
       activeKey,
@@ -135,19 +90,10 @@ const Tabs = React.createClass({
 
     activeKey = this.getActiveKey();
 
-    const isHorizontal = position === 'left' || position === 'right';
-
-    if (bsStyle == null) {
-      bsStyle = isHorizontal ? 'pills' : 'tabs';
-    }
-
     const containerProps = { id, className, style, activeKey, onSelect };
 
     const tabsProps = {
       ...props,
-      bsStyle,
-      bsClass: undefined,
-      stacked: isHorizontal,
       ref: 'tabs',
       role: 'tablist'
     };
@@ -160,54 +106,6 @@ const Tabs = React.createClass({
       unmountOnExit: props.unmountOnExit
     };
 
-    const childPanes = children;
-
-    if (isHorizontal) {
-      deprecationWarning({
-        message: 'Horizontal Tabs (position "left" or "right") are deprecated in favor ' +
-                 'of the more flexible TabContainer component.'
-      });
-
-      if (!standalone) {
-        containerProps.className =
-          classNames(containerProps.className, 'clearfix');
-      }
-
-      const {tabsColProps, panesColProps} =
-        this.getColProps({tabWidth, paneWidth});
-
-      const tabs = (
-        <Col componentClass={Nav} {...tabsProps} {...tabsColProps}>
-          {childTabs}
-        </Col>
-      );
-      const panes = (
-        <Col componentClass={TabContent} {...panesProps} {...panesColProps}>
-          {childPanes}
-        </Col>
-      );
-
-      if (position === 'left') {
-        return (
-          <TabContainer {...containerProps}>
-            <div>
-              {tabs}
-              {panes}
-            </div>
-          </TabContainer>
-        );
-      }
-
-      return (
-        <TabContainer {...containerProps}>
-          <div>
-            {panes}
-            {tabs}
-          </div>
-        </TabContainer>
-      );
-    }
-
     return (
       <TabContainer {...containerProps}>
         <div>
@@ -216,7 +114,7 @@ const Tabs = React.createClass({
           </Nav>
 
           <TabContent {...panesProps}>
-            {childPanes}
+            {children}
           </TabContent>
         </div>
       </TabContainer>

@@ -2,13 +2,9 @@ import classNames from 'classnames';
 import React, { cloneElement, PropTypes } from 'react';
 
 import { State } from './styleMaps';
-import {
-  bsStyles, bsClass, getClassSet, prefix,
-} from './utils/bootstrapUtils';
-import deprecationWarning from './utils/deprecationWarning';
+import { bsStyles, bsClass, getClassSet, prefix }
+  from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
-
-import Interpolate from './Interpolate';
 
 /**
  * Custom propTypes checker
@@ -72,14 +68,6 @@ class ProgressBar extends React.Component {
   renderProgressBar() {
     let { className, label, now, min, max, style, ...props } = this.props;
 
-    const percentage = this.getPercentage(
-      now, min, max
-    );
-
-    if (typeof label === 'string') {
-      label = this.renderLabel(percentage);
-    }
-
     if (this.props.srOnly) {
       label = (
         <span className="sr-only">
@@ -98,38 +86,13 @@ class ProgressBar extends React.Component {
         {...props}
         className={classes}
         role="progressbar"
-        style={{ width: percentage + '%', ...style }}
+        style={{ width: `${this.getPercentage(now, min, max)}%`, ...style }}
         aria-valuenow={this.props.now}
         aria-valuemin={this.props.min}
         aria-valuemax={this.props.max}
       >
         {label}
       </div>
-    );
-  }
-
-  renderLabel(percentage) {
-    const { interpolateClass, now, min, max, bsStyle, label } = this.props;
-    const InterpolateClass = interpolateClass || Interpolate;
-
-    const { REGEXP } = InterpolateClass;
-    if (REGEXP && REGEXP.exec(label)) {
-      deprecationWarning(
-        'String interpolation in <ProgressBar label>',
-        'ES2015 template strings or other patterns'
-      );
-    }
-
-    return (
-      <InterpolateClass
-        now={now}
-        min={min}
-        max={max}
-        percent={percentage}
-        bsStyle={bsStyle}
-      >
-        {label}
-      </InterpolateClass>
     );
   }
 }
@@ -144,7 +107,6 @@ ProgressBar.propTypes = {
   active: PropTypes.bool,
   children: onlyProgressBar,
   className: React.PropTypes.string,
-  interpolateClass: PropTypes.node,
   /**
    * @private
    */

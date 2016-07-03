@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React from 'react';
-import deprecated from 'react-prop-types/lib/deprecated';
 
 import { Sizes } from './styleMaps';
 import { bsClass, bsSizes, getClassSet } from './utils/bootstrapUtils';
@@ -11,32 +10,7 @@ const propTypes = {
    * Sets `id` on `<FormControl>` and `htmlFor` on `<FormGroup.Label>`.
    */
   controlId: React.PropTypes.string,
-  /**
-   * @private
-   */
-  standalone: deprecated(
-    React.PropTypes.bool,
-    'Use a `<FormControl>` or `<InputGroup>` directly.'
-  ),
   validationState: React.PropTypes.oneOf(['success', 'warning', 'error']),
-  /**
-   * @private
-   */
-  bsStyle: deprecated(
-    React.PropTypes.oneOf(['success', 'warning', 'error']),
-    'Use `validationState`'
-  ),
-  /**
-   * @private
-   */
-  hasFeedback: deprecated(
-    React.PropTypes.bool,
-    'Use a `<FormControl.Feedback>` element.'
-  ),
-  /**
-   * @private
-   */
-  groupClassName: deprecated(React.PropTypes.string, 'Use `className`.'),
 };
 
 const childContextTypes = {
@@ -45,7 +19,7 @@ const childContextTypes = {
 
 class FormGroup extends React.Component {
   getChildContext() {
-    const { controlId, bsStyle, validationState = bsStyle } = this.props;
+    const { controlId, validationState } = this.props;
 
     return {
       $bs_formGroup: {
@@ -64,13 +38,9 @@ class FormGroup extends React.Component {
 
   render() {
     const {
-      standalone,
-      bsStyle,
-      validationState = bsStyle,
-      groupClassName,
-      className = groupClassName,
+      validationState,
+      className,
       children,
-      hasFeedback = this.hasFeedback(children),
       ...props,
     } = this.props;
 
@@ -79,8 +49,8 @@ class FormGroup extends React.Component {
     delete props.controlId;
 
     const classes = {
-      ...(!standalone && getClassSet(this.props)),
-      'has-feedback': hasFeedback,
+      ...getClassSet(this.props),
+      'has-feedback': this.hasFeedback(children),
     };
     if (validationState) {
       classes[`has-${validationState}`] = true;

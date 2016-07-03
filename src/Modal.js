@@ -8,7 +8,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import BaseModal from 'react-overlays/lib/Modal';
 import isOverflowing from 'react-overlays/lib/utils/isOverflowing';
-import deprecated from 'react-prop-types/lib/deprecated';
 import elementType from 'react-prop-types/lib/elementType';
 
 import { Sizes } from './styleMaps';
@@ -48,11 +47,6 @@ const Modal = React.createClass({
      * styles and markup to create a custom modal component.
      */
     dialogComponentClass: elementType,
-
-    /**
-     * @private
-     */
-    dialogComponent: deprecated(elementType, 'Use `dialogComponentClass`.'),
 
     /**
      * When `true` The modal will automatically shift focus to itself when it opens, and replace it to the last focused element when it closes.
@@ -160,7 +154,7 @@ const Modal = React.createClass({
     }
 
     let inClass = { in: props.show && !animation };
-    let Dialog = props.dialogComponent || props.dialogComponentClass;
+    let Dialog = props.dialogComponentClass;
 
     let parentProps = pick(props,
       Object.keys(BaseModal.propTypes).concat(

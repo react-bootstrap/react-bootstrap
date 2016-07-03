@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 import Modal from '../src/Modal';
 
-import { render, shouldWarn } from './helpers';
+import { render } from './helpers';
 
 describe('Modal', () => {
   let mountPoint;
@@ -157,24 +157,6 @@ describe('Modal', () => {
 
     let instance = render(
       <Modal show dialogComponentClass={CustomDialog} onHide={noOp}>
-        <strong>Message</strong>
-      </Modal>
-    , mountPoint);
-
-    assert.ok(instance._modal instanceof CustomDialog);
-  });
-
-  it('Should use deprecated dialogComponent', () => {
-    shouldWarn('deprecated');
-
-    let noOp = () => {};
-
-    class CustomDialog extends React.Component {
-      render() { return <div {...this.props}/>; }
-    }
-
-    let instance = render(
-      <Modal show dialogComponent={CustomDialog} onHide={noOp}>
         <strong>Message</strong>
       </Modal>
     , mountPoint);

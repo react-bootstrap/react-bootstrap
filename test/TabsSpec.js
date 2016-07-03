@@ -11,7 +11,7 @@ import Tabs from '../src/Tabs';
 
 import ValidComponentChildren from '../src/utils/ValidComponentChildren';
 
-import { render, shouldWarn } from './helpers';
+import { render } from './helpers';
 
 describe('Tabs', () => {
   it('Should show the correct tab', () => {
@@ -293,132 +293,6 @@ describe('Tabs', () => {
       );
 
       expect(cols).to.be.empty;
-    });
-  });
-
-
-  describe('when the position prop is "left"', () => {
-    beforeEach(() => {
-      shouldWarn('deprecated');
-    });
-
-    describe('when tabWidth is not provided', () => {
-      let instance;
-
-      beforeEach(() => {
-        instance = ReactTestUtils.renderIntoDocument(
-          <Tabs id='test' defaultActiveKey={1} position="left">
-            <Tab title="A Tab" eventKey={1}>Tab content</Tab>
-          </Tabs>
-        ).refs.inner;
-      });
-
-      it('Should stack the tabs', () => {
-        let nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
-
-        expect(nav.props.bsStyle).to.equal('pills');
-        expect(nav.props.stacked).to.be.ok;
-      });
-
-      it('Should have a left nav with a width of 2', () => {
-        let tabs = instance.refs.tabs;
-        let panes = instance.refs.panes;
-
-        expect(ReactDOM.findDOMNode(tabs).className).to.match(/\bcol-xs-2\b/);
-        expect(ReactDOM.findDOMNode(panes).className).to.match(/\bcol-xs-10\b/);
-      });
-
-      it('renders grid elements', () => {
-        const cols = ReactTestUtils.scryRenderedComponentsWithType(
-          instance, Col
-        );
-
-        expect(cols).to.have.length(2);
-      });
-
-      it('should render with clearfix', () => {
-        expect(ReactDOM.findDOMNode(instance).className).to.match(/\bclearfix\b/);
-      });
-    });
-
-    describe('when only tabWidth is provided', () => {
-      it('Should have a left nav with the width that was provided', () => {
-        let instance = ReactTestUtils.renderIntoDocument(
-          <Tabs id='test' defaultActiveKey={1} position="left" tabWidth={3}>
-            <Tab title="A Tab" eventKey={1}>Tab content</Tab>
-          </Tabs>
-        ).refs.inner;
-
-        let tabs = instance.refs.tabs;
-        let panes = instance.refs.panes;
-
-        expect(ReactDOM.findDOMNode(tabs).className).to.match(/\bcol-xs-3\b/);
-        expect(ReactDOM.findDOMNode(panes).className).to.match(/\bcol-xs-9\b/);
-      });
-    });
-
-    describe('when simple tabWidth and paneWidth are provided', () => {
-      let instance;
-
-      beforeEach(() => {
-        instance = ReactTestUtils.renderIntoDocument(
-          <Tabs id='test' position="left" tabWidth={4} paneWidth={7}>
-            <Tab title="A Tab" eventKey={1}>Tab content</Tab>
-          </Tabs>
-        ).refs.inner;
-      });
-
-      it('Should have the provided widths', () => {
-        let tabs = instance.refs.tabs;
-        let panes = instance.refs.panes;
-
-        expect(ReactDOM.findDOMNode(tabs).className).to.match(/\bcol-xs-4\b/);
-        expect(ReactDOM.findDOMNode(panes).className).to.match(/\bcol-xs-7\b/);
-      });
-    });
-
-    describe('when complex tabWidth and paneWidth are provided', () => {
-      let instance;
-
-      beforeEach(() => {
-        instance = ReactTestUtils.renderIntoDocument(
-          <Tabs
-            id='test'
-            position="left"
-            tabWidth={{xs: 4, md: 3}}
-            paneWidth={{xs: 7, md: 8}}
-          >
-            <Tab title="A Tab" eventKey={1}>Tab content</Tab>
-          </Tabs>
-        ).refs.inner;
-      });
-
-      it('Should have the provided widths', () => {
-        let tabs = instance.refs.tabs;
-        let panes = instance.refs.panes;
-
-        expect(ReactDOM.findDOMNode(tabs).className)
-          .to.match(/\bcol-xs-4\b/).and.to.match(/\bcol-md-3\b/);
-        expect(ReactDOM.findDOMNode(panes).className)
-          .to.match(/\bcol-xs-7\b/).and.to.match(/\bcol-md-8\b/);
-      });
-    });
-
-    describe('when standalone', () => {
-      let instance;
-
-      beforeEach(() => {
-        instance = ReactTestUtils.renderIntoDocument(
-          <Tabs id='test' defaultActiveKey={1} position="left" standalone>
-            <Tab title="A Tab" eventKey={1}>Tab content</Tab>
-          </Tabs>
-        ).refs.inner;
-      });
-
-      it('should not render with clearfix', () => {
-        expect(ReactDOM.findDOMNode(instance).className)
-          .to.not.match(/\bclearfix\b/);
-      });
     });
   });
 
