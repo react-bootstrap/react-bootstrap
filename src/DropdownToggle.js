@@ -3,21 +3,30 @@ import classNames from 'classnames';
 import Button from './Button';
 import SafeAnchor from './SafeAnchor';
 
+import { prefix, bsClass } from './utils/bootstrapUtils';
+
 const CARET = <span> <span className="caret" /></span>;
 
-export default class DropdownToggle extends React.Component {
+class DropdownToggle extends React.Component {
   render() {
-    const caret = this.props.noCaret ? null : CARET;
+    const {
+      noCaret,
+      useAnchor,
+      bsClass: bootstrapClass,
+      ...props
+    } = this.props;
+
+    const caret = noCaret ? null : CARET;
 
     const classes = {
-      'dropdown-toggle': true
+      [prefix(this.props, 'toggle')]: true
     };
 
-    const Component = this.props.useAnchor ? SafeAnchor : Button;
+    const Component = useAnchor ? SafeAnchor : Button;
 
     return (
       <Component
-        {...this.props}
+        {...props}
         className={classNames(classes, this.props.className)}
         role="button"
         aria-haspopup
@@ -45,3 +54,5 @@ DropdownToggle.propTypes = {
 DropdownToggle.isToggle = true;
 DropdownToggle.titleProp = 'title';
 DropdownToggle.onClickProp = 'onClick';
+
+export default bsClass('dropdown', DropdownToggle);
