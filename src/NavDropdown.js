@@ -1,13 +1,15 @@
 import React from 'react';
+import classNames from 'classnames';
 import Dropdown from './Dropdown';
 
 class NavDropdown extends React.Component {
 
   render() {
-    let { children, title, noCaret, ...props } = this.props;
+    let { children, title, noCaret, active, className, ...props } = this.props;
+    const classes = classNames(className, { active });
 
     return (
-      <Dropdown {...props} componentClass="li">
+      <Dropdown className={classes} {...props} componentClass="li">
         <Dropdown.Toggle
           useAnchor
           disabled={props.disabled}
@@ -26,6 +28,7 @@ class NavDropdown extends React.Component {
 NavDropdown.propTypes = {
   noCaret: React.PropTypes.bool,
   title: React.PropTypes.node.isRequired,
+  active: React.PropTypes.bool,
   ...Dropdown.propTypes
 };
 

@@ -21,8 +21,24 @@ describe('NavDropdown', () => {
     assert.equal(li.nodeName, 'LI');
     assert.ok(li.className.match(/\bdropdown\b/));
     assert.ok(li.className.match(/\btest-class\b/));
+    assert.ok(li.className.should.not.match(/\bactive\b/));
     assert.equal(button.nodeName, 'A');
     assert.equal(button.innerText.trim(), 'Title');
+  });
+
+  it('renders div with active class', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <NavDropdown active title="Title" className="test-class" id='nav-test'>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+      </NavDropdown>
+    );
+
+    let li = ReactDOM.findDOMNode(instance);
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active'));
+    assert.ok(li.className.match(/\btest-class\b/)); // it still has the given className
+    assert.ok(li.className.match(/\bactive\b/)); // plus the active class
   });
 
   it('is open with explicit prop', () => {
