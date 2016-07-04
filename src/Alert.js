@@ -1,20 +1,14 @@
 import classNames from 'classnames';
 import React from 'react';
-import deprecated from 'react-prop-types/lib/deprecated';
 
 import { State } from './styleMaps';
-import {
-  bsStyles, bsClass, getClassSet, prefix,
-} from './utils/bootstrapUtils';
+import { bsStyles, bsClass, getClassSet, prefix }
+  from './utils/bootstrapUtils';
 
 let Alert = React.createClass({
 
   propTypes: {
     onDismiss: React.PropTypes.func,
-    /**
-     * @private
-     */
-    dismissAfter: deprecated(React.PropTypes.number, 'No longer supported.'),
     closeLabel: React.PropTypes.string
   },
 
@@ -68,16 +62,6 @@ let Alert = React.createClass({
       </div>
     );
   },
-
-  componentDidMount() {
-    if (this.props.dismissAfter && this.props.onDismiss) {
-      this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter);
-    }
-  },
-
-  componentWillUnmount() {
-    clearTimeout(this.dismissTimer);
-  }
 });
 
 
