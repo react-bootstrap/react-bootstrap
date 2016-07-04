@@ -12,7 +12,7 @@ class DropdownToggle extends React.Component {
     const {
       noCaret,
       useAnchor,
-      bsClass: baseClass,
+      bsClass: bootstrapClass,
       ...props
     } = this.props;
 
