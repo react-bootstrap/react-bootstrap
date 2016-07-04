@@ -94,4 +94,13 @@ describe('DropdownToggle', () => {
 
     button.className.should.match(/\bbtn-sm\b/);
   });
+
+  it('forwards bsClass', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownToggle bsClass='my-custom-bsClass' open={false} title='bsClass forwards' />
+    );
+    const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
+
+    button.className.should.match(/\bmy-custom-bsClass-toggle\b/);
+  });
 });

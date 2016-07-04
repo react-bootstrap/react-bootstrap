@@ -254,7 +254,8 @@ class Dropdown extends React.Component {
       ref,
       open,
       id: this.props.id,
-      role: this.props.role
+      role: this.props.role,
+      bsClass: this.props.bsClass
     };
 
     toggleProps.onClick = createChainedFunction(
