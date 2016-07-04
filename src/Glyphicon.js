@@ -36,8 +36,10 @@ const Glyphicon = React.createClass({
       ['form-control-feedback']: this.props.formControlFeedback
     });
 
+	const { bsClass, glyph, formControlFeedback, ...rest } = this.props;
+
     return (
-      <span {...this.props} className={className}>
+      <span {...rest} className={className}>
         {this.props.children}
       </span>
     );
