@@ -9,17 +9,26 @@ const CARET = <span> <span className="caret" /></span>;
 
 export default class DropdownToggle extends React.Component {
   render() {
-    const caret = this.props.noCaret ? null : CARET;
+
+    const {
+      noCaret,
+      useAnchor,
+      bsClass,
+      ...props
+    } = this.props;
+
+
+    const caret = noCaret ? null : CARET;
 
     const classes = {
       [prefix(this.props, 'toggle')]: true
     };
 
-    const Component = this.props.useAnchor ? SafeAnchor : Button;
+    const Component = useAnchor ? SafeAnchor : Button;
 
     return (
       <Component
-        {...this.props}
+        {...props}
         className={classNames(classes, this.props.className)}
         role="button"
         aria-haspopup
@@ -33,11 +42,13 @@ export default class DropdownToggle extends React.Component {
 DropdownToggle.defaultProps = {
   open: false,
   useAnchor: false,
-  bsRole: 'toggle'
+  bsRole: 'toggle',
+  bsClass: 'dropdown'
 };
 
 DropdownToggle.propTypes = {
   bsRole: React.PropTypes.string,
+  bsClass: React.PropTypes.string,
   noCaret: React.PropTypes.bool,
   open: React.PropTypes.bool,
   title: React.PropTypes.string,
