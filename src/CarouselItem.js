@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { prefix } from './utils/bootstrapUtils';
 import TransitionEvents from './utils/TransitionEvents';
 
 const CarouselItem = React.createClass({
@@ -12,7 +11,6 @@ const CarouselItem = React.createClass({
     active: React.PropTypes.bool,
     animateIn: React.PropTypes.bool,
     animateOut: React.PropTypes.bool,
-    caption: React.PropTypes.node,
     index: React.PropTypes.number
   },
 
@@ -84,20 +82,9 @@ const CarouselItem = React.createClass({
     return (
       <div {...this.props} className={classNames(this.props.className, classes)}>
         {this.props.children}
-        {this.props.caption ? this.renderCaption() : null}
       </div>
     );
   },
-
-  renderCaption() {
-    let classes = prefix(this.props, 'caption');
-
-    return (
-      <div className={classes}>
-        {this.props.caption}
-      </div>
-    );
-  }
 });
 
 export default CarouselItem;
