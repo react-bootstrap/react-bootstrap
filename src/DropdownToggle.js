@@ -3,16 +3,16 @@ import classNames from 'classnames';
 import Button from './Button';
 import SafeAnchor from './SafeAnchor';
 
-import { prefix } from './utils/bootstrapUtils';
+import { prefix, bsClass } from './utils/bootstrapUtils';
 
 const CARET = <span> <span className="caret" /></span>;
 
-export default class DropdownToggle extends React.Component {
+class DropdownToggle extends React.Component {
   render() {
     const {
       noCaret,
       useAnchor,
-      bsClass,
+      bsClass: baseClass,
       ...props
     } = this.props;
 
@@ -40,13 +40,11 @@ export default class DropdownToggle extends React.Component {
 DropdownToggle.defaultProps = {
   open: false,
   useAnchor: false,
-  bsRole: 'toggle',
-  bsClass: 'dropdown'
+  bsRole: 'toggle'
 };
 
 DropdownToggle.propTypes = {
   bsRole: React.PropTypes.string,
-  bsClass: React.PropTypes.string,
   noCaret: React.PropTypes.bool,
   open: React.PropTypes.bool,
   title: React.PropTypes.string,
@@ -56,3 +54,5 @@ DropdownToggle.propTypes = {
 DropdownToggle.isToggle = true;
 DropdownToggle.titleProp = 'title';
 DropdownToggle.onClickProp = 'onClick';
+
+export default bsClass('dropdown', DropdownToggle);
