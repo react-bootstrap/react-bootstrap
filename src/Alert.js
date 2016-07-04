@@ -6,6 +6,9 @@ import { State } from './styleMaps';
 import {
   bsStyles, bsClass, getClassSet, prefix,
 } from './utils/bootstrapUtils';
+import { omit } from './utils/sanitizeProps';
+
+const PROPS_TO_OMIT = ['onDismiss', 'dismissAfter', 'closeLabel'];
 
 let Alert = React.createClass({
 
@@ -53,12 +56,13 @@ let Alert = React.createClass({
   render() {
     let classes = getClassSet(this.props);
     let isDismissable = !!this.props.onDismiss;
+    const props = omit(this.props, PROPS_TO_OMIT);
 
     classes[prefix(this.props, 'dismissable')] = isDismissable;
 
     return (
       <div
-        {...this.props}
+        {...props}
         role="alert"
         className={classNames(this.props.className, classes)}
       >
@@ -79,7 +83,6 @@ let Alert = React.createClass({
     clearTimeout(this.dismissTimer);
   }
 });
-
 
 export default bsStyles(State.values(), State.INFO,
   bsClass('alert', Alert)
