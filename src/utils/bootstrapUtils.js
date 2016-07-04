@@ -1,6 +1,7 @@
 import { PropTypes } from 'react';
 import styleMaps from '../styleMaps';
 import invariant from 'invariant';
+import omit from 'lodash-compat/object/omit';
 
 function curry(fn) {
   return (...args) => {
@@ -135,3 +136,7 @@ export function addStyle(Component, ...styleVariant) {
 }
 
 export const _curry = curry;
+
+export const omitProps = (props, keys) {
+  return omit(props, [...keys, 'bsRole', 'bsStyle', 'bsClass']);
+};

@@ -1,8 +1,10 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { prefix } from './utils/bootstrapUtils';
+import { prefix, omitProps } from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
+
+const PROPS_TO_OMIT = ['pullRight'];
 
 const Badge = React.createClass({
   propTypes: {
@@ -32,10 +34,12 @@ const Badge = React.createClass({
       'pull-right': this.props.pullRight,
       [prefix(this.props)]: this.hasContent()
     };
-    const { pullRight, bsClass, ...rest } = this.props;
+
+    const props = omitProps(this.props, PROPS_TO_OMIT);
+
     return (
       <span
-        {...rest}
+        {...props}
         className={classNames(this.props.className, classes)}
       >
         {this.props.children}
