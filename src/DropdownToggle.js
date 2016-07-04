@@ -9,14 +9,12 @@ const CARET = <span> <span className="caret" /></span>;
 
 export default class DropdownToggle extends React.Component {
   render() {
-
     const {
       noCaret,
       useAnchor,
       bsClass,
       ...props
     } = this.props;
-
 
     const caret = noCaret ? null : CARET;
 
