@@ -1,7 +1,5 @@
 import React from 'react';
 
-// FIXME: This should really be ValidElementChildren.
-
 /**
  * Iterates through children that are typically specified as `props.children`,
  * but only maps over children that are "valid components".
@@ -137,6 +135,20 @@ function some(children, func, context) {
   return result;
 }
 
+function toArray(children) {
+  const result = [];
+
+  React.Children.forEach(children, child => {
+    if (!React.isValidElement(child)) {
+      return;
+    }
+
+    result.push(child);
+  });
+
+  return result;
+}
+
 export default {
   map,
   forEach,
@@ -144,4 +156,5 @@ export default {
   find,
   filter,
   some,
+  toArray,
 };
