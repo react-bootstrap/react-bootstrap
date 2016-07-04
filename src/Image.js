@@ -42,9 +42,11 @@ const Image = React.createClass({
       'img-circle': this.props.circle,
       'img-thumbnail': this.props.thumbnail
     };
+    
+    const { responsive, rounded, circle, thumbnail, ...rest } = this.props;
 
     return (
-      <img {...this.props} className={classNames(this.props.className, classes)} />
+      <img {...rest} className={classNames(this.props.className, classes)} />
     );
   }
 });
