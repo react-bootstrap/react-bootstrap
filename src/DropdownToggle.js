@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import Button from './Button';
 import SafeAnchor from './SafeAnchor';
 
+import { prefix } from './utils/bootstrapUtils';
+
 const CARET = <span> <span className="caret" /></span>;
 
 export default class DropdownToggle extends React.Component {
@@ -10,7 +12,7 @@ export default class DropdownToggle extends React.Component {
     const caret = this.props.noCaret ? null : CARET;
 
     const classes = {
-      'dropdown-toggle': true
+      [prefix(this.props, 'toggle')]: true
     };
 
     const Component = this.props.useAnchor ? SafeAnchor : Button;
