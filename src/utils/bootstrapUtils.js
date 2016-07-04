@@ -137,6 +137,6 @@ export function addStyle(Component, ...styleVariant) {
 
 export const _curry = curry;
 
-export const omitProps = (props, keys) {
+export const omitProps = (props, keys) => {
   return omit(props, [...keys, 'bsRole', 'bsStyle', 'bsClass']);
 };
