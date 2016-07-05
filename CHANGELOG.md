@@ -1,3 +1,20 @@
+## [next] \(v0.30.0\)
+> _Unreleased_
+
+- **Breaking:** Remove `linkId` prop from `<Breadcrumb.Item>` and use `id` prop to set link `id` attribute, for consistency with other wrapped link components ([#2011])
+- **Breaking:** Remove deprecated functionality from v0.29.x ([#2017])
+- **Breaking:** Remove redundant `caption` prop from `<Carousel.Item>`, as this functionality is available from `<Carousel.Caption>` ([#2018])
+- **Feature/Deprecation:** Rename `<PageItem>` to <Pager.Item>` for consistency ([#1976])
+- **Feature:** Add `ValidComponentChildren.toArray` ([#2016])
+
+[next]: https://github.com/react-bootstrap/react-bootstrap/compare/master...next
+[#1976]: https://github.com/react-bootstrap/react-bootstrap/pull/1976
+[#2011]: https://github.com/react-bootstrap/react-bootstrap/pull/2011
+[#2016]: https://github.com/react-bootstrap/react-bootstrap/pull/2016
+[#2017]: https://github.com/react-bootstrap/react-bootstrap/pull/2017
+[#2018]: https://github.com/react-bootstrap/react-bootstrap/pull/2018
+
+
 ## [HEAD] \(v0.29.6\)
 > _Unreleased_
 
