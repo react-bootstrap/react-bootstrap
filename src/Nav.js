@@ -9,7 +9,7 @@ import {
   bsStyles, bsClass as _bsClass, getClassSet, prefix,
 } from './utils/bootstrapUtils';
 import chain from './utils/createChainedFunction';
-import { nextEnabled, TAB, PANE } from './utils/tabUtils';
+import { nextEnabled, PANE, TAB } from './utils/TabUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 class Nav extends React.Component {
