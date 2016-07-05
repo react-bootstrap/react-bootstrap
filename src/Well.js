@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { Sizes } from './styleMaps';
 import { bsSizes, bsClass, getClassSet, omitBsProps }
   from './utils/bootstrapUtils';
+import { Size } from './utils/StyleConfig';
 
 class Well extends React.Component {
   render() {
@@ -21,5 +21,5 @@ class Well extends React.Component {
 }
 
 export default bsClass('well',
-  bsSizes([Sizes.LARGE, Sizes.SMALL], Well)
+  bsSizes([Size.LARGE, Size.SMALL], Well)
 );

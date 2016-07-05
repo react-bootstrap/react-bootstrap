@@ -3,12 +3,15 @@ import React from 'react';
 
 import { prefix } from './utils/bootstrapUtils';
 
-class NavbarBrand extends React.Component {
+const contextTypes = {
+  $bs_navbar_bsClass: React.PropTypes.string
+};
 
+class NavbarBrand extends React.Component {
   render() {
-    const {className, children, ...props} = this.props;
-    let { $bs_navbar_bsClass: bsClass = 'navbar' } = this.context;
-    let brandClasses = prefix({ bsClass }, 'brand');
+    const { className, children, ...props } = this.props;
+    const { $bs_navbar_bsClass: bsClass = 'navbar' } = this.context;
+    const brandClasses = prefix({ bsClass }, 'brand');
 
     if (React.isValidElement(children)) {
       return React.cloneElement(children, {
@@ -26,8 +29,6 @@ class NavbarBrand extends React.Component {
   }
 }
 
-NavbarBrand.contextTypes = {
-  $bs_navbar_bsClass: React.PropTypes.string
-};
+NavbarBrand.contextTypes = contextTypes;
 
 export default NavbarBrand;

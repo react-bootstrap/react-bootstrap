@@ -161,11 +161,11 @@ describe('OverlayTrigger', () => {
     [
       {
         name: 'Popover',
-        overlay: (<Popover>test</Popover>)
+        overlay: (<Popover id="test-popover">test</Popover>)
       },
       {
         name: 'Tooltip',
-        overlay: (<Tooltip>test</Tooltip>)
+        overlay: (<Tooltip id="test-tooltip">test</Tooltip>)
       }
     ].forEach( testCase => {
       describe(testCase.name, () => {

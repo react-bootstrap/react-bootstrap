@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Thumbnail from '../src/Thumbnail';
 
-describe('Thumbnail', () => {
+describe('<Thumbnail>', () => {
   it('Should have a thumbnail class and be an anchor', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Thumbnail href="#" src="#" alt="test" />

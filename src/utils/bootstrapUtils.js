@@ -1,8 +1,10 @@
+// TODO: The publicly exposed parts of this should be in lib/BootstrapUtils.
+
 import omit from 'lodash-compat/object/omit';
 import invariant from 'invariant';
 import { PropTypes } from 'react';
 
-import styleMaps from '../styleMaps';
+import { SIZE_MAP } from './StyleConfig';
 
 function curry(fn) {
   return (...args) => {
@@ -82,7 +84,7 @@ export const bsSizes = curry((sizes, defaultSize, Component) => {
 
   const values = [];
   existing.forEach(size => {
-    const mappedSize = styleMaps.SIZES[size];
+    const mappedSize = SIZE_MAP[size];
     if (mappedSize && mappedSize !== size) {
       values.push(mappedSize);
     }
@@ -117,7 +119,7 @@ export function getClassSet(props) {
   };
 
   if (props.bsSize) {
-    const bsSize = styleMaps.SIZES[props.bsSize] || bsSize;
+    const bsSize = SIZE_MAP[props.bsSize] || props.bsSize;
     classes[prefix(props, bsSize)] = true;
   }
 

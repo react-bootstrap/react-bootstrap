@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { State } from './styleMaps';
 import { bsStyles, bsClass, getClassSet, omitBsProps, prefix }
   from './utils/bootstrapUtils';
+import { State } from './utils/StyleConfig';
 
 const propTypes = {
   onDismiss: React.PropTypes.func,

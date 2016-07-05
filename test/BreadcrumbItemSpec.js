@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Breadcrumb from '../src/Breadcrumb';
 
-describe('Breadcrumb.Item', () => {
+describe('<Breadcrumb.Item>', () => {
   it('Should render `a` as inner element when is not active', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Breadcrumb.Item href='#'>

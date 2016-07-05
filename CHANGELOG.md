@@ -13,6 +13,9 @@
 - **Bugfix:** Do not pass arbitrary props to DOM nodes ([#2026])
 - **Bugfix:** Support strings for `positionTop` and `positionLeft` on `<Popover>` and `<Tooltip>` ([#2026])
 - **Bugfix:** Support captions on `<Thumbnail>` links ([#2026])
+- **Bugfix:** Don't ignore `componentClass` on `<ListGroup>` when using only `<ListGroupItem>` children ([#2026])
+- **Bugfix:** Don't assign default `key` to `<ListGroup>`, `PanelGroup`, `<Pager>`, or `<ProgressBar>` children ([#2026])
+- **Bugfix:** Remove pointless update-deferral-during-`onSelect` logic in `<PanelGroup>` ([#2026])
 
 [next]: https://github.com/react-bootstrap/react-bootstrap/compare/master...next
 [#1976]: https://github.com/react-bootstrap/react-bootstrap/pull/1976

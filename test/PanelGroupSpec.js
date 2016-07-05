@@ -4,9 +4,9 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Panel from '../src/Panel';
 import PanelGroup from '../src/PanelGroup';
 
-import {getOne} from './helpers';
+import { getOne } from './helpers';
 
-describe('PanelGroup', () => {
+describe('<PanelGroup>', () => {
   it('Should pass bsStyle to Panels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup bsStyle="default">

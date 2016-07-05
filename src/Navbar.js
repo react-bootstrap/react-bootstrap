@@ -4,10 +4,10 @@ import React, { PropTypes } from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 import uncontrollable from 'uncontrollable';
 
-import { DEFAULT, INVERSE } from './styleMaps';
 import {
   bsClass as bsClasses, bsStyles, getClassSet, prefix,
 } from './utils/bootstrapUtils';
+import { Style } from './utils/StyleConfig';
 
 import Grid from './Grid';
 import NavbarBrand from './NavbarBrand';
@@ -117,7 +117,7 @@ let Navbar = React.createClass({
     }
 
     if (inverse) {
-      props.bsStyle = INVERSE;
+      props.bsStyle = Style.INVERSE;
     }
 
     const classes = getClassSet(props);
@@ -136,9 +136,9 @@ let Navbar = React.createClass({
   }
 });
 
-const NAVBAR_STATES = [DEFAULT, INVERSE];
+const NAVBAR_STYLES = [Style.DEFAULT, Style.INVERSE];
 
-Navbar = bsStyles(NAVBAR_STATES, DEFAULT,
+Navbar = bsStyles(NAVBAR_STYLES, Style.DEFAULT,
   bsClasses('navbar',
     uncontrollable(Navbar, { expanded: 'onToggle' })
   )

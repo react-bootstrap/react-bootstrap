@@ -1,12 +1,11 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 
-import { State, PRIMARY, DEFAULT } from './styleMaps';
+import Collapse from './Collapse';
 import {
   bsStyles, bsClass, getClassSet, prefix,
 } from './utils/bootstrapUtils';
-
-import Collapse from './Collapse';
+import { State, Style } from './utils/StyleConfig';
 
 let Panel = React.createClass({
 
@@ -46,6 +45,7 @@ let Panel = React.createClass({
   },
 
   handleSelect(e) {
+    // FIXME: What the heck? This API is horrible. This needs to go away!
     e.persist();
     e.selected = true;
 
@@ -241,8 +241,6 @@ let Panel = React.createClass({
   }
 });
 
-const PANEL_STATES = [...Object.values(State), DEFAULT, PRIMARY];
-
-export default bsStyles(PANEL_STATES, DEFAULT,
-  bsClass('panel', Panel)
+export default bsClass('panel',
+  bsStyles([...Object.values(State), Style.DEFAULT, Style.PRIMARY], Panel)
 );

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import ListGroupItem from '../src/ListGroupItem';
 
-describe('ListGroupItem', () => {
+describe('<ListGroupItem>', () => {
 
   it('Should output a "span" with the class "list-group-item"', () => {
     let instance = ReactTestUtils.renderIntoDocument(

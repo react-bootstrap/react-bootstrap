@@ -2,9 +2,9 @@ import classNames from 'classnames';
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
-import { Sizes, State, DEFAULT, PRIMARY, LINK } from './styleMaps';
 import { bsStyles, bsSizes, bsClass, getClassSet, omitBsProps, prefix }
   from './utils/bootstrapUtils';
+import { Size, State, Style } from './utils/StyleConfig';
 
 import SafeAnchor from './SafeAnchor';
 
@@ -72,9 +72,10 @@ Button.propTypes = propTypes;
 Button.defaultProps = defaultProps;
 
 export default bsStyles(
-  [...Object.values(State), DEFAULT, PRIMARY, LINK], DEFAULT,
+  [...Object.values(State), Style.DEFAULT, Style.PRIMARY, Style.LINK],
+  Style.DEFAULT,
   bsSizes(
-    [Sizes.LARGE, Sizes.SMALL, Sizes.XSMALL],
+    [Size.LARGE, Size.SMALL, Size.XSMALL],
     bsClass('btn', Button)
   )
 );

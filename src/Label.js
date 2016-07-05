@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { State, DEFAULT, PRIMARY } from './styleMaps';
 import { bsClass, bsStyles, getClassSet, omitBsProps }
   from './utils/bootstrapUtils';
+import { State, Style } from './utils/StyleConfig';
 
 class Label extends React.Component {
   hasContent(children) {
@@ -44,7 +44,9 @@ class Label extends React.Component {
 }
 
 export default bsClass('label',
-  bsStyles([...Object.values(State), DEFAULT, PRIMARY], DEFAULT,
+  bsStyles(
+    [...Object.values(State), Style.DEFAULT, Style.PRIMARY],
+    Style.DEFAULT,
     Label
   )
 );

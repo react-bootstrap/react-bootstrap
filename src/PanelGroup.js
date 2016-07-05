@@ -1,92 +1,98 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 
-import { bsClass, getClassSet } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
+import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
-const PanelGroup = React.createClass({
+const propTypes = {
+  accordion: React.PropTypes.bool,
+  activeKey: React.PropTypes.any,
+  className: React.PropTypes.string,
+  children: React.PropTypes.node,
+  defaultActiveKey: React.PropTypes.any,
+  onSelect: React.PropTypes.func,
+};
 
+const defaultProps = {
+  accordion: false,
+};
 
-  propTypes: {
-    accordion: React.PropTypes.bool,
-    activeKey: React.PropTypes.any,
-    className: React.PropTypes.string,
-    children: React.PropTypes.node,
-    defaultActiveKey: React.PropTypes.any,
-    onSelect: React.PropTypes.func
-  },
+class PanelGroup extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-  getDefaultProps() {
-    return {
-      accordion: false
+    this.handleSelect = this.handleSelect.bind(this);
+
+    this.state = {
+      activeKey: props.defaultActiveKey,
     };
-  },
-
-  getInitialState() {
-    let defaultActiveKey = this.props.defaultActiveKey;
-
-    return {
-      activeKey: defaultActiveKey
-    };
-  },
-
-  render() {
-    let classes = getClassSet(this.props);
-    let {className, ...props} = this.props;
-    if (this.props.accordion) { props.role = 'tablist'; }
-    return (
-      <div {...props} className={classNames(className, classes)} onSelect={null}>
-        {ValidComponentChildren.map(props.children, this.renderPanel)}
-      </div>
-    );
-  },
-
-  renderPanel(child, index) {
-    let activeKey =
-      this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
-
-    let props = {
-      bsStyle: child.props.bsStyle || this.props.bsStyle,
-      key: child.key ? child.key : index,
-      ref: child.ref
-    };
-
-    if (this.props.accordion) {
-      props.headerRole = 'tab';
-      props.panelRole = 'tabpanel';
-      props.collapsible = true;
-      props.expanded = (child.props.eventKey === activeKey);
-      props.onSelect = this.handleSelect;
-    }
-
-    return cloneElement(
-      child,
-      props
-    );
-  },
-
-  shouldComponentUpdate() {
-    // Defer any updates to this component during the `onSelect` handler.
-    return !this._isChanging;
-  },
+  }
 
   handleSelect(key, e) {
     e.preventDefault();
 
     if (this.props.onSelect) {
-      this._isChanging = true;
       this.props.onSelect(key, e);
-      this._isChanging = false;
     }
 
     if (this.state.activeKey === key) {
       key = null;
     }
 
-    this.setState({
-      activeKey: key
-    });
+    this.setState({ activeKey: key });
   }
-});
+
+  render() {
+    const {
+      accordion,
+      activeKey: activeKeyProp,
+      className,
+      children,
+      ...props,
+    } = this.props;
+
+    delete props.defaultActiveKey;
+    delete props.onSelect;
+
+    let activeKey;
+    if (accordion) {
+      activeKey = activeKeyProp != null ? activeKeyProp : this.state.activeKey;
+      props.role = props.role || 'tablist';
+    }
+
+    const classes = getClassSet(props);
+
+    return (
+      <div
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
+      >
+        {ValidComponentChildren.map(children, child => {
+          const childProps = {
+            bsStyle: child.props.bsStyle || props.bsStyle,
+          };
+
+          if (accordion) {
+            Object.assign(childProps, {
+              headerRole: 'tab',
+              panelRole: 'tabpanel',
+              collapsible: true,
+              expanded: child.props.eventKey === activeKey,
+              onSelect: createChainedFunction(
+                this.handleSelect, child.props.onSelect
+              )
+            });
+          }
+
+          return cloneElement(child, childProps);
+        })}
+      </div>
+    );
+  }
+}
+
+PanelGroup.propTypes = propTypes;
+PanelGroup.defaultProps = defaultProps;
 
 export default bsClass('panel-group', PanelGroup);

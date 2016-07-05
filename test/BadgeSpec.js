@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Badge from '../src/Badge';
 
-describe('Badge', () => {
+describe('<Badge>', () => {
   it('Should output a badge with content', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>

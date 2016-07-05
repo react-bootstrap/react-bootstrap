@@ -12,25 +12,20 @@ import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 import uncontrollable from 'uncontrollable';
 import warning from 'warning';
 
+import ButtonGroup from './ButtonGroup';
+import DropdownMenu from './DropdownMenu';
+import DropdownToggle from './DropdownToggle';
 import { prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 import { exclusiveRoles, requiredRoles } from './utils/PropTypes';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
-import ButtonGroup from './ButtonGroup';
-import DropdownMenu from './DropdownMenu';
-import DropdownToggle from './DropdownToggle';
-
 const TOGGLE_ROLE = DropdownToggle.defaultProps.bsRole;
 const MENU_ROLE = DropdownMenu.defaultProps.bsRole;
 
 class Dropdown extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.Toggle = DropdownToggle;
-
+  constructor(props, context) {
+    super(props, context);
     this.toggleOpen = this.toggleOpen.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);

@@ -16,7 +16,7 @@ class FormControlStatic extends React.Component {
   render() {
     const { componentClass: Component, className, ...props } = this.props;
 
-    const classes = getClassSet(this.props);
+    const classes = getClassSet(props);
 
     return (
       <Component
