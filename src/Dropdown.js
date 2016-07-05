@@ -14,7 +14,7 @@ import warning from 'warning';
 
 import { prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
-import CustomPropTypes from './utils/CustomPropTypes';
+import { exclusiveRoles, requiredRoles } from './utils/PropTypes';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 import ButtonGroup from './ButtonGroup';
@@ -310,8 +310,8 @@ Dropdown.propTypes = {
    * @type {node}
    */
   children: all(
-    CustomPropTypes.requiredRoles(TOGGLE_ROLE, MENU_ROLE),
-    CustomPropTypes.exclusiveRoles(MENU_ROLE)
+    requiredRoles(TOGGLE_ROLE, MENU_ROLE),
+    exclusiveRoles(MENU_ROLE)
   ),
 
   /**
