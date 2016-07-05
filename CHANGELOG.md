@@ -1,7 +1,7 @@
 ## [next] \(v0.30.0\)
 > _Unreleased_
 
-- **Breaking:** Remove `linkId` prop from `<Breadcrumb.Item>` and use `id` prop to set link `id` attribute, for consistency with other wrapped link components ([#2011])
+- **Breaking:** Remove `linkId` prop from `<Breadcrumb.Item>`, for consistency with other wrapped link components ([#2011])
 - **Breaking:** Remove deprecated functionality from v0.29.x ([#2017])
 - **Breaking:** Remove redundant `caption` prop from `<Carousel.Item>`, as this functionality is available from `<Carousel.Caption>` ([#2018])
 - **Feature/Deprecation:** Rename `<PageItem>` to <Pager.Item>` for consistency ([#1976])
