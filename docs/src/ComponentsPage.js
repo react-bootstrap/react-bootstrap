@@ -104,9 +104,14 @@ const sections = {
 
 let ScrollSpy = ({ href, onBefore, onAfter }) => (
   <Waypoint
-    onEnter={(e, dir) => dir === 'above' && onBefore(href)}
-    onLeave={(e, dir) => dir === 'above' && onAfter(href)}
-    threshold={-0.02}
+    onEnter={({ previousPosition }) => (
+      previousPosition === Waypoint.above && onBefore(href)
+    )}
+    onLeave={({ currentPosition }) => (
+      currentPosition === Waypoint.above && onAfter(href)
+    )}
+    topOffset={10}
+    bottomOffset={-10}
   />
 );
 
