@@ -109,7 +109,7 @@ ListGroupItem.defaultTypes = {
   listItem: false
 };
 
-export default bsStyles(State.values(),
+export default bsStyles(Object.values(State),
   bsClass('list-group-item',
     ListGroupItem
   )

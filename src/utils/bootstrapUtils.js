@@ -1,6 +1,8 @@
-import { PropTypes } from 'react';
-import styleMaps from '../styleMaps';
+import omit from 'lodash-compat/object/omit';
 import invariant from 'invariant';
+import { PropTypes } from 'react';
+
+import styleMaps from '../styleMaps';
 
 function curry(fn) {
   return (...args) => {
@@ -124,6 +126,10 @@ export function getClassSet(props) {
   }
 
   return classes;
+}
+
+export function omitBsProps(props) {
+  return omit(props, ['bsClass', 'bsSize', 'bsStyle']);
 }
 
 /**

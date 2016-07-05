@@ -1,42 +1,35 @@
-import React, { cloneElement } from 'react';
 import classNames from 'classnames';
-import ValidComponentChildren from './utils/ValidComponentChildren';
+import React, { cloneElement } from 'react';
+
 import BreadcrumbItem from './BreadcrumbItem';
+import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
+import ValidComponentChildren from './utils/ValidComponentChildren';
 
-const Breadcrumb = React.createClass({
-  propTypes: {
-    /**
-     * bootstrap className
-     * @private
-     */
-    bsClass: React.PropTypes.string
-  },
-
-  getDefaultProps() {
-    return {
-      bsClass: 'breadcrumb'
-    };
-  },
-
-  render() {
-    const { className, ...props } = this.props;
-
-    return (
-      <ol
-        {...props}
-        role="navigation"
-        aria-label="breadcrumbs"
-        className={classNames(className, this.props.bsClass)}>
-        {ValidComponentChildren.map(this.props.children, this.renderBreadcrumbItem)}
-      </ol>
-    );
-  },
-
+class Breadcrumb extends React.Component {
   renderBreadcrumbItem(child, index) {
     return cloneElement(child, { key: child.key || index });
   }
-});
+
+  render() {
+    const { className, children, ...props } = this.props;
+
+    const classes = getClassSet(props);
+
+    return (
+      <ol
+        {...omitBsProps(props)}
+        role="navigation"
+        aria-label="breadcrumbs"
+        className={classNames(className, classes)}
+      >
+        {ValidComponentChildren.map(children, (child, index) => (
+          this.renderBreadcrumbItem(child, index))
+        )}
+      </ol>
+    );
+  }
+}
 
 Breadcrumb.Item = BreadcrumbItem;
 
-export default Breadcrumb;
+export default bsClass('breadcrumb', Breadcrumb);

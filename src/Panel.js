@@ -241,7 +241,7 @@ let Panel = React.createClass({
   }
 });
 
-const PANEL_STATES = State.values().concat(DEFAULT, PRIMARY);
+const PANEL_STATES = [...Object.values(State), DEFAULT, PRIMARY];
 
 export default bsStyles(PANEL_STATES, DEFAULT,
   bsClass('panel', Panel)

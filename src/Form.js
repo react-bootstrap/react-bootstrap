@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
-import { bsClass, prefix } from './utils/bootstrapUtils';
+import { bsClass, omitBsProps, prefix } from './utils/bootstrapUtils';
 
 const propTypes = {
   horizontal: React.PropTypes.bool,
@@ -22,18 +22,19 @@ class Form extends React.Component {
       horizontal, inline, componentClass: Component, className, ...props,
     } = this.props;
 
-    delete props.bsClass;
-
     const classes = [];
     if (horizontal) {
-      classes.push(prefix(this.props, 'horizontal'));
+      classes.push(prefix(props, 'horizontal'));
     }
     if (inline) {
-      classes.push(prefix(this.props, 'inline'));
+      classes.push(prefix(props, 'inline'));
     }
 
     return (
-      <Component {...props} className={classNames(className, classes)} />
+      <Component
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
+      />
     );
   }
 }

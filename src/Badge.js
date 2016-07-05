@@ -1,46 +1,56 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { prefix } from './utils/bootstrapUtils';
-import ValidComponentChildren from './utils/ValidComponentChildren';
+import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
 
-const Badge = React.createClass({
-  propTypes: {
-    pullRight: React.PropTypes.bool
-  },
+const propTypes = {
+  pullRight: React.PropTypes.bool,
+};
 
-  getDefaultProps() {
-    return {
-      pullRight: false,
-      bsClass: 'badge'
-    };
-  },
+const defaultProps = {
+  pullRight: false,
+};
 
-  hasContent() {
-    const { children } = this.props;
+class Badge extends React.Component {
+  hasContent(children) {
+    let result = false;
 
-    return (
-      ValidComponentChildren.count(children) > 0 ||
-      React.Children.count(children) > 1 ||
-      typeof children === 'string' ||
-      typeof children === 'number'
-    );
-  },
+    React.Children.forEach(children, child => {
+      if (result) {
+        return;
+      }
+
+      if (child != null && child !== false) {
+        result = true;
+      }
+    });
+
+    return result;
+  }
 
   render() {
-    let classes = {
-      'pull-right': this.props.pullRight,
-      [prefix(this.props)]: this.hasContent()
+    const { pullRight, className, children, ...props } = this.props;
+
+    const classes = {
+      ...getClassSet(props),
+      'pull-right': pullRight,
+
+      // Hack for collapsing on IE8.
+      hidden: !this.hasContent(children),
     };
+
     return (
       <span
-        {...this.props}
-        className={classNames(this.props.className, classes)}
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
       >
-        {this.props.children}
+        {children}
       </span>
     );
   }
-});
+}
 
-export default Badge;
+Badge.propTypes = propTypes;
+Badge.defaultProps = defaultProps;
+
+export default bsClass('badge', Badge);

@@ -46,4 +46,16 @@ describe('Thumbnail', () => {
     );
     assert.ok(ReactDOM.findDOMNode(instance).lastChild.className.match(/\bcaption\b/));
   });
+
+  it('Should have an inner div with class caption in an anchor', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Thumbnail href="#" src="#" alt="test">
+        Test
+        <div>
+          Test child element
+        </div>
+      </Thumbnail>
+    );
+    assert.ok(ReactDOM.findDOMNode(instance).lastChild.className.match(/\bcaption\b/));
+  });
 });

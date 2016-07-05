@@ -122,7 +122,7 @@ ProgressBar.defaultProps = {
   striped: false
 };
 
-export default bsStyles(State.values(),
+export default bsStyles(Object.values(State),
   bsClass('progress-bar',
     ProgressBar
   )

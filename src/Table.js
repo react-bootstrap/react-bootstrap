@@ -1,45 +1,59 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 
-const Table = React.createClass({
-  propTypes: {
-    striped: React.PropTypes.bool,
-    bordered: React.PropTypes.bool,
-    condensed: React.PropTypes.bool,
-    hover: React.PropTypes.bool,
-    responsive: React.PropTypes.bool
-  },
+import { bsClass, getClassSet, omitBsProps, prefix }
+  from './utils/bootstrapUtils';
 
-  getDefaultProps() {
-    return {
-      bordered: false,
-      condensed: false,
-      hover: false,
-      responsive: false,
-      striped: false
-    };
-  },
+const propTypes = {
+  striped: React.PropTypes.bool,
+  bordered: React.PropTypes.bool,
+  condensed: React.PropTypes.bool,
+  hover: React.PropTypes.bool,
+  responsive: React.PropTypes.bool,
+};
 
+const defaultProps = {
+  bordered: false,
+  condensed: false,
+  hover: false,
+  responsive: false,
+  striped: false,
+};
+
+class Table extends React.Component {
   render() {
-    let classes = {
-      'table': true,
-      'table-striped': this.props.striped,
-      'table-bordered': this.props.bordered,
-      'table-condensed': this.props.condensed,
-      'table-hover': this.props.hover
+    const {
+      striped, bordered, condensed, hover, responsive, className, ...props,
+    } = this.props;
+
+    const classes = {
+      ...getClassSet(props),
+      [prefix(props, 'striped')]: striped,
+      [prefix(props, 'bordered')]: bordered,
+      [prefix(props, 'condensed')]: condensed,
+      [prefix(props, 'hover')]: hover,
     };
-    let table = (
-      <table {...this.props} className={classNames(this.props.className, classes)}>
-        {this.props.children}
-      </table>
+
+    const table = (
+      <table
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
+      />
     );
 
-    return this.props.responsive ? (
-      <div className="table-responsive">
-        {table}
-      </div>
-    ) : table;
-  }
-});
+    if (responsive) {
+      return (
+        <div className={prefix(props, 'responsive')}>
+          {table}
+        </div>
+      );
+    }
 
-export default Table;
+    return table;
+  }
+}
+
+Table.propTypes = propTypes;
+Table.defaultProps = defaultProps;
+
+export default bsClass('table', Table);

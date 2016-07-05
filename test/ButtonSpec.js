@@ -43,17 +43,6 @@ describe('Button', () => {
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('href'), href);
   });
 
-  it('Should output an anchor if called with a target', () => {
-    let target = '_blank';
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Button target={target}>
-        Title
-      </Button>
-    );
-    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'A');
-    assert.equal(ReactDOM.findDOMNode(instance).getAttribute('target'), target);
-  });
-
   it('Should call onClick callback', (done) => {
     let doneOp = () => {
       done();
@@ -128,31 +117,5 @@ describe('Button', () => {
       </Button>
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bactive\b/));
-  });
-
-  it('Should render an anchor in a list item when in a nav', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Button navItem active>
-        Title
-      </Button>
-    );
-
-    let li = ReactDOM.findDOMNode(instance);
-    let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
-    assert.equal(li.nodeName, 'LI');
-    assert.ok(li.className.match(/\bactive\b/));
-    assert.ok(anchor.getAttribute('href'), '#');
-  });
-
-  it('Should render an anchor when in a navDropdown', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Button navDropdown>
-        Title
-      </Button>
-    );
-
-    let anchor = ReactDOM.findDOMNode(instance);
-    assert.equal(anchor.nodeName, 'A');
-    assert.ok(anchor.getAttribute('href'), '#');
   });
 });

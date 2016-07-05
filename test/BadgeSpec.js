@@ -52,10 +52,10 @@ describe('Badge', () => {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpull-right\b/));
   });
 
-  it('Should not have a badge class when empty', () => {
+  it('Hides when empty', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge />
     );
-    assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
   });
 });

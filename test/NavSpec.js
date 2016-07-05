@@ -1,13 +1,12 @@
+import keycode from 'keycode';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import tsp from 'teaspoon';
-import keycode from 'keycode';
 
-import Button from '../src/Button';
 import Nav from '../src/Nav';
 import NavItem from '../src/NavItem';
 
-import {shouldWarn} from './helpers';
+import { shouldWarn } from './helpers';
 
 describe('Nav', () => {
   it('Should set the correct item active', () => {
@@ -105,19 +104,6 @@ describe('Nav', () => {
 
     assert.ok(items[1].props.active);
     assert.notOk(items[0].props.active);
-  });
-
-  it('Should set navItem prop on passed in buttons', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Nav bsStyle="pills" activeHref="#item2">
-        <Button eventKey={1}>Button 1 content</Button>
-        <NavItem eventKey={2} href="#item2">Pill 2 content</NavItem>
-      </Nav>
-    );
-
-    let items = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
-
-    assert.ok(items[0].props.navItem);
   });
 
   it('Should warn when attempting to use a justified navbar nav', () => {
