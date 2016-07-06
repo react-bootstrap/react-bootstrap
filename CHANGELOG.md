@@ -3,10 +3,12 @@
 
 - **Bugfix:** Support `style` on `<Modal>` ([#1957])
 - **Bugfix:** Support `bsClass` on `<Dropdown.Toggle>` ([#2014])
+- **Bugfix:** Support `active` on `<NavDropdown>` ([#2015])
 
 [HEAD]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.5...master
 [#1957]: https://github.com/react-bootstrap/react-bootstrap/pull/1957
 [#2014]: https://github.com/react-bootstrap/react-bootstrap/pull/2014
+[#2015]: https://github.com/react-bootstrap/react-bootstrap/pull/2015
 
 
 ## [v0.29.5]
