@@ -6,7 +6,7 @@ import warning from 'warning';
 
 import { bsClass as setBsClass, prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
-import { TAB, PANE } from './utils/tabUtils';
+import { PANE, TAB } from './utils/TabUtils';
 
 import Fade from './Fade';
 
