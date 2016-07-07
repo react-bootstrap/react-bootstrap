@@ -92,10 +92,10 @@ class Dropdown extends React.Component {
     let className = prefix(this.props);
 
     const rootClasses = {
-      open: this.props.open,
-      disabled: this.props.disabled,
+      [this.props.openClassName]: this.props.open,
+      [this.props.disabledClassName]: this.props.disabled,
       [className]: !this.props.dropup,
-      dropup: this.props.dropup
+      [this.props.dropupClassName]: this.props.dropup
     };
 
     return (
@@ -279,12 +279,30 @@ Dropdown.MENU_ROLE = MENU_ROLE;
 
 Dropdown.defaultProps = {
   componentClass: ButtonGroup,
-  bsClass: 'dropdown'
+  bsClass: 'dropdown',
+  openClassName: 'open',
+  disabledClassName: 'disabled',
+  dropupClassName: 'dropup'
 };
 
 Dropdown.propTypes = {
 
   bsClass: React.PropTypes.string,
+
+  /**
+   * A CSS class to apply to the dropdown when open.
+   */
+  openClassName: React.PropTypes.string.isRequired,
+
+  /**
+   * A CSS class to apply to the dropdown when disabled.
+   */
+  disabledClassName: React.PropTypes.string.isRequired,
+
+  /**
+   * A CSS class to apply to the dropdown when acting as a dropup.
+   */
+  dropupClassName: React.PropTypes.string.isRequired,
 
   /**
    * The menu will open above the dropdown button, instead of below it.

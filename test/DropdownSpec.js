@@ -51,6 +51,42 @@ describe('Dropdown', () => {
     node.className.should.not.match(/\bdropup\b/);
   });
 
+  it('should allow a custom CSS class for the "open" state', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Dropdown openClassName="myOpenClass" id='test-id'>
+        {dropdownChildren}
+      </Dropdown>
+    );
+    const node = ReactDOM.findDOMNode(instance);
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
+
+    ReactTestUtils.Simulate.click(buttonNode);
+
+    node.className.should.match(/\bmyOpenClass\b/);
+  });
+
+  it('should allow a custom CSS class for the "disabled" state', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Dropdown disabled disabledClassName="myDisabledClass" id='test-id'>
+        {dropdownChildren}
+      </Dropdown>
+    );
+    const node = ReactDOM.findDOMNode(instance);
+
+    node.className.should.match(/\bmyDisabledClass\b/);
+  });
+
+  it('should allow a custom CSS class for the "dropup" state', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Dropdown dropup dropupClassName="myDropupClass" id='test-id'>
+        {dropdownChildren}
+      </Dropdown>
+    );
+    const node = ReactDOM.findDOMNode(instance);
+
+    node.className.should.match(/\bmyDropupClass\b/);
+  });
+
   it('renders div with dropup class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown title='Dropup' dropup id='test-id'>
