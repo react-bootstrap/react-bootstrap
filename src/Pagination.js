@@ -7,6 +7,8 @@ import { bsClass, getClassSet } from './utils/bootstrapUtils';
 import PaginationButton from './PaginationButton';
 import SafeAnchor from './SafeAnchor';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Pagination = React.createClass({
 
   propTypes: {
@@ -264,9 +266,10 @@ const Pagination = React.createClass({
   },
 
   render() {
+    const domProps = ensureDomProps(this.props, 'ul');
     return (
       <ul
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, getClassSet(this.props))}
       >
         {this.renderFirst()}

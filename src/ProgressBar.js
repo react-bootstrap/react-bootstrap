@@ -10,6 +10,8 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 
 import Interpolate from './Interpolate';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 /**
  * Custom propTypes checker
  */
@@ -48,9 +50,11 @@ class ProgressBar extends React.Component {
       content = this.renderProgressBar();
     }
 
+    const domProps = ensureDomProps(this.props, 'div');
+
     return (
       <div
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, 'progress')}
         min={null}
         max={null}
@@ -93,9 +97,11 @@ class ProgressBar extends React.Component {
       [prefix(this.props, 'striped')]: this.props.active || this.props.striped
     });
 
+    const domProps = ensureDomProps(props, 'div');
+
     return (
       <div
-        {...props}
+        {...domProps}
         className={classes}
         role="progressbar"
         style={{ width: percentage + '%', ...style }}

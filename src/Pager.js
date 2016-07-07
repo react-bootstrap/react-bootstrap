@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Pager = React.createClass({
 
   propTypes: {
@@ -11,9 +13,10 @@ const Pager = React.createClass({
   },
 
   render() {
+    const domProps = ensureDomProps(this.props, 'ul');
     return (
       <ul
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, 'pager')}>
         {ValidComponentChildren.map(this.props.children, this.renderPageItem)}
       </ul>

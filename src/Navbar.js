@@ -15,6 +15,8 @@ import NavbarCollapse from './NavbarCollapse';
 import NavbarHeader from './NavbarHeader';
 import NavbarToggle from './NavbarToggle';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 let Navbar = React.createClass({
 
   propTypes: {
@@ -126,8 +128,10 @@ let Navbar = React.createClass({
     classes[prefix(this.props, 'fixed-bottom')] = fixedBottom;
     classes[prefix(this.props, 'static-top')] = staticTop;
 
+    const domProps = ensureDomProps(props, ComponentClass);
+
     return (
-      <ComponentClass {...props} className={classNames(className, classes)}>
+      <ComponentClass {...domProps} className={classNames(className, classes)}>
         <Grid fluid={fluid}>
           { children }
         </Grid>
@@ -148,13 +152,17 @@ function createSimpleWrapper(tag, suffix, displayName) {
   let wrapper = (
     { componentClass: Tag, className, ...props },
     { $bs_navbar_bsClass: bsClass = 'navbar' }
-  ) =>
-    <Tag {...props}
-      className={classNames(className, prefix({ bsClass }, suffix), {
-        [prefix({ bsClass }, 'right')]: props.pullRight,
-        [prefix({ bsClass }, 'left')]: props.pullLeft
-      })}
-    />;
+  ) => {
+    const domProps = ensureDomProps(props, Tag);
+    return (
+      <Tag {...domProps}
+        className={classNames(className, prefix({ bsClass }, suffix), {
+          [prefix({ bsClass }, 'right')]: props.pullRight,
+          [prefix({ bsClass }, 'left')]: props.pullLeft
+        })}
+      />
+    );
+  };
 
   wrapper.displayName = displayName;
 

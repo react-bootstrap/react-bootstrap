@@ -9,6 +9,8 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 
 import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 class DropdownMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -102,12 +104,14 @@ class DropdownMenu extends React.Component {
       [prefix(this.props, 'menu-right')]: pullRight
     };
 
+    const domProps = ensureDomProps(props, 'ul');
+
     let list = (
       <ul
         className={classNames(className, classes)}
         role="menu"
         aria-labelledby={labelledBy}
-        {...props}
+        {...domProps}
       >
         {items}
       </ul>

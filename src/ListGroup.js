@@ -3,6 +3,8 @@ import ListGroupItem from './ListGroupItem';
 import classNames from 'classnames';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 class ListGroup extends React.Component {
   render() {
     let items = ValidComponentChildren.map(
@@ -12,9 +14,10 @@ class ListGroup extends React.Component {
 
     if (this.areCustomChildren(items)) {
       let Component = this.props.componentClass;
+      const domProps = ensureDomProps(this.props, Component);
       return (
         <Component
-          {...this.props}
+          {...domProps}
           className={classNames(this.props.className, 'list-group')}>
           {items}
         </Component>
@@ -56,10 +59,10 @@ class ListGroup extends React.Component {
     let listItems = ValidComponentChildren.map(items,
       (item) => cloneElement(item, { listItem: true })
     );
-
+    const domProps = ensureDomProps(this.props, 'ul');
     return (
       <ul
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, 'list-group')}>
         {listItems}
       </ul>
@@ -67,9 +70,10 @@ class ListGroup extends React.Component {
   }
 
   renderDiv(items) {
+    const domProps = ensureDomProps(this.props, 'div');
     return (
       <div
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, 'list-group')}>
         {items}
       </div>

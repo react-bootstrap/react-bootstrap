@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Table = React.createClass({
   propTypes: {
     striped: React.PropTypes.bool,
@@ -28,8 +30,9 @@ const Table = React.createClass({
       'table-condensed': this.props.condensed,
       'table-hover': this.props.hover
     };
+    const domProps = ensureDomProps(this.props, 'table');
     let table = (
-      <table {...this.props} className={classNames(this.props.className, classes)}>
+      <table {...domProps} className={classNames(this.props.className, classes)}>
         {this.props.children}
       </table>
     );

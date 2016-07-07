@@ -6,6 +6,8 @@ import { Sizes } from './styleMaps';
 import { bsClass, bsSizes, getClassSet } from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const propTypes = {
   /**
    * Sets `id` on `<FormControl>` and `htmlFor` on `<FormGroup.Label>`.
@@ -86,8 +88,10 @@ class FormGroup extends React.Component {
       classes[`has-${validationState}`] = true;
     }
 
+    const domProps = ensureDomProps(props, 'div');
+
     return (
-      <div {...props} className={classNames(className, classes)}>
+      <div {...domProps} className={classNames(className, classes)}>
         {children}
       </div>
     );

@@ -9,6 +9,8 @@ import {
 
 import SafeAnchor from './SafeAnchor';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const ButtonStyles = State.values().concat(DEFAULT, PRIMARY, LINK);
 
 const types = ['button', 'reset', 'submit'];
@@ -59,10 +61,10 @@ class Button extends React.Component {
 
   renderButton(classes) {
     let Component = this.props.componentClass || 'button';
-
+    const domProps = ensureDomProps(this.props, Component);
     return (
       <Component
-        {...this.props}
+        {...domProps}
         type={this.props.type || 'button'}
         className={classNames(this.props.className, classes)}>
         {this.props.children}

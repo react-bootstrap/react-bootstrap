@@ -3,6 +3,8 @@ import React from 'react';
 
 import SafeAnchor from './SafeAnchor';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const BreadcrumbItem = React.createClass({
   propTypes: {
     /**
@@ -62,11 +64,13 @@ const BreadcrumbItem = React.createClass({
       id: linkId
     };
 
+    const domProps = ensureDomProps(props, 'span');
+
     return (
       <li id={id} className={classNames(className, { active })}>
         {
           active ?
-            <span {...props}>
+            <span {...domProps}>
               { children }
             </span> :
             <SafeAnchor {...props} {...linkProps}>

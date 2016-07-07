@@ -4,15 +4,17 @@ import React from 'react';
 import { bsClass, prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 class ModalHeader extends React.Component {
 
   render() {
     let { 'aria-label': label, ...props } = this.props;
     let onHide = createChainedFunction(this.context.$bs_onModalHide, this.props.onHide);
-
+    const domProps = ensureDomProps(props, 'div');
     return (
       <div
-        {...props}
+        {...domProps}
         className={classNames(this.props.className, prefix(this.props, 'header'))}
       >
         { this.props.closeButton &&

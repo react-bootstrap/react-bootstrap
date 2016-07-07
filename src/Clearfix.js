@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import styleMaps from './styleMaps';
 import elementType from 'react-prop-types/lib/elementType';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Clearfix = React.createClass({
   propTypes: {
     /**
@@ -60,8 +62,10 @@ const Clearfix = React.createClass({
       classes['visible-' + size + '-block'] = this.props['visible' + size.charAt(0).toUpperCase() + size.slice(1) + 'Block'];
     }, this);
 
+    const domProps = ensureDomProps(this.props, ComponentClass);
+
     return (
-      <ComponentClass {...this.props} className={classNames(this.props.className, 'clearfix', classes)}>
+      <ComponentClass {...domProps} className={classNames(this.props.className, 'clearfix', classes)}>
         {this.props.children}
       </ComponentClass>
     );

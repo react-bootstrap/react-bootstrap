@@ -3,6 +3,8 @@ import React from 'react';
 
 import { bsClass, getClassSet } from './utils/bootstrapUtils';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 class HelpBlock extends React.Component {
   render() {
     const { className, ...props } = this.props;
@@ -10,8 +12,10 @@ class HelpBlock extends React.Component {
 
     const classes = getClassSet(this.props);
 
+    const domProps = ensureDomProps(props, 'span');
+
     return (
-      <span {...props} className={classNames(className, classes)} />
+      <span {...domProps} className={classNames(className, classes)} />
     );
   }
 }

@@ -21,6 +21,8 @@ import ButtonGroup from './ButtonGroup';
 import DropdownMenu from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const TOGGLE_ROLE = DropdownToggle.defaultProps.bsRole;
 const MENU_ROLE = DropdownMenu.defaultProps.bsRole;
 
@@ -98,9 +100,11 @@ class Dropdown extends React.Component {
       dropup: this.props.dropup
     };
 
+    const domProps = ensureDomProps(props, Component);
+
     return (
       <Component
-        {...props}
+        {...domProps}
         className={classNames(this.props.className, rootClasses)}
       >
         { children }

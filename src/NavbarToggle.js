@@ -4,6 +4,8 @@ import React, { PropTypes } from 'react';
 import { prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const NavbarToggle = React.createClass({
 
   propTypes: {
@@ -28,7 +30,7 @@ const NavbarToggle = React.createClass({
       $bs_navbar_expanded: expanded,
     } = this.context;
 
-    const buttonProps = {
+    let buttonProps = {
       type: 'button',
       ...props,
       onClick: createChainedFunction(onClick, onToggle),
@@ -38,6 +40,7 @@ const NavbarToggle = React.createClass({
         !expanded && 'collapsed'
       )
     };
+    buttonProps = ensureDomProps(buttonProps, 'button');
 
     if (children) {
       return (

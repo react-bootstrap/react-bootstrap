@@ -2,6 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import elementType from 'react-prop-types/lib/elementType';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Row = React.createClass({
   propTypes: {
     /**
@@ -18,9 +20,9 @@ const Row = React.createClass({
 
   render() {
     let ComponentClass = this.props.componentClass;
-
+    const domProps = ensureDomProps(this.props, ComponentClass);
     return (
-      <ComponentClass {...this.props} className={classNames(this.props.className, 'row')}>
+      <ComponentClass {...domProps} className={classNames(this.props.className, 'row')}>
         {this.props.children}
       </ComponentClass>
     );

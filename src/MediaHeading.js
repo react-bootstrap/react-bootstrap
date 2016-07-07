@@ -2,6 +2,8 @@ import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 import classNames from 'classnames';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const MediaHeading = React.createClass({
   displayName: 'Media.Heading',
   propTypes: {
@@ -19,9 +21,9 @@ const MediaHeading = React.createClass({
 
   render() {
     const {componentClass: ComponentClass, className, ...props} = this.props;
-
+    const domProps = ensureDomProps(props, ComponentClass);
     return (
-      <ComponentClass {...props} className={classNames(className, 'media-heading')}/>
+      <ComponentClass {...domProps} className={classNames(className, 'media-heading')}/>
     );
   }
 });

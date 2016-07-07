@@ -12,6 +12,8 @@ import chain from './utils/createChainedFunction';
 import { nextEnabled, TAB, PANE } from './utils/tabUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 class Nav extends React.Component {
 
   componentDidUpdate() {
@@ -52,9 +54,11 @@ class Nav extends React.Component {
       classes['pull-left'] = this.props.pullLeft;
     }
 
+    const domProps = ensureDomProps(this.props, 'ul');
+
     let list = (
       <ul ref="ul"
-        {...this.props}
+        {...domProps}
         role={this.getNavRole()}
         className={classNames(className, classes)}
       >

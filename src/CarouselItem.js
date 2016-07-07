@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 import { prefix } from './utils/bootstrapUtils';
 import TransitionEvents from './utils/TransitionEvents';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const CarouselItem = React.createClass({
   propTypes: {
     direction: React.PropTypes.oneOf(['prev', 'next']),
@@ -81,8 +83,10 @@ const CarouselItem = React.createClass({
       classes[this.state.direction] = true;
     }
 
+    const domProps = ensureDomProps(this.props, 'div');
+
     return (
-      <div {...this.props} className={classNames(this.props.className, classes)}>
+      <div {...domProps} className={classNames(this.props.className, classes)}>
         {this.props.children}
         {this.props.caption ? this.renderCaption() : null}
       </div>

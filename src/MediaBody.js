@@ -2,6 +2,8 @@ import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 import classNames from 'classnames';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const MediaBody = React.createClass({
   displayName: 'Media.Body',
   propTypes: {
@@ -19,9 +21,9 @@ const MediaBody = React.createClass({
 
   render() {
     const {componentClass: ComponentClass, className, ...props} = this.props;
-
+    const domProps = ensureDomProps(props, ComponentClass);
     return (
-      <ComponentClass {...props} className={classNames(className, 'media-body')}/>
+      <ComponentClass {...domProps} className={classNames(className, 'media-body')}/>
     );
   }
 });

@@ -5,6 +5,8 @@ import { bsClass, getClassSet } from './utils/bootstrapUtils';
 
 import SafeAnchor from './SafeAnchor';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const Thumbnail = React.createClass({
 
   propTypes: {
@@ -15,7 +17,7 @@ const Thumbnail = React.createClass({
 
   render() {
     let classes = getClassSet(this.props);
-
+    const domProps = ensureDomProps(this.props, 'div');
     if (this.props.href) {
       return (
         <SafeAnchor {...this.props} href={this.props.href} className={classSet(this.props.className, classes)}>
@@ -26,7 +28,7 @@ const Thumbnail = React.createClass({
 
     if (this.props.children) {
       return (
-        <div {...this.props} className={classSet(this.props.className, classes)}>
+        <div {...domProps} className={classSet(this.props.className, classes)}>
           <img src={this.props.src} alt={this.props.alt} />
           <div className="caption">
             {this.props.children}
@@ -36,7 +38,7 @@ const Thumbnail = React.createClass({
     }
 
     return (
-      <div {...this.props} className={classSet(this.props.className, classes)}>
+      <div {...domProps} className={classSet(this.props.className, classes)}>
         <img src={this.props.src} alt={this.props.alt} />
       </div>
     );

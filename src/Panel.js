@@ -8,6 +8,8 @@ import {
 
 import Collapse from './Collapse';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 let Panel = React.createClass({
 
   propTypes: {
@@ -70,8 +72,9 @@ let Panel = React.createClass({
 
   render() {
     let {headerRole, panelRole, ...props} = this.props;
+    const domProps = ensureDomProps(props, 'div');
     return (
-      <div {...props}
+      <div {...domProps}
         className={classNames(this.props.className, getClassSet(this.props))}
         id={this.props.collapsible ? null : this.props.id} onSelect={null}
       >

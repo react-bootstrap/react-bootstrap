@@ -6,6 +6,8 @@ import {
   bsStyles, bsClass, getClassSet, prefix,
 } from './utils/bootstrapUtils';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 class ListGroupItem extends React.Component {
 
 
@@ -27,18 +29,20 @@ class ListGroupItem extends React.Component {
   }
 
   renderLi(classes) {
+    const domProps = ensureDomProps(this.props, 'li');
     return (
       <li
-        {...this.props} className={classNames(this.props.className, classes)}>
+        {...domProps} className={classNames(this.props.className, classes)}>
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </li>
     );
   }
 
   renderAnchor(classes) {
+    const domProps = ensureDomProps(this.props, 'a');
     return (
       <a
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, classes)}
       >
         {this.props.header ? this.renderStructuredContent() : this.props.children}
@@ -47,10 +51,11 @@ class ListGroupItem extends React.Component {
   }
 
   renderButton(classes) {
+    const domProps = ensureDomProps(this.props, 'button');
     return (
       <button
         type="button"
-        {...this.props}
+        {...domProps}
         className={classNames(this.props.className, classes)}>
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </button>
@@ -58,9 +63,10 @@ class ListGroupItem extends React.Component {
   }
 
   renderSpan(classes) {
+    const domProps = ensureDomProps(this.props, 'span');
     return (
       <span
-        {...this.props} className={classNames(this.props.className, classes)}>
+        {...domProps} className={classNames(this.props.className, classes)}>
         {this.props.header ? this.renderStructuredContent() : this.props.children}
       </span>
     );

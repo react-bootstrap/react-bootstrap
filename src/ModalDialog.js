@@ -4,6 +4,8 @@ import React from 'react';
 import { Sizes } from './styleMaps';
 import { bsClass, bsSizes, getClassSet, prefix } from './utils/bootstrapUtils';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 /* eslint-disable react/prop-types */
 const ModalDialog = React.createClass({
 
@@ -25,9 +27,11 @@ const ModalDialog = React.createClass({
     delete dialogClasses[bsClassPrefix];
     dialogClasses[prefix(this.props, 'dialog')] = true;
 
+    const domProps = ensureDomProps(this.props, 'div');
+
     return (
       <div
-        {...this.props}
+        {...domProps}
         title={null}
         tabIndex="-1"
         role="dialog"

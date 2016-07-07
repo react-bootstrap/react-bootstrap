@@ -4,6 +4,8 @@ import elementType from 'react-prop-types/lib/elementType';
 
 import { bsClass, prefix } from './utils/bootstrapUtils';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const propTypes = {
   horizontal: React.PropTypes.bool,
   inline: React.PropTypes.bool,
@@ -32,8 +34,10 @@ class Form extends React.Component {
       classes.push(prefix(this.props, 'inline'));
     }
 
+    const domProps = ensureDomProps(props, Component);
+
     return (
-      <Component {...props} className={classNames(className, classes)} />
+      <Component {...domProps} className={classNames(className, classes)} />
     );
   }
 }

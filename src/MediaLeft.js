@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import ensureDomProps from './utils/ensureDomProps';
+
 const MediaLeft = React.createClass({
   displayName: 'Media.Left',
   propTypes: {
@@ -20,8 +22,10 @@ const MediaLeft = React.createClass({
       { [`media-${align}`]: Boolean(align) } // Only add the media-alignment class if align is passed in props
     );
 
+    const domProps = ensureDomProps(props, 'div');
+
     return (
-      <div {...props} className={classes} />
+      <div {...domProps} className={classes} />
     );
   }
 });
