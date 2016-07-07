@@ -20,7 +20,7 @@ class Badge extends React.Component {
         return;
       }
 
-      if (child != null && child !== false) {
+      if (child || child === 0) {
         result = true;
       }
     });

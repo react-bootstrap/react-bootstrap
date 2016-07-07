@@ -52,10 +52,26 @@ describe('<Badge>', () => {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpull-right\b/));
   });
 
-  it('Hides when empty', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Badge />
-    );
-    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
+  describe('Hides when empty', () => {
+    it('should hide with no children', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Badge />
+      );
+      assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
+    });
+
+    it('should hide with empty string', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Badge>{''}</Badge>
+      );
+      assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
+    });
+
+    it('should not hide 0', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Badge>{0}</Badge>
+      );
+      assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
+    });
   });
 });
