@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Clearfix from '../src/Clearfix';
 
-describe('Clearfix', () => {
+describe('<Clearfix>', () => {
   it('uses "div" by default', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Clearfix />
@@ -54,7 +54,7 @@ describe('Clearfix', () => {
 
   it('allows custom elements instead of "div"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Clearfix componentClass='section' />
+      <Clearfix componentClass="section" />
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');

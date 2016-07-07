@@ -9,8 +9,6 @@ import { DEVICE_SIZES } from './utils/StyleConfig';
 const propTypes = {
   componentClass: elementType,
 
-  // TODO: These should be `visibleSz`, not `visibleSzBlock`.
-
   /**
    * Apply clearfix
    *
