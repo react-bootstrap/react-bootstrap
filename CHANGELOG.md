@@ -7,15 +7,19 @@
 - **Breaking:** Remove pointless `navItem` and `navDropdown` props from `<Button>` ([#2026])
 - **Feature/Deprecation:** Rename `<PageItem>` to <Pager.Item>` for consistency ([#1976])
 - **Feature:** Add `ValidComponentChildren.toArray` ([#2016])
-- **Feature:** Add `bsClass` support consistently throughout all components ([#2026])
+- **Feature:** Add `bsClass` support consistently throughout all components ([#2026], [#2036])
 - **Feature:** Add `omitBsProps` helper to `bootstrapUtils` to remove Bootstrap styling props ([#2026])
 - **Feature:** Improve IE8-compatible self collapse support on `<Badge>` and add it to `<Label>` ([#2026])
-- **Bugfix:** Do not pass arbitrary props to DOM nodes ([#2026])
+- **Bugfix:** Do not pass arbitrary props to DOM nodes ([#2026], [#2036])
 - **Bugfix:** Support strings for `positionTop` and `positionLeft` on `<Popover>` and `<Tooltip>` ([#2026])
 - **Bugfix:** Support captions on `<Thumbnail>` links ([#2026])
 - **Bugfix:** Don't ignore `componentClass` on `<ListGroup>` when using only `<ListGroupItem>` children ([#2026])
-- **Bugfix:** Don't assign default `key` to `<ListGroup>`, `PanelGroup`, `<Pager>`, or `<ProgressBar>` children ([#2026])
+- **Bugfix:** Don't assign default `key` to `<Breadcrumb>`, `<Carousel>`, `<ListGroup>`, `<Nav>`, `<PanelGroup>`, `<Pager>`, or `<ProgressBar>` children ([#2026], [#2036])
 - **Bugfix:** Remove pointless update-deferral-during-`onSelect` logic in `<PanelGroup>` ([#2026])
+- **Bugfix:** Use consistent `bsClass` handling on dropdown components ([#2036])
+- **Bugfix:** Remove extraneous `.collapsed` on collapsible panel title anchor ([#2036])
+- **Bugfix:** Improve edge case handling in tab animation state management and styling ([#2036])
+- **Refactor:** Clean up context usage on navbar components ([#2036])
 
 [next]: https://github.com/react-bootstrap/react-bootstrap/compare/master...next
 [#1976]: https://github.com/react-bootstrap/react-bootstrap/pull/1976
@@ -24,6 +28,7 @@
 [#2017]: https://github.com/react-bootstrap/react-bootstrap/pull/2017
 [#2018]: https://github.com/react-bootstrap/react-bootstrap/pull/2018
 [#2026]: https://github.com/react-bootstrap/react-bootstrap/pull/2026
+[#2036]: https://github.com/react-bootstrap/react-bootstrap/pull/2036
 
 
 ## [HEAD] \(v0.29.6\)

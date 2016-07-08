@@ -7,15 +7,15 @@ import tsp from 'teaspoon';
 import DropdownMenu from '../src/DropdownMenu';
 import MenuItem from '../src/MenuItem';
 
-import {getOne} from './helpers';
+import { getOne } from './helpers';
 
-describe('DropdownMenu', () => {
+describe('<Dropdown.Menu>', () => {
   const simpleMenu = (
     <DropdownMenu>
-      <MenuItem eventKey='1'>Item 1</MenuItem>
-      <MenuItem eventKey='2'>Item 2</MenuItem>
-      <MenuItem eventKey='3'>Item 3</MenuItem>
-      <MenuItem eventKey='4'>Item 4</MenuItem>
+      <MenuItem eventKey="1">Item 1</MenuItem>
+      <MenuItem eventKey="2">Item 2</MenuItem>
+      <MenuItem eventKey="3">Item 3</MenuItem>
+      <MenuItem eventKey="4">Item 4</MenuItem>
     </DropdownMenu>
   );
 
@@ -35,8 +35,8 @@ describe('DropdownMenu', () => {
   });
 
   it('has aria-labelledby=<id>', () => {
-    const instance1 = ReactTestUtils.renderIntoDocument(<DropdownMenu labelledBy='herpa' />);
-    const instance2 = ReactTestUtils.renderIntoDocument(<DropdownMenu labelledBy='derpa' />);
+    const instance1 = ReactTestUtils.renderIntoDocument(<DropdownMenu labelledBy="herpa" />);
+    const instance2 = ReactTestUtils.renderIntoDocument(<DropdownMenu labelledBy="derpa" />);
     const node1 = ReactDOM.findDOMNode(instance1);
     const node2 = ReactDOM.findDOMNode(instance2);
 
@@ -56,10 +56,10 @@ describe('DropdownMenu', () => {
     };
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownMenu onSelect={onSelect}>
-        <MenuItem eventKey='1'>Item 1</MenuItem>
-        <MenuItem eventKey='2'>Item 2</MenuItem>
-        <MenuItem eventKey='3'>Item 3</MenuItem>
-        <MenuItem eventKey='4'>Item 4</MenuItem>
+        <MenuItem eventKey="1">Item 1</MenuItem>
+        <MenuItem eventKey="2">Item 2</MenuItem>
+        <MenuItem eventKey="3">Item 3</MenuItem>
+        <MenuItem eventKey="4">Item 4</MenuItem>
       </DropdownMenu>
     );
 

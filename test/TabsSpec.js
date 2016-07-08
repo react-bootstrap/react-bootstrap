@@ -26,7 +26,7 @@ describe('<Tabs>', () => {
     assert.ok(!ReactDOM.findDOMNode(panes[1]).className.match(/\bactive\b/));
 
     const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
-    assert.equal(nav.context.$bs_tabcontainer.activeKey, 1);
+    assert.equal(nav.context.$bs_tabContainer.activeKey, 1);
   });
 
   it('Should only show the tabs with `Tab.props.title` set', () => {
@@ -105,7 +105,7 @@ describe('<Tabs>', () => {
     assert.ok(!ReactDOM.findDOMNode(panes[1]).className.match(/\bactive\b/));
 
     const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
-    assert.equal(nav.context.$bs_tabcontainer.activeKey, 1);
+    assert.equal(nav.context.$bs_tabContainer.activeKey, 1);
   });
 
   it('Should show the correct first tab with children array', () => {
@@ -129,7 +129,7 @@ describe('<Tabs>', () => {
     );
 
     const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
-    assert.equal(nav.context.$bs_tabcontainer.activeKey, 0);
+    assert.equal(nav.context.$bs_tabContainer.activeKey, 0);
   });
 
   it('Should show the correct tab when selected', () => {
@@ -151,13 +151,13 @@ describe('<Tabs>', () => {
     assert.ok(!ReactDOM.findDOMNode(panes[1]).className.match(/\bactive\b/));
 
     const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
-    assert.equal(nav.context.$bs_tabcontainer.activeKey, 1);
+    assert.equal(nav.context.$bs_tabContainer.activeKey, 1);
   });
 
   it('Should mount initial tab and no others when unmountOnExit is true and animation is false', () => {
     const tab1 = <span className="tab1">Tab 1</span>;
     const instance = ReactTestUtils.renderIntoDocument(
-      <Tabs id="test" defaultActiveKey={1} animation={false} unmountOnExit={true}>
+      <Tabs id="test" defaultActiveKey={1} animation={false} unmountOnExit>
         <Tab title={tab1} eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
         <Tab title="Tab 3" eventKey={3}>Tab 3 content</Tab>
@@ -173,7 +173,7 @@ describe('<Tabs>', () => {
   it('Should mount the correct tab when selected and unmount the previous when unmountOnExit is true and animation is false', () => {
     const tab1 = <span className="tab1">Tab 1</span>;
     const instance = ReactTestUtils.renderIntoDocument(
-      <Tabs id="test" defaultActiveKey={2} animation={false} unmountOnExit={true}>
+      <Tabs id="test" defaultActiveKey={2} animation={false} unmountOnExit>
         <Tab title={tab1} eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
       </Tabs>
@@ -189,7 +189,7 @@ describe('<Tabs>', () => {
     expect(ReactDOM.findDOMNode(panes[1])).to.not.exist;
 
     const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
-    assert.equal(nav.context.$bs_tabcontainer.activeKey, 1);
+    assert.equal(nav.context.$bs_tabContainer.activeKey, 1);
   });
 
   it('Should treat active key of null as nothing selected', () => {
@@ -201,7 +201,7 @@ describe('<Tabs>', () => {
     );
 
     const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
-    expect(nav.context.$bs_tabcontainer.activeKey).to.not.exist;
+    expect(nav.context.$bs_tabContainer.activeKey).to.not.exist;
   });
 
   it('Should pass default bsStyle (of "tabs") to Nav', () => {
@@ -230,7 +230,7 @@ describe('<Tabs>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Tabs id="test" defaultActiveKey={1}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
-        <Tab title="Tab 2" eventKey={2} disabled={true}>Tab 2 content</Tab>
+        <Tab title="Tab 2" eventKey={2} disabled>Tab 2 content</Tab>
       </Tabs>
     );
 
@@ -241,7 +241,7 @@ describe('<Tabs>', () => {
     const tab1 = <span className="tab1">Tab 1</span>;
     const instance = ReactTestUtils.renderIntoDocument(
       <Tabs id="test" defaultActiveKey={2} animation={false}>
-        <Tab title={tab1} eventKey={1} disabled={true}>Tab 1 content</Tab>
+        <Tab title={tab1} eventKey={1} disabled>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
       </Tabs>
     );
@@ -256,11 +256,11 @@ describe('<Tabs>', () => {
     assert.ok(ReactDOM.findDOMNode(panes[1]).className.match(/\bactive\b/));
 
     const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
-    assert.equal(nav.context.$bs_tabcontainer.activeKey, 2);
+    assert.equal(nav.context.$bs_tabContainer.activeKey, 2);
   });
 
 
-  describe('animation', () => {
+  describe('active state invariants', () => {
     let mountPoint;
 
     beforeEach(() => {
@@ -273,10 +273,15 @@ describe('<Tabs>', () => {
       document.body.removeChild(mountPoint);
     });
 
-    function checkTabRemovingWithAnimation(animation) {
+    [true, false].forEach(animation => {
       it(`should correctly set "active" after Tab is removed with "animation=${animation}"`, () => {
         const instance = render(
-          <Tabs id="test" defaultActiveKey={2} animation={animation}>
+          <Tabs
+            id="test"
+            activeKey={2}
+            animation={animation}
+            onSelect={() => {}}
+          >
             <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
             <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
           </Tabs>
@@ -289,17 +294,19 @@ describe('<Tabs>', () => {
 
         // second tab has been removed
         render(
-          <Tabs id="test" defaultActiveKey={1} animation={animation}>
+          <Tabs
+            id="test"
+            activeKey={1}
+            animation={animation}
+            onSelect={() => {}}
+          >
             <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
           </Tabs>
         , mountPoint).refs.inner;
 
         assert.ok(ReactDOM.findDOMNode(panes[0]).className.match(/\bactive\b/));
       });
-    }
-
-    checkTabRemovingWithAnimation(true);
-    checkTabRemovingWithAnimation(false);
+    });
   });
 
 
@@ -382,5 +389,17 @@ describe('<Tabs>', () => {
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('id'), 'my-tabs-id');
     // Decimal point string depends on locale
     assert.equal(parseFloat(ReactDOM.findDOMNode(instance).style.opacity), 0.5);
+  });
+
+  it('should respect custom bsClass on all components', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Tabs id="test" bsClass="my-tabs">
+        <Tab eventKey={1} title="Tab 1" />
+        <Tab eventKey={2} title="Tab 2" bsClass="my-pane" />
+      </Tabs>
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-tabs-pane'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-pane'));
   });
 });

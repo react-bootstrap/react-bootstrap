@@ -51,7 +51,7 @@ describe('ResponsiveEmbed', () => {
 
   it('should add custom classes to child element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <ResponsiveEmbed a16by9 className='custom-class'>
+      <ResponsiveEmbed a16by9 className="custom-class">
         <div />
       </ResponsiveEmbed>
     );

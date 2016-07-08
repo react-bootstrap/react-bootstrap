@@ -49,7 +49,7 @@ class PanelGroup extends React.Component {
   render() {
     const {
       accordion,
-      activeKey: activeKeyProp,
+      activeKey: propsActiveKey,
       className,
       children,
       ...props,
@@ -60,7 +60,8 @@ class PanelGroup extends React.Component {
 
     let activeKey;
     if (accordion) {
-      activeKey = activeKeyProp != null ? activeKeyProp : this.state.activeKey;
+      activeKey = propsActiveKey != null ?
+        propsActiveKey : this.state.activeKey;
       props.role = props.role || 'tablist';
     }
 

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Button from '../src/Button';
 
-describe('Button', () => {
+describe('<Button>', () => {
   it('Should output a button', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button>
@@ -25,7 +25,7 @@ describe('Button', () => {
 
   it('Should show the type if passed one', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Button type='submit'>
+      <Button type="submit">
         Title
       </Button>
     );
@@ -66,7 +66,7 @@ describe('Button', () => {
 
   it('Should be disabled link', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Button disabled href='#'>
+      <Button disabled href="#">
         Title
       </Button>
     );
@@ -84,7 +84,7 @@ describe('Button', () => {
 
   it('Should apply bsStyle class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Button bsStyle='danger'>
+      <Button bsStyle="danger">
         Title
       </Button>
     );
@@ -103,7 +103,7 @@ describe('Button', () => {
 
   it('Should default to bsStyle="default"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Button bsStyle='default'>
+      <Button bsStyle="default">
         Title
       </Button>
     );

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Jumbotron from '../src/Jumbotron';
 
-describe('Jumbotron', () => {
+describe('<Jumbotron>', () => {
   it('Should output a div with content', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Jumbotron>
@@ -27,7 +27,7 @@ describe('Jumbotron', () => {
 
   it('Should override node class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Jumbotron componentClass='section'>
+      <Jumbotron componentClass="section">
         <strong>Content</strong>
       </Jumbotron>
     );

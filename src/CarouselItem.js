@@ -4,89 +4,111 @@ import ReactDOM from 'react-dom';
 
 import TransitionEvents from './utils/TransitionEvents';
 
-// TODO: This should use a timeout instead of TransitionEvents.
+// TODO: This should use a timeout instead of TransitionEvents, or else just
+// not wait until transition end to trigger continuing animations.
 
-const CarouselItem = React.createClass({
-  propTypes: {
-    direction: React.PropTypes.oneOf(['prev', 'next']),
-    onAnimateOutEnd: React.PropTypes.func,
-    active: React.PropTypes.bool,
-    animateIn: React.PropTypes.bool,
-    animateOut: React.PropTypes.bool,
-    index: React.PropTypes.number
-  },
+const propTypes = {
+  direction: React.PropTypes.oneOf(['prev', 'next']),
+  onAnimateOutEnd: React.PropTypes.func,
+  active: React.PropTypes.bool,
+  animateIn: React.PropTypes.bool,
+  animateOut: React.PropTypes.bool,
+  index: React.PropTypes.number,
+};
 
-  getInitialState() {
-    return {
-      direction: null
+const defaultProps = {
+  active: false,
+  animateIn: false,
+  animateOut: false,
+};
+
+class CarouselItem extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleAnimateOutEnd = this.handleAnimateOutEnd.bind(this);
+
+    this.state = {
+      direction: null,
     };
-  },
 
-  getDefaultProps() {
-    return {
-      bsStyle: 'carousel',
-      active: false,
-      animateIn: false,
-      animateOut: false
-    };
-  },
-
-  handleAnimateOutEnd() {
-    if (this.props.onAnimateOutEnd && this.isMounted()) {
-      this.props.onAnimateOutEnd(this.props.index);
-    }
-  },
+    this.isUnmounted = false;
+  }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.active !== nextProps.active) {
-      this.setState({
-        direction: null
-      });
+      this.setState({ direction: null });
     }
-  },
+  }
 
   componentDidUpdate(prevProps) {
-    if (!this.props.active && prevProps.active) {
+    const { active } = this.props;
+    const prevActive = prevProps.active;
+
+    if (!active && prevActive) {
       TransitionEvents.addEndEventListener(
-        ReactDOM.findDOMNode(this),
-        this.handleAnimateOutEnd
+        ReactDOM.findDOMNode(this), this.handleAnimateOutEnd
       );
     }
 
-    if (this.props.active !== prevProps.active) {
-      setTimeout(this.startAnimation, 20);
+    if (active !== prevActive) {
+      setTimeout(() => this.startAnimation(), 20);
     }
-  },
+  }
+
+  componentWillUnmount() {
+    this.isUnmounted = true;
+  }
+
+  handleAnimateOutEnd() {
+    if (this.isUnmounted) {
+      return;
+    }
+
+    if (this.props.onAnimateOutEnd) {
+      this.props.onAnimateOutEnd(this.props.index);
+    }
+  }
 
   startAnimation() {
-    if (!this.isMounted()) {
+    if (this.isUnmounted) {
       return;
     }
 
     this.setState({
-      direction: this.props.direction === 'prev' ?
-        'right' : 'left'
+      direction: this.props.direction === 'prev' ? 'right' : 'left',
     });
-  },
+  }
 
   render() {
-    let classes = {
-      item: true,
-      active: (this.props.active && !this.props.animateIn) || this.props.animateOut,
-      next: this.props.active && this.props.animateIn && this.props.direction === 'next',
-      prev: this.props.active && this.props.animateIn && this.props.direction === 'prev'
-    };
+    const {
+      direction, active, animateIn, animateOut, className, ...props,
+    } = this.props;
 
-    if (this.state.direction && (this.props.animateIn || this.props.animateOut)) {
+    delete props.onAnimateOutEnd;
+    delete props.index;
+
+    const classes = {
+      item: true,
+      active: active && !animateIn || animateOut,
+    };
+    if (direction && active && animateIn) {
+      classes[direction] = true;
+    }
+    if (this.state.direction && (animateIn || animateOut)) {
       classes[this.state.direction] = true;
     }
 
     return (
-      <div {...this.props} className={classNames(this.props.className, classes)}>
-        {this.props.children}
-      </div>
+      <div
+        {...props}
+        className={classNames(className, classes)}
+      />
     );
-  },
-});
+  }
+}
+
+CarouselItem.propTypes = propTypes;
+CarouselItem.defaultProps = defaultProps;
 
 export default CarouselItem;

@@ -35,7 +35,8 @@ const NavMain = React.createClass({
     ]);
 
     return (
-      <Navbar staticTop
+      <Navbar
+        staticTop
         componentClass="header"
         className="bs-docs-nav"
         role="banner"

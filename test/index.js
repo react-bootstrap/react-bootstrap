@@ -4,11 +4,17 @@ import { _resetWarned } from '../src/utils/deprecationWarning';
 
 beforeEach(() => {
   sinon.stub(console, 'error', msg => {
-    for (const about of console.error.expected) {
+    let expected = false;
+
+    console.error.expected.forEach(about => {
       if (msg.indexOf(about) !== -1) {
         console.error.warned[about] = true;
-        return;
+        expected = true;
       }
+    });
+
+    if (expected) {
+      return;
     }
 
     console.error.threw = true;

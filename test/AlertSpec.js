@@ -56,7 +56,7 @@ describe('<Alert>', () => {
 
   it('Should have use bsStyle class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Alert bsStyle='danger'>
+      <Alert bsStyle="danger">
         Message
       </Alert>
     );

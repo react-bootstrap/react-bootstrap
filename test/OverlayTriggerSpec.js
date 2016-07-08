@@ -33,7 +33,7 @@ describe('OverlayTrigger', () => {
 
   it('Should show after click trigger', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <OverlayTrigger trigger='click' overlay={<div>test</div>}>
+      <OverlayTrigger trigger="click" overlay={<div>test</div>}>
         <button>button</button>
       </OverlayTrigger>
     );
@@ -59,10 +59,10 @@ describe('OverlayTrigger', () => {
     it('Should keep trigger handlers', (done) => {
       const instance = render(
         <div>
-          <OverlayTrigger trigger='focus' overlay={<div>test</div>}>
+          <OverlayTrigger trigger="focus" overlay={<div>test</div>}>
             <button onBlur={()=> done()}>button</button>
           </OverlayTrigger>
-          <input id='target' />
+          <input id="target" />
         </div>
       , mountPoint);
 
@@ -73,7 +73,7 @@ describe('OverlayTrigger', () => {
 
   it('Should maintain overlay classname', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <OverlayTrigger trigger='click' overlay={<div className='test-overlay'>test</div>}>
+      <OverlayTrigger trigger="click" overlay={<div className="test-overlay">test</div>}>
         <button>button</button>
       </OverlayTrigger>
     );
@@ -92,7 +92,7 @@ describe('OverlayTrigger', () => {
 
     let instance = ReactTestUtils.renderIntoDocument(
       <OverlayTrigger
-        trigger='click'
+        trigger="click"
         overlay={<div>test</div>}
         onHide={() => {}}
         onExit={increment}
@@ -207,7 +207,7 @@ describe('OverlayTrigger', () => {
           instance = ReactTestUtils.renderIntoDocument(
             <OverlayTrigger
               overlay={<div>test</div>}
-              trigger='click' rootClose={testCase.rootClose}
+              trigger="click" rootClose={testCase.rootClose}
             >
             <button>button</button>
             </OverlayTrigger>
@@ -261,7 +261,8 @@ describe('OverlayTrigger', () => {
         instance = ReactTestUtils.renderIntoDocument(
           <OverlayTrigger
             overlay={<ReplacedOverlay />}
-            trigger='click' rootClose={true}
+            trigger="click"
+            rootClose
           >
             <button>button</button>
           </OverlayTrigger>

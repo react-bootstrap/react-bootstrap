@@ -16,7 +16,7 @@ describe('<ListGroupItem>', () => {
 
   it('Should output an "anchor" if "href" prop is set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ListGroupItem href='#test'>Anchor</ListGroupItem>
+      <ListGroupItem href="#test">Anchor</ListGroupItem>
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'A');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
@@ -41,7 +41,7 @@ describe('<ListGroupItem>', () => {
 
   it('Should support "bsStyle" prop', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ListGroupItem bsStyle='success'>Item 1</ListGroupItem>
+      <ListGroupItem bsStyle="success">Item 1</ListGroupItem>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item-success'));
   });
@@ -62,7 +62,7 @@ describe('<ListGroupItem>', () => {
 
   it('Should support "header" prop as a string', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ListGroupItem header='Heading'>Item text</ListGroupItem>
+      <ListGroupItem header="Heading">Item text</ListGroupItem>
     );
 
     let node = ReactDOM.findDOMNode(instance);

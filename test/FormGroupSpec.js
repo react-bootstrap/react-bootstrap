@@ -5,12 +5,12 @@ import $ from 'teaspoon';
 import FormControl from '../src/FormControl';
 import FormGroup from '../src/FormGroup';
 
-describe('FormGroup', () => {
+describe('<FormGroup>', () => {
   it('renders children', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <FormGroup>
-        <span className='child1' />
-        <span className='child2' />
+        <span className="child1" />
+        <span className="child2" />
       </FormGroup>
     );
 

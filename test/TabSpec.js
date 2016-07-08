@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Tab from '../src/Tab';
 
-describe('Tab', () => {
+describe('<Tab>', () => {
   it('Should have class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Tab>Item content</Tab>
@@ -14,24 +14,38 @@ describe('Tab', () => {
 
   it('Should add active class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Tab active={true}>Item content</Tab>
+      <Tab>Item content</Tab>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active'));
   });
 
-  describe('Web Accessibility', () => {
+  it('Should not add active class when not visible', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Tab eventKey={{}}>Item content</Tab>
+    );
+    assert.lengthOf(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'active'), 0);
+  });
 
-    it('Should have aria-hidden', () => {
+  describe('Web Accessibility', () => {
+    it('Should have aria-hidden false when visible', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <Tab active>Item content</Tab>
+        <Tab>Item content</Tab>
       );
 
       assert.equal(ReactDOM.findDOMNode(instance).getAttribute('aria-hidden'), 'false');
     });
 
+    it('Should have aria-hidden true when hidden', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Tab eventKey={{}}>Item content</Tab>
+      );
+
+      assert.equal(ReactDOM.findDOMNode(instance).getAttribute('aria-hidden'), 'true');
+    });
+
     it('Should have role', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <Tab active>Item content</Tab>
+        <Tab>Item content</Tab>
       );
 
       assert.equal(ReactDOM.findDOMNode(instance).getAttribute('role'), 'tabpanel');

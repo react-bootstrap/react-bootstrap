@@ -14,14 +14,14 @@ import { shouldWarn } from './helpers';
 class CustomMenu extends React.Component {
   render() {
     return (
-      <div className='custom-menu'>
+      <div className="custom-menu">
         {this.props.children}
       </div>
     );
   }
 }
 
-describe('Dropdown', () => {
+describe('<Dropdown>', () => {
   let BaseDropdown = Dropdown.ControlledComponent;
 
   const dropdownChildren = [
@@ -37,7 +37,7 @@ describe('Dropdown', () => {
   ];
 
   const simpleDropdown = (
-    <Dropdown id='test-id'>
+    <Dropdown id="test-id">
       {dropdownChildren}
     </Dropdown>
   );
@@ -53,7 +53,7 @@ describe('Dropdown', () => {
 
   it('renders div with dropup class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Dropdown title='Dropup' dropup id='test-id'>
+      <Dropdown title="Dropup" dropup id="test-id">
         {dropdownChildren}
       </Dropdown>
     );
@@ -103,10 +103,10 @@ describe('Dropdown', () => {
 
   it('renders custom menu', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Dropdown title='Single child' id='test-id'>
+      <Dropdown title="Single child" id="test-id">
         <Dropdown.Toggle>Child Text</Dropdown.Toggle>
 
-        <CustomMenu bsRole='menu'>
+        <CustomMenu bsRole="menu">
           <MenuItem>Item 1</MenuItem>
         </CustomMenu>
       </Dropdown>
@@ -136,30 +136,9 @@ describe('Dropdown', () => {
     err.message.should.match(/Duplicate children.*bsRole: menu/);
   });
 
-  it('only renders one menu', () => {
-    shouldWarn('Duplicate children');
-
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Dropdown title='Single child' id='test-id'>
-        <Dropdown.Toggle>Child Text</Dropdown.Toggle>
-
-        <CustomMenu bsRole='menu'>
-          <MenuItem>Item 1</MenuItem>
-        </CustomMenu>
-        <DropdownMenu>
-          <MenuItem>Item 1</MenuItem>
-        </DropdownMenu>
-      </Dropdown>
-    );
-
-    ReactTestUtils.scryRenderedComponentsWithType(instance, DropdownMenu).length.should.equal(0);
-    ReactTestUtils.scryRenderedComponentsWithType(instance, CustomMenu).length.should.equal(1);
-  });
-
-
   it('forwards pullRight to menu', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Dropdown pullRight id='test-id'>
+      <Dropdown pullRight id="test-id">
         {dropdownChildren}
       </Dropdown>
     );
@@ -193,7 +172,7 @@ describe('Dropdown', () => {
 
   it('opens if dropdown contains no focusable menu item', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Dropdown title='custom child' id='dropdown'>
+      <Dropdown title="custom child" id="dropdown">
         <Dropdown.Toggle>Toggle</Dropdown.Toggle>
         <Dropdown.Menu>
           <li>Some custom nonfocusable content</li>
@@ -253,7 +232,7 @@ describe('Dropdown', () => {
     const handleSelect = () => {};
 
     const instance = ReactTestUtils.renderIntoDocument(
-      <Dropdown open={true} onToggle={handleSelect} id='test-id'>
+      <Dropdown open onToggle={handleSelect} id="test-id">
         {dropdownChildren}
       </Dropdown>
     );
@@ -283,15 +262,15 @@ describe('Dropdown', () => {
       render() {
         return (
           <div>
-            <button className='outer-button'
+            <button className="outer-button"
               onClick={() => this.setState({open: !this.state.open})}>
               Outer button
             </button>
             <Dropdown
               open={this.state.open}
               onToggle={() => {}}
-              title='Prop open control'
-              id='test-id'
+              title="Prop open control"
+              id="test-id"
             >
               {dropdownChildren}
             </Dropdown>
@@ -321,62 +300,55 @@ describe('Dropdown', () => {
   });
 
   describe('PropType validation', () => {
-
     describe('children', () => {
-
       it('menu is exclusive', () => {
+        shouldWarn('Duplicate children');
+        shouldWarn('bsRole: menu');
 
-        const props = {
-          children: [
-            <Dropdown.Toggle/>,
-            <Dropdown.Menu/>,
-            <Dropdown.Menu/>
-          ]
-        };
-        BaseDropdown.propTypes.children(props, 'children', 'Dropdown')
-          .message.should.match(/Duplicate children.*bsRole: menu/);
+        ReactTestUtils.renderIntoDocument(
+          <Dropdown id="test">
+            <Dropdown.Toggle />
+            <Dropdown.Menu />
+            <Dropdown.Menu />
+          </Dropdown>
+        );
       });
 
       it('menu is required', () => {
+        shouldWarn('Missing a required child');
+        shouldWarn('bsRole: menu');
 
-        const props = {
-          children: [
-            <Dropdown.Toggle/>
-          ]
-        };
-
-        BaseDropdown.propTypes.children(props, 'children', 'Dropdown')
-          .message.should.match(/Missing a required child.*bsRole: menu/);
+        // Dropdowns can't render without a menu.
+        try {
+          ReactTestUtils.renderIntoDocument(
+            <Dropdown id="test">
+              <Dropdown.Toggle />
+            </Dropdown>
+          );
+        } catch (e) {} // eslint-disable-line no-empty
       });
 
       it('toggles are not exclusive', () => {
-
-        const props = {
-          children: [
-            <Dropdown.Toggle/>,
-            <Dropdown.Toggle/>,
-            <Dropdown.Menu/>
-          ]
-        };
-
-        expect(BaseDropdown.propTypes.children(props, 'children', 'Dropdown'))
-          .to.not.exist;
+        ReactTestUtils.renderIntoDocument(
+          <Dropdown id="test">
+            <Dropdown.Toggle />
+            <Dropdown.Toggle />
+            <Dropdown.Menu />
+          </Dropdown>
+        );
       });
 
       it('toggle is required', () => {
+        shouldWarn('Missing a required child');
+        shouldWarn('bsRole: toggle');
 
-        const props = {
-          children: [
-            <Dropdown.Menu/>
-          ]
-        };
-
-        BaseDropdown.propTypes.children(props, 'children', 'Dropdown')
-          .message.should.match(/Missing a required child.*bsRole: toggle/);
+        ReactTestUtils.renderIntoDocument(
+          <Dropdown id="test">
+            <Dropdown.Menu />
+          </Dropdown>
+        );
       });
-
     });
-
   });
 
   it('chains refs', () => {
@@ -405,7 +377,7 @@ describe('Dropdown', () => {
       render() {
         return (
           <Dropdown id="test">
-            <Dropdown.Toggle ref='toggle' />
+            <Dropdown.Toggle ref="toggle" />
             <Dropdown.Menu />
           </Dropdown>
         );
@@ -482,7 +454,7 @@ describe('Dropdown', () => {
       const instance = ReactDOM.render(
         <Grid>
           {simpleDropdown}
-          <input type='text' id='next-focusable' />
+          <input type="text" id="next-focusable" />
         </Grid>, focusableContainer);
 
       // Need to use Grid instead of div above to make instance a composite

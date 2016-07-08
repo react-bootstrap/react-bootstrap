@@ -1,21 +1,51 @@
+import omit from 'lodash-compat/object/omit';
+import pick from 'lodash-compat/object/pick';
 import React from 'react';
+
 import Dropdown from './Dropdown';
+import { bsClass, prefix } from './utils/bootstrapUtils';
+
+const propTypes = {
+  ...Dropdown.propTypes,
+
+  // Toggle props.
+  title: React.PropTypes.node.isRequired,
+  noCaret: React.PropTypes.bool,
+
+  // Override generated docs from <Dropdown>.
+  children: React.PropTypes.node,
+};
 
 class NavDropdown extends React.Component {
-
   render() {
-    let { children, title, noCaret, ...props } = this.props;
+    const { title, className, style, children, ...props } = this.props;
+
+    const dropdownProps = pick(
+      props, Object.keys(Dropdown.ControlledComponent.propTypes)
+    );
+    const toggleProps = omit(
+      props, Object.keys(Dropdown.ControlledComponent.propTypes)
+    );
+
+    // Unlike for the other dropdowns, styling needs to go to the `<Dropdown>`
+    // rather than the `<Dropdown.Toggle>`.
 
     return (
-      <Dropdown {...props} componentClass="li">
+      <Dropdown
+        {...dropdownProps}
+        componentClass="li"
+        className={className}
+        style={style}
+      >
         <Dropdown.Toggle
+          {...toggleProps}
           useAnchor
-          disabled={props.disabled}
-          noCaret={noCaret}
+          bsClass={prefix(props, 'toggle')}
         >
           {title}
         </Dropdown.Toggle>
-        <Dropdown.Menu>
+
+        <Dropdown.Menu bsClass={prefix(props, 'menu')}>
           {children}
         </Dropdown.Menu>
       </Dropdown>
@@ -23,10 +53,6 @@ class NavDropdown extends React.Component {
   }
 }
 
-NavDropdown.propTypes = {
-  noCaret: React.PropTypes.bool,
-  title: React.PropTypes.node.isRequired,
-  ...Dropdown.propTypes
-};
+NavDropdown.propTypes = propTypes;
 
-export default NavDropdown;
+export default bsClass('dropdown', NavDropdown);

@@ -16,9 +16,9 @@ function curry(fn) {
   };
 }
 
-export function prefix(props = {}, variant) {
+export function prefix(props, variant) {
   invariant(
-    (props.bsClass || '').trim(),
+    props.bsClass != null,
     'A `bsClass` prop is required for this component'
   );
   return props.bsClass + (variant ? `-${variant}` : '');

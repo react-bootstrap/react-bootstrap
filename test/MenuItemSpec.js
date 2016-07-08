@@ -73,7 +73,7 @@ describe('<MenuItem>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <MenuItem
         onKeyDown={() => done()}
-        href='/herpa-derpa'>
+        href="/herpa-derpa">
         Item
       </MenuItem>
     );
@@ -95,7 +95,7 @@ describe('<MenuItem>', () => {
       eventKey.should.equal('1');
     };
     const instance = ReactTestUtils.renderIntoDocument(
-      <MenuItem onSelect={handleSelect} eventKey='1'>Item</MenuItem>
+      <MenuItem onSelect={handleSelect} eventKey="1">Item</MenuItem>
     );
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 

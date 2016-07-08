@@ -6,10 +6,9 @@ import DropdownButton from '../src/DropdownButton';
 import DropdownMenu from '../src/DropdownMenu';
 import MenuItem from '../src/MenuItem';
 
-describe('DropdownButton', () => {
-
+describe('<DropdownButton>', () => {
   const simpleDropdown = (
-    <DropdownButton title='Simple Dropdown' id='test-id'>
+    <DropdownButton title="Simple Dropdown" id="test-id">
       <MenuItem>Item 1</MenuItem>
       <MenuItem>Item 2</MenuItem>
       <MenuItem>Item 3</MenuItem>
@@ -40,7 +39,7 @@ describe('DropdownButton', () => {
 
   it('renders single MenuItem child', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Single child' id='test-id'>
+      <DropdownButton title="Single child" id="test-id">
         <MenuItem>Item 1</MenuItem>
       </DropdownButton>
     );
@@ -54,7 +53,7 @@ describe('DropdownButton', () => {
 
   it('forwards pullRight to menu', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton pullRight title='blah' id='test-id'>
+      <DropdownButton pullRight title="blah" id="test-id">
         <MenuItem>Item 1</MenuItem>
       </DropdownButton>
     );
@@ -65,7 +64,7 @@ describe('DropdownButton', () => {
 
   it('renders bsSize', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='blah' bsSize='small' id='test-id'>
+      <DropdownButton title="blah" bsSize="small" id="test-id">
         <MenuItem>Item 1</MenuItem>
       </DropdownButton>
     );
@@ -76,7 +75,7 @@ describe('DropdownButton', () => {
 
   it('renders bsStyle', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='blah' bsStyle='success' id='test-id'>
+      <DropdownButton title="blah" bsStyle="success" id="test-id">
         <MenuItem>Item 1</MenuItem>
       </DropdownButton>
     );
@@ -98,11 +97,11 @@ describe('DropdownButton', () => {
       }
     };
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Simple Dropdown' onSelect={onSelect} id='test-id'>
-        <MenuItem eventKey='1'>Item 1</MenuItem>
-        <MenuItem eventKey='2'>Item 2</MenuItem>
-        <MenuItem eventKey='3'>Item 3</MenuItem>
-        <MenuItem eventKey='4'>Item 4</MenuItem>
+      <DropdownButton title="Simple Dropdown" onSelect={onSelect} id="test-id">
+        <MenuItem eventKey="1">Item 1</MenuItem>
+        <MenuItem eventKey="2">Item 2</MenuItem>
+        <MenuItem eventKey="3">Item 3</MenuItem>
+        <MenuItem eventKey="4">Item 4</MenuItem>
       </DropdownButton>
     );
 
@@ -115,8 +114,8 @@ describe('DropdownButton', () => {
 
   it('closes when child MenuItem is selected', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Simple Dropdown' id='test-id'>
-        <MenuItem eventKey='1'>Item 1</MenuItem>
+      <DropdownButton title="Simple Dropdown" id="test-id">
+        <MenuItem eventKey="1">Item 1</MenuItem>
       </DropdownButton>
     );
 
@@ -135,8 +134,8 @@ describe('DropdownButton', () => {
     const handleSelect = () => {};
 
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownButton title='Simple Dropdown' open={true} onToggle={handleSelect} id='test-id'>
-        <MenuItem eventKey='1'>Item 1</MenuItem>
+      <DropdownButton title="Simple Dropdown" open onToggle={handleSelect} id="test-id">
+        <MenuItem eventKey="1">Item 1</MenuItem>
       </DropdownButton>
     );
 

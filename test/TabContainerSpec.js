@@ -7,21 +7,21 @@ import TabPane from '../src/TabPane';
 import TabContent from '../src/TabContent';
 import TabContainer from '../src/TabContainer';
 
-let s = tsp.selector;
+const s = tsp.selector;
 
-describe('TabContainer', () => {
+describe('<TabContainer>', () => {
 
   it('should not propagate context past TabPanes', () => {
     let instance = tsp(
       <TabContainer id="custom-id">
         <div>
           <Nav>
-            <NavItem eventKey='1'>One</NavItem>
+            <NavItem eventKey="1">One</NavItem>
           </Nav>
           <TabContent>
-            <TabPane eventKey='1'>
+            <TabPane eventKey="1">
               <Nav>
-                <NavItem eventKey='2'>One</NavItem>
+                <NavItem eventKey="2">One</NavItem>
               </Nav>
             </TabPane>
           </TabContent>
@@ -31,11 +31,11 @@ describe('TabContainer', () => {
 
     let top = instance
       .find(s`div > ${Nav}`)
-      .context('$bs_tabcontainer');
+      .context('$bs_tabContainer');
 
     let nested = instance
       .find(s`${TabPane} ${Nav}`)
-      .context('$bs_tabcontainer');
+      .context('$bs_tabContainer');
 
     expect(top).to.exist;
     expect(nested).to.not.exist;
@@ -46,10 +46,10 @@ describe('TabContainer', () => {
       <TabContainer id="custom-id">
         <div>
           <Nav>
-            <NavItem eventKey='1'>One</NavItem>
+            <NavItem eventKey="1">One</NavItem>
           </Nav>
           <TabContent>
-            <TabPane eventKey='1' />
+            <TabPane eventKey="1" />
           </TabContent>
         </div>
       </TabContainer>
@@ -74,8 +74,8 @@ describe('TabContainer', () => {
     let instance = tsp(
       <TabContainer id="custom-id">
         <div>
-          <Nav bsStyle='pills'>
-            <NavItem eventKey='1'>One</NavItem>
+          <Nav bsStyle="pills">
+            <NavItem eventKey="1">One</NavItem>
           </Nav>
         </div>
       </TabContainer>
@@ -93,16 +93,25 @@ describe('TabContainer', () => {
       .should.equal('tab');
   });
 
-  it('should call onSelect when tab becomes unmounted', () => {
+  it('should not get stuck after tab becomes unmounted', () => {
     class Switcher extends React.Component {
-      state = { show: true };
+      state = {
+        activeKey: '2',
+        show: true,
+      };
+
       render() {
         return (
-          <TabContainer id="custom-id" {...this.props}>
+          <TabContainer
+            id="custom-id"
+            activeKey={this.state.activeKey}
+            onSelect={() => {}}
+          >
             <div>
               <TabContent>
+                <TabPane eventKey="1" />
                 {this.state.show &&
-                  <TabPane eventKey='1' />
+                  <TabPane eventKey="2" />
                 }
               </TabContent>
             </div>
@@ -111,14 +120,16 @@ describe('TabContainer', () => {
       }
     }
 
-    let spy = sinon.spy();
-    let instance = tsp(<Switcher activeKey="1" onSelect={spy} />).render();
+    const instance = tsp(<Switcher />).render();
+    instance.single(TabContent);
 
-    instance.single(TabPane);
+    instance.single('[eventKey="2"]').single('.active');
 
     instance.state('show', false);
+    instance.none('.active');
 
-    spy.should.have.been.calledOnce.and.calledWith(undefined);
+    instance.state('activeKey', '1');
+    instance.single('[eventKey="1"]').single('.active');
   });
 
   it('should not call onSelect when container unmounts', () => {
@@ -133,7 +144,7 @@ describe('TabContainer', () => {
           <TabContainer id="custom-id" {...this.props}>
             <div>
               <TabContent>
-                <TabPane eventKey='1' />
+                <TabPane eventKey="1" />
               </TabContent>
             </div>
           </TabContainer>
@@ -151,7 +162,7 @@ describe('TabContainer', () => {
     spy.should.have.not.been.called;
   });
 
-  it('should clean up unmounted tab Sstate', () => {
+  it('should clean up unmounted tab state', () => {
     class Switcher extends React.Component {
       state = {
         activeKey: 2,
@@ -163,7 +174,7 @@ describe('TabContainer', () => {
           <TabContainer
             id="custom-id"
             activeKey={this.state.activeKey}
-            onSelect={activeKey => this.setState({ activeKey })}
+            onSelect={() => {}}
           >
             <div>
               <TabContent>
@@ -177,12 +188,10 @@ describe('TabContainer', () => {
       }
     }
 
-    let spy = sinon.spy();
-    let instance = tsp(<Switcher onSelect={spy} />).render();
+    const instance = tsp(<Switcher />).render();
 
     instance.find(TabPane).length.should.equal(3);
-
-    instance.single('[eventKey=2].active');
+    instance.single('[eventKey=2]').single('.active');
 
     instance.state({
       activeKey: 1,
@@ -190,15 +199,121 @@ describe('TabContainer', () => {
     });
 
     instance.find(TabPane).length.should.equal(2);
-    instance.single('[eventKey=1].active');
+    instance.single('[eventKey=1]').single('.active');
+  });
+
+  it('should not get stuck if tab stops animating', () => {
+    class Switcher extends React.Component {
+      state = {
+        activeKey: 1,
+        animation: true,
+      };
+
+      render() {
+        return (
+          <TabContainer
+            id="custom-id"
+            activeKey={this.state.activeKey}
+            onSelect={() => {}}
+          >
+            <TabContent>
+              <TabPane key={0} eventKey={0} />
+              <TabPane key={1} eventKey={1} animation={this.state.animation} />
+            </TabContent>
+          </TabContainer>
+        );
+      }
+    }
+
+    const instance = tsp(<Switcher />).render();
+
+    instance.single('[eventKey=1]').single('.active');
+
+    instance.state({ animation: false });
+    instance.single('[eventKey=1]').single('.active');
+
+    instance.state({ activeKey: 0 });
+    instance.single('[eventKey=0]').single('.active');
+  });
+
+  it('should handle simultaneous eventKey and activeKey change', () => {
+    class Switcher extends React.Component {
+      state = {
+        activeKey: 1,
+      };
+
+      render() {
+        return (
+          <TabContainer
+            id="custom-id"
+            activeKey={this.state.activeKey}
+            onSelect={() => {}}
+          >
+            <TabContent>
+              <TabPane key={0} eventKey={0} />
+              <TabPane key={1} eventKey={this.state.activeKey} />
+            </TabContent>
+          </TabContainer>
+        );
+      }
+    }
+
+    const instance = tsp(<Switcher />).render();
+
+    instance.single('[eventKey=1]').single('.active');
+
+    instance.state({ activeKey: 2 });
+    instance.single('[eventKey=2]').single('.active');
+  });
+
+  it('should not get stuck if eventKey ceases to exist', () => {
+    class Switcher extends React.Component {
+      state = {
+        activeKey: 1,
+        eventKey: 1,
+      };
+
+      render() {
+        return (
+          <TabContainer
+            id="custom-id"
+            activeKey={this.state.activeKey}
+            onSelect={() => {}}
+          >
+            <TabContent>
+              <TabPane key={0} eventKey={0} />
+              <TabPane key={1} eventKey={this.state.eventKey} />
+            </TabContent>
+          </TabContainer>
+        );
+      }
+    }
+
+    const instance = tsp(<Switcher />).render();
+
+    instance.single('[eventKey=1]').single('.active');
+
+    instance.state({ eventKey: 2 });
+    instance.none('.active');
+
+    instance.state({ activeKey: 2 });
+    instance.single('[eventKey=2]').single('.active');
+
+    // Check that active state lingers after changing event key.
+    instance.state({ activeKey: 0 });
+    instance.single('[eventKey=2]').single('.active');
+
+    // But once event key changes again, make sure active state switches.
+    instance.state({ eventKey: 1 });
+    instance.single('[eventKey=0]').single('.active');
   });
 
   it('should use explicit Nav role', () => {
     let instance = tsp(
       <TabContainer id="custom-id">
         <div>
-          <Nav role='navigation' bsStyle='pills'>
-            <NavItem href='#foo' eventKey='1'>One</NavItem>
+          <Nav role="navigation" bsStyle="pills">
+            <NavItem href="#foo" eventKey="1">One</NavItem>
           </Nav>
         </div>
       </TabContainer>

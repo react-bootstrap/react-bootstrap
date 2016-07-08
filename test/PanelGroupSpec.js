@@ -95,9 +95,9 @@ describe('<PanelGroup>', () => {
 
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
-        <PanelGroup defaultActiveKey='1' accordion>
-          <Panel header='Collapsible Group Item #1' eventKey='1' id='Panel1ID'>Panel 1</Panel>
-          <Panel header='Collapsible Group Item #2' eventKey='2' id='Panel2ID'>Panel 2</Panel>
+        <PanelGroup defaultActiveKey="1" accordion>
+          <Panel header="Collapsible Group Item #1" eventKey="1" id="Panel1ID">Panel 1</Panel>
+          <Panel header="Collapsible Group Item #2" eventKey="2" id="Panel2ID">Panel 2</Panel>
         </PanelGroup>
       );
       let accordion = ReactTestUtils.findRenderedComponentWithType(instance, PanelGroup);

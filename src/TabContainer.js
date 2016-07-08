@@ -1,102 +1,103 @@
 import React, { PropTypes } from 'react';
 import uncontrollable from 'uncontrollable';
 
-let idPropType = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.number
+const TAB = 'tab';
+const PANE = 'pane';
+
+const idPropType = PropTypes.oneOfType([
+  PropTypes.string, PropTypes.number,
 ]);
 
+const propTypes = {
+  /**
+   * HTML id attribute, required if no `generateChildId` prop
+   * is specified.
+   */
+  id(props, ...args) {
+    let error = null;
 
-let TabContainer = React.createClass({
+    if (!props.generateChildId) {
+      error = idPropType(props, ...args);
 
-  propTypes: {
-    /**
-     * HTML id attribute, required if no `generateChildId` prop
-     * is specified.
-     */
-    id(props, ...args) {
-      let error = null;
-
-      if (!props.generateChildId) {
-        error = idPropType(props, ...args);
-
-        if (!error && !props.id) {
-          error = new Error(
-            'In order to properly initialize Tabs in a way that is accessible to assistive technologies ' +
-            '(such as screen readers) an `id` or a `generateChildId` prop to TabContainer is required');
-        }
+      if (!error && !props.id) {
+        error = new Error(
+          'In order to properly initialize Tabs in a way that is accessible ' +
+          'to assistive technologies (such as screen readers) an `id` or a ' +
+          '`generateChildId` prop to TabContainer is required'
+        );
       }
-      return error;
-    },
+    }
 
-    /**
-     * A function that takes an eventKey and type and returns a
-     * unique id for child tab NavItems and TabPanes. The function _must_ be a pure function,
-     * meaning it should always return the _same_ id for the same set of inputs. The default
-     * value requires that an `id` to be set for the TabContainer.
-     *
-     * The `type` argument will either be `"tab"` or `"pane"`.
-     *
-     * @defaultValue (eventKey, type) => `${this.props.id}-${type}-${key}`
-     */
-    generateChildId: PropTypes.func,
-
-    /**
-     * A callback fired when a tab is selected.
-     *
-     * @controllable activeKey
-     */
-    onSelect: PropTypes.func,
-
-    /**
-     * The `eventKey` of the currently active tab.
-     *
-     * @controllable onSelect
-     */
-    activeKey: PropTypes.any
+    return error;
   },
 
-  childContextTypes: {
-    $bs_tabcontainer: React.PropTypes.shape({
-      activeKey: PropTypes.any,
-      onSelect: PropTypes.func,
-      getId: PropTypes.func
-    })
-  },
+  /**
+   * A function that takes an `eventKey` and `type` and returns a unique id for
+   * child tab `<NavItem>`s and `<TabPane>`s. The function _must_ be a pure
+   * function, meaning it should always return the _same_ id for the same set
+   * of inputs. The default value requires that an `id` to be set for the
+   * `<TabContainer>`.
+   *
+   * The `type` argument will either be `"tab"` or `"pane"`.
+   *
+   * @defaultValue (eventKey, type) => `${this.props.id}-${type}-${key}`
+   */
+  generateChildId: PropTypes.func,
 
+  /**
+   * A callback fired when a tab is selected.
+   *
+   * @controllable activeKey
+   */
+  onSelect: PropTypes.func,
+
+  /**
+   * The `eventKey` of the currently active tab.
+   *
+   * @controllable onSelect
+   */
+  activeKey: PropTypes.any,
+};
+
+const childContextTypes = {
+  $bs_tabContainer: React.PropTypes.shape({
+    activeKey: PropTypes.any,
+    onSelect: PropTypes.func.isRequired,
+    getTabId: PropTypes.func.isRequired,
+    getPaneId: PropTypes.func.isRequired,
+  }),
+};
+
+class TabContainer extends React.Component {
   getChildContext() {
-    const { activeKey, generateChildId, id } = this.props;
+    const { activeKey, onSelect, generateChildId, id } = this.props;
+
+    const getId =
+      generateChildId ||
+      ((key, type) => (id ? `${id}-${type}-${key}` : null));
 
     return {
-      $bs_tabcontainer: {
+      $bs_tabContainer: {
         activeKey,
-        onSelect: this.handleSelect,
-        getId:
-          generateChildId ||
-          ((key, type) => (id ? `${id}-${type}-${key}` : null))
+        onSelect,
+        getTabId: key => getId(key, TAB),
+        getPaneId: key => getId(key, PANE),
       },
     };
-  },
-
-  componentWillUnmount() {
-    // isMounted() isn't `true` at this point;
-    this.unmounting = true;
-  },
-
-  handleSelect(key) {
-    if (!this.unmounting) {
-      this.props.onSelect(key);
-    }
-  },
+  }
 
   render() {
     const { children, ...props } = this.props;
+
     delete props.generateChildId;
     delete props.onSelect;
     delete props.activeKey;
 
     return React.cloneElement(React.Children.only(children), props);
   }
-});
+}
+
+TabContainer.propTypes = propTypes;
+TabContainer.childContextTypes = childContextTypes;
 
 export default uncontrollable(TabContainer, { activeKey: 'onSelect' });
