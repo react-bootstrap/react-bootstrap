@@ -8,6 +8,11 @@ import Fade from './Fade';
 import classNames from 'classnames';
 
 class Overlay extends React.Component {
+  updatePosition() {
+      if (this.refs.overlay) {
+          this.refs.overlay.updatePosition();
+      }
+  }
 
   render() {
     let {
@@ -27,6 +32,7 @@ class Overlay extends React.Component {
 
     return (
       <BaseOverlay
+        ref="overlay"
         {...props}
         transition={transition}
       >
