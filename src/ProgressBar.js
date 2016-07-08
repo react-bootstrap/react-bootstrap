@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import omit from 'lodash-compat/object/omit';
 import React, { cloneElement, PropTypes } from 'react';
 
 import { bsClass as setBsClass, bsStyles, getClassSet, omitBsProps, prefix }
@@ -98,8 +97,10 @@ class ProgressBar extends React.Component {
   }
 
   render() {
-    if (this.props.isChild) {
-      return this.renderProgressBar(omit(this.props, ['isChild']));
+    const { isChild, ...props } = this.props;
+
+    if (isChild) {
+      return this.renderProgressBar(props);
     }
 
     const {
@@ -114,12 +115,12 @@ class ProgressBar extends React.Component {
       bsStyle,
       className,
       children,
-      ...props,
-    } = this.props;
+      ...wrapperProps,
+    } = props;
 
     return (
       <div
-        {...props}
+        {...wrapperProps}
         className={classNames(className, 'progress')}
       >
         {children ?

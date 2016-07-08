@@ -10,8 +10,8 @@ const propTypes = {
   /**
    * You can use a custom element type for this component.
    *
-   * If not specified, it will be treated as `'li'` if every child is a non-
-   * actionable `<ListGroupItem>`, and `'div'` otherwise.
+   * If not specified, it will be treated as `'li'` if every child is a
+   * non-actionable `<ListGroupItem>`, and `'div'` otherwise.
    */
   componentClass: elementType,
 };

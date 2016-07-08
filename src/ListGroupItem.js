@@ -13,6 +13,7 @@ const propTypes = {
   listItem: React.PropTypes.bool,
   onClick: React.PropTypes.func,
   href: React.PropTypes.string,
+  type: React.PropTypes.string,
 };
 
 const defaultProps = {
@@ -58,7 +59,7 @@ class ListGroupItem extends React.Component {
       Component = 'span';
     }
 
-    const containerProps = {
+    const componentProps = {
       ...omitBsProps(props),
       className: classNames(className, classes),
     };
@@ -66,7 +67,7 @@ class ListGroupItem extends React.Component {
     // TODO: Deprecate `header` prop.
     if (header) {
       return (
-        <Component {...containerProps}>
+        <Component {...componentProps}>
           {this.renderHeader(header, prefix(props, 'heading'))}
 
           <p className={prefix(props, 'text')}>
@@ -77,7 +78,7 @@ class ListGroupItem extends React.Component {
     }
 
     return (
-      <Component {...containerProps}>
+      <Component {...componentProps}>
         {children}
       </Component>
     );

@@ -3,6 +3,8 @@ import React from 'react';
 
 import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
 
+// TODO: `pullRight` doesn't belong here. There's no special handling here.
+
 const propTypes = {
   pullRight: React.PropTypes.bool,
 };

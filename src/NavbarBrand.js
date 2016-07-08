@@ -11,18 +11,19 @@ class NavbarBrand extends React.Component {
   render() {
     const { className, children, ...props } = this.props;
     const { $bs_navbar_bsClass: bsClass = 'navbar' } = this.context;
-    const brandClasses = prefix({ bsClass }, 'brand');
+
+    const bsClassName = prefix({ bsClass }, 'brand');
 
     if (React.isValidElement(children)) {
       return React.cloneElement(children, {
         className: classNames(
-          children.props.className, className, brandClasses
+          children.props.className, className, bsClassName
         )
       });
     }
 
     return (
-      <span {...props} className={classNames(className, brandClasses)}>
+      <span {...props} className={classNames(className, bsClassName)}>
         {children}
       </span>
     );

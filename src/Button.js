@@ -71,11 +71,12 @@ class Button extends React.Component {
 Button.propTypes = propTypes;
 Button.defaultProps = defaultProps;
 
-export default bsStyles(
-  [...Object.values(State), Style.DEFAULT, Style.PRIMARY, Style.LINK],
-  Style.DEFAULT,
-  bsSizes(
-    [Size.LARGE, Size.SMALL, Size.XSMALL],
-    bsClass('btn', Button)
+export default bsClass('btn',
+  bsSizes([Size.LARGE, Size.SMALL, Size.XSMALL],
+    bsStyles(
+      [...Object.values(State), Style.DEFAULT, Style.PRIMARY, Style.LINK],
+      Style.DEFAULT,
+      Button
+    )
   )
 );

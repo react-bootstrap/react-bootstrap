@@ -39,6 +39,9 @@ class FormControlFeedback extends React.Component {
 
   render() {
     const { className, children, ...props } = this.props;
+
+    delete props.bsRole;
+
     const classes = getClassSet(props);
 
     if (!children) {

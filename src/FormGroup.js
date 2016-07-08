@@ -45,6 +45,8 @@ class FormGroup extends React.Component {
       ...props,
     } = this.props;
 
+    delete props.controlId;
+
     const classes = {
       ...getClassSet(props),
       'has-feedback': this.hasFeedback(children),

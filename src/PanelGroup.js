@@ -12,11 +12,14 @@ const propTypes = {
   children: React.PropTypes.node,
   defaultActiveKey: React.PropTypes.any,
   onSelect: React.PropTypes.func,
+  role: React.PropTypes.string,
 };
 
 const defaultProps = {
   accordion: false,
 };
+
+// TODO: Use uncontrollable.
 
 class PanelGroup extends React.Component {
   constructor(props, context) {
