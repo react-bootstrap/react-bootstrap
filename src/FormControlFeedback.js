@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, getClassSet } from './utils/bootstrapUtils';
-
 import Glyphicon from './Glyphicon';
+import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
 
 const defaultProps = {
   bsRole: 'feedback',
@@ -31,7 +30,7 @@ class FormControlFeedback extends React.Component {
 
     return (
       <Glyphicon
-        {...props}
+        {...omitBsProps(props)}
         glyph={glyph}
         className={classNames(className, classes)}
       />
@@ -40,9 +39,10 @@ class FormControlFeedback extends React.Component {
 
   render() {
     const { className, children, ...props } = this.props;
-    delete props.bsClass;
 
-    const classes = getClassSet(this.props);
+    delete props.bsRole;
+
+    const classes = getClassSet(props);
 
     if (!children) {
       return this.renderDefaultFeedback(
@@ -52,7 +52,7 @@ class FormControlFeedback extends React.Component {
 
     const child = React.Children.only(children);
     return React.cloneElement(child, {
-      ...props,
+      ...omitBsProps(props),
       className: classNames(child.props.className, className, classes),
     });
   }

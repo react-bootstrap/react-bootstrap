@@ -1,71 +1,77 @@
-import React from 'react';
 import classNames from 'classnames';
-import styleMaps from './styleMaps';
+import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
-const Clearfix = React.createClass({
-  propTypes: {
-    /**
-     * You can use a custom element for this component
-     */
-    componentClass: elementType,
-    /**
-     * Apply clearfix
-     *
-     * on Extra small devices Phones
-     *
-     * adds class `visible-xs-block`
-     */
-    visibleXsBlock: React.PropTypes.bool,
-    /**
-     * Apply clearfix
-     *
-     * on Small devices Tablets
-     *
-     * adds class `visible-sm-block`
-     */
-    visibleSmBlock: React.PropTypes.bool,
-    /**
-     * Apply clearfix
-     *
-     * on Medium devices Desktops
-     *
-     * adds class `visible-md-block`
-     */
-    visibleMdBlock: React.PropTypes.bool,
-    /**
-     * Apply clearfix
-     *
-     * on Large devices Desktops
-     *
-     * adds class `visible-lg-block`
-     */
-    visibleLgBlock: React.PropTypes.bool
-  },
+import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
+import capitalize from './utils/capitalize';
+import { DEVICE_SIZES } from './utils/StyleConfig';
 
-  getDefaultProps() {
-    return {
-      componentClass: 'div'
-    };
-  },
+const propTypes = {
+  componentClass: elementType,
 
+  /**
+   * Apply clearfix
+   *
+   * on Extra small devices Phones
+   *
+   * adds class `visible-xs-block`
+   */
+  visibleXsBlock: React.PropTypes.bool,
+  /**
+   * Apply clearfix
+   *
+   * on Small devices Tablets
+   *
+   * adds class `visible-sm-block`
+   */
+  visibleSmBlock: React.PropTypes.bool,
+  /**
+   * Apply clearfix
+   *
+   * on Medium devices Desktops
+   *
+   * adds class `visible-md-block`
+   */
+  visibleMdBlock: React.PropTypes.bool,
+  /**
+   * Apply clearfix
+   *
+   * on Large devices Desktops
+   *
+   * adds class `visible-lg-block`
+   */
+  visibleLgBlock: React.PropTypes.bool,
+};
+
+const defaultProps = {
+  componentClass: 'div',
+};
+
+class Clearfix extends React.Component {
   render() {
-    let ComponentClass = this.props.componentClass;
+    const { componentClass: Component, className, ...props } = this.props;
 
-    let classes = {};
+    const classes = getClassSet(props);
 
-    Object.keys(styleMaps.SIZES).forEach( key => {
-      let size = styleMaps.SIZES[key];
+    DEVICE_SIZES.forEach(size => {
+      const propName = `visible${capitalize(size)}Block`;
+      if (props[propName]) {
+        classes[`visible-${size}-block`] = true;
+      }
 
-      classes['visible-' + size + '-block'] = this.props['visible' + size.charAt(0).toUpperCase() + size.slice(1) + 'Block'];
-    }, this);
+      delete props[propName];
+    });
 
     return (
-      <ComponentClass {...this.props} className={classNames(this.props.className, 'clearfix', classes)}>
-        {this.props.children}
-      </ComponentClass>
+      <Component
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
+      />
     );
   }
-});
+}
 
-export default Clearfix;
+Clearfix.propTypes = propTypes;
+Clearfix.defaultProps = defaultProps;
+
+export default bsClass('clearfix', Clearfix);

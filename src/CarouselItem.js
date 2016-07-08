@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 
 import TransitionEvents from './utils/TransitionEvents';
 
+// TODO: This should use a timeout instead of TransitionEvents.
+
 const CarouselItem = React.createClass({
   propTypes: {
     direction: React.PropTypes.oneOf(['prev', 'next']),

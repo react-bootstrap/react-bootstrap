@@ -1,116 +1,93 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 
-import { State } from './styleMaps';
-import {
-  bsStyles, bsClass, getClassSet, prefix,
-} from './utils/bootstrapUtils';
+import { bsClass, bsStyles, getClassSet, omitBsProps, prefix }
+  from './utils/bootstrapUtils';
+import { State } from './utils/StyleConfig';
 
-class ListGroupItem extends React.Component {
-
-
-  render() {
-    let classes = getClassSet(this.props);
-
-    classes.active = this.props.active;
-    classes.disabled = this.props.disabled;
-
-    if (this.props.href) {
-      return this.renderAnchor(classes);
-    } else if (this.props.onClick) {
-      return this.renderButton(classes);
-    } else if (this.props.listItem) {
-      return this.renderLi(classes);
-    }
-
-    return this.renderSpan(classes);
-  }
-
-  renderLi(classes) {
-    return (
-      <li
-        {...this.props} className={classNames(this.props.className, classes)}>
-        {this.props.header ? this.renderStructuredContent() : this.props.children}
-      </li>
-    );
-  }
-
-  renderAnchor(classes) {
-    return (
-      <a
-        {...this.props}
-        className={classNames(this.props.className, classes)}
-      >
-        {this.props.header ? this.renderStructuredContent() : this.props.children}
-      </a>
-    );
-  }
-
-  renderButton(classes) {
-    return (
-      <button
-        type="button"
-        {...this.props}
-        className={classNames(this.props.className, classes)}>
-        {this.props.header ? this.renderStructuredContent() : this.props.children}
-      </button>
-    );
-  }
-
-  renderSpan(classes) {
-    return (
-      <span
-        {...this.props} className={classNames(this.props.className, classes)}>
-        {this.props.header ? this.renderStructuredContent() : this.props.children}
-      </span>
-    );
-  }
-
-  renderStructuredContent() {
-    let header;
-    let headingClass = prefix(this.props, 'heading');
-
-    if (React.isValidElement(this.props.header)) {
-      header = cloneElement(this.props.header, {
-        key: 'header',
-        className: classNames(this.props.header.props.className, headingClass)
-      });
-    } else {
-      header = (
-        <h4 key="header" className={headingClass}>
-          {this.props.header}
-        </h4>
-      );
-    }
-
-    let content = (
-      <p key="content" className={prefix(this.props, 'text')}>
-        {this.props.children}
-      </p>
-    );
-
-    return [header, content];
-  }
-}
-
-ListGroupItem.propTypes = {
+const propTypes = {
   className: React.PropTypes.string,
   active: React.PropTypes.any,
   disabled: React.PropTypes.any,
   header: React.PropTypes.node,
   listItem: React.PropTypes.bool,
   onClick: React.PropTypes.func,
-  eventKey: React.PropTypes.any,
   href: React.PropTypes.string,
-  target: React.PropTypes.string
+  type: React.PropTypes.string,
 };
 
-ListGroupItem.defaultTypes = {
-  listItem: false
+const defaultProps = {
+  listItem: false,
 };
 
-export default bsStyles(State.values(),
-  bsClass('list-group-item',
-    ListGroupItem
-  )
+class ListGroupItem extends React.Component {
+  renderHeader(header, headingClassName) {
+    if (React.isValidElement(header)) {
+      return cloneElement(header, {
+        className: classNames(header.props.className, headingClassName),
+      });
+    }
+
+    return (
+      <h4 className={headingClassName}>
+        {header}
+      </h4>
+    );
+  }
+
+  render() {
+    const {
+      active, disabled, className, header, listItem, children, ...props,
+    } = this.props;
+
+    const classes = {
+      ...getClassSet(props),
+      active,
+      disabled,
+    };
+
+    let Component;
+
+    if (props.href) {
+      Component = 'a';
+    } else if (props.onClick) {
+      Component = 'button';
+      props.type = props.type || 'button';
+    } else if (listItem) {
+      Component = 'li';
+    } else {
+      Component = 'span';
+    }
+
+    const componentProps = {
+      ...omitBsProps(props),
+      className: classNames(className, classes),
+    };
+
+    // TODO: Deprecate `header` prop.
+    if (header) {
+      return (
+        <Component {...componentProps}>
+          {this.renderHeader(header, prefix(props, 'heading'))}
+
+          <p className={prefix(props, 'text')}>
+            {children}
+          </p>
+        </Component>
+      );
+    }
+
+    return (
+      <Component {...componentProps}>
+        {children}
+      </Component>
+    );
+  }
+}
+
+ListGroupItem.propTypes = propTypes;
+ListGroupItem.defaultProps = defaultProps;
+
+export default bsClass('list-group-item',
+  bsStyles(Object.values(State), ListGroupItem)
 );

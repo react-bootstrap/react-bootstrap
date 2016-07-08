@@ -4,22 +4,21 @@ import React, { PropTypes } from 'react';
 import { prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
-const NavbarToggle = React.createClass({
+const propTypes = {
+  onClick: React.PropTypes.func,
+  /**
+   * The toggle content, if left empty it will render the default toggle (seen above).
+   */
+  children: PropTypes.node,
+};
 
-  propTypes: {
-    onClick: React.PropTypes.func,
-    /**
-     * The toggle content, if left empty it will render the default toggle (seen above).
-     */
-    children: PropTypes.node
-  },
+const contextTypes = {
+  $bs_navbar_bsClass: PropTypes.string,
+  $bs_navbar_onToggle: PropTypes.func,
+  $bs_navbar_expanded: PropTypes.bool,
+};
 
-  contextTypes: {
-    $bs_navbar_bsClass: PropTypes.string,
-    $bs_navbar_onToggle: PropTypes.func,
-    $bs_navbar_expanded: PropTypes.bool,
-  },
-
+class NavbarToggle extends React.Component {
   render() {
     const { onClick, className, children, ...props } = this.props;
     const {
@@ -56,6 +55,9 @@ const NavbarToggle = React.createClass({
       </button>
     );
   }
-});
+}
+
+NavbarToggle.propTypes = propTypes;
+NavbarToggle.contextTypes = contextTypes;
 
 export default NavbarToggle;

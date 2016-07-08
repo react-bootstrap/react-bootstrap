@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import React from 'react';
 import warning from 'warning';
 
-import { bsClass, getClassSet, prefix } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, omitBsProps, prefix }
+  from './utils/bootstrapUtils';
 
 const propTypes = {
   inline: React.PropTypes.bool,
@@ -39,11 +40,9 @@ class Checkbox extends React.Component {
       ...props,
     } = this.props;
 
-    delete props.bsClass;
-
     const input = (
       <input
-        {...props}
+        {...omitBsProps(props)}
         ref={inputRef}
         type="checkbox"
         disabled={disabled}
@@ -52,7 +51,7 @@ class Checkbox extends React.Component {
 
     if (inline) {
       const classes = {
-        [prefix(this.props, 'inline')]: true,
+        [prefix(props, 'inline')]: true,
         disabled,
       };
 
@@ -74,7 +73,7 @@ class Checkbox extends React.Component {
     }
 
     const classes = {
-      ...getClassSet(this.props),
+      ...getClassSet(props),
       disabled,
     };
     if (validationState) {

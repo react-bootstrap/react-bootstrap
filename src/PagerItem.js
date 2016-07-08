@@ -1,27 +1,47 @@
+
 import classNames from 'classnames';
 import React from 'react';
 
 import SafeAnchor from './SafeAnchor';
 import createChainedFunction from './utils/createChainedFunction';
 
-const PagerItem = React.createClass({
-  displayName: 'Pager.Item',
-  propTypes: {
-    disabled: React.PropTypes.bool,
-    previous: React.PropTypes.bool,
-    next: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
-    onSelect: React.PropTypes.func,
-    eventKey: React.PropTypes.any
-  },
+const propTypes = {
+  disabled: React.PropTypes.bool,
+  previous: React.PropTypes.bool,
+  next: React.PropTypes.bool,
+  onClick: React.PropTypes.func,
+  onSelect: React.PropTypes.func,
+  eventKey: React.PropTypes.any,
+};
 
-  getDefaultProps() {
-    return {
-      disabled: false,
-      previous: false,
-      next: false
-    };
-  },
+const defaultProps = {
+  disabled: false,
+  previous: false,
+  next: false,
+};
+
+class PagerItem extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleSelect = this.handleSelect.bind(this);
+  }
+
+  handleSelect(e) {
+    const { disabled, onSelect, eventKey } = this.props;
+
+    if (onSelect || disabled) {
+      e.preventDefault();
+    }
+
+    if (disabled) {
+      return;
+    }
+
+    if (onSelect) {
+      onSelect(eventKey, e);
+    }
+  }
 
   render() {
     const {
@@ -43,17 +63,10 @@ const PagerItem = React.createClass({
         />
       </li>
     );
-  },
-
-  handleSelect(e) {
-    if (this.props.onSelect || this.props.disabled) {
-      e.preventDefault();
-
-      if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, e);
-      }
-    }
   }
-});
+}
+
+PagerItem.propTypes = propTypes;
+PagerItem.defaultProps = defaultProps;
 
 export default PagerItem;

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Badge from '../src/Badge';
 
-describe('Badge', () => {
+describe('<Badge>', () => {
   it('Should output a badge with content', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
@@ -52,10 +52,26 @@ describe('Badge', () => {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpull-right\b/));
   });
 
-  it('Should not have a badge class when empty', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Badge />
-    );
-    assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
+  describe('Hides when empty', () => {
+    it('should hide with no children', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Badge />
+      );
+      assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
+    });
+
+    it('should hide with empty string', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Badge>{''}</Badge>
+      );
+      assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
+    });
+
+    it('should not hide 0', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Badge>{0}</Badge>
+      );
+      assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
+    });
   });
 });

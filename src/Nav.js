@@ -78,7 +78,6 @@ class Nav extends React.Component {
         activeHref: this.props.activeHref,
         onSelect,
         key: child.key || index,
-        navItem: true,
         ...tabProps
       }
     );

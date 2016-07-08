@@ -25,10 +25,10 @@ describe('Dropdown', () => {
   let BaseDropdown = Dropdown.ControlledComponent;
 
   const dropdownChildren = [
-    <Dropdown.Toggle>
+    <Dropdown.Toggle key="toggle">
       Child Title
     </Dropdown.Toggle>,
-    <Dropdown.Menu>
+    <Dropdown.Menu key="menu">
       <MenuItem>Item 1</MenuItem>
       <MenuItem>Item 2</MenuItem>
       <MenuItem>Item 3</MenuItem>

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Collapse from '../src/Collapse';
 
-describe('Collapse', () => {
+describe('<Collapse>', () => {
 
   let Component, instance;
 

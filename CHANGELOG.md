@@ -4,8 +4,18 @@
 - **Breaking:** Remove `linkId` prop from `<Breadcrumb.Item>`, for consistency with other wrapped link components ([#2011])
 - **Breaking:** Remove deprecated functionality from v0.29.x ([#2017])
 - **Breaking:** Remove redundant `caption` prop from `<Carousel.Item>`, as this functionality is available from `<Carousel.Caption>` ([#2018])
+- **Breaking:** Remove pointless `navItem` and `navDropdown` props from `<Button>` ([#2026])
 - **Feature/Deprecation:** Rename `<PageItem>` to <Pager.Item>` for consistency ([#1976])
 - **Feature:** Add `ValidComponentChildren.toArray` ([#2016])
+- **Feature:** Add `bsClass` support consistently throughout all components ([#2026])
+- **Feature:** Add `omitBsProps` helper to `bootstrapUtils` to remove Bootstrap styling props ([#2026])
+- **Feature:** Improve IE8-compatible self collapse support on `<Badge>` and add it to `<Label>` ([#2026])
+- **Bugfix:** Do not pass arbitrary props to DOM nodes ([#2026])
+- **Bugfix:** Support strings for `positionTop` and `positionLeft` on `<Popover>` and `<Tooltip>` ([#2026])
+- **Bugfix:** Support captions on `<Thumbnail>` links ([#2026])
+- **Bugfix:** Don't ignore `componentClass` on `<ListGroup>` when using only `<ListGroupItem>` children ([#2026])
+- **Bugfix:** Don't assign default `key` to `<ListGroup>`, `PanelGroup`, `<Pager>`, or `<ProgressBar>` children ([#2026])
+- **Bugfix:** Remove pointless update-deferral-during-`onSelect` logic in `<PanelGroup>` ([#2026])
 
 [next]: https://github.com/react-bootstrap/react-bootstrap/compare/master...next
 [#1976]: https://github.com/react-bootstrap/react-bootstrap/pull/1976
@@ -13,6 +23,7 @@
 [#2016]: https://github.com/react-bootstrap/react-bootstrap/pull/2016
 [#2017]: https://github.com/react-bootstrap/react-bootstrap/pull/2017
 [#2018]: https://github.com/react-bootstrap/react-bootstrap/pull/2018
+[#2026]: https://github.com/react-bootstrap/react-bootstrap/pull/2026
 
 
 ## [HEAD] \(v0.29.6\)

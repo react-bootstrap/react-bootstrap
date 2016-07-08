@@ -1,30 +1,21 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, prefix } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
 
 class ModalFooter extends React.Component {
   render() {
+    const { className, ...props } = this.props;
+
+    const classes = getClassSet(props);
+
     return (
       <div
-        {...this.props}
-        className={classNames(this.props.className, prefix(this.props, 'footer'))}
-      >
-        {this.props.children}
-      </div>
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
+      />
     );
   }
 }
 
-ModalFooter.propTypes = {
-  /**
-   * A css class applied to the Component
-   */
-  bsClass: React.PropTypes.string
-};
-
-ModalFooter.defaultProps = {
-  bsClass: 'modal'
-};
-
-export default bsClass('modal', ModalFooter);
+export default bsClass('modal-footer', ModalFooter);

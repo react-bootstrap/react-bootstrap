@@ -10,15 +10,14 @@ import BaseModal from 'react-overlays/lib/Modal';
 import isOverflowing from 'react-overlays/lib/utils/isOverflowing';
 import elementType from 'react-prop-types/lib/elementType';
 
-import { Sizes } from './styleMaps';
-import { bsClass, bsSizes, prefix } from './utils/bootstrapUtils';
-
 import Fade from './Fade';
-import ModalDialog from './ModalDialog';
 import Body from './ModalBody';
+import ModalDialog from './ModalDialog';
+import Footer from './ModalFooter';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
-import Footer from './ModalFooter';
+import { bsClass, bsSizes, prefix } from './utils/bootstrapUtils';
+import { Size } from './utils/StyleConfig';
 
 /* eslint-disable react/prop-types */
 const Modal = React.createClass({
@@ -260,6 +259,6 @@ Modal.Dialog = ModalDialog;
 Modal.TRANSITION_DURATION = 300;
 Modal.BACKDROP_TRANSITION_DURATION = 150;
 
-export default bsSizes([Sizes.LARGE, Sizes.SMALL],
-  bsClass('modal', Modal)
+export default bsClass('modal',
+  bsSizes([Size.LARGE, Size.SMALL], Modal)
 );

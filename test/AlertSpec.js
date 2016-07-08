@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Alert from '../src/Alert';
 
-describe('Alert', () => {
+describe('<Alert>', () => {
   it('Should output a alert with message', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Alert>

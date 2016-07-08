@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 
 import Breadcrumb from '../src/Breadcrumb';
 
-describe('Breadcrumb.Item', () => {
+describe('<Breadcrumb.Item>', () => {
   it('Should render `a` as inner element when is not active', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb.Item href='#'>
+      <Breadcrumb.Item href="#">
         Crumb
       </Breadcrumb.Item>
     );
@@ -61,7 +61,7 @@ describe('Breadcrumb.Item', () => {
     };
 
     const instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb.Item href='#' onClick={handleClick}>
+      <Breadcrumb.Item href="#" onClick={handleClick}>
         Crumb
       </Breadcrumb.Item>
     );
@@ -72,7 +72,7 @@ describe('Breadcrumb.Item', () => {
 
   it('Should apply id onto the anchor', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb.Item href='#' id='test-link-id'>
+      <Breadcrumb.Item href="#" id="test-link-id">
         Crumb
       </Breadcrumb.Item>
     );
@@ -83,7 +83,7 @@ describe('Breadcrumb.Item', () => {
 
   it('Should apply `href` property onto `a` inner element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb.Item href='http://getbootstrap.com/components/#breadcrumbs'>
+      <Breadcrumb.Item href="http://getbootstrap.com/components/#breadcrumbs">
         Crumb
       </Breadcrumb.Item>
     );
@@ -94,7 +94,7 @@ describe('Breadcrumb.Item', () => {
 
   it('Should apply `title` property onto `a` inner element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb.Item title='test-title' href='http://getbootstrap.com/components/#breadcrumbs'>
+      <Breadcrumb.Item title="test-title" href="http://getbootstrap.com/components/#breadcrumbs">
         Crumb
       </Breadcrumb.Item>
     );
@@ -105,7 +105,7 @@ describe('Breadcrumb.Item', () => {
 
   it('Should not apply properties for inner `anchor` onto `li` wrapper element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb.Item title='test-title' href='/hi'>
+      <Breadcrumb.Item title="test-title" href="/hi">
         Crumb
       </Breadcrumb.Item>
     );
@@ -117,7 +117,7 @@ describe('Breadcrumb.Item', () => {
 
   it('Should set `target` attribute on `anchor`', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb.Item target='_blank' href='http://getbootstrap.com/components/#breadcrumbs'>
+      <Breadcrumb.Item target="_blank" href="http://getbootstrap.com/components/#breadcrumbs">
         Crumb
       </Breadcrumb.Item>
     );

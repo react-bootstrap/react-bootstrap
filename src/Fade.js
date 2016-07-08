@@ -2,27 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import Transition from 'react-overlays/lib/Transition';
 
-class Fade extends React.Component {
-  render() {
-    let timeout = this.props.timeout;
-
-    return (
-      <Transition
-        {...this.props}
-        timeout={timeout}
-        className={classNames(this.props.className, 'fade')}
-        enteredClassName="in"
-        enteringClassName="in"
-      >
-        {this.props.children}
-      </Transition>
-    );
-  }
-}
-
-// Explicitly copied from Transition for doc generation.
-// TODO: Remove duplication once #977 is resolved.
-Fade.propTypes = {
+const propTypes = {
   /**
    * Show the component; triggers the fade in or fade out animation
    */
@@ -69,14 +49,30 @@ Fade.propTypes = {
   /**
    * Callback fired after the component has faded out
    */
-  onExited: React.PropTypes.func
+  onExited: React.PropTypes.func,
 };
 
-Fade.defaultProps = {
+const defaultProps = {
   in: false,
   timeout: 300,
   unmountOnExit: false,
-  transitionAppear: false
+  transitionAppear: false,
 };
+
+class Fade extends React.Component {
+  render() {
+    return (
+      <Transition
+        {...this.props}
+        className={classNames(this.props.className, 'fade')}
+        enteredClassName="in"
+        enteringClassName="in"
+      />
+    );
+  }
+}
+
+Fade.propTypes = propTypes;
+Fade.defaultProps = defaultProps;
 
 export default Fade;

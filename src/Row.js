@@ -1,30 +1,33 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
-const Row = React.createClass({
-  propTypes: {
-    /**
-     * You can use a custom element for this component
-     */
-    componentClass: elementType
-  },
+import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
 
-  getDefaultProps() {
-    return {
-      componentClass: 'div'
-    };
-  },
+const propTypes = {
+  componentClass: elementType,
+};
 
+const defaultProps = {
+  componentClass: 'div',
+};
+
+class Row extends React.Component {
   render() {
-    let ComponentClass = this.props.componentClass;
+    const { componentClass: Component, className, ...props } = this.props;
+
+    const classes = getClassSet(props);
 
     return (
-      <ComponentClass {...this.props} className={classNames(this.props.className, 'row')}>
-        {this.props.children}
-      </ComponentClass>
+      <Component
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
+      />
     );
   }
-});
+}
 
-export default Row;
+Row.propTypes = propTypes;
+Row.defaultProps = defaultProps;
+
+export default bsClass('row', Row);

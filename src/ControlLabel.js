@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import warning from 'warning';
 
-import { bsClass, getClassSet } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
@@ -37,16 +37,14 @@ class ControlLabel extends React.Component {
       '`controlId` is ignored on `<ControlLabel>` when `htmlFor` is specified.'
     );
 
-    delete props.bsClass;
-
     const classes = {
-      ...getClassSet(this.props),
+      ...getClassSet(props),
       'sr-only': srOnly,
     };
 
     return (
       <label
-        {...props}
+        {...omitBsProps(props)}
         htmlFor={htmlFor}
         className={classNames(className, classes)}
       />

@@ -1,46 +1,39 @@
-import classSet from 'classnames';
+import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, getClassSet } from './utils/bootstrapUtils';
-
 import SafeAnchor from './SafeAnchor';
+import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
 
-const Thumbnail = React.createClass({
+const propTypes = {
+  src: React.PropTypes.string,
+  alt: React.PropTypes.string,
+  href: React.PropTypes.string,
+};
 
-  propTypes: {
-    alt: React.PropTypes.string,
-    href: React.PropTypes.string,
-    src: React.PropTypes.string
-  },
-
+class Thumbnail extends React.Component {
   render() {
-    let classes = getClassSet(this.props);
+    const { src, alt, className, children, ...props } = this.props;
 
-    if (this.props.href) {
-      return (
-        <SafeAnchor {...this.props} href={this.props.href} className={classSet(this.props.className, classes)}>
-          <img src={this.props.src} alt={this.props.alt} />
-        </SafeAnchor>
-      );
-    }
-
-    if (this.props.children) {
-      return (
-        <div {...this.props} className={classSet(this.props.className, classes)}>
-          <img src={this.props.src} alt={this.props.alt} />
-          <div className="caption">
-            {this.props.children}
-          </div>
-        </div>
-      );
-    }
+    const Component = props.href ? SafeAnchor : 'div';
+    const classes = getClassSet(props);
 
     return (
-      <div {...this.props} className={classSet(this.props.className, classes)}>
-        <img src={this.props.src} alt={this.props.alt} />
-      </div>
+      <Component
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
+      >
+        <img src={src} alt={alt} />
+
+        {children && (
+          <div className="caption">
+            {children}
+          </div>
+        )}
+      </Component>
     );
   }
-});
+}
+
+Thumbnail.propTypes = propTypes;
 
 export default bsClass('thumbnail', Thumbnail);

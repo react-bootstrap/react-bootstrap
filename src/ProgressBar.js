@@ -1,103 +1,46 @@
 import classNames from 'classnames';
 import React, { cloneElement, PropTypes } from 'react';
 
-import { State } from './styleMaps';
-import { bsStyles, bsClass, getClassSet, prefix }
+import { bsClass as setBsClass, bsStyles, getClassSet, omitBsProps, prefix }
   from './utils/bootstrapUtils';
+import { State } from './utils/StyleConfig';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
+const ROUND_PRECISION = 1000;
+
 /**
- * Custom propTypes checker
+ * Validate that children, if any, are instances of `<ProgressBar>`.
  */
 function onlyProgressBar(props, propName, componentName) {
-  if (props[propName]) {
-    let error, childIdentifier;
-
-    React.Children.forEach(props[propName], (child) => {
-      if (child.type !== ProgressBar) { //eslint-disable-line
-        childIdentifier = (child.type.displayName ? child.type.displayName : child.type);
-        error = new Error(`Children of ${componentName} can contain only ProgressBar components. Found ${childIdentifier}`);
-      }
-    });
-
-    return error;
+  const children = props[propName];
+  if (!children) {
+    return null;
   }
+
+  let error = null;
+
+  React.Children.forEach(children, child => {
+    if (error) {
+      return;
+    }
+
+    if (child.type === ProgressBar) { // eslint-disable-line no-use-before-define
+      return;
+    }
+
+    const childIdentifier = React.isValidElement(child) ?
+      child.type.displayName || child.type.name || child.type :
+      child;
+    error = new Error(
+      `Children of ${componentName} can contain only ProgressBar ` +
+      `components. Found ${childIdentifier}.`
+    );
+  });
+
+  return error;
 }
 
-class ProgressBar extends React.Component {
-
-  getPercentage(now, min, max) {
-    const roundPrecision = 1000;
-    return Math.round(((now - min) / (max - min) * 100) * roundPrecision) / roundPrecision;
-  }
-
-  render() {
-    if (this.props.isChild) {
-      return this.renderProgressBar();
-    }
-
-    let content;
-
-    if (this.props.children) {
-      content = ValidComponentChildren.map(this.props.children, this.renderChildBar);
-    } else {
-      content = this.renderProgressBar();
-    }
-
-    return (
-      <div
-        {...this.props}
-        className={classNames(this.props.className, 'progress')}
-        min={null}
-        max={null}
-        label={null}
-        aria-valuetext={null}
-      >
-        {content}
-      </div>
-    );
-  }
-
-  renderChildBar(child, index) {
-    return cloneElement(child, {
-      isChild: true,
-      key: child.key ? child.key : index
-    });
-  }
-
-  renderProgressBar() {
-    let { className, label, now, min, max, style, ...props } = this.props;
-
-    if (this.props.srOnly) {
-      label = (
-        <span className="sr-only">
-          {label}
-        </span>
-      );
-    }
-
-    const classes = classNames(className, getClassSet(this.props), {
-      active: this.props.active,
-      [prefix(this.props, 'striped')]: this.props.active || this.props.striped
-    });
-
-    return (
-      <div
-        {...props}
-        className={classes}
-        role="progressbar"
-        style={{ width: `${this.getPercentage(now, min, max)}%`, ...style }}
-        aria-valuenow={this.props.now}
-        aria-valuemin={this.props.min}
-        aria-valuemax={this.props.max}
-      >
-        {label}
-      </div>
-    );
-  }
-}
-
-ProgressBar.propTypes = {
+const propTypes = {
   min: PropTypes.number,
   now: PropTypes.number,
   max: PropTypes.number,
@@ -105,15 +48,16 @@ ProgressBar.propTypes = {
   srOnly: PropTypes.bool,
   striped: PropTypes.bool,
   active: PropTypes.bool,
-  children: onlyProgressBar,
   className: React.PropTypes.string,
+  children: onlyProgressBar,
+
   /**
    * @private
    */
-  isChild: PropTypes.bool
+  isChild: PropTypes.bool,
 };
 
-ProgressBar.defaultProps = {
+const defaultProps = {
   min: 0,
   max: 100,
   active: false,
@@ -122,8 +66,79 @@ ProgressBar.defaultProps = {
   striped: false
 };
 
-export default bsStyles(State.values(),
-  bsClass('progress-bar',
-    ProgressBar
-  )
+function getPercentage(now, min, max) {
+  const percentage = (now - min) / (max - min) * 100;
+  return Math.round(percentage * ROUND_PRECISION) / ROUND_PRECISION;
+}
+
+class ProgressBar extends React.Component {
+  renderProgressBar({
+    min, now, max, label, srOnly, striped, active, className, style, ...props,
+  }) {
+    const classes = {
+      ...getClassSet(props),
+      active,
+      [prefix(props, 'striped')]: active || striped,
+    };
+
+    return (
+      <div
+        {...omitBsProps(props)}
+        role="progressbar"
+        className={classNames(className, classes)}
+        style={{ width: `${getPercentage(now, min, max)}%`, ...style }}
+        aria-valuenow={now}
+        aria-valuemin={min}
+        aria-valuemax={max}
+      >
+        {srOnly ? <span className="sr-only">{label}</span> : label}
+      </div>
+    );
+  }
+
+  render() {
+    const { isChild, ...props } = this.props;
+
+    if (isChild) {
+      return this.renderProgressBar(props);
+    }
+
+    const {
+      min,
+      now,
+      max,
+      label,
+      srOnly,
+      striped,
+      active,
+      bsClass,
+      bsStyle,
+      className,
+      children,
+      ...wrapperProps,
+    } = props;
+
+    return (
+      <div
+        {...wrapperProps}
+        className={classNames(className, 'progress')}
+      >
+        {children ?
+          ValidComponentChildren.map(children, child => (
+            cloneElement(child, { isChild: true }
+          ))) :
+          this.renderProgressBar({
+            min, now, max, label, srOnly, striped, active, bsClass, bsStyle,
+          })
+        }
+      </div>
+    );
+  }
+}
+
+ProgressBar.propTypes = propTypes;
+ProgressBar.defaultProps = defaultProps;
+
+export default setBsClass('progress-bar',
+  bsStyles(Object.values(State), ProgressBar)
 );

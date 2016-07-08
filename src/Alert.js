@@ -1,70 +1,74 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { State } from './styleMaps';
-import { bsStyles, bsClass, getClassSet, prefix }
+import { bsStyles, bsClass, getClassSet, omitBsProps, prefix }
   from './utils/bootstrapUtils';
+import { State } from './utils/StyleConfig';
 
-let Alert = React.createClass({
+const propTypes = {
+  onDismiss: React.PropTypes.func,
+  closeLabel: React.PropTypes.string,
+};
 
-  propTypes: {
-    onDismiss: React.PropTypes.func,
-    closeLabel: React.PropTypes.string
-  },
+const defaultProps = {
+  closeLabel: 'Close alert',
+};
 
-  getDefaultProps() {
-    return {
-      closeLabel: 'Close Alert'
-    };
-  },
-
-  renderDismissButton() {
+class Alert extends React.Component {
+  renderDismissButton(onDismiss) {
     return (
       <button
         type="button"
         className="close"
-        onClick={this.props.onDismiss}
+        onClick={onDismiss}
         aria-hidden="true"
         tabIndex="-1"
       >
         <span>&times;</span>
       </button>
     );
-  },
+  }
 
-  renderSrOnlyDismissButton() {
+  renderSrOnlyDismissButton(onDismiss, closeLabel) {
     return (
       <button
         type="button"
         className="close sr-only"
-        onClick={this.props.onDismiss}
+        onClick={onDismiss}
       >
-        {this.props.closeLabel}
+        {closeLabel}
       </button>
     );
-  },
+  }
 
   render() {
-    let classes = getClassSet(this.props);
-    let isDismissable = !!this.props.onDismiss;
+    const {
+      onDismiss, closeLabel, className, children, ...props,
+    } = this.props;
 
-    classes[prefix(this.props, 'dismissable')] = isDismissable;
+    const dismissable = !!onDismiss;
+    const classes = {
+      ...getClassSet(props),
+      [prefix(props, 'dismissable')]: dismissable,
+    };
 
     return (
       <div
-        {...this.props}
+        {...omitBsProps(props)}
         role="alert"
-        className={classNames(this.props.className, classes)}
+        className={classNames(className, classes)}
       >
-        {isDismissable ? this.renderDismissButton() : null}
-        {this.props.children}
-        {isDismissable ? this.renderSrOnlyDismissButton() : null}
+        {dismissable && this.renderDismissButton(onDismiss)}
+        {children}
+        {dismissable && this.renderSrOnlyDismissButton(onDismiss, closeLabel)}
       </div>
     );
-  },
-});
+  }
+}
 
+Alert.propTypes = propTypes;
+Alert.defaultProps = defaultProps;
 
-export default bsStyles(State.values(), State.INFO,
+export default bsStyles(Object.values(State), State.INFO,
   bsClass('alert', Alert)
 );

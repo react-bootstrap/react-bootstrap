@@ -1,25 +1,52 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { State, DEFAULT, PRIMARY } from './styleMaps';
-import { bsStyles, bsClass, getClassSet } from './utils/bootstrapUtils';
+import { bsClass, bsStyles, getClassSet, omitBsProps }
+  from './utils/bootstrapUtils';
+import { State, Style } from './utils/StyleConfig';
 
-@bsClass('label')
-@bsStyles(State.values().concat(DEFAULT, PRIMARY), DEFAULT)
 class Label extends React.Component {
+  hasContent(children) {
+    let result = false;
+
+    React.Children.forEach(children, child => {
+      if (result) {
+        return;
+      }
+
+      if (child || child === 0) {
+        result = true;
+      }
+    });
+
+    return result;
+  }
 
   render() {
-    let classes = getClassSet(this.props);
+    const { className, children, ...props } = this.props;
+
+    const classes = {
+      ...getClassSet(props),
+
+      // Hack for collapsing on IE8.
+      hidden: !this.hasContent(children),
+    };
 
     return (
       <span
-        {...this.props}
-        className={classNames(this.props.className, classes)}
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
       >
-        {this.props.children}
+        {children}
       </span>
     );
   }
 }
 
-export default Label;
+export default bsClass('label',
+  bsStyles(
+    [...Object.values(State), Style.DEFAULT, Style.PRIMARY],
+    Style.DEFAULT,
+    Label
+  )
+);

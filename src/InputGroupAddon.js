@@ -1,17 +1,19 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, getClassSet } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
 
 class InputGroupAddon extends React.Component {
   render() {
     const { className, ...props } = this.props;
-    delete props.bsClass;
 
-    const classes = getClassSet(this.props);
+    const classes = getClassSet(props);
 
     return (
-      <span {...props} className={classNames(className, classes)} />
+      <span
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
+      />
     );
   }
 }

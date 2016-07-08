@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { Sizes } from './styleMaps';
-import { bsClass, bsSizes, getClassSet } from './utils/bootstrapUtils';
+import { bsClass, bsSizes, getClassSet, omitBsProps }
+  from './utils/bootstrapUtils';
+import { Size } from './utils/StyleConfig';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const propTypes = {
@@ -44,12 +45,10 @@ class FormGroup extends React.Component {
       ...props,
     } = this.props;
 
-    delete props.bsClass;
-    delete props.bsSize;
     delete props.controlId;
 
     const classes = {
-      ...getClassSet(this.props),
+      ...getClassSet(props),
       'has-feedback': this.hasFeedback(children),
     };
     if (validationState) {
@@ -57,7 +56,10 @@ class FormGroup extends React.Component {
     }
 
     return (
-      <div {...props} className={classNames(className, classes)}>
+      <div
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
+      >
         {children}
       </div>
     );
@@ -68,5 +70,5 @@ FormGroup.propTypes = propTypes;
 FormGroup.childContextTypes = childContextTypes;
 
 export default bsClass('form-group',
-  bsSizes([Sizes.LARGE, Sizes.SMALL], FormGroup)
+  bsSizes([Size.LARGE, Size.SMALL], FormGroup)
 );

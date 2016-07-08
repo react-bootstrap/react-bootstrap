@@ -1,14 +1,21 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 
-const MediaListItem = React.createClass({
-  displayName: 'Media.ListItem',
+import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
+
+class MediaListItem extends React.Component {
   render() {
-    const {className, ...props} = this.props;
+    const { className, ...props } = this.props;
+
+    const classes = getClassSet(props);
+
     return (
-      <li {...props} className={classNames(className, 'media')}/>
+      <li
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
+      />
     );
   }
-});
+}
 
-export default MediaListItem;
+export default bsClass('media', MediaListItem);

@@ -1,35 +1,25 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { getClassSet } from './utils/bootstrapUtils';
-
 import Button from './Button';
+import { bsClass, bsSizes, getClassSet, omitBsProps }
+  from './utils/bootstrapUtils';
 
-const ButtonToolbar = React.createClass({
-
-  propTypes: {
-    bsSize: Button.propTypes.bsSize
-  },
-
-  getDefaultProps() {
-    return {
-      bsClass: 'btn-toolbar'
-    };
-  },
-
+class ButtonToolbar extends React.Component {
   render() {
-    let classes = getClassSet(this.props);
+    const { className, ...props } = this.props;
+    const classes = getClassSet(props);
 
     return (
       <div
-        {...this.props}
+        {...omitBsProps(props)}
         role="toolbar"
-        className={classNames(this.props.className, classes)}
-      >
-        {this.props.children}
-      </div>
+        className={classNames(className, classes)}
+      />
     );
   }
-});
+}
 
-export default ButtonToolbar;
+export default bsClass('btn-toolbar',
+  bsSizes(Button.SIZES, ButtonToolbar)
+);

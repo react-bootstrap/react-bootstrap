@@ -1,3 +1,5 @@
+// TODO: This module should be ElementChildren, and should use named exports.
+
 import React from 'react';
 
 /**
@@ -115,6 +117,26 @@ function find(children, func, context) {
   return result;
 }
 
+function every(children, func, context) {
+  let index = 0;
+  let result = true;
+
+  React.Children.forEach(children, child => {
+    if (!result) {
+      return;
+    }
+    if (!React.isValidElement(child)) {
+      return;
+    }
+
+    if (!func.call(context, child, index++)) {
+      result = false;
+    }
+  });
+
+  return result;
+}
+
 function some(children, func, context) {
   let index = 0;
   let result = false;
@@ -155,6 +177,7 @@ export default {
   count,
   find,
   filter,
+  every,
   some,
   toArray,
 };
