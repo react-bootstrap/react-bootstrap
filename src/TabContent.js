@@ -56,9 +56,12 @@ class TabContent extends React.Component {
     this.handlePaneEnter = this.handlePaneEnter.bind(this);
     this.handlePaneExited = this.handlePaneExited.bind(this);
 
-    // `state.activeKey` will be `null` unless `props.animation` is `true`.
+    // Active entries in state will be `null` unless `animation` is set. Need
+    // to track active child in case keys swap and the active child changes
+    // but the active key does not.
     this.state = {
       activeKey: null,
+      activeChild: null,
     };
   }
 
@@ -87,8 +90,8 @@ class TabContent extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.animation && this.state.activeKey != null) {
-      this.setState({ activeKey: null });
+    if (!nextProps.animation && this.state.activeChild) {
+      this.setState({ activeKey: null, activeChild: null });
     }
   }
 
@@ -96,29 +99,40 @@ class TabContent extends React.Component {
     this.isUnmounted = true;
   }
 
-  handlePaneEnter(eventKey) {
+  handlePaneEnter(child, childKey) {
     if (!this.props.animation) {
-      return;
+      return false;
     }
 
-    if (eventKey !== this.getContainerActiveKey()) {
-      return;
+    // It's possible that this child should be transitioning out.
+    if (childKey !== this.getContainerActiveKey()) {
+      return false;
     }
 
-    if (this.state.activeKey !== eventKey) {
-      this.setState({ activeKey: eventKey });
-    }
+    this.setState({
+      activeKey: childKey,
+      activeChild: child,
+    });
+
+    return true;
   }
 
-  handlePaneExited(eventKey) {
+  handlePaneExited(child) {
     // This might happen as everything is unmounting.
     if (this.isUnmounted) {
       return;
     }
 
-    if (eventKey === this.state.activeKey) {
-      this.setState({ activeKey: null });
-    }
+    this.setState(({ activeChild }) => {
+      if (activeChild !== child) {
+        return null;
+      }
+
+      return {
+        activeKey: null,
+        activeChild: null,
+      };
+    });
   }
 
   getContainerActiveKey() {

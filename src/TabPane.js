@@ -103,7 +103,7 @@ class TabPane extends React.Component {
     this.handleEnter = this.handleEnter.bind(this);
     this.handleExited = this.handleExited.bind(this);
 
-    this.enteredEventKey = null;
+    this.in = false;
   }
 
   getChildContext() {
@@ -113,30 +113,26 @@ class TabPane extends React.Component {
   }
 
   componentDidMount() {
-    if (this.getAnimation() && this.isActive()) {
+    if (this.shouldBeIn()) {
       // In lieu of the action event firing.
       this.handleEnter();
     }
   }
 
   componentDidUpdate() {
-    if (this.enteredEventKey != null) {
-      if (!this.getAnimation() || !this.isActive()) {
+    if (this.in) {
+      if (!this.shouldBeIn()) {
         // We shouldn't be active any more. Notify the parent.
         this.handleExited();
       }
-    }
-
-    if (this.enteredEventKey == null && this.props.eventKey) {
-      if (this.getAnimation() && this.isActive()) {
-        // We are the active child. Notify the parent.
-        this.handleEnter();
-      }
+    } else if (this.shouldBeIn()) {
+      // We are the active child. Notify the parent.
+      this.handleEnter();
     }
   }
 
   componentWillUnmount() {
-    if (this.enteredEventKey != null) {
+    if (this.in) {
       // In lieu of the action event firing.
       this.handleExited();
     }
@@ -148,9 +144,7 @@ class TabPane extends React.Component {
       return;
     }
 
-    const { eventKey } = this.props;
-    tabContent.onPaneEnter(eventKey);
-    this.enteredEventKey = eventKey;
+    this.in = tabContent.onPaneEnter(this, this.props.eventKey);
   }
 
   handleExited() {
@@ -159,8 +153,8 @@ class TabPane extends React.Component {
       return;
     }
 
-    tabContent.onPaneExited(this.enteredEventKey);
-    this.enteredEventKey = null;
+    tabContent.onPaneExited(this);
+    this.in = false;
   }
 
   getAnimation() {
@@ -177,6 +171,10 @@ class TabPane extends React.Component {
     const activeKey = tabContent && tabContent.activeKey;
 
     return this.props.eventKey === activeKey;
+  }
+
+  shouldBeIn() {
+    return this.getAnimation() && this.isActive();
   }
 
   render() {

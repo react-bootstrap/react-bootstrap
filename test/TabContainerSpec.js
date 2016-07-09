@@ -10,7 +10,6 @@ import TabContainer from '../src/TabContainer';
 const s = tsp.selector;
 
 describe('<TabContainer>', () => {
-
   it('should not propagate context past TabPanes', () => {
     let instance = tsp(
       <TabContainer id="custom-id">
@@ -93,221 +92,6 @@ describe('<TabContainer>', () => {
       .should.equal('tab');
   });
 
-  it('should not get stuck after tab becomes unmounted', () => {
-    class Switcher extends React.Component {
-      state = {
-        activeKey: '2',
-        show: true,
-      };
-
-      render() {
-        return (
-          <TabContainer
-            id="custom-id"
-            activeKey={this.state.activeKey}
-            onSelect={() => {}}
-          >
-            <div>
-              <TabContent>
-                <TabPane eventKey="1" />
-                {this.state.show &&
-                  <TabPane eventKey="2" />
-                }
-              </TabContent>
-            </div>
-          </TabContainer>
-        );
-      }
-    }
-
-    const instance = tsp(<Switcher />).render();
-    instance.single(TabContent);
-
-    instance.single('[eventKey="2"]').single('.active');
-
-    instance.state('show', false);
-    instance.none('.active');
-
-    instance.state('activeKey', '1');
-    instance.single('[eventKey="1"]').single('.active');
-  });
-
-  it('should not call onSelect when container unmounts', () => {
-    class Switcher extends React.Component {
-      state = { show: true };
-      render() {
-        if (!this.state.show) {
-          return <div />;
-        }
-
-        return (
-          <TabContainer id="custom-id" {...this.props}>
-            <div>
-              <TabContent>
-                <TabPane eventKey="1" />
-              </TabContent>
-            </div>
-          </TabContainer>
-        );
-      }
-    }
-
-    let spy = sinon.spy();
-    let instance = tsp(<Switcher activeKey="1" onSelect={spy} />).render();
-
-    instance.single(TabPane);
-
-    instance.state('show', false);
-
-    spy.should.have.not.been.called;
-  });
-
-  it('should clean up unmounted tab state', () => {
-    class Switcher extends React.Component {
-      state = {
-        activeKey: 2,
-        tabs: [0, 1, 2],
-      };
-
-      render() {
-        return (
-          <TabContainer
-            id="custom-id"
-            activeKey={this.state.activeKey}
-            onSelect={() => {}}
-          >
-            <div>
-              <TabContent>
-                {this.state.tabs.map(id =>
-                  <TabPane key={id} eventKey={id}>{id}</TabPane>
-                )}
-              </TabContent>
-            </div>
-          </TabContainer>
-        );
-      }
-    }
-
-    const instance = tsp(<Switcher />).render();
-
-    instance.find(TabPane).length.should.equal(3);
-    instance.single('[eventKey=2]').single('.active');
-
-    instance.state({
-      activeKey: 1,
-      tabs: [0, 1],
-    });
-
-    instance.find(TabPane).length.should.equal(2);
-    instance.single('[eventKey=1]').single('.active');
-  });
-
-  it('should not get stuck if tab stops animating', () => {
-    class Switcher extends React.Component {
-      state = {
-        activeKey: 1,
-        animation: true,
-      };
-
-      render() {
-        return (
-          <TabContainer
-            id="custom-id"
-            activeKey={this.state.activeKey}
-            onSelect={() => {}}
-          >
-            <TabContent>
-              <TabPane key={0} eventKey={0} />
-              <TabPane key={1} eventKey={1} animation={this.state.animation} />
-            </TabContent>
-          </TabContainer>
-        );
-      }
-    }
-
-    const instance = tsp(<Switcher />).render();
-
-    instance.single('[eventKey=1]').single('.active');
-
-    instance.state({ animation: false });
-    instance.single('[eventKey=1]').single('.active');
-
-    instance.state({ activeKey: 0 });
-    instance.single('[eventKey=0]').single('.active');
-  });
-
-  it('should handle simultaneous eventKey and activeKey change', () => {
-    class Switcher extends React.Component {
-      state = {
-        activeKey: 1,
-      };
-
-      render() {
-        return (
-          <TabContainer
-            id="custom-id"
-            activeKey={this.state.activeKey}
-            onSelect={() => {}}
-          >
-            <TabContent>
-              <TabPane key={0} eventKey={0} />
-              <TabPane key={1} eventKey={this.state.activeKey} />
-            </TabContent>
-          </TabContainer>
-        );
-      }
-    }
-
-    const instance = tsp(<Switcher />).render();
-
-    instance.single('[eventKey=1]').single('.active');
-
-    instance.state({ activeKey: 2 });
-    instance.single('[eventKey=2]').single('.active');
-  });
-
-  it('should not get stuck if eventKey ceases to exist', () => {
-    class Switcher extends React.Component {
-      state = {
-        activeKey: 1,
-        eventKey: 1,
-      };
-
-      render() {
-        return (
-          <TabContainer
-            id="custom-id"
-            activeKey={this.state.activeKey}
-            onSelect={() => {}}
-          >
-            <TabContent>
-              <TabPane key={0} eventKey={0} />
-              <TabPane key={1} eventKey={this.state.eventKey} />
-            </TabContent>
-          </TabContainer>
-        );
-      }
-    }
-
-    const instance = tsp(<Switcher />).render();
-
-    instance.single('[eventKey=1]').single('.active');
-
-    instance.state({ eventKey: 2 });
-    instance.none('.active');
-
-    instance.state({ activeKey: 2 });
-    instance.single('[eventKey=2]').single('.active');
-
-    // Check that active state lingers after changing event key.
-    instance.state({ activeKey: 0 });
-    instance.single('[eventKey=2]').single('.active');
-
-    // But once event key changes again, make sure active state switches.
-    instance.state({ eventKey: 1 });
-    instance.single('[eventKey=0]').single('.active');
-  });
-
   it('should use explicit Nav role', () => {
     let instance = tsp(
       <TabContainer id="custom-id">
@@ -329,5 +113,149 @@ describe('<TabContainer>', () => {
     expect(instance
       .find(s`${NavItem} a`)[0]
       .getAttribute('role')).to.not.exist;
+  });
+
+  describe('tab switching edge cases', () => {
+    class Switcher extends React.Component {
+      state = { ...this.props };
+
+      render() {
+        const {
+          eventKeys, show = true, onSelect = () => {}, tabProps = [], ...props,
+        } = this.state;
+
+        if (!show) {
+          return null;
+        }
+
+        return (
+          <TabContainer {...props} id="custom-id" onSelect={onSelect}>
+            <TabContent>
+              {eventKeys.map((eventKey, index) => (
+                <TabPane
+                  key={index}
+                  eventKey={eventKey}
+                  {...tabProps[index]}
+                />
+              ))}
+            </TabContent>
+          </TabContainer>
+        );
+      }
+    }
+
+    it('should not get stuck after tab becomes unmounted', () => {
+      const instance = tsp(
+        <Switcher eventKeys={[1, 2]} activeKey={2} />
+      ).render();
+
+      instance.single(TabContent);
+      instance.single('[eventKey=2]').single('.active');
+
+      instance.state({ eventKeys: [1] });
+      instance.none('.active');
+
+      instance.state({ activeKey: 1 });
+      instance.single('[eventKey=1]').single('.active');
+    });
+
+    it('should not call onSelect when container unmounts', () => {
+      const spy = sinon.spy();
+      const instance = tsp(
+        <Switcher eventKeys={[1]} activeKey={1} onSelect={spy} />
+      ).render();
+
+      instance.single(TabPane);
+
+      instance.state({ show: false });
+      spy.should.have.not.been.called;
+    });
+
+    it('should clean up unmounted tab state', () => {
+      const instance = tsp(
+        <Switcher eventKeys={[1, 2, 3]} activeKey={3} />
+      ).render();
+
+      instance.find(TabPane).length.should.equal(3);
+      instance.single('[eventKey=3]').single('.active');
+
+      instance.state({ eventKeys: [1, 2], activeKey: 2 });
+      instance.find(TabPane).length.should.equal(2);
+      instance.single('[eventKey=2]').single('.active');
+    });
+
+    it('should not get stuck if tab stops animating', () => {
+      const instance = tsp(
+        <Switcher eventKeys={[1, 2]} activeKey={1} />
+      ).render();
+
+      instance.single('[eventKey=1]').single('.active');
+
+      instance.state({ animation: false });
+      instance.single('[eventKey=1]').single('.active');
+
+      instance.state({ activeKey: 2 });
+      instance.single('[eventKey=2]').single('.active');
+
+      instance.state({ animation: true });
+      instance.state({ activeKey: 1 });
+      instance.single('[eventKey=2]').single('.active');
+    });
+
+    it('should handle simultaneous eventKey and activeKey change', () => {
+      const instance = tsp(
+        <Switcher eventKeys={[1, 2]} activeKey={2} />
+      ).render();
+
+      instance.single('[eventKey=2]').single('.active');
+
+      instance.state({ eventKeys: [1, 3], activeKey: 3 });
+      instance.single('[eventKey=3]').single('.active');
+
+      instance.state({ eventKeys: [1, 4], activeKey: 4 });
+      instance.single('[eventKey=4]').single('.active');
+    });
+
+    it('should not get stuck if eventKey ceases to exist', () => {
+      const instance = tsp(
+        <Switcher eventKeys={[1, 2]} activeKey={2} />
+      ).render();
+
+      instance.single('[eventKey=2]').single('.active');
+
+      instance.state({ eventKeys: [1, 3] });
+      instance.none('.active');
+
+      instance.state({ activeKey: 3 });
+      instance.single('[eventKey=3]').single('.active');
+
+      // Check that active state lingers after changing event key.
+      instance.state({ activeKey: 1 });
+      instance.single('[eventKey=3]').single('.active');
+
+      // But once event key changes again, make sure active state switches.
+      instance.state({ eventKeys: [1, 2] });
+      instance.single('[eventKey=1]').single('.active');
+    });
+
+    [
+      [[1, 2], [2, 1]],
+      [[2, 1], [1, 2]],
+    ].forEach(([order1, order2]) => {
+      it('should handle event key swaps', () => {
+        const instance = tsp(
+          <Switcher eventKeys={order1} activeKey={1} />
+        ).render();
+
+        instance.single('[eventKey=1]').single('.active');
+
+        instance.state({ eventKeys: order2 });
+        instance.single('[eventKey=1]').single('.active');
+
+        // Check that the animation is still wired up.
+        instance.state({ activeKey: 2 });
+        instance.single('[eventKey=1]').single('.active');
+      });
+    });
   });
 });
