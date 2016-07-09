@@ -1,7 +1,6 @@
-import 'es5-shim';
+import deprecated from 'react-prop-types/lib/deprecated';
 
 import { _resetWarned } from '../src/utils/deprecationWarning';
-import deprecated from 'react-prop-types/lib/deprecated';
 
 beforeEach(() => {
   sinon.stub(console, 'error', msg => {

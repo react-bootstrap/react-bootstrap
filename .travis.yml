@@ -4,6 +4,12 @@ language: node_js
 node_js:
   - stable
 
+env:
+  - BROWSER=ChromeCi
+
+# FIXME: Our test suite fails on Firefox.
+#   - BROWSER=Firefox
+
 cache:
   directories:
     - node_modules

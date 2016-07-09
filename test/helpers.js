@@ -1,4 +1,4 @@
-import {cloneElement} from 'react';
+import { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
 
 export function shouldWarn(about) {
