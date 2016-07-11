@@ -391,7 +391,7 @@ describe('<Tabs>', () => {
     assert.equal(parseFloat(ReactDOM.findDOMNode(instance).style.opacity), 0.5);
   });
 
-  it('should respect custom bsClass on all components', () => {
+  it('should derive bsClass from parent', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Tabs id="test" bsClass="my-tabs">
         <Tab eventKey={1} title="Tab 1" />
@@ -399,7 +399,7 @@ describe('<Tabs>', () => {
       </Tabs>
     );
 
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-tabs-pane'));
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-pane'));
+    assert.lengthOf(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'my-tabs-pane'), 2);
+    assert.lengthOf(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'my-pane'), 0);
   });
 });

@@ -118,4 +118,15 @@ describe('<SplitButton>', () => {
     const toggleNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
     expect(toggleNode.getAttribute('aria-label')).to.equal('Label');
   });
+
+  it('should derive bsClass from parent', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <SplitButton title="title" id="test-id" bsClass="my-dropdown">
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+      </SplitButton>
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-toggle'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-menu'));
+  });
 });

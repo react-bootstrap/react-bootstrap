@@ -214,7 +214,6 @@ describe('<Panel>', () => {
     );
 
     const children = ReactDOM.findDOMNode(instance).children;
-    console.log(children);
     assert.equal(children.length, 3);
 
     assert.equal(children[0].nodeName, 'DIV');

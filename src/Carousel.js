@@ -101,15 +101,13 @@ class Carousel extends React.Component {
 
   handleMouseOver() {
     if (this.props.pauseOnHover) {
-      this.isPaused = true;
-      clearTimeout(this.timeout);
+      this.pause();
     }
   }
 
   handleMouseOut() {
     if (this.isPaused) {
-      this.isPaused = false;
-      this.waitForNext();
+      this.play();
     }
   }
 
@@ -221,6 +219,18 @@ class Carousel extends React.Component {
     if (!this.isPaused && slide && interval && activeIndexProp == null) {
       this.timeout = setTimeout(this.handleNext, interval);
     }
+  }
+
+  // This might be a public API.
+  pause() {
+    this.isPaused = true;
+    clearTimeout(this.timeout);
+  }
+
+  // This might be a public API.
+  play() {
+    this.isPaused = false;
+    this.waitForNext();
   }
 
   renderIndicators(children, activeIndex, props) {

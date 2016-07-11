@@ -133,17 +133,17 @@ class Nav extends React.Component {
     let nextActiveChild;
 
     switch (event.keyCode) {
-    case keycode.codes.left:
-    case keycode.codes.up:
-      nextActiveChild = this.getNextActiveChild(-1);
-      break;
-    case keycode.codes.right:
-    case keycode.codes.down:
-      nextActiveChild = this.getNextActiveChild(1);
-      break;
-    default:
-      // It was a different key; don't handle this keypress.
-      return;
+      case keycode.codes.left:
+      case keycode.codes.up:
+        nextActiveChild = this.getNextActiveChild(-1);
+        break;
+      case keycode.codes.right:
+      case keycode.codes.down:
+        nextActiveChild = this.getNextActiveChild(1);
+        break;
+      default:
+        // It was a different key; don't handle this keypress.
+        return;
     }
 
     event.preventDefault();

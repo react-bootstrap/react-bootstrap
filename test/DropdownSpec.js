@@ -480,4 +480,22 @@ describe('<Dropdown>', () => {
     });
   });
 
+  it('should derive bsClass from parent', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Dropdown bsClass="my-dropdown" id="test-id">
+        <Dropdown.Toggle bsClass="my-toggle">
+          Child Title
+        </Dropdown.Toggle>
+        <Dropdown.Menu bsClass="my-menu">
+          <MenuItem>Item 1</MenuItem>
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-toggle'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-menu'));
+
+    assert.lengthOf(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'my-toggle'), 0);
+    assert.lengthOf(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'my-menu'), 0);
+  });
 });

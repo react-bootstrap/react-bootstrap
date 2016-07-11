@@ -3,7 +3,6 @@ import pick from 'lodash-compat/object/pick';
 import React from 'react';
 
 import Dropdown from './Dropdown';
-import { bsClass, prefix } from './utils/bootstrapUtils';
 
 const propTypes = {
   ...Dropdown.propTypes,
@@ -37,14 +36,13 @@ class DropdownButton extends React.Component {
       >
         <Dropdown.Toggle
           {...toggleProps}
-          bsClass={prefix(props, 'toggle')}
           bsSize={bsSize}
           bsStyle={bsStyle}
         >
           {title}
         </Dropdown.Toggle>
 
-        <Dropdown.Menu bsClass={prefix(props, 'menu')}>
+        <Dropdown.Menu>
           {children}
         </Dropdown.Menu>
       </Dropdown>
@@ -54,4 +52,4 @@ class DropdownButton extends React.Component {
 
 DropdownButton.propTypes = propTypes;
 
-export default bsClass('dropdown', DropdownButton);
+export default DropdownButton;

@@ -3,7 +3,8 @@ import React, { PropTypes } from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 import warning from 'warning';
 
-import { getClassSet, omitBsProps, prefix } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, omitBsProps, prefix }
+  from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
 import Fade from './Fade';
@@ -209,12 +210,8 @@ class TabPane extends React.Component {
 
     const Transition = animation === true ? Fade : animation;
 
-    if (props.bsClass === undefined) {
-      if (tabContent) {
-        props.bsClass = prefix(tabContent, 'pane');
-      } else {
-        props.bsClass = 'tab-pane';
-      }
+    if (tabContent) {
+      props.bsClass = prefix(tabContent, 'pane');
     }
 
     const classes = {
@@ -271,4 +268,4 @@ TabPane.propTypes = propTypes;
 TabPane.contextTypes = contextTypes;
 TabPane.childContextTypes = childContextTypes;
 
-export default TabPane;
+export default bsClass('tab-pane', TabPane);

@@ -3,7 +3,6 @@ import pick from 'lodash-compat/object/pick';
 import React from 'react';
 
 import Dropdown from './Dropdown';
-import { bsClass, prefix } from './utils/bootstrapUtils';
 
 const propTypes = {
   ...Dropdown.propTypes,
@@ -40,12 +39,11 @@ class NavDropdown extends React.Component {
         <Dropdown.Toggle
           {...toggleProps}
           useAnchor
-          bsClass={prefix(props, 'toggle')}
         >
           {title}
         </Dropdown.Toggle>
 
-        <Dropdown.Menu bsClass={prefix(props, 'menu')}>
+        <Dropdown.Menu>
           {children}
         </Dropdown.Menu>
       </Dropdown>
@@ -55,4 +53,4 @@ class NavDropdown extends React.Component {
 
 NavDropdown.propTypes = propTypes;
 
-export default bsClass('dropdown', NavDropdown);
+export default NavDropdown;

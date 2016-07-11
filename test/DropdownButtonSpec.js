@@ -165,4 +165,15 @@ describe('<DropdownButton>', () => {
     assert.equal(buttonNode.getAttribute('id'), 'testId');
     assert.ok(buttonNode.disabled);
   });
+
+  it('should derive bsClass from parent', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="title" id="test-id" bsClass="my-dropdown">
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+      </DropdownButton>
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-toggle'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-menu'));
+  });
 });

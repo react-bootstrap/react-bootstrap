@@ -13,7 +13,7 @@ import warning from 'warning';
 import ButtonGroup from './ButtonGroup';
 import DropdownMenu from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
-import { bsClass as setBsClass } from './utils/bootstrapUtils';
+import { bsClass as setBsClass, prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 import { exclusiveRoles, requiredRoles } from './utils/PropTypes';
 import ValidComponentChildren from './utils/ValidComponentChildren';
@@ -156,19 +156,19 @@ class Dropdown extends React.Component {
     }
 
     switch (event.keyCode) {
-    case keycode.codes.down:
-      if (!this.props.open) {
-        this.toggleOpen('keydown');
-      } else if (this.menu.focusNext) {
-        this.menu.focusNext();
-      }
-      event.preventDefault();
-      break;
-    case keycode.codes.esc:
-    case keycode.codes.tab:
-      this.handleClose(event);
-      break;
-    default:
+      case keycode.codes.down:
+        if (!this.props.open) {
+          this.toggleOpen('keydown');
+        } else if (this.menu.focusNext) {
+          this.menu.focusNext();
+        }
+        event.preventDefault();
+        break;
+      case keycode.codes.esc:
+      case keycode.codes.tab:
+        this.handleClose(event);
+        break;
+      default:
     }
   }
 
@@ -231,6 +231,7 @@ class Dropdown extends React.Component {
     return cloneElement(child, {
       ...props,
       ref,
+      bsClass: prefix(props, 'toggle'),
       onClick: createChainedFunction(
         child.props.onClick, this.handleClick
       ),
@@ -257,6 +258,7 @@ class Dropdown extends React.Component {
       ...props,
       ref,
       labelledBy: id,
+      bsClass: prefix(props, 'menu'),
       onClose: createChainedFunction(
         child.props.onClose, onClose, this.handleClose,
       ),
@@ -306,14 +308,16 @@ class Dropdown extends React.Component {
       >
         {ValidComponentChildren.map(children, child => {
           switch (child.props.bsRole) {
-          case TOGGLE_ROLE:
-            return this.renderToggle(child, { id, disabled, open, role });
-          case MENU_ROLE:
-            return this.renderMenu(child, {
-              id, open, pullRight, onClose, onSelect,
-            });
-          default:
-            return child;
+            case TOGGLE_ROLE:
+              return this.renderToggle(child, {
+                id, disabled, open, role, bsClass,
+              });
+            case MENU_ROLE:
+              return this.renderMenu(child, {
+                id, open, pullRight, bsClass, onClose, onSelect,
+              });
+            default:
+              return child;
           }
         })}
       </Component>

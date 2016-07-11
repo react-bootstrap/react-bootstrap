@@ -66,4 +66,15 @@ describe('<NavDropdown>', () => {
     ReactTestUtils.Simulate.click(outerToggle);
     dropdownNode.className.should.not.match(/\bopen\b/);
   });
+
+  it('should derive bsClass from parent', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <NavDropdown title="title" id="test-id" bsClass="my-dropdown">
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+      </NavDropdown>
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-toggle'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-menu'));
+  });
 });

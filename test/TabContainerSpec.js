@@ -159,6 +159,17 @@ describe('<TabContainer>', () => {
       instance.single('[eventKey=1]').single('.active');
     });
 
+    it('should handle closing tab and changing active tab', () => {
+      const instance = tsp(
+        <Switcher eventKeys={[1, 2]} activeKey={2} />
+      ).render();
+
+      instance.single('[eventKey=2]').single('.active');
+
+      instance.state({ eventKeys: [1], activeKey: 1 });
+      instance.single('[eventKey=1]').single('.active');
+    });
+
     it('should not call onSelect when container unmounts', () => {
       const spy = sinon.spy();
       const instance = tsp(

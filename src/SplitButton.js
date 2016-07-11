@@ -5,7 +5,6 @@ import React from 'react';
 import Button from './Button';
 import Dropdown from './Dropdown';
 import SplitToggle from './SplitToggle';
-import { bsClass, prefix } from './utils/bootstrapUtils';
 
 const propTypes = {
   ...Dropdown.propTypes,
@@ -57,12 +56,11 @@ class SplitButton extends React.Component {
         </Button>
         <SplitToggle
           aria-label={toggleLabel || title}
-          bsClass={prefix(props, 'toggle')}
           bsSize={bsSize}
           bsStyle={bsStyle}
         />
 
-        <Dropdown.Menu bsClass={prefix(props, 'menu')}>
+        <Dropdown.Menu>
           {children}
         </Dropdown.Menu>
       </Dropdown>
@@ -74,4 +72,4 @@ SplitButton.propTypes = propTypes;
 
 SplitButton.Toggle = SplitToggle;
 
-export default bsClass('dropdown', SplitButton);
+export default SplitButton;

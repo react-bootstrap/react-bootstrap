@@ -15,10 +15,10 @@ const contextTypes = {
 class FormControlFeedback extends React.Component {
   getGlyph(validationState) {
     switch (validationState) {
-    case 'success': return 'ok';
-    case 'warning': return 'warning-sign';
-    case 'error': return 'remove';
-    default: return null;
+      case 'success': return 'ok';
+      case 'warning': return 'warning-sign';
+      case 'error': return 'remove';
+      default: return null;
     }
   }
 
