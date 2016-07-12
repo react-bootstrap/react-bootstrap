@@ -355,7 +355,7 @@ const ComponentsPage = React.createClass({
                     <Anchor id="affix">Affix</Anchor>
                   </h2>
 
-                  <p>Use <a href="http://react-bootstrap.github.io/react-overlays/examples/#affixes"><code>{'<AutoAffix>'}</code> or <code>{'<Affix>'}</code> from react-overlays</a>.</p>
+                  <p>Use <a href="http://react-bootstrap.github.io/react-overlays/#affixes"><code>{'<AutoAffix>'}</code> or <code>{'<Affix>'}</code> from react-overlays</a>.</p>
                   <p>There isn't really any additional Bootstrap markup associated with affixes, so we didn't add a Bootstrap-specific affix class. The upstream ones already give you everything you need.</p>
                 </div>
 
