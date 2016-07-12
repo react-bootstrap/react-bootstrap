@@ -5,15 +5,15 @@ import ValidComponentChildren from './ValidComponentChildren';
 export function requiredRoles(...roles) {
   return createChainableTypeChecker((props, propName, component) => {
     let missing;
-    let children = ValidComponentChildren.toArray(props.children);
-
-    let inRole = (role, child) => role === child.props.bsRole;
 
     roles.every(role => {
-      if (!children.some(child => inRole(role, child))) {
+      if (!ValidComponentChildren.some(
+        props.children, child => child.props.bsRole === role
+      )) {
         missing = role;
         return false;
       }
+
       return true;
     });
 
@@ -31,18 +31,18 @@ export function requiredRoles(...roles) {
 
 export function exclusiveRoles(...roles) {
   return createChainableTypeChecker((props, propName, component) => {
-    let children = ValidComponentChildren.toArray(props.children);
     let duplicate;
 
     roles.every(role => {
-      let childrenWithRole = children.filter(
-        child => child.props.bsRole === role
+      const childrenWithRole = ValidComponentChildren.filter(
+        props.children, child => child.props.bsRole === role
       );
 
       if (childrenWithRole.length > 1) {
         duplicate = role;
         return false;
       }
+
       return true;
     });
 

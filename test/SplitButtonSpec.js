@@ -6,9 +6,9 @@ import SplitButton from '../src/SplitButton';
 import MenuItem from '../src/MenuItem';
 import Button from '../src/Button';
 
-describe('SplitButton', () => {
+describe('<SplitButton>', () => {
   const simple = (
-    <SplitButton title='Title' id='test-id'>
+    <SplitButton title="Title" id="test-id">
       <MenuItem>Item 1</MenuItem>
       <MenuItem>Item 2</MenuItem>
       <MenuItem>Item 3</MenuItem>
@@ -40,7 +40,7 @@ describe('SplitButton', () => {
 
   it('should invoke onClick when SplitButton.Button is clicked (prop)', (done) => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <SplitButton title='Title' id='test-id' onClick={ () => done() }>
+      <SplitButton title="Title" id="test-id" onClick={ () => done() }>
         <MenuItem>Item 1</MenuItem>
       </SplitButton>
     );
@@ -55,8 +55,8 @@ describe('SplitButton', () => {
 
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton
-        title='Title'
-        id='test-id'
+        title="Title"
+        id="test-id"
         onClick={onClickSpy}
       >
         <MenuItem>Item 1</MenuItem>
@@ -67,7 +67,7 @@ describe('SplitButton', () => {
 
     ReactTestUtils.Simulate.click(toggleNode);
 
-    setTimeout(()=> {
+    setTimeout(() => {
       onClickSpy.should.not.have.been.called;
       done();
     }, 10);
@@ -75,7 +75,7 @@ describe('SplitButton', () => {
 
   it('Should pass disabled to both buttons', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <SplitButton title='Title' id='test-id' disabled>
+      <SplitButton title="Title" id="test-id" disabled>
         <MenuItem>Item 1</MenuItem>
       </SplitButton>
     );
@@ -90,7 +90,7 @@ describe('SplitButton', () => {
 
   it('Should set target attribute on anchor', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <SplitButton title="Title" id='test-id' href="/some/unique-thing/" target="_blank">
+      <SplitButton title="Title" id="test-id" href="/some/unique-thing/" target="_blank">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
       </SplitButton>
     );
@@ -110,12 +110,23 @@ describe('SplitButton', () => {
 
   it('should set aria-label on toggle from toggleLabel', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <SplitButton title='Title' id='test-id' toggleLabel='Label'>
+      <SplitButton title="Title" id="test-id" toggleLabel="Label">
         <MenuItem>Item 1</MenuItem>
       </SplitButton>
     );
 
     const toggleNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
     expect(toggleNode.getAttribute('aria-label')).to.equal('Label');
+  });
+
+  it('should derive bsClass from parent', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <SplitButton title="title" id="test-id" bsClass="my-dropdown">
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+      </SplitButton>
+    );
+
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-toggle'));
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-menu'));
   });
 });

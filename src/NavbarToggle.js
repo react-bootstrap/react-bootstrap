@@ -5,7 +5,7 @@ import { prefix } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
-  onClick: React.PropTypes.func,
+  onClick: PropTypes.func,
   /**
    * The toggle content, if left empty it will render the default toggle (seen above).
    */
@@ -13,28 +13,26 @@ const propTypes = {
 };
 
 const contextTypes = {
-  $bs_navbar_bsClass: PropTypes.string,
-  $bs_navbar_onToggle: PropTypes.func,
-  $bs_navbar_expanded: PropTypes.bool,
+  $bs_navbar: PropTypes.shape({
+    bsClass: PropTypes.string,
+    expanded: PropTypes.bool,
+    onToggle: PropTypes.func.isRequired,
+  }),
 };
 
 class NavbarToggle extends React.Component {
   render() {
     const { onClick, className, children, ...props } = this.props;
-    const {
-      $bs_navbar_bsClass: bsClass = 'navbar',
-      $bs_navbar_onToggle: onToggle,
-      $bs_navbar_expanded: expanded,
-    } = this.context;
+    const navbarProps = this.context.$bs_navbar || { bsClass: 'navbar' };
 
     const buttonProps = {
       type: 'button',
       ...props,
-      onClick: createChainedFunction(onClick, onToggle),
+      onClick: createChainedFunction(onClick, navbarProps.onToggle),
       className: classNames(
         className,
-        prefix({ bsClass }, 'toggle'),
-        !expanded && 'collapsed'
+        prefix(navbarProps, 'toggle'),
+        !navbarProps.expanded && 'collapsed'
       )
     };
 

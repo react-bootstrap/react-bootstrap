@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Grid from '../src/Grid';
 
-describe('Grid', () => {
+describe('<Grid>', () => {
   it('uses "div" by default', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Grid />
@@ -37,7 +37,7 @@ describe('Grid', () => {
 
   it('allows custom elements instead of "div"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Grid componentClass='section' />
+      <Grid componentClass="section" />
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');

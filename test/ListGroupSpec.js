@@ -187,7 +187,8 @@ describe('<ListGroup>', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup
           id="testItem"
-          componentClass='ul'>
+          componentClass="ul"
+        >
           <CustomComponent>Custom Child</CustomComponent>
           <CustomComponent>Custom Child</CustomComponent>
           <ListGroupItem listItem>RB Child</ListGroupItem>

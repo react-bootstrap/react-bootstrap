@@ -2,49 +2,51 @@ import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 
 import Collapse from './Collapse';
-import {
-  bsStyles, bsClass, getClassSet, prefix,
-} from './utils/bootstrapUtils';
+import { bsStyles, bsClass, getClassSet, omitBsProps, prefix }
+  from './utils/bootstrapUtils';
 import { State, Style } from './utils/StyleConfig';
 
-let Panel = React.createClass({
+// TODO: Use uncontrollable.
 
-  propTypes: {
-    collapsible: React.PropTypes.bool,
-    onSelect: React.PropTypes.func,
-    header: React.PropTypes.node,
-    id: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ]),
-    footer: React.PropTypes.node,
-    defaultExpanded: React.PropTypes.bool,
-    expanded: React.PropTypes.bool,
-    eventKey: React.PropTypes.any,
-    headerRole: React.PropTypes.string,
-    panelRole: React.PropTypes.string,
+const propTypes = {
+  collapsible: React.PropTypes.bool,
+  onSelect: React.PropTypes.func,
+  header: React.PropTypes.node,
+  id: React.PropTypes.oneOfType([
+    React.PropTypes.string, React.PropTypes.number,
+  ]),
+  footer: React.PropTypes.node,
+  defaultExpanded: React.PropTypes.bool,
+  expanded: React.PropTypes.bool,
+  eventKey: React.PropTypes.any,
+  headerRole: React.PropTypes.string,
+  panelRole: React.PropTypes.string,
 
-    onEnter: Collapse.propTypes.onEnter,
-    onEntering: Collapse.propTypes.onEntering,
-    onEntered: Collapse.propTypes.onEntered,
-    onExit: Collapse.propTypes.onExit,
-    onExiting: Collapse.propTypes.onExiting,
-    onExited: Collapse.propTypes.onExited
-  },
+  // From Collapse.
+  onEnter: React.PropTypes.func,
+  onEntering: React.PropTypes.func,
+  onEntered: React.PropTypes.func,
+  onExit: React.PropTypes.func,
+  onExiting: React.PropTypes.func,
+  onExited: React.PropTypes.func,
+};
 
-  getDefaultProps() {
-    return {
-      defaultExpanded: false
+const defaultProps = {
+  defaultExpanded: false,
+};
+
+class Panel extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleClickTitle = this.handleClickTitle.bind(this);
+
+    this.state = {
+      expanded: this.props.defaultExpanded,
     };
-  },
+  }
 
-  getInitialState() {
-    return {
-      expanded: this.props.defaultExpanded
-    };
-  },
-
-  handleSelect(e) {
+  handleClickTitle(e) {
     // FIXME: What the heck? This API is horrible. This needs to go away!
     e.persist();
     e.selected = true;
@@ -56,190 +58,177 @@ let Panel = React.createClass({
     }
 
     if (e.selected) {
-      this.handleToggle();
+      this.setState({ expanded: !this.state.expanded });
     }
-  },
-
-  handleToggle() {
-    this.setState({ expanded: !this.state.expanded});
-  },
-
-  isExpanded() {
-    return this.props.expanded != null ? this.props.expanded : this.state.expanded;
-  },
-
-  render() {
-    let {headerRole, panelRole, ...props} = this.props;
-    return (
-      <div {...props}
-        className={classNames(this.props.className, getClassSet(this.props))}
-        id={this.props.collapsible ? null : this.props.id} onSelect={null}
-      >
-        {this.renderHeading(headerRole)}
-        {this.props.collapsible ? this.renderCollapsibleBody(panelRole) : this.renderBody()}
-        {this.renderFooter()}
-      </div>
-    );
-  },
-
-  renderCollapsibleBody(panelRole) {
-    let collapseProps = {
-      onEnter: this.props.onEnter,
-      onEntering: this.props.onEntering,
-      onEntered: this.props.onEntered,
-      onExit: this.props.onExit,
-      onExiting: this.props.onExiting,
-      onExited: this.props.onExited,
-      in: this.isExpanded()
-    };
-    let props = {
-      className: prefix(this.props, 'collapse'),
-      id: this.props.id,
-      ref: 'panel',
-      'aria-hidden': !this.isExpanded()
-    };
-    if (panelRole) {
-      props.role = panelRole;
-    }
-
-    return (
-      <Collapse {...collapseProps}>
-        <div {...props}>
-          {this.renderBody()}
-
-        </div>
-      </Collapse>
-    );
-  },
-
-  renderBody() {
-    let allChildren = this.props.children;
-    let bodyElements = [];
-    let panelBodyChildren = [];
-    let bodyClass = prefix(this.props, 'body');
-
-    function getProps() {
-      return {key: bodyElements.length};
-    }
-
-    function addPanelChild(child) {
-      bodyElements.push(cloneElement(child, getProps()));
-    }
-
-    function addPanelBody(children) {
-      bodyElements.push(
-        <div className={bodyClass} {...getProps()}>
-          {children}
-        </div>
-      );
-    }
-
-    function maybeRenderPanelBody() {
-      if (panelBodyChildren.length === 0) {
-        return;
-      }
-
-      addPanelBody(panelBodyChildren);
-      panelBodyChildren = [];
-    }
-
-    // Handle edge cases where we should not iterate through children.
-    if (!Array.isArray(allChildren) || allChildren.length === 0) {
-      if (this.shouldRenderFill(allChildren)) {
-        addPanelChild(allChildren);
-      } else {
-        addPanelBody(allChildren);
-      }
-    } else {
-      allChildren.forEach( child => {
-        if (this.shouldRenderFill(child)) {
-          maybeRenderPanelBody();
-
-          // Separately add the filled element.
-          addPanelChild(child);
-        } else {
-          panelBodyChildren.push(child);
-        }
-      });
-
-      maybeRenderPanelBody();
-    }
-
-    return bodyElements;
-  },
+  }
 
   shouldRenderFill(child) {
     return React.isValidElement(child) && child.props.fill != null;
-  },
+  }
 
-  renderHeading(headerRole) {
-    let header = this.props.header;
+  renderHeading(collapsible, header, id, role, expanded, props) {
+    let title;
+    const titleClassName = prefix(props, 'title');
 
-    if (!header) {
-      return null;
-    }
-
-    if (!React.isValidElement(header) || Array.isArray(header)) {
-      header = this.props.collapsible ?
-        this.renderCollapsibleTitle(header, headerRole) : header;
-    } else {
-      const className = classNames(
-        prefix(this.props, 'title'), header.props.className
-      );
-
-      if (this.props.collapsible) {
-        header = cloneElement(header, {
-          className,
-          children: this.renderAnchor(header.props.children, headerRole)
+    if (collapsible) {
+      if (React.isValidElement(header)) {
+        title = cloneElement(header, {
+          className: classNames(header.props.className, titleClassName),
+          children: this.renderAnchor(header.props.children, role),
         });
       } else {
-        header = cloneElement(header, {className});
+        title = (
+          <h4 role="presentation" className={titleClassName}>
+            {this.renderAnchor(header, id, role, expanded)}
+          </h4>
+        );
+      }
+    } else {
+      if (React.isValidElement(header)) {
+        title = cloneElement(header, {
+          className: classNames(header.props.className, titleClassName),
+        });
+      } else {
+        title = header;
       }
     }
 
     return (
-      <div className={prefix(this.props, 'heading')}>
-        {header}
+      <div className={prefix(props, 'heading')}>
+        {title}
       </div>
     );
-  },
+  }
 
-  renderAnchor(header, headerRole) {
+  renderAnchor(header, id, role, expanded) {
     return (
       <a
-        href={'#' + (this.props.id || '')}
-        aria-controls={this.props.collapsible ? this.props.id : null}
-        className={this.isExpanded() ? null : 'collapsed'}
-        aria-expanded={this.isExpanded()}
-        aria-selected={this.isExpanded()}
-        onClick={this.handleSelect}
-        role={headerRole}
+        role={role}
+        href={id && `#${id}`}
+        onClick={this.handleClickTitle}
+        aria-controls={id}
+        aria-expanded={expanded}
+        aria-selected={expanded}
       >
         {header}
       </a>
     );
-  },
+  }
 
-  renderCollapsibleTitle(header, headerRole) {
+  renderCollapsibleBody(id, expanded, role, children, props, animationHooks) {
     return (
-      <h4 className={prefix(this.props, 'title')} role="presentation">
-        {this.renderAnchor(header, headerRole)}
-      </h4>
+      <Collapse in={expanded} {...animationHooks}>
+        <div
+          id={id}
+          role={role}
+          className={prefix(props, 'collapse')}
+          aria-hidden={!expanded}
+        >
+          {this.renderBody(children, props)}
+        </div>
+      </Collapse>
     );
-  },
+  }
 
-  renderFooter() {
-    if (!this.props.footer) {
-      return null;
+  renderBody(rawChildren, props) {
+    const children = [];
+    let bodyChildren = [];
+
+    const bodyClassName = prefix(props, 'body');
+
+    function maybeAddBody() {
+      if (!bodyChildren.length) {
+        return;
+      }
+
+      // Derive the key from the index here, since we need to make one up.
+      children.push(
+        <div key={children.length} className={bodyClassName}>
+          {bodyChildren}
+        </div>
+      );
+
+      bodyChildren = [];
     }
 
+    // Convert to array so we can re-use keys.
+    React.Children.toArray(rawChildren).forEach(child => {
+      if (React.isValidElement(child) && child.props.fill) {
+        maybeAddBody();
+
+        // Remove the child's unknown `fill` prop.
+        children.push(cloneElement(child, { fill: undefined }));
+
+        return;
+      }
+
+      bodyChildren.push(child);
+    });
+
+    maybeAddBody();
+
+    return children;
+  }
+
+  render() {
+    const {
+      collapsible,
+      header,
+      id,
+      footer,
+      expanded: propsExpanded,
+      headerRole,
+      panelRole,
+      className,
+      children,
+      onEnter,
+      onEntering,
+      onEntered,
+      onExit,
+      onExiting,
+      onExited,
+      ...props,
+    } = this.props;
+
+    delete props.defaultExpanded;
+    delete props.eventKey;
+    delete props.onSelect;
+
+    const expanded = propsExpanded != null ?
+      propsExpanded : this.state.expanded;
+
+    const classes = getClassSet(props);
+
     return (
-      <div className={prefix(this.props, 'footer')}>
-        {this.props.footer}
+      <div
+        {...omitBsProps(props)}
+        className={classNames(className, classes)}
+        id={collapsible ? null : id}
+      >
+        {header && this.renderHeading(
+          collapsible, header, id, headerRole, expanded, props
+        )}
+
+        {collapsible ?
+          this.renderCollapsibleBody(
+            id, expanded, panelRole, children, props,
+            { onEnter, onEntering, onEntered, onExit, onExiting, onExited }
+          ) :
+          this.renderBody(children, props)
+        }
+
+        {footer && (
+          <div className={prefix(props, 'footer')}>
+            {footer}
+          </div>
+        )}
       </div>
     );
   }
-});
+}
+
+Panel.propTypes = propTypes;
+Panel.defaultProps = defaultProps;
 
 export default bsClass('panel',
   bsStyles([...Object.values(State), Style.DEFAULT, Style.PRIMARY], Panel)

@@ -144,28 +144,28 @@ const PropTable = React.createClass({
     let doclets = prop.doclets || {};
 
     switch (name) {
-    case 'object':
-      return name;
-    case 'union':
-      return type.value.reduce((current, val, i, list) => {
-        let item = this.getType({ type: val });
-        if (React.isValidElement(item)) {
-          item = React.cloneElement(item, {key: i});
-        }
-        current = current.concat(item);
+      case 'object':
+        return name;
+      case 'union':
+        return type.value.reduce((current, val, i, list) => {
+          let item = this.getType({ type: val });
+          if (React.isValidElement(item)) {
+            item = React.cloneElement(item, {key: i});
+          }
+          current = current.concat(item);
 
-        return i === (list.length - 1) ? current : current.concat(' | ');
-      }, []);
-    case 'array':
-      let child = this.getType({ type: type.value });
+          return i === (list.length - 1) ? current : current.concat(' | ');
+        }, []);
+      case 'array':
+        let child = this.getType({ type: type.value });
 
-      return <span>{'array<'}{ child }{'>'}</span>;
-    case 'enum':
-      return this.renderEnum(type);
-    case 'custom':
-      return cleanDocletValue(doclets.type || name);
-    default:
-      return name;
+        return <span>{'array<'}{child}{'>'}</span>;
+      case 'enum':
+        return this.renderEnum(type);
+      case 'custom':
+        return cleanDocletValue(doclets.type || name);
+      default:
+        return name;
     }
   },
 

@@ -3,21 +3,22 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 
 import Pagination from '../src/Pagination';
 
-describe('Pagination', () => {
+describe('<Pagination>', () => {
   it('should have class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Pagination>Item content</Pagination>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pagination'));
   });
 
   it('should show the correct active button', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         items={5}
-        activePage={3} />
+        activePage={3}
+      />
     );
-    let pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+    const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     assert.equal(pageButtons.length, 5);
     pageButtons[2].className.should.match(/\bactive\b/);
   });
@@ -28,7 +29,7 @@ describe('Pagination', () => {
       done();
     }
 
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Pagination items={5} onSelect={onSelect} />
     );
 
@@ -38,13 +39,14 @@ describe('Pagination', () => {
   });
 
   it('should only show part of buttons and active button in the middle of buttons when given maxButtons', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         items={30}
         activePage={10}
-        maxButtons={9} />
+        maxButtons={9}
+      />
     );
-    let pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+    const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     // 9 visible page buttons and 1 ellipsis button
     assert.equal(pageButtons.length, 10);
 
@@ -54,18 +56,19 @@ describe('Pagination', () => {
   });
 
   it('should show the ellipsis, boundaryLinks, first, last, prev and next button with default labels', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Pagination
-        first={true}
-        last={true}
-        prev={true}
-        next={true}
-        ellipsis={true}
+        first
+        last
+        prev
+        next
+        ellipsis
         maxButtons={3}
         activePage={10}
-        items={20} />
+        items={20}
+      />
     );
-    let pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+    const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     // add first, last, prev, next and ellipsis button
     assert.equal(pageButtons.length, 8);
 
@@ -78,19 +81,20 @@ describe('Pagination', () => {
   });
 
   it('should show the boundaryLinks, first, last, prev and next button', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Pagination
-        first={true}
-        last={true}
-        prev={true}
-        next={true}
-        ellipsis={true}
-        boundaryLinks={true}
+        first
+        last
+        prev
+        next
+        ellipsis
+        boundaryLinks
         maxButtons={3}
         activePage={10}
-        items={20} />
+        items={20}
+      />
     );
-    let pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+    const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     // add first, last, prev, next and ellipsis button
     assert.equal(pageButtons[2].innerText, '1');
     assert.equal(pageButtons[3].innerText, '…');
@@ -99,18 +103,19 @@ describe('Pagination', () => {
   });
 
   it('should show the ellipsis, first, last, prev and next button with custom labels', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Pagination
-        first='first'
-        last='last'
-        prev='prev'
-        next='next'
-        ellipsis='more'
+        first="first"
+        last="last"
+        prev="prev"
+        next="next"
+        ellipsis="more"
         maxButtons={3}
         activePage={10}
-        items={20} />
+        items={20}
+      />
     );
-    let pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+    const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     // add first, last, prev, next and ellipsis button
     assert.equal(pageButtons.length, 8);
 
@@ -131,7 +136,8 @@ describe('Pagination', () => {
         ellipsis
         maxButtons={5}
         activePage={1}
-        items={1} />
+        items={1}
+      />
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
@@ -150,7 +156,8 @@ describe('Pagination', () => {
         ellipsis
         maxButtons={1}
         activePage={1}
-        items={0} />
+        items={0}
+      />
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
@@ -162,18 +169,17 @@ describe('Pagination', () => {
   });
 
   it('should wrap buttons in SafeAnchor when no buttonComponentClass prop is supplied', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         maxButtons={2}
         activePage={1}
-        items={2} />
+        items={2}
+      />
     );
-    let pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+    const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
-    let tagName = 'A';
-
-    assert.equal(pageButtons[0].children[0].tagName, tagName);
-    assert.equal(pageButtons[1].children[0].tagName, tagName);
+    assert.equal(pageButtons[0].children[0].tagName, 'A');
+    assert.equal(pageButtons[1].children[0].tagName, 'A');
 
     assert.equal(pageButtons[0].children[0].getAttribute('href'), '');
     assert.equal(pageButtons[1].children[0].getAttribute('href'), '');
@@ -182,29 +188,28 @@ describe('Pagination', () => {
   it('should wrap each button in a buttonComponentClass when it is present', () => {
     class DummyElement extends React.Component {
       render() {
-        return <div {...this.props}/>;
+        return <div>{this.props.children}</div>;
       }
     }
 
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Pagination
         maxButtons={2}
         activePage={1}
         items={2}
-        buttonComponentClass={DummyElement} />
+        buttonComponentClass={DummyElement}
+      />
     );
-    let pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+    const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
-    let tagName = 'DIV';
-
-    assert.equal(pageButtons[0].children[0].tagName, tagName);
-    assert.equal(pageButtons[1].children[0].tagName, tagName);
+    assert.equal(pageButtons[0].children[0].tagName, 'DIV');
+    assert.equal(pageButtons[1].children[0].tagName, 'DIV');
   });
 
   it('should call onSelect with custom buttonComponentClass', (done) => {
     class DummyElement extends React.Component {
       render() {
-        return <div {...this.props}/>;
+        return <div onClick={this.props.onClick} />;
       }
     }
 
@@ -213,8 +218,8 @@ describe('Pagination', () => {
       done();
     }
 
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Pagination items={5} onSelect={onSelect} buttonComponentClass={DummyElement}/>
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Pagination items={5} onSelect={onSelect} buttonComponentClass={DummyElement} />
     );
 
     ReactTestUtils.Simulate.click(
@@ -235,7 +240,8 @@ describe('Pagination', () => {
         ellipsis
         maxButtons={1}
         activePage={1}
-        items={0} />
+        items={0}
+      />
     );
     const liElements = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
@@ -254,12 +260,16 @@ describe('Pagination', () => {
   it('should pass page number to buttonComponentClass', () => {
     class DummyElement extends React.Component {
       render() {
-        return <a href={`?page=${this.props.eventKey}`}>{this.props.eventKey}</a>;
+        return (
+          <a href={`?page=${this.props.eventKey}`}>
+            {this.props.eventKey}
+          </a>
+        );
       }
     }
 
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Pagination items={5} buttonComponentClass={DummyElement}/>
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Pagination items={5} buttonComponentClass={DummyElement} />
     );
 
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');

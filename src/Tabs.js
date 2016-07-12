@@ -6,6 +6,7 @@ import Nav from './Nav';
 import NavItem from './NavItem';
 import UncontrolledTabContainer from './TabContainer';
 import TabContent from './TabContent';
+import { bsClass as setBsClass } from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const TabContainer = UncontrolledTabContainer.ControlledComponent;
@@ -19,7 +20,7 @@ const propTypes = {
   activeKey: React.PropTypes.any,
 
   /**
-   * Navigation style for tabs
+   * Navigation style
    */
   bsStyle: React.PropTypes.oneOf(['tabs', 'pills']),
 
@@ -52,9 +53,6 @@ const propTypes = {
 const defaultProps = {
   bsStyle: 'tabs',
   animation: true,
-  tabWidth: 2,
-  position: 'top',
-  standalone: false,
   unmountOnExit: false
 };
 
@@ -93,6 +91,7 @@ class Tabs extends React.Component {
       onSelect,
       animation,
       unmountOnExit,
+      bsClass,
       className,
       style,
       children,
@@ -117,6 +116,7 @@ class Tabs extends React.Component {
           </Nav>
 
           <TabContent
+            bsClass={bsClass}
             animation={animation}
             unmountOnExit={unmountOnExit}
           >
@@ -130,5 +130,7 @@ class Tabs extends React.Component {
 
 Tabs.propTypes = propTypes;
 Tabs.defaultProps = defaultProps;
+
+setBsClass('tab', Tabs);
 
 export default uncontrollable(Tabs, { activeKey: 'onSelect' });
