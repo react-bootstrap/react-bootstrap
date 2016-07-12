@@ -71,7 +71,7 @@ describe('<Dropdown>', () => {
 
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
-    buttonNode.innerText.should.match(/Child Title/);
+    buttonNode.textContent.should.match(/Child Title/);
 
     buttonNode.tagName.should.equal('BUTTON');
     buttonNode.className.should.match(/\bbtn[ $]/);

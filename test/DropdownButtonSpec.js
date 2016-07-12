@@ -20,7 +20,7 @@ describe('<DropdownButton>', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
-    buttonNode.innerText.should.match(/Simple Dropdown/);
+    buttonNode.textContent.should.match(/Simple Dropdown/);
   });
 
   it('renders dropdown toggle button', () => {

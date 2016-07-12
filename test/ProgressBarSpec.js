@@ -10,7 +10,7 @@ function getProgressBarNode(wrapper) {
   return ReactTestUtils.findRenderedDOMComponentWithClass(wrapper, 'progress-bar');
 }
 
-describe('ProgressBar', () => {
+describe('<ProgressBar>', () => {
   it('Should output a progress bar with wrapper', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar min={0} max={10} now={0} />
@@ -93,26 +93,37 @@ describe('ProgressBar', () => {
       <ProgressBar min={0} max={10} now={5} />
     );
 
-    assert.equal(ReactDOM.findDOMNode(instance).innerText, '');
+    assert.equal(ReactDOM.findDOMNode(instance).textContent, '');
   });
 
   it('Should have label', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={5} bsStyle="success"
-        label="progress bar label" />
+      <ProgressBar
+        min={0}
+        max={10}
+        now={5}
+        bsStyle="success"
+        label="progress bar label"
+      />
     );
 
-    assert.equal(ReactDOM.findDOMNode(instance).innerText, 'progress bar label');
+    assert.equal(ReactDOM.findDOMNode(instance).textContent, 'progress bar label');
   });
 
   it('Should have screen reader only label', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={5} srOnly bsStyle="success"
-        label="progress bar label" />
+      <ProgressBar
+        min={0}
+        max={10}
+        now={5}
+        srOnly
+        bsStyle="success"
+        label="progress bar label"
+      />
     );
     const srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'sr-only');
 
-    assert.equal(srLabel.innerText, 'progress bar label');
+    assert.equal(srLabel.textContent, 'progress bar label');
   });
 
   it('Should have a label that is a React component', () => {

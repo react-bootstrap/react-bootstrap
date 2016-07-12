@@ -40,7 +40,7 @@ describe('<Panel>', () => {
       </Panel>
     );
     const header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading');
-    assert.equal(header.innerHTML, 'Heading');
+    assert.equal(header.textContent, 'Heading');
   });
 
   it('Should have custom component header', () => {
@@ -52,7 +52,7 @@ describe('<Panel>', () => {
     const header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading');
     assert.equal(header.firstChild.nodeName, 'H3');
     assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
-    assert.equal(header.firstChild.innerHTML, 'Heading');
+    assert.equal(header.firstChild.textContent, 'Heading');
   });
 
   it('Should have custom component header with anchor', () => {
@@ -65,7 +65,7 @@ describe('<Panel>', () => {
     assert.equal(header.firstChild.nodeName, 'H3');
     assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
     assert.equal(header.firstChild.firstChild.nodeName, 'A');
-    assert.equal(header.firstChild.firstChild.innerHTML, 'Heading');
+    assert.equal(header.firstChild.firstChild.textContent, 'Heading');
   });
 
   it('Should have custom component header with custom class', () => {
@@ -80,7 +80,7 @@ describe('<Panel>', () => {
     assert.equal(header.firstChild.nodeName, 'H3');
     assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
     assert.ok(header.firstChild.className.match(/\bcustom-class\b/));
-    assert.equal(header.firstChild.innerHTML, 'Heading');
+    assert.equal(header.firstChild.textContent, 'Heading');
   });
 
   it('Should have footer', () => {
@@ -90,7 +90,7 @@ describe('<Panel>', () => {
       </Panel>
     );
     const footer = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-footer');
-    assert.equal(footer.innerText, 'Footer');
+    assert.equal(footer.textContent, 'Footer');
   });
 
   it('Should have collapse classes', () => {

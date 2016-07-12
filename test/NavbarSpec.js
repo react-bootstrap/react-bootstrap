@@ -103,7 +103,7 @@ describe('<Navbar>', () => {
 
     assert.ok(brand);
     assert.equal(brand.nodeName, 'SPAN');
-    assert.equal(brand.innerText, 'Brand');
+    assert.equal(brand.textContent, 'Brand');
   });
 
   it('Should add link element with navbar-brand class using NavBrand Component', () => {
@@ -119,7 +119,7 @@ describe('<Navbar>', () => {
 
     assert.ok(brand);
     assert.equal(brand.nodeName, 'A');
-    assert.equal(brand.innerText, 'Brand');
+    assert.equal(brand.textContent, 'Brand');
   });
 
   it('Should pass navbar context to navs', () => {

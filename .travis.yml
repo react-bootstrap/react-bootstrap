@@ -6,9 +6,7 @@ node_js:
 
 env:
   - BROWSER=ChromeCi
-
-# FIXME: Our test suite fails on Firefox.
-#   - BROWSER=Firefox
+  - BROWSER=Firefox
 
 cache:
   directories:

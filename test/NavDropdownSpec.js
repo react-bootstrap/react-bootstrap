@@ -21,7 +21,7 @@ describe('<NavDropdown>', () => {
     assert.ok(li.className.match(/\bdropdown\b/));
     assert.ok(li.className.match(/\btest-class\b/));
     assert.equal(button.nodeName, 'A');
-    assert.equal(button.innerText.trim(), 'Title');
+    assert.equal(button.textContent.trim(), 'Title');
   });
 
   it('is open with explicit prop', () => {
