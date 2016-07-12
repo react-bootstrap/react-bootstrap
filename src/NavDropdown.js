@@ -1,8 +1,7 @@
-import omit from 'lodash-compat/object/omit';
-import pick from 'lodash-compat/object/pick';
 import React from 'react';
 
 import Dropdown from './Dropdown';
+import splitComponentProps from './utils/splitComponentProps';
 
 const propTypes = {
   ...Dropdown.propTypes,
@@ -19,12 +18,8 @@ class NavDropdown extends React.Component {
   render() {
     const { title, className, style, children, ...props } = this.props;
 
-    const dropdownProps = pick(
-      props, Object.keys(Dropdown.ControlledComponent.propTypes)
-    );
-    const toggleProps = omit(
-      props, Object.keys(Dropdown.ControlledComponent.propTypes)
-    );
+    const [dropdownProps, toggleProps] =
+      splitComponentProps(props, Dropdown.ControlledComponent);
 
     // Unlike for the other dropdowns, styling needs to go to the `<Dropdown>`
     // rather than the `<Dropdown.Toggle>`.

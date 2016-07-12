@@ -10,7 +10,7 @@
 - **Feature:** Add `bsClass` support consistently throughout all components ([#2026], [#2036])
 - **Feature:** Add `omitBsProps` helper to `bootstrapUtils` to remove Bootstrap styling props ([#2026])
 - **Feature:** Improve IE8-compatible self collapse support on `<Badge>` and add it to `<Label>` ([#2026])
-- **Bugfix:** Do not pass arbitrary props to DOM nodes ([#2026], [#2036])
+- **Bugfix:** Do not pass arbitrary props to DOM nodes ([#2026], [#2036], [#2044])
 - **Bugfix:** Support strings for `positionTop` and `positionLeft` on `<Popover>` and `<Tooltip>` ([#2026])
 - **Bugfix:** Support captions on `<Thumbnail>` links ([#2026])
 - **Bugfix:** Don't ignore `componentClass` on `<ListGroup>` when using only `<ListGroupItem>` children ([#2026])
@@ -20,6 +20,7 @@
 - **Bugfix:** Remove extraneous `.collapsed` on collapsible panel title anchor ([#2036])
 - **Bugfix:** Improve edge case handling in tab animation state management and styling ([#2036])
 - **Refactor:** Clean up context usage on navbar components ([#2036])
+- **Refactor:** Sync up context usage on modals to other components ([#2044])
 
 [next]: https://github.com/react-bootstrap/react-bootstrap/compare/master...next
 [#1976]: https://github.com/react-bootstrap/react-bootstrap/pull/1976
@@ -29,6 +30,7 @@
 [#2018]: https://github.com/react-bootstrap/react-bootstrap/pull/2018
 [#2026]: https://github.com/react-bootstrap/react-bootstrap/pull/2026
 [#2036]: https://github.com/react-bootstrap/react-bootstrap/pull/2036
+[#2044]: https://github.com/react-bootstrap/react-bootstrap/pull/2044
 
 
 ## [HEAD] \(v0.29.6\)

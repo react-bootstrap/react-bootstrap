@@ -8,10 +8,17 @@ import Tooltip from '../src/Tooltip';
 
 import { render } from './helpers';
 
-describe('OverlayTrigger', () => {
+describe('<OverlayTrigger>', () => {
+  // Swallow extra props.
+  const Div = ({ className, children }) => (
+    <div className={className}>
+      {children}
+    </div>
+  );
+
   it('Should create OverlayTrigger element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <OverlayTrigger overlay={<div>test</div>}>
+      <OverlayTrigger overlay={<Div>test</Div>}>
         <button>button</button>
       </OverlayTrigger>
     );
@@ -22,7 +29,7 @@ describe('OverlayTrigger', () => {
   it('Should pass OverlayTrigger onClick prop to child', () => {
     const callback = sinon.spy();
     const instance = ReactTestUtils.renderIntoDocument(
-      <OverlayTrigger overlay={<div>test</div>} onClick={callback}>
+      <OverlayTrigger overlay={<Div>test</Div>} onClick={callback}>
         <button>button</button>
       </OverlayTrigger>
     );
@@ -33,14 +40,14 @@ describe('OverlayTrigger', () => {
 
   it('Should show after click trigger', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <OverlayTrigger trigger="click" overlay={<div>test</div>}>
+      <OverlayTrigger trigger="click" overlay={<Div>test</Div>}>
         <button>button</button>
       </OverlayTrigger>
     );
     const overlayTrigger = ReactDOM.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
 
-    instance.state.isOverlayShown.should.be.true;
+    instance.state.show.should.be.true;
   });
 
   describe('trigger handlers', () => {
@@ -59,8 +66,8 @@ describe('OverlayTrigger', () => {
     it('Should keep trigger handlers', (done) => {
       const instance = render(
         <div>
-          <OverlayTrigger trigger="focus" overlay={<div>test</div>}>
-            <button onBlur={()=> done()}>button</button>
+          <OverlayTrigger trigger="focus" overlay={<Div>test</Div>}>
+            <button onBlur={() => done()}>button</button>
           </OverlayTrigger>
           <input id="target" />
         </div>
@@ -73,7 +80,7 @@ describe('OverlayTrigger', () => {
 
   it('Should maintain overlay classname', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <OverlayTrigger trigger="click" overlay={<div className="test-overlay">test</div>}>
+      <OverlayTrigger trigger="click" overlay={<Div className="test-overlay">test</Div>}>
         <button>button</button>
       </OverlayTrigger>
     );
@@ -86,25 +93,24 @@ describe('OverlayTrigger', () => {
 
   it('Should pass transition callbacks to Transition', (done) => {
     let count = 0;
-    let increment = ()=> count++;
+    const increment = () => count++;
 
     let overlayTrigger;
 
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <OverlayTrigger
         trigger="click"
-        overlay={<div>test</div>}
-        onHide={() => {}}
+        overlay={<Div>test</Div>}
         onExit={increment}
         onExiting={increment}
-        onExited={()=> {
+        onExited={() => {
           increment();
           expect(count).to.equal(6);
           done();
         }}
         onEnter={increment}
         onEntering={increment}
-        onEntered={()=> {
+        onEntered={() => {
           increment();
           ReactTestUtils.Simulate.click(overlayTrigger);
         }}
@@ -120,21 +126,23 @@ describe('OverlayTrigger', () => {
 
   it('Should forward requested context', () => {
     const contextTypes = {
-      key: React.PropTypes.string
+      key: React.PropTypes.string,
     };
 
     const contextSpy = sinon.spy();
+
     class ContextReader extends React.Component {
       render() {
         contextSpy(this.context.key);
         return <div />;
       }
     }
+
     ContextReader.contextTypes = contextTypes;
 
     class ContextHolder extends React.Component {
       getChildContext() {
-        return {key: 'value'};
+        return { key: 'value' };
       }
 
       render() {
@@ -167,9 +175,10 @@ describe('OverlayTrigger', () => {
         name: 'Tooltip',
         overlay: (<Tooltip id="test-tooltip">test</Tooltip>)
       }
-    ].forEach( testCase => {
+    ].forEach(testCase => {
       describe(testCase.name, () => {
-        let instance, overlayTrigger;
+        let instance;
+        let overlayTrigger;
 
         beforeEach(() => {
           instance = ReactTestUtils.renderIntoDocument(
@@ -199,28 +208,28 @@ describe('OverlayTrigger', () => {
         rootClose: null,
         shownAfterClick: true
       }
-    ].forEach( testCase => {
+    ].forEach(testCase => {
       describe(testCase.label, () => {
         let instance;
 
         beforeEach(() => {
           instance = ReactTestUtils.renderIntoDocument(
             <OverlayTrigger
-              overlay={<div>test</div>}
+              overlay={<Div>test</Div>}
               trigger="click" rootClose={testCase.rootClose}
             >
-            <button>button</button>
+              <button>button</button>
             </OverlayTrigger>
           );
           const overlayTrigger = ReactDOM.findDOMNode(instance);
           ReactTestUtils.Simulate.click(overlayTrigger);
         });
 
-        it('Should have correct isOverlayShown state', () => {
+        it('Should have correct show state', () => {
           document.documentElement.click();
 
           // Need to click this way for it to propagate to document element.
-          instance.state.isOverlayShown.should.equal(testCase.shownAfterClick);
+          instance.state.show.should.equal(testCase.shownAfterClick);
         });
       });
     });
@@ -234,11 +243,11 @@ describe('OverlayTrigger', () => {
             super(props);
 
             this.handleClick = this.handleClick.bind(this);
-            this.state = {replaced: false};
+            this.state = { replaced: false };
           }
 
           handleClick() {
-            this.setState({replaced: true});
+            this.setState({ replaced: true });
           }
 
           render() {
@@ -276,7 +285,7 @@ describe('OverlayTrigger', () => {
         const replaceOverlay = document.getElementById('replace-overlay');
         replaceOverlay.click();
 
-        instance.state.isOverlayShown.should.be.true;
+        instance.state.show.should.be.true;
       });
     });
   });

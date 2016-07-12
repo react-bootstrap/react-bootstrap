@@ -1,8 +1,7 @@
-import omit from 'lodash-compat/object/omit';
-import pick from 'lodash-compat/object/pick';
 import React from 'react';
 
 import Dropdown from './Dropdown';
+import splitComponentProps from './utils/splitComponentProps';
 
 const propTypes = {
   ...Dropdown.propTypes,
@@ -21,12 +20,8 @@ class DropdownButton extends React.Component {
   render() {
     const { bsSize, bsStyle, title, children, ...props } = this.props;
 
-    const dropdownProps = pick(
-      props, Object.keys(Dropdown.ControlledComponent.propTypes)
-    );
-    const toggleProps = omit(
-      props, Object.keys(Dropdown.ControlledComponent.propTypes)
-    );
+    const [dropdownProps, toggleProps] =
+      splitComponentProps(props, Dropdown.ControlledComponent);
 
     return (
       <Dropdown
