@@ -1,75 +1,76 @@
+class CustomToggle extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-class CustomMenu extends React.Component {
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-  constructor(...args) {
-    super(...args);
-    this.state = { value: '' };
-    this.onChange = e => this.setState({ value: e.target.value });
+  handleClick(e) {
+    e.preventDefault();
+
+    this.props.onClick(e);
   }
 
   render() {
-    let { className, ...props } = this.props;
-
     return (
-      <div
-        className={"dropdown-menu"}
-        style={{ padding: ''}}
-      >
-        <input
-          ref={input => this.input = input}
-          type="text"
-          className="form-control"
-          placeholder="type to filter..."
-          onChange={this.onChange}
-          value={this.state.value}
-        />
-        <ul className="list-unstyled">
-          { this.filterChildren() }
-        </ul>
-      </div>
+      <a href="" onClick={this.handleClick}>
+        {this.props.children}
+      </a>
     );
   }
+}
 
-  filterChildren() {
-    let { children } = this.props;
-    let { value } = this.state;
-    let filtered = [];
+class CustomMenu extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-    let matches = child => child.props.children.indexOf(value) !== -1;
+    this.onChange = e => this.setState({ value: e.target.value });
 
-    React.Children.forEach(children, child => {
-      if (!value.trim() || matches(child)) {
-        filtered.push(child);
-      }
-    });
-
-    return filtered;
+    this.state = { value: '' };
   }
 
   focusNext() {
-    let input = ReactDOM.findDOMNode(this.input);
+    const input = ReactDOM.findDOMNode(this.input);
 
     if (input) {
       input.focus();
     }
   }
+
+  render() {
+    const { children } = this.props;
+    const { value } = this.state;
+
+    return (
+      <div className="dropdown-menu" style={{ padding: '' }}>
+        <FormControl
+          ref={c => { this.input = c; }}
+          type="text"
+          placeholder="Type to filter..."
+          onChange={this.onChange}
+          value={this.state.value}
+        />
+        <ul className="list-unstyled">
+          {React.Children.toArray(children).filter(child => (
+            !value.trim() || child.props.children.indexOf(value) !== -1
+          ))}
+        </ul>
+      </div>
+    );
+  }
 }
 
-let preventDefault = e => e.preventDefault();
+ReactDOM.render((
+  <Dropdown id="dropdown-custom-menu">
+    <CustomToggle bsRole="toggle">
+      Custom toggle
+    </CustomToggle>
 
-let dropdownExample = (
-    <Dropdown id="dropdown-custom-menu">
-      <a href="#" bsRole="toggle" onClick={preventDefault}>
-        custom Toggle
-      </a>
-
-      <CustomMenu bsRole="menu">
-        <MenuItem eventKey="1">Red</MenuItem>
-        <MenuItem eventKey="2">Blue</MenuItem>
-        <MenuItem eventKey="3" active>Orange</MenuItem>
-        <MenuItem eventKey="1">Red-Orange</MenuItem>
-      </CustomMenu>
-    </Dropdown>
-  );
-
-ReactDOM.render(dropdownExample, mountNode);
+    <CustomMenu bsRole="menu">
+      <MenuItem eventKey="1">Red</MenuItem>
+      <MenuItem eventKey="2">Blue</MenuItem>
+      <MenuItem eventKey="3" active>Orange</MenuItem>
+      <MenuItem eventKey="1">Red-Orange</MenuItem>
+    </CustomMenu>
+  </Dropdown>
+), mountNode);

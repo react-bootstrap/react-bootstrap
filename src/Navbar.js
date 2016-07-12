@@ -162,7 +162,7 @@ const UncontrollableNavbar = uncontrollable(Navbar, { expanded: 'onToggle' });
 
 function createSimpleWrapper(tag, suffix, displayName) {
   const Wrapper = (
-    { componentClass: Tag, className, ...props },
+    { componentClass: Tag, className, pullRight, pullLeft, ...props },
     { $bs_navbar: navbarProps = { bsClass: 'navbar' } }
   ) => (
     <Tag
@@ -170,8 +170,8 @@ function createSimpleWrapper(tag, suffix, displayName) {
       className={classNames(
         className,
         prefix(navbarProps, suffix),
-        props.pullRight && prefix(navbarProps, 'right'),
-        props.pullLeft && prefix(navbarProps, 'left'),
+        pullRight && prefix(navbarProps, 'right'),
+        pullLeft && prefix(navbarProps, 'left'),
       )}
     />
   );
@@ -183,8 +183,11 @@ function createSimpleWrapper(tag, suffix, displayName) {
     pullRight: React.PropTypes.bool,
     pullLeft: React.PropTypes.bool,
   };
+
   Wrapper.defaultProps = {
     componentClass: tag,
+    pullRight: false,
+    pullLeft: false,
   };
 
   Wrapper.contextTypes = {

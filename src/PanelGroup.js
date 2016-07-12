@@ -8,8 +8,6 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 const propTypes = {
   accordion: React.PropTypes.bool,
   activeKey: React.PropTypes.any,
-  className: React.PropTypes.string,
-  children: React.PropTypes.node,
   defaultActiveKey: React.PropTypes.any,
   onSelect: React.PropTypes.func,
   role: React.PropTypes.string,

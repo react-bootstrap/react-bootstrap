@@ -6,7 +6,6 @@ import { bsClass, bsStyles, getClassSet, omitBsProps, prefix }
 import { State } from './utils/StyleConfig';
 
 const propTypes = {
-  className: React.PropTypes.string,
   active: React.PropTypes.any,
   disabled: React.PropTypes.any,
   header: React.PropTypes.node,

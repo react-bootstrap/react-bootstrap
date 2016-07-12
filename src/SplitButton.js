@@ -23,6 +23,9 @@ const propTypes = {
   toggleLabel: React.PropTypes.string,
 
   // Override generated docs from <Dropdown>.
+  /**
+   * @private
+   */
   children: React.PropTypes.node,
 };
 

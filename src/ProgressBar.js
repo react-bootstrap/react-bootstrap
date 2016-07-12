@@ -48,7 +48,6 @@ const propTypes = {
   srOnly: PropTypes.bool,
   striped: PropTypes.bool,
   active: PropTypes.bool,
-  className: React.PropTypes.string,
   children: onlyProgressBar,
 
   /**

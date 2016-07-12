@@ -13,6 +13,9 @@ const propTypes = {
   noCaret: React.PropTypes.bool,
 
   // Override generated docs from <Dropdown>.
+  /**
+   * @private
+   */
   children: React.PropTypes.node,
 };
 

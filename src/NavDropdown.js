@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 
 import Dropdown from './Dropdown';
@@ -9,14 +10,24 @@ const propTypes = {
   // Toggle props.
   title: React.PropTypes.node.isRequired,
   noCaret: React.PropTypes.bool,
+  active: React.PropTypes.bool,
 
   // Override generated docs from <Dropdown>.
+  /**
+   * @private
+   */
   children: React.PropTypes.node,
 };
 
 class NavDropdown extends React.Component {
   render() {
-    const { title, className, style, children, ...props } = this.props;
+    const { title, active, className, style, children, ...props } = this.props;
+
+    delete props.eventKey;
+
+    // These are injected down by `<Nav>` for building `<SubNav>`s.
+    delete props.activeKey;
+    delete props.activeHref;
 
     const [dropdownProps, toggleProps] =
       splitComponentProps(props, Dropdown.ControlledComponent);
@@ -28,13 +39,10 @@ class NavDropdown extends React.Component {
       <Dropdown
         {...dropdownProps}
         componentClass="li"
-        className={className}
+        className={classNames(className, { active })}
         style={style}
       >
-        <Dropdown.Toggle
-          {...toggleProps}
-          useAnchor
-        >
+        <Dropdown.Toggle {...toggleProps} useAnchor>
           {title}
         </Dropdown.Toggle>
 
