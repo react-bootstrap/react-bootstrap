@@ -22,7 +22,7 @@ describe('<DropdownToggle>', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleToggle);
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
-    buttonNode.innerText.should.match(/herpa derpa/);
+    buttonNode.textContent.should.match(/herpa derpa/);
   });
 
   it('renders title children', () => {
@@ -34,7 +34,7 @@ describe('<DropdownToggle>', () => {
     const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
     const h3Node = getOne(button.getElementsByTagName('h3'));
 
-    h3Node.innerText.should.match(/herpa derpa/);
+    h3Node.textContent.should.match(/herpa derpa/);
   });
 
   it('renders dropdown toggle button caret', () => {

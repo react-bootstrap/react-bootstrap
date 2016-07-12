@@ -51,7 +51,7 @@ describe('<Pagination>', () => {
     assert.equal(pageButtons.length, 10);
 
     // active button is the second one
-    assert.equal(pageButtons[0].firstChild.innerText, '6');
+    assert.equal(pageButtons[0].firstChild.textContent, '6');
     pageButtons[4].className.should.match(/\bactive\b/);
   });
 
@@ -72,11 +72,11 @@ describe('<Pagination>', () => {
     // add first, last, prev, next and ellipsis button
     assert.equal(pageButtons.length, 8);
 
-    assert.equal(pageButtons[0].innerText, '«');
-    assert.equal(pageButtons[1].innerText, '‹');
-    assert.equal(pageButtons[5].innerText, '…');
-    assert.equal(pageButtons[6].innerText, '›');
-    assert.equal(pageButtons[7].innerText, '»');
+    assert.equal(pageButtons[0].textContent, '«');
+    assert.equal(pageButtons[1].textContent, '‹');
+    assert.equal(pageButtons[5].textContent, '…');
+    assert.equal(pageButtons[6].textContent, '›');
+    assert.equal(pageButtons[7].textContent, '»');
 
   });
 
@@ -96,10 +96,10 @@ describe('<Pagination>', () => {
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     // add first, last, prev, next and ellipsis button
-    assert.equal(pageButtons[2].innerText, '1');
-    assert.equal(pageButtons[3].innerText, '…');
-    assert.equal(pageButtons[7].innerText, '…');
-    assert.equal(pageButtons[8].innerText, '20');
+    assert.equal(pageButtons[2].textContent, '1');
+    assert.equal(pageButtons[3].textContent, '…');
+    assert.equal(pageButtons[7].textContent, '…');
+    assert.equal(pageButtons[8].textContent, '20');
   });
 
   it('should show the ellipsis, first, last, prev and next button with custom labels', () => {
@@ -119,11 +119,11 @@ describe('<Pagination>', () => {
     // add first, last, prev, next and ellipsis button
     assert.equal(pageButtons.length, 8);
 
-    assert.equal(pageButtons[0].innerText, 'first');
-    assert.equal(pageButtons[1].innerText, 'prev');
-    assert.equal(pageButtons[5].innerText, 'more');
-    assert.equal(pageButtons[6].innerText, 'next');
-    assert.equal(pageButtons[7].innerText, 'last');
+    assert.equal(pageButtons[0].textContent, 'first');
+    assert.equal(pageButtons[1].textContent, 'prev');
+    assert.equal(pageButtons[5].textContent, 'more');
+    assert.equal(pageButtons[6].textContent, 'next');
+    assert.equal(pageButtons[7].textContent, 'last');
   });
 
   it('should enumerate pagenums correctly when ellipsis=true', () => {
@@ -141,11 +141,11 @@ describe('<Pagination>', () => {
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
-    assert.equal(pageButtons[0].innerText, '«');
-    assert.equal(pageButtons[1].innerText, '‹');
-    assert.equal(pageButtons[2].innerText, '1');
-    assert.equal(pageButtons[3].innerText, '›');
-    assert.equal(pageButtons[4].innerText, '»');
+    assert.equal(pageButtons[0].textContent, '«');
+    assert.equal(pageButtons[1].textContent, '‹');
+    assert.equal(pageButtons[2].textContent, '1');
+    assert.equal(pageButtons[3].textContent, '›');
+    assert.equal(pageButtons[4].textContent, '»');
   });
 
   it('should render next and last buttons as disabled when items=0 and ellipsis=true', () => {
@@ -161,8 +161,8 @@ describe('<Pagination>', () => {
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
-    assert.equal(pageButtons[0].innerText, '›');
-    assert.equal(pageButtons[1].innerText, '»');
+    assert.equal(pageButtons[0].textContent, '›');
+    assert.equal(pageButtons[1].textContent, '»');
 
     assert.include(pageButtons[0].className, 'disabled');
     assert.include(pageButtons[1].className, 'disabled');
@@ -253,8 +253,8 @@ describe('<Pagination>', () => {
     const nextButton = pageButtons[0];
     const lastButton = pageButtons[1];
 
-    ReactTestUtils.Simulate.click( nextButton );
-    ReactTestUtils.Simulate.click( lastButton );
+    ReactTestUtils.Simulate.click(nextButton);
+    ReactTestUtils.Simulate.click(lastButton);
   });
 
   it('should pass page number to buttonComponentClass', () => {

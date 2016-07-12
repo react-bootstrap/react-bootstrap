@@ -73,7 +73,7 @@ module.exports = config => {
       },
     },
 
-    browsers: env.BROWSER ? [env.BROWSER] : ['Chrome'],
+    browsers: env.BROWSER ? env.BROWSER.split(',') : ['Chrome'],
 
     singleRun: isCi,
   });

@@ -67,10 +67,10 @@ describe('<ListGroupItem>', () => {
 
     let node = ReactDOM.findDOMNode(instance);
     assert.equal(node.firstChild.nodeName, 'H4');
-    assert.equal(node.firstChild.innerText, 'Heading');
+    assert.equal(node.firstChild.textContent, 'Heading');
     assert.ok(node.firstChild.className.match(/\blist-group-item-heading\b/));
     assert.equal(node.lastChild.nodeName, 'P');
-    assert.equal(node.lastChild.innerText, 'Item text');
+    assert.equal(node.lastChild.textContent, 'Item text');
     assert.ok(node.lastChild.className.match(/\blist-group-item-text\b/));
   });
 
@@ -82,10 +82,10 @@ describe('<ListGroupItem>', () => {
 
     let node = ReactDOM.findDOMNode(instance);
     assert.equal(node.firstChild.nodeName, 'H2');
-    assert.equal(node.firstChild.innerText, 'Heading');
+    assert.equal(node.firstChild.textContent, 'Heading');
     assert.ok(node.firstChild.className.match(/\blist-group-item-heading\b/));
     assert.equal(node.lastChild.nodeName, 'P');
-    assert.equal(node.lastChild.innerText, 'Item text');
+    assert.equal(node.lastChild.textContent, 'Item text');
     assert.ok(node.lastChild.className.match(/\blist-group-item-text\b/));
   });
 });
