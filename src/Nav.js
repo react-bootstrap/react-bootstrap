@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import all from 'react-prop-types/lib/all';
 import warning from 'warning';
 
-import { bsClass, bsStyles, getClassSet, omitBsProps, prefix }
+import { bsClass, bsStyles, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
@@ -288,10 +288,12 @@ class Nav extends React.Component {
     const tabContainer = this.context.$bs_tabContainer;
     const role = propsRole || (tabContainer ? 'tablist' : null);
 
+    const [bsProps, elementProps] = splitBsProps(props);
+
     const classes = {
-      ...getClassSet(props),
-      [prefix(props, 'stacked')]: stacked,
-      [prefix(props, 'justified')]: justified,
+      ...getClassSet(bsProps),
+      [prefix(bsProps, 'stacked')]: stacked,
+      [prefix(bsProps, 'justified')]: justified,
     };
 
     const navbar = propsNavbar != null ? propsNavbar : this.context.$bs_navbar;
@@ -315,7 +317,7 @@ class Nav extends React.Component {
 
     return (
       <ul
-        {...omitBsProps(props)}
+        {...elementProps}
         role={role}
         className={classNames(className, classes)}
       >

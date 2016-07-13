@@ -11,8 +11,13 @@ import NavbarBrand from './NavbarBrand';
 import NavbarCollapse from './NavbarCollapse';
 import NavbarHeader from './NavbarHeader';
 import NavbarToggle from './NavbarToggle';
-import { bsClass as setBsClass, bsStyles, getClassSet, omitBsProps, prefix }
-  from './utils/bootstrapUtils';
+import {
+  bsClass as setBsClass,
+  bsStyles,
+  getClassSet,
+  prefix,
+  splitBsPropsAndOmit,
+} from './utils/bootstrapUtils';
 import { Style } from './utils/StyleConfig';
 
 const propTypes = {
@@ -118,30 +123,31 @@ class Navbar extends React.Component {
       ...props
     } = this.props;
 
-    delete props.expanded;
-    delete props.onToggle;
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
+      'expanded', 'onToggle',
+    ]);
 
     // will result in some false positives but that seems better
     // than false negatives. strict `undefined` check allows explicit
     // "nulling" of the role if the user really doesn't want one
-    if (props.role === undefined && Component !== 'nav') {
-      props.role = 'navigation';
+    if (elementProps.role === undefined && Component !== 'nav') {
+      elementProps.role = 'navigation';
     }
 
     if (inverse) {
-      props.bsStyle = Style.INVERSE;
+      bsProps.bsStyle = Style.INVERSE;
     }
 
     const classes = {
-      ...getClassSet(props),
-      [prefix(props, 'fixed-top')]: fixedTop,
-      [prefix(props, 'fixed-bottom')]: fixedBottom,
-      [prefix(props, 'static-top')]: staticTop,
+      ...getClassSet(bsProps),
+      [prefix(bsProps, 'fixed-top')]: fixedTop,
+      [prefix(bsProps, 'fixed-bottom')]: fixedBottom,
+      [prefix(bsProps, 'static-top')]: staticTop,
     };
 
     return (
       <Component
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       >
         <Grid fluid={fluid}>
@@ -162,10 +168,10 @@ const UncontrollableNavbar = uncontrollable(Navbar, { expanded: 'onToggle' });
 
 function createSimpleWrapper(tag, suffix, displayName) {
   const Wrapper = (
-    { componentClass: Tag, className, pullRight, pullLeft, ...props },
+    { componentClass: Component, className, pullRight, pullLeft, ...props },
     { $bs_navbar: navbarProps = { bsClass: 'navbar' } }
   ) => (
-    <Tag
+    <Component
       {...props}
       className={classNames(
         className,

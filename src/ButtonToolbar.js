@@ -2,17 +2,19 @@ import classNames from 'classnames';
 import React from 'react';
 
 import Button from './Button';
-import { bsClass, bsSizes, getClassSet, omitBsProps }
+import { bsClass, bsSizes, getClassSet, splitBsProps }
   from './utils/bootstrapUtils';
 
 class ButtonToolbar extends React.Component {
   render() {
     const { className, ...props } = this.props;
-    const classes = getClassSet(props);
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         role="toolbar"
         className={classNames(className, classes)}
       />

@@ -3,7 +3,7 @@ import React, { cloneElement } from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
 import ListGroupItem from './ListGroupItem';
-import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const propTypes = {
@@ -40,7 +40,9 @@ class ListGroup extends React.Component {
       ...props,
     } = this.props;
 
-    const classes = getClassSet(props);
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
 
     const useListItem =
       Component === 'ul' &&
@@ -50,7 +52,7 @@ class ListGroup extends React.Component {
 
     return (
       <Component
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       >
         {useListItem ?

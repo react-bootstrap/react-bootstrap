@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 
 import PagerItem from './PagerItem';
-import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
@@ -13,12 +13,13 @@ const propTypes = {
 class Pager extends React.Component {
   render() {
     const { onSelect, className, children, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
-    const classes = getClassSet(props);
+    const classes = getClassSet(bsProps);
 
     return (
       <ul
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       >
         {ValidComponentChildren.map(children, child => (

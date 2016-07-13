@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, getClassSet, omitBsProps, prefix }
+import { bsClass, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 
 const propTypes = {
@@ -23,27 +23,35 @@ const defaultProps = {
 class Table extends React.Component {
   render() {
     const {
-      striped, bordered, condensed, hover, responsive, className, ...props,
+      striped,
+      bordered,
+      condensed,
+      hover,
+      responsive,
+      className,
+      ...props,
     } = this.props;
 
+    const [bsProps, elementProps] = splitBsProps(props);
+
     const classes = {
-      ...getClassSet(props),
-      [prefix(props, 'striped')]: striped,
-      [prefix(props, 'bordered')]: bordered,
-      [prefix(props, 'condensed')]: condensed,
-      [prefix(props, 'hover')]: hover,
+      ...getClassSet(bsProps),
+      [prefix(bsProps, 'striped')]: striped,
+      [prefix(bsProps, 'bordered')]: bordered,
+      [prefix(bsProps, 'condensed')]: condensed,
+      [prefix(bsProps, 'hover')]: hover,
     };
 
     const table = (
       <table
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       />
     );
 
     if (responsive) {
       return (
-        <div className={prefix(props, 'responsive')}>
+        <div className={prefix(bsProps, 'responsive')}>
           {table}
         </div>
       );

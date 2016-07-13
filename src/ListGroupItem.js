@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 
-import { bsClass, bsStyles, getClassSet, omitBsProps, prefix }
+import { bsClass, bsStyles, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 import { State } from './utils/StyleConfig';
 
@@ -36,40 +36,45 @@ class ListGroupItem extends React.Component {
 
   render() {
     const {
-      active, disabled, className, header, listItem, children, ...props,
+      active,
+      disabled,
+      className,
+      header,
+      listItem,
+      children,
+      ...props,
     } = this.props;
 
+    const [bsProps, elementProps] = splitBsProps(props);
+
     const classes = {
-      ...getClassSet(props),
+      ...getClassSet(bsProps),
       active,
       disabled,
     };
 
     let Component;
 
-    if (props.href) {
+    if (elementProps.href) {
       Component = 'a';
-    } else if (props.onClick) {
+    } else if (elementProps.onClick) {
       Component = 'button';
-      props.type = props.type || 'button';
+      elementProps.type = elementProps.type || 'button';
     } else if (listItem) {
       Component = 'li';
     } else {
       Component = 'span';
     }
 
-    const componentProps = {
-      ...omitBsProps(props),
-      className: classNames(className, classes),
-    };
+    elementProps.className = classNames(className, classes);
 
     // TODO: Deprecate `header` prop.
     if (header) {
       return (
-        <Component {...componentProps}>
-          {this.renderHeader(header, prefix(props, 'heading'))}
+        <Component {...elementProps}>
+          {this.renderHeader(header, prefix(bsProps, 'heading'))}
 
-          <p className={prefix(props, 'text')}>
+          <p className={prefix(bsProps, 'text')}>
             {children}
           </p>
         </Component>
@@ -77,7 +82,7 @@ class ListGroupItem extends React.Component {
     }
 
     return (
-      <Component {...componentProps}>
+      <Component {...elementProps}>
         {children}
       </Component>
     );

@@ -3,19 +3,20 @@ import React from 'react';
 
 import InputGroupAddon from './InputGroupAddon';
 import InputGroupButton from './InputGroupButton';
-import { bsClass, bsSizes, getClassSet, omitBsProps }
+import { bsClass, bsSizes, getClassSet, splitBsProps }
   from './utils/bootstrapUtils';
 import { Size } from './utils/StyleConfig';
 
 class InputGroup extends React.Component {
   render() {
     const { className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
-    const classes = getClassSet(props);
+    const classes = getClassSet(bsProps);
 
     return (
       <span
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       />
     );

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, bsSizes, getClassSet, omitBsProps, prefix }
+import { bsClass, bsSizes, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 import { Size } from './utils/StyleConfig';
 
@@ -14,33 +14,30 @@ const propTypes = {
 
 class ModalDialog extends React.Component {
   render() {
-    const {
-      dialogClassName, className, style, children, ...props,
-    } = this.props;
+    const { dialogClassName, className, style, children, ...props, } =
+      this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
-    const modalStyle = {
-      display: 'block',
-      ...style,
-    };
+    const bsClassName = prefix(bsProps);
 
-    const bsClassName = prefix(props);
+    const modalStyle = { display: 'block', ...style };
 
     const dialogClasses = {
-      ...getClassSet(props),
+      ...getClassSet(bsProps),
       [bsClassName]: false,
-      [prefix(props, 'dialog')]: true,
+      [prefix(bsProps, 'dialog')]: true,
     };
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
         className={classNames(className, bsClassName)}
       >
         <div className={classNames(dialogClassName, dialogClasses)}>
-          <div className={prefix(props, 'content')} role="document">
+          <div className={prefix(bsProps, 'content')} role="document">
             {children}
           </div>
         </div>

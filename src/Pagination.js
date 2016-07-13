@@ -3,7 +3,7 @@ import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
 import PaginationButton from './PaginationButton';
-import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   activePage: React.PropTypes.number,
@@ -189,7 +189,9 @@ class Pagination extends React.Component {
       ...props,
     } = this.props;
 
-    const classes = getClassSet(props);
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
 
     const buttonProps = {
       onSelect,
@@ -198,7 +200,7 @@ class Pagination extends React.Component {
 
     return (
       <ul
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       >
         {first && (

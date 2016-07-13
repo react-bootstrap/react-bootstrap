@@ -1,4 +1,3 @@
-import omit from 'lodash-compat/object/omit';
 import React from 'react';
 
 import TabContainer from './TabContainer';
@@ -20,8 +19,12 @@ const propTypes = {
 
 class Tab extends React.Component {
   render() {
-    // Omit props only relevant to tab nav instead of tab pane.
-    const props = omit(this.props, ['title', 'disabled', 'tabClassName']);
+    const props = { ...this.props };
+
+    // These props are for the parent `<Tabs>` rather than the `<TabPane>`.
+    delete props.title;
+    delete props.disabled;
+    delete props.tabClassName;
 
     return <TabPane {...props} />;
   }

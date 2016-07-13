@@ -1,12 +1,14 @@
-import _ from 'lodash-compat';
+import merge from 'lodash/merge';
 import React from 'react';
+
 import Glyphicon from '../../src/Glyphicon';
 import Label from '../../src/Label';
 import Table from '../../src/Table';
+import capitalize from '../../src/utils/capitalize';
 
-
-let cleanDocletValue = str => str.trim().replace(/^\{/, '').replace(/\}$/, '');
-let capitalize = str => str[0].toUpperCase() + str.substr(1);
+function cleanDocletValue(str) {
+  return str.trim().replace(/^\{/, '').replace(/\}$/, '');
+}
 
 function getPropsData(component, metadata) {
   let componentData = metadata[component] || {};
@@ -15,7 +17,7 @@ function getPropsData(component, metadata) {
   if (componentData.composes) {
     componentData.composes.forEach(other => {
       if (other !== component) {
-        props = _.merge({}, getPropsData(other, metadata), props);
+        props = merge({}, getPropsData(other, metadata), props);
       }
     });
   }
@@ -23,7 +25,7 @@ function getPropsData(component, metadata) {
   if (componentData.mixins) {
     componentData.mixins.forEach( other => {
       if (other !== component && componentData.composes.indexOf(other) === -1) {
-        props = _.merge({}, getPropsData(other, metadata), props);
+        props = merge({}, getPropsData(other, metadata), props);
       }
     });
   }

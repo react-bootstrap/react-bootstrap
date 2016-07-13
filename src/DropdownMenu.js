@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
 
-import { bsClass, getClassSet, omitBsProps, prefix }
+import { bsClass, getClassSet, prefix, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
@@ -97,16 +97,16 @@ class DropdownMenu extends React.Component {
       ...props,
     } = this.props;
 
-    delete props.bsRole;
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['bsRole']);
 
     const classes = {
-      ...getClassSet(props),
-      [prefix(props, 'right')]: pullRight,
+      ...getClassSet(bsProps),
+      [prefix(bsProps, 'right')]: pullRight,
     };
 
     const list = (
       <ul
-        {...omitBsProps(props)}
+        {...elementProps}
         role="menu"
         className={classNames(className, classes)}
         aria-labelledby={labelledBy}

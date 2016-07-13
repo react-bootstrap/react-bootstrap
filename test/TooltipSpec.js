@@ -1,4 +1,4 @@
-import _ from 'lodash-compat';
+import pick from 'lodash/pick';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 
@@ -18,7 +18,7 @@ describe('Tooltip', () => {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
 
     const tooltip = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tooltip');
-    expect(_.pick(tooltip.style, ['top', 'left']))
+    expect(pick(tooltip.style, ['top', 'left']))
       .to.eql({ top: '10px', left: '20px' });
   });
 
@@ -35,7 +35,7 @@ describe('Tooltip', () => {
         </Tooltip>
       );
       const tooltip = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tooltip');
-      expect(_.pick(tooltip.style, ['top', 'left']))
+      expect(pick(tooltip.style, ['top', 'left']))
         .to.eql({ top: '10px', left: '20px' });
       // Decimal point string depends on locale
       expect(parseFloat(tooltip.style.opacity)).to.eql(0.9);

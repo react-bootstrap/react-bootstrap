@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 
-import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsPropsAndOmit }
+  from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
@@ -53,26 +54,27 @@ class PanelGroup extends React.Component {
       ...props,
     } = this.props;
 
-    delete props.defaultActiveKey;
-    delete props.onSelect;
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
+      'defaultActiveKey', 'onSelect',
+    ]);
 
     let activeKey;
     if (accordion) {
       activeKey = propsActiveKey != null ?
         propsActiveKey : this.state.activeKey;
-      props.role = props.role || 'tablist';
+      elementProps.role = elementProps.role || 'tablist';
     }
 
-    const classes = getClassSet(props);
+    const classes = getClassSet(bsProps);
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       >
         {ValidComponentChildren.map(children, child => {
           const childProps = {
-            bsStyle: child.props.bsStyle || props.bsStyle,
+            bsStyle: child.props.bsStyle || bsProps.bsStyle,
           };
 
           if (accordion) {

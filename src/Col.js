@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
-import { bsClass, prefix, omitBsProps } from './utils/bootstrapUtils';
+import { bsClass, prefix, splitBsProps } from './utils/bootstrapUtils';
 import { DEVICE_SIZES } from './utils/StyleConfig';
 
 const propTypes = {
@@ -177,19 +177,20 @@ const defaultProps = {
 class Col extends React.Component {
   render() {
     const { componentClass: Component, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = [];
 
     DEVICE_SIZES.forEach(size => {
       function popProp(propSuffix, modifier) {
         const propName = `${size}${propSuffix}`;
-        const propValue = props[propName];
+        const propValue = elementProps[propName];
 
         if (propValue != null) {
-          classes.push(prefix(props, `${size}${modifier}-${propValue}`));
+          classes.push(prefix(bsProps, `${size}${modifier}-${propValue}`));
         }
 
-        delete props[propName];
+        delete elementProps[propName];
       }
 
       popProp('', '');
@@ -198,15 +199,15 @@ class Col extends React.Component {
       popProp('Pull', '-pull');
 
       const hiddenPropName = `${size}Hidden`;
-      if (props[hiddenPropName]) {
+      if (elementProps[hiddenPropName]) {
         classes.push(`hidden-${size}`);
       }
-      delete props[hiddenPropName];
+      delete elementProps[hiddenPropName];
     });
 
     return (
       <Component
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       />
     );

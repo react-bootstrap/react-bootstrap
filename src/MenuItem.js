@@ -3,7 +3,7 @@ import React from 'react';
 import all from 'react-prop-types/lib/all';
 
 import SafeAnchor from './SafeAnchor';
-import { bsClass, omitBsProps, prefix } from './utils/bootstrapUtils';
+import { bsClass, prefix, splitBsPropsAndOmit } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
@@ -101,16 +101,17 @@ class MenuItem extends React.Component {
       ...props,
     } = this.props;
 
-    delete props.eventKey;
-    delete props.onSelect;
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
+      'eventKey', 'onSelect',
+    ]);
 
     if (divider) {
       // Forcibly blank out the children; separators shouldn't render any.
-      props.children = undefined;
+      elementProps.children = undefined;
 
       return (
         <li
-          {...omitBsProps(props)}
+          {...elementProps}
           role="separator"
           className={classNames(className, 'divider')}
           style={style}
@@ -121,15 +122,13 @@ class MenuItem extends React.Component {
     if (header) {
       return (
         <li
-          {...omitBsProps(props)}
+          {...elementProps}
           role="heading"
-          className={classNames(className, prefix(props, 'header'))}
+          className={classNames(className, prefix(bsProps, 'header'))}
           style={style}
         />
       );
     }
-
-    delete props.onSelect;
 
     return (
       <li
@@ -138,7 +137,7 @@ class MenuItem extends React.Component {
         style={style}
       >
         <SafeAnchor
-          {...omitBsProps(props)}
+          {...elementProps}
           role="menuitem"
           tabIndex="-1"
           onClick={createChainedFunction(onClick, this.handleClick)}

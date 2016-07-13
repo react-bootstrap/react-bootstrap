@@ -21,7 +21,13 @@ const defaultProps = {
 class DropdownToggle extends React.Component {
   render() {
     const {
-      noCaret, open, useAnchor, bsClass, className, children, ...props,
+      noCaret,
+      open,
+      useAnchor,
+      bsClass,
+      className,
+      children,
+      ...props,
     } = this.props;
 
     delete props.bsRole;

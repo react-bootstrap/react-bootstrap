@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 
 import Collapse from './Collapse';
-import { bsStyles, bsClass, getClassSet, omitBsProps, prefix }
+import { bsStyles, bsClass, getClassSet, prefix, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
 import { State, Style } from './utils/StyleConfig';
 
@@ -66,38 +66,31 @@ class Panel extends React.Component {
     return React.isValidElement(child) && child.props.fill != null;
   }
 
-  renderHeading(collapsible, header, id, role, expanded, props) {
-    let title;
-    const titleClassName = prefix(props, 'title');
+  renderHeader(collapsible, header, id, role, expanded, bsProps) {
+    const titleClassName = prefix(bsProps, 'title');
 
-    if (collapsible) {
-      if (React.isValidElement(header)) {
-        title = cloneElement(header, {
-          className: classNames(header.props.className, titleClassName),
-          children: this.renderAnchor(header.props.children, role),
-        });
-      } else {
-        title = (
-          <h4 role="presentation" className={titleClassName}>
-            {this.renderAnchor(header, id, role, expanded)}
-          </h4>
-        );
+    if (!collapsible) {
+      if (!React.isValidElement(header)) {
+        return header;
       }
-    } else {
-      if (React.isValidElement(header)) {
-        title = cloneElement(header, {
-          className: classNames(header.props.className, titleClassName),
-        });
-      } else {
-        title = header;
-      }
+
+      return cloneElement(header, {
+        className: classNames(header.props.className, titleClassName),
+      });
     }
 
-    return (
-      <div className={prefix(props, 'heading')}>
-        {title}
-      </div>
-    );
+    if (!React.isValidElement(header)) {
+      return (
+        <h4 role="presentation" className={titleClassName}>
+          {this.renderAnchor(header, id, role, expanded)}
+        </h4>
+      );
+    }
+
+    return cloneElement(header, {
+      className: classNames(header.props.className, titleClassName),
+      children: this.renderAnchor(header.props.children, role),
+    });
   }
 
   renderAnchor(header, id, role, expanded) {
@@ -115,26 +108,28 @@ class Panel extends React.Component {
     );
   }
 
-  renderCollapsibleBody(id, expanded, role, children, props, animationHooks) {
+  renderCollapsibleBody(
+    id, expanded, role, children, bsProps, animationHooks
+  ) {
     return (
       <Collapse in={expanded} {...animationHooks}>
         <div
           id={id}
           role={role}
-          className={prefix(props, 'collapse')}
+          className={prefix(bsProps, 'collapse')}
           aria-hidden={!expanded}
         >
-          {this.renderBody(children, props)}
+          {this.renderBody(children, bsProps)}
         </div>
       </Collapse>
     );
   }
 
-  renderBody(rawChildren, props) {
+  renderBody(rawChildren, bsProps) {
     const children = [];
     let bodyChildren = [];
 
-    const bodyClassName = prefix(props, 'body');
+    const bodyClassName = prefix(bsProps, 'body');
 
     function maybeAddBody() {
       if (!bodyChildren.length) {
@@ -190,35 +185,39 @@ class Panel extends React.Component {
       ...props,
     } = this.props;
 
-    delete props.defaultExpanded;
-    delete props.eventKey;
-    delete props.onSelect;
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
+      'defaultExpanded', 'eventKey', 'onSelect',
+    ]);
 
     const expanded = propsExpanded != null ?
       propsExpanded : this.state.expanded;
 
-    const classes = getClassSet(props);
+    const classes = getClassSet(bsProps);
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
         id={collapsible ? null : id}
       >
-        {header && this.renderHeading(
-          collapsible, header, id, headerRole, expanded, props
+        {header && (
+          <div className={prefix(bsProps, 'heading')}>
+            {this.renderHeader(
+              collapsible, header, id, headerRole, expanded, bsProps
+            )}
+          </div>
         )}
 
         {collapsible ?
           this.renderCollapsibleBody(
-            id, expanded, panelRole, children, props,
+            id, expanded, panelRole, children, bsProps,
             { onEnter, onEntering, onEntered, onExit, onExiting, onExited }
           ) :
-          this.renderBody(children, props)
+          this.renderBody(children, bsProps)
         }
 
         {footer && (
-          <div className={prefix(props, 'footer')}>
+          <div className={prefix(bsProps, 'footer')}>
             {footer}
           </div>
         )}

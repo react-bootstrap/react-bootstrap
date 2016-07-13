@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { PropTypes } from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
-import { bsClass as setBsClass, omitBsProps, prefix }
+import { bsClass as setBsClass, prefix, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
 
 const propTypes = {
@@ -142,14 +142,14 @@ class TabContent extends React.Component {
 
   render() {
     const { componentClass: Component, className, ...props } = this.props;
-
-    delete props.animation;
-    delete props.unmountOnExit;
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
+      'animation', 'unmountOnExit',
+    ]);
 
     return (
       <Component
-        {...omitBsProps(props)}
-        className={classNames(className, prefix(props, 'content'))}
+        {...elementProps}
+        className={classNames(className, prefix(bsProps, 'content'))}
       />
     );
   }

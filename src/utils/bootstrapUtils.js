@@ -1,6 +1,5 @@
 // TODO: The publicly exposed parts of this should be in lib/BootstrapUtils.
 
-import omit from 'lodash-compat/object/omit';
 import invariant from 'invariant';
 import { PropTypes } from 'react';
 
@@ -130,8 +129,45 @@ export function getClassSet(props) {
   return classes;
 }
 
-export function omitBsProps(props) {
-  return omit(props, ['bsClass', 'bsSize', 'bsStyle']);
+function getBsProps(props) {
+  return {
+    bsClass: props.bsClass,
+    bsSize: props.bsSize,
+    bsStyle: props.bsStyle,
+  };
+}
+
+function isBsProp(propName) {
+  return (
+    propName === 'bsClass' ||
+    propName === 'bsSize' ||
+    propName === 'bsStyle'
+  );
+}
+
+export function splitBsProps(props) {
+  const elementProps = {};
+  Object.entries(props).forEach(([propName, propValue]) => {
+    if (!isBsProp(propName)) {
+      elementProps[propName] = propValue;
+    }
+  });
+
+  return [getBsProps(props), elementProps];
+}
+
+export function splitBsPropsAndOmit(props, omittedPropNames) {
+  const isOmittedProp = {};
+  omittedPropNames.forEach(propName => { isOmittedProp[propName] = true; });
+
+  const elementProps = {};
+  Object.entries(props).forEach(([propName, propValue]) => {
+    if (!isBsProp(propName) && !isOmittedProp[propName]) {
+      elementProps[propName] = propValue;
+    }
+  });
+
+  return [getBsProps(props), elementProps];
 }
 
 /**

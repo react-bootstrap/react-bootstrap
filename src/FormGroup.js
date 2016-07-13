@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, bsSizes, getClassSet, omitBsProps }
+import { bsClass, bsSizes, getClassSet, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
 import { Size } from './utils/StyleConfig';
 import ValidComponentChildren from './utils/ValidComponentChildren';
@@ -38,17 +38,11 @@ class FormGroup extends React.Component {
   }
 
   render() {
-    const {
-      validationState,
-      className,
-      children,
-      ...props,
-    } = this.props;
-
-    delete props.controlId;
+    const { validationState, className, children, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['controlId']);
 
     const classes = {
-      ...getClassSet(props),
+      ...getClassSet(bsProps),
       'has-feedback': this.hasFeedback(children),
     };
     if (validationState) {
@@ -57,7 +51,7 @@ class FormGroup extends React.Component {
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       >
         {children}

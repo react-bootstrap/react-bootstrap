@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, getClassSet, omitBsProps, prefix}
+import { bsClass, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 
 const propTypes = {
@@ -14,15 +14,16 @@ const propTypes = {
 class Glyphicon extends React.Component {
   render() {
     const { glyph, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
-      ...getClassSet(props),
-      [prefix(props, glyph)]: true,
+      ...getClassSet(bsProps),
+      [prefix(bsProps, glyph)]: true,
     };
 
     return (
       <span
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       />
     );
