@@ -1,10 +1,9 @@
-import omit from 'lodash-compat/object/omit';
-import pick from 'lodash-compat/object/pick';
 import React from 'react';
 
 import Button from './Button';
 import Dropdown from './Dropdown';
 import SplitToggle from './SplitToggle';
+import splitComponentProps from './utils/splitComponentProps';
 
 const propTypes = {
   ...Dropdown.propTypes,
@@ -24,6 +23,9 @@ const propTypes = {
   toggleLabel: React.PropTypes.string,
 
   // Override generated docs from <Dropdown>.
+  /**
+   * @private
+   */
   children: React.PropTypes.node,
 };
 
@@ -33,12 +35,8 @@ class SplitButton extends React.Component {
       bsSize, bsStyle, title, toggleLabel, children, ...props,
     } = this.props;
 
-    const dropdownProps = pick(
-      props, Object.keys(Dropdown.ControlledComponent.propTypes)
-    );
-    const buttonProps = omit(
-      props, Object.keys(Dropdown.ControlledComponent.propTypes)
-    );
+    const [dropdownProps, buttonProps] =
+      splitComponentProps(props, Dropdown.ControlledComponent);
 
     return (
       <Dropdown

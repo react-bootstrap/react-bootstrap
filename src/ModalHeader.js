@@ -33,7 +33,9 @@ const defaultProps = {
 };
 
 const contextTypes = {
-  $bs_onModalHide: React.PropTypes.func,
+  $bs_modal: React.PropTypes.shape({
+    onHide: React.PropTypes.func,
+  }),
 };
 
 class ModalHeader extends React.Component {
@@ -41,7 +43,7 @@ class ModalHeader extends React.Component {
     const {
       'aria-label': label, closeButton, onHide, className, children, ...props,
     } = this.props;
-    const onModalHide = this.context.$bs_onModalHide;
+    const modal = this.context.$bs_modal;
 
     const classes = getClassSet(props);
 
@@ -55,7 +57,7 @@ class ModalHeader extends React.Component {
             type="button"
             className="close"
             aria-label={label}
-            onClick={createChainedFunction(onModalHide, onHide)}
+            onClick={createChainedFunction(modal.onHide, onHide)}
           >
             <span aria-hidden="true">
               &times;

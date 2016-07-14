@@ -2,12 +2,13 @@ import events from 'dom-helpers/events';
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
+import BaseModal from 'react-overlays/lib/Modal';
 
 import Modal from '../src/Modal';
 
 import { render } from './helpers';
 
-describe('Modal', () => {
+describe('<Modal>', () => {
   let mountPoint;
 
   beforeEach(() => {
@@ -21,8 +22,8 @@ describe('Modal', () => {
   });
 
   it('Should render the modal content', () => {
-    let noOp = () => {};
-    let instance = render(
+    const noOp = () => {};
+    const instance = render(
       <Modal show onHide={noOp} animation={false}>
         <strong>Message</strong>
       </Modal>
@@ -33,29 +34,29 @@ describe('Modal', () => {
   });
 
   it('Should close the modal when the modal dialog is clicked', (done) => {
-    let doneOp = () => { done(); };
+    const doneOp = () => { done(); };
 
-    let instance = render(
+    const instance = render(
       <Modal show onHide={doneOp}>
         <strong>Message</strong>
       </Modal>
     , mountPoint);
 
 
-    let dialog = ReactDOM.findDOMNode(instance._modal);
+    const dialog = ReactDOM.findDOMNode(instance._modal);
 
     ReactTestUtils.Simulate.click(dialog);
   });
 
   it('Should not close the modal when the "static" dialog is clicked', () => {
-    let onHideSpy = sinon.spy();
-    let instance = render(
+    const onHideSpy = sinon.spy();
+    const instance = render(
       <Modal show onHide={onHideSpy} backdrop="static">
         <strong>Message</strong>
       </Modal>
     , mountPoint);
 
-    let dialog = ReactDOM.findDOMNode(instance._modal);
+    const dialog = ReactDOM.findDOMNode(instance._modal);
 
     ReactTestUtils.Simulate.click(dialog);
 
@@ -63,99 +64,101 @@ describe('Modal', () => {
   });
 
   it('Should close the modal when the modal close button is clicked', (done) => {
-    let doneOp = () => { done(); };
+    const doneOp = () => { done(); };
 
-    let instance = render(
+    const instance = render(
       <Modal show onHide={doneOp}>
         <Modal.Header closeButton />
         <strong>Message</strong>
       </Modal>
     , mountPoint);
 
-    let button = ReactDOM.findDOMNode(instance._modal)
+    const button = ReactDOM.findDOMNode(instance._modal)
         .getElementsByClassName('close')[0];
 
     ReactTestUtils.Simulate.click(button);
   });
 
   it('Should pass className to the dialog', () => {
-    let noOp = () => {};
-    let instance = render(
+    const noOp = () => {};
+    const instance = render(
       <Modal show className="mymodal" onHide={noOp}>
         <strong>Message</strong>
       </Modal>
     , mountPoint);
 
-    let dialog = ReactDOM.findDOMNode(instance._modal);
+    const dialog = ReactDOM.findDOMNode(instance._modal);
 
     assert.ok(dialog.className.match(/\bmymodal\b/));
   });
 
   it('Should use bsClass on the dialog', () => {
-    let noOp = () => {};
-    let instance = render(
+    const noOp = () => {};
+    const instance = render(
       <Modal show bsClass="mymodal" onHide={noOp}>
         <strong>Message</strong>
       </Modal>
     , mountPoint);
 
-    let modal = ReactDOM.findDOMNode(instance._modal);
+    const modal = ReactDOM.findDOMNode(instance._modal);
 
     assert.ok(modal.className.match(/\bmymodal\b/));
     assert.ok(modal.children[0].className.match(/\bmymodal-dialog\b/));
     assert.ok(modal.children[0].children[0].className.match(/\bmymodal-content\b/));
-    assert.ok(instance._backdrop.className.match(/\bmymodal-backdrop\b/));
+
+    const baseModal = ReactTestUtils.findRenderedComponentWithType(instance, BaseModal);
+    assert.ok(baseModal.refs.backdrop.className.match(/\bmymodal-backdrop\b/));
   });
 
   it('Should pass bsSize to the dialog', () => {
-    let noOp = () => {};
-    let instance = render(
+    const noOp = () => {};
+    const instance = render(
       <Modal show bsSize="small" onHide={noOp}>
         <strong>Message</strong>
       </Modal>
     , mountPoint);
 
-    let dialog = ReactDOM.findDOMNode(instance._modal).getElementsByClassName('modal-dialog')[0];
+    const dialog = ReactDOM.findDOMNode(instance._modal).getElementsByClassName('modal-dialog')[0];
 
     assert.ok(dialog.className.match(/\bmodal-sm\b/));
 
   });
 
   it('Should pass dialog style to the dialog', () => {
-    let noOp = () => {};
-    let instance = render(
-      <Modal show style={{top: 1000}} onHide={noOp}>
+    const noOp = () => {};
+    const instance = render(
+      <Modal show style={{ top: 1000 }} onHide={noOp}>
         <strong>Message</strong>
       </Modal>
     , mountPoint);
 
-    let dialog = ReactDOM.findDOMNode(instance._modal);
+    const dialog = ReactDOM.findDOMNode(instance._modal);
 
     assert.ok(dialog.style.top === '1000px');
 
   });
 
   it('Should pass dialogClassName to the dialog', () => {
-    let noOp = () => {};
-    let instance = render(
+    const noOp = () => {};
+    const instance = render(
       <Modal show dialogClassName="testCss" onHide={noOp}>
         <strong>Message</strong>
       </Modal>
     , mountPoint);
 
-    let dialog = ReactTestUtils.findRenderedDOMComponentWithClass(instance._modal, 'modal-dialog');
+    const dialog = ReactTestUtils.findRenderedDOMComponentWithClass(instance._modal, 'modal-dialog');
 
     assert.ok(dialog.className.match(/\btestCss\b/));
   });
 
   it('Should use dialogComponentClass', () => {
-    let noOp = () => {};
+    const noOp = () => {};
 
     class CustomDialog extends React.Component {
-      render() { return <div {...this.props}/>; }
+      render() { return <div tabIndex="-1" />; }
     }
 
-    let instance = render(
+    const instance = render(
       <Modal show dialogComponentClass={CustomDialog} onHide={noOp}>
         <strong>Message</strong>
       </Modal>
@@ -166,21 +169,22 @@ describe('Modal', () => {
 
   it('Should pass transition callbacks to Transition', (done) => {
     let count = 0;
-    let increment = ()=> count++;
+    const increment = () => { ++count; };
 
-    let instance = render(
-      <Modal show
+    const instance = render(
+      <Modal
+        show
         onHide={() => {}}
         onExit={increment}
         onExiting={increment}
-        onExited={()=> {
+        onExited={() => {
           increment();
           expect(count).to.equal(6);
           done();
         }}
         onEnter={increment}
         onEntering={increment}
-        onEntered={()=> {
+        onEntered={() => {
           increment();
           instance.renderWithProps({ show: false });
         }}

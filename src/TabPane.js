@@ -208,7 +208,7 @@ class TabPane extends React.Component {
       return null;
     }
 
-    const Transition = animation === true ? Fade : animation;
+    const Transition = animation === true ? Fade : animation || null;
 
     if (tabContent) {
       props.bsClass = prefix(tabContent, 'pane');

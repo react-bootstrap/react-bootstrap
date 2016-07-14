@@ -3,23 +3,26 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
 
 import MenuItem from '../src/MenuItem';
+import Nav from '../src/Nav';
 import NavDropdown from '../src/NavDropdown';
 
 describe('<NavDropdown>', () => {
   it('Should render li when in nav', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <NavDropdown title="Title" className="test-class" id="nav-test">
-        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
-      </NavDropdown>
+      <Nav>
+        <NavDropdown title="Title" className="test-class" id="nav-test">
+          <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+          <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+        </NavDropdown>
+      </Nav>
     );
 
-    const li = ReactDOM.findDOMNode(instance);
+    const dropdown = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, NavDropdown));
     const button = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
 
-    assert.equal(li.nodeName, 'LI');
-    assert.ok(li.className.match(/\bdropdown\b/));
-    assert.ok(li.className.match(/\btest-class\b/));
+    assert.equal(dropdown.nodeName, 'LI');
+    assert.ok(dropdown.className.match(/\bdropdown\b/));
+    assert.ok(dropdown.className.match(/\btest-class\b/));
     assert.equal(button.nodeName, 'A');
     assert.equal(button.textContent.trim(), 'Title');
   });

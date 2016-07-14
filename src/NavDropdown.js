@@ -1,8 +1,8 @@
-import omit from 'lodash-compat/object/omit';
-import pick from 'lodash-compat/object/pick';
+import classNames from 'classnames';
 import React from 'react';
 
 import Dropdown from './Dropdown';
+import splitComponentProps from './utils/splitComponentProps';
 
 const propTypes = {
   ...Dropdown.propTypes,
@@ -10,21 +10,27 @@ const propTypes = {
   // Toggle props.
   title: React.PropTypes.node.isRequired,
   noCaret: React.PropTypes.bool,
+  active: React.PropTypes.bool,
 
   // Override generated docs from <Dropdown>.
+  /**
+   * @private
+   */
   children: React.PropTypes.node,
 };
 
 class NavDropdown extends React.Component {
   render() {
-    const { title, className, style, children, ...props } = this.props;
+    const { title, active, className, style, children, ...props } = this.props;
 
-    const dropdownProps = pick(
-      props, Object.keys(Dropdown.ControlledComponent.propTypes)
-    );
-    const toggleProps = omit(
-      props, Object.keys(Dropdown.ControlledComponent.propTypes)
-    );
+    delete props.eventKey;
+
+    // These are injected down by `<Nav>` for building `<SubNav>`s.
+    delete props.activeKey;
+    delete props.activeHref;
+
+    const [dropdownProps, toggleProps] =
+      splitComponentProps(props, Dropdown.ControlledComponent);
 
     // Unlike for the other dropdowns, styling needs to go to the `<Dropdown>`
     // rather than the `<Dropdown.Toggle>`.
@@ -33,13 +39,10 @@ class NavDropdown extends React.Component {
       <Dropdown
         {...dropdownProps}
         componentClass="li"
-        className={className}
+        className={classNames(className, { active })}
         style={style}
       >
-        <Dropdown.Toggle
-          {...toggleProps}
-          useAnchor
-        >
+        <Dropdown.Toggle {...toggleProps} useAnchor>
           {title}
         </Dropdown.Toggle>
 

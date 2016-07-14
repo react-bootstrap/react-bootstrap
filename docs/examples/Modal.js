@@ -1,5 +1,4 @@
 const Example = React.createClass({
-
   getInitialState() {
     return { showModal: false };
   },
@@ -13,8 +12,16 @@ const Example = React.createClass({
   },
 
   render() {
-    let popover = <Popover title="popover">very popover. such engagement</Popover>;
-    let tooltip = <Tooltip id="tooltip-modal">wow.</Tooltip>;
+    const popover = (
+      <Popover id="modal-popover" title="popover">
+        very popover. such engagement
+      </Popover>
+    );
+    const tooltip = (
+      <Tooltip id="modal-tooltip">
+        wow.
+      </Tooltip>
+    );
 
     return (
       <div>
@@ -64,4 +71,4 @@ const Example = React.createClass({
   }
 });
 
-ReactDOM.render(<Example/>, mountNode);
+ReactDOM.render(<Example />, mountNode);

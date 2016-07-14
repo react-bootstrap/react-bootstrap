@@ -3,7 +3,6 @@ import events from 'dom-helpers/events';
 import ownerDocument from 'dom-helpers/ownerDocument';
 import canUseDOM from 'dom-helpers/util/inDOM';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import pick from 'lodash-compat/object/pick';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import BaseModal from 'react-overlays/lib/Modal';
@@ -17,204 +16,152 @@ import Footer from './ModalFooter';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
 import { bsClass, bsSizes, prefix } from './utils/bootstrapUtils';
+import createChainedFunction from './utils/createChainedFunction';
+import splitComponentProps from './utils/splitComponentProps';
 import { Size } from './utils/StyleConfig';
 
-/* eslint-disable react/prop-types */
-const Modal = React.createClass({
+const propTypes = {
+  ...BaseModal.propTypes,
+  ...ModalDialog.propTypes,
 
-  propTypes: {
-    ...BaseModal.propTypes,
-    ...ModalDialog.propTypes,
+  /**
+   * Include a backdrop component. Specify 'static' for a backdrop that doesn't
+   * trigger an "onHide" when clicked.
+   */
+  backdrop: React.PropTypes.oneOf(['static', true, false]),
 
-    /**
-     * Include a backdrop component. Specify 'static' for a backdrop that doesn't trigger an "onHide" when clicked.
-     */
-    backdrop: React.PropTypes.oneOf(['static', true, false]),
+  /**
+   * Close the modal when escape key is pressed
+   */
+  keyboard: React.PropTypes.bool,
 
-    /**
-     * Close the modal when escape key is pressed
-     */
-    keyboard: React.PropTypes.bool,
+  /**
+   * Open and close the Modal with a slide and fade animation.
+   */
+  animation: React.PropTypes.bool,
 
-    /**
-     * Open and close the Modal with a slide and fade animation.
-     */
-    animation: React.PropTypes.bool,
+  /**
+   * A Component type that provides the modal content Markup. This is a useful
+   * prop when you want to use your own styles and markup to create a custom
+   * modal component.
+   */
+  dialogComponentClass: elementType,
 
-    /**
-     * A Component type that provides the modal content Markup. This is a useful prop when you want to use your own
-     * styles and markup to create a custom modal component.
-     */
-    dialogComponentClass: elementType,
+  /**
+   * When `true` The modal will automatically shift focus to itself when it
+   * opens, and replace it to the last focused element when it closes.
+   * Generally this should never be set to false as it makes the Modal less
+   * accessible to assistive technologies, like screen-readers.
+   */
+  autoFocus: React.PropTypes.bool,
 
-    /**
-     * When `true` The modal will automatically shift focus to itself when it opens, and replace it to the last focused element when it closes.
-     * Generally this should never be set to false as it makes the Modal less accessible to assistive technologies, like screen-readers.
-     */
-    autoFocus: React.PropTypes.bool,
+  /**
+   * When `true` The modal will prevent focus from leaving the Modal while
+   * open. Consider leaving the default value here, as it is necessary to make
+   * the Modal work well with assistive technologies, such as screen readers.
+   */
+  enforceFocus: React.PropTypes.bool,
 
-    /**
-     * When `true` The modal will prevent focus from leaving the Modal while open.
-     * Consider leaving the default value here, as it is necessary to make the Modal work well with assistive technologies,
-     * such as screen readers.
-     */
-    enforceFocus: React.PropTypes.bool,
+  /**
+   * When `true` The modal will show itself.
+   */
+  show: React.PropTypes.bool,
 
-    /**
-     * Hide this from automatic props documentation generation.
-     * @private
-     */
-    bsStyle: React.PropTypes.string,
+  /**
+   * A callback fired when the header closeButton or non-static backdrop is
+   * clicked. Required if either are specified.
+   */
+  onHide: React.PropTypes.func,
 
-    /**
-     * When `true` The modal will show itself.
-     */
-    show: React.PropTypes.bool,
+  /**
+   * Callback fired before the Modal transitions in
+   */
+  onEnter: React.PropTypes.func,
 
-    /**
-     * A callback fired when the header closeButton or non-static backdrop is
-     * clicked. Required if either are specified.
-     */
+  /**
+   * Callback fired as the Modal begins to transition in
+   */
+  onEntering: React.PropTypes.func,
+
+  /**
+   * Callback fired after the Modal finishes transitioning in
+   */
+  onEntered: React.PropTypes.func,
+
+  /**
+   * Callback fired right before the Modal transitions out
+   */
+  onExit: React.PropTypes.func,
+
+  /**
+   * Callback fired as the Modal begins to transition out
+   */
+  onExiting: React.PropTypes.func,
+
+  /**
+   * Callback fired after the Modal finishes transitioning out
+   */
+  onExited: React.PropTypes.func,
+
+  /**
+   * @private
+   */
+  container: BaseModal.propTypes.container,
+};
+
+const defaultProps = {
+  ...BaseModal.defaultProps,
+  animation: true,
+  dialogComponentClass: ModalDialog,
+};
+
+const childContextTypes = {
+  $bs_modal: React.PropTypes.shape({
     onHide: React.PropTypes.func,
+  }),
+};
 
-    /**
-     * Callback fired before the Modal transitions in
-     */
-    onEnter: React.PropTypes.func,
+class Modal extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-    /**
-     * Callback fired as the Modal begins to transition in
-     */
-    onEntering: React.PropTypes.func,
+    this.handleEntering = this.handleEntering.bind(this);
+    this.handleExited = this.handleExited.bind(this);
+    this.handleWindowResize = this.handleWindowResize.bind(this);
+    this.handleDialogClick = this.handleDialogClick.bind(this);
 
-    /**
-     * Callback fired after the Modal finishes transitioning in
-     */
-    onEntered: React.PropTypes.func,
-
-    /**
-     * Callback fired right before the Modal transitions out
-     */
-    onExit: React.PropTypes.func,
-
-    /**
-     * Callback fired as the Modal begins to transition out
-     */
-    onExiting: React.PropTypes.func,
-
-    /**
-     * Callback fired after the Modal finishes transitioning out
-     */
-    onExited: React.PropTypes.func
-  },
-
-  childContextTypes: {
-    '$bs_onModalHide': React.PropTypes.func
-  },
-
-  getDefaultProps() {
-    return {
-      ...BaseModal.defaultProps,
-      bsClass: 'modal',
-      animation: true,
-      dialogComponentClass: ModalDialog,
+    this.state = {
+      style: {},
     };
-  },
-
-  getInitialState() {
-    return {
-      modalStyles: {}
-    };
-  },
+  }
 
   getChildContext() {
     return {
-      $bs_onModalHide: this.props.onHide
+      $bs_modal: {
+        onHide: this.props.onHide,
+      },
     };
-  },
+  }
 
   componentWillUnmount() {
-    events.off(window, 'resize', this.handleWindowResize);
-  },
+    // Clean up the listener if we need to.
+    this.handleExited();
+  }
 
-  render() {
-    let {
-        className
-      , children
-      , dialogClassName
-      , animation
-      , style
-      , ...props } = this.props;
-
-    let { modalStyles } = this.state;
-
-    if (style) {
-      modalStyles = { ...modalStyles, ...style };
-    }
-
-    let inClass = { in: props.show && !animation };
-    let Dialog = props.dialogComponentClass;
-
-    let parentProps = pick(props,
-      Object.keys(BaseModal.propTypes).concat(
-        ['onExit', 'onExiting', 'onEnter', 'onEntered']) // the rest are fired in _onHide() and _onShow()
-    );
-
-    let modal = (
-      <Dialog
-        key="modal"
-        ref={ref => this._modal = ref}
-        {...props}
-        style={modalStyles}
-        className={classNames(className, inClass)}
-        dialogClassName={dialogClassName}
-        onClick={props.backdrop === true ? this.handleDialogClick : null}
-      >
-        { this.props.children }
-      </Dialog>
-    );
-
-    return (
-      <BaseModal
-        {...parentProps}
-        show={props.show}
-        ref={ref => {
-          this._wrapper = (ref && ref.refs.modal);
-          this._backdrop = (ref && ref.refs.backdrop);
-        }}
-        onEntering={this._onShow}
-        onExited={this._onHide}
-        backdropClassName={classNames(prefix(props, 'backdrop'), inClass)}
-        containerClassName={prefix(props, 'open')}
-        transition={animation ? Fade : undefined}
-        dialogTransitionTimeout={Modal.TRANSITION_DURATION}
-        backdropTransitionTimeout={Modal.BACKDROP_TRANSITION_DURATION}
-      >
-        { modal }
-      </BaseModal>
-    );
-  },
-
-
-  _onShow(...args) {
+  handleEntering() {
+    // FIXME: This should work even when animation is disabled.
     events.on(window, 'resize', this.handleWindowResize);
+    this.updateStyle();
+  }
 
-    this.setState(
-      this._getStyles()
-    );
-
-    if (this.props.onEntering) {
-      this.props.onEntering(...args);
-    }
-  },
-
-  _onHide(...args) {
+  handleExited() {
+    // FIXME: This should work even when animation is disabled.
     events.off(window, 'resize', this.handleWindowResize);
+  }
 
-    if (this.props.onExited) {
-      this.props.onExited(...args);
-    }
-  },
+  handleWindowResize() {
+    this.updateStyle();
+  }
 
   handleDialogClick(e) {
     if (e.target !== e.currentTarget) {
@@ -222,32 +169,82 @@ const Modal = React.createClass({
     }
 
     this.props.onHide();
-  },
+  }
 
-  handleWindowResize() {
-    this.setState(this._getStyles());
-  },
-
-  _getStyles() {
+  updateStyle() {
     if (!canUseDOM) {
-      return {};
+      return;
     }
 
-    let node = ReactDOM.findDOMNode(this._modal);
-    let doc = ownerDocument(node);
+    const modalNode = ReactDOM.findDOMNode(this._modal);
+    const modalHeight = modalNode.scrollHeight;
 
-    let scrollHt = node.scrollHeight;
-    let bodyIsOverflowing = isOverflowing(ReactDOM.findDOMNode(this.props.container || doc.body));
-    let modalIsOverflowing = scrollHt > doc.documentElement.clientHeight;
+    const document = ownerDocument(modalNode);
+    const bodyIsOverflowing = isOverflowing(
+      ReactDOM.findDOMNode(this.props.container || document.body)
+    );
+    const modalIsOverflowing =
+      modalHeight > document.documentElement.clientHeight;
 
-    return {
-      modalStyles: {
-        paddingRight: bodyIsOverflowing && !modalIsOverflowing ? getScrollbarSize() : void 0,
-        paddingLeft: !bodyIsOverflowing && modalIsOverflowing ? getScrollbarSize() : void 0
+    this.setState({
+      style: {
+        paddingRight: bodyIsOverflowing && !modalIsOverflowing ?
+          getScrollbarSize() : undefined,
+        paddingLeft: !bodyIsOverflowing && modalIsOverflowing ?
+          getScrollbarSize() : undefined
       }
-    };
+    });
   }
-});
+
+  render() {
+    const {
+      backdrop,
+      animation,
+      show,
+      dialogComponentClass: Dialog,
+      className,
+      style,
+      children, // Just in case this get added to BaseModal propTypes.
+      onEntering,
+      onExited,
+      ...props,
+    } = this.props;
+
+    const [baseModalProps, dialogProps] =
+      splitComponentProps(props, BaseModal);
+
+    const inClassName = show && !animation && 'in';
+
+    return (
+      <BaseModal
+        {...baseModalProps}
+        show={show}
+        onEntering={createChainedFunction(onEntering, this.handleEntering)}
+        onExited={createChainedFunction(onExited, this.handleExited)}
+        backdrop={backdrop}
+        backdropClassName={classNames(prefix(props, 'backdrop'), inClassName)}
+        containerClassName={prefix(props, 'open')}
+        transition={animation ? Fade : undefined}
+        dialogTransitionTimeout={Modal.TRANSITION_DURATION}
+        backdropTransitionTimeout={Modal.BACKDROP_TRANSITION_DURATION}
+      >
+        <Dialog
+          {...dialogProps}
+          ref={c => { this._modal = c; }}
+          style={{ ...this.state.style, ...style }}
+          className={classNames(className, inClassName)}
+          onClick={backdrop === true ? this.handleDialogClick : null}
+        >
+          {children}
+        </Dialog>
+      </BaseModal>
+    );
+  }
+}
+
+Modal.propTypes = propTypes;
+Modal.defaultProps = defaultProps;
+Modal.childContextTypes = childContextTypes;
 
 Modal.Body = Body;
 Modal.Header = Header;

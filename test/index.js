@@ -38,7 +38,7 @@ afterEach(() => {
   /* eslint-enable no-console */
 
   _resetWarned();
-  deprecated._resetWarned && deprecated._resetWarned();
+  deprecated._resetWarned();
 });
 
 describe('Process environment for tests', () => {
