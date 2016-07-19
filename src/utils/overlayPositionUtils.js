@@ -1,2 +1,2 @@
 
-export * from 'react-overlays/lib/utils/overlayPositionUtils';
+export * from 'react-overlays/lib/utils/calculatePosition';
