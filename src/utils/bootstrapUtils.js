@@ -134,6 +134,7 @@ function getBsProps(props) {
     bsClass: props.bsClass,
     bsSize: props.bsSize,
     bsStyle: props.bsStyle,
+    bsRole: props.bsRole,
   };
 }
 
@@ -141,7 +142,8 @@ function isBsProp(propName) {
   return (
     propName === 'bsClass' ||
     propName === 'bsSize' ||
-    propName === 'bsStyle'
+    propName === 'bsStyle' ||
+    propName === 'bsRole'
   );
 }
 

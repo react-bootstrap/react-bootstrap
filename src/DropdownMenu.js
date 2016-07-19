@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
 
-import { bsClass, getClassSet, prefix, splitBsPropsAndOmit }
+import { bsClass, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
@@ -97,7 +97,7 @@ class DropdownMenu extends React.Component {
       ...props,
     } = this.props;
 
-    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['bsRole']);
+    const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
       ...getClassSet(bsProps),

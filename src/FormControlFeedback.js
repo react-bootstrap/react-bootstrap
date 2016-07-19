@@ -2,8 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 
 import Glyphicon from './Glyphicon';
-import { bsClass, getClassSet, splitBsPropsAndOmit }
-  from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const defaultProps = {
   bsRole: 'feedback',
@@ -40,7 +39,7 @@ class FormControlFeedback extends React.Component {
 
   render() {
     const { className, children, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['bsRole']);
+    const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = getClassSet(bsProps);
 
