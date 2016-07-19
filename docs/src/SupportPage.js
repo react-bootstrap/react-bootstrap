@@ -27,7 +27,7 @@ export default class Page extends React.Component {
                   <p>Bring your questions and pair with other react-bootstrap users in a <a href="http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap">live Thinkful hangout</a>. Hear about the challenges other developers are running into, or screenshare your own code with the group for feedback.</p>
 
                   <h3>Chat rooms</h3>
-                  <p>Discuss questions in the <code className="js">#react-bootstrap</code> channel on the <a href="http://www.reactiflux.com/">Reactiflux Discord</a> or on <a href="https://gitter.im/react-bootstrap/react-bootstrap">Gitter</a>.</p>
+                  <p>Discuss questions in the <code className="js">#react-bootstrap</code> channel on the <a href="http://www.reactiflux.com/">Reactiflux Discord</a>.</p>
 
                   <h3>GitHub issues</h3>
                   <p>The issue tracker is the preferred channel for bug reports, features requests and submitting pull requests. See more about how we use issues in the <a href="https://github.com/react-bootstrap/react-bootstrap/blob/master/CONTRIBUTING.md#issues">contribution guidelines</a>.</p>
