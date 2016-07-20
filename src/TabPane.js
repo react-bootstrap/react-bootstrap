@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 import warning from 'warning';
 
-import { bsClass, getClassSet, omitBsProps, prefix }
+import { bsClass, getClassSet, prefix, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
@@ -196,7 +196,7 @@ class TabPane extends React.Component {
       $bs_tabContent: tabContent, $bs_tabContainer: tabContainer,
     } = this.context;
 
-    delete props.animation; // Accessed via this.getAnimation().
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['animation']);
 
     const active = this.isActive();
     const animation = this.getAnimation();
@@ -211,16 +211,16 @@ class TabPane extends React.Component {
     const Transition = animation === true ? Fade : animation || null;
 
     if (tabContent) {
-      props.bsClass = prefix(tabContent, 'pane');
+      bsProps.bsClass = prefix(tabContent, 'pane');
     }
 
     const classes = {
-      ...getClassSet(props),
+      ...getClassSet(bsProps),
       active,
     };
 
     if (tabContainer) {
-      warning(!props.id && !props['aria-labelledby'],
+      warning(!elementProps.id && !elementProps['aria-labelledby'],
         'In the context of a `<TabContainer>`, `<TabPanes>` are given ' +
         'generated `id` and `aria-labelledby` attributes for the sake of ' +
         'proper component accessibility. Any provided ones will be ignored. ' +
@@ -228,13 +228,13 @@ class TabPane extends React.Component {
         'prop to the parent `<TabContainer>`.'
       );
 
-      props.id = tabContainer.getPaneId(eventKey);
-      props['aria-labelledby'] = tabContainer.getTabId(eventKey);
+      elementProps.id = tabContainer.getPaneId(eventKey);
+      elementProps['aria-labelledby'] = tabContainer.getTabId(eventKey);
     }
 
     const pane = (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         role="tabpanel"
         aria-hidden={!active}
         className={classNames(className, classes)}

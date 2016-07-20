@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
-import { bsClass, omitBsProps, prefix } from './utils/bootstrapUtils';
+import { bsClass, prefix, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
@@ -24,15 +24,15 @@ const defaultProps = {
 
 class Grid extends React.Component {
   render() {
-    const {
-      fluid, componentClass: Component, className, ...props,
-    } = this.props;
+    const { fluid, componentClass: Component, className, ...props } =
+      this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
-    const classes = prefix(props, fluid && 'fluid');
+    const classes = prefix(bsProps, fluid && 'fluid');
 
     return (
       <Component
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       />
     );

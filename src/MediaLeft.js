@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 
 import Media from './Media';
-import { bsClass, getClassSet, omitBsProps, prefix }
+import { bsClass, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 
 const propTypes = {
@@ -15,8 +15,9 @@ const propTypes = {
 class MediaLeft extends React.Component {
   render() {
     const { align, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
-    const classes = getClassSet(props);
+    const classes = getClassSet(bsProps);
 
     if (align) {
       // The class is e.g. `media-top`, not `media-left-top`.
@@ -25,7 +26,7 @@ class MediaLeft extends React.Component {
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       />
     );

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, omitBsProps, prefix } from './utils/bootstrapUtils';
+import { bsClass, prefix, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
@@ -34,20 +34,20 @@ const defaultProps = {
 
 class Image extends React.Component {
   render() {
-    const {
-      responsive, rounded, circle, thumbnail, className, ...props,
-    } = this.props;
+    const { responsive, rounded, circle, thumbnail, className, ...props } =
+      this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
-      [prefix(props, 'responsive')]: responsive,
-      [prefix(props, 'rounded')]: rounded,
-      [prefix(props, 'circle')]: circle,
-      [prefix(props, 'thumbnail')]: thumbnail,
+      [prefix(bsProps, 'responsive')]: responsive,
+      [prefix(bsProps, 'rounded')]: rounded,
+      [prefix(bsProps, 'circle')]: circle,
+      [prefix(bsProps, 'thumbnail')]: thumbnail,
     };
 
     return (
       <img
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       />
     );

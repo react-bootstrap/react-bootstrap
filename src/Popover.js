@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
-import { bsClass, getClassSet, omitBsProps, prefix }
+import { bsClass, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 
 const propTypes = {
@@ -71,8 +71,10 @@ class Popover extends React.Component {
       ...props,
     } = this.props;
 
+    const [bsProps, elementProps] = splitBsProps(props);
+
     const classes = {
-      ...getClassSet(props),
+      ...getClassSet(bsProps),
       [placement]: true,
     };
 
@@ -90,7 +92,7 @@ class Popover extends React.Component {
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         role="tooltip"
         className={classNames(className, classes)}
         style={outerStyle}
@@ -98,12 +100,12 @@ class Popover extends React.Component {
         <div className="arrow" style={arrowStyle} />
 
         {title && (
-          <h3 className={prefix(props, 'title')}>
+          <h3 className={prefix(bsProps, 'title')}>
             {title}
           </h3>
         )}
 
-        <div className={prefix(props, 'content')}>
+        <div className={prefix(bsProps, 'content')}>
           {children}
         </div>
       </div>

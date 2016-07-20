@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
-import { bsStyles, bsSizes, bsClass, getClassSet, omitBsProps, prefix }
+import { bsClass, bsSizes, bsStyles, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 import { Size, State, Style } from './utils/StyleConfig';
 
@@ -29,22 +29,24 @@ const defaultProps = {
 };
 
 class Button extends React.Component {
-  renderAnchor(props, className) {
+  renderAnchor(elementProps, className) {
     return (
       <SafeAnchor
-        {...omitBsProps(props)}
-        className={classNames(className, props.disabled && 'disabled')}
+        {...elementProps}
+        className={classNames(
+          className, elementProps.disabled && 'disabled'
+        )}
       />
     );
   }
 
-  renderButton({ componentClass, ...props }, className) {
+  renderButton({ componentClass, ...elementProps }, className) {
     const Component = componentClass || 'button';
 
     return (
       <Component
-        {...omitBsProps(props)}
-        type={props.type || 'button'}
+        {...elementProps}
+        type={elementProps.type || 'button'}
         className={className}
       />
     );
@@ -52,19 +54,20 @@ class Button extends React.Component {
 
   render() {
     const { active, block, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
-      ...getClassSet(props),
+      ...getClassSet(bsProps),
       active,
-      [prefix(props, 'block')]: block,
+      [prefix(bsProps, 'block')]: block,
     };
     const fullClassName = classNames(className, classes);
 
-    if (props.href) {
-      return this.renderAnchor(props, fullClassName);
+    if (elementProps.href) {
+      return this.renderAnchor(elementProps, fullClassName);
     }
 
-    return this.renderButton(props, fullClassName);
+    return this.renderButton(elementProps, fullClassName);
   }
 }
 

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
-import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   componentClass: elementType,
@@ -15,12 +15,13 @@ const defaultProps = {
 class MediaHeading extends React.Component {
   render() {
     const { componentClass: Component, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
-    const classes = getClassSet(props);
+    const classes = getClassSet(bsProps);
 
     return (
       <Component
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       />
     );

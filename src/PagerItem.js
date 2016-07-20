@@ -1,4 +1,3 @@
-
 import classNames from 'classnames';
 import React from 'react';
 
@@ -44,9 +43,8 @@ class PagerItem extends React.Component {
   }
 
   render() {
-    const {
-      disabled, previous, next, onClick, className, style, ...props,
-    } = this.props;
+    const { disabled, previous, next, onClick, className, style, ...props } =
+      this.props;
 
     delete props.onSelect;
     delete props.eventKey;

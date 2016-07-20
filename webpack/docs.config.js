@@ -1,8 +1,8 @@
-import _ from 'lodash-compat';
-import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import baseConfig, { options, jsLoader } from './base.config';
 import ip from 'ip';
+import webpack from 'webpack';
+
+import baseConfig, { options, jsLoader } from './base.config';
 
 const webpackDevServerAddress = `http://${ip.address()}:${options.port}`;
 const cssSourceMap = options.debug ? '?sourceMap' : '';
@@ -12,7 +12,7 @@ const entryFile = './docs/client.js';
 const devEntryBundle = [
   'webpack/hot/dev-server',
   `webpack-dev-server/client?${webpackDevServerAddress}`,
-  entryFile
+  entryFile,
 ];
 
 baseConfig.plugins.push(new ExtractTextPlugin('[name].css'));
@@ -20,18 +20,19 @@ if (options.debug) {
   baseConfig.plugins.push(new webpack.NoErrorsPlugin());
 }
 
-export default _.extend({}, baseConfig, {
+export default {
+  ...baseConfig,
 
   devtool: options.debug ? 'source-map' : null,
 
   entry: {
-    bundle: options.debug ? devEntryBundle : entryFile
+    bundle: options.debug ? devEntryBundle : entryFile,
   },
 
   output: {
     filename: '[name].js',
     path: './docs-built/assets',
-    publicPath: options.debug ? `${webpackDevServerAddress}/assets/` : '/assets/'
+    publicPath: options.debug ? `${webpackDevServerAddress}/assets/` : '/assets/',
   },
 
   module: {
@@ -45,7 +46,7 @@ export default _.extend({}, baseConfig, {
         loader: ExtractTextPlugin.extract('style', `css${cssSourceMap}!less${cssSourceMap}`) },
       { test: /\.json$/, loader: 'json' },
       { test: /\.jpe?g$|\.gif$|\.png|\.ico$/, loader: 'file?name=[name].[ext]' },
-      { test: /\.eot$|\.ttf$|\.svg$|\.woff2?$/, loader: 'file?name=[name].[ext]' }
-    ]
-  }
-});
+      { test: /\.eot$|\.ttf$|\.svg$|\.woff2?$/, loader: 'file?name=[name].[ext]' },
+    ],
+  },
+};

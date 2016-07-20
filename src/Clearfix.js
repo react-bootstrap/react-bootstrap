@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
-import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 import capitalize from './utils/capitalize';
 import { DEVICE_SIZES } from './utils/StyleConfig';
 
@@ -50,21 +50,22 @@ const defaultProps = {
 class Clearfix extends React.Component {
   render() {
     const { componentClass: Component, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
-    const classes = getClassSet(props);
+    const classes = getClassSet(bsProps);
 
     DEVICE_SIZES.forEach(size => {
       const propName = `visible${capitalize(size)}Block`;
-      if (props[propName]) {
+      if (elementProps[propName]) {
         classes[`visible-${size}-block`] = true;
       }
 
-      delete props[propName];
+      delete elementProps[propName];
     });
 
     return (
       <Component
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       />
     );

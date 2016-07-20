@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, bsStyles, getClassSet, omitBsProps }
+import { bsClass, bsStyles, getClassSet, splitBsProps }
   from './utils/bootstrapUtils';
 import { State, Style } from './utils/StyleConfig';
 
@@ -24,9 +24,10 @@ class Label extends React.Component {
 
   render() {
     const { className, children, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
-      ...getClassSet(props),
+      ...getClassSet(bsProps),
 
       // Hack for collapsing on IE8.
       hidden: !this.hasContent(children),
@@ -34,7 +35,7 @@ class Label extends React.Component {
 
     return (
       <span
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       >
         {children}

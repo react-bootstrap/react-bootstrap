@@ -3,7 +3,7 @@ import React from 'react';
 import all from 'react-prop-types/lib/all';
 
 import Button from './Button';
-import { bsClass, getClassSet, omitBsProps, prefix }
+import { bsClass, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 
 const propTypes = {
@@ -33,12 +33,13 @@ const defaultProps = {
 class ButtonGroup extends React.Component {
   render() {
     const { block, justified, vertical, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
-      ...getClassSet(props),
-      [prefix(props)]: !vertical,
-      [prefix(props, 'vertical')]: vertical,
-      [prefix(props, 'justified')]: justified,
+      ...getClassSet(bsProps),
+      [prefix(bsProps)]: !vertical,
+      [prefix(bsProps, 'vertical')]: vertical,
+      [prefix(bsProps, 'justified')]: justified,
 
       // this is annoying, since the class is `btn-block` not `btn-group-block`
       [prefix(Button.defaultProps, 'block')]: block,
@@ -46,7 +47,7 @@ class ButtonGroup extends React.Component {
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       />
     );

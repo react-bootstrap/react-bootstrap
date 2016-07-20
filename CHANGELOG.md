@@ -8,7 +8,7 @@
 - **Feature/Deprecation:** Rename `<PageItem>` to <Pager.Item>` for consistency ([#1976])
 - **Feature:** Add `ValidComponentChildren.toArray` ([#2016])
 - **Feature:** Add `bsClass` support consistently throughout all components ([#2026], [#2036])
-- **Feature:** Add `omitBsProps` helper to `bootstrapUtils` to remove Bootstrap styling props ([#2026])
+- **Feature:** Add `splitBsProps` and `splitBsPropsAndOmit` helpers to `bootstrapUtils` to remove Bootstrap styling props ([#2052])
 - **Feature:** Improve IE8-compatible self collapse support on `<Badge>` and add it to `<Label>` ([#2026])
 - **Bugfix:** Do not pass arbitrary props to DOM nodes ([#2026], [#2036], [#2044])
 - **Bugfix:** Support strings for `positionTop` and `positionLeft` on `<Popover>` and `<Tooltip>` ([#2026])
@@ -31,6 +31,7 @@
 [#2026]: https://github.com/react-bootstrap/react-bootstrap/pull/2026
 [#2036]: https://github.com/react-bootstrap/react-bootstrap/pull/2036
 [#2044]: https://github.com/react-bootstrap/react-bootstrap/pull/2044
+[#2052]: https://github.com/react-bootstrap/react-bootstrap/pull/2052
 
 
 ## [HEAD] \(v0.29.6\)

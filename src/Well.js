@@ -1,19 +1,20 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsSizes, bsClass, getClassSet, omitBsProps }
+import { bsClass, bsSizes, getClassSet, splitBsProps }
   from './utils/bootstrapUtils';
 import { Size } from './utils/StyleConfig';
 
 class Well extends React.Component {
   render() {
     const { className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
-    const classes = getClassSet(props);
+    const classes = getClassSet(bsProps);
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       />
     );

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
-import { bsClass, getClassSet, omitBsProps, prefix }
+import { bsClass, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 
 const propTypes = {
@@ -65,8 +65,10 @@ class Tooltip extends React.Component {
       ...props,
     } = this.props;
 
+    const [bsProps, elementProps] = splitBsProps(props);
+
     const classes = {
-      ...getClassSet(props),
+      ...getClassSet(bsProps),
       [placement]: true,
     };
 
@@ -83,14 +85,14 @@ class Tooltip extends React.Component {
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         role="tooltip"
         className={classNames(className, classes)}
         style={outerStyle}
       >
-        <div className={prefix(props, 'arrow')} style={arrowStyle} />
+        <div className={prefix(bsProps, 'arrow')} style={arrowStyle} />
 
-        <div className={prefix(props, 'inner')}>
+        <div className={prefix(bsProps, 'inner')}>
           {children}
         </div>
       </div>

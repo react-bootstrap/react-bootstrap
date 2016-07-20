@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 // TODO: `pullRight` doesn't belong here. There's no special handling here.
 
@@ -32,9 +32,10 @@ class Badge extends React.Component {
 
   render() {
     const { pullRight, className, children, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
-      ...getClassSet(props),
+      ...getClassSet(bsProps),
       'pull-right': pullRight,
 
       // Hack for collapsing on IE8.
@@ -43,7 +44,7 @@ class Badge extends React.Component {
 
     return (
       <span
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       >
         {children}

@@ -37,9 +37,8 @@ class NavItem extends React.Component {
   }
 
   render() {
-    const {
-      active, disabled, onClick, className, style, ...props,
-    } = this.props;
+    const { active, disabled, onClick, className, style, ...props } =
+      this.props;
 
     delete props.onSelect;
     delete props.eventKey;

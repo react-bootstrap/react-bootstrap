@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { cloneElement, PropTypes } from 'react';
 
-import { bsClass as setBsClass, bsStyles, getClassSet, omitBsProps, prefix }
+import { bsClass as setBsClass, bsStyles, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 import { State } from './utils/StyleConfig';
 import ValidComponentChildren from './utils/ValidComponentChildren';
@@ -74,15 +74,17 @@ class ProgressBar extends React.Component {
   renderProgressBar({
     min, now, max, label, srOnly, striped, active, className, style, ...props,
   }) {
+    const [bsProps, elementProps] = splitBsProps(props);
+
     const classes = {
-      ...getClassSet(props),
+      ...getClassSet(bsProps),
       active,
-      [prefix(props, 'striped')]: active || striped,
+      [prefix(bsProps, 'striped')]: active || striped,
     };
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         role="progressbar"
         className={classNames(className, classes)}
         style={{ width: `${getPercentage(now, min, max)}%`, ...style }}

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, getClassSet, omitBsProps } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
 // TODO: `aria-label` should be `closeLabel`.
@@ -41,15 +41,23 @@ const contextTypes = {
 class ModalHeader extends React.Component {
   render() {
     const {
-      'aria-label': label, closeButton, onHide, className, children, ...props,
+      'aria-label': label,
+      closeButton,
+      onHide,
+      className,
+      children,
+      ...props,
     } = this.props;
+
     const modal = this.context.$bs_modal;
 
-    const classes = getClassSet(props);
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
       >
         {closeButton &&

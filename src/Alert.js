@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsStyles, bsClass, getClassSet, omitBsProps, prefix }
+import { bsClass, bsStyles, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 import { State } from './utils/StyleConfig';
 
@@ -42,19 +42,19 @@ class Alert extends React.Component {
   }
 
   render() {
-    const {
-      onDismiss, closeLabel, className, children, ...props,
-    } = this.props;
+    const { onDismiss, closeLabel, className, children, ...props } =
+      this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
     const dismissable = !!onDismiss;
     const classes = {
-      ...getClassSet(props),
-      [prefix(props, 'dismissable')]: dismissable,
+      ...getClassSet(bsProps),
+      [prefix(bsProps, 'dismissable')]: dismissable,
     };
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         role="alert"
         className={classNames(className, classes)}
       >

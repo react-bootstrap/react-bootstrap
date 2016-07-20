@@ -5,7 +5,7 @@ import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
 import Glyphicon from './Glyphicon';
 import SafeAnchor from './SafeAnchor';
-import { bsClass, getClassSet, omitBsProps, prefix }
+import { bsClass, getClassSet, prefix, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
@@ -233,7 +233,7 @@ class Carousel extends React.Component {
     this.waitForNext();
   }
 
-  renderIndicators(children, activeIndex, props) {
+  renderIndicators(children, activeIndex, bsProps) {
     let indicators = [];
 
     ValidComponentChildren.forEach(children, (child, index) => {
@@ -251,14 +251,14 @@ class Carousel extends React.Component {
     });
 
     return (
-      <ol className={prefix(props, 'indicators')}>
+      <ol className={prefix(bsProps, 'indicators')}>
         {indicators}
       </ol>
     );
   }
 
-  renderControls(wrap, children, activeIndex, prevIcon, nextIcon, props) {
-    const controlClassName = prefix(props, 'control');
+  renderControls(wrap, children, activeIndex, prevIcon, nextIcon, bsProps) {
+    const controlClassName = prefix(bsProps, 'control');
     const count = ValidComponentChildren.count(children);
 
     return [
@@ -296,33 +296,36 @@ class Carousel extends React.Component {
       children,
       ...props,
     } = this.props;
+
     const { previousActiveIndex, direction } = this.state;
 
-    delete props.interval;
-    delete props.pauseOnHover;
-    delete props.onSelect;
-    delete props.onSlideEnd;
-    delete props.activeIndex; // Accessed via this.getActiveIndex().
-    delete props.defaultActiveIndex;
-    delete props.direction;
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
+      'interval',
+      'pauseOnHover',
+      'onSelect',
+      'onSlideEnd',
+      'activeIndex', // Accessed via this.getActiveIndex().
+      'defaultActiveIndex',
+      'direction'
+    ]);
 
     const activeIndex = this.getActiveIndex();
 
     const classes = {
-      ...getClassSet(props),
+      ...getClassSet(bsProps),
       slide,
     };
 
     return (
       <div
-        {...omitBsProps(props)}
+        {...elementProps}
         className={classNames(className, classes)}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
-        {indicators && this.renderIndicators(children, activeIndex, props)}
+        {indicators && this.renderIndicators(children, activeIndex, bsProps)}
 
-        <div className={prefix(props, 'inner')}>
+        <div className={prefix(bsProps, 'inner')}>
           {ValidComponentChildren.map(children, (child, index) => {
             const active = index === activeIndex;
             const previousActive = slide && index === previousActiveIndex;
@@ -340,7 +343,7 @@ class Carousel extends React.Component {
         </div>
 
         {controls && this.renderControls(
-          wrap, children, activeIndex, prevIcon, nextIcon, props
+          wrap, children, activeIndex, prevIcon, nextIcon, bsProps
         )}
       </div>
     );
