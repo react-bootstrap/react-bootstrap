@@ -55,10 +55,7 @@ export default function DropdownSection() {
       <h4>Custom Dropdown Components</h4>
 
       <p>
-        For those that want to customize everything, you can forgo the included Toggle and Menu components,
-        and create your own. In order to tell the Dropdown component what role your custom components play
-        add a special prop <code>bsRole</code> to your menu or toggle components. The Dropdown expects
-        at least one component with <code>bsRole="toggle"</code> and exactly one with <code>bsRole="menu"</code>.
+        For those that want to customize everything, you can forgo the included Toggle and Menu components, and create your own. In order to tell the Dropdown component what role your custom components play, add a special prop <code>bsRole</code> to your menu or toggle components. The Dropdown expects at least one component with <code>bsRole="toggle"</code> and exactly one with <code>bsRole="menu"</code>. Custom toggle and menu components must be able to accept refs.
       </p>
       <ReactPlayground codeText={Samples.DropdownButtonCustomMenu} />
 

@@ -176,15 +176,15 @@ class Modal extends React.Component {
       return;
     }
 
-    const modalNode = ReactDOM.findDOMNode(this._modal);
-    const modalHeight = modalNode.scrollHeight;
+    const dialogNode = this._modal.getDialogElement();
+    const dialogHeight = dialogNode.scrollHeight;
 
-    const document = ownerDocument(modalNode);
+    const document = ownerDocument(dialogNode);
     const bodyIsOverflowing = isOverflowing(
       ReactDOM.findDOMNode(this.props.container || document.body)
     );
     const modalIsOverflowing =
-      modalHeight > document.documentElement.clientHeight;
+      dialogHeight > document.documentElement.clientHeight;
 
     this.setState({
       style: {
@@ -218,6 +218,7 @@ class Modal extends React.Component {
     return (
       <BaseModal
         {...baseModalProps}
+        ref={c => { this._modal = c; }}
         show={show}
         onEntering={createChainedFunction(onEntering, this.handleEntering)}
         onExited={createChainedFunction(onExited, this.handleExited)}
@@ -230,7 +231,6 @@ class Modal extends React.Component {
       >
         <Dialog
           {...dialogProps}
-          ref={c => { this._modal = c; }}
           style={{ ...this.state.style, ...style }}
           className={classNames(className, inClassName)}
           onClick={backdrop === true ? this.handleDialogClick : null}
