@@ -1,52 +1,60 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 
-const Image = React.createClass({
+import { bsClass, prefix, splitBsProps } from './utils/bootstrapUtils';
 
-  propTypes: {
+const propTypes = {
+  /**
+   * Sets image as responsive image
+   */
+  responsive: React.PropTypes.bool,
 
-    /**
-     * Sets image as responsive image
-     */
-    responsive: React.PropTypes.bool,
+  /**
+   * Sets image shape as rounded
+   */
+  rounded: React.PropTypes.bool,
 
-    /**
-     * Sets image shape as rounded
-     */
-    rounded: React.PropTypes.bool,
+  /**
+   * Sets image shape as circle
+   */
+  circle: React.PropTypes.bool,
 
-    /**
-     * Sets image shape as circle
-     */
-    circle: React.PropTypes.bool,
+  /**
+   * Sets image shape as thumbnail
+   */
+  thumbnail: React.PropTypes.bool,
+};
 
-    /**
-     * Sets image shape as thumbnail
-     */
-    thumbnail: React.PropTypes.bool
-  },
+const defaultProps = {
+  responsive: false,
+  rounded: false,
+  circle: false,
+  thumbnail: false,
+};
 
-  getDefaultProps() {
-    return {
-      responsive: false,
-      rounded: false,
-      circle: false,
-      thumbnail: false
-    };
-  },
-
+class Image extends React.Component {
   render() {
+    const { responsive, rounded, circle, thumbnail, className, ...props } =
+      this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
     const classes = {
-      'img-responsive': this.props.responsive,
-      'img-rounded': this.props.rounded,
-      'img-circle': this.props.circle,
-      'img-thumbnail': this.props.thumbnail
+      [prefix(bsProps, 'responsive')]: responsive,
+      [prefix(bsProps, 'rounded')]: rounded,
+      [prefix(bsProps, 'circle')]: circle,
+      [prefix(bsProps, 'thumbnail')]: thumbnail,
     };
 
     return (
-      <img {...this.props} className={classNames(this.props.className, classes)} />
+      <img
+        {...elementProps}
+        className={classNames(className, classes)}
+      />
     );
   }
-});
+}
 
-export default Image;
+Image.propTypes = propTypes;
+Image.defaultProps = defaultProps;
+
+export default bsClass('img', Image);

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import ListGroupItem from '../src/ListGroupItem';
 
-describe('ListGroupItem', () => {
+describe('<ListGroupItem>', () => {
 
   it('Should output a "span" with the class "list-group-item"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
@@ -16,7 +16,7 @@ describe('ListGroupItem', () => {
 
   it('Should output an "anchor" if "href" prop is set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ListGroupItem href='#test'>Anchor</ListGroupItem>
+      <ListGroupItem href="#test">Anchor</ListGroupItem>
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'A');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item'));
@@ -41,7 +41,7 @@ describe('ListGroupItem', () => {
 
   it('Should support "bsStyle" prop', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ListGroupItem bsStyle='success'>Item 1</ListGroupItem>
+      <ListGroupItem bsStyle="success">Item 1</ListGroupItem>
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group-item-success'));
   });
@@ -62,15 +62,15 @@ describe('ListGroupItem', () => {
 
   it('Should support "header" prop as a string', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ListGroupItem header='Heading'>Item text</ListGroupItem>
+      <ListGroupItem header="Heading">Item text</ListGroupItem>
     );
 
     let node = ReactDOM.findDOMNode(instance);
     assert.equal(node.firstChild.nodeName, 'H4');
-    assert.equal(node.firstChild.innerText, 'Heading');
+    assert.equal(node.firstChild.textContent, 'Heading');
     assert.ok(node.firstChild.className.match(/\blist-group-item-heading\b/));
     assert.equal(node.lastChild.nodeName, 'P');
-    assert.equal(node.lastChild.innerText, 'Item text');
+    assert.equal(node.lastChild.textContent, 'Item text');
     assert.ok(node.lastChild.className.match(/\blist-group-item-text\b/));
   });
 
@@ -82,10 +82,10 @@ describe('ListGroupItem', () => {
 
     let node = ReactDOM.findDOMNode(instance);
     assert.equal(node.firstChild.nodeName, 'H2');
-    assert.equal(node.firstChild.innerText, 'Heading');
+    assert.equal(node.firstChild.textContent, 'Heading');
     assert.ok(node.firstChild.className.match(/\blist-group-item-heading\b/));
     assert.equal(node.lastChild.nodeName, 'P');
-    assert.equal(node.lastChild.innerText, 'Item text');
+    assert.equal(node.lastChild.textContent, 'Item text');
     assert.ok(node.lastChild.className.match(/\blist-group-item-text\b/));
   });
 });

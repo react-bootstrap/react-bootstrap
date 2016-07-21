@@ -1,6 +1,5 @@
-import 'colors';
-import _ from 'lodash-compat';
 import { exec } from 'child-process-promise';
+import 'colors';
 
 let executionOptions = {
   dryRun: false,
@@ -47,7 +46,7 @@ function safeExec(command, options = {}) {
 }
 
 function setExecOptions(options) {
-  executionOptions = _.extend({}, executionOptions, options);
+  executionOptions = { ...executionOptions, ...options };
 }
 
 export default {

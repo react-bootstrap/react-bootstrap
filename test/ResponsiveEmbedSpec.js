@@ -18,8 +18,8 @@ describe('ResponsiveEmbed', () => {
     assert.ok(instanceClassName, 'embed-responsive');
   });
 
-  it('should warn if neither `a16by9` nor `a4by3` attribute is set', () => {
-    shouldWarn('`a16by9` or `a4by3` attribute must be set.');
+  it('should warn if neither `a16by9` nor `a4by3` is set', () => {
+    shouldWarn('Either `a16by9` or `a4by3` must be set.');
 
     ReactTestUtils.renderIntoDocument(
       <ResponsiveEmbed>
@@ -29,7 +29,7 @@ describe('ResponsiveEmbed', () => {
   });
 
   it('should warn about both `a16by9` or `a4by3` attributes set', () => {
-    shouldWarn('Either `a16by9` or `a4by3` attribute can be set. Not both.');
+    shouldWarn('Only one of `a16by9` or `a4by3` can be set.');
 
     ReactTestUtils.renderIntoDocument(
       <ResponsiveEmbed a16by9 a4by3>
@@ -51,7 +51,7 @@ describe('ResponsiveEmbed', () => {
 
   it('should add custom classes to child element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <ResponsiveEmbed a16by9 className='custom-class'>
+      <ResponsiveEmbed a16by9 className="custom-class">
         <div />
       </ResponsiveEmbed>
     );

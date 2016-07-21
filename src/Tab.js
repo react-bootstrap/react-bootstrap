@@ -1,16 +1,10 @@
 import React from 'react';
-import TabPane from './TabPane';
+
 import TabContainer from './TabContainer';
 import TabContent from './TabContent';
+import TabPane from './TabPane';
 
-class Tab extends React.Component {
-  render() {
-    let { title, disabled, tabClassName, ...props } = this.props;
-    return <TabPane {...props}/>;
-  }
-}
-
-Tab.propTypes = {
+const propTypes = {
   ...TabPane.propTypes,
 
   disabled: React.PropTypes.bool,
@@ -22,6 +16,21 @@ Tab.propTypes = {
    */
   tabClassName: React.PropTypes.string
 };
+
+class Tab extends React.Component {
+  render() {
+    const props = { ...this.props };
+
+    // These props are for the parent `<Tabs>` rather than the `<TabPane>`.
+    delete props.title;
+    delete props.disabled;
+    delete props.tabClassName;
+
+    return <TabPane {...props} />;
+  }
+}
+
+Tab.propTypes = propTypes;
 
 Tab.Container = TabContainer;
 Tab.Content = TabContent;

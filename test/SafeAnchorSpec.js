@@ -13,7 +13,7 @@ describe('SafeAnchor', () => {
   });
 
   it('forwards provided href', () => {
-    tsp(<SafeAnchor href='http://google.com' />)
+    tsp(<SafeAnchor href="http://google.com" />)
       .shallowRender()
       .find('a')
       .props('href')
@@ -59,7 +59,7 @@ describe('SafeAnchor', () => {
   it('does not prevent default when href is provided', () => {
     const handleClick = sinon.spy();
 
-    tsp(<SafeAnchor href='#foo' onClick={handleClick} />)
+    tsp(<SafeAnchor href="#foo" onClick={handleClick} />)
       .render()
       .find('a')
       .trigger('click');
@@ -73,7 +73,7 @@ describe('SafeAnchor', () => {
     let spy = sinon.spy(SafeAnchor.prototype, 'handleClick');
 
     tsp(
-      <SafeAnchor disabled href='#foo' onClick={clickSpy}>
+      <SafeAnchor disabled href="#foo" onClick={clickSpy}>
         Title
       </SafeAnchor>
     )
@@ -87,7 +87,7 @@ describe('SafeAnchor', () => {
   });
 
   it('forwards provided role', () => {
-    tsp(<SafeAnchor role='test' />)
+    tsp(<SafeAnchor role="test" />)
       .shallowRender()
       .find('a')
       .props('role')
@@ -95,7 +95,7 @@ describe('SafeAnchor', () => {
   });
 
   it('forwards provided role with href', () => {
-    tsp(<SafeAnchor role='test' href='http://google.com' />)
+    tsp(<SafeAnchor role="test" href="http://google.com" />)
       .shallowRender()
       .find('a')
       .props('role')
@@ -109,7 +109,7 @@ describe('SafeAnchor', () => {
       .props('role')
       .should.equal('button');
 
-    tsp(<SafeAnchor href='#' />)
+    tsp(<SafeAnchor href="#" />)
       .shallowRender()
       .find('a')
       .props('role')
@@ -118,7 +118,7 @@ describe('SafeAnchor', () => {
 
   it('sets no role with provided href', () => {
     expect(
-      tsp(<SafeAnchor href='http://google.com' />)
+      tsp(<SafeAnchor href="http://google.com" />)
         .shallowRender()
         .find('a')
         .props('role')

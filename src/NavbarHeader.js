@@ -1,23 +1,27 @@
 import classNames from 'classnames';
-import React, { PropTypes } from 'react';
+import React from 'react';
 
 import { prefix } from './utils/bootstrapUtils';
 
-let NavbarHeader = React.createClass({
+const contextTypes = {
+  $bs_navbar: React.PropTypes.shape({
+    bsClass: React.PropTypes.string,
+  }),
+};
 
-  contextTypes: {
-    $bs_navbar_bsClass: PropTypes.string
-  },
-
+class NavbarHeader extends React.Component {
   render() {
-    let { className, ...props } = this.props;
-    let { $bs_navbar_bsClass: bsClass = 'navbar' } = this.context;
-    let headerClasses = prefix({ bsClass }, 'header');
+    const { className, ...props } = this.props;
+    const navbarProps = this.context.$bs_navbar || { bsClass: 'navbar' };
+
+    const bsClassName = prefix(navbarProps, 'header');
 
     return (
-      <div {...props} className={classNames(className, headerClasses)} />
+      <div {...props} className={classNames(className, bsClassName)} />
     );
   }
-});
+}
+
+NavbarHeader.contextTypes = contextTypes;
 
 export default NavbarHeader;

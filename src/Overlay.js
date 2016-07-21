@@ -1,46 +1,11 @@
-/* eslint react/prop-types: [2, {ignore: ["container", "containerPadding", "target", "placement", "children"] }] */
-/* These properties are validated in 'Portal' and 'Position' components */
-
+import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 import BaseOverlay from 'react-overlays/lib/Overlay';
 import elementType from 'react-prop-types/lib/elementType';
+
 import Fade from './Fade';
-import classNames from 'classnames';
 
-class Overlay extends React.Component {
-
-  render() {
-    let {
-        children: child
-      , animation: transition
-      , ...props } = this.props;
-
-    if (transition === true) {
-      transition = Fade;
-    }
-
-    if (transition === false) {
-      transition = null;
-    }
-
-    if (!transition) {
-      child = cloneElement(child, {
-        className: classNames('in', child.props.className)
-      });
-    }
-
-    return (
-      <BaseOverlay
-        {...props}
-        transition={transition}
-      >
-        {child}
-      </BaseOverlay>
-    );
-  }
-}
-
-Overlay.propTypes = {
+const propTypes = {
   ...BaseOverlay.propTypes,
 
   /**
@@ -61,8 +26,7 @@ Overlay.propTypes = {
    * Use animation
    */
   animation: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    elementType
+    React.PropTypes.bool, elementType,
   ]),
 
   /**
@@ -93,13 +57,43 @@ Overlay.propTypes = {
   /**
    * Callback fired after the Overlay finishes transitioning out
    */
-  onExited: React.PropTypes.func
+  onExited: React.PropTypes.func,
 };
 
-Overlay.defaultProps = {
+const defaultProps = {
   animation: Fade,
   rootClose: false,
-  show: false
+  show: false,
 };
+
+class Overlay extends React.Component {
+  render() {
+    const { animation, children, ...props } = this.props;
+
+    const transition = animation === true ? Fade : animation || null;
+
+    let child;
+
+    if (!transition) {
+      child = cloneElement(children, {
+        className: classNames(children.props.className, 'in'),
+      });
+    } else {
+      child = children;
+    }
+
+    return (
+      <BaseOverlay
+        {...props}
+        transition={transition}
+      >
+        {child}
+      </BaseOverlay>
+    );
+  }
+}
+
+Overlay.propTypes = propTypes;
+Overlay.defaultProps = defaultProps;
 
 export default Overlay;

@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Thumbnail from '../src/Thumbnail';
 
-describe('Thumbnail', () => {
+describe('<Thumbnail>', () => {
   it('Should have a thumbnail class and be an anchor', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Thumbnail href="#" src="#" alt="test" />
@@ -38,6 +38,18 @@ describe('Thumbnail', () => {
   it('Should have an inner div with class caption', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Thumbnail src="#" alt="test">
+        Test
+        <div>
+          Test child element
+        </div>
+      </Thumbnail>
+    );
+    assert.ok(ReactDOM.findDOMNode(instance).lastChild.className.match(/\bcaption\b/));
+  });
+
+  it('Should have an inner div with class caption in an anchor', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Thumbnail href="#" src="#" alt="test">
         Test
         <div>
           Test child element

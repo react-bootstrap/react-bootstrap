@@ -3,31 +3,35 @@ import React from 'react';
 
 import { prefix } from './utils/bootstrapUtils';
 
-class NavbarBrand extends React.Component {
+const contextTypes = {
+  $bs_navbar: React.PropTypes.shape({
+    bsClass: React.PropTypes.string,
+  }),
+};
 
+class NavbarBrand extends React.Component {
   render() {
-    const {className, children, ...props} = this.props;
-    let { $bs_navbar_bsClass: bsClass = 'navbar' } = this.context;
-    let brandClasses = prefix({ bsClass }, 'brand');
+    const { className, children, ...props } = this.props;
+    const navbarProps = this.context.$bs_navbar || { bsClass: 'navbar' };
+
+    const bsClassName = prefix(navbarProps, 'brand');
 
     if (React.isValidElement(children)) {
       return React.cloneElement(children, {
         className: classNames(
-          children.props.className, className, brandClasses
+          children.props.className, className, bsClassName
         )
       });
     }
 
     return (
-      <span {...props} className={classNames(className, brandClasses)}>
+      <span {...props} className={classNames(className, bsClassName)}>
         {children}
       </span>
     );
   }
 }
 
-NavbarBrand.contextTypes = {
-  $bs_navbar_bsClass: React.PropTypes.string
-};
+NavbarBrand.contextTypes = contextTypes;
 
 export default NavbarBrand;

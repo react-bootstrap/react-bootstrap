@@ -2,50 +2,63 @@ import classNames from 'classnames';
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
+import SafeAnchor from './SafeAnchor';
 import createChainedFunction from './utils/createChainedFunction';
 
-const PaginationButton = React.createClass({
+// TODO: This should be `<Pagination.Item>`.
 
-  propTypes: {
-    className: React.PropTypes.string,
-    eventKey: React.PropTypes.any,
-    onSelect: React.PropTypes.func,
-    disabled: React.PropTypes.bool,
-    active: React.PropTypes.bool,
-    onClick: React.PropTypes.func,
-    /**
-     * You can use a custom element for this component
-     */
-    buttonComponentClass: elementType
-  },
+// TODO: This should use `componentClass` like other components.
 
-  getDefaultProps() {
-    return {
-      active: false,
-      disabled: false
-    };
-  },
+const propTypes = {
+  componentClass: elementType,
+  className: React.PropTypes.string,
+  eventKey: React.PropTypes.any,
+  onSelect: React.PropTypes.func,
+  disabled: React.PropTypes.bool,
+  active: React.PropTypes.bool,
+  onClick: React.PropTypes.func,
+};
+
+const defaultProps = {
+  componentClass: SafeAnchor,
+  active: false,
+  disabled: false
+};
+
+class PaginationButton extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
 
   handleClick(event) {
-    if (this.props.disabled) {
+    const { disabled, onSelect, eventKey } = this.props;
+
+    if (disabled) {
       return;
     }
 
-    if (this.props.onSelect) {
-      this.props.onSelect(this.props.eventKey, event);
+    if (onSelect) {
+      onSelect(eventKey, event);
     }
-  },
+  }
 
   render() {
     const {
+      componentClass: Component,
       active,
       disabled,
       onClick,
-      buttonComponentClass: ButtonComponentClass,
       className,
       style,
       ...props,
     } = this.props;
+
+    if (Component === SafeAnchor) {
+      // Assume that custom components want `eventKey`.
+      delete props.eventKey;
+    }
 
     delete props.onSelect;
 
@@ -54,7 +67,7 @@ const PaginationButton = React.createClass({
         className={classNames(className, { active, disabled })}
         style={style}
       >
-        <ButtonComponentClass
+        <Component
           {...props}
           disabled={disabled}
           onClick={createChainedFunction(onClick, this.handleClick)}
@@ -62,6 +75,9 @@ const PaginationButton = React.createClass({
       </li>
     );
   }
-});
+}
+
+PaginationButton.propTypes = propTypes;
+PaginationButton.defaultProps = defaultProps;
 
 export default PaginationButton;

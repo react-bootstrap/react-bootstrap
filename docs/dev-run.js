@@ -1,4 +1,5 @@
-/* eslint no-process-exit: 0 */
+/* eslint-disable no-console, no-process-exit */
+
 import 'colors';
 import portfinder from 'portfinder';
 import { exec } from 'child-process-promise';
@@ -10,7 +11,7 @@ const SIGINT = 'SIGINT';
 let processMap = {};
 
 function output(prefix, message) {
-  let formattedMessage = message.trim().split('\n')
+  let formattedMessage = message.toString().trim().split('\n')
     .reduce((acc, line) => `${acc}${ acc !== '' ? '\n' : '' }${prefix} ${line}`, '');
 
   console.log(formattedMessage);
@@ -22,9 +23,7 @@ function listen({stdout, stderr}, name) {
 }
 
 function shutdown() {
-  for (let key in processMap) {
-    processMap[key].kill(SIGINT);
-  }
+  Object.values(processMap).forEach(process => process.kill(SIGINT));
 }
 
 function catchExec(name, err) {

@@ -1,49 +1,53 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { Sizes } from './styleMaps';
-import { bsClass, bsSizes, getClassSet, prefix } from './utils/bootstrapUtils';
+import { bsClass, bsSizes, getClassSet, prefix, splitBsProps }
+  from './utils/bootstrapUtils';
+import { Size } from './utils/StyleConfig';
 
-/* eslint-disable react/prop-types */
-const ModalDialog = React.createClass({
+const propTypes = {
+  /**
+   * A css class to apply to the Modal dialog DOM node.
+   */
+  dialogClassName: React.PropTypes.string,
+};
 
-  propTypes: {
-    /**
-     * A css class to apply to the Modal dialog DOM node.
-     */
-    dialogClassName: React.PropTypes.string
-  },
-
+class ModalDialog extends React.Component {
   render() {
-    let modalStyle = {
-      display: 'block',
-      ...this.props.style
-    };
-    let bsClassPrefix = prefix(this.props);
-    let dialogClasses = getClassSet(this.props);
+    const { dialogClassName, className, style, children, ...props, } =
+      this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
-    delete dialogClasses[bsClassPrefix];
-    dialogClasses[prefix(this.props, 'dialog')] = true;
+    const bsClassName = prefix(bsProps);
+
+    const modalStyle = { display: 'block', ...style };
+
+    const dialogClasses = {
+      ...getClassSet(bsProps),
+      [bsClassName]: false,
+      [prefix(bsProps, 'dialog')]: true,
+    };
 
     return (
       <div
-        {...this.props}
-        title={null}
+        {...elementProps}
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
-        className={classNames(this.props.className, bsClassPrefix)}
+        className={classNames(className, bsClassName)}
       >
-        <div className={classNames(this.props.dialogClassName, dialogClasses)}>
-          <div className={prefix(this.props, 'content')} role="document">
-            { this.props.children }
+        <div className={classNames(dialogClassName, dialogClasses)}>
+          <div className={prefix(bsProps, 'content')} role="document">
+            {children}
           </div>
         </div>
       </div>
     );
   }
-});
+}
 
-export default bsSizes([Sizes.LARGE, Sizes.SMALL],
-  bsClass('modal', ModalDialog)
+ModalDialog.propTypes = propTypes;
+
+export default bsClass('modal',
+  bsSizes([Size.LARGE, Size.SMALL], ModalDialog)
 );

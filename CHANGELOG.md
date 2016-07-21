@@ -1,14 +1,43 @@
-## [HEAD] \(v0.29.6\)
+## [HEAD] \(v0.30.0\)
 > _Unreleased_
 
+- **Breaking:** Remove `linkId` prop from `<Breadcrumb.Item>`, for consistency with other wrapped link components ([#2011])
+- **Breaking:** Remove deprecated functionality from v0.29.x ([#2017])
+- **Breaking:** Remove redundant `caption` prop from `<Carousel.Item>`, as this functionality is available from `<Carousel.Caption>` ([#2018])
+- **Breaking:** Remove pointless `navItem` and `navDropdown` props from `<Button>` ([#2026])
+- **Feature/Deprecation:** Rename `<PageItem>` to <Pager.Item>` for consistency ([#1976])
+- **Feature:** Add `ValidComponentChildren.toArray` ([#2016])
+- **Feature:** Add `bsClass` support consistently throughout all components ([#2026], [#2036])
+- **Feature:** Add `splitBsProps` and `splitBsPropsAndOmit` helpers to `bootstrapUtils` to remove Bootstrap styling props ([#2052])
+- **Feature:** Improve IE8-compatible self collapse support on `<Badge>` and add it to `<Label>` ([#2026])
 - **Bugfix:** Support `style` on `<Modal>` ([#1957])
 - **Bugfix:** Support `bsClass` on `<Dropdown.Toggle>` ([#2014])
 - **Bugfix:** Support `active` on `<NavDropdown>` ([#2015])
+- **Bugfix:** Do not pass arbitrary props to DOM nodes ([#2026], [#2036], [#2044])
+- **Bugfix:** Support strings for `positionTop` and `positionLeft` on `<Popover>` and `<Tooltip>` ([#2026])
+- **Bugfix:** Support captions on `<Thumbnail>` links ([#2026])
+- **Bugfix:** Don't ignore `componentClass` on `<ListGroup>` when using only `<ListGroupItem>` children ([#2026])
+- **Bugfix:** Don't assign default `key` to `<Breadcrumb>`, `<Carousel>`, `<ListGroup>`, `<Nav>`, `<PanelGroup>`, `<Pager>`, or `<ProgressBar>` children ([#2026], [#2036])
+- **Bugfix:** Remove pointless update-deferral-during-`onSelect` logic in `<PanelGroup>` ([#2026])
+- **Bugfix:** Use consistent `bsClass` handling on dropdown components ([#2036])
+- **Bugfix:** Remove extraneous `.collapsed` on collapsible panel title anchor ([#2036])
+- **Bugfix:** Improve edge case handling in tab animation state management and styling ([#2036])
+- **Refactor:** Clean up context usage on navbar components ([#2036])
+- **Refactor:** Sync up context usage on modals to other components ([#2044])
 
 [HEAD]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.5...master
 [#1957]: https://github.com/react-bootstrap/react-bootstrap/pull/1957
+[#1976]: https://github.com/react-bootstrap/react-bootstrap/pull/1976
+[#2011]: https://github.com/react-bootstrap/react-bootstrap/pull/2011
 [#2014]: https://github.com/react-bootstrap/react-bootstrap/pull/2014
 [#2015]: https://github.com/react-bootstrap/react-bootstrap/pull/2015
+[#2016]: https://github.com/react-bootstrap/react-bootstrap/pull/2016
+[#2017]: https://github.com/react-bootstrap/react-bootstrap/pull/2017
+[#2018]: https://github.com/react-bootstrap/react-bootstrap/pull/2018
+[#2026]: https://github.com/react-bootstrap/react-bootstrap/pull/2026
+[#2036]: https://github.com/react-bootstrap/react-bootstrap/pull/2036
+[#2044]: https://github.com/react-bootstrap/react-bootstrap/pull/2044
+[#2052]: https://github.com/react-bootstrap/react-bootstrap/pull/2052
 
 
 ## [v0.29.5]

@@ -54,7 +54,7 @@ describe('ButtonGroup', () => {
   });
 
   it('Should warn about block without vertical', () => {
-    shouldWarn('The block property requires the vertical property to be set to have any effect');
+    shouldWarn('`block` requires `vertical` to be set to have any effect');
 
     ReactTestUtils.renderIntoDocument(
       <ButtonGroup block>

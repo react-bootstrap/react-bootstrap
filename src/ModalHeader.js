@@ -1,45 +1,18 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, prefix } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
-class ModalHeader extends React.Component {
+// TODO: `aria-label` should be `closeLabel`.
 
-  render() {
-    let { 'aria-label': label, ...props } = this.props;
-    let onHide = createChainedFunction(this.context.$bs_onModalHide, this.props.onHide);
-
-    return (
-      <div
-        {...props}
-        className={classNames(this.props.className, prefix(this.props, 'header'))}
-      >
-        { this.props.closeButton &&
-          <button
-            type="button"
-            className="close"
-            aria-label={label}
-            onClick={onHide}>
-            <span aria-hidden="true">
-              &times;
-            </span>
-          </button>
-        }
-        { this.props.children }
-      </div>
-    );
-  }
-}
-
-ModalHeader.propTypes = {
+const propTypes = {
   /**
-   * The 'aria-label' attribute provides an accessible label for the close button.
-   * It is used for Assistive Technology when the label text is not readable.
+   * The 'aria-label' attribute provides an accessible label for the close
+   * button. It is used for Assistive Technology when the label text is not
+   * readable.
    */
   'aria-label': React.PropTypes.string,
-
-  bsClass: React.PropTypes.string,
 
   /**
    * Specify whether the Component should contain a close button
@@ -47,20 +20,67 @@ ModalHeader.propTypes = {
   closeButton: React.PropTypes.bool,
 
   /**
-   * A Callback fired when the close button is clicked. If used directly inside a Modal component, the onHide will automatically
-   * be propagated up to the parent Modal `onHide`.
+   * A Callback fired when the close button is clicked. If used directly inside
+   * a Modal component, the onHide will automatically be propagated up to the
+   * parent Modal `onHide`.
    */
-  onHide: React.PropTypes.func
+  onHide: React.PropTypes.func,
 };
 
-ModalHeader.contextTypes = {
-  '$bs_onModalHide': React.PropTypes.func
-};
-
-ModalHeader.defaultProps = {
+const defaultProps = {
   'aria-label': 'Close',
-  closeButton: false
+  closeButton: false,
 };
 
+const contextTypes = {
+  $bs_modal: React.PropTypes.shape({
+    onHide: React.PropTypes.func,
+  }),
+};
 
-export default bsClass('modal', ModalHeader);
+class ModalHeader extends React.Component {
+  render() {
+    const {
+      'aria-label': label,
+      closeButton,
+      onHide,
+      className,
+      children,
+      ...props,
+    } = this.props;
+
+    const modal = this.context.$bs_modal;
+
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
+
+    return (
+      <div
+        {...elementProps}
+        className={classNames(className, classes)}
+      >
+        {closeButton &&
+          <button
+            type="button"
+            className="close"
+            aria-label={label}
+            onClick={createChainedFunction(modal.onHide, onHide)}
+          >
+            <span aria-hidden="true">
+              &times;
+            </span>
+          </button>
+        }
+
+        {children}
+      </div>
+    );
+  }
+}
+
+ModalHeader.propTypes = propTypes;
+ModalHeader.defaultProps = defaultProps;
+ModalHeader.contextTypes = contextTypes;
+
+export default bsClass('modal-header', ModalHeader);

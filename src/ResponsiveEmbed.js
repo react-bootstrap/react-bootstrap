@@ -1,44 +1,15 @@
 import classNames from 'classnames';
-import React, { PropTypes, cloneElement } from 'react';
-
+import React, { cloneElement, PropTypes } from 'react';
 import warning from 'warning';
 
-class ResponsiveEmbed extends React.Component {
-  render() {
-    const { bsClass, className, a16by9, a4by3, children, ...props } = this.props;
-    warning(!(!a16by9 && !a4by3), '`a16by9` or `a4by3` attribute must be set.');
-    warning(!(a16by9 && a4by3), 'Either `a16by9` or `a4by3` attribute can be set. Not both.');
+import { bsClass, getClassSet, prefix, splitBsProps }
+  from './utils/bootstrapUtils';
 
-    const aspectRatio = {
-      'embed-responsive-16by9': a16by9,
-      'embed-responsive-4by3': a4by3
-    };
+// TODO: This should probably take a single `aspectRatio` prop.
 
-    return (
-      <div className={classNames(bsClass, aspectRatio)}>
-        {cloneElement(children, {
-          ...props,
-          className: classNames(className, 'embed-responsive-item')
-        })}
-      </div>
-    );
-  }
-}
-
-ResponsiveEmbed.defaultProps = {
-  bsClass: 'embed-responsive',
-  a16by9: false,
-  a4by3: false
-};
-
-ResponsiveEmbed.propTypes = {
+const propTypes = {
   /**
-   * bootstrap className
-   * @private
-   */
-  bsClass: PropTypes.string,
-  /**
-   * This component accepts only one child element
+   * This component requires a single child element
    */
   children: PropTypes.element.isRequired,
   /**
@@ -48,7 +19,46 @@ ResponsiveEmbed.propTypes = {
   /**
    * 4by3 aspect ratio
    */
-  a4by3: PropTypes.bool
+  a4by3: PropTypes.bool,
 };
 
-export default ResponsiveEmbed;
+const defaultProps = {
+  a16by9: false,
+  a4by3: false,
+};
+
+class ResponsiveEmbed extends React.Component {
+  render() {
+    const { a16by9, a4by3, className, children, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    warning(
+      a16by9 || a4by3,
+      'Either `a16by9` or `a4by3` must be set.'
+    );
+    warning(
+      !(a16by9 && a4by3),
+      'Only one of `a16by9` or `a4by3` can be set.'
+    );
+
+    const classes = {
+      ...getClassSet(bsProps),
+      [prefix(bsProps, '16by9')]: a16by9,
+      [prefix(bsProps, '4by3')]: a4by3,
+    };
+
+    return (
+      <div className={classNames(classes)}>
+        {cloneElement(children, {
+          ...elementProps,
+          className: classNames(className, prefix(bsProps, 'item')),
+        })}
+      </div>
+    );
+  }
+}
+
+ResponsiveEmbed.propTypes = propTypes;
+ResponsiveEmbed.defaultProps = defaultProps;
+
+export default bsClass('embed-responsive', ResponsiveEmbed);

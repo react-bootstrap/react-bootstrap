@@ -1,8 +1,8 @@
-import {cloneElement} from 'react';
+import { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
 
 export function shouldWarn(about) {
-  console.error.expected.push(about);
+  console.error.expected.push(about); // eslint-disable-line no-console
 }
 
 /**

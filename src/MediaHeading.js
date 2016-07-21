@@ -1,29 +1,34 @@
+import classNames from 'classnames';
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
-import classNames from 'classnames';
 
-const MediaHeading = React.createClass({
-  displayName: 'Media.Heading',
-  propTypes: {
-    /**
-     * You can use a custom element for the media heading
-     */
-    componentClass: elementType
-  },
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
-  getDefaultProps() {
-    return {
-      componentClass: 'h4'
-    };
-  },
+const propTypes = {
+  componentClass: elementType,
+};
 
+const defaultProps = {
+  componentClass: 'h4',
+};
+
+class MediaHeading extends React.Component {
   render() {
-    const {componentClass: ComponentClass, className, ...props} = this.props;
+    const { componentClass: Component, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
 
     return (
-      <ComponentClass {...props} className={classNames(className, 'media-heading')}/>
+      <Component
+        {...elementProps}
+        className={classNames(className, classes)}
+      />
     );
   }
-});
+}
 
-export default MediaHeading;
+MediaHeading.propTypes = propTypes;
+MediaHeading.defaultProps = defaultProps;
+
+export default bsClass('media-heading', MediaHeading);

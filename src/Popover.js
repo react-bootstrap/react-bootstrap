@@ -2,107 +2,118 @@ import classNames from 'classnames';
 import React from 'react';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
-import { prefix } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, prefix, splitBsProps }
+  from './utils/bootstrapUtils';
 
-const Popover = React.createClass({
+const propTypes = {
+  /**
+   * An html id attribute, necessary for accessibility
+   * @type {string}
+   * @required
+   */
+  id: isRequiredForA11y(React.PropTypes.oneOfType([
+    React.PropTypes.string, React.PropTypes.number,
+  ])),
 
-  propTypes: {
+  /**
+   * Sets the direction the Popover is positioned towards.
+   */
+  placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
-    /**
-     * An html id attribute, necessary for accessibility
-     * @type {string}
-     * @required
-     */
-    id: isRequiredForA11y(
-      React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number
-      ])
-    ),
+  /**
+   * The "top" position value for the Popover.
+   */
+  positionTop: React.PropTypes.oneOfType([
+    React.PropTypes.number, React.PropTypes.string,
+  ]),
+  /**
+   * The "left" position value for the Popover.
+   */
+  positionLeft: React.PropTypes.oneOfType([
+    React.PropTypes.number, React.PropTypes.string,
+  ]),
 
-    /**
-     * Sets the direction the Popover is positioned towards.
-     */
-    placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  /**
+   * The "top" position value for the Popover arrow.
+   */
+  arrowOffsetTop: React.PropTypes.oneOfType([
+    React.PropTypes.number, React.PropTypes.string,
+  ]),
+  /**
+   * The "left" position value for the Popover arrow.
+   */
+  arrowOffsetLeft: React.PropTypes.oneOfType([
+    React.PropTypes.number, React.PropTypes.string,
+  ]),
 
-    /**
-     * The "left" position value for the Popover.
-     */
-    positionLeft: React.PropTypes.number,
-    /**
-     * The "top" position value for the Popover.
-     */
-    positionTop: React.PropTypes.number,
-    /**
-     * The "left" position value for the Popover arrow.
-     */
-    arrowOffsetLeft: React.PropTypes.oneOfType([
-      React.PropTypes.number, React.PropTypes.string
-    ]),
-    /**
-     * The "top" position value for the Popover arrow.
-     */
-    arrowOffsetTop: React.PropTypes.oneOfType([
-      React.PropTypes.number, React.PropTypes.string
-    ]),
-    /**
-     * Title text
-     */
-    title: React.PropTypes.node
-  },
+  /**
+   * Title content
+   */
+  title: React.PropTypes.node,
+};
 
-  getDefaultProps() {
-    return {
-      placement: 'right',
-      bsClass: 'popover'
-    };
-  },
+const defaultProps = {
+  placement: 'right',
+};
 
+class Popover extends React.Component {
   render() {
+    const {
+      placement,
+      positionTop,
+      positionLeft,
+      arrowOffsetTop,
+      arrowOffsetLeft,
+      title,
+      className,
+      style,
+      children,
+      ...props,
+    } = this.props;
+
+    const [bsProps, elementProps] = splitBsProps(props);
+
     const classes = {
-      [prefix(this.props)]: true,
-      [this.props.placement]: true
+      ...getClassSet(bsProps),
+      [placement]: true,
     };
 
-    const style = {
-      left: this.props.positionLeft,
-      top: this.props.positionTop,
+    const outerStyle = {
       display: 'block',
-      // we don't want to expose the `style` property
-      ...this.props.style // eslint-disable-line react/prop-types
+      top: positionTop,
+      left: positionLeft,
+      ...style,
     };
 
     const arrowStyle = {
-      left: this.props.arrowOffsetLeft,
-      top: this.props.arrowOffsetTop
+      top: arrowOffsetTop,
+      left: arrowOffsetLeft,
     };
 
     return (
       <div
+        {...elementProps}
         role="tooltip"
-        {...this.props}
-        className={classNames(this.props.className, classes)}
-        style={style}
-        title={null}
+        className={classNames(className, classes)}
+        style={outerStyle}
       >
         <div className="arrow" style={arrowStyle} />
 
-        {this.props.title ? this.renderTitle() : null}
+        {title && (
+          <h3 className={prefix(bsProps, 'title')}>
+            {title}
+          </h3>
+        )}
 
-        <div className={prefix(this.props, 'content')}>
-          {this.props.children}
+        <div className={prefix(bsProps, 'content')}>
+          {children}
         </div>
       </div>
     );
-  },
-
-  renderTitle() {
-    return (
-      <h3 className={prefix(this.props, 'title')}>
-        {this.props.title}
-      </h3>
-    );
   }
-});
+}
 
-export default Popover;
+Popover.propTypes = propTypes;
+Popover.defaultProps = defaultProps;
+
+export default bsClass('popover', Popover);

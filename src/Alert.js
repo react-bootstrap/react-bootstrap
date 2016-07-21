@@ -1,86 +1,74 @@
 import classNames from 'classnames';
 import React from 'react';
-import deprecated from 'react-prop-types/lib/deprecated';
 
-import { State } from './styleMaps';
-import {
-  bsStyles, bsClass, getClassSet, prefix,
-} from './utils/bootstrapUtils';
+import { bsClass, bsStyles, getClassSet, prefix, splitBsProps }
+  from './utils/bootstrapUtils';
+import { State } from './utils/StyleConfig';
 
-let Alert = React.createClass({
+const propTypes = {
+  onDismiss: React.PropTypes.func,
+  closeLabel: React.PropTypes.string,
+};
 
-  propTypes: {
-    onDismiss: React.PropTypes.func,
-    /**
-     * @private
-     */
-    dismissAfter: deprecated(React.PropTypes.number, 'No longer supported.'),
-    closeLabel: React.PropTypes.string
-  },
+const defaultProps = {
+  closeLabel: 'Close alert',
+};
 
-  getDefaultProps() {
-    return {
-      closeLabel: 'Close Alert'
-    };
-  },
-
-  renderDismissButton() {
+class Alert extends React.Component {
+  renderDismissButton(onDismiss) {
     return (
       <button
         type="button"
         className="close"
-        onClick={this.props.onDismiss}
+        onClick={onDismiss}
         aria-hidden="true"
         tabIndex="-1"
       >
         <span>&times;</span>
       </button>
     );
-  },
+  }
 
-  renderSrOnlyDismissButton() {
+  renderSrOnlyDismissButton(onDismiss, closeLabel) {
     return (
       <button
         type="button"
         className="close sr-only"
-        onClick={this.props.onDismiss}
+        onClick={onDismiss}
       >
-        {this.props.closeLabel}
+        {closeLabel}
       </button>
     );
-  },
+  }
 
   render() {
-    let classes = getClassSet(this.props);
-    let isDismissable = !!this.props.onDismiss;
+    const { onDismiss, closeLabel, className, children, ...props } =
+      this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
-    classes[prefix(this.props, 'dismissable')] = isDismissable;
+    const dismissable = !!onDismiss;
+    const classes = {
+      ...getClassSet(bsProps),
+      [prefix(bsProps, 'dismissable')]: dismissable,
+    };
 
     return (
       <div
-        {...this.props}
+        {...elementProps}
         role="alert"
-        className={classNames(this.props.className, classes)}
+        className={classNames(className, classes)}
       >
-        {isDismissable ? this.renderDismissButton() : null}
-        {this.props.children}
-        {isDismissable ? this.renderSrOnlyDismissButton() : null}
+        {dismissable && this.renderDismissButton(onDismiss)}
+        {children}
+        {dismissable && this.renderSrOnlyDismissButton(onDismiss, closeLabel)}
       </div>
     );
-  },
-
-  componentDidMount() {
-    if (this.props.dismissAfter && this.props.onDismiss) {
-      this.dismissTimer = setTimeout(this.props.onDismiss, this.props.dismissAfter);
-    }
-  },
-
-  componentWillUnmount() {
-    clearTimeout(this.dismissTimer);
   }
-});
+}
 
+Alert.propTypes = propTypes;
+Alert.defaultProps = defaultProps;
 
-export default bsStyles(State.values(), State.INFO,
+export default bsStyles(Object.values(State), State.INFO,
   bsClass('alert', Alert)
 );

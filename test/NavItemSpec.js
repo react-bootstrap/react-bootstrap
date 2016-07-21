@@ -4,10 +4,10 @@ import ReactDOM from 'react-dom';
 
 import NavItem from '../src/NavItem';
 
-describe('NavItem', () => {
+describe('<NavItem>', () => {
   it('Should add active class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <NavItem active={true}>
+      <NavItem active>
         Item content
       </NavItem>
     );
@@ -16,7 +16,7 @@ describe('NavItem', () => {
 
   it('Should add disabled class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <NavItem disabled={true}>
+      <NavItem disabled>
         Item content
       </NavItem>
     );
@@ -36,7 +36,7 @@ describe('NavItem', () => {
 
   it('Should not add anchor properties to li', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <NavItem href='/hi' title='boom!'>
+      <NavItem href="/hi" title="boom!">
         Item content
       </NavItem>
     );
@@ -47,7 +47,7 @@ describe('NavItem', () => {
 
   it('Should pass tabIndex to the anchor', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <NavItem href='/hi' tabIndex='3' title='boom!'>
+      <NavItem href="/hi" tabIndex="3" title="boom!">
         Item content
       </NavItem>
     );
@@ -65,7 +65,7 @@ describe('NavItem', () => {
       done();
     }
     let instance = ReactTestUtils.renderIntoDocument(
-      <NavItem eventKey='2' onSelect={handleSelect}>
+      <NavItem eventKey="2" onSelect={handleSelect}>
         <span>Item content</span>
       </NavItem>
     );
@@ -77,7 +77,7 @@ describe('NavItem', () => {
       throw new Error('onSelect should not be called');
     }
     let instance = ReactTestUtils.renderIntoDocument(
-      <NavItem disabled={true} onSelect={handleSelect}>
+      <NavItem disabled onSelect={handleSelect}>
         <span>Item content</span>
       </NavItem>
     );
@@ -127,7 +127,7 @@ describe('NavItem', () => {
 
     it('Should pass aria-controls to the link', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-          <NavItem href="/path/to/stuff" target="_blank" aria-controls='hi'>Item content</NavItem>
+          <NavItem href="/path/to/stuff" target="_blank" aria-controls="hi">Item content</NavItem>
         );
 
       let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
@@ -157,7 +157,7 @@ describe('NavItem', () => {
 
     it('Should pass role down', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-          <NavItem role='tab'>Item content</NavItem>
+          <NavItem role="tab">Item content</NavItem>
         );
 
       let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');

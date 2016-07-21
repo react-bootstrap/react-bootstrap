@@ -2,11 +2,12 @@ import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
 import ReactDOM from 'react-dom';
 import tsp from 'teaspoon';
+
 import MenuItem from '../src/MenuItem';
 
 import { shouldWarn } from './helpers';
 
-describe('MenuItem', () => {
+describe('<MenuItem>', () => {
   it('renders divider', () => {
     const instance = ReactTestUtils.renderIntoDocument(<MenuItem divider />);
     const node = ReactDOM.findDOMNode(instance);
@@ -25,7 +26,7 @@ describe('MenuItem', () => {
     );
     const node = ReactDOM.findDOMNode(instance);
 
-    node.className.should.match(/\bdivider foo bar\b/);
+    node.className.should.match(/\bfoo bar divider\b/);
     node.style.height.should.equal('100px');
   });
 
@@ -64,7 +65,7 @@ describe('MenuItem', () => {
     );
     const node = ReactDOM.findDOMNode(instance);
 
-    node.className.should.match(/\bdropdown-header foo bar\b/);
+    node.className.should.match(/\bfoo bar dropdown-header\b/);
     node.style.height.should.equal('100px');
   });
 
@@ -72,7 +73,7 @@ describe('MenuItem', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <MenuItem
         onKeyDown={() => done()}
-        href='/herpa-derpa'>
+        href="/herpa-derpa">
         Item
       </MenuItem>
     );
@@ -94,7 +95,7 @@ describe('MenuItem', () => {
       eventKey.should.equal('1');
     };
     const instance = ReactTestUtils.renderIntoDocument(
-      <MenuItem onSelect={handleSelect} eventKey='1'>Item</MenuItem>
+      <MenuItem onSelect={handleSelect} eventKey="1">Item</MenuItem>
     );
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 

@@ -1,169 +1,163 @@
-import cn from 'classnames';
-import invariant from 'invariant';
+import classNames from 'classnames';
 import React, { PropTypes } from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
-import { bsClass as setBsClass, prefix } from './utils/bootstrapUtils';
+import { bsClass as setBsClass, prefix, splitBsPropsAndOmit }
+  from './utils/bootstrapUtils';
 
-let animationPropType = PropTypes.oneOfType([
-  PropTypes.bool,
-  elementType
-]);
+const propTypes = {
+  componentClass: elementType,
 
-let TabContent = React.createClass({
+  /**
+   * Sets a default animation strategy for all children `<TabPane>`s. Use
+   * `false` to disable, `true` to enable the default `<Fade>` animation or any
+   * `<Transition>` component.
+   */
+  animation: PropTypes.oneOfType([
+    PropTypes.bool, elementType,
+  ]),
 
-  propTypes: {
+  /**
+   * Unmount tabs (remove it from the DOM) when they are no longer visible
+   */
+  unmountOnExit: PropTypes.bool,
+};
 
-    /**
-     * the Component used to render the TabContent
-     */
-    componentClass: elementType,
+const defaultProps = {
+  componentClass: 'div',
+  animation: true,
+  unmountOnExit: false,
+};
 
-    /**
-     * Sets a default animation strategy for all children TabPanes.
-     * Use `false` to disable, `true` to enable the default "Fade"
-     * animation or any `<Transition>` component.
-     */
+const contextTypes = {
+  $bs_tabContainer: PropTypes.shape({
+    activeKey: PropTypes.any,
+  }),
+};
+
+const childContextTypes = {
+  $bs_tabContent: PropTypes.shape({
+    bsClass: PropTypes.string,
     animation: PropTypes.oneOfType([
-      PropTypes.bool,
-      elementType
+      PropTypes.bool, elementType,
     ]),
-
-    /**
-     * Unmount the tab (remove it from the DOM) when it is no longer visible
-     */
+    activeKey: PropTypes.any,
     unmountOnExit: PropTypes.bool,
-  },
+    onPaneEnter: PropTypes.func.isRequired,
+    onPaneExited: PropTypes.func.isRequired,
+    exiting: PropTypes.bool.isRequired,
+  }),
+};
 
-  contextTypes: {
-    $bs_tabcontainer: React.PropTypes.shape({
-      activeKey: React.PropTypes.any,
-      onSelect: PropTypes.func,
-    })
-  },
+class TabContent extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-  childContextTypes: {
-    $bs_tabcontent: PropTypes.shape({
-      bsClass: PropTypes.string,
-      animation: animationPropType,
-      activeKey: PropTypes.any,
-      onExited: PropTypes.func,
-      register: PropTypes.func,
-      unmountOnExit: PropTypes.bool,
-    }),
-  },
+    this.handlePaneEnter = this.handlePaneEnter.bind(this);
+    this.handlePaneExited = this.handlePaneExited.bind(this);
 
-  getDefaultProps() {
-    return {
-      componentClass: 'div',
-      animation: true,
-      unmountOnExit: false
+    // Active entries in state will be `null` unless `animation` is set. Need
+    // to track active child in case keys swap and the active child changes
+    // but the active key does not.
+    this.state = {
+      activeKey: null,
+      activeChild: null,
     };
-  },
-
-  getInitialState() {
-    return {
-      exitingPane: null
-    };
-  },
+  }
 
   getChildContext() {
-    let exitingPane = this._exitingPane;
+    const { bsClass, animation, unmountOnExit } = this.props;
+
+    const stateActiveKey = this.state.activeKey;
+    const containerActiveKey = this.getContainerActiveKey();
+
+    const activeKey =
+      stateActiveKey != null ? stateActiveKey : containerActiveKey;
+    const exiting =
+      stateActiveKey != null && stateActiveKey !== containerActiveKey;
 
     return {
-      $bs_tabcontent: {
-        bsClass: this.props.bsClass,
-        animation: this.props.animation,
-        activeKey: exitingPane ? undefined : this.getActiveKey(),
-        onExited: this.handlePaneExited,
-        register: this.registerPane,
-        unmountOnExit: this.props.unmountOnExit
-      }
+      $bs_tabContent: {
+        bsClass,
+        animation,
+        activeKey,
+        unmountOnExit,
+        onPaneEnter: this.handlePaneEnter,
+        onPaneExited: this.handlePaneExited,
+        exiting,
+      },
     };
-  },
+  }
 
-  componentWillMount() {
-    this.panes = [];
-  },
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.animation && this.state.activeChild) {
+      this.setState({ activeKey: null, activeChild: null });
+    }
+  }
 
-  /**
-   * This belongs in `componentWillReceiveProps()` but
-   * 0.14.x contains a bug where cwrp isn't called when only context changes.
-   * fixed in master, not sure it will make it into any 0.14 release
-   */
-  componentWillUpdate(nextProps, _, nextContext) {
-    let currentActiveKey = this.getActiveKey();
-    let nextActiveKey = this.getActiveKey(nextContext);
-    let currentKeyIsStillValid = this.panes.indexOf(currentActiveKey) !== -1;
+  componentWillUnmount() {
+    this.isUnmounted = true;
+  }
 
-    if (this.panes.indexOf(this._exitingPane) === -1) {
-      this._exitingPane = null;
+  handlePaneEnter(child, childKey) {
+    if (!this.props.animation) {
+      return false;
     }
 
-    if (nextActiveKey !== currentActiveKey && currentKeyIsStillValid) {
-      this._exitingPane = currentActiveKey;
+    // It's possible that this child should be transitioning out.
+    if (childKey !== this.getContainerActiveKey()) {
+      return false;
     }
-  },
+
+    this.setState({
+      activeKey: childKey,
+      activeChild: child,
+    });
+
+    return true;
+  }
+
+  handlePaneExited(child) {
+    // This might happen as everything is unmounting.
+    if (this.isUnmounted) {
+      return;
+    }
+
+    this.setState(({ activeChild }) => {
+      if (activeChild !== child) {
+        return null;
+      }
+
+      return {
+        activeKey: null,
+        activeChild: null,
+      };
+    });
+  }
+
+  getContainerActiveKey() {
+    const tabContainer = this.context.$bs_tabContainer;
+    return tabContainer && tabContainer.activeKey;
+  }
 
   render() {
-    let { className, children } = this.props;
-    let Component = this.props.componentClass;
-
-    let contentClass = prefix(this.props, 'content');
+    const { componentClass: Component, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
+      'animation', 'unmountOnExit',
+    ]);
 
     return (
-      <Component className={cn(contentClass, className)}>
-        { children }
-      </Component>
+      <Component
+        {...elementProps}
+        className={classNames(className, prefix(bsProps, 'content'))}
+      />
     );
-  },
-
-  handlePaneExited() {
-    this._exitingPane = null;
-    this.forceUpdate();
-  },
-
-  /**
-   * This is unfortunately neccessary because the TabContent needs to know if
-   * a TabPane is ever going to exit, since it may unmount and just leave the
-   * TabContent to wait longingly forever for the handlePaneExited to be called.
-   */
-  registerPane(eventKey) {
-    let panes = this.panes;
-
-    invariant(panes.indexOf(eventKey) === -1,
-      'You cannot have multiple TabPanes of with the same `eventKey` in the same ' +
-      'TabContent component. Duplicate eventKey: ' + eventKey
-    );
-
-    panes.push(eventKey);
-
-    return ()=> {
-      panes.splice(panes.indexOf(eventKey), 1);
-
-      // #1892
-      // new active state can propagate down _before_
-      // the tab actually unmounts, so it will map be exiting.
-      // since an exiting tab won't complete, clear the bad state
-      if (eventKey === this._exitingPane) {
-        this.handlePaneExited();
-      }
-
-      // If the tab was active, we need to tell the container
-      // that it no longer exists and as such is not active.
-      if (eventKey === this.getActiveKey()) {
-        this.getContext('$bs_tabcontainer').onSelect();
-      }
-    };
-  },
-
-  getActiveKey(context = this.context) {
-    return this.getContext('$bs_tabcontainer', context).activeKey;
-  },
-
-  getContext(key, context = this.context) {
-    return context[key] || {};
   }
-});
+}
+
+TabContent.propTypes = propTypes;
+TabContent.defaultProps = defaultProps;
+TabContent.contextTypes = contextTypes;
+TabContent.childContextTypes = childContextTypes;
 
 export default setBsClass('tab', TabContent);

@@ -4,54 +4,53 @@ import ReactDOM from 'react-dom';
 
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
-
-import { getOne } from './helpers';
 import { addStyle } from '../src/utils/bootstrapUtils';
 
-describe('Navbar', () => {
+import { getOne } from './helpers';
 
+describe('<Navbar>', () => {
   it('Should create nav element', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar />
     );
-    let nav = ReactDOM.findDOMNode(instance);
+    const nav = ReactDOM.findDOMNode(instance);
     assert.equal(nav.nodeName, 'NAV');
     assert.ok(nav.className.match(/\bnavbar\b/));
-    assert.ok(!nav.getAttribute('role'));
+    assert.notOk(nav.getAttribute('role'));
   });
 
   it('Should add "navigation" role when not using a `<nav>`', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Navbar componentClass='div' />
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar componentClass="div" />
     );
-    let nav = ReactDOM.findDOMNode(instance);
+    const nav = ReactDOM.findDOMNode(instance);
     assert.equal(nav.nodeName, 'DIV');
     assert.ok(nav.getAttribute('role') === 'navigation');
   });
 
   it('Should add fixedTop variation class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar fixedTop />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-fixed-top'));
   });
 
   it('Should add fixedBottom variation class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar fixedBottom />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-fixed-bottom'));
   });
 
   it('Should add staticTop variation class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar staticTop />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-static-top'));
   });
 
   it('Should add inverse variation class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar inverse />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-inverse'));
@@ -60,8 +59,8 @@ describe('Navbar', () => {
   it('Should not add default class along with custom styles', () => {
     addStyle(Navbar, 'custom');
 
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Navbar bsStyle='custom' />
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar bsStyle="custom" />
     );
 
     expect(() => ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-default'))
@@ -69,28 +68,28 @@ describe('Navbar', () => {
   });
 
   it('Should add fluid variation class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar fluid />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'container-fluid'));
   });
 
   it('Should override role attribute', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Navbar role="banner"/>
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar role="banner" />
     );
     assert.ok(ReactDOM.findDOMNode(instance).getAttribute('role'), 'banner');
   });
 
   it('Should override node class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Navbar componentClass={'header'}/>
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar componentClass="header" />
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'HEADER');
   });
 
   it('Should add header with brand', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>Brand</Navbar.Brand>
@@ -98,17 +97,17 @@ describe('Navbar', () => {
       </Navbar>
     );
 
-    let header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
+    const header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
 
-    let brand = getOne(header.getElementsByClassName('navbar-brand'));
+    const brand = getOne(header.getElementsByClassName('navbar-brand'));
 
     assert.ok(brand);
     assert.equal(brand.nodeName, 'SPAN');
-    assert.equal(brand.innerText, 'Brand');
+    assert.equal(brand.textContent, 'Brand');
   });
 
   it('Should add link element with navbar-brand class using NavBrand Component', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand><a>Brand</a></Navbar.Brand>
@@ -116,27 +115,27 @@ describe('Navbar', () => {
       </Navbar>
     );
 
-    let brand = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-brand');
+    const brand = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-brand');
 
     assert.ok(brand);
     assert.equal(brand.nodeName, 'A');
-    assert.equal(brand.innerText, 'Brand');
+    assert.equal(brand.textContent, 'Brand');
   });
 
   it('Should pass navbar context to navs', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
         <Nav />
       </Navbar>
     );
 
-    let nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
+    const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
 
     assert.ok(nav.context.$bs_navbar);
   });
 
   it('Should add default toggle', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
         <Navbar.Header>
           <Navbar.Toggle />
@@ -149,11 +148,11 @@ describe('Navbar', () => {
   });
 
   it('Should add custom toggle', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
         <Navbar.Header>
           <Navbar.Toggle>
-            <span className='test'>hi</span>
+            <span className="test">hi</span>
           </Navbar.Toggle>
         </Navbar.Header>
       </Navbar>
@@ -164,8 +163,8 @@ describe('Navbar', () => {
   });
 
   it('Should trigger onToggle', () => {
-    let toggleSpy = sinon.spy();
-    let instance = ReactTestUtils.renderIntoDocument(
+    const toggleSpy = sinon.spy();
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar onToggle={toggleSpy}>
         <Navbar.Header>
           <Navbar.Toggle />
@@ -173,7 +172,7 @@ describe('Navbar', () => {
       </Navbar>
     );
 
-    let toggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
+    const toggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
 
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(toggle));
 
@@ -182,9 +181,9 @@ describe('Navbar', () => {
   });
 
   it('Should support custom props', () => {
-    let clickSpy = sinon.spy();
+    const clickSpy = sinon.spy();
 
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
         <Navbar.Header>
           <Navbar.Toggle
@@ -196,7 +195,7 @@ describe('Navbar', () => {
       </Navbar>
     );
 
-    let toggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
+    const toggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
 
     expect(toggle.className).to.match(/foo bar/);
     expect(toggle.style.height).to.equal('100px');
@@ -206,7 +205,7 @@ describe('Navbar', () => {
   });
 
   it('Should render collapse', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
         <Navbar.Collapse>
           hello
@@ -218,7 +217,7 @@ describe('Navbar', () => {
   });
 
   it('Should pass expanded to Collapse', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar defaultExpanded>
         <Navbar.Collapse>
           hello
@@ -226,13 +225,13 @@ describe('Navbar', () => {
       </Navbar>
     );
 
-    let collapse = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Collapse);
+    const collapse = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Collapse);
 
-    expect(collapse.context.$bs_navbar_expanded).to.equal(true);
+    expect(collapse.context.$bs_navbar.expanded).to.equal(true);
   });
 
   it('Should wire the toggle to the collapse', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
         <Navbar.Header>
           <Navbar.Toggle />
@@ -243,30 +242,30 @@ describe('Navbar', () => {
       </Navbar>
     );
 
-    let toggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
-    let collapse = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Collapse);
+    const toggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
+    const collapse = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Collapse);
 
-    expect(collapse.context.$bs_navbar_expanded).to.not.be.ok;
+    expect(collapse.context.$bs_navbar.expanded).to.not.be.ok;
     expect(toggle.className).to.match(/collapsed/);
 
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(toggle));
 
-    expect(collapse.context.$bs_navbar_expanded).to.equal(true);
+    expect(collapse.context.$bs_navbar.expanded).to.equal(true);
     expect(toggle.className).to.not.match(/collapsed/);
   });
 
   it('Should pass `bsClass` down to sub components', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Navbar bsClass='my-navbar'>
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar bsClass="my-navbar">
         <Navbar.Header>
           <Navbar.Brand />
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Navbar.Form/>
-          <Navbar.Text/>
-          <Navbar.Link/>
-          <Nav pullRight/>
+          <Navbar.Form />
+          <Navbar.Text />
+          <Navbar.Link />
+          <Nav pullRight />
         </Navbar.Collapse>
       </Navbar>
     );
@@ -284,9 +283,9 @@ describe('Navbar', () => {
   });
 
   it('Should add custom className to header', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    const instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
-        <Navbar.Header className='test'>
+        <Navbar.Header className="test">
           <Navbar.Brand />
         </Navbar.Header>
       </Navbar>
@@ -294,5 +293,4 @@ describe('Navbar', () => {
 
     ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'test');
   });
-
 });

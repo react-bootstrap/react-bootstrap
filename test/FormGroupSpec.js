@@ -5,14 +5,12 @@ import $ from 'teaspoon';
 import FormControl from '../src/FormControl';
 import FormGroup from '../src/FormGroup';
 
-import { shouldWarn } from './helpers';
-
-describe('FormGroup', () => {
+describe('<FormGroup>', () => {
   it('renders children', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <FormGroup>
-        <span className='child1' />
-        <span className='child2' />
+        <span className="child1" />
+        <span className="child2" />
       </FormGroup>
     );
 
@@ -48,90 +46,6 @@ describe('FormGroup', () => {
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group-lg'));
-  });
-
-  it('throws no warning without bsSize when standalone', () => {
-    shouldWarn('deprecated');
-
-    ReactTestUtils.renderIntoDocument(
-      <FormGroup standalone />
-    );
-  });
-
-  it('throws warning about bsSize when standalone', () => {
-    shouldWarn('deprecated');
-
-    ReactTestUtils.renderIntoDocument(
-      <FormGroup standalone bsSize="large" />
-    );
-  });
-
-  it('renders no form-group class when standalone', () => {
-    shouldWarn('deprecated');
-
-    let instance = ReactTestUtils.renderIntoDocument(
-      <FormGroup standalone>
-        <span />
-      </FormGroup>
-    );
-
-    assert.equal(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'form-group').length, 0);
-  });
-
-  it('renders no form-group-* class when standalone', () => {
-    shouldWarn('deprecated');
-
-    let instance = ReactTestUtils.renderIntoDocument(
-      <FormGroup standalone bsSize="large" />
-    );
-
-    assert.equal(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'form-group').length, 0);
-    assert.equal(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'form-group-lg').length, 0);
-  });
-
-  [
-    {
-      props: { hasFeedback: true },
-      className: 'has-feedback',
-    },
-    {
-      props: { bsStyle: 'success' },
-      className: 'has-success',
-    },
-    {
-      props: { bsStyle: 'warning' },
-      className: 'has-warning',
-    },
-    {
-      props: { bsStyle: 'error' },
-      className: 'has-error',
-    },
-    {
-      props: { groupClassName: 'custom-group' },
-      className: 'custom-group',
-    },
-  ].forEach(({ props, className }) => {
-    it(`does not render ${className} class`, () => {
-      $(
-        <FormGroup>
-          <span />
-        </FormGroup>
-      )
-        .shallowRender()
-        .none(`.${className}`);
-    });
-
-    it(`renders with ${className} class`, () => {
-      shouldWarn('deprecated');
-
-      $(
-        <FormGroup {...props}>
-          <span />
-        </FormGroup>
-      )
-        .shallowRender()
-        .single(`.${className}`);
-    });
   });
 
   [

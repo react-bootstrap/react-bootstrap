@@ -2,93 +2,105 @@ import classNames from 'classnames';
 import React from 'react';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
-import { prefix } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, prefix, splitBsProps }
+  from './utils/bootstrapUtils';
 
-const Tooltip = React.createClass({
+const propTypes = {
+  /**
+   * An html id attribute, necessary for accessibility
+   * @type {string|number}
+   * @required
+   */
+  id: isRequiredForA11y(React.PropTypes.oneOfType([
+    React.PropTypes.string, React.PropTypes.number,
+  ])),
 
-  propTypes: {
-    /**
-     * An html id attribute, necessary for accessibility
-     * @type {string}
-     * @required
-     */
-    id: isRequiredForA11y(
-      React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number
-      ])
-    ),
+  /**
+   * Sets the direction the Tooltip is positioned towards.
+   */
+  placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
-    /**
-     * Sets the direction the Tooltip is positioned towards.
-     */
-    placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  /**
+   * The "top" position value for the Tooltip.
+   */
+  positionTop: React.PropTypes.oneOfType([
+    React.PropTypes.number, React.PropTypes.string,
+  ]),
+  /**
+   * The "left" position value for the Tooltip.
+   */
+  positionLeft: React.PropTypes.oneOfType([
+    React.PropTypes.number, React.PropTypes.string,
+  ]),
 
-    /**
-     * The "left" position value for the Tooltip.
-     */
-    positionLeft: React.PropTypes.number,
-    /**
-     * The "top" position value for the Tooltip.
-     */
-    positionTop: React.PropTypes.number,
-    /**
-     * The "left" position value for the Tooltip arrow.
-     */
-    arrowOffsetLeft: React.PropTypes.oneOfType([
-      React.PropTypes.number, React.PropTypes.string
-    ]),
-    /**
-     * The "top" position value for the Tooltip arrow.
-     */
-    arrowOffsetTop: React.PropTypes.oneOfType([
-      React.PropTypes.number, React.PropTypes.string
-    ]),
-    /**
-     * Title text
-     */
-    title: React.PropTypes.node
-  },
+  /**
+   * The "top" position value for the Tooltip arrow.
+   */
+  arrowOffsetTop: React.PropTypes.oneOfType([
+    React.PropTypes.number, React.PropTypes.string,
+  ]),
+  /**
+   * The "left" position value for the Tooltip arrow.
+   */
+  arrowOffsetLeft: React.PropTypes.oneOfType([
+    React.PropTypes.number, React.PropTypes.string,
+  ]),
+};
 
-  getDefaultProps() {
-    return {
-      bsClass: 'tooltip',
-      placement: 'right'
-    };
-  },
+const defaultProps = {
+  placement: 'right',
+};
 
+class Tooltip extends React.Component {
   render() {
+    const {
+      placement,
+      positionTop,
+      positionLeft,
+      arrowOffsetTop,
+      arrowOffsetLeft,
+      className,
+      style,
+      children,
+      ...props,
+    } = this.props;
+
+    const [bsProps, elementProps] = splitBsProps(props);
+
     const classes = {
-      [prefix(this.props)]: true,
-      [this.props.placement]: true
+      ...getClassSet(bsProps),
+      [placement]: true,
     };
 
-    const style = {
-      left: this.props.positionLeft,
-      top: this.props.positionTop,
-      ...this.props.style
+    const outerStyle = {
+      top: positionTop,
+      left: positionLeft,
+      ...style,
     };
 
     const arrowStyle = {
-      left: this.props.arrowOffsetLeft,
-      top: this.props.arrowOffsetTop
+      top: arrowOffsetTop,
+      left: arrowOffsetLeft,
     };
 
     return (
       <div
+        {...elementProps}
         role="tooltip"
-        {...this.props}
-        className={classNames(this.props.className, classes)}
-        style={style}
+        className={classNames(className, classes)}
+        style={outerStyle}
       >
-        <div className={prefix(this.props, 'arrow')} style={arrowStyle} />
+        <div className={prefix(bsProps, 'arrow')} style={arrowStyle} />
 
-        <div className={prefix(this.props, 'inner')}>
-          {this.props.children}
+        <div className={prefix(bsProps, 'inner')}>
+          {children}
         </div>
       </div>
     );
   }
-});
+}
 
-export default Tooltip;
+Tooltip.propTypes = propTypes;
+Tooltip.defaultProps = defaultProps;
+
+export default bsClass('tooltip', Tooltip);

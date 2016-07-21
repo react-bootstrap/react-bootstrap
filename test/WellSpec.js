@@ -25,7 +25,7 @@ describe('Well', () => {
 
   it('Should accept bsSize arguments', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Well bsSize='small'>
+      <Well bsSize="small">
         Content
       </Well>
     );

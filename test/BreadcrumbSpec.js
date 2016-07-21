@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Breadcrumb from '../src/Breadcrumb';
 
-describe('Breadcrumb', () => {
+describe('<Breadcrumb>', () => {
   it('Should apply id to the wrapper ol element', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Breadcrumb id="custom-id" />

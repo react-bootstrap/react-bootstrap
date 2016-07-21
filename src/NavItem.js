@@ -4,38 +4,54 @@ import React from 'react';
 import SafeAnchor from './SafeAnchor';
 import createChainedFunction from './utils/createChainedFunction';
 
-const NavItem = React.createClass({
+const propTypes = {
+  active: React.PropTypes.bool,
+  disabled: React.PropTypes.bool,
+  role: React.PropTypes.string,
+  href: React.PropTypes.string,
+  onClick: React.PropTypes.func,
+  onSelect: React.PropTypes.func,
+  eventKey: React.PropTypes.any,
+};
 
-  propTypes: {
-    active: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    role: React.PropTypes.string,
-    href: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    onSelect: React.PropTypes.func,
-    eventKey: React.PropTypes.any,
-  },
+const defaultProps = {
+  active: false,
+  disabled: false
+};
 
-  getDefaultProps() {
-    return {
-      active: false,
-      disabled: false
-    };
-  },
+class NavItem extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    if (this.props.onSelect) {
+      e.preventDefault();
+
+      if (!this.props.disabled) {
+        this.props.onSelect(this.props.eventKey, e);
+      }
+    }
+  }
 
   render() {
-    let {
-      active, disabled, role, href, onClick, className, style, ...props,
-    } = this.props;
+    const { active, disabled, onClick, className, style, ...props } =
+      this.props;
 
     delete props.onSelect;
     delete props.eventKey;
 
-    if (!role) {
-      if (href === '#') {
-        role = 'button';
+    // These are injected down by `<Nav>` for building `<SubNav>`s.
+    delete props.activeKey;
+    delete props.activeHref;
+
+    if (!props.role) {
+      if (props.href === '#') {
+        props.role = 'button';
       }
-    } else if (role === 'tab') {
+    } else if (props.role === 'tab') {
       props['aria-selected'] = active;
     }
 
@@ -48,23 +64,14 @@ const NavItem = React.createClass({
         <SafeAnchor
           {...props}
           disabled={disabled}
-          role={role}
-          href={href}
           onClick={createChainedFunction(onClick, this.handleClick)}
         />
       </li>
     );
-  },
-
-  handleClick(e) {
-    if (this.props.onSelect) {
-      e.preventDefault();
-
-      if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, e);
-      }
-    }
   }
-});
+}
+
+NavItem.propTypes = propTypes;
+NavItem.defaultProps = defaultProps;
 
 export default NavItem;

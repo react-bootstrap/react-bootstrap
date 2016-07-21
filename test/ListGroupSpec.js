@@ -5,13 +5,13 @@ import ReactDOM from 'react-dom';
 import ListGroup from '../src/ListGroup';
 import ListGroupItem from '../src/ListGroupItem';
 
-describe('ListGroup', () => {
+describe('<ListGroup>', () => {
 
   describe('All children are of type ListGroupItem', () => {
 
     it('Should output a "div" with the class "list-group"', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <ListGroup/>
+        <ListGroup />
       );
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
       assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group'));
@@ -187,7 +187,8 @@ describe('ListGroup', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup
           id="testItem"
-          componentClass='ul'>
+          componentClass="ul"
+        >
           <CustomComponent>Custom Child</CustomComponent>
           <CustomComponent>Custom Child</CustomComponent>
           <ListGroupItem listItem>RB Child</ListGroupItem>

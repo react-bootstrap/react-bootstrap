@@ -1,117 +1,111 @@
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 
+import Nav from '../../src/Nav';
+import SafeAnchor from '../../src/SafeAnchor';
 import ValidComponentChildren from '../../src/utils/ValidComponentChildren';
 import createChainedFunction from '../../src/utils/createChainedFunction';
-import SafeAnchor from '../../src/SafeAnchor';
 
-const SubNav = React.createClass({
-  propTypes: {
-    onSelect: React.PropTypes.func,
-    active: React.PropTypes.bool,
-    activeHref: React.PropTypes.string,
-    activeKey: React.PropTypes.any,
-    disabled: React.PropTypes.bool,
-    eventKey: React.PropTypes.any,
-    href: React.PropTypes.string,
-    title: React.PropTypes.string,
-    text: React.PropTypes.node,
-    target: React.PropTypes.string
-  },
+const propTypes = {
+  onSelect: React.PropTypes.func,
+  active: React.PropTypes.bool,
+  activeKey: React.PropTypes.any,
+  activeHref: React.PropTypes.string,
+  disabled: React.PropTypes.bool,
+  eventKey: React.PropTypes.any,
+  href: React.PropTypes.string,
+  text: React.PropTypes.node,
+};
 
-  getDefaultProps() {
-    return {
-      bsClass: 'nav',
-      active: false,
-      disabled: false
-    };
-  },
+const defaultProps = {
+  active: false,
+  disabled: false,
+};
+
+class SubNav extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleClick = this.handleClick.bind(this);
+  }
 
   handleClick(e) {
-    if (this.props.onSelect) {
+    const { onSelect, disabled, eventKey } = this.props;
+
+    if (onSelect) {
       e.preventDefault();
 
-      if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, e);
+      if (disabled) {
+        return;
       }
-    }
-  },
 
-  isActive({ props }) {
+      onSelect(eventKey, e);
+    }
+  }
+
+  isActive({ props }, activeKey, activeHref) {
     if (props.active) {
       return true;
     }
 
-    if (this.props.activeKey != null && this.props.activeKey === props.eventKey) {
+    if (activeKey != null && props.eventKey === activeKey) {
       return true;
     }
 
-    if (this.props.activeHref != null && this.props.activeHref === props.href) {
+    if (activeHref && props.href === activeHref) {
       return true;
     }
 
     if (props.children) {
-      return ValidComponentChildren.some(
-        props.children,
-        child => this.isActive(child)
-      );
+      return ValidComponentChildren.some(props.children, child => (
+        this.isActive(child, activeKey, activeHref)
+      ));
     }
 
-    return false;
-  },
-
-  getChildActive(child) {
-    if (child.props.active) {
-      return true;
-    }
-    if (this.props.activeKey != null) {
-      if (child.props.eventKey === this.props.activeKey) {
-        return true;
-      }
-    }
-    if (this.props.activeHref != null) {
-      if (child.props.href === this.props.activeHref) {
-        return true;
-      }
-    }
-
-    return child.props.active;
-  },
+    return props.active;
+  }
 
   render() {
+    const {
+      onSelect,
+      disabled,
+      activeKey,
+      activeHref,
+      text,
+      className,
+      style,
+      children,
+      ...props,
+    } = this.props;
+
+    delete props.active; // Accessed via this.isActive().
+    delete props.eventKey; // Accessed via this.isActive().
+
     const classes = {
-      active: this.isActive(this),
-      disabled: this.props.disabled
+      active: this.isActive(this, activeKey, activeHref),
+      disabled,
     };
 
     return (
-      <li {...this.props} className={classNames(this.props.className, classes)}>
-        <SafeAnchor
-          href={this.props.href}
-          title={this.props.title}
-          target={this.props.target}
-          onClick={this.handleClick}
-        >
-          {this.props.text}
+      <li className={classNames(className, classes)} style={style}>
+        <SafeAnchor {...props}>
+          {text}
         </SafeAnchor>
 
-        <ul className="nav">
-          {ValidComponentChildren.map(this.props.children, this.renderNavItem)}
-        </ul>
+        <Nav>
+          {ValidComponentChildren.map(children, child => (
+            cloneElement(child, {
+              active: this.isActive(child, activeKey, activeHref),
+              onSelect: createChainedFunction(child.props.onSelect, onSelect),
+            })
+          ))}
+        </Nav>
       </li>
     );
-  },
-
-  renderNavItem(child, index) {
-    return cloneElement(
-      child,
-      {
-        active: this.getChildActive(child),
-        onSelect: createChainedFunction(child.props.onSelect, this.props.onSelect),
-        key: child.key ? child.key : index
-      }
-    );
   }
-});
+}
+
+SubNav.propTypes = propTypes;
+SubNav.defaultProps = defaultProps;
 
 export default SubNav;

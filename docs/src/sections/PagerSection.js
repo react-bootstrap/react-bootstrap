@@ -9,7 +9,7 @@ export default function PagerSection() {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
-        <Anchor id="pager">Pager</Anchor> <small>Pager, PageItem</small>
+        <Anchor id="pager">Pager</Anchor> <small>Pager, Pager.Item</small>
       </h2>
 
       <p>Quick previous and next links.</p>
@@ -30,8 +30,8 @@ export default function PagerSection() {
       <h4><Anchor id="pager-props-pager">Pager</Anchor></h4>
       <PropTable component="Pager"/>
 
-      <h4><Anchor id="pager-props-pageitem">PageItem</Anchor></h4>
-      <PropTable component="PageItem"/>
+      <h4><Anchor id="pager-props-pager-item">Pager.Item</Anchor></h4>
+      <PropTable component="Pager.Item"/>
     </div>
   );
 }

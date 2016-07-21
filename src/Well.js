@@ -1,21 +1,26 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { Sizes } from './styleMaps';
-import { bsSizes, bsClass, getClassSet } from './utils/bootstrapUtils';
+import { bsClass, bsSizes, getClassSet, splitBsProps }
+  from './utils/bootstrapUtils';
+import { Size } from './utils/StyleConfig';
 
-@bsClass('well')
-@bsSizes([Sizes.LARGE, Sizes.SMALL])
 class Well extends React.Component {
   render() {
-    let classes = getClassSet(this.props);
+    const { className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
 
     return (
-      <div {...this.props} className={classNames(this.props.className, classes)}>
-        {this.props.children}
-      </div>
+      <div
+        {...elementProps}
+        className={classNames(className, classes)}
+      />
     );
   }
 }
 
-export default Well;
+export default bsClass('well',
+  bsSizes([Size.LARGE, Size.SMALL], Well)
+);

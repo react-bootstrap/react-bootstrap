@@ -4,9 +4,7 @@ import ReactDOM from 'react-dom';
 
 import Alert from '../src/Alert';
 
-import { shouldWarn } from './helpers';
-
-describe('Alert', () => {
+describe('<Alert>', () => {
   it('Should output a alert with message', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Alert>
@@ -47,19 +45,6 @@ describe('Alert', () => {
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(instance).children[0]);
   });
 
-  it('Should call onDismiss callback on dismissAfter time', (done) => {
-    shouldWarn('deprecated');
-
-    let doneOp = () => {
-      done();
-    };
-    ReactTestUtils.renderIntoDocument(
-      <Alert onDismiss={doneOp} dismissAfter={1}>
-        Message
-      </Alert>
-    );
-  });
-
   it('Should have a default bsStyle class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Alert>
@@ -71,7 +56,7 @@ describe('Alert', () => {
 
   it('Should have use bsStyle class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Alert bsStyle='danger'>
+      <Alert bsStyle="danger">
         Message
       </Alert>
     );

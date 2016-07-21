@@ -2,30 +2,33 @@ import classNames from 'classnames';
 import React from 'react';
 import elementType from 'react-prop-types/lib/elementType';
 
-const CarouselCaption = React.createClass({
-  displayName: 'Carousel.Caption',
-  propTypes: {
-    /**
-     * You can use a custom element for this component
-     */
-    componentClass: elementType
-  },
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
-  getDefaultProps() {
-    return {
-      componentClass: 'div'
-    };
-  },
+const propTypes = {
+  componentClass: elementType,
+};
 
+const defaultProps = {
+  componentClass: 'div',
+};
+
+class CarouselCaption extends React.Component {
   render() {
-    let ComponentClass = this.props.componentClass;
+    const { componentClass: Component, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
 
     return (
-      <ComponentClass {...this.props} className={classNames(this.props.className, 'carousel-caption')}>
-        {this.props.children}
-      </ComponentClass>
+      <Component
+        {...elementProps}
+        className={classNames(className, classes)}
+      />
     );
   }
-});
+}
 
-export default CarouselCaption;
+CarouselCaption.propTypes = propTypes;
+CarouselCaption.defaultProps = defaultProps;
+
+export default bsClass('carousel-caption', CarouselCaption);

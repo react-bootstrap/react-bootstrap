@@ -1,6 +1,6 @@
-import React from 'react';
+// TODO: This module should be ElementChildren, and should use named exports.
 
-// FIXME: This should really be ValidElementChildren.
+import React from 'react';
 
 /**
  * Iterates through children that are typically specified as `props.children`,
@@ -117,6 +117,26 @@ function find(children, func, context) {
   return result;
 }
 
+function every(children, func, context) {
+  let index = 0;
+  let result = true;
+
+  React.Children.forEach(children, child => {
+    if (!result) {
+      return;
+    }
+    if (!React.isValidElement(child)) {
+      return;
+    }
+
+    if (!func.call(context, child, index++)) {
+      result = false;
+    }
+  });
+
+  return result;
+}
+
 function some(children, func, context) {
   let index = 0;
   let result = false;
@@ -137,11 +157,27 @@ function some(children, func, context) {
   return result;
 }
 
+function toArray(children) {
+  const result = [];
+
+  React.Children.forEach(children, child => {
+    if (!React.isValidElement(child)) {
+      return;
+    }
+
+    result.push(child);
+  });
+
+  return result;
+}
+
 export default {
   map,
   forEach,
   count,
   find,
   filter,
+  every,
   some,
+  toArray,
 };

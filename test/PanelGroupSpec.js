@@ -4,9 +4,9 @@ import ReactTestUtils from 'react/lib/ReactTestUtils';
 import Panel from '../src/Panel';
 import PanelGroup from '../src/PanelGroup';
 
-import {getOne} from './helpers';
+import { getOne } from './helpers';
 
-describe('PanelGroup', () => {
+describe('<PanelGroup>', () => {
   it('Should pass bsStyle to Panels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup bsStyle="default">
@@ -95,9 +95,9 @@ describe('PanelGroup', () => {
 
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
-        <PanelGroup defaultActiveKey='1' accordion>
-          <Panel header='Collapsible Group Item #1' eventKey='1' id='Panel1ID'>Panel 1</Panel>
-          <Panel header='Collapsible Group Item #2' eventKey='2' id='Panel2ID'>Panel 2</Panel>
+        <PanelGroup defaultActiveKey="1" accordion>
+          <Panel header="Collapsible Group Item #1" eventKey="1" id="Panel1ID">Panel 1</Panel>
+          <Panel header="Collapsible Group Item #2" eventKey="2" id="Panel2ID">Panel 2</Panel>
         </PanelGroup>
       );
       let accordion = ReactTestUtils.findRenderedComponentWithType(instance, PanelGroup);
