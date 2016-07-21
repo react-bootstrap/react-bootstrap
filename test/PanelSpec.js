@@ -13,16 +13,17 @@ describe('<Panel>', () => {
       </Panel>
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpanel\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpanel-default\b/));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-body'));
   });
 
   it('Should have bootstrap style class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Panel bsStyle="default">
+      <Panel bsStyle="primary">
         Panel content
       </Panel>
     );
-    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpanel-default\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpanel-primary\b/));
   });
 
   it('Should honour additional classes passed in, adding not overriding', () => {

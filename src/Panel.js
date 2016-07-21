@@ -230,5 +230,9 @@ Panel.propTypes = propTypes;
 Panel.defaultProps = defaultProps;
 
 export default bsClass('panel',
-  bsStyles([...Object.values(State), Style.DEFAULT, Style.PRIMARY], Panel)
+  bsStyles(
+    [...Object.values(State), Style.DEFAULT, Style.PRIMARY],
+    Style.DEFAULT,
+    Panel
+  )
 );
