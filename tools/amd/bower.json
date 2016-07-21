@@ -8,7 +8,7 @@
     "react-bootstrap.js"
   ],
   "keywords": [
-    <%= _.map(pkg.keywords, function(keyword) { return '"' + keyword + '"' }).join(',\n    ')%>
+    <%= pkg.keywords.map(keyword => `"${keyword}"`).join(',\n    ') %>
   ],
   "ignore": [
     "**/.*"
