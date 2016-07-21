@@ -1,22 +1,38 @@
+function FieldGroup({ id, label, help, ...props }) {
+  return (
+    <FormGroup controlId={id}>
+      <ControlLabel>{label}</ControlLabel>
+      <FormControl {...props} />
+      {help && <HelpBlock>{help}</HelpBlock>}
+    </FormGroup>
+  );
+}
+
 const formInstance = (
   <form>
-    <FormGroup controlId="formControlsText">
-      <ControlLabel>Text</ControlLabel>
-      <FormControl type="text" placeholder="Enter text" />
-    </FormGroup>
-    <FormGroup controlId="formControlsEmail">
-      <ControlLabel>Email address</ControlLabel>
-      <FormControl type="email" placeholder="Enter email" />
-    </FormGroup>
-    <FormGroup controlId="formControlsPassword">
-      <ControlLabel>Password</ControlLabel>
-      <FormControl type="password" />
-    </FormGroup>
-    <FormGroup controlId="formControlsFile">
-      <ControlLabel>File</ControlLabel>
-      <FormControl type="file" />
-      <HelpBlock>Example block-level help text here.</HelpBlock>
-    </FormGroup>
+    <FieldGroup
+      id="formControlsText"
+      type="text"
+      label="Text"
+      placeholder="Enter text"
+    />
+    <FieldGroup
+      id="formControlsEmail"
+      type="email"
+      label="Email address"
+      placeholder="Enter email"
+    />
+    <FieldGroup
+      id="formControlsPassword"
+      label="Password"
+      type="password"
+    />
+    <FieldGroup
+      id="formControlsFile"
+      type="file"
+      label="File"
+      help="Example block-level help text here."
+    />
 
     <Checkbox checked readOnly>
       Checkbox

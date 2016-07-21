@@ -15,11 +15,15 @@ export default function FormSection() {
       <p>
         The <code>{'<FormControl>'}</code> component renders a form control with Bootstrap styling. The <code>{'<FormGroup>'}</code> component wraps a form control with proper spacing, along with support for a label, help text, and validation state. To ensure accessibility, set <code>controlId</code> on <code>{'<FormGroup>'}</code>, and use <code>{'<ControlLabel>'}</code> for the label.
       </p>
+
+      <ReactPlayground codeText={Samples.FormBasic} />
+
       <p>
         The <code>{'<FormControl>'}</code> component directly renders the <code>{'<input>'}</code> or other specified component. If you need to access the value of an uncontrolled <code>{'<FormControl>'}</code>, attach a <code>ref</code> to it as you would with an uncontrolled input, then call <code>ReactDOM.findDOMNode(ref)</code> to get the DOM node. You can then interact with that node as you would with any other uncontrolled input.
       </p>
-
-      <ReactPlayground codeText={Samples.FormBasic} />
+      <p>
+        If your application contains a large number of form groups, we recommend building a higher-level component encapsulating a complete field group that renders the label, the control, and any other necessary components. We don't provide this out-of-the-box, because the composition of those field groups is too specific to an individual application to admit a good one-size-fits-all solution.
+      </p>
 
       <h3><Anchor id="forms-props">Props</Anchor></h3>
 

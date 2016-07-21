@@ -12,7 +12,7 @@ export default function FormControlsSection() {
         <Anchor id="forms-controls">Supported controls</Anchor> <small>Checkbox, Radio, FormControl.Static, HelpBlock</small>
       </h2>
 
-      <p>Examples of standard form controls supported in an example form layout. Use <code>{'<FormControl>'}</code> for <code>{'<input>'}</code>, <code>{'<textarea>'}</code>, and <code>{'<select>'}</code>. Use <code>{'<Checkbox>'}</code> and <code>{'<Radio>'}</code> for checkboxes and radios respectively, optionally with <code>inline</code> to render multiple on the same line. Use <code>{'<FormControl.Static>'}</code> for static text.</p>
+      <p>Examples of standard form controls supported in an example form layout, using a custom <code>{'<FieldGroup>'}</code> component. Use <code>{'<FormControl>'}</code> for <code>{'<input>'}</code>, <code>{'<textarea>'}</code>, and <code>{'<select>'}</code>. Use <code>{'<Checkbox>'}</code> and <code>{'<Radio>'}</code> for checkboxes and radios respectively, optionally with <code>inline</code> to render multiple on the same line. Use <code>{'<FormControl.Static>'}</code> for static text.</p>
       <ReactPlayground codeText={Samples.FormControls} />
 
       <h3><Anchor id="forms-controls-props">Props</Anchor></h3>
