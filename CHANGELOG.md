@@ -1,11 +1,11 @@
-## [HEAD] \(v0.30.0\)
-> _Unreleased_
+## [v0.30.0-rc.1]
+> 2016-07-21
 
 - **Breaking:** Remove `linkId` prop from `<Breadcrumb.Item>`, for consistency with other wrapped link components ([#2011])
 - **Breaking:** Remove deprecated functionality from v0.29.x ([#2017])
 - **Breaking:** Remove redundant `caption` prop from `<Carousel.Item>`, as this functionality is available from `<Carousel.Caption>` ([#2018])
 - **Breaking:** Remove pointless `navItem` and `navDropdown` props from `<Button>` ([#2026])
-- **Feature/Deprecation:** Rename `<PageItem>` to <Pager.Item>` for consistency ([#1976])
+- **Feature/Deprecation:** Rename `<PageItem>` to `<Pager.Item>` for consistency ([#1976])
 - **Feature:** Add `ValidComponentChildren.toArray` ([#2016])
 - **Feature:** Add `bsClass` support consistently throughout all components ([#2026], [#2036])
 - **Feature:** Add `splitBsProps` and `splitBsPropsAndOmit` helpers to `bootstrapUtils` to remove Bootstrap styling props ([#2052])
@@ -25,7 +25,7 @@
 - **Refactor:** Clean up context usage on navbar components ([#2036])
 - **Refactor:** Sync up context usage on modals to other components ([#2044])
 
-[HEAD]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.5...master
+[v0.30.0-rc.1]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.5...v0.30.0-rc.1
 [#1957]: https://github.com/react-bootstrap/react-bootstrap/pull/1957
 [#1976]: https://github.com/react-bootstrap/react-bootstrap/pull/1976
 [#2011]: https://github.com/react-bootstrap/react-bootstrap/pull/2011
