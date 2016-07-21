@@ -29,8 +29,7 @@ describe('<Modal>', () => {
       </Modal>
     , mountPoint);
 
-    assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance._modal, 'strong'));
+    assert.ok(instance._modal.getDialogElement().querySelector('strong'));
   });
 
   it('Should close the modal when the modal dialog is clicked', (done) => {
@@ -43,7 +42,7 @@ describe('<Modal>', () => {
     , mountPoint);
 
 
-    const dialog = ReactDOM.findDOMNode(instance._modal);
+    const dialog = instance._modal.getDialogElement();
 
     ReactTestUtils.Simulate.click(dialog);
   });
@@ -56,7 +55,7 @@ describe('<Modal>', () => {
       </Modal>
     , mountPoint);
 
-    const dialog = ReactDOM.findDOMNode(instance._modal);
+    const dialog = instance._modal.getDialogElement();
 
     ReactTestUtils.Simulate.click(dialog);
 
@@ -73,7 +72,7 @@ describe('<Modal>', () => {
       </Modal>
     , mountPoint);
 
-    const button = ReactDOM.findDOMNode(instance._modal)
+    const button = instance._modal.getDialogElement()
         .getElementsByClassName('close')[0];
 
     ReactTestUtils.Simulate.click(button);
@@ -87,7 +86,7 @@ describe('<Modal>', () => {
       </Modal>
     , mountPoint);
 
-    const dialog = ReactDOM.findDOMNode(instance._modal);
+    const dialog = instance._modal.getDialogElement();
 
     assert.ok(dialog.className.match(/\bmymodal\b/));
   });
@@ -100,7 +99,7 @@ describe('<Modal>', () => {
       </Modal>
     , mountPoint);
 
-    const modal = ReactDOM.findDOMNode(instance._modal);
+    const modal = instance._modal.getDialogElement();
 
     assert.ok(modal.className.match(/\bmymodal\b/));
     assert.ok(modal.children[0].className.match(/\bmymodal-dialog\b/));
@@ -118,7 +117,7 @@ describe('<Modal>', () => {
       </Modal>
     , mountPoint);
 
-    const dialog = ReactDOM.findDOMNode(instance._modal).getElementsByClassName('modal-dialog')[0];
+    const dialog = instance._modal.getDialogElement().getElementsByClassName('modal-dialog')[0];
 
     assert.ok(dialog.className.match(/\bmodal-sm\b/));
 
@@ -132,7 +131,7 @@ describe('<Modal>', () => {
       </Modal>
     , mountPoint);
 
-    const dialog = ReactDOM.findDOMNode(instance._modal);
+    const dialog = instance._modal.getDialogElement();
 
     assert.ok(dialog.style.top === '1000px');
 
@@ -146,7 +145,7 @@ describe('<Modal>', () => {
       </Modal>
     , mountPoint);
 
-    const dialog = ReactTestUtils.findRenderedDOMComponentWithClass(instance._modal, 'modal-dialog');
+    const dialog = instance._modal.getDialogElement().querySelector('.modal-dialog');
 
     assert.ok(dialog.className.match(/\btestCss\b/));
   });
@@ -154,8 +153,8 @@ describe('<Modal>', () => {
   it('Should use dialogComponentClass', () => {
     const noOp = () => {};
 
-    class CustomDialog extends React.Component {
-      render() { return <div tabIndex="-1" />; }
+    function CustomDialog() {
+      return <div className="custom-dialog" tabIndex="-1" />;
     }
 
     const instance = render(
@@ -164,7 +163,7 @@ describe('<Modal>', () => {
       </Modal>
     , mountPoint);
 
-    assert.ok(instance._modal instanceof CustomDialog);
+    assert.equal(instance._modal.getDialogElement().className, 'custom-dialog');
   });
 
   it('Should pass transition callbacks to Transition', (done) => {

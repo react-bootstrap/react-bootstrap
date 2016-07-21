@@ -160,10 +160,6 @@ class Collapse extends React.Component {
   }
 
   // for testing
-  _getTransitionInstance() {
-    return this.refs.transition;
-  }
-
   _getScrollDimensionValue(elem, dimension) {
     return `${elem[`scroll${capitalize(dimension)}`]}px`;
   }
@@ -193,7 +189,6 @@ class Collapse extends React.Component {
 
     return (
       <Transition
-        ref="transition"
         {...props}
         aria-expanded={props.role ? props.in : null}
         className={classNames(className, classes)}
