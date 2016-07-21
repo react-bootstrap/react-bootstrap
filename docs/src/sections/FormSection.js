@@ -13,12 +13,10 @@ export default function FormSection() {
       </h1>
 
       <p>
-        The <code>{'<FormControl>'}</code> component renders a form control with Bootstrap styling.
-        The <code>{'<FormGroup>'}</code> component wraps a form control with proper spacing, along with support for a label, help text, and validation state. To ensure accessibility, set <code>controlId</code> on <code>{'<FormGroup>'}</code>, and use <code>{'<ControlLabel>'}</code> for the label.
+        The <code>{'<FormControl>'}</code> component renders a form control with Bootstrap styling. The <code>{'<FormGroup>'}</code> component wraps a form control with proper spacing, along with support for a label, help text, and validation state. To ensure accessibility, set <code>controlId</code> on <code>{'<FormGroup>'}</code>, and use <code>{'<ControlLabel>'}</code> for the label.
       </p>
       <p>
-        If you need the value of a <code>{'<FormControl>'}</code>, attach a <code>ref</code> to it.
-        Then call <code>getDOMNode</code> or <code>findDOMNode</code> to retrieve the <code>{'<FormControl>'}</code>'s node.
+        The <code>{'<FormControl>'}</code> component directly renders the <code>{'<input>'}</code> or other specified component. If you need to access the value of an uncontrolled <code>{'<FormControl>'}</code>, attach a <code>ref</code> to it as you would with an uncontrolled input, then call <code>ReactDOM.findDOMNode(ref)</code> to get the DOM node. You can then interact with that node as you would with any other uncontrolled input.
       </p>
 
       <ReactPlayground codeText={Samples.FormBasic} />
