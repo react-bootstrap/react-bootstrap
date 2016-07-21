@@ -1,3 +1,14 @@
+## [v0.30.0-rc.2]
+> 2016-07-21
+
+- **Bugfix:** Stop assigning refs unnecessarily ([#2078])
+- **Bugfix:** Restore `bsStyle` of `default` on `<Panel>` ([#2079])
+
+[v0.30.0-rc.2]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.0-rc.1...v0.30.0-rc.2
+[#2078]: https://github.com/react-bootstrap/react-bootstrap/pull/2078
+[#2079]: https://github.com/react-bootstrap/react-bootstrap/pull/2079
+
+
 ## [v0.30.0-rc.1]
 > 2016-07-21
 
