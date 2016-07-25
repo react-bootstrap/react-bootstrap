@@ -1,24 +1,13 @@
-## [v0.30.0-rc.2]
-> 2016-07-21
+## [v0.30.0]
+> 2016-07-25
 
-- **Bugfix:** Stop assigning refs unnecessarily ([#2078])
-- **Bugfix:** Restore `bsStyle` of `default` on `<Panel>` ([#2079])
-
-[v0.30.0-rc.2]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.0-rc.1...v0.30.0-rc.2
-[#2078]: https://github.com/react-bootstrap/react-bootstrap/pull/2078
-[#2079]: https://github.com/react-bootstrap/react-bootstrap/pull/2079
-
-
-## [v0.30.0-rc.1]
-> 2016-07-21
-
-- **Breaking:** Remove `linkId` prop from `<Breadcrumb.Item>`, for consistency with other wrapped link components ([#2011])
+- **Breaking:** Remove `linkId` prop from `<Breadcrumb.Item>` for consistency with other wrapped link components ([#2011])
 - **Breaking:** Remove deprecated functionality from v0.29.x ([#2017])
 - **Breaking:** Remove redundant `caption` prop from `<Carousel.Item>`, as this functionality is available from `<Carousel.Caption>` ([#2018])
 - **Breaking:** Remove pointless `navItem` and `navDropdown` props from `<Button>` ([#2026])
 - **Feature/Deprecation:** Rename `<PageItem>` to `<Pager.Item>` for consistency ([#1976])
 - **Feature:** Add `ValidComponentChildren.toArray` ([#2016])
-- **Feature:** Add `bsClass` support consistently throughout all components ([#2026], [#2036])
+- **Feature:** Add `bsClass` support consistently throughout all components ([#2026], [#2036], [#2079])
 - **Feature:** Add `splitBsProps` and `splitBsPropsAndOmit` helpers to `bootstrapUtils` to remove Bootstrap styling props ([#2052])
 - **Feature:** Improve IE8-compatible self collapse support on `<Badge>` and add it to `<Label>` ([#2026])
 - **Bugfix:** Support `style` on `<Modal>` ([#1957])
@@ -33,10 +22,11 @@
 - **Bugfix:** Use consistent `bsClass` handling on dropdown components ([#2036])
 - **Bugfix:** Remove extraneous `.collapsed` on collapsible panel title anchor ([#2036])
 - **Bugfix:** Improve edge case handling in tab animation state management and styling ([#2036])
+- **Bugfix:** Stop assigning refs unnecessarily ([#2078])
 - **Refactor:** Clean up context usage on navbar components ([#2036])
 - **Refactor:** Sync up context usage on modals to other components ([#2044])
 
-[v0.30.0-rc.1]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.5...v0.30.0-rc.1
+[v0.30.0]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.5...v0.30.0
 [#1957]: https://github.com/react-bootstrap/react-bootstrap/pull/1957
 [#1976]: https://github.com/react-bootstrap/react-bootstrap/pull/1976
 [#2011]: https://github.com/react-bootstrap/react-bootstrap/pull/2011
@@ -49,6 +39,8 @@
 [#2036]: https://github.com/react-bootstrap/react-bootstrap/pull/2036
 [#2044]: https://github.com/react-bootstrap/react-bootstrap/pull/2044
 [#2052]: https://github.com/react-bootstrap/react-bootstrap/pull/2052
+[#2078]: https://github.com/react-bootstrap/react-bootstrap/pull/2078
+[#2079]: https://github.com/react-bootstrap/react-bootstrap/pull/2079
 
 
 ## [v0.29.5]
