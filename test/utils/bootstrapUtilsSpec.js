@@ -1,61 +1,50 @@
 import React from 'react';
 
-import {
-  bsStyles, bsSizes, getClassSet, prefix, _curry,
-} from '../../src/utils/bootstrapUtils';
+import { bsStyles, bsSizes, getClassSet, prefix, _curry }
+  from '../../src/utils/bootstrapUtils';
 
 import { render, shouldWarn } from '../helpers';
 
-describe('bootstrapUtils', ()=> {
+describe('bootstrapUtils', () => {
 
-  function validatePropType(propTypes, prop, value, match) {
-    let result = propTypes[prop]({ [prop]: value }, prop, 'Component');
-
-    if (match) {
-      expect(result.message).to.match(match);
-    } else {
-      expect(result).to.not.exist;
-    }
-  }
-
-  it('should prefix with bsClass', ()=> {
-    expect(prefix({ bsClass: 'yolo'}, 'pie')).to.equal('yolo-pie');
+  it('should prefix with bsClass', () => {
+    expect(prefix({ bsClass: 'yolo' }, 'pie')).to.equal('yolo-pie');
   });
 
-  it('should return bsClass when there is no suffix', ()=> {
-    expect(prefix({ bsClass: 'yolo'})).to.equal('yolo');
-    expect(prefix({ bsClass: 'yolo'}, '')).to.equal('yolo');
-    expect(prefix({ bsClass: 'yolo'}, null)).to.equal('yolo');
+  it('should return bsClass when there is no suffix', () => {
+    expect(prefix({ bsClass: 'yolo' })).to.equal('yolo');
+    expect(prefix({ bsClass: 'yolo' }, '')).to.equal('yolo');
+    expect(prefix({ bsClass: 'yolo' }, null)).to.equal('yolo');
   });
 
-  it('returns a classSet of bsClass', ()=> {
-    expect(getClassSet({ bsClass: 'btn' })).to.eql({'btn': true });
+  it('returns a classSet of bsClass', () => {
+    expect(getClassSet({ bsClass: 'btn' })).to.eql({ btn: true });
   });
 
-  it('returns a classSet of bsClass and style', ()=> {
+  it('returns a classSet of bsClass and style', () => {
     expect(
       getClassSet({ bsClass: 'btn', bsStyle: 'primary' })
     )
-    .to.eql({'btn': true, 'btn-primary': true });
+    .to.eql({ btn: true, 'btn-primary': true });
   });
 
-  it('returns a classSet of bsClass and size', ()=> {
+  it('returns a classSet of bsClass and size', () => {
     expect(getClassSet({ bsClass: 'btn', bsSize: 'large' }))
-        .to.eql({'btn': true, 'btn-lg': true });
+        .to.eql({ btn: true, 'btn-lg': true });
 
     expect(getClassSet({ bsClass: 'btn', bsSize: 'lg' }))
-        .to.eql({'btn': true, 'btn-lg': true });
+        .to.eql({ btn: true, 'btn-lg': true });
   });
 
-  it('returns a classSet of bsClass, style and size', ()=> {
+  it('returns a classSet of bsClass, style and size', () => {
     expect(getClassSet({ bsClass: 'btn', bsSize: 'lg', bsStyle: 'primary' }))
-        .to.eql({'btn': true, 'btn-lg': true, 'btn-primary': true });
+        .to.eql({ btn: true, 'btn-lg': true, 'btn-primary': true });
   });
 
-  describe('decorators', ()=> {
-    it('should apply immediately if a component is supplied', ()=> {
-      let spy = sinon.spy();
-      let component = function noop() {};
+  describe('decorators', () => {
+    it('should apply immediately if a component is supplied', () => {
+      const spy = sinon.spy();
+      const component = function noop() {};
 
       _curry(spy)(true, 'hi', component);
 
@@ -63,10 +52,10 @@ describe('bootstrapUtils', ()=> {
       expect(spy).to.have.been.calledWith(true, 'hi', component);
     });
 
-    it('should curry the method as a decorator', ()=> {
-      let spy = sinon.spy();
-      let component = function noop() {};
-      let decorator = _curry(spy)(true, 'hi');
+    it('should curry the method as a decorator', () => {
+      const spy = sinon.spy();
+      const component = function noop() {};
+      const decorator = _curry(spy)(true, 'hi');
 
       expect(spy).to.have.not.been.calledOnce;
 
@@ -77,89 +66,99 @@ describe('bootstrapUtils', ()=> {
     });
   });
 
-  describe('bsStyles', ()=> {
+  describe('bsStyles', () => {
 
-    it('should add style to allowed propTypes', ()=> {
-      let Component = {};
-
+    it('should add style to allowed propTypes', () => {
+      const Component = () => null;
       bsStyles(['minimal', 'boss', 'plaid'])(Component);
 
       expect(Component.propTypes).to.exist;
 
-      validatePropType(Component.propTypes, 'bsStyle', 'plaid');
+      React.createElement(Component, { bsStyle: 'plaid' });
 
-      validatePropType(Component.propTypes, 'bsStyle', 'not-plaid',
-        /expected one of \["minimal","boss","plaid"\]/);
+      shouldWarn('expected one of ["minimal","boss","plaid"]');
+      React.createElement(Component, { bsStyle: 'not-plaid' });
     });
 
-    it('should not override other propTypes', ()=> {
-      let Component = { propTypes: {other() {}}};
-
+    it('should not override other propTypes', () => {
+      const propTypes = { other() {} };
+      const Component = () => null;
+      Component.propTypes = propTypes;
       bsStyles(['minimal', 'boss', 'plaid'])(Component);
 
       expect(Component.propTypes).to.exist;
       expect(Component.propTypes.other).to.exist;
     });
 
-    it('should set a default if provided', ()=> {
-      let Component = { propTypes: {other() {}}};
-
+    it('should set a default if provided', () => {
+      const propTypes = { other() {} };
+      const Component = () => null;
+      Component.propTypes = propTypes;
       bsStyles(['minimal', 'boss', 'plaid'], 'plaid')(Component);
 
       expect(Component.defaultProps).to.exist;
       expect(Component.defaultProps.bsStyle).to.equal('plaid');
     });
 
-    it('should work with es6 classes', ()=> {
-      shouldWarn('expected one of ["minimal","boss","plaid"]');
+    it('should work with ES classes', () => {
+      shouldWarn('expected one of ["minimal","tweed","plaid"]');
 
-      @bsStyles(['minimal', 'boss', 'plaid'], 'plaid')
+      @bsStyles(['minimal', 'tweed', 'plaid'], 'plaid')
       class Component extends React.Component {
-        render() { return <span/>; }
+        render() { return <span />; }
       }
 
-      let instance = render(<Component />);
+      const instance = render(<Component />);
 
       expect(instance.props.bsStyle).to.equal('plaid');
 
-      render(<Component bsStyle="not-plaid"/>);
+      render(<Component bsStyle="not-plaid" />);
     });
 
-    it('should work with createClass', ()=> {
+    it('should work with createClass', () => {
       shouldWarn('expected one of ["minimal","boss","plaid"]');
 
-      let Component = bsStyles(['minimal', 'boss', 'plaid'], 'plaid')(
+      const Component = bsStyles(['minimal', 'boss', 'plaid'], 'plaid')(
         React.createClass({
-          render() { return <span/>; }
+          render() { return <span />; }
         })
       );
 
-      let instance = render(<Component />);
+      const instance = render(<Component />);
 
       expect(instance.props.bsStyle).to.equal('plaid');
 
-      render(<Component bsStyle="not-plaid"/>);
+      render(<Component bsStyle="not-plaid" />);
+    });
+
+    it('should work with functional components', () => {
+      shouldWarn('expected one of ["minimal","boss","tartan"]');
+
+      const Component = bsStyles(['minimal', 'boss', 'tartan'], 'tartan')(
+        () => <span />
+      );
+
+      render(<Component bsStyle="not-plaid" />);
     });
   });
 
-  describe('bsSizes', ()=> {
+  describe('bsSizes', () => {
 
-    it('should add size to allowed propTypes', ()=> {
-      let Component = {};
-
+    it('should add size to allowed propTypes', () => {
+      const Component = () => null;
       bsSizes(['large', 'small'])(Component);
 
       expect(Component.propTypes).to.exist;
 
-      validatePropType(Component.propTypes, 'bsSize', 'small');
-      validatePropType(Component.propTypes, 'bsSize', 'sm');
+      React.createElement(Component, { bsSize: 'small' });
+      React.createElement(Component, { bsSize: 'sm' });
 
-      validatePropType(Component.propTypes, 'bsSize', 'superSmall',
-        /expected one of \["lg","large","sm","small"\]/);
+      shouldWarn('expected one of ["lg","large","sm","small"]');
+      React.createElement(Component, { bsSize: 'superSmall' });
     });
 
-    it('should not override other propTypes', ()=> {
-      let Component = { propTypes: {other() {}}};
+    it('should not override other propTypes', () => {
+      const Component = { propTypes: { other() {} } };
 
       bsSizes(['smallish', 'micro', 'planet'])(Component);
 
@@ -167,8 +166,8 @@ describe('bootstrapUtils', ()=> {
       expect(Component.propTypes.other).to.exist;
     });
 
-    it('should set a default if provided', ()=> {
-      let Component = { propTypes: {other() {}}};
+    it('should set a default if provided', () => {
+      const Component = { propTypes: { other() {} } };
 
       bsSizes(['smallish', 'micro', 'planet'], 'smallish')(Component);
 
@@ -176,35 +175,35 @@ describe('bootstrapUtils', ()=> {
       expect(Component.defaultProps.bsSize).to.equal('smallish');
     });
 
-    it('should work with es6 classes', ()=> {
+    it('should work with es6 classes', () => {
       shouldWarn('expected one of ["smallish","micro","planet"]');
 
       @bsSizes(['smallish', 'micro', 'planet'], 'smallish')
       class Component extends React.Component {
-        render() { return <span/>; }
+        render() { return <span />; }
       }
 
-      let instance = render(<Component />);
+      const instance = render(<Component />);
 
       expect(instance.props.bsSize).to.equal('smallish');
 
-      render(<Component bsSize="not-smallish"/>);
+      render(<Component bsSize="not-smallish" />);
     });
 
-    it('should work with createClass', ()=> {
+    it('should work with createClass', () => {
       shouldWarn('expected one of ["smallish","micro","planet"]');
 
-      let Component = bsSizes(['smallish', 'micro', 'planet'], 'smallish')(
+      const Component = bsSizes(['smallish', 'micro', 'planet'], 'smallish')(
         React.createClass({
-          render() { return <span/>; }
+          render() { return <span />; }
         })
       );
 
-      let instance = render(<Component />);
+      const instance = render(<Component />);
 
       expect(instance.props.bsSize).to.equal('smallish');
 
-      render(<Component bsSize="not-smallish"/>);
+      render(<Component bsSize="not-smallish" />);
     });
   });
 });
