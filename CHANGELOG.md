@@ -1,3 +1,14 @@
+## [v0.30.1]
+> 2016-08-01
+
+- **Bugfix:** Don't trigger PropTypes warning ([#2095])
+- **Bugfix:** Fix regression with `rootClose` on `<OverlayTrigger>` ([#2099])
+
+[v0.30.1]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.0...v0.30.1
+[#2095]: https://github.com/react-bootstrap/react-bootstrap/pull/2095
+[#2099]: https://github.com/react-bootstrap/react-bootstrap/pull/2099
+
+
 ## [v0.30.0]
 > 2016-07-25
 
