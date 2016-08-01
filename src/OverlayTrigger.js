@@ -106,6 +106,7 @@ class OverlayTrigger extends React.Component {
     this.handleToggle = this.handleToggle.bind(this);
     this.handleDelayedShow = this.handleDelayedShow.bind(this);
     this.handleDelayedHide = this.handleDelayedHide.bind(this);
+    this.handleHide = this.handleHide.bind(this);
 
     this.handleMouseOver = e => (
       this.handleMouseOverOut(this.handleDelayedShow, e)
@@ -209,6 +210,10 @@ class OverlayTrigger extends React.Component {
     }
   }
 
+  handleHide() {
+    this.hide();
+  }
+
   show() {
     this.setState({ show: true });
   }
@@ -222,7 +227,7 @@ class OverlayTrigger extends React.Component {
       <Overlay
         {...props}
         show={this.state.show}
-        onHide={this.handleToggle}
+        onHide={this.handleHide}
         target={this}
       >
         {overlay}

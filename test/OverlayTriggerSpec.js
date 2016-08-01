@@ -226,11 +226,48 @@ describe('<OverlayTrigger>', () => {
         });
 
         it('Should have correct show state', () => {
+          // Need to click this way for it to propagate to document element.
           document.documentElement.click();
 
-          // Need to click this way for it to propagate to document element.
-          instance.state.show.should.equal(testCase.shownAfterClick);
+          expect(instance.state.show).to.equal(testCase.shownAfterClick);
         });
+      });
+    });
+
+    describe('clicking on trigger to hide', () => {
+      let mountNode;
+
+      beforeEach(() => {
+        mountNode = document.createElement('div');
+        document.body.appendChild(mountNode);
+      });
+
+      afterEach(() => {
+        ReactDOM.unmountComponentAtNode(mountNode);
+        document.body.removeChild(mountNode);
+      });
+
+      it('should hide after clicking on trigger', () => {
+        const instance = ReactDOM.render(
+          <OverlayTrigger
+            overlay={<Div>test</Div>}
+            trigger="click"
+            rootClose
+          >
+            <button>button</button>
+          </OverlayTrigger>,
+          mountNode
+        );
+
+        const node = ReactDOM.findDOMNode(instance);
+        expect(instance.state.show).to.be.false;
+
+        node.click();
+        expect(instance.state.show).to.be.true;
+
+        // Need to click this way for it to propagate to document element.
+        node.click();
+        expect(instance.state.show).to.be.false;
       });
     });
 

@@ -122,7 +122,7 @@ describe('<Dropdown.Menu>', () => {
         </div>, focusableContainer);
 
       const button = getOne(instance.getElementsByTagName('button'));
-      button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+      button.click();
 
       requestClose.should.have.been.calledOnce;
       requestClose.getCall(0).args.length.should.equal(0);
