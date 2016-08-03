@@ -13,3 +13,4 @@ tmp-bower-repo/
 tmp-docs-repo/
 .babel-cache/
 coverage/
+es6/

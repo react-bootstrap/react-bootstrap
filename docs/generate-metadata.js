@@ -112,7 +112,7 @@ export default function generate(destination, options = { mixins: true, inferCom
   return globp(__dirname + '/../src/**/*.js') // eslint-disable-line no-path-concat
     .then( files => {
       let results = files.map(
-        filename => fsp.readFile(filename).then(content => metadata(content, options)));
+        filename => fsp.readFile(filename, 'utf-8').then(content => metadata(content, options)));
 
       return Promise.all(results)
         .then( data => {

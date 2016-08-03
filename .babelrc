@@ -1,6 +1,8 @@
 {
-  "stage": 1,
-  "optional": ["runtime"],
-  "loose": ["all"],
-  "plugins": ["dev-expression"]
+  "presets": ["es2015-loose", "react", "stage-1"],
+  "plugins": [
+    "transform-runtime",
+    "transform-es3-member-expression-literals",
+    "transform-es3-property-literals"
+  ]
 }

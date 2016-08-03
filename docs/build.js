@@ -4,7 +4,7 @@ import fsp from 'fs-promise';
 import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import {match, RoutingContext} from 'react-router';
+import {match, RouterContext} from 'react-router';
 
 import Root from './src/Root';
 import routes from './src/Routes';
@@ -33,7 +33,7 @@ function generateHTML(fileName) {
     const location = fileName === 'index.html' ? '/' : `/${fileName}`;
     match({routes, location}, (error, redirectLocation, renderProps) => {
       let html = ReactDOMServer.renderToString(
-        <RoutingContext {...renderProps} />
+        <RouterContext {...renderProps} />
       );
       html = '<!doctype html>' + html;
       let write = fsp.writeFile(path.join(docsBuilt, fileName), html);

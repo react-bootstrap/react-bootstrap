@@ -1,16 +1,15 @@
 import { transform } from 'babel-core';
-import glob from 'glob';
 import fs from 'fs';
 import path from 'path';
 import outputFileSync from 'output-file-sync';
 
-export function buildContent(content, filename, destination, babelOptions = {}) {
+function buildContent(content, filename, destination, babelOptions = {}) {
   babelOptions.filename = filename;
   const result = transform(content, babelOptions);
   outputFileSync(destination, result.code, {encoding: 'utf8'});
 }
 
-export function buildFile(filename, destination, babelOptions = {}) {
+function buildFile(filename, destination, babelOptions = {}) {
   const content = fs.readFileSync(filename, {encoding: 'utf8'});
   // We only have .js files that we need to build
   if (path.extname(filename) === '.js') {
@@ -20,7 +19,7 @@ export function buildFile(filename, destination, babelOptions = {}) {
   }
 }
 
-export function buildFolder(folderPath, destination, babelOptions = {}, firstFolder = true) {
+export default function buildBabel(folderPath, destination, babelOptions = {}, firstFolder = true) {
   let stats = fs.statSync(folderPath);
 
   if (stats.isFile()) {
@@ -28,14 +27,6 @@ export function buildFolder(folderPath, destination, babelOptions = {}, firstFol
   } else if (stats.isDirectory()) {
     let outputPath = firstFolder ? destination : path.join(destination, path.basename(folderPath));
     let files = fs.readdirSync(folderPath).map(file => path.join(folderPath, file));
-    files.forEach(filename => buildFolder(filename, outputPath, babelOptions, false));
+    files.forEach(filename => buildBabel(filename, outputPath, babelOptions, false));
   }
-}
-
-export function buildGlob(filesGlob, destination, babelOptions = {}) {
-  let files = glob.sync(filesGlob);
-  if (!files.length) {
-    files = [filesGlob];
-  }
-  files.forEach(filename => buildFolder(filename, destination, babelOptions, true));
 }

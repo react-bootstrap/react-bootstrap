@@ -1,18 +1,10 @@
 import path from 'path';
 
-const repoRoot = path.resolve(__dirname, '../');
+export const repoRoot = path.resolve(__dirname, '../');
 
-const srcRoot = path.join(repoRoot, 'src/');
-const distRoot = path.join(repoRoot, 'dist/');
-const libRoot = path.join(repoRoot, 'lib/');
-const bowerRoot = path.join(repoRoot, 'amd/');
-const docsRoot = path.join(repoRoot, 'docs-built/');
-
-export {
-  repoRoot,
-  srcRoot,
-  distRoot,
-  libRoot,
-  bowerRoot,
-  docsRoot
-};
+export const srcRoot = path.join(repoRoot, 'src/');
+export const distRoot = path.join(repoRoot, 'dist/');
+export const libRoot = path.join(repoRoot, 'lib/');
+export const es6Root = path.join(repoRoot, 'es6/');
+export const bowerRoot = path.join(repoRoot, 'amd/');
+export const docsRoot = path.join(repoRoot, 'docs-built/');

@@ -1,6 +1,7 @@
 import 'colors';
 import bower from './amd/build';
 import lib from './lib/build';
+import es6 from './es6/build';
 import dist from './dist/build';
 import { copy } from './fs-utils';
 import { distRoot, bowerRoot } from './constants';
@@ -18,6 +19,7 @@ function forkAndBuildDocs({verbose}) {
 export default function Build(options) {
   return Promise.all([
     lib(),
+    es6(),
     bower(),
     dist(),
     forkAndBuildDocs(options)
