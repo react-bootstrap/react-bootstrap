@@ -1,4 +1,4 @@
-import { exec as _exec } from 'child-process-promise';
+import { exec as processExec } from 'child-process-promise';
 import 'colors';
 
 let executionOptions = {
@@ -16,7 +16,7 @@ function logWithPrefix(prefix, message) {
 }
 
 export function exec(command, options = {}) {
-  let proc = _exec(command, options);
+  let proc = processExec(command, options);
   if (!executionOptions.verbose) {
     return proc;
   }
