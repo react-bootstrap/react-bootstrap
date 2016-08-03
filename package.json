@@ -44,6 +44,7 @@
     "babel-cli": "^6.11.4",
     "babel-eslint": "^6.1.0",
     "babel-loader": "^6.2.4",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-es3-member-expression-literals": "^6.8.0",
     "babel-plugin-transform-es3-property-literals": "^6.8.0",
     "babel-plugin-transform-runtime": "^6.12.0",
