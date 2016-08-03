@@ -21,12 +21,13 @@
     "test-node": "mocha --compilers js:babel-core/register test/server/*Spec.js"
   },
   "main": "lib/index.js",
-  "jsnext:main": "es6/index.js",
+  "jsnext:main": "es/index.js",
+  "module": "es/index.js",
   "files": [
     "CHANGELOG.md",
     "lib",
     "dist",
-    "es6"
+    "es"
   ],
   "keywords": [
     "react",
