@@ -1,4 +1,5 @@
 require('babel-register');
+const path = require('path');
 const merge = require('webpack-merge');
 
 const {default: webpackConfigBase} = require('./webpack/base.config');
@@ -19,7 +20,17 @@ module.exports = config => {
   const coverageReporters = [];
 
   if (runCoverage) {
-    process.env.BABEL_ENV = 'ci';
+    // Correctly order isparta-loader v. babel-loader.
+    webpackConfig = merge(
+      {
+        module: {
+          loaders: [{
+            test: /\.js/, include: path.resolve('src'), loader: 'isparta',
+          }],
+        },
+      },
+      webpackConfig
+    );
 
     coverageReporters.push('coverage');
 
