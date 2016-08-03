@@ -13,6 +13,7 @@ export default function BuildES() {
       babelrc: false,
       presets: ['es2015-webpack-loose', 'react', 'stage-1'],
       plugins: [
+        'dev-expression',
         'transform-runtime',
         'transform-es3-member-expression-literals',
         'transform-es3-property-literals'
