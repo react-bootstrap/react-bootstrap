@@ -1,3 +1,13 @@
+## [v0.30.2]
+> 2016-08-04
+
+- **Chore:** Upgrade to Babel 6 ([#2108])
+- **Chore:** Add ES module build ([#2108])
+
+[v0.30.2]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.1...v0.30.2
+[#2108]: https://github.com/react-bootstrap/react-bootstrap/pull/2108
+
+
 ## [v0.30.1]
 > 2016-08-01
 
