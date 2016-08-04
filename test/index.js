@@ -42,8 +42,8 @@ afterEach(() => {
 });
 
 describe('Process environment for tests', () => {
-  it('Should be development for React console warnings', () => {
-    assert.equal(process.env.NODE_ENV, 'development');
+  it('should not be production for React console warnings', () => {
+    expect(process.env.NODE_ENV).to.not.equal('production');
   });
 });
 
