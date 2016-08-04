@@ -107,6 +107,7 @@ export default {
   TabsControlled:                require('fs').readFileSync(__dirname + '/../examples/TabsControlled.js', 'utf8'),
   TabsNoAnimation:               require('fs').readFileSync(__dirname + '/../examples/TabsNoAnimation.js', 'utf8'),
   TabsUncontrolled:              require('fs').readFileSync(__dirname + '/../examples/TabsUncontrolled.js', 'utf8'),
+  TabsWithDropdown:              require('fs').readFileSync(__dirname + '/../examples/TabsWithDropdown.js', 'utf8'),
   ThumbnailAnchor:               require('fs').readFileSync(__dirname + '/../examples/ThumbnailAnchor.js', 'utf8'),
   ThumbnailDiv:                  require('fs').readFileSync(__dirname + '/../examples/ThumbnailDiv.js', 'utf8'),
   TooltipBasic:                  require('fs').readFileSync(__dirname + '/../examples/TooltipBasic.js', 'utf8'),

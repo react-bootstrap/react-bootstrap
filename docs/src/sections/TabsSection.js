@@ -26,6 +26,9 @@ export default function TabsSection() {
       <p>Set the <code>animation</code> prop to <code>false</code></p>
       <ReactPlayground codeText={Samples.TabsNoAnimation} exampleClassName="bs-example-tabs" />
 
+      <h3><Anchor id="tabs-with-dropdown">Tabs with Dropdown</Anchor></h3>
+      <ReactPlayground codeText={Samples.TabsWithDropdown} exampleClassName="bs-example-tabs" />
+
       <h3><Anchor id="tabs-custom-layout">Custom Tab Layout</Anchor></h3>
       <p>
         For more complex layouts the flexible <code>TabContainer</code>, <code>TabContent</code>, and
