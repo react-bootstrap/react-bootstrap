@@ -7,9 +7,6 @@ const webpackConfigBase = require('./webpack/base.config').default;
 module.exports = config => {
   const { env } = process;
 
-  const coverageReporters = env.CONTINUOUS_INTEGRATION === 'true' ?
-    ['coverage', 'coveralls'] : ['coverage'];
-
   config.set({
     frameworks: ['mocha', 'sinon-chai'],
 
@@ -34,7 +31,7 @@ module.exports = config => {
       noInfo: true,
     },
 
-    reporters: ['mocha', ...coverageReporters],
+    reporters: ['mocha', 'coverage'],
 
     mochaReporter: {
       output: 'autowatch',
