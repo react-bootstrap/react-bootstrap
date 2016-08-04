@@ -2,7 +2,7 @@ import path from 'path';
 import fsp from 'fs-promise';
 import fse from 'fs-extra';
 
-function copy(src, dest, options) {
+export function copy(src, dest, options) {
   options = options || {};
 
   return Promise.all([
@@ -33,7 +33,3 @@ function copy(src, dest, options) {
     });
   });
 }
-
-export default {
-  copy
-};

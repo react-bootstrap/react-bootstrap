@@ -69,9 +69,10 @@ const Tooltip = require('../../src/Tooltip');
 const Well = require('../../src/Well');
 
 const bootstrapUtils = require('../../src/utils/bootstrapUtils');
+
 /* eslint-enable */
 
-import babel from 'babel-core/browser';
+import {transform} from 'babel-standalone';
 import CodeExample from './CodeExample';
 
 const IS_MOBILE = typeof navigator !== 'undefined' && (
@@ -165,7 +166,9 @@ const ReactPlayground = React.createClass({
   getDefaultProps() {
     return {
       transformer(code) {
-        return babel.transform(code).code;
+        return transform(code, {
+          presets: ['es2015-loose', 'react', 'stage-1']
+        }).code;
       }
     };
   },

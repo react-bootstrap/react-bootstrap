@@ -103,22 +103,23 @@ describe('bootstrapUtils', () => {
     it('should work with ES classes', () => {
       shouldWarn('expected one of ["minimal","tweed","plaid"]');
 
-      @bsStyles(['minimal', 'tweed', 'plaid'], 'plaid')
       class Component extends React.Component {
         render() { return <span />; }
       }
 
-      const instance = render(<Component />);
+      const WrappedComponent = bsStyles(['minimal', 'tweed', 'plaid'], 'plaid')(Component);
+
+      const instance = render(<WrappedComponent />);
 
       expect(instance.props.bsStyle).to.equal('plaid');
 
-      render(<Component bsStyle="not-plaid" />);
+      render(<WrappedComponent bsStyle="not-plaid" />);
     });
 
     it('should work with createClass', () => {
-      shouldWarn('expected one of ["minimal","boss","plaid"]');
+      shouldWarn('expected one of ["minimal","boss","plaid","tweed"]');
 
-      const Component = bsStyles(['minimal', 'boss', 'plaid'], 'plaid')(
+      const Component = bsStyles(['minimal', 'boss', 'plaid', 'tweed'], 'plaid')(
         React.createClass({
           render() { return <span />; }
         })
@@ -178,22 +179,23 @@ describe('bootstrapUtils', () => {
     it('should work with es6 classes', () => {
       shouldWarn('expected one of ["smallish","micro","planet"]');
 
-      @bsSizes(['smallish', 'micro', 'planet'], 'smallish')
       class Component extends React.Component {
         render() { return <span />; }
       }
 
-      const instance = render(<Component />);
+      const WrappedComponent = bsSizes(['smallish', 'micro', 'planet'], 'smallish')(Component);
+
+      const instance = render(<WrappedComponent />);
 
       expect(instance.props.bsSize).to.equal('smallish');
 
-      render(<Component bsSize="not-smallish" />);
+      render(<WrappedComponent bsSize="not-smallish" />);
     });
 
     it('should work with createClass', () => {
-      shouldWarn('expected one of ["smallish","micro","planet"]');
+      shouldWarn('expected one of ["smallish","micro","planet","big"]');
 
-      const Component = bsSizes(['smallish', 'micro', 'planet'], 'smallish')(
+      const Component = bsSizes(['smallish', 'micro', 'planet', 'big'], 'smallish')(
         React.createClass({
           render() { return <span />; }
         })

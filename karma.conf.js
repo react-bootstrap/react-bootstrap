@@ -1,9 +1,8 @@
-require('babel/register');
-
+require('babel-register');
 const path = require('path');
 const merge = require('webpack-merge');
 
-const webpackConfigBase = require('./webpack/base.config').default;
+const {default: webpackConfigBase} = require('./webpack/base.config');
 
 module.exports = config => {
   const { env } = process;

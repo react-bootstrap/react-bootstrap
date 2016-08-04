@@ -36,7 +36,6 @@ export default {
   },
 
   module: {
-    noParse: /babel-core\/browser/,
     loaders: [
       { test: /\.js/, loader: `${reactHot}${jsLoader}`, exclude: /node_modules|Samples\.js/ },
       { test: /Samples.js/, loader: `${reactHot}transform?brfs!${jsLoader}` },
