@@ -38,6 +38,7 @@ const propTypes = {
   direction: React.PropTypes.oneOf(['prev', 'next']),
   prevIcon: React.PropTypes.node,
   nextIcon: React.PropTypes.node,
+  unfocusable: React.PropTypes.bool,
 };
 
 const defaultProps = {
@@ -49,6 +50,7 @@ const defaultProps = {
   controls: true,
   prevIcon: <Glyphicon glyph="chevron-left" />,
   nextIcon: <Glyphicon glyph="chevron-right" />,
+  unfocusable: false,
 };
 
 class Carousel extends React.Component {
@@ -267,6 +269,7 @@ class Carousel extends React.Component {
           key="prev"
           className={classNames(controlClassName, 'left')}
           onClick={this.handlePrev}
+          componentClass={this.props.unfocusable ? 'div' : 'a'}
         >
           {prevIcon}
         </SafeAnchor>
@@ -277,6 +280,7 @@ class Carousel extends React.Component {
           key="next"
           className={classNames(controlClassName, 'right')}
           onClick={this.handleNext}
+          componentClass={this.props.unfocusable ? 'div' : 'a'}
         >
           {nextIcon}
         </SafeAnchor>
