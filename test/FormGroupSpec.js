@@ -87,6 +87,31 @@ describe('<FormGroup>', () => {
     });
   });
 
+  [
+    {
+      props: { validationState: false },
+      className: 'has-success',
+    },
+    {
+      props: { validationState: false },
+      className: 'has-warning',
+    },
+    {
+      props: { validationState: false },
+      className: 'has-error',
+    },
+  ].forEach(({ props, className }) => {
+    it(`does not render ${className} class`, () => {
+      $(
+        <FormGroup {...props}>
+          <span />
+        </FormGroup>
+      )
+        .shallowRender()
+        .none(`.${className}`);
+    });
+  });
+
   describe('feedback', () => {
     it('should not have feedback without feedback component', () => {
       $(
