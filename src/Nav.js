@@ -112,8 +112,10 @@ class Nav extends React.Component {
     this._needsRefocus = false;
 
     const { children } = this.props;
+    const { activeKey, activeHref } = this.getActiveProps();
+
     const activeChild = ValidComponentChildren.find(children, child => (
-      this.isChildActive(child)
+      this.isActive(child, activeKey, activeHref)
     ));
 
     const childrenArray = ValidComponentChildren.toArray(children);
@@ -160,9 +162,10 @@ class Nav extends React.Component {
     const validChildren = children.filter(child => (
       child.props.eventKey && !child.props.disabled
     ));
+    const { activeKey, activeHref } = this.getActiveProps();
 
     const activeChild = ValidComponentChildren.find(children, child => (
-      this.isChildActive(child)
+      this.isActive(child, activeKey, activeHref)
     ));
 
     // This assumes the active child is not disabled.
@@ -184,44 +187,32 @@ class Nav extends React.Component {
     return validChildren[nextIndex];
   }
 
-  isChildActive(child) {
-    const { activeKey, activeHref } = this.props;
+  getActiveProps() {
     const tabContainer = this.context.$bs_tabContainer;
 
     if (tabContainer) {
-      const childKey = child.props.eventKey;
-
-      warning(!child.props.active,
-        'Specifying a `<NavItem>` `active` prop in the context of a ' +
-        '`<TabContainer>` is not supported. Instead use `<TabContainer ' +
-        `activeKey={${childKey}} />\``
-      );
-
-      const active = childKey === tabContainer.activeKey;
-
-      // Only warn on the active child to avoid spamming the console.
-      warning(!active || activeKey == null && !activeHref,
+      warning(this.props.activeKey == null && !this.props.activeHref,
         'Specifying a `<Nav>` `activeKey` or `activeHref` in the context of ' +
         'a `<TabContainer>` is not supported. Instead use `<TabContainer ' +
-        `activeKey={${childKey}} />\``
+        `activeKey={${this.props.activeKey}} />\`.`
       );
 
-      return active;
+      return tabContainer;
     }
 
-    if (child.props.active) {
+    return this.props;
+  }
+
+  isActive({ props }, activeKey, activeHref) {
+    if (
+      props.active ||
+      activeKey != null && props.eventKey === activeKey ||
+      activeHref && props.href === activeHref
+    ) {
       return true;
     }
 
-    if (activeKey != null && child.props.eventKey === activeKey) {
-      return true;
-    }
-
-    if (activeHref && child.props.href === activeHref) {
-      return true;
-    }
-
-    return child.props.active;
+    return props.active;
   }
 
   getTabProps(child, tabContainer, navRole, active, onSelect) {
@@ -271,8 +262,6 @@ class Nav extends React.Component {
 
   render() {
     const {
-      activeKey,
-      activeHref,
       stacked,
       justified,
       onSelect,
@@ -287,6 +276,10 @@ class Nav extends React.Component {
 
     const tabContainer = this.context.$bs_tabContainer;
     const role = propsRole || (tabContainer ? 'tablist' : null);
+
+    const { activeKey, activeHref } = this.getActiveProps();
+    delete props.activeKey; // Accessed via this.getActiveProps().
+    delete props.activeHref; // Accessed via this.getActiveProps().
 
     const [bsProps, elementProps] = splitBsProps(props);
 
@@ -322,7 +315,7 @@ class Nav extends React.Component {
         className={classNames(className, classes)}
       >
         {ValidComponentChildren.map(children, child => {
-          const active = this.isChildActive(child);
+          const active = this.isActive(child, activeKey, activeHref);
           const childOnSelect = createChainedFunction(
             child.props.onSelect,
             onSelect,
