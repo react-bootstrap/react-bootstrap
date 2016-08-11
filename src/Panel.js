@@ -89,7 +89,7 @@ class Panel extends React.Component {
 
     return cloneElement(header, {
       className: classNames(header.props.className, titleClassName),
-      children: this.renderAnchor(header.props.children, role, expanded),
+      children: this.renderAnchor(header.props.children, id, role, expanded),
     });
   }
 
