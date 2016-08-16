@@ -3,6 +3,7 @@ import React from 'react';
 
 import Dropdown from './Dropdown';
 import splitComponentProps from './utils/splitComponentProps';
+import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const propTypes = {
   ...Dropdown.propTypes,
@@ -20,14 +21,38 @@ const propTypes = {
 };
 
 class NavDropdown extends React.Component {
+  isActive({ props }, activeKey, activeHref) {
+    if (
+      props.active ||
+      activeKey != null && props.eventKey === activeKey ||
+      activeHref && props.href === activeHref
+    ) {
+      return true;
+    }
+
+    if (props.children) {
+      return ValidComponentChildren.some(props.children, child => (
+        this.isActive(child, activeKey, activeHref)
+      ));
+    }
+
+    return props.active;
+  }
+
   render() {
-    const { title, active, className, style, children, ...props } = this.props;
+    const {
+      title,
+      activeKey,
+      activeHref,
+      className,
+      style,
+      children,
+      ...props,
+    } = this.props;
 
-    delete props.eventKey;
-
-    // These are injected down by `<Nav>` for building `<SubNav>`s.
-    delete props.activeKey;
-    delete props.activeHref;
+    const active = this.isActive(this, activeKey, activeHref);
+    delete props.active; // Accessed via this.isActive().
+    delete props.eventKey; // Accessed via this.isActive().
 
     const [dropdownProps, toggleProps] =
       splitComponentProps(props, Dropdown.ControlledComponent);
@@ -47,7 +72,11 @@ class NavDropdown extends React.Component {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          {children}
+          {ValidComponentChildren.map(children, child => (
+            React.cloneElement(child, {
+              active: this.isActive(child, activeKey, activeHref),
+            })
+          ))}
         </Dropdown.Menu>
       </Dropdown>
     );

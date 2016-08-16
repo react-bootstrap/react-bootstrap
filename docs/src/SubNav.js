@@ -44,15 +44,11 @@ class SubNav extends React.Component {
   }
 
   isActive({ props }, activeKey, activeHref) {
-    if (props.active) {
-      return true;
-    }
-
-    if (activeKey != null && props.eventKey === activeKey) {
-      return true;
-    }
-
-    if (activeHref && props.href === activeHref) {
+    if (
+      props.active ||
+      activeKey != null && props.eventKey === activeKey ||
+      activeHref && props.href === activeHref
+    ) {
       return true;
     }
 
