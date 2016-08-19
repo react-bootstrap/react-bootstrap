@@ -10,6 +10,7 @@ import SafeAnchor from './SafeAnchor';
 
 const propTypes = {
   active: React.PropTypes.bool,
+  bsCustomClass: React.PropTypes.string,
   disabled: React.PropTypes.bool,
   block: React.PropTypes.bool,
   onClick: React.PropTypes.func,
@@ -53,7 +54,7 @@ class Button extends React.Component {
   }
 
   render() {
-    const { active, block, className, ...props } = this.props;
+    const { active, block, bsCustomClass, className, ...props } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
@@ -61,7 +62,7 @@ class Button extends React.Component {
       active,
       [prefix(bsProps, 'block')]: block,
     };
-    const fullClassName = classNames(className, classes);
+    const fullClassName = classNames(bsCustomClass, className, classes);
 
     if (elementProps.href) {
       return this.renderAnchor(elementProps, fullClassName);
