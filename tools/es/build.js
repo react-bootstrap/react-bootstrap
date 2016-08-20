@@ -11,7 +11,11 @@ export default function BuildES() {
     .then(() => fsp.mkdirs(esRoot))
     .then(() => buildBabel(srcRoot, esRoot, {
       babelrc: false,
-      presets: ['es2015-webpack-loose', 'react', 'stage-1'],
+      presets: [
+        ['es2015', { loose: true, modules: false }],
+        'stage-1',
+        'react'
+      ],
       plugins: [
         'dev-expression',
         'transform-runtime',
