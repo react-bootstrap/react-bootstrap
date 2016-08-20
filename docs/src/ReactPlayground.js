@@ -167,6 +167,7 @@ const ReactPlayground = React.createClass({
     return {
       transformer(code) {
         return transform(code, {
+          // TODO: Use preset options once babel-standalone v6.13 is released.
           presets: ['es2015-loose', 'react', 'stage-1']
         }).code;
       }
