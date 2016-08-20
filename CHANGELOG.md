@@ -1,3 +1,15 @@
+## [v0.30.3]
+> 2016-08-20
+
+- **Feature:** Support dropdowns in tab navigation ([#2134])
+- **Bugfix:** Properly pass expanded state to collapsible header elements ([#2133], [#2137])
+
+[v0.30.3]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.2...v0.30.3
+[#2133]: https://github.com/react-bootstrap/react-bootstrap/pull/2133
+[#2134]: https://github.com/react-bootstrap/react-bootstrap/pull/2134
+[#2137]: https://github.com/react-bootstrap/react-bootstrap/pull/2137
+
+
 ## [v0.30.2]
 > 2016-08-04
 
