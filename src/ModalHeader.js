@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsPropsAndOmit } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
 // TODO: `aria-label` should be `closeLabel`.
@@ -51,7 +51,7 @@ class ModalHeader extends React.Component {
 
     const modal = this.context.$bs_modal;
 
-    const [bsProps, elementProps] = splitBsProps(props);
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['closeButton']);
 
     const classes = getClassSet(bsProps);
 
