@@ -92,7 +92,7 @@
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
     "lodash": "^4.13.1",
-    "marked": "^0.3.5",
+    "marked": "^0.3.6",
     "mocha": "^2.5.3",
     "node-libs-browser": "^1.0.0",
     "nodemon": "^1.9.2",
