@@ -17,6 +17,7 @@ const propTypes = {
     React.PropTypes.string, React.PropTypes.number,
   ]),
   onSelect: React.PropTypes.func,
+  rootCloseEvent: React.PropTypes.oneOf(['click', 'mousedown']),
 };
 
 const defaultProps = {
@@ -93,6 +94,7 @@ class DropdownMenu extends React.Component {
       labelledBy,
       onSelect,
       className,
+      rootCloseEvent,
       children,
       ...props
     } = this.props;
@@ -108,6 +110,7 @@ class DropdownMenu extends React.Component {
       <RootCloseWrapper
         disabled={!open}
         onRootClose={onClose}
+        event={rootCloseEvent}
       >
         <ul
           {...elementProps}
