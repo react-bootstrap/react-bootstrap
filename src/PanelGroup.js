@@ -7,11 +7,8 @@ import uncontrollable from 'uncontrollable';
 import { bsClass, getClassSet, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
+import { generatedId } from './utils/PropTypes';
 
-const idPropType = React.PropTypes.oneOfType([
-  React.PropTypes.string,
-  React.PropTypes.number
-]);
 
 const propTypes = {
   accordion: React.PropTypes.bool,
@@ -25,30 +22,17 @@ const propTypes = {
    * meaning it should always return the _same_ id for the same set of inputs. The default
    * value requires that an `id` to be set for the PanelGroup.
    *
-   * The `type` argument will either be `"tab"` or `"pane"`.
+   * The `type` argument will either be `"COLLAPSE"` or `"HEADING"`.
    *
    * @defaultValue (eventKey, type) => `${this.props.id}-${type}-${key}`
    */
-  generateChildId: PropTypes.func,
+  generateChildId: React.PropTypes.func,
 
   /**
    * HTML id attribute, required if no `generateChildId` prop
    * is specified.
    */
-  id(props, ...args) {
-    let error = null;
-
-    if (!props.generateChildId) {
-      error = idPropType(props, ...args);
-
-      if (!error && !props.id) {
-        error = new Error(
-          'In order to properly initialize the PanelGroup in a way that is accessible to assistive technologies ' +
-          '(such as screen readers) an `id` or a `generateChildId` prop to PanelGroup is required');
-      }
-    }
-    return error;
-  },
+  id: generatedId('PanelGroup')
 };
 
 const defaultProps = {
@@ -57,7 +41,9 @@ const defaultProps = {
 
 const childContextTypes = {
   $bs_panelGroup: React.PropTypes.shape({
-    getId: React.PropTypes.func
+    getId: React.PropTypes.func,
+    headerRole: React.PropTypes.string,
+    panelRole: React.PropTypes.string,
   })
 };
 
@@ -78,7 +64,11 @@ class PanelGroup extends React.Component {
     }
 
     return {
-      $bs_panelGroup: { getId },
+      $bs_panelGroup: {
+        getId,
+        headerRole: 'tab',
+        panelRole: 'tabpanel',
+      },
     };
   }
 
@@ -91,7 +81,7 @@ class PanelGroup extends React.Component {
   render() {
     const {
       accordion,
-      activeKey: propsActiveKey,
+      activeKey,
       className,
       children,
       ...props
@@ -99,10 +89,7 @@ class PanelGroup extends React.Component {
 
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['onSelect']);
 
-    let activeKey;
     if (accordion) {
-      activeKey = propsActiveKey != null ?
-        propsActiveKey : this.state.activeKey;
       elementProps.role = elementProps.role || 'tablist';
     }
 
@@ -121,8 +108,6 @@ class PanelGroup extends React.Component {
 
           if (accordion) {
             Object.assign(childProps, {
-              headerRole: 'tab',
-              panelRole: 'tabpanel',
               collapsible: true,
               expanded: (child.props.eventKey === activeKey),
               onToggle: this.handleSelect.bind(null, child.props.eventKey),

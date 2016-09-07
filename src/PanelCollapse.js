@@ -31,10 +31,10 @@ class PanelCollapse extends React.Component {
     bsProps.bsClass = _bsClass || bsProps.bsClass;
 
     if (getIds) {
-      let { headerId, collapseId } = getIds();
+      let { headingId, collapseId } = getIds();
       props.id = collapseId;
       props.role = props.role || 'tabpanel';
-      props['aria-labelledby'] = headerId;
+      props['aria-labelledby'] = headingId;
     }
 
     return (

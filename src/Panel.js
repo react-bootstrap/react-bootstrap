@@ -45,22 +45,23 @@ class Panel extends React.Component {
   }
 
   getChildContext() {
-    let { getId } = this.context.$bs_panel_group || {};
+    const { expanded, eventKey } = this.props;
+    let { getId } = this.context.$bs_panelGroup || {};
     let getIds = null;
 
     if (getId) {
       getIds = () => ({
-        headerId: getId(this.props.eventKey, 'HEADER'),
-        collapseId: getId(this.props.eventKey, 'COLLAPSE')
+        headingId: getId(eventKey, 'HEADING'),
+        collapseId: getId(eventKey, 'COLLAPSE')
       });
     }
 
     return {
       $bs_panel: {
         getIds,
+        expanded,
         bsClass: this.props.bsClass,
         onToggle: this.handleToggle,
-        expanded: this.props.expanded
       }
     };
   }
@@ -72,7 +73,7 @@ class Panel extends React.Component {
   render() {
     let { className, children } = this.props;
     const [bsProps, props] = splitBsPropsAndOmit(this.props,
-      ['onToggle', 'eventKey', 'expanded']
+      ['onToggle', 'eventKey', 'expanded', 'collapsible']
     );
 
     if (typeof children === 'string' || typeof children === 'number') {
@@ -151,7 +152,7 @@ class Panel extends React.Component {
     maybeWrapPanelBody();
 
     if (this.props.collapsible) {
-      body = (<Collapse>{body}</Collapse>);
+      body = <Collapse>{body}</Collapse>;
     }
 
     return [...headers, ...body, ...footers];
