@@ -1,7 +1,32 @@
+import React from 'react';
 import createChainableTypeChecker
   from 'react-prop-types/lib/utils/createChainableTypeChecker';
 
 import ValidComponentChildren from './ValidComponentChildren';
+
+const idPropType = React.PropTypes.oneOfType([
+  React.PropTypes.string,
+  React.PropTypes.number
+]);
+
+
+export function generatedId(name) {
+  return (props, ...args) => {
+    let error = null;
+
+    if (!props.generateChildId) {
+      error = idPropType(props, ...args);
+
+      if (!error && !props.id) {
+        error = new Error(
+          'In order to properly initialize the ' + name + ' in a way that is accessible to assistive technologies ' +
+          '(such as screen readers) an `id` or a `generateChildId` prop to ' + name + ' is required');
+      }
+    }
+    return error;
+  };
+}
+
 
 export function requiredRoles(...roles) {
   return createChainableTypeChecker((props, propName, component) => {

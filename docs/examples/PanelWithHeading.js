@@ -2,7 +2,7 @@ const panelsInstance = (
   <div>
     <Panel>
       <Panel.Heading>
-        Panel heading without title
+        Panel heading without a title
       </Panel.Heading>
       <Panel.Body>
         Panel content
@@ -11,7 +11,7 @@ const panelsInstance = (
     <Panel>
       <Panel.Heading>
         <Panel.Title componentClass="h3">
-          Panel heading without title
+          Panel heading with a title
         </Panel.Title>
       </Panel.Heading>
       <Panel.Body>

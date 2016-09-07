@@ -6,7 +6,7 @@ import { prefix, bsClass, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   componentClass: elementType,
-  title: PropTypes.bool,
+
   bsRole: PropTypes.string,
 };
 
@@ -24,24 +24,15 @@ const contextTypes = {
 class PanelHeading extends React.Component {
 
   render() {
-    let { children, className, title, ...props } = this.props;
+    let { children, className, ...props } = this.props;
     const { getIds, bsClass: _bsClass } = this.context.$bs_panel || {};
 
     const [bsProps, elementProps] = splitBsProps(props);
     bsProps.bsClass = _bsClass || bsProps.bsClass;
 
     if (getIds) {
-      props.role = props.role || 'tab';
-      props.id = getIds().headingId;
-    }
-
-    if (title) {
-      children = cloneElement(React.Children.only(children), {
-        className: cn(
-          children.props.className,
-          prefix(bsProps, 'title')
-        )
-      });
+      elementProps.role = elementProps.role || 'tab';
+      elementProps.id = getIds().headingId;
     }
 
     return (

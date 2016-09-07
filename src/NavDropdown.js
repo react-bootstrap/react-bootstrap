@@ -12,6 +12,8 @@ const propTypes = {
   title: React.PropTypes.node.isRequired,
   noCaret: React.PropTypes.bool,
   active: React.PropTypes.bool,
+  activeKey: React.PropTypes.any,
+  activeHref: React.PropTypes.string,
 
   // Override generated docs from <Dropdown>.
   /**

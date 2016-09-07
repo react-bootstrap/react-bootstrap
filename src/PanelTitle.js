@@ -1,47 +1,56 @@
-import React, { PropTypes } from 'react';
 import cn from 'classnames';
+import React, { PropTypes } from 'react';
 import elementType from 'react-prop-types/lib/elementType';
-import tbsUtils, { bsClass } from './utils/bootstrapUtils';
-import Toggle from './PanelToggle';
 
-let PanelTitle = React.createClass({
-  propTypes: {
-    componentClass: elementType,
-    toggle: PropTypes.bool,
-  },
+import { prefix, splitBsProps, bsClass } from './utils/bootstrapUtils';
+import PanelToggle from './PanelToggle';
 
-  contextTypes: {
-    $bs_panel: PropTypes.shape({
-      bsClass: PropTypes.string
-    })
-  },
+const propTypes = {
+  componentClass: elementType,
+  toggle: PropTypes.bool,
+};
 
-  getDefaultProps() {
-    return { componentClass: 'div' };
-  },
+const contextTypes = {
+  $bs_panel: PropTypes.shape({
+    bsClass: PropTypes.string,
+  }),
+};
 
+const defaultProps = {
+  componentClass: 'div',
+};
+
+class PanelTitle extends React.Component {
   render() {
-    let { children, className, toggle, componentClass, ...props } = this.props;
-    let Component = 'div';
+    let {
+      children,
+      className,
+      toggle,
+      componentClass: Component,
+      ...props } = this.props;
+
+    const { bsClass: _bsClass } = this.context.$bs_panel || {};
+
+    const [bsProps, elementProps] = splitBsProps(props);
+    bsProps.bsClass = _bsClass || bsProps.bsClass;
 
     if (toggle) {
-      children = <Toggle>{children}</Toggle>;
+      children = <PanelToggle>{children}</PanelToggle>;
     }
 
-    children = (
+    return (
       <Component
-        {...props}
-        className={cn(
-          className,
-          tbsUtils.prefix(props, this.context.$bs_panel, 'title')
-        )}
+        {...elementProps}
+        className={cn(className, prefix(bsProps, 'title'))}
       >
         { children }
       </Component>
     );
-
-    return children;
   }
-});
+}
+
+PanelTitle.propTypes = propTypes;
+PanelTitle.defaultProps = defaultProps;
+PanelTitle.contextTypes = contextTypes;
 
 export default bsClass('panel', PanelTitle);

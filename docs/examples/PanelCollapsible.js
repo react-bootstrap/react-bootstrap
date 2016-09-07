@@ -12,7 +12,11 @@ class Example extends React.Component {
         <Button onClick={ ()=> this.setState({ open: !this.state.open })}>
           click
         </Button>
-        <Panel collapsible expanded={this.state.open}>
+        <Panel
+          collapsible
+          id="collapsible-panel-example"
+          expanded={this.state.open}
+        >
           Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
           Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
         </Panel>
