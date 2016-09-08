@@ -1,6 +1,6 @@
-import warning from 'react/lib/warning';
+import warning from 'warning';
 
-const warned = {};
+let warned = {};
 
 function deprecationWarning(oldname, newname, link) {
   let message;
@@ -24,7 +24,7 @@ function deprecationWarning(oldname, newname, link) {
 }
 
 
-deprecationWarning.wrapper = function(Component, ...args) {
+deprecationWarning.wrapper = (Component, ...args) => {
   return class DeprecatedComponent extends Component {
     componentWillMount(...methodArgs) {
       deprecationWarning(...args);
@@ -37,3 +37,7 @@ deprecationWarning.wrapper = function(Component, ...args) {
 };
 
 export default deprecationWarning;
+
+export function _resetWarned() {
+  warned = {};
+}

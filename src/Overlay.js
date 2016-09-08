@@ -1,48 +1,11 @@
-/* eslint react/prop-types: [2, {ignore: ["container", "containerPadding", "target", "placement", "children"] }] */
-/* These properties are validated in 'Portal' and 'Position' components */
-
+import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 import BaseOverlay from 'react-overlays/lib/Overlay';
-import CustomPropTypes from './utils/CustomPropTypes';
+import elementType from 'react-prop-types/lib/elementType';
+
 import Fade from './Fade';
-import classNames from 'classnames';
 
-class Overlay extends React.Component {
-  updatePosition() {
-      if (this.refs.overlay) {
-          this.refs.overlay.updatePosition();
-      }
-  }
-
-  render() {
-    let {
-        children: child
-      , animation: transition
-      , ...props } = this.props;
-
-    if (transition === true) {
-      transition = Fade;
-    }
-
-    if (!transition) {
-      child = cloneElement(child, {
-        className: classNames('in', child.props.className)
-      });
-    }
-
-    return (
-      <BaseOverlay
-        ref="overlay"
-        {...props}
-        transition={transition}
-      >
-        {child}
-      </BaseOverlay>
-    );
-  }
-}
-
-Overlay.propTypes = {
+const propTypes = {
   ...BaseOverlay.propTypes,
 
   /**
@@ -54,7 +17,8 @@ Overlay.propTypes = {
    */
   rootClose: React.PropTypes.bool,
   /**
-   * A Callback fired by the Overlay when it wishes to be hidden.
+   * A callback invoked by the overlay when it wishes to be hidden. Required if
+   * `rootClose` is specified.
    */
   onHide: React.PropTypes.func,
 
@@ -62,8 +26,7 @@ Overlay.propTypes = {
    * Use animation
    */
   animation: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
-    CustomPropTypes.elementType
+    React.PropTypes.bool, elementType,
   ]),
 
   /**
@@ -94,10 +57,46 @@ Overlay.propTypes = {
   /**
    * Callback fired after the Overlay finishes transitioning out
    */
-  onExited: React.PropTypes.func
+  onExited: React.PropTypes.func,
 };
 
-Overlay.defaultProps = {
+class Overlay extends React.Component {
+  updatePosition() {
+    if (this.refs.overlay) {
+      this.refs.overlay.updatePosition();
+    }
+  }
+
+  render() {
+    let {
+      children: child
+      , animation: transition
+      , ...props } = this.props;
+
+    if (transition === true) {
+      transition = Fade;
+    }
+
+    if (!transition) {
+      child = cloneElement(child, {
+        className: classNames('in', child.props.className)
+      });
+    }
+
+    return (
+      <BaseOverlay
+        ref="overlay"
+        {...props}
+        transition={transition}
+      >
+        {child}
+      </BaseOverlay>
+    );
+  }
+}
+
+Overlay.propTypes = propTypes;
+const defaultProps = {
   animation: Fade,
   rootClose: false,
   show: false

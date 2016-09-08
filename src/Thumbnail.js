@@ -1,51 +1,40 @@
+import classNames from 'classnames';
 import React from 'react';
-import classSet from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+
 import SafeAnchor from './SafeAnchor';
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
-const Thumbnail = React.createClass({
-  mixins: [BootstrapMixin],
+const propTypes = {
+  src: React.PropTypes.string,
+  alt: React.PropTypes.string,
+  href: React.PropTypes.string,
+};
 
-  propTypes: {
-    alt: React.PropTypes.string,
-    href: React.PropTypes.string,
-    src: React.PropTypes.string
-  },
-
-  getDefaultProps() {
-    return {
-      bsClass: 'thumbnail'
-    };
-  },
-
+class Thumbnail extends React.Component {
   render() {
-    let classes = this.getBsClassSet();
+    const { src, alt, className, children, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
 
-    if (this.props.href) {
-      return (
-        <SafeAnchor {...this.props} href={this.props.href} className={classSet(this.props.className, classes)}>
-          <img src={this.props.src} alt={this.props.alt} />
-        </SafeAnchor>
-      );
-    } else {
-      if (this.props.children) {
-        return (
-          <div {...this.props} className={classSet(this.props.className, classes)}>
-            <img src={this.props.src} alt={this.props.alt} />
-            <div className="caption">
-              {this.props.children}
-            </div>
+    const Component = elementProps.href ? SafeAnchor : 'div';
+    const classes = getClassSet(bsProps);
+
+    return (
+      <Component
+        {...elementProps}
+        className={classNames(className, classes)}
+      >
+        <img src={src} alt={alt} />
+
+        {children && (
+          <div className="caption">
+            {children}
           </div>
-        );
-      } else {
-        return (
-          <div {...this.props} className={classSet(this.props.className, classes)}>
-            <img src={this.props.src} alt={this.props.alt} />
-          </div>
-        );
-      }
-    }
+        )}
+      </Component>
+    );
   }
-});
+}
 
-export default Thumbnail;
+Thumbnail.propTypes = propTypes;
+
+export default bsClass('thumbnail', Thumbnail);

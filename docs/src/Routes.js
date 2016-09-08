@@ -1,23 +1,22 @@
 import React from 'react';
+import {IndexRoute, Route} from 'react-router';
 
-import Root from './Root';
+import ComponentsPage from './ComponentsPage';
+import GettingStartedPage from './GettingStartedPage';
 import HomePage from './HomePage';
 import IntroductionPage from './IntroductionPage';
-import GettingStartedPage from './GettingStartedPage';
-import ComponentsPage from './ComponentsPage';
-import SupportPage from './SupportPage';
 import NotFoundPage from './NotFoundPage';
-
-import {Route, DefaultRoute, NotFoundRoute} from 'react-router';
+import Root from './Root';
+import SupportPage from './SupportPage';
 
 export default (
-  <Route name="home" path="/" handler={Root}>
-    <DefaultRoute handler={HomePage}/>
-    <NotFoundRoute handler={NotFoundPage} />
+  <Route path="/" component={Root}>
+    <IndexRoute component={HomePage} />
+    <Route path="introduction.html" component={IntroductionPage} />
+    <Route path="getting-started.html" component={GettingStartedPage} />
+    <Route path="components.html" component={ComponentsPage} />
+    <Route path="support.html" component={SupportPage} />
 
-    <Route name="introduction" path="introduction.html" handler={IntroductionPage} />
-    <Route name="getting-started" path="getting-started.html" handler={GettingStartedPage} />
-    <Route name="components" path="components.html" handler={ComponentsPage} />
-    <Route name="support" path="support.html" handler={SupportPage} />
+    <Route path="*" component={NotFoundPage} />
   </Route>
 );

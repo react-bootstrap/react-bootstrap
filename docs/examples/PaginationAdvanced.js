@@ -5,9 +5,9 @@ const PaginationAdvanced = React.createClass({
     };
   },
 
-  handleSelect(event, selectedEvent) {
+  handleSelect(eventKey) {
     this.setState({
-      activePage: selectedEvent.eventKey
+      activePage: eventKey
     });
   },
 
@@ -19,6 +19,7 @@ const PaginationAdvanced = React.createClass({
         first
         last
         ellipsis
+        boundaryLinks
         items={20}
         maxButtons={5}
         activePage={this.state.activePage}
@@ -27,4 +28,4 @@ const PaginationAdvanced = React.createClass({
   }
 });
 
-React.render(<PaginationAdvanced />, mountNode);
+ReactDOM.render(<PaginationAdvanced />, mountNode);

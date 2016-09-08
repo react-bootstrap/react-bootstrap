@@ -1,1 +1,0 @@
-export Static from './Static';

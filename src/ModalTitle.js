@@ -1,27 +1,22 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
+
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 class ModalTitle extends React.Component {
   render() {
+    const { className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
+
     return (
       <h4
-        {...this.props}
-        className={classNames(this.props.className, this.props.modalClassName)}>
-        { this.props.children }
-      </h4>
+        {...elementProps}
+        className={classNames(className, classes)}
+      />
     );
   }
 }
 
-ModalTitle.propTypes = {
-  /**
-   * A css class applied to the Component
-   */
-  modalClassName: React.PropTypes.string
-};
-
-ModalTitle.defaultProps = {
-  modalClassName: 'modal-title'
-};
-
-export default ModalTitle;
+export default bsClass('modal-title', ModalTitle);

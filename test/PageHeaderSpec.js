@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import PageHeader from '../src/PageHeader';
 
-describe('PageHeader', function () {
-  it('Should output a div with content', function () {
+describe('PageHeader', () => {
+  it('Should output a div with content', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PageHeader>
         <strong>Content</strong>
@@ -12,13 +14,13 @@ describe('PageHeader', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
-  it('Should have a page-header class', function () {
+  it('Should have a page-header class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PageHeader>
         Content
       </PageHeader>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bpage-header\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpage-header\b/));
   });
 
 });

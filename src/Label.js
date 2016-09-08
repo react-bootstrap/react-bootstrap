@@ -1,26 +1,53 @@
-import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import React from 'react';
 
-const Label = React.createClass({
-  mixins: [BootstrapMixin],
+import { bsClass, bsStyles, getClassSet, splitBsProps }
+  from './utils/bootstrapUtils';
+import { State, Style } from './utils/StyleConfig';
 
-  getDefaultProps() {
-    return {
-      bsClass: 'label',
-      bsStyle: 'default'
-    };
-  },
+class Label extends React.Component {
+  hasContent(children) {
+    let result = false;
+
+    React.Children.forEach(children, child => {
+      if (result) {
+        return;
+      }
+
+      if (child || child === 0) {
+        result = true;
+      }
+    });
+
+    return result;
+  }
 
   render() {
-    let classes = this.getBsClassSet();
+    const { className, children, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = {
+      ...getClassSet(bsProps),
+
+      // Hack for collapsing on IE8.
+      hidden: !this.hasContent(children),
+    };
 
     return (
-      <span {...this.props} className={classNames(this.props.className, classes)}>
-        {this.props.children}
+      <span
+        {...elementProps}
+        className={classNames(className, classes)}
+      >
+        {children}
       </span>
     );
   }
-});
+}
 
-export default Label;
+export default bsClass('label',
+  bsStyles(
+    [...Object.values(State), Style.DEFAULT, Style.PRIMARY],
+    Style.DEFAULT,
+    Label
+  )
+);

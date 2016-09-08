@@ -1,101 +1,39 @@
 import React from 'react';
-import classNames from 'classnames';
-import TransitionEvents from './utils/TransitionEvents';
 
-const Tab = React.createClass({
-  propTypes: {
-    /**
-     * @private
-     */
-    active:          React.PropTypes.bool,
-    animation:       React.PropTypes.bool,
-    /**
-     * It is used by 'Tabs' - parent component
-     * @private
-     */
-    onAnimateOutEnd: React.PropTypes.func,
-    disabled:        React.PropTypes.bool,
-    title:           React.PropTypes.node
-  },
+import TabContainer from './TabContainer';
+import TabContent from './TabContent';
+import TabPane from './TabPane';
 
-  getDefaultProps() {
-    return {
-      animation: true
-    };
-  },
+const propTypes = {
+  ...TabPane.propTypes,
 
-  getInitialState() {
-    return {
-      animateIn: false,
-      animateOut: false
-    };
-  },
+  disabled: React.PropTypes.bool,
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.animation) {
-      if (!this.state.animateIn && nextProps.active && !this.props.active) {
-        this.setState({
-          animateIn: true
-        });
-      } else if (!this.state.animateOut && !nextProps.active && this.props.active) {
-        this.setState({
-          animateOut: true
-        });
-      }
-    }
-  },
+  title: React.PropTypes.node,
 
-  componentDidUpdate() {
-    if (this.state.animateIn) {
-      setTimeout(this.startAnimateIn, 0);
-    }
-    if (this.state.animateOut) {
-      TransitionEvents.addEndEventListener(
-        React.findDOMNode(this),
-        this.stopAnimateOut
-      );
-    }
-  },
+  /**
+   * tabClassName is used as className for the associated NavItem
+   */
+  tabClassName: React.PropTypes.string
+};
 
-  startAnimateIn() {
-    if (this.isMounted()) {
-      this.setState({
-        animateIn: false
-      });
-    }
-  },
-
-  stopAnimateOut() {
-    if (this.isMounted()) {
-      this.setState({
-        animateOut: false
-      });
-
-      if (this.props.onAnimateOutEnd) {
-        this.props.onAnimateOutEnd();
-      }
-    }
-  },
-
+class Tab extends React.Component {
   render() {
-    let classes = {
-      'tab-pane': true,
-      'fade': true,
-      'active': this.props.active || this.state.animateOut,
-      'in': this.props.active && !this.state.animateIn
-    };
+    const props = { ...this.props };
 
-    return (
-      <div {...this.props}
-        title={undefined}
-        role="tabpanel"
-        aria-hidden={!this.props.active}
-        className={classNames(this.props.className, classes)}
-      >
-        {this.props.children}
-      </div>
-    );
+    // These props are for the parent `<Tabs>` rather than the `<TabPane>`.
+    delete props.title;
+    delete props.disabled;
+    delete props.tabClassName;
+
+    return <TabPane {...props} />;
   }
-});
+}
+
+Tab.propTypes = propTypes;
+
+Tab.Container = TabContainer;
+Tab.Content = TabContent;
+Tab.Pane = TabPane;
 
 export default Tab;

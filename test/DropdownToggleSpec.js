@@ -1,13 +1,16 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+
 import DropdownToggle from '../src/DropdownToggle';
 
-describe('DropdownToggle', function() {
-  const simpleToggle = <DropdownToggle open={false} title='herpa derpa' />;
+import { getOne } from './helpers';
 
-  it('renders toggle button', function() {
+describe('<DropdownToggle>', () => {
+  const simpleToggle = <DropdownToggle open={false} title="herpa derpa" />;
+
+  it('renders toggle button', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleToggle);
-    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     buttonNode.className.should.match(/\bbtn[ $]/);
     buttonNode.className.should.match(/\bbtn-default\b/);
@@ -15,80 +18,90 @@ describe('DropdownToggle', function() {
     buttonNode.getAttribute('aria-expanded').should.equal('false');
   });
 
-  it('renders title prop', function() {
+  it('renders title prop', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleToggle);
-    const buttonNode = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
-    buttonNode.innerText.should.match(/herpa derpa/);
+    buttonNode.textContent.should.match(/herpa derpa/);
   });
 
-  it('renders title children', function() {
+  it('renders title children', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle open={false}>
+      <DropdownToggle title="toggle" open={false}>
         <h3>herpa derpa</h3>
       </DropdownToggle>
     );
     const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
-    const h3Node = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(button, 'H3'));
+    const h3Node = getOne(button.getElementsByTagName('h3'));
 
-    h3Node.innerText.should.match(/herpa derpa/);
+    h3Node.textContent.should.match(/herpa derpa/);
   });
 
-  it('renders dropdown toggle button caret', function() {
+  it('renders dropdown toggle button caret', () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleToggle);
-    const caretNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'caret').getDOMNode();
+    const caretNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'caret');
 
     caretNode.tagName.should.equal('SPAN');
   });
 
-  it('does not render toggle button caret', function() {
+  it('does not render toggle button caret', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle open={false} title='no caret' noCaret />
+      <DropdownToggle open={false} title="no caret" noCaret />
     );
     const caretNode = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'caret');
 
     caretNode.length.should.equal(0);
   });
 
-  it('forwards onClick handler', function(done) {
+  it('forwards onClick handler', (done) => {
     const handleClick = (event) => {
       event.should.be.ok;
       done();
     };
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle open={false} title='click forwards' onClick={handleClick} />
+      <DropdownToggle open={false} title="click forwards" onClick={handleClick} />
     );
     const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     ReactTestUtils.Simulate.click(button);
   });
 
-  it('forwards id', function() {
+  it('forwards id', () => {
     const id = 'testid';
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle id={id} open={false} title='id forwards' />
+      <DropdownToggle id={id} open={false} title="id forwards" />
     );
-    const button = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     button.getAttribute('id').should.equal(id);
   });
 
-  it('forwards bsStyle', function() {
+  it('forwards bsStyle', () => {
     const style = 'success';
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle bsStyle={style} open={false} title='bsStyle forwards' />
+      <DropdownToggle bsStyle={style} open={false} title="bsStyle forwards" />
     );
-    const button = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     button.className.should.match(/\bbtn-success\b/);
   });
 
-  it('forwards bsSize', function() {
+  it('forwards bsSize', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle bsSize='small' open={false} title='bsSize forwards' />
+      <DropdownToggle bsSize="small" open={false} title="bsSize forwards" />
     );
-    const button = React.findDOMNode(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON'));
+    const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
     button.className.should.match(/\bbtn-sm\b/);
+  });
+
+  it('does not forward bsClass', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownToggle bsClass="my-custom-bsClass" open={false} title="bsClass" />
+    );
+    const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
+
+    button.className.should.match(/\bmy-custom-bsClass\b/);
+    button.className.should.match(/\bbtn\b/);
   });
 });

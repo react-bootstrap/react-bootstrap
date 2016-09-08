@@ -1,80 +1,77 @@
-import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import React from 'react';
+
 import SafeAnchor from './SafeAnchor';
+import createChainedFunction from './utils/createChainedFunction';
 
-const NavItem = React.createClass({
-  mixins: [BootstrapMixin],
+const propTypes = {
+  active: React.PropTypes.bool,
+  disabled: React.PropTypes.bool,
+  role: React.PropTypes.string,
+  href: React.PropTypes.string,
+  onClick: React.PropTypes.func,
+  onSelect: React.PropTypes.func,
+  eventKey: React.PropTypes.any,
+};
 
-  propTypes: {
-    linkId: React.PropTypes.string,
-    onSelect: React.PropTypes.func,
-    active: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    href: React.PropTypes.string,
-    role: React.PropTypes.string,
-    title: React.PropTypes.node,
-    eventKey: React.PropTypes.any,
-    target: React.PropTypes.string,
-    'aria-controls': React.PropTypes.string
-  },
+const defaultProps = {
+  active: false,
+  disabled: false
+};
 
-  getDefaultProps() {
-    return {
-      active: false,
-      disabled: false
-    };
-  },
+class NavItem extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-  render() {
-    let {
-        role,
-        linkId,
-        disabled,
-        active,
-        href,
-        title,
-        target,
-        children,
-        tabIndex, //eslint-disable-line
-        'aria-controls': ariaControls,
-        ...props } = this.props;
-    let classes = {
-      active,
-      disabled
-    };
-    let linkProps = {
-      role,
-      href,
-      title,
-      target,
-      tabIndex,
-      id: linkId,
-      onClick: this.handleClick
-    };
-
-    if (!role && href === '#') {
-      linkProps.role = 'button';
-    }
-
-    return (
-      <li {...props} role="presentation" className={classNames(props.className, classes)}>
-        <SafeAnchor {...linkProps} aria-selected={active} aria-controls={ariaControls}>
-          { children }
-        </SafeAnchor>
-      </li>
-    );
-  },
+    this.handleClick = this.handleClick.bind(this);
+  }
 
   handleClick(e) {
     if (this.props.onSelect) {
       e.preventDefault();
 
       if (!this.props.disabled) {
-        this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
+        this.props.onSelect(this.props.eventKey, e);
       }
     }
   }
-});
+
+  render() {
+    const { active, disabled, onClick, className, style, ...props } =
+      this.props;
+
+    delete props.onSelect;
+    delete props.eventKey;
+
+    // These are injected down by `<Nav>` for building `<SubNav>`s.
+    delete props.activeKey;
+    delete props.activeHref;
+
+    if (!props.role) {
+      if (props.href === '#') {
+        props.role = 'button';
+      }
+    } else if (props.role === 'tab') {
+      props['aria-selected'] = active;
+    }
+
+    return (
+      <li
+        role="presentation"
+        className={classNames(className, { active, disabled })}
+        style={style}
+      >
+        <SafeAnchor
+          {...props}
+          disabled={disabled}
+          onClick={createChainedFunction(onClick, this.handleClick)}
+        />
+      </li>
+    );
+  }
+}
+
+NavItem.propTypes = propTypes;
+NavItem.defaultProps = defaultProps;
 
 export default NavItem;

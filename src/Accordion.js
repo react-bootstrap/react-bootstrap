@@ -1,7 +1,8 @@
 import React from 'react';
+
 import PanelGroup from './PanelGroup';
 
-const Accordion = React.createClass({
+class Accordion extends React.Component {
   render() {
     return (
       <PanelGroup {...this.props} accordion>
@@ -9,6 +10,6 @@ const Accordion = React.createClass({
       </PanelGroup>
     );
   }
-});
+}
 
 export default Accordion;

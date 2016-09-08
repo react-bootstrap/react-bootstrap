@@ -1,43 +1,45 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Grid from '../src/Grid';
 
-describe('Grid', function () {
-  it('uses "div" by default', function () {
+describe('<Grid>', () => {
+  it('uses "div" by default', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Grid />
     );
 
-    assert.equal(React.findDOMNode(instance).nodeName, 'DIV');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
   });
 
-  it('has "container" class by default', function () {
+  it('has "container" class by default', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Grid />
     );
-    assert.equal(React.findDOMNode(instance).className, 'container');
+    assert.equal(ReactDOM.findDOMNode(instance).className, 'container');
   });
 
-  it('turns grid into "full-width" layout via "fluid" property set', function () {
+  it('turns grid into "full-width" layout via "fluid" property set', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Grid fluid />
     );
-    assert.equal(React.findDOMNode(instance).className, 'container-fluid');
+    assert.equal(ReactDOM.findDOMNode(instance).className, 'container-fluid');
   });
 
-  it('should merge additional classes passed in', function () {
+  it('should merge additional classes passed in', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Grid className="whatever" fluid />
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bwhatever\b/));
-    assert.ok(React.findDOMNode(instance).className.match(/\bcontainer-fluid\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bwhatever\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bcontainer-fluid\b/));
   });
 
-  it('allows custom elements instead of "div"', function () {
+  it('allows custom elements instead of "div"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Grid componentClass='section' />
+      <Grid componentClass="section" />
     );
 
-    assert.equal(React.findDOMNode(instance).nodeName, 'SECTION');
+    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');
   });
 });

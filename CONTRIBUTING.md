@@ -3,35 +3,22 @@
 We welcome community support with both pull requests and reporting bugs. Please
 don't hesitate to jump in.
 
-## Review others work
+## Review others' work
 
 Check out the list of outstanding pull requests if there is something you might
 be interested in. Maybe somebody is trying to fix that stupid bug that bothers
 you. Review the PR. Do you have any better ideas how to fix this problem? Let us
-know...
+know.
 
 ## Issues
 
 The issue tracker is the preferred channel for bug reports, features requests
 and submitting pull requests, but please respect the following restrictions:
 
-- Please do not use the issue tracker for personal support requests. Stack
-  Overflow ([react-bootstrap](http://stackoverflow.com/questions/tagged/react-bootstrap)
-  tag), [Slack](http://www.reactiflux.com/),
-  [gitter](https://gitter.im/react-bootstrap/react-bootstrap), or
-  [Thinkful](http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap)
-  are better places to get help.
-- Please do not open issues or pull requests regarding the code in React or
-  Bootstrap (open them in their respective repositories).
+- Please do not use the issue tracker for personal support requests. Stack Overflow ([react-bootstrap](http://stackoverflow.com/questions/tagged/react-bootstrap) tag), [Discord](https://discord.gg/0ZcbPKXt5bXLs9XK), or [Thinkful](http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap) are better places to get help.
+- Please do not open issues or pull requests regarding the code in React or Bootstrap (open them in their respective repositories).
 
-_Note: Occasionally issues are opened that are unclear, or we cannot verify them. When
-the issue author has not responded to our questions for verification within 7
-days then we will close the issue._
-
-[![HuBoard][huboard-badge]][huboard] We use HuBoard to triage issues and
-prioritize the backlog for the core dev team. Feel free to tackle any currently
-open [issue][issues]. The issues tagged with "help wanted" and especially those
-high in the backlog are fair game.
+_Note: Occasionally issues are opened that are unclear, or we cannot verify them. When the issue author has not responded to our questions for verification within 7 days then we will close the issue._
 
 ## Tests
 
@@ -47,34 +34,6 @@ We use [ESLint][eslint] for all JavaScript Linting. There should be no linting
 errors and no new warnings for new work. You are welcome to configure your
 editor to use ESLint or the `npm test` command will run unit tests and the
 linter.
-
-## Commit Subjects for Public API Changes
-
-If your patch **changes the API or fixes a bug** please use one of the following
-prefixes in your commit subject:
-
-- `[fixed] ...`
-- `[changed] ...`
-- `[added] ...`
-- `[removed] ...`
-
-That ensures the subject line of your commit makes it into the auto-generated
-changelog. Do not use these tags if your change doesn't fix a bug and doesn't
-change the public API.
-
-### When using `[changed]` or `[removed]`...
-
-Please include an upgrade path with example code in the commit message.  If it
-doesn't make sense to do this, then it doesn't make sense to use `[changed]` or
-`[removed]` :). For further reading on writing a well formed commit message,
-check out these [5 useful tips for a better commit message][commit-message]
-
-### Using `[changed]` with development dependencies updates
-
-Use `[changed]` if dev-dependency has impact on the resulting code or API.
-`babel` is a good example of such dev-dependency.
-`chai`, `colors`, `express` or `eslint` are good examples when there is
-no need to add `[changed]`.
 
 ## Visual Changes
 
@@ -93,17 +52,17 @@ or change in a Component.
 
 ```js
 propTypes: {
-    /**
-     * Sets the visibility of the Component
-     */
-    show: React.PropTypes.bool,
+  /**
+   * Sets the visibility of the Component
+   */
+  show: React.PropTypes.bool,
 
-    /**
-     * A callback fired when the visibility changes
-     * @type {func}
-     * @required
-     */
-    onHide: myCustomPropType
+  /**
+   * A callback fired when the visibility changes
+   * @type {func}
+   * @required
+   */
+  onHide: myCustomPropType
 }
 ```
 
@@ -126,19 +85,11 @@ therefore this project is the wrong place to implement them.
 
 ## Breaking changes
 
-Breaking changes should be accompanied with deprecations of removed
-functionality. Prior to the 1.0.0 release, we aim to follow React's example of
-taking two Minor releases to break old functionality. As such, changes that
-intend to remove or change public APIs should be be submitted against the
-`vX-rc` branch, and should be accompanied with deprecation warnings on the old
-APIs. The deprecated APIs themselves should not be removed until the Minor
-release after that.
+Breaking changes should be accompanied with deprecations of removed functionality. Prior to the 1.0.0 release, we aim to follow React's example of taking two minor releases to break old functionality. As such, changes that intend to remove or change public APIs should be be submitted against the `next` branch, and should be accompanied with deprecation warnings on the old APIs. The deprecated APIs themselves should not be removed until the minor release after that.
 
 ## Notes for lodash functions usage in the code
 
 You can use `lodash` but keep it to things where it actually needs it, i.e. don't use `lodash`'s `forEach` when `Array.prototype.forEach` is fine.
-
-[eslint-plugin-lodash](https://github.com/eslint-plugins/eslint-plugin-lodash) will help in preventing to not include the full `lodash`.
 
 The full discussion about it at [#889](https://github.com/react-bootstrap/react-bootstrap/issues/889)
 

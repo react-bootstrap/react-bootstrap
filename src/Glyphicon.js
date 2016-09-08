@@ -1,44 +1,35 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 
-const Glyphicon = React.createClass({
-  propTypes: {
-    /**
-     * bootstrap className
-     * @private
-     */
-    bsClass: React.PropTypes.string,
-    /**
-     * An icon name. See e.g. http://getbootstrap.com/components/#glyphicons
-     */
-    glyph: React.PropTypes.string.isRequired,
-    /**
-     * Adds 'form-control-feedback' class
-     * @private
-     */
-    formControlFeedback: React.PropTypes.bool
-  },
+import { bsClass, getClassSet, prefix, splitBsProps }
+  from './utils/bootstrapUtils';
 
-  getDefaultProps() {
-    return {
-      bsClass: 'glyphicon',
-      formControlFeedback: false
-    };
-  },
+const propTypes = {
+  /**
+   * An icon name. See e.g. http://getbootstrap.com/components/#glyphicons
+   */
+  glyph: React.PropTypes.string.isRequired,
+};
 
+class Glyphicon extends React.Component {
   render() {
-    let className = classNames(this.props.className, {
-      [this.props.bsClass]: true,
-      ['glyphicon-' + this.props.glyph]: true,
-      ['form-control-feedback']: this.props.formControlFeedback
-    });
+    const { glyph, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = {
+      ...getClassSet(bsProps),
+      [prefix(bsProps, glyph)]: true,
+    };
 
     return (
-      <span {...this.props} className={className}>
-        {this.props.children}
-      </span>
+      <span
+        {...elementProps}
+        className={classNames(className, classes)}
+      />
     );
   }
-});
+}
 
-export default Glyphicon;
+Glyphicon.propTypes = propTypes;
+
+export default bsClass('glyphicon', Glyphicon);

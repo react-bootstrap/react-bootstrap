@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import PanelGroup from '../src/PanelGroup';
-import Panel from '../src/Panel';
 
-describe('PanelGroup', function () {
-  it('Should pass bsStyle to Panels', function () {
+import Panel from '../src/Panel';
+import PanelGroup from '../src/PanelGroup';
+
+import { getOne } from './helpers';
+
+describe('<PanelGroup>', () => {
+  it('Should pass bsStyle to Panels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup bsStyle="default">
         <Panel>Panel 1</Panel>
@@ -16,7 +19,7 @@ describe('PanelGroup', function () {
     assert.equal(panel.props.bsStyle, 'default');
   });
 
-  it('Should not override bsStyle on Panel', function () {
+  it('Should not override bsStyle on Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup bsStyle="default">
         <Panel bsStyle="primary">Panel 1</Panel>
@@ -28,7 +31,7 @@ describe('PanelGroup', function () {
     assert.equal(panel.props.bsStyle, 'primary');
   });
 
-  it('Should not collapse panel by bubbling onSelect callback', function () {
+  it('Should not collapse panel by bubbling onSelect callback', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup accordion>
         <Panel>
@@ -48,57 +51,88 @@ describe('PanelGroup', function () {
     assert.notOk(panel.state.collapsing);
   });
 
-  describe('Web Accessibility', function() {
+  it('Should obey onSelect handler', () => {
+    function handleSelect(eventKey, e) {
+      if (e.target.className.indexOf('ignoreme') > -1) {
+        e.selected = false;
+      }
+    }
+
+    let header = (
+      <div>
+        <span className="clickme">Click me</span>
+        <span className="ignoreme">Ignore me</span>
+      </div>
+    );
+
+    let instance = ReactTestUtils.renderIntoDocument(
+      <PanelGroup accordion onSelect={handleSelect}>
+        <Panel eventKey="1" header={header}>
+          <div>Panel body</div>
+        </Panel>
+      </PanelGroup>
+    );
+
+    let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
+
+    assert.notOk(panel.state.expanded);
+
+    ReactTestUtils.Simulate.click(
+      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'ignoreme')
+    );
+
+    assert.notOk(panel.state.expanded);
+
+    ReactTestUtils.Simulate.click(
+      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'clickme')
+    );
+
+    assert.ok(panel.state.expanded);
+  });
+
+  describe('Web Accessibility', () => {
     let instance, panelBodies, panelGroup, links;
 
-    beforeEach(function() {
+    beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
-        <PanelGroup defaultActiveKey='1' accordion>
-          <Panel header='Collapsible Group Item #1' eventKey='1' id='Panel1ID'>Panel 1</Panel>
-          <Panel header='Collapsible Group Item #2' eventKey='2' id='Panel2ID'>Panel 2</Panel>
+        <PanelGroup defaultActiveKey="1" accordion>
+          <Panel header="Collapsible Group Item #1" eventKey="1" id="Panel1ID">Panel 1</Panel>
+          <Panel header="Collapsible Group Item #2" eventKey="2" id="Panel2ID">Panel 2</Panel>
         </PanelGroup>
       );
       let accordion = ReactTestUtils.findRenderedComponentWithType(instance, PanelGroup);
       panelGroup = ReactTestUtils.findRenderedDOMComponentWithClass(accordion, 'panel-group');
-      panelBodies = ReactTestUtils.scryRenderedDOMComponentsWithClass(panelGroup, 'panel-collapse');
-      links = ReactTestUtils.scryRenderedDOMComponentsWithClass(panelGroup, 'panel-heading')
-        .map(function(header) {
-          return ReactTestUtils.findRenderedDOMComponentWithTag(header, 'a');
-        });
+      panelBodies = panelGroup.getElementsByClassName('panel-collapse');
+      links = Array.from(panelGroup.getElementsByClassName('panel-heading'))
+        .map(header => getOne(header.getElementsByTagName('a')));
     });
 
-    it('Should have a role of tablist', function() {
-      assert.equal(panelGroup.props.role, 'tablist');
+    it('Should have a role of tablist', () => {
+      assert.equal(panelGroup.getAttribute('role'), 'tablist');
     });
 
-    it('Should provide each header tab with role of tab', function() {
-      assert.equal(links[0].props.role, 'tab');
-      assert.equal(links[1].props.role, 'tab');
+    it('Should provide each header tab with role of tab', () => {
+      assert.equal(links[0].getAttribute('role'), 'tab');
+      assert.equal(links[1].getAttribute('role'), 'tab');
     });
 
-    it('Should provide the panelBodies with role of tabpanel', function() {
-      assert.equal(panelBodies[0].props.role, 'tabpanel');
+    it('Should provide the panelBodies with role of tabpanel', () => {
+      assert.equal(panelBodies[0].getAttribute('role'), 'tabpanel');
     });
 
-    it('Should provide each panel with an aria-labelledby referencing the corresponding header', function() {
-      assert.equal(panelBodies[0].props.id, links[0].props['aria-controls']);
-      assert.equal(panelBodies[1].props.id, links[1].props['aria-controls']);
+    it('Should provide each panel with an aria-labelledby referencing the corresponding header', () => {
+      assert.equal(panelBodies[0].id, links[0].getAttribute('aria-controls'));
+      assert.equal(panelBodies[1].id, links[1].getAttribute('aria-controls'));
     });
 
-    it('Should maintain each tab aria-selected state', function() {
-      assert.equal(links[0].props['aria-selected'], true);
-      assert.equal(links[1].props['aria-selected'], false);
+    it('Should maintain each tab aria-selected state', () => {
+      assert.equal(links[0].getAttribute('aria-selected'), 'true');
+      assert.equal(links[1].getAttribute('aria-selected'), 'false');
     });
 
-    it('Should maintain each tab aria-hidden state', function() {
-      assert.equal(panelBodies[0].props['aria-hidden'], false);
-      assert.equal(panelBodies[1].props['aria-hidden'], true);
-    });
-
-    afterEach(function() {
-      if (instance && ReactTestUtils.isCompositeComponent(instance) && instance.isMounted()) {
-        React.unmountComponentAtNode(React.findDOMNode(instance));
-      }
+    it('Should maintain each tab aria-hidden state', () => {
+      assert.equal(panelBodies[0].getAttribute('aria-hidden'), 'false');
+      assert.equal(panelBodies[1].getAttribute('aria-hidden'), 'true');
     });
   });
 });

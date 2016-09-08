@@ -1,3 +1,331 @@
+## [v0.30.3]
+> 2016-08-20
+
+- **Feature:** Support dropdowns in tab navigation ([#2134])
+- **Bugfix:** Properly pass expanded state to collapsible header elements ([#2133], [#2137])
+
+[v0.30.3]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.2...v0.30.3
+[#2133]: https://github.com/react-bootstrap/react-bootstrap/pull/2133
+[#2134]: https://github.com/react-bootstrap/react-bootstrap/pull/2134
+[#2137]: https://github.com/react-bootstrap/react-bootstrap/pull/2137
+
+
+## [v0.30.2]
+> 2016-08-04
+
+- **Chore:** Upgrade to Babel 6 ([#2108])
+- **Chore:** Add ES module build ([#2108])
+
+[v0.30.2]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.1...v0.30.2
+[#2108]: https://github.com/react-bootstrap/react-bootstrap/pull/2108
+
+
+## [v0.30.1]
+> 2016-08-01
+
+- **Bugfix:** Don't trigger PropTypes warning ([#2095])
+- **Bugfix:** Fix regression with `rootClose` on `<OverlayTrigger>` ([#2099])
+
+[v0.30.1]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.0...v0.30.1
+[#2095]: https://github.com/react-bootstrap/react-bootstrap/pull/2095
+[#2099]: https://github.com/react-bootstrap/react-bootstrap/pull/2099
+
+
+## [v0.30.0]
+> 2016-07-25
+
+- **Breaking:** Remove `linkId` prop from `<Breadcrumb.Item>` for consistency with other wrapped link components ([#2011])
+- **Breaking:** Remove deprecated functionality from v0.29.x ([#2017])
+- **Breaking:** Remove redundant `caption` prop from `<Carousel.Item>`, as this functionality is available from `<Carousel.Caption>` ([#2018])
+- **Breaking:** Remove pointless `navItem` and `navDropdown` props from `<Button>` ([#2026])
+- **Feature/Deprecation:** Rename `<PageItem>` to `<Pager.Item>` for consistency ([#1976])
+- **Feature:** Add `ValidComponentChildren.toArray` ([#2016])
+- **Feature:** Add `bsClass` support consistently throughout all components ([#2026], [#2036], [#2079])
+- **Feature:** Add `splitBsProps` and `splitBsPropsAndOmit` helpers to `bootstrapUtils` to remove Bootstrap styling props ([#2052])
+- **Feature:** Improve IE8-compatible self collapse support on `<Badge>` and add it to `<Label>` ([#2026])
+- **Bugfix:** Support `style` on `<Modal>` ([#1957])
+- **Bugfix:** Support `bsClass` on `<Dropdown.Toggle>` ([#2014])
+- **Bugfix:** Support `active` on `<NavDropdown>` ([#2015])
+- **Bugfix:** Do not pass arbitrary props to DOM nodes ([#2026], [#2036], [#2044])
+- **Bugfix:** Support strings for `positionTop` and `positionLeft` on `<Popover>` and `<Tooltip>` ([#2026])
+- **Bugfix:** Support captions on `<Thumbnail>` links ([#2026])
+- **Bugfix:** Don't ignore `componentClass` on `<ListGroup>` when using only `<ListGroupItem>` children ([#2026])
+- **Bugfix:** Don't assign default `key` to `<Breadcrumb>`, `<Carousel>`, `<ListGroup>`, `<Nav>`, `<PanelGroup>`, `<Pager>`, or `<ProgressBar>` children ([#2026], [#2036])
+- **Bugfix:** Remove pointless update-deferral-during-`onSelect` logic in `<PanelGroup>` ([#2026])
+- **Bugfix:** Use consistent `bsClass` handling on dropdown components ([#2036])
+- **Bugfix:** Remove extraneous `.collapsed` on collapsible panel title anchor ([#2036])
+- **Bugfix:** Improve edge case handling in tab animation state management and styling ([#2036])
+- **Bugfix:** Stop assigning refs unnecessarily ([#2078])
+- **Refactor:** Clean up context usage on navbar components ([#2036])
+- **Refactor:** Sync up context usage on modals to other components ([#2044])
+
+[v0.30.0]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.5...v0.30.0
+[#1957]: https://github.com/react-bootstrap/react-bootstrap/pull/1957
+[#1976]: https://github.com/react-bootstrap/react-bootstrap/pull/1976
+[#2011]: https://github.com/react-bootstrap/react-bootstrap/pull/2011
+[#2014]: https://github.com/react-bootstrap/react-bootstrap/pull/2014
+[#2015]: https://github.com/react-bootstrap/react-bootstrap/pull/2015
+[#2016]: https://github.com/react-bootstrap/react-bootstrap/pull/2016
+[#2017]: https://github.com/react-bootstrap/react-bootstrap/pull/2017
+[#2018]: https://github.com/react-bootstrap/react-bootstrap/pull/2018
+[#2026]: https://github.com/react-bootstrap/react-bootstrap/pull/2026
+[#2036]: https://github.com/react-bootstrap/react-bootstrap/pull/2036
+[#2044]: https://github.com/react-bootstrap/react-bootstrap/pull/2044
+[#2052]: https://github.com/react-bootstrap/react-bootstrap/pull/2052
+[#2078]: https://github.com/react-bootstrap/react-bootstrap/pull/2078
+[#2079]: https://github.com/react-bootstrap/react-bootstrap/pull/2079
+
+
+## [v0.29.5]
+> 2016-06-18
+
+- **Feature:** Allow function refs on dropdown components ([#1948])
+- **Bugfix:** Fix bugs with tab selection and state management ([#1956])
+
+[v0.29.5]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.4...v0.29.5
+[#1948]: https://github.com/react-bootstrap/react-bootstrap/pull/1948
+[#1956]: https://github.com/react-bootstrap/react-bootstrap/pull/1956
+
+
+## [v0.29.4]
+> 2016-05-10
+
+- **Feature:** Add `inputRef` to `<Checkbox>` and `<Radio>` ([#1865])
+- **Bugfix:** Persist `<Panel>` events before modifying them ([#1864])
+- **Bugfix:** Add back `eventKey` to props for custom pagination buttons ([#1876])
+
+[v0.29.4]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.3...v0.29.4
+[#1864]: https://github.com/react-bootstrap/react-bootstrap/pull/1864
+[#1865]: https://github.com/react-bootstrap/react-bootstrap/pull/1865
+[#1876]: https://github.com/react-bootstrap/react-bootstrap/pull/1876
+
+
+## [v0.29.3]
+> 2016-04-28
+
+- **Feature:** Add `unmountOnExit` support to tabs ([#1823])
+- **Bugfix:** Do not pass `onSelect` to DOM nodes ([#1861])
+- **Bugfix:** Do not throw error when tab group has no panes ([#1862])
+- **Bugfix:** Fix setting `id` for `<NavItem>`s for tabs ([#1862])
+
+[v0.29.3]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.2...v0.29.3
+[#1823]: https://github.com/react-bootstrap/react-bootstrap/pull/1823
+[#1861]: https://github.com/react-bootstrap/react-bootstrap/pull/1861
+[#1862]: https://github.com/react-bootstrap/react-bootstrap/pull/1862
+
+
+## [v0.29.2]
+> 2016-04-22
+
+- **Bugfix:** Don't always set `tabIndex` on `<SafeAnchor>` ([#1844])
+
+[v0.29.2]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.1...v0.29.2
+[#1844]: https://github.com/react-bootstrap/react-bootstrap/pull/1844
+
+
+## [v0.29.1]
+> 2016-04-21
+
+- **Bugfix:** Don't incorrectly pass `onSelect` past `<TabContainer>` ([#1825])
+- **Bugfix:** Set `role` instead of `type` on `<Dropdown.Toggle>` button ([#1835])
+
+[v0.29.1]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.29.0...v0.29.1
+[#1825]: https://github.com/react-bootstrap/react-bootstrap/pull/1825
+[#1835]: https://github.com/react-bootstrap/react-bootstrap/pull/1835
+
+
+## [v0.29.0]
+> 2016-04-18
+
+- **Breaking:** Change `onSelect` signature to be `(eventKey: any, event: SyntheticEvent) => any` on all React-Bootstrap components, instead of the old inconsistent mishmash ([#1604], [#1677], [#1756])
+- **Breaking:** Remove deprecated `duration` on transition components ([#1608])
+- **Breaking:** Remove deprecated functionality from `<Nav>`, `<Navbar>`, and related components ([#1608], [#1745])
+- **Breaking:** Don't check for prefixed `bsStyle` in `bootstrapUtils.getClassSet` ([#1759])
+- **Breaking:** Disable click handlers on `disabled` components ([#1794])
+- **Breaking:** In components with wrapped anchors, pass through all props other than `className` and `style` to the wrapped anchor ([#1801])
+- **Breaking:** Use consistent exports from `bootstrapUtils` ([#1813])
+- **Feature/Deprecation:** Add lower-level tab components, and deprecate horizontal layout support in `<Tabs>` in favor of lower-level components ([#1607], [#1784])
+- **Feature/Deprecation:** Deprecate `dialogComponent` in favor of new `dialogComponentClass` on `<Modal>` for consistency with other components ([#1753])
+- **Feature/Deprecation:** Rewrite form and form control API (`<FormControl>`, &c.), and deprecate the old API (`<Input>`, &c.) ([#1765])
+- **Deprecation:** Deprecate `dismissAfter` on `<Alert>` ([#1636])
+- **Deprecation:** Deprecate label interpolation (e.g. `label="%(percent)s%"`) in `<ProgressBar>` ([#1751])
+- **Bugfix:** Set `collapsed` class on `<Navbar.Toggle>` ([#1733])
+
+[v0.29.0]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.5...v0.29.0
+[#1604]: https://github.com/react-bootstrap/react-bootstrap/pull/1604
+[#1607]: https://github.com/react-bootstrap/react-bootstrap/pull/1607
+[#1608]: https://github.com/react-bootstrap/react-bootstrap/pull/1608
+[#1636]: https://github.com/react-bootstrap/react-bootstrap/pull/1636
+[#1677]: https://github.com/react-bootstrap/react-bootstrap/pull/1677
+[#1733]: https://github.com/react-bootstrap/react-bootstrap/pull/1733
+[#1745]: https://github.com/react-bootstrap/react-bootstrap/pull/1745
+[#1751]: https://github.com/react-bootstrap/react-bootstrap/pull/1751
+[#1753]: https://github.com/react-bootstrap/react-bootstrap/pull/1753
+[#1756]: https://github.com/react-bootstrap/react-bootstrap/pull/1756
+[#1759]: https://github.com/react-bootstrap/react-bootstrap/pull/1759
+[#1765]: https://github.com/react-bootstrap/react-bootstrap/pull/1765
+[#1784]: https://github.com/react-bootstrap/react-bootstrap/pull/1784
+[#1794]: https://github.com/react-bootstrap/react-bootstrap/pull/1794
+[#1801]: https://github.com/react-bootstrap/react-bootstrap/pull/1801
+[#1813]: https://github.com/react-bootstrap/react-bootstrap/pull/1813
+
+
+## [v0.28.5]
+> 2016-04-01
+
+- **Feature:** Support `<Breadcrumb.Item>` in addition to `<BreadcrumbItem>` for breadcrumb items ([#1722])
+- **Feature:** Add `<Carousel.Caption>` for carousel captions ([#1734])
+- **Feature:** Support `<Carousel.Item>` in addition to `<CarouselItem>` for carousel items ([#1740])
+- **Feature:** Add `<Clearfix>` for grids ([#1736])
+- **Bugfix:** Support `style` on nested `<ProgressBar>` ([#1719])
+- **Bugfix:** Fix CommonJS export for `<Media>` ([#1737])
+- **Bugfix:** Support `className` and `style` on `<MenuItem header>` and `<MenuItem divider>` ([#1748])
+- **Bugfix:** Support extra props for `<Navbar.Header>` and `<Navbar.Toggle>` ([#1754])
+
+[v0.28.5]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.4...v0.28.5
+[#1719]: https://github.com/react-bootstrap/react-bootstrap/pull/1719
+[#1722]: https://github.com/react-bootstrap/react-bootstrap/pull/1722
+[#1734]: https://github.com/react-bootstrap/react-bootstrap/pull/1734
+[#1736]: https://github.com/react-bootstrap/react-bootstrap/pull/1736
+[#1737]: https://github.com/react-bootstrap/react-bootstrap/pull/1737
+[#1740]: https://github.com/react-bootstrap/react-bootstrap/pull/1740
+[#1748]: https://github.com/react-bootstrap/react-bootstrap/pull/1748
+[#1754]: https://github.com/react-bootstrap/react-bootstrap/pull/1754
+
+
+## [v0.28.4]
+> 2016-03-24
+
+- **Feature:** Add `componentClass` on `<FormControls.Static>` ([#1653])
+- **Feature:** Add transition hooks on collapsible `<Panel>` ([#1664])
+- **Feature:** Add `<Media>` and related components ([#1707])
+- **Bugfix:** Support `className` on `<MenuItem divider>` ([#1682])
+- **Bugfix:** Support `className` on `<Navbar.Header>` ([#1695])
+
+[v0.28.4]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.28.3...v0.28.4
+[#1653]: https://github.com/react-bootstrap/react-bootstrap/pull/1653
+[#1664]: https://github.com/react-bootstrap/react-bootstrap/pull/1664
+[#1682]: https://github.com/react-bootstrap/react-bootstrap/pull/1682
+[#1695]: https://github.com/react-bootstrap/react-bootstrap/pull/1695
+[#1707]: https://github.com/react-bootstrap/react-bootstrap/pull/1707
+
+
+v0.28.3 - Thu, 11 Feb 2016 00:00:42 GMT
+---------------------------------------
+
+- [922ecae](../../commit/922ecae) [fixed] Allow overriding aria-label on <SplitButton> toggle
+- [f187e04](../../commit/f187e04) [fixed] Use actual ellipsis in pagination
+- [f4c1525](../../commit/f4c1525) [added] pagination boundaryLinks
+- [9331141](../../commit/9331141) [fixed] remove extra tabIndex
+
+
+
+v0.28.2 - Fri, 08 Jan 2016 06:38:06 GMT
+---------------------------------------
+
+- [1bee8a2](../../commit/1bee8a2) [added] responsively hiding columns
+- [653bb17](../../commit/653bb17) [fixed] a11y: setting tabIndex="-1" for the dismiss button of Alerts since aria-hidden="true"
+- [1d07197](../../commit/1d07197) [fixed] don't add aria-label to modal header and close button
+- [035e553](../../commit/035e553) [fixed] navbar-default not added for custom styles
+
+
+
+v0.28.1 - Mon, 16 Nov 2015 20:04:34 GMT
+---------------------------------------
+
+
+
+
+
+v0.28.0 - Mon, 16 Nov 2015 18:42:38 GMT
+---------------------------------------
+
+- [21cab20](../../commit/21cab20) [changed] dropdown props are passed through to the dropdown Button
+- [f9ea411](../../commit/f9ea411) [changed] navbar `navExpanded` to `expanded`
+- [0be007f](../../commit/0be007f) [removed] Nav `right` prop in favor of `pullRight`
+- [5dbafd3](../../commit/5dbafd3) [changed] Split the Navbar component into sub-components
+- [59c9571](../../commit/59c9571) [changed] remove extra wrapping `<nav>` element in Nav components
+- [229cb2c](../../commit/229cb2c) [fixed] aria-label properly passed to the Modal header button
+- [345f4b4](../../commit/345f4b4) [changed] Only add the `navigation` role to navbar when not using a <nav>
+- [44b3b9e](../../commit/44b3b9e) [fixed] when overlay animation is false the transition prop passed to base overlay should be null so that it does not trigger a React PropTypes warning
+- [0f3ee3e](../../commit/0f3ee3e) [removed] bootstrap mixin
+- [df2f1a3](../../commit/df2f1a3) [fixed] Don't clone children in ResponsiveEmbed
+
+
+
+v0.27.3 - Mon, 26 Oct 2015 13:59:37 GMT
+---------------------------------------
+
+- [9d5df37](../../commit/9d5df37) [fixed] OverlayTrigger show/hide timeout management
+- [6e37b27](../../commit/6e37b27) [fixed] Remove cross import between Button & ButtonInput
+- [6bad1e8](../../commit/6bad1e8) [fixed] Explicitly disallow justified Navbar Navs
+
+
+
+v0.27.2 - Sun, 18 Oct 2015 02:21:06 GMT
+---------------------------------------
+
+- [e333c3d](../../commit/e333c3d) [fixed] Falsy href handling on MenuItem
+- [4f4017e](../../commit/4f4017e) [fixed] DropdownTitle children v. title
+- [8612b91](../../commit/8612b91) [fixed] Respect onClick on MenuItem
+- [b64ed11](../../commit/b64ed11) [fixed] Put onClick on correct element on NavItem
+- [9e4c041](../../commit/9e4c041) [fixed] Incorrect 'aria-selected' on NavItem
+- [0b0ac36](../../commit/0b0ac36) [added] Custom labels for Pagination's special element (ellipsis, first, last, prev & next)
+
+
+
+v0.27.1 - Thu, 08 Oct 2015 17:48:24 GMT
+---------------------------------------
+
+- [e64230c](../../commit/e64230c) [fixed] Don't include react-dom in the bundles
+
+
+
+v0.27.0 - Wed, 07 Oct 2015 21:49:21 GMT
+---------------------------------------
+
+- [583febb](../../commit/583febb) [removed] unnecessary functionality in React v0.14
+- [049e538](../../commit/049e538) [changed] Update for React v0.14
+
+
+
+v0.26.2 - Wed, 07 Oct 2015 16:43:16 GMT
+---------------------------------------
+
+- [ca52c30](../../commit/ca52c30) [fixed] Actually export the Image component
+- [73daba7](../../commit/73daba7) [fixed] Show toggle button when using NavBrand
+
+
+
+v0.26.1 - Mon, 05 Oct 2015 02:04:27 GMT
+---------------------------------------
+
+
+
+
+
+v0.26.0 - Sun, 04 Oct 2015 21:21:22 GMT
+---------------------------------------
+
+- [b7853bb](../../commit/b7853bb) [fixed] Dropdown focus behavior on click
+- [dbb0385](../../commit/dbb0385) [added] #1320 allow NavItem class to be set
+- [3d13dda](../../commit/3d13dda) [fixed] #1287 ListGroupItem with onClick and header properly displays header
+- [3f5c6e3](../../commit/3f5c6e3) [added] #1181 ListGroup supports componentClass prop
+- [b5a9f3a](../../commit/b5a9f3a)     [added] NavBrand Component
+- [ac37698](../../commit/ac37698) [added] 'Responsive embed' component
+- [1c2d054](../../commit/1c2d054) [fixed] Set the disabled css class so that the text is greyed out.
+- [0348274](../../commit/0348274) [fixed] Breadcrumb and BreadcrumbItem components
+- [3c710f9](../../commit/3c710f9) [added] Breadcrumb component
+- [99d333f](../../commit/99d333f) [changed] use `lodash-compat` for IE8 compatibility and `lodash` for dev
+- [ce564cb](../../commit/ce564cb) [fixed] any props not known by DropdownMenu are passed through to the underlying ul
+- [674d67e](../../commit/674d67e) [added] images component
+- [deee09d](../../commit/deee09d) [fixed] stop rendering extra attributes on Progress bar dom nodes
+- [02f1fec](../../commit/02f1fec) [fixed] allow null activeKey (empty) selection
+- [656f40d](../../commit/656f40d) [changed] 'id' prop-type made uniform throughout the project
+- [b9a4477](../../commit/b9a4477) [changed] use 'react-prop-types' instead of 'utils/CustomPropTypes'
+
+
+
 v0.25.2 - Sat, 12 Sep 2015 15:59:13 GMT
 ---------------------------------------
 

@@ -5,10 +5,12 @@ node_modules
 amd/
 !tools/amd/
 !tools/lib/
+es/
+!tools/es/
 dist/
 !tools/dist/
 docs-built/
 tmp-bower-repo/
 tmp-docs-repo/
 .babel-cache/
-.coverage/
+coverage/

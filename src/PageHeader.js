@@ -1,14 +1,26 @@
-import React from 'react';
 import classNames from 'classnames';
+import React from 'react';
 
-const PageHeader = React.createClass({
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
+
+class PageHeader extends React.Component {
   render() {
+    const { className, children, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
+
     return (
-      <div {...this.props} className={classNames(this.props.className, 'page-header')}>
-        <h1>{this.props.children}</h1>
+      <div
+        {...elementProps}
+        className={classNames(className, classes)}
+      >
+        <h1>
+          {children}
+        </h1>
       </div>
     );
   }
-});
+}
 
-export default PageHeader;
+export default bsClass('page-header', PageHeader);

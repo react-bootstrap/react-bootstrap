@@ -1,81 +1,56 @@
-/* eslint no-var: 0, babel/object-shorthand: 0, vars-on-top: 0 */
-require('babel/register');
+require('babel-register');
 
-var webpackConfig = require('./webpack/test.config.js');
-var isCI = process.env.CONTINUOUS_INTEGRATION === 'true';
-var runCoverage = process.env.COVERAGE === 'true' || isCI;
-var devBrowser = process.env.PHANTOM ? 'PhantomJS' : 'Chrome';
+const webpack = require('webpack');
 
-var preprocessors = ['webpack', 'sourcemap'];
-var reporters = ['mocha'];
+const webpackConfigBase = require('./webpack/base.config').default;
 
-if (runCoverage) {
-  webpackConfig = require('./webpack/test-coverage.config');
-  reporters.push('coverage');
+module.exports = config => {
+  const { env } = process;
 
-  if (isCI) {
-    reporters.push('coveralls');
-  }
-}
-
-module.exports = function(config) {
   config.set({
+    frameworks: ['mocha', 'sinon-chai'],
 
-    basePath: '',
-
-    frameworks: [
-      'mocha',
-      'sinon-chai'
-    ],
-
-    files: [
-      'test/index.js'
-    ],
+    files: ['test/index.js'],
 
     preprocessors: {
-      'test/index.js': preprocessors
+      'test/index.js': ['webpack', 'sourcemap'],
     },
 
-    webpack: webpackConfig,
+    // This explicitly doesn't use webpack-merge because we want to override
+    // the DefinePlugin in the base config.
+    webpack: Object.assign({}, webpackConfigBase, {
+      plugins: [
+        new webpack.DefinePlugin({
+          'process.env.NODE_ENV': JSON.stringify('test'),
+        }),
+      ],
+      devtool: 'cheap-module-inline-source-map',
+    }),
 
     webpackMiddleware: {
-      noInfo: true
+      noInfo: true,
     },
 
-    reporters: reporters,
+    reporters: ['mocha', 'coverage'],
 
     mochaReporter: {
-      output: 'autowatch'
+      output: 'autowatch',
     },
 
     coverageReporter: {
-      dir: '.coverage',
-      reporters: [
-        { type: 'html' },
-        { type: 'lcovonly' }
-      ]
+      type: 'lcov',
+      dir: 'coverage',
     },
-
-    port: 9876,
-
-    colors: true,
-
-    logLevel: config.LOG_INFO,
-
-    autoWatch: true,
-
-    browsers: [ isCI ? 'ChromeTravisCI' : devBrowser ],
 
     customLaunchers: {
-      ChromeTravisCI: {
+      ChromeCi: {
         base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
+        flags: ['--no-sandbox'],
+      },
     },
 
-    captureTimeout: 60000,
-    browserNoActivityTimeout: 45000,
+    browsers: env.BROWSER ? env.BROWSER.split(',') : ['Chrome'],
 
-    singleRun: isCI
+    singleRun: env.CONTINUOUS_INTEGRATION === 'true',
   });
 };

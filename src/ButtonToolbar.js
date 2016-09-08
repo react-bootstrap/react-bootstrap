@@ -1,28 +1,27 @@
-import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
+import React from 'react';
 
-const ButtonToolbar = React.createClass({
-  mixins: [BootstrapMixin],
+import Button from './Button';
+import { bsClass, bsSizes, getClassSet, splitBsProps }
+  from './utils/bootstrapUtils';
 
-  getDefaultProps() {
-    return {
-      bsClass: 'button-toolbar'
-    };
-  },
-
+class ButtonToolbar extends React.Component {
   render() {
-    let classes = this.getBsClassSet();
+    const { className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
 
     return (
       <div
-        {...this.props}
+        {...elementProps}
         role="toolbar"
-        className={classNames(this.props.className, classes)}>
-        {this.props.children}
-      </div>
+        className={classNames(className, classes)}
+      />
     );
   }
-});
+}
 
-export default ButtonToolbar;
+export default bsClass('btn-toolbar',
+  bsSizes(Button.SIZES, ButtonToolbar)
+);

@@ -1,54 +1,62 @@
 import React from 'react';
 import classNames from 'classnames';
 import Button from './Button';
-import CustomPropTypes from './utils/CustomPropTypes';
 import SafeAnchor from './SafeAnchor';
 
-const CARET = <span> <span className="caret" /></span>;
+import { bsClass as setBsClass } from './utils/bootstrapUtils';
 
-export default class DropdownToggle extends React.Component {
+const propTypes = {
+  noCaret: React.PropTypes.bool,
+  open: React.PropTypes.bool,
+  title: React.PropTypes.string,
+  useAnchor: React.PropTypes.bool,
+};
+
+const defaultProps = {
+  open: false,
+  useAnchor: false,
+  bsRole: 'toggle',
+};
+
+class DropdownToggle extends React.Component {
   render() {
-    const caret = this.props.noCaret ? null : CARET;
+    const {
+      noCaret,
+      open,
+      useAnchor,
+      bsClass,
+      className,
+      children,
+      ...props,
+    } = this.props;
 
-    const classes = {
-      'dropdown-toggle': true
-    };
+    delete props.bsRole;
 
-    const Component = this.props.useAnchor ? SafeAnchor : Button;
+    const Component = useAnchor ? SafeAnchor : Button;
+    const useCaret = !noCaret;
+
+    // This intentionally forwards bsSize and bsStyle (if set) to the
+    // underlying component, to allow it to render size and style variants.
+
+    // FIXME: Should this really fall back to `title` as children?
 
     return (
       <Component
-        {...this.props}
-        className={classNames(classes, this.props.className)}
-        type="button"
+        {...props}
+        role="button"
+        className={classNames(className, bsClass)}
         aria-haspopup
-        aria-expanded={this.props.open}>
-        {this.props.title || this.props.children}{caret}
+        aria-expanded={open}
+      >
+        {children || props.title}
+        {useCaret && ' '}
+        {useCaret && <span className="caret" />}
       </Component>
     );
   }
 }
 
-const titleAndChildrenValidation = CustomPropTypes.singlePropFrom([
-  'title',
-  'children'
-]);
+DropdownToggle.propTypes = propTypes;
+DropdownToggle.defaultProps = defaultProps;
 
-DropdownToggle.defaultProps = {
-  open: false,
-  useAnchor: false,
-  bsRole: 'toggle'
-};
-
-DropdownToggle.propTypes = {
-  bsRole: React.PropTypes.string,
-  children: titleAndChildrenValidation,
-  noCaret: React.PropTypes.bool,
-  open: React.PropTypes.bool,
-  title: titleAndChildrenValidation,
-  useAnchor: React.PropTypes.bool
-};
-
-DropdownToggle.isToggle = true;
-DropdownToggle.titleProp = 'title';
-DropdownToggle.onClickProp = 'onClick';
+export default setBsClass('dropdown-toggle', DropdownToggle);

@@ -34,4 +34,4 @@ const AlertDismissable = React.createClass({
   }
 });
 
-React.render(<AlertDismissable />, mountNode);
+ReactDOM.render(<AlertDismissable />, mountNode);

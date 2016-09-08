@@ -1,104 +1,85 @@
-import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
-import CustomPropTypes from './utils/CustomPropTypes';
-import ButtonInput from './ButtonInput';
+import React from 'react';
+import elementType from 'react-prop-types/lib/elementType';
 
-const Button = React.createClass({
-  mixins: [BootstrapMixin],
+import { bsClass, bsSizes, bsStyles, getClassSet, prefix, splitBsProps }
+  from './utils/bootstrapUtils';
+import { Size, State, Style } from './utils/StyleConfig';
 
-  propTypes: {
-    active: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    block: React.PropTypes.bool,
-    navItem: React.PropTypes.bool,
-    navDropdown: React.PropTypes.bool,
-    /**
-     * You can use a custom element for this component
-     */
-    componentClass: CustomPropTypes.elementType,
-    href: React.PropTypes.string,
-    target: React.PropTypes.string,
-    /**
-     * Defines HTML button type Attribute
-     * @type {("button"|"reset"|"submit")}
-     * @defaultValue 'button'
-     */
-    type: React.PropTypes.oneOf(ButtonInput.types)
-  },
+import SafeAnchor from './SafeAnchor';
 
-  getDefaultProps() {
-    return {
-      active: false,
-      block: false,
-      bsClass: 'button',
-      bsStyle: 'default',
-      disabled: false,
-      navItem: false,
-      navDropdown: false
-    };
-  },
+const propTypes = {
+  active: React.PropTypes.bool,
+  disabled: React.PropTypes.bool,
+  block: React.PropTypes.bool,
+  onClick: React.PropTypes.func,
+  componentClass: elementType,
+  href: React.PropTypes.string,
+  /**
+   * Defines HTML button type attribute
+   * @defaultValue 'button'
+   */
+  type: React.PropTypes.oneOf(['button', 'reset', 'submit']),
+};
 
-  render() {
-    let classes = this.props.navDropdown ? {} : this.getBsClassSet();
-    let renderFuncName;
+const defaultProps = {
+  active: false,
+  block: false,
+  disabled: false,
+};
 
-    classes = {
-      active: this.props.active,
-      'btn-block': this.props.block,
-      ...classes
-    };
-
-    if (this.props.navItem) {
-      return this.renderNavItem(classes);
-    }
-
-    renderFuncName = this.props.href || this.props.target || this.props.navDropdown ?
-      'renderAnchor' : 'renderButton';
-
-    return this[renderFuncName](classes);
-  },
-
-  renderAnchor(classes) {
-    let Component = this.props.componentClass || 'a';
-    let href = this.props.href || '#';
-    classes.disabled = this.props.disabled;
-
+class Button extends React.Component {
+  renderAnchor(elementProps, className) {
     return (
-      <Component
-        {...this.props}
-        href={href}
-        className={classNames(this.props.className, classes)}
-        role="button">
-        {this.props.children}
-      </Component>
-    );
-  },
-
-  renderButton(classes) {
-    let Component = this.props.componentClass || 'button';
-
-    return (
-      <Component
-        {...this.props}
-        type={this.props.type || 'button'}
-        className={classNames(this.props.className, classes)}>
-        {this.props.children}
-      </Component>
-    );
-  },
-
-  renderNavItem(classes) {
-    let liClasses = {
-      active: this.props.active
-    };
-
-    return (
-      <li className={classNames(liClasses)}>
-        {this.renderAnchor(classes)}
-      </li>
+      <SafeAnchor
+        {...elementProps}
+        className={classNames(
+          className, elementProps.disabled && 'disabled'
+        )}
+      />
     );
   }
-});
 
-export default Button;
+  renderButton({ componentClass, ...elementProps }, className) {
+    const Component = componentClass || 'button';
+
+    return (
+      <Component
+        {...elementProps}
+        type={elementProps.type || 'button'}
+        className={className}
+      />
+    );
+  }
+
+  render() {
+    const { active, block, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = {
+      ...getClassSet(bsProps),
+      active,
+      [prefix(bsProps, 'block')]: block,
+    };
+    const fullClassName = classNames(className, classes);
+
+    if (elementProps.href) {
+      return this.renderAnchor(elementProps, fullClassName);
+    }
+
+    return this.renderButton(elementProps, fullClassName);
+  }
+}
+
+Button.propTypes = propTypes;
+Button.defaultProps = defaultProps;
+
+export default bsClass('btn',
+  bsSizes([Size.LARGE, Size.SMALL, Size.XSMALL],
+    bsStyles(
+      [...Object.values(State), Style.DEFAULT, Style.PRIMARY, Style.LINK],
+      Style.DEFAULT,
+      Button
+    )
+  )
+);

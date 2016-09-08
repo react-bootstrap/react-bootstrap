@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
-import ButtonToolbar from '../src/ButtonToolbar';
-import ButtonGroup from '../src/ButtonGroup';
-import Button from '../src/Button';
+import ReactDOM from 'react-dom';
 
-describe('ButtonToolbar', function () {
-  it('Should output a button toolbar', function () {
+import Button from '../src/Button';
+import ButtonGroup from '../src/ButtonGroup';
+import ButtonToolbar from '../src/ButtonToolbar';
+
+describe('ButtonToolbar', () => {
+  it('Should output a button toolbar', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ButtonToolbar>
         <ButtonGroup>
@@ -15,7 +17,7 @@ describe('ButtonToolbar', function () {
         </ButtonGroup>
       </ButtonToolbar>
     );
-    let node = React.findDOMNode(instance);
+    let node = ReactDOM.findDOMNode(instance);
     assert.equal(node.nodeName, 'DIV');
     assert.ok(node.className.match(/\bbtn-toolbar\b/));
     assert.equal(node.getAttribute('role'), 'toolbar');

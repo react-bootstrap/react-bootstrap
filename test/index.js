@@ -1,25 +1,53 @@
-import 'es5-shim';
+import deprecated from 'react-prop-types/lib/deprecated';
 
-beforeEach(function() {
-  sinon.stub(console, 'warn');
-});
+import { _resetWarned } from '../src/utils/deprecationWarning';
 
-afterEach(function() {
-  if (typeof console.warn.restore === 'function') {
-    assert(!console.warn.called, () => {
-      return `${console.warn.getCall(0).args[0]} \nIn '${this.currentTest.fullTitle()}'`;
+beforeEach(() => {
+  /* eslint-disable no-console */
+  sinon.stub(console, 'error', msg => {
+    let expected = false;
+
+    console.error.expected.forEach(about => {
+      if (msg.indexOf(about) !== -1) {
+        console.error.warned[about] = true;
+        expected = true;
+      }
     });
-    console.warn.restore();
-  }
+
+    if (expected) {
+      return;
+    }
+
+    console.error.threw = true;
+    throw new Error(msg);
+  });
+
+  console.error.expected = [];
+  console.error.warned = Object.create(null);
+  console.error.threw = false;
+  /* eslint-enable no-console */
 });
 
-describe('Process environment for tests', function () {
-  it('Should be development for React console warnings', function () {
-    assert.equal(process.env.NODE_ENV, 'development');
+afterEach(() => {
+  /* eslint-disable no-console */
+  if (!console.error.threw && console.error.expected.length) {
+    expect(console.error.warned).to.have.keys(console.error.expected);
+  }
+
+  console.error.restore();
+  /* eslint-enable no-console */
+
+  _resetWarned();
+  deprecated._resetWarned();
+});
+
+describe('Process environment for tests', () => {
+  it('should not be production for React console warnings', () => {
+    expect(process.env.NODE_ENV).to.not.equal('production');
   });
 });
 
-// Ensure all files in src folder are loaded for proper code coverage analysis
+// Ensure all files in src folder are loaded for proper code coverage analysis.
 const srcContext = require.context('../src', true, /.*\.js$/);
 srcContext.keys().forEach(srcContext);
 

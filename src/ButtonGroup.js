@@ -1,52 +1,60 @@
-import React from 'react';
 import classNames from 'classnames';
-import BootstrapMixin from './BootstrapMixin';
-import CustomPropTypes from './utils/CustomPropTypes';
+import React from 'react';
+import all from 'react-prop-types/lib/all';
 
-const ButtonGroup = React.createClass({
-  mixins: [BootstrapMixin],
+import Button from './Button';
+import { bsClass, getClassSet, prefix, splitBsProps }
+  from './utils/bootstrapUtils';
 
-  propTypes: {
-    vertical:  React.PropTypes.bool,
-    justified: React.PropTypes.bool,
-    /**
-     * Display block buttons, only useful when used with the "vertical" prop.
-     * @type {bool}
-     */
-    block: CustomPropTypes.all([
-      React.PropTypes.bool,
-      function(props) {
-        if (props.block && !props.vertical) {
-          return new Error('The block property requires the vertical property to be set to have any effect');
-        }
-      }
-    ])
-  },
+const propTypes = {
+  vertical: React.PropTypes.bool,
+  justified: React.PropTypes.bool,
 
-  getDefaultProps() {
-    return {
-      block: false,
-      bsClass: 'button-group',
-      justified: false,
-      vertical: false
-    };
-  },
+  /**
+   * Display block buttons; only useful when used with the "vertical" prop.
+   * @type {bool}
+   */
+  block: all(
+    React.PropTypes.bool,
+    ({ block, vertical }) => (
+      block && !vertical ?
+        new Error('`block` requires `vertical` to be set to have any effect') :
+        null
+    ),
+  ),
+};
 
+const defaultProps = {
+  block: false,
+  justified: false,
+  vertical: false,
+};
+
+class ButtonGroup extends React.Component {
   render() {
-    let classes = this.getBsClassSet();
-    classes['btn-group'] = !this.props.vertical;
-    classes['btn-group-vertical'] = this.props.vertical;
-    classes['btn-group-justified'] = this.props.justified;
-    classes['btn-block'] = this.props.block;
+    const { block, justified, vertical, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = {
+      ...getClassSet(bsProps),
+      [prefix(bsProps)]: !vertical,
+      [prefix(bsProps, 'vertical')]: vertical,
+      [prefix(bsProps, 'justified')]: justified,
+
+      // this is annoying, since the class is `btn-block` not `btn-group-block`
+      [prefix(Button.defaultProps, 'block')]: block,
+    };
 
     return (
       <div
-        {...this.props}
-        className={classNames(this.props.className, classes)}>
-        {this.props.children}
-      </div>
+        {...elementProps}
+        className={classNames(className, classes)}
+      />
     );
   }
-});
+}
 
-export default ButtonGroup;
+ButtonGroup.propTypes = propTypes;
+ButtonGroup.defaultProps = defaultProps;
+
+export default bsClass('btn-group', ButtonGroup);

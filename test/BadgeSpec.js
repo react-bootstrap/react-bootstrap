@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
+
 import Badge from '../src/Badge';
 
-describe('Badge', function () {
-  it('Should output a badge with content', function () {
+describe('<Badge>', () => {
+  it('Should output a badge with content', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         <strong>Content</strong>
@@ -12,48 +14,64 @@ describe('Badge', function () {
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
 
-  it('Should have a badge class', function () {
+  it('Should have a badge class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         Content
       </Badge>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bbadge\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
 
-  it('Should have a badge using a number', function () {
+  it('Should have a badge using a number', () => {
     let count = 42;
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         {count}
       </Badge>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bbadge\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
 
-  it('Should have a badge using a a mix of content', function () {
+  it('Should have a badge using a a mix of content', () => {
     let count = 42;
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         £{count}
       </Badge>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bbadge\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
 
-  it('Should have a badge class pulled right', function () {
+  it('Should have a badge class pulled right', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge pullRight>
         Content
       </Badge>
     );
-    assert.ok(React.findDOMNode(instance).className.match(/\bpull-right\b/));
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpull-right\b/));
   });
 
-  it('Should not have a badge class when empty', function () {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Badge />
-    );
-    assert.notOk(React.findDOMNode(instance).className.match(/\bbadge\b/));
+  describe('Hides when empty', () => {
+    it('should hide with no children', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Badge />
+      );
+      assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
+    });
+
+    it('should hide with empty string', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Badge>{''}</Badge>
+      );
+      assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
+    });
+
+    it('should not hide 0', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Badge>{0}</Badge>
+      );
+      assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
+    });
   });
 });

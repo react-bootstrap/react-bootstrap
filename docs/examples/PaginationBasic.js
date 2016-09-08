@@ -5,9 +5,9 @@ const PaginationBasic = React.createClass({
     };
   },
 
-  handleSelect(event, selectedEvent) {
+  handleSelect(eventKey) {
     this.setState({
-      activePage: selectedEvent.eventKey
+      activePage: eventKey
     });
   },
 
@@ -38,4 +38,4 @@ const PaginationBasic = React.createClass({
   }
 });
 
-React.render(<PaginationBasic />, mountNode);
+ReactDOM.render(<PaginationBasic />, mountNode);

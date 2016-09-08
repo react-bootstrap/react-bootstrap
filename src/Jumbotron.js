@@ -1,28 +1,34 @@
 import React from 'react';
 import classNames from 'classnames';
-import CustomPropTypes from './utils/CustomPropTypes';
+import elementType from 'react-prop-types/lib/elementType';
 
-const Jumbotron = React.createClass({
-  propTypes: {
-    /**
-     * You can use a custom element for this component
-     */
-    componentClass: CustomPropTypes.elementType
-  },
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
-  getDefaultProps() {
-    return { componentClass: 'div' };
-  },
+const propTypes = {
+  componentClass: elementType,
+};
 
+const defaultProps = {
+  componentClass: 'div',
+};
+
+class Jumbotron extends React.Component {
   render() {
-    const ComponentClass = this.props.componentClass;
+    const { componentClass: Component, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
 
     return (
-      <ComponentClass {...this.props} className={classNames(this.props.className, 'jumbotron')}>
-        {this.props.children}
-      </ComponentClass>
+      <Component
+        {...elementProps}
+        className={classNames(className, classes)}
+      />
     );
   }
-});
+}
 
-export default Jumbotron;
+Jumbotron.propTypes = propTypes;
+Jumbotron.defaultProps = defaultProps;
+
+export default bsClass('jumbotron', Jumbotron);

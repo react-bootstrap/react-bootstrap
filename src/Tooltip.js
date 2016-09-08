@@ -1,35 +1,98 @@
 import classNames from 'classnames';
 import React from 'react';
+import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
-import CustomPropTypes from './utils/CustomPropTypes';
+import { bsClass, getClassSet, prefix, splitBsProps }
+  from './utils/bootstrapUtils';
 
-export default class Tooltip extends React.Component {
+const propTypes = {
+  /**
+   * An html id attribute, necessary for accessibility
+   * @type {string|number}
+   * @required
+   */
+  id: isRequiredForA11y(React.PropTypes.oneOfType([
+    React.PropTypes.string, React.PropTypes.number,
+  ])),
+
+  /**
+   * Sets the direction the Tooltip is positioned towards.
+   */
+  placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+
+  /**
+   * The "top" position value for the Tooltip.
+   */
+  positionTop: React.PropTypes.oneOfType([
+    React.PropTypes.number, React.PropTypes.string,
+  ]),
+  /**
+   * The "left" position value for the Tooltip.
+   */
+  positionLeft: React.PropTypes.oneOfType([
+    React.PropTypes.number, React.PropTypes.string,
+  ]),
+
+  /**
+   * The "top" position value for the Tooltip arrow.
+   */
+  arrowOffsetTop: React.PropTypes.oneOfType([
+    React.PropTypes.number, React.PropTypes.string,
+  ]),
+  /**
+   * The "left" position value for the Tooltip arrow.
+   */
+  arrowOffsetLeft: React.PropTypes.oneOfType([
+    React.PropTypes.number, React.PropTypes.string,
+  ]),
+};
+
+const defaultProps = {
+  placement: 'right',
+};
+
+class Tooltip extends React.Component {
   render() {
     const {
       placement,
-      positionLeft,
       positionTop,
-      arrowOffsetLeft,
+      positionLeft,
       arrowOffsetTop,
+      arrowOffsetLeft,
       className,
       style,
       children,
-      ...props
+      ...props,
     } = this.props;
+
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = {
+      ...getClassSet(bsProps),
+      [placement]: true,
+    };
+
+    const outerStyle = {
+      top: positionTop,
+      left: positionLeft,
+      ...style,
+    };
+
+    const arrowStyle = {
+      top: arrowOffsetTop,
+      left: arrowOffsetLeft,
+    };
 
     return (
       <div
+        {...elementProps}
         role="tooltip"
-        {...props}
-        className={classNames(className, 'tooltip', placement)}
-        style={{left: positionLeft, top: positionTop, ...style}}
+        className={classNames(className, classes)}
+        style={outerStyle}
       >
-        <div
-          className="tooltip-arrow"
-          style={{left: arrowOffsetLeft, top: arrowOffsetTop}}
-        />
+        <div className={prefix(bsProps, 'arrow')} style={arrowStyle} />
 
-        <div className="tooltip-inner">
+        <div className={prefix(bsProps, 'inner')}>
           {children}
         </div>
       </div>
@@ -37,46 +100,7 @@ export default class Tooltip extends React.Component {
   }
 }
 
-Tooltip.propTypes = {
-  /**
-   * An html id attribute, necessary for accessibility
-   * @type {string}
-   * @required
-   */
-  id: CustomPropTypes.isRequiredForA11y(
-    React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
-    ])
-  ),
+Tooltip.propTypes = propTypes;
+Tooltip.defaultProps = defaultProps;
 
-  /**
-   * The direction the tooltip is positioned towards
-   */
-  placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-
-  /**
-   * The `left` position value for the tooltip
-   */
-  positionLeft: React.PropTypes.number,
-  /**
-   * The `top` position value for the tooltip
-   */
-  positionTop: React.PropTypes.number,
-  /**
-   * The `left` position value for the tooltip arrow
-   */
-  arrowOffsetLeft: React.PropTypes.oneOfType([
-    React.PropTypes.number, React.PropTypes.string
-  ]),
-  /**
-   * The `top` position value for the tooltip arrow
-   */
-  arrowOffsetTop: React.PropTypes.oneOfType([
-    React.PropTypes.number, React.PropTypes.string
-  ])
-};
-
-Tooltip.defaultProps = {
-  placement: 'right'
-};
+export default bsClass('tooltip', Tooltip);

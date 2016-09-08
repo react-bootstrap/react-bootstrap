@@ -1,3 +1,24 @@
+const CustomPopover = React.createClass({
+  render() {
+    return (
+      <div
+        style={{
+          ...this.props.style,
+          position: 'absolute',
+          backgroundColor: '#EEE',
+          boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
+          border: '1px solid #CCC',
+          borderRadius: 3,
+          marginLeft: -5,
+          marginTop: 5,
+          padding: 10,
+        }}
+      >
+        <strong>Holy guacamole!</strong> Check this info.
+      </div>
+    );
+  },
+});
 
 const Example = React.createClass({
   getInitialState() {
@@ -9,17 +30,6 @@ const Example = React.createClass({
   },
 
   render() {
-    const style = {
-      position: 'absolute',
-      backgroundColor: '#EEE',
-      boxShadow: '0 5px 10px rgba(0, 0, 0, 0.2)',
-      border: '1px solid #CCC',
-      borderRadius: 3,
-      marginLeft: -5,
-      marginTop: 5,
-      padding: 10
-    };
-
     return (
       <div style={{ height: 100, position: 'relative' }}>
         <Button ref="target" onClick={this.toggle}>
@@ -31,15 +41,13 @@ const Example = React.createClass({
           onHide={() => this.setState({ show: false })}
           placement="right"
           container={this}
-          target={() => React.findDOMNode(this.refs.target)}
+          target={() => ReactDOM.findDOMNode(this.refs.target)}
         >
-          <div style={style}>
-            <strong>Holy guacamole!</strong> Check this info.
-          </div>
+          <CustomPopover />
         </Overlay>
       </div>
     );
-  }
+  },
 });
 
-React.render(<Example/>, mountNode);
+ReactDOM.render(<Example />, mountNode);

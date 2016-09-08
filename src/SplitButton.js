@@ -1,45 +1,63 @@
 import React from 'react';
-import BootstrapMixin from './BootstrapMixin';
+
 import Button from './Button';
 import Dropdown from './Dropdown';
 import SplitToggle from './SplitToggle';
+import splitComponentProps from './utils/splitComponentProps';
+
+const propTypes = {
+  ...Dropdown.propTypes,
+
+  // Toggle props.
+  bsStyle: React.PropTypes.string,
+  bsSize: React.PropTypes.string,
+  href: React.PropTypes.string,
+  onClick: React.PropTypes.func,
+  /**
+   * The content of the split button.
+   */
+  title: React.PropTypes.node.isRequired,
+  /**
+   * Accessible label for the toggle; the value of `title` if not specified.
+   */
+  toggleLabel: React.PropTypes.string,
+
+  // Override generated docs from <Dropdown>.
+  /**
+   * @private
+   */
+  children: React.PropTypes.node,
+};
 
 class SplitButton extends React.Component {
-
   render() {
-    let {
-      children,
-      title,
-      onClick,
-      target,
-      href,
-      // bsStyle is validated by 'Button' component
-      bsStyle, // eslint-disable-line
-      ...props } = this.props;
+    const {
+      bsSize, bsStyle, title, toggleLabel, children, ...props,
+    } = this.props;
 
-    let { disabled } = props;
-
-    let button = (
-      <Button
-        onClick={onClick}
-        bsStyle={bsStyle}
-        disabled={disabled}
-        target={target}
-        href={href}
-      >
-        {title}
-      </Button>
-    );
+    const [dropdownProps, buttonProps] =
+      splitComponentProps(props, Dropdown.ControlledComponent);
 
     return (
-      <Dropdown {...props}>
-        {button}
-
-        <SplitToggle
-          aria-label={title}
+      <Dropdown
+        {...dropdownProps}
+        bsSize={bsSize}
+        bsStyle={bsStyle}
+      >
+        <Button
+          {...buttonProps}
+          disabled={props.disabled}
+          bsSize={bsSize}
           bsStyle={bsStyle}
-          disabled={disabled}
+        >
+          {title}
+        </Button>
+        <SplitToggle
+          aria-label={toggleLabel || title}
+          bsSize={bsSize}
+          bsStyle={bsStyle}
         />
+
         <Dropdown.Menu>
           {children}
         </Dropdown.Menu>
@@ -48,27 +66,7 @@ class SplitButton extends React.Component {
   }
 }
 
-SplitButton.propTypes = {
-  ...Dropdown.propTypes,
-  ...BootstrapMixin.propTypes,
-
-  /**
-   * @private
-   */
-  onClick() {},
-  target: React.PropTypes.string,
-  href: React.PropTypes.string,
-  /**
-   * The content of the split button.
-   */
-  title: React.PropTypes.node.isRequired
-};
-
-SplitButton.defaultProps = {
-  disabled: false,
-  dropup: false,
-  pullRight: false
-};
+SplitButton.propTypes = propTypes;
 
 SplitButton.Toggle = SplitToggle;
 
