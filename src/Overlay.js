@@ -60,30 +60,32 @@ const propTypes = {
   onExited: React.PropTypes.func,
 };
 
-const defaultProps = {
-  animation: Fade,
-  rootClose: false,
-  show: false,
-};
-
 class Overlay extends React.Component {
+  updatePosition() {
+    if (this.refs.overlay) {
+      this.refs.overlay.updatePosition();
+    }
+  }
+
   render() {
-    const { animation, children, ...props } = this.props;
+    let {
+      children: child
+      , animation: transition
+      , ...props } = this.props;
 
-    const transition = animation === true ? Fade : animation || null;
-
-    let child;
+    if (transition === true) {
+      transition = Fade;
+    }
 
     if (!transition) {
-      child = cloneElement(children, {
-        className: classNames(children.props.className, 'in'),
+      child = cloneElement(child, {
+        className: classNames('in', child.props.className)
       });
-    } else {
-      child = children;
     }
 
     return (
       <BaseOverlay
+        ref="overlay"
         {...props}
         transition={transition}
       >
@@ -94,6 +96,10 @@ class Overlay extends React.Component {
 }
 
 Overlay.propTypes = propTypes;
-Overlay.defaultProps = defaultProps;
+const defaultProps = {
+  animation: Fade,
+  rootClose: false,
+  show: false
+};
 
 export default Overlay;
