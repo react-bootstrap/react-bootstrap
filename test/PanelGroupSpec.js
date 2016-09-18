@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactDOM from 'react-dom';
 
 import Panel from '../src/Panel';
 import PanelGroup from '../src/PanelGroup';
@@ -9,7 +10,7 @@ import { getOne } from './helpers';
 describe('<PanelGroup>', () => {
   it('Should pass bsStyle to Panels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <PanelGroup bsStyle="default">
+      <PanelGroup bsStyle="default" id="test-id">
         <Panel>Panel 1</Panel>
       </PanelGroup>
     );
@@ -21,7 +22,7 @@ describe('<PanelGroup>', () => {
 
   it('Should not override bsStyle on Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <PanelGroup bsStyle="default">
+      <PanelGroup bsStyle="default" id="test-id">
         <Panel bsStyle="primary">Panel 1</Panel>
       </PanelGroup>
     );
@@ -33,7 +34,7 @@ describe('<PanelGroup>', () => {
 
   it('Should not collapse panel by bubbling onSelect callback', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <PanelGroup accordion>
+      <PanelGroup accordion id="test-id">
         <Panel>
           <input type="text" className="changeme" />
         </Panel>
@@ -66,8 +67,9 @@ describe('<PanelGroup>', () => {
     );
 
     let instance = ReactTestUtils.renderIntoDocument(
-      <PanelGroup accordion onSelect={handleSelect}>
-        <Panel eventKey="1" header={header}>
+      <PanelGroup accordion onSelect={handleSelect} id="test-id">
+        <Panel eventKey="1">
+          <Panel.Heading>{header}</Panel.Heading>
           <div>Panel body</div>
         </Panel>
       </PanelGroup>
@@ -95,9 +97,15 @@ describe('<PanelGroup>', () => {
 
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
-        <PanelGroup defaultActiveKey="1" accordion>
-          <Panel header="Collapsible Group Item #1" eventKey="1" id="Panel1ID">Panel 1</Panel>
-          <Panel header="Collapsible Group Item #2" eventKey="2" id="Panel2ID">Panel 2</Panel>
+        <PanelGroup defaultActiveKey="1" id="test-id" accordion>
+          <Panel eventKey="1" id="Panel1ID">
+            <Panel.Heading>Collapsible Group Item #1</Panel.Heading>
+            Panel 1
+          </Panel>
+          <Panel eventKey="2" id="Panel2ID">
+            <Panel.Heading>Collapsible Group Item #2</Panel.Heading>
+            Panel 2
+          </Panel>
         </PanelGroup>
       );
       let accordion = ReactTestUtils.findRenderedComponentWithType(instance, PanelGroup);
@@ -133,6 +141,29 @@ describe('<PanelGroup>', () => {
     it('Should maintain each tab aria-hidden state', () => {
       assert.equal(panelBodies[0].getAttribute('aria-hidden'), 'false');
       assert.equal(panelBodies[1].getAttribute('aria-hidden'), 'true');
+    });
+  });
+
+  describe('Web Accessibility', () => {
+    it('Should add aria-controls with id', () => {
+      const instance = ReactTestUtils.renderIntoDocument(
+        <PanelGroup id="panelgroup" accordion>
+          <Panel id="panel-1" eventKey={1} collapsible expanded>
+            <Panel.Heading>
+              <Panel.Title toggle>
+                Heading
+              </Panel.Title>
+            </Panel.Heading>
+            Panel content
+          </Panel>
+        </PanelGroup>
+      );
+
+      const collapse = ReactDOM.findDOMNode(instance).querySelector('.panel-collapse');
+      const anchor = ReactDOM.findDOMNode(instance).querySelector('.panel-title a');
+
+      assert.equal(collapse.getAttribute('id'), 'panel-1');
+      assert.equal(anchor.getAttribute('aria-controls'), 'panelgroup-COLLAPSE-1');
     });
   });
 });
