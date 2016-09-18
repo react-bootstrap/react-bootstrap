@@ -20,7 +20,7 @@ See the [documentation][documentation] with live editable examples.
 
 - Install the dependencies with `npm install`
 - Run tests `npm test`
-- Run tests in watch mode `npm run test-watch`
+- Run tests in watch mode `npm run tdd`
 - Run the docs site in development mode with `npm run docs`. This will watch
   for file changes as you work. Simply refresh the page to see the updates.
 - Build with `npm run build`
