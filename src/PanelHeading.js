@@ -1,4 +1,4 @@
-import React, { PropTypes, cloneElement } from 'react';
+import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import elementType from 'react-prop-types/lib/elementType';
 
