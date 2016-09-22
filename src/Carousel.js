@@ -16,7 +16,7 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 const propTypes = {
   slide: React.PropTypes.bool,
   indicators: React.PropTypes.bool,
-  interval: React.PropTypes.number,
+  interval: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.bool]),
   controls: React.PropTypes.bool,
   pauseOnHover: React.PropTypes.bool,
   wrap: React.PropTypes.bool,

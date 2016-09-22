@@ -212,4 +212,14 @@ describe('<Carousel>', () => {
     assert.equal(prevButtons.length, 1);
     assert.equal(nextButtons.length, 1);
   });
+
+  it('Should allow interval to be set to false', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Carousel activeIndex={1} controls interval={false}>
+        {items}
+      </Carousel>
+    );
+
+    assert.equal(instance.props.interval, false);
+  });
 });
