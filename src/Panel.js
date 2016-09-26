@@ -18,7 +18,6 @@ const propTypes = {
   onToggle: React.PropTypes.func,
   expanded: React.PropTypes.bool,
   eventKey: React.PropTypes.any,
-
   collapsible: React.PropTypes.bool,
 };
 
@@ -151,7 +150,7 @@ class Panel extends React.Component {
     maybeWrapPanelBody();
 
     if (this.props.collapsible) {
-      body = <Collapse>{body}</Collapse>;
+      body = <Collapse key={++i}>{body}</Collapse>;
     }
 
     return [...headers, ...body, ...footers];
