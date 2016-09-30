@@ -106,7 +106,6 @@ class DropdownMenu extends React.Component {
 
     return (
       <RootCloseWrapper
-        noWrap
         disabled={!open}
         onRootClose={onClose}
       >
