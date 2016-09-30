@@ -142,12 +142,22 @@ class Dropdown extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    this.unmounted = true;
+  }
+
   handleClick() {
     if (this.props.disabled) {
       return;
     }
 
-    this.toggleOpen('click');
+    // let the current click propagate up and finish before toggling open
+    // so that the RootCloseWrapper doesn't immediately cancel the open
+    setTimeout(() => {
+      if (!this.unmounted) {
+        this.toggleOpen('click');
+      }
+    });
   }
 
   handleKeyDown(event) {
