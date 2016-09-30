@@ -144,12 +144,11 @@ class Collapse extends React.Component {
   handleExit(elem) {
     const dimension = this._dimension();
     elem.style[dimension] = this.props.getDimensionValue(dimension, elem) + 'px';
+    triggerBrowserReflow(elem);
   }
 
   handleExiting(elem) {
     const dimension = this._dimension();
-
-    triggerBrowserReflow(elem);
     elem.style[dimension] = '0';
   }
 
