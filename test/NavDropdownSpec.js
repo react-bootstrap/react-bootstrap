@@ -105,6 +105,27 @@ describe('<NavDropdown>', () => {
     expect(ReactDOM.findDOMNode(items[2]).className).to.not.match(/active/);
   });
 
+  it('should handle nested child null active state', () => {
+    class Container extends React.Component {
+      render() {
+        return null;
+      }
+    }
+
+    const instance = ReactTestUtils.renderIntoDocument(
+      <NavDropdown id="test-id" title="title">
+        <Container>
+          <MenuItem>MenuItem 1 content</MenuItem>
+        </Container>
+      </NavDropdown>
+    );
+
+    const container = ReactTestUtils.findRenderedComponentWithType(
+      instance, Container,
+    );
+    expect(container.props.active).to.not.be.false;
+  });
+
   it('should derive bsClass from parent', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <NavDropdown title="title" id="test-id" bsClass="my-dropdown">
