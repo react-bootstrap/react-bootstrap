@@ -6,6 +6,13 @@ import DropdownButton from '../src/DropdownButton';
 import DropdownMenu from '../src/DropdownMenu';
 import MenuItem from '../src/MenuItem';
 
+function simulateClick(node) {
+  ReactTestUtils.Simulate.click(node);
+  return new Promise((resolve) => {
+    setTimeout(resolve);
+  });
+}
+
 describe('<DropdownButton>', () => {
   const simpleDropdown = (
     <DropdownButton title="Simple Dropdown" id="test-id">
@@ -112,7 +119,7 @@ describe('<DropdownButton>', () => {
     });
   });
 
-  it('closes when child MenuItem is selected', () => {
+  it('closes when child MenuItem is selected', async () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Simple Dropdown" id="test-id">
         <MenuItem eventKey="1">Item 1</MenuItem>
@@ -122,11 +129,13 @@ describe('<DropdownButton>', () => {
     const node = ReactDOM.findDOMNode(instance);
 
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
-    ReactTestUtils.Simulate.click(buttonNode);
+    await simulateClick(buttonNode);
+
     node.className.should.match(/\bopen\b/);
 
     const menuItem = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
-    ReactTestUtils.Simulate.click(menuItem);
+
+    await simulateClick(menuItem);
     node.className.should.not.match(/\bopen\b/);
   });
 

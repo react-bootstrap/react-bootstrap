@@ -21,6 +21,13 @@ class CustomMenu extends React.Component {
   }
 }
 
+function simulateClick(node) {
+  ReactTestUtils.Simulate.click(node);
+  return new Promise((resolve) => {
+    setTimeout(resolve);
+  });
+}
+
 describe('<Dropdown>', () => {
   let BaseDropdown = Dropdown.ControlledComponent;
 
@@ -151,7 +158,7 @@ describe('<Dropdown>', () => {
   // NOTE: The onClick event handler is invoked for both the Enter and Space
   // keys as well since the component is a button. I cannot figure out how to
   // get ReactTestUtils to simulate such though.
-  it('toggles open/closed when clicked', () => {
+  it('toggles open/closed when clicked', async () => {
     const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
     const node = ReactDOM.findDOMNode(instance);
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
@@ -159,18 +166,18 @@ describe('<Dropdown>', () => {
     node.className.should.not.match(/\bopen\b/);
     buttonNode.getAttribute('aria-expanded').should.equal('false');
 
-    ReactTestUtils.Simulate.click(buttonNode);
+    await simulateClick(buttonNode);
 
     node.className.should.match(/\bopen\b/);
     buttonNode.getAttribute('aria-expanded').should.equal('true');
 
-    ReactTestUtils.Simulate.click(buttonNode);
+    await simulateClick(buttonNode);
 
     node.className.should.not.match(/\bopen\b/);
     buttonNode.getAttribute('aria-expanded').should.equal('false');
   });
 
-  it('opens if dropdown contains no focusable menu item', () => {
+  it('opens if dropdown contains no focusable menu item', async () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown title="custom child" id="dropdown">
         <Dropdown.Toggle>Toggle</Dropdown.Toggle>
@@ -181,7 +188,9 @@ describe('<Dropdown>', () => {
     );
     const node = ReactDOM.findDOMNode(instance);
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
-    ReactTestUtils.Simulate.click(buttonNode);
+
+    await simulateClick(buttonNode);
+
     node.className.should.match(/\bopen\b/);
   });
 
@@ -212,7 +221,7 @@ describe('<Dropdown>', () => {
       .should.not.have.property('onSelect');
   });
 
-  it('closes when child MenuItem is selected', () => {
+  it('closes when child MenuItem is selected', async () => {
     const instance = ReactTestUtils.renderIntoDocument(
       simpleDropdown
     );
@@ -220,11 +229,11 @@ describe('<Dropdown>', () => {
     const node = ReactDOM.findDOMNode(instance);
 
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
-    ReactTestUtils.Simulate.click(buttonNode);
+    await simulateClick(buttonNode);
     node.className.should.match(/\bopen\b/);
 
     const menuItem = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0];
-    ReactTestUtils.Simulate.click(menuItem);
+    await simulateClick(menuItem);
     node.className.should.not.match(/\bopen\b/);
   });
 
@@ -450,7 +459,7 @@ describe('<Dropdown>', () => {
       document.activeElement.should.equal(buttonNode);
     });
 
-    it('when open and the key "tab" is pressed the menu is closed and focus is progress to the next focusable element', done => {
+    it('when open and the key "tab" is pressed the menu is closed and focus is progress to the next focusable element', async done => {
       const instance = ReactDOM.render(
         <Grid>
           {simpleDropdown}
@@ -463,7 +472,7 @@ describe('<Dropdown>', () => {
 
       const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(node, 'BUTTON');
 
-      ReactTestUtils.Simulate.click(buttonNode);
+      await simulateClick(buttonNode);
       buttonNode.getAttribute('aria-expanded').should.equal('true');
 
       ReactTestUtils.Simulate.keyDown(buttonNode, { key: keycode('tab'), keyCode: keycode('tab') });

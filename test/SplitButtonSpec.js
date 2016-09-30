@@ -6,6 +6,13 @@ import SplitButton from '../src/SplitButton';
 import MenuItem from '../src/MenuItem';
 import Button from '../src/Button';
 
+function simulateClick(node) {
+  ReactTestUtils.Simulate.click(node);
+  return new Promise((resolve) => {
+    setTimeout(resolve);
+  });
+}
+
 describe('<SplitButton>', () => {
   const simple = (
     <SplitButton title="Title" id="test-id">
@@ -16,14 +23,14 @@ describe('<SplitButton>', () => {
     </SplitButton>
   );
 
-  it('should open the menu when dropdown button is clicked', () => {
+  it('should open the menu when dropdown button is clicked', async () => {
     const instance = ReactTestUtils.renderIntoDocument(simple);
 
     const toggleNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
     const splitButtonNode = ReactDOM.findDOMNode(instance);
 
     splitButtonNode.className.should.not.match(/open/);
-    ReactTestUtils.Simulate.click(toggleNode);
+    await simulateClick(toggleNode);
     splitButtonNode.className.should.match(/open/);
   });
 
