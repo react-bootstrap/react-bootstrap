@@ -1,14 +1,23 @@
+## [v0.30.5]
+> 2016-10-01
+
+- **Bugfix:** Fix opening `<Dropdown>` ([#2244])
+
+[v0.30.5]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.4...v0.30.5
+[#2244]: https://github.com/react-bootstrap/react-bootstrap/pull/2244
+
+
 ## [v0.30.4]
 > 2016-09-30
 
-- **Bugfix::** DropdownMenu instance persists across visibility changes [#2241]
-- **Bugfix:** Panel fix `aria-expanded` on headers [#2137]
-- **Bugfix:** Address off-by-1 bug in the Pagination component [#2189]
+- **Bugfix:** Properly set `aria-expanded` on `<Panel>` headers ([#2137])
+- **Bugfix:** Fix off-by-one bug in `<Pagination>` [#2189]
+- **Bugfix:** Persist `<Dropdown.Menu>` instance across visibility changes ([#2241])
 
 [v0.30.4]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.3...v0.30.4
-[#2241]: https://github.com/react-bootstrap/react-bootstrap/pull/2241
 [#2137]: https://github.com/react-bootstrap/react-bootstrap/pull/2137
 [#2189]: https://github.com/react-bootstrap/react-bootstrap/pull/2189
+[#2241]: https://github.com/react-bootstrap/react-bootstrap/pull/2241
 
 
 ## [v0.30.3]
