@@ -106,7 +106,7 @@ describe('<Modal>', () => {
     assert.ok(modal.children[0].children[0].className.match(/\bmymodal-content\b/));
 
     const baseModal = ReactTestUtils.findRenderedComponentWithType(instance, BaseModal);
-    assert.ok(baseModal.refs.backdrop.className.match(/\bmymodal-backdrop\b/));
+    assert.ok(baseModal.backdrop.className.match(/\bmymodal-backdrop\b/));
   });
 
   it('Should pass bsSize to the dialog', () => {
