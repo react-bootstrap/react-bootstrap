@@ -32,7 +32,7 @@ const propTypes = {
 class SplitButton extends React.Component {
   render() {
     const {
-      bsSize, bsStyle, title, toggleLabel, children, ...props,
+      bsSize, bsStyle, title, toggleLabel, children, ...props
     } = this.props;
 
     const [dropdownProps, buttonProps] =

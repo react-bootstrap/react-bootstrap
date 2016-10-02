@@ -207,7 +207,7 @@ class Modal extends React.Component {
       children, // Just in case this get added to BaseModal propTypes.
       onEntering,
       onExited,
-      ...props,
+      ...props
     } = this.props;
 
     const [baseModalProps, dialogProps] =

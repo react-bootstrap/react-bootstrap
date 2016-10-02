@@ -94,7 +94,7 @@ class DropdownMenu extends React.Component {
       onSelect,
       className,
       children,
-      ...props,
+      ...props
     } = this.props;
 
     const [bsProps, elementProps] = splitBsProps(props);

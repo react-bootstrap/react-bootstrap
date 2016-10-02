@@ -52,7 +52,7 @@ class PaginationButton extends React.Component {
       onClick,
       className,
       style,
-      ...props,
+      ...props
     } = this.props;
 
     if (Component === SafeAnchor) {

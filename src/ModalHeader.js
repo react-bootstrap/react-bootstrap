@@ -46,7 +46,7 @@ class ModalHeader extends React.Component {
       onHide,
       className,
       children,
-      ...props,
+      ...props
     } = this.props;
 
     const modal = this.context.$bs_modal;

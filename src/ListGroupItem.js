@@ -42,7 +42,7 @@ class ListGroupItem extends React.Component {
       header,
       listItem,
       children,
-      ...props,
+      ...props
     } = this.props;
 
     const [bsProps, elementProps] = splitBsProps(props);

@@ -51,7 +51,7 @@ class PanelGroup extends React.Component {
       activeKey: propsActiveKey,
       className,
       children,
-      ...props,
+      ...props
     } = this.props;
 
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, [

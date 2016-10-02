@@ -71,7 +71,7 @@ class SubNav extends React.Component {
       className,
       style,
       children,
-      ...props,
+      ...props
     } = this.props;
 
     delete props.active; // Accessed via this.isActive().

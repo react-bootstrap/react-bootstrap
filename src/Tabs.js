@@ -96,7 +96,7 @@ class Tabs extends React.Component {
       style,
       children,
       activeKey = getDefaultActiveKey(children),
-      ...props,
+      ...props
     } = this.props;
 
     return (

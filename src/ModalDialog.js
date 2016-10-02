@@ -14,7 +14,7 @@ const propTypes = {
 
 class ModalDialog extends React.Component {
   render() {
-    const { dialogClassName, className, style, children, ...props, } =
+    const { dialogClassName, className, style, children, ...props } =
       this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 

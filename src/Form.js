@@ -23,7 +23,7 @@ class Form extends React.Component {
       inline,
       componentClass: Component,
       className,
-      ...props,
+      ...props
     } = this.props;
 
     const [bsProps, elementProps] = splitBsProps(props);
