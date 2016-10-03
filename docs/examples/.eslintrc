@@ -62,6 +62,8 @@
     "TabPane": false,
     "Tabs": false,
     "Thumbnail": false,
+    "ToggleButton": false,
+    "ToggleButtonGroup": false,
     "Tooltip": false,
     "Well": false,
 

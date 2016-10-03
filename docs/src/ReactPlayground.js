@@ -66,6 +66,8 @@ const Table = require('../../src/Table');
 const TabPane = require('../../src/TabPane');
 const Tabs = require('../../src/Tabs');
 const Thumbnail = require('../../src/Thumbnail');
+const ToggleButton = require('../../src/ToggleButton');
+const ToggleButtonGroup = require('../../src/ToggleButtonGroup');
 const Tooltip = require('../../src/Tooltip');
 const Well = require('../../src/Well');
 
