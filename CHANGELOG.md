@@ -1,10 +1,11 @@
 ## [v0.30.5]
-> 2016-10-01
+> 2016-10-03
 
-- **Bugfix:** Fix opening `<Dropdown>` ([#2244])
+- **Bugfix:** Fix opening `<Dropdown>` ([#2244], [#2251])
 
 [v0.30.5]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.4...v0.30.5
 [#2244]: https://github.com/react-bootstrap/react-bootstrap/pull/2244
+[#2251]: https://github.com/react-bootstrap/react-bootstrap/pull/2251
 
 
 ## [v0.30.4]
