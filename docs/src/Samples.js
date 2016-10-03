@@ -14,6 +14,8 @@ export default {
   ButtonGroupNested:             require('fs').readFileSync(__dirname + '/../examples/ButtonGroupNested.js', 'utf8'),
   ButtonGroupSizes:              require('fs').readFileSync(__dirname + '/../examples/ButtonGroupSizes.js', 'utf8'),
   ButtonGroupVertical:           require('fs').readFileSync(__dirname + '/../examples/ButtonGroupVertical.js', 'utf8'),
+  ButtonGroupToggleCheckbox:     require('fs').readFileSync(__dirname + '/../examples/ButtonGroupToggleCheckbox.js', 'utf8'),
+  ButtonGroupToggleRadio:        require('fs').readFileSync(__dirname + '/../examples/ButtonGroupToggleRadio.js', 'utf8'),
   ButtonLoading:                 require('fs').readFileSync(__dirname + '/../examples/ButtonLoading.js', 'utf8'),
   ButtonSizes:                   require('fs').readFileSync(__dirname + '/../examples/ButtonSizes.js', 'utf8'),
   ButtonTagTypes:                require('fs').readFileSync(__dirname + '/../examples/ButtonTagTypes.js', 'utf8'),
