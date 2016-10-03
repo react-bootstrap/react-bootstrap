@@ -182,7 +182,7 @@ class Panel extends React.Component {
       onExit,
       onExiting,
       onExited,
-      ...props,
+      ...props
     } = this.props;
 
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, [

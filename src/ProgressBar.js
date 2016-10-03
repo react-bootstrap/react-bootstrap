@@ -72,7 +72,7 @@ function getPercentage(now, min, max) {
 
 class ProgressBar extends React.Component {
   renderProgressBar({
-    min, now, max, label, srOnly, striped, active, className, style, ...props,
+    min, now, max, label, srOnly, striped, active, className, style, ...props
   }) {
     const [bsProps, elementProps] = splitBsProps(props);
 
@@ -116,7 +116,7 @@ class ProgressBar extends React.Component {
       bsStyle,
       className,
       children,
-      ...wrapperProps,
+      ...wrapperProps
     } = props;
 
     return (

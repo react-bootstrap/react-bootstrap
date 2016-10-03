@@ -251,7 +251,7 @@ class OverlayTrigger extends React.Component {
       onFocus,
       onMouseOut,
       onMouseOver,
-      ...props,
+      ...props
     } = this.props;
 
     delete props.delay;

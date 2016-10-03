@@ -47,7 +47,7 @@ class NavDropdown extends React.Component {
       className,
       style,
       children,
-      ...props,
+      ...props
     } = this.props;
 
     const active = this.isActive(this, activeKey, activeHref);

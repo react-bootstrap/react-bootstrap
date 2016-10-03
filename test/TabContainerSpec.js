@@ -121,7 +121,7 @@ describe('<TabContainer>', () => {
 
       render() {
         const {
-          eventKeys, show = true, onSelect = () => {}, tabProps = [], ...props,
+          eventKeys, show = true, onSelect = () => {}, tabProps = [], ...props
         } = this.state;
 
         if (!show) {

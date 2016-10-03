@@ -37,7 +37,7 @@ class Radio extends React.Component {
       className,
       style,
       children,
-      ...props,
+      ...props
     } = this.props;
 
     const [bsProps, elementProps] = splitBsProps(props);

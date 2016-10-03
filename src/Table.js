@@ -29,7 +29,7 @@ class Table extends React.Component {
       hover,
       responsive,
       className,
-      ...props,
+      ...props
     } = this.props;
 
     const [bsProps, elementProps] = splitBsProps(props);

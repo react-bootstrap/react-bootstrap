@@ -189,7 +189,7 @@ class TabPane extends React.Component {
       onExiting,
       onExited,
       unmountOnExit: propsUnmountOnExit,
-      ...props,
+      ...props
     } = this.props;
 
     const {

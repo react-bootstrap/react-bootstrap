@@ -165,7 +165,7 @@ class Collapse extends React.Component {
 
   render() {
     const {
-      onEnter, onEntering, onEntered, onExit, onExiting, className, ...props,
+      onEnter, onEntering, onEntered, onExit, onExiting, className, ...props
     } = this.props;
 
     delete props.dimension;

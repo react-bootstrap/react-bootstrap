@@ -37,7 +37,7 @@ class ListGroup extends React.Component {
       children,
       componentClass: Component = getDefaultComponent(children),
       className,
-      ...props,
+      ...props
     } = this.props;
 
     const [bsProps, elementProps] = splitBsProps(props);

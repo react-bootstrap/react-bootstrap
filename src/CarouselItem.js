@@ -82,7 +82,7 @@ class CarouselItem extends React.Component {
 
   render() {
     const {
-      direction, active, animateIn, animateOut, className, ...props,
+      direction, active, animateIn, animateOut, className, ...props
     } = this.props;
 
     delete props.onAnimateOutEnd;

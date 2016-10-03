@@ -186,7 +186,7 @@ class Pagination extends React.Component {
       onSelect,
       buttonComponentClass,
       className,
-      ...props,
+      ...props
     } = this.props;
 
     const [bsProps, elementProps] = splitBsProps(props);

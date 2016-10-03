@@ -271,7 +271,7 @@ class Nav extends React.Component {
       pullLeft,
       className,
       children,
-      ...props,
+      ...props
     } = this.props;
 
     const tabContainer = this.context.$bs_tabContainer;

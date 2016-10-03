@@ -27,7 +27,7 @@ class DropdownToggle extends React.Component {
       bsClass,
       className,
       children,
-      ...props,
+      ...props
     } = this.props;
 
     delete props.bsRole;

@@ -294,7 +294,7 @@ class Carousel extends React.Component {
       nextIcon,
       className,
       children,
-      ...props,
+      ...props
     } = this.props;
 
     const { previousActiveIndex, direction } = this.state;
