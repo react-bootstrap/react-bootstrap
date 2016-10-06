@@ -168,7 +168,7 @@ const UncontrollableNavbar = uncontrollable(Navbar, { expanded: 'onToggle' });
 
 function createSimpleWrapper(tag, suffix, displayName) {
   const Wrapper = (
-    { componentClass: Component, className, pullRight, pullLeft, ...props },
+    { active, activeKey, activeHref, componentClass: Component, className, pullRight, pullLeft, ...props },
     { $bs_navbar: navbarProps = { bsClass: 'navbar' } }
   ) => (
     <Component
