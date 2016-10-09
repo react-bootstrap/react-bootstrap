@@ -212,4 +212,34 @@ describe('<Carousel>', () => {
     assert.equal(prevButtons.length, 1);
     assert.equal(nextButtons.length, 1);
   });
+
+  it('Should allow user to specify an array of elements as icons', () => {
+    const prevIcon = [
+      <span className="previous" key="first"></span>,
+      <span className="previous" key="second"></span>,
+    ];
+
+    const nextIcon = [
+      <span className="next" key="first"></span>,
+      <span className="next" key="second"></span>,
+    ];
+
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Carousel
+        activeIndex={1} controls wrap={false}
+        prevIcon={prevIcon}
+        nextIcon={nextIcon}
+      >
+        <Carousel.Item>Item 1 content</Carousel.Item>
+        <Carousel.Item>Item 2 content</Carousel.Item>
+        <Carousel.Item>Item 3 content</Carousel.Item>
+      </Carousel>
+    );
+
+    const prevButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'previous');
+    const nextButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'next');
+
+    assert.equal(prevButtons.length, 2);
+    assert.equal(nextButtons.length, 2);
+  });
 });
