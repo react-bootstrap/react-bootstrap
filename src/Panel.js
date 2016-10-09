@@ -99,6 +99,7 @@ class Panel extends React.Component {
         role={role}
         href={id && `#${id}`}
         onClick={this.handleClickTitle}
+        className={ expanded ? '' : 'collapsed' }
         aria-controls={id}
         aria-expanded={expanded}
         aria-selected={expanded}

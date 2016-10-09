@@ -284,6 +284,7 @@ describe('<Panel>', () => {
       );
       const anchor = ReactDOM.findDOMNode(instance).querySelector('.panel-title a');
       assert.equal(anchor.getAttribute('aria-expanded'), 'true');
+      assert.ok(!anchor.getAttribute('class').match(/\bcollapsed\b/));
     });
 
     it('Should be aria-expanded=false', () => {
@@ -294,6 +295,7 @@ describe('<Panel>', () => {
       );
       const anchor = ReactDOM.findDOMNode(instance).querySelector('.panel-title a');
       assert.equal(anchor.getAttribute('aria-expanded'), 'false');
+      assert.ok(anchor.getAttribute('class').match(/\bcollapsed\b/));
     });
 
     it('Should add aria-controls with id', () => {
