@@ -87,8 +87,8 @@ class Pagination extends React.Component {
 
     if (maxButtons) {
       let hiddenPagesBefore = activePage - parseInt(maxButtons / 2, 10);
-      startPage = hiddenPagesBefore > 2 ? hiddenPagesBefore : 1;
-      hasHiddenPagesAfter = startPage + maxButtons < items;
+      startPage = hiddenPagesBefore >= 2 ? hiddenPagesBefore : 1;
+      hasHiddenPagesAfter = startPage + maxButtons <= items;
 
       if (!hasHiddenPagesAfter) {
         endPage = items;
