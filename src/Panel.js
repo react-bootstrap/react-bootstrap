@@ -94,16 +94,21 @@ class Panel extends React.Component {
   }
 
   renderAnchor(header, id, role, expanded) {
+    const props = {
+      role,
+      href: id && `#${id}`,
+      onClick: this.handleClickTitle,
+      'aria-controls': id,
+      'aria-expanded': expanded,
+      'aria-selected': expanded,
+    };
+
+    if (!expanded) {
+      props.className = 'collapsed';
+    }
+
     return (
-      <a
-        role={role}
-        href={id && `#${id}`}
-        onClick={this.handleClickTitle}
-        className={ expanded ? '' : 'collapsed' }
-        aria-controls={id}
-        aria-expanded={expanded}
-        aria-selected={expanded}
-      >
+      <a {...props}>
         {header}
       </a>
     );

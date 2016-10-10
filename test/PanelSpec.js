@@ -284,7 +284,7 @@ describe('<Panel>', () => {
       );
       const anchor = ReactDOM.findDOMNode(instance).querySelector('.panel-title a');
       assert.equal(anchor.getAttribute('aria-expanded'), 'true');
-      assert.ok(!anchor.getAttribute('class').match(/\bcollapsed\b/));
+      assert.equal(anchor.getAttribute('class'), null);
     });
 
     it('Should be aria-expanded=false', () => {
