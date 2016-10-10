@@ -36,14 +36,8 @@ const propTypes = {
   activeIndex: React.PropTypes.number,
   defaultActiveIndex: React.PropTypes.number,
   direction: React.PropTypes.oneOf(['prev', 'next']),
-  prevIcon: React.PropTypes.oneOfType([
-    React.PropTypes.node,
-    React.PropTypes.arrayOf(React.PropTypes.node),
-  ]),
-  nextIcon: React.PropTypes.oneOfType([
-    React.PropTypes.node,
-    React.PropTypes.arrayOf(React.PropTypes.node),
-  ]),
+  prevIcon: React.PropTypes.node,
+  nextIcon: React.PropTypes.node,
 };
 
 const defaultProps = {
