@@ -276,4 +276,30 @@ describe('<Pagination>', () => {
 
     assert.equal(pageButtons[1].getAttribute('href'), '?page=2');
   });
+
+  it('should render three items from 1 to 3 when activePage=1', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Pagination items={4} maxButtons={3} activePage={1} />
+    );
+    const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+
+    assert.equal(pageButtons[0].textContent, '1');
+    assert.equal(pageButtons[1].textContent, '2');
+    assert.equal(pageButtons[2].textContent, '3');
+  });
+
+  it('should render three items from 2 to 4 when activePage=3', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Pagination
+        onSelect={()=>{}}
+        items={4}
+        maxButtons={3}
+        activePage={3} />
+    );
+    const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
+
+    assert.equal(pageButtons[0].textContent, '2');
+    assert.equal(pageButtons[1].textContent, '3');
+    assert.equal(pageButtons[2].textContent, '4');
+  });
 });
