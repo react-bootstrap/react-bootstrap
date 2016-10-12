@@ -60,9 +60,9 @@ const defaultProps = {
   indicators: true,
   controls: true,
   prevIcon: <Glyphicon glyph="chevron-left" />,
-  prevLabel: "Previous",
+  prevLabel: 'Previous',
   nextIcon: <Glyphicon glyph="chevron-right" />,
-  nextLabel: "Next",
+  nextLabel: 'Next',
 };
 
 class Carousel extends React.Component {
