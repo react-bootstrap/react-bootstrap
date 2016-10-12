@@ -65,6 +65,14 @@ const propTypes = {
    */
   expanded: React.PropTypes.bool,
 
+  /**
+   * Sets 'lazy auto-toggling' that nondiscriminantely fires the onToggle callback
+   * when an interior <Navbar.Collapse> is clicked anywhere. All subcomponent onClick
+   * events will continue to work as intended. This should not be used for complex
+   * nav menus.
+   */
+  lazyAutoToggle: React.PropTypes.bool,
+
   role: React.PropTypes.string,
 };
 
@@ -75,6 +83,7 @@ const defaultProps = {
   staticTop: false,
   inverse: false,
   fluid: false,
+  lazyAutoToggle: false,
 };
 
 const childContextTypes = {
@@ -82,6 +91,7 @@ const childContextTypes = {
     bsClass: PropTypes.string,
     expanded: PropTypes.bool,
     onToggle: PropTypes.func.isRequired,
+    lazyAutoToggle: PropTypes.bool,
   })
 };
 
@@ -93,13 +103,14 @@ class Navbar extends React.Component {
   }
 
   getChildContext() {
-    const { bsClass, expanded } = this.props;
+    const { bsClass, expanded, lazyAutoToggle } = this.props;
 
     return {
       $bs_navbar: {
         bsClass,
         expanded,
         onToggle: this.handleToggle,
+        lazyAutoToggle,
       },
     };
   }
@@ -124,7 +135,7 @@ class Navbar extends React.Component {
     } = this.props;
 
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
-      'expanded', 'onToggle',
+      'expanded', 'onToggle', 'lazyAutoToggle'
     ]);
 
     // will result in some false positives but that seems better

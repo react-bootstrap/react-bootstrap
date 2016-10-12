@@ -254,6 +254,52 @@ describe('<Navbar>', () => {
     expect(toggle.className).to.not.match(/collapsed/);
   });
 
+  it('Should lazyAutoToggle to the collapse when given lazyAutoToggle prop', () => {
+    const toggleSpy = sinon.spy();
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar lazyAutoToggle onToggle={toggleSpy}>
+        <Navbar.Header>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          hello
+        </Navbar.Collapse>
+      </Navbar>
+    );
+
+    const collapse = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Collapse);
+
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(collapse));
+
+    expect(toggleSpy).to.be.calledOnce;
+    expect(toggleSpy).to.be.calledWith(true);
+  });
+
+  it('Should lazyAutoToggle & fire subcomponent onclick', () => {
+    const toggleSpy = sinon.spy();
+    const navItemSpy = sinon.spy();
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar lazyAutoToggle onToggle={toggleSpy}>
+        <Navbar.Header>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Navbar.Link onClick={navItemSpy}>
+            Hello
+          </Navbar.Link>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+
+    const link = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Link);
+
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(link));
+
+    expect(toggleSpy).to.be.calledOnce;
+    expect(toggleSpy).to.be.calledWith(true);
+    expect(navItemSpy).to.be.calledOnce;
+  });
+
   it('Should pass `bsClass` down to sub components', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Navbar bsClass="my-navbar">
