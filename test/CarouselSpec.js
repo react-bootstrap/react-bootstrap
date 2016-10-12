@@ -212,4 +212,43 @@ describe('<Carousel>', () => {
     assert.equal(prevButtons.length, 1);
     assert.equal(nextButtons.length, 1);
   });
+
+  it('Should allow user to specify a previous and next SR label', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Carousel
+        activeIndex={1} controls wrap={false}
+        prevLabel="Previous awesomeness"
+        nextLabel="Next awesomeness"
+      >
+        <Carousel.Item>Item 1 content</Carousel.Item>
+        <Carousel.Item>Item 2 content</Carousel.Item>
+        <Carousel.Item>Item 3 content</Carousel.Item>
+      </Carousel>
+    );
+
+    const labels = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'sr-only');
+
+    assert.equal(labels.length, 2);
+    assert.equal(labels[0].textContent, 'Previous awesomeness');
+    assert.equal(labels[1].textContent, 'Next awesomeness');
+  });
+
+  it('Should not render labels when values are falsy', () => {
+    [null, ''].forEach(falsyValue => {
+      const instance = ReactTestUtils.renderIntoDocument(
+        <Carousel
+          activeIndex={1} controls wrap={false}
+          prevLabel={falsyValue}
+          nextLabel={falsyValue}
+        >
+          <Carousel.Item>Item 1 content</Carousel.Item>
+          <Carousel.Item>Item 2 content</Carousel.Item>
+          <Carousel.Item>Item 3 content</Carousel.Item>
+        </Carousel>
+      );
+
+      const labels = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'sr-only');
+      assert.equal(labels.length, 0, `should not render labels for value ${falsyValue}`);
+    });
+  });
 });

@@ -37,7 +37,19 @@ const propTypes = {
   defaultActiveIndex: React.PropTypes.number,
   direction: React.PropTypes.oneOf(['prev', 'next']),
   prevIcon: React.PropTypes.node,
+  /**
+   * Label shown to screen readers only, can be used to show the previous element
+   * in the carousel.
+   * Set to null to deactivate.
+   */
+  prevLabel: React.PropTypes.string,
   nextIcon: React.PropTypes.node,
+  /**
+   * Label shown to screen readers only, can be used to show the next element
+   * in the carousel.
+   * Set to null to deactivate.
+   */
+  nextLabel: React.PropTypes.string,
 };
 
 const defaultProps = {
@@ -48,7 +60,9 @@ const defaultProps = {
   indicators: true,
   controls: true,
   prevIcon: <Glyphicon glyph="chevron-left" />,
+  prevLabel: 'Previous',
   nextIcon: <Glyphicon glyph="chevron-right" />,
+  nextLabel: 'Next',
 };
 
 class Carousel extends React.Component {
@@ -257,7 +271,9 @@ class Carousel extends React.Component {
     );
   }
 
-  renderControls(wrap, children, activeIndex, prevIcon, nextIcon, bsProps) {
+  renderControls(properties) {
+    const { wrap, children, activeIndex, prevIcon,
+            nextIcon, bsProps, prevLabel, nextLabel } = properties;
     const controlClassName = prefix(bsProps, 'control');
     const count = ValidComponentChildren.count(children);
 
@@ -269,6 +285,7 @@ class Carousel extends React.Component {
           onClick={this.handlePrev}
         >
           {prevIcon}
+          {prevLabel && <span className="sr-only">{prevLabel}</span>}
         </SafeAnchor>
       ),
 
@@ -279,6 +296,7 @@ class Carousel extends React.Component {
           onClick={this.handleNext}
         >
           {nextIcon}
+          {nextLabel && <span className="sr-only">{nextLabel}</span>}
         </SafeAnchor>
       ),
     ];
@@ -291,7 +309,9 @@ class Carousel extends React.Component {
       controls,
       wrap,
       prevIcon,
+      prevLabel,
       nextIcon,
+      nextLabel,
       className,
       children,
       ...props
@@ -342,9 +362,16 @@ class Carousel extends React.Component {
           })}
         </div>
 
-        {controls && this.renderControls(
-          wrap, children, activeIndex, prevIcon, nextIcon, bsProps
-        )}
+        {controls && this.renderControls({
+          wrap,
+          children,
+          activeIndex,
+          prevIcon,
+          prevLabel,
+          nextIcon,
+          nextLabel,
+          bsProps,
+        })}
       </div>
     );
   }
