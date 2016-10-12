@@ -47,8 +47,14 @@ const defaultProps = {
   wrap: true,
   indicators: true,
   controls: true,
-  prevIcon: <Glyphicon glyph="chevron-left" />,
-  nextIcon: <Glyphicon glyph="chevron-right" />,
+  prevIcon: [
+    <Glyphicon glyph="chevron-left" key="icon" />,
+    <span className="sr-only" key="sr">Previous</span>,
+  ],
+  nextIcon: [
+    <Glyphicon glyph="chevron-right" key="icon" />,
+    <span className="sr-only" key="sr">Next</span>,
+  ],
 };
 
 class Carousel extends React.Component {
