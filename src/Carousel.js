@@ -277,9 +277,6 @@ class Carousel extends React.Component {
     const controlClassName = prefix(bsProps, 'control');
     const count = ValidComponentChildren.count(children);
 
-    const prevLabelNode = prevLabel && <span className="sr-only">{prevLabel}</span>;
-    const nextLabelNode = nextLabel && <span className="sr-only">{nextLabel}</span>;
-
     return [
       (wrap || activeIndex !== 0) && (
         <SafeAnchor
@@ -288,7 +285,7 @@ class Carousel extends React.Component {
           onClick={this.handlePrev}
         >
           {prevIcon}
-          {prevLabelNode}
+          {prevLabel && <span className="sr-only">{prevLabel}</span>}
         </SafeAnchor>
       ),
 
@@ -299,7 +296,7 @@ class Carousel extends React.Component {
           onClick={this.handleNext}
         >
           {nextIcon}
-          {nextLabelNode}
+          {nextLabel && <span className="sr-only">{nextLabel}</span>}
         </SafeAnchor>
       ),
     ];
