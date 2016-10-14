@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
+import NavItem from '../src/NavItem';
+
 import { addStyle } from '../src/utils/bootstrapUtils';
 
 import { getOne } from './helpers';
@@ -254,28 +256,7 @@ describe('<Navbar>', () => {
     expect(toggle.className).to.not.match(/collapsed/);
   });
 
-  it('Should lazyAutoToggle to the collapse when given lazyAutoToggle prop', () => {
-    const toggleSpy = sinon.spy();
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar lazyAutoToggle onToggle={toggleSpy}>
-        <Navbar.Header>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          hello
-        </Navbar.Collapse>
-      </Navbar>
-    );
-
-    const collapse = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Collapse);
-
-    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(collapse));
-
-    expect(toggleSpy).to.be.calledOnce;
-    expect(toggleSpy).to.be.calledWith(true);
-  });
-
-  it('Should lazyAutoToggle & fire subcomponent onclick', () => {
+  it('Should lazyAutoToggle & fire Nav subcomponent onSelect event', () => {
     const toggleSpy = sinon.spy();
     const navItemSpy = sinon.spy();
     const instance = ReactTestUtils.renderIntoDocument(
@@ -284,20 +265,24 @@ describe('<Navbar>', () => {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Navbar.Link onClick={navItemSpy}>
-            Hello
-          </Navbar.Link>
+          <Nav>
+            <NavItem eventKey={1} href="#" onClick={navItemSpy}>
+              <span className="link-text">
+                Option 1
+              </span>
+            </NavItem>
+          </Nav>
         </Navbar.Collapse>
       </Navbar>
     );
 
-    const link = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Link);
+    const link = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'link-text');
 
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(link));
 
+    expect(navItemSpy).to.be.calledOnce;
     expect(toggleSpy).to.be.calledOnce;
     expect(toggleSpy).to.be.calledWith(true);
-    expect(navItemSpy).to.be.calledOnce;
   });
 
   it('Should pass `bsClass` down to sub components', () => {

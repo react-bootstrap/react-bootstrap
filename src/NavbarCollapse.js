@@ -7,25 +7,10 @@ const contextTypes = {
   $bs_navbar: PropTypes.shape({
     bsClass: PropTypes.string,
     expanded: PropTypes.bool,
-    lazyAutoToggle: PropTypes.bool,
   }),
 };
 
-const propTypes = { lazyAutoToggle: PropTypes.bool };
-
 class NavbarCollapse extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick() {
-    const { lazyAutoToggle, onToggle } = this.context.$bs_navbar;
-    if (lazyAutoToggle && onToggle) {
-      onToggle();
-    }
-  }
-
   render() {
     const { children, ...props } = this.props;
     const navbarProps = this.context.$bs_navbar || { bsClass: 'navbar' };
@@ -34,7 +19,7 @@ class NavbarCollapse extends React.Component {
 
     return (
       <Collapse in={navbarProps.expanded} {...props}>
-        <div className={bsClassName} onClick={this.handleClick}>
+        <div className={bsClassName}>
           {children}
         </div>
       </Collapse>
@@ -43,7 +28,5 @@ class NavbarCollapse extends React.Component {
 }
 
 NavbarCollapse.contextTypes = contextTypes;
-
-NavbarCollapse.propTypes = propTypes;
 
 export default NavbarCollapse;

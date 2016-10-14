@@ -67,9 +67,9 @@ const propTypes = {
 
   /**
    * Sets 'lazy auto-toggling' that nondiscriminantely fires the onToggle callback
-   * when an interior <Navbar.Collapse> is clicked anywhere. All subcomponent onClick
-   * events will continue to work as intended. This should not be used for complex
-   * nav menus.
+   * after the onClick & onSelect callbacks for every item within a child <Nav>.
+   * Does nothing if no child <Nav> is present. lazyAutoToggle should not be used
+   * for complex nav menus.
    */
   lazyAutoToggle: React.PropTypes.bool,
 
