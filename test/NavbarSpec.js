@@ -314,38 +314,6 @@ describe('<Navbar>', () => {
     expect(selectSpy).to.be.calledWith(1);
   });
 
-
-  it('Should not fire onToggle for toggleOnSelect when onSelect is provided', () => {
-    const selectSpy = sinon.spy();
-    const navItemSpy = sinon.spy();
-    const toggleSpy = sinon.spy();
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar onSelect={selectSpy} onToggle={toggleSpy} toggleOnSelect>
-        <Navbar.Header>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <NavItem eventKey={1} href="#" onClick={navItemSpy}>
-              <span className="link-text">
-                Option 1
-              </span>
-            </NavItem>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    );
-
-    const link = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'link-text');
-
-    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(link));
-
-    expect(navItemSpy).to.be.calledOnce;
-    expect(selectSpy).to.be.calledOnce;
-    expect(selectSpy).to.be.calledWith(1);
-    expect(toggleSpy.callCount).to.equal(0);
-  });
-
   it('Should pass `bsClass` down to sub components', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Navbar bsClass="my-navbar">

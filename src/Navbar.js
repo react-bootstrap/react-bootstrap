@@ -19,6 +19,7 @@ import {
   splitBsPropsAndOmit,
 } from './utils/bootstrapUtils';
 import { Style } from './utils/StyleConfig';
+import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
   /**
@@ -60,22 +61,24 @@ const propTypes = {
   /**
    * A callback fired when a `<NavItem>` grandchild is selected inside a child
    * `<Nav>`. Should be used to execute complex toggling or other miscellaneous
-   * actions desired after selecting a `<NavItem>`. The callback is called with
-   * an eventKey, which is a prop from the `<NavItem>`, and an event.
+   * actions desired after selecting a `<NavItem>`. Does nothing if no `<Nav>`
+   * & `<NavItem>` children exist. The callback is called with an eventKey,
+   * which is a prop from the `<NavItem>`, and an event.
+   *
    * ```js
    * function (
    * 	Any eventKey,
    * 	SyntheticEvent event?
    * )
    * ```
+   *
    * For basic toggling after all `<NavItem>` select events, try using
-   * toggleOnSelect. Note: When onSelect is set, toggleOnSelect will do nothing.
+   * toggleOnSelect.
    */
   onSelect: React.PropTypes.func,
   /**
    * Fires the onToggle callback whenever a <NavItem> inside the child <Nav> is
-   * selected. Does nothing if an onSelect callback is provided to `<Navbar>` or
-   * if no `<Nav>` & `<NavItem>` children exist.
+   * selected. Does nothing if no `<Nav>` & `<NavItem>` children exist.
    *
    * The onSelect callback should be used instead for more complex operations
    * desired for after `<NavItem>` select events.
@@ -115,18 +118,17 @@ class Navbar extends React.Component {
     super(props, context);
 
     this.handleToggle = this.handleToggle.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
   }
 
   getChildContext() {
-    const { bsClass, expanded } = this.props;
+    const { bsClass, expanded, onSelect, toggleOnSelect } = this.props;
 
     return {
       $bs_navbar: {
         bsClass,
         expanded,
         onToggle: this.handleToggle,
-        onSelect: this.handleSelect,
+        onSelect: createChainedFunction(onSelect, toggleOnSelect && this.handleToggle || null),
       },
     };
   }
@@ -135,16 +137,6 @@ class Navbar extends React.Component {
     const { onToggle, expanded } = this.props;
 
     onToggle(!expanded);
-  }
-
-  handleSelect(eventKey, syntheticEvent) {
-    const { onSelect, toggleOnSelect } = this.props;
-
-    if (onSelect) {
-      onSelect(eventKey, syntheticEvent);
-    } else if (toggleOnSelect) {
-      this.handleToggle();
-    }
   }
 
   render() {
