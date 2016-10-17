@@ -77,7 +77,7 @@ const propTypes = {
    */
   onSelect: React.PropTypes.func,
   /**
-   * Fires the onToggle callback whenever a <NavItem> inside the child <Nav> is
+   * Fires the onToggle callback whenever a `<NavItem>` inside the child `<Nav>` is
    * selected. Does nothing if no `<Nav>` & `<NavItem>` children exist.
    *
    * The onSelect callback should be used instead for more complex operations
