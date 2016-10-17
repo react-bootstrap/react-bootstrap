@@ -57,21 +57,36 @@ const propTypes = {
    * @controllable navExpanded
    */
   onToggle: React.PropTypes.func,
-
+  /**
+   * A callback fired when a `<NavItem>` grandchild is selected inside a child
+   * `<Nav>`. Should be used to execute complex toggling or other miscellaneous
+   * actions desired after selecting a `<NavItem>`. The callback is called with
+   * an eventKey, which is a prop from the `<NavItem>`, and an event.
+   * ```js
+   * function (
+   * 	Any eventKey,
+   * 	SyntheticEvent event?
+   * )
+   * ```
+   * For basic toggling after all `<NavItem>` select events, try using
+   * toggleOnSelect. Note: When onSelect is set, toggleOnSelect will do nothing.
+   */
+  onSelect: React.PropTypes.func,
+  /**
+   * Fires the onToggle callback whenever a <NavItem> inside the child <Nav> is
+   * selected. Does nothing if an onSelect callback is provided to `<Navbar>` or
+   * if no `<Nav>` & `<NavItem>` children exist.
+   *
+   * The onSelect callback should be used instead for more complex operations
+   * desired for after `<NavItem>` select events.
+   */
+  toggleOnSelect: React.PropTypes.bool,
   /**
    * Explicitly set the visiblity of the navbar body
    *
    * @controllable onToggle
    */
   expanded: React.PropTypes.bool,
-
-  /**
-   * Sets 'lazy auto-toggling' that nondiscriminantely fires the onToggle callback
-   * after the onClick & onSelect callbacks for every item within a child <Nav>.
-   * Does nothing if no child <Nav> is present. lazyAutoToggle should not be used
-   * for complex nav menus.
-   */
-  lazyAutoToggle: React.PropTypes.bool,
 
   role: React.PropTypes.string,
 };
@@ -83,7 +98,7 @@ const defaultProps = {
   staticTop: false,
   inverse: false,
   fluid: false,
-  lazyAutoToggle: false,
+  toggleOnSelect: false,
 };
 
 const childContextTypes = {
@@ -91,7 +106,8 @@ const childContextTypes = {
     bsClass: PropTypes.string,
     expanded: PropTypes.bool,
     onToggle: PropTypes.func.isRequired,
-    lazyAutoToggle: PropTypes.bool,
+    onSelect: PropTypes.func,
+    toggleOnSelect: PropTypes.bool,
   })
 };
 
@@ -103,14 +119,15 @@ class Navbar extends React.Component {
   }
 
   getChildContext() {
-    const { bsClass, expanded, lazyAutoToggle } = this.props;
+    const { bsClass, expanded, onSelect, toggleOnSelect } = this.props;
 
     return {
       $bs_navbar: {
         bsClass,
         expanded,
         onToggle: this.handleToggle,
-        lazyAutoToggle,
+        onSelect,
+        toggleOnSelect,
       },
     };
   }
@@ -135,7 +152,7 @@ class Navbar extends React.Component {
     } = this.props;
 
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
-      'expanded', 'onToggle', 'lazyAutoToggle'
+      'expanded', 'onToggle', 'onSelect', 'toggleOnSelect'
     ]);
 
     // will result in some false positives but that seems better
