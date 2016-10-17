@@ -107,7 +107,6 @@ const childContextTypes = {
     expanded: PropTypes.bool,
     onToggle: PropTypes.func.isRequired,
     onSelect: PropTypes.func,
-    toggleOnSelect: PropTypes.bool,
   })
 };
 
@@ -116,18 +115,18 @@ class Navbar extends React.Component {
     super(props, context);
 
     this.handleToggle = this.handleToggle.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   getChildContext() {
-    const { bsClass, expanded, onSelect, toggleOnSelect } = this.props;
+    const { bsClass, expanded } = this.props;
 
     return {
       $bs_navbar: {
         bsClass,
         expanded,
         onToggle: this.handleToggle,
-        onSelect,
-        toggleOnSelect,
+        onSelect: this.handleSelect,
       },
     };
   }
@@ -136,6 +135,16 @@ class Navbar extends React.Component {
     const { onToggle, expanded } = this.props;
 
     onToggle(!expanded);
+  }
+
+  handleSelect(eventKey, syntheticEvent) {
+    const { onSelect, toggleOnSelect } = this.props;
+
+    if (onSelect) {
+      onSelect(eventKey, syntheticEvent);
+    } else if (toggleOnSelect) {
+      this.handleToggle();
+    }
   }
 
   render() {

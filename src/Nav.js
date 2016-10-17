@@ -93,8 +93,6 @@ const defaultProps = {
 const contextTypes = {
   $bs_navbar: React.PropTypes.shape({
     bsClass: React.PropTypes.string,
-    toggleOnSelect: React.PropTypes.bool,
-    onToggle: React.PropTypes.func,
     onSelect: React.PropTypes.func,
   }),
 
@@ -322,7 +320,7 @@ class Nav extends React.Component {
           const childOnSelect = createChainedFunction(
             child.props.onSelect,
             onSelect,
-            navbar && (navbar.onSelect || navbar.toggleOnSelect && navbar.onToggle) || null,
+            navbar && navbar.onSelect,
             tabContainer && tabContainer.onSelect
           );
 
