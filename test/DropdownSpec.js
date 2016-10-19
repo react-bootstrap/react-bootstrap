@@ -170,6 +170,52 @@ describe('<Dropdown>', () => {
     buttonNode.getAttribute('aria-expanded').should.equal('false');
   });
 
+  it('closes when clicked outside', () => {
+    const instance = ReactTestUtils.renderIntoDocument(simpleDropdown);
+    const node = ReactDOM.findDOMNode(instance);
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
+
+    node.className.should.not.match(/\bopen\b/);
+    buttonNode.getAttribute('aria-expanded').should.equal('false');
+
+    ReactTestUtils.Simulate.click(buttonNode);
+
+    node.className.should.match(/\bopen\b/);
+    buttonNode.getAttribute('aria-expanded').should.equal('true');
+
+    // Use native events as the click doesn't have to be in the React portion
+    const event = new MouseEvent('click');
+    document.dispatchEvent(event);
+
+    node.className.should.not.match(/\bopen\b/);
+    buttonNode.getAttribute('aria-expanded').should.equal('false');
+  });
+
+  it('closes when mousedown outside if rootCloseEvent set', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Dropdown id="test-id" rootCloseEvent="mousedown">
+        {dropdownChildren}
+      </Dropdown>
+    );
+    const node = ReactDOM.findDOMNode(instance);
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
+
+    node.className.should.not.match(/\bopen\b/);
+    buttonNode.getAttribute('aria-expanded').should.equal('false');
+
+    ReactTestUtils.Simulate.click(buttonNode);
+
+    node.className.should.match(/\bopen\b/);
+    buttonNode.getAttribute('aria-expanded').should.equal('true');
+
+    // Use native events as the click doesn't have to be in the React portion
+    const event = new MouseEvent('mousedown');
+    document.dispatchEvent(event);
+
+    node.className.should.not.match(/\bopen\b/);
+    buttonNode.getAttribute('aria-expanded').should.equal('false');
+  });
+
   it('opens if dropdown contains no focusable menu item', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown title="custom child" id="dropdown">

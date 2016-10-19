@@ -94,6 +94,11 @@ const propTypes = {
    * a menu button.
    */
   role: React.PropTypes.string,
+
+  /**
+   * Which event when fired outside the component will cause it to be closed
+   */
+  rootCloseEvent: React.PropTypes.oneOf(['click', 'mousedown']),
 };
 
 const defaultProps = {
@@ -241,7 +246,7 @@ class Dropdown extends React.Component {
     });
   }
 
-  renderMenu(child, { id, onClose, onSelect, ...props }) {
+  renderMenu(child, { id, onClose, onSelect, rootCloseEvent, ...props }) {
     let ref = c => { this.menu = c; };
 
     if (typeof child.ref === 'string') {
@@ -265,6 +270,7 @@ class Dropdown extends React.Component {
       onSelect: createChainedFunction(
         child.props.onSelect, onSelect, this.handleClose,
       ),
+      rootCloseEvent
     });
   }
 
@@ -281,6 +287,7 @@ class Dropdown extends React.Component {
       role,
       bsClass,
       className,
+      rootCloseEvent,
       children,
       ...props
     } = this.props;
@@ -314,7 +321,7 @@ class Dropdown extends React.Component {
               });
             case MENU_ROLE:
               return this.renderMenu(child, {
-                id, open, pullRight, bsClass, onClose, onSelect,
+                id, open, pullRight, bsClass, onClose, onSelect, rootCloseEvent,
               });
             default:
               return child;
