@@ -61,7 +61,7 @@ class SafeAnchor extends React.Component {
       props.role = props.role || 'button';
       // we want to make sure there is a href attribute on the node
       // otherwise, the cursor incorrectly styled (except with role='button')
-      props.href = props.href || '';
+      props.href = props.href || '#';
     }
 
     if (disabled) {

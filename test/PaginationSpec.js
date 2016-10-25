@@ -181,8 +181,8 @@ describe('<Pagination>', () => {
     assert.equal(pageButtons[0].children[0].tagName, 'A');
     assert.equal(pageButtons[1].children[0].tagName, 'A');
 
-    assert.equal(pageButtons[0].children[0].getAttribute('href'), '');
-    assert.equal(pageButtons[1].children[0].getAttribute('href'), '');
+    assert.equal(pageButtons[0].children[0].getAttribute('href'), '#');
+    assert.equal(pageButtons[1].children[0].getAttribute('href'), '#');
   });
 
   it('should wrap each button in a buttonComponentClass when it is present', () => {
