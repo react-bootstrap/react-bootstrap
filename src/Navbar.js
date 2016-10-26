@@ -125,13 +125,15 @@ class Navbar extends React.Component {
 
   getChildContext() {
     const { bsClass, expanded, onSelect, toggleOnSelect } = this.props;
+    const inMobileViewport = typeof(window) !== 'undefined' && window.innerWidth < 768;
+    const canToggleOnSelect = inMobileViewport && toggleOnSelect || false;
 
     return {
       $bs_navbar: {
         bsClass,
         expanded,
         onToggle: this.handleToggle,
-        onSelect: createChainedFunction(onSelect, window.innerWidth < 768 && toggleOnSelect && this.handleToggle || null),
+        onSelect: createChainedFunction(onSelect, canToggleOnSelect && this.handleToggle || null),
       },
     };
   }
