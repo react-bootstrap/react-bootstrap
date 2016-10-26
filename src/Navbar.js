@@ -128,7 +128,7 @@ class Navbar extends React.Component {
         bsClass,
         expanded,
         onToggle: this.handleToggle,
-        onSelect: createChainedFunction(onSelect, toggleOnSelect && this.handleToggle || null),
+        onSelect: createChainedFunction(onSelect, window.innerWidth < 768 && toggleOnSelect && this.handleToggle || null),
       },
     };
   }
