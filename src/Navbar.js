@@ -63,7 +63,9 @@ const propTypes = {
    * `<Nav>`. Should be used to execute complex toggling or other miscellaneous
    * actions desired after selecting a `<NavItem>`. Does nothing if no `<Nav>`
    * & `<NavItem>` children exist. The callback is called with an eventKey,
-   * which is a prop from the `<NavItem>`, and an event.
+   * which is a prop from the `<NavItem>`, and an event. If you would like
+   * onSelect to only fire when in a mobile viewport, add a condition for it to
+   * fire only when `window.innerWidth` is less than 768.
    *
    * ```js
    * function (
@@ -72,13 +74,14 @@ const propTypes = {
    * )
    * ```
    *
-   * For basic toggling after all `<NavItem>` select events, try using
-   * toggleOnSelect.
+   * For basic toggling after all `<NavItem>` select events in mobile viewports,
+   * try using toggleOnSelect.
    */
   onSelect: React.PropTypes.func,
   /**
    * Fires the onToggle callback whenever a `<NavItem>` inside the child `<Nav>` is
-   * selected. Does nothing if no `<Nav>` & `<NavItem>` children exist.
+   * selected. Does nothing if no `<Nav>` & `<NavItem>` children exist or if
+   * the window is not in a mobile-sized viewport.
    *
    * The onSelect callback should be used instead for more complex operations
    * desired for after `<NavItem>` select events.
