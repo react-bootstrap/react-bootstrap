@@ -257,32 +257,38 @@ describe('<Navbar>', () => {
   });
 
   it('Should toggleOnSelect & fire Nav subcomponent onSelect event', () => {
-    const toggleSpy = sinon.spy();
-    const navItemSpy = sinon.spy();
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar toggleOnSelect onToggle={toggleSpy}>
-        <Navbar.Header>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <NavItem eventKey={1} href="#" onClick={navItemSpy}>
-              <span className="link-text">
-                Option 1
-              </span>
-            </NavItem>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    );
+    let widthBackup = window.innerWidth;
+    try {
+      window.innerWidth = 100;
+      const toggleSpy = sinon.spy();
+      const navItemSpy = sinon.spy();
+      const instance = ReactTestUtils.renderIntoDocument(
+        <Navbar toggleOnSelect onToggle={toggleSpy}>
+          <Navbar.Header>
+            <Navbar.Toggle />
+          </Navbar.Header>
+          <Navbar.Collapse>
+            <Nav>
+              <NavItem eventKey={1} href="#" onClick={navItemSpy}>
+                <span className="link-text">
+                  Option 1
+                </span>
+              </NavItem>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      );
 
-    const link = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'link-text');
+      const link = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'link-text');
 
-    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(link));
+      ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(link));
 
-    expect(navItemSpy).to.be.calledOnce;
-    expect(toggleSpy).to.be.calledOnce;
-    expect(toggleSpy).to.be.calledWith(true);
+      expect(navItemSpy).to.be.calledOnce;
+      expect(toggleSpy).to.be.calledOnce;
+      expect(toggleSpy).to.be.calledWith(true);
+    } finally {
+      window.innerWidth = widthBackup;
+    }
   });
 
   it('Should fire onSelect with eventKey for nav children', () => {
