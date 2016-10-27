@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
+import NavItem from '../src/NavItem';
+
 import { addStyle } from '../src/utils/bootstrapUtils';
 
 import { getOne } from './helpers';
@@ -252,6 +254,64 @@ describe('<Navbar>', () => {
 
     expect(collapse.context.$bs_navbar.expanded).to.equal(true);
     expect(toggle.className).to.not.match(/collapsed/);
+  });
+
+  it('Should closeOnSelect & fire Nav subcomponent onSelect event if expanded', () => {
+    const toggleSpy = sinon.spy();
+    const navItemSpy = sinon.spy();
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar closeOnSelect onToggle={toggleSpy} defaultExpanded>
+        <Navbar.Header>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            <NavItem eventKey={1} href="#" onClick={navItemSpy}>
+              <span className="link-text">
+                Option 1
+              </span>
+            </NavItem>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+
+    const link = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'link-text');
+
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(link));
+
+    expect(navItemSpy).to.be.calledOnce;
+    expect(toggleSpy).to.be.calledOnce;
+    expect(toggleSpy).to.be.calledWith(false);
+  });
+
+  it('Should fire onSelect with eventKey for nav children', () => {
+    const selectSpy = sinon.spy();
+    const navItemSpy = sinon.spy();
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar onSelect={selectSpy}>
+        <Navbar.Header>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            <NavItem eventKey={1} href="#" onClick={navItemSpy}>
+              <span className="onselect-text">
+                Option 1
+              </span>
+            </NavItem>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+
+    const link = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'onselect-text');
+
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(link));
+
+    expect(navItemSpy).to.be.calledOnce;
+    expect(selectSpy).to.be.calledOnce;
+    expect(selectSpy).to.be.calledWith(1);
   });
 
   it('Should pass `bsClass` down to sub components', () => {

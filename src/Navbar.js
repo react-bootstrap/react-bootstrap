@@ -19,6 +19,7 @@ import {
   splitBsPropsAndOmit,
 } from './utils/bootstrapUtils';
 import { Style } from './utils/StyleConfig';
+import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
   /**
@@ -57,7 +58,36 @@ const propTypes = {
    * @controllable navExpanded
    */
   onToggle: React.PropTypes.func,
-
+  /**
+   * A callback fired when a descendant of a child `<Nav>` is selected. Should
+   * be used to execute complex closing or other miscellaneous actions desired
+   * after selecting a descendant of `<Nav>`. Does nothing if no `<Nav>` or `<Nav>`
+   * descendants exist. The callback is called with an eventKey, which is a
+   * prop from the selected `<Nav>` descendant, and an event.
+   *
+   * ```js
+   * function (
+   * 	Any eventKey,
+   * 	SyntheticEvent event?
+   * )
+   * ```
+   *
+   * For basic closing behavior after all `<Nav>` descendant onSelect events in
+   * mobile viewports, try using closeOnSelect.
+   *
+   * Note: If you are manually closing the navbar using this `OnSelect` prop,
+   * ensure that you are setting `expanded` to false and not *toggling* between
+   * true and false.
+   */
+  onSelect: React.PropTypes.func,
+  /**
+   * Sets `expanded` to `false` after the onSelect event of a descendant of a
+   * child `<Nav>`. Does nothing if no `<Nav>` or `<Nav>` descendants exist.
+   *
+   * The onSelect callback should be used instead for more complex operations
+   * that need to be executed after the `select` event of `<Nav>` descendants.
+   */
+  closeOnSelect: React.PropTypes.bool,
   /**
    * Explicitly set the visiblity of the navbar body
    *
@@ -75,6 +105,7 @@ const defaultProps = {
   staticTop: false,
   inverse: false,
   fluid: false,
+  closeOnSelect: false,
 };
 
 const childContextTypes = {
@@ -82,6 +113,7 @@ const childContextTypes = {
     bsClass: PropTypes.string,
     expanded: PropTypes.bool,
     onToggle: PropTypes.func.isRequired,
+    onSelect: PropTypes.func,
   })
 };
 
@@ -90,18 +122,28 @@ class Navbar extends React.Component {
     super(props, context);
 
     this.handleToggle = this.handleToggle.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   getChildContext() {
-    const { bsClass, expanded } = this.props;
+    const { bsClass, expanded, onSelect, closeOnSelect } = this.props;
 
     return {
       $bs_navbar: {
         bsClass,
         expanded,
         onToggle: this.handleToggle,
+        onSelect: createChainedFunction(onSelect, closeOnSelect && this.handleClose || null),
       },
     };
+  }
+
+  handleClose() {
+    const { onToggle, expanded } = this.props;
+
+    if (expanded) {
+      onToggle(false);
+    }
   }
 
   handleToggle() {
@@ -124,7 +166,7 @@ class Navbar extends React.Component {
     } = this.props;
 
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
-      'expanded', 'onToggle',
+      'expanded', 'onToggle', 'onSelect', 'closeOnSelect'
     ]);
 
     // will result in some false positives but that seems better
