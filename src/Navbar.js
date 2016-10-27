@@ -59,11 +59,11 @@ const propTypes = {
    */
   onToggle: React.PropTypes.func,
   /**
-   * A callback fired when a `<NavItem>` grandchild is selected inside a child
-   * `<Nav>`. Should be used to execute complex toggling or other miscellaneous
-   * actions desired after selecting a `<NavItem>`. Does nothing if no `<Nav>`
-   * & `<NavItem>`/`<MenuItem>` children exist. The callback is called with an
-   * eventKey, which is a prop from the `<NavItem>`, and an event.
+   * A callback fired when a descendant of a child `<Nav>` is selected. Should
+   * be used to execute complex closing or other miscellaneous actions desired
+   * after selecting a descendant of `<Nav>`. Does nothing if no `<Nav>` or `<Nav>`
+   * descendants exist. The callback is called with an eventKey, which is a
+   * prop from the selected `<Nav>` descendant, and an event.
    *
    * ```js
    * function (
@@ -72,20 +72,20 @@ const propTypes = {
    * )
    * ```
    *
-   * For basic closing behavior after all `<NavItem>` onSelect events in mobile
-   * viewports, try using closeOnSelect.
+   * For basic closing behavior after all `<Nav>` descendant onSelect events in
+   * mobile viewports, try using closeOnSelect.
+   *
    * Note: If you are manually closing the navbar using this `OnSelect` prop,
    * ensure that you are setting `expanded` to false and not *toggling* between
    * true and false.
    */
   onSelect: React.PropTypes.func,
   /**
-   * Sets `expanded` to false after the onSelect event of a child of `<Nav>`
-   * (such as `<NavItem>` or `<MenuItem>`). Does nothing if no `<Nav>` or
-   * `<NavItem>`/`<MenuItem>` children exist.
+   * Sets `expanded` to `false` after the onSelect event of a descendant of a
+   * child `<Nav>`. Does nothing if no `<Nav>` or `<Nav>` descendants exist.
    *
    * The onSelect callback should be used instead for more complex operations
-   * desired for after `<NavItem>` select events.
+   * that need to be executed after the `select` event of `<Nav>` descendants.
    */
   closeOnSelect: React.PropTypes.bool,
   /**
