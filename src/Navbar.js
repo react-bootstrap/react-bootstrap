@@ -73,7 +73,7 @@ const propTypes = {
    * ```
    *
    * For basic closing behavior after all `<Nav>` descendant onSelect events in
-   * mobile viewports, try using closeOnSelect.
+   * mobile viewports, try using collapseOnSelect.
    *
    * Note: If you are manually closing the navbar using this `OnSelect` prop,
    * ensure that you are setting `expanded` to false and not *toggling* between
@@ -87,7 +87,7 @@ const propTypes = {
    * The onSelect callback should be used instead for more complex operations
    * that need to be executed after the `select` event of `<Nav>` descendants.
    */
-  closeOnSelect: React.PropTypes.bool,
+  collapseOnSelect: React.PropTypes.bool,
   /**
    * Explicitly set the visiblity of the navbar body
    *
@@ -105,7 +105,7 @@ const defaultProps = {
   staticTop: false,
   inverse: false,
   fluid: false,
-  closeOnSelect: false,
+  collapseOnSelect: false,
 };
 
 const childContextTypes = {
@@ -122,23 +122,25 @@ class Navbar extends React.Component {
     super(props, context);
 
     this.handleToggle = this.handleToggle.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this.handleCollapse = this.handleCollapse.bind(this);
   }
 
   getChildContext() {
-    const { bsClass, expanded, onSelect, closeOnSelect } = this.props;
+    const { bsClass, expanded, onSelect, collapseOnSelect } = this.props;
 
     return {
       $bs_navbar: {
         bsClass,
         expanded,
         onToggle: this.handleToggle,
-        onSelect: createChainedFunction(onSelect, closeOnSelect && this.handleClose || null),
+        onSelect: createChainedFunction(
+          onSelect, collapseOnSelect ? this.handleCollapse : null,
+        ),
       },
     };
   }
 
-  handleClose() {
+  handleCollapse() {
     const { onToggle, expanded } = this.props;
 
     if (expanded) {
@@ -166,7 +168,7 @@ class Navbar extends React.Component {
     } = this.props;
 
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
-      'expanded', 'onToggle', 'onSelect', 'closeOnSelect'
+      'expanded', 'onToggle', 'onSelect', 'collapseOnSelect',
     ]);
 
     // will result in some false positives but that seems better

@@ -46,9 +46,7 @@ export default function NavbarSection() {
         the toggle and collapse together!
       </p>
       <p>
-        By setting the prop <code>defaultExpanded</code> the Navbar will start
-        expanded by default. You can also finely control the collapsing behavior by using
-        the <code>expanded</code> and <code>onToggle</code> props.
+        Set the <code>defaultExpanded</code> prop to make the Navbar start expanded. Set <code>collapseOnSelect</code> to make the Navbar collapse automatically when the user selects an item. You can also finely control the collapsing behavior by using the <code>expanded</code> and <code>onToggle</code> props.
       </p>
 
       <ReactPlayground codeText={Samples.NavbarCollapsible} />

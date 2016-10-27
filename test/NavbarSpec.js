@@ -256,11 +256,11 @@ describe('<Navbar>', () => {
     expect(toggle.className).to.not.match(/collapsed/);
   });
 
-  it('Should closeOnSelect & fire Nav subcomponent onSelect event if expanded', () => {
+  it('Should collapseOnSelect & fire Nav subcomponent onSelect event if expanded', () => {
     const toggleSpy = sinon.spy();
     const navItemSpy = sinon.spy();
     const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar closeOnSelect onToggle={toggleSpy} defaultExpanded>
+      <Navbar collapseOnSelect onToggle={toggleSpy} defaultExpanded>
         <Navbar.Header>
           <Navbar.Toggle />
         </Navbar.Header>

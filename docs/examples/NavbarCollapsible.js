@@ -1,5 +1,5 @@
 const navbarInstance = (
-  <Navbar inverse>
+  <Navbar inverse collapseOnSelect>
     <Navbar.Header>
       <Navbar.Brand>
         <a href="#">React-Bootstrap</a>
