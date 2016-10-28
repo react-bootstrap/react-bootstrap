@@ -1,3 +1,23 @@
+## [v0.30.6]
+> 2016-10-28
+
+- **Feature:** Add `rootCloseEvent` to `<Dropdown>` to configure root close trigger event ([#2195])
+- **Feature:** Add screen reader labels configurable with `prevLabel` and `nextLabel` to `<Carousel>` controls ([#2275])
+- **Feature:** Add `collapseOnSelect` to `<Navbar>` to enable automatically collapsing the navbar when the user selects an item ([#2280], [#2308])
+- **Bugfix:** Change placeholder `href` in `<SafeAnchor>` to `#` for better IE compatibility ([#2080])
+- **Bugfix:** Fix off-by-one error in displaying `<Pagination>` pages ([#2271])
+- **Bugfix:** Properly set `.collapsed` on `<Panel>` title anchor ([#2276])
+
+[v0.30.6]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.5...v0.30.6
+[#2080]: https://github.com/react-bootstrap/react-bootstrap/pull/2080
+[#2195]: https://github.com/react-bootstrap/react-bootstrap/pull/2195
+[#2271]: https://github.com/react-bootstrap/react-bootstrap/pull/2271
+[#2275]: https://github.com/react-bootstrap/react-bootstrap/pull/2275
+[#2276]: https://github.com/react-bootstrap/react-bootstrap/pull/2276
+[#2280]: https://github.com/react-bootstrap/react-bootstrap/pull/2280
+[#2308]: https://github.com/react-bootstrap/react-bootstrap/pull/2308
+
+
 ## [v0.30.5]
 > 2016-10-03
 
