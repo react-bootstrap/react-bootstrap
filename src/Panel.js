@@ -149,7 +149,7 @@ class Panel extends React.Component {
 
     // Convert to array so we can re-use keys.
     React.Children.toArray(rawChildren).forEach(child => {
-      if (React.isValidElement(child) && child.props.fill) {
+      if (this.shouldRenderFill(child)) {
         maybeAddBody();
 
         // Remove the child's unknown `fill` prop.
