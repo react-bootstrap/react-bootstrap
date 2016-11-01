@@ -62,10 +62,6 @@ class Panel extends React.Component {
     }
   }
 
-  shouldRenderFill(child) {
-    return React.isValidElement(child) && child.props.fill != null;
-  }
-
   renderHeader(collapsible, header, id, role, expanded, bsProps) {
     const titleClassName = prefix(bsProps, 'title');
 
@@ -149,7 +145,7 @@ class Panel extends React.Component {
 
     // Convert to array so we can re-use keys.
     React.Children.toArray(rawChildren).forEach(child => {
-      if (this.shouldRenderFill(child)) {
+      if (React.isValidElement(child) && child.props.fill) {
         maybeAddBody();
 
         // Remove the child's unknown `fill` prop.
