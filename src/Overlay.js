@@ -58,12 +58,18 @@ const propTypes = {
    * Callback fired after the Overlay finishes transitioning out
    */
   onExited: React.PropTypes.func,
+
+  /**
+   * Sets the direction of the Overlay.
+   */
+  placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 };
 
 const defaultProps = {
   animation: Fade,
   rootClose: false,
   show: false,
+  placement: 'right',
 };
 
 class Overlay extends React.Component {
