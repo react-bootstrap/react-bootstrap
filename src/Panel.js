@@ -62,10 +62,6 @@ class Panel extends React.Component {
     }
   }
 
-  shouldRenderFill(child) {
-    return React.isValidElement(child) && child.props.fill != null;
-  }
-
   renderHeader(collapsible, header, id, role, expanded, bsProps) {
     const titleClassName = prefix(bsProps, 'title');
 
