@@ -18,21 +18,28 @@ export default function PopoverSection() {
       <ReactPlayground codeText={Samples.PopoverBasic}/>
 
       <h4><Anchor id="popovers-overlay-trigger">With OverlayTrigger</Anchor></h4>
-      <p>The Popover component, like the Tooltip can be used with an <code>OverlayTrigger</code> Component, and positioned around it.</p>
+      <p>
+        The Popover component, like the Tooltip can be used with an <code>OverlayTrigger</code> Component, and positioned around it.
+      </p>
       <ReactPlayground codeText={Samples.PopoverPositioned} />
 
       <h4><Anchor id="popovers-trigger-behaviors">Trigger behaviors</Anchor></h4>
-      <p>It's inadvisable to use <code>"hover"</code> or <code>"focus"</code> triggers for popovers, because they have poor accessibility from keyboard and on mobile devices.</p>
+      <p>
+        It's inadvisable to use <code>"hover"</code> or <code>"focus"</code> triggers for popovers, because they have poor accessibility from keyboard and on mobile devices.
+      </p>
       <ReactPlayground codeText={Samples.PopoverTriggerBehaviors} />
 
       <h4><Anchor id="popovers-in-container">Popover component in container</Anchor></h4>
+      <p>
+        Specify <code>container</code> to control the DOM element to which to append the overlay. This element must be a positioned element to allow correctly positioning the overlay.
+      </p>
       <ReactPlayground codeText={Samples.PopoverContained} exampleClassName="bs-example-popover-contained" />
 
       <h4><Anchor id="popovers-positioned-scrolling">Positioned popover components in scrolling container</Anchor></h4>
       <ReactPlayground codeText={Samples.PopoverPositionedScrolling} exampleClassName="bs-example-popover-scroll" />
 
       <h3><Anchor id="popover-props">Props</Anchor></h3>
-      <PropTable component="Popover"/>
+      <PropTable component="Popover" />
     </div>
   );
 }
