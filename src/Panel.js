@@ -29,6 +29,8 @@ const propTypes = {
   onExit: React.PropTypes.func,
   onExiting: React.PropTypes.func,
   onExited: React.PropTypes.func,
+  timeout: React.PropTypes.number,
+
 };
 
 const defaultProps = {
@@ -179,6 +181,7 @@ class Panel extends React.Component {
       onExit,
       onExiting,
       onExited,
+      timeout,
       ...props
     } = this.props;
 
@@ -208,7 +211,7 @@ class Panel extends React.Component {
         {collapsible ?
           this.renderCollapsibleBody(
             id, expanded, panelRole, children, bsProps,
-            { onEnter, onEntering, onEntered, onExit, onExiting, onExited }
+            { onEnter, onEntering, onEntered, onExit, onExiting, onExited, timeout }
           ) :
           this.renderBody(children, bsProps)
         }
