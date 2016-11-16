@@ -17,6 +17,14 @@ const propTypes = {
    * Uses `controlId` from `<FormGroup>` if not explicitly specified.
    */
   id: React.PropTypes.string,
+  /**
+   * Attaches a ref to the `<input>` element. Only functions can be used here.
+   *
+   * ```js
+   * <FormControl inputRef={ref => { this.input = ref; }} />
+   * ```
+   */
+  inputRef: React.PropTypes.func,
 };
 
 const defaultProps = {
@@ -36,6 +44,7 @@ class FormControl extends React.Component {
       componentClass: Component,
       type,
       id = controlId,
+      inputRef,
       className,
       ...props
     } = this.props;
@@ -58,6 +67,7 @@ class FormControl extends React.Component {
         {...elementProps}
         type={type}
         id={id}
+        ref={inputRef}
         className={classNames(className, classes)}
       />
     );
