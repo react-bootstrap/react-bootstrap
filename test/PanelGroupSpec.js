@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactTestUtils from 'react-addons-test-utils';
 
 import Panel from '../src/Panel';
 import PanelGroup from '../src/PanelGroup';
