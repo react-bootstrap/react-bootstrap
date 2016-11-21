@@ -1,6 +1,6 @@
 import keycode from 'keycode';
 import React from 'react';
-import ReactTestUtils from 'react/lib/ReactTestUtils';
+import ReactTestUtils from 'react-addons-test-utils';
 import tsp from 'teaspoon';
 
 import Nav from '../src/Nav';
