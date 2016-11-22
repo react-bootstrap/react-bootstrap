@@ -2,8 +2,10 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
 
+import Dropdown from '../src/Dropdown';
 import DropdownButton from '../src/DropdownButton';
 import DropdownMenu from '../src/DropdownMenu';
+import DropdownToggle from '../src/DropdownToggle';
 import MenuItem from '../src/MenuItem';
 
 describe('<DropdownButton>', () => {
@@ -175,5 +177,34 @@ describe('<DropdownButton>', () => {
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-toggle'));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-menu'));
+  });
+
+  it('should pass onMouseEnter and onMouseLeave to `<Dropdown>`', () => {
+    const onMouseEnter = () => {};
+    const onMouseLeave = () => {};
+
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton
+        id="test-id"
+        title="title"
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+      >
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+      </DropdownButton>
+    );
+
+    const dropdown = ReactTestUtils.findRenderedComponentWithType(
+      instance, Dropdown,
+    );
+    const toggle = ReactTestUtils.findRenderedComponentWithType(
+      instance, DropdownToggle,
+    );
+
+    expect(dropdown.props.onMouseEnter).to.equal(onMouseEnter);
+    expect(dropdown.props.onMouseLeave).to.equal(onMouseLeave);
+
+    expect(toggle.props.onMouseEnter).to.not.exist;
+    expect(toggle.props.onMouseLeave).to.not.exist;
   });
 });
