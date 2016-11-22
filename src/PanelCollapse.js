@@ -6,6 +6,30 @@ import Collapse from './Collapse';
 
 const propTypes = {
   bsRole: React.PropTypes.string,
+  /**
+   * Callback fired before the component expands
+   */
+  onEnter: React.PropTypes.func,
+  /**
+   * Callback fired after the component starts to expand
+   */
+  onEntering: React.PropTypes.func,
+  /**
+   * Callback fired after the component has expanded
+   */
+  onEntered: React.PropTypes.func,
+  /**
+   * Callback fired before the component collapses
+   */
+  onExit: React.PropTypes.func,
+  /**
+   * Callback fired after the component starts to collapse
+   */
+  onExiting: React.PropTypes.func,
+  /**
+   * Callback fired after the component has collapsed
+   */
+  onExited: React.PropTypes.func,
 };
 
 const defaultProps = {

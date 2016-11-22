@@ -7,7 +7,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  bsRole: 'body',
+  bsRole: 'panel-body',
 };
 
 const contextTypes = {

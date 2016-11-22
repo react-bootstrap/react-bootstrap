@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 
+import tsp from 'teaspoon';
+
 import Panel from '../src/Panel';
 import PanelGroup from '../src/PanelGroup';
-
-import { getOne } from './helpers';
 
 describe('<PanelGroup>', () => {
   it('Should pass bsStyle to Panels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <PanelGroup bsStyle="default">
+      <PanelGroup bsStyle="default" id="panel">
         <Panel>Panel 1</Panel>
       </PanelGroup>
     );
@@ -21,7 +21,7 @@ describe('<PanelGroup>', () => {
 
   it('Should not override bsStyle on Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <PanelGroup bsStyle="default">
+      <PanelGroup bsStyle="default" id="panel">
         <Panel bsStyle="primary">Panel 1</Panel>
       </PanelGroup>
     );
@@ -32,79 +32,69 @@ describe('<PanelGroup>', () => {
   });
 
   it('Should not collapse panel by bubbling onSelect callback', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <PanelGroup accordion>
+    tsp(
+      <PanelGroup accordion id="panel" onSelect={() => { throw new Error(); }}>
         <Panel>
           <input type="text" className="changeme" />
         </Panel>
       </PanelGroup>
-    );
-
-    let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
-
-    assert.notOk(panel.state.collapsing);
-
-    ReactTestUtils.Simulate.select(
-      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'changeme')
-    );
-
-    assert.notOk(panel.state.collapsing);
+    )
+    .render()
+    .single('input.changeme')
+    .trigger('select');
   });
 
-  it('Should obey onSelect handler', () => {
+  it('Should call onSelect handler with eventKey', (done) => {
     function handleSelect(eventKey, e) {
-      if (e.target.className.indexOf('ignoreme') > -1) {
-        e.selected = false;
-      }
+      e.should.exist;
+      eventKey.should.equal('1');
+      done();
     }
 
-    let header = (
-      <div>
-        <span className="clickme">Click me</span>
-        <span className="ignoreme">Ignore me</span>
-      </div>
-    );
+    tsp(
+      <PanelGroup accordion onSelect={handleSelect} id="panel">
+        <Panel eventKey="1">
+          <Panel.Heading>
+            <Panel.Title toggle>foo</Panel.Title>
+          </Panel.Heading>
 
-    let instance = ReactTestUtils.renderIntoDocument(
-      <PanelGroup accordion onSelect={handleSelect}>
-        <Panel eventKey="1" header={header}>
           <div>Panel body</div>
         </Panel>
       </PanelGroup>
-    );
-
-    let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
-
-    assert.notOk(panel.state.expanded);
-
-    ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'ignoreme')
-    );
-
-    assert.notOk(panel.state.expanded);
-
-    ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'clickme')
-    );
-
-    assert.ok(panel.state.expanded);
+    )
+    .render()
+    .find('a')
+    .trigger('click');
   });
 
   describe('Web Accessibility', () => {
-    let instance, panelBodies, panelGroup, links;
+    let panelBodies, panelGroup, headers, links;
 
     beforeEach(() => {
-      instance = ReactTestUtils.renderIntoDocument(
-        <PanelGroup defaultActiveKey="1" accordion>
-          <Panel header="Collapsible Group Item #1" eventKey="1" id="Panel1ID">Panel 1</Panel>
-          <Panel header="Collapsible Group Item #2" eventKey="2" id="Panel2ID">Panel 2</Panel>
+      const inst = tsp(
+        <PanelGroup accordion defaultActiveKey="1" id="panel">
+          <Panel eventKey="1">
+            <Panel.Heading>
+              <Panel.Title toggle>foo</Panel.Title>
+            </Panel.Heading>
+
+            Panel 1
+          </Panel>
+          <Panel eventKey="2">
+            <Panel.Heading>
+              <Panel.Title toggle>foo</Panel.Title>
+            </Panel.Heading>
+
+            Panel 2
+          </Panel>
         </PanelGroup>
-      );
-      let accordion = ReactTestUtils.findRenderedComponentWithType(instance, PanelGroup);
-      panelGroup = ReactTestUtils.findRenderedDOMComponentWithClass(accordion, 'panel-group');
-      panelBodies = panelGroup.getElementsByClassName('panel-collapse');
-      links = Array.from(panelGroup.getElementsByClassName('panel-heading'))
-        .map(header => getOne(header.getElementsByTagName('a')));
+      )
+      .render();
+
+      panelGroup = inst.dom();
+      panelBodies = inst.find('.panel-collapse').dom();
+      headers = inst.find('.panel-heading').dom();
+      links = inst.find('.panel-heading a').dom();
     });
 
     it('Should have a role of tablist', () => {
@@ -112,8 +102,8 @@ describe('<PanelGroup>', () => {
     });
 
     it('Should provide each header tab with role of tab', () => {
-      assert.equal(links[0].getAttribute('role'), 'tab');
-      assert.equal(links[1].getAttribute('role'), 'tab');
+      assert.equal(headers[0].getAttribute('role'), 'tab');
+      assert.equal(headers[1].getAttribute('role'), 'tab');
     });
 
     it('Should provide the panelBodies with role of tabpanel', () => {
@@ -125,14 +115,13 @@ describe('<PanelGroup>', () => {
       assert.equal(panelBodies[1].id, links[1].getAttribute('aria-controls'));
     });
 
-    it('Should maintain each tab aria-selected state', () => {
-      assert.equal(links[0].getAttribute('aria-selected'), 'true');
-      assert.equal(links[1].getAttribute('aria-selected'), 'false');
+    it('Should maintain each tab aria-expanded state', () => {
+      assert.equal(links[0].getAttribute('aria-expanded'), 'true');
+      assert.equal(panelBodies[0].getAttribute('aria-expanded'), 'true');
+
+      assert.equal(links[1].getAttribute('aria-expanded'), 'false');
+      assert.equal(panelBodies[1].getAttribute('aria-expanded'), 'false');
     });
 
-    it('Should maintain each tab aria-hidden state', () => {
-      assert.equal(panelBodies[0].getAttribute('aria-hidden'), 'false');
-      assert.equal(panelBodies[1].getAttribute('aria-hidden'), 'true');
-    });
   });
 });

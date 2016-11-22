@@ -34,7 +34,7 @@ export default function PanelSection() {
 
       <h3><Anchor id="panels-tables">With tables and list groups</Anchor></h3>
       <p>
-        Add the <code>bsRole="body"</code> prop to <code>&lt;Table /&gt;</code>, <code>&lt;ListGroup /&gt;</code>,
+        Add the <code>bsRole="panel-body"</code> prop to <code>&lt;Table /&gt;</code>, <code>&lt;ListGroup /&gt;</code>,
         or any component to have them function as a PanelBody, without any extra padding.
       </p>
       <ReactPlayground codeText={Samples.PanelListGroupFill} />

@@ -12,6 +12,7 @@ const propTypes = {
 
 const defaultProps = {
   bsRole: 'heading',
+  componentClass: 'div',
 };
 
 const contextTypes = {
@@ -24,7 +25,7 @@ const contextTypes = {
 class PanelHeading extends React.Component {
 
   render() {
-    let { children, className, ...props } = this.props;
+    const { children, className, componentClass: Component, ...props } = this.props;
     const { getIds, bsClass: _bsClass } = this.context.$bs_panel || {};
 
     const [bsProps, elementProps] = splitBsProps(props);
@@ -36,12 +37,12 @@ class PanelHeading extends React.Component {
     }
 
     return (
-      <div
+      <Component
         {...elementProps}
         className={cn(className, prefix(bsProps, 'heading'))}
       >
         {children}
-      </div>
+      </Component>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import elementType from 'react-prop-types/lib/elementType';
+import SafeAnchor from './SafeAnchor';
 import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
@@ -12,8 +13,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  componentClass: 'a',
-  role: 'button'
+  componentClass: SafeAnchor,
 };
 
 const contextTypes = {
@@ -35,8 +35,6 @@ class PanelToggle extends React.Component {
 
   handleToggle(event) {
     const { onToggle } = this.context.$bs_panel || {};
-
-    event.preventDefault();
 
     if (onToggle) {
       onToggle(event);
