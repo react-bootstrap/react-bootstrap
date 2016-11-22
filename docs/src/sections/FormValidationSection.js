@@ -12,7 +12,7 @@ export default function FormValidationSection() {
         <Anchor id="forms-validation">Validation states</Anchor> <small>FormControl.Feedback</small>
       </h2>
 
-      <p>Set <code>validationState</code> to one of <code>'success'</code>, <code>'warning'</code> or <code>'error'</code>. Add <code>{'<FormControl.Feedback>'}</code> for a feedback icon.</p>
+      <p>Set <code>validationState</code> to one of <code>'success'</code>, <code>'warning'</code> or <code>'error'</code> to show validation state. Set <code>validationState</code> to <code>null</code> (or <code>undefined</code>) to hide validation state. Add <code>{'<FormControl.Feedback>'}</code> for a feedback icon when validation state is set.</p>
       <ReactPlayground codeText={Samples.FormValidation} />
 
       <h3><Anchor id="forms-validation-props">Props</Anchor></h3>

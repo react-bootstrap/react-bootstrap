@@ -16,6 +16,11 @@ const formInstance = (
       <FormControl type="text" />
     </FormGroup>
 
+    <FormGroup controlId="formValidationNull" validationState={null}>
+      <ControlLabel>Input with no validation state</ControlLabel>
+      <FormControl type="text" />
+    </FormGroup>
+
     <FormGroup controlId="formValidationSuccess2" validationState="success">
       <ControlLabel>Input with success and feedback icon</ControlLabel>
       <FormControl type="text" />

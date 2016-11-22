@@ -1,8 +1,10 @@
-import metadata from 'react-component-metadata';
-import glob from 'glob';
 import fsp from 'fs-promise';
-import promisify from '../tools/promisify';
+import glob from 'glob';
 import marked from 'marked';
+import path from 'path';
+import metadata from 'react-component-metadata';
+
+import promisify from '../tools/promisify';
 import defaultDescriptions from './src/defaultPropDescriptions';
 
 marked.setOptions({
@@ -54,7 +56,7 @@ function applyPropDoclets(props, propName) {
     value = cleanDocletValue(doclets.type);
     prop.type.name = value;
 
-    if ( value[0] === '(' ) {
+    if (value[0] === '(') {
       value = value.substring(1, value.length - 1).split('|');
 
       prop.type.value = value;
@@ -90,7 +92,7 @@ function addBootstrapPropTypes(Component, componentData) {
         defaultValue: quote(defaultProps[propName]),
         type: {
           name: 'enum',
-          value: values.map( v => `"${v}"`),
+          value: values.map(v => `"${v}"`),
         }
       };
     }
@@ -109,23 +111,23 @@ function addBootstrapPropTypes(Component, componentData) {
 }
 
 export default function generate(destination, options = { mixins: true, inferComponent: true }) {
-  return globp(__dirname + '/../src/**/*.js') // eslint-disable-line no-path-concat
-    .then( files => {
+  return globp(path.join(__dirname, '../src/**/*.js'))
+    .then((files) => {
       let results = files.map(
         filename => fsp.readFile(filename, 'utf-8').then(content => metadata(content, options)));
 
       return Promise.all(results)
-        .then( data => {
+        .then((data) => {
           let result = {};
 
-          data.forEach(components => {
-            Object.keys(components).forEach(key => {
+          data.forEach((components) => {
+            Object.keys(components).forEach((key) => {
               let Component;
 
               try {
                 // require the actual component to inspect props we can only get a runtime
-                Component = require('../src/' + key);
-              } catch (e) {} //eslint-disable-line
+                Component = require(`../src/${key}`);
+              } catch (e) {} // eslint-disable-line no-empty
 
               const component = components[key];
 
@@ -135,7 +137,7 @@ export default function generate(destination, options = { mixins: true, inferCom
 
               parseDoclets(component);
 
-              Object.keys(component.props).forEach( propName => {
+              Object.keys(component.props).forEach((propName) => {
                 const prop = component.props[propName];
 
                 parseDoclets(prop, propName);
@@ -149,6 +151,6 @@ export default function generate(destination, options = { mixins: true, inferCom
 
           return result;
         })
-        .catch( e => setTimeout(()=> { throw e; }));
+        .catch(e => setTimeout(()=> { throw e; }));
     });
 }
