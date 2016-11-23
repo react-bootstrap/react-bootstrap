@@ -25,6 +25,7 @@ class Tab extends React.Component {
     delete props.title;
     delete props.disabled;
     delete props.tabClassName;
+    delete props.tabComponentClass;
 
     return <TabPane {...props} />;
   }
