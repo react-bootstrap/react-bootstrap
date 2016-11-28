@@ -261,10 +261,11 @@ class OverlayTrigger extends React.Component {
 
     const child = React.Children.only(children);
     const childProps = child.props;
+    const triggerProps = {};
 
-    const triggerProps = {
-      'aria-describedby': overlay.props.id
-    };
+    if (this.state.show) {
+      triggerProps['aria-describedby'] = overlay.props.id;
+    }
 
     // FIXME: The logic here for passing through handlers on this component is
     // inconsistent. We shouldn't be passing any of these props through.
