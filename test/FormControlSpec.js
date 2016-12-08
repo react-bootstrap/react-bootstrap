@@ -77,4 +77,12 @@ describe('<FormControl>', () => {
     expect(instance.input.tagName).to.equal('INPUT');
   });
 
+  it('should properly display size of FormControl', () => {
+    $(
+      <FormControl type="text" bsSize="lg" />
+    )
+      .render()
+      .single('input.form-control.input-lg');
+  });
+
 });
