@@ -6,6 +6,8 @@ import warning from 'warning';
 import FormControlFeedback from './FormControlFeedback';
 import FormControlStatic from './FormControlStatic';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
+import { SIZE_MAP } from './utils/StyleConfig';
+import { prefix } from './utils/bootstrapUtils';
 
 const propTypes = {
   componentClass: elementType,
@@ -46,6 +48,7 @@ class FormControl extends React.Component {
       id = controlId,
       inputRef,
       className,
+      bsSize,
       ...props
     } = this.props;
 
@@ -60,6 +63,13 @@ class FormControl extends React.Component {
     let classes;
     if (type !== 'file') {
       classes = getClassSet(bsProps);
+    }
+
+    // If user provides a size, make sure to append it to classes as input-
+    // e.g. if bsSize is small, it will append input-sm
+    if (bsSize) {
+      const size = SIZE_MAP[bsSize] || bsSize;
+      classes[prefix({ bsClass: 'input' }, size)] = true;
     }
 
     return (
