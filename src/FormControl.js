@@ -5,8 +5,8 @@ import warning from 'warning';
 
 import FormControlFeedback from './FormControlFeedback';
 import FormControlStatic from './FormControlStatic';
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
-import { SIZE_MAP } from './utils/StyleConfig';
+import { bsClass, getClassSet, splitBsProps, bsSizes } from './utils/bootstrapUtils';
+import { SIZE_MAP, Size } from './utils/StyleConfig';
 import { prefix } from './utils/bootstrapUtils';
 
 const propTypes = {
@@ -91,4 +91,6 @@ FormControl.contextTypes = contextTypes;
 FormControl.Feedback = FormControlFeedback;
 FormControl.Static = FormControlStatic;
 
-export default bsClass('form-control', FormControl);
+export default bsClass('form-control',
+  bsSizes([Size.SMALL, Size.LARGE], FormControl)
+);
