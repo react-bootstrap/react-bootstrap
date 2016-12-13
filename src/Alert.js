@@ -23,7 +23,6 @@ class Alert extends React.Component {
         className="close"
         onClick={onDismiss}
         aria-hidden="true"
-        tabIndex="-1"
       >
         <span>&times;</span>
       </button>
@@ -36,6 +35,7 @@ class Alert extends React.Component {
         type="button"
         className="close sr-only"
         onClick={onDismiss}
+        tabIndex="-1"
       >
         {closeLabel}
       </button>
