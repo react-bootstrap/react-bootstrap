@@ -37,7 +37,7 @@ linter.
 
 ## Visual Changes
 
-When making a visual change, if at all feasible please provide screenshots
+When making a visual change, please provide screenshots
 and/or screencasts of the proposed change. This will help us to understand the
 desired change easier.
 
