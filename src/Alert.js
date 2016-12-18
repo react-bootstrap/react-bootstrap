@@ -25,7 +25,7 @@ class Alert extends React.Component {
         tabIndex="-1"
       >
         <span aria-hidden="true">&times;</span>
-        <span class="sr-only">{closeLabel}</span>
+        <span className="sr-only">{closeLabel}</span>
       </button>
     );
   }
