@@ -16,28 +16,16 @@ const defaultProps = {
 };
 
 class Alert extends React.Component {
-  renderDismissButton(onDismiss) {
+  renderDismissButton(onDismiss, closeLabel) {
     return (
       <button
         type="button"
         className="close"
         onClick={onDismiss}
-        aria-hidden="true"
-      >
-        <span>&times;</span>
-      </button>
-    );
-  }
-
-  renderSrOnlyDismissButton(onDismiss, closeLabel) {
-    return (
-      <button
-        type="button"
-        className="close sr-only"
-        onClick={onDismiss}
         tabIndex="-1"
       >
-        {closeLabel}
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">{closeLabel}</span>
       </button>
     );
   }
@@ -59,9 +47,8 @@ class Alert extends React.Component {
         role="alert"
         className={classNames(className, classes)}
       >
-        {dismissable && this.renderDismissButton(onDismiss)}
+        {dismissable && this.renderDismissButton(onDismiss, closeLabel)}
         {children}
-        {dismissable && this.renderSrOnlyDismissButton(onDismiss, closeLabel)}
       </div>
     );
   }
