@@ -56,7 +56,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-1": "^6.13.0",
     "babel-register": "^6.11.6",
-    "babel-standalone": "^6.12.0",
+    "babel-standalone": "6.19.0",
     "bootstrap": "^3.3.6",
     "brfs": "^1.4.3",
     "chai": "^3.5.0",
