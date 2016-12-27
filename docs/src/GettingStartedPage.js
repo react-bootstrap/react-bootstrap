@@ -26,14 +26,20 @@ export default class Page extends React.Component {
                 <Col sm={6}>
                   <Panel header="npm (recommended)" className="bs-docs-code-panel">
                     <CodeExample
-                      codeText={`$ npm install react-bootstrap --save`}
+                      codeText={
+`$ npm install --save react react-dom
+$ npm install --save react-bootstrap`
+                      }
                     />
                   </Panel>
                 </Col>
                 <Col sm={6}>
                   <Panel header="bower" className="bs-docs-code-panel">
                     <CodeExample
-                      codeText={`$ bower install react react-bootstrap`}
+                      codeText={
+`$ bower install react
+$ bower install react-bootstrap`
+                      }
                     />
                   </Panel>
                 </Col>
