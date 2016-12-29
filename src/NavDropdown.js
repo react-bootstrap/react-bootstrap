@@ -22,7 +22,9 @@ const propTypes = {
 
 class NavDropdown extends React.Component {
   isActive({ props }, activeKey, activeHref) {
-    if (
+    if (props.active != null) {
+      return props.active;
+    } else if (
       props.active ||
       activeKey != null && props.eventKey === activeKey ||
       activeHref && props.href === activeHref
