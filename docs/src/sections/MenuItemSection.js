@@ -22,7 +22,7 @@ export default function MenuItemSection() {
         <li><code>divider</code>: Adds an horizontal divider between sections</li>
         <li><code>disabled</code>: shows the item as disabled, and prevents the onclick</li>
         <li><code>eventKey</code>: passed to the callback</li>
-        <li><code>onSelect</code>: a callback that is called when the user clicks the item.</li>
+        <li><code>onSelect</code>: a callback that is called when the user clicks the item. <b>NOTE:</b> the containing DropdownMenu actually re-writes this property on its direct child elements. For simple (direct) uses of MenuItem, this will not affect you. However, if you wrap a MenuItem in your own component, be careful! You <em>must</em> handle the onSelect property accordingly, or the <a href="https://github.com/react-bootstrap/react-bootstrap/issues/2429">dropdown will not close</a> after a user selects a menu item!</li>
       </ul>
       <p>The callback is called with the following arguments: <code>event</code> and <code>eventKey</code></p>
       <ReactPlayground codeText={Samples.MenuItem} />
