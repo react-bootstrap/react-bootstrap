@@ -165,7 +165,7 @@ React.render(button, mountNode);`
                     codeText={
 `var buttonGroupInstance = (
   <ButtonGroup>
-    <DropdownButton bsStyle="success" title="Dropdown">
+    <DropdownButton id="dropdown-btn-menu" bsStyle="success" title="Dropdown">
       <MenuItem key="1">Dropdown link</MenuItem>
       <MenuItem key="2">Dropdown link</MenuItem>
     </DropdownButton>
