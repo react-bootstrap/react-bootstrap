@@ -48,4 +48,20 @@ describe('Modal.Header', () => {
 
     assert.isNotNull(ReactDOM.findDOMNode(instance));
   });
+
+  it('Should trigger onHide when modal is closed', () => {
+    const onHideSpy = sinon.spy();
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Modal.Header closeButton onHide={onHideSpy} />
+    );
+
+    const closeButton = ReactTestUtils.findRenderedDOMComponentWithClass(
+      instance,
+      'close',
+    );
+
+    ReactTestUtils.Simulate.click(closeButton);
+
+    expect(onHideSpy).to.have.been.called;
+  });
 });
