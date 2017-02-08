@@ -251,4 +251,28 @@ describe('<Carousel>', () => {
       assert.equal(labels.length, 0, `should not render labels for value ${falsyValue}`);
     });
   });
+
+  it('Should transition properly when slide animation is disabled', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Carousel defaultActiveIndex={0} slide={false}>
+        {items}
+      </Carousel>
+    );
+
+    const nextButton = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'right');
+    assert.ok(nextButton);
+
+    const prevButton = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'left');
+    assert.ok(prevButton);
+
+    assert.equal(instance.state.activeIndex, 0);
+
+    ReactTestUtils.Simulate.click(nextButton);
+    assert.equal(instance.state.activeIndex, 1);
+
+    ReactTestUtils.Simulate.click(prevButton);
+    assert.equal(instance.state.activeIndex, 0);
+
+  });
+
 });
