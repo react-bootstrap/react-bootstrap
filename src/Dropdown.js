@@ -90,6 +90,20 @@ const propTypes = {
   onSelect: React.PropTypes.func,
 
   /**
+   * Whether or not to close the Dropdown after selecting an item.
+   *
+   * @controllable onToggle
+   */
+  closeOnSelect: React.PropTypes.bool,
+
+  /**
+   * Whether or not to close the Dropdown after pressing the tab key.
+   *
+   * @controllable onToggle
+   */
+  closeOnTab: React.PropTypes.bool,
+
+  /**
    * If `'menuitem'`, causes the dropdown to behave like a menu item rather than
    * a menu button.
    */
@@ -180,7 +194,9 @@ class Dropdown extends React.Component {
         break;
       case keycode.codes.esc:
       case keycode.codes.tab:
-        this.handleClose(event);
+        if (this.props.closeOnTab) {
+          this.handleClose(event);
+        }
         break;
       default:
     }
@@ -255,7 +271,7 @@ class Dropdown extends React.Component {
     });
   }
 
-  renderMenu(child, { id, onClose, onSelect, rootCloseEvent, ...props }) {
+  renderMenu(child, { id, onClose, onSelect, rootCloseEvent, closeOnSelect, ...props }) {
     let ref = c => { this.menu = c; };
 
     if (typeof child.ref === 'string') {
@@ -277,7 +293,7 @@ class Dropdown extends React.Component {
         child.props.onClose, onClose, this.handleClose,
       ),
       onSelect: createChainedFunction(
-        child.props.onSelect, onSelect, this.handleClose,
+        child.props.onSelect, onSelect, closeOnSelect ? this.handleClose : undefined,
       ),
       rootCloseEvent
     });
@@ -293,6 +309,7 @@ class Dropdown extends React.Component {
       open,
       onClose,
       onSelect,
+      closeOnSelect,
       role,
       bsClass,
       className,
@@ -330,7 +347,7 @@ class Dropdown extends React.Component {
               });
             case MENU_ROLE:
               return this.renderMenu(child, {
-                id, open, pullRight, bsClass, onClose, onSelect, rootCloseEvent,
+                id, open, pullRight, bsClass, onClose, onSelect, closeOnSelect, rootCloseEvent,
               });
             default:
               return child;

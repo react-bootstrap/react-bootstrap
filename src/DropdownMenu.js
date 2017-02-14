@@ -17,6 +17,7 @@ const propTypes = {
     React.PropTypes.string, React.PropTypes.number,
   ]),
   onSelect: React.PropTypes.func,
+  closeOnTab: React.PropTypes.bool,
   rootCloseEvent: React.PropTypes.oneOf(['click', 'mousedown']),
 };
 
@@ -44,7 +45,9 @@ class DropdownMenu extends React.Component {
         break;
       case keycode.codes.esc:
       case keycode.codes.tab:
-        this.props.onClose(event);
+        if (this.props.closeOnTab) {
+          this.props.onClose(event);
+        }
         break;
       default:
     }
