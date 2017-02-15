@@ -101,6 +101,11 @@ const propTypes = {
   rootCloseEvent: React.PropTypes.oneOf(['click', 'mousedown']),
 
   /**
+   * Don't close the menu when an item onSelect is fired
+   */
+  preventCloseOnItemSelect: React.PropTypes.bool,
+
+  /**
    * @private
    */
   onMouseEnter: React.PropTypes.func,
@@ -111,7 +116,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  componentClass: ButtonGroup,
+  componentClass: ButtonGroup
 };
 
 class Dropdown extends React.Component {
@@ -277,7 +282,11 @@ class Dropdown extends React.Component {
         child.props.onClose, onClose, this.handleClose,
       ),
       onSelect: createChainedFunction(
-        child.props.onSelect, onSelect, this.handleClose,
+        child.props.onSelect, onSelect, (e) => {
+          if (!this.props.preventCloseOnItemSelect) {
+            this.handleClose(e);
+          }
+        },
       ),
       rootCloseEvent
     });
