@@ -61,6 +61,12 @@ const propTypes = {
    * the Modal work well with assistive technologies, such as screen readers.
    */
   enforceFocus: React.PropTypes.bool,
+  
+  /**
+   * When `true` The modal will restore focus to previously focused element once
+   * modal is hidden
+   */
+  restoreFocus: React.PropTypes.bool,
 
   /**
    * When `true` The modal will show itself.
