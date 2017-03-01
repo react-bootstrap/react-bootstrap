@@ -161,7 +161,7 @@ class Dropdown extends React.Component {
       return;
     }
 
-    this.toggleOpen(event, 'click');
+    this.toggleOpen(event, { source: 'click' });
   }
 
   handleKeyDown(event) {
@@ -172,7 +172,7 @@ class Dropdown extends React.Component {
     switch (event.keyCode) {
       case keycode.codes.down:
         if (!this.props.open) {
-          this.toggleOpen(event, 'keydown');
+          this.toggleOpen(event, { source: 'keydown' });
         } else if (this.menu.focusNext) {
           this.menu.focusNext();
         }
@@ -180,7 +180,7 @@ class Dropdown extends React.Component {
         break;
       case keycode.codes.esc:
       case keycode.codes.tab:
-        this.handleClose(event, 'keydown');
+        this.handleClose(event, { source: 'keydown' });
         break;
       default:
     }
@@ -194,7 +194,7 @@ class Dropdown extends React.Component {
     }
 
     if (this.props.onToggle) {
-      this.props.onToggle(open, event, { source });
+      this.props.onToggle(open, event, source);
     }
   }
 
@@ -274,10 +274,10 @@ class Dropdown extends React.Component {
       labelledBy: id,
       bsClass: prefix(props, 'menu'),
       onClose: createChainedFunction(
-        child.props.onClose, onClose, (event) => this.handleClose(event, 'close'),
+        child.props.onClose, onClose, this.handleClose,
       ),
       onSelect: createChainedFunction(
-        child.props.onSelect, onSelect, (key, event) => this.handleClose(event, 'select'),
+        child.props.onSelect, onSelect, (key, event) => this.handleClose(event, { source: 'select' }),
       ),
       rootCloseEvent
     });

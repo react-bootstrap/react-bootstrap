@@ -9,7 +9,7 @@ import DropdownMenu from '../src/DropdownMenu';
 import Grid from '../src/Grid';
 import MenuItem from '../src/MenuItem';
 
-import { shouldWarn, getOne } from './helpers';
+import { shouldWarn } from './helpers';
 
 class CustomMenu extends React.Component {
   render() {
@@ -624,32 +624,6 @@ describe('<Dropdown>', () => {
       expect(spy.getCall(0).args[0]).to.equal(true);
       expect(spy.getCall(0).args[1]).to.be.an('object');
       assert.deepEqual(spy.getCall(0).args[2], { source: 'keydown' });
-    });
-
-    it('passes open, event, and source correctly when closed from RootClose', () => {
-      const onToggleSpy = sinon.spy();
-
-      function onToggle(...args) {
-        onToggleSpy(...args);
-
-        expect(onToggleSpy).to.have.been.calledOnce;
-        expect(onToggleSpy.getCall(0).args.length).to.equal(3);
-        expect(onToggleSpy.getCall(0).args[0]).to.equal(false);
-        expect(onToggleSpy.getCall(0).args[1]).to.be.an('object');
-        assert.deepEqual(onToggleSpy.getCall(0).args[2], { source: 'close' });
-      }
-
-      const instance = ReactDOM.render(
-        <div>
-          <button>Something to click</button>
-          <Dropdown id="test" onToggle={onToggle}>
-            <Dropdown.Menu open>
-              <MenuItem>Item</MenuItem>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>, focusableContainer);
-      const button = getOne(instance.getElementsByTagName('button'));
-      button.click();
     });
   });
 

@@ -44,7 +44,7 @@ class DropdownMenu extends React.Component {
         break;
       case keycode.codes.esc:
       case keycode.codes.tab:
-        this.props.onClose(event);
+        this.props.onClose(event, { source: 'keydown' });
         break;
       default:
     }
@@ -109,7 +109,7 @@ class DropdownMenu extends React.Component {
     return (
       <RootCloseWrapper
         disabled={!open}
-        onRootClose={onClose}
+        onRootClose={(e) => onClose(e, { source: 'rootClose' })}
         event={rootCloseEvent}
       >
         <ul
