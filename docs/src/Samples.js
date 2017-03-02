@@ -83,6 +83,7 @@ export default {
   PanelGroupAccordion:           require('fs').readFileSync(__dirname + '/../examples/PanelGroupAccordion.js', 'utf8'),
   PanelGroupControlled:          require('fs').readFileSync(__dirname + '/../examples/PanelGroupControlled.js', 'utf8'),
   PanelGroupUncontrolled:        require('fs').readFileSync(__dirname + '/../examples/PanelGroupUncontrolled.js', 'utf8'),
+  PanelCollapseControl:          require('fs').readFileSync(__dirname + '/../examples/PanelCollapseControl.js', 'utf8'),
   PanelListGroupFill:            require('fs').readFileSync(__dirname + '/../examples/PanelListGroupFill.js', 'utf8'),
   PanelWithFooter:               require('fs').readFileSync(__dirname + '/../examples/PanelWithFooter.js', 'utf8'),
   PanelWithHeading:              require('fs').readFileSync(__dirname + '/../examples/PanelWithHeading.js', 'utf8'),

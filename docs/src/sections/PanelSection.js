@@ -44,6 +44,10 @@ export default function PanelSection() {
       <p><code>PanelGroup</code>s can also be uncontrolled where they manage their own state. The <code>defaultActiveKey</code> prop dictates which panel is open when initially.</p>
       <ReactPlayground codeText={Samples.PanelGroupUncontrolled} />
 
+      <h3><Anchor id="panels-collapse-control">Collapse control</Anchor></h3>
+      <p>The control over a collapsible panel can be delegated to an <code>anchor</code>, an <code>element</code> or the entire <code>heading</code>. The <code>collapseControl</code> prop dictates the behaviour, as well as structure of the header HTML code. Notice how <code>element</code> and <code>heading</code> values omit the unnecessary anchor tag. You can define individual <code>collapseControl</code> props for each panel, however it will always prioritize the value passed to <code>PanelGroup</code>.</p>
+      <ReactPlayground codeText={Samples.PanelCollapseControl} />
+
       <h3><Anchor id="panels-accordion">Accordions</Anchor></h3>
       <p><code>&lt;Accordion /&gt;</code> aliases <code>&lt;PanelGroup accordion /&gt;</code>.</p>
       <ReactPlayground codeText={Samples.PanelGroupAccordion} />

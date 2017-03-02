@@ -12,6 +12,7 @@ const propTypes = {
   defaultActiveKey: React.PropTypes.any,
   onSelect: React.PropTypes.func,
   role: React.PropTypes.string,
+  collapseControl: React.PropTypes.oneOf([undefined, 'heading', 'element', 'anchor']),
 };
 
 const defaultProps = {
@@ -51,11 +52,12 @@ class PanelGroup extends React.Component {
       activeKey: propsActiveKey,
       className,
       children,
+      collapseControl,
       ...props
     } = this.props;
 
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
-      'defaultActiveKey', 'onSelect',
+      'defaultActiveKey', 'onSelect', 'collapseControl',
     ]);
 
     let activeKey;
@@ -82,6 +84,7 @@ class PanelGroup extends React.Component {
               headerRole: 'tab',
               panelRole: 'tabpanel',
               collapsible: true,
+              collapseControl: collapseControl || child.props.collapseControl,
               expanded: child.props.eventKey === activeKey,
               onSelect: createChainedFunction(
                 this.handleSelect, child.props.onSelect

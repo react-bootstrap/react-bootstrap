@@ -69,6 +69,47 @@ describe('<Panel>', () => {
     assert.equal(header.firstChild.firstChild.textContent, 'Heading');
   });
 
+  it('Should have custom component header without anchor', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Panel header={<h3>Heading</h3>} collapseControl="heading" collapsible>
+        Panel content
+      </Panel>
+    );
+    const header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading');
+    assert.equal(header.firstChild.nodeName, 'H3');
+    assert.ok(header.firstChild.className.match(/\bpanel-title\b/));
+    assert.notEqual(header.firstChild.firstChild.nodeName, 'A');
+    assert.equal(header.firstChild.firstChild.textContent, 'Heading');
+  });
+
+  it('Should give collapse control to header', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Panel header="Heading" collapseControl="heading" collapsible>
+        Panel content
+      </Panel>
+    );
+    const header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading');
+    assert.ok(header.className.match(/\bcollapsed\b/));
+    assert.equal(header.getAttribute('aria-expanded'), 'false');
+    ReactTestUtils.Simulate.click(header);
+    assert.notOk(header.className.match(/\bcollapsed\b/));
+    assert.equal(header.getAttribute('aria-expanded'), 'true');
+  });
+
+  it('Should give collapse control to element', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Panel header={<div>Heading</div>} collapseControl="element" collapsible>
+        Panel content
+      </Panel>
+    );
+    const header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-heading');
+    assert.ok(header.firstChild.className.match(/\bcollapsed\b/));
+    assert.equal(header.firstChild.getAttribute('aria-expanded'), 'false');
+    ReactTestUtils.Simulate.click(header.firstChild);
+    assert.notOk(header.firstChild.className.match(/\bcollapsed\b/));
+    assert.equal(header.firstChild.getAttribute('aria-expanded'), 'true');
+  });
+
   it('Should have custom component header with custom class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Panel
