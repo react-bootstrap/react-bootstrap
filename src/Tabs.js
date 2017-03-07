@@ -45,6 +45,11 @@ const propTypes = {
   onSelect: React.PropTypes.func,
 
   /**
+   * Wait until the first "enter" transition to mount tabs (add them to the DOM)
+   */
+  mountOnEnter: React.PropTypes.bool,
+
+  /**
    * Unmount tabs (remove it from the DOM) when it is no longer visible
    */
   unmountOnExit: React.PropTypes.bool,
@@ -53,7 +58,8 @@ const propTypes = {
 const defaultProps = {
   bsStyle: 'tabs',
   animation: true,
-  unmountOnExit: false
+  mountOnEnter: false,
+  unmountOnExit: false,
 };
 
 function getDefaultActiveKey(children) {
@@ -90,6 +96,7 @@ class Tabs extends React.Component {
       id,
       onSelect,
       animation,
+      mountOnEnter,
       unmountOnExit,
       bsClass,
       className,
@@ -118,6 +125,7 @@ class Tabs extends React.Component {
           <TabContent
             bsClass={bsClass}
             animation={animation}
+            mountOnEnter={mountOnEnter}
             unmountOnExit={unmountOnExit}
           >
             {children}
