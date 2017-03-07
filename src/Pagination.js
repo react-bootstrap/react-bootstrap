@@ -11,7 +11,8 @@ const propTypes = {
   maxButtons: React.PropTypes.number,
 
   /**
-   * When `true`, will display the first and the last button page
+   * When `true`, will display the first and the last button page when
+   * displaying ellipsis.
    */
   boundaryLinks: React.PropTypes.bool,
 
@@ -83,52 +84,48 @@ class Pagination extends React.Component {
 
     let startPage;
     let endPage;
-    let hasHiddenPagesAfter;
 
-    if (maxButtons) {
-      let hiddenPagesBefore = activePage - parseInt(maxButtons / 2, 10);
-      startPage = Math.max(hiddenPagesBefore, 1);
-      hasHiddenPagesAfter = items >= startPage + maxButtons;
-
-      if (!hasHiddenPagesAfter) {
-        endPage = items;
-        startPage = items - maxButtons + 1;
-        if (startPage < 1) {
-          startPage = 1;
-        }
-      } else {
-        endPage = startPage + maxButtons - 1;
-      }
+    if (maxButtons && maxButtons < items) {
+      startPage = Math.max(
+        Math.min(
+          activePage - Math.floor(maxButtons / 2, 10),
+          items - maxButtons + 1
+        ),
+        1
+      );
+      endPage = startPage + maxButtons - 1;
     } else {
       startPage = 1;
       endPage = items;
     }
 
-    for (let pagenumber = startPage; pagenumber <= endPage; pagenumber++) {
+    for (let page = startPage; page <= endPage; ++page) {
       pageButtons.push(
         <PaginationButton
           {...buttonProps}
-          key={pagenumber}
-          eventKey={pagenumber}
-          active={pagenumber === activePage}
+          key={page}
+          eventKey={page}
+          active={page === activePage}
         >
-          {pagenumber}
+          {page}
         </PaginationButton>
       );
     }
 
-    if (boundaryLinks && ellipsis && startPage !== 1) {
-      pageButtons.unshift(
-        <PaginationButton
-          key="ellipsisFirst"
-          disabled
-          componentClass={buttonProps.componentClass}
-        >
-          <span aria-label="More">
-            {ellipsis === true ? '\u2026' : ellipsis}
-          </span>
-        </PaginationButton>
-      );
+    if (ellipsis && boundaryLinks && startPage > 1) {
+      if (startPage > 2) {
+        pageButtons.unshift(
+          <PaginationButton
+            key="ellipsisFirst"
+            disabled
+            componentClass={buttonProps.componentClass}
+          >
+            <span aria-label="More">
+              {ellipsis === true ? '\u2026' : ellipsis}
+            </span>
+          </PaginationButton>
+        );
+      }
 
       pageButtons.unshift(
         <PaginationButton
@@ -142,20 +139,22 @@ class Pagination extends React.Component {
       );
     }
 
-    if (maxButtons && hasHiddenPagesAfter && ellipsis) {
-      pageButtons.push(
-        <PaginationButton
-          key="ellipsis"
-          disabled
-          componentClass={buttonProps.componentClass}
-        >
-          <span aria-label="More">
-            {ellipsis === true ? '\u2026' : ellipsis}
-          </span>
-        </PaginationButton>
-      );
+    if (ellipsis && endPage < items) {
+      if (!boundaryLinks || endPage < items - 1) {
+        pageButtons.push(
+          <PaginationButton
+            key="ellipsis"
+            disabled
+            componentClass={buttonProps.componentClass}
+          >
+            <span aria-label="More">
+              {ellipsis === true ? '\u2026' : ellipsis}
+            </span>
+          </PaginationButton>
+        );
+      }
 
-      if (boundaryLinks && endPage !== items) {
+      if (boundaryLinks) {
         pageButtons.push(
           <PaginationButton
             {...buttonProps}

@@ -20,7 +20,7 @@ export default function MenuItemSection() {
       <ul>
         <li><code>header</code>: To add a header label to sections</li>
         <li><code>divider</code>: Adds an horizontal divider between sections</li>
-        <li><code>disabled</code>: shows the item as disabled, and prevents the onclick</li>
+        <li><code>disabled</code>: shows the item as disabled, and prevents <code>onSelect</code> from firing</li>
         <li><code>eventKey</code>: passed to the callback</li>
         <li><code>onSelect</code>: a callback that is called when the user clicks the item.</li>
       </ul>

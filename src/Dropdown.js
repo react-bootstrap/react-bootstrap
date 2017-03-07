@@ -71,10 +71,10 @@ const propTypes = {
 
   /**
    * A callback fired when the Dropdown wishes to change visibility. Called with the requested
-   * `open` value.
+   * `open` value, the DOM event, and the source that fired it: `'click'`,`'keydown'`,`'rootClose'`, or `'select'`.
    *
    * ```js
-   * function(Boolean isOpen) {}
+   * function(Boolean isOpen, Object event, { String source }) {}
    * ```
    * @controllable open
    */
@@ -156,12 +156,12 @@ class Dropdown extends React.Component {
     }
   }
 
-  handleClick() {
+  handleClick(event) {
     if (this.props.disabled) {
       return;
     }
 
-    this.toggleOpen('click');
+    this.toggleOpen(event, { source: 'click' });
   }
 
   handleKeyDown(event) {
@@ -172,7 +172,7 @@ class Dropdown extends React.Component {
     switch (event.keyCode) {
       case keycode.codes.down:
         if (!this.props.open) {
-          this.toggleOpen('keydown');
+          this.toggleOpen(event, { source: 'keydown' });
         } else if (this.menu.focusNext) {
           this.menu.focusNext();
         }
@@ -180,30 +180,30 @@ class Dropdown extends React.Component {
         break;
       case keycode.codes.esc:
       case keycode.codes.tab:
-        this.handleClose(event);
+        this.handleClose(event, { source: 'keydown' });
         break;
       default:
     }
   }
 
-  toggleOpen(eventType) {
+  toggleOpen(event, eventDetails) {
     let open = !this.props.open;
 
     if (open) {
-      this.lastOpenEventType = eventType;
+      this.lastOpenEventType = eventDetails.source;
     }
 
     if (this.props.onToggle) {
-      this.props.onToggle(open);
+      this.props.onToggle(open, event, eventDetails);
     }
   }
 
-  handleClose() {
+  handleClose(event, eventDetails) {
     if (!this.props.open) {
       return;
     }
 
-    this.toggleOpen(null);
+    this.toggleOpen(event, eventDetails);
   }
 
   focusNextOnOpen() {
@@ -274,10 +274,14 @@ class Dropdown extends React.Component {
       labelledBy: id,
       bsClass: prefix(props, 'menu'),
       onClose: createChainedFunction(
-        child.props.onClose, onClose, this.handleClose,
+        child.props.onClose,
+        onClose,
+        this.handleClose,
       ),
       onSelect: createChainedFunction(
-        child.props.onSelect, onSelect, this.handleClose,
+        child.props.onSelect,
+        onSelect,
+        (key, event) => this.handleClose(event, { source: 'select' }),
       ),
       rootCloseEvent
     });
