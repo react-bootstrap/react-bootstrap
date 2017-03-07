@@ -34,6 +34,11 @@ const propTypes = {
   in: React.PropTypes.bool,
 
   /**
+   * Wait until the first "enter" transition to mount the component (add it to the DOM)
+   */
+  mountOnEnter: React.PropTypes.bool,
+
+  /**
    * Unmount the component (remove it from the DOM) when it is collapsed
    */
   unmountOnExit: React.PropTypes.bool,
@@ -106,6 +111,7 @@ const propTypes = {
 const defaultProps = {
   in: false,
   timeout: 300,
+  mountOnEnter: false,
   unmountOnExit: false,
   transitionAppear: false,
 
