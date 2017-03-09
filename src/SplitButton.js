@@ -32,7 +32,7 @@ const propTypes = {
 class SplitButton extends React.Component {
   render() {
     const {
-      bsSize, bsStyle, title, toggleLabel, children, ...props
+      bsSize, bsStyle, title, toggleLabel, children, 'data-toggle': dataToggle, ...props
     } = this.props;
 
     const [dropdownProps, buttonProps] =
@@ -53,6 +53,7 @@ class SplitButton extends React.Component {
           {title}
         </Button>
         <SplitToggle
+          data-toggle={dataToggle || ''}
           aria-label={toggleLabel || title}
           bsSize={bsSize}
           bsStyle={bsStyle}
