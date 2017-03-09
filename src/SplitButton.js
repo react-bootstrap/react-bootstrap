@@ -53,7 +53,7 @@ class SplitButton extends React.Component {
           {title}
         </Button>
         <SplitToggle
-          data-toggle={dataToggle || ''}
+          data-toggle={dataToggle || null}
           aria-label={toggleLabel || title}
           bsSize={bsSize}
           bsStyle={bsStyle}
