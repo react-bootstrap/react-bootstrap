@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "0.30.7",
+  "version": "0.30.8",
   "description": "Bootstrap 3 components built with React",
   "repository": {
     "type": "git",
@@ -124,7 +124,7 @@
     "dom-helpers": "^3.2.0",
     "invariant": "^2.2.1",
     "keycode": "^2.1.2",
-    "react-overlays": "^0.6.10",
+    "react-overlays": "^0.6.12",
     "react-prop-types": "^0.4.0",
     "uncontrollable": "^4.0.1",
     "warning": "^3.0.0"
