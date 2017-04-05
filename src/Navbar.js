@@ -193,27 +193,21 @@ class Navbar extends React.Component {
       [prefix(bsProps, 'static-top')]: staticTop,
     };
 
-    if (this.props.fullWidth) {
-      return (
-        <Component
-          {...elementProps}
-          className={classNames(className, classes)}
-        >
+    if (!this.props.fullWidth) {
+      children = (
+        <Grid fluid={fluid}>
           {children}
-        </Component>
-      );
-    } else {
-      return (
-        <Component
-          {...elementProps}
-          className={classNames(className, classes)}
-        >
-          <Grid fluid={fluid}>
-            {children}
-          </Grid>
-        </Component>
+        </Grid>
       );
     }
+    return (
+      <Component
+        {...elementProps}
+        className={classNames(className, classes)}
+      >
+        {children}
+      </Component>
+    );
   }
 }
 
