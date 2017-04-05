@@ -65,11 +65,6 @@ const propTypes = {
   open: React.PropTypes.bool,
 
   /**
-   * A callback fired when the Dropdown closes.
-   */
-  onClose: React.PropTypes.func,
-
-  /**
    * A callback fired when the Dropdown wishes to change visibility. Called with the requested
    * `open` value, the DOM event, and the source that fired it: `'click'`,`'keydown'`,`'rootClose'`, or `'select'`.
    *
@@ -255,7 +250,7 @@ class Dropdown extends React.Component {
     });
   }
 
-  renderMenu(child, { id, onClose, onSelect, rootCloseEvent, ...props }) {
+  renderMenu(child, { id, onSelect, rootCloseEvent, ...props }) {
     let ref = c => { this.menu = c; };
 
     if (typeof child.ref === 'string') {
@@ -275,7 +270,6 @@ class Dropdown extends React.Component {
       bsClass: prefix(props, 'menu'),
       onClose: createChainedFunction(
         child.props.onClose,
-        onClose,
         this.handleClose,
       ),
       onSelect: createChainedFunction(
@@ -295,7 +289,6 @@ class Dropdown extends React.Component {
       disabled,
       pullRight,
       open,
-      onClose,
       onSelect,
       role,
       bsClass,
@@ -334,7 +327,7 @@ class Dropdown extends React.Component {
               });
             case MENU_ROLE:
               return this.renderMenu(child, {
-                id, open, pullRight, bsClass, onClose, onSelect, rootCloseEvent,
+                id, open, pullRight, bsClass, onSelect, rootCloseEvent,
               });
             default:
               return child;
