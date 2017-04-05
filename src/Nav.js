@@ -151,7 +151,7 @@ class Nav extends React.Component {
 
     event.preventDefault();
 
-    if (onSelect && nextActiveChild && nextActiveChild.props.eventKey) {
+    if (onSelect && nextActiveChild && nextActiveChild.props.eventKey != null) {
       onSelect(nextActiveChild.props.eventKey);
     }
 
