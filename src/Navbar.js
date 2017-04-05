@@ -193,8 +193,9 @@ class Navbar extends React.Component {
       [prefix(bsProps, 'static-top')]: staticTop,
     };
 
+    let newChildren = children;
     if (!this.props.fullWidth) {
-      children = (
+      newChildren = (
         <Grid fluid={fluid}>
           {children}
         </Grid>
@@ -205,7 +206,7 @@ class Navbar extends React.Component {
         {...elementProps}
         className={classNames(className, classes)}
       >
-        {children}
+        {newChildren}
       </Component>
     );
   }
