@@ -63,6 +63,12 @@ const propTypes = {
   enforceFocus: React.PropTypes.bool,
 
   /**
+   * When `true` The modal will restore focus to previously focused element once
+   * modal is hidden
+   */
+  restoreFocus: React.PropTypes.bool,
+
+  /**
    * When `true` The modal will show itself.
    */
   show: React.PropTypes.bool,

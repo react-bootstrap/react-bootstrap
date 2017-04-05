@@ -6,7 +6,7 @@ import { bsClass, getClassSet, prefix, splitBsProps }
 
 const propTypes = {
   /**
-   * An icon name. See e.g. http://getbootstrap.com/components/#glyphicons
+   * An icon name without "glyphicon-" prefix. See e.g. http://getbootstrap.com/components/#glyphicons
    */
   glyph: React.PropTypes.string.isRequired,
 };

@@ -1,3 +1,27 @@
+## [v0.30.8]
+> 2017-03-07
+
+- **Feature:** Support `bsSize` on `<FormControl>` ([#2382], [#2394])
+- **Feature:** Pass event and event source to `onToggle` callback for `<Dropdown>` ([#2422])
+- **Feature:** Add `restoreFocus` to `<Modal>` ([#2482])
+- **Feature:** Add `mountOnEnter` to transition and tab components ([#2504])
+- **Bugfix:** Don't set `aria-describedby` in `<OverlayTrigger>` when not showing the overlay ([#2359])
+- **Bugfix:** Fix `boundaryLinks` in `<Pagination>` ([#2443])
+- **Bugfix:** Support `closeButton` in `<Modal.Header>` in static modals ([#2453])
+- **Bugfix:** Fix `<Carousel>` with `slide` disabled ([#2466])
+
+[v0.30.8]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.7...v0.30.8
+[#2359]: https://github.com/react-bootstrap/react-bootstrap/pull/2359
+[#2382]: https://github.com/react-bootstrap/react-bootstrap/pull/2382
+[#2394]: https://github.com/react-bootstrap/react-bootstrap/pull/2394
+[#2422]: https://github.com/react-bootstrap/react-bootstrap/pull/2422
+[#2443]: https://github.com/react-bootstrap/react-bootstrap/pull/2443
+[#2453]: https://github.com/react-bootstrap/react-bootstrap/pull/2453
+[#2466]: https://github.com/react-bootstrap/react-bootstrap/pull/2466
+[#2482]: https://github.com/react-bootstrap/react-bootstrap/pull/2482
+[#2504]: https://github.com/react-bootstrap/react-bootstrap/pull/2504
+
+
 ## [v0.30.7]
 > 2016-11-22
 

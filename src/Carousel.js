@@ -187,7 +187,7 @@ class Carousel extends React.Component {
       return;
     }
 
-    const previousActiveIndex = this.getActiveIndex();
+    const previousActiveIndex = this.props.slide ? this.getActiveIndex() : null;
     direction = direction || this.getDirection(previousActiveIndex, index);
 
     const { onSelect } = this.props;
