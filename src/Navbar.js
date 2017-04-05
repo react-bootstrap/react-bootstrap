@@ -45,7 +45,10 @@ const propTypes = {
    * of at the predefined screen breakpoints
    */
   fluid: React.PropTypes.bool,
-
+  /**
+   * Allow the Navbar to take up the full width.  Cannot be used with fluid.
+   */
+  fullWidth: React.PropTypes.bool,
   /**
    * Set a custom element for this component.
    */
@@ -102,6 +105,7 @@ const defaultProps = {
   componentClass: 'nav',
   fixedTop: false,
   fixedBottom: false,
+  fullWidth: false,
   staticTop: false,
   inverse: false,
   fluid: false,
@@ -189,16 +193,27 @@ class Navbar extends React.Component {
       [prefix(bsProps, 'static-top')]: staticTop,
     };
 
-    return (
-      <Component
-        {...elementProps}
-        className={classNames(className, classes)}
-      >
-        <Grid fluid={fluid}>
+    if (this.props.fullWidth) {
+      return (
+        <Component
+          {...elementProps}
+          className={classNames(className, classes)}
+        >
           {children}
-        </Grid>
-      </Component>
-    );
+        </Component>
+      );
+    } else {
+      return (
+        <Component
+          {...elementProps}
+          className={classNames(className, classes)}
+        >
+          <Grid fluid={fluid}>
+            {children}
+          </Grid>
+        </Component>
+      );
+    }
   }
 }
 
