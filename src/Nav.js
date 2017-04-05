@@ -151,7 +151,7 @@ class Nav extends React.Component {
 
     event.preventDefault();
 
-    if (onSelect && nextActiveChild && nextActiveChild.props.eventKey) {
+    if (onSelect && nextActiveChild && nextActiveChild.props.eventKey != null) {
       onSelect(nextActiveChild.props.eventKey);
     }
 
@@ -161,7 +161,7 @@ class Nav extends React.Component {
   getNextActiveChild(offset) {
     const { children } = this.props;
     const validChildren = children.filter(child => (
-      child.props.eventKey && !child.props.disabled
+      child.props.eventKey != null && !child.props.disabled
     ));
     const { activeKey, activeHref } = this.getActiveProps();
 
