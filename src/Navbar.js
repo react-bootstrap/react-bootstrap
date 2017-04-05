@@ -172,7 +172,7 @@ class Navbar extends React.Component {
     } = this.props;
 
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
-      'expanded', 'onToggle', 'onSelect', 'collapseOnSelect',
+      'expanded', 'onToggle', 'onSelect', 'collapseOnSelect', 'fullWidth'
     ]);
 
     // will result in some false positives but that seems better
