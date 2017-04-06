@@ -21,6 +21,7 @@ const propTypes = {
   eventKey: React.PropTypes.any,
   headerRole: React.PropTypes.string,
   panelRole: React.PropTypes.string,
+  headerControls: React.PropTypes.array,
 
   // From Collapse.
   onEnter: React.PropTypes.func,
@@ -33,6 +34,7 @@ const propTypes = {
 
 const defaultProps = {
   defaultExpanded: false,
+  headerControls: []
 };
 
 class Panel extends React.Component {
@@ -62,7 +64,7 @@ class Panel extends React.Component {
     }
   }
 
-  renderHeader(collapsible, header, id, role, expanded, bsProps) {
+  renderHeader(collapsible, header, id, role, expanded, bsProps, headerControls) {
     const titleClassName = prefix(bsProps, 'title');
 
     if (!collapsible) {
@@ -83,10 +85,33 @@ class Panel extends React.Component {
       );
     }
 
+    if (headerControls.length !== 0) {
+      return cloneElement(header, {
+        className: classNames(header.props.className, titleClassName),
+        children: this.renderAnchorCustom( header.props.children, id, role, expanded, headerControls )
+      });
+    }
+
     return cloneElement(header, {
       className: classNames(header.props.className, titleClassName),
       children: this.renderAnchor(header.props.children, id, role, expanded),
     });
+  }
+
+  renderAnchorCustom( header, id, role, expanded, headerControls ) {
+    const _self = this;
+    return ( function _renderRecurse( node ) {
+      const children = React.Children.toArray( node );
+      return children.map( child => {
+        const { props } = child;
+        if (!props) {
+          return child;
+        }
+        return (headerControls.indexOf(props.id) !== -1)
+          ? _self.renderAnchor(child, props.id, role, expanded)
+          : _renderRecurse(props.children);
+      });
+    })( header );
   }
 
   renderAnchor(header, id, role, expanded) {
@@ -179,6 +204,7 @@ class Panel extends React.Component {
       onExit,
       onExiting,
       onExited,
+      headerControls,
       ...props
     } = this.props;
 
@@ -200,7 +226,7 @@ class Panel extends React.Component {
         {header && (
           <div className={prefix(bsProps, 'heading')}>
             {this.renderHeader(
-              collapsible, header, id, headerRole, expanded, bsProps
+              collapsible, header, id, headerRole, expanded, bsProps, headerControls
             )}
           </div>
         )}
