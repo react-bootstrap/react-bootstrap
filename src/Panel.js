@@ -21,6 +21,7 @@ const propTypes = {
   eventKey: React.PropTypes.any,
   headerRole: React.PropTypes.string,
   panelRole: React.PropTypes.string,
+  collapseControl: React.PropTypes.oneOf(['heading', 'element', 'anchor']),
 
   // From Collapse.
   onEnter: React.PropTypes.func,
@@ -33,6 +34,7 @@ const propTypes = {
 
 const defaultProps = {
   defaultExpanded: false,
+  collapseControl: 'anchor',
 };
 
 class Panel extends React.Component {
@@ -62,7 +64,35 @@ class Panel extends React.Component {
     }
   }
 
-  renderHeader(collapsible, header, id, role, expanded, bsProps) {
+  renderHeaderContainer(header, collapsible, collapseControl, id, headerRole, expanded, bsProps, collapseControlProps) {
+    // Pass the props to panel header so that the entire header is clickable, instead of just the text anchor
+    let props;
+    if (collapseControl === 'heading') {
+      props = collapseControlProps;
+    }
+
+    return (
+      <div className={
+            classNames(
+              prefix(bsProps, 'heading'),
+              {
+                'collapsed': collapseControl === 'heading' && !expanded
+              }
+            )
+          }
+          role={headerRole}
+          {...props}
+          >
+        {
+          this.renderHeader(
+              collapsible, header, collapseControl, id, headerRole, expanded, bsProps, collapseControlProps
+          )
+        }
+      </div>
+    );
+  }
+
+  renderHeader(collapsible, header, collapseControl, id, role, expanded, bsProps, collapseControlProps) {
     const titleClassName = prefix(bsProps, 'title');
 
     if (!collapsible) {
@@ -76,11 +106,39 @@ class Panel extends React.Component {
     }
 
     if (!React.isValidElement(header)) {
+      // If the header props is not a valid React element and the panel header has control
+      // over the collapsible, an anchor tag is no longer necessary.
+      if (collapseControl === 'heading') {
+        return (
+          <h4 role="presentation" className={titleClassName}>
+            {header}
+          </h4>
+        );
+      }
+
       return (
         <h4 role="presentation" className={titleClassName}>
           {this.renderAnchor(header, id, role, expanded)}
         </h4>
       );
+    }
+
+    // If the panel header or a valid React element controls the collapsible, wrapping the
+    // children in an anchor tag is unnecessary.
+    if (collapseControl === 'heading') {
+      return cloneElement(header, {
+        className: classNames(header.props.className, titleClassName),
+        children: header.props.children,
+      });
+    } else if (collapseControl === 'element') {
+      // Pass the control props to the descendant - this will work only if the header prop
+      // is a valid React element, eg. <Button />. Again, it will not wrap the children in
+      // an unnecessary anchor tag.
+      return cloneElement(header, {
+        className: classNames(header.props.className, titleClassName, (expanded ? null : 'collapsed')),
+        children: header.props.children,
+        ...collapseControlProps
+      });
     }
 
     return cloneElement(header, {
@@ -173,6 +231,7 @@ class Panel extends React.Component {
       panelRole,
       className,
       children,
+      collapseControl,
       onEnter,
       onEntering,
       onEntered,
@@ -191,6 +250,14 @@ class Panel extends React.Component {
 
     const classes = getClassSet(bsProps);
 
+    // These are the props required to give an element control over collapsible Panel
+    const collapseControlProps = {
+      'onClick': this.handleClickTitle,
+      'aria-controls': id,
+      'aria-expanded': expanded,
+      'aria-selected': expanded,
+    };
+
     return (
       <div
         {...elementProps}
@@ -198,11 +265,16 @@ class Panel extends React.Component {
         id={collapsible ? null : id}
       >
         {header && (
-          <div className={prefix(bsProps, 'heading')}>
-            {this.renderHeader(
-              collapsible, header, id, headerRole, expanded, bsProps
-            )}
-          </div>
+          this.renderHeaderContainer(
+            header,
+            collapsible,
+            collapseControl,
+            id,
+            headerRole,
+            expanded,
+            bsProps,
+            collapseControlProps
+          )
         )}
 
         {collapsible ?

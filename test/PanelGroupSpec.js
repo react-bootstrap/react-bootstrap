@@ -31,6 +31,28 @@ describe('<PanelGroup>', () => {
     assert.equal(panel.props.bsStyle, 'primary');
   });
 
+  it('Should pass collapseControl prop to children', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <PanelGroup collapseControl="heading" accordion>
+        <Panel>Panel 1</Panel>
+      </PanelGroup>
+    );
+
+    let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
+    assert.equal(panel.props.collapseControl, 'heading');
+  });
+
+  it('Should prioritize container collapseControl value', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <PanelGroup collapseControl="anchor" accordion>
+        <Panel collapseControl="heading">Panel 1</Panel>
+      </PanelGroup>
+    );
+
+    let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
+    assert.equal(panel.props.collapseControl, 'anchor');
+  });
+
   it('Should not collapse panel by bubbling onSelect callback', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup accordion>
