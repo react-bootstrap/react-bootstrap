@@ -55,15 +55,15 @@ const formInstance = (
       </Checkbox>
     </FormGroup>
     <FormGroup>
-      <Radio inline>
+      <Radio name="radioGroup" inline>
         1
       </Radio>
       {' '}
-      <Radio inline>
+      <Radio name="radioGroup" inline>
         2
       </Radio>
       {' '}
-      <Radio inline>
+      <Radio name="radioGroup" inline>
         3
       </Radio>
     </FormGroup>
