@@ -4,11 +4,11 @@ npm-debug.log*
 node_modules
 amd/
 !tools/amd/
-lib/
+#lib/
 !tools/lib/
-es/
+#es/
 !tools/es/
-dist/
+#dist/
 !tools/dist/
 docs-built/
 tmp-bower-repo/
