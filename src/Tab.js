@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import TabContainer from './TabContainer';
 import TabContent from './TabContent';
 import TabPane from './TabPane';
@@ -7,14 +9,14 @@ import TabPane from './TabPane';
 const propTypes = {
   ...TabPane.propTypes,
 
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
 
-  title: React.PropTypes.node,
+  title: PropTypes.node,
 
   /**
    * tabClassName is used as className for the associated NavItem
    */
-  tabClassName: React.PropTypes.string
+  tabClassName: PropTypes.string
 };
 
 class Tab extends React.Component {

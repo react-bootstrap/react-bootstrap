@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import Button from './Button';
 import Dropdown from './Dropdown';
 import SplitToggle from './SplitToggle';
@@ -9,24 +11,24 @@ const propTypes = {
   ...Dropdown.propTypes,
 
   // Toggle props.
-  bsStyle: React.PropTypes.string,
-  bsSize: React.PropTypes.string,
-  href: React.PropTypes.string,
-  onClick: React.PropTypes.func,
+  bsStyle: PropTypes.string,
+  bsSize: PropTypes.string,
+  href: PropTypes.string,
+  onClick: PropTypes.func,
   /**
    * The content of the split button.
    */
-  title: React.PropTypes.node.isRequired,
+  title: PropTypes.node.isRequired,
   /**
    * Accessible label for the toggle; the value of `title` if not specified.
    */
-  toggleLabel: React.PropTypes.string,
+  toggleLabel: PropTypes.string,
 
   // Override generated docs from <Dropdown>.
   /**
    * @private
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 class SplitButton extends React.Component {

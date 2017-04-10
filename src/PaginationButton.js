@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'react-prop-types/lib/elementType';
 
 import SafeAnchor from './SafeAnchor';
@@ -11,12 +12,12 @@ import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
   componentClass: elementType,
-  className: React.PropTypes.string,
-  eventKey: React.PropTypes.any,
-  onSelect: React.PropTypes.func,
-  disabled: React.PropTypes.bool,
-  active: React.PropTypes.bool,
-  onClick: React.PropTypes.func,
+  className: PropTypes.string,
+  eventKey: PropTypes.any,
+  onSelect: PropTypes.func,
+  disabled: PropTypes.bool,
+  active: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import keycode from 'keycode';
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
 
@@ -10,14 +11,14 @@ import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const propTypes = {
-  open: React.PropTypes.bool,
-  pullRight: React.PropTypes.bool,
-  onClose: React.PropTypes.func,
-  labelledBy: React.PropTypes.oneOfType([
-    React.PropTypes.string, React.PropTypes.number,
+  open: PropTypes.bool,
+  pullRight: PropTypes.bool,
+  onClose: PropTypes.func,
+  labelledBy: PropTypes.oneOfType([
+    PropTypes.string, PropTypes.number,
   ]),
-  onSelect: React.PropTypes.func,
-  rootCloseEvent: React.PropTypes.oneOf(['click', 'mousedown']),
+  onSelect: PropTypes.func,
+  rootCloseEvent: PropTypes.oneOf(['click', 'mousedown']),
 };
 
 const defaultProps = {

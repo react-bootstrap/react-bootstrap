@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import { bsClass, bsSizes, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 import { Size } from './utils/StyleConfig';
@@ -9,7 +11,7 @@ const propTypes = {
   /**
    * A css class to apply to the Modal dialog DOM node.
    */
-  dialogClassName: React.PropTypes.string,
+  dialogClassName: PropTypes.string,
 };
 
 class ModalDialog extends React.Component {

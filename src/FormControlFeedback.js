@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import Glyphicon from './Glyphicon';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
@@ -9,7 +11,7 @@ const defaultProps = {
 };
 
 const contextTypes = {
-  $bs_formGroup: React.PropTypes.object,
+  $bs_formGroup: PropTypes.object,
 };
 
 class FormControlFeedback extends React.Component {

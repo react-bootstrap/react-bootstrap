@@ -1,6 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import PropTypes from 'prop-types';
+
 import { bsClass, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 
@@ -8,7 +10,7 @@ const propTypes = {
   /**
    * An icon name without "glyphicon-" prefix. See e.g. http://getbootstrap.com/components/#glyphicons
    */
-  glyph: React.PropTypes.string.isRequired,
+  glyph: PropTypes.string.isRequired,
 };
 
 class Glyphicon extends React.Component {

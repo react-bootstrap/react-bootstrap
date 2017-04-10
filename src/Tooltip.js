@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
 import { bsClass, getClassSet, prefix, splitBsProps }
@@ -11,39 +12,39 @@ const propTypes = {
    * @type {string|number}
    * @required
    */
-  id: isRequiredForA11y(React.PropTypes.oneOfType([
-    React.PropTypes.string, React.PropTypes.number,
+  id: isRequiredForA11y(PropTypes.oneOfType([
+    PropTypes.string, PropTypes.number,
   ])),
 
   /**
    * Sets the direction the Tooltip is positioned towards.
    */
-  placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
   /**
    * The "top" position value for the Tooltip.
    */
-  positionTop: React.PropTypes.oneOfType([
-    React.PropTypes.number, React.PropTypes.string,
+  positionTop: PropTypes.oneOfType([
+    PropTypes.number, PropTypes.string,
   ]),
   /**
    * The "left" position value for the Tooltip.
    */
-  positionLeft: React.PropTypes.oneOfType([
-    React.PropTypes.number, React.PropTypes.string,
+  positionLeft: PropTypes.oneOfType([
+    PropTypes.number, PropTypes.string,
   ]),
 
   /**
    * The "top" position value for the Tooltip arrow.
    */
-  arrowOffsetTop: React.PropTypes.oneOfType([
-    React.PropTypes.number, React.PropTypes.string,
+  arrowOffsetTop: PropTypes.oneOfType([
+    PropTypes.number, PropTypes.string,
   ]),
   /**
    * The "left" position value for the Tooltip arrow.
    */
-  arrowOffsetLeft: React.PropTypes.oneOfType([
-    React.PropTypes.number, React.PropTypes.string,
+  arrowOffsetLeft: PropTypes.oneOfType([
+    PropTypes.number, PropTypes.string,
   ]),
 };
 
