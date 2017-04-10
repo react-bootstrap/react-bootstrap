@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
-
 import PropTypes from 'prop-types';
 
 import PagerItem from './PagerItem';

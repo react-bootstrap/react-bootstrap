@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import all from 'react-prop-types/lib/all';
 
 import SafeAnchor from './SafeAnchor';
@@ -10,19 +11,19 @@ const propTypes = {
   /**
    * Highlight the menu item as active.
    */
-  active: React.PropTypes.bool,
+  active: PropTypes.bool,
 
   /**
    * Disable the menu item, making it unselectable.
    */
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
 
   /**
    * Styles the menu item as a horizontal rule, providing visual separation between
    * groups of menu items.
    */
   divider: all(
-    React.PropTypes.bool,
+    PropTypes.bool,
     ({ divider, children }) => (
       divider && children ?
         new Error('Children will not be rendered for dividers') :
@@ -33,22 +34,22 @@ const propTypes = {
   /**
    * Value passed to the `onSelect` handler, useful for identifying the selected menu item.
    */
-  eventKey: React.PropTypes.any,
+  eventKey: PropTypes.any,
 
   /**
    * Styles the menu item as a header label, useful for describing a group of menu items.
    */
-  header: React.PropTypes.bool,
+  header: PropTypes.bool,
 
   /**
    * HTML `href` attribute corresponding to `a.href`.
    */
-  href: React.PropTypes.string,
+  href: PropTypes.string,
 
   /**
    * Callback fired when the menu item is clicked.
    */
-  onClick: React.PropTypes.func,
+  onClick: PropTypes.func,
 
   /**
    * Callback fired when the menu item is selected.
@@ -57,7 +58,7 @@ const propTypes = {
    * (eventKey: any, event: Object) => any
    * ```
    */
-  onSelect: React.PropTypes.func,
+  onSelect: PropTypes.func,
 };
 
 const defaultProps = {
