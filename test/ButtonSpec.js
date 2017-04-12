@@ -118,4 +118,13 @@ describe('<Button>', () => {
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bactive\b/));
   });
+
+  it('Should apply bsCustomClass', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Button bsCustomClass="anyClass">
+        Title
+      </Button>
+    );
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\banyClass\b/));
+  });
 });
