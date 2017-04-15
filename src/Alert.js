@@ -1,13 +1,14 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { bsClass, bsStyles, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 import { State } from './utils/StyleConfig';
 
 const propTypes = {
-  onDismiss: React.PropTypes.func,
-  closeLabel: React.PropTypes.string,
+  onDismiss: PropTypes.func,
+  closeLabel: PropTypes.string,
 };
 
 const defaultProps = {

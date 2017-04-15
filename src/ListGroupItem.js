@@ -1,18 +1,19 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
+import PropTypes from 'prop-types';
 
 import { bsClass, bsStyles, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 import { State } from './utils/StyleConfig';
 
 const propTypes = {
-  active: React.PropTypes.any,
-  disabled: React.PropTypes.any,
-  header: React.PropTypes.node,
-  listItem: React.PropTypes.bool,
-  onClick: React.PropTypes.func,
-  href: React.PropTypes.string,
-  type: React.PropTypes.string,
+  active: PropTypes.any,
+  disabled: PropTypes.any,
+  header: PropTypes.node,
+  listItem: PropTypes.bool,
+  onClick: PropTypes.func,
+  href: PropTypes.string,
+  type: PropTypes.string,
 };
 
 const defaultProps = {

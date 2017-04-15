@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { bsClass, bsSizes, getClassSet, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
@@ -10,14 +11,14 @@ const propTypes = {
   /**
    * Sets `id` on `<FormControl>` and `htmlFor` on `<FormGroup.Label>`.
    */
-  controlId: React.PropTypes.string,
-  validationState: React.PropTypes.oneOf([
+  controlId: PropTypes.string,
+  validationState: PropTypes.oneOf([
     'success', 'warning', 'error', null,
   ]),
 };
 
 const childContextTypes = {
-  $bs_formGroup: React.PropTypes.object.isRequired,
+  $bs_formGroup: PropTypes.object.isRequired,
 };
 
 class FormGroup extends React.Component {

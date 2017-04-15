@@ -1,62 +1,63 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'react-prop-types/lib/elementType';
 
 import PaginationButton from './PaginationButton';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
-  activePage: React.PropTypes.number,
-  items: React.PropTypes.number,
-  maxButtons: React.PropTypes.number,
+  activePage: PropTypes.number,
+  items: PropTypes.number,
+  maxButtons: PropTypes.number,
 
   /**
    * When `true`, will display the first and the last button page when
    * displaying ellipsis.
    */
-  boundaryLinks: React.PropTypes.bool,
+  boundaryLinks: PropTypes.bool,
 
   /**
    * When `true`, will display the default node value ('&hellip;').
    * Otherwise, will display provided node (when specified).
    */
-  ellipsis: React.PropTypes.oneOfType([
-    React.PropTypes.bool, React.PropTypes.node,
+  ellipsis: PropTypes.oneOfType([
+    PropTypes.bool, PropTypes.node,
   ]),
 
   /**
    * When `true`, will display the default node value ('&laquo;').
    * Otherwise, will display provided node (when specified).
    */
-  first: React.PropTypes.oneOfType([
-    React.PropTypes.bool, React.PropTypes.node,
+  first: PropTypes.oneOfType([
+    PropTypes.bool, PropTypes.node,
   ]),
 
   /**
    * When `true`, will display the default node value ('&raquo;').
    * Otherwise, will display provided node (when specified).
    */
-  last: React.PropTypes.oneOfType([
-    React.PropTypes.bool, React.PropTypes.node,
+  last: PropTypes.oneOfType([
+    PropTypes.bool, PropTypes.node,
   ]),
 
   /**
    * When `true`, will display the default node value ('&lsaquo;').
    * Otherwise, will display provided node (when specified).
    */
-  prev: React.PropTypes.oneOfType([
-    React.PropTypes.bool, React.PropTypes.node,
+  prev: PropTypes.oneOfType([
+    PropTypes.bool, PropTypes.node,
   ]),
 
   /**
    * When `true`, will display the default node value ('&rsaquo;').
    * Otherwise, will display provided node (when specified).
    */
-  next: React.PropTypes.oneOfType([
-    React.PropTypes.bool, React.PropTypes.node,
+  next: PropTypes.oneOfType([
+    PropTypes.bool, PropTypes.node,
   ]),
 
-  onSelect: React.PropTypes.func,
+  onSelect: PropTypes.func,
 
   /**
    * You can use a custom element for the buttons

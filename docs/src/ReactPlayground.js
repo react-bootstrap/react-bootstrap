@@ -4,6 +4,7 @@
 /* eslint-disable */
 const classNames = require('classnames');
 const React = require('react');
+const PropTypes = require('prop-types');
 const ReactDOM = require('react-dom');
 
 // Keep these in sync with src/index.js.
@@ -159,8 +160,8 @@ const ReactPlayground = React.createClass({
   mixins: [selfCleaningTimeout],
 
   propTypes: {
-    codeText: React.PropTypes.string.isRequired,
-    transformer: React.PropTypes.func
+    codeText: PropTypes.string.isRequired,
+    transformer: PropTypes.func
   },
 
   getDefaultProps() {

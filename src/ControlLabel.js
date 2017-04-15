@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import warning from 'warning';
 
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
@@ -8,8 +9,8 @@ const propTypes = {
   /**
    * Uses `controlId` from `<FormGroup>` if not explicitly specified.
    */
-  htmlFor: React.PropTypes.string,
-  srOnly: React.PropTypes.bool,
+  htmlFor: PropTypes.string,
+  srOnly: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -17,7 +18,7 @@ const defaultProps = {
 };
 
 const contextTypes = {
-  $bs_formGroup: React.PropTypes.object,
+  $bs_formGroup: PropTypes.object,
 };
 
 class ControlLabel extends React.Component {

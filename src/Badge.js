@@ -1,12 +1,13 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 // TODO: `pullRight` doesn't belong here. There's no special handling here.
 
 const propTypes = {
-  pullRight: React.PropTypes.bool,
+  pullRight: PropTypes.bool,
 };
 
 const defaultProps = {

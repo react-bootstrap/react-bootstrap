@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
+import PropTypes from 'prop-types';
 
 import { bsClass, getClassSet, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
@@ -7,11 +8,11 @@ import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const propTypes = {
-  accordion: React.PropTypes.bool,
-  activeKey: React.PropTypes.any,
-  defaultActiveKey: React.PropTypes.any,
-  onSelect: React.PropTypes.func,
-  role: React.PropTypes.string,
+  accordion: PropTypes.bool,
+  activeKey: PropTypes.any,
+  defaultActiveKey: PropTypes.any,
+  onSelect: PropTypes.func,
+  role: PropTypes.string,
 };
 
 const defaultProps = {

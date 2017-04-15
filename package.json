@@ -99,6 +99,7 @@
     "nodemon": "^1.9.2",
     "output-file-sync": "^1.1.2",
     "portfinder": "^1.0.3",
+    "prop-types": "^15.5.6",
     "react": "^15.4.0",
     "react-addons-test-utils": "^15.4.0",
     "react-component-metadata": "^3.1.0",

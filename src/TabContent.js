@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'react-prop-types/lib/elementType';
 
 import { bsClass as setBsClass, prefix, splitBsPropsAndOmit }
@@ -20,7 +21,7 @@ const propTypes = {
   /**
    * Wait until the first "enter" transition to mount tabs (add them to the DOM)
    */
-  mountOnEnter: React.PropTypes.bool,
+  mountOnEnter: PropTypes.bool,
 
   /**
    * Unmount tabs (remove it from the DOM) when they are no longer visible

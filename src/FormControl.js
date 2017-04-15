@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'react-prop-types/lib/elementType';
 import warning from 'warning';
 
@@ -14,11 +15,11 @@ const propTypes = {
   /**
    * Only relevant if `componentClass` is `'input'`.
    */
-  type: React.PropTypes.string,
+  type: PropTypes.string,
   /**
    * Uses `controlId` from `<FormGroup>` if not explicitly specified.
    */
-  id: React.PropTypes.string,
+  id: PropTypes.string,
   /**
    * Attaches a ref to the `<input>` element. Only functions can be used here.
    *
@@ -26,7 +27,7 @@ const propTypes = {
    * <FormControl inputRef={ref => { this.input = ref; }} />
    * ```
    */
-  inputRef: React.PropTypes.func,
+  inputRef: PropTypes.func,
 };
 
 const defaultProps = {
@@ -34,7 +35,7 @@ const defaultProps = {
 };
 
 const contextTypes = {
-  $bs_formGroup: React.PropTypes.object,
+  $bs_formGroup: PropTypes.object,
 };
 
 class FormControl extends React.Component {

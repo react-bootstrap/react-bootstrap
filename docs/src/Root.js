@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Root = React.createClass({
   statics: {
@@ -19,7 +20,7 @@ const Root = React.createClass({
   },
 
   childContextTypes: {
-    metadata: React.PropTypes.object
+    metadata: PropTypes.object
   },
 
   getChildContext() {

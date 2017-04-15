@@ -1,7 +1,7 @@
 // TODO: The publicly exposed parts of this should be in lib/BootstrapUtils.
 
 import invariant from 'invariant';
-import { PropTypes } from 'react';
+import PropTypes from 'prop-types';
 
 import { SIZE_MAP } from './StyleConfig';
 

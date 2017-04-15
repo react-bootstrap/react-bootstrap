@@ -55,7 +55,7 @@ propTypes: {
   /**
    * Sets the visibility of the Component
    */
-  show: React.PropTypes.bool,
+  show: PropTypes.bool,
 
   /**
    * A callback fired when the visibility changes

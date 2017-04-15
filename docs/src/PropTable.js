@@ -1,5 +1,6 @@
 import merge from 'lodash/merge';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Glyphicon from '../../src/Glyphicon';
 import Label from '../../src/Label';
@@ -37,7 +38,7 @@ function getPropsData(component, metadata) {
 const PropTable = React.createClass({
 
   contextTypes: {
-    metadata: React.PropTypes.object
+    metadata: PropTypes.object
   },
 
   componentWillMount() {
