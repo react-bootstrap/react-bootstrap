@@ -1,3 +1,16 @@
+## [v0.30.9]
+> 2017-04-18
+
+- **Feature:** Export `<PaginationButton>` ([#2505])
+- **Bugfix:** Support falsy `eventKey` ([#2541])
+- **Chore:** Update for React v15.5 deprecations ([#2552])
+
+[v0.30.9]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.8...v0.30.9
+[#2505]: https://github.com/react-bootstrap/react-bootstrap/pull/2505
+[#2541]: https://github.com/react-bootstrap/react-bootstrap/pull/2541
+[#2552]: https://github.com/react-bootstrap/react-bootstrap/pull/2552
+
+
 ## [v0.30.8]
 > 2017-03-07
 
