@@ -27,7 +27,7 @@ export default function TooltipSection() {
 
       <h3><Anchor id="tooltips-props">Props</Anchor></h3>
 
-      <h4><Anchor id="overlays-trigger-props">Overlay Trigger</Anchor></h4>
+      <h4><Anchor id="overlays-trigger-props">OverlayTrigger</Anchor></h4>
       <PropTable component="OverlayTrigger"/>
 
       <h4><Anchor id="tooltips-props-tooltip">Tooltip</Anchor></h4>
