@@ -1,3 +1,11 @@
+## [v0.30.10]
+> 2017-04-21
+
+- **Bugfix:** Move prop-types to normal dependencies ([#2576])
+
+[v0.30.10]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.9...v0.30.10
+[#2576]: https://github.com/react-bootstrap/react-bootstrap/pull/2576
+
 ## [v0.30.9]
 > 2017-04-18
 
