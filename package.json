@@ -38,8 +38,8 @@
   "author": "Stephen J. Collings <stevoland@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
-    "react": ">=0.14.0",
-    "react-dom": ">=0.14.0"
+    "react": "^0.14.9 || >=15.3.0",
+    "react-dom": "^0.14.9 || >=15.3.0"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
@@ -124,7 +124,7 @@
     "dom-helpers": "^2.4.0",
     "invariant": "^2.2.1",
     "keycode": "^2.1.2",
-    "react-overlays": "^0.6.10",
+    "react-overlays": "^0.7.0",
     "react-prop-types": "^0.4.0",
     "uncontrollable": "^4.0.1",
     "warning": "^3.0.0"
