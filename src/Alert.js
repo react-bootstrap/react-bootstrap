@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { bsClass, bsStyles, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 import { State } from './utils/StyleConfig';
+import CloseButton from './CloseButton';
 
 const propTypes = {
   onDismiss: PropTypes.func,
@@ -16,20 +17,6 @@ const defaultProps = {
 };
 
 class Alert extends React.Component {
-  renderDismissButton(onDismiss, closeLabel) {
-    return (
-      <button
-        type="button"
-        className="close"
-        onClick={onDismiss}
-        tabIndex="-1"
-      >
-        <span aria-hidden="true">&times;</span>
-        <span className="sr-only">{closeLabel}</span>
-      </button>
-    );
-  }
-
   render() {
     const { onDismiss, closeLabel, className, children, ...props } =
       this.props;
@@ -47,7 +34,12 @@ class Alert extends React.Component {
         role="alert"
         className={classNames(className, classes)}
       >
-        {dismissable && this.renderDismissButton(onDismiss, closeLabel)}
+        {dismissable && (
+          <CloseButton
+            onClick={onDismiss}
+            label={closeLabel}
+          />
+        )}
         {children}
       </div>
     );
