@@ -125,7 +125,7 @@ describe('<Dropdown.Menu>', () => {
       button.click();
 
       requestClose.should.have.been.calledOnce;
-      requestClose.getCall(0).args.length.should.equal(0);
+      requestClose.getCall(0).args.length.should.equal(1);
     });
 
     describe('Keyboard Navigation', () => {
