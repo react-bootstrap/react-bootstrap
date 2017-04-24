@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import css from 'dom-helpers/style';
 import React from 'react';
+import PropTypes from 'prop-types';
 import Transition from 'react-overlays/lib/Transition';
 
 import capitalize from './utils/capitalize';
@@ -31,50 +32,55 @@ const propTypes = {
   /**
    * Show the component; triggers the expand or collapse animation
    */
-  in: React.PropTypes.bool,
+  in: PropTypes.bool,
+
+  /**
+   * Wait until the first "enter" transition to mount the component (add it to the DOM)
+   */
+  mountOnEnter: PropTypes.bool,
 
   /**
    * Unmount the component (remove it from the DOM) when it is collapsed
    */
-  unmountOnExit: React.PropTypes.bool,
+  unmountOnExit: PropTypes.bool,
 
   /**
    * Run the expand animation when the component mounts, if it is initially
    * shown
    */
-  transitionAppear: React.PropTypes.bool,
+  transitionAppear: PropTypes.bool,
 
   /**
    * Duration of the collapse animation in milliseconds, to ensure that
    * finishing callbacks are fired even if the original browser transition end
    * events are canceled
    */
-  timeout: React.PropTypes.number,
+  timeout: PropTypes.number,
 
   /**
    * Callback fired before the component expands
    */
-  onEnter: React.PropTypes.func,
+  onEnter: PropTypes.func,
   /**
    * Callback fired after the component starts to expand
    */
-  onEntering: React.PropTypes.func,
+  onEntering: PropTypes.func,
   /**
    * Callback fired after the component has expanded
    */
-  onEntered: React.PropTypes.func,
+  onEntered: PropTypes.func,
   /**
    * Callback fired before the component collapses
    */
-  onExit: React.PropTypes.func,
+  onExit: PropTypes.func,
   /**
    * Callback fired after the component starts to collapse
    */
-  onExiting: React.PropTypes.func,
+  onExiting: PropTypes.func,
   /**
    * Callback fired after the component has collapsed
    */
-  onExited: React.PropTypes.func,
+  onExited: PropTypes.func,
 
   /**
    * The dimension used when collapsing, or a function that returns the
@@ -83,9 +89,9 @@ const propTypes = {
    * _Note: Bootstrap only partially supports 'width'!
    * You will need to supply your own CSS animation for the `.width` CSS class._
    */
-  dimension: React.PropTypes.oneOfType([
-    React.PropTypes.oneOf(['height', 'width']),
-    React.PropTypes.func,
+  dimension: PropTypes.oneOfType([
+    PropTypes.oneOf(['height', 'width']),
+    PropTypes.func,
   ]),
 
   /**
@@ -95,17 +101,18 @@ const propTypes = {
    * should animate in its specified dimension. Called with the current
    * dimension prop value and the DOM node.
    */
-  getDimensionValue: React.PropTypes.func,
+  getDimensionValue: PropTypes.func,
 
   /**
    * ARIA role of collapsible element
    */
-  role: React.PropTypes.string,
+  role: PropTypes.string,
 };
 
 const defaultProps = {
   in: false,
   timeout: 300,
+  mountOnEnter: false,
   unmountOnExit: false,
   transitionAppear: false,
 

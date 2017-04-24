@@ -1,13 +1,14 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import SafeAnchor from './SafeAnchor';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
-  src: React.PropTypes.string,
-  alt: React.PropTypes.string,
-  href: React.PropTypes.string,
+  src: PropTypes.string,
+  alt: PropTypes.string,
+  href: PropTypes.string,
 };
 
 class Thumbnail extends React.Component {

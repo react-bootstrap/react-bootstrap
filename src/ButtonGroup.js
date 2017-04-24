@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import all from 'react-prop-types/lib/all';
 
 import Button from './Button';
@@ -7,15 +8,15 @@ import { bsClass, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 
 const propTypes = {
-  vertical: React.PropTypes.bool,
-  justified: React.PropTypes.bool,
+  vertical: PropTypes.bool,
+  justified: PropTypes.bool,
 
   /**
    * Display block buttons; only useful when used with the "vertical" prop.
    * @type {bool}
    */
   block: all(
-    React.PropTypes.bool,
+    PropTypes.bool,
     ({ block, vertical }) => (
       block && !vertical ?
         new Error('`block` requires `vertical` to be set to have any effect') :

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Button from './Button';
 import SafeAnchor from './SafeAnchor';
@@ -6,10 +7,10 @@ import SafeAnchor from './SafeAnchor';
 import { bsClass as setBsClass } from './utils/bootstrapUtils';
 
 const propTypes = {
-  noCaret: React.PropTypes.bool,
-  open: React.PropTypes.bool,
-  title: React.PropTypes.string,
-  useAnchor: React.PropTypes.bool,
+  noCaret: PropTypes.bool,
+  open: PropTypes.bool,
+  title: PropTypes.string,
+  useAnchor: PropTypes.bool,
 };
 
 const defaultProps = {

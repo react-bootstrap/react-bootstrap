@@ -1,61 +1,63 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'react-prop-types/lib/elementType';
 
 import PaginationButton from './PaginationButton';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
-  activePage: React.PropTypes.number,
-  items: React.PropTypes.number,
-  maxButtons: React.PropTypes.number,
+  activePage: PropTypes.number,
+  items: PropTypes.number,
+  maxButtons: PropTypes.number,
 
   /**
-   * When `true`, will display the first and the last button page
+   * When `true`, will display the first and the last button page when
+   * displaying ellipsis.
    */
-  boundaryLinks: React.PropTypes.bool,
+  boundaryLinks: PropTypes.bool,
 
   /**
    * When `true`, will display the default node value ('&hellip;').
    * Otherwise, will display provided node (when specified).
    */
-  ellipsis: React.PropTypes.oneOfType([
-    React.PropTypes.bool, React.PropTypes.node,
+  ellipsis: PropTypes.oneOfType([
+    PropTypes.bool, PropTypes.node,
   ]),
 
   /**
    * When `true`, will display the default node value ('&laquo;').
    * Otherwise, will display provided node (when specified).
    */
-  first: React.PropTypes.oneOfType([
-    React.PropTypes.bool, React.PropTypes.node,
+  first: PropTypes.oneOfType([
+    PropTypes.bool, PropTypes.node,
   ]),
 
   /**
    * When `true`, will display the default node value ('&raquo;').
    * Otherwise, will display provided node (when specified).
    */
-  last: React.PropTypes.oneOfType([
-    React.PropTypes.bool, React.PropTypes.node,
+  last: PropTypes.oneOfType([
+    PropTypes.bool, PropTypes.node,
   ]),
 
   /**
    * When `true`, will display the default node value ('&lsaquo;').
    * Otherwise, will display provided node (when specified).
    */
-  prev: React.PropTypes.oneOfType([
-    React.PropTypes.bool, React.PropTypes.node,
+  prev: PropTypes.oneOfType([
+    PropTypes.bool, PropTypes.node,
   ]),
 
   /**
    * When `true`, will display the default node value ('&rsaquo;').
    * Otherwise, will display provided node (when specified).
    */
-  next: React.PropTypes.oneOfType([
-    React.PropTypes.bool, React.PropTypes.node,
+  next: PropTypes.oneOfType([
+    PropTypes.bool, PropTypes.node,
   ]),
 
-  onSelect: React.PropTypes.func,
+  onSelect: PropTypes.func,
 
   /**
    * You can use a custom element for the buttons
@@ -83,52 +85,48 @@ class Pagination extends React.Component {
 
     let startPage;
     let endPage;
-    let hasHiddenPagesAfter;
 
-    if (maxButtons) {
-      let hiddenPagesBefore = activePage - parseInt(maxButtons / 2, 10);
-      startPage = Math.max(hiddenPagesBefore, 1);
-      hasHiddenPagesAfter = items >= startPage + maxButtons;
-
-      if (!hasHiddenPagesAfter) {
-        endPage = items;
-        startPage = items - maxButtons + 1;
-        if (startPage < 1) {
-          startPage = 1;
-        }
-      } else {
-        endPage = startPage + maxButtons - 1;
-      }
+    if (maxButtons && maxButtons < items) {
+      startPage = Math.max(
+        Math.min(
+          activePage - Math.floor(maxButtons / 2, 10),
+          items - maxButtons + 1
+        ),
+        1
+      );
+      endPage = startPage + maxButtons - 1;
     } else {
       startPage = 1;
       endPage = items;
     }
 
-    for (let pagenumber = startPage; pagenumber <= endPage; pagenumber++) {
+    for (let page = startPage; page <= endPage; ++page) {
       pageButtons.push(
         <PaginationButton
           {...buttonProps}
-          key={pagenumber}
-          eventKey={pagenumber}
-          active={pagenumber === activePage}
+          key={page}
+          eventKey={page}
+          active={page === activePage}
         >
-          {pagenumber}
+          {page}
         </PaginationButton>
       );
     }
 
-    if (boundaryLinks && ellipsis && startPage !== 1) {
-      pageButtons.unshift(
-        <PaginationButton
-          key="ellipsisFirst"
-          disabled
-          componentClass={buttonProps.componentClass}
-        >
-          <span aria-label="More">
-            {ellipsis === true ? '\u2026' : ellipsis}
-          </span>
-        </PaginationButton>
-      );
+    if (ellipsis && boundaryLinks && startPage > 1) {
+      if (startPage > 2) {
+        pageButtons.unshift(
+          <PaginationButton
+            key="ellipsisFirst"
+            disabled
+            componentClass={buttonProps.componentClass}
+          >
+            <span aria-label="More">
+              {ellipsis === true ? '\u2026' : ellipsis}
+            </span>
+          </PaginationButton>
+        );
+      }
 
       pageButtons.unshift(
         <PaginationButton
@@ -142,20 +140,22 @@ class Pagination extends React.Component {
       );
     }
 
-    if (maxButtons && hasHiddenPagesAfter && ellipsis) {
-      pageButtons.push(
-        <PaginationButton
-          key="ellipsis"
-          disabled
-          componentClass={buttonProps.componentClass}
-        >
-          <span aria-label="More">
-            {ellipsis === true ? '\u2026' : ellipsis}
-          </span>
-        </PaginationButton>
-      );
+    if (ellipsis && endPage < items) {
+      if (!boundaryLinks || endPage < items - 1) {
+        pageButtons.push(
+          <PaginationButton
+            key="ellipsis"
+            disabled
+            componentClass={buttonProps.componentClass}
+          >
+            <span aria-label="More">
+              {ellipsis === true ? '\u2026' : ellipsis}
+            </span>
+          </PaginationButton>
+        );
+      }
 
-      if (boundaryLinks && endPage !== items) {
+      if (boundaryLinks) {
         pageButtons.push(
           <PaginationButton
             {...buttonProps}

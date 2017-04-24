@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'react-prop-types/lib/elementType';
 
 import { bsClass as setBsClass, prefix, splitBsPropsAndOmit }
@@ -18,6 +19,11 @@ const propTypes = {
   ]),
 
   /**
+   * Wait until the first "enter" transition to mount tabs (add them to the DOM)
+   */
+  mountOnEnter: PropTypes.bool,
+
+  /**
    * Unmount tabs (remove it from the DOM) when they are no longer visible
    */
   unmountOnExit: PropTypes.bool,
@@ -26,6 +32,7 @@ const propTypes = {
 const defaultProps = {
   componentClass: 'div',
   animation: true,
+  mountOnEnter: false,
   unmountOnExit: false,
 };
 
@@ -42,6 +49,7 @@ const childContextTypes = {
       PropTypes.bool, elementType,
     ]),
     activeKey: PropTypes.any,
+    mountOnEnter: PropTypes.bool,
     unmountOnExit: PropTypes.bool,
     onPaneEnter: PropTypes.func.isRequired,
     onPaneExited: PropTypes.func.isRequired,
@@ -66,7 +74,7 @@ class TabContent extends React.Component {
   }
 
   getChildContext() {
-    const { bsClass, animation, unmountOnExit } = this.props;
+    const { bsClass, animation, mountOnEnter, unmountOnExit } = this.props;
 
     const stateActiveKey = this.state.activeKey;
     const containerActiveKey = this.getContainerActiveKey();
@@ -81,6 +89,7 @@ class TabContent extends React.Component {
         bsClass,
         animation,
         activeKey,
+        mountOnEnter,
         unmountOnExit,
         onPaneEnter: this.handlePaneEnter,
         onPaneExited: this.handlePaneExited,
@@ -143,7 +152,7 @@ class TabContent extends React.Component {
   render() {
     const { componentClass: Component, className, ...props } = this.props;
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
-      'animation', 'unmountOnExit',
+      'animation', 'mountOnEnter', 'unmountOnExit',
     ]);
 
     return (

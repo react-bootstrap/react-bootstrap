@@ -1,16 +1,17 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import SafeAnchor from './SafeAnchor';
 import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
-  disabled: React.PropTypes.bool,
-  previous: React.PropTypes.bool,
-  next: React.PropTypes.bool,
-  onClick: React.PropTypes.func,
-  onSelect: React.PropTypes.func,
-  eventKey: React.PropTypes.any,
+  disabled: PropTypes.bool,
+  previous: PropTypes.bool,
+  next: PropTypes.bool,
+  onClick: PropTypes.func,
+  onSelect: PropTypes.func,
+  eventKey: PropTypes.any,
 };
 
 const defaultProps = {

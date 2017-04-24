@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactTestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
 
@@ -149,7 +150,7 @@ describe('<OverlayTrigger>', () => {
 
   it('Should forward requested context', () => {
     const contextTypes = {
-      key: React.PropTypes.string,
+      key: PropTypes.string,
     };
 
     const contextSpy = sinon.spy();

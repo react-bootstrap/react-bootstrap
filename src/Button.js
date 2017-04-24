@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'react-prop-types/lib/elementType';
 
 import { bsClass, bsSizes, bsStyles, getClassSet, prefix, splitBsProps }
@@ -9,17 +10,17 @@ import { Size, State, Style } from './utils/StyleConfig';
 import SafeAnchor from './SafeAnchor';
 
 const propTypes = {
-  active: React.PropTypes.bool,
-  disabled: React.PropTypes.bool,
-  block: React.PropTypes.bool,
-  onClick: React.PropTypes.func,
+  active: PropTypes.bool,
+  disabled: PropTypes.bool,
+  block: PropTypes.bool,
+  onClick: PropTypes.func,
   componentClass: elementType,
-  href: React.PropTypes.string,
+  href: PropTypes.string,
   /**
    * Defines HTML button type attribute
    * @defaultValue 'button'
    */
-  type: React.PropTypes.oneOf(['button', 'reset', 'submit']),
+  type: PropTypes.oneOf(['button', 'reset', 'submit']),
 };
 
 const defaultProps = {

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
 import { bsClass, getClassSet, prefix, splitBsProps }
@@ -11,45 +12,45 @@ const propTypes = {
    * @type {string}
    * @required
    */
-  id: isRequiredForA11y(React.PropTypes.oneOfType([
-    React.PropTypes.string, React.PropTypes.number,
+  id: isRequiredForA11y(PropTypes.oneOfType([
+    PropTypes.string, PropTypes.number,
   ])),
 
   /**
    * Sets the direction the Popover is positioned towards.
    */
-  placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
   /**
    * The "top" position value for the Popover.
    */
-  positionTop: React.PropTypes.oneOfType([
-    React.PropTypes.number, React.PropTypes.string,
+  positionTop: PropTypes.oneOfType([
+    PropTypes.number, PropTypes.string,
   ]),
   /**
    * The "left" position value for the Popover.
    */
-  positionLeft: React.PropTypes.oneOfType([
-    React.PropTypes.number, React.PropTypes.string,
+  positionLeft: PropTypes.oneOfType([
+    PropTypes.number, PropTypes.string,
   ]),
 
   /**
    * The "top" position value for the Popover arrow.
    */
-  arrowOffsetTop: React.PropTypes.oneOfType([
-    React.PropTypes.number, React.PropTypes.string,
+  arrowOffsetTop: PropTypes.oneOfType([
+    PropTypes.number, PropTypes.string,
   ]),
   /**
    * The "left" position value for the Popover arrow.
    */
-  arrowOffsetLeft: React.PropTypes.oneOfType([
-    React.PropTypes.number, React.PropTypes.string,
+  arrowOffsetLeft: PropTypes.oneOfType([
+    PropTypes.number, PropTypes.string,
   ]),
 
   /**
    * Title content
    */
-  title: React.PropTypes.node,
+  title: PropTypes.node,
 };
 
 const defaultProps = {
