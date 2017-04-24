@@ -153,7 +153,7 @@ describe('<ListGroup>', () => {
 
   describe('Some or all children are user-defined custom components', () => {
     it('Should output a div by default when children are custom components', () => {
-      let CustomComponent = React.createClass({
+      class CustomComponent extends React.Component {
         render() {
           return (
             <li>
@@ -161,7 +161,7 @@ describe('<ListGroup>', () => {
             </li>
           );
         }
-      });
+      }
 
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup id="testItem">
@@ -174,7 +174,7 @@ describe('<ListGroup>', () => {
     });
 
     it('Should use a "componentClass" prop if specified if any children are custom components', () => {
-      let CustomComponent = React.createClass({
+      class CustomComponent extends React.Component {
         render() {
           return (
             <li>
@@ -182,7 +182,7 @@ describe('<ListGroup>', () => {
             </li>
           );
         }
-      });
+      }
 
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup
