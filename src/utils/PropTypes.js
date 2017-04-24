@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import createChainableTypeChecker
   from 'prop-types-extra/lib/utils/createChainableTypeChecker';
 
 import ValidComponentChildren from './ValidComponentChildren';
 
-const idPropType = React.PropTypes.oneOfType([
-  React.PropTypes.string,
-  React.PropTypes.number
+const idPropType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.number
 ]);
 
 

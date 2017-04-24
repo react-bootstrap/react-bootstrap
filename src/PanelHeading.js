@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import cn from 'classnames';
 import elementType from 'react-prop-types/lib/elementType';
@@ -7,7 +8,7 @@ import { prefix, bsClass, splitBsProps } from './utils/bootstrapUtils';
 const propTypes = {
   componentClass: elementType,
 
-  bsRole: React.PropTypes.string,
+  bsRole: PropTypes.string,
 };
 
 const defaultProps = {
@@ -16,9 +17,9 @@ const defaultProps = {
 };
 
 const contextTypes = {
-  $bs_panel: React.PropTypes.shape({
-    getIds: React.PropTypes.func,
-    bsClass: React.PropTypes.string
+  $bs_panel: PropTypes.shape({
+    getIds: PropTypes.func,
+    bsClass: PropTypes.string
   })
 };
 

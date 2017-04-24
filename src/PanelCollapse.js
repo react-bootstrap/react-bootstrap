@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import { prefix, splitBsProps, bsClass } from './utils/bootstrapUtils';
@@ -5,31 +6,31 @@ import Collapse from './Collapse';
 
 
 const propTypes = {
-  bsRole: React.PropTypes.string,
+  bsRole: PropTypes.string,
   /**
    * Callback fired before the component expands
    */
-  onEnter: React.PropTypes.func,
+  onEnter: PropTypes.func,
   /**
    * Callback fired after the component starts to expand
    */
-  onEntering: React.PropTypes.func,
+  onEntering: PropTypes.func,
   /**
    * Callback fired after the component has expanded
    */
-  onEntered: React.PropTypes.func,
+  onEntered: PropTypes.func,
   /**
    * Callback fired before the component collapses
    */
-  onExit: React.PropTypes.func,
+  onExit: PropTypes.func,
   /**
    * Callback fired after the component starts to collapse
    */
-  onExiting: React.PropTypes.func,
+  onExiting: PropTypes.func,
   /**
    * Callback fired after the component has collapsed
    */
-  onExited: React.PropTypes.func,
+  onExited: PropTypes.func,
 };
 
 const defaultProps = {
@@ -37,10 +38,10 @@ const defaultProps = {
 };
 
 const contextTypes = {
-  $bs_panel: React.PropTypes.shape({
-    getIds: React.PropTypes.func,
-    bsClass: React.PropTypes.string,
-    expanded: React.PropTypes.bool,
+  $bs_panel: PropTypes.shape({
+    getIds: PropTypes.func,
+    bsClass: PropTypes.string,
+    expanded: PropTypes.bool,
   })
 };
 

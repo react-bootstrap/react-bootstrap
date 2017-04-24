@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import uncontrollable from 'uncontrollable';
@@ -11,10 +12,10 @@ import { generatedId } from './utils/PropTypes';
 
 
 const propTypes = {
-  accordion: React.PropTypes.bool,
-  activeKey: React.PropTypes.any,
-  onSelect: React.PropTypes.func,
-  role: React.PropTypes.string,
+  accordion: PropTypes.bool,
+  activeKey: PropTypes.any,
+  onSelect: PropTypes.func,
+  role: PropTypes.string,
 
   /**
    * A function that takes an eventKey and type and returns a
@@ -26,7 +27,7 @@ const propTypes = {
    *
    * @defaultValue (eventKey, type) => `${this.props.id}-${type}-${key}`
    */
-  generateChildId: React.PropTypes.func,
+  generateChildId: PropTypes.func,
 
   /**
    * HTML id attribute, required if no `generateChildId` prop
@@ -40,10 +41,10 @@ const defaultProps = {
 };
 
 const childContextTypes = {
-  $bs_panelGroup: React.PropTypes.shape({
-    getId: React.PropTypes.func,
-    headerRole: React.PropTypes.string,
-    panelRole: React.PropTypes.string,
+  $bs_panelGroup: PropTypes.shape({
+    getId: PropTypes.func,
+    headerRole: PropTypes.string,
+    panelRole: PropTypes.string,
   })
 };
 

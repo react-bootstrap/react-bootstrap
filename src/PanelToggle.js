@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import elementType from 'react-prop-types/lib/elementType';
@@ -5,7 +6,7 @@ import SafeAnchor from './SafeAnchor';
 import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
-  onClick: React.PropTypes.func,
+  onClick: PropTypes.func,
   /**
    * You can use a custom element for this component
    */
@@ -17,10 +18,10 @@ const defaultProps = {
 };
 
 const contextTypes = {
-  $bs_panel: React.PropTypes.shape({
-    getIds: React.PropTypes.func,
-    onToggle: React.PropTypes.func,
-    expanded: React.PropTypes.bool,
+  $bs_panel: PropTypes.shape({
+    getIds: PropTypes.func,
+    onToggle: PropTypes.func,
+    expanded: PropTypes.bool,
   })
 };
 
