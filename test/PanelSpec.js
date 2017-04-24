@@ -2,7 +2,6 @@ import React from 'react';
 import tsp from 'teaspoon';
 
 import Panel from '../src/Panel';
-import Table from '../src/Table';
 
 describe('<Panel>', () => {
   it('Should have class and body', () => {
