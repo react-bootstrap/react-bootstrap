@@ -19,11 +19,6 @@ export default function AlertsSection() {
       <p>just pass in a <code>onDismiss</code> function.</p>
       <ReactPlayground codeText={Samples.AlertDismissable} />
 
-      <div className="bs-callout bs-callout-info">
-        <h4>Screen Reader Accessibility</h4>
-      <p>Unlike regular Bootstrap, alerts have an sr-only dismiss button after the content.</p>
-      </div>
-
       <h3><Anchor id="alert-props">Props</Anchor></h3>
       <PropTable component="Alert"/>
     </div>
