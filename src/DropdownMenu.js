@@ -1,23 +1,24 @@
 import classNames from 'classnames';
 import keycode from 'keycode';
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
 
-import { bsClass, getClassSet, prefix, splitBsProps }
+import { bsClass, getClassSet, prefix, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const propTypes = {
-  open: React.PropTypes.bool,
-  pullRight: React.PropTypes.bool,
-  onClose: React.PropTypes.func,
-  labelledBy: React.PropTypes.oneOfType([
-    React.PropTypes.string, React.PropTypes.number,
+  open: PropTypes.bool,
+  pullRight: PropTypes.bool,
+  onClose: PropTypes.func,
+  labelledBy: PropTypes.oneOfType([
+    PropTypes.string, PropTypes.number,
   ]),
-  onSelect: React.PropTypes.func,
-  rootCloseEvent: React.PropTypes.oneOf(['click', 'mousedown']),
+  onSelect: PropTypes.func,
+  rootCloseEvent: PropTypes.oneOf(['click', 'mousedown']),
 };
 
 const defaultProps = {
@@ -29,7 +30,12 @@ class DropdownMenu extends React.Component {
   constructor(props) {
     super(props);
 
+    this.handleRootClose = this.handleRootClose.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
+  }
+
+  handleRootClose(event) {
+    this.props.onClose(event, { source: 'rootClose' });
   }
 
   handleKeyDown(event) {
@@ -44,7 +50,7 @@ class DropdownMenu extends React.Component {
         break;
       case keycode.codes.esc:
       case keycode.codes.tab:
-        this.props.onClose(event);
+        this.props.onClose(event, { source: 'keydown' });
         break;
       default:
     }
@@ -90,7 +96,6 @@ class DropdownMenu extends React.Component {
     const {
       open,
       pullRight,
-      onClose,
       labelledBy,
       onSelect,
       className,
@@ -99,7 +104,7 @@ class DropdownMenu extends React.Component {
       ...props
     } = this.props;
 
-    const [bsProps, elementProps] = splitBsProps(props);
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['onClose']);
 
     const classes = {
       ...getClassSet(bsProps),
@@ -109,7 +114,7 @@ class DropdownMenu extends React.Component {
     return (
       <RootCloseWrapper
         disabled={!open}
-        onRootClose={onClose}
+        onRootClose={this.handleRootClose}
         event={rootCloseEvent}
       >
         <ul
@@ -121,9 +126,11 @@ class DropdownMenu extends React.Component {
           {ValidComponentChildren.map(children, child => (
             React.cloneElement(child, {
               onKeyDown: createChainedFunction(
-                child.props.onKeyDown, this.handleKeyDown
+                child.props.onKeyDown, this.handleKeyDown,
               ),
-              onSelect: createChainedFunction(child.props.onSelect, onSelect),
+              onSelect: createChainedFunction(
+                child.props.onSelect, onSelect,
+              ),
             })
           ))}
         </ul>

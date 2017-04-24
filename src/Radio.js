@@ -1,17 +1,18 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import warning from 'warning';
 
 import { bsClass, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';
 
 const propTypes = {
-  inline: React.PropTypes.bool,
-  disabled: React.PropTypes.bool,
+  inline: PropTypes.bool,
+  disabled: PropTypes.bool,
   /**
    * Only valid if `inline` is not set.
    */
-  validationState: React.PropTypes.oneOf([
+  validationState: PropTypes.oneOf([
     'success', 'warning', 'error', null,
   ]),
   /**
@@ -21,7 +22,7 @@ const propTypes = {
    * <Radio inputRef={ref => { this.input = ref; }} />
    * ```
    */
-  inputRef: React.PropTypes.func,
+  inputRef: PropTypes.func,
 };
 
 const defaultProps = {

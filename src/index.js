@@ -46,6 +46,7 @@ export PageHeader from './PageHeader';
 export PageItem from './PageItem';
 export Pager from './Pager';
 export Pagination from './Pagination';
+export PaginationButton from './PaginationButton';
 export Panel from './Panel';
 export PanelGroup from './PanelGroup';
 export Popover from './Popover';

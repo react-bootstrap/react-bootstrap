@@ -1,11 +1,12 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { prefix } from './utils/bootstrapUtils';
 
 const contextTypes = {
-  $bs_navbar: React.PropTypes.shape({
-    bsClass: React.PropTypes.string,
+  $bs_navbar: PropTypes.shape({
+    bsClass: PropTypes.string,
   }),
 };
 

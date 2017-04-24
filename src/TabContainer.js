@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import uncontrollable from 'uncontrollable';
 
 const TAB = 'tab';
@@ -60,7 +61,7 @@ const propTypes = {
 };
 
 const childContextTypes = {
-  $bs_tabContainer: React.PropTypes.shape({
+  $bs_tabContainer: PropTypes.shape({
     activeKey: PropTypes.any,
     onSelect: PropTypes.func.isRequired,
     getTabId: PropTypes.func.isRequired,

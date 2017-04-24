@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'react-prop-types/lib/elementType';
 import warning from 'warning';
 
@@ -33,7 +34,7 @@ const propTypes = {
    * `<TabContent>`, the `bsClass` of the `<TabContent>` suffixed by `-pane`.
    * If otherwise not explicitly specified, `tab-pane`.
    */
-  bsClass: React.PropTypes.string,
+  bsClass: PropTypes.string,
 
   /**
    * Transition onEnter callback when animation is not `false`
@@ -66,6 +67,11 @@ const propTypes = {
   onExited: PropTypes.func,
 
   /**
+   * Wait until the first "enter" transition to mount the tab (add it to the DOM)
+   */
+  mountOnEnter: PropTypes.bool,
+
+  /**
    * Unmount the tab (remove it from the DOM) when it is no longer visible
    */
   unmountOnExit: PropTypes.bool,
@@ -73,8 +79,8 @@ const propTypes = {
 
 const contextTypes = {
   $bs_tabContainer: PropTypes.shape({
-    getId: PropTypes.func,
-    unmountOnExit: PropTypes.bool,
+    getTabId: PropTypes.func,
+    getPaneId: PropTypes.func,
   }),
   $bs_tabContent: PropTypes.shape({
     bsClass: PropTypes.string,
@@ -82,6 +88,7 @@ const contextTypes = {
       PropTypes.bool, elementType,
     ]),
     activeKey: PropTypes.any,
+    mountOnEnter: PropTypes.bool,
     unmountOnExit: PropTypes.bool,
     onPaneEnter: PropTypes.func.isRequired,
     onPaneExited: PropTypes.func.isRequired,
@@ -188,6 +195,7 @@ class TabPane extends React.Component {
       onExit,
       onExiting,
       onExited,
+      mountOnEnter: propsMountOnEnter,
       unmountOnExit: propsUnmountOnExit,
       ...props
     } = this.props;
@@ -201,6 +209,8 @@ class TabPane extends React.Component {
     const active = this.isActive();
     const animation = this.getAnimation();
 
+    const mountOnEnter = propsMountOnEnter != null ?
+      propsMountOnEnter : tabContent && tabContent.mountOnEnter;
     const unmountOnExit = propsUnmountOnExit != null ?
       propsUnmountOnExit : tabContent && tabContent.unmountOnExit;
 
@@ -253,6 +263,7 @@ class TabPane extends React.Component {
           onExit={onExit}
           onExiting={onExiting}
           onExited={createChainedFunction(this.handleExited, onExited)}
+          mountOnEnter={mountOnEnter}
           unmountOnExit={unmountOnExit}
         >
           {pane}

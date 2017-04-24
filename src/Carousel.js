@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
+import PropTypes from 'prop-types';
 
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
@@ -14,12 +15,12 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 // TODO: Use uncontrollable.
 
 const propTypes = {
-  slide: React.PropTypes.bool,
-  indicators: React.PropTypes.bool,
-  interval: React.PropTypes.number,
-  controls: React.PropTypes.bool,
-  pauseOnHover: React.PropTypes.bool,
-  wrap: React.PropTypes.bool,
+  slide: PropTypes.bool,
+  indicators: PropTypes.bool,
+  interval: PropTypes.number,
+  controls: PropTypes.bool,
+  pauseOnHover: PropTypes.bool,
+  wrap: PropTypes.bool,
   /**
    * Callback fired when the active item changes.
    *
@@ -31,25 +32,25 @@ const propTypes = {
    * be a persisted event object with `direction` set to the direction of the
    * transition.
    */
-  onSelect: React.PropTypes.func,
-  onSlideEnd: React.PropTypes.func,
-  activeIndex: React.PropTypes.number,
-  defaultActiveIndex: React.PropTypes.number,
-  direction: React.PropTypes.oneOf(['prev', 'next']),
-  prevIcon: React.PropTypes.node,
+  onSelect: PropTypes.func,
+  onSlideEnd: PropTypes.func,
+  activeIndex: PropTypes.number,
+  defaultActiveIndex: PropTypes.number,
+  direction: PropTypes.oneOf(['prev', 'next']),
+  prevIcon: PropTypes.node,
   /**
    * Label shown to screen readers only, can be used to show the previous element
    * in the carousel.
    * Set to null to deactivate.
    */
-  prevLabel: React.PropTypes.string,
-  nextIcon: React.PropTypes.node,
+  prevLabel: PropTypes.string,
+  nextIcon: PropTypes.node,
   /**
    * Label shown to screen readers only, can be used to show the next element
    * in the carousel.
    * Set to null to deactivate.
    */
-  nextLabel: React.PropTypes.string,
+  nextLabel: PropTypes.string,
 };
 
 const defaultProps = {
@@ -187,7 +188,7 @@ class Carousel extends React.Component {
       return;
     }
 
-    const previousActiveIndex = this.getActiveIndex();
+    const previousActiveIndex = this.props.slide ? this.getActiveIndex() : null;
     direction = direction || this.getDirection(previousActiveIndex, index);
 
     const { onSelect } = this.props;

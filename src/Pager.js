@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
+import PropTypes from 'prop-types';
 
 import PagerItem from './PagerItem';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
@@ -7,7 +8,7 @@ import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const propTypes = {
-  onSelect: React.PropTypes.func,
+  onSelect: PropTypes.func,
 };
 
 class Pager extends React.Component {

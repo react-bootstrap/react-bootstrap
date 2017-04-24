@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Dropdown from './Dropdown';
 import splitComponentProps from './utils/splitComponentProps';
@@ -7,16 +8,16 @@ const propTypes = {
   ...Dropdown.propTypes,
 
   // Toggle props.
-  bsStyle: React.PropTypes.string,
-  bsSize: React.PropTypes.string,
-  title: React.PropTypes.node.isRequired,
-  noCaret: React.PropTypes.bool,
+  bsStyle: PropTypes.string,
+  bsSize: PropTypes.string,
+  title: PropTypes.node.isRequired,
+  noCaret: PropTypes.bool,
 
   // Override generated docs from <Dropdown>.
   /**
    * @private
    */
-  children: React.PropTypes.node,
+  children: PropTypes.node,
 };
 
 class DropdownButton extends React.Component {

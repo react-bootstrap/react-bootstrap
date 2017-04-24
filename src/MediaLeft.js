@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Media from './Media';
 import { bsClass, getClassSet, prefix, splitBsProps }
@@ -9,7 +10,7 @@ const propTypes = {
   /**
    * Align the media to the top, middle, or bottom of the media object.
    */
-  align: React.PropTypes.oneOf(['top', 'middle', 'bottom']),
+  align: PropTypes.oneOf(['top', 'middle', 'bottom']),
 };
 
 class MediaLeft extends React.Component {

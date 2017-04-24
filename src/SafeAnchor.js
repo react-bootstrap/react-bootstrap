@@ -1,13 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'react-prop-types/lib/elementType';
 
 const propTypes = {
-  href: React.PropTypes.string,
-  onClick: React.PropTypes.func,
-  disabled: React.PropTypes.bool,
-  role: React.PropTypes.string,
-  tabIndex: React.PropTypes.oneOfType([
-    React.PropTypes.number, React.PropTypes.string,
+  href: PropTypes.string,
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+  role: PropTypes.string,
+  tabIndex: PropTypes.oneOfType([
+    PropTypes.number, PropTypes.string,
   ]),
   /**
    * this is sort of silly but needed for Button

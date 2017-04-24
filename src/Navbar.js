@@ -2,7 +2,8 @@
 /* eslint-disable react/no-multi-comp */
 
 import classNames from 'classnames';
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'react-prop-types/lib/elementType';
 import uncontrollable from 'uncontrollable';
 
@@ -26,25 +27,25 @@ const propTypes = {
    * Create a fixed navbar along the top of the screen, that scrolls with the
    * page
    */
-  fixedTop: React.PropTypes.bool,
+  fixedTop: PropTypes.bool,
   /**
    * Create a fixed navbar along the bottom of the screen, that scrolls with
    * the page
    */
-  fixedBottom: React.PropTypes.bool,
+  fixedBottom: PropTypes.bool,
   /**
    * Create a full-width navbar that scrolls away with the page
    */
-  staticTop: React.PropTypes.bool,
+  staticTop: PropTypes.bool,
   /**
    * An alternative dark visual style for the Navbar
    */
-  inverse: React.PropTypes.bool,
+  inverse: PropTypes.bool,
   /**
    * Allow the Navbar to fluidly adjust to the page or container width, instead
    * of at the predefined screen breakpoints
    */
-  fluid: React.PropTypes.bool,
+  fluid: PropTypes.bool,
 
   /**
    * Set a custom element for this component.
@@ -57,7 +58,7 @@ const propTypes = {
    *
    * @controllable navExpanded
    */
-  onToggle: React.PropTypes.func,
+  onToggle: PropTypes.func,
   /**
    * A callback fired when a descendant of a child `<Nav>` is selected. Should
    * be used to execute complex closing or other miscellaneous actions desired
@@ -79,7 +80,7 @@ const propTypes = {
    * ensure that you are setting `expanded` to false and not *toggling* between
    * true and false.
    */
-  onSelect: React.PropTypes.func,
+  onSelect: PropTypes.func,
   /**
    * Sets `expanded` to `false` after the onSelect event of a descendant of a
    * child `<Nav>`. Does nothing if no `<Nav>` or `<Nav>` descendants exist.
@@ -87,15 +88,15 @@ const propTypes = {
    * The onSelect callback should be used instead for more complex operations
    * that need to be executed after the `select` event of `<Nav>` descendants.
    */
-  collapseOnSelect: React.PropTypes.bool,
+  collapseOnSelect: PropTypes.bool,
   /**
    * Explicitly set the visiblity of the navbar body
    *
    * @controllable onToggle
    */
-  expanded: React.PropTypes.bool,
+  expanded: PropTypes.bool,
 
-  role: React.PropTypes.string,
+  role: PropTypes.string,
 };
 
 const defaultProps = {
@@ -230,8 +231,8 @@ function createSimpleWrapper(tag, suffix, displayName) {
 
   Wrapper.propTypes = {
     componentClass: elementType,
-    pullRight: React.PropTypes.bool,
-    pullLeft: React.PropTypes.bool,
+    pullRight: PropTypes.bool,
+    pullLeft: PropTypes.bool,
   };
 
   Wrapper.defaultProps = {
