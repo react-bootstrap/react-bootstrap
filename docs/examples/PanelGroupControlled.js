@@ -17,11 +17,11 @@ const ControlledPanelGroup = React.createClass({
         activeKey={this.state.activeKey}
         onSelect={this.handleSelect}
       >
-        <Panel eventKey="1" >
+        <Panel eventKey="1">
           <Panel.Heading>
             <Panel.Title toggle>Panel heading 1</Panel.Title>
           </Panel.Heading>
-          <Panel.Body>
+          <Panel.Body collapsible >
             Panel content 1
           </Panel.Body>
         </Panel>
@@ -29,7 +29,7 @@ const ControlledPanelGroup = React.createClass({
           <Panel.Heading>
             <Panel.Title toggle>Panel heading 2</Panel.Title>
           </Panel.Heading>
-          <Panel.Body>
+          <Panel.Body collapsible>
             Panel content 2
           </Panel.Body>
         </Panel>

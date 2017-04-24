@@ -6,6 +6,11 @@ import SafeAnchor from './SafeAnchor';
 import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
+  /**
+   * only here to satisfy linting, just the html onClick handler.
+   *
+   * @private
+   */
   onClick: PropTypes.func,
   /**
    * You can use a custom element for this component

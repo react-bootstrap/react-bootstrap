@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
-import PropTypes from 'prop-types';
 import uncontrollable from 'uncontrollable';
 
 
@@ -13,8 +12,24 @@ import { generatedId } from './utils/PropTypes';
 
 const propTypes = {
   accordion: PropTypes.bool,
+  /**
+   * When `accordion` is enabled, `activeKey` controls the which child `Panel` is expanded. `activeKey` should
+   * match a child Panel `eventKey` prop exactly.
+   *
+   * @controllable onSelect
+   */
   activeKey: PropTypes.any,
+
+  /**
+   * A callback fired when a child Panel collapse state changes. It's called with the next expanded `activeKey`
+   *
+   * @controllable activeKey
+   */
   onSelect: PropTypes.func,
+
+  /**
+   * An HTML role attribute
+   */
   role: PropTypes.string,
 
   /**
@@ -45,6 +60,8 @@ const childContextTypes = {
     getId: PropTypes.func,
     headerRole: PropTypes.string,
     panelRole: PropTypes.string,
+    activeKey: PropTypes.any,
+    onToggle: PropTypes.func,
   })
 };
 
@@ -56,7 +73,7 @@ class PanelGroup extends React.Component {
   }
 
   getChildContext() {
-    const { accordion, generateChildId, id } = this.props;
+    const { activeKey, accordion, generateChildId, id } = this.props;
     let getId = null;
 
     if (accordion) {
@@ -69,6 +86,10 @@ class PanelGroup extends React.Component {
         getId,
         headerRole: 'tab',
         panelRole: 'tabpanel',
+        ...(accordion && {
+          activeKey,
+          onToggle: this.handleSelect,
+        })
       },
     };
   }
@@ -82,13 +103,12 @@ class PanelGroup extends React.Component {
   render() {
     const {
       accordion,
-      activeKey,
       className,
       children,
       ...props
     } = this.props;
 
-    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['onSelect']);
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['onSelect', 'activeKey']);
 
     if (accordion) {
       elementProps.role = elementProps.role || 'tablist';
@@ -101,21 +121,10 @@ class PanelGroup extends React.Component {
         {...elementProps}
         className={classNames(className, classes)}
       >
-        {ValidComponentChildren.map(children, (child, index) => {
-          const childProps = {
+        {ValidComponentChildren.map(children, (child) => {
+          return cloneElement(child, {
             bsStyle: child.props.bsStyle || bsProps.bsStyle,
-            key: child.key ? child.key : index,
-          };
-
-          if (accordion) {
-            Object.assign(childProps, {
-              collapsible: true,
-              expanded: (child.props.eventKey === activeKey),
-              onToggle: this.handleSelect.bind(null, child.props.eventKey),
-            });
-          }
-
-          return cloneElement(child, childProps);
+          });
         })}
       </div>
     );

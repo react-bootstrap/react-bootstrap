@@ -6,7 +6,6 @@ import Collapse from './Collapse';
 
 
 const propTypes = {
-  bsRole: PropTypes.string,
   /**
    * Callback fired before the component expands
    */
@@ -33,10 +32,6 @@ const propTypes = {
   onExited: PropTypes.func,
 };
 
-const defaultProps = {
-  bsRole: 'panel-collapse',
-};
-
 const contextTypes = {
   $bs_panel: PropTypes.shape({
     getIds: PropTypes.func,
@@ -46,7 +41,6 @@ const contextTypes = {
 };
 
 class PanelCollapse extends React.Component {
-
   render() {
     const { children } = this.props;
     const { getIds, bsClass: _bsClass, expanded } = this.context.$bs_panel || {};
@@ -73,7 +67,6 @@ class PanelCollapse extends React.Component {
 }
 
 PanelCollapse.propTypes = propTypes;
-PanelCollapse.defaultProps = defaultProps;
 PanelCollapse.contextTypes = contextTypes;
 
 export default bsClass('panel', PanelCollapse);

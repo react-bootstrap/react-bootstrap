@@ -8,6 +8,10 @@ import PanelToggle from './PanelToggle';
 
 const propTypes = {
   componentClass: elementType,
+  /**
+   * A convenience prop that renders the Panel.Title as a panel collapse toggle component
+   * for the common use-case.
+   */
   toggle: PropTypes.bool,
 };
 

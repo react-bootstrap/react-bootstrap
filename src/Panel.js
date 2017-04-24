@@ -2,12 +2,10 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import uncontrollable from 'uncontrollable';
-import warning from 'warning';
 
 import { bsStyles, bsClass, getClassSet, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
 import { State, Style } from './utils/StyleConfig';
-
 import Body from './PanelBody';
 import Heading from './PanelHeading';
 import Title from './PanelTitle';
@@ -18,17 +16,32 @@ import Collapse from './PanelCollapse';
 const defaultGetId = (id, type) => id ? `${id}--${type}` : null;
 
 const propTypes = {
-  onToggle: PropTypes.func,
+  /**
+   * Controls the collapsed/expanded state ofthe Panel. Requires a `Panel.Collapse` or `<Panel.Body collapsible>` child component
+   * in order to actually animate out or in,
+   *
+   * @controllable onToggle
+   */
   expanded: PropTypes.bool,
+  /**
+   * A callback fired when the collapse state changes.
+   *
+   * @controllable expanded
+   */
+  onToggle: PropTypes.func,
   eventKey: PropTypes.any,
-  id: PropTypes.string,
 
-  collapsible: PropTypes.bool,
+  /**
+   * An HTML `id` attribute uniquely identifying the Panel component.
+   */
+  id: PropTypes.string,
 };
 
 const contextTypes = {
   $bs_panelGroup: PropTypes.shape({
-    getId: PropTypes.func
+    getId: PropTypes.func,
+    activeKey: PropTypes.any,
+    onToggle: PropTypes.func,
   })
 };
 
@@ -49,7 +62,7 @@ class Panel extends React.Component {
   }
 
   getChildContext() {
-    const { expanded, eventKey, id } = this.props;
+    const { eventKey, id } = this.props;
     const { getId = defaultGetId } = this.context.$bs_panelGroup || {};
 
     let getIds = null;
@@ -63,28 +76,37 @@ class Panel extends React.Component {
     return {
       $bs_panel: {
         getIds,
-        expanded,
         bsClass: this.props.bsClass,
+        expanded: this.getExpanded(),
         onToggle: this.handleToggle,
       }
     };
   }
 
   handleToggle(e) {
-    this.props.onToggle(!this.props.expanded, e);
+    const { onToggle } = this.context.$bs_panelGroup || {};
+    const expanded = !this.getExpanded();
+
+    this.props.onToggle(expanded, e);
+    if (onToggle) {
+      onToggle(this.props.eventKey, expanded, e);
+    }
+  }
+
+  getExpanded() {
+    const { eventKey } = this.props;
+    const { activeKey } = this.context.$bs_panelGroup || {};
+
+    return this.props.expanded != null || activeKey === undefined ?
+      this.props.expanded :
+      activeKey === eventKey;
   }
 
   render() {
     let { className, children } = this.props;
     const [bsProps, props] = splitBsPropsAndOmit(this.props,
-      ['onToggle', 'eventKey', 'expanded', 'collapsible']
+      ['onToggle', 'eventKey', 'expanded']
     );
-
-    if (typeof children === 'string' || typeof children === 'number') {
-      children = (
-        <Body>{children}</Body>
-      );
-    }
 
     return (
       <div
@@ -94,72 +116,9 @@ class Panel extends React.Component {
           getClassSet(bsProps)
         )}
       >
-        { this.extractChildren(children) }
+        {children}
       </div>
     );
-  }
-
-  extractChildren(children) {
-    let headers = [];
-    let footers = [];
-    let body = [];
-    let pendingBody = [];
-    let i = 0;
-
-    function addChild(array, child) {
-      array.push(
-        React.isValidElement(child)
-          ? React.cloneElement(child, { key: ++i })
-          : child
-      );
-    }
-
-    function maybeWrapPanelBody() {
-      if (pendingBody.length === 0) {
-        return;
-      }
-      addChild(body, <Body>{pendingBody}</Body>);
-      pendingBody = [];
-    }
-
-    React.Children.forEach(children, child => {
-      if (child == null) { return; }
-
-      let role = React.isValidElement(child)
-        ? child.props.bsRole
-        : '';
-
-      switch (role) {
-        case 'heading':
-          addChild(headers, child);
-          break;
-        case 'footer':
-          addChild(footers, child);
-          break;
-        case 'panel-body':
-          maybeWrapPanelBody();
-          addChild(body, child);
-          break;
-        case 'panel-collapse':
-          warning(!this.props.collapsible,
-            'You are nesting a `<Panel.Collapse>` inside of a Panel with a `collapsible` prop ' +
-            'set to true. Either let the Panel wrap your panel body for you or remove the `collapsible` prop.'
-          );
-          addChild(body, child);
-          break;
-        default:
-          addChild(pendingBody, child);
-          break;
-      }
-    });
-
-    maybeWrapPanelBody();
-
-    if (this.props.collapsible) {
-      body = <Collapse key="collapse">{body}</Collapse>;
-    }
-
-    return [...headers, ...body, ...footers];
   }
 }
 

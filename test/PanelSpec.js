@@ -8,7 +8,7 @@ describe('<Panel>', () => {
   it('Should have class and body', () => {
     const inst = tsp(
       <Panel>
-        Panel content
+        <Panel.Body>Panel content</Panel.Body>
       </Panel>
     )
     .render();
@@ -20,7 +20,7 @@ describe('<Panel>', () => {
   it('Should have bootstrap style class', () => {
     tsp(
       <Panel bsStyle="primary">
-        Panel content
+        <Panel.Body>Panel content</Panel.Body>
       </Panel>
     )
     .render()
@@ -126,8 +126,8 @@ describe('<Panel>', () => {
 
   it('Should have collapse classes', () => {
     tsp(
-      <Panel collapsible defaultExpanded>
-        Panel content
+      <Panel defaultExpanded>
+        <Panel.Body collapsible>Panel content</Panel.Body>
       </Panel>
     )
     .render()
@@ -146,11 +146,11 @@ describe('<Panel>', () => {
 
   it('Should set ids on toggle and collapse', () => {
     const inst = tsp(
-      <Panel collapsible id="testid">
+      <Panel id="testid">
         <Panel.Heading>
           <Panel.Title toggle>foo</Panel.Title>
         </Panel.Heading>
-        Panel content
+        <Panel.Body collapsible>Panel content</Panel.Body>
       </Panel>
     )
     .render();
@@ -161,12 +161,12 @@ describe('<Panel>', () => {
 
   it('Should be open', () => {
     const inst = tsp(
-      <Panel collapsible defaultExpanded>
+      <Panel defaultExpanded>
         <Panel.Heading>
           <Panel.Title toggle>foo</Panel.Title>
         </Panel.Heading>
 
-        Panel content
+        <Panel.Body collapsible>Panel content</Panel.Body>
       </Panel>
     )
     .render();
@@ -177,12 +177,12 @@ describe('<Panel>', () => {
 
   it('Should be closed', () => {
     const inst = tsp(
-      <Panel collapsible defaultExpanded={false}>
+      <Panel defaultExpanded={false}>
         <Panel.Heading>
           <Panel.Title toggle>foo</Panel.Title>
         </Panel.Heading>
 
-        Panel content
+        <Panel.Body collapsible>Panel content</Panel.Body>
       </Panel>
     )
     .render();
@@ -194,12 +194,12 @@ describe('<Panel>', () => {
 
   it('Should toggle when uncontrolled', () => {
     const inst = tsp(
-      <Panel collapsible defaultExpanded={false}>
+      <Panel defaultExpanded={false}>
         <Panel.Heading>
           <Panel.Title toggle>foo</Panel.Title>
         </Panel.Heading>
 
-        Panel content
+        <Panel.Body collapsible>Panel content</Panel.Body>
       </Panel>
     )
     .render();
@@ -211,51 +211,17 @@ describe('<Panel>', () => {
       .should.equal(true);
   });
 
-  it('Should not wrap panel-filling tables in a panel body', () => {
-    const node = tsp(
-      <Panel>
-        Panel content
-        <Table bsRole="panel-body" />
-        More panel content
-      </Panel>
-    )
-    .render()
-    .dom();
-
-    const children = node.children;
-    assert.equal(children.length, 3);
-
-    assert.equal(children[0].nodeName, 'DIV');
-    assert.ok(children[0].className.match(/\bpanel-body\b/));
-
-    assert.equal(children[1].nodeName, 'TABLE');
-    assert.notOk(children[1].className.match(/\bpanel-body\b/));
-
-    assert.equal(children[2].nodeName, 'DIV');
-    assert.ok(children[2].className.match(/\bpanel-body\b/));
-  });
-
-  it('Should not wrap single panel-body table in a panel body', () => {
-    tsp(
-      <Panel>
-        <Table bsRole="panel-body" />
-      </Panel>
-    )
-    .render()
-    .none('.panel-body');
-  });
-
 
   describe('Web Accessibility', () => {
 
     it('Should be aria-expanded=true', () => {
       tsp(
-        <Panel collapsible defaultExpanded>
+        <Panel defaultExpanded>
           <Panel.Heading>
             <Panel.Title toggle>foo</Panel.Title>
           </Panel.Heading>
 
-          Panel content
+          <Panel.Body collapsible>Panel content</Panel.Body>
         </Panel>
       )
       .render()
@@ -264,12 +230,12 @@ describe('<Panel>', () => {
 
     it('Should be aria-expanded=false', () => {
       tsp(
-        <Panel collapsible defaultExpanded={false}>
+        <Panel defaultExpanded={false}>
           <Panel.Heading>
             <Panel.Title toggle>foo</Panel.Title>
           </Panel.Heading>
 
-          Panel content
+          <Panel.Body collapsible>Panel content</Panel.Body>
         </Panel>
       )
       .render()
@@ -279,11 +245,12 @@ describe('<Panel>', () => {
 
     it('Should add aria-controls with id', () => {
       const inst = tsp(
-        <Panel collapsible id="testid">
+        <Panel id="testid">
           <Panel.Heading>
             <Panel.Title toggle>foo</Panel.Title>
           </Panel.Heading>
-          Panel content
+
+          <Panel.Body collapsible>Panel content</Panel.Body>
         </Panel>
       )
       .render();

@@ -7,12 +7,9 @@ import { prefix, bsClass, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   componentClass: elementType,
-
-  bsRole: PropTypes.string,
 };
 
 const defaultProps = {
-  bsRole: 'heading',
   componentClass: 'div',
 };
 

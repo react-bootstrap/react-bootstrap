@@ -13,19 +13,21 @@ export default function PanelSection() {
       </h2>
 
       <h3><Anchor id="panels-basic">Basic example</Anchor></h3>
-      <p>By default, all the <code>&lt;Panel /&gt;</code> does is apply some basic border and padding to contain some content.</p>
+      <p>By default, all the <code>&lt;Panel /&gt;</code> does is apply a basic border and padding to contain some content.</p>
       <p>You can pass on any additional properties you need, e.g. a custom <code>onClick</code> handler, as it is shown in the example code. They all will apply to the wrapper <code>div</code> element.</p>
       <ReactPlayground codeText={Samples.PanelBasic} />
 
-      <h3><Anchor id="panels-collapsible">Collapsible Panel</Anchor></h3>
-      <ReactPlayground codeText={Samples.PanelCollapsible} />
-
       <h3><Anchor id="panels-heading">Panel with heading</Anchor></h3>
-      <p>Easily add a heading container to your panel with the <code>header</code> prop.</p>
+      <p>
+        Easily add a heading container to your panel with the <code>{'<Panel.Heading>'}</code> and <code>{'<Panel.Title>'}</code> sub-components.
+      </p>
       <ReactPlayground codeText={Samples.PanelWithHeading} />
 
       <h3><Anchor id="panels-footer">Panel with footer</Anchor></h3>
-      <p>Pass buttons or secondary text in the <code>footer</code> prop. Note that panel footers do not inherit colors and borders when using contextual variations as they are not meant to be in the foreground.</p>
+      <p>
+        Pass buttons or secondary text in the <code>{'<Panel.Footer>'}</code> sub-component.
+        Note that panel footers do not inherit colors and borders when using contextual variations as they are not meant to be in the foreground.
+      </p>
       <ReactPlayground codeText={Samples.PanelWithFooter} />
 
       <h3><Anchor id="panels-contextual">Contextual alternatives</Anchor></h3>
@@ -34,10 +36,13 @@ export default function PanelSection() {
 
       <h3><Anchor id="panels-tables">With tables and list groups</Anchor></h3>
       <p>
-        Add the <code>bsRole="panel-body"</code> prop to <code>&lt;Table /&gt;</code>, <code>&lt;ListGroup /&gt;</code>,
-        or any component to have them function as a PanelBody, without any extra padding.
+        Add any <code>&lt;Table /&gt;</code>, <code>&lt;ListGroup /&gt;</code> to a panel for a seamless integration.
+        Mix and match with <code>{'Panel.Body'}</code> as needed.
       </p>
       <ReactPlayground codeText={Samples.PanelListGroupFill} />
+
+      <h3><Anchor id="panels-collapsible">Collapsible Panel</Anchor></h3>
+      <ReactPlayground codeText={Samples.PanelCollapsible} />
 
       <h3><Anchor id="panels-controlled">Controlled PanelGroups</Anchor></h3>
       <p><code>PanelGroup</code>s can be controlled by a parent component. The <code>activeKey</code> prop dictates which panel is open.</p>
@@ -48,13 +53,31 @@ export default function PanelSection() {
       <ReactPlayground codeText={Samples.PanelGroupUncontrolled} />
 
       <h3><Anchor id="panels-accordion">Accordions</Anchor></h3>
-      <p><code>&lt;Accordion /&gt;</code> aliases <code>&lt;PanelGroup accordion /&gt;</code>.</p>
+      <p>Use <code>&lt;PanelGroup accordion /&gt;</code> to create an accordion style collapsing Panel set.</p>
       <ReactPlayground codeText={Samples.PanelGroupAccordion} />
 
       <h3><Anchor id="panels-props">Props</Anchor></h3>
 
       <h4><Anchor id="panels-props-accordion">Panels, Accordion</Anchor></h4>
       <PropTable component="Panel"/>
+
+      <h4><Anchor id="panels-props-panel-heading">Panel.Heading</Anchor></h4>
+      <PropTable component="PanelHeading"/>
+
+      <h4><Anchor id="panels-props-panel-title">Panel.Title</Anchor></h4>
+      <PropTable component="PanelTitle"/>
+
+      <h4><Anchor id="panels-props-panel-toggle">Panel.Toggle</Anchor></h4>
+      <PropTable component="PanelToggle"/>
+
+      <h4><Anchor id="panels-props-panel-collapse">Panel.Collapse</Anchor></h4>
+      <PropTable component="PanelCollapse"/>
+
+      <h4><Anchor id="panels-props-panel-body">Panel.Body</Anchor></h4>
+      <PropTable component="PanelBody"/>
+
+      <h4><Anchor id="panels-props-panel-footer">Panel.Footer</Anchor></h4>
+      <PropTable component="PanelFooter"/>
 
       <h4><Anchor id="panels-props-group">PanelGroup</Anchor></h4>
       <PropTable component="PanelGroup"/>

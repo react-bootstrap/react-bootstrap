@@ -10,7 +10,7 @@ describe('<PanelGroup>', () => {
   it('Should pass bsStyle to Panels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup bsStyle="default" id="panel">
-        <Panel>Panel 1</Panel>
+        <Panel><Panel.Body>Panel 1</Panel.Body></Panel>
       </PanelGroup>
     );
 
@@ -22,7 +22,9 @@ describe('<PanelGroup>', () => {
   it('Should not override bsStyle on Panel', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup bsStyle="default" id="panel">
-        <Panel bsStyle="primary">Panel 1</Panel>
+        <Panel bsStyle="primary">
+          <Panel.Body>Panel 1</Panel.Body>
+        </Panel>
       </PanelGroup>
     );
 
@@ -58,7 +60,7 @@ describe('<PanelGroup>', () => {
             <Panel.Title toggle>foo</Panel.Title>
           </Panel.Heading>
 
-          <div>Panel body</div>
+          <Panel.Body collapsible>Panel 1</Panel.Body>
         </Panel>
       </PanelGroup>
     )
@@ -78,14 +80,14 @@ describe('<PanelGroup>', () => {
               <Panel.Title toggle>foo</Panel.Title>
             </Panel.Heading>
 
-            Panel 1
+            <Panel.Body collapsible>Panel 1</Panel.Body>
           </Panel>
           <Panel eventKey="2">
             <Panel.Heading>
               <Panel.Title toggle>foo</Panel.Title>
             </Panel.Heading>
 
-            Panel 2
+            <Panel.Body collapsible>Panel 2</Panel.Body>
           </Panel>
         </PanelGroup>
       )

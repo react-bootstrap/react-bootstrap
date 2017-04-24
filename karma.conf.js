@@ -25,6 +25,7 @@ module.exports = config => {
         }),
       ],
       devtool: 'cheap-module-inline-source-map',
+      stats: 'minimal',
     }),
 
     webpackMiddleware: {

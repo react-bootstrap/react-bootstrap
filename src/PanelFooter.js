@@ -3,13 +3,6 @@ import React from 'react';
 import cn from 'classnames';
 import { prefix, bsClass, splitBsProps } from './utils/bootstrapUtils';
 
-const propTypes = {
-  bsRole: PropTypes.string,
-};
-
-const defaultProps = {
-  bsRole: 'footer',
-};
 
 const contextTypes = {
   $bs_panel: PropTypes.shape({
@@ -36,8 +29,6 @@ class PanelFooter extends React.Component {
   }
 }
 
-PanelFooter.propTypes = propTypes;
-PanelFooter.defaultProps = defaultProps;
 PanelFooter.contextTypes = contextTypes;
 
 export default bsClass('panel', PanelFooter);

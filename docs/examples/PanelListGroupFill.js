@@ -6,7 +6,7 @@ const panelInstance = (
     <Panel.Body>
       Some default panel content here.
     </Panel.Body>
-    <ListGroup bsRole="panel-body">
+    <ListGroup>
       <ListGroupItem>Item 1</ListGroupItem>
       <ListGroupItem>Item 2</ListGroupItem>
       <ListGroupItem>&hellip;</ListGroupItem>
