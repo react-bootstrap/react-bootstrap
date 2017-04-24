@@ -42,7 +42,7 @@ const contextTypes = {
 class ModalHeader extends React.Component {
   render() {
     const {
-      'aria-label': label,
+      'aria-label': closeLabel,
       closeButton,
       onHide,
       className,
@@ -65,9 +65,9 @@ class ModalHeader extends React.Component {
           <button
             type="button"
             className="close"
-            aria-label={label}
             onClick={createChainedFunction(modal && modal.onHide, onHide)}
           >
+            <span className="sr-only">{closeLabel}</span>
             <span aria-hidden="true">
               &times;
             </span>
