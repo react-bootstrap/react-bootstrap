@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Anchor from '../Anchor';
-import PropTable from '../PropTable';
 import ReactPlayground from '../ReactPlayground';
 import Samples from '../Samples';
 
@@ -11,16 +10,28 @@ export default function PaginationSection() {
       <h2 className="page-header">
         <Anchor id="pagination">Pagination</Anchor> <small>Pagination</small>
       </h2>
+      <p>
+        A set of <em>presentational</em> components for building pagination UI.
+      </p>
 
-      <p>Provide pagination links for your site or app with the multi-page pagination component. Set <code>items</code> to the number of pages. <code>activePage</code> prop dictates which page is active</p>
       <ReactPlayground codeText={Samples.PaginationBasic} />
 
       <h4><Anchor id="pagination-more">More options</Anchor></h4>
-      <p>such as <code>first</code>, <code>last</code>, <code>previous</code>, <code>next</code>, <code>boundaryLinks</code> and <code>ellipsis</code>.</p>
+      <p>
+        For building more complex pagination UI, there are few convenient sub-components for adding "First", "Previous", "Next", and "Last" buttons, as
+        well as an <code>Ellipsis</code> item for indicating previous or continuing results.
+      </p>
       <ReactPlayground codeText={Samples.PaginationAdvanced} />
 
-      <h3><Anchor id="pagination-props">Props</Anchor></h3>
-      <PropTable component="Pagination"/>
+      <div className="bs-callout bs-callout-info">
+        <h4>Migration Details</h4>
+        <p>
+          In previous versions of ReactBootstrap, the Pagination components contained "business" logic related to pagination. Considering logic of this
+          sort is almost always application and use-case specific we've removed it in favor of purelly presentational components (just like vanilla bootstrap).
+          For folks that miss those features we recommend pairing these components with one of the many pagination utilities out there,
+          such as: <a href="https://www.npmjs.com/package/segmentize">segmentize</a> or <a href="https://www.npmjs.com/package/ultimate-pagination">ultimate-pagination</a>.
+        </p>
+      </div>
     </div>
   );
 }
