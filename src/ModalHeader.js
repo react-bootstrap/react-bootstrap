@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
+import CloseButton from './CloseButton';
 
 // TODO: `aria-label` should be `closeLabel`.
 
 const propTypes = {
   /**
-   * The 'aria-label' attribute provides an accessible label for the close
+   * Provides an accessible label for the close
    * button. It is used for Assistive Technology when the label text is not
    * readable.
    */
-  'aria-label': PropTypes.string,
+  closeLabel: PropTypes.string,
 
   /**
    * Specify whether the Component should contain a close button
@@ -29,7 +30,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  'aria-label': 'Close',
+  closeLabel: 'Close',
   closeButton: false,
 };
 
@@ -42,7 +43,7 @@ const contextTypes = {
 class ModalHeader extends React.Component {
   render() {
     const {
-      'aria-label': label,
+      closeLabel,
       closeButton,
       onHide,
       className,
@@ -61,18 +62,12 @@ class ModalHeader extends React.Component {
         {...elementProps}
         className={classNames(className, classes)}
       >
-        {closeButton &&
-          <button
-            type="button"
-            className="close"
-            aria-label={label}
+        {closeButton && (
+          <CloseButton
+            label={closeLabel}
             onClick={createChainedFunction(modal && modal.onHide, onHide)}
-          >
-            <span aria-hidden="true">
-              &times;
-            </span>
-          </button>
-        }
+          />
+        )}
 
         {children}
       </div>
