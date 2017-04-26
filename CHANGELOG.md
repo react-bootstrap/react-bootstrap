@@ -1,3 +1,17 @@
+## [v0.31.0]
+> 2017-04-26
+
+- **Breaking:** Rename `aria-label` prop to `closeLabel` on ModalHeader  ([#2584])
+- **Breaking:** Remove unused `onClose` callback on Dropdowns (use `onToggle`)  ([#2585])
+- **Breaking:** Increase minimal required React and ReactDOM versions to `0.14.9` or `>=15.3.0` ([#2579])
+- **Bugfix:** Consistently render accessible close buttons for Alerts and Modals  ([#2584])
+
+[v0.31.0]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.30.10...v0.31.0
+[#2584]: https://github.com/react-bootstrap/react-bootstrap/pull/2584
+[#2585]: https://github.com/react-bootstrap/react-bootstrap/pull/2585
+[#2579]: https://github.com/react-bootstrap/react-bootstrap/pull/2579
+
+
 ## [v0.30.10]
 > 2017-04-21
 
