@@ -63,6 +63,8 @@ export Table from './Table';
 export TabPane from './TabPane';
 export Tabs from './Tabs';
 export Thumbnail from './Thumbnail';
+export ToggleButton from './ToggleButton';
+export ToggleButtonGroup from './ToggleButtonGroup';
 export Tooltip from './Tooltip';
 export Well from './Well';
 
