@@ -3,7 +3,7 @@ const buttonGroupInstance = (
     <ToggleButton value={1}>
       Radio 1 (pre-checked)
     </ToggleButton>
-    <ToggleButton value={2}>Radio 3</ToggleButton>
+    <ToggleButton value={2}>Radio 2</ToggleButton>
 
     <ToggleButton value={3}>Radio 3</ToggleButton>
   </ToggleButtonGroup>
