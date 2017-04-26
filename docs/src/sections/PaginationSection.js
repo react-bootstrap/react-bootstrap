@@ -27,9 +27,11 @@ export default function PaginationSection() {
         <h4>Migration Details</h4>
         <p>
           In previous versions of ReactBootstrap, the Pagination components contained "business" logic related to pagination. Considering logic of this
-          sort is almost always application and use-case specific we've removed it in favor of purelly presentational components (just like vanilla bootstrap).
-          For folks that miss those features we recommend pairing these components with one of the many pagination utilities out there,
-          such as: <a href="https://www.npmjs.com/package/segmentize">segmentize</a> or <a href="https://www.npmjs.com/package/ultimate-pagination">ultimate-pagination</a>.
+          sort is almost always application and use-case specific we've removed it in favor of purely presentational components (just like vanilla bootstrap).
+        </p>
+        <p>
+          In order to help migration we've provided a drop-in replacement for the
+          old component at: <a href="https://www.npmjs.com/package/@react-bootstrap/pagination">@react-bootstrap/pagination</a>
         </p>
       </div>
     </div>

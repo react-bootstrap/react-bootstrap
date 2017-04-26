@@ -29,7 +29,7 @@ export default function PaginationItem({
   children,
   ...props,
 }) {
-  const Component = active ? 'span' : SafeAnchor;
+  const Component = active || disabled ? 'span' : SafeAnchor;
   return (
     <li
       style={style}
@@ -48,33 +48,30 @@ export default function PaginationItem({
 PaginationItem.propTypes = propTypes;
 PaginationItem.defaultProps = defaultProps;
 
-export const First = props => (
-  <li aria-label="First" {...props}>
-    <SafeAnchor>{'\u00ab'}</SafeAnchor>
-  </li>
-);
+function createButton(name, defaultValue, label = name) {
+  return class extends React.Component {
+    static displayName = name;
+    static propTypes = { disabled: PropTypes.bool, };
+    render() {
+      const { disabled, children, className, ...props } = this.props;
+      const Component = disabled ? 'span' : SafeAnchor;
 
-export const Prev = props => (
-  <li aria-label="Previous" {...props}>
-    <SafeAnchor>{'\u2039'}</SafeAnchor>
-  </li>
-);
+      return (
+        <li
+          aria-label={label}
+          className={classNames(className, { disabled })}
+          {...props}
+        >
+          <Component>{children || defaultValue}</Component>
+        </li>
+      );
+    }
+  };
+}
 
-export const Ellipsis = props => (
-  <li aria-label="More" {...props}>
-    <span>{'\u2026'}</span>
-  </li>
-);
-
-export const Next = props => (
-  <li aria-label="Next" {...props}>
-    <SafeAnchor>{'\u203a'}</SafeAnchor>
-  </li>
-);
-
-export const Last = props => (
-  <li aria-label="Last" {...props}>
-    <SafeAnchor>{'\u00bb'}</SafeAnchor>
-  </li>
-);
+export const First = createButton('First', '\u00ab');
+export const Prev = createButton('Prev', '\u2039');
+export const Ellipsis = createButton('Ellipsis', '\u2026', 'More');
+export const Next = createButton('Next', '\u203a');
+export const Last = createButton('Last', '\u00bb');
 
