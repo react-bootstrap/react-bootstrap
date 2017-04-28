@@ -27,6 +27,7 @@ const defaultProps = {
   active: false,
   block: false,
   disabled: false,
+  type: 'button',
 };
 
 class Button extends React.Component {
@@ -47,7 +48,7 @@ class Button extends React.Component {
     return (
       <Component
         {...elementProps}
-        type={elementProps.type || 'button'}
+        type={elementProps.type}
         className={className}
       />
     );

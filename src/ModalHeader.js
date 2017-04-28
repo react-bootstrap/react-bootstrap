@@ -6,8 +6,6 @@ import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 import CloseButton from './CloseButton';
 
-// TODO: `aria-label` should be `closeLabel`.
-
 const propTypes = {
   /**
    * Provides an accessible label for the close
