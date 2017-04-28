@@ -40,4 +40,14 @@ describe('Label', () => {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
   });
 
+  it('Shows with multiple children', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Label>
+        <strong>A label</strong>
+        <span>With a message</span>
+      </Label>
+    );
+    assert.ok(ReactDOM.findDOMNode(instance).className.should.not.match(/\bhidden\b/));
+  });
+
 });
