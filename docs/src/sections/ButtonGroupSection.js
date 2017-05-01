@@ -30,6 +30,14 @@ export default function ButtonGroupSection() {
       <p>You can place other button types within the <code>{"<ButtonGroup />"}</code> like <code>{"<DropdownButton />"}</code>s.</p>
       <ReactPlayground codeText={Samples.ButtonGroupNested} />
 
+      <h3><Anchor id="btn-groups-checkbox-radio">Checkbox / Radio</Anchor></h3>
+      <p>
+        For checkboxes or radio buttons styled as Buttons, you can can use
+        the <code>ToggleButtonGroup</code> and <code>ToggleButton</code> components.
+      </p>
+      <ReactPlayground codeText={Samples.ButtonGroupToggleCheckbox} />
+      <ReactPlayground codeText={Samples.ButtonGroupToggleRadio} />
+
       <h3><Anchor id="btn-groups-vertical">Vertical variation</Anchor></h3>
       <p>Make a set of buttons appear vertically stacked rather than horizontally. <strong
         className="text-danger">Split button dropdowns are not supported here.</strong></p>
@@ -49,7 +57,15 @@ export default function ButtonGroupSection() {
       <ReactPlayground codeText={Samples.ButtonGroupJustified} />
 
       <h3><Anchor id="btn-groups-props">Props</Anchor></h3>
+
+      <h4><Anchor id="btn-groups-group-props">ButtonGroup</Anchor></h4>
       <PropTable component="ButtonGroup"/>
+
+      <h4><Anchor id="btn-groups-toggle-group-props">ToggleButtonGroup</Anchor></h4>
+      <PropTable component="ToggleButtonGroup"/>
+
+      <h4><Anchor id="btn-groups-toggle-btn-props">ToggleButton</Anchor></h4>
+      <PropTable component="ToggleButton"/>
     </div>
   );
 }
