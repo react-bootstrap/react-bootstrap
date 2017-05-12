@@ -1,5 +1,5 @@
 import createChainableTypeChecker
-  from 'react-prop-types/lib/utils/createChainableTypeChecker';
+  from 'prop-types-extra/lib/utils/createChainableTypeChecker';
 
 import ValidComponentChildren from './ValidComponentChildren';
 

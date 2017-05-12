@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
-import elementType from 'react-prop-types/lib/elementType';
+import elementType from 'prop-types-extra/lib/elementType';
 
 import ListGroupItem from './ListGroupItem';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';

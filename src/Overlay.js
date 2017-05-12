@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import BaseOverlay from 'react-overlays/lib/Overlay';
-import elementType from 'react-prop-types/lib/elementType';
+import elementType from 'prop-types-extra/lib/elementType';
 
 import Fade from './Fade';
 

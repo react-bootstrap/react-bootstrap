@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import elementType from 'react-prop-types/lib/elementType';
+import elementType from 'prop-types-extra/lib/elementType';
 import warning from 'warning';
 
 import FormControlFeedback from './FormControlFeedback';

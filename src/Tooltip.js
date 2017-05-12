@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
+import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 
 import { bsClass, getClassSet, prefix, splitBsProps }
   from './utils/bootstrapUtils';

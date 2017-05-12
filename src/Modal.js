@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import BaseModal from 'react-overlays/lib/Modal';
 import isOverflowing from 'react-overlays/lib/utils/isOverflowing';
-import elementType from 'react-prop-types/lib/elementType';
+import elementType from 'prop-types-extra/lib/elementType';
 
 import Fade from './Fade';
 import Body from './ModalBody';

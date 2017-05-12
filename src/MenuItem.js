@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import all from 'react-prop-types/lib/all';
+import all from 'prop-types-extra/lib/all';
 
 import SafeAnchor from './SafeAnchor';
 import { bsClass, prefix, splitBsPropsAndOmit } from './utils/bootstrapUtils';
