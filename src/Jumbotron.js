@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import elementType from 'react-prop-types/lib/elementType';
+import elementType from 'prop-types-extra/lib/elementType';
 
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 

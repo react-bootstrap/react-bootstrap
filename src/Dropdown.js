@@ -5,9 +5,9 @@ import keycode from 'keycode';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import all from 'react-prop-types/lib/all';
-import elementType from 'react-prop-types/lib/elementType';
-import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
+import all from 'prop-types-extra/lib/all';
+import elementType from 'prop-types-extra/lib/elementType';
+import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import uncontrollable from 'uncontrollable';
 import warning from 'warning';
 

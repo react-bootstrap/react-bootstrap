@@ -124,8 +124,9 @@
     "dom-helpers": "^3.2.0",
     "invariant": "^2.2.1",
     "keycode": "^2.1.2",
-    "react-overlays": "^0.7.0",
     "prop-types": "^15.5.6",
+    "prop-types-extra": "^1.0.1",
+    "react-overlays": "^0.7.0",
     "react-prop-types": "^0.4.0",
     "uncontrollable": "^4.1.0",
     "warning": "^3.0.0"

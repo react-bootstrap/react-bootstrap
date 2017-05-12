@@ -1,4 +1,4 @@
-import deprecated from 'react-prop-types/lib/deprecated';
+import deprecated from 'prop-types-extra/lib/deprecated';
 
 import { _resetWarned } from '../src/utils/deprecationWarning';
 
