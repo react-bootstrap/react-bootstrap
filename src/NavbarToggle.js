@@ -27,7 +27,6 @@ class NavbarToggle extends React.Component {
     const navbarProps = this.context.$bs_navbar || { bsClass: 'navbar' };
 
     const buttonProps = {
-      type: 'button',
       ...props,
       onClick: createChainedFunction(onClick, navbarProps.onToggle),
       className: classNames(

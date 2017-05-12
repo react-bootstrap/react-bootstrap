@@ -8,8 +8,6 @@ import createChainedFunction from './utils/createChainedFunction';
 
 // TODO: This should be `<Pagination.Item>`.
 
-// TODO: This should use `componentClass` like other components.
-
 const propTypes = {
   componentClass: elementType,
   className: PropTypes.string,
