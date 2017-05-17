@@ -15,7 +15,7 @@ const defaultProps = {
 
 const contextTypes = {
   $bs_panel: PropTypes.shape({
-    getIds: PropTypes.func,
+    headingId: PropTypes.string,
     bsClass: PropTypes.string
   })
 };
@@ -24,14 +24,14 @@ class PanelHeading extends React.Component {
 
   render() {
     const { children, className, componentClass: Component, ...props } = this.props;
-    const { getIds, bsClass: _bsClass } = this.context.$bs_panel || {};
+    const { headingId, bsClass: _bsClass } = this.context.$bs_panel || {};
 
     const [bsProps, elementProps] = splitBsProps(props);
     bsProps.bsClass = _bsClass || bsProps.bsClass;
 
-    if (getIds) {
+    if (headingId) {
       elementProps.role = elementProps.role || 'tab';
-      elementProps.id = getIds().headingId;
+      elementProps.id = headingId;
     }
 
     return (

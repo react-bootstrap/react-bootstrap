@@ -34,7 +34,8 @@ const propTypes = {
 
 const contextTypes = {
   $bs_panel: PropTypes.shape({
-    getIds: PropTypes.func,
+    headingId: PropTypes.string,
+    bodyId: PropTypes.string,
     bsClass: PropTypes.string,
     expanded: PropTypes.bool,
   })
@@ -43,15 +44,16 @@ const contextTypes = {
 class PanelCollapse extends React.Component {
   render() {
     const { children } = this.props;
-    const { getIds, bsClass: _bsClass, expanded } = this.context.$bs_panel || {};
+    const {
+      headingId, bodyId, bsClass: _bsClass, expanded,
+    } = this.context.$bs_panel || {};
 
     const [bsProps, props] = splitBsProps(this.props);
 
     bsProps.bsClass = _bsClass || bsProps.bsClass;
 
-    if (getIds) {
-      let { headingId, collapseId } = getIds();
-      props.id = collapseId;
+    if (headingId && bodyId) {
+      props.id = bodyId;
       props.role = props.role || 'tabpanel';
       props['aria-labelledby'] = headingId;
     }

@@ -154,8 +154,8 @@ describe('<Panel>', () => {
     )
     .render();
 
-    inst.single('#testid--COLLAPSE.panel-collapse');
-    inst.single('#testid--HEADING.panel-heading');
+    inst.single('#testid--body.panel-collapse');
+    inst.single('#testid--heading.panel-heading');
   });
 
   it('Should be open', () => {
@@ -254,8 +254,8 @@ describe('<Panel>', () => {
       )
       .render();
 
-      inst.single('a[aria-controls=testid--COLLAPSE]');
-      inst.single('.panel-collapse[aria-labelledby=testid--HEADING]');
+      inst.single('a[aria-controls=testid--body]');
+      inst.single('.panel-collapse[aria-labelledby=testid--heading]');
     });
   });
 });

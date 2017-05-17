@@ -24,7 +24,7 @@ const defaultProps = {
 
 const contextTypes = {
   $bs_panel: PropTypes.shape({
-    getIds: PropTypes.func,
+    bodyId: PropTypes.string,
     onToggle: PropTypes.func,
     expanded: PropTypes.bool,
   })
@@ -49,7 +49,7 @@ class PanelToggle extends React.Component {
 
   render() {
     const { onClick, className, componentClass, ...props } = this.props;
-    const { expanded, getIds } = this.context.$bs_panel || {};
+    const { expanded, bodyId } = this.context.$bs_panel || {};
     const Component = componentClass;
 
     props.onClick = createChainedFunction(onClick, this.handleToggle);
@@ -57,8 +57,8 @@ class PanelToggle extends React.Component {
     props['aria-expanded'] = expanded;
     props.className = classNames(className, !expanded && 'collapsed');
 
-    if (getIds) {
-      props['aria-controls'] = getIds().collapseId;
+    if (bodyId) {
+      props['aria-controls'] = bodyId;
     }
 
     return (

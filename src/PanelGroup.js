@@ -38,7 +38,7 @@ const propTypes = {
    * meaning it should always return the _same_ id for the same set of inputs. The default
    * value requires that an `id` to be set for the PanelGroup.
    *
-   * The `type` argument will either be `"COLLAPSE"` or `"HEADING"`.
+   * The `type` argument will either be `"body"` or `"heading"`.
    *
    * @defaultValue (eventKey, type) => `${this.props.id}-${type}-${key}`
    */

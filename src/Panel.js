@@ -48,7 +48,8 @@ const contextTypes = {
 
 const childContextTypes = {
   $bs_panel: PropTypes.shape({
-    getIds: PropTypes.func,
+    headingId: PropTypes.string,
+    bodyId: PropTypes.string,
     bsClass: PropTypes.string,
     onToggle: PropTypes.func,
     expanded: PropTypes.bool,
@@ -63,19 +64,23 @@ class Panel extends React.Component {
 
   getChildContext() {
     const { eventKey, id } = this.props;
-    const { getId = defaultGetId } = this.context.$bs_panelGroup || {};
+    let { getId } = this.context.$bs_panelGroup || {};
 
-    let getIds = null;
-    if (getId || id) {
-      getIds = () => ({
-        headingId: getId(eventKey || id, 'HEADING'),
-        collapseId: getId(eventKey || id, 'COLLAPSE')
-      });
+    let ids;
+    let idKey = eventKey == null ? id : eventKey;
+
+    if (idKey !== null) {
+      getId = getId || defaultGetId;
+      ids = {
+        headingId: getId(idKey, 'heading'),
+        bodyId: getId(idKey, 'body'),
+      };
     }
+
 
     return {
       $bs_panel: {
-        getIds,
+        ...ids,
         bsClass: this.props.bsClass,
         expanded: this.getExpanded(),
         onToggle: this.handleToggle,

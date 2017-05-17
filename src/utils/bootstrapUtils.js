@@ -15,7 +15,7 @@ function curry(fn) {
   };
 }
 
-export function prefix(props, context = {}, variant) {
+export function prefix(props, context, variant) {
   if (arguments.length === 2) {
     variant = context;
     context = {};

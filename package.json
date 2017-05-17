@@ -64,6 +64,7 @@
     "codecov": "^1.0.1",
     "codemirror": "^5.16.0",
     "colors": "^1.1.2",
+    "create-react-class": "^15.5.3",
     "cross-env": "^2.0.0",
     "css-loader": "^0.23.1",
     "eslint": "^1.10.3",
