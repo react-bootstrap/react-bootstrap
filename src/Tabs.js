@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import requiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
+import requiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 import uncontrollable from 'uncontrollable';
 
 import Nav from './Nav';
@@ -76,7 +76,7 @@ function getDefaultActiveKey(children) {
 
 class Tabs extends React.Component {
   renderTab(child) {
-    const { title, eventKey, disabled, tabClassName } = child.props;
+    const { title, eventKey, disabled, tabClassName, href } = child.props;
     if (title == null) {
       return null;
     }
@@ -86,6 +86,7 @@ class Tabs extends React.Component {
         eventKey={eventKey}
         disabled={disabled}
         className={tabClassName}
+        href={href}
       >
         {title}
       </NavItem>
