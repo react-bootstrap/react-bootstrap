@@ -129,6 +129,10 @@ class OverlayTrigger extends React.Component {
   }
 
   componentDidUpdate() {
+    if (this.state.show) {
+      ReactDOM.unmountComponentAtNode(this._mountNode);
+      this._mountNode = document.createElement('div');
+    }
     this.renderOverlay();
   }
 
