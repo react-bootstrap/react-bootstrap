@@ -39,6 +39,7 @@ class Checkbox extends React.Component {
       inputRef,
       className,
       style,
+      title,
       children,
       ...props
     } = this.props;
@@ -70,7 +71,7 @@ class Checkbox extends React.Component {
       );
 
       return (
-        <label className={classNames(className, classes)} style={style}>
+        <label className={classNames(className, classes)} style={style} title={title}>
           {input}
           {children}
         </label>
@@ -87,7 +88,7 @@ class Checkbox extends React.Component {
 
     return (
       <div className={classNames(className, classes)} style={style}>
-        <label>
+        <label title={title}>
           {input}
           {children}
         </label>
