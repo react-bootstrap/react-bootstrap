@@ -9,6 +9,7 @@ import { bsClass, getClassSet, prefix, splitBsProps }
 const propTypes = {
   inline: PropTypes.bool,
   disabled: PropTypes.bool,
+  title: PropTypes.string,
   /**
    * Only valid if `inline` is not set.
    */
@@ -28,6 +29,7 @@ const propTypes = {
 const defaultProps = {
   inline: false,
   disabled: false,
+  title: '',
 };
 
 class Checkbox extends React.Component {
