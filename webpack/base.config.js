@@ -10,7 +10,10 @@ export const options = yargs
   })
   .argv;
 
-export const jsLoader = 'babel?cacheDirectory';
+export const jsLoader = {
+  loader: 'babel-loader',
+  options: { cacheDirectory: true }
+};
 
 const baseConfig = {
   entry: undefined,
@@ -20,8 +23,8 @@ const baseConfig = {
   externals: undefined,
 
   module: {
-    loaders: [
-      { test: /\.js/, loader: jsLoader, exclude: /node_modules/ }
+    rules: [
+      { test: /\.js/, use: [jsLoader], exclude: /node_modules/ }
     ]
   },
 
@@ -31,11 +34,8 @@ const baseConfig = {
         NODE_ENV: JSON.stringify(options.optimizeMinimize ? 'production' : 'development')
       }
     })
-  ]
+  ],
+  devtool: options.optimizeMinimize ? 'source-map' : false
 };
-
-if (options.optimizeMinimize) {
-  baseConfig.devtool = 'source-map';
-}
 
 export default baseConfig;

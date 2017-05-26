@@ -1,14 +1,15 @@
 import baseConfig, { options } from './base.config';
+import path from 'path';
 
 export default {
   ...baseConfig,
 
   entry: {
-    'react-bootstrap': './src/index.js',
+    'react-bootstrap': path.resolve('./src/index.js'),
   },
 
   output: {
-    path: './dist',
+    path: path.resolve('dist'),
     filename: options.optimizeMinimize ? '[name].min.js' : '[name].js',
     library: 'ReactBootstrap',
     libraryTarget: 'umd',
