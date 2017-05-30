@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
 
 import Collapse from '../src/Collapse';
 
@@ -54,16 +54,15 @@ describe('<Collapse>', () => {
   });
 
   describe('from collapsed to expanded', () => {
-    let scrollHeightStub;
-
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
         <Component>Panel content</Component>
       );
 
       // since scrollHeight is gonna be 0 detached from the DOM
-      scrollHeightStub = sinon.stub(instance.collapse, '_getScrollDimensionValue');
-      scrollHeightStub.returns('15px');
+      sinon
+        .stub(instance.collapse, '_getScrollDimensionValue')
+        .returns('15px');
     });
 
 

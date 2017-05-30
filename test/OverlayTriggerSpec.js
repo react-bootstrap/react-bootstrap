@@ -1,7 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import ReactTestUtils from 'react-addons-test-utils';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
 
 import OverlayTrigger from '../src/OverlayTrigger';
 import Popover from '../src/Popover';

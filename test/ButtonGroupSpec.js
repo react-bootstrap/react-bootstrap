@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
 
 import ButtonGroup from '../src/ButtonGroup';
 import Button from '../src/Button';
