@@ -259,6 +259,18 @@ describe('<Tabs>', () => {
     assert.equal(nav.context.$bs_tabContainer.activeKey, 2);
   });
 
+  it('Should render tab with the requested html button element', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Tabs id="test" defaultActiveKey={1}>
+        <Tab tabComponentClass="button" title="Tab 1" eventKey={1}>Tab 1 content</Tab>
+        <Tab tabComponentClass="button" title="Tab 2" eventKey={2}>Tab 2 content</Tab>
+      </Tabs>
+    );
+
+    const buttons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'button');
+    assert.equal(buttons.length, 2);
+  });
+
 
   describe('active state invariants', () => {
     let mountPoint;

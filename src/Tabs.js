@@ -76,7 +76,7 @@ function getDefaultActiveKey(children) {
 
 class Tabs extends React.Component {
   renderTab(child) {
-    const { title, eventKey, disabled, tabClassName } = child.props;
+    const { title, eventKey, disabled, tabClassName, tabComponentClass } = child.props;
     if (title == null) {
       return null;
     }
@@ -86,6 +86,7 @@ class Tabs extends React.Component {
         eventKey={eventKey}
         disabled={disabled}
         className={tabClassName}
+        componentClass={tabComponentClass}
       >
         {title}
       </NavItem>
