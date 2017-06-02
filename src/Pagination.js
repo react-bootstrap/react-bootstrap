@@ -206,6 +206,7 @@ class Pagination extends React.Component {
         {first && (
           <PaginationButton
             {...buttonProps}
+            className="btn-first"
             eventKey={1}
             disabled={activePage === 1}
           >
@@ -217,6 +218,7 @@ class Pagination extends React.Component {
         {prev && (
           <PaginationButton
             {...buttonProps}
+            className="btn-prev"
             eventKey={activePage - 1}
             disabled={activePage === 1}
           >
@@ -233,6 +235,7 @@ class Pagination extends React.Component {
         {next && (
           <PaginationButton
             {...buttonProps}
+            className="btn-next"
             eventKey={activePage + 1}
             disabled={activePage >= items}
           >
@@ -244,6 +247,7 @@ class Pagination extends React.Component {
         {last && (
           <PaginationButton
             {...buttonProps}
+            className="btn-last"
             eventKey={items}
             disabled={activePage >= items}
           >
