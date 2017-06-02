@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import invariant from 'invariant';
 import uncontrollable from 'uncontrollable';
 
@@ -13,14 +14,14 @@ const propTypes = {
    *
    * __Required if `type` is set to `'radio'`__
    */
-  name: React.PropTypes.string,
+  name: PropTypes.string,
 
   /**
    * The value, or array of values, of the active (pressed) buttons
    *
    * @controllable onChange
    */
-  value: React.PropTypes.any,
+  value: PropTypes.any,
 
   /**
    * Callback fired when a button is pressed, depending on whether the `type`
@@ -29,13 +30,13 @@ const propTypes = {
    *
    * @controllable values
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
 
   /**
    * The input `type` of the rendered buttons, determines the toggle behavior
    * of the buttons
    */
-  type: React.PropTypes.oneOf(['checkbox', 'radio']).isRequired,
+  type: PropTypes.oneOf(['checkbox', 'radio']).isRequired,
 };
 
 const defaultProps = {
