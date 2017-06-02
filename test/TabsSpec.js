@@ -373,6 +373,19 @@ describe('<Tabs>', () => {
     assert.notDeepEqual(myTabClass, myNavItem);
   });
 
+  it('Should pass href to the nav item for all tabs', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Tabs id="test" bsStyle="pills" defaultActiveKey={1} animation={false}>
+        <Tab title="Tab 1" eventKey={1} href="http://example.com">Tab 1 content</Tab>
+      </Tabs>
+    );
+
+    const tabs = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
+    const link1 = ReactTestUtils.findRenderedDOMComponentWithTag(tabs[0], 'a');
+
+    assert.equal(link1.getAttribute('href'), 'http://example.com');
+  });
+
   it('Should pass className, Id, and style to Tabs', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Tabs

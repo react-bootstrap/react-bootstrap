@@ -10,6 +10,8 @@ const propTypes = {
 
   disabled: PropTypes.bool,
 
+  href: PropTypes.string,
+
   title: PropTypes.node,
 
   /**
