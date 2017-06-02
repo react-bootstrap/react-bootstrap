@@ -1,3 +1,9 @@
+# data-toggle fork
+**This fork aims on adding `data-toggle` attributes in the right places.**
+
+You can still use the bundled js in `development`, but you may drop it in `production`
+and use e.g. [bootstrap.native](https://github.com/thednp/bootstrap.native/) there.
+
 # React-Bootstrap [![Travis][build-badge]][build] [![npm][npm-badge]][npm]
 
 [Bootstrap 3][bootstrap] components built with [React][react].
