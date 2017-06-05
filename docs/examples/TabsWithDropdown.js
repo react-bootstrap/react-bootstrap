@@ -9,7 +9,7 @@ const tabsInstance = (
           <NavItem eventKey="second">
             Tab 2
           </NavItem>
-          <NavDropdown eventKey="3" title="Dropdown" id="nav-dropdown-within-tab">
+          <NavDropdown eventKey="3" title="Dropdown">
             <MenuItem eventKey="3.1">Action</MenuItem>
             <MenuItem eventKey="3.2">Another action</MenuItem>
             <MenuItem eventKey="3.3">Something else here</MenuItem>
