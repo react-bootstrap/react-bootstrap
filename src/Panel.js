@@ -99,6 +99,7 @@ class Panel extends React.Component {
         aria-controls={id}
         aria-expanded={expanded}
         aria-selected={expanded}
+        style={{cursor: 'pointer'}}
         className={expanded ? null : 'collapsed' }
       >
         {header}
