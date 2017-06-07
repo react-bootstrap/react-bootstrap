@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsPropsAndOmit } from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 import CloseButton from './CloseButton';
 
@@ -53,7 +53,7 @@ class ModalHeader extends React.Component {
 
     const modal = this.context.$bs_modal;
 
-    const [bsProps, elementProps] = splitBsProps(props);
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['closeButton']);
 
     const classes = getClassSet(bsProps);
 
