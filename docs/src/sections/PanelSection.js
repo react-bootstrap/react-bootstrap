@@ -50,10 +50,10 @@ export default function PanelSection() {
 
       <h3><Anchor id="panels-props">Props</Anchor></h3>
 
-      <h4><Anchor id="panels-props-accordion">Panels, Accordion</Anchor></h4>
+      <h4><Anchor id="panels-props-accordion">Panels</Anchor></h4>
       <PropTable component="Panel"/>
 
-      <h4><Anchor id="panels-props-group">PanelGroup</Anchor></h4>
+      <h4><Anchor id="panels-props-group">PanelGroup, Accordion</Anchor></h4>
       <PropTable component="PanelGroup"/>
     </div>
   );
