@@ -6,6 +6,10 @@ const propTypes = {
   onClick: PropTypes.func,
 };
 
+const defaultProps = {
+  label: 'Close'
+};
+
 class CloseButton extends React.Component {
   render() {
     const { label, onClick } = this.props;
@@ -23,5 +27,6 @@ class CloseButton extends React.Component {
 }
 
 CloseButton.propTypes = propTypes;
+CloseButton.defaultProps = defaultProps;
 
 export default CloseButton;
