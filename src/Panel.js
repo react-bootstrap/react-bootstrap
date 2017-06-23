@@ -17,8 +17,9 @@ const defaultGetId = (id, type) => id ? `${id}--${type}` : null;
 
 const propTypes = {
   /**
-   * Controls the collapsed/expanded state ofthe Panel. Requires a `Panel.Collapse` or `<Panel.Body collapsible>` child component
-   * in order to actually animate out or in,
+   * Controls the collapsed/expanded state ofthe Panel. Requires
+   * a `Panel.Collapse` or `<Panel.Body collapsible>` child component
+   * in order to actually animate out or in.
    *
    * @controllable onToggle
    */

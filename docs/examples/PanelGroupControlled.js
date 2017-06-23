@@ -21,7 +21,7 @@ const ControlledPanelGroup = React.createClass({
           <Panel.Heading>
             <Panel.Title toggle>Panel heading 1</Panel.Title>
           </Panel.Heading>
-          <Panel.Body collapsible >
+          <Panel.Body collapsible>
             Panel content 1
           </Panel.Body>
         </Panel>
