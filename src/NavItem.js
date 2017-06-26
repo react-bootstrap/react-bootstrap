@@ -28,7 +28,7 @@ class NavItem extends React.Component {
   }
 
   handleClick(e) {
-    if (this.props.onSelect) {
+    if (this.props.onSelect && this.props.onSelect.name !== 'bound handleCollapse') {
       e.preventDefault();
 
       if (!this.props.disabled) {
