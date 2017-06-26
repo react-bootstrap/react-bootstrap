@@ -1,5 +1,11 @@
 import { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
+import tsp from 'teaspoon';
+
+tsp.fn.log = function log() {
+  console.log(this.dom());
+  return this;
+};
 
 export function shouldWarn(about) {
   console.error.expected.push(about); // eslint-disable-line no-console
