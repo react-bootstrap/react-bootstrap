@@ -200,6 +200,7 @@ class Collapse extends React.Component {
           ...innerProps,
           className: classNames(
             className,
+            children.props.className,
             collapseStyles[state],
             this.getDimension() === 'width' && 'width'
           )

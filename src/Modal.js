@@ -129,11 +129,13 @@ const childContextTypes = {
 };
 
 /* eslint-disable no-use-before-define, react/no-multi-comp */
-const DialogTransition = (props) =>
-  <Fade {...props} timeout={Modal.TRANSITION_DURATION} />;
+function DialogTransition(props) {
+  return <Fade {...props} timeout={Modal.TRANSITION_DURATION} />;
+}
 
-const BackdropTransition = (props) =>
-  <Fade {...props} timeout={Modal.BACKDROP_TRANSITION_DURATION} />;
+function BackdropTransition(props) {
+  return <Fade {...props} timeout={Modal.BACKDROP_TRANSITION_DURATION} />;
+}
 
 /* eslint-enable no-use-before-define */
 

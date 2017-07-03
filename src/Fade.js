@@ -75,13 +75,18 @@ const fadeStyles = {
 
 class Fade extends React.Component {
   render() {
-    const { className, ...props } = this.props;
+    const { className, children, ...props } = this.props;
 
     return (
       <Transition {...props}>
-        {(status, innerProps) => React.cloneElement(props.children, {
+        {(status, innerProps) => React.cloneElement(children, {
           ...innerProps,
-          className: classNames('fade', className, fadeStyles[status]),
+          className: classNames(
+            'fade',
+            className,
+            children.props.className,
+            fadeStyles[status]
+          ),
         })}
       </Transition>
     );
