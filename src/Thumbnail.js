@@ -9,11 +9,13 @@ const propTypes = {
   src: PropTypes.string,
   alt: PropTypes.string,
   href: PropTypes.string,
+  onError: PropTypes.func,
+  onLoad: PropTypes.func
 };
 
 class Thumbnail extends React.Component {
   render() {
-    const { src, alt, className, children, ...props } = this.props;
+    const { src, alt, onError, onLoad, className, children, ...props } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const Component = elementProps.href ? SafeAnchor : 'div';
@@ -24,7 +26,7 @@ class Thumbnail extends React.Component {
         {...elementProps}
         className={classNames(className, classes)}
       >
-        <img src={src} alt={alt} />
+        <img {...{src, alt, onError, onLoad}} />
 
         {children && (
           <div className="caption">
