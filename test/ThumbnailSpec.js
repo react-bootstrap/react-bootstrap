@@ -5,16 +5,9 @@ import ReactTestUtils from 'react-dom/test-utils';
 import Thumbnail from '../src/Thumbnail';
 
 describe('<Thumbnail>', () => {
-  let defaultProps = {
-    href: '#',
-    src: '#',
-    alt: 'test',
-    onError: () => {},
-    onLoad: () => {}
-  };
   it('Should have a thumbnail class and be an anchor', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Thumbnail {...defaultProps} />
+      <Thumbnail href="#" src="#" alt="test" />
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bthumbnail\b/));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
@@ -22,7 +15,7 @@ describe('<Thumbnail>', () => {
 
   it('Should have an image', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Thumbnail {...defaultProps} />
+      <Thumbnail href="#" src="#" alt="test" />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'img'));
   });
@@ -37,14 +30,14 @@ describe('<Thumbnail>', () => {
 
   it('Should have an image', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Thumbnail {...defaultProps} />
+      <Thumbnail src="#" alt="test" />
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'img'));
   });
 
   it('Should have an inner div with class caption', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Thumbnail {...defaultProps} >
+      <Thumbnail src="#" alt="test">
         Test
         <div>
           Test child element
@@ -56,7 +49,7 @@ describe('<Thumbnail>', () => {
 
   it('Should have an inner div with class caption in an anchor', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Thumbnail {...defaultProps}>
+      <Thumbnail href="#" src="#" alt="test">
         Test
         <div>
           Test child element
@@ -68,22 +61,22 @@ describe('<Thumbnail>', () => {
 
   it('Should have an img with an onError callback', () => {
     const onErrorSpy = sinon.spy();
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Thumbnail src="#" href="#" onLoad={() => {}} onError={onErrorSpy} />
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Thumbnail href="#" src="#" alt="test" onError={onErrorSpy} />
     );
-    let img = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'img');
+    const img = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'img');
     ReactTestUtils.Simulate.error(img);
-    assert.ok(onErrorSpy.calledOnce);
+    expect(onErrorSpy).to.have.been.calledOnce;
   });
 
   it('Should have an img with an onLoad callback', () => {
     const onLoadSpy = sinon.spy();
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Thumbnail src="#" href="#" onError={() => {}} onLoad={onLoadSpy} />
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Thumbnail href="#" src="#" alt="test" onLoad={onLoadSpy} />
     );
-    let img = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'img');
+    const img = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'img');
     ReactTestUtils.Simulate.load(img);
-    assert.ok(onLoadSpy.calledOnce);
+    expect(onLoadSpy).to.have.been.calledOnce;
   });
 
 });
