@@ -15,7 +15,7 @@ See the [documentation][documentation] with live editable examples.
 ## Related modules
 
 - [react-router-bootstrap][react-router-bootstrap] – Integration with [React Router][react-router]
-- [react-bootstrap-extended][react-bootstrap-extended] - A version of React Bootstrap where each component has extra props that map to bootstrap's utility classes. For example, `pullRight` adds the class `pull-right` to a component.
+- [React Bootstrap Extended][react-bootstrap-extended] - A version of React Bootstrap where each component has extra props that map to bootstrap's utility classes. For example, `pullRight` adds the class `pull-right` to a component.
 
 ## Local setup
 
