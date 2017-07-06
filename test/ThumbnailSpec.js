@@ -28,8 +28,9 @@ describe('<Thumbnail>', () => {
   });
 
   it('Should have a thumbnail class and be a div', () => {
+    const {href, ...otherProps} = defaultProps;
     let instance = ReactTestUtils.renderIntoDocument(
-      <Thumbnail src="#" alt="test" />
+      <Thumbnail {...otherProps} />
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bthumbnail\b/));
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');

@@ -6,10 +6,25 @@ import SafeAnchor from './SafeAnchor';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
+  /**
+   * src property that is passed down to the image inside this component
+   */
   src: PropTypes.string,
+  /**
+   * alt property that is passed down to the image inside this component
+   */
   alt: PropTypes.string,
+  /**
+   * href property that is passed down to the image inside this component
+   */
   href: PropTypes.string,
+  /**
+   * onError callback that is passed down to the image inside this component
+   */
   onError: PropTypes.func,
+  /**
+   * onLoad callback that is passed down to the image inside this component
+   */
   onLoad: PropTypes.func
 };
 
