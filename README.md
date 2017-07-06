@@ -15,6 +15,7 @@ See the [documentation][documentation] with live editable examples.
 ## Related modules
 
 - [react-router-bootstrap][react-router-bootstrap] – Integration with [React Router][react-router]
+- [React Bootstrap Extended][react-bootstrap-extended] - A version of React Bootstrap where each component has extra props that map to bootstrap's utility classes. For example, `pullRight` adds the class `pull-right` to a component.
 
 ## Local setup
 
@@ -43,6 +44,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [react-router-bootstrap]: https://github.com/react-bootstrap/react-router-bootstrap
 [react-router]: https://github.com/reactjs/react-router
+[react-bootstrap-extended]: https://github.com/rbalicki2/react-bootstrap-extended
 
 [thinkful-badge]: https://tf-assets-staging.s3.amazonaws.com/badges/thinkful_repo_badge.svg
 [thinkful]: http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap
