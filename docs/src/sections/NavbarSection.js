@@ -42,8 +42,8 @@ export default function NavbarSection() {
       <h3><Anchor id="navbars-mobile-friendly">Responsive Navbars</Anchor></h3>
       <p>
         To have a mobile-friendly Navbar, add a <code>Navbar.Toggle</code> to your Header and wrap your
-        Navs in a <code>Navbar.Collapse</code> component. The <code>Navbar</code> will automatically wire
-        the toggle and collapse together!
+        Navs in a <code>Navbar.Collapse</code> component. The <code>Navbar</code> will automatically combine
+        the toggle and collapse.
       </p>
       <p>
         Set the <code>defaultExpanded</code> prop to make the Navbar start expanded. Set <code>collapseOnSelect</code>
