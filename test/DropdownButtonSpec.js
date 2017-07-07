@@ -153,6 +153,27 @@ describe('<DropdownButton>', () => {
     node.className.should.match(/\bopen\b/);
   });
 
+  it('dropdown is open if defaultOpen is true and open isn\'t defined', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="Simple Dropdown" defaultOpen id="test-id">
+        <MenuItem eventKey="1">Item 1</MenuItem>
+      </DropdownButton>
+    );
+    const node = ReactDOM.findDOMNode(instance);
+    node.className.should.match(/\bopen\b/);
+  });
+
+  it('dropdown is closed if defaultOpen is true and open is false', () => {
+    const handleSelect = () => {};
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="Simple Dropdown" defaultOpen open={false} onToggle={handleSelect} id="test-id">
+        <MenuItem eventKey="1">Item 1</MenuItem>
+      </DropdownButton>
+    );
+    const node = ReactDOM.findDOMNode(instance);
+    node.className.should.not.match(/\bopen\b/);
+  });
+
   it('Should pass props to button', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="Title" bsStyle="primary" id="testId" disabled>
@@ -207,4 +228,6 @@ describe('<DropdownButton>', () => {
     expect(toggle.props.onMouseEnter).to.not.exist;
     expect(toggle.props.onMouseLeave).to.not.exist;
   });
+
+
 });
