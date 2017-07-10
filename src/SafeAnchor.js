@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
+import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
   href: PropTypes.string,
@@ -67,6 +68,9 @@ class SafeAnchor extends React.Component {
   render() {
     const { componentClass: Component, disabled, onKeyDown, ...props } = this.props;
 
+    const handleKeyDown = Component === 'a' ?
+      createChainedFunction(this.handleKeyDown, onKeyDown) : onKeyDown;
+
     if (isTrivialHref(props.href)) {
       props.role = props.role || 'button';
       // we want to make sure there is a href attribute on the node
@@ -83,7 +87,7 @@ class SafeAnchor extends React.Component {
       <Component
         {...props}
         onClick={this.handleClick}
-        onKeyDown={onKeyDown || this.handleKeyDown}
+        onKeyDown={handleKeyDown}
       />
     );
   }
