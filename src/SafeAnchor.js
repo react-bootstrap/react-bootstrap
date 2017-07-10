@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
-import keycode from 'keycode';
 
 const propTypes = {
   href: PropTypes.string,
@@ -59,7 +58,8 @@ class SafeAnchor extends React.Component {
   }
 
   handleKeyDown(event) {
-    if (keycode(event) === 'space') {
+    event.preventDefault();
+    if (event.key === ' ') {
       this.handleClick(event);
     }
   }

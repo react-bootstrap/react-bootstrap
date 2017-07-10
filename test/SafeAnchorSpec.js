@@ -45,7 +45,7 @@ describe('SafeAnchor', () => {
     tsp(<SafeAnchor onClick={handleClick} />)
       .shallowRender()
       .find('a')
-      .trigger('keyDown', { keyCode: 32, preventDefault() {} });
+      .trigger('keyDown', { key: ' ', preventDefault() {} });
 
     handleClick.should.have.been.calledOnce;
   });
