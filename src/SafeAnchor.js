@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
+import keycode from 'keycode';
 
 const propTypes = {
   href: PropTypes.string,
   onClick: PropTypes.func,
+  onKeyDown: PropTypes.func,
   disabled: PropTypes.bool,
   role: PropTypes.string,
   tabIndex: PropTypes.oneOfType([
@@ -36,6 +38,7 @@ class SafeAnchor extends React.Component {
     super(props, context);
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   handleClick(event) {
@@ -55,8 +58,14 @@ class SafeAnchor extends React.Component {
     }
   }
 
+  handleKeyDown(event) {
+    if (keycode(event) === 'space') {
+      this.handleClick(event);
+    }
+  }
+
   render() {
-    const { componentClass: Component, disabled, ...props } = this.props;
+    const { componentClass: Component, disabled, onKeyDown, ...props } = this.props;
 
     if (isTrivialHref(props.href)) {
       props.role = props.role || 'button';
@@ -74,6 +83,7 @@ class SafeAnchor extends React.Component {
       <Component
         {...props}
         onClick={this.handleClick}
+        onKeyDown={onKeyDown || this.handleKeyDown}
       />
     );
   }
