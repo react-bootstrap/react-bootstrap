@@ -59,8 +59,8 @@ class SafeAnchor extends React.Component {
   }
 
   handleKeyDown(event) {
-    event.preventDefault();
     if (event.key === ' ') {
+      event.preventDefault();
       this.handleClick(event);
     }
   }
@@ -68,8 +68,7 @@ class SafeAnchor extends React.Component {
   render() {
     const { componentClass: Component, disabled, onKeyDown, ...props } = this.props;
 
-    const handleKeyDown = Component === 'a' ?
-      createChainedFunction(this.handleKeyDown, onKeyDown) : onKeyDown;
+    const handleKeyDown = createChainedFunction(this.handleKeyDown, onKeyDown);
 
     if (isTrivialHref(props.href)) {
       props.role = props.role || 'button';
