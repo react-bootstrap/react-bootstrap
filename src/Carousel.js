@@ -17,6 +17,10 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 const propTypes = {
   slide: PropTypes.bool,
   indicators: PropTypes.bool,
+  /**
+   * The amount of time to delay between automatically cycling an item.
+   * If `null`, carousel will not automatically cycle.
+   */
   interval: PropTypes.number,
   controls: PropTypes.bool,
   pauseOnHover: PropTypes.bool,
