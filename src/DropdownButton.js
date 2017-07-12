@@ -22,7 +22,7 @@ const propTypes = {
 
 class DropdownButton extends React.Component {
   render() {
-    const { bsSize, bsStyle, title, children, ...props } = this.props;
+    const { bsSize, bsStyle, title, children, defaultOpen, ...props } = this.props;
 
     const [dropdownProps, toggleProps] =
       splitComponentProps(props, Dropdown.ControlledComponent);
@@ -32,6 +32,7 @@ class DropdownButton extends React.Component {
         {...dropdownProps}
         bsSize={bsSize}
         bsStyle={bsStyle}
+        defaultOpen={defaultOpen}
       >
         <Dropdown.Toggle
           {...toggleProps}
