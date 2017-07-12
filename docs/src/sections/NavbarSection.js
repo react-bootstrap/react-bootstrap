@@ -33,7 +33,7 @@ export default function NavbarSection() {
         <h4>Additional Import Options</h4>
         <p>
           The Navbar Header, Toggle, Brand, and Collapse components are available as static properties
-          on the <code>{"<Navbar/>"}</code> component but you can also import them directly from
+          on the <code>{"<Navbar>"}</code> component but you can also import them directly from
           the <code>/lib</code> directory
           like: <code>{'require("react-bootstrap/lib/NavbarHeader")'}</code>.
         </p>
@@ -41,9 +41,7 @@ export default function NavbarSection() {
 
       <h3><Anchor id="navbars-mobile-friendly">Responsive Navbars</Anchor></h3>
       <p>
-        To have a mobile friendly Navbar, Add a <code>Navbar.Toggle</code> to your Header and wrap your
-        Navs in a <code>Navbar.Collapse</code> component. The <code>Navbar</code> will automatically wire
-        the toggle and collapse together!
+        To have a mobile-friendly Navbar, add a <code>Navbar.Toggle</code> to your Header and wrap your <code>Nav</code>s in a <code>Navbar.Collapse</code> component. The <code>Navbar</code> will automatically make the toggle control the collapse.
       </p>
       <p>
         Set the <code>defaultExpanded</code> prop to make the Navbar start expanded. Set <code>collapseOnSelect</code> to make the Navbar collapse automatically when the user selects an item. You can also finely control the collapsing behavior by using the <code>expanded</code> and <code>onToggle</code> props.
