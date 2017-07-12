@@ -7,6 +7,7 @@
 - **Bugfix:** Properly handle `onLoad` and `onError` on `<Thumbnail>` ([#2687])
 - **Bugfix:** Properly handle `defaultOpen` on dropdown button components ([#2702])
 - **Chore:** Switch from react-prop-types to prop-types-extra ([#2621])
+- **Chore:** Rebuild UMD bundle with updated dependencies
 
 [v0.31.1]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.31.0...v0.31.1
 [#2252]: https://github.com/react-bootstrap/react-bootstrap/pull/2252
