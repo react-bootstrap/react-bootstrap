@@ -19,7 +19,7 @@ const propTypes = {
   indicators: PropTypes.bool,
   /**
    * The amount of time to delay between automatically cycling an item.
-   * If `0`, carousel will not automatically cycle.
+   * If `null`, carousel will not automatically cycle.
    */
   interval: PropTypes.number,
   controls: PropTypes.bool,
