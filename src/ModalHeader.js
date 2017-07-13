@@ -14,7 +14,7 @@ const propTypes = {
    * button. It is used for Assistive Technology when the label text is not
    * readable.
    */
-  closeLabel: PropTypes.string,
+  closeLabel: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]),
 
   /**
    * Specify whether the Component should contain a close button

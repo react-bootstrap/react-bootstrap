@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 import React from 'react';
 
 const propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.oneOfType([ PropTypes.string, PropTypes.object ]).isRequired,
   onClick: PropTypes.func,
 };
 
