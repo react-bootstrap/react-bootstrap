@@ -98,4 +98,16 @@ describe('<CloseButton>', () => {
     );
     assert.equal(ReactDOM.findDOMNode(instance).children[1].innerHTML, label);
   });
+
+  it('Should have a custom component as label', () => {
+    let noOp = () => {};
+    let label = <strong>Close Item</strong>;
+    let instance = ReactTestUtils.renderIntoDocument(
+      <CloseButton
+        onClick={noOp}
+        label={label}
+      />
+    );
+    assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
+  })
 });
