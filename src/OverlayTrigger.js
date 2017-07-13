@@ -84,10 +84,6 @@ const propTypes = {
   /**
    * @private
    */
-  target: PropTypes.oneOf([null]),
-   /**
-   * @private
-   */
   onHide: PropTypes.oneOf([null]),
   /**
    * @private
@@ -229,7 +225,7 @@ class OverlayTrigger extends React.Component {
         {...props}
         show={this.state.show}
         onHide={this.handleHide}
-        target={this}
+        target={this.props.target || this}
       >
         {overlay}
       </Overlay>
