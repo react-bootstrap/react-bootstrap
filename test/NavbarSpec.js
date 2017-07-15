@@ -256,7 +256,7 @@ describe('<Navbar>', () => {
     expect(toggle.className).to.not.match(/collapsed/);
   });
 
-  it('Should collapseOnSelect & fire exgerna href click', () => {
+  it('Should collapseOnSelect & fire external href click', () => {
     const navItemSpy = sinon.spy();
     const instance = ReactTestUtils.renderIntoDocument(
       <Navbar collapseOnSelect defaultExpanded>
