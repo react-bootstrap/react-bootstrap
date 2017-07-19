@@ -69,7 +69,7 @@ class ToggleButtonGroup extends React.Component {
   }
 
   render() {
-    const { children, type, name } = this.props;
+    const { children, type, name, className } = this.props;
 
     const values = this.getValues();
 
@@ -80,7 +80,7 @@ class ToggleButtonGroup extends React.Component {
 
     // the data attribute is required b/c twbs css uses it in the selector
     return (
-      <ButtonGroup data-toggle="buttons">
+      <ButtonGroup data-toggle="buttons" className={className}>
         {ValidChildren.map(children, child => {
           const { value, onChange } = child.props;
           const handler = () => this.handleToggle(value);
