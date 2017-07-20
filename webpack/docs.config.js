@@ -34,7 +34,7 @@ export default {
     path: './docs-built/assets',
     publicPath: options.debug ? `${webpackDevServerAddress}/assets/` : '/assets/',
   },
-
+  devServer: { stats: 'minimal' },
   module: {
     loaders: [
       { test: /\.js/, loader: `${reactHot}${jsLoader}`, exclude: /node_modules|Samples\.js/ },
