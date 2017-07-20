@@ -1,41 +1,30 @@
-const PaginationBasic = React.createClass({
-  getInitialState() {
-    return {
-      activePage: 1
-    };
-  },
 
-  handleSelect(eventKey) {
-    this.setState({
-      activePage: eventKey
-    });
-  },
+let active = 7;
+let items = [];
+for (let number = 1; number <= 10; number++) {
+  items.push(
+    <Pagination.Item active={number === active}>
+      {number}
+    </Pagination.Item>
+  );
+}
 
-  render() {
-    return (
-      <div>
-        <Pagination
-          bsSize="large"
-          items={10}
-          activePage={this.state.activePage}
-          onSelect={this.handleSelect} />
-        <br />
+const paginationBasic = (
+  <div>
+    <Pagination bsSize="large">
+      {items}
+    </Pagination>
+    <br />
 
-        <Pagination
-          bsSize="medium"
-          items={10}
-          activePage={this.state.activePage}
-          onSelect={this.handleSelect} />
-        <br />
+    <Pagination bsSize="medium">
+      {items}
+    </Pagination>
+    <br />
 
-        <Pagination
-          bsSize="small"
-          items={10}
-          activePage={this.state.activePage}
-          onSelect={this.handleSelect} />
-      </div>
-    );
-  }
-});
+    <Pagination bsSize="small">
+      {items}
+    </Pagination>
+  </div>
+);
 
-ReactDOM.render(<PaginationBasic />, mountNode);
+ReactDOM.render(paginationBasic, mountNode);
