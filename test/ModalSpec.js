@@ -109,6 +109,18 @@ describe('<Modal>', () => {
     assert.ok(baseModal.backdrop.className.match(/\bmymodal-backdrop\b/));
   });
 
+  it('Should use backdropClassName to add classes to the backdrop', () => {
+    const noOp = () => {};
+    const instance = render(
+      <Modal show backdropClassName="my-modal-backdrop" onHide={noOp}>
+        <strong>Message</strong>
+      </Modal>
+    , mountPoint);
+
+    const baseModal = ReactTestUtils.findRenderedComponentWithType(instance, BaseModal);
+    assert.ok(baseModal.backdrop.className.match(/\bmodal-backdrop my-modal-backdrop\b/));
+  });
+
   it('Should pass bsSize to the dialog', () => {
     const noOp = () => {};
     const instance = render(
