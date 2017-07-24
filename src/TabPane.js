@@ -19,7 +19,7 @@ const propTypes = {
   /**
    * Use animation when showing or hiding `<TabPane>`s. Use `false` to disable,
    * `true` to enable the default `<Fade>` animation or
-   * a `react-transition-group@2.0.0` `<Transition/>` component.
+   * a react-transition-group v2 `<Transition/>` component.
    */
   animation: PropTypes.oneOfType([PropTypes.bool, elementType]),
 
