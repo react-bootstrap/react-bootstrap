@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import invariant from 'invariant';
 import uncontrollable from 'uncontrollable';
 
@@ -52,7 +52,7 @@ class ToggleButtonGroup extends React.Component {
   handleToggle(value) {
     const { type, onChange } = this.props;
     const values = this.getValues();
-    const isActive = values.includes(value);
+    const isActive = values.indexOf(value) !== -1;
 
     if (type === 'radio') {
       if (!isActive) {
@@ -69,7 +69,7 @@ class ToggleButtonGroup extends React.Component {
   }
 
   render() {
-    const { children, type, name } = this.props;
+    const { children, type, name, ...props } = this.props;
 
     const values = this.getValues();
 
@@ -78,9 +78,12 @@ class ToggleButtonGroup extends React.Component {
       'is set to "radio"'
     );
 
+    delete props.onChange;
+    delete props.value;
+
     // the data attribute is required b/c twbs css uses it in the selector
     return (
-      <ButtonGroup data-toggle="buttons">
+      <ButtonGroup {...props} data-toggle="buttons">
         {ValidChildren.map(children, child => {
           const { value, onChange } = child.props;
           const handler = () => this.handleToggle(value);
@@ -88,7 +91,7 @@ class ToggleButtonGroup extends React.Component {
           return React.cloneElement(child, {
             type,
             name: child.name || name,
-            checked: values.includes(value),
+            checked: values.indexOf(value) !== -1,
             onChange: chainFunction(onChange, handler),
           });
         })}
