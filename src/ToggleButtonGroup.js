@@ -91,7 +91,7 @@ class ToggleButtonGroup extends React.Component {
           return React.cloneElement(child, {
             type,
             name: child.name || name,
-            checked: values.includes(value),
+            checked: values.indexOf(value) !== -1,
             onChange: chainFunction(onChange, handler),
           });
         })}
