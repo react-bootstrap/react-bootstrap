@@ -79,6 +79,7 @@ class ToggleButtonGroup extends React.Component {
     );
 
     delete props.onChange;
+    delete props.value;
 
     // the data attribute is required b/c twbs css uses it in the selector
     return (
