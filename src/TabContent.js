@@ -11,8 +11,8 @@ const propTypes = {
 
   /**
    * Sets a default animation strategy for all children `<TabPane>`s. Use
-   * `false` to disable, `true` to enable the default `<Fade>` animation or any
-   * `<Transition>` component.
+   * `false` to disable, `true` to enable the default `<Fade>` animation or
+   * a react-transition-group v2 `<Transition/>` component.
    */
   animation: PropTypes.oneOfType([
     PropTypes.bool, elementType,
