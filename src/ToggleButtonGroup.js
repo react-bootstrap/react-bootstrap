@@ -52,7 +52,7 @@ class ToggleButtonGroup extends React.Component {
   handleToggle(value) {
     const { type, onChange } = this.props;
     const values = this.getValues();
-    const isActive = values.includes(value);
+    const isActive = values.indexOf(value) !== -1;
 
     if (type === 'radio') {
       if (!isActive) {
