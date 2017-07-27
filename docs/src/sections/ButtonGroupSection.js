@@ -9,7 +9,7 @@ export default function ButtonGroupSection() {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
-        <Anchor id="btn-groups">Button groups</Anchor> <small>ButtonGroup, ButtonToolbar</small>
+        <Anchor id="btn-groups">Button groups</Anchor> <small>ButtonGroup, ButtonToolbar, ToggleButtonGroup, ToggleButton</small>
       </h2>
 
       <p className="lead">Group a series of buttons together on a single line with the button group.</p>
@@ -32,11 +32,12 @@ export default function ButtonGroupSection() {
 
       <h3><Anchor id="btn-groups-checkbox-radio">Checkbox / Radio</Anchor></h3>
       <p>
-        For checkboxes or radio buttons styled as Buttons, you can can use
-        the <code>ToggleButtonGroup</code> and <code>ToggleButton</code> components.
+        For checkboxes or radio buttons styled as Bootstrap buttons, use the <code>{'<ToggleButtonGroup>'}</code> and <code>{'<ToggleButton>'}</code> components. The group behaves as a form component, where the value is an array of the selected <code>eventKey</code>s for checkbox groups or the selected <code>eventKey</code> for radio groups.
       </p>
-      <ReactPlayground codeText={Samples.ButtonGroupToggleCheckbox} />
-      <ReactPlayground codeText={Samples.ButtonGroupToggleRadio} />
+      <h4>Uncontrolled</h4>
+      <ReactPlayground codeText={Samples.ToggleButtonGroupUncontrolled} />
+      <h4>Controlled</h4>
+      <ReactPlayground codeText={Samples.ToggleButtonGroupControlled} />
 
       <h3><Anchor id="btn-groups-vertical">Vertical variation</Anchor></h3>
       <p>Make a set of buttons appear vertically stacked rather than horizontally. <strong
@@ -60,6 +61,9 @@ export default function ButtonGroupSection() {
 
       <h4><Anchor id="btn-groups-group-props">ButtonGroup</Anchor></h4>
       <PropTable component="ButtonGroup"/>
+
+      <h4><Anchor id="btn-groups-toolbar-props">ButtonToolbar</Anchor></h4>
+      <PropTable component="ButtonToolbar"/>
 
       <h4><Anchor id="btn-groups-toggle-group-props">ToggleButtonGroup</Anchor></h4>
       <PropTable component="ToggleButtonGroup"/>

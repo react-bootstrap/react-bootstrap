@@ -1,9 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import Button from './Button';
-import { bsClass, bsSizes, getClassSet, splitBsProps }
-  from './utils/bootstrapUtils';
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 class ButtonToolbar extends React.Component {
   render() {
@@ -22,6 +20,4 @@ class ButtonToolbar extends React.Component {
   }
 }
 
-export default bsClass('btn-toolbar',
-  bsSizes(Button.SIZES, ButtonToolbar)
-);
+export default bsClass('btn-toolbar', ButtonToolbar);

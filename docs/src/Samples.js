@@ -1,6 +1,6 @@
-/* eslint no-path-concat: 0, no-var: 0, key-spacing: 0 */
+/* eslint-disable no-path-concat, key-spacing */
 
-export default {
+module.exports = {
   AlertBasic:                    require('fs').readFileSync(__dirname + '/../examples/AlertBasic.js', 'utf8'),
   AlertDismissable:              require('fs').readFileSync(__dirname + '/../examples/AlertDismissable.js', 'utf8'),
   Badge:                         require('fs').readFileSync(__dirname + '/../examples/Badge.js', 'utf8'),
@@ -14,8 +14,6 @@ export default {
   ButtonGroupNested:             require('fs').readFileSync(__dirname + '/../examples/ButtonGroupNested.js', 'utf8'),
   ButtonGroupSizes:              require('fs').readFileSync(__dirname + '/../examples/ButtonGroupSizes.js', 'utf8'),
   ButtonGroupVertical:           require('fs').readFileSync(__dirname + '/../examples/ButtonGroupVertical.js', 'utf8'),
-  ButtonGroupToggleCheckbox:     require('fs').readFileSync(__dirname + '/../examples/ButtonGroupToggleCheckbox.js', 'utf8'),
-  ButtonGroupToggleRadio:        require('fs').readFileSync(__dirname + '/../examples/ButtonGroupToggleRadio.js', 'utf8'),
   ButtonLoading:                 require('fs').readFileSync(__dirname + '/../examples/ButtonLoading.js', 'utf8'),
   ButtonSizes:                   require('fs').readFileSync(__dirname + '/../examples/ButtonSizes.js', 'utf8'),
   ButtonTagTypes:                require('fs').readFileSync(__dirname + '/../examples/ButtonTagTypes.js', 'utf8'),
@@ -112,6 +110,8 @@ export default {
   TabsWithDropdown:              require('fs').readFileSync(__dirname + '/../examples/TabsWithDropdown.js', 'utf8'),
   ThumbnailAnchor:               require('fs').readFileSync(__dirname + '/../examples/ThumbnailAnchor.js', 'utf8'),
   ThumbnailDiv:                  require('fs').readFileSync(__dirname + '/../examples/ThumbnailDiv.js', 'utf8'),
+  ToggleButtonGroupControlled:   require('fs').readFileSync(__dirname + '/../examples/ToggleButtonGroupControlled.js', 'utf8'),
+  ToggleButtonGroupUncontrolled: require('fs').readFileSync(__dirname + '/../examples/ToggleButtonGroupUncontrolled.js', 'utf8'),
   TooltipBasic:                  require('fs').readFileSync(__dirname + '/../examples/TooltipBasic.js', 'utf8'),
   TooltipInCopy:                 require('fs').readFileSync(__dirname + '/../examples/TooltipInCopy.js', 'utf8'),
   TooltipPositioned:             require('fs').readFileSync(__dirname + '/../examples/TooltipPositioned.js', 'utf8'),
