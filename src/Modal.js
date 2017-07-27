@@ -247,7 +247,7 @@ class Modal extends React.Component {
           {...dialogProps}
           style={{ ...this.state.style, ...style }}
           className={classNames(className, inClassName)}
-          onClick={backdrop === true ? this.handleDialogClick : null}
+          onMouseDown={backdrop === true ? this.handleDialogClick : null}
         >
           {children}
         </Dialog>
