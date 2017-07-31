@@ -10,6 +10,7 @@ const propTypes = {
   * target property that is passed down to the image inside this component
   */
    target: PropTypes.string,
+  /**
    * src property that is passed down to the image inside this component
    */
  
@@ -45,7 +46,7 @@ class Thumbnail extends React.Component {
         {...elementProps}
         className={classNames(className, classes)}
       >
-        <img {...{src, alt, onError, onLoad,target}} />
+        <img {...{src, alt, onError, onLoad, target}} />
 
         {children && (
           <div className="caption">
