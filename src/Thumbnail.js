@@ -7,6 +7,10 @@ import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
+   * target property that is passed down to the image inside this component
+   */
+  target: PropTypes.string,
+  /**
    * src property that is passed down to the image inside this component
    */
   src: PropTypes.string,
