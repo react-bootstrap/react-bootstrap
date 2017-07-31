@@ -7,13 +7,12 @@ import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
-  * target property that is passed down to the image inside this component
-  */
-   target: PropTypes.string,
+   * target property that is passed down to the image inside this component
+   */
+  target: PropTypes.string, 
   /**
    * src property that is passed down to the image inside this component
    */
- 
   src: PropTypes.string,
   /**
    * alt property that is passed down to the image inside this component
@@ -35,7 +34,7 @@ const propTypes = {
 
 class Thumbnail extends React.Component {
   render() {
-    const { src,target, alt, onError, onLoad, className, children, ...props } = this.props;
+    const { src, alt, onError, onLoad, className, children, ...props } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const Component = elementProps.href ? SafeAnchor : 'div';
