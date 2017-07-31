@@ -46,7 +46,7 @@ class Thumbnail extends React.Component {
         {...elementProps}
         className={classNames(className, classes)}
       >
-        <img {...{src, alt, onError, onLoad, target}} />
+        <img {...{src, alt, onError, onLoad}} />
 
         {children && (
           <div className="caption">
