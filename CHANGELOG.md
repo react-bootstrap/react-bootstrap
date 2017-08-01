@@ -1,3 +1,17 @@
+## [v0.31.2]
+> 2017-08-01
+
+- **Feature:** Support `backdropClassName` on `<Modal>` ([#2723])
+- **Bugfix:** Export `<ToggleButton>` and `<ToggleButtonGroup>` ([#2704])
+- **Bugfix:** Pass through props on `<ToggleButtonGroup>` ([#2731])
+- **Bugfix:** Fix `<ToggleButtonGroup>` in pre-ES2016 environments ([#2731])
+
+[v0.31.2]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.31.1...v0.31.2
+[#2704]: https://github.com/react-bootstrap/react-bootstrap/pull/2704
+[#2723]: https://github.com/react-bootstrap/react-bootstrap/pull/2723
+[#2731]: https://github.com/react-bootstrap/react-bootstrap/pull/2731
+
+
 ## [v0.31.1]
 > 2017-07-12
 
