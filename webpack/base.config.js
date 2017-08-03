@@ -24,7 +24,7 @@ const baseConfig = {
 
   module: {
     rules: [
-      { test: /\.js/, use: [jsLoader], exclude: /node_modules/ }
+      { test: /\.js/, use: jsLoader, exclude: /node_modules/ }
     ]
   },
 
