@@ -1,5 +1,5 @@
 const accordionInstance = (
-  <PanelGroup accordiaon id="accordion-example">
+  <PanelGroup accordion id="accordion-example">
     <Panel eventKey="1">
       <Panel.Heading>
         <Panel.Title toggle>Collapsible Group Item #1</Panel.Title>
