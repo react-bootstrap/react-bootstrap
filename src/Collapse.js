@@ -200,7 +200,7 @@ class Collapse extends React.Component {
         className={classNames(className, classes)}
         exitedClassName="collapse"
         exitingClassName="collapsing"
-        enteredClassName="collapse in"
+        enteredClassName="collapse show"
         enteringClassName="collapsing"
         onEnter={handleEnter}
         onEntering={handleEntering}
