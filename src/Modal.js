@@ -213,7 +213,7 @@ class Modal extends React.Component {
     const [baseModalProps, dialogProps] =
       splitComponentProps(props, BaseModal);
 
-    const inClassName = show && !animation && 'in';
+    const inClassName = show && !animation && 'show';
 
     return (
       <BaseModal

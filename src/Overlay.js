@@ -76,7 +76,7 @@ class Overlay extends React.Component {
 
     if (!transition) {
       child = cloneElement(children, {
-        className: classNames(children.props.className, 'in'),
+        className: classNames(children.props.className, 'show'),
       });
     } else {
       child = children;

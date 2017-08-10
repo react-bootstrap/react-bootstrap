@@ -49,13 +49,13 @@ describe('Fade', () => {
 
   });
 
-  it('Should add "in" class when entering', done => {
+  it('Should add "show" class when entering', done => {
     instance = ReactTestUtils.renderIntoDocument(
       <Component>Panel content</Component>
     );
 
     function onEntering() {
-      assert.equal(ReactDOM.findDOMNode(instance).className, 'fade in');
+      assert.equal(ReactDOM.findDOMNode(instance).className, 'fade show');
       done();
     }
 
@@ -65,7 +65,7 @@ describe('Fade', () => {
     instance.setState({ in: true, onEntering });
   });
 
-  it('Should remove "in" class when exiting', done => {
+  it('Should remove "show" class when exiting', done => {
     instance = ReactTestUtils.renderIntoDocument(
       <Component in>Panel content</Component>
     );
@@ -76,7 +76,7 @@ describe('Fade', () => {
     }
 
     assert.equal(
-      ReactDOM.findDOMNode(instance).className, 'fade in');
+      ReactDOM.findDOMNode(instance).className, 'fade show');
 
     instance.setState({ in: false, onExiting });
   });

@@ -101,7 +101,7 @@ describe('<Collapse>', () => {
       let node = ReactDOM.findDOMNode(instance);
 
       function onEntered() {
-        assert.equal(node.className, 'collapse in');
+        assert.equal(node.className, 'collapse show');
         done();
       }
 

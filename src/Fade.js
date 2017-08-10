@@ -65,8 +65,8 @@ class Fade extends React.Component {
       <Transition
         {...this.props}
         className={classNames(this.props.className, 'fade')}
-        enteredClassName="in"
-        enteringClassName="in"
+        enteredClassName="show"
+        enteringClassName="show"
       />
     );
   }
