@@ -22,7 +22,9 @@
     "tdd": "karma start",
     "test": "npm run lint && npm run test-browser && npm run test-node",
     "test-browser": "cross-env NODE_ENV=test karma start --single-run",
-    "test-node": "mocha --compilers js:tools/babel-register.js test/server/*Spec.js"
+    "test-node": "mocha --compilers js:babel-register test/server/*Spec.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "lint-staged": {
     "*.js": [
@@ -102,8 +104,10 @@
     "release-script": "^1.0.2",
     "sinon": "^2.3.2",
     "sinon-chai": "^2.8.0",
-    "webpack": "^3.6.0",
-    "webpack-atoms": "^4.1.2"
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1",
+    "yargs": "^4.7.1",
+    "@storybook/react": "^3.2.3"
   },
   "dependencies": {
     "babel-runtime": "^6.11.6",
