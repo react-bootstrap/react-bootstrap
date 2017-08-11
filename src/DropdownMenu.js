@@ -119,7 +119,7 @@ class DropdownMenu extends React.Component {
         onRootClose={this.handleRootClose}
         event={rootCloseEvent}
       >
-        <ul
+        <div
           {...elementProps}
           role="menu"
           className={classNames(className, classes)}
@@ -134,7 +134,7 @@ class DropdownMenu extends React.Component {
               onSelect: createChainedFunction(child.props.onSelect, onSelect)
             })
           )}
-        </ul>
+        </div>
       </RootCloseWrapper>
     );
   }

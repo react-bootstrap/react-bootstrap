@@ -97,7 +97,6 @@ class MenuItem extends React.Component {
       header,
       onClick,
       className,
-      style,
       ...props
     } = this.props;
 
@@ -111,39 +110,36 @@ class MenuItem extends React.Component {
       elementProps.children = undefined;
 
       return (
-        <li
+        <div
           {...elementProps}
           role="separator"
-          className={classNames(className, 'divider')}
-          style={style}
+          className={classNames(className, prefix(bsProps, 'divider'))}
         />
       );
     }
 
     if (header) {
       return (
-        <li
+        <div
           {...elementProps}
           role="heading"
           className={classNames(className, prefix(bsProps, 'header'))}
-          style={style}
         />
       );
     }
 
     return (
-      <li
-        role="presentation"
-        className={classNames(className, { active, disabled })}
-        style={style}
-      >
-        <SafeAnchor
-          {...elementProps}
-          role="menuitem"
-          tabIndex="-1"
-          onClick={createChainedFunction(onClick, this.handleClick)}
-        />
-      </li>
+      <SafeAnchor
+        {...elementProps}
+        role="menuitem"
+        tabIndex="-1"
+        className={classNames(
+          className,
+          prefix(bsProps, 'item'),
+          { active, disabled }
+        )}
+        onClick={createChainedFunction(onClick, this.handleClick)}
+      />
     );
   }
 }
