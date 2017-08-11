@@ -32,6 +32,12 @@ const propTypes = {
   backdrop: PropTypes.oneOf(['static', true, false]),
 
   /**
+   * Add an optional extra class name to .modal-backdrop
+   * It could end up looking like class="modal-backdrop foo-modal-backdrop in".
+   */
+  backdropClassName: PropTypes.string,
+
+  /**
    * Close the modal when escape key is pressed
    */
   keyboard: PropTypes.bool,
@@ -217,6 +223,7 @@ class Modal extends React.Component {
   render() {
     const {
       backdrop,
+      backdropClassName,
       animation,
       show,
       dialogComponentClass: Dialog,

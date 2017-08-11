@@ -1,9 +1,13 @@
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 const propTypes = {
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+};
+
+const defaultProps = {
+  label: 'Close'
 };
 
 class CloseButton extends React.Component {
@@ -23,5 +27,6 @@ class CloseButton extends React.Component {
 }
 
 CloseButton.propTypes = propTypes;
+CloseButton.defaultProps = defaultProps;
 
 export default CloseButton;

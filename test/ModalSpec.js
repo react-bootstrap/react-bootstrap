@@ -1,7 +1,7 @@
 import events from 'dom-helpers/events';
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
 import BaseModal from 'react-overlays/lib/Modal';
 
 import Modal from '../src/Modal';
@@ -107,6 +107,18 @@ describe('<Modal>', () => {
 
     const baseModal = ReactTestUtils.findRenderedComponentWithType(instance, BaseModal);
     assert.ok(baseModal.backdrop.className.match(/\bmymodal-backdrop\b/));
+  });
+
+  it('Should use backdropClassName to add classes to the backdrop', () => {
+    const noOp = () => {};
+    const instance = render(
+      <Modal show backdropClassName="my-modal-backdrop" onHide={noOp}>
+        <strong>Message</strong>
+      </Modal>
+    , mountPoint);
+
+    const baseModal = ReactTestUtils.findRenderedComponentWithType(instance, BaseModal);
+    assert.ok(baseModal.backdrop.className.match(/\bmodal-backdrop my-modal-backdrop\b/));
   });
 
   it('Should pass bsSize to the dialog', () => {

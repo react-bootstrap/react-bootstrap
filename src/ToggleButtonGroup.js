@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import invariant from 'invariant';
 import uncontrollable from 'uncontrollable';
@@ -13,14 +14,14 @@ const propTypes = {
    *
    * __Required if `type` is set to `'radio'`__
    */
-  name: React.PropTypes.string,
+  name: PropTypes.string,
 
   /**
    * The value, or array of values, of the active (pressed) buttons
    *
    * @controllable onChange
    */
-  value: React.PropTypes.any,
+  value: PropTypes.any,
 
   /**
    * Callback fired when a button is pressed, depending on whether the `type`
@@ -29,13 +30,13 @@ const propTypes = {
    *
    * @controllable values
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
 
   /**
    * The input `type` of the rendered buttons, determines the toggle behavior
    * of the buttons
    */
-  type: React.PropTypes.oneOf(['checkbox', 'radio']).isRequired,
+  type: PropTypes.oneOf(['checkbox', 'radio']).isRequired,
 };
 
 const defaultProps = {
@@ -51,7 +52,7 @@ class ToggleButtonGroup extends React.Component {
   handleToggle(value) {
     const { type, onChange } = this.props;
     const values = this.getValues();
-    const isActive = values.includes(value);
+    const isActive = values.indexOf(value) !== -1;
 
     if (type === 'radio') {
       if (!isActive) {
@@ -68,7 +69,7 @@ class ToggleButtonGroup extends React.Component {
   }
 
   render() {
-    const { children, type, name } = this.props;
+    const { children, type, name, ...props } = this.props;
 
     const values = this.getValues();
 
@@ -77,9 +78,12 @@ class ToggleButtonGroup extends React.Component {
       'is set to "radio"'
     );
 
+    delete props.onChange;
+    delete props.value;
+
     // the data attribute is required b/c twbs css uses it in the selector
     return (
-      <ButtonGroup data-toggle="buttons">
+      <ButtonGroup {...props} data-toggle="buttons">
         {ValidChildren.map(children, child => {
           const { value, onChange } = child.props;
           const handler = () => this.handleToggle(value);
@@ -87,7 +91,7 @@ class ToggleButtonGroup extends React.Component {
           return React.cloneElement(child, {
             type,
             name: child.name || name,
-            checked: values.includes(value),
+            checked: values.indexOf(value) !== -1,
             onChange: chainFunction(onChange, handler),
           });
         })}

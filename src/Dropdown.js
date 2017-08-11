@@ -65,6 +65,8 @@ const propTypes = {
    */
   open: PropTypes.bool,
 
+  defaultOpen: PropTypes.bool,
+
   /**
    * A callback fired when the Dropdown wishes to change visibility. Called with the requested
    * `open` value, the DOM event, and the source that fired it: `'click'`,`'keydown'`,`'rootClose'`, or `'select'`.

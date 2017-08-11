@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
 import ReactDOM from 'react-dom';
+import ReactTestUtils from 'react-dom/test-utils';
 
 import Dropdown from '../src/Dropdown';
 import DropdownButton from '../src/DropdownButton';
@@ -177,6 +177,28 @@ describe('<DropdownButton>', () => {
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-toggle'));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-menu'));
+  });
+
+  it('should pass defaultOpen to `<Dropdown>`', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton
+        id="test-id"
+        title="title"
+        defaultOpen
+      >
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+      </DropdownButton>
+    );
+
+    const dropdown = ReactTestUtils.findRenderedComponentWithType(
+      instance, Dropdown,
+    );
+    const toggle = ReactTestUtils.findRenderedComponentWithType(
+      instance, DropdownToggle,
+    );
+
+    expect(dropdown.props.defaultOpen).to.equal(true);
+    expect(toggle.props.defaultOpen).to.not.exist;
   });
 
   it('should pass onMouseEnter and onMouseLeave to `<Dropdown>`', () => {

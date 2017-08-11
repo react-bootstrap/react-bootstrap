@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from './Button';
@@ -7,27 +8,27 @@ const propTypes = {
    * The `<input>` `type`
    * @type {[type]}
    */
-  type: React.PropTypes.oneOf(['checkbox', 'radio']),
+  type: PropTypes.oneOf(['checkbox', 'radio']),
 
   /**
    * The HTML input name, used to group like checkboxes or radio buttons together
    * semantically
    */
-  name: React.PropTypes.string,
+  name: PropTypes.string,
 
   /**
    * The checked state of the input, managed by `<ToggleButtonGroup>`` automatically
    */
-  checked: React.PropTypes.bool,
+  checked: PropTypes.bool,
 
   /**
    * [onChange description]
    */
-  onChange: React.PropTypes.func,
+  onChange: PropTypes.func,
   /**
    * The value of the input, and unique identifier in the ToggleButtonGroup
    */
-  value: React.PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
 };
 
 class ToggleButton extends React.Component {

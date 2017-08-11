@@ -1,3 +1,39 @@
+## [v0.31.2]
+> 2017-08-01
+
+- **Feature:** Support `backdropClassName` on `<Modal>` ([#2723])
+- **Bugfix:** Export `<ToggleButton>` and `<ToggleButtonGroup>` ([#2704])
+- **Bugfix:** Pass through props on `<ToggleButtonGroup>` ([#2731])
+- **Bugfix:** Fix `<ToggleButtonGroup>` in pre-ES2016 environments ([#2731])
+
+[v0.31.2]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.31.1...v0.31.2
+[#2704]: https://github.com/react-bootstrap/react-bootstrap/pull/2704
+[#2723]: https://github.com/react-bootstrap/react-bootstrap/pull/2723
+[#2731]: https://github.com/react-bootstrap/react-bootstrap/pull/2731
+
+
+## [v0.31.1]
+> 2017-07-12
+
+- **Feature:** Add `<ToggleButton>` and `<ToggleButtonGroup>` ([#2252], [#2648])
+- **Feature:** Add `<CloseButton>` to top-level API ([#2652])
+- **Bugfix:** Properly handle `title` on `<Checkbox>` and `<Radio>` ([#2635], [#2647])
+- **Bugfix:** Properly handle `onLoad` and `onError` on `<Thumbnail>` ([#2687])
+- **Bugfix:** Properly handle `defaultOpen` on dropdown button components ([#2702])
+- **Chore:** Switch from react-prop-types to prop-types-extra ([#2621])
+- **Chore:** Rebuild UMD bundle with updated dependencies
+
+[v0.31.1]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.31.0...v0.31.1
+[#2252]: https://github.com/react-bootstrap/react-bootstrap/pull/2252
+[#2621]: https://github.com/react-bootstrap/react-bootstrap/pull/2621
+[#2635]: https://github.com/react-bootstrap/react-bootstrap/pull/2635
+[#2647]: https://github.com/react-bootstrap/react-bootstrap/pull/2647
+[#2648]: https://github.com/react-bootstrap/react-bootstrap/pull/2648
+[#2652]: https://github.com/react-bootstrap/react-bootstrap/pull/2652
+[#2687]: https://github.com/react-bootstrap/react-bootstrap/pull/2687
+[#2702]: https://github.com/react-bootstrap/react-bootstrap/pull/2702
+
+
 ## [v0.31.0]
 > 2017-04-26
 

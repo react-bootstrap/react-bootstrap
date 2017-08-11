@@ -10,6 +10,7 @@ export Carousel from './Carousel';
 export CarouselItem from './CarouselItem';
 export Checkbox from './Checkbox';
 export Clearfix from './Clearfix';
+export CloseButton from './CloseButton';
 export ControlLabel from './ControlLabel';
 export Col from './Col';
 export Collapse from './Collapse';
@@ -62,6 +63,8 @@ export Table from './Table';
 export TabPane from './TabPane';
 export Tabs from './Tabs';
 export Thumbnail from './Thumbnail';
+export ToggleButton from './ToggleButton';
+export ToggleButtonGroup from './ToggleButtonGroup';
 export Tooltip from './Tooltip';
 export Well from './Well';
 
