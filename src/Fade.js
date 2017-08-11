@@ -70,8 +70,8 @@ const defaultProps = {
 };
 
 const fadeStyles = {
-  [ENTERING]: 'in',
-  [ENTERED]: 'in'
+  [ENTERING]: 'show',
+  [ENTERED]: 'show',
 };
 
 class Fade extends React.Component {
