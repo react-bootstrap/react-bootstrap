@@ -15,7 +15,7 @@ export const SIZE_MAP = {
   xs: 'xs'
 };
 
-export const DEVICE_SIZES = ['lg', 'md', 'sm', 'xs'];
+export const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm', 'xs'];
 
 export const State = {
   SUCCESS: 'success',

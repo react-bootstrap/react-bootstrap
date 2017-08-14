@@ -79,15 +79,23 @@ class Button extends React.Component {
 Button.propTypes = propTypes;
 Button.defaultProps = defaultProps;
 
-const variants = [...Object.values(State), Style.PRIMARY, Style.SECONDARY, Style.LIGHT, Style.DARK];
+const variants = [
+  ...Object.values(State),
+  Style.PRIMARY,
+  Style.SECONDARY,
+  Style.LIGHT,
+  Style.DARK
+];
 const outlineVariants = variants.map(v => `outline-${v}`);
 
-export default bsClass('btn',
-  bsSizes([Size.LARGE, Size.SMALL],
+export default bsClass(
+  'btn',
+  bsSizes(
+    [Size.LARGE, Size.SMALL],
     bsStyles(
       [...variants, ...outlineVariants, Style.LINK],
       Style.PRIMARY,
-      Button,
-    ),
-  ),
+      Button
+    )
+  )
 );
