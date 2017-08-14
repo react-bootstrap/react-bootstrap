@@ -6,169 +6,58 @@ import elementType from 'prop-types-extra/lib/elementType';
 import { bsClass, prefix, splitBsProps } from './utils/bootstrapUtils';
 import { DEVICE_SIZES } from './utils/StyleConfig';
 
+const column = PropTypes.oneOfType([
+  PropTypes.oneOf(['auto']),
+  PropTypes.number
+]);
+
 const propTypes = {
   componentClass: elementType,
 
   /**
    * The number of columns you wish to span
    *
-   * for Extra small devices Phones (<768px)
+   * for Extra small devices Phones (<576px)
    *
-   * class-prefix `col-xs-`
+   * class-prefix `col-`
    */
-  xs: PropTypes.number,
+  xs: column,
+
   /**
    * The number of columns you wish to span
    *
-   * for Small devices Tablets (≥768px)
+   * for Small devices Tablets (≥576px)
    *
    * class-prefix `col-sm-`
    */
-  sm: PropTypes.number,
+  sm: column,
+
   /**
    * The number of columns you wish to span
    *
-   * for Medium devices Desktops (≥992px)
+   * for Medium devices Desktops (≥768px)
    *
    * class-prefix `col-md-`
    */
-  md: PropTypes.number,
+  md: column,
+
+  /**
+   * The number of columns you wish to span
+   *
+   * for Large devices Desktops (≥992px)
+   *
+   * class-prefix `col-lg-`
+   */
+  lg: column,
+
   /**
    * The number of columns you wish to span
    *
    * for Large devices Desktops (≥1200px)
    *
-   * class-prefix `col-lg-`
+   * class-prefix `col-xl-`
    */
-  lg: PropTypes.number,
-  /**
-   * Hide column
-   *
-   * on Extra small devices Phones
-   *
-   * adds class `hidden-xs`
-   */
-  xsHidden: PropTypes.bool,
-  /**
-   * Hide column
-   *
-   * on Small devices Tablets
-   *
-   * adds class `hidden-sm`
-   */
-  smHidden: PropTypes.bool,
-  /**
-   * Hide column
-   *
-   * on Medium devices Desktops
-   *
-   * adds class `hidden-md`
-   */
-  mdHidden: PropTypes.bool,
-  /**
-   * Hide column
-   *
-   * on Large devices Desktops
-   *
-   * adds class `hidden-lg`
-   */
-  lgHidden: PropTypes.bool,
-  /**
-   * Move columns to the right
-   *
-   * for Extra small devices Phones
-   *
-   * class-prefix `col-xs-offset-`
-   */
-  xsOffset: PropTypes.number,
-  /**
-   * Move columns to the right
-   *
-   * for Small devices Tablets
-   *
-   * class-prefix `col-sm-offset-`
-   */
-  smOffset: PropTypes.number,
-  /**
-   * Move columns to the right
-   *
-   * for Medium devices Desktops
-   *
-   * class-prefix `col-md-offset-`
-   */
-  mdOffset: PropTypes.number,
-  /**
-   * Move columns to the right
-   *
-   * for Large devices Desktops
-   *
-   * class-prefix `col-lg-offset-`
-   */
-  lgOffset: PropTypes.number,
-  /**
-   * Change the order of grid columns to the right
-   *
-   * for Extra small devices Phones
-   *
-   * class-prefix `col-xs-push-`
-   */
-  xsPush: PropTypes.number,
-  /**
-   * Change the order of grid columns to the right
-   *
-   * for Small devices Tablets
-   *
-   * class-prefix `col-sm-push-`
-   */
-  smPush: PropTypes.number,
-  /**
-   * Change the order of grid columns to the right
-   *
-   * for Medium devices Desktops
-   *
-   * class-prefix `col-md-push-`
-   */
-  mdPush: PropTypes.number,
-  /**
-   * Change the order of grid columns to the right
-   *
-   * for Large devices Desktops
-   *
-   * class-prefix `col-lg-push-`
-   */
-  lgPush: PropTypes.number,
-  /**
-   * Change the order of grid columns to the left
-   *
-   * for Extra small devices Phones
-   *
-   * class-prefix `col-xs-pull-`
-   */
-  xsPull: PropTypes.number,
-  /**
-   * Change the order of grid columns to the left
-   *
-   * for Small devices Tablets
-   *
-   * class-prefix `col-sm-pull-`
-   */
-  smPull: PropTypes.number,
-  /**
-   * Change the order of grid columns to the left
-   *
-   * for Medium devices Desktops
-   *
-   * class-prefix `col-md-pull-`
-   */
-  mdPull: PropTypes.number,
-  /**
-   * Change the order of grid columns to the left
-   *
-   * for Large devices Desktops
-   *
-   * class-prefix `col-lg-pull-`
-   */
-  lgPull: PropTypes.number
+  xl: column
 };
 
 const defaultProps = {
@@ -183,28 +72,28 @@ class Col extends React.Component {
     const classes = [];
 
     DEVICE_SIZES.forEach(size => {
-      function popProp(propSuffix, modifier) {
-        const propName = `${size}${propSuffix}`;
-        const propValue = elementProps[propName];
+      const propValue = elementProps[size];
 
-        if (propValue != null) {
-          classes.push(prefix(bsProps, `${size}${modifier}-${propValue}`));
-        }
+      if (propValue == null) return;
 
-        delete elementProps[propName];
+      if (size === 'xs') {
+        // col and col-4
+        classes.push(
+          propValue === true
+            ? bsProps.bsClass
+            : prefix(bsProps, `-${propValue}`)
+        );
+      } else {
+        // col-md-3
+        classes.push(prefix(bsProps, `${size}-${propValue}`));
       }
 
-      popProp('', '');
-      popProp('Offset', '-offset');
-      popProp('Push', '-push');
-      popProp('Pull', '-pull');
-
-      const hiddenPropName = `${size}Hidden`;
-      if (elementProps[hiddenPropName]) {
-        classes.push(`hidden-${size}`);
-      }
-      delete elementProps[hiddenPropName];
+      delete elementProps[size];
     });
+
+    if (!classes.length) {
+      classes.push(bsProps.bsClass); // plain 'col'
+    }
 
     return (
       <Component {...elementProps} className={classNames(className, classes)} />

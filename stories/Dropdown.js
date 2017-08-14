@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { storiesOf } from '@storybook/react';
-
 
 import DropdownButton from '../src/DropdownButton';
 import MenuItem from '../src/MenuItem';

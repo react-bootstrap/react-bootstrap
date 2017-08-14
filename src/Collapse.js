@@ -38,7 +38,7 @@ const collapseStyles = {
   [EXITED]: 'collapse',
   [EXITING]: 'collapsing',
   [ENTERING]: 'collapsing',
-  [ENTERED]: 'collapse show',
+  [ENTERED]: 'collapse show'
 };
 
 const propTypes = {

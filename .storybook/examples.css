@@ -1,0 +1,12 @@
+
+.example-grid .row >.col,
+.example-grid .row > [class^=col-] {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  background-color: rgba(86,61,124,.15);
+  border: 1px solid rgba(86,61,124,.2);
+}
+
+.example-grid .row + .row {
+  margin-top: 1rem;
+}
