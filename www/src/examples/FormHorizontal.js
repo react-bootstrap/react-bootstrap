@@ -1,7 +1,7 @@
 const formInstance = (
   <Form horizontal>
     <FormGroup controlId="formHorizontalEmail">
-      <Col componentClass={ControlLabel} sm={2}>
+      <Col componentClass={FormLabel} sm={2}>
         Email
       </Col>
       <Col sm={10}>
@@ -10,7 +10,7 @@ const formInstance = (
     </FormGroup>
 
     <FormGroup controlId="formHorizontalPassword">
-      <Col componentClass={ControlLabel} sm={2}>
+      <Col componentClass={FormLabel} sm={2}>
         Password
       </Col>
       <Col sm={10}>
