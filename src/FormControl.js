@@ -4,19 +4,25 @@ import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 import warning from 'warning';
 
-import FormControlFeedback from './FormControlFeedback';
-import FormControlStatic from './FormControlStatic';
+import InvalidFeedback from './InvalidFeedback';
 import {
-  prefix,
   bsClass,
   getClassSet,
+  prefix,
   splitBsProps,
   bsSizes
 } from './utils/bootstrapUtils';
-import { SIZE_MAP, Size } from './utils/StyleConfig';
+import { Size } from './utils/StyleConfig';
 
 const propTypes = {
   componentClass: elementType,
+  /**
+   * Render the input as plain text.
+   */
+  plaintext: PropTypes.bool,
+
+  /** @ignore */
+  readOnly: PropTypes.bool,
   /**
    * Only relevant if `componentClass` is `'input'`.
    */
@@ -32,7 +38,9 @@ const propTypes = {
    * <FormControl inputRef={ref => { this.input = ref; }} />
    * ```
    */
-  inputRef: PropTypes.func
+  inputRef: PropTypes.func,
+  isValid: PropTypes.bool.isRequired,
+  isInvalid: PropTypes.bool.isRequired
 };
 
 const defaultProps = {
@@ -54,7 +62,10 @@ class FormControl extends React.Component {
       id = controlId,
       inputRef,
       className,
-      bsSize,
+      isValid,
+      isInvalid,
+      plaintext,
+      readOnly,
       ...props
     } = this.props;
 
@@ -65,17 +76,13 @@ class FormControl extends React.Component {
       '`controlId` is ignored on `<FormControl>` when `id` is specified.'
     );
 
-    // input[type="file"] should not have .form-control.
     let classes;
-    if (type !== 'file') {
+    if (type === 'file') {
+      classes = { [prefix(bsProps, 'file')]: true };
+    } else if (plaintext) {
+      classes = { [prefix(bsProps, 'plaintext')]: true };
+    } else {
       classes = getClassSet(bsProps);
-    }
-
-    // If user provides a size, make sure to append it to classes as input-
-    // e.g. if bsSize is small, it will append input-sm
-    if (bsSize) {
-      const size = SIZE_MAP[bsSize] || bsSize;
-      classes[prefix({ bsClass: 'input' }, size)] = true;
     }
 
     return (
@@ -84,7 +91,13 @@ class FormControl extends React.Component {
         type={type}
         id={id}
         ref={inputRef}
-        className={classNames(className, classes)}
+        readOnly={readOnly || plaintext}
+        className={classNames(
+          className,
+          classes,
+          isValid && prefix(bsProps, 'is-valid'),
+          isInvalid && prefix(bsProps, 'is-invalid')
+        )}
       />
     );
   }
@@ -94,8 +107,7 @@ FormControl.propTypes = propTypes;
 FormControl.defaultProps = defaultProps;
 FormControl.contextTypes = contextTypes;
 
-FormControl.Feedback = FormControlFeedback;
-FormControl.Static = FormControlStatic;
+FormControl.Feedback = InvalidFeedback;
 
 export default bsClass(
   'form-control',

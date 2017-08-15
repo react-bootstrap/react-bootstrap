@@ -28,7 +28,7 @@ class FormExample extends React.Component {
           controlId="formBasicText"
           validationState={this.getValidationState()}
         >
-          <ControlLabel>Working example with validation</ControlLabel>
+          <FormLabel>Working example with validation</FormLabel>
           <FormControl
             type="text"
             value={this.state.value}

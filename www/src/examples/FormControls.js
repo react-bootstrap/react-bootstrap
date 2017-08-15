@@ -1,7 +1,7 @@
 function FieldGroup({ id, label, help, ...props }) {
   return (
     <FormGroup controlId={id}>
-      <ControlLabel>{label}</ControlLabel>
+      <FormLabel>{label}</FormLabel>
       <FormControl {...props} />
       {help && <HelpBlock>{help}</HelpBlock>}
     </FormGroup>
@@ -54,14 +54,14 @@ const formInstance = (
     </FormGroup>
 
     <FormGroup controlId="formControlsSelect">
-      <ControlLabel>Select</ControlLabel>
+      <FormLabel>Select</FormLabel>
       <FormControl componentClass="select" placeholder="select">
         <option value="select">select</option>
         <option value="other">...</option>
       </FormControl>
     </FormGroup>
     <FormGroup controlId="formControlsSelectMultiple">
-      <ControlLabel>Multiple select</ControlLabel>
+      <FormLabel>Multiple select</FormLabel>
       <FormControl componentClass="select" multiple>
         <option value="select">select (multiple)</option>
         <option value="other">...</option>
@@ -69,12 +69,12 @@ const formInstance = (
     </FormGroup>
 
     <FormGroup controlId="formControlsTextarea">
-      <ControlLabel>Textarea</ControlLabel>
+      <FormLabel>Textarea</FormLabel>
       <FormControl componentClass="textarea" placeholder="textarea" />
     </FormGroup>
 
     <FormGroup>
-      <ControlLabel>Static text</ControlLabel>
+      <FormLabel>Static text</FormLabel>
       <FormControl.Static>email@example.com</FormControl.Static>
     </FormGroup>
 

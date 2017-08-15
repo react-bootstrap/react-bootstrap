@@ -11,7 +11,7 @@ export CarouselItem from './CarouselItem';
 export Checkbox from './Checkbox';
 export Clearfix from './Clearfix';
 export CloseButton from './CloseButton';
-export ControlLabel from './ControlLabel';
+export FormLabel from './FormLabel';
 export Col from './Col';
 export Collapse from './Collapse';
 export Dropdown from './Dropdown';
