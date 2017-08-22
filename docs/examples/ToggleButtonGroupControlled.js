@@ -22,6 +22,7 @@ class ToggleButtonGroupControlled extends React.Component {
         <ToggleButton value={2}>Checkbox 2</ToggleButton>
 
         <ToggleButton value={3}>Checkbox 3 (pre-checked)</ToggleButton>
+        <ToggleButton value={4} disabled>Checkbox 4 (disabled)</ToggleButton>
       </ToggleButtonGroup>
     );
   }
