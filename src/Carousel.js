@@ -107,6 +107,15 @@ class Carousel extends React.Component {
           this.getDirection(activeIndex, nextProps.activeIndex),
       });
     }
+
+    if (nextProps.activeIndex == null &&
+        this.state.activeIndex >= nextProps.children.length) {
+      this.setState({
+        activeIndex: 0,
+        previousActiveIndex: null,
+        direction: null
+      });
+    }
   }
 
   componentDidMount() {
