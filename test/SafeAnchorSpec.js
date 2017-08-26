@@ -39,6 +39,17 @@ describe('SafeAnchor', () => {
     handleClick.should.have.been.calledOnce;
   });
 
+  it('provides onClick handler as onKeyDown handler for "space"', () => {
+    const handleClick = sinon.spy();
+
+    tsp(<SafeAnchor onClick={handleClick} />)
+      .shallowRender()
+      .find('a')
+      .trigger('keyDown', { key: ' ', preventDefault() {} });
+
+    handleClick.should.have.been.calledOnce;
+  });
+
   it('prevents default when no href is provided', () => {
     const handleClick = sinon.spy();
 
