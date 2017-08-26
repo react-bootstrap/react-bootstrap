@@ -22,6 +22,11 @@ const propTypes = {
   checked: PropTypes.bool,
 
   /**
+   * The disabled state of both the label and input
+   */
+  disabled: PropTypes.bool,
+
+  /**
    * [onChange description]
    */
   onChange: PropTypes.func,
@@ -35,6 +40,7 @@ class ToggleButton extends React.Component {
   render() {
     const {
       children, name, checked, type, onChange, value, ...props } = this.props;
+    const disabled = props.disabled;
 
     return (
       <Button
@@ -48,6 +54,7 @@ class ToggleButton extends React.Component {
           autoComplete="off"
           value={value}
           checked={!!checked}
+          disabled={!!disabled}
           onChange={onChange}
         />
 
