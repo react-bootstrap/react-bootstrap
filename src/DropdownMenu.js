@@ -39,13 +39,14 @@ class DropdownMenu extends React.Component {
   }
 
   handleKeyDown(event) {
+    const targetElement = event.target;
     switch (event.keyCode) {
       case keycode.codes.down:
-        this.focusNext();
+        this.focusNext(targetElement);
         event.preventDefault();
         break;
       case keycode.codes.up:
-        this.focusPrevious();
+        this.focusPrevious(targetElement);
         event.preventDefault();
         break;
       case keycode.codes.esc:
@@ -56,9 +57,9 @@ class DropdownMenu extends React.Component {
     }
   }
 
-  getItemsAndActiveIndex() {
+  getItemsAndActiveIndex(targetElement) {
     const items = this.getFocusableMenuItems();
-    const activeIndex = items.indexOf(document.activeElement);
+    const activeIndex = items.indexOf(targetElement);
 
     return { items, activeIndex };
   }
@@ -72,8 +73,8 @@ class DropdownMenu extends React.Component {
     return Array.from(node.querySelectorAll('[tabIndex="-1"]'));
   }
 
-  focusNext() {
-    const { items, activeIndex } = this.getItemsAndActiveIndex();
+  focusNext(targetElement) {
+    const { items, activeIndex } = this.getItemsAndActiveIndex(targetElement);
     if (items.length === 0) {
       return;
     }
@@ -82,8 +83,8 @@ class DropdownMenu extends React.Component {
     items[nextIndex].focus();
   }
 
-  focusPrevious() {
-    const { items, activeIndex } = this.getItemsAndActiveIndex();
+  focusPrevious(targetElement) {
+    const { items, activeIndex } = this.getItemsAndActiveIndex(targetElement);
     if (items.length === 0) {
       return;
     }
