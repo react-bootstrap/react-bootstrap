@@ -13,10 +13,15 @@ const propTypes = {
   defaultActiveKey: PropTypes.any,
   onSelect: PropTypes.func,
   role: PropTypes.string,
+  /**
+   * Sets whether you can have multiple panels expanded
+   */
+  multiExpanded: PropTypes.bool,
 };
 
 const defaultProps = {
   accordion: false,
+  multiExpanded: false,
 };
 
 // TODO: Use uncontrollable.
@@ -52,6 +57,7 @@ class PanelGroup extends React.Component {
       activeKey: propsActiveKey,
       className,
       children,
+      multiExpanded,
       ...props
     } = this.props;
 
@@ -83,7 +89,7 @@ class PanelGroup extends React.Component {
               headerRole: 'tab',
               panelRole: 'tabpanel',
               collapsible: true,
-              expanded: child.props.eventKey === activeKey,
+              expanded: multiExpanded ? null : (child.props.eventKey === activeKey),
               onSelect: createChainedFunction(
                 this.handleSelect, child.props.onSelect
               )

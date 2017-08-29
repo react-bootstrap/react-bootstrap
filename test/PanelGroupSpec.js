@@ -7,6 +7,48 @@ import PanelGroup from '../src/PanelGroup';
 import { getOne } from './helpers';
 
 describe('<PanelGroup>', () => {
+  it('Should allow for multiple panels to expand if multiExpanded prop is set to true', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <PanelGroup multiExpanded bsStyle="default" accordion>
+        <Panel header={"1"} eventKey="1">Panel 1</Panel>
+        <Panel header={"2"} eventKey="2">Panel 2</Panel>
+      </PanelGroup>
+    );
+
+    let panels = ReactTestUtils.scryRenderedComponentsWithType(instance, Panel);
+
+    panels.forEach((panel) => {
+      let anchorTag = ReactTestUtils.findRenderedDOMComponentWithTag(panel, 'a');
+      ReactTestUtils.Simulate.click(anchorTag);
+    });
+
+    panels.forEach((panel) => {
+      assert.equal(panel.props.expanded, null);
+      assert.equal(panel.state.expanded, true);
+    });
+  });
+
+  it('Should not allow for multiple panels to expand if multiExpanded prop is set to false', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <PanelGroup multiExpanded={false} bsStyle="default" accordion>
+        <Panel header={"1"} eventKey="1">Panel 1</Panel>
+        <Panel header={"2"} eventKey="2">Panel 2</Panel>
+      </PanelGroup>
+    );
+
+
+    let panels = ReactTestUtils.scryRenderedComponentsWithType(instance, Panel);
+
+    panels.forEach((panel) => {
+      let anchorTag = ReactTestUtils.findRenderedDOMComponentWithTag(panel, 'a');
+      ReactTestUtils.Simulate.click(anchorTag);
+    });
+    let panelOneExpanded = panels[0].props.expanded;
+    let panelTwoExpanded = panels[1].props.expanded;
+
+    assert.equal(panelOneExpanded !== panelTwoExpanded, true);
+  });
+
   it('Should pass bsStyle to Panels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup bsStyle="default">
