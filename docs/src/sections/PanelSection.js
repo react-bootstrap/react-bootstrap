@@ -44,6 +44,10 @@ export default function PanelSection() {
       <p><code>PanelGroup</code>s can also be uncontrolled where they manage their own state. The <code>defaultActiveKey</code> prop dictates which panel is open when initially.</p>
       <ReactPlayground codeText={Samples.PanelGroupUncontrolled} />
 
+      <h3><Anchor id="panels-multiple-expandable">Multiple Expandable Panels</Anchor></h3>
+      <p><code>PanelGroup</code>s can contain multiple expandable panels.</p>
+      <ReactPlayground codeText={Samples.PanelGroupMultipleExpandable} />
+
       <h3><Anchor id="panels-accordion">Accordions</Anchor></h3>
       <p><code>&lt;Accordion /&gt;</code> aliases <code>&lt;PanelGroup accordion /&gt;</code>.</p>
       <ReactPlayground codeText={Samples.PanelGroupAccordion} />
