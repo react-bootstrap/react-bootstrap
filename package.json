@@ -61,7 +61,7 @@
     "brfs": "^1.4.3",
     "chai": "^3.5.0",
     "child-process-promise": "^2.0.3",
-    "codecov": "^1.0.1",
+    "codecov": "^2.2.0",
     "codemirror": "^5.16.0",
     "colors": "^1.1.2",
     "cross-env": "^2.0.0",
