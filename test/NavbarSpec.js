@@ -256,6 +256,58 @@ describe('<Navbar>', () => {
     expect(toggle.className).to.not.match(/collapsed/);
   });
 
+  it('Should collapseOnSelect & fire external href click', () => {
+    const navItemSpy = sinon.spy();
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar collapseOnSelect defaultExpanded>
+        <Navbar.Header>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            <NavItem eventKey={1} href="https://www.google.com/" onClick={navItemSpy}>
+              <span className="link-text">
+                Option 1
+              </span>
+            </NavItem>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+
+    const link = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'link-text');
+
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(link));
+
+    expect(navItemSpy.getCall(0).args[0].isDefaultPrevented()).to.be.false;
+  });
+
+  it('Should fire external href click', () => {
+    const navItemSpy = sinon.spy();
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar defaultExpanded>
+        <Navbar.Header>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            <NavItem eventKey={1} href="https://www.google.com/" onClick={navItemSpy}>
+              <span className="link-text">
+                Option 1
+              </span>
+            </NavItem>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+
+    const link = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'link-text');
+
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(link));
+
+    expect(navItemSpy.getCall(0).args[0].isDefaultPrevented()).to.be.false;
+  });
+
   it('Should collapseOnSelect & fire Nav subcomponent onSelect event if expanded', () => {
     const toggleSpy = sinon.spy();
     const navItemSpy = sinon.spy();
