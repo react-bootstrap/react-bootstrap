@@ -353,4 +353,34 @@ describe('<Navbar>', () => {
 
     ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'test');
   });
+
+  it('Should open external href link in collapseOnSelect', () => {
+    const selectSpy = sinon.spy();
+    const navItemOnClick = sinon.stub();
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Navbar onSelect={selectSpy}>
+        <Navbar.Header>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            <NavItem eventKey={1} href="https://www.google.com" onClick={navItemOnClick} />
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    );
+
+    const link = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
+
+    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(link));
+
+    const event = navItemOnClick.getCall(0).args[0];
+    const preventDefaultSpy = sinon.spy(event.preventDefault);
+
+    expect(selectSpy).to.be.calledOnce;
+    expect(navItemOnClick).to.be.calledOnce;
+    expect(event.target.getAttribute('href')).to.be.equal('https://www.google.com');
+    expect(preventDefaultSpy).to.not.be.called;
+    expect(selectSpy).to.be.calledWith(1);
+  });
 });
