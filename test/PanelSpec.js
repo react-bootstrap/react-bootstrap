@@ -150,6 +150,26 @@ describe('<Panel>', () => {
     assert.ok(anchor.className.match(/\bcollapsed\b/), 'The anchor should have collapsed in its class name');
   });
 
+  it('Should not prevent default when onSelect handler is called', () => {
+    const selectSpy = sinon.spy();
+
+    const panelTitleOnClick = sinon.stub();
+    
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Panel collapsible onClick={panelTitleOnClick} onSelect={selectSpy} header="Click me" eventKey="1">
+        Panel content
+      </Panel>
+    );
+
+    const title = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'panel-title');
+    
+    ReactTestUtils.Simulate.click(title.firstChild);
+    const event = panelTitleOnClick.getCall(0).args[0];
+    const preventDefaultSpy = sinon.spy(event.preventDefault);
+    expect(selectSpy).to.be.calledOnce;
+    expect(preventDefaultSpy).to.not.be.called;
+  });
+
   it('Should call onSelect handler', (done) => {
     function handleSelect(key) {
       assert.equal(key, '1');
