@@ -54,8 +54,6 @@ class Panel extends React.Component {
 
     if (this.props.onSelect) {
       this.props.onSelect(this.props.eventKey, e);
-    } else {
-      e.preventDefault();
     }
 
     if (e.selected) {

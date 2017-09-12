@@ -33,8 +33,6 @@ class PanelGroup extends React.Component {
   }
 
   handleSelect(key, e) {
-    e.preventDefault();
-
     if (this.props.onSelect) {
       this.props.onSelect(key, e);
     }
