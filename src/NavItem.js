@@ -28,10 +28,13 @@ class NavItem extends React.Component {
   }
 
   handleClick(e) {
-    if (this.props.onSelect && !this.props.disabled) {
-      this.props.onSelect(this.props.eventKey, e);
-    } else if (this.props.disabled) {
+    if (this.props.disabled) {
       e.preventDefault();
+      return;
+    }
+
+    if (this.props.onSelect) {
+      this.props.onSelect(this.props.eventKey, e);
     }
   }
 
