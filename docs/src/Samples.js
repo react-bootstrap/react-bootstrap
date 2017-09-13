@@ -82,6 +82,7 @@ module.exports = {
   PanelContextual:               require('fs').readFileSync(__dirname + '/../examples/PanelContextual.js', 'utf8'),
   PanelGroupAccordion:           require('fs').readFileSync(__dirname + '/../examples/PanelGroupAccordion.js', 'utf8'),
   PanelGroupControlled:          require('fs').readFileSync(__dirname + '/../examples/PanelGroupControlled.js', 'utf8'),
+  PanelGroupMultipleExpandable:  require('fs').readFileSync(__dirname + '/../examples/PanelGroupMultipleExpandable.js', 'utf8'),
   PanelGroupUncontrolled:        require('fs').readFileSync(__dirname + '/../examples/PanelGroupUncontrolled.js', 'utf8'),
   PanelListGroupFill:            require('fs').readFileSync(__dirname + '/../examples/PanelListGroupFill.js', 'utf8'),
   PanelWithFooter:               require('fs').readFileSync(__dirname + '/../examples/PanelWithFooter.js', 'utf8'),

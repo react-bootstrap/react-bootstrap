@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "0.31.2",
+  "version": "0.31.3",
   "description": "Bootstrap 3 components built with React",
   "repository": {
     "type": "git",
@@ -61,7 +61,7 @@
     "brfs": "^1.4.3",
     "chai": "^3.5.0",
     "child-process-promise": "^2.0.3",
-    "codecov": "^1.0.1",
+    "codecov": "^2.2.0",
     "codemirror": "^5.16.0",
     "colors": "^1.1.2",
     "create-react-class": "^15.5.3",

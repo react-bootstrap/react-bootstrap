@@ -1,3 +1,16 @@
+## [v0.31.3]
+> 2017-09-06
+
+- **Bugfix:** Support `disabled` on `<ToggleButton>` ([#2760])
+- **Bugfix:** Handle space keydown events on `<SafeAnchor>` ([#2697])
+- **Bugfix:** Handle reducing number of items in uncontrolled carousels ([#2768])
+
+[v0.31.3]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.31.2...v0.31.3
+[#2697]: https://github.com/react-bootstrap/react-bootstrap/pull/2697
+[#2760]: https://github.com/react-bootstrap/react-bootstrap/pull/2760
+[#2768]: https://github.com/react-bootstrap/react-bootstrap/pull/2768
+
+
 ## [v0.31.2]
 > 2017-08-01
 

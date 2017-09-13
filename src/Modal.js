@@ -249,7 +249,9 @@ class Modal extends React.Component {
         transition={animation ? DialogTransition : undefined}
         backdrop={backdrop}
         backdropTransition={animation ? BackdropTransition : undefined}
-        backdropClassName={classNames(prefix(props, 'backdrop'), inClassName)}
+        backdropClassName={classNames(
+          prefix(props, 'backdrop'), backdropClassName, inClassName,
+        )}
         onEntering={createChainedFunction(onEntering, this.handleEntering)}
         onExited={createChainedFunction(onExited, this.handleExited)}
       >

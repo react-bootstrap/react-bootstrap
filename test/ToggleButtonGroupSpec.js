@@ -43,6 +43,19 @@ describe('ToggleButtonGroup', () => {
     .length.should.equal(2);
   });
 
+  it('should disable radios', () => {
+    tsp(
+      <ToggleButtonGroup type="radio" name="items">
+        <ToggleButtonGroup.Button value={1} disabled>Option 1</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={2} disabled>Option 2</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
+      </ToggleButtonGroup>
+    )
+    .render()
+    .find('input[disabled]')
+    .length.should.equal(2);
+  });
+
   it('should return an array of values', () => {
     const spy = sinon.spy();
     tsp(
