@@ -285,34 +285,6 @@ describe('<Navbar>', () => {
     expect(preventDefaultSpy).to.not.be.called;
   });
 
-  it('Should preventDefault on disabled nav element', () => {
-    const selectSpy = sinon.spy();
-    const navItemSpy = sinon.spy();
-    const disabled = true;
-    const disabledSpy = sinon.spy(e, "preventDefault");
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar onSelect={selectSpy} onClick={navItemSpy} >
-        <Navbar.Header>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <NavItem eventKey={1} href="https://www.google.com" disabled={disabled}/>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    );
-
-    const link = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
-
-    ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(link));
-    
-    expect(selectSpy).to.be.calledOnce;
-    expect(navItemSpy).to.be.calledOnce;
-    expect(event.target.getAttribute('href')).to.be.equal('https://www.google.com');
-    expect(disabledSpy).to.be.called;
-  });
-
   it('Should fire external href click', () => {
     const navItemSpy = sinon.spy();
     const instance = ReactTestUtils.renderIntoDocument(

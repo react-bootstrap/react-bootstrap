@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import tsp from 'teaspoon';
 
 tsp.fn.log = function log() {
-  console.log(this.dom());
   return this;
 };
 
