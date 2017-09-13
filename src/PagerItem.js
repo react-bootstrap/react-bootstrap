@@ -30,7 +30,7 @@ class PagerItem extends React.Component {
   handleSelect(e) {
     const { disabled, onSelect, eventKey } = this.props;
 
-    if (onSelect || disabled) {
+    if (onSelect && disabled) {
       e.preventDefault();
     }
 

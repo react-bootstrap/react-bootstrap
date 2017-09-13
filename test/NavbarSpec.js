@@ -309,7 +309,7 @@ describe('<Navbar>', () => {
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(link));
 
     expect(navItemSpy.getCall(0).args[0].isDefaultPrevented()).to.be.false;
-  })
+  });
 
   it('Should collapseOnSelect & fire Nav subcomponent onSelect event if expanded', () => {
     const toggleSpy = sinon.spy();
