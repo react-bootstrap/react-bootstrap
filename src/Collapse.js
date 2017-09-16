@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import css from 'dom-helpers/style';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Transition from 'react-overlays/lib/Transition';
+import Transition from 'react-transition-group/Transition';
 
 import capitalize from './utils/capitalize';
 import createChainedFunction from './utils/createChainedFunction';
@@ -48,7 +48,7 @@ const propTypes = {
    * Run the expand animation when the component mounts, if it is initially
    * shown
    */
-  transitionAppear: PropTypes.bool,
+  appear: PropTypes.bool,
 
   /**
    * Duration of the collapse animation in milliseconds, to ensure that
@@ -114,7 +114,7 @@ const defaultProps = {
   timeout: 300,
   mountOnEnter: false,
   unmountOnExit: false,
-  transitionAppear: false,
+  appear: false,
 
   dimension: 'height',
   getDimensionValue,
@@ -172,7 +172,7 @@ class Collapse extends React.Component {
 
   render() {
     const {
-      onEnter, onEntering, onEntered, onExit, onExiting, className, ...props
+      onEnter, onEntering, onEntered, onExit, onExiting, className, children, ...props
     } = this.props;
 
     delete props.dimension;
@@ -193,21 +193,28 @@ class Collapse extends React.Component {
       width: this._dimension() === 'width',
     };
 
+    const collapseStyles = {
+      entered: 'collapse in',
+      entering: 'collapsing',
+      exited: 'collapse',
+      exiting: 'collapsing',
+    };
+
     return (
-      <Transition
-        {...props}
-        aria-expanded={props.role ? props.in : null}
-        className={classNames(className, classes)}
-        exitedClassName="collapse"
-        exitingClassName="collapsing"
-        enteredClassName="collapse in"
-        enteringClassName="collapsing"
-        onEnter={handleEnter}
-        onEntering={handleEntering}
-        onEntered={handleEntered}
-        onExit={handleExit}
-        onExiting={handleExiting}
-      />
+        <Transition
+          {...props}
+          aria-expanded={props.role ? props.in : null}
+          onEnter={handleEnter}
+          onEntering={handleEntering}
+          onEntered={handleEntered}
+          onExit={handleExit}
+          onExiting={handleExiting} >
+          {(state, innerProps) => React.cloneElement(children, {
+            ...innerProps,
+            className: classNames(children.props.className, className, classes, collapseStyles[state])
+          })
+          }
+        </Transition>
     );
   }
 }

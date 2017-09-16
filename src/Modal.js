@@ -240,8 +240,7 @@ class Modal extends React.Component {
         backdropClassName={classNames(prefix(props, 'backdrop'), backdropClassName, inClassName)}
         containerClassName={prefix(props, 'open')}
         transition={animation ? Fade : undefined}
-        dialogTransitionTimeout={Modal.TRANSITION_DURATION}
-        backdropTransitionTimeout={Modal.BACKDROP_TRANSITION_DURATION}
+        backdropTransition={Modal.BackdropFade}
       >
         <Dialog
           {...dialogProps}
@@ -267,8 +266,11 @@ Modal.Footer = Footer;
 
 Modal.Dialog = ModalDialog;
 
-Modal.TRANSITION_DURATION = 300;
-Modal.BACKDROP_TRANSITION_DURATION = 150;
+Modal.BackdropFade = class BackdropFade extends Fade {};
+Modal.BackdropFade.defaultProps = {
+  ...Fade.defaultProps,
+  timeout: 150
+};
 
 export default bsClass('modal',
   bsSizes([Size.LARGE, Size.SMALL], Modal)
