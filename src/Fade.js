@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Transition from 'react-overlays/lib/Transition';
+import Transition from 'react-transition-group/Transition';
 
 const propTypes = {
   /**
@@ -23,7 +23,7 @@ const propTypes = {
    * Run the fade in animation when the component mounts, if it is initially
    * shown
    */
-  transitionAppear: PropTypes.bool,
+  appear: PropTypes.bool,
 
   /**
    * Duration of the fade animation in milliseconds, to ensure that finishing
@@ -63,18 +63,31 @@ const defaultProps = {
   timeout: 300,
   mountOnEnter: false,
   unmountOnExit: false,
-  transitionAppear: false,
+  appear: false,
+};
+
+const fadeStyles = {
+  entered: 'fade in',
+  entering: 'fade in',
+  exiting: 'fade',
+  exited: 'fade'
 };
 
 class Fade extends React.Component {
   render() {
+    const {
+      children, className, ...props
+    } = this.props;
+
     return (
       <Transition
-        {...this.props}
-        className={classNames(this.props.className, 'fade')}
-        enteredClassName="in"
-        enteringClassName="in"
-      />
+        {...props} >
+        {(state, innerProps) => React.cloneElement(children, {
+          ...innerProps,
+          className: classNames(children.props.className, className, fadeStyles[state])
+        })
+        }
+      </Transition>
     );
   }
 }
