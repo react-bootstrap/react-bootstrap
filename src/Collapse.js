@@ -201,19 +201,19 @@ class Collapse extends React.Component {
     };
 
     return (
-        <Transition
-          {...props}
-          aria-expanded={props.role ? props.in : null}
-          onEnter={handleEnter}
-          onEntering={handleEntering}
-          onEntered={handleEntered}
-          onExit={handleExit}
-          onExiting={handleExiting} >
-          {(state, innerProps) => React.cloneElement(children, {
-            ...innerProps,
-            className: classNames(children.props.className, className, classes, collapseStyles[state])
-          })
-          }
+      <Transition
+        {...props}
+        aria-expanded={props.role ? props.in : null}
+        onEnter={handleEnter}
+        onEntering={handleEntering}
+        onEntered={handleEntered}
+        onExit={handleExit}
+        onExiting={handleExiting} >
+        {(state, innerProps) => React.cloneElement(children, {
+          ...innerProps,
+          className: classNames(children.props.className, className, classes, collapseStyles[state])
+        })
+        }
         </Transition>
     );
   }
