@@ -53,10 +53,10 @@ const propTypes = {
   componentClass: elementType,
   /**
    * A callback fired when the `<Navbar>` body collapses or expands. Fired when
-   * a `<Navbar.Toggle>` is clicked and called with the new `navExpanded`
+   * a `<Navbar.Toggle>` is clicked and called with the new `expanded`
    * boolean value.
    *
-   * @controllable navExpanded
+   * @controllable expanded
    */
   onToggle: PropTypes.func,
   /**
