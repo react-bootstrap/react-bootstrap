@@ -1,0 +1,57 @@
+{
+  "name": "gatsby-starter-blog",
+  "description": "Starter Gatsby Blog",
+  "version": "1.0.0",
+  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby-starter-blog/issues"
+  },
+  "dependencies": {
+    "babel-register": "^6.24.1",
+    "gatsby": "^1.9.50",
+    "gatsby-link": "^1.6.18",
+    "gatsby-plugin-catch-links": "^1.0.8",
+    "gatsby-plugin-google-analytics": "^1.0.7",
+    "gatsby-plugin-manifest": "^1.0.8",
+    "gatsby-plugin-offline": "^1.0.9",
+    "gatsby-plugin-preact": "^1.0.12",
+    "gatsby-plugin-sharp": "^1.6.8",
+    "gatsby-remark-prismjs": "^1.2.8",
+    "gatsby-source-filesystem": "^1.5.1",
+    "gatsby-transformer-react-docgen": "^1.0.8",
+    "gatsby-transformer-remark": "^1.7.15",
+    "graphql": "^0.10.5",
+    "graphql-type-json": "^0.1.4",
+    "lodash": "^4.15.0",
+    "moment": "^2.14.1",
+    "react-helmet": "^5.2.0",
+    "safe-access": "^0.1.0",
+    "underscore.string": "^3.2.3"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.0.0"
+  },
+  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "main": "n/a",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+  },
+  "scripts": {
+    "dev": "gatsby develop",
+    "lint": "./node_modules/.bin/eslint --ext .js,.jsx --ignore-pattern public .",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "rm -rf ./.cache && node --inspect=11387 node_modules/.bin/gatsby develop",
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "deploy": "gatsby build --prefix-links && gh-pages -d public",
+    "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
+  },
+  "resolutions": {
+    "graphql": "0.10.5"
+  }
+}
