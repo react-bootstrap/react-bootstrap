@@ -14,7 +14,7 @@ describe('<Nav>', () => {
       <Nav bsStyle="pills" activeKey={1}>
         <NavItem eventKey={1}>Pill 1 content</NavItem>
         <NavItem eventKey={2}>Pill 2 content</NavItem>
-      </Nav>
+      </Nav>,
     );
 
     const items = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
@@ -28,7 +28,7 @@ describe('<Nav>', () => {
       <Nav bsStyle="tabs" activeKey={1}>
         <NavItem eventKey={1}>Tab 1 content</NavItem>
         <NavItem eventKey={2}>Tab 2 content</NavItem>
-      </Nav>
+      </Nav>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav'));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-tabs'));
@@ -39,7 +39,7 @@ describe('<Nav>', () => {
       <Nav bsStyle="tabs" stacked activeKey={1}>
         <NavItem eventKey={1}>Tab 1 content</NavItem>
         <NavItem eventKey={2}>Tab 2 content</NavItem>
-      </Nav>
+      </Nav>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-stacked'));
   });
@@ -49,7 +49,7 @@ describe('<Nav>', () => {
       <Nav bsStyle="tabs" justified activeKey={1}>
         <NavItem eventKey={1}>Tab 1 content</NavItem>
         <NavItem eventKey={2}>Tab 2 content</NavItem>
-      </Nav>
+      </Nav>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-justified'));
   });
@@ -59,7 +59,7 @@ describe('<Nav>', () => {
       <Nav bsStyle="tabs" pullRight activeKey={1}>
         <NavItem eventKey={1}>Tab 1 content</NavItem>
         <NavItem eventKey={2}>Tab 2 content</NavItem>
-      </Nav>
+      </Nav>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pull-right'));
   });
@@ -69,7 +69,7 @@ describe('<Nav>', () => {
       <Nav bsStyle="tabs" navbar pullRight activeKey={1}>
         <NavItem key={1}>Tab 1 content</NavItem>
         <NavItem key={2}>Tab 2 content</NavItem>
-      </Nav>
+      </Nav>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-right'));
@@ -81,11 +81,11 @@ describe('<Nav>', () => {
       done();
     }
     const instance = ReactTestUtils.renderIntoDocument(
-          <Nav bsStyle="tabs" activeKey={1} onSelect={handleSelect}>
-            <NavItem eventKey={1}>Tab 1 content</NavItem>
-            <NavItem eventKey={2}><span>Tab 2 content</span></NavItem>
-          </Nav>
-        );
+      <Nav bsStyle="tabs" activeKey={1} onSelect={handleSelect}>
+        <NavItem eventKey={1}>Tab 1 content</NavItem>
+        <NavItem eventKey={2}><span>Tab 2 content</span></NavItem>
+      </Nav>,
+    );
 
     const items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
 
@@ -97,7 +97,7 @@ describe('<Nav>', () => {
       <Nav bsStyle="pills" activeHref="#item2">
         <NavItem eventKey={1} href="#item1">Pill 1 content</NavItem>
         <NavItem eventKey={2} href="#item2">Pill 2 content</NavItem>
-      </Nav>
+      </Nav>,
     );
 
     const items = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
@@ -110,7 +110,7 @@ describe('<Nav>', () => {
     shouldWarn('justified navbar `Nav`s are not supported');
 
     ReactTestUtils.renderIntoDocument(
-      <Nav navbar justified />
+      <Nav navbar justified />,
     );
   });
 
@@ -126,7 +126,7 @@ describe('<Nav>', () => {
           <NavItem eventKey={3}>NavItem 3 content</NavItem>
           <NavItem eventKey={4} disabled>NavItem 4 content</NavItem>
           <NavItem eventKey={5}>NavItem 5 content</NavItem>
-        </Nav>
+        </Nav>,
       )
         .render(true);
       selectSpy = sinon.spy(activeKey => instance.props({ activeKey }));
@@ -198,7 +198,7 @@ describe('<Nav>', () => {
           <NavItem eventKey={-100}>NavItem 1 content</NavItem>
           <NavItem eventKey={0}>NavItem 2 content</NavItem>
           <NavItem eventKey={1}>NavItem 3 content</NavItem>
-        </Nav>
+        </Nav>,
       ).render(true);
 
       const anchors = instance.find('a').dom();
@@ -220,7 +220,7 @@ describe('<Nav>', () => {
           <NavItem eventKey={'a'}>NavItem 1 content</NavItem>
           <NavItem eventKey={'b'}>NavItem 2 content</NavItem>
           <NavItem eventKey={''}>NavItem 3 content</NavItem>
-        </Nav>
+        </Nav>,
       ).render(true);
 
       const anchors = instance.find('a').dom();
@@ -242,7 +242,7 @@ describe('<Nav>', () => {
         <Nav role="tablist" bsStyle="tabs" activeKey={1}>
           <NavItem key={1}>Tab 1 content</NavItem>
           <NavItem key={2}>Tab 2 content</NavItem>
-        </Nav>
+        </Nav>,
       );
 
       const ul = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'ul')[0];

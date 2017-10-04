@@ -4,13 +4,15 @@ const LinkWithTooltip = React.createClass({
 
     return (
       <OverlayTrigger
-        overlay={tooltip} placement="top"
-        delayShow={300} delayHide={150}
+        overlay={tooltip}
+        placement="top"
+        delayShow={300}
+        delayHide={150}
       >
         <a href={this.props.href}>{this.props.children}</a>
       </OverlayTrigger>
     );
-  }
+  },
 });
 
 const copyInstance = (

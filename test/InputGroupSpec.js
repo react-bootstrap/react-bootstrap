@@ -18,23 +18,23 @@ describe('<InputGroup>', () => {
         <InputGroup.Button className="my-button">
           <Button>Bar</Button>
         </InputGroup.Button>
-      </InputGroup>
+      </InputGroup>,
     )
       .render()
       .single('.input-group.my-input-group')
-        .end()
+      .end()
       .single('.input-group-addon.my-addon')
-        .tap($addon => expect($addon.text()).to.equal('Foo'))
-        .end()
+      .tap($addon => expect($addon.text()).to.equal('Foo'))
+      .end()
       .single('input.form-control[type="text"]')
-        .end()
+      .end()
       .single('.input-group-btn.my-button')
-        .single($.s`${Button}`);
+      .single($.s`${Button}`);
   });
 
   it('should support bsSize', () => {
     $(
-      <InputGroup bsSize="small" />
+      <InputGroup bsSize="small" />,
     )
       .shallowRender()
       .single('.input-group.input-group-sm');

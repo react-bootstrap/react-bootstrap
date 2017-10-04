@@ -1,5 +1,5 @@
 import React from 'react';
-import {IndexRoute, Route} from 'react-router';
+import { IndexRoute, Route } from 'react-router';
 
 import ComponentsPage from './ComponentsPage';
 import GettingStartedPage from './GettingStartedPage';

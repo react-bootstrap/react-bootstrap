@@ -1,7 +1,7 @@
 const FormExample = React.createClass({
   getInitialState() {
     return {
-      value: ''
+      value: '',
     };
   },
 
@@ -10,6 +10,7 @@ const FormExample = React.createClass({
     if (length > 10) return 'success';
     else if (length > 5) return 'warning';
     else if (length > 0) return 'error';
+    return null;
   },
 
   handleChange(e) {
@@ -35,7 +36,7 @@ const FormExample = React.createClass({
         </FormGroup>
       </form>
     );
-  }
+  },
 });
 
 ReactDOM.render(<FormExample />, mountNode);

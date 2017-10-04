@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-for */
+
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -69,7 +71,7 @@ class Checkbox extends React.Component {
         !validationState,
         '`validationState` is ignored on `<Checkbox inline>`. To display ' +
         'validation state on an inline checkbox, set `validationState` on a ' +
-        'parent `<FormGroup>` or other element instead.'
+        'parent `<FormGroup>` or other element instead.',
       );
 
       return (

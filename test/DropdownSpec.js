@@ -33,7 +33,7 @@ describe('<Dropdown>', () => {
       <MenuItem>Item 2</MenuItem>
       <MenuItem>Item 3</MenuItem>
       <MenuItem>Item 4</MenuItem>
-    </Dropdown.Menu>
+    </Dropdown.Menu>,
   ];
 
   const simpleDropdown = (
@@ -55,7 +55,7 @@ describe('<Dropdown>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown title="Dropup" dropup id="test-id">
         {dropdownChildren}
-      </Dropdown>
+      </Dropdown>,
     );
     const node = ReactDOM.findDOMNode(instance);
 
@@ -66,7 +66,7 @@ describe('<Dropdown>', () => {
 
   it('renders toggle with Dropdown.Toggle', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      simpleDropdown
+      simpleDropdown,
     );
 
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
@@ -94,7 +94,7 @@ describe('<Dropdown>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown.Toggle noCaret>
         Child Text
-      </Dropdown.Toggle>
+      </Dropdown.Toggle>,
     );
     const caretNode = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'caret');
 
@@ -109,7 +109,7 @@ describe('<Dropdown>', () => {
         <CustomMenu bsRole="menu">
           <MenuItem>Item 1</MenuItem>
         </CustomMenu>
-      </Dropdown>
+      </Dropdown>,
     );
 
     ReactTestUtils.scryRenderedComponentsWithType(instance, DropdownMenu).length.should.equal(0);
@@ -119,17 +119,15 @@ describe('<Dropdown>', () => {
   it('prop validation with multiple menus', () => {
     const props = {
       title: 'herpa derpa',
-      children: [(
-        <Dropdown.Toggle>Child Text</Dropdown.Toggle>
-      ), (
+      children: [
+        <Dropdown.Toggle>Child Text</Dropdown.Toggle>,
         <Dropdown.Menu>
           <MenuItem>Item 1</MenuItem>
-        </Dropdown.Menu>
-      ), (
+        </Dropdown.Menu>,
         <Dropdown.Menu>
           <MenuItem>Item 1</MenuItem>
-        </Dropdown.Menu>
-      )]
+        </Dropdown.Menu>,
+      ],
     };
 
     let err = BaseDropdown.propTypes.children(props, 'children', 'DropdownButton');
@@ -140,7 +138,7 @@ describe('<Dropdown>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown pullRight id="test-id">
         {dropdownChildren}
-      </Dropdown>
+      </Dropdown>,
     );
     const menu = ReactTestUtils.findRenderedComponentWithType(instance, DropdownMenu);
 
@@ -195,7 +193,7 @@ describe('<Dropdown>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown id="test-id" rootCloseEvent="mousedown">
         {dropdownChildren}
-      </Dropdown>
+      </Dropdown>,
     );
     const node = ReactDOM.findDOMNode(instance);
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
@@ -223,7 +221,7 @@ describe('<Dropdown>', () => {
         <Dropdown.Menu>
           <li>Some custom nonfocusable content</li>
         </Dropdown.Menu>
-      </Dropdown>
+      </Dropdown>,
     );
     const node = ReactDOM.findDOMNode(instance);
     const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
@@ -260,7 +258,7 @@ describe('<Dropdown>', () => {
 
   it('closes when child MenuItem is selected', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      simpleDropdown
+      simpleDropdown,
     );
 
     const node = ReactDOM.findDOMNode(instance);
@@ -280,7 +278,7 @@ describe('<Dropdown>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Dropdown open onToggle={handleSelect} id="test-id">
         {dropdownChildren}
-      </Dropdown>
+      </Dropdown>,
     );
 
     const node = ReactDOM.findDOMNode(instance);
@@ -301,15 +299,17 @@ describe('<Dropdown>', () => {
         super(props);
 
         this.state = {
-          open: false
+          open: false,
         };
       }
 
       render() {
         return (
           <div>
-            <button className="outer-button"
-              onClick={() => this.setState({open: !this.state.open})}>
+            <button
+              className="outer-button"
+              onClick={() => this.setState({ open: !this.state.open })}
+            >
               Outer button
             </button>
             <Dropdown
@@ -356,7 +356,7 @@ describe('<Dropdown>', () => {
             <Dropdown.Toggle />
             <Dropdown.Menu />
             <Dropdown.Menu />
-          </Dropdown>
+          </Dropdown>,
         );
       });
 
@@ -369,7 +369,7 @@ describe('<Dropdown>', () => {
           ReactTestUtils.renderIntoDocument(
             <Dropdown id="test">
               <Dropdown.Toggle />
-            </Dropdown>
+            </Dropdown>,
           );
         } catch (e) {} // eslint-disable-line no-empty
       });
@@ -380,7 +380,7 @@ describe('<Dropdown>', () => {
             <Dropdown.Toggle />
             <Dropdown.Toggle />
             <Dropdown.Menu />
-          </Dropdown>
+          </Dropdown>,
         );
       });
 
@@ -391,7 +391,7 @@ describe('<Dropdown>', () => {
         ReactTestUtils.renderIntoDocument(
           <Dropdown id="test">
             <Dropdown.Menu />
-          </Dropdown>
+          </Dropdown>,
         );
       });
     });
@@ -484,7 +484,7 @@ describe('<Dropdown>', () => {
         <Dropdown defaultOpen role="menuitem" id="test-id">
           {dropdownChildren}
         </Dropdown>
-      , focusableContainer);
+        , focusableContainer);
 
       const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
       const firstMenuItemAnchor = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A')[0];
@@ -496,7 +496,7 @@ describe('<Dropdown>', () => {
       document.activeElement.should.equal(buttonNode);
     });
 
-    it('when open and the key "tab" is pressed the menu is closed and focus is progress to the next focusable element', done => {
+    it('when open and the key "tab" is pressed the menu is closed and focus is progress to the next focusable element', (done) => {
       const instance = ReactDOM.render(
         <Grid>
           {simpleDropdown}
@@ -544,7 +544,7 @@ describe('<Dropdown>', () => {
       const instance = ReactTestUtils.renderIntoDocument(
         <Dropdown id="test-id" onToggle={spy}>
           {dropdownChildren}
-        </Dropdown>
+        </Dropdown>,
       );
       const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
@@ -564,7 +564,7 @@ describe('<Dropdown>', () => {
       const instance = ReactTestUtils.renderIntoDocument(
         <Dropdown id="test-id" onToggle={spy}>
           {dropdownChildren}
-        </Dropdown>
+        </Dropdown>,
       );
       const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
@@ -590,7 +590,7 @@ describe('<Dropdown>', () => {
           <Dropdown.Menu key="menu">
             <MenuItem eventKey={1}>Item 1</MenuItem>
           </Dropdown.Menu>
-        </Dropdown>
+        </Dropdown>,
       );
       const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
       const childNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
@@ -613,7 +613,7 @@ describe('<Dropdown>', () => {
       const instance = ReactTestUtils.renderIntoDocument(
         <Dropdown id="test-id" onToggle={spy}>
           {dropdownChildren}
-        </Dropdown>
+        </Dropdown>,
       );
       const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
@@ -636,7 +636,7 @@ describe('<Dropdown>', () => {
         <Dropdown.Menu bsClass="my-menu">
           <MenuItem>Item 1</MenuItem>
         </Dropdown.Menu>
-      </Dropdown>
+      </Dropdown>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-toggle'));

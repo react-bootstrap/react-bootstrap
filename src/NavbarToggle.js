@@ -33,8 +33,8 @@ class NavbarToggle extends React.Component {
       className: classNames(
         className,
         prefix(navbarProps, 'toggle'),
-        !navbarProps.expanded && 'collapsed'
-      )
+        !navbarProps.expanded && 'collapsed',
+      ),
     };
 
     if (children) {

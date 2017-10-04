@@ -79,7 +79,7 @@ const defaultProps = {
 
 class Pagination extends React.Component {
   renderPageButtons(
-    activePage, items, maxButtons, boundaryLinks, ellipsis, buttonProps
+    activePage, items, maxButtons, boundaryLinks, ellipsis, buttonProps,
   ) {
     const pageButtons = [];
 
@@ -90,9 +90,9 @@ class Pagination extends React.Component {
       startPage = Math.max(
         Math.min(
           activePage - Math.floor(maxButtons / 2, 10),
-          items - maxButtons + 1
+          items - maxButtons + 1,
         ),
-        1
+        1,
       );
       endPage = startPage + maxButtons - 1;
     } else {
@@ -109,7 +109,7 @@ class Pagination extends React.Component {
           active={page === activePage}
         >
           {page}
-        </PaginationButton>
+        </PaginationButton>,
       );
     }
 
@@ -124,7 +124,7 @@ class Pagination extends React.Component {
             <span aria-label="More">
               {ellipsis === true ? '\u2026' : ellipsis}
             </span>
-          </PaginationButton>
+          </PaginationButton>,
         );
       }
 
@@ -136,7 +136,7 @@ class Pagination extends React.Component {
           active={false}
         >
           1
-        </PaginationButton>
+        </PaginationButton>,
       );
     }
 
@@ -151,7 +151,7 @@ class Pagination extends React.Component {
             <span aria-label="More">
               {ellipsis === true ? '\u2026' : ellipsis}
             </span>
-          </PaginationButton>
+          </PaginationButton>,
         );
       }
 
@@ -164,7 +164,7 @@ class Pagination extends React.Component {
             active={false}
           >
             {items}
-          </PaginationButton>
+          </PaginationButton>,
         );
       }
     }
@@ -227,7 +227,7 @@ class Pagination extends React.Component {
         )}
 
         {this.renderPageButtons(
-          activePage, items, maxButtons, boundaryLinks, ellipsis, buttonProps
+          activePage, items, maxButtons, boundaryLinks, ellipsis, buttonProps,
         )}
 
         {next && (

@@ -25,13 +25,13 @@ class NavDropdown extends React.Component {
   isActive({ props }, activeKey, activeHref) {
     if (
       props.active ||
-      activeKey != null && props.eventKey === activeKey ||
-      activeHref && props.href === activeHref
+      (activeKey != null && props.eventKey === activeKey) ||
+      (activeHref && props.href === activeHref)
     ) {
       return true;
     }
 
-    if (ValidComponentChildren.some(props.children, (child) => (
+    if (ValidComponentChildren.some(props.children, child => (
       this.isActive(child, activeKey, activeHref)
     ))) {
       return true;

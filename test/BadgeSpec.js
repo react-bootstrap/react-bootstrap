@@ -9,7 +9,7 @@ describe('<Badge>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         <strong>Content</strong>
-      </Badge>
+      </Badge>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
@@ -18,7 +18,7 @@ describe('<Badge>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         Content
-      </Badge>
+      </Badge>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
@@ -28,7 +28,7 @@ describe('<Badge>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         {count}
-      </Badge>
+      </Badge>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
@@ -38,7 +38,7 @@ describe('<Badge>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge>
         £{count}
-      </Badge>
+      </Badge>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbadge\b/));
   });
@@ -47,7 +47,7 @@ describe('<Badge>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Badge pullRight>
         Content
-      </Badge>
+      </Badge>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpull-right\b/));
   });
@@ -55,21 +55,21 @@ describe('<Badge>', () => {
   describe('Hides when empty', () => {
     it('should hide with no children', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <Badge />
+        <Badge />,
       );
       assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
     });
 
     it('should hide with empty string', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <Badge>{''}</Badge>
+        <Badge>{''}</Badge>,
       );
       assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
     });
 
     it('should not hide 0', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <Badge>{0}</Badge>
+        <Badge>{0}</Badge>,
       );
       assert.notOk(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
     });

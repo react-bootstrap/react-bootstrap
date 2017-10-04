@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -25,7 +27,7 @@ const propTypes = {
   /**
    * onLoad callback that is passed down to the image inside this component
    */
-  onLoad: PropTypes.func
+  onLoad: PropTypes.func,
 };
 
 class Thumbnail extends React.Component {
@@ -41,7 +43,7 @@ class Thumbnail extends React.Component {
         {...elementProps}
         className={classNames(className, classes)}
       >
-        <img {...{src, alt, onError, onLoad}} />
+        <img {...{ src, alt, onError, onLoad }} />
 
         {children && (
           <div className="caption">

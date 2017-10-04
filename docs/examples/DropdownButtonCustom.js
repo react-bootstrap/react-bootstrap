@@ -19,7 +19,7 @@ const dropdownInstance = (
       <Button bsStyle="info">
         mix it up style-wise
       </Button>
-      <Dropdown.Toggle bsStyle="success"/>
+      <Dropdown.Toggle bsStyle="success" />
       <Dropdown.Menu className="super-colors">
         <MenuItem eventKey="1">Action</MenuItem>
         <MenuItem eventKey="2">Another action</MenuItem>

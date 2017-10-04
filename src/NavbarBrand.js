@@ -20,8 +20,8 @@ class NavbarBrand extends React.Component {
     if (React.isValidElement(children)) {
       return React.cloneElement(children, {
         className: classNames(
-          children.props.className, className, bsClassName
-        )
+          children.props.className, className, bsClassName,
+        ),
       });
     }
 

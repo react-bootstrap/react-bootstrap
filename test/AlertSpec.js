@@ -9,7 +9,7 @@ describe('<Alert>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Alert>
         <strong>Message</strong>
-      </Alert>
+      </Alert>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
@@ -18,7 +18,7 @@ describe('<Alert>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Alert>
         Message
-      </Alert>
+      </Alert>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\balert\b/));
   });
@@ -28,7 +28,7 @@ describe('<Alert>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Alert onDismiss={noOp}>
         Message
-      </Alert>
+      </Alert>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\balert-dismissable\b/));
   });
@@ -40,7 +40,7 @@ describe('<Alert>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Alert onDismiss={doneOp}>
         Message
-      </Alert>
+      </Alert>,
     );
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(instance).children[0]);
   });
@@ -49,7 +49,7 @@ describe('<Alert>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Alert>
         Message
-      </Alert>
+      </Alert>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\balert-\w+\b/));
   });
@@ -58,7 +58,7 @@ describe('<Alert>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Alert bsStyle="danger">
         Message
-      </Alert>
+      </Alert>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\balert-danger\b/));
   });
@@ -66,7 +66,7 @@ describe('<Alert>', () => {
   describe('Web Accessibility', () => {
     it('Should have alert role', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <Alert>Message</Alert>
+        <Alert>Message</Alert>,
       );
 
       assert.equal(ReactDOM.findDOMNode(instance).getAttribute('role'), 'alert');
@@ -79,7 +79,7 @@ describe('<Alert>', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <Alert onDismiss={doneOp}>
           Message
-        </Alert>
+        </Alert>,
       );
 
       ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(instance).getElementsByClassName('sr-only')[0]);

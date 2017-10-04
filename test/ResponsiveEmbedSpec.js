@@ -11,7 +11,7 @@ describe('ResponsiveEmbed', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ResponsiveEmbed a16by9>
         <div />
-      </ResponsiveEmbed>
+      </ResponsiveEmbed>,
     );
 
     let instanceClassName = ReactDOM.findDOMNode(instance).className;
@@ -24,7 +24,7 @@ describe('ResponsiveEmbed', () => {
     ReactTestUtils.renderIntoDocument(
       <ResponsiveEmbed>
         <div />
-      </ResponsiveEmbed>
+      </ResponsiveEmbed>,
     );
   });
 
@@ -34,7 +34,7 @@ describe('ResponsiveEmbed', () => {
     ReactTestUtils.renderIntoDocument(
       <ResponsiveEmbed a16by9 a4by3>
         <div />
-      </ResponsiveEmbed>
+      </ResponsiveEmbed>,
     );
   });
 
@@ -42,7 +42,7 @@ describe('ResponsiveEmbed', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <ResponsiveEmbed a16by9>
         <div />
-      </ResponsiveEmbed>
+      </ResponsiveEmbed>,
     );
 
     let child = ReactDOM.findDOMNode(instance).firstChild;
@@ -53,7 +53,7 @@ describe('ResponsiveEmbed', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <ResponsiveEmbed a16by9 className="custom-class">
         <div />
-      </ResponsiveEmbed>
+      </ResponsiveEmbed>,
     );
 
     let child = ReactDOM.findDOMNode(instance).firstChild;
@@ -62,9 +62,9 @@ describe('ResponsiveEmbed', () => {
 
   it('should pass custom attributes to child element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <ResponsiveEmbed a16by9 style={{color: 'white'}}>
+      <ResponsiveEmbed a16by9 style={{ color: 'white' }}>
         <div />
-      </ResponsiveEmbed>
+      </ResponsiveEmbed>,
     );
 
     let child = ReactDOM.findDOMNode(instance).firstChild;
@@ -75,7 +75,7 @@ describe('ResponsiveEmbed', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <ResponsiveEmbed a16by9>
         <div />
-      </ResponsiveEmbed>
+      </ResponsiveEmbed>,
     );
 
     let wrapper = ReactDOM.findDOMNode(instance);
@@ -86,7 +86,7 @@ describe('ResponsiveEmbed', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <ResponsiveEmbed a4by3>
         <div />
-      </ResponsiveEmbed>
+      </ResponsiveEmbed>,
     );
 
     let wrapper = ReactDOM.findDOMNode(instance);

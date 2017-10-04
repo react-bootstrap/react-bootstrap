@@ -42,7 +42,7 @@ describe('createChainedFunction', () => {
   it('forwards arguments to all chained functions', () => {
     const in1 = 'herpa derpa';
     const in2 = {
-      herpa: 'derpa'
+      herpa: 'derpa',
     };
 
     const func = (arg1, arg2) => {

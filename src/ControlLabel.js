@@ -31,7 +31,7 @@ class ControlLabel extends React.Component {
 
     warning(
       controlId == null || htmlFor === controlId,
-      '`controlId` is ignored on `<ControlLabel>` when `htmlFor` is specified.'
+      '`controlId` is ignored on `<ControlLabel>` when `htmlFor` is specified.',
     );
 
     const classes = {

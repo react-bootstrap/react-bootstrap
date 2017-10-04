@@ -1,14 +1,14 @@
 const Example = React.createClass({
   getInitialState() {
-    return {show: false};
+    return { show: false };
   },
 
   showModal() {
-    this.setState({show: true});
+    this.setState({ show: true });
   },
 
   hideModal() {
-    this.setState({show: false});
+    this.setState({ show: false });
   },
 
   render() {
@@ -51,7 +51,7 @@ const Example = React.createClass({
         </Modal>
       </ButtonToolbar>
     );
-  }
+  },
 });
 
-ReactDOM.render(<Example/>, mountNode);
+ReactDOM.render(<Example />, mountNode);

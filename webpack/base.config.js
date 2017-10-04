@@ -6,7 +6,7 @@ export const options = yargs
   .alias('d', 'debug')
   .option('port', {
     default: '8080',
-    type: 'string'
+    type: 'string',
   })
   .argv;
 
@@ -21,17 +21,17 @@ const baseConfig = {
 
   module: {
     loaders: [
-      { test: /\.js/, loader: jsLoader, exclude: /node_modules/ }
-    ]
+      { test: /\.js/, loader: jsLoader, exclude: /node_modules/ },
+    ],
   },
 
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(options.optimizeMinimize ? 'production' : 'development')
-      }
-    })
-  ]
+        NODE_ENV: JSON.stringify(options.optimizeMinimize ? 'production' : 'development'),
+      },
+    }),
+  ],
 };
 
 if (options.optimizeMinimize) {

@@ -63,6 +63,79 @@ class Panel extends React.Component {
     }
   }
 
+  renderAnchor(header, id, role, expanded) {
+    return (
+      <a
+        role={role}
+        href={id && `#${id}`}
+        onClick={this.handleClickTitle}
+        aria-controls={id}
+        aria-expanded={expanded}
+        aria-selected={expanded}
+        className={expanded ? null : 'collapsed'}
+      >
+        {header}
+      </a>
+    );
+  }
+
+  renderBody(rawChildren, bsProps) {
+    const children = [];
+    let bodyChildren = [];
+
+    const bodyClassName = prefix(bsProps, 'body');
+
+    function maybeAddBody() {
+      if (!bodyChildren.length) {
+        return;
+      }
+
+      // Derive the key from the index here, since we need to make one up.
+      children.push(
+        <div key={children.length} className={bodyClassName}>
+          {bodyChildren}
+        </div>,
+      );
+
+      bodyChildren = [];
+    }
+
+    // Convert to array so we can re-use keys.
+    React.Children.toArray(rawChildren).forEach((child) => {
+      if (React.isValidElement(child) && child.props.fill) {
+        maybeAddBody();
+
+        // Remove the child's unknown `fill` prop.
+        children.push(cloneElement(child, { fill: undefined }));
+
+        return;
+      }
+
+      bodyChildren.push(child);
+    });
+
+    maybeAddBody();
+
+    return children;
+  }
+
+  renderCollapsibleBody(
+    id, expanded, role, children, bsProps, animationHooks,
+  ) {
+    return (
+      <Collapse in={expanded} {...animationHooks}>
+        <div
+          id={id}
+          role={role}
+          className={prefix(bsProps, 'collapse')}
+          aria-hidden={!expanded}
+        >
+          {this.renderBody(children, bsProps)}
+        </div>
+      </Collapse>
+    );
+  }
+
   renderHeader(collapsible, header, id, role, expanded, bsProps) {
     const titleClassName = prefix(bsProps, 'title');
 
@@ -88,79 +161,6 @@ class Panel extends React.Component {
       className: classNames(header.props.className, titleClassName),
       children: this.renderAnchor(header.props.children, id, role, expanded),
     });
-  }
-
-  renderAnchor(header, id, role, expanded) {
-    return (
-      <a
-        role={role}
-        href={id && `#${id}`}
-        onClick={this.handleClickTitle}
-        aria-controls={id}
-        aria-expanded={expanded}
-        aria-selected={expanded}
-        className={expanded ? null : 'collapsed' }
-      >
-        {header}
-      </a>
-    );
-  }
-
-  renderCollapsibleBody(
-    id, expanded, role, children, bsProps, animationHooks
-  ) {
-    return (
-      <Collapse in={expanded} {...animationHooks}>
-        <div
-          id={id}
-          role={role}
-          className={prefix(bsProps, 'collapse')}
-          aria-hidden={!expanded}
-        >
-          {this.renderBody(children, bsProps)}
-        </div>
-      </Collapse>
-    );
-  }
-
-  renderBody(rawChildren, bsProps) {
-    const children = [];
-    let bodyChildren = [];
-
-    const bodyClassName = prefix(bsProps, 'body');
-
-    function maybeAddBody() {
-      if (!bodyChildren.length) {
-        return;
-      }
-
-      // Derive the key from the index here, since we need to make one up.
-      children.push(
-        <div key={children.length} className={bodyClassName}>
-          {bodyChildren}
-        </div>
-      );
-
-      bodyChildren = [];
-    }
-
-    // Convert to array so we can re-use keys.
-    React.Children.toArray(rawChildren).forEach(child => {
-      if (React.isValidElement(child) && child.props.fill) {
-        maybeAddBody();
-
-        // Remove the child's unknown `fill` prop.
-        children.push(cloneElement(child, { fill: undefined }));
-
-        return;
-      }
-
-      bodyChildren.push(child);
-    });
-
-    maybeAddBody();
-
-    return children;
   }
 
   render() {
@@ -201,7 +201,7 @@ class Panel extends React.Component {
         {header && (
           <div className={prefix(bsProps, 'heading')}>
             {this.renderHeader(
-              collapsible, header, id, headerRole, expanded, bsProps
+              collapsible, header, id, headerRole, expanded, bsProps,
             )}
           </div>
         )}
@@ -209,7 +209,7 @@ class Panel extends React.Component {
         {collapsible ?
           this.renderCollapsibleBody(
             id, expanded, panelRole, children, bsProps,
-            { onEnter, onEntering, onEntered, onExit, onExiting, onExited }
+            { onEnter, onEntering, onEntered, onExit, onExiting, onExited },
           ) :
           this.renderBody(children, bsProps)
         }
@@ -231,6 +231,6 @@ export default bsClass('panel',
   bsStyles(
     [...Object.values(State), Style.DEFAULT, Style.PRIMARY],
     Style.DEFAULT,
-    Panel
-  )
+    Panel,
+  ),
 );

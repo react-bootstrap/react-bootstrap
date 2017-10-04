@@ -9,11 +9,11 @@ describe('<FormControl.Static>', () => {
       $(
         <FormControl.Static name="foo" className="my-form-control-static">
           Static text
-        </FormControl.Static>
+        </FormControl.Static>,
       )
         .shallowRender()
         .single('.form-control-static.my-form-control-static')
-          .text()
+        .text(),
     ).to.equal('Static text');
   });
 
@@ -28,11 +28,11 @@ describe('<FormControl.Static>', () => {
       $(
         <FormControl.Static componentClass={MyComponent}>
           Static text
-        </FormControl.Static>
+        </FormControl.Static>,
       )
         .shallowRender()
         .single($.s`${MyComponent}.form-control-static`)
-          .text()
+        .text(),
     ).to.equal('Static text');
   });
 });

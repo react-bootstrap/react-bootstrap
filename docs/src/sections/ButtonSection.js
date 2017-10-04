@@ -19,7 +19,7 @@ export default function ButtonSection() {
         <h4>Button spacing</h4>
         <p>Because React doesn't output newlines between elements, buttons on the same line are displayed
         flush against each other. To preserve the spacing between multiple inline buttons, wrap your
-        button group in <code>{"<ButtonToolbar />"}</code>.</p>
+        button group in <code>{'<ButtonToolbar />'}</code>.</p>
       </div>
 
       <h3><Anchor id="buttons-sizes">Sizes</Anchor></h3>
@@ -35,8 +35,8 @@ export default function ButtonSection() {
 
       <h3><Anchor id="buttons-tags">Button tags</Anchor></h3>
       <p>The DOM element tag is choosen automatically for you based on the props you supply. Passing
-        a <code>href</code> will result in the button using a <code>{"<a />"}</code> element otherwise
-        a <code>{"<button />"}</code> element will be used.
+        a <code>href</code> will result in the button using a <code>{'<a />'}</code> element otherwise
+        a <code>{'<button />'}</code> element will be used.
       </p>
       <ReactPlayground codeText={Samples.ButtonTagTypes} />
 
@@ -47,7 +47,7 @@ export default function ButtonSection() {
       <div className="bs-callout bs-callout-warning">
         <h4>Cross-Browser compatibility</h4>
         <p>
-          Because <code>{"<Button />"}</code> will render an <code>{'<a>'}</code> tag in certain situations.
+          Because <code>{'<Button />'}</code> will render an <code>{'<a>'}</code> tag in certain situations.
           Since anchor tags can't be <code>disabled</code>, the behavior is emulated as best it can be.
           Specifically, <code>pointer-events: none;</code> style is added to the anchor to prevent focusing, which
           is only supported in newer browser versions.
@@ -57,11 +57,11 @@ export default function ButtonSection() {
       <h3><Anchor id="buttons-loading">Button loading state</Anchor></h3>
       <p>When activating an asynchronous action from a button it is a good UX pattern to give the user
         feedback as to the loading state, this can easily be done by updating
-        your <code>{"<Button />"}</code>&#8217;s props from a state change like below.</p>
+        your <code>{'<Button />'}</code>&#8217;s props from a state change like below.</p>
       <ReactPlayground codeText={Samples.ButtonLoading} />
 
       <h3><Anchor id="buttons-props">Props</Anchor></h3>
-      <PropTable component="Button"/>
+      <PropTable component="Button" />
     </div>
   );
 }

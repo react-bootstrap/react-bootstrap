@@ -22,7 +22,7 @@ describe('<MenuItem>', () => {
         divider
         className="foo bar"
         style={{ height: '100px' }}
-      />
+      />,
     );
     const node = ReactDOM.findDOMNode(instance);
 
@@ -36,7 +36,7 @@ describe('<MenuItem>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <MenuItem divider>
         Some child
-      </MenuItem>
+      </MenuItem>,
     );
     const node = ReactDOM.findDOMNode(instance);
 
@@ -61,7 +61,7 @@ describe('<MenuItem>', () => {
         style={{ height: '100px' }}
       >
         Header Text
-      </MenuItem>
+      </MenuItem>,
     );
     const node = ReactDOM.findDOMNode(instance);
 
@@ -73,9 +73,10 @@ describe('<MenuItem>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <MenuItem
         onKeyDown={() => done()}
-        href="/herpa-derpa">
+        href="/herpa-derpa"
+      >
         Item
-      </MenuItem>
+      </MenuItem>,
     );
     const node = ReactDOM.findDOMNode(instance);
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
@@ -95,7 +96,7 @@ describe('<MenuItem>', () => {
       eventKey.should.equal('1');
     };
     const instance = ReactTestUtils.renderIntoDocument(
-      <MenuItem onSelect={handleSelect} eventKey="1">Item</MenuItem>
+      <MenuItem onSelect={handleSelect} eventKey="1">Item</MenuItem>,
     );
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
@@ -107,7 +108,7 @@ describe('<MenuItem>', () => {
       expect(eventKey).to.be.undefined;
     };
     const instance = ReactTestUtils.renderIntoDocument(
-      <MenuItem onSelect={handleSelect}>Item</MenuItem>
+      <MenuItem onSelect={handleSelect}>Item</MenuItem>,
     );
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
@@ -119,7 +120,7 @@ describe('<MenuItem>', () => {
     const handleSelect = sinon.spy();
 
     const instance = ReactTestUtils.renderIntoDocument(
-      <MenuItem onClick={handleClick} onSelect={handleSelect}>Item</MenuItem>
+      <MenuItem onClick={handleClick} onSelect={handleSelect}>Item</MenuItem>,
     );
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
 
@@ -134,7 +135,7 @@ describe('<MenuItem>', () => {
       throw new Error('Should not invoke onSelect with divider flag applied');
     };
     const instance = ReactTestUtils.renderIntoDocument(
-      <MenuItem onSelect={handleSelect} divider />
+      <MenuItem onSelect={handleSelect} divider />,
     );
     ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A').length.should.equal(0);
     const li = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'li');
@@ -147,7 +148,7 @@ describe('<MenuItem>', () => {
       throw new Error('Should not invoke onSelect with divider flag applied');
     };
     const instance = ReactTestUtils.renderIntoDocument(
-      <MenuItem onSelect={handleSelect} header>Header content</MenuItem>
+      <MenuItem onSelect={handleSelect} header>Header content</MenuItem>,
     );
     ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A').length.should.equal(0);
     const li = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'li');
@@ -157,22 +158,22 @@ describe('<MenuItem>', () => {
 
   it('does not pass onClick to DOM node', () => {
     tsp(
-      <MenuItem onSelect={()=>{}}>Item</MenuItem>
+      <MenuItem onSelect={() => {}}>Item</MenuItem>,
     )
-    .shallowRender()
-    .children()
-    .props()
-    .should.not.have.property('onSelect');
+      .shallowRender()
+      .children()
+      .props()
+      .should.not.have.property('onSelect');
   });
 
   it('does not pass onClick to children', () => {
     tsp(
-      <MenuItem onSelect={()=>{}}>Item</MenuItem>
+      <MenuItem onSelect={() => {}}>Item</MenuItem>,
     )
-    .shallowRender()
-    .find('SafeAnchor')
-    .props()
-    .should.not.have.property('onSelect');
+      .shallowRender()
+      .find('SafeAnchor')
+      .props()
+      .should.not.have.property('onSelect');
   });
 
   it('disabled link', () => {
@@ -180,7 +181,7 @@ describe('<MenuItem>', () => {
       throw new Error('Should not invoke onSelect event');
     };
     const instance = ReactTestUtils.renderIntoDocument(
-      <MenuItem onSelect={handleSelect} disabled>Text</MenuItem>
+      <MenuItem onSelect={handleSelect} disabled>Text</MenuItem>,
     );
     const node = ReactDOM.findDOMNode(instance);
     const anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
@@ -199,7 +200,7 @@ describe('<MenuItem>', () => {
         style={{ height: 100 }}
       >
         Title
-      </MenuItem>
+      </MenuItem>,
     );
 
     let node = ReactDOM.findDOMNode(instance);
@@ -220,7 +221,7 @@ describe('<MenuItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <MenuItem target="_blank">
         Title
-      </MenuItem>
+      </MenuItem>,
     );
 
     let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
@@ -231,7 +232,7 @@ describe('<MenuItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <MenuItem>
         Title
-      </MenuItem>
+      </MenuItem>,
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'LI');
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('role'), 'presentation');

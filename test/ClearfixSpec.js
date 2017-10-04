@@ -7,7 +7,7 @@ import Clearfix from '../src/Clearfix';
 describe('<Clearfix>', () => {
   it('uses "div" by default', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Clearfix />
+      <Clearfix />,
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
@@ -15,14 +15,14 @@ describe('<Clearfix>', () => {
 
   it('has "clearfix" class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Clearfix>Clearfix content</Clearfix>
+      <Clearfix>Clearfix content</Clearfix>,
     );
     assert.equal(ReactDOM.findDOMNode(instance).className, 'clearfix');
   });
 
   it('Defaults to no visible block classes', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Clearfix />
+      <Clearfix />,
     );
 
     let instanceClassName = ReactDOM.findDOMNode(instance).className;
@@ -34,7 +34,7 @@ describe('<Clearfix>', () => {
 
   it('Should apply visible block classes', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Clearfix visibleXsBlock visibleSmBlock visibleMdBlock visibleLgBlock />
+      <Clearfix visibleXsBlock visibleSmBlock visibleMdBlock visibleLgBlock />,
     );
 
     let instanceClassName = ReactDOM.findDOMNode(instance).className;
@@ -46,7 +46,7 @@ describe('<Clearfix>', () => {
 
   it('Should merge additional classes passed in', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Clearfix className="bob"/>
+      <Clearfix className="bob" />,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbob\b/));
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bclearfix\b/));
@@ -54,7 +54,7 @@ describe('<Clearfix>', () => {
 
   it('allows custom elements instead of "div"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Clearfix componentClass="section" />
+      <Clearfix componentClass="section" />,
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');

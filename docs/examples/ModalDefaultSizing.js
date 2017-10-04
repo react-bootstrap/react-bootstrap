@@ -22,7 +22,7 @@ const MySmallModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  }
+  },
 });
 
 const MyLargeModal = React.createClass({
@@ -49,7 +49,7 @@ const MyLargeModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  }
+  },
 });
 
 const App = React.createClass({
@@ -62,10 +62,10 @@ const App = React.createClass({
 
     return (
       <ButtonToolbar>
-        <Button bsStyle="primary" onClick={()=>this.setState({ smShow: true })}>
+        <Button bsStyle="primary" onClick={() => this.setState({ smShow: true })}>
           Launch small demo modal
         </Button>
-        <Button bsStyle="primary" onClick={()=>this.setState({ lgShow: true })}>
+        <Button bsStyle="primary" onClick={() => this.setState({ lgShow: true })}>
           Launch large demo modal
         </Button>
 
@@ -73,7 +73,7 @@ const App = React.createClass({
         <MyLargeModal show={this.state.lgShow} onHide={lgClose} />
       </ButtonToolbar>
     );
-  }
+  },
 });
 
-ReactDOM.render(<App/>, mountNode);
+ReactDOM.render(<App />, mountNode);

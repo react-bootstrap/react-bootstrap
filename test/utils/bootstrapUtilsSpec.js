@@ -23,22 +23,22 @@ describe('bootstrapUtils', () => {
 
   it('returns a classSet of bsClass and style', () => {
     expect(
-      getClassSet({ bsClass: 'btn', bsStyle: 'primary' })
+      getClassSet({ bsClass: 'btn', bsStyle: 'primary' }),
     )
-    .to.eql({ btn: true, 'btn-primary': true });
+      .to.eql({ btn: true, 'btn-primary': true });
   });
 
   it('returns a classSet of bsClass and size', () => {
     expect(getClassSet({ bsClass: 'btn', bsSize: 'large' }))
-        .to.eql({ btn: true, 'btn-lg': true });
+      .to.eql({ btn: true, 'btn-lg': true });
 
     expect(getClassSet({ bsClass: 'btn', bsSize: 'lg' }))
-        .to.eql({ btn: true, 'btn-lg': true });
+      .to.eql({ btn: true, 'btn-lg': true });
   });
 
   it('returns a classSet of bsClass, style and size', () => {
     expect(getClassSet({ bsClass: 'btn', bsSize: 'lg', bsStyle: 'primary' }))
-        .to.eql({ btn: true, 'btn-lg': true, 'btn-primary': true });
+      .to.eql({ btn: true, 'btn-lg': true, 'btn-primary': true });
   });
 
   describe('decorators', () => {
@@ -122,7 +122,7 @@ describe('bootstrapUtils', () => {
       const Component = bsStyles(['minimal', 'boss', 'plaid', 'tweed'], 'plaid')(
         class extends React.Component {
           render() { return <span />; }
-        }
+        },
       );
 
       const instance = render(<Component />);
@@ -136,7 +136,7 @@ describe('bootstrapUtils', () => {
       shouldWarn('expected one of ["minimal","boss","tartan"]');
 
       const Component = bsStyles(['minimal', 'boss', 'tartan'], 'tartan')(
-        () => <span />
+        () => <span />,
       );
 
       render(<Component bsStyle="not-plaid" />);
@@ -198,7 +198,7 @@ describe('bootstrapUtils', () => {
       const Component = bsSizes(['smallish', 'micro', 'planet', 'big'], 'smallish')(
         class extends React.Component {
           render() { return <span />; }
-        }
+        },
       );
 
       const instance = render(<Component />);

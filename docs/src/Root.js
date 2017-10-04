@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Root = React.createClass({
+  childContextTypes: {
+    metadata: PropTypes.object,
+  },
+
   statics: {
     /**
      * Get the list of pages that are renderable
@@ -14,17 +18,13 @@ const Root = React.createClass({
         'introduction.html',
         'getting-started.html',
         'components.html',
-        'support.html'
+        'support.html',
       ];
-    }
-  },
-
-  childContextTypes: {
-    metadata: PropTypes.object
+    },
   },
 
   getChildContext() {
-    return {metadata: Root.propData};
+    return { metadata: Root.propData };
   },
 
   render() {
@@ -44,7 +44,7 @@ const Root = React.createClass({
               w.console[method] = noop;
             });
          }
-        }(window));`
+        }(window));`,
     };
 
     let head = {
@@ -58,7 +58,7 @@ const Root = React.createClass({
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>
-        <![endif]-->`
+        <![endif]-->`,
     };
 
     return (
@@ -73,7 +73,7 @@ const Root = React.createClass({
         </body>
       </html>
     );
-  }
+  },
 });
 
 

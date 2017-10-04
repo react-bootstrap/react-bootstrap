@@ -9,7 +9,7 @@ describe('<FormControl.Feedback>', () => {
     $(
       <FormGroup validationState="success">
         <FormControl.Feedback />
-      </FormGroup>
+      </FormGroup>,
     )
       .render()
       .single('.form-control-feedback.glyphicon-ok');
@@ -19,7 +19,7 @@ describe('<FormControl.Feedback>', () => {
     $(
       <FormGroup validationState="warning">
         <FormControl.Feedback />
-      </FormGroup>
+      </FormGroup>,
     )
       .render()
       .single('.form-control-feedback.glyphicon-warning-sign');
@@ -29,7 +29,7 @@ describe('<FormControl.Feedback>', () => {
     $(
       <FormGroup validationState="error">
         <FormControl.Feedback />
-      </FormGroup>
+      </FormGroup>,
     )
       .render()
       .single('.form-control-feedback.glyphicon-remove');
@@ -41,7 +41,7 @@ describe('<FormControl.Feedback>', () => {
         <div>
           <FormControl.Feedback />
         </div>
-      </FormGroup>
+      </FormGroup>,
     )
       .render()
       .single('.form-control-feedback.glyphicon-ok');
@@ -55,7 +55,7 @@ describe('<FormControl.Feedback>', () => {
     $(
       <FormControl.Feedback>
         <MyComponent className="foo" />
-      </FormControl.Feedback>
+      </FormControl.Feedback>,
     )
       .render()
       .single($.s`${MyComponent}.foo.form-control-feedback`);

@@ -21,7 +21,7 @@ export default function ImageSection() {
       <ReactPlayground codeText={Samples.ImageResponsive} />
 
       <h3><Anchor id="image-props">Props</Anchor></h3>
-      <PropTable component="Image"/>
+      <PropTable component="Image" />
     </div>
   );
 }

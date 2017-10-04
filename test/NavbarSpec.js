@@ -13,7 +13,7 @@ import { getOne } from './helpers';
 describe('<Navbar>', () => {
   it('Should create nav element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar />
+      <Navbar />,
     );
     const nav = ReactDOM.findDOMNode(instance);
     assert.equal(nav.nodeName, 'NAV');
@@ -23,7 +23,7 @@ describe('<Navbar>', () => {
 
   it('Should add "navigation" role when not using a `<nav>`', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar componentClass="div" />
+      <Navbar componentClass="div" />,
     );
     const nav = ReactDOM.findDOMNode(instance);
     assert.equal(nav.nodeName, 'DIV');
@@ -32,28 +32,28 @@ describe('<Navbar>', () => {
 
   it('Should add fixedTop variation class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar fixedTop />
+      <Navbar fixedTop />,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-fixed-top'));
   });
 
   it('Should add fixedBottom variation class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar fixedBottom />
+      <Navbar fixedBottom />,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-fixed-bottom'));
   });
 
   it('Should add staticTop variation class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar staticTop />
+      <Navbar staticTop />,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-static-top'));
   });
 
   it('Should add inverse variation class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar inverse />
+      <Navbar inverse />,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-inverse'));
   });
@@ -62,7 +62,7 @@ describe('<Navbar>', () => {
     addStyle(Navbar, 'custom');
 
     const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar bsStyle="custom" />
+      <Navbar bsStyle="custom" />,
     );
 
     expect(() => ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-default'))
@@ -71,21 +71,21 @@ describe('<Navbar>', () => {
 
   it('Should add fluid variation class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar fluid />
+      <Navbar fluid />,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'container-fluid'));
   });
 
   it('Should override role attribute', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar role="banner" />
+      <Navbar role="banner" />,
     );
     assert.ok(ReactDOM.findDOMNode(instance).getAttribute('role'), 'banner');
   });
 
   it('Should override node class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Navbar componentClass="header" />
+      <Navbar componentClass="header" />,
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'HEADER');
   });
@@ -96,7 +96,7 @@ describe('<Navbar>', () => {
         <Navbar.Header>
           <Navbar.Brand>Brand</Navbar.Brand>
         </Navbar.Header>
-      </Navbar>
+      </Navbar>,
     );
 
     const header = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-header');
@@ -114,7 +114,7 @@ describe('<Navbar>', () => {
         <Navbar.Header>
           <Navbar.Brand><a>Brand</a></Navbar.Brand>
         </Navbar.Header>
-      </Navbar>
+      </Navbar>,
     );
 
     const brand = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-brand');
@@ -128,7 +128,7 @@ describe('<Navbar>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Navbar>
         <Nav />
-      </Navbar>
+      </Navbar>,
     );
 
     const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
@@ -142,7 +142,7 @@ describe('<Navbar>', () => {
         <Navbar.Header>
           <Navbar.Toggle />
         </Navbar.Header>
-      </Navbar>
+      </Navbar>,
     );
 
     ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
@@ -157,7 +157,7 @@ describe('<Navbar>', () => {
             <span className="test">hi</span>
           </Navbar.Toggle>
         </Navbar.Header>
-      </Navbar>
+      </Navbar>,
     );
 
     ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
@@ -171,7 +171,7 @@ describe('<Navbar>', () => {
         <Navbar.Header>
           <Navbar.Toggle />
         </Navbar.Header>
-      </Navbar>
+      </Navbar>,
     );
 
     const toggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
@@ -194,7 +194,7 @@ describe('<Navbar>', () => {
             style={{ height: 100 }}
           />
         </Navbar.Header>
-      </Navbar>
+      </Navbar>,
     );
 
     const toggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
@@ -212,7 +212,7 @@ describe('<Navbar>', () => {
         <Navbar.Collapse>
           hello
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     );
 
     ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-collapse');
@@ -224,7 +224,7 @@ describe('<Navbar>', () => {
         <Navbar.Collapse>
           hello
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     );
 
     const collapse = ReactTestUtils.findRenderedComponentWithType(instance, Navbar.Collapse);
@@ -241,7 +241,7 @@ describe('<Navbar>', () => {
         <Navbar.Collapse>
           hello
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     );
 
     const toggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-toggle');
@@ -273,7 +273,7 @@ describe('<Navbar>', () => {
             </NavItem>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     );
 
     const link = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'link-text');
@@ -302,7 +302,7 @@ describe('<Navbar>', () => {
             </NavItem>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     );
 
     const link = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'onselect-text');
@@ -327,7 +327,7 @@ describe('<Navbar>', () => {
           <Navbar.Link />
           <Nav pullRight />
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     );
 
     ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-navbar');
@@ -348,7 +348,7 @@ describe('<Navbar>', () => {
         <Navbar.Header className="test">
           <Navbar.Brand />
         </Navbar.Header>
-      </Navbar>
+      </Navbar>,
     );
 
     ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'test');

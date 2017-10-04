@@ -7,7 +7,7 @@ import Breadcrumb from '../src/Breadcrumb';
 describe('<Breadcrumb>', () => {
   it('Should apply id to the wrapper ol element', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb id="custom-id" />
+      <Breadcrumb id="custom-id" />,
     );
 
     let olNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ol');
@@ -16,7 +16,7 @@ describe('<Breadcrumb>', () => {
 
   it('Should have breadcrumb class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb />
+      <Breadcrumb />,
     );
 
     let olNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'ol');
@@ -25,7 +25,7 @@ describe('<Breadcrumb>', () => {
 
   it('Should have custom classes', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb className="custom-one custom-two" />
+      <Breadcrumb className="custom-one custom-two" />,
     );
 
     let olNode = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Breadcrumb));
@@ -38,7 +38,7 @@ describe('<Breadcrumb>', () => {
 
   it('Should have a navigation role', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb />
+      <Breadcrumb />,
     );
 
     let olNode = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Breadcrumb));
@@ -47,7 +47,7 @@ describe('<Breadcrumb>', () => {
 
   it('Should have an aria-label in ol', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Breadcrumb />
+      <Breadcrumb />,
     );
 
     let olNode = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, Breadcrumb));

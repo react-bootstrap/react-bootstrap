@@ -27,5 +27,5 @@ InputGroup.Addon = InputGroupAddon;
 InputGroup.Button = InputGroupButton;
 
 export default bsClass('input-group',
-  bsSizes([Size.LARGE, Size.SMALL], InputGroup)
+  bsSizes([Size.LARGE, Size.SMALL], InputGroup),
 );

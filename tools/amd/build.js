@@ -4,7 +4,7 @@ import path from 'path';
 
 import { repoRoot, bowerRoot } from '../constants';
 import { exec } from '../exec';
-import { copy } from '../fs-utils';
+import copy from '../fs-utils';
 
 const packagePath = path.join(repoRoot, 'package.json');
 const bowerTemplatePath = path.join(__dirname, 'bower.json');
@@ -17,10 +17,10 @@ function bowerConfig() {
     fsp.readFile(packagePath)
       .then(json => JSON.parse(json)),
     fsp.readFile(bowerTemplatePath)
-      .then(templateString => template(templateString))
+      .then(templateString => template(templateString)),
   ])
-  .then(([pkg, compiledTemplate]) => compiledTemplate({ pkg }))
-  .then(config => fsp.writeFile(bowerJson, config));
+    .then(([pkg, compiledTemplate]) => compiledTemplate({ pkg }))
+    .then(config => fsp.writeFile(bowerJson, config));
 }
 
 export default function BuildBower() {
@@ -30,7 +30,7 @@ export default function BuildBower() {
     .then(() => fsp.mkdirs(bowerRoot))
     .then(() => Promise.all([
       bowerConfig(),
-      copy(readme, bowerRoot)
+      copy(readme, bowerRoot),
     ]))
     .then(() => console.log('Built: '.cyan + 'bower module'.green));
 }

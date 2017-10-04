@@ -10,11 +10,11 @@ describe('ToggleButtonGroup', () => {
         <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
-      </ToggleButtonGroup>
+      </ToggleButtonGroup>,
     )
-    .render()
-    .find('input[type="checkbox"]')
-    .length.should.equal(3);
+      .render()
+      .find('input[type="checkbox"]')
+      .length.should.equal(3);
   });
 
   it('should render radios', () => {
@@ -23,11 +23,11 @@ describe('ToggleButtonGroup', () => {
         <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
-      </ToggleButtonGroup>
+      </ToggleButtonGroup>,
     )
-    .render()
-    .find('input[type="radio"]')
-    .length.should.equal(3);
+      .render()
+      .find('input[type="radio"]')
+      .length.should.equal(3);
   });
 
   it('should select initial values', () => {
@@ -36,11 +36,11 @@ describe('ToggleButtonGroup', () => {
         <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
-      </ToggleButtonGroup>
+      </ToggleButtonGroup>,
     )
-    .render()
-    .find('input[checked]')
-    .length.should.equal(2);
+      .render()
+      .find('input[checked]')
+      .length.should.equal(2);
   });
 
   it('should disable radios', () => {
@@ -49,11 +49,11 @@ describe('ToggleButtonGroup', () => {
         <ToggleButtonGroup.Button value={1} disabled>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2} disabled>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
-      </ToggleButtonGroup>
+      </ToggleButtonGroup>,
     )
-    .render()
-    .find('input[disabled]')
-    .length.should.equal(2);
+      .render()
+      .find('input[disabled]')
+      .length.should.equal(2);
   });
 
   it('should return an array of values', () => {
@@ -63,11 +63,11 @@ describe('ToggleButtonGroup', () => {
         <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
-      </ToggleButtonGroup>
+      </ToggleButtonGroup>,
     )
-    .render()
-    .nth(1, 'input[type="checkbox"]')
-    .trigger('change');
+      .render()
+      .nth(1, 'input[type="checkbox"]')
+      .trigger('change');
 
     spy.should.have.been.calledWith([2]);
   });
@@ -79,11 +79,11 @@ describe('ToggleButtonGroup', () => {
         <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
-      </ToggleButtonGroup>
+      </ToggleButtonGroup>,
     )
-    .render()
-    .nth(1, 'input[type="radio"]')
-    .trigger('change');
+      .render()
+      .nth(1, 'input[type="radio"]')
+      .trigger('change');
 
     spy.should.have.been.calledWith(2);
   });

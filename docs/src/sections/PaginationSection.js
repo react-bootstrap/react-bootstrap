@@ -20,7 +20,7 @@ export default function PaginationSection() {
       <ReactPlayground codeText={Samples.PaginationAdvanced} />
 
       <h3><Anchor id="pagination-props">Props</Anchor></h3>
-      <PropTable component="Pagination"/>
+      <PropTable component="Pagination" />
     </div>
   );
 }

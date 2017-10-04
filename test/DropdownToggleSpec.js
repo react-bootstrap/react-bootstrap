@@ -29,7 +29,7 @@ describe('<DropdownToggle>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownToggle title="toggle" open={false}>
         <h3>herpa derpa</h3>
-      </DropdownToggle>
+      </DropdownToggle>,
     );
     const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
     const h3Node = getOne(button.getElementsByTagName('h3'));
@@ -46,7 +46,7 @@ describe('<DropdownToggle>', () => {
 
   it('does not render toggle button caret', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle open={false} title="no caret" noCaret />
+      <DropdownToggle open={false} title="no caret" noCaret />,
     );
     const caretNode = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'caret');
 
@@ -59,7 +59,7 @@ describe('<DropdownToggle>', () => {
       done();
     };
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle open={false} title="click forwards" onClick={handleClick} />
+      <DropdownToggle open={false} title="click forwards" onClick={handleClick} />,
     );
     const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
@@ -69,7 +69,7 @@ describe('<DropdownToggle>', () => {
   it('forwards id', () => {
     const id = 'testid';
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle id={id} open={false} title="id forwards" />
+      <DropdownToggle id={id} open={false} title="id forwards" />,
     );
     const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
@@ -79,7 +79,7 @@ describe('<DropdownToggle>', () => {
   it('forwards bsStyle', () => {
     const style = 'success';
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle bsStyle={style} open={false} title="bsStyle forwards" />
+      <DropdownToggle bsStyle={style} open={false} title="bsStyle forwards" />,
     );
     const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
@@ -88,7 +88,7 @@ describe('<DropdownToggle>', () => {
 
   it('forwards bsSize', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle bsSize="small" open={false} title="bsSize forwards" />
+      <DropdownToggle bsSize="small" open={false} title="bsSize forwards" />,
     );
     const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 
@@ -97,7 +97,7 @@ describe('<DropdownToggle>', () => {
 
   it('does not forward bsClass', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <DropdownToggle bsClass="my-custom-bsClass" open={false} title="bsClass" />
+      <DropdownToggle bsClass="my-custom-bsClass" open={false} title="bsClass" />,
     );
     const button = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
 

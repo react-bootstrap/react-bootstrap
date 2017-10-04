@@ -10,7 +10,7 @@ describe('Label', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Label>
         <strong>Message</strong>
-      </Label>
+      </Label>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
@@ -19,7 +19,7 @@ describe('Label', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Label>
         Message
-      </Label>
+      </Label>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\blabel\b/));
   });
@@ -28,14 +28,14 @@ describe('Label', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Label>
         Message
-      </Label>
+      </Label>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\blabel-default\b/));
   });
 
   it('Hides when empty', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Label />
+      <Label />,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
   });

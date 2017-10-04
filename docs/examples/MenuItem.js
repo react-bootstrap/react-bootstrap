@@ -7,7 +7,7 @@ const MenuItems = (
     <ul className="dropdown-menu open">
       <MenuItem header>Header</MenuItem>
       <MenuItem>link</MenuItem>
-      <MenuItem divider/>
+      <MenuItem divider />
       <MenuItem header>Header</MenuItem>
       <MenuItem>link</MenuItem>
       <MenuItem disabled>disabled</MenuItem>

@@ -46,7 +46,7 @@ class FormControlFeedback extends React.Component {
 
     if (!children) {
       return this.renderDefaultFeedback(
-        this.context.$bs_formGroup, className, classes, elementProps
+        this.context.$bs_formGroup, className, classes, elementProps,
       );
     }
 

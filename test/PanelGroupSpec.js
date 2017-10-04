@@ -11,7 +11,7 @@ describe('<PanelGroup>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup bsStyle="default">
         <Panel>Panel 1</Panel>
-      </PanelGroup>
+      </PanelGroup>,
     );
 
     let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
@@ -23,7 +23,7 @@ describe('<PanelGroup>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup bsStyle="default">
         <Panel bsStyle="primary">Panel 1</Panel>
-      </PanelGroup>
+      </PanelGroup>,
     );
 
     let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
@@ -37,7 +37,7 @@ describe('<PanelGroup>', () => {
         <Panel>
           <input type="text" className="changeme" />
         </Panel>
-      </PanelGroup>
+      </PanelGroup>,
     );
 
     let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
@@ -45,7 +45,7 @@ describe('<PanelGroup>', () => {
     assert.notOk(panel.state.collapsing);
 
     ReactTestUtils.Simulate.select(
-      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'changeme')
+      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'changeme'),
     );
 
     assert.notOk(panel.state.collapsing);
@@ -70,7 +70,7 @@ describe('<PanelGroup>', () => {
         <Panel eventKey="1" header={header}>
           <div>Panel body</div>
         </Panel>
-      </PanelGroup>
+      </PanelGroup>,
     );
 
     let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
@@ -78,27 +78,30 @@ describe('<PanelGroup>', () => {
     assert.notOk(panel.state.expanded);
 
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'ignoreme')
+      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'ignoreme'),
     );
 
     assert.notOk(panel.state.expanded);
 
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'clickme')
+      ReactTestUtils.findRenderedDOMComponentWithClass(panel, 'clickme'),
     );
 
     assert.ok(panel.state.expanded);
   });
 
   describe('Web Accessibility', () => {
-    let instance, panelBodies, panelGroup, links;
+    let instance,
+      panelBodies,
+      panelGroup,
+      links;
 
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
         <PanelGroup defaultActiveKey="1" accordion>
           <Panel header="Collapsible Group Item #1" eventKey="1" id="Panel1ID">Panel 1</Panel>
           <Panel header="Collapsible Group Item #2" eventKey="2" id="Panel2ID">Panel 2</Panel>
-        </PanelGroup>
+        </PanelGroup>,
       );
       let accordion = ReactTestUtils.findRenderedComponentWithType(instance, PanelGroup);
       panelGroup = ReactTestUtils.findRenderedDOMComponentWithClass(accordion, 'panel-group');

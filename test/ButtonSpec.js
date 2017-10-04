@@ -9,7 +9,7 @@ describe('<Button>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button>
         Title
-      </Button>
+      </Button>,
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'BUTTON');
   });
@@ -18,7 +18,7 @@ describe('<Button>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button>
         Title
-      </Button>
+      </Button>,
     );
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('type'), 'button');
   });
@@ -27,7 +27,7 @@ describe('<Button>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button type="submit">
         Title
-      </Button>
+      </Button>,
     );
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('type'), 'submit');
   });
@@ -37,7 +37,7 @@ describe('<Button>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button href={href}>
         Title
-      </Button>
+      </Button>,
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'A');
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('href'), href);
@@ -50,7 +50,7 @@ describe('<Button>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button onClick={doneOp}>
         Title
-      </Button>
+      </Button>,
     );
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(instance));
   });
@@ -59,7 +59,7 @@ describe('<Button>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button disabled>
         Title
-      </Button>
+      </Button>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).disabled);
   });
@@ -68,7 +68,7 @@ describe('<Button>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button disabled href="#">
         Title
-      </Button>
+      </Button>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bdisabled\b/));
   });
@@ -77,7 +77,7 @@ describe('<Button>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button block>
         Title
-      </Button>
+      </Button>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-block\b/));
   });
@@ -86,7 +86,7 @@ describe('<Button>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button bsStyle="danger">
         Title
-      </Button>
+      </Button>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-danger\b/));
   });
@@ -95,7 +95,7 @@ describe('<Button>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button className="bob" bsStyle="danger">
         Title
-      </Button>
+      </Button>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbob\b/));
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-danger\b/));
@@ -105,7 +105,7 @@ describe('<Button>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button bsStyle="default">
         Title
-      </Button>
+      </Button>,
     );
     assert.equal(instance.props.bsStyle, 'default');
   });
@@ -114,7 +114,7 @@ describe('<Button>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Button active>
         Title
-      </Button>
+      </Button>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bactive\b/));
   });

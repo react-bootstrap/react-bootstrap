@@ -36,8 +36,8 @@ const propTypes = {
    *
    * ```js
    * function (
-   * 	Any eventKey,
-   * 	SyntheticEvent event?
+   *   Any eventKey,
+   *   SyntheticEvent event?
    * )
    * ```
    *
@@ -65,7 +65,7 @@ const defaultProps = {
 
 function getDefaultActiveKey(children) {
   let defaultActiveKey;
-  ValidComponentChildren.forEach(children, child => {
+  ValidComponentChildren.forEach(children, (child) => {
     if (defaultActiveKey == null) {
       defaultActiveKey = child.props.eventKey;
     }

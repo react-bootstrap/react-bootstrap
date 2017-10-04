@@ -9,7 +9,7 @@ import { shouldWarn } from './helpers';
 describe('<FormControl>', () => {
   it('should render correctly', () => {
     $(
-      <FormControl type="text" id="foo" name="bar" className="my-control" />
+      <FormControl type="text" id="foo" name="bar" className="my-control" />,
     )
       .shallowRender()
       .single('input#foo.form-control.my-control[name="bar"]');
@@ -17,7 +17,7 @@ describe('<FormControl>', () => {
 
   it('should support textarea', () => {
     $(
-      <FormControl componentClass="textarea" />
+      <FormControl componentClass="textarea" />,
     )
       .shallowRender()
       .single('textarea.form-control');
@@ -25,7 +25,7 @@ describe('<FormControl>', () => {
 
   it('should support select', () => {
     $(
-      <FormControl componentClass="select" />
+      <FormControl componentClass="select" />,
     )
       .shallowRender()
       .single('select.form-control');
@@ -33,18 +33,18 @@ describe('<FormControl>', () => {
 
   it('should not render .form-control for type="file"', () => {
     $(
-      <FormControl type="file" />
+      <FormControl type="file" />,
     )
       .shallowRender()
       .single('input[type="file"]')
-        .none('.form-control');
+      .none('.form-control');
   });
 
   it('should use controlId for id', () => {
     $(
       <FormGroup controlId="foo">
         <FormControl type="text" />
-      </FormGroup>
+      </FormGroup>,
     )
       .render()
       .single('input#foo.form-control');
@@ -56,7 +56,7 @@ describe('<FormControl>', () => {
     $(
       <FormGroup controlId="foo">
         <FormControl type="text" id="bar" />
-      </FormGroup>
+      </FormGroup>,
     )
       .render()
       .single('input#bar.form-control');
@@ -67,7 +67,7 @@ describe('<FormControl>', () => {
       render() {
         return (
           <FormGroup controlId="foo">
-            <FormControl type="text" inputRef={ref => { this.input = ref; }} />
+            <FormControl type="text" inputRef={(ref) => { this.input = ref; }} />
           </FormGroup>
         );
       }
@@ -79,7 +79,7 @@ describe('<FormControl>', () => {
 
   it('should properly display size of FormControl', () => {
     $(
-      <FormControl type="text" bsSize="lg" />
+      <FormControl type="text" bsSize="lg" />,
     )
       .render()
       .single('input.form-control.input-lg');
