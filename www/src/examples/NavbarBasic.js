@@ -2,7 +2,7 @@ const navbarInstance = (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <a href="#">React-Bootstrap</a>
+        <a href="#home">React-Bootstrap</a>
       </Navbar.Brand>
     </Navbar.Header>
     <Nav>

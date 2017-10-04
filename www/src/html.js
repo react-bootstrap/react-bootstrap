@@ -11,7 +11,8 @@ module.exports = class HTML extends React.Component {
 
     let css;
     if (process.env.NODE_ENV === 'production') {
-      css = <style dangerouslySetInnerHTML={{ __html: require('!raw-loader!../public/styles.css') }} />
+      let html = require('!raw-loader!../public/styles.css'); // eslint-disable-line
+      css = <style dangerouslySetInnerHTML={{ __html: html }} />;
     }
 
     // Dump out our current props to a global object via a script tag so
@@ -29,7 +30,7 @@ module.exports = class HTML extends React.Component {
               w.console[method] = noop;
             });
          }
-        }(window));`
+        }(window));`,
     };
 
     // let head = {
@@ -43,7 +44,7 @@ module.exports = class HTML extends React.Component {
     // };
 
     return (
-      <html>
+      <html lang="en">
         <head>
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />

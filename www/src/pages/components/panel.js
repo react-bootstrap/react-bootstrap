@@ -4,15 +4,15 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import PanelBasic from '!!raw-loader!../../examples/PanelBasic';
-import PanelCollapsible from '!!raw-loader!../../examples/PanelCollapsible';
-import PanelWithHeading from '!!raw-loader!../../examples/PanelWithHeading';
-import PanelWithFooter from '!!raw-loader!../../examples/PanelWithFooter';
-import PanelContextual from '!!raw-loader!../../examples/PanelContextual';
-import PanelListGroupFill from '!!raw-loader!../../examples/PanelListGroupFill';
-import PanelGroupControlled from '!!raw-loader!../../examples/PanelGroupControlled';
-import PanelGroupUncontrolled from '!!raw-loader!../../examples/PanelGroupUncontrolled';
-import PanelGroupAccordion from '!!raw-loader!../../examples/PanelGroupAccordion';
+import PanelBasic from '../../examples/PanelBasic';
+import PanelCollapsible from '../../examples/PanelCollapsible';
+import PanelWithHeading from '../../examples/PanelWithHeading';
+import PanelWithFooter from '../../examples/PanelWithFooter';
+import PanelContextual from '../../examples/PanelContextual';
+import PanelListGroupFill from '../../examples/PanelListGroupFill';
+import PanelGroupControlled from '../../examples/PanelGroupControlled';
+import PanelGroupUncontrolled from '../../examples/PanelGroupUncontrolled';
+import PanelGroupAccordion from '../../examples/PanelGroupAccordion';
 
 export default function PanelSection({ data }) {
   return (
@@ -60,10 +60,10 @@ export default function PanelSection({ data }) {
       <h3><Anchor id="panels-props">Props</Anchor></h3>
 
       <h4><Anchor id="panels-props-accordion">Panels, Accordion</Anchor></h4>
-      <PropTable metadata={data.Panel}/>
+      <PropTable metadata={data.Panel} />
 
       <h4><Anchor id="panels-props-group">PanelGroup</Anchor></h4>
-      <PropTable metadata={data.PanelGroup}/>
+      <PropTable metadata={data.PanelGroup} />
     </div>
   );
 }

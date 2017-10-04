@@ -1,4 +1,3 @@
-import merge from 'lodash/merge';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -32,28 +31,46 @@ class PropTable extends React.Component {
     metadata: PropTypes.object.isRequired,
   }
 
-  render() {
-    let propsData = this.props.metadata.props || [];
-
-    if (!propsData.length) {
-      return <div className="text-muted"><em>There are no public props for this component.</em></div>;
+  getDisplayTypeName(typeName) {
+    if (typeName === 'func') {
+      return 'function';
+    } else if (typeName === 'bool') {
+      return 'boolean';
     }
 
-    return (
-      <Table bordered striped className="prop-table">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this._renderRows(propsData)}
-        </tbody>
-      </Table>
-    );
+    return typeName;
+  }
+
+  getType(prop) {
+    let type = prop.type || {};
+    let name = this.getDisplayTypeName(type.name);
+    let doclets = prop.doclets || {};
+
+    switch (name) {
+      case 'object':
+        return name;
+      case 'union':
+        return type.value.reduce((current, val, i, list) => {
+          let item = this.getType({ type: val });
+          if (React.isValidElement(item)) {
+            item = React.cloneElement(item, { key: i });
+          }
+          current = current.concat(item);
+
+          return i === (list.length - 1) ? current : current.concat(' | ');
+        }, []);
+      case 'array': {
+        let child = this.getType({ type: type.value });
+
+        return <span>{'array<'}{child}{'>'}</span>;
+      }
+      case 'enum':
+        return this.renderEnum(type);
+      case 'custom':
+        return cleanDocletValue(doclets.type || type.raw);
+      default:
+        return name;
+    }
   }
 
   _renderRows(propsData) {
@@ -82,7 +99,7 @@ class PropTable extends React.Component {
             <td>
               {doclets.deprecated &&
                 <div className="prop-desc-heading">
-                  <strong className="text-danger">{'Deprecated: ' + doclets.deprecated + ' '}</strong>
+                  <strong className="text-danger">{`Deprecated: ${doclets.deprecated} `}</strong>
                 </div>
               }
               { this.renderControllableNote(propData, name) }
@@ -94,16 +111,6 @@ class PropTable extends React.Component {
           </tr>
         );
       });
-  }
-
-  renderRequiredLabel(prop) {
-    if (!prop.required) {
-      return null;
-    }
-
-    return (
-      <Label>required</Label>
-    );
   }
 
   renderControllableNote(prop, propName) {
@@ -121,7 +128,7 @@ class PropTable extends React.Component {
     ) : (
       <span>
         controlled by: <code>{controllable}</code>,
-        initial prop: <code>{'default' + capitalize(propName)}</code>
+        initial prop: <code>{`default${capitalize(propName)}`}</code>
       </span>
     );
 
@@ -129,53 +136,12 @@ class PropTable extends React.Component {
       <div className="prop-desc-heading">
         <small>
           <em className="text-info">
-            <Glyphicon glyph="info-sign"/>
+            <Glyphicon glyph="info-sign" />
             &nbsp;{ text }
           </em>
         </small>
       </div>
     );
-  }
-
-  getType(prop) {
-    let type = prop.type || {};
-    let name = this.getDisplayTypeName(type.name);
-    let doclets = prop.doclets || {};
-
-    switch (name) {
-      case 'object':
-        return name;
-      case 'union':
-        return type.value.reduce((current, val, i, list) => {
-          let item = this.getType({ type: val });
-          if (React.isValidElement(item)) {
-            item = React.cloneElement(item, {key: i});
-          }
-          current = current.concat(item);
-
-          return i === (list.length - 1) ? current : current.concat(' | ');
-        }, []);
-      case 'array':
-        let child = this.getType({ type: type.value });
-
-        return <span>{'array<'}{child}{'>'}</span>;
-      case 'enum':
-        return this.renderEnum(type);
-      case 'custom':
-        return cleanDocletValue(doclets.type || type.raw);
-      default:
-        return name;
-    }
-  }
-
-  getDisplayTypeName(typeName) {
-    if (typeName === 'func') {
-      return 'function';
-    } else if (typeName === 'bool') {
-      return 'boolean';
-    }
-
-    return typeName;
   }
 
   renderEnum(enumType) {
@@ -185,17 +151,51 @@ class PropTable extends React.Component {
     enumValues.forEach(({ value }, i) => {
       if (i > 0) {
         renderedEnumValues.push(
-          <span key={`${i}c`}>, </span>
+          <span key={`${i}c`}>, </span>,
         );
       }
 
       renderedEnumValues.push(
-        <code key={i}>{value}</code>
+        <code key={i}>{value}</code>,
       );
     });
 
     return (
       <span>one of: {renderedEnumValues}</span>
+    );
+  }
+
+  renderRequiredLabel(prop) {
+    if (!prop.required) {
+      return null;
+    }
+
+    return (
+      <Label>required</Label>
+    );
+  }
+
+  render() {
+    let propsData = this.props.metadata.props || [];
+
+    if (!propsData.length) {
+      return <div className="text-muted"><em>There are no public props for this component.</em></div>;
+    }
+
+    return (
+      <Table bordered striped className="prop-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Default</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this._renderRows(propsData)}
+        </tbody>
+      </Table>
     );
   }
 }

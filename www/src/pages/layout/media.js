@@ -4,9 +4,9 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import MediaList from '!!raw-loader!../../examples/MediaList';
-import MediaObject from '!!raw-loader!../../examples/MediaObject';
-import MediaAlignment from '!!raw-loader!../../examples/MediaAlignment';
+import MediaList from '../../examples/MediaList';
+import MediaObject from '../../examples/MediaObject';
+import MediaAlignment from '../../examples/MediaAlignment';
 
 export default function MediaSection({ data }) {
   return (
@@ -31,19 +31,19 @@ export default function MediaSection({ data }) {
       <h3><Anchor id="media-props">Props</Anchor></h3>
 
       <h4><Anchor id="media-media-props">Media</Anchor></h4>
-      <PropTable metadata={data.Media}/>
+      <PropTable metadata={data.Media} />
 
       <h4><Anchor id="media-left-props">Media.Left</Anchor></h4>
-      <PropTable metadata={data.MediaLeft}/>
+      <PropTable metadata={data.MediaLeft} />
 
       <h4><Anchor id="media-right-props">Media.Right</Anchor></h4>
-      <PropTable metadata={data.MediaRight}/>
+      <PropTable metadata={data.MediaRight} />
 
       <h4><Anchor id="media-heading-props">Media.Heading</Anchor></h4>
-      <PropTable metadata={data.MediaHeading}/>
+      <PropTable metadata={data.MediaHeading} />
 
       <h4><Anchor id="media-body-props">Media.Body</Anchor></h4>
-      <PropTable metadata={data.MediaBody}/>
+      <PropTable metadata={data.MediaBody} />
     </div>
   );
 }

@@ -3,7 +3,7 @@ function handleClick() {
 }
 
 const panelInstance = (
-  <Panel onClick={ handleClick }>
+  <Panel onClick={handleClick}>
     Basic panel example
   </Panel>
 );

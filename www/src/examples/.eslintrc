@@ -1,6 +1,8 @@
 {
   "rules": {
-    "no-alert": 0
+    "no-alert": 0,
+    "react/jsx-no-undef": "off",
+    "react/no-multi-comp": "off"
   },
   "globals": {
     "classNames": false,

@@ -4,8 +4,8 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import Overlay from '!!raw-loader!../../examples/Overlay';
-import OverlayCustom from '!!raw-loader!../../examples/OverlayCustom';
+import Overlay from '../../examples/Overlay';
+import OverlayCustom from '../../examples/OverlayCustom';
 
 export default function OverlaySection({ data }) {
   return (

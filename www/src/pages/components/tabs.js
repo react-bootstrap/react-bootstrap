@@ -4,11 +4,11 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import TabsUncontrolled from '!!raw-loader!../../examples/TabsUncontrolled';
-import TabsControlled from '!!raw-loader!../../examples/TabsControlled';
-import TabsNoAnimation from '!!raw-loader!../../examples/TabsNoAnimation';
-import TabsWithDropdown from '!!raw-loader!../../examples/TabsWithDropdown';
-import LeftTabs from '!!raw-loader!../../examples/LeftTabs';
+import TabsUncontrolled from '../../examples/TabsUncontrolled';
+import TabsControlled from '../../examples/TabsControlled';
+import TabsNoAnimation from '../../examples/TabsNoAnimation';
+import TabsWithDropdown from '../../examples/TabsWithDropdown';
+import LeftTabs from '../../examples/LeftTabs';
 
 export default function TabsSection({ data }) {
   return (
@@ -50,19 +50,19 @@ export default function TabsSection({ data }) {
       <h3><Anchor id="tabs-props">Props</Anchor></h3>
 
       <h4><Anchor id="tabs-props-area">Tabs</Anchor></h4>
-      <PropTable metadata={data.Tabs}/>
+      <PropTable metadata={data.Tabs} />
 
       <h4><Anchor id="tabs-props-pane">Tab</Anchor></h4>
-      <PropTable metadata={data.Tab}/>
+      <PropTable metadata={data.Tab} />
 
       <h4><Anchor id="tabs-props-pane">TabContainer</Anchor></h4>
-      <PropTable metadata={data.TabContainer}/>
+      <PropTable metadata={data.TabContainer} />
 
       <h4><Anchor id="tabs-props-pane">TabContent</Anchor></h4>
-      <PropTable metadata={data.TabContent}/>
+      <PropTable metadata={data.TabContent} />
 
       <h4><Anchor id="tabs-props-pane">TabPane</Anchor></h4>
-      <PropTable metadata={data.TabPane}/>
+      <PropTable metadata={data.TabPane} />
     </div>
   );
 }

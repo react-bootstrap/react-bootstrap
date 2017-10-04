@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 import CodeMirror from 'codemirror';
 import 'codemirror/addon/runmode/runmode';
 import 'codemirror/mode/jsx/jsx';

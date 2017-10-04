@@ -4,11 +4,11 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import PopoverBasic from '!!raw-loader!../../examples/PopoverBasic';
-import PopoverPositioned from '!!raw-loader!../../examples/PopoverPositioned';
-import PopoverTriggerBehaviors from '!!raw-loader!../../examples/PopoverTriggerBehaviors';
-import PopoverContained from '!!raw-loader!../../examples/PopoverContained';
-import PopoverPositionedScrolling from '!!raw-loader!../../examples/PopoverPositionedScrolling';
+import PopoverBasic from '../../examples/PopoverBasic';
+import PopoverPositioned from '../../examples/PopoverPositioned';
+import PopoverTriggerBehaviors from '../../examples/PopoverTriggerBehaviors';
+import PopoverContained from '../../examples/PopoverContained';
+import PopoverPositionedScrolling from '../../examples/PopoverPositionedScrolling';
 
 export default function PopoverSection({ data }) {
   return (
@@ -20,7 +20,7 @@ export default function PopoverSection({ data }) {
       <p>
         The Popover, offers a more robust alternative to the Tooltip for displaying overlays of content.
       </p>
-      <ReactPlayground codeText={PopoverBasic}/>
+      <ReactPlayground codeText={PopoverBasic} />
 
       <h4><Anchor id="popovers-overlay-trigger">With OverlayTrigger</Anchor></h4>
       <p>
@@ -41,8 +41,10 @@ export default function PopoverSection({ data }) {
       <ReactPlayground codeText={PopoverContained} exampleClassName="bs-example-popover-contained" />
 
       <h4><Anchor id="popovers-positioned-scrolling">Positioned popover components in scrolling container</Anchor></h4>
-      <ReactPlayground codeText={PopoverPositionedScrolling}
-        exampleClassName="bs-example-popover-scroll" />
+      <ReactPlayground
+        codeText={PopoverPositionedScrolling}
+        exampleClassName="bs-example-popover-scroll"
+      />
 
       <h3><Anchor id="popover-props">Props</Anchor></h3>
       <PropTable metadata={data.Popover} />

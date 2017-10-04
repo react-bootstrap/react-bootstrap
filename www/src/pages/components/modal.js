@@ -4,11 +4,11 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import ModalStatic from '!!raw-loader!../../examples/ModalStatic';
-import Modal from '!!raw-loader!../../examples/Modal';
-import ModalContained from '!!raw-loader!../../examples/ModalContained';
-import ModalDefaultSizing from '!!raw-loader!../../examples/ModalDefaultSizing';
-import ModalCustomSizing from '!!raw-loader!../../examples/ModalCustomSizing';
+import ModalStatic from '../../examples/ModalStatic';
+import Modal from '../../examples/Modal';
+import ModalContained from '../../examples/ModalContained';
+import ModalDefaultSizing from '../../examples/ModalDefaultSizing';
+import ModalCustomSizing from '../../examples/ModalCustomSizing';
 
 export default function ModalSection({ data }) {
   return (
@@ -22,18 +22,18 @@ export default function ModalSection({ data }) {
       <ReactPlayground codeText={ModalStatic} />
 
       <h3><Anchor id="modals-live">Basic example</Anchor></h3>
-      <p></p>
+      <p />
       <p>
-        A modal with header, body, and set of actions in the footer. Use <code>{"<Modal/>"}</code> in combination with other components to
-        show or hide your Modal. The <code>{"<Modal/>"}</code> Component comes with
-        a few convenient "sub components": <code>{"<Modal.Header/>"}</code>, <code>{"<Modal.Title/>"}</code>, <code>{"<Modal.Body/>"}</code>,
-        and <code>{"<Modal.Footer/>"}</code>, which you can use to build the Modal content.
+        A modal with header, body, and set of actions in the footer. Use <code>{'<Modal/>'}</code> in combination with other components to
+        show or hide your Modal. The <code>{'<Modal/>'}</code> Component comes with
+        a few convenient "sub components": <code>{'<Modal.Header/>'}</code>, <code>{'<Modal.Title/>'}</code>, <code>{'<Modal.Body/>'}</code>,
+        and <code>{'<Modal.Footer/>'}</code>, which you can use to build the Modal content.
       </p>
       <ReactPlayground codeText={Modal} />
       <div className="bs-callout bs-callout-info">
         <h4>Additional Import Options</h4>
         <p>
-          The Modal Header, Title, Body, and Footer components are available as static properties the <code>{"<Modal/>"}</code> component, but you can also,
+          The Modal Header, Title, Body, and Footer components are available as static properties the <code>{'<Modal/>'}</code> component, but you can also,
           import them directly from the <code>/lib</code> directory like: <code>{'require("react-bootstrap/lib/ModalHeader")'}</code>.
         </p>
       </div>
@@ -47,7 +47,7 @@ export default function ModalSection({ data }) {
           '}\n' +
           '.modal-container .modal, .modal-container .modal-backdrop {\n' +
           '  position: absolute;\n' +
-          '}\n'
+          '}\n',
         )}
       </pre>
       <ReactPlayground codeText={ModalContained} />
@@ -63,19 +63,19 @@ export default function ModalSection({ data }) {
       <h3><Anchor id="modals-props">Props</Anchor></h3>
 
       <h4><Anchor id="modals-props-modal">Modal</Anchor></h4>
-      <PropTable metadata={data.Modal}/>
+      <PropTable metadata={data.Modal} />
 
       <h4><Anchor id="modals-props-modal-header">Modal.Header</Anchor></h4>
-      <PropTable metadata={data.ModalHeader}/>
+      <PropTable metadata={data.ModalHeader} />
 
       <h4><Anchor id="modals-props-modal-title">Modal.Title</Anchor></h4>
-      <PropTable metadata={data.ModalTitle}/>
+      <PropTable metadata={data.ModalTitle} />
 
       <h4><Anchor id="modals-props-modal-body">Modal.Body</Anchor></h4>
-      <PropTable metadata={data.ModalBody}/>
+      <PropTable metadata={data.ModalBody} />
 
       <h4><Anchor id="modals-props-modal-footer">Modal.Footer</Anchor></h4>
-      <PropTable metadata={data.ModalFooter}/>
+      <PropTable metadata={data.ModalFooter} />
     </div>
   );
 }

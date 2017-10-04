@@ -1,7 +1,7 @@
 const LoadingButton = React.createClass({
   getInitialState() {
     return {
-      isLoading: false
+      isLoading: false,
     };
   },
 
@@ -11,21 +11,22 @@ const LoadingButton = React.createClass({
       <Button
         bsStyle="primary"
         disabled={isLoading}
-        onClick={!isLoading ? this.handleClick : null}>
+        onClick={!isLoading ? this.handleClick : null}
+      >
         {isLoading ? 'Loading...' : 'Loading state'}
       </Button>
     );
   },
 
   handleClick() {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
 
     // This probably where you would have an `ajax` call
     setTimeout(() => {
       // Completed of async action, set loading state back
-      this.setState({isLoading: false});
+      this.setState({ isLoading: false });
     }, 2000);
-  }
+  },
 });
 
 ReactDOM.render(<LoadingButton />, mountNode);

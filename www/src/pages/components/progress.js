@@ -4,13 +4,14 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import ProgressBarBasic from '!!raw-loader!../../examples/ProgressBarBasic';
-import ProgressBarWithLabel from '!!raw-loader!../../examples/ProgressBarWithLabel';
-import ProgressBarScreenreaderLabel from '!!raw-loader!../../examples/ProgressBarScreenreaderLabel';
-import ProgressBarContextual from '!!raw-loader!../../examples/ProgressBarContextual';
-import ProgressBarStriped from '!!raw-loader!../../examples/ProgressBarStriped';
-import ProgressBarAnimated from '!!raw-loader!../../examples/ProgressBarAnimated';
-import ProgressBarStacked from '!!raw-loader!../../examples/ProgressBarStacked';
+import ProgressBarBasic from '../../examples/ProgressBarBasic';
+import ProgressBarWithLabel from '../../examples/ProgressBarWithLabel';
+import ProgressBarScreenreaderLabel from '../../examples/ProgressBarScreenreaderLabel';
+import ProgressBarContextual from '../../examples/ProgressBarContextual';
+import ProgressBarStriped from '../../examples/ProgressBarStriped';
+import ProgressBarAnimated from '../../examples/ProgressBarAnimated';
+import ProgressBarStacked from '../../examples/ProgressBarStacked';
+
 export default function ProgressBarSection({ data }) {
   return (
     <div className="bs-docs-section">
@@ -49,7 +50,7 @@ export default function ProgressBarSection({ data }) {
       <ReactPlayground codeText={ProgressBarStacked} />
 
       <h3><Anchor id="progress-props">ProgressBar</Anchor></h3>
-      <PropTable metadata={data.ProgressBar}/>
+      <PropTable metadata={data.ProgressBar} />
     </div>
   );
 }

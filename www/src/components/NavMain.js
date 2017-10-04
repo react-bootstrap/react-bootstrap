@@ -8,7 +8,7 @@ import Nav from 'react-bootstrap/lib/Nav';
 const NAV_LINKS = {
   documentation: {
     link: '/getting-started/introduction',
-    title: 'Documentation'
+    title: 'Documentation',
   },
 };
 
@@ -54,6 +54,7 @@ function NavMain({ activePage }) {
               <a
                 href="https://github.com/react-bootstrap/react-bootstrap"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 GitHub
               </a>

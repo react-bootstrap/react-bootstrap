@@ -4,7 +4,7 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import Jumbotron from '!!raw-loader!../../examples/Jumbotron';
+import Jumbotron from '../../examples/Jumbotron';
 
 export default function JumbotronSection({ data }) {
   return (
@@ -17,7 +17,7 @@ export default function JumbotronSection({ data }) {
       <ReactPlayground codeText={Jumbotron} />
 
       <h3><Anchor id="jumbotron-props">Props</Anchor></h3>
-      <PropTable metadata={data.Jumbotron}/>
+      <PropTable metadata={data.Jumbotron} />
     </div>
   );
 }

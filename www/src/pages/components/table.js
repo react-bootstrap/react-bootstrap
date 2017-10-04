@@ -4,8 +4,8 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import TableBasic from '!!raw-loader!../../examples/TableBasic';
-import TableResponsive from '!!raw-loader!../../examples/TableResponsive';
+import TableBasic from '../../examples/TableBasic';
+import TableResponsive from '../../examples/TableResponsive';
 
 
 export default function TableSection({ data }) {
@@ -23,7 +23,7 @@ export default function TableSection({ data }) {
       <ReactPlayground codeText={TableResponsive} />
 
       <h3><Anchor id="table-props">Props</Anchor></h3>
-      <PropTable metadata={data.Table}/>
+      <PropTable metadata={data.Table} />
     </div>
   );
 }

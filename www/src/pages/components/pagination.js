@@ -4,11 +4,11 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import PagerDefault from '!!raw-loader!../../examples/PagerDefault';
-import PagerAligned from '!!raw-loader!../../examples/PagerAligned';
-import PagerDisabled from '!!raw-loader!../../examples/PagerDisabled';
-import PaginationBasic from '!!raw-loader!../../examples/PaginationBasic';
-import PaginationAdvanced from '!!raw-loader!../../examples/PaginationAdvanced';
+import PagerDefault from '../../examples/PagerDefault';
+import PagerAligned from '../../examples/PagerAligned';
+import PagerDisabled from '../../examples/PagerDisabled';
+import PaginationBasic from '../../examples/PaginationBasic';
+import PaginationAdvanced from '../../examples/PaginationAdvanced';
 
 export default function PaginationSection({ data }) {
   return (
@@ -33,10 +33,10 @@ export default function PaginationSection({ data }) {
       <h3><Anchor id="pager-props">Props</Anchor></h3>
 
       <h4><Anchor id="pager-props-pager">Pager</Anchor></h4>
-      <PropTable metadata={data.Pager}/>
+      <PropTable metadata={data.Pager} />
 
       <h4><Anchor id="pager-props-pager-item">Pager.Item</Anchor></h4>
-      <PropTable metadata={data.Pager.Item}/>
+      <PropTable metadata={data.Pager.Item} />
 
       <h2 className="page-header">
         <Anchor id="pagination">Pagination</Anchor> <small>Pagination</small>
@@ -50,7 +50,7 @@ export default function PaginationSection({ data }) {
       <ReactPlayground codeText={PaginationAdvanced} />
 
       <h3><Anchor id="pagination-props">Props</Anchor></h3>
-      <PropTable metadata={data.Pagination}/>
+      <PropTable metadata={data.Pagination} />
     </div>
   );
 }

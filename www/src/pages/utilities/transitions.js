@@ -4,8 +4,8 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import Fade from '!!raw-loader!../../examples/Fade';
-import Collapse from '!!raw-loader!../../examples/Collapse';
+import Fade from '../../examples/Fade';
+import Collapse from '../../examples/Collapse';
 
 
 export default function TransitionSection({ data }) {
@@ -30,7 +30,7 @@ export default function TransitionSection({ data }) {
           has non-zero margin or padding,
           try wrapping the contents
           of your <code>&lt;Collapse&gt;</code>
-          {" "}inside a node with no margin or padding,
+          {' '}inside a node with no margin or padding,
           like the <code>&lt;div&gt;</code> in the example below.
           This will allow the height to be computed properly,
           so the animation can proceed smoothly.
@@ -39,7 +39,7 @@ export default function TransitionSection({ data }) {
       <ReactPlayground codeText={Collapse} />
 
       <h4><Anchor id="transitions-collapse-props">Props</Anchor></h4>
-      <PropTable metadata={data.Collapse}/>
+      <PropTable metadata={data.Collapse} />
 
       <h3>
         <Anchor id="transitions-fade">Fade</Anchor>
@@ -49,7 +49,7 @@ export default function TransitionSection({ data }) {
       <ReactPlayground codeText={Fade} />
 
       <h4><Anchor id="transitions-fade-props">Props</Anchor></h4>
-      <PropTable metadata={data.Fade}/>
+      <PropTable metadata={data.Fade} />
     </div>
   );
 }

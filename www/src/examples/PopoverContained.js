@@ -2,7 +2,7 @@ class Example extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.handleClick = e => {
+    this.handleClick = (e) => {
       this.setState({ target: e.target, show: !this.state.show });
     };
 

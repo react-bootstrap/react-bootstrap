@@ -1,4 +1,3 @@
-const path = require('path');
 
 exports.modifyWebpackConfig = function modifyWebpackConfig({ config }) {
   config.loader('less-loader', {
@@ -6,9 +5,14 @@ exports.modifyWebpackConfig = function modifyWebpackConfig({ config }) {
     loaders: ['style-loader', 'css-loader', 'less-loader'],
   });
 
-  config._config.resolve.alias = {
-    'react-bootstrap/lib': path.resolve(__dirname, '../src')
-  };
+  config.loader('raw-loader', {
+    test: /src\/examples\//,
+    loaders: ['raw-loader'],
+  });
+
+  // config._config.resolve.alias = {
+  //   'react-bootstrap/lib': path.resolve(__dirname, '../src')
+  // };
 };
 
 

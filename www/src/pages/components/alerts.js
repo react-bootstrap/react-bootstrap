@@ -4,8 +4,8 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import AlertBasic from '!!raw-loader!../../examples/AlertBasic';
-import AlertDismissable from '!!raw-loader!../../examples/AlertDismissable';
+import AlertBasic from '../../examples/AlertBasic';
+import AlertDismissable from '../../examples/AlertDismissable';
 
 export default function AlertsSection({ data }) {
   return (

@@ -4,7 +4,7 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import PageHeader from '!!raw-loader!../../examples/Jumbotron';
+import PageHeader from '../../examples/Jumbotron';
 
 export default function PageHeaderSection({ data }) {
   return (
@@ -17,7 +17,7 @@ export default function PageHeaderSection({ data }) {
       <ReactPlayground codeText={PageHeader} />
 
       <h3><Anchor id="page-header-props">Props</Anchor></h3>
-      <PropTable metadata={data.PageHeader}/>
+      <PropTable metadata={data.PageHeader} />
     </div>
   );
 }

@@ -3,9 +3,9 @@ import React from 'react';
 import Anchor from '../../components/Anchor';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import CustomButtonStyle from '!!raw-loader!../../examples/CustomButtonStyle';
+import CustomButtonStyle from '../../examples/CustomButtonStyle';
 
-export default function CustomStylesSection({ data }) {
+export default function CustomStylesSection() {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">

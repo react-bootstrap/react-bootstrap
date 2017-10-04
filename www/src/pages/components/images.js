@@ -4,10 +4,10 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import ImageShape from '!!raw-loader!../../examples/ImageShape';
-import ImageResponsive from '!!raw-loader!../../examples/ImageResponsive';
-import ThumbnailAnchor from '!!raw-loader!../../examples/ThumbnailAnchor';
-import ThumbnailDiv from '!!raw-loader!../../examples/ThumbnailDiv';
+import ImageShape from '../../examples/ImageShape';
+import ImageResponsive from '../../examples/ImageResponsive';
+import ThumbnailAnchor from '../../examples/ThumbnailAnchor';
+import ThumbnailDiv from '../../examples/ThumbnailDiv';
 
 export default function ImageSection({ data }) {
   return (
@@ -25,7 +25,7 @@ export default function ImageSection({ data }) {
       <ReactPlayground codeText={ImageResponsive} />
 
       <h3><Anchor id="image-props">Props</Anchor></h3>
-      <PropTable metadata={data.Image}/>
+      <PropTable metadata={data.Image} />
 
       <h2 className="page-header">
         <Anchor id="thumbnail">Thumbnails</Anchor> <small>Thumbnail</small>
@@ -42,7 +42,7 @@ export default function ImageSection({ data }) {
       <ReactPlayground codeText={ThumbnailDiv} />
 
       <h3><Anchor id="thumbnail-props">Props</Anchor></h3>
-      <PropTable metadata={data.Thumbnail}/>
+      <PropTable metadata={data.Thumbnail} />
     </div>
   );
 }

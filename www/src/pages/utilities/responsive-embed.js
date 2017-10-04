@@ -4,7 +4,7 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import ResponsiveEmbed from '!!raw-loader!../../examples/ResponsiveEmbed';
+import ResponsiveEmbed from '../../examples/ResponsiveEmbed';
 
 export default function ResponsiveEmbedSection({ data }) {
   return (
@@ -19,7 +19,7 @@ export default function ResponsiveEmbedSection({ data }) {
       <ReactPlayground codeText={ResponsiveEmbed} />
 
       <h3><Anchor id="responsive-embed-props">Props</Anchor></h3>
-      <PropTable metadata={data.ResponsiveEmbed}/>
+      <PropTable metadata={data.ResponsiveEmbed} />
     </div>
   );
 }

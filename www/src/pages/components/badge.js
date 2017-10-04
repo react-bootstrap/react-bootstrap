@@ -4,7 +4,7 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import Badge from '!!raw-loader!../../examples/Badge';
+import Badge from '../../examples/Badge';
 
 export default function BadgeSection({ data }) {
   return (
@@ -13,7 +13,7 @@ export default function BadgeSection({ data }) {
         <Anchor id="badges">Badges</Anchor> <small>Badge</small>
       </h2>
 
-      <p>Easily highlight new or unread items by adding a <code>{"<Badge>"}</code> to links, Bootstrap navs, and more.</p>
+      <p>Easily highlight new or unread items by adding a <code>{'<Badge>'}</code> to links, Bootstrap navs, and more.</p>
       <ReactPlayground codeText={Badge} />
       <div className="bs-callout bs-callout-info">
         <h4>Cross-browser compatibility</h4>

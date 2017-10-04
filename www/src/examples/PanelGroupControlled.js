@@ -1,7 +1,7 @@
 const ControlledPanelGroup = React.createClass({
   getInitialState() {
     return {
-      activeKey: '1'
+      activeKey: '1',
     };
   },
 
@@ -16,7 +16,7 @@ const ControlledPanelGroup = React.createClass({
         <Panel header="Panel 2" eventKey="2">Panel 2 content</Panel>
       </PanelGroup>
     );
-  }
+  },
 });
 
 ReactDOM.render(<ControlledPanelGroup />, mountNode);

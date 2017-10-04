@@ -12,7 +12,6 @@ const propTypes = {
 };
 
 
-
 function ComponentsPage({ children, ...props }) {
   return (
     <Default {...props}>

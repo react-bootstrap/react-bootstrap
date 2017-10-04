@@ -7,6 +7,10 @@ import Anchor from '../../components/Anchor';
 import CodeExample from '../../components/CodeExample';
 
 export default class Page extends React.Component {
+  shouldComponentUpdate() {
+    return false;
+  }
+
   render() {
     return (
       <div>
@@ -17,7 +21,7 @@ export default class Page extends React.Component {
               <Panel header="npm (recommended)" className="bs-docs-code-panel">
                 <CodeExample
                   codeText={
-`$ npm install --save react react-dom
+                    `$ npm install --save react react-dom
 $ npm install --save react-bootstrap`
                   }
                 />
@@ -27,7 +31,7 @@ $ npm install --save react-bootstrap`
               <Panel header="bower" className="bs-docs-code-panel">
                 <CodeExample
                   codeText={
-`$ bower install react
+                    `$ bower install react
 $ bower install react-bootstrap`
                   }
                 />
@@ -45,7 +49,7 @@ $ bower install react-bootstrap`
           <CodeExample
             mode="htmlmixed"
             codeText={
-`<!-- Latest compiled and minified CSS -->
+              `<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 
 <!-- Optional theme -->
@@ -89,7 +93,7 @@ $ bower install react-bootstrap`
           <CodeExample
             mode="javascript"
             codeText={
-`var Alert = require('react-bootstrap/lib/Alert');
+              `var Alert = require('react-bootstrap/lib/Alert');
 // or
 var Alert = require('react-bootstrap').Alert;`
             }
@@ -103,7 +107,7 @@ var Alert = require('react-bootstrap').Alert;`
           <CodeExample
             mode="javascript"
             codeText={
-`import Button from 'react-bootstrap/lib/Button';
+              `import Button from 'react-bootstrap/lib/Button';
 // or
 import { Button } from 'react-bootstrap';`
             }
@@ -119,7 +123,7 @@ import { Button } from 'react-bootstrap';`
           <CodeExample
             mode="javascript"
             codeText={
-`define(['react-bootstrap'], function(ReactBootstrap) {
+              `define(['react-bootstrap'], function(ReactBootstrap) {
 var Alert = ReactBootstrap.Alert;
 ...
 });`
@@ -136,7 +140,7 @@ var Alert = ReactBootstrap.Alert;
           <CodeExample
             mode="htmlmixed"
             codeText={
-`<script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react.min.js"></script>
+              `<script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react-dom.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/<version>/react-bootstrap.min.js"></script>
 <script>
@@ -150,7 +154,7 @@ var Alert = ReactBootstrap.Alert;
           <h2 className="page-header"><Anchor id="browser-support">Browser support</Anchor></h2>
           <p>We aim to support all browsers supported by both <a href="http://facebook.github.io/react/docs/working-with-the-browser.html#browser-support-and-polyfills">React</a> and <a href="http://getbootstrap.com/getting-started/#support">Bootstrap</a>.</p>
           <p>Unfortunately, due to the lack of resources and the will of dedicating the efforts to modern browsers and getting closer to Bootstrap's features, we will not be testing <code>react-bootstrap</code> against IE8 anymore.
-            <br/>We will however continue supporting IE8 as long as people submit PRs addressing compatibility issues with it.</p>
+            <br />We will however continue supporting IE8 as long as people submit PRs addressing compatibility issues with it.</p>
 
           <p>React requires <a href="http://facebook.github.io/react/docs/working-with-the-browser.html#browser-support-and-polyfills">polyfills for non-ES5 capable browsers.</a></p>
 
@@ -159,7 +163,7 @@ var Alert = ReactBootstrap.Alert;
               mode="htmlmixed"
               codeText={
 
-`<!--[if lt IE 9]>
+                `<!--[if lt IE 9]>
 <script>
 (function(){
 var ef = function(){};
@@ -177,9 +181,5 @@ window.console = window.console || {log:ef,warn:ef,error:ef,dir:ef};
         </div>
       </div>
     );
-  }
-
-  shouldComponentUpdate() {
-    return false;
   }
 }

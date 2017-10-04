@@ -4,12 +4,12 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import ListGroupDefault from '!!raw-loader!../../examples/ListGroupDefault';
-import ListGroupLinked from '!!raw-loader!../../examples/ListGroupLinked';
-import ListGroupActive from '!!raw-loader!../../examples/ListGroupActive';
-import ListGroupStyle from '!!raw-loader!../../examples/ListGroupStyle';
-import ListGroupHeader from '!!raw-loader!../../examples/ListGroupHeader';
-import ListGroupCustom from '!!raw-loader!../../examples/ListGroupCustom';
+import ListGroupDefault from '../../examples/ListGroupDefault';
+import ListGroupLinked from '../../examples/ListGroupLinked';
+import ListGroupActive from '../../examples/ListGroupActive';
+import ListGroupStyle from '../../examples/ListGroupStyle';
+import ListGroupHeader from '../../examples/ListGroupHeader';
+import ListGroupCustom from '../../examples/ListGroupCustom';
 
 export default function ListGroupSection({ data }) {
   return (
@@ -52,10 +52,10 @@ export default function ListGroupSection({ data }) {
       <h3><Anchor id="listgroup-props">Props</Anchor></h3>
 
       <h4><Anchor id="listgroup-props-group">ListGroup</Anchor></h4>
-      <PropTable metadata={data.ListGroup}/>
+      <PropTable metadata={data.ListGroup} />
 
       <h4><Anchor id="listgroup-props-item">ListGroupItem</Anchor></h4>
-      <PropTable metadata={data.ListGroupItem}/>
+      <PropTable metadata={data.ListGroupItem} />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 const path = require('path');
 const defaultDescriptions = require('./src/defaultPropDescriptions');
 const { requireInNewContext, addBootstrapPropTypes } = require('./bsPropUtils');
+
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Starter Blog',

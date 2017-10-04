@@ -44,10 +44,10 @@ const Example = React.createClass({
             <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
 
             <h4>Popover in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={popover}><a href="#">popover</a></OverlayTrigger> here</p>
+            <p>there is a <OverlayTrigger overlay={popover}><a href="#popover">popover</a></OverlayTrigger> here</p>
 
             <h4>Tooltips in a modal</h4>
-            <p>there is a <OverlayTrigger overlay={tooltip}><a href="#">tooltip</a></OverlayTrigger> here</p>
+            <p>there is a <OverlayTrigger overlay={tooltip}><a href="#tooltip">tooltip</a></OverlayTrigger> here</p>
 
             <hr />
 
@@ -68,7 +68,7 @@ const Example = React.createClass({
         </Modal>
       </div>
     );
-  }
+  },
 });
 
 ReactDOM.render(<Example />, mountNode);

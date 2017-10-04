@@ -44,14 +44,14 @@ const components = [
   'table',
   'tabs',
   'tooltips',
-  'well'
+  'well',
 ];
 
 const utilities = [
   'custom-styles',
   'transitions',
-  'responsive-embed'
-]
+  'responsive-embed',
+];
 
 function NavSection({ heading, location, items, path }) {
   let active = location.pathname.startsWith(path);

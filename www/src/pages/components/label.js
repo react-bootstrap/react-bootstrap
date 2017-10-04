@@ -4,8 +4,8 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import Label from '!!raw-loader!../../examples/Label';
-import LabelVariations from '!!raw-loader!../../examples/LabelVariations';
+import Label from '../../examples/Label';
+import LabelVariations from '../../examples/LabelVariations';
 
 export default function LabelSection({ data }) {
   return (
@@ -14,7 +14,7 @@ export default function LabelSection({ data }) {
         <Anchor id="labels">Labels</Anchor> <small>Label</small>
       </h2>
 
-      <p>Create a <code>{"<Label>label</Label>"}</code> to highlight information</p>
+      <p>Create a <code>{'<Label>label</Label>'}</code> to highlight information</p>
       <ReactPlayground codeText={Label} />
 
       <h3><Anchor id="labels-variations">Available variations</Anchor></h3>
@@ -22,7 +22,7 @@ export default function LabelSection({ data }) {
       <ReactPlayground codeText={LabelVariations} />
 
       <h3><Anchor id="label-props">Props</Anchor></h3>
-      <PropTable metadata={data.Label}/>
+      <PropTable metadata={data.Label} />
     </div>
   );
 }

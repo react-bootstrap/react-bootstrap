@@ -4,9 +4,9 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import TooltipBasic from '!!raw-loader!../../examples/TooltipBasic';
-import TooltipPositioned from '!!raw-loader!../../examples/TooltipPositioned';
-import TooltipInCopy from '!!raw-loader!../../examples/TooltipInCopy';
+import TooltipBasic from '../../examples/TooltipBasic';
+import TooltipPositioned from '../../examples/TooltipPositioned';
+import TooltipInCopy from '../../examples/TooltipInCopy';
 
 export default function TooltipSection({ data }) {
   return (
@@ -18,7 +18,7 @@ export default function TooltipSection({ data }) {
       <p>
         Tooltip component for a more stylish alternative to that anchor tag <code>title</code> attribute.
       </p>
-      <ReactPlayground codeText={TooltipBasic} exampleClassName="tooltip-static"/>
+      <ReactPlayground codeText={TooltipBasic} exampleClassName="tooltip-static" />
 
       <h4><Anchor id="tooltips-overlay-trigger">With OverlayTrigger</Anchor></h4>
       <p>Attach and position tooltips with <code>OverlayTrigger</code>.</p>
@@ -31,10 +31,10 @@ export default function TooltipSection({ data }) {
       <h3><Anchor id="tooltips-props">Props</Anchor></h3>
 
       <h4><Anchor id="overlays-trigger-props">OverlayTrigger</Anchor></h4>
-      <PropTable metadata={data.OverlayTrigger}/>
+      <PropTable metadata={data.OverlayTrigger} />
 
       <h4><Anchor id="tooltips-props-tooltip">Tooltip</Anchor></h4>
-      <PropTable metadata={data.Tooltip}/>
+      <PropTable metadata={data.Tooltip} />
     </div>
   );
 }

@@ -4,9 +4,9 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import GridBasic from '!!raw-loader!../../examples/GridBasic';
-import GridWithoutClearfix from '!!raw-loader!../../examples/GridWithoutClearfix';
-import GridWithClearfix from '!!raw-loader!../../examples/GridWithClearfix';
+import GridBasic from '../../examples/GridBasic';
+import GridWithoutClearfix from '../../examples/GridWithoutClearfix';
+import GridWithClearfix from '../../examples/GridWithClearfix';
 
 
 export default function GridSection({ data }) {
@@ -31,16 +31,16 @@ export default function GridSection({ data }) {
       <h3><Anchor id="grid-props">Props</Anchor></h3>
 
       <h4><Anchor id="grid-props-grid">Grid</Anchor></h4>
-      <PropTable metadata={data.Grid}/>
+      <PropTable metadata={data.Grid} />
 
       <h4><Anchor id="grid-props-row">Row</Anchor></h4>
-      <PropTable metadata={data.Row}/>
+      <PropTable metadata={data.Row} />
 
       <h4><Anchor id="grid-props-col">Col</Anchor></h4>
-      <PropTable metadata={data.Col}/>
+      <PropTable metadata={data.Col} />
 
       <h4><Anchor id="grid-props-col">Clearfix</Anchor></h4>
-      <PropTable metadata={data.Clearfix}/>
+      <PropTable metadata={data.Clearfix} />
     </div>
   );
 }

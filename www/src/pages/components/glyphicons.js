@@ -4,7 +4,7 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import Glyphicon from '!!raw-loader!../../examples/Glyphicon';
+import Glyphicon from '../../examples/Glyphicon';
 
 export default function GlyphiconSection({ data }) {
   return (

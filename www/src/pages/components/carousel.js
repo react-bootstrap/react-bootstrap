@@ -4,8 +4,8 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import CarouselUncontrolled from '!!raw-loader!../../examples/CarouselUncontrolled';
-import CarouselControlled from '!!raw-loader!../../examples/CarouselControlled';
+import CarouselUncontrolled from '../../examples/CarouselUncontrolled';
+import CarouselControlled from '../../examples/CarouselControlled';
 
 export default function CarouselSection({ data }) {
   return (

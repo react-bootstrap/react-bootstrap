@@ -4,7 +4,7 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import Breadcrumb from '!!raw-loader!../../examples/Breadcrumb';
+import Breadcrumb from '../../examples/Breadcrumb';
 
 export default function BreadcrumbSection({ data }) {
   return (

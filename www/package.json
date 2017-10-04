@@ -8,6 +8,10 @@
   },
   "dependencies": {
     "babel-register": "^6.24.1",
+    "babel-standalone": "^6.21.1",
+    "bootstrap": "^3.3.6",
+    "classnames": "^2.2.5",
+    "codemirror": "^5.16.0",
     "gatsby": "^1.9.50",
     "gatsby-cli": "^1.2.0-alpha.d6b7680b",
     "gatsby-link": "^1.6.18",
@@ -26,6 +30,10 @@
     "graphql-type-json": "^0.1.4",
     "lodash": "^4.15.0",
     "moment": "^2.14.1",
+    "prop-types": "^15.6.0",
+    "react": "^15.5.4",
+    "react-bootstrap": "file:../",
+    "react-dom": "^15.5.4",
     "react-helmet": "^5.2.0",
     "safe-access": "^0.1.0",
     "underscore.string": "^3.2.3"

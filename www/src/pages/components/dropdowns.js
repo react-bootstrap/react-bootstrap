@@ -4,15 +4,15 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import DropdownButtonBasic from '!!raw-loader!../../examples/DropdownButtonBasic';
-import SplitButtonBasic from '!!raw-loader!../../examples/SplitButtonBasic';
-import DropdownButtonSizes from '!!raw-loader!../../examples/DropdownButtonSizes';
-import DropdownButtonNoCaret from '!!raw-loader!../../examples/DropdownButtonNoCaret';
-import SplitButtonDropup from '!!raw-loader!../../examples/SplitButtonDropup';
-import SplitButtonRight from '!!raw-loader!../../examples/SplitButtonRight';
-import DropdownButtonCustom from '!!raw-loader!../../examples/DropdownButtonCustom';
-import DropdownButtonCustomMenu from '!!raw-loader!../../examples/DropdownButtonCustomMenu';
-import MenuItem from '!!raw-loader!../../examples/MenuItem';
+import DropdownButtonBasic from '../../examples/DropdownButtonBasic';
+import SplitButtonBasic from '../../examples/SplitButtonBasic';
+import DropdownButtonSizes from '../../examples/DropdownButtonSizes';
+import DropdownButtonNoCaret from '../../examples/DropdownButtonNoCaret';
+import SplitButtonDropup from '../../examples/SplitButtonDropup';
+import SplitButtonRight from '../../examples/SplitButtonRight';
+import DropdownButtonCustom from '../../examples/DropdownButtonCustom';
+import DropdownButtonCustomMenu from '../../examples/DropdownButtonCustomMenu';
+import MenuItem from '../../examples/MenuItem';
 
 
 export default function DropdownSection({ data }) {
@@ -23,11 +23,11 @@ export default function DropdownSection({ data }) {
       </h2>
 
       <h3><Anchor id="btn-dropdowns-single">Single button dropdowns</Anchor></h3>
-      <p>Create a dropdown button with the <code>{"<DropdownButton />"}</code> component.</p>
+      <p>Create a dropdown button with the <code>{'<DropdownButton />'}</code> component.</p>
       <ReactPlayground codeText={DropdownButtonBasic} />
 
       <h3><Anchor id="btn-dropdowns-split">Split button dropdowns</Anchor></h3>
-      <p>Similarly, create split button dropdowns with the <code>{"<SplitButton />"}</code> component.</p>
+      <p>Similarly, create split button dropdowns with the <code>{'<SplitButton />'}</code> component.</p>
       <ReactPlayground codeText={SplitButtonBasic} />
 
       <h3><Anchor id="btn-dropdowns-sizing">Sizing</Anchor></h3>
@@ -66,7 +66,6 @@ export default function DropdownSection({ data }) {
       <ReactPlayground codeText={MenuItem} />
 
 
-
       <h3><Anchor id="btn-dropdowns-custom">Dropdown Customization</Anchor></h3>
       <p>
         If the default handling of the dropdown menu and toggle components aren't to your liking, you can
@@ -88,6 +87,15 @@ export default function DropdownSection({ data }) {
       <p>
         For those that want to customize everything, you can forgo the included Toggle and Menu components, and create your own. In order to tell the Dropdown component what role your custom components play, add a special prop <code>bsRole</code> to your menu or toggle components. The Dropdown expects at least one component with <code>bsRole="toggle"</code> and exactly one with <code>bsRole="menu"</code>. Custom toggle and menu components must be able to accept refs.
       </p>
+      <div className="bs-callout bs-callout-warning">
+        <h4>Using <code>rootCloseEvent</code> with custom dropdown components</h4>
+        <p>
+          If you want to use the <code>rootCloseEvent</code> prop with your custom dropdown components, you will have to pass the <code>rootCloseEvent</code> to <code>{ '<RootCloseWrapper>' }</code> in your custom dropdown menu component <a href="https://github.com/react-bootstrap/react-bootstrap/blob/v0.31.5/src/DropdownMenu.js#L115-L119">similarly to how it is implemented in <code>{ '<Dropdown.Menu>' }</code></a>.
+        </p>
+        <p>
+          You will have to add <code>react-overlays</code> as a dependency and import <code>{ '<RootCloseWrapper>' }</code> from <code>react-overlays</code> yourself like: <code>import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper'</code>.
+        </p>
+      </div>
       <ReactPlayground codeText={DropdownButtonCustomMenu} />
 
       <h3><Anchor id="btn-dropdowns-props">Props</Anchor></h3>
@@ -102,7 +110,7 @@ export default function DropdownSection({ data }) {
       <PropTable metadata={data.Dropdown} />
 
       <h3><Anchor id="menu-item-props">Props</Anchor></h3>
-      <PropTable metadata={data.MenuItem}/>
+      <PropTable metadata={data.MenuItem} />
     </div>
   );
 }

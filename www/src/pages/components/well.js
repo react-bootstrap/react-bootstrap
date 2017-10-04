@@ -4,8 +4,8 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import Well from '!!raw-loader!../../examples/Well';
-import WellSizes from '!!raw-loader!../../examples/WellSizes';
+import Well from '../../examples/Well';
+import WellSizes from '../../examples/WellSizes';
 
 export default function WellSection({ data }) {
   return (
@@ -22,7 +22,7 @@ export default function WellSection({ data }) {
       <ReactPlayground codeText={WellSizes} />
 
       <h3><Anchor id="wells-props">Props</Anchor></h3>
-      <PropTable metadata={data.Well}/>
+      <PropTable metadata={data.Well} />
     </div>
   );
 }

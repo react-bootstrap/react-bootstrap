@@ -4,10 +4,10 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import NavBasic from '!!raw-loader!../../examples/NavBasic';
-import NavDropdown from '!!raw-loader!../../examples/NavDropdown';
-import NavStacked from '!!raw-loader!../../examples/NavStacked';
-import NavJustified from '!!raw-loader!../../examples/NavJustified';
+import NavBasic from '../../examples/NavBasic';
+import NavDropdown from '../../examples/NavDropdown';
+import NavStacked from '../../examples/NavStacked';
+import NavJustified from '../../examples/NavJustified';
 
 export default function NavSection({ data }) {
   return (
@@ -34,10 +34,10 @@ export default function NavSection({ data }) {
       <h3><Anchor id="navs-props">Props</Anchor></h3>
 
       <h4><Anchor id="navs-props-nav">Nav</Anchor></h4>
-      <PropTable metadata={data.Nav}/>
+      <PropTable metadata={data.Nav} />
 
       <h4><Anchor id="navs-props-navitem">NavItem</Anchor></h4>
-      <PropTable metadata={data.NavItem}/>
+      <PropTable metadata={data.NavItem} />
     </div>
   );
 }

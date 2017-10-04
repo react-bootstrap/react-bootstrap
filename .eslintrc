@@ -4,9 +4,6 @@
     "browser": true,
     "node": true
   },
-  "ecmaFeatures": {
-    "jsx": true
-  },
   "parser": "babel-eslint",
   "plugins": [
     "react"
@@ -74,9 +71,16 @@
       }
     },
     {
-      "files": ["docs/**/*"],
+      "files": ["www/src/**/*"],
+      "globals": {
+        "graphql": false
+      },
       "rules": {
-        "react/no-unescaped-entities": "off"
+        "global-require": "off",
+        "no-console": "off",
+        "react/no-unescaped-entities": "off",
+        "react/prop-types": "off",
+        "import/no-webpack-loader-syntax": "off"
       }
     }
   ]

@@ -4,13 +4,13 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import FormBasic from '!!raw-loader!../../examples/FormBasic';
-import FormControls from '!!raw-loader!../../examples/FormControls';
-import FormInline from '!!raw-loader!../../examples/FormInline';
-import FormHorizontal from '!!raw-loader!../../examples/FormHorizontal';
-import FormInputSizes from '!!raw-loader!../../examples/FormInputSizes';
-import FormInputAddons from '!!raw-loader!../../examples/FormInputAddons';
-import FormValidation from '!!raw-loader!../../examples/FormValidation';
+import FormBasic from '../../examples/FormBasic';
+import FormControls from '../../examples/FormControls';
+import FormInline from '../../examples/FormInline';
+import FormHorizontal from '../../examples/FormHorizontal';
+import FormInputSizes from '../../examples/FormInputSizes';
+import FormInputAddons from '../../examples/FormInputAddons';
+import FormValidation from '../../examples/FormValidation';
 
 export default function FormControlsSection({ data }) {
   return (

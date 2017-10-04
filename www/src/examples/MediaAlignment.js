@@ -2,7 +2,7 @@ const mediaAlignmentInstance = (
   <div>
     <Media>
       <Media.Left align="top">
-        <img width={64} height={64} src="/thumbnail.png" alt="Image"/>
+        <img width={64} height={64} src="/thumbnail.png" alt="thumbnail" />
       </Media.Left>
       <Media.Body>
         <Media.Heading>Top aligned media</Media.Heading>
@@ -13,7 +13,7 @@ const mediaAlignmentInstance = (
     </Media>
     <Media>
       <Media.Left align="middle">
-        <img width={64} height={64} src="/thumbnail.png" alt="Image"/>
+        <img width={64} height={64} src="/thumbnail.png" alt="thumbnail" />
       </Media.Left>
       <Media.Body>
         <Media.Heading>Middle aligned media</Media.Heading>
@@ -24,7 +24,7 @@ const mediaAlignmentInstance = (
     </Media>
     <Media>
       <Media.Left align="bottom">
-        <img width={64} height={64} src="/thumbnail.png" alt="Image"/>
+        <img width={64} height={64} src="/thumbnail.png" alt="thumbnail" />
       </Media.Left>
       <Media.Body>
         <Media.Heading>Bottom aligned media</Media.Heading>

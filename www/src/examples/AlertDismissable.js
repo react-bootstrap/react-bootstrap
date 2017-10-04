@@ -1,7 +1,7 @@
 const AlertDismissable = React.createClass({
   getInitialState() {
     return {
-      alertVisible: true
+      alertVisible: true,
     };
   },
 
@@ -26,12 +26,12 @@ const AlertDismissable = React.createClass({
   },
 
   handleAlertDismiss() {
-    this.setState({alertVisible: false});
+    this.setState({ alertVisible: false });
   },
 
   handleAlertShow() {
-    this.setState({alertVisible: true});
-  }
+    this.setState({ alertVisible: true });
+  },
 });
 
 ReactDOM.render(<AlertDismissable />, mountNode);
