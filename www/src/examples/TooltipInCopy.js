@@ -27,4 +27,4 @@ const copyInstance = (
   </p>
 );
 
-ReactDOM.render(copyInstance, mountNode);
+render(copyInstance);

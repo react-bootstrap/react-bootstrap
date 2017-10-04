@@ -44,4 +44,4 @@ const tabsInstance = (
   </Tab.Container>
 );
 
-ReactDOM.render(tabsInstance, mountNode);
+render(tabsInstance);

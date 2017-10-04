@@ -19,4 +19,4 @@ const glyphInstance = (
   </div>
 );
 
-ReactDOM.render(glyphInstance, mountNode);
+render(glyphInstance);

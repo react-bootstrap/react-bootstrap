@@ -5,4 +5,4 @@ const wellInstance = (
   </div>
 );
 
-ReactDOM.render(wellInstance, mountNode);
+render(wellInstance);

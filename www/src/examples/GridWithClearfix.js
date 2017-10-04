@@ -12,4 +12,4 @@ const gridInstance = (
   </Grid>
 );
 
-ReactDOM.render(gridInstance, mountNode);
+render(gridInstance);

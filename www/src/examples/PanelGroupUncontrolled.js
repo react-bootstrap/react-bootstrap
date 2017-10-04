@@ -5,4 +5,4 @@ const panelGroupInstance = (
   </PanelGroup>
 );
 
-ReactDOM.render(panelGroupInstance, mountNode);
+render(panelGroupInstance);

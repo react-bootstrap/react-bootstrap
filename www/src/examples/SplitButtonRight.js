@@ -8,4 +8,4 @@ const buttonsInstance = (
   </SplitButton>
 );
 
-ReactDOM.render(buttonsInstance, mountNode);
+render(buttonsInstance);

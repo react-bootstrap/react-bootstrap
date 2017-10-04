@@ -39,4 +39,4 @@ const FormExample = React.createClass({
   },
 });
 
-ReactDOM.render(<FormExample />, mountNode);
+render(<FormExample />);

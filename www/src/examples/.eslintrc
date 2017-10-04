@@ -1,10 +1,13 @@
 {
   "rules": {
     "no-alert": 0,
+    "no-unused-expressions": "off",
+    "semi": "off",
     "react/jsx-no-undef": "off",
     "react/no-multi-comp": "off"
   },
   "globals": {
+    "render": false,
     "classNames": false,
     "React": false,
     "ReactDOM": false,

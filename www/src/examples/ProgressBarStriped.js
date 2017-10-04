@@ -7,4 +7,4 @@ const progressInstance = (
   </div>
 );
 
-ReactDOM.render(progressInstance, mountNode);
+render(progressInstance);

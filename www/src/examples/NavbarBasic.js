@@ -19,4 +19,4 @@ const navbarInstance = (
   </Navbar>
 );
 
-ReactDOM.render(navbarInstance, mountNode);
+render(navbarInstance);

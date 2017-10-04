@@ -32,4 +32,4 @@ const dropdownInstance = (
   </ButtonToolbar>
 );
 
-ReactDOM.render(dropdownInstance, mountNode);
+render(dropdownInstance);

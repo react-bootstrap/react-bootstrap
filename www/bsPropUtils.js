@@ -1,7 +1,7 @@
 const { runInNewContext } = require('vm');
 
 const srcCache = new Map();
-exports.requireInNewContext = function(filename) {
+exports.requireInNewContext = function requireInNewContext(filename) {
   const root = {
     process,
     component: srcCache.get(filename),
@@ -21,7 +21,7 @@ exports.requireInNewContext = function(filename) {
 let quote = str => str && `'${str}'`;
 
 
-exports.addBootstrapPropTypes = function(doc, Component) {
+exports.addBootstrapPropTypes = function addBootstrapPropTypes(doc, Component) {
   let propTypes = Component.propTypes || {};
   let defaultProps = Component.defaultProps || {};
 
@@ -38,7 +38,7 @@ exports.addBootstrapPropTypes = function(doc, Component) {
         type: {
           name: 'enum',
           value: values.map(v => ({ value: `"${v}"` })),
-        }
+        },
       });
     }
   }

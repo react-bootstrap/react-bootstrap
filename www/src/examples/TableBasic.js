@@ -30,4 +30,4 @@ const tableInstance = (
   </Table>
 );
 
-ReactDOM.render(tableInstance, mountNode);
+render(tableInstance);

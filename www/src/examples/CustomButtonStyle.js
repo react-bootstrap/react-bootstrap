@@ -12,4 +12,4 @@ const customButtonStyle = (
   </div>
 );
 
-ReactDOM.render(customButtonStyle, mountNode);
+render(customButtonStyle);

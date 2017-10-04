@@ -4,4 +4,4 @@ const progressInstance = (
   <ProgressBar now={now} label={`${now}%`} srOnly />
 );
 
-ReactDOM.render(progressInstance, mountNode);
+render(progressInstance);

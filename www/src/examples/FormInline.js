@@ -18,4 +18,4 @@ const formInstance = (
   </Form>
 );
 
-ReactDOM.render(formInstance, mountNode);
+render(formInstance);

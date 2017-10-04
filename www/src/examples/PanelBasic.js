@@ -8,4 +8,4 @@ const panelInstance = (
   </Panel>
 );
 
-ReactDOM.render(panelInstance, mountNode);
+render(panelInstance);

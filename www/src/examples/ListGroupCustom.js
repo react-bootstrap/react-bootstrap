@@ -19,4 +19,4 @@ const listgroupInstance = (
   </ListGroup>
 );
 
-ReactDOM.render(listgroupInstance, mountNode);
+render(listgroupInstance);

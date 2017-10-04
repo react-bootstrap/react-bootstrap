@@ -18,4 +18,4 @@ const tooltipInstance = (
   </div>
 );
 
-ReactDOM.render(tooltipInstance, mountNode);
+render(tooltipInstance);

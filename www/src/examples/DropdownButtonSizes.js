@@ -42,4 +42,4 @@ const buttonsInstance = (
   </div>
 );
 
-ReactDOM.render(buttonsInstance, mountNode);
+render(buttonsInstance);

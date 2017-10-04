@@ -14,4 +14,4 @@ const thumbnailInstance = (
   </Grid>
 );
 
-ReactDOM.render(thumbnailInstance, mountNode);
+render(thumbnailInstance);

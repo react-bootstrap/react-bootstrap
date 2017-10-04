@@ -23,4 +23,4 @@ const buttonsInstance = (
   </ButtonToolbar>
 );
 
-ReactDOM.render(buttonsInstance, mountNode);
+render(buttonsInstance);

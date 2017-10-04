@@ -23,4 +23,4 @@ const positionerInstance = (
   </ButtonToolbar>
 );
 
-ReactDOM.render(positionerInstance, mountNode);
+render(positionerInstance);

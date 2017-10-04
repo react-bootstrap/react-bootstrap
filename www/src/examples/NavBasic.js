@@ -10,4 +10,4 @@ const navInstance = (
   </Nav>
 );
 
-ReactDOM.render(navInstance, mountNode);
+render(navInstance);

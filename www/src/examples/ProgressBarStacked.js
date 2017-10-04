@@ -6,4 +6,4 @@ const progressInstance = (
   </ProgressBar>
 );
 
-ReactDOM.render(progressInstance, mountNode);
+render(progressInstance);

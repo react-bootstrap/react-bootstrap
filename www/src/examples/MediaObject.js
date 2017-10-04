@@ -51,4 +51,4 @@ const mediaInstance = (
   </div>
 );
 
-ReactDOM.render(mediaInstance, mountNode);
+render(mediaInstance);

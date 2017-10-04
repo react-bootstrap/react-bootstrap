@@ -12,4 +12,4 @@ const breadcrumbInstance = (
   </Breadcrumb>
 );
 
-ReactDOM.render(breadcrumbInstance, mountNode);
+render(breadcrumbInstance);

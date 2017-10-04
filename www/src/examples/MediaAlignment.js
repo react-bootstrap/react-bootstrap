@@ -36,4 +36,4 @@ const mediaAlignmentInstance = (
   </div>
 );
 
-ReactDOM.render(mediaAlignmentInstance, mountNode);
+render(mediaAlignmentInstance);

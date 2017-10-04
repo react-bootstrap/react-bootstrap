@@ -127,4 +127,4 @@ const formInstance = (
   </form>
 );
 
-ReactDOM.render(formInstance, mountNode);
+render(formInstance);

@@ -12,4 +12,4 @@ const accordionInstance = (
   </Accordion>
 );
 
-ReactDOM.render(accordionInstance, mountNode);
+render(accordionInstance);

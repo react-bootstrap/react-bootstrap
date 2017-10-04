@@ -6,4 +6,4 @@ const responsiveEmbedInstance = (
   </div>
 );
 
-ReactDOM.render(responsiveEmbedInstance, mountNode);
+render(responsiveEmbedInstance);

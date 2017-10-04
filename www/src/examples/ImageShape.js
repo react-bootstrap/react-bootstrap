@@ -14,4 +14,4 @@ const imageShapeInstance = (
   </Grid>
 );
 
-ReactDOM.render(imageShapeInstance, mountNode);
+render(imageShapeInstance);

@@ -9,10 +9,6 @@ exports.modifyWebpackConfig = function modifyWebpackConfig({ config }) {
     test: /src\/examples\//,
     loaders: ['raw-loader'],
   });
-
-  // config._config.resolve.alias = {
-  //   'react-bootstrap/lib': path.resolve(__dirname, '../src')
-  // };
 };
 
 

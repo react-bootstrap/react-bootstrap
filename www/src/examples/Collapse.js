@@ -24,4 +24,4 @@ class Example extends React.Component {
   }
 }
 
-ReactDOM.render(<Example />, mountNode);
+render(<Example />);

@@ -9,10 +9,6 @@
   "homepage": "https://react-bootstrap.github.io/",
   "scripts": {
     "build": "babel-node tools/build-cli.js",
-    "docs": "babel-node docs/dev-run.js",
-    "docs-build": "babel-node tools/build-cli.js --docs-only",
-    "docs-prod": "npm run docs-build && cross-env NODE_ENV=production babel-node docs/server.js",
-    "docs-prod-unoptimized": "npm run docs-build -- --dev && cross-env NODE_ENV=production babel-node docs/server.js",
     "lint": "eslint www/src src test tools webpack *.js",
     "release": "release",
     "tdd": "karma start",

@@ -9,14 +9,14 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
         path: path.resolve(__dirname, '../src'),
         name: 'source',
       },
     },
     {
-      resolve: `gatsby-transformer-react-docgen`,
+      resolve: 'gatsby-transformer-react-docgen',
       options: {
         handlers: [
           function applyBootstrapPropsHandler(docs, _, { absolutePath }) {
@@ -33,12 +33,12 @@ module.exports = {
                 desc.description = desc.description || defaultDescriptions[name];
               }
             });
-          }
-        ]
+          },
+        ],
       },
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
           'gatsby-remark-prismjs',

@@ -6,4 +6,4 @@ const jumbotronInstance = (
   </Jumbotron>
 );
 
-ReactDOM.render(jumbotronInstance, mountNode);
+render(jumbotronInstance);

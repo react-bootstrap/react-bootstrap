@@ -212,24 +212,17 @@ body {
   margin-bottom: 0;
 }
 
-.bs-example + .highlight {
+.bs-example + .bs-code-editor > pre {
   margin-top: 0;
   margin-bottom: 0;
   border-top: none;
-  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 }
 
-.code-toggle {
-  float: right;
-  display: inline-block;
-  position: relative;
-  top: -1px;
-  background: #fafafa;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  border: 1px solid #e1e1e8;
-  border-top: none;
-  padding: 4px 8px;
+.bs-code-editor > pre {
+  padding: 20px;
+  border: 1px solid #ddd;
 }
 
 @media (min-width: 768px) {

@@ -44,4 +44,4 @@ const mediaListInstance = (
   </div>
 );
 
-ReactDOM.render(mediaListInstance, mountNode);
+render(mediaListInstance);

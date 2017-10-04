@@ -50,4 +50,4 @@ const Example = React.createClass({
   },
 });
 
-ReactDOM.render(<Example />, mountNode);
+render(<Example />);

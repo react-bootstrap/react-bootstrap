@@ -21,4 +21,4 @@ const MenuItems = (
   </Clearfix>
 );
 
-ReactDOM.render(MenuItems, mountNode);
+render(MenuItems);

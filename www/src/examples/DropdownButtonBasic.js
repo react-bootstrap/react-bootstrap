@@ -16,4 +16,4 @@ const buttonsInstance = (
   <ButtonToolbar>{BUTTONS.map(renderDropdownButton)}</ButtonToolbar>
 );
 
-ReactDOM.render(buttonsInstance, mountNode);
+render(buttonsInstance);

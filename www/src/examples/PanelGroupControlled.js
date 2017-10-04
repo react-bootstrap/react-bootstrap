@@ -19,4 +19,4 @@ const ControlledPanelGroup = React.createClass({
   },
 });
 
-ReactDOM.render(<ControlledPanelGroup />, mountNode);
+render(<ControlledPanelGroup />);

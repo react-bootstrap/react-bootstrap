@@ -9,4 +9,4 @@ const labelVariationInstance = (
   </div>
 );
 
-ReactDOM.render(labelVariationInstance, mountNode);
+render(labelVariationInstance);
