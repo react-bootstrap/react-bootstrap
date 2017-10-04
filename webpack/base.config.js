@@ -6,7 +6,7 @@ export const options = yargs
   .alias('d', 'debug')
   .option('port', {
     default: '8080',
-    type: 'string'
+    type: 'string',
   })
   .argv;
 
