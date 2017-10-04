@@ -9,32 +9,32 @@ describe('<Form>', () => {
     $(
       <Form horizontal className="my-form">
         <FormGroup />
-      </Form>
+      </Form>,
     )
       .shallowRender()
       .single('form.form-horizontal.my-form')
-        .single(FormGroup);
+      .single(FormGroup);
   });
 
   it('should support inline', () => {
     $(
       <Form inline className="my-form">
         <FormGroup />
-      </Form>
+      </Form>,
     )
       .shallowRender()
       .single('form.form-inline.my-form')
-        .single(FormGroup);
+      .single(FormGroup);
   });
 
   it('should support custom componentClass', () => {
     $(
       <Form componentClass="fieldset" horizontal className="my-form">
         <FormGroup />
-      </Form>
+      </Form>,
     )
       .shallowRender()
       .single('fieldset.form-horizontal.my-form')
-        .single(FormGroup);
+      .single(FormGroup);
   });
 });

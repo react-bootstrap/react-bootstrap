@@ -15,7 +15,7 @@ export default function TooltipSection() {
       <p>
         Tooltip component for a more stylish alternative to that anchor tag <code>title</code> attribute.
       </p>
-      <ReactPlayground codeText={Samples.TooltipBasic} exampleClassName="tooltip-static"/>
+      <ReactPlayground codeText={Samples.TooltipBasic} exampleClassName="tooltip-static" />
 
       <h4><Anchor id="tooltips-overlay-trigger">With OverlayTrigger</Anchor></h4>
       <p>Attach and position tooltips with <code>OverlayTrigger</code>.</p>
@@ -28,10 +28,10 @@ export default function TooltipSection() {
       <h3><Anchor id="tooltips-props">Props</Anchor></h3>
 
       <h4><Anchor id="overlays-trigger-props">OverlayTrigger</Anchor></h4>
-      <PropTable component="OverlayTrigger"/>
+      <PropTable component="OverlayTrigger" />
 
       <h4><Anchor id="tooltips-props-tooltip">Tooltip</Anchor></h4>
-      <PropTable component="Tooltip"/>
+      <PropTable component="Tooltip" />
     </div>
   );
 }

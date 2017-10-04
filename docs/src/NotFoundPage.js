@@ -7,17 +7,18 @@ import PageFooter from './PageFooter';
 const NotFoundPage = React.createClass({
   render() {
     return (
-        <div>
-          <NavMain activePage="" />
+      <div>
+        <NavMain activePage="" />
 
-          <PageHeader
-            title="404"
-            subTitle="Hmmm this is awkward." />
+        <PageHeader
+          title="404"
+          subTitle="Hmmm this is awkward."
+        />
 
-          <PageFooter />
-        </div>
-      );
-  }
+        <PageFooter />
+      </div>
+    );
+  },
 });
 
 export default NotFoundPage;

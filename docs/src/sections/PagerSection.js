@@ -28,10 +28,10 @@ export default function PagerSection() {
       <h3><Anchor id="pager-props">Props</Anchor></h3>
 
       <h4><Anchor id="pager-props-pager">Pager</Anchor></h4>
-      <PropTable component="Pager"/>
+      <PropTable component="Pager" />
 
       <h4><Anchor id="pager-props-pager-item">Pager.Item</Anchor></h4>
-      <PropTable component="Pager.Item"/>
+      <PropTable component="Pager.Item" />
     </div>
   );
 }

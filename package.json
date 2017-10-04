@@ -13,7 +13,7 @@
     "docs-build": "babel-node tools/build-cli.js --docs-only",
     "docs-prod": "npm run docs-build && cross-env NODE_ENV=production babel-node docs/server.js",
     "docs-prod-unoptimized": "npm run docs-build -- --dev && cross-env NODE_ENV=production babel-node docs/server.js",
-    "lint": "eslint docs src test tools webpack *.js",
+    "lint": "eslint src test tools webpack *.js",
     "release": "release",
     "tdd": "karma start",
     "test": "npm run lint && npm run test-browser && npm run test-node",

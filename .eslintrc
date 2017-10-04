@@ -12,10 +12,33 @@
     "react"
   ],
   "rules": {
+    "max-len": "off",
+    "no-plusplus": "off",
     "prefer-const": "off",
+    "one-var": "off",
     "no-param-reassign": "off",
+    "no-mixed-operators": ["error", {
+      "groups": [
+        ["&", "|", "^", "~", "<<", ">>", ">>>"],
+        ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+        ["&&", "||"],
+        ["in", "instanceof"]
+      ],
+      "allowSamePrecedence": false
+    }],
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "react/forbid-prop-types": "off",
     "react/jsx-boolean-value": 2,
     "react/jsx-no-duplicate-props": 2,
+    "react/no-find-dom-node": "off",
+    "react/no-array-index-key": "off",
+    "react/no-string-refs": "off",
+    "react/prefer-stateless-function": "off",
+    "react/jsx-filename-extension": ["error", {
+      "extensions": [".js"]
+    }],
     "react/prop-types": [2, { "ignore": [
         "children",
         "className",
@@ -25,8 +48,36 @@
         "bsSize"
       ]
     }],
+    "react/require-default-props": "off",
     "import/no-extraneous-dependencies": [
       "error", {"devDependencies": ["!src/**/*.js"] }
+    ],
+    "no-restricted-syntax": ["error",
+      "ForOfStatement",
+      "LabeledStatement",
+      "WithStatement"
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["test/*"],
+      "rules": {
+        "no-return-assign": "off",
+        "global-require": "off",
+        "no-console": "off",
+        "react/no-render-return-value": "off",
+        "jsx-a11y/aria-role": "off",
+        "jsx-a11y/alt-text": "off",
+        "jsx-a11y/tabindex-no-positive": "off",
+        "jsx-a11y/no-static-element-interactions": "off",
+        "import/first": "off"
+      }
+    },
+    {
+      "files": ["docs/**/*"],
+      "rules": {
+        "react/no-unescaped-entities": "off"
+      }
+    }
+  ]
 }

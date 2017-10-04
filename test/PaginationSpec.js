@@ -6,7 +6,7 @@ import Pagination from '../src/Pagination';
 describe('<Pagination>', () => {
   it('should have class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Pagination>Item content</Pagination>
+      <Pagination>Item content</Pagination>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pagination'));
   });
@@ -16,7 +16,7 @@ describe('<Pagination>', () => {
       <Pagination
         items={5}
         activePage={3}
-      />
+      />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     assert.equal(pageButtons.length, 5);
@@ -30,11 +30,11 @@ describe('<Pagination>', () => {
     }
 
     const instance = ReactTestUtils.renderIntoDocument(
-      <Pagination items={5} onSelect={onSelect} />
+      <Pagination items={5} onSelect={onSelect} />,
     );
 
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a')[1]
+      ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a')[1],
     );
   });
 
@@ -44,7 +44,7 @@ describe('<Pagination>', () => {
         items={30}
         activePage={10}
         maxButtons={9}
-      />
+      />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     // 9 visible page buttons and 1 ellipsis button
@@ -66,7 +66,7 @@ describe('<Pagination>', () => {
         maxButtons={3}
         activePage={10}
         items={20}
-      />
+      />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     // add first, last, prev, next and ellipsis button
@@ -92,7 +92,7 @@ describe('<Pagination>', () => {
         maxButtons={3}
         activePage={10}
         items={20}
-      />
+      />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     // add first, last, prev, next and ellipsis button
@@ -113,7 +113,7 @@ describe('<Pagination>', () => {
         maxButtons={5}
         activePage={4}
         items={20}
-      />
+      />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     assert.equal(pageButtons[3].textContent, '2');
@@ -130,7 +130,7 @@ describe('<Pagination>', () => {
         maxButtons={5}
         activePage={17}
         items={20}
-      />
+      />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     assert.equal(pageButtons[pageButtons.length - 4].textContent, '19');
@@ -147,7 +147,7 @@ describe('<Pagination>', () => {
         maxButtons={3}
         activePage={10}
         items={20}
-      />
+      />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
     // add first, last, prev, next and ellipsis button
@@ -171,7 +171,7 @@ describe('<Pagination>', () => {
         maxButtons={5}
         activePage={1}
         items={1}
-      />
+      />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
@@ -191,7 +191,7 @@ describe('<Pagination>', () => {
         maxButtons={1}
         activePage={1}
         items={0}
-      />
+      />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
@@ -208,7 +208,7 @@ describe('<Pagination>', () => {
         maxButtons={2}
         activePage={1}
         items={2}
-      />
+      />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
@@ -232,7 +232,7 @@ describe('<Pagination>', () => {
         activePage={1}
         items={2}
         buttonComponentClass={DummyElement}
-      />
+      />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
@@ -253,11 +253,11 @@ describe('<Pagination>', () => {
     }
 
     const instance = ReactTestUtils.renderIntoDocument(
-      <Pagination items={5} onSelect={onSelect} buttonComponentClass={DummyElement} />
+      <Pagination items={5} onSelect={onSelect} buttonComponentClass={DummyElement} />,
     );
 
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'div')[2]
+      ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'div')[2],
     );
   });
 
@@ -275,7 +275,7 @@ describe('<Pagination>', () => {
         maxButtons={1}
         activePage={1}
         items={0}
-      />
+      />,
     );
     const liElements = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
@@ -303,7 +303,7 @@ describe('<Pagination>', () => {
     }
 
     const instance = ReactTestUtils.renderIntoDocument(
-      <Pagination items={5} buttonComponentClass={DummyElement} />
+      <Pagination items={5} buttonComponentClass={DummyElement} />,
     );
 
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
@@ -313,7 +313,7 @@ describe('<Pagination>', () => {
 
   it('should render three items from 1 to 3 when activePage=1', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Pagination items={4} maxButtons={3} activePage={1} />
+      <Pagination items={4} maxButtons={3} activePage={1} />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 
@@ -325,10 +325,11 @@ describe('<Pagination>', () => {
   it('should render three items from 2 to 4 when activePage=3', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Pagination
-        onSelect={()=>{}}
+        onSelect={() => {}}
         items={4}
         maxButtons={3}
-        activePage={3} />
+        activePage={3}
+      />,
     );
     const pageButtons = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'li');
 

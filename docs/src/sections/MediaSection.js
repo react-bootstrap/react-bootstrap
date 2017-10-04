@@ -28,19 +28,19 @@ export default function MediaSection() {
       <h3><Anchor id="media-props">Props</Anchor></h3>
 
       <h4><Anchor id="media-media-props">Media</Anchor></h4>
-      <PropTable component="Media"/>
+      <PropTable component="Media" />
 
       <h4><Anchor id="media-left-props">Media.Left</Anchor></h4>
-      <PropTable component="Media.Left"/>
+      <PropTable component="Media.Left" />
 
       <h4><Anchor id="media-right-props">Media.Right</Anchor></h4>
-      <PropTable component="Media.Right"/>
+      <PropTable component="Media.Right" />
 
       <h4><Anchor id="media-heading-props">Media.Heading</Anchor></h4>
-      <PropTable component="Media.Heading"/>
+      <PropTable component="Media.Heading" />
 
       <h4><Anchor id="media-body-props">Media.Body</Anchor></h4>
-      <PropTable component="Media.Body"/>
+      <PropTable component="Media.Body" />
     </div>
   );
 }

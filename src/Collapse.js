@@ -131,34 +131,6 @@ class Collapse extends React.Component {
     this.handleExiting = this.handleExiting.bind(this);
   }
 
-  /* -- Expanding -- */
-  handleEnter(elem) {
-    const dimension = this._dimension();
-    elem.style[dimension] = '0';
-  }
-
-  handleEntering(elem) {
-    const dimension = this._dimension();
-    elem.style[dimension] = this._getScrollDimensionValue(elem, dimension);
-  }
-
-  handleEntered(elem) {
-    const dimension = this._dimension();
-    elem.style[dimension] = null;
-  }
-
-  /* -- Collapsing -- */
-  handleExit(elem) {
-    const dimension = this._dimension();
-    elem.style[dimension] = this.props.getDimensionValue(dimension, elem) + 'px';
-    triggerBrowserReflow(elem);
-  }
-
-  handleExiting(elem) {
-    const dimension = this._dimension();
-    elem.style[dimension] = '0';
-  }
-
   _dimension() {
     return typeof this.props.dimension === 'function'
       ? this.props.dimension()
@@ -168,6 +140,34 @@ class Collapse extends React.Component {
   // for testing
   _getScrollDimensionValue(elem, dimension) {
     return `${elem[`scroll${capitalize(dimension)}`]}px`;
+  }
+
+  /* -- Expanding -- */
+  handleEnter(elem) {
+    const dimension = this._dimension();
+    elem.style[dimension] = '0';
+  }
+
+  handleEntered(elem) {
+    const dimension = this._dimension();
+    elem.style[dimension] = null;
+  }
+
+  handleEntering(elem) {
+    const dimension = this._dimension();
+    elem.style[dimension] = this._getScrollDimensionValue(elem, dimension);
+  }
+
+  /* -- Collapsing -- */
+  handleExit(elem) {
+    const dimension = this._dimension();
+    elem.style[dimension] = `${this.props.getDimensionValue(dimension, elem)}px`;
+    triggerBrowserReflow(elem);
+  }
+
+  handleExiting(elem) {
+    const dimension = this._dimension();
+    elem.style[dimension] = '0';
   }
 
   render() {

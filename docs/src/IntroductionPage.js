@@ -13,7 +13,8 @@ const IntroductionPage = React.createClass({
 
         <PageHeader
           title="Introduction"
-          subTitle="The most popular front-end framework, rebuilt for React."/>
+          subTitle="The most popular front-end framework, rebuilt for React."
+        />
 
         <div className="container bs-docs-container">
           <div className="row">
@@ -36,7 +37,7 @@ const IntroductionPage = React.createClass({
                   <CodeExample
                     mode="javascript"
                     codeText={
-`button(size=SMALL, color=GREEN, text="Something", onClick=someCallback)`
+                      'button(size=SMALL, color=GREEN, text="Something", onClick=someCallback)'
                     }
                   />
                 </div>
@@ -50,7 +51,7 @@ const IntroductionPage = React.createClass({
                   <CodeExample
                     mode="htmlmixed"
                     codeText={
-`<button id="something-btn" type="button" class="btn btn-success btn-sm">
+                      `<button id="something-btn" type="button" class="btn btn-success btn-sm">
   Something
 </button>`
                     }
@@ -75,7 +76,7 @@ const IntroductionPage = React.createClass({
                   <CodeExample
                     mode="javascript"
                     codeText={
-`<Button bsStyle="success" bsSize="small" onClick={someCallback}>
+                      `<Button bsStyle="success" bsSize="small" onClick={someCallback}>
   Something
 </Button>`
                     }
@@ -114,7 +115,7 @@ const IntroductionPage = React.createClass({
                   <CodeExample
                     mode="javascript"
                     codeText={
-`var button = React.DOM.button({
+                      `var button = React.DOM.button({
   className: "btn btn-lg btn-success",
   children: "Register"
 });
@@ -133,7 +134,7 @@ React.render(button, mountNode);`
                   <CodeExample
                     mode="javascript"
                     codeText={
-`var button = ReactBootstrap.Button({
+                      `var button = ReactBootstrap.Button({
   bsStyle: "success",
   bsSize: "large",
   children: "Register"
@@ -163,7 +164,7 @@ React.render(button, mountNode);`
                   <CodeExample
                     mode="javascript"
                     codeText={
-`var buttonGroupInstance = (
+                      `var buttonGroupInstance = (
   <ButtonGroup>
     <DropdownButton id="dropdown-btn-menu" bsStyle="success" title="Dropdown">
       <MenuItem key="1">Dropdown link</MenuItem>
@@ -184,9 +185,11 @@ React.render(buttonGroupInstance, mountNode);`
                   messy to mix Javascript and HTML in this way.
                   However, compare the code required to add
                   a dropdown button in the example above to the <a
-                  href="http://getbootstrap.com/javascript/#dropdowns">
+                    href="http://getbootstrap.com/javascript/#dropdowns"
+                  >
                   Bootstrap Javascript</a> and <a
-                  href="http://getbootstrap.com/components/#btn-dropdowns">
+                    href="http://getbootstrap.com/components/#btn-dropdowns"
+                  >
                   Components</a> documentation for creating a dropdown button.
                   The documentation is split in two because
                   you have to implement the component in two places
@@ -200,7 +203,8 @@ React.render(buttonGroupInstance, mountNode);`
                   the React.js philosophy that a single piece of functionality
                   should be defined in a single place.
                   View the current React-Bootstrap library on the <a
-                  href="/components.html">components page</a>.
+                    href="/components.html"
+                  >components page</a>.
                 </p>
               </div>
             </div>
@@ -209,7 +213,7 @@ React.render(buttonGroupInstance, mountNode);`
         <PageFooter />
       </div>
     );
-  }
+  },
 });
 
 export default IntroductionPage;

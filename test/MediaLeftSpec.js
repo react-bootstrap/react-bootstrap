@@ -7,7 +7,7 @@ import Media from '../src/Media';
 describe('Media.Left', () => {
   it('uses "div"', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Media.Left />
+      <Media.Left />,
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
@@ -15,7 +15,7 @@ describe('Media.Left', () => {
 
   it('has "media-left" class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Media.Left />
+      <Media.Left />,
     );
 
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bmedia-left\b/));
@@ -23,7 +23,7 @@ describe('Media.Left', () => {
 
   it('should be able to change alignment to middle', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Media.Left align="middle" />
+      <Media.Left align="middle" />,
     );
 
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bmedia-middle\b/));
@@ -31,7 +31,7 @@ describe('Media.Left', () => {
 
   it('should be able to change alignment to bottom', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Media.Left align="bottom" />
+      <Media.Left align="bottom" />,
     );
 
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bmedia-bottom\b/));
@@ -39,7 +39,7 @@ describe('Media.Left', () => {
 
   it('should merge additional classes passed in', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Media.Left className="custom-class" />
+      <Media.Left className="custom-class" />,
     );
 
     assert.include(ReactDOM.findDOMNode(instance).className, 'media-left');
@@ -50,7 +50,7 @@ describe('Media.Left', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Media.Left>
         <img />
-      </Media.Left>
+      </Media.Left>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'img'));
   });

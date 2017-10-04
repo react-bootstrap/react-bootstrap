@@ -1,6 +1,6 @@
 import 'colors';
-import { exec } from '../exec';
 import fsp from 'fs-promise';
+import { exec } from '../exec';
 import { srcRoot, libRoot } from '../constants';
 import buildBabel from '../buildBabel';
 

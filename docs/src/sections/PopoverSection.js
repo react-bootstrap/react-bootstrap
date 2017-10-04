@@ -15,7 +15,7 @@ export default function PopoverSection() {
       <p>
         The Popover, offers a more robust alternative to the Tooltip for displaying overlays of content.
       </p>
-      <ReactPlayground codeText={Samples.PopoverBasic}/>
+      <ReactPlayground codeText={Samples.PopoverBasic} />
 
       <h4><Anchor id="popovers-overlay-trigger">With OverlayTrigger</Anchor></h4>
       <p>

@@ -182,7 +182,7 @@ class Col extends React.Component {
 
     const classes = [];
 
-    DEVICE_SIZES.forEach(size => {
+    DEVICE_SIZES.forEach((size) => {
       function popProp(propSuffix, modifier) {
         const propName = `${size}${propSuffix}`;
         const propValue = elementProps[propName];

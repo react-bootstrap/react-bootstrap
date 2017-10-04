@@ -9,11 +9,11 @@ describe('<HelpBlock>', () => {
       $(
         <HelpBlock id="foo" className="my-help-block">
           Help contents
-        </HelpBlock>
+        </HelpBlock>,
       )
         .shallowRender()
         .single('#foo.help-block.my-help-block')
-          .text()
+        .text(),
     ).to.equal('Help contents');
   });
 });

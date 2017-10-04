@@ -17,7 +17,7 @@ describe('<Tabs>', () => {
       <Tabs id="test" defaultActiveKey={1}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     const panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
@@ -35,7 +35,7 @@ describe('<Tabs>', () => {
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
         <Tab eventKey={2}>Tab 2 content</Tab>
         <Tab title="Tab 2" eventKey={3}>Tab 3 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
@@ -50,7 +50,7 @@ describe('<Tabs>', () => {
       <Tabs id="test" defaultActiveKey={2}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
         <Tab title={tabTitle} eventKey={2}>Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
@@ -68,11 +68,11 @@ describe('<Tabs>', () => {
       <Tabs id="test" onSelect={onSelect} activeKey={1}>
         <Tab title="Tab 1" eventKey="1">Tab 1 content</Tab>
         <Tab title={tab2} eventKey="2">Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab2')
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab2'),
     );
   });
 
@@ -81,7 +81,7 @@ describe('<Tabs>', () => {
       <Tabs id="test" defaultActiveKey={1}>
         <Tab title="Tab 1" className="custom" eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" tabClassName="tcustom" eventKey={2}>Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     const panes = ReactTestUtils.scryRenderedComponentsWithType(instance, Tab);
@@ -97,7 +97,7 @@ describe('<Tabs>', () => {
       <Tabs id="test">
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     const panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
@@ -125,7 +125,7 @@ describe('<Tabs>', () => {
       <Tabs id="test">
         {panes}
         {null}
-      </Tabs>
+      </Tabs>,
     );
 
     const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
@@ -138,13 +138,13 @@ describe('<Tabs>', () => {
       <Tabs id="test" defaultActiveKey={2} animation={false}>
         <Tab title={tab1} eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     const panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
 
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab1')
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab1'),
     );
 
     assert.ok(ReactDOM.findDOMNode(panes[0]).className.match(/\bactive\b/));
@@ -161,7 +161,7 @@ describe('<Tabs>', () => {
         <Tab title={tab1} eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
         <Tab title="Tab 3" eventKey={3}>Tab 3 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     const panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
@@ -176,13 +176,13 @@ describe('<Tabs>', () => {
       <Tabs id="test" defaultActiveKey={2} animation={false} unmountOnExit>
         <Tab title={tab1} eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     const panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
 
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab1')
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab1'),
     );
 
     expect(ReactDOM.findDOMNode(panes[0])).to.exist;
@@ -194,10 +194,10 @@ describe('<Tabs>', () => {
 
   it('Should treat active key of null as nothing selected', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Tabs id="test" activeKey={null} onSelect={()=>{}}>
+      <Tabs id="test" activeKey={null} onSelect={() => {}}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     const nav = ReactTestUtils.findRenderedComponentWithType(instance, Nav);
@@ -209,7 +209,7 @@ describe('<Tabs>', () => {
       <Tabs id="test" defaultActiveKey={1} animation={false}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-tabs'));
@@ -220,7 +220,7 @@ describe('<Tabs>', () => {
       <Tabs id="test" bsStyle="pills" defaultActiveKey={1} animation={false}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-pills'));
@@ -231,7 +231,7 @@ describe('<Tabs>', () => {
       <Tabs id="test" defaultActiveKey={1}>
         <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2} disabled>Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled'));
@@ -243,13 +243,13 @@ describe('<Tabs>', () => {
       <Tabs id="test" defaultActiveKey={2} animation={false}>
         <Tab title={tab1} eventKey={1} disabled>Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     const panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
 
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab1')
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab1'),
     );
 
     assert.ok(!ReactDOM.findDOMNode(panes[0]).className.match(/\bactive\b/));
@@ -273,7 +273,7 @@ describe('<Tabs>', () => {
       document.body.removeChild(mountPoint);
     });
 
-    [true, false].forEach(animation => {
+    [true, false].forEach((animation) => {
       it(`should correctly set "active" after Tab is removed with "animation=${animation}"`, () => {
         const instance = render(
           <Tabs
@@ -285,7 +285,7 @@ describe('<Tabs>', () => {
             <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
             <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
           </Tabs>
-        , mountPoint);
+          , mountPoint);
 
         const panes = ReactTestUtils.scryRenderedComponentsWithType(instance, TabPane);
 
@@ -302,7 +302,7 @@ describe('<Tabs>', () => {
           >
             <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
           </Tabs>
-        , mountPoint).refs.inner;
+          , mountPoint).refs.inner;
 
         assert.ok(ReactDOM.findDOMNode(panes[0]).className.match(/\bactive\b/));
       });
@@ -318,7 +318,7 @@ describe('<Tabs>', () => {
         <Tabs defaultActiveKey={2} id="test">
           <Tab title="Tab 1" eventKey={1}>Tab 1 content</Tab>
           <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
-        </Tabs>
+        </Tabs>,
       );
     });
 
@@ -364,7 +364,7 @@ describe('<Tabs>', () => {
       <Tabs id="test" bsStyle="pills" defaultActiveKey={1} animation={false}>
         <Tab title="Tab 1" eventKey={1} className="my-tab-class">Tab 1 content</Tab>
         <Tab title="Tab 2" eventKey={2}>Tab 2 content</Tab>
-      </Tabs>
+      </Tabs>,
     );
 
     const myTabClass = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-tab-class');
@@ -382,7 +382,7 @@ describe('<Tabs>', () => {
         className="my-tabs-class"
         id="my-tabs-id"
         style={{ opacity: 0.5 }}
-      />
+      />,
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('class'), 'my-tabs-class');
@@ -396,7 +396,7 @@ describe('<Tabs>', () => {
       <Tabs id="test" bsClass="my-tabs">
         <Tab eventKey={1} title="Tab 1" />
         <Tab eventKey={2} title="Tab 2" bsClass="my-pane" />
-      </Tabs>
+      </Tabs>,
     );
 
     assert.lengthOf(ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'my-tabs-pane'), 2);

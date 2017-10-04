@@ -73,7 +73,7 @@ class PanelGroup extends React.Component {
         {...elementProps}
         className={classNames(className, classes)}
       >
-        {ValidComponentChildren.map(children, child => {
+        {ValidComponentChildren.map(children, (child) => {
           const childProps = {
             bsStyle: child.props.bsStyle || bsProps.bsStyle,
           };
@@ -85,8 +85,8 @@ class PanelGroup extends React.Component {
               collapsible: true,
               expanded: child.props.eventKey === activeKey,
               onSelect: createChainedFunction(
-                this.handleSelect, child.props.onSelect
-              )
+                this.handleSelect, child.props.onSelect,
+              ),
             });
           }
 

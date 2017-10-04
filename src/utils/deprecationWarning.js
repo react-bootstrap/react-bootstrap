@@ -24,16 +24,14 @@ function deprecationWarning(oldname, newname, link) {
 }
 
 
-deprecationWarning.wrapper = (Component, ...args) => {
-  return class DeprecatedComponent extends Component {
-    componentWillMount(...methodArgs) {
-      deprecationWarning(...args);
+deprecationWarning.wrapper = (Component, ...args) => class DeprecatedComponent extends Component {
+  componentWillMount(...methodArgs) {
+    deprecationWarning(...args);
 
-      if (super.componentWillMount) {
-        super.componentWillMount(...methodArgs);
-      }
+    if (super.componentWillMount) {
+      super.componentWillMount(...methodArgs);
     }
-  };
+  }
 };
 
 export default deprecationWarning;

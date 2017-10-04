@@ -1,6 +1,5 @@
 
 class Example extends React.Component {
-
   constructor(...args) {
     super(...args);
     this.state = {};
@@ -9,7 +8,7 @@ class Example extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={()=> this.setState({ open: !this.state.open })}>
+        <Button onClick={() => this.setState({ open: !this.state.open })}>
           click
         </Button>
         <Fade in={this.state.open}>
@@ -25,4 +24,4 @@ class Example extends React.Component {
   }
 }
 
-ReactDOM.render(<Example/>, mountNode);
+ReactDOM.render(<Example />, mountNode);

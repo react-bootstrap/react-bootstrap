@@ -35,11 +35,11 @@ class ResponsiveEmbed extends React.Component {
 
     warning(
       a16by9 || a4by3,
-      'Either `a16by9` or `a4by3` must be set.'
+      'Either `a16by9` or `a4by3` must be set.',
     );
     warning(
       !(a16by9 && a4by3),
-      'Only one of `a16by9` or `a4by3` can be set.'
+      'Only one of `a16by9` or `a4by3` can be set.',
     );
 
     const classes = {

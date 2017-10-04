@@ -16,7 +16,7 @@ export default function PageHeaderSection() {
       <ReactPlayground codeText={Samples.PageHeader} />
 
       <h3><Anchor id="page-header-props">Props</Anchor></h3>
-      <PropTable component="PageHeader"/>
+      <PropTable component="PageHeader" />
     </div>
   );
 }

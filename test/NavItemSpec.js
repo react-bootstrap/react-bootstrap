@@ -9,7 +9,7 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem active>
         Item content
-      </NavItem>
+      </NavItem>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active'));
   });
@@ -18,7 +18,7 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem disabled>
         Item content
-      </NavItem>
+      </NavItem>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled'));
   });
@@ -27,7 +27,7 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem href="/some/unique-thing/" title="content">
         Item content
-      </NavItem>
+      </NavItem>,
     );
     let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.ok(linkElement.href.indexOf('/some/unique-thing/') >= 0);
@@ -38,7 +38,7 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem href="/hi" title="boom!">
         Item content
-      </NavItem>
+      </NavItem>,
     );
 
     assert.ok(!ReactDOM.findDOMNode(instance).hasAttribute('href'));
@@ -49,7 +49,7 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem href="/hi" tabIndex="3" title="boom!">
         Item content
-      </NavItem>
+      </NavItem>,
     );
 
     let node = ReactDOM.findDOMNode(instance);
@@ -67,7 +67,7 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem eventKey="2" onSelect={handleSelect}>
         <span>Item content</span>
-      </NavItem>
+      </NavItem>,
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
   });
@@ -79,15 +79,15 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem disabled onSelect={handleSelect}>
         <span>Item content</span>
-      </NavItem>
+      </NavItem>,
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
   });
 
   it('Should set target attribute on anchor', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-          <NavItem href="/some/unique-thing/" target="_blank">Item content</NavItem>
-        );
+      <NavItem href="/some/unique-thing/" target="_blank">Item content</NavItem>,
+    );
     let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.equal(linkElement.target, '_blank');
   });
@@ -100,15 +100,15 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem onSelect={handleSelect} target="_blank">
         <span>Item content</span>
-      </NavItem>
+      </NavItem>,
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'));
   });
 
   it('Should set role="button" when href=="#"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-          <NavItem href="#" target="_blank">Item content</NavItem>
-        );
+      <NavItem href="#" target="_blank">Item content</NavItem>,
+    );
 
     let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert(linkElement.outerHTML.match('role="button"'), true);
@@ -116,8 +116,8 @@ describe('<NavItem>', () => {
 
   it('Should not set role when href!="#"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-          <NavItem href="/path/to/stuff" target="_blank">Item content</NavItem>
-        );
+      <NavItem href="/path/to/stuff" target="_blank">Item content</NavItem>,
+    );
 
     let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
     assert.equal(linkElement.outerHTML.match('role="button"'), null);
@@ -127,8 +127,8 @@ describe('<NavItem>', () => {
 
     it('Should pass aria-controls to the link', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-          <NavItem href="/path/to/stuff" target="_blank" aria-controls="hi">Item content</NavItem>
-        );
+        <NavItem href="/path/to/stuff" target="_blank" aria-controls="hi">Item content</NavItem>,
+      );
 
       let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
 
@@ -137,8 +137,8 @@ describe('<NavItem>', () => {
 
     it('Should add aria-selected to the link when role is "tab"', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-          <NavItem role="tab" active>Item content</NavItem>
-        );
+        <NavItem role="tab" active>Item content</NavItem>,
+      );
 
       let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
 
@@ -147,8 +147,8 @@ describe('<NavItem>', () => {
 
     it('Should not add aria-selected to the link when role is not "tab"', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-          <NavItem role="button" active>Item content</NavItem>
-        );
+        <NavItem role="button" active>Item content</NavItem>,
+      );
 
       let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
 
@@ -157,8 +157,8 @@ describe('<NavItem>', () => {
 
     it('Should pass role down', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-          <NavItem role="tab">Item content</NavItem>
-        );
+        <NavItem role="tab">Item content</NavItem>,
+      );
 
       let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
 

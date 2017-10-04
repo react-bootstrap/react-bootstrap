@@ -161,6 +161,14 @@ class Modal extends React.Component {
     this.handleExited();
   }
 
+  handleDialogClick(e) {
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+
+    this.props.onHide();
+  }
+
   handleEntering() {
     // FIXME: This should work even when animation is disabled.
     events.on(window, 'resize', this.handleWindowResize);
@@ -176,14 +184,6 @@ class Modal extends React.Component {
     this.updateStyle();
   }
 
-  handleDialogClick(e) {
-    if (e.target !== e.currentTarget) {
-      return;
-    }
-
-    this.props.onHide();
-  }
-
   updateStyle() {
     if (!canUseDOM) {
       return;
@@ -194,7 +194,7 @@ class Modal extends React.Component {
 
     const document = ownerDocument(dialogNode);
     const bodyIsOverflowing = isOverflowing(
-      ReactDOM.findDOMNode(this.props.container || document.body)
+      ReactDOM.findDOMNode(this.props.container || document.body),
     );
     const modalIsOverflowing =
       dialogHeight > document.documentElement.clientHeight;
@@ -204,8 +204,8 @@ class Modal extends React.Component {
         paddingRight: bodyIsOverflowing && !modalIsOverflowing ?
           getScrollbarSize() : undefined,
         paddingLeft: !bodyIsOverflowing && modalIsOverflowing ?
-          getScrollbarSize() : undefined
-      }
+          getScrollbarSize() : undefined,
+      },
     });
   }
 
@@ -232,7 +232,7 @@ class Modal extends React.Component {
     return (
       <BaseModal
         {...baseModalProps}
-        ref={c => { this._modal = c; }}
+        ref={(c) => { this._modal = c; }}
         show={show}
         onEntering={createChainedFunction(onEntering, this.handleEntering)}
         onExited={createChainedFunction(onExited, this.handleExited)}
@@ -271,5 +271,5 @@ Modal.TRANSITION_DURATION = 300;
 Modal.BACKDROP_TRANSITION_DURATION = 150;
 
 export default bsClass('modal',
-  bsSizes([Size.LARGE, Size.SMALL], Modal)
+  bsSizes([Size.LARGE, Size.SMALL], Modal),
 );

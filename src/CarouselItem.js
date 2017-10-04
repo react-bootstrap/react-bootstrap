@@ -48,7 +48,7 @@ class CarouselItem extends React.Component {
 
     if (!active && prevActive) {
       TransitionEvents.addEndEventListener(
-        ReactDOM.findDOMNode(this), this.handleAnimateOutEnd
+        ReactDOM.findDOMNode(this), this.handleAnimateOutEnd,
       );
     }
 
@@ -91,7 +91,7 @@ class CarouselItem extends React.Component {
 
     const classes = {
       item: true,
-      active: active && !animateIn || animateOut,
+      active: (active && !animateIn) || animateOut,
     };
     if (direction && active && animateIn) {
       classes[direction] = true;

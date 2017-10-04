@@ -98,7 +98,7 @@ const sections = {
     customStyles: '#custom-styles',
   missing: '#missing',
     affix: '#affix',
-    scrollspy: '#scrollspy'
+    scrollspy: '#scrollspy',
 };
 /* eslint-enable indent */
 
@@ -118,22 +118,14 @@ let ScrollSpy = ({ href, onBefore, onAfter }) => (
 const ComponentsPage = React.createClass({
   getInitialState() {
     return {
-      activeNavItemHref: null
+      activeNavItemHref: null,
     };
-  },
-
-  getMain() {
-    return this.refs.main;
-  },
-
-  handleNavItemSelect(key, e) {
-    window.location = e.target.href;
   },
 
   componentDidMount() {
     this.afterSections = {};
     Object.keys(sections).forEach(
-      key => this.afterSections[sections[key]] = false
+      key => this.afterSections[sections[key]] = false,
     );
 
     const { hash } = window.location;
@@ -147,6 +139,20 @@ const ComponentsPage = React.createClass({
         }
       }
     }
+  },
+
+  onAfter(href) {
+    this.afterSections[href] = true;
+    this.updateActiveHref();
+  },
+
+  onBefore(href) {
+    this.afterSections[href] = false;
+    this.updateActiveHref();
+  },
+
+  getMain() {
+    return this.refs.main;
   },
 
   setActiveNavItem() {
@@ -163,24 +169,8 @@ const ComponentsPage = React.createClass({
     this.setState({ activeNavItemHref });
   },
 
-  renderScrollSpy(href) {
-    return (
-      <ScrollSpy
-        href={href}
-        onBefore={this.onBefore}
-        onAfter={this.onAfter}
-      />
-    );
-  },
-
-  onBefore(href) {
-    this.afterSections[href] = false;
-    this.updateActiveHref();
-  },
-
-  onAfter(href) {
-    this.afterSections[href] = true;
-    this.updateActiveHref();
+  handleNavItemSelect(key, e) {
+    window.location = e.target.href;
   },
 
   updateActiveHref() {
@@ -192,6 +182,16 @@ const ComponentsPage = React.createClass({
       this.updateActiveHrefHandle = null;
       this.setActiveNavItem();
     });
+  },
+
+  renderScrollSpy(href) {
+    return (
+      <ScrollSpy
+        href={href}
+        onBefore={this.onBefore}
+        onAfter={this.onAfter}
+      />
+    );
   },
 
   render() {
@@ -473,7 +473,7 @@ const ComponentsPage = React.createClass({
         <PageFooter ref="footer" />
       </div>
     );
-  }
+  },
 });
 
 export default ComponentsPage;

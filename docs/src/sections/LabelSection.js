@@ -12,7 +12,7 @@ export default function LabelSection() {
         <Anchor id="labels">Labels</Anchor> <small>Label</small>
       </h2>
 
-      <p>Create a <code>{"<Label>label</Label>"}</code> to highlight information</p>
+      <p>Create a <code>{'<Label>label</Label>'}</code> to highlight information</p>
       <ReactPlayground codeText={Samples.Label} />
 
       <h3><Anchor id="labels-variations">Available variations</Anchor></h3>
@@ -20,7 +20,7 @@ export default function LabelSection() {
       <ReactPlayground codeText={Samples.LabelVariations} />
 
       <h3><Anchor id="label-props">Props</Anchor></h3>
-      <PropTable component="Label"/>
+      <PropTable component="Label" />
     </div>
   );
 }

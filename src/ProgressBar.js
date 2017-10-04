@@ -20,7 +20,7 @@ function onlyProgressBar(props, propName, componentName) {
 
   let error = null;
 
-  React.Children.forEach(children, child => {
+  React.Children.forEach(children, (child) => {
     if (error) {
       return;
     }
@@ -34,7 +34,7 @@ function onlyProgressBar(props, propName, componentName) {
       child;
     error = new Error(
       `Children of ${componentName} can contain only ProgressBar ` +
-      `components. Found ${childIdentifier}.`
+      `components. Found ${childIdentifier}.`,
     );
   });
 
@@ -63,7 +63,7 @@ const defaultProps = {
   active: false,
   isChild: false,
   srOnly: false,
-  striped: false
+  striped: false,
 };
 
 function getPercentage(now, min, max) {
@@ -127,8 +127,8 @@ class ProgressBar extends React.Component {
       >
         {children ?
           ValidComponentChildren.map(children, child => (
-            cloneElement(child, { isChild: true }
-          ))) :
+            cloneElement(child, { isChild: true },
+            ))) :
           this.renderProgressBar({
             min, now, max, label, srOnly, striped, active, bsClass, bsStyle,
           })
@@ -142,5 +142,5 @@ ProgressBar.propTypes = propTypes;
 ProgressBar.defaultProps = defaultProps;
 
 export default setBsClass('progress-bar',
-  bsStyles(Object.values(State), ProgressBar)
+  bsStyles(Object.values(State), ProgressBar),
 );

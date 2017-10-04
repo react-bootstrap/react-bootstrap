@@ -40,9 +40,9 @@ describe('<SplitButton>', () => {
 
   it('should invoke onClick when SplitButton.Button is clicked (prop)', (done) => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <SplitButton title="Title" id="test-id" onClick={ () => done() }>
+      <SplitButton title="Title" id="test-id" onClick={() => done()}>
         <MenuItem>Item 1</MenuItem>
-      </SplitButton>
+      </SplitButton>,
     );
 
     const buttonNode = ReactDOM.findDOMNode(ReactTestUtils.scryRenderedComponentsWithType(instance, Button)[0]);
@@ -60,7 +60,7 @@ describe('<SplitButton>', () => {
         onClick={onClickSpy}
       >
         <MenuItem>Item 1</MenuItem>
-      </SplitButton>
+      </SplitButton>,
     );
 
     const toggleNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
@@ -77,7 +77,7 @@ describe('<SplitButton>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" id="test-id" disabled>
         <MenuItem>Item 1</MenuItem>
-      </SplitButton>
+      </SplitButton>,
     );
 
     const toggleNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
@@ -92,7 +92,7 @@ describe('<SplitButton>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" id="test-id" href="/some/unique-thing/" target="_blank">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-      </SplitButton>
+      </SplitButton>,
     );
 
     let anchors = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a');
@@ -112,7 +112,7 @@ describe('<SplitButton>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" id="test-id" toggleLabel="Label">
         <MenuItem>Item 1</MenuItem>
-      </SplitButton>
+      </SplitButton>,
     );
 
     const toggleNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
@@ -123,7 +123,7 @@ describe('<SplitButton>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="title" id="test-id" bsClass="my-dropdown">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-      </SplitButton>
+      </SplitButton>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-toggle'));

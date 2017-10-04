@@ -15,14 +15,14 @@ const Trigger = React.createClass({
   },
 
   render() {
-    let close = () => this.setState({ show: false});
+    let close = () => this.setState({ show: false });
 
     return (
-      <div className="modal-container" style={{height: 200}}>
+      <div className="modal-container" style={{ height: 200 }}>
         <Button
           bsStyle="primary"
           bsSize="large"
-          onClick={() => this.setState({ show: true})}
+          onClick={() => this.setState({ show: true })}
         >
           Launch contained modal
         </Button>
@@ -45,7 +45,7 @@ const Trigger = React.createClass({
         </Modal>
       </div>
     );
-  }
+  },
 });
 
 ReactDOM.render(<Trigger />, mountNode);

@@ -6,7 +6,8 @@ import Collapse from '../src/Collapse';
 
 describe('<Collapse>', () => {
 
-  let Component, instance;
+  let Component,
+    instance;
 
   beforeEach(() => {
 
@@ -17,7 +18,7 @@ describe('<Collapse>', () => {
         return (
           <Collapse
             ref={r => this.collapse = r}
-            getDimensionValue={()=> 15 }
+            getDimensionValue={() => 15}
             {...props}
             {...this.state}
           >
@@ -34,7 +35,7 @@ describe('<Collapse>', () => {
 
   it('Should default to collapsed', () => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component>Panel content</Component>
+      <Component>Panel content</Component>,
     );
 
     assert.ok(
@@ -46,7 +47,7 @@ describe('<Collapse>', () => {
 
     it('Should have collapse class', () => {
       instance = ReactTestUtils.renderIntoDocument(
-        <Component>Panel content</Component>
+        <Component>Panel content</Component>,
       );
 
       assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'collapse'));
@@ -56,7 +57,7 @@ describe('<Collapse>', () => {
   describe('from collapsed to expanded', () => {
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
-        <Component>Panel content</Component>
+        <Component>Panel content</Component>,
       );
 
       // since scrollHeight is gonna be 0 detached from the DOM
@@ -127,7 +128,7 @@ describe('<Collapse>', () => {
   describe('from expanded to collapsed', () => {
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
-        <Component in>Panel content</Component>
+        <Component in>Panel content</Component>,
       );
     });
 
@@ -187,7 +188,7 @@ describe('<Collapse>', () => {
 
     it('Should have collapse and in class', () => {
       instance = ReactTestUtils.renderIntoDocument(
-        <Component in >Panel content</Component>
+        <Component in >Panel content</Component>,
       );
 
       expect(ReactDOM.findDOMNode(instance.collapse).className)
@@ -198,7 +199,7 @@ describe('<Collapse>', () => {
   describe('dimension', () => {
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
-        <Component>Panel content</Component>
+        <Component>Panel content</Component>,
       );
     });
 
@@ -221,19 +222,19 @@ describe('<Collapse>', () => {
   describe('with a role', () => {
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
-        <Component role="note">Panel content</Component>
+        <Component role="note">Panel content</Component>,
       );
     });
 
     it('sets aria-expanded true when expanded', () => {
       let node = ReactDOM.findDOMNode(instance);
-      instance.setState({ in: true});
+      instance.setState({ in: true });
       assert.equal(node.getAttribute('aria-expanded'), 'true');
     });
 
     it('sets aria-expanded false when collapsed', () => {
       let node = ReactDOM.findDOMNode(instance);
-      instance.setState({ in: false});
+      instance.setState({ in: false });
       assert.equal(node.getAttribute('aria-expanded'), 'false');
     });
   });

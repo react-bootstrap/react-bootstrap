@@ -12,11 +12,11 @@ describe('<ControlLabel>', () => {
       $(
         <ControlLabel htmlFor="foo" className="my-control-label">
           Label
-        </ControlLabel>
+        </ControlLabel>,
       )
         .shallowRender()
         .single('label.control-label.my-control-label[htmlFor="foo"]')
-          .text()
+        .text(),
     ).to.equal('Label');
   });
 
@@ -24,7 +24,7 @@ describe('<ControlLabel>', () => {
     $(
       <ControlLabel srOnly>
         Label
-      </ControlLabel>
+      </ControlLabel>,
     )
       .shallowRender()
       .single('label.control-label.sr-only');
@@ -34,7 +34,7 @@ describe('<ControlLabel>', () => {
     $(
       <FormGroup controlId="foo">
         <ControlLabel>Label</ControlLabel>
-      </FormGroup>
+      </FormGroup>,
     )
       .render()
       .single('label.control-label[htmlFor="foo"]');
@@ -48,7 +48,7 @@ describe('<ControlLabel>', () => {
         <ControlLabel htmlFor="bar">
           Label
         </ControlLabel>
-      </FormGroup>
+      </FormGroup>,
     )
       .render()
       .single('label.control-label[htmlFor="bar"]');

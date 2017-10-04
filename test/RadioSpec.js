@@ -10,32 +10,32 @@ describe('<Radio>', () => {
     $(
       <Radio name="foo" checked className="my-radio">
         My label
-      </Radio>
+      </Radio>,
     )
       .shallowRender()
       .single('div.radio.my-radio')
-        .single('input[type="radio"][name="foo"][checked]')
-          .end()
-        .single('label')
-          .tap($label => expect($label.text()).to.equal('My label'));
+      .single('input[type="radio"][name="foo"][checked]')
+      .end()
+      .single('label')
+      .tap($label => expect($label.text()).to.equal('My label'));
   });
 
   it('should support inline', () => {
     $(
       <Radio inline name="foo" className="my-radio">
         My label
-      </Radio>
+      </Radio>,
     )
       .shallowRender()
       .single('label.radio-inline.my-radio')
-        .single('input[type="radio"][name="foo"]')
-          .end()
-        .tap($label => expect($label.text()).to.equal('My label'));
+      .single('input[type="radio"][name="foo"]')
+      .end()
+      .tap($label => expect($label.text()).to.equal('My label'));
   });
 
   it('should support validation state', () => {
     $(
-      <Radio validationState="success" />
+      <Radio validationState="success" />,
     )
       .shallowRender()
       .single('.has-success');
@@ -45,7 +45,7 @@ describe('<Radio>', () => {
     shouldWarn('ignored');
 
     $(
-      <Radio inline validationState="success" />
+      <Radio inline validationState="success" />,
     )
       .shallowRender()
       .none('.has-success');
@@ -55,7 +55,7 @@ describe('<Radio>', () => {
     class Container extends React.Component {
       render() {
         return (
-          <Radio inputRef={ref => { this.input = ref; }} />
+          <Radio inputRef={(ref) => { this.input = ref; }} />
         );
       }
     }

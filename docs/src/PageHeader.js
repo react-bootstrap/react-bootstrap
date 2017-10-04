@@ -10,7 +10,7 @@ const PageHeader = React.createClass({
         </div>
       </div>
     );
-  }
+  },
 });
 
 export default PageHeader;

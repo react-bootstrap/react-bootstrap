@@ -8,15 +8,15 @@ import promisify from '../tools/promisify';
 import defaultDescriptions from './src/defaultPropDescriptions';
 
 marked.setOptions({
-  xhtml: true
+  xhtml: true,
 });
 
 let globp = promisify(glob);
 
 // removes doclet syntax from comments
-let cleanDoclets = desc => {
+let cleanDoclets = (desc) => {
   let idx = desc.indexOf('@');
-  return (idx === -1 ? desc : desc.substr(0, idx )).trim();
+  return (idx === -1 ? desc : desc.substr(0, idx)).trim();
 };
 
 let cleanDocletValue = str => str.trim().replace(/^\{/, '').replace(/\}$/, '');
@@ -93,7 +93,7 @@ function addBootstrapPropTypes(Component, componentData) {
         type: {
           name: 'enum',
           value: values.map(v => `"${v}"`),
-        }
+        },
       };
     }
   }
@@ -105,7 +105,7 @@ function addBootstrapPropTypes(Component, componentData) {
     componentData.props.bsClass = {
       desc: '',
       defaultValue: quote(defaultProps.bsClass),
-      type: { name: 'string' }
+      type: { name: 'string' },
     };
   }
 }
@@ -151,6 +151,6 @@ export default function generate(destination, options = { mixins: true, inferCom
 
           return result;
         })
-        .catch(e => setTimeout(()=> { throw e; }));
+        .catch(e => setTimeout(() => { throw e; }));
     });
 }

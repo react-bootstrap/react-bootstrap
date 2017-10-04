@@ -27,7 +27,7 @@ describe('<Modal>', () => {
       <Modal show onHide={noOp} animation={false}>
         <strong>Message</strong>
       </Modal>
-    , mountPoint);
+      , mountPoint);
 
     assert.ok(instance._modal.getDialogElement().querySelector('strong'));
   });
@@ -39,7 +39,7 @@ describe('<Modal>', () => {
       <Modal show onHide={doneOp}>
         <strong>Message</strong>
       </Modal>
-    , mountPoint);
+      , mountPoint);
 
 
     const dialog = instance._modal.getDialogElement();
@@ -53,7 +53,7 @@ describe('<Modal>', () => {
       <Modal show onHide={onHideSpy} backdrop="static">
         <strong>Message</strong>
       </Modal>
-    , mountPoint);
+      , mountPoint);
 
     const dialog = instance._modal.getDialogElement();
 
@@ -70,10 +70,10 @@ describe('<Modal>', () => {
         <Modal.Header closeButton />
         <strong>Message</strong>
       </Modal>
-    , mountPoint);
+      , mountPoint);
 
     const button = instance._modal.getDialogElement()
-        .getElementsByClassName('close')[0];
+      .getElementsByClassName('close')[0];
 
     ReactTestUtils.Simulate.click(button);
   });
@@ -84,7 +84,7 @@ describe('<Modal>', () => {
       <Modal show className="mymodal" onHide={noOp}>
         <strong>Message</strong>
       </Modal>
-    , mountPoint);
+      , mountPoint);
 
     const dialog = instance._modal.getDialogElement();
 
@@ -97,7 +97,7 @@ describe('<Modal>', () => {
       <Modal show bsClass="mymodal" onHide={noOp}>
         <strong>Message</strong>
       </Modal>
-    , mountPoint);
+      , mountPoint);
 
     const modal = instance._modal.getDialogElement();
 
@@ -115,7 +115,7 @@ describe('<Modal>', () => {
       <Modal show backdropClassName="my-modal-backdrop" onHide={noOp}>
         <strong>Message</strong>
       </Modal>
-    , mountPoint);
+      , mountPoint);
 
     const baseModal = ReactTestUtils.findRenderedComponentWithType(instance, BaseModal);
     assert.ok(baseModal.backdrop.className.match(/\bmodal-backdrop my-modal-backdrop\b/));
@@ -127,7 +127,7 @@ describe('<Modal>', () => {
       <Modal show bsSize="small" onHide={noOp}>
         <strong>Message</strong>
       </Modal>
-    , mountPoint);
+      , mountPoint);
 
     const dialog = instance._modal.getDialogElement().getElementsByClassName('modal-dialog')[0];
 
@@ -141,7 +141,7 @@ describe('<Modal>', () => {
       <Modal show style={{ top: 1000 }} onHide={noOp}>
         <strong>Message</strong>
       </Modal>
-    , mountPoint);
+      , mountPoint);
 
     const dialog = instance._modal.getDialogElement();
 
@@ -155,7 +155,7 @@ describe('<Modal>', () => {
       <Modal show dialogClassName="testCss" onHide={noOp}>
         <strong>Message</strong>
       </Modal>
-    , mountPoint);
+      , mountPoint);
 
     const dialog = instance._modal.getDialogElement().querySelector('.modal-dialog');
 
@@ -173,7 +173,7 @@ describe('<Modal>', () => {
       <Modal show dialogComponentClass={CustomDialog} onHide={noOp}>
         <strong>Message</strong>
       </Modal>
-    , mountPoint);
+      , mountPoint);
 
     assert.equal(instance._modal.getDialogElement().className, 'custom-dialog');
   });

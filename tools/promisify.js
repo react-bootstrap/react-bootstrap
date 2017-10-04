@@ -1,14 +1,13 @@
 export default function promisify(fn) {
-  return (...args) => {
-    return new Promise((resolve, reject) => {
-      function finish(err, result) {
-        if (err) {
-          return reject(err);
-        }
-        resolve(result);
+  return (...args) => new Promise((resolve, reject) => {
+    function finish(err, result) {
+      if (err) {
+        reject(err);
+        return;
       }
+      resolve(result);
+    }
 
-      fn.apply(null, args.concat(finish));
-    });
-  };
+    fn(...args.concat(finish));
+  });
 }

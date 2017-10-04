@@ -1,5 +1,7 @@
 // These do not use ES6 imports, because the evaluated code requires un-mangled
 // variable names.
+import { transform } from 'babel-standalone';
+import CodeExample from './CodeExample';
 
 /* eslint-disable */
 const classNames = require('classnames');
@@ -75,8 +77,6 @@ const bootstrapUtils = require('../../src/utils/bootstrapUtils');
 
 /* eslint-enable */
 
-import {transform} from 'babel-standalone';
-import CodeExample from './CodeExample';
 
 const IS_MOBILE = typeof navigator !== 'undefined' && (
   navigator.userAgent.match(/Android/i)
@@ -86,7 +86,7 @@ const IS_MOBILE = typeof navigator !== 'undefined' && (
     || navigator.userAgent.match(/iPod/i)
     || navigator.userAgent.match(/BlackBerry/i)
     || navigator.userAgent.match(/Windows Phone/i)
-  );
+);
 
 class CodeMirrorEditor extends React.Component {
   constructor(props) {
@@ -107,7 +107,7 @@ class CodeMirrorEditor extends React.Component {
       matchBrackets: true,
       tabSize: 2,
       theme: 'solarized light',
-      readOnly: this.props.readOnly
+      readOnly: this.props.readOnly,
     });
     this.editor.on('change', this.handleChange);
   }
@@ -143,7 +143,7 @@ class CodeMirrorEditor extends React.Component {
       <div style={this.props.style} className={this.props.className}>
         {editor}
       </div>
-      );
+    );
   }
 }
 
@@ -152,28 +152,28 @@ const selfCleaningTimeout = {
     clearTimeout(this.timeoutID);
   },
 
-  updateTimeout() {
+  updateTimeout(...args) {
     clearTimeout(this.timeoutID);
-    this.timeoutID = setTimeout.apply(null, arguments);
-  }
+    this.timeoutID = setTimeout(...args);
+  },
 };
 
 const ReactPlayground = React.createClass({
-  mixins: [selfCleaningTimeout],
-
   propTypes: {
     codeText: PropTypes.string.isRequired,
-    transformer: PropTypes.func
+    transformer: PropTypes.func,
   },
+
+  mixins: [selfCleaningTimeout],
 
   getDefaultProps() {
     return {
       transformer(code) {
         return transform(code, {
           // TODO: Use preset options once babel-standalone v6.13 is released.
-          presets: ['es2015-loose', 'react', 'stage-1']
+          presets: ['es2015-loose', 'react', 'stage-1'],
         }).code;
-      }
+      },
     };
   },
 
@@ -181,7 +181,7 @@ const ReactPlayground = React.createClass({
     return {
       code: this.props.codeText,
       codeChanged: false,
-      showCode: false
+      showCode: false,
     };
   },
 
@@ -191,10 +191,13 @@ const ReactPlayground = React.createClass({
     // that we supply, so we can ensure ahead of time that it won't throw an
     // exception while rendering.
     const originalRender = ReactDOM.render;
-    ReactDOM.render = (element) => this._initialExample = element;
+    ReactDOM.render = (element) => {
+      this._initialExample = element;
+      return element;
+    };
 
     // Stub out mountNode for the example code.
-    const mountNode = null;  // eslint-disable-line no-unused-vars
+    const mountNode = null; // eslint-disable-line no-unused-vars
 
     try {
       const compiledCode = this.props.transformer(this.props.codeText);
@@ -209,75 +212,6 @@ const ReactPlayground = React.createClass({
 
   componentWillUnmount() {
     this.clearExample();
-  },
-
-  handleCodeChange(value) {
-    this.setState(
-      {code: value, codeChanged: true},
-      this.executeCode
-    );
-  },
-
-  handleCodeModeToggle() {
-    this.setState({
-      showCode: !this.state.showCode
-    });
-  },
-
-  render() {
-    return (
-      <div className="playground">
-        {this.renderExample()}
-
-        {this.renderEditor()}
-        {this.renderToggle()}
-      </div>
-    );
-  },
-
-  renderExample() {
-    let example;
-    if (this.state.codeChanged) {
-      example = (
-        <div ref="mount" />
-      );
-    } else {
-      example = (
-        <div>{this._initialExample}</div>
-      );
-    }
-
-    return (
-      <div className={classNames('bs-example', this.props.exampleClassName)}>
-        {example}
-      </div>
-    );
-  },
-
-  renderEditor() {
-    if (!this.state.showCode) {
-      return null;
-    }
-
-    return (
-      <CodeMirrorEditor
-        key="jsx"
-        onChange={this.handleCodeChange}
-        className="highlight"
-        codeText={this.state.code}
-      />
-    );
-  },
-
-  renderToggle() {
-    return (
-      <SafeAnchor
-        className={classNames('code-toggle', {'open': this.state.showCode})}
-        onClick={this.handleCodeModeToggle}
-      >
-        {this.state.showCode ? 'hide code' : 'show code'}
-      </SafeAnchor>
-    );
   },
 
   clearExample() {
@@ -318,13 +252,82 @@ const ReactPlayground = React.createClass({
             <Alert bsStyle="danger">
               {err.toString()}
             </Alert>,
-            mountNode
+            mountNode,
           );
         },
-        500
+        500,
       );
     }
-  }
+  },
+
+  handleCodeChange(value) {
+    this.setState(
+      { code: value, codeChanged: true },
+      this.executeCode,
+    );
+  },
+
+  handleCodeModeToggle() {
+    this.setState({
+      showCode: !this.state.showCode,
+    });
+  },
+
+  renderEditor() {
+    if (!this.state.showCode) {
+      return null;
+    }
+
+    return (
+      <CodeMirrorEditor
+        key="jsx"
+        onChange={this.handleCodeChange}
+        className="highlight"
+        codeText={this.state.code}
+      />
+    );
+  },
+
+  renderExample() {
+    let example;
+    if (this.state.codeChanged) {
+      example = (
+        <div ref="mount" />
+      );
+    } else {
+      example = (
+        <div>{this._initialExample}</div>
+      );
+    }
+
+    return (
+      <div className={classNames('bs-example', this.props.exampleClassName)}>
+        {example}
+      </div>
+    );
+  },
+
+  renderToggle() {
+    return (
+      <SafeAnchor
+        className={classNames('code-toggle', { open: this.state.showCode })}
+        onClick={this.handleCodeModeToggle}
+      >
+        {this.state.showCode ? 'hide code' : 'show code'}
+      </SafeAnchor>
+    );
+  },
+
+  render() {
+    return (
+      <div className="playground">
+        {this.renderExample()}
+
+        {this.renderEditor()}
+        {this.renderToggle()}
+      </div>
+    );
+  },
 });
 
 export default ReactPlayground;

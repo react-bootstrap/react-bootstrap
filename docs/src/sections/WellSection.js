@@ -20,7 +20,7 @@ export default function WellSection() {
       <ReactPlayground codeText={Samples.WellSizes} />
 
       <h3><Anchor id="wells-props">Props</Anchor></h3>
-      <PropTable component="Well"/>
+      <PropTable component="Well" />
     </div>
   );
 }

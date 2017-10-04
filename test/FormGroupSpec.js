@@ -11,7 +11,7 @@ describe('<FormGroup>', () => {
       <FormGroup>
         <span className="child1" />
         <span className="child2" />
-      </FormGroup>
+      </FormGroup>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'child1'));
@@ -22,7 +22,7 @@ describe('<FormGroup>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <FormGroup>
         <span />
-      </FormGroup>
+      </FormGroup>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
@@ -32,7 +32,7 @@ describe('<FormGroup>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <FormGroup bsSize="small">
         <span />
-      </FormGroup>
+      </FormGroup>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
@@ -41,7 +41,7 @@ describe('<FormGroup>', () => {
     instance = ReactTestUtils.renderIntoDocument(
       <FormGroup bsSize="large">
         <span />
-      </FormGroup>
+      </FormGroup>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
@@ -70,7 +70,7 @@ describe('<FormGroup>', () => {
       $(
         <FormGroup>
           <span />
-        </FormGroup>
+        </FormGroup>,
       )
         .shallowRender()
         .none(`.${className}`);
@@ -80,7 +80,7 @@ describe('<FormGroup>', () => {
       $(
         <FormGroup {...props}>
           <span />
-        </FormGroup>
+        </FormGroup>,
       )
         .shallowRender()
         .single(`.${className}`);
@@ -90,7 +90,7 @@ describe('<FormGroup>', () => {
   describe('feedback', () => {
     it('should not have feedback without feedback component', () => {
       $(
-        <FormGroup validationState="success" />
+        <FormGroup validationState="success" />,
       )
         .shallowRender()
         .none('.has-feedback');
@@ -100,7 +100,7 @@ describe('<FormGroup>', () => {
       $(
         <FormGroup validationState="success">
           <FormControl.Feedback />
-        </FormGroup>
+        </FormGroup>,
       )
         .shallowRender()
         .single('.has-feedback');
@@ -112,7 +112,7 @@ describe('<FormGroup>', () => {
           <div>
             <FormControl.Feedback />
           </div>
-        </FormGroup>
+        </FormGroup>,
       )
         .shallowRender()
         .single('.has-feedback');
@@ -122,7 +122,7 @@ describe('<FormGroup>', () => {
       $(
         <FormGroup validationState="success">
           <div bsRole="feedback" />
-        </FormGroup>
+        </FormGroup>,
       )
         .shallowRender()
         .single('.has-feedback');

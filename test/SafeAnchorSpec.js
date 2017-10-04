@@ -56,11 +56,11 @@ describe('SafeAnchor', () => {
     tsp(<SafeAnchor onClick={handleClick} />)
       .render()
       .find('a')
-        .trigger('click')
-        .end()
+      .trigger('click')
+      .end()
       .props({ href: '#' })
       .find('a')
-        .trigger('click');
+      .trigger('click');
 
     expect(handleClick).to.have.been.calledTwice;
     expect(handleClick.getCall(0).args[0].isDefaultPrevented()).to.be.true;
@@ -86,10 +86,10 @@ describe('SafeAnchor', () => {
     tsp(
       <SafeAnchor disabled href="#foo" onClick={clickSpy}>
         Title
-      </SafeAnchor>
+      </SafeAnchor>,
     )
-    .render()
-    .trigger('click');
+      .render()
+      .trigger('click');
 
     expect(spy).to.have.been.calledOnce;
     expect(clickSpy).to.have.not.been.called;
@@ -132,7 +132,7 @@ describe('SafeAnchor', () => {
       tsp(<SafeAnchor href="http://google.com" />)
         .shallowRender()
         .find('a')
-        .props('role')
+        .props('role'),
     ).to.not.exist;
   });
 });

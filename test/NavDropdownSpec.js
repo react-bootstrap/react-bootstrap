@@ -14,7 +14,7 @@ describe('<NavDropdown>', () => {
           <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
           <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
         </NavDropdown>
-      </Nav>
+      </Nav>,
     );
 
     const dropdown = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, NavDropdown));
@@ -33,7 +33,7 @@ describe('<NavDropdown>', () => {
       <NavDropdown active title="Title" className="test-class" id="nav-test">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
         <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
-      </NavDropdown>
+      </NavDropdown>,
     );
 
     const li = ReactDOM.findDOMNode(instance);
@@ -49,7 +49,7 @@ describe('<NavDropdown>', () => {
         super(props);
 
         this.state = {
-          open: false
+          open: false,
         };
       }
 
@@ -92,13 +92,13 @@ describe('<NavDropdown>', () => {
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
         <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
         <MenuItem eventKey="3">MenuItem 3 content</MenuItem>
-      </NavDropdown>
+      </NavDropdown>,
     );
 
     expect(ReactDOM.findDOMNode(instance).className).to.match(/active/);
 
     const items = ReactTestUtils.scryRenderedComponentsWithType(
-      instance, MenuItem
+      instance, MenuItem,
     );
     expect(ReactDOM.findDOMNode(items[0]).className).to.not.match(/active/);
     expect(ReactDOM.findDOMNode(items[1]).className).to.match(/active/);
@@ -117,7 +117,7 @@ describe('<NavDropdown>', () => {
         <Container>
           <MenuItem>MenuItem 1 content</MenuItem>
         </Container>
-      </NavDropdown>
+      </NavDropdown>,
     );
 
     const container = ReactTestUtils.findRenderedComponentWithType(
@@ -130,7 +130,7 @@ describe('<NavDropdown>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <NavDropdown title="title" id="test-id" bsClass="my-dropdown">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-      </NavDropdown>
+      </NavDropdown>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-toggle'));

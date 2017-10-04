@@ -23,7 +23,7 @@ const propTypes = {
 const defaultProps = {
   componentClass: SafeAnchor,
   active: false,
-  disabled: false
+  disabled: false,
 };
 
 class PaginationButton extends React.Component {

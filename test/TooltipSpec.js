@@ -13,7 +13,7 @@ describe('Tooltip', () => {
         positionLeft={20}
       >
         <strong>Tooltip Content</strong>
-      </Tooltip>
+      </Tooltip>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
 
@@ -32,7 +32,7 @@ describe('Tooltip', () => {
           positionLeft={20}
         >
           <strong>Tooltip Content</strong>
-        </Tooltip>
+        </Tooltip>,
       );
       const tooltip = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tooltip');
       expect(pick(tooltip.style, ['top', 'left']))

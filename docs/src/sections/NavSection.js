@@ -30,10 +30,10 @@ export default function NavSection() {
       <h3><Anchor id="navs-props">Props</Anchor></h3>
 
       <h4><Anchor id="navs-props-nav">Nav</Anchor></h4>
-      <PropTable component="Nav"/>
+      <PropTable component="Nav" />
 
       <h4><Anchor id="navs-props-navitem">NavItem</Anchor></h4>
-      <PropTable component="NavItem"/>
+      <PropTable component="NavItem" />
     </div>
   );
 }

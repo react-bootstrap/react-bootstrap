@@ -45,7 +45,7 @@ const propTypes = {
    */
   children: all(
     requiredRoles(TOGGLE_ROLE, MENU_ROLE),
-    exclusiveRoles(MENU_ROLE)
+    exclusiveRoles(MENU_ROLE),
   ),
 
   /**
@@ -131,7 +131,7 @@ class Dropdown extends React.Component {
   componentWillUpdate(nextProps) {
     if (!nextProps.open && this.props.open) {
       this._focusInDropdown = contains(
-        ReactDOM.findDOMNode(this.menu), activeElement(document)
+        ReactDOM.findDOMNode(this.menu), activeElement(document),
       );
     }
   }
@@ -154,12 +154,43 @@ class Dropdown extends React.Component {
     }
   }
 
+  focus() {
+    const toggle = ReactDOM.findDOMNode(this.toggle);
+
+    if (toggle && toggle.focus) {
+      toggle.focus();
+    }
+  }
+
+  focusNextOnOpen() {
+    const menu = this.menu;
+
+    if (!menu.focusNext) {
+      return;
+    }
+
+    if (
+      this.lastOpenEventType === 'keydown' ||
+      this.props.role === 'menuitem'
+    ) {
+      menu.focusNext();
+    }
+  }
+
   handleClick(event) {
     if (this.props.disabled) {
       return;
     }
 
     this.toggleOpen(event, { source: 'click' });
+  }
+
+  handleClose(event, eventDetails) {
+    if (!this.props.open) {
+      return;
+    }
+
+    this.toggleOpen(event, eventDetails);
   }
 
   handleKeyDown(event) {
@@ -196,71 +227,14 @@ class Dropdown extends React.Component {
     }
   }
 
-  handleClose(event, eventDetails) {
-    if (!this.props.open) {
-      return;
-    }
-
-    this.toggleOpen(event, eventDetails);
-  }
-
-  focusNextOnOpen() {
-    const menu = this.menu;
-
-    if (!menu.focusNext) {
-      return;
-    }
-
-    if (
-      this.lastOpenEventType === 'keydown' ||
-      this.props.role === 'menuitem'
-    ) {
-      menu.focusNext();
-    }
-  }
-
-  focus() {
-    const toggle = ReactDOM.findDOMNode(this.toggle);
-
-    if (toggle && toggle.focus) {
-      toggle.focus();
-    }
-  }
-
-  renderToggle(child, props) {
-    let ref = c => { this.toggle = c; };
-
-    if (typeof child.ref === 'string') {
-      warning(false,
-        'String refs are not supported on `<Dropdown.Toggle>` components. ' +
-        'To apply a ref to the component use the callback signature:\n\n ' +
-        'https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute'
-      );
-    } else {
-      ref = createChainedFunction(child.ref, ref);
-    }
-
-    return cloneElement(child, {
-      ...props,
-      ref,
-      bsClass: prefix(props, 'toggle'),
-      onClick: createChainedFunction(
-        child.props.onClick, this.handleClick
-      ),
-      onKeyDown: createChainedFunction(
-        child.props.onKeyDown, this.handleKeyDown
-      ),
-    });
-  }
-
   renderMenu(child, { id, onSelect, rootCloseEvent, ...props }) {
-    let ref = c => { this.menu = c; };
+    let ref = (c) => { this.menu = c; };
 
     if (typeof child.ref === 'string') {
       warning(false,
         'String refs are not supported on `<Dropdown.Menu>` components. ' +
         'To apply a ref to the component use the callback signature:\n\n ' +
-        'https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute'
+        'https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute',
       );
     } else {
       ref = createChainedFunction(child.ref, ref);
@@ -279,7 +253,33 @@ class Dropdown extends React.Component {
         onSelect,
         (key, event) => this.handleClose(event, { source: 'select' }),
       ),
-      rootCloseEvent
+      rootCloseEvent,
+    });
+  }
+
+  renderToggle(child, props) {
+    let ref = (c) => { this.toggle = c; };
+
+    if (typeof child.ref === 'string') {
+      warning(false,
+        'String refs are not supported on `<Dropdown.Toggle>` components. ' +
+        'To apply a ref to the component use the callback signature:\n\n ' +
+        'https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute',
+      );
+    } else {
+      ref = createChainedFunction(child.ref, ref);
+    }
+
+    return cloneElement(child, {
+      ...props,
+      ref,
+      bsClass: prefix(props, 'toggle'),
+      onClick: createChainedFunction(
+        child.props.onClick, this.handleClick,
+      ),
+      onKeyDown: createChainedFunction(
+        child.props.onKeyDown, this.handleKeyDown,
+      ),
     });
   }
 
@@ -321,7 +321,7 @@ class Dropdown extends React.Component {
         {...props}
         className={classNames(className, classes)}
       >
-        {ValidComponentChildren.map(children, child => {
+        {ValidComponentChildren.map(children, (child) => {
           switch (child.props.bsRole) {
             case TOGGLE_ROLE:
               return this.renderToggle(child, {

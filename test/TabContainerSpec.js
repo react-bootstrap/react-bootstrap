@@ -25,7 +25,7 @@ describe('<TabContainer>', () => {
             </TabPane>
           </TabContent>
         </div>
-      </TabContainer>
+      </TabContainer>,
     ).render();
 
     let top = instance
@@ -51,7 +51,7 @@ describe('<TabContainer>', () => {
             <TabPane eventKey="1" />
           </TabContent>
         </div>
-      </TabContainer>
+      </TabContainer>,
     ).render();
 
     let tabId = instance
@@ -77,7 +77,7 @@ describe('<TabContainer>', () => {
             <NavItem eventKey="1">One</NavItem>
           </Nav>
         </div>
-      </TabContainer>
+      </TabContainer>,
     ).render();
 
     instance
@@ -100,7 +100,7 @@ describe('<TabContainer>', () => {
             <NavItem href="#foo" eventKey="1">One</NavItem>
           </Nav>
         </div>
-      </TabContainer>
+      </TabContainer>,
     ).render();
 
     instance
@@ -146,7 +146,7 @@ describe('<TabContainer>', () => {
 
     it('should not get stuck after tab becomes unmounted', () => {
       const instance = tsp(
-        <Switcher eventKeys={[1, 2]} activeKey={2} />
+        <Switcher eventKeys={[1, 2]} activeKey={2} />,
       ).render();
 
       instance.single(TabContent);
@@ -161,7 +161,7 @@ describe('<TabContainer>', () => {
 
     it('should handle closing tab and changing active tab', () => {
       const instance = tsp(
-        <Switcher eventKeys={[1, 2]} activeKey={2} />
+        <Switcher eventKeys={[1, 2]} activeKey={2} />,
       ).render();
 
       instance.single('[eventKey=2]').single('.active');
@@ -173,7 +173,7 @@ describe('<TabContainer>', () => {
     it('should not call onSelect when container unmounts', () => {
       const spy = sinon.spy();
       const instance = tsp(
-        <Switcher eventKeys={[1]} activeKey={1} onSelect={spy} />
+        <Switcher eventKeys={[1]} activeKey={1} onSelect={spy} />,
       ).render();
 
       instance.single(TabPane);
@@ -184,7 +184,7 @@ describe('<TabContainer>', () => {
 
     it('should clean up unmounted tab state', () => {
       const instance = tsp(
-        <Switcher eventKeys={[1, 2, 3]} activeKey={3} />
+        <Switcher eventKeys={[1, 2, 3]} activeKey={3} />,
       ).render();
 
       instance.find(TabPane).length.should.equal(3);
@@ -197,7 +197,7 @@ describe('<TabContainer>', () => {
 
     it('should not get stuck if tab stops animating', () => {
       const instance = tsp(
-        <Switcher eventKeys={[1, 2]} activeKey={1} />
+        <Switcher eventKeys={[1, 2]} activeKey={1} />,
       ).render();
 
       instance.single('[eventKey=1]').single('.active');
@@ -215,7 +215,7 @@ describe('<TabContainer>', () => {
 
     it('should handle simultaneous eventKey and activeKey change', () => {
       const instance = tsp(
-        <Switcher eventKeys={[1, 2]} activeKey={2} />
+        <Switcher eventKeys={[1, 2]} activeKey={2} />,
       ).render();
 
       instance.single('[eventKey=2]').single('.active');
@@ -229,7 +229,7 @@ describe('<TabContainer>', () => {
 
     it('should not get stuck if eventKey ceases to exist', () => {
       const instance = tsp(
-        <Switcher eventKeys={[1, 2]} activeKey={2} />
+        <Switcher eventKeys={[1, 2]} activeKey={2} />,
       ).render();
 
       instance.single('[eventKey=2]').single('.active');
@@ -255,7 +255,7 @@ describe('<TabContainer>', () => {
     ].forEach(([order1, order2]) => {
       it('should handle event key swaps', () => {
         const instance = tsp(
-          <Switcher eventKeys={order1} activeKey={1} />
+          <Switcher eventKeys={order1} activeKey={1} />,
         ).render();
 
         instance.single('[eventKey=1]').single('.active');

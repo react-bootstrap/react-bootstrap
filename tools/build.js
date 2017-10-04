@@ -3,11 +3,11 @@ import bower from './amd/build';
 import lib from './lib/build';
 import es from './es/build';
 import dist from './dist/build';
-import { copy } from './fs-utils';
+import copy from './fs-utils';
 import { distRoot, bowerRoot } from './constants';
 import { exec } from './exec';
 
-function forkAndBuildDocs({verbose}) {
+function forkAndBuildDocs({ verbose }) {
   console.log('Building: '.cyan + 'docs'.green);
 
   const verboseOption = verbose ? '--verbose' : '';
@@ -22,7 +22,7 @@ export default function Build(options) {
     es(),
     bower(),
     dist(),
-    forkAndBuildDocs(options)
+    forkAndBuildDocs(options),
   ])
-  .then(() => copy(distRoot, bowerRoot));
+    .then(() => copy(distRoot, bowerRoot));
 }

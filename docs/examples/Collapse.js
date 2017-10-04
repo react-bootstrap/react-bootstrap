@@ -8,7 +8,7 @@ class Example extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={ ()=> this.setState({ open: !this.state.open })}>
+        <Button onClick={() => this.setState({ open: !this.state.open })}>
           click
         </Button>
         <Collapse in={this.state.open}>
@@ -24,4 +24,4 @@ class Example extends React.Component {
   }
 }
 
-ReactDOM.render(<Example/>, mountNode);
+ReactDOM.render(<Example />, mountNode);
