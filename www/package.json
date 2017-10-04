@@ -9,6 +9,7 @@
   "dependencies": {
     "babel-register": "^6.24.1",
     "gatsby": "^1.9.50",
+    "gatsby-cli": "^1.2.0-alpha.d6b7680b",
     "gatsby-link": "^1.6.18",
     "gatsby-plugin-catch-links": "^1.0.8",
     "gatsby-plugin-google-analytics": "^1.0.7",
@@ -20,6 +21,7 @@
     "gatsby-source-filesystem": "^1.5.1",
     "gatsby-transformer-react-docgen": "^1.0.8",
     "gatsby-transformer-remark": "^1.7.15",
+    "global": "^4.3.2",
     "graphql": "^0.10.5",
     "graphql-type-json": "^0.1.4",
     "lodash": "^4.15.0",
