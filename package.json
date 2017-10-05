@@ -45,7 +45,7 @@
     "babel-cli": "^6.11.4",
     "babel-core": "^6.13.2",
     "babel-eslint": "^8.0.1",
-    "babel-loader": "6.0.0",
+    "babel-loader": "^6.2.5",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-istanbul": "^4.1.5",
