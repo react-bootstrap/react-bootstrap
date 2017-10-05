@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import * as ReactBootstrap from 'react-bootstrap';
 
-console.log(ReactBootstrap)
 import {
   LiveProvider,
   LiveEditor,
