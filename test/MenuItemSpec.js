@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
-import tsp from 'teaspoon';
+import { shallow } from 'enzyme';
 
 import MenuItem from '../src/MenuItem';
 
@@ -157,20 +157,18 @@ describe('<MenuItem>', () => {
   });
 
   it('does not pass onClick to DOM node', () => {
-    tsp(
+    shallow(
       <MenuItem onSelect={() => {}}>Item</MenuItem>,
     )
-      .shallowRender()
       .children()
       .props()
       .should.not.have.property('onSelect');
   });
 
   it('does not pass onClick to children', () => {
-    tsp(
+    shallow(
       <MenuItem onSelect={() => {}}>Item</MenuItem>,
     )
-      .shallowRender()
       .find('SafeAnchor')
       .props()
       .should.not.have.property('onSelect');

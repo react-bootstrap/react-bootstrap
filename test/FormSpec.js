@@ -1,40 +1,37 @@
 import React from 'react';
-import $ from 'teaspoon';
+import { shallow } from 'enzyme';
 
 import Form from '../src/Form';
 import FormGroup from '../src/FormGroup';
 
 describe('<Form>', () => {
   it('should support horizontal', () => {
-    $(
+    shallow(
       <Form horizontal className="my-form">
         <FormGroup />
       </Form>,
     )
-      .shallowRender()
-      .single('form.form-horizontal.my-form')
-      .single(FormGroup);
+      .assertSingle('form.form-horizontal.my-form')
+      .assertSingle(FormGroup);
   });
 
   it('should support inline', () => {
-    $(
+    shallow(
       <Form inline className="my-form">
         <FormGroup />
       </Form>,
     )
-      .shallowRender()
-      .single('form.form-inline.my-form')
-      .single(FormGroup);
+      .assertSingle('form.form-inline.my-form')
+      .assertSingle(FormGroup);
   });
 
   it('should support custom componentClass', () => {
-    $(
+    shallow(
       <Form componentClass="fieldset" horizontal className="my-form">
         <FormGroup />
       </Form>,
     )
-      .shallowRender()
-      .single('fieldset.form-horizontal.my-form')
-      .single(FormGroup);
+      .assertSingle('fieldset.form-horizontal.my-form')
+      .assertSingle(FormGroup);
   });
 });

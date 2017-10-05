@@ -1,5 +1,5 @@
 import React from 'react';
-import $ from 'teaspoon';
+import { mount, shallow } from 'enzyme';
 
 import Button from '../src/Button';
 import FormControl from '../src/FormControl';
@@ -7,7 +7,7 @@ import InputGroup from '../src/InputGroup';
 
 describe('<InputGroup>', () => {
   it('should render properly', () => {
-    $(
+    const wrapper = mount(
       <InputGroup className="my-input-group">
         <InputGroup.Addon className="my-addon">
           Foo
@@ -20,23 +20,24 @@ describe('<InputGroup>', () => {
         </InputGroup.Button>
       </InputGroup>,
     )
-      .render()
-      .single('.input-group.my-input-group')
-      .end()
-      .single('.input-group-addon.my-addon')
-      .tap($addon => expect($addon.text()).to.equal('Foo'))
-      .end()
-      .single('input.form-control[type="text"]')
-      .end()
-      .single('.input-group-btn.my-button')
-      .single($.s`${Button}`);
+      .assertSingle('.input-group.my-input-group');
+
+    wrapper
+      .assertSingle('.input-group-addon.my-addon')
+      .text().should.equal('Foo');
+
+    wrapper
+      .assertSingle('input.form-control[type="text"]');
+
+    wrapper
+      .assertSingle('.input-group-btn.my-button')
+      .assertSingle(Button);
   });
 
   it('should support bsSize', () => {
-    $(
+    shallow(
       <InputGroup bsSize="small" />,
     )
-      .shallowRender()
-      .single('.input-group.input-group-sm');
+      .assertSingle('.input-group.input-group-sm');
   });
 });

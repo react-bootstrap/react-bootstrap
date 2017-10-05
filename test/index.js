@@ -2,6 +2,25 @@ import deprecated from 'prop-types-extra/lib/deprecated';
 
 import { _resetWarned } from '../src/utils/deprecationWarning';
 
+import Enzyme, { ShallowWrapper, ReactWrapper } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-15';
+
+Enzyme.configure({ adapter: new Adapter() });
+
+function assertLength(length) {
+  return function $assertLength(selector) {
+    let result = this.find(selector);
+    expect(result).to.have.length(length);
+    return result;
+  };
+}
+
+ReactWrapper.prototype.assertSingle = assertLength(1);
+ShallowWrapper.prototype.assertSingle = assertLength(1);
+
+ReactWrapper.prototype.assertNone = assertLength(0);
+ShallowWrapper.prototype.assertNone = assertLength(0);
+
 beforeEach(() => {
   /* eslint-disable no-console */
   sinon.stub(console, 'error').callsFake((msg) => {

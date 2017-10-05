@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
-import $ from 'teaspoon';
+import { shallow } from 'enzyme';
 
 import FormControl from '../src/FormControl';
 import FormGroup from '../src/FormGroup';
@@ -67,65 +67,59 @@ describe('<FormGroup>', () => {
     },
   ].forEach(({ props, className }) => {
     it(`does not render ${className} class`, () => {
-      $(
+      shallow(
         <FormGroup>
           <span />
         </FormGroup>,
       )
-        .shallowRender()
-        .none(`.${className}`);
+        .assertNone(`.${className}`);
     });
 
     it(`renders with ${className} class`, () => {
-      $(
+      shallow(
         <FormGroup {...props}>
           <span />
         </FormGroup>,
       )
-        .shallowRender()
-        .single(`.${className}`);
+        .assertSingle(`.${className}`);
     });
   });
 
   describe('feedback', () => {
     it('should not have feedback without feedback component', () => {
-      $(
+      shallow(
         <FormGroup validationState="success" />,
       )
-        .shallowRender()
-        .none('.has-feedback');
+        .assertNone('.has-feedback');
     });
 
     it('should have feedback with feedback component', () => {
-      $(
+      shallow(
         <FormGroup validationState="success">
           <FormControl.Feedback />
         </FormGroup>,
       )
-        .shallowRender()
-        .single('.has-feedback');
+        .assertSingle('.has-feedback');
     });
 
     it('should have feedback with nested feedback component', () => {
-      $(
+      shallow(
         <FormGroup validationState="success">
           <div>
             <FormControl.Feedback />
           </div>
         </FormGroup>,
       )
-        .shallowRender()
-        .single('.has-feedback');
+        .assertSingle('.has-feedback');
     });
 
     it('should have feedback with custom feedback component', () => {
-      $(
+      shallow(
         <FormGroup validationState="success">
           <div bsRole="feedback" />
         </FormGroup>,
       )
-        .shallowRender()
-        .single('.has-feedback');
+        .assertSingle('.has-feedback');
     });
   });
 });
