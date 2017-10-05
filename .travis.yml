@@ -8,9 +8,7 @@ env:
   - BROWSER=ChromeCi
   - BROWSER=Firefox
 
-cache:
-  directories:
-    - node_modules
+cache: yarn
 
 before_install:
   - export CHROME_BIN=chromium-browser
