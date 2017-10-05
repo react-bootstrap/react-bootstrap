@@ -1,7 +1,7 @@
 import keycode from 'keycode';
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
-import tsp from 'teaspoon';
+import { mount } from 'enzyme';
 
 import Nav from '../src/Nav';
 import NavItem from '../src/NavItem';
@@ -9,6 +9,16 @@ import NavItem from '../src/NavItem';
 import { shouldWarn } from './helpers';
 
 describe('<Nav>', () => {
+  let mountPoint;
+  beforeEach(() => {
+    mountPoint = document.createElement('div');
+    document.body.appendChild(mountPoint);
+  });
+
+  afterEach(() => {
+    document.body.removeChild(mountPoint);
+  });
+
   it('Should set the correct item active', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Nav bsStyle="pills" activeKey={1}>
@@ -119,7 +129,7 @@ describe('<Nav>', () => {
     let selectSpy;
 
     beforeEach(() => {
-      instance = tsp(
+      instance = mount(
         <Nav activeKey={1} onSelect={selectSpy} role="tablist">
           <NavItem eventKey={1}>NavItem 1 content</NavItem>
           <NavItem eventKey={2} disabled>NavItem 2 content</NavItem>
@@ -127,15 +137,16 @@ describe('<Nav>', () => {
           <NavItem eventKey={4} disabled>NavItem 4 content</NavItem>
           <NavItem eventKey={5}>NavItem 5 content</NavItem>
         </Nav>,
-      )
-        .render(true);
-      selectSpy = sinon.spy(activeKey => instance.props({ activeKey }));
+        { attachTo: mountPoint },
+      );
+
+      selectSpy = sinon.spy(activeKey => instance.setProps({ activeKey }));
     });
 
     afterEach(() => instance.unmount());
 
     it('only the active tab should be focusable', () => {
-      const links = instance.find('a').dom();
+      const links = instance.find('a').map(n => n.getDOMNode());
 
       expect(links[0].getAttribute('tabindex')).to.not.equal('-1');
       expect(links[1].getAttribute('tabindex')).to.equal('-1');
@@ -145,46 +156,47 @@ describe('<Nav>', () => {
     });
 
     it('should focus the next tab on arrow key', () => {
-      const anchors = instance.find('a').dom();
+      const anchors = instance.find('a').map(n => n.getDOMNode());
       anchors[0].focus();
 
       ReactTestUtils.Simulate.keyDown(anchors[0], { keyCode: keycode('right') });
 
-      expect(instance[0].props.activeKey).to.equal(3);
+      expect(instance.prop('activeKey')).to.equal(3);
+
       expect(document.activeElement).to.equal(anchors[2]);
     });
 
     it('should focus the previous tab on arrow key', () => {
-      instance.props({ activeKey: 5 });
+      instance.setProps({ activeKey: 5 });
 
-      const anchors = instance.find('a').dom();
+      const anchors = instance.find('a').map(n => n.getDOMNode());
       anchors[4].focus();
 
       ReactTestUtils.Simulate.keyDown(anchors[4], { keyCode: keycode('left') });
 
-      expect(instance[0].props.activeKey).to.equal(3);
+      expect(instance.props().activeKey).to.equal(3);
       expect(document.activeElement).to.equal(anchors[2]);
     });
 
     it('should wrap to the next tab on arrow key', () => {
-      instance.props({ activeKey: 5 });
+      instance.setProps({ activeKey: 5 });
 
-      const anchors = instance.find('a').dom();
+      const anchors = instance.find('a').map(n => n.getDOMNode());
       anchors[4].focus();
 
       ReactTestUtils.Simulate.keyDown(anchors[4], { keyCode: keycode('down') });
 
-      expect(instance[0].props.activeKey).to.equal(1);
+      expect(instance.props().activeKey).to.equal(1);
       expect(document.activeElement).to.equal(anchors[0]);
     });
 
     it('should wrap to the previous tab on arrow key', () => {
-      const anchors = instance.find('a').dom();
+      const anchors = instance.find('a').map(n => n.getDOMNode());
       anchors[0].focus();
 
       ReactTestUtils.Simulate.keyDown(anchors[0], { keyCode: keycode('up') });
 
-      expect(instance[0].props.activeKey).to.equal(5);
+      expect(instance.props().activeKey).to.equal(5);
       expect(document.activeElement).to.equal(anchors[4]);
     });
   });
@@ -192,21 +204,22 @@ describe('<Nav>', () => {
   describe('event keys', () => {
     it('should accept any number as an event key', () => {
       let instance;
-      let selectSpy = sinon.spy(activeKey => instance.props({ activeKey }));
-      instance = tsp(
+      let selectSpy = sinon.spy(activeKey => instance.setProps({ activeKey }));
+      instance = mount(
         <Nav activeKey={-100} onSelect={selectSpy} role="tablist">
           <NavItem eventKey={-100}>NavItem 1 content</NavItem>
           <NavItem eventKey={0}>NavItem 2 content</NavItem>
           <NavItem eventKey={1}>NavItem 3 content</NavItem>
         </Nav>,
-      ).render(true);
+        { attachTo: mountPoint },
+      );
 
-      const anchors = instance.find('a').dom();
+      const anchors = instance.find('a').map(n => n.getDOMNode());
       anchors[0].focus();
 
       ReactTestUtils.Simulate.keyDown(anchors[0], { keyCode: keycode('right') });
 
-      expect(instance[0].props.activeKey).to.equal(0);
+      expect(instance.props().activeKey).to.equal(0);
       expect(document.activeElement).to.equal(anchors[1]);
 
       instance.unmount();
@@ -214,21 +227,22 @@ describe('<Nav>', () => {
 
     it('should accept any string as an event key', () => {
       let instance;
-      let selectSpy = sinon.spy(activeKey => instance.props({ activeKey }));
-      instance = tsp(
+      let selectSpy = sinon.spy(activeKey => instance.setProps({ activeKey }));
+      instance = mount(
         <Nav activeKey={''} onSelect={selectSpy} role="tablist">
           <NavItem eventKey={'a'}>NavItem 1 content</NavItem>
           <NavItem eventKey={'b'}>NavItem 2 content</NavItem>
           <NavItem eventKey={''}>NavItem 3 content</NavItem>
         </Nav>,
-      ).render(true);
+        { attachTo: mountPoint },
+      );
 
-      const anchors = instance.find('a').dom();
+      const anchors = instance.find('a').map(n => n.getDOMNode());
       anchors[2].focus();
 
       ReactTestUtils.Simulate.keyDown(anchors[2], { keyCode: keycode('right') });
 
-      expect(instance[0].props.activeKey).to.equal('a');
+      expect(instance.props().activeKey).to.equal('a');
       expect(document.activeElement).to.equal(anchors[0]);
 
       instance.unmount();

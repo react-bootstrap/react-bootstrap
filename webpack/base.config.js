@@ -22,9 +22,12 @@ const baseConfig = {
   module: {
     loaders: [
       { test: /\.js/, loader: jsLoader, exclude: /node_modules/ },
+      { test: /\.json$/, loader: 'json-loader' },
     ],
   },
-
+  resolve: {
+    extensions: ['', '.js', '.json'],
+  },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {

@@ -2,7 +2,7 @@ import keycode from 'keycode';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
-import tsp from 'teaspoon';
+import { shallow } from 'enzyme';
 
 import DropdownMenu from '../src/DropdownMenu';
 import MenuItem from '../src/MenuItem';
@@ -71,10 +71,9 @@ describe('<Dropdown.Menu>', () => {
   });
 
   it('does not pass onSelect to DOM node', () => {
-    tsp(<DropdownMenu onSelect={() => {}} />)
-      .shallowRender()
-      .tap(m => m.props().should.have.property('onSelect'))
-      .children()
+    shallow(<DropdownMenu onSelect={() => {}} />)
+      .find('ul')
+      .props()
       .should.not.have.property('onSelect');
   });
 

@@ -2,7 +2,7 @@ import keycode from 'keycode';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
-import tsp from 'teaspoon';
+import { mount, shallow } from 'enzyme';
 
 import Dropdown from '../src/Dropdown';
 import DropdownMenu from '../src/DropdownMenu';
@@ -248,11 +248,9 @@ describe('<Dropdown>', () => {
   });
 
   it('does not pass onSelect to DOM node', () => {
-    tsp(simpleDropdown)
-      .props('onSelect', () => {})
-      .shallowRender()
-      .tap(m => m.props().should.have.property('onSelect'))
-      .children()
+    shallow(simpleDropdown)
+      .setProps('onSelect', () => {})
+      .find('div')
       .should.not.have.property('onSelect');
   });
 
@@ -409,7 +407,7 @@ describe('<Dropdown>', () => {
       }
     }
 
-    let inst = tsp(<RefDropdown />).render().unwrap();
+    let inst = mount(<RefDropdown />).instance();
 
     inst.menu.should.exist;
     inst.dropdown.menu.should.exist;
@@ -432,7 +430,7 @@ describe('<Dropdown>', () => {
 
     shouldWarn('String refs are not supported');
 
-    tsp(<RefDropdown />).render().unwrap();
+    mount(<RefDropdown />);
   });
 
   describe('focusable state', () => {
