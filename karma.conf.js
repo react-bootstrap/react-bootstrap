@@ -1,8 +1,5 @@
-require('babel-register');
+const { plugins, rules } = require('webpack-atoms');
 
-const webpack = require('webpack');
-
-const webpackConfigBase = require('./webpack/base.config').default;
 
 module.exports = (config) => {
   const { env } = process;
@@ -16,16 +13,19 @@ module.exports = (config) => {
       'test/index.js': ['webpack', 'sourcemap'],
     },
 
-    // This explicitly doesn't use webpack-merge because we want to override
-    // the DefinePlugin in the base config.
-    webpack: Object.assign({}, webpackConfigBase, {
+    webpack: {
+      devtool: 'module-source-map',
+      module: {
+        rules: [
+          rules.js({ cacheDirectory: true }),
+        ],
+      },
       plugins: [
-        new webpack.DefinePlugin({
+        plugins.define({
           'process.env.NODE_ENV': JSON.stringify('test'),
         }),
       ],
-      devtool: 'cheap-module-inline-source-map',
-    }),
+    },
 
     webpackMiddleware: {
       noInfo: true,

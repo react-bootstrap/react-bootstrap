@@ -1,8 +1,7 @@
 {
   "extends": ["eslint-config-airbnb"],
   "env": {
-    "browser": true,
-    "node": true
+    "browser": true
   },
   "parser": "babel-eslint",
   "plugins": [
@@ -56,6 +55,17 @@
     ]
   },
   "overrides": [
+    {
+      "files": ["tools/*"],
+      "env": {
+        "node": true,
+        "browser": false
+      },
+      "rules": {
+        "global-require": "off",
+        "no-console": "off"
+      }
+    },
     {
       "files": ["test/*"],
       "rules": {
