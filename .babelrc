@@ -3,7 +3,8 @@
     ["env", {
       "targets": {
         "ie": 9,
-        "uglify": true
+        "uglify": true,
+        "loose": true
       }
     }],
     "react"
