@@ -21,7 +21,9 @@ module.exports = {
         handlers: [
           function applyBootstrapPropsHandler(docs, _, { absolutePath }) {
             // eslint-disable-next-line
-            let Component = require(absolutePath.replace('react-bootstrap/src', 'react-bootstrap/lib'));
+            let Component = require(
+              path.relative(__dirname, absolutePath).replace('src', 'lib'),
+            );
 
             if (Component) {
               addBootstrapPropTypes(docs, Component);
