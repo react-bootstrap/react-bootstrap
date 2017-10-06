@@ -17,9 +17,11 @@ Promise.all([
   has('lib') && lib(),
   has('es') && es(),
   has('bower') && bower(),
-  has('dist') && dist(),
+  (has('dist') || has('bower')) && dist(),
 ])
-  .then(() => fse.copy(distRoot, bowerRoot))
+  .then(() => (has('dist') || has('bower')) &&
+    fse.copy(distRoot, bowerRoot),
+  )
   .catch((err) => {
     if (err.stack) {
       console.error(err.stack.red);
