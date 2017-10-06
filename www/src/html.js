@@ -1,9 +1,10 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Helmet from 'react-helmet';
 
 module.exports = class HTML extends React.Component {
   static propTypes = {
-    body: React.PropTypes.string,
+    body: PropTypes.string,
   };
 
   render() {

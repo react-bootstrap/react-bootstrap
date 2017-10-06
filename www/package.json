@@ -29,6 +29,10 @@
     "react-live": "^1.7.1"
   },
   "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
     "webpack": "^1.15.0"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
@@ -41,7 +45,7 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "debug": "rm -rf ./.cache && node --inspect=11387 node_modules/.bin/gatsby develop",
+    "debug": "rm -rf ./.cache && node --inspect-brk node_modules/.bin/gatsby develop",
     "develop": "gatsby develop",
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-links && gh-pages -d public"

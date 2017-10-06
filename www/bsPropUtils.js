@@ -1,25 +1,4 @@
-const { runInNewContext } = require('vm');
-
-const srcCache = new Map();
-exports.requireInNewContext = function requireInNewContext(filename) {
-  const root = {
-    process,
-    component: srcCache.get(filename),
-    require: Object.assign(require, {
-      extensions: Object.assign({}, require.extensions),
-    }),
-  };
-  runInNewContext(`
-    require('babel-register')();
-    component = component || require('${filename}');
-  `, root);
-
-  srcCache.set(filename, root.component);
-  return root.component;
-};
-
 let quote = str => str && `'${str}'`;
-
 
 exports.addBootstrapPropTypes = function addBootstrapPropTypes(doc, Component) {
   let propTypes = Component.propTypes || {};

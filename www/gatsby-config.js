@@ -1,6 +1,6 @@
 const path = require('path');
 const defaultDescriptions = require('./src/defaultPropDescriptions');
-const { requireInNewContext, addBootstrapPropTypes } = require('./bsPropUtils');
+const { addBootstrapPropTypes } = require('./bsPropUtils');
 
 module.exports = {
   siteMetadata: {
@@ -20,7 +20,8 @@ module.exports = {
       options: {
         handlers: [
           function applyBootstrapPropsHandler(docs, _, { absolutePath }) {
-            let Component = requireInNewContext(absolutePath);
+            // eslint-disable-next-line
+            let Component = require(absolutePath.replace('react-bootstrap/src', 'react-bootstrap/lib'));
 
             if (Component) {
               addBootstrapPropTypes(docs, Component);
