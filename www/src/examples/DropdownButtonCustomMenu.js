@@ -60,7 +60,7 @@ class CustomMenu extends React.Component {
   }
 }
 
-ReactDOM.render((
+render(
   <Dropdown id="dropdown-custom-menu">
     <CustomToggle bsRole="toggle">
       Custom toggle
@@ -73,4 +73,4 @@ ReactDOM.render((
       <MenuItem eventKey="1">Red-Orange</MenuItem>
     </CustomMenu>
   </Dropdown>
-), mountNode);
+);

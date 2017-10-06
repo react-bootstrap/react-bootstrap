@@ -1,5 +1,9 @@
 const { plugins, rules } = require('webpack-atoms');
+const runBabel = require('./tools/run-babel');
 
+let babelOptions = runBabel.getConfig({ modules: false, test: true });
+
+babelOptions.cacheDirectory = true;
 
 module.exports = (config) => {
   const { env } = process;
@@ -17,7 +21,7 @@ module.exports = (config) => {
       devtool: 'module-source-map',
       module: {
         rules: [
-          rules.js({ cacheDirectory: true }),
+          rules.js(babelOptions),
         ],
       },
       plugins: [

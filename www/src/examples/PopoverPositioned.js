@@ -22,7 +22,7 @@ const popoverRight = (
   </Popover>
 );
 
-ReactDOM.render((
+render(
   <ButtonToolbar>
     <OverlayTrigger trigger="click" placement="left" overlay={popoverLeft}>
       <Button>Holy guacamole!</Button>
@@ -37,4 +37,4 @@ ReactDOM.render((
       <Button>Holy guacamole!</Button>
     </OverlayTrigger>
   </ButtonToolbar>
-), mountNode);
+);

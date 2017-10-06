@@ -22,7 +22,7 @@ const popoverClickRootClose = (
   </Popover>
 );
 
-ReactDOM.render((
+render(
   <ButtonToolbar>
     <OverlayTrigger trigger="click" placement="bottom" overlay={popoverClick}>
       <Button>Click</Button>
@@ -37,4 +37,4 @@ ReactDOM.render((
       <Button>Click w/rootClose</Button>
     </OverlayTrigger>
   </ButtonToolbar>
-), mountNode);
+);

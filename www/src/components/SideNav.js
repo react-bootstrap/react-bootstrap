@@ -77,7 +77,7 @@ function NavSection({ heading, location, items, path }) {
   );
 }
 
-function SideNav() {
+function SideNav({ location }) {
   return (
     <div
       className="bs-docs-sidebar"

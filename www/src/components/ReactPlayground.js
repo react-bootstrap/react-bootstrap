@@ -17,6 +17,7 @@ import '../css/prism.css';
 
 const scope = {
   ...ReactBootstrap,
+  ReactDOM,
   classNames,
   PropTypes,
   bootstrapUtils: ReactBootstrap.utils.bootstrapUtils

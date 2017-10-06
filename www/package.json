@@ -1,8 +1,7 @@
 {
-  "name": "gatsby-starter-blog",
-  "description": "Starter Gatsby Blog",
+  "description": "React Bootstrap Documentation",
   "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Jason Quense",
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby-starter-blog/issues"
   },
@@ -10,13 +9,11 @@
     "bootstrap": "^3.3.6",
     "classnames": "^2.2.5",
     "codemirror": "^5.16.0",
-    "gatsby": "^1.9.50",
+    "gatsby": "^1.9.52",
     "gatsby-link": "^1.6.18",
     "gatsby-plugin-catch-links": "^1.0.8",
-    "gatsby-plugin-manifest": "^1.0.8",
+    "gatsby-plugin-less": "^1.0.5",
     "gatsby-plugin-offline": "^1.0.9",
-    "gatsby-plugin-preact": "^1.0.12",
-    "gatsby-plugin-sharp": "^1.6.8",
     "gatsby-remark-prismjs": "^1.2.8",
     "gatsby-source-filesystem": "^1.5.1",
     "gatsby-transformer-react-docgen": "^1.0.8",
@@ -32,14 +29,13 @@
     "react-live": "^1.7.1"
   },
   "devDependencies": {
-    "gh-pages": "^1.0.0"
+    "webpack": "^1.15.0"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
   "keywords": [
     "gatsby"
   ],
   "license": "MIT",
-  "main": "n/a",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"

@@ -9,6 +9,7 @@
   "homepage": "https://react-bootstrap.github.io/",
   "scripts": {
     "build": "node tools/build.js",
+    "build-docs": "npm run build lib && cd www && npm i && npm run build",
     "lint": "eslint www/src src test tools webpack *.js",
     "release": "release",
     "tdd": "karma start",
@@ -82,7 +83,7 @@
     "sinon": "^2.3.2",
     "sinon-chai": "^2.8.0",
     "webpack": "^3.6.0",
-    "webpack-atoms": "^3.0.2"
+    "webpack-atoms": "^4.1.2"
   },
   "dependencies": {
     "babel-runtime": "^6.11.6",

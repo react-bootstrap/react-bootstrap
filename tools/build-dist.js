@@ -3,8 +3,12 @@ const webpack = require('webpack');
 const { plugins, rules } = require('webpack-atoms');
 
 const { distRoot } = require('./constants');
+const runBabel = require('./run-babel');
 
 function config(optimize) {
+  let babelOptions = runBabel.getConfig({ modules: false });
+  babelOptions.cacheDirectory = true;
+
   return {
     entry: {
       'react-bootstrap': './src/index.js',
@@ -18,11 +22,12 @@ function config(optimize) {
     },
     module: {
       rules: [
-        rules.js({ cacheDirectory: true }),
+        rules.js(babelOptions),
       ],
     },
     plugins: [
       optimize && plugins.uglify(),
+      plugins.moduleConcatenation(),
       plugins.define({
         'process.env': {
           NODE_ENV: JSON.stringify(optimize ? 'production' : 'development'),

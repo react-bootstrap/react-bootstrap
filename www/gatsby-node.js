@@ -1,9 +1,8 @@
+const webpack = require('webpack');
 
 exports.modifyWebpackConfig = function modifyWebpackConfig({ config }) {
-  config.loader('less-loader', {
-    test: /\.less$/,
-    loaders: ['style-loader', 'css-loader', 'less-loader'],
-  });
+  // See https://github.com/FormidableLabs/react-live/issues/5
+  config.plugin('ignore', () => new webpack.IgnorePlugin(/^(xor|props)$/));
 
   config.loader('raw-loader', {
     test: /src\/examples\//,
@@ -15,7 +14,11 @@ exports.modifyWebpackConfig = function modifyWebpackConfig({ config }) {
 exports.onCreatePage = ({ page }) => {
   if (page.path.startsWith('/getting-started')) {
     page.layout = 'getting-started';
+  } else if (page.path.startsWith('/layout')) {
+    page.layout = 'layout';
   } else if (page.path.startsWith('/components')) {
     page.layout = 'components';
+  } else if (page.path.startsWith('/utilities')) {
+    page.layout = 'utilities';
   }
 };

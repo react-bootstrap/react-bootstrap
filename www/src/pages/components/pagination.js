@@ -36,7 +36,7 @@ export default function PaginationSection({ data }) {
       <PropTable metadata={data.Pager} />
 
       <h4><Anchor id="pager-props-pager-item">Pager.Item</Anchor></h4>
-      <PropTable metadata={data.Pager.Item} />
+      <PropTable metadata={data.PagerItem} />
 
       <h2 className="page-header">
         <Anchor id="pagination">Pagination</Anchor> <small>Pagination</small>
@@ -61,6 +61,9 @@ export const query = graphql`
       ...PropTable_metadata
     }
     Pager: componentMetadata(displayName: { eq: "Pager" }) {
+      ...PropTable_metadata
+    }
+    PagerItem: componentMetadata(displayName: { eq: "PagerItem" }) {
       ...PropTable_metadata
     }
   }

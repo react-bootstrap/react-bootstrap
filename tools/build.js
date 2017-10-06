@@ -7,12 +7,17 @@ const es = require('./build-es');
 const dist = require('./build-dist');
 const { distRoot, bowerRoot } = require('./constants');
 
+const targets = process.argv.slice(2);
+const has = t => !targets.length || targets.includes(t);
+
+console.log(
+  `Building targets: ${targets.length ? targets.join(', ') : 'all'}\n`.green);
 
 Promise.all([
-  lib(),
-  es(),
-  bower(),
-  dist(),
+  has('lib') && lib(),
+  has('es') && es(),
+  has('bower') && bower(),
+  has('dist') && dist(),
 ])
   .then(() => fse.copy(distRoot, bowerRoot))
   .catch((err) => {

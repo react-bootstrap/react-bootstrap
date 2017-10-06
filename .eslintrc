@@ -92,6 +92,12 @@
         "react/prop-types": "off",
         "import/no-webpack-loader-syntax": "off"
       }
+    },
+    {
+      "files": ["www/src/examples/*"],
+      "rules": {
+        "comma-dangle": "off"
+      }
     }
   ]
 }

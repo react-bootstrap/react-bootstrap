@@ -2,6 +2,29 @@ const { transform } = require('babel-core');
 const fse = require('fs-extra');
 const path = require('path');
 
+let getConfig = ({ modules = true, test = false } = {}) => ({
+  babelrc: false,
+  presets: [
+    ['env', {
+      loose: true,
+      modules: modules ? 'commonjs' : false,
+      targets: {
+        ie: 9,
+        uglify: true,
+      },
+    }],
+    'react',
+  ],
+  plugins: [
+    'transform-class-properties',
+    'transform-object-rest-spread',
+    'transform-export-extensions',
+    'dev-expression',
+    'transform-runtime',
+    modules && 'add-module-exports',
+    test && 'istanbul',
+  ].filter(Boolean),
+});
 
 async function buildFile(filename, destination, babelOptions = {}) {
   if (!path.extname(filename) === '.js') return;
@@ -35,6 +58,9 @@ async function _build(folderPath, destination, babelOptions = {}, firstFolder = 
   }
 }
 
-module.exports = function buildBabel(folderPath, destination, babelOptions = {}) {
-  return _build(folderPath, destination, babelOptions);
+module.exports = function buildBabel(folderPath, destination, babelConfig = {}) {
+  return _build(folderPath, destination, getConfig(babelConfig));
 };
+
+module.exports.getConfig = getConfig;
+
