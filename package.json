@@ -9,7 +9,7 @@
   "homepage": "https://react-bootstrap.github.io/",
   "scripts": {
     "build": "node tools/build.js",
-    "build-docs": "npm -C www i && npm -C www run build",
+    "build-docs": "npm run build lib && npm -C www i && npm -C www run build",
     "lint": "eslint www/src src test tools webpack *.js",
     "release": "release",
     "tdd": "karma start",
