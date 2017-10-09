@@ -4,7 +4,6 @@ import Col from 'react-bootstrap/lib/Col';
 import Panel from 'react-bootstrap/lib/Panel';
 
 import Anchor from '../../components/Anchor';
-import CodeExample from '../../components/CodeExample';
 
 export default class Page extends React.Component {
   shouldComponentUpdate() {
