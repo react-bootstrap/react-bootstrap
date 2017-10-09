@@ -11,7 +11,7 @@ module.exports = class HTML extends React.Component {
     const head = Helmet.rewind();
 
     let css;
-    if (!__DEV__) {
+    if (process.env.NODE_ENV !== 'production') {
       let html = require('!raw-loader!../public/styles.css'); // eslint-disable-line
       css = <style dangerouslySetInnerHTML={{ __html: html }} />;
     }
