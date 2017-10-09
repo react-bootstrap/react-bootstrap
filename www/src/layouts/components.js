@@ -12,10 +12,7 @@ const propTypes = {
 function ComponentsPage({ children, ...props }) {
   return (
     <Default {...props}>
-      <PageHeader
-        title="Components"
-        subTitle={''}
-      />
+      <PageHeader title="Components" />
       <Main location={props.location}>
         {children()}
       </Main>

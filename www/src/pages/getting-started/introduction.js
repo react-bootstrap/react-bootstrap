@@ -19,22 +19,18 @@ export default class Page extends React.Component {
           <Row>
             <Col sm={6}>
               <Panel header="npm (recommended)" className="bs-docs-code-panel">
-                <CodeExample
-                  codeText={
-                    `$ npm install --save react react-dom
-$ npm install --save react-bootstrap`
-                  }
-                />
+                <pre><code>{`
+$ npm install --save react react-dom
+$ npm install --save react-bootstrap
+                `}</code></pre>
               </Panel>
             </Col>
             <Col sm={6}>
               <Panel header="bower" className="bs-docs-code-panel">
-                <CodeExample
-                  codeText={
-                    `$ bower install react
-$ bower install react-bootstrap`
-                  }
-                />
+                <pre><code>{`
+$ bower install react
+$ bower install react-bootstrap
+                `}</code></pre>
               </Panel>
             </Col>
           </Row>
@@ -46,14 +42,13 @@ $ bower install react-bootstrap`
             components. How and which bootstrap styles you include is up to you, but the simplest way
             is to include the latest styles from the CDN.
           </p>
-          <CodeExample
-            mode="htmlmixed"
-            codeText={
-              `<!-- Latest compiled and minified CSS -->
+          <pre><code>{`
+<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">`}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
+          `}</code></pre>
           />
           <p>
             For more advanced use cases you can also use a bundler like Webpack or Browserify to include
@@ -90,13 +85,10 @@ $ bower install react-bootstrap`
             </p>
           </div>
           <h3><Anchor id="commonjs">CommonJS</Anchor></h3>
-          <CodeExample
-            mode="javascript"
-            codeText={
-              `var Alert = require('react-bootstrap/lib/Alert');
+          <pre><code>{`
+var Alert = require('react-bootstrap/lib/Alert');
 // or
-var Alert = require('react-bootstrap').Alert;`
-            }
+var Alert = require('react-bootstrap').Alert;`}</code></pre>
           />
 
           <h3><Anchor id="es6">ES6</Anchor></h3>
@@ -104,14 +96,10 @@ var Alert = require('react-bootstrap').Alert;`
             Es6 modules aren't supported natively yet, but you can use the syntax now with the help
             of a transpiler like Babel.
           </p>
-          <CodeExample
-            mode="javascript"
-            codeText={
-              `import Button from 'react-bootstrap/lib/Button';
+          <pre><code>{`
+import Button from 'react-bootstrap/lib/Button';
 // or
-import { Button } from 'react-bootstrap';`
-            }
-          />
+import { Button } from 'react-bootstrap';`}</code></pre>
 
           <h3><Anchor id="amd">AMD</Anchor></h3>
           <div className="bs-callout bs-callout-danger">
@@ -120,16 +108,11 @@ import { Button } from 'react-bootstrap';`
               components, consider using npm and CommonJS modules instead.
             </p>
           </div>
-          <CodeExample
-            mode="javascript"
-            codeText={
-              `define(['react-bootstrap'], function(ReactBootstrap) {
+          <pre><code>{`
+define(['react-bootstrap'], function(ReactBootstrap) {
 var Alert = ReactBootstrap.Alert;
 ...
-});`
-            }
-          />
-
+});`}</code></pre>
           <h3><Anchor id="browser-globals">Browser globals</Anchor></h3>
           <p>
             We provide <code>react-bootstrap.js</code> and <code>react-bootstrap.min.js</code> bundles
@@ -137,17 +120,14 @@ var Alert = ReactBootstrap.Alert;
             These bundles are available on <a href="https://cdnjs.com/libraries/react-bootstrap">CDNJS</a>,
             and in both the Bower and NPM packages.
           </p>
-          <CodeExample
-            mode="htmlmixed"
-            codeText={
-              `<script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react.min.js"></script>
+
+          <pre><code>{`
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react-dom.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/<version>/react-bootstrap.min.js"></script>
 <script>
 var Alert = ReactBootstrap.Alert;
-</script>`
-            }
-          />
+</script>`}</code></pre>
 
         </div>
         <div className="bs-docs-section">
@@ -159,24 +139,14 @@ var Alert = ReactBootstrap.Alert;
           <p>React requires <a href="http://facebook.github.io/react/docs/working-with-the-browser.html#browser-support-and-polyfills">polyfills for non-ES5 capable browsers.</a></p>
 
           <div className="highlight">
-            <CodeExample
-              mode="htmlmixed"
-              codeText={
-
-                `<!--[if lt IE 9]>
-<script>
-(function(){
-var ef = function(){};
-window.console = window.console || {log:ef,warn:ef,error:ef,dir:ef};
-}());
-</script>
+            <pre><code>{`
+<!--[if lt IE 9]>
 <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv-printshiv.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>
-<![endif]-->`
-              }
-            />
+<![endif]-->`}</code></pre>
+
           </div>
         </div>
       </div>

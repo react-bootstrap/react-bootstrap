@@ -9,12 +9,12 @@
   "homepage": "https://react-bootstrap.github.io/",
   "scripts": {
     "build": "node tools/build.js",
-    "build-docs": "npm run build lib && cd www && npm i && npm run build",
+    "build-docs": "npm -C www i && npm -C www run build",
     "lint": "eslint www/src src test tools webpack *.js",
     "release": "release",
     "tdd": "karma start",
     "test": "npm run lint && npm run test-browser && npm run test-node",
-    "test-browser": "karma start --single-run",
+    "test-browser": "cross-env NODE_ENV=test karma start --single-run",
     "test-node": "mocha --compilers js:babel-register test/server/*Spec.js"
   },
   "main": "lib/index.js",
@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
-    "babel-eslint": "^8.0.1",
+    "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.2",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-dev-expression": "^0.2.1",

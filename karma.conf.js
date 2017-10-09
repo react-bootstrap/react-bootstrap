@@ -3,8 +3,6 @@ const runBabel = require('./tools/run-babel');
 
 let babelOptions = runBabel.getConfig({ modules: false, test: true });
 
-babelOptions.cacheDirectory = true;
-
 module.exports = (config) => {
   const { env } = process;
 

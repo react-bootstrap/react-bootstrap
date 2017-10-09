@@ -7,7 +7,6 @@ const runBabel = require('./run-babel');
 
 function config(optimize) {
   let babelOptions = runBabel.getConfig({ modules: false });
-  babelOptions.cacheDirectory = true;
 
   return {
     entry: {

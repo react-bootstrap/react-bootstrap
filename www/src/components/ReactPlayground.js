@@ -1,5 +1,4 @@
 
-/* eslint-disable */
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -10,8 +9,8 @@ import {
   LiveProvider,
   LiveEditor,
   LiveError,
-  LivePreview
-} from 'react-live'
+  LivePreview,
+} from 'react-live';
 
 import '../css/prism.css';
 
@@ -20,7 +19,7 @@ const scope = {
   ReactDOM,
   classNames,
   PropTypes,
-  bootstrapUtils: ReactBootstrap.utils.bootstrapUtils
+  bootstrapUtils: ReactBootstrap.utils.bootstrapUtils,
 };
 
 export default class Playground extends React.Component {
@@ -43,7 +42,7 @@ export default class Playground extends React.Component {
           <LiveError />
         </div>
         <div className="bs-code-editor">
-          <LiveEditor  />
+          <LiveEditor />
         </div>
       </LiveProvider>
     );

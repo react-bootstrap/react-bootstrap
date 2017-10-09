@@ -9,12 +9,12 @@ const propTypes = {
   location: PropTypes.object.isRequired,
 };
 
-function LayoutLayout({ children, ...props }) {
+function UtilitiesLayout({ children, ...props }) {
   return (
     <Default {...props}>
       <PageHeader
         title="Layout"
-        subTitle={'Options for structuring your pages with Bootstrap, including global styles, required scaffolding, grid system, and more.'}
+        subTitle="Options for structuring your pages with Bootstrap, including global styles, required scaffolding, grid system, and more."
       />
       <Main location={props.location}>
         {children()}
@@ -23,6 +23,6 @@ function LayoutLayout({ children, ...props }) {
   );
 }
 
-LayoutLayout.propTypes = propTypes;
+UtilitiesLayout.propTypes = propTypes;
 
-export default LayoutLayout;
+export default UtilitiesLayout;

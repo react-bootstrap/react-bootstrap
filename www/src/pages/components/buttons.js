@@ -3,8 +3,6 @@ import React from 'react';
 import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-// import Samples from '../Samples';
-
 import ButtonTypes from '../../examples/ButtonTypes';
 import ButtonSizes from '../../examples/ButtonSizes';
 import ButtonBlock from '../../examples/ButtonBlock';

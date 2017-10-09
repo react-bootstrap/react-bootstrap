@@ -3,6 +3,9 @@
   "env": {
     "browser": true
   },
+  "globals": {
+    "__DEV__": false
+  },
   "parser": "babel-eslint",
   "plugins": [
     "react"

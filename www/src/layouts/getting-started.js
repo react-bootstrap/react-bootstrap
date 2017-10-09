@@ -12,10 +12,7 @@ const propTypes = {
 function DocPage({ children, ...props }) {
   return (
     <Default {...props}>
-      <PageHeader
-        title="Getting started"
-        subTitle={''}
-      />
+      <PageHeader title="Getting started" />
       <Main location={props.location}>
         {children()}
       </Main>

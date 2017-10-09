@@ -10,7 +10,7 @@ const propTypes = {
   location: PropTypes.object.isRequired,
 };
 
-function LayoutLayout({ children, ...props }) {
+function Main({ children, ...props }) {
   return (
     <Grid>
       <Row>
@@ -25,6 +25,6 @@ function LayoutLayout({ children, ...props }) {
   );
 }
 
-LayoutLayout.propTypes = propTypes;
+Main.propTypes = propTypes;
 
-export default LayoutLayout;
+export default Main;

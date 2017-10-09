@@ -4,8 +4,8 @@ const { addBootstrapPropTypes } = require('./bsPropUtils');
 
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Starter Blog',
-    author: 'Kyle Mathews',
+    title: 'React-Bootstrap Documentation',
+    author: 'Jason Quense',
   },
   plugins: [
     {

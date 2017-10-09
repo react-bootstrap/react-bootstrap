@@ -4,7 +4,7 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import PageHeader from '../../examples/Jumbotron';
+import PageHeader from '../../examples/PageHeader';
 
 export default function PageHeaderSection({ data }) {
   return (

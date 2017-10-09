@@ -1,5 +1,5 @@
 {
-  "description": "React Bootstrap Documentation",
+  "description": "React-Bootstrap Documentation",
   "version": "1.0.0",
   "author": "Jason Quense",
   "bugs": {
@@ -35,17 +35,16 @@
     "babel-preset-react": "^6.24.1",
     "webpack": "^1.15.0"
   },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
+  "homepage": "https://react-bootstrap.github.io/",
   "keywords": [
     "gatsby"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/react-bootstrap/react-bootstrap.git"
   },
   "scripts": {
-    "debug": "rm -rf ./.cache && node --inspect-brk node_modules/.bin/gatsby develop",
     "develop": "gatsby develop",
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-links && gh-pages -d public"

@@ -3,6 +3,7 @@ const fse = require('fs-extra');
 const path = require('path');
 
 let getConfig = ({ modules = true, test = false } = {}) => ({
+  cacheDirectory: true,
   babelrc: false,
   presets: [
     ['env', {
