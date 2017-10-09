@@ -1,7 +1,10 @@
 const { plugins, rules } = require('webpack-atoms');
 const runBabel = require('./tools/run-babel');
 
-let babelOptions = runBabel.getConfig({ modules: false, test: true });
+const babelOptions = {
+  ...runBabel.getConfig({ modules: false, test: true }),
+  cacheDirectory: true,
+};
 
 module.exports = (config) => {
   const { env } = process;

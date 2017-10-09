@@ -21,7 +21,7 @@ function config(optimize) {
     },
     module: {
       rules: [
-        rules.js(babelOptions),
+        rules.js({ ...babelOptions, cacheDirectory: true }),
       ],
     },
     plugins: [
