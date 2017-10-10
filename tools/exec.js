@@ -3,15 +3,15 @@ import 'colors';
 
 let executionOptions = {
   dryRun: false,
-  verbose: false
+  verbose: false,
 };
 
 function logWithPrefix(prefix, message) {
   console.log(
     message.toString().trim()
-    .split('\n')
-    .map((line) => `${prefix.grey} ${line}`)
-    .join('\n')
+      .split('\n')
+      .map(line => `${prefix.grey} ${line}`)
+      .join('\n'),
   );
 }
 
@@ -24,14 +24,14 @@ export function exec(command, options = {}) {
   let title = options.title || command;
   let output = (data, type) => logWithPrefix(`[${title}] ${type}:`, data);
 
-  return proc.progress(({stdout, stderr}) => {
+  return proc.progress(({ stdout, stderr }) => {
     stdout.on('data', data => output(data, 'stdout'));
     stderr.on('data', data => output(data, 'stderr'));
   })
-  .then(result => {
-    logWithPrefix(`[${title}]`, 'Complete'.cyan);
-    return result;
-  });
+    .then((result) => {
+      logWithPrefix(`[${title}]`, 'Complete'.cyan);
+      return result;
+    });
 }
 
 export function safeExec(command, options = {}) {

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-for */
+
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -29,7 +31,7 @@ const propTypes = {
 const defaultProps = {
   inline: false,
   disabled: false,
-  title: ''
+  title: '',
 };
 
 class Radio extends React.Component {
@@ -69,7 +71,7 @@ class Radio extends React.Component {
         !validationState,
         '`validationState` is ignored on `<Radio inline>`. To display ' +
         'validation state on an inline radio, set `validationState` on a ' +
-        'parent `<FormGroup>` or other element instead.'
+        'parent `<FormGroup>` or other element instead.',
       );
 
       return (

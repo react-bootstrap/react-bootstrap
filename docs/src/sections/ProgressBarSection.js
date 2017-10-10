@@ -43,7 +43,7 @@ export default function ProgressBarSection() {
       <ReactPlayground codeText={Samples.ProgressBarStacked} />
 
       <h3><Anchor id="progress-props">ProgressBar</Anchor></h3>
-      <PropTable component="ProgressBar"/>
+      <PropTable component="ProgressBar" />
     </div>
   );
 }

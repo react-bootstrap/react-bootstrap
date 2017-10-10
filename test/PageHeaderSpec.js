@@ -9,7 +9,7 @@ describe('PageHeader', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PageHeader>
         <strong>Content</strong>
-      </PageHeader>
+      </PageHeader>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
@@ -18,7 +18,7 @@ describe('PageHeader', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PageHeader>
         Content
-      </PageHeader>
+      </PageHeader>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bpage-header\b/));
   });

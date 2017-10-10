@@ -68,7 +68,7 @@ const Example = React.createClass({
         </Modal>
       </div>
     );
-  }
+  },
 });
 
 ReactDOM.render(<Example />, mountNode);

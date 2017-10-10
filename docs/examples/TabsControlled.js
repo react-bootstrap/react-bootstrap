@@ -1,13 +1,13 @@
 const ControlledTabs = React.createClass({
   getInitialState() {
     return {
-      key: 1
+      key: 1,
     };
   },
 
   handleSelect(key) {
-    alert('selected ' + key);
-    this.setState({key});
+    alert(`selected ${key}`);
+    this.setState({ key });
   },
 
   render() {
@@ -18,7 +18,7 @@ const ControlledTabs = React.createClass({
         <Tab eventKey={3} title="Tab 3" disabled>Tab 3 content</Tab>
       </Tabs>
     );
-  }
+  },
 });
 
 ReactDOM.render(<ControlledTabs />, mountNode);

@@ -94,5 +94,5 @@ ListGroupItem.propTypes = propTypes;
 ListGroupItem.defaultProps = defaultProps;
 
 export default bsClass('list-group-item',
-  bsStyles(Object.values(State), ListGroupItem)
+  bsStyles(Object.values(State), ListGroupItem),
 );

@@ -1,5 +1,5 @@
 import React from 'react';
-import $ from 'teaspoon';
+import { mount, shallow } from 'enzyme';
 
 import FormControl from '../src/FormControl';
 import FormGroup from '../src/FormGroup';
@@ -8,58 +8,53 @@ import { shouldWarn } from './helpers';
 
 describe('<FormControl>', () => {
   it('should render correctly', () => {
-    $(
-      <FormControl type="text" id="foo" name="bar" className="my-control" />
+    shallow(
+      <FormControl type="text" id="foo" name="bar" className="my-control" />,
     )
-      .shallowRender()
-      .single('input#foo.form-control.my-control[name="bar"]');
+      .assertSingle('input#foo.form-control.my-control[name="bar"]');
   });
 
   it('should support textarea', () => {
-    $(
-      <FormControl componentClass="textarea" />
+    shallow(
+      <FormControl componentClass="textarea" />,
     )
-      .shallowRender()
-      .single('textarea.form-control');
+      .assertSingle('textarea.form-control');
   });
 
   it('should support select', () => {
-    $(
-      <FormControl componentClass="select" />
+    shallow(
+      <FormControl componentClass="select" />,
     )
-      .shallowRender()
-      .single('select.form-control');
+      .assertSingle('select.form-control');
   });
 
   it('should not render .form-control for type="file"', () => {
-    $(
-      <FormControl type="file" />
+    shallow(
+      <FormControl type="file" />,
     )
-      .shallowRender()
-      .single('input[type="file"]')
-        .none('.form-control');
+      .assertSingle('input[type="file"]')
+      .find('.form-control')
+      .should.have.length(0);
   });
 
   it('should use controlId for id', () => {
-    $(
+    mount(
       <FormGroup controlId="foo">
         <FormControl type="text" />
-      </FormGroup>
+      </FormGroup>,
     )
-      .render()
-      .single('input#foo.form-control');
+      .assertSingle('input#foo.form-control');
   });
 
   it('should prefer explicit id', () => {
     shouldWarn('ignored');
 
-    $(
+    mount(
       <FormGroup controlId="foo">
         <FormControl type="text" id="bar" />
-      </FormGroup>
+      </FormGroup>,
     )
-      .render()
-      .single('input#bar.form-control');
+      .assertSingle('input#bar.form-control');
   });
 
   it('should support inputRef', () => {
@@ -67,22 +62,21 @@ describe('<FormControl>', () => {
       render() {
         return (
           <FormGroup controlId="foo">
-            <FormControl type="text" inputRef={ref => { this.input = ref; }} />
+            <FormControl type="text" inputRef={(ref) => { this.input = ref; }} />
           </FormGroup>
         );
       }
     }
 
-    const instance = $(<Container />).render().unwrap();
+    const instance = mount(<Container />).instance();
     expect(instance.input.tagName).to.equal('INPUT');
   });
 
   it('should properly display size of FormControl', () => {
-    $(
-      <FormControl type="text" bsSize="lg" />
+    mount(
+      <FormControl type="text" bsSize="lg" />,
     )
-      .render()
-      .single('input.form-control.input-lg');
+      .assertSingle('input.form-control.input-lg');
   });
 
 });

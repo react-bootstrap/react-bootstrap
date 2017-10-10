@@ -13,11 +13,11 @@ export default function DropdownSection() {
       </h2>
 
       <h3><Anchor id="btn-dropdowns-single">Single button dropdowns</Anchor></h3>
-      <p>Create a dropdown button with the <code>{"<DropdownButton />"}</code> component.</p>
+      <p>Create a dropdown button with the <code>{'<DropdownButton />'}</code> component.</p>
       <ReactPlayground codeText={Samples.DropdownButtonBasic} />
 
       <h3><Anchor id="btn-dropdowns-split">Split button dropdowns</Anchor></h3>
-      <p>Similarly, create split button dropdowns with the <code>{"<SplitButton />"}</code> component.</p>
+      <p>Similarly, create split button dropdowns with the <code>{'<SplitButton />'}</code> component.</p>
       <ReactPlayground codeText={Samples.SplitButtonBasic} />
 
       <h3><Anchor id="btn-dropdowns-sizing">Sizing</Anchor></h3>
@@ -62,13 +62,13 @@ export default function DropdownSection() {
       <h3><Anchor id="btn-dropdowns-props">Props</Anchor></h3>
 
       <h4><Anchor id="btn-dropdowns-props-dropdown-button">DropdownButton</Anchor></h4>
-      <PropTable component="DropdownButton"/>
+      <PropTable component="DropdownButton" />
 
       <h4><Anchor id="btn-dropdowns-props-split">SplitButton</Anchor></h4>
-      <PropTable component="SplitButton"/>
+      <PropTable component="SplitButton" />
 
       <h4><Anchor id="btn-dropdowns-props-dropdown">Dropdown</Anchor></h4>
-      <PropTable component="Dropdown"/>
+      <PropTable component="Dropdown" />
     </div>
   );
 }

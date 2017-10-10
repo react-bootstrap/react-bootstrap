@@ -129,6 +129,16 @@ const defaultProps = {
 };
 
 class Collapse extends React.Component {
+  getDimension() {
+    return typeof this.props.dimension === 'function'
+      ? this.props.dimension()
+      : this.props.dimension;
+  }
+
+  // for testing
+  _getScrollDimensionValue(elem, dimension) {
+    return `${elem[`scroll${capitalize(dimension)}`]}px`;
+  }
 
   /* -- Expanding -- */
   handleEnter = (elem) => {
@@ -147,7 +157,7 @@ class Collapse extends React.Component {
   /* -- Collapsing -- */
   handleExit = (elem) => {
     const dimension = this.getDimension();
-    elem.style[dimension] = this.props.getDimensionValue(dimension, elem) + 'px';
+    elem.style[dimension] = `${this.props.getDimensionValue(dimension, elem)}px`;
     triggerBrowserReflow(elem);
   }
 
@@ -155,16 +165,6 @@ class Collapse extends React.Component {
     elem.style[this.getDimension()] = '0';
   }
 
-  getDimension() {
-    return typeof this.props.dimension === 'function'
-      ? this.props.dimension()
-      : this.props.dimension;
-  }
-
-  // for testing
-  _getScrollDimensionValue(elem, dimension) {
-    return `${elem[`scroll${capitalize(dimension)}`]}px`;
-  }
 
   render() {
     const {
@@ -202,8 +202,8 @@ class Collapse extends React.Component {
             className,
             children.props.className,
             collapseStyles[state],
-            this.getDimension() === 'width' && 'width'
-          )
+            this.getDimension() === 'width' && 'width',
+          ),
         })}
       </Transition>
     );

@@ -15,19 +15,19 @@ export default function ButtonGroupSection() {
       <p className="lead">Group a series of buttons together on a single line with the button group.</p>
 
       <h3><Anchor id="btn-groups-single">Basic example</Anchor></h3>
-      <p>Wrap a series of <code>{"<Button />"}</code>s in a <code>{"<ButtonGroup />"}</code>.</p>
+      <p>Wrap a series of <code>{'<Button />'}</code>s in a <code>{'<ButtonGroup />'}</code>.</p>
       <ReactPlayground codeText={Samples.ButtonGroupBasic} />
 
       <h3><Anchor id="btn-groups-toolbar">Button toolbar</Anchor></h3>
-      <p>Combine sets of <code>{"<ButtonGroup />"}</code>s into a <code>{"<ButtonToolbar />"}</code> for more complex components.</p>
+      <p>Combine sets of <code>{'<ButtonGroup />'}</code>s into a <code>{'<ButtonToolbar />'}</code> for more complex components.</p>
       <ReactPlayground codeText={Samples.ButtonToolbarBasic} />
 
       <h3><Anchor id="btn-groups-sizing">Sizing</Anchor></h3>
-      <p>Instead of applying button sizing props to every button in a group, just add <code>bsSize</code> prop to the <code>{"<ButtonGroup />"}</code>.</p>
+      <p>Instead of applying button sizing props to every button in a group, just add <code>bsSize</code> prop to the <code>{'<ButtonGroup />'}</code>.</p>
       <ReactPlayground codeText={Samples.ButtonGroupSizes} />
 
       <h3><Anchor id="btn-groups-nested">Nesting</Anchor></h3>
-      <p>You can place other button types within the <code>{"<ButtonGroup />"}</code> like <code>{"<DropdownButton />"}</code>s.</p>
+      <p>You can place other button types within the <code>{'<ButtonGroup />'}</code> like <code>{'<DropdownButton />'}</code>s.</p>
       <ReactPlayground codeText={Samples.ButtonGroupNested} />
 
       <h3><Anchor id="btn-groups-checkbox-radio">Checkbox / Radio</Anchor></h3>
@@ -41,11 +41,12 @@ export default function ButtonGroupSection() {
 
       <h3><Anchor id="btn-groups-vertical">Vertical variation</Anchor></h3>
       <p>Make a set of buttons appear vertically stacked rather than horizontally. <strong
-        className="text-danger">Split button dropdowns are not supported here.</strong></p>
-      <p>Just add <code>vertical</code> to the <code>{"<ButtonGroup />"}</code>.</p>
+        className="text-danger"
+      >Split button dropdowns are not supported here.</strong></p>
+      <p>Just add <code>vertical</code> to the <code>{'<ButtonGroup />'}</code>.</p>
       <ReactPlayground codeText={Samples.ButtonGroupVertical} />
       <br />
-      <p>Moreover, you can have buttons be block level elements so they take the full width of their container, just add <code>block</code> to the <code>{"<ButtonGroup />"}</code>, in addition to the <code>vertical</code> you just added.</p>
+      <p>Moreover, you can have buttons be block level elements so they take the full width of their container, just add <code>block</code> to the <code>{'<ButtonGroup />'}</code>, in addition to the <code>vertical</code> you just added.</p>
       <ReactPlayground codeText={Samples.ButtonGroupBlock} />
 
       <h3><Anchor id="btn-groups-justified">Justified button groups</Anchor></h3>
@@ -54,22 +55,22 @@ export default function ButtonGroupSection() {
         <h4>Style issues</h4>
         <p>There are some issues and workarounds required when using this property, please see <a href="http://getbootstrap.com/components/#btn-groups-justified">bootstrap&#8217;s button group docs</a> for more specifics.</p>
       </div>
-      <p>Just add <code>justified</code> to the <code>{"<ButtonGroup />"}</code>.</p>
+      <p>Just add <code>justified</code> to the <code>{'<ButtonGroup />'}</code>.</p>
       <ReactPlayground codeText={Samples.ButtonGroupJustified} />
 
       <h3><Anchor id="btn-groups-props">Props</Anchor></h3>
 
       <h4><Anchor id="btn-groups-group-props">ButtonGroup</Anchor></h4>
-      <PropTable component="ButtonGroup"/>
+      <PropTable component="ButtonGroup" />
 
       <h4><Anchor id="btn-groups-toolbar-props">ButtonToolbar</Anchor></h4>
-      <PropTable component="ButtonToolbar"/>
+      <PropTable component="ButtonToolbar" />
 
       <h4><Anchor id="btn-groups-toggle-group-props">ToggleButtonGroup</Anchor></h4>
-      <PropTable component="ToggleButtonGroup"/>
+      <PropTable component="ToggleButtonGroup" />
 
       <h4><Anchor id="btn-groups-toggle-btn-props">ToggleButton</Anchor></h4>
-      <PropTable component="ToggleButton"/>
+      <PropTable component="ToggleButton" />
     </div>
   );
 }

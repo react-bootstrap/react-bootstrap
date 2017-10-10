@@ -68,8 +68,8 @@ const propTypes = {
    *
    * ```js
    * function (
-   * 	Any eventKey,
-   * 	SyntheticEvent event?
+   *  Any eventKey,
+   *  SyntheticEvent event?
    * )
    * ```
    *
@@ -115,7 +115,7 @@ const childContextTypes = {
     expanded: PropTypes.bool,
     onToggle: PropTypes.func.isRequired,
     onSelect: PropTypes.func,
-  })
+  }),
 };
 
 class Navbar extends React.Component {
@@ -214,7 +214,7 @@ const UncontrollableNavbar = uncontrollable(Navbar, { expanded: 'onToggle' });
 function createSimpleWrapper(tag, suffix, displayName) {
   const Wrapper = (
     { componentClass: Component, className, pullRight, pullLeft, ...props },
-    { $bs_navbar: navbarProps = { bsClass: 'navbar' } }
+    { $bs_navbar: navbarProps = { bsClass: 'navbar' } },
   ) => (
     <Component
       {...props}
@@ -261,5 +261,5 @@ UncontrollableNavbar.Link = createSimpleWrapper('a', 'link', 'NavbarLink');
 
 // Set bsStyles here so they can be overridden.
 export default bsStyles([Style.DEFAULT, Style.INVERSE], Style.DEFAULT,
-  UncontrollableNavbar
+  UncontrollableNavbar,
 );

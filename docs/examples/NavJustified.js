@@ -1,6 +1,6 @@
 const NavJustified = React.createClass({
   handleSelect(selectedKey) {
-    alert('selected ' + selectedKey);
+    alert(`selected ${selectedKey}`);
   },
 
   render() {
@@ -19,7 +19,7 @@ const NavJustified = React.createClass({
         </Nav>
       </div>
     );
-  }
+  },
 });
 
 ReactDOM.render(<NavJustified />, mountNode);

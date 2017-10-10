@@ -6,7 +6,8 @@ import Fade from '../src/Fade';
 
 describe('Fade', () => {
 
-  let Component, instance;
+  let Component,
+    instance;
 
   beforeEach(() => {
 
@@ -15,8 +16,10 @@ describe('Fade', () => {
         let { children, ...props } = this.props;
 
         return (
-          <Fade ref={r => this.fade = r}
-            {...props} {...this.state}
+          <Fade
+            ref={r => this.fade = r}
+            {...props}
+            {...this.state}
           >
             <div>
               {children}
@@ -29,7 +32,7 @@ describe('Fade', () => {
 
   it('Should default to hidden', () => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component>Panel content</Component>
+      <Component>Panel content</Component>,
     );
 
     assert.ok(
@@ -38,7 +41,7 @@ describe('Fade', () => {
 
   it('Should always have the "fade" class', () => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component>Panel content</Component>
+      <Component>Panel content</Component>,
     );
 
     assert.ok(
@@ -49,9 +52,9 @@ describe('Fade', () => {
 
   });
 
-  it('Should add "in" class when entering', done => {
+  it('Should add "in" class when entering', (done) => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component>Panel content</Component>
+      <Component>Panel content</Component>,
     );
 
     function onEntering() {
@@ -65,9 +68,9 @@ describe('Fade', () => {
     instance.setState({ in: true, onEntering });
   });
 
-  it('Should remove "in" class when exiting', done => {
+  it('Should remove "in" class when exiting', (done) => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component in>Panel content</Component>
+      <Component in>Panel content</Component>,
     );
 
     function onExiting() {

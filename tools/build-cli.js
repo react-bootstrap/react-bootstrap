@@ -1,27 +1,27 @@
 /* eslint no-process-exit: 0 */
 
 import 'colors';
+import yargs from 'yargs';
 import build from './build';
 import docs from '../docs/build';
 import { setExecOptions } from './exec';
 
-import yargs from 'yargs';
 
 const argv = yargs
   .help('h')
   .option('docs-only', {
     demand: false,
-    default: false
+    default: false,
   })
   .option('verbose', {
     demand: false,
     default: false,
-    describe: 'Increased debug output'
+    describe: 'Increased debug output',
   })
   .option('dev', {
     demand: false,
     default: false,
-    describe: 'Only used when supplied with the --docs-only flag'
+    describe: 'Only used when supplied with the --docs-only flag',
   })
   .argv;
 
@@ -36,7 +36,7 @@ if (argv.docsOnly) {
 }
 
 buildProcess
-  .catch(err => {
+  .catch((err) => {
     if (err.stack) {
       console.error(err.stack.red);
     } else {

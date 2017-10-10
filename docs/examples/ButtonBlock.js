@@ -1,4 +1,4 @@
-const wellStyles = {maxWidth: 400, margin: '0 auto 10px'};
+const wellStyles = { maxWidth: 400, margin: '0 auto 10px' };
 
 const buttonsInstance = (
   <div className="well" style={wellStyles}>

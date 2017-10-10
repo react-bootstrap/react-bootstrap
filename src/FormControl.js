@@ -6,9 +6,8 @@ import warning from 'warning';
 
 import FormControlFeedback from './FormControlFeedback';
 import FormControlStatic from './FormControlStatic';
-import { bsClass, getClassSet, splitBsProps, bsSizes } from './utils/bootstrapUtils';
+import { prefix, bsClass, getClassSet, splitBsProps, bsSizes } from './utils/bootstrapUtils';
 import { SIZE_MAP, Size } from './utils/StyleConfig';
-import { prefix } from './utils/bootstrapUtils';
 
 const propTypes = {
   componentClass: elementType,
@@ -57,7 +56,7 @@ class FormControl extends React.Component {
 
     warning(
       controlId == null || id === controlId,
-      '`controlId` is ignored on `<FormControl>` when `id` is specified.'
+      '`controlId` is ignored on `<FormControl>` when `id` is specified.',
     );
 
     // input[type="file"] should not have .form-control.
@@ -93,5 +92,5 @@ FormControl.Feedback = FormControlFeedback;
 FormControl.Static = FormControlStatic;
 
 export default bsClass('form-control',
-  bsSizes([Size.SMALL, Size.LARGE], FormControl)
+  bsSizes([Size.SMALL, Size.LARGE], FormControl),
 );

@@ -47,7 +47,7 @@ class Image extends React.Component {
     };
 
     return (
-      <img
+      <img // eslint-disable-line jsx-a11y/alt-text
         {...elementProps}
         className={classNames(className, classes)}
       />

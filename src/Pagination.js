@@ -28,7 +28,7 @@ class Pagination extends React.Component {
   }
 }
 
-Pagination = bsClass('pagination', Pagination);
+bsClass('pagination', Pagination);
 
 Pagination.First = First;
 Pagination.Prev = Prev;

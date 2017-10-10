@@ -7,19 +7,19 @@ import Nav from '../../src/Nav';
 const NAV_LINKS = {
   introduction: {
     link: '/introduction.html',
-    title: 'Introduction'
+    title: 'Introduction',
   },
   'getting-started': {
     link: '/getting-started.html',
-    title: 'Getting started'
+    title: 'Getting started',
   },
   components: {
     link: '/components.html',
-    title: 'Components'
+    title: 'Components',
   },
   support: {
     link: '/support.html',
-    title: 'Support'
+    title: 'Support',
   },
 };
 

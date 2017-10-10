@@ -9,7 +9,7 @@ describe('Well', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Well>
         <strong>Content</strong>
-      </Well>
+      </Well>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
   });
@@ -18,7 +18,7 @@ describe('Well', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Well>
         Content
-      </Well>
+      </Well>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bwell\b/));
   });
@@ -27,7 +27,7 @@ describe('Well', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Well bsSize="small">
         Content
-      </Well>
+      </Well>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bwell-sm\b/));
   });

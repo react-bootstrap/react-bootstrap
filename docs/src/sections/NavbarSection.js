@@ -33,7 +33,7 @@ export default function NavbarSection() {
         <h4>Additional Import Options</h4>
         <p>
           The Navbar Header, Toggle, Brand, and Collapse components are available as static properties
-          on the <code>{"<Navbar>"}</code> component but you can also import them directly from
+          on the <code>{'<Navbar>'}</code> component but you can also import them directly from
           the <code>/lib</code> directory
           like: <code>{'require("react-bootstrap/lib/NavbarHeader")'}</code>.
         </p>
@@ -67,10 +67,10 @@ export default function NavbarSection() {
       <h3><Anchor id="navbar-props">Props</Anchor></h3>
 
       <h4><Anchor id="navs-props-navbar">Navbar</Anchor></h4>
-      <PropTable component="Navbar"/>
+      <PropTable component="Navbar" />
 
       <h4><Anchor id="navs-props-navbar-toggle">Navbar.Toggle</Anchor></h4>
-      <PropTable component="NavbarToggle"/>
+      <PropTable component="NavbarToggle" />
     </div>
   );
 }

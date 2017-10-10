@@ -20,7 +20,7 @@ export default function AlertsSection() {
       <ReactPlayground codeText={Samples.AlertDismissable} />
 
       <h3><Anchor id="alert-props">Props</Anchor></h3>
-      <PropTable component="Alert"/>
+      <PropTable component="Alert" />
     </div>
   );
 }

@@ -45,10 +45,10 @@ export default function ListGroupSection() {
       <h3><Anchor id="listgroup-props">Props</Anchor></h3>
 
       <h4><Anchor id="listgroup-props-group">ListGroup</Anchor></h4>
-      <PropTable component="ListGroup"/>
+      <PropTable component="ListGroup" />
 
       <h4><Anchor id="listgroup-props-item">ListGroupItem</Anchor></h4>
-      <PropTable component="ListGroupItem"/>
+      <PropTable component="ListGroupItem" />
     </div>
   );
 }

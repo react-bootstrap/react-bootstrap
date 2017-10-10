@@ -5,7 +5,7 @@ import ReactTestUtils from 'react-dom/test-utils';
 import ButtonGroup from '../src/ButtonGroup';
 import Button from '../src/Button';
 
-import {shouldWarn} from './helpers';
+import { shouldWarn } from './helpers';
 
 describe('ButtonGroup', () => {
   it('Should output a button group', () => {
@@ -14,7 +14,7 @@ describe('ButtonGroup', () => {
         <Button>
           Title
         </Button>
-      </ButtonGroup>
+      </ButtonGroup>,
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-group\b/));
@@ -26,7 +26,7 @@ describe('ButtonGroup', () => {
         <Button>
           Title
         </Button>
-      </ButtonGroup>
+      </ButtonGroup>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-group-lg\b/));
   });
@@ -37,7 +37,7 @@ describe('ButtonGroup', () => {
         <Button>
           Title
         </Button>
-      </ButtonGroup>
+      </ButtonGroup>,
     );
     assert.equal(ReactDOM.findDOMNode(instance).className.trim(), 'btn-group-vertical');
   });
@@ -48,7 +48,7 @@ describe('ButtonGroup', () => {
         <Button>
           Title
         </Button>
-      </ButtonGroup>
+      </ButtonGroup>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-block\b/));
   });
@@ -61,7 +61,7 @@ describe('ButtonGroup', () => {
         <Button>
           Title
         </Button>
-      </ButtonGroup>
+      </ButtonGroup>,
     );
   });
 
@@ -71,7 +71,7 @@ describe('ButtonGroup', () => {
         <Button>
           Title
         </Button>
-      </ButtonGroup>
+      </ButtonGroup>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-group-justified\b/));
   });

@@ -15,7 +15,7 @@ const canUseDOM = !!(
   typeof window !== 'undefined' &&
     window.document &&
     window.document.createElement
-  );
+);
 
 /**
  * EVENT_NAME_MAP is used to determine which event fired when a
@@ -24,20 +24,20 @@ const canUseDOM = !!(
  */
 const EVENT_NAME_MAP = {
   transitionend: {
-    'transition': 'transitionend',
-    'WebkitTransition': 'webkitTransitionEnd',
-    'MozTransition': 'mozTransitionEnd',
-    'OTransition': 'oTransitionEnd',
-    'msTransition': 'MSTransitionEnd'
+    transition: 'transitionend',
+    WebkitTransition: 'webkitTransitionEnd',
+    MozTransition: 'mozTransitionEnd',
+    OTransition: 'oTransitionEnd',
+    msTransition: 'MSTransitionEnd',
   },
 
   animationend: {
-    'animation': 'animationend',
-    'WebkitAnimation': 'webkitAnimationEnd',
-    'MozAnimation': 'mozAnimationEnd',
-    'OAnimation': 'oAnimationEnd',
-    'msAnimation': 'MSAnimationEnd'
-  }
+    animation: 'animationend',
+    WebkitAnimation: 'webkitAnimationEnd',
+    MozAnimation: 'mozAnimationEnd',
+    OAnimation: 'oAnimationEnd',
+    msAnimation: 'MSAnimationEnd',
+  },
 };
 
 let endEvents = [];
@@ -61,7 +61,7 @@ function detectEvents() {
 
   for (let baseEventName in EVENT_NAME_MAP) { // eslint-disable-line guard-for-in
     let baseEvents = EVENT_NAME_MAP[baseEventName];
-    for (let styleName in baseEvents) {
+    for (let styleName in baseEvents) { // eslint-disable-line guard-for-in
       if (styleName in style) {
         endEvents.push(baseEvents[styleName]);
         break;
@@ -95,7 +95,7 @@ const ReactTransitionEvents = {
       window.setTimeout(eventListener, 0);
       return;
     }
-    endEvents.forEach(endEvent => {
+    endEvents.forEach((endEvent) => {
       addEventListener(node, endEvent, eventListener);
     });
   },
@@ -104,10 +104,10 @@ const ReactTransitionEvents = {
     if (endEvents.length === 0) {
       return;
     }
-    endEvents.forEach(endEvent => {
+    endEvents.forEach((endEvent) => {
       removeEventListener(node, endEvent, eventListener);
     });
-  }
+  },
 };
 
 export default ReactTransitionEvents;

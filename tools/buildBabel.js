@@ -6,11 +6,11 @@ import outputFileSync from 'output-file-sync';
 function buildContent(content, filename, destination, babelOptions = {}) {
   babelOptions.filename = filename;
   const result = transform(content, babelOptions);
-  outputFileSync(destination, result.code, {encoding: 'utf8'});
+  outputFileSync(destination, result.code, { encoding: 'utf8' });
 }
 
 function buildFile(filename, destination, babelOptions = {}) {
-  const content = fs.readFileSync(filename, {encoding: 'utf8'});
+  const content = fs.readFileSync(filename, { encoding: 'utf8' });
   // We only have .js files that we need to build
   if (path.extname(filename) === '.js') {
     const outputPath = path.join(destination, path.basename(filename));

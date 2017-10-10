@@ -17,18 +17,18 @@ export default function ModalSection() {
       <ReactPlayground codeText={Samples.ModalStatic} />
 
       <h3><Anchor id="modals-live">Basic example</Anchor></h3>
-      <p></p>
+      <p />
       <p>
-        A modal with header, body, and set of actions in the footer. Use <code>{"<Modal/>"}</code> in combination with other components to
-        show or hide your Modal. The <code>{"<Modal/>"}</code> Component comes with
-        a few convenient "sub components": <code>{"<Modal.Header/>"}</code>, <code>{"<Modal.Title/>"}</code>, <code>{"<Modal.Body/>"}</code>,
-        and <code>{"<Modal.Footer/>"}</code>, which you can use to build the Modal content.
+        A modal with header, body, and set of actions in the footer. Use <code>{'<Modal/>'}</code> in combination with other components to
+        show or hide your Modal. The <code>{'<Modal/>'}</code> Component comes with
+        a few convenient "sub components": <code>{'<Modal.Header/>'}</code>, <code>{'<Modal.Title/>'}</code>, <code>{'<Modal.Body/>'}</code>,
+        and <code>{'<Modal.Footer/>'}</code>, which you can use to build the Modal content.
       </p>
       <ReactPlayground codeText={Samples.Modal} />
       <div className="bs-callout bs-callout-info">
         <h4>Additional Import Options</h4>
         <p>
-          The Modal Header, Title, Body, and Footer components are available as static properties the <code>{"<Modal/>"}</code> component, but you can also,
+          The Modal Header, Title, Body, and Footer components are available as static properties the <code>{'<Modal/>'}</code> component, but you can also,
           import them directly from the <code>/lib</code> directory like: <code>{'require("react-bootstrap/lib/ModalHeader")'}</code>.
         </p>
       </div>
@@ -42,7 +42,7 @@ export default function ModalSection() {
           '}\n' +
           '.modal-container .modal, .modal-container .modal-backdrop {\n' +
           '  position: absolute;\n' +
-          '}\n'
+          '}\n',
         )}
       </pre>
       <ReactPlayground codeText={Samples.ModalContained} />
@@ -58,19 +58,19 @@ export default function ModalSection() {
       <h3><Anchor id="modals-props">Props</Anchor></h3>
 
       <h4><Anchor id="modals-props-modal">Modal</Anchor></h4>
-      <PropTable component="Modal"/>
+      <PropTable component="Modal" />
 
       <h4><Anchor id="modals-props-modal-header">Modal.Header</Anchor></h4>
-      <PropTable component="ModalHeader"/>
+      <PropTable component="ModalHeader" />
 
       <h4><Anchor id="modals-props-modal-title">Modal.Title</Anchor></h4>
-      <PropTable component="ModalTitle"/>
+      <PropTable component="ModalTitle" />
 
       <h4><Anchor id="modals-props-modal-body">Modal.Body</Anchor></h4>
-      <PropTable component="ModalBody"/>
+      <PropTable component="ModalBody" />
 
       <h4><Anchor id="modals-props-modal-footer">Modal.Footer</Anchor></h4>
-      <PropTable component="ModalFooter"/>
+      <PropTable component="ModalFooter" />
     </div>
   );
 }

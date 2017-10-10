@@ -34,35 +34,6 @@ class DropdownMenu extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
-  handleRootClose(event) {
-    this.props.onClose(event, { source: 'rootClose' });
-  }
-
-  handleKeyDown(event) {
-    switch (event.keyCode) {
-      case keycode.codes.down:
-        this.focusNext();
-        event.preventDefault();
-        break;
-      case keycode.codes.up:
-        this.focusPrevious();
-        event.preventDefault();
-        break;
-      case keycode.codes.esc:
-      case keycode.codes.tab:
-        this.props.onClose(event, { source: 'keydown' });
-        break;
-      default:
-    }
-  }
-
-  getItemsAndActiveIndex() {
-    const items = this.getFocusableMenuItems();
-    const activeIndex = items.indexOf(document.activeElement);
-
-    return { items, activeIndex };
-  }
-
   getFocusableMenuItems() {
     const node = ReactDOM.findDOMNode(this);
     if (!node) {
@@ -70,6 +41,13 @@ class DropdownMenu extends React.Component {
     }
 
     return Array.from(node.querySelectorAll('[tabIndex="-1"]'));
+  }
+
+  getItemsAndActiveIndex() {
+    const items = this.getFocusableMenuItems();
+    const activeIndex = items.indexOf(document.activeElement);
+
+    return { items, activeIndex };
   }
 
   focusNext() {
@@ -90,6 +68,28 @@ class DropdownMenu extends React.Component {
 
     const prevIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
     items[prevIndex].focus();
+  }
+
+  handleKeyDown(event) {
+    switch (event.keyCode) {
+      case keycode.codes.down:
+        this.focusNext();
+        event.preventDefault();
+        break;
+      case keycode.codes.up:
+        this.focusPrevious();
+        event.preventDefault();
+        break;
+      case keycode.codes.esc:
+      case keycode.codes.tab:
+        this.props.onClose(event, { source: 'keydown' });
+        break;
+      default:
+    }
+  }
+
+  handleRootClose(event) {
+    this.props.onClose(event, { source: 'rootClose' });
   }
 
   render() {

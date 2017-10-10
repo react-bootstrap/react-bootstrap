@@ -108,6 +108,11 @@ class TabContent extends React.Component {
     this.isUnmounted = true;
   }
 
+  getContainerActiveKey() {
+    const tabContainer = this.context.$bs_tabContainer;
+    return tabContainer && tabContainer.activeKey;
+  }
+
   handlePaneEnter(child, childKey) {
     if (!this.props.animation) {
       return false;
@@ -142,11 +147,6 @@ class TabContent extends React.Component {
         activeChild: null,
       };
     });
-  }
-
-  getContainerActiveKey() {
-    const tabContainer = this.context.$bs_tabContainer;
-    return tabContainer && tabContainer.activeKey;
   }
 
   render() {

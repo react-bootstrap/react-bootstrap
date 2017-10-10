@@ -2,7 +2,7 @@ import keycode from 'keycode';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
-import tsp from 'teaspoon';
+import { shallow } from 'enzyme';
 
 import DropdownMenu from '../src/DropdownMenu';
 import MenuItem from '../src/MenuItem';
@@ -60,21 +60,20 @@ describe('<Dropdown.Menu>', () => {
         <MenuItem eventKey="2">Item 2</MenuItem>
         <MenuItem eventKey="3">Item 3</MenuItem>
         <MenuItem eventKey="4">Item 4</MenuItem>
-      </DropdownMenu>
+      </DropdownMenu>,
     );
 
     const menuItems = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
 
-    menuItems.forEach(item => {
+    menuItems.forEach((item) => {
       ReactTestUtils.Simulate.click(item);
     });
   });
 
   it('does not pass onSelect to DOM node', () => {
-    tsp(<DropdownMenu onSelect={()=>{}}/>)
-      .shallowRender()
-      .tap(m => m.props().should.have.property('onSelect'))
-      .children()
+    shallow(<DropdownMenu onSelect={() => {}} />)
+      .find('ul')
+      .props()
       .should.not.have.property('onSelect');
   });
 
@@ -82,7 +81,7 @@ describe('<Dropdown.Menu>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownMenu pullRight>
         <MenuItem>Item</MenuItem>
-      </DropdownMenu>
+      </DropdownMenu>,
     );
     const node = ReactDOM.findDOMNode(instance);
 
@@ -94,7 +93,7 @@ describe('<Dropdown.Menu>', () => {
       <DropdownMenu pullRight>
         <MenuItem>Item</MenuItem>
         { false && <MenuItem>Item 2</MenuItem> }
-      </DropdownMenu>
+      </DropdownMenu>,
     );
   });
 
@@ -177,7 +176,7 @@ describe('<Dropdown.Menu>', () => {
         document.activeElement.should.equal(items[3]);
       });
 
-      ['esc', 'tab'].forEach(key => {
+      ['esc', 'tab'].forEach((key) => {
         it(`when the key "${key}" is pressed the requestClose prop is invoked with the originating event`, () => {
           const requestClose = sinon.spy();
           const instance = ReactDOM.render(
@@ -200,7 +199,7 @@ describe('<Dropdown.Menu>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <DropdownMenu className="new-fancy-class">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-      </DropdownMenu>
+      </DropdownMenu>,
     );
 
     let node = ReactDOM.findDOMNode(instance);

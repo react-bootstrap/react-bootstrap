@@ -16,7 +16,7 @@ export default function GlyphiconSection() {
       <ReactPlayground codeText={Samples.Glyphicon} />
 
       <h3><Anchor id="glyphicons-props">Props</Anchor></h3>
-      <PropTable component="Glyphicon"/>
+      <PropTable component="Glyphicon" />
     </div>
   );
 }
