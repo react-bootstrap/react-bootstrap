@@ -168,6 +168,21 @@ describe('<DropdownButton>', () => {
     assert.ok(buttonNode.disabled);
   });
 
+  it('should add .btn-block to button and not .btn-group', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <DropdownButton title="Title" bsStyle="primary" id="testId" disabled block>
+        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+      </DropdownButton>,
+    );
+
+    const buttonNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'BUTTON');
+    assert.ok(buttonNode.className.match(/\bbtn-block\b/));
+
+    const buttonGroupNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'btn-group');
+    assert.ok(!buttonGroupNode.className.match(/\bbtn-bock\b/));
+  });
+
   it('should derive bsClass from parent', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <DropdownButton title="title" id="test-id" bsClass="my-dropdown">
