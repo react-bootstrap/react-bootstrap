@@ -13,6 +13,13 @@ const propTypes = {
   title: PropTypes.node.isRequired,
   noCaret: PropTypes.bool,
 
+  // The block prop does not work 100% as you'd expect out of the box
+  // Requires extra styling to make it display correctly, but WILL add .btn-block to button element
+  /**
+   * @private
+   */
+  block: PropTypes.bool,
+
   // Override generated docs from <Dropdown>.
   /**
    * @private
