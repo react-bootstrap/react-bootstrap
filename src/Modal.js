@@ -157,6 +157,10 @@ class Modal extends React.Component {
     };
   }
 
+  componentWillMount() {
+    this._pendingUpdateStyle = false;
+  }
+
   componentDidUpdate() {
     if (this._pendingUpdateStyle) {
       this.updateStyle();
@@ -166,7 +170,6 @@ class Modal extends React.Component {
   componentWillUnmount() {
     // Clean up the listener if we need to.
     this.handleExited();
-    this._pendingUpdateStyle = false;
   }
 
   handleDialogClick(e) {
@@ -199,27 +202,28 @@ class Modal extends React.Component {
 
     if (!this._modal) {
       this._pendingUpdateStyle = true;
-    } else {
-      this._pendingUpdateStyle = false;
-      const dialogNode = this._modal.getDialogElement();
-      const dialogHeight = dialogNode.scrollHeight;
-
-      const document = ownerDocument(dialogNode);
-      const bodyIsOverflowing = isOverflowing(
-        ReactDOM.findDOMNode(this.props.container || document.body),
-      );
-      const modalIsOverflowing =
-        dialogHeight > document.documentElement.clientHeight;
-
-      this.setState({
-        style: {
-          paddingRight: bodyIsOverflowing && !modalIsOverflowing ?
-            getScrollbarSize() : undefined,
-          paddingLeft: !bodyIsOverflowing && modalIsOverflowing ?
-            getScrollbarSize() : undefined,
-        },
-      });
+      return;
     }
+
+    this._pendingUpdateStyle = false;
+    const dialogNode = this._modal.getDialogElement();
+    const dialogHeight = dialogNode.scrollHeight;
+
+    const document = ownerDocument(dialogNode);
+    const bodyIsOverflowing = isOverflowing(
+      ReactDOM.findDOMNode(this.props.container || document.body),
+    );
+    const modalIsOverflowing =
+      dialogHeight > document.documentElement.clientHeight;
+
+    this.setState({
+      style: {
+        paddingRight: bodyIsOverflowing && !modalIsOverflowing ?
+          getScrollbarSize() : undefined,
+        paddingLeft: !bodyIsOverflowing && modalIsOverflowing ?
+          getScrollbarSize() : undefined,
+      },
+    });
   }
 
   render() {
