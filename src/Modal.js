@@ -162,6 +162,10 @@ class Modal extends React.Component {
     this.handleExited();
   }
 
+  setModalRef(ref) {
+    this._modal = ref;
+  }
+
   handleDialogClick(e) {
     if (e.target !== e.currentTarget) {
       return;
@@ -208,10 +212,6 @@ class Modal extends React.Component {
           getScrollbarSize() : undefined,
       },
     });
-  }
-
-  setModalRef(ref) {
-    this._modal = ref;
   }
 
   render() {
