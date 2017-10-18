@@ -142,7 +142,7 @@ class Modal extends React.Component {
     this.handleExited = this.handleExited.bind(this);
     this.handleWindowResize = this.handleWindowResize.bind(this);
     this.handleDialogClick = this.handleDialogClick.bind(this);
-    this._pendingUpdateStyle = false;
+    this.setModalRef = this.setModalRef.bind(this);
 
     this.state = {
       style: {},
@@ -155,16 +155,6 @@ class Modal extends React.Component {
         onHide: this.props.onHide,
       },
     };
-  }
-
-  componentWillMount() {
-    this._pendingUpdateStyle = false;
-  }
-
-  componentDidUpdate() {
-    if (this._pendingUpdateStyle) {
-      this.updateStyle();
-    }
   }
 
   componentWillUnmount() {
@@ -200,12 +190,6 @@ class Modal extends React.Component {
       return;
     }
 
-    if (!this._modal) {
-      this._pendingUpdateStyle = true;
-      return;
-    }
-
-    this._pendingUpdateStyle = false;
     const dialogNode = this._modal.getDialogElement();
     const dialogHeight = dialogNode.scrollHeight;
 
@@ -224,6 +208,10 @@ class Modal extends React.Component {
           getScrollbarSize() : undefined,
       },
     });
+  }
+
+  setModalRef(ref) {
+    this._modal = ref;
   }
 
   render() {
@@ -249,7 +237,7 @@ class Modal extends React.Component {
     return (
       <BaseModal
         {...baseModalProps}
-        ref={(c) => { this._modal = c; }}
+        ref={this.setModalRef}
         show={show}
         onEntering={createChainedFunction(onEntering, this.handleEntering)}
         onExited={createChainedFunction(onExited, this.handleExited)}
