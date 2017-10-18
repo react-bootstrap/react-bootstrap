@@ -128,7 +128,7 @@
     "keycode": "^2.1.2",
     "prop-types": "^15.5.10",
     "prop-types-extra": "^1.0.1",
-    "react-overlays": "^0.7.0",
+    "react-overlays": "^0.7.3",
     "uncontrollable": "^4.1.0",
     "warning": "^3.0.0"
   },
