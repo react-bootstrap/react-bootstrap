@@ -44,7 +44,7 @@ describe('ButtonGroup', () => {
 
   it('Should display block with inline style', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <ButtonGroup vertical style={{display: 'block'}}>
+      <ButtonGroup vertical style={{ display: 'block' }}>
         <Button>
           Title
         </Button>

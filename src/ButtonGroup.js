@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import all from 'prop-types-extra/lib/all';
-import warning from 'warning';
 
 import Button from './Button';
 import { bsClass, getClassSet, prefix, splitBsProps }
