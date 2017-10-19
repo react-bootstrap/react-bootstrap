@@ -64,6 +64,7 @@
     "codecov": "^2.2.0",
     "codemirror": "^5.16.0",
     "colors": "^1.1.2",
+    "create-react-class": "^15.5.3",
     "cross-env": "^2.0.0",
     "css-loader": "^0.23.1",
     "enzyme": "^3.1.0",
@@ -128,7 +129,9 @@
     "keycode": "^2.1.2",
     "prop-types": "^15.5.10",
     "prop-types-extra": "^1.0.1",
-    "react-overlays": "^0.7.0",
+    "react-overlays": "^0.8.0",
+    "react-prop-types": "^0.4.0",
+    "react-transition-group": "^2.0.0",
     "uncontrollable": "^4.1.0",
     "warning": "^3.0.0"
   },

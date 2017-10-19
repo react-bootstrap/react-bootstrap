@@ -13,6 +13,8 @@ const propTypes = {
   title: PropTypes.node.isRequired,
   noCaret: PropTypes.bool,
   active: PropTypes.bool,
+  activeKey: PropTypes.any,
+  activeHref: PropTypes.string,
 
   // Override generated docs from <Dropdown>.
   /**

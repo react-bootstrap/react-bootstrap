@@ -204,7 +204,7 @@ describe('<Collapse>', () => {
     });
 
     it('Defaults to height', () => {
-      assert.equal(instance.collapse._dimension(), 'height');
+      assert.equal(instance.collapse.getDimension(), 'height');
     });
 
     it('Uses getCollapsibleDimension if exists', () => {
@@ -215,7 +215,7 @@ describe('<Collapse>', () => {
 
       instance.setState({ dimension });
 
-      assert.equal(instance.collapse._dimension(), 'whatevs');
+      assert.equal(instance.collapse.getDimension(), 'whatevs');
     });
   });
 
