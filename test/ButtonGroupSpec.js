@@ -42,6 +42,17 @@ describe('ButtonGroup', () => {
     assert.equal(ReactDOM.findDOMNode(instance).className.trim(), 'btn-group-vertical');
   });
 
+  it('Should display block with inline style', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <ButtonGroup vertical style={{display: 'block'}}>
+        <Button>
+          Title
+        </Button>
+      </ButtonGroup>,
+    );
+    assert.ok(ReactDOM.findDOMNode(instance).style.display.match('block'));
+  });
+
   it('Should add block variation', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ButtonGroup vertical block>

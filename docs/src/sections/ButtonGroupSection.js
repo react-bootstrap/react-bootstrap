@@ -46,7 +46,7 @@ export default function ButtonGroupSection() {
       <p>Just add <code>vertical</code> to the <code>{'<ButtonGroup />'}</code>.</p>
       <ReactPlayground codeText={Samples.ButtonGroupVertical} />
       <br />
-      <p>Moreover, you can have buttons be block level elements so they take the full width of their container, just add <code>block</code> to the <code>{'<ButtonGroup />'}</code>, in addition to the <code>vertical</code> you just added.</p>
+      <p>Moreover, you can have buttons be block level elements so they take the full width of their container, just style the component to include <code>display: block</code> in your CSS or inline styles. Example: <code>{'<ButtonGroup vertical style={{display: \'block\'}} />'}</code>.</p>
       <ReactPlayground codeText={Samples.ButtonGroupBlock} />
 
       <h3><Anchor id="btn-groups-justified">Justified button groups</Anchor></h3>

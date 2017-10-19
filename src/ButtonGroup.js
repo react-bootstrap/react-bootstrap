@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import all from 'prop-types-extra/lib/all';
+import warning from 'warning';
 
 import Button from './Button';
 import { bsClass, getClassSet, prefix, splitBsProps }
@@ -14,14 +15,19 @@ const propTypes = {
   /**
    * Display block buttons; only useful when used with the "vertical" prop.
    * @type {bool}
+   * @private
    */
   block: all(
     PropTypes.bool,
-    ({ block, vertical }) => (
-      block && !vertical ?
-        new Error('`block` requires `vertical` to be set to have any effect') :
-        null
-    ),
+    ({ block, vertical }) => {
+      if (block) {
+        console.warn('`block` is deprecated on ButtonGroup and will be removed in v0.31.5. See https://react-bootstrap.github.io/components.html#btn-groups for more information.');
+        if (!vertical) {
+          return new Error('`block` requires `vertical` to be set to have any effect');
+        }
+      }
+      return null;
+    },
   ),
 };
 
