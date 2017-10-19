@@ -19,12 +19,11 @@ const propTypes = {
    */
   block: all(
     PropTypes.bool,
-    ({ block, vertical }) => {
-      if (block && !vertical) {
-        return new Error('`block` requires `vertical` to be set to have any effect');
-      }
-      return null;
-    },
+    ({ block, vertical }) => (
+      block && !vertical ?
+        new Error('`block` requires `vertical` to be set to have any effect') :
+        null
+    ),
     deprecated(() => null, 'The `block` prop has been deprecated on ButtonGroup. See https://react-bootstrap.github.io/components.html#btn-groups for more information.'),
   ),
 };
