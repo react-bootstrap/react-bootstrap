@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import all from 'prop-types-extra/lib/all';
+import deprecated from 'prop-types-extra/lib/deprecated';
 
 import Button from './Button';
 import { bsClass, getClassSet, prefix, splitBsProps }
@@ -19,19 +20,17 @@ const propTypes = {
   block: all(
     PropTypes.bool,
     ({ block, vertical }) => {
-      if (block) {
-        console.warn('`block` is deprecated on ButtonGroup and will be removed in v0.31.5. See https://react-bootstrap.github.io/components.html#btn-groups for more information.');
-        if (!vertical) {
-          return new Error('`block` requires `vertical` to be set to have any effect');
-        }
+      if (block && !vertical) {
+        return new Error('`block` requires `vertical` to be set to have any effect');
       }
       return null;
     },
+    deprecated(() => null, 'The `block` prop has been deprecated on ButtonGroup. See https://react-bootstrap.github.io/components.html#btn-groups for more information.'),
   ),
 };
 
 const defaultProps = {
-  block: false,
+  block: null,
   justified: false,
   vertical: false,
 };

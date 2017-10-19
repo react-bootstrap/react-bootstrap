@@ -54,6 +54,8 @@ describe('ButtonGroup', () => {
   });
 
   it('Should add block variation', () => {
+    shouldWarn('Warning: Failed prop type: Warning: The prop `block` of `ButtonGroup` is deprecated. The `block` prop has been deprecated on ButtonGroup. See https://react-bootstrap.github.io/components.html#btn-groups for more information.');
+
     let instance = ReactTestUtils.renderIntoDocument(
       <ButtonGroup vertical block>
         <Button>
