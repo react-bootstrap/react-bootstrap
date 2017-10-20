@@ -28,7 +28,7 @@ export default function MenuItemSection() {
       <ReactPlayground codeText={Samples.MenuItem} />
 
       <h3><Anchor id="menu-item-props">Props</Anchor></h3>
-      <PropTable component="MenuItem"/>
+      <PropTable component="MenuItem" />
     </div>
   );
 }

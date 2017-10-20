@@ -17,7 +17,7 @@ const propTypes = {
 
 const defaultProps = {
   active: false,
-  disabled: false
+  disabled: false,
 };
 
 class NavItem extends React.Component {

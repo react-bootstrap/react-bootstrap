@@ -75,7 +75,7 @@ class ToggleButtonGroup extends React.Component {
 
     invariant(type !== 'radio' || !!name,
       'A `name` is required to group the toggle buttons when the `type` ' +
-      'is set to "radio"'
+      'is set to "radio"',
     );
 
     delete props.onChange;
@@ -84,7 +84,7 @@ class ToggleButtonGroup extends React.Component {
     // the data attribute is required b/c twbs css uses it in the selector
     return (
       <ButtonGroup {...props} data-toggle="buttons">
-        {ValidChildren.map(children, child => {
+        {ValidChildren.map(children, (child) => {
           const { value, onChange } = child.props;
           const handler = () => this.handleToggle(value);
 

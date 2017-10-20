@@ -50,5 +50,5 @@ Alert.propTypes = propTypes;
 Alert.defaultProps = defaultProps;
 
 export default bsStyles(Object.values(State), State.INFO,
-  bsClass('alert', Alert)
+  bsClass('alert', Alert),
 );

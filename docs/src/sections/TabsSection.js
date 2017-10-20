@@ -45,19 +45,19 @@ export default function TabsSection() {
       <h3><Anchor id="tabs-props">Props</Anchor></h3>
 
       <h4><Anchor id="tabs-props-area">Tabs</Anchor></h4>
-      <PropTable component="Tabs"/>
+      <PropTable component="Tabs" />
 
       <h4><Anchor id="tabs-props-pane">Tab</Anchor></h4>
-      <PropTable component="Tab"/>
+      <PropTable component="Tab" />
 
       <h4><Anchor id="tabs-props-pane">TabContainer</Anchor></h4>
-      <PropTable component="TabContainer"/>
+      <PropTable component="TabContainer" />
 
       <h4><Anchor id="tabs-props-pane">TabContent</Anchor></h4>
-      <PropTable component="TabContent"/>
+      <PropTable component="TabContent" />
 
       <h4><Anchor id="tabs-props-pane">TabPane</Anchor></h4>
-      <PropTable component="TabPane"/>
+      <PropTable component="TabPane" />
     </div>
   );
 }

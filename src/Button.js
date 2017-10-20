@@ -35,7 +35,7 @@ class Button extends React.Component {
       <SafeAnchor
         {...elementProps}
         className={classNames(
-          className, elementProps.disabled && 'disabled'
+          className, elementProps.disabled && 'disabled',
         )}
       />
     );
@@ -80,7 +80,7 @@ export default bsClass('btn',
     bsStyles(
       [...Object.values(State), Style.DEFAULT, Style.PRIMARY, Style.LINK],
       Style.DEFAULT,
-      Button
-    )
-  )
+      Button,
+    ),
+  ),
 );

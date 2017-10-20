@@ -22,5 +22,5 @@ class Well extends React.Component {
 }
 
 export default bsClass('well',
-  bsSizes([Size.LARGE, Size.SMALL], Well)
+  bsSizes([Size.LARGE, Size.SMALL], Well),
 );

@@ -4,7 +4,7 @@ const webpack = require('webpack');
 
 const webpackConfigBase = require('./webpack/base.config').default;
 
-module.exports = config => {
+module.exports = (config) => {
   const { env } = process;
 
   config.set({

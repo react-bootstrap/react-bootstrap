@@ -1,10 +1,5 @@
 import { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
-import tsp from 'teaspoon';
-
-tsp.fn.log = function log() {
-  return this;
-};
 
 export function shouldWarn(about) {
   console.error.expected.push(about); // eslint-disable-line no-console
@@ -22,11 +17,8 @@ export function render(element, mountPoint) {
   let instance = ReactDOM.render(element, mount);
 
   if (instance && !instance.renderWithProps) {
-    instance.renderWithProps = newProps => {
-
-      return render(
-        cloneElement(element, newProps), mount);
-    };
+    instance.renderWithProps = newProps => render(
+      cloneElement(element, newProps), mount);
   }
 
   return instance;

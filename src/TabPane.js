@@ -23,10 +23,10 @@ const propTypes = {
    */
   animation: PropTypes.oneOfType([PropTypes.bool, elementType]),
 
-  /** @private **/
+  /** @private * */
   id: PropTypes.string,
 
-  /** @private **/
+  /** @private * */
   'aria-labelledby': PropTypes.string,
 
   /**
@@ -146,6 +146,15 @@ class TabPane extends React.Component {
     }
   }
 
+  getAnimation() {
+    if (this.props.animation != null) {
+      return this.props.animation;
+    }
+
+    const tabContent = this.context.$bs_tabContent;
+    return tabContent && tabContent.animation;
+  }
+
   handleEnter() {
     const tabContent = this.context.$bs_tabContent;
     if (!tabContent) {
@@ -163,15 +172,6 @@ class TabPane extends React.Component {
 
     tabContent.onPaneExited(this);
     this.in = false;
-  }
-
-  getAnimation() {
-    if (this.props.animation != null) {
-      return this.props.animation;
-    }
-
-    const tabContent = this.context.$bs_tabContent;
-    return tabContent && tabContent.animation;
   }
 
   isActive() {
@@ -235,7 +235,7 @@ class TabPane extends React.Component {
         'generated `id` and `aria-labelledby` attributes for the sake of ' +
         'proper component accessibility. Any provided ones will be ignored. ' +
         'To control these attributes directly provide a `generateChildId` ' +
-        'prop to the parent `<TabContainer>`.'
+        'prop to the parent `<TabContainer>`.',
       );
 
       elementProps.id = tabContainer.getPaneId(eventKey);

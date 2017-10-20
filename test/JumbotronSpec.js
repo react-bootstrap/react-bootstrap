@@ -9,7 +9,7 @@ describe('<Jumbotron>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Jumbotron>
         <strong>Content</strong>
-      </Jumbotron>
+      </Jumbotron>,
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
@@ -20,7 +20,7 @@ describe('<Jumbotron>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Jumbotron>
         Content
-      </Jumbotron>
+      </Jumbotron>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bjumbotron\b/));
   });
@@ -29,7 +29,7 @@ describe('<Jumbotron>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Jumbotron componentClass="section">
         <strong>Content</strong>
-      </Jumbotron>
+      </Jumbotron>,
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');
   });

@@ -1,6 +1,6 @@
 import 'colors';
-import { exec } from '../exec';
 import fsp from 'fs-promise';
+import { exec } from '../exec';
 import { srcRoot, esRoot } from '../constants';
 import buildBabel from '../buildBabel';
 
@@ -14,14 +14,14 @@ export default function BuildES() {
       presets: [
         ['es2015', { loose: true, modules: false }],
         'stage-1',
-        'react'
+        'react',
       ],
       plugins: [
         'dev-expression',
         'transform-runtime',
         'transform-es3-member-expression-literals',
-        'transform-es3-property-literals'
-      ]
+        'transform-es3-property-literals',
+      ],
     }))
     .then(() => console.log('Built: '.cyan + 'es module'.green));
 }

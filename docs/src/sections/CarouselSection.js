@@ -23,13 +23,13 @@ export default function CarouselSection() {
       <h3><Anchor id="carousels-props">Props</Anchor></h3>
 
       <h4><Anchor id="carousels-props-carousel">Carousel</Anchor></h4>
-      <PropTable component="Carousel"/>
+      <PropTable component="Carousel" />
 
       <h4><Anchor id="carousels-props-item">Carousel.Item</Anchor></h4>
-      <PropTable component="CarouselItem"/>
+      <PropTable component="CarouselItem" />
 
       <h4><Anchor id="carousels-props-caption">Carousel.Caption</Anchor></h4>
-      <PropTable component="Carousel.Caption"/>
+      <PropTable component="Carousel.Caption" />
     </div>
   );
 }

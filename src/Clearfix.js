@@ -55,7 +55,7 @@ class Clearfix extends React.Component {
 
     const classes = getClassSet(bsProps);
 
-    DEVICE_SIZES.forEach(size => {
+    DEVICE_SIZES.forEach((size) => {
       const propName = `visible${capitalize(size)}Block`;
       if (elementProps[propName]) {
         classes[`visible-${size}-block`] = true;

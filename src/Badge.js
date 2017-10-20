@@ -18,7 +18,7 @@ class Badge extends React.Component {
   hasContent(children) {
     let result = false;
 
-    React.Children.forEach(children, child => {
+    React.Children.forEach(children, (child) => {
       if (result) {
         return;
       }

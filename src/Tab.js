@@ -15,7 +15,7 @@ const propTypes = {
   /**
    * tabClassName is used as className for the associated NavItem
    */
-  tabClassName: PropTypes.string
+  tabClassName: PropTypes.string,
 };
 
 class Tab extends React.Component {

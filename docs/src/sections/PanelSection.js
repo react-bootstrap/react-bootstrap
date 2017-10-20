@@ -63,28 +63,28 @@ export default function PanelSection() {
       <h3><Anchor id="panels-props">Props</Anchor></h3>
 
       <h4><Anchor id="panels-props-accordion">Panels</Anchor></h4>
-      <PropTable component="Panel"/>
+      <PropTable component="Panel" />
 
       <h4><Anchor id="panels-props-panel-heading">Panel.Heading</Anchor></h4>
-      <PropTable component="PanelHeading"/>
+      <PropTable component="PanelHeading" />
 
       <h4><Anchor id="panels-props-panel-title">Panel.Title</Anchor></h4>
-      <PropTable component="PanelTitle"/>
+      <PropTable component="PanelTitle" />
 
       <h4><Anchor id="panels-props-panel-toggle">Panel.Toggle</Anchor></h4>
-      <PropTable component="PanelToggle"/>
+      <PropTable component="PanelToggle" />
 
       <h4><Anchor id="panels-props-panel-collapse">Panel.Collapse</Anchor></h4>
-      <PropTable component="PanelCollapse"/>
+      <PropTable component="PanelCollapse" />
 
       <h4><Anchor id="panels-props-panel-body">Panel.Body</Anchor></h4>
-      <PropTable component="PanelBody"/>
+      <PropTable component="PanelBody" />
 
       <h4><Anchor id="panels-props-panel-footer">Panel.Footer</Anchor></h4>
-      <PropTable component="PanelFooter"/>
+      <PropTable component="PanelFooter" />
 
       <h4><Anchor id="panels-props-group">PanelGroup</Anchor></h4>
-      <PropTable component="PanelGroup"/>
+      <PropTable component="PanelGroup" />
     </div>
   );
 }

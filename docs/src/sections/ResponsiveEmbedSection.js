@@ -18,7 +18,7 @@ export default function ResponsiveEmbedSection() {
       <ReactPlayground codeText={Samples.ResponsiveEmbed} />
 
       <h3><Anchor id="responsive-embed-props">Props</Anchor></h3>
-      <PropTable component="ResponsiveEmbed"/>
+      <PropTable component="ResponsiveEmbed" />
     </div>
   );
 }

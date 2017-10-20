@@ -12,7 +12,7 @@ export default function BadgeSection() {
         <Anchor id="badges">Badges</Anchor> <small>Badge</small>
       </h2>
 
-      <p>Easily highlight new or unread items by adding a <code>{"<Badge>"}</code> to links, Bootstrap navs, and more.</p>
+      <p>Easily highlight new or unread items by adding a <code>{'<Badge>'}</code> to links, Bootstrap navs, and more.</p>
       <ReactPlayground codeText={Samples.Badge} />
       <div className="bs-callout bs-callout-info">
         <h4>Cross-browser compatibility</h4>

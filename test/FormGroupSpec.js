@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
-import $ from 'teaspoon';
+import { shallow } from 'enzyme';
 
 import FormControl from '../src/FormControl';
 import FormGroup from '../src/FormGroup';
@@ -11,7 +11,7 @@ describe('<FormGroup>', () => {
       <FormGroup>
         <span className="child1" />
         <span className="child2" />
-      </FormGroup>
+      </FormGroup>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'child1'));
@@ -22,7 +22,7 @@ describe('<FormGroup>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <FormGroup>
         <span />
-      </FormGroup>
+      </FormGroup>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
@@ -32,7 +32,7 @@ describe('<FormGroup>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <FormGroup bsSize="small">
         <span />
-      </FormGroup>
+      </FormGroup>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
@@ -41,7 +41,7 @@ describe('<FormGroup>', () => {
     instance = ReactTestUtils.renderIntoDocument(
       <FormGroup bsSize="large">
         <span />
-      </FormGroup>
+      </FormGroup>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'form-group'));
@@ -67,65 +67,59 @@ describe('<FormGroup>', () => {
     },
   ].forEach(({ props, className }) => {
     it(`does not render ${className} class`, () => {
-      $(
+      shallow(
         <FormGroup>
           <span />
-        </FormGroup>
+        </FormGroup>,
       )
-        .shallowRender()
-        .none(`.${className}`);
+        .assertNone(`.${className}`);
     });
 
     it(`renders with ${className} class`, () => {
-      $(
+      shallow(
         <FormGroup {...props}>
           <span />
-        </FormGroup>
+        </FormGroup>,
       )
-        .shallowRender()
-        .single(`.${className}`);
+        .assertSingle(`.${className}`);
     });
   });
 
   describe('feedback', () => {
     it('should not have feedback without feedback component', () => {
-      $(
-        <FormGroup validationState="success" />
+      shallow(
+        <FormGroup validationState="success" />,
       )
-        .shallowRender()
-        .none('.has-feedback');
+        .assertNone('.has-feedback');
     });
 
     it('should have feedback with feedback component', () => {
-      $(
+      shallow(
         <FormGroup validationState="success">
           <FormControl.Feedback />
-        </FormGroup>
+        </FormGroup>,
       )
-        .shallowRender()
-        .single('.has-feedback');
+        .assertSingle('.has-feedback');
     });
 
     it('should have feedback with nested feedback component', () => {
-      $(
+      shallow(
         <FormGroup validationState="success">
           <div>
             <FormControl.Feedback />
           </div>
-        </FormGroup>
+        </FormGroup>,
       )
-        .shallowRender()
-        .single('.has-feedback');
+        .assertSingle('.has-feedback');
     });
 
     it('should have feedback with custom feedback component', () => {
-      $(
+      shallow(
         <FormGroup validationState="success">
           <div bsRole="feedback" />
-        </FormGroup>
+        </FormGroup>,
       )
-        .shallowRender()
-        .single('.has-feedback');
+        .assertSingle('.has-feedback');
     });
   });
 });

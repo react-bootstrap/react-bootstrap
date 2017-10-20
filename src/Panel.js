@@ -13,7 +13,7 @@ import Footer from './PanelFooter';
 import Toggle from './PanelToggle';
 import Collapse from './PanelCollapse';
 
-const defaultGetId = (id, type) => id ? `${id}--${type}` : null;
+const defaultGetId = (id, type) => (id ? `${id}--${type}` : null);
 
 const propTypes = {
   /**
@@ -43,7 +43,7 @@ const contextTypes = {
     getId: PropTypes.func,
     activeKey: PropTypes.any,
     onToggle: PropTypes.func,
-  })
+  }),
 };
 
 
@@ -54,7 +54,7 @@ const childContextTypes = {
     bsClass: PropTypes.string,
     onToggle: PropTypes.func,
     expanded: PropTypes.bool,
-  })
+  }),
 };
 
 class Panel extends React.Component {
@@ -85,8 +85,17 @@ class Panel extends React.Component {
         bsClass: this.props.bsClass,
         expanded: this.getExpanded(),
         onToggle: this.handleToggle,
-      }
+      },
     };
+  }
+
+  getExpanded() {
+    const { eventKey } = this.props;
+    const { activeKey } = this.context.$bs_panelGroup || {};
+
+    return this.props.expanded != null || activeKey === undefined ?
+      this.props.expanded :
+      activeKey === eventKey;
   }
 
   handleToggle(e) {
@@ -99,19 +108,10 @@ class Panel extends React.Component {
     }
   }
 
-  getExpanded() {
-    const { eventKey } = this.props;
-    const { activeKey } = this.context.$bs_panelGroup || {};
-
-    return this.props.expanded != null || activeKey === undefined ?
-      this.props.expanded :
-      activeKey === eventKey;
-  }
-
   render() {
     let { className, children } = this.props;
     const [bsProps, props] = splitBsPropsAndOmit(this.props,
-      ['onToggle', 'eventKey', 'expanded']
+      ['onToggle', 'eventKey', 'expanded'],
     );
 
     return (
@@ -119,7 +119,7 @@ class Panel extends React.Component {
         {...props}
         className={classNames(
           className,
-          getClassSet(bsProps)
+          getClassSet(bsProps),
         )}
       >
         {children}
@@ -133,17 +133,17 @@ Panel.propTypes = propTypes;
 Panel.contextTypes = contextTypes;
 Panel.childContextTypes = childContextTypes;
 
-Panel = uncontrollable(
+const UncontrolledPanel = uncontrollable(
   bsClass('panel',
     bsStyles(
       [...Object.values(State), Style.DEFAULT, Style.PRIMARY],
       Style.DEFAULT,
-      Panel
-    )
+      Panel,
+    ),
   ),
-  { expanded: 'onToggle' }
+  { expanded: 'onToggle' },
 );
 
-Object.assign(Panel, { Heading, Title, Body, Footer, Toggle, Collapse });
+Object.assign(UncontrolledPanel, { Heading, Title, Body, Footer, Toggle, Collapse });
 
-export default Panel;
+export default UncontrolledPanel;

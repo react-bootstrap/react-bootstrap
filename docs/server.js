@@ -7,7 +7,7 @@ import ip from 'ip';
 import path from 'path';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import {match, RouterContext} from 'react-router';
+import { match, RouterContext } from 'react-router';
 
 import Root from './src/Root';
 import routes from './src/Routes';
@@ -30,27 +30,27 @@ if (development) {
     proxy.web(req, res, { target });
   });
 
-  proxy.on('error', e => {
+  proxy.on('error', (e) => {
     console.log('Could not connect to webpack proxy'.red);
     console.log(e.toString().red);
   });
 
   console.log('Prop data generation started:'.green);
 
-  metadata().then(props => {
+  metadata().then((props) => {
     console.log('Prop data generation finished:'.green);
     Root.propData = props;
 
-    app.use(function renderApp(req, res) {
+    app.use((req, res) => {
       res.header('Access-Control-Allow-Origin', target);
       res.header('Access-Control-Allow-Headers', 'X-Requested-With');
 
       const location = req.url;
-      match({routes, location}, (error, redirectLocation, renderProps) => {
+      match({ routes, location }, (error, redirectLocation, renderProps) => {
         const html = ReactDOMServer.renderToString(
-          <RouterContext {...renderProps} />
+          <RouterContext {...renderProps} />,
         );
-        res.send('<!doctype html>' + html);
+        res.send(`<!doctype html>${html}`);
       });
     });
   });
@@ -59,7 +59,7 @@ if (development) {
 }
 
 app.listen(port, () => {
-  console.log(`Server started at:`);
+  console.log('Server started at:');
   console.log(`- http://localhost:${port}`);
   console.log(`- http://${ip.address()}:${port}`);
 });

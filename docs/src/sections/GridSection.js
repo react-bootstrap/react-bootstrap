@@ -26,16 +26,16 @@ export default function GridSection() {
       <h3><Anchor id="grid-props">Props</Anchor></h3>
 
       <h4><Anchor id="grid-props-grid">Grid</Anchor></h4>
-      <PropTable component="Grid"/>
+      <PropTable component="Grid" />
 
       <h4><Anchor id="grid-props-row">Row</Anchor></h4>
-      <PropTable component="Row"/>
+      <PropTable component="Row" />
 
       <h4><Anchor id="grid-props-col">Col</Anchor></h4>
-      <PropTable component="Col"/>
+      <PropTable component="Col" />
 
       <h4><Anchor id="grid-props-col">Clearfix</Anchor></h4>
-      <PropTable component="Clearfix"/>
+      <PropTable component="Clearfix" />
     </div>
   );
 }

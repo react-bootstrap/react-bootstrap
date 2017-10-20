@@ -9,7 +9,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Breadcrumb.Item href="#">
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
@@ -20,7 +20,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Breadcrumb.Item active>
         Active Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     assert.include(ReactDOM.findDOMNode(instance).className, 'active');
@@ -31,7 +31,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Breadcrumb.Item href="#" active>
         Active Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     assert.include(ReactDOM.findDOMNode(instance).className, 'active');
@@ -47,7 +47,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Breadcrumb.Item className="custom-one custom-two">
         Active Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     const classes = ReactDOM.findDOMNode(instance).className;
@@ -63,7 +63,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Breadcrumb.Item href="#" onClick={handleClick}>
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     const anchorNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
@@ -74,7 +74,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Breadcrumb.Item href="#" id="test-link-id">
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     const linkNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
@@ -85,7 +85,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Breadcrumb.Item href="http://getbootstrap.com/components/#breadcrumbs">
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     const linkNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
@@ -96,7 +96,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Breadcrumb.Item title="test-title" href="http://getbootstrap.com/components/#breadcrumbs">
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     const linkNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
@@ -107,7 +107,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Breadcrumb.Item title="test-title" href="/hi">
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     const liNode = ReactDOM.findDOMNode(instance);
@@ -119,7 +119,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Breadcrumb.Item target="_blank" href="http://getbootstrap.com/components/#breadcrumbs">
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     const linkNode = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');

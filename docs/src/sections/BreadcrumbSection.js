@@ -22,7 +22,7 @@ export default function BreadcrumbSection() {
       <p><code>Breadcrumb</code> component itself doesn't have any specific public properties</p>
 
       <h4><Anchor id="breadcrumbs-props-breadcrumb-item">Breadcrumb.Item</Anchor></h4>
-      <PropTable component="BreadcrumbItem"/>
+      <PropTable component="BreadcrumbItem" />
     </div>
   );
 }

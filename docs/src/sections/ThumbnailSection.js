@@ -23,7 +23,7 @@ export default function ThumbnailSection() {
       <ReactPlayground codeText={Samples.ThumbnailDiv} />
 
       <h3><Anchor id="thumbnail-props">Props</Anchor></h3>
-      <PropTable component="Thumbnail"/>
+      <PropTable component="Thumbnail" />
     </div>
   );
 }

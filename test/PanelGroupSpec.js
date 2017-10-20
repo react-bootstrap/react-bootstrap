@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 
-import tsp from 'teaspoon';
+import { mount } from 'enzyme';
 
 import Panel from '../src/Panel';
 import PanelGroup from '../src/PanelGroup';
@@ -11,7 +11,7 @@ describe('<PanelGroup>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup bsStyle="default" id="panel">
         <Panel><Panel.Body>Panel 1</Panel.Body></Panel>
-      </PanelGroup>
+      </PanelGroup>,
     );
 
     let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
@@ -25,7 +25,7 @@ describe('<PanelGroup>', () => {
         <Panel bsStyle="primary">
           <Panel.Body>Panel 1</Panel.Body>
         </Panel>
-      </PanelGroup>
+      </PanelGroup>,
     );
 
     let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
@@ -34,16 +34,15 @@ describe('<PanelGroup>', () => {
   });
 
   it('Should not collapse panel by bubbling onSelect callback', () => {
-    tsp(
+    mount(
       <PanelGroup accordion id="panel" onSelect={() => { throw new Error(); }}>
         <Panel>
           <input type="text" className="changeme" />
         </Panel>
-      </PanelGroup>
+      </PanelGroup>,
     )
-    .render()
-    .single('input.changeme')
-    .trigger('select');
+      .assertSingle('input.changeme')
+      .simulate('select');
   });
 
   it('Should call onSelect handler with eventKey', (done) => {
@@ -53,7 +52,7 @@ describe('<PanelGroup>', () => {
       done();
     }
 
-    tsp(
+    mount(
       <PanelGroup accordion onSelect={handleSelect} id="panel">
         <Panel eventKey="1">
           <Panel.Heading>
@@ -62,18 +61,17 @@ describe('<PanelGroup>', () => {
 
           <Panel.Body collapsible>Panel 1</Panel.Body>
         </Panel>
-      </PanelGroup>
+      </PanelGroup>,
     )
-    .render()
-    .find('a')
-    .trigger('click');
+      .find('a')
+      .simulate('click');
   });
 
   describe('Web Accessibility', () => {
-    let panelBodies, panelGroup, headers, links;
+    let panelBodies, panelGroup, headers, links; // eslint-disable-line
 
     beforeEach(() => {
-      const inst = tsp(
+      const inst = mount(
         <PanelGroup accordion defaultActiveKey="1" id="panel">
           <Panel eventKey="1">
             <Panel.Heading>
@@ -89,14 +87,13 @@ describe('<PanelGroup>', () => {
 
             <Panel.Body collapsible>Panel 2</Panel.Body>
           </Panel>
-        </PanelGroup>
-      )
-      .render();
+        </PanelGroup>,
+      );
 
-      panelGroup = inst.dom();
-      panelBodies = inst.find('.panel-collapse').dom();
-      headers = inst.find('.panel-heading').dom();
-      links = inst.find('.panel-heading a').dom();
+      panelGroup = inst.getDOMNode();
+      panelBodies = inst.find('.panel-collapse').map(n => n.getDOMNode());
+      headers = inst.find('.panel-heading').map(n => n.getDOMNode());
+      links = inst.find('.panel-heading a').map(n => n.getDOMNode());
     });
 
     it('Should have a role of tablist', () => {

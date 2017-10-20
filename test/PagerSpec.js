@@ -7,7 +7,7 @@ import Pager from '../src/Pager';
 describe('Pager', () => {
   it('Should output a unordered list as root element with class "pager"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Pager/>
+      <Pager />,
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'UL');
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pager'));
@@ -17,7 +17,7 @@ describe('Pager', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Pager>
         <Pager.Item href="#">Top</Pager.Item>
-      </Pager>
+      </Pager>,
     );
     assert.equal(ReactDOM.findDOMNode(instance).children.length, 1);
     assert.equal(ReactDOM.findDOMNode(instance).children[0].nodeName, 'LI');
@@ -29,7 +29,7 @@ describe('Pager', () => {
         <Pager.Item previous href="#">Previous</Pager.Item>
         <Pager.Item disabled href="#">Top</Pager.Item>
         <Pager.Item next href="#">Next</Pager.Item>
-      </Pager>
+      </Pager>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'previous'));
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled'));
@@ -46,13 +46,13 @@ describe('Pager', () => {
       <Pager onSelect={handleSelect}>
         <Pager.Item eventKey={1} href="#prev">Previous</Pager.Item>
         <Pager.Item eventKey={2} href="#next">Next</Pager.Item>
-      </Pager>
+      </Pager>,
     );
 
     let items = ReactTestUtils.scryRenderedComponentsWithType(instance, Pager.Item);
 
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithTag(items[1], 'a')
+      ReactTestUtils.findRenderedDOMComponentWithTag(items[1], 'a'),
     );
   });
 });

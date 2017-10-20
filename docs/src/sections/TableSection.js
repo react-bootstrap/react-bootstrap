@@ -20,7 +20,7 @@ export default function TableSection() {
       <ReactPlayground codeText={Samples.TableResponsive} />
 
       <h3><Anchor id="table-props">Props</Anchor></h3>
-      <PropTable component="Table"/>
+      <PropTable component="Table" />
     </div>
   );
 }

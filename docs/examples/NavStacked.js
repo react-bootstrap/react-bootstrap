@@ -1,5 +1,5 @@
 function handleSelect(selectedKey) {
-  alert('selected ' + selectedKey);
+  alert(`selected ${selectedKey}`);
 }
 
 const navInstance = (

@@ -7,7 +7,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  label: 'Close'
+  label: 'Close',
 };
 
 class CloseButton extends React.Component {

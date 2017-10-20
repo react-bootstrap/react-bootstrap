@@ -10,7 +10,7 @@ describe('<CloseButton>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <CloseButton
         onClick={noOp}
-      />
+      />,
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'BUTTON');
   });
@@ -20,7 +20,7 @@ describe('<CloseButton>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <CloseButton
         onClick={noOp}
-      />
+      />,
     );
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('type'), 'button');
   });
@@ -30,7 +30,7 @@ describe('<CloseButton>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <CloseButton
         onClick={noOp}
-      />
+      />,
     );
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('class'), 'close');
   });
@@ -42,7 +42,7 @@ describe('<CloseButton>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <CloseButton
         onClick={doneOp}
-      />
+      />,
     );
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(instance));
   });
@@ -52,7 +52,7 @@ describe('<CloseButton>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <CloseButton
         onClick={noOp}
-      />
+      />,
     );
     assert.equal(ReactDOM.findDOMNode(instance).children[0].getAttribute('aria-hidden'), 'true');
   });
@@ -62,7 +62,7 @@ describe('<CloseButton>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <CloseButton
         onClick={noOp}
-      />
+      />,
     );
     assert.equal(ReactDOM.findDOMNode(instance).children[0].innerHTML.charCodeAt(0), '215');
   });
@@ -72,7 +72,7 @@ describe('<CloseButton>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <CloseButton
         onClick={noOp}
-      />
+      />,
     );
     assert.equal(ReactDOM.findDOMNode(instance).children[1].getAttribute('class'), 'sr-only');
   });
@@ -82,7 +82,7 @@ describe('<CloseButton>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <CloseButton
         onClick={noOp}
-      />
+      />,
     );
     assert.equal(ReactDOM.findDOMNode(instance).children[1].innerHTML, 'Close');
   });
@@ -94,7 +94,7 @@ describe('<CloseButton>', () => {
       <CloseButton
         onClick={noOp}
         label={label}
-      />
+      />,
     );
     assert.equal(ReactDOM.findDOMNode(instance).children[1].innerHTML, label);
   });

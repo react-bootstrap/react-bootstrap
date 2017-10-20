@@ -44,7 +44,7 @@ class CustomMenu extends React.Component {
     return (
       <div className="dropdown-menu" style={{ padding: '' }}>
         <FormControl
-          ref={c => { this.input = c; }}
+          ref={(c) => { this.input = c; }}
           type="text"
           placeholder="Type to filter..."
           onChange={this.onChange}

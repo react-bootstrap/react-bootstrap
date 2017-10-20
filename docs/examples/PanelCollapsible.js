@@ -2,14 +2,14 @@ class Example extends React.Component {
   constructor(...args) {
     super(...args);
     this.state = {
-      open: true
+      open: true,
     };
   }
 
   render() {
     return (
       <div>
-        <Button onClick={ ()=> this.setState({ open: !this.state.open })}>
+        <Button onClick={() => this.setState({ open: !this.state.open })}>
           Click to toggle
         </Button>
         <br />
@@ -58,4 +58,4 @@ class Example extends React.Component {
   }
 }
 
-ReactDOM.render(<Example/>, mountNode);
+ReactDOM.render(<Example />, mountNode);

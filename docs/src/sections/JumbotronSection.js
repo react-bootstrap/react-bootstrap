@@ -16,7 +16,7 @@ export default function JumbotronSection() {
       <ReactPlayground codeText={Samples.Jumbotron} />
 
       <h3><Anchor id="jumbotron-props">Props</Anchor></h3>
-      <PropTable component="Jumbotron"/>
+      <PropTable component="Jumbotron" />
     </div>
   );
 }

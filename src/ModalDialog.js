@@ -50,5 +50,5 @@ class ModalDialog extends React.Component {
 ModalDialog.propTypes = propTypes;
 
 export default bsClass('modal',
-  bsSizes([Size.LARGE, Size.SMALL], ModalDialog)
+  bsSizes([Size.LARGE, Size.SMALL], ModalDialog),
 );

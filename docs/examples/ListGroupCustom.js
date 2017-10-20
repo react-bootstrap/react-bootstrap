@@ -3,11 +3,12 @@ const CustomComponent = React.createClass({
     return (
       <li
         className="list-group-item"
-        onClick={() => {}}>
+        onClick={() => {}}
+      >
         {this.props.children}
       </li>
     );
-  }
+  },
 });
 
 const listgroupInstance = (

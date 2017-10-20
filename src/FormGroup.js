@@ -28,7 +28,7 @@ class FormGroup extends React.Component {
     return {
       $bs_formGroup: {
         controlId,
-        validationState
+        validationState,
       },
     };
   }
@@ -36,7 +36,7 @@ class FormGroup extends React.Component {
   hasFeedback(children) {
     return ValidComponentChildren.some(children, child => (
       child.props.bsRole === 'feedback' ||
-      child.props.children && this.hasFeedback(child.props.children)
+      (child.props.children && this.hasFeedback(child.props.children))
     ));
   }
 
@@ -67,5 +67,5 @@ FormGroup.propTypes = propTypes;
 FormGroup.childContextTypes = childContextTypes;
 
 export default bsClass('form-group',
-  bsSizes([Size.LARGE, Size.SMALL], FormGroup)
+  bsSizes([Size.LARGE, Size.SMALL], FormGroup),
 );

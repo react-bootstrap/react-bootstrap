@@ -40,7 +40,7 @@ const propTypes = {
     ({ justified, navbar }) => (
       justified && navbar ?
         Error('justified navbar `Nav`s are not supported') : null
-    )
+    ),
   ),
 
   /**
@@ -48,8 +48,8 @@ const propTypes = {
    *
    * ```js
    * function (
-   * 	Any eventKey,
-   * 	SyntheticEvent event?
+   *  Any eventKey,
+   *  SyntheticEvent event?
    * )
    * ```
    */
@@ -133,30 +133,20 @@ class Nav extends React.Component {
     activeNode.firstChild.focus();
   }
 
-  handleTabKeyDown(onSelect, event) {
-    let nextActiveChild;
+  getActiveProps() {
+    const tabContainer = this.context.$bs_tabContainer;
 
-    switch (event.keyCode) {
-      case keycode.codes.left:
-      case keycode.codes.up:
-        nextActiveChild = this.getNextActiveChild(-1);
-        break;
-      case keycode.codes.right:
-      case keycode.codes.down:
-        nextActiveChild = this.getNextActiveChild(1);
-        break;
-      default:
-        // It was a different key; don't handle this keypress.
-        return;
+    if (tabContainer) {
+      warning(this.props.activeKey == null && !this.props.activeHref,
+        'Specifying a `<Nav>` `activeKey` or `activeHref` in the context of ' +
+        'a `<TabContainer>` is not supported. Instead use `<TabContainer ' +
+        `activeKey={${this.props.activeKey}} />\`.`,
+      );
+
+      return tabContainer;
     }
 
-    event.preventDefault();
-
-    if (onSelect && nextActiveChild && nextActiveChild.props.eventKey != null) {
-      onSelect(nextActiveChild.props.eventKey);
-    }
-
-    this._needsRefocus = true;
+    return this.props;
   }
 
   getNextActiveChild(offset) {
@@ -189,34 +179,6 @@ class Nav extends React.Component {
     return validChildren[nextIndex];
   }
 
-  getActiveProps() {
-    const tabContainer = this.context.$bs_tabContainer;
-
-    if (tabContainer) {
-      warning(this.props.activeKey == null && !this.props.activeHref,
-        'Specifying a `<Nav>` `activeKey` or `activeHref` in the context of ' +
-        'a `<TabContainer>` is not supported. Instead use `<TabContainer ' +
-        `activeKey={${this.props.activeKey}} />\`.`
-      );
-
-      return tabContainer;
-    }
-
-    return this.props;
-  }
-
-  isActive({ props }, activeKey, activeHref) {
-    if (
-      props.active ||
-      activeKey != null && props.eventKey === activeKey ||
-      activeHref && props.href === activeHref
-    ) {
-      return true;
-    }
-
-    return props.active;
-  }
-
   getTabProps(child, tabContainer, navRole, active, onSelect) {
     if (!tabContainer && navRole !== 'tablist') {
       // No tab props here.
@@ -238,7 +200,7 @@ class Nav extends React.Component {
         'generated `id` and `aria-controls` attributes for the sake of ' +
         'proper component accessibility. Any provided ones will be ignored. ' +
         'To control these attributes directly, provide a `generateChildId` ' +
-        'prop to the parent `<TabContainer>`.'
+        'prop to the parent `<TabContainer>`.',
       );
 
       id = tabContainer.getTabId(eventKey);
@@ -248,7 +210,7 @@ class Nav extends React.Component {
     if (navRole === 'tablist') {
       role = role || 'tab';
       onKeyDown = createChainedFunction(
-        event => this.handleTabKeyDown(onSelect, event), onKeyDown
+        event => this.handleTabKeyDown(onSelect, event), onKeyDown,
       );
       tabIndex = active ? tabIndex : -1;
     }
@@ -260,6 +222,44 @@ class Nav extends React.Component {
       'aria-controls': controls,
       tabIndex,
     };
+  }
+
+  handleTabKeyDown(onSelect, event) {
+    let nextActiveChild;
+
+    switch (event.keyCode) {
+      case keycode.codes.left:
+      case keycode.codes.up:
+        nextActiveChild = this.getNextActiveChild(-1);
+        break;
+      case keycode.codes.right:
+      case keycode.codes.down:
+        nextActiveChild = this.getNextActiveChild(1);
+        break;
+      default:
+        // It was a different key; don't handle this keypress.
+        return;
+    }
+
+    event.preventDefault();
+
+    if (onSelect && nextActiveChild && nextActiveChild.props.eventKey != null) {
+      onSelect(nextActiveChild.props.eventKey);
+    }
+
+    this._needsRefocus = true;
+  }
+
+  isActive({ props }, activeKey, activeHref) {
+    if (
+      props.active ||
+      (activeKey != null && props.eventKey === activeKey) ||
+      (activeHref && props.href === activeHref)
+    ) {
+      return true;
+    }
+
+    return props.active;
   }
 
   render() {
@@ -316,18 +316,18 @@ class Nav extends React.Component {
         role={role}
         className={classNames(className, classes)}
       >
-        {ValidComponentChildren.map(children, child => {
+        {ValidComponentChildren.map(children, (child) => {
           const active = this.isActive(child, activeKey, activeHref);
           const childOnSelect = createChainedFunction(
             child.props.onSelect,
             onSelect,
             navbar && navbar.onSelect,
-            tabContainer && tabContainer.onSelect
+            tabContainer && tabContainer.onSelect,
           );
 
           return cloneElement(child, {
             ...this.getTabProps(
-              child, tabContainer, role, active, childOnSelect
+              child, tabContainer, role, active, childOnSelect,
             ),
             active,
             activeKey,
@@ -345,5 +345,5 @@ Nav.defaultProps = defaultProps;
 Nav.contextTypes = contextTypes;
 
 export default bsClass('nav',
-  bsStyles(['tabs', 'pills'], Nav)
+  bsStyles(['tabs', 'pills'], Nav),
 );

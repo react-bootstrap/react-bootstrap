@@ -7,7 +7,7 @@ import Pager from '../src/Pager';
 describe('PagerItem', () => {
   it('Should output a "list item" as root element, and an "anchor" as a child item', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Pager.Item href="#">Text</Pager.Item>
+      <Pager.Item href="#">Text</Pager.Item>,
     );
 
     let node = ReactDOM.findDOMNode(instance);
@@ -18,21 +18,21 @@ describe('PagerItem', () => {
 
   it('Should output "disabled" attribute as a class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Pager.Item disabled href="#">Text</Pager.Item>
+      <Pager.Item disabled href="#">Text</Pager.Item>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled'));
   });
 
   it('Should output "next" attribute as a class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Pager.Item previous href="#">Previous</Pager.Item>
+      <Pager.Item previous href="#">Previous</Pager.Item>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'previous'));
   });
 
   it('Should output "previous" attribute as a class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Pager.Item next href="#">Next</Pager.Item>
+      <Pager.Item next href="#">Next</Pager.Item>,
     );
     assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'next'));
   });
@@ -43,7 +43,7 @@ describe('PagerItem', () => {
       done();
     }
     let instance = ReactTestUtils.renderIntoDocument(
-      <Pager.Item eventKey={1} onSelect={handleSelect}>Next</Pager.Item>
+      <Pager.Item eventKey={1} onSelect={handleSelect}>Next</Pager.Item>,
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });
@@ -53,14 +53,14 @@ describe('PagerItem', () => {
       throw new Error('onSelect should not be called');
     }
     let instance = ReactTestUtils.renderIntoDocument(
-      <Pager.Item disabled onSelect={handleSelect}>Next</Pager.Item>
+      <Pager.Item disabled onSelect={handleSelect}>Next</Pager.Item>,
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });
 
   it('Should set target attribute on anchor', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Pager.Item next href="#" target="_blank">Next</Pager.Item>
+      <Pager.Item next href="#" target="_blank">Next</Pager.Item>,
     );
 
     let anchor = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a');
@@ -73,7 +73,7 @@ describe('PagerItem', () => {
       done();
     }
     let instance = ReactTestUtils.renderIntoDocument(
-      <Pager.Item eventKey={1} onSelect={handleSelect} target="_blank">Next</Pager.Item>
+      <Pager.Item eventKey={1} onSelect={handleSelect} target="_blank">Next</Pager.Item>,
     );
     ReactTestUtils.Simulate.click(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'a'));
   });

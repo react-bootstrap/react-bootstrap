@@ -48,7 +48,7 @@ const propTypes = {
    * HTML id attribute, required if no `generateChildId` prop
    * is specified.
    */
-  id: generatedId('PanelGroup')
+  id: generatedId('PanelGroup'),
 };
 
 const defaultProps = {
@@ -62,7 +62,7 @@ const childContextTypes = {
     panelRole: PropTypes.string,
     activeKey: PropTypes.any,
     onToggle: PropTypes.func,
-  })
+  }),
 };
 
 class PanelGroup extends React.Component {
@@ -78,7 +78,7 @@ class PanelGroup extends React.Component {
 
     if (accordion) {
       getId = generateChildId
-        || ((key, type) => id ? `${id}-${type}-${key}` : null);
+        || ((key, type) => (id ? `${id}-${type}-${key}` : null));
     }
 
     return {
@@ -89,7 +89,7 @@ class PanelGroup extends React.Component {
         ...(accordion && {
           activeKey,
           onToggle: this.handleSelect,
-        })
+        }),
       },
     };
   }
@@ -121,11 +121,11 @@ class PanelGroup extends React.Component {
         {...elementProps}
         className={classNames(className, classes)}
       >
-        {ValidComponentChildren.map(children, (child) => {
-          return cloneElement(child, {
+        {ValidComponentChildren.map(children, child =>
+          cloneElement(child, {
             bsStyle: child.props.bsStyle || bsProps.bsStyle,
-          });
-        })}
+          }),
+        )}
       </div>
     );
   }
@@ -138,6 +138,6 @@ PanelGroup.childContextTypes = childContextTypes;
 export default uncontrollable(
   bsClass('panel-group', PanelGroup),
   {
-    activeKey: 'onSelect'
-  }
+    activeKey: 'onSelect',
+  },
 );

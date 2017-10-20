@@ -4,7 +4,7 @@ import 'codemirror/mode/jsx/jsx';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, browserHistory} from 'react-router';
+import { Router, browserHistory } from 'react-router';
 
 import Root from './src/Root';
 import routes from './src/Routes';
@@ -31,6 +31,8 @@ Root.assetBaseUrl = window.ASSET_BASE_URL;
 Root.propData = window.PROP_DATA;
 
 ReactDOM.render(
-  <Router history={browserHistory} children={routes} />,
-  document
+  <Router history={browserHistory}>
+    {routes}
+  </Router>,
+  document,
 );
