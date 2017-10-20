@@ -142,6 +142,7 @@ class Modal extends React.Component {
     this.handleExited = this.handleExited.bind(this);
     this.handleWindowResize = this.handleWindowResize.bind(this);
     this.handleDialogClick = this.handleDialogClick.bind(this);
+    this.setModalRef = this.setModalRef.bind(this);
 
     this.state = {
       style: {},
@@ -159,6 +160,10 @@ class Modal extends React.Component {
   componentWillUnmount() {
     // Clean up the listener if we need to.
     this.handleExited();
+  }
+
+  setModalRef(ref) {
+    this._modal = ref;
   }
 
   handleDialogClick(e) {
@@ -232,7 +237,7 @@ class Modal extends React.Component {
     return (
       <BaseModal
         {...baseModalProps}
-        ref={(c) => { this._modal = c; }}
+        ref={this.setModalRef}
         show={show}
         onEntering={createChainedFunction(onEntering, this.handleEntering)}
         onExited={createChainedFunction(onExited, this.handleExited)}
