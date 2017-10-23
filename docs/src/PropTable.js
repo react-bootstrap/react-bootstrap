@@ -7,6 +7,14 @@ import Label from '../../src/Label';
 import Table from '../../src/Table';
 import capitalize from '../../src/utils/capitalize';
 
+import packageJSON from '../../package.json';
+
+let version = packageJSON.version;
+
+if (/docs/.test(version)) {
+  version = version.split('-')[0];
+}
+
 function cleanDocletValue(str) {
   return str.trim().replace(/^\{/, '').replace(/\}$/, '');
 }
@@ -14,6 +22,9 @@ function cleanDocletValue(str) {
 function getPropsData(component, metadata) {
   let componentData = metadata[component] || {};
   let props = componentData.props || {};
+
+  const linkToComponentOnGitHub = `https://github.com/react-bootstrap/react-bootstrap/tree/v${version}/src/${component}.js`;
+  props = merge({}, { linkToComponentOnGitHub }, props);
 
   if (componentData.composes) {
     componentData.composes.forEach((other) => {
@@ -183,7 +194,7 @@ const PropTable = React.createClass({
   render() {
     let propsData = this.propsData;
 
-    if (!Object.keys(propsData).length) {
+    if (Object.keys(propsData).length === 1) {
       return <div className="text-muted"><em>There are no public props for this component.</em></div>;
     }
 
@@ -197,6 +208,13 @@ const PropTable = React.createClass({
             <th>Description</th>
           </tr>
         </thead>
+        <tfoot>
+          <tr>
+            <td colSpan={4}>
+              <a href={propsData.linkToComponentOnGitHub}>View source on GitHub</a>
+            </td>
+          </tr>
+        </tfoot>
         <tbody>
           { this._renderRows(propsData) }
         </tbody>
