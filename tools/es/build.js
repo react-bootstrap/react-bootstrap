@@ -12,11 +12,12 @@ export default function BuildES() {
     .then(() => buildBabel(srcRoot, esRoot, {
       babelrc: false,
       presets: [
-        ['env', {
-          'loose': true,
-          'targets': {
-            'ie': 9,
-            'uglify': true
+        [env, {
+          loose: true,
+          modules: false,
+          targets: {
+            ie: 9,
+            uglify: true
           }
         }],
         'react'
@@ -29,11 +30,6 @@ export default function BuildES() {
         'transform-runtime',
         'add-module-exports'
       ],
-      env: {
-        'test': {
-          'plugins': ['istanbul']
-        }
-      }
     }))
     .then(() => console.log('Built: '.cyan + 'es module'.green));
 }
