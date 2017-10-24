@@ -28,7 +28,6 @@ export default function BuildES() {
         'transform-export-extensions',
         'dev-expression',
         'transform-runtime',
-        'add-module-exports',
       ],
     }))
     .then(() => console.log('Built: '.cyan + 'es module'.green));
