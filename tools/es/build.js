@@ -12,7 +12,7 @@ export default function BuildES() {
     .then(() => buildBabel(srcRoot, esRoot, {
       babelrc: false,
       presets: [
-        [env, {
+        ['env', {
           loose: true,
           modules: false,
           targets: {
