@@ -1,3 +1,12 @@
+## [v0.31.5]
+> 2017-10-24
+
+- **Bugfix:** Fix ES module build ([#2856])
+
+[v0.31.5]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.31.4...v0.31.5
+[#2856]: https://github.com/react-bootstrap/react-bootstrap/pull/2856
+
+
 ## [v0.31.4]
 > 2017-10-24
 
