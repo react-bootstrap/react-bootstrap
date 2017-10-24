@@ -17,10 +17,10 @@ export default function BuildES() {
           modules: false,
           targets: {
             ie: 9,
-            uglify: true
-          }
+            uglify: true,
+          },
         }],
-        'react'
+        'react',
       ],
       plugins: [
         'transform-class-properties',
@@ -28,7 +28,7 @@ export default function BuildES() {
         'transform-export-extensions',
         'dev-expression',
         'transform-runtime',
-        'add-module-exports'
+        'add-module-exports',
       ],
     }))
     .then(() => console.log('Built: '.cyan + 'es module'.green));
