@@ -399,7 +399,7 @@ describe('<Dropdown>', () => {
     class RefDropdown extends React.Component {
       render() {
         return (
-          <Dropdown ref={dropdown => this.dropdown = dropdown.refs.inner} id="test">
+          <Dropdown ref={dropdown => this.dropdown = dropdown.inner} id="test">
             <Dropdown.Toggle ref={toggle => this.toggle = toggle} />
             <Dropdown.Menu ref={menu => this.menu = menu} />
           </Dropdown>
