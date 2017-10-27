@@ -22,7 +22,7 @@ const IntroductionPage = React.createClass({
               <div className="bs-docs-section">
                 <p className="lead">
                   React-Bootstrap is a library of reusable front-end components.
-                  You'll get the look-and-feel of Twitter Bootstrap,
+                  You'll get the look-and-feel of Bootstrap,
                   but with much cleaner code, via Facebook's React.js framework.
                 </p>
 
@@ -44,7 +44,7 @@ const IntroductionPage = React.createClass({
 
                 <p>
                   With the most popular web front-end framework,
-                  Twitter Bootstrap, you'd write this in your HTML:
+                  Bootstrap, you'd write this in your HTML:
                 </p>
 
                 <div className="highlight">
