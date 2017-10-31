@@ -86,14 +86,6 @@ export default function FormControlsSection({ data }) {
         <Anchor id="forms-props-radio">Radio</Anchor>
       </h4>
       <PropTable metadata={data.Radio} />
-      <h4>
-        <Anchor id="forms-props-form-control-static">FormControl.Static</Anchor>
-      </h4>
-      <PropTable metadata={data.FormControlStatic} />
-      <h4>
-        <Anchor id="forms-props-help-block">HelpBlock</Anchor>
-      </h4>
-      <PropTable metadata={data.HelpBlock} />
       <h2 className="page-header">
         <Anchor id="forms-layout">Form layout</Anchor> <small>Form</small>
       </h2>
