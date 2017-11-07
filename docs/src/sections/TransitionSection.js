@@ -18,7 +18,7 @@ export default function TransitionSection() {
         <Anchor id="transitions-collapse">Collapse</Anchor>
       </h3>
 
-      <p>Add a collapse toggle animation to an element or component.</p>
+      <p>Add a collapse toggle animation to a single element or component (will error with multiple children).</p>
       <div className="bs-callout bs-callout-info">
         <h4>Smoothing animations</h4>
         <p>
@@ -42,7 +42,7 @@ export default function TransitionSection() {
         <Anchor id="transitions-fade">Fade</Anchor>
       </h3>
 
-      <p>Add a fade animation to a child element or component.</p>
+      <p>Add a fade animation to a single child element or component (will error with multiple children).</p>
       <ReactPlayground codeText={Samples.Fade} />
 
       <h4><Anchor id="transitions-fade-props">Props</Anchor></h4>
