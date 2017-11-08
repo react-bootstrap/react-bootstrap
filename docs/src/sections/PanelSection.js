@@ -33,7 +33,6 @@ export default function PanelSection() {
       <ReactPlayground codeText={Samples.PanelContextual} />
 
       <h3><Anchor id="panels-tables">With tables and list groups</Anchor></h3>
-      <p>Add the <code>fill</code> prop to <code>&lt;Table /&gt;</code> or <code>&lt;ListGroup /&gt;</code> elements to make them fill the panel.</p>
       <ReactPlayground codeText={Samples.PanelListGroupFill} />
 
       <h3><Anchor id="panels-controlled">Controlled PanelGroups</Anchor></h3>
