@@ -3,7 +3,7 @@
 This website is a single page app built on
 [React](http://facebook.github.io/react/), with styles and structure taken from
 the [Bootstrap](http://getbootstrap.com/) docs website.  The app is statically
-generated to HTML via node and then hosted by pushing HTML to [GitHub
+generated to HTML via Node and then hosted by pushing HTML to [GitHub
 Pages](http://pages.github.com/).
 
 ## Development
