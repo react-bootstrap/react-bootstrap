@@ -1,3 +1,29 @@
+## [v0.31.5]
+> 2017-10-24
+
+- **Bugfix:** Fix ES module build ([#2856])
+
+[v0.31.5]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.31.4...v0.31.5
+[#2856]: https://github.com/react-bootstrap/react-bootstrap/pull/2856
+
+
+## [v0.31.4]
+> 2017-10-24
+
+- **Feature:** Support `align` on `<Media.Body>` ([#2830])
+- **Bugfix:** Update react-overlays dependency to support React v16 ([#2839], [#2855])
+- **Bugfix:** Use a bound function for the base modal ref in `<Modal>` to prevent the ref getting set to `null` ([#2844])
+- **Chore:** Update Babel configuration ([#2821], [#2837])
+
+[v0.31.4]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.31.3...v0.31.4
+[#2821]: https://github.com/react-bootstrap/react-bootstrap/pull/2821
+[#2830]: https://github.com/react-bootstrap/react-bootstrap/pull/2830
+[#2837]: https://github.com/react-bootstrap/react-bootstrap/pull/2837
+[#2839]: https://github.com/react-bootstrap/react-bootstrap/pull/2839
+[#2844]: https://github.com/react-bootstrap/react-bootstrap/pull/2844
+[#2855]: https://github.com/react-bootstrap/react-bootstrap/pull/2855
+
+
 ## [v0.31.3]
 > 2017-09-06
 
