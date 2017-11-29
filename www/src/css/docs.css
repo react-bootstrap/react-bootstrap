@@ -185,8 +185,8 @@
   border-left: 1px solid #563d7c;
 }
 .bs-docs-sidebar .nav > .active > a,
-.bs-docs-sidebar .nav > .active:hover > a,
-.bs-docs-sidebar .nav > .active:focus > a {
+.bs-docs-sidebar .nav > .active > a:hover,
+.bs-docs-sidebar .nav > .active > a:focus  {
   padding-left: 18px;
   font-weight: bold;
   color: #563d7c;

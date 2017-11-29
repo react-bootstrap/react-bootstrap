@@ -1,9 +1,13 @@
-const FormExample = React.createClass({
-  getInitialState() {
-    return {
+class FormExample extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.handleChange = this.handleChange.bind(null)
+
+    this.state = {
       value: '',
     };
-  },
+  }
 
   getValidationState() {
     const length = this.state.value.length;
@@ -11,11 +15,11 @@ const FormExample = React.createClass({
     else if (length > 5) return 'warning';
     else if (length > 0) return 'error';
     return null;
-  },
+  }
 
   handleChange(e) {
     this.setState({ value: e.target.value });
-  },
+  }
 
   render() {
     return (
@@ -36,7 +40,7 @@ const FormExample = React.createClass({
         </FormGroup>
       </form>
     );
-  },
-});
+  }
+}
 
 render(<FormExample />);

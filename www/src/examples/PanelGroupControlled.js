@@ -1,13 +1,17 @@
-const ControlledPanelGroup = React.createClass({
-  getInitialState() {
-    return {
+class ControlledPanelGroup extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.handleSelect = this.handleSelect.bind(this);
+
+    this.state = {
       activeKey: '1',
     };
-  },
+  }
 
   handleSelect(activeKey) {
     this.setState({ activeKey });
-  },
+  }
 
   render() {
     return (
@@ -16,7 +20,7 @@ const ControlledPanelGroup = React.createClass({
         <Panel header="Panel 2" eventKey="2">Panel 2 content</Panel>
       </PanelGroup>
     );
-  },
-});
+  }
+}
 
 render(<ControlledPanelGroup />);

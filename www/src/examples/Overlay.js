@@ -1,22 +1,31 @@
-const Example = React.createClass({
-  getInitialState() {
-    return { show: true };
-  },
+class Example extends React.Component {
+  constructor(...args) {
+    super(...args);
 
-  toggle() {
+    this.getTarget = this.getTarget.bind(this);
+    this.handleToggle = this.handleToggle.bind(this);
+
+    this.state = { show: true };
+  }
+
+  getTarget() {
+    return ReactDOM.findDOMNode(this.refs.target)
+  }
+
+  handleToggle() {
     this.setState({ show: !this.state.show });
-  },
+  }
 
   render() {
     const sharedProps = {
-      show: this.state.show,
       container: this,
-      target: () => ReactDOM.findDOMNode(this.refs.target),
+      target: this.getTarget,
+      show: this.state.show,
     };
 
     return (
       <div style={{ height: 100, paddingLeft: 150, position: 'relative' }}>
-        <Button ref="target" onClick={this.toggle}>
+        <Button ref="target" onClick={this.handleToggle}>
           Click me!
         </Button>
 
@@ -34,7 +43,7 @@ const Example = React.createClass({
         </Overlay>
       </div>
     );
-  },
-});
+  }
+}
 
 render(<Example />);

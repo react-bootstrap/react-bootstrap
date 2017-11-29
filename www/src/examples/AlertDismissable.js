@@ -1,9 +1,22 @@
-const AlertDismissable = React.createClass({
-  getInitialState() {
-    return {
+class AlertDismissable extends React.Component {
+  constructor(...args) {
+    super(...args)
+
+    this.handleAlertShow = this.handleAlertShow.bind(this);
+    this.handleAlertDismiss = this.handleAlertDismiss.bind(this);
+
+    this.state = {
       alertVisible: true,
-    };
-  },
+    }
+  }
+
+  handleAlertDismiss() {
+    this.setState({ alertVisible: false });
+  }
+
+  handleAlertShow() {
+    this.setState({ alertVisible: true });
+  }
 
   render() {
     if (this.state.alertVisible) {
@@ -23,15 +36,7 @@ const AlertDismissable = React.createClass({
     return (
       <Button onClick={this.handleAlertShow}>Show Alert</Button>
     );
-  },
-
-  handleAlertDismiss() {
-    this.setState({ alertVisible: false });
-  },
-
-  handleAlertShow() {
-    this.setState({ alertVisible: true });
-  },
-});
+  }
+}
 
 render(<AlertDismissable />);

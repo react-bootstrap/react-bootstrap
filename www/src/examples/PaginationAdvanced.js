@@ -1,15 +1,19 @@
-const PaginationAdvanced = React.createClass({
-  getInitialState() {
-    return {
+class PaginationAdvanced extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.handleSelect = this.handleSelect.bind(this);
+
+    this.state = {
       activePage: 1,
     };
-  },
+  }
 
   handleSelect(eventKey) {
     this.setState({
       activePage: eventKey,
     });
-  },
+  }
 
   render() {
     return (
@@ -26,7 +30,7 @@ const PaginationAdvanced = React.createClass({
         onSelect={this.handleSelect}
       />
     );
-  },
-});
+  }
+}
 
 render(<PaginationAdvanced />);

@@ -1,4 +1,4 @@
-const MySmallModal = React.createClass({
+class MySmallModal extends React.Component {
   render() {
     return (
       <Modal {...this.props} bsSize="small" aria-labelledby="contained-modal-title-sm">
@@ -22,10 +22,10 @@ const MySmallModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
-const MyLargeModal = React.createClass({
+class MyLargeModal extends React.Component {
   render() {
     return (
       <Modal {...this.props} bsSize="large" aria-labelledby="contained-modal-title-lg">
@@ -49,13 +49,15 @@ const MyLargeModal = React.createClass({
         </Modal.Footer>
       </Modal>
     );
-  },
-});
+  }
+}
 
-const App = React.createClass({
-  getInitialState() {
-    return { smShow: false, lgShow: false };
-  },
+class App extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.state = { smShow: false, lgShow: false };
+  }
   render() {
     let smClose = () => this.setState({ smShow: false });
     let lgClose = () => this.setState({ lgShow: false });
@@ -73,7 +75,7 @@ const App = React.createClass({
         <MyLargeModal show={this.state.lgShow} onHide={lgClose} />
       </ButtonToolbar>
     );
-  },
-});
+  }
+}
 
 render(<App />);

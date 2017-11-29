@@ -32,7 +32,7 @@ body {
   .bs-docs-nav .navbar-nav>li>a {
     border-bottom: 3px solid #222;
   }
-  .bs-docs-nav .navbar-nav>li>a:hover,.bs-docs-nav .navbar-nav>.active>a, .bs-docs-nav .navbar-nav>.active>a:hover {
+  .bs-docs-nav .navbar-nav>li>a:hover, .bs-docs-nav .navbar-nav>.active>a:hover {
     border-bottom: 3px solid #cc7a6f;
   }
 }
@@ -155,8 +155,8 @@ body {
   color: #666;
 }
 
-.bs-docs-sidebar .nav>li>a:hover,
-.bs-docs-sidebar .nav>li>a:focus {
+.bs-docs-sidebar .nav > li > a:hover,
+.bs-docs-sidebar .nav > li:not(.active) > a:focus {
   color: #cc7a6f;
   border-left: 1px solid #cc7a6f;
 }

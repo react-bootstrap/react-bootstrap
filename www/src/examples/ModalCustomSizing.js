@@ -1,27 +1,32 @@
-const Example = React.createClass({
-  getInitialState() {
-    return { show: false };
-  },
+class Example extends React.Component {
+  constructor(...args) {
+    super(...args);
 
-  showModal() {
+    this.handleShow = this.handleShow.bind(this);
+    this.handleHide = this.handleHide.bind(this);
+
+    this.state = { show: false };
+  }
+
+  handleShow() {
     this.setState({ show: true });
-  },
+  }
 
-  hideModal() {
+  handleHide() {
     this.setState({ show: false });
-  },
+  }
 
   render() {
     return (
       <ButtonToolbar>
-        <Button bsStyle="primary" onClick={this.showModal}>
+        <Button bsStyle="primary" onClick={this.handleShow}>
           Launch demo modal
         </Button>
 
         <Modal
           {...this.props}
           show={this.state.show}
-          onHide={this.hideModal}
+          onHide={this.handleHide}
           dialogClassName="custom-modal"
         >
           <Modal.Header closeButton>
@@ -46,12 +51,12 @@ const Example = React.createClass({
              similique laboriosam eum et nemo expedita. Consequuntur perspiciatis cumque dolorem.</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.hideModal}>Close</Button>
+            <Button onClick={this.handleHide}>Close</Button>
           </Modal.Footer>
         </Modal>
       </ButtonToolbar>
     );
-  },
-});
+  }
+}
 
 render(<Example />);

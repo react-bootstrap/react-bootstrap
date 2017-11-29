@@ -1,22 +1,18 @@
-const CustomComponent = React.createClass({
-  render() {
-    return (
-      <li
-        className="list-group-item"
-        onClick={() => {}}
-      >
-        {this.props.children}
-      </li>
-    );
-  },
-});
+function CustomComponent({ children }) {
+  return (
+    <li
+      className="list-group-item"
+      onClick={() => {}}
+    >
+      {children}
+    </li>
+  );
+}
 
-const listgroupInstance = (
+render(
   <ListGroup componentClass="ul">
     <CustomComponent>Custom Child 1 </CustomComponent>
     <CustomComponent>Custom Child 2 </CustomComponent>
     <CustomComponent>Custom Child 3</CustomComponent>
   </ListGroup>
 );
-
-render(listgroupInstance);

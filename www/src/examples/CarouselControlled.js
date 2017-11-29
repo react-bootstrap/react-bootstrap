@@ -1,10 +1,14 @@
-const ControlledCarousel = React.createClass({
-  getInitialState() {
-    return {
+class ControlledCarousel extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.handleSelect = this.handleSelect.bind(this);
+
+    this.state = {
       index: 0,
       direction: null,
     };
-  },
+  }
 
   handleSelect(selectedIndex, e) {
     alert(`selected=${selectedIndex}, direction=${e.direction}`);
@@ -12,7 +16,7 @@ const ControlledCarousel = React.createClass({
       index: selectedIndex,
       direction: e.direction,
     });
-  },
+  }
 
   render() {
     return (
@@ -40,7 +44,7 @@ const ControlledCarousel = React.createClass({
         </Carousel.Item>
       </Carousel>
     );
-  },
-});
+  }
+}
 
 render(<ControlledCarousel />);

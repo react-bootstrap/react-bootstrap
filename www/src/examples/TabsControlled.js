@@ -1,14 +1,18 @@
-const ControlledTabs = React.createClass({
-  getInitialState() {
-    return {
+class ControlledTabs extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.handleSelect = this.handleSelect.bind(this);
+
+    this.state = {
       key: 1,
     };
-  },
+  }
 
   handleSelect(key) {
     alert(`selected ${key}`);
     this.setState({ key });
-  },
+  }
 
   render() {
     return (
@@ -18,7 +22,7 @@ const ControlledTabs = React.createClass({
         <Tab eventKey={3} title="Tab 3" disabled>Tab 3 content</Tab>
       </Tabs>
     );
-  },
-});
+  }
+}
 
 render(<ControlledTabs />);

@@ -1,21 +1,17 @@
-const LinkWithTooltip = React.createClass({
-  render() {
-    let tooltip = <Tooltip id={this.props.id}>{this.props.tooltip}</Tooltip>;
+function LinkWithTooltip({ id, children, href, tooltip }) {
+  return (
+    <OverlayTrigger
+      overlay={<Tooltip id={id}>{tooltip}</Tooltip>}
+      placement="top"
+      delayShow={300}
+      delayHide={150}
+    >
+      <a href={href}>{children}</a>
+    </OverlayTrigger>
+  );
+}
 
-    return (
-      <OverlayTrigger
-        overlay={tooltip}
-        placement="top"
-        delayShow={300}
-        delayHide={150}
-      >
-        <a href={this.props.href}>{this.props.children}</a>
-      </OverlayTrigger>
-    );
-  },
-});
-
-const copyInstance = (
+render(
   <p className="muted" style={{ marginBottom: 0 }}>
     Tight pants next level keffiyeh <LinkWithTooltip tooltip="Default tooltip" href="#" id="tooltip-1">you probably</LinkWithTooltip> haven't
     heard of them. Photo booth beard raw denim letterpress vegan messenger bag stumptown. Farm-to-table seitan, mcsweeney's
@@ -26,5 +22,3 @@ const copyInstance = (
     cred raw denim single-origin coffee viral.
   </p>
 );
-
-render(copyInstance);

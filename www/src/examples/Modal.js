@@ -1,15 +1,20 @@
-const Example = React.createClass({
-  getInitialState() {
-    return { showModal: false };
-  },
+class Example extends React.Component {
+  constructor(...args) {
+    super(...args);
 
-  close() {
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.state = { showModal: false };
+  }
+
+  handleClose() {
     this.setState({ showModal: false });
-  },
+  }
 
-  open() {
+  handleShow() {
     this.setState({ showModal: true });
-  },
+  }
 
   render() {
     const popover = (
@@ -30,12 +35,12 @@ const Example = React.createClass({
         <Button
           bsStyle="primary"
           bsSize="large"
-          onClick={this.open}
+          onClick={this.handleShow}
         >
           Launch demo modal
         </Button>
 
-        <Modal show={this.state.showModal} onHide={this.close}>
+        <Modal show={this.state.showModal} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>
@@ -63,12 +68,12 @@ const Example = React.createClass({
             <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.close}>Close</Button>
+            <Button onClick={this.handleClose}>Close</Button>
           </Modal.Footer>
         </Modal>
       </div>
     );
-  },
-});
+  }
+}
 
 render(<Example />);
