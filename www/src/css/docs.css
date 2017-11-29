@@ -197,9 +197,6 @@
 
 /* Show and affix the side nav when space allows it */
 @media (min-width: 992px) {
-  .bs-docs-sidebar-holder {
-    padding-top: 20px;
-  }
   .bs-docs-sidebar .nav > .active > ul {
     display: block;
   }

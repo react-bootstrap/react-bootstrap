@@ -9,7 +9,7 @@ const propTypes = {
   location: PropTypes.object.isRequired,
 };
 
-function ComponentsPage({ children, ...props }) {
+function ComponentsLayout({ children, ...props }) {
   return (
     <Default {...props}>
       <PageHeader title="Components" />
@@ -20,6 +20,6 @@ function ComponentsPage({ children, ...props }) {
   );
 }
 
-ComponentsPage.propTypes = propTypes;
+ComponentsLayout.propTypes = propTypes;
 
-export default ComponentsPage;
+export default ComponentsLayout;

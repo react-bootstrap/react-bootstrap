@@ -12,7 +12,7 @@ const propTypes = {
   location: PropTypes.object.isRequired,
 };
 
-function Layout({ children, location }) {
+function DefaultLayout({ children, location }) {
   return (
     <div>
       <NavMain activePage={location.pathname} />
@@ -24,6 +24,6 @@ function Layout({ children, location }) {
   );
 }
 
-Layout.propTypes = propTypes;
+DefaultLayout.propTypes = propTypes;
 
-export default Layout;
+export default DefaultLayout;

@@ -9,7 +9,7 @@ const propTypes = {
   location: PropTypes.object.isRequired,
 };
 
-function UtilitiesLayout({ children, ...props }) {
+function LayoutLayout({ children, ...props }) {
   return (
     <Default {...props}>
       <PageHeader
@@ -23,6 +23,6 @@ function UtilitiesLayout({ children, ...props }) {
   );
 }
 
-UtilitiesLayout.propTypes = propTypes;
+LayoutLayout.propTypes = propTypes;
 
-export default UtilitiesLayout;
+export default LayoutLayout;

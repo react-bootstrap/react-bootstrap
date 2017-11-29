@@ -13,8 +13,7 @@ export default function GridSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
-        <Anchor id="grid">Grid system</Anchor>
-        <small>Grid, Row, Col, Clearfix</small>
+        <Anchor id="grid">Grid system</Anchor> <small>Grid, Row, Col, Clearfix</small>
       </h2>
 
       <h3><Anchor id="grids-basic">Basic Grid</Anchor></h3>
