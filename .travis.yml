@@ -15,6 +15,9 @@ before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
 
+after_install:
+  - npm i -C ./www
+
 after_success:
   - node_modules/.bin/codecov
 
