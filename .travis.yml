@@ -16,7 +16,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 before_script:
-  - npm i -C ./www
+  - npm run bootstrap-docs
 
 after_success:
   - node_modules/.bin/codecov

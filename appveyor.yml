@@ -11,6 +11,7 @@ install:
   - node --version
   - npm --version
   - npm install
+  - npm run bootstrap-docs
 
 # No need for MSBuild on this project
 build: off
