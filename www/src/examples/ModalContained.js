@@ -51,6 +51,6 @@ class Trigger extends React.Component {
       </div>
     );
   }
-});
+}
 
 render(<Trigger />);

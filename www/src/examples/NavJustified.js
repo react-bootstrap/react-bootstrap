@@ -20,6 +20,6 @@ class NavJustified extends React.Component {
       </div>
     );
   }
-});
+}
 
 render(<NavJustified />);
