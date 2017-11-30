@@ -36,7 +36,6 @@ async function buildFile(filename, destination, babelOptions = {}) {
   const result = transform(content, babelOptions);
   const output = path.join(destination, path.basename(filename));
 
-  // console.log(`${filename} -> ${output}`);
   await fse.outputFile(output, result.code);
 }
 

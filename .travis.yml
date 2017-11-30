@@ -11,6 +11,7 @@ env:
 cache:
   directories:
     - node_modules
+    - www/node_modules
 
 before_install:
   - export CHROME_BIN=chromium-browser

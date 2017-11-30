@@ -8,7 +8,7 @@
   },
   "homepage": "https://react-bootstrap.github.io/",
   "scripts": {
-    "bootstrap-docs": "npm run build lib && npm -C www install",
+    "bootstrap-docs": "npm run build lib es && npm -C www install",
     "build": "node tools/build.js",
     "build-docs": "npm run bootstrap-docs && npm -C www run build",
     "lint": "eslint www/src src test tools webpack *.js",

@@ -4,10 +4,6 @@ import React from 'react';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 
-const propTypes = {
-
-};
-
 const gettingStarted = [
   'introduction',
   'support',
@@ -110,7 +106,5 @@ function SideNav({ location }) {
     </div>
   );
 }
-
-SideNav.propTypes = propTypes;
 
 export default SideNav;
