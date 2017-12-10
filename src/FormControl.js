@@ -92,5 +92,5 @@ FormControl.Feedback = FormControlFeedback;
 FormControl.Static = FormControlStatic;
 
 export default bsClass('form-control',
-  bsSizes([Size.SMALL, Size.LARGE], FormControl),
+  bsSizes([Size.XSMALL, Size.SMALL, Size.LARGE], FormControl),
 );
