@@ -2,11 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-
-import TransitionEvents from './utils/TransitionEvents';
-
-// TODO: This should use a timeout instead of TransitionEvents, or else just
-// not wait until transition end to trigger continuing animations.
+import transition from 'dom-helpers/transition';
 
 const propTypes = {
   direction: PropTypes.oneOf(['prev', 'next']),
@@ -47,7 +43,7 @@ class CarouselItem extends React.Component {
     const prevActive = prevProps.active;
 
     if (!active && prevActive) {
-      TransitionEvents.addEndEventListener(
+      transition.end(
         ReactDOM.findDOMNode(this), this.handleAnimateOutEnd,
       );
     }
