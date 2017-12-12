@@ -95,6 +95,9 @@ const propTypes = {
 
   /**
    * Which event when fired outside the component will cause it to be closed
+   *
+   * *Note: `rootCloseEvent` will not work with custom dropdowns because it is
+   * implemented internally by `<Dropdown.Menu>`.*
    */
   rootCloseEvent: PropTypes.oneOf(['click', 'mousedown']),
 
