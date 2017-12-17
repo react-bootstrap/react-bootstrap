@@ -60,7 +60,7 @@ export default function DropdownSection() {
       <div className="bs-callout bs-callout-warning">
         <h4>Using <code>rootCloseEvent</code> with custom dropdown components</h4>
         <p>
-          If you want to use the <code>rootCloseEvent</code> prop with your custom dropdown components, you will have to pass the <code>rootCloseEvent</code> to <code>{ '<RootCloseWrapper>' }</code> in your custom dropdown menu component <a href="https://github.com/react-bootstrap/react-bootstrap/blob/e41e041709045db657ac02c46fa4ff2df4e339a3/src/DropdownMenu.js#L115-L119">similarly to how it is implemented in <code>{ '<Dropdown.Menu>' }</code></a>.
+          If you want to use the <code>rootCloseEvent</code> prop with your custom dropdown components, you will have to pass the <code>rootCloseEvent</code> to <code>{ '<RootCloseWrapper>' }</code> in your custom dropdown menu component <a href="https://github.com/react-bootstrap/react-bootstrap/blob/v0.31.5/src/DropdownMenu.js#L115-L119">similarly to how it is implemented in <code>{ '<Dropdown.Menu>' }</code></a>.
         </p>
         <p>
           You will have to add <code>react-overlays</code> as a dependency and import <code>{ '<RootCloseWrapper>' }</code> from <code>react-overlays</code> yourself like: <code>import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper'</code>.

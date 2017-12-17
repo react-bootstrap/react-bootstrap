@@ -98,7 +98,7 @@ const propTypes = {
    *
    * *Note: For custom dropdown components, you will have to pass the
    * `rootCloseEvent` to `<RootCloseWrapper>` in your custom dropdown menu
-   * component ([similarly to how it is implemented in `<Dropdown.Menu>`](https://github.com/react-bootstrap/react-bootstrap/blob/e41e041709045db657ac02c46fa4ff2df4e339a3/src/DropdownMenu.js#L115-L119)).*
+   * component ([similarly to how it is implemented in `<Dropdown.Menu>`](https://github.com/react-bootstrap/react-bootstrap/blob/v0.31.5/src/DropdownMenu.js#L115-L119)).*
    */
   rootCloseEvent: PropTypes.oneOf(['click', 'mousedown']),
 
