@@ -110,10 +110,10 @@ class OverlayTrigger extends React.Component {
     this.handleHide = this.handleHide.bind(this);
 
     this.handleMouseOver = e => (
-      this.handleMouseOverOut(this.handleDelayedShow, e)
+      this.handleMouseOverOut(this.handleDelayedShow, e, 'fromElement')
     );
     this.handleMouseOut = e => (
-      this.handleMouseOverOut(this.handleDelayedHide, e)
+      this.handleMouseOverOut(this.handleDelayedHide, e, 'toElement')
     );
 
     this._mountNode = null;
@@ -198,9 +198,9 @@ class OverlayTrigger extends React.Component {
   // React's built version is broken: https://github.com/facebook/react/issues/4251
   // for cases when the trigger is disabled and mouseOut/Over can cause flicker
   // moving from one child element to another.
-  handleMouseOverOut(handler, e) {
+  handleMouseOverOut(handler, e, relatedNative) {
     const target = e.currentTarget;
-    const related = e.relatedTarget || e.nativeEvent.toElement;
+    const related = e.relatedTarget || e.nativeEvent[relatedNative];
 
     if ((!related || related !== target) && !contains(target, related)) {
       handler(e);
