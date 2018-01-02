@@ -29,7 +29,7 @@ const propTypes = {
    * Callback fired when the active item changes.
    *
    * ```js
-   * (eventKey: any) => any | (eventKey: any, event: Object) => any
+   * (eventKey: any, ?event: Object) => any
    * ```
    *
    * If this callback takes two or more arguments, the second argument will

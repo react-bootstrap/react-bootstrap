@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import { bsStyles, bsSizes, getClassSet, prefix, _curry }
@@ -81,7 +82,7 @@ describe('bootstrapUtils', () => {
     });
 
     it('should not override other propTypes', () => {
-      const propTypes = { other() {} };
+      const propTypes = { other: PropTypes.string };
       const Component = () => null;
       Component.propTypes = propTypes;
       bsStyles(['minimal', 'boss', 'plaid'])(Component);
@@ -91,7 +92,7 @@ describe('bootstrapUtils', () => {
     });
 
     it('should set a default if provided', () => {
-      const propTypes = { other() {} };
+      const propTypes = { other: PropTypes.string };
       const Component = () => null;
       Component.propTypes = propTypes;
       bsStyles(['minimal', 'boss', 'plaid'], 'plaid')(Component);
@@ -159,7 +160,7 @@ describe('bootstrapUtils', () => {
     });
 
     it('should not override other propTypes', () => {
-      const Component = { propTypes: { other() {} } };
+      const Component = { propTypes: { other: PropTypes.string } };
 
       bsSizes(['smallish', 'micro', 'planet'])(Component);
 
@@ -168,7 +169,7 @@ describe('bootstrapUtils', () => {
     });
 
     it('should set a default if provided', () => {
-      const Component = { propTypes: { other() {} } };
+      const Component = { propTypes: { other: PropTypes.string } };
 
       bsSizes(['smallish', 'micro', 'planet'], 'smallish')(Component);
 

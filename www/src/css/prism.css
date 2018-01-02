@@ -1,0 +1,136 @@
+/**
+ * Github-like theme for Prism.js
+ * @author Luke Askew http://github.com/lukeaskew
+ */
+.prism-code {
+  font-family: Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", "Courier New", Courier, monospace;
+  font-size: 14px;
+  color: #C0C5CE;
+  background-color: #1B2B34;
+  display: block;
+  white-space: pre;
+  padding: 0.5rem;
+  margin: 0;
+  vertical-align: baseline;
+  outline: none;
+  text-shadow: none;
+  -webkit-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  word-wrap: normal;
+  word-break: normal;
+  text-align: left;
+  word-spacing: normal;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+}
+
+.token.def {color: #F99157;}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #65737E;
+}
+
+.token.punctuation {
+  color: #C0C5CE;
+}
+
+.token.namespace {
+  opacity: .7;
+}
+
+.token.def {
+  color: #F99157;
+}
+.token.property {
+  color: #FAC863;
+}
+.token.tag > .token.tag,
+.token.tag > .token.punctuation {
+  color: #EB606B;
+}
+
+/*.token.tag > .token.script.language-javascript {
+  color: #FAC863;
+}*/
+
+/*.token.tag > .token.script.language-javascript > .operator:nth-child(1) {
+  color: #C0C5CE;
+}*/
+
+/* jsx-bracket */
+.token.tag > .token.script.language-javascript > .punctuation:first-child + .punctuation,
+.token.tag > .token.script.language-javascript > .punctuation:last-child {
+  color: #FAC863;
+}
+
+.token.attr-value,
+.token.string {
+  color: #FAC863;
+}
+
+
+.token.boolean,
+.token.number,
+.token.selector {
+  color: #C594C5;
+}
+.token.attr-name {
+  color: #99C794;
+}
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #5FB3B3;
+}
+
+
+
+.token.keyword,
+.token.control,
+.token.directive,
+.token.unit {
+  color: #C594C5;
+}
+
+.token.statement,
+.token.regex,
+.token.atrule {
+  color: #5FB3B3;
+}
+
+.token.placeholder,
+.token.variable {
+  color: #6699CC;
+}
+
+.token.deleted {
+  text-decoration: line-through;
+}
+
+.token.inserted {
+  border-bottom: 1px dotted #D8DEE9;
+  text-decoration: none;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.important {
+  color: #EC5f67;
+}
+
+.token.entity {
+  cursor: help;
+}
