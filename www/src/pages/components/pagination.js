@@ -38,18 +38,35 @@ export default function PaginationSection({ data }) {
       <h4><Anchor id="pager-props-pager-item">Pager.Item</Anchor></h4>
       <PropTable metadata={data.PagerItem} />
 
+
       <h2 className="page-header">
         <Anchor id="pagination">Pagination</Anchor> <small>Pagination</small>
       </h2>
+      <p>
+        A set of <em>presentational</em> components for building pagination UI.
+      </p>
 
-      <p>Provide pagination links for your site or app with the multi-page pagination component. Set <code>items</code> to the number of pages. <code>activePage</code> prop dictates which page is active</p>
+      <div className="bs-callout bs-callout-info">
+        <h4>Migration Details</h4>
+        <p>
+          In previous versions of ReactBootstrap, the Pagination components contained "business" logic related to pagination. Considering logic of this
+          sort is almost always application and use-case specific we've removed it in favor of purely presentational components (just like vanilla bootstrap).
+        </p>
+        <p>
+          In order to help migration we've provided a drop-in replacement for the
+          old component at: <a href="https://www.npmjs.com/package/@react-bootstrap/pagination">@react-bootstrap/pagination</a>
+        </p>
+      </div>
+
       <ReactPlayground codeText={PaginationBasic} />
 
       <h4><Anchor id="pagination-more">More options</Anchor></h4>
-      <p>such as <code>first</code>, <code>last</code>, <code>previous</code>, <code>next</code>, <code>boundaryLinks</code> and <code>ellipsis</code>.</p>
+      <p>
+        For building more complex pagination UI, there are few convenient sub-components for adding "First", "Previous", "Next", and "Last" buttons, as
+        well as an <code>Ellipsis</code> item for indicating previous or continuing results.
+      </p>
       <ReactPlayground codeText={PaginationAdvanced} />
 
-      <h3><Anchor id="pagination-props">Props</Anchor></h3>
       <PropTable metadata={data.Pagination} />
     </div>
   );

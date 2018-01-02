@@ -1,6 +1,11 @@
 const panelInstance = (
-  <Panel footer="Panel footer">
-    Panel content
+  <Panel>
+    <Panel.Body>
+      Panel content
+    </Panel.Body>
+    <Panel.Footer>
+      Panel footer
+    </Panel.Footer>
   </Panel>
 );
 

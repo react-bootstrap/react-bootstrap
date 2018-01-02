@@ -134,6 +134,17 @@ const childContextTypes = {
   }),
 };
 
+/* eslint-disable no-use-before-define, react/no-multi-comp */
+function DialogTransition(props) {
+  return <Fade {...props} timeout={Modal.TRANSITION_DURATION} />;
+}
+
+function BackdropTransition(props) {
+  return <Fade {...props} timeout={Modal.BACKDROP_TRANSITION_DURATION} />;
+}
+
+/* eslint-enable no-use-before-define */
+
 class Modal extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -239,14 +250,15 @@ class Modal extends React.Component {
         {...baseModalProps}
         ref={this.setModalRef}
         show={show}
+        containerClassName={prefix(props, 'open')}
+        transition={animation ? DialogTransition : undefined}
+        backdrop={backdrop}
+        backdropTransition={animation ? BackdropTransition : undefined}
+        backdropClassName={classNames(
+          prefix(props, 'backdrop'), backdropClassName, inClassName,
+        )}
         onEntering={createChainedFunction(onEntering, this.handleEntering)}
         onExited={createChainedFunction(onExited, this.handleExited)}
-        backdrop={backdrop}
-        backdropClassName={classNames(prefix(props, 'backdrop'), backdropClassName, inClassName)}
-        containerClassName={prefix(props, 'open')}
-        transition={animation ? Fade : undefined}
-        dialogTransitionTimeout={Modal.TRANSITION_DURATION}
-        backdropTransitionTimeout={Modal.BACKDROP_TRANSITION_DURATION}
       >
         <Dialog
           {...dialogProps}

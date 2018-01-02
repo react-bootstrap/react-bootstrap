@@ -1,7 +1,25 @@
 const panelGroupInstance = (
-  <PanelGroup defaultActiveKey="2" accordion>
-    <Panel header="Panel 1" eventKey="1">Panel 1 content</Panel>
-    <Panel header="Panel 2" eventKey="2">Panel 2 content</Panel>
+  <PanelGroup
+    accordion
+    id="accordion-uncontrolled-example"
+    defaultActiveKey="2"
+  >
+    <Panel eventKey="1" >
+      <Panel.Heading>
+        <Panel.Title toggle>Panel heading 1</Panel.Title>
+      </Panel.Heading>
+      <Panel.Body collapsible>
+        Panel content 1
+      </Panel.Body>
+    </Panel>
+    <Panel eventKey="2">
+      <Panel.Heading>
+        <Panel.Title toggle>Panel heading 2</Panel.Title>
+      </Panel.Heading>
+      <Panel.Body collapsible>
+        Panel content 2
+      </Panel.Body>
+    </Panel>
   </PanelGroup>
 );
 

@@ -1,36 +1,18 @@
-class PaginationAdvanced extends React.Component {
-  constructor(...args) {
-    super(...args);
 
-    this.handleSelect = this.handleSelect.bind(this);
+<Pagination>
+  <Pagination.First />
+  <Pagination.Prev />
+  <Pagination.Item>{1}</Pagination.Item>
+  <Pagination.Ellipsis />
 
-    this.state = {
-      activePage: 1,
-    };
-  }
+  <Pagination.Item>{10}</Pagination.Item>
+  <Pagination.Item>{11}</Pagination.Item>
+  <Pagination.Item active>{12}</Pagination.Item>
+  <Pagination.Item>{13}</Pagination.Item>
+  <Pagination.Item disabled>{14}</Pagination.Item>
 
-  handleSelect(eventKey) {
-    this.setState({
-      activePage: eventKey,
-    });
-  }
-
-  render() {
-    return (
-      <Pagination
-        prev
-        next
-        first
-        last
-        ellipsis
-        boundaryLinks
-        items={20}
-        maxButtons={5}
-        activePage={this.state.activePage}
-        onSelect={this.handleSelect}
-      />
-    );
-  }
-}
-
-render(<PaginationAdvanced />);
+  <Pagination.Ellipsis />
+  <Pagination.Item>{20}</Pagination.Item>
+  <Pagination.Next />
+  <Pagination.Last />
+</Pagination>

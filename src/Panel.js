@@ -1,236 +1,149 @@
 import classNames from 'classnames';
-import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import uncontrollable from 'uncontrollable';
 
-import Collapse from './Collapse';
-import { bsStyles, bsClass, getClassSet, prefix, splitBsPropsAndOmit }
+import { bsStyles, bsClass, getClassSet, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
 import { State, Style } from './utils/StyleConfig';
+import Body from './PanelBody';
+import Heading from './PanelHeading';
+import Title from './PanelTitle';
+import Footer from './PanelFooter';
+import Toggle from './PanelToggle';
+import Collapse from './PanelCollapse';
 
-// TODO: Use uncontrollable.
+const defaultGetId = (id, type) => (id ? `${id}--${type}` : null);
 
 const propTypes = {
-  collapsible: PropTypes.bool,
-  onSelect: PropTypes.func,
-  header: PropTypes.node,
-  id: PropTypes.oneOfType([
-    PropTypes.string, PropTypes.number,
-  ]),
-  footer: PropTypes.node,
-  defaultExpanded: PropTypes.bool,
+  /**
+   * Controls the collapsed/expanded state ofthe Panel. Requires
+   * a `Panel.Collapse` or `<Panel.Body collapsible>` child component
+   * in order to actually animate out or in.
+   *
+   * @controllable onToggle
+   */
   expanded: PropTypes.bool,
+  /**
+   * A callback fired when the collapse state changes.
+   *
+   * @controllable expanded
+   */
+  onToggle: PropTypes.func,
   eventKey: PropTypes.any,
-  headerRole: PropTypes.string,
-  panelRole: PropTypes.string,
 
-  // From Collapse.
-  onEnter: PropTypes.func,
-  onEntering: PropTypes.func,
-  onEntered: PropTypes.func,
-  onExit: PropTypes.func,
-  onExiting: PropTypes.func,
-  onExited: PropTypes.func,
+  /**
+   * An HTML `id` attribute uniquely identifying the Panel component.
+   */
+  id: PropTypes.string,
 };
 
-const defaultProps = {
-  defaultExpanded: false,
+const contextTypes = {
+  $bs_panelGroup: PropTypes.shape({
+    getId: PropTypes.func,
+    activeKey: PropTypes.any,
+    onToggle: PropTypes.func,
+  }),
+};
+
+
+const childContextTypes = {
+  $bs_panel: PropTypes.shape({
+    headingId: PropTypes.string,
+    bodyId: PropTypes.string,
+    bsClass: PropTypes.string,
+    onToggle: PropTypes.func,
+    expanded: PropTypes.bool,
+  }),
 };
 
 class Panel extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(...args) {
+    super(...args);
+    this.handleToggle = this.handleToggle.bind(this);
+  }
 
-    this.handleClickTitle = this.handleClickTitle.bind(this);
+  getChildContext() {
+    const { eventKey, id } = this.props;
+    let { getId } = this.context.$bs_panelGroup || {};
 
-    this.state = {
-      expanded: this.props.defaultExpanded,
+    let ids;
+    let idKey = eventKey == null ? id : eventKey;
+
+    if (idKey !== null) {
+      getId = getId || defaultGetId;
+      ids = {
+        headingId: getId(idKey, 'heading'),
+        bodyId: getId(idKey, 'body'),
+      };
+    }
+
+
+    return {
+      $bs_panel: {
+        ...ids,
+        bsClass: this.props.bsClass,
+        expanded: this.getExpanded(),
+        onToggle: this.handleToggle,
+      },
     };
   }
 
-  handleClickTitle(e) {
-    // FIXME: What the heck? This API is horrible. This needs to go away!
-    e.persist();
-    e.selected = true;
+  getExpanded() {
+    const { eventKey } = this.props;
+    const { activeKey } = this.context.$bs_panelGroup || {};
 
-    if (this.props.onSelect) {
-      this.props.onSelect(this.props.eventKey, e);
-    } else {
-      e.preventDefault();
-    }
-
-    if (e.selected) {
-      this.setState({ expanded: !this.state.expanded });
-    }
+    return this.props.expanded != null || activeKey === undefined ?
+      this.props.expanded :
+      activeKey === eventKey;
   }
 
-  renderAnchor(header, id, role, expanded) {
-    return (
-      <a
-        role={role}
-        href={id && `#${id}`}
-        onClick={this.handleClickTitle}
-        aria-controls={id}
-        aria-expanded={expanded}
-        aria-selected={expanded}
-        className={expanded ? null : 'collapsed'}
-      >
-        {header}
-      </a>
-    );
-  }
+  handleToggle(e) {
+    const { onToggle } = this.context.$bs_panelGroup || {};
+    const expanded = !this.getExpanded();
 
-  renderBody(rawChildren, bsProps) {
-    const children = [];
-    let bodyChildren = [];
-
-    const bodyClassName = prefix(bsProps, 'body');
-
-    function maybeAddBody() {
-      if (!bodyChildren.length) {
-        return;
-      }
-
-      // Derive the key from the index here, since we need to make one up.
-      children.push(
-        <div key={children.length} className={bodyClassName}>
-          {bodyChildren}
-        </div>,
-      );
-
-      bodyChildren = [];
+    this.props.onToggle(expanded, e);
+    if (onToggle) {
+      onToggle(this.props.eventKey, expanded, e);
     }
-
-    // Convert to array so we can re-use keys.
-    React.Children.toArray(rawChildren).forEach((child) => {
-      if (React.isValidElement(child) && child.props.fill) {
-        maybeAddBody();
-
-        // Remove the child's unknown `fill` prop.
-        children.push(cloneElement(child, { fill: undefined }));
-
-        return;
-      }
-
-      bodyChildren.push(child);
-    });
-
-    maybeAddBody();
-
-    return children;
-  }
-
-  renderCollapsibleBody(
-    id, expanded, role, children, bsProps, animationHooks,
-  ) {
-    return (
-      <Collapse in={expanded} {...animationHooks}>
-        <div
-          id={id}
-          role={role}
-          className={prefix(bsProps, 'collapse')}
-          aria-hidden={!expanded}
-        >
-          {this.renderBody(children, bsProps)}
-        </div>
-      </Collapse>
-    );
-  }
-
-  renderHeader(collapsible, header, id, role, expanded, bsProps) {
-    const titleClassName = prefix(bsProps, 'title');
-
-    if (!collapsible) {
-      if (!React.isValidElement(header)) {
-        return header;
-      }
-
-      return cloneElement(header, {
-        className: classNames(header.props.className, titleClassName),
-      });
-    }
-
-    if (!React.isValidElement(header)) {
-      return (
-        <h4 role="presentation" className={titleClassName}>
-          {this.renderAnchor(header, id, role, expanded)}
-        </h4>
-      );
-    }
-
-    return cloneElement(header, {
-      className: classNames(header.props.className, titleClassName),
-      children: this.renderAnchor(header.props.children, id, role, expanded),
-    });
   }
 
   render() {
-    const {
-      collapsible,
-      header,
-      id,
-      footer,
-      expanded: propsExpanded,
-      headerRole,
-      panelRole,
-      className,
-      children,
-      onEnter,
-      onEntering,
-      onEntered,
-      onExit,
-      onExiting,
-      onExited,
-      ...props
-    } = this.props;
-
-    const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
-      'defaultExpanded', 'eventKey', 'onSelect',
-    ]);
-
-    const expanded = propsExpanded != null ?
-      propsExpanded : this.state.expanded;
-
-    const classes = getClassSet(bsProps);
+    let { className, children } = this.props;
+    const [bsProps, props] = splitBsPropsAndOmit(this.props,
+      ['onToggle', 'eventKey', 'expanded'],
+    );
 
     return (
       <div
-        {...elementProps}
-        className={classNames(className, classes)}
-        id={collapsible ? null : id}
+        {...props}
+        className={classNames(
+          className,
+          getClassSet(bsProps),
+        )}
       >
-        {header && (
-          <div className={prefix(bsProps, 'heading')}>
-            {this.renderHeader(
-              collapsible, header, id, headerRole, expanded, bsProps,
-            )}
-          </div>
-        )}
-
-        {collapsible ?
-          this.renderCollapsibleBody(
-            id, expanded, panelRole, children, bsProps,
-            { onEnter, onEntering, onEntered, onExit, onExiting, onExited },
-          ) :
-          this.renderBody(children, bsProps)
-        }
-
-        {footer && (
-          <div className={prefix(bsProps, 'footer')}>
-            {footer}
-          </div>
-        )}
+        {children}
       </div>
     );
   }
 }
 
 Panel.propTypes = propTypes;
-Panel.defaultProps = defaultProps;
 
-export default bsClass('panel',
-  bsStyles(
-    [...Object.values(State), Style.DEFAULT, Style.PRIMARY],
-    Style.DEFAULT,
-    Panel,
+Panel.contextTypes = contextTypes;
+Panel.childContextTypes = childContextTypes;
+
+const UncontrolledPanel = uncontrollable(
+  bsClass('panel',
+    bsStyles(
+      [...Object.values(State), Style.DEFAULT, Style.PRIMARY],
+      Style.DEFAULT,
+      Panel,
+    ),
   ),
+  { expanded: 'onToggle' },
 );
+
+Object.assign(UncontrolledPanel, { Heading, Title, Body, Footer, Toggle, Collapse });
+
+export default UncontrolledPanel;

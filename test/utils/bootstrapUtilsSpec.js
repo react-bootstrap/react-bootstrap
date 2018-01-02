@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-
+import createReactClass from 'create-react-class';
 import { bsStyles, bsSizes, getClassSet, prefix, _curry }
   from '../../src/utils/bootstrapUtils';
 
@@ -121,9 +121,9 @@ describe('bootstrapUtils', () => {
       shouldWarn('expected one of ["minimal","boss","plaid","tweed"]');
 
       const Component = bsStyles(['minimal', 'boss', 'plaid', 'tweed'], 'plaid')(
-        class extends React.Component {
-          render() { return <span />; }
-        },
+        createReactClass({ // eslint-disable-line
+          render() { return <span />; },
+        }),
       );
 
       const instance = render(<Component />);

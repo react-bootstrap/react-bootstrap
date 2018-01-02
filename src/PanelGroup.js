@@ -1,68 +1,116 @@
 import classNames from 'classnames';
-import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
+import React, { cloneElement } from 'react';
+import uncontrollable from 'uncontrollable';
+
 
 import { bsClass, getClassSet, splitBsPropsAndOmit }
   from './utils/bootstrapUtils';
-import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
+import { generatedId } from './utils/PropTypes';
+
 
 const propTypes = {
   accordion: PropTypes.bool,
+  /**
+   * When `accordion` is enabled, `activeKey` controls the which child `Panel` is expanded. `activeKey` should
+   * match a child Panel `eventKey` prop exactly.
+   *
+   * @controllable onSelect
+   */
   activeKey: PropTypes.any,
-  defaultActiveKey: PropTypes.any,
+
+  /**
+   * A callback fired when a child Panel collapse state changes. It's called with the next expanded `activeKey`
+   *
+   * @controllable activeKey
+   */
   onSelect: PropTypes.func,
+
+  /**
+   * An HTML role attribute
+   */
   role: PropTypes.string,
+
+  /**
+   * A function that takes an eventKey and type and returns a
+   * unique id for each Panel heading and Panel Collapse. The function _must_ be a pure function,
+   * meaning it should always return the _same_ id for the same set of inputs. The default
+   * value requires that an `id` to be set for the PanelGroup.
+   *
+   * The `type` argument will either be `"body"` or `"heading"`.
+   *
+   * @defaultValue (eventKey, type) => `${this.props.id}-${type}-${key}`
+   */
+  generateChildId: PropTypes.func,
+
+  /**
+   * HTML id attribute, required if no `generateChildId` prop
+   * is specified.
+   */
+  id: generatedId('PanelGroup'),
 };
 
 const defaultProps = {
   accordion: false,
 };
 
-// TODO: Use uncontrollable.
+const childContextTypes = {
+  $bs_panelGroup: PropTypes.shape({
+    getId: PropTypes.func,
+    headerRole: PropTypes.string,
+    panelRole: PropTypes.string,
+    activeKey: PropTypes.any,
+    onToggle: PropTypes.func,
+  }),
+};
 
 class PanelGroup extends React.Component {
   constructor(props, context) {
     super(props, context);
 
     this.handleSelect = this.handleSelect.bind(this);
+  }
 
-    this.state = {
-      activeKey: props.defaultActiveKey,
+  getChildContext() {
+    const { activeKey, accordion, generateChildId, id } = this.props;
+    let getId = null;
+
+    if (accordion) {
+      getId = generateChildId
+        || ((key, type) => (id ? `${id}-${type}-${key}` : null));
+    }
+
+    return {
+      $bs_panelGroup: {
+        getId,
+        headerRole: 'tab',
+        panelRole: 'tabpanel',
+        ...(accordion && {
+          activeKey,
+          onToggle: this.handleSelect,
+        }),
+      },
     };
   }
 
-  handleSelect(key, e) {
-    e.preventDefault();
-
-    if (this.props.onSelect) {
+  handleSelect(key, expanded, e) {
+    if (expanded) {
       this.props.onSelect(key, e);
     }
-
-    if (this.state.activeKey === key) {
-      key = null;
-    }
-
-    this.setState({ activeKey: key });
   }
 
   render() {
     const {
       accordion,
-      activeKey: propsActiveKey,
       className,
       children,
       ...props
     } = this.props;
 
-    const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
-      'defaultActiveKey', 'onSelect',
-    ]);
+    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['onSelect', 'activeKey']);
 
-    let activeKey;
     if (accordion) {
-      activeKey = propsActiveKey != null ?
-        propsActiveKey : this.state.activeKey;
       elementProps.role = elementProps.role || 'tablist';
     }
 
@@ -73,25 +121,11 @@ class PanelGroup extends React.Component {
         {...elementProps}
         className={classNames(className, classes)}
       >
-        {ValidComponentChildren.map(children, (child) => {
-          const childProps = {
+        {ValidComponentChildren.map(children, child =>
+          cloneElement(child, {
             bsStyle: child.props.bsStyle || bsProps.bsStyle,
-          };
-
-          if (accordion) {
-            Object.assign(childProps, {
-              headerRole: 'tab',
-              panelRole: 'tabpanel',
-              collapsible: true,
-              expanded: child.props.eventKey === activeKey,
-              onSelect: createChainedFunction(
-                this.handleSelect, child.props.onSelect,
-              ),
-            });
-          }
-
-          return cloneElement(child, childProps);
-        })}
+          }),
+        )}
       </div>
     );
   }
@@ -99,5 +133,11 @@ class PanelGroup extends React.Component {
 
 PanelGroup.propTypes = propTypes;
 PanelGroup.defaultProps = defaultProps;
+PanelGroup.childContextTypes = childContextTypes;
 
-export default bsClass('panel-group', PanelGroup);
+export default uncontrollable(
+  bsClass('panel-group', PanelGroup),
+  {
+    activeKey: 'onSelect',
+  },
+);

@@ -1,48 +1,30 @@
-class PaginationBasic extends React.Component {
-  constructor(...args) {
-    super(...args);
 
-    this.handleSelect = this.handleSelect.bind(this);
-
-    this.state = {
-      activePage: 1,
-    };
-  }
-
-  handleSelect(eventKey) {
-    this.setState({
-      activePage: eventKey,
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        <Pagination
-          bsSize="large"
-          items={10}
-          activePage={this.state.activePage}
-          onSelect={this.handleSelect}
-        />
-        <br />
-
-        <Pagination
-          bsSize="medium"
-          items={10}
-          activePage={this.state.activePage}
-          onSelect={this.handleSelect}
-        />
-        <br />
-
-        <Pagination
-          bsSize="small"
-          items={10}
-          activePage={this.state.activePage}
-          onSelect={this.handleSelect}
-        />
-      </div>
-    );
-  }
+let active = 7;
+let items = [];
+for (let number = 1; number <= 10; number++) {
+  items.push(
+    <Pagination.Item active={number === active}>
+      {number}
+    </Pagination.Item>
+  );
 }
 
-render(<PaginationBasic />);
+const paginationBasic = (
+  <div>
+    <Pagination bsSize="large">
+      {items}
+    </Pagination>
+    <br />
+
+    <Pagination bsSize="medium">
+      {items}
+    </Pagination>
+    <br />
+
+    <Pagination bsSize="small">
+      {items}
+    </Pagination>
+  </div>
+);
+
+render(paginationBasic);

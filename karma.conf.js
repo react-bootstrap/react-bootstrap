@@ -19,7 +19,6 @@ module.exports = (config) => {
     },
 
     webpack: {
-      devtool: 'module-source-map',
       module: {
         rules: [
           rules.js(babelOptions),
@@ -30,6 +29,8 @@ module.exports = (config) => {
           'process.env.NODE_ENV': JSON.stringify('test'),
         }),
       ],
+      devtool: 'cheap-module-inline-source-map',
+      stats: 'minimal',
     },
 
     webpackMiddleware: {
