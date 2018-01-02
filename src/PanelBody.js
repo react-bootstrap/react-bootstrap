@@ -25,8 +25,8 @@ const defaultProps = {
 
 const contextTypes = {
   $bs_panel: PropTypes.shape({
-    bsClass: PropTypes.string
-  })
+    bsClass: PropTypes.string,
+  }),
 };
 
 class PanelBody extends React.Component {

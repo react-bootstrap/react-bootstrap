@@ -16,12 +16,11 @@ const defaultProps = {
 const contextTypes = {
   $bs_panel: PropTypes.shape({
     headingId: PropTypes.string,
-    bsClass: PropTypes.string
-  })
+    bsClass: PropTypes.string,
+  }),
 };
 
 class PanelHeading extends React.Component {
-
   render() {
     const { children, className, componentClass: Component, ...props } = this.props;
     const { headingId, bsClass: _bsClass } = this.context.$bs_panel || {};

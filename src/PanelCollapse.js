@@ -38,7 +38,7 @@ const contextTypes = {
     bodyId: PropTypes.string,
     bsClass: PropTypes.string,
     expanded: PropTypes.bool,
-  })
+  }),
 };
 
 class PanelCollapse extends React.Component {

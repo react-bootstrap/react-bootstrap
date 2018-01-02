@@ -269,7 +269,7 @@ describe('<Navbar>', () => {
             <NavItem eventKey={1} href="https://www.google.com" onClick={navItemOnClick} />
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     );
 
     const link = ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'A');
@@ -301,7 +301,7 @@ describe('<Navbar>', () => {
             </NavItem>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     );
 
     const link = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'link-text');

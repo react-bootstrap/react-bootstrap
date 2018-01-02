@@ -6,7 +6,7 @@ import ValidComponentChildren from './ValidComponentChildren';
 
 const idPropType = PropTypes.oneOfType([
   PropTypes.string,
-  PropTypes.number
+  PropTypes.number,
 ]);
 
 
@@ -19,8 +19,8 @@ export function generatedId(name) {
 
       if (!error && !props.id) {
         error = new Error(
-          'In order to properly initialize the ' + name + ' in a way that is accessible to assistive technologies ' +
-          '(such as screen readers) an `id` or a `generateChildId` prop to ' + name + ' is required');
+          `In order to properly initialize the ${name} in a way that is accessible to assistive technologies ` +
+          `(such as screen readers) an \`id\` or a \`generateChildId\` prop to ${name} is required`);
       }
     }
     return error;

@@ -85,7 +85,7 @@ class Fade extends React.Component {
             'fade',
             className,
             children.props.className,
-            fadeStyles[status]
+            fadeStyles[status],
           ),
         })}
       </Transition>

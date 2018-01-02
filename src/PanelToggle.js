@@ -27,12 +27,11 @@ const contextTypes = {
     bodyId: PropTypes.string,
     onToggle: PropTypes.func,
     expanded: PropTypes.bool,
-  })
+  }),
 };
 
 
 class PanelToggle extends React.Component {
-
   constructor(...args) {
     super(...args);
 
