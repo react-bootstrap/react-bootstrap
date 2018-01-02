@@ -36,14 +36,16 @@ export default function ModalSection() {
       <h3><Anchor id="modals-contained">Contained Modal</Anchor></h3>
       <p>You will need to add the following css to your project and ensure that your container has the <code>modal-container</code> class.</p>
       <pre>
-        {React.DOM.code(null,
-          '.modal-container {\n' +
-          '  position: relative;\n' +
-          '}\n' +
-          '.modal-container .modal, .modal-container .modal-backdrop {\n' +
-          '  position: absolute;\n' +
-          '}\n',
-        )}
+        <code>
+          {
+            '.modal-container {\n' +
+            '  position: relative;\n' +
+            '}\n' +
+            '.modal-container .modal, .modal-container .modal-backdrop {\n' +
+            '  position: absolute;\n' +
+            '}\n'
+          }
+        </code>
       </pre>
       <ReactPlayground codeText={Samples.ModalContained} />
 

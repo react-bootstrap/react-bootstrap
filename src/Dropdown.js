@@ -95,6 +95,10 @@ const propTypes = {
 
   /**
    * Which event when fired outside the component will cause it to be closed
+   *
+   * *Note: For custom dropdown components, you will have to pass the
+   * `rootCloseEvent` to `<RootCloseWrapper>` in your custom dropdown menu
+   * component ([similarly to how it is implemented in `<Dropdown.Menu>`](https://github.com/react-bootstrap/react-bootstrap/blob/v0.31.5/src/DropdownMenu.js#L115-L119)).*
    */
   rootCloseEvent: PropTypes.oneOf(['click', 'mousedown']),
 
