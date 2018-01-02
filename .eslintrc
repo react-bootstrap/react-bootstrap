@@ -94,6 +94,9 @@
         "react/no-unescaped-entities": "off",
         "react/prop-types": "off",
         "import/no-webpack-loader-syntax": "off"
+      },
+      "settings": {
+        "import/core-modules": "react-bootstrap"
       }
     },
     {

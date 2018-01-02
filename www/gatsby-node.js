@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 
 exports.modifyWebpackConfig = function modifyWebpackConfig({ config }) {
@@ -8,6 +9,11 @@ exports.modifyWebpackConfig = function modifyWebpackConfig({ config }) {
     test: /src\/examples\//,
     loaders: ['raw-loader'],
   });
+
+  config._config.resolve.alias = {
+    'react-bootstrap$': path.resolve(__dirname, '../lib/index.js'),
+    'react-bootstrap/lib': path.resolve(__dirname, '../lib'),
+  };
 };
 
 
