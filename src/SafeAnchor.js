@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
   href: PropTypes.string,
@@ -62,6 +61,8 @@ class SafeAnchor extends React.Component {
       event.preventDefault();
       this.handleClick(event);
     }
+
+    if (this.props.onKeyDown) this.props.onKeyDown(event);
   }
 
   render() {
@@ -88,7 +89,7 @@ class SafeAnchor extends React.Component {
       <Component
         {...props}
         onClick={this.handleClick}
-        onKeyDown={createChainedFunction(this.handleKeyDown, onKeyDown)}
+        onKeyDown={this.handleKeyDown}
       />
     );
   }

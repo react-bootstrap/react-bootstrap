@@ -10,7 +10,6 @@ import {
   prefix,
   splitBsPropsAndOmit
 } from './utils/bootstrapUtils';
-import createChainedFunction from './utils/createChainedFunction';
 
 import Fade from './Fade';
 
@@ -157,21 +156,19 @@ class TabPane extends React.Component {
     return tabContent && tabContent.animation;
   }
 
-  handleEnter() {
-    const tabContent = this.context.$bs_tabContent;
-    if (!tabContent) {
-      return;
-    }
+  handleEnter(...args) {
+    if (this.props.onEnter) this.props.onEnter(...args);
 
+    const tabContent = this.context.$bs_tabContent;
+    if (!tabContent) return;
     this.in = tabContent.onPaneEnter(this, this.props.eventKey);
   }
 
-  handleExited() {
-    const tabContent = this.context.$bs_tabContent;
-    if (!tabContent) {
-      return;
-    }
+  handleExited(...args) {
+    if (this.props.onExited) this.props.onExited(...args);
 
+    const tabContent = this.context.$bs_tabContent;
+    if (!tabContent) return;
     tabContent.onPaneExited(this);
     this.in = false;
   }
@@ -265,12 +262,12 @@ class TabPane extends React.Component {
       return (
         <Transition
           in={active && !exiting}
-          onEnter={createChainedFunction(this.handleEnter, onEnter)}
+          onEnter={this.handleEnter}
           onEntering={onEntering}
           onEntered={onEntered}
           onExit={onExit}
           onExiting={onExiting}
-          onExited={createChainedFunction(this.handleExited, onExited)}
+          onExited={this.handleExited}
           mountOnEnter={mountOnEnter}
           unmountOnExit={unmountOnExit}
         >

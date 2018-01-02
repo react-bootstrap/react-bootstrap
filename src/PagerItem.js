@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SafeAnchor from './SafeAnchor';
-import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
   disabled: PropTypes.bool,
@@ -21,23 +20,10 @@ const defaultProps = {
 };
 
 class PagerItem extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.handleSelect = this.handleSelect.bind(this);
-  }
-
-  handleSelect(e) {
-    const { disabled, onSelect, eventKey } = this.props;
-
-    if (disabled) {
-      e.preventDefault();
-      return;
-    }
-
-    if (onSelect) {
-      onSelect(eventKey, e);
-    }
+  handleSelect = (e) => {
+    const { onClick, onSelect, eventKey } = this.props;
+    if (onClick) onClick(e);
+    if (onSelect) onSelect(eventKey, e);
   }
 
   render() {
@@ -62,7 +48,7 @@ class PagerItem extends React.Component {
         <SafeAnchor
           {...props}
           disabled={disabled}
-          onClick={createChainedFunction(onClick, this.handleSelect)}
+          onClick={this.handleSelect}
         />
       </li>
     );

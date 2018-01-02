@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { prefix } from './utils/bootstrapUtils';
-import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
   onClick: PropTypes.func,
@@ -22,6 +21,12 @@ const contextTypes = {
 };
 
 class NavbarToggle extends React.Component {
+  handleClick = (...args) => {
+    const { onClick } = this.props;
+    const navbarProps = this.context.$bs_navbar;
+    if (onClick) onClick(...args);
+    if (navbarProps && navbarProps.onToggle) navbarProps.onToggle(...args);
+  }
   render() {
     const { onClick, className, children, ...props } = this.props;
     const navbarProps = this.context.$bs_navbar || { bsClass: 'navbar' };
@@ -29,7 +34,7 @@ class NavbarToggle extends React.Component {
     const buttonProps = {
       type: 'button',
       ...props,
-      onClick: createChainedFunction(onClick, navbarProps.onToggle),
+      onClick: this.handleClick,
       className: classNames(
         className,
         prefix(navbarProps, 'toggle'),

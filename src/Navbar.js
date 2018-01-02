@@ -20,7 +20,6 @@ import {
   splitBsPropsAndOmit
 } from './utils/bootstrapUtils';
 import { Style } from './utils/StyleConfig';
-import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
   /**
@@ -127,27 +126,23 @@ class Navbar extends React.Component {
   }
 
   getChildContext() {
-    const { bsClass, expanded, onSelect, collapseOnSelect } = this.props;
+    const { bsClass, expanded } = this.props;
 
     return {
       $bs_navbar: {
         bsClass,
         expanded,
         onToggle: this.handleToggle,
-        onSelect: createChainedFunction(
-          onSelect,
-          collapseOnSelect ? this.handleCollapse : null
-        )
+        onSelect: this.handleCollapse
       }
     };
   }
 
-  handleCollapse() {
-    const { onToggle, expanded } = this.props;
+  handleCollapse(...args) {
+    const { collapseOnSelect, onToggle, onSelect, expanded } = this.props;
 
-    if (expanded) {
-      onToggle(false);
-    }
+    if (onSelect) onSelect(...args);
+    if (collapseOnSelect && expanded) onToggle(false);
   }
 
   handleToggle() {

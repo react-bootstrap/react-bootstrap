@@ -17,7 +17,6 @@ import Footer from './ModalFooter';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
 import { bsClass, bsSizes, prefix } from './utils/bootstrapUtils';
-import createChainedFunction from './utils/createChainedFunction';
 import splitComponentProps from './utils/splitComponentProps';
 import { Size } from './utils/StyleConfig';
 
@@ -149,12 +148,6 @@ class Modal extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.handleEntering = this.handleEntering.bind(this);
-    this.handleExited = this.handleExited.bind(this);
-    this.handleWindowResize = this.handleWindowResize.bind(this);
-    this.handleDialogClick = this.handleDialogClick.bind(this);
-    this.setModalRef = this.setModalRef.bind(this);
-
     this.state = {
       style: {}
     };
@@ -169,34 +162,33 @@ class Modal extends React.Component {
   }
 
   componentWillUnmount() {
-    // Clean up the listener if we need to.
-    this.handleExited();
+    events.off(window, 'resize', this.handleWindowResize);
   }
 
-  setModalRef(ref) {
+  setModalRef = (ref) => {
     this._modal = ref;
   }
 
-  handleDialogClick(e) {
-    if (e.target !== e.currentTarget) {
-      return;
-    }
+  handleDialogClick = (e) => {
+    if (e.target !== e.currentTarget) return;
 
     this.props.onHide();
   }
 
-  handleEntering() {
+  handleEntering = (...args) => {
     // FIXME: This should work even when animation is disabled.
     events.on(window, 'resize', this.handleWindowResize);
     this.updateStyle();
+    if (this.props.onEntering) this.props.onEntering(...args);
   }
 
-  handleExited() {
+  handleExited = (...args) => {
     // FIXME: This should work even when animation is disabled.
     events.off(window, 'resize', this.handleWindowResize);
+    if (this.props.onExited) this.props.onExited(...args);
   }
 
-  handleWindowResize() {
+  handleWindowResize = () => {
     this.updateStyle();
   }
 
@@ -239,8 +231,6 @@ class Modal extends React.Component {
       className,
       style,
       children, // Just in case this get added to BaseModal propTypes.
-      onEntering,
-      onExited,
       ...props
     } = this.props;
 
@@ -262,8 +252,8 @@ class Modal extends React.Component {
           backdropClassName,
           inClassName
         )}
-        onEntering={createChainedFunction(onEntering, this.handleEntering)}
-        onExited={createChainedFunction(onExited, this.handleExited)}
+        onEntering={this.handleEntering}
+        onExited={this.handleExited}
       >
         <Dialog
           {...dialogProps}

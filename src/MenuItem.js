@@ -5,7 +5,6 @@ import all from 'prop-types-extra/lib/all';
 
 import SafeAnchor from './SafeAnchor';
 import { bsClass, prefix, splitBsPropsAndOmit } from './utils/bootstrapUtils';
-import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
   /**
@@ -74,7 +73,7 @@ class MenuItem extends React.Component {
   }
 
   handleClick(event) {
-    const { href, disabled, onSelect, eventKey } = this.props;
+    const { href, disabled, onSelect, eventKey, onClick } = this.props;
 
     if (!href || disabled) {
       event.preventDefault();
@@ -87,6 +86,8 @@ class MenuItem extends React.Component {
     if (onSelect) {
       onSelect(eventKey, event);
     }
+
+    if (onClick) onClick(event);
   }
 
   render() {
@@ -95,7 +96,6 @@ class MenuItem extends React.Component {
       disabled,
       divider,
       header,
-      onClick,
       className,
       style,
       ...props
@@ -141,7 +141,7 @@ class MenuItem extends React.Component {
           {...elementProps}
           role="menuitem"
           tabIndex="-1"
-          onClick={createChainedFunction(onClick, this.handleClick)}
+          onClick={this.handleClick}
         />
       </li>
     );

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
-import createChainedFunction from './utils/createChainedFunction';
 import CloseButton from './CloseButton';
 
 // TODO: `aria-label` should be `closeLabel`.
@@ -41,6 +40,11 @@ const contextTypes = {
 };
 
 class ModalHeader extends React.Component {
+  onHide = (...args) => {
+    const modal = this.context.$bs_modal;
+    if (modal && modal.onHide) modal.onHide(...args);
+    if (this.props.onHide) this.props.onHide(...args);
+  };
   render() {
     const {
       closeLabel,
@@ -51,19 +55,15 @@ class ModalHeader extends React.Component {
       ...props
     } = this.props;
 
-    const modal = this.context.$bs_modal;
-
     const [bsProps, elementProps] = splitBsProps(props);
 
-    const classes = getClassSet(bsProps);
-
     return (
-      <div {...elementProps} className={classNames(className, classes)}>
+      <div
+        {...elementProps}
+        className={classNames(className, getClassSet(bsProps))}
+      >
         {closeButton && (
-          <CloseButton
-            label={closeLabel}
-            onClick={createChainedFunction(modal && modal.onHide, onHide)}
-          />
+          <CloseButton label={closeLabel} onClick={this.onHide} />
         )}
 
         {children}

@@ -10,7 +10,6 @@ import Transition, {
 } from 'react-transition-group/Transition';
 
 import capitalize from './utils/capitalize';
-import createChainedFunction from './utils/createChainedFunction';
 
 const MARGINS = {
   height: ['marginTop', 'marginBottom'],
@@ -148,15 +147,18 @@ class Collapse extends React.Component {
   /* -- Expanding -- */
   handleEnter = elem => {
     elem.style[this.getDimension()] = '0';
+    if (this.props.onEnter) this.props.onEnter(elem);
   };
 
   handleEntering = elem => {
     const dimension = this.getDimension();
     elem.style[dimension] = this._getScrollDimensionValue(elem, dimension);
+    if (this.props.onEntering) this.props.onEntering(elem);
   };
 
   handleEntered = elem => {
     elem.style[this.getDimension()] = null;
+    if (this.props.onEntered) this.props.onEntered(elem);
   };
 
   /* -- Collapsing -- */
@@ -167,45 +169,29 @@ class Collapse extends React.Component {
       elem
     )}px`;
     triggerBrowserReflow(elem);
+    if (this.props.onExit) this.props.onExit(elem);
   };
 
   handleExiting = elem => {
     elem.style[this.getDimension()] = '0';
+    if (this.props.onExiting) this.props.onExiting(elem);
   };
 
   render() {
-    const {
-      onEnter,
-      onEntering,
-      onEntered,
-      onExit,
-      onExiting,
-      className,
-      children,
-      ...props
-    } = this.props;
+    const { className, children, ...props } = this.props;
 
     delete props.dimension;
     delete props.getDimensionValue;
-
-    const handleEnter = createChainedFunction(this.handleEnter, onEnter);
-    const handleEntering = createChainedFunction(
-      this.handleEntering,
-      onEntering
-    );
-    const handleEntered = createChainedFunction(this.handleEntered, onEntered);
-    const handleExit = createChainedFunction(this.handleExit, onExit);
-    const handleExiting = createChainedFunction(this.handleExiting, onExiting);
 
     return (
       <Transition
         {...props}
         aria-expanded={props.role ? props.in : null}
-        onEnter={handleEnter}
-        onEntering={handleEntering}
-        onEntered={handleEntered}
-        onExit={handleExit}
-        onExiting={handleExiting}
+        onEnter={this.handleEnter}
+        onEntering={this.handleEntering}
+        onEntered={this.handleEntered}
+        onExit={this.handleExit}
+        onExiting={this.handleExiting}
       >
         {(state, innerProps) =>
           React.cloneElement(children, {

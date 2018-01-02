@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import elementType from 'react-prop-types/lib/elementType';
+import elementType from 'prop-types-extra/lib/elementType';
 import SafeAnchor from './SafeAnchor';
-import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
   /**
@@ -31,18 +30,11 @@ const contextTypes = {
 };
 
 class PanelToggle extends React.Component {
-  constructor(...args) {
-    super(...args);
-
-    this.handleToggle = this.handleToggle.bind(this);
-  }
-
-  handleToggle(event) {
-    const { onToggle } = this.context.$bs_panel || {};
-
-    if (onToggle) {
-      onToggle(event);
-    }
+  handleToggle = (event) => {
+    const { onClick } = this.props;
+    const panel = this.context.$bs_panel;
+    if (onClick) onClick(event);
+    if (panel && panel.onToggle) panel.onToggle(event);
   }
 
   render() {
@@ -50,7 +42,7 @@ class PanelToggle extends React.Component {
     const { expanded, bodyId } = this.context.$bs_panel || {};
     const Component = componentClass;
 
-    props.onClick = createChainedFunction(onClick, this.handleToggle);
+    props.onClick = this.handleToggle;
 
     props['aria-expanded'] = expanded;
     props.className = classNames(className, !expanded && 'collapsed');

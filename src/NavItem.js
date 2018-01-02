@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SafeAnchor from './SafeAnchor';
-import createChainedFunction from './utils/createChainedFunction';
 
 const propTypes = {
   active: PropTypes.bool,
@@ -28,14 +27,9 @@ class NavItem extends React.Component {
   }
 
   handleClick(e) {
-    if (this.props.disabled) {
-      e.preventDefault();
-      return;
-    }
-
-    if (this.props.onSelect) {
-      this.props.onSelect(this.props.eventKey, e);
-    }
+    const { onClick, onSelect, eventKey } = this.props;
+    if (onClick) onClick(e);
+    if (onSelect) onSelect(eventKey, e);
   }
 
   render() {
@@ -72,7 +66,7 @@ class NavItem extends React.Component {
         <SafeAnchor
           {...props}
           disabled={disabled}
-          onClick={createChainedFunction(onClick, this.handleClick)}
+          onClick={this.handleClick}
         />
       </li>
     );
