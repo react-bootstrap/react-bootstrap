@@ -49,7 +49,6 @@ class ModalHeader extends React.Component {
     const {
       closeLabel,
       closeButton,
-      onHide,
       className,
       children,
       ...props

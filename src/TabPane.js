@@ -109,9 +109,6 @@ class TabPane extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.handleEnter = this.handleEnter.bind(this);
-    this.handleExited = this.handleExited.bind(this);
-
     this.in = false;
   }
 
@@ -156,21 +153,22 @@ class TabPane extends React.Component {
     return tabContent && tabContent.animation;
   }
 
-  handleEnter(...args) {
-    if (this.props.onEnter) this.props.onEnter(...args);
-
+  handleEnter = (...args) => {
     const tabContent = this.context.$bs_tabContent;
-    if (!tabContent) return;
-    this.in = tabContent.onPaneEnter(this, this.props.eventKey);
+    if (tabContent) {
+      this.in = tabContent.onPaneEnter(this, this.props.eventKey);
+    }
+
+    if (this.props.onEnter) this.props.onEnter(...args);
   }
 
-  handleExited(...args) {
-    if (this.props.onExited) this.props.onExited(...args);
-
+  handleExited = (...args) => {
     const tabContent = this.context.$bs_tabContent;
-    if (!tabContent) return;
-    tabContent.onPaneExited(this);
-    this.in = false;
+    if (!tabContent) {
+      tabContent.onPaneExited(this);
+      this.in = false;
+    }
+    if (this.props.onExited) this.props.onExited(...args);
   }
 
   isActive() {
