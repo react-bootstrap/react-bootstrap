@@ -164,7 +164,7 @@ class TabPane extends React.Component {
 
   handleExited = (...args) => {
     const tabContent = this.context.$bs_tabContent;
-    if (!tabContent) {
+    if (tabContent) {
       tabContent.onPaneExited(this);
       this.in = false;
     }

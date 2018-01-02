@@ -54,6 +54,7 @@ class ModalHeader extends React.Component {
       ...props
     } = this.props;
 
+    delete props.onHide;
     const [bsProps, elementProps] = splitBsProps(props);
 
     return (
