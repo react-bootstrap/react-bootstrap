@@ -1,0 +1,52 @@
+{
+  "description": "React-Bootstrap Documentation",
+  "version": "1.0.0",
+  "author": "Jason Quense",
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby-starter-blog/issues"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "classnames": "^2.2.5",
+    "codemirror": "^5.16.0",
+    "gatsby": "^1.9.126",
+    "gatsby-link": "^1.6.30",
+    "gatsby-plugin-catch-links": "^1.0.13",
+    "gatsby-plugin-less": "^1.0.7",
+    "gatsby-plugin-offline": "^1.0.11",
+    "gatsby-remark-prismjs": "^1.2.10",
+    "gatsby-source-filesystem": "^1.5.9",
+    "gatsby-transformer-react-docgen": "^1.0.8",
+    "gatsby-transformer-remark": "^1.7.22",
+    "graphql": "^0.11.7",
+    "graphql-type-json": "^0.1.4",
+    "lodash": "^4.15.0",
+    "prop-types": "^15.6.0",
+    "react": "^15.5.4",
+    "react-bootstrap": "file:../",
+    "react-dom": "^15.5.4",
+    "react-helmet": "^5.2.0",
+    "react-live": "^1.7.1"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^1.15.0"
+  },
+  "homepage": "https://react-bootstrap.github.io/",
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-bootstrap/react-bootstrap.git"
+  },
+  "scripts": {
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "deploy": "gatsby build --prefix-links && gh-pages -d public"
+  }
+}

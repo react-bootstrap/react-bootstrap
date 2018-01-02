@@ -1,14 +1,17 @@
 version: '{build}'
 
+environment:
+  NODE_VERSION: "8"
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of io.js
-  - ps: Install-Product node ''
+  - ps: Install-Product node $env:NODE_VERSION
   - npm -g install npm@latest
   - set PATH=%APPDATA%\npm;%PATH%
   - node --version
   - npm --version
   - npm install
+  - npm run bootstrap-docs
 
 # No need for MSBuild on this project
 build: off

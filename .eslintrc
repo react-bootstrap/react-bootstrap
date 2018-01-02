@@ -1,11 +1,10 @@
 {
   "extends": ["eslint-config-airbnb"],
   "env": {
-    "browser": true,
-    "node": true
+    "browser": true
   },
-  "ecmaFeatures": {
-    "jsx": true
+  "globals": {
+    "__DEV__": false
   },
   "parser": "babel-eslint",
   "plugins": [
@@ -60,6 +59,17 @@
   },
   "overrides": [
     {
+      "files": ["tools/*"],
+      "env": {
+        "node": true,
+        "browser": false
+      },
+      "rules": {
+        "global-require": "off",
+        "no-console": "off"
+      }
+    },
+    {
       "files": ["test/*"],
       "rules": {
         "no-return-assign": "off",
@@ -74,9 +84,25 @@
       }
     },
     {
-      "files": ["docs/**/*"],
+      "files": ["www/src/**/*"],
+      "globals": {
+        "graphql": false
+      },
       "rules": {
-        "react/no-unescaped-entities": "off"
+        "global-require": "off",
+        "no-console": "off",
+        "react/no-unescaped-entities": "off",
+        "react/prop-types": "off",
+        "import/no-webpack-loader-syntax": "off"
+      },
+      "settings": {
+        "import/core-modules": "react-bootstrap"
+      }
+    },
+    {
+      "files": ["www/src/examples/*"],
+      "rules": {
+        "comma-dangle": "off"
       }
     }
   ]

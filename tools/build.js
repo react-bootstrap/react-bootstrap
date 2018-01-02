@@ -1,28 +1,32 @@
-import 'colors';
-import bower from './amd/build';
-import lib from './lib/build';
-import es from './es/build';
-import dist from './dist/build';
-import copy from './fs-utils';
-import { distRoot, bowerRoot } from './constants';
-import { exec } from './exec';
+require('colors');
+const fse = require('fs-extra');
 
-function forkAndBuildDocs({ verbose }) {
-  console.log('Building: '.cyan + 'docs'.green);
+const bower = require('./build-bower');
+const lib = require('./build-lib');
+const es = require('./build-es');
+const dist = require('./build-dist');
+const { distRoot, bowerRoot } = require('./constants');
 
-  const verboseOption = verbose ? '--verbose' : '';
+const targets = process.argv.slice(2);
+const has = t => !targets.length || targets.includes(t);
 
-  return exec(`npm run docs-build -- ${verboseOption}`)
-    .then(() => console.log('Built: '.cyan + 'docs'.green));
-}
+console.log(
+  `Building targets: ${targets.length ? targets.join(', ') : 'all'}\n`.green);
 
-export default function Build(options) {
-  return Promise.all([
-    lib(),
-    es(),
-    bower(),
-    dist(),
-    forkAndBuildDocs(options),
-  ])
-    .then(() => copy(distRoot, bowerRoot));
-}
+Promise.all([
+  has('lib') && lib(),
+  has('es') && es(),
+  has('bower') && bower(),
+  (has('dist') || has('bower')) && dist(),
+])
+  .then(() => (has('dist') || has('bower')) &&
+    fse.copy(distRoot, bowerRoot),
+  )
+  .catch((err) => {
+    if (err.stack) {
+      console.error(err.stack.red);
+    } else {
+      console.error(err.toString().red);
+    }
+    process.exit(1);
+  });
