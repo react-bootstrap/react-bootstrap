@@ -14,8 +14,8 @@
     "bootstrap-docs": "npm run build lib && cd www && yarn install && cd ..",
     "build": "node tools/build.js",
     "build-docs": "npm run bootstrap-docs && npm -C www run build",
-    "format": "prettier --write '**/*.js' --ignore-path .eslintignore",
-    "lint": "eslint www/src src test tools *.js",
+    "format": "npm run lint -- --fix",
+    "lint": "eslint .",
     "precommit": "lint-staged",
     "release": "release",
     "tdd": "karma start",
@@ -30,7 +30,6 @@
     ]
   },
   "prettier": {
-    "printWidth": 80,
     "singleQuote": true
   },
   "files": [
