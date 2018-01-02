@@ -47,6 +47,7 @@ describe('SafeAnchor', () => {
     const handleClick = sinon.spy();
 
     const wrapper = mount(<SafeAnchor onClick={handleClick} />);
+
     wrapper.find('a').simulate('click');
 
     wrapper
@@ -72,18 +73,18 @@ describe('SafeAnchor', () => {
 
   it('Should disable link behavior', () => {
     let clickSpy = sinon.spy();
-    let spy = sinon.spy(SafeAnchor.prototype, 'handleClick');
+    let bubbleSpy = sinon.spy();
 
     mount(
-      <SafeAnchor disabled href="#foo" onClick={clickSpy}>
-        Title
-      </SafeAnchor>
+      <div onClick={bubbleSpy}>
+        <SafeAnchor disabled href="#foo" onClick={clickSpy}>
+          Title
+        </SafeAnchor>
+      </div>
     ).simulate('click');
 
-    expect(spy).to.have.been.calledOnce;
+    expect(bubbleSpy).to.have.not.been.calledO;
     expect(clickSpy).to.have.not.been.called;
-    expect(spy.getCall(0).args[0].isDefaultPrevented()).to.equal(true);
-    expect(spy.getCall(0).args[0].isPropagationStopped()).to.equal(true);
   });
 
   it('forwards provided role', () => {
