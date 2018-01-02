@@ -1,0 +1,5 @@
+/lib
+/dist
+/node_modules/**
+/es
+/amd
