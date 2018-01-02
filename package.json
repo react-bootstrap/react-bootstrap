@@ -14,7 +14,7 @@
     "bootstrap-docs": "npm run build lib && cd www && yarn install && cd ..",
     "build": "node tools/build.js",
     "build-docs": "npm run bootstrap-docs && npm -C www run build",
-    "format": "prettier --write 'src' 'tools' 'docs/src'",
+    "format": "prettier --write '**/*.js' --ignore-path .eslintignore",
     "lint": "eslint www/src src test tools *.js",
     "precommit": "lint-staged",
     "release": "release",
@@ -31,7 +31,7 @@
   },
   "prettier": {
     "printWidth": 80,
-    "quotes": "single"
+    "singleQuote": true
   },
   "files": [
     "CHANGELOG.md",
