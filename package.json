@@ -16,7 +16,7 @@
     "build-docs": "npm run bootstrap-docs && npm -C www run build",
     "ci-lint": "eslint --rule 'prettier/prettier: 2'",
     "format": "npm run ci-lint -- --fix",
-    "lint": "npm run lint .",
+    "lint": "npm run ci-lint .",
     "precommit": "lint-staged",
     "release": "release",
     "tdd": "karma start",
