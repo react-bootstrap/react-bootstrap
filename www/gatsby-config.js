@@ -48,6 +48,7 @@ module.exports = {
       }
     },
     'gatsby-plugin-catch-links',
+    'gatsby-plugin-sass',
     'gatsby-plugin-less'
   ]
 };

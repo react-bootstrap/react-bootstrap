@@ -6,7 +6,7 @@
     "url": "https://github.com/gatsbyjs/gatsby-starter-blog/issues"
   },
   "dependencies": {
-    "bootstrap": "^3.3.6",
+    "bootstrap": "^4.0.0-beta.3",
     "classnames": "^2.2.5",
     "codemirror": "^5.16.0",
     "gatsby": "^1.9.126",
@@ -33,6 +33,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "gatsby-plugin-sass": "^1.0.15",
     "webpack": "^1.15.0"
   },
   "homepage": "https://react-bootstrap.github.io/",
