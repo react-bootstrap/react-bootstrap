@@ -14,8 +14,9 @@
     "bootstrap-docs": "npm run build lib && cd www && yarn install && cd ..",
     "build": "node tools/build.js",
     "build-docs": "npm run bootstrap-docs && npm -C www run build",
-    "format": "npm run lint -- --fix",
-    "lint": "eslint .",
+    "ci-lint": "eslint --rule 'prettier/prettier: 2'",
+    "format": "npm run ci-lint -- --fix",
+    "lint": "npm run lint .",
     "precommit": "lint-staged",
     "release": "release",
     "tdd": "karma start",
@@ -25,7 +26,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
+      "format",
       "git add"
     ]
   },
