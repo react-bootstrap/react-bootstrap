@@ -12,7 +12,6 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
     "max-len": "off",
     "no-plusplus": "off",
     "prefer-const": "off",
