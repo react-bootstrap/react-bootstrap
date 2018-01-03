@@ -10,7 +10,7 @@ describe('ToggleButtonGroup', () => {
         <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
-      </ToggleButtonGroup>,
+      </ToggleButtonGroup>
     )
       .find('input[type="checkbox"]')
       .length.should.equal(3);
@@ -22,7 +22,7 @@ describe('ToggleButtonGroup', () => {
         <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
-      </ToggleButtonGroup>,
+      </ToggleButtonGroup>
     )
       .find('input[type="radio"]')
       .length.should.equal(3);
@@ -34,7 +34,7 @@ describe('ToggleButtonGroup', () => {
         <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
-      </ToggleButtonGroup>,
+      </ToggleButtonGroup>
     )
       .find('input[checked=true]')
       .length.should.equal(2);
@@ -43,10 +43,14 @@ describe('ToggleButtonGroup', () => {
   it('should disable radios', () => {
     mount(
       <ToggleButtonGroup type="radio" name="items">
-        <ToggleButtonGroup.Button value={1} disabled>Option 1</ToggleButtonGroup.Button>
-        <ToggleButtonGroup.Button value={2} disabled>Option 2</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={1} disabled>
+          Option 1
+        </ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={2} disabled>
+          Option 2
+        </ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
-      </ToggleButtonGroup>,
+      </ToggleButtonGroup>
     )
       .find('input[disabled=true]')
       .length.should.equal(2);
@@ -59,7 +63,7 @@ describe('ToggleButtonGroup', () => {
         <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
-      </ToggleButtonGroup>,
+      </ToggleButtonGroup>
     )
       .find('input[type="checkbox"]')
       .at(1)
@@ -75,7 +79,7 @@ describe('ToggleButtonGroup', () => {
         <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
         <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>
-      </ToggleButtonGroup>,
+      </ToggleButtonGroup>
     )
       .find('input[type="radio"]')
       .at(1)

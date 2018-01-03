@@ -16,27 +16,49 @@ export default function NavSection({ data }) {
         <Anchor id="navs">Navs</Anchor> <small>Nav, NavItem</small>
       </h2>
 
-      <p>Navs come in two styles, <code>pills</code> and <code>tabs</code>. Disable a tab by adding <code>disabled</code>.</p>
+      <p>
+        Navs come in two styles, <code>pills</code> and <code>tabs</code>.
+        Disable a tab by adding <code>disabled</code>.
+      </p>
       <ReactPlayground codeText={NavBasic} />
 
-      <h3><Anchor id="navs-dropdown">Dropdown</Anchor></h3>
-      <p>Add dropdowns using the <code>NavDropdown</code> component.</p>
+      <h3>
+        <Anchor id="navs-dropdown">Dropdown</Anchor>
+      </h3>
+      <p>
+        Add dropdowns using the <code>NavDropdown</code> component.
+      </p>
       <ReactPlayground codeText={NavDropdown} />
 
-      <h3><Anchor id="navs-stacked">Stacked</Anchor></h3>
-      <p>They can also be <code>stacked</code> vertically.</p>
+      <h3>
+        <Anchor id="navs-stacked">Stacked</Anchor>
+      </h3>
+      <p>
+        They can also be <code>stacked</code> vertically.
+      </p>
       <ReactPlayground codeText={NavStacked} />
 
-      <h3><Anchor id="navs-justified">Justified</Anchor></h3>
-      <p>They can be <code>justified</code> to take the full width of their parent.</p>
+      <h3>
+        <Anchor id="navs-justified">Justified</Anchor>
+      </h3>
+      <p>
+        They can be <code>justified</code> to take the full width of their
+        parent.
+      </p>
       <ReactPlayground codeText={NavJustified} />
 
-      <h3><Anchor id="navs-props">Props</Anchor></h3>
+      <h3>
+        <Anchor id="navs-props">Props</Anchor>
+      </h3>
 
-      <h4><Anchor id="navs-props-nav">Nav</Anchor></h4>
+      <h4>
+        <Anchor id="navs-props-nav">Nav</Anchor>
+      </h4>
       <PropTable metadata={data.Nav} />
 
-      <h4><Anchor id="navs-props-navitem">NavItem</Anchor></h4>
+      <h4>
+        <Anchor id="navs-props-navitem">NavItem</Anchor>
+      </h4>
       <PropTable metadata={data.NavItem} />
     </div>
   );

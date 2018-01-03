@@ -8,7 +8,7 @@ import createChainedFunction from './utils/createChainedFunction';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const propTypes = {
-  onSelect: PropTypes.func,
+  onSelect: PropTypes.func
 };
 
 class Pager extends React.Component {
@@ -19,15 +19,12 @@ class Pager extends React.Component {
     const classes = getClassSet(bsProps);
 
     return (
-      <ul
-        {...elementProps}
-        className={classNames(className, classes)}
-      >
-        {ValidComponentChildren.map(children, child => (
+      <ul {...elementProps} className={classNames(className, classes)}>
+        {ValidComponentChildren.map(children, child =>
           cloneElement(child, {
-            onSelect: createChainedFunction(child.props.onSelect, onSelect),
+            onSelect: createChainedFunction(child.props.onSelect, onSelect)
           })
-        ))}
+        )}
       </ul>
     );
   }

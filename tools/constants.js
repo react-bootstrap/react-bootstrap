@@ -16,5 +16,5 @@ module.exports = {
   libRoot,
   esRoot,
   bowerRoot,
-  docsRoot,
+  docsRoot
 };

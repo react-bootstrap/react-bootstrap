@@ -15,27 +15,28 @@ const propTypes = {
   /**
    * You can use a custom element for this component
    */
-  componentClass: elementType,
+  componentClass: elementType
 };
 
 const defaultProps = {
   componentClass: 'div',
-  fluid: false,
+  fluid: false
 };
 
 class Grid extends React.Component {
   render() {
-    const { fluid, componentClass: Component, className, ...props } =
-      this.props;
+    const {
+      fluid,
+      componentClass: Component,
+      className,
+      ...props
+    } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = prefix(bsProps, fluid && 'fluid');
 
     return (
-      <Component
-        {...elementProps}
-        className={classNames(className, classes)}
-      />
+      <Component {...elementProps} className={classNames(className, classes)} />
     );
   }
 }

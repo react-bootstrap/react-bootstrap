@@ -10,9 +10,7 @@ const navbarInstance = (
       <Navbar.Text>
         Signed in as: <Navbar.Link href="#">Mark Otto</Navbar.Link>
       </Navbar.Text>
-      <Navbar.Text pullRight>
-        Have a great day!
-      </Navbar.Text>
+      <Navbar.Text pullRight>Have a great day!</Navbar.Text>
     </Navbar.Collapse>
   </Navbar>
 );

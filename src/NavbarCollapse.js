@@ -7,8 +7,8 @@ import { prefix } from './utils/bootstrapUtils';
 const contextTypes = {
   $bs_navbar: PropTypes.shape({
     bsClass: PropTypes.string,
-    expanded: PropTypes.bool,
-  }),
+    expanded: PropTypes.bool
+  })
 };
 
 class NavbarCollapse extends React.Component {
@@ -20,9 +20,7 @@ class NavbarCollapse extends React.Component {
 
     return (
       <Collapse in={navbarProps.expanded} {...props}>
-        <div className={bsClassName}>
-          {children}
-        </div>
+        <div className={bsClassName}>{children}</div>
       </Collapse>
     );
   }

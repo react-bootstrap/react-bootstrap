@@ -13,10 +13,15 @@ export default function JumbotronSection({ data }) {
         <Anchor id="jumbotron">Jumbotron</Anchor> <small>Jumbotron</small>
       </h2>
 
-      <p>A lightweight, flexible component that can optionally extend the entire viewport to showcase key content on your site.</p>
+      <p>
+        A lightweight, flexible component that can optionally extend the entire
+        viewport to showcase key content on your site.
+      </p>
       <ReactPlayground codeText={Jumbotron} />
 
-      <h3><Anchor id="jumbotron-props">Props</Anchor></h3>
+      <h3>
+        <Anchor id="jumbotron-props">Props</Anchor>
+      </h3>
       <PropTable metadata={data.Jumbotron} />
     </div>
   );

@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 import warning from 'warning';
 
-import { bsClass, getClassSet, prefix, splitBsPropsAndOmit }
-  from './utils/bootstrapUtils';
+import {
+  bsClass,
+  getClassSet,
+  prefix,
+  splitBsPropsAndOmit
+} from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
 import Fade from './Fade';
@@ -74,26 +78,24 @@ const propTypes = {
   /**
    * Unmount the tab (remove it from the DOM) when it is no longer visible
    */
-  unmountOnExit: PropTypes.bool,
+  unmountOnExit: PropTypes.bool
 };
 
 const contextTypes = {
   $bs_tabContainer: PropTypes.shape({
     getTabId: PropTypes.func,
-    getPaneId: PropTypes.func,
+    getPaneId: PropTypes.func
   }),
   $bs_tabContent: PropTypes.shape({
     bsClass: PropTypes.string,
-    animation: PropTypes.oneOfType([
-      PropTypes.bool, elementType,
-    ]),
+    animation: PropTypes.oneOfType([PropTypes.bool, elementType]),
     activeKey: PropTypes.any,
     mountOnEnter: PropTypes.bool,
     unmountOnExit: PropTypes.bool,
     onPaneEnter: PropTypes.func.isRequired,
     onPaneExited: PropTypes.func.isRequired,
-    exiting: PropTypes.bool.isRequired,
-  }),
+    exiting: PropTypes.bool.isRequired
+  })
 };
 
 /**
@@ -101,7 +103,7 @@ const contextTypes = {
  * conflict with the top level one.
  */
 const childContextTypes = {
-  $bs_tabContainer: PropTypes.oneOf([null]),
+  $bs_tabContainer: PropTypes.oneOf([null])
 };
 
 class TabPane extends React.Component {
@@ -116,7 +118,7 @@ class TabPane extends React.Component {
 
   getChildContext() {
     return {
-      $bs_tabContainer: null,
+      $bs_tabContainer: null
     };
   }
 
@@ -201,7 +203,8 @@ class TabPane extends React.Component {
     } = this.props;
 
     const {
-      $bs_tabContent: tabContent, $bs_tabContainer: tabContainer,
+      $bs_tabContent: tabContent,
+      $bs_tabContainer: tabContainer
     } = this.context;
 
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['animation']);
@@ -209,10 +212,14 @@ class TabPane extends React.Component {
     const active = this.isActive();
     const animation = this.getAnimation();
 
-    const mountOnEnter = propsMountOnEnter != null ?
-      propsMountOnEnter : tabContent && tabContent.mountOnEnter;
-    const unmountOnExit = propsUnmountOnExit != null ?
-      propsUnmountOnExit : tabContent && tabContent.unmountOnExit;
+    const mountOnEnter =
+      propsMountOnEnter != null
+        ? propsMountOnEnter
+        : tabContent && tabContent.mountOnEnter;
+    const unmountOnExit =
+      propsUnmountOnExit != null
+        ? propsUnmountOnExit
+        : tabContent && tabContent.unmountOnExit;
 
     if (!active && !animation && unmountOnExit) {
       return null;
@@ -226,16 +233,17 @@ class TabPane extends React.Component {
 
     const classes = {
       ...getClassSet(bsProps),
-      active,
+      active
     };
 
     if (tabContainer) {
-      warning(!elementProps.id && !elementProps['aria-labelledby'],
+      warning(
+        !elementProps.id && !elementProps['aria-labelledby'],
         'In the context of a `<TabContainer>`, `<TabPanes>` are given ' +
-        'generated `id` and `aria-labelledby` attributes for the sake of ' +
-        'proper component accessibility. Any provided ones will be ignored. ' +
-        'To control these attributes directly provide a `generateChildId` ' +
-        'prop to the parent `<TabContainer>`.',
+          'generated `id` and `aria-labelledby` attributes for the sake of ' +
+          'proper component accessibility. Any provided ones will be ignored. ' +
+          'To control these attributes directly provide a `generateChildId` ' +
+          'prop to the parent `<TabContainer>`.'
       );
 
       elementProps.id = tabContainer.getPaneId(eventKey);

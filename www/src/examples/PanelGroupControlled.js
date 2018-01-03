@@ -5,7 +5,7 @@ class ControlledPanelGroup extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
 
     this.state = {
-      activeKey: '1',
+      activeKey: '1'
     };
   }
 
@@ -25,17 +25,13 @@ class ControlledPanelGroup extends React.Component {
           <Panel.Heading>
             <Panel.Title toggle>Panel heading 1</Panel.Title>
           </Panel.Heading>
-          <Panel.Body collapsible>
-            Panel content 1
-          </Panel.Body>
+          <Panel.Body collapsible>Panel content 1</Panel.Body>
         </Panel>
         <Panel eventKey="2">
           <Panel.Heading>
             <Panel.Title toggle>Panel heading 2</Panel.Title>
           </Panel.Heading>
-          <Panel.Body collapsible>
-            Panel content 2
-          </Panel.Body>
+          <Panel.Body collapsible>Panel content 2</Panel.Body>
         </Panel>
       </PanelGroup>
     );

@@ -7,7 +7,10 @@ import Table from 'react-bootstrap/lib/Table';
 import capitalize from 'react-bootstrap/lib/utils/capitalize';
 
 function cleanDocletValue(str) {
-  return str.trim().replace(/^\{/, '').replace(/\}$/, '');
+  return str
+    .trim()
+    .replace(/^\{/, '')
+    .replace(/\}$/, '');
 }
 
 // function getPropsData(component, metadata) {
@@ -25,11 +28,10 @@ function cleanDocletValue(str) {
 //   return props;
 // }
 
-
 class PropTable extends React.Component {
   static propTypes = {
-    metadata: PropTypes.object.isRequired,
-  }
+    metadata: PropTypes.object.isRequired
+  };
 
   getDisplayTypeName(typeName) {
     if (typeName === 'func') {
@@ -57,12 +59,18 @@ class PropTable extends React.Component {
           }
           current = current.concat(item);
 
-          return i === (list.length - 1) ? current : current.concat(' | ');
+          return i === list.length - 1 ? current : current.concat(' | ');
         }, []);
       case 'array': {
         let child = this.getType({ type: type.value });
 
-        return <span>{'array<'}{child}{'>'}</span>;
+        return (
+          <span>
+            {'array<'}
+            {child}
+            {'>'}
+          </span>
+        );
       }
       case 'enum':
         return this.renderEnum(type);
@@ -76,12 +84,9 @@ class PropTable extends React.Component {
   _renderRows(propsData) {
     return propsData
       .filter(prop => prop.type && !prop.doclets.private)
-      .map((propData) => {
+      .map(propData => {
         const { name, description, doclets, defaultValue } = propData;
-        let descHtml = (
-          description &&
-          description.childMarkdownRemark.html
-        );
+        let descHtml = description && description.childMarkdownRemark.html;
 
         return (
           <tr key={name} className="prop-table-row">
@@ -92,17 +97,17 @@ class PropTable extends React.Component {
               <div>{this.getType(propData)}</div>
             </td>
 
-            <td>
-              {defaultValue && defaultValue.value}
-            </td>
+            <td>{defaultValue && defaultValue.value}</td>
 
             <td>
-              {doclets.deprecated &&
+              {doclets.deprecated && (
                 <div className="prop-desc-heading">
-                  <strong className="text-danger">{`Deprecated: ${doclets.deprecated} `}</strong>
+                  <strong className="text-danger">{`Deprecated: ${
+                    doclets.deprecated
+                  } `}</strong>
                 </div>
-              }
-              { this.renderControllableNote(propData, name) }
+              )}
+              {this.renderControllableNote(propData, name)}
               <div
                 className="prop-desc"
                 dangerouslySetInnerHTML={{ __html: descHtml }}
@@ -127,8 +132,8 @@ class PropTable extends React.Component {
       </span>
     ) : (
       <span>
-        controlled by: <code>{controllable}</code>,
-        initial prop: <code>{`default${capitalize(propName)}`}</code>
+        controlled by: <code>{controllable}</code>, initial prop:{' '}
+        <code>{`default${capitalize(propName)}`}</code>
       </span>
     );
 
@@ -137,7 +142,7 @@ class PropTable extends React.Component {
         <small>
           <em className="text-info">
             <Glyphicon glyph="info-sign" />
-            &nbsp;{ text }
+            &nbsp;{text}
           </em>
         </small>
       </div>
@@ -150,19 +155,13 @@ class PropTable extends React.Component {
     const renderedEnumValues = [];
     enumValues.forEach(({ value }, i) => {
       if (i > 0) {
-        renderedEnumValues.push(
-          <span key={`${i}c`}>, </span>,
-        );
+        renderedEnumValues.push(<span key={`${i}c`}>, </span>);
       }
 
-      renderedEnumValues.push(
-        <code key={i}>{value}</code>,
-      );
+      renderedEnumValues.push(<code key={i}>{value}</code>);
     });
 
-    return (
-      <span>one of: {renderedEnumValues}</span>
-    );
+    return <span>one of: {renderedEnumValues}</span>;
   }
 
   renderRequiredLabel(prop) {
@@ -170,16 +169,18 @@ class PropTable extends React.Component {
       return null;
     }
 
-    return (
-      <Label>required</Label>
-    );
+    return <Label>required</Label>;
   }
 
   render() {
     let propsData = this.props.metadata.props || [];
 
     if (!propsData.length) {
-      return <div className="text-muted"><em>There are no public props for this component.</em></div>;
+      return (
+        <div className="text-muted">
+          <em>There are no public props for this component.</em>
+        </div>
+      );
     }
 
     return (
@@ -192,9 +193,7 @@ class PropTable extends React.Component {
             <th>Description</th>
           </tr>
         </thead>
-        <tbody>
-          {this._renderRows(propsData)}
-        </tbody>
+        <tbody>{this._renderRows(propsData)}</tbody>
       </Table>
     );
   }

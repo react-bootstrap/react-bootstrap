@@ -6,7 +6,7 @@ class ControlledCarousel extends React.Component {
 
     this.state = {
       index: 0,
-      direction: null,
+      direction: null
     };
   }
 
@@ -14,13 +14,17 @@ class ControlledCarousel extends React.Component {
     alert(`selected=${selectedIndex}, direction=${e.direction}`);
     this.setState({
       index: selectedIndex,
-      direction: e.direction,
+      direction: e.direction
     });
   }
 
   render() {
     return (
-      <Carousel activeIndex={this.state.index} direction={this.state.direction} onSelect={this.handleSelect}>
+      <Carousel
+        activeIndex={this.state.index}
+        direction={this.state.direction}
+        onSelect={this.handleSelect}
+      >
         <Carousel.Item>
           <img width={900} height={500} alt="900x500" src="/carousel.png" />
           <Carousel.Caption>
@@ -39,7 +43,9 @@ class ControlledCarousel extends React.Component {
           <img width={900} height={500} alt="900x500" src="/carousel.png" />
           <Carousel.Caption>
             <h3>Third slide label</h3>
-            <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+            <p>
+              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>

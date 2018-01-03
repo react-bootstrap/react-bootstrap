@@ -12,29 +12,25 @@ describe('<ControlLabel>', () => {
       shallow(
         <ControlLabel htmlFor="foo" className="my-control-label">
           Label
-        </ControlLabel>,
+        </ControlLabel>
       )
         .assertSingle('label.control-label.my-control-label[htmlFor="foo"]')
-        .text(),
+        .text()
     ).to.equal('Label');
   });
 
   it('should respect srOnly', () => {
-    shallow(
-      <ControlLabel srOnly>
-        Label
-      </ControlLabel>,
-    )
-      .assertSingle('label.control-label.sr-only');
+    shallow(<ControlLabel srOnly>Label</ControlLabel>).assertSingle(
+      'label.control-label.sr-only'
+    );
   });
 
   it('should use controlId for htmlFor', () => {
     mount(
       <FormGroup controlId="foo">
         <ControlLabel>Label</ControlLabel>
-      </FormGroup>,
-    )
-      .assertSingle('label.control-label[htmlFor="foo"]');
+      </FormGroup>
+    ).assertSingle('label.control-label[htmlFor="foo"]');
   });
 
   it('should prefer explicit htmlFor', () => {
@@ -42,11 +38,8 @@ describe('<ControlLabel>', () => {
 
     mount(
       <FormGroup controlId="foo">
-        <ControlLabel htmlFor="bar">
-          Label
-        </ControlLabel>
-      </FormGroup>,
-    )
-      .assertSingle('label.control-label[htmlFor="bar"]');
+        <ControlLabel htmlFor="bar">Label</ControlLabel>
+      </FormGroup>
+    ).assertSingle('label.control-label[htmlFor="bar"]');
   });
 });

@@ -10,15 +10,15 @@ const propTypes = {
    * Uses `controlId` from `<FormGroup>` if not explicitly specified.
    */
   htmlFor: PropTypes.string,
-  srOnly: PropTypes.bool,
+  srOnly: PropTypes.bool
 };
 
 const defaultProps = {
-  srOnly: false,
+  srOnly: false
 };
 
 const contextTypes = {
-  $bs_formGroup: PropTypes.object,
+  $bs_formGroup: PropTypes.object
 };
 
 class ControlLabel extends React.Component {
@@ -31,12 +31,12 @@ class ControlLabel extends React.Component {
 
     warning(
       controlId == null || htmlFor === controlId,
-      '`controlId` is ignored on `<ControlLabel>` when `htmlFor` is specified.',
+      '`controlId` is ignored on `<ControlLabel>` when `htmlFor` is specified.'
     );
 
     const classes = {
       ...getClassSet(bsProps),
-      'sr-only': srOnly,
+      'sr-only': srOnly
     };
 
     return (

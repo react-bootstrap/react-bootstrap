@@ -14,14 +14,23 @@ export default function WellSection({ data }) {
         <Anchor id="wells">Wells</Anchor> <small>Well</small>
       </h2>
 
-      <p>Use the well as a simple effect on an element to give it an inset effect.</p>
+      <p>
+        Use the well as a simple effect on an element to give it an inset
+        effect.
+      </p>
       <ReactPlayground codeText={Well} />
 
-      <h2><Anchor id="wells-optional">Optional classes</Anchor></h2>
-      <p>Control padding and rounded corners with two optional modifier classes.</p>
+      <h2>
+        <Anchor id="wells-optional">Optional classes</Anchor>
+      </h2>
+      <p>
+        Control padding and rounded corners with two optional modifier classes.
+      </p>
       <ReactPlayground codeText={WellSizes} />
 
-      <h3><Anchor id="wells-props">Props</Anchor></h3>
+      <h3>
+        <Anchor id="wells-props">Props</Anchor>
+      </h3>
       <PropTable metadata={data.Well} />
     </div>
   );

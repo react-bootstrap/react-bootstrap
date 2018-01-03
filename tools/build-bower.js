@@ -3,7 +3,6 @@ const fse = require('fs-extra');
 const { bowerRoot } = require('./constants');
 const pkgJson = require('../package.json');
 
-
 module.exports = async function buildBower() {
   console.log('Building: '.cyan + 'bower module'.green);
 
@@ -13,7 +12,7 @@ module.exports = async function buildBower() {
 
   await fse.copy(
     path.resolve(__dirname, '../README.md'),
-    path.join(bowerRoot, 'README.md'),
+    path.join(bowerRoot, 'README.md')
   );
 
   await fse.writeJson(
@@ -24,19 +23,15 @@ module.exports = async function buildBower() {
       homepage: pkgJson.homepage,
       author: pkgJson.author,
       license: pkgJson.license,
-      main: [
-        'react-bootstrap.js',
-      ],
+      main: ['react-bootstrap.js'],
       keywords: pkgJson.keywords,
-      ignore: [
-        '**/.*',
-      ],
+      ignore: ['**/.*'],
       dependencies: {
         react: pkgJson.peerDependencies.react,
-        'react-dom': pkgJson.peerDependencies['react-dom'],
-      },
+        'react-dom': pkgJson.peerDependencies['react-dom']
+      }
     },
-    { spaces: 2 },
+    { spaces: 2 }
   );
 
   console.log('Built: '.cyan + 'bower module'.green);

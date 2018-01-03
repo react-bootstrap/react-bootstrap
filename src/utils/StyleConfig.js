@@ -1,7 +1,7 @@
 export const Size = {
   LARGE: 'large',
   SMALL: 'small',
-  XSMALL: 'xsmall',
+  XSMALL: 'xsmall'
 };
 
 export const SIZE_MAP = {
@@ -12,26 +12,21 @@ export const SIZE_MAP = {
   lg: 'lg',
   md: 'md',
   sm: 'sm',
-  xs: 'xs',
+  xs: 'xs'
 };
 
-export const DEVICE_SIZES = [
-  'lg',
-  'md',
-  'sm',
-  'xs',
-];
+export const DEVICE_SIZES = ['lg', 'md', 'sm', 'xs'];
 
 export const State = {
   SUCCESS: 'success',
   WARNING: 'warning',
   DANGER: 'danger',
-  INFO: 'info',
+  INFO: 'info'
 };
 
 export const Style = {
   DEFAULT: 'default',
   PRIMARY: 'primary',
   LINK: 'link',
-  INVERSE: 'inverse',
+  INVERSE: 'inverse'
 };

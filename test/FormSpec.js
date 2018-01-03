@@ -9,7 +9,7 @@ describe('<Form>', () => {
     shallow(
       <Form horizontal className="my-form">
         <FormGroup />
-      </Form>,
+      </Form>
     )
       .assertSingle('form.form-horizontal.my-form')
       .assertSingle(FormGroup);
@@ -19,7 +19,7 @@ describe('<Form>', () => {
     shallow(
       <Form inline className="my-form">
         <FormGroup />
-      </Form>,
+      </Form>
     )
       .assertSingle('form.form-inline.my-form')
       .assertSingle(FormGroup);
@@ -29,7 +29,7 @@ describe('<Form>', () => {
     shallow(
       <Form componentClass="fieldset" horizontal className="my-form">
         <FormGroup />
-      </Form>,
+      </Form>
     )
       .assertSingle('fieldset.form-horizontal.my-form')
       .assertSingle(FormGroup);

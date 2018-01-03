@@ -7,18 +7,18 @@ import Carousel from '../src/Carousel';
 describe('<Carousel>', () => {
   const items = [
     <Carousel.Item key={1}>Item 1 content</Carousel.Item>,
-    <Carousel.Item key={2}>Item 2 content</Carousel.Item>,
+    <Carousel.Item key={2}>Item 2 content</Carousel.Item>
   ];
 
   it('Should show the correct item', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Carousel activeIndex={1}>
-        {items}
-      </Carousel>,
+      <Carousel activeIndex={1}>{items}</Carousel>
     );
 
-    const [item1, item2] =
-      ReactTestUtils.scryRenderedComponentsWithType(instance, Carousel.Item);
+    const [item1, item2] = ReactTestUtils.scryRenderedComponentsWithType(
+      instance,
+      Carousel.Item
+    );
 
     assert.equal(item1.props.active, false);
     assert.equal(item2.props.active, true);
@@ -26,19 +26,22 @@ describe('<Carousel>', () => {
 
   it('Should show the correct item with defaultActiveIndex', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Carousel defaultActiveIndex={1}>
-        {items}
-      </Carousel>,
+      <Carousel defaultActiveIndex={1}>{items}</Carousel>
     );
 
-    const [item1, item2] =
-      ReactTestUtils.scryRenderedComponentsWithType(instance, Carousel.Item);
+    const [item1, item2] = ReactTestUtils.scryRenderedComponentsWithType(
+      instance,
+      Carousel.Item
+    );
 
     assert.equal(item1.props.active, false);
     assert.equal(item2.props.active, true);
     assert.equal(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
-        .getElementsByTagName('li').length, 2,
+      ReactTestUtils.findRenderedDOMComponentWithClass(
+        instance,
+        'carousel-indicators'
+      ).getElementsByTagName('li').length,
+      2
     );
   });
 
@@ -49,21 +52,26 @@ describe('<Carousel>', () => {
         {null}
         {false}
         <Carousel.Item>Item 2 content</Carousel.Item>
-      </Carousel>,
+      </Carousel>
     );
 
-    const [item1, item2] =
-      ReactTestUtils.scryRenderedComponentsWithType(instance, Carousel.Item);
+    const [item1, item2] = ReactTestUtils.scryRenderedComponentsWithType(
+      instance,
+      Carousel.Item
+    );
 
     assert.equal(item1.props.active, false);
     assert.equal(item2.props.active, true);
     assert.equal(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
-        .getElementsByTagName('li').length, 2,
+      ReactTestUtils.findRenderedDOMComponentWithClass(
+        instance,
+        'carousel-indicators'
+      ).getElementsByTagName('li').length,
+      2
     );
   });
 
-  it('Should call onSelect when indicator selected', (done) => {
+  it('Should call onSelect when indicator selected', done => {
     function onSelect(index, ...args) {
       expect(index).to.equal(0);
 
@@ -78,16 +86,18 @@ describe('<Carousel>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={1} onSelect={onSelect}>
         {items}
-      </Carousel>,
+      </Carousel>
     );
 
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
-        .getElementsByTagName('li')[0],
+      ReactTestUtils.findRenderedDOMComponentWithClass(
+        instance,
+        'carousel-indicators'
+      ).getElementsByTagName('li')[0]
     );
   });
 
-  it('Should call onSelect with direction', (done) => {
+  it('Should call onSelect with direction', done => {
     function onSelect(index, event) {
       expect(index).to.equal(0);
       expect(event.direction).to.equal('prev');
@@ -99,16 +109,18 @@ describe('<Carousel>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={1} onSelect={onSelect}>
         {items}
-      </Carousel>,
+      </Carousel>
     );
 
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
-        .getElementsByTagName('li')[0],
+      ReactTestUtils.findRenderedDOMComponentWithClass(
+        instance,
+        'carousel-indicators'
+      ).getElementsByTagName('li')[0]
     );
   });
 
-  it('Should call onSelect with direction when there is no event', (done) => {
+  it('Should call onSelect with direction when there is no event', done => {
     function onSelect(index, event) {
       expect(index).to.equal(0);
       expect(event.direction).to.equal('next');
@@ -120,7 +132,7 @@ describe('<Carousel>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Carousel activeIndex={1} onSelect={onSelect}>
         {items}
-      </Carousel>,
+      </Carousel>
     );
 
     instance.handleNext();
@@ -130,10 +142,13 @@ describe('<Carousel>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Carousel defaultActiveIndex={0} controls wrap>
         {items}
-      </Carousel>,
+      </Carousel>
     );
 
-    const prevButton = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'left');
+    const prevButton = ReactTestUtils.findRenderedDOMComponentWithClass(
+      instance,
+      'left'
+    );
     assert.ok(prevButton);
 
     assert.equal(instance.state.activeIndex, 0);
@@ -145,10 +160,13 @@ describe('<Carousel>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Carousel defaultActiveIndex={1} controls wrap>
         {items}
-      </Carousel>,
+      </Carousel>
     );
 
-    const nextButton = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'right');
+    const nextButton = ReactTestUtils.findRenderedDOMComponentWithClass(
+      instance,
+      'right'
+    );
     assert.ok(nextButton);
 
     assert.equal(instance.state.activeIndex, 1);
@@ -160,11 +178,17 @@ describe('<Carousel>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Carousel defaultActiveIndex={0} controls wrap={false}>
         {items}
-      </Carousel>,
+      </Carousel>
     );
 
-    const prevButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'left');
-    const nextButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'right');
+    const prevButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(
+      instance,
+      'left'
+    );
+    const nextButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(
+      instance,
+      'right'
+    );
 
     assert.equal(prevButtons.length, 0);
     assert.equal(nextButtons.length, 1);
@@ -179,11 +203,17 @@ describe('<Carousel>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Carousel defaultActiveIndex={1} controls wrap={false}>
         {items}
-      </Carousel>,
+      </Carousel>
     );
 
-    const prevButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'left');
-    const nextButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'right');
+    const prevButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(
+      instance,
+      'left'
+    );
+    const nextButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(
+      instance,
+      'right'
+    );
 
     assert.equal(prevButtons.length, 1);
     assert.equal(nextButtons.length, 0);
@@ -206,11 +236,17 @@ describe('<Carousel>', () => {
         <Carousel.Item>Item 1 content</Carousel.Item>
         <Carousel.Item>Item 2 content</Carousel.Item>
         <Carousel.Item>Item 3 content</Carousel.Item>
-      </Carousel>,
+      </Carousel>
     );
 
-    const prevButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'ficon-left');
-    const nextButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'ficon-right');
+    const prevButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(
+      instance,
+      'ficon-left'
+    );
+    const nextButtons = ReactTestUtils.scryRenderedDOMComponentsWithClass(
+      instance,
+      'ficon-right'
+    );
 
     assert.equal(prevButtons.length, 1);
     assert.equal(nextButtons.length, 1);
@@ -228,10 +264,13 @@ describe('<Carousel>', () => {
         <Carousel.Item>Item 1 content</Carousel.Item>
         <Carousel.Item>Item 2 content</Carousel.Item>
         <Carousel.Item>Item 3 content</Carousel.Item>
-      </Carousel>,
+      </Carousel>
     );
 
-    const labels = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'sr-only');
+    const labels = ReactTestUtils.scryRenderedDOMComponentsWithClass(
+      instance,
+      'sr-only'
+    );
 
     assert.equal(labels.length, 2);
     assert.equal(labels[0].textContent, 'Previous awesomeness');
@@ -239,7 +278,7 @@ describe('<Carousel>', () => {
   });
 
   it('Should not render labels when values are falsy', () => {
-    [null, ''].forEach((falsyValue) => {
+    [null, ''].forEach(falsyValue => {
       const instance = ReactTestUtils.renderIntoDocument(
         <Carousel
           activeIndex={1}
@@ -251,11 +290,18 @@ describe('<Carousel>', () => {
           <Carousel.Item>Item 1 content</Carousel.Item>
           <Carousel.Item>Item 2 content</Carousel.Item>
           <Carousel.Item>Item 3 content</Carousel.Item>
-        </Carousel>,
+        </Carousel>
       );
 
-      const labels = ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'sr-only');
-      assert.equal(labels.length, 0, `should not render labels for value ${falsyValue}`);
+      const labels = ReactTestUtils.scryRenderedDOMComponentsWithClass(
+        instance,
+        'sr-only'
+      );
+      assert.equal(
+        labels.length,
+        0,
+        `should not render labels for value ${falsyValue}`
+      );
     });
   });
 
@@ -263,13 +309,19 @@ describe('<Carousel>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Carousel defaultActiveIndex={0} slide={false}>
         {items}
-      </Carousel>,
+      </Carousel>
     );
 
-    const nextButton = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'right');
+    const nextButton = ReactTestUtils.findRenderedDOMComponentWithClass(
+      instance,
+      'right'
+    );
     assert.ok(nextButton);
 
-    const prevButton = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'left');
+    const prevButton = ReactTestUtils.findRenderedDOMComponentWithClass(
+      instance,
+      'left'
+    );
     assert.ok(prevButton);
 
     assert.equal(instance.state.activeIndex, 0);
@@ -279,7 +331,6 @@ describe('<Carousel>', () => {
 
     ReactTestUtils.Simulate.click(prevButton);
     assert.equal(instance.state.activeIndex, 0);
-
   });
 
   it('Should render on update, default active item > new child length', () => {
@@ -288,39 +339,48 @@ describe('<Carousel>', () => {
     // default active is the 2nd item, which will be removed on
     // subsequent render
     let instance = ReactDOM.render(
-      <Carousel defaultActiveIndex={1}>
-        {items}
-      </Carousel>,
-      div,
+      <Carousel defaultActiveIndex={1}>{items}</Carousel>,
+      div
     );
 
-    const [item1, item2] =
-      ReactTestUtils.scryRenderedComponentsWithType(instance, Carousel.Item);
+    const [item1, item2] = ReactTestUtils.scryRenderedComponentsWithType(
+      instance,
+      Carousel.Item
+    );
 
     assert.equal(item1.props.active, false);
     assert.equal(item2.props.active, true);
     assert.equal(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
-        .getElementsByTagName('li').length, 2,
+      ReactTestUtils.findRenderedDOMComponentWithClass(
+        instance,
+        'carousel-indicators'
+      ).getElementsByTagName('li').length,
+      2
     );
 
     let fewerItems = items.slice();
     fewerItems.pop();
     instance = ReactDOM.render(
-      <Carousel defaultActiveIndex={0}>
-        {fewerItems}
-      </Carousel>,
-      div,
+      <Carousel defaultActiveIndex={0}>{fewerItems}</Carousel>,
+      div
     );
 
-    const [item3] = ReactTestUtils.scryRenderedComponentsWithType(instance, Carousel.Item);
+    const [item3] = ReactTestUtils.scryRenderedComponentsWithType(
+      instance,
+      Carousel.Item
+    );
 
     assert.equal(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
-        .getElementsByTagName('li').length, 1,
+      ReactTestUtils.findRenderedDOMComponentWithClass(
+        instance,
+        'carousel-indicators'
+      ).getElementsByTagName('li').length,
+      1
     );
     assert.equal(
-      ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'item').length, 1,
+      ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'item')
+        .length,
+      1
     );
     assert.equal(item3.props.active, true);
   });
@@ -331,41 +391,46 @@ describe('<Carousel>', () => {
     // default active is the 2nd item, which will be removed on
     // subsequent render
     let instance = ReactDOM.render(
-      <Carousel activeIndex={1}>
-        {items}
-      </Carousel>,
-      div,
+      <Carousel activeIndex={1}>{items}</Carousel>,
+      div
     );
 
-    const [item1, item2] =
-      ReactTestUtils.scryRenderedComponentsWithType(instance, Carousel.Item);
+    const [item1, item2] = ReactTestUtils.scryRenderedComponentsWithType(
+      instance,
+      Carousel.Item
+    );
 
     assert.equal(item1.props.active, false);
     assert.equal(item2.props.active, true);
     assert.equal(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
-        .getElementsByTagName('li').length, 2,
+      ReactTestUtils.findRenderedDOMComponentWithClass(
+        instance,
+        'carousel-indicators'
+      ).getElementsByTagName('li').length,
+      2
     );
 
     let fewerItems = items.slice();
     fewerItems.pop();
-    instance = ReactDOM.render(
-      <Carousel>
-        {fewerItems}
-      </Carousel>,
-      div,
+    instance = ReactDOM.render(<Carousel>{fewerItems}</Carousel>, div);
+
+    const [item3] = ReactTestUtils.scryRenderedComponentsWithType(
+      instance,
+      Carousel.Item
     );
 
-    const [item3] = ReactTestUtils.scryRenderedComponentsWithType(instance, Carousel.Item);
-
     assert.equal(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'carousel-indicators')
-        .getElementsByTagName('li').length, 1,
+      ReactTestUtils.findRenderedDOMComponentWithClass(
+        instance,
+        'carousel-indicators'
+      ).getElementsByTagName('li').length,
+      1
     );
     assert.equal(
-      ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'item').length, 1,
+      ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'item')
+        .length,
+      1
     );
     assert.equal(item3.props.active, true);
   });
-
 });
