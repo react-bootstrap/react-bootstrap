@@ -27,13 +27,22 @@ render(
     <OverlayTrigger trigger="click" placement="bottom" overlay={popoverClick}>
       <Button>Click</Button>
     </OverlayTrigger>
-    <OverlayTrigger trigger={['hover', 'focus']} placement="bottom" overlay={popoverHoverFocus}>
+    <OverlayTrigger
+      trigger={['hover', 'focus']}
+      placement="bottom"
+      overlay={popoverHoverFocus}
+    >
       <Button>Hover + Focus</Button>
     </OverlayTrigger>
     <OverlayTrigger trigger="focus" placement="bottom" overlay={popoverFocus}>
       <Button>Focus</Button>
     </OverlayTrigger>
-    <OverlayTrigger trigger="click" rootClose placement="bottom" overlay={popoverClickRootClose}>
+    <OverlayTrigger
+      trigger="click"
+      rootClose
+      placement="bottom"
+      overlay={popoverClickRootClose}
+    >
       <Button>Click w/rootClose</Button>
     </OverlayTrigger>
   </ButtonToolbar>

@@ -4,13 +4,7 @@ import DropdownToggle from './DropdownToggle';
 
 class SplitToggle extends React.Component {
   render() {
-    return (
-      <DropdownToggle
-        {...this.props}
-        useAnchor={false}
-        noCaret={false}
-      />
-    );
+    return <DropdownToggle {...this.props} useAnchor={false} noCaret={false} />;
   }
 }
 

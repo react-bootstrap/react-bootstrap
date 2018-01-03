@@ -24,10 +24,13 @@ describe('<Nav>', () => {
       <Nav bsStyle="pills" activeKey={1}>
         <NavItem eventKey={1}>Pill 1 content</NavItem>
         <NavItem eventKey={2}>Pill 2 content</NavItem>
-      </Nav>,
+      </Nav>
     );
 
-    const items = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
+    const items = ReactTestUtils.scryRenderedComponentsWithType(
+      instance,
+      NavItem
+    );
 
     assert.ok(items[0].props.active);
     assert.notOk(items[1].props.active);
@@ -38,10 +41,14 @@ describe('<Nav>', () => {
       <Nav bsStyle="tabs" activeKey={1}>
         <NavItem eventKey={1}>Tab 1 content</NavItem>
         <NavItem eventKey={2}>Tab 2 content</NavItem>
-      </Nav>,
+      </Nav>
     );
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav'));
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-tabs'));
+    assert.ok(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav')
+    );
+    assert.ok(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-tabs')
+    );
   });
 
   it('Should adds stacked variation class', () => {
@@ -49,9 +56,11 @@ describe('<Nav>', () => {
       <Nav bsStyle="tabs" stacked activeKey={1}>
         <NavItem eventKey={1}>Tab 1 content</NavItem>
         <NavItem eventKey={2}>Tab 2 content</NavItem>
-      </Nav>,
+      </Nav>
     );
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-stacked'));
+    assert.ok(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-stacked')
+    );
   });
 
   it('Should adds variation class', () => {
@@ -59,9 +68,14 @@ describe('<Nav>', () => {
       <Nav bsStyle="tabs" justified activeKey={1}>
         <NavItem eventKey={1}>Tab 1 content</NavItem>
         <NavItem eventKey={2}>Tab 2 content</NavItem>
-      </Nav>,
+      </Nav>
     );
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-justified'));
+    assert.ok(
+      ReactTestUtils.findRenderedDOMComponentWithClass(
+        instance,
+        'nav-justified'
+      )
+    );
   });
 
   it('Should add pull-right class', () => {
@@ -69,9 +83,11 @@ describe('<Nav>', () => {
       <Nav bsStyle="tabs" pullRight activeKey={1}>
         <NavItem eventKey={1}>Tab 1 content</NavItem>
         <NavItem eventKey={2}>Tab 2 content</NavItem>
-      </Nav>,
+      </Nav>
     );
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pull-right'));
+    assert.ok(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pull-right')
+    );
   });
 
   it('Should add navbar-right class', () => {
@@ -79,13 +95,15 @@ describe('<Nav>', () => {
       <Nav bsStyle="tabs" navbar pullRight activeKey={1}>
         <NavItem key={1}>Tab 1 content</NavItem>
         <NavItem key={2}>Tab 2 content</NavItem>
-      </Nav>,
+      </Nav>
     );
 
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-right'));
+    assert.ok(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'navbar-right')
+    );
   });
 
-  it('Should call on select when item is selected', (done) => {
+  it('Should call on select when item is selected', done => {
     function handleSelect(key) {
       assert.equal(key, '2');
       done();
@@ -93,11 +111,16 @@ describe('<Nav>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Nav bsStyle="tabs" activeKey={1} onSelect={handleSelect}>
         <NavItem eventKey={1}>Tab 1 content</NavItem>
-        <NavItem eventKey={2}><span>Tab 2 content</span></NavItem>
-      </Nav>,
+        <NavItem eventKey={2}>
+          <span>Tab 2 content</span>
+        </NavItem>
+      </Nav>
     );
 
-    const items = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'A');
+    const items = ReactTestUtils.scryRenderedDOMComponentsWithTag(
+      instance,
+      'A'
+    );
 
     ReactTestUtils.Simulate.click(items[1]);
   });
@@ -105,12 +128,19 @@ describe('<Nav>', () => {
   it('Should set the correct item active by href', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Nav bsStyle="pills" activeHref="#item2">
-        <NavItem eventKey={1} href="#item1">Pill 1 content</NavItem>
-        <NavItem eventKey={2} href="#item2">Pill 2 content</NavItem>
-      </Nav>,
+        <NavItem eventKey={1} href="#item1">
+          Pill 1 content
+        </NavItem>
+        <NavItem eventKey={2} href="#item2">
+          Pill 2 content
+        </NavItem>
+      </Nav>
     );
 
-    const items = ReactTestUtils.scryRenderedComponentsWithType(instance, NavItem);
+    const items = ReactTestUtils.scryRenderedComponentsWithType(
+      instance,
+      NavItem
+    );
 
     assert.ok(items[1].props.active);
     assert.notOk(items[0].props.active);
@@ -119,9 +149,7 @@ describe('<Nav>', () => {
   it('Should warn when attempting to use a justified navbar nav', () => {
     shouldWarn('justified navbar `Nav`s are not supported');
 
-    ReactTestUtils.renderIntoDocument(
-      <Nav navbar justified />,
-    );
+    ReactTestUtils.renderIntoDocument(<Nav navbar justified />);
   });
 
   describe('keyboard navigation', () => {
@@ -132,12 +160,16 @@ describe('<Nav>', () => {
       instance = mount(
         <Nav activeKey={1} onSelect={selectSpy} role="tablist">
           <NavItem eventKey={1}>NavItem 1 content</NavItem>
-          <NavItem eventKey={2} disabled>NavItem 2 content</NavItem>
+          <NavItem eventKey={2} disabled>
+            NavItem 2 content
+          </NavItem>
           <NavItem eventKey={3}>NavItem 3 content</NavItem>
-          <NavItem eventKey={4} disabled>NavItem 4 content</NavItem>
+          <NavItem eventKey={4} disabled>
+            NavItem 4 content
+          </NavItem>
           <NavItem eventKey={5}>NavItem 5 content</NavItem>
         </Nav>,
-        { attachTo: mountPoint },
+        { attachTo: mountPoint }
       );
 
       selectSpy = sinon.spy(activeKey => instance.setProps({ activeKey }));
@@ -159,7 +191,9 @@ describe('<Nav>', () => {
       const anchors = instance.find('a').map(n => n.getDOMNode());
       anchors[0].focus();
 
-      ReactTestUtils.Simulate.keyDown(anchors[0], { keyCode: keycode('right') });
+      ReactTestUtils.Simulate.keyDown(anchors[0], {
+        keyCode: keycode('right')
+      });
 
       expect(instance.prop('activeKey')).to.equal(3);
 
@@ -211,13 +245,15 @@ describe('<Nav>', () => {
           <NavItem eventKey={0}>NavItem 2 content</NavItem>
           <NavItem eventKey={1}>NavItem 3 content</NavItem>
         </Nav>,
-        { attachTo: mountPoint },
+        { attachTo: mountPoint }
       );
 
       const anchors = instance.find('a').map(n => n.getDOMNode());
       anchors[0].focus();
 
-      ReactTestUtils.Simulate.keyDown(anchors[0], { keyCode: keycode('right') });
+      ReactTestUtils.Simulate.keyDown(anchors[0], {
+        keyCode: keycode('right')
+      });
 
       expect(instance.props().activeKey).to.equal(0);
       expect(document.activeElement).to.equal(anchors[1]);
@@ -234,13 +270,15 @@ describe('<Nav>', () => {
           <NavItem eventKey={'b'}>NavItem 2 content</NavItem>
           <NavItem eventKey={''}>NavItem 3 content</NavItem>
         </Nav>,
-        { attachTo: mountPoint },
+        { attachTo: mountPoint }
       );
 
       const anchors = instance.find('a').map(n => n.getDOMNode());
       anchors[2].focus();
 
-      ReactTestUtils.Simulate.keyDown(anchors[2], { keyCode: keycode('right') });
+      ReactTestUtils.Simulate.keyDown(anchors[2], {
+        keyCode: keycode('right')
+      });
 
       expect(instance.props().activeKey).to.equal('a');
       expect(document.activeElement).to.equal(anchors[0]);
@@ -250,17 +288,22 @@ describe('<Nav>', () => {
   });
 
   describe('Web Accessibility', () => {
-
     it('Should have tablist and tab roles', () => {
       const instance = ReactTestUtils.renderIntoDocument(
         <Nav role="tablist" bsStyle="tabs" activeKey={1}>
           <NavItem key={1}>Tab 1 content</NavItem>
           <NavItem key={2}>Tab 2 content</NavItem>
-        </Nav>,
+        </Nav>
       );
 
-      const ul = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'ul')[0];
-      const navItem = ReactTestUtils.scryRenderedDOMComponentsWithTag(instance, 'a')[0];
+      const ul = ReactTestUtils.scryRenderedDOMComponentsWithTag(
+        instance,
+        'ul'
+      )[0];
+      const navItem = ReactTestUtils.scryRenderedDOMComponentsWithTag(
+        instance,
+        'a'
+      )[0];
 
       assert.equal(ul.getAttribute('role'), 'tablist');
       assert.equal(navItem.getAttribute('role'), 'tab');

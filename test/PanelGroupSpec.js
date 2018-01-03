@@ -10,8 +10,10 @@ describe('<PanelGroup>', () => {
   it('Should pass bsStyle to Panels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <PanelGroup bsStyle="default" id="panel">
-        <Panel><Panel.Body>Panel 1</Panel.Body></Panel>
-      </PanelGroup>,
+        <Panel>
+          <Panel.Body>Panel 1</Panel.Body>
+        </Panel>
+      </PanelGroup>
     );
 
     let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
@@ -25,7 +27,7 @@ describe('<PanelGroup>', () => {
         <Panel bsStyle="primary">
           <Panel.Body>Panel 1</Panel.Body>
         </Panel>
-      </PanelGroup>,
+      </PanelGroup>
     );
 
     let panel = ReactTestUtils.findRenderedComponentWithType(instance, Panel);
@@ -35,17 +37,23 @@ describe('<PanelGroup>', () => {
 
   it('Should not collapse panel by bubbling onSelect callback', () => {
     mount(
-      <PanelGroup accordion id="panel" onSelect={() => { throw new Error(); }}>
+      <PanelGroup
+        accordion
+        id="panel"
+        onSelect={() => {
+          throw new Error();
+        }}
+      >
         <Panel>
           <input type="text" className="changeme" />
         </Panel>
-      </PanelGroup>,
+      </PanelGroup>
     )
       .assertSingle('input.changeme')
       .simulate('select');
   });
 
-  it('Should call onSelect handler with eventKey', (done) => {
+  it('Should call onSelect handler with eventKey', done => {
     function handleSelect(eventKey, e) {
       e.should.exist;
       eventKey.should.equal('1');
@@ -61,7 +69,7 @@ describe('<PanelGroup>', () => {
 
           <Panel.Body collapsible>Panel 1</Panel.Body>
         </Panel>
-      </PanelGroup>,
+      </PanelGroup>
     )
       .find('a')
       .simulate('click');
@@ -87,7 +95,7 @@ describe('<PanelGroup>', () => {
 
             <Panel.Body collapsible>Panel 2</Panel.Body>
           </Panel>
-        </PanelGroup>,
+        </PanelGroup>
       );
 
       panelGroup = inst.getDOMNode();
@@ -121,6 +129,5 @@ describe('<PanelGroup>', () => {
       assert.equal(links[1].getAttribute('aria-expanded'), 'false');
       assert.equal(panelBodies[1].getAttribute('aria-expanded'), 'false');
     });
-
   });
 });

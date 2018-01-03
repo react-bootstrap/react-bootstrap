@@ -10,12 +10,7 @@ class MediaListItem extends React.Component {
 
     const classes = getClassSet(bsProps);
 
-    return (
-      <li
-        {...elementProps}
-        className={classNames(className, classes)}
-      />
-    );
+    return <li {...elementProps} className={classNames(className, classes)} />;
   }
 }
 

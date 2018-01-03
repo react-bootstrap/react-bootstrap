@@ -11,11 +11,9 @@ describe('ButtonToolbar', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <ButtonToolbar>
         <ButtonGroup>
-          <Button>
-            Title
-          </Button>
+          <Button>Title</Button>
         </ButtonGroup>
-      </ButtonToolbar>,
+      </ButtonToolbar>
     );
     let node = ReactDOM.findDOMNode(instance);
     assert.equal(node.nodeName, 'DIV');

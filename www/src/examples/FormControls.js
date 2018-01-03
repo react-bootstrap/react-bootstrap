@@ -22,11 +22,7 @@ const formInstance = (
       label="Email address"
       placeholder="Enter email"
     />
-    <FieldGroup
-      id="formControlsPassword"
-      label="Password"
-      type="password"
-    />
+    <FieldGroup id="formControlsPassword" label="Password" type="password" />
     <FieldGroup
       id="formControlsFile"
       type="file"
@@ -42,27 +38,16 @@ const formInstance = (
     </Radio>
 
     <FormGroup>
-      <Checkbox inline>
-        1
-      </Checkbox>
-      {' '}
-      <Checkbox inline>
-        2
-      </Checkbox>
-      {' '}
-      <Checkbox inline>
-        3
-      </Checkbox>
+      <Checkbox inline>1</Checkbox> <Checkbox inline>2</Checkbox>{' '}
+      <Checkbox inline>3</Checkbox>
     </FormGroup>
     <FormGroup>
       <Radio name="radioGroup" inline>
         1
-      </Radio>
-      {' '}
+      </Radio>{' '}
       <Radio name="radioGroup" inline>
         2
-      </Radio>
-      {' '}
+      </Radio>{' '}
       <Radio name="radioGroup" inline>
         3
       </Radio>
@@ -90,14 +75,10 @@ const formInstance = (
 
     <FormGroup>
       <ControlLabel>Static text</ControlLabel>
-      <FormControl.Static>
-        email@example.com
-      </FormControl.Static>
+      <FormControl.Static>email@example.com</FormControl.Static>
     </FormGroup>
 
-    <Button type="submit">
-      Submit
-    </Button>
+    <Button type="submit">Submit</Button>
   </form>
 );
 

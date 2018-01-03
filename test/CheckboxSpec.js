@@ -10,7 +10,7 @@ describe('<Checkbox>', () => {
     const wrapper = shallow(
       <Checkbox name="foo" checked className="my-checkbox">
         My label
-      </Checkbox>,
+      </Checkbox>
     );
 
     wrapper
@@ -19,14 +19,15 @@ describe('<Checkbox>', () => {
 
     wrapper
       .assertSingle('label')
-      .text().should.equal('My label');
+      .text()
+      .should.equal('My label');
   });
 
   it('should support inline', () => {
     const wrapper = shallow(
       <Checkbox inline name="foo" className="my-checkbox">
         My label
-      </Checkbox>,
+      </Checkbox>
     );
 
     wrapper
@@ -35,22 +36,20 @@ describe('<Checkbox>', () => {
 
     wrapper
       .assertSingle('label')
-      .text().should.equal('My label');
+      .text()
+      .should.equal('My label');
   });
 
   it('should support validation state', () => {
-    shallow(
-      <Checkbox validationState="success" />,
-    )
-      .assertSingle('.has-success');
+    shallow(<Checkbox validationState="success" />).assertSingle(
+      '.has-success'
+    );
   });
 
   it('should not support validation state when inline', () => {
     shouldWarn('ignored');
 
-    shallow(
-      <Checkbox inline validationState="success" />,
-    )
+    shallow(<Checkbox inline validationState="success" />)
       .find('.has-success')
       .should.have.length(0);
   });
@@ -59,7 +58,11 @@ describe('<Checkbox>', () => {
     class Container extends React.Component {
       render() {
         return (
-          <Checkbox inputRef={(ref) => { this.input = ref; }} />
+          <Checkbox
+            inputRef={ref => {
+              this.input = ref;
+            }}
+          />
         );
       }
     }

@@ -1,4 +1,3 @@
-
 class Example extends React.Component {
   constructor(...args) {
     super(...args);
@@ -14,8 +13,10 @@ class Example extends React.Component {
         <Fade in={this.state.open}>
           <div>
             <Well>
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-              Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+              Anim pariatur cliche reprehenderit, enim eiusmod high life
+              accusamus terry richardson ad squid. Nihil anim keffiyeh
+              helvetica, craft beer labore wes anderson cred nesciunt sapiente
+              ea proident.
             </Well>
           </div>
         </Fade>

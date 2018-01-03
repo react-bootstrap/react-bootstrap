@@ -17,10 +17,7 @@ function curry(fn) {
 
 export function prefix(props, variant) {
   let bsClass = (props.bsClass || '').trim();
-  invariant(
-    bsClass != null,
-    'A `bsClass` prop is required for this component',
-  );
+  invariant(bsClass != null, 'A `bsClass` prop is required for this component');
   return bsClass + (variant ? `-${variant}` : '');
 }
 
@@ -43,7 +40,7 @@ export const bsStyles = curry((styles, defaultStyle, Component) => {
   let existing = Component.STYLES || [];
   let propTypes = Component.propTypes || {};
 
-  styles.forEach((style) => {
+  styles.forEach(style => {
     if (existing.indexOf(style) === -1) {
       existing.push(style);
     }
@@ -57,7 +54,7 @@ export const bsStyles = curry((styles, defaultStyle, Component) => {
 
   Component.propTypes = {
     ...propTypes,
-    bsStyle: propType,
+    bsStyle: propType
   };
 
   if (defaultStyle !== undefined) {
@@ -77,14 +74,14 @@ export const bsSizes = curry((sizes, defaultSize, Component) => {
   let existing = Component.SIZES || [];
   let propTypes = Component.propTypes || {};
 
-  sizes.forEach((size) => {
+  sizes.forEach(size => {
     if (existing.indexOf(size) === -1) {
       existing.push(size);
     }
   });
 
   const values = [];
-  existing.forEach((size) => {
+  existing.forEach(size => {
     const mappedSize = SIZE_MAP[size];
     if (mappedSize && mappedSize !== size) {
       values.push(mappedSize);
@@ -101,7 +98,7 @@ export const bsSizes = curry((sizes, defaultSize, Component) => {
 
   Component.propTypes = {
     ...propTypes,
-    bsSize: propType,
+    bsSize: propType
   };
 
   if (defaultSize !== undefined) {
@@ -116,7 +113,7 @@ export const bsSizes = curry((sizes, defaultSize, Component) => {
 
 export function getClassSet(props) {
   const classes = {
-    [prefix(props)]: true,
+    [prefix(props)]: true
   };
 
   if (props.bsSize) {
@@ -136,7 +133,7 @@ function getBsProps(props) {
     bsClass: props.bsClass,
     bsSize: props.bsSize,
     bsStyle: props.bsStyle,
-    bsRole: props.bsRole,
+    bsRole: props.bsRole
   };
 }
 
@@ -162,7 +159,9 @@ export function splitBsProps(props) {
 
 export function splitBsPropsAndOmit(props, omittedPropNames) {
   const isOmittedProp = {};
-  omittedPropNames.forEach((propName) => { isOmittedProp[propName] = true; });
+  omittedPropNames.forEach(propName => {
+    isOmittedProp[propName] = true;
+  });
 
   const elementProps = {};
   Object.entries(props).forEach(([propName, propValue]) => {

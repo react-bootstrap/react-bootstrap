@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 
 class Anchor extends React.Component {
   static propTypes = {
-    id: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   };
 
   render() {

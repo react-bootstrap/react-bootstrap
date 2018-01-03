@@ -18,35 +18,58 @@ export default function PopoverSection({ data }) {
       </h2>
 
       <p>
-        The Popover, offers a more robust alternative to the Tooltip for displaying overlays of content.
+        The Popover, offers a more robust alternative to the Tooltip for
+        displaying overlays of content.
       </p>
       <ReactPlayground codeText={PopoverBasic} />
 
-      <h4><Anchor id="popovers-overlay-trigger">With OverlayTrigger</Anchor></h4>
+      <h4>
+        <Anchor id="popovers-overlay-trigger">With OverlayTrigger</Anchor>
+      </h4>
       <p>
-        The Popover component, like the Tooltip can be used with an <code>OverlayTrigger</code> Component, and positioned around it.
+        The Popover component, like the Tooltip can be used with an{' '}
+        <code>OverlayTrigger</code> Component, and positioned around it.
       </p>
       <ReactPlayground codeText={PopoverPositioned} />
 
-      <h4><Anchor id="popovers-trigger-behaviors">Trigger behaviors</Anchor></h4>
+      <h4>
+        <Anchor id="popovers-trigger-behaviors">Trigger behaviors</Anchor>
+      </h4>
       <p>
-        It's inadvisable to use <code>"hover"</code> or <code>"focus"</code> triggers for popovers, because they have poor accessibility from keyboard and on mobile devices.
+        It's inadvisable to use <code>"hover"</code> or <code>"focus"</code>{' '}
+        triggers for popovers, because they have poor accessibility from
+        keyboard and on mobile devices.
       </p>
       <ReactPlayground codeText={PopoverTriggerBehaviors} />
 
-      <h4><Anchor id="popovers-in-container">Popover component in container</Anchor></h4>
+      <h4>
+        <Anchor id="popovers-in-container">
+          Popover component in container
+        </Anchor>
+      </h4>
       <p>
-        Specify <code>container</code> to control the DOM element to which to append the overlay. This element must be a positioned element to allow correctly positioning the overlay.
+        Specify <code>container</code> to control the DOM element to which to
+        append the overlay. This element must be a positioned element to allow
+        correctly positioning the overlay.
       </p>
-      <ReactPlayground codeText={PopoverContained} exampleClassName="bs-example-popover-contained" />
+      <ReactPlayground
+        codeText={PopoverContained}
+        exampleClassName="bs-example-popover-contained"
+      />
 
-      <h4><Anchor id="popovers-positioned-scrolling">Positioned popover components in scrolling container</Anchor></h4>
+      <h4>
+        <Anchor id="popovers-positioned-scrolling">
+          Positioned popover components in scrolling container
+        </Anchor>
+      </h4>
       <ReactPlayground
         codeText={PopoverPositionedScrolling}
         exampleClassName="bs-example-popover-scroll"
       />
 
-      <h3><Anchor id="popover-props">Props</Anchor></h3>
+      <h3>
+        <Anchor id="popover-props">Props</Anchor>
+      </h3>
       <PropTable metadata={data.Popover} />
     </div>
   );

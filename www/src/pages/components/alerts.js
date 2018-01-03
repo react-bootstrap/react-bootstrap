@@ -17,11 +17,17 @@ export default function AlertsSection({ data }) {
       <p>Basic alert styles.</p>
       <ReactPlayground codeText={AlertBasic} />
 
-      <h3><Anchor id="alerts-closeable">Closeable alerts</Anchor></h3>
-      <p>just pass in a <code>onDismiss</code> function.</p>
+      <h3>
+        <Anchor id="alerts-closeable">Closeable alerts</Anchor>
+      </h3>
+      <p>
+        just pass in a <code>onDismiss</code> function.
+      </p>
       <ReactPlayground codeText={AlertDismissable} />
 
-      <h3><Anchor id="alert-props">Props</Anchor></h3>
+      <h3>
+        <Anchor id="alert-props">Props</Anchor>
+      </h3>
       <PropTable metadata={data.metadata} />
     </div>
   );

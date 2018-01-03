@@ -6,8 +6,8 @@ import { prefix } from './utils/bootstrapUtils';
 
 const contextTypes = {
   $bs_navbar: PropTypes.shape({
-    bsClass: PropTypes.string,
-  }),
+    bsClass: PropTypes.string
+  })
 };
 
 class NavbarBrand extends React.Component {
@@ -19,9 +19,7 @@ class NavbarBrand extends React.Component {
 
     if (React.isValidElement(children)) {
       return React.cloneElement(children, {
-        className: classNames(
-          children.props.className, className, bsClassName,
-        ),
+        className: classNames(children.props.className, className, bsClassName)
       });
     }
 

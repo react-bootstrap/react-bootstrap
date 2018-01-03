@@ -11,13 +11,13 @@ const propTypes = {
   onSelect: PropTypes.func,
   disabled: PropTypes.bool,
   active: PropTypes.bool,
-  activeLabel: PropTypes.string.isRequired,
+  activeLabel: PropTypes.string.isRequired
 };
 
 const defaultProps = {
   active: false,
   disabled: false,
-  activeLabel: '(current)',
+  activeLabel: '(current)'
 };
 
 export default function PaginationItem({
@@ -31,15 +31,10 @@ export default function PaginationItem({
 }) {
   const Component = active || disabled ? 'span' : SafeAnchor;
   return (
-    <li
-      style={style}
-      className={classNames(className, { active, disabled })}
-    >
+    <li style={style} className={classNames(className, { active, disabled })}>
       <Component disabled={disabled} {...props}>
         {children}
-        {active && (
-          <span className="sr-only">{activeLabel}</span>
-        )}
+        {active && <span className="sr-only">{activeLabel}</span>}
       </Component>
     </li>
   );
@@ -74,4 +69,3 @@ export const Prev = createButton('Prev', '\u2039');
 export const Ellipsis = createButton('Ellipsis', '\u2026', 'More');
 export const Next = createButton('Next', '\u203a');
 export const Last = createButton('Last', '\u00bb');
-

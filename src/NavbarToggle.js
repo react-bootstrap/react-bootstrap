@@ -10,15 +10,15 @@ const propTypes = {
   /**
    * The toggle content, if left empty it will render the default toggle (seen above).
    */
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 const contextTypes = {
   $bs_navbar: PropTypes.shape({
     bsClass: PropTypes.string,
     expanded: PropTypes.bool,
-    onToggle: PropTypes.func.isRequired,
-  }),
+    onToggle: PropTypes.func.isRequired
+  })
 };
 
 class NavbarToggle extends React.Component {
@@ -33,16 +33,12 @@ class NavbarToggle extends React.Component {
       className: classNames(
         className,
         prefix(navbarProps, 'toggle'),
-        !navbarProps.expanded && 'collapsed',
-      ),
+        !navbarProps.expanded && 'collapsed'
+      )
     };
 
     if (children) {
-      return (
-        <button {...buttonProps}>
-          {children}
-        </button>
-      );
+      return <button {...buttonProps}>{children}</button>;
     }
 
     return (

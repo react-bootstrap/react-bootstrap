@@ -10,35 +10,42 @@ function config(optimize) {
 
   return {
     entry: {
-      'react-bootstrap': './src/index.js',
+      'react-bootstrap': './src/index.js'
     },
 
     output: {
       path: distRoot,
       filename: optimize ? '[name].min.js' : '[name].js',
       library: 'ReactBootstrap',
-      libraryTarget: 'umd',
+      libraryTarget: 'umd'
     },
     module: {
-      rules: [
-        rules.js({ ...babelOptions, cacheDirectory: true }),
-      ],
+      rules: [rules.js({ ...babelOptions, cacheDirectory: true })]
     },
     plugins: [
       optimize && plugins.uglify(),
       plugins.moduleConcatenation(),
       plugins.define({
         'process.env': {
-          NODE_ENV: JSON.stringify(optimize ? 'production' : 'development'),
-        },
-      }),
-    ]
-      .filter(Boolean),
+          NODE_ENV: JSON.stringify(optimize ? 'production' : 'development')
+        }
+      })
+    ].filter(Boolean),
 
     externals: {
-      react: { root: 'React', commonjs2: 'react', commonjs: 'react', amd: 'react' },
-      'react-dom': { root: 'ReactDOM', commonjs2: 'react-dom', commonjs: 'react-dom', amd: 'react-dom' },
-    },
+      react: {
+        root: 'React',
+        commonjs2: 'react',
+        commonjs: 'react',
+        amd: 'react'
+      },
+      'react-dom': {
+        root: 'ReactDOM',
+        commonjs2: 'react-dom',
+        commonjs: 'react-dom',
+        amd: 'react-dom'
+      }
+    }
   };
 }
 

@@ -10,13 +10,13 @@ const propTypes = {
   noCaret: PropTypes.bool,
   open: PropTypes.bool,
   title: PropTypes.string,
-  useAnchor: PropTypes.bool,
+  useAnchor: PropTypes.bool
 };
 
 const defaultProps = {
   open: false,
   useAnchor: false,
-  bsRole: 'toggle',
+  bsRole: 'toggle'
 };
 
 class DropdownToggle extends React.Component {

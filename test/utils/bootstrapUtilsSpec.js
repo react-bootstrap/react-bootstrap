@@ -1,13 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import createReactClass from 'create-react-class';
-import { bsStyles, bsSizes, getClassSet, prefix, _curry }
-  from '../../src/utils/bootstrapUtils';
+import {
+  bsStyles,
+  bsSizes,
+  getClassSet,
+  prefix,
+  _curry
+} from '../../src/utils/bootstrapUtils';
 
 import { render, shouldWarn } from '../helpers';
 
 describe('bootstrapUtils', () => {
-
   it('should prefix with bsClass', () => {
     expect(prefix({ bsClass: 'yolo' }, 'pie')).to.equal('yolo-pie');
   });
@@ -23,23 +27,28 @@ describe('bootstrapUtils', () => {
   });
 
   it('returns a classSet of bsClass and style', () => {
-    expect(
-      getClassSet({ bsClass: 'btn', bsStyle: 'primary' }),
-    )
-      .to.eql({ btn: true, 'btn-primary': true });
+    expect(getClassSet({ bsClass: 'btn', bsStyle: 'primary' })).to.eql({
+      btn: true,
+      'btn-primary': true
+    });
   });
 
   it('returns a classSet of bsClass and size', () => {
-    expect(getClassSet({ bsClass: 'btn', bsSize: 'large' }))
-      .to.eql({ btn: true, 'btn-lg': true });
+    expect(getClassSet({ bsClass: 'btn', bsSize: 'large' })).to.eql({
+      btn: true,
+      'btn-lg': true
+    });
 
-    expect(getClassSet({ bsClass: 'btn', bsSize: 'lg' }))
-      .to.eql({ btn: true, 'btn-lg': true });
+    expect(getClassSet({ bsClass: 'btn', bsSize: 'lg' })).to.eql({
+      btn: true,
+      'btn-lg': true
+    });
   });
 
   it('returns a classSet of bsClass, style and size', () => {
-    expect(getClassSet({ bsClass: 'btn', bsSize: 'lg', bsStyle: 'primary' }))
-      .to.eql({ btn: true, 'btn-lg': true, 'btn-primary': true });
+    expect(
+      getClassSet({ bsClass: 'btn', bsSize: 'lg', bsStyle: 'primary' })
+    ).to.eql({ btn: true, 'btn-lg': true, 'btn-primary': true });
   });
 
   describe('decorators', () => {
@@ -68,7 +77,6 @@ describe('bootstrapUtils', () => {
   });
 
   describe('bsStyles', () => {
-
     it('should add style to allowed propTypes', () => {
       const Component = () => null;
       bsStyles(['minimal', 'boss', 'plaid'])(Component);
@@ -105,10 +113,14 @@ describe('bootstrapUtils', () => {
       shouldWarn('expected one of ["minimal","tweed","plaid"]');
 
       class Component extends React.Component {
-        render() { return <span />; }
+        render() {
+          return <span />;
+        }
       }
 
-      const WrappedComponent = bsStyles(['minimal', 'tweed', 'plaid'], 'plaid')(Component);
+      const WrappedComponent = bsStyles(['minimal', 'tweed', 'plaid'], 'plaid')(
+        Component
+      );
 
       const instance = render(<WrappedComponent />);
 
@@ -120,10 +132,15 @@ describe('bootstrapUtils', () => {
     it('should work with createClass', () => {
       shouldWarn('expected one of ["minimal","boss","plaid","tweed"]');
 
-      const Component = bsStyles(['minimal', 'boss', 'plaid', 'tweed'], 'plaid')(
+      const Component = bsStyles(
+        ['minimal', 'boss', 'plaid', 'tweed'],
+        'plaid'
+      )(
         createReactClass({ // eslint-disable-line
-          render() { return <span />; },
-        }),
+          render() {
+            return <span />;
+          }
+        })
       );
 
       const instance = render(<Component />);
@@ -137,7 +154,7 @@ describe('bootstrapUtils', () => {
       shouldWarn('expected one of ["minimal","boss","tartan"]');
 
       const Component = bsStyles(['minimal', 'boss', 'tartan'], 'tartan')(
-        () => <span />,
+        () => <span />
       );
 
       render(<Component bsStyle="not-plaid" />);
@@ -145,7 +162,6 @@ describe('bootstrapUtils', () => {
   });
 
   describe('bsSizes', () => {
-
     it('should add size to allowed propTypes', () => {
       const Component = () => null;
       bsSizes(['large', 'small'])(Component);
@@ -181,10 +197,15 @@ describe('bootstrapUtils', () => {
       shouldWarn('expected one of ["smallish","micro","planet"]');
 
       class Component extends React.Component {
-        render() { return <span />; }
+        render() {
+          return <span />;
+        }
       }
 
-      const WrappedComponent = bsSizes(['smallish', 'micro', 'planet'], 'smallish')(Component);
+      const WrappedComponent = bsSizes(
+        ['smallish', 'micro', 'planet'],
+        'smallish'
+      )(Component);
 
       const instance = render(<WrappedComponent />);
 
@@ -196,10 +217,15 @@ describe('bootstrapUtils', () => {
     it('should work with createClass', () => {
       shouldWarn('expected one of ["smallish","micro","planet","big"]');
 
-      const Component = bsSizes(['smallish', 'micro', 'planet', 'big'], 'smallish')(
+      const Component = bsSizes(
+        ['smallish', 'micro', 'planet', 'big'],
+        'smallish'
+      )(
         class extends React.Component {
-          render() { return <span />; }
-        },
+          render() {
+            return <span />;
+          }
+        }
       );
 
       const instance = render(<Component />);

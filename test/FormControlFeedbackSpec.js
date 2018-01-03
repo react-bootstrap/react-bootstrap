@@ -9,27 +9,24 @@ describe('<FormControl.Feedback>', () => {
     mount(
       <FormGroup validationState="success">
         <FormControl.Feedback />
-      </FormGroup>,
-    )
-      .assertSingle('.form-control-feedback.glyphicon-ok');
+      </FormGroup>
+    ).assertSingle('.form-control-feedback.glyphicon-ok');
   });
 
   it('should render default warning', () => {
     mount(
       <FormGroup validationState="warning">
         <FormControl.Feedback />
-      </FormGroup>,
-    )
-      .assertSingle('.form-control-feedback.glyphicon-warning-sign');
+      </FormGroup>
+    ).assertSingle('.form-control-feedback.glyphicon-warning-sign');
   });
 
   it('should render default error', () => {
     mount(
       <FormGroup validationState="error">
         <FormControl.Feedback />
-      </FormGroup>,
-    )
-      .assertSingle('.form-control-feedback.glyphicon-remove');
+      </FormGroup>
+    ).assertSingle('.form-control-feedback.glyphicon-remove');
   });
 
   it('should render default validation state', () => {
@@ -38,9 +35,8 @@ describe('<FormControl.Feedback>', () => {
         <div>
           <FormControl.Feedback />
         </div>
-      </FormGroup>,
-    )
-      .assertSingle('.form-control-feedback.glyphicon-ok');
+      </FormGroup>
+    ).assertSingle('.form-control-feedback.glyphicon-ok');
   });
 
   it('should render custom component', () => {
@@ -51,8 +47,7 @@ describe('<FormControl.Feedback>', () => {
     mount(
       <FormControl.Feedback>
         <MyComponent className="foo" />
-      </FormControl.Feedback>,
-    )
-      .assertSingle('MyComponent.foo.form-control-feedback');
+      </FormControl.Feedback>
+    ).assertSingle('MyComponent.foo.form-control-feedback');
   });
 });

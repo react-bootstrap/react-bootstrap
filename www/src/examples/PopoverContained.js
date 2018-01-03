@@ -2,7 +2,7 @@ class Example extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.handleClick = (e) => {
+    this.handleClick = e => {
       this.setState({ target: e.target, show: !this.state.show });
     };
 
@@ -12,9 +12,7 @@ class Example extends React.Component {
   render() {
     return (
       <ButtonToolbar>
-        <Button onClick={this.handleClick}>
-          Holy guacamole!
-        </Button>
+        <Button onClick={this.handleClick}>Holy guacamole!</Button>
 
         <Overlay
           show={this.state.show}

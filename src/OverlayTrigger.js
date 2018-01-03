@@ -30,9 +30,7 @@ const propTypes = {
   /**
    * Specify which action or actions trigger Overlay visibility
    */
-  trigger: PropTypes.oneOfType([
-    triggerType, PropTypes.arrayOf(triggerType),
-  ]),
+  trigger: PropTypes.oneOfType([triggerType, PropTypes.arrayOf(triggerType)]),
 
   /**
    * A millisecond delay amount to show and hide the Overlay once triggered
@@ -92,12 +90,12 @@ const propTypes = {
   /**
    * @private
    */
-  show: PropTypes.oneOf([null]),
+  show: PropTypes.oneOf([null])
 };
 
 const defaultProps = {
   defaultOverlayShown: false,
-  trigger: ['hover', 'focus'],
+  trigger: ['hover', 'focus']
 };
 
 class OverlayTrigger extends React.Component {
@@ -109,17 +107,15 @@ class OverlayTrigger extends React.Component {
     this.handleDelayedHide = this.handleDelayedHide.bind(this);
     this.handleHide = this.handleHide.bind(this);
 
-    this.handleMouseOver = e => (
-      this.handleMouseOverOut(this.handleDelayedShow, e, 'fromElement')
-    );
-    this.handleMouseOut = e => (
-      this.handleMouseOverOut(this.handleDelayedHide, e, 'toElement')
-    );
+    this.handleMouseOver = e =>
+      this.handleMouseOverOut(this.handleDelayedShow, e, 'fromElement');
+    this.handleMouseOut = e =>
+      this.handleMouseOverOut(this.handleDelayedHide, e, 'toElement');
 
     this._mountNode = null;
 
     this.state = {
-      show: props.defaultOverlayShown,
+      show: props.defaultOverlayShown
     };
   }
 
@@ -151,8 +147,8 @@ class OverlayTrigger extends React.Component {
       return;
     }
 
-    const delay = this.props.delayHide != null ?
-      this.props.delayHide : this.props.delay;
+    const delay =
+      this.props.delayHide != null ? this.props.delayHide : this.props.delay;
 
     if (!delay) {
       this.hide();
@@ -176,8 +172,8 @@ class OverlayTrigger extends React.Component {
       return;
     }
 
-    const delay = this.props.delayShow != null ?
-      this.props.delayShow : this.props.delay;
+    const delay =
+      this.props.delayShow != null ? this.props.delayShow : this.props.delay;
 
     if (!delay) {
       this.show();
@@ -238,7 +234,9 @@ class OverlayTrigger extends React.Component {
 
   renderOverlay() {
     ReactDOM.unstable_renderSubtreeIntoContainer(
-      this, this._overlay, this._mountNode,
+      this,
+      this._overlay,
+      this._mountNode
     );
   }
 
@@ -275,32 +273,42 @@ class OverlayTrigger extends React.Component {
 
     if (isOneOf('click', trigger)) {
       triggerProps.onClick = createChainedFunction(
-        triggerProps.onClick, this.handleToggle,
+        triggerProps.onClick,
+        this.handleToggle
       );
     }
 
     if (isOneOf('hover', trigger)) {
-      warning(!(trigger === 'hover'),
+      warning(
+        !(trigger === 'hover'),
         '[react-bootstrap] Specifying only the `"hover"` trigger limits the ' +
-        'visibility of the overlay to just mouse users. Consider also ' +
-        'including the `"focus"` trigger so that touch and keyboard only ' +
-        'users can see the overlay as well.',
+          'visibility of the overlay to just mouse users. Consider also ' +
+          'including the `"focus"` trigger so that touch and keyboard only ' +
+          'users can see the overlay as well.'
       );
 
       triggerProps.onMouseOver = createChainedFunction(
-        childProps.onMouseOver, onMouseOver, this.handleMouseOver,
+        childProps.onMouseOver,
+        onMouseOver,
+        this.handleMouseOver
       );
       triggerProps.onMouseOut = createChainedFunction(
-        childProps.onMouseOut, onMouseOut, this.handleMouseOut,
+        childProps.onMouseOut,
+        onMouseOut,
+        this.handleMouseOut
       );
     }
 
     if (isOneOf('focus', trigger)) {
       triggerProps.onFocus = createChainedFunction(
-        childProps.onFocus, onFocus, this.handleDelayedShow,
+        childProps.onFocus,
+        onFocus,
+        this.handleDelayedShow
       );
       triggerProps.onBlur = createChainedFunction(
-        childProps.onBlur, onBlur, this.handleDelayedHide,
+        childProps.onBlur,
+        onBlur,
+        this.handleDelayedHide
       );
     }
 

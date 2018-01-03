@@ -15,21 +15,20 @@ const propTypes = {
   /**
    * You can use a custom element for this component
    */
-  componentClass: elementType,
+  componentClass: elementType
 };
 
 const defaultProps = {
-  componentClass: SafeAnchor,
+  componentClass: SafeAnchor
 };
 
 const contextTypes = {
   $bs_panel: PropTypes.shape({
     bodyId: PropTypes.string,
     onToggle: PropTypes.func,
-    expanded: PropTypes.bool,
-  }),
+    expanded: PropTypes.bool
+  })
 };
-
 
 class PanelToggle extends React.Component {
   constructor(...args) {
@@ -60,9 +59,7 @@ class PanelToggle extends React.Component {
       props['aria-controls'] = bodyId;
     }
 
-    return (
-      <Component {...props} />
-    );
+    return <Component {...props} />;
   }
 }
 
