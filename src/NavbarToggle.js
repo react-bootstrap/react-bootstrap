@@ -26,7 +26,7 @@ class NavbarToggle extends React.Component {
     const navbarProps = this.context.$bs_navbar;
     if (onClick) onClick(...args);
     if (navbarProps && navbarProps.onToggle) navbarProps.onToggle(...args);
-  }
+  };
   render() {
     const { onClick, className, children, ...props } = this.props;
     const navbarProps = this.context.$bs_navbar || { bsClass: 'navbar' };

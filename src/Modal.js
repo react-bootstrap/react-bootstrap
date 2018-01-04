@@ -165,32 +165,32 @@ class Modal extends React.Component {
     events.off(window, 'resize', this.handleWindowResize);
   }
 
-  setModalRef = (ref) => {
+  setModalRef = ref => {
     this._modal = ref;
-  }
+  };
 
-  handleDialogClick = (e) => {
+  handleDialogClick = e => {
     if (e.target !== e.currentTarget) return;
 
     this.props.onHide();
-  }
+  };
 
   handleEntering = (...args) => {
     // FIXME: This should work even when animation is disabled.
     events.on(window, 'resize', this.handleWindowResize);
     this.updateStyle();
     if (this.props.onEntering) this.props.onEntering(...args);
-  }
+  };
 
   handleExited = (...args) => {
     // FIXME: This should work even when animation is disabled.
     events.off(window, 'resize', this.handleWindowResize);
     if (this.props.onExited) this.props.onExited(...args);
-  }
+  };
 
   handleWindowResize = () => {
     this.updateStyle();
-  }
+  };
 
   updateStyle() {
     if (!canUseDOM) {

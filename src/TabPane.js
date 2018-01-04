@@ -160,7 +160,7 @@ class TabPane extends React.Component {
     }
 
     if (this.props.onEnter) this.props.onEnter(...args);
-  }
+  };
 
   handleExited = (...args) => {
     const tabContent = this.context.$bs_tabContent;
@@ -169,7 +169,7 @@ class TabPane extends React.Component {
       this.in = false;
     }
     if (this.props.onExited) this.props.onExited(...args);
-  }
+  };
 
   isActive() {
     const tabContent = this.context.$bs_tabContent;

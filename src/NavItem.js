@@ -63,11 +63,7 @@ class NavItem extends React.Component {
         className={classNames(className, { active, disabled })}
         style={style}
       >
-        <SafeAnchor
-          {...props}
-          disabled={disabled}
-          onClick={this.handleClick}
-        />
+        <SafeAnchor {...props} disabled={disabled} onClick={this.handleClick} />
       </li>
     );
   }

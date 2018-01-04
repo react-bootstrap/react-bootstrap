@@ -20,11 +20,11 @@ const defaultProps = {
 };
 
 class PagerItem extends React.Component {
-  handleSelect = (e) => {
+  handleSelect = e => {
     const { onClick, onSelect, eventKey } = this.props;
     if (onClick) onClick(e);
     if (onSelect) onSelect(eventKey, e);
-  }
+  };
 
   render() {
     const {

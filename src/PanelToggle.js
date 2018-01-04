@@ -30,12 +30,12 @@ const contextTypes = {
 };
 
 class PanelToggle extends React.Component {
-  handleToggle = (event) => {
+  handleToggle = event => {
     const { onClick } = this.props;
     const panel = this.context.$bs_panel;
     if (onClick) onClick(event);
     if (panel && panel.onToggle) panel.onToggle(event);
-  }
+  };
 
   render() {
     const { onClick, className, componentClass, ...props } = this.props;

@@ -178,13 +178,13 @@ class Dropdown extends React.Component {
     }
   }
 
-  handleClick = (event) => {
+  handleClick = event => {
     if (this.props.disabled) {
       return;
     }
 
     this.toggleOpen(event, { source: 'click' });
-  }
+  };
 
   handleClose = (event, eventDetails) => {
     if (!this.props.open) {
@@ -192,9 +192,9 @@ class Dropdown extends React.Component {
     }
 
     this.toggleOpen(event, eventDetails);
-  }
+  };
 
-  handleKeyDown = (event) => {
+  handleKeyDown = event => {
     if (this.props.disabled) {
       return;
     }
@@ -214,7 +214,7 @@ class Dropdown extends React.Component {
         break;
       default:
     }
-  }
+  };
 
   toggleOpen(event, eventDetails) {
     let open = !this.props.open;
