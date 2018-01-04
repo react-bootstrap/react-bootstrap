@@ -1,5 +1,5 @@
 ## [v0.32.0]
-> 2018-01-02
+> 2018-01-04
 
 - **Breaking:** Refactor Panel API ([#1769])
 - **Breaking:** Remove Pagination logic, for purely presentational components ([#2587])
