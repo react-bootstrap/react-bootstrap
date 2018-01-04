@@ -4,7 +4,6 @@ import React from 'react';
 import { prefix, splitBsProps, bsClass } from './utils/bootstrapUtils';
 import Collapse from './Collapse';
 
-
 const propTypes = {
   /**
    * Callback fired before the component expands
@@ -29,7 +28,7 @@ const propTypes = {
   /**
    * Callback fired after the component has collapsed
    */
-  onExited: PropTypes.func,
+  onExited: PropTypes.func
 };
 
 const contextTypes = {
@@ -37,16 +36,15 @@ const contextTypes = {
     headingId: PropTypes.string,
     bodyId: PropTypes.string,
     bsClass: PropTypes.string,
-    expanded: PropTypes.bool,
-  }),
+    expanded: PropTypes.bool
+  })
 };
 
 class PanelCollapse extends React.Component {
   render() {
     const { children } = this.props;
-    const {
-      headingId, bodyId, bsClass: _bsClass, expanded,
-    } = this.context.$bs_panel || {};
+    const { headingId, bodyId, bsClass: _bsClass, expanded } =
+      this.context.$bs_panel || {};
 
     const [bsProps, props] = splitBsProps(this.props);
 
@@ -60,9 +58,7 @@ class PanelCollapse extends React.Component {
 
     return (
       <Collapse in={expanded} {...props}>
-        <div className={prefix(bsProps, 'collapse')}>
-          { children }
-        </div>
+        <div className={prefix(bsProps, 'collapse')}>{children}</div>
       </Collapse>
     );
   }

@@ -16,8 +16,8 @@ exports.addBootstrapPropTypes = function addBootstrapPropTypes(doc, Component) {
         defaultValue: { value: quote(defaultProps[propName]) },
         type: {
           name: 'enum',
-          value: values.map(v => ({ value: `"${v}"` })),
-        },
+          value: values.map(v => ({ value: `"${v}"` }))
+        }
       });
     }
   }
@@ -31,7 +31,7 @@ exports.addBootstrapPropTypes = function addBootstrapPropTypes(doc, Component) {
       required: false,
       description: '',
       type: { name: 'string' },
-      defaultValue: { value: quote(defaultProps.bsClass) },
+      defaultValue: { value: quote(defaultProps.bsClass) }
     });
   }
 };

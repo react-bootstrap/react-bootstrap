@@ -27,29 +27,30 @@ const propTypes = {
   /**
    * onLoad callback that is passed down to the image inside this component
    */
-  onLoad: PropTypes.func,
+  onLoad: PropTypes.func
 };
 
 class Thumbnail extends React.Component {
   render() {
-    const { src, alt, onError, onLoad, className, children, ...props } = this.props;
+    const {
+      src,
+      alt,
+      onError,
+      onLoad,
+      className,
+      children,
+      ...props
+    } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const Component = elementProps.href ? SafeAnchor : 'div';
     const classes = getClassSet(bsProps);
 
     return (
-      <Component
-        {...elementProps}
-        className={classNames(className, classes)}
-      >
+      <Component {...elementProps} className={classNames(className, classes)}>
         <img {...{ src, alt, onError, onLoad }} />
 
-        {children && (
-          <div className="caption">
-            {children}
-          </div>
-        )}
+        {children && <div className="caption">{children}</div>}
       </Component>
     );
   }

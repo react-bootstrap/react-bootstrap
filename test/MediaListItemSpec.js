@@ -6,22 +6,18 @@ import Media from '../src/Media';
 
 describe('Media.ListItem', () => {
   it('uses "li"', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Media.ListItem />,
-    );
+    const instance = ReactTestUtils.renderIntoDocument(<Media.ListItem />);
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'LI');
   });
   it('has "media" class', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Media.ListItem />,
-    );
+    const instance = ReactTestUtils.renderIntoDocument(<Media.ListItem />);
 
     assert.include(ReactDOM.findDOMNode(instance).className, 'media');
   });
   it('should merge additional classes passed in', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Media.ListItem className="custom-class" />,
+      <Media.ListItem className="custom-class" />
     );
     const classes = ReactDOM.findDOMNode(instance).className;
 
@@ -32,8 +28,10 @@ describe('Media.ListItem', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Media.ListItem>
         <strong>Content</strong>
-      </Media.ListItem>,
+      </Media.ListItem>
     );
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
+    assert.ok(
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong')
+    );
   });
 });

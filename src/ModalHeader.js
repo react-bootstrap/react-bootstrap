@@ -26,18 +26,18 @@ const propTypes = {
    * a Modal component, the onHide will automatically be propagated up to the
    * parent Modal `onHide`.
    */
-  onHide: PropTypes.func,
+  onHide: PropTypes.func
 };
 
 const defaultProps = {
   closeLabel: 'Close',
-  closeButton: false,
+  closeButton: false
 };
 
 const contextTypes = {
   $bs_modal: PropTypes.shape({
-    onHide: PropTypes.func,
-  }),
+    onHide: PropTypes.func
+  })
 };
 
 class ModalHeader extends React.Component {
@@ -58,10 +58,7 @@ class ModalHeader extends React.Component {
     const classes = getClassSet(bsProps);
 
     return (
-      <div
-        {...elementProps}
-        className={classNames(className, classes)}
-      >
+      <div {...elementProps} className={classNames(className, classes)}>
         {closeButton && (
           <CloseButton
             label={closeLabel}

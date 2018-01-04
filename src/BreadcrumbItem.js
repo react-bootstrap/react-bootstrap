@@ -20,11 +20,11 @@ const propTypes = {
   /**
    * `target` attribute for the inner `a` element
    */
-  target: PropTypes.string,
+  target: PropTypes.string
 };
 
 const defaultProps = {
-  active: false,
+  active: false
 };
 
 class BreadcrumbItem extends React.Component {
@@ -36,10 +36,11 @@ class BreadcrumbItem extends React.Component {
 
     return (
       <li className={classNames(className, { active })}>
-        {active ?
-          <span {...props} /> :
+        {active ? (
+          <span {...props} />
+        ) : (
           <SafeAnchor {...props} {...linkProps} />
-        }
+        )}
       </li>
     );
   }

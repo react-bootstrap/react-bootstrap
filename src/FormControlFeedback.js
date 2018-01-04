@@ -6,20 +6,24 @@ import Glyphicon from './Glyphicon';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const defaultProps = {
-  bsRole: 'feedback',
+  bsRole: 'feedback'
 };
 
 const contextTypes = {
-  $bs_formGroup: PropTypes.object,
+  $bs_formGroup: PropTypes.object
 };
 
 class FormControlFeedback extends React.Component {
   getGlyph(validationState) {
     switch (validationState) {
-      case 'success': return 'ok';
-      case 'warning': return 'warning-sign';
-      case 'error': return 'remove';
-      default: return null;
+      case 'success':
+        return 'ok';
+      case 'warning':
+        return 'warning-sign';
+      case 'error':
+        return 'remove';
+      default:
+        return null;
     }
   }
 
@@ -46,14 +50,17 @@ class FormControlFeedback extends React.Component {
 
     if (!children) {
       return this.renderDefaultFeedback(
-        this.context.$bs_formGroup, className, classes, elementProps,
+        this.context.$bs_formGroup,
+        className,
+        classes,
+        elementProps
       );
     }
 
     const child = React.Children.only(children);
     return React.cloneElement(child, {
       ...elementProps,
-      className: classNames(child.props.className, className, classes),
+      className: classNames(child.props.className, className, classes)
     });
   }
 }

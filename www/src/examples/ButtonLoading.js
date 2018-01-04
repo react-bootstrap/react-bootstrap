@@ -5,7 +5,7 @@ class LoadingButton extends React.Component {
     this.handleClick = this.handleClick.bind(this);
 
     this.state = {
-      isLoading: false,
+      isLoading: false
     };
   }
 

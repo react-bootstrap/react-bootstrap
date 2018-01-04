@@ -16,9 +16,7 @@ describe('createChainedFunction', () => {
     const func2 = sinon.stub();
     const chained = createChainedFunction(func1, func2);
 
-    chained
-      .should.not.equal(func1)
-      .and.should.not.equal(func2);
+    chained.should.not.equal(func1).and.should.not.equal(func2);
 
     func1.should.not.have.been.called;
     func2.should.not.have.been.called;
@@ -42,7 +40,7 @@ describe('createChainedFunction', () => {
   it('forwards arguments to all chained functions', () => {
     const in1 = 'herpa derpa';
     const in2 = {
-      herpa: 'derpa',
+      herpa: 'derpa'
     };
 
     const func = (arg1, arg2) => {

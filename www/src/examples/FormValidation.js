@@ -83,15 +83,12 @@ const formInstance = (
 
     <Form componentClass="fieldset" inline>
       <FormGroup controlId="formValidationWarning4" validationState="warning">
-        <ControlLabel>Input with warning</ControlLabel>
-        {' '}
+        <ControlLabel>Input with warning</ControlLabel>{' '}
         <FormControl type="text" />
         <FormControl.Feedback />
-      </FormGroup>
-      {' '}
+      </FormGroup>{' '}
       <FormGroup controlId="formValidationError4" validationState="error">
-        <ControlLabel>Input group with error</ControlLabel>
-        {' '}
+        <ControlLabel>Input group with error</ControlLabel>{' '}
         <InputGroup>
           <InputGroup.Addon>@</InputGroup.Addon>
           <FormControl type="text" />
@@ -100,29 +97,14 @@ const formInstance = (
       </FormGroup>
     </Form>
 
-    <Checkbox validationState="success">
-      Checkbox with success
-    </Checkbox>
-    <Radio validationState="warning">
-      Radio with warning
-    </Radio>
-    <Checkbox validationState="error">
-      Checkbox with error
-    </Checkbox>
+    <Checkbox validationState="success">Checkbox with success</Checkbox>
+    <Radio validationState="warning">Radio with warning</Radio>
+    <Checkbox validationState="error">Checkbox with error</Checkbox>
 
     {/* This requires React 15's <span>-less spaces to be exactly correct. */}
     <FormGroup validationState="success">
-      <Checkbox inline>
-        Checkbox
-      </Checkbox>
-      {' '}
-      <Checkbox inline>
-        with
-      </Checkbox>
-      {' '}
-      <Checkbox inline>
-        success
-      </Checkbox>
+      <Checkbox inline>Checkbox</Checkbox> <Checkbox inline>with</Checkbox>{' '}
+      <Checkbox inline>success</Checkbox>
     </FormGroup>
   </form>
 );

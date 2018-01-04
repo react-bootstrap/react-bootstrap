@@ -2,30 +2,34 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { bsClass, bsStyles, getClassSet, prefix, splitBsProps }
-  from './utils/bootstrapUtils';
+import {
+  bsClass,
+  bsStyles,
+  getClassSet,
+  prefix,
+  splitBsProps
+} from './utils/bootstrapUtils';
 import { State } from './utils/StyleConfig';
 import CloseButton from './CloseButton';
 
 const propTypes = {
   onDismiss: PropTypes.func,
-  closeLabel: PropTypes.string,
+  closeLabel: PropTypes.string
 };
 
 const defaultProps = {
-  closeLabel: 'Close alert',
+  closeLabel: 'Close alert'
 };
 
 class Alert extends React.Component {
   render() {
-    const { onDismiss, closeLabel, className, children, ...props } =
-      this.props;
+    const { onDismiss, closeLabel, className, children, ...props } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const dismissable = !!onDismiss;
     const classes = {
       ...getClassSet(bsProps),
-      [prefix(bsProps, 'dismissable')]: dismissable,
+      [prefix(bsProps, 'dismissable')]: dismissable
     };
 
     return (
@@ -34,12 +38,7 @@ class Alert extends React.Component {
         role="alert"
         className={classNames(className, classes)}
       >
-        {dismissable && (
-          <CloseButton
-            onClick={onDismiss}
-            label={closeLabel}
-          />
-        )}
+        {dismissable && <CloseButton onClick={onDismiss} label={closeLabel} />}
         {children}
       </div>
     );
@@ -49,6 +48,8 @@ class Alert extends React.Component {
 Alert.propTypes = propTypes;
 Alert.defaultProps = defaultProps;
 
-export default bsStyles(Object.values(State), State.INFO,
-  bsClass('alert', Alert),
+export default bsStyles(
+  Object.values(State),
+  State.INFO,
+  bsClass('alert', Alert)
 );

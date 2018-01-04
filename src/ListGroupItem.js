@@ -2,8 +2,13 @@ import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 
-import { bsClass, bsStyles, getClassSet, prefix, splitBsProps }
-  from './utils/bootstrapUtils';
+import {
+  bsClass,
+  bsStyles,
+  getClassSet,
+  prefix,
+  splitBsProps
+} from './utils/bootstrapUtils';
 import { State } from './utils/StyleConfig';
 
 const propTypes = {
@@ -13,26 +18,22 @@ const propTypes = {
   listItem: PropTypes.bool,
   onClick: PropTypes.func,
   href: PropTypes.string,
-  type: PropTypes.string,
+  type: PropTypes.string
 };
 
 const defaultProps = {
-  listItem: false,
+  listItem: false
 };
 
 class ListGroupItem extends React.Component {
   renderHeader(header, headingClassName) {
     if (React.isValidElement(header)) {
       return cloneElement(header, {
-        className: classNames(header.props.className, headingClassName),
+        className: classNames(header.props.className, headingClassName)
       });
     }
 
-    return (
-      <h4 className={headingClassName}>
-        {header}
-      </h4>
-    );
+    return <h4 className={headingClassName}>{header}</h4>;
   }
 
   render() {
@@ -51,7 +52,7 @@ class ListGroupItem extends React.Component {
     const classes = {
       ...getClassSet(bsProps),
       active,
-      disabled,
+      disabled
     };
 
     let Component;
@@ -75,24 +76,19 @@ class ListGroupItem extends React.Component {
         <Component {...elementProps}>
           {this.renderHeader(header, prefix(bsProps, 'heading'))}
 
-          <p className={prefix(bsProps, 'text')}>
-            {children}
-          </p>
+          <p className={prefix(bsProps, 'text')}>{children}</p>
         </Component>
       );
     }
 
-    return (
-      <Component {...elementProps}>
-        {children}
-      </Component>
-    );
+    return <Component {...elementProps}>{children}</Component>;
   }
 }
 
 ListGroupItem.propTypes = propTypes;
 ListGroupItem.defaultProps = defaultProps;
 
-export default bsClass('list-group-item',
-  bsStyles(Object.values(State), ListGroupItem),
+export default bsClass(
+  'list-group-item',
+  bsStyles(Object.values(State), ListGroupItem)
 );

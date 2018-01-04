@@ -11,18 +11,17 @@ const targets = process.argv.slice(2);
 const has = t => !targets.length || targets.includes(t);
 
 console.log(
-  `Building targets: ${targets.length ? targets.join(', ') : 'all'}\n`.green);
+  `Building targets: ${targets.length ? targets.join(', ') : 'all'}\n`.green
+);
 
 Promise.all([
   has('lib') && lib(),
   has('es') && es(),
   has('bower') && bower(),
-  (has('dist') || has('bower')) && dist(),
+  (has('dist') || has('bower')) && dist()
 ])
-  .then(() => (has('dist') || has('bower')) &&
-    fse.copy(distRoot, bowerRoot),
-  )
-  .catch((err) => {
+  .then(() => (has('dist') || has('bower')) && fse.copy(distRoot, bowerRoot))
+  .catch(err => {
     if (err.stack) {
       console.error(err.stack.red);
     } else {

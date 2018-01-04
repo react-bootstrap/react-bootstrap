@@ -27,24 +27,27 @@ const propTypes = {
   /**
    * @private
    */
-  children: PropTypes.node,
+  children: PropTypes.node
 };
 
 class SplitButton extends React.Component {
   render() {
     const {
-      bsSize, bsStyle, title, toggleLabel, children, ...props
+      bsSize,
+      bsStyle,
+      title,
+      toggleLabel,
+      children,
+      ...props
     } = this.props;
 
-    const [dropdownProps, buttonProps] =
-      splitComponentProps(props, Dropdown.ControlledComponent);
+    const [dropdownProps, buttonProps] = splitComponentProps(
+      props,
+      Dropdown.ControlledComponent
+    );
 
     return (
-      <Dropdown
-        {...dropdownProps}
-        bsSize={bsSize}
-        bsStyle={bsStyle}
-      >
+      <Dropdown {...dropdownProps} bsSize={bsSize} bsStyle={bsStyle}>
         <Button
           {...buttonProps}
           disabled={props.disabled}
@@ -59,9 +62,7 @@ class SplitButton extends React.Component {
           bsStyle={bsStyle}
         />
 
-        <Dropdown.Menu>
-          {children}
-        </Dropdown.Menu>
+        <Dropdown.Menu>{children}</Dropdown.Menu>
       </Dropdown>
     );
   }

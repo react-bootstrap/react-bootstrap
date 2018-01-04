@@ -3,8 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import { bsClass, bsSizes, bsStyles, getClassSet, prefix, splitBsProps }
-  from './utils/bootstrapUtils';
+import {
+  bsClass,
+  bsSizes,
+  bsStyles,
+  getClassSet,
+  prefix,
+  splitBsProps
+} from './utils/bootstrapUtils';
 import { Size, State, Style } from './utils/StyleConfig';
 
 import SafeAnchor from './SafeAnchor';
@@ -20,13 +26,13 @@ const propTypes = {
    * Defines HTML button type attribute
    * @defaultValue 'button'
    */
-  type: PropTypes.oneOf(['button', 'reset', 'submit']),
+  type: PropTypes.oneOf(['button', 'reset', 'submit'])
 };
 
 const defaultProps = {
   active: false,
   block: false,
-  disabled: false,
+  disabled: false
 };
 
 class Button extends React.Component {
@@ -34,9 +40,7 @@ class Button extends React.Component {
     return (
       <SafeAnchor
         {...elementProps}
-        className={classNames(
-          className, elementProps.disabled && 'disabled',
-        )}
+        className={classNames(className, elementProps.disabled && 'disabled')}
       />
     );
   }
@@ -60,7 +64,7 @@ class Button extends React.Component {
     const classes = {
       ...getClassSet(bsProps),
       active,
-      [prefix(bsProps, 'block')]: block,
+      [prefix(bsProps, 'block')]: block
     };
     const fullClassName = classNames(className, classes);
 
@@ -75,12 +79,14 @@ class Button extends React.Component {
 Button.propTypes = propTypes;
 Button.defaultProps = defaultProps;
 
-export default bsClass('btn',
-  bsSizes([Size.LARGE, Size.SMALL, Size.XSMALL],
+export default bsClass(
+  'btn',
+  bsSizes(
+    [Size.LARGE, Size.SMALL, Size.XSMALL],
     bsStyles(
       [...Object.values(State), Style.DEFAULT, Style.PRIMARY, Style.LINK],
       Style.DEFAULT,
-      Button,
-    ),
-  ),
+      Button
+    )
+  )
 );

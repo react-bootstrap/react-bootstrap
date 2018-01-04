@@ -33,21 +33,24 @@ const propTypes = {
   /**
    * The value of the input, and unique identifier in the ToggleButtonGroup
    */
-  value: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired
 };
 
 class ToggleButton extends React.Component {
   render() {
     const {
-      children, name, checked, type, onChange, value, ...props } = this.props;
+      children,
+      name,
+      checked,
+      type,
+      onChange,
+      value,
+      ...props
+    } = this.props;
     const disabled = props.disabled;
 
     return (
-      <Button
-        {...props}
-        active={!!checked}
-        componentClass="label"
-      >
+      <Button {...props} active={!!checked} componentClass="label">
         <input
           name={name}
           type={type}

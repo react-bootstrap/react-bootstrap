@@ -6,16 +6,14 @@ import Main from '../components/Main';
 import Default from './index';
 
 const propTypes = {
-  location: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 };
 
 function DocPage({ children, ...props }) {
   return (
     <Default {...props}>
       <PageHeader title="Getting started" />
-      <Main location={props.location}>
-        {children()}
-      </Main>
+      <Main location={props.location}>{children()}</Main>
     </Default>
   );
 }

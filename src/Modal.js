@@ -119,19 +119,19 @@ const propTypes = {
   /**
    * @private
    */
-  container: BaseModal.propTypes.container,
+  container: BaseModal.propTypes.container
 };
 
 const defaultProps = {
   ...BaseModal.defaultProps,
   animation: true,
-  dialogComponentClass: ModalDialog,
+  dialogComponentClass: ModalDialog
 };
 
 const childContextTypes = {
   $bs_modal: PropTypes.shape({
-    onHide: PropTypes.func,
-  }),
+    onHide: PropTypes.func
+  })
 };
 
 /* eslint-disable no-use-before-define, react/no-multi-comp */
@@ -156,15 +156,15 @@ class Modal extends React.Component {
     this.setModalRef = this.setModalRef.bind(this);
 
     this.state = {
-      style: {},
+      style: {}
     };
   }
 
   getChildContext() {
     return {
       $bs_modal: {
-        onHide: this.props.onHide,
-      },
+        onHide: this.props.onHide
+      }
     };
   }
 
@@ -210,18 +210,22 @@ class Modal extends React.Component {
 
     const document = ownerDocument(dialogNode);
     const bodyIsOverflowing = isOverflowing(
-      ReactDOM.findDOMNode(this.props.container || document.body),
+      ReactDOM.findDOMNode(this.props.container || document.body)
     );
     const modalIsOverflowing =
       dialogHeight > document.documentElement.clientHeight;
 
     this.setState({
       style: {
-        paddingRight: bodyIsOverflowing && !modalIsOverflowing ?
-          getScrollbarSize() : undefined,
-        paddingLeft: !bodyIsOverflowing && modalIsOverflowing ?
-          getScrollbarSize() : undefined,
-      },
+        paddingRight:
+          bodyIsOverflowing && !modalIsOverflowing
+            ? getScrollbarSize()
+            : undefined,
+        paddingLeft:
+          !bodyIsOverflowing && modalIsOverflowing
+            ? getScrollbarSize()
+            : undefined
+      }
     });
   }
 
@@ -240,8 +244,7 @@ class Modal extends React.Component {
       ...props
     } = this.props;
 
-    const [baseModalProps, dialogProps] =
-      splitComponentProps(props, BaseModal);
+    const [baseModalProps, dialogProps] = splitComponentProps(props, BaseModal);
 
     const inClassName = show && !animation && 'in';
 
@@ -255,7 +258,9 @@ class Modal extends React.Component {
         backdrop={backdrop}
         backdropTransition={animation ? BackdropTransition : undefined}
         backdropClassName={classNames(
-          prefix(props, 'backdrop'), backdropClassName, inClassName,
+          prefix(props, 'backdrop'),
+          backdropClassName,
+          inClassName
         )}
         onEntering={createChainedFunction(onEntering, this.handleEntering)}
         onExited={createChainedFunction(onExited, this.handleExited)}
@@ -287,6 +292,4 @@ Modal.Dialog = ModalDialog;
 Modal.TRANSITION_DURATION = 300;
 Modal.BACKDROP_TRANSITION_DURATION = 150;
 
-export default bsClass('modal',
-  bsSizes([Size.LARGE, Size.SMALL], Modal),
-);
+export default bsClass('modal', bsSizes([Size.LARGE, Size.SMALL], Modal));

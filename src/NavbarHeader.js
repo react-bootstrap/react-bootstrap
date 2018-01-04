@@ -6,8 +6,8 @@ import { prefix } from './utils/bootstrapUtils';
 
 const contextTypes = {
   $bs_navbar: PropTypes.shape({
-    bsClass: PropTypes.string,
-  }),
+    bsClass: PropTypes.string
+  })
 };
 
 class NavbarHeader extends React.Component {
@@ -17,9 +17,7 @@ class NavbarHeader extends React.Component {
 
     const bsClassName = prefix(navbarProps, 'header');
 
-    return (
-      <div {...props} className={classNames(className, bsClassName)} />
-    );
+    return <div {...props} className={classNames(className, bsClassName)} />;
   }
 }
 

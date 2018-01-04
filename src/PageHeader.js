@@ -11,13 +11,8 @@ class PageHeader extends React.Component {
     const classes = getClassSet(bsProps);
 
     return (
-      <div
-        {...elementProps}
-        className={classNames(className, classes)}
-      >
-        <h1>
-          {children}
-        </h1>
+      <div {...elementProps} className={classNames(className, classes)}>
+        <h1>{children}</h1>
       </div>
     );
   }

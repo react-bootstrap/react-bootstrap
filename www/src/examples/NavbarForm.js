@@ -10,8 +10,7 @@ const navbarInstance = (
       <Navbar.Form pullLeft>
         <FormGroup>
           <FormControl type="text" placeholder="Search" />
-        </FormGroup>
-        {' '}
+        </FormGroup>{' '}
         <Button type="submit">Submit</Button>
       </Navbar.Form>
     </Navbar.Collapse>
