@@ -1,8 +1,10 @@
 lib/
 dist/
-node_modules/**
+node_modules/
 es/
 amd/
-docs/assets/
+docs/assets
 coverage/
-**/node_modules/**
+.cache/
+public/
+static/
