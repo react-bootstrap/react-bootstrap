@@ -6,7 +6,7 @@ import Main from '../components/Main';
 import Default from './index';
 
 const propTypes = {
-  location: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 };
 
 function LayoutLayout({ children, ...props }) {
@@ -16,9 +16,7 @@ function LayoutLayout({ children, ...props }) {
         title="Layout"
         subTitle="Options for structuring your pages with Bootstrap, including global styles, required scaffolding, grid system, and more."
       />
-      <Main location={props.location}>
-        {children()}
-      </Main>
+      <Main location={props.location}>{children()}</Main>
     </Default>
   );
 }

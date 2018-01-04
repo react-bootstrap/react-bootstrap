@@ -8,4 +8,4 @@
   >
     And here's some <strong>amazing</strong> content. It's very engaging. right?
   </Popover>
-</div>
+</div>;

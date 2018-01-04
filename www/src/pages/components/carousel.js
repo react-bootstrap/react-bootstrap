@@ -11,26 +11,45 @@ export default function CarouselSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
-        <Anchor id="carousels">Carousels</Anchor> <small>Carousel, Carousel.Item, Carousel.Caption</small>
+        <Anchor id="carousels">Carousels</Anchor>{' '}
+        <small>Carousel, Carousel.Item, Carousel.Caption</small>
       </h2>
 
-      <h3><Anchor id="carousels-uncontrolled">Uncontrolled</Anchor></h3>
+      <h3>
+        <Anchor id="carousels-uncontrolled">Uncontrolled</Anchor>
+      </h3>
       <p>Allow the component to control its own state.</p>
-      <ReactPlayground codeText={CarouselUncontrolled} exampleClassName="bs-example-tabs" />
+      <ReactPlayground
+        codeText={CarouselUncontrolled}
+        exampleClassName="bs-example-tabs"
+      />
 
-      <h3><Anchor id="carousels-controlled">Controlled</Anchor></h3>
+      <h3>
+        <Anchor id="carousels-controlled">Controlled</Anchor>
+      </h3>
       <p>Pass down the active state on render via props.</p>
-      <ReactPlayground codeText={CarouselControlled} exampleClassName="bs-example-tabs" />
+      <ReactPlayground
+        codeText={CarouselControlled}
+        exampleClassName="bs-example-tabs"
+      />
 
-      <h3><Anchor id="carousels-props">Props</Anchor></h3>
+      <h3>
+        <Anchor id="carousels-props">Props</Anchor>
+      </h3>
 
-      <h4><Anchor id="carousels-props-carousel">Carousel</Anchor></h4>
+      <h4>
+        <Anchor id="carousels-props-carousel">Carousel</Anchor>
+      </h4>
       <PropTable metadata={data.carousel} />
 
-      <h4><Anchor id="carousels-props-item">Carousel.Item</Anchor></h4>
+      <h4>
+        <Anchor id="carousels-props-item">Carousel.Item</Anchor>
+      </h4>
       <PropTable metadata={data.item} />
 
-      <h4><Anchor id="carousels-props-caption">Carousel.Caption</Anchor></h4>
+      <h4>
+        <Anchor id="carousels-props-caption">Carousel.Caption</Anchor>
+      </h4>
       <PropTable metadata={data.caption} />
     </div>
   );

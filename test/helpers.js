@@ -17,8 +17,8 @@ export function render(element, mountPoint) {
   let instance = ReactDOM.render(element, mount);
 
   if (instance && !instance.renderWithProps) {
-    instance.renderWithProps = newProps => render(
-      cloneElement(element, newProps), mount);
+    instance.renderWithProps = newProps =>
+      render(cloneElement(element, newProps), mount);
   }
 
   return instance;

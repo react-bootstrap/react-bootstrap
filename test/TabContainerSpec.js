@@ -7,7 +7,6 @@ import TabPane from '../src/TabPane';
 import TabContent from '../src/TabContent';
 import TabContainer from '../src/TabContainer';
 
-
 describe('<TabContainer>', () => {
   it('should not propagate context past TabPanes', () => {
     let instance = mount(
@@ -24,19 +23,18 @@ describe('<TabContainer>', () => {
             </TabPane>
           </TabContent>
         </div>
-      </TabContainer>,
+      </TabContainer>
     );
 
     let top = instance
       .find('div > Nav')
       .first()
-      .instance()
-      .context.$bs_tabContainer;
+      .instance().context.$bs_tabContainer;
 
     let nested = instance
-      .find('TabPane Nav').first()
-      .instance()
-      .context.$bs_tabContainer;
+      .find('TabPane Nav')
+      .first()
+      .instance().context.$bs_tabContainer;
 
     expect(top).to.exist;
     expect(nested).to.not.exist;
@@ -53,15 +51,17 @@ describe('<TabContainer>', () => {
             <TabPane eventKey="1" />
           </TabContent>
         </div>
-      </TabContainer>,
+      </TabContainer>
     );
 
     let tabId = instance
-      .find('NavItem a').first()
+      .find('NavItem a')
+      .first()
       .prop('id');
 
     let paneId = instance
-      .find('TabPane div').first()
+      .find('TabPane div')
+      .first()
       .prop('id');
 
     expect(tabId).to.exist;
@@ -79,7 +79,7 @@ describe('<TabContainer>', () => {
             <NavItem eventKey="1">One</NavItem>
           </Nav>
         </div>
-      </TabContainer>,
+      </TabContainer>
     );
 
     instance
@@ -90,7 +90,8 @@ describe('<TabContainer>', () => {
 
     instance
       .find('NavItem a')
-      .first().getDOMNode()
+      .first()
+      .getDOMNode()
       .getAttribute('role')
       .should.equal('tab');
   });
@@ -100,10 +101,12 @@ describe('<TabContainer>', () => {
       <TabContainer id="custom-id">
         <div>
           <Nav role="navigation" bsStyle="pills">
-            <NavItem href="#foo" eventKey="1">One</NavItem>
+            <NavItem href="#foo" eventKey="1">
+              One
+            </NavItem>
           </Nav>
         </div>
-      </TabContainer>,
+      </TabContainer>
     );
 
     instance
@@ -113,11 +116,13 @@ describe('<TabContainer>', () => {
       .should.equal('navigation');
 
     // make sure its not passed to the NavItem
-    expect(instance
-      .find('NavItem a')
-      .first()
-      .getDOMNode()
-      .getAttribute('role')).to.not.exist;
+    expect(
+      instance
+        .find('NavItem a')
+        .first()
+        .getDOMNode()
+        .getAttribute('role')
+    ).to.not.exist;
   });
 
   describe('tab switching edge cases', () => {
@@ -126,7 +131,11 @@ describe('<TabContainer>', () => {
 
       render() {
         const {
-          eventKeys, show = true, onSelect = () => {}, tabProps = [], ...props
+          eventKeys,
+          show = true,
+          onSelect = () => {},
+          tabProps = [],
+          ...props
         } = this.state;
 
         if (!show) {
@@ -137,11 +146,7 @@ describe('<TabContainer>', () => {
           <TabContainer {...props} id="custom-id" onSelect={onSelect}>
             <TabContent>
               {eventKeys.map((eventKey, index) => (
-                <TabPane
-                  key={index}
-                  eventKey={eventKey}
-                  {...tabProps[index]}
-                />
+                <TabPane key={index} eventKey={eventKey} {...tabProps[index]} />
               ))}
             </TabContent>
           </TabContainer>
@@ -150,9 +155,7 @@ describe('<TabContainer>', () => {
     }
 
     it('should not get stuck after tab becomes unmounted', () => {
-      const instance = mount(
-        <Switcher eventKeys={[1, 2]} activeKey={2} />,
-      );
+      const instance = mount(<Switcher eventKeys={[1, 2]} activeKey={2} />);
 
       instance.assertSingle(TabContent);
       instance.assertSingle('[eventKey=2]').assertSingle('.active');
@@ -165,9 +168,7 @@ describe('<TabContainer>', () => {
     });
 
     it('should handle closing tab and changing active tab', () => {
-      const instance = mount(
-        <Switcher eventKeys={[1, 2]} activeKey={2} />,
-      );
+      const instance = mount(<Switcher eventKeys={[1, 2]} activeKey={2} />);
 
       instance.assertSingle('[eventKey=2]').assertSingle('.active');
 
@@ -178,7 +179,7 @@ describe('<TabContainer>', () => {
     it('should not call onSelect when container unmounts', () => {
       const spy = sinon.spy();
       const instance = mount(
-        <Switcher eventKeys={[1]} activeKey={1} onSelect={spy} />,
+        <Switcher eventKeys={[1]} activeKey={1} onSelect={spy} />
       );
 
       instance.assertSingle(TabPane);
@@ -188,9 +189,7 @@ describe('<TabContainer>', () => {
     });
 
     it('should clean up unmounted tab state', () => {
-      const instance = mount(
-        <Switcher eventKeys={[1, 2, 3]} activeKey={3} />,
-      );
+      const instance = mount(<Switcher eventKeys={[1, 2, 3]} activeKey={3} />);
 
       instance.find(TabPane).length.should.equal(3);
       instance.assertSingle('[eventKey=3]').assertSingle('.active');
@@ -201,9 +200,7 @@ describe('<TabContainer>', () => {
     });
 
     it('should not get stuck if tab stops animating', () => {
-      const instance = mount(
-        <Switcher eventKeys={[1, 2]} activeKey={1} />,
-      );
+      const instance = mount(<Switcher eventKeys={[1, 2]} activeKey={1} />);
 
       instance.assertSingle('[eventKey=1]').assertSingle('.active');
 
@@ -219,9 +216,7 @@ describe('<TabContainer>', () => {
     });
 
     it('should handle simultaneous eventKey and activeKey change', () => {
-      const instance = mount(
-        <Switcher eventKeys={[1, 2]} activeKey={2} />,
-      );
+      const instance = mount(<Switcher eventKeys={[1, 2]} activeKey={2} />);
 
       instance.assertSingle('[eventKey=2]').assertSingle('.active');
 
@@ -233,9 +228,7 @@ describe('<TabContainer>', () => {
     });
 
     it('should not get stuck if eventKey ceases to exist', () => {
-      const instance = mount(
-        <Switcher eventKeys={[1, 2]} activeKey={2} />,
-      );
+      const instance = mount(<Switcher eventKeys={[1, 2]} activeKey={2} />);
 
       instance.assertSingle('[eventKey=2]').assertSingle('.active');
 
@@ -254,14 +247,9 @@ describe('<TabContainer>', () => {
       instance.assertSingle('[eventKey=1]').assertSingle('.active');
     });
 
-    [
-      [[1, 2], [2, 1]],
-      [[2, 1], [1, 2]],
-    ].forEach(([order1, order2]) => {
+    [[[1, 2], [2, 1]], [[2, 1], [1, 2]]].forEach(([order1, order2]) => {
       it('should handle event key swaps', () => {
-        const instance = mount(
-          <Switcher eventKeys={order1} activeKey={1} />,
-        );
+        const instance = mount(<Switcher eventKeys={order1} activeKey={1} />);
 
         instance.assertSingle('[eventKey=1]').assertSingle('.active');
 

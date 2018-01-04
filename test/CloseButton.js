@@ -8,9 +8,7 @@ describe('<CloseButton>', () => {
   it('Should output a button', () => {
     let noOp = () => {};
     let instance = ReactTestUtils.renderIntoDocument(
-      <CloseButton
-        onClick={noOp}
-      />,
+      <CloseButton onClick={noOp} />
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'BUTTON');
   });
@@ -18,9 +16,7 @@ describe('<CloseButton>', () => {
   it('Should have type=button by default', () => {
     let noOp = () => {};
     let instance = ReactTestUtils.renderIntoDocument(
-      <CloseButton
-        onClick={noOp}
-      />,
+      <CloseButton onClick={noOp} />
     );
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('type'), 'button');
   });
@@ -28,21 +24,17 @@ describe('<CloseButton>', () => {
   it('Should have class=close by default', () => {
     let noOp = () => {};
     let instance = ReactTestUtils.renderIntoDocument(
-      <CloseButton
-        onClick={noOp}
-      />,
+      <CloseButton onClick={noOp} />
     );
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('class'), 'close');
   });
 
-  it('Should call onClick callback', (done) => {
+  it('Should call onClick callback', done => {
     let doneOp = () => {
       done();
     };
     let instance = ReactTestUtils.renderIntoDocument(
-      <CloseButton
-        onClick={doneOp}
-      />,
+      <CloseButton onClick={doneOp} />
     );
     ReactTestUtils.Simulate.click(ReactDOM.findDOMNode(instance));
   });
@@ -50,39 +42,40 @@ describe('<CloseButton>', () => {
   it('Should have a span with aria-hidden=true', () => {
     let noOp = () => {};
     let instance = ReactTestUtils.renderIntoDocument(
-      <CloseButton
-        onClick={noOp}
-      />,
+      <CloseButton onClick={noOp} />
     );
-    assert.equal(ReactDOM.findDOMNode(instance).children[0].getAttribute('aria-hidden'), 'true');
+    assert.equal(
+      ReactDOM.findDOMNode(instance).children[0].getAttribute('aria-hidden'),
+      'true'
+    );
   });
 
   it('Should have a span with text of &times; (char code 215)', () => {
     let noOp = () => {};
     let instance = ReactTestUtils.renderIntoDocument(
-      <CloseButton
-        onClick={noOp}
-      />,
+      <CloseButton onClick={noOp} />
     );
-    assert.equal(ReactDOM.findDOMNode(instance).children[0].innerHTML.charCodeAt(0), '215');
+    assert.equal(
+      ReactDOM.findDOMNode(instance).children[0].innerHTML.charCodeAt(0),
+      '215'
+    );
   });
 
   it('Should have a span with class=sr-only', () => {
     let noOp = () => {};
     let instance = ReactTestUtils.renderIntoDocument(
-      <CloseButton
-        onClick={noOp}
-      />,
+      <CloseButton onClick={noOp} />
     );
-    assert.equal(ReactDOM.findDOMNode(instance).children[1].getAttribute('class'), 'sr-only');
+    assert.equal(
+      ReactDOM.findDOMNode(instance).children[1].getAttribute('class'),
+      'sr-only'
+    );
   });
 
   it('Should have a span with text defaulted to "Close"', () => {
     let noOp = () => {};
     let instance = ReactTestUtils.renderIntoDocument(
-      <CloseButton
-        onClick={noOp}
-      />,
+      <CloseButton onClick={noOp} />
     );
     assert.equal(ReactDOM.findDOMNode(instance).children[1].innerHTML, 'Close');
   });
@@ -91,10 +84,7 @@ describe('<CloseButton>', () => {
     let noOp = () => {};
     let label = 'Close Item';
     let instance = ReactTestUtils.renderIntoDocument(
-      <CloseButton
-        onClick={noOp}
-        label={label}
-      />,
+      <CloseButton onClick={noOp} label={label} />
     );
     assert.equal(ReactDOM.findDOMNode(instance).children[1].innerHTML, label);
   });

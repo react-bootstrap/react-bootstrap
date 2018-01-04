@@ -6,24 +6,20 @@ import Modal from '../src/Modal';
 
 describe('Modal.Header', () => {
   it('uses "div" by default', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Modal.Header />,
-    );
+    const instance = ReactTestUtils.renderIntoDocument(<Modal.Header />);
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
   });
 
   it('has "modal-header" class', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Modal.Header />,
-    );
+    const instance = ReactTestUtils.renderIntoDocument(<Modal.Header />);
 
     assert.include(ReactDOM.findDOMNode(instance).className, 'modal-header');
   });
 
   it('should merge additional classes passed in', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Modal.Header className="custom-class" />,
+      <Modal.Header className="custom-class" />
     );
     const classes = ReactDOM.findDOMNode(instance).className;
 
@@ -35,15 +31,17 @@ describe('Modal.Header', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Modal.Header>
         <strong>Content</strong>
-      </Modal.Header>,
+      </Modal.Header>
     );
 
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'));
+    assert.ok(
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong')
+    );
   });
 
   it('has closeButton without a containing Modal and renders', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Modal.Header closeButton />,
+      <Modal.Header closeButton />
     );
 
     assert.isNotNull(ReactDOM.findDOMNode(instance));
@@ -52,12 +50,12 @@ describe('Modal.Header', () => {
   it('Should trigger onHide when modal is closed', () => {
     const onHideSpy = sinon.spy();
     const instance = ReactTestUtils.renderIntoDocument(
-      <Modal.Header closeButton onHide={onHideSpy} />,
+      <Modal.Header closeButton onHide={onHideSpy} />
     );
 
     const closeButton = ReactTestUtils.findRenderedDOMComponentWithClass(
       instance,
-      'close',
+      'close'
     );
 
     ReactTestUtils.Simulate.click(closeButton);

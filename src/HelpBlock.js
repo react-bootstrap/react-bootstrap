@@ -11,10 +11,7 @@ class HelpBlock extends React.Component {
     const classes = getClassSet(bsProps);
 
     return (
-      <span
-        {...elementProps}
-        className={classNames(className, classes)}
-      />
+      <span {...elementProps} className={classNames(className, classes)} />
     );
   }
 }

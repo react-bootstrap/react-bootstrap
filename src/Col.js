@@ -168,11 +168,11 @@ const propTypes = {
    *
    * class-prefix `col-lg-pull-`
    */
-  lgPull: PropTypes.number,
+  lgPull: PropTypes.number
 };
 
 const defaultProps = {
-  componentClass: 'div',
+  componentClass: 'div'
 };
 
 class Col extends React.Component {
@@ -182,7 +182,7 @@ class Col extends React.Component {
 
     const classes = [];
 
-    DEVICE_SIZES.forEach((size) => {
+    DEVICE_SIZES.forEach(size => {
       function popProp(propSuffix, modifier) {
         const propName = `${size}${propSuffix}`;
         const propValue = elementProps[propName];
@@ -207,10 +207,7 @@ class Col extends React.Component {
     });
 
     return (
-      <Component
-        {...elementProps}
-        className={classNames(className, classes)}
-      />
+      <Component {...elementProps} className={classNames(className, classes)} />
     );
   }
 }

@@ -2,15 +2,19 @@ import classNames from 'classnames';
 import css from 'dom-helpers/style';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Transition, { EXITED, ENTERED, ENTERING, EXITING }
-  from 'react-transition-group/Transition';
+import Transition, {
+  EXITED,
+  ENTERED,
+  ENTERING,
+  EXITING
+} from 'react-transition-group/Transition';
 
 import capitalize from './utils/capitalize';
 import createChainedFunction from './utils/createChainedFunction';
 
 const MARGINS = {
   height: ['marginTop', 'marginBottom'],
-  width: ['marginLeft', 'marginRight'],
+  width: ['marginLeft', 'marginRight']
 };
 
 // reading a dimension prop will cause the browser to recalculate,
@@ -23,7 +27,8 @@ function getDimensionValue(dimension, elem) {
   let value = elem[`offset${capitalize(dimension)}`];
   let margins = MARGINS[dimension];
 
-  return (value +
+  return (
+    value +
     parseInt(css(elem, margins[0]), 10) +
     parseInt(css(elem, margins[1]), 10)
   );
@@ -33,7 +38,7 @@ const collapseStyles = {
   [EXITED]: 'collapse',
   [EXITING]: 'collapsing',
   [ENTERING]: 'collapsing',
-  [ENTERED]: 'collapse in',
+  [ENTERED]: 'collapse in'
 };
 
 const propTypes = {
@@ -99,7 +104,7 @@ const propTypes = {
    */
   dimension: PropTypes.oneOfType([
     PropTypes.oneOf(['height', 'width']),
-    PropTypes.func,
+    PropTypes.func
   ]),
 
   /**
@@ -114,7 +119,7 @@ const propTypes = {
   /**
    * ARIA role of collapsible element
    */
-  role: PropTypes.string,
+  role: PropTypes.string
 };
 
 const defaultProps = {
@@ -125,7 +130,7 @@ const defaultProps = {
   appear: false,
 
   dimension: 'height',
-  getDimensionValue,
+  getDimensionValue
 };
 
 class Collapse extends React.Component {
@@ -141,50 +146,56 @@ class Collapse extends React.Component {
   }
 
   /* -- Expanding -- */
-  handleEnter = (elem) => {
+  handleEnter = elem => {
     elem.style[this.getDimension()] = '0';
-  }
+  };
 
-  handleEntering = (elem) => {
+  handleEntering = elem => {
     const dimension = this.getDimension();
     elem.style[dimension] = this._getScrollDimensionValue(elem, dimension);
-  }
+  };
 
-  handleEntered = (elem) => {
+  handleEntered = elem => {
     elem.style[this.getDimension()] = null;
-  }
+  };
 
   /* -- Collapsing -- */
-  handleExit = (elem) => {
+  handleExit = elem => {
     const dimension = this.getDimension();
-    elem.style[dimension] = `${this.props.getDimensionValue(dimension, elem)}px`;
+    elem.style[dimension] = `${this.props.getDimensionValue(
+      dimension,
+      elem
+    )}px`;
     triggerBrowserReflow(elem);
-  }
+  };
 
-  handleExiting = (elem) => {
+  handleExiting = elem => {
     elem.style[this.getDimension()] = '0';
-  }
-
+  };
 
   render() {
     const {
-      onEnter, onEntering, onEntered, onExit, onExiting,
-      className, children, ...props
+      onEnter,
+      onEntering,
+      onEntered,
+      onExit,
+      onExiting,
+      className,
+      children,
+      ...props
     } = this.props;
 
     delete props.dimension;
     delete props.getDimensionValue;
 
-    const handleEnter =
-      createChainedFunction(this.handleEnter, onEnter);
-    const handleEntering =
-      createChainedFunction(this.handleEntering, onEntering);
-    const handleEntered =
-      createChainedFunction(this.handleEntered, onEntered);
-    const handleExit =
-      createChainedFunction(this.handleExit, onExit);
-    const handleExiting =
-      createChainedFunction(this.handleExiting, onExiting);
+    const handleEnter = createChainedFunction(this.handleEnter, onEnter);
+    const handleEntering = createChainedFunction(
+      this.handleEntering,
+      onEntering
+    );
+    const handleEntered = createChainedFunction(this.handleEntered, onEntered);
+    const handleExit = createChainedFunction(this.handleExit, onExit);
+    const handleExiting = createChainedFunction(this.handleExiting, onExiting);
 
     return (
       <Transition
@@ -196,15 +207,17 @@ class Collapse extends React.Component {
         onExit={handleExit}
         onExiting={handleExiting}
       >
-        {(state, innerProps) => React.cloneElement(children, {
-          ...innerProps,
-          className: classNames(
-            className,
-            children.props.className,
-            collapseStyles[state],
-            this.getDimension() === 'width' && 'width',
-          ),
-        })}
+        {(state, innerProps) =>
+          React.cloneElement(children, {
+            ...innerProps,
+            className: classNames(
+              className,
+              children.props.className,
+              collapseStyles[state],
+              this.getDimension() === 'width' && 'width'
+            )
+          })
+        }
       </Transition>
     );
   }

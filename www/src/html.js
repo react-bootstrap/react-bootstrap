@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 
 module.exports = class HTML extends React.Component {
   static propTypes = {
-    body: PropTypes.string,
+    body: PropTypes.string
   };
 
   render() {
@@ -33,7 +33,10 @@ module.exports = class HTML extends React.Component {
         </head>
 
         <body>
-          <div id="___gatsby" dangerouslySetInnerHTML={{ __html: this.props.body }} />
+          <div
+            id="___gatsby"
+            dangerouslySetInnerHTML={{ __html: this.props.body }}
+          />
 
           {this.props.postBodyComponents}
         </body>

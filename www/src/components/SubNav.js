@@ -15,12 +15,12 @@ const propTypes = {
   disabled: PropTypes.bool,
   eventKey: PropTypes.any,
   href: PropTypes.string,
-  text: PropTypes.node,
+  text: PropTypes.node
 };
 
 const defaultProps = {
   active: false,
-  disabled: false,
+  disabled: false
 };
 
 class SubNav extends React.Component {
@@ -53,9 +53,11 @@ class SubNav extends React.Component {
       return true;
     }
 
-    if (ValidComponentChildren.some(props.children, child => (
-      this.isActive(child, activeKey, activeHref)
-    ))) {
+    if (
+      ValidComponentChildren.some(props.children, child =>
+        this.isActive(child, activeKey, activeHref)
+      )
+    ) {
       return true;
     }
 
@@ -80,22 +82,20 @@ class SubNav extends React.Component {
 
     const classes = {
       active: this.isActive(this, activeKey, activeHref),
-      disabled,
+      disabled
     };
 
     return (
       <li className={classNames(className, classes)} style={style}>
-        <SafeAnchor {...props}>
-          {text}
-        </SafeAnchor>
+        <SafeAnchor {...props}>{text}</SafeAnchor>
 
         <Nav>
-          {ValidComponentChildren.map(children, child => (
+          {ValidComponentChildren.map(children, child =>
             cloneElement(child, {
               active: this.isActive(child, activeKey, activeHref),
-              onSelect: createChainedFunction(child.props.onSelect, onSelect),
+              onSelect: createChainedFunction(child.props.onSelect, onSelect)
             })
-          ))}
+          )}
         </Nav>
       </li>
     );

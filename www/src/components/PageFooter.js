@@ -45,15 +45,36 @@ class PageFooter extends React.Component {
               </li>
             </ul>
           </div>
-          <p>Code licensed under <a href="https://github.com/react-bootstrap/react-bootstrap/blob/master/LICENSE" rel="noopener noreferrer" target="_blank">MIT</a>.</p>
+          <p>
+            Code licensed under{' '}
+            <a
+              href="https://github.com/react-bootstrap/react-bootstrap/blob/master/LICENSE"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              MIT
+            </a>.
+          </p>
           <ul className="bs-docs-footer-links muted">
             <li>Currently v{version}</li>
             <li>·</li>
-            <li><a href="https://github.com/react-bootstrap/react-bootstrap/">GitHub</a></li>
+            <li>
+              <a href="https://github.com/react-bootstrap/react-bootstrap/">
+                GitHub
+              </a>
+            </li>
             <li>·</li>
-            <li><a href="https://github.com/react-bootstrap/react-bootstrap/issues?state=open">Issues</a></li>
+            <li>
+              <a href="https://github.com/react-bootstrap/react-bootstrap/issues?state=open">
+                Issues
+              </a>
+            </li>
             <li>·</li>
-            <li><a href="https://github.com/react-bootstrap/react-bootstrap/releases">Releases</a></li>
+            <li>
+              <a href="https://github.com/react-bootstrap/react-bootstrap/releases">
+                Releases
+              </a>
+            </li>
           </ul>
         </div>
       </footer>

@@ -23,27 +23,33 @@ const propTypes = {
   /**
    * Sets image shape as thumbnail
    */
-  thumbnail: PropTypes.bool,
+  thumbnail: PropTypes.bool
 };
 
 const defaultProps = {
   responsive: false,
   rounded: false,
   circle: false,
-  thumbnail: false,
+  thumbnail: false
 };
 
 class Image extends React.Component {
   render() {
-    const { responsive, rounded, circle, thumbnail, className, ...props } =
-      this.props;
+    const {
+      responsive,
+      rounded,
+      circle,
+      thumbnail,
+      className,
+      ...props
+    } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
       [prefix(bsProps, 'responsive')]: responsive,
       [prefix(bsProps, 'rounded')]: rounded,
       [prefix(bsProps, 'circle')]: circle,
-      [prefix(bsProps, 'thumbnail')]: thumbnail,
+      [prefix(bsProps, 'thumbnail')]: thumbnail
     };
 
     return (

@@ -1,8 +1,6 @@
-
 const fse = require('fs-extra');
 const { srcRoot, esRoot } = require('./constants');
 const runBabel = require('./run-babel');
-
 
 module.exports = async function buildEsModules() {
   console.log('Building: '.cyan + 'es module'.green);
