@@ -122,6 +122,6 @@
   "release-script": {
     "bowerRepo": "git@github.com:react-bootstrap/react-bootstrap-bower.git",
     "docsRepo": "git@github.com:react-bootstrap/react-bootstrap.github.io.git",
-    "docsRoot": "www/public"
+    "docsRoot": "www/public/"
   }
 }
