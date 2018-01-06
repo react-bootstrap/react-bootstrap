@@ -2,7 +2,7 @@ class FormExample extends React.Component {
   constructor(...args) {
     super(...args);
 
-    this.handleChange = this.handleChange.bind(null);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
       value: ''
