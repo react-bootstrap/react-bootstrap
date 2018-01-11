@@ -56,7 +56,6 @@ $ bower install react-bootstrap
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
           `}</code>
           </pre>
-          />
           <p>
             For more advanced use cases you can also use a bundler like Webpack
             or Browserify to include the css files for you as part of your build
