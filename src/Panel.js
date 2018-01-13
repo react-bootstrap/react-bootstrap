@@ -94,9 +94,8 @@ class Panel extends React.Component {
   getExpanded() {
     const { eventKey } = this.props;
     const { activeKey } = this.context.$bs_panelGroup || {};
-
-    return this.props.expanded != null || activeKey === undefined
-      ? this.props.expanded
+    return activeKey === undefined
+      ? !!this.props.expanded 
       : activeKey === eventKey;
   }
 

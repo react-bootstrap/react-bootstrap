@@ -75,6 +75,39 @@ describe('<PanelGroup>', () => {
       .simulate('click');
   });
 
+  it('Init Panel1 open, click Panel2 it opens and Panel1 closes, click Panel2 it opens, Panel1 closes ', () => {
+    const inst = mount(
+      <PanelGroup accordion defaultActiveKey="1" id="panel">
+        <Panel id="panel1" eventKey="1">
+          <Panel.Heading>
+            <Panel.Title toggle>foo</Panel.Title>
+          </Panel.Heading>
+
+          <Panel.Body collapsible>Panel 1</Panel.Body>
+        </Panel>
+        <Panel id="panel2" eventKey="2">
+          <Panel.Heading>
+            <Panel.Title toggle>foo</Panel.Title>
+          </Panel.Heading>
+
+          <Panel.Body collapsible>Panel 2</Panel.Body>
+        </Panel>
+      </PanelGroup>
+    )
+    const panel1 = inst.find('#panel1').find('a');
+    const panel2 = inst.find('#panel2').find('a');
+    const panel1Dom = panel1.getDOMNode();
+    const panel2Dom = panel2.getDOMNode();
+
+    panel2.simulate('click');
+    assert.equal(panel1Dom.getAttribute('class'), 'collapsed');
+    assert.equal(panel2Dom.getAttribute('class'), '');
+
+    panel1.simulate('click');
+    assert.equal(panel1Dom.getAttribute('class'), '');
+    assert.equal(panel2Dom.getAttribute('class'), 'collapsed');
+  });
+
   describe('Web Accessibility', () => {
     let panelBodies, panelGroup, headers, links; // eslint-disable-line
 
