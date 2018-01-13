@@ -93,7 +93,7 @@ describe('<PanelGroup>', () => {
           <Panel.Body collapsible>Panel 2</Panel.Body>
         </Panel>
       </PanelGroup>
-    )
+    );
     const panel1 = inst.find('#panel1').find('a');
     const panel2 = inst.find('#panel2').find('a');
     const panel1Dom = panel1.getDOMNode();
