@@ -1,4 +1,4 @@
-function FieldGroup({ id, label, help, ...props }) {
+function _FieldGroup(id, label, help, ...props) {
   return (
     <FormGroup controlId={id}>
       <ControlLabel>{label}</ControlLabel>
@@ -6,6 +6,10 @@ function FieldGroup({ id, label, help, ...props }) {
       {help && <HelpBlock>{help}</HelpBlock>}
     </FormGroup>
   );
+}
+
+function FieldGroup(props) {
+  return _FieldGroup(...props);
 }
 
 const formInstance = (
