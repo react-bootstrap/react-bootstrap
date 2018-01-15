@@ -73,7 +73,7 @@ class Panel extends React.Component {
     if (idKey !== null) {
       const panelGroup = this.context.$bs_panelGroup;
       const getId = (panelGroup && panelGroup.getId) || defaultGetId;
-      
+
       ids = {
         headingId: getId(idKey, 'heading'),
         bodyId: getId(idKey, 'body')
