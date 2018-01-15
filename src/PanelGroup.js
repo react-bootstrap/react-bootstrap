@@ -67,12 +67,6 @@ const childContextTypes = {
 };
 
 class PanelGroup extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.handleSelect = this.handleSelect.bind(this);
-  }
-
   getChildContext() {
     const { activeKey, accordion, generateChildId, id } = this.props;
     let getId = null;
@@ -96,11 +90,13 @@ class PanelGroup extends React.Component {
     };
   }
 
-  handleSelect(key, expanded, e) {
+  handleSelect = (key, expanded, e) => {
     if (expanded) {
       this.props.onSelect(key, e);
+    } else if (this.props.activeKey === key) {
+      this.props.onSelect(null, e);
     }
-  }
+  };
 
   render() {
     const { accordion, className, children, ...props } = this.props;
