@@ -342,8 +342,8 @@ class Nav extends React.Component {
               childOnSelect
             ),
             active,
-            activekey,
-            activehref,
+            activekey: activeKey,
+            activehref: activeHref,
             onSelect: childOnSelect
           });
         })}
