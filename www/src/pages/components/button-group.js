@@ -123,6 +123,20 @@ export default function ButtonGroupSection({ data }) {
         selected <code>eventKey</code> for radio groups.
       </p>
 
+      <div className="bs-callout bs-callout-warning">
+        <h4>Bootstrap JS issue</h4>
+        <p>
+          There is a known{' '}
+          <a href="https://github.com/react-bootstrap/react-bootstrap/issues/2774">
+            issue
+          </a>{' '}
+          when including Bootstrap JS while using Toggle Button Groups.
+          Therefore it is advised not use Bootstrap JS in conjunction with{' '}
+          <code>{'<ToggleButtonGroup>'}</code> and{' '}
+          <code>{'<ToggleButton>'}</code>.
+        </p>
+      </div>
+
       <h4>Uncontrolled</h4>
       <ReactPlayground codeText={ToggleButtonGroupUncontrolled} />
       <h4>Controlled</h4>
