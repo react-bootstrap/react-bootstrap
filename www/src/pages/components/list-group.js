@@ -15,7 +15,7 @@ export default function ListGroupSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
-        <Anchor id="listgroup">List group</Anchor>
+        <Anchor id="listgroup">List group</Anchor>{' '}
         <small>ListGroup, ListGroupItem</small>
       </h2>
 

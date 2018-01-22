@@ -1,19 +1,21 @@
 class Example extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
 
-    this.state = { showModal: false };
+    this.state = {
+      show: false
+    };
   }
 
   handleClose() {
-    this.setState({ showModal: false });
+    this.setState({ show: false });
   }
 
   handleShow() {
-    this.setState({ showModal: true });
+    this.setState({ show: true });
   }
 
   render() {
@@ -32,7 +34,7 @@ class Example extends React.Component {
           Launch demo modal
         </Button>
 
-        <Modal show={this.state.showModal} onHide={this.handleClose}>
+        <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>

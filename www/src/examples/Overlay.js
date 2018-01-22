@@ -1,15 +1,17 @@
 class Example extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
 
     this.getTarget = this.getTarget.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
 
-    this.state = { show: true };
+    this.state = {
+      show: true
+    };
   }
 
   getTarget() {
-    return ReactDOM.findDOMNode(this.refs.target);
+    return ReactDOM.findDOMNode(this.target);
   }
 
   handleToggle() {
@@ -25,7 +27,12 @@ class Example extends React.Component {
 
     return (
       <div style={{ height: 100, paddingLeft: 150, position: 'relative' }}>
-        <Button ref="target" onClick={this.handleToggle}>
+        <Button
+          ref={button => {
+            this.target = button;
+          }}
+          onClick={this.handleToggle}
+        >
           Click me!
         </Button>
 
