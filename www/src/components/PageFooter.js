@@ -1,5 +1,5 @@
 import React from 'react';
-import packageJSON from '../../package.json';
+import packageJSON from '../../../package.json';
 
 let version = packageJSON.version;
 
