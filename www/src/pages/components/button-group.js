@@ -11,13 +11,17 @@ import ButtonGroupNested from '../../examples/ButtonGroupNested';
 import ButtonGroupVertical from '../../examples/ButtonGroupVertical';
 import ButtonGroupBlock from '../../examples/ButtonGroupBlock';
 import ButtonGroupJustified from '../../examples/ButtonGroupJustified';
+import ToggleButtonGroupControlled from '../../examples/ToggleButtonGroupControlled';
+import ToggleButtonGroupUncontrolled from '../../examples/ToggleButtonGroupUncontrolled';
 
 export default function ButtonGroupSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
         <Anchor id="btn-groups">Button groups</Anchor>{' '}
-        <small>ButtonGroup, ButtonToolbar</small>
+        <small>
+          ButtonGroup, ButtonToolbar, ToggleButtonGroup, ToggleButton
+        </small>
       </h2>
 
       <p className="lead">
@@ -109,16 +113,76 @@ export default function ButtonGroupSection({ data }) {
       <ReactPlayground codeText={ButtonGroupJustified} />
 
       <h3>
+        <Anchor id="btn-groups-checkbox-radio">Checkbox / Radio</Anchor>
+      </h3>
+      <p>
+        For checkboxes or radio buttons styled as Bootstrap buttons, use the
+        <code>{'<ToggleButtonGroup>'}</code> and <code>{'<ToggleButton>'}</code>
+        components. The group behaves as a form component, where the value is an
+        array of the selected <code>eventKey</code>s for checkbox groups or the
+        selected <code>eventKey</code> for radio groups.
+      </p>
+
+      <div className="bs-callout bs-callout-warning">
+        <h4>Bootstrap JS issue</h4>
+        <p>
+          There is a known{' '}
+          <a href="https://github.com/react-bootstrap/react-bootstrap/issues/2774">
+            issue
+          </a>{' '}
+          when including Bootstrap JS while using Toggle Button Groups.
+          Therefore it is advised not use Bootstrap JS in conjunction with{' '}
+          <code>{'<ToggleButtonGroup>'}</code> and{' '}
+          <code>{'<ToggleButton>'}</code>.
+        </p>
+      </div>
+
+      <h4>Uncontrolled</h4>
+      <ReactPlayground codeText={ToggleButtonGroupUncontrolled} />
+      <h4>Controlled</h4>
+      <ReactPlayground codeText={ToggleButtonGroupControlled} />
+
+      <h3>
         <Anchor id="btn-groups-props">Props</Anchor>
       </h3>
-      <PropTable metadata={data.metadata} />
+
+      <h4>
+        <Anchor id="btn-groups-group-props">ButtonGroup</Anchor>
+      </h4>
+      <PropTable metadata={data.ButtonGroup} />
+
+      <h4>
+        <Anchor id="btn-groups-toolbar-props">ButtonToolbar</Anchor>
+      </h4>
+      <PropTable metadata={data.ButtonToolbar} />
+
+      <h4>
+        <Anchor id="btn-groups-toggle-group-props">ToggleButtonGroup</Anchor>
+      </h4>
+      <PropTable metadata={data.ToggleButtonGroup} />
+
+      <h4>
+        <Anchor id="btn-groups-toggle-btn-props">ToggleButton</Anchor>
+      </h4>
+      <PropTable metadata={data.ToggleButton} />
     </div>
   );
 }
 
 export const query = graphql`
   query ButtonGroupQuery {
-    metadata: componentMetadata(displayName: { eq: "ButtonGroup" }) {
+    ButtonGroup: componentMetadata(displayName: { eq: "ButtonGroup" }) {
+      ...PropTable_metadata
+    }
+    ButtonToolbar: componentMetadata(displayName: { eq: "ButtonToolbar" }) {
+      ...PropTable_metadata
+    }
+    ToggleButtonGroup: componentMetadata(
+      displayName: { eq: "ToggleButtonGroup" }
+    ) {
+      ...PropTable_metadata
+    }
+    ToggleButton: componentMetadata(displayName: { eq: "ToggleButton" }) {
       ...PropTable_metadata
     }
   }
