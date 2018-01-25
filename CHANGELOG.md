@@ -1,3 +1,12 @@
+## [v0.32.1]
+> 2018-01-24
+
+- **Bugfix:** Do not allow more than one open panel in an accordion group ([#2940])
+
+[v0.32.1]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.32.0...v0.32.1
+[#2940]: https://github.com/react-bootstrap/react-bootstrap/pull/2940
+
+
 ## [v0.32.0]
 > 2018-01-04
 
@@ -18,6 +27,7 @@
 [#2908]: https://github.com/react-bootstrap/react-bootstrap/pull/2908
 [#2676]: https://github.com/react-bootstrap/react-bootstrap/pull/2676
 [#1769]: https://github.com/react-bootstrap/react-bootstrap/pull/1769
+
 
 ## [v0.31.5]
 > 2017-10-24
