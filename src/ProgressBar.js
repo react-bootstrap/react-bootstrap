@@ -31,7 +31,8 @@ function onlyProgressBar(props, propName, componentName) {
     }
 
     // eslint-disable-next-line no-use-before-define
-    if (child.type === ProgressBar) return;
+    const element = <ProgressBar />;
+    if (child.type === element.type) return;
 
     const childIdentifier = React.isValidElement(child)
       ? child.type.displayName || child.type.name || child.type
