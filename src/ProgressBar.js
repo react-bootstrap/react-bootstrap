@@ -30,7 +30,12 @@ function onlyProgressBar(props, propName, componentName) {
       return;
     }
 
-    // eslint-disable-next-line no-use-before-define
+    /**
+     * Compare types in a way that works with libraries that patch and proxy
+     * components like react-hot-loader.
+     *
+     * see https://github.com/gaearon/react-hot-loader#checking-element-types
+     */
     const element = <ProgressBar />;
     if (child.type === element.type) return;
 
