@@ -98,6 +98,11 @@ export default function ModalSection({ data }) {
       <PropTable metadata={data.Modal} />
 
       <h4>
+        <Anchor id="modals-props-modal-dialog">Modal.Dialog</Anchor>
+      </h4>
+      <PropTable metadata={data.ModalDialog} />
+
+      <h4>
         <Anchor id="modals-props-modal-header">Modal.Header</Anchor>
       </h4>
       <PropTable metadata={data.ModalHeader} />
@@ -123,6 +128,9 @@ export default function ModalSection({ data }) {
 export const query = graphql`
   query ModalQuery {
     Modal: componentMetadata(displayName: { eq: "Modal" }) {
+      ...PropTable_metadata
+    }
+    ModalDialog: componentMetadata(displayName: { eq: "ModalDialog" }) {
       ...PropTable_metadata
     }
     ModalHeader: componentMetadata(displayName: { eq: "ModalHeader" }) {
