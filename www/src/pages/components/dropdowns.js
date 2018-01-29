@@ -104,8 +104,8 @@ export default function DropdownSection({ data }) {
         </li>
       </ul>
       <p>
-        The callback is called with the following arguments: <code>event</code>{' '}
-        and <code>eventKey</code>
+        The callback is called with the following arguments:{' '}
+        <code>eventKey</code> and <code>event</code>
       </p>
       <ReactPlayground codeText={MenuItem} />
 
