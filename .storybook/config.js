@@ -2,7 +2,7 @@ import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
 
 // import './v4/bootstrap-reboot.css';
-import './v4/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import './examples.css';
 
 function loadStories() {
