@@ -116,7 +116,7 @@ storiesOf('Button', module)
       </Button>
     </div>
   ))
-  .add('Toggle Buttons', () => (
+  .add('Toggle Buttons ✔', () => (
     <div>
       <ButtonToolbar>
         <ToggleButtonGroup type="checkbox" defaultValue={[1, 3]}>

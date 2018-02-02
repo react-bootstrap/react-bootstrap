@@ -50,7 +50,7 @@ class ToggleButton extends React.Component {
     const disabled = props.disabled;
 
     return (
-      <Button {...props} active={!!checked} componentClass="label">
+      <Button {...props} type={null} active={!!checked} componentClass="label">
         <input
           name={name}
           type={type}
