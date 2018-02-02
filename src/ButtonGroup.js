@@ -14,6 +14,10 @@ import {
 const propTypes = {
   vertical: PropTypes.bool,
   justified: PropTypes.bool,
+  /**
+   * Display as a button toggle group
+   * @type {bool}
+   */
   toggle: PropTypes.bool,
 
   /**
