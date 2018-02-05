@@ -494,6 +494,11 @@ h1[id] {
   clear: left;
 }
 
+/* Link to Github Source */
+.link-to-source {
+  font-size: 12px;
+  padding: 0 5px;
+}
 
 
 /*

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -171,22 +172,26 @@ export default function DropdownSection({ data }) {
 
       <h4>
         <Anchor id="btn-dropdowns-props-dropdown-button">DropdownButton</Anchor>
+        <LinkToSource component={data.DropdownButton.displayName} />
       </h4>
       <PropTable metadata={data.DropdownButton} />
 
       <h4>
         <Anchor id="btn-dropdowns-props-split">SplitButton</Anchor>
+        <LinkToSource component={data.SplitButton.displayName} />
       </h4>
       <PropTable metadata={data.SplitButton} />
 
       <h4>
         <Anchor id="btn-dropdowns-props-dropdown">Dropdown</Anchor>
+        <LinkToSource component={data.Dropdown.displayName} />
       </h4>
       <PropTable metadata={data.Dropdown} />
 
-      <h3>
-        <Anchor id="menu-item-props">Props</Anchor>
-      </h3>
+      <h4>
+        <Anchor id="menu-item-props">Menu Item</Anchor>
+        <LinkToSource component={data.MenuItem.displayName} />
+      </h4>
       <PropTable metadata={data.MenuItem} />
     </div>
   );

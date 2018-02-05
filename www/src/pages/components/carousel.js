@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -39,16 +40,19 @@ export default function CarouselSection({ data }) {
 
       <h4>
         <Anchor id="carousels-props-carousel">Carousel</Anchor>
+        <LinkToSource component={data.carousel.displayName} />
       </h4>
       <PropTable metadata={data.carousel} />
 
       <h4>
         <Anchor id="carousels-props-item">Carousel.Item</Anchor>
+        <LinkToSource component={data.item.displayName} />
       </h4>
       <PropTable metadata={data.item} />
 
       <h4>
         <Anchor id="carousels-props-caption">Carousel.Caption</Anchor>
+        <LinkToSource component={data.caption.displayName} />
       </h4>
       <PropTable metadata={data.caption} />
     </div>

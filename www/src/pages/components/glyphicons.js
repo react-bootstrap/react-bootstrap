@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -21,6 +22,7 @@ export default function GlyphiconSection({ data }) {
 
       <h3>
         <Anchor id="glyphicons-props">Props</Anchor>
+        <LinkToSource component={data.Glyphicon.displayName} />
       </h3>
       <PropTable metadata={data.Glyphicon} />
     </div>

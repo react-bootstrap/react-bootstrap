@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -85,11 +86,13 @@ export default function ListGroupSection({ data }) {
 
       <h4>
         <Anchor id="listgroup-props-group">ListGroup</Anchor>
+        <LinkToSource component={data.ListGroup.displayName} />
       </h4>
       <PropTable metadata={data.ListGroup} />
 
       <h4>
         <Anchor id="listgroup-props-item">ListGroupItem</Anchor>
+        <LinkToSource component={data.ListGroupItem.displayName} />
       </h4>
       <PropTable metadata={data.ListGroupItem} />
     </div>

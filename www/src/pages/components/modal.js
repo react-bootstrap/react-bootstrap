@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -94,26 +95,31 @@ export default function ModalSection({ data }) {
 
       <h4>
         <Anchor id="modals-props-modal">Modal</Anchor>
+        <LinkToSource component={data.Modal.displayName} />
       </h4>
       <PropTable metadata={data.Modal} />
 
       <h4>
         <Anchor id="modals-props-modal-header">Modal.Header</Anchor>
+        <LinkToSource component={data.ModalHeader.displayName} />
       </h4>
       <PropTable metadata={data.ModalHeader} />
 
       <h4>
         <Anchor id="modals-props-modal-title">Modal.Title</Anchor>
+        <LinkToSource component={data.ModalTitle.displayName} />
       </h4>
       <PropTable metadata={data.ModalTitle} />
 
       <h4>
         <Anchor id="modals-props-modal-body">Modal.Body</Anchor>
+        <LinkToSource component={data.ModalBody.displayName} />
       </h4>
       <PropTable metadata={data.ModalBody} />
 
       <h4>
         <Anchor id="modals-props-modal-footer">Modal.Footer</Anchor>
+        <LinkToSource component={data.ModalFooter.displayName} />
       </h4>
       <PropTable metadata={data.ModalFooter} />
     </div>

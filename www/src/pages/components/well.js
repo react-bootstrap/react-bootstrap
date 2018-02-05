@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -30,6 +31,7 @@ export default function WellSection({ data }) {
 
       <h3>
         <Anchor id="wells-props">Props</Anchor>
+        <LinkToSource component={data.Well.displayName} />
       </h3>
       <PropTable metadata={data.Well} />
     </div>

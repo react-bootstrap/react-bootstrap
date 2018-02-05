@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -148,21 +149,25 @@ export default function ButtonGroupSection({ data }) {
 
       <h4>
         <Anchor id="btn-groups-group-props">ButtonGroup</Anchor>
+        <LinkToSource component={data.ButtonGroup.displayName} />
       </h4>
       <PropTable metadata={data.ButtonGroup} />
 
       <h4>
         <Anchor id="btn-groups-toolbar-props">ButtonToolbar</Anchor>
+        <LinkToSource component={data.ButtonToolbar.displayName} />
       </h4>
       <PropTable metadata={data.ButtonToolbar} />
 
       <h4>
         <Anchor id="btn-groups-toggle-group-props">ToggleButtonGroup</Anchor>
+        <LinkToSource component={data.ToggleButtonGroup.displayName} />
       </h4>
       <PropTable metadata={data.ToggleButtonGroup} />
 
       <h4>
         <Anchor id="btn-groups-toggle-btn-props">ToggleButton</Anchor>
+        <LinkToSource component={data.ToggleButton.displayName} />
       </h4>
       <PropTable metadata={data.ToggleButton} />
     </div>
