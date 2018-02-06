@@ -101,6 +101,7 @@ export default function ModalSection({ data }) {
 
       <h4>
         <Anchor id="modals-props-modal-dialog">Modal.Dialog</Anchor>
+        <LinkToSource component={data.ModalDialog.displayName} />
       </h4>
       <PropTable metadata={data.ModalDialog} />
 
