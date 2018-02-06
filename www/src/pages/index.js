@@ -19,6 +19,16 @@ export default class HomePage extends React.Component {
         </main>
 
         <Grid>
+          <Alert bsStyle="info">
+            <p>
+              <Glyphicon glyph="warning-sign" /> React-Bootstrap currently
+              targets Bootstrap v3. We are actively working on Bootstrap v4
+              support in{' '}
+              <a href="https://github.com/react-bootstrap/react-bootstrap/pull/2752">
+                #2752
+              </a>.
+            </p>
+          </Alert>
           <Alert bsStyle="warning">
             <p>
               <Glyphicon glyph="bullhorn" /> We are actively working to reach a
@@ -62,16 +72,6 @@ export default class HomePage extends React.Component {
               <Glyphicon glyph="user" /> We actively seek to invite frequent
               pull request authors to join the organization.{' '}
               <Glyphicon glyph="thumbs-up" />
-            </p>
-          </Alert>
-          <Alert bsStyle="danger">
-            <p>
-              <Glyphicon glyph="warning-sign" /> The project is under active
-              development, and APIs will change.{' '}
-            </p>
-            <p>
-              <Glyphicon glyph="bullhorn" /> Prior to the 1.0.0 release,
-              breaking changes should result in a minor version bump.
             </p>
           </Alert>
         </Grid>

@@ -47,11 +47,13 @@ $ bower install react-bootstrap
             and which bootstrap styles you include is up to you, but the
             simplest way is to include the latest styles from the CDN.
           </p>
-          <p>
-            Note that the current version of React-Bootstrap uses version 3.x of
-            stylesheet. Consider version 3.x for the satisfactory style
-            representation until version 4.x is fully supported.
-          </p>
+          <div className="bs-callout bs-callout-warning">
+            <p>
+              React-Bootstrap currently targets Bootstrap v3. To use
+              React-Bootstrap, include the CSS for Bootstrap v3 instead of
+              Bootstrap v4.
+            </p>
+          </div>
           <pre>
             <code>{`
 <!-- Latest compiled and minified CSS -->
@@ -78,9 +80,9 @@ $ bower install react-bootstrap
           </p>
           <div className="bs-callout bs-callout-warning">
             <p>
-              Because React-Bootstrap completely re-implements the JavaScript
-              bits of Bootstrap, it's not automatically compatible with themes
-              that extend the default JavaScript behaviors.
+              Because React-Bootstrap completely reimplements Bootstrap's
+              JavaScript, it's not automatically compatible with themes that
+              extend the default JavaScript behaviors.
             </p>
           </div>
           <h2 className="page-header">
