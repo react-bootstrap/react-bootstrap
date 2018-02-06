@@ -48,8 +48,8 @@ $ bower install react-bootstrap
             simplest way is to include the latest styles from the CDN.
           </p>
           <p>
-            Note that the current version of React-Bootstrap uses version 3.x
-            of stylesheet. Consider version 3.x for the satisfactory style
+            Note that the current version of React-Bootstrap uses version 3.x of
+            stylesheet. Consider version 3.x for the satisfactory style
             representation until version 4.x is fully supported.
           </p>
           <pre>
