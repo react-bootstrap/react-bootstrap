@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -23,6 +24,7 @@ export default function PageHeaderSection({ data }) {
 
       <h3>
         <Anchor id="page-header-props">Props</Anchor>
+        <LinkToSource component={data.PageHeader.displayName} />
       </h3>
       <PropTable metadata={data.PageHeader} />
     </div>

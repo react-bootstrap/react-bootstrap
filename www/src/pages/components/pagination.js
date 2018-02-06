@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -48,11 +49,13 @@ export default function PaginationSection({ data }) {
 
       <h4>
         <Anchor id="pager-props-pager">Pager</Anchor>
+        <LinkToSource component={data.Pager.displayName} />
       </h4>
       <PropTable metadata={data.Pager} />
 
       <h4>
         <Anchor id="pager-props-pager-item">Pager.Item</Anchor>
+        <LinkToSource component={data.PagerItem.displayName} />
       </h4>
       <PropTable metadata={data.PagerItem} />
 

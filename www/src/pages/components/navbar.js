@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -95,11 +96,13 @@ export default function NavbarSection({ data }) {
 
       <h4>
         <Anchor id="navs-props-navbar">Navbar</Anchor>
+        <LinkToSource component={data.Navbar.displayName} />
       </h4>
       <PropTable metadata={data.Navbar} />
 
       <h4>
         <Anchor id="navs-props-navbar-toggle">Navbar.Toggle</Anchor>
+        <LinkToSource component={data.NavbarToggle.displayName} />
       </h4>
       <PropTable metadata={data.NavbarToggle} />
     </div>

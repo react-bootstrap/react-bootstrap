@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -55,16 +56,19 @@ export default function FormControlsSection({ data }) {
 
       <h4>
         <Anchor id="forms-props-form-group">FormGroup</Anchor>
+        <LinkToSource component={data.FormGroup.displayName} />
       </h4>
       <PropTable metadata={data.FormGroup} />
 
       <h4>
         <Anchor id="forms-props-form-control">FormControl</Anchor>
+        <LinkToSource component={data.FormControl.displayName} />
       </h4>
       <PropTable metadata={data.FormControl} />
 
       <h4>
         <Anchor id="forms-props-control-label">ControlLabel</Anchor>
+        <LinkToSource component={data.ControlLabel.displayName} />
       </h4>
       <PropTable metadata={data.ControlLabel} />
 
@@ -91,21 +95,25 @@ export default function FormControlsSection({ data }) {
 
       <h4>
         <Anchor id="forms-props-checkbox">Checkbox</Anchor>
+        <LinkToSource component={data.Checkbox.displayName} />
       </h4>
       <PropTable metadata={data.Checkbox} />
 
       <h4>
         <Anchor id="forms-props-radio">Radio</Anchor>
+        <LinkToSource component={data.Radio.displayName} />
       </h4>
       <PropTable metadata={data.Radio} />
 
       <h4>
         <Anchor id="forms-props-form-control-static">FormControl.Static</Anchor>
+        <LinkToSource component={data.FormControlStatic.displayName} />
       </h4>
       <PropTable metadata={data.FormControlStatic} />
 
       <h4>
         <Anchor id="forms-props-help-block">HelpBlock</Anchor>
+        <LinkToSource component={data.HelpBlock.displayName} />
       </h4>
       <PropTable metadata={data.HelpBlock} />
 
@@ -143,6 +151,7 @@ export default function FormControlsSection({ data }) {
 
       <h4>
         <Anchor id="forms-props-form">Form</Anchor>
+        <LinkToSource component={data.Form.displayName} />
         <small>(only needed for horizontal or inline forms)</small>
       </h4>
       <PropTable metadata={data.Form} />
@@ -178,16 +187,19 @@ export default function FormControlsSection({ data }) {
 
       <h4>
         <Anchor id="forms-props-input-group">InputGroup</Anchor>
+        <LinkToSource component={data.InputGroup.displayName} />
       </h4>
       <PropTable metadata={data.InputGroup} />
 
       <h4>
         <Anchor id="forms-props-input-group-addon">InputGroup.Addon</Anchor>
+        <LinkToSource component={data.InputGroupAddon.displayName} />
       </h4>
       <PropTable metadata={data.InputGroupAddon} />
 
       <h4>
         <Anchor id="forms-props-input-group-button">InputGroup.Button</Anchor>
+        <LinkToSource component={data.InputGroupButton.displayName} />
       </h4>
       <PropTable metadata={data.InputGroupButton} />
 
@@ -214,6 +226,7 @@ export default function FormControlsSection({ data }) {
         <Anchor id="forms-props-form-control-feedback">
           FormControl.Feedback
         </Anchor>
+        <LinkToSource component={data.FormControlFeedback.displayName} />
       </h4>
       <PropTable metadata={data.FormControlFeedback} />
     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -115,41 +116,49 @@ export default function PanelSection({ data }) {
 
       <h4>
         <Anchor id="panels-props-accordion">Panels, Accordion</Anchor>
+        <LinkToSource component={data.Panel.displayName} />
       </h4>
       <PropTable metadata={data.Panel} />
 
       <h4>
         <Anchor id="panels-props-panel-heading">Panel.Heading</Anchor>
+        <LinkToSource component={data.PanelHeading.displayName} />
       </h4>
       <PropTable metadata={data.PanelHeading} />
 
       <h4>
         <Anchor id="panels-props-panel-title">Panel.Title</Anchor>
+        <LinkToSource component={data.PanelTitle.displayName} />
       </h4>
       <PropTable metadata={data.PanelTitle} />
 
       <h4>
         <Anchor id="panels-props-panel-toggle">Panel.Toggle</Anchor>
+        <LinkToSource component={data.PanelToggle.displayName} />
       </h4>
       <PropTable metadata={data.PanelToggle} />
 
       <h4>
         <Anchor id="panels-props-panel-collapse">Panel.Collapse</Anchor>
+        <LinkToSource component={data.PanelCollapse.displayName} />
       </h4>
       <PropTable metadata={data.PanelCollapse} />
 
       <h4>
         <Anchor id="panels-props-panel-body">Panel.Body</Anchor>
+        <LinkToSource component={data.PanelBody.displayName} />
       </h4>
       <PropTable metadata={data.PanelBody} />
 
       <h4>
         <Anchor id="panels-props-panel-footer">Panel.Footer</Anchor>
+        <LinkToSource component={data.PanelFooter.displayName} />
       </h4>
       <PropTable metadata={data.PanelFooter} />
 
       <h4>
         <Anchor id="panels-props-group">PanelGroup</Anchor>
+        <LinkToSource component={data.PanelGroup.displayName} />
       </h4>
       <PropTable metadata={data.PanelGroup} />
     </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -31,6 +32,7 @@ export default function BreadcrumbSection({ data }) {
 
       <h3>
         <Anchor id="breadcrumbs-props">Props</Anchor>
+        <LinkToSource component={data.metadata.displayName} />
       </h3>
       <p>
         <code>Breadcrumb</code> component itself doesn't have any specific
