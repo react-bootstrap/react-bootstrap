@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import { storiesOf } from '@storybook/react'; // eslint-disable-line
 
 import Button from '../src/Button';
 import ButtonToolbar from '../src/ButtonToolbar';
@@ -9,7 +8,7 @@ import ToggleButton from '../src/ToggleButton';
 import ToggleButtonGroup from '../src/ToggleButtonGroup';
 
 storiesOf('Button', module)
-  .add('Styles ✔', () =>
+  .add('Styles ✔', () => (
     <div>
       <div>
         <Button bsStyle="primary">Primary</Button>
@@ -20,6 +19,7 @@ storiesOf('Button', module)
         <Button bsStyle="info">Info</Button>
         <Button bsStyle="light">Light</Button>
         <Button bsStyle="dark">Dark</Button>
+        <Button bsStyle="link">Link</Button>
       </div>
       <br />
       <div>
@@ -33,46 +33,90 @@ storiesOf('Button', module)
         <Button bsStyle="outline-dark">Dark</Button>
       </div>
     </div>
-  )
-  .add('sizes ✔', () =>
+  ))
+  .add('sizes ✔', () => (
     <div>
-      <Button bsSize="lg" bsStyle="primary">Primary</Button>
-      <Button bsSize="lg" bsStyle="secondary">Secondary</Button>
-      <Button bsSize="sm" bsStyle="primary">Primary</Button>
-      <Button bsSize="sm" bsStyle="secondary">Secondary</Button>
+      <Button bsSize="lg" bsStyle="primary">
+        Primary
+      </Button>
+      <Button bsSize="lg" bsStyle="secondary">
+        Secondary
+      </Button>
+      <Button bsSize="sm" bsStyle="primary">
+        Primary
+      </Button>
+      <Button bsSize="sm" bsStyle="secondary">
+        Secondary
+      </Button>
     </div>
-  )
-  .add('disabled ✔', () =>
+  ))
+  .add('disabled ✔', () => (
     <div>
-      <Button disabled bsStyle="primary">Primary</Button>
-      <Button disabled bsStyle="secondary">Secondary</Button>
-      <Button disabled bsStyle="success">Success</Button>
-      <Button disabled bsStyle="danger">Danger</Button>
-      <Button disabled bsStyle="warning">Warning</Button>
-      <Button disabled bsStyle="info">Info</Button>
-      <Button disabled bsStyle="light">Light</Button>
-      <Button disabled bsStyle="dark">Dark</Button>
+      <Button disabled bsStyle="primary">
+        Primary
+      </Button>
+      <Button disabled bsStyle="secondary">
+        Secondary
+      </Button>
+      <Button disabled bsStyle="success">
+        Success
+      </Button>
+      <Button disabled bsStyle="danger">
+        Danger
+      </Button>
+      <Button disabled bsStyle="warning">
+        Warning
+      </Button>
+      <Button disabled bsStyle="info">
+        Info
+      </Button>
+      <Button disabled bsStyle="light">
+        Light
+      </Button>
+      <Button disabled bsStyle="dark">
+        Dark
+      </Button>
     </div>
-  )
-  .add('active ✔', () =>
+  ))
+  .add('active ✔', () => (
     <div>
-      <Button active bsStyle="primary">Primary</Button>
-      <Button active bsStyle="secondary">Secondary</Button>
-      <Button active bsStyle="success">Success</Button>
-      <Button active bsStyle="danger">Danger</Button>
-      <Button active bsStyle="warning">Warning</Button>
-      <Button active bsStyle="info">Info</Button>
-      <Button active bsStyle="light">Light</Button>
-      <Button active bsStyle="dark">Dark</Button>
+      <Button active bsStyle="primary">
+        Primary
+      </Button>
+      <Button active bsStyle="secondary">
+        Secondary
+      </Button>
+      <Button active bsStyle="success">
+        Success
+      </Button>
+      <Button active bsStyle="danger">
+        Danger
+      </Button>
+      <Button active bsStyle="warning">
+        Warning
+      </Button>
+      <Button active bsStyle="info">
+        Info
+      </Button>
+      <Button active bsStyle="light">
+        Light
+      </Button>
+      <Button active bsStyle="dark">
+        Dark
+      </Button>
     </div>
-  )
-  .add('block ✔', () =>
+  ))
+  .add('block ✔', () => (
     <div>
-      <Button block bsStyle="primary">Primary</Button>
-      <Button block bsStyle="secondary">Secondary</Button>
+      <Button block bsStyle="primary">
+        Primary
+      </Button>
+      <Button block bsStyle="secondary">
+        Secondary
+      </Button>
     </div>
-  )
-  .add('Toggle Buttons', () =>
+  ))
+  .add('Toggle Buttons ✔', () => (
     <div>
       <ButtonToolbar>
         <ToggleButtonGroup type="checkbox" defaultValue={[1, 3]}>
@@ -85,14 +129,11 @@ storiesOf('Button', module)
 
       <ButtonToolbar>
         <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
-          <ToggleButton value={1}>
-            Radio 1 (pre-checked)
-          </ToggleButton>
+          <ToggleButton value={1}>Radio 1 (pre-checked)</ToggleButton>
           <ToggleButton value={2}>Radio 2</ToggleButton>
 
           <ToggleButton value={3}>Radio 3</ToggleButton>
         </ToggleButtonGroup>
       </ButtonToolbar>
     </div>
-  );
-
+  ));

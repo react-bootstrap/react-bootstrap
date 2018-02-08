@@ -1584,6 +1584,10 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
+bootstrap@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-4.0.0.tgz#ceb03842c145fcc1b9b4e15da2a05656ba68469a"
+
 bowser@^1.0.0, bowser@^1.7.3:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/bowser/-/bowser-1.9.1.tgz#f86ef2132e8cb10b3eb6ea5af018758c587020db"

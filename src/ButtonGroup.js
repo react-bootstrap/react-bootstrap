@@ -14,6 +14,11 @@ import {
 const propTypes = {
   vertical: PropTypes.bool,
   justified: PropTypes.bool,
+  /**
+   * Display as a button toggle group
+   * @type {bool}
+   */
+  toggle: PropTypes.bool,
 
   /**
    * Display block buttons; only useful when used with the "vertical" prop.
@@ -31,12 +36,20 @@ const propTypes = {
 const defaultProps = {
   block: false,
   justified: false,
-  vertical: false
+  vertical: false,
+  toggle: false
 };
 
 class ButtonGroup extends React.Component {
   render() {
-    const { block, justified, vertical, className, ...props } = this.props;
+    const {
+      block,
+      justified,
+      toggle,
+      vertical,
+      className,
+      ...props
+    } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
@@ -44,6 +57,7 @@ class ButtonGroup extends React.Component {
       [prefix(bsProps)]: !vertical,
       [prefix(bsProps, 'vertical')]: vertical,
       [prefix(bsProps, 'justified')]: justified,
+      [prefix(bsProps, 'toggle')]: toggle,
 
       // this is annoying, since the class is `btn-block` not `btn-group-block`
       [prefix(Button.defaultProps, 'block')]: block

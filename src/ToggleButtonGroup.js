@@ -69,7 +69,14 @@ class ToggleButtonGroup extends React.Component {
   }
 
   render() {
-    const { children, type, name, ...props } = this.props;
+    const {
+      onChange: x,
+      value: y, // eslint-disable-line no-unused-vars
+      children,
+      type,
+      name,
+      ...props
+    } = this.props;
 
     const values = this.getValues();
 
@@ -79,12 +86,9 @@ class ToggleButtonGroup extends React.Component {
         'is set to "radio"'
     );
 
-    delete props.onChange;
-    delete props.value;
-
     // the data attribute is required b/c twbs css uses it in the selector
     return (
-      <ButtonGroup {...props} data-toggle="buttons">
+      <ButtonGroup {...props} toggle data-toggle="buttons">
         {ValidChildren.map(children, child => {
           const { value, onChange } = child.props;
           const handler = () => this.handleToggle(value);
