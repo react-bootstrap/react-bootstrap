@@ -33,7 +33,9 @@ export default function OverlaySection({ data }) {
       <p>
         You don't need to use the provided <code>Tooltip</code> or{' '}
         <code>Popover</code> components. Creating custom overlays is as easy as
-        wrapping some markup in an <code>Overlay</code> component.
+        wrapping some markup in an <code>Overlay</code> component. Make sure to
+        pass down the <code>className</code> and <code>style</code> props to
+        the wrapped element to make positioning and transitions work.
       </p>
       <ReactPlayground codeText={OverlayCustom} />
 

@@ -1,6 +1,7 @@
-function CustomPopover({ style }) {
+function CustomPopover({ className, style }) {
   return (
     <div
+      className={className}
       style={{
         ...style,
         position: 'absolute',
