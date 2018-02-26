@@ -46,6 +46,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [react-router-bootstrap]: https://github.com/react-bootstrap/react-router-bootstrap
 [react-router]: https://github.com/reactjs/react-router
 [react-bootstrap-extended]: https://github.com/rbalicki2/react-bootstrap-extended
+[awesome-react-bootstrap-components]: https://github.com/Hermanya/awesome-react-bootstrap-components
 
 [thinkful-badge]: https://tf-assets-staging.s3.amazonaws.com/badges/thinkful_repo_badge.svg
 [thinkful]: http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap
