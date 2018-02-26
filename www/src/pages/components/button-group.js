@@ -4,13 +4,12 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import ButtonGroupBasic from '../../examples/ButtonGroupBasic';
-import ButtonToolbarBasic from '../../examples/ButtonToolbarBasic';
-import ButtonGroupSizes from '../../examples/ButtonGroupSizes';
-import ButtonGroupNested from '../../examples/ButtonGroupNested';
-import ButtonGroupVertical from '../../examples/ButtonGroupVertical';
-import ButtonGroupBlock from '../../examples/ButtonGroupBlock';
-import ButtonGroupJustified from '../../examples/ButtonGroupJustified';
+import ButtonGroupBasic from '../../examples/ButtonGroup/Basic';
+import ButtonToolbarBasic from '../../examples/ButtonGroup/ToolbarBasic';
+import ButtonToolbar from '../../examples/ButtonGroup/Toolbar';
+import ButtonGroupSizes from '../../examples/ButtonGroup/Sizes';
+import ButtonGroupNested from '../../examples/ButtonGroup/Nested';
+import ButtonGroupVertical from '../../examples/ButtonGroup/Vertical';
 
 export default function ButtonGroupSection({ data }) {
   return (
@@ -42,6 +41,13 @@ export default function ButtonGroupSection({ data }) {
         <code>{'<ButtonToolbar />'}</code> for more complex components.
       </p>
       <ReactPlayground codeText={ButtonToolbarBasic} />
+
+      <p>
+        Feel free to mix input groups with button groups in your toolbars.
+        Similar to the example above, you’ll likely need some utilities though
+        to space things properly.
+      </p>
+      <ReactPlayground codeText={ButtonToolbar} />
 
       <h3>
         <Anchor id="btn-groups-sizing">Sizing</Anchor>
@@ -76,37 +82,6 @@ export default function ButtonGroupSection({ data }) {
         Just add <code>vertical</code> to the <code>{'<ButtonGroup />'}</code>.
       </p>
       <ReactPlayground codeText={ButtonGroupVertical} />
-      <br />
-      <p>
-        Moreover, you can have buttons be block level elements so they take the
-        full width of their container, just add <code>block</code> to the{' '}
-        <code>{'<ButtonGroup />'}</code>, in addition to the{' '}
-        <code>vertical</code> you just added.
-      </p>
-      <ReactPlayground codeText={ButtonGroupBlock} />
-
-      <h3>
-        <Anchor id="btn-groups-justified">Justified button groups</Anchor>
-      </h3>
-      <p>
-        Make a group of buttons stretch at equal sizes to span the entire width
-        of its parent. Also works with button dropdowns within the button group.
-      </p>
-      <div className="bs-callout bs-callout-warning">
-        <h4>Style issues</h4>
-        <p>
-          There are some issues and workarounds required when using this
-          property, please see{' '}
-          <a href="http://getbootstrap.com/components/#btn-groups-justified">
-            bootstrap&#8217;s button group docs
-          </a>{' '}
-          for more specifics.
-        </p>
-      </div>
-      <p>
-        Just add <code>justified</code> to the <code>{'<ButtonGroup />'}</code>.
-      </p>
-      <ReactPlayground codeText={ButtonGroupJustified} />
 
       <h3>
         <Anchor id="btn-groups-props">Props</Anchor>

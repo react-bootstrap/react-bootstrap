@@ -21,7 +21,10 @@ export const State = {
   SUCCESS: 'success',
   WARNING: 'warning',
   DANGER: 'danger',
-  INFO: 'info'
+  INFO: 'info',
+
+  // TODO: legacy, remove
+  DEFAULT: 'default'
 };
 
 export const Style = {
@@ -30,5 +33,8 @@ export const Style = {
   LIGHT: 'light',
   DARK: 'dark',
   LINK: 'link',
-  INVERSE: 'inverse'
+  INVERSE: 'inverse',
+
+  // TODO: legacy, remove
+  DEFAULT: 'default'
 };

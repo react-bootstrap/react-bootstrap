@@ -17,6 +17,7 @@ const components = [
   'carousel',
   'dropdowns',
   'forms',
+  'input-group',
   'glyphicons',
   'images',
   'jumbotron',
@@ -26,15 +27,13 @@ const components = [
   'navs',
   'navbar',
   'overlays',
-  'page-header',
   'pagination',
   'panel',
   'popovers',
   'progress',
   'table',
   'tabs',
-  'tooltips',
-  'well'
+  'tooltips'
 ];
 
 const utilities = ['custom-styles', 'transitions', 'responsive-embed'];

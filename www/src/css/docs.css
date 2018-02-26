@@ -404,9 +404,9 @@ h1[id] {
 .bs-example-control-sizing input[type="text"] + input[type="text"] {
   margin-top: 10px;
 }
-.bs-example-form .input-group {
+/* .bs-example-form .input-group {
   margin-bottom: 10px;
-}
+} */
 .bs-example > textarea.form-control {
   resize: vertical;
 }

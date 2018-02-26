@@ -4,13 +4,12 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import FormBasic from '../../examples/FormBasic';
-import FormControls from '../../examples/FormControls';
-import FormInline from '../../examples/FormInline';
-import FormHorizontal from '../../examples/FormHorizontal';
-import FormInputSizes from '../../examples/FormInputSizes';
-import FormInputAddons from '../../examples/FormInputAddons';
-import FormValidation from '../../examples/FormValidation';
+import FormBasic from '../../examples/Form/Basic';
+import FormControls from '../../examples/Form/Controls';
+import FormInline from '../../examples/Form/Inline';
+import FormHorizontal from '../../examples/Form/Horizontal';
+import FormInputSizes from '../../examples/Form/InputSizes';
+import FormValidation from '../../examples/Form/Validation';
 
 export default function FormControlsSection({ data }) {
   return (
@@ -119,19 +118,6 @@ export default function FormControlsSection({ data }) {
         <small>(only needed for horizontal or inline forms)</small>
       </h4>
       <PropTable metadata={data.Form} />
-      <h2 className="page-header">
-        <Anchor id="forms-input-groups">Input groups</Anchor>
-        <small>InputGroup, InputGroup.Addon, InputGroup.Button</small>
-      </h2>
-      <h3>
-        <Anchor id="forms-input-addons">Input add-ons</Anchor>
-      </h3>
-      <p>
-        Wrap your form control in an <code>{'<InputGroup>'}</code>, then use for
-        normal add-ons and for button add-ons. Exotic configurations may require
-        CSS on your side.
-      </p>
-      <ReactPlayground codeText={FormInputAddons} />
       <h3>
         <Anchor id="forms-input-sizes">Input sizes</Anchor>
       </h3>

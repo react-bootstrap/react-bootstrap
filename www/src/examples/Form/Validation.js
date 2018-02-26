@@ -24,19 +24,19 @@ const formInstance = (
     <FormGroup controlId="formValidationSuccess2" validationState="success">
       <FormLabel>Input with success and feedback icon</FormLabel>
       <FormControl type="text" />
-      <FormControl.Feedback />
+      <FormControl />
     </FormGroup>
 
     <FormGroup controlId="formValidationWarning2" validationState="warning">
       <FormLabel>Input with warning and feedback icon</FormLabel>
       <FormControl type="text" />
-      <FormControl.Feedback />
+      <FormControl />
     </FormGroup>
 
     <FormGroup controlId="formValidationError2" validationState="error">
       <FormLabel>Input with error and feedback icon</FormLabel>
       <FormControl type="text" />
-      <FormControl.Feedback />
+      <FormControl />
     </FormGroup>
 
     <FormGroup controlId="formValidationSuccess3" validationState="success">
@@ -50,10 +50,12 @@ const formInstance = (
     <FormGroup controlId="formValidationWarning3" validationState="warning">
       <FormLabel>Input group with warning</FormLabel>
       <InputGroup>
-        <InputGroup.Addon>@</InputGroup.Addon>
+        <InputGroup.Prepend>
+          <InputGroup.Text>@</InputGroup.Text>
+        </InputGroup.Prepend>
         <FormControl type="text" />
       </InputGroup>
-      <FormControl.Feedback />
+      <FormControl />
     </FormGroup>
 
     <Form componentClass="fieldset" horizontal>
@@ -63,7 +65,7 @@ const formInstance = (
         </Col>
         <Col xs={9}>
           <FormControl type="text" />
-          <FormControl.Feedback />
+          <FormControl />
         </Col>
       </FormGroup>
 
@@ -73,10 +75,12 @@ const formInstance = (
         </Col>
         <Col xs={9}>
           <InputGroup>
-            <InputGroup.Addon>@</InputGroup.Addon>
+            <InputGroup.Prepend>
+              <InputGroup.Text>@</InputGroup.Text>
+            </InputGroup.Prepend>
             <FormControl type="text" />
           </InputGroup>
-          <FormControl.Feedback />
+          <FormControl />
         </Col>
       </FormGroup>
     </Form>
@@ -84,15 +88,17 @@ const formInstance = (
     <Form componentClass="fieldset" inline>
       <FormGroup controlId="formValidationWarning4" validationState="warning">
         <FormLabel>Input with warning</FormLabel> <FormControl type="text" />
-        <FormControl.Feedback />
+        <FormControl />
       </FormGroup>{' '}
       <FormGroup controlId="formValidationError4" validationState="error">
         <FormLabel>Input group with error</FormLabel>{' '}
         <InputGroup>
-          <InputGroup.Addon>@</InputGroup.Addon>
+          <InputGroup.Prepend>
+            <InputGroup.Text>@</InputGroup.Text>
+          </InputGroup.Prepend>
           <FormControl type="text" />
         </InputGroup>
-        <FormControl.Feedback />
+        <FormControl />
       </FormGroup>
     </Form>
 

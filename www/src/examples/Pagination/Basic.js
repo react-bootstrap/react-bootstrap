@@ -8,10 +8,10 @@ for (let number = 1; number <= 10; number++) {
 
 const paginationBasic = (
   <div>
-    <Pagination bsSize="large">{items}</Pagination>
+    <Pagination>{items}</Pagination>
     <br />
 
-    <Pagination bsSize="medium">{items}</Pagination>
+    <Pagination bsSize="large">{items}</Pagination>
     <br />
 
     <Pagination bsSize="small">{items}</Pagination>

@@ -3,13 +3,14 @@ import React from 'react';
 import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-import ButtonTypes from '../../examples/ButtonTypes';
-import ButtonSizes from '../../examples/ButtonSizes';
-import ButtonBlock from '../../examples/ButtonBlock';
-import ButtonActive from '../../examples/ButtonActive';
-import ButtonTagTypes from '../../examples/ButtonTagTypes';
-import ButtonDisabled from '../../examples/ButtonDisabled';
-import ButtonLoading from '../../examples/ButtonLoading';
+
+import ButtonTypes from '../../examples/Button/Types';
+import ButtonSizes from '../../examples/Button/Sizes';
+import ButtonBlock from '../../examples/Button/Block';
+import ButtonActive from '../../examples/Button/Active';
+import ButtonTagTypes from '../../examples/Button/TagTypes';
+import ButtonDisabled from '../../examples/Button/Disabled';
+import ButtonLoading from '../../examples/Button/Loading';
 
 export default function ButtonSection({ data }) {
   return (

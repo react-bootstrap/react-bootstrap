@@ -21,6 +21,13 @@ const propTypes = {
   toggle: PropTypes.bool,
 
   /**
+   * The ARIA role describing the button group. Generallu the default
+   * "group" role is correct. An `aria-label` or `aria-labelledby`
+   * prop is also recommended.
+   */
+  role: PropTypes.string,
+
+  /**
    * Display block buttons; only useful when used with the "vertical" prop.
    * @type {bool}
    */
@@ -37,7 +44,8 @@ const defaultProps = {
   block: false,
   justified: false,
   vertical: false,
-  toggle: false
+  toggle: false,
+  role: 'group'
 };
 
 class ButtonGroup extends React.Component {

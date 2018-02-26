@@ -3,6 +3,9 @@ import React from 'react';
 
 import InputGroupAddon from './InputGroupAddon';
 import InputGroupButton from './InputGroupButton';
+import InputGroupText from './InputGroupText';
+import InputGroupPrepend from './InputGroupPrepend';
+import InputGroupAppend from './InputGroupAppend';
 import {
   bsClass,
   bsSizes,
@@ -18,14 +21,28 @@ class InputGroup extends React.Component {
 
     const classes = getClassSet(bsProps);
 
-    return (
-      <span {...elementProps} className={classNames(className, classes)} />
-    );
+    return <div {...elementProps} className={classNames(className, classes)} />;
   }
 }
 
 InputGroup.Addon = InputGroupAddon;
 InputGroup.Button = InputGroupButton;
+
+InputGroup.Append = InputGroupAppend;
+InputGroup.Prepend = InputGroupPrepend;
+InputGroup.Text = InputGroupText;
+
+InputGroup.Checkbox = props => (
+  <InputGroupText>
+    <input type="checkbox" {...props} />
+  </InputGroupText>
+);
+
+InputGroup.Radio = props => (
+  <InputGroupText>
+    <input type="radio" {...props} />
+  </InputGroupText>
+);
 
 export default bsClass(
   'input-group',

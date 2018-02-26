@@ -7,6 +7,7 @@ import PageFooter from '../components/PageFooter';
 
 import '../css/docs.css';
 import '../css/style.less';
+import '../css/examples.less';
 
 const propTypes = {
   location: PropTypes.object.isRequired

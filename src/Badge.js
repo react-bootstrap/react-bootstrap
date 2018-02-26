@@ -1,46 +1,30 @@
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
-
-// TODO: `pullRight` doesn't belong here. There's no special handling here.
-
-const propTypes = {
-  pullRight: PropTypes.bool
-};
-
-const defaultProps = {
-  pullRight: false
-};
+import {
+  bsClass,
+  bsStyles,
+  getClassSet,
+  prefix,
+  splitBsProps
+} from './utils/bootstrapUtils';
+import { State, Style } from './utils/StyleConfig';
 
 class Badge extends React.Component {
-  hasContent(children) {
-    let result = false;
-
-    React.Children.forEach(children, child => {
-      if (result) {
-        return;
-      }
-
-      if (child || child === 0) {
-        result = true;
-      }
-    });
-
-    return result;
-  }
-
+  static propTypes = {
+    pill: PropTypes.bool.isRequired
+  };
+  static defaultProps = {
+    pill: false
+  };
   render() {
-    const { pullRight, className, children, ...props } = this.props;
+    const { className, children, pill, ...props } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
       ...getClassSet(bsProps),
-      'pull-right': pullRight,
-
-      // Hack for collapsing on IE8.
-      hidden: !this.hasContent(children)
+      [prefix(bsProps, 'pill')]: pill
     };
 
     return (
@@ -51,7 +35,17 @@ class Badge extends React.Component {
   }
 }
 
-Badge.propTypes = propTypes;
-Badge.defaultProps = defaultProps;
-
-export default bsClass('badge', Badge);
+export default bsClass(
+  'badge',
+  bsStyles(
+    [
+      ...Object.values(State),
+      Style.PRIMARY,
+      Style.SECONDARY,
+      Style.LIGHT,
+      Style.DARK
+    ],
+    Style.SECONDARY,
+    Badge
+  )
+);

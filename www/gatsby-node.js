@@ -11,8 +11,8 @@ exports.modifyWebpackConfig = function modifyWebpackConfig({ config }) {
   });
 
   config._config.resolve.alias = {
-    'react-bootstrap$': path.resolve(__dirname, '../lib/index.js'),
-    'react-bootstrap/lib': path.resolve(__dirname, '../lib')
+    'react-bootstrap$': path.resolve(__dirname, '../src/index.js'),
+    'react-bootstrap/lib': path.resolve(__dirname, '../src')
   };
 };
 

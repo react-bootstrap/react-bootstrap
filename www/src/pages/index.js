@@ -3,7 +3,7 @@ import React from 'react';
 import Grid from 'react-bootstrap/lib/Grid';
 import Alert from 'react-bootstrap/lib/Alert';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
-import Label from 'react-bootstrap/lib/Label';
+import Badge from 'react-bootstrap/lib/Badge';
 
 export default class HomePage extends React.Component {
   render() {
@@ -44,7 +44,7 @@ export default class HomePage extends React.Component {
               >
                 issue
               </a>{' '}
-              with a <Label bsStyle="success">help-wanted</Label> label.
+              with a <Badge bsStyle="success">help-wanted</Badge> label.
             </p>
             <p>
               <Glyphicon glyph="ok" /> We are open to pull requests that address
