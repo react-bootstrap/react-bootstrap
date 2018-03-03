@@ -11,6 +11,9 @@ exports.modifyWebpackConfig = function modifyWebpackConfig({ config }) {
   });
 
   config._config.resolve.alias = {
+    react: path.resolve(__dirname, '../node_modules/react'),
+    'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
+
     'react-bootstrap$': path.resolve(__dirname, '../src/index.js'),
     'react-bootstrap/lib': path.resolve(__dirname, '../src')
   };
