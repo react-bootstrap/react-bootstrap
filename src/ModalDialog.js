@@ -15,7 +15,11 @@ const propTypes = {
   /**
    * A css class to apply to the Modal dialog DOM node.
    */
-  dialogClassName: PropTypes.string
+  dialogClassName: PropTypes.string,
+  /**
+   * A css class to apply to the Modal content DOM node.
+   */
+  contentClassName: PropTypes.string
 };
 
 class ModalDialog extends React.Component {
@@ -25,6 +29,7 @@ class ModalDialog extends React.Component {
       className,
       style,
       children,
+      contentClassName,
       ...props
     } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
@@ -48,7 +53,10 @@ class ModalDialog extends React.Component {
         className={classNames(className, bsClassName)}
       >
         <div className={classNames(dialogClassName, dialogClasses)}>
-          <div className={prefix(bsProps, 'content')} role="document">
+          <div
+            className={classNames(contentClassName, prefix(bsProps, 'content'))}
+            role="document"
+          >
             {children}
           </div>
         </div>

@@ -235,6 +235,22 @@ describe('<Modal>', () => {
     );
   });
 
+  it('applies a contentClassName to the modal-content when passed ', () => {
+    const noOp = () => {};
+    const instance = render(
+      <Modal show contentClassName="contentTestCss" onHide={noOp}>
+        <strong>Message</strong>
+      </Modal>,
+      mountPoint
+    );
+
+    const dialog = instance._modal
+      .getDialogElement()
+      .querySelector('.modal-content');
+
+    assert.ok(dialog.className.match(/\bcontentTestCss\b/));
+  });
+
   describe('cleanup', () => {
     let offSpy;
 
