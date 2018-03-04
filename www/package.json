@@ -24,7 +24,7 @@
     "lodash": "^4.15.0",
     "prop-types": "^15.6.0",
     "react": "^15.5.4",
-    "react-bootstrap": "file:../",
+    "react-bootstrap": "file:..",
     "react-dom": "^15.5.4",
     "react-helmet": "^5.2.0",
     "react-live": "^1.9.2"
