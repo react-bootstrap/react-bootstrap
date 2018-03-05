@@ -1,4 +1,4 @@
-const { transform } = require('babel-core');
+const { transform } = require('@babel/core');
 const fse = require('fs-extra');
 const path = require('path');
 
@@ -6,24 +6,24 @@ let getConfig = ({ modules = true, test = false } = {}) => ({
   babelrc: false,
   presets: [
     [
-      'env',
+      '@babel/env',
       {
         loose: true,
+        shippedProposals: true,
         modules: modules ? 'commonjs' : false,
         targets: {
-          ie: 9,
-          uglify: true
+          browsers: ['last 4 versions', 'not ie <= 8']
         }
       }
     ],
-    'react'
+    '@babel/react'
   ],
   plugins: [
-    'transform-class-properties',
-    'transform-object-rest-spread',
-    'transform-export-extensions',
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-export-default-from',
+    '@babel/plugin-proposal-export-namespace-from',
+    '@babel/transform-runtime',
     'dev-expression',
-    'transform-runtime',
     modules && 'add-module-exports',
     test && 'istanbul'
   ].filter(Boolean)

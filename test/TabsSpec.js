@@ -393,7 +393,7 @@ describe('<Tabs>', () => {
             </Tab>
           </Tabs>,
           mountPoint
-        ).refs.inner;
+        ).inner;
 
         assert.ok(ReactDOM.findDOMNode(panes[0]).className.match(/\bactive\b/));
       });
