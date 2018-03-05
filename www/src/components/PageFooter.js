@@ -53,7 +53,22 @@ class PageFooter extends React.Component {
               target="_blank"
             >
               MIT
-            </a>.
+            </a>{'. '}
+            Documentation based, in part, on{' '}
+            <a
+              href="https://getbootstrap.com/docs/3.3/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              bootstrap 
+            </a>; licensed under{' '}
+            <a
+              href="https://creativecommons.org/licenses/by/3.0/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              CC BY 3.0 
+            </a>
           </p>
           <ul className="bs-docs-footer-links muted">
             <li>Currently v{version}</li>
