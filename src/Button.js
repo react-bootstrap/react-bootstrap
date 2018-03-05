@@ -77,8 +77,7 @@ class Button extends React.Component {
             `${bsClass}-${bsStyle}`,
             bsSize && `${bsClass}-${bsSize}`,
             block && `${bsClass}-block`,
-            active && 'active',
-            !!(props.href && props.disabled) && 'disabled'
+            active && 'active'
           );
 
           if (props.href) {
