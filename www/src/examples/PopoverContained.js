@@ -6,7 +6,9 @@ class Example extends React.Component {
       this.setState({ target: e.target, show: !this.state.show });
     };
 
-    this.state = { show: false };
+    this.state = {
+      show: false
+    };
   }
 
   render() {

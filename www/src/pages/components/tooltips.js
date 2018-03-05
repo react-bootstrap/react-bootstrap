@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -44,11 +45,13 @@ export default function TooltipSection({ data }) {
 
       <h4>
         <Anchor id="overlays-trigger-props">OverlayTrigger</Anchor>
+        <LinkToSource component={data.OverlayTrigger.displayName} />
       </h4>
       <PropTable metadata={data.OverlayTrigger} />
 
       <h4>
         <Anchor id="tooltips-props-tooltip">Tooltip</Anchor>
+        <LinkToSource component={data.Tooltip.displayName} />
       </h4>
       <PropTable metadata={data.Tooltip} />
     </div>

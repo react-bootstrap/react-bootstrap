@@ -3,16 +3,10 @@
 npm-debug.log*
 node_modules
 amd/
-!tools/amd/
 lib/
-!tools/lib/
 es/
-!tools/es/
 dist/
-!tools/dist/
-docs-built/
-tmp-bower-repo/
-tmp-docs-repo/
+tmp-*-repo/
 .babel-cache/
 coverage/
 .idea

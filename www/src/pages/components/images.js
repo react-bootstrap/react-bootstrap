@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -36,6 +37,7 @@ export default function ImageSection({ data }) {
 
       <h3>
         <Anchor id="image-props">Props</Anchor>
+        <LinkToSource component={data.Image.displayName} />
       </h3>
       <PropTable metadata={data.Image} />
 
@@ -62,6 +64,7 @@ export default function ImageSection({ data }) {
 
       <h3>
         <Anchor id="thumbnail-props">Props</Anchor>
+        <LinkToSource component={data.Thumbnail.displayName} />
       </h3>
       <PropTable metadata={data.Thumbnail} />
     </div>

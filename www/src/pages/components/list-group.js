@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -15,7 +16,7 @@ export default function ListGroupSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
-        <Anchor id="listgroup">List group</Anchor>
+        <Anchor id="listgroup">List group</Anchor>{' '}
         <small>ListGroup, ListGroupItem</small>
       </h2>
 
@@ -90,8 +91,8 @@ export default function ListGroupSection({ data }) {
 
       <h4>
         <Anchor id="listgroup-props-item">ListGroupItem</Anchor>
+        <LinkToSource component={data.ListGroupItem.displayName} />
       </h4>
-      <PropTable metadata={data.ListGroupItem} />
     </div>
   );
 }

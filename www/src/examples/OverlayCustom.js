@@ -1,6 +1,7 @@
-function CustomPopover({ style }) {
+function CustomPopover({ className, style }) {
   return (
     <div
+      className={className}
       style={{
         ...style,
         position: 'absolute',
@@ -19,12 +20,14 @@ function CustomPopover({ style }) {
 }
 
 class Example extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
 
     this.handleToggle = this.handleToggle.bind(this);
 
-    this.state = { show: true };
+    this.state = {
+      show: true
+    };
   }
 
   handleToggle() {
@@ -34,7 +37,12 @@ class Example extends React.Component {
   render() {
     return (
       <div style={{ height: 100, position: 'relative' }}>
-        <Button ref="target" onClick={this.handleToggle}>
+        <Button
+          ref={button => {
+            this.target = button;
+          }}
+          onClick={this.handleToggle}
+        >
           I am an Overlay target
         </Button>
 
@@ -43,7 +51,7 @@ class Example extends React.Component {
           onHide={() => this.setState({ show: false })}
           placement="right"
           container={this}
-          target={() => ReactDOM.findDOMNode(this.refs.target)}
+          target={() => ReactDOM.findDOMNode(this.target)}
         >
           <CustomPopover />
         </Overlay>
