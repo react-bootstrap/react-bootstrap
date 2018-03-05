@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import invariant from 'invariant';
 
-let variants = new Map([
+const defaultVariantTypes = new Map([
   ['Alert', 'alert'],
   ['Badge', 'badge'],
   ['Button', 'btn'],
@@ -15,12 +15,15 @@ let variants = new Map([
   ['FormControl', 'form-control']
 ]);
 
-const StyleContext = React.createContext(variants);
+const StyleContext = React.createContext(defaultVariantTypes);
 
 class StyleProvider extends React.Component {
+  static propTypes = {
+    variants: PropTypes.Object.isRequired
+  };
   constructor(...args) {
     super(...args);
-    this.variants = new Map(variants);
+    this.variants = new Map(defaultVariantTypes);
     Object.entries(this.props.variants).forEach(([key, value]) => {
       this.variants.set(key, value);
     });
@@ -34,6 +37,12 @@ class StyleProvider extends React.Component {
     );
   }
 }
+
+const propTypes = {
+  componentType: PropTypes.oneOf([...defaultVariantTypes.keys()]).isRequired,
+  props: PropTypes.object.isRequired
+};
+
 // eslint-disable-next-line
 function StyleConsumer({
   componentType,
@@ -54,5 +63,7 @@ function StyleConsumer({
     </StyleContext.Consumer>
   );
 }
+
+StyleConsumer.propTypes = propTypes;
 
 export { StyleConsumer as Consumer, StyleProvider as Provider };

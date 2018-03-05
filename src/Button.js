@@ -33,11 +33,16 @@ class Button extends React.Component {
      */
     bsSize: PropTypes.string,
 
+    /** Manually set the visual state of the button to `:active` */
     active: PropTypes.bool,
+
+    /**
+     * Disables the Button, preventing mouse events,
+     * even if the underlying component is an `<a>` tag
+     */
     disabled: PropTypes.bool,
-    block: PropTypes.bool,
-    onClick: PropTypes.func,
-    componentClass: elementType,
+
+    /** Providing a `href` will render an `<a>` tag, _styled_ as a button. */
     href: PropTypes.string,
 
     /**
@@ -45,13 +50,14 @@ class Button extends React.Component {
      *
      * @default 'button'
      */
-    type: PropTypes.oneOf(['button', 'reset', 'submit', null])
+    type: PropTypes.oneOf(['button', 'reset', 'submit', null]),
+
+    componentClass: elementType
   };
 
   static defaultProps = {
     bsStyle: 'primary',
     active: false,
-    block: false,
     disabled: false,
     type: 'button'
   };
