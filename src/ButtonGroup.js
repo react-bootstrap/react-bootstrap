@@ -3,13 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import all from 'prop-types-extra/lib/all';
 
-import Button from './Button';
-import {
-  bsClass,
-  getClassSet,
-  prefix,
-  splitBsProps
-} from './utils/bootstrapUtils';
+import * as StyleContext from './StyleContext';
 
 const propTypes = {
   vertical: PropTypes.bool,
@@ -50,32 +44,29 @@ const defaultProps = {
 
 class ButtonGroup extends React.Component {
   render() {
-    const {
-      block,
-      justified,
-      toggle,
-      vertical,
-      className,
-      ...props
-    } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
-
-    const classes = {
-      ...getClassSet(bsProps),
-      [prefix(bsProps)]: !vertical,
-      [prefix(bsProps, 'vertical')]: vertical,
-      [prefix(bsProps, 'justified')]: justified,
-      [prefix(bsProps, 'toggle')]: toggle,
-
-      // this is annoying, since the class is `btn-block` not `btn-group-block`
-      [prefix(Button.defaultProps, 'block')]: block
-    };
-
-    return <div {...elementProps} className={classNames(className, classes)} />;
+    return (
+      <StyleContext.Consumer componentType="ButtonGroup" props={this.props}>
+        {({
+          bsClass,
+          bsSize,
+          props: { toggle, vertical, className, ...props }
+        }) => (
+          <div
+            {...props}
+            className={classNames(
+              className,
+              !vertical && bsClass,
+              vertical && `${bsClass}-vertical`,
+              bsSize && `${bsClass}-${bsSize}`
+            )}
+          />
+        )}
+      </StyleContext.Consumer>
+    );
   }
 }
 
 ButtonGroup.propTypes = propTypes;
 ButtonGroup.defaultProps = defaultProps;
 
-export default bsClass('btn-group', ButtonGroup);
+export default ButtonGroup;

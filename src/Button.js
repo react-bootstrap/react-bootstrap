@@ -3,100 +3,94 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import {
-  bsClass,
-  bsSizes,
-  bsStyles,
-  getClassSet,
-  prefix,
-  splitBsProps
-} from './utils/bootstrapUtils';
-import { Size, State, Style } from './utils/StyleConfig';
-
+import * as StyleContext from './StyleContext';
 import SafeAnchor from './SafeAnchor';
 
-const propTypes = {
-  active: PropTypes.bool,
-  disabled: PropTypes.bool,
-  block: PropTypes.bool,
-  onClick: PropTypes.func,
-  componentClass: elementType,
-  href: PropTypes.string,
-  /**
-   * Defines HTML button type attribute
-   * @defaultValue 'button'
-   */
-  type: PropTypes.oneOf(['button', 'reset', 'submit', null])
-};
-
-const defaultProps = {
-  active: false,
-  block: false,
-  disabled: false,
-  type: 'button'
-};
-
 class Button extends React.Component {
-  renderAnchor(elementProps, className) {
-    return (
-      <SafeAnchor
-        {...elementProps}
-        className={classNames(className, elementProps.disabled && 'disabled')}
-      />
-    );
-  }
+  static propTypes = {
+    /**
+     * @default 'btn'
+     */
+    bsClass: PropTypes.string,
 
-  renderButton({ componentClass, ...elementProps }, className) {
-    const Component = componentClass || 'button';
+    /**
+     * One or more button variant combinations
+     *
+     * buttons may be one of a variety of visual variants such as:
+     *
+     * `'primary', 'secondary', 'success', 'danger', 'warning', 'info, 'dark', 'light', 'link'`
+     *
+     * as well as "outline" versions (prefixed by 'outline-*')
+     *
+     * `'outline-primary', 'outline-secondary', 'outline-success', 'outline-danger', 'outline-warning', 'outline-info, 'outline-dark', 'outline-light'`
+     */
+    bsStyle: PropTypes.string,
 
-    return (
-      <Component
-        {...elementProps}
-        type={elementProps.type}
-        className={className}
-      />
-    );
-  }
+    /**
+     * Specifies a large or small button.
+     *
+     * @type ('sm'|'lg')
+     */
+    bsSize: PropTypes.string,
+
+    active: PropTypes.bool,
+    disabled: PropTypes.bool,
+    block: PropTypes.bool,
+    onClick: PropTypes.func,
+    componentClass: elementType,
+    href: PropTypes.string,
+
+    /**
+     * Defines HTML button type attribute.
+     *
+     * @default 'button'
+     */
+    type: PropTypes.oneOf(['button', 'reset', 'submit', null])
+  };
+
+  static defaultProps = {
+    bsStyle: 'primary',
+    active: false,
+    block: false,
+    disabled: false,
+    type: 'button'
+  };
 
   render() {
-    const { active, block, className, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
+    return (
+      <StyleContext.Consumer componentType="Button" props={this.props}>
+        {({
+          bsStyle,
+          bsClass,
+          bsSize,
+          props: { active, block, className, componentClass, ...props }
+        }) => {
+          const classes = classNames(
+            className,
+            bsClass,
+            `${bsClass}-${bsStyle}`,
+            bsSize && `${bsClass}-${bsSize}`,
+            block && `${bsClass}-block`,
+            active && 'active',
+            !!(props.href && props.disabled) && 'disabled'
+          );
 
-    const classes = {
-      ...getClassSet(bsProps),
-      active,
-      [prefix(bsProps, 'block')]: block
-    };
-    const fullClassName = classNames(className, classes);
+          if (props.href) {
+            return (
+              <SafeAnchor
+                {...props}
+                componentClass={componentClass}
+                className={classNames(classes, props.disabled && 'disabled')}
+              />
+            );
+          }
 
-    if (elementProps.href) {
-      return this.renderAnchor(elementProps, fullClassName);
-    }
-
-    return this.renderButton(elementProps, fullClassName);
+          const Component = componentClass || 'button';
+          return <Component {...props} type={props.type} className={classes} />;
+        }}
+      </StyleContext.Consumer>
+    );
   }
 }
 
-Button.propTypes = propTypes;
-Button.defaultProps = defaultProps;
-
-const variants = [
-  ...Object.values(State),
-  Style.PRIMARY,
-  Style.SECONDARY,
-  Style.LIGHT,
-  Style.DARK
-];
-const outlineVariants = variants.map(v => `outline-${v}`);
-
-export default bsClass(
-  'btn',
-  bsSizes(
-    [Size.LARGE, Size.SMALL],
-    bsStyles(
-      [...variants, ...outlineVariants, Style.LINK],
-      Style.PRIMARY,
-      Button
-    )
-  )
-);
+export default Button;
