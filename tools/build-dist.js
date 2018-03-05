@@ -23,7 +23,7 @@ function config(optimize) {
       rules: [rules.js({ ...babelOptions, cacheDirectory: true })]
     },
     plugins: [
-      optimize && plugins.uglify(),
+      optimize && plugins.uglify({ exclude: undefined }),
       plugins.moduleConcatenation(),
       plugins.define({
         'process.env': {
