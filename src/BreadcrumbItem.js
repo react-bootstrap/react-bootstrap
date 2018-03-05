@@ -7,7 +7,9 @@ import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
-   * If set to true, renders `span` instead of `a`
+   * If set to true, renders `span` instead of `a` and
+   *
+   * adds `aria-current="page"` attribute
    */
   active: PropTypes.bool,
   /**
@@ -39,7 +41,10 @@ class BreadcrumbItem extends React.Component {
     const linkProps = { href, title, target };
 
     return (
-      <li className={classNames(className, classes, { active })}>
+      <li
+        className={classNames(className, classes, { active })}
+        {...(active ? { 'aria-current': 'page' } : {})}
+      >
         {active ? (
           <span {...elementProps} />
         ) : (

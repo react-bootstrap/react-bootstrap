@@ -15,8 +15,9 @@ export default function BreadcrumbSection({ data }) {
       </h2>
 
       <p>
-        Breadcrumbs are used to indicate the current page's location. Add{' '}
-        <code>active</code> attribute to active <code>Breadcrumb.Item</code>.
+        Indicate the current page’s location within a navigational hierarchy
+        that automatically adds separators via CSS. Add <code>active</code>{' '}
+        attribute to active <code>Breadcrumb.Item</code>.
       </p>
       <p>
         Do not set both <code>active</code> and <code>href</code> attributes.{' '}

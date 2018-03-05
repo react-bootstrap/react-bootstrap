@@ -1,5 +1,5 @@
 const breadcrumbInstance = (
-  <Breadcrumb>
+  <Breadcrumb id="test">
     <Breadcrumb.Item href="#">Home</Breadcrumb.Item>
     <Breadcrumb.Item href="http://getbootstrap.com/components/#breadcrumbs">
       Library

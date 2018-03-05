@@ -57,6 +57,15 @@ describe('<Breadcrumb.Item>', () => {
     assert.include(classes, 'custom-two');
   });
 
+  it('Should add aria-current to active element', () => {
+    const instance = ReactTestUtils.renderIntoDocument(
+      <Breadcrumb.Item active>Active Crumb</Breadcrumb.Item>
+    );
+
+    const liNode = ReactDOM.findDOMNode(instance);
+    assert.equal(liNode.getAttribute('aria-current'), 'page');
+  });
+
   it('Should spread additional props onto inner element', done => {
     const handleClick = () => {
       done();

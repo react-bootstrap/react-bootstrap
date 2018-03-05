@@ -12,12 +12,13 @@ class Breadcrumb extends React.Component {
     const classes = getClassSet(bsProps);
 
     return (
-      <ol
-        {...elementProps}
-        role="navigation"
-        aria-label="breadcrumbs"
-        className={classNames(className, classes)}
-      />
+      <nav aria-label="breadcrumbs">
+        <ol
+          role="navigation"
+          {...elementProps}
+          className={classNames(className, classes)}
+        />
+      </nav>
     );
   }
 }
