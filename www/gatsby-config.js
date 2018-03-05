@@ -5,7 +5,13 @@ const { addBootstrapPropTypes } = require('./bsPropUtils');
 module.exports = {
   siteMetadata: {
     title: 'React-Bootstrap Documentation',
-    author: 'Jason Quense'
+    author: 'Jason Quense',
+    browsers: [
+      'last 4 Chrome versions',
+      'last 4 Firefox versions',
+      'last 2 Edge versions',
+      'last 2 Safari versions'
+    ]
   },
   plugins: [
     {
