@@ -58,7 +58,6 @@ class ButtonGroup extends React.Component {
       ...props
     } = this.props;
 
-    delete props.bsRole;
     let baseClass = bsPrefix;
     if (vertical) baseClass = `${bsPrefix}-vertical`;
 

@@ -171,6 +171,9 @@ function toArray(children) {
   return result;
 }
 
+export { map, forEach, count, find, filter, every, some, toArray };
+
+// TODO REMOVE this
 export default {
   map,
   forEach,
