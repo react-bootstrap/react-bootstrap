@@ -1,11 +1,11 @@
-<Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
-  <Tab eventKey={1} title="Tab 1">
-    Tab 1 content
+<Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+  <Tab eventKey="home" title="Home">
+    <Sonnet />
   </Tab>
-  <Tab eventKey={2} title="Tab 2">
-    Tab 2 content
+  <Tab eventKey="profile" title="Profile">
+    <Sonnet />
   </Tab>
-  <Tab eventKey={3} title="Tab 3" disabled>
-    Tab 3 content
+  <Tab eventKey="contact" title="Contact" disabled>
+    <Sonnet />
   </Tab>
 </Tabs>;

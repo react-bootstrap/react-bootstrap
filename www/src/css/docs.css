@@ -31,6 +31,7 @@
   width: 144px;
   height: 144px;
   font-size: 108px;
+
   line-height: 140px;
 }
 .bs-docs-booticon-inverse {
@@ -470,14 +471,6 @@ h1[id] {
   float: left;
   width: 260px;
   margin: 20px;
-}
-
-/* MenuItem */
-.bs-example .dropdown-menu.open {
-  position: static;
-  display: block;
-  margin-bottom: 5px;
-  clear: left;
 }
 
 /* Link to Github Source */

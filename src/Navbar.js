@@ -13,6 +13,7 @@ import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';
 import { createBootstrapComponent } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
+import SelectableContext from './SelectableContext';
 
 const propTypes = {
   /** @default 'navbar' */
@@ -147,8 +148,7 @@ class Navbar extends React.Component {
 
     this.state = {
       navbarContext: {
-        onToggle: this.handleToggle,
-        onSelect: this.handleCollapse
+        onToggle: this.handleToggle
       }
     };
   }
@@ -198,20 +198,22 @@ class Navbar extends React.Component {
 
     return (
       <NavbarContext.Provider value={this.state.navbarContext}>
-        <Component
-          {...props}
-          className={classNames(
-            className,
-            bsPrefix,
-            expand && expandClass,
-            variant && `${bsPrefix}-${variant}`,
-            bg && `bg-${bg}`,
-            sticky && `sticky-${sticky}`,
-            fixed && `fixed-${fixed}`
-          )}
-        >
-          {fluid ? children : <div className="container">{children}</div>}
-        </Component>
+        <SelectableContext.Provider value={this.handleCollapse}>
+          <Component
+            {...props}
+            className={classNames(
+              className,
+              bsPrefix,
+              expand && expandClass,
+              variant && `${bsPrefix}-${variant}`,
+              bg && `bg-${bg}`,
+              sticky && `sticky-${sticky}`,
+              fixed && `fixed-${fixed}`
+            )}
+          >
+            {fluid ? children : <div className="container">{children}</div>}
+          </Component>
+        </SelectableContext.Provider>
       </NavbarContext.Provider>
     );
   }

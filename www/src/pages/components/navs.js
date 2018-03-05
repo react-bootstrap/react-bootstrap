@@ -5,6 +5,7 @@ import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 import Callout from '../../components/Callout';
+import CodeBlock from '../../components/CodeBlock';
 
 import NavAlignement from '../../examples/Nav/Alignment';
 import NavBasic from '../../examples/Nav/Basic';
@@ -12,22 +13,25 @@ import NavDropdown from '../../examples/Nav/Dropdown';
 import NavStacked from '../../examples/Nav/Stacked';
 import NavFill from '../../examples/Nav/Fill';
 import NavJustified from '../../examples/Nav/Justified';
+import NavDropdownImpl from '../../examples/Nav/DropdownImpl';
 
 export default function NavSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
-        <Anchor id="navs">Base Nav</Anchor>{' '}
-        <small>Nav, Nav.Item, Nav.Link</small>
+        <Anchor id="navs">Base Nav</Anchor>
       </h2>
 
       <p>
-        Navs come in two styles, <code>pills</code> and <code>tabs</code>.
-        Disable a tab by adding <code>disabled</code>.
+        Navigation bits in Bootstrap all share a general <code>Nav</code>{' '}
+        component and styles. Swap <code>variant</code>s to switch between each
+        style. The base <code>Nav</code> component is built with flexbox and
+        provide a strong foundation for building all types of navigation
+        components.
       </p>
       <Callout theme="info">
-        The base <code>.nav</code> component does not include any{' '}
-        <code>.active</code> styling!
+        The basic, variant-less, <code>Nav</code> component does not include any{' '}
+        <code>active</code> prop styling!
       </Callout>
       <ReactPlayground codeText={NavBasic} />
       <h3>
@@ -72,10 +76,19 @@ export default function NavSection({ data }) {
       <ReactPlayground codeText={NavJustified} />
 
       <h3>
-        <Anchor id="navs-dropdown">Dropdown</Anchor>
+        <Anchor id="navs-dropdown">Using dropdowns</Anchor>
       </h3>
       <p>
-        Add dropdowns using the <code>NavDropdown</code> component.
+        You can mix and match the Dropdown components with the NavLink and
+        NavItem components to create a Dropdown that plays well in a Nav
+        component
+      </p>
+      <CodeBlock codeText={NavDropdownImpl} />
+
+      <p>
+        The above demostrates how flexible the component model can be. But if
+        you didn't want to roll your own versions we've included a
+        straight-forward <code>NavDropdown</code> that works for most cases.{' '}
       </p>
       <ReactPlayground codeText={NavDropdown} />
 
@@ -114,6 +127,10 @@ export const query = graphql`
       ...PropTable_metadata
     }
     NavLink: componentMetadata(displayName: { eq: "NavLink" }) {
+      displayName
+      ...PropTable_metadata
+    }
+    NavDropdown: componentMetadata(displayName: { eq: "NavDropdown" }) {
       displayName
       ...PropTable_metadata
     }

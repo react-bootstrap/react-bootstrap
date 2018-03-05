@@ -5,11 +5,11 @@
       variant="outline-secondary"
       title="Dropdown"
     >
-      <MenuItem href="#">Action</MenuItem>
-      <MenuItem href="#">Another action</MenuItem>
-      <MenuItem href="#">Something else here</MenuItem>
-      <MenuItem divider />
-      <MenuItem href="#">Separated link</MenuItem>
+      <Dropdown.Item href="#">Action</Dropdown.Item>
+      <Dropdown.Item href="#">Another action</Dropdown.Item>
+      <Dropdown.Item href="#">Something else here</Dropdown.Item>
+      <Dropdown.Item divider />
+      <Dropdown.Item href="#">Separated link</Dropdown.Item>
     </DropdownButton>
     <FormControl aria-describedby="basic-addon1" />
   </InputGroup>
@@ -26,11 +26,11 @@
       variant="outline-secondary"
       title="Dropdown"
     >
-      <MenuItem href="#">Action</MenuItem>
-      <MenuItem href="#">Another action</MenuItem>
-      <MenuItem href="#">Something else here</MenuItem>
-      <MenuItem divider />
-      <MenuItem href="#">Separated link</MenuItem>
+      <Dropdown.Item href="#">Action</Dropdown.Item>
+      <Dropdown.Item href="#">Another action</Dropdown.Item>
+      <Dropdown.Item href="#">Something else here</Dropdown.Item>
+      <Dropdown.Item divider />
+      <Dropdown.Item href="#">Separated link</Dropdown.Item>
     </DropdownButton>
   </InputGroup>
 </>;

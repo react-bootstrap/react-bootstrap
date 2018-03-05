@@ -4,30 +4,29 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
+import ARIA from '../../components/AriaAbbr';
 
 import TabsUncontrolled from '../../examples/Tabs/Uncontrolled';
 import TabsControlled from '../../examples/Tabs/Controlled';
 import TabsNoAnimation from '../../examples/Tabs/NoAnimation';
-import TabsWithDropdown from '../../examples/Tabs/WithDropdown';
 import LeftTabs from '../../examples/Tabs/LeftTabs';
 
 export default function TabsSection({ data }) {
   return (
     <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="tabs">Togglable tabs</Anchor>{' '}
-        <small>Tabs, Tab, TabContainer, TabContent, TabPane</small>
+      <h2>
+        <Anchor id="tabs">Tabbed components</Anchor>
       </h2>
 
       <p>
-        Add quick, dynamic tab functionality to transition through panes of
-        local content.
+        Create dynamic tabbed interfaces, as described in the{' '}
+        <a href="https://www.w3.org/TR/wai-aria-practices/#tabpanel">
+          <abbr title="Web Accessibility Initiative">WAI</abbr> <ARIA />
+          Authoring Practices
+        </a>. <code>Tabs</code> is a higher-level component for quickly creating
+        a <code>Nav</code> matched with a set of <code>TabPane</code>s.
       </p>
 
-      <h3>
-        <Anchor id="tabs-uncontrolled">Uncontrolled</Anchor>
-      </h3>
-      <p>Allow the component to control its own state.</p>
       <ReactPlayground
         codeText={TabsUncontrolled}
         exampleClassName="bs-example-tabs"
@@ -36,7 +35,10 @@ export default function TabsSection({ data }) {
       <h3>
         <Anchor id="tabs-controlled">Controlled</Anchor>
       </h3>
-      <p>Pass down the active state on render via props.</p>
+      <p>
+        <code>Tabs</code> can be controlled directly when you want to handle the
+        selection logic personally.
+      </p>
       <ReactPlayground
         codeText={TabsControlled}
         exampleClassName="bs-example-tabs"
@@ -54,22 +56,30 @@ export default function TabsSection({ data }) {
       />
 
       <h3>
-        <Anchor id="tabs-with-dropdown">Tabs with Dropdown</Anchor>
+        <Anchor id="tabs-with-dropdown">Dropdowns?</Anchor>
       </h3>
-      <ReactPlayground
-        codeText={TabsWithDropdown}
-        exampleClassName="bs-example-tabs"
-      />
-
+      <p>
+        Dynamic tabbed interfaces should not contain dropdown menus, as this
+        causes both usability and accessibility issues. From a usability
+        perspective, the fact that the currently displayed tab’s trigger element
+        is not immediately visible (as it’s inside the closed dropdown menu) can
+        cause confusion. From an accessibility point of view, there is currently
+        no sensible way to map this sort of construct to a standard WAI ARIA
+        pattern, meaning that it cannot be easily made understandable to users
+        of assistive technologies.
+      </p>
+      <p>
+        That said, it Dropdowns do work technically (sans focus management), but
+        we don't make any claims about support.
+      </p>
       <h3>
         <Anchor id="tabs-custom-layout">Custom Tab Layout</Anchor>
       </h3>
       <p>
         For more complex layouts the flexible <code>TabContainer</code>,{' '}
-        <code>TabContent</code>, and
-        <code>TabPane</code> components along with any style of <code>Nav</code>{' '}
-        allow you to quickly piece together your own Tabs component with
-        additional markup needed.
+        <code>TabContent</code>, and <code>TabPane</code> components along with
+        any style of <code>Nav</code> allow you to quickly piece together your
+        own Tabs component with additional markup needed.
       </p>
       <p>
         Just create a set of NavItems each with an <code>eventKey</code>{' '}

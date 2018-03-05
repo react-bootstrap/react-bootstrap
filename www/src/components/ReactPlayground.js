@@ -3,8 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import * as ReactBootstrap from 'react-bootstrap';
-
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
+
+import Sonnet from './Sonnet';
 
 import '../css/prism.css';
 
@@ -13,6 +14,7 @@ const scope = {
   ReactDOM,
   classNames,
   PropTypes,
+  Sonnet,
   bootstrapUtils: ReactBootstrap.utils.bootstrapUtils
 };
 
@@ -22,7 +24,7 @@ export default class Playground extends React.Component {
   };
 
   render() {
-    const { codeText } = this.props;
+    const { codeText, exampleClassName } = this.props;
 
     return (
       <LiveProvider
@@ -31,7 +33,7 @@ export default class Playground extends React.Component {
         mountStylesheet={false}
         noInline={codeText.includes('render(')}
       >
-        <div className={classNames('bs-example', this.props.exampleClassName)}>
+        <div className={classNames('bs-example', exampleClassName)}>
           <LivePreview />
           <LiveError />
         </div>

@@ -8250,6 +8250,10 @@ sha.js@^2.4.0, sha.js@^2.4.8:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
+shakespeare-data@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/shakespeare-data/-/shakespeare-data-2.5.0.tgz#6c245ffeaa2ec0f37fee4d748b5111a1eb9acfe1"
+
 shallow-clone@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/shallow-clone/-/shallow-clone-1.0.0.tgz#4480cd06e882ef68b2ad88a3ea54832e2c48b571"

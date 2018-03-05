@@ -15,6 +15,7 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
       ]
     },
     resolve: {
+      modules: [path.resolve(__dirname, '../node_modules'), 'node_module'],
       alias: {
         react: path.resolve(__dirname, '../node_modules/react'),
         'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),

@@ -73,12 +73,12 @@ render(
     <CustomToggle bsRole="toggle">Custom toggle</CustomToggle>
 
     <CustomMenu bsRole="menu">
-      <MenuItem eventKey="1">Red</MenuItem>
-      <MenuItem eventKey="2">Blue</MenuItem>
-      <MenuItem eventKey="3" active>
+      <Dropdown.Item eventKey="1">Red</Dropdown.Item>
+      <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
+      <Dropdown.Item eventKey="3" active>
         Orange
-      </MenuItem>
-      <MenuItem eventKey="1">Red-Orange</MenuItem>
+      </Dropdown.Item>
+      <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
     </CustomMenu>
   </Dropdown>
 );

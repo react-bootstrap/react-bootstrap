@@ -12,14 +12,14 @@ body {
   background-color: #222;
 }
 
-.bs-docs-nav .navbar-nav>li>a {
+.bs-docs-nav .navbar-nav > li > a {
   color: #aaa;
   font-weight: normal;
 }
 
-.bs-docs-nav .navbar-nav>li>a:hover,
-.bs-docs-nav .navbar-nav>.active>a,
-.bs-docs-nav .navbar-nav>.active>a:hover {
+.bs-docs-nav .navbar-nav > li > a:hover,
+.bs-docs-nav .navbar-nav > .active > a,
+.bs-docs-nav .navbar-nav > .active > a:hover {
   background: #333;
   color: #fafafa;
 }
@@ -29,10 +29,11 @@ body {
 // }
 
 @media (min-width: 768px) {
-  .bs-docs-nav .navbar-nav>li>a {
+  .bs-docs-nav .navbar-nav > li > a {
     border-bottom: 3px solid #222;
   }
-  .bs-docs-nav .navbar-nav>li>a:hover, .bs-docs-nav .navbar-nav>.active>a:hover {
+  .bs-docs-nav .navbar-nav > li > a:hover,
+  .bs-docs-nav .navbar-nav > .active > a:hover {
     border-bottom: 3px solid #cc7a6f;
   }
 }
@@ -48,7 +49,7 @@ body {
   color: #e9e9e9;
   position: relative;
   padding: 30px 15px;
-  text-shadow: 0 1px 0 rgba(0,0,0,.1);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 .bs-docs-header {
@@ -89,12 +90,12 @@ body {
 
 @media (min-width: 992px) {
   .bs-docs-header {
-    h1, p {
+    h1,
+    p {
       margin-right: 380px;
     }
   }
 }
-
 
 .bs-docs-masthead {
   margin-bottom: 20px;
@@ -114,7 +115,6 @@ body {
     margin: 0 auto 30px;
   }
 }
-
 
 @media (min-width: 768px) {
   .bs-docs-masthead h1 {
@@ -151,7 +151,7 @@ body {
   }
 }
 
-.bs-docs-sidebar .nav>li>a {
+.bs-docs-sidebar .nav > li > a {
   color: #666;
 }
 
@@ -161,8 +161,10 @@ body {
   border-left: 1px solid #cc7a6f;
 }
 
-.bs-example .btn-toolbar + .btn-toolbar {
-  margin-top: 10px;
+.bs-example {
+  .btn-toolbar + .btn-toolbar {
+    margin-top: 10px;
+  }
 }
 
 .bs-example .static-modal .modal {
@@ -235,7 +237,8 @@ body {
 .modal-container {
   position: relative;
 }
-.modal-container .modal, .modal-container .modal-backdrop {
+.modal-container .modal,
+.modal-container .modal-backdrop {
   position: absolute;
 }
 
@@ -247,26 +250,31 @@ body {
   position: relative;
   display: inline-block;
   margin: 5px 10px;
-
 }
 
 .bs-example .super-colors {
-  background: -moz-linear-gradient( top ,
-      rgba(255, 0, 0, 1) 0%,
-      rgba(255, 255, 0, 1) 15%,
-      rgba(0, 255, 0, 1) 30%,
-      rgba(0, 255, 255, 1) 50%,
-      rgba(0, 0, 255, 1) 65%,
-      rgba(255, 0, 255, 1) 80%,
-      rgba(255, 0, 0, 1) 100%);
-  background: -webkit-gradient(linear,  left top,  left bottom,
-      color-stop(0%, rgba(255, 0, 0, 1)),
-      color-stop(15%, rgba(255, 255, 0, 1)),
-      color-stop(30%, rgba(0, 255, 0, 1)),
-      color-stop(50%, rgba(0, 255, 255, 1)),
-      color-stop(65%, rgba(0, 0, 255, 1)),
-      color-stop(80%, rgba(255, 0, 255, 1)),
-      color-stop(100%, rgba(255, 0, 0, 1)));
+  background: -moz-linear-gradient(
+    top,
+    rgba(255, 0, 0, 1) 0%,
+    rgba(255, 255, 0, 1) 15%,
+    rgba(0, 255, 0, 1) 30%,
+    rgba(0, 255, 255, 1) 50%,
+    rgba(0, 0, 255, 1) 65%,
+    rgba(255, 0, 255, 1) 80%,
+    rgba(255, 0, 0, 1) 100%
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, rgba(255, 0, 0, 1)),
+    color-stop(15%, rgba(255, 255, 0, 1)),
+    color-stop(30%, rgba(0, 255, 0, 1)),
+    color-stop(50%, rgba(0, 255, 255, 1)),
+    color-stop(65%, rgba(0, 0, 255, 1)),
+    color-stop(80%, rgba(255, 0, 255, 1)),
+    color-stop(100%, rgba(255, 0, 0, 1))
+  );
 }
 
 /*.bs-example .custom-menu > ul > li {

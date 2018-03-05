@@ -4,6 +4,7 @@ import elementType from 'prop-types-extra/lib/elementType';
 import uncontrollable from 'uncontrollable';
 
 import TabContext from './TabContext';
+import SelectableContext from './SelectableContext';
 
 class TabContainer extends React.Component {
   static propTypes = {
@@ -79,14 +80,13 @@ class TabContainer extends React.Component {
   };
 
   static getDerivedStateFromProps(
-    { onSelect, activeKey, mountOnEnter, unmountOnExit, transition },
+    { activeKey, mountOnEnter, unmountOnExit, transition },
     prevState
   ) {
     return {
       tabContext: {
         ...prevState.tabContext,
         activeKey,
-        onSelect,
         mountOnEnter,
         unmountOnExit,
         transition
@@ -119,11 +119,13 @@ class TabContainer extends React.Component {
   getControllerId = key => this.getKey(key, 'tab');
 
   render() {
-    const { children } = this.props;
+    const { children, onSelect } = this.props;
 
     return (
       <TabContext.Provider value={this.state.tabContext}>
-        {children}
+        <SelectableContext.Provider value={onSelect}>
+          {children}
+        </SelectableContext.Provider>
       </TabContext.Provider>
     );
   }

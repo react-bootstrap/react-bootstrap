@@ -2,40 +2,67 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Dropdown from './Dropdown';
-import splitComponentProps from './utils/splitComponentProps';
 
 const propTypes = {
-  ...Dropdown.propTypes,
+  /** An `href` passed to the Toggle component */
+  href: PropTypes.string,
 
-  // Toggle props.
-  bsStyle: PropTypes.string,
-  bsSize: PropTypes.string,
+  /** An `onClick` handler passed to the Toggle component */
+  onClick: PropTypes.func,
+
+  /** The content of the non-toggle Button.  */
   title: PropTypes.node.isRequired,
-  noCaret: PropTypes.bool,
 
-  // Override generated docs from <Dropdown>.
+  /** Disables both Buttons  */
+  disabled: PropTypes.bool,
+
+  /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
+  menuRole: PropTypes.string,
+
   /**
-   * @private
+   *  Which event when fired outside the component will cause it to be closed.
+   *
+   * _see [DropdownMenu](#menu-props) for more details_
    */
-  children: PropTypes.node
+  rootCloseEvent: PropTypes.string,
+
+  /** @ignore */
+  bsPrefix: PropTypes.string,
+  /** @ignore */
+  variant: PropTypes.string,
+  /** @ignore */
+  size: PropTypes.string
 };
 
 class DropdownButton extends React.Component {
   render() {
-    const { bsSize, bsStyle, title, children, ...props } = this.props;
-
-    const [dropdownProps, toggleProps] = splitComponentProps(
-      props,
-      Dropdown.ControlledComponent
-    );
+    const {
+      title,
+      children,
+      bsPrefix,
+      rootCloseEvent,
+      variant,
+      size,
+      menuRole,
+      disabled,
+      href,
+      ...props
+    } = this.props;
 
     return (
-      <Dropdown {...dropdownProps} bsSize={bsSize} bsStyle={bsStyle}>
-        <Dropdown.Toggle {...toggleProps} bsSize={bsSize} bsStyle={bsStyle}>
+      <Dropdown {...props}>
+        <Dropdown.Toggle
+          href={href}
+          size={size}
+          variant={variant}
+          disabled={disabled}
+          childBsPrefix={bsPrefix}
+        >
           {title}
         </Dropdown.Toggle>
-
-        <Dropdown.Menu>{children}</Dropdown.Menu>
+        <Dropdown.Menu role={menuRole} rootCloseEvent={rootCloseEvent}>
+          {children}
+        </Dropdown.Menu>
       </Dropdown>
     );
   }
