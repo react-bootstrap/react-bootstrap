@@ -3,7 +3,7 @@ import deprecated from 'prop-types-extra/lib/deprecated';
 import { _resetWarned } from '../src/utils/deprecationWarning';
 
 import Enzyme, { ShallowWrapper, ReactWrapper } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -23,10 +23,10 @@ ShallowWrapper.prototype.assertNone = assertLength(0);
 
 beforeEach(() => {
   /* eslint-disable no-console */
-  sinon.stub(console, 'error').callsFake((msg) => {
+  sinon.stub(console, 'error').callsFake(msg => {
     let expected = false;
 
-    console.error.expected.forEach((about) => {
+    console.error.expected.forEach(about => {
       if (msg.indexOf(about) !== -1) {
         console.error.warned[about] = true;
         expected = true;

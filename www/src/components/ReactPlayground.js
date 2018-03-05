@@ -1,16 +1,10 @@
-
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import * as ReactBootstrap from 'react-bootstrap';
 
-import {
-  LiveProvider,
-  LiveEditor,
-  LiveError,
-  LivePreview,
-} from 'react-live';
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 
 import '../css/prism.css';
 
@@ -19,13 +13,13 @@ const scope = {
   ReactDOM,
   classNames,
   PropTypes,
-  bootstrapUtils: ReactBootstrap.utils.bootstrapUtils,
+  bootstrapUtils: ReactBootstrap.utils.bootstrapUtils
 };
 
 export default class Playground extends React.Component {
   static propTypes = {
-    codeText: PropTypes.string.isRequired,
-  }
+    codeText: PropTypes.string.isRequired
+  };
 
   render() {
     const { codeText } = this.props;

@@ -14,11 +14,16 @@ describe('<NavDropdown>', () => {
           <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
           <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
         </NavDropdown>
-      </Nav>,
+      </Nav>
     );
 
-    const dropdown = ReactDOM.findDOMNode(ReactTestUtils.findRenderedComponentWithType(instance, NavDropdown));
-    const button = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown-toggle');
+    const dropdown = ReactDOM.findDOMNode(
+      ReactTestUtils.findRenderedComponentWithType(instance, NavDropdown)
+    );
+    const button = ReactTestUtils.findRenderedDOMComponentWithClass(
+      instance,
+      'dropdown-toggle'
+    );
 
     assert.equal(dropdown.nodeName, 'LI');
     assert.ok(dropdown.className.match(/\bdropdown\b/));
@@ -33,12 +38,14 @@ describe('<NavDropdown>', () => {
       <NavDropdown active title="Title" className="test-class" id="nav-test">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
         <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
-      </NavDropdown>,
+      </NavDropdown>
     );
 
     const li = ReactDOM.findDOMNode(instance);
 
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active'));
+    assert.ok(
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active')
+    );
     assert.ok(li.className.match(/\btest-class\b/)); // it still has the given className
     assert.ok(li.className.match(/\bactive\b/)); // plus the active class
   });
@@ -49,7 +56,7 @@ describe('<NavDropdown>', () => {
         super(props);
 
         this.state = {
-          open: false,
+          open: false
         };
       }
 
@@ -76,8 +83,14 @@ describe('<NavDropdown>', () => {
     }
 
     const instance = ReactTestUtils.renderIntoDocument(<OpenProp />);
-    const outerToggle = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'outer-button');
-    const dropdownNode = ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'dropdown');
+    const outerToggle = ReactTestUtils.findRenderedDOMComponentWithClass(
+      instance,
+      'outer-button'
+    );
+    const dropdownNode = ReactTestUtils.findRenderedDOMComponentWithClass(
+      instance,
+      'dropdown'
+    );
 
     dropdownNode.className.should.not.match(/\bopen\b/);
     ReactTestUtils.Simulate.click(outerToggle);
@@ -92,13 +105,14 @@ describe('<NavDropdown>', () => {
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
         <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
         <MenuItem eventKey="3">MenuItem 3 content</MenuItem>
-      </NavDropdown>,
+      </NavDropdown>
     );
 
     expect(ReactDOM.findDOMNode(instance).className).to.match(/active/);
 
     const items = ReactTestUtils.scryRenderedComponentsWithType(
-      instance, MenuItem,
+      instance,
+      MenuItem
     );
     expect(ReactDOM.findDOMNode(items[0]).className).to.not.match(/active/);
     expect(ReactDOM.findDOMNode(items[1]).className).to.match(/active/);
@@ -117,11 +131,12 @@ describe('<NavDropdown>', () => {
         <Container>
           <MenuItem>MenuItem 1 content</MenuItem>
         </Container>
-      </NavDropdown>,
+      </NavDropdown>
     );
 
     const container = ReactTestUtils.findRenderedComponentWithType(
-      instance, Container,
+      instance,
+      Container
     );
     expect(container.props.active).to.not.be.false;
   });
@@ -130,10 +145,20 @@ describe('<NavDropdown>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <NavDropdown title="title" id="test-id" bsClass="my-dropdown">
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-      </NavDropdown>,
+      </NavDropdown>
     );
 
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-toggle'));
-    assert.ok(ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'my-dropdown-menu'));
+    assert.ok(
+      ReactTestUtils.findRenderedDOMComponentWithClass(
+        instance,
+        'my-dropdown-toggle'
+      )
+    );
+    assert.ok(
+      ReactTestUtils.findRenderedDOMComponentWithClass(
+        instance,
+        'my-dropdown-menu'
+      )
+    );
   });
 });

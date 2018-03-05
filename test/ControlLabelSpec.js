@@ -1,40 +1,36 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 
-import ControlLabel from '../src/ControlLabel';
+import FormLabel from '../src/FormLabel';
 import FormGroup from '../src/FormGroup';
 
 import { shouldWarn } from './helpers';
 
-describe('<ControlLabel>', () => {
+describe('<FormLabel>', () => {
   it('should render correctly', () => {
     expect(
       shallow(
-        <ControlLabel htmlFor="foo" className="my-control-label">
+        <FormLabel htmlFor="foo" className="my-control-label">
           Label
-        </ControlLabel>,
+        </FormLabel>
       )
         .assertSingle('label.control-label.my-control-label[htmlFor="foo"]')
-        .text(),
+        .text()
     ).to.equal('Label');
   });
 
   it('should respect srOnly', () => {
-    shallow(
-      <ControlLabel srOnly>
-        Label
-      </ControlLabel>,
-    )
-      .assertSingle('label.control-label.sr-only');
+    shallow(<FormLabel srOnly>Label</FormLabel>).assertSingle(
+      'label.control-label.sr-only'
+    );
   });
 
   it('should use controlId for htmlFor', () => {
     mount(
       <FormGroup controlId="foo">
-        <ControlLabel>Label</ControlLabel>
-      </FormGroup>,
-    )
-      .assertSingle('label.control-label[htmlFor="foo"]');
+        <FormLabel>Label</FormLabel>
+      </FormGroup>
+    ).assertSingle('label.control-label[htmlFor="foo"]');
   });
 
   it('should prefer explicit htmlFor', () => {
@@ -42,11 +38,8 @@ describe('<ControlLabel>', () => {
 
     mount(
       <FormGroup controlId="foo">
-        <ControlLabel htmlFor="bar">
-          Label
-        </ControlLabel>
-      </FormGroup>,
-    )
-      .assertSingle('label.control-label[htmlFor="bar"]');
+        <FormLabel htmlFor="bar">Label</FormLabel>
+      </FormGroup>
+    ).assertSingle('label.control-label[htmlFor="bar"]');
   });
 });

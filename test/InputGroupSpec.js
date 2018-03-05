@@ -9,35 +9,33 @@ describe('<InputGroup>', () => {
   it('should render properly', () => {
     const wrapper = mount(
       <InputGroup className="my-input-group">
-        <InputGroup.Addon className="my-addon">
-          Foo
-        </InputGroup.Addon>
+        <InputGroup.Prepend className="my-addon">
+          <InputGroup.Text>Foo</InputGroup.Text>
+
+          <InputGroup.Radio checked />
+          <InputGroup.Checkbox checked />
+        </InputGroup.Prepend>
 
         <FormControl type="text" />
 
-        <InputGroup.Button className="my-button">
-          <Button>Bar</Button>
-        </InputGroup.Button>
-      </InputGroup>,
-    )
-      .assertSingle('.input-group.my-input-group');
+        <Button>Bar</Button>
+      </InputGroup>
+    ).assertSingle('.input-group.my-input-group');
 
     wrapper
-      .assertSingle('.input-group-addon.my-addon')
-      .text().should.equal('Foo');
+      .assertSingle('.input-group-prepend.my-addon')
+      .text()
+      .should.equal('Foo');
 
-    wrapper
-      .assertSingle('input.form-control[type="text"]');
+    wrapper.assertSingle('input.form-control[type="text"]');
 
-    wrapper
-      .assertSingle('.input-group-btn.my-button')
-      .assertSingle(Button);
+    wrapper.assertSingle('input[type=radio][checked=true]');
+    wrapper.assertSingle('input[type=checkbox][checked]');
   });
 
   it('should support bsSize', () => {
-    shallow(
-      <InputGroup bsSize="small" />,
-    )
-      .assertSingle('.input-group.input-group-sm');
+    shallow(<InputGroup bsSize="small" />).assertSingle(
+      '.input-group.input-group-sm'
+    );
   });
 });

@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
 import Media from './Media';
-import { bsClass, getClassSet, prefix, splitBsProps } from './utils/bootstrapUtils';
+import {
+  bsClass,
+  getClassSet,
+  prefix,
+  splitBsProps
+} from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
@@ -12,16 +17,21 @@ const propTypes = {
    */
   align: PropTypes.oneOf(['top', 'middle', 'bottom']),
 
-  componentClass: elementType,
+  componentClass: elementType
 };
 
 const defaultProps = {
-  componentClass: 'div',
+  componentClass: 'div'
 };
 
 class MediaBody extends React.Component {
   render() {
-    const { componentClass: Component, align, className, ...props } = this.props;
+    const {
+      componentClass: Component,
+      align,
+      className,
+      ...props
+    } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = getClassSet(bsProps);
@@ -32,10 +42,7 @@ class MediaBody extends React.Component {
     }
 
     return (
-      <Component
-        {...elementProps}
-        className={classNames(className, classes)}
-      />
+      <Component {...elementProps} className={classNames(className, classes)} />
     );
   }
 }

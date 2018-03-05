@@ -7,15 +7,17 @@ exports.modifyWebpackConfig = function modifyWebpackConfig({ config }) {
 
   config.loader('raw-loader', {
     test: /src\/examples\//,
-    loaders: ['raw-loader'],
+    loaders: ['raw-loader']
   });
 
   config._config.resolve.alias = {
-    'react-bootstrap$': path.resolve(__dirname, '../lib/index.js'),
-    'react-bootstrap/lib': path.resolve(__dirname, '../lib'),
+    react: path.resolve(__dirname, '../node_modules/react'),
+    'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
+
+    'react-bootstrap$': path.resolve(__dirname, '../src/index.js'),
+    'react-bootstrap/lib': path.resolve(__dirname, '../src')
   };
 };
-
 
 exports.onCreatePage = ({ page }) => {
   if (page.path.startsWith('/getting-started')) {

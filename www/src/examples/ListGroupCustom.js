@@ -1,9 +1,6 @@
 function CustomComponent({ children }) {
   return (
-    <li
-      className="list-group-item"
-      onClick={() => {}}
-    >
+    <li className="list-group-item" onClick={() => {}}>
       {children}
     </li>
   );

@@ -9,10 +9,10 @@ describe('<HelpBlock>', () => {
       shallow(
         <HelpBlock id="foo" className="my-help-block">
           Help contents
-        </HelpBlock>,
+        </HelpBlock>
       )
         .assertSingle('#foo.help-block.my-help-block')
-        .text(),
+        .text()
     ).to.equal('Help contents');
   });
 });

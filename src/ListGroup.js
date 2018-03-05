@@ -13,7 +13,7 @@ const propTypes = {
    * If not specified, it will be treated as `'li'` if every child is a
    * non-actionable `<ListGroupItem>`, and `'div'` otherwise.
    */
-  componentClass: elementType,
+  componentClass: elementType
 };
 
 function getDefaultComponent(children) {
@@ -22,9 +22,13 @@ function getDefaultComponent(children) {
     return 'div';
   }
 
-  if (ValidComponentChildren.some(children, child => (
-    child.type !== ListGroupItem || child.props.href || child.props.onClick
-  ))) {
+  if (
+    ValidComponentChildren.some(
+      children,
+      child =>
+        child.type !== ListGroupItem || child.props.href || child.props.onClick
+    )
+  ) {
     return 'div';
   }
 
@@ -46,21 +50,18 @@ class ListGroup extends React.Component {
 
     const useListItem =
       Component === 'ul' &&
-      ValidComponentChildren.every(children, child => (
-        child.type === ListGroupItem
-      ));
+      ValidComponentChildren.every(
+        children,
+        child => child.type === ListGroupItem
+      );
 
     return (
-      <Component
-        {...elementProps}
-        className={classNames(className, classes)}
-      >
-        {useListItem ?
-          ValidComponentChildren.map(children, child => (
-            cloneElement(child, { listItem: true })
-          )) :
-          children
-        }
+      <Component {...elementProps} className={classNames(className, classes)}>
+        {useListItem
+          ? ValidComponentChildren.map(children, child =>
+              cloneElement(child, { listItem: true })
+            )
+          : children}
       </Component>
     );
   }

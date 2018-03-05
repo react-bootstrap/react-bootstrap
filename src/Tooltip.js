@@ -3,8 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 
-import { bsClass, getClassSet, prefix, splitBsProps }
-  from './utils/bootstrapUtils';
+import {
+  bsClass,
+  getClassSet,
+  prefix,
+  splitBsProps
+} from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
@@ -12,9 +16,9 @@ const propTypes = {
    * @type {string|number}
    * @required
    */
-  id: isRequiredForA11y(PropTypes.oneOfType([
-    PropTypes.string, PropTypes.number,
-  ])),
+  id: isRequiredForA11y(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
 
   /**
    * Sets the direction the Tooltip is positioned towards.
@@ -24,32 +28,24 @@ const propTypes = {
   /**
    * The "top" position value for the Tooltip.
    */
-  positionTop: PropTypes.oneOfType([
-    PropTypes.number, PropTypes.string,
-  ]),
+  positionTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /**
    * The "left" position value for the Tooltip.
    */
-  positionLeft: PropTypes.oneOfType([
-    PropTypes.number, PropTypes.string,
-  ]),
+  positionLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   /**
    * The "top" position value for the Tooltip arrow.
    */
-  arrowOffsetTop: PropTypes.oneOfType([
-    PropTypes.number, PropTypes.string,
-  ]),
+  arrowOffsetTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /**
    * The "left" position value for the Tooltip arrow.
    */
-  arrowOffsetLeft: PropTypes.oneOfType([
-    PropTypes.number, PropTypes.string,
-  ]),
+  arrowOffsetLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };
 
 const defaultProps = {
-  placement: 'right',
+  placement: 'right'
 };
 
 class Tooltip extends React.Component {
@@ -70,18 +66,18 @@ class Tooltip extends React.Component {
 
     const classes = {
       ...getClassSet(bsProps),
-      [placement]: true,
+      [placement]: true
     };
 
     const outerStyle = {
       top: positionTop,
       left: positionLeft,
-      ...style,
+      ...style
     };
 
     const arrowStyle = {
       top: arrowOffsetTop,
-      left: arrowOffsetLeft,
+      left: arrowOffsetLeft
     };
 
     return (
@@ -93,9 +89,7 @@ class Tooltip extends React.Component {
       >
         <div className={prefix(bsProps, 'arrow')} style={arrowStyle} />
 
-        <div className={prefix(bsProps, 'inner')}>
-          {children}
-        </div>
+        <div className={prefix(bsProps, 'inner')}>{children}</div>
       </div>
     );
   }

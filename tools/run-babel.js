@@ -5,15 +5,18 @@ const path = require('path');
 let getConfig = ({ modules = true, test = false } = {}) => ({
   babelrc: false,
   presets: [
-    ['env', {
-      loose: true,
-      modules: modules ? 'commonjs' : false,
-      targets: {
-        ie: 9,
-        uglify: true,
-      },
-    }],
-    'react',
+    [
+      'env',
+      {
+        loose: true,
+        modules: modules ? 'commonjs' : false,
+        targets: {
+          ie: 9,
+          uglify: true
+        }
+      }
+    ],
+    'react'
   ],
   plugins: [
     'transform-class-properties',
@@ -22,8 +25,8 @@ let getConfig = ({ modules = true, test = false } = {}) => ({
     'dev-expression',
     'transform-runtime',
     modules && 'add-module-exports',
-    test && 'istanbul',
-  ].filter(Boolean),
+    test && 'istanbul'
+  ].filter(Boolean)
 });
 
 async function buildFile(filename, destination, babelOptions = {}) {
@@ -39,27 +42,37 @@ async function buildFile(filename, destination, babelOptions = {}) {
   await fse.outputFile(output, result.code);
 }
 
-async function _build(folderPath, destination, babelOptions = {}, firstFolder = true) {
+async function _build(
+  folderPath,
+  destination,
+  babelOptions = {},
+  firstFolder = true
+) {
   let stats = fse.statSync(folderPath);
 
   if (stats.isFile()) {
     await buildFile(folderPath, destination, babelOptions);
   } else if (stats.isDirectory()) {
-    let outputPath = firstFolder ? destination : path.join(destination, path.basename(folderPath));
+    let outputPath = firstFolder
+      ? destination
+      : path.join(destination, path.basename(folderPath));
 
-    let files = (await fse
-      .readdir(folderPath))
-      .map(file => path.join(folderPath, file));
+    let files = (await fse.readdir(folderPath)).map(file =>
+      path.join(folderPath, file)
+    );
 
     await Promise.all(
-      files.map(f => _build(f, outputPath, babelOptions, false)),
+      files.map(f => _build(f, outputPath, babelOptions, false))
     );
   }
 }
 
-module.exports = function buildBabel(folderPath, destination, babelConfig = {}) {
+module.exports = function buildBabel(
+  folderPath,
+  destination,
+  babelConfig = {}
+) {
   return _build(folderPath, destination, getConfig(babelConfig));
 };
 
 module.exports.getConfig = getConfig;
-

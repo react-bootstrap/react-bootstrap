@@ -17,7 +17,7 @@ import React from 'react';
 function map(children, func, context) {
   let index = 0;
 
-  return React.Children.map(children, (child) => {
+  return React.Children.map(children, child => {
     if (!React.isValidElement(child)) {
       return child;
     }
@@ -39,7 +39,7 @@ function map(children, func, context) {
 function forEach(children, func, context) {
   let index = 0;
 
-  React.Children.forEach(children, (child) => {
+  React.Children.forEach(children, child => {
     if (!React.isValidElement(child)) {
       return;
     }
@@ -57,7 +57,7 @@ function forEach(children, func, context) {
 function count(children) {
   let result = 0;
 
-  React.Children.forEach(children, (child) => {
+  React.Children.forEach(children, child => {
     if (!React.isValidElement(child)) {
       return;
     }
@@ -84,7 +84,7 @@ function filter(children, func, context) {
   let index = 0;
   let result = [];
 
-  React.Children.forEach(children, (child) => {
+  React.Children.forEach(children, child => {
     if (!React.isValidElement(child)) {
       return;
     }
@@ -101,7 +101,7 @@ function find(children, func, context) {
   let index = 0;
   let result;
 
-  React.Children.forEach(children, (child) => {
+  React.Children.forEach(children, child => {
     if (result) {
       return;
     }
@@ -121,7 +121,7 @@ function every(children, func, context) {
   let index = 0;
   let result = true;
 
-  React.Children.forEach(children, (child) => {
+  React.Children.forEach(children, child => {
     if (!result) {
       return;
     }
@@ -141,7 +141,7 @@ function some(children, func, context) {
   let index = 0;
   let result = false;
 
-  React.Children.forEach(children, (child) => {
+  React.Children.forEach(children, child => {
     if (result) {
       return;
     }
@@ -160,7 +160,7 @@ function some(children, func, context) {
 function toArray(children) {
   const result = [];
 
-  React.Children.forEach(children, (child) => {
+  React.Children.forEach(children, child => {
     if (!React.isValidElement(child)) {
       return;
     }
@@ -179,5 +179,5 @@ export default {
   filter,
   every,
   some,
-  toArray,
+  toArray
 };

@@ -5,25 +5,16 @@ import ReactTestUtils from 'react-dom/test-utils';
 import Fade from '../src/Fade';
 
 describe('Fade', () => {
-
-  let Component,
-    instance;
+  let Component, instance;
 
   beforeEach(() => {
-
     Component = class extends React.Component {
       render() {
         let { children, ...props } = this.props;
 
         return (
-          <Fade
-            ref={r => this.fade = r}
-            {...props}
-            {...this.state}
-          >
-            <div>
-              {children}
-            </div>
+          <Fade ref={r => (this.fade = r)} {...props} {...this.state}>
+            <div>{children}</div>
           </Fade>
         );
       }
@@ -32,29 +23,25 @@ describe('Fade', () => {
 
   it('Should default to hidden', () => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component>Panel content</Component>,
+      <Component>Panel content</Component>
     );
 
-    assert.ok(
-      instance.fade.props.in === false);
+    assert.ok(instance.fade.props.in === false);
   });
 
   it('Should always have the "fade" class', () => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component>Panel content</Component>,
+      <Component>Panel content</Component>
     );
 
-    assert.ok(
-      instance.fade.props.in === false);
+    assert.ok(instance.fade.props.in === false);
 
-    assert.equal(
-      ReactDOM.findDOMNode(instance).className, 'fade');
-
+    assert.equal(ReactDOM.findDOMNode(instance).className, 'fade');
   });
 
-  it('Should add "in" class when entering', (done) => {
+  it('Should add "in" class when entering', done => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component>Panel content</Component>,
+      <Component>Panel content</Component>
     );
 
     function onEntering() {
@@ -62,15 +49,14 @@ describe('Fade', () => {
       done();
     }
 
-    assert.ok(
-      instance.fade.props.in === false);
+    assert.ok(instance.fade.props.in === false);
 
     instance.setState({ in: true, onEntering });
   });
 
-  it('Should remove "in" class when exiting', (done) => {
+  it('Should remove "in" class when exiting', done => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component in>Panel content</Component>,
+      <Component in>Panel content</Component>
     );
 
     function onExiting() {
@@ -78,8 +64,7 @@ describe('Fade', () => {
       done();
     }
 
-    assert.equal(
-      ReactDOM.findDOMNode(instance).className, 'fade in');
+    assert.equal(ReactDOM.findDOMNode(instance).className, 'fade in');
 
     instance.setState({ in: false, onExiting });
   });

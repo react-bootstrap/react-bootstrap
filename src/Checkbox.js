@@ -1,23 +1,18 @@
 /* eslint-disable jsx-a11y/label-has-for */
 
 import classNames from 'classnames';
-import React from 'react';
 import PropTypes from 'prop-types';
-import warning from 'warning';
+import React from 'react';
 
-import { bsClass, getClassSet, prefix, splitBsProps }
-  from './utils/bootstrapUtils';
+import { bsClass, prefix, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   inline: PropTypes.bool,
   disabled: PropTypes.bool,
   title: PropTypes.string,
-  /**
-   * Only valid if `inline` is not set.
-   */
-  validationState: PropTypes.oneOf([
-    'success', 'warning', 'error', null,
-  ]),
+
+  isValid: PropTypes.bool.isRequired,
+  isInvalid: PropTypes.bool.isRequired,
   /**
    * Attaches a ref to the `<input>` element. Only functions can be used here.
    *
@@ -25,13 +20,15 @@ const propTypes = {
    * <Checkbox inputRef={ref => { this.input = ref; }} />
    * ```
    */
-  inputRef: PropTypes.func,
+  inputRef: PropTypes.func
 };
 
 const defaultProps = {
   inline: false,
   disabled: false,
-  title: '',
+  isValid: false,
+  isInvalid: false,
+  title: ''
 };
 
 class Checkbox extends React.Component {
@@ -39,7 +36,8 @@ class Checkbox extends React.Component {
     const {
       inline,
       disabled,
-      validationState,
+      isValid,
+      isInvalid,
       inputRef,
       className,
       style,
@@ -50,50 +48,28 @@ class Checkbox extends React.Component {
 
     const [bsProps, elementProps] = splitBsProps(props);
 
-    const input = (
-      <input
-        {...elementProps}
-        ref={inputRef}
-        type="checkbox"
-        disabled={disabled}
-      />
-    );
-
-    if (inline) {
-      const classes = {
-        [prefix(bsProps, 'inline')]: true,
-        disabled,
-      };
-
-      // Use a warning here instead of in propTypes to get better-looking
-      // generated documentation.
-      warning(
-        !validationState,
-        '`validationState` is ignored on `<Checkbox inline>`. To display ' +
-        'validation state on an inline checkbox, set `validationState` on a ' +
-        'parent `<FormGroup>` or other element instead.',
-      );
-
-      return (
-        <label className={classNames(className, classes)} style={style} title={title}>
-          {input}
-          {children}
-        </label>
-      );
-    }
-
-    const classes = {
-      ...getClassSet(bsProps),
-      disabled,
-    };
-    if (validationState) {
-      classes[`has-${validationState}`] = true;
-    }
-
     return (
-      <div className={classNames(className, classes)} style={style}>
-        <label title={title}>
-          {input}
+      <div
+        className={classNames(
+          className,
+          disabled && 'disabled',
+          inline && prefix(bsProps, 'inline')
+        )}
+        style={style}
+        title={title}
+      >
+        <label title={title} className={prefix(bsProps, 'label')}>
+          <input
+            {...elementProps}
+            ref={inputRef}
+            type="checkbox"
+            disabled={disabled}
+            className={classNames(
+              prefix(bsProps, 'input'),
+              isValid && prefix(bsProps, 'is-valid'),
+              isInvalid && prefix(bsProps, 'is-invalid')
+            )}
+          />
           {children}
         </label>
       </div>
@@ -104,4 +80,4 @@ class Checkbox extends React.Component {
 Checkbox.propTypes = propTypes;
 Checkbox.defaultProps = defaultProps;
 
-export default bsClass('checkbox', Checkbox);
+export default bsClass('form-check', Checkbox);

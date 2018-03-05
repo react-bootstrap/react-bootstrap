@@ -11,11 +11,11 @@ import MediaRight from './MediaRight';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
-  componentClass: elementType,
+  componentClass: elementType
 };
 
 const defaultProps = {
-  componentClass: 'div',
+  componentClass: 'div'
 };
 
 class Media extends React.Component {
@@ -26,10 +26,7 @@ class Media extends React.Component {
     const classes = getClassSet(bsProps);
 
     return (
-      <Component
-        {...elementProps}
-        className={classNames(className, classes)}
-      />
+      <Component {...elementProps} className={classNames(className, classes)} />
     );
   }
 }

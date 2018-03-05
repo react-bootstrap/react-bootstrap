@@ -12,12 +12,12 @@ const propTypes = {
   href: PropTypes.string,
   onClick: PropTypes.func,
   onSelect: PropTypes.func,
-  eventKey: PropTypes.any,
+  eventKey: PropTypes.any
 };
 
 const defaultProps = {
   active: false,
-  disabled: false,
+  disabled: false
 };
 
 class NavItem extends React.Component {
@@ -39,8 +39,14 @@ class NavItem extends React.Component {
   }
 
   render() {
-    const { active, disabled, onClick, className, style, ...props } =
-      this.props;
+    const {
+      active,
+      disabled,
+      onClick,
+      className,
+      style,
+      ...props
+    } = this.props;
 
     delete props.onSelect;
     delete props.eventKey;

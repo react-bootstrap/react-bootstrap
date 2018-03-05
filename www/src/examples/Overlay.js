@@ -9,7 +9,7 @@ class Example extends React.Component {
   }
 
   getTarget() {
-    return ReactDOM.findDOMNode(this.refs.target)
+    return ReactDOM.findDOMNode(this.refs.target);
   }
 
   handleToggle() {
@@ -20,7 +20,7 @@ class Example extends React.Component {
     const sharedProps = {
       container: this,
       target: this.getTarget,
-      show: this.state.show,
+      show: this.state.show
     };
 
     return (

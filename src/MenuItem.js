@@ -24,11 +24,10 @@ const propTypes = {
    */
   divider: all(
     PropTypes.bool,
-    ({ divider, children }) => (
-      divider && children ?
-        new Error('Children will not be rendered for dividers') :
-        null
-    ),
+    ({ divider, children }) =>
+      divider && children
+        ? new Error('Children will not be rendered for dividers')
+        : null
   ),
 
   /**
@@ -58,13 +57,13 @@ const propTypes = {
    * (eventKey: any, event: Object) => any
    * ```
    */
-  onSelect: PropTypes.func,
+  onSelect: PropTypes.func
 };
 
 const defaultProps = {
   divider: false,
   disabled: false,
-  header: false,
+  header: false
 };
 
 class MenuItem extends React.Component {
@@ -98,12 +97,12 @@ class MenuItem extends React.Component {
       header,
       onClick,
       className,
-      style,
       ...props
     } = this.props;
 
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
-      'eventKey', 'onSelect',
+      'eventKey',
+      'onSelect'
     ]);
 
     if (divider) {
@@ -111,39 +110,36 @@ class MenuItem extends React.Component {
       elementProps.children = undefined;
 
       return (
-        <li
+        <div
           {...elementProps}
           role="separator"
-          className={classNames(className, 'divider')}
-          style={style}
+          className={classNames(className, prefix(bsProps, 'divider'))}
         />
       );
     }
 
     if (header) {
       return (
-        <li
+        <div
           {...elementProps}
           role="heading"
           className={classNames(className, prefix(bsProps, 'header'))}
-          style={style}
         />
       );
     }
 
     return (
-      <li
-        role="presentation"
-        className={classNames(className, { active, disabled })}
-        style={style}
-      >
-        <SafeAnchor
-          {...elementProps}
-          role="menuitem"
-          tabIndex="-1"
-          onClick={createChainedFunction(onClick, this.handleClick)}
-        />
-      </li>
+      <SafeAnchor
+        {...elementProps}
+        role="menuitem"
+        tabIndex="-1"
+        className={classNames(
+          className,
+          prefix(bsProps, 'item'),
+          { active, disabled }
+        )}
+        onClick={createChainedFunction(onClick, this.handleClick)}
+      />
     );
   }
 }

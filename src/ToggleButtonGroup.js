@@ -36,11 +36,11 @@ const propTypes = {
    * The input `type` of the rendered buttons, determines the toggle behavior
    * of the buttons
    */
-  type: PropTypes.oneOf(['checkbox', 'radio']).isRequired,
+  type: PropTypes.oneOf(['checkbox', 'radio']).isRequired
 };
 
 const defaultProps = {
-  type: 'radio',
+  type: 'radio'
 };
 
 class ToggleButtonGroup extends React.Component {
@@ -69,22 +69,27 @@ class ToggleButtonGroup extends React.Component {
   }
 
   render() {
-    const { children, type, name, ...props } = this.props;
+    const {
+      onChange: x,
+      value: y, // eslint-disable-line no-unused-vars
+      children,
+      type,
+      name,
+      ...props
+    } = this.props;
 
     const values = this.getValues();
 
-    invariant(type !== 'radio' || !!name,
+    invariant(
+      type !== 'radio' || !!name,
       'A `name` is required to group the toggle buttons when the `type` ' +
-      'is set to "radio"',
+        'is set to "radio"'
     );
-
-    delete props.onChange;
-    delete props.value;
 
     // the data attribute is required b/c twbs css uses it in the selector
     return (
-      <ButtonGroup {...props} data-toggle="buttons">
-        {ValidChildren.map(children, (child) => {
+      <ButtonGroup {...props} toggle data-toggle="buttons">
+        {ValidChildren.map(children, child => {
           const { value, onChange } = child.props;
           const handler = () => this.handleToggle(value);
 
@@ -92,7 +97,7 @@ class ToggleButtonGroup extends React.Component {
             type,
             name: child.name || name,
             checked: values.indexOf(value) !== -1,
-            onChange: chainFunction(onChange, handler),
+            onChange: chainFunction(onChange, handler)
           });
         })}
       </ButtonGroup>
@@ -104,7 +109,7 @@ ToggleButtonGroup.propTypes = propTypes;
 ToggleButtonGroup.defaultProps = defaultProps;
 
 const UncontrolledToggleButtonGroup = uncontrollable(ToggleButtonGroup, {
-  value: 'onChange',
+  value: 'onChange'
 });
 
 UncontrolledToggleButtonGroup.Button = ToggleButton;

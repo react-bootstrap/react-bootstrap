@@ -3,7 +3,7 @@ import React from 'react';
 
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
-class HelpBlock extends React.Component {
+class FormText extends React.Component {
   render() {
     const { className, ...props } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
@@ -11,12 +11,9 @@ class HelpBlock extends React.Component {
     const classes = getClassSet(bsProps);
 
     return (
-      <span
-        {...elementProps}
-        className={classNames(className, classes)}
-      />
+      <span {...elementProps} className={classNames(className, classes)} />
     );
   }
 }
 
-export default bsClass('help-block', HelpBlock);
+export default bsClass('form-text', FormText);

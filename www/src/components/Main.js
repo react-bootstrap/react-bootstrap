@@ -7,17 +7,17 @@ import Col from 'react-bootstrap/lib/Col';
 import SideNav from './SideNav';
 
 const propTypes = {
-  location: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 };
 
 function Main({ children, ...props }) {
   return (
-    <Grid>
+    <Grid fluid>
       <Row>
-        <Col md={3} className="bs-docs-sidebar-holder">
+        <Col xs={12} md={3} xl={2} className="bs-docs-sidebar-holder">
           <SideNav location={props.location} />
         </Col>
-        <Col md={9}>
+        <Col xs={12} md={9} xl={10}>
           {children}
         </Col>
       </Row>

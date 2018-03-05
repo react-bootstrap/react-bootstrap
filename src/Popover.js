@@ -3,8 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 
-import { bsClass, getClassSet, prefix, splitBsProps }
-  from './utils/bootstrapUtils';
+import {
+  bsClass,
+  getClassSet,
+  prefix,
+  splitBsProps
+} from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
@@ -12,9 +16,9 @@ const propTypes = {
    * @type {string}
    * @required
    */
-  id: isRequiredForA11y(PropTypes.oneOfType([
-    PropTypes.string, PropTypes.number,
-  ])),
+  id: isRequiredForA11y(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  ),
 
   /**
    * Sets the direction the Popover is positioned towards.
@@ -24,37 +28,29 @@ const propTypes = {
   /**
    * The "top" position value for the Popover.
    */
-  positionTop: PropTypes.oneOfType([
-    PropTypes.number, PropTypes.string,
-  ]),
+  positionTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /**
    * The "left" position value for the Popover.
    */
-  positionLeft: PropTypes.oneOfType([
-    PropTypes.number, PropTypes.string,
-  ]),
+  positionLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   /**
    * The "top" position value for the Popover arrow.
    */
-  arrowOffsetTop: PropTypes.oneOfType([
-    PropTypes.number, PropTypes.string,
-  ]),
+  arrowOffsetTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /**
    * The "left" position value for the Popover arrow.
    */
-  arrowOffsetLeft: PropTypes.oneOfType([
-    PropTypes.number, PropTypes.string,
-  ]),
+  arrowOffsetLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   /**
    * Title content
    */
-  title: PropTypes.node,
+  title: PropTypes.node
 };
 
 const defaultProps = {
-  placement: 'right',
+  placement: 'right'
 };
 
 class Popover extends React.Component {
@@ -76,19 +72,19 @@ class Popover extends React.Component {
 
     const classes = {
       ...getClassSet(bsProps),
-      [placement]: true,
+      [placement]: true
     };
 
     const outerStyle = {
       display: 'block',
       top: positionTop,
       left: positionLeft,
-      ...style,
+      ...style
     };
 
     const arrowStyle = {
       top: arrowOffsetTop,
-      left: arrowOffsetLeft,
+      left: arrowOffsetLeft
     };
 
     return (
@@ -100,15 +96,9 @@ class Popover extends React.Component {
       >
         <div className="arrow" style={arrowStyle} />
 
-        {title && (
-          <h3 className={prefix(bsProps, 'title')}>
-            {title}
-          </h3>
-        )}
+        {title && <h3 className={prefix(bsProps, 'title')}>{title}</h3>}
 
-        <div className={prefix(bsProps, 'content')}>
-          {children}
-        </div>
+        <div className={prefix(bsProps, 'content')}>{children}</div>
       </div>
     );
   }
