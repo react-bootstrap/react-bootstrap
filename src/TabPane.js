@@ -3,14 +3,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import { getClassSet, splitBsProps } from './utils/bootstrapUtils';
 import mapContextToProps from './utils/mapContextToProps';
+import { createBootstrapComponent } from './ThemeProvider';
 import TabContext from './TabContext';
 
 import Fade from './Fade';
 
 class TabPane extends React.Component {
   static propTypes = {
+    /**
+     * @default 'tab-pane'
+     */
+    bsPrefix: PropTypes.string,
+
     /**
      * A key that associates the `TabPane` with it's controlling `NavLink`.
      */
@@ -82,12 +87,9 @@ class TabPane extends React.Component {
     'aria-labelledby': PropTypes.string
   };
 
-  static defaultProps = {
-    bsClass: 'tab-pane'
-  };
-
   render() {
     const {
+      bsPrefix,
       active,
       eventKey,
       className,
@@ -103,19 +105,14 @@ class TabPane extends React.Component {
       ...props
     } = this.props;
 
-    const [bsProps, elementProps] = splitBsProps(props);
-
     if (!active && unmountOnExit) return null;
 
     let pane = (
       <div
-        {...elementProps}
+        {...props}
         role="tabpanel"
         aria-hidden={!active}
-        className={classNames(className, {
-          ...getClassSet(bsProps),
-          active
-        })}
+        className={classNames(className, bsPrefix, { active })}
       />
     );
 
@@ -143,7 +140,7 @@ class TabPane extends React.Component {
 }
 
 export default mapContextToProps(
-  TabPane,
+  createBootstrapComponent(TabPane, 'tab-pane'),
   TabContext.Consumer,
   (context, props) => {
     if (!context) return null;

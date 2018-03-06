@@ -4,9 +4,14 @@ import React from 'react';
 
 import SafeAnchor from './SafeAnchor';
 import NavContext from './NavContext';
-import { bsClass, prefix, splitBsProps } from './utils/bootstrapUtils';
+import { createBootstrapComponent } from './ThemeProvider';
 
 const propTypes = {
+  /**
+   * @default 'nav-link'
+   */
+  bsPrefix: PropTypes.string,
+
   /**
    * The active state of the NavItem item.
    */
@@ -50,6 +55,7 @@ class NavLink extends React.Component {
         {navContext => {
           const {
             active,
+            bsPrefix,
             disabled,
             onClick,
             className,
@@ -62,7 +68,6 @@ class NavLink extends React.Component {
 
           delete props.onSelect;
 
-          const [bsProps, elementProps] = splitBsProps(props);
           const navItemKey = String(eventKey || href);
 
           const isActive =
@@ -73,9 +78,9 @@ class NavLink extends React.Component {
           let role = propsRole;
           if (navContext.role === 'tablist') {
             role = 'tab';
-            elementProps['data-rb-event-key'] = navItemKey;
-            elementProps['aria-selected'] = isActive;
-            elementProps.tabIndex = isActive ? elementProps.tabIndex : -1;
+            props['data-rb-event-key'] = navItemKey;
+            props['aria-selected'] = isActive;
+            props.tabIndex = isActive ? props.tabIndex : -1;
           }
 
           this.navContext = navContext;
@@ -84,14 +89,14 @@ class NavLink extends React.Component {
             <SafeAnchor
               id={navContext.getControllerId(navItemKey)}
               aria-controls={navContext.getControlledId(navItemKey)}
-              {...elementProps}
+              {...props}
               role={role}
               href={href}
               disabled={disabled}
               onClick={this.handleClick}
               className={classNames(
                 className,
-                prefix(bsProps),
+                bsPrefix,
                 isActive && 'active',
                 disabled && 'disabled'
               )}
@@ -106,4 +111,4 @@ class NavLink extends React.Component {
 NavLink.propTypes = propTypes;
 NavLink.defaultProps = defaultProps;
 
-export default bsClass('nav-link', NavLink);
+export default createBootstrapComponent(NavLink, 'nav-link');

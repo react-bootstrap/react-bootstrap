@@ -25,8 +25,10 @@ const propTypes = {
 
   /**
    * Navigation style
+   *
+   * @type {('tabs'| 'pills')}
    */
-  bsStyle: PropTypes.oneOf(['tabs', 'pills']),
+  variant: PropTypes.string,
 
   /**
    * Sets a default animation strategy for all children `<TabPane>`s. Use
@@ -72,7 +74,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  bsStyle: 'tabs',
+  variant: 'tabs',
   mountOnEnter: false,
   unmountOnExit: false
 };
@@ -152,4 +154,6 @@ class Tabs extends React.Component {
 Tabs.propTypes = propTypes;
 Tabs.defaultProps = defaultProps;
 
-export default uncontrollable(Tabs, { activeKey: 'onSelect' });
+export default uncontrollable(Tabs, {
+  activeKey: 'onSelect'
+});

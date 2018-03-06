@@ -6,95 +6,88 @@ import all from 'prop-types-extra/lib/all';
 import React from 'react';
 import uncontrollable from 'uncontrollable';
 
-import {
-  bsClass,
-  bsStyles,
-  getClassSet,
-  prefix,
-  splitBsProps
-} from './utils/bootstrapUtils';
-
+import { createBootstrapComponent } from './ThemeProvider';
 import TabContext from './TabContext';
 import mapContextToProps from './utils/mapContextToProps';
 import NavContext from './NavContext';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
 
-// TODO: This `bsStyle` is very unlike the others. Should we rename it?
-
-// TODO: `pullRight` and `pullLeft` don't render right outside of `navbar`.
-// Consider renaming or replacing them.
-
-const propTypes = {
-  /**
-   * Marks the NavItem with a matching `eventKey` as active. Has a
-   * higher precedence over `activeHref`.
-   */
-  activeKey: PropTypes.any,
-
-  /**
-   * NavItems are be positioned vertically.
-   */
-  fill: PropTypes.bool,
-
-  justified: all(
-    PropTypes.bool,
-    ({ justified, navbar }) =>
-      justified && navbar
-        ? Error('justified navbar `Nav`s are not supported')
-        : null
-  ),
-
-  /**
-   * A callback fired when a NavItem is selected.
-   *
-   * ```js
-   * function (
-   *  Any eventKey,
-   *  SyntheticEvent event?
-   * )
-   * ```
-   */
-  onSelect: PropTypes.func,
-
-  /**
-   * ARIA role for the Nav, in the context of a TabContainer, the default will
-   * be set to "tablist", but can be overridden by the Nav when set explicitly.
-   *
-   * When the role is set to "tablist" NavItem focus is managed according to
-   * the ARIA authoring practices for tabs:
-   * https://www.w3.org/TR/2013/WD-wai-aria-practices-20130307/#tabpanel
-   */
-  role: PropTypes.string,
-
-  /**
-   * Apply styling an alignment for use in a Navbar. This prop will be set
-   * automatically when the Nav is used inside a Navbar.
-   */
-  navbar: PropTypes.bool,
-
-  componentClass: elementType,
-
-  /** @private */
-  onKeyDown: PropTypes.func
-};
-
-const defaultProps = {
-  justified: false,
-  fill: false,
-  componentClass: 'ul'
-};
-
-const contextTypes = {
-  $bs_navbar: PropTypes.shape({
-    bsClass: PropTypes.string,
-    onSelect: PropTypes.func
-  })
-};
-
 const noop = () => {};
 
 class Nav extends React.Component {
+  static propTypes = {
+    /**
+     * @default 'nav'
+     */
+    bsPrefix: PropTypes.string,
+
+    /**
+     * The visual variant of the nav items.
+     *
+     * @type {('tabs'|'pills')}
+     */
+    variant: PropTypes.string,
+
+    /**
+     * Marks the NavItem with a matching `eventKey` as active. Has a
+     * higher precedence over `activeHref`.
+     */
+    activeKey: PropTypes.any,
+
+    /**
+     * NavItems are be positioned vertically.
+     */
+    fill: PropTypes.bool,
+
+    justified: all(
+      PropTypes.bool,
+      ({ justified, navbar }) =>
+        justified && navbar
+          ? Error('justified navbar `Nav`s are not supported')
+          : null
+    ),
+
+    /**
+     * A callback fired when a NavItem is selected.
+     *
+     * ```js
+     * function (
+     *  Any eventKey,
+     *  SyntheticEvent event?
+     * )
+     * ```
+     */
+    onSelect: PropTypes.func,
+
+    /**
+     * ARIA role for the Nav, in the context of a TabContainer, the default will
+     * be set to "tablist", but can be overridden by the Nav when set explicitly.
+     *
+     * When the role is set to "tablist" NavItem focus is managed according to
+     * the ARIA authoring practices for tabs:
+     * https://www.w3.org/TR/2013/WD-wai-aria-practices-20130307/#tabpanel
+     */
+    role: PropTypes.string,
+
+    /**
+     * Apply styling an alignment for use in a Navbar. This prop will be set
+     * automatically when the Nav is used inside a Navbar.
+     */
+    navbar: PropTypes.bool,
+
+    componentClass: elementType,
+
+    /** @private */
+    onKeyDown: PropTypes.func
+  };
+
+  static defaultProps = {
+    justified: false,
+    fill: false,
+    componentClass: 'ul'
+  };
+
   static getDerivedStateFromProps(
     { activeKey, getControlledId, getControllerId, role, onSelect },
     prevState
@@ -164,13 +157,15 @@ class Nav extends React.Component {
 
   render() {
     const {
+      bsPrefix,
+      variant,
       fill,
       justified,
       onSelect,
-      navbar: propsNavbar,
-      componentClass: Component,
+      navbar,
       className,
       children,
+      componentClass: Component,
       ...props
     } = this.props;
 
@@ -179,27 +174,22 @@ class Nav extends React.Component {
     delete props.getControlledId;
     delete props.getControllerId;
 
-    const [bsProps, elementProps] = splitBsProps(props);
-
     const classes = {
-      ...getClassSet(bsProps),
-      [prefix(bsProps, 'fill')]: fill,
-      [prefix(bsProps, 'justified')]: justified
+      [bsPrefix]: !navbar,
+      [`navbar-nav`]: navbar,
+      [`${bsPrefix}-${variant}`]: !!variant,
+      [`${bsPrefix}-fill`]: fill,
+      [`${bsPrefix}-justified`]: justified
     };
 
-    if (propsNavbar != null ? propsNavbar : this.context.$bs_navbar) {
-      const navbarProps = this.context.$bs_navbar || { bsClass: 'navbar' };
-      classes[prefix(navbarProps, 'nav')] = true;
-    }
-
-    if (elementProps.role === 'tablist') {
-      elementProps.onKeyDown = this.handleKeyDown;
+    if (props.role === 'tablist') {
+      props.onKeyDown = this.handleKeyDown;
     }
 
     return (
       <NavContext.Provider value={this.state.navContext}>
         <Component
-          {...elementProps}
+          {...props}
           ref={this.attachRef}
           className={classNames(className, classes)}
         >
@@ -210,14 +200,9 @@ class Nav extends React.Component {
   }
 }
 
-Nav.propTypes = propTypes;
-Nav.defaultProps = defaultProps;
-Nav.contextTypes = contextTypes;
-
-const UncontrolledNav = uncontrollable(
-  bsClass('nav', bsStyles(['tabs', 'pills'], Nav)),
-  { activeKey: 'onSelect' }
-);
+const UncontrolledNav = uncontrollable(createBootstrapComponent(Nav, 'nav'), {
+  activeKey: 'onSelect'
+});
 
 const DecoratedNav = mapContextToProps(
   UncontrolledNav,

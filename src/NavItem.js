@@ -3,10 +3,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import { bsClass, prefix, splitBsProps } from './utils/bootstrapUtils';
+import { createBootstrapComponent } from './ThemeProvider';
 
 class NavItem extends React.Component {
   static propTypes = {
+    /**
+     * @default 'nav-item'
+     */
+    bsPrefix: PropTypes.string,
+
     /** The ARIA role of the component */
     role: PropTypes.string,
     componentClass: elementType
@@ -19,23 +24,19 @@ class NavItem extends React.Component {
 
   render() {
     const {
+      bsPrefix,
       className,
       children,
       componentClass: Component,
       ...props
     } = this.props;
 
-    const [bsProps, elementProps] = splitBsProps(props);
-
     return (
-      <Component
-        {...elementProps}
-        className={classNames(className, prefix(bsProps, 'item'))}
-      >
+      <Component {...props} className={classNames(className, bsPrefix)}>
         {children}
       </Component>
     );
   }
 }
 
-export default bsClass('nav', NavItem);
+export default createBootstrapComponent(NavItem, 'nav-item');

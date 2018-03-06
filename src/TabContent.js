@@ -1,36 +1,34 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import {
-  bsClass as setBsClass,
-  prefix,
-  splitBsProps
-} from './utils/bootstrapUtils';
-
-const propTypes = {
-  componentClass: elementType
-};
-
-const defaultProps = {
-  componentClass: 'div'
-};
+import { createBootstrapComponent } from './ThemeProvider';
 
 class TabContent extends React.Component {
-  render() {
-    const { componentClass: Component, className, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
+  static propTypes = {
+    /**
+     * @default 'tab-pane'
+     */
+    bsPrefix: PropTypes.string,
 
-    return (
-      <Component
-        {...elementProps}
-        className={classNames(className, prefix(bsProps, 'content'))}
-      />
-    );
+    componentClass: elementType
+  };
+
+  static defaultProps = {
+    componentClass: 'div'
+  };
+
+  render() {
+    const {
+      bsPrefix,
+      componentClass: Component,
+      className,
+      ...props
+    } = this.props;
+
+    return <Component {...props} className={classNames(className, bsPrefix)} />;
   }
 }
 
-TabContent.propTypes = propTypes;
-TabContent.defaultProps = defaultProps;
-
-export default setBsClass('tab', TabContent);
+export default createBootstrapComponent(TabContent, 'tab-content');
