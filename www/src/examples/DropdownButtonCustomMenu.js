@@ -24,9 +24,15 @@ class CustomMenu extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.onChange = e => this.setState({ value: e.target.value });
+    this.handleChange = this.handleChange.bind(this);
 
-    this.state = { value: '' };
+    this.state = {
+      value: ''
+    };
+  }
+
+  handleChange(e) {
+    this.setState({ value: e.target.value });
   }
 
   focusNext() {
@@ -49,8 +55,8 @@ class CustomMenu extends React.Component {
           }}
           type="text"
           placeholder="Type to filter..."
-          onChange={this.onChange}
-          value={this.state.value}
+          onChange={this.handleChange}
+          value={value}
         />
         <ul className="list-unstyled">
           {React.Children.toArray(children).filter(

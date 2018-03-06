@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -115,6 +116,7 @@ export default function FormControlsSection({ data }) {
       </h3>
       <h4>
         <Anchor id="forms-props-form">Form</Anchor>
+        <LinkToSource component={data.Form.displayName} />
         <small>(only needed for horizontal or inline forms)</small>
       </h4>
       <PropTable metadata={data.Form} />
@@ -130,18 +132,6 @@ export default function FormControlsSection({ data }) {
       <h3>
         <Anchor id="forms-input-groups-props">Props</Anchor>
       </h3>
-      <h4>
-        <Anchor id="forms-props-input-group">InputGroup</Anchor>
-      </h4>
-      <PropTable metadata={data.InputGroup} />
-      <h4>
-        <Anchor id="forms-props-input-group-addon">InputGroup.Addon</Anchor>
-      </h4>
-      <PropTable metadata={data.InputGroupAddon} />
-      <h4>
-        <Anchor id="forms-props-input-group-button">InputGroup.Button</Anchor>
-      </h4>
-      <PropTable metadata={data.InputGroupButton} />
       <h2 className="page-header">
         <Anchor id="forms-validation">Validation states</Anchor>
         <small>FormControl.Feedback</small>
@@ -171,37 +161,39 @@ export default function FormControlsSection({ data }) {
 export const query = graphql`
   query FormQuery {
     Form: componentMetadata(displayName: { eq: "Form" }) {
+      displayName
       ...PropTable_metadata
     }
     FormGroup: componentMetadata(displayName: { eq: "FormGroup" }) {
+      displayName
       ...PropTable_metadata
     }
     FormControl: componentMetadata(displayName: { eq: "FormControl" }) {
+      displayName
       ...PropTable_metadata
     }
     FormLabel: componentMetadata(displayName: { eq: "FormLabel" }) {
+      displayName
       ...PropTable_metadata
     }
     Checkbox: componentMetadata(displayName: { eq: "Checkbox" }) {
+      displayName
       ...PropTable_metadata
     }
     Radio: componentMetadata(displayName: { eq: "Radio" }) {
-      ...PropTable_metadata
-    }
-    InputGroup: componentMetadata(displayName: { eq: "InputGroup" }) {
-      ...PropTable_metadata
-    }
-    InputGroupAddon: componentMetadata(displayName: { eq: "InputGroupAddon" }) {
+      displayName
       ...PropTable_metadata
     }
     InputGroupButton: componentMetadata(
       displayName: { eq: "InputGroupButton" }
     ) {
+      displayName
       ...PropTable_metadata
     }
     FormControlFeedback: componentMetadata(
       displayName: { eq: "FormControlFeedback" }
     ) {
+      displayName
       ...PropTable_metadata
     }
   }

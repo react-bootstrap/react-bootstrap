@@ -133,10 +133,13 @@ class MyLargeModal extends React.Component {
 }
 
 class App extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
 
-    this.state = { smShow: false, lgShow: false };
+    this.state = {
+      smShow: false,
+      lgShow: false
+    };
   }
   render() {
     let smClose = () => this.setState({ smShow: false });

@@ -1,11 +1,13 @@
 class Example extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
 
     this.handleShow = this.handleShow.bind(this);
     this.handleHide = this.handleHide.bind(this);
 
-    this.state = { show: false };
+    this.state = {
+      show: false
+    };
   }
 
   handleShow() {

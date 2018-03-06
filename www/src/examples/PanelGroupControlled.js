@@ -1,6 +1,6 @@
 class ControlledPanelGroup extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
 
     this.handleSelect = this.handleSelect.bind(this);
 

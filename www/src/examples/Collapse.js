@@ -1,8 +1,10 @@
 class Example extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
 
-    this.state = {};
+    this.state = {
+      open: false
+    };
   }
 
   render() {

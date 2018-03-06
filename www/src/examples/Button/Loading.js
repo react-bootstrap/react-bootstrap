@@ -1,6 +1,6 @@
 class LoadingButton extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
 
     this.handleClick = this.handleClick.bind(this);
 
@@ -20,7 +20,8 @@ class LoadingButton extends React.Component {
   }
 
   render() {
-    let isLoading = this.state.isLoading;
+    const { isLoading } = this.state;
+
     return (
       <Button
         bsStyle="primary"

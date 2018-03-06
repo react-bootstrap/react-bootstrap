@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -85,26 +86,31 @@ export default function TabsSection({ data }) {
 
       <h4>
         <Anchor id="tabs-props-area">Tabs</Anchor>
+        <LinkToSource component={data.Tabs.displayName} />
       </h4>
       <PropTable metadata={data.Tabs} />
 
       <h4>
         <Anchor id="tabs-props-pane">Tab</Anchor>
+        <LinkToSource component={data.Tab.displayName} />
       </h4>
       <PropTable metadata={data.Tab} />
 
       <h4>
         <Anchor id="tabs-props-pane">TabContainer</Anchor>
+        <LinkToSource component={data.TabContainer.displayName} />
       </h4>
       <PropTable metadata={data.TabContainer} />
 
       <h4>
         <Anchor id="tabs-props-pane">TabContent</Anchor>
+        <LinkToSource component={data.TabContent.displayName} />
       </h4>
       <PropTable metadata={data.TabContent} />
 
       <h4>
         <Anchor id="tabs-props-pane">TabPane</Anchor>
+        <LinkToSource component={data.TabPane.displayName} />
       </h4>
       <PropTable metadata={data.TabPane} />
     </div>

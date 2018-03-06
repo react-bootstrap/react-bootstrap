@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -84,6 +85,7 @@ export default function ProgressBarSection({ data }) {
 
       <h3>
         <Anchor id="progress-props">ProgressBar</Anchor>
+        <LinkToSource component={data.ProgressBar.displayName} />
       </h3>
       <PropTable metadata={data.ProgressBar} />
     </div>

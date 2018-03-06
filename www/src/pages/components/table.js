@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -33,6 +34,7 @@ export default function TableSection({ data }) {
 
       <h3>
         <Anchor id="table-props">Props</Anchor>
+        <LinkToSource component={data.Table.displayName} />
       </h3>
       <PropTable metadata={data.Table} />
     </div>

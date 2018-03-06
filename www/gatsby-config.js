@@ -1,6 +1,6 @@
 const path = require('path');
 const defaultDescriptions = require('./src/defaultPropDescriptions');
-const { addBootstrapPropTypes } = require('./bsPropUtils');
+// const { addBootstrapPropTypes } = require('./bsPropUtils');
 
 module.exports = {
   siteMetadata: {

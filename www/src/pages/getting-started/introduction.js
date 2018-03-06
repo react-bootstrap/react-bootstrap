@@ -50,7 +50,7 @@ $ bower install react-bootstrap
           <pre>
             <code>{`
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
@@ -74,9 +74,9 @@ $ bower install react-bootstrap
           </p>
           <div className="bs-callout bs-callout-warning">
             <p>
-              Because React-Bootstrap completely re-implements the JavaScript
-              bits of Bootstrap, it's not automatically compatible with themes
-              that extend the default JavaScript behaviors.
+              Because React-Bootstrap completely reimplements Bootstrap's
+              JavaScript, it's not automatically compatible with themes that
+              extend the default JavaScript behaviors.
             </p>
           </div>
           <h2 className="page-header">

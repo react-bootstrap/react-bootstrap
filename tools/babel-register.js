@@ -1,3 +1,3 @@
 const { getConfig } = require('./run-babel');
 
-require('babel-register')(getConfig());
+require('@babel/register')(getConfig());

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -108,6 +109,7 @@ export default function ButtonSection({ data }) {
 
       <h3>
         <Anchor id="buttons-props">Props</Anchor>
+        <LinkToSource component={data.metadata.displayName} />
       </h3>
 
       <PropTable metadata={data.metadata} />
@@ -118,6 +120,7 @@ export default function ButtonSection({ data }) {
 export const query = graphql`
   query ButtonQuery {
     metadata: componentMetadata(displayName: { eq: "Button" }) {
+      displayName
       ...PropTable_metadata
     }
   }

@@ -1,27 +1,27 @@
 class AlertDismissable extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
 
-    this.handleAlertShow = this.handleAlertShow.bind(this);
-    this.handleAlertDismiss = this.handleAlertDismiss.bind(this);
+    this.handleDismiss = this.handleDismiss.bind(this);
+    this.handleShow = this.handleShow.bind(this);
 
     this.state = {
-      alertVisible: true
+      show: true
     };
   }
 
-  handleAlertDismiss() {
-    this.setState({ alertVisible: false });
+  handleDismiss() {
+    this.setState({ show: false });
   }
 
-  handleAlertShow() {
-    this.setState({ alertVisible: true });
+  handleShow() {
+    this.setState({ show: true });
   }
 
   render() {
-    if (this.state.alertVisible) {
+    if (this.state.show) {
       return (
-        <Alert bsStyle="danger" onDismiss={this.handleAlertDismiss}>
+        <Alert bsStyle="danger" onDismiss={this.handleDismiss}>
           <h4>Oh snap! You got an error!</h4>
           <p>
             Change this and that and try again. Duis mollis, est non commodo
@@ -31,13 +31,13 @@ class AlertDismissable extends React.Component {
           <p>
             <Button bsStyle="danger">Take this action</Button>
             <span> or </span>
-            <Button onClick={this.handleAlertDismiss}>Hide Alert</Button>
+            <Button onClick={this.handleDismiss}>Hide Alert</Button>
           </p>
         </Alert>
       );
     }
 
-    return <Button onClick={this.handleAlertShow}>Show Alert</Button>;
+    return <Button onClick={this.handleShow}>Show Alert</Button>;
   }
 }
 
