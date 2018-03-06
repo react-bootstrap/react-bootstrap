@@ -3,7 +3,12 @@ function handleSelect(selectedKey) {
 }
 
 const navInstance = (
-  <Nav bsStyle="pills" stacked activeKey={1} onSelect={handleSelect}>
+  <Nav
+    activeKey={1}
+    bsStyle="pills"
+    className="flex-column"
+    onSelect={handleSelect}
+  >
     <NavItem eventKey={1} href="/home">
       NavItem 1 content
     </NavItem>

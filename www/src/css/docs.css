@@ -176,17 +176,17 @@
   font-weight: 500;
   color: #999;
 }
-.bs-docs-sidebar .nav > li > a:hover,
-.bs-docs-sidebar .nav > li > a:focus {
+.bs-docs-sidebar .nav-link:hover,
+.bs-docs-sidebar .nav-link:focus {
   padding-left: 19px;
   color: #563d7c;
   text-decoration: none;
   background-color: transparent;
   border-left: 1px solid #563d7c;
 }
-.bs-docs-sidebar .nav > .active > a,
-.bs-docs-sidebar .nav > .active > a:hover,
-.bs-docs-sidebar .nav > .active > a:focus  {
+.bs-docs-sidebar .nav-link.active,
+.bs-docs-sidebar .nav-link.active:hover,
+.bs-docs-sidebar .nav-link.active:focus  {
   padding-left: 18px;
   font-weight: bold;
   color: #563d7c;

@@ -1,18 +1,24 @@
 <Nav
-  bsStyle="pills"
-  activeKey="active"
+  activeKey="/home"
+  role="tablist"
   onSelect={selectedKey => alert(`selected ${selectedKey}`)}
 >
-  <Nav.Item eventKey="active" href="/home">
-    <Nav.Link>Active</Nav.Link>
+  <Nav.Item>
+    <Nav.Link href="/home">Active</Nav.Link>
   </Nav.Item>
-  <Nav.Item eventKey="link-1">
-    <Nav.Link href="#">Link</Nav.Link>
+  <Nav.Item>
+    <Nav.Link eventKey="link-1" href="#">
+      Link
+    </Nav.Link>
   </Nav.Item>
-  <Nav.Item eventKey="link-2">
-    <Nav.Link href="#">Link</Nav.Link>
+  <Nav.Item>
+    <Nav.Link eventKey="link-1" href="#">
+      Link
+    </Nav.Link>
   </Nav.Item>
-  <Nav.Item eventKey="disabled" disabled>
-    <Nav.Link>Disabled</Nav.Link>
+  <Nav.Item>
+    <Nav.Link eventKey="disabled" disabled>
+      Disabled
+    </Nav.Link>
   </Nav.Item>
 </Nav>;

@@ -74,12 +74,20 @@ const fadeStyles = {
   [ENTERED]: 'show'
 };
 
+function triggerBrowserReflow(node) {
+  node.offsetHeight; // eslint-disable-line no-unused-expressions
+}
+
 class Fade extends React.Component {
+  handleEnter = node => {
+    triggerBrowserReflow(node);
+    if (this.props.onEnter) this.props.onEnter(node);
+  };
   render() {
     const { className, children, ...props } = this.props;
 
     return (
-      <Transition {...props}>
+      <Transition {...props} onEnter={this.handleEnter}>
         {(status, innerProps) =>
           React.cloneElement(children, {
             ...innerProps,

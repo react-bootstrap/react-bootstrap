@@ -1,7 +1,9 @@
-import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import SafeAnchor from './SafeAnchor';
+import NavContext from './NavContext';
 import { bsClass, prefix, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
@@ -22,17 +24,6 @@ const propTypes = {
   href: PropTypes.string,
 
   /**
-   * A callback fired when the `NavLink` is clicked.
-   * This callback must be handled to trigger a  change in the
-   * parent `Nav` component's `active` state.
-   *
-   * ```
-   * (eventKey?: any) => void
-   * ```
-   */
-  onSelect: PropTypes.func,
-
-  /**
    * Uniquely idenifies the `NavItem` amoungst its siblings,
    * used to determine and control the active state ofthe parent `Nav`
    */
@@ -43,43 +34,71 @@ const propTypes = {
 };
 
 const defaultProps = {
-  active: false,
   disabled: false
 };
 
 class NavLink extends React.Component {
-  handleClick(e) {
-    const { onClick, onSelect } = this.props;
+  handleClick = e => {
+    const { onClick, eventKey, href } = this.props;
     if (onClick) onClick(e);
-    if (onSelect) onSelect(e);
-  }
+    if (this.navContext) this.navContext.onSelect(String(eventKey || href));
+  };
+
   render() {
-    const {
-      active,
-      disabled,
-      onClick,
-      className,
-      style,
-      onSelect,
-      ...props
-    } = this.props;
-
-    const [bsProps, elementProps] = splitBsProps(props);
-
-    delete elementProps.onSelect;
-    delete elementProps.eventKey;
-
-    if (elementProps.role === 'tab') {
-      elementProps['aria-selected'] = active;
-    }
-
     return (
-      <SafeAnchor
-        {...elementProps}
-        disabled={disabled}
-        className={prefix(bsProps)}
-        onClick={this.handleClick}
-      />
+      <NavContext.Consumer>
+        {navContext => {
+          const {
+            active,
+            disabled,
+            onClick,
+            className,
+            style,
+            eventKey,
+            href,
+            role: propsRole,
+            ...props
+          } = this.props;
+
+          delete props.onSelect;
+
+          const [bsProps, elementProps] = splitBsProps(props);
+          const navItemKey = String(eventKey || href);
+
+          const isActive =
+            active == null
+              ? String(navContext.activeKey) === navItemKey
+              : active;
+
+          let role = propsRole;
+          if (navContext.role === 'tablist') {
+            role = 'tab';
+            elementProps['data-rb-event-key'] = navItemKey;
+            elementProps['aria-selected'] = isActive;
+            elementProps.tabIndex = isActive ? elementProps.tabIndex : -1;
+          }
+
+          this.navContext = navContext;
+
+          return (
+            <SafeAnchor
+              id={navContext.getControllerId(navItemKey)}
+              aria-controls={navContext.getControlledId(navItemKey)}
+              {...elementProps}
+              role={role}
+              href={href}
+              disabled={disabled}
+              onClick={this.handleClick}
+              className={classNames(
+                className,
+                prefix(bsProps),
+                isActive && 'active',
+                disabled && 'disabled'
+              )}
+            />
+          );
+        }}
+      </NavContext.Consumer>
     );
   }
 }
