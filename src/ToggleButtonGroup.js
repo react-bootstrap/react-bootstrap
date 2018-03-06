@@ -49,34 +49,28 @@ class ToggleButtonGroup extends React.Component {
     return value == null ? [] : [].concat(value);
   }
 
-  handleToggle(value) {
+  handleToggle(value, event) {
     const { type, onChange } = this.props;
     const values = this.getValues();
     const isActive = values.indexOf(value) !== -1;
 
     if (type === 'radio') {
-      if (!isActive) {
-        onChange(value);
-      }
+      if (!isActive) onChange(value, event);
       return;
     }
 
     if (isActive) {
-      onChange(values.filter(n => n !== value));
+      onChange(values.filter(n => n !== value), event);
     } else {
-      onChange([...values, value]);
+      onChange([...values, value], event);
     }
   }
 
   render() {
-    const {
-      onChange: x,
-      value: y, // eslint-disable-line no-unused-vars
-      children,
-      type,
-      name,
-      ...props
-    } = this.props;
+    const { children, type, name, ...props } = this.props;
+
+    delete props.onChange;
+    delete props.value;
 
     const values = this.getValues();
 
@@ -86,12 +80,11 @@ class ToggleButtonGroup extends React.Component {
         'is set to "radio"'
     );
 
-    // the data attribute is required b/c twbs css uses it in the selector
     return (
-      <ButtonGroup {...props} toggle data-toggle="buttons">
+      <ButtonGroup {...props} toggle>
         {ValidChildren.map(children, child => {
           const { value, onChange } = child.props;
-          const handler = () => this.handleToggle(value);
+          const handler = e => this.handleToggle(value, e);
 
           return React.cloneElement(child, {
             type,

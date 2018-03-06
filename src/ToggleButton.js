@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -5,8 +6,7 @@ import Button from './Button';
 
 const propTypes = {
   /**
-   * The `<input>` `type`
-   * @type {[type]}
+   * The `<input>` element `type`
    */
   type: PropTypes.oneOf(['checkbox', 'radio']),
 
@@ -37,27 +37,45 @@ const propTypes = {
 };
 
 class ToggleButton extends React.Component {
+  state = { focused: false };
+
+  handleFocus = e => {
+    if (e.target.tagName === 'INPUT') this.setState({ focused: true });
+  };
+  handleBlur = e => {
+    if (e.target.tagName === 'INPUT') this.setState({ focused: false });
+  };
   render() {
     const {
       children,
       name,
+      className,
       checked,
       type,
       onChange,
       value,
       ...props
     } = this.props;
+    const { focused } = this.state;
     const disabled = props.disabled;
 
     return (
-      <Button {...props} type={null} active={!!checked} componentClass="label">
+      <Button
+        {...props}
+        className={classNames(className, focused && 'focus')}
+        type={null}
+        active={!!checked}
+        componentClass="label"
+      >
         <input
           name={name}
           type={type}
-          autoComplete="off"
           value={value}
+          autoComplete="off"
           checked={!!checked}
           disabled={!!disabled}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
           onChange={onChange}
         />
 
