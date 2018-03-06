@@ -22,7 +22,7 @@ module.exports = {
     ['@babel/plugin-proposal-class-properties', { loose: true }],
     '@babel/plugin-proposal-export-default-from',
     '@babel/plugin-proposal-export-namespace-from',
-    ['@babel/plugin-transform-runtime', { useESModules: !commonjs },
+    ['@babel/plugin-transform-runtime', { useESModules: !commonjs }],
     'babel-plugin-dev-expression',
     commonjs && 'babel-plugin-add-module-exports',
     process.env.NODE_ENV === 'test' && 'babel-plugin-istanbul'
