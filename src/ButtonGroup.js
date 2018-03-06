@@ -1,16 +1,18 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import all from 'prop-types-extra/lib/all';
+import elementType from 'prop-types-extra/lib/elementType';
 
 import * as StyleContext from './StyleContext';
 
 const propTypes = {
+  /** Make the set of Buttons appear vertically stacked. */
   vertical: PropTypes.bool,
-  justified: PropTypes.bool,
+
   /**
-   * Display as a button toggle group
-   * @type {bool}
+   * Display as a button toggle group.
+   *
+   * (Generally it's better to use `ToggleButtonGroup` directly)
    */
   toggle: PropTypes.bool,
 
@@ -21,47 +23,43 @@ const propTypes = {
    */
   role: PropTypes.string,
 
-  /**
-   * Display block buttons; only useful when used with the "vertical" prop.
-   * @type {bool}
-   */
-  block: all(
-    PropTypes.bool,
-    ({ block, vertical }) =>
-      block && !vertical
-        ? new Error('`block` requires `vertical` to be set to have any effect')
-        : null
-  )
+  componentClass: elementType
 };
 
 const defaultProps = {
   block: false,
-  justified: false,
   vertical: false,
   toggle: false,
-  role: 'group'
+  role: 'group',
+  componentClass: 'div'
 };
 
 class ButtonGroup extends React.Component {
   render() {
+    const {
+      bsClass,
+      bsSize,
+      toggle,
+      vertical,
+      className,
+      componentClass: Component,
+      ...props
+    } = this.props;
+
+    delete props.bsRole;
+    let baseClass = bsClass;
+    if (vertical) baseClass = `${bsClass}-vertical`;
+
     return (
-      <StyleContext.Consumer componentType="ButtonGroup" props={this.props}>
-        {({
-          bsClass,
-          bsSize,
-          props: { toggle, vertical, className, ...props }
-        }) => (
-          <div
-            {...props}
-            className={classNames(
-              className,
-              !vertical && bsClass,
-              vertical && `${bsClass}-vertical`,
-              bsSize && `${bsClass}-${bsSize}`
-            )}
-          />
+      <Component
+        {...props}
+        className={classNames(
+          className,
+          baseClass,
+          toggle && `${bsClass}-toggle`,
+          bsSize && `${bsClass}-${bsSize}`
         )}
-      </StyleContext.Consumer>
+      />
     );
   }
 }
@@ -69,4 +67,7 @@ class ButtonGroup extends React.Component {
 ButtonGroup.propTypes = propTypes;
 ButtonGroup.defaultProps = defaultProps;
 
-export default ButtonGroup;
+export default StyleContext.createBoostrapComponent(
+  { prefix: 'btn-group' },
+  ButtonGroup
+);

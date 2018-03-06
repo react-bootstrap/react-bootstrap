@@ -33,6 +33,9 @@ class Button extends React.Component {
      */
     bsSize: PropTypes.string,
 
+    /** Spans the full width of the Button parent */
+    block: PropTypes.bool,
+
     /** Manually set the visual state of the button to `:active` */
     active: PropTypes.bool,
 
@@ -56,46 +59,49 @@ class Button extends React.Component {
   };
 
   static defaultProps = {
-    bsStyle: 'primary',
+    bsStyle: 'secondary',
     active: false,
     disabled: false,
     type: 'button'
   };
 
   render() {
-    return (
-      <StyleContext.Consumer componentType="Button" props={this.props}>
-        {({
-          bsStyle,
-          bsClass,
-          bsSize,
-          props: { active, block, className, componentClass, ...props }
-        }) => {
-          const classes = classNames(
-            className,
-            bsClass,
-            `${bsClass}-${bsStyle}`,
-            bsSize && `${bsClass}-${bsSize}`,
-            block && `${bsClass}-block`,
-            active && 'active'
-          );
+    const {
+      bsStyle,
+      bsClass,
+      bsSize,
+      active,
+      className,
+      block,
+      type,
+      componentClass,
+      ...props
+    } = this.props;
 
-          if (props.href) {
-            return (
-              <SafeAnchor
-                {...props}
-                componentClass={componentClass}
-                className={classNames(classes, props.disabled && 'disabled')}
-              />
-            );
-          }
+    delete props.bsRole;
 
-          const Component = componentClass || 'button';
-          return <Component {...props} type={props.type} className={classes} />;
-        }}
-      </StyleContext.Consumer>
+    const classes = classNames(
+      className,
+      bsClass,
+      active && 'active',
+      `${bsClass}-${bsStyle}`,
+      block && `${bsClass}-block`,
+      bsSize && `${bsClass}-${bsSize}`
     );
+
+    if (props.href) {
+      return (
+        <SafeAnchor
+          {...props}
+          componentClass={componentClass}
+          className={classNames(classes, props.disabled && 'disabled')}
+        />
+      );
+    }
+
+    const Component = componentClass || 'button';
+    return <Component {...props} type={type} className={classes} />;
   }
 }
 
-export default Button;
+export default StyleContext.createBoostrapComponent({ prefix: 'btn' }, Button);

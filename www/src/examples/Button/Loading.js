@@ -1,3 +1,7 @@
+function simulateNetworkRequest() {
+  return new Promise(resolve => setTimeout(resolve, 2000));
+}
+
 class LoadingButton extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -10,13 +14,11 @@ class LoadingButton extends React.Component {
   }
 
   handleClick() {
-    this.setState({ isLoading: true });
-
-    // This probably where you would have an `ajax` call
-    setTimeout(() => {
-      // Completed of async action, set loading state back
-      this.setState({ isLoading: false });
-    }, 2000);
+    this.setState({ isLoading: true }, () => {
+      simulateNetworkRequest().then(() => {
+        this.setState({ isLoading: false });
+      });
+    });
   }
 
   render() {
@@ -28,7 +30,7 @@ class LoadingButton extends React.Component {
         disabled={isLoading}
         onClick={!isLoading ? this.handleClick : null}
       >
-        {isLoading ? 'Loading...' : 'Loading state'}
+        {isLoading ? 'Loading…' : 'Click to load'}
       </Button>
     );
   }

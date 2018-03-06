@@ -9,8 +9,8 @@ class ToggleButtonGroupControlled extends React.Component {
     };
   }
 
-  handleChange(e) {
-    this.setState({ value: e });
+  handleChange(value, event) {
+    this.setState({ value });
   }
 
   render() {
