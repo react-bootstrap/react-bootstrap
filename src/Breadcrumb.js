@@ -7,8 +7,8 @@ import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
-   * ARIA label for the nav, if no label is provided
-   * it will default to "breadcrumbs".
+   * ARIA label for the nav element
+   * https://www.w3.org/TR/wai-aria-practices/#breadcrumb
    */
   label: PropTypes.string
 };

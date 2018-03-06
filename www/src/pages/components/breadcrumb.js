@@ -33,7 +33,7 @@ export default function BreadcrumbSection({ data }) {
 
       <h3>
         <Anchor id="breadcrumbs-props">Props</Anchor>
-        <LinkToSource component={data.metadata.displayName} />
+        <LinkToSource component={data.Breadcrumb.displayName} />
       </h3>
       <PropTable metadata={data.Breadcrumb} />
 
