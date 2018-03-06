@@ -13,7 +13,7 @@
     "gatsby-link": "^1.6.30",
     "gatsby-plugin-catch-links": "2.0.1-1",
     "gatsby-plugin-less": "2.0.0-alpha.3",
-    "gatsby-remark-prismjs": "1.2.17",
+    "gatsby-remark-prismjs": "^1.2.17",
     "gatsby-source-filesystem": "2.0.0-alpha.3",
     "gatsby-transformer-react-docgen": "2.0.1-1",
     "gatsby-transformer-remark": "2.0.1-1",
