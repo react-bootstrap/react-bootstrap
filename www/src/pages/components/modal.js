@@ -56,15 +56,15 @@ export default function ModalSection({ data }) {
         your container has the <code>modal-container</code> class.
       </p>
       <pre>
-        {React.DOM.code(
-          null,
-          '.modal-container {\n' +
-            '  position: relative;\n' +
-            '}\n' +
-            '.modal-container .modal, .modal-container .modal-backdrop {\n' +
-            '  position: absolute;\n' +
-            '}\n'
-        )}
+        <code>
+          {`
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}`.trim()}
+        </code>
       </pre>
       <ReactPlayground codeText={ModalContained} />
 

@@ -11,9 +11,10 @@
   "jsnext:main": "es/index.js",
   "module": "es/index.js",
   "scripts": {
-    "bootstrap-docs": "npm run build lib && cd www && yarn install && cd ..",
+    "bootstrap": "yarn && yarn --cwd www",
     "build": "node tools/build.js",
-    "build-docs": "npm run bootstrap-docs && npm -C www run build",
+    "build-docs": "yarn --cwd www run build",
+    "start": "yarn --cwd www run develop",
     "ci-lint": "eslint --rule 'prettier/prettier: 2'",
     "format": "npm run ci-lint . -- --fix",
     "lint": "npm run ci-lint .",
@@ -28,7 +29,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "format",
+      "npm run ci-lint -- --fix",
       "git add"
     ]
   },
@@ -54,10 +55,6 @@
     "react-dom": "^0.14.9 || >=15.3.0"
   },
   "devDependencies": {
-    "@storybook/react": "^3.2.3",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "karma": "^2.0.0",
-    "karma-chrome-launcher": "^2.2.0",
     "@babel/cli": "^7.0.0-beta.40",
     "@babel/core": "^7.0.0-beta.40",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.38",
@@ -68,6 +65,8 @@
     "@babel/preset-env": "^7.0.0-beta.38",
     "@babel/preset-react": "^7.0.0-beta.38",
     "@babel/register": "^7.0.0-beta.40",
+    "@monastic.panic/enzyme-adapter-react-16": "^1.2.1",
+    "@storybook/react": "^3.3.14",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.0.0",
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -79,7 +78,6 @@
     "create-react-class": "^15.6.3",
     "cross-env": "^2.0.0",
     "enzyme": "^3.1.0",
-    "enzyme-adapter-react-15": "^1.0.1",
     "eslint": "^4.18.2",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -89,6 +87,8 @@
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
     "fs-extra": "^5.0.0",
+    "karma": "^2.0.0",
+    "karma-chrome-launcher": "^2.2.0",
     "karma-cli": "^1.0.1",
     "karma-coverage": "^1.1.0",
     "karma-firefox-launcher": "^1.0.0",
@@ -98,20 +98,18 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^2.0.13",
     "lint-staged": "^6.0.0",
-
-    "react": "^16.3.0-0",
-    "react-dom": "^16.3.0-0",
     "lodash": "^4.17.5",
     "mocha": "^2.5.3",
     "prettier": "^1.11.1",
-
-    "react-test-renderer": "^15.6.2",
+    "react": "^16.3.0-0",
+    "react-dom": "^16.3.0-0",
+    "react-test-renderer": "^16.3.0-0",
     "release-script": "^1.0.2",
     "sinon": "^2.3.2",
     "sinon-chai": "^2.8.0",
-    "webpack-dev-server": "^2.0.0",
     "webpack": "^3.6.0",
-    "webpack-atoms": "^5.1.1"
+    "webpack-atoms": "^5.1.1",
+    "webpack-dev-server": "^2.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0-beta.40",

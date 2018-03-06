@@ -20,7 +20,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 install:
-  - yarn && yarn run bootstrap-docs
+  - yarn run bootstrap
 
 after_success:
   - node_modules/.bin/codecov
@@ -29,3 +29,4 @@ branches:
   only:
     - master
     - next
+    - v4-support
