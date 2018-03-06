@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 import warning from 'warning';
 
-import InvalidFeedback from './InvalidFeedback';
+import Feedback from './Feedback';
 import {
   bsClass,
   getClassSet,
@@ -107,7 +107,7 @@ FormControl.propTypes = propTypes;
 FormControl.defaultProps = defaultProps;
 FormControl.contextTypes = contextTypes;
 
-FormControl.Feedback = InvalidFeedback;
+FormControl.Feedback = Feedback;
 
 export default bsClass(
   'form-control',

@@ -7,19 +7,18 @@ import { bsClass, getClassSet, splitBsProps } from './bootstrapUtils';
 const pascalCase = str => str[0].toUpperCase() + camelize(str).slice(1);
 
 export default function createWithBsClass(
-  variantName,
-  displayName = pascalCase(variantName)
+  variant,
+  { Component = 'div', displayName = pascalCase(variant) } = {}
 ) {
   return bsClass(
-    variantName,
+    variant,
     class extends React.Component {
       static displayName = displayName;
       render() {
         const { className, ...props } = this.props;
         const [bsProps, elementProps] = splitBsProps(props);
-
         return (
-          <div
+          <Component
             {...elementProps}
             className={classNames(className, getClassSet(bsProps))}
           />

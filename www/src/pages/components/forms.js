@@ -1,18 +1,16 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
-import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
 import FormBasic from '../../examples/Form/Basic';
-import FormControls from '../../examples/Form/Controls';
-import FormInline from '../../examples/Form/Inline';
-import FormHorizontal from '../../examples/Form/Horizontal';
+import FormTextControls from '../../examples/Form/TextControls';
 import FormInputSizes from '../../examples/Form/InputSizes';
 import FormValidation from '../../examples/Form/Validation';
 
 export default function FormControlsSection({ data }) {
+  console.log(data);
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -45,8 +43,22 @@ export default function FormControlsSection({ data }) {
         field groups is too specific to an individual application to admit a
         good one-size-fits-all solution.
       </p>Í
+      <h2 className="page-header">
+        <Anchor id="forms-controls">Form controls</Anchor>
+      </h2>
+      <p>
+        Examples of standard form controls supported in an example form layout,
+        using a custom <code>{'<FieldGroup>'}</code> component. Use{' '}
+        <code>{'<FormControl>'}</code> for <code>{'<input>'}</code>,{' '}
+        <code>{'<textarea>'}</code>, and <code>{'<select>'}</code>. Use{' '}
+        <code>{'<FormCheck>'}</code> and <code>{'<Radio>'}</code> for checkboxes
+        and radios respectively, optionally with <code>inline</code> to render
+        multiple on the same line. Use <code>{'<FormControl.Static>'}</code> for
+        static text.
+      </p>
+      <ReactPlayground codeText={FormTextControls} />
       <h3>
-        <Anchor id="forms-props">Props</Anchor>
+        <Anchor id="forms-controls-props">Props</Anchor>
       </h3>
       <h4>
         <Anchor id="forms-props-form-group">FormGroup</Anchor>
@@ -60,66 +72,16 @@ export default function FormControlsSection({ data }) {
         <Anchor id="forms-props-control-label">FormLabel</Anchor>
       </h4>
       <PropTable metadata={data.FormLabel} />
-      <h2 className="page-header">
-        <Anchor id="forms-controls">Supported controls</Anchor>{' '}
-        <small>Checkbox, Radio, FormControl.Static, HelpBlock</small>
-      </h2>
-      <p>
-        Examples of standard form controls supported in an example form layout,
-        using a custom <code>{'<FieldGroup>'}</code> component. Use{' '}
-        <code>{'<FormControl>'}</code> for <code>{'<input>'}</code>,{' '}
-        <code>{'<textarea>'}</code>, and <code>{'<select>'}</code>. Use{' '}
-        <code>{'<Checkbox>'}</code> and <code>{'<Radio>'}</code> for checkboxes
-        and radios respectively, optionally with <code>inline</code> to render
-        multiple on the same line. Use <code>{'<FormControl.Static>'}</code> for
-        static text.
-      </p>
-      <ReactPlayground codeText={FormControls} />
-      <h3>
-        <Anchor id="forms-controls-props">Props</Anchor>
-      </h3>
       <h4>
-        <Anchor id="forms-props-checkbox">Checkbox</Anchor>
+        <Anchor id="forms-props-checkbox">FormCheck</Anchor>
       </h4>
-      <PropTable metadata={data.Checkbox} />
-      <h4>
-        <Anchor id="forms-props-radio">Radio</Anchor>
-      </h4>
-      <PropTable metadata={data.Radio} />
+      <PropTable metadata={data.FormCheck} />
       <h2 className="page-header">
         <Anchor id="forms-layout">Form layout</Anchor> <small>Form</small>
       </h2>
       <h3>
-        <Anchor id="forms-inline">Inline forms</Anchor>
-      </h3>
-      <p>
-        Use <code>{'<Form inline>'}</code> instead of <code>{'<form>'}</code>.
-        JSX strips whitespace between lines, so you will need to manually add
-        spaces. Additionally, Bootstrap assigns inline form controls{' '}
-        <code>width: auto</code> by default, so you may need to set custom
-        widths.
-      </p>
-      <ReactPlayground codeText={FormInline} />
-      <h3>
-        <Anchor id="forms-horizontal">Horizontal forms</Anchor>
-      </h3>
-      <p>
-        Use <code>{'<Form horizontal>'}</code> instead of{' '}
-        <code>{'<form>'}</code>, then use <code>{'<Col>'}</code>s to align
-        labels and controls. Do not use <code>{'<Row>'}</code> here, as{' '}
-        <code>{'<FormGroup>'}</code> will already serve as a grid row in a
-        horizontal form.
-      </p>
-      <ReactPlayground codeText={FormHorizontal} />
-      <h3>
         <Anchor id="forms-layout-props">Props</Anchor>
       </h3>
-      <h4>
-        <Anchor id="forms-props-form">Form</Anchor>
-        <LinkToSource component={data.Form.displayName} />
-        <small>(only needed for horizontal or inline forms)</small>
-      </h4>
-      <PropTable metadata={data.Form} />
       <h3>
         <Anchor id="forms-input-sizes">Input sizes</Anchor>
       </h3>
@@ -129,9 +91,6 @@ export default function FormControlsSection({ data }) {
         works with add-ons and most other options.
       </p>
       <ReactPlayground codeText={FormInputSizes} />
-      <h3>
-        <Anchor id="forms-input-groups-props">Props</Anchor>
-      </h3>
       <h2 className="page-header">
         <Anchor id="forms-validation">Validation states</Anchor>
         <small>FormControl.Feedback</small>
@@ -153,7 +112,7 @@ export default function FormControlsSection({ data }) {
           FormControl.Feedback
         </Anchor>
       </h4>
-      <PropTable metadata={data.FormControlFeedback} />
+      <PropTable metadata={data.Feedback} />
     </div>
   );
 }
@@ -176,24 +135,10 @@ export const query = graphql`
       displayName
       ...PropTable_metadata
     }
-    Checkbox: componentMetadata(displayName: { eq: "Checkbox" }) {
-      displayName
+    FormCheck: componentMetadata(displayName: { eq: "FormCheck" }) {
       ...PropTable_metadata
     }
-    Radio: componentMetadata(displayName: { eq: "Radio" }) {
-      displayName
-      ...PropTable_metadata
-    }
-    InputGroupButton: componentMetadata(
-      displayName: { eq: "InputGroupButton" }
-    ) {
-      displayName
-      ...PropTable_metadata
-    }
-    FormControlFeedback: componentMetadata(
-      displayName: { eq: "FormControlFeedback" }
-    ) {
-      displayName
+    Feedback: componentMetadata(displayName: { eq: "Feedback" }) {
       ...PropTable_metadata
     }
   }

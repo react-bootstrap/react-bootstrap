@@ -11,7 +11,7 @@ class FormText extends React.Component {
     const classes = getClassSet(bsProps);
 
     return (
-      <span {...elementProps} className={classNames(className, classes)} />
+      <small {...elementProps} className={classNames(className, classes)} />
     );
   }
 }
