@@ -8,7 +8,7 @@ const pascalCase = str => str[0].toUpperCase() + camelize(str).slice(1);
 
 export default function createWithBsClass(
   variantName,
-  displayName = pascalCase(variantName)
+  { displayName = pascalCase(variantName) } = {}
 ) {
   return bsClass(
     variantName,

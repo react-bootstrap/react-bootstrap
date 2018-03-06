@@ -1,85 +1,80 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import elementType from 'prop-types-extra/lib/elementType';
 
-import SafeAnchor from './SafeAnchor';
-import createChainedFunction from './utils/createChainedFunction';
-
-const propTypes = {
-  active: PropTypes.bool,
-  disabled: PropTypes.bool,
-  role: PropTypes.string,
-  href: PropTypes.string,
-  onClick: PropTypes.func,
-  onSelect: PropTypes.func,
-  eventKey: PropTypes.any
-};
-
-const defaultProps = {
-  active: false,
-  disabled: false
-};
+import { bsClass, prefix, splitBsProps } from './utils/bootstrapUtils';
 
 class NavItem extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  static propTypes = {
+    /**
+     * The active state of the NavItem item. **The is _passed through_ to
+     * the `NavItem`'s child, assuming it's a `NavLink`.**
+     */
+    active: PropTypes.bool,
+    /**
+     * The disabled state of the NavItem item. **The is _passed through_ to
+     * the `NavItem`'s child, assuming it's a `NavLink`**
+     */
+    disabled: PropTypes.bool,
 
-    this.handleClick = this.handleClick.bind(this);
-  }
+    /** The ARIA role of the component */
+    role: PropTypes.string,
 
-  handleClick(e) {
-    if (this.props.disabled) {
-      e.preventDefault();
-      return;
-    }
+    /**
+     * A callback fired when the NavItem is selected. **The is _passed through_ to
+     * the `NavItem`'s child, assuming it's a `NavLink`**
+     *
+     * ```
+     * (eventKey?: any) => void
+     * ```
+     */
+    onSelect: PropTypes.func,
 
-    if (this.props.onSelect) {
-      this.props.onSelect(this.props.eventKey, e);
-    }
-  }
+    /**
+     * Uniquely idenifies the `NavItem` amoungst its siblings,
+     * used to determine and control the active state ofthe parent `Nav`
+     */
+    eventKey: PropTypes.any,
+
+    componentClass: elementType
+  };
+
+  static defaultProps = {
+    active: false,
+    disabled: false,
+    role: 'presentaton',
+    componentClass: 'li'
+  };
 
   render() {
     const {
       active,
       disabled,
-      onClick,
       className,
-      style,
+      children,
+      onSelect,
+      componentClass: Component,
       ...props
     } = this.props;
 
-    delete props.onSelect;
-    delete props.eventKey;
+    const [bsProps, elementProps] = splitBsProps(props);
 
-    // These are injected down by `<Nav>` for building `<SubNav>`s.
-    delete props.activeKey;
-    delete props.activeHref;
-
-    if (!props.role) {
-      if (props.href === '#') {
-        props.role = 'button';
-      }
-    } else if (props.role === 'tab') {
-      props['aria-selected'] = active;
-    }
-
+    delete elementProps.eventKey;
+    console.log(Component);
     return (
-      <li
-        role="presentation"
-        className={classNames(className, { active, disabled })}
-        style={style}
+      <Component
+        {...elementProps}
+        className={classNames(className, prefix(bsProps, 'item'))}
       >
-        <SafeAnchor
-          {...props}
-          disabled={disabled}
-          onClick={createChainedFunction(onClick, this.handleClick)}
-        />
-      </li>
+        {/* {React.cloneElement(children, {
+          active,
+          disabled,
+          onSelect
+        })} */}
+      </Component>
     );
   }
 }
 
-NavItem.propTypes = propTypes;
-NavItem.defaultProps = defaultProps;
-
-export default NavItem;
+export default bsClass('nav', NavItem);

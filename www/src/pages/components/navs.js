@@ -4,23 +4,29 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
+import Callout from '../../components/Callout';
 
-import NavBasic from '../../examples/NavBasic';
-import NavDropdown from '../../examples/NavDropdown';
-import NavStacked from '../../examples/NavStacked';
-import NavJustified from '../../examples/NavJustified';
+import NavBasic from '../../examples/Nav/Basic';
+import NavDropdown from '../../examples/Nav/Dropdown';
+import NavStacked from '../../examples/Nav/Stacked';
+import NavJustified from '../../examples/Nav/Justified';
 
 export default function NavSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
-        <Anchor id="navs">Navs</Anchor> <small>Nav, NavItem</small>
+        <Anchor id="navs">Base Nav</Anchor>{' '}
+        <small>Nav, Nav.Item, Nav.Link</small>
       </h2>
 
       <p>
         Navs come in two styles, <code>pills</code> and <code>tabs</code>.
         Disable a tab by adding <code>disabled</code>.
       </p>
+      <Callout theme="info">
+        The base <code>.nav</code> component does not include any{' '}
+        <code>.active</code> styling!
+      </Callout>
       <ReactPlayground codeText={NavBasic} />
 
       <h3>

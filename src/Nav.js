@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import all from 'prop-types-extra/lib/all';
 import warning from 'warning';
+import uncontrollable from 'uncontrollable';
 
 import {
   bsClass,
@@ -13,10 +14,11 @@ import {
   prefix,
   splitBsProps
 } from './utils/bootstrapUtils';
+import mapContextToProps from './utils/mapContextToProps';
 import createChainedFunction from './utils/createChainedFunction';
-import ValidComponentChildren from './utils/ValidComponentChildren';
-
-// TODO: Should we expose `<NavItem>` as `<Nav.Item>`?
+import * as ValidChildren from './utils/ValidComponentChildren';
+import NavItem from './NavItem';
+import NavLink from './NavLink';
 
 // TODO: This `bsStyle` is very unlike the others. Should we rename it?
 
@@ -38,7 +40,7 @@ const propTypes = {
   /**
    * NavItems are be positioned vertically.
    */
-  stacked: PropTypes.bool,
+  fill: PropTypes.bool,
 
   justified: all(
     PropTypes.bool,
@@ -93,7 +95,7 @@ const defaultProps = {
   justified: false,
   pullRight: false,
   pullLeft: false,
-  stacked: false
+  fill: false
 };
 
 const contextTypes = {
@@ -111,31 +113,36 @@ const contextTypes = {
 };
 
 class Nav extends React.Component {
+  static getDerivedStateFromProps({ activeKey }, prevState) {
+    let activeIndex = -1;
+    ValidChildren.forEach((child, idx) => {
+      const { eventKey } = child.props;
+      if (eventKey === activeKey) activeIndex = idx;
+    });
+
+    return { ...prevState, activeKey, activeIndex };
+  }
+
+  constructor(...args) {
+    super(...args);
+
+    this.state = {
+      activeIndex: -1,
+      onSelect: this.handleSelect
+    };
+  }
+
   componentDidUpdate() {
-    if (!this._needsRefocus) {
-      return;
-    }
+    if (!this._needsRefocus) return;
 
-    this._needsRefocus = false;
-
-    const { children } = this.props;
-    const { activeKey, activeHref } = this.getActiveProps();
-
-    const activeChild = ValidComponentChildren.find(children, child =>
-      this.isActive(child, activeKey, activeHref)
-    );
-
-    const childrenArray = ValidComponentChildren.toArray(children);
-    const activeChildIndex = childrenArray.indexOf(activeChild);
+    const { activeIndex } = this.state;
 
     const childNodes = ReactDOM.findDOMNode(this).children;
-    const activeNode = childNodes && childNodes[activeChildIndex];
+    const activeNode = childNodes && childNodes[activeIndex];
+    const linkNode = activeNode && activeNode.querySelector('.nav-link');
 
-    if (!activeNode || !activeNode.firstChild) {
-      return;
-    }
-
-    activeNode.firstChild.focus();
+    if (!linkNode) return;
+    linkNode.focus();
   }
 
   getActiveProps() {
@@ -162,7 +169,7 @@ class Nav extends React.Component {
     );
     const { activeKey, activeHref } = this.getActiveProps();
 
-    const activeChild = ValidComponentChildren.find(children, child =>
+    const activeChild = ValidChildren.find(children, child =>
       this.isActive(child, activeKey, activeHref)
     );
 
@@ -232,6 +239,9 @@ class Nav extends React.Component {
     };
   }
 
+  handleSelect(eventKey) {
+    this.props.onSelect(eventKey);
+  }
   handleTabKeyDown(onSelect, event) {
     let nextActiveChild;
 
@@ -272,7 +282,7 @@ class Nav extends React.Component {
 
   render() {
     const {
-      stacked,
+      fill,
       justified,
       onSelect,
       role: propsRole,
@@ -295,7 +305,7 @@ class Nav extends React.Component {
 
     const classes = {
       ...getClassSet(bsProps),
-      [prefix(bsProps, 'stacked')]: stacked,
+      [prefix(bsProps, 'fill')]: fill,
       [prefix(bsProps, 'justified')]: justified
     };
 
@@ -324,7 +334,7 @@ class Nav extends React.Component {
         role={role}
         className={classNames(className, classes)}
       >
-        {ValidComponentChildren.map(children, child => {
+        {ValidChildren.map(children, child => {
           const active = this.isActive(child, activeKey, activeHref);
           const childOnSelect = createChainedFunction(
             child.props.onSelect,
@@ -342,8 +352,6 @@ class Nav extends React.Component {
               childOnSelect
             ),
             active,
-            activeKey,
-            activeHref,
             onSelect: childOnSelect
           });
         })}
@@ -356,4 +364,26 @@ Nav.propTypes = propTypes;
 Nav.defaultProps = defaultProps;
 Nav.contextTypes = contextTypes;
 
-export default bsClass('nav', bsStyles(['tabs', 'pills'], Nav));
+Nav.Item = NavItem;
+Nav.Link = NavLink;
+
+const DecoratedNav = bsClass('nav', bsStyles(['tabs', 'pills'], Nav));
+
+// function warnAboutTabContext(props) {
+//   warning(
+//     props.activeKey == null,
+//     'Specifying a `<Nav>` `activeKey` in the context of ' +
+//       'a `<TabContainer>` is not supported. Instead use `<TabContainer ' +
+//       `activeKey={${props.activeKey}} />\`.`
+//   );
+// }
+
+// const mapped = mapContextToProps(
+//   DecoratedNav,
+//   null /* TabConsumer */,
+//   mapFromTriggerContext
+// );
+
+export default uncontrollable(DecoratedNav, {
+  activeKey: 'onSelect'
+});
