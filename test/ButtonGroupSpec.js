@@ -1,53 +1,40 @@
+import { mount } from 'enzyme';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactTestUtils from 'react-dom/test-utils';
-
 import ButtonGroup from '../src/ButtonGroup';
 import Button from '../src/Button';
 
 describe('ButtonGroup', () => {
   it('Should output a button group', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    mount(
       <ButtonGroup>
         <Button>Title</Button>
       </ButtonGroup>
-    );
-    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
-    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-group\b/));
+    ).assertSingle('div.btn-group');
   });
 
   it('Should add size', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <ButtonGroup bsSize="large">
+    mount(
+      <ButtonGroup size="lg">
         <Button>Title</Button>
       </ButtonGroup>
-    );
-    assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\bbtn-group-lg\b/)
-    );
+    ).assertSingle('.btn-group-lg');
   });
 
   it('Should add vertical variation', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    mount(
       <ButtonGroup vertical>
         <Button>Title</Button>
       </ButtonGroup>
-    );
-    assert.equal(
-      ReactDOM.findDOMNode(instance).className.trim(),
-      'btn-group-vertical'
-    );
+    )
+      .tap(b => b.assertSingle('.btn-group-vertical'))
+      .assertNone('.btn-group');
   });
 
   it('Should add toggle variation', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    mount(
       <ButtonGroup toggle>
         <Button>Title</Button>
       </ButtonGroup>
-    );
-    assert.equal(
-      ReactDOM.findDOMNode(instance).className.trim(),
-      'btn-group btn-group-toggle'
-    );
+    ).assertSingle('.btn-group.btn-group-toggle');
   });
 });

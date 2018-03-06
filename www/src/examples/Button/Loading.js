@@ -26,7 +26,7 @@ class LoadingButton extends React.Component {
 
     return (
       <Button
-        bsStyle="primary"
+        variant="primary"
         disabled={isLoading}
         onClick={!isLoading ? this.handleClick : null}
       >

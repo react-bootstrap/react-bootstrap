@@ -1,18 +1,18 @@
 <div>
   <ButtonToolbar>
-    <Button bsSize="lg" bsStyle="primary">
+    <Button variant="primary" size="lg">
       Large button
     </Button>
-    <Button bsStyle="secondary" bsSize="lg">
+    <Button variant="secondary" size="lg">
       Large button
     </Button>
   </ButtonToolbar>
 
   <ButtonToolbar>
-    <Button bsStyle="primary" bsSize="sm">
+    <Button variant="primary" size="sm">
       Small button
     </Button>
-    <Button bsStyle="secondary" bsSize="sm">
+    <Button variant="secondary" size="sm">
       Small button
     </Button>
   </ButtonToolbar>

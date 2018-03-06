@@ -28,36 +28,36 @@ export default function ButtonSection({ data }) {
       </h3>
       <p>
         Use any of the available button style types to quickly create a styled
-        button. Just modify the <code>bsStyle</code> prop.
+        button. Just modify the <code>variant</code> prop.
       </p>
       <ReactPlayground codeText={ButtonTypes} />
       <h3>
         <Anchor id="buttons-outline-btns">Outline buttons</Anchor>
       </h3>
       <p>
-        For a lighter touch, Buttons also come in `outline` variants, with no
-        background color.
+        For a lighter touch, Buttons also come in <code>outline-*</code>{' '}
+        variants with no background color.
       </p>
       <ReactPlayground codeText={ButtonOutlineTypes} />
       <h3>
         <Anchor id="buttons-tags">Button tags</Anchor>
       </h3>
       <p>
-        Generally <code>{'<Button>'}</code>s will render a HTML{' '}
-        <code>{'<button>'}</code> tag. However you can render whatever you'd
+        Normally <code>{'<Button>'}</code> components will render a HTML{' '}
+        <code>{'<button>'}</code> element. However you can render whatever you'd
         like, adding a <code>href</code> prop will automatically render an{' '}
-        <code>{'<a />'}</code> tag otherwise you can specify{' '}
+        <code>{'<a />'}</code> element otherwise you can specify{' '}
         <code>componentClass</code> to render something else (like an{' '}
-        <code>input</code> tag). React Bootstrap will take care of the proper
-        ARIA roles for you.
+        <code>input</code>). React Bootstrap will take care of the proper ARIA
+        roles for you.
       </p>
       <ReactPlayground codeText={ButtonTagTypes} />
       <h3>
         <Anchor id="buttons-sizes">Sizes</Anchor>
       </h3>
       <p>
-        Fancy larger or smaller buttons? Add <code>bsSize="large"</code>,{' '}
-        <code>bsSize="small"</code> for additional sizes.
+        Fancy larger or smaller buttons? Add <code>size="large"</code>,{' '}
+        <code>size="small"</code> for additional sizes.
       </p>
       <ReactPlayground codeText={ButtonSizes} />
       <p>

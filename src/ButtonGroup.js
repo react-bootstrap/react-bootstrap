@@ -3,42 +3,53 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import * as StyleContext from './StyleContext';
-
-const propTypes = {
-  /** Make the set of Buttons appear vertically stacked. */
-  vertical: PropTypes.bool,
-
-  /**
-   * Display as a button toggle group.
-   *
-   * (Generally it's better to use `ToggleButtonGroup` directly)
-   */
-  toggle: PropTypes.bool,
-
-  /**
-   * The ARIA role describing the button group. Generallu the default
-   * "group" role is correct. An `aria-label` or `aria-labelledby`
-   * prop is also recommended.
-   */
-  role: PropTypes.string,
-
-  componentClass: elementType
-};
-
-const defaultProps = {
-  block: false,
-  vertical: false,
-  toggle: false,
-  role: 'group',
-  componentClass: 'div'
-};
+import { createBootstrapComponent } from './ThemeProvider';
 
 class ButtonGroup extends React.Component {
+  static propTypes = {
+    /**
+     * @default 'btn-group'
+     */
+    bsPrefix: PropTypes.string,
+
+    /**
+     * Sets the size for all Buttons in the group.
+     *
+     * @type ('sm'|'lg')
+     */
+    size: PropTypes.string,
+
+    /** Make the set of Buttons appear vertically stacked. */
+    vertical: PropTypes.bool,
+
+    /**
+     * Display as a button toggle group.
+     *
+     * (Generally it's better to use `ToggleButtonGroup` directly)
+     */
+    toggle: PropTypes.bool,
+
+    /**
+     * An ARIA role describing the button group. Usually the default
+     * "group" role is fine. An `aria-label` or `aria-labelledby`
+     * prop is also recommended.
+     */
+    role: PropTypes.string,
+
+    componentClass: elementType
+  };
+
+  static defaultProps = {
+    vertical: false,
+    toggle: false,
+    role: 'group',
+    componentClass: 'div'
+  };
+
   render() {
     const {
-      bsClass,
-      bsSize,
+      bsPrefix,
+      size,
       toggle,
       vertical,
       className,
@@ -47,8 +58,8 @@ class ButtonGroup extends React.Component {
     } = this.props;
 
     delete props.bsRole;
-    let baseClass = bsClass;
-    if (vertical) baseClass = `${bsClass}-vertical`;
+    let baseClass = bsPrefix;
+    if (vertical) baseClass = `${bsPrefix}-vertical`;
 
     return (
       <Component
@@ -56,18 +67,12 @@ class ButtonGroup extends React.Component {
         className={classNames(
           className,
           baseClass,
-          toggle && `${bsClass}-toggle`,
-          bsSize && `${bsClass}-${bsSize}`
+          size && `${bsPrefix}-${size}`,
+          toggle && `${bsPrefix}-toggle`
         )}
       />
     );
   }
 }
 
-ButtonGroup.propTypes = propTypes;
-ButtonGroup.defaultProps = defaultProps;
-
-export default StyleContext.createBoostrapComponent(
-  { prefix: 'btn-group' },
-  ButtonGroup
-);
+export default createBootstrapComponent(ButtonGroup, 'btn-group');

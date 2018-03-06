@@ -1,11 +1,11 @@
 <ButtonToolbar>
-  <Button bsStyle="primary" bsSize="lg" disabled>
+  <Button variant="primary" size="lg" disabled>
     Primary button
   </Button>{' '}
-  <Button bsStyle="secondary" bsSize="lg" disabled>
+  <Button variant="secondary" size="lg" disabled>
     Button
   </Button>{' '}
-  <Button href="#" bsStyle="secondary" bsSize="lg" disabled>
+  <Button href="#" variant="secondary" size="lg" disabled>
     Link
   </Button>
 </ButtonToolbar>;

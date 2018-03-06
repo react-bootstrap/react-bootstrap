@@ -1,10 +1,10 @@
 <div>
   <ButtonToolbar className="mb-3" aria-label="Toolbar with Button groups">
     <ButtonGroup className="mr-2" aria-label="First group">
-      <Button bsStyle="secondary">1</Button>
-      <Button bsStyle="secondary">2</Button>
-      <Button bsStyle="secondary">3</Button>
-      <Button bsStyle="secondary">4</Button>
+      <Button variant="secondary">1</Button>
+      <Button variant="secondary">2</Button>
+      <Button variant="secondary">3</Button>
+      <Button variant="secondary">4</Button>
     </ButtonGroup>
     <InputGroup>
       <InputGroup.Prepend>
@@ -24,10 +24,10 @@
     aria-label="Toolbar with Button groups"
   >
     <ButtonGroup aria-label="First group">
-      <Button bsStyle="secondary">1</Button>
-      <Button bsStyle="secondary">2</Button>
-      <Button bsStyle="secondary">3</Button>
-      <Button bsStyle="secondary">4</Button>
+      <Button variant="secondary">1</Button>
+      <Button variant="secondary">2</Button>
+      <Button variant="secondary">3</Button>
+      <Button variant="secondary">4</Button>
     </ButtonGroup>
     <InputGroup>
       <InputGroup.Prepend>

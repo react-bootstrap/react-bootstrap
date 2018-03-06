@@ -1,8 +1,8 @@
 <div>
-  <Button bsStyle="primary" bsSize="lg" block>
+  <Button variant="primary" size="lg" block>
     Block level button
   </Button>
-  <Button bsStyle="secondary" bsSize="lg" block>
+  <Button variant="secondary" size="lg" block>
     Block level button
   </Button>
 </div>;

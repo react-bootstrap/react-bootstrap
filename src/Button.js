@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import * as StyleContext from './StyleContext';
+import { createBootstrapComponent } from './ThemeProvider';
 import SafeAnchor from './SafeAnchor';
 
 class Button extends React.Component {
@@ -11,7 +11,7 @@ class Button extends React.Component {
     /**
      * @default 'btn'
      */
-    bsClass: PropTypes.string,
+    bsPrefix: PropTypes.string,
 
     /**
      * One or more button variant combinations
@@ -24,14 +24,14 @@ class Button extends React.Component {
      *
      * `'outline-primary', 'outline-secondary', 'outline-success', 'outline-danger', 'outline-warning', 'outline-info, 'outline-dark', 'outline-light'`
      */
-    bsStyle: PropTypes.string,
+    variant: PropTypes.string,
 
     /**
      * Specifies a large or small button.
      *
      * @type ('sm'|'lg')
      */
-    bsSize: PropTypes.string,
+    size: PropTypes.string,
 
     /** Spans the full width of the Button parent */
     block: PropTypes.bool,
@@ -41,11 +41,11 @@ class Button extends React.Component {
 
     /**
      * Disables the Button, preventing mouse events,
-     * even if the underlying component is an `<a>` tag
+     * even if the underlying component is an `<a>` element
      */
     disabled: PropTypes.bool,
 
-    /** Providing a `href` will render an `<a>` tag, _styled_ as a button. */
+    /** Providing a `href` will render an `<a>` element, _styled_ as a button. */
     href: PropTypes.string,
 
     /**
@@ -59,7 +59,7 @@ class Button extends React.Component {
   };
 
   static defaultProps = {
-    bsStyle: 'secondary',
+    variant: 'primary',
     active: false,
     disabled: false,
     type: 'button'
@@ -67,9 +67,9 @@ class Button extends React.Component {
 
   render() {
     const {
-      bsStyle,
-      bsClass,
-      bsSize,
+      bsPrefix,
+      variant,
+      size,
       active,
       className,
       block,
@@ -82,11 +82,11 @@ class Button extends React.Component {
 
     const classes = classNames(
       className,
-      bsClass,
+      bsPrefix,
       active && 'active',
-      `${bsClass}-${bsStyle}`,
-      block && `${bsClass}-block`,
-      bsSize && `${bsClass}-${bsSize}`
+      `${bsPrefix}-${variant}`,
+      block && `${bsPrefix}-block`,
+      size && `${bsPrefix}-${size}`
     );
 
     if (props.href) {
@@ -104,4 +104,4 @@ class Button extends React.Component {
   }
 }
 
-export default StyleContext.createBoostrapComponent({ prefix: 'btn' }, Button);
+export default createBootstrapComponent(Button, 'btn');

@@ -1,8 +1,8 @@
 <ButtonToolbar>
-  <Button bsStyle="primary" bsSize="lg" active>
+  <Button variant="primary" size="lg" active>
     Primary button
   </Button>
-  <Button bsStyle="secondary" bsSize="lg" active>
+  <Button variant="secondary" size="lg" active>
     Button
   </Button>
 </ButtonToolbar>;
