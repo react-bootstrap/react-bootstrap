@@ -27,11 +27,13 @@ const propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * [onChange description]
+   * A callback fired when the underlying input element changes. This is passed
+   * directly to the `<input>` so shares the same signature as a native `onChange` event.
    */
   onChange: PropTypes.func,
   /**
-   * The value of the input, and unique identifier in the ToggleButtonGroup
+   * The value of the input, should be unique amoungst it's siblings when nested in a
+   * `ToggleButtonGroup`.
    */
   value: PropTypes.any.isRequired
 };
