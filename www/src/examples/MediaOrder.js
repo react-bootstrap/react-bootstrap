@@ -1,6 +1,5 @@
 <div>
   <Media>
-    <img width={64} height={64} src="/thumbnail.png" alt="thumbnail" />
     <Media.Body>
       <h5>Media Heading</h5>
       <p>
@@ -10,5 +9,6 @@
         fringilla. Donec lacinia congue felis in faucibus.
       </p>
     </Media.Body>
+    <img width={64} height={64} src="/thumbnail.png" alt="thumbnail" />
   </Media>
 </div>;
