@@ -70,7 +70,7 @@ export default function ProgressBarSection({ data }) {
         <Anchor id="progress-animated">Animated</Anchor>
       </h2>
       <p>
-        Add <code>active</code> prop to animate the stripes right to left. Not
+        Add <code>animated</code> prop to animate the stripes right to left. Not
         available in IE9 and below.
       </p>
       <ReactPlayground codeText={ProgressBarAnimated} />

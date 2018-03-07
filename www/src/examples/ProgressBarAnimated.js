@@ -1,1 +1,1 @@
-<ProgressBar active now={45} />;
+<ProgressBar animated now={45} />;
