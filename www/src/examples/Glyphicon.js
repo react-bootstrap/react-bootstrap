@@ -17,16 +17,16 @@
   </ButtonToolbar>
   <ButtonToolbar>
     <ButtonGroup>
-      <Button bsSize="large">
+      <Button size="large">
         <Glyphicon glyph="star" /> Star
       </Button>
       <Button>
         <Glyphicon glyph="star" /> Star
       </Button>
-      <Button bsSize="small">
+      <Button size="small">
         <Glyphicon glyph="star" /> Star
       </Button>
-      <Button bsSize="xsmall">
+      <Button size="xsmall">
         <Glyphicon glyph="star" /> Star
       </Button>
     </ButtonGroup>

@@ -29,7 +29,7 @@ class AlertDismissable extends React.Component {
             Cras mattis consectetur purus sit amet fermentum.
           </p>
           <p>
-            <Button bsStyle="danger">Take this action</Button>
+            <Button variant="danger">Take this action</Button>
             <span> or </span>
             <Button onClick={this.handleDismiss}>Hide Alert</Button>
           </p>

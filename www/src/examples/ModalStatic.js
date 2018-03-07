@@ -8,7 +8,7 @@
 
     <Modal.Footer>
       <Button>Close</Button>
-      <Button bsStyle="primary">Save changes</Button>
+      <Button variant="primary">Save changes</Button>
     </Modal.Footer>
   </Modal.Dialog>
 </div>;
