@@ -28,10 +28,7 @@
     "react-live": "^1.9.2"
   },
   "devDependencies": {
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1"
+    "@babel/preset-flow": "^7.0.0-beta.40"
   },
   "homepage": "https://react-bootstrap.github.io/",
   "keywords": [

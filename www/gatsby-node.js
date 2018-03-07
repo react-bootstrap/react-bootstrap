@@ -27,6 +27,12 @@ exports.modifyWebpackConfig = function modifyWebpackConfig({
   });
 };
 
+exports.onCreateBabelConfig = ({ actions }) => {
+  actions.setBabelPreset({
+    name: `@babel/preset-flow`
+  });
+};
+
 exports.onCreatePage = ({ page }) => {
   if (page.path.startsWith('/getting-started')) {
     page.layout = 'getting-started';
