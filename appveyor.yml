@@ -9,7 +9,7 @@ install:
   - set PATH=%APPDATA%\npm;%PATH%
   - node --version
   - yarn --version
-  - yarn run bootstrap
+  - yarn bootstrap
 
 # No need for MSBuild on this project
 build: off
