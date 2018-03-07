@@ -25,7 +25,7 @@ const defaultProps = {
 class Breadcrumb extends React.Component {
   render() {
     const {
-      bsClass,
+      bsClass: bsClassName,
       listProps,
       children,
       className,
@@ -44,8 +44,8 @@ class Breadcrumb extends React.Component {
       >
         <ol
           role="navigation"
-          className={classNames(bsClass, listProps.className)}
           {...listProps}
+          className={classNames(bsClassName, listProps.className)}
         >
           {children}
         </ol>
