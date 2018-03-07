@@ -6,7 +6,7 @@ import Breadcrumb from '../src/Breadcrumb';
 describe('<Breadcrumb>', () => {
   it('Should apply id to the wrapper ol element', () => {
     const instance = shallow(<Breadcrumb id="custom-id" />);
-    assert.equal(instance.find('ol#custom-id').length, 1);
+    assert.equal(instance.find('nav#custom-id').length, 1);
   });
 
   it('Should have breadcrumb class inside ol', () => {
@@ -17,8 +17,8 @@ describe('<Breadcrumb>', () => {
   it('Should have custom classes', () => {
     const instance = shallow(<Breadcrumb className="custom-one custom-two" />);
 
-    assert.equal(instance.find('ol.custom-one').length, 1);
-    assert.equal(instance.find('ol.custom-two').length, 1);
+    assert.equal(instance.find('nav.custom-one').length, 1);
+    assert.equal(instance.find('nav.custom-two').length, 1);
   });
 
   it('Should have a navigation role', () => {
