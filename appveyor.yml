@@ -6,18 +6,16 @@ environment:
 install:
   # Get the latest stable version of io.js
   - ps: Install-Product node $env:NODE_VERSION
-  - npm -g install npm@latest
   - set PATH=%APPDATA%\npm;%PATH%
   - node --version
-  - npm --version
-  - npm install
-  - npm run bootstrap-docs
+  - yarn --version
+  - yarn bootstrap
 
 # No need for MSBuild on this project
 build: off
 
 test_script:
-  - npm test
+  - yarn test
 
 branches:
   only:

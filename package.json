@@ -11,22 +11,25 @@
   "jsnext:main": "es/index.js",
   "module": "es/index.js",
   "scripts": {
-    "bootstrap-docs": "npm run build lib && cd www && yarn install && cd ..",
+    "bootstrap": "yarn && yarn --cwd www",
     "build": "node tools/build.js",
-    "build-docs": "npm run bootstrap-docs && npm -C www run build",
+    "build-docs": "yarn --cwd www run build",
+    "start": "yarn --cwd www run develop",
     "ci-lint": "eslint --rule 'prettier/prettier: 2'",
-    "format": "npm run ci-lint -- --fix",
+    "format": "npm run ci-lint . -- --fix",
     "lint": "npm run ci-lint .",
     "precommit": "lint-staged",
     "release": "npm run build-docs && release",
     "tdd": "karma start",
     "test": "npm run lint && npm run test-browser && npm run test-node",
     "test-browser": "cross-env NODE_ENV=test karma start --single-run",
-    "test-node": "mocha --compilers js:tools/babel-register.js test/server/*Spec.js"
+    "test-node": "mocha --compilers js:@babel/register test/server/*Spec.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "lint-staged": {
     "*.js": [
-      "format",
+      "npm run ci-lint -- --fix",
       "git add"
     ]
   },

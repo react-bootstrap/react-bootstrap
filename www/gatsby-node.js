@@ -1,19 +1,36 @@
 const path = require('path');
-const webpack = require('webpack');
 
-exports.modifyWebpackConfig = function modifyWebpackConfig({ config }) {
-  // See https://github.com/FormidableLabs/react-live/issues/5
-  config.plugin('ignore', () => new webpack.IgnorePlugin(/^(xor|props)$/));
-
-  config.loader('raw-loader', {
-    test: /src\/examples\//,
-    loaders: ['raw-loader']
+exports.modifyWebpackConfig = function modifyWebpackConfig({
+  actions,
+  plugins,
+  loaders
+}) {
+  actions.setWebpackConfig({
+    module: {
+      rules: [
+        {
+          test: /src\/examples\//,
+          use: loaders.raw()
+        }
+      ]
+    },
+    resolve: {
+      alias: {
+        'react-bootstrap$': path.resolve(__dirname, '../src/index.js'),
+        'react-bootstrap/lib': path.resolve(__dirname, '../src')
+      }
+    },
+    plugins: [
+      // See https://github.com/FormidableLabs/react-live/issues/5
+      plugins.ignore(/^(xor|props)$/)
+    ]
   });
+};
 
-  config._config.resolve.alias = {
-    'react-bootstrap$': path.resolve(__dirname, '../lib/index.js'),
-    'react-bootstrap/lib': path.resolve(__dirname, '../lib')
-  };
+exports.onCreateBabelConfig = ({ actions }) => {
+  actions.setBabelPreset({
+    name: `@babel/preset-flow`
+  });
 };
 
 exports.onCreatePage = ({ page }) => {

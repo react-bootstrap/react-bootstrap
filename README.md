@@ -20,12 +20,15 @@ See the [documentation][documentation] with live editable examples.
 
 ## Local setup
 
-- Install the dependencies with `npm install`
-- Run tests `npm test`
-- Run tests in watch mode `npm run tdd`
-- Run the docs site in development mode with `npm run docs`. This will watch
-  for file changes as you work. Simply refresh the page to see the updates.
-- Build with `npm run build`
+Yarn is the our package manager of choice here. Check out setup
+instructions [here](https://yarnpkg.com/en/docs/install) if you don't have it installed already.
+After that you can run `yarn run bootstrap` to install all the needed dependencies.
+
+From there you can:
+
+- Run the tests once with `yarn test` (Or run them in watch mode with `yarn run tdd`).
+- Start a local copy of the docs site with `yarn start`
+- Or build a local copy of the library with `yarn run build`
 
 ## Contributions
 

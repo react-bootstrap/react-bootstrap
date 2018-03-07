@@ -2,41 +2,23 @@ const { transform } = require('@babel/core');
 const fse = require('fs-extra');
 const path = require('path');
 
-let getConfig = ({ modules = true, test = false } = {}) => ({
-  babelrc: false,
-  presets: [
-    [
-      '@babel/env',
-      {
-        loose: true,
-        shippedProposals: true,
-        modules: modules ? 'commonjs' : false,
-        targets: {
-          browsers: ['last 4 versions', 'not ie <= 8']
-        }
-      }
-    ],
-    '@babel/react'
-  ],
-  plugins: [
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-export-default-from',
-    '@babel/plugin-proposal-export-namespace-from',
-    '@babel/transform-runtime',
-    'dev-expression',
-    modules && 'add-module-exports',
-    test && 'istanbul'
-  ].filter(Boolean)
-});
+let getConfig = ({ modules = true, optimize = true, test = false } = {}) => {
+  delete require.cache[require.resolve('../.babelrc.js')];
+
+  const devEnv = test ? 'test' : 'development';
+
+  process.env.NODE_ENV = optimize ? 'production' : devEnv;
+  process.env.BABEL_ENV = modules ? '' : 'esm';
+
+  return require('../.babelrc.js');
+};
 
 async function buildFile(filename, destination, babelOptions = {}) {
   if (!path.extname(filename) === '.js') return;
 
   const content = await fse.readFile(filename, { encoding: 'utf8' });
 
-  babelOptions.filename = filename;
-
-  const result = transform(content, babelOptions);
+  const result = transform(content, { ...babelOptions, filename });
   const output = path.join(destination, path.basename(filename));
 
   await fse.outputFile(output, result.code);
