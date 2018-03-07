@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Helmet from 'react-helmet';
 
-module.exports = class HTML extends React.Component {
+export default class HTML extends React.Component {
   static propTypes = {
     body: PropTypes.string
   };
@@ -43,4 +43,4 @@ module.exports = class HTML extends React.Component {
       </html>
     );
   }
-};
+}

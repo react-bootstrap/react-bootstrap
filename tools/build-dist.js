@@ -6,7 +6,7 @@ const { distRoot } = require('./constants');
 const runBabel = require('./run-babel');
 
 function config(optimize) {
-  let babelOptions = runBabel.getConfig({ modules: false });
+  let babelOptions = runBabel.getConfig({ modules: false, optimize });
 
   return {
     entry: {
@@ -20,7 +20,13 @@ function config(optimize) {
       libraryTarget: 'umd'
     },
     module: {
-      rules: [rules.js({ ...babelOptions, cacheDirectory: true })]
+      rules: [
+        rules.js({
+          ...babelOptions,
+          babelrc: false,
+          cacheDirectory: true
+        })
+      ]
     },
     plugins: [
       optimize && plugins.uglify(),
@@ -55,7 +61,7 @@ module.exports = async function buildDistributable() {
   if (fse.existsSync(distRoot)) await fse.remove(distRoot);
 
   await new Promise((resolve, reject) => {
-    webpack([config(), config(true)], (err, stats) => {
+    webpack([config(false), config(true)], (err, stats) => {
       if (err || stats.hasErrors()) {
         reject(err || stats.toJson().errors);
         return;
