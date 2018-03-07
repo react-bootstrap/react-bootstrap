@@ -12,8 +12,7 @@ const propTypes = {
    */
   label: PropTypes.string,
   /**
-   * Optional prop that hold properties that will be spread to
-   * the list element
+   * Additional props passed as-is to the underlying `<ul>` element
    */
   listProps: PropTypes.object
 };
@@ -45,10 +44,11 @@ class Breadcrumb extends React.Component {
       >
         <ol
           role="navigation"
-          className={bsClass}
-          children={children}
+          className={classNames(bsClass, listProps.className)}
           {...listProps}
-        />
+        >
+          {children}
+        </ol>
       </nav>
     );
   }
