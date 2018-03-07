@@ -67,6 +67,7 @@ class Button extends React.Component {
 
   render() {
     const {
+      bsRole: _0,
       bsPrefix,
       variant,
       size,
@@ -77,8 +78,6 @@ class Button extends React.Component {
       componentClass,
       ...props
     } = this.props;
-
-    delete props.bsRole;
 
     const classes = classNames(
       className,

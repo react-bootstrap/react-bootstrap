@@ -28,7 +28,7 @@ function createBootstrapComponent(Component, prefix) {
   const name = Component.displayName || Component.name;
   // eslint-disable-next-line
   return class extends React.Component {
-    static displayName = `Boostrap(${name})`;
+    static displayName = `Bootstrap(${name})`;
     static propTypes = {
       bsPrefix: PropTypes.string
     };
