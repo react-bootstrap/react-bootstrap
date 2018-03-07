@@ -1,13 +1,9 @@
-<Nav
-  activeKey="/home"
-  role="tablist"
-  onSelect={selectedKey => alert(`selected ${selectedKey}`)}
->
+<Nav fill variant="tabs" activeKey="/home">
   <Nav.Item>
     <Nav.Link href="/home">Active</Nav.Link>
   </Nav.Item>
   <Nav.Item>
-    <Nav.Link eventKey="link-1">Link</Nav.Link>
+    <Nav.Link eventKey="link-1">Loooonger NavLink</Nav.Link>
   </Nav.Item>
   <Nav.Item>
     <Nav.Link eventKey="link-2">Link</Nav.Link>

@@ -36,15 +36,20 @@ class Nav extends React.Component {
     activeKey: PropTypes.any,
 
     /**
-     * NavItems are be positioned vertically.
+     * Have all `NavItem`s to proportionatly fill all available width.
      */
     fill: PropTypes.bool,
 
-    justified: all(
+    /**
+     * Have all `NavItem`s to evenly fill all available width.
+     *
+     * @type bool
+     */
+    justify: all(
       PropTypes.bool,
-      ({ justified, navbar }) =>
-        justified && navbar
-          ? Error('justified navbar `Nav`s are not supported')
+      ({ justify, navbar }) =>
+        justify && navbar
+          ? Error('justify navbar `Nav`s are not supported')
           : null
     ),
 
@@ -83,7 +88,7 @@ class Nav extends React.Component {
   };
 
   static defaultProps = {
-    justified: false,
+    justify: false,
     fill: false,
     componentClass: 'ul'
   };
@@ -160,7 +165,7 @@ class Nav extends React.Component {
       bsPrefix,
       variant,
       fill,
-      justified,
+      justify,
       onSelect,
       navbar,
       className,
@@ -179,7 +184,7 @@ class Nav extends React.Component {
       [`navbar-nav`]: navbar,
       [`${bsPrefix}-${variant}`]: !!variant,
       [`${bsPrefix}-fill`]: fill,
-      [`${bsPrefix}-justified`]: justified
+      [`${bsPrefix}-justified`]: justify
     };
 
     if (props.role === 'tablist') {
