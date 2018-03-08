@@ -32,11 +32,14 @@ describe('Table', () => {
     );
   });
 
-  it('Should have correct class when condensed', () => {
-    let instance = ReactTestUtils.renderIntoDocument(<Table condensed />);
-    assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\btable-condensed\b/)
-    );
+  it('Should have correct class when small', () => {
+    let instance = ReactTestUtils.renderIntoDocument(<Table size="sm" />);
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\btable-sm\b/));
+  });
+
+  it('Should have correct class when dark', () => {
+    let instance = ReactTestUtils.renderIntoDocument(<Table variant="dark" />);
+    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\btable-dark\b/));
   });
 
   it('Should have responsive wrapper', () => {
@@ -46,6 +49,13 @@ describe('Table', () => {
     );
     assert.ok(
       ReactDOM.findDOMNode(instance).firstChild.className.match(/\btable\b/)
+    );
+  });
+
+  it('Should have responsive breakpoints', () => {
+    let instance = ReactTestUtils.renderIntoDocument(<Table responsive="sm" />);
+    assert.ok(
+      ReactDOM.findDOMNode(instance).className.match(/\btable-responsive-sm\b/)
     );
   });
 });
