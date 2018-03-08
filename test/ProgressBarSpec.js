@@ -38,7 +38,7 @@ describe('<ProgressBar>', () => {
 
   it('Should have the success class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} bsStyle="success" />
+      <ProgressBar min={0} max={10} now={0} variant="success" />
     );
 
     assert.ok(
@@ -48,7 +48,7 @@ describe('<ProgressBar>', () => {
 
   it('Should have the warning class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} bsStyle="warning" />
+      <ProgressBar min={0} max={10} now={0} variant="warning" />
     );
 
     assert.ok(
@@ -110,7 +110,7 @@ describe('<ProgressBar>', () => {
         min={0}
         max={10}
         now={5}
-        bsStyle="success"
+        variant="success"
         label="progress bar label"
       />
     );
@@ -128,7 +128,7 @@ describe('<ProgressBar>', () => {
         max={10}
         now={5}
         srOnly
-        bsStyle="success"
+        variant="success"
         label="progress bar label"
       />
     );

@@ -53,8 +53,14 @@ const propTypes = {
   srOnly: PropTypes.bool,
   striped: PropTypes.bool,
   animated: PropTypes.bool,
-  children: onlyProgressBar,
   bsPrefix: PropTypes.string,
+  /**
+   * Sets the background class of the progress bar.
+   *
+   * @type ('success'|'danger'|'warning'|'info')
+   */
+  variant: PropTypes.string,
+  children: onlyProgressBar,
 
   /**
    * @private
@@ -87,17 +93,16 @@ class ProgressBar extends React.Component {
     animated,
     className,
     style,
-    bsStyle,
+    variant,
     bsPrefix,
     ...props
   }) {
     const classes = {
       [bsPrefix]: true,
-      [`bg-${bsStyle}`]: bsStyle,
+      [`bg-${variant}`]: variant,
       [`${bsPrefix}-animated`]: animated,
       [`${bsPrefix}-striped`]: animated || striped
     };
-    // Object{progress-bar: true, bg-undefined: undefined, progress-bar-animated: false, progress-bar-striped: false}
     return (
       <div
         {...props}
@@ -129,7 +134,7 @@ class ProgressBar extends React.Component {
       striped,
       animated,
       bsPrefix,
-      bsStyle,
+      variant,
       className,
       children,
       ...wrapperProps
@@ -150,7 +155,7 @@ class ProgressBar extends React.Component {
               striped,
               animated,
               bsPrefix,
-              bsStyle
+              variant
             })}
       </div>
     );

@@ -1,6 +1,6 @@
 <div>
-  <ProgressBar striped bsStyle="success" now={40} />
-  <ProgressBar striped bsStyle="info" now={20} />
-  <ProgressBar striped bsStyle="warning" now={60} />
-  <ProgressBar striped bsStyle="danger" now={80} />
+  <ProgressBar striped variant="success" now={40} />
+  <ProgressBar striped variant="info" now={20} />
+  <ProgressBar striped variant="warning" now={60} />
+  <ProgressBar striped variant="danger" now={80} />
 </div>;
