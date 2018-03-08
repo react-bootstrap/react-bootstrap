@@ -5,13 +5,13 @@ import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import ProgressBarBasic from '../../examples/ProgressBarBasic';
-import ProgressBarWithLabel from '../../examples/ProgressBarWithLabel';
-import ProgressBarScreenreaderLabel from '../../examples/ProgressBarScreenreaderLabel';
-import ProgressBarContextual from '../../examples/ProgressBarContextual';
-import ProgressBarStriped from '../../examples/ProgressBarStriped';
-import ProgressBarAnimated from '../../examples/ProgressBarAnimated';
-import ProgressBarStacked from '../../examples/ProgressBarStacked';
+import ProgressBarBasic from '../../examples/ProgressBar/ProgressBarBasic';
+import ProgressBarWithLabel from '../../examples/ProgressBar/ProgressBarWithLabel';
+import ProgressBarScreenreaderLabel from '../../examples/ProgressBar/ProgressBarScreenreaderLabel';
+import ProgressBarContextual from '../../examples/ProgressBar/ProgressBarContextual';
+import ProgressBarStriped from '../../examples/ProgressBar/ProgressBarStriped';
+import ProgressBarAnimated from '../../examples/ProgressBar/ProgressBarAnimated';
+import ProgressBarStacked from '../../examples/ProgressBar/ProgressBarStacked';
 
 export default function ProgressBarSection({ data }) {
   return (
