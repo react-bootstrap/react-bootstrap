@@ -31,8 +31,6 @@ function onlyProgressBar(props, propName, componentName) {
      * see https://github.com/gaearon/react-hot-loader#checking-element-types
      */
     const element = <ProgressBar />;
-    console.log(child.type);
-    console.log(element.type);
     if (child.type === element.type) return;
 
     const childIdentifier = React.isValidElement(child)
