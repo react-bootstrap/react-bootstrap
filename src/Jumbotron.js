@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
+import { createBootstrapComponent } from './ThemeProvider';
 
 const propTypes = {
   componentClass: elementType,
@@ -23,19 +23,15 @@ class Jumbotron extends React.Component {
       fluid,
       ...props
     } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
-
     const classes = {
-      ...getClassSet(bsProps),
+      jumbotron: true,
       'jumbotron-fluid': fluid
     };
-    return (
-      <Component {...elementProps} className={classNames(className, classes)} />
-    );
+    return <Component {...props} className={classNames(className, classes)} />;
   }
 }
 
 Jumbotron.propTypes = propTypes;
 Jumbotron.defaultProps = defaultProps;
 
-export default bsClass('jumbotron', Jumbotron);
+export default createBootstrapComponent(Jumbotron, 'jumbotron');
