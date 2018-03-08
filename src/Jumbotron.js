@@ -1,24 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import elementType from 'prop-types-extra/lib/elementType';
 
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
-  componentClass: elementType
+  componentClass: elementType,
+  fluid: PropTypes.bool
 };
 
 const defaultProps = {
-  componentClass: 'div'
+  componentClass: 'div',
+  fluid: false
 };
 
 class Jumbotron extends React.Component {
   render() {
-    const { componentClass: Component, className, ...props } = this.props;
+    const {
+      componentClass: Component,
+      className,
+      fluid,
+      ...props
+    } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
-    const classes = getClassSet(bsProps);
-
+    const classes = {
+      ...getClassSet(bsProps),
+      'jumbotron-fluid': fluid
+    };
     return (
       <Component {...elementProps} className={classNames(className, classes)} />
     );
