@@ -2,18 +2,14 @@ import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  bsClass as setBsClass,
-  bsStyles,
-  splitBsProps
-} from './utils/bootstrapUtils';
-import { State } from './utils/StyleConfig';
+import { createBootstrapComponent } from './ThemeProvider';
+
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const ROUND_PRECISION = 1000;
 
 /**
- * Validate that children, if any, are instances of `<ProgressBar>`.
+ * Validate that children, if any, are instances of `Bootstrap(<ProgressBar>)`.
  */
 function onlyProgressBar(props, propName, componentName) {
   const children = props[propName];
@@ -35,6 +31,8 @@ function onlyProgressBar(props, propName, componentName) {
      * see https://github.com/gaearon/react-hot-loader#checking-element-types
      */
     const element = <ProgressBar />;
+    console.log(child.type);
+    console.log(element.type);
     if (child.type === element.type) return;
 
     const childIdentifier = React.isValidElement(child)
@@ -91,20 +89,20 @@ class ProgressBar extends React.Component {
     className,
     style,
     bsStyle,
+    bsPrefix,
     ...props
   }) {
-    const [, elementProps] = splitBsProps(props);
 
     const classes = {
-      [props.bsClass]: true,
+      [bsPrefix]: true,
       [`bg-${bsStyle}`]: bsStyle,
-      [`${props.bsClass}-animated`]: animated,
-      [`${props.bsClass}-striped`]: animated || striped
+      [`${bsPrefix}-animated`]: animated,
+      [`${bsPrefix}-striped`]: animated || striped
     };
-
+    // Object{progress-bar: true, bg-undefined: undefined, progress-bar-animated: false, progress-bar-striped: false}
     return (
       <div
-        {...elementProps}
+        {...props}
         role="progressbar"
         className={classNames(className, classes)}
         style={{ width: `${getPercentage(now, min, max)}%`, ...style }}
@@ -132,7 +130,7 @@ class ProgressBar extends React.Component {
       srOnly,
       striped,
       animated,
-      bsClass,
+      bsPrefix,
       bsStyle,
       className,
       children,
@@ -153,7 +151,7 @@ class ProgressBar extends React.Component {
               srOnly,
               striped,
               animated,
-              bsClass,
+              bsPrefix,
               bsStyle
             })}
       </div>
@@ -164,7 +162,5 @@ class ProgressBar extends React.Component {
 ProgressBar.propTypes = propTypes;
 ProgressBar.defaultProps = defaultProps;
 
-export default setBsClass(
-  'progress-bar',
-  bsStyles(Object.values(State), ProgressBar)
-);
+export default createBootstrapComponent (ProgressBar, 'progress-bar');
+
