@@ -5,8 +5,6 @@ import PropTypes from 'prop-types';
 import {
   bsClass as setBsClass,
   bsStyles,
-  getClassSet,
-  prefix,
   splitBsProps
 } from './utils/bootstrapUtils';
 import { State } from './utils/StyleConfig';
@@ -58,7 +56,7 @@ const propTypes = {
   label: PropTypes.node,
   srOnly: PropTypes.bool,
   striped: PropTypes.bool,
-  active: PropTypes.bool,
+  animated: PropTypes.bool,
   children: onlyProgressBar,
 
   /**
@@ -70,7 +68,7 @@ const propTypes = {
 const defaultProps = {
   min: 0,
   max: 100,
-  active: false,
+  animated: false,
   isChild: false,
   srOnly: false,
   striped: false
@@ -89,17 +87,19 @@ class ProgressBar extends React.Component {
     label,
     srOnly,
     striped,
-    active,
+    animated,
     className,
     style,
+    bsStyle,
     ...props
   }) {
-    const [bsProps, elementProps] = splitBsProps(props);
+    const [, elementProps] = splitBsProps(props);
 
     const classes = {
-      ...getClassSet(bsProps),
-      active,
-      [prefix(bsProps, 'striped')]: active || striped
+      [props.bsClass]: true,
+      [`bg-${bsStyle}`]: bsStyle,
+      [`${props.bsClass}-animated`]: animated,
+      [`${props.bsClass}-striped`]: animated || striped
     };
 
     return (
@@ -118,7 +118,7 @@ class ProgressBar extends React.Component {
   }
 
   render() {
-    const { isChild, ...props } = this.props;
+    const {  isChild, ...props } = this.props;
 
     if (isChild) {
       return this.renderProgressBar(props);
@@ -131,7 +131,7 @@ class ProgressBar extends React.Component {
       label,
       srOnly,
       striped,
-      active,
+      animated,
       bsClass,
       bsStyle,
       className,
@@ -152,7 +152,7 @@ class ProgressBar extends React.Component {
               label,
               srOnly,
               striped,
-              active,
+              animated,
               bsClass,
               bsStyle
             })}
