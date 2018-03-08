@@ -9,7 +9,7 @@ import ValidComponentChildren from './utils/ValidComponentChildren';
 const ROUND_PRECISION = 1000;
 
 /**
- * Validate that children, if any, are instances of `Bootstrap(<ProgressBar>)`.
+ * Validate that children, if any, are instances of `<ProgressBar>`.
  */
 function onlyProgressBar(props, propName, componentName) {
   const children = props[propName];
@@ -30,7 +30,7 @@ function onlyProgressBar(props, propName, componentName) {
      *
      * see https://github.com/gaearon/react-hot-loader#checking-element-types
      */
-    const element = <ProgressBar />;
+    const element = <DecoratedProgressBar />;
     if (child.type === element.type) return;
 
     const childIdentifier = React.isValidElement(child)
@@ -54,6 +54,7 @@ const propTypes = {
   striped: PropTypes.bool,
   animated: PropTypes.bool,
   children: onlyProgressBar,
+  bsPrefix: PropTypes.string,
 
   /**
    * @private
@@ -90,7 +91,6 @@ class ProgressBar extends React.Component {
     bsPrefix,
     ...props
   }) {
-
     const classes = {
       [bsPrefix]: true,
       [`bg-${bsStyle}`]: bsStyle,
@@ -159,6 +159,7 @@ class ProgressBar extends React.Component {
 
 ProgressBar.propTypes = propTypes;
 ProgressBar.defaultProps = defaultProps;
+const DecoratedProgressBar = createBootstrapComponent (ProgressBar, 'progress-bar');
 
-export default createBootstrapComponent (ProgressBar, 'progress-bar');
+export default DecoratedProgressBar;
 
