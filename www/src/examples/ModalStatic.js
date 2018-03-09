@@ -8,7 +8,7 @@ const modalInstance = (
       <Modal.Body>One fine body...</Modal.Body>
 
       <Modal.Footer>
-        <Button>Close</Button>
+        <Button bsStyle="secondary">Close</Button>
         <Button bsStyle="primary">Save changes</Button>
       </Modal.Footer>
     </Modal.Dialog>
