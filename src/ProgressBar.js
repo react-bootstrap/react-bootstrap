@@ -59,7 +59,7 @@ const propTypes = {
    *
    * @type ('success'|'danger'|'warning'|'info')
    */
-  variant: PropTypes.string,
+  variant: PropTypes.oneOf(['success','danger','warning','info']),
   children: onlyProgressBar,
 
   /**
