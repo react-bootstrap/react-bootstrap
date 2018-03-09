@@ -9,6 +9,7 @@ import Modal from '../../examples/Modal';
 import ModalContained from '../../examples/ModalContained';
 import ModalDefaultSizing from '../../examples/ModalDefaultSizing';
 import ModalCustomSizing from '../../examples/ModalCustomSizing';
+import ModalVerticallyCentered from '../../examples/ModalVerticallyCentered';
 
 export default function ModalSection({ data }) {
   return (
@@ -88,6 +89,17 @@ export default function ModalSection({ data }) {
         set to 90%.
       </p>
       <ReactPlayground codeText={ModalCustomSizing} />
+
+      <h3>
+        <Anchor id="modal-vertically-centered">
+          Vertically centered modals
+        </Anchor>
+      </h3>
+      <p>
+        You can vertically center a modal by passing the "verticallyCenter"
+        prop.
+      </p>
+      <ReactPlayground codeText={ModalVerticallyCentered} />
 
       <h3>
         <Anchor id="modals-props">Props</Anchor>
