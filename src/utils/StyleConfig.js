@@ -22,6 +22,10 @@ export const State = {
   WARNING: 'warning',
   DANGER: 'danger',
   INFO: 'info',
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary',
+  DARK: 'dark',
+  LINK: 'light',
 
   // TODO: legacy, remove
   DEFAULT: 'default'
