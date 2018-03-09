@@ -13,9 +13,24 @@ import { State } from './utils/StyleConfig';
 import CloseButton from './CloseButton';
 
 const propTypes = {
+  /**
+   * Callback fired when alert is closed.
+   */
   onDismiss: PropTypes.func,
+
+  /**
+   * Sets the text for alert close button.
+   */
   closeLabel: PropTypes.string,
+
+  /**
+   * Specifies the heading tag for 'headingText'
+   */
   headingComponent: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
+
+  /**
+   * Specifies the alert heading text
+   */
   headingText: PropTypes.string
 };
 
