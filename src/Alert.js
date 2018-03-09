@@ -14,16 +14,27 @@ import CloseButton from './CloseButton';
 
 const propTypes = {
   onDismiss: PropTypes.func,
-  closeLabel: PropTypes.string
+  closeLabel: PropTypes.string,
+  headingComponent: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
+  headingText: PropTypes.string
 };
 
 const defaultProps = {
-  closeLabel: 'Close alert'
+  closeLabel: 'Close alert',
+  headingComponent: 'h4'
 };
 
 class Alert extends React.Component {
   render() {
-    const { onDismiss, closeLabel, className, children, ...props } = this.props;
+    const {
+      onDismiss,
+      closeLabel,
+      headingComponent: HeadingComponent,
+      headingText,
+      className,
+      children,
+      ...props
+    } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const dismissable = !!onDismiss;
@@ -39,6 +50,11 @@ class Alert extends React.Component {
         className={classNames(className, classes)}
       >
         {dismissable && <CloseButton onClick={onDismiss} label={closeLabel} />}
+        {!!headingText && (
+          <HeadingComponent className="alert-heading">
+            {headingText}
+          </HeadingComponent>
+        )}
         {children}
       </div>
     );

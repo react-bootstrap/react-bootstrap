@@ -78,4 +78,37 @@ describe('<Alert>', () => {
       );
     });
   });
+
+  describe('Alert alert-heading', () => {
+    it('Should have alert-heading', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Alert headingText="Well done!">Message</Alert>
+      );
+
+      assert.ok(
+        ReactTestUtils.findRenderedDOMComponentWithClass(
+          instance,
+          'alert-heading'
+        )
+      );
+    });
+
+    it('Should have headingComponent h4 by default', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Alert headingText="Well done!">Message</Alert>
+      );
+
+      assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'h4'));
+    });
+
+    it('Should support headingComponent as prop', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Alert headingText="Well done!" headingComponent="h1">
+          Message
+        </Alert>
+      );
+
+      assert.ok(ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'h1'));
+    });
+  });
 });
