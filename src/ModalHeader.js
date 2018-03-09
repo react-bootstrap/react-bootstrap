@@ -59,14 +59,14 @@ class ModalHeader extends React.Component {
 
     return (
       <div {...elementProps} className={classNames(className, classes)}>
+        {children}
+
         {closeButton && (
           <CloseButton
             label={closeLabel}
             onClick={createChainedFunction(modal && modal.onHide, onHide)}
           />
         )}
-
-        {children}
       </div>
     );
   }

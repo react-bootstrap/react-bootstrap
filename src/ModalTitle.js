@@ -9,7 +9,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  componentClass: 'h4'
+  componentClass: 'h5'
 };
 
 class ModalTitle extends React.Component {
