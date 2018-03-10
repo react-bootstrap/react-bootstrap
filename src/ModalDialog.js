@@ -15,13 +15,19 @@ const propTypes = {
   /**
    * A css class to apply to the Modal dialog DOM node.
    */
-  dialogClassName: PropTypes.string
+  dialogClassName: PropTypes.string,
+
+  /**
+   * Specify whether the Component should be vertically centered
+   */
+  centered: PropTypes.bool
 };
 
 class ModalDialog extends React.Component {
   render() {
     const {
       dialogClassName,
+      centered,
       className,
       style,
       children,
@@ -36,7 +42,8 @@ class ModalDialog extends React.Component {
     const dialogClasses = {
       ...getClassSet(bsProps),
       [bsClassName]: false,
-      [prefix(bsProps, 'dialog')]: true
+      [prefix(bsProps, 'dialog')]: true,
+      [prefix(bsProps, 'dialog-centered')]: centered
     };
 
     return (
