@@ -1,5 +1,5 @@
 <ButtonGroup aria-label="Basic example">
-  <Button bsStyle="secondary">Left</Button>
-  <Button bsStyle="secondary">Middle</Button>
-  <Button bsStyle="secondary">Right</Button>
+  <Button variant="secondary">Left</Button>
+  <Button variant="secondary">Middle</Button>
+  <Button variant="secondary">Right</Button>
 </ButtonGroup>;

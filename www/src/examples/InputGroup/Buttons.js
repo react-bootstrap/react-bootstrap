@@ -1,7 +1,7 @@
 <div>
   <InputGroup className="mb-3">
     <InputGroup.Prepend>
-      <Button bsStyle="outline-secondary">Button</Button>
+      <Button variant="outline-secondary">Button</Button>
     </InputGroup.Prepend>
     <FormControl aria-describedby="basic-addon1" />
   </InputGroup>
@@ -13,14 +13,14 @@
       aria-describedby="basic-addon2"
     />
     <InputGroup.Append>
-      <Button bsStyle="outline-secondary">Button</Button>
+      <Button variant="outline-secondary">Button</Button>
     </InputGroup.Append>
   </InputGroup>
 
   <InputGroup className="mb-3">
     <InputGroup.Prepend>
-      <Button bsStyle="outline-secondary">Button</Button>
-      <Button bsStyle="outline-secondary">Button</Button>
+      <Button variant="outline-secondary">Button</Button>
+      <Button variant="outline-secondary">Button</Button>
     </InputGroup.Prepend>
     <FormControl aria-describedby="basic-addon1" />
   </InputGroup>
@@ -32,8 +32,8 @@
       aria-describedby="basic-addon2"
     />
     <InputGroup.Append>
-      <Button bsStyle="outline-secondary">Button</Button>
-      <Button bsStyle="outline-secondary">Button</Button>
+      <Button variant="outline-secondary">Button</Button>
+      <Button variant="outline-secondary">Button</Button>
     </InputGroup.Append>
   </InputGroup>
 </div>;

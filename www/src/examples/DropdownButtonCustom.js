@@ -16,7 +16,7 @@
   </Dropdown>
 
   <Dropdown id="dropdown-custom-2">
-    <Button bsStyle="info">mix it up style-wise</Button>
+    <Button variant="info">mix it up style-wise</Button>
     <Dropdown.Toggle bsStyle="success" />
     <Dropdown.Menu className="super-colors">
       <MenuItem eventKey="1">Action</MenuItem>

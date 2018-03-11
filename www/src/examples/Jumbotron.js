@@ -5,6 +5,6 @@
     extra attention to featured content or information.
   </p>
   <p>
-    <Button bsStyle="primary">Learn more</Button>
+    <Button variant="primary">Learn more</Button>
   </p>
 </Jumbotron>;
