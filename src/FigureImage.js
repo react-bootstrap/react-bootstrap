@@ -6,6 +6,10 @@ import { bsClass, prefix, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
+   * Sets image as figure image.
+   */
+  figureImg: PropTypes.bool,
+  /**
    * Sets image as fluid image.
    */
   fluid: PropTypes.bool,
@@ -27,15 +31,17 @@ const propTypes = {
 };
 
 const defaultProps = {
-  fluid: false,
+  figureImg: true,
+  fluid: true,
   rounded: false,
   roundedCircle: false,
   thumbnail: false
 };
 
-class Image extends React.Component {
+class FigureImage extends React.Component {
   render() {
     const {
+      figureImg,
       fluid,
       rounded,
       roundedCircle,
@@ -46,6 +52,7 @@ class Image extends React.Component {
     const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
+      'figure-img': figureImg,
       [prefix(bsProps, 'fluid')]: fluid,
       rounded,
       'rounded-circle': roundedCircle,
@@ -61,7 +68,7 @@ class Image extends React.Component {
   }
 }
 
-Image.propTypes = propTypes;
-Image.defaultProps = defaultProps;
+FigureImage.propTypes = propTypes;
+FigureImage.defaultProps = defaultProps;
 
-export default bsClass('img', Image);
+export default bsClass('img', FigureImage);

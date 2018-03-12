@@ -19,6 +19,7 @@ const components = [
   'forms',
   'glyphicons',
   'images',
+  'figures',
   'jumbotron',
   'list-group',
   'modal',
