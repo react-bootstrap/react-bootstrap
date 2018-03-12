@@ -7,7 +7,10 @@ import { createBootstrapComponent } from './ThemeProvider';
 
 const propTypes = {
   componentClass: elementType,
-  fluid: PropTypes.bool
+  /** Make the jumbotron full width, and without rounded corners */
+  fluid: PropTypes.bool,
+  /** @default 'jumbotron' */
+  bsPrefix: PropTypes.string
 };
 
 const defaultProps = {
@@ -21,11 +24,12 @@ class Jumbotron extends React.Component {
       componentClass: Component,
       className,
       fluid,
+      bsPrefix,
       ...props
     } = this.props;
     const classes = {
-      jumbotron: true,
-      'jumbotron-fluid': fluid
+      [bsPrefix]: true,
+      [`${bsPrefix}-fluid`]: fluid
     };
     return <Component {...props} className={classNames(className, classes)} />;
   }
