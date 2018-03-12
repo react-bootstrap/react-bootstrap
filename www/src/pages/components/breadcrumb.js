@@ -50,6 +50,7 @@ export default function BreadcrumbSection({ data }) {
 export const query = graphql`
   query BreadcrumbQuery {
     metadata: componentMetadata(displayName: { eq: "BreadcrumbItem" }) {
+      displayName
       ...PropTable_metadata
     }
   }

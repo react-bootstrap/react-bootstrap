@@ -24,7 +24,7 @@
     "Clearfix": false,
     "Col": false,
     "Collapse": false,
-    "ControlLabel": false,
+    "FormLabel": false,
     "Dropdown": false,
     "DropdownButton": false,
     "Fade": false,

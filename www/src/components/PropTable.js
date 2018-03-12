@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
-import Label from 'react-bootstrap/lib/Label';
+import Badge from 'react-bootstrap/lib/Badge';
 import Table from 'react-bootstrap/lib/Table';
 import capitalize from 'react-bootstrap/lib/utils/capitalize';
 
@@ -91,7 +91,7 @@ class PropTable extends React.Component {
         return (
           <tr key={name} className="prop-table-row">
             <td>
-              {name} {this.renderRequiredLabel(propData)}
+              {name} {this.renderRequiredBadge(propData)}
             </td>
             <td>
               <div>{this.getType(propData)}</div>
@@ -164,12 +164,12 @@ class PropTable extends React.Component {
     return <span>one of: {renderedEnumValues}</span>;
   }
 
-  renderRequiredLabel(prop) {
+  renderRequiredBadge(prop) {
     if (!prop.required) {
       return null;
     }
 
-    return <Label>required</Label>;
+    return <Badge>required</Badge>;
   }
 
   render() {

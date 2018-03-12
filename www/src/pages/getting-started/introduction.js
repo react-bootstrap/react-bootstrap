@@ -47,22 +47,16 @@ $ bower install react-bootstrap
             and which bootstrap styles you include is up to you, but the
             simplest way is to include the latest styles from the CDN.
           </p>
-          <div className="bs-callout bs-callout-warning">
-            <p>
-              React-Bootstrap currently targets Bootstrap v3. To use
-              React-Bootstrap, include the CSS for Bootstrap v3 instead of
-              Bootstrap v4.
-            </p>
-          </div>
           <pre>
             <code>{`
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css">
           `}</code>
           </pre>
+          />
           <p>
             For more advanced use cases you can also use a bundler like Webpack
             or Browserify to include the css files for you as part of your build

@@ -1,11 +1,12 @@
 lib/
 dist/
-node_modules/
+node_modules/**
 es/
 amd/
-docs/assets
+docs/assets/
 coverage/
-.cache/
-public/
-static/
+**/node_modules/**
 tmp-*-repo/
+www/.cache
+www/public
+stories/

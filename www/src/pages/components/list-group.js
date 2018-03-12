@@ -86,7 +86,6 @@ export default function ListGroupSection({ data }) {
 
       <h4>
         <Anchor id="listgroup-props-group">ListGroup</Anchor>
-        <LinkToSource component={data.ListGroup.displayName} />
       </h4>
       <PropTable metadata={data.ListGroup} />
 
@@ -94,7 +93,6 @@ export default function ListGroupSection({ data }) {
         <Anchor id="listgroup-props-item">ListGroupItem</Anchor>
         <LinkToSource component={data.ListGroupItem.displayName} />
       </h4>
-      <PropTable metadata={data.ListGroupItem} />
     </div>
   );
 }

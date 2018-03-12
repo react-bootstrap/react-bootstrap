@@ -2,18 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
 
-import Tab from '../src/Tab';
+import TabPane from '../src/TabPane';
 
-describe('<Tab>', () => {
+describe('<TabPane>', () => {
   it('Should have class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(<Tab>Item content</Tab>);
+    let instance = ReactTestUtils.renderIntoDocument(
+      <TabPane>Item content</TabPane>
+    );
     assert.ok(
       ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'tab-pane')
     );
   });
 
   it('Should add active class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(<Tab>Item content</Tab>);
+    let instance = ReactTestUtils.renderIntoDocument(
+      <TabPane active>Item content</TabPane>
+    );
     assert.ok(
       ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active')
     );
@@ -21,7 +25,7 @@ describe('<Tab>', () => {
 
   it('Should not add active class when not visible', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Tab eventKey={{}}>Item content</Tab>
+      <TabPane eventKey={{}}>Item content</TabPane>
     );
     assert.lengthOf(
       ReactTestUtils.scryRenderedDOMComponentsWithClass(instance, 'active'),
@@ -30,8 +34,10 @@ describe('<Tab>', () => {
   });
 
   describe('Web Accessibility', () => {
-    it('Should have aria-hidden false when visible', () => {
-      let instance = ReactTestUtils.renderIntoDocument(<Tab>Item content</Tab>);
+    it('Should have aria-hidden=false when visible', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <TabPane active>Item content</TabPane>
+      );
 
       assert.equal(
         ReactDOM.findDOMNode(instance).getAttribute('aria-hidden'),
@@ -39,9 +45,9 @@ describe('<Tab>', () => {
       );
     });
 
-    it('Should have aria-hidden true when hidden', () => {
+    it('Should have aria-hidden=true when hidden', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <Tab eventKey={{}}>Item content</Tab>
+        <TabPane eventKey={{}}>Item content</TabPane>
       );
 
       assert.equal(
@@ -51,7 +57,9 @@ describe('<Tab>', () => {
     });
 
     it('Should have role', () => {
-      let instance = ReactTestUtils.renderIntoDocument(<Tab>Item content</Tab>);
+      let instance = ReactTestUtils.renderIntoDocument(
+        <TabPane>Item content</TabPane>
+      );
 
       assert.equal(
         ReactDOM.findDOMNode(instance).getAttribute('role'),

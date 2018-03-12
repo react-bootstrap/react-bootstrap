@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SafeAnchor from './SafeAnchor';
+import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
@@ -30,16 +31,19 @@ const defaultProps = {
 class BreadcrumbItem extends React.Component {
   render() {
     const { active, href, title, target, className, ...props } = this.props;
+    const [bsProps, elementProps] = splitBsProps(props);
+
+    const classes = getClassSet(bsProps);
 
     // Don't try to render these props on non-active <span>.
     const linkProps = { href, title, target };
 
     return (
-      <li className={classNames(className, { active })}>
+      <li className={classNames(className, classes, { active })}>
         {active ? (
-          <span {...props} />
+          <span {...elementProps} />
         ) : (
-          <SafeAnchor {...props} {...linkProps} />
+          <SafeAnchor {...elementProps} {...linkProps} />
         )}
       </li>
     );
@@ -49,4 +53,4 @@ class BreadcrumbItem extends React.Component {
 BreadcrumbItem.propTypes = propTypes;
 BreadcrumbItem.defaultProps = defaultProps;
 
-export default BreadcrumbItem;
+export default bsClass('breadcrumb-item', BreadcrumbItem);

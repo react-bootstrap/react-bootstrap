@@ -30,7 +30,7 @@ class Example extends React.Component {
       <div>
         <p>Click to get the full Modal experience!</p>
 
-        <Button bsStyle="primary" bsSize="large" onClick={this.handleShow}>
+        <Button variant="primary" bsSize="large" onClick={this.handleShow}>
           Launch demo modal
         </Button>
 

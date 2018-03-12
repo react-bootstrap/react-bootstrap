@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import React from 'react';
 import PropTypes from 'prop-types';
+import elementType from 'prop-types-extra/lib/elementType';
+import React from 'react';
 
 import {
   bsClass,
@@ -12,11 +13,17 @@ import { Size } from './utils/StyleConfig';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const propTypes = {
+  componentClass: elementType,
+
   /**
    * Sets `id` on `<FormControl>` and `htmlFor` on `<FormGroup.Label>`.
    */
   controlId: PropTypes.string,
   validationState: PropTypes.oneOf(['success', 'warning', 'error', null])
+};
+
+const defaultProps = {
+  componentClass: 'div'
 };
 
 const childContextTypes = {
@@ -45,7 +52,13 @@ class FormGroup extends React.Component {
   }
 
   render() {
-    const { validationState, className, children, ...props } = this.props;
+    const {
+      componentClass: Component,
+      validationState,
+      className,
+      children,
+      ...props
+    } = this.props;
     const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['controlId']);
 
     const classes = {
@@ -57,14 +70,15 @@ class FormGroup extends React.Component {
     }
 
     return (
-      <div {...elementProps} className={classNames(className, classes)}>
+      <Component {...elementProps} className={classNames(className, classes)}>
         {children}
-      </div>
+      </Component>
     );
   }
 }
 
 FormGroup.propTypes = propTypes;
+FormGroup.defaultProps = defaultProps;
 FormGroup.childContextTypes = childContextTypes;
 
 export default bsClass(

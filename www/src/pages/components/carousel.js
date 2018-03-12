@@ -62,12 +62,15 @@ export default function CarouselSection({ data }) {
 export const query = graphql`
   query CarouselQuery {
     carousel: componentMetadata(displayName: { eq: "Carousel" }) {
+      displayName
       ...PropTable_metadata
     }
     item: componentMetadata(displayName: { eq: "CarouselItem" }) {
+      displayName
       ...PropTable_metadata
     }
     caption: componentMetadata(displayName: { eq: "CarouselCaption" }) {
+      displayName
       ...PropTable_metadata
     }
   }

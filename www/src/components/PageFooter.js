@@ -38,7 +38,6 @@ class PageFooter extends React.Component {
                   width={230}
                   height={20}
                   title="twitter"
-                  allowTransparency="true"
                   frameBorder="0"
                   scrolling="no"
                 />

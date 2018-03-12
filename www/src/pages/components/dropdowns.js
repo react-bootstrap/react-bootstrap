@@ -200,15 +200,19 @@ export default function DropdownSection({ data }) {
 export const query = graphql`
   query DropdownQuery {
     DropdownButton: componentMetadata(displayName: { eq: "DropdownButton" }) {
+      displayName
       ...PropTable_metadata
     }
     SplitButton: componentMetadata(displayName: { eq: "SplitButton" }) {
+      displayName
       ...PropTable_metadata
     }
     Dropdown: componentMetadata(displayName: { eq: "Dropdown" }) {
+      displayName
       ...PropTable_metadata
     }
     MenuItem: componentMetadata(displayName: { eq: "MenuItem" }) {
+      displayName
       ...PropTable_metadata
     }
   }

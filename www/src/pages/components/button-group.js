@@ -5,24 +5,19 @@ import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import ButtonGroupBasic from '../../examples/ButtonGroupBasic';
-import ButtonToolbarBasic from '../../examples/ButtonToolbarBasic';
-import ButtonGroupSizes from '../../examples/ButtonGroupSizes';
-import ButtonGroupNested from '../../examples/ButtonGroupNested';
-import ButtonGroupVertical from '../../examples/ButtonGroupVertical';
-import ButtonGroupBlock from '../../examples/ButtonGroupBlock';
-import ButtonGroupJustified from '../../examples/ButtonGroupJustified';
-import ToggleButtonGroupControlled from '../../examples/ToggleButtonGroupControlled';
-import ToggleButtonGroupUncontrolled from '../../examples/ToggleButtonGroupUncontrolled';
+import ButtonGroupBasic from '../../examples/ButtonGroup/Basic';
+import ButtonToolbarBasic from '../../examples/ButtonGroup/ToolbarBasic';
+import ButtonToolbar from '../../examples/ButtonGroup/Toolbar';
+import ButtonGroupSizes from '../../examples/ButtonGroup/Sizes';
+import ButtonGroupNested from '../../examples/ButtonGroup/Nested';
+import ButtonGroupVertical from '../../examples/ButtonGroup/Vertical';
 
 export default function ButtonGroupSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
         <Anchor id="btn-groups">Button groups</Anchor>{' '}
-        <small>
-          ButtonGroup, ButtonToolbar, ToggleButtonGroup, ToggleButton
-        </small>
+        <small>ButtonGroup, ButtonToolbar</small>
       </h2>
 
       <p className="lead">
@@ -47,6 +42,13 @@ export default function ButtonGroupSection({ data }) {
         <code>{'<ButtonToolbar />'}</code> for more complex components.
       </p>
       <ReactPlayground codeText={ButtonToolbarBasic} />
+
+      <p>
+        Feel free to mix input groups with button groups in your toolbars.
+        Similar to the example above, you’ll likely need some utilities though
+        to space things properly.
+      </p>
+      <ReactPlayground codeText={ButtonToolbar} />
 
       <h3>
         <Anchor id="btn-groups-sizing">Sizing</Anchor>
@@ -81,95 +83,15 @@ export default function ButtonGroupSection({ data }) {
         Just add <code>vertical</code> to the <code>{'<ButtonGroup />'}</code>.
       </p>
       <ReactPlayground codeText={ButtonGroupVertical} />
-      <br />
-      <p>
-        Moreover, you can have buttons be block level elements so they take the
-        full width of their container, just add <code>block</code> to the{' '}
-        <code>{'<ButtonGroup />'}</code>, in addition to the{' '}
-        <code>vertical</code> you just added.
-      </p>
-      <ReactPlayground codeText={ButtonGroupBlock} />
-
-      <h3>
-        <Anchor id="btn-groups-justified">Justified button groups</Anchor>
-      </h3>
-      <p>
-        Make a group of buttons stretch at equal sizes to span the entire width
-        of its parent. Also works with button dropdowns within the button group.
-      </p>
-      <div className="bs-callout bs-callout-warning">
-        <h4>Style issues</h4>
-        <p>
-          There are some issues and workarounds required when using this
-          property, please see{' '}
-          <a href="http://getbootstrap.com/components/#btn-groups-justified">
-            bootstrap&#8217;s button group docs
-          </a>{' '}
-          for more specifics.
-        </p>
-      </div>
-      <p>
-        Just add <code>justified</code> to the <code>{'<ButtonGroup />'}</code>.
-      </p>
-      <ReactPlayground codeText={ButtonGroupJustified} />
-
-      <h3>
-        <Anchor id="btn-groups-checkbox-radio">Checkbox / Radio</Anchor>
-      </h3>
-      <p>
-        For checkboxes or radio buttons styled as Bootstrap buttons, use the
-        <code>{'<ToggleButtonGroup>'}</code> and <code>{'<ToggleButton>'}</code>
-        components. The group behaves as a form component, where the value is an
-        array of the selected <code>eventKey</code>s for checkbox groups or the
-        selected <code>eventKey</code> for radio groups.
-      </p>
-
-      <div className="bs-callout bs-callout-warning">
-        <h4>Bootstrap JS issue</h4>
-        <p>
-          There is a known{' '}
-          <a href="https://github.com/react-bootstrap/react-bootstrap/issues/2774">
-            issue
-          </a>{' '}
-          when including Bootstrap JS while using Toggle Button Groups.
-          Therefore it is advised not use Bootstrap JS in conjunction with{' '}
-          <code>{'<ToggleButtonGroup>'}</code> and{' '}
-          <code>{'<ToggleButton>'}</code>.
-        </p>
-      </div>
-
-      <h4>Uncontrolled</h4>
-      <ReactPlayground codeText={ToggleButtonGroupUncontrolled} />
-      <h4>Controlled</h4>
-      <ReactPlayground codeText={ToggleButtonGroupControlled} />
 
       <h3>
         <Anchor id="btn-groups-props">Props</Anchor>
       </h3>
-
       <h4>
         <Anchor id="btn-groups-group-props">ButtonGroup</Anchor>
         <LinkToSource component={data.ButtonGroup.displayName} />
       </h4>
       <PropTable metadata={data.ButtonGroup} />
-
-      <h4>
-        <Anchor id="btn-groups-toolbar-props">ButtonToolbar</Anchor>
-        <LinkToSource component={data.ButtonToolbar.displayName} />
-      </h4>
-      <PropTable metadata={data.ButtonToolbar} />
-
-      <h4>
-        <Anchor id="btn-groups-toggle-group-props">ToggleButtonGroup</Anchor>
-        <LinkToSource component={data.ToggleButtonGroup.displayName} />
-      </h4>
-      <PropTable metadata={data.ToggleButtonGroup} />
-
-      <h4>
-        <Anchor id="btn-groups-toggle-btn-props">ToggleButton</Anchor>
-        <LinkToSource component={data.ToggleButton.displayName} />
-      </h4>
-      <PropTable metadata={data.ToggleButton} />
     </div>
   );
 }
@@ -177,17 +99,7 @@ export default function ButtonGroupSection({ data }) {
 export const query = graphql`
   query ButtonGroupQuery {
     ButtonGroup: componentMetadata(displayName: { eq: "ButtonGroup" }) {
-      ...PropTable_metadata
-    }
-    ButtonToolbar: componentMetadata(displayName: { eq: "ButtonToolbar" }) {
-      ...PropTable_metadata
-    }
-    ToggleButtonGroup: componentMetadata(
-      displayName: { eq: "ToggleButtonGroup" }
-    ) {
-      ...PropTable_metadata
-    }
-    ToggleButton: componentMetadata(displayName: { eq: "ToggleButton" }) {
+      displayName
       ...PropTable_metadata
     }
   }

@@ -7,16 +7,11 @@
     "url": "https://github.com/gatsbyjs/gatsby-starter-blog/issues"
   },
   "dependencies": {
-    "bootstrap": "^3.3.6",
+    "bootstrap": "^4.0.0",
     "classnames": "^2.2.5",
     "gatsby": "2.0.0-alpha.8",
     "gatsby-link": "^1.6.30",
     "gatsby-plugin-catch-links": "2.0.1-1",
-    "gatsby-plugin-less": "2.0.0-alpha.3",
-    "gatsby-remark-prismjs": "^1.2.17",
-    "gatsby-source-filesystem": "2.0.0-alpha.3",
-    "gatsby-transformer-react-docgen": "2.0.1-1",
-    "gatsby-transformer-remark": "2.0.1-1",
     "graphql": "^0.11.7",
     "graphql-type-json": "^0.1.4",
     "lodash": "^4.15.0",
@@ -28,7 +23,13 @@
     "react-live": "^1.9.2"
   },
   "devDependencies": {
-    "@babel/preset-flow": "^7.0.0-beta.40"
+    "@babel/preset-flow": "^7.0.0-beta.40",
+    "gatsby-plugin-less": "2.0.0-alpha.3",
+    "gatsby-plugin-sass": "^2.0.0-alpha.3",
+    "gatsby-remark-prismjs": "^1.2.17",
+    "gatsby-source-filesystem": "2.0.0-alpha.3",
+    "gatsby-transformer-react-docgen": "2.0.1-1",
+    "gatsby-transformer-remark": "2.0.1-1"
   },
   "homepage": "https://react-bootstrap.github.io/",
   "keywords": [

@@ -21,7 +21,7 @@ class Example extends React.Component {
   render() {
     return (
       <ButtonToolbar>
-        <Button bsStyle="primary" onClick={this.handleShow}>
+        <Button variant="primary" onClick={this.handleShow}>
           Launch demo modal
         </Button>
 

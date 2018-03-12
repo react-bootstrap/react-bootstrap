@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import startCase from 'lodash/startCase';
 import React from 'react';
 import Nav from 'react-bootstrap/lib/Nav';
-import NavItem from 'react-bootstrap/lib/NavItem';
 
 const gettingStarted = ['introduction', 'support'];
 
@@ -20,21 +19,18 @@ const components = [
   'glyphicons',
   'images',
   'jumbotron',
-  'label',
   'list-group',
   'modal',
   'navs',
   'navbar',
   'overlays',
-  'page-header',
   'pagination',
   'panel',
   'popovers',
   'progress',
   'table',
   'tabs',
-  'tooltips',
-  'well'
+  'tooltips'
 ];
 
 const utilities = ['custom-styles', 'transitions', 'responsive-embed'];
@@ -48,11 +44,16 @@ function NavSection({ heading, location, items, path }) {
       </div>
 
       {active && (
-        <Nav className="bs-docs-sidenav" activeHref={location.pathname}>
+        <Nav
+          activeKey={location.pathname}
+          className="bs-docs-sidenav flex-column"
+        >
           {items.map(name => (
-            <NavItem key={`${path}/${name}/`} href={`${path}/${name}/`}>
-              {startCase(name.toLowerCase())}
-            </NavItem>
+            <Nav.Item key={`${path}/${name}/`}>
+              <Nav.Link href={`${path}/${name}/`}>
+                {startCase(name.toLowerCase())}
+              </Nav.Link>
+            </Nav.Item>
           ))}
         </Nav>
       )}

@@ -2,7 +2,7 @@
 const path = require('path');
 const escapeRegExp = require('lodash/escapeRegExp');
 const defaultDescriptions = require('./src/defaultPropDescriptions');
-const { addBootstrapPropTypes } = require('./bsPropUtils');
+// const { addBootstrapPropTypes } = require('./bsPropUtils');
 
 const root = escapeRegExp(path.resolve(__dirname, '../'));
 const nodeModules = `${path.sep}node_modules${path.sep}`;
@@ -43,14 +43,16 @@ module.exports = {
       resolve: 'gatsby-transformer-react-docgen',
       options: {
         handlers: [
-          function applyBootstrapPropsHandler(docs, _, { absolutePath }) {
-            // eslint-disable-next-line
-            let Component = require(absolutePath);
+          // function applyBootstrapPropsHandler(docs, _, { absolutePath }) {
+          //   // eslint-disable-next-line
+          //   let Component = require(path
+          //     .relative(__dirname, absolutePath)
+          //     .replace('src', 'lib'));
 
-            if (Component) {
-              addBootstrapPropTypes(docs, Component);
-            }
-          },
+          //   if (Component) {
+          //     addBootstrapPropTypes(docs, Component);
+          //   }
+          // },
           function defaultDescriptionsHandler(docs) {
             docs._props.forEach((_, name) => {
               if (defaultDescriptions[name]) {
@@ -70,6 +72,7 @@ module.exports = {
       }
     },
     'gatsby-plugin-catch-links',
+    'gatsby-plugin-sass',
     'gatsby-plugin-less'
   ]
 };

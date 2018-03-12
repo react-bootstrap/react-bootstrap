@@ -56,15 +56,15 @@ export default function ModalSection({ data }) {
         your container has the <code>modal-container</code> class.
       </p>
       <pre>
-        {React.DOM.code(
-          null,
-          '.modal-container {\n' +
-            '  position: relative;\n' +
-            '}\n' +
-            '.modal-container .modal, .modal-container .modal-backdrop {\n' +
-            '  position: absolute;\n' +
-            '}\n'
-        )}
+        <code>
+          {`
+.modal-container {
+  position: relative;
+}
+.modal-container .modal, .modal-container .modal-backdrop {
+  position: absolute;
+}`.trim()}
+        </code>
       </pre>
       <ReactPlayground codeText={ModalContained} />
 
@@ -95,7 +95,6 @@ export default function ModalSection({ data }) {
 
       <h4>
         <Anchor id="modals-props-modal">Modal</Anchor>
-        <LinkToSource component={data.Modal.displayName} />
       </h4>
       <PropTable metadata={data.Modal} />
 
@@ -113,19 +112,16 @@ export default function ModalSection({ data }) {
 
       <h4>
         <Anchor id="modals-props-modal-title">Modal.Title</Anchor>
-        <LinkToSource component={data.ModalTitle.displayName} />
       </h4>
       <PropTable metadata={data.ModalTitle} />
 
       <h4>
         <Anchor id="modals-props-modal-body">Modal.Body</Anchor>
-        <LinkToSource component={data.ModalBody.displayName} />
       </h4>
       <PropTable metadata={data.ModalBody} />
 
       <h4>
         <Anchor id="modals-props-modal-footer">Modal.Footer</Anchor>
-        <LinkToSource component={data.ModalFooter.displayName} />
       </h4>
       <PropTable metadata={data.ModalFooter} />
     </div>

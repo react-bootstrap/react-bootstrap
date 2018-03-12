@@ -32,6 +32,7 @@ export default function JumbotronSection({ data }) {
 export const query = graphql`
   query JumbotronQuery {
     Jumbotron: componentMetadata(displayName: { eq: "Jumbotron" }) {
+      displayName
       ...PropTable_metadata
     }
   }

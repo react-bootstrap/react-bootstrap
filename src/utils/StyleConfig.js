@@ -15,18 +15,26 @@ export const SIZE_MAP = {
   xs: 'xs'
 };
 
-export const DEVICE_SIZES = ['lg', 'md', 'sm', 'xs'];
+export const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm', 'xs'];
 
 export const State = {
   SUCCESS: 'success',
   WARNING: 'warning',
   DANGER: 'danger',
-  INFO: 'info'
+  INFO: 'info',
+
+  // TODO: legacy, remove
+  DEFAULT: 'default'
 };
 
 export const Style = {
-  DEFAULT: 'default',
   PRIMARY: 'primary',
+  SECONDARY: 'secondary',
+  LIGHT: 'light',
+  DARK: 'dark',
   LINK: 'link',
-  INVERSE: 'inverse'
+  INVERSE: 'inverse',
+
+  // TODO: legacy, remove
+  DEFAULT: 'default'
 };

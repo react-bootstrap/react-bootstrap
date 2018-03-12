@@ -3,7 +3,7 @@ import React from 'react';
 import Grid from 'react-bootstrap/lib/Grid';
 import Alert from 'react-bootstrap/lib/Alert';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
-import Label from 'react-bootstrap/lib/Label';
+import Badge from 'react-bootstrap/lib/Badge';
 
 export default class HomePage extends React.Component {
   render() {
@@ -19,16 +19,6 @@ export default class HomePage extends React.Component {
         </main>
 
         <Grid>
-          <Alert bsStyle="info">
-            <p>
-              <Glyphicon glyph="warning-sign" /> React-Bootstrap currently
-              targets Bootstrap v3. We are actively working on Bootstrap v4
-              support in{' '}
-              <a href="https://github.com/react-bootstrap/react-bootstrap/pull/2752">
-                #2752
-              </a>.
-            </p>
-          </Alert>
           <Alert bsStyle="warning">
             <p>
               <Glyphicon glyph="bullhorn" /> We are actively working to reach a
@@ -54,7 +44,7 @@ export default class HomePage extends React.Component {
               >
                 issue
               </a>{' '}
-              with a <Label bsStyle="success">help-wanted</Label> label.
+              with a <Badge bsStyle="success">help-wanted</Badge> label.
             </p>
             <p>
               <Glyphicon glyph="ok" /> We are open to pull requests that address
@@ -72,6 +62,16 @@ export default class HomePage extends React.Component {
               <Glyphicon glyph="user" /> We actively seek to invite frequent
               pull request authors to join the organization.{' '}
               <Glyphicon glyph="thumbs-up" />
+            </p>
+          </Alert>
+          <Alert bsStyle="danger">
+            <p>
+              <Glyphicon glyph="warning-sign" /> The project is under active
+              development, and APIs will change.{' '}
+            </p>
+            <p>
+              <Glyphicon glyph="bullhorn" /> Prior to the 1.0.0 release,
+              breaking changes should result in a minor version bump.
             </p>
           </Alert>
         </Grid>
