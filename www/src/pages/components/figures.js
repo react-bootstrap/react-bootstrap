@@ -12,7 +12,7 @@ export default function FigureSection({ data }) {
     <div className="bs-docs-section">
       <h2 className="page-header">
         <Anchor id="figures">Figures</Anchor>{' '}
-        <small>Figure, Figure.Image, Figure.Caption</small>
+        <small>Figure, FigureImage, FigureCaption</small>
       </h2>
 
       <p>
@@ -37,13 +37,13 @@ export default function FigureSection({ data }) {
       <PropTable metadata={data.figure} />
 
       <h4>
-        <Anchor id="figures-props-image">Figure.Image</Anchor>
+        <Anchor id="figures-props-image">FigureImage</Anchor>
         <LinkToSource component={data.image.displayName} />
       </h4>
       <PropTable metadata={data.image} />
 
       <h4>
-        <Anchor id="figures-props-caption">Figure.Caption</Anchor>
+        <Anchor id="figures-props-caption">FigureCaption</Anchor>
         <LinkToSource component={data.caption.displayName} />
       </h4>
       <PropTable metadata={data.caption} />

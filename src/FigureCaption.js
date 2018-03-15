@@ -1,31 +1,35 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
-
-const propTypes = {
-  componentClass: elementType
-};
-
-const defaultProps = {
-  componentClass: 'figcaption'
-};
+import { createBootstrapComponent } from './ThemeProvider';
 
 class FigureCaption extends React.Component {
+  static propTypes = {
+    /**
+     * @default 'figure-caption'
+     */
+    bsPrefix: PropTypes.string,
+    componentClass: elementType
+  };
+
+  static defaultProps = {
+    componentClass: 'figcaption'
+  };
+
   render() {
-    const { componentClass: Component, className, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
+    const {
+      componentClass: Component,
+      bsPrefix,
+      className,
+      ...props
+    } = this.props;
 
-    const classes = getClassSet(bsProps);
+    const classes = classNames(`${bsPrefix}`);
 
-    return (
-      <Component {...elementProps} className={classNames(className, classes)} />
-    );
+    return <Component {...props} className={classNames(className, classes)} />;
   }
 }
 
-FigureCaption.propTypes = propTypes;
-FigureCaption.defaultProps = defaultProps;
-
-export default bsClass('figure-caption', FigureCaption);
+export default createBootstrapComponent(FigureCaption, 'figure-caption');

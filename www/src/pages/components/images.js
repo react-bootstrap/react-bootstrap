@@ -73,9 +73,11 @@ export default function ImageSection({ data }) {
 export const query = graphql`
   query ImageQuery {
     Image: componentMetadata(displayName: { eq: "Image" }) {
+      displayName
       ...PropTable_metadata
     }
     Thumbnail: componentMetadata(displayName: { eq: "Thumbnail" }) {
+      displayName
       ...PropTable_metadata
     }
   }
