@@ -7,25 +7,25 @@
     "__DEV__": false
   },
   "parser": "babel-eslint",
-  "plugins": [
-    "react",
-    "prettier"
-  ],
+  "plugins": ["react", "prettier"],
   "rules": {
     "max-len": "off",
     "no-plusplus": "off",
     "prefer-const": "off",
     "one-var": "off",
     "no-param-reassign": "off",
-    "no-mixed-operators": ["error", {
-      "groups": [
-        ["&", "|", "^", "~", "<<", ">>", ">>>"],
-        ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
-        ["&&", "||"],
-        ["in", "instanceof"]
-      ],
-      "allowSamePrecedence": false
-    }],
+    "no-mixed-operators": [
+      "error",
+      {
+        "groups": [
+          ["&", "|", "^", "~", "<<", ">>", ">>>"],
+          ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+          ["&&", "||"],
+          ["in", "instanceof"]
+        ],
+        "allowSamePrecedence": false
+      }
+    ],
     "class-methods-use-this": "off",
     "no-underscore-dangle": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
@@ -36,26 +36,45 @@
     "react/no-array-index-key": "off",
     "react/no-string-refs": "off",
     "react/prefer-stateless-function": "off",
-    "react/jsx-filename-extension": ["error", {
-      "extensions": [".js"]
-    }],
-    "react/prop-types": [2, { "ignore": [
-        "children",
-        "className",
-        "style",
-        "bsStyle",
-        "bsClass",
-        "bsSize"
-      ]
-    }],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [".js"]
+      }
+    ],
+    "react/prop-types": [
+      2,
+      {
+        "ignore": [
+          "children",
+          "className",
+          "style",
+          "bsStyle",
+          "bsClass",
+          "bsSize",
+          "bsRole"
+        ]
+      }
+    ],
     "react/require-default-props": "off",
     "import/no-extraneous-dependencies": [
-      "error", {"devDependencies": ["!src/**/*.js"] }
+      "error",
+      { "devDependencies": ["!src/**/*.js"] }
     ],
-    "no-restricted-syntax": ["error",
+    "no-restricted-syntax": [
+      "error",
       "ForOfStatement",
       "LabeledStatement",
       "WithStatement"
+    ],
+    "no-unused-vars": [
+      2,
+      {
+        "vars": "all",
+        "args": "after-used",
+        "varsIgnorePattern": "^_\\d?$",
+        "argsIgnorePattern": "^_\\d?$"
+      }
     ]
   },
   "overrides": [

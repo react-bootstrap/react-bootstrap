@@ -2,8 +2,12 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { bsClass, getClassSet, prefix, splitBsProps }
-  from './utils/bootstrapUtils';
+import {
+  bsClass,
+  getClassSet,
+  prefix,
+  splitBsProps
+} from './utils/bootstrapUtils';
 
 const propTypes = {
   inline: PropTypes.bool,
@@ -19,7 +23,7 @@ const propTypes = {
    * <FormCheck inputRef={ref => { this.input = ref; }} />
    * ```
    */
-  inputRef: PropTypes.func,
+  inputRef: PropTypes.func
 };
 
 const defaultProps = {
@@ -28,7 +32,7 @@ const defaultProps = {
   disabled: false,
   isValid: false,
   isInvalid: false,
-  title: '',
+  title: ''
 };
 
 class FormCheck extends React.Component {
@@ -60,7 +64,10 @@ class FormCheck extends React.Component {
         style={style}
         title={title}
       >
-        <label title={title} className={prefix(bsProps, 'label')}>
+        <label // eslint-disable-line jsx-a11y/label-has-for
+          title={title}
+          className={prefix(bsProps, 'label')}
+        >
           <input
             {...elementProps}
             ref={inputRef}

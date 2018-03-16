@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -27,6 +28,7 @@ export default function AlertsSection({ data }) {
 
       <h3>
         <Anchor id="alert-props">Props</Anchor>
+        <LinkToSource component={data.metadata.displayName} />
       </h3>
       <PropTable metadata={data.metadata} />
     </div>
@@ -35,7 +37,7 @@ export default function AlertsSection({ data }) {
 
 export const query = graphql`
   query AlertQuery {
-    metadata: componentMetadata(displayName: { eq: "Button" }) {
+    metadata: componentMetadata(displayName: { eq: "Alert" }) {
       ...PropTable_metadata
     }
   }

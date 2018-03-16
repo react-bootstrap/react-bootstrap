@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import uncontrollable from 'uncontrollable';
+import warning from 'warning';
 
 import {
   bsStyles,
@@ -16,6 +17,8 @@ import Title from './PanelTitle';
 import Footer from './PanelFooter';
 import Toggle from './PanelToggle';
 import Collapse from './PanelCollapse';
+
+const has = Object.prototype.hasOwnProperty;
 
 const defaultGetId = (id, type) => (id ? `${id}--${type}` : null);
 
@@ -61,20 +64,16 @@ const childContextTypes = {
 };
 
 class Panel extends React.Component {
-  constructor(...args) {
-    super(...args);
-    this.handleToggle = this.handleToggle.bind(this);
-  }
-
   getChildContext() {
     const { eventKey, id } = this.props;
-    let { getId } = this.context.$bs_panelGroup || {};
+    const idKey = eventKey == null ? id : eventKey;
 
     let ids;
-    let idKey = eventKey == null ? id : eventKey;
 
     if (idKey !== null) {
-      getId = getId || defaultGetId;
+      const panelGroup = this.context.$bs_panelGroup;
+      const getId = (panelGroup && panelGroup.getId) || defaultGetId;
+
       ids = {
         headingId: getId(idKey, 'heading'),
         bodyId: getId(idKey, 'body')
@@ -92,23 +91,32 @@ class Panel extends React.Component {
   }
 
   getExpanded() {
-    const { eventKey } = this.props;
-    const { activeKey } = this.context.$bs_panelGroup || {};
+    const panelGroup = this.context.$bs_panelGroup;
 
-    return this.props.expanded != null || activeKey === undefined
-      ? this.props.expanded
-      : activeKey === eventKey;
+    if (panelGroup && has.call(panelGroup, 'activeKey')) {
+      warning(
+        this.props.expanded == null,
+        'Specifying `<Panel>` `expanded` in the context of an accordion ' +
+          '`<PanelGroup>` is not supported. Set `activeKey` on the ' +
+          '`<PanelGroup>` instead.'
+      );
+
+      return panelGroup.activeKey === this.props.eventKey;
+    }
+
+    return !!this.props.expanded;
   }
 
-  handleToggle(e) {
-    const { onToggle } = this.context.$bs_panelGroup || {};
+  handleToggle = e => {
+    const panelGroup = this.context.$bs_panelGroup;
     const expanded = !this.getExpanded();
 
-    this.props.onToggle(expanded, e);
-    if (onToggle) {
-      onToggle(this.props.eventKey, expanded, e);
+    if (panelGroup && panelGroup.onToggle) {
+      panelGroup.onToggle(this.props.eventKey, expanded, e);
+    } else {
+      this.props.onToggle(expanded, e);
     }
-  }
+  };
 
   render() {
     let { className, children } = this.props;

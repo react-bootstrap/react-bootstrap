@@ -3,100 +3,104 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import {
-  bsClass,
-  bsSizes,
-  bsStyles,
-  getClassSet,
-  prefix,
-  splitBsProps
-} from './utils/bootstrapUtils';
-import { Size, State, Style } from './utils/StyleConfig';
-
+import { createBootstrapComponent } from './ThemeProvider';
 import SafeAnchor from './SafeAnchor';
 
-const propTypes = {
-  active: PropTypes.bool,
-  disabled: PropTypes.bool,
-  block: PropTypes.bool,
-  onClick: PropTypes.func,
-  componentClass: elementType,
-  href: PropTypes.string,
-  /**
-   * Defines HTML button type attribute
-   * @defaultValue 'button'
-   */
-  type: PropTypes.oneOf(['button', 'reset', 'submit', null])
-};
-
-const defaultProps = {
-  active: false,
-  block: false,
-  disabled: false,
-  type: 'button'
-};
-
 class Button extends React.Component {
-  renderAnchor(elementProps, className) {
-    return (
-      <SafeAnchor
-        {...elementProps}
-        className={classNames(className, elementProps.disabled && 'disabled')}
-      />
-    );
-  }
+  static propTypes = {
+    /**
+     * @default 'btn'
+     */
+    bsPrefix: PropTypes.string,
 
-  renderButton({ componentClass, ...elementProps }, className) {
-    const Component = componentClass || 'button';
+    /**
+     * One or more button variant combinations
+     *
+     * buttons may be one of a variety of visual variants such as:
+     *
+     * `'primary', 'secondary', 'success', 'danger', 'warning', 'info, 'dark', 'light', 'link'`
+     *
+     * as well as "outline" versions (prefixed by 'outline-*')
+     *
+     * `'outline-primary', 'outline-secondary', 'outline-success', 'outline-danger', 'outline-warning', 'outline-info, 'outline-dark', 'outline-light'`
+     */
+    variant: PropTypes.string,
 
-    return (
-      <Component
-        {...elementProps}
-        type={elementProps.type}
-        className={className}
-      />
-    );
-  }
+    /**
+     * Specifies a large or small button.
+     *
+     * @type ('sm'|'lg')
+     */
+    size: PropTypes.string,
+
+    /** Spans the full width of the Button parent */
+    block: PropTypes.bool,
+
+    /** Manually set the visual state of the button to `:active` */
+    active: PropTypes.bool,
+
+    /**
+     * Disables the Button, preventing mouse events,
+     * even if the underlying component is an `<a>` element
+     */
+    disabled: PropTypes.bool,
+
+    /** Providing a `href` will render an `<a>` element, _styled_ as a button. */
+    href: PropTypes.string,
+
+    /**
+     * Defines HTML button type attribute.
+     *
+     * @default 'button'
+     */
+    type: PropTypes.oneOf(['button', 'reset', 'submit', null]),
+
+    componentClass: elementType
+  };
+
+  static defaultProps = {
+    variant: 'primary',
+    active: false,
+    disabled: false,
+    type: 'button'
+  };
 
   render() {
-    const { active, block, className, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
-
-    const classes = {
-      ...getClassSet(bsProps),
+    const {
+      bsRole: _0,
+      bsPrefix,
+      variant,
+      size,
       active,
-      [prefix(bsProps, 'block')]: block
-    };
-    const fullClassName = classNames(className, classes);
+      className,
+      block,
+      type,
+      componentClass,
+      ...props
+    } = this.props;
 
-    if (elementProps.href) {
-      return this.renderAnchor(elementProps, fullClassName);
+    const classes = classNames(
+      className,
+      bsPrefix,
+      active && 'active',
+      `${bsPrefix}-${variant}`,
+      block && `${bsPrefix}-block`,
+      size && `${bsPrefix}-${size}`
+    );
+
+    if (props.href) {
+      return (
+        <SafeAnchor
+          {...props}
+          componentClass={componentClass}
+          className={classNames(classes, props.disabled && 'disabled')}
+        />
+      );
     }
 
-    return this.renderButton(elementProps, fullClassName);
+    const Component = componentClass || 'button';
+    return <Component {...props} type={type} className={classes} />;
   }
 }
 
-Button.propTypes = propTypes;
-Button.defaultProps = defaultProps;
-
-const variants = [
-  ...Object.values(State),
-  Style.PRIMARY,
-  Style.SECONDARY,
-  Style.LIGHT,
-  Style.DARK
-];
-const outlineVariants = variants.map(v => `outline-${v}`);
-
-export default bsClass(
-  'btn',
-  bsSizes(
-    [Size.LARGE, Size.SMALL],
-    bsStyles(
-      [...variants, ...outlineVariants, Style.LINK],
-      Style.PRIMARY,
-      Button
-    )
-  )
-);
+export default createBootstrapComponent(Button, 'btn');

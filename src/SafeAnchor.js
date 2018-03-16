@@ -81,7 +81,7 @@ class SafeAnchor extends React.Component {
 
     if (disabled) {
       props.tabIndex = -1;
-      props.style = { pointerEvents: 'none', ...props.style };
+      props['aria-disabled'] = true;
     }
 
     return (

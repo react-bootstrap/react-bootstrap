@@ -445,7 +445,7 @@ describe('<Dropdown>', () => {
       render() {
         return (
           <Dropdown
-            ref={dropdown => (this.dropdown = dropdown.refs.inner)}
+            ref={dropdown => (this.dropdown = dropdown.inner)}
             id="test"
           >
             <Dropdown.Toggle ref={toggle => (this.toggle = toggle)} />
