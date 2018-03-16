@@ -10,6 +10,7 @@ import ModalContained from '../../examples/ModalContained';
 import ModalDefaultSizing from '../../examples/ModalDefaultSizing';
 import ModalCustomSizing from '../../examples/ModalCustomSizing';
 import ModalVerticallyCentered from '../../examples/ModalVerticallyCentered';
+import ModalGrid from '../../examples/ModalGrid';
 
 export default function ModalSection({ data }) {
   return (
@@ -100,6 +101,15 @@ export default function ModalSection({ data }) {
         prop.
       </p>
       <ReactPlayground codeText={ModalVerticallyCentered} />
+
+      <h3>
+        <Anchor id="modal-grid">Using grid in modals</Anchor>
+      </h3>
+      <p>
+        You can use grid layouts within a model using regular grid components
+        inside the modal content.
+      </p>
+      <ReactPlayground codeText={ModalGrid} />
 
       <h3>
         <Anchor id="modals-props">Props</Anchor>
