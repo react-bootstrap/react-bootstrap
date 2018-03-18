@@ -25,26 +25,33 @@ class ThemeProvider extends React.Component {
 }
 
 function createBootstrapComponent(Component, prefix) {
+  const refProp = '@@react-bootstrap/ref';
   const name = Component.displayName || Component.name;
   // eslint-disable-next-line
-  return class extends React.Component {
+  class BootstrapComponent extends React.Component {
     static displayName = `Bootstrap(${name})`;
     static propTypes = {
-      bsPrefix: PropTypes.string
+      bsPrefix: PropTypes.string,
+      [refProp]: PropTypes.any
     };
     render() {
+      const { [refProp]: ref, bsPrefix, ...props } = this.props;
       return (
         <ThemeContext.Consumer>
           {variants => (
             <Component
-              {...this.props}
-              bsPrefix={this.props.bsPrefix || variants.get(prefix) || prefix}
+              {...props}
+              ref={ref}
+              bsPrefix={bsPrefix || variants.get(prefix) || prefix}
             />
           )}
         </ThemeContext.Consumer>
       );
     }
-  };
+  }
+  return React.forwardRef((props, ref) =>
+    React.createElement(BootstrapComponent, { ...props, [refProp]: ref })
+  );
 }
 
 export { createBootstrapComponent };
