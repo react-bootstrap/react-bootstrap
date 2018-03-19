@@ -13,13 +13,16 @@ export default function createWithBsPrefix(
   return createBootstrapComponent(
     class extends React.Component {
       static displayName = displayName;
-      static propTypes = { bsPrefix: () => {} };
+      static propTypes = { bsPrefix: () => {}, componentClass: () => {} };
       render() {
-        const { className, bsPrefix, ...props } = this.props;
+        const {
+          className,
+          bsPrefix,
+          componentClass: Tag = Component,
+          ...props
+        } = this.props;
 
-        return (
-          <Component {...props} className={classNames(className, bsPrefix)} />
-        );
+        return <Tag {...props} className={classNames(className, bsPrefix)} />;
       }
     },
     prefix

@@ -1,58 +1,77 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import elementType from 'prop-types-extra/lib/elementType';
 
-import { prefix } from './utils/bootstrapUtils';
-import createChainedFunction from './utils/createChainedFunction';
-
-const propTypes = {
-  onClick: PropTypes.func,
-  /**
-   * The toggle content, if left empty it will render the default toggle (seen above).
-   */
-  children: PropTypes.node
-};
-
-const contextTypes = {
-  $bs_navbar: PropTypes.shape({
-    bsClass: PropTypes.string,
-    expanded: PropTypes.bool,
-    onToggle: PropTypes.func.isRequired
-  })
-};
+import { createBootstrapComponent } from './ThemeProvider';
+import NavbarContext from './NavbarContext';
 
 class NavbarToggle extends React.Component {
+  static propTypes = {
+    /** @default 'navbar' */
+    bsPrefix: PropTypes.string,
+
+    /** An accessible ARIA label for the toggler button. */
+    label: PropTypes.string,
+
+    /** @private */
+    onClick: PropTypes.func,
+
+    /**
+     * The toggle content, if left empty it will render the default toggle (seen above).
+     */
+    children: PropTypes.node,
+    componentClass: elementType
+  };
+
+  static defaultProps = {
+    label: 'Toggle navigation',
+    componentClass: 'button'
+  };
+
+  handleClick = e => {
+    const { onClick } = this.props;
+    const { onToggle } = this.navbarContext;
+
+    if (onClick) onClick(e);
+    if (onToggle) onToggle();
+  };
   render() {
-    const { onClick, className, children, ...props } = this.props;
-    const navbarProps = this.context.$bs_navbar || { bsClass: 'navbar' };
+    const {
+      bsPrefix,
+      className,
+      children,
+      label,
+      componentClass: Component,
+      ...props
+    } = this.props;
 
-    const buttonProps = {
-      type: 'button',
-      ...props,
-      onClick: createChainedFunction(onClick, navbarProps.onToggle),
-      className: classNames(
-        className,
-        prefix(navbarProps, 'toggle'),
-        !navbarProps.expanded && 'collapsed'
-      )
-    };
-
-    if (children) {
-      return <button {...buttonProps}>{children}</button>;
+    if (Component === 'button') {
+      props.type = 'button';
     }
 
     return (
-      <button {...buttonProps}>
-        <span className="sr-only">Toggle navigation</span>
-        <span className="icon-bar" />
-        <span className="icon-bar" />
-        <span className="icon-bar" />
-      </button>
+      <NavbarContext.Consumer>
+        {context => {
+          this.navbarContext = context || {};
+          return (
+            <Component
+              {...props}
+              onClick={this.handleClick}
+              aria-label={label}
+              className={classNames(
+                className,
+                bsPrefix,
+                !!(context && context.expanded) && 'collapsed'
+              )}
+            >
+              {children || <span className={`${bsPrefix}-icon`} />}
+            </Component>
+          );
+        }}
+      </NavbarContext.Consumer>
     );
   }
 }
 
-NavbarToggle.propTypes = propTypes;
-NavbarToggle.contextTypes = contextTypes;
-
-export default NavbarToggle;
+export default createBootstrapComponent(NavbarToggle, 'navbar-toggler');

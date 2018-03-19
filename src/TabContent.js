@@ -8,7 +8,7 @@ import { createBootstrapComponent } from './ThemeProvider';
 class TabContent extends React.Component {
   static propTypes = {
     /**
-     * @default 'tab-pane'
+     * @default 'tab-content'
      */
     bsPrefix: PropTypes.string,
 

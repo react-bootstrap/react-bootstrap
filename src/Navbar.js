@@ -7,40 +7,50 @@ import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 import uncontrollable from 'uncontrollable';
 
-import Grid from './Grid';
+import createWithBsPrefix from './utils/createWithBsPrefix';
 import NavbarBrand from './NavbarBrand';
 import NavbarCollapse from './NavbarCollapse';
-import NavbarHeader from './NavbarHeader';
 import NavbarToggle from './NavbarToggle';
-import {
-  bsClass as setBsClass,
-  bsStyles,
-  getClassSet,
-  prefix,
-  splitBsPropsAndOmit
-} from './utils/bootstrapUtils';
-import { Style } from './utils/StyleConfig';
-import createChainedFunction from './utils/createChainedFunction';
+import { createBootstrapComponent } from './ThemeProvider';
+import NavbarContext from './NavbarContext';
 
 const propTypes = {
+  /** @default 'navbar' */
+  bsPrefix: PropTypes.string.isRequired,
+
   /**
-   * Create a fixed navbar along the top of the screen, that scrolls with the
-   * page
+   * The general visual variant a the Navbar.
+   * Use in combination with `background-color` utilities, or your own background styles.
+   *
+   * @type {('light'|'dark')}
    */
-  fixedTop: PropTypes.bool,
+  variant: PropTypes.string,
+
+  /** The breakpoint, below which, the Navbar will collapse */
+  expand: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl']).isRequired,
+
   /**
-   * Create a fixed navbar along the bottom of the screen, that scrolls with
-   * the page
+   * A convenience prop for adding `bg-*` utility classes since they are so commonly used here.
+   * `light` and `dark` are common choices but any `bg-*` class is supported, including any custom ones you might define.
+   *
+   * Pairs nicely with the `variant` prop.
    */
-  fixedBottom: PropTypes.bool,
+  bg: PropTypes.string,
+
   /**
-   * Create a full-width navbar that scrolls away with the page
+   * Create a fixed navbar along the top or bottom of the screen, that scrolls with the
+   * page. A convenience prop for the `fixed-*` positioning classes.
    */
-  staticTop: PropTypes.bool,
+  fixed: PropTypes.oneOf(['top', 'bottom']),
+
   /**
-   * An alternative dark visual style for the Navbar
+   * Position the navbar at the top or bottom of the viewport,
+   * but only after scrolling past it. . A convenience prop for the `sticky-*` positioning classes.
+   *
+   *  __Not supported in <= IE11 and other older browsers without a polyfill__
    */
-  inverse: PropTypes.bool,
+  sticky: PropTypes.oneOf(['top', 'bottom']),
+
   /**
    * Allow the Navbar to fluidly adjust to the page or container width, instead
    * of at the predefined screen breakpoints
@@ -51,6 +61,7 @@ const propTypes = {
    * Set a custom element for this component.
    */
   componentClass: elementType,
+
   /**
    * A callback fired when the `<Navbar>` body collapses or expands. Fired when
    * a `<Navbar.Toggle>` is clicked and called with the new `expanded`
@@ -59,6 +70,7 @@ const propTypes = {
    * @controllable expanded
    */
   onToggle: PropTypes.func,
+
   /**
    * A callback fired when a descendant of a child `<Nav>` is selected. Should
    * be used to execute complex closing or other miscellaneous actions desired
@@ -89,6 +101,7 @@ const propTypes = {
    * that need to be executed after the `select` event of `<Nav>` descendants.
    */
   collapseOnSelect: PropTypes.bool,
+
   /**
    * Explicitly set the visiblity of the navbar body
    *
@@ -101,166 +114,112 @@ const propTypes = {
 
 const defaultProps = {
   componentClass: 'nav',
-  fixedTop: false,
-  fixedBottom: false,
-  staticTop: false,
-  inverse: false,
-  fluid: false,
+  expand: true,
+  fluid: true,
+  variant: 'light',
   collapseOnSelect: false
 };
 
-const childContextTypes = {
-  $bs_navbar: PropTypes.shape({
-    bsClass: PropTypes.string,
-    expanded: PropTypes.bool,
-    onToggle: PropTypes.func.isRequired,
-    onSelect: PropTypes.func
-  })
-};
-
 class Navbar extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.handleToggle = this.handleToggle.bind(this);
-    this.handleCollapse = this.handleCollapse.bind(this);
-  }
-
-  getChildContext() {
-    const { bsClass, expanded, onSelect, collapseOnSelect } = this.props;
-
+  static getDerivedStateFromProps({ bsPrefix, expanded }, prevState) {
     return {
-      $bs_navbar: {
-        bsClass,
-        expanded,
-        onToggle: this.handleToggle,
-        onSelect: createChainedFunction(
-          onSelect,
-          collapseOnSelect ? this.handleCollapse : null
-        )
+      navbarContext: {
+        ...prevState.navbarContext,
+        bsPrefix,
+        expanded
       }
     };
   }
 
-  handleCollapse() {
-    const { onToggle, expanded } = this.props;
+  constructor(...args) {
+    super(...args);
 
-    if (expanded) {
-      onToggle(false);
-    }
+    this.state = {
+      navbarContext: {
+        onToggle: this.handleToggle,
+        onSelect: this.handleCollapse
+      }
+    };
   }
 
-  handleToggle() {
+  handleCollapse = (...args) => {
+    const { onToggle, expanded, collapseOnSelect, onSelect } = this.props;
+
+    if (onSelect) onSelect(...args);
+    if (collapseOnSelect && expanded) {
+      onToggle(false);
+    }
+  };
+
+  handleToggle = () => {
     const { onToggle, expanded } = this.props;
 
     onToggle(!expanded);
-  }
+  };
 
   render() {
     const {
-      componentClass: Component,
-      fixedTop,
-      fixedBottom,
-      staticTop,
-      inverse,
+      bsPrefix,
+      expand,
+      variant,
+      bg,
+      fixed,
+      sticky,
       fluid,
       className,
       children,
+      componentClass: Component,
+      expanded: _1,
+      onToggle: _2,
+      onSelect: _3,
+      collapseOnSelect: _4,
       ...props
     } = this.props;
-
-    const [bsProps, elementProps] = splitBsPropsAndOmit(props, [
-      'expanded',
-      'onToggle',
-      'onSelect',
-      'collapseOnSelect'
-    ]);
 
     // will result in some false positives but that seems better
     // than false negatives. strict `undefined` check allows explicit
     // "nulling" of the role if the user really doesn't want one
-    if (elementProps.role === undefined && Component !== 'nav') {
-      elementProps.role = 'navigation';
+    if (props.role === undefined && Component !== 'nav') {
+      props.role = 'navigation';
     }
-
-    if (inverse) {
-      bsProps.bsStyle = Style.INVERSE;
-    }
-
-    const classes = {
-      ...getClassSet(bsProps),
-      [prefix(bsProps, 'fixed-top')]: fixedTop,
-      [prefix(bsProps, 'fixed-bottom')]: fixedBottom,
-      [prefix(bsProps, 'static-top')]: staticTop
-    };
+    let expandClass = `${bsPrefix}-expand`;
+    if (typeof expand === 'string') expandClass = `${expandClass}-${expand}`;
 
     return (
-      <Component {...elementProps} className={classNames(className, classes)}>
-        <Grid fluid={fluid}>{children}</Grid>
-      </Component>
+      <NavbarContext.Provider value={this.state.navbarContext}>
+        <Component
+          {...props}
+          className={classNames(
+            className,
+            bsPrefix,
+            expand && expandClass,
+            variant && `${bsPrefix}-${variant}`,
+            bg && `bg-${bg}`,
+            sticky && `sticky-${sticky}`,
+            fixed && `fixed-${fixed}`
+          )}
+        >
+          {fluid ? children : <div className="container">{children}</div>}
+        </Component>
+      </NavbarContext.Provider>
     );
   }
 }
 
 Navbar.propTypes = propTypes;
 Navbar.defaultProps = defaultProps;
-Navbar.childContextTypes = childContextTypes;
 
-setBsClass('navbar', Navbar);
-
-const UncontrollableNavbar = uncontrollable(Navbar, { expanded: 'onToggle' });
-
-function createSimpleWrapper(tag, suffix, displayName) {
-  const Wrapper = (
-    { componentClass: Component, className, pullRight, pullLeft, ...props },
-    { $bs_navbar: navbarProps = { bsClass: 'navbar' } }
-  ) => (
-    <Component
-      {...props}
-      className={classNames(
-        className,
-        prefix(navbarProps, suffix),
-        pullRight && prefix(navbarProps, 'right'),
-        pullLeft && prefix(navbarProps, 'left')
-      )}
-    />
-  );
-
-  Wrapper.displayName = displayName;
-
-  Wrapper.propTypes = {
-    componentClass: elementType,
-    pullRight: PropTypes.bool,
-    pullLeft: PropTypes.bool
-  };
-
-  Wrapper.defaultProps = {
-    componentClass: tag,
-    pullRight: false,
-    pullLeft: false
-  };
-
-  Wrapper.contextTypes = {
-    $bs_navbar: PropTypes.shape({
-      bsClass: PropTypes.string
-    })
-  };
-
-  return Wrapper;
-}
-
-UncontrollableNavbar.Brand = NavbarBrand;
-UncontrollableNavbar.Header = NavbarHeader;
-UncontrollableNavbar.Toggle = NavbarToggle;
-UncontrollableNavbar.Collapse = NavbarCollapse;
-
-UncontrollableNavbar.Form = createSimpleWrapper('div', 'form', 'NavbarForm');
-UncontrollableNavbar.Text = createSimpleWrapper('p', 'text', 'NavbarText');
-UncontrollableNavbar.Link = createSimpleWrapper('a', 'link', 'NavbarLink');
-
-// Set bsStyles here so they can be overridden.
-export default bsStyles(
-  [Style.DEFAULT, Style.INVERSE],
-  Style.DEFAULT,
-  UncontrollableNavbar
+const DecoratedNavbar = createBootstrapComponent(
+  uncontrollable(Navbar, { expanded: 'onToggle' }),
+  'navbar'
 );
+
+DecoratedNavbar.Brand = NavbarBrand;
+DecoratedNavbar.Toggle = NavbarToggle;
+DecoratedNavbar.Collapse = NavbarCollapse;
+
+DecoratedNavbar.Text = createWithBsPrefix('navbar-text', {
+  Component: 'span'
+});
+
+export default DecoratedNavbar;
