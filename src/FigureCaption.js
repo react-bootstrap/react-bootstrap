@@ -26,9 +26,7 @@ class FigureCaption extends React.Component {
       ...props
     } = this.props;
 
-    const classes = classNames(`${bsPrefix}`);
-
-    return <Component {...props} className={classNames(className, classes)} />;
+    return <Component {...props} className={classNames(className, bsPrefix)} />;
   }
 }
 

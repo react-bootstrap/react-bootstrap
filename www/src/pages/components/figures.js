@@ -37,13 +37,13 @@ export default function FigureSection({ data }) {
       <PropTable metadata={data.figure} />
 
       <h4>
-        <Anchor id="figures-props-image">FigureImage</Anchor>
+        <Anchor id="figures-props-image">Figure.Image</Anchor>
         <LinkToSource component={data.image.displayName} />
       </h4>
       <PropTable metadata={data.image} />
 
       <h4>
-        <Anchor id="figures-props-caption">FigureCaption</Anchor>
+        <Anchor id="figures-props-caption">Figure.Caption</Anchor>
         <LinkToSource component={data.caption.displayName} />
       </h4>
       <PropTable metadata={data.caption} />
@@ -58,6 +58,7 @@ export const query = graphql`
       ...PropTable_metadata
     }
     image: componentMetadata(displayName: { eq: "FigureImage" }) {
+      displayName
       ...PropTable_metadata
     }
     caption: componentMetadata(displayName: { eq: "FigureCaption" }) {

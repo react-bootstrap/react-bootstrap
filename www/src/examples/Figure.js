@@ -1,6 +1,6 @@
 <Figure>
-  <FigureImage width={400} height={300} alt="400x300" src="/figure.png" />
-  <FigureCaption>
-    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-  </FigureCaption>
+  <Figure.Image width={171} height={180} alt="171x180" src="/thumbnail.png" />
+  <Figure.Caption>
+    Nulla vitae elit libero, a pharetra augue mollis interdum.
+  </Figure.Caption>
 </Figure>;

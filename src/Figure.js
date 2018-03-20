@@ -5,6 +5,9 @@ import elementType from 'prop-types-extra/lib/elementType';
 
 import { createBootstrapComponent } from './ThemeProvider';
 
+import FigureImage from './FigureImage';
+import FigureCaption from './FigureCaption';
+
 class Figure extends React.Component {
   static propTypes = {
     /**
@@ -27,10 +30,12 @@ class Figure extends React.Component {
       ...props
     } = this.props;
 
-    const classes = classNames(`${bsPrefix}`);
-
-    return <Component {...props} className={classNames(className, classes)} />;
+    return <Component {...props} className={classNames(className, bsPrefix)} />;
   }
 }
 
-export default createBootstrapComponent(Figure, 'figure');
+const DecoratedFigure = createBootstrapComponent(Figure, 'figure');
+
+DecoratedFigure.Image = FigureImage;
+DecoratedFigure.Caption = FigureCaption;
+export default DecoratedFigure;

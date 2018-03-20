@@ -2,25 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
 
-import FigureCaption from '../src/FigureCaption';
+import Figure from '../src/Figure';
 
-describe('<FigureCaption>', () => {
+describe('<Figure.Caption>', () => {
   it('uses "figcaption" by default', () => {
-    let instance = ReactTestUtils.renderIntoDocument(<FigureCaption />);
+    let instance = ReactTestUtils.renderIntoDocument(<Figure.Caption />);
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'FIGCAPTION');
   });
 
   it('has "figure-caption" class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <FigureCaption>FigureCaption content</FigureCaption>
+      <Figure.Caption>FigureCaption content</Figure.Caption>
     );
     assert.equal(ReactDOM.findDOMNode(instance).className, 'figure-caption');
   });
 
   it('Should merge additional classes passed in', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <FigureCaption className="bob" />
+      <Figure.Caption className="bob" />
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbob\b/));
     assert.ok(
@@ -30,7 +30,7 @@ describe('<FigureCaption>', () => {
 
   it('allows custom elements instead of "figcaption"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <FigureCaption componentClass="section" />
+      <Figure.Caption componentClass="section" />
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');

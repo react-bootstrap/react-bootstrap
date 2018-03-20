@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
 
 import Figure from '../src/Figure';
-import FigureImage from '../src/FigureImage';
 
 describe('Figure', () => {
   describe('General', () => {
@@ -15,9 +14,9 @@ describe('Figure', () => {
     });
   });
 
-  describe('FigureImage', () => {
+  describe('Figure.Image', () => {
     it('should be an image', () => {
-      let instance = ReactTestUtils.renderIntoDocument(<FigureImage />);
+      let instance = ReactTestUtils.renderIntoDocument(<Figure.Image />);
       let image = ReactDOM.findDOMNode(instance);
 
       image.nodeName.should.equal('IMG');
@@ -25,7 +24,7 @@ describe('Figure', () => {
 
     it('should provide src and alt prop', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <FigureImage src="image.jpg" alt="this is alt" />
+        <Figure.Image src="image.jpg" alt="this is alt" />
       );
       let image = ReactDOM.findDOMNode(instance);
 
@@ -34,14 +33,25 @@ describe('Figure', () => {
     });
 
     it('should have correct class when fluid prop is set', () => {
-      let instance = ReactTestUtils.renderIntoDocument(<FigureImage fluid />);
+      let instance = ReactTestUtils.renderIntoDocument(<Figure.Image fluid />);
       let imageClassName = ReactDOM.findDOMNode(instance).className;
 
       imageClassName.should.match(/\bimg-fluid\b/);
     });
 
+    it('should not override class when rounded prop is set', () => {
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Figure.Image rounded />
+      );
+      let imageClassName = ReactDOM.findDOMNode(instance).className;
+
+      imageClassName.should.match(/\bfigure-img img-fluid rounded\b/);
+    });
+
     it('should have correct class when rounded prop is set', () => {
-      let instance = ReactTestUtils.renderIntoDocument(<FigureImage rounded />);
+      let instance = ReactTestUtils.renderIntoDocument(
+        <Figure.Image rounded />
+      );
       let imageClassName = ReactDOM.findDOMNode(instance).className;
 
       imageClassName.should.match(/\brounded\b/);
@@ -49,7 +59,7 @@ describe('Figure', () => {
 
     it('should have correct class when roundedCircle prop is set', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <FigureImage roundedCircle />
+        <Figure.Image roundedCircle />
       );
       let imageClassName = ReactDOM.findDOMNode(instance).className;
 
@@ -58,7 +68,7 @@ describe('Figure', () => {
 
     it('should have correct class when thumbnail prop is set', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <FigureImage thumbnail />
+        <Figure.Image thumbnail />
       );
       let imageClassName = ReactDOM.findDOMNode(instance).className;
 

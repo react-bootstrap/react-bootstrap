@@ -25,8 +25,6 @@ export Grid from './Grid';
 export HelpBlock from './HelpBlock';
 export Image from './Image';
 export Figure from './Figure';
-export FigureImage from './FigureImage';
-export FigureCaption from './FigureCaption';
 export InputGroup from './InputGroup';
 export Jumbotron from './Jumbotron';
 export ListGroup from './ListGroup';

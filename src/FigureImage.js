@@ -1,18 +1,17 @@
+import classNames from 'classnames';
 import React from 'react';
-
-import { createBootstrapComponent } from './ThemeProvider';
 
 import Image from './Image';
 
 class FigureImage extends React.Component {
-  static propTypes = { ...Image.propTypes };
+  static propTypes = Image.propTypes;
 
-  static defaultProps = { ...Image.propTypes, fluid: true };
+  static defaultProps = { fluid: true };
 
   render() {
-    const { ...props } = this.props;
-    return <Image {...props} className="figure-img" />;
+    const { className, ...props } = this.props;
+    return <Image {...props} className={classNames(className, 'figure-img')} />;
   }
 }
 
-export default createBootstrapComponent(FigureImage, 'img');
+export default FigureImage;
