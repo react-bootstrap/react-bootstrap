@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -53,11 +54,13 @@ export default function NavSection({ data }) {
 
       <h4>
         <Anchor id="navs-props-nav">Nav</Anchor>
+        <LinkToSource component={data.Nav.displayName} />
       </h4>
       <PropTable metadata={data.Nav} />
 
       <h4>
         <Anchor id="navs-props-navitem">NavItem</Anchor>
+        <LinkToSource component={data.NavItem.displayName} />
       </h4>
       <PropTable metadata={data.NavItem} />
     </div>
@@ -67,9 +70,11 @@ export default function NavSection({ data }) {
 export const query = graphql`
   query NavQuery {
     Nav: componentMetadata(displayName: { eq: "Nav" }) {
+      displayName
       ...PropTable_metadata
     }
     NavItem: componentMetadata(displayName: { eq: "NavItem" }) {
+      displayName
       ...PropTable_metadata
     }
   }

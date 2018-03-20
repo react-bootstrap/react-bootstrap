@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -104,8 +105,8 @@ export default function DropdownSection({ data }) {
         </li>
       </ul>
       <p>
-        The callback is called with the following arguments: <code>event</code>{' '}
-        and <code>eventKey</code>
+        The callback is called with the following arguments:{' '}
+        <code>eventKey</code> and <code>event</code>
       </p>
       <ReactPlayground codeText={MenuItem} />
 
@@ -171,22 +172,26 @@ export default function DropdownSection({ data }) {
 
       <h4>
         <Anchor id="btn-dropdowns-props-dropdown-button">DropdownButton</Anchor>
+        <LinkToSource component={data.DropdownButton.displayName} />
       </h4>
       <PropTable metadata={data.DropdownButton} />
 
       <h4>
         <Anchor id="btn-dropdowns-props-split">SplitButton</Anchor>
+        <LinkToSource component={data.SplitButton.displayName} />
       </h4>
       <PropTable metadata={data.SplitButton} />
 
       <h4>
         <Anchor id="btn-dropdowns-props-dropdown">Dropdown</Anchor>
+        <LinkToSource component={data.Dropdown.displayName} />
       </h4>
       <PropTable metadata={data.Dropdown} />
 
-      <h3>
-        <Anchor id="menu-item-props">Props</Anchor>
-      </h3>
+      <h4>
+        <Anchor id="menu-item-props">Menu Item</Anchor>
+        <LinkToSource component={data.MenuItem.displayName} />
+      </h4>
       <PropTable metadata={data.MenuItem} />
     </div>
   );
@@ -195,15 +200,19 @@ export default function DropdownSection({ data }) {
 export const query = graphql`
   query DropdownQuery {
     DropdownButton: componentMetadata(displayName: { eq: "DropdownButton" }) {
+      displayName
       ...PropTable_metadata
     }
     SplitButton: componentMetadata(displayName: { eq: "SplitButton" }) {
+      displayName
       ...PropTable_metadata
     }
     Dropdown: componentMetadata(displayName: { eq: "Dropdown" }) {
+      displayName
       ...PropTable_metadata
     }
     MenuItem: componentMetadata(displayName: { eq: "MenuItem" }) {
+      displayName
       ...PropTable_metadata
     }
   }

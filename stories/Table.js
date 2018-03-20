@@ -96,6 +96,4 @@ storiesOf('Table ', module)
         </tr>
       </tbody>
     </Table>
-  ));;
-
-
+  ));

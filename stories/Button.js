@@ -11,41 +11,41 @@ storiesOf('Button', module)
   .add('Styles ✔', () => (
     <div>
       <div>
-        <Button bsStyle="primary">Primary</Button>
-        <Button bsStyle="secondary">Secondary</Button>
-        <Button bsStyle="success">Success</Button>
-        <Button bsStyle="danger">Danger</Button>
-        <Button bsStyle="warning">Warning</Button>
-        <Button bsStyle="info">Info</Button>
-        <Button bsStyle="light">Light</Button>
-        <Button bsStyle="dark">Dark</Button>
-        <Button bsStyle="link">Link</Button>
+        <Button variant="primary">Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="success">Success</Button>
+        <Button variant="danger">Danger</Button>
+        <Button variant="warning">Warning</Button>
+        <Button variant="info">Info</Button>
+        <Button variant="light">Light</Button>
+        <Button variant="dark">Dark</Button>
+        <Button variant="link">Link</Button>
       </div>
       <br />
       <div>
-        <Button bsStyle="outline-primary">Primary</Button>
-        <Button bsStyle="outline-secondary">Secondary</Button>
-        <Button bsStyle="outline-success">Success</Button>
-        <Button bsStyle="outline-danger">Danger</Button>
-        <Button bsStyle="outline-warning">Warning</Button>
-        <Button bsStyle="outline-info">Info</Button>
-        <Button bsStyle="outline-light">Light</Button>
-        <Button bsStyle="outline-dark">Dark</Button>
+        <Button variant="outline-primary">Primary</Button>
+        <Button variant="outline-secondary">Secondary</Button>
+        <Button variant="outline-success">Success</Button>
+        <Button variant="outline-danger">Danger</Button>
+        <Button variant="outline-warning">Warning</Button>
+        <Button variant="outline-info">Info</Button>
+        <Button variant="outline-light">Light</Button>
+        <Button variant="outline-dark">Dark</Button>
       </div>
     </div>
   ))
   .add('sizes ✔', () => (
     <div>
-      <Button bsSize="lg" bsStyle="primary">
+      <Button size="lg" bsStyle="primary">
         Primary
       </Button>
-      <Button bsSize="lg" bsStyle="secondary">
+      <Button size="lg" bsStyle="secondary">
         Secondary
       </Button>
-      <Button bsSize="sm" bsStyle="primary">
+      <Button size="sm" bsStyle="primary">
         Primary
       </Button>
-      <Button bsSize="sm" bsStyle="secondary">
+      <Button size="sm" bsStyle="secondary">
         Secondary
       </Button>
     </div>
