@@ -4,13 +4,13 @@ import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import ModalStatic from '../../examples/ModalStatic';
-import Modal from '../../examples/Modal';
-import ModalContained from '../../examples/ModalContained';
-import ModalDefaultSizing from '../../examples/ModalDefaultSizing';
-import ModalCustomSizing from '../../examples/ModalCustomSizing';
-import ModalVerticallyCentered from '../../examples/ModalVerticallyCentered';
-import ModalGrid from '../../examples/ModalGrid';
+import ModalStatic from '../../examples/Modal/Static';
+import ModalBasic from '../../examples/Modal/Basic';
+import ModalContained from '../../examples/Modal/Contained';
+import ModalDefaultSizing from '../../examples/Modal/DefaultSizing';
+import ModalCustomSizing from '../../examples/Modal/CustomSizing';
+import ModalVerticallyCentered from '../../examples/Modal/VerticallyCentered';
+import ModalGrid from '../../examples/Modal/Grid';
 
 export default function ModalSection({ data }) {
   return (
@@ -38,7 +38,7 @@ export default function ModalSection({ data }) {
         <code>{'<Modal.Footer/>'}</code>, which you can use to build the Modal
         content.
       </p>
-      <ReactPlayground codeText={Modal} />
+      <ReactPlayground codeText={ModalBasic} />
       <div className="bs-callout bs-callout-info">
         <h4>Additional Import Options</h4>
         <p>
