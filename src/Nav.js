@@ -30,8 +30,7 @@ class Nav extends React.Component {
     variant: PropTypes.string,
 
     /**
-     * Marks the NavItem with a matching `eventKey` as active. Has a
-     * higher precedence over `activeHref`.
+     * Marks the NavItem with a matching `eventKey` (or `href` if present) as active.
      */
     activeKey: PropTypes.any,
 
@@ -118,18 +117,18 @@ class Nav extends React.Component {
   componentDidUpdate() {
     if (!this._needsRefocus || !this.listNode) return;
 
-    let activeChild = qsa(this.listNode, `.nav-link.active`).pop();
+    let activeChild = this.listNode.querySelector('[data-rb-event-key].active');
     if (activeChild) activeChild.focus();
   }
 
   getNextActiveChild(offset) {
     if (!this.listNode) return null;
-    const itemSelector = '.nav-link:not(.disabled)';
 
-    let items = qsa(this.listNode, itemSelector);
-    let activeChild = qsa(this.listNode, `${itemSelector}.active`).pop();
+    let items = qsa(this.listNode, '[data-rb-event-key]:not(.disabled)');
+    let activeChild = this.listNode.querySelector('.active');
 
-    return items[items.indexOf(activeChild) + offset];
+    let index = items.indexOf(activeChild);
+    return index === -1 ? null : items[index + offset];
   }
 
   handleKeyDown = event => {
@@ -166,7 +165,6 @@ class Nav extends React.Component {
       variant,
       fill,
       justify,
-      onSelect,
       navbar,
       className,
       children,

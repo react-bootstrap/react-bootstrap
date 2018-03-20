@@ -1,11 +1,5 @@
 import React from 'react';
 
-const TabContext = React.createContext(
-  null /* {
-    active: false,
-    getControllerId() {},
-    getControlledId() {}
-  } */
-);
+const TabContext = React.createContext(null);
 
 export default TabContext;

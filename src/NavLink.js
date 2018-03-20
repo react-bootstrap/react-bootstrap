@@ -57,12 +57,11 @@ class NavLink extends React.Component {
             active,
             bsPrefix,
             disabled,
-            onClick,
             className,
-            style,
             eventKey,
             href,
             role: propsRole,
+            onClick: _,
             ...props
           } = this.props;
 
