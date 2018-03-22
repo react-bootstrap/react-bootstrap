@@ -305,9 +305,9 @@ describe('<Carousel>', () => {
     });
   });
 
-  it('Should transition properly when slide animation is disabled', () => {
+  it('Should transition properly when animate animation is disabled', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Carousel defaultActiveIndex={0} slide={false}>
+      <Carousel defaultActiveIndex={0} animate={false}>
         {items}
       </Carousel>
     );

@@ -14,12 +14,10 @@ import {
 } from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
-// TODO: `slide` should be `animate`.
-
 // TODO: Use uncontrollable.
 
 const propTypes = {
-  slide: PropTypes.bool,
+  animate: PropTypes.bool,
   indicators: PropTypes.bool,
   /**
    * The amount of time to delay between automatically cycling an item.
@@ -41,7 +39,7 @@ const propTypes = {
    * transition.
    */
   onSelect: PropTypes.func,
-  onSlideEnd: PropTypes.func,
+  onAnimateEnd: PropTypes.func,
   activeIndex: PropTypes.number,
   defaultActiveIndex: PropTypes.number,
   direction: PropTypes.oneOf(['prev', 'next']),
@@ -62,7 +60,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  slide: true,
+  animate: true,
   interval: 5000,
   pauseOnHover: true,
   wrap: true,
@@ -156,8 +154,8 @@ class Carousel extends React.Component {
       () => {
         this.waitForNext();
 
-        if (this.props.onSlideEnd) {
-          this.props.onSlideEnd();
+        if (this.props.onAnimateEnd) {
+          this.props.onAnimateEnd();
         }
       }
     );
@@ -223,7 +221,9 @@ class Carousel extends React.Component {
       return;
     }
 
-    const previousActiveIndex = this.props.slide ? this.getActiveIndex() : null;
+    const previousActiveIndex = this.props.animate
+      ? this.getActiveIndex()
+      : null;
     direction = direction || this.getDirection(previousActiveIndex, index);
 
     const { onSelect } = this.props;
@@ -264,9 +264,9 @@ class Carousel extends React.Component {
   }
 
   waitForNext() {
-    const { slide, interval, activeIndex: activeIndexProp } = this.props;
+    const { animate, interval, activeIndex: activeIndexProp } = this.props;
 
-    if (!this.isPaused && slide && interval && activeIndexProp == null) {
+    if (!this.isPaused && animate && interval && activeIndexProp == null) {
       this.timeout = setTimeout(this.handleNext, interval);
     }
   }
@@ -332,7 +332,7 @@ class Carousel extends React.Component {
 
   render() {
     const {
-      slide,
+      animate,
       indicators,
       controls,
       wrap,
@@ -351,7 +351,7 @@ class Carousel extends React.Component {
       'interval',
       'pauseOnHover',
       'onSelect',
-      'onSlideEnd',
+      'onAnimateEnd',
       'activeIndex', // Accessed via this.getActiveIndex().
       'defaultActiveIndex',
       'direction'
@@ -361,7 +361,7 @@ class Carousel extends React.Component {
 
     const classes = {
       ...getClassSet(bsProps),
-      slide
+      animate
     };
 
     return (
@@ -376,13 +376,13 @@ class Carousel extends React.Component {
         <div className={prefix(bsProps, 'inner')}>
           {ValidComponentChildren.map(children, (child, index) => {
             const active = index === activeIndex;
-            const previousActive = slide && index === previousActiveIndex;
+            const previousActive = animate && index === previousActiveIndex;
 
             return cloneElement(child, {
               active,
               index,
               animateOut: previousActive,
-              animateIn: active && previousActiveIndex != null && slide,
+              animateIn: active && previousActiveIndex != null && animate,
               direction,
               onAnimateOutEnd: previousActive
                 ? this.handleItemAnimateOutEnd
