@@ -22,25 +22,25 @@ describe('Image', () => {
     assert.equal(image.getAttribute('alt'), 'this is alt');
   });
 
-  it('should have correct class when responsive prop is set', () => {
-    let instance = ReactTestUtils.renderIntoDocument(<Image responsive />);
+  it('should have correct class when fluid prop is set', () => {
+    let instance = ReactTestUtils.renderIntoDocument(<Image fluid />);
     let imageClassName = ReactDOM.findDOMNode(instance).className;
 
-    imageClassName.should.match(/\bimg-responsive\b/);
+    imageClassName.should.match(/\bimg-fluid\b/);
   });
 
   it('should have correct class when rounded prop is set', () => {
     let instance = ReactTestUtils.renderIntoDocument(<Image rounded />);
     let imageClassName = ReactDOM.findDOMNode(instance).className;
 
-    imageClassName.should.match(/\bimg-rounded\b/);
+    imageClassName.should.match(/\brounded\b/);
   });
 
-  it('should have correct class when circle prop is set', () => {
-    let instance = ReactTestUtils.renderIntoDocument(<Image circle />);
+  it('should have correct class when roundedCircle prop is set', () => {
+    let instance = ReactTestUtils.renderIntoDocument(<Image roundedCircle />);
     let imageClassName = ReactDOM.findDOMNode(instance).className;
 
-    imageClassName.should.match(/\bimg-circle\b/);
+    imageClassName.should.match(/\brounded-circle\b/);
   });
 
   it('should have correct class when thumbnail prop is set', () => {

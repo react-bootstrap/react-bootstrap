@@ -378,7 +378,7 @@ h1[id] {
 
 
 /* Images */
-.bs-example > .img-circle,
+.bs-example > .rounded-circle,
 .bs-example > .img-rounded,
 .bs-example > .img-thumbnail {
   margin: 5px;

@@ -24,6 +24,7 @@ export Glyphicon from './Glyphicon';
 export Grid from './Grid';
 export HelpBlock from './HelpBlock';
 export Image from './Image';
+export Figure from './Figure';
 export InputGroup from './InputGroup';
 export Jumbotron from './Jumbotron';
 export ListGroup from './ListGroup';
