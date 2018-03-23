@@ -11,7 +11,7 @@ class NavbarBrand extends React.Component {
     bsPrefix: PropTypes.string,
 
     /**
-     * An href, when provided the Brand will render as an `<a>` element (unless `componentClass` is provided)
+     * An href, when provided the Brand will render as an `<a>` element (unless `componentClass` is provided).
      */
     href: PropTypes.string,
 

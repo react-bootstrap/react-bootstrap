@@ -6,17 +6,17 @@ export default function mapContextToProps(Component, consumers, mapToProps) {
   if (!Array.isArray(consumers)) consumers = [consumers];
   const SingleConsumer = consumers[0];
 
-  function singleRender() {
+  function singleRender(props, ref) {
     return (
       <SingleConsumer>
         {value => (
-          <Component {...this.props} {...mapToProps(value, this.props)} />
+          <Component ref={ref} {...props} {...mapToProps(value, props)} />
         )}
       </SingleConsumer>
     );
   }
 
-  function multiRender() {
+  function multiRender(props, ref) {
     const contexts = Array(consumers.length);
     return consumers.reduce(
       (child, Consumer, idx) => (
@@ -26,8 +26,9 @@ export default function mapContextToProps(Component, consumers, mapToProps) {
             return (
               child || (
                 <Component
-                  {...this.props}
-                  {...mapToProps(...contexts, this.props)}
+                  ref={ref}
+                  {...props}
+                  {...mapToProps(...contexts, props)}
                 />
               )
             );
@@ -37,13 +38,8 @@ export default function mapContextToProps(Component, consumers, mapToProps) {
       null
     );
   }
+  const contextTransform = consumers.length === 1 ? singleRender : multiRender;
+  contextTransform.displayName = `ContextTransform(${name})`;
 
-  const WrappedComponent = class extends React.Component {
-    static displayName = `ContextTransform(${name})`;
-  };
-
-  WrappedComponent.prototype.render =
-    consumers.length === 1 ? singleRender : multiRender;
-
-  return WrappedComponent;
+  return React.forwardRef(contextTransform);
 }

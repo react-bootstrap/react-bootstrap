@@ -32,7 +32,7 @@ export default function NavbarSection({ data }) {
       </h3>
       <p>
         A simple flexible branding component. Images are supported but will
-        likely require custome styling to work well.
+        likely require custom styling to work well.
       </p>
       <ReactPlayground codeText={NavbarBrand} />
 
@@ -50,7 +50,7 @@ export default function NavbarSection({ data }) {
       </h3>
       <p>
         Loose text and links can be wrapped <code>Navbar.Text</code> in order to
-        correctly align it veritically.
+        correctly align it vertically.
       </p>
       <ReactPlayground codeText={NavbarTextLink} />
 
@@ -72,7 +72,7 @@ export default function NavbarSection({ data }) {
         theming classes and background-color utilities. Choose from
         <code>variant="light"</code> for use with light background colors, or{' '}
         <code>variant="dark"</code> for dark background colors. Then, customize
-        with the <code>bg</code> prop or any custome css!
+        with the <code>bg</code> prop or any custom css!
       </p>
 
       <ReactPlayground codeText={NavbarColorSchemes} />

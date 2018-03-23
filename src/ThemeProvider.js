@@ -27,7 +27,7 @@ function createBootstrapComponent(Component, prefix) {
   // eslint-disable-next-line react/prop-types
   function forwardRef({ bsPrefix, ...props }, ref) {
     return (
-      <ThemeContext.Consumer>
+      <Consumer>
         {variants => (
           <Component
             {...props}
@@ -35,7 +35,7 @@ function createBootstrapComponent(Component, prefix) {
             bsPrefix={bsPrefix || variants.get(prefix) || prefix}
           />
         )}
-      </ThemeContext.Consumer>
+      </Consumer>
     );
   }
   forwardRef.displayName = `Bootstrap(${name})`;

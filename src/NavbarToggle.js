@@ -21,6 +21,7 @@ class NavbarToggle extends React.Component {
      * The toggle content. When empty, the default toggle will be rendered.
      */
     children: PropTypes.node,
+
     componentClass: elementType
   };
 
