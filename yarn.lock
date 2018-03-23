@@ -8274,8 +8274,8 @@ react-docgen@^2.20.0:
     recast "^0.12.6"
 
 react-dom@^16.3.0-0:
-  version "16.3.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.0-alpha.2.tgz#a970b6185684941e89a568c09321d22643457cb6"
+  version "16.3.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.3.0-alpha.3.tgz#edfc7a78263c54bcd7cc396b68163b0aed46be58"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -8313,6 +8313,10 @@ react-inspector@^2.2.2:
   dependencies:
     babel-runtime "^6.26.0"
     is-dom "^1.0.9"
+
+react-is@^16.3.0-alpha.3:
+  version "16.3.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.3.0-alpha.3.tgz#0960d927b2b17154897139c6329aa958e29a86c2"
 
 react-modal@^3.1.10:
   version "3.3.2"
@@ -8371,12 +8375,13 @@ react-style-proptype@^3.0.0:
     prop-types "^15.6.0"
 
 react-test-renderer@^16.3.0-0:
-  version "16.3.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.3.0-alpha.2.tgz#20417b295982edd9c2dabc21359b1586f8ec7551"
+  version "16.3.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.3.0-alpha.3.tgz#ca59613a48ae15aec7f62a32c509811b0e73f973"
   dependencies:
     fbjs "^0.8.16"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+    react-is "^16.3.0-alpha.3"
 
 react-transition-group@^1.1.2:
   version "1.2.1"
@@ -8411,8 +8416,8 @@ react-treebeard@^2.1.0:
     velocity-react "^1.3.1"
 
 react@^16.3.0-0:
-  version "16.3.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.3.0-alpha.2.tgz#91e2b82bb985b23e7b6555f810e1fd94894afce2"
+  version "16.3.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.3.0-alpha.3.tgz#b925cbb4a971db2b0ab87cb9da449227d1ccafb4"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"

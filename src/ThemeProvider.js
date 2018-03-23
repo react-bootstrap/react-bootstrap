@@ -25,33 +25,26 @@ class ThemeProvider extends React.Component {
 }
 
 function createBootstrapComponent(Component, prefix) {
-  const refProp = '@@react-bootstrap/ref';
   const name = Component.displayName || Component.name;
-  // eslint-disable-next-line
-  class BootstrapComponent extends React.Component {
-    static displayName = `Bootstrap(${name})`;
-    static propTypes = {
-      bsPrefix: PropTypes.string,
-      [refProp]: PropTypes.any
-    };
-    render() {
-      const { [refProp]: ref, bsPrefix, ...props } = this.props;
-      return (
-        <ThemeContext.Consumer>
-          {variants => (
-            <Component
-              {...props}
-              ref={ref}
-              bsPrefix={bsPrefix || variants.get(prefix) || prefix}
-            />
-          )}
-        </ThemeContext.Consumer>
-      );
-    }
+  // This looks like a function component but it's not,
+  // it's passed to forwardRef directly, and named for the dev-tools
+  // eslint-disable-next-line react/prop-types
+  function forwardRef({ bsPrefix, ...props }, ref) {
+    return (
+      <ThemeContext.Consumer>
+        {variants => (
+          <Component
+            {...props}
+            ref={ref}
+            bsPrefix={bsPrefix || variants.get(prefix) || prefix}
+          />
+        )}
+      </ThemeContext.Consumer>
+    );
   }
-  return React.forwardRef((props, ref) =>
-    React.createElement(BootstrapComponent, { ...props, [refProp]: ref })
-  );
+  forwardRef.displayName = `Bootstrap(${name})`;
+
+  return React.forwardRef(forwardRef);
 }
 
 export { createBootstrapComponent };
