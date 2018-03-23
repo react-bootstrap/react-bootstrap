@@ -14,6 +14,7 @@ class NavItem extends React.Component {
 
     /** The ARIA role of the component */
     role: PropTypes.string,
+
     componentClass: elementType
   };
 

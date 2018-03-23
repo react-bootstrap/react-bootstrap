@@ -1,17 +1,45 @@
 import React from 'react';
 
-export default function mapContextToProps(Component, Consumer, mapToProps) {
+export default function mapContextToProps(Component, consumers, mapToProps) {
   const name = Component.name || Component.displayName;
-  return class extends React.Component {
-    static displayName = `ContextTransform(${name})`;
-    render() {
-      return (
+
+  if (!Array.isArray(consumers)) consumers = [consumers];
+  const SingleConsumer = consumers[0];
+
+  function singleRender(props, ref) {
+    return (
+      <SingleConsumer>
+        {value => (
+          <Component ref={ref} {...props} {...mapToProps(value, props)} />
+        )}
+      </SingleConsumer>
+    );
+  }
+
+  function multiRender(props, ref) {
+    const contexts = Array(consumers.length);
+    return consumers.reduce(
+      (child, Consumer, idx) => (
         <Consumer>
-          {context => (
-            <Component {...this.props} {...mapToProps(context, this.props)} />
-          )}
+          {value => {
+            contexts[idx] = value;
+            return (
+              child || (
+                <Component
+                  ref={ref}
+                  {...props}
+                  {...mapToProps(...contexts, props)}
+                />
+              )
+            );
+          }}
         </Consumer>
-      );
-    }
-  };
+      ),
+      null
+    );
+  }
+  const contextTransform = consumers.length === 1 ? singleRender : multiRender;
+  contextTransform.displayName = `ContextTransform(${name})`;
+
+  return React.forwardRef(contextTransform);
 }

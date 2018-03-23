@@ -10,6 +10,7 @@ import { createBootstrapComponent } from './ThemeProvider';
 import TabContext from './TabContext';
 import mapContextToProps from './utils/mapContextToProps';
 import NavContext from './NavContext';
+import NavbarContext from './NavbarContext';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
 
@@ -22,6 +23,9 @@ class Nav extends React.Component {
      */
     bsPrefix: PropTypes.string,
 
+    /** @private */
+    navbarBsPrefix: PropTypes.string,
+
     /**
      * The visual variant of the nav items.
      *
@@ -31,6 +35,8 @@ class Nav extends React.Component {
 
     /**
      * Marks the NavItem with a matching `eventKey` (or `href` if present) as active.
+     *
+     * @type {string}
      */
     activeKey: PropTypes.any,
 
@@ -42,7 +48,7 @@ class Nav extends React.Component {
     /**
      * Have all `NavItem`s to evenly fill all available width.
      *
-     * @type bool
+     * @type {boolean}
      */
     justify: all(
       PropTypes.bool,
@@ -68,7 +74,7 @@ class Nav extends React.Component {
      * ARIA role for the Nav, in the context of a TabContainer, the default will
      * be set to "tablist", but can be overridden by the Nav when set explicitly.
      *
-     * When the role is set to "tablist" NavItem focus is managed according to
+     * When the role is "tablist", NavLink focus is managed according to
      * the ARIA authoring practices for tabs:
      * https://www.w3.org/TR/2013/WD-wai-aria-practices-20130307/#tabpanel
      */
@@ -92,12 +98,14 @@ class Nav extends React.Component {
     componentClass: 'ul'
   };
 
-  static getDerivedStateFromProps(
-    { activeKey, getControlledId, getControllerId, role, onSelect },
-    prevState
-  ) {
+  static getDerivedStateFromProps({
+    activeKey,
+    getControlledId,
+    getControllerId,
+    role,
+    onSelect
+  }) {
     return {
-      ...prevState,
       navContext: {
         role, // used by NavLink to determine it's role
         onSelect,
@@ -162,6 +170,7 @@ class Nav extends React.Component {
   render() {
     const {
       bsPrefix,
+      navbarBsPrefix,
       variant,
       fill,
       justify,
@@ -177,14 +186,6 @@ class Nav extends React.Component {
     delete props.getControlledId;
     delete props.getControllerId;
 
-    const classes = {
-      [bsPrefix]: !navbar,
-      [`navbar-nav`]: navbar,
-      [`${bsPrefix}-${variant}`]: !!variant,
-      [`${bsPrefix}-fill`]: fill,
-      [`${bsPrefix}-justified`]: justify
-    };
-
     if (props.role === 'tablist') {
       props.onKeyDown = this.handleKeyDown;
     }
@@ -194,7 +195,13 @@ class Nav extends React.Component {
         <Component
           {...props}
           ref={this.attachRef}
-          className={classNames(className, classes)}
+          className={classNames(className, {
+            [bsPrefix]: !navbar,
+            [`${navbarBsPrefix}-nav`]: navbar,
+            [`${bsPrefix}-${variant}`]: !!variant,
+            [`${bsPrefix}-fill`]: fill,
+            [`${bsPrefix}-justified`]: justify
+          })}
         >
           {children}
         </Component>
@@ -209,16 +216,30 @@ const UncontrolledNav = uncontrollable(createBootstrapComponent(Nav, 'nav'), {
 
 const DecoratedNav = mapContextToProps(
   UncontrolledNav,
-  TabContext.Consumer,
-  (context, props) => {
-    if (!context) return null;
-    const { activeKey, onSelect, getControllerId, getControlledId } = context;
+  [TabContext.Consumer, NavbarContext.Consumer],
+  (tabContext, navbarContext, { role, navbar }) => {
+    if (!tabContext && !navbarContext) return null;
+
+    if (navbarContext)
+      return {
+        onSelect: navbarContext.onSelect,
+        navbarBsPrefix: navbarContext.bsPrefix,
+        navbar: navbar == null ? true : navbar
+      };
+
+    const {
+      activeKey,
+      onSelect,
+      getControllerId,
+      getControlledId
+    } = tabContext;
+
     return {
       activeKey,
       onSelect,
       getControllerId,
       getControlledId,
-      role: props.role || 'tablist'
+      role: role || 'tablist'
     };
   }
 );
