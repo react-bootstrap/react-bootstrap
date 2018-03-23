@@ -16,11 +16,6 @@ class NavbarBrand extends React.Component {
     href: PropTypes.string,
 
     /**
-     * The toggle content, if left empty it will render the default toggle (seen above).
-     */
-    children: PropTypes.node,
-
-    /**
      * Set a custom element for this component.
      */
     componentClass: elementType

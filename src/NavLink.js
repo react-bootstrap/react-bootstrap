@@ -22,7 +22,10 @@ const propTypes = {
    */
   disabled: PropTypes.bool,
 
-  /** The ARIA role for the `NavLink` */
+  /**
+   * The ARIA role for the `NavLink`, In the context of a 'tablist' parent Nav,
+   * the role defaults to 'tab'
+   * */
   role: PropTypes.string,
 
   /** The HTML href attribute for the `NavLink` */
@@ -30,7 +33,7 @@ const propTypes = {
 
   /**
    * Uniquely idenifies the `NavItem` amoungst its siblings,
-   * used to determine and control the active state ofthe parent `Nav`
+   * used to determine and control the active state of its parent `Nav`
    */
   eventKey: PropTypes.any,
 

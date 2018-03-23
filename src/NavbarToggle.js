@@ -8,7 +8,7 @@ import NavbarContext from './NavbarContext';
 
 class NavbarToggle extends React.Component {
   static propTypes = {
-    /** @default 'navbar' */
+    /** @default 'navbar-toggler' */
     bsPrefix: PropTypes.string,
 
     /** An accessible ARIA label for the toggler button. */
@@ -18,7 +18,7 @@ class NavbarToggle extends React.Component {
     onClick: PropTypes.func,
 
     /**
-     * The toggle content, if left empty it will render the default toggle (seen above).
+     * The toggle content. When empty, the default toggle will be rendered.
      */
     children: PropTypes.node,
     componentClass: elementType

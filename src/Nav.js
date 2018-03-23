@@ -35,6 +35,8 @@ class Nav extends React.Component {
 
     /**
      * Marks the NavItem with a matching `eventKey` (or `href` if present) as active.
+     *
+     * @type {string}
      */
     activeKey: PropTypes.any,
 
@@ -46,7 +48,7 @@ class Nav extends React.Component {
     /**
      * Have all `NavItem`s to evenly fill all available width.
      *
-     * @type bool
+     * @type {boolean}
      */
     justify: all(
       PropTypes.bool,
@@ -72,7 +74,7 @@ class Nav extends React.Component {
      * ARIA role for the Nav, in the context of a TabContainer, the default will
      * be set to "tablist", but can be overridden by the Nav when set explicitly.
      *
-     * When the role is set to "tablist" NavItem focus is managed according to
+     * When the role is "tablist", NavLink focus is managed according to
      * the ARIA authoring practices for tabs:
      * https://www.w3.org/TR/2013/WD-wai-aria-practices-20130307/#tabpanel
      */

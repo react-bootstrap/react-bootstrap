@@ -20,13 +20,16 @@ const propTypes = {
 
   /**
    * The general visual variant a the Navbar.
-   * Use in combination with `background-color` utilities, or your own background styles.
+   * Use in combination with the `bg` prop, `background-color` utilities,
+   * or your own background styles.
    *
    * @type {('light'|'dark')}
    */
   variant: PropTypes.string,
 
-  /** The breakpoint, below which, the Navbar will collapse */
+  /** The breakpoint, below which, the Navbar will collapse.
+   * When `true` the Navbar will always be expanded regardless of screen size.
+   */
   expand: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl']).isRequired,
 
   /**
@@ -80,8 +83,8 @@ const propTypes = {
    *
    * ```js
    * function (
-   *  Any eventKey,
-   *  SyntheticEvent event?
+   *  eventKey: mixed,
+   *  event?: SyntheticEvent
    * )
    * ```
    *
@@ -93,22 +96,30 @@ const propTypes = {
    * true and false.
    */
   onSelect: PropTypes.func,
+
   /**
-   * Sets `expanded` to `false` after the onSelect event of a descendant of a
-   * child `<Nav>`. Does nothing if no `<Nav>` or `<Nav>` descendants exist.
+   * Toggles `expanded` to `false` after the onSelect event of a descendant of a
+   * child `<Nav>` fires. Does nothing if no `<Nav>` or `<Nav>` descendants exist.
    *
-   * The onSelect callback should be used instead for more complex operations
-   * that need to be executed after the `select` event of `<Nav>` descendants.
+   * Manually controlling `expanded` via the onSelect callback is recommended instead
+   * for more complex operations that need to be executed after
+   * the `select` event of `<Nav>` descendants.
    */
   collapseOnSelect: PropTypes.bool,
 
   /**
-   * Explicitly set the visiblity of the navbar body
+   * Controls the visiblity of the navbar body
    *
    * @controllable onToggle
    */
   expanded: PropTypes.bool,
 
+  /**
+   * The ARIA role for the navbar, will default to 'navigation' for
+   * Navbars whose `componentClass` is something other than `<nav>`.
+   *
+   * @default 'navigation'
+   */
   role: PropTypes.string
 };
 
