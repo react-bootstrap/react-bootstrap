@@ -2,193 +2,95 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
-import warning from 'warning';
 
-import {
-  bsClass,
-  getClassSet,
-  prefix,
-  splitBsPropsAndOmit
-} from './utils/bootstrapUtils';
-import createChainedFunction from './utils/createChainedFunction';
+import mapContextToProps from './utils/mapContextToProps';
+import { createBootstrapComponent } from './ThemeProvider';
+import TabContext from './TabContext';
 
 import Fade from './Fade';
 
-const propTypes = {
-  /**
-   * Uniquely identify the `<TabPane>` among its siblings.
-   */
-  eventKey: PropTypes.any,
-
-  /**
-   * Use animation when showing or hiding `<TabPane>`s. Use `false` to disable,
-   * `true` to enable the default `<Fade>` animation or
-   * a react-transition-group v2 `<Transition/>` component.
-   */
-  animation: PropTypes.oneOfType([PropTypes.bool, elementType]),
-
-  /** @private * */
-  id: PropTypes.string,
-
-  /** @private * */
-  'aria-labelledby': PropTypes.string,
-
-  /**
-   * If not explicitly specified and rendered in the context of a
-   * `<TabContent>`, the `bsClass` of the `<TabContent>` suffixed by `-pane`.
-   * If otherwise not explicitly specified, `tab-pane`.
-   */
-  bsClass: PropTypes.string,
-
-  /**
-   * Transition onEnter callback when animation is not `false`
-   */
-  onEnter: PropTypes.func,
-
-  /**
-   * Transition onEntering callback when animation is not `false`
-   */
-  onEntering: PropTypes.func,
-
-  /**
-   * Transition onEntered callback when animation is not `false`
-   */
-  onEntered: PropTypes.func,
-
-  /**
-   * Transition onExit callback when animation is not `false`
-   */
-  onExit: PropTypes.func,
-
-  /**
-   * Transition onExiting callback when animation is not `false`
-   */
-  onExiting: PropTypes.func,
-
-  /**
-   * Transition onExited callback when animation is not `false`
-   */
-  onExited: PropTypes.func,
-
-  /**
-   * Wait until the first "enter" transition to mount the tab (add it to the DOM)
-   */
-  mountOnEnter: PropTypes.bool,
-
-  /**
-   * Unmount the tab (remove it from the DOM) when it is no longer visible
-   */
-  unmountOnExit: PropTypes.bool
-};
-
-const contextTypes = {
-  $bs_tabContainer: PropTypes.shape({
-    getTabId: PropTypes.func,
-    getPaneId: PropTypes.func
-  }),
-  $bs_tabContent: PropTypes.shape({
-    bsClass: PropTypes.string,
-    animation: PropTypes.oneOfType([PropTypes.bool, elementType]),
-    activeKey: PropTypes.any,
-    mountOnEnter: PropTypes.bool,
-    unmountOnExit: PropTypes.bool,
-    onPaneEnter: PropTypes.func.isRequired,
-    onPaneExited: PropTypes.func.isRequired,
-    exiting: PropTypes.bool.isRequired
-  })
-};
-
-/**
- * We override the `<TabContainer>` context so `<Nav>`s in `<TabPane>`s don't
- * conflict with the top level one.
- */
-const childContextTypes = {
-  $bs_tabContainer: PropTypes.oneOf([null])
-};
-
 class TabPane extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  static propTypes = {
+    /**
+     * @default 'tab-pane'
+     */
+    bsPrefix: PropTypes.string,
 
-    this.handleEnter = this.handleEnter.bind(this);
-    this.handleExited = this.handleExited.bind(this);
+    /**
+     * A key that associates the `TabPane` with it's controlling `NavLink`.
+     */
+    eventKey: PropTypes.any,
 
-    this.in = false;
-  }
+    /**
+     * Toggles the active state of the TabPane, this is generally controlled by a
+     * TabContainer.
+     */
+    active: PropTypes.bool,
 
-  getChildContext() {
-    return {
-      $bs_tabContainer: null
-    };
-  }
+    /**
+     * Use animation when showing or hiding `<TabPane>`s. Use `false` to disable,
+     * `true` to enable the default `<Fade>` animation or
+     * a react-transition-group v2 `<Transition/>` component.
+     */
+    transition: PropTypes.oneOfType([PropTypes.bool, elementType]),
 
-  componentDidMount() {
-    if (this.shouldBeIn()) {
-      // In lieu of the action event firing.
-      this.handleEnter();
-    }
-  }
+    /**
+     *
+     * @default 'tab-pane'
+     */
+    bsClass: PropTypes.string,
 
-  componentDidUpdate() {
-    if (this.in) {
-      if (!this.shouldBeIn()) {
-        // We shouldn't be active any more. Notify the parent.
-        this.handleExited();
-      }
-    } else if (this.shouldBeIn()) {
-      // We are the active child. Notify the parent.
-      this.handleEnter();
-    }
-  }
+    /**
+     * Transition onEnter callback when animation is not `false`
+     */
+    onEnter: PropTypes.func,
 
-  componentWillUnmount() {
-    if (this.in) {
-      // In lieu of the action event firing.
-      this.handleExited();
-    }
-  }
+    /**
+     * Transition onEntering callback when animation is not `false`
+     */
+    onEntering: PropTypes.func,
 
-  getAnimation() {
-    if (this.props.animation != null) {
-      return this.props.animation;
-    }
+    /**
+     * Transition onEntered callback when animation is not `false`
+     */
+    onEntered: PropTypes.func,
 
-    const tabContent = this.context.$bs_tabContent;
-    return tabContent && tabContent.animation;
-  }
+    /**
+     * Transition onExit callback when animation is not `false`
+     */
+    onExit: PropTypes.func,
 
-  handleEnter() {
-    const tabContent = this.context.$bs_tabContent;
-    if (!tabContent) {
-      return;
-    }
+    /**
+     * Transition onExiting callback when animation is not `false`
+     */
+    onExiting: PropTypes.func,
 
-    this.in = tabContent.onPaneEnter(this, this.props.eventKey);
-  }
+    /**
+     * Transition onExited callback when animation is not `false`
+     */
+    onExited: PropTypes.func,
 
-  handleExited() {
-    const tabContent = this.context.$bs_tabContent;
-    if (!tabContent) {
-      return;
-    }
+    /**
+     * Wait until the first "enter" transition to mount the tab (add it to the DOM)
+     */
+    mountOnEnter: PropTypes.bool,
 
-    tabContent.onPaneExited(this);
-    this.in = false;
-  }
+    /**
+     * Unmount the tab (remove it from the DOM) when it is no longer visible
+     */
+    unmountOnExit: PropTypes.bool,
 
-  isActive() {
-    const tabContent = this.context.$bs_tabContent;
-    const activeKey = tabContent && tabContent.activeKey;
+    /** @private * */
+    id: PropTypes.string,
 
-    return this.props.eventKey === activeKey;
-  }
-
-  shouldBeIn() {
-    return this.getAnimation() && this.isActive();
-  }
+    /** @private * */
+    'aria-labelledby': PropTypes.string
+  };
 
   render() {
     const {
+      bsPrefix,
+      active,
       eventKey,
       className,
       onEnter,
@@ -197,94 +99,65 @@ class TabPane extends React.Component {
       onExit,
       onExiting,
       onExited,
-      mountOnEnter: propsMountOnEnter,
-      unmountOnExit: propsUnmountOnExit,
+      mountOnEnter,
+      unmountOnExit,
+      transition: Transition,
       ...props
     } = this.props;
 
-    const {
-      $bs_tabContent: tabContent,
-      $bs_tabContainer: tabContainer
-    } = this.context;
+    if (!active && unmountOnExit) return null;
 
-    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['animation']);
-
-    const active = this.isActive();
-    const animation = this.getAnimation();
-
-    const mountOnEnter =
-      propsMountOnEnter != null
-        ? propsMountOnEnter
-        : tabContent && tabContent.mountOnEnter;
-    const unmountOnExit =
-      propsUnmountOnExit != null
-        ? propsUnmountOnExit
-        : tabContent && tabContent.unmountOnExit;
-
-    if (!active && !animation && unmountOnExit) {
-      return null;
-    }
-
-    const Transition = animation === true ? Fade : animation || null;
-
-    if (tabContent) {
-      bsProps.bsClass = prefix(tabContent, 'pane');
-    }
-
-    const classes = {
-      ...getClassSet(bsProps),
-      active
-    };
-
-    if (tabContainer) {
-      warning(
-        !elementProps.id && !elementProps['aria-labelledby'],
-        'In the context of a `<TabContainer>`, `<TabPanes>` are given ' +
-          'generated `id` and `aria-labelledby` attributes for the sake of ' +
-          'proper component accessibility. Any provided ones will be ignored. ' +
-          'To control these attributes directly provide a `generateChildId` ' +
-          'prop to the parent `<TabContainer>`.'
-      );
-
-      elementProps.id = tabContainer.getPaneId(eventKey);
-      elementProps['aria-labelledby'] = tabContainer.getTabId(eventKey);
-    }
-
-    const pane = (
+    let pane = (
       <div
-        {...elementProps}
+        {...props}
         role="tabpanel"
         aria-hidden={!active}
-        className={classNames(className, classes)}
+        className={classNames(className, bsPrefix, { active })}
       />
     );
 
-    if (Transition) {
-      const exiting = tabContent && tabContent.exiting;
-
-      return (
+    if (Transition)
+      pane = (
         <Transition
-          in={active && !exiting}
-          onEnter={createChainedFunction(this.handleEnter, onEnter)}
+          in={active}
+          onEnter={onEnter}
           onEntering={onEntering}
           onEntered={onEntered}
           onExit={onExit}
           onExiting={onExiting}
-          onExited={createChainedFunction(this.handleExited, onExited)}
+          onExited={onExited}
           mountOnEnter={mountOnEnter}
-          unmountOnExit={unmountOnExit}
+          unmountOnExit={mountOnEnter}
         >
           {pane}
         </Transition>
       );
-    }
 
-    return pane;
+    // We provide an empty the TabContext so `<Nav>`s in `<TabPane>`s don't
+    // conflict with the top level one.
+    return <TabContext.Provider value={null}>{pane}</TabContext.Provider>;
   }
 }
 
-TabPane.propTypes = propTypes;
-TabPane.contextTypes = contextTypes;
-TabPane.childContextTypes = childContextTypes;
+export default mapContextToProps(
+  createBootstrapComponent(TabPane, 'tab-pane'),
+  TabContext.Consumer,
+  (context, props) => {
+    if (!context) return null;
+    const { activeKey, getControlledId, getControllerId, ...rest } = context;
+    const shouldTransition =
+      props.transition !== false && rest.transition !== false;
 
-export default bsClass('tab-pane', TabPane);
+    return {
+      active: String(activeKey) === String(props.eventKey),
+      id: getControlledId(props.eventKey),
+      'aria-labelledby': getControllerId(props.eventKey),
+      transition:
+        shouldTransition && (props.transition || rest.transition || Fade),
+      mountOnEnter:
+        props.mountOnEnter != null ? props.mountOnEnter : rest.mountOnEnter,
+      unmountOnExit:
+        props.unmountOnExit != null ? props.unmountOnExit : rest.unmountOnExit
+    };
+  }
+);

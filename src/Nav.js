@@ -1,359 +1,231 @@
 import classNames from 'classnames';
-import keycode from 'keycode';
-import React, { cloneElement } from 'react';
+import qsa from 'dom-helpers/query/querySelectorAll';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
+import elementType from 'prop-types-extra/lib/elementType';
 import all from 'prop-types-extra/lib/all';
-import warning from 'warning';
+import React from 'react';
+import uncontrollable from 'uncontrollable';
 
-import {
-  bsClass,
-  bsStyles,
-  getClassSet,
-  prefix,
-  splitBsProps
-} from './utils/bootstrapUtils';
-import createChainedFunction from './utils/createChainedFunction';
-import ValidComponentChildren from './utils/ValidComponentChildren';
+import { createBootstrapComponent } from './ThemeProvider';
+import TabContext from './TabContext';
+import mapContextToProps from './utils/mapContextToProps';
+import NavContext from './NavContext';
+import NavItem from './NavItem';
+import NavLink from './NavLink';
 
-// TODO: Should we expose `<NavItem>` as `<Nav.Item>`?
-
-// TODO: This `bsStyle` is very unlike the others. Should we rename it?
-
-// TODO: `pullRight` and `pullLeft` don't render right outside of `navbar`.
-// Consider renaming or replacing them.
-
-const propTypes = {
-  /**
-   * Marks the NavItem with a matching `eventKey` as active. Has a
-   * higher precedence over `activeHref`.
-   */
-  activeKey: PropTypes.any,
-
-  /**
-   * Marks the child NavItem with a matching `href` prop as active.
-   */
-  activeHref: PropTypes.string,
-
-  /**
-   * NavItems are be positioned vertically.
-   */
-  stacked: PropTypes.bool,
-
-  justified: all(
-    PropTypes.bool,
-    ({ justified, navbar }) =>
-      justified && navbar
-        ? Error('justified navbar `Nav`s are not supported')
-        : null
-  ),
-
-  /**
-   * A callback fired when a NavItem is selected.
-   *
-   * ```js
-   * function (
-   *  Any eventKey,
-   *  SyntheticEvent event?
-   * )
-   * ```
-   */
-  onSelect: PropTypes.func,
-
-  /**
-   * ARIA role for the Nav, in the context of a TabContainer, the default will
-   * be set to "tablist", but can be overridden by the Nav when set explicitly.
-   *
-   * When the role is set to "tablist" NavItem focus is managed according to
-   * the ARIA authoring practices for tabs:
-   * https://www.w3.org/TR/2013/WD-wai-aria-practices-20130307/#tabpanel
-   */
-  role: PropTypes.string,
-
-  /**
-   * Apply styling an alignment for use in a Navbar. This prop will be set
-   * automatically when the Nav is used inside a Navbar.
-   */
-  navbar: PropTypes.bool,
-
-  /**
-   * Float the Nav to the right. When `navbar` is `true` the appropriate
-   * contextual classes are added as well.
-   */
-  pullRight: PropTypes.bool,
-
-  /**
-   * Float the Nav to the left. When `navbar` is `true` the appropriate
-   * contextual classes are added as well.
-   */
-  pullLeft: PropTypes.bool
-};
-
-const defaultProps = {
-  justified: false,
-  pullRight: false,
-  pullLeft: false,
-  stacked: false
-};
-
-const contextTypes = {
-  $bs_navbar: PropTypes.shape({
-    bsClass: PropTypes.string,
-    onSelect: PropTypes.func
-  }),
-
-  $bs_tabContainer: PropTypes.shape({
-    activeKey: PropTypes.any,
-    onSelect: PropTypes.func.isRequired,
-    getTabId: PropTypes.func.isRequired,
-    getPaneId: PropTypes.func.isRequired
-  })
-};
+const noop = () => {};
 
 class Nav extends React.Component {
-  componentDidUpdate() {
-    if (!this._needsRefocus) {
-      return;
-    }
+  static propTypes = {
+    /**
+     * @default 'nav'
+     */
+    bsPrefix: PropTypes.string,
 
-    this._needsRefocus = false;
+    /**
+     * The visual variant of the nav items.
+     *
+     * @type {('tabs'|'pills')}
+     */
+    variant: PropTypes.string,
 
-    const { children } = this.props;
-    const { activeKey, activeHref } = this.getActiveProps();
+    /**
+     * Marks the NavItem with a matching `eventKey` (or `href` if present) as active.
+     */
+    activeKey: PropTypes.any,
 
-    const activeChild = ValidComponentChildren.find(children, child =>
-      this.isActive(child, activeKey, activeHref)
-    );
+    /**
+     * Have all `NavItem`s to proportionatly fill all available width.
+     */
+    fill: PropTypes.bool,
 
-    const childrenArray = ValidComponentChildren.toArray(children);
-    const activeChildIndex = childrenArray.indexOf(activeChild);
+    /**
+     * Have all `NavItem`s to evenly fill all available width.
+     *
+     * @type bool
+     */
+    justify: all(
+      PropTypes.bool,
+      ({ justify, navbar }) =>
+        justify && navbar
+          ? Error('justify navbar `Nav`s are not supported')
+          : null
+    ),
 
-    const childNodes = ReactDOM.findDOMNode(this).children;
-    const activeNode = childNodes && childNodes[activeChildIndex];
+    /**
+     * A callback fired when a NavItem is selected.
+     *
+     * ```js
+     * function (
+     *  Any eventKey,
+     *  SyntheticEvent event?
+     * )
+     * ```
+     */
+    onSelect: PropTypes.func,
 
-    if (!activeNode || !activeNode.firstChild) {
-      return;
-    }
+    /**
+     * ARIA role for the Nav, in the context of a TabContainer, the default will
+     * be set to "tablist", but can be overridden by the Nav when set explicitly.
+     *
+     * When the role is set to "tablist" NavItem focus is managed according to
+     * the ARIA authoring practices for tabs:
+     * https://www.w3.org/TR/2013/WD-wai-aria-practices-20130307/#tabpanel
+     */
+    role: PropTypes.string,
 
-    activeNode.firstChild.focus();
+    /**
+     * Apply styling an alignment for use in a Navbar. This prop will be set
+     * automatically when the Nav is used inside a Navbar.
+     */
+    navbar: PropTypes.bool,
+
+    componentClass: elementType,
+
+    /** @private */
+    onKeyDown: PropTypes.func
+  };
+
+  static defaultProps = {
+    justify: false,
+    fill: false,
+    componentClass: 'ul'
+  };
+
+  static getDerivedStateFromProps(
+    { activeKey, getControlledId, getControllerId, role, onSelect },
+    prevState
+  ) {
+    return {
+      ...prevState,
+      navContext: {
+        role, // used by NavLink to determine it's role
+        onSelect,
+        activeKey,
+        getControlledId: getControlledId || noop,
+        getControllerId: getControllerId || noop
+      }
+    };
   }
 
-  getActiveProps() {
-    const tabContainer = this.context.$bs_tabContainer;
+  constructor(...args) {
+    super(...args);
 
-    if (tabContainer) {
-      warning(
-        this.props.activeKey == null && !this.props.activeHref,
-        'Specifying a `<Nav>` `activeKey` or `activeHref` in the context of ' +
-          'a `<TabContainer>` is not supported. Instead use `<TabContainer ' +
-          `activeKey={${this.props.activeKey}} />\`.`
-      );
+    this.state = { navContext: null };
+  }
 
-      return tabContainer;
-    }
+  componentDidUpdate() {
+    if (!this._needsRefocus || !this.listNode) return;
 
-    return this.props;
+    let activeChild = this.listNode.querySelector('[data-rb-event-key].active');
+    if (activeChild) activeChild.focus();
   }
 
   getNextActiveChild(offset) {
-    const { children } = this.props;
-    const validChildren = children.filter(
-      child => child.props.eventKey != null && !child.props.disabled
-    );
-    const { activeKey, activeHref } = this.getActiveProps();
+    if (!this.listNode) return null;
 
-    const activeChild = ValidComponentChildren.find(children, child =>
-      this.isActive(child, activeKey, activeHref)
-    );
+    let items = qsa(this.listNode, '[data-rb-event-key]:not(.disabled)');
+    let activeChild = this.listNode.querySelector('.active');
 
-    // This assumes the active child is not disabled.
-    const activeChildIndex = validChildren.indexOf(activeChild);
-    if (activeChildIndex === -1) {
-      // Something has gone wrong. Select the first valid child we can find.
-      return validChildren[0];
-    }
-
-    let nextIndex = activeChildIndex + offset;
-    const numValidChildren = validChildren.length;
-
-    if (nextIndex >= numValidChildren) {
-      nextIndex = 0;
-    } else if (nextIndex < 0) {
-      nextIndex = numValidChildren - 1;
-    }
-
-    return validChildren[nextIndex];
+    let index = items.indexOf(activeChild);
+    return index === -1 ? null : items[index + offset];
   }
 
-  getTabProps(child, tabContainer, navRole, active, onSelect) {
-    if (!tabContainer && navRole !== 'tablist') {
-      // No tab props here.
-      return null;
-    }
+  handleKeyDown = event => {
+    const { onKeyDown, onSelect } = this.props;
+    if (onKeyDown) onKeyDown(event);
 
-    let {
-      id,
-      'aria-controls': controls,
-      eventKey,
-      role,
-      onKeyDown,
-      tabIndex
-    } = child.props;
-
-    if (tabContainer) {
-      warning(
-        !id && !controls,
-        'In the context of a `<TabContainer>`, `<NavItem>`s are given ' +
-          'generated `id` and `aria-controls` attributes for the sake of ' +
-          'proper component accessibility. Any provided ones will be ignored. ' +
-          'To control these attributes directly, provide a `generateChildId` ' +
-          'prop to the parent `<TabContainer>`.'
-      );
-
-      id = tabContainer.getTabId(eventKey);
-      controls = tabContainer.getPaneId(eventKey);
-    }
-
-    if (navRole === 'tablist') {
-      role = role || 'tab';
-      onKeyDown = createChainedFunction(
-        event => this.handleTabKeyDown(onSelect, event),
-        onKeyDown
-      );
-      tabIndex = active ? tabIndex : -1;
-    }
-
-    return {
-      id,
-      role,
-      onKeyDown,
-      'aria-controls': controls,
-      tabIndex
-    };
-  }
-
-  handleTabKeyDown(onSelect, event) {
     let nextActiveChild;
-
-    switch (event.keyCode) {
-      case keycode.codes.left:
-      case keycode.codes.up:
+    switch (event.key) {
+      case 'ArrowLeft':
+      case 'ArrowUp':
         nextActiveChild = this.getNextActiveChild(-1);
         break;
-      case keycode.codes.right:
-      case keycode.codes.down:
+      case 'ArrowRight':
+      case 'ArrowDown':
         nextActiveChild = this.getNextActiveChild(1);
         break;
       default:
-        // It was a different key; don't handle this keypress.
         return;
     }
+    if (!nextActiveChild) return;
 
     event.preventDefault();
-
-    if (onSelect && nextActiveChild && nextActiveChild.props.eventKey != null) {
-      onSelect(nextActiveChild.props.eventKey);
-    }
-
+    onSelect(nextActiveChild.dataset.rbEventKey);
     this._needsRefocus = true;
-  }
+  };
 
-  isActive({ props }, activeKey, activeHref) {
-    if (
-      props.active ||
-      (activeKey != null && props.eventKey === activeKey) ||
-      (activeHref && props.href === activeHref)
-    ) {
-      return true;
-    }
-
-    return props.active;
-  }
+  attachRef = ref => {
+    this.listNode = ref;
+  };
 
   render() {
     const {
-      stacked,
-      justified,
-      onSelect,
-      role: propsRole,
-      navbar: propsNavbar,
-      pullRight,
-      pullLeft,
+      bsPrefix,
+      variant,
+      fill,
+      justify,
+      navbar,
       className,
       children,
+      componentClass: Component,
       ...props
     } = this.props;
 
-    const tabContainer = this.context.$bs_tabContainer;
-    const role = propsRole || (tabContainer ? 'tablist' : null);
-
-    const { activeKey, activeHref } = this.getActiveProps();
-    delete props.activeKey; // Accessed via this.getActiveProps().
-    delete props.activeHref; // Accessed via this.getActiveProps().
-
-    const [bsProps, elementProps] = splitBsProps(props);
+    delete props.activeKey;
+    delete props.onSelect;
+    delete props.getControlledId;
+    delete props.getControllerId;
 
     const classes = {
-      ...getClassSet(bsProps),
-      [prefix(bsProps, 'stacked')]: stacked,
-      [prefix(bsProps, 'justified')]: justified
+      [bsPrefix]: !navbar,
+      [`navbar-nav`]: navbar,
+      [`${bsPrefix}-${variant}`]: !!variant,
+      [`${bsPrefix}-fill`]: fill,
+      [`${bsPrefix}-justified`]: justify
     };
 
-    const navbar = propsNavbar != null ? propsNavbar : this.context.$bs_navbar;
-    let pullLeftClassName;
-    let pullRightClassName;
-
-    if (navbar) {
-      const navbarProps = this.context.$bs_navbar || { bsClass: 'navbar' };
-
-      classes[prefix(navbarProps, 'nav')] = true;
-
-      pullRightClassName = prefix(navbarProps, 'right');
-      pullLeftClassName = prefix(navbarProps, 'left');
-    } else {
-      pullRightClassName = 'pull-right';
-      pullLeftClassName = 'pull-left';
+    if (props.role === 'tablist') {
+      props.onKeyDown = this.handleKeyDown;
     }
 
-    classes[pullRightClassName] = pullRight;
-    classes[pullLeftClassName] = pullLeft;
-
     return (
-      <ul
-        {...elementProps}
-        role={role}
-        className={classNames(className, classes)}
-      >
-        {ValidComponentChildren.map(children, child => {
-          const active = this.isActive(child, activeKey, activeHref);
-          const childOnSelect = createChainedFunction(
-            child.props.onSelect,
-            onSelect,
-            navbar && navbar.onSelect,
-            tabContainer && tabContainer.onSelect
-          );
-
-          return cloneElement(child, {
-            ...this.getTabProps(
-              child,
-              tabContainer,
-              role,
-              active,
-              childOnSelect
-            ),
-            active,
-            activeKey,
-            activeHref,
-            onSelect: childOnSelect
-          });
-        })}
-      </ul>
+      <NavContext.Provider value={this.state.navContext}>
+        <Component
+          {...props}
+          ref={this.attachRef}
+          className={classNames(className, classes)}
+        >
+          {children}
+        </Component>
+      </NavContext.Provider>
     );
   }
 }
 
-Nav.propTypes = propTypes;
-Nav.defaultProps = defaultProps;
-Nav.contextTypes = contextTypes;
+const UncontrolledNav = uncontrollable(createBootstrapComponent(Nav, 'nav'), {
+  activeKey: 'onSelect'
+});
 
-export default bsClass('nav', bsStyles(['tabs', 'pills'], Nav));
+const DecoratedNav = mapContextToProps(
+  UncontrolledNav,
+  TabContext.Consumer,
+  (context, props) => {
+    if (!context) return null;
+    const { activeKey, onSelect, getControllerId, getControlledId } = context;
+    return {
+      activeKey,
+      onSelect,
+      getControllerId,
+      getControlledId,
+      role: props.role || 'tablist'
+    };
+  }
+);
+
+DecoratedNav.Item = NavItem;
+DecoratedNav.Link = NavLink;
+
+DecoratedNav._Nav = Nav; // for Testing until enzyme is working with context
+
+export default DecoratedNav;
