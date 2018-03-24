@@ -1,4 +1,4 @@
-<Tabs defaultActiveKey={1} animation={false} id="noanim-tab-example">
+<Tabs defaultActiveKey={1} transition={false} id="noanim-tab-example">
   <Tab eventKey={1} title="Tab 1">
     Tab 1 content
   </Tab>

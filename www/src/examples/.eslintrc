@@ -35,6 +35,7 @@
     "Grid": false,
     "HelpBlock": false,
     "Image": false,
+    "Figure": false,
     "InputGroup": false,
     "Jumbotron": false,
     "Label": false,

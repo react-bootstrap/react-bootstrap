@@ -5,11 +5,11 @@ import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import TabsUncontrolled from '../../examples/TabsUncontrolled';
-import TabsControlled from '../../examples/TabsControlled';
-import TabsNoAnimation from '../../examples/TabsNoAnimation';
-import TabsWithDropdown from '../../examples/TabsWithDropdown';
-import LeftTabs from '../../examples/LeftTabs';
+import TabsUncontrolled from '../../examples/Tabs/Uncontrolled';
+import TabsControlled from '../../examples/Tabs/Controlled';
+import TabsNoAnimation from '../../examples/Tabs/NoAnimation';
+import TabsWithDropdown from '../../examples/Tabs/WithDropdown';
+import LeftTabs from '../../examples/Tabs/LeftTabs';
 
 export default function TabsSection({ data }) {
   return (
@@ -46,7 +46,7 @@ export default function TabsSection({ data }) {
         <Anchor id="tabs-no-animation">No animation</Anchor>
       </h3>
       <p>
-        Set the <code>animation</code> prop to <code>false</code>
+        Set the <code>transition</code> prop to <code>false</code>
       </p>
       <ReactPlayground
         codeText={TabsNoAnimation}

@@ -51,18 +51,6 @@ describe('<Nav>', () => {
     );
   });
 
-  it('Should adds stacked variation class', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Nav bsStyle="tabs" stacked activeKey={1}>
-        <NavItem eventKey={1}>Tab 1 content</NavItem>
-        <NavItem eventKey={2}>Tab 2 content</NavItem>
-      </Nav>
-    );
-    assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'nav-stacked')
-    );
-  });
-
   it('Should adds variation class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Nav bsStyle="tabs" justified activeKey={1}>

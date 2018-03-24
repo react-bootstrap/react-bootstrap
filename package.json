@@ -28,26 +28,13 @@
     "build-storybook": "build-storybook"
   },
   "lint-staged": {
-    "*.js": [
-      "npm run ci-lint -- --fix",
-      "git add"
-    ]
+    "*.js": ["npm run ci-lint -- --fix", "git add"]
   },
   "prettier": {
     "singleQuote": true
   },
-  "files": [
-    "CHANGELOG.md",
-    "lib",
-    "dist",
-    "es"
-  ],
-  "keywords": [
-    "react",
-    "ecosystem-react",
-    "react-component",
-    "bootstrap"
-  ],
+  "files": ["CHANGELOG.md", "lib", "dist", "es"],
+  "keywords": ["react", "ecosystem-react", "react-component", "bootstrap"],
   "author": "Stephen J. Collings <stevoland@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
@@ -55,16 +42,16 @@
     "react-dom": "^0.14.9 || >=15.3.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.40",
-    "@babel/core": "^7.0.0-beta.40",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.38",
-    "@babel/plugin-proposal-export-default-from": "^7.0.0-beta.38",
-    "@babel/plugin-proposal-export-namespace-from": "^7.0.0-beta.38",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.38",
-    "@babel/plugin-transform-runtime": "^7.0.0-beta.40",
-    "@babel/preset-env": "^7.0.0-beta.38",
-    "@babel/preset-react": "^7.0.0-beta.38",
-    "@babel/register": "^7.0.0-beta.40",
+    "@babel/cli": "^7.0.0-beta.42",
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.42",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0-beta.42",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0-beta.42",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.42",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "@babel/preset-react": "^7.0.0-beta.42",
+    "@babel/register": "^7.0.0-beta.42",
     "@monastic.panic/enzyme-adapter-react-16": "^1.2.1",
     "@storybook/react": "^3.3.14",
     "babel-core": "^7.0.0-bridge.0",
@@ -101,9 +88,9 @@
     "lodash": "^4.17.5",
     "mocha": "^2.5.3",
     "prettier": "^1.11.1",
-    "react": "^16.3.0-0",
-    "react-dom": "^16.3.0-0",
-    "react-test-renderer": "^16.3.0-0",
+    "react": "^16.3.0-alpha.3",
+    "react-dom": "^16.3.0-alpha.3",
+    "react-test-renderer": "^16.3.0-alpha.3",
     "release-script": "^1.0.2",
     "sinon": "^2.3.2",
     "sinon-chai": "^2.8.0",

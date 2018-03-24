@@ -2,8 +2,12 @@
   <Row className="clearfix">
     <Col sm={12}>
       <Nav bsStyle="tabs">
-        <NavItem eventKey="first">Tab 1</NavItem>
-        <NavItem eventKey="second">Tab 2</NavItem>
+        <Nav.Item>
+          <Nav.Link eventKey="first">Tab 1</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="second">Tab 2</Nav.Link>
+        </Nav.Item>
         <NavDropdown eventKey="3" title="Dropdown" id="nav-dropdown-within-tab">
           <MenuItem eventKey="3.1">Action</MenuItem>
           <MenuItem eventKey="3.2">Another action</MenuItem>
