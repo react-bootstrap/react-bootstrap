@@ -97,6 +97,8 @@ export { default as Figure } from './Figure';
 export { default as InputGroup } from './InputGroup';
 export type { InputGroupProps } from './InputGroup';
 
+export { default as Layout } from './Layout';
+
 export { default as ListGroup } from './ListGroup';
 export type { ListGroupProps } from './ListGroup';
 
