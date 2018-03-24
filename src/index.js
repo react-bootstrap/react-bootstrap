@@ -27,6 +27,7 @@ export Image from './Image';
 export Figure from './Figure';
 export InputGroup from './InputGroup';
 export Jumbotron from './Jumbotron';
+export Layout from './Layout';
 export ListGroup from './ListGroup';
 export ListGroupItem from './ListGroupItem';
 export Media from './Media';
