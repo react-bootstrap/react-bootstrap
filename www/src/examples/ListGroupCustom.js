@@ -8,8 +8,8 @@ function CustomComponent({ children }) {
 
 render(
   <ListGroup componentClass="ul">
-    <CustomComponent>Custom Child 1 </CustomComponent>
-    <CustomComponent>Custom Child 2 </CustomComponent>
+    <CustomComponent>Custom Child 1</CustomComponent>
+    <CustomComponent>Custom Child 2</CustomComponent>
     <CustomComponent>Custom Child 3</CustomComponent>
   </ListGroup>
 );

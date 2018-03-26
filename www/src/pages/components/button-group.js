@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -86,14 +87,19 @@ export default function ButtonGroupSection({ data }) {
       <h3>
         <Anchor id="btn-groups-props">Props</Anchor>
       </h3>
-      <PropTable metadata={data.metadata} />
+      <h4>
+        <Anchor id="btn-groups-group-props">ButtonGroup</Anchor>
+        <LinkToSource component={data.ButtonGroup.displayName} />
+      </h4>
+      <PropTable metadata={data.ButtonGroup} />
     </div>
   );
 }
 
 export const query = graphql`
   query ButtonGroupQuery {
-    metadata: componentMetadata(displayName: { eq: "ButtonGroup" }) {
+    ButtonGroup: componentMetadata(displayName: { eq: "ButtonGroup" }) {
+      displayName
       ...PropTable_metadata
     }
   }

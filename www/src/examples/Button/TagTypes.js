@@ -1,10 +1,7 @@
-const buttonsInstance = (
-  <ButtonToolbar>
-    <Button bsStyle="primary" href="#">
-      Link
-    </Button>
-    <Button bsStyle="primary">Button</Button>
-  </ButtonToolbar>
-);
-
-render(buttonsInstance);
+<ButtonToolbar>
+  <Button href="#">Link</Button>
+  <Button type="submit">Button</Button>
+  <Button componentClass="input" type="button" value="Input" />
+  <Button componentClass="input" type="submit" value="Submit" />
+  <Button componentClass="input" type="reset" value="Reset" />
+</ButtonToolbar>;

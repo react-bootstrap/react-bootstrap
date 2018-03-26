@@ -17,7 +17,12 @@ storiesOf('Forms ', module)
     <Form>
       <FormGroup>
         <FormLabel for="exampleFormControlInput1">Email address</FormLabel>
-        <FormControl type="email" class="Form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
+        <FormControl
+          type="email"
+          class="Form-control"
+          id="exampleFormControlInput1"
+          placeholder="name@example.com"
+        />
       </FormGroup>
       <FormGroup>
         <FormLabel for="exampleFormControlSelect1">Example select</FormLabel>
@@ -30,8 +35,14 @@ storiesOf('Forms ', module)
         </FormControl>
       </FormGroup>
       <FormGroup>
-        <FormLabel for="exampleFormControlSelect2">Example multiple select</FormLabel>
-        <FormControl multiple componentClass="select" id="exampleFormControlSelect2">
+        <FormLabel for="exampleFormControlSelect2">
+          Example multiple select
+        </FormLabel>
+        <FormControl
+          multiple
+          componentClass="select"
+          id="exampleFormControlSelect2"
+        >
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -40,8 +51,14 @@ storiesOf('Forms ', module)
         </FormControl>
       </FormGroup>
       <FormGroup>
-        <FormLabel for="exampleFormControlTextarea1">Example textarea</FormLabel>
-        <FormControl componentClass="textarea" id="exampleFormControlTextarea1" rows="3" />
+        <FormLabel for="exampleFormControlTextarea1">
+          Example textarea
+        </FormLabel>
+        <FormControl
+          componentClass="textarea"
+          id="exampleFormControlTextarea1"
+          rows="3"
+        />
       </FormGroup>
     </Form>
   ))
@@ -49,29 +66,46 @@ storiesOf('Forms ', module)
     <Grid>
       <Form>
         <FormGroup componentClass={Row} controlId="inputEmail3">
-          <FormLabel column sm={2}>Email</FormLabel>
+          <FormLabel column sm={2}>
+            Email
+          </FormLabel>
           <Col sm={10}>
-            <FormControl type="email" placeholder="Email"/>
+            <FormControl type="email" placeholder="Email" />
           </Col>
         </FormGroup>
         <FormGroup componentClass={Row} controlId="inputPassword3">
-          <FormLabel column sm={2}>Password</FormLabel>
+          <FormLabel column sm={2}>
+            Password
+          </FormLabel>
           <Col sm={10}>
             <FormControl type="password" placeholder="Password" />
           </Col>
         </FormGroup>
         <FormGroup componentClass="fieldset">
           <Row>
-            <Col componentClass="legend" className="col-form-legend">Radios</Col>
+            <Col componentClass="legend" className="col-form-legend">
+              Radios
+            </Col>
             <Col sm={10}>
               <FormCheck type="radio" value="option1" name="gridRadios" checked>
-                {' '}Option one is this and that&mdash;be sure to include why it's great
+                {' '}
+                Option one is this and that&mdash;be sure to include why it's
+                great
               </FormCheck>
               <FormCheck type="radio" value="option2" name="gridRadios" checked>
-                {' '}Option two can be something else and selecting it will deselect option one
+                {' '}
+                Option two can be something else and selecting it will deselect
+                option one
               </FormCheck>
-              <FormCheck type="radio" disabled value="option3" name="gridRadios" checked>
-                {' '}Option three is disabled
+              <FormCheck
+                type="radio"
+                disabled
+                value="option3"
+                name="gridRadios"
+                checked
+              >
+                {' '}
+                Option three is disabled
               </FormCheck>
             </Col>
           </Row>
@@ -79,14 +113,14 @@ storiesOf('Forms ', module)
         <FormGroup componentClass={Row}>
           <Col sm={2}>Checkbox</Col>
           <Col sm={10}>
-            <FormCheck type="checkbox">
-              {' '}Check me out
-            </FormCheck>
+            <FormCheck type="checkbox"> Check me out</FormCheck>
           </Col>
         </FormGroup>
         <FormGroup componentClass={Row}>
           <Col sm={10}>
-            <Button type="submit" bsStyle="primary">Sign in</Button>
+            <Button type="submit" bsStyle="primary">
+              Sign in
+            </Button>
           </Col>
         </FormGroup>
       </Form>
@@ -101,19 +135,21 @@ storiesOf('Forms ', module)
       </FormGroup>
     </Form>
   ))
-  .add('Readonly ✔', () => (
-    <FormControl readOnly />
-  ))
+  .add('Readonly ✔', () => <FormControl readOnly />)
   .add('Plaintext ✔', () => (
     <Form>
       <FormGroup componentClass={Row}>
-        <FormLabel column sm={2}>Blah</FormLabel>
+        <FormLabel column sm={2}>
+          Blah
+        </FormLabel>
         <Col sm={10}>
-        <FormControl placeholder="another input" />
+          <FormControl placeholder="another input" />
         </Col>
       </FormGroup>
       <FormGroup componentClass={Row}>
-        <FormLabel column sm={2}>Example file input</FormLabel>
+        <FormLabel column sm={2}>
+          Example file input
+        </FormLabel>
         <Col sm={10}>
           <FormControl plaintext value="email@example.com" />
         </Col>
@@ -122,11 +158,14 @@ storiesOf('Forms ', module)
   ))
   .add('Sizes ✔', () => (
     <Form>
-      <FormControl placeholder="large" bsStyle="lg" /><br />
-      <FormControl placeholder="default" /><br />
-      <FormControl placeholder="small" bsStyle="sm" /><br />
+      <FormControl placeholder="large" bsStyle="lg" />
+      <br />
+      <FormControl placeholder="default" />
+      <br />
+      <FormControl placeholder="small" bsStyle="sm" />
+      <br />
 
-      <FormControl componentClass="select" bsStyle="lg" >
+      <FormControl componentClass="select" bsStyle="lg">
         <option>Large select</option>
       </FormControl>
       <br />
@@ -138,4 +177,4 @@ storiesOf('Forms ', module)
         <option>Small select</option>
       </FormControl>
     </Form>
-  ))
+  ));

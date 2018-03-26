@@ -1,12 +1,8 @@
-const buttonsInstance = (
-  <ButtonToolbar>
-    <Button bsStyle="primary" bsSize="large" active>
-      Primary button
-    </Button>
-    <Button bsStyle="secondary" bsSize="large" active>
-      Button
-    </Button>
-  </ButtonToolbar>
-);
-
-render(buttonsInstance);
+<ButtonToolbar>
+  <Button variant="primary" size="lg" active>
+    Primary button
+  </Button>
+  <Button variant="secondary" size="lg" active>
+    Button
+  </Button>
+</ButtonToolbar>;

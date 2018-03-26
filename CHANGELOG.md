@@ -1,3 +1,34 @@
+## [v0.32.1]
+> 2018-01-24
+
+- **Bugfix:** Do not allow more than one open panel in an accordion group ([#2940])
+
+[v0.32.1]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.32.0...v0.32.1
+[#2940]: https://github.com/react-bootstrap/react-bootstrap/pull/2940
+
+
+## [v0.32.0]
+> 2018-01-04
+
+- **Breaking:** Refactor Panel API ([#1769])
+- **Breaking:** Remove Pagination logic, for purely presentational components ([#2587])
+
+- **Feature:** Switch to react-transition-group for Transition components ([#2676])
+- **Feature:** Remove inconsistent preventDefaults onSelect events ([#2790])
+- **BugFix:** Use different properties for mouseover and mouseout in handleMouseOverOut ([#2908])
+- **Docs:** Add new Gatsby docs! ([#2920])
+- **Chore:** replace old TransitionEvents ([#2902])
+
+[v0.32.0]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.31.5...v0.32.0
+[#2920]: https://github.com/react-bootstrap/react-bootstrap/pull/2920
+[#2902]: https://github.com/react-bootstrap/react-bootstrap/pull/2902
+[#2587]: https://github.com/react-bootstrap/react-bootstrap/pull/2587
+[#2790]: https://github.com/react-bootstrap/react-bootstrap/pull/2790
+[#2908]: https://github.com/react-bootstrap/react-bootstrap/pull/2908
+[#2676]: https://github.com/react-bootstrap/react-bootstrap/pull/2676
+[#1769]: https://github.com/react-bootstrap/react-bootstrap/pull/1769
+
+
 ## [v0.31.5]
 > 2017-10-24
 

@@ -6,6 +6,8 @@ import { mount } from 'enzyme';
 import Panel from '../src/Panel';
 import PanelGroup from '../src/PanelGroup';
 
+import { shouldWarn } from './helpers';
+
 describe('<PanelGroup>', () => {
   it('Should pass bsStyle to Panels', () => {
     let instance = ReactTestUtils.renderIntoDocument(
@@ -35,44 +37,95 @@ describe('<PanelGroup>', () => {
     assert.equal(panel.props.bsStyle, 'primary');
   });
 
-  it('Should not collapse panel by bubbling onSelect callback', () => {
-    mount(
-      <PanelGroup
-        accordion
-        id="panel"
-        onSelect={() => {
-          throw new Error();
-        }}
-      >
-        <Panel>
-          <input type="text" className="changeme" />
-        </Panel>
-      </PanelGroup>
-    )
-      .assertSingle('input.changeme')
-      .simulate('select');
-  });
+  describe('accordion', () => {
+    it('Should not collapse panel by bubbling onSelect callback', () => {
+      mount(
+        <PanelGroup
+          accordion
+          id="panel"
+          onSelect={() => {
+            throw new Error();
+          }}
+        >
+          <Panel>
+            <input type="text" className="changeme" />
+          </Panel>
+        </PanelGroup>
+      )
+        .assertSingle('input.changeme')
+        .simulate('select');
+    });
 
-  it('Should call onSelect handler with eventKey', done => {
-    function handleSelect(eventKey, e) {
-      e.should.exist;
-      eventKey.should.equal('1');
-      done();
-    }
+    it('Should call onSelect handler with eventKey', done => {
+      function handleSelect(eventKey, e) {
+        e.should.exist;
+        eventKey.should.equal('1');
+        done();
+      }
 
-    mount(
-      <PanelGroup accordion onSelect={handleSelect} id="panel">
-        <Panel eventKey="1">
-          <Panel.Heading>
-            <Panel.Title toggle>foo</Panel.Title>
-          </Panel.Heading>
+      mount(
+        <PanelGroup accordion onSelect={handleSelect} id="panel">
+          <Panel eventKey="1">
+            <Panel.Heading>
+              <Panel.Title toggle>foo</Panel.Title>
+            </Panel.Heading>
 
-          <Panel.Body collapsible>Panel 1</Panel.Body>
-        </Panel>
-      </PanelGroup>
-    )
-      .find('a')
-      .simulate('click');
+            <Panel.Body collapsible>Panel 1</Panel.Body>
+          </Panel>
+        </PanelGroup>
+      )
+        .find('a')
+        .simulate('click');
+    });
+
+    it('Should manage expanded panels', () => {
+      const inst = mount(
+        <PanelGroup accordion defaultActiveKey="1" id="panel">
+          <Panel id="panel1" eventKey="1">
+            <Panel.Heading>
+              <Panel.Title toggle>foo</Panel.Title>
+            </Panel.Heading>
+
+            <Panel.Body collapsible>Panel 1</Panel.Body>
+          </Panel>
+          <Panel id="panel2" eventKey="2">
+            <Panel.Heading>
+              <Panel.Title toggle>foo</Panel.Title>
+            </Panel.Heading>
+
+            <Panel.Body collapsible>Panel 2</Panel.Body>
+          </Panel>
+        </PanelGroup>
+      );
+
+      const panel1 = inst.find('#panel1').find('a');
+      const panel2 = inst.find('#panel2').find('a');
+      const panel1Dom = panel1.getDOMNode();
+      const panel2Dom = panel2.getDOMNode();
+
+      panel2.simulate('click');
+      assert.equal(panel1Dom.getAttribute('class'), 'collapsed');
+      assert.equal(panel2Dom.getAttribute('class'), '');
+
+      panel1.simulate('click');
+      assert.equal(panel1Dom.getAttribute('class'), '');
+      assert.equal(panel2Dom.getAttribute('class'), 'collapsed');
+
+      panel1.simulate('click');
+      assert.equal(panel1Dom.getAttribute('class'), 'collapsed');
+      assert.equal(panel2Dom.getAttribute('class'), 'collapsed');
+    });
+
+    it('Should warn if panel has explicit expanded', () => {
+      shouldWarn('`<Panel>` `expanded`');
+
+      mount(
+        <PanelGroup accordion defaultActiveKey="1" id="panel">
+          <Panel id="panel1" eventKey="1" />
+          <Panel id="panel2" eventKey="2" expanded onToggle={() => {}} />
+        </PanelGroup>
+      );
+    });
   });
 
   describe('Web Accessibility', () => {

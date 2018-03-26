@@ -2,7 +2,7 @@
   "rules": {
     "no-alert": "off",
     "no-unused-expressions": "off",
-    "semi": "off",
+    "no-unused-vars": "off",
     "react/jsx-no-undef": "off",
     "react/no-multi-comp": "off"
   },
@@ -35,6 +35,7 @@
     "Grid": false,
     "HelpBlock": false,
     "Image": false,
+    "Figure": false,
     "InputGroup": false,
     "Jumbotron": false,
     "Label": false,

@@ -1,11 +1,13 @@
 class Example extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
 
     this.handleShow = this.handleShow.bind(this);
     this.handleHide = this.handleHide.bind(this);
 
-    this.state = { show: false };
+    this.state = {
+      show: false
+    };
   }
 
   handleShow() {
@@ -19,7 +21,7 @@ class Example extends React.Component {
   render() {
     return (
       <ButtonToolbar>
-        <Button bsStyle="primary" onClick={this.handleShow}>
+        <Button variant="primary" onClick={this.handleShow}>
           Launch demo modal
         </Button>
 

@@ -8,7 +8,7 @@ const customButtonStyle = (
         color: white;
     }
     `}</style>
-    <Button bsStyle="custom">Custom</Button>
+    <Button variant="custom">Custom</Button>
   </div>
 );
 

@@ -2,42 +2,43 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import Nav from '../src/Nav';
-import NavItem from '../src/NavItem';
 import TabPane from '../src/TabPane';
 import TabContent from '../src/TabContent';
 import TabContainer from '../src/TabContainer';
 
 describe('<TabContainer>', () => {
   it('should not propagate context past TabPanes', () => {
+    const onSelect = sinon.spy();
+
     let instance = mount(
-      <TabContainer id="custom-id">
-        <div>
-          <Nav>
-            <NavItem eventKey="1">One</NavItem>
-          </Nav>
-          <TabContent>
-            <TabPane eventKey="1">
-              <Nav>
-                <NavItem eventKey="2">One</NavItem>
-              </Nav>
-            </TabPane>
-          </TabContent>
-        </div>
+      <TabContainer id="custom-id" onSelect={onSelect}>
+        <Nav>
+          <Nav.Item>
+            <Nav.Link eventKey="1">One</Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <TabContent>
+          <TabPane eventKey="1">
+            <Nav>
+              <Nav.Item>
+                <Nav.Link eventKey="2">One</Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </TabPane>
+        </TabContent>
       </TabContainer>
     );
 
-    let top = instance
-      .find('div > Nav')
-      .first()
-      .instance().context.$bs_tabContainer;
+    instance.find('TabPane Nav a').simulate('click');
 
-    let nested = instance
-      .find('TabPane Nav')
-      .first()
-      .instance().context.$bs_tabContainer;
+    onSelect.should.not.have.been.called;
 
-    expect(top).to.exist;
-    expect(nested).to.not.exist;
+    instance
+      .find('Nav a')
+      .first()
+      .simulate('click');
+
+    onSelect.should.have.been.calledOnce;
   });
 
   it('should match up ids', () => {
@@ -45,7 +46,9 @@ describe('<TabContainer>', () => {
       <TabContainer id="custom-id">
         <div>
           <Nav>
-            <NavItem eventKey="1">One</NavItem>
+            <Nav.Item>
+              <Nav.Link eventKey="1">One</Nav.Link>
+            </Nav.Item>
           </Nav>
           <TabContent>
             <TabPane eventKey="1" />
@@ -55,7 +58,7 @@ describe('<TabContainer>', () => {
     );
 
     let tabId = instance
-      .find('NavItem a')
+      .find('Nav.Link a')
       .first()
       .prop('id');
 
@@ -76,7 +79,9 @@ describe('<TabContainer>', () => {
       <TabContainer id="custom-id">
         <div>
           <Nav bsStyle="pills">
-            <NavItem eventKey="1">One</NavItem>
+            <Nav.Item>
+              <Nav.Link eventKey="1">One</Nav.Link>
+            </Nav.Item>
           </Nav>
         </div>
       </TabContainer>
@@ -89,7 +94,7 @@ describe('<TabContainer>', () => {
       .should.equal('tablist');
 
     instance
-      .find('NavItem a')
+      .find('Nav.Link a')
       .first()
       .getDOMNode()
       .getAttribute('role')
@@ -101,9 +106,11 @@ describe('<TabContainer>', () => {
       <TabContainer id="custom-id">
         <div>
           <Nav role="navigation" bsStyle="pills">
-            <NavItem href="#foo" eventKey="1">
-              One
-            </NavItem>
+            <Nav.Item>
+              <Nav.Link href="#foo" eventKey="1">
+                One
+              </Nav.Link>
+            </Nav.Item>
           </Nav>
         </div>
       </TabContainer>
@@ -115,10 +122,10 @@ describe('<TabContainer>', () => {
       .getAttribute('role')
       .should.equal('navigation');
 
-    // make sure its not passed to the NavItem
+    // make sure its not passed to the Nav.Link
     expect(
       instance
-        .find('NavItem a')
+        .find('Nav.Link a')
         .first()
         .getDOMNode()
         .getAttribute('role')

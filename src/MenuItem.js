@@ -133,11 +133,10 @@ class MenuItem extends React.Component {
         {...elementProps}
         role="menuitem"
         tabIndex="-1"
-        className={classNames(
-          className,
-          prefix(bsProps, 'item'),
-          { active, disabled }
-        )}
+        className={classNames(className, prefix(bsProps, 'item'), {
+          active,
+          disabled
+        })}
         onClick={createChainedFunction(onClick, this.handleClick)}
       />
     );

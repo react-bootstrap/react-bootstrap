@@ -1,8 +1,8 @@
 class FormExample extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
 
-    this.handleChange = this.handleChange.bind(null);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
       value: ''

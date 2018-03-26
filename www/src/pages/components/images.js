@@ -1,11 +1,12 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
 import ImageShape from '../../examples/ImageShape';
-import ImageResponsive from '../../examples/ImageResponsive';
+import ImageFluid from '../../examples/ImageFluid';
 import ThumbnailAnchor from '../../examples/ThumbnailAnchor';
 import ThumbnailDiv from '../../examples/ThumbnailDiv';
 
@@ -20,22 +21,22 @@ export default function ImageSection({ data }) {
         <Anchor id="image-shape">Shape</Anchor>
       </h3>
       <p>
-        Use the <code>rounded</code>, <code>circle</code> and{' '}
+        Use the <code>rounded</code>, <code>roundedCircle</code> and{' '}
         <code>thumbnail</code> props to customise the image.
       </p>
       <ReactPlayground codeText={ImageShape} />
 
       <h3>
-        <Anchor id="image-responsive">Responsive</Anchor>
+        <Anchor id="image-fluid">Fluid</Anchor>
       </h3>
       <p>
-        Use the <code>responsive</code> to scale image nicely to the parent
-        element.
+        Use the <code>fluid</code> to scale image nicely to the parent element.
       </p>
-      <ReactPlayground codeText={ImageResponsive} />
+      <ReactPlayground codeText={ImageFluid} />
 
       <h3>
         <Anchor id="image-props">Props</Anchor>
+        <LinkToSource component={data.Image.displayName} />
       </h3>
       <PropTable metadata={data.Image} />
 
@@ -62,6 +63,7 @@ export default function ImageSection({ data }) {
 
       <h3>
         <Anchor id="thumbnail-props">Props</Anchor>
+        <LinkToSource component={data.Thumbnail.displayName} />
       </h3>
       <PropTable metadata={data.Thumbnail} />
     </div>
@@ -71,9 +73,11 @@ export default function ImageSection({ data }) {
 export const query = graphql`
   query ImageQuery {
     Image: componentMetadata(displayName: { eq: "Image" }) {
+      displayName
       ...PropTable_metadata
     }
     Thumbnail: componentMetadata(displayName: { eq: "Thumbnail" }) {
+      displayName
       ...PropTable_metadata
     }
   }

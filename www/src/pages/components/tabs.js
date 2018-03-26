@@ -1,14 +1,15 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import TabsUncontrolled from '../../examples/TabsUncontrolled';
-import TabsControlled from '../../examples/TabsControlled';
-import TabsNoAnimation from '../../examples/TabsNoAnimation';
-import TabsWithDropdown from '../../examples/TabsWithDropdown';
-import LeftTabs from '../../examples/LeftTabs';
+import TabsUncontrolled from '../../examples/Tabs/Uncontrolled';
+import TabsControlled from '../../examples/Tabs/Controlled';
+import TabsNoAnimation from '../../examples/Tabs/NoAnimation';
+import TabsWithDropdown from '../../examples/Tabs/WithDropdown';
+import LeftTabs from '../../examples/Tabs/LeftTabs';
 
 export default function TabsSection({ data }) {
   return (
@@ -45,7 +46,7 @@ export default function TabsSection({ data }) {
         <Anchor id="tabs-no-animation">No animation</Anchor>
       </h3>
       <p>
-        Set the <code>animation</code> prop to <code>false</code>
+        Set the <code>transition</code> prop to <code>false</code>
       </p>
       <ReactPlayground
         codeText={TabsNoAnimation}
@@ -85,26 +86,31 @@ export default function TabsSection({ data }) {
 
       <h4>
         <Anchor id="tabs-props-area">Tabs</Anchor>
+        <LinkToSource component={data.Tabs.displayName} />
       </h4>
       <PropTable metadata={data.Tabs} />
 
       <h4>
         <Anchor id="tabs-props-pane">Tab</Anchor>
+        <LinkToSource component={data.Tab.displayName} />
       </h4>
       <PropTable metadata={data.Tab} />
 
       <h4>
         <Anchor id="tabs-props-pane">TabContainer</Anchor>
+        <LinkToSource component={data.TabContainer.displayName} />
       </h4>
       <PropTable metadata={data.TabContainer} />
 
       <h4>
         <Anchor id="tabs-props-pane">TabContent</Anchor>
+        <LinkToSource component={data.TabContent.displayName} />
       </h4>
       <PropTable metadata={data.TabContent} />
 
       <h4>
         <Anchor id="tabs-props-pane">TabPane</Anchor>
+        <LinkToSource component={data.TabPane.displayName} />
       </h4>
       <PropTable metadata={data.TabPane} />
     </div>

@@ -1,8 +1,10 @@
 class Example extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
 
-    this.state = {};
+    this.state = {
+      open: false
+    };
   }
 
   render() {
@@ -13,12 +15,9 @@ class Example extends React.Component {
         </Button>
         <Collapse in={this.state.open}>
           <div>
-            <Well>
-              Anim pariatur cliche reprehenderit, enim eiusmod high life
-              accusamus terry richardson ad squid. Nihil anim keffiyeh
-              helvetica, craft beer labore wes anderson cred nesciunt sapiente
-              ea proident.
-            </Well>
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
+            labore wes anderson cred nesciunt sapiente ea proident.
           </div>
         </Collapse>
       </div>
