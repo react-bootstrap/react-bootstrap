@@ -32,9 +32,7 @@
     "gatsby-transformer-remark": "2.0.1-1"
   },
   "homepage": "https://react-bootstrap.github.io/",
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": ["gatsby"],
   "license": "MIT",
   "repository": {
     "type": "git",

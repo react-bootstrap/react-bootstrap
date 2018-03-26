@@ -1,3 +1,3 @@
-import createWithBsClass from './utils/createWithBsClass';
+import createWithBsPrefix from './utils/createWithBsPrefix';
 
-export default createWithBsClass('input-group-prepend');
+export default createWithBsPrefix('input-group-prepend');

@@ -6,16 +6,21 @@ class NavDropdownExample extends React.Component {
 
   render() {
     return (
-      <Nav bsStyle="tabs" activeKey="1" onSelect={k => this.handleSelect(k)}>
-        <NavItem eventKey="1" href="/home">
-          NavItem 1 content
-        </NavItem>
-        <NavItem eventKey="2" title="Item">
-          NavItem 2 content
-        </NavItem>
-        <NavItem eventKey="3" disabled>
-          NavItem 3 content
-        </NavItem>
+      <Nav
+        componentClass="div"
+        variant="tabs"
+        activeKey="1"
+        onSelect={k => this.handleSelect(k)}
+      >
+        <Nav.Link eventKey="1" href="/home">
+          NavLink 1 content
+        </Nav.Link>
+        <Nav.Link eventKey="2" title="Item">
+          NavLink 2 content
+        </Nav.Link>
+        <Nav.Link eventKey="3" disabled>
+          NavLink 3 content
+        </Nav.Link>
         <NavDropdown eventKey="4" title="Dropdown" id="nav-dropdown">
           <MenuItem eventKey="4.1">Action</MenuItem>
           <MenuItem eventKey="4.2">Another action</MenuItem>

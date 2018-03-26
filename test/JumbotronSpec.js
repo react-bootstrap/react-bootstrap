@@ -25,6 +25,15 @@ describe('<Jumbotron>', () => {
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bjumbotron\b/));
   });
 
+  it('Should have a fluid class', () => {
+    let instance = ReactTestUtils.renderIntoDocument(
+      <Jumbotron fluid>Content</Jumbotron>
+    );
+    assert.ok(
+      ReactDOM.findDOMNode(instance).className.match(/\bjumbotron-fluid\b/)
+    );
+  });
+
   it('Should override node class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Jumbotron componentClass="section">

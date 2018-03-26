@@ -16,8 +16,9 @@ export default function BreadcrumbSection({ data }) {
       </h2>
 
       <p>
-        Breadcrumbs are used to indicate the current page's location. Add{' '}
-        <code>active</code> attribute to active <code>Breadcrumb.Item</code>.
+        Indicate the current page’s location within a navigational hierarchy
+        that automatically adds separators via CSS. Add <code>active</code> prop
+        to active <code>Breadcrumb.Item</code>.
       </p>
       <p>
         Do not set both <code>active</code> and <code>href</code> attributes.{' '}
@@ -32,25 +33,24 @@ export default function BreadcrumbSection({ data }) {
 
       <h3>
         <Anchor id="breadcrumbs-props">Props</Anchor>
-        <LinkToSource component={data.metadata.displayName} />
+        <LinkToSource component={data.Breadcrumb.displayName} />
       </h3>
-      <p>
-        <code>Breadcrumb</code> component itself doesn't have any specific
-        public properties
-      </p>
+      <PropTable metadata={data.Breadcrumb} />
 
       <h4>
         <Anchor id="breadcrumbs-props-breadcrumb-item">Breadcrumb.Item</Anchor>
       </h4>
-      <PropTable metadata={data.metadata} />
+      <PropTable metadata={data.BreadcrumbItem} />
     </div>
   );
 }
 
 export const query = graphql`
   query BreadcrumbQuery {
-    metadata: componentMetadata(displayName: { eq: "BreadcrumbItem" }) {
-      displayName
+    BreadcrumbItem: componentMetadata(displayName: { eq: "BreadcrumbItem" }) {
+      ...PropTable_metadata
+    }
+    Breadcrumb: componentMetadata(displayName: { eq: "Breadcrumb" }) {
       ...PropTable_metadata
     }
   }

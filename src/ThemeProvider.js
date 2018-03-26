@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const ThemeContext = React.createContext(new Map());
+const { Provider, Consumer } = React.createContext(new Map());
 
 class ThemeProvider extends React.Component {
   static propTypes = {
@@ -16,36 +16,32 @@ class ThemeProvider extends React.Component {
   }
 
   render() {
-    return (
-      <ThemeContext.Provider value={this.variants}>
-        {this.props.children}
-      </ThemeContext.Provider>
-    );
+    return <Provider value={this.variants}>{this.props.children}</Provider>;
   }
 }
 
 function createBootstrapComponent(Component, prefix) {
   const name = Component.displayName || Component.name;
-  // eslint-disable-next-line
-  return class extends React.Component {
-    static displayName = `Bootstrap(${name})`;
-    static propTypes = {
-      bsPrefix: PropTypes.string
-    };
-    render() {
-      return (
-        <ThemeContext.Consumer>
-          {variants => (
-            <Component
-              {...this.props}
-              bsPrefix={this.props.bsPrefix || variants.get(prefix) || prefix}
-            />
-          )}
-        </ThemeContext.Consumer>
-      );
-    }
-  };
+  // This looks like a function component but it's not,
+  // it's passed to forwardRef directly, and named for the dev-tools
+  // eslint-disable-next-line react/prop-types
+  function forwardRef({ bsPrefix, ...props }, ref) {
+    return (
+      <Consumer>
+        {variants => (
+          <Component
+            {...props}
+            ref={ref}
+            bsPrefix={bsPrefix || variants.get(prefix) || prefix}
+          />
+        )}
+      </Consumer>
+    );
+  }
+  forwardRef.displayName = `Bootstrap(${name})`;
+
+  return React.forwardRef(forwardRef);
 }
 
-export { createBootstrapComponent };
+export { createBootstrapComponent, Consumer as ThemeConsumer };
 export default ThemeProvider;

@@ -1,101 +1,132 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import elementType from 'prop-types-extra/lib/elementType';
 import uncontrollable from 'uncontrollable';
 
-const TAB = 'tab';
-const PANE = 'pane';
-
-const idPropType = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
-
-const propTypes = {
-  /**
-   * HTML id attribute, required if no `generateChildId` prop
-   * is specified.
-   */
-  id(props, ...args) {
-    let error = null;
-
-    if (!props.generateChildId) {
-      error = idPropType(props, ...args);
-
-      if (!error && !props.id) {
-        error = new Error(
-          'In order to properly initialize Tabs in a way that is accessible ' +
-            'to assistive technologies (such as screen readers) an `id` or a ' +
-            '`generateChildId` prop to TabContainer is required'
-        );
-      }
-    }
-
-    return error;
-  },
-
-  /**
-   * A function that takes an `eventKey` and `type` and returns a unique id for
-   * child tab `<NavItem>`s and `<TabPane>`s. The function _must_ be a pure
-   * function, meaning it should always return the _same_ id for the same set
-   * of inputs. The default value requires that an `id` to be set for the
-   * `<TabContainer>`.
-   *
-   * The `type` argument will either be `"tab"` or `"pane"`.
-   *
-   * @defaultValue (eventKey, type) => `${this.props.id}-${type}-${key}`
-   */
-  generateChildId: PropTypes.func,
-
-  /**
-   * A callback fired when a tab is selected.
-   *
-   * @controllable activeKey
-   */
-  onSelect: PropTypes.func,
-
-  /**
-   * The `eventKey` of the currently active tab.
-   *
-   * @controllable onSelect
-   */
-  activeKey: PropTypes.any
-};
-
-const childContextTypes = {
-  $bs_tabContainer: PropTypes.shape({
-    activeKey: PropTypes.any,
-    onSelect: PropTypes.func.isRequired,
-    getTabId: PropTypes.func.isRequired,
-    getPaneId: PropTypes.func.isRequired
-  })
-};
+import TabContext from './TabContext';
 
 class TabContainer extends React.Component {
-  getChildContext() {
-    const { activeKey, onSelect, generateChildId, id } = this.props;
+  static propTypes = {
+    /**
+     * HTML id attribute, required if no `generateChildId` prop
+     * is specified.
+     *
+     * @type {string}
+     */
+    id(props, ...args) {
+      let error = null;
 
-    const getId =
-      generateChildId || ((key, type) => (id ? `${id}-${type}-${key}` : null));
+      if (!props.generateChildId) {
+        error = PropTypes.string(props, ...args);
 
+        if (!error && !props.id) {
+          error = new Error(
+            'In order to properly initialize Tabs in a way that is accessible ' +
+              'to assistive technologies (such as screen readers) an `id` or a ' +
+              '`generateChildId` prop to TabContainer is required'
+          );
+        }
+      }
+
+      return error;
+    },
+
+    /**
+     * Sets a default animation strategy for all children `<TabPane>`s. Use
+     * `false` to disable, `true` to enable the default `<Fade>` animation or
+     * a react-transition-group v2 `<Transition/>` component.
+     *
+     * @type {{Transition | false}}
+     * @default {Fade}
+     */
+    transition: PropTypes.oneOfType([PropTypes.oneOf([false]), elementType]),
+    /**
+     * Wait until the first "enter" transition to mount tabs (add them to the DOM)
+     */
+    mountOnEnter: PropTypes.bool,
+
+    /**
+     * Unmount tabs (remove it from the DOM) when they are no longer visible
+     */
+    unmountOnExit: PropTypes.bool,
+
+    /**
+     * A function that takes an `eventKey` and `type` and returns a unique id for
+     * child tab `<NavItem>`s and `<TabPane>`s. The function _must_ be a pure
+     * function, meaning it should always return the _same_ id for the same set
+     * of inputs. The default value requires that an `id` to be set for the
+     * `<TabContainer>`.
+     *
+     * The `type` argument will either be `"tab"` or `"pane"`.
+     *
+     * @defaultValue (eventKey, type) => `${this.props.id}-${type}-${eventKey}`
+     */
+    generateChildId: PropTypes.func,
+
+    /**
+     * A callback fired when a tab is selected.
+     *
+     * @controllable activeKey
+     */
+    onSelect: PropTypes.func,
+
+    /**
+     * The `eventKey` of the currently active tab.
+     *
+     * @controllable onSelect
+     */
+    activeKey: PropTypes.any
+  };
+
+  static getDerivedStateFromProps(
+    { onSelect, activeKey, mountOnEnter, unmountOnExit, transition },
+    prevState
+  ) {
     return {
-      $bs_tabContainer: {
+      tabContext: {
+        ...prevState.tabContext,
         activeKey,
         onSelect,
-        getTabId: key => getId(key, TAB),
-        getPaneId: key => getId(key, PANE)
+        mountOnEnter,
+        unmountOnExit,
+        transition
+      }
+    };
+  }
+  constructor(...args) {
+    super(...args);
+
+    this.state = {
+      tabContext: {
+        onSelect: this.props.onSelect,
+        activeKey: this.props.activeKey,
+        transition: this.props.transition,
+        mountOnEnter: this.props.mountOnEnter,
+        unmountOnExit: this.props.unmountOnExit,
+        getControlledId: this.getControlledId,
+        getControllerId: this.getControllerId
       }
     };
   }
 
+  getKey(key, type) {
+    const { generateChildId, id } = this.props;
+    if (generateChildId) return generateChildId(key, type);
+    return id ? `${id}-${type}-${key}` : null;
+  }
+
+  getControlledId = key => this.getKey(key, 'tabpane');
+  getControllerId = key => this.getKey(key, 'tab');
+
   render() {
-    const { children, ...props } = this.props;
+    const { children } = this.props;
 
-    delete props.generateChildId;
-    delete props.onSelect;
-    delete props.activeKey;
-
-    return React.cloneElement(React.Children.only(children), props);
+    return (
+      <TabContext.Provider value={this.state.tabContext}>
+        {children}
+      </TabContext.Provider>
+    );
   }
 }
-
-TabContainer.propTypes = propTypes;
-TabContainer.childContextTypes = childContextTypes;
 
 export default uncontrollable(TabContainer, { activeKey: 'onSelect' });
