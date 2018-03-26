@@ -58,7 +58,7 @@ class App extends React.Component {
           bsStyle="primary"
           onClick={() => this.setState({ modalShow: true })}
         >
-          Launch vertically centered modal
+          Launch modal with grid
         </Button>
 
         <MydModalWithGrid show={this.state.modalShow} onHide={modalClose} />
