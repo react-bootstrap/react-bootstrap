@@ -54,7 +54,6 @@ class BreadcrumbItem extends React.Component {
       <Component
         className={classNames(bsPrefix, className, { active })}
         aria-current={active ? 'page' : undefined}
-        {...elementProps}
       >
         {active ? (
           <span {...elementProps} className={classNames({ active })} />
