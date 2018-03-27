@@ -1,11 +1,13 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
 import { createBootstrapComponent } from './ThemeProvider';
 
 class ModalFooter extends React.Component {
   static propTypes = {
+    bsPrefix: PropTypes.string,
     componentClass: elementType
   };
 
@@ -14,9 +16,14 @@ class ModalFooter extends React.Component {
   };
 
   render() {
-    const { componentClass: Component, className, ...props } = this.props;
+    const {
+      componentClass: Component,
+      bsPrefix,
+      className,
+      ...props
+    } = this.props;
 
-    const classes = classNames('modal-footer', className);
+    const classes = classNames(className, bsPrefix);
 
     return <Component {...props} className={classNames(classes)} />;
   }
