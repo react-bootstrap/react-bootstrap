@@ -28,12 +28,11 @@
     "react-live": "^1.9.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.42",
     "@babel/preset-flow": "^7.0.0-beta.40"
   },
   "homepage": "https://react-bootstrap.github.io/",
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": ["gatsby"],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -43,5 +42,8 @@
     "develop": "gatsby develop",
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-links && gh-pages -d public"
+  },
+  "resolutions": {
+    "gatsby/@babel/core": "7.0.0-beta.42"
   }
 }
