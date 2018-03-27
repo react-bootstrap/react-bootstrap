@@ -4,6 +4,7 @@ import Link from 'gatsby-link';
 
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
+import FormControl from 'react-bootstrap/lib/FormControl';
 
 const NAV_LINKS = {
   documentation: {
@@ -24,6 +25,15 @@ const propTypes = {
   activePage: PropTypes.string
 };
 
+function attachSearch(ref) {
+  if (ref)
+    window.docsearch({
+      apiKey: '68117ff90f086cb491d7e7e984cd7b75',
+      indexName: 'react_bootstrap',
+      inputSelector: ref,
+      debug: false // Set debug to true if you want to inspect the dropdown
+    });
+}
 function NavMain({ activePage }) {
   return (
     <Navbar
@@ -59,6 +69,14 @@ function NavMain({ activePage }) {
             </li>
           </Wrapper>
         </Nav>
+        <Navbar.Form pullRight>
+          <FormControl
+            type="search"
+            className="bs-search-bar"
+            placeholder="Search…"
+            inputRef={attachSearch}
+          />
+        </Navbar.Form>
       </Navbar.Collapse>
     </Navbar>
   );
