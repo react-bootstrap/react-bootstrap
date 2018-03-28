@@ -43,6 +43,9 @@
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-links && gh-pages -d public"
   },
+  "engines": {
+    "node": ">= 8.3.0"
+  },
   "resolutions": {
     "gatsby/@babel/core": "7.0.0-beta.42"
   }
