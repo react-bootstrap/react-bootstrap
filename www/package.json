@@ -43,5 +43,8 @@
     "develop": "gatsby develop",
     "build": "gatsby build",
     "deploy": "gatsby build --prefix-links && gh-pages -d public"
-  }
+  },
+  "engines": {
+    "node": ">= 8.3.0"
+  },
 }
