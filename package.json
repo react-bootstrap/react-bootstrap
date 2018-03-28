@@ -116,8 +116,5 @@
     "bowerRepo": "git@github.com:react-bootstrap/react-bootstrap-bower.git",
     "docsRepo": "git@github.com:react-bootstrap/react-bootstrap.github.io.git",
     "docsRoot": "www/public/"
-  },
-  "engines": {
-    "node": ">= 8.3.0"
   }
 }
