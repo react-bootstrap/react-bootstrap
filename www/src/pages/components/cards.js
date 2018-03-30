@@ -6,6 +6,8 @@ import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
 import CardBasic from '../../examples/Card/Basic';
+import CardBodyOnly from '../../examples/Card/BodyOnly';
+import CardText from '../../examples/Card/Text';
 
 export default function CardSection({ data }) {
   return (
@@ -21,9 +23,26 @@ export default function CardSection({ data }) {
       </p>
 
       <h3>
-        <Anchor id="card-basic-example">Basic Example</Anchor>
+        <Anchor id="card-example-basic">Basic Example</Anchor>
       </h3>
       <ReactPlayground codeText={CardBasic} />
+
+      <h2>
+        <Anchor id="card-content-types">Content types</Anchor>
+      </h2>
+
+      <h3>
+        <Anchor id="card-example-body">Body</Anchor>
+      </h3>
+      <p>
+        Use <code>Card.Body</code> to pad content inside a <code>Card</code>.
+      </p>
+      <ReactPlayground codeText={CardBodyOnly} />
+
+      <h3>
+        <Anchor id="card-example-text">Title, text, and links</Anchor>
+      </h3>
+      <ReactPlayground codeText={CardText} />
 
       <h3>
         <Anchor id="card-props">Props</Anchor>
