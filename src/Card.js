@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
 import { createBootstrapComponent } from './ThemeProvider';
+import createWithBsPrefix from './utils/createWithBsPrefix';
 
 import CardBody from './CardBody';
-import CardImageTop from './CardImageTop';
-import CardLink from './CardLink';
-import CardText from './CardText';
+import CardImg from './CardImg';
 import CardTitle from './CardTitle';
 import CardSubtitle from './CardSubtitle';
 
@@ -40,10 +39,15 @@ class Card extends React.Component {
 
 const DecoratedCard = createBootstrapComponent(Card, 'card');
 DecoratedCard.Body = CardBody;
-DecoratedCard.ImageTop = CardImageTop;
-DecoratedCard.Link = CardLink;
-DecoratedCard.Text = CardText;
+DecoratedCard.Img = CardImg;
 DecoratedCard.Title = CardTitle;
 DecoratedCard.Subtitle = CardSubtitle;
+
+DecoratedCard.Link = createWithBsPrefix('card-link', {
+  Component: 'a'
+});
+DecoratedCard.Text = createWithBsPrefix('card-text', {
+  Component: 'p'
+});
 
 export default DecoratedCard;

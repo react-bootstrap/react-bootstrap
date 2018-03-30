@@ -5,30 +5,39 @@ import elementType from 'prop-types-extra/lib/elementType';
 
 import { createBootstrapComponent } from './ThemeProvider';
 
-class CardLink extends React.Component {
+class CardImg extends React.Component {
   static propTypes = {
     /**
-     * @default 'card-link'
+     * @default 'card-img'
      */
     bsPrefix: PropTypes.string,
+
+    /**
+     * Defines image position inside
+     * the card.
+     */
+    variant: PropTypes.oneOf(['top', 'bottom', null]),
 
     componentClass: elementType
   };
 
   static defaultProps = {
-    componentClass: 'a'
+    componentClass: 'img',
+    variant: null,
   };
 
   render() {
     const {
       bsPrefix,
       className,
+      variant,
       componentClass: Component,
       ...props
     } = this.props;
 
-    return <Component className={classNames(bsPrefix, className)} {...props} />;
+    const baseClass = variant ? `${bsPrefix}-${variant}` : bsPrefix
+    return <Component className={classNames(baseClass, className)} {...props} />;
   }
 }
 
-export default createBootstrapComponent(CardLink, 'card-link');
+export default createBootstrapComponent(CardImg, 'card-img');
