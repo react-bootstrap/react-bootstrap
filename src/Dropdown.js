@@ -170,7 +170,7 @@ class Dropdown extends React.Component {
   focusNextOnOpen() {
     const menu = this.menu;
 
-    if (!menu.focusNext) {
+    if (!menu || !menu.focusNext) {
       return;
     }
 

@@ -1,30 +1,48 @@
-const commonjs = process.env.BABEL_ENV !== 'esm';
+module.exports = api => {
+  let dev = false;
+  let modules = true;
 
-module.exports = {
-  presets: [
-    [
-      '@babel/preset-env',
-      {
-        loose: true,
-        shippedProposals: true,
-        modules: commonjs ? 'commonjs' : false,
-        targets: {
-          browsers: ['last 4 versions', 'not ie <= 8']
+  switch (api.env()) {
+    case 'test':
+      dev = true;
+      modules = false;
+      break;
+    case 'dist-dev':
+      dev = true;
+      modules = false;
+      break;
+    case 'dist-prod':
+    case 'esm':
+      modules = false;
+      break;
+    case 'build':
+    default:
+      break;
+  }
+
+  return {
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          loose: true,
+          shippedProposals: true,
+          modules: modules ? 'commonjs' : false,
+          targets: {
+            browsers: ['last 4 versions', 'not ie <= 8']
+          }
         }
-      }
+      ],
+      ['@babel/preset-react', { development: dev }]
     ],
-    [
-      '@babel/preset-react',
-      { development: process.env.NODE_ENV !== 'production' }
-    ]
-  ],
-  plugins: [
-    ['@babel/plugin-proposal-class-properties', { loose: true }],
-    '@babel/plugin-proposal-export-default-from',
-    '@babel/plugin-proposal-export-namespace-from',
-    ['@babel/plugin-transform-runtime', { useESModules: !commonjs }],
-    'babel-plugin-dev-expression',
-    commonjs && 'babel-plugin-add-module-exports',
-    process.env.NODE_ENV === 'test' && 'babel-plugin-istanbul'
-  ].filter(Boolean)
+    plugins: [
+      ['@babel/plugin-proposal-class-properties', { loose: true }],
+      '@babel/plugin-proposal-export-default-from',
+      '@babel/plugin-proposal-export-namespace-from',
+      ['@babel/plugin-transform-runtime', { useESModules: !modules }],
+      'babel-plugin-dev-expression',
+      modules && 'babel-plugin-add-module-exports',
+      api.env() === 'test' && 'babel-plugin-istanbul'
+    ].filter(Boolean)
+  };
 };

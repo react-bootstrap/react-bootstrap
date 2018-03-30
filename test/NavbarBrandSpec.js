@@ -20,7 +20,7 @@ describe('<Navbar.Brand>', () => {
   it('Should create NavbarBrand A (link) element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <NavbarBrand>
-        <a href>BrandLink</a>
+        <a href="">BrandLink</a>
       </NavbarBrand>
     );
 
