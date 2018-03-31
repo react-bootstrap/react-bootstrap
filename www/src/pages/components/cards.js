@@ -18,7 +18,10 @@ export default function CardSection({ data }) {
     <div className="bs-docs-section">
       <h2 className="page-header">
         <Anchor id="cards">Cards</Anchor>
-        <small>Card, CardBody, CardTitle, CardImgTop</small>
+        <small>
+          Card, Card.Body, Card.Title, Card.Subtitle, Card.Img, Card.Header,
+          Card.Footer
+        </small>
       </h2>
 
       <p className="lead">

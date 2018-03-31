@@ -49,11 +49,7 @@ DecoratedCard.Link = createWithBsPrefix('card-link', {
 DecoratedCard.Text = createWithBsPrefix('card-text', {
   Component: 'p'
 });
-DecoratedCard.Header = createWithBsPrefix('card-header', {
-  Component: 'div'
-});
-DecoratedCard.Footer = createWithBsPrefix('card-footer', {
-  Component: 'div'
-});
+DecoratedCard.Header = createWithBsPrefix('card-header');
+DecoratedCard.Footer = createWithBsPrefix('card-footer');
 
 export default DecoratedCard;

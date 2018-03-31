@@ -16,7 +16,7 @@ class CardTitle extends React.Component {
   };
 
   static defaultProps = {
-    componentClass: 'h5'
+    componentClass: 'div'
   };
 
   render() {
@@ -27,7 +27,11 @@ class CardTitle extends React.Component {
       ...props
     } = this.props;
 
-    return <Component className={classNames(bsPrefix, className)} {...props} />;
+    const isDefaultComponent = Component === 'div';
+
+    const classes = classNames(bsPrefix, className, isDefaultComponent && 'h5');
+
+    return <Component className={classNames(classes)} {...props} />;
   }
 }
 
