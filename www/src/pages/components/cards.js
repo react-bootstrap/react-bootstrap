@@ -12,6 +12,10 @@ import CardImageAndText from '../../examples/Card/ImageAndText';
 import CardListGroups from '../../examples/Card/ListGroups';
 import CardListGroupWithHeader from '../../examples/Card/ListGroupWithHeader';
 import CardKitchenSink from '../../examples/Card/KitchenSink';
+import CardWithHeader from '../../examples/Card/WithHeader';
+import CardWithHeaderStyled from '../../examples/Card/WithHeaderStyled';
+import CardWithHeaderAndQuote from '../../examples/Card/WithHeaderAndQuote';
+import CardHeaderAndFooter from '../../examples/Card/HeaderAndFooter';
 
 export default function CardSection({ data }) {
   return (
@@ -49,6 +53,12 @@ export default function CardSection({ data }) {
       <h3>
         <Anchor id="card-example-text">Title, text, and links</Anchor>
       </h3>
+      <p>
+        Using <code>Card.Title</code>, <code>Card.Subtitle</code>, and{' '}
+        <code>Card.Text</code> inside the <code>Card.Body</code> will line them
+        up nicely. <code>Card.Link</code>s are used to line up links next to
+        each other.
+      </p>
       <ReactPlayground codeText={CardText} />
 
       <h3>
@@ -67,6 +77,25 @@ export default function CardSection({ data }) {
         <Anchor id="card-example-kitchen-sink">Kitchen Sink</Anchor>
       </h3>
       <ReactPlayground codeText={CardKitchenSink} />
+
+      <h3>
+        <Anchor id="card-example-header-and-footer">Header and Footer</Anchor>
+      </h3>
+      <p>
+        You may add a header by adding a <code>Card.Header</code> component.
+      </p>
+      <ReactPlayground codeText={CardWithHeader} />
+
+      <p>
+        A <code>CardHeader</code> can be styled by passing a heading element
+        through the <code>componentClass</code> prop
+      </p>
+      <ReactPlayground codeText={CardWithHeaderStyled} />
+
+      <ReactPlayground codeText={CardWithHeaderAndQuote} />
+      <ReactPlayground codeText={CardHeaderAndFooter} />
+
+      {/* PROPS SECTION */}
 
       <h3>
         <Anchor id="card-props">Props</Anchor>
