@@ -46,3 +46,8 @@
 
 * removed InputGroupButton, and InputGroupAddon
 * added InputGroup.Prepend, InputGroup.Append, InputGroup.Text, InputGroup.Checkbox, InputGroup.Radio
+
+### Badge & Label
+
+* removed Label (replaced with just) badge
+* `bsStyle` renamed to `variant`

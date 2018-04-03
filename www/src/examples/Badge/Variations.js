@@ -1,10 +1,10 @@
 <div>
-  <Badge bsStyle="primary">Primary</Badge>
-  <Badge bsStyle="secondary">Secondary</Badge>
-  <Badge bsStyle="success">Success</Badge>
-  <Badge bsStyle="danger">Danger</Badge>
-  <Badge bsStyle="warning">Warning</Badge>
-  <Badge bsStyle="info">Info</Badge>
-  <Badge bsStyle="light">Light</Badge>
-  <Badge bsStyle="dark">Dark</Badge>
+  <Badge variant="primary">Primary</Badge>
+  <Badge variant="secondary">Secondary</Badge>
+  <Badge variant="success">Success</Badge>
+  <Badge variant="danger">Danger</Badge>
+  <Badge variant="warning">Warning</Badge>
+  <Badge variant="info">Info</Badge>
+  <Badge variant="light">Light</Badge>
+  <Badge variant="dark">Dark</Badge>
 </div>;
