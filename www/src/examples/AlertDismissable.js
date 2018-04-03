@@ -21,8 +21,12 @@ class AlertDismissable extends React.Component {
   render() {
     if (this.state.show) {
       return (
-        <Alert bsStyle="danger" onDismiss={this.handleDismiss}>
-          <h4>Oh snap! You got an error!</h4>
+        <Alert
+          bsStyle="danger"
+          onDismiss={this.handleDismiss}
+          headingText="Oh snap! You got an error!"
+          headingComponent="h3"
+        >
           <p>
             Change this and that and try again. Duis mollis, est non commodo
             luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.

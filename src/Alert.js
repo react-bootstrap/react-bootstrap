@@ -13,17 +13,43 @@ import { State } from './utils/StyleConfig';
 import CloseButton from './CloseButton';
 
 const propTypes = {
+  /**
+   * Callback fired when alert is closed.
+   */
   onDismiss: PropTypes.func,
-  closeLabel: PropTypes.string
+
+  /**
+   * Sets the text for alert close button.
+   */
+  closeLabel: PropTypes.string,
+
+  /**
+   * Specifies the heading tag for 'headingText'
+   */
+  headingComponent: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']),
+
+  /**
+   * Specifies the alert heading text
+   */
+  headingText: PropTypes.string
 };
 
 const defaultProps = {
-  closeLabel: 'Close alert'
+  closeLabel: 'Close alert',
+  headingComponent: 'h4'
 };
 
 class Alert extends React.Component {
   render() {
-    const { onDismiss, closeLabel, className, children, ...props } = this.props;
+    const {
+      onDismiss,
+      closeLabel,
+      headingComponent: HeadingComponent,
+      headingText,
+      className,
+      children,
+      ...props
+    } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const dismissable = !!onDismiss;
@@ -39,6 +65,11 @@ class Alert extends React.Component {
         className={classNames(className, classes)}
       >
         {dismissable && <CloseButton onClick={onDismiss} label={closeLabel} />}
+        {!!headingText && (
+          <HeadingComponent className="alert-heading">
+            {headingText}
+          </HeadingComponent>
+        )}
         {children}
       </div>
     );
