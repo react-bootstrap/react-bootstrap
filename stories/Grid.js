@@ -1,14 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Grid from '../src/Grid';
+import Container from '../src/Container';
 import Col from '../src/Col';
 import Row from '../src/Row';
 
-storiesOf('Grid', module)
+storiesOf('Container', module)
   .addDecorator(fn => <div className="example-grid">{fn()}</div>)
   .add('Basic ✔', () => (
-    <Grid>
+    <Container>
       <Row className="justify-content-md-center">
         <Col xs lg={2}>
           1 of 3
@@ -25,5 +25,5 @@ storiesOf('Grid', module)
           3 of 3
         </Col>
       </Row>
-    </Grid>
+    </Container>
   ));

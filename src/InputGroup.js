@@ -25,24 +25,26 @@ class InputGroup extends React.Component {
   }
 }
 
-InputGroup.Addon = InputGroupAddon;
-InputGroup.Button = InputGroupButton;
-
-InputGroup.Append = InputGroupAppend;
-InputGroup.Prepend = InputGroupPrepend;
-InputGroup.Text = InputGroupText;
-
-InputGroup.Checkbox = props => (
+const InputGroupCheckbox = props => (
   <InputGroupText>
     <input type="checkbox" {...props} />
   </InputGroupText>
 );
 
-InputGroup.Radio = props => (
+const InputGroupRadio = props => (
   <InputGroupText>
     <input type="radio" {...props} />
   </InputGroupText>
 );
+
+InputGroup.Addon = InputGroupAddon;
+InputGroup.Button = InputGroupButton;
+
+InputGroup.Radio = InputGroupRadio;
+InputGroup.Checkbox = InputGroupCheckbox;
+InputGroup.Append = InputGroupAppend;
+InputGroup.Prepend = InputGroupPrepend;
+InputGroup.Text = InputGroupText;
 
 export default bsClass(
   'input-group',

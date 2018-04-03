@@ -21,7 +21,7 @@ export Form from './Form';
 export FormControl from './FormControl';
 export FormGroup from './FormGroup';
 export Glyphicon from './Glyphicon';
-export Grid from './Grid';
+export Container from './Container';
 export HelpBlock from './HelpBlock';
 export Image from './Image';
 export Figure from './Figure';

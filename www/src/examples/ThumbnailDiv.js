@@ -1,4 +1,4 @@
-<Grid>
+<Container>
   <Row>
     <Col xs={6} md={4}>
       <Thumbnail src="/thumbnaildiv.png" alt="242x200">
@@ -31,4 +31,4 @@
       </Thumbnail>
     </Col>
   </Row>
-</Grid>;
+</Container>;

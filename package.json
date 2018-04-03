@@ -28,13 +28,26 @@
     "build-storybook": "build-storybook"
   },
   "lint-staged": {
-    "*.js": ["npm run ci-lint -- --fix", "git add"]
+    "*.js": [
+      "npm run ci-lint -- --fix",
+      "git add"
+    ]
   },
   "prettier": {
     "singleQuote": true
   },
-  "files": ["CHANGELOG.md", "lib", "dist", "es"],
-  "keywords": ["react", "ecosystem-react", "react-component", "bootstrap"],
+  "files": [
+    "CHANGELOG.md",
+    "lib",
+    "dist",
+    "es"
+  ],
+  "keywords": [
+    "react",
+    "ecosystem-react",
+    "react-component",
+    "bootstrap"
+  ],
   "author": "Stephen J. Collings <stevoland@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
@@ -68,6 +81,7 @@
     "eslint": "^4.18.2",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-config-prettier": "^2.9.0",
+    "eslint-import-resolver-webpack": "^0.9.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-mocha": "^4.12.1",

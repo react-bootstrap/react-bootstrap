@@ -1,4 +1,4 @@
-<Grid>
+<Container>
   <Row>
     <Col xs={6} md={4}>
       <Image src="/thumbnail.png" rounded />
@@ -10,4 +10,4 @@
       <Image src="/thumbnail.png" thumbnail />
     </Col>
   </Row>
-</Grid>;
+</Container>;

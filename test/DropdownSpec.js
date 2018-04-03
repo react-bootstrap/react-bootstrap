@@ -6,7 +6,7 @@ import { mount, shallow } from 'enzyme';
 
 import Dropdown from '../src/Dropdown';
 import DropdownMenu from '../src/DropdownMenu';
-import Grid from '../src/Grid';
+import Container from '../src/Container';
 import MenuItem from '../src/MenuItem';
 
 import { shouldWarn } from './helpers';
@@ -562,14 +562,14 @@ describe('<Dropdown>', () => {
 
     it('when open and the key "tab" is pressed the menu is closed and focus is progress to the next focusable element', done => {
       const instance = ReactDOM.render(
-        <Grid>
+        <Container>
           {simpleDropdown}
           <input type="text" id="next-focusable" />
-        </Grid>,
+        </Container>,
         focusableContainer
       );
 
-      // Need to use Grid instead of div above to make instance a composite
+      // Need to use Container instead of div above to make instance a composite
       // element, to make this call legal.
       const node = ReactTestUtils.findRenderedComponentWithType(
         instance,

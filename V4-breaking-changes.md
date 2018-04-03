@@ -33,4 +33,11 @@
 
 ### NavLink
 
-* add
+### Grid
+
+* renamed to Container
+
+#### Col
+
+* removed visibility props
+* consolidated col `span`, `offset`, and `order` into an object value prop per breakpoint.

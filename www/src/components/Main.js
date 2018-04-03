@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Grid from 'react-bootstrap/lib/Grid';
+import Container from 'react-bootstrap/lib/Container';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
 
@@ -12,7 +12,7 @@ const propTypes = {
 
 function Main({ children, ...props }) {
   return (
-    <Grid fluid>
+    <Container fluid>
       <Row>
         <Col xs={12} md={3} xl={2} className="bs-docs-sidebar-holder">
           <SideNav location={props.location} />
@@ -21,7 +21,7 @@ function Main({ children, ...props }) {
           {children}
         </Col>
       </Row>
-    </Grid>
+    </Container>
   );
 }
 
