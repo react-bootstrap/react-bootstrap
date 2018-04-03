@@ -41,3 +41,8 @@
 
 * removed visibility props
 * consolidated col `span`, `offset`, and `order` into an object value prop per breakpoint.
+
+### InputGroup
+
+* removed InputGroupButton, and InputGroupAddon
+* added InputGroup.Prepend, InputGroup.Append, InputGroup.Text, InputGroup.Checkbox, InputGroup.Radio

@@ -1,8 +1,8 @@
-<div>
+<>
   <InputGroup className="mb-3">
     <DropdownButton
       componentClass={InputGroup.Prepend}
-      bsStyle="outline-secondary"
+      variant="outline-secondary"
       title="Dropdown"
     >
       <MenuItem href="#">Action</MenuItem>
@@ -23,7 +23,7 @@
 
     <DropdownButton
       componentClass={InputGroup.Append}
-      bsStyle="outline-secondary"
+      variant="outline-secondary"
       title="Dropdown"
     >
       <MenuItem href="#">Action</MenuItem>
@@ -33,4 +33,4 @@
       <MenuItem href="#">Separated link</MenuItem>
     </DropdownButton>
   </InputGroup>
-</div>;
+</>;

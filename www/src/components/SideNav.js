@@ -16,6 +16,7 @@ const components = [
   'carousel',
   'dropdowns',
   'forms',
+  'input-group',
   'glyphicons',
   'images',
   'figures',
