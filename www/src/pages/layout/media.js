@@ -1,22 +1,21 @@
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import PropTable from '../../components/PropTable';
+import Heading from '../../components/Heading';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import MediaList from '../../examples/MediaList';
-import MediaObject from '../../examples/MediaObject';
-import MediaAlignment from '../../examples/MediaAlignment';
-import MediaOrder from '../../examples/MediaOrder';
-import MediaNesting from '../../examples/MediaNesting';
+import List from '../../examples/Media/List';
+import Basic from '../../examples/Media/Basic';
+import Alignment from '../../examples/Media/Alignment';
+import Order from '../../examples/Media/Order';
+import Nesting from '../../examples/Media/Nesting';
 
 export default function MediaSection({ data }) {
   return (
     <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="media-objects">Media objects</Anchor>{' '}
-        <small>Media, Media.Body</small>
-      </h2>
+      <Heading h="1" id="media-objects">
+        Media objects
+      </Heading>
 
       <p>
         The media object helps build complex and repetitive components (e.g.
@@ -28,63 +27,59 @@ export default function MediaSection({ data }) {
         content. Optional padding and margin can be controlled through spacing
         utilities.
       </p>
-      <ReactPlayground codeText={MediaObject} />
+      <ReactPlayground codeText={Basic} />
 
-      <h3>
-        <Anchor id="media-nesting">Media Nesting</Anchor>
-      </h3>
+      <Heading h="2" id="media-nesting">
+        Media Nesting
+      </Heading>
+
       <p>
         Media objects can be infinitely nested, though we suggest you stop at
         some point. Place nested <code>Media</code> within the{' '}
         <code>Media.Body</code> of a parent media object.
       </p>
-      <ReactPlayground codeText={MediaNesting} />
+      <ReactPlayground codeText={Nesting} />
 
-      <h3>
-        <Anchor id="media-alignment">Media Alignment</Anchor>
-      </h3>
+      <Heading h="2" id="media-alignment">
+        Media Alignment
+      </Heading>
+
       <p>
         Media in a media object can be aligned with flexbox utilities to the top
         (default), middle, or end of your <code>Media.Body</code> content.
       </p>
-      <ReactPlayground codeText={MediaAlignment} />
+      <ReactPlayground codeText={Alignment} />
 
-      <h3>
-        <Anchor id="media-order">Media Order</Anchor>
-      </h3>
+      <Heading h="2" id="media-order">
+        Media Order
+      </Heading>
+
       <p>
         Change the order of content in media objects by modifying the HTML
         itself, or by adding some custom flexbox CSS to set the{' '}
         <code>order</code> property (to an integer of your choosing).
       </p>
-      <ReactPlayground codeText={MediaOrder} />
+      <ReactPlayground codeText={Order} />
 
-      <h3>
-        <Anchor id="media-list">Media list</Anchor>
-      </h3>
+      <Heading h="2" id="media-list">
+        Media list
+      </Heading>
+
       <p>
         Because the media object has so few structural requirements, you can
         also use these classes on list HTML elements. On your <code>ul</code> or{' '}
         <code>ol</code> , add the .list-unstyled to remove any browser default
-        list styles, and then include <code>Media</code> to your
-        <code>li</code>s. As always, use spacing utilities wherever needed to
-        fine tune.
+        list styles, use <code>li</code> for your <code>Media</code>{' '}
+        <code>componentClass</code>. As always, use spacing utilities wherever
+        needed to fine tune.
       </p>
-      <ReactPlayground codeText={MediaList} />
+      <ReactPlayground codeText={List} />
 
-      <h3>
-        <Anchor id="media-props">Props</Anchor>
-      </h3>
+      <Heading h="2" id="media-props">
+        Props
+      </Heading>
 
-      <h4>
-        <Anchor id="media-media-props">Media</Anchor>
-      </h4>
-      <PropTable metadata={data.Media} />
-
-      <h4>
-        <Anchor id="media-body-props">Media.Body</Anchor>
-      </h4>
-      <PropTable metadata={data.MediaBody} />
+      <ComponentApi metadata={data.Media} />
     </div>
   );
 }
@@ -92,9 +87,6 @@ export default function MediaSection({ data }) {
 export const query = graphql`
   query MediaQuery {
     Media: componentMetadata(displayName: { eq: "Media" }) {
-      ...PropTable_metadata
-    }
-    MediaBody: componentMetadata(displayName: { eq: "MediaBody" }) {
       ...PropTable_metadata
     }
   }
