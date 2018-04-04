@@ -81,7 +81,7 @@ class Col extends React.Component {
         classes.push(
           propValue === true
             ? bsProps.bsClass
-            : prefix(bsProps, `-${propValue}`)
+            : prefix(bsProps, `${propValue}`)
         );
       } else {
         // col-md-3
