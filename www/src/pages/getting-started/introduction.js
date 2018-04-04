@@ -1,7 +1,6 @@
 import React from 'react';
 import Row from 'react-bootstrap/lib/Row';
 import Col from 'react-bootstrap/lib/Col';
-import Panel from 'react-bootstrap/lib/Panel';
 
 import Anchor from '../../components/Anchor';
 
@@ -19,24 +18,27 @@ export default class Page extends React.Component {
           </h2>
           <Row>
             <Col sm={6}>
-              <Panel header="npm (recommended)" className="bs-docs-code-panel">
+              <div
+                header="npm (recommended)"
+                className="card card-body bs-docs-code-panel"
+              >
                 <pre>
                   <code>{`
 $ npm install --save react react-dom
 $ npm install --save react-bootstrap
                 `}</code>
                 </pre>
-              </Panel>
+              </div>
             </Col>
             <Col sm={6}>
-              <Panel header="bower" className="bs-docs-code-panel">
+              <div header="bower" className="card card-body bs-docs-code-panel">
                 <pre>
                   <code>{`
 $ bower install react
 $ bower install react-bootstrap
                 `}</code>
                 </pre>
-              </Panel>
+              </div>
             </Col>
           </Row>
           <h2>Stylesheets</h2>

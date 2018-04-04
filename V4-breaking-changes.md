@@ -51,3 +51,7 @@
 
 * removed Label (replaced with just) badge
 * `bsStyle` renamed to `variant`
+
+## Panel
+
+* removed, replaced with Card and Card components

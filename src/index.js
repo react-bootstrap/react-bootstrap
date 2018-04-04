@@ -1,4 +1,3 @@
-export Accordion from './Accordion';
 export Alert from './Alert';
 export Badge from './Badge';
 export Breadcrumb from './Breadcrumb';
@@ -45,8 +44,6 @@ export Overlay from './Overlay';
 export OverlayTrigger from './OverlayTrigger';
 export PageItem from './PageItem';
 export Pagination from './Pagination';
-export Panel from './Panel';
-export PanelGroup from './PanelGroup';
 export Popover from './Popover';
 export ProgressBar from './ProgressBar';
 export Radio from './Radio';

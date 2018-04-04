@@ -11,8 +11,6 @@
     "classNames": false,
     "React": false,
     "ReactDOM": false,
-
-    "Accordion": false,
     "Alert": false,
     "Badge": false,
     "Breadcrumb": false,
@@ -53,8 +51,6 @@
     "PageHeader": false,
     "Pager": false,
     "Pagination": false,
-    "Panel": false,
-    "PanelGroup": false,
     "Popover": false,
     "ProgressBar": false,
     "Radio": false,
