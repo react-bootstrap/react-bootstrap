@@ -38,21 +38,21 @@ describe('<ProgressBar>', () => {
 
   it('Should have the success class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} bsStyle="success" />
+      <ProgressBar min={0} max={10} now={0} variant="success" />
     );
 
     assert.ok(
-      getProgressBarNode(instance).className.match(/\bprogress-bar-success\b/)
+      getProgressBarNode(instance).className.match(/\bbg-success\b/)
     );
   });
 
   it('Should have the warning class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} bsStyle="warning" />
+      <ProgressBar min={0} max={10} now={0} variant="warning" />
     );
 
     assert.ok(
-      getProgressBarNode(instance).className.match(/\bprogress-bar-warning\b/)
+      getProgressBarNode(instance).className.match(/\bbg-warning\b/)
     );
   });
 
@@ -110,7 +110,7 @@ describe('<ProgressBar>', () => {
         min={0}
         max={10}
         now={5}
-        bsStyle="success"
+        variant="success"
         label="progress bar label"
       />
     );
@@ -128,7 +128,7 @@ describe('<ProgressBar>', () => {
         max={10}
         now={5}
         srOnly
-        bsStyle="success"
+        variant="success"
         label="progress bar label"
       />
     );
@@ -185,13 +185,13 @@ describe('<ProgressBar>', () => {
 
   it('Should show animated striped bar', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={1} max={11} now={6} active />
+      <ProgressBar min={1} max={11} now={6} animated />
     );
 
     const barClassName = ReactDOM.findDOMNode(instance).firstChild.className;
 
     assert.ok(barClassName.match(/\bprogress-bar-striped\b/));
-    assert.ok(barClassName.match(/\bactive\b/));
+    assert.ok(barClassName.match(/\bprogress-bar-animated\b/));
   });
 
   it('Should show stacked bars', () => {
@@ -212,10 +212,10 @@ describe('<ProgressBar>', () => {
     assert.equal(bar2.style.width, '30%');
   });
 
-  it('Should render active and striped children in stacked bar too', () => {
+  it('Should render animated and striped children in stacked bar too', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <ProgressBar>
-        <ProgressBar active key={1} now={50} />
+        <ProgressBar animated key={1} now={50} />
         <ProgressBar striped key={2} now={30} />
       </ProgressBar>
     );
@@ -226,12 +226,12 @@ describe('<ProgressBar>', () => {
     assert.ok(wrapper.className.match(/\bprogress\b/));
 
     assert.ok(bar1.className.match(/\bprogress-bar\b/));
-    assert.ok(bar1.className.match(/\bactive\b/));
+    assert.ok(bar1.className.match(/\bprogress-bar-animated\b/));
     assert.ok(bar1.className.match(/\bprogress-bar-striped\b/));
 
     assert.ok(bar2.className.match(/\bprogress-bar\b/));
     assert.ok(bar2.className.match(/\bprogress-bar-striped\b/));
-    assert.notOk(bar2.className.match(/\bactive\b/));
+    assert.notOk(bar2.className.match(/\bprogress-bar-animated\b/));
   });
 
   it('Should forward className and style to nested bars', () => {
