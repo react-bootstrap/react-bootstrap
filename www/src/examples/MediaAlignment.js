@@ -1,10 +1,14 @@
 <div>
   <Media>
-    <Media.Left align="top">
-      <img width={64} height={64} src="/thumbnail.png" alt="thumbnail" />
-    </Media.Left>
+    <img
+      align="self-start"
+      width={64}
+      height={64}
+      src="/thumbnail.png"
+      alt="thumbnail"
+    />
     <Media.Body>
-      <Media.Heading>Top aligned media</Media.Heading>
+      <h5>Media Heading</h5>
       <p>
         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
         ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
@@ -19,12 +23,17 @@
       </p>
     </Media.Body>
   </Media>
+
   <Media>
-    <Media.Left align="middle">
-      <img width={64} height={64} src="/thumbnail.png" alt="thumbnail" />
-    </Media.Left>
+    <img
+      align="self-center"
+      width={64}
+      height={64}
+      src="/thumbnail.png"
+      alt="thumbnail"
+    />
     <Media.Body>
-      <Media.Heading>Middle aligned media</Media.Heading>
+      <h5>Media Heading</h5>
       <p>
         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
         ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
@@ -39,12 +48,17 @@
       </p>
     </Media.Body>
   </Media>
+
   <Media>
-    <Media.Left align="bottom">
-      <img width={64} height={64} src="/thumbnail.png" alt="thumbnail" />
-    </Media.Left>
+    <img
+      align="self-end"
+      width={64}
+      height={64}
+      src="/thumbnail.png"
+      alt="thumbnail"
+    />
     <Media.Body>
-      <Media.Heading>Bottom aligned media</Media.Heading>
+      <h5>Media Heading</h5>
       <p>
         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
         ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
