@@ -9,7 +9,6 @@ import Transition, {
   EXITING
 } from 'react-transition-group/Transition';
 
-import capitalize from './utils/capitalize';
 import createChainedFunction from './utils/createChainedFunction';
 
 const MARGINS = {
@@ -24,7 +23,8 @@ function triggerBrowserReflow(node) {
 }
 
 function getDimensionValue(dimension, elem) {
-  let value = elem[`offset${capitalize(dimension)}`];
+  let offset = `offset${dimension[0].toUpperCase()}${dimension.slice(1)}`;
+  let value = elem[offset];
   let margins = MARGINS[dimension];
 
   return (
@@ -142,7 +142,8 @@ class Collapse extends React.Component {
 
   // for testing
   _getScrollDimensionValue(elem, dimension) {
-    return `${elem[`scroll${capitalize(dimension)}`]}px`;
+    const scroll = `scroll${dimension[0].toUpperCase()}${dimension.slice(1)}`;
+    return `${elem[scroll]}px`;
   }
 
   /* -- Expanding -- */

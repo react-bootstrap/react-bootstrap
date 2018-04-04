@@ -1,10 +1,10 @@
 import classNames from 'classnames';
-import React from 'react';
+import capitalize from 'lodash/capitalize';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
+import React from 'react';
 
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
-import capitalize from './utils/capitalize';
 import { DEVICE_SIZES } from './utils/StyleConfig';
 
 const propTypes = {

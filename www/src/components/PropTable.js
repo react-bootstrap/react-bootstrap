@@ -1,10 +1,10 @@
+import capitalize from 'lodash/capitalize';
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Badge from 'react-bootstrap/lib/Badge';
 import Table from 'react-bootstrap/lib/Table';
-import capitalize from 'react-bootstrap/lib/utils/capitalize';
 
 function cleanDocletValue(str) {
   return str
