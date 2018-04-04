@@ -5,18 +5,18 @@ const { Provider, Consumer } = React.createContext(new Map());
 
 class ThemeProvider extends React.Component {
   static propTypes = {
-    variants: PropTypes.object.isRequired
+    prefixes: PropTypes.object.isRequired
   };
   constructor(...args) {
     super(...args);
-    this.variants = new Map();
-    Object.entries(this.props.variants).forEach(([key, value]) => {
-      this.variants.set(key, value);
+    this.prefixes = new Map();
+    Object.entries(this.props.prefixes).forEach(([key, value]) => {
+      this.prefixes.set(key, value);
     });
   }
 
   render() {
-    return <Provider value={this.variants}>{this.props.children}</Provider>;
+    return <Provider value={this.prefixes}>{this.props.children}</Provider>;
   }
 }
 
@@ -28,11 +28,11 @@ function createBootstrapComponent(Component, prefix) {
   function forwardRef({ bsPrefix, ...props }, ref) {
     return (
       <Consumer>
-        {variants => (
+        {prefixes => (
           <Component
             {...props}
             ref={ref}
-            bsPrefix={bsPrefix || variants.get(prefix) || prefix}
+            bsPrefix={bsPrefix || prefixes.get(prefix) || prefix}
           />
         )}
       </Consumer>

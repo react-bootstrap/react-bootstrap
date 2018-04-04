@@ -1,28 +1,50 @@
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
+import Heading from '../../components/Heading';
+import Callout from '../../components/Callout';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import CustomButtonStyle from '../../examples/CustomButtonStyle';
+import Prefixes from '../../examples/Theming/Prefixes';
+import Variants from '../../examples/Theming/Variants';
 
 export default function CustomStylesSection() {
   return (
     <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="custom-styles">Custom Styles</Anchor>
-      </h2>
+      <Heading h="1" id="custom-styles">
+        Theming and Customizing styles.
+      </Heading>
 
       <p>
-        The <code>bsStyle</code> prop, available in many components in
-        React-Bootstrap, is used to map to a Bootstrap class for styling; for
-        example, the Bootstrap class used for <code>Button</code> is{' '}
-        <code>
-          `btn-${'{'}bsStyle{'}'}`
-        </code>. Use <code>bootstrapUtils</code> to create a custom class that
-        is used in lieu of the classes provided by Bootstrap:
+        Generally, if you stick to the bootstrap defined classes and variants,
+        there isn't anything you need to do to use a custom theme with
+        ReactBootstrap, it just works. There are plently of cases tho where you
+        want to color outside the lines and we try to make that easy to do.
       </p>
+      <Heading h="2" id="custom-styles-variants">
+        New variants and sizes
+      </Heading>
+      <p>
+        Custom variants and sizes to should follow the leapatternd of the
+        default bootstrap variants, and define css classes matching:{' '}
+        <code>compontent-*</code>. React bootstrap builds the component
+        classNames in a consistent way that you can rely on. For instance this
+        custom Button.
+      </p>
+      <ReactPlayground codeText={Variants} />
 
-      <ReactPlayground codeText={CustomButtonStyle} />
+      <Heading h="2" id="custom-styles-prefix">
+        Prefixing components
+      </Heading>
+      <p>
+        In some cases you may need to change the base class "prefix" of one or
+        more Components. You can control how a Component prefixes it's classes
+        locallyy by changing the <code>bsPrefix</code> prop. Or globally via the{' '}
+        <code>ThemeProvider</code> Component.
+      </p>
+      <Callout theme="warning">
+        Changing prefixes is an escape hatch and generally shouldn't be used
+      </Callout>
+      <ReactPlayground codeText={Prefixes} />
     </div>
   );
 }
