@@ -23,9 +23,7 @@ class ModalFooter extends React.Component {
       ...props
     } = this.props;
 
-    const classes = classNames(className, bsPrefix);
-
-    return <Component {...props} className={classNames(classes)} />;
+    return <Component {...props} className={classNames(className, bsPrefix)} />;
   }
 }
 
