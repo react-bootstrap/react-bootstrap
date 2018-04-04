@@ -1,8 +1,7 @@
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import LinkToSource from '../../components/LinkToSource';
-import PropTable from '../../components/PropTable';
+import Heading from '../../components/Heading';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 
 import BadgeBasic from '../../examples/Badge/Basic';
@@ -13,9 +12,9 @@ import BadgeVariations from '../../examples/Badge/Variations';
 export default function BadgeSection({ data }) {
   return (
     <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="badges">Badges</Anchor> <small>Badge</small>
-      </h2>
+      <Heading h="1" id="badges">
+        Badges
+      </Heading>
 
       <p>
         Badges scale to match the size of the immediate parent element by using
@@ -34,22 +33,21 @@ export default function BadgeSection({ data }) {
         will simply be presented with the content of the badge. Depending on the
         specific situation, these badges may seem like random additional words
         or numbers at the end of a sentence, link, or button. Unless the context
-        is clear (as with the “Notifications” example, where it is understood
-        that the “4” is the number of notifications), consider including
-        additional context with a visually hidden piece of additional text.
+        is clear, consider including additional context with a visually hidden
+        piece of additional text.
       </p>
-      <h3>
-        <Anchor id="badges-variations">Contextual variations</Anchor>
-      </h3>
+      <Heading h="2" id="badges-variations">
+        Contextual variations
+      </Heading>
       <p>
         Add any of the below mentioned modifier classes to change the appearance
         of a badge.
       </p>
       <ReactPlayground codeText={BadgeVariations} />
 
-      <h3>
-        <Anchor id="badges-variations">Pill badges</Anchor>
-      </h3>
+      <Heading h="2" id="badges-variations">
+        Pill badges
+      </Heading>
       <p>
         Use the <code>pill</code> modifier class to make badges more rounded
         (with a larger <code>border-radius</code> and additional horizontal{' '}
@@ -57,11 +55,10 @@ export default function BadgeSection({ data }) {
       </p>
       <ReactPlayground codeText={BadgePill} />
 
-      <h3>
-        <Anchor id="badges-props">Props</Anchor>
-        <LinkToSource component={data.metadata.displayName} />
-      </h3>
-      <PropTable metadata={data.metadata} />
+      <Heading h="2" id="badges-props">
+        Props
+      </Heading>
+      <ComponentApi metadata={data.metadata} />
     </div>
   );
 }
@@ -70,7 +67,7 @@ export const query = graphql`
   query BadgeQuery {
     metadata: componentMetadata(displayName: { eq: "Badge" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
   }
 `;

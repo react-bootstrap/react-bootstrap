@@ -1,31 +1,43 @@
 import classNames from 'classnames';
-import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
+import React from 'react';
 
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
-
-const propTypes = {
-  componentClass: elementType
-};
-
-const defaultProps = {
-  componentClass: 'div'
-};
+import { createBootstrapComponent } from './ThemeProvider';
 
 class Row extends React.Component {
-  render() {
-    const { componentClass: Component, className, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
+  static propTypes = {
+    /**
+     * @default 'row'
+     */
+    bsPrefix: PropTypes.string.isRequired,
 
-    const classes = getClassSet(bsProps);
+    /** Removes the gutter spacing between `Col`s as well as any added negative margins. */
+    noGutters: PropTypes.bool.isRequired,
+    componentClass: elementType
+  };
+
+  static defaultProps = {
+    componentClass: 'div',
+    noGutters: false
+  };
+
+  render() {
+    const {
+      bsPrefix,
+      noGutters,
+      componentClass: Component,
+      className,
+      ...props
+    } = this.props;
 
     return (
-      <Component {...elementProps} className={classNames(className, classes)} />
+      <Component
+        {...props}
+        className={classNames(className, bsPrefix, noGutters && 'no-gutters')}
+      />
     );
   }
 }
 
-Row.propTypes = propTypes;
-Row.defaultProps = defaultProps;
-
-export default bsClass('row', Row);
+export default createBootstrapComponent(Row, 'row');

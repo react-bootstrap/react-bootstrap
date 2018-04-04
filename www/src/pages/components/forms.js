@@ -185,12 +185,6 @@ export const query = graphql`
       displayName
       ...PropTable_metadata
     }
-    InputGroupButton: componentMetadata(
-      displayName: { eq: "InputGroupButton" }
-    ) {
-      displayName
-      ...PropTable_metadata
-    }
     FormControlFeedback: componentMetadata(
       displayName: { eq: "FormControlFeedback" }
     ) {

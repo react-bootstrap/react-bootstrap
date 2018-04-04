@@ -5,7 +5,6 @@
  * details, see http://creativecommons.org/licenses/by/3.0/.
  */
 
-
 /* Keep code small in tables on account of limited space */
 .table code {
   font-size: 13px;
@@ -43,7 +42,6 @@
   border: 1px solid #cdbfe3;
 }
 
-
 /*
  * Main navigation
  *
@@ -58,7 +56,6 @@
 .bs-docs-nav .navbar-nav > li > a {
   font-weight: 500;
 }
-
 
 /*
  * Footer
@@ -94,7 +91,7 @@
 }
 
 .bs-docs-single-col-container {
-  max-width: 900px
+  max-width: 900px;
 }
 
 .bs-docs-code-panel .panel-body {
@@ -141,20 +138,17 @@
   border: 0;
 }
 
-
-
 /* Example thumbnails */
 @media (max-width: 480px) {
   .bs-examples {
     margin-right: -10px;
     margin-left: -10px;
   }
-  .bs-examples > [class^="col-"] {
+  .bs-examples > [class^='col-'] {
     padding-right: 10px;
     padding-left: 10px;
   }
 }
-
 
 @media (min-width: 768px) {
   .bs-docs-sidebar {
@@ -186,14 +180,13 @@
 }
 .bs-docs-sidebar .nav-link.active,
 .bs-docs-sidebar .nav-link.active:hover,
-.bs-docs-sidebar .nav-link.active:focus  {
+.bs-docs-sidebar .nav-link.active:focus {
   padding-left: 18px;
   font-weight: bold;
   color: #563d7c;
   background-color: transparent;
   border-left: 2px solid #563d7c;
 }
-
 
 /* Show and affix the side nav when space allows it */
 @media (min-width: 992px) {
@@ -224,7 +217,6 @@ h1[id] {
   padding-top: 20px;
   margin-top: 0;
 }
-
 
 /*
  * Callouts
@@ -277,9 +269,8 @@ h1[id] {
   color: #1b809e;
 }
 
-
 /*
- * Grid examples
+ * Container examples
  *
  * Highlight the grid columns within the docs so folks can see their padding,
  * alignment, sizing, etc.
@@ -288,15 +279,14 @@ h1[id] {
 .show-grid {
   margin-bottom: 15px;
 }
-.show-grid [class^="col-"] {
+.show-grid [class^='col-'] {
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #eee;
-  background-color: rgba(86,61,124,.15);
+  background-color: rgba(86, 61, 124, 0.15);
   border: 1px solid #ddd;
-  border: 1px solid rgba(86,61,124,.2);
+  border: 1px solid rgba(86, 61, 124, 0.2);
 }
-
 
 /*
  * Examples
@@ -312,8 +302,8 @@ h1[id] {
   border-color: #e5e5e5 #eee #eee;
   border-style: solid;
   border-width: 1px 0;
-  -webkit-box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
-          box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+  -webkit-box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.05);
 }
 /* Echo out a label for the example */
 .bs-example:after {
@@ -325,9 +315,8 @@ h1[id] {
   color: #959595;
   text-transform: uppercase;
   letter-spacing: 1px;
-  content: "Example";
+  content: 'Example';
 }
-
 
 /* Make the examples and snippets not full-width */
 @media (min-width: 768px) {
@@ -338,7 +327,7 @@ h1[id] {
     border-color: #ddd;
     border-width: 1px;
     -webkit-box-shadow: none;
-            box-shadow: none;
+    box-shadow: none;
   }
   .bs-example + .highlight {
     margin-top: -16px;
@@ -376,7 +365,6 @@ h1[id] {
   float: none;
 }
 
-
 /* Images */
 .bs-example > .rounded-circle,
 .bs-example > .img-rounded,
@@ -401,7 +389,7 @@ h1[id] {
 
 /* Forms */
 .bs-example-control-sizing select,
-.bs-example-control-sizing input[type="text"] + input[type="text"] {
+.bs-example-control-sizing input[type='text'] + input[type='text'] {
   margin-top: 10px;
 }
 /* .bs-example-form .input-group {
@@ -415,7 +403,6 @@ h1[id] {
 .bs-example > .list-group {
   max-width: 400px;
 }
-
 
 @media (min-width: 768px) {
   .bs-navbar-top-example .navbar-fixed-top,
@@ -458,7 +445,6 @@ h1[id] {
   width: 90%;
 }
 
-
 /* Example tabbable tabs */
 .bs-example-tabs .nav-tabs {
   margin-bottom: 15px;
@@ -500,7 +486,6 @@ h1[id] {
   padding: 0 5px;
 }
 
-
 /*
  * Miscellaneous
  *
@@ -520,10 +505,14 @@ h1[id] {
 
 /* Pseudo :focus state for showing how it looks in the docs */
 #focusedInput {
-  border-color: rgb(204,204,204); /* Restate unfocused value to make CSSLint happy that there's a pre-CSS3 fallback*/
-  border-color: rgba(82,168,236,.8);
+  border-color: rgb(
+    204,
+    204,
+    204
+  ); /* Restate unfocused value to make CSSLint happy that there's a pre-CSS3 fallback*/
+  border-color: rgba(82, 168, 236, 0.8);
   outline: 0;
   outline: thin dotted \9; /* IE6-9 */
-  -webkit-box-shadow: 0 0 8px rgba(82,168,236,.6);
-          box-shadow: 0 0 8px rgba(82,168,236,.6);
+  -webkit-box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: 0 0 8px rgba(82, 168, 236, 0.6);
 }

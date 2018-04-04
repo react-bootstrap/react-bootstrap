@@ -13,30 +13,33 @@ const dummySentences = [
 ];
 
 const gridInstance = (
-  <Grid>
+  <Container>
     <Row className="show-grid">
       <Col sm={6} md={3}>
-        <code>&lt;{'Col sm={6} md={3}'} /&gt;</code>
+        <code>{'<Col sm={6} md={3} />'}</code>
         <br />
         {dummySentences.slice(0, 6).join(' ')}
       </Col>
       <Col sm={6} md={3}>
-        <code>&lt;{'Col sm={6} md={3}'} /&gt;</code>
+        <code>{'<Col sm={6} md={3} />'}</code>
         <br />
         {dummySentences.slice(0, 4).join(' ')}
       </Col>
+      <Clearfix visibleSmBlock>
+        <code>{'<Clearfix visibleSmBlock />'}</code>
+      </Clearfix>
       <Col sm={6} md={3}>
-        <code>&lt;{'Col sm={6} md={3}'} /&gt;</code>
+        <code>{'<Col sm={6} md={3} />'}</code>
         <br />
         {dummySentences.slice(0, 6).join(' ')}
       </Col>
       <Col sm={6} md={3}>
-        <code>&lt;{'Col sm={6} md={3}'} /&gt;</code>
+        <code>{'<Col sm={6} md={3} />'}</code>
         <br />
         {dummySentences.slice(0, 2).join(' ')}
       </Col>
     </Row>
-  </Grid>
+  </Container>
 );
 
 render(gridInstance);

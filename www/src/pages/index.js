@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Grid from 'react-bootstrap/lib/Grid';
+import Container from 'react-bootstrap/lib/Container';
 import Alert from 'react-bootstrap/lib/Alert';
 import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Badge from 'react-bootstrap/lib/Badge';
@@ -18,7 +18,7 @@ export default class HomePage extends React.Component {
           </div>
         </main>
 
-        <Grid>
+        <Container>
           <Alert bsStyle="warning">
             <p>
               <Glyphicon glyph="bullhorn" /> We are actively working to reach a
@@ -74,7 +74,7 @@ export default class HomePage extends React.Component {
               breaking changes should result in a minor version bump.
             </p>
           </Alert>
-        </Grid>
+        </Container>
       </div>
     );
   }

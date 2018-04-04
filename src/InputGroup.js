@@ -1,50 +1,84 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import elementType from 'prop-types-extra/lib/elementType';
 import React from 'react';
 
-import InputGroupAddon from './InputGroupAddon';
-import InputGroupButton from './InputGroupButton';
-import InputGroupText from './InputGroupText';
-import InputGroupPrepend from './InputGroupPrepend';
-import InputGroupAppend from './InputGroupAppend';
-import {
-  bsClass,
-  bsSizes,
-  getClassSet,
-  splitBsProps
-} from './utils/bootstrapUtils';
-import { Size } from './utils/StyleConfig';
+import createWithBsPrefix from './utils/createWithBsPrefix';
+import { createBootstrapComponent } from './ThemeProvider';
 
+/**
+ *
+ * @property {InputGroupAppend} Append
+ * @property {InputGroupPrepend} Prepend
+ * @property {InputGroupText} Text
+ * @property {InputGroupRadio} Radio
+ * @property {InputGroupCheckbox} Checkbox
+ */
 class InputGroup extends React.Component {
+  static propTypes = {
+    /** @default 'input-group */
+    bsPrefix: PropTypes.string.isRequired,
+
+    /**
+     * Control the size of buttons and form elements from the top-level .
+     *
+     * @type {('sm'|'lg')}
+     */
+    size: PropTypes.string.isRequired,
+
+    componentClass: elementType
+  };
+  static defaultProps = {
+    componentClass: 'div'
+  };
   render() {
-    const { className, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
+    const {
+      bsPrefix,
+      size,
+      className,
+      componentClass: Component,
+      ...props
+    } = this.props;
 
-    const classes = getClassSet(bsProps);
-
-    return <div {...elementProps} className={classNames(className, classes)} />;
+    return (
+      <Component
+        {...props}
+        className={classNames(
+          className,
+          bsPrefix,
+          size && `${bsPrefix}-${size}`
+        )}
+      />
+    );
   }
 }
 
-InputGroup.Addon = InputGroupAddon;
-InputGroup.Button = InputGroupButton;
+const InputGroupAppend = createWithBsPrefix('input-group-append');
 
-InputGroup.Append = InputGroupAppend;
-InputGroup.Prepend = InputGroupPrepend;
-InputGroup.Text = InputGroupText;
+const InputGroupPrepend = createWithBsPrefix('input-group-prepend');
 
-InputGroup.Checkbox = props => (
+const InputGroupText = createWithBsPrefix('input-group-text', {
+  Component: 'span'
+});
+
+const InputGroupCheckbox = props => (
   <InputGroupText>
     <input type="checkbox" {...props} />
   </InputGroupText>
 );
 
-InputGroup.Radio = props => (
+const InputGroupRadio = props => (
   <InputGroupText>
     <input type="radio" {...props} />
   </InputGroupText>
 );
 
-export default bsClass(
-  'input-group',
-  bsSizes([Size.LARGE, Size.SMALL], InputGroup)
-);
+const DecoratedInputGroup = createBootstrapComponent(InputGroup, 'input-group');
+
+DecoratedInputGroup.Text = InputGroupText;
+DecoratedInputGroup.Radio = InputGroupRadio;
+DecoratedInputGroup.Checkbox = InputGroupCheckbox;
+DecoratedInputGroup.Append = InputGroupAppend;
+DecoratedInputGroup.Prepend = InputGroupPrepend;
+
+export default DecoratedInputGroup;

@@ -33,4 +33,21 @@
 
 ### NavLink
 
-* add
+### Grid
+
+* renamed to Container
+
+#### Col
+
+* removed visibility props
+* consolidated col `span`, `offset`, and `order` into an object value prop per breakpoint.
+
+### InputGroup
+
+* removed InputGroupButton, and InputGroupAddon
+* added InputGroup.Prepend, InputGroup.Append, InputGroup.Text, InputGroup.Checkbox, InputGroup.Radio
+
+### Badge & Label
+
+* removed Label (replaced with just) badge
+* `bsStyle` renamed to `variant`

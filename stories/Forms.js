@@ -10,7 +10,7 @@ import FormControl from '../src/FormControl';
 import Button from '../src/Button';
 import Row from '../src/Row';
 import Col from '../src/Col';
-import Grid from '../src/Grid';
+import Container from '../src/Container';
 
 storiesOf('Forms ', module)
   .add('Form  ✔', () => (
@@ -63,7 +63,7 @@ storiesOf('Forms ', module)
     </Form>
   ))
   .add('Horizontal form  ✔', () => (
-    <Grid>
+    <Container>
       <Form>
         <FormGroup componentClass={Row} controlId="inputEmail3">
           <FormLabel column sm={2}>
@@ -124,7 +124,7 @@ storiesOf('Forms ', module)
           </Col>
         </FormGroup>
       </Form>
-    </Grid>
+    </Container>
   ))
   .add('form-row', () => <span />)
   .add('File input ✔', () => (

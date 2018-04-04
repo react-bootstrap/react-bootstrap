@@ -1,5 +1,5 @@
 <div>
-  <InputGroup bsSize="sm" class="mb-3">
+  <InputGroup size="sm" class="mb-3">
     <InputGroup.Prepend>
       <InputGroup.Text id="inputGroup-sizing-sm">Small</InputGroup.Text>
     </InputGroup.Prepend>
@@ -16,7 +16,7 @@
     />
   </InputGroup>
   <br />
-  <InputGroup bsSize="lg">
+  <InputGroup size="lg">
     <InputGroup.Prepend>
       <InputGroup.Text id="inputGroup-sizing-lg">Large</InputGroup.Text>
     </InputGroup.Prepend>
