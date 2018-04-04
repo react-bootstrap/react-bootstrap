@@ -16,6 +16,7 @@ import CardWithHeader from '../../examples/Card/WithHeader';
 import CardWithHeaderStyled from '../../examples/Card/WithHeaderStyled';
 import CardWithHeaderAndQuote from '../../examples/Card/WithHeaderAndQuote';
 import CardHeaderAndFooter from '../../examples/Card/HeaderAndFooter';
+import CardImgOverlay from '../../examples/Card/ImgOverlay';
 
 export default function CardSection({ data }) {
   return (
@@ -94,6 +95,12 @@ export default function CardSection({ data }) {
 
       <ReactPlayground codeText={CardWithHeaderAndQuote} />
       <ReactPlayground codeText={CardHeaderAndFooter} />
+
+      <h3>
+        <Anchor id="card-example-img-overlay">Image Overlays</Anchor>
+      </h3>
+      <p />
+      <ReactPlayground codeText={CardImgOverlay} />
 
       {/* PROPS SECTION */}
 

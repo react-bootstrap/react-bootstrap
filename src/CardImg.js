@@ -15,6 +15,8 @@ class CardImg extends React.Component {
     /**
      * Defines image position inside
      * the card.
+     *
+     * @type {('top'|'bottom')}
      */
     variant: PropTypes.oneOf(['top', 'bottom', null]),
 
@@ -23,7 +25,7 @@ class CardImg extends React.Component {
 
   static defaultProps = {
     componentClass: 'img',
-    variant: null,
+    variant: null
   };
 
   render() {
@@ -35,8 +37,10 @@ class CardImg extends React.Component {
       ...props
     } = this.props;
 
-    const baseClass = variant ? `${bsPrefix}-${variant}` : bsPrefix
-    return <Component className={classNames(baseClass, className)} {...props} />;
+    const baseClass = variant ? `${bsPrefix}-${variant}` : bsPrefix;
+    return (
+      <Component className={classNames(baseClass, className)} {...props} />
+    );
   }
 }
 

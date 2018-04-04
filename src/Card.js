@@ -51,5 +51,6 @@ DecoratedCard.Text = createWithBsPrefix('card-text', {
 });
 DecoratedCard.Header = createWithBsPrefix('card-header');
 DecoratedCard.Footer = createWithBsPrefix('card-footer');
+DecoratedCard.ImgOverlay = createWithBsPrefix('card-img-overlay');
 
 export default DecoratedCard;
