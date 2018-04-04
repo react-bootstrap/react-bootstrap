@@ -1,16 +1,17 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import MediaBody from './MediaBody';
-import MediaHeading from './MediaHeading';
-import MediaLeft from './MediaLeft';
-import MediaList from './MediaList';
-import MediaListItem from './MediaListItem';
-import MediaRight from './MediaRight';
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
+import createWithBsPrefix from './utils/createWithBsPrefix';
+import { createBootstrapComponent } from './ThemeProvider';
 
 const propTypes = {
+  /**
+   * @default 'media'
+   */
+  bsPrefix: PropTypes.string.isRequired,
+
   componentClass: elementType
 };
 
@@ -20,25 +21,22 @@ const defaultProps = {
 
 class Media extends React.Component {
   render() {
-    const { componentClass: Component, className, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
+    const {
+      bsPrefix,
+      className,
+      componentClass: Component,
+      ...props
+    } = this.props;
 
-    const classes = getClassSet(bsProps);
-
-    return (
-      <Component {...elementProps} className={classNames(className, classes)} />
-    );
+    return <Component {...props} className={classNames(className, bsPrefix)} />;
   }
 }
 
 Media.propTypes = propTypes;
 Media.defaultProps = defaultProps;
 
-Media.Heading = MediaHeading;
-Media.Body = MediaBody;
-Media.Left = MediaLeft;
-Media.Right = MediaRight;
-Media.List = MediaList;
-Media.ListItem = MediaListItem;
+const DecoratedMedia = createBootstrapComponent(Media, 'media');
 
-export default bsClass('media', Media);
+DecoratedMedia.Body = createWithBsPrefix('media-body');
+
+export default DecoratedMedia;
