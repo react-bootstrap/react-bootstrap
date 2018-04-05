@@ -8,6 +8,7 @@ export ButtonToolbar from './ButtonToolbar';
 export Card from './Card';
 export CardBody from './CardBody';
 export CardImg from './CardImg';
+export CardGroup from './CardGroup';
 export CardTitle from './CardTitle';
 export CardSubtitle from './CardSubtitle';
 export Carousel from './Carousel';
