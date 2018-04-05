@@ -10,7 +10,7 @@ class CardTitle extends React.Component {
     /**
      * @default 'card-title'
      */
-    bsPrefix: PropTypes.string,
+    bsPrefix: PropTypes.string.isRequired,
 
     componentClass: elementType
   };

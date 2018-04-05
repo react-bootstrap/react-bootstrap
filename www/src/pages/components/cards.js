@@ -1,8 +1,7 @@
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import LinkToSource from '../../components/LinkToSource';
-import PropTable from '../../components/PropTable';
+import Heading from '../../components/Heading';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 
 import CardBasic from '../../examples/Card/Basic';
@@ -22,39 +21,34 @@ import CardGroup from '../../examples/Card/Group';
 export default function CardSection({ data }) {
   return (
     <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="cards">Cards</Anchor>
-        <small>
-          Card, Card.Body, Card.Title, Card.Subtitle, Card.Img, Card.Header,
-          Card.Footer
-        </small>
-      </h2>
+      <Heading h="1" id="cards">
+        Cards
+      </Heading>
 
       <p className="lead">
         Bootstrap’s cards provide a flexible and extensible content container
         with multiple variants and options.
       </p>
 
-      <h3>
-        <Anchor id="card-example-basic">Basic Example</Anchor>
-      </h3>
+      <Heading h="3" id="card-example-basic">
+        Basic Example
+      </Heading>
       <ReactPlayground codeText={CardBasic} />
 
-      <h2>
-        <Anchor id="card-content-types">Content types</Anchor>
-      </h2>
-
-      <h3>
-        <Anchor id="card-example-body">Body</Anchor>
-      </h3>
+      <Heading h="2" id="card-content-types">
+        Content types
+      </Heading>
+      <Heading h="3" id="card-example-body">
+        Body
+      </Heading>
       <p>
         Use <code>Card.Body</code> to pad content inside a <code>Card</code>.
       </p>
       <ReactPlayground codeText={CardBodyOnly} />
 
-      <h3>
-        <Anchor id="card-example-text">Title, text, and links</Anchor>
-      </h3>
+      <Heading h="3" id="card-example-text">
+        Title, text, and links
+      </Heading>
       <p>
         Using <code>Card.Title</code>, <code>Card.Subtitle</code>, and{' '}
         <code>Card.Text</code> inside the <code>Card.Body</code> will line them
@@ -63,26 +57,26 @@ export default function CardSection({ data }) {
       </p>
       <ReactPlayground codeText={CardText} />
 
-      <h3>
-        <Anchor id="card-example-images">Images</Anchor>
-      </h3>
+      <Heading h="2" id="card-example-images">
+        Images
+      </Heading>
       <ReactPlayground codeText={CardImageAndText} />
 
-      <h3>
-        <Anchor id="card-example-list-groups">List Groups</Anchor>
-      </h3>
+      <Heading h="2" id="card-example-list-groups">
+        List Groups
+      </Heading>
       <ReactPlayground codeText={CardListGroups} />
 
       <ReactPlayground codeText={CardListGroupWithHeader} />
 
-      <h3>
-        <Anchor id="card-example-kitchen-sink">Kitchen Sink</Anchor>
-      </h3>
+      <Heading h="2" id="card-example-kitchen-sink">
+        Kitchen Sink
+      </Heading>
       <ReactPlayground codeText={CardKitchenSink} />
 
-      <h3>
-        <Anchor id="card-example-header-and-footer">Header and Footer</Anchor>
-      </h3>
+      <Heading h="2" id="card-example-header-and-footer">
+        Header and Footer
+      </Heading>
       <p>
         You may add a header by adding a <code>Card.Header</code> component.
       </p>
@@ -97,44 +91,31 @@ export default function CardSection({ data }) {
       <ReactPlayground codeText={CardWithHeaderAndQuote} />
       <ReactPlayground codeText={CardHeaderAndFooter} />
 
-      <h3>
-        <Anchor id="card-example-img-overlay">Image Overlays</Anchor>
-      </h3>
+      <Heading h="2" id="card-example-img-overlay">
+        Image Overlays
+      </Heading>
       <p />
       <ReactPlayground codeText={CardImgOverlay} />
 
-      <h3>
-        <Anchor id="card-example-layout">Card layout</Anchor>
-      </h3>
-      <h4>
-        <Anchor id="card-example-card-group">Card Groups</Anchor>
-      </h4>
-      <p />
+      <Heading h="2" id="card-example-layout">
+        Card layout
+      </Heading>
+      <Heading h="3" id="card-example-card-group">
+        Card Groups
+      </Heading>
       <ReactPlayground codeText={CardGroup} />
 
       {/* PROPS SECTION */}
 
-      <h3>
-        <Anchor id="card-props">Props</Anchor>
-      </h3>
+      <Heading h="2" id="card-props">
+        Props
+      </Heading>
 
-      <h4>
-        <Anchor id="card-props-card">Card</Anchor>
-        <LinkToSource component={data.Card.displayName} />
-      </h4>
-      <PropTable metadata={data.Card} />
-
-      <h4>
-        <Anchor id="card-props-card-body">Card.Body</Anchor>
-        <LinkToSource component={data.CardBody.displayName} />
-      </h4>
-      <PropTable metadata={data.CardBody} />
-
-      <h4>
-        <Anchor id="card-props-card-title">Card.Title</Anchor>
-        <LinkToSource component={data.CardTitle.displayName} />
-      </h4>
-      <PropTable metadata={data.CardTitle} />
+      <ComponentApi metadata={data.Card} />
+      <ComponentApi metadata={data.CardBody} />
+      <ComponentApi metadata={data.CardImg} />
+      <ComponentApi metadata={data.CardTitle} />
+      <ComponentApi metadata={data.CardSubtitle} />
     </div>
   );
 }
@@ -142,13 +123,19 @@ export default function CardSection({ data }) {
 export const query = graphql`
   query CardQuery {
     Card: componentMetadata(displayName: { eq: "Card" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     CardBody: componentMetadata(displayName: { eq: "CardBody" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
+    }
+    CardImg: componentMetadata(displayName: { eq: "CardImg" }) {
+      ...ComponentApi_metadata
     }
     CardTitle: componentMetadata(displayName: { eq: "CardTitle" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
+    }
+    CardSubtitle: componentMetadata(displayName: { eq: "CardSubtitle" }) {
+      ...ComponentApi_metadata
     }
   }
 `;

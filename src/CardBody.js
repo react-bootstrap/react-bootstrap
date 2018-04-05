@@ -10,7 +10,7 @@ class CardBody extends React.Component {
     /**
      * @default 'card-body'
      */
-    bsPrefix: PropTypes.string,
+    bsPrefix: PropTypes.string.isRequired,
 
     componentClass: elementType
   };

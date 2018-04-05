@@ -10,7 +10,7 @@ class CardImg extends React.Component {
     /**
      * @default 'card-img'
      */
-    bsPrefix: PropTypes.string,
+    bsPrefix: PropTypes.string.isRequired,
 
     /**
      * Defines image position inside

@@ -16,7 +16,7 @@ class Card extends React.Component {
     /**
      * @default 'card'
      */
-    bsPrefix: PropTypes.string,
+    bsPrefix: PropTypes.string.isRequired,
 
     componentClass: elementType
   };
