@@ -3,7 +3,7 @@ class MySmallModal extends React.Component {
     return (
       <Modal
         {...this.props}
-        bsSize="small"
+        size="sm"
         aria-labelledby="contained-modal-title-sm"
       >
         <Modal.Header closeButton>
@@ -70,7 +70,7 @@ class MyLargeModal extends React.Component {
     return (
       <Modal
         {...this.props}
-        bsSize="large"
+        size="lg"
         aria-labelledby="contained-modal-title-lg"
       >
         <Modal.Header closeButton>

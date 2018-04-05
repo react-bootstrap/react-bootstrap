@@ -5,11 +5,13 @@ import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import ModalStatic from '../../examples/ModalStatic';
-import Modal from '../../examples/Modal';
-import ModalContained from '../../examples/ModalContained';
-import ModalDefaultSizing from '../../examples/ModalDefaultSizing';
-import ModalCustomSizing from '../../examples/ModalCustomSizing';
+import ModalStatic from '../../examples/Modal/Static';
+import ModalBasic from '../../examples/Modal/Basic';
+import ModalContained from '../../examples/Modal/Contained';
+import ModalDefaultSizing from '../../examples/Modal/DefaultSizing';
+import ModalCustomSizing from '../../examples/Modal/CustomSizing';
+import ModalVerticallyCentered from '../../examples/Modal/VerticallyCentered';
+import ModalGrid from '../../examples/Modal/Grid';
 
 export default function ModalSection({ data }) {
   return (
@@ -37,7 +39,7 @@ export default function ModalSection({ data }) {
         <code>{'<Modal.Footer/>'}</code>, which you can use to build the Modal
         content.
       </p>
-      <ReactPlayground codeText={Modal} />
+      <ReactPlayground codeText={ModalBasic} />
       <div className="bs-callout bs-callout-info">
         <h4>Additional Import Options</h4>
         <p>
@@ -88,6 +90,26 @@ export default function ModalSection({ data }) {
         set to 90%.
       </p>
       <ReactPlayground codeText={ModalCustomSizing} />
+
+      <h3>
+        <Anchor id="modal-vertically-centered">
+          Vertically centered modals
+        </Anchor>
+      </h3>
+      <p>
+        You can vertically center a modal by passing the "verticallyCenter"
+        prop.
+      </p>
+      <ReactPlayground codeText={ModalVerticallyCentered} />
+
+      <h3>
+        <Anchor id="modal-grid">Using grid in modals</Anchor>
+      </h3>
+      <p>
+        You can use grid layouts within a model using regular grid components
+        inside the modal content.
+      </p>
+      <ReactPlayground codeText={ModalGrid} />
 
       <h3>
         <Anchor id="modals-props">Props</Anchor>
