@@ -15,6 +15,8 @@ import CardWithHeader from '../../examples/Card/WithHeader';
 import CardWithHeaderStyled from '../../examples/Card/WithHeaderStyled';
 import CardWithHeaderAndQuote from '../../examples/Card/WithHeaderAndQuote';
 import CardHeaderAndFooter from '../../examples/Card/HeaderAndFooter';
+import CardNavTabs from '../../examples/Card/NavTabs';
+import CardNavPills from '../../examples/Card/NavPills';
 import CardImgOverlay from '../../examples/Card/ImgOverlay';
 import CardGroup from '../../examples/Card/Group';
 import CardDeck from '../../examples/Card/Deck';
@@ -98,6 +100,12 @@ export default function CardSection({ data }) {
       </Heading>
       <p />
       <ReactPlayground codeText={CardImgOverlay} />
+
+      <Heading h="2" id="card-example-navigation">
+        Navigation
+      </Heading>
+      <ReactPlayground codeText={CardNavTabs} />
+      <ReactPlayground codeText={CardNavPills} />
 
       <Heading h="2" id="card-example-layout">
         Card layout

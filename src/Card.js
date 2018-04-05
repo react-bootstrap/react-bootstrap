@@ -5,6 +5,7 @@ import elementType from 'prop-types-extra/lib/elementType';
 
 import { createBootstrapComponent } from './ThemeProvider';
 import createWithBsPrefix from './utils/createWithBsPrefix';
+import CardContext from './CardContext';
 
 import CardBody from './CardBody';
 import CardImg from './CardImg';
@@ -25,6 +26,16 @@ class Card extends React.Component {
     componentClass: 'div'
   };
 
+  static getDerivedStateFromProps({ bsPrefix }) {
+    return {
+      cardContext: {
+        cardHeaderBsPrefix: `${bsPrefix}-header`
+      }
+    };
+  }
+
+  state = {};
+
   render() {
     const {
       bsPrefix,
@@ -33,7 +44,11 @@ class Card extends React.Component {
       ...props
     } = this.props;
 
-    return <Component className={classNames(bsPrefix, className)} {...props} />;
+    return (
+      <CardContext.Provider value={this.state.cardContext}>
+        <Component className={classNames(bsPrefix, className)} {...props} />
+      </CardContext.Provider>
+    );
   }
 }
 
