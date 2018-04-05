@@ -1,4 +1,4 @@
-<CardGroup>
+<CardDeck>
   <Card>
     <Card.Img variant="top" src="https://placehold.it/200x100" />
     <Card.Body>
@@ -39,4 +39,4 @@
       <small className="text-muted">Last updated 3 mins ago</small>
     </Card.Footer>
   </Card>
-</CardGroup>;
+</CardDeck>;
