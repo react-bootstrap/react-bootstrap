@@ -1,22 +1,21 @@
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import LinkToSource from '../../components/LinkToSource';
-import PropTable from '../../components/PropTable';
+import Heading from '../../components/Heading';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import TableBasic from '../../examples/TableBasic';
-import TableSmall from '../../examples/TableSmall';
-import TableDark from '../../examples/TableDark';
-import TableResponsive from '../../examples/TableResponsive';
-import TableResponsiveBreakpoints from '../../examples/TableResponsiveBreakpoints';
+import TableBasic from '../../examples/Table/Basic';
+import TableSmall from '../../examples/Table/Small';
+import TableDark from '../../examples/Table/Dark';
+import TableResponsive from '../../examples/Table/Responsive';
+import TableResponsiveBreakpoints from '../../examples/Table/ResponsiveBreakpoints';
 
 export default function TableSection({ data }) {
   return (
     <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="tables">Tables</Anchor>
-      </h2>
+      <Heading h="1" id="tables">
+        Tables
+      </Heading>
 
       <p>
         Use the <code>striped</code>, <code>bordered</code> and{' '}
@@ -24,34 +23,38 @@ export default function TableSection({ data }) {
       </p>
       <ReactPlayground codeText={TableBasic} />
 
-      <h3>
-        <Anchor id="table-small">Small Table</Anchor>
-      </h3>
+      <Heading h="2" id="table-small">
+        Small Table
+      </Heading>
+
       <p>
         Use <code>size="sm"</code> to make tables compact by cutting cell
         padding in half.
       </p>
       <ReactPlayground codeText={TableSmall} />
 
-      <h3>
-        <Anchor id="table-inverted">Inverted Table</Anchor>
-      </h3>
+      <Heading h="2" id="table-inverted">
+        Dark Table
+      </Heading>
+
       <p>
         Use <code>variant="dark"</code> to invert the colors of the table and
         get light text on a dark background.
       </p>
       <ReactPlayground codeText={TableDark} />
 
-      <h2>
-        <Anchor id="table-responsive">Responsive</Anchor>
-      </h2>
+      <Heading h="2" id="table-responsive">
+        Responsive
+      </Heading>
+
       <p>
         Responsive tables allow tables to be scrolled horizontally with ease.
       </p>
 
-      <h3>
-        <Anchor id="table-responsive-always">Always Responsive</Anchor>
-      </h3>
+      <Heading h="3" id="table-responsive-always">
+        Always Responsive
+      </Heading>
+
       <p>
         Across every breakpoint, use <code>responsive</code> for horizontally
         scrolling tables. Responsive tables are wrapped automatically in a{' '}
@@ -59,9 +62,10 @@ export default function TableSection({ data }) {
       </p>
       <ReactPlayground codeText={TableResponsive} />
 
-      <h3>
-        <Anchor id="table-responsive-breakpoint">Breakpoint specific</Anchor>
-      </h3>
+      <Heading h="3" id="table-responsive-breakpoint">
+        Breakpoint specific
+      </Heading>
+
       <p>
         Use <code>responsive="sm"</code>, <code>responsive="md"</code>,{' '}
         <code>responsive="lg"</code>, or <code>responsive="xl"</code> as needed
@@ -71,11 +75,10 @@ export default function TableSection({ data }) {
       </p>
       <ReactPlayground codeText={TableResponsiveBreakpoints} />
 
-      <h3>
-        <Anchor id="table-props">Props</Anchor>
-        <LinkToSource component={data.Table.displayName} />
-      </h3>
-      <PropTable metadata={data.Table} />
+      <Heading h="2" id="table-props">
+        Props
+      </Heading>
+      <ComponentApi metadata={data.Table} />
     </div>
   );
 }
@@ -83,7 +86,7 @@ export default function TableSection({ data }) {
 export const query = graphql`
   query TableQuery {
     Table: componentMetadata(displayName: { eq: "Table" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
   }
 `;

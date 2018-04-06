@@ -57,7 +57,7 @@ export TabContent from './TabContent';
 export Table from './Table';
 export TabPane from './TabPane';
 export Tabs from './Tabs';
-export Thumbnail from './Thumbnail';
+export ThemeProvider from './ThemeProvider';
 export ToggleButton from './ToggleButton';
 export ToggleButtonGroup from './ToggleButtonGroup';
 export Tooltip from './Tooltip';

@@ -63,11 +63,10 @@
     "Table": false,
     "TabPane": false,
     "Tabs": false,
-    "Thumbnail": false,
     "Tooltip": false,
     "Well": false,
 
-    "bootstrapUtils": false,
+    "ThemeProvider": false,
 
     "mountNode": false
   }

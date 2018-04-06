@@ -28,7 +28,7 @@ describe('<ThemeProvider>', () => {
 
   it('should provide bsPrefix overrides', () => {
     const wrapper = mount(
-      <ThemeProvider variants={{ btn: 'my-btn', foo: 'global-foo' }}>
+      <ThemeProvider prefixes={{ btn: 'my-btn', foo: 'global-foo' }}>
         <div>
           <Button variant="primary">My label</Button>
           <Foo />
@@ -42,7 +42,7 @@ describe('<ThemeProvider>', () => {
 
   it('should use prop bsPrefix first', () => {
     const wrapper = mount(
-      <ThemeProvider variants={{ foo: 'global-foo' }}>
+      <ThemeProvider prefixes={{ foo: 'global-foo' }}>
         <div>
           <Foo bsPrefix="my-foo" />
         </div>

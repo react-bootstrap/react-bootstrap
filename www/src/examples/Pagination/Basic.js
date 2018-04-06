@@ -11,10 +11,10 @@ const paginationBasic = (
     <Pagination>{items}</Pagination>
     <br />
 
-    <Pagination bsSize="large">{items}</Pagination>
+    <Pagination size="lg">{items}</Pagination>
     <br />
 
-    <Pagination bsSize="small">{items}</Pagination>
+    <Pagination size="sm">{items}</Pagination>
   </div>
 );
 

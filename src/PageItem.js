@@ -6,11 +6,14 @@ import React from 'react';
 import SafeAnchor from './SafeAnchor';
 
 const propTypes = {
-  className: PropTypes.string,
-  onSelect: PropTypes.func,
+  /** Disables the PageItem */
   disabled: PropTypes.bool,
+
+  /** Styles PageItem as active, and renders a `<span>` instead of an `<a>`. */
   active: PropTypes.bool,
-  activeLabel: PropTypes.string.isRequired
+
+  /** An accessible label indicating the active state.. */
+  activeLabel: PropTypes.string
 };
 
 const defaultProps = {
@@ -36,7 +39,8 @@ export default function PageItem({
     >
       <Component className="page-link" disabled={disabled} {...props}>
         {children}
-        {active && <span className="sr-only">{activeLabel}</span>}
+        {active &&
+          activeLabel && <span className="sr-only">{activeLabel}</span>}
       </Component>
     </li>
   );
