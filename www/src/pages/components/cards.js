@@ -34,7 +34,7 @@ export default function CardSection({ data }) {
         with multiple variants and options.
       </p>
 
-      <Heading h="3" id="card-example-basic">
+      <Heading h="2" id="card-example-basic">
         Basic Example
       </Heading>
       <ReactPlayground codeText={CardBasic} />
@@ -132,7 +132,6 @@ export default function CardSection({ data }) {
       </Heading>
 
       <ComponentApi metadata={data.Card} />
-      <ComponentApi metadata={data.CardBody} />
       <ComponentApi metadata={data.CardImg} />
       <ComponentApi metadata={data.CardTitle} />
       <ComponentApi metadata={data.CardSubtitle} />
@@ -143,9 +142,6 @@ export default function CardSection({ data }) {
 export const query = graphql`
   query CardQuery {
     Card: componentMetadata(displayName: { eq: "Card" }) {
-      ...ComponentApi_metadata
-    }
-    CardBody: componentMetadata(displayName: { eq: "CardBody" }) {
       ...ComponentApi_metadata
     }
     CardImg: componentMetadata(displayName: { eq: "CardImg" }) {

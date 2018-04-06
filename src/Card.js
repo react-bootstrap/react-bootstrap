@@ -7,7 +7,6 @@ import { createBootstrapComponent } from './ThemeProvider';
 import createWithBsPrefix from './utils/createWithBsPrefix';
 import CardContext from './CardContext';
 
-import CardBody from './CardBody';
 import CardImg from './CardImg';
 import CardTitle from './CardTitle';
 import CardSubtitle from './CardSubtitle';
@@ -53,11 +52,11 @@ class Card extends React.Component {
 }
 
 const DecoratedCard = createBootstrapComponent(Card, 'card');
-DecoratedCard.Body = CardBody;
 DecoratedCard.Img = CardImg;
 DecoratedCard.Title = CardTitle;
 DecoratedCard.Subtitle = CardSubtitle;
 
+DecoratedCard.Body = createWithBsPrefix('card-body');
 DecoratedCard.Link = createWithBsPrefix('card-link', {
   Component: 'a'
 });

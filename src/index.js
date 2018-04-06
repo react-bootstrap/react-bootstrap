@@ -6,7 +6,6 @@ export Button from './Button';
 export ButtonGroup from './ButtonGroup';
 export ButtonToolbar from './ButtonToolbar';
 export Card from './Card';
-export CardBody from './CardBody';
 export CardColumns from './CardColumns';
 export CardDeck from './CardDeck';
 export CardImg from './CardImg';
