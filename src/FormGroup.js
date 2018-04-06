@@ -13,7 +13,7 @@ import { Size } from './utils/StyleConfig';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const propTypes = {
-  componentClass: elementType,
+  as: elementType,
 
   /**
    * Sets `id` on `<FormControl>` and `htmlFor` on `<FormGroup.Label>`.
@@ -23,7 +23,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  componentClass: 'div'
+  as: 'div'
 };
 
 const childContextTypes = {
@@ -53,7 +53,7 @@ class FormGroup extends React.Component {
 
   render() {
     const {
-      componentClass: Component,
+      as: Component,
       validationState,
       className,
       children,

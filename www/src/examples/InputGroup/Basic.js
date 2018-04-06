@@ -45,6 +45,6 @@
     <InputGroup.Prepend>
       <InputGroup.Text>With textarea</InputGroup.Text>
     </InputGroup.Prepend>
-    <FormControl componentClass="textarea" aria-label="With textarea" />
+    <FormControl as="textarea" aria-label="With textarea" />
   </InputGroup>
 </div>;

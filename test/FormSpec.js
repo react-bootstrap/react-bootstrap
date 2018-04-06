@@ -25,9 +25,9 @@ describe('<Form>', () => {
       .assertSingle(FormGroup);
   });
 
-  it('should support custom componentClass', () => {
+  it('should support custom as', () => {
     shallow(
-      <Form componentClass="fieldset" horizontal className="my-form">
+      <Form as="fieldset" horizontal className="my-form">
         <FormGroup />
       </Form>
     )

@@ -15,20 +15,15 @@ class Figure extends React.Component {
      */
     bsPrefix: PropTypes.string,
 
-    componentClass: elementType
+    as: elementType
   };
 
   static defaultProps = {
-    componentClass: 'figure'
+    as: 'figure'
   };
 
   render() {
-    const {
-      componentClass: Component,
-      bsPrefix,
-      className,
-      ...props
-    } = this.props;
+    const { as: Component, bsPrefix, className, ...props } = this.props;
 
     return <Component {...props} className={classNames(className, bsPrefix)} />;
   }

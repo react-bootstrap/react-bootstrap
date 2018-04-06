@@ -14,15 +14,13 @@ describe('<FormControl>', () => {
   });
 
   it('should support textarea', () => {
-    shallow(<FormControl componentClass="textarea" />).assertSingle(
+    shallow(<FormControl as="textarea" />).assertSingle(
       'textarea.form-control'
     );
   });
 
   it('should support select', () => {
-    shallow(<FormControl componentClass="select" />).assertSingle(
-      'select.form-control'
-    );
+    shallow(<FormControl as="select" />).assertSingle('select.form-control');
   });
 
   it('should not render .form-control for type="file"', () => {

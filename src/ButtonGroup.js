@@ -36,14 +36,14 @@ class ButtonGroup extends React.Component {
      */
     role: PropTypes.string,
 
-    componentClass: elementType
+    as: elementType
   };
 
   static defaultProps = {
     vertical: false,
     toggle: false,
     role: 'group',
-    componentClass: 'div'
+    as: 'div'
   };
 
   render() {
@@ -54,7 +54,7 @@ class ButtonGroup extends React.Component {
       toggle,
       vertical,
       className,
-      componentClass: Component,
+      as: Component,
       ...props
     } = this.props;
 

@@ -52,7 +52,7 @@ class FormLabel extends React.Component {
       return (
         <Col
           {...elementProps}
-          componentClass="label"
+          as="label"
           htmlFor={htmlFor}
           className={classNames(className, 'col-form-label', classes)}
         />

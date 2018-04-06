@@ -27,9 +27,7 @@ describe('Media', () => {
   });
 
   it('should allow custom elements instead of "div"', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Media componentClass="section" />
-    );
+    const instance = ReactTestUtils.renderIntoDocument(<Media as="section" />);
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');
   });

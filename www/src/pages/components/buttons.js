@@ -46,10 +46,9 @@ export default function ButtonSection({ data }) {
         Normally <code>{'<Button>'}</code> components will render a HTML{' '}
         <code>{'<button>'}</code> element. However you can render whatever you'd
         like, adding a <code>href</code> prop will automatically render an{' '}
-        <code>{'<a />'}</code> element otherwise you can specify{' '}
-        <code>componentClass</code> to render something else (like an{' '}
-        <code>input</code>). React Bootstrap will take care of the proper ARIA
-        roles for you.
+        <code>{'<a />'}</code> element. You can use the <code>as</code> prop to
+        render whatever your heart desires. React Bootstrap will take care of
+        the proper ARIA roles for you.
       </p>
       <ReactPlayground codeText={ButtonTagTypes} />
       <h3>

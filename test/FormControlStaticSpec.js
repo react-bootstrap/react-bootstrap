@@ -16,16 +16,14 @@ describe('<FormControl.Static>', () => {
     ).to.equal('Static text');
   });
 
-  it('should support custom componentClass', () => {
+  it('should support custom as', () => {
     function MyComponent({ children, ...props }) {
       return <div {...props}>{children}</div>;
     }
 
     expect(
       shallow(
-        <FormControl.Static componentClass={MyComponent}>
-          Static text
-        </FormControl.Static>
+        <FormControl.Static as={MyComponent}>Static text</FormControl.Static>
       )
         .assertSingle('MyComponent.form-control-static')
         .contains('Static text')

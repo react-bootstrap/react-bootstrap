@@ -70,7 +70,7 @@ class NavDropdown extends React.Component {
     return (
       <Dropdown
         {...dropdownProps}
-        componentClass="li"
+        as="li"
         className={classNames(className, { active })}
         style={style}
       >

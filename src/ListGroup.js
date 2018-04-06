@@ -13,7 +13,7 @@ const propTypes = {
    * If not specified, it will be treated as `'li'` if every child is a
    * non-actionable `<ListGroupItem>`, and `'div'` otherwise.
    */
-  componentClass: elementType
+  as: elementType
 };
 
 function getDefaultComponent(children) {
@@ -39,7 +39,7 @@ class ListGroup extends React.Component {
   render() {
     const {
       children,
-      componentClass: Component = getDefaultComponent(children),
+      as: Component = getDefaultComponent(children),
       className,
       ...props
     } = this.props;

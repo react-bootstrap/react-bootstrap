@@ -49,7 +49,7 @@ describe('<Media.Body>', () => {
 
   it('should allow custom elements instead of "div"', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Media.Body componentClass="section" />
+      <Media.Body as="section" />
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');

@@ -63,7 +63,7 @@ const propTypes = {
   /**
    * Set a custom element for this component.
    */
-  componentClass: elementType,
+  as: elementType,
 
   /**
    * A callback fired when the `<Navbar>` body collapses or expands. Fired when
@@ -116,7 +116,7 @@ const propTypes = {
 
   /**
    * The ARIA role for the navbar, will default to 'navigation' for
-   * Navbars whose `componentClass` is something other than `<nav>`.
+   * Navbars whose `as` is something other than `<nav>`.
    *
    * @default 'navigation'
    */
@@ -124,7 +124,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  componentClass: 'nav',
+  as: 'nav',
   expand: true,
   fluid: true,
   variant: 'light',
@@ -179,7 +179,7 @@ class Navbar extends React.Component {
       fluid,
       className,
       children,
-      componentClass: Component,
+      as: Component,
       expanded: _1,
       onToggle: _2,
       onSelect: _3,

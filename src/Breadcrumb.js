@@ -22,13 +22,13 @@ class Breadcrumb extends React.Component {
      */
     listProps: PropTypes.object,
 
-    componentClass: elementType
+    as: elementType
   };
 
   static defaultProps = {
     label: 'breadcrumb',
     listProps: {},
-    componentClass: 'nav'
+    as: 'nav'
   };
 
   render() {
@@ -38,7 +38,7 @@ class Breadcrumb extends React.Component {
       listProps,
       children,
       label,
-      componentClass: Component,
+      as: Component,
       ...props
     } = this.props;
 

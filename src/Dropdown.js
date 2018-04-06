@@ -37,7 +37,7 @@ const propTypes = {
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   ),
 
-  componentClass: elementType,
+  as: elementType,
 
   /**
    * The children of a Dropdown may be a `<Dropdown.Toggle>` or a `<Dropdown.Menu>`.
@@ -113,7 +113,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  componentClass: ButtonGroup
+  as: ButtonGroup
 };
 
 class Dropdown extends React.Component {
@@ -293,7 +293,7 @@ class Dropdown extends React.Component {
 
   render() {
     const {
-      componentClass: Component,
+      as: Component,
       id,
       dropup,
       disabled,

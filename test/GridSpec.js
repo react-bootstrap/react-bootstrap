@@ -33,7 +33,7 @@ describe('<Container>', () => {
 
   it('allows custom elements instead of "div"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Container componentClass="section" />
+      <Container as="section" />
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');

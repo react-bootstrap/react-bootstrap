@@ -22,12 +22,12 @@ class NavbarToggle extends React.Component {
      */
     children: PropTypes.node,
 
-    componentClass: elementType
+    as: elementType
   };
 
   static defaultProps = {
     label: 'Toggle navigation',
-    componentClass: 'button'
+    as: 'button'
   };
 
   handleClick = e => {
@@ -43,7 +43,7 @@ class NavbarToggle extends React.Component {
       className,
       children,
       label,
-      componentClass: Component,
+      as: Component,
       ...props
     } = this.props;
 
