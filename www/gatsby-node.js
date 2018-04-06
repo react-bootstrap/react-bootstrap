@@ -9,7 +9,7 @@ exports.modifyWebpackConfig = function modifyWebpackConfig({
     module: {
       rules: [
         {
-          test: /src\/examples\//,
+          include: path.resolve(__dirname, 'src/examples'),
           use: loaders.raw()
         }
       ]
