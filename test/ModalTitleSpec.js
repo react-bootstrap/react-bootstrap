@@ -28,9 +28,7 @@ describe('Modal.Title', () => {
   });
 
   it('should allow custom elements instead of "h4"', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Modal.Title componentClass="h3" />
-    );
+    const instance = ReactTestUtils.renderIntoDocument(<Modal.Title as="h3" />);
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'H3');
   });

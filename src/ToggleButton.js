@@ -67,7 +67,7 @@ class ToggleButton extends React.Component {
         className={classNames(className, focused && 'focus')}
         type={null}
         active={!!checked}
-        componentClass="label"
+        as="label"
       >
         <input
           name={name}

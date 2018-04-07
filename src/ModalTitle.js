@@ -5,16 +5,16 @@ import elementType from 'prop-types-extra/lib/elementType';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
-  componentClass: elementType
+  as: elementType
 };
 
 const defaultProps = {
-  componentClass: 'h4'
+  as: 'h4'
 };
 
 class ModalTitle extends React.Component {
   render() {
-    const { componentClass: Component, className, ...props } = this.props;
+    const { as: Component, className, ...props } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = getClassSet(bsProps);

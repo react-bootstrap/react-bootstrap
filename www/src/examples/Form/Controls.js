@@ -55,14 +55,14 @@ const formInstance = (
 
     <FormGroup controlId="formControlsSelect">
       <FormLabel>Select</FormLabel>
-      <FormControl componentClass="select" placeholder="select">
+      <FormControl as="select" placeholder="select">
         <option value="select">select</option>
         <option value="other">...</option>
       </FormControl>
     </FormGroup>
     <FormGroup controlId="formControlsSelectMultiple">
       <FormLabel>Multiple select</FormLabel>
-      <FormControl componentClass="select" multiple>
+      <FormControl as="select" multiple>
         <option value="select">select (multiple)</option>
         <option value="other">...</option>
       </FormControl>
@@ -70,7 +70,7 @@ const formInstance = (
 
     <FormGroup controlId="formControlsTextarea">
       <FormLabel>Textarea</FormLabel>
-      <FormControl componentClass="textarea" placeholder="textarea" />
+      <FormControl as="textarea" placeholder="textarea" />
     </FormGroup>
 
     <FormGroup>

@@ -5,16 +5,16 @@ import elementType from 'prop-types-extra/lib/elementType';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
-  componentClass: elementType
+  as: elementType
 };
 
 const defaultProps = {
-  componentClass: 'div'
+  as: 'div'
 };
 
 class InvalidFeedback extends React.Component {
   render() {
-    const { className, componentClass: Component, ...props } = this.props;
+    const { className, as: Component, ...props } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     return (

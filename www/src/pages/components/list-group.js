@@ -75,8 +75,8 @@ export default function ListGroupSection({ data }) {
         have href or onClick props to determine which DOM elements to emit.
         However, with custom item components as children to{' '}
         <code>ListGroup</code>, set the
-        <code>componentClass</code> prop to specify which element{' '}
-        <code>ListGroup</code> should output.
+        <code>as</code> prop to specify which element <code>ListGroup</code>{' '}
+        should output.
       </p>
       <ReactPlayground codeText={ListGroupCustom} />
 

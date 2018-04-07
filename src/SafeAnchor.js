@@ -14,11 +14,11 @@ const propTypes = {
   /**
    * this is sort of silly but needed for Button
    */
-  componentClass: elementType
+  as: elementType
 };
 
 const defaultProps = {
-  componentClass: 'a'
+  as: 'a'
 };
 
 function isTrivialHref(href) {
@@ -65,12 +65,7 @@ class SafeAnchor extends React.Component {
   }
 
   render() {
-    const {
-      componentClass: Component,
-      disabled,
-      onKeyDown,
-      ...props
-    } = this.props;
+    const { as: Component, disabled, onKeyDown, ...props } = this.props;
 
     if (isTrivialHref(props.href)) {
       props.role = props.role || 'button';

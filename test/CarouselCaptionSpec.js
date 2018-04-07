@@ -30,7 +30,7 @@ describe('<Carousel.Caption>', () => {
 
   it('allows custom elements instead of "div"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Carousel.Caption componentClass="section" />
+      <Carousel.Caption as="section" />
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');

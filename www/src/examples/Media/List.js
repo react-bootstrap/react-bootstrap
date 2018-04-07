@@ -1,5 +1,5 @@
 <ul className="list-unstyled">
-  <Media componentClass="li">
+  <Media as="li">
     <img
       width={64}
       height={64}
@@ -18,7 +18,7 @@
     </Media.Body>
   </Media>
 
-  <Media componentClass="li">
+  <Media as="li">
     <img
       width={64}
       height={64}
@@ -37,7 +37,7 @@
     </Media.Body>
   </Media>
 
-  <Media componentClass="li">
+  <Media as="li">
     <img
       width={64}
       height={64}

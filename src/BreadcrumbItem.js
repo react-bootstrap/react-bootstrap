@@ -30,22 +30,16 @@ class BreadcrumbItem extends React.Component {
      */
     target: PropTypes.string,
 
-    componentClass: elementType
+    as: elementType
   };
 
   static defaultProps = {
     active: false,
-    componentClass: 'li'
+    as: 'li'
   };
 
   render() {
-    const {
-      bsPrefix,
-      active,
-      className,
-      componentClass: Component,
-      ...props
-    } = this.props;
+    const { bsPrefix, active, className, as: Component, ...props } = this.props;
 
     const { href, title, target, ...elementProps } = props;
     const linkProps = { href, title, target };

@@ -15,12 +15,12 @@ class NavItem extends React.Component {
     /** The ARIA role of the component */
     role: PropTypes.string,
 
-    componentClass: elementType
+    as: elementType
   };
 
   static defaultProps = {
     role: 'presentaton',
-    componentClass: 'li'
+    as: 'li'
   };
 
   render() {
@@ -28,7 +28,7 @@ class NavItem extends React.Component {
       bsPrefix,
       className,
       children,
-      componentClass: Component,
+      as: Component,
       ...props
     } = this.props;
 

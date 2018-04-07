@@ -29,7 +29,7 @@ describe('Modal.Footer', () => {
 
   it('should allow custom elements instead of "div"', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Modal.Footer componentClass="section" />
+      <Modal.Footer as="section" />
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');

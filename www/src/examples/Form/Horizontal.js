@@ -1,6 +1,6 @@
 <Form horizontal>
   <FormGroup controlId="formHorizontalEmail">
-    <Col componentClass={FormLabel} sm={2}>
+    <Col as={FormLabel} sm={2}>
       Email
     </Col>
     <Col sm={10}>
@@ -9,7 +9,7 @@
   </FormGroup>
 
   <FormGroup controlId="formHorizontalPassword">
-    <Col componentClass={FormLabel} sm={2}>
+    <Col as={FormLabel} sm={2}>
       Password
     </Col>
     <Col sm={10}>

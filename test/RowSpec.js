@@ -23,9 +23,7 @@ describe('Row', () => {
   });
 
   it('allows custom elements instead of "div"', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Row componentClass="section" />
-    );
+    let instance = ReactTestUtils.renderIntoDocument(<Row as="section" />);
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');
   });

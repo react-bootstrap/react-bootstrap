@@ -7,7 +7,7 @@ class NavDropdownExample extends React.Component {
   render() {
     return (
       <Nav
-        componentClass="div"
+        as="div"
         variant="tabs"
         activeKey="1"
         onSelect={k => this.handleSelect(k)}

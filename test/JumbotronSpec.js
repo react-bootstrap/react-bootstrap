@@ -36,7 +36,7 @@ describe('<Jumbotron>', () => {
 
   it('Should override node class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Jumbotron componentClass="section">
+      <Jumbotron as="section">
         <strong>Content</strong>
       </Jumbotron>
     );

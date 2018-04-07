@@ -8,7 +8,7 @@ import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 import { DEVICE_SIZES } from './utils/StyleConfig';
 
 const propTypes = {
-  componentClass: elementType,
+  as: elementType,
 
   /**
    * Apply clearfix
@@ -45,12 +45,12 @@ const propTypes = {
 };
 
 const defaultProps = {
-  componentClass: 'div'
+  as: 'div'
 };
 
 class Clearfix extends React.Component {
   render() {
-    const { componentClass: Component, className, ...props } = this.props;
+    const { as: Component, className, ...props } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = getClassSet(bsProps);

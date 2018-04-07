@@ -34,7 +34,7 @@ class Col extends React.Component {
      */
     bsPrefix: PropTypes.string,
 
-    componentClass: elementType,
+    as: elementType,
 
     /**
      * The number of columns to span on sxtra small devices (<576px) HII!
@@ -73,16 +73,11 @@ class Col extends React.Component {
   };
 
   static defaultProps = {
-    componentClass: 'div'
+    as: 'div'
   };
 
   render() {
-    const {
-      bsPrefix,
-      className,
-      componentClass: Component,
-      ...props
-    } = this.props;
+    const { bsPrefix, className, as: Component, ...props } = this.props;
 
     const spans = [];
     const classes = [];

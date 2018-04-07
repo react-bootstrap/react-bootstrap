@@ -15,7 +15,7 @@ import {
 import { Size } from './utils/StyleConfig';
 
 const propTypes = {
-  componentClass: elementType,
+  as: elementType,
   /**
    * Render the input as plain text.
    */
@@ -24,7 +24,7 @@ const propTypes = {
   /** @ignore */
   readOnly: PropTypes.bool,
   /**
-   * Only relevant if `componentClass` is `'input'`.
+   * Only relevant if `as` is `'input'`.
    */
   type: PropTypes.string,
   /**
@@ -44,7 +44,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  componentClass: 'input'
+  as: 'input'
 };
 
 const contextTypes = {
@@ -57,7 +57,7 @@ class FormControl extends React.Component {
     const controlId = formGroup && formGroup.controlId;
 
     const {
-      componentClass: Component,
+      as: Component,
       type,
       id = controlId,
       inputRef,

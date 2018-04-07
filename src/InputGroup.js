@@ -26,19 +26,13 @@ class InputGroup extends React.Component {
      */
     size: PropTypes.string.isRequired,
 
-    componentClass: elementType
+    as: elementType
   };
   static defaultProps = {
-    componentClass: 'div'
+    as: 'div'
   };
   render() {
-    const {
-      bsPrefix,
-      size,
-      className,
-      componentClass: Component,
-      ...props
-    } = this.props;
+    const { bsPrefix, size, className, as: Component, ...props } = this.props;
 
     return (
       <Component

@@ -99,7 +99,7 @@ class Tabs extends React.Component {
 
     return (
       <NavItem
-        componentClass={NavLink}
+        as={NavLink}
         eventKey={eventKey}
         disabled={disabled}
         className={tabClassName}
@@ -116,8 +116,6 @@ class Tabs extends React.Component {
       transition,
       mountOnEnter,
       unmountOnExit,
-      className,
-      style,
       children,
       activeKey = getDefaultActiveKey(children),
       ...props
@@ -132,7 +130,7 @@ class Tabs extends React.Component {
         mountOnEnter={mountOnEnter}
         unmountOnExit={unmountOnExit}
       >
-        <Nav {...props} role="tablist" componentClass="nav">
+        <Nav {...props} role="tablist" as="nav">
           {ValidComponentChildren.map(children, this.renderTab)}
         </Nav>
 

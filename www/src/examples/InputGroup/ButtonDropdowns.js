@@ -1,7 +1,7 @@
 <>
   <InputGroup className="mb-3">
     <DropdownButton
-      componentClass={InputGroup.Prepend}
+      as={InputGroup.Prepend}
       variant="outline-secondary"
       title="Dropdown"
     >
@@ -22,7 +22,7 @@
     />
 
     <DropdownButton
-      componentClass={InputGroup.Append}
+      as={InputGroup.Append}
       variant="outline-secondary"
       title="Dropdown"
     >

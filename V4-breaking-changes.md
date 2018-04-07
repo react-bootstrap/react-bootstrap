@@ -1,3 +1,9 @@
+## General
+
+* `bsStyle` -> `variant`
+* `bsClass` -> `bsPrefix`
+* `componentClass` -> `as`
+
 ## Navbar
 
 * removed `Navbar.Header`
@@ -17,7 +23,7 @@
 ### NavbarBrand
 
 * Renders a `<a>` when an `href` is provided
-* The presence of `children` does not skip the wrapping `span`, use `componentClass` along with `children` for custom rendering
+* The presence of `children` does not skip the wrapping `span`, use `as` along with `children` for custom rendering
 
 ## Nav
 

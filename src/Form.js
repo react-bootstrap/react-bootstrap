@@ -8,13 +8,13 @@ import { bsClass, prefix, splitBsProps } from './utils/bootstrapUtils';
 const propTypes = {
   horizontal: PropTypes.bool,
   inline: PropTypes.bool,
-  componentClass: elementType
+  as: elementType
 };
 
 const defaultProps = {
   horizontal: false,
   inline: false,
-  componentClass: 'form'
+  as: 'form'
 };
 
 class Form extends React.Component {
@@ -22,7 +22,7 @@ class Form extends React.Component {
     const {
       horizontal,
       inline,
-      componentClass: Component,
+      as: Component,
       className,
       ...props
     } = this.props;

@@ -30,7 +30,7 @@ describe('<Figure.Caption>', () => {
 
   it('allows custom elements instead of "figcaption"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Figure.Caption componentClass="section" />
+      <Figure.Caption as="section" />
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');

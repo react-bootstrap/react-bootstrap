@@ -86,7 +86,7 @@ class Nav extends React.Component {
      */
     navbar: PropTypes.bool,
 
-    componentClass: elementType,
+    as: elementType,
 
     /** @private */
     onKeyDown: PropTypes.func
@@ -95,7 +95,7 @@ class Nav extends React.Component {
   static defaultProps = {
     justify: false,
     fill: false,
-    componentClass: 'ul'
+    as: 'ul'
   };
 
   static getDerivedStateFromProps({
@@ -177,7 +177,7 @@ class Nav extends React.Component {
       navbar,
       className,
       children,
-      componentClass: Component,
+      as: Component,
       ...props
     } = this.props;
 

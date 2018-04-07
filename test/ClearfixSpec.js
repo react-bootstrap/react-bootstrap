@@ -49,9 +49,7 @@ describe('<Clearfix>', () => {
   });
 
   it('allows custom elements instead of "div"', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Clearfix componentClass="section" />
-    );
+    let instance = ReactTestUtils.renderIntoDocument(<Clearfix as="section" />);
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');
   });

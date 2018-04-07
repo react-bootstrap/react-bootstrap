@@ -12,21 +12,16 @@ const propTypes = {
    */
   bsPrefix: PropTypes.string.isRequired,
 
-  componentClass: elementType
+  as: elementType
 };
 
 const defaultProps = {
-  componentClass: 'div'
+  as: 'div'
 };
 
 class Media extends React.Component {
   render() {
-    const {
-      bsPrefix,
-      className,
-      componentClass: Component,
-      ...props
-    } = this.props;
+    const { bsPrefix, className, as: Component, ...props } = this.props;
 
     return <Component {...props} className={classNames(className, bsPrefix)} />;
   }

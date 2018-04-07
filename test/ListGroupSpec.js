@@ -222,7 +222,7 @@ describe('<ListGroup>', () => {
       assert.equal(ReactDOM.findDOMNode(instance).firstChild.nodeName, 'LI');
     });
 
-    it('Should use a "componentClass" prop if specified if any children are custom components', () => {
+    it('Should use a "as" prop if specified if any children are custom components', () => {
       class CustomComponent extends React.Component {
         render() {
           return (
@@ -234,7 +234,7 @@ describe('<ListGroup>', () => {
       }
 
       let instance = ReactTestUtils.renderIntoDocument(
-        <ListGroup id="testItem" componentClass="ul">
+        <ListGroup id="testItem" as="ul">
           <CustomComponent>Custom Child</CustomComponent>
           <CustomComponent>Custom Child</CustomComponent>
           <ListGroupItem listItem>RB Child</ListGroupItem>

@@ -18,7 +18,7 @@ const propTypes = {
 function NavMain({ activePage }) {
   return (
     <Navbar
-      componentClass="header"
+      as="header"
       role="banner"
       expand="md"
       variant="dark"

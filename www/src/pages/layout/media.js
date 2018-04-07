@@ -69,9 +69,8 @@ export default function MediaSection({ data }) {
         Because the media object has so few structural requirements, you can
         also use these classes on list HTML elements. On your <code>ul</code> or{' '}
         <code>ol</code> , add the .list-unstyled to remove any browser default
-        list styles, use <code>li</code> for your <code>Media</code>{' '}
-        <code>componentClass</code>. As always, use spacing utilities wherever
-        needed to fine tune.
+        list styles, use <code>{'<Media as="li">'}</code> to render as a list
+        item. As always, use spacing utilities wherever needed to fine tune.
       </p>
       <ReactPlayground codeText={List} />
 
