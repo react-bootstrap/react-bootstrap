@@ -61,21 +61,6 @@
   }
 }
 
-.bs-docs-single-col-container {
-  max-width: 900px;
-}
-
-.bs-docs-code-panel .panel-body {
-  padding: 0;
-}
-
-.bs-docs-code-panel .panel-body > pre {
-  padding: 20px;
-  margin-bottom: 0;
-  border-radius: 0;
-  border-width: 0;
-}
-
 /*
  * Social buttons
  *
@@ -96,12 +81,6 @@
   display: inline-block;
   padding: 5px 8px;
   line-height: 1;
-}
-.bs-docs-social-buttons .twitter-follow-button {
-  width: 225px !important;
-}
-.bs-docs-social-buttons .twitter-share-button {
-  width: 98px !important;
 }
 /* Style the GitHub buttons via CSS instead of inline attributes */
 .github-btn {
