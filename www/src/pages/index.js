@@ -11,7 +11,7 @@ export default class HomePage extends React.Component {
       <div>
         <main className="bs-docs-masthead" id="content" role="main">
           <div className="container">
-            <span className="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline" />
+            <span className="bs-docs-booticon bs-docs-booticon-lg" />
             <p className="lead">
               The most popular front-end framework, rebuilt for React.
             </p>
