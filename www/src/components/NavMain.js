@@ -25,28 +25,30 @@ function NavMain({ activePage }) {
       className="bg-dark bs-docs-nav"
       collapseOnSelect
     >
-      <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
-      <Navbar.Toggle />
-      <Navbar.Collapse className="bs-navbar-collapse">
-        <Nav role="navigation" id="top">
-          {Object.values(NAV_LINKS).map(({ link, title }) => (
+      <div className="container">
+        <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="bs-navbar-collapse">
+          <Nav role="navigation" id="top">
+            {Object.values(NAV_LINKS).map(({ link, title }) => (
+              <Nav.Link
+                key={link}
+                href={link}
+                active={activePage.startsWith(link)}
+              >
+                {title}
+              </Nav.Link>
+            ))}
             <Nav.Link
-              key={link}
-              href={link}
-              active={activePage.startsWith(link)}
+              href="https://github.com/react-bootstrap/react-bootstrap"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              {title}
+              GitHub
             </Nav.Link>
-          ))}
-          <Nav.Link
-            href="https://github.com/react-bootstrap/react-bootstrap"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub
-          </Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
+          </Nav>
+        </Navbar.Collapse>
+      </div>
     </Navbar>
   );
 }
