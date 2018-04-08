@@ -14,18 +14,6 @@
 /* Bootstrap "B" icon */
 .bs-docs-booticon {
   display: block;
-  font-weight: 500;
-  color: #fff;
-  text-align: center;
-  cursor: default;
-  background-color: #563d7c;
-  border-radius: 15%;
-}
-.bs-docs-booticon-lg {
-  width: 144px;
-  height: 144px;
-  font-size: 108px;
-  line-height: 140px;
 }
 
 /* Main Navigation */
