@@ -28,6 +28,13 @@
   line-height: 140px;
 }
 
+/* Main Navigation */
+
+.bs-docs-nav .navbar-brand,
+.bs-docs-nav .navbar-nav > .nav-link {
+  font-weight: 500;
+}
+
 /*
  * Footer
  *

@@ -22,7 +22,7 @@ function NavMain({ activePage }) {
       role="banner"
       expand="md"
       variant="dark"
-      className="bg-dark"
+      className="bg-dark bs-docs-nav"
       collapseOnSelect
     >
       <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
