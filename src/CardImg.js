@@ -20,11 +20,11 @@ class CardImg extends React.Component {
      */
     variant: PropTypes.oneOf(['top', 'bottom', null]),
 
-    componentClass: elementType
+    as: elementType
   };
 
   static defaultProps = {
-    componentClass: 'img',
+    as: 'img',
     variant: null
   };
 
@@ -33,7 +33,7 @@ class CardImg extends React.Component {
       bsPrefix,
       className,
       variant,
-      componentClass: Component,
+      as: Component,
       ...props
     } = this.props;
 

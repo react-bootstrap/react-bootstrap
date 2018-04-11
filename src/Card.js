@@ -19,14 +19,14 @@ class Card extends React.Component {
     /**
      * Sets card background
      *
-     * @type('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')
+     * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
      */
     bg: PropTypes.string,
 
     /**
      * Sets card text color
      *
-     * @type('white')
+     * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light'|'white'|'muted')}
      */
     text: PropTypes.string,
 
@@ -37,11 +37,11 @@ class Card extends React.Component {
      */
     border: PropTypes.string,
 
-    componentClass: elementType
+    as: elementType
   };
 
   static defaultProps = {
-    componentClass: 'div'
+    as: 'div'
   };
 
   static getDerivedStateFromProps({ bsPrefix }) {
@@ -58,7 +58,7 @@ class Card extends React.Component {
     const {
       bsPrefix,
       className,
-      componentClass: Component,
+      as: Component,
       bg,
       text,
       border,

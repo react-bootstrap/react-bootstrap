@@ -13,6 +13,10 @@ describe('<CardImg>', () => {
     expect(img.prop('src')).to.equal('http://fakeurl.com/pic.jpg');
   });
 
+  it('accepts as prop', () => {
+    mount(<CardImg as="figure">img</CardImg>).assertSingle('figure.card-img');
+  });
+
   describe('variants', () => {
     it('null', () => {
       mount(<CardImg />).assertSingle('.card-img');

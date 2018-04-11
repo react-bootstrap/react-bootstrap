@@ -36,7 +36,7 @@ describe('<Card>', () => {
     ).assertSingle('p');
   });
 
-  it('accepts componentClass', () => {
-    mount(<Card componentClass="section">body</Card>).assertSingle('section');
+  it('accepts as prop', () => {
+    mount(<Card as="section">body</Card>).assertSingle('section');
   });
 });
