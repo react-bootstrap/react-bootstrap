@@ -133,8 +133,6 @@ export default function CardSection({ data }) {
 
       <ComponentApi metadata={data.Card} />
       <ComponentApi metadata={data.CardImg} />
-      <ComponentApi metadata={data.CardTitle} />
-      <ComponentApi metadata={data.CardSubtitle} />
     </div>
   );
 }
@@ -145,12 +143,6 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     CardImg: componentMetadata(displayName: { eq: "CardImg" }) {
-      ...ComponentApi_metadata
-    }
-    CardTitle: componentMetadata(displayName: { eq: "CardTitle" }) {
-      ...ComponentApi_metadata
-    }
-    CardSubtitle: componentMetadata(displayName: { eq: "CardSubtitle" }) {
       ...ComponentApi_metadata
     }
   }
