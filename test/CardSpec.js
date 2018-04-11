@@ -39,4 +39,8 @@ describe('<Card>', () => {
   it('accepts as prop', () => {
     mount(<Card as="section">body</Card>).assertSingle('section');
   });
+
+  it('allows for the body shorthand', () => {
+    mount(<Card body>test</Card>).assertSingle('.card-body');
+  });
 });

@@ -6,6 +6,7 @@ import ReactPlayground from '../../components/ReactPlayground';
 
 import CardBasic from '../../examples/Card/Basic';
 import CardBodyOnly from '../../examples/Card/BodyOnly';
+import CardBodyShorthand from '../../examples/Card/BodyShorthand';
 import CardText from '../../examples/Card/Text';
 import CardImageAndText from '../../examples/Card/ImageAndText';
 import CardListGroups from '../../examples/Card/ListGroups';
@@ -51,6 +52,11 @@ export default function CardSection({ data }) {
         Use <code>Card.Body</code> to pad content inside a <code>Card</code>.
       </p>
       <ReactPlayground codeText={CardBodyOnly} />
+      <p>
+        Alernatively, you can use this shorthand version for Cards with body
+        only, and no other children
+      </p>
+      <ReactPlayground codeText={CardBodyShorthand} />
 
       <Heading h="3" id="card-example-text">
         Title, text, and links

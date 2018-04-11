@@ -33,15 +33,22 @@ class Card extends React.Component {
     /**
      * Sets card border color
      *
-     * @type('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')
+     * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
      */
     border: PropTypes.string,
+
+    /**
+     * When this prop is set, it creates a Card with a Card.Body inside
+     * passing the children directly to it
+     */
+    body: PropTypes.bool,
 
     as: elementType
   };
 
   static defaultProps = {
-    as: 'div'
+    as: 'div',
+    body: false
   };
 
   static getDerivedStateFromProps({ bsPrefix }) {
@@ -62,6 +69,7 @@ class Card extends React.Component {
       bg,
       text,
       border,
+      body,
       ...props
     } = this.props;
 
@@ -72,6 +80,15 @@ class Card extends React.Component {
       text && `text-${text}`,
       border && `border-${border}`
     );
+
+    if (body) {
+      const { children, ...rest } = props;
+      return (
+        <Component className={classes} {...rest}>
+          <div className="card-body">{children}</div>
+        </Component>
+      );
+    }
 
     return (
       <CardContext.Provider value={this.state.cardContext}>
