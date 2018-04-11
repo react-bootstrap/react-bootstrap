@@ -8,8 +8,6 @@ import createWithBsPrefix from './utils/createWithBsPrefix';
 import CardContext from './CardContext';
 
 import CardImg from './CardImg';
-import CardTitle from './CardTitle';
-import CardSubtitle from './CardSubtitle';
 
 class Card extends React.Component {
   static propTypes = {
@@ -51,10 +49,19 @@ class Card extends React.Component {
   }
 }
 
+const divWithHeadingClass = headingClass =>
+  React.forwardRef((p, ref) => (
+    <div {...p} ref={ref} className={classNames(p.className, headingClass)} />
+  ));
+
 const DecoratedCard = createBootstrapComponent(Card, 'card');
 DecoratedCard.Img = CardImg;
-DecoratedCard.Title = CardTitle;
-DecoratedCard.Subtitle = CardSubtitle;
+DecoratedCard.Title = createWithBsPrefix('card-title', {
+  Component: divWithHeadingClass('h5')
+});
+DecoratedCard.Subtitle = createWithBsPrefix('card-subtitle', {
+  Component: divWithHeadingClass('h6')
+});
 
 DecoratedCard.Body = createWithBsPrefix('card-body');
 DecoratedCard.Link = createWithBsPrefix('card-link', {

@@ -10,8 +10,6 @@ export CardColumns from './CardColumns';
 export CardDeck from './CardDeck';
 export CardImg from './CardImg';
 export CardGroup from './CardGroup';
-export CardTitle from './CardTitle';
-export CardSubtitle from './CardSubtitle';
 export Carousel from './Carousel';
 export CarouselItem from './CarouselItem';
 export Checkbox from './Checkbox';
