@@ -90,7 +90,7 @@ export default function CardSection({ data }) {
 
       <p>
         A <code>CardHeader</code> can be styled by passing a heading element
-        through the <code>componentClass</code> prop
+        through the <code>as</code> prop
       </p>
       <ReactPlayground codeText={CardWithHeaderStyled} />
 

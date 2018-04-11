@@ -1,5 +1,5 @@
 <Card>
-  <Card.Header componentClass="h5">Featured</Card.Header>
+  <Card.Header as="h5">Featured</Card.Header>
   <Card.Body>
     <Card.Title>Special title treatment</Card.Title>
     <Card.Text>
