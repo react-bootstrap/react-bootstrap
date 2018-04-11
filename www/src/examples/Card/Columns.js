@@ -35,7 +35,7 @@
       <small className="text-muted">Last updated 3 mins ago</small>
     </Card.Footer>
   </Card>
-  <Card className="bg-primary text-white text-center p-3">
+  <Card bg="primary" text="white" className="text-center p-3">
     <blockquote className="blockquote mb-0 card-body">
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere

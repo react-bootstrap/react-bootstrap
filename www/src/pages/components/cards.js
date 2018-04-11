@@ -21,6 +21,8 @@ import CardImgOverlay from '../../examples/Card/ImgOverlay';
 import CardGroup from '../../examples/Card/Group';
 import CardDeck from '../../examples/Card/Deck';
 import CardColumns from '../../examples/Card/Columns';
+import CardBgColor from '../../examples/Card/BgColor';
+import CardBorder from '../../examples/Card/Border';
 
 export default function CardSection({ data }) {
   return (
@@ -98,7 +100,6 @@ export default function CardSection({ data }) {
       <Heading h="2" id="card-example-img-overlay">
         Image Overlays
       </Heading>
-      <p />
       <ReactPlayground codeText={CardImgOverlay} />
 
       <Heading h="2" id="card-example-navigation">
@@ -106,6 +107,23 @@ export default function CardSection({ data }) {
       </Heading>
       <ReactPlayground codeText={CardNavTabs} />
       <ReactPlayground codeText={CardNavPills} />
+
+      <Heading h="2" id="card-example-styles">
+        Card Styles
+      </Heading>
+      <Heading h="3" id="card-example-card-background">
+        Background Color
+      </Heading>
+      <p>
+        You can change a card's appearance by changing their <code>bg</code>,
+        and <code>text</code> props.
+      </p>
+      <ReactPlayground codeText={CardBgColor} />
+
+      <Heading h="3" id="card-example-card-border">
+        Border Color
+      </Heading>
+      <ReactPlayground codeText={CardBorder} />
 
       <Heading h="2" id="card-example-layout">
         Card layout

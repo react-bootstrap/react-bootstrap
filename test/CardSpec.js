@@ -14,6 +14,20 @@ describe('<Card>', () => {
     );
   });
 
+  it('accepts a bg prop', () => {
+    mount(<Card bg="primary">Card</Card>).assertSingle('.card.bg-primary');
+  });
+
+  it('accepts a text prop', () => {
+    mount(<Card text="success">Card</Card>).assertSingle('.card.text-success');
+  });
+
+  it('accepts a border prop', () => {
+    mount(<Card border="danger">Card</Card>).assertSingle(
+      '.card.border-danger'
+    );
+  });
+
   it('should render children', () => {
     mount(
       <Card>

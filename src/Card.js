@@ -16,6 +16,27 @@ class Card extends React.Component {
      */
     bsPrefix: PropTypes.string.isRequired,
 
+    /**
+     * Sets card background
+     *
+     * @type('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')
+     */
+    bg: PropTypes.string,
+
+    /**
+     * Sets card text color
+     *
+     * @type('white')
+     */
+    text: PropTypes.string,
+
+    /**
+     * Sets card border color
+     *
+     * @type('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')
+     */
+    border: PropTypes.string,
+
     componentClass: elementType
   };
 
@@ -38,12 +59,23 @@ class Card extends React.Component {
       bsPrefix,
       className,
       componentClass: Component,
+      bg,
+      text,
+      border,
       ...props
     } = this.props;
 
+    const classes = classNames(
+      className,
+      bsPrefix,
+      bg && `bg-${bg}`,
+      text && `text-${text}`,
+      border && `border-${border}`
+    );
+
     return (
       <CardContext.Provider value={this.state.cardContext}>
-        <Component className={classNames(bsPrefix, className)} {...props} />
+        <Component className={classes} {...props} />
       </CardContext.Provider>
     );
   }
