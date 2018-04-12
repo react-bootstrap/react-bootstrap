@@ -1,5 +1,5 @@
 <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src="http://placehold.it/268x180" />
+  <Card.Img variant="top" src="/200x100.png" />
   <Card.Body>
     <Card.Title>Card Title</Card.Title>
     <Card.Text>

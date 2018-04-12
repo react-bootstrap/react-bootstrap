@@ -1,6 +1,6 @@
 <CardColumns>
   <Card>
-    <Card.Img variant="top" src="https://placehold.it/200x100" />
+    <Card.Img variant="top" src="/200x100.png" />
     <Card.Body>
       <Card.Title>Card title that wraps to a new line</Card.Title>
       <Card.Text>
@@ -23,7 +23,7 @@
     </blockquote>
   </Card>
   <Card>
-    <Card.Img variant="top" src="https://placehold.it/200x100" />
+    <Card.Img variant="top" src="/200x100.png" />
     <Card.Body>
       <Card.Title>Card title</Card.Title>
       <Card.Text>
@@ -61,7 +61,7 @@
     </Card.Body>
   </Card>
   <Card>
-    <Card.Img src="https://placehold.it/200x200" />
+    <Card.Img src="/200x100.png" />
   </Card>
   <Card className="text-right">
     <blockquote className="blockquote mb-0 card-body">

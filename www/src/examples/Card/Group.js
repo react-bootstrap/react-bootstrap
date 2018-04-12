@@ -1,6 +1,6 @@
 <CardGroup>
   <Card>
-    <Card.Img variant="top" src="https://placehold.it/200x100" />
+    <Card.Img variant="top" src="/200x100.png" />
     <Card.Body>
       <Card.Title>Card title</Card.Title>
       <Card.Text>
@@ -13,7 +13,7 @@
     </Card.Footer>
   </Card>
   <Card>
-    <Card.Img variant="top" src="https://placehold.it/200x100" />
+    <Card.Img variant="top" src="/200x100.png" />
     <Card.Body>
       <Card.Title>Card title</Card.Title>
       <Card.Text>
@@ -26,7 +26,7 @@
     </Card.Footer>
   </Card>
   <Card>
-    <Card.Img variant="top" src="https://placehold.it/200x100" />
+    <Card.Img variant="top" src="/200x100.png" />
     <Card.Body>
       <Card.Title>Card title</Card.Title>
       <Card.Text>

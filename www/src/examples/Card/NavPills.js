@@ -5,10 +5,10 @@
         <Nav.Link active>Active</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="link">Link</Nav.Link>
+        <Nav.Link href="#link">Link</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="disabled" disabled>
+        <Nav.Link href="#disabled" disabled>
           Disabled
         </Nav.Link>
       </Nav.Item>
