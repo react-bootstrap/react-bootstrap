@@ -70,5 +70,5 @@ describe('Process environment for tests', () => {
 const srcContext = require.context('../src', true, /.*\.js$/);
 srcContext.keys().forEach(srcContext);
 
-const testsContext = require.context('.', true, /Spec$/);
+const testsContext = require.context('.', true, /Card/);
 testsContext.keys().forEach(testsContext);

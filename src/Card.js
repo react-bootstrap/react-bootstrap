@@ -9,6 +9,8 @@ import CardContext from './CardContext';
 
 import CardImg from './CardImg';
 
+const CardBody = createWithBsPrefix('card-body');
+
 class Card extends React.Component {
   static propTypes = {
     /**
@@ -70,6 +72,7 @@ class Card extends React.Component {
       text,
       border,
       body,
+      children,
       ...props
     } = this.props;
 
@@ -81,18 +84,11 @@ class Card extends React.Component {
       border && `border-${border}`
     );
 
-    if (body) {
-      const { children, ...rest } = props;
-      return (
-        <Component className={classes} {...rest}>
-          <div className="card-body">{children}</div>
-        </Component>
-      );
-    }
-
     return (
       <CardContext.Provider value={this.state.cardContext}>
-        <Component className={classes} {...props} />
+        <Component className={classes} {...props}>
+          {body ? <CardBody>{children}</CardBody> : children}
+        </Component>
       </CardContext.Provider>
     );
   }
@@ -112,7 +108,7 @@ DecoratedCard.Subtitle = createWithBsPrefix('card-subtitle', {
   Component: divWithHeadingClass('h6')
 });
 
-DecoratedCard.Body = createWithBsPrefix('card-body');
+DecoratedCard.Body = CardBody;
 DecoratedCard.Link = createWithBsPrefix('card-link', {
   Component: 'a'
 });
