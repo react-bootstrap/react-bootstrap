@@ -9,6 +9,7 @@
   "dependencies": {
     "bootstrap": "^4.0.0",
     "classnames": "^2.2.5",
+    "formik": "^0.11.11",
     "gatsby": "2.0.0-alpha.41",
     "gatsby-link": "^1.6.38-10",
     "gatsby-plugin-catch-links": "2.0.1-1",
@@ -28,7 +29,8 @@
     "react-dom": "^15.5.4",
     "react-helmet": "^5.2.0",
     "react-live": "^1.9.2",
-    "shakespeare-data": "^2.5.0"
+    "shakespeare-data": "^2.5.0",
+    "yup": "^0.24.1"
   },
   "devDependencies": {
     "@babel/preset-flow": "^7.0.0-beta.40",
@@ -42,9 +44,7 @@
     }
   },
   "homepage": "https://react-bootstrap.github.io/",
-  "keywords": [
-    "gatsby"
-  ],
+  "keywords": ["gatsby"],
   "license": "MIT",
   "repository": {
     "type": "git",

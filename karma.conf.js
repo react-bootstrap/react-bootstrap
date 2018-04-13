@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 const { DefinePlugin } = require('webpack');
+=======
+const { plugins, rules } = require('webpack-atoms');
+const runBabel = require('./tools/run-babel');
+
+const babelOptions = {
+  ...runBabel.getConfig({ modules: false, test: true }),
+  cacheDirectory: true,
+};
+>>>>>>> WIP
 
 module.exports = config => {
   const { env } = process;
@@ -9,12 +19,13 @@ module.exports = config => {
     files: ['test/index.js'],
 
     preprocessors: {
-      'test/index.js': ['webpack', 'sourcemap']
+      'test/index.js': ['webpack', 'sourcemap'],
     },
 
     webpack: {
       mode: 'development',
       module: {
+<<<<<<< HEAD
         rules: [
           {
             test: /\.js$/,
@@ -33,35 +44,43 @@ module.exports = config => {
         new DefinePlugin({
           'process.env.NODE_ENV': JSON.stringify('test')
         })
+=======
+        rules: [rules.js(babelOptions)],
+      },
+      plugins: [
+        plugins.define({
+          'process.env.NODE_ENV': JSON.stringify('test'),
+        }),
+>>>>>>> WIP
       ],
       devtool: 'cheap-module-inline-source-map',
-      stats: 'minimal'
+      stats: 'minimal',
     },
 
     webpackMiddleware: {
-      noInfo: true
+      noInfo: true,
     },
 
     reporters: ['mocha', 'coverage'],
 
     mochaReporter: {
-      output: 'autowatch'
+      output: 'autowatch',
     },
 
     coverageReporter: {
       type: 'lcov',
-      dir: 'coverage'
+      dir: 'coverage',
     },
 
     customLaunchers: {
       ChromeCi: {
         base: 'Chrome',
-        flags: ['--no-sandbox']
-      }
+        flags: ['--no-sandbox'],
+      },
     },
 
     browsers: env.BROWSER ? env.BROWSER.split(',') : ['Chrome'],
 
-    singleRun: env.CONTINUOUS_INTEGRATION === 'true'
+    singleRun: env.CONTINUOUS_INTEGRATION === 'true',
   });
 };

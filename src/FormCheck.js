@@ -1,92 +1,152 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import warning from 'warning';
 
-import {
-  bsClass,
-  getClassSet,
-  prefix,
-  splitBsProps
-} from './utils/bootstrapUtils';
+import mapContextToProps from './utils/mapContextToProps';
+import createWithBsPrefix from './utils/createWithBsPrefix';
+import { createBootstrapComponent } from './ThemeProvider';
+import FormContext from './FormContext';
+import Feedback from './Feedback';
 
-const propTypes = {
-  inline: PropTypes.bool,
-  disabled: PropTypes.bool,
-  title: PropTypes.string,
-  type: PropTypes.oneOf(['radio', 'checkbox']).isRequired,
-  isValid: PropTypes.bool.isRequired,
-  isInvalid: PropTypes.bool.isRequired,
-  /**
-   * Attaches a ref to the `<input>` element. Only functions can be used here.
-   *
-   * ```js
-   * <FormCheck inputRef={ref => { this.input = ref; }} />
-   * ```
-   */
-  inputRef: PropTypes.func
-};
+const withFormContext = (field, Component) =>
+  mapContextToProps(Component, FormContext.Consumer, ({ id }, props) => ({
+    [field]: props[field] || id,
+  }));
 
-const defaultProps = {
-  type: 'checkbox',
-  inline: false,
-  disabled: false,
-  isValid: false,
-  isInvalid: false,
-  title: ''
-};
+const FormCheckInput = createWithBsPrefix('form-check-input', {
+  Component: 'input',
+});
+
+const FormCheckLabel = createWithBsPrefix('form-check-label', {
+  Component: 'label',
+});
 
 class FormCheck extends React.Component {
+  static propTypes = {
+    /**
+     * @default 'form-check'
+     */
+    bsPrefix: PropTypes.string,
+
+    /**
+     * The FormCheck `ref` will be forwarded to the underlying input element,
+     * which means it will be a DOM node, when resolved.
+     *
+     * @type {ReactRef}
+     * @alias {ref}
+     */
+    inputRef: PropTypes.any,
+
+    /** A HTML id attribute, necessary for proper form accessibility. */
+    id: PropTypes.string,
+
+    inline: PropTypes.bool,
+    disabled: PropTypes.bool,
+    title: PropTypes.string,
+    label: PropTypes.node,
+
+    /** The type of checkable. */
+    type: PropTypes.oneOf(['radio', 'checkbox']).isRequired,
+
+    /** Manually style the input as valid */
+    isValid: PropTypes.bool.isRequired,
+    /** A message to display when the input is valid */
+    validFeedback: PropTypes.node,
+
+    /** Manually style the input as invalid */
+    isInvalid: PropTypes.bool.isRequired,
+    /** A message to display when the input is invalid */
+    invalidFeedback: PropTypes.node,
+  };
+
+  static defaultProps = {
+    type: 'checkbox',
+    inline: false,
+    disabled: false,
+    isValid: false,
+    isInvalid: false,
+    title: '',
+  };
+
   render() {
     const {
+      id,
+      bsPrefix,
       inline,
       disabled,
       isValid,
       isInvalid,
-      inputRef,
+      inputRef, // eslint-disable-line react/prop-types
       className,
       style,
       title,
       type,
+      label,
       children,
       ...props
     } = this.props;
 
-    const [bsProps, elementProps] = splitBsProps(props);
+    const hasChildren =
+      children != null &&
+      children !== false &&
+      React.Children.count(children) > 0;
+
+    const hasLabel =
+      label != null && label !== false && React.Children.count(label) > 0;
 
     return (
       <div
+        style={style}
         className={classNames(
           className,
-          getClassSet(bsProps),
-          disabled && 'disabled',
-          inline && prefix(bsProps, 'inline')
+          bsPrefix,
+          inline && `${bsPrefix}-inline`,
         )}
-        style={style}
-        title={title}
       >
-        <label // eslint-disable-line jsx-a11y/label-has-for
-          title={title}
-          className={prefix(bsProps, 'label')}
-        >
-          <input
-            {...elementProps}
-            ref={inputRef}
-            type={type}
-            disabled={disabled}
-            className={classNames(
-              prefix(bsProps, 'input'),
-              isValid && prefix(bsProps, 'is-valid'),
-              isInvalid && prefix(bsProps, 'is-invalid')
+        {hasChildren ? (
+          children
+        ) : (
+          <>
+            <FormCheckInput
+              {...props}
+              id={id}
+              type={type}
+              ref={inputRef}
+              disabled={disabled}
+              className={classNames(
+                isValid && 'is-valid',
+                isInvalid && 'is-invalid',
+                !hasLabel && 'position-static',
+              )}
+            />
+            {hasLabel && (
+              <FormCheckLabel htmlFor={id} title={title}>
+                {label}
+              </FormCheckLabel>
             )}
-          />
-          {children}
-        </label>
+          </>
+        )}
       </div>
     );
   }
 }
 
-FormCheck.propTypes = propTypes;
-FormCheck.defaultProps = defaultProps;
+const mapContext = ({ controlId }, { id }) => {
+  warning(
+    controlId == null || !id,
+    '`controlId` is ignored on `<FormCheck>` when `id` is specified.',
+  );
+  return {
+    id: id || controlId,
+  };
+};
 
-export default bsClass('form-check', FormCheck);
+export default mapContextToProps(
+  createBootstrapComponent(FormCheck, {
+    forwardRefAs: 'inputRef',
+    prefix: 'form-check',
+  }),
+  FormContext.Consumer,
+  mapContext,
+);

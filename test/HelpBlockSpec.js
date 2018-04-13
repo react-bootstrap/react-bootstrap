@@ -1,18 +1,18 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import HelpBlock from '../src/HelpBlock';
+import FormText from '../src/FormText';
 
-describe('<HelpBlock>', () => {
+describe('<FormText>', () => {
   it('should render correctly', () => {
     expect(
       shallow(
-        <HelpBlock id="foo" className="my-help-block">
+        <FormText id="foo" className="my-help-block">
           Help contents
-        </HelpBlock>
+        </FormText>,
       )
         .assertSingle('#foo.help-block.my-help-block')
-        .text()
+        .text(),
     ).to.equal('Help contents');
   });
 });

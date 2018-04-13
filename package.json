@@ -35,7 +35,8 @@
     ]
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "all"
   },
   "files": [
     "CHANGELOG.md",
@@ -134,5 +135,8 @@
     "bowerRepo": "git@github.com:react-bootstrap/react-bootstrap-bower.git",
     "docsRepo": "git@github.com:react-bootstrap/react-bootstrap.github.io.git",
     "docsRoot": "www/public/"
+  },
+  "resolutions": {
+    "react-test-renderer": "16.3.0-alpha.3"
   }
 }

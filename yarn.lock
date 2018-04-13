@@ -8414,9 +8414,24 @@ react-style-proptype@^3.0.0:
   dependencies:
     prop-types "^15.5.4"
 
+<<<<<<< HEAD
 "react-test-renderer@^16.0.0-0  || ^16.3.0-0", react-test-renderer@^16.3.2:
   version "16.4.0"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.4.0.tgz#0dbe0e24263e94e1830c7afb1f403707fad313a3"
+=======
+react-test-renderer@16.3.0-alpha.3, "react-test-renderer@^16.0.0-0  || ^16.3.0-0":
+  version "16.3.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.3.0-alpha.3.tgz#ca59613a48ae15aec7f62a32c509811b0e73f973"
+  dependencies:
+    fbjs "^0.8.16"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
+    react-is "^16.3.0-alpha.3"
+
+react-test-renderer@^16.3.2:
+  version "16.3.2"
+  resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.3.2.tgz#3d1ed74fda8db42521fdf03328e933312214749a"
+>>>>>>> WIP
   dependencies:
     fbjs "^0.8.16"
     object-assign "^4.1.1"

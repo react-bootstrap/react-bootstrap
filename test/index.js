@@ -10,7 +10,12 @@ Enzyme.configure({ adapter: new Adapter() });
 function assertLength(length) {
   return function $assertLength(selector) {
     let result = this.find(selector);
-    expect(result).to.have.length(length);
+    expect(
+      result,
+      `Expected to find ${length} match but found ${
+        result.length
+      } for selector "${selector}" on element: \n\n${this.debug()}`,
+    ).to.have.length(length);
     return result;
   };
 }
