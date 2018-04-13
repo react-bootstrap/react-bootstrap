@@ -1,6 +1,6 @@
 const path = require('path');
 
-exports.modifyWebpackConfig = function modifyWebpackConfig({
+exports.onCreateWebpackConfig = function onCreateWebpackConfig({
   actions,
   plugins,
   loaders

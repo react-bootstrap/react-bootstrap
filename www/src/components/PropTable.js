@@ -44,7 +44,7 @@ function getTypeName(prop) {
 
 class PropTable extends React.Component {
   static propTypes = {
-    metadata: PropTypes.object.isRequired
+    metadata: PropTypes.object.isRequired,
   };
 
   getType(prop) {
@@ -228,10 +228,7 @@ export const metadataFragment = graphql`
     }
     props {
       name
-      doclets {
-        type
-        controllable
-      }
+      doclets
       defaultValue {
         value
         computed
