@@ -44,7 +44,7 @@ function getTypeName(prop) {
 
 class PropTable extends React.Component {
   static propTypes = {
-    metadata: PropTypes.object.isRequired
+    metadata: PropTypes.object.isRequired,
   };
 
   getType(prop) {
