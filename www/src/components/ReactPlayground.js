@@ -32,7 +32,7 @@ export default class Playground extends React.Component {
         noInline={codeText.includes('render(')}
       >
         <div className={classNames('bs-example', this.props.exampleClassName)}>
-          <LivePreview />
+          <LivePreview className="bs-example-preview" />
           <LiveError />
         </div>
         <div className="bs-code-editor">

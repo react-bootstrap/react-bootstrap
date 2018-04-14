@@ -251,23 +251,23 @@
 }
 
 /* Tweak content of examples for optimum awesome */
-.bs-example > p:last-child,
-.bs-example > ul:last-child,
-.bs-example > ol:last-child,
-.bs-example > blockquote:last-child,
-.bs-example > .form-control:last-child,
-.bs-example > .table:last-child,
-.bs-example > .navbar:last-child,
-.bs-example > .jumbotron:last-child,
-.bs-example > .alert:last-child,
-.bs-example > .panel:last-child,
-.bs-example > .list-group:last-child,
-.bs-example > .well:last-child,
-.bs-example > .progress:last-child,
-.bs-example > .table-responsive:last-child > .table {
+.bs-example-preview > p:last-child,
+.bs-example-preview > ul:last-child,
+.bs-example-preview > ol:last-child,
+.bs-example-preview > blockquote:last-child,
+.bs-example-preview > .form-control:last-child,
+.bs-example-preview > .table:last-child,
+.bs-example-preview > .navbar:last-child,
+.bs-example-preview > .jumbotron:last-child,
+.bs-example-preview > .alert:last-child,
+.bs-example-preview > .panel:last-child,
+.bs-example-preview > .list-group:last-child,
+.bs-example-preview > .well:last-child,
+.bs-example-preview > .progress:last-child,
+.bs-example-preview > .table-responsive:last-child > .table {
   margin-bottom: 0;
 }
-.bs-example > p > .close {
+.bs-example-preview > p > .close {
   float: none;
 }
 
