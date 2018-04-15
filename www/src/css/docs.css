@@ -306,30 +306,7 @@
   max-width: 400px;
 }
 
-/* Pager */
-.bs-example > .pager {
-  margin-top: 0;
-}
-
 /* Example modals */
-.bs-example-modal {
-  background-color: #f5f5f5;
-}
-.bs-example-modal .modal {
-  position: relative;
-  top: auto;
-  right: auto;
-  bottom: auto;
-  left: auto;
-  z-index: 1;
-  display: block;
-}
-.bs-example-modal .modal-dialog {
-  left: auto;
-  margin-right: auto;
-  margin-left: auto;
-}
-
 .custom-modal {
   width: 90%;
 }
