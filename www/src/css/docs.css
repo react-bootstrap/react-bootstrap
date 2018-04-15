@@ -272,9 +272,9 @@
 }
 
 /* Images */
-.bs-example > .rounded-circle,
-.bs-example > .img-rounded,
-.bs-example > .img-thumbnail {
+.bs-example-images .rounded-circle,
+.bs-example-images .rounded,
+.bs-example-images .img-thumbnail {
   margin: 5px;
 }
 

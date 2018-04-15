@@ -24,7 +24,10 @@ export default function ImageSection({ data }) {
         Use the <code>rounded</code>, <code>roundedCircle</code> and{' '}
         <code>thumbnail</code> props to customise the image.
       </p>
-      <ReactPlayground codeText={ImageShape} />
+      <ReactPlayground
+        exampleClassName="bs-example-images"
+        codeText={ImageShape}
+      />
 
       <h3>
         <Anchor id="image-fluid">Fluid</Anchor>
@@ -32,7 +35,10 @@ export default function ImageSection({ data }) {
       <p>
         Use the <code>fluid</code> to scale image nicely to the parent element.
       </p>
-      <ReactPlayground codeText={ImageFluid} />
+      <ReactPlayground
+        exampleClassName="bs-example-images"
+        codeText={ImageFluid}
+      />
 
       <h3>
         <Anchor id="image-props">Props</Anchor>
@@ -53,13 +59,19 @@ export default function ImageSection({ data }) {
         <Anchor id="thumbnail-anchor">Anchor Thumbnail</Anchor>
       </h3>
       <p>Creates an anchor wrapping an image.</p>
-      <ReactPlayground codeText={ThumbnailAnchor} />
+      <ReactPlayground
+        exampleClassName="bs-example-images"
+        codeText={ThumbnailAnchor}
+      />
 
       <h3>
         <Anchor id="thumbnail-divider">Divider Thumbnail</Anchor>
       </h3>
       <p>Creates a divider wrapping an image and other children elements.</p>
-      <ReactPlayground codeText={ThumbnailDiv} />
+      <ReactPlayground
+        exampleClassName="bs-example-images"
+        codeText={ThumbnailDiv}
+      />
 
       <h3>
         <Anchor id="thumbnail-props">Props</Anchor>
