@@ -279,7 +279,7 @@
 }
 
 /* Tables */
-.bs-example > .table-responsive > .table {
+.bs-example-preview > .table-responsive > .table {
   background-color: #fff;
 }
 
