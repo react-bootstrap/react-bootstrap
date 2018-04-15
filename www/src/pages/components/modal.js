@@ -22,7 +22,10 @@ export default function ModalSection({ data }) {
         <Anchor id="modals-static">Static Markup</Anchor>
       </h3>
       <p>A modal dialog component</p>
-      <ReactPlayground codeText={ModalStatic} />
+      <ReactPlayground
+        exampleClassName="bs-example-modals-static"
+        codeText={ModalStatic}
+      />
 
       <h3>
         <Anchor id="modals-live">Basic example</Anchor>

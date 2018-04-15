@@ -307,6 +307,9 @@
 }
 
 /* Example modals */
+.bs-example-modals-static {
+  background-color: #f5f5f5;
+}
 .custom-modal {
   width: 90%;
 }
