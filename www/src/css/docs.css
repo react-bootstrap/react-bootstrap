@@ -284,13 +284,9 @@
 }
 
 /* Buttons */
-.bs-example > .btn,
-.bs-example > .btn-group {
+.bs-example-buttons .btn {
   margin-top: 5px;
   margin-bottom: 5px;
-}
-.bs-example > .btn-toolbar + .btn-toolbar {
-  margin-top: 10px;
 }
 
 /* Forms */

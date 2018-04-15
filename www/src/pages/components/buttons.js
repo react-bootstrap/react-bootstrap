@@ -30,7 +30,10 @@ export default function ButtonSection({ data }) {
         Use any of the available button style types to quickly create a styled
         button. Just modify the <code>variant</code> prop.
       </p>
-      <ReactPlayground codeText={ButtonTypes} />
+      <ReactPlayground
+        exampleClassName="bs-example-buttons"
+        codeText={ButtonTypes}
+      />
       <h3>
         <Anchor id="buttons-outline-btns">Outline buttons</Anchor>
       </h3>
@@ -38,7 +41,10 @@ export default function ButtonSection({ data }) {
         For a lighter touch, Buttons also come in <code>outline-*</code>{' '}
         variants with no background color.
       </p>
-      <ReactPlayground codeText={ButtonOutlineTypes} />
+      <ReactPlayground
+        exampleClassName="bs-example-buttons"
+        codeText={ButtonOutlineTypes}
+      />
       <h3>
         <Anchor id="buttons-tags">Button tags</Anchor>
       </h3>
@@ -51,7 +57,10 @@ export default function ButtonSection({ data }) {
         <code>input</code>). React Bootstrap will take care of the proper ARIA
         roles for you.
       </p>
-      <ReactPlayground codeText={ButtonTagTypes} />
+      <ReactPlayground
+        exampleClassName="bs-example-buttons"
+        codeText={ButtonTagTypes}
+      />
       <h3>
         <Anchor id="buttons-sizes">Sizes</Anchor>
       </h3>
@@ -59,12 +68,18 @@ export default function ButtonSection({ data }) {
         Fancy larger or smaller buttons? Add <code>size="large"</code>,{' '}
         <code>size="small"</code> for additional sizes.
       </p>
-      <ReactPlayground codeText={ButtonSizes} />
+      <ReactPlayground
+        exampleClassName="bs-example-buttons"
+        codeText={ButtonSizes}
+      />
       <p>
         Create block level buttons—those that span the full width of a parent—by
         adding <code>block</code>
       </p>
-      <ReactPlayground codeText={ButtonBlock} />
+      <ReactPlayground
+        exampleClassName="bs-example-buttons"
+        codeText={ButtonBlock}
+      />
       <h3>
         <Anchor id="buttons-active">Active state</Anchor>
       </h3>
@@ -72,14 +87,20 @@ export default function ButtonSection({ data }) {
         To set a buttons active state simply set the components{' '}
         <code>active</code> prop.
       </p>
-      <ReactPlayground codeText={ButtonActive} />
+      <ReactPlayground
+        exampleClassName="bs-example-buttons"
+        codeText={ButtonActive}
+      />
       <h3>
         <Anchor id="buttons-disabled">Disabled state</Anchor>
       </h3>
       <p>
         Make buttons look inactive by adding the <code>disabled</code> prop to.
       </p>
-      <ReactPlayground codeText={ButtonDisabled} />
+      <ReactPlayground
+        exampleClassName="bs-example-buttons"
+        codeText={ButtonDisabled}
+      />
       <p>
         Watch out! <code>{'<a>'}</code> element's don't naturally support a
         disabled attribute. In browsers that support it this is handled with a{' '}
@@ -99,7 +120,10 @@ export default function ButtonSection({ data }) {
         easily be done by updating your <code>{'<Button />'}</code>&#8217;s
         props from a state change like below.
       </p>
-      <ReactPlayground codeText={ButtonLoading} />
+      <ReactPlayground
+        exampleClassName="bs-example-buttons"
+        codeText={ButtonLoading}
+      />
       <h3>
         <Anchor id="buttons-checkbox-radio">Checkbox / Radio</Anchor>
       </h3>
@@ -108,7 +132,10 @@ export default function ButtonSection({ data }) {
         <code>radio</code> form elements. This is helpful when you want a toggle
         button that works neatly inside an HTML form.
       </p>
-      <ReactPlayground codeText={ToggleButton} />
+      <ReactPlayground
+        exampleClassName="bs-example-buttons"
+        codeText={ToggleButton}
+      />
       <p>
         The above handles styling, But requires manually controlling the{' '}
         <code>checked</code> state for each radio or checkbox in the group.
@@ -122,9 +149,15 @@ export default function ButtonSection({ data }) {
         <code>value</code> in a similarly named radio group.
       </p>
       <h4>Uncontrolled</h4>
-      <ReactPlayground codeText={ToggleButtonGroupUncontrolled} />
+      <ReactPlayground
+        exampleClassName="bs-example-buttons"
+        codeText={ToggleButtonGroupUncontrolled}
+      />
       <h4>Controlled</h4>
-      <ReactPlayground codeText={ToggleButtonGroupControlled} />
+      <ReactPlayground
+        exampleClassName="bs-example-buttons"
+        codeText={ToggleButtonGroupControlled}
+      />
       <h2>
         <Anchor id="buttons-props">Props</Anchor>
       </h2>
