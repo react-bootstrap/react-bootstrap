@@ -9,11 +9,7 @@ for (let number = 1; number <= 10; number++) {
 const paginationBasic = (
   <div>
     <Pagination>{items}</Pagination>
-    <br />
-
     <Pagination bsSize="large">{items}</Pagination>
-    <br />
-
     <Pagination bsSize="small">{items}</Pagination>
   </div>
 );

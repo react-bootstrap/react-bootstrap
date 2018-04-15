@@ -302,21 +302,8 @@
 }
 
 /* List groups */
-.bs-example > .list-group {
+.bs-example-preview > .list-group {
   max-width: 400px;
-}
-
-@media (min-width: 768px) {
-  .bs-navbar-top-example .navbar-fixed-top,
-  .bs-navbar-bottom-example .navbar-fixed-bottom {
-    position: absolute;
-  }
-}
-
-/* Pagination */
-.bs-example .pagination {
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 /* Pager */
