@@ -13,6 +13,7 @@ const components = [
   'breadcrumb',
   'buttons',
   'button-group',
+  'cards',
   'carousel',
   'dropdowns',
   'forms',

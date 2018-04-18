@@ -11,6 +11,7 @@ import TabContext from './TabContext';
 import mapContextToProps from './utils/mapContextToProps';
 import NavContext from './NavContext';
 import NavbarContext from './NavbarContext';
+import CardContext from './CardContext';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
 
@@ -25,6 +26,8 @@ class Nav extends React.Component {
 
     /** @private */
     navbarBsPrefix: PropTypes.string,
+    /** @private */
+    cardHeaderBsPrefix: PropTypes.string,
 
     /**
      * The visual variant of the nav items.
@@ -171,6 +174,7 @@ class Nav extends React.Component {
     const {
       bsPrefix,
       navbarBsPrefix,
+      cardHeaderBsPrefix,
       variant,
       fill,
       justify,
@@ -198,6 +202,7 @@ class Nav extends React.Component {
           className={classNames(className, {
             [bsPrefix]: !navbar,
             [`${navbarBsPrefix}-nav`]: navbar,
+            [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
             [`${bsPrefix}-${variant}`]: !!variant,
             [`${bsPrefix}-fill`]: fill,
             [`${bsPrefix}-justified`]: justify
@@ -216,15 +221,20 @@ const UncontrolledNav = uncontrollable(createBootstrapComponent(Nav, 'nav'), {
 
 const DecoratedNav = mapContextToProps(
   UncontrolledNav,
-  [TabContext.Consumer, NavbarContext.Consumer],
-  (tabContext, navbarContext, { role, navbar }) => {
-    if (!tabContext && !navbarContext) return null;
+  [TabContext.Consumer, NavbarContext.Consumer, CardContext.Consumer],
+  (tabContext, navbarContext, cardContext, { role, navbar }) => {
+    if (!tabContext && !navbarContext && !cardContext) return null;
 
     if (navbarContext)
       return {
         onSelect: navbarContext.onSelect,
         navbarBsPrefix: navbarContext.bsPrefix,
         navbar: navbar == null ? true : navbar
+      };
+
+    if (cardContext)
+      return {
+        cardHeaderBsPrefix: cardContext.cardHeaderBsPrefix
       };
 
     const {
