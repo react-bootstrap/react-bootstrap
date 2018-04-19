@@ -4,13 +4,13 @@ import React from 'react';
 import Heading from '../../components/Heading';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
-import ListGroupActive from '../../examples/ListGroupActive';
-import ListGroupCustom from '../../examples/ListGroupCustom';
-import ListGroupDefault from '../../examples/ListGroupDefault';
-import ListGroupHeader from '../../examples/ListGroupHeader';
-import ListGroupLinked from '../../examples/ListGroupLinked';
-import ListGroupStyle from '../../examples/ListGroupStyle';
 import withLayout from '../../withLayout';
+import ListGroupDefault from '../../examples/ListGroup/Default';
+import ListGroupLinked from '../../examples/ListGroup/Linked';
+import ListGroupActive from '../../examples/ListGroup/Active';
+import ListGroupStyle from '../../examples/ListGroup/Style';
+import ListGroupHeader from '../../examples/ListGroup/Header';
+import ListGroupCustom from '../../examples/ListGroup/Custom';
 
 export default withLayout(function ListGroupSection({ data }) {
   return (
@@ -28,6 +28,15 @@ export default withLayout(function ListGroupSection({ data }) {
       </Heading>
       <ReactPlayground codeText={ListGroupDefault} />
 
+      <Heading h="2" id="listgroup-styling-state">
+        Styling by state
+      </Heading>
+      <p>
+        Set the <code>active</code> or <code>disabled</code> prop to{' '}
+        <code>true</code> to mark or disable the item.
+      </p>
+      <ReactPlayground codeText={ListGroupActive} />
+
       <Heading h="3" id="listgroup-example-linked">
         Linked
       </Heading>
@@ -36,15 +45,6 @@ export default withLayout(function ListGroupSection({ data }) {
         <code>ListGroupItem</code>, to create a linked or clickable element.
       </p>
       <ReactPlayground codeText={ListGroupLinked} />
-
-      <Heading h="3" id="listgroup-styling-state">
-        Styling by state
-      </Heading>
-      <p>
-        Set the <code>active</code> or <code>disabled</code> prop to{' '}
-        <code>true</code> to mark or disable the item.
-      </p>
-      <ReactPlayground codeText={ListGroupActive} />
 
       <Heading h="3" id="listgroup-styling-color">
         Styling by color
@@ -89,10 +89,10 @@ export default withLayout(function ListGroupSection({ data }) {
 export const query = graphql`
   query ListGroupQuery {
     ListGroup: componentMetadata(displayName: { eq: "ListGroup" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     ListGroupItem: componentMetadata(displayName: { eq: "ListGroupItem" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
   }
 `;
