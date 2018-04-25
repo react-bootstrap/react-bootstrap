@@ -10,11 +10,15 @@ class Example extends React.Component {
   render() {
     return (
       <div>
-        <Button onClick={() => this.setState({ open: !this.state.open })}>
+        <Button
+          onClick={() => this.setState({ open: !this.state.open })}
+          aria-expanded={this.state.open}
+          aria-controls="collapseExample"
+        >
           click
         </Button>
         <Collapse in={this.state.open}>
-          <div>
+          <div id="collapseExample">
             <Well>
               Anim pariatur cliche reprehenderit, enim eiusmod high life
               accusamus terry richardson ad squid. Nihil anim keffiyeh

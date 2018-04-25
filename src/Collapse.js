@@ -119,7 +119,20 @@ const propTypes = {
   /**
    * ARIA role of collapsible element
    */
-  role: PropTypes.string
+  role: PropTypes.string,
+
+  /**
+   * ARIA attribute added to the control element conveys the current state of the
+   * collapsible element to assistive technologies.
+   */
+  'aria-expanded': PropTypes.string,
+
+  /**
+   * ARIA attribute must be added to the control element specifying the id of the
+   * collapsible element. Assitive technologies can use thsi attribute to provide
+   * navigation cues.
+   */
+  'aria-controls': PropTypes.string
 };
 
 const defaultProps = {
