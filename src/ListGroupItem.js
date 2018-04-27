@@ -1,94 +1,66 @@
 import classNames from 'classnames';
-import React, { cloneElement } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import elementType from 'prop-types-extra/lib/elementType';
 
-import {
-  bsClass,
-  bsStyles,
-  getClassSet,
-  prefix,
-  splitBsProps,
-} from './utils/bootstrapUtils';
-import { State } from './utils/StyleConfig';
-
-const propTypes = {
-  active: PropTypes.any,
-  disabled: PropTypes.any,
-  header: PropTypes.node,
-  listItem: PropTypes.bool,
-  onClick: PropTypes.func,
-  href: PropTypes.string,
-  type: PropTypes.string,
-};
-
-const defaultProps = {
-  listItem: false,
-};
+import { createBootstrapComponent } from './ThemeProvider';
 
 class ListGroupItem extends React.Component {
-  renderHeader(header, headingClassName) {
-    if (React.isValidElement(header)) {
-      return cloneElement(header, {
-        className: classNames(header.props.className, headingClassName),
-      });
-    }
+  static propTypes = {
+    /**
+     * @default 'list-group-item'
+     */
+    bsPrefix: PropTypes.string.isRequired,
 
-    return <h4 className={headingClassName}>{header}</h4>;
-  }
+    /**
+     * Sets contextual classes for list item
+     * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
+     */
+    variant: PropTypes.string,
+    /**
+     * Sets list item as active
+     */
+    active: PropTypes.bool,
+
+    /**
+     * Sets list item state as disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
+     * You can use a custom element type for this component
+     */
+    as: elementType,
+  };
+
+  static defaultProps = {
+    variant: null,
+    active: false,
+    disabled: false,
+    as: 'li',
+  };
 
   render() {
     const {
+      bsPrefix,
       active,
       disabled,
       className,
-      header,
-      listItem,
-      children,
+      variant,
+      as: Component,
       ...props
     } = this.props;
 
-    const [bsProps, elementProps] = splitBsProps(props);
+    const classes = classNames(
+      bsPrefix,
+      active && 'active',
+      disabled && 'disabled',
+      `${bsPrefix}-${variant}`,
+      className,
+    );
 
-    const classes = {
-      ...getClassSet(bsProps),
-      active,
-      disabled,
-    };
-
-    let Component;
-
-    if (elementProps.href) {
-      Component = 'a';
-    } else if (elementProps.onClick) {
-      Component = 'button';
-      elementProps.type = elementProps.type || 'button';
-    } else if (listItem) {
-      Component = 'li';
-    } else {
-      Component = 'span';
-    }
-
-    elementProps.className = classNames(className, classes);
-
-    // TODO: Deprecate `header` prop.
-    if (header) {
-      return (
-        <Component {...elementProps}>
-          {this.renderHeader(header, prefix(bsProps, 'heading'))}
-
-          <p className={prefix(bsProps, 'text')}>{children}</p>
-        </Component>
-      );
-    }
-
-    return <Component {...elementProps}>{children}</Component>;
+    return <Component {...props} className={classes} />;
   }
 }
 
-ListGroupItem.propTypes = propTypes;
-ListGroupItem.defaultProps = defaultProps;
-
-export default bsClass(
-  'list-group-item',
-  bsStyles(Object.values(State), ListGroupItem),
-);
+export default createBootstrapComponent(ListGroupItem, 'list-group-item');
