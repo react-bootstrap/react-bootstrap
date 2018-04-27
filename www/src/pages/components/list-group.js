@@ -8,7 +8,6 @@ import ListGroupDefault from '../../examples/ListGroup/Default';
 import ListGroupLinked from '../../examples/ListGroup/Linked';
 import ListGroupActive from '../../examples/ListGroup/Active';
 import ListGroupStyle from '../../examples/ListGroup/Style';
-import ListGroupHeader from '../../examples/ListGroup/Header';
 import ListGroupCustom from '../../examples/ListGroup/Custom';
 
 export default function ListGroupSection({ data }) {
@@ -52,15 +51,6 @@ export default function ListGroupSection({ data }) {
         Set the <code>bsStyle</code> prop to style the item
       </p>
       <ReactPlayground codeText={ListGroupStyle} />
-
-      <Heading h="3" id="listgroup-with-header">
-        With header
-      </Heading>
-      <p>
-        Set the <code>header</code> prop to create a structured item, with a
-        heading and a body area.
-      </p>
-      <ReactPlayground codeText={ListGroupHeader} />
 
       <Heading h="3" id="listgroup-with-custom-children">
         With custom component children
