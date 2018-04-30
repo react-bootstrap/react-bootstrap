@@ -67,11 +67,11 @@ class DropdownItem extends React.Component {
      */
     onSelect: PropTypes.func,
 
-    componentClass: elementType
+    as: elementType
   };
 
   static defaultProps = {
-    componentClass: SafeAnchor,
+    as: SafeAnchor,
     divider: false,
     disabled: false,
     header: false
@@ -98,7 +98,7 @@ class DropdownItem extends React.Component {
       children,
       eventKey: _,
       onSelect: _1,
-      componentClass: Component,
+      as: Component,
       ...props
     } = this.props;
 

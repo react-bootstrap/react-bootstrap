@@ -1,4 +1,4 @@
-<Dropdown componentClass={ButtonGroup} id="dropdown-split-basic">
+<Dropdown as={ButtonGroup} id="dropdown-split-basic">
   <Button variant="success">Split Button</Button>
   <Dropdown.Toggle variant="success" split />
 

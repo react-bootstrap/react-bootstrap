@@ -64,7 +64,7 @@ class SplitButton extends React.Component {
     } = this.props;
 
     return (
-      <Dropdown {...props} componentClass={ButtonGroup}>
+      <Dropdown {...props} as={ButtonGroup}>
         <Button
           size={size}
           variant={variant}

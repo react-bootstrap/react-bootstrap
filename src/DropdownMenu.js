@@ -34,7 +34,14 @@ class DropdownMenu extends React.Component {
      */
     rootCloseEvent: PropTypes.oneOf(['click', 'mousedown']),
 
-    componentClass: elementType,
+    /**
+     * Control the rendering of the DropdownMenu. All non-menu props
+     * (listed here) are passed through to the `as` Component.
+     *
+     * If providing a custom, non DOM, component. the `show` and `alignRight` props
+     * are also injected and should be handled appropriatedly.
+     */
+    as: elementType,
 
     /** @private */
     menuRef: PropTypes.any
@@ -42,7 +49,7 @@ class DropdownMenu extends React.Component {
 
   static defaultProps = {
     alignRight: false,
-    componentClass: 'div'
+    as: 'div'
   };
 
   handleRootClose = event => {
@@ -57,7 +64,7 @@ class DropdownMenu extends React.Component {
       alignRight,
       className,
       rootCloseEvent,
-      componentClass: Component,
+      as: Component,
       ...props
     } = this.props;
 
@@ -71,6 +78,13 @@ class DropdownMenu extends React.Component {
         alignRight && `${bsPrefix}-right`
       )
     };
+
+    // For custom components provide additional, non-DOM, props;
+    if (typeof Component !== 'string') {
+      menuProps.show = show;
+      menuProps.alignRight = alignRight;
+    }
+
     return (
       <RootCloseWrapper
         disabled={!show}

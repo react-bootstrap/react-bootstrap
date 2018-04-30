@@ -51,7 +51,7 @@ export default function DropdownSection({ data }) {
         </a>, but it's very specific to a certain kind a menu. <ARIA /> menus,
         must only contain <code>role="menuitem"</code>,{' '}
         <code>role="menuitemcheckbox"</code>, or{' '}
-        <code>role="menuitemcheckbox"</code>.
+        <code>role="menuitemradio"</code>.
       </p>
       <p>
         On the other hand, Bootstrap's dropdowns are designed to more generic
@@ -183,36 +183,12 @@ export default function DropdownSection({ data }) {
 
       <p>
         For those that want to customize everything, you can forgo the included
-        Toggle and Menu components, and create your own. In order to tell the
-        Dropdown component what role your custom components play, add a special
-        prop <code>bsRole</code> to your menu or toggle components. The Dropdown
-        expects at least one component with <code>bsRole="toggle"</code> and
-        exactly one with <code>bsRole="menu"</code>. Custom toggle and menu
-        components must be able to accept refs.
+        Toggle and Menu components, and create your own. By providing custom
+        components to the <code>as</code> prop, you can control how each
+        component behaves. Custom toggle and menu components{' '}
+        <strong>must</strong> be able to accept refs.
       </p>
-      <div className="bs-callout bs-callout-warning">
-        <h4>
-          Using <code>rootCloseEvent</code> with custom dropdown components
-        </h4>
-        <p>
-          If you want to use the <code>rootCloseEvent</code> prop with your
-          custom dropdown components, you will have to pass the{' '}
-          <code>rootCloseEvent</code> to <code>{'<RootCloseWrapper>'}</code> in
-          your custom dropdown menu component{' '}
-          <a href="https://github.com/react-bootstrap/react-bootstrap/blob/v0.31.5/src/DropdownMenu.js#L115-L119">
-            similarly to how it is implemented in{' '}
-            <code>{'<Dropdown.Menu>'}</code>
-          </a>.
-        </p>
-        <p>
-          You will have to add <code>react-overlays</code> as a dependency and
-          import <code>{'<RootCloseWrapper>'}</code> from{' '}
-          <code>react-overlays</code> yourself like:{' '}
-          <code>
-            import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper'
-          </code>.
-        </p>
-      </div>
+
       <ReactPlayground codeText={DropdownButtonCustomMenu} />
 
       <h3>

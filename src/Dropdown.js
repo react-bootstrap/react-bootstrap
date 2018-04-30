@@ -170,7 +170,10 @@ class Dropdown extends React.Component {
     if (!this.menu) return null;
 
     const { bsPrefix } = this.props;
-    let items = qsa(this.menu, `.${bsPrefix}-item:not(.disabled)`);
+    let items = qsa(
+      this.menu,
+      `.${bsPrefix}-item:not(.disabled):not(:disabled)`
+    );
 
     let index = items.indexOf(current) + offset;
     index = Math.max(0, Math.min(index, items.length));

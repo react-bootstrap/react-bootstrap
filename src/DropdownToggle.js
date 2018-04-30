@@ -16,7 +16,7 @@ class DropdownToggle extends React.Component {
     title: PropTypes.string,
 
     split: PropTypes.bool,
-    componentClass: elementType,
+    as: elementType,
 
     /**
      * to passthrough to the underlying button or whatever from DropdownButton
@@ -26,7 +26,7 @@ class DropdownToggle extends React.Component {
   };
 
   static defaultProps = {
-    componentClass: Button
+    as: Button
   };
 
   render() {
@@ -36,7 +36,7 @@ class DropdownToggle extends React.Component {
       className,
       children,
       childBsPrefix,
-      componentClass: Component,
+      as: Component,
       ...props
     } = this.props;
 
