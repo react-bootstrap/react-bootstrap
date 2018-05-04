@@ -44,9 +44,10 @@ class DropdownToggle extends React.Component {
     // underlying component, to allow it to render size and style variants.
     return (
       <DropdownContext.Consumer>
-        {({ toggleId, setToggleElement, onToggle }) => (
+        {({ toggleId, setToggleElement, onToggle, show }) => (
           <Component
             aria-haspopup
+            aria-expanded={!!show}
             id={toggleId}
             bsPrefix={childBsPrefix}
             onClick={onToggle}

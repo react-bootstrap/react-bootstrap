@@ -6,7 +6,7 @@ export default React.createContext({
   onClose() {},
   onToggle() {},
   popper: {},
-  toggleId: '',
-  show: false,
-  alignRight: false
+  toggleId: undefined,
+  show: null,
+  alignRight: null
 });

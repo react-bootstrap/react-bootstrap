@@ -5,6 +5,7 @@ import elementType from 'prop-types-extra/lib/elementType';
 import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
 
 import { createBootstrapComponent } from './ThemeProvider';
+import chain from './utils/createChainedFunction';
 import mapContextToProps from './utils/mapContextToProps';
 import DropdownContext from './DropdownContext';
 
@@ -104,11 +105,11 @@ export default mapContextToProps(
     { toggleId, show, alignRight, setMenuElement, onClose, popper: { styles } },
     props
   ) => ({
-    onClose,
     style: styles,
     menuRef: setMenuElement,
     'aria-labelledby': toggleId,
     show: show == null ? props.show : show,
+    onClose: chain(props.onClose, onClose),
     alignRight: alignRight == null ? props.alignRight : alignRight
   })
 );

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
 
-import MenuItem from '../src/MenuItem';
+import DropdownItem from '../src/DropdownItem';
 import Nav from '../src/Nav';
 import NavDropdown from '../src/NavDropdown';
 
@@ -11,8 +11,8 @@ describe('<NavDropdown>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Nav>
         <NavDropdown title="Title" className="test-class" id="nav-test">
-          <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-          <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+          <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
+          <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
         </NavDropdown>
       </Nav>
     );
@@ -36,8 +36,8 @@ describe('<NavDropdown>', () => {
   it('renders div with active class', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <NavDropdown active title="Title" className="test-class" id="nav-test">
-        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
+        <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
+        <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
       </NavDropdown>
     );
 
@@ -75,7 +75,7 @@ describe('<NavDropdown>', () => {
               title="Prop open control"
               id="test-id"
             >
-              <MenuItem eventKey="1">Item 1</MenuItem>
+              <DropdownItem eventKey="1">Item 1</DropdownItem>
             </NavDropdown>
           </div>
         );
@@ -102,9 +102,9 @@ describe('<NavDropdown>', () => {
   it('should handle child active state', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <NavDropdown id="test-id" title="title" activeKey="2">
-        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
-        <MenuItem eventKey="2">MenuItem 2 content</MenuItem>
-        <MenuItem eventKey="3">MenuItem 3 content</MenuItem>
+        <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
+        <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
+        <DropdownItem eventKey="3">DropdownItem 3 content</DropdownItem>
       </NavDropdown>
     );
 
@@ -112,7 +112,7 @@ describe('<NavDropdown>', () => {
 
     const items = ReactTestUtils.scryRenderedComponentsWithType(
       instance,
-      MenuItem
+      DropdownItem
     );
     expect(ReactDOM.findDOMNode(items[0]).className).to.not.match(/active/);
     expect(ReactDOM.findDOMNode(items[1]).className).to.match(/active/);
@@ -129,7 +129,7 @@ describe('<NavDropdown>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <NavDropdown id="test-id" title="title">
         <Container>
-          <MenuItem>MenuItem 1 content</MenuItem>
+          <DropdownItem>DropdownItem 1 content</DropdownItem>
         </Container>
       </NavDropdown>
     );
@@ -144,7 +144,7 @@ describe('<NavDropdown>', () => {
   it('should derive bsClass from parent', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <NavDropdown title="title" id="test-id" bsClass="my-dropdown">
-        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
       </NavDropdown>
     );
 

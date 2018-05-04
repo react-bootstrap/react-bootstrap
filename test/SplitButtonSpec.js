@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
 
 import SplitButton from '../src/SplitButton';
-import MenuItem from '../src/MenuItem';
+import DropdownItem from '../src/DropdownItem';
 import Button from '../src/Button';
 
 describe('<SplitButton>', () => {
   const simple = (
     <SplitButton title="Title" id="test-id">
-      <MenuItem>Item 1</MenuItem>
-      <MenuItem>Item 2</MenuItem>
-      <MenuItem>Item 3</MenuItem>
-      <MenuItem>Item 4</MenuItem>
+      <DropdownItem>Item 1</DropdownItem>
+      <DropdownItem>Item 2</DropdownItem>
+      <DropdownItem>Item 3</DropdownItem>
+      <DropdownItem>Item 4</DropdownItem>
     </SplitButton>
   );
 
@@ -46,7 +46,7 @@ describe('<SplitButton>', () => {
   it('should invoke onClick when SplitButton.Button is clicked (prop)', done => {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" id="test-id" onClick={() => done()}>
-        <MenuItem>Item 1</MenuItem>
+        <DropdownItem>Item 1</DropdownItem>
       </SplitButton>
     );
 
@@ -61,7 +61,7 @@ describe('<SplitButton>', () => {
 
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" id="test-id" onClick={onClickSpy}>
-        <MenuItem>Item 1</MenuItem>
+        <DropdownItem>Item 1</DropdownItem>
       </SplitButton>
     );
 
@@ -81,7 +81,7 @@ describe('<SplitButton>', () => {
   it('Should pass disabled to both buttons', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" id="test-id" disabled>
-        <MenuItem>Item 1</MenuItem>
+        <DropdownItem>Item 1</DropdownItem>
       </SplitButton>
     );
 
@@ -106,7 +106,7 @@ describe('<SplitButton>', () => {
         href="/some/unique-thing/"
         target="_blank"
       >
-        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
       </SplitButton>
     );
 
@@ -132,7 +132,7 @@ describe('<SplitButton>', () => {
   it('should set aria-label on toggle from toggleLabel', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="Title" id="test-id" toggleLabel="Label">
-        <MenuItem>Item 1</MenuItem>
+        <DropdownItem>Item 1</DropdownItem>
       </SplitButton>
     );
 
@@ -146,7 +146,7 @@ describe('<SplitButton>', () => {
   it('should derive bsClass from parent', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <SplitButton title="title" id="test-id" bsClass="my-dropdown">
-        <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
+        <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
       </SplitButton>
     );
 

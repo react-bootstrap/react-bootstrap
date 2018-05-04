@@ -209,7 +209,7 @@ class Nav extends React.Component {
             className={classNames(className, {
               [bsPrefix]: !navbar,
               [`${navbarBsPrefix}-nav`]: navbar,
-            [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
+              [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
               [`${bsPrefix}-${variant}`]: !!variant,
               [`${bsPrefix}-fill`]: fill,
               [`${bsPrefix}-justified`]: justify
@@ -229,12 +229,17 @@ const UncontrolledNav = uncontrollable(createBootstrapComponent(Nav, 'nav'), {
 
 const DecoratedNav = mapContextToProps(
   UncontrolledNav,
-  [SelectableContext.Consumer, TabContext.Consumer, NavbarContext.Consumer, CardContext.Consumer],
+  [
+    SelectableContext.Consumer,
+    TabContext.Consumer,
+    NavbarContext.Consumer,
+    CardContext.Consumer
+  ],
   (
     onSelect,
     tabContext,
     navbarContext,
-    cardContext
+    cardContext,
     { role, navbar, onSelect: propsOnSelect }
   ) => {
     onSelect = chain(propsOnSelect, onSelect);
@@ -249,13 +254,6 @@ const DecoratedNav = mapContextToProps(
 
     if (cardContext)
       return { cardHeaderBsPrefix: cardContext.cardHeaderBsPrefix };
-
-    const {
-      activeKey,
-      onSelect,
-      getControllerId,
-      getControlledId
-    } = tabContext;
 
     const { activeKey, getControllerId, getControlledId } = tabContext;
     return {
