@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Dropdown from './Dropdown';
 
@@ -24,8 +25,8 @@ class NavDropdown extends React.Component {
 }
 
 NavDropdown.propTypes = {
-  noCaret: React.PropTypes.bool,
-  title: React.PropTypes.node.isRequired,
+  noCaret: PropTypes.bool,
+  title: PropTypes.node.isRequired,
   ...Dropdown.propTypes
 };
 

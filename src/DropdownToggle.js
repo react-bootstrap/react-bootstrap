@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import Button from './Button';
@@ -35,11 +36,11 @@ DropdownToggle.defaultProps = {
 };
 
 DropdownToggle.propTypes = {
-  bsRole: React.PropTypes.string,
-  noCaret: React.PropTypes.bool,
-  open: React.PropTypes.bool,
-  title: React.PropTypes.string,
-  useAnchor: React.PropTypes.bool
+  bsRole: PropTypes.string,
+  noCaret: PropTypes.bool,
+  open: PropTypes.bool,
+  title: PropTypes.string,
+  useAnchor: PropTypes.bool
 };
 
 DropdownToggle.isToggle = true;

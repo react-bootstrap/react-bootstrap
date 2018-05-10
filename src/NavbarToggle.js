@@ -1,23 +1,23 @@
 import classNames from 'classnames';
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import tbsUtils from './utils/bootstrapUtils';
 import createChainedFunction from './utils/createChainedFunction';
 
-const NavbarToggle = React.createClass({
-
-  propTypes: {
-    onClick: React.PropTypes.func,
+class NavbarToggle extends React.Component {
+  static propTypes = {
+    onClick: PropTypes.func,
     /**
      * The toggle content, if left empty it will render the default toggle (seen above).
      */
     children: PropTypes.node
-  },
+  };
 
-  contextTypes: {
+  static contextTypes = {
     $bs_navbar_bsClass: PropTypes.string,
     $bs_navbar_onToggle: PropTypes.func,
-  },
+  };
 
   render() {
     const { onClick, className, children, ...props } = this.props;
@@ -50,6 +50,6 @@ const NavbarToggle = React.createClass({
       </button>
     );
   }
-});
+}
 
 export default NavbarToggle;

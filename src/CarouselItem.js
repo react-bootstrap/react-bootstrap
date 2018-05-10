@@ -1,19 +1,23 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
+import createReactClass from 'create-react-class';
 import ReactDOM from 'react-dom';
 
 import TransitionEvents from './utils/TransitionEvents';
 import tbsUtils from './utils/bootstrapUtils';
 
-const CarouselItem = React.createClass({
+const CarouselItem = createReactClass({
+  displayName: 'CarouselItem',
+
   propTypes: {
-    direction: React.PropTypes.oneOf(['prev', 'next']),
-    onAnimateOutEnd: React.PropTypes.func,
-    active: React.PropTypes.bool,
-    animateIn: React.PropTypes.bool,
-    animateOut: React.PropTypes.bool,
-    caption: React.PropTypes.node,
-    index: React.PropTypes.number
+    direction: PropTypes.oneOf(['prev', 'next']),
+    onAnimateOutEnd: PropTypes.func,
+    active: PropTypes.bool,
+    animateIn: PropTypes.bool,
+    animateOut: PropTypes.bool,
+    caption: PropTypes.node,
+    index: PropTypes.number
   },
 
   getInitialState() {
@@ -97,7 +101,7 @@ const CarouselItem = React.createClass({
         {this.props.caption}
       </div>
     );
-  }
+  },
 });
 
 export default CarouselItem;

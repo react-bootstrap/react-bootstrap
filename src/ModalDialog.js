@@ -1,17 +1,18 @@
 /* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
+
 import React from 'react';
 import classNames from 'classnames';
 import tbsUtils, { bsClass, bsSizes } from './utils/bootstrapUtils';
 import { Sizes } from './styleMaps';
 
-const ModalDialog = React.createClass({
-
-  propTypes: {
+class ModalDialog extends React.Component {
+  static propTypes = {
     /**
      * A css class to apply to the Modal dialog DOM node.
      */
-    dialogClassName: React.PropTypes.string
-  },
+    dialogClassName: PropTypes.string
+  };
 
   render() {
     let modalStyle = {
@@ -41,7 +42,7 @@ const ModalDialog = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default bsSizes([Sizes.LARGE, Sizes.SMALL],
   bsClass('modal', ModalDialog)

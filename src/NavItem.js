@@ -1,30 +1,28 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import SafeAnchor from './SafeAnchor';
 import createChainedFunction from './utils/createChainedFunction';
 
-const NavItem = React.createClass({
+class NavItem extends React.Component {
+  static propTypes = {
+    linkId: PropTypes.string,
+    onSelect: PropTypes.func,
+    active: PropTypes.bool,
+    disabled: PropTypes.bool,
+    href: PropTypes.string,
+    onClick: PropTypes.func,
+    role: PropTypes.string,
+    title: PropTypes.node,
+    eventKey: PropTypes.any,
+    target: PropTypes.string,
+    'aria-controls': PropTypes.string
+  };
 
-  propTypes: {
-    linkId: React.PropTypes.string,
-    onSelect: React.PropTypes.func,
-    active: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    href: React.PropTypes.string,
-    onClick: React.PropTypes.func,
-    role: React.PropTypes.string,
-    title: React.PropTypes.node,
-    eventKey: React.PropTypes.any,
-    target: React.PropTypes.string,
-    'aria-controls': React.PropTypes.string
-  },
-
-  getDefaultProps() {
-    return {
-      active: false,
-      disabled: false
-    };
-  },
+  static defaultProps = {
+    active: false,
+    disabled: false
+  };
 
   render() {
     let {
@@ -67,9 +65,9 @@ const NavItem = React.createClass({
         </SafeAnchor>
       </li>
     );
-  },
+  }
 
-  handleClick(e) {
+  handleClick = (e) => {
     if (this.props.onSelect) {
       e.preventDefault();
 
@@ -77,7 +75,7 @@ const NavItem = React.createClass({
         this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
       }
     }
-  }
-});
+  };
+}
 
 export default NavItem;

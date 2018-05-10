@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import createChainedFunction from './utils/createChainedFunction';
 
@@ -30,6 +31,6 @@ export default class SafeAnchor extends React.Component {
 }
 
 SafeAnchor.propTypes = {
-  href: React.PropTypes.string,
-  onClick: React.PropTypes.func
+  href: PropTypes.string,
+  onClick: PropTypes.func
 };

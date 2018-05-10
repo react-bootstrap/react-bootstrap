@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router';
 import Navbar from '../../src/Navbar';
@@ -22,10 +23,10 @@ const NAV_LINKS = {
   }
 };
 
-const NavMain = React.createClass({
-  propTypes: {
-    activePage: React.PropTypes.string
-  },
+class NavMain extends React.Component {
+  static propTypes = {
+    activePage: PropTypes.string
+  };
 
   render() {
     let links = Object.keys(NAV_LINKS).map(this.renderNavItem).concat([
@@ -53,9 +54,9 @@ const NavMain = React.createClass({
         </Navbar.Collapse>
       </Navbar>
     );
-  },
+  }
 
-  renderNavItem(linkName) {
+  renderNavItem = (linkName) => {
     let link = NAV_LINKS[linkName];
 
     return (
@@ -63,7 +64,7 @@ const NavMain = React.createClass({
           <Link to={link.link}>{link.title}</Link>
         </li>
       );
-  }
-});
+  };
+}
 
 export default NavMain;

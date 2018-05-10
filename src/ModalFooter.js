@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import tbsUtils, { bsClass } from './utils/bootstrapUtils';
@@ -18,7 +19,7 @@ ModalFooter.propTypes = {
   /**
    * A css class applied to the Component
    */
-  bsClass: React.PropTypes.string
+  bsClass: PropTypes.string
 };
 
 ModalFooter.defaultProps = {

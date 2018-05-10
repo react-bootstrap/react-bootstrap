@@ -1,26 +1,26 @@
 // https://www.npmjs.org/package/react-interpolate-component
 // TODO: Drop this in favor of es6 string interpolation
 
+import PropTypes from 'prop-types';
+
 import React from 'react';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const REGEXP = /\%\((.+?)\)s/;
 
-const Interpolate = React.createClass({
-  displayName: 'Interpolate',
+class Interpolate extends React.Component {
+  static displayName = 'Interpolate';
 
-  propTypes: {
-    component: React.PropTypes.node,
-    format: React.PropTypes.string,
-    unsafe: React.PropTypes.bool
-  },
+  static propTypes = {
+    component: PropTypes.node,
+    format: PropTypes.string,
+    unsafe: PropTypes.bool
+  };
 
-  getDefaultProps() {
-    return {
-      component: 'span',
-      unsafe: false
-    };
-  },
+  static defaultProps = {
+    component: 'span',
+    unsafe: false
+  };
 
   render() {
     let format = (ValidComponentChildren.hasValidComponent(this.props.children) ||
@@ -80,6 +80,6 @@ const Interpolate = React.createClass({
 
     return React.createElement(parent, props, kids);
   }
-});
+}
 
 export default Interpolate;

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import React, { PropTypes, cloneElement } from 'react';
+import PropTypes from 'prop-types';
+import React, { cloneElement } from 'react';
 
 import warning from 'warning';
 

@@ -1,25 +1,25 @@
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
 import { State, PRIMARY, DEFAULT } from './styleMaps';
 import Collapse from './Collapse';
 
-let Panel = React.createClass({
-
-  propTypes: {
-    collapsible: React.PropTypes.bool,
-    onSelect: React.PropTypes.func,
-    header: React.PropTypes.node,
-    id: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
+class Panel extends React.Component {
+  static propTypes = {
+    collapsible: PropTypes.bool,
+    onSelect: PropTypes.func,
+    header: PropTypes.node,
+    id: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
     ]),
-    footer: React.PropTypes.node,
-    defaultExpanded: React.PropTypes.bool,
-    expanded: React.PropTypes.bool,
-    eventKey: React.PropTypes.any,
-    headerRole: React.PropTypes.string,
-    panelRole: React.PropTypes.string,
+    footer: PropTypes.node,
+    defaultExpanded: PropTypes.bool,
+    expanded: PropTypes.bool,
+    eventKey: PropTypes.any,
+    headerRole: PropTypes.string,
+    panelRole: PropTypes.string,
 
     onEnter: Collapse.propTypes.onEnter,
     onEntering: Collapse.propTypes.onEntering,
@@ -27,21 +27,17 @@ let Panel = React.createClass({
     onExit: Collapse.propTypes.onExit,
     onExiting: Collapse.propTypes.onExiting,
     onExited: Collapse.propTypes.onExited
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      defaultExpanded: false
-    };
-  },
+  static defaultProps = {
+    defaultExpanded: false
+  };
 
-  getInitialState() {
-    return {
-      expanded: this.props.defaultExpanded
-    };
-  },
+  state = {
+    expanded: this.props.defaultExpanded
+  };
 
-  handleSelect(e) {
+  handleSelect = (e) => {
     e.selected = true;
 
     if (this.props.onSelect) {
@@ -53,15 +49,15 @@ let Panel = React.createClass({
     if (e.selected) {
       this.handleToggle();
     }
-  },
+  };
 
-  handleToggle() {
+  handleToggle = () => {
     this.setState({ expanded: !this.state.expanded});
-  },
+  };
 
-  isExpanded() {
+  isExpanded = () => {
     return this.props.expanded != null ? this.props.expanded : this.state.expanded;
-  },
+  };
 
   render() {
     let {headerRole, panelRole, ...props} = this.props;
@@ -74,9 +70,9 @@ let Panel = React.createClass({
         {this.renderFooter()}
       </div>
     );
-  },
+  }
 
-  renderCollapsibleBody(panelRole) {
+  renderCollapsibleBody = (panelRole) => {
     let collapseProps = {
       onEnter: this.props.onEnter,
       onEntering: this.props.onEntering,
@@ -104,9 +100,9 @@ let Panel = React.createClass({
         </div>
       </Collapse>
     );
-  },
+  };
 
-  renderBody() {
+  renderBody = () => {
     let allChildren = this.props.children;
     let bodyElements = [];
     let panelBodyChildren = [];
@@ -160,13 +156,13 @@ let Panel = React.createClass({
     }
 
     return bodyElements;
-  },
+  };
 
-  shouldRenderFill(child) {
+  shouldRenderFill = (child) => {
     return React.isValidElement(child) && child.props.fill != null;
-  },
+  };
 
-  renderHeading(headerRole) {
+  renderHeading = (headerRole) => {
     let header = this.props.header;
 
     if (!header) {
@@ -196,9 +192,9 @@ let Panel = React.createClass({
         {header}
       </div>
     );
-  },
+  };
 
-  renderAnchor(header, headerRole) {
+  renderAnchor = (header, headerRole) => {
     return (
       <a
         href={'#' + (this.props.id || '')}
@@ -211,17 +207,17 @@ let Panel = React.createClass({
         {header}
       </a>
     );
-  },
+  };
 
-  renderCollapsibleTitle(header, headerRole) {
+  renderCollapsibleTitle = (header, headerRole) => {
     return (
       <h4 className={bootstrapUtils.prefix(this.props, 'title')} role="presentation">
         {this.renderAnchor(header, headerRole)}
       </h4>
     );
-  },
+  };
 
-  renderFooter() {
+  renderFooter = () => {
     if (!this.props.footer) {
       return null;
     }
@@ -231,8 +227,8 @@ let Panel = React.createClass({
         {this.props.footer}
       </div>
     );
-  }
-});
+  };
+}
 
 const PANEL_STATES = State.values().concat(DEFAULT, PRIMARY);
 

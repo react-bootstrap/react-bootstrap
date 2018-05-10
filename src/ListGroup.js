@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import ListGroupItem from './ListGroupItem';
 import classNames from 'classnames';
@@ -82,16 +83,16 @@ ListGroup.defaultProps = {
 };
 
 ListGroup.propTypes = {
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * The element for ListGroup if children are
    * user-defined custom components.
    * @type {("ul"|"div")}
    */
-  componentClass: React.PropTypes.oneOf(['ul', 'div']),
-  id: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number
+  componentClass: PropTypes.oneOf(['ul', 'div']),
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
   ])
 };
 

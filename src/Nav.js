@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 import all from 'react-prop-types/lib/all';
@@ -94,36 +95,36 @@ class Nav extends React.Component {
 }
 
 Nav.propTypes = {
-  activeHref: React.PropTypes.string,
-  activeKey: React.PropTypes.any,
+  activeHref: PropTypes.string,
+  activeKey: PropTypes.any,
 
-  stacked: React.PropTypes.bool,
+  stacked: PropTypes.bool,
   justified: all(
-    React.PropTypes.bool,
+    PropTypes.bool,
     ({justified, navbar}) => (
       justified && navbar ?
         Error('justified navbar `Nav`s are not supported') : null
     )
   ),
-  onSelect: React.PropTypes.func,
+  onSelect: PropTypes.func,
 
   /**
    * CSS classes for the wrapper `nav` element
    */
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   /**
    * HTML id for the wrapper `nav` element
    */
-  id: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
   ]),
   /**
    * CSS classes for the inner `ul` element
    *
    * @deprecated
    */
-  ulClassName: deprecated(React.PropTypes.string,
+  ulClassName: deprecated(PropTypes.string,
     'The wrapping `<nav>` has been removed you can use `className` now'),
   /**
    * HTML id for the inner `ul` element
@@ -131,38 +132,38 @@ Nav.propTypes = {
    * @deprecated
    */
 
-  ulId: deprecated(React.PropTypes.string,
+  ulId: deprecated(PropTypes.string,
     'The wrapping `<nav>` has been removed you can use `id` now'),
 
   /**
    * Apply styling an alignment for use in a Navbar. This prop will be set
    * automatically when the Nav is used inside a Navbar.
    */
-  navbar: React.PropTypes.bool,
-  eventKey: React.PropTypes.any,
-  pullRight: React.PropTypes.bool,
-  pullLeft: React.PropTypes.bool,
+  navbar: PropTypes.bool,
+  eventKey: PropTypes.any,
+  pullRight: PropTypes.bool,
+  pullLeft: PropTypes.bool,
 
-  right: deprecated(React.PropTypes.bool,
+  right: deprecated(PropTypes.bool,
     'Use the `pullRight` prop instead'),
 
   /**
    * @private
    */
-  expanded: React.PropTypes.bool,
+  expanded: PropTypes.bool,
 
   /**
    * @private
    */
-  collapsible: deprecated(React.PropTypes.bool,
+  collapsible: deprecated(PropTypes.bool,
     'Use `Navbar.Collapse` instead, to create collapsible Navbars'),
 };
 
 Nav.contextTypes = {
-  $bs_navbar: React.PropTypes.bool,
-  $bs_navbar_bsClass: React.PropTypes.string,
+  $bs_navbar: PropTypes.bool,
+  $bs_navbar_bsClass: PropTypes.string,
 
-  $bs_deprecated_navbar: React.PropTypes.bool
+  $bs_deprecated_navbar: PropTypes.bool
 };
 
 Nav.defaultProps = {

@@ -1,6 +1,8 @@
 /* eslint react/prop-types: [2, {ignore: ["container", "containerPadding", "target", "placement", "children"] }] */
 /* These properties are validated in 'Portal' and 'Position' components */
 
+import PropTypes from 'prop-types';
+
 import React, { cloneElement } from 'react';
 import BaseOverlay from 'react-overlays/lib/Overlay';
 import elementType from 'react-prop-types/lib/elementType';
@@ -46,54 +48,54 @@ Overlay.propTypes = {
   /**
    * Set the visibility of the Overlay
    */
-  show: React.PropTypes.bool,
+  show: PropTypes.bool,
   /**
    * Specify whether the overlay should trigger onHide when the user clicks outside the overlay
    */
-  rootClose: React.PropTypes.bool,
+  rootClose: PropTypes.bool,
   /**
    * A callback invoked by the overlay when it wishes to be hidden. Required if
    * `rootClose` is specified.
    */
-  onHide: React.PropTypes.func,
+  onHide: PropTypes.func,
 
   /**
    * Use animation
    */
-  animation: React.PropTypes.oneOfType([
-    React.PropTypes.bool,
+  animation: PropTypes.oneOfType([
+    PropTypes.bool,
     elementType
   ]),
 
   /**
    * Callback fired before the Overlay transitions in
    */
-  onEnter: React.PropTypes.func,
+  onEnter: PropTypes.func,
 
   /**
    * Callback fired as the Overlay begins to transition in
    */
-  onEntering: React.PropTypes.func,
+  onEntering: PropTypes.func,
 
   /**
    * Callback fired after the Overlay finishes transitioning in
    */
-  onEntered: React.PropTypes.func,
+  onEntered: PropTypes.func,
 
   /**
    * Callback fired right before the Overlay transitions out
    */
-  onExit: React.PropTypes.func,
+  onExit: PropTypes.func,
 
   /**
    * Callback fired as the Overlay begins to transition out
    */
-  onExiting: React.PropTypes.func,
+  onExiting: PropTypes.func,
 
   /**
    * Callback fired after the Overlay finishes transitioning out
    */
-  onExited: React.PropTypes.func
+  onExited: PropTypes.func
 };
 
 Overlay.defaultProps = {

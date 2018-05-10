@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import Collapse from './Collapse';
 import classNames from 'classnames';
@@ -6,23 +7,20 @@ import deprecationWarning from './utils/deprecationWarning';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
 
-let CollapsibleNav = React.createClass({
+class CollapsibleNav extends React.Component {
+  static propTypes = {
+    onSelect: PropTypes.func,
+    activeHref: PropTypes.string,
+    activeKey: PropTypes.any,
+    collapsible: PropTypes.bool,
+    expanded: PropTypes.bool,
+    eventKey: PropTypes.any
+  };
 
-  propTypes: {
-    onSelect: React.PropTypes.func,
-    activeHref: React.PropTypes.string,
-    activeKey: React.PropTypes.any,
-    collapsible: React.PropTypes.bool,
-    expanded: React.PropTypes.bool,
-    eventKey: React.PropTypes.any
-  },
-
-  getDefaultProps() {
-    return {
-      collapsible: false,
-      expanded: false
-    };
-  },
+  static defaultProps = {
+    collapsible: false,
+    expanded: false
+  };
 
   render() {
     /*
@@ -45,9 +43,9 @@ let CollapsibleNav = React.createClass({
       );
     }
     return nav;
-  },
+  }
 
-  getChildActiveProp(child) {
+  getChildActiveProp = (child) => {
     if (child.props.active) {
       return true;
     }
@@ -63,9 +61,9 @@ let CollapsibleNav = React.createClass({
     }
 
     return child.props.active;
-  },
+  };
 
-  renderChildren(child, index) {
+  renderChildren = (child, index) => {
     let key = child.key ? child.key : index;
     return cloneElement(
       child,
@@ -77,9 +75,9 @@ let CollapsibleNav = React.createClass({
         navItem: true
       }
     );
-  },
+  };
 
-  renderCollapsibleNavChildren(child, index) {
+  renderCollapsibleNavChildren = (child, index) => {
     let key = child.key ? child.key : index;
     return cloneElement(
       child,
@@ -93,8 +91,8 @@ let CollapsibleNav = React.createClass({
         navItem: true
       }
     );
-  }
-});
+  };
+}
 
 export default deprecationWarning.wrapper(CollapsibleNav,
   'CollapsibleNav', 'Navbar.Collapse',

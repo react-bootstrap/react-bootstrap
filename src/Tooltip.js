@@ -1,60 +1,58 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import tbsUtils from './utils/bootstrapUtils';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
-const Tooltip = React.createClass({
-
-  propTypes: {
+class Tooltip extends React.Component {
+  static propTypes = {
     /**
      * An html id attribute, necessary for accessibility
      * @type {string}
      * @required
      */
     id: isRequiredForA11y(
-      React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number
+      PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
       ])
     ),
 
     /**
      * Sets the direction the Tooltip is positioned towards.
      */
-    placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+    placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
     /**
      * The "left" position value for the Tooltip.
      */
-    positionLeft: React.PropTypes.number,
+    positionLeft: PropTypes.number,
     /**
      * The "top" position value for the Tooltip.
      */
-    positionTop: React.PropTypes.number,
+    positionTop: PropTypes.number,
     /**
      * The "left" position value for the Tooltip arrow.
      */
-    arrowOffsetLeft: React.PropTypes.oneOfType([
-      React.PropTypes.number, React.PropTypes.string
+    arrowOffsetLeft: PropTypes.oneOfType([
+      PropTypes.number, PropTypes.string
     ]),
     /**
      * The "top" position value for the Tooltip arrow.
      */
-    arrowOffsetTop: React.PropTypes.oneOfType([
-      React.PropTypes.number, React.PropTypes.string
+    arrowOffsetTop: PropTypes.oneOfType([
+      PropTypes.number, PropTypes.string
     ]),
     /**
      * Title text
      */
-    title: React.PropTypes.node
-  },
+    title: PropTypes.node
+  };
 
-  getDefaultProps() {
-    return {
-      bsClass: 'tooltip',
-      placement: 'right'
-    };
-  },
+  static defaultProps = {
+    bsClass: 'tooltip',
+    placement: 'right'
+  };
 
   render() {
     const classes = {
@@ -82,6 +80,6 @@ const Tooltip = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default Tooltip;

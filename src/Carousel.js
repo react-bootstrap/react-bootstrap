@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
+import createReactClass from 'create-react-class';
 import classNames from 'classnames';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import Glyphicon from './Glyphicon';
@@ -7,22 +9,23 @@ import tbsUtils from './utils/bootstrapUtils';
 import Caption from './CarouselCaption';
 import Item from './CarouselItem';
 
-let Carousel = React.createClass({
+let Carousel = createReactClass({
+  displayName: 'Carousel',
 
   propTypes: {
-    slide: React.PropTypes.bool,
-    indicators: React.PropTypes.bool,
-    interval: React.PropTypes.number,
-    controls: React.PropTypes.bool,
-    pauseOnHover: React.PropTypes.bool,
-    wrap: React.PropTypes.bool,
-    onSelect: React.PropTypes.func,
-    onSlideEnd: React.PropTypes.func,
-    activeIndex: React.PropTypes.number,
-    defaultActiveIndex: React.PropTypes.number,
-    direction: React.PropTypes.oneOf(['prev', 'next']),
-    prevIcon: React.PropTypes.node,
-    nextIcon: React.PropTypes.node
+    slide: PropTypes.bool,
+    indicators: PropTypes.bool,
+    interval: PropTypes.number,
+    controls: PropTypes.bool,
+    pauseOnHover: PropTypes.bool,
+    wrap: PropTypes.bool,
+    onSelect: PropTypes.func,
+    onSlideEnd: PropTypes.func,
+    activeIndex: PropTypes.number,
+    defaultActiveIndex: PropTypes.number,
+    direction: PropTypes.oneOf(['prev', 'next']),
+    prevIcon: PropTypes.node,
+    nextIcon: PropTypes.node
   },
 
   getDefaultProps() {
@@ -301,7 +304,7 @@ let Carousel = React.createClass({
         });
       }
     }
-  }
+  },
 });
 
 Carousel = Object.assign(Carousel, { Caption, Item });

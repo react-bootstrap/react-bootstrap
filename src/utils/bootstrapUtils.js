@@ -1,4 +1,4 @@
-import { PropTypes } from 'react';
+import PropTypes from 'prop-types';
 import styleMaps from '../styleMaps';
 import invariant from 'invariant';
 import warning from 'warning';

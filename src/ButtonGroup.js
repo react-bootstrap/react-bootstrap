@@ -1,35 +1,33 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import bootstrapUtils, { bsClass } from './utils/bootstrapUtils';
 import all from 'react-prop-types/lib/all';
 import Button from './Button';
 
-const ButtonGroup = React.createClass({
-
-  propTypes: {
-    vertical: React.PropTypes.bool,
-    justified: React.PropTypes.bool,
+class ButtonGroup extends React.Component {
+  static propTypes = {
+    vertical: PropTypes.bool,
+    justified: PropTypes.bool,
     /**
      * Display block buttons, only useful when used with the "vertical" prop.
      * @type {bool}
      */
     block: all(
-      React.PropTypes.bool,
+      PropTypes.bool,
       props => {
         if (props.block && !props.vertical) {
           return new Error('The block property requires the vertical property to be set to have any effect');
         }
       }
     )
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      block: false,
-      justified: false,
-      vertical: false
-    };
-  },
+  static defaultProps = {
+    block: false,
+    justified: false,
+    vertical: false
+  };
 
   render() {
     let classes = bootstrapUtils.getClassSet(this.props);
@@ -49,6 +47,6 @@ const ButtonGroup = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default bsClass('btn-group', ButtonGroup);

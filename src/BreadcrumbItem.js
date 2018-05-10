@@ -1,47 +1,46 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import SafeAnchor from './SafeAnchor';
 
-const BreadcrumbItem = React.createClass({
-  propTypes: {
+class BreadcrumbItem extends React.Component {
+  static propTypes = {
     /**
      * If set to true, renders `span` instead of `a`
      */
-    active: React.PropTypes.bool,
+    active: PropTypes.bool,
     /**
      * HTML id for the wrapper `li` element
      */
-    id: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
+    id: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
     ]),
     /**
      * HTML id for the inner `a` element
      */
-    linkId: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
+    linkId: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
     ]),
     /**
      * `href` attribute for the inner `a` element
      */
-    href: React.PropTypes.string,
+    href: PropTypes.string,
     /**
      * `title` attribute for the inner `a` element
      */
-    title: React.PropTypes.node,
+    title: PropTypes.node,
     /**
      * `target` attribute for the inner `a` element
      */
-    target: React.PropTypes.string
-  },
+    target: PropTypes.string
+  };
 
-  getDefaultProps() {
-    return {
-      active: false,
-    };
-  },
+  static defaultProps = {
+    active: false,
+  };
 
   render() {
     const {
@@ -76,6 +75,6 @@ const BreadcrumbItem = React.createClass({
       </li>
     );
   }
-});
+}
 
 export default BreadcrumbItem;

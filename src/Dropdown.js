@@ -4,6 +4,7 @@ import contains from 'dom-helpers/query/contains';
 import keycode from 'keycode';
 import find from 'lodash-compat/collection/find';
 import omit from 'lodash-compat/object/omit';
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
 import all from 'react-prop-types/lib/all';
@@ -259,12 +260,12 @@ Dropdown.defaultProps = {
 
 Dropdown.propTypes = {
 
-  bsClass: React.PropTypes.string,
+  bsClass: PropTypes.string,
 
   /**
    * The menu will open above the dropdown button, instead of below it.
    */
-  dropup: React.PropTypes.bool,
+  dropup: PropTypes.bool,
 
   /**
    * An html id attribute, necessary for assistive technologies, such as screen readers.
@@ -272,9 +273,9 @@ Dropdown.propTypes = {
    * @required
    */
   id: isRequiredForA11y(
-    React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
     ])
   ),
 
@@ -292,24 +293,24 @@ Dropdown.propTypes = {
   /**
    * Whether or not component is disabled.
    */
-  disabled: React.PropTypes.bool,
+  disabled: PropTypes.bool,
 
   /**
    * Align the menu to the right side of the Dropdown toggle
    */
-  pullRight: React.PropTypes.bool,
+  pullRight: PropTypes.bool,
 
   /**
    * Whether or not the Dropdown is visible.
    *
    * @controllable onToggle
    */
-  open: React.PropTypes.bool,
+  open: PropTypes.bool,
 
   /**
    * A callback fired when the Dropdown closes.
    */
-  onClose: React.PropTypes.func,
+  onClose: PropTypes.func,
 
   /**
    * A callback fired when the Dropdown wishes to change visibility. Called with the requested
@@ -320,7 +321,7 @@ Dropdown.propTypes = {
    * ```
    * @controllable open
    */
-  onToggle: React.PropTypes.func,
+  onToggle: PropTypes.func,
 
   /**
    * A callback fired when a menu item is selected.
@@ -329,13 +330,13 @@ Dropdown.propTypes = {
    * function(Object event, Any eventKey)
    * ```
    */
-  onSelect: React.PropTypes.func,
+  onSelect: PropTypes.func,
 
   /**
    * If `'menuitem'`, causes the dropdown to behave like a menu item rather than
    * a menu button.
    */
-  role: React.PropTypes.string
+  role: PropTypes.string
 };
 
 Dropdown = uncontrollable(Dropdown, { open: 'onToggle' });

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Button from './Button';
 import FormGroup from './FormGroup';
@@ -24,7 +25,7 @@ ButtonInput.defaultProps = {
 };
 
 ButtonInput.propTypes = {
-  type: React.PropTypes.oneOf(ButtonInput.types),
+  type: PropTypes.oneOf(ButtonInput.types),
   bsStyle() {
     // defer to Button propTypes of bsStyle
     return null;

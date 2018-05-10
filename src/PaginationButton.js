@@ -1,33 +1,31 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import createSelectedEvent from './utils/createSelectedEvent';
 import elementType from 'react-prop-types/lib/elementType';
 
-const PaginationButton = React.createClass({
-
-  propTypes: {
-    className: React.PropTypes.string,
-    eventKey: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
+class PaginationButton extends React.Component {
+  static propTypes = {
+    className: PropTypes.string,
+    eventKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
     ]),
-    onSelect: React.PropTypes.func,
-    disabled: React.PropTypes.bool,
-    active: React.PropTypes.bool,
+    onSelect: PropTypes.func,
+    disabled: PropTypes.bool,
+    active: PropTypes.bool,
     /**
      * You can use a custom element for this component
      */
     buttonComponentClass: elementType
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      active: false,
-      disabled: false
-    };
-  },
+  static defaultProps = {
+    active: false,
+    disabled: false
+  };
 
-  handleClick(event) {
+  handleClick = (event) => {
     if (this.props.disabled) {
       return;
     }
@@ -36,7 +34,7 @@ const PaginationButton = React.createClass({
       let selectedEvent = createSelectedEvent(this.props.eventKey);
       this.props.onSelect(event, selectedEvent);
     }
-  },
+  };
 
   render() {
     let classes = {
@@ -59,6 +57,6 @@ const PaginationButton = React.createClass({
       </li>
     );
   }
-});
+}
 
 export default PaginationButton;

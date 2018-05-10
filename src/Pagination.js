@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import bootstrapUtils, { bsClass } from './utils/bootstrapUtils';
@@ -5,80 +6,77 @@ import PaginationButton from './PaginationButton';
 import elementType from 'react-prop-types/lib/elementType';
 import SafeAnchor from './SafeAnchor';
 
-const Pagination = React.createClass({
-
-  propTypes: {
-    activePage: React.PropTypes.number,
-    items: React.PropTypes.number,
-    maxButtons: React.PropTypes.number,
+class Pagination extends React.Component {
+  static propTypes = {
+    activePage: PropTypes.number,
+    items: PropTypes.number,
+    maxButtons: PropTypes.number,
     /**
      * When `true`, will display the first and the last button page
      */
-    boundaryLinks: React.PropTypes.bool,
+    boundaryLinks: PropTypes.bool,
     /**
      * When `true`, will display the default node value ('&hellip;').
      * Otherwise, will display provided node (when specified).
      */
-    ellipsis: React.PropTypes.oneOfType([
-      React.PropTypes.bool,
-      React.PropTypes.node
+    ellipsis: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.node
     ]),
     /**
      * When `true`, will display the default node value ('&laquo;').
      * Otherwise, will display provided node (when specified).
      */
-    first: React.PropTypes.oneOfType([
-      React.PropTypes.bool,
-      React.PropTypes.node
+    first: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.node
     ]),
     /**
      * When `true`, will display the default node value ('&raquo;').
      * Otherwise, will display provided node (when specified).
      */
-    last: React.PropTypes.oneOfType([
-      React.PropTypes.bool,
-      React.PropTypes.node
+    last: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.node
     ]),
     /**
      * When `true`, will display the default node value ('&lsaquo;').
      * Otherwise, will display provided node (when specified).
      */
-    prev: React.PropTypes.oneOfType([
-      React.PropTypes.bool,
-      React.PropTypes.node
+    prev: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.node
     ]),
     /**
      * When `true`, will display the default node value ('&rsaquo;').
      * Otherwise, will display provided node (when specified).
      */
-    next: React.PropTypes.oneOfType([
-      React.PropTypes.bool,
-      React.PropTypes.node
+    next: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.node
     ]),
-    onSelect: React.PropTypes.func,
+    onSelect: PropTypes.func,
     /**
      * You can use a custom element for the buttons
      */
     buttonComponentClass: elementType
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      activePage: 1,
-      items: 1,
-      maxButtons: 0,
-      first: false,
-      last: false,
-      prev: false,
-      next: false,
-      ellipsis: true,
-      boundaryLinks: false,
-      buttonComponentClass: SafeAnchor,
-      bsClass: 'pagination'
-    };
-  },
+  static defaultProps = {
+    activePage: 1,
+    items: 1,
+    maxButtons: 0,
+    first: false,
+    last: false,
+    prev: false,
+    next: false,
+    ellipsis: true,
+    boundaryLinks: false,
+    buttonComponentClass: SafeAnchor,
+    bsClass: 'pagination'
+  };
 
-  renderPageButtons() {
+  renderPageButtons = () => {
     let pageButtons = [];
     let startPage, endPage, hasHiddenPagesAfter;
     let {
@@ -174,9 +172,9 @@ const Pagination = React.createClass({
     }
 
     return pageButtons;
-  },
+  };
 
-  renderPrev() {
+  renderPrev = () => {
     if (!this.props.prev) {
       return null;
     }
@@ -193,9 +191,9 @@ const Pagination = React.createClass({
         </span>
       </PaginationButton>
     );
-  },
+  };
 
-  renderNext() {
+  renderNext = () => {
     if (!this.props.next) {
       return null;
     }
@@ -212,9 +210,9 @@ const Pagination = React.createClass({
         </span>
       </PaginationButton>
     );
-  },
+  };
 
-  renderFirst() {
+  renderFirst = () => {
     if (!this.props.first) {
       return null;
     }
@@ -231,9 +229,9 @@ const Pagination = React.createClass({
         </span>
       </PaginationButton>
     );
-  },
+  };
 
-  renderLast() {
+  renderLast = () => {
     if (!this.props.last) {
       return null;
     }
@@ -250,7 +248,7 @@ const Pagination = React.createClass({
         </span>
       </PaginationButton>
     );
-  },
+  };
 
   render() {
     return (
@@ -265,6 +263,6 @@ const Pagination = React.createClass({
       </ul>
     );
   }
-});
+}
 
 export default bsClass('pagination', Pagination);

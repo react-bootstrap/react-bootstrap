@@ -3,7 +3,9 @@
 
 /* eslint-disable */
 const classNames = require('classnames');
+const PropTypes = require('prop-types');
 const React = require('react');
+const createReactClass = require('create-react-class');
 const ReactDOM = require('react-dom');
 
 const Accordion = require('../../src/Accordion');
@@ -148,12 +150,13 @@ const selfCleaningTimeout = {
   }
 };
 
-const ReactPlayground = React.createClass({
+const ReactPlayground = createReactClass({
+  displayName: 'ReactPlayground',
   mixins: [selfCleaningTimeout],
 
   propTypes: {
-    codeText: React.PropTypes.string.isRequired,
-    transformer: React.PropTypes.func
+    codeText: PropTypes.string.isRequired,
+    transformer: PropTypes.func
   },
 
   getDefaultProps() {
@@ -311,7 +314,7 @@ const ReactPlayground = React.createClass({
         500
       );
     }
-  }
+  },
 });
 
 export default ReactPlayground;

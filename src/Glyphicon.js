@@ -1,30 +1,29 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-const Glyphicon = React.createClass({
-  propTypes: {
+class Glyphicon extends React.Component {
+  static propTypes = {
     /**
      * bootstrap className
      * @private
      */
-    bsClass: React.PropTypes.string,
+    bsClass: PropTypes.string,
     /**
      * An icon name. See e.g. http://getbootstrap.com/components/#glyphicons
      */
-    glyph: React.PropTypes.string.isRequired,
+    glyph: PropTypes.string.isRequired,
     /**
      * Adds 'form-control-feedback' class
      * @private
      */
-    formControlFeedback: React.PropTypes.bool
-  },
+    formControlFeedback: PropTypes.bool
+  };
 
-  getDefaultProps() {
-    return {
-      bsClass: 'glyphicon',
-      formControlFeedback: false
-    };
-  },
+  static defaultProps = {
+    bsClass: 'glyphicon',
+    formControlFeedback: false
+  };
 
   render() {
     let className = classNames(this.props.className, {
@@ -39,6 +38,6 @@ const Glyphicon = React.createClass({
       </span>
     );
   }
-});
+}
 
 export default Glyphicon;

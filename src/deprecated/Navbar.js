@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import deprecated from 'react-prop-types/lib/deprecated';
@@ -11,66 +12,61 @@ import { DEFAULT, INVERSE } from '../styleMaps';
 import createChainedFunction from '../utils/createChainedFunction';
 import ValidComponentChildren from '../utils/ValidComponentChildren';
 
-const Navbar = React.createClass({
-
-  propTypes: {
-    fixedTop: React.PropTypes.bool,
-    fixedBottom: React.PropTypes.bool,
-    staticTop: React.PropTypes.bool,
-    inverse: React.PropTypes.bool,
-    fluid: React.PropTypes.bool,
-    role: React.PropTypes.string,
+class Navbar extends React.Component {
+  static propTypes = {
+    fixedTop: PropTypes.bool,
+    fixedBottom: PropTypes.bool,
+    staticTop: PropTypes.bool,
+    inverse: PropTypes.bool,
+    fluid: PropTypes.bool,
+    role: PropTypes.string,
     /**
      * You can use a custom element for this component
      */
     componentClass: elementType,
-    brand: deprecated(React.PropTypes.node, 'Use the `NavBrand` component.'),
-    toggleButton: React.PropTypes.node,
-    toggleNavKey: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
+    brand: deprecated(PropTypes.node, 'Use the `NavBrand` component.'),
+    toggleButton: PropTypes.node,
+    toggleNavKey: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
     ]),
-    onToggle: React.PropTypes.func,
-    navExpanded: React.PropTypes.bool,
-    defaultNavExpanded: React.PropTypes.bool
-  },
+    onToggle: PropTypes.func,
+    navExpanded: PropTypes.bool,
+    defaultNavExpanded: PropTypes.bool
+  };
 
   // TODO Remove in 0.29
-  childContextTypes: {
-    $bs_deprecated_navbar: React.PropTypes.bool
-  },
+  static childContextTypes = {
+    $bs_deprecated_navbar: PropTypes.bool
+  };
+
+  static defaultProps = {
+    role: 'navigation',
+    componentClass: 'nav',
+    fixedTop: false,
+    fixedBottom: false,
+    staticTop: false,
+    inverse: false,
+    fluid: false,
+    defaultNavExpanded: false
+  };
+
+  state = {
+    navExpanded: this.props.defaultNavExpanded
+  };
 
   getChildContext() {
     return {
       $bs_deprecated_navbar: true
     };
-  },
-
-  getDefaultProps() {
-    return {
-      role: 'navigation',
-      componentClass: 'nav',
-      fixedTop: false,
-      fixedBottom: false,
-      staticTop: false,
-      inverse: false,
-      fluid: false,
-      defaultNavExpanded: false
-    };
-  },
-
-  getInitialState() {
-    return {
-      navExpanded: this.props.defaultNavExpanded
-    };
-  },
+  }
 
   shouldComponentUpdate() {
     // Defer any updates to this component during the `onSelect` handler.
     return !this._isChanging;
-  },
+  }
 
-  handleToggle() {
+  handleToggle = () => {
     if (this.props.onToggle) {
       this._isChanging = true;
       this.props.onToggle();
@@ -80,17 +76,17 @@ const Navbar = React.createClass({
     this.setState({
       navExpanded: !this.state.navExpanded
     });
-  },
+  };
 
-  isNavExpanded() {
+  isNavExpanded = () => {
     return this.props.navExpanded != null ? this.props.navExpanded : this.state.navExpanded;
-  },
+  };
 
-  hasNavBrandChild() {
+  hasNavBrandChild = () => {
     return ValidComponentChildren.findValidComponents(
       this.props.children, child => child.props.bsRole === 'brand'
     ).length > 0;
-  },
+  };
 
   render() {
     const {
@@ -137,19 +133,18 @@ const Navbar = React.createClass({
         </Grid>
       </ComponentClass>
     );
-  },
+  }
 
-  renderBrandHeader() {
+  renderBrandHeader = () => {
     let {brand} = this.props;
     if (brand) {
       brand = <NavBrand>{brand}</NavBrand>;
     }
 
     return this.renderHeader(brand);
-  },
+  };
 
-
-  renderHeader(brand) {
+  renderHeader = (brand) => {
     const hasToggle = this.props.toggleButton || this.props.toggleNavKey != null;
     const headerClass = tbsUtils.prefix(this.props, 'header');
 
@@ -159,9 +154,9 @@ const Navbar = React.createClass({
         {hasToggle ? this.renderToggleButton() : null}
       </div>
     );
-  },
+  };
 
-  renderChild(child, index) {
+  renderChild = (child, index) => {
     const key = child.key != null ? child.key : index;
 
     if (child.props.bsRole === 'brand') {
@@ -178,9 +173,9 @@ const Navbar = React.createClass({
       expanded: collapsible && this.isNavExpanded(),
       key
     });
-  },
+  };
 
-  renderToggleButton() {
+  renderToggleButton = () => {
     const {toggleButton} = this.props;
     const toggleClass = tbsUtils.prefix(this.props, 'toggle');
 
@@ -214,9 +209,8 @@ const Navbar = React.createClass({
         {children}
       </button>
     );
-  }
-
-});
+  };
+}
 
 const NAVBAR_STATES = [DEFAULT, INVERSE];
 

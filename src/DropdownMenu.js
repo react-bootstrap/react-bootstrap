@@ -1,4 +1,5 @@
 import keycode from 'keycode';
+import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
@@ -129,14 +130,14 @@ DropdownMenu.defaultProps = {
 };
 
 DropdownMenu.propTypes = {
-  open: React.PropTypes.bool,
-  pullRight: React.PropTypes.bool,
-  onClose: React.PropTypes.func,
-  labelledBy: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number
+  open: PropTypes.bool,
+  pullRight: PropTypes.bool,
+  onClose: PropTypes.func,
+  labelledBy: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
   ]),
-  onSelect: React.PropTypes.func
+  onSelect: PropTypes.func
 };
 
 export default DropdownMenu;

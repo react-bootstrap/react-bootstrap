@@ -1,30 +1,29 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
-const Root = React.createClass({
-  statics: {
-    /**
-     * Get the list of pages that are renderable
-     *
-     * @returns {Array}
-     */
-    getPages() {
-      return [
-        'index.html',
-        'introduction.html',
-        'getting-started.html',
-        'components.html',
-        'support.html'
-      ];
-    }
-  },
+class Root extends React.Component {
+  /**
+   * Get the list of pages that are renderable
+   *
+   * @returns {Array}
+   */
+  static getPages() {
+    return [
+      'index.html',
+      'introduction.html',
+      'getting-started.html',
+      'components.html',
+      'support.html'
+    ];
+  }
 
-  childContextTypes: {
-    metadata: React.PropTypes.object
-  },
+  static childContextTypes = {
+    metadata: PropTypes.object
+  };
 
   getChildContext() {
     return {metadata: Root.propData};
-  },
+  }
 
   render() {
     // Dump out our current props to a global object via a script tag so
@@ -73,7 +72,7 @@ const Root = React.createClass({
       </html>
     );
   }
-});
+}
 
 
 export default Root;

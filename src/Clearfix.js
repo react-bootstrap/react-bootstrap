@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import styleMaps from './styleMaps';
 import elementType from 'react-prop-types/lib/elementType';
 
-const Clearfix = React.createClass({
-  propTypes: {
+class Clearfix extends React.Component {
+  static propTypes = {
     /**
      * You can use a custom element for this component
      */
@@ -16,7 +17,7 @@ const Clearfix = React.createClass({
      *
      * adds class `visible-xs-block`
      */
-    visibleXsBlock: React.PropTypes.bool,
+    visibleXsBlock: PropTypes.bool,
     /**
      * Apply clearfix
      *
@@ -24,7 +25,7 @@ const Clearfix = React.createClass({
      *
      * adds class `visible-sm-block`
      */
-    visibleSmBlock: React.PropTypes.bool,
+    visibleSmBlock: PropTypes.bool,
     /**
      * Apply clearfix
      *
@@ -32,7 +33,7 @@ const Clearfix = React.createClass({
      *
      * adds class `visible-md-block`
      */
-    visibleMdBlock: React.PropTypes.bool,
+    visibleMdBlock: PropTypes.bool,
     /**
      * Apply clearfix
      *
@@ -40,14 +41,12 @@ const Clearfix = React.createClass({
      *
      * adds class `visible-lg-block`
      */
-    visibleLgBlock: React.PropTypes.bool
-  },
+    visibleLgBlock: PropTypes.bool
+  };
 
-  getDefaultProps() {
-    return {
-      componentClass: 'div'
-    };
-  },
+  static defaultProps = {
+    componentClass: 'div'
+  };
 
   render() {
     let ComponentClass = this.props.componentClass;
@@ -66,6 +65,6 @@ const Clearfix = React.createClass({
       </ComponentClass>
     );
   }
-});
+}
 
 export default Clearfix;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import elementType from 'react-prop-types/lib/elementType';
@@ -9,37 +10,34 @@ import { Sizes, State, DEFAULT, PRIMARY, LINK } from './styleMaps';
 
 const ButtonStyles = State.values().concat(DEFAULT, PRIMARY, LINK);
 
-let Button = React.createClass({
-
-  propTypes: {
-    active: React.PropTypes.bool,
-    disabled: React.PropTypes.bool,
-    block: React.PropTypes.bool,
-    navItem: React.PropTypes.bool,
-    navDropdown: React.PropTypes.bool,
+class Button extends React.Component {
+  static propTypes = {
+    active: PropTypes.bool,
+    disabled: PropTypes.bool,
+    block: PropTypes.bool,
+    navItem: PropTypes.bool,
+    navDropdown: PropTypes.bool,
     /**
      * You can use a custom element for this component
      */
     componentClass: elementType,
-    href: React.PropTypes.string,
-    target: React.PropTypes.string,
+    href: PropTypes.string,
+    target: PropTypes.string,
     /**
      * Defines HTML button type Attribute
      * @type {("button"|"reset"|"submit")}
      * @defaultValue 'button'
      */
-    type: React.PropTypes.oneOf(types)
-  },
+    type: PropTypes.oneOf(types)
+  };
 
-  getDefaultProps() {
-    return {
-      active: false,
-      block: false,
-      disabled: false,
-      navItem: false,
-      navDropdown: false
-    };
-  },
+  static defaultProps = {
+    active: false,
+    block: false,
+    disabled: false,
+    navItem: false,
+    navDropdown: false
+  };
 
   render() {
     let classes = this.props.navDropdown ? {} : bootstrapUtils.getClassSet(this.props);
@@ -61,9 +59,9 @@ let Button = React.createClass({
       'renderAnchor' : 'renderButton';
 
     return this[renderFuncName](classes);
-  },
+  }
 
-  renderAnchor(classes) {
+  renderAnchor = (classes) => {
     let Component = this.props.componentClass || 'a';
     let href = this.props.href || '#';
     classes.disabled = this.props.disabled;
@@ -77,9 +75,9 @@ let Button = React.createClass({
         {this.props.children}
       </Component>
     );
-  },
+  };
 
-  renderButton(classes) {
+  renderButton = (classes) => {
     let Component = this.props.componentClass || 'button';
 
     return (
@@ -90,9 +88,9 @@ let Button = React.createClass({
         {this.props.children}
       </Component>
     );
-  },
+  };
 
-  renderNavItem(classes) {
+  renderNavItem = (classes) => {
     let liClasses = {
       active: this.props.active
     };
@@ -102,8 +100,8 @@ let Button = React.createClass({
         {this.renderAnchor(classes)}
       </li>
     );
-  }
-});
+  };
+}
 
 Button.types = types;
 

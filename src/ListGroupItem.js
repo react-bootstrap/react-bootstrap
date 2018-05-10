@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
 import { State } from './styleMaps';
@@ -91,15 +92,15 @@ class ListGroupItem extends React.Component {
 }
 
 ListGroupItem.propTypes = {
-  className: React.PropTypes.string,
-  active: React.PropTypes.any,
-  disabled: React.PropTypes.any,
-  header: React.PropTypes.node,
-  listItem: React.PropTypes.bool,
-  onClick: React.PropTypes.func,
-  eventKey: React.PropTypes.any,
-  href: React.PropTypes.string,
-  target: React.PropTypes.string
+  className: PropTypes.string,
+  active: PropTypes.any,
+  disabled: PropTypes.any,
+  header: PropTypes.node,
+  listItem: PropTypes.bool,
+  onClick: PropTypes.func,
+  eventKey: PropTypes.any,
+  href: PropTypes.string,
+  target: PropTypes.string
 };
 
 ListGroupItem.defaultTypes = {

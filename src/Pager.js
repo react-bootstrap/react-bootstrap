@@ -1,14 +1,14 @@
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import createChainedFunction from './utils/createChainedFunction';
 
-const Pager = React.createClass({
-
-  propTypes: {
-    onSelect: React.PropTypes.func
-  },
+class Pager extends React.Component {
+  static propTypes = {
+    onSelect: PropTypes.func
+  };
 
   render() {
     return (
@@ -18,9 +18,9 @@ const Pager = React.createClass({
         {ValidComponentChildren.map(this.props.children, this.renderPageItem)}
       </ul>
     );
-  },
+  }
 
-  renderPageItem(child, index) {
+  renderPageItem = (child, index) => {
     return cloneElement(
       child,
       {
@@ -28,7 +28,7 @@ const Pager = React.createClass({
         key: child.key ? child.key : index
       }
     );
-  }
-});
+  };
+}
 
 export default Pager;

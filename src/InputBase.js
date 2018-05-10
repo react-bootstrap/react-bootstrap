@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import FormGroup from './FormGroup';
@@ -208,27 +209,27 @@ class InputBase extends React.Component {
 }
 
 InputBase.propTypes = {
-  type: React.PropTypes.string,
-  label: React.PropTypes.node,
-  help: React.PropTypes.node,
-  addonBefore: React.PropTypes.node,
-  addonAfter: React.PropTypes.node,
-  buttonBefore: React.PropTypes.node,
-  buttonAfter: React.PropTypes.node,
-  bsSize: React.PropTypes.oneOf(['small', 'medium', 'large']),
-  bsStyle: React.PropTypes.oneOf(['success', 'warning', 'error']),
-  hasFeedback: React.PropTypes.bool,
-  feedbackIcon: React.PropTypes.node,
-  id: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.number
+  type: PropTypes.string,
+  label: PropTypes.node,
+  help: PropTypes.node,
+  addonBefore: PropTypes.node,
+  addonAfter: PropTypes.node,
+  buttonBefore: PropTypes.node,
+  buttonAfter: PropTypes.node,
+  bsSize: PropTypes.oneOf(['small', 'medium', 'large']),
+  bsStyle: PropTypes.oneOf(['success', 'warning', 'error']),
+  hasFeedback: PropTypes.bool,
+  feedbackIcon: PropTypes.node,
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
   ]),
-  groupClassName: React.PropTypes.string,
-  wrapperClassName: React.PropTypes.string,
-  labelClassName: React.PropTypes.string,
-  multiple: React.PropTypes.bool,
-  disabled: React.PropTypes.bool,
-  value: React.PropTypes.any
+  groupClassName: PropTypes.string,
+  wrapperClassName: PropTypes.string,
+  labelClassName: PropTypes.string,
+  multiple: PropTypes.bool,
+  disabled: PropTypes.bool,
+  value: PropTypes.any
 };
 
 InputBase.defaultProps = {

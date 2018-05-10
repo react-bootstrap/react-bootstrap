@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
 import Col from './Col';
@@ -51,32 +52,32 @@ function move(children, currentKey, keys, moveNext) {
   return next.props.disabled ? currentKey : next.props.eventKey;
 }
 
-const Tabs = React.createClass({
-  propTypes: {
-    activeKey: React.PropTypes.any,
-    defaultActiveKey: React.PropTypes.any,
+class Tabs extends React.Component {
+  static propTypes = {
+    activeKey: PropTypes.any,
+    defaultActiveKey: PropTypes.any,
     /**
      * Navigation style for tabs
      *
      * If not specified, it will be treated as `'tabs'` when vertically
      * positioned and `'pills'` when horizontally positioned.
      */
-    bsStyle: React.PropTypes.oneOf(['tabs', 'pills']),
-    animation: React.PropTypes.bool,
-    id: React.PropTypes.oneOfType([
-      React.PropTypes.string,
-      React.PropTypes.number
+    bsStyle: PropTypes.oneOf(['tabs', 'pills']),
+    animation: PropTypes.bool,
+    id: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
     ]),
-    onSelect: React.PropTypes.func,
-    position: React.PropTypes.oneOf(['top', 'left', 'right']),
+    onSelect: PropTypes.func,
+    position: PropTypes.oneOf(['top', 'left', 'right']),
     /**
      * Number of grid columns for the tabs if horizontally positioned
      *
      * This accepts either a single width or a mapping of size to width.
      */
-    tabWidth: React.PropTypes.oneOfType([
-      React.PropTypes.number,
-      React.PropTypes.object
+    tabWidth: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.object
     ]),
     /**
      * Number of grid columns for the panes if horizontally positioned
@@ -85,35 +86,34 @@ const Tabs = React.createClass({
      * specified, it will be treated as `styleMaps.GRID_COLUMNS` minus
      * `tabWidth`.
      */
-    paneWidth: React.PropTypes.oneOfType([
-      React.PropTypes.number,
-      React.PropTypes.object
+    paneWidth: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.object
     ]),
     /**
      * Render without clearfix if horizontally positioned
      */
-    standalone: React.PropTypes.bool
-  },
+    standalone: PropTypes.bool
+  };
 
-  getDefaultProps() {
-    return {
-      bsClass: 'tab',
-      animation: true,
-      tabWidth: 2,
-      position: 'top',
-      standalone: false
-    };
-  },
+  static defaultProps = {
+    bsClass: 'tab',
+    animation: true,
+    tabWidth: 2,
+    position: 'top',
+    standalone: false
+  };
 
-  getInitialState() {
-    let defaultActiveKey = this.props.defaultActiveKey != null ?
-      this.props.defaultActiveKey : getDefaultActiveKeyFromChildren(this.props.children);
+  constructor(props) {
+    super(props);
+    let defaultActiveKey = props.defaultActiveKey != null ?
+      props.defaultActiveKey : getDefaultActiveKeyFromChildren(props.children);
 
-    return {
+    this.state = {
       activeKey: defaultActiveKey,
       previousActiveKey: null
     };
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.activeKey != null && nextProps.activeKey !== this.props.activeKey) {
@@ -130,7 +130,7 @@ const Tabs = React.createClass({
         }
       });
     }
-  },
+  }
 
   componentDidUpdate() {
     let tabs = this._tabs;
@@ -146,13 +146,13 @@ const Tabs = React.createClass({
         }
       }
     }
-  },
+  }
 
-  handlePaneAnimateOutEnd() {
+  handlePaneAnimateOutEnd = () => {
     this.setState({
       previousActiveKey: null
     });
-  },
+  };
 
   render() {
     let {
@@ -242,13 +242,13 @@ const Tabs = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
-  getActiveKey() {
+  getActiveKey = () => {
     return this.props.activeKey !== undefined ? this.props.activeKey : this.state.activeKey;
-  },
+  };
 
-  renderPane(child, index) {
+  renderPane = (child, index) => {
     let previousActiveKey = this.state.previousActiveKey;
 
     let shouldPaneBeSetActive = child.props.eventKey === this.getActiveKey();
@@ -267,9 +267,9 @@ const Tabs = React.createClass({
         onAnimateOutEnd: paneIsAlreadyActive ? this.handlePaneAnimateOutEnd : null
       }
     );
-  },
+  };
 
-  renderTab(child, index) {
+  renderTab = (child, index) => {
     if (child.props.title == null) {
       return null;
     }
@@ -290,9 +290,9 @@ const Tabs = React.createClass({
         {title}
       </NavItem>
     );
-  },
+  };
 
-  getColProps({tabWidth, paneWidth}) {
+  getColProps = ({tabWidth, paneWidth}) => {
     let tabsColProps;
     if (tabWidth instanceof Object) {
       tabsColProps = tabWidth;
@@ -313,14 +313,14 @@ const Tabs = React.createClass({
     }
 
     return {tabsColProps, panesColProps};
-  },
+  };
 
   shouldComponentUpdate() {
     // Defer any updates to this component during the `onSelect` handler.
     return !this._isChanging;
-  },
+  }
 
-  handleSelect(selectedKey) {
+  handleSelect = (selectedKey) => {
     if (this.props.onSelect) {
       this._isChanging = true;
       this.props.onSelect(selectedKey);
@@ -336,9 +336,9 @@ const Tabs = React.createClass({
         previousActiveKey
       });
     }
-  },
+  };
 
-  handleKeyDown(event) {
+  handleKeyDown = (event) => {
     let keys = this._eventKeys();
     let currentKey = this.getActiveKey() || keys[0];
     let next;
@@ -367,16 +367,16 @@ const Tabs = React.createClass({
       break;
     default:
     }
-  },
+  };
 
-  _eventKeys() {
+  _eventKeys = () => {
     let keys = [];
 
     ValidComponentChildren.forEach(this.props.children,
       ({props: { eventKey }}) => keys.push(eventKey));
 
     return keys;
-  }
-});
+  };
+}
 
 export default Tabs;

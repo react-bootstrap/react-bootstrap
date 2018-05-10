@@ -1,26 +1,25 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 import classNames from 'classnames';
 import tbsUtils from './utils/bootstrapUtils';
 
-const Badge = React.createClass({
-  propTypes: {
-    pullRight: React.PropTypes.bool
-  },
+class Badge extends React.Component {
+  static propTypes = {
+    pullRight: PropTypes.bool
+  };
 
-  getDefaultProps() {
-    return {
-      pullRight: false,
-      bsClass: 'badge'
-    };
-  },
+  static defaultProps = {
+    pullRight: false,
+    bsClass: 'badge'
+  };
 
-  hasContent() {
+  hasContent = () => {
     return ValidComponentChildren.hasValidComponent(this.props.children) ||
       (React.Children.count(this.props.children) > 1) ||
       (typeof this.props.children === 'string') ||
       (typeof this.props.children === 'number');
-  },
+  };
 
   render() {
     let classes = {
@@ -35,6 +34,6 @@ const Badge = React.createClass({
       </span>
     );
   }
-});
+}
 
 export default Badge;

@@ -1,27 +1,25 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import SafeAnchor from './SafeAnchor';
 
-const PageItem = React.createClass({
+class PageItem extends React.Component {
+  static propTypes = {
+    href: PropTypes.string,
+    target: PropTypes.string,
+    title: PropTypes.string,
+    disabled: PropTypes.bool,
+    previous: PropTypes.bool,
+    next: PropTypes.bool,
+    onSelect: PropTypes.func,
+    eventKey: PropTypes.any
+  };
 
-  propTypes: {
-    href: React.PropTypes.string,
-    target: React.PropTypes.string,
-    title: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
-    previous: React.PropTypes.bool,
-    next: React.PropTypes.bool,
-    onSelect: React.PropTypes.func,
-    eventKey: React.PropTypes.any
-  },
-
-  getDefaultProps() {
-    return {
-      disabled: false,
-      previous: false,
-      next: false
-    };
-  },
+  static defaultProps = {
+    disabled: false,
+    previous: false,
+    next: false
+  };
 
   render() {
     let classes = {
@@ -43,9 +41,9 @@ const PageItem = React.createClass({
         </SafeAnchor>
       </li>
     );
-  },
+  }
 
-  handleSelect(e) {
+  handleSelect = (e) => {
     if (this.props.onSelect || this.props.disabled) {
       e.preventDefault();
 
@@ -53,7 +51,7 @@ const PageItem = React.createClass({
         this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
       }
     }
-  }
-});
+  };
+}
 
 export default PageItem;

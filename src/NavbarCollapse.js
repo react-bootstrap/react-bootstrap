@@ -1,13 +1,13 @@
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import tbsUtils from './utils/bootstrapUtils';
 import Collapse from './Collapse';
 
-let NavbarCollapse = React.createClass({
-
-  contextTypes: {
+class NavbarCollapse extends React.Component {
+  static contextTypes = {
     $bs_navbar_bsClass: PropTypes.string,
     $bs_navbar_expanded: PropTypes.bool
-  },
+  };
 
   render() {
     let { children, ...props } = this.props;
@@ -24,6 +24,6 @@ let NavbarCollapse = React.createClass({
       </Collapse>
     );
   }
-});
+}
 
 export default NavbarCollapse;

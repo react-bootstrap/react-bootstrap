@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import tbsUtils from './utils/bootstrapUtils';
@@ -26,7 +27,7 @@ class NavbarBrand extends React.Component {
 }
 
 NavbarBrand.contextTypes = {
-  $bs_navbar_bsClass: React.PropTypes.string
+  $bs_navbar_bsClass: PropTypes.string
 };
 
 export default NavbarBrand;

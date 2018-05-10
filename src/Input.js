@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import InputBase from './InputBase';
 import * as FormControls from './FormControls';
@@ -15,7 +16,7 @@ class Input extends InputBase {
 }
 
 Input.propTypes = {
-  type: React.PropTypes.string
+  type: PropTypes.string
 };
 
 export default Input;

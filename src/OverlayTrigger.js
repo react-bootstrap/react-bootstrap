@@ -1,7 +1,10 @@
-/* eslint-disable react/prop-types */
-
 import contains from 'dom-helpers/query/contains';
 import pick from 'lodash-compat/object/pick';
+
+/* eslint-disable react/prop-types */
+
+import PropTypes from 'prop-types';
+
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
 import warning from 'warning';
@@ -24,63 +27,63 @@ function isOneOf(one, of) {
   return one === of;
 }
 
-const OverlayTrigger = React.createClass({
-  propTypes: {
+class OverlayTrigger extends React.Component {
+  static propTypes = {
 
     ...Overlay.propTypes,
 
      /**
      * Specify which action or actions trigger Overlay visibility
      */
-    trigger: React.PropTypes.oneOfType([
-      React.PropTypes.oneOf(['click', 'hover', 'focus']),
-      React.PropTypes.arrayOf(React.PropTypes.oneOf(['click', 'hover', 'focus']))
+    trigger: PropTypes.oneOfType([
+      PropTypes.oneOf(['click', 'hover', 'focus']),
+      PropTypes.arrayOf(PropTypes.oneOf(['click', 'hover', 'focus']))
     ]),
 
     /**
      * A millisecond delay amount to show and hide the Overlay once triggered
      */
-    delay: React.PropTypes.number,
+    delay: PropTypes.number,
     /**
      * A millisecond delay amount before showing the Overlay once triggered.
      */
-    delayShow: React.PropTypes.number,
+    delayShow: PropTypes.number,
     /**
      * A millisecond delay amount before hiding the Overlay once triggered.
      */
-    delayHide: React.PropTypes.number,
+    delayHide: PropTypes.number,
 
     /**
      * The initial visibility state of the Overlay, for more nuanced visibility controll consider
      * using the Overlay component directly.
      */
-    defaultOverlayShown: React.PropTypes.bool,
+    defaultOverlayShown: PropTypes.bool,
 
     /**
      * An element or text to overlay next to the target.
      */
-    overlay: React.PropTypes.node.isRequired,
+    overlay: PropTypes.node.isRequired,
 
     /**
      * @private
      */
-    onBlur: React.PropTypes.func,
+    onBlur: PropTypes.func,
     /**
      * @private
      */
-    onClick: React.PropTypes.func,
+    onClick: PropTypes.func,
     /**
      * @private
      */
-    onFocus: React.PropTypes.func,
+    onFocus: PropTypes.func,
     /**
      * @private
      */
-    onMouseEnter: React.PropTypes.func,
+    onMouseEnter: PropTypes.func,
     /**
      * @private
      */
-    onMouseLeave: React.PropTypes.func,
+    onMouseLeave: PropTypes.func,
 
     // override specific overlay props
     /**
@@ -95,75 +98,71 @@ const OverlayTrigger = React.createClass({
      * @private
      */
     show() {}
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      defaultOverlayShown: false,
-      trigger: ['hover', 'focus']
-    };
-  },
+  static defaultProps = {
+    defaultOverlayShown: false,
+    trigger: ['hover', 'focus']
+  };
 
-  getInitialState() {
-    return {
-      isOverlayShown: this.props.defaultOverlayShown
-    };
-  },
+  state = {
+    isOverlayShown: this.props.defaultOverlayShown
+  };
 
-  show() {
+  show = () => {
     this.setState({
       isOverlayShown: true
     });
-  },
+  };
 
-  hide() {
+  hide = () => {
     this.setState({
       isOverlayShown: false
     });
-  },
+  };
 
-  toggle() {
+  toggle = () => {
     if (this.state.isOverlayShown) {
       this.hide();
     } else {
       this.show();
     }
-  },
+  };
 
   componentWillMount() {
     this.handleMouseOver = this.handleMouseOverOut.bind(null, this.handleDelayedShow);
     this.handleMouseOut = this.handleMouseOverOut.bind(null, this.handleDelayedHide);
-  },
+  }
 
   componentDidMount() {
     this._mountNode = document.createElement('div');
     this.renderOverlay();
-  },
+  }
 
-  renderOverlay() {
+  renderOverlay = () => {
     ReactDOM.unstable_renderSubtreeIntoContainer(
       this, this._overlay, this._mountNode
     );
-  },
+  };
 
   componentWillUnmount() {
     ReactDOM.unmountComponentAtNode(this._mountNode);
     this._mountNode = null;
     clearTimeout(this._hoverShowDelay);
     clearTimeout(this._hoverHideDelay);
-  },
+  }
 
   componentDidUpdate() {
     if (this._mountNode) {
       this.renderOverlay();
     }
-  },
+  }
 
-  getOverlayTarget() {
+  getOverlayTarget = () => {
     return ReactDOM.findDOMNode(this);
-  },
+  };
 
-  getOverlay() {
+  getOverlay = () => {
     let overlayProps = {
       ...pick(this.props, Object.keys(Overlay.propTypes)),
       show: this.state.isOverlayShown,
@@ -187,7 +186,7 @@ const OverlayTrigger = React.createClass({
         { overlay }
       </Overlay>
     );
-  },
+  };
 
   render() {
     const trigger = React.Children.only(this.props.children);
@@ -224,9 +223,9 @@ const OverlayTrigger = React.createClass({
       trigger,
       props
     );
-  },
+  }
 
-  handleDelayedShow() {
+  handleDelayedShow = () => {
     if (this._hoverHideDelay != null) {
       clearTimeout(this._hoverHideDelay);
       this._hoverHideDelay = null;
@@ -249,9 +248,9 @@ const OverlayTrigger = React.createClass({
       this._hoverShowDelay = null;
       this.show();
     }, delay);
-  },
+  };
 
-  handleDelayedHide() {
+  handleDelayedHide = () => {
     if (this._hoverShowDelay != null) {
       clearTimeout(this._hoverShowDelay);
       this._hoverShowDelay = null;
@@ -274,21 +273,20 @@ const OverlayTrigger = React.createClass({
       this._hoverHideDelay = null;
       this.hide();
     }, delay);
-  },
+  };
 
   // Simple implementation of mouseEnter and mouseLeave.
   // React's built version is broken: https://github.com/facebook/react/issues/4251
   // for cases when the trigger is disabled and mouseOut/Over can cause flicker moving
   // from one child element to another.
-  handleMouseOverOut(handler, e) {
+  handleMouseOverOut = (handler, e) => {
     let target = e.currentTarget;
     let related = e.relatedTarget || e.nativeEvent.toElement;
 
     if (!related || related !== target && !contains(target, related)) {
       handler(e);
     }
-  }
-
-});
+  };
+}
 
 export default OverlayTrigger;

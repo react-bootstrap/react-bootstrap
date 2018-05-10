@@ -1,11 +1,11 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import tbsUtils from './utils/bootstrapUtils';
 import isRequiredForA11y from 'react-prop-types/lib/isRequiredForA11y';
 
-const Popover = React.createClass({
-
-  propTypes: {
+class Popover extends React.Component {
+  static propTypes = {
 
     /**
      * An html id attribute, necessary for accessibility
@@ -13,49 +13,47 @@ const Popover = React.createClass({
      * @required
      */
     id: isRequiredForA11y(
-      React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number
+      PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
       ])
     ),
 
     /**
      * Sets the direction the Popover is positioned towards.
      */
-    placement: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+    placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
     /**
      * The "left" position value for the Popover.
      */
-    positionLeft: React.PropTypes.number,
+    positionLeft: PropTypes.number,
     /**
      * The "top" position value for the Popover.
      */
-    positionTop: React.PropTypes.number,
+    positionTop: PropTypes.number,
     /**
      * The "left" position value for the Popover arrow.
      */
-    arrowOffsetLeft: React.PropTypes.oneOfType([
-      React.PropTypes.number, React.PropTypes.string
+    arrowOffsetLeft: PropTypes.oneOfType([
+      PropTypes.number, PropTypes.string
     ]),
     /**
      * The "top" position value for the Popover arrow.
      */
-    arrowOffsetTop: React.PropTypes.oneOfType([
-      React.PropTypes.number, React.PropTypes.string
+    arrowOffsetTop: PropTypes.oneOfType([
+      PropTypes.number, PropTypes.string
     ]),
     /**
      * Title text
      */
-    title: React.PropTypes.node
-  },
+    title: PropTypes.node
+  };
 
-  getDefaultProps() {
-    return {
-      placement: 'right',
-      bsClass: 'popover'
-    };
-  },
+  static defaultProps = {
+    placement: 'right',
+    bsClass: 'popover'
+  };
 
   render() {
     const classes = {
@@ -85,15 +83,15 @@ const Popover = React.createClass({
         </div>
       </div>
     );
-  },
+  }
 
-  renderTitle() {
+  renderTitle = () => {
     return (
       <h3 className={tbsUtils.prefix(this.props, 'title')}>
         {this.props.title}
       </h3>
     );
-  }
-});
+  };
+}
 
 export default Popover;

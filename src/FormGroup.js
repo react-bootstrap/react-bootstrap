@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
@@ -27,18 +28,18 @@ FormGroup.defaultProps = {
 };
 
 FormGroup.propTypes = {
-  standalone: React.PropTypes.bool,
-  hasFeedback: React.PropTypes.bool,
+  standalone: PropTypes.bool,
+  hasFeedback: PropTypes.bool,
   bsSize(props) {
     if (props.standalone && props.bsSize !== undefined) {
       return new Error('bsSize will not be used when `standalone` is set.');
     }
 
-    return React.PropTypes.oneOf(['small', 'medium', 'large'])
+    return PropTypes.oneOf(['small', 'medium', 'large'])
       .apply(null, arguments);
   },
-  bsStyle: React.PropTypes.oneOf(['success', 'warning', 'error']),
-  groupClassName: React.PropTypes.string
+  bsStyle: PropTypes.oneOf(['success', 'warning', 'error']),
+  groupClassName: PropTypes.string
 };
 
 export default FormGroup;

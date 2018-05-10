@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 
@@ -5,31 +6,27 @@ import ValidComponentChildren from '../../src/utils/ValidComponentChildren';
 import createChainedFunction from '../../src/utils/createChainedFunction';
 import SafeAnchor from '../../src/SafeAnchor';
 
-const SubNav = React.createClass({
+class SubNav extends React.Component {
+  static propTypes = {
+    onSelect: PropTypes.func,
+    active: PropTypes.bool,
+    activeHref: PropTypes.string,
+    activeKey: PropTypes.any,
+    disabled: PropTypes.bool,
+    eventKey: PropTypes.any,
+    href: PropTypes.string,
+    title: PropTypes.string,
+    text: PropTypes.node,
+    target: PropTypes.string
+  };
 
+  static defaultProps = {
+    bsClass: 'nav',
+    active: false,
+    disabled: false
+  };
 
-  propTypes: {
-    onSelect: React.PropTypes.func,
-    active: React.PropTypes.bool,
-    activeHref: React.PropTypes.string,
-    activeKey: React.PropTypes.any,
-    disabled: React.PropTypes.bool,
-    eventKey: React.PropTypes.any,
-    href: React.PropTypes.string,
-    title: React.PropTypes.string,
-    text: React.PropTypes.node,
-    target: React.PropTypes.string
-  },
-
-  getDefaultProps() {
-    return {
-      bsClass: 'nav',
-      active: false,
-      disabled: false
-    };
-  },
-
-  handleClick(e) {
+  handleClick = (e) => {
     if (this.props.onSelect) {
       e.preventDefault();
 
@@ -37,13 +34,13 @@ const SubNav = React.createClass({
         this.props.onSelect(this.props.eventKey, this.props.href, this.props.target);
       }
     }
-  },
+  };
 
-  isActive() {
+  isActive = () => {
     return this.isChildActive(this);
-  },
+  };
 
-  isChildActive(child) {
+  isChildActive = (child) => {
     if (child.props.active) {
       return true;
     }
@@ -73,9 +70,9 @@ const SubNav = React.createClass({
     }
 
     return false;
-  },
+  };
 
-  getChildActiveProp(child) {
+  getChildActiveProp = (child) => {
     if (child.props.active) {
       return true;
     }
@@ -91,7 +88,7 @@ const SubNav = React.createClass({
     }
 
     return child.props.active;
-  },
+  };
 
   render() {
     let classes = {
@@ -113,9 +110,9 @@ const SubNav = React.createClass({
         </ul>
       </li>
     );
-  },
+  }
 
-  renderNavItem(child, index) {
+  renderNavItem = (child, index) => {
     return cloneElement(
       child,
       {
@@ -124,7 +121,7 @@ const SubNav = React.createClass({
         key: child.key ? child.key : index
       }
     );
-  }
-});
+  };
+}
 
 export default SubNav;

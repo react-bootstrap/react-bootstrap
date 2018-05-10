@@ -1,4 +1,5 @@
-import React, { cloneElement, PropTypes } from 'react';
+import PropTypes from 'prop-types';
+import React, { cloneElement } from 'react';
 import Interpolate from './Interpolate';
 import bootstrapUtils, { bsStyles, bsClass } from './utils/bootstrapUtils';
 import { State } from './styleMaps';
@@ -128,7 +129,7 @@ ProgressBar.propTypes = {
   striped: PropTypes.bool,
   active: PropTypes.bool,
   children: onlyProgressBar,
-  className: React.PropTypes.string,
+  className: PropTypes.string,
   interpolateClass: PropTypes.node,
   /**
    * @private

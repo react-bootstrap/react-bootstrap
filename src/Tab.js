@@ -1,27 +1,31 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import createReactClass from 'create-react-class';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import tbsUtils from './utils/bootstrapUtils';
 import TransitionEvents from './utils/TransitionEvents';
 
-const Tab = React.createClass({
+const Tab = createReactClass({
+  displayName: 'Tab',
+
   propTypes: {
     /**
      * @private
      */
-    active: React.PropTypes.bool,
-    animation: React.PropTypes.bool,
+    active: PropTypes.bool,
+    animation: PropTypes.bool,
     /**
      * It is used by 'Tabs' - parent component
      * @private
      */
-    onAnimateOutEnd: React.PropTypes.func,
-    disabled: React.PropTypes.bool,
-    title: React.PropTypes.node,
+    onAnimateOutEnd: PropTypes.func,
+    disabled: PropTypes.bool,
+    title: PropTypes.node,
     /**
      * tabClassName is used as className for the associated NavItem
      */
-    tabClassName: React.PropTypes.string
+    tabClassName: PropTypes.string
   },
 
   getDefaultProps() {
@@ -102,7 +106,7 @@ const Tab = React.createClass({
         {this.props.children}
       </div>
     );
-  }
+  },
 });
 
 export default Tab;

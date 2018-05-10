@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import tbsUtils, { bsClass } from './utils/bootstrapUtils';
@@ -36,24 +37,24 @@ ModalHeader.propTypes = {
    * The 'aria-label' attribute provides an accessible label for the close button.
    * It is used for Assistive Technology when the label text is not readable.
    */
-  'aria-label': React.PropTypes.string,
+  'aria-label': PropTypes.string,
 
-  bsClass: React.PropTypes.string,
+  bsClass: PropTypes.string,
 
   /**
    * Specify whether the Component should contain a close button
    */
-  closeButton: React.PropTypes.bool,
+  closeButton: PropTypes.bool,
 
   /**
    * A Callback fired when the close button is clicked. If used directly inside a Modal component, the onHide will automatically
    * be propagated up to the parent Modal `onHide`.
    */
-  onHide: React.PropTypes.func
+  onHide: PropTypes.func
 };
 
 ModalHeader.contextTypes = {
-  '$bs_onModalHide': React.PropTypes.func
+  '$bs_onModalHide': PropTypes.func
 };
 
 ModalHeader.defaultProps = {

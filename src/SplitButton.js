@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Button from './Button';
 import Dropdown from './Dropdown';
@@ -59,16 +60,16 @@ SplitButton.propTypes = {
    * @private
    */
   onClick() {},
-  target: React.PropTypes.string,
-  href: React.PropTypes.string,
+  target: PropTypes.string,
+  href: PropTypes.string,
   /**
    * The content of the split button.
    */
-  title: React.PropTypes.node.isRequired,
+  title: PropTypes.node.isRequired,
   /**
    * Accessible label for the toggle; the value of `title` if not specified.
    */
-  toggleLabel: React.PropTypes.string
+  toggleLabel: PropTypes.string
 };
 
 SplitButton.defaultProps = {

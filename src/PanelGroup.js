@@ -1,34 +1,32 @@
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import classNames from 'classnames';
 
 import bootstrapUtils, { bsClass } from './utils/bootstrapUtils';
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
-const PanelGroup = React.createClass({
+class PanelGroup extends React.Component {
+  static propTypes = {
+    accordion: PropTypes.bool,
+    activeKey: PropTypes.any,
+    className: PropTypes.string,
+    children: PropTypes.node,
+    defaultActiveKey: PropTypes.any,
+    onSelect: PropTypes.func
+  };
 
+  static defaultProps = {
+    accordion: false
+  };
 
-  propTypes: {
-    accordion: React.PropTypes.bool,
-    activeKey: React.PropTypes.any,
-    className: React.PropTypes.string,
-    children: React.PropTypes.node,
-    defaultActiveKey: React.PropTypes.any,
-    onSelect: React.PropTypes.func
-  },
+  constructor(props) {
+    super(props);
+    let defaultActiveKey = props.defaultActiveKey;
 
-  getDefaultProps() {
-    return {
-      accordion: false
-    };
-  },
-
-  getInitialState() {
-    let defaultActiveKey = this.props.defaultActiveKey;
-
-    return {
+    this.state = {
       activeKey: defaultActiveKey
     };
-  },
+  }
 
   render() {
     let classes = bootstrapUtils.getClassSet(this.props);
@@ -39,9 +37,9 @@ const PanelGroup = React.createClass({
         {ValidComponentChildren.map(props.children, this.renderPanel)}
       </div>
     );
-  },
+  }
 
-  renderPanel(child, index) {
+  renderPanel = (child, index) => {
     let activeKey =
       this.props.activeKey != null ? this.props.activeKey : this.state.activeKey;
 
@@ -63,14 +61,14 @@ const PanelGroup = React.createClass({
       child,
       props
     );
-  },
+  };
 
   shouldComponentUpdate() {
     // Defer any updates to this component during the `onSelect` handler.
     return !this._isChanging;
-  },
+  }
 
-  handleSelect(e, key) {
+  handleSelect = (e, key) => {
     e.preventDefault();
 
     if (this.props.onSelect) {
@@ -86,7 +84,7 @@ const PanelGroup = React.createClass({
     this.setState({
       activeKey: key
     });
-  }
-});
+  };
+}
 
 export default bsClass('panel-group', PanelGroup);

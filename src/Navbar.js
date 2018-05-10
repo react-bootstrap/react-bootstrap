@@ -1,5 +1,7 @@
 /* eslint react/no-multi-comp: 0 */
-import React, { PropTypes } from 'react';
+import PropTypes from 'prop-types';
+
+import React from 'react';
 import uncontrollable from 'uncontrollable';
 import classNames from 'classnames';
 import elementType from 'react-prop-types/lib/elementType';
@@ -34,30 +36,29 @@ function shouldRenderOldNavbar(component) {
   );
 }
 
-let Navbar = React.createClass({
-
-  propTypes: {
+class Navbar extends React.Component {
+  static propTypes = {
     /**
      * Create a fixed navbar along the top of the screen, that scrolls with the page
      */
-    fixedTop: React.PropTypes.bool,
+    fixedTop: PropTypes.bool,
     /**
      * Create a fixed navbar along the bottom of the screen, that scrolls with the page
      */
-    fixedBottom: React.PropTypes.bool,
+    fixedBottom: PropTypes.bool,
     /**
      * Create a full-width navbar that scrolls away with the page
      */
-    staticTop: React.PropTypes.bool,
+    staticTop: PropTypes.bool,
     /**
      * An alternative dark visual style for the Navbar
      */
-    inverse: React.PropTypes.bool,
+    inverse: PropTypes.bool,
     /**
      * Allow the Navbar to fluidly adjust to the page or container width, instead of at the
      * predefined screen breakpoints
      */
-    fluid: React.PropTypes.bool,
+    fluid: PropTypes.bool,
 
     /**
      * Set a custom element for this component.
@@ -69,39 +70,37 @@ let Navbar = React.createClass({
      *
      * @controllable navExpanded
      */
-    onToggle: React.PropTypes.func,
+    onToggle: PropTypes.func,
 
     /**
      * Explicitly set the visiblity of the navbar body
      *
      * @controllable onToggle
      */
-    expanded: React.PropTypes.bool,
+    expanded: PropTypes.bool,
 
     /**
      * @deprecated
      */
-    navExpanded: deprecated(React.PropTypes.bool,
+    navExpanded: deprecated(PropTypes.bool,
       'Use `expanded` and `defaultExpanded` instead.')
-  },
+  };
 
-  childContextTypes: {
+  static childContextTypes = {
     $bs_navbar: PropTypes.bool,
     $bs_navbar_bsClass: PropTypes.string,
     $bs_navbar_onToggle: PropTypes.func,
     $bs_navbar_expanded: PropTypes.bool,
-  },
+  };
 
-  getDefaultProps() {
-    return {
-      componentClass: 'nav',
-      fixedTop: false,
-      fixedBottom: false,
-      staticTop: false,
-      inverse: false,
-      fluid: false
-    };
-  },
+  static defaultProps = {
+    componentClass: 'nav',
+    fixedTop: false,
+    fixedBottom: false,
+    staticTop: false,
+    inverse: false,
+    fluid: false
+  };
 
   getChildContext() {
     return {
@@ -110,15 +109,15 @@ let Navbar = React.createClass({
       $bs_navbar_onToggle: this.handleToggle,
       $bs_navbar_expanded: this.props.expanded
     };
-  },
+  }
 
-  handleToggle() {
+  handleToggle = () => {
     this.props.onToggle(!this.props.expanded);
-  },
+  };
 
-  isNavExpanded() {
+  isNavExpanded = () => {
     return !!this.props.expanded;
-  },
+  };
 
   render() {
     if (shouldRenderOldNavbar(this)) {
@@ -170,7 +169,7 @@ let Navbar = React.createClass({
       </ComponentClass>
     );
   }
-});
+}
 
 const NAVBAR_STATES = [DEFAULT, INVERSE];
 
@@ -196,8 +195,8 @@ function createSimpleWrapper(tag, suffix, displayName) {
 
   wrapper.propTypes = {
     componentClass: elementType,
-    pullRight: React.PropTypes.bool,
-    pullLeft: React.PropTypes.bool,
+    pullRight: PropTypes.bool,
+    pullLeft: PropTypes.bool,
   };
   wrapper.defaultProps = {
     componentClass: tag,
