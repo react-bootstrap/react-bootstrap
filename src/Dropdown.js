@@ -63,8 +63,15 @@ const propTypes = {
    * `show` value, the DOM event, and the source that fired it: `'click'`,`'keydown'`,`'rootClose'`, or `'select'`.
    *
    * ```js
-   * function(Boolean isOpen, Object event, { String source }) {}
+   * function(
+   *   isOpen: boolean,
+   *   event: SyntheticEvent,
+   *   metadata: {
+   *     source: 'select' | 'click' | 'rootCloose' | 'keydown'
+   *   }
+   * ): void
    * ```
+   *
    * @controllable show
    */
   onToggle: PropTypes.func,
@@ -148,7 +155,6 @@ class Dropdown extends React.Component {
   }
 
   componentDidMount() {
-    // this.focusNextOnOpen();
     if (this.props.show) this.updatePosition();
   }
 
@@ -174,23 +180,23 @@ class Dropdown extends React.Component {
     if (this.popper) this.popper.destroy();
   }
 
-  get hasMenuRole() {
-    return this.menu && matches(this.menu, '[role=menu]');
-  }
-
   getNextFocusedChild(current, offset) {
     if (!this.menu) return null;
 
     const { bsPrefix } = this.props;
     let items = qsa(
       this.menu,
-      `.${bsPrefix}-item:not(.disabled):not(:disabled)`
+      `.${bsPrefix}-item:not(.disabled):not(:disabled)` // same as upstream
     );
 
     let index = items.indexOf(current) + offset;
     index = Math.max(0, Math.min(index, items.length));
 
     return items[index];
+  }
+
+  hasMenuRole() {
+    return this.menu && matches(this.menu, '[role=menu]');
   }
 
   focus() {
@@ -200,7 +206,7 @@ class Dropdown extends React.Component {
   }
 
   maybeFocusFirst() {
-    if (!this.hasMenuRole) return;
+    if (!this.hasMenuRole()) return;
 
     const { bsPrefix } = this.props;
     let first = this.menu.querySelector(`.${bsPrefix}-item:not(.disabled)`);

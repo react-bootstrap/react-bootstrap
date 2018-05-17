@@ -15,10 +15,13 @@ class SplitButton extends React.Component {
      */
     toggleLabel: PropTypes.string,
 
-    /** An `href` passed to the Toggle component */
+    /** An `href` passed to the non-toggle Button */
     href: PropTypes.string,
 
-    /** An `onClick` handler passed to the Toggle component */
+    /** An anchor `target` passed to the non-toggle Button */
+    target: PropTypes.string,
+
+    /** An `onClick` handler passed to the non-toggle Button */
     onClick: PropTypes.func,
 
     /** The content of the non-toggle Button.  */
@@ -58,6 +61,7 @@ class SplitButton extends React.Component {
       children,
       onClick,
       href,
+      target,
       menuRole,
       rootCloseEvent,
       ...props
@@ -71,6 +75,7 @@ class SplitButton extends React.Component {
           disabled={props.disabled}
           bsPrefix={bsPrefix}
           href={href}
+          target={target}
           onClick={onClick}
         >
           {title}

@@ -106,21 +106,25 @@ export default mapContextToProps(
     let navItemKey = makeEventKey(eventKey, href);
 
     const props = {
+      active,
       eventKey: navItemKey,
-      onSelect: chain(pSelect, onSelect),
-      id: navContext.getControllerId(eventKey),
-      'aria-controls': navContext.getControlledId(eventKey),
-      active:
-        active == null && navItemKey != null
-          ? makeEventKey(navContext.activeKey) === navItemKey
-          : active
+      onSelect: chain(pSelect, onSelect)
     };
 
-    if (navContext.role === 'tablist') {
-      props.role = role || 'tab';
-      props.tabIndex = props.active ? tabIndex : -1;
-      props['aria-selected'] = props.active;
-      props['data-rb-event-key'] = navItemKey;
+    if (navContext) {
+      props.id = navContext.getControllerId(eventKey);
+      props['aria-controls'] = navContext.getControlledId(eventKey);
+      props.active =
+        active == null && navItemKey != null
+          ? makeEventKey(navContext.activeKey) === navItemKey
+          : active;
+
+      if (navContext.role === 'tablist') {
+        props.role = role || 'tab';
+        props.tabIndex = props.active ? tabIndex : -1;
+        props['aria-selected'] = props.active;
+        props['data-rb-event-key'] = navItemKey;
+      }
     }
 
     return props;

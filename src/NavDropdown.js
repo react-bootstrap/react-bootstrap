@@ -12,8 +12,11 @@ const propTypes = {
   /** The content of the non-toggle Button.  */
   title: PropTypes.node.isRequired,
 
-  /** Disables both Buttons  */
+  /** Disables the toggle NavLink  */
   disabled: PropTypes.bool,
+
+  /** Style the toggle NavLink as active  */
+  active: PropTypes.bool,
 
   /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
   menuRole: PropTypes.string,
@@ -38,6 +41,7 @@ class NavDropdown extends React.Component {
       rootCloseEvent,
       menuRole,
       disabled,
+      active,
       ...props
     } = this.props;
 
@@ -45,6 +49,7 @@ class NavDropdown extends React.Component {
       <Dropdown {...props} as={NavItem}>
         <Dropdown.Toggle
           eventKey={null}
+          active={active}
           disabled={disabled}
           childBsPrefix={bsPrefix}
           as={NavLink}
