@@ -1,34 +1,26 @@
 class ControlledTabs extends React.Component {
   constructor(props, context) {
     super(props, context);
-
-    this.handleSelect = this.handleSelect.bind(this);
-
     this.state = {
-      key: 1
+      key: 'home'
     };
-  }
-
-  handleSelect(key) {
-    alert(`selected ${key}`);
-    this.setState({ key });
   }
 
   render() {
     return (
       <Tabs
-        activeKey={this.state.key}
-        onSelect={this.handleSelect}
         id="controlled-tab-example"
+        activeKey={this.state.key}
+        onSelect={key => this.setState({ key })}
       >
-        <Tab eventKey={1} title="Tab 1">
-          Tab 1 content
+        <Tab eventKey="home" title="Home">
+          <Sonnet />
         </Tab>
-        <Tab eventKey={2} title="Tab 2">
-          Tab 2 content
+        <Tab eventKey="profile" title="Profile">
+          <Sonnet />
         </Tab>
-        <Tab eventKey={3} title="Tab 3" disabled>
-          Tab 3 content
+        <Tab eventKey="contact" title="Contact" disabled>
+          <Sonnet />
         </Tab>
       </Tabs>
     );

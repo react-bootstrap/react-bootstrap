@@ -30,7 +30,7 @@ function isTrivialHref(href) {
  * an anchor tag is needed, when semantically a button tag is the
  * better choice. SafeAnchor ensures that when an anchor is used like a
  * button its accessible. It also emulates input `disabled` behavior for
- * links, which is usually desirable for Buttons, NavItems, MenuItems, etc.
+ * links, which is usually desirable for Buttons, NavItems, DropdownItems, etc.
  */
 class SafeAnchor extends React.Component {
   constructor(props, context) {

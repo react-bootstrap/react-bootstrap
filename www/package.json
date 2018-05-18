@@ -26,7 +26,8 @@
     "react-bootstrap": "*",
     "react-dom": "^15.5.4",
     "react-helmet": "^5.2.0",
-    "react-live": "^1.9.2"
+    "react-live": "^1.9.2",
+    "shakespeare-data": "^2.5.0"
   },
   "devDependencies": {
     "@babel/preset-flow": "^7.0.0-beta.40"

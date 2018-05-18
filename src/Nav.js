@@ -9,9 +9,11 @@ import uncontrollable from 'uncontrollable';
 import { createBootstrapComponent } from './ThemeProvider';
 import TabContext from './TabContext';
 import mapContextToProps from './utils/mapContextToProps';
+import chain from './utils/createChainedFunction';
 import NavContext from './NavContext';
 import NavbarContext from './NavbarContext';
 import CardContext from './CardContext';
+import SelectableContext from './SelectableContext';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
 
@@ -165,7 +167,11 @@ class Nav extends React.Component {
     onSelect(nextActiveChild.dataset.rbEventKey);
     this._needsRefocus = true;
   };
-
+  handleSelect = (key, event) => {
+    const { onSelect } = this.props;
+    if (key == null || !onSelect) return;
+    onSelect(key, event);
+  };
   attachRef = ref => {
     this.listNode = ref;
   };
@@ -181,12 +187,12 @@ class Nav extends React.Component {
       navbar,
       className,
       children,
+      onSelect: _,
       as: Component,
       ...props
     } = this.props;
 
     delete props.activeKey;
-    delete props.onSelect;
     delete props.getControlledId;
     delete props.getControllerId;
 
@@ -196,20 +202,22 @@ class Nav extends React.Component {
 
     return (
       <NavContext.Provider value={this.state.navContext}>
-        <Component
-          {...props}
-          ref={this.attachRef}
-          className={classNames(className, {
-            [bsPrefix]: !navbar,
-            [`${navbarBsPrefix}-nav`]: navbar,
-            [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
-            [`${bsPrefix}-${variant}`]: !!variant,
-            [`${bsPrefix}-fill`]: fill,
-            [`${bsPrefix}-justified`]: justify
-          })}
-        >
-          {children}
-        </Component>
+        <SelectableContext.Provider value={this.handleSelect}>
+          <Component
+            {...props}
+            ref={this.attachRef}
+            className={classNames(className, {
+              [bsPrefix]: !navbar,
+              [`${navbarBsPrefix}-nav`]: navbar,
+              [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
+              [`${bsPrefix}-${variant}`]: !!variant,
+              [`${bsPrefix}-fill`]: fill,
+              [`${bsPrefix}-justified`]: justify
+            })}
+          >
+            {children}
+          </Component>
+        </SelectableContext.Provider>
       </NavContext.Provider>
     );
   }
@@ -221,32 +229,38 @@ const UncontrolledNav = uncontrollable(createBootstrapComponent(Nav, 'nav'), {
 
 const DecoratedNav = mapContextToProps(
   UncontrolledNav,
-  [TabContext.Consumer, NavbarContext.Consumer, CardContext.Consumer],
-  (tabContext, navbarContext, cardContext, { role, navbar }) => {
-    if (!tabContext && !navbarContext && !cardContext) return null;
+  [
+    SelectableContext.Consumer,
+    TabContext.Consumer,
+    NavbarContext.Consumer,
+    CardContext.Consumer
+  ],
+  (
+    onSelect,
+    tabContext,
+    navbarContext,
+    cardContext,
+    { role, navbar, onSelect: propsOnSelect }
+  ) => {
+    onSelect = chain(propsOnSelect, onSelect);
+    if (!tabContext && !navbarContext && !cardContext) return { onSelect };
 
     if (navbarContext)
       return {
-        onSelect: navbarContext.onSelect,
+        onSelect,
         navbarBsPrefix: navbarContext.bsPrefix,
         navbar: navbar == null ? true : navbar
       };
 
     if (cardContext)
-      return {
-        cardHeaderBsPrefix: cardContext.cardHeaderBsPrefix
-      };
+      return { cardHeaderBsPrefix: cardContext.cardHeaderBsPrefix };
 
-    const {
-      activeKey,
-      onSelect,
-      getControllerId,
-      getControlledId
-    } = tabContext;
-
+    const { activeKey, getControllerId, getControlledId } = tabContext;
     return {
       activeKey,
       onSelect,
+      // pass these two through to avoid having to listen to
+      // both Tab and Nav contexts in NavLink
       getControllerId,
       getControlledId,
       role: role || 'tablist'

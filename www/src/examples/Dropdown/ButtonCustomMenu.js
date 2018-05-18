@@ -35,20 +35,22 @@ class CustomMenu extends React.Component {
     this.setState({ value: e.target.value });
   }
 
-  focusNext() {
-    const input = ReactDOM.findDOMNode(this.input);
-
-    if (input) {
-      input.focus();
-    }
-  }
-
   render() {
-    const { children } = this.props;
+    const {
+      children,
+      style,
+      className,
+      'aria-labelledby': labeledBy
+    } = this.props;
+
     const { value } = this.state;
 
     return (
-      <div className="dropdown-menu" style={{ padding: '' }}>
+      <div
+        className={className}
+        aria-labelledby={labeledBy}
+        style={{ ...style, padding: '' }}
+      >
         <FormControl
           ref={c => {
             this.input = c;
@@ -70,15 +72,15 @@ class CustomMenu extends React.Component {
 
 render(
   <Dropdown id="dropdown-custom-menu">
-    <CustomToggle bsRole="toggle">Custom toggle</CustomToggle>
+    <Dropdown.Toggle as={CustomToggle}>Custom toggle</Dropdown.Toggle>
 
-    <CustomMenu bsRole="menu">
-      <MenuItem eventKey="1">Red</MenuItem>
-      <MenuItem eventKey="2">Blue</MenuItem>
-      <MenuItem eventKey="3" active>
+    <Dropdown.Menu as={CustomMenu}>
+      <Dropdown.Item eventKey="1">Red</Dropdown.Item>
+      <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
+      <Dropdown.Item eventKey="3" active>
         Orange
-      </MenuItem>
-      <MenuItem eventKey="1">Red-Orange</MenuItem>
-    </CustomMenu>
+      </Dropdown.Item>
+      <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
+    </Dropdown.Menu>
   </Dropdown>
 );

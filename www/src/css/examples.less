@@ -2,11 +2,6 @@
   display: block;
 }
 
-.badge + .badge,
-.btn-toolbar > .btn + .btn {
-  margin-left: 0.5em;
-}
-
 .grid-examples .row > .col,
 .grid-examples .row > [class^='col-'] {
   padding-top: 0.75rem;
@@ -17,4 +12,28 @@
 
 .grid-examples .row + .row {
   margin-top: 1rem;
+}
+
+.bs-example {
+  & .react-live-preview::after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+
+  .btn-toolbar + .btn-toolbar {
+    margin-top: 10px;
+  }
+
+  .badge + .badge,
+  .btn-toolbar > * + * {
+    margin-left: 0.5em;
+  }
+}
+
+.bs-example__dropdown-menu {
+  .dropdown-menu {
+    position: static;
+    display: block;
+  }
 }

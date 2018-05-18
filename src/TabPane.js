@@ -6,6 +6,7 @@ import elementType from 'prop-types-extra/lib/elementType';
 import mapContextToProps from './utils/mapContextToProps';
 import { createBootstrapComponent } from './ThemeProvider';
 import TabContext from './TabContext';
+import SelectableContext, { makeEventKey } from './SelectableContext';
 
 import Fade from './Fade';
 
@@ -80,10 +81,10 @@ class TabPane extends React.Component {
      */
     unmountOnExit: PropTypes.bool,
 
-    /** @private * */
+    /** @ignore * */
     id: PropTypes.string,
 
-    /** @private * */
+    /** @ignore * */
     'aria-labelledby': PropTypes.string
   };
 
@@ -91,7 +92,6 @@ class TabPane extends React.Component {
     const {
       bsPrefix,
       active,
-      eventKey,
       className,
       onEnter,
       onEntering,
@@ -102,6 +102,7 @@ class TabPane extends React.Component {
       mountOnEnter,
       unmountOnExit,
       transition: Transition,
+      eventKey: _,
       ...props
     } = this.props;
 
@@ -135,7 +136,13 @@ class TabPane extends React.Component {
 
     // We provide an empty the TabContext so `<Nav>`s in `<TabPane>`s don't
     // conflict with the top level one.
-    return <TabContext.Provider value={null}>{pane}</TabContext.Provider>;
+    return (
+      <TabContext.Provider value={null}>
+        <SelectableContext.Provider value={null}>
+          {pane}
+        </SelectableContext.Provider>
+      </TabContext.Provider>
+    );
   }
 }
 
@@ -147,9 +154,13 @@ export default mapContextToProps(
     const { activeKey, getControlledId, getControllerId, ...rest } = context;
     const shouldTransition =
       props.transition !== false && rest.transition !== false;
+    let key = makeEventKey(props.eventKey);
 
     return {
-      active: String(activeKey) === String(props.eventKey),
+      active:
+        props.active == null && key != null
+          ? makeEventKey(activeKey) === key
+          : props.active,
       id: getControlledId(props.eventKey),
       'aria-labelledby': getControllerId(props.eventKey),
       transition:

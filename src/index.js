@@ -34,7 +34,6 @@ export Jumbotron from './Jumbotron';
 export ListGroup from './ListGroup';
 export ListGroupItem from './ListGroupItem';
 export Media from './Media';
-export MenuItem from './MenuItem';
 export Modal from './Modal';
 export ModalBody from './ModalBody';
 export ModalDialog from './ModalDialog';

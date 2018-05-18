@@ -61,3 +61,21 @@
 ## Panel
 
 * removed, replaced with Card and Card components
+* add
+
+## Dropdown
+
+* Removed the `disabled` prop on Dropdown, pass it directly to Dropdown.Toggle
+* Removed bsRole, use function children to render custom Toggles or Menus
+* Removed SplitButton.toggle (replaced with a `split` prop on the basic Toggle)
+* `noCaret` is removed because it's not optional with the styles anymore
+* bsPrefixes are not passed from the parent Dropdown anymore
+* onSelect behavior is now passed to Menu and Toggle via the Context api
+
+### DropdownButton/SplitButton/NavButton
+
+* Extra props are passed to the underlying Dropdown component, not the Toggle.
+
+### DropdownItem
+
+* renamed from MenuItem to match upstream
