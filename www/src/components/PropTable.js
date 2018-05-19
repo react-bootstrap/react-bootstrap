@@ -102,9 +102,9 @@ class PropTable extends React.Component {
             <td>
               {doclets.deprecated && (
                 <div className="prop-desc-heading">
-                  <strong className="text-danger">{`Deprecated: ${
-                    doclets.deprecated
-                  } `}</strong>
+                  <strong className="text-danger">
+                    {`Deprecated: ${doclets.deprecated} `}
+                  </strong>
                 </div>
               )}
               {this.renderControllableNote(propData, name)}

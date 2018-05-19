@@ -125,7 +125,7 @@ export default function DropdownSection({ data }) {
           As a convenience Toggle and Menu components available as static
           properties on the Dropdown component. However, you can also import
           them directly, from the <code>/lib</code> directory like:{' '}
-          <code>{'require("react-bootstrap/lib/DropdownToggle")'}</code>.
+          <code>require("react-bootstrap/lib/DropdownToggle")</code>.
         </p>
       </div>
       <ReactPlayground codeText={DropdownButtonCustom} />

@@ -48,7 +48,7 @@ export default function NavbarSection({ data }) {
           available as static properties on the <code>{'<Navbar/>'}</code>{' '}
           component but you can also import them directly from the{' '}
           <code>/lib</code> directory like:{' '}
-          <code>{'require("react-bootstrap/lib/NavbarHeader")'}</code>.
+          <code>require("react-bootstrap/lib/NavbarHeader")</code>.
         </p>
       </div>
 
