@@ -93,13 +93,12 @@ export default function ModalSection({ data }) {
         <Anchor id="modals-multiple">Multiple Modals</Anchor>
       </h3>
       <div className="bs-callout bs-callout-warning">
-        <h4>
-          Not supported
-        </h4>
+        <h4>Not supported</h4>
         <p>
           React-Bootstrap modals are not designed to support rendering multiple
-          modals simultaneously. You will have to add <code>react-overlays</code> as
-          a dependency and build your own modal component using its{' '}
+          modals simultaneously. You will have to add{' '}
+          <code>react-overlays</code> as a dependency and build your own modal
+          component using its{' '}
           <a href="https://github.com/react-bootstrap/react-overlays/blob/master/src/ModalManager.js">
             <code>{'<ModalManager/>'}</code>
           </a>{' '}
