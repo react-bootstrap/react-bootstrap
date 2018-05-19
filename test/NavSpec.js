@@ -265,10 +265,10 @@ describe('<Nav>', () => {
       let instance;
       let selectSpy = sinon.spy(activeKey => instance.setProps({ activeKey }));
       instance = mount(
-        <Nav activeKey={''} onSelect={selectSpy} role="tablist">
-          <NavItem eventKey={'a'}>NavItem 1 content</NavItem>
-          <NavItem eventKey={'b'}>NavItem 2 content</NavItem>
-          <NavItem eventKey={''}>NavItem 3 content</NavItem>
+        <Nav activeKey="" onSelect={selectSpy} role="tablist">
+          <NavItem eventKey="a">NavItem 1 content</NavItem>
+          <NavItem eventKey="b">NavItem 2 content</NavItem>
+          <NavItem eventKey="">NavItem 3 content</NavItem>
         </Nav>,
         { attachTo: mountPoint }
       );

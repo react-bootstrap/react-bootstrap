@@ -21,20 +21,19 @@ export default class Page extends React.Component {
             <Col sm={6}>
               <Panel header="npm (recommended)" className="bs-docs-code-panel">
                 <pre>
-                  <code>{`
-$ npm install --save react react-dom
-$ npm install --save react-bootstrap
-                `}</code>
+                  <code>
+                    $ npm install --save react react-dom $ npm install --save
+                    react-bootstrap
+                  </code>
                 </pre>
               </Panel>
             </Col>
             <Col sm={6}>
               <Panel header="bower" className="bs-docs-code-panel">
                 <pre>
-                  <code>{`
-$ bower install react
-$ bower install react-bootstrap
-                `}</code>
+                  <code>
+                    $ bower install react $ bower install react-bootstrap
+                  </code>
                 </pre>
               </Panel>
             </Col>
@@ -55,13 +54,15 @@ $ bower install react-bootstrap
             </p>
           </div>
           <pre>
-            <code>{`
+            <code>
+              {`
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-          `}</code>
+          `}
+            </code>
           </pre>
           <p>
             For more advanced use cases you can also use a bundler like Webpack
@@ -112,10 +113,10 @@ $ bower install react-bootstrap
             <Anchor id="commonjs">CommonJS</Anchor>
           </h3>
           <pre>
-            <code>{`
-var Alert = require('react-bootstrap/lib/Alert');
-// or
-var Alert = require('react-bootstrap').Alert;`}</code>
+            <code>
+              var Alert = require('react-bootstrap/lib/Alert'); // or var Alert
+              = require('react-bootstrap').Alert;
+            </code>
           </pre>
           />
           <h3>
@@ -126,10 +127,12 @@ var Alert = require('react-bootstrap').Alert;`}</code>
             syntax now with the help of a transpiler like Babel.
           </p>
           <pre>
-            <code>{`
+            <code>
+              {`
 import Button from 'react-bootstrap/lib/Button';
 // or
-import { Button } from 'react-bootstrap';`}</code>
+import { Button } from 'react-bootstrap';`}
+            </code>
           </pre>
           <h3>
             <Anchor id="amd">AMD</Anchor>
@@ -142,11 +145,13 @@ import { Button } from 'react-bootstrap';`}</code>
             </p>
           </div>
           <pre>
-            <code>{`
+            <code>
+              {`
 define(['react-bootstrap'], function(ReactBootstrap) {
 var Alert = ReactBootstrap.Alert;
 ...
-});`}</code>
+});`}
+            </code>
           </pre>
           <h3>
             <Anchor id="browser-globals">Browser globals</Anchor>
@@ -160,13 +165,15 @@ var Alert = ReactBootstrap.Alert;
             in both the Bower and NPM packages.
           </p>
           <pre>
-            <code>{`
+            <code>
+              {`
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/<react-version>/react-dom.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/<version>/react-bootstrap.min.js"></script>
 <script>
 var Alert = ReactBootstrap.Alert;
-</script>`}</code>
+</script>`}
+            </code>
           </pre>
         </div>
         <div className="bs-docs-section">
@@ -201,13 +208,15 @@ var Alert = ReactBootstrap.Alert;
 
           <div className="highlight">
             <pre>
-              <code>{`
+              <code>
+                {`
 <!--[if lt IE 9]>
 <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv-printshiv.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-shim.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/3.4.0/es5-sham.js"></script>
-<![endif]-->`}</code>
+<![endif]-->`}
+              </code>
             </pre>
           </div>
         </div>

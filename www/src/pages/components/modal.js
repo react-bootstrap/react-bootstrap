@@ -44,7 +44,7 @@ export default function ModalSection({ data }) {
           The Modal Header, Title, Body, and Footer components are available as
           static properties the <code>{'<Modal/>'}</code> component, but you can
           also, import them directly from the <code>/lib</code> directory like:{' '}
-          <code>{'require("react-bootstrap/lib/ModalHeader")'}</code>.
+          <code>require("react-bootstrap/lib/ModalHeader")</code>.
         </p>
       </div>
 

@@ -47,7 +47,7 @@ describe('<Badge>', () => {
     });
 
     it('should hide with empty string', () => {
-      let instance = ReactTestUtils.renderIntoDocument(<Badge>{''}</Badge>);
+      let instance = ReactTestUtils.renderIntoDocument(<Badge />);
       assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bhidden\b/));
     });
 

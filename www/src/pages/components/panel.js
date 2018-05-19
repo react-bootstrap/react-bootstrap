@@ -73,7 +73,7 @@ export default function PanelSection({ data }) {
       <p>
         Add any <code>&lt;Table /&gt;</code>, <code>&lt;ListGroup /&gt;</code>{' '}
         to a panel for a seamless integration. Mix and match with{' '}
-        <code>{'Panel.Body'}</code> as needed.
+        <code>Panel.Body</code> as needed.
       </p>
       <ReactPlayground codeText={PanelListGroupFill} />
 
