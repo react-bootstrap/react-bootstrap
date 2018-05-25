@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Heading from '../../components/Heading';
 import Callout from '../../components/Callout';
+import Heading from '../../components/Heading';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import Prefixes from '../../examples/Theming/Prefixes';
 import Variants from '../../examples/Theming/Variants';
+import withLayout from '../../withLayout';
 
-export default function CustomStylesSection() {
+export default withLayout(function CustomStylesSection() {
   return (
     <div className="bs-docs-section">
       <Heading h="1" id="custom-styles">
@@ -47,4 +47,4 @@ export default function CustomStylesSection() {
       <ReactPlayground codeText={Prefixes} />
     </div>
   );
-}
+});

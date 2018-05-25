@@ -8,7 +8,8 @@ module.exports = {
     'global-require': 'off',
     'react/prop-types': 'off',
     'react/no-unescaped-entities': 'off',
-    'import/no-webpack-loader-syntax': 'off'
+    'import/no-webpack-loader-syntax': 'off',
+    'prefer-arrow-callback': 'off'
   },
   settings: {
     'import/resolver': {

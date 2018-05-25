@@ -46,7 +46,6 @@ function onlyProgressBar(props, propName, componentName) {
 }
 
 const propTypes = {
-
   /**
    * Minimum value progress can begin from
    */
@@ -158,7 +157,7 @@ class ProgressBar extends React.Component {
   }
 
   render() {
-    const {  isChild, ...props } = this.props;
+    const { isChild, ...props } = this.props;
 
     if (isChild) {
       return this.renderProgressBar(props);
@@ -203,7 +202,9 @@ class ProgressBar extends React.Component {
 
 ProgressBar.propTypes = propTypes;
 ProgressBar.defaultProps = defaultProps;
-const DecoratedProgressBar = createBootstrapComponent (ProgressBar, 'progress-bar');
+const DecoratedProgressBar = createBootstrapComponent(
+  ProgressBar,
+  'progress-bar'
+);
 
 export default DecoratedProgressBar;
-

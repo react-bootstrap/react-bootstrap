@@ -3,10 +3,10 @@ import React from 'react';
 import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import ResponsiveEmbed from '../../examples/ResponsiveEmbed';
+import withLayout from '../../withLayout';
 
-export default function ResponsiveEmbedSection({ data }) {
+export default withLayout(function ResponsiveEmbedSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -35,7 +35,7 @@ export default function ResponsiveEmbedSection({ data }) {
       <PropTable metadata={data.ResponsiveEmbed} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query ResponsiveEmbedQuery {

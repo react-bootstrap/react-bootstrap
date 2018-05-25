@@ -1,19 +1,19 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import Callout from '../../components/Callout';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-import Callout from '../../components/Callout';
-
 import NavbarBasic from '../../examples/Navbar/Basic';
 import NavbarBrand from '../../examples/Navbar/Brand';
-import NavbarColorSchemes from '../../examples/Navbar/ColorSchemes';
 import NavbarCollapsible from '../../examples/Navbar/Collapsible';
+import NavbarColorSchemes from '../../examples/Navbar/ColorSchemes';
 import NavbarForm from '../../examples/Navbar/Form';
 import NavbarTextLink from '../../examples/Navbar/TextLink';
+import withLayout from '../../withLayout';
 
-export default function NavbarSection({ data }) {
+export default withLayout(function NavbarSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -61,7 +61,7 @@ export default function NavbarSection({ data }) {
           available as static properties on the <code>{'<Navbar/>'}</code>{' '}
           component but you can also import them directly from the{' '}
           <code>/lib</code> directory like:{' '}
-          <code>{'require("react-bootstrap/lib/NavbarHeader")'}</code>.
+          <code>require("react-bootstrap/lib/NavbarHeader")</code>.
         </p>
       </div>
       <h3>
@@ -115,7 +115,7 @@ export default function NavbarSection({ data }) {
       <PropTable metadata={data.NavbarToggle} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query NavbarQuery {

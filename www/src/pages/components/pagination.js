@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Heading from '../../components/Heading';
 import ComponentApi from '../../components/ComponentApi';
+import Heading from '../../components/Heading';
 import ReactPlayground from '../../components/ReactPlayground';
-
-import PaginationBasic from '../../examples/Pagination/Basic';
 import PaginationAdvanced from '../../examples/Pagination/Advanced';
+import PaginationBasic from '../../examples/Pagination/Basic';
+import withLayout from '../../withLayout';
 
-export default function PaginationSection({ data }) {
+export default withLayout(function PaginationSection({ data }) {
   return (
     <div className="bs-docs-section">
       <Heading h="1" id="pagination">
@@ -37,7 +37,7 @@ export default function PaginationSection({ data }) {
       <ComponentApi metadata={data.PageItem} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query PaginationQuery {

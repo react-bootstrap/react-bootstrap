@@ -12,7 +12,7 @@ import {
   prefix,
   splitBsPropsAndOmit
 } from './utils/bootstrapUtils';
-import ValidComponentChildren from './utils/ValidComponentChildren';
+import * as ValidComponentChildren from './utils/ValidComponentChildren';
 
 // TODO: `slide` should be `animate`.
 

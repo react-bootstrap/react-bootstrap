@@ -1,18 +1,18 @@
 import React from 'react';
 
-import Heading from '../../components/Heading';
 import ComponentApi from '../../components/ComponentApi';
+import Heading from '../../components/Heading';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import Basic from '../../examples/InputGroup/Basic';
-import Sizes from '../../examples/InputGroup/Sizes';
-import Checkboxes from '../../examples/InputGroup/Checkboxes';
-import Buttons from '../../examples/InputGroup/Buttons';
 import ButtonDropdowns from '../../examples/InputGroup/ButtonDropdowns';
+import Buttons from '../../examples/InputGroup/Buttons';
+import Checkboxes from '../../examples/InputGroup/Checkboxes';
 import MultipleAddons from '../../examples/InputGroup/MultipleAddons';
 import MultipleInputs from '../../examples/InputGroup/MultipleInputs';
+import Sizes from '../../examples/InputGroup/Sizes';
+import withLayout from '../../withLayout';
 
-export default function InputGroupSection({ data }) {
+export default withLayout(function InputGroupSection({ data }) {
   return (
     <div className="bs-docs-section">
       <Heading h="1" id="input-group">
@@ -71,7 +71,7 @@ export default function InputGroupSection({ data }) {
       <ComponentApi metadata={data.InputGroup} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query InputGroupQuery {

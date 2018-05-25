@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function Page() {
+import withLayout from '../../withLayout';
+
+export default withLayout(function Page() {
   return (
     <div className="bs-docs-section">
       <p>
@@ -46,4 +48,4 @@ export default function Page() {
       </p>
     </div>
   );
-}
+});

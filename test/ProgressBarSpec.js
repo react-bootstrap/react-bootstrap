@@ -41,9 +41,7 @@ describe('<ProgressBar>', () => {
       <ProgressBar min={0} max={10} now={0} variant="success" />
     );
 
-    assert.ok(
-      getProgressBarNode(instance).className.match(/\bbg-success\b/)
-    );
+    assert.ok(getProgressBarNode(instance).className.match(/\bbg-success\b/));
   });
 
   it('Should have the warning class', () => {
@@ -51,9 +49,7 @@ describe('<ProgressBar>', () => {
       <ProgressBar min={0} max={10} now={0} variant="warning" />
     );
 
-    assert.ok(
-      getProgressBarNode(instance).className.match(/\bbg-warning\b/)
-    );
+    assert.ok(getProgressBarNode(instance).className.match(/\bbg-warning\b/));
   });
 
   it('Should default to min:0, max:100', () => {

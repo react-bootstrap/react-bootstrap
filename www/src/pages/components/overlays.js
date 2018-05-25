@@ -4,11 +4,11 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import Overlay from '../../examples/Overlay';
 import OverlayCustom from '../../examples/OverlayCustom';
+import withLayout from '../../withLayout';
 
-export default function OverlaySection({ data }) {
+export default withLayout(function OverlaySection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -46,7 +46,7 @@ export default function OverlaySection({ data }) {
       <PropTable metadata={data.Overlay} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query OverlayQuery {

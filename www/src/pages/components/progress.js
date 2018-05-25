@@ -4,16 +4,16 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
-import ProgressBarBasic from '../../examples/ProgressBar/Basic';
-import ProgressBarWithLabel from '../../examples/ProgressBar/WithLabel';
-import ProgressBarScreenreaderLabel from '../../examples/ProgressBar/ScreenreaderLabel';
-import ProgressBarContextual from '../../examples/ProgressBar/Contextual';
-import ProgressBarStriped from '../../examples/ProgressBar/Striped';
 import ProgressBarAnimated from '../../examples/ProgressBar/Animated';
+import ProgressBarBasic from '../../examples/ProgressBar/Basic';
+import ProgressBarContextual from '../../examples/ProgressBar/Contextual';
+import ProgressBarScreenreaderLabel from '../../examples/ProgressBar/ScreenreaderLabel';
 import ProgressBarStacked from '../../examples/ProgressBar/Stacked';
+import ProgressBarStriped from '../../examples/ProgressBar/Striped';
+import ProgressBarWithLabel from '../../examples/ProgressBar/WithLabel';
+import withLayout from '../../withLayout';
 
-export default function ProgressBarSection({ data }) {
+export default withLayout(function ProgressBarSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -90,7 +90,7 @@ export default function ProgressBarSection({ data }) {
       <PropTable metadata={data.ProgressBar} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query ProgressBarQuery {

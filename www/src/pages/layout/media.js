@@ -1,16 +1,16 @@
 import React from 'react';
 
-import Heading from '../../components/Heading';
 import ComponentApi from '../../components/ComponentApi';
+import Heading from '../../components/Heading';
 import ReactPlayground from '../../components/ReactPlayground';
-
-import List from '../../examples/Media/List';
-import Basic from '../../examples/Media/Basic';
 import Alignment from '../../examples/Media/Alignment';
-import Order from '../../examples/Media/Order';
+import Basic from '../../examples/Media/Basic';
+import List from '../../examples/Media/List';
 import Nesting from '../../examples/Media/Nesting';
+import Order from '../../examples/Media/Order';
+import withLayout from '../../withLayout';
 
-export default function MediaSection({ data }) {
+export default withLayout(function MediaSection({ data }) {
   return (
     <div className="bs-docs-section">
       <Heading h="1" id="media-objects">
@@ -81,7 +81,7 @@ export default function MediaSection({ data }) {
       <ComponentApi metadata={data.Media} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query MediaQuery {

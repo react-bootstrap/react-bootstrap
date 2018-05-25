@@ -4,11 +4,11 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import JumbotronBasic from '../../examples/Jumbotron/Basic';
 import JumbotronFluid from '../../examples/Jumbotron/Fluid';
+import withLayout from '../../withLayout';
 
-export default function JumbotronSection({ data }) {
+export default withLayout(function JumbotronSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -30,7 +30,7 @@ export default function JumbotronSection({ data }) {
       <PropTable metadata={data.Jumbotron} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query JumbotronQuery {

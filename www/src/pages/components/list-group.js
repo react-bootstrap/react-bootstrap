@@ -4,15 +4,15 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
-import ListGroupDefault from '../../examples/ListGroupDefault';
-import ListGroupLinked from '../../examples/ListGroupLinked';
 import ListGroupActive from '../../examples/ListGroupActive';
-import ListGroupStyle from '../../examples/ListGroupStyle';
-import ListGroupHeader from '../../examples/ListGroupHeader';
 import ListGroupCustom from '../../examples/ListGroupCustom';
+import ListGroupDefault from '../../examples/ListGroupDefault';
+import ListGroupHeader from '../../examples/ListGroupHeader';
+import ListGroupLinked from '../../examples/ListGroupLinked';
+import ListGroupStyle from '../../examples/ListGroupStyle';
+import withLayout from '../../withLayout';
 
-export default function ListGroupSection({ data }) {
+export default withLayout(function ListGroupSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -95,7 +95,7 @@ export default function ListGroupSection({ data }) {
       </h4>
     </div>
   );
-}
+});
 
 export const query = graphql`
   query ListGroupQuery {

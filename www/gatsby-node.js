@@ -1,9 +1,11 @@
 const path = require('path');
+const _ = require('lodash');
 
 exports.onCreateWebpackConfig = function onCreateWebpackConfig({
   actions,
   plugins,
-  loaders
+  loaders,
+  getConfig
 }) {
   actions.setWebpackConfig({
     module: {
@@ -15,7 +17,7 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
       ]
     },
     resolve: {
-      modules: [path.resolve(__dirname, '../node_modules'), 'node_module'],
+      modules: [path.resolve(__dirname, '../node_modules')],
       alias: {
         react: path.resolve(__dirname, '../node_modules/react'),
         'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
@@ -28,22 +30,13 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
       plugins.ignore(/^(xor|props)$/)
     ]
   });
+
+  const current = getConfig();
+  current.module.rules = current.module.rules.filter(r => r.enforce !== 'pre');
 };
 
 exports.onCreateBabelConfig = ({ actions }) => {
   actions.setBabelPreset({
     name: `@babel/preset-flow`
   });
-};
-
-exports.onCreatePage = ({ page }) => {
-  if (page.path.startsWith('/getting-started')) {
-    page.layout = 'getting-started';
-  } else if (page.path.startsWith('/layout')) {
-    page.layout = 'layout';
-  } else if (page.path.startsWith('/components')) {
-    page.layout = 'components';
-  } else if (page.path.startsWith('/utilities')) {
-    page.layout = 'utilities';
-  }
 };

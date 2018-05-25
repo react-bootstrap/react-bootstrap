@@ -1,21 +1,21 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import Callout from '../../components/Callout';
+import CodeBlock from '../../components/CodeBlock';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-import Callout from '../../components/Callout';
-import CodeBlock from '../../components/CodeBlock';
-
 import NavAlignement from '../../examples/Nav/Alignment';
 import NavBasic from '../../examples/Nav/Basic';
 import NavDropdown from '../../examples/Nav/Dropdown';
-import NavStacked from '../../examples/Nav/Stacked';
+import NavDropdownImpl from '../../examples/Nav/DropdownImpl';
 import NavFill from '../../examples/Nav/Fill';
 import NavJustified from '../../examples/Nav/Justified';
-import NavDropdownImpl from '../../examples/Nav/DropdownImpl';
+import NavStacked from '../../examples/Nav/Stacked';
+import withLayout from '../../withLayout';
 
-export default function NavSection({ data }) {
+export default withLayout(function NavSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -114,7 +114,7 @@ export default function NavSection({ data }) {
       <PropTable metadata={data.NavLink} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query NavQuery {

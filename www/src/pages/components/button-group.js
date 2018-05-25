@@ -4,15 +4,15 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import ButtonGroupBasic from '../../examples/ButtonGroup/Basic';
-import ButtonToolbarBasic from '../../examples/ButtonGroup/ToolbarBasic';
-import ButtonToolbar from '../../examples/ButtonGroup/Toolbar';
-import ButtonGroupSizes from '../../examples/ButtonGroup/Sizes';
 import ButtonGroupNested from '../../examples/ButtonGroup/Nested';
+import ButtonGroupSizes from '../../examples/ButtonGroup/Sizes';
+import ButtonToolbar from '../../examples/ButtonGroup/Toolbar';
+import ButtonToolbarBasic from '../../examples/ButtonGroup/ToolbarBasic';
 import ButtonGroupVertical from '../../examples/ButtonGroup/Vertical';
+import withLayout from '../../withLayout';
 
-export default function ButtonGroupSection({ data }) {
+export default withLayout(function ButtonGroupSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -94,7 +94,7 @@ export default function ButtonGroupSection({ data }) {
       <PropTable metadata={data.ButtonGroup} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query ButtonGroupQuery {

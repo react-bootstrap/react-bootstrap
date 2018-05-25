@@ -1,3 +1,4 @@
+import withLayout from '../../withLayout';
 // import React from 'react';
 
 // import Anchor from '../../components/Anchor';
@@ -12,7 +13,7 @@
 // import FormInputSizes from '../../examples/Form/InputSizes';
 // import FormValidation from '../../examples/Form/Validation';
 
-export default function FormControlsSection() {
+export default withLayout(function FormControlsSection() {
   return null;
   // return (
   //   <div className="bs-docs-section">
@@ -157,7 +158,7 @@ export default function FormControlsSection() {
   //     <PropTable metadata={data.FormControlFeedback} />
   //   </div>
   // );
-}
+});
 
 export const query = graphql`
   query FormQuery {

@@ -1,27 +1,28 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import ARIA from '../../components/AriaAbbr';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-import ARIA from '../../components/AriaAbbr';
-
 import DropdownBasic from '../../examples/Dropdown/Basic';
 import DropdownBasicButton from '../../examples/Dropdown/BasicButton';
-import DropdownVariants from '../../examples/Dropdown/Variants';
-import DropdownItemTags from '../../examples/Dropdown/DropdownItemTags';
-import SplitBasic from '../../examples/Dropdown/SplitBasic';
-import SplitVariants from '../../examples/Dropdown/SplitVariants';
+import DropdownButtonCustom from '../../examples/Dropdown/ButtonCustom';
+import DropdownButtonCustomMenu from '../../examples/Dropdown/ButtonCustomMenu';
 import DropdownButtonSizes from '../../examples/Dropdown/ButtonSizes';
 import DropDirections from '../../examples/Dropdown/DropDirections';
+import DropdownItemTags from '../../examples/Dropdown/DropdownItemTags';
 import MenuAlignRight from '../../examples/Dropdown/MenuAlignRight';
 import MenuDividers from '../../examples/Dropdown/MenuDividers';
 import MenuHeaders from '../../examples/Dropdown/MenuHeaders';
-import DropdownButtonCustom from '../../examples/Dropdown/ButtonCustom';
-import DropdownButtonCustomMenu from '../../examples/Dropdown/ButtonCustomMenu';
+import SplitBasic from '../../examples/Dropdown/SplitBasic';
+import SplitVariants from '../../examples/Dropdown/SplitVariants';
+import DropdownVariants from '../../examples/Dropdown/Variants';
+import withLayout from '../../withLayout';
+
 // import DropdownItem from '../../examples/Dropdown/DropdownItem';
 
-export default function DropdownSection({ data }) {
+export default withLayout(function DropdownSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -174,7 +175,7 @@ export default function DropdownSection({ data }) {
           As a convenience Toggle and Menu components available as static
           properties on the Dropdown component. However, you can also import
           them directly, from the <code>/lib</code> directory like:{' '}
-          <code>{'require("react-bootstrap/lib/DropdownToggle")'}</code>.
+          <code>require("react-bootstrap/lib/DropdownToggle")</code>.
         </p>
       </div>
       <ReactPlayground codeText={DropdownButtonCustom} />
@@ -231,7 +232,7 @@ export default function DropdownSection({ data }) {
       <PropTable metadata={data.DropdownItem} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query DropdownQuery {

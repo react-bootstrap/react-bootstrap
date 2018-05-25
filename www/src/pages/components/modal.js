@@ -4,14 +4,14 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
-import ModalStatic from '../../examples/ModalStatic';
 import Modal from '../../examples/Modal';
 import ModalContained from '../../examples/ModalContained';
-import ModalDefaultSizing from '../../examples/ModalDefaultSizing';
 import ModalCustomSizing from '../../examples/ModalCustomSizing';
+import ModalDefaultSizing from '../../examples/ModalDefaultSizing';
+import ModalStatic from '../../examples/ModalStatic';
+import withLayout from '../../withLayout';
 
-export default function ModalSection({ data }) {
+export default withLayout(function ModalSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -44,7 +44,7 @@ export default function ModalSection({ data }) {
           The Modal Header, Title, Body, and Footer components are available as
           static properties the <code>{'<Modal/>'}</code> component, but you can
           also, import them directly from the <code>/lib</code> directory like:{' '}
-          <code>{'require("react-bootstrap/lib/ModalHeader")'}</code>.
+          <code>require("react-bootstrap/lib/ModalHeader")</code>.
         </p>
       </div>
 
@@ -90,6 +90,23 @@ export default function ModalSection({ data }) {
       <ReactPlayground codeText={ModalCustomSizing} />
 
       <h3>
+        <Anchor id="modals-multiple">Multiple Modals</Anchor>
+      </h3>
+      <div className="bs-callout bs-callout-warning">
+        <h4>Not supported</h4>
+        <p>
+          React-Bootstrap modals are not designed to support rendering multiple
+          modals simultaneously. You will have to add{' '}
+          <code>react-overlays</code> as a dependency and build your own modal
+          component using its{' '}
+          <a href="https://github.com/react-bootstrap/react-overlays/blob/master/src/ModalManager.js">
+            <code>{'<ModalManager/>'}</code>
+          </a>{' '}
+          component, which supports multiple modals.
+        </p>
+      </div>
+
+      <h3>
         <Anchor id="modals-props">Props</Anchor>
       </h3>
 
@@ -126,7 +143,7 @@ export default function ModalSection({ data }) {
       <PropTable metadata={data.ModalFooter} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query ModalQuery {

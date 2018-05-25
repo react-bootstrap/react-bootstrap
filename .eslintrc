@@ -28,7 +28,15 @@
     ],
     "class-methods-use-this": "off",
     "no-underscore-dangle": "off",
+    "prefer-destructuring": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/mouse-events-have-key-events": "off",
+    "jsx-a11y/label-has-for": [
+      "error",
+      { "required": { "some": ["nesting", "id"] } }
+    ],
     "react/forbid-prop-types": "off",
     "react/jsx-boolean-value": 2,
     "react/jsx-no-duplicate-props": 2,
@@ -36,6 +44,7 @@
     "react/no-array-index-key": "off",
     "react/no-string-refs": "off",
     "react/prefer-stateless-function": "off",
+    "react/default-props-match-prop-types": "off",
     "react/jsx-filename-extension": [
       "error",
       {
@@ -51,8 +60,7 @@
           "style",
           "bsStyle",
           "bsClass",
-          "bsSize",
-          "bsRole"
+          "bsSize"
         ]
       }
     ],

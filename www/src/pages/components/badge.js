@@ -1,15 +1,15 @@
 import React from 'react';
 
-import Heading from '../../components/Heading';
 import ComponentApi from '../../components/ComponentApi';
+import Heading from '../../components/Heading';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import BadgeBasic from '../../examples/Badge/Basic';
 import BadgeButton from '../../examples/Badge/Button';
 import BadgePill from '../../examples/Badge/Pill';
 import BadgeVariations from '../../examples/Badge/Variations';
+import withLayout from '../../withLayout';
 
-export default function BadgeSection({ data }) {
+export default withLayout(function BadgeSection({ data }) {
   return (
     <div className="bs-docs-section">
       <Heading h="1" id="badges">
@@ -61,7 +61,7 @@ export default function BadgeSection({ data }) {
       <ComponentApi metadata={data.metadata} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query BadgeQuery {

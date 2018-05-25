@@ -1,31 +1,31 @@
 import React from 'react';
 
-import Heading from '../../components/Heading';
 import ComponentApi from '../../components/ComponentApi';
+import Heading from '../../components/Heading';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import CardBasic from '../../examples/Card/Basic';
+import CardBgColor from '../../examples/Card/BgColor';
 import CardBodyOnly from '../../examples/Card/BodyOnly';
 import CardBodyShorthand from '../../examples/Card/BodyShorthand';
-import CardText from '../../examples/Card/Text';
+import CardBorder from '../../examples/Card/Border';
+import CardColumns from '../../examples/Card/Columns';
+import CardDeck from '../../examples/Card/Deck';
+import CardGroup from '../../examples/Card/Group';
+import CardHeaderAndFooter from '../../examples/Card/HeaderAndFooter';
 import CardImageAndText from '../../examples/Card/ImageAndText';
+import CardImgOverlay from '../../examples/Card/ImgOverlay';
+import CardKitchenSink from '../../examples/Card/KitchenSink';
 import CardListGroups from '../../examples/Card/ListGroups';
 import CardListGroupWithHeader from '../../examples/Card/ListGroupWithHeader';
-import CardKitchenSink from '../../examples/Card/KitchenSink';
-import CardWithHeader from '../../examples/Card/WithHeader';
-import CardWithHeaderStyled from '../../examples/Card/WithHeaderStyled';
-import CardWithHeaderAndQuote from '../../examples/Card/WithHeaderAndQuote';
-import CardHeaderAndFooter from '../../examples/Card/HeaderAndFooter';
-import CardNavTabs from '../../examples/Card/NavTabs';
 import CardNavPills from '../../examples/Card/NavPills';
-import CardImgOverlay from '../../examples/Card/ImgOverlay';
-import CardGroup from '../../examples/Card/Group';
-import CardDeck from '../../examples/Card/Deck';
-import CardColumns from '../../examples/Card/Columns';
-import CardBgColor from '../../examples/Card/BgColor';
-import CardBorder from '../../examples/Card/Border';
+import CardNavTabs from '../../examples/Card/NavTabs';
+import CardText from '../../examples/Card/Text';
+import CardWithHeader from '../../examples/Card/WithHeader';
+import CardWithHeaderAndQuote from '../../examples/Card/WithHeaderAndQuote';
+import CardWithHeaderStyled from '../../examples/Card/WithHeaderStyled';
+import withLayout from '../../withLayout';
 
-export default function CardSection({ data }) {
+export default withLayout(function CardSection({ data }) {
   return (
     <div className="bs-docs-section">
       <Heading h="1" id="cards">
@@ -159,7 +159,7 @@ export default function CardSection({ data }) {
       <ComponentApi metadata={data.CardImg} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query CardQuery {

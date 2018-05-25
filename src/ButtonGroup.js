@@ -48,7 +48,6 @@ class ButtonGroup extends React.Component {
 
   render() {
     const {
-      bsRole: _0,
       bsPrefix,
       size,
       toggle,
