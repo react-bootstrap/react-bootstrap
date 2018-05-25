@@ -18,7 +18,7 @@ function DefaultLayout({ children, location }) {
     <div>
       <NavMain activePage={location.pathname} />
 
-      {typeof children === 'function' ? children() : children}
+      {children}
 
       <PageFooter />
     </div>

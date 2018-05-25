@@ -3,6 +3,7 @@ import React from 'react';
 
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
+import FormControl from 'react-bootstrap/lib/FormControl';
 
 const NAV_LINKS = {
   documentation: {

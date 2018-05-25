@@ -1,9 +1,11 @@
 const path = require('path');
+const _ = require('lodash');
 
 exports.onCreateWebpackConfig = function onCreateWebpackConfig({
   actions,
   plugins,
-  loaders
+  loaders,
+  getConfig
 }) {
   actions.setWebpackConfig({
     module: {
@@ -15,7 +17,7 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
       ]
     },
     resolve: {
-      modules: [path.resolve(__dirname, '../node_modules'), 'node_module'],
+      modules: [path.resolve(__dirname, '../node_modules')],
       alias: {
         react: path.resolve(__dirname, '../node_modules/react'),
         'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
@@ -28,6 +30,14 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
       plugins.ignore(/^(xor|props)$/)
     ]
   });
+
+  const current = getConfig();
+  current.module.rules = current.module.rules.filter(r => r.enforce !== 'pre');
+  console.log(
+    _.flatMap(current.module.rules, r => r.oneOf)
+      .filter(Boolean)
+      .map(r => r.use)
+  );
 };
 
 exports.onCreateBabelConfig = ({ actions }) => {

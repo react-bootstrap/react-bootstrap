@@ -67,7 +67,6 @@ class Button extends React.Component {
 
   render() {
     const {
-      bsRole: _0,
       bsPrefix,
       variant,
       size,

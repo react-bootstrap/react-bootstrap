@@ -13,7 +13,7 @@ function ComponentsLayout({ children, ...props }) {
   return (
     <Default {...props}>
       <PageHeader title="Components" />
-      <Main location={props.location}>{children()}</Main>
+      <Main location={props.location}>{children}</Main>
     </Default>
   );
 }

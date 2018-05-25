@@ -1,10 +1,4 @@
-const { plugins, rules } = require('webpack-atoms');
-const runBabel = require('./tools/run-babel');
-
-const babelOptions = {
-  ...runBabel.getConfig({ modules: false, test: true }),
-  cacheDirectory: true
-};
+const { DefinePlugin } = require('webpack');
 
 module.exports = config => {
   const { env } = process;
@@ -19,11 +13,24 @@ module.exports = config => {
     },
 
     webpack: {
+      mode: 'development',
       module: {
-        rules: [rules.js(babelOptions)]
+        rules: [
+          {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                cacheDirectory: true,
+                envName: 'test'
+              }
+            }
+          }
+        ]
       },
       plugins: [
-        plugins.define({
+        new DefinePlugin({
           'process.env.NODE_ENV': JSON.stringify('test')
         })
       ],

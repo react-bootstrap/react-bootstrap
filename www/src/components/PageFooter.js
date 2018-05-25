@@ -1,7 +1,7 @@
 import React from 'react';
 import packageJSON from '../../../package.json';
 
-let version = packageJSON.version;
+let { version } = packageJSON;
 
 if (/docs/.test(version)) {
   version = version.split('-')[0];

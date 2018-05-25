@@ -3,7 +3,7 @@
     {[DropdownButton, SplitButton].map((DropdownType, idx) => (
       <DropdownType
         size="lg"
-        title={` Drop large `}
+        title="Drop small"
         id={`dropdown-button-drop-${idx}`}
       >
         <Dropdown.Item eventKey="1">Action</Dropdown.Item>
@@ -19,7 +19,7 @@
       <DropdownType
         size="sm"
         variant="secondary"
-        title={`Drop small`}
+        title="Drop small"
         id={`dropdown-button-drop-${idx}`}
       >
         <Dropdown.Item eventKey="1">Action</Dropdown.Item>
