@@ -1,16 +1,16 @@
 import React from 'react';
 
-import Heading from '../../components/Heading';
 import ComponentApi from '../../components/ComponentApi';
+import Heading from '../../components/Heading';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import TableBasic from '../../examples/Table/Basic';
-import TableSmall from '../../examples/Table/Small';
 import TableDark from '../../examples/Table/Dark';
 import TableResponsive from '../../examples/Table/Responsive';
 import TableResponsiveBreakpoints from '../../examples/Table/ResponsiveBreakpoints';
+import TableSmall from '../../examples/Table/Small';
+import withLayout from '../../withLayout';
 
-export default function TableSection({ data }) {
+export default withLayout(function TableSection({ data }) {
   return (
     <div className="bs-docs-section">
       <Heading h="1" id="tables">
@@ -81,7 +81,7 @@ export default function TableSection({ data }) {
       <ComponentApi metadata={data.Table} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query TableQuery {

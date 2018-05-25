@@ -3,10 +3,10 @@ import React from 'react';
 import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import Glyphicon from '../../examples/Glyphicon';
+import withLayout from '../../withLayout';
 
-export default function GlyphiconSection({ data }) {
+export default withLayout(function GlyphiconSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -25,7 +25,7 @@ export default function GlyphiconSection({ data }) {
       <PropTable metadata={data.Glyphicon} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query GlyphiconQuery {

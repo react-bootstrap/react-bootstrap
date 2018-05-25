@@ -3,17 +3,16 @@ import React from 'react';
 import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import GridAutoLayout from '../../examples/Grid/AutoLayout';
 import GridAutoLayoutSizing from '../../examples/Grid/AutoLayoutSizing';
 import GridAutoLayoutVariable from '../../examples/Grid/AutoLayoutVariable';
+import GridOffsetting from '../../examples/Grid/Offsetting';
+import GridOrdering from '../../examples/Grid/Ordering';
 import GridResponsive from '../../examples/Grid/Responsive';
 import GridResponsiveAuto from '../../examples/Grid/ResponsiveAuto';
-import GridOrdering from '../../examples/Grid/Ordering';
+import withLayout from '../../withLayout';
 
-import GridOffsetting from '../../examples/Grid/Offsetting';
-
-export default function GridSection({ data }) {
+export default withLayout(function GridSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h1 className="page-header">
@@ -144,7 +143,7 @@ export default function GridSection({ data }) {
       <PropTable metadata={data.Clearfix} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query GridQuery {

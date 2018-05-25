@@ -1,17 +1,17 @@
 import React from 'react';
 
 import Anchor from '../../components/Anchor';
+import ARIA from '../../components/AriaAbbr';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-import ARIA from '../../components/AriaAbbr';
-
-import TabsUncontrolled from '../../examples/Tabs/Uncontrolled';
 import TabsControlled from '../../examples/Tabs/Controlled';
-import TabsNoAnimation from '../../examples/Tabs/NoAnimation';
 import LeftTabs from '../../examples/Tabs/LeftTabs';
+import TabsNoAnimation from '../../examples/Tabs/NoAnimation';
+import TabsUncontrolled from '../../examples/Tabs/Uncontrolled';
+import withLayout from '../../withLayout';
 
-export default function TabsSection({ data }) {
+export default withLayout(function TabsSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2>
@@ -125,7 +125,7 @@ export default function TabsSection({ data }) {
       <PropTable metadata={data.TabPane} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query TabsQuery {

@@ -20,6 +20,7 @@
     "gatsby-transformer-remark": "2.0.1-1",
     "graphql": "^0.13.2",
     "graphql-type-json": "^0.1.4",
+    "import-sort-style-module": "^4.2.0",
     "lodash": "^4.15.0",
     "prop-types": "^15.6.0",
     "react": "^15.5.4",
@@ -30,10 +31,20 @@
     "shakespeare-data": "^2.5.0"
   },
   "devDependencies": {
-    "@babel/preset-flow": "^7.0.0-beta.40"
+    "@babel/preset-flow": "^7.0.0-beta.40",
+    "import-sort-cli": "^4.2.0",
+    "import-sort-parser-4catalyzer": "^4.0.1"
+  },
+  "importSort": {
+    ".js": {
+      "style": "module",
+      "parser": "4catalyzer"
+    }
   },
   "homepage": "https://react-bootstrap.github.io/",
-  "keywords": ["gatsby"],
+  "keywords": [
+    "gatsby"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -42,6 +53,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "deploy": "gatsby build --prefix-links && gh-pages -d public"
+    "deploy": "gatsby build --prefix-links && gh-pages -d public",
+    "sort": "import-sort 'src/pages/**/*.js'"
   }
 }

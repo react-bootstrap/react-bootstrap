@@ -4,14 +4,14 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
-import ModalStatic from '../../examples/ModalStatic';
 import Modal from '../../examples/Modal';
 import ModalContained from '../../examples/ModalContained';
-import ModalDefaultSizing from '../../examples/ModalDefaultSizing';
 import ModalCustomSizing from '../../examples/ModalCustomSizing';
+import ModalDefaultSizing from '../../examples/ModalDefaultSizing';
+import ModalStatic from '../../examples/ModalStatic';
+import withLayout from '../../withLayout';
 
-export default function ModalSection({ data }) {
+export default withLayout(function ModalSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -143,7 +143,7 @@ export default function ModalSection({ data }) {
       <PropTable metadata={data.ModalFooter} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query ModalQuery {

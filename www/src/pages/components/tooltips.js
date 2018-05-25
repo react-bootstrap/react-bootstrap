@@ -4,12 +4,12 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import TooltipBasic from '../../examples/TooltipBasic';
-import TooltipPositioned from '../../examples/TooltipPositioned';
 import TooltipInCopy from '../../examples/TooltipInCopy';
+import TooltipPositioned from '../../examples/TooltipPositioned';
+import withLayout from '../../withLayout';
 
-export default function TooltipSection({ data }) {
+export default withLayout(function TooltipSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -56,7 +56,7 @@ export default function TooltipSection({ data }) {
       <PropTable metadata={data.Tooltip} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query TooltipQuery {

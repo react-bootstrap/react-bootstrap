@@ -4,10 +4,10 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import Breadcrumb from '../../examples/Breadcrumb';
+import withLayout from '../../withLayout';
 
-export default function BreadcrumbSection({ data }) {
+export default withLayout(function BreadcrumbSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -43,7 +43,7 @@ export default function BreadcrumbSection({ data }) {
       <PropTable metadata={data.BreadcrumbItem} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query BreadcrumbQuery {

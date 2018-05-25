@@ -4,13 +4,13 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import Basic from '../../examples/Alert/Basic';
-import Link from '../../examples/Alert/Link';
 import Dismissible from '../../examples/Alert/Dismissible';
 import DismissibleControlled from '../../examples/Alert/DismissibleControlled';
+import Link from '../../examples/Alert/Link';
+import withLayout from '../../withLayout';
 
-export default function AlertsSection({ data }) {
+export default withLayout(function AlertsSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -52,7 +52,7 @@ export default function AlertsSection({ data }) {
       <PropTable metadata={data.metadata} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query AlertQuery {

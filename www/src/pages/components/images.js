@@ -1,13 +1,13 @@
 import React from 'react';
 
-import Heading from '../../components/Heading';
 import ComponentApi from '../../components/ComponentApi';
+import Heading from '../../components/Heading';
 import ReactPlayground from '../../components/ReactPlayground';
-
-import Shape from '../../examples/Image/Shape';
 import Fluid from '../../examples/Image/Fluid';
+import Shape from '../../examples/Image/Shape';
+import withLayout from '../../withLayout';
 
-export default function ImageSection({ data }) {
+export default withLayout(function ImageSection({ data }) {
   return (
     <div className="bs-docs-section">
       <Heading h="1" id="images">
@@ -34,7 +34,7 @@ export default function ImageSection({ data }) {
       <ComponentApi metadata={data.Image} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query ImageQuery {

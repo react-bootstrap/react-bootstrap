@@ -4,10 +4,10 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import Figure from '../../examples/Figure';
+import withLayout from '../../withLayout';
 
-export default function FigureSection({ data }) {
+export default withLayout(function FigureSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -49,7 +49,7 @@ export default function FigureSection({ data }) {
       <PropTable metadata={data.caption} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query FigureQuery {

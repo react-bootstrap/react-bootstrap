@@ -13,7 +13,7 @@ function UtilitiesLayout({ children, ...props }) {
   return (
     <Default {...props}>
       <PageHeader title="Utilities" subTitle="" />
-      <Main location={props.location}>{children()}</Main>
+      <Main location={props.location}>{children}</Main>
     </Default>
   );
 }

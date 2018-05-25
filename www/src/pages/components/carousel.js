@@ -4,11 +4,11 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
-import CarouselUncontrolled from '../../examples/CarouselUncontrolled';
 import CarouselControlled from '../../examples/CarouselControlled';
+import CarouselUncontrolled from '../../examples/CarouselUncontrolled';
+import withLayout from '../../withLayout';
 
-export default function CarouselSection({ data }) {
+export default withLayout(function CarouselSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -57,7 +57,7 @@ export default function CarouselSection({ data }) {
       <PropTable metadata={data.caption} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query CarouselQuery {
