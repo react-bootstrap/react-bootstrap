@@ -1,12 +1,18 @@
 <form>
   {['checkbox', 'radio'].map(type => (
     <div key={`default-${type}`} className="mb-3">
-      <FormCheck type={type} id={`default-${type}`}>
-        default {type}
-      </FormCheck>
-      <FormCheck type={type} disabled id={`disabled-default-${type}`}>
-        disabled {type}
-      </FormCheck>
+      <FormCheck // prettier-ignore
+        type={type}
+        id={`default-${type}`}
+        label={`default ${type}`}
+      />
+
+      <FormCheck
+        disabled
+        type={type}
+        label={`disabled ${type}`}
+        id={`disabled-default-${type}`}
+      />
     </div>
   ))}
 </form>;

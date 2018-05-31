@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 import warning from 'warning';
 
-import mapContextToProps from './utils/mapContextToProps';
+import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import Feedback from './Feedback';
 import FormContext from './FormContext';
 import { createBootstrapComponent } from './ThemeProvider';
@@ -141,12 +141,12 @@ const mapContext = ({ controlId }, { id }) => {
 };
 
 const DecoratedFormControl = mapContextToProps(
+  FormContext.Consumer,
+  mapContext,
   createBootstrapComponent(FormControl, {
     prefix: 'form-control',
     forwardRefAs: 'inputRef',
   }),
-  FormContext.Consumer,
-  mapContext,
 );
 
 DecoratedFormControl.Feedback = Feedback;

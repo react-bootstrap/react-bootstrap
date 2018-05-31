@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import warning from 'warning';
 
-import mapContextToProps from './utils/mapContextToProps';
+import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import Col from './Col';
 import FormContext from './FormContext';
 import { createBootstrapComponent } from './ThemeProvider';
@@ -82,7 +82,7 @@ const mapContext = ({ controlId }, { htmlFor }) => {
 };
 
 export default mapContextToProps(
-  createBootstrapComponent(FormLabel, 'form-label'),
   FormContext.Consumer,
   mapContext,
+  createBootstrapComponent(FormLabel, 'form-label'),
 );

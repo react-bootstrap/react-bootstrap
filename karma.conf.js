@@ -1,14 +1,4 @@
-<<<<<<< HEAD
 const { DefinePlugin } = require('webpack');
-=======
-const { plugins, rules } = require('webpack-atoms');
-const runBabel = require('./tools/run-babel');
-
-const babelOptions = {
-  ...runBabel.getConfig({ modules: false, test: true }),
-  cacheDirectory: true,
-};
->>>>>>> WIP
 
 module.exports = config => {
   const { env } = process;
@@ -25,7 +15,6 @@ module.exports = config => {
     webpack: {
       mode: 'development',
       module: {
-<<<<<<< HEAD
         rules: [
           {
             test: /\.js$/,
@@ -44,14 +33,6 @@ module.exports = config => {
         new DefinePlugin({
           'process.env.NODE_ENV': JSON.stringify('test')
         })
-=======
-        rules: [rules.js(babelOptions)],
-      },
-      plugins: [
-        plugins.define({
-          'process.env.NODE_ENV': JSON.stringify('test'),
-        }),
->>>>>>> WIP
       ],
       devtool: 'cheap-module-inline-source-map',
       stats: 'minimal',

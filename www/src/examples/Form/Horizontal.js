@@ -24,31 +24,28 @@
       <Col sm={10}>
         <FormCheck
           type="radio"
+          label="first radio"
           name="formHorizontalRadios"
           id="formHorizontalRadios1"
-        >
-          first radio
-        </FormCheck>
+        />
         <FormCheck
           type="radio"
+          label="second radio"
           name="formHorizontalRadios"
           id="formHorizontalRadios2"
-        >
-          second radio
-        </FormCheck>
+        />
         <FormCheck
           type="radio"
+          label="third radio"
           name="formHorizontalRadios"
           id="formHorizontalRadios3"
-        >
-          third radio
-        </FormCheck>
+        />
       </Col>
     </FormGroup>
   </fieldset>
   <FormGroup as={Row} controlId="formHorizontalCheck">
     <Col sm={{ span: 10, offset: 2 }}>
-      <FormCheck>Remember me</FormCheck>
+      <FormCheck label="Remember me" />
     </Col>
   </FormGroup>
 

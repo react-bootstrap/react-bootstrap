@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 
 import SafeAnchor from './SafeAnchor';
 import NavContext from './NavContext';
 import SelectableContext, { makeEventKey } from './SelectableContext';
-import mapContextToProps from './utils/mapContextToProps';
 import chain from './utils/createChainedFunction';
 import { createBootstrapComponent } from './ThemeProvider';
 
@@ -49,11 +49,11 @@ const propTypes = {
   eventKey: PropTypes.any,
 
   /** @private */
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {
-  disabled: false
+  disabled: false,
 };
 
 class NavLink extends React.Component {
@@ -85,7 +85,7 @@ class NavLink extends React.Component {
           className,
           bsPrefix,
           active && 'active',
-          disabled && 'disabled'
+          disabled && 'disabled',
         )}
       />
     );
@@ -96,19 +96,18 @@ NavLink.propTypes = propTypes;
 NavLink.defaultProps = defaultProps;
 
 export default mapContextToProps(
-  createBootstrapComponent(NavLink, 'nav-link'),
   [SelectableContext, NavContext],
   (
     onSelect,
     navContext,
-    { active, eventKey, href, role, tabIndex, onSelect: pSelect }
+    { active, eventKey, href, role, tabIndex, onSelect: pSelect },
   ) => {
     let navItemKey = makeEventKey(eventKey, href);
 
     const props = {
       active,
       eventKey: navItemKey,
-      onSelect: chain(pSelect, onSelect)
+      onSelect: chain(pSelect, onSelect),
     };
 
     if (navContext) {
@@ -128,5 +127,6 @@ export default mapContextToProps(
     }
 
     return props;
-  }
+  },
+  createBootstrapComponent(NavLink, 'nav-link'),
 );

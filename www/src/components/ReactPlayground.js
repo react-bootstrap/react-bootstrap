@@ -23,6 +23,8 @@ const scope = {
   bootstrapUtils: ReactBootstrap.utils.bootstrapUtils,
 };
 
+const prettierComment = /(\{\s*\/\*\s+prettier-ignore\s+\*\/\s*\})|(\/\/\s+prettier-ignore)/gim;
+
 export default class Playground extends React.Component {
   static propTypes = {
     codeText: PropTypes.string.isRequired,
@@ -33,7 +35,7 @@ export default class Playground extends React.Component {
 
     return (
       <LiveProvider
-        code={codeText}
+        code={codeText.replace(prettierComment, '')}
         scope={scope}
         mountStylesheet={false}
         noInline={codeText.includes('render(')}

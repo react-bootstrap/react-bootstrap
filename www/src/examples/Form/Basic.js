@@ -12,7 +12,7 @@
     <FormControl type="password" placeholder="Password" />
   </FormGroup>
   <FormGroup id="formBasicChecbox">
-    <FormCheck type="checkbox">Check me out</FormCheck>
+    <FormCheck type="checkbox" label="Check me out" />
   </FormGroup>
   <Button variant="primary" type="submit">
     Submit

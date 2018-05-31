@@ -19,6 +19,7 @@ import GridComplex from '../../examples/Form/GridComplex';
 import Horizontal from '../../examples/Form/Horizontal';
 import ValidationNative from '../../examples/Form/ValidationNative';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
+import CheckApi from '../../examples/Form/CheckApi';
 
 export default withLayout(function FormControlsSection({ data }) {
   return (
@@ -74,7 +75,7 @@ export default withLayout(function FormControlsSection({ data }) {
         Plaintext
       </Heading>
       <p>
-        If you want to have elements in your form styled as plain text, use the
+        If you want to have elements in your form styled as plain text, use the{' '}
         <code>plaintext</code> prop on FormControls to remove the default form
         field styling and preserve the correct margin and padding.
       </p>
@@ -83,7 +84,7 @@ export default withLayout(function FormControlsSection({ data }) {
         Checkboxes and Radios
       </Heading>
       <p>
-        For the none textual checkbox and radio controls, <code>FormCheck</code>{' '}
+        For the non-textual checkbox and radio controls, <code>FormCheck</code>{' '}
         provides a single component for both types that adds some additional
         styling and improved layout.
       </p>
@@ -115,6 +116,24 @@ export default withLayout(function FormControlsSection({ data }) {
         </strong>
       </p>
       <ReactPlayground codeText={NoLabels} />
+
+      <Heading h="3" id="forms-check-api">
+        Customizing FormCheck rendering
+      </Heading>
+
+      <p>
+        When you need tighter control, or want to customize how the{' '}
+        <code>FormCheck</code> component renders, it may better to use it's
+        constituent parts directly.
+      </p>
+      <p>
+        By provided <code>children</code> to the <code>FormCheck</code> you can
+        forgo the default rendering and handle it yourself. (You can still
+        provide an <code>id</code> to the <code>FormCheck</code> or{' '}
+        <code>FormGroup</code> and have it propogate to the label and input).
+      </p>
+      <ReactPlayground codeText={CheckApi} />
+
       <Heading h="2" id="forms-layout">
         Layout
       </Heading>
@@ -137,7 +156,7 @@ export default withLayout(function FormControlsSection({ data }) {
       </p>
       <p>
         You also add the <code>controlId</code> prop to accessibly wire the
-        nested label and input together via the id
+        nested label and input together via the <code>id</code>.
       </p>
       <ReactPlayground codeText={FormGroup} />
       <Heading h="3" id="forms-layout-grid">

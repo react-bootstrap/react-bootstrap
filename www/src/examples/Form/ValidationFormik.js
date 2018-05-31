@@ -38,8 +38,7 @@ function FormExample() {
                 name="firstName"
                 value={values.firstName}
                 onChange={handleChange}
-                onBlur={handleBlur}
-                isValid={isValid && !errors.firstName}
+                isValid={touched.firstName && !errors.firstName}
               />
               <FormControl.Feedback>Looks good!</FormControl.Feedback>
             </FormGroup>
@@ -50,8 +49,7 @@ function FormExample() {
                 name="lastName"
                 value={values.lastName}
                 onChange={handleChange}
-                onBlur={handleBlur}
-                isValid={isValid && !errors.lastName}
+                isValid={touched.firstName && !errors.lastName}
               />
 
               <FormControl.Feedback>Looks good!</FormControl.Feedback>
@@ -69,7 +67,6 @@ function FormExample() {
                   name="username"
                   value={values.username}
                   onChange={handleChange}
-                  onBlur={handleBlur}
                   isInvalid={!!errors.username}
                 />
                 <FormControl.Feedback type="invalid">
@@ -87,7 +84,6 @@ function FormExample() {
                 name="city"
                 value={values.city}
                 onChange={handleChange}
-                onBlur={handleBlur}
                 isInvalid={!!errors.city}
               />
 
@@ -103,7 +99,6 @@ function FormExample() {
                 name="state"
                 value={values.state}
                 onChange={handleChange}
-                onBlur={handleBlur}
                 isInvalid={!!errors.state}
               />
               <FormControl.Feedback type="invalid">
@@ -118,7 +113,6 @@ function FormExample() {
                 name="zip"
                 value={values.zip}
                 onChange={handleChange}
-                onBlur={handleBlur}
                 isInvalid={!!errors.zip}
               />
 
@@ -131,13 +125,12 @@ function FormExample() {
             <FormCheck
               required
               name="terms"
+              label="Agree to terms and conditions"
               onChange={handleChange}
-              id={'validationFormik06'}
               isInvalid={!!errors.terms}
               invalidFeedback={errors.terms}
-            >
-              Agree to terms and conditions
-            </FormCheck>
+              id="validationFormik0"
+            />
           </FormGroup>
           <Button type="submit">Submit form</Button>
         </Form>

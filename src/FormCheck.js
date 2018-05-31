@@ -1,26 +1,12 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import warning from 'warning';
 
-import mapContextToProps from './utils/mapContextToProps';
-import createWithBsPrefix from './utils/createWithBsPrefix';
 import { createBootstrapComponent } from './ThemeProvider';
 import FormContext from './FormContext';
 import Feedback from './Feedback';
-
-const withFormContext = (field, Component) =>
-  mapContextToProps(Component, FormContext.Consumer, ({ id }, props) => ({
-    [field]: props[field] || id,
-  }));
-
-const FormCheckInput = createWithBsPrefix('form-check-input', {
-  Component: 'input',
-});
-
-const FormCheckLabel = createWithBsPrefix('form-check-label', {
-  Component: 'label',
-});
+import FormCheckInput from './FormCheckInput';
+import FormCheckLabel from './FormCheckLabel';
 
 class FormCheck extends React.Component {
   static propTypes = {
@@ -41,6 +27,19 @@ class FormCheck extends React.Component {
     /** A HTML id attribute, necessary for proper form accessibility. */
     id: PropTypes.string,
 
+    /**
+     * Provide a function child to manually handle the layout of the FormCheck's inner components.
+     *
+     * ````
+     * <FormCheck>
+     *   <FormCheck.Input isInvalid type={radio} />
+     *   <FormCheck.Label>Allow us to contact you?</FormCheck.Label>
+     *   <Feedback type="invalid">Yo this is required</Feedback>
+     * </FormCheck>
+     * ```
+     */
+    children: PropTypes.node,
+
     inline: PropTypes.bool,
     disabled: PropTypes.bool,
     title: PropTypes.string,
@@ -51,13 +50,12 @@ class FormCheck extends React.Component {
 
     /** Manually style the input as valid */
     isValid: PropTypes.bool.isRequired,
-    /** A message to display when the input is valid */
-    validFeedback: PropTypes.node,
 
     /** Manually style the input as invalid */
     isInvalid: PropTypes.bool.isRequired,
-    /** A message to display when the input is invalid */
-    invalidFeedback: PropTypes.node,
+
+    /** A message to display when the input is in a validation state */
+    feedback: PropTypes.node,
   };
 
   static defaultProps = {
@@ -77,7 +75,8 @@ class FormCheck extends React.Component {
       disabled,
       isValid,
       isInvalid,
-      inputRef, // eslint-disable-line react/prop-types
+      feedback,
+      inputRef,
       className,
       style,
       title,
@@ -87,66 +86,56 @@ class FormCheck extends React.Component {
       ...props
     } = this.props;
 
-    const hasChildren =
-      children != null &&
-      children !== false &&
-      React.Children.count(children) > 0;
+    const hasLabel = label != null && label !== false && !children;
 
-    const hasLabel =
-      label != null && label !== false && React.Children.count(label) > 0;
+    const input = (
+      <FormCheckInput
+        {...props}
+        type={type}
+        ref={inputRef}
+        isValid={isValid}
+        isInvalid={isInvalid}
+        isStatic={!hasLabel}
+        disabled={disabled}
+      />
+    );
 
     return (
-      <div
-        style={style}
-        className={classNames(
-          className,
-          bsPrefix,
-          inline && `${bsPrefix}-inline`,
-        )}
+      <FormContext.Transform
+        mapToValue={({ controlId }) => ({ controlId: id || controlId })}
       >
-        {hasChildren ? (
-          children
-        ) : (
-          <>
-            <FormCheckInput
-              {...props}
-              id={id}
-              type={type}
-              ref={inputRef}
-              disabled={disabled}
-              className={classNames(
-                isValid && 'is-valid',
-                isInvalid && 'is-invalid',
-                !hasLabel && 'position-static',
+        <div
+          style={style}
+          className={classNames(
+            className,
+            bsPrefix,
+            inline && `${bsPrefix}-inline`,
+          )}
+        >
+          {children || (
+            <React.Fragment>
+              {input}
+              {hasLabel && (
+                <FormCheckLabel title={title}>{label}</FormCheckLabel>
               )}
-            />
-            {hasLabel && (
-              <FormCheckLabel htmlFor={id} title={title}>
-                {label}
-              </FormCheckLabel>
-            )}
-          </>
-        )}
-      </div>
+              {(isValid || isInvalid) && (
+                <Feedback type={isValid ? 'valid' : 'invalid'}>
+                  {feedback}
+                </Feedback>
+              )}
+            </React.Fragment>
+          )}
+        </div>
+      </FormContext.Transform>
     );
   }
 }
+const DecoratedFormCheck = createBootstrapComponent(FormCheck, {
+  forwardRefAs: 'inputRef',
+  prefix: 'form-check',
+});
 
-const mapContext = ({ controlId }, { id }) => {
-  warning(
-    controlId == null || !id,
-    '`controlId` is ignored on `<FormCheck>` when `id` is specified.',
-  );
-  return {
-    id: id || controlId,
-  };
-};
+DecoratedFormCheck.Input = FormCheckInput;
+DecoratedFormCheck.Label = FormCheckLabel;
 
-export default mapContextToProps(
-  createBootstrapComponent(FormCheck, {
-    forwardRefAs: 'inputRef',
-    prefix: 'form-check',
-  }),
-  FormContext.Consumer,
-  mapContext,
-);
+export default DecoratedFormCheck;

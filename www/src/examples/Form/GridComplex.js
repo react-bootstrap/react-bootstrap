@@ -30,7 +30,7 @@
     <FormGroup as={Col} controlId="formGridState">
       <FormLabel>State</FormLabel>
       <FormControl as="select">
-        <option selected>Choose...</option>
+        <option>Choose...</option>
         <option>...</option>
       </FormControl>
     </FormGroup>
@@ -42,7 +42,7 @@
   </Form.Row>
 
   <FormGroup id="formGridCheckbox">
-    <FormCheck type="checkbox">Check me out</FormCheck>
+    <FormCheck type="checkbox" label="Check me out" />
   </FormGroup>
 
   <Button variant="primary" type="submit">

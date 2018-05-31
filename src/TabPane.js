@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import mapContextToProps from './utils/mapContextToProps';
+import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import { createBootstrapComponent } from './ThemeProvider';
 import TabContext from './TabContext';
 import SelectableContext, { makeEventKey } from './SelectableContext';
@@ -85,7 +85,7 @@ class TabPane extends React.Component {
     id: PropTypes.string,
 
     /** @ignore * */
-    'aria-labelledby': PropTypes.string
+    'aria-labelledby': PropTypes.string,
   };
 
   render() {
@@ -147,7 +147,6 @@ class TabPane extends React.Component {
 }
 
 export default mapContextToProps(
-  createBootstrapComponent(TabPane, 'tab-pane'),
   TabContext.Consumer,
   (context, props) => {
     if (!context) return null;
@@ -168,7 +167,8 @@ export default mapContextToProps(
       mountOnEnter:
         props.mountOnEnter != null ? props.mountOnEnter : rest.mountOnEnter,
       unmountOnExit:
-        props.unmountOnExit != null ? props.unmountOnExit : rest.unmountOnExit
+        props.unmountOnExit != null ? props.unmountOnExit : rest.unmountOnExit,
     };
-  }
+  },
+  createBootstrapComponent(TabPane, 'tab-pane'),
 );
