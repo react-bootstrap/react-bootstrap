@@ -55,6 +55,11 @@ const propTypes = {
   dialogComponentClass: elementType,
 
   /**
+   * When `true` The modal will be vertically centered.
+   */
+  centered: PropTypes.bool,
+
+  /**
    * When `true` The modal will automatically shift focus to itself when it
    * opens, and replace it to the last focused element when it closes.
    * Generally this should never be set to false as it makes the Modal less

@@ -1,31 +1,25 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
-
-const propTypes = {
-  as: elementType
-};
-
-const defaultProps = {
-  as: 'h4'
-};
+import { createBootstrapComponent } from './ThemeProvider';
 
 class ModalTitle extends React.Component {
+  static propTypes = {
+    bsPrefix: PropTypes.string,
+    as: elementType
+  };
+
+  static defaultProps = {
+    as: 'div'
+  };
+
   render() {
-    const { as: Component, className, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
+    const { as: Component, bsPrefix, className, ...props } = this.props;
 
-    const classes = getClassSet(bsProps);
-
-    return (
-      <Component {...elementProps} className={classNames(className, classes)} />
-    );
+    return <Component {...props} className={classNames(className, bsPrefix)} />;
   }
 }
 
-ModalTitle.propTypes = propTypes;
-ModalTitle.defaultProps = defaultProps;
-
-export default bsClass('modal-title', ModalTitle);
+export default createBootstrapComponent(ModalTitle, 'modal-title');
