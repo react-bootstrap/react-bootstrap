@@ -1,5 +1,4 @@
 <div className="static-modal">
-  <Modal.Dialog>
     <Modal.Header>
       <Modal.Title>Modal title</Modal.Title>
     </Modal.Header>
@@ -10,5 +9,4 @@
       <Button>Close</Button>
       <Button bsStyle="primary">Save changes</Button>
     </Modal.Footer>
-  </Modal.Dialog>
 </div>;
