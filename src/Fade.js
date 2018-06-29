@@ -5,6 +5,7 @@ import Transition, {
   ENTERED,
   ENTERING
 } from 'react-transition-group/Transition';
+import onEnd from 'dom-helpers/transition/end';
 
 const propTypes = {
   /**
@@ -83,11 +84,12 @@ class Fade extends React.Component {
     triggerBrowserReflow(node);
     if (this.props.onEnter) this.props.onEnter(node);
   };
+
   render() {
     const { className, children, ...props } = this.props;
 
     return (
-      <Transition {...props} onEnter={this.handleEnter}>
+      <Transition addEndListener={onEnd} {...props} onEnter={this.handleEnter}>
         {(status, innerProps) =>
           React.cloneElement(children, {
             ...innerProps,

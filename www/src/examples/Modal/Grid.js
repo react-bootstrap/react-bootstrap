@@ -12,7 +12,7 @@ class MydModalWithGrid extends React.Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Grid>
+          <Container>
             <Row className="show-grid">
               <Col xs={12} md={8}>
                 <code>.col-xs-12 .col-md-8</code>
@@ -33,7 +33,7 @@ class MydModalWithGrid extends React.Component {
                 <code>.col-xs-6 .col-md-4</code>
               </Col>
             </Row>
-          </Grid>
+          </Container>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.onHide}>Close</Button>
@@ -55,7 +55,7 @@ class App extends React.Component {
     return (
       <ButtonToolbar>
         <Button
-          bsStyle="primary"
+          variant="primary"
           onClick={() => this.setState({ modalShow: true })}
         >
           Launch modal with grid

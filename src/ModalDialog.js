@@ -33,7 +33,8 @@ class ModalDialog extends React.Component {
       dialogClassName,
       centered,
       size,
-      children
+      children,
+      ...props
     } = this.props;
 
     const dialogClasses = classNames(
@@ -43,14 +44,8 @@ class ModalDialog extends React.Component {
       size && `${bsPrefix}-${size}`
     );
 
-    const modalStyle = { display: 'block', 'padding-left': 0 };
-
     return (
-      <div
-        tabIndex="-1"
-        style={modalStyle}
-        className={classNames(className, bsPrefix)}
-      >
+      <div tabIndex="-1" {...props} className={classNames(className, bsPrefix)}>
         <div className={dialogClasses}>
           <div className={classNames('modal-content')}>{children}</div>
         </div>

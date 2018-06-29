@@ -148,13 +148,13 @@ class App extends React.Component {
     return (
       <ButtonToolbar>
         <Button
-          bsStyle="primary"
+          variant="primary"
           onClick={() => this.setState({ smShow: true })}
         >
           Launch small demo modal
         </Button>
         <Button
-          bsStyle="primary"
+          variant="primary"
           onClick={() => this.setState({ lgShow: true })}
         >
           Launch large demo modal

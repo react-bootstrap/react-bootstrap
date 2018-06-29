@@ -40,7 +40,7 @@ class App extends React.Component {
     return (
       <ButtonToolbar>
         <Button
-          bsStyle="primary"
+          variant="primary"
           onClick={() => this.setState({ modalShow: true })}
         >
           Launch vertically centered modal
