@@ -5,8 +5,8 @@ import elementType from 'prop-types-extra/lib/elementType';
 
 import { createBootstrapComponent } from './ThemeProvider';
 import createWithBsPrefix from './utils/createWithBsPrefix';
+import divWithHeadingClass from './utils/divWithHeadingClass';
 import CardContext from './CardContext';
-
 import CardImg from './CardImg';
 
 const CardBody = createWithBsPrefix('card-body');
@@ -93,11 +93,6 @@ class Card extends React.Component {
     );
   }
 }
-
-const divWithHeadingClass = headingClass =>
-  React.forwardRef((p, ref) => (
-    <div {...p} ref={ref} className={classNames(p.className, headingClass)} />
-  ));
 
 const DecoratedCard = createBootstrapComponent(Card, 'card');
 DecoratedCard.Img = CardImg;

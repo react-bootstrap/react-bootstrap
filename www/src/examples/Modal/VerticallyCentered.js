@@ -3,7 +3,7 @@ class MyVerticallyCenteredModal extends React.Component {
     return (
       <Modal
         {...this.props}
-        bsSize="large"
+        size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >

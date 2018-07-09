@@ -74,7 +74,7 @@ export default withLayout(function ModalSection({ data }) {
         Sizing modals using standard Bootstrap props
       </Heading>
       <p>
-        You can specify a bootstrap large or small modal by using the "bsSize"
+        You can specify a bootstrap large or small modal by using the "size"
         prop.
       </p>
       <ReactPlayground codeText={ModalDefaultSizing} />

@@ -8,7 +8,6 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
   getConfig
 }) {
   actions.setWebpackConfig({
-    devtool: 'cheap-inline-module-source-map',
     module: {
       rules: [
         {

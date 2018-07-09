@@ -9,11 +9,6 @@ class ModalDialog extends React.Component {
     bsPrefix: PropTypes.string,
 
     /**
-     * A css class to apply to the Modal dialog DOM node.
-     */
-    dialogClassName: PropTypes.string,
-
-    /**
      * Specifies a large or small modal.
      *
      * @type ('sm'|'lg')
@@ -30,25 +25,24 @@ class ModalDialog extends React.Component {
     const {
       bsPrefix,
       className,
-      dialogClassName,
       centered,
       size,
       children,
       ...props
     } = this.props;
 
-    const dialogClasses = classNames(
-      `${bsPrefix}-dialog`,
-      dialogClassName,
-      centered && `${bsPrefix}-dialog-centered`,
-      size && `${bsPrefix}-${size}`
-    );
-
+    const bsClass = `${bsPrefix}-dialog`;
     return (
-      <div tabIndex="-1" {...props} className={classNames(className, bsPrefix)}>
-        <div className={dialogClasses}>
-          <div className={classNames('modal-content')}>{children}</div>
-        </div>
+      <div
+        {...props}
+        className={classNames(
+          bsClass,
+          className,
+          size && `${bsPrefix}-${size}`,
+          centered && `${bsClass}-centered`
+        )}
+      >
+        <div className={classNames(`${bsPrefix}-content`)}>{children}</div>
       </div>
     );
   }

@@ -725,9 +725,9 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@monastic.panic/enzyme-adapter-react-16@^1.2.1":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@monastic.panic/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.2.2.tgz#a7ed67b8e7dfd55a341e70b93db7c70d884be37c"
+"@monastic.panic/enzyme-adapter-react-16@^1.2.4":
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/@monastic.panic/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.2.4.tgz#e75f783e27ab99cd13f0e88312486405ca18a38b"
   dependencies:
     "@monastic.panic/enzyme-adapter-utils" "^1.4.0"
     lodash "^4.17.4"
@@ -8373,8 +8373,9 @@ react-modal@^3.3.2:
     react-lifecycles-compat "^3.0.0"
     warning "^3.0.0"
 
-"react-overlays@file:../react-overlays":
-  version "1.0.0-beta.3"
+react-overlays@^1.0.0-beta.6:
+  version "1.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-1.0.0-beta.6.tgz#612577fb5e44a3a06fd98534cbf866aa0ee9fd02"
   dependencies:
     classnames "^2.2.6"
     dom-helpers "^3.3.1"

@@ -1,11 +1,7 @@
 class MydModalWithGrid extends React.Component {
   render() {
     return (
-      <Modal
-        {...this.props}
-        bsSize="large"
-        aria-labelledby="contained-modal-title-vcenter"
-      >
+      <Modal {...this.props} aria-labelledby="contained-modal-title-vcenter">
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
             Using Grid in Modal

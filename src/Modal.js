@@ -47,14 +47,19 @@ const propTypes = {
   animation: PropTypes.bool,
 
   /**
+   * A css class to apply to the Modal dialog DOM node.
+   */
+  dialogClassName: PropTypes.string,
+
+  /**
    * A Component type that provides the modal content Markup. This is a useful
    * prop when you want to use your own styles and markup to create a custom
    * modal component.
    */
-  dialogComponentClass: elementType,
+  dialogAs: elementType,
 
   /**
-   * When `true` The modal will be vertically centered.
+   * Specify whether the Component should be vertically centered.
    */
   centered: PropTypes.bool,
 
@@ -129,7 +134,7 @@ const propTypes = {
 const defaultProps = {
   ...BaseModal.defaultProps,
   animation: true,
-  dialogComponentClass: ModalDialog,
+  dialogAs: ModalDialog,
   manager: new BootstrapModalManager()
 };
 
@@ -165,8 +170,25 @@ class Modal extends React.Component {
     this._modal = ref;
   };
 
-  handleDialogClick = e => {
-    if (e.target !== e.currentTarget) return;
+  // We prevent the modal from closing during a drag by detecting where the
+  // the click originates from. If it starts in the modal and then ends outside
+  // don't close.
+  handleDialogMouseDown = () => {
+    this._waitingForMouseUp = true;
+  };
+
+  handleMouseUp = e => {
+    if (this._waitingForMouseUp && e.target === this._modal.dialog) {
+      this._ignoreBackdropClick = true;
+    }
+    this._waitingForMouseUp = false;
+  };
+
+  handleClick = e => {
+    if (this._ignoreBackdropClick || e.target !== e.currentTarget) {
+      this._ignoreBackdropClick = false;
+      return;
+    }
 
     this.props.onHide();
   };
@@ -196,7 +218,7 @@ class Modal extends React.Component {
   };
 
   handleWindowResize = () => {
-    this.updateDialogStyle(this._modal.root);
+    this.updateDialogStyle(this._modal.dialog);
   };
 
   updateDialogStyle(node) {
@@ -239,38 +261,42 @@ class Modal extends React.Component {
       backdrop,
       animation,
       show,
-      dialogComponentClass: Dialog,
+      dialogClassName,
+      dialogAs: Dialog,
       className,
       style,
       children, // Just in case this get added to BaseModal propTypes.
       onEntering: _0,
       onExited: _1,
+      backdropClassName: _2,
       ...props
     } = this.props;
 
     const [baseModalProps, dialogProps] = splitComponentProps(props, BaseModal);
-
+    const clickHandler = backdrop === true ? this.handleClick : null;
     return (
       <ModalContext.Provider value={this.modalContext}>
         <BaseModal
           {...baseModalProps}
           ref={this.setModalRef}
           show={show}
-          style={{ ...this.state.style, ...style }}
+          style={{ ...style, ...this.state.style }}
+          className={classNames(className, bsPrefix)}
           containerClassName={`${bsPrefix}-open`}
           transition={animation ? DialogTransition : undefined}
           backdrop={backdrop}
           backdropTransition={animation ? BackdropTransition : undefined}
           renderBackdrop={this.renderBackdrop}
+          onClick={clickHandler}
+          onMouseUp={this.handleMouseUp}
           onEnter={this.handleEnter}
           onEntering={this.handleEntering}
           onExited={this.handleExited}
         >
           <Dialog
             {...dialogProps}
-            style={dialogProps.style}
-            onClick={backdrop === true ? this.handleDialogClick : null}
-            className={className}
+            onMouseDown={this.handleDialogMouseDown}
+            className={dialogClassName}
           >
             {children}
           </Dialog>

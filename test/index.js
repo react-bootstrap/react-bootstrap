@@ -77,5 +77,5 @@ describe('Process environment for tests', () => {
 const srcContext = require.context('../src', true, /.*\.js$/);
 srcContext.keys().forEach(srcContext);
 
-const testsContext = require.context('.', true, /.*\.js$/);
+const testsContext = require.context('.', true, /.*ModalSpec\.js$/);
 testsContext.keys().forEach(testsContext);

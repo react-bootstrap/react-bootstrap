@@ -2,8 +2,11 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
+import divWithHeadingClass from './utils/divWithHeadingClass';
 
 import { createBootstrapComponent } from './ThemeProvider';
+
+const DivStyledAsH4 = divWithHeadingClass('h4');
 
 class ModalTitle extends React.Component {
   static propTypes = {
@@ -12,7 +15,7 @@ class ModalTitle extends React.Component {
   };
 
   static defaultProps = {
-    as: 'div'
+    as: DivStyledAsH4
   };
 
   render() {
