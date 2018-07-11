@@ -2,13 +2,16 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
+import { createBootstrapComponent } from './ThemeProvider';
 import createChainedFunction from './utils/createChainedFunction';
 import CloseButton from './CloseButton';
+import ModalContext from './ModalContext';
 
 // TODO: `aria-label` should be `closeLabel`.
 
 const propTypes = {
+  bsPrefix: PropTypes.string,
+
   /**
    * Provides an accessible label for the close
    * button. It is used for Assistive Technology when the label text is not
@@ -34,15 +37,10 @@ const defaultProps = {
   closeButton: false
 };
 
-const contextTypes = {
-  $bs_modal: PropTypes.shape({
-    onHide: PropTypes.func
-  })
-};
-
 class ModalHeader extends React.Component {
   render() {
     const {
+      bsPrefix,
       closeLabel,
       closeButton,
       onHide,
@@ -51,29 +49,29 @@ class ModalHeader extends React.Component {
       ...props
     } = this.props;
 
-    const modal = this.context.$bs_modal;
-
-    const [bsProps, elementProps] = splitBsProps(props);
-
-    const classes = getClassSet(bsProps);
-
     return (
-      <div {...elementProps} className={classNames(className, classes)}>
-        {closeButton && (
-          <CloseButton
-            label={closeLabel}
-            onClick={createChainedFunction(modal && modal.onHide, onHide)}
-          />
-        )}
+      <ModalContext.Consumer>
+        {context => (
+          <div {...props} className={classNames(className, bsPrefix)}>
+            {children}
 
-        {children}
-      </div>
+            {closeButton && (
+              <CloseButton
+                label={closeLabel}
+                onClick={createChainedFunction(
+                  context && context.onHide,
+                  onHide
+                )}
+              />
+            )}
+          </div>
+        )}
+      </ModalContext.Consumer>
     );
   }
 }
 
 ModalHeader.propTypes = propTypes;
 ModalHeader.defaultProps = defaultProps;
-ModalHeader.contextTypes = contextTypes;
 
-export default bsClass('modal-header', ModalHeader);
+export default createBootstrapComponent(ModalHeader, 'modal-header');

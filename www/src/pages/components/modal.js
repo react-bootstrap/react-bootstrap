@@ -1,32 +1,34 @@
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import LinkToSource from '../../components/LinkToSource';
-import PropTable from '../../components/PropTable';
+import ComponentApi from '../../components/ComponentApi';
+import Heading from '../../components/Heading';
 import ReactPlayground from '../../components/ReactPlayground';
-import Modal from '../../examples/Modal';
-import ModalContained from '../../examples/ModalContained';
-import ModalCustomSizing from '../../examples/ModalCustomSizing';
-import ModalDefaultSizing from '../../examples/ModalDefaultSizing';
-import ModalStatic from '../../examples/ModalStatic';
+
+import ModalStatic from '../../examples/Modal/Static';
+import ModalBasic from '../../examples/Modal/Basic';
+import ModalContained from '../../examples/Modal/Contained';
+import ModalDefaultSizing from '../../examples/Modal/DefaultSizing';
+import ModalCustomSizing from '../../examples/Modal/CustomSizing';
+import ModalVerticallyCentered from '../../examples/Modal/VerticallyCentered';
+import ModalGrid from '../../examples/Modal/Grid';
 import withLayout from '../../withLayout';
 
 export default withLayout(function ModalSection({ data }) {
   return (
     <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="modals">Modals</Anchor> <small>Modal</small>
-      </h2>
+      <Heading h="2" id="modals">
+        Modals
+      </Heading>
 
-      <h3>
-        <Anchor id="modals-static">Static Markup</Anchor>
-      </h3>
+      <Heading h="3" id="modals-static">
+        Static Markup
+      </Heading>
       <p>A modal dialog component</p>
       <ReactPlayground codeText={ModalStatic} />
 
-      <h3>
-        <Anchor id="modals-live">Basic example</Anchor>
-      </h3>
+      <Heading h="3" id="modals-live">
+        Basic example
+      </Heading>
       <p />
       <p>
         A modal with header, body, and set of actions in the footer. Use{' '}
@@ -37,7 +39,7 @@ export default withLayout(function ModalSection({ data }) {
         <code>{'<Modal.Footer/>'}</code>, which you can use to build the Modal
         content.
       </p>
-      <ReactPlayground codeText={Modal} />
+      <ReactPlayground codeText={ModalBasic} />
       <div className="bs-callout bs-callout-info">
         <h4>Additional Import Options</h4>
         <p>
@@ -48,9 +50,9 @@ export default withLayout(function ModalSection({ data }) {
         </p>
       </div>
 
-      <h3>
-        <Anchor id="modals-contained">Contained Modal</Anchor>
-      </h3>
+      <Heading h="3" id="modals-contained">
+        Contained Modal
+      </Heading>
       <p>
         You will need to add the following css to your project and ensure that
         your container has the <code>modal-container</code> class.
@@ -68,20 +70,18 @@ export default withLayout(function ModalSection({ data }) {
       </pre>
       <ReactPlayground codeText={ModalContained} />
 
-      <h3>
-        <Anchor id="modal-default-sizing">
-          Sizing modals using standard Bootstrap props
-        </Anchor>
-      </h3>
+      <Heading h="3" id="modal-default-sizing">
+        Sizing modals using standard Bootstrap props
+      </Heading>
       <p>
-        You can specify a bootstrap large or small modal by using the "bsSize"
+        You can specify a bootstrap large or small modal by using the "size"
         prop.
       </p>
       <ReactPlayground codeText={ModalDefaultSizing} />
 
-      <h3>
-        <Anchor id="modal-custom-sizing">Sizing modals using custom CSS</Anchor>
-      </h3>
+      <Heading h="3" id="modal-custom-sizing">
+        Sizing modals using custom CSS
+      </Heading>
       <p>
         You can apply custom css to the modal dialog div using the
         "dialogClassName" prop. Example is using a custom css class with width
@@ -89,9 +89,9 @@ export default withLayout(function ModalSection({ data }) {
       </p>
       <ReactPlayground codeText={ModalCustomSizing} />
 
-      <h3>
-        <Anchor id="modals-multiple">Multiple Modals</Anchor>
-      </h3>
+      <Heading h="3" id="modals-multiple">
+        Multiple Modals
+      </Heading>
       <div className="bs-callout bs-callout-warning">
         <h4>Not supported</h4>
         <p>
@@ -105,42 +105,34 @@ export default withLayout(function ModalSection({ data }) {
           component, which supports multiple modals.
         </p>
       </div>
+      <Heading h="3" id="modal-vertically-centered">
+        Vertically centered modals
+      </Heading>
+      <p>
+        You can vertically center a modal by passing the "verticallyCenter"
+        prop.
+      </p>
+      <ReactPlayground codeText={ModalVerticallyCentered} />
 
-      <h3>
-        <Anchor id="modals-props">Props</Anchor>
-      </h3>
+      <Heading h="3" id="modal-grid">
+        Using grid in modals
+      </Heading>
+      <p>
+        You can use grid layouts within a model using regular grid components
+        inside the modal content.
+      </p>
+      <ReactPlayground codeText={ModalGrid} />
 
-      <h4>
-        <Anchor id="modals-props-modal">Modal</Anchor>
-      </h4>
-      <PropTable metadata={data.Modal} />
+      <Heading h="3" id="modals-props">
+        Props
+      </Heading>
 
-      <h4>
-        <Anchor id="modals-props-modal-dialog">Modal.Dialog</Anchor>
-        <LinkToSource component={data.ModalDialog.displayName} />
-      </h4>
-      <PropTable metadata={data.ModalDialog} />
-
-      <h4>
-        <Anchor id="modals-props-modal-header">Modal.Header</Anchor>
-        <LinkToSource component={data.ModalHeader.displayName} />
-      </h4>
-      <PropTable metadata={data.ModalHeader} />
-
-      <h4>
-        <Anchor id="modals-props-modal-title">Modal.Title</Anchor>
-      </h4>
-      <PropTable metadata={data.ModalTitle} />
-
-      <h4>
-        <Anchor id="modals-props-modal-body">Modal.Body</Anchor>
-      </h4>
-      <PropTable metadata={data.ModalBody} />
-
-      <h4>
-        <Anchor id="modals-props-modal-footer">Modal.Footer</Anchor>
-      </h4>
-      <PropTable metadata={data.ModalFooter} />
+      <ComponentApi metadata={data.Modal} />
+      <ComponentApi metadata={data.ModalDialog} />
+      <ComponentApi metadata={data.ModalHeader} />
+      <ComponentApi metadata={data.ModalTitle} />
+      <ComponentApi metadata={data.ModalBody} />
+      <ComponentApi metadata={data.ModalFooter} />
     </div>
   );
 });
@@ -148,22 +140,22 @@ export default withLayout(function ModalSection({ data }) {
 export const query = graphql`
   query ModalQuery {
     Modal: componentMetadata(displayName: { eq: "Modal" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     ModalDialog: componentMetadata(displayName: { eq: "ModalDialog" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     ModalHeader: componentMetadata(displayName: { eq: "ModalHeader" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     ModalTitle: componentMetadata(displayName: { eq: "ModalTitle" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     ModalBody: componentMetadata(displayName: { eq: "ModalBody" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     ModalFooter: componentMetadata(displayName: { eq: "ModalFooter" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
   }
 `;

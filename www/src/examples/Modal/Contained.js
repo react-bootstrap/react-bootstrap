@@ -27,8 +27,8 @@ class Trigger extends React.Component {
     return (
       <div className="modal-container" style={{ height: 200 }}>
         <Button
-          bsStyle="primary"
-          bsSize="large"
+          size="lg"
+          variant="primary"
           onClick={() => this.setState({ show: true })}
         >
           Launch contained modal

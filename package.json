@@ -24,19 +24,31 @@
     "tdd": "karma start",
     "test": "npm run lint && npm run test-browser && npm run test-node",
     "test-browser": "cross-env NODE_ENV=test karma start --single-run",
-    "test-node":
-      "cross-env NODE_ENV=test-server mocha --compilers js:@babel/register test/server/*Spec.js",
+    "test-node": "cross-env NODE_ENV=test-server mocha --compilers js:@babel/register test/server/*Spec.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "lint-staged": {
-    "*.js": ["npm run ci-lint -- --fix", "git add"]
+    "*.js": [
+      "npm run ci-lint -- --fix",
+      "git add"
+    ]
   },
   "prettier": {
     "singleQuote": true
   },
-  "files": ["CHANGELOG.md", "lib", "dist", "es"],
-  "keywords": ["react", "ecosystem-react", "react-component", "bootstrap"],
+  "files": [
+    "CHANGELOG.md",
+    "lib",
+    "dist",
+    "es"
+  ],
+  "keywords": [
+    "react",
+    "ecosystem-react",
+    "react-component",
+    "bootstrap"
+  ],
   "author": "Stephen J. Collings <stevoland@gmail.com>",
   "license": "MIT",
   "peerDependencies": {
@@ -54,7 +66,7 @@
     "@babel/preset-env": "^7.0.0-beta.42",
     "@babel/preset-react": "^7.0.0-beta.42",
     "@babel/register": "^7.0.0-beta.42",
-    "@monastic.panic/enzyme-adapter-react-16": "^1.2.1",
+    "@monastic.panic/enzyme-adapter-react-16": "^1.2.4",
     "@storybook/react": "^3.3.14",
     "babel-core": "^7.0.0-bridge.0",
     "babel-eslint": "^8.0.0",
@@ -71,11 +83,11 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
+    "eslint-import-resolver-webpack": "^0.9.0",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-mocha": "^5.0.0",
     "eslint-plugin-prettier": "^2.6.0",
-    "eslint-import-resolver-webpack": "^0.9.0",
     "eslint-plugin-react": "^7.8.2",
     "execa": "^0.10.0",
     "fs-extra": "^6.0.1",
@@ -112,7 +124,7 @@
     "popper.js": "^1.14.3",
     "prop-types": "^15.6.1",
     "prop-types-extra": "^1.1.0",
-    "react-overlays": "^1.0.0-beta.2",
+    "react-overlays": "^1.0.0-beta.6",
     "react-prop-types": "^0.4.0",
     "react-transition-group": "^2.3.1",
     "uncontrollable": "^6.0.0",
