@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 import uncontrollable from 'uncontrollable';
+import divWithClassName from './utils/divWithClassName';
 
 import createWithBsPrefix from './utils/createWithBsPrefix';
 import { createBootstrapComponent } from './ThemeProvider';
@@ -116,14 +117,14 @@ const DecoratedAlert = uncontrollable(
   }
 );
 
-const h4 = React.forwardRef((p, ref) => (
-  <div {...p} ref={ref} className={classNames(p.className, 'h4')} />
-));
+const DivStyledAsH4 = divWithClassName('h4');
 
 DecoratedAlert.Link = createWithBsPrefix('alert-link', {
   Component: SafeAnchor
 });
 
-DecoratedAlert.Heading = createWithBsPrefix('alert-heading', { Component: h4 });
+DecoratedAlert.Heading = createWithBsPrefix('alert-heading', {
+  Component: DivStyledAsH4
+});
 
 export default DecoratedAlert;

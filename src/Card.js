@@ -5,7 +5,7 @@ import elementType from 'prop-types-extra/lib/elementType';
 
 import { createBootstrapComponent } from './ThemeProvider';
 import createWithBsPrefix from './utils/createWithBsPrefix';
-import divWithHeadingClass from './utils/divWithHeadingClass';
+import divWithClassName from './utils/divWithClassName';
 import CardContext from './CardContext';
 import CardImg from './CardImg';
 
@@ -94,13 +94,16 @@ class Card extends React.Component {
   }
 }
 
+const DivStyledAsH5 = divWithClassName('h5');
+const DivStyledAsH6 = divWithClassName('h6');
+
 const DecoratedCard = createBootstrapComponent(Card, 'card');
 DecoratedCard.Img = CardImg;
 DecoratedCard.Title = createWithBsPrefix('card-title', {
-  Component: divWithHeadingClass('h5')
+  Component: DivStyledAsH5
 });
 DecoratedCard.Subtitle = createWithBsPrefix('card-subtitle', {
-  Component: divWithHeadingClass('h6')
+  Component: DivStyledAsH6
 });
 
 DecoratedCard.Body = CardBody;
