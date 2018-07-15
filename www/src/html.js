@@ -10,12 +10,6 @@ export default class HTML extends React.Component {
   render() {
     const head = Helmet.rewind();
 
-    let css;
-    if (process.env.NODE_ENV === 'production') {
-      let html = require('!raw-loader!../public/styles.css'); // eslint-disable-line
-      css = <style dangerouslySetInnerHTML={{ __html: html }} />;
-    }
-
     return (
       <html lang="en">
         <head>
@@ -25,8 +19,6 @@ export default class HTML extends React.Component {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          {this.props.headComponents}
-          {css}
           {head.title.toComponent()}
           {head.meta.toComponent()}
           {head.link.toComponent()}
