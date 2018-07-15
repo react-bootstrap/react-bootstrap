@@ -11,7 +11,7 @@ function CustomPopover({ className, style }) {
         borderRadius: 3,
         marginLeft: -5,
         marginTop: 5,
-        padding: 10
+        padding: 10,
       }}
     >
       <strong>Holy guacamole!</strong> Check this info.
@@ -26,7 +26,7 @@ class Example extends React.Component {
     this.handleToggle = this.handleToggle.bind(this);
 
     this.state = {
-      show: true
+      show: true,
     };
   }
 

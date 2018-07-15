@@ -10,12 +10,12 @@ const propTypes = {
   /** Make the jumbotron full width, and without rounded corners */
   fluid: PropTypes.bool,
   /** @default 'jumbotron' */
-  bsPrefix: PropTypes.string
+  bsPrefix: PropTypes.string,
 };
 
 const defaultProps = {
   as: 'div',
-  fluid: false
+  fluid: false,
 };
 
 class Jumbotron extends React.Component {
@@ -23,7 +23,7 @@ class Jumbotron extends React.Component {
     const { as: Component, className, fluid, bsPrefix, ...props } = this.props;
     const classes = {
       [bsPrefix]: true,
-      [`${bsPrefix}-fluid`]: fluid
+      [`${bsPrefix}-fluid`]: fluid,
     };
     return <Component {...props} className={classNames(className, classes)} />;
   }

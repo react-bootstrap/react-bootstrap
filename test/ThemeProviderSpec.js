@@ -13,14 +13,14 @@ describe('<ThemeProvider>', () => {
         );
       }
     },
-    'foo'
+    'foo',
   );
 
   it('should use HOC value', () => {
     const wrapper = mount(
       <div>
         <Foo />
-      </div>
+      </div>,
     );
 
     wrapper.assertSingle('p.foo');
@@ -33,7 +33,7 @@ describe('<ThemeProvider>', () => {
           <Button variant="primary">My label</Button>
           <Foo />
         </div>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
 
     wrapper.assertSingle('button.my-btn.my-btn-primary');
@@ -46,7 +46,7 @@ describe('<ThemeProvider>', () => {
         <div>
           <Foo bsPrefix="my-foo" />
         </div>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
 
     wrapper.assertSingle('p.my-foo');
@@ -57,7 +57,7 @@ describe('<ThemeProvider>', () => {
     const wrapper = mount(
       <div>
         <Foo bsPrefix="my-foo" ref={r => (ref = r)} />
-      </div>
+      </div>,
     );
 
     expect(ref).to.equal(wrapper.find('Foo').instance());

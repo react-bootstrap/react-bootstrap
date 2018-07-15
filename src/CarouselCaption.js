@@ -5,11 +5,11 @@ import elementType from 'prop-types-extra/lib/elementType';
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
 
 const propTypes = {
-  as: elementType
+  as: elementType,
 };
 
 const defaultProps = {
-  as: 'div'
+  as: 'div',
 };
 
 class CarouselCaption extends React.Component {

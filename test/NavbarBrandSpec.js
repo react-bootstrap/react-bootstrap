@@ -7,7 +7,7 @@ import NavbarBrand from '../src/NavbarBrand';
 describe('<Navbar.Brand>', () => {
   it('Should create NavbarBrand SPAN element', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <NavbarBrand>Brand</NavbarBrand>
+      <NavbarBrand>Brand</NavbarBrand>,
     );
 
     const brand = ReactDOM.findDOMNode(instance);
@@ -21,7 +21,7 @@ describe('<Navbar.Brand>', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <NavbarBrand>
         <a href="">BrandLink</a>
-      </NavbarBrand>
+      </NavbarBrand>,
     );
 
     const brand = ReactDOM.findDOMNode(instance);

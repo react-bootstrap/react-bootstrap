@@ -13,24 +13,24 @@ describe('<Figure.Caption>', () => {
 
   it('has "figure-caption" class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Figure.Caption>FigureCaption content</Figure.Caption>
+      <Figure.Caption>FigureCaption content</Figure.Caption>,
     );
     assert.equal(ReactDOM.findDOMNode(instance).className, 'figure-caption');
   });
 
   it('Should merge additional classes passed in', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Figure.Caption className="bob" />
+      <Figure.Caption className="bob" />,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbob\b/));
     assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\bfigure-caption\b/)
+      ReactDOM.findDOMNode(instance).className.match(/\bfigure-caption\b/),
     );
   });
 
   it('allows custom elements instead of "figcaption"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Figure.Caption as="section" />
+      <Figure.Caption as="section" />,
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');

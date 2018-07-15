@@ -9,7 +9,7 @@ describe('<DropdownToggle>', () => {
   it('renders toggle button', () => {
     mount(simpleToggle)
       .assertSingle(
-        'button[aria-expanded=false].dropdown-toggle.btn.btn-primary'
+        'button[aria-expanded=false].dropdown-toggle.btn.btn-primary',
       )
       .text()
       .should.equal('herpa derpa');
@@ -23,7 +23,7 @@ describe('<DropdownToggle>', () => {
     mount(
       <DropdownToggle>
         <h3>herpa derpa</h3>
-      </DropdownToggle>
+      </DropdownToggle>,
     )
       .assertSingle('h3')
       .text()
@@ -40,7 +40,7 @@ describe('<DropdownToggle>', () => {
         open={false}
         title="click forwards"
         onClick={handleClick}
-      />
+      />,
     ).simulate('click');
   });
 
@@ -55,7 +55,7 @@ describe('<DropdownToggle>', () => {
         bsPrefix="my-custom-bsClass"
         open={false}
         title="bsClass"
-      />
+      />,
     ).assertSingle('.my-custom-bsClass.btn');
   });
 });

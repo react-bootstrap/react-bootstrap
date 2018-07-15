@@ -10,7 +10,7 @@ describe('<Card>', () => {
 
   it('should have additional classes', () => {
     mount(<Card className="custom-class">Card</Card>).assertSingle(
-      '.card.custom-class'
+      '.card.custom-class',
     );
   });
 
@@ -24,7 +24,7 @@ describe('<Card>', () => {
 
   it('accepts a border prop', () => {
     mount(<Card border="danger">Card</Card>).assertSingle(
-      '.card.border-danger'
+      '.card.border-danger',
     );
   });
 
@@ -32,7 +32,7 @@ describe('<Card>', () => {
     mount(
       <Card>
         <p>hello</p>
-      </Card>
+      </Card>,
     ).assertSingle('p');
   });
 

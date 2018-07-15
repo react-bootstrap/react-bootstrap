@@ -45,19 +45,19 @@ class Card extends React.Component {
      */
     body: PropTypes.bool,
 
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
     as: 'div',
-    body: false
+    body: false,
   };
 
   static getDerivedStateFromProps({ bsPrefix }) {
     return {
       cardContext: {
-        cardHeaderBsPrefix: `${bsPrefix}-header`
-      }
+        cardHeaderBsPrefix: `${bsPrefix}-header`,
+      },
     };
   }
 
@@ -81,7 +81,7 @@ class Card extends React.Component {
       bsPrefix,
       bg && `bg-${bg}`,
       text && `text-${text}`,
-      border && `border-${border}`
+      border && `border-${border}`,
     );
 
     return (
@@ -100,18 +100,18 @@ const DivStyledAsH6 = divWithClassName('h6');
 const DecoratedCard = createBootstrapComponent(Card, 'card');
 DecoratedCard.Img = CardImg;
 DecoratedCard.Title = createWithBsPrefix('card-title', {
-  Component: DivStyledAsH5
+  Component: DivStyledAsH5,
 });
 DecoratedCard.Subtitle = createWithBsPrefix('card-subtitle', {
-  Component: DivStyledAsH6
+  Component: DivStyledAsH6,
 });
 
 DecoratedCard.Body = CardBody;
 DecoratedCard.Link = createWithBsPrefix('card-link', {
-  Component: 'a'
+  Component: 'a',
 });
 DecoratedCard.Text = createWithBsPrefix('card-text', {
-  Component: 'p'
+  Component: 'p',
 });
 DecoratedCard.Header = createWithBsPrefix('card-header');
 DecoratedCard.Footer = createWithBsPrefix('card-footer');

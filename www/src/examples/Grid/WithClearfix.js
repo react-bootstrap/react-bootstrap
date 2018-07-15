@@ -9,7 +9,7 @@ const dummySentences = [
   'Nullam tristique diam non turpis.',
   'Cras placerat accumsan nulla.',
   'Nullam rutrum.',
-  'Nam vestibulum accumsan nisl.'
+  'Nam vestibulum accumsan nisl.',
 ];
 
 const gridInstance = (

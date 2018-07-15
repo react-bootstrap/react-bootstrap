@@ -10,5 +10,5 @@ module.exports = {
   eventKey:
     'A unique identifier for the Component, the `eventKey` makes it distinguishable from others in a set. ' +
     "Similar to React's `key` prop, in that it only needs to be " +
-    'unique amoungst the Components siblings, not globally. '
+    'unique amoungst the Components siblings, not globally. ',
 };

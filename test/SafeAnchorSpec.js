@@ -77,7 +77,7 @@ describe('SafeAnchor', () => {
     mount(
       <SafeAnchor disabled href="#foo" onClick={clickSpy}>
         Title
-      </SafeAnchor>
+      </SafeAnchor>,
     ).simulate('click');
 
     expect(spy).to.have.been.calledOnce;
@@ -116,7 +116,7 @@ describe('SafeAnchor', () => {
     expect(
       shallow(<SafeAnchor href="http://google.com" />)
         .find('a')
-        .prop('role')
+        .prop('role'),
     ).to.not.exist;
   });
 });

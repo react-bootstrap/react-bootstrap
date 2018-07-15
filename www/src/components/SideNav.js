@@ -33,7 +33,7 @@ const components = [
   'progress',
   'table',
   'tabs',
-  'tooltips'
+  'tooltips',
 ];
 
 const utilities = ['custom-styles', 'transitions', 'responsive-embed'];

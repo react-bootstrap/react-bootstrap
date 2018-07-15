@@ -7,7 +7,7 @@ import {
   bsClass,
   getClassSet,
   prefix,
-  splitBsProps
+  splitBsProps,
 } from './utils/bootstrapUtils';
 
 // TODO: This should probably take a single `aspectRatio` prop.
@@ -24,12 +24,12 @@ const propTypes = {
   /**
    * 4by3 aspect ratio
    */
-  a4by3: PropTypes.bool
+  a4by3: PropTypes.bool,
 };
 
 const defaultProps = {
   a16by9: false,
-  a4by3: false
+  a4by3: false,
 };
 
 class ResponsiveEmbed extends React.Component {
@@ -43,14 +43,14 @@ class ResponsiveEmbed extends React.Component {
     const classes = {
       ...getClassSet(bsProps),
       [prefix(bsProps, '16by9')]: a16by9,
-      [prefix(bsProps, '4by3')]: a4by3
+      [prefix(bsProps, '4by3')]: a4by3,
     };
 
     return (
       <div className={classNames(classes)}>
         {cloneElement(children, {
           ...elementProps,
-          className: classNames(className, prefix(bsProps, 'item'))
+          className: classNames(className, prefix(bsProps, 'item')),
         })}
       </div>
     );

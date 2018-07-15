@@ -6,7 +6,7 @@ import FormGroup from '../src/FormGroup';
 
 import { shouldWarn } from './helpers';
 
-describe.only('<FormLabel>', () => {
+describe('<FormLabel>', () => {
   it('should render correctly', () => {
     mount(
       <FormLabel id="foo" name="bar" className="my-control" />,

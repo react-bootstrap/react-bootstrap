@@ -14,14 +14,14 @@ export default function transformer(file, api) {
 
   let imp = j.importDeclaration(
     [j.importDefaultSpecifier(j.identifier('withLayout'))],
-    j.literal('../../withLayout')
+    j.literal('../../withLayout'),
   );
 
   j(
     root
       .find(j.Program)
       .get('body')
-      .get(0)
+      .get(0),
   ).insertBefore(imp);
 
   let node = mainExport.node;
@@ -31,7 +31,7 @@ export default function transformer(file, api) {
       node.params,
       node.body,
       node.generator,
-      node.expression
+      node.expression,
     );
 
   mainExport.replace(j.callExpression(j.identifier('withLayout'), [node]));

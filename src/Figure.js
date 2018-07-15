@@ -15,11 +15,11 @@ class Figure extends React.Component {
      */
     bsPrefix: PropTypes.string,
 
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
-    as: 'figure'
+    as: 'figure',
   };
 
   render() {

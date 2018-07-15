@@ -10,7 +10,7 @@ export default function createPopper(onUpdate) {
       this.destroy();
 
       const {
-        modifiers: { arrow, preventOverflow, ...modifiers } = {}
+        modifiers: { arrow, preventOverflow, ...modifiers } = {},
       } = popperConfig;
 
       popper = new PopperJs(target, element, {
@@ -19,20 +19,20 @@ export default function createPopper(onUpdate) {
           ...modifiers,
           preventOverflow: {
             ...preventOverflow,
-            boundariesElement: boundary || 'scrollParent'
+            boundariesElement: boundary || 'scrollParent',
           },
           arrow: {
             // explicit so the default selector isn't used
             enabled: !!arrowEl,
             ...arrow,
-            element: arrowEl
+            element: arrowEl,
           },
           computeStyle: { enabled: true },
-          applyStyle: { enabled: false }
+          applyStyle: { enabled: false },
         },
         onCreate: onUpdate,
-        onUpdate
+        onUpdate,
       });
-    }
+    },
   };
 }

@@ -24,7 +24,7 @@ describe('Figure', () => {
 
     it('should provide src and alt prop', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <Figure.Image src="image.jpg" alt="this is alt" />
+        <Figure.Image src="image.jpg" alt="this is alt" />,
       );
       let image = ReactDOM.findDOMNode(instance);
 
@@ -41,7 +41,7 @@ describe('Figure', () => {
 
     it('should not override class when rounded prop is set', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <Figure.Image rounded />
+        <Figure.Image rounded />,
       );
       let imageClassName = ReactDOM.findDOMNode(instance).className;
 
@@ -50,7 +50,7 @@ describe('Figure', () => {
 
     it('should have correct class when rounded prop is set', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <Figure.Image rounded />
+        <Figure.Image rounded />,
       );
       let imageClassName = ReactDOM.findDOMNode(instance).className;
 
@@ -59,7 +59,7 @@ describe('Figure', () => {
 
     it('should have correct class when roundedCircle prop is set', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <Figure.Image roundedCircle />
+        <Figure.Image roundedCircle />,
       );
       let imageClassName = ReactDOM.findDOMNode(instance).className;
 
@@ -68,7 +68,7 @@ describe('Figure', () => {
 
     it('should have correct class when thumbnail prop is set', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <Figure.Image thumbnail />
+        <Figure.Image thumbnail />,
       );
       let imageClassName = ReactDOM.findDOMNode(instance).className;
 

@@ -13,13 +13,13 @@ const propTypes = {
   active: PropTypes.bool,
 
   /** An accessible label indicating the active state.. */
-  activeLabel: PropTypes.string
+  activeLabel: PropTypes.string,
 };
 
 const defaultProps = {
   active: false,
   disabled: false,
-  activeLabel: '(current)'
+  activeLabel: '(current)',
 };
 
 export default function PageItem({

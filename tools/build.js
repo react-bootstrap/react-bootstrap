@@ -32,8 +32,8 @@ const has = t => !targets.length || targets.includes(t);
  */
 const buildLib = step('commonjs modules', libRoot, () =>
   execa.shell(`npx babel ${srcRoot} --out-dir ${libRoot} --env-name "lib"`, {
-    stdio
-  })
+    stdio,
+  }),
 );
 
 /**
@@ -42,8 +42,8 @@ const buildLib = step('commonjs modules', libRoot, () =>
  */
 const buildEsm = step('es modules', esRoot, () =>
   execa.shell(`npx babel ${srcRoot} --out-dir ${esRoot} --env-name "esm"`, {
-    stdio
-  })
+    stdio,
+  }),
 );
 
 /**
@@ -55,7 +55,7 @@ const buildBower = step('bowser package', bowerRoot, async () => {
 
   await fse.copy(
     path.resolve(__dirname, '../README.md'),
-    path.join(bowerRoot, 'README.md')
+    path.join(bowerRoot, 'README.md'),
   );
 
   await fse.writeJson(
@@ -71,10 +71,10 @@ const buildBower = step('bowser package', bowerRoot, async () => {
       ignore: ['**/.*'],
       dependencies: {
         react: pkgJson.peerDependencies.react,
-        'react-dom': pkgJson.peerDependencies['react-dom']
-      }
+        'react-dom': pkgJson.peerDependencies['react-dom'],
+      },
     },
-    { spaces: 2 }
+    { spaces: 2 },
   );
 });
 
@@ -100,20 +100,20 @@ const buildDist = step(
           }
 
           resolve();
-        }
+        },
       );
-    })
+    }),
 );
 
 console.log(
-  green(`Building targets: ${targets.length ? targets.join(', ') : 'all'}\n`)
+  green(`Building targets: ${targets.length ? targets.join(', ') : 'all'}\n`),
 );
 
 Promise.all([
   has('lib') && buildLib(),
   has('es') && buildEsm(),
   has('bower') && buildBower(),
-  (has('dist') || has('bower')) && buildDist()
+  (has('dist') || has('bower')) && buildDist(),
 ]).catch(err => {
   if (err) console.error(red(err.stack || err.toString()));
   process.exit(1);

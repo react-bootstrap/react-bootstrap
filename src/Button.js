@@ -55,14 +55,14 @@ class Button extends React.Component {
      */
     type: PropTypes.oneOf(['button', 'reset', 'submit', null]),
 
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
     variant: 'primary',
     active: false,
     disabled: false,
-    type: 'button'
+    type: 'button',
   };
 
   render() {
@@ -84,7 +84,7 @@ class Button extends React.Component {
       active && 'active',
       `${bsPrefix}-${variant}`,
       block && `${bsPrefix}-block`,
-      size && `${bsPrefix}-${size}`
+      size && `${bsPrefix}-${size}`,
     );
 
     if (props.href) {

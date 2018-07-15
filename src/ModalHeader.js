@@ -29,12 +29,12 @@ const propTypes = {
    * a Modal component, the onHide will automatically be propagated up to the
    * parent Modal `onHide`.
    */
-  onHide: PropTypes.func
+  onHide: PropTypes.func,
 };
 
 const defaultProps = {
   closeLabel: 'Close',
-  closeButton: false
+  closeButton: false,
 };
 
 class ModalHeader extends React.Component {
@@ -60,7 +60,7 @@ class ModalHeader extends React.Component {
                 label={closeLabel}
                 onClick={createChainedFunction(
                   context && context.onHide,
-                  onHide
+                  onHide,
                 )}
               />
             )}

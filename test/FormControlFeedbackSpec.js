@@ -28,7 +28,7 @@ describe('<Feedback>', () => {
       return <div {...props} />;
     }
 
-    mount(<FormControl.Feedback componentClass={MyComponent} />).assertSingle(
+    mount(<FormControl.Feedback as={MyComponent} />).assertSingle(
       'MyComponent.valid-feedback',
     );
   });

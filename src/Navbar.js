@@ -121,7 +121,7 @@ const propTypes = {
    *
    * @default 'navigation'
    */
-  role: PropTypes.string
+  role: PropTypes.string,
 };
 
 const defaultProps = {
@@ -129,7 +129,7 @@ const defaultProps = {
   expand: true,
   fluid: true,
   variant: 'light',
-  collapseOnSelect: false
+  collapseOnSelect: false,
 };
 
 class Navbar extends React.Component {
@@ -138,8 +138,8 @@ class Navbar extends React.Component {
       navbarContext: {
         ...prevState.navbarContext,
         bsPrefix,
-        expanded
-      }
+        expanded,
+      },
     };
   }
 
@@ -148,8 +148,8 @@ class Navbar extends React.Component {
 
     this.state = {
       navbarContext: {
-        onToggle: this.handleToggle
-      }
+        onToggle: this.handleToggle,
+      },
     };
   }
 
@@ -208,7 +208,7 @@ class Navbar extends React.Component {
               variant && `${bsPrefix}-${variant}`,
               bg && `bg-${bg}`,
               sticky && `sticky-${sticky}`,
-              fixed && `fixed-${fixed}`
+              fixed && `fixed-${fixed}`,
             )}
           >
             {fluid ? children : <div className="container">{children}</div>}
@@ -224,7 +224,7 @@ Navbar.defaultProps = defaultProps;
 
 const DecoratedNavbar = createBootstrapComponent(
   uncontrollable(Navbar, { expanded: 'onToggle' }),
-  'navbar'
+  'navbar',
 );
 
 DecoratedNavbar.Brand = NavbarBrand;
@@ -232,7 +232,7 @@ DecoratedNavbar.Toggle = NavbarToggle;
 DecoratedNavbar.Collapse = NavbarCollapse;
 
 DecoratedNavbar.Text = createWithBsPrefix('navbar-text', {
-  Component: 'span'
+  Component: 'span',
 });
 
 export default DecoratedNavbar;

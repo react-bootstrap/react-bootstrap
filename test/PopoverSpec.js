@@ -9,24 +9,24 @@ describe('Popover', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Popover id="test-popover" title="Popover title">
         <strong>Popover Content</strong>
-      </Popover>
+      </Popover>,
     );
 
     assert.ok(
       ReactTestUtils.findRenderedDOMComponentWithClass(
         instance,
-        'popover-title'
-      )
+        'popover-title',
+      ),
     );
     assert.ok(
       ReactTestUtils.findRenderedDOMComponentWithClass(
         instance,
-        'popover-content'
-      )
+        'popover-content',
+      ),
     );
 
     assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong')
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'),
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).style.display, 'block');

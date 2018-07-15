@@ -6,7 +6,7 @@ class ControlledCarousel extends React.Component {
 
     this.state = {
       index: 0,
-      direction: null
+      direction: null,
     };
   }
 
@@ -14,7 +14,7 @@ class ControlledCarousel extends React.Component {
     alert(`selected=${selectedIndex}, direction=${e.direction}`);
     this.setState({
       index: selectedIndex,
-      direction: e.direction
+      direction: e.direction,
     });
   }
 

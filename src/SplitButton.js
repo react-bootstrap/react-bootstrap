@@ -44,11 +44,11 @@ class SplitButton extends React.Component {
     /** @ignore */
     variant: PropTypes.string,
     /** @ignore */
-    size: PropTypes.string
+    size: PropTypes.string,
   };
 
   static defaultProps = {
-    toggleLabel: 'Toggle dropdown'
+    toggleLabel: 'Toggle dropdown',
   };
 
   render() {

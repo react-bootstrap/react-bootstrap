@@ -29,7 +29,7 @@ const propTypes = {
   rootCloseEvent: PropTypes.string,
 
   /** @ignore */
-  bsPrefix: PropTypes.string
+  bsPrefix: PropTypes.string,
 };
 
 class NavDropdown extends React.Component {

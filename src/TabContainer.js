@@ -24,7 +24,7 @@ class TabContainer extends React.Component {
           error = new Error(
             'In order to properly initialize Tabs in a way that is accessible ' +
               'to assistive technologies (such as screen readers) an `id` or a ' +
-              '`generateChildId` prop to TabContainer is required'
+              '`generateChildId` prop to TabContainer is required',
           );
         }
       }
@@ -76,12 +76,12 @@ class TabContainer extends React.Component {
      *
      * @controllable onSelect
      */
-    activeKey: PropTypes.any
+    activeKey: PropTypes.any,
   };
 
   static getDerivedStateFromProps(
     { activeKey, mountOnEnter, unmountOnExit, transition },
-    prevState
+    prevState,
   ) {
     return {
       tabContext: {
@@ -89,8 +89,8 @@ class TabContainer extends React.Component {
         activeKey,
         mountOnEnter,
         unmountOnExit,
-        transition
-      }
+        transition,
+      },
     };
   }
   constructor(...args) {
@@ -104,8 +104,8 @@ class TabContainer extends React.Component {
         mountOnEnter: this.props.mountOnEnter,
         unmountOnExit: this.props.unmountOnExit,
         getControlledId: this.getControlledId,
-        getControllerId: this.getControllerId
-      }
+        getControllerId: this.getControllerId,
+      },
     };
   }
 

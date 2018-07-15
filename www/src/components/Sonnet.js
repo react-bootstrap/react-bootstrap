@@ -4,7 +4,7 @@ class Sonnet extends React.Component {
   constructor(...args) {
     super(...args);
     import('shakespeare-data').then(s =>
-      this.setState({ sonnet: s.sonnets.random() })
+      this.setState({ sonnet: s.sonnets.random() }),
     );
   }
 

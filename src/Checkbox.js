@@ -20,7 +20,7 @@ const propTypes = {
    * <Checkbox inputRef={ref => { this.input = ref; }} />
    * ```
    */
-  inputRef: PropTypes.func
+  inputRef: PropTypes.func,
 };
 
 const defaultProps = {
@@ -28,7 +28,7 @@ const defaultProps = {
   disabled: false,
   isValid: false,
   isInvalid: false,
-  title: ''
+  title: '',
 };
 
 class Checkbox extends React.Component {
@@ -53,7 +53,7 @@ class Checkbox extends React.Component {
         className={classNames(
           className,
           disabled && 'disabled',
-          inline && prefix(bsProps, 'inline')
+          inline && prefix(bsProps, 'inline'),
         )}
         style={style}
         title={title}
@@ -67,7 +67,7 @@ class Checkbox extends React.Component {
             className={classNames(
               prefix(bsProps, 'input'),
               isValid && prefix(bsProps, 'is-valid'),
-              isInvalid && prefix(bsProps, 'is-invalid')
+              isInvalid && prefix(bsProps, 'is-invalid'),
             )}
           />
           {children}

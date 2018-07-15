@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 
 export default class HTML extends React.Component {
   static propTypes = {
-    body: PropTypes.string
+    body: PropTypes.string,
   };
 
   render() {

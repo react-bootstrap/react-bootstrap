@@ -44,7 +44,7 @@ describe('<Button>', () => {
     mount(
       <Button disabled href="#">
         Title
-      </Button>
+      </Button>,
     ).assertSingle(`a.disabled`);
   });
 
@@ -64,7 +64,7 @@ describe('<Button>', () => {
     mount(
       <Button className="bob" variant="danger">
         Title
-      </Button>
+      </Button>,
     ).assertSingle(`.bob.btn-danger`);
   });
 
@@ -80,7 +80,7 @@ describe('<Button>', () => {
     mount(
       <Button bsPrefix="my-btn" variant="danger">
         Title
-      </Button>
+      </Button>,
     ).assertSingle(`.my-btn.my-btn-danger`);
   });
 });

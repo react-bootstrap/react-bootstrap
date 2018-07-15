@@ -8,7 +8,7 @@ describe('ButtonGroup', () => {
     mount(
       <ButtonGroup>
         <Button>Title</Button>
-      </ButtonGroup>
+      </ButtonGroup>,
     ).assertSingle('div.btn-group');
   });
 
@@ -16,7 +16,7 @@ describe('ButtonGroup', () => {
     mount(
       <ButtonGroup size="lg">
         <Button>Title</Button>
-      </ButtonGroup>
+      </ButtonGroup>,
     ).assertSingle('.btn-group-lg');
   });
 
@@ -24,7 +24,7 @@ describe('ButtonGroup', () => {
     mount(
       <ButtonGroup vertical>
         <Button>Title</Button>
-      </ButtonGroup>
+      </ButtonGroup>,
     )
       .tap(b => b.assertSingle('.btn-group-vertical'))
       .assertNone('.btn-group');
@@ -34,7 +34,7 @@ describe('ButtonGroup', () => {
     mount(
       <ButtonGroup toggle>
         <Button>Title</Button>
-      </ButtonGroup>
+      </ButtonGroup>,
     ).assertSingle('.btn-group.btn-group-toggle');
   });
 });

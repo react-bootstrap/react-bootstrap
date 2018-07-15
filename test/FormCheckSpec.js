@@ -11,10 +11,9 @@ describe('<FormCheck>', () => {
         name="foo"
         value="foo"
         defaultChecked
+        label="My label"
         className="my-checkbox"
-      >
-        My label
-      </FormCheck>,
+      />,
     );
 
     wrapper
@@ -36,9 +35,8 @@ describe('<FormCheck>', () => {
         type="radio"
         defaultChecked
         className="my-radio"
-      >
-        My label
-      </FormCheck>,
+        label="My label"
+      />,
     );
 
     wrapper
@@ -52,7 +50,7 @@ describe('<FormCheck>', () => {
   });
 
   it('should support inline', () => {
-    mount(<FormCheck inline>My label</FormCheck>).assertSingle(
+    mount(<FormCheck inline label="My label" />).assertSingle(
       'div.form-check-inline',
     );
   });

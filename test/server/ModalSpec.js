@@ -12,8 +12,8 @@ describe('Modal', () => {
       ReactDOMServer.renderToString(
         <Modal onHide={noOp}>
           <strong>Message</strong>
-        </Modal>
-      )
+        </Modal>,
+      ),
     );
   });
 });

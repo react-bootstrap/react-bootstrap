@@ -45,6 +45,7 @@
     "react/no-string-refs": "off",
     "react/prefer-stateless-function": "off",
     "react/default-props-match-prop-types": "off",
+    "import/no-named-as-default-member": "off",
     "react/jsx-filename-extension": [
       "error",
       {

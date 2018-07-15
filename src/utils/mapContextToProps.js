@@ -35,7 +35,7 @@ export default function mapContextToProps(Component, consumers, mapToProps) {
           }}
         </Consumer>
       ),
-      null
+      null,
     );
   }
   const contextTransform = consumers.length === 1 ? singleRender : multiRender;

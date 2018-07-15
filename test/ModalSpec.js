@@ -25,7 +25,7 @@ describe('<Modal>', () => {
     const instance = mount(
       <Modal show onHide={noOp} animation={false}>
         <strong>Message</strong>
-      </Modal>
+      </Modal>,
     ).instance();
 
     assert.ok(instance._modal.dialog.querySelector('strong'));
@@ -39,7 +39,7 @@ describe('<Modal>', () => {
     mount(
       <Modal show onHide={doneOp}>
         <strong>Message</strong>
-      </Modal>
+      </Modal>,
     )
       .find('ModalDialog')
       .simulate('click');
@@ -50,7 +50,7 @@ describe('<Modal>', () => {
     mount(
       <Modal show onHide={onHideSpy} backdrop="static">
         <strong>Message</strong>
-      </Modal>
+      </Modal>,
     )
       .find('ModalDialog')
       .simulate('click');
@@ -67,7 +67,7 @@ describe('<Modal>', () => {
       <Modal show onHide={doneOp}>
         <Modal.Header closeButton />
         <strong>Message</strong>
-      </Modal>
+      </Modal>,
     )
       .find('.close')
       .simulate('click');
@@ -78,7 +78,7 @@ describe('<Modal>', () => {
     mount(
       <Modal show className="mymodal" onHide={noOp}>
         <strong>Message</strong>
-      </Modal>
+      </Modal>,
     ).assertSingle('ModalDialog.mymodal');
   });
 
@@ -88,7 +88,7 @@ describe('<Modal>', () => {
     mount(
       <Modal show backdropClassName="my-modal-backdrop" onHide={noOp}>
         <strong>Message</strong>
-      </Modal>
+      </Modal>,
     ).find('.modal-backdrop.my-modal-backdrop');
   });
 
@@ -97,7 +97,7 @@ describe('<Modal>', () => {
     mount(
       <Modal show size="sm" onHide={noOp}>
         <strong>Message</strong>
-      </Modal>
+      </Modal>,
     ).find('.modal-sm');
   });
 
@@ -107,7 +107,7 @@ describe('<Modal>', () => {
       <Modal show style={{ color: 'red' }} onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-      { attachTo: mountPoint }
+      { attachTo: mountPoint },
     )
       .find('.modal-dialog')
       .getDOMNode();
@@ -120,7 +120,7 @@ describe('<Modal>', () => {
     mount(
       <Modal show dialogClassName="my-dialog" onHide={noOp}>
         <strong>Message</strong>
-      </Modal>
+      </Modal>,
     ).assertSingle('modal-dialog.my-dialog');
   });
 
@@ -135,7 +135,7 @@ describe('<Modal>', () => {
       <Modal show dialogComponentClass={CustomDialog} onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-      mountPoint
+      mountPoint,
     );
 
     assert.equal(instance._modal.dialog.className, 'custom-dialog');
@@ -167,7 +167,7 @@ describe('<Modal>', () => {
       >
         <strong>Message</strong>
       </Modal>,
-      mountPoint
+      mountPoint,
     );
   });
 
@@ -188,7 +188,7 @@ describe('<Modal>', () => {
           super(props, context);
 
           this.state = {
-            show: true
+            show: true,
           };
         }
 

@@ -23,16 +23,16 @@ module.exports = config => {
               loader: 'babel-loader',
               options: {
                 cacheDirectory: true,
-                envName: 'test'
-              }
-            }
-          }
-        ]
+                envName: 'test',
+              },
+            },
+          },
+        ],
       },
       plugins: [
         new DefinePlugin({
-          'process.env.NODE_ENV': JSON.stringify('test')
-        })
+          'process.env.NODE_ENV': JSON.stringify('test'),
+        }),
       ],
       devtool: 'cheap-module-inline-source-map',
       stats: 'minimal',

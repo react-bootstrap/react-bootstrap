@@ -22,12 +22,12 @@ class NavbarToggle extends React.Component {
      */
     children: PropTypes.node,
 
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
     label: 'Toggle navigation',
-    as: 'button'
+    as: 'button',
   };
 
   handleClick = e => {
@@ -63,7 +63,7 @@ class NavbarToggle extends React.Component {
               className={classNames(
                 className,
                 bsPrefix,
-                !!(context && context.expanded) && 'collapsed'
+                !!(context && context.expanded) && 'collapsed',
               )}
             >
               {children || <span className={`${bsPrefix}-icon`} />}

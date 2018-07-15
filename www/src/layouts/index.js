@@ -10,7 +10,7 @@ import '../css/style.less';
 import '../css/examples.less';
 
 const propTypes = {
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 };
 
 function DefaultLayout({ children, location }) {

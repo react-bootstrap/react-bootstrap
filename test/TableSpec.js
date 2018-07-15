@@ -14,21 +14,21 @@ describe('Table', () => {
   it('Should have correct class when striped', () => {
     let instance = ReactTestUtils.renderIntoDocument(<Table striped />);
     assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\btable-striped\b/)
+      ReactDOM.findDOMNode(instance).className.match(/\btable-striped\b/),
     );
   });
 
   it('Should have correct class when hover', () => {
     let instance = ReactTestUtils.renderIntoDocument(<Table hover />);
     assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\btable-hover\b/)
+      ReactDOM.findDOMNode(instance).className.match(/\btable-hover\b/),
     );
   });
 
   it('Should have correct class when bordered', () => {
     let instance = ReactTestUtils.renderIntoDocument(<Table bordered />);
     assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\btable-bordered\b/)
+      ReactDOM.findDOMNode(instance).className.match(/\btable-bordered\b/),
     );
   });
 
@@ -45,17 +45,17 @@ describe('Table', () => {
   it('Should have responsive wrapper', () => {
     let instance = ReactTestUtils.renderIntoDocument(<Table responsive />);
     assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\btable-responsive\b/)
+      ReactDOM.findDOMNode(instance).className.match(/\btable-responsive\b/),
     );
     assert.ok(
-      ReactDOM.findDOMNode(instance).firstChild.className.match(/\btable\b/)
+      ReactDOM.findDOMNode(instance).firstChild.className.match(/\btable\b/),
     );
   });
 
   it('Should have responsive breakpoints', () => {
     let instance = ReactTestUtils.renderIntoDocument(<Table responsive="sm" />);
     assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\btable-responsive-sm\b/)
+      ReactDOM.findDOMNode(instance).className.match(/\btable-responsive-sm\b/),
     );
   });
 });

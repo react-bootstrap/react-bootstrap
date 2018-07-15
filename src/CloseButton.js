@@ -3,11 +3,11 @@ import React from 'react';
 
 const propTypes = {
   label: PropTypes.string.isRequired,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {
-  label: 'Close'
+  label: 'Close',
 };
 
 class CloseButton extends React.Component {

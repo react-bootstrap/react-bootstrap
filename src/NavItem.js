@@ -15,12 +15,12 @@ class NavItem extends React.Component {
     /** The ARIA role of the component */
     role: PropTypes.string,
 
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
     role: 'presentaton',
-    as: 'li'
+    as: 'li',
   };
 
   render() {

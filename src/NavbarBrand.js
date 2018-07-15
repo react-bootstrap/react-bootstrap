@@ -18,7 +18,7 @@ class NavbarBrand extends React.Component {
     /**
      * Set a custom element for this component.
      */
-    as: elementType
+    as: elementType,
   };
 
   render() {

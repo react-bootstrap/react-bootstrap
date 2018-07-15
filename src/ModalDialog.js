@@ -18,7 +18,7 @@ class ModalDialog extends React.Component {
     /**
      * Specify whether the Component should be vertically centered
      */
-    centered: PropTypes.bool
+    centered: PropTypes.bool,
   };
 
   render() {
@@ -39,7 +39,7 @@ class ModalDialog extends React.Component {
           bsClass,
           className,
           size && `${bsPrefix}-${size}`,
-          centered && `${bsClass}-centered`
+          centered && `${bsClass}-centered`,
         )}
       >
         <div className={classNames(`${bsPrefix}-content`)}>{children}</div>

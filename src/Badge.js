@@ -20,11 +20,11 @@ class Badge extends React.Component {
      * Add the `pill` modifier to make badges more rounded with
      * some additional horizontal padding
      */
-    pill: PropTypes.bool.isRequired
+    pill: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
-    pill: false
+    pill: false,
   };
 
   render() {
@@ -37,7 +37,7 @@ class Badge extends React.Component {
           className,
           bsPrefix,
           pill && `${bsPrefix}-pill`,
-          variant && `${bsPrefix}-${variant}`
+          variant && `${bsPrefix}-${variant}`,
         )}
       />
     );

@@ -23,17 +23,17 @@ describe('<Container>', () => {
 
   it('should merge additional classes passed in', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Container className="whatever" fluid />
+      <Container className="whatever" fluid />,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bwhatever\b/));
     assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\bcontainer-fluid\b/)
+      ReactDOM.findDOMNode(instance).className.match(/\bcontainer-fluid\b/),
     );
   });
 
   it('allows custom elements instead of "div"', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Container as="section" />
+      <Container as="section" />,
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');

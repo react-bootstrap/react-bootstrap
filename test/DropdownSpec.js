@@ -13,7 +13,7 @@ describe('<Dropdown>', () => {
       <Dropdown.Item>Item 2</Dropdown.Item>
       <Dropdown.Item>Item 3</Dropdown.Item>
       <Dropdown.Item>Item 4</Dropdown.Item>
-    </Dropdown.Menu>
+    </Dropdown.Menu>,
   ];
 
   const simpleDropdown = <Dropdown id="test-id">{dropdownChildren}</Dropdown>;
@@ -28,7 +28,7 @@ describe('<Dropdown>', () => {
     const node = mount(
       <Dropdown title="Dropup" drop="up" id="test-id">
         {dropdownChildren}
-      </Dropdown>
+      </Dropdown>,
     ).getDOMNode();
 
     node.tagName.should.equal('DIV');
@@ -53,7 +53,7 @@ describe('<Dropdown>', () => {
     mount(
       <Dropdown alignRight id="test-id">
         {dropdownChildren}
-      </Dropdown>
+      </Dropdown>,
     ).assertSingle('DropdownMenu[alignRight=true]');
   });
 
@@ -81,7 +81,7 @@ describe('<Dropdown>', () => {
     const wrapper = mount(
       <Dropdown onToggle={closeSpy} id="test-id">
         {dropdownChildren}
-      </Dropdown>
+      </Dropdown>,
     );
 
     wrapper.find('button').simulate('click');
@@ -105,7 +105,7 @@ describe('<Dropdown>', () => {
           <Dropdown.Item>Item 3</Dropdown.Item>
           <Dropdown.Item>Item 4</Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown>
+      </Dropdown>,
     );
 
     wrapper.find('button').simulate('click');
@@ -125,7 +125,7 @@ describe('<Dropdown>', () => {
         <Dropdown.Menu>
           <li>Some custom nonfocusable content</li>
         </Dropdown.Menu>
-      </Dropdown>
+      </Dropdown>,
     );
 
     wrapper.find('button').simulate('click');
@@ -145,7 +145,7 @@ describe('<Dropdown>', () => {
       mount(simpleDropdown)
         .setProps({ onSelect: () => {} })
         .find('div.dropdown')
-        .prop('onSelect')
+        .prop('onSelect'),
     ).to.not.exist;
   });
 
@@ -170,7 +170,7 @@ describe('<Dropdown>', () => {
     const wrapper = mount(
       <Dropdown show onToggle={handleSelect} id="test-id">
         {dropdownChildren}
-      </Dropdown>
+      </Dropdown>,
     );
 
     wrapper.find('button').simulate('click');
@@ -197,7 +197,7 @@ describe('<Dropdown>', () => {
         wrapper
           .find('div.dropdown-menu')
           .getDOMNode()
-          .getAttribute('aria-labelledby')
+          .getAttribute('aria-labelledby'),
       );
   });
 
@@ -248,7 +248,7 @@ describe('<Dropdown>', () => {
             <Dropdown.Item>Item 1</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>,
-        { attachTo: focusableContainer }
+        { attachTo: focusableContainer },
       );
 
       wrapper
@@ -262,7 +262,7 @@ describe('<Dropdown>', () => {
         wrapper
           .find('a')
           .first()
-          .getDOMNode()
+          .getDOMNode(),
       );
     });
 
@@ -271,7 +271,7 @@ describe('<Dropdown>', () => {
         <Dropdown defaultShow role="menu" id="test-id">
           {dropdownChildren}
         </Dropdown>,
-        { attachTo: focusableContainer }
+        { attachTo: focusableContainer },
       );
 
       const firstAnchor = wrapper.find('a').first();
@@ -292,7 +292,7 @@ describe('<Dropdown>', () => {
           </Dropdown>,
           <input type="text" id="next-focusable" />
         </Container>,
-        focusableContainer
+        focusableContainer,
       );
 
       // Need to use Container instead of div above to make instance a composite
@@ -333,7 +333,7 @@ describe('<Dropdown>', () => {
       const wrapper = mount(
         <Dropdown id="test-id" onToggle={spy}>
           {dropdownChildren}
-        </Dropdown>
+        </Dropdown>,
       );
 
       expect(spy).to.not.have.been.called;
@@ -352,7 +352,7 @@ describe('<Dropdown>', () => {
       const wrapper = mount(
         <Dropdown id="test-id" onToggle={spy}>
           {dropdownChildren}
-        </Dropdown>
+        </Dropdown>,
       );
 
       expect(spy).to.not.have.been.called;
@@ -376,7 +376,7 @@ describe('<Dropdown>', () => {
           <Dropdown.Menu>
             <Dropdown.Item eventKey={1}>Item 1</Dropdown.Item>
           </Dropdown.Menu>
-        </Dropdown>
+        </Dropdown>,
       );
 
       expect(spy).to.not.have.been.called;
@@ -401,7 +401,7 @@ describe('<Dropdown>', () => {
       const wrapper = mount(
         <Dropdown id="test-id" onToggle={spy}>
           {dropdownChildren}
-        </Dropdown>
+        </Dropdown>,
       );
 
       wrapper.find('button').simulate('keyDown', { key: 'ArrowDown' });
@@ -421,7 +421,7 @@ describe('<Dropdown>', () => {
         <Dropdown.Menu bsPrefix="my-menu">
           <Dropdown.Item>Item 1</Dropdown.Item>
         </Dropdown.Menu>
-      </Dropdown>
+      </Dropdown>,
     );
 
     wrapper.assertSingle('div.my-dropdown');

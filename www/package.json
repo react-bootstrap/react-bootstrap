@@ -9,6 +9,7 @@
   "dependencies": {
     "bootstrap": "^4.0.0",
     "classnames": "^2.2.5",
+    "common-tags": "^1.8.0",
     "formik": "^0.11.11",
     "gatsby": "2.0.0-alpha.43",
     "gatsby-link": "^1.6.38-10",
@@ -44,7 +45,9 @@
     }
   },
   "homepage": "https://react-bootstrap.github.io/",
-  "keywords": ["gatsby"],
+  "keywords": [
+    "gatsby"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",

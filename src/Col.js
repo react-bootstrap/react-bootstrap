@@ -103,13 +103,15 @@ class Col extends React.Component {
       if (order != null) classes.push(`order${infix}-${order}`);
       if (offset != null) classes.push(`offset${infix}-${offset}`);
     });
-
     if (!spans.length) {
       spans.push(bsPrefix); // plain 'col'
     }
 
     return (
-      <Component {...props} className={classNames(className, spans, classes)} />
+      <Component
+        {...props}
+        className={classNames(className, ...spans, ...classes)}
+      />
     );
   }
 }

@@ -17,7 +17,7 @@ const propTypes = {
   innerRef: PropTypes.any,
 
   /** The HTML for attribute for associating the label with an input */
-  htmlFor: PropTypes.string.isRequired,
+  htmlFor: PropTypes.string,
 };
 
 const defaultProps = {

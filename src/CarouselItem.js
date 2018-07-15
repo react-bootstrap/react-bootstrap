@@ -10,13 +10,13 @@ const propTypes = {
   active: PropTypes.bool,
   animateIn: PropTypes.bool,
   animateOut: PropTypes.bool,
-  index: PropTypes.number
+  index: PropTypes.number,
 };
 
 const defaultProps = {
   active: false,
   animateIn: false,
-  animateOut: false
+  animateOut: false,
 };
 
 class CarouselItem extends React.Component {
@@ -26,7 +26,7 @@ class CarouselItem extends React.Component {
     this.handleAnimateOutEnd = this.handleAnimateOutEnd.bind(this);
 
     this.state = {
-      direction: null
+      direction: null,
     };
 
     this.isUnmounted = false;
@@ -71,7 +71,7 @@ class CarouselItem extends React.Component {
     }
 
     this.setState({
-      direction: this.props.direction === 'prev' ? 'right' : 'left'
+      direction: this.props.direction === 'prev' ? 'right' : 'left',
     });
   }
 
@@ -90,7 +90,7 @@ class CarouselItem extends React.Component {
 
     const classes = {
       item: true,
-      active: (active && !animateIn) || animateOut
+      active: (active && !animateIn) || animateOut,
     };
     if (direction && active && animateIn) {
       classes[direction] = true;

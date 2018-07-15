@@ -8,11 +8,11 @@ import { createBootstrapComponent } from './ThemeProvider';
 class ModalBody extends React.Component {
   static propTypes = {
     bsPrefix: PropTypes.string,
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
-    as: 'div'
+    as: 'div',
   };
 
   render() {

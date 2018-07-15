@@ -14,15 +14,11 @@ describe('<FormControl>', () => {
   });
 
   it('should support textarea', () => {
-    mount(<FormControl componentClass="textarea" />).assertSingle(
-      'textarea.form-control',
-    );
+    mount(<FormControl as="textarea" />).assertSingle('textarea.form-control');
   });
 
   it('should support select', () => {
-    mount(<FormControl componentClass="select" />).assertSingle(
-      'select.form-control',
-    );
+    mount(<FormControl as="select" />).assertSingle('select.form-control');
   });
 
   it('should support type=file', () => {

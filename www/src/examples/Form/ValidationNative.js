@@ -1,4 +1,9 @@
 class FormExample extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.state = { validated: false };
+  }
   handleSubmit(event) {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
@@ -9,7 +14,7 @@ class FormExample extends React.Component {
   }
 
   render() {
-    const { validated = false } = this.state || {};
+    const { validated } = this.state;
     return (
       <Form
         noValidate

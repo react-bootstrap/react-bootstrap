@@ -1,6 +1,5 @@
 class NavDropdownExample extends React.Component {
   handleSelect(eventKey) {
-    event.preventDefault();
     alert(`selected ${eventKey}`);
   }
 

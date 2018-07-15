@@ -26,7 +26,7 @@ describe('<TabContainer>', () => {
             </Nav>
           </TabPane>
         </TabContent>
-      </TabContainer>
+      </TabContainer>,
     );
 
     instance.find('TabPane Nav a').simulate('click');
@@ -54,7 +54,7 @@ describe('<TabContainer>', () => {
             <TabPane eventKey="1" />
           </TabContent>
         </div>
-      </TabContainer>
+      </TabContainer>,
     );
 
     let tabId = instance
@@ -84,7 +84,7 @@ describe('<TabContainer>', () => {
             </Nav.Item>
           </Nav>
         </div>
-      </TabContainer>
+      </TabContainer>,
     );
 
     instance
@@ -113,7 +113,7 @@ describe('<TabContainer>', () => {
             </Nav.Item>
           </Nav>
         </div>
-      </TabContainer>
+      </TabContainer>,
     );
 
     instance
@@ -128,7 +128,7 @@ describe('<TabContainer>', () => {
         .find('Nav.Link a')
         .first()
         .getDOMNode()
-        .getAttribute('role')
+        .getAttribute('role'),
     ).to.not.exist;
   });
 
@@ -186,7 +186,7 @@ describe('<TabContainer>', () => {
     it('should not call onSelect when container unmounts', () => {
       const spy = sinon.spy();
       const instance = mount(
-        <Switcher eventKeys={[1]} activeKey={1} onSelect={spy} />
+        <Switcher eventKeys={[1]} activeKey={1} onSelect={spy} />,
       );
 
       instance.assertSingle(TabPane);

@@ -7,19 +7,19 @@ import NavItem from '../src/NavItem';
 describe('<NavItem>', () => {
   it('Should add active class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <NavItem active>Item content</NavItem>
+      <NavItem active>Item content</NavItem>,
     );
     assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active')
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'active'),
     );
   });
 
   it('Should add disabled class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <NavItem disabled>Item content</NavItem>
+      <NavItem disabled>Item content</NavItem>,
     );
     assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled')
+      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'disabled'),
     );
   });
 
@@ -27,11 +27,11 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem href="/some/unique-thing/" title="content">
         Item content
-      </NavItem>
+      </NavItem>,
     );
     let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(
       instance,
-      'a'
+      'a',
     );
     assert.ok(linkElement.href.indexOf('/some/unique-thing/') >= 0);
     assert.equal(linkElement.title, 'content');
@@ -41,7 +41,7 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem href="/hi" title="boom!">
         Item content
-      </NavItem>
+      </NavItem>,
     );
 
     assert.ok(!ReactDOM.findDOMNode(instance).hasAttribute('href'));
@@ -52,7 +52,7 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem href="/hi" tabIndex="3" title="boom!">
         Item content
-      </NavItem>
+      </NavItem>,
     );
 
     let node = ReactDOM.findDOMNode(instance);
@@ -69,10 +69,10 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem eventKey="2" onSelect={handleSelect}>
         <span>Item content</span>
-      </NavItem>
+      </NavItem>,
     );
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span')
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'),
     );
   });
 
@@ -83,10 +83,10 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem disabled onSelect={handleSelect}>
         <span>Item content</span>
-      </NavItem>
+      </NavItem>,
     );
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span')
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'),
     );
   });
 
@@ -94,11 +94,11 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem href="/some/unique-thing/" target="_blank">
         Item content
-      </NavItem>
+      </NavItem>,
     );
     let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(
       instance,
-      'a'
+      'a',
     );
     assert.equal(linkElement.target, '_blank');
   });
@@ -111,10 +111,10 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem onSelect={handleSelect} target="_blank">
         <span>Item content</span>
-      </NavItem>
+      </NavItem>,
     );
     ReactTestUtils.Simulate.click(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span')
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'span'),
     );
   });
 
@@ -122,12 +122,12 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem href="#" target="_blank">
         Item content
-      </NavItem>
+      </NavItem>,
     );
 
     let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(
       instance,
-      'a'
+      'a',
     );
     assert(linkElement.outerHTML.match('role="button"'), true);
   });
@@ -136,12 +136,12 @@ describe('<NavItem>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <NavItem href="/path/to/stuff" target="_blank">
         Item content
-      </NavItem>
+      </NavItem>,
     );
 
     let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(
       instance,
-      'a'
+      'a',
     );
     assert.equal(linkElement.outerHTML.match('role="button"'), null);
   });
@@ -151,12 +151,12 @@ describe('<NavItem>', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <NavItem href="/path/to/stuff" target="_blank" aria-controls="hi">
           Item content
-        </NavItem>
+        </NavItem>,
       );
 
       let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(
         instance,
-        'a'
+        'a',
       );
 
       assert.ok(linkElement.hasAttribute('aria-controls'));
@@ -166,12 +166,12 @@ describe('<NavItem>', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <NavItem role="tab" active>
           Item content
-        </NavItem>
+        </NavItem>,
       );
 
       let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(
         instance,
-        'a'
+        'a',
       );
 
       expect(linkElement.getAttribute('aria-selected')).to.equal('true');
@@ -181,12 +181,12 @@ describe('<NavItem>', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <NavItem role="button" active>
           Item content
-        </NavItem>
+        </NavItem>,
       );
 
       let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(
         instance,
-        'a'
+        'a',
       );
 
       expect(linkElement.getAttribute('aria-selected')).to.not.exist;
@@ -194,12 +194,12 @@ describe('<NavItem>', () => {
 
     it('Should pass role down', () => {
       let instance = ReactTestUtils.renderIntoDocument(
-        <NavItem role="tab">Item content</NavItem>
+        <NavItem role="tab">Item content</NavItem>,
       );
 
       let linkElement = ReactTestUtils.findRenderedDOMComponentWithTag(
         instance,
-        'a'
+        'a',
       );
 
       assert.equal(linkElement.getAttribute('role'), 'tab');

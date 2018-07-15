@@ -1,18 +1,29 @@
 import React from 'react';
-import { shallowRender } from 'enzyme';
+import { mount } from 'enzyme';
 
 import Col from '../src/Col';
 
 describe('Col', () => {
   it('Should include "col" when there are no sizes', () => {
-    shallowRender(<Col />).assertSingle('.col');
+    mount(<Col />).assertSingle('.col');
   });
 
   it('Should include "col" when xs is true', () => {
-    shallowRender(<Col xl />).assertSingle('.col');
+    mount(<Col xs />).assertSingle('.col');
+    mount(<Col xs={{ span: true }} />).assertSingle('.col');
   });
 
   it('Should include sizes', () => {
-    shallowRender(<Col xl={4} md={8} />).assertSingle('.col-md-8.col-4');
+    mount(<Col xs={4} md={8} />).assertSingle('.col-md-8.col-4');
+  });
+
+  it('Should include offsets', () => {
+    mount(
+      <Col
+        xs={{ span: 4, offset: 1 }}
+        md={{ span: 8, order: 1 }}
+        lg={{ order: 'last' }}
+      />,
+    ).assertSingle('.col-md-8.order-md-1.col-4.offset-1.order-lg-last');
   });
 });

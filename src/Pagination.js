@@ -23,7 +23,7 @@ class Pagination extends React.Component {
      *
      * @type {('sm'|'lg')}
      */
-    size: PropTypes.string
+    size: PropTypes.string,
   };
   render() {
     const { bsPrefix, className, children, size, ...props } = this.props;
@@ -34,7 +34,7 @@ class Pagination extends React.Component {
         className={classNames(
           className,
           bsPrefix,
-          size && `${bsPrefix}-${size}`
+          size && `${bsPrefix}-${size}`,
         )}
       >
         {children}

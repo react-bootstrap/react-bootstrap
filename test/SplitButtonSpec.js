@@ -41,7 +41,7 @@ describe('<SplitButton>', () => {
     const wrapper = mount(
       <SplitButton title="Title" id="test-id" onClick={() => done()}>
         <DropdownItem>Item 1</DropdownItem>
-      </SplitButton>
+      </SplitButton>,
     );
 
     wrapper
@@ -56,7 +56,7 @@ describe('<SplitButton>', () => {
     const wrapper = mount(
       <SplitButton title="Title" id="test-id" onClick={() => done()}>
         <DropdownItem>Item 1</DropdownItem>
-      </SplitButton>
+      </SplitButton>,
     );
 
     wrapper.find('button.dropdown-toggle').simulate('click');
@@ -71,7 +71,7 @@ describe('<SplitButton>', () => {
     mount(
       <SplitButton title="Title" id="test-id" disabled>
         <DropdownItem>Item 1</DropdownItem>
-      </SplitButton>
+      </SplitButton>,
     )
       .find('button[disabled]')
       .length.should.equal(2);
@@ -86,7 +86,7 @@ describe('<SplitButton>', () => {
         target="_blank"
       >
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
-      </SplitButton>
+      </SplitButton>,
     ).assertSingle('a[target="_blank"]');
   });
 
@@ -101,7 +101,7 @@ describe('<SplitButton>', () => {
     mount(
       <SplitButton title="Title" id="test-id" toggleLabel="Label">
         <DropdownItem>Item 1</DropdownItem>
-      </SplitButton>
+      </SplitButton>,
     )
       .assertSingle('.sr-only')
       .text()
