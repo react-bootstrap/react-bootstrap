@@ -21,7 +21,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = mount(
       <Breadcrumb.Item href="#" active>
         Active Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
     instance.find('span.active').should.have.length(1);
     instance.find('span[href="#"]').should.have.length(0);
@@ -30,7 +30,7 @@ describe('<Breadcrumb.Item>', () => {
 
   it('Should add custom classes onto `li` wrapper element', () => {
     mount(
-      <Breadcrumb.Item className="custom-one custom-two">a</Breadcrumb.Item>
+      <Breadcrumb.Item className="custom-one custom-two">a</Breadcrumb.Item>,
     )
       .find('li.custom-one.custom-two')
       .should.have.length(1);
@@ -48,7 +48,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = mount(
       <Breadcrumb.Item href="#" onClick={handleClick}>
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     instance.find('a').simulate('click');
@@ -60,7 +60,7 @@ describe('<Breadcrumb.Item>', () => {
     mount(
       <Breadcrumb.Item href="#" id="test-link-id">
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     )
       .find('a#test-link-id')
       .should.have.length(1);
@@ -70,7 +70,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = mount(
       <Breadcrumb.Item href="http://getbootstrap.com/components/#breadcrumbs">
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     instance
@@ -86,7 +86,7 @@ describe('<Breadcrumb.Item>', () => {
         href="http://getbootstrap.com/components/#breadcrumbs"
       >
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
 
     instance
@@ -99,7 +99,7 @@ describe('<Breadcrumb.Item>', () => {
     const instance = mount(
       <Breadcrumb.Item title="test-title" href="/hi">
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
     expect(instance.find('li[href="/hi"]').exists()).to.equal(false);
     expect(instance.find('li[title="test-title"]').exists()).to.equal(false);
@@ -112,7 +112,7 @@ describe('<Breadcrumb.Item>', () => {
         href="http://getbootstrap.com/components/#breadcrumbs"
       >
         Crumb
-      </Breadcrumb.Item>
+      </Breadcrumb.Item>,
     );
     instance
       .find('a')

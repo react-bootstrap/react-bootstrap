@@ -55,13 +55,13 @@ class Alert extends React.Component {
     closeLabel: PropTypes.string,
 
     /** A `react-transition-group` Transition component used to animate the Alert on dismissal. */
-    transition: elementType
+    transition: elementType,
   };
 
   static defaultProps = {
     show: true,
     transition: Fade,
-    closeLabel: 'Close alert'
+    closeLabel: 'Close alert',
   };
 
   handleClose = e => {
@@ -90,7 +90,7 @@ class Alert extends React.Component {
           className,
           bsPrefix,
           variant && `${bsPrefix}-${variant}`,
-          dismissible && `${bsPrefix}-dismissible`
+          dismissible && `${bsPrefix}-dismissible`,
         )}
       >
         {dismissible && (
@@ -113,18 +113,18 @@ class Alert extends React.Component {
 const DecoratedAlert = uncontrollable(
   createBootstrapComponent(Alert, 'alert'),
   {
-    show: 'onClose'
-  }
+    show: 'onClose',
+  },
 );
 
 const DivStyledAsH4 = divWithClassName('h4');
 
 DecoratedAlert.Link = createWithBsPrefix('alert-link', {
-  Component: SafeAnchor
+  Component: SafeAnchor,
 });
 
 DecoratedAlert.Heading = createWithBsPrefix('alert-heading', {
-  Component: DivStyledAsH4
+  Component: DivStyledAsH4,
 });
 
 export default DecoratedAlert;

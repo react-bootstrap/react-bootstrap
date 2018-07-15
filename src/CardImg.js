@@ -20,12 +20,12 @@ class CardImg extends React.Component {
      */
     variant: PropTypes.oneOf(['top', 'bottom', null]),
 
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
     as: 'img',
-    variant: null
+    variant: null,
   };
 
   render() {

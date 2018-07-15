@@ -6,7 +6,7 @@ import Main from '../components/Main';
 import Default from './index';
 
 const propTypes = {
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 };
 
 function UtilitiesLayout({ children, ...props }) {

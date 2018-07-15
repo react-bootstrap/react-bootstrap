@@ -14,7 +14,7 @@ describe('Image', () => {
 
   it('should provide src and alt prop', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Image src="image.jpg" alt="this is alt" />
+      <Image src="image.jpg" alt="this is alt" />,
     );
     let image = ReactDOM.findDOMNode(instance);
 

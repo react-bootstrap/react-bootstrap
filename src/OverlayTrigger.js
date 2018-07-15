@@ -90,12 +90,12 @@ const propTypes = {
   /**
    * @private
    */
-  show: PropTypes.oneOf([null])
+  show: PropTypes.oneOf([null]),
 };
 
 const defaultProps = {
   defaultOverlayShown: false,
-  trigger: ['hover', 'focus']
+  trigger: ['hover', 'focus'],
 };
 
 class OverlayTrigger extends React.Component {
@@ -115,7 +115,7 @@ class OverlayTrigger extends React.Component {
     this._mountNode = null;
 
     this.state = {
-      show: props.defaultOverlayShown
+      show: props.defaultOverlayShown,
     };
   }
 
@@ -236,7 +236,7 @@ class OverlayTrigger extends React.Component {
     ReactDOM.unstable_renderSubtreeIntoContainer(
       this,
       this._overlay,
-      this._mountNode
+      this._mountNode,
     );
   }
 
@@ -274,7 +274,7 @@ class OverlayTrigger extends React.Component {
     if (isOneOf('click', trigger)) {
       triggerProps.onClick = createChainedFunction(
         triggerProps.onClick,
-        this.handleToggle
+        this.handleToggle,
       );
     }
 
@@ -284,18 +284,18 @@ class OverlayTrigger extends React.Component {
         '[react-bootstrap] Specifying only the `"hover"` trigger limits the ' +
           'visibility of the overlay to just mouse users. Consider also ' +
           'including the `"focus"` trigger so that touch and keyboard only ' +
-          'users can see the overlay as well.'
+          'users can see the overlay as well.',
       );
 
       triggerProps.onMouseOver = createChainedFunction(
         childProps.onMouseOver,
         onMouseOver,
-        this.handleMouseOver
+        this.handleMouseOver,
       );
       triggerProps.onMouseOut = createChainedFunction(
         childProps.onMouseOut,
         onMouseOut,
-        this.handleMouseOut
+        this.handleMouseOut,
       );
     }
 
@@ -303,12 +303,12 @@ class OverlayTrigger extends React.Component {
       triggerProps.onFocus = createChainedFunction(
         childProps.onFocus,
         onFocus,
-        this.handleDelayedShow
+        this.handleDelayedShow,
       );
       triggerProps.onBlur = createChainedFunction(
         childProps.onBlur,
         onBlur,
-        this.handleDelayedHide
+        this.handleDelayedHide,
       );
     }
 

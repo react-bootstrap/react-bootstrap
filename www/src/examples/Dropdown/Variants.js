@@ -15,6 +15,6 @@
         <Dropdown.Item divider />
         <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
       </DropdownButton>
-    )
+    ),
   )}
 </ButtonToolbar>;

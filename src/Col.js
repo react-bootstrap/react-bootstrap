@@ -10,12 +10,12 @@ const colSize = PropTypes.oneOfType([
   PropTypes.bool,
   PropTypes.number,
   PropTypes.string,
-  PropTypes.oneOf(['auto'])
+  PropTypes.oneOf(['auto']),
 ]);
 
 const stringOrNumber = PropTypes.oneOfType([
   PropTypes.number,
-  PropTypes.string
+  PropTypes.string,
 ]);
 
 const column = PropTypes.oneOfType([
@@ -23,8 +23,8 @@ const column = PropTypes.oneOfType([
   PropTypes.shape({
     size: colSize,
     order: stringOrNumber,
-    offset: stringOrNumber
-  })
+    offset: stringOrNumber,
+  }),
 ]);
 
 class Col extends React.Component {
@@ -37,7 +37,7 @@ class Col extends React.Component {
     as: elementType,
 
     /**
-     * The number of columns to span on sxtra small devices (<576px) HII!
+     * The number of columns to span on sxtra small devices (<576px)
      *
      * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
      */
@@ -69,11 +69,11 @@ class Col extends React.Component {
      *
      * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
      */
-    xl: column
+    xl: column,
   };
 
   static defaultProps = {
-    as: 'div'
+    as: 'div',
   };
 
   render() {
@@ -97,19 +97,21 @@ class Col extends React.Component {
 
       if (span != null)
         spans.push(
-          span === true ? `${bsPrefix}${infix}` : `${bsPrefix}${infix}-${span}`
+          span === true ? `${bsPrefix}${infix}` : `${bsPrefix}${infix}-${span}`,
         );
 
       if (order != null) classes.push(`order${infix}-${order}`);
       if (offset != null) classes.push(`offset${infix}-${offset}`);
     });
-
     if (!spans.length) {
       spans.push(bsPrefix); // plain 'col'
     }
 
     return (
-      <Component {...props} className={classNames(className, spans, classes)} />
+      <Component
+        {...props}
+        className={classNames(className, ...spans, ...classes)}
+      />
     );
   }
 }

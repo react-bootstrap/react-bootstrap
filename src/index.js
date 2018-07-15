@@ -15,18 +15,21 @@ export CarouselItem from './CarouselItem';
 export Checkbox from './Checkbox';
 export Clearfix from './Clearfix';
 export CloseButton from './CloseButton';
-export FormLabel from './FormLabel';
 export Col from './Col';
 export Collapse from './Collapse';
 export Dropdown from './Dropdown';
 export DropdownButton from './DropdownButton';
 export Fade from './Fade';
+
 export Form from './Form';
 export FormControl from './FormControl';
+export FormCheck from './FormCheck';
 export FormGroup from './FormGroup';
+export FormLabel from './FormLabel';
+export FormText from './FormText';
+
 export Glyphicon from './Glyphicon';
 export Container from './Container';
-export HelpBlock from './HelpBlock';
 export Image from './Image';
 export Figure from './Figure';
 export InputGroup from './InputGroup';

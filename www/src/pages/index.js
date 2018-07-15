@@ -80,5 +80,5 @@ export default withLayout(
         </div>
       );
     }
-  }
+  },
 );

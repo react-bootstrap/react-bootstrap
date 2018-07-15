@@ -24,12 +24,12 @@ class InputGroup extends React.Component {
      *
      * @type {('sm'|'lg')}
      */
-    size: PropTypes.string.isRequired,
+    size: PropTypes.string,
 
-    as: elementType
+    as: elementType,
   };
   static defaultProps = {
-    as: 'div'
+    as: 'div',
   };
   render() {
     const { bsPrefix, size, className, as: Component, ...props } = this.props;
@@ -40,7 +40,7 @@ class InputGroup extends React.Component {
         className={classNames(
           className,
           bsPrefix,
-          size && `${bsPrefix}-${size}`
+          size && `${bsPrefix}-${size}`,
         )}
       />
     );
@@ -52,7 +52,7 @@ const InputGroupAppend = createWithBsPrefix('input-group-append');
 const InputGroupPrepend = createWithBsPrefix('input-group-prepend');
 
 const InputGroupText = createWithBsPrefix('input-group-text', {
-  Component: 'span'
+  Component: 'span',
 });
 
 const InputGroupCheckbox = props => (

@@ -182,5 +182,5 @@ export default {
   filter,
   every,
   some,
-  toArray
+  toArray,
 };

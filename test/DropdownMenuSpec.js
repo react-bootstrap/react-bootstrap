@@ -24,7 +24,7 @@ describe('<Dropdown.Menu>', () => {
     mount(
       <DropdownMenu className="new-fancy-class">
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
-      </DropdownMenu>
+      </DropdownMenu>,
     ).assertSingle('div.new-fancy-class');
   });
 
@@ -32,7 +32,7 @@ describe('<Dropdown.Menu>', () => {
     mount(
       <DropdownMenu alignRight>
         <DropdownItem>Item</DropdownItem>
-      </DropdownMenu>
+      </DropdownMenu>,
     ).assertSingle('.dropdown-menu-right');
   });
 
@@ -58,7 +58,7 @@ describe('<Dropdown.Menu>', () => {
             <DropdownItem>Item</DropdownItem>
           </DropdownMenu>
         </div>,
-        { attachTo: focusableContainer }
+        { attachTo: focusableContainer },
       );
 
       wrapper
@@ -86,7 +86,7 @@ describe('<Dropdown.Menu>', () => {
                 <DropdownItem>Item</DropdownItem>
               </DropdownMenu>
             </Dropdown>,
-            { attachTo: focusableContainer }
+            { attachTo: focusableContainer },
           );
 
           wrapper.find('a').simulate('keyDown', { key });

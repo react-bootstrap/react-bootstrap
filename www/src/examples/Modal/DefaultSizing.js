@@ -4,7 +4,7 @@ class Example extends React.Component {
 
     this.state = {
       smShow: false,
-      lgShow: false
+      lgShow: false,
     };
   }
   render() {

@@ -12,11 +12,11 @@ class TabContent extends React.Component {
      */
     bsPrefix: PropTypes.string,
 
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
-    as: 'div'
+    as: 'div',
   };
 
   render() {

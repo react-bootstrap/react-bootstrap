@@ -79,3 +79,8 @@
 ### DropdownItem
 
 * renamed from MenuItem to match upstream
+
+
+## Alert
+
+- `onDismiss` renamed to `onClose`

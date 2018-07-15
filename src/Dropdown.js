@@ -4,6 +4,7 @@ import qsa from 'dom-helpers/query/querySelectorAll';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import elementType from 'prop-types-extra/lib/elementType';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import uncontrollable from 'uncontrollable';
@@ -17,7 +18,6 @@ import DropdownToggle from './DropdownToggle';
 import DropdownItem from './DropdownItem';
 
 import SelectableContext from './SelectableContext';
-import mapContextToProps from './utils/mapContextToProps';
 import NavbarContext from './NavbarContext';
 
 const propTypes = {
@@ -34,7 +34,7 @@ const propTypes = {
    * @required
    */
   id: isRequiredForA11y(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   ),
 
   as: elementType,
@@ -85,12 +85,12 @@ const propTypes = {
   onSelect: PropTypes.func,
 
   /** @private */
-  navbar: PropTypes.bool
+  navbar: PropTypes.bool,
 };
 
 const defaultProps = {
   as: 'div',
-  navbar: false
+  navbar: false,
 };
 
 /**
@@ -104,7 +104,7 @@ const defaultProps = {
 class Dropdown extends React.Component {
   static getDerivedStateFromProps(
     { drop, alignRight, show, id: toggleId },
-    prevState
+    prevState,
   ) {
     let placement = alignRight ? 'bottom-end' : 'bottom-start';
     if (drop === 'up') placement = alignRight ? 'top-end' : 'top-start';
@@ -118,8 +118,8 @@ class Dropdown extends React.Component {
         ...prevState.dropdownContext,
         toggleId,
         alignRight,
-        show
-      }
+        show,
+      },
     };
   }
 
@@ -141,16 +141,16 @@ class Dropdown extends React.Component {
             this.setState(({ dropdownContext }) => ({
               dropdownContext: {
                 ...dropdownContext,
-                toggleId: this.toggle.id
-              }
+                toggleId: this.toggle.id,
+              },
             }));
           if (this.props.show) this.updatePosition();
         },
         setMenuElement: el => {
           this.menu = ReactDOM.findDOMNode(el);
           if (this.props.show) this.updatePosition();
-        }
-      }
+        },
+      },
     };
   }
 
@@ -186,7 +186,7 @@ class Dropdown extends React.Component {
     const { bsPrefix } = this.props;
     let items = qsa(
       this.menu,
-      `.${bsPrefix}-item:not(.disabled):not(:disabled)` // same as upstream
+      `.${bsPrefix}-item:not(.disabled):not(:disabled)`, // same as upstream
     );
 
     let index = items.indexOf(current) + offset;
@@ -277,8 +277,8 @@ class Dropdown extends React.Component {
       target: this.toggle,
       placement: this.state.placement,
       modifiers: {
-        flip: { enabled: !!this.props.flip }
-      }
+        flip: { enabled: !!this.props.flip },
+      },
     });
   }
 
@@ -328,7 +328,7 @@ class Dropdown extends React.Component {
               (!drop || drop === 'down') && bsPrefix,
               drop === 'up' && 'dropup',
               drop === 'right' && 'dropright',
-              drop === 'left' && 'dropleft'
+              drop === 'left' && 'dropleft',
             )}
           />
         </SelectableContext.Provider>
@@ -342,16 +342,16 @@ Dropdown.defaultProps = defaultProps;
 
 const UncontrolledDropdown = uncontrollable(
   createBootstrapComponent(Dropdown, 'dropdown'),
-  { show: 'onToggle' }
+  { show: 'onToggle' },
 );
 
 const DecoratedDropdown = mapContextToProps(
-  UncontrolledDropdown,
   [SelectableContext, NavbarContext],
   (onSelect, navbarContext, props) => ({
     navbar: !!navbarContext,
-    onSelect: chain(props.onSelect, onSelect)
-  })
+    onSelect: chain(props.onSelect, onSelect),
+  }),
+  UncontrolledDropdown,
 );
 
 DecoratedDropdown.Toggle = DropdownToggle;

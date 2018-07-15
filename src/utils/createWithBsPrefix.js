@@ -8,7 +8,7 @@ const pascalCase = str => str[0].toUpperCase() + camelize(str).slice(1);
 
 export default function createWithBsPrefix(
   prefix,
-  { displayName = pascalCase(prefix), Component = 'div' } = {}
+  { displayName = pascalCase(prefix), Component = 'div' } = {},
 ) {
   return createBootstrapComponent(
     class extends React.Component {
@@ -25,6 +25,6 @@ export default function createWithBsPrefix(
         return <Tag {...props} className={classNames(className, bsPrefix)} />;
       }
     },
-    prefix
+    prefix,
   );
 }

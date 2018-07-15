@@ -30,7 +30,7 @@ describe('<Collapse>', () => {
 
   it('Should default to collapsed', () => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component>Panel content</Component>
+      <Component>Panel content</Component>,
     );
 
     assert.ok(instance.collapse.props.in === false);
@@ -39,11 +39,11 @@ describe('<Collapse>', () => {
   describe('collapsed', () => {
     it('Should have collapse class', () => {
       instance = ReactTestUtils.renderIntoDocument(
-        <Component>Panel content</Component>
+        <Component>Panel content</Component>,
       );
 
       assert.ok(
-        ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'collapse')
+        ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'collapse'),
       );
     });
   });
@@ -51,7 +51,7 @@ describe('<Collapse>', () => {
   describe('from collapsed to expanded', () => {
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
-        <Component>Panel content</Component>
+        <Component>Panel content</Component>,
       );
 
       // since scrollHeight is gonna be 0 detached from the DOM
@@ -119,7 +119,7 @@ describe('<Collapse>', () => {
   describe('from expanded to collapsed', () => {
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
-        <Component in>Panel content</Component>
+        <Component in>Panel content</Component>,
       );
     });
 
@@ -178,11 +178,11 @@ describe('<Collapse>', () => {
   describe('expanded', () => {
     it('Should have collapse and in class', () => {
       instance = ReactTestUtils.renderIntoDocument(
-        <Component in>Panel content</Component>
+        <Component in>Panel content</Component>,
       );
 
       expect(ReactDOM.findDOMNode(instance.collapse).className).to.match(
-        /\bcollapse in\b/
+        /\bcollapse in\b/,
       );
     });
   });
@@ -190,7 +190,7 @@ describe('<Collapse>', () => {
   describe('dimension', () => {
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
-        <Component>Panel content</Component>
+        <Component>Panel content</Component>,
       );
     });
 
@@ -212,7 +212,7 @@ describe('<Collapse>', () => {
   describe('with a role', () => {
     beforeEach(() => {
       instance = ReactTestUtils.renderIntoDocument(
-        <Component role="note">Panel content</Component>
+        <Component role="note">Panel content</Component>,
       );
     });
 

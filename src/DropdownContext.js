@@ -8,5 +8,5 @@ export default React.createContext({
   popper: {},
   toggleId: undefined,
   show: null,
-  alignRight: null
+  alignRight: null,
 });

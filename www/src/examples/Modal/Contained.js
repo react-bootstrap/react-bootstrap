@@ -16,7 +16,7 @@ class Trigger extends React.Component {
     this.handleHide = this.handleHide.bind(this);
 
     this.state = {
-      show: false
+      show: false,
     };
   }
 

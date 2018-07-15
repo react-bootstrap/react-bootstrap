@@ -6,7 +6,7 @@ class Example extends React.Component {
     this.handleToggle = this.handleToggle.bind(this);
 
     this.state = {
-      show: true
+      show: true,
     };
   }
 
@@ -22,7 +22,7 @@ class Example extends React.Component {
     const sharedProps = {
       container: this,
       target: this.getTarget,
-      show: this.state.show
+      show: this.state.show,
     };
 
     return (

@@ -14,12 +14,12 @@ class Row extends React.Component {
 
     /** Removes the gutter spacing between `Col`s as well as any added negative margins. */
     noGutters: PropTypes.bool.isRequired,
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
     as: 'div',
-    noGutters: false
+    noGutters: false,
   };
 
   render() {

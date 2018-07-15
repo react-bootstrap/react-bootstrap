@@ -16,11 +16,11 @@ class ButtonToolbar extends React.Component {
      * "toolbar" role is correct. An `aria-label` or `aria-labelledby`
      * prop is also recommended.
      */
-    role: PropTypes.string
+    role: PropTypes.string,
   };
 
   static defaultProps = {
-    role: 'toolbar'
+    role: 'toolbar',
   };
 
   render() {

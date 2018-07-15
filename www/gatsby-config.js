@@ -12,12 +12,12 @@ require('@babel/register')({
   ...require('../.babelrc.js'),
   only: [
     // Only the src directory
-    new RegExp(`^${escapeRegExp(path.join(root, '/src/'))}`, 'i')
+    new RegExp(`^${escapeRegExp(path.join(root, '/src/'))}`, 'i'),
   ],
   ignore: [
     // Ignore any node_modules inside the current working directory.
-    new RegExp(`^${root}(?:${path.sep}.*)?${escapeRegExp(nodeModules)}`, 'i')
-  ]
+    new RegExp(`^${root}(?:${path.sep}.*)?${escapeRegExp(nodeModules)}`, 'i'),
+  ],
 });
 
 module.exports = {
@@ -28,16 +28,16 @@ module.exports = {
       'last 4 Chrome versions',
       'last 4 Firefox versions',
       'last 2 Edge versions',
-      'last 2 Safari versions'
-    ]
+      'last 2 Safari versions',
+    ],
   },
   plugins: [
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: path.resolve(__dirname, '../src'),
-        name: 'source'
-      }
+        name: 'source',
+      },
     },
     {
       resolve: 'gatsby-transformer-react-docgen',
@@ -61,18 +61,18 @@ module.exports = {
                   desc.description || defaultDescriptions[name];
               }
             });
-          }
-        ]
-      }
+          },
+        ],
+      },
     },
     {
       resolve: 'gatsby-transformer-remark',
       options: {
-        plugins: ['gatsby-remark-prismjs']
-      }
+        plugins: ['gatsby-remark-prismjs'],
+      },
     },
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sass',
-    'gatsby-plugin-less'
-  ]
+    'gatsby-plugin-less',
+  ],
 };

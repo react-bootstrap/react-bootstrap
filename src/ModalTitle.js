@@ -11,11 +11,11 @@ const DivStyledAsH4 = divWithClassName('h4');
 class ModalTitle extends React.Component {
   static propTypes = {
     bsPrefix: PropTypes.string,
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
-    as: DivStyledAsH4
+    as: DivStyledAsH4,
   };
 
   render() {

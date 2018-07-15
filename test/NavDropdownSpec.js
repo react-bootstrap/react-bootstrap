@@ -11,7 +11,7 @@ describe('<NavDropdown>', () => {
       <NavDropdown title="Title" className="test-class" id="nav-test">
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
         <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
-      </NavDropdown>
+      </NavDropdown>,
     );
 
     wrapper.assertSingle('li.dropdown.test-class');
@@ -27,7 +27,7 @@ describe('<NavDropdown>', () => {
       <NavDropdown active title="Title" id="nav-test">
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
         <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
-      </NavDropdown>
+      </NavDropdown>,
     ).assertSingle('a.dropdown-toggle.active');
   });
 
@@ -39,7 +39,7 @@ describe('<NavDropdown>', () => {
           <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
           <DropdownItem eventKey="3">DropdownItem 3 content</DropdownItem>
         </NavDropdown>
-      </Nav>
+      </Nav>,
     );
 
     wrapper

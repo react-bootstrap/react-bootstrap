@@ -9,10 +9,10 @@ describe('Badge', () => {
       mount(
         <Badge variant="primary" pill>
           Message
-        </Badge>
+        </Badge>,
       )
         .assertSingle('span.badge.badge-primary.badge-pill')
-        .text()
+        .text(),
     ).to.equal('Message');
   });
 });

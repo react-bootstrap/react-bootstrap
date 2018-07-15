@@ -2,11 +2,11 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
+import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
 
 import { createBootstrapComponent } from './ThemeProvider';
 import chain from './utils/createChainedFunction';
-import mapContextToProps from './utils/mapContextToProps';
 import DropdownContext from './DropdownContext';
 
 class DropdownMenu extends React.Component {
@@ -45,12 +45,12 @@ class DropdownMenu extends React.Component {
     as: elementType,
 
     /** @private */
-    menuRef: PropTypes.any
+    menuRef: PropTypes.any,
   };
 
   static defaultProps = {
     alignRight: false,
-    as: 'div'
+    as: 'div',
   };
 
   handleRootClose = event => {
@@ -76,8 +76,8 @@ class DropdownMenu extends React.Component {
         className,
         bsPrefix,
         show && 'show',
-        alignRight && `${bsPrefix}-right`
-      )
+        alignRight && `${bsPrefix}-right`,
+      ),
     };
 
     // For custom components provide additional, non-DOM, props;
@@ -99,17 +99,17 @@ class DropdownMenu extends React.Component {
 }
 
 export default mapContextToProps(
-  createBootstrapComponent(DropdownMenu, 'dropdown-menu'),
   DropdownContext.Consumer,
   (
     { toggleId, show, alignRight, setMenuElement, onClose, popper: { styles } },
-    props
+    props,
   ) => ({
     style: styles,
     menuRef: setMenuElement,
     'aria-labelledby': toggleId,
     show: show == null ? props.show : show,
     onClose: chain(props.onClose, onClose),
-    alignRight: alignRight == null ? props.alignRight : alignRight
-  })
+    alignRight: alignRight == null ? props.alignRight : alignRight,
+  }),
+  createBootstrapComponent(DropdownMenu, 'dropdown-menu'),
 );

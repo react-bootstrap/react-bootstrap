@@ -19,7 +19,7 @@ describe('Media', () => {
 
   it('should merge additional classes passed in', () => {
     const instance = ReactTestUtils.renderIntoDocument(
-      <Media className="custom-class" />
+      <Media className="custom-class" />,
     );
 
     assert.include(ReactDOM.findDOMNode(instance).className, 'media');
@@ -36,10 +36,10 @@ describe('Media', () => {
     const instance = ReactTestUtils.renderIntoDocument(
       <Media>
         <strong>Children</strong>
-      </Media>
+      </Media>,
     );
     assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong')
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'),
     );
   });
 });

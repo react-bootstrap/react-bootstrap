@@ -23,7 +23,7 @@ describe('Fade', () => {
 
   it('Should default to hidden', () => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component>Panel content</Component>
+      <Component>Panel content</Component>,
     );
 
     assert.ok(instance.fade.props.in === false);
@@ -31,7 +31,7 @@ describe('Fade', () => {
 
   it('Should always have the "fade" class', () => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component>Panel content</Component>
+      <Component>Panel content</Component>,
     );
 
     assert.ok(instance.fade.props.in === false);
@@ -41,7 +41,7 @@ describe('Fade', () => {
 
   it('Should add "in" class when entering', done => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component>Panel content</Component>
+      <Component>Panel content</Component>,
     );
 
     function onEntering() {
@@ -56,7 +56,7 @@ describe('Fade', () => {
 
   it('Should remove "in" class when exiting', done => {
     instance = ReactTestUtils.renderIntoDocument(
-      <Component in>Panel content</Component>
+      <Component in>Panel content</Component>,
     );
 
     function onExiting() {

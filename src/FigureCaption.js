@@ -11,11 +11,11 @@ class FigureCaption extends React.Component {
      * @default 'figure-caption'
      */
     bsPrefix: PropTypes.string,
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
-    as: 'figcaption'
+    as: 'figcaption',
   };
 
   render() {

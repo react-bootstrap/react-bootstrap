@@ -3,7 +3,7 @@ class Example extends React.Component {
     super(props, context);
 
     this.state = {
-      show: false
+      show: false,
     };
 
     this.handleShow = () => {

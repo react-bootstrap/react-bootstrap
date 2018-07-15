@@ -32,7 +32,7 @@ describe('<Navbar>', () => {
       mount(<Navbar role="banner" />)
         .getDOMNode()
         .getAttribute('role'),
-      'banner'
+      'banner',
     );
   });
 
@@ -50,7 +50,7 @@ describe('<Navbar>', () => {
     mount(
       <Navbar>
         <Nav />
-      </Navbar>
+      </Navbar>,
     ).assertSingle('.navbar-nav');
   });
 
@@ -59,11 +59,11 @@ describe('<Navbar>', () => {
       mount(
         <Navbar>
           <Navbar.Toggle as="p">hi</Navbar.Toggle>
-        </Navbar>
+        </Navbar>,
       )
         .assertSingle('p.navbar-toggler')
         .text(),
-      'hi'
+      'hi',
     );
   });
 
@@ -72,7 +72,7 @@ describe('<Navbar>', () => {
     mount(
       <Navbar onToggle={toggleSpy}>
         <Navbar.Toggle />
-      </Navbar>
+      </Navbar>,
     )
       .find(Navbar.Toggle)
       .simulate('click');
@@ -87,7 +87,7 @@ describe('<Navbar>', () => {
     mount(
       <Navbar>
         <Navbar.Toggle onClick={clickSpy} />
-      </Navbar>
+      </Navbar>,
     )
       .find(Navbar.Toggle)
       .simulate('click');
@@ -99,7 +99,7 @@ describe('<Navbar>', () => {
     mount(
       <Navbar>
         <Navbar.Collapse>hello</Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     ).assertSingle('.navbar-collapse');
   });
 
@@ -107,7 +107,7 @@ describe('<Navbar>', () => {
     mount(
       <Navbar defaultExpanded>
         <Navbar.Collapse>hello</Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     ).assertSingle('Collapse[in]');
   });
 
@@ -116,7 +116,7 @@ describe('<Navbar>', () => {
       <Navbar>
         <Navbar.Toggle />
         <Navbar.Collapse>hello</Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     );
 
     let toggle = wrapper.find('.navbar-toggler');
@@ -145,7 +145,7 @@ describe('<Navbar>', () => {
             <Nav.Link href="https://www.google.com" onClick={navItemOnClick} />
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     )
       .find('a.nav-link')
       .simulate('click');
@@ -156,7 +156,7 @@ describe('<Navbar>', () => {
     expect(selectSpy).to.be.calledOnce;
     expect(navItemOnClick).to.be.calledOnce;
     expect(event.target.getAttribute('href')).to.be.equal(
-      'https://www.google.com'
+      'https://www.google.com',
     );
     expect(preventDefaultSpy).to.not.be.called;
   });
@@ -173,7 +173,7 @@ describe('<Navbar>', () => {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     )
       .find('.link-text')
       .simulate('click');
@@ -194,7 +194,7 @@ describe('<Navbar>', () => {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     )
       .find('.link-text')
       .simulate('click');
@@ -218,7 +218,7 @@ describe('<Navbar>', () => {
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     )
       .find('.link-text')
       .simulate('click');

@@ -41,5 +41,5 @@ render(
       twitter handle
     </LinkWithTooltip>{' '}
     freegan cred raw denim single-origin coffee viral.
-  </p>
+  </p>,
 );

@@ -61,14 +61,14 @@ const propTypes = {
   /**
    * Sets the direction of the Overlay.
    */
-  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left'])
+  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 };
 
 const defaultProps = {
   animation: Fade,
   rootClose: false,
   show: false,
-  placement: 'right'
+  placement: 'right',
 };
 
 class Overlay extends React.Component {
@@ -81,7 +81,7 @@ class Overlay extends React.Component {
 
     if (!transition) {
       child = cloneElement(children, {
-        className: classNames(children.props.className, 'in')
+        className: classNames(children.props.className, 'in'),
       });
     } else {
       child = children;

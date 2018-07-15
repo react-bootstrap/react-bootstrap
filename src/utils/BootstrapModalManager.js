@@ -6,7 +6,7 @@ import ModalManager from 'react-overlays/lib/ModalManager';
 const Selector = {
   FIXED_CONTENT: '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top',
   STICKY_CONTENT: '.sticky-top',
-  NAVBAR_TOGGLER: '.navbar-toggler'
+  NAVBAR_TOGGLER: '.navbar-toggler',
 };
 
 export default class BootstrapModalManager extends ModalManager {
@@ -31,13 +31,13 @@ export default class BootstrapModalManager extends ModalManager {
     const size = getScrollbarSize();
 
     qsa(container, Selector.FIXED_CONTENT).forEach(el =>
-      this.adjustAndStore('paddingRight', el, size)
+      this.adjustAndStore('paddingRight', el, size),
     );
     qsa(container, Selector.STICKY_CONTENT).forEach(el =>
-      this.adjustAndStore('margingRight', el, -size)
+      this.adjustAndStore('margingRight', el, -size),
     );
     qsa(container, Selector.NAVBAR_TOGGLER).forEach(el =>
-      this.adjustAndStore('margingRight', el, size)
+      this.adjustAndStore('margingRight', el, size),
     );
   }
 
@@ -45,13 +45,13 @@ export default class BootstrapModalManager extends ModalManager {
     super.removeContainerStyle(containerState, container);
 
     qsa(container, Selector.FIXED_CONTENT).forEach(el =>
-      this.restore('paddingRight', el)
+      this.restore('paddingRight', el),
     );
     qsa(container, Selector.STICKY_CONTENT).forEach(el =>
-      this.restore('margingRight', el)
+      this.restore('margingRight', el),
     );
     qsa(container, Selector.NAVBAR_TOGGLER).forEach(el =>
-      this.restore('margingRight', el)
+      this.restore('margingRight', el),
     );
   }
 }

@@ -5,7 +5,7 @@ class ToggleButtonGroupControlled extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      value: [1, 3]
+      value: [1, 3],
     };
   }
 

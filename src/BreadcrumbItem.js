@@ -30,12 +30,12 @@ class BreadcrumbItem extends React.Component {
      */
     target: PropTypes.string,
 
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
     active: false,
-    as: 'li'
+    as: 'li',
   };
 
   render() {

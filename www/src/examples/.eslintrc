@@ -69,6 +69,8 @@
 
     "ThemeProvider": false,
 
-    "mountNode": false
+    "mountNode": false,
+    "yup": false,
+    "formik": false
   }
 }

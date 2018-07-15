@@ -12,11 +12,11 @@ const propTypes = {
    */
   bsPrefix: PropTypes.string.isRequired,
 
-  as: elementType
+  as: elementType,
 };
 
 const defaultProps = {
-  as: 'div'
+  as: 'div',
 };
 
 class Media extends React.Component {

@@ -2,7 +2,7 @@ let active = 7;
 let items = [];
 for (let number = 1; number <= 10; number++) {
   items.push(
-    <Pagination.Item active={number === active}>{number}</Pagination.Item>
+    <Pagination.Item active={number === active}>{number}</Pagination.Item>,
   );
 }
 

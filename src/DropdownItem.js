@@ -1,14 +1,14 @@
 import classNames from 'classnames';
-import React from 'react';
 import PropTypes from 'prop-types';
 import all from 'prop-types-extra/lib/all';
 import elementType from 'prop-types-extra/lib/elementType';
+import React from 'react';
+import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 
 import chain from './utils/createChainedFunction';
 import SafeAnchor from './SafeAnchor';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import { createBootstrapComponent } from './ThemeProvider';
-import mapContextToProps from './utils/mapContextToProps';
 import NavContext from './NavContext';
 
 class DropdownItem extends React.Component {
@@ -35,7 +35,7 @@ class DropdownItem extends React.Component {
       ({ divider, children }) =>
         divider && children
           ? new Error('Children will not be rendered for dividers')
-          : null
+          : null,
     ),
 
     /**
@@ -67,14 +67,14 @@ class DropdownItem extends React.Component {
      */
     onSelect: PropTypes.func,
 
-    as: elementType
+    as: elementType,
   };
 
   static defaultProps = {
     as: SafeAnchor,
     divider: false,
     disabled: false,
-    header: false
+    header: false,
   };
 
   handleClick = event => {
@@ -131,7 +131,7 @@ class DropdownItem extends React.Component {
           className,
           `${bsPrefix}-item`,
           active && 'active',
-          props.disabled && 'disabled'
+          props.disabled && 'disabled',
         )}
         onClick={this.handleClick}
       >
@@ -142,7 +142,6 @@ class DropdownItem extends React.Component {
 }
 
 export default mapContextToProps(
-  createBootstrapComponent(DropdownItem, 'dropdown'),
   [SelectableContext, NavContext],
   (onSelect, navContext, props) => {
     const { activeKey } = navContext || {};
@@ -152,7 +151,8 @@ export default mapContextToProps(
       active:
         props.active == null && key != null
           ? makeEventKey(activeKey) === key
-          : props.active
+          : props.active,
     };
-  }
+  },
+  createBootstrapComponent(DropdownItem, 'dropdown'),
 );

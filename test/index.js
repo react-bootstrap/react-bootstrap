@@ -10,7 +10,12 @@ Enzyme.configure({ adapter: new Adapter() });
 function assertLength(length) {
   return function $assertLength(selector) {
     let result = this.find(selector);
-    expect(result).to.have.length(length);
+    expect(
+      result,
+      `Expected to find ${length} match but found ${
+        result.length
+      } for selector "${selector}" on element: \n\n${this.debug()}`,
+    ).to.have.length(length);
     return result;
   };
 }
@@ -77,5 +82,5 @@ describe('Process environment for tests', () => {
 const srcContext = require.context('../src', true, /.*\.js$/);
 srcContext.keys().forEach(srcContext);
 
-const testsContext = require.context('.', true, /.*ModalSpec\.js$/);
+const testsContext = require.context('.', true, /.*\.js$/);
 testsContext.keys().forEach(testsContext);

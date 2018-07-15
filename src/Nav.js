@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 import all from 'prop-types-extra/lib/all';
 import React from 'react';
+import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import uncontrollable from 'uncontrollable';
 
 import { createBootstrapComponent } from './ThemeProvider';
 import TabContext from './TabContext';
-import mapContextToProps from './utils/mapContextToProps';
 import chain from './utils/createChainedFunction';
 import NavContext from './NavContext';
 import NavbarContext from './NavbarContext';
@@ -60,7 +60,7 @@ class Nav extends React.Component {
       ({ justify, navbar }) =>
         justify && navbar
           ? Error('justify navbar `Nav`s are not supported')
-          : null
+          : null,
     ),
 
     /**
@@ -94,13 +94,13 @@ class Nav extends React.Component {
     as: elementType,
 
     /** @private */
-    onKeyDown: PropTypes.func
+    onKeyDown: PropTypes.func,
   };
 
   static defaultProps = {
     justify: false,
     fill: false,
-    as: 'ul'
+    as: 'ul',
   };
 
   static getDerivedStateFromProps({
@@ -108,7 +108,7 @@ class Nav extends React.Component {
     getControlledId,
     getControllerId,
     role,
-    onSelect
+    onSelect,
   }) {
     return {
       navContext: {
@@ -116,8 +116,8 @@ class Nav extends React.Component {
         onSelect,
         activeKey,
         getControlledId: getControlledId || noop,
-        getControllerId: getControllerId || noop
-      }
+        getControllerId: getControllerId || noop,
+      },
     };
   }
 
@@ -212,7 +212,7 @@ class Nav extends React.Component {
               [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
               [`${bsPrefix}-${variant}`]: !!variant,
               [`${bsPrefix}-fill`]: fill,
-              [`${bsPrefix}-justified`]: justify
+              [`${bsPrefix}-justified`]: justify,
             })}
           >
             {children}
@@ -224,23 +224,22 @@ class Nav extends React.Component {
 }
 
 const UncontrolledNav = uncontrollable(createBootstrapComponent(Nav, 'nav'), {
-  activeKey: 'onSelect'
+  activeKey: 'onSelect',
 });
 
 const DecoratedNav = mapContextToProps(
-  UncontrolledNav,
   [
     SelectableContext.Consumer,
     TabContext.Consumer,
     NavbarContext.Consumer,
-    CardContext.Consumer
+    CardContext.Consumer,
   ],
   (
     onSelect,
     tabContext,
     navbarContext,
     cardContext,
-    { role, navbar, onSelect: propsOnSelect }
+    { role, navbar, onSelect: propsOnSelect },
   ) => {
     onSelect = chain(propsOnSelect, onSelect);
     if (!tabContext && !navbarContext && !cardContext) return { onSelect };
@@ -249,7 +248,7 @@ const DecoratedNav = mapContextToProps(
       return {
         onSelect,
         navbarBsPrefix: navbarContext.bsPrefix,
-        navbar: navbar == null ? true : navbar
+        navbar: navbar == null ? true : navbar,
       };
 
     if (cardContext)
@@ -263,9 +262,10 @@ const DecoratedNav = mapContextToProps(
       // both Tab and Nav contexts in NavLink
       getControllerId,
       getControlledId,
-      role: role || 'tablist'
+      role: role || 'tablist',
     };
-  }
+  },
+  UncontrolledNav,
 );
 
 DecoratedNav.Item = NavItem;

@@ -47,7 +47,7 @@ class Table extends React.Component {
      * a particular breakpoint. From that breakpoint and up, the table will
      * behave normally and not scroll horizontally.
      */
-    responsive: PropTypes.oneOfType([PropTypes.bool, PropTypes.string])
+    responsive: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
   };
 
   render() {
@@ -68,7 +68,7 @@ class Table extends React.Component {
       size && `${bsPrefix}-${size}`,
       striped && `${bsPrefix}-striped`,
       bordered && `${bsPrefix}-bordered`,
-      hover && `${bsPrefix}-hover`
+      hover && `${bsPrefix}-hover`,
     );
 
     const table = <table {...props} className={classes} />;

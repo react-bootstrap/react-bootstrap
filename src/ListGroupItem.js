@@ -7,7 +7,7 @@ import {
   bsStyles,
   getClassSet,
   prefix,
-  splitBsProps
+  splitBsProps,
 } from './utils/bootstrapUtils';
 import { State } from './utils/StyleConfig';
 
@@ -18,18 +18,18 @@ const propTypes = {
   listItem: PropTypes.bool,
   onClick: PropTypes.func,
   href: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
 };
 
 const defaultProps = {
-  listItem: false
+  listItem: false,
 };
 
 class ListGroupItem extends React.Component {
   renderHeader(header, headingClassName) {
     if (React.isValidElement(header)) {
       return cloneElement(header, {
-        className: classNames(header.props.className, headingClassName)
+        className: classNames(header.props.className, headingClassName),
       });
     }
 
@@ -52,7 +52,7 @@ class ListGroupItem extends React.Component {
     const classes = {
       ...getClassSet(bsProps),
       active,
-      disabled
+      disabled,
     };
 
     let Component;
@@ -90,5 +90,5 @@ ListGroupItem.defaultProps = defaultProps;
 
 export default bsClass(
   'list-group-item',
-  bsStyles(Object.values(State), ListGroupItem)
+  bsStyles(Object.values(State), ListGroupItem),
 );

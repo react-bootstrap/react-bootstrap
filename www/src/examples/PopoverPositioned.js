@@ -36,5 +36,5 @@ render(
     <OverlayTrigger trigger="click" placement="right" overlay={popoverRight}>
       <Button>Holy guacamole!</Button>
     </OverlayTrigger>
-  </ButtonToolbar>
+  </ButtonToolbar>,
 );

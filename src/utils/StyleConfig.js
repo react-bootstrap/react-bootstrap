@@ -1,7 +1,7 @@
 export const Size = {
   LARGE: 'large',
   SMALL: 'small',
-  XSMALL: 'xsmall'
+  XSMALL: 'xsmall',
 };
 
 export const SIZE_MAP = {
@@ -12,7 +12,7 @@ export const SIZE_MAP = {
   lg: 'lg',
   md: 'md',
   sm: 'sm',
-  xs: 'xs'
+  xs: 'xs',
 };
 
 export const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm', 'xs'];
@@ -28,7 +28,7 @@ export const State = {
   LINK: 'light',
 
   // TODO: legacy, remove
-  DEFAULT: 'default'
+  DEFAULT: 'default',
 };
 
 export const Style = {
@@ -40,5 +40,5 @@ export const Style = {
   INVERSE: 'inverse',
 
   // TODO: legacy, remove
-  DEFAULT: 'default'
+  DEFAULT: 'default',
 };

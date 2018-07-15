@@ -128,14 +128,14 @@ const propTypes = {
   /**
    * @private
    */
-  container: BaseModal.propTypes.container
+  container: BaseModal.propTypes.container,
 };
 
 const defaultProps = {
   ...BaseModal.defaultProps,
   animation: true,
   dialogAs: ModalDialog,
-  manager: new BootstrapModalManager()
+  manager: new BootstrapModalManager(),
 };
 
 /* eslint-disable no-use-before-define, react/no-multi-comp */
@@ -154,10 +154,10 @@ class Modal extends React.Component {
     super(props, context);
 
     this.state = {
-      style: {}
+      style: {},
     };
     this.modalContext = {
-      onHide: () => this.props.onHide()
+      onHide: () => this.props.onHide(),
     };
   }
 
@@ -239,8 +239,8 @@ class Modal extends React.Component {
         paddingLeft:
           !containerIsOverflowing && modalIsOverflowing
             ? getScrollbarSize()
-            : undefined
-      }
+            : undefined,
+      },
     });
   }
 

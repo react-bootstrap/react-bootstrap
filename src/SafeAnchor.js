@@ -14,11 +14,11 @@ const propTypes = {
   /**
    * this is sort of silly but needed for Button
    */
-  as: elementType
+  as: elementType,
 };
 
 const defaultProps = {
-  as: 'a'
+  as: 'a',
 };
 
 function isTrivialHref(href) {

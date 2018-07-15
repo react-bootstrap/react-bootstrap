@@ -225,5 +225,5 @@ var Alert = ReactBootstrap.Alert;
         </div>
       );
     }
-  }
+  },
 );

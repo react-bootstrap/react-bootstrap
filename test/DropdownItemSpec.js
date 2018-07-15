@@ -9,13 +9,13 @@ import { shouldWarn } from './helpers';
 describe('<DropdownItem>', () => {
   it('renders divider', () => {
     mount(<DropdownItem divider />).assertSingle(
-      'div.dropdown-divider[role="separator"]'
+      'div.dropdown-divider[role="separator"]',
     );
   });
 
   it('renders divider className and style', () => {
     const node = mount(
-      <DropdownItem divider className="foo bar" style={{ height: '100px' }} />
+      <DropdownItem divider className="foo bar" style={{ height: '100px' }} />,
     ).getDOMNode();
 
     node.className.should.match(/\bfoo bar dropdown-divider\b/);
@@ -26,7 +26,7 @@ describe('<DropdownItem>', () => {
     shouldWarn('Children will not be rendered for dividers');
 
     const node = mount(
-      <DropdownItem divider>Some child</DropdownItem>
+      <DropdownItem divider>Some child</DropdownItem>,
     ).getDOMNode();
 
     node.className.should.match(/\bdropdown-divider\b/);
@@ -44,7 +44,7 @@ describe('<DropdownItem>', () => {
     const node = mount(
       <DropdownItem header className="foo bar" style={{ height: '100px' }}>
         Header text
-      </DropdownItem>
+      </DropdownItem>,
     ).getDOMNode();
 
     node.className.should.match(/\bfoo bar dropdown-header\b/);
@@ -55,7 +55,7 @@ describe('<DropdownItem>', () => {
     mount(
       <DropdownItem onKeyDown={() => done()} href="/herpa-derpa">
         Item
-      </DropdownItem>
+      </DropdownItem>,
     )
       .assertSingle('a.dropdown-item[href="/herpa-derpa"]')
       .tap(a => a.text().should.equal('Item'))
@@ -64,7 +64,7 @@ describe('<DropdownItem>', () => {
 
   it('should render as a button when set', () => {
     mount(<DropdownItem as={Button} variant="success" />).assertSingle(
-      'button.dropdown-item.btn-success'
+      'button.dropdown-item.btn-success',
     );
   });
 
@@ -76,7 +76,7 @@ describe('<DropdownItem>', () => {
     mount(
       <DropdownItem onSelect={handleSelect} eventKey="1">
         Item
-      </DropdownItem>
+      </DropdownItem>,
     ).simulate('click');
   });
 
@@ -86,7 +86,7 @@ describe('<DropdownItem>', () => {
       done();
     };
     mount(<DropdownItem onSelect={handleSelect}>Item</DropdownItem>).simulate(
-      'click'
+      'click',
     );
   });
 
@@ -97,7 +97,7 @@ describe('<DropdownItem>', () => {
     mount(
       <DropdownItem onClick={handleClick} onSelect={handleSelect}>
         Item
-      </DropdownItem>
+      </DropdownItem>,
     ).simulate('click');
 
     expect(handleClick).to.have.been.called;
@@ -122,7 +122,7 @@ describe('<DropdownItem>', () => {
     mount(
       <DropdownItem onSelect={handleSelect} header>
         Header content
-      </DropdownItem>
+      </DropdownItem>,
     )
       .simulate('click')
       .assertNone('a');
@@ -149,7 +149,7 @@ describe('<DropdownItem>', () => {
     mount(
       <DropdownItem onSelect={handleSelect} disabled>
         Text
-      </DropdownItem>
+      </DropdownItem>,
     )
       .assertSingle('a.disabled')
       .simulate('click');
@@ -164,7 +164,7 @@ describe('<DropdownItem>', () => {
         style={{ height: 100 }}
       >
         Title
-      </DropdownItem>
+      </DropdownItem>,
     ).getDOMNode();
 
     assert(node.className.match(/\btest-class\b/));

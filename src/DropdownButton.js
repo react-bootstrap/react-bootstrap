@@ -31,7 +31,7 @@ const propTypes = {
   /** @ignore */
   variant: PropTypes.string,
   /** @ignore */
-  size: PropTypes.string
+  size: PropTypes.string,
 };
 
 class DropdownButton extends React.Component {

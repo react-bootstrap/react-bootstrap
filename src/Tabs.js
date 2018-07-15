@@ -70,13 +70,13 @@ const propTypes = {
   /**
    * Unmount tabs (remove it from the DOM) when it is no longer visible
    */
-  unmountOnExit: PropTypes.bool
+  unmountOnExit: PropTypes.bool,
 };
 
 const defaultProps = {
   variant: 'tabs',
   mountOnEnter: false,
-  unmountOnExit: false
+  unmountOnExit: false,
 };
 
 function getDefaultActiveKey(children) {
@@ -153,5 +153,5 @@ Tabs.propTypes = propTypes;
 Tabs.defaultProps = defaultProps;
 
 export default uncontrollable(Tabs, {
-  activeKey: 'onSelect'
+  activeKey: 'onSelect',
 });

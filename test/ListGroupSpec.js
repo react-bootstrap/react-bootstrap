@@ -11,7 +11,10 @@ describe('<ListGroup>', () => {
       let instance = ReactTestUtils.renderIntoDocument(<ListGroup />);
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
       assert.ok(
-        ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group')
+        ReactTestUtils.findRenderedDOMComponentWithClass(
+          instance,
+          'list-group',
+        ),
       );
     });
 
@@ -19,38 +22,38 @@ describe('<ListGroup>', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup>
           <ListGroupItem>Only Child</ListGroupItem>
-        </ListGroup>
+        </ListGroup>,
       );
 
       let items = ReactTestUtils.scryRenderedComponentsWithType(
         instance,
-        ListGroupItem
+        ListGroupItem,
       );
 
       assert.ok(
         ReactTestUtils.findRenderedDOMComponentWithClass(
           items[0],
-          'list-group-item'
-        )
+          'list-group-item',
+        ),
       );
     });
 
     it('Should support a single "ListGroupItem" child contained in an array', () => {
       let child = [<ListGroupItem key={42}>Only Child in array</ListGroupItem>];
       let instance = ReactTestUtils.renderIntoDocument(
-        <ListGroup>{child}</ListGroup>
+        <ListGroup>{child}</ListGroup>,
       );
 
       let items = ReactTestUtils.scryRenderedComponentsWithType(
         instance,
-        ListGroupItem
+        ListGroupItem,
       );
 
       assert.ok(
         ReactTestUtils.findRenderedDOMComponentWithClass(
           items[0],
-          'list-group-item'
-        )
+          'list-group-item',
+        ),
       );
     });
 
@@ -58,7 +61,7 @@ describe('<ListGroup>', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup>
           <ListGroupItem>Only Child</ListGroupItem>
-        </ListGroup>
+        </ListGroup>,
       );
 
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'UL');
@@ -69,7 +72,7 @@ describe('<ListGroup>', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup>
           <ListGroupItem href="#test">Only Child</ListGroupItem>
-        </ListGroup>
+        </ListGroup>,
       );
 
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
@@ -81,32 +84,32 @@ describe('<ListGroup>', () => {
         <ListGroup>
           <ListGroupItem>1st Child</ListGroupItem>
           <ListGroupItem>2nd Child</ListGroupItem>
-        </ListGroup>
+        </ListGroup>,
       );
 
       let items = ReactTestUtils.scryRenderedComponentsWithType(
         instance,
-        ListGroupItem
+        ListGroupItem,
       );
 
       assert.ok(
         ReactTestUtils.findRenderedDOMComponentWithClass(
           items[0],
-          'list-group-item'
-        )
+          'list-group-item',
+        ),
       );
       assert.ok(
         ReactTestUtils.findRenderedDOMComponentWithClass(
           items[1],
-          'list-group-item'
-        )
+          'list-group-item',
+        ),
       );
     });
 
     it('Should support multiple "ListGroupItem" children including a subset contained in an array', () => {
       let itemArray = [
         <ListGroupItem key={0}>2nd Child nested</ListGroupItem>,
-        <ListGroupItem key={1}>3rd Child nested</ListGroupItem>
+        <ListGroupItem key={1}>3rd Child nested</ListGroupItem>,
       ];
 
       let instance = ReactTestUtils.renderIntoDocument(
@@ -114,25 +117,25 @@ describe('<ListGroup>', () => {
           <ListGroupItem>1st Child</ListGroupItem>
           {itemArray}
           <ListGroupItem>4th Child</ListGroupItem>
-        </ListGroup>
+        </ListGroup>,
       );
 
       let items = ReactTestUtils.scryRenderedComponentsWithType(
         instance,
-        ListGroupItem
+        ListGroupItem,
       );
 
       assert.ok(
         ReactTestUtils.findRenderedDOMComponentWithClass(
           items[0],
-          'list-group-item'
-        )
+          'list-group-item',
+        ),
       );
       assert.ok(
         ReactTestUtils.findRenderedDOMComponentWithClass(
           items[1],
-          'list-group-item'
-        )
+          'list-group-item',
+        ),
       );
     });
 
@@ -141,10 +144,13 @@ describe('<ListGroup>', () => {
         <ListGroup>
           <ListGroupItem>1st Child</ListGroupItem>
           <ListGroupItem>2nd Child</ListGroupItem>
-        </ListGroup>
+        </ListGroup>,
       );
       assert.ok(
-        ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group')
+        ReactTestUtils.findRenderedDOMComponentWithClass(
+          instance,
+          'list-group',
+        ),
       );
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'UL');
       assert.equal(ReactDOM.findDOMNode(instance).firstChild.nodeName, 'LI');
@@ -156,13 +162,16 @@ describe('<ListGroup>', () => {
         <ListGroup>
           <ListGroupItem href="#test">1st Child</ListGroupItem>
           <ListGroupItem>2nd Child</ListGroupItem>
-        </ListGroup>
+        </ListGroup>,
       );
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
       assert.equal(ReactDOM.findDOMNode(instance).firstChild.nodeName, 'A');
       assert.equal(ReactDOM.findDOMNode(instance).lastChild.nodeName, 'SPAN');
       assert.ok(
-        ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group')
+        ReactTestUtils.findRenderedDOMComponentWithClass(
+          instance,
+          'list-group',
+        ),
       );
     });
 
@@ -171,16 +180,19 @@ describe('<ListGroup>', () => {
         <ListGroup>
           <ListGroupItem onClick={() => null}>1st Child</ListGroupItem>
           <ListGroupItem>2nd Child</ListGroupItem>
-        </ListGroup>
+        </ListGroup>,
       );
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
       assert.equal(
         ReactDOM.findDOMNode(instance).firstChild.nodeName,
-        'BUTTON'
+        'BUTTON',
       );
       assert.equal(ReactDOM.findDOMNode(instance).lastChild.nodeName, 'SPAN');
       assert.ok(
-        ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group')
+        ReactTestUtils.findRenderedDOMComponentWithClass(
+          instance,
+          'list-group',
+        ),
       );
     });
 
@@ -188,10 +200,13 @@ describe('<ListGroup>', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup id="testItem">
           <ListGroupItem>Child</ListGroupItem>
-        </ListGroup>
+        </ListGroup>,
       );
       assert.ok(
-        ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group')
+        ReactTestUtils.findRenderedDOMComponentWithClass(
+          instance,
+          'list-group',
+        ),
       );
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'UL');
       assert.equal(ReactDOM.findDOMNode(instance).id, 'testItem');
@@ -213,10 +228,13 @@ describe('<ListGroup>', () => {
       let instance = ReactTestUtils.renderIntoDocument(
         <ListGroup id="testItem">
           <CustomComponent>Child</CustomComponent>
-        </ListGroup>
+        </ListGroup>,
       );
       assert.ok(
-        ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group')
+        ReactTestUtils.findRenderedDOMComponentWithClass(
+          instance,
+          'list-group',
+        ),
       );
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
       assert.equal(ReactDOM.findDOMNode(instance).firstChild.nodeName, 'LI');
@@ -238,10 +256,13 @@ describe('<ListGroup>', () => {
           <CustomComponent>Custom Child</CustomComponent>
           <CustomComponent>Custom Child</CustomComponent>
           <ListGroupItem listItem>RB Child</ListGroupItem>
-        </ListGroup>
+        </ListGroup>,
       );
       assert.ok(
-        ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'list-group')
+        ReactTestUtils.findRenderedDOMComponentWithClass(
+          instance,
+          'list-group',
+        ),
       );
       assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'UL');
       assert.equal(ReactDOM.findDOMNode(instance).lastChild.nodeName, 'LI');

@@ -7,7 +7,7 @@ class Example extends React.Component {
     };
 
     this.state = {
-      show: false
+      show: false,
     };
   }
 

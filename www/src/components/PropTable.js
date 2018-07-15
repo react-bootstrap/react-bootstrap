@@ -44,7 +44,7 @@ function getTypeName(prop) {
 
 class PropTable extends React.Component {
   static propTypes = {
-    metadata: PropTypes.object.isRequired
+    metadata: PropTypes.object.isRequired,
   };
 
   getType(prop) {
@@ -88,7 +88,7 @@ class PropTable extends React.Component {
   _renderRows(propsData) {
     return propsData
       .filter(
-        prop => prop.type && !prop.doclets.private && !prop.doclets.ignore
+        prop => prop.type && !prop.doclets.private && !prop.doclets.ignore,
       )
       .map(propData => {
         const { name, description, doclets } = propData;

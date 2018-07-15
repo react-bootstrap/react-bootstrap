@@ -4,7 +4,7 @@ import prism from 'react-live/lib/utils/prism';
 import { stripIndent } from 'common-tags';
 
 const propTypes = {
-  codeText: PropTypes.string.isRequired
+  codeText: PropTypes.string.isRequired,
 };
 
 function CodeBlock({ codeText }) {
@@ -14,7 +14,7 @@ function CodeBlock({ codeText }) {
         className="prism-code"
         style={{ marginBottom: 20 }}
         dangerouslySetInnerHTML={{
-          __html: prism(stripIndent([codeText]), 'jsx')
+          __html: prism(stripIndent([codeText]), 'jsx'),
         }}
       />
     </div>

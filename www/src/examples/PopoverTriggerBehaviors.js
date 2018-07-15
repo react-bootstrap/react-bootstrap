@@ -45,5 +45,5 @@ render(
     >
       <Button>Click w/rootClose</Button>
     </OverlayTrigger>
-  </ButtonToolbar>
+  </ButtonToolbar>,
 );

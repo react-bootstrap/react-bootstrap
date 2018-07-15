@@ -6,7 +6,7 @@ class Example extends React.Component {
     this.handleClose = this.handleClose.bind(this);
 
     this.state = {
-      show: false
+      show: false,
     };
   }
 

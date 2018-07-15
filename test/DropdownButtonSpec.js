@@ -24,7 +24,7 @@ describe('<DropdownButton>', () => {
     mount(
       <DropdownButton title="Single child" id="test-id">
         <DropdownItem>Item 1</DropdownItem>
-      </DropdownButton>
+      </DropdownButton>,
     ).assertSingle('DropdownMenu DropdownItem');
   });
 
@@ -32,7 +32,7 @@ describe('<DropdownButton>', () => {
     mount(
       <DropdownButton alignRight title="blah" id="test-id">
         <DropdownItem>Item 1</DropdownItem>
-      </DropdownButton>
+      </DropdownButton>,
     )
       .find('DropdownMenu')
       .props()
@@ -43,7 +43,7 @@ describe('<DropdownButton>', () => {
     mount(
       <DropdownButton title="blah" size="sm" variant="success" id="test-id">
         <DropdownItem>Item 1</DropdownItem>
-      </DropdownButton>
+      </DropdownButton>,
     ).find('button.dropdown-toggle.btn-success.btn-sm');
   });
 
@@ -64,7 +64,7 @@ describe('<DropdownButton>', () => {
         <DropdownItem eventKey="2">Item 2</DropdownItem>
         <DropdownItem eventKey="3">Item 3</DropdownItem>
         <DropdownItem eventKey="4">Item 4</DropdownItem>
-      </DropdownButton>
+      </DropdownButton>,
     );
 
     instance.find('a').forEach(item => {
@@ -83,7 +83,7 @@ describe('<DropdownButton>', () => {
         id="test-id"
       >
         <DropdownItem eventKey="1">Item 1</DropdownItem>
-      </DropdownButton>
+      </DropdownButton>,
     );
 
     wrapper.find('button').simulate('click');
@@ -104,7 +104,7 @@ describe('<DropdownButton>', () => {
       <DropdownButton disabled title="Title" id="testId">
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
         <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
-      </DropdownButton>
+      </DropdownButton>,
     ).assertSingle('button[disabled]');
   });
 
@@ -112,7 +112,7 @@ describe('<DropdownButton>', () => {
     mount(
       <DropdownButton title="title" id="test-id" bsPrefix="my-button">
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
-      </DropdownButton>
+      </DropdownButton>,
     ).assertSingle('button.my-button-primary');
   });
 
@@ -120,7 +120,7 @@ describe('<DropdownButton>', () => {
     const wrapper = mount(
       <DropdownButton id="test-id" title="title" defaultShow>
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
-      </DropdownButton>
+      </DropdownButton>,
     );
 
     expect(wrapper.children().props().defaultShow).to.equal(true);

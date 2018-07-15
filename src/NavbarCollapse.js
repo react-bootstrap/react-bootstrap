@@ -8,7 +8,7 @@ import NavbarContext from './NavbarContext';
 class NavbarCollapse extends React.Component {
   static propTypes = {
     /** @default 'navbar-collapse' */
-    bsPrefix: PropTypes.string
+    bsPrefix: PropTypes.string,
   };
 
   render() {

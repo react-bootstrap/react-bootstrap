@@ -9,28 +9,28 @@ describe('<Jumbotron>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Jumbotron>
         <strong>Content</strong>
-      </Jumbotron>
+      </Jumbotron>,
     );
 
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
     assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong')
+      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'),
     );
   });
 
   it('Should have a jumbotron class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Jumbotron>Content</Jumbotron>
+      <Jumbotron>Content</Jumbotron>,
     );
     assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bjumbotron\b/));
   });
 
   it('Should have a fluid class', () => {
     let instance = ReactTestUtils.renderIntoDocument(
-      <Jumbotron fluid>Content</Jumbotron>
+      <Jumbotron fluid>Content</Jumbotron>,
     );
     assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\bjumbotron-fluid\b/)
+      ReactDOM.findDOMNode(instance).className.match(/\bjumbotron-fluid\b/),
     );
   });
 
@@ -38,7 +38,7 @@ describe('<Jumbotron>', () => {
     let instance = ReactTestUtils.renderIntoDocument(
       <Jumbotron as="section">
         <strong>Content</strong>
-      </Jumbotron>
+      </Jumbotron>,
     );
     assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');
   });

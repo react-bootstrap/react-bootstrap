@@ -27,7 +27,7 @@ class CustomMenu extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      value: ''
+      value: '',
     };
   }
 
@@ -40,7 +40,7 @@ class CustomMenu extends React.Component {
       children,
       style,
       className,
-      'aria-labelledby': labeledBy
+      'aria-labelledby': labeledBy,
     } = this.props;
 
     const { value } = this.state;
@@ -62,7 +62,8 @@ class CustomMenu extends React.Component {
         />
         <ul className="list-unstyled">
           {React.Children.toArray(children).filter(
-            child => !value.trim() || child.props.children.indexOf(value) !== -1
+            child =>
+              !value.trim() || child.props.children.indexOf(value) !== -1,
           )}
         </ul>
       </div>
@@ -82,5 +83,5 @@ render(
       </Dropdown.Item>
       <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
     </Dropdown.Menu>
-  </Dropdown>
+  </Dropdown>,
 );

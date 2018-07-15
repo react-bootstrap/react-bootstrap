@@ -5,16 +5,17 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
   actions,
   plugins,
   loaders,
-  getConfig
+  getConfig,
 }) {
   actions.setWebpackConfig({
+    devtool: 'cheap-inline-module-source-map',
     module: {
       rules: [
         {
           include: path.resolve(__dirname, 'src/examples'),
-          use: loaders.raw()
-        }
-      ]
+          use: loaders.raw(),
+        },
+      ],
     },
     resolve: {
       modules: [path.resolve(__dirname, '../node_modules')],
@@ -22,13 +23,13 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
         react: path.resolve(__dirname, '../node_modules/react'),
         'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
         'react-bootstrap$': path.resolve(__dirname, '../src/index.js'),
-        'react-bootstrap/lib': path.resolve(__dirname, '../src')
-      }
+        'react-bootstrap/lib': path.resolve(__dirname, '../src'),
+      },
     },
     plugins: [
       // See https://github.com/FormidableLabs/react-live/issues/5
-      plugins.ignore(/^(xor|props)$/)
-    ]
+      plugins.ignore(/^(xor|props)$/),
+    ],
   });
 
   const current = getConfig();
@@ -37,6 +38,6 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
 
 exports.onCreateBabelConfig = ({ actions }) => {
   actions.setBabelPreset({
-    name: `@babel/preset-flow`
+    name: `@babel/preset-flow`,
   });
 };
