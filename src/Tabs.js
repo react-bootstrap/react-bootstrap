@@ -82,7 +82,12 @@ class Tabs extends React.Component {
     }
 
     return (
-      <NavItem eventKey={eventKey} disabled={disabled} className={tabClassName}>
+      <NavItem
+        eventKey={eventKey}
+        disabled={disabled}
+        className={tabClassName}
+        tabIndex={0}
+      >
         {title}
       </NavItem>
     );
