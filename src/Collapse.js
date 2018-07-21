@@ -10,18 +10,13 @@ import Transition, {
   EXITING,
 } from 'react-transition-group/Transition';
 
+import triggerBrowserReflow from './utils/triggerBrowserReflow';
 import createChainedFunction from './utils/createChainedFunction';
 
 const MARGINS = {
   height: ['marginTop', 'marginBottom'],
   width: ['marginLeft', 'marginRight'],
 };
-
-// reading a dimension prop will cause the browser to recalculate,
-// which will let our animations work
-function triggerBrowserReflow(node) {
-  node.offsetHeight; // eslint-disable-line no-unused-expressions
-}
 
 function getDimensionValue(dimension, elem) {
   let offset = `offset${dimension[0].toUpperCase()}${dimension.slice(1)}`;

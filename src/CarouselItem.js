@@ -1,12 +1,23 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
 import transition from 'dom-helpers/transition';
+import Transition from 'react-transition-group/Transition';
+
+import triggerBrowserReflow from './utils/triggerBrowserReflow';
+import { createBootstrapComponent } from './ThemeProvider';
+
+const isTransitioning = s => s === 'exiting' || s === 'entering';
+const isActive = s => s === 'entered' || s === 'exiting';
 
 const propTypes = {
+  /**
+   * @default 'carousel-item'
+   */
+  bsPrefix: PropTypes.string,
   direction: PropTypes.oneOf(['prev', 'next']),
-  onAnimateOutEnd: PropTypes.func,
+  onSlideStart: PropTypes.func,
+  onSlideEnd: PropTypes.func,
   active: PropTypes.bool,
   animateIn: PropTypes.bool,
   animateOut: PropTypes.bool,
@@ -20,67 +31,24 @@ const defaultProps = {
 };
 
 class CarouselItem extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.handleAnimateOutEnd = this.handleAnimateOutEnd.bind(this);
-
-    this.state = {
-      direction: null,
-    };
-
-    this.isUnmounted = false;
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.active !== nextProps.active) {
-      this.setState({ direction: null });
+  handleExit = () => {
+    if (this.props.onSlideStart) {
+      this.props.onSlideStart();
     }
-  }
+  };
 
-  componentDidUpdate(prevProps) {
-    const { active } = this.props;
-    const prevActive = prevProps.active;
-
-    if (!active && prevActive) {
-      transition.end(ReactDOM.findDOMNode(this), this.handleAnimateOutEnd);
+  handleExiting = () => {
+    if (this.props.onSlideEnd) {
+      this.props.onSlideEnd();
     }
-
-    if (active !== prevActive) {
-      setTimeout(() => this.startAnimation(), 20);
-    }
-  }
-
-  componentWillUnmount() {
-    this.isUnmounted = true;
-  }
-
-  handleAnimateOutEnd() {
-    if (this.isUnmounted) {
-      return;
-    }
-
-    if (this.props.onAnimateOutEnd) {
-      this.props.onAnimateOutEnd(this.props.index);
-    }
-  }
-
-  startAnimation() {
-    if (this.isUnmounted) {
-      return;
-    }
-
-    this.setState({
-      direction: this.props.direction === 'prev' ? 'right' : 'left',
-    });
-  }
+  };
 
   render() {
     const {
+      bsPrefix,
       direction,
       active,
-      animateIn,
-      animateOut,
+      children,
       className,
       ...props
     } = this.props;
@@ -88,22 +56,44 @@ class CarouselItem extends React.Component {
     delete props.onAnimateOutEnd;
     delete props.index;
 
-    const classes = {
-      item: true,
-      active: (active && !animateIn) || animateOut,
-    };
-    if (direction && active && animateIn) {
-      classes[direction] = true;
-    }
-    if (this.state.direction && (animateIn || animateOut)) {
-      classes[this.state.direction] = true;
+    let orderClassName, directionalClassName;
+
+    if (direction === 'next') {
+      orderClassName = `${bsPrefix}-next`;
+      directionalClassName = `${bsPrefix}-left`;
+    } else if (direction === 'prev') {
+      orderClassName = `${bsPrefix}-prev`;
+      directionalClassName = `${bsPrefix}-right`;
     }
 
-    return <div {...props} className={classNames(className, classes)} />;
+    return (
+      <Transition
+        in={active}
+        addEndListener={(node, done) => transition.end(node, done)}
+        onExit={this.handleExit}
+        onExited={this.handleExiting}
+        onEnter={triggerBrowserReflow}
+      >
+        {state => (
+          <div
+            className={classNames(
+              className,
+              bsPrefix,
+              isActive(state) && 'active',
+              isTransitioning(state) && directionalClassName,
+              ((state === 'exited' && active) || state === 'entering') &&
+                orderClassName,
+            )}
+          >
+            {children}
+          </div>
+        )}
+      </Transition>
+    );
   }
 }
 
 CarouselItem.propTypes = propTypes;
 CarouselItem.defaultProps = defaultProps;
 
-export default CarouselItem;
+export default createBootstrapComponent(CarouselItem, 'carousel-item');

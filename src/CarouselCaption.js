@@ -1,10 +1,14 @@
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
 import elementType from 'prop-types-extra/lib/elementType';
-
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
+import { createBootstrapComponent } from './ThemeProvider';
 
 const propTypes = {
+  /**
+   * @default 'carousel-caption'
+   */
+  bsPrefix: PropTypes.string,
   as: elementType,
 };
 
@@ -14,18 +18,13 @@ const defaultProps = {
 
 class CarouselCaption extends React.Component {
   render() {
-    const { as: Component, className, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
+    const { as: Component, className, bsPrefix, ...props } = this.props;
 
-    const classes = getClassSet(bsProps);
-
-    return (
-      <Component {...elementProps} className={classNames(className, classes)} />
-    );
+    return <Component {...props} className={classNames(className, bsPrefix)} />;
   }
 }
 
 CarouselCaption.propTypes = propTypes;
 CarouselCaption.defaultProps = defaultProps;
 
-export default bsClass('carousel-caption', CarouselCaption);
+export default createBootstrapComponent(CarouselCaption, 'carousel-caption');
