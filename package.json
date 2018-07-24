@@ -1,7 +1,7 @@
 {
   "name": "react-bootstrap",
   "version": "0.32.1-docs.0",
-  "description": "Bootstrap 3 components built with React",
+  "description": "Bootstrap 4 components built with React",
   "repository": {
     "type": "git",
     "url": "react-bootstrap/react-bootstrap"
@@ -13,6 +13,7 @@
   "module": "es/index.js",
   "scripts": {
     "bootstrap": "yarn && yarn --cwd www",
+    "docs": "yarn --cwd www develop",
     "build": "node tools/build.js",
     "build-docs": "yarn --cwd www run build",
     "start": "yarn --cwd www run develop",

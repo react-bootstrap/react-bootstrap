@@ -1,6 +1,6 @@
 # React-Bootstrap [![Travis][build-badge]][build] [![npm][npm-badge]][npm]
 
-[Bootstrap 3][bootstrap] components built with [React][react].
+[Bootstrap 4][bootstrap] components built with [React][react].
 
 [![Codecov][codecov-badge]][codecov]
 [![Discord][discord-badge]][discord]
@@ -22,12 +22,13 @@ See the [documentation][documentation] with live editable examples.
 
 Yarn is the our package manager of choice here. Check out setup
 instructions [here](https://yarnpkg.com/en/docs/install) if you don't have it installed already.
+
 After that you can run `yarn run bootstrap` to install all the needed dependencies.
 
 From there you can:
 
 - Run the tests once with `yarn test` (Or run them in watch mode with `yarn run tdd`).
-- Start a local copy of the docs site with `yarn start`
+- Start a local copy of the docs site with `yarn docs`
 - Or build a local copy of the library with `yarn run build`
 
 ## Contributions
