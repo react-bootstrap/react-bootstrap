@@ -49,13 +49,13 @@ describe('<DropdownToggle>', () => {
     mount(<DropdownToggle id={id} />).assertSingle(`button#${id}`);
   });
 
-  it('does not forward bsClass', () => {
+  it('does not forward bsPrefix', () => {
     mount(
       <DropdownToggle
-        bsPrefix="my-custom-bsClass"
+        bsPrefix="my-custom-bsPrefix"
         open={false}
         title="bsClass"
       />,
-    ).assertSingle('.my-custom-bsClass.btn');
+    ).assertSingle('.my-custom-bsPrefix.btn');
   });
 });

@@ -6,6 +6,13 @@ import NavItem from './NavItem';
 import NavLink from './NavLink';
 
 const propTypes = {
+  /**
+   * An html id attribute for the Toggle button, necessary for assistive technologies, such as screen readers.
+   * @type {string|number}
+   * @required
+   */
+  id: PropTypes.any,
+
   /** An `onClick` handler passed to the Toggle component */
   onClick: PropTypes.func,
 
@@ -35,6 +42,7 @@ const propTypes = {
 class NavDropdown extends React.Component {
   render() {
     const {
+      id,
       title,
       children,
       bsPrefix,
@@ -48,6 +56,7 @@ class NavDropdown extends React.Component {
     return (
       <Dropdown {...props} as={NavItem}>
         <Dropdown.Toggle
+          id={id}
           eventKey={null}
           active={active}
           disabled={disabled}
