@@ -6,7 +6,9 @@ import Dropdown from '../src/Dropdown';
 
 describe('<Dropdown>', () => {
   const dropdownChildren = [
-    <Dropdown.Toggle key="toggle">Child Title</Dropdown.Toggle>,
+    <Dropdown.Toggle id="test-id" key="toggle">
+      Child Title
+    </Dropdown.Toggle>,
     <Dropdown.Menu key="menu">
       <Dropdown.Item>Item 1</Dropdown.Item>
       <Dropdown.Item>Item 2</Dropdown.Item>
@@ -15,7 +17,7 @@ describe('<Dropdown>', () => {
     </Dropdown.Menu>,
   ];
 
-  const simpleDropdown = <Dropdown id="test-id">{dropdownChildren}</Dropdown>;
+  const simpleDropdown = <Dropdown>{dropdownChildren}</Dropdown>;
 
   it('renders div with dropdown class', () => {
     mount(simpleDropdown).assertSingle('div.dropdown');
@@ -25,7 +27,7 @@ describe('<Dropdown>', () => {
     mount(simpleDropdown).assertSingle('div.dropdown');
 
     const node = mount(
-      <Dropdown title="Dropup" drop="up" id="test-id">
+      <Dropdown title="Dropup" drop="up">
         {dropdownChildren}
       </Dropdown>,
     ).getDOMNode();
@@ -49,11 +51,9 @@ describe('<Dropdown>', () => {
   });
 
   it('forwards alignRight to menu', () => {
-    mount(
-      <Dropdown alignRight id="test-id">
-        {dropdownChildren}
-      </Dropdown>,
-    ).assertSingle('DropdownMenu[alignRight=true]');
+    mount(<Dropdown alignRight>{dropdownChildren}</Dropdown>).assertSingle(
+      'DropdownMenu[alignRight=true]',
+    );
   });
 
   // NOTE: The onClick event handler is invoked for both the Enter and Space
@@ -156,9 +156,7 @@ describe('<Dropdown>', () => {
     it('passes open, event, and source correctly when opened with click', () => {
       const spy = sinon.spy();
       const wrapper = mount(
-        <Dropdown id="test-id" onToggle={spy}>
-          {dropdownChildren}
-        </Dropdown>,
+        <Dropdown onToggle={spy}>{dropdownChildren}</Dropdown>,
       );
 
       expect(spy).to.not.have.been.called;
@@ -175,9 +173,7 @@ describe('<Dropdown>', () => {
     it('passes open, event, and source correctly when closed with click', () => {
       const spy = sinon.spy();
       const wrapper = mount(
-        <Dropdown id="test-id" onToggle={spy}>
-          {dropdownChildren}
-        </Dropdown>,
+        <Dropdown onToggle={spy}>{dropdownChildren}</Dropdown>,
       );
 
       expect(spy).to.not.have.been.called;
@@ -196,8 +192,8 @@ describe('<Dropdown>', () => {
     it('passes open, event, and source correctly when child selected', () => {
       const spy = sinon.spy();
       const wrapper = mount(
-        <Dropdown id="test-id" onToggle={spy}>
-          <Dropdown.Toggle>Child Title</Dropdown.Toggle>
+        <Dropdown onToggle={spy}>
+          <Dropdown.Toggle id="test-id">Child Title</Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item eventKey={1}>Item 1</Dropdown.Item>
           </Dropdown.Menu>
@@ -224,9 +220,7 @@ describe('<Dropdown>', () => {
     it('passes open, event, and source correctly when opened with keydown', () => {
       const spy = sinon.spy();
       const wrapper = mount(
-        <Dropdown id="test-id" onToggle={spy}>
-          {dropdownChildren}
-        </Dropdown>,
+        <Dropdown onToggle={spy}>{dropdownChildren}</Dropdown>,
       );
 
       wrapper.find('button').simulate('keyDown', { key: 'ArrowDown' });
@@ -241,8 +235,10 @@ describe('<Dropdown>', () => {
 
   it('should use each components bsPrefix', () => {
     const wrapper = mount(
-      <Dropdown bsPrefix="my-dropdown" id="test-id">
-        <Dropdown.Toggle bsPrefix="my-toggle">Child Title</Dropdown.Toggle>
+      <Dropdown bsPrefix="my-dropdown">
+        <Dropdown.Toggle id="test-id" bsPrefix="my-toggle">
+          Child Title
+        </Dropdown.Toggle>
         <Dropdown.Menu bsPrefix="my-menu">
           <Dropdown.Item>Item 1</Dropdown.Item>
         </Dropdown.Menu>

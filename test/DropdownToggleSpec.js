@@ -4,7 +4,9 @@ import { mount } from 'enzyme';
 import DropdownToggle from '../src/DropdownToggle';
 
 describe('<DropdownToggle>', () => {
-  const simpleToggle = <DropdownToggle>herpa derpa</DropdownToggle>;
+  const simpleToggle = (
+    <DropdownToggle id="test-id">herpa derpa</DropdownToggle>
+  );
 
   it('renders toggle button', () => {
     mount(simpleToggle)
@@ -21,7 +23,7 @@ describe('<DropdownToggle>', () => {
 
   it('renders children', () => {
     mount(
-      <DropdownToggle>
+      <DropdownToggle id="test-id">
         <h3>herpa derpa</h3>
       </DropdownToggle>,
     )
@@ -38,6 +40,7 @@ describe('<DropdownToggle>', () => {
     mount(
       <DropdownToggle
         open={false}
+        id="test-id"
         title="click forwards"
         onClick={handleClick}
       />,
@@ -55,6 +58,7 @@ describe('<DropdownToggle>', () => {
         bsPrefix="my-custom-bsPrefix"
         open={false}
         title="bsClass"
+        id="test-id"
       />,
     ).assertSingle('.my-custom-bsPrefix.btn');
   });
