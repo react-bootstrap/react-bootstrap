@@ -58,6 +58,7 @@ const propTypes = {
    * @controllable show
    */
   onToggle: PropTypes.func,
+
   /**
    * A callback fired when a menu item is selected.
    *
@@ -94,7 +95,7 @@ class Dropdown extends React.Component {
   handleToggle = (show, event, source = event.type) => {
     if (event.currentTarget === document) source = 'rootClose';
 
-    if (this.props.onToggle) this.props.onToggle(show, event, { source });
+    this.props.onToggle(show, event, { source });
   };
 
   render() {
@@ -115,7 +116,7 @@ class Dropdown extends React.Component {
 
     return (
       <SelectableContext.Provider value={this.handleSelect}>
-        <BaseDropdown
+        <BaseDropdown.ControlledComponent
           drop={drop}
           show={show}
           alignEnd={alignRight}
@@ -136,7 +137,7 @@ class Dropdown extends React.Component {
               )}
             />
           )}
-        </BaseDropdown>
+        </BaseDropdown.ControlledComponent>
       </SelectableContext.Provider>
     );
   }
@@ -145,7 +146,10 @@ class Dropdown extends React.Component {
 Dropdown.propTypes = propTypes;
 Dropdown.defaultProps = defaultProps;
 
-const UncontrolledDropdown = createBootstrapComponent(Dropdown, 'dropdown');
+const UncontrolledDropdown = createBootstrapComponent(
+  BaseDropdown.deferControlTo(Dropdown),
+  'dropdown',
+);
 
 const DecoratedDropdown = mapContextToProps(
   SelectableContext,
