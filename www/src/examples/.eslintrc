@@ -71,6 +71,7 @@
 
     "mountNode": false,
     "yup": false,
-    "formik": false
+    "formik": false,
+    "PlaceholderImage": false
   }
 }

@@ -22,6 +22,9 @@ const propTypes = {
   animateIn: PropTypes.bool,
   animateOut: PropTypes.bool,
   index: PropTypes.number,
+
+  /** @private */
+  slide: PropTypes.bool.isRequired,
 };
 
 const defaultProps = {
@@ -50,11 +53,20 @@ class CarouselItem extends React.Component {
       active,
       children,
       className,
+      slide,
       ...props
     } = this.props;
 
-    delete props.onAnimateOutEnd;
-    delete props.index;
+    delete props.onSlideEnd;
+    delete props.onSlideStart;
+
+    if (!slide) {
+      return (
+        <div className={classNames(className, bsPrefix, active && 'active')}>
+          {children}
+        </div>
+      );
+    }
 
     let orderClassName, directionalClassName;
 
@@ -69,10 +81,10 @@ class CarouselItem extends React.Component {
     return (
       <Transition
         in={active}
-        addEndListener={(node, done) => transition.end(node, done)}
         onExit={this.handleExit}
         onExited={this.handleExiting}
         onEnter={triggerBrowserReflow}
+        addEndListener={(node, done) => transition.end(node, done)}
       >
         {state => (
           <div

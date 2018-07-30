@@ -7,6 +7,7 @@ import * as formik from 'formik';
 import yup from 'yup';
 
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
+import PlaceholderImage from './PlaceholderImage';
 
 import Sonnet from './Sonnet';
 
@@ -20,6 +21,7 @@ const scope = {
   Sonnet,
   formik,
   yup,
+  PlaceholderImage,
   bootstrapUtils: ReactBootstrap.utils.bootstrapUtils,
 };
 

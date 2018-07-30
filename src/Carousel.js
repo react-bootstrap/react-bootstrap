@@ -20,6 +20,9 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   slide: PropTypes.bool,
+
+  /** Cross fade slides instead of the default slide animation */
+  fade: PropTypes.bool,
   indicators: PropTypes.bool,
   /**
    * The amount of time to delay between automatically cycling an item.
@@ -29,6 +32,8 @@ const propTypes = {
   controls: PropTypes.bool,
   pauseOnHover: PropTypes.bool,
   wrap: PropTypes.bool,
+  keyboard: PropTypes.bool,
+
   /**
    * Callback fired when the active item changes.
    *
@@ -65,7 +70,9 @@ const propTypes = {
 
 const defaultProps = {
   slide: true,
+  fade: false,
   interval: 5000,
+  keyboard: true,
   pauseOnHover: true,
   wrap: true,
   indicators: true,
@@ -143,6 +150,7 @@ class Carousel extends React.Component {
     const pendingIndex = this._pendingIndex;
     this._isSliding = false;
     this._pendingIndex = null;
+
     if (pendingIndex != null) this.to(pendingIndex);
     else this.cycle();
   };
@@ -153,6 +161,23 @@ class Carousel extends React.Component {
 
   handleMouseOver = () => {
     if (this.props.pauseOnHover) this.pause();
+  };
+
+  handleKeyDown = event => {
+    if (/input|textarea/i.test(event.target.tagName)) return;
+
+    switch (event.key) {
+      case 'ArrowLeft':
+        event.preventDefault();
+        this.handlePrev(event);
+        break;
+      case 'ArrowRight':
+        event.preventDefault();
+        this.handleNext(event);
+        break;
+      default:
+        break;
+    }
   };
 
   handleNextWhenVisible = () => {
@@ -182,7 +207,7 @@ class Carousel extends React.Component {
     this.select(index, e, 'next');
   };
 
-  handlePrev(e) {
+  handlePrev = e => {
     if (this._isSliding) return;
 
     const { wrap, activeIndex } = this.props;
@@ -196,7 +221,7 @@ class Carousel extends React.Component {
     }
 
     this.select(index, e, 'prev');
-  }
+  };
 
   // This might be a public API.
   pause() {
@@ -234,17 +259,22 @@ class Carousel extends React.Component {
   }
 
   select(index, event, direction) {
-    clearTimeout(this.timeout);
+    clearTimeout(this.selectThrottle);
+    event.persist();
+    // The timeout throttles fast clicks, in order to give any pending state
+    // a chance to update and propagate back through props
+    this.selectThrottle = setTimeout(() => {
+      clearTimeout(this.timeout);
 
-    const { slide, activeIndex, onSelect } = this.props;
+      const { activeIndex, onSelect } = this.props;
+      if (index === activeIndex) return;
 
-    const previousActiveIndex = slide ? activeIndex : null;
-
-    onSelect(
-      index,
-      direction || previousActiveIndex > activeIndex ? 'prev' : 'next',
-      event,
-    );
+      onSelect(
+        index,
+        direction || (index < activeIndex ? 'prev' : 'next'),
+        event,
+      );
+    }, 50);
   }
 
   renderControls(properties) {
@@ -311,6 +341,8 @@ class Carousel extends React.Component {
     const {
       bsPrefix,
       slide,
+      fade,
+      keyboard,
       activeIndex: _,
       indicators,
       controls,
@@ -336,10 +368,17 @@ class Carousel extends React.Component {
     ]);
 
     return (
+      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div
         {...elementProps}
         ref={this.carousel}
-        className={classNames(className, bsPrefix, { slide })}
+        className={classNames(
+          className,
+          bsPrefix,
+          slide && 'slide',
+          fade && `${bsPrefix}-fade`,
+        )}
+        onKeyDown={keyboard ? this.handleKeyDown : undefined}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
       >
@@ -348,14 +387,15 @@ class Carousel extends React.Component {
         <div className={`${bsPrefix}-inner`}>
           {ValidComponentChildren.map(children, (child, index) => {
             const active = index === activeIndex;
-            const previousActive = slide && index === previousActiveIndex;
 
             return cloneElement(child, {
+              slide,
               active,
-              index,
               direction,
-              onSlideStart: previousActive ? this.handleSlideStart : null,
-              onSlideEnd: previousActive ? this.handleSlideEnd : null,
+              onSlideStart:
+                index === previousActiveIndex ? this.handleSlideStart : null,
+              onSlideEnd:
+                index === previousActiveIndex ? this.handleSlideEnd : null,
             });
           })}
         </div>
