@@ -8,7 +8,12 @@ import NavDropdown from '../src/NavDropdown';
 describe('<NavDropdown>', () => {
   it('Should render li when in nav', () => {
     const wrapper = mount(
-      <NavDropdown title="Title" className="test-class" id="nav-test">
+      <NavDropdown
+        defaultShow
+        title="Title"
+        className="test-class"
+        id="nav-test"
+      >
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
         <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
       </NavDropdown>,
@@ -24,7 +29,7 @@ describe('<NavDropdown>', () => {
 
   it('renders active toggle', () => {
     mount(
-      <NavDropdown active title="Title" id="nav-test">
+      <NavDropdown defaultShow active title="Title" id="nav-test">
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
         <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
       </NavDropdown>,
@@ -34,7 +39,7 @@ describe('<NavDropdown>', () => {
   it('should handle child active state', () => {
     const wrapper = mount(
       <Nav defaultActiveKey="2">
-        <NavDropdown id="test-id" title="title">
+        <NavDropdown defaultShow id="test-id" title="title">
           <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
           <DropdownItem eventKey="2">DropdownItem 2 content</DropdownItem>
           <DropdownItem eventKey="3">DropdownItem 3 content</DropdownItem>

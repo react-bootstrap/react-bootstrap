@@ -1,17 +1,17 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import FormText from '../src/FormText';
 
 describe('<FormText>', () => {
   it('should render correctly', () => {
     expect(
-      shallow(
-        <FormText id="foo" className="my-help-block">
+      mount(
+        <FormText id="foo" className="my-form-text">
           Help contents
         </FormText>,
       )
-        .assertSingle('#foo.help-block.my-help-block')
+        .assertSingle('#foo.form-text.my-form-text')
         .text(),
     ).to.equal('Help contents');
   });

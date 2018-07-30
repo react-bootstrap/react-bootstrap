@@ -133,22 +133,22 @@ const defaultProps = {
 };
 
 class Navbar extends React.Component {
-  static getDerivedStateFromProps({ bsPrefix, expanded }, prevState) {
-    return {
-      navbarContext: {
-        ...prevState.navbarContext,
-        bsPrefix,
-        expanded,
-      },
-    };
-  }
-
   constructor(...args) {
     super(...args);
 
     this.state = {
       navbarContext: {
         onToggle: this.handleToggle,
+      },
+    };
+  }
+
+  static getDerivedStateFromProps({ bsPrefix, expanded }, prevState) {
+    return {
+      navbarContext: {
+        ...prevState.navbarContext,
+        bsPrefix,
+        expanded,
       },
     };
   }

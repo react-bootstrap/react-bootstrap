@@ -6,7 +6,7 @@ import DropdownItem from '../src/DropdownItem';
 
 describe('<Dropdown.Menu>', () => {
   const simpleMenu = (
-    <DropdownMenu>
+    <DropdownMenu show>
       <DropdownItem eventKey="1">Item 1</DropdownItem>
       <DropdownItem eventKey="2">Item 2</DropdownItem>
       <DropdownItem eventKey="3">Item 3</DropdownItem>
@@ -20,7 +20,7 @@ describe('<Dropdown.Menu>', () => {
 
   it('Should pass props to dropdown', () => {
     mount(
-      <DropdownMenu className="new-fancy-class">
+      <DropdownMenu show className="new-fancy-class">
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
       </DropdownMenu>,
     ).assertSingle('div.new-fancy-class');
@@ -28,7 +28,7 @@ describe('<Dropdown.Menu>', () => {
 
   it('applies alignRight', () => {
     mount(
-      <DropdownMenu alignRight>
+      <DropdownMenu show alignRight>
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
     ).assertSingle('.dropdown-menu-right');

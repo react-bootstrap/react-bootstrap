@@ -79,20 +79,6 @@ class TabContainer extends React.Component {
     activeKey: PropTypes.any,
   };
 
-  static getDerivedStateFromProps(
-    { activeKey, mountOnEnter, unmountOnExit, transition },
-    prevState,
-  ) {
-    return {
-      tabContext: {
-        ...prevState.tabContext,
-        activeKey,
-        mountOnEnter,
-        unmountOnExit,
-        transition,
-      },
-    };
-  }
   constructor(...args) {
     super(...args);
 
@@ -105,6 +91,21 @@ class TabContainer extends React.Component {
         unmountOnExit: this.props.unmountOnExit,
         getControlledId: this.getControlledId,
         getControllerId: this.getControllerId,
+      },
+    };
+  }
+
+  static getDerivedStateFromProps(
+    { activeKey, mountOnEnter, unmountOnExit, transition },
+    prevState,
+  ) {
+    return {
+      tabContext: {
+        ...prevState.tabContext,
+        activeKey,
+        mountOnEnter,
+        unmountOnExit,
+        transition,
       },
     };
   }

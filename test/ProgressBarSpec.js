@@ -1,107 +1,70 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactTestUtils from 'react-dom/test-utils';
+import { mount } from 'enzyme';
 
 import ProgressBar from '../src/ProgressBar';
-
-import { getOne, shouldWarn } from './helpers';
-
-function getProgressBarNode(wrapper) {
-  return ReactTestUtils.findRenderedDOMComponentWithClass(
-    wrapper,
-    'progress-bar',
-  );
-}
+import { shouldWarn } from './helpers';
 
 describe('<ProgressBar>', () => {
   it('Should output a progress bar with wrapper', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} />,
-    );
-
-    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
-    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bprogress\b/));
-    assert.ok(getProgressBarNode(instance).className.match(/\bprogress-bar\b/));
-    assert.equal(
-      getProgressBarNode(instance).getAttribute('role'),
-      'progressbar',
+    mount(<ProgressBar min={0} max={10} now={0} />).assertSingle(
+      'div.progress .progress-bar[role="progressbar"]',
     );
   });
 
-  it('Should have the default class', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} />,
-    );
-
-    assert.ok(getProgressBarNode(instance).className.match(/\bprogress-bar\b/));
-  });
-
-  it('Should have the success class', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} variant="success" />,
-    );
-
-    assert.ok(getProgressBarNode(instance).className.match(/\bbg-success\b/));
-  });
-
-  it('Should have the warning class', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} variant="warning" />,
-    );
-
-    assert.ok(getProgressBarNode(instance).className.match(/\bbg-warning\b/));
+  ['success', 'warning', 'info', 'danger'].forEach(variant => {
+    it(`Should have the variant="${variant}" class`, () => {
+      mount(
+        <ProgressBar min={0} max={10} now={0} variant={variant} />,
+      ).assertSingle(`.progress-bar.bg-${variant}`);
+    });
   });
 
   it('Should default to min:0, max:100', () => {
-    const instance = ReactTestUtils.renderIntoDocument(<ProgressBar now={5} />);
-    const bar = getProgressBarNode(instance);
-
-    assert.equal(bar.getAttribute('aria-valuemin'), '0');
-    assert.equal(bar.getAttribute('aria-valuemax'), '100');
+    mount(<ProgressBar now={5} />).assertSingle(
+      '.progress-bar[aria-valuemin=0][aria-valuemax=100]',
+    );
   });
 
   it('Should have 0% computed width', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={0} />,
-    );
+    const node = mount(<ProgressBar min={0} max={10} now={0} />)
+      .find('.progress-bar')
+      .getDOMNode();
 
-    assert.equal(getProgressBarNode(instance).style.width, '0%');
+    assert.equal(node.style.width, '0%');
   });
 
   it('Should have 10% computed width', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={1} />,
-    );
+    const node = mount(<ProgressBar min={0} max={10} now={1} />)
+      .find('.progress-bar')
+      .getDOMNode();
 
-    assert.equal(getProgressBarNode(instance).style.width, '10%');
+    assert.equal(node.style.width, '10%');
   });
 
   it('Should have 100% computed width', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={10} />,
-    );
+    const node = mount(<ProgressBar min={0} max={10} now={10} />)
+      .find('.progress-bar')
+      .getDOMNode();
 
-    assert.equal(getProgressBarNode(instance).style.width, '100%');
+    assert.equal(node.style.width, '100%');
   });
 
   it('Should have 50% computed width with non-zero min', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={1} max={11} now={6} />,
-    );
+    const node = mount(<ProgressBar min={1} max={11} now={6} />)
+      .find('.progress-bar')
+      .getDOMNode();
 
-    assert.equal(getProgressBarNode(instance).style.width, '50%');
+    assert.equal(node.style.width, '50%');
   });
 
   it('Should not have label', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={0} max={10} now={5} />,
-    );
+    const node = mount(<ProgressBar min={0} max={10} now={5} />).getDOMNode();
 
-    assert.equal(ReactDOM.findDOMNode(instance).textContent, '');
+    assert.equal(node.textContent, '');
   });
 
   it('Should have label', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
+    const node = mount(
       <ProgressBar
         min={0}
         max={10}
@@ -109,16 +72,13 @@ describe('<ProgressBar>', () => {
         variant="success"
         label="progress bar label"
       />,
-    );
+    ).getDOMNode();
 
-    assert.equal(
-      ReactDOM.findDOMNode(instance).textContent,
-      'progress bar label',
-    );
+    assert.equal(node.textContent, 'progress bar label');
   });
 
   it('Should have screen reader only label', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
+    const node = mount(
       <ProgressBar
         min={0}
         max={10}
@@ -127,99 +87,69 @@ describe('<ProgressBar>', () => {
         variant="success"
         label="progress bar label"
       />,
-    );
-    const srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(
-      instance,
-      'sr-only',
-    );
+    )
+      .find('.sr-only')
+      .getDOMNode();
 
-    assert.equal(srLabel.textContent, 'progress bar label');
+    assert.equal(node.textContent, 'progress bar label');
   });
 
   it('Should have a label that is a React component', () => {
     const customLabel = <strong className="special-label">My label</strong>;
 
-    const instance = ReactTestUtils.renderIntoDocument(
+    mount(
       <ProgressBar min={0} max={10} now={5} label={customLabel} />,
-    );
-
-    assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithClass(
-        instance,
-        'special-label',
-      ),
-    );
+    ).assertSingle('.special-label');
   });
 
   it('Should have screen reader only label that wraps a React component', () => {
     const customLabel = <strong className="special-label">My label</strong>;
 
-    const instance = ReactTestUtils.renderIntoDocument(
+    mount(
       <ProgressBar min={0} max={10} now={5} label={customLabel} srOnly />,
-    );
-
-    const srLabel = ReactTestUtils.findRenderedDOMComponentWithClass(
-      instance,
-      'sr-only',
-    );
-    const component = getOne(srLabel.getElementsByClassName('special-label'));
-
-    assert.ok(component);
+    ).find('.sr-only .special-label');
   });
 
   it('Should show striped bar', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={1} max={11} now={6} striped />,
-    );
-
-    assert.ok(
-      ReactDOM.findDOMNode(instance).firstChild.className.match(
-        /\bprogress-bar-striped\b/,
-      ),
+    mount(<ProgressBar min={1} max={11} now={6} striped />).assertSingle(
+      '.progress-bar-striped',
     );
   });
 
   it('Should show animated striped bar', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <ProgressBar min={1} max={11} now={6} animated />,
+    mount(<ProgressBar min={1} max={11} now={6} animated />).assertSingle(
+      '.progress-bar-striped.progress-bar-animated',
     );
-
-    const barClassName = ReactDOM.findDOMNode(instance).firstChild.className;
-
-    assert.ok(barClassName.match(/\bprogress-bar-striped\b/));
-    assert.ok(barClassName.match(/\bprogress-bar-animated\b/));
   });
 
   it('Should show stacked bars', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
+    const node = mount(
       <ProgressBar>
         <ProgressBar key={1} now={50} />
         <ProgressBar key={2} now={30} />
       </ProgressBar>,
-    );
-    const wrapper = ReactDOM.findDOMNode(instance);
-    const bar1 = wrapper.firstChild;
-    const bar2 = wrapper.lastChild;
+    ).getDOMNode();
 
-    assert.ok(wrapper.className.match(/\bprogress\b/));
+    const bar1 = node.firstChild;
+    const bar2 = node.lastChild;
+
     assert.ok(bar1.className.match(/\bprogress-bar\b/));
     assert.equal(bar1.style.width, '50%');
+
     assert.ok(bar2.className.match(/\bprogress-bar\b/));
     assert.equal(bar2.style.width, '30%');
   });
 
   it('Should render animated and striped children in stacked bar too', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
+    const node = mount(
       <ProgressBar>
         <ProgressBar animated key={1} now={50} />
         <ProgressBar striped key={2} now={30} />
       </ProgressBar>,
-    );
-    const wrapper = ReactDOM.findDOMNode(instance);
-    const bar1 = wrapper.firstChild;
-    const bar2 = wrapper.lastChild;
-
-    assert.ok(wrapper.className.match(/\bprogress\b/));
+    ).getDOMNode();
+    // const node = ReactDOM.findDOMNode(node);
+    const bar1 = node.firstChild;
+    const bar2 = node.lastChild;
 
     assert.ok(bar1.className.match(/\bprogress-bar\b/));
     assert.ok(bar1.className.match(/\bprogress-bar-animated\b/));
@@ -231,15 +161,15 @@ describe('<ProgressBar>', () => {
   });
 
   it('Should forward className and style to nested bars', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
+    const node = mount(
       <ProgressBar>
         <ProgressBar now={1} className="bar1" />
         <ProgressBar now={2} style={{ minWidth: 10 }} />
       </ProgressBar>,
-    );
-    const wrapper = ReactDOM.findDOMNode(instance);
-    const bar1 = wrapper.firstChild;
-    const bar2 = wrapper.lastChild;
+    ).getDOMNode();
+
+    const bar1 = node.firstChild;
+    const bar2 = node.lastChild;
 
     assert.ok(bar1.className.match(/\bbar1\b/));
     assert.equal(bar2.style.minWidth, '10px');
@@ -252,7 +182,7 @@ describe('<ProgressBar>', () => {
       return null;
     }
 
-    ReactTestUtils.renderIntoDocument(
+    mount(
       <ProgressBar>
         <ProgressBar key={1} />
         <NotProgressBar />

@@ -1,7 +1,7 @@
 import qsa from 'dom-helpers/query/querySelectorAll';
 import css from 'dom-helpers/style';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import ModalManager from 'react-overlays/lib/ModalManager';
+import ModalManager from 'react-overlays//ModalManager';
 
 const Selector = {
   FIXED_CONTENT: '.fixed-top, .fixed-bottom, .is-fixed, .sticky-top',

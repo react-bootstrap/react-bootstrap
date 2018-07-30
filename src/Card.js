@@ -53,6 +53,8 @@ class Card extends React.Component {
     body: false,
   };
 
+  state = {};
+
   static getDerivedStateFromProps({ bsPrefix }) {
     return {
       cardContext: {
@@ -60,8 +62,6 @@ class Card extends React.Component {
       },
     };
   }
-
-  state = {};
 
   render() {
     const {

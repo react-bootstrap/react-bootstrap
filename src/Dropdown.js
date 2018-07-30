@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import elementType from 'prop-types-extra/lib/elementType';
-import BaseDropdown from 'react-overlays/lib/Dropdown';
+import BaseDropdown from 'react-overlays/Dropdown';
 
 import chain from './utils/createChainedFunction';
 import { createBootstrapComponent } from './ThemeProvider';

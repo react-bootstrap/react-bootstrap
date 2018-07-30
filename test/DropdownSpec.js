@@ -52,7 +52,7 @@ describe('<Dropdown>', () => {
 
   it('forwards alignRight to menu', () => {
     mount(<Dropdown alignRight>{dropdownChildren}</Dropdown>).assertSingle(
-      'DropdownMenu[alignRight=true]',
+      'DropdownMenu[alignEnd=true]',
     );
   });
 
@@ -100,7 +100,9 @@ describe('<Dropdown>', () => {
   });
 
   it('has aria-labelledby same id as toggle button', () => {
-    const wrapper = mount(simpleDropdown);
+    const wrapper = mount(
+      React.cloneElement(simpleDropdown, { defaultShow: true }),
+    );
 
     wrapper
       .find('button')
@@ -119,12 +121,16 @@ describe('<Dropdown>', () => {
       render() {
         return (
           <Dropdown
+            defaultShow
             ref={dropdown => {
               this.dropdown = dropdown;
             }}
             id="test"
           >
-            <Dropdown.Toggle ref={toggle => (this.toggle = toggle)} />
+            <Dropdown.Toggle
+              id="test-id"
+              ref={toggle => (this.toggle = toggle)}
+            />
             <Dropdown.Menu ref={menu => (this.menu = menu)} />
           </Dropdown>
         );
@@ -134,10 +140,7 @@ describe('<Dropdown>', () => {
     let inst = mount(<RefDropdown />).instance();
 
     inst.menu.should.exist;
-    inst.dropdown.menu.should.exist;
-
     inst.toggle.should.exist;
-    inst.dropdown.toggle.should.exist;
   });
 
   describe('DOM event and source passed to onToggle', () => {
@@ -235,7 +238,7 @@ describe('<Dropdown>', () => {
 
   it('should use each components bsPrefix', () => {
     const wrapper = mount(
-      <Dropdown bsPrefix="my-dropdown">
+      <Dropdown defaultShow bsPrefix="my-dropdown">
         <Dropdown.Toggle id="test-id" bsPrefix="my-toggle">
           Child Title
         </Dropdown.Toggle>

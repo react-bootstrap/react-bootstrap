@@ -8148,9 +8148,9 @@ react-modal@^3.3.2:
     react-lifecycles-compat "^3.0.0"
     warning "^3.0.0"
 
-react-overlays@^1.0.0-beta.12:
-  version "1.0.0-beta.12"
-  resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-1.0.0-beta.12.tgz#3fa5bebdb8a3122377f58b616c28c12ca93291df"
+react-overlays@^1.0.0-beta.14:
+  version "1.0.0-beta.14"
+  resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-1.0.0-beta.14.tgz#4f70922316cbe964a1843a9c0efedc4f36f3463b"
   dependencies:
     "@react-bootstrap/react-popper" "^1.1.0"
     classnames "^2.2.6"
@@ -8158,7 +8158,6 @@ react-overlays@^1.0.0-beta.12:
     prop-types "^15.6.2"
     prop-types-extra "^1.1.0"
     react-context-toolbox "^1.1.0"
-    react-transition-group "^2.4.0"
     warning "^4.0.1"
 
 react-prop-types@^0.4.0:
