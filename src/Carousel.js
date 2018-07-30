@@ -21,37 +21,63 @@ const propTypes = {
    */
   bsPrefix: PropTypes.string,
 
+  /**
+   * Enables animation on the Carousel as it transitions between slides.
+   */
   slide: PropTypes.bool,
 
   /** Cross fade slides instead of the default slide animation */
   fade: PropTypes.bool,
+
+  /** Slides will loop to the start when the last one transitions */
+  wrap: PropTypes.bool,
+
+  /**
+   * Show a set of slide position indicators
+   */
   indicators: PropTypes.bool,
+
   /**
    * The amount of time to delay between automatically cycling an item.
    * If `null`, carousel will not automatically cycle.
    */
   interval: PropTypes.number,
+
+  /**
+   * Show the Carousel previous and next arrows for changing the current slide
+   */
   controls: PropTypes.bool,
+
+  /**
+   * Temporarily puase the slide interval when the mouse hovers over a slide.
+   */
   pauseOnHover: PropTypes.bool,
-  wrap: PropTypes.bool,
+
+  /** Enable keyboard navigation via the Arrow keys for changing slides */
   keyboard: PropTypes.bool,
 
   /**
    * Callback fired when the active item changes.
    *
    * ```js
-   * (eventKey: any, ?event: Object) => any
+   * (eventKey: any, direction: 'prev' | 'next', ?event: Object) => any
    * ```
    *
-   * If this callback takes two or more arguments, the second argument will
-   * be a persisted event object with `direction` set to the direction of the
-   * transition.
+   * @controllable activeIndex
    */
   onSelect: PropTypes.func,
+
+  /** A callback fired after a slide transitions in */
   onSlideEnd: PropTypes.func,
+
+  /**
+   * Controls the current visible slide
+   *
+   * @controllable onSelect
+   */
   activeIndex: PropTypes.number,
-  defaultActiveIndex: PropTypes.number,
-  direction: PropTypes.oneOf(['prev', 'next']),
+
+  /** Override the default button icon for the "previous" control */
   prevIcon: PropTypes.node,
 
   /**
@@ -61,7 +87,9 @@ const propTypes = {
    */
   prevLabel: PropTypes.string,
 
+  /** Override the default button icon for the "next" control */
   nextIcon: PropTypes.node,
+
   /**
    * Label shown to screen readers only, can be used to show the next element
    * in the carousel.

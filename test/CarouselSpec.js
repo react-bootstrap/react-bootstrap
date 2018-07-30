@@ -14,8 +14,8 @@ describe('<Carousel>', () => {
 
     const carouselItems = wrapper.find('CarouselItem');
 
-    assert.equal(carouselItems.at(0).props().active, false);
-    assert.equal(carouselItems.at(1).props().active, true);
+    assert.equal(carouselItems.at(0).is('.active'), false);
+    assert.equal(carouselItems.at(1).is('.active'), true);
   });
 
   it('Should show the correct item with defaultActiveIndex', () => {
@@ -23,8 +23,8 @@ describe('<Carousel>', () => {
 
     const carouselItems = wrapper.find('CarouselItem');
 
-    assert.equal(carouselItems.at(0).props().active, false);
-    assert.equal(carouselItems.at(1).props().active, true);
+    assert.equal(carouselItems.at(0).is('.active'), false);
+    assert.equal(carouselItems.at(1).is('.active'), true);
 
     wrapper.find('.carousel-indicators > li').length.should.equal(2);
   });
@@ -41,8 +41,8 @@ describe('<Carousel>', () => {
 
     const carouselItems = wrapper.find('CarouselItem');
 
-    assert.equal(carouselItems.at(0).props().active, false);
-    assert.equal(carouselItems.at(1).props().active, true);
+    assert.equal(carouselItems.at(0).is('.active'), false);
+    assert.equal(carouselItems.at(1).is('.active'), true);
 
     wrapper.find('.carousel-indicators > li').length.should.equal(2);
   });
@@ -218,8 +218,8 @@ describe('<Carousel>', () => {
 
     let carouselItems = wrapper.find('CarouselItem');
 
-    assert.equal(carouselItems.at(0).props().active, false);
-    assert.equal(carouselItems.at(1).props().active, true);
+    assert.equal(carouselItems.at(0).is('.active'), false);
+    assert.equal(carouselItems.at(1).is('.active'), true);
 
     wrapper.find('.carousel-indicators > li').length.should.equal(2);
 
