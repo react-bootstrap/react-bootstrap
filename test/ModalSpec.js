@@ -1,23 +1,13 @@
 import events from 'dom-helpers/events';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 
 import Modal from '../src/Modal';
 
-import { render } from './helpers';
-
 describe('<Modal>', () => {
-  let mountPoint;
-
-  beforeEach(() => {
-    mountPoint = document.createElement('div');
-    document.body.appendChild(mountPoint);
-  });
-
   afterEach(() => {
-    ReactDOM.unmountComponentAtNode(mountPoint);
-    document.body.removeChild(mountPoint);
+    // make sure the dangling portal elements get cleaned up
+    document.body.innerHTML = '';
   });
 
   it('Should render the modal content', () => {
@@ -41,7 +31,7 @@ describe('<Modal>', () => {
         <strong>Message</strong>
       </Modal>,
     )
-      .find('ModalDialog')
+      .find('div.modal') // the modal-dialog element is pointer-events: none;
       .simulate('click');
   });
 
@@ -79,7 +69,7 @@ describe('<Modal>', () => {
       <Modal show className="mymodal" onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-    ).assertSingle('ModalDialog.mymodal');
+    ).assertSingle('div.modal.mymodal');
   });
 
   it('Should use backdropClassName to add classes to the backdrop', () => {
@@ -98,7 +88,7 @@ describe('<Modal>', () => {
       <Modal show size="sm" onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-    ).find('.modal-sm');
+    ).find('.modal-dialog.modal-sm');
   });
 
   it('Should pass dialog style to the dialog', () => {
@@ -107,9 +97,8 @@ describe('<Modal>', () => {
       <Modal show style={{ color: 'red' }} onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-      { attachTo: mountPoint },
     )
-      .find('.modal-dialog')
+      .find('div.modal')
       .getDOMNode();
 
     assert.ok(dialog.style.color === 'red');
@@ -121,24 +110,21 @@ describe('<Modal>', () => {
       <Modal show dialogClassName="my-dialog" onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-    ).assertSingle('modal-dialog.my-dialog');
+    ).assertSingle('.modal-dialog.my-dialog');
   });
 
-  it('Should use dialogComponentClass', () => {
+  it('Should use dialogAs', () => {
     const noOp = () => {};
 
     function CustomDialog() {
       return <div className="custom-dialog" tabIndex="-1" />;
     }
 
-    const instance = render(
-      <Modal show dialogComponentClass={CustomDialog} onHide={noOp}>
+    mount(
+      <Modal show dialogAs={CustomDialog} onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-      mountPoint,
-    );
-
-    assert.equal(instance._modal.dialog.className, 'custom-dialog');
+    ).assertSingle('.custom-dialog');
   });
 
   it('Should pass transition callbacks to Transition', done => {
@@ -147,7 +133,7 @@ describe('<Modal>', () => {
       ++count;
     };
 
-    const instance = render(
+    const instance = mount(
       <Modal
         show
         onHide={() => {}}
@@ -162,12 +148,11 @@ describe('<Modal>', () => {
         onEntering={increment}
         onEntered={() => {
           increment();
-          instance.renderWithProps({ show: false });
+          instance.setProps({ show: false });
         }}
       >
         <strong>Message</strong>
       </Modal>,
-      mountPoint,
     );
   });
 
@@ -201,7 +186,7 @@ describe('<Modal>', () => {
         }
       }
 
-      const instance = render(<Component />, mountPoint);
+      const instance = mount(<Component />);
       instance.setState({ show: false });
 
       expect(offSpy).to.have.been.calledWith(window, 'resize');

@@ -60,7 +60,7 @@ class NavLink extends React.Component {
   handleClick = e => {
     const { onClick, onSelect, eventKey } = this.props;
     if (onClick) onClick(e);
-    if (eventKey != null && onSelect) onSelect(eventKey);
+    if (eventKey != null && onSelect) onSelect(eventKey, e);
   };
 
   render() {
@@ -105,25 +105,27 @@ export default mapContextToProps(
     let navItemKey = makeEventKey(eventKey, href);
 
     const props = {
+      role,
       active,
       eventKey: navItemKey,
       onSelect: chain(pSelect, onSelect),
     };
 
     if (navContext) {
+      if (!role && navContext.role === 'tablist') props.role = 'tab';
+
+      props['data-rb-event-key'] = navItemKey;
       props.id = navContext.getControllerId(eventKey);
       props['aria-controls'] = navContext.getControlledId(eventKey);
       props.active =
         active == null && navItemKey != null
           ? makeEventKey(navContext.activeKey) === navItemKey
           : active;
+    }
 
-      if (navContext.role === 'tablist') {
-        props.role = role || 'tab';
-        props.tabIndex = props.active ? tabIndex : -1;
-        props['aria-selected'] = props.active;
-        props['data-rb-event-key'] = navItemKey;
-      }
+    if (props.role === 'tab') {
+      props.tabIndex = props.active ? tabIndex : -1;
+      props['aria-selected'] = props.active;
     }
 
     return props;

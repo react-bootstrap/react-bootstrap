@@ -22,19 +22,20 @@ describe('<DropdownButton>', () => {
 
   it('renders single DropdownItem child', () => {
     mount(
-      <DropdownButton title="Single child" id="test-id">
+      <DropdownButton defaultShow title="Single child" id="test-id">
         <DropdownItem>Item 1</DropdownItem>
       </DropdownButton>,
-    ).assertSingle('DropdownMenu DropdownItem');
+    ).assertSingle('.dropdown-menu a.dropdown-item');
   });
 
-  it('forwards alignRight to menu', () => {
+  it('forwards alignRight to the Dropdown', () => {
     mount(
       <DropdownButton alignRight title="blah" id="test-id">
         <DropdownItem>Item 1</DropdownItem>
       </DropdownButton>,
     )
-      .find('DropdownMenu')
+      .find('Dropdown')
+      .first()
       .props()
       .alignRight.should.equal(true);
   });
@@ -59,7 +60,12 @@ describe('<DropdownButton>', () => {
       }
     };
     const instance = mount(
-      <DropdownButton title="Simple Dropdown" onSelect={onSelect} id="test-id">
+      <DropdownButton
+        defaultShow
+        title="Simple Dropdown"
+        onSelect={onSelect}
+        id="test-id"
+      >
         <DropdownItem eventKey="1">Item 1</DropdownItem>
         <DropdownItem eventKey="2">Item 2</DropdownItem>
         <DropdownItem eventKey="3">Item 3</DropdownItem>
@@ -95,6 +101,7 @@ describe('<DropdownButton>', () => {
     handleSelect.should.have.been.calledWith(false);
     wrapper
       .find('Dropdown')
+      .first()
       .prop('show')
       .should.equal(true);
   });
@@ -124,6 +131,11 @@ describe('<DropdownButton>', () => {
     );
 
     expect(wrapper.children().props().defaultShow).to.equal(true);
-    expect(wrapper.find('DropdownToggle').props().defaultShow).to.not.exist;
+    expect(
+      wrapper
+        .find('DropdownToggle')
+        .first()
+        .props().defaultShow,
+    ).to.not.exist;
   });
 });

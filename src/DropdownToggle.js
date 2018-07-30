@@ -1,11 +1,12 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import elementType from 'prop-types-extra/lib/elementType';
+import BaseDropdownToggle from 'react-overlays//DropdownToggle';
 import React from 'react';
 
 import Button from './Button';
 import { createBootstrapComponent } from './ThemeProvider';
-import DropdownContext from './DropdownContext';
 
 class DropdownToggle extends React.Component {
   static propTypes = {
@@ -15,7 +16,15 @@ class DropdownToggle extends React.Component {
     bsPrefix: PropTypes.string,
     title: PropTypes.string,
 
+    /**
+     * An html id attribute, necessary for assistive technologies, such as screen readers.
+     * @type {string|number}
+     * @required
+     */
+    id: isRequiredForA11y(PropTypes.any),
+
     split: PropTypes.bool,
+
     as: elementType,
 
     /**
@@ -43,26 +52,24 @@ class DropdownToggle extends React.Component {
     // This intentionally forwards bsSize and bsStyle (if set) to the
     // underlying component, to allow it to render size and style variants.
     return (
-      <DropdownContext.Consumer>
-        {({ toggleId, setToggleElement, onToggle, show }) => (
+      <BaseDropdownToggle>
+        {({ ref, onToggle, props: toggleProps }) => (
           <Component
-            aria-haspopup
-            aria-expanded={!!show}
-            id={toggleId}
-            bsPrefix={childBsPrefix}
+            ref={ref}
             onClick={onToggle}
-            ref={setToggleElement}
+            bsPrefix={childBsPrefix}
             className={classNames(
               className,
               bsPrefix,
               split && `${bsPrefix}-split`,
             )}
+            {...toggleProps}
             {...props}
           >
             {children}
           </Component>
         )}
-      </DropdownContext.Consumer>
+      </BaseDropdownToggle>
     );
   }
 }

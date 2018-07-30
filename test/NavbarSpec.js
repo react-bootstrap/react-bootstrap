@@ -74,7 +74,7 @@ describe('<Navbar>', () => {
         <Navbar.Toggle />
       </Navbar>,
     )
-      .find(Navbar.Toggle)
+      .find('NavbarToggle')
       .simulate('click');
 
     expect(toggleSpy).to.be.calledOnce;
@@ -89,7 +89,7 @@ describe('<Navbar>', () => {
         <Navbar.Toggle onClick={clickSpy} />
       </Navbar>,
     )
-      .find(Navbar.Toggle)
+      .find('NavbarToggle')
       .simulate('click');
 
     expect(clickSpy).to.have.been.called;

@@ -58,7 +58,7 @@ describe('<TabContainer>', () => {
     );
 
     let tabId = instance
-      .find('Nav.Link a')
+      .find('NavLink a')
       .first()
       .prop('id');
 
@@ -78,7 +78,7 @@ describe('<TabContainer>', () => {
     let instance = mount(
       <TabContainer id="custom-id">
         <div>
-          <Nav bsStyle="pills">
+          <Nav variant="pills">
             <Nav.Item>
               <Nav.Link eventKey="1">One</Nav.Link>
             </Nav.Item>
@@ -88,13 +88,13 @@ describe('<TabContainer>', () => {
     );
 
     instance
-      .find(Nav)
+      .find('Nav')
       .getDOMNode()
       .getAttribute('role')
       .should.equal('tablist');
 
     instance
-      .find('Nav.Link a')
+      .find('NavLink a')
       .first()
       .getDOMNode()
       .getAttribute('role')
@@ -105,7 +105,7 @@ describe('<TabContainer>', () => {
     let instance = mount(
       <TabContainer id="custom-id">
         <div>
-          <Nav role="navigation" bsStyle="pills">
+          <Nav role="navigation" variant="pills">
             <Nav.Item>
               <Nav.Link href="#foo" eventKey="1">
                 One
@@ -117,7 +117,7 @@ describe('<TabContainer>', () => {
     );
 
     instance
-      .find(Nav)
+      .find('Nav')
       .getDOMNode()
       .getAttribute('role')
       .should.equal('navigation');
@@ -125,148 +125,88 @@ describe('<TabContainer>', () => {
     // make sure its not passed to the Nav.Link
     expect(
       instance
-        .find('Nav.Link a')
+        .find('NavLink a')
         .first()
         .getDOMNode()
         .getAttribute('role'),
     ).to.not.exist;
   });
 
-  describe('tab switching edge cases', () => {
-    class Switcher extends React.Component {
-      state = { ...this.props };
+  it('Should show the correct tab when selected', () => {
+    const wrapper = mount(
+      <TabContainer id="test" defaultActiveKey={1} transition={false}>
+        <Nav>
+          <Nav.Item>
+            <Nav.Link eventKey="1">One</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="2">Two</Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <TabContent>
+          <TabPane eventKey="1">Tab 1</TabPane>
+          <TabPane eventKey="2">Tab 2</TabPane>
+        </TabContent>
+      </TabContainer>,
+    );
 
-      render() {
-        const {
-          eventKeys,
-          show = true,
-          onSelect = () => {},
-          tabProps = [],
-          ...props
-        } = this.state;
+    wrapper
+      .find('div.tab-pane.active')
+      .tap(p => p.should.have.lengthOf(1))
+      .text()
+      .should.equal('Tab 1');
 
-        if (!show) {
-          return null;
-        }
+    wrapper
+      .find('a.nav-link')
+      .last()
+      .simulate('click');
 
-        return (
-          <TabContainer {...props} id="custom-id" onSelect={onSelect}>
-            <TabContent>
-              {eventKeys.map((eventKey, index) => (
-                <TabPane key={index} eventKey={eventKey} {...tabProps[index]} />
-              ))}
-            </TabContent>
-          </TabContainer>
-        );
-      }
-    }
+    wrapper
+      .find('div.tab-pane.active')
+      .tap(p => p.should.have.lengthOf(1))
+      .text()
+      .should.equal('Tab 2');
+  });
 
-    it('should not get stuck after tab becomes unmounted', () => {
-      const instance = mount(<Switcher eventKeys={[1, 2]} activeKey={2} />);
+  it('Should mount and unmount tabs when set', () => {
+    const wrapper = mount(
+      <TabContainer
+        id="test"
+        mountOnEnter
+        unmountOnExit
+        defaultActiveKey={1}
+        transition={false}
+      >
+        <Nav>
+          <Nav.Item>
+            <Nav.Link eventKey="1">One</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="2">Two</Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <TabContent>
+          <TabPane eventKey="1">Tab 1</TabPane>
+          <TabPane eventKey="2">Tab 2</TabPane>
+        </TabContent>
+      </TabContainer>,
+    );
 
-      instance.assertSingle(TabContent);
-      instance.assertSingle('[eventKey=2]').assertSingle('.active');
+    wrapper
+      .find('div.tab-pane')
+      .tap(p => p.should.have.lengthOf(1))
+      .text()
+      .should.equal('Tab 1');
 
-      instance.setState({ eventKeys: [1] });
-      instance.assertNone('.active');
+    wrapper
+      .find('a.nav-link')
+      .last()
+      .simulate('click');
 
-      instance.setState({ activeKey: 1 });
-      instance.assertSingle('[eventKey=1]').assertSingle('.active');
-    });
-
-    it('should handle closing tab and changing active tab', () => {
-      const instance = mount(<Switcher eventKeys={[1, 2]} activeKey={2} />);
-
-      instance.assertSingle('[eventKey=2]').assertSingle('.active');
-
-      instance.setState({ eventKeys: [1], activeKey: 1 });
-      instance.assertSingle('[eventKey=1]').assertSingle('.active');
-    });
-
-    it('should not call onSelect when container unmounts', () => {
-      const spy = sinon.spy();
-      const instance = mount(
-        <Switcher eventKeys={[1]} activeKey={1} onSelect={spy} />,
-      );
-
-      instance.assertSingle(TabPane);
-
-      instance.setState({ show: false });
-      spy.should.have.not.been.called;
-    });
-
-    it('should clean up unmounted tab state', () => {
-      const instance = mount(<Switcher eventKeys={[1, 2, 3]} activeKey={3} />);
-
-      instance.find(TabPane).length.should.equal(3);
-      instance.assertSingle('[eventKey=3]').assertSingle('.active');
-
-      instance.setState({ eventKeys: [1, 2], activeKey: 2 });
-      instance.find(TabPane).length.should.equal(2);
-      instance.assertSingle('[eventKey=2]').assertSingle('.active');
-    });
-
-    it('should not get stuck if tab stops animating', () => {
-      const instance = mount(<Switcher eventKeys={[1, 2]} activeKey={1} />);
-
-      instance.assertSingle('[eventKey=1]').assertSingle('.active');
-
-      instance.setState({ animation: false });
-      instance.assertSingle('[eventKey=1]').assertSingle('.active');
-
-      instance.setState({ activeKey: 2 });
-      instance.assertSingle('[eventKey=2]').assertSingle('.active');
-
-      instance.setState({ animation: true });
-      instance.setState({ activeKey: 1 });
-      instance.assertSingle('[eventKey=2]').assertSingle('.active');
-    });
-
-    it('should handle simultaneous eventKey and activeKey change', () => {
-      const instance = mount(<Switcher eventKeys={[1, 2]} activeKey={2} />);
-
-      instance.assertSingle('[eventKey=2]').assertSingle('.active');
-
-      instance.setState({ eventKeys: [1, 3], activeKey: 3 });
-      instance.assertSingle('[eventKey=3]').assertSingle('.active');
-
-      instance.setState({ eventKeys: [1, 4], activeKey: 4 });
-      instance.assertSingle('[eventKey=4]').assertSingle('.active');
-    });
-
-    it('should not get stuck if eventKey ceases to exist', () => {
-      const instance = mount(<Switcher eventKeys={[1, 2]} activeKey={2} />);
-
-      instance.assertSingle('[eventKey=2]').assertSingle('.active');
-
-      instance.setState({ eventKeys: [1, 3] });
-      instance.assertNone('.active');
-
-      instance.setState({ activeKey: 3 });
-      instance.assertSingle('[eventKey=3]').assertSingle('.active');
-
-      // Check that active state lingers after changing event key.
-      instance.setState({ activeKey: 1 });
-      instance.assertSingle('[eventKey=3]').assertSingle('.active');
-
-      // But once event key changes again, make sure active state switches.
-      instance.setState({ eventKeys: [1, 2] });
-      instance.assertSingle('[eventKey=1]').assertSingle('.active');
-    });
-
-    [[[1, 2], [2, 1]], [[2, 1], [1, 2]]].forEach(([order1, order2]) => {
-      it('should handle event key swaps', () => {
-        const instance = mount(<Switcher eventKeys={order1} activeKey={1} />);
-
-        instance.assertSingle('[eventKey=1]').assertSingle('.active');
-
-        instance.setState({ eventKeys: order2 });
-        instance.assertSingle('[eventKey=1]').assertSingle('.active');
-
-        // Check that the animation is still wired up.
-        instance.setState({ activeKey: 2 });
-        instance.assertSingle('[eventKey=1]').assertSingle('.active');
-      });
-    });
+    wrapper
+      .find('div.tab-pane')
+      .tap(p => p.should.have.lengthOf(1))
+      .text()
+      .should.equal('Tab 2');
   });
 });

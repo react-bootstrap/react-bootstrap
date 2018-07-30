@@ -1,15 +1,10 @@
 import React from 'react';
-import ReactTestUtils from 'react-dom/test-utils';
+import { mount } from 'enzyme';
 
 import Pagination from '../src/Pagination';
 
 describe('<Pagination>', () => {
   it('should have class', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <Pagination>Item content</Pagination>,
-    );
-    assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithClass(instance, 'pagination'),
-    );
+    mount(<Pagination>Item content</Pagination>).assertSingle('.pagination');
   });
 });

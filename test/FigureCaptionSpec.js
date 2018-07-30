@@ -1,38 +1,26 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactTestUtils from 'react-dom/test-utils';
+import { mount } from 'enzyme';
 
 import Figure from '../src/Figure';
 
 describe('<Figure.Caption>', () => {
   it('uses "figcaption" by default', () => {
-    let instance = ReactTestUtils.renderIntoDocument(<Figure.Caption />);
-
-    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'FIGCAPTION');
+    mount(<Figure.Caption />).assertSingle('figcaption');
   });
 
   it('has "figure-caption" class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Figure.Caption>FigureCaption content</Figure.Caption>,
+    mount(<Figure.Caption>FigureCaption content</Figure.Caption>).assertSingle(
+      '.figure-caption',
     );
-    assert.equal(ReactDOM.findDOMNode(instance).className, 'figure-caption');
   });
 
   it('Should merge additional classes passed in', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Figure.Caption className="bob" />,
-    );
-    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbob\b/));
-    assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\bfigure-caption\b/),
+    mount(<Figure.Caption className="bob" />).assertSingle(
+      '.bob.figure-caption',
     );
   });
 
   it('allows custom elements instead of "figcaption"', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Figure.Caption as="section" />,
-    );
-
-    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');
+    mount(<Figure.Caption as="section" />).assertSingle('section');
   });
 });

@@ -11,6 +11,13 @@ import Dropdown from './Dropdown';
 class SplitButton extends React.Component {
   static propTypes = {
     /**
+     * An html id attribute for the Toggle button, necessary for assistive technologies, such as screen readers.
+     * @type {string|number}
+     * @required
+     */
+    id: PropTypes.any,
+
+    /**
      * Accessible label for the toggle; the value of `title` if not specified.
      */
     toggleLabel: PropTypes.string,
@@ -53,6 +60,7 @@ class SplitButton extends React.Component {
 
   render() {
     const {
+      id,
       bsPrefix,
       size,
       variant,
@@ -82,6 +90,7 @@ class SplitButton extends React.Component {
         </Button>
         <Dropdown.Toggle
           split
+          id={id}
           size={size}
           variant={variant}
           disabled={props.disabled}

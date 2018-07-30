@@ -11,22 +11,22 @@
     "classnames": "^2.2.5",
     "common-tags": "^1.8.0",
     "formik": "^0.11.11",
-    "gatsby": "2.0.0-alpha.43",
-    "gatsby-link": "^1.6.38-10",
+    "gatsby": "^2.0.0-beta.59",
+    "gatsby-link": "^2.0.0-beta.5",
     "gatsby-plugin-catch-links": "2.0.1-1",
-    "gatsby-plugin-less": "2.0.0-alpha.13",
-    "gatsby-plugin-sass": "2.0.0-alpha.13",
+    "gatsby-plugin-less": "^2.0.0-beta.5",
+    "gatsby-plugin-sass": "^2.0.0-beta.6",
     "gatsby-remark-prismjs": "^1.2.17",
     "gatsby-source-filesystem": "2.0.0-alpha.13",
-    "gatsby-transformer-react-docgen": "2.0.1-6",
-    "gatsby-transformer-remark": "2.0.1-11",
+    "gatsby-transformer-react-docgen": "^2.1.1-beta.4",
+    "gatsby-transformer-remark": "^2.1.1-beta.4",
     "graphql": "^0.13.2",
-    "graphql-type-json": "^0.1.4",
     "import-sort-style-module": "^4.2.0",
     "lodash": "^4.15.0",
+    "prismjs": "^1.15.0",
     "prop-types": "^15.6.0",
     "react": "^16.4.1",
-    "react-bootstrap": "*",
+    "react-docgen": "3.0.0-rc.0",
     "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
     "react-live": "^1.9.2",
@@ -36,7 +36,12 @@
   "devDependencies": {
     "@babel/preset-flow": "^7.0.0-beta.40",
     "import-sort-cli": "^4.2.0",
-    "import-sort-parser-4catalyzer": "^4.0.1"
+    "import-sort-parser-4catalyzer": "^4.0.1",
+    "less": "^3.8.0",
+    "node-sass": "^4.9.2"
+  },
+  "resolutions": {
+    "react-docgen": "3.0.0-rc.0"
   },
   "importSort": {
     ".js": {

@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 import Dropdown from './Dropdown';
 
 const propTypes = {
+  /**
+   * An html id attribute for the Toggle button, necessary for assistive technologies, such as screen readers.
+   * @type {string|number}
+   * @required
+   */
+  id: PropTypes.any,
+
   /** An `href` passed to the Toggle component */
   href: PropTypes.string,
 
@@ -46,12 +53,14 @@ class DropdownButton extends React.Component {
       menuRole,
       disabled,
       href,
+      id,
       ...props
     } = this.props;
 
     return (
       <Dropdown {...props}>
         <Dropdown.Toggle
+          id={id}
           href={href}
           size={size}
           variant={variant}

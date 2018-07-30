@@ -2,12 +2,10 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
-import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
-import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
+import BaseDropdownMenu from 'react-overlays//DropdownMenu';
+import NavbarContext from './NavbarContext';
 
 import { createBootstrapComponent } from './ThemeProvider';
-import chain from './utils/createChainedFunction';
-import DropdownContext from './DropdownContext';
 
 class DropdownMenu extends React.Component {
   static propTypes = {
@@ -21,8 +19,6 @@ class DropdownMenu extends React.Component {
 
     /** Aligns the Dropdown menu to the right of it's container. */
     alignRight: PropTypes.bool,
-
-    onClose: PropTypes.func,
 
     onSelect: PropTypes.func,
 
@@ -43,9 +39,6 @@ class DropdownMenu extends React.Component {
      * are also injected and should be handled appropriatedly.
      */
     as: elementType,
-
-    /** @private */
-    menuRef: PropTypes.any,
   };
 
   static defaultProps = {
@@ -53,63 +46,62 @@ class DropdownMenu extends React.Component {
     as: 'div',
   };
 
-  handleRootClose = event => {
-    this.props.onClose(event, { source: 'rootClose' });
-  };
-
   render() {
     const {
-      show,
       bsPrefix,
-      menuRef,
-      alignRight,
       className,
+      alignRight,
       rootCloseEvent,
+      show: showProps,
       as: Component,
       ...props
     } = this.props;
 
-    const menuProps = {
-      ...props,
-      ref: menuRef,
-      className: classNames(
-        className,
-        bsPrefix,
-        show && 'show',
-        alignRight && `${bsPrefix}-right`,
-      ),
-    };
-
     // For custom components provide additional, non-DOM, props;
-    if (typeof Component !== 'string') {
-      menuProps.show = show;
-      menuProps.alignRight = alignRight;
-    }
 
     return (
-      <RootCloseWrapper
-        disabled={!show}
-        onRootClose={this.handleRootClose}
-        event={rootCloseEvent}
-      >
-        <Component {...menuProps} />
-      </RootCloseWrapper>
+      <NavbarContext>
+        {isNavbar => (
+          <BaseDropdownMenu
+            show={showProps}
+            alignEnd={alignRight}
+            usePopper={!isNavbar}
+            rootCloseEvent={rootCloseEvent}
+          >
+            {({ ref, popper, show, alignEnd, onClose, props: menuProps }) => {
+              if (typeof Component !== 'string') {
+                menuProps.show = show;
+                menuProps.onClose = onClose;
+                menuProps.alignRight = alignEnd;
+              }
+
+              if (popper) {
+                // we don't need the default style, menus are display: none when not shown.
+                props.style = popper.placement
+                  ? { ...props.style, ...popper.style }
+                  : props.style;
+                props['x-placement'] = popper.placement;
+              }
+
+              return (
+                <Component
+                  ref={ref}
+                  {...props}
+                  {...menuProps}
+                  className={classNames(
+                    className,
+                    bsPrefix,
+                    show && 'show',
+                    alignRight && `${bsPrefix}-right`,
+                  )}
+                />
+              );
+            }}
+          </BaseDropdownMenu>
+        )}
+      </NavbarContext>
     );
   }
 }
 
-export default mapContextToProps(
-  DropdownContext.Consumer,
-  (
-    { toggleId, show, alignRight, setMenuElement, onClose, popper: { styles } },
-    props,
-  ) => ({
-    style: styles,
-    menuRef: setMenuElement,
-    'aria-labelledby': toggleId,
-    show: show == null ? props.show : show,
-    onClose: chain(props.onClose, onClose),
-    alignRight: alignRight == null ? props.alignRight : alignRight,
-  }),
-  createBootstrapComponent(DropdownMenu, 'dropdown-menu'),
-);
+export default createBootstrapComponent(DropdownMenu, 'dropdown-menu');

@@ -103,6 +103,12 @@ class Nav extends React.Component {
     as: 'ul',
   };
 
+  constructor(...args) {
+    super(...args);
+
+    this.state = { navContext: null };
+  }
+
   static getDerivedStateFromProps({
     activeKey,
     getControlledId,
@@ -121,12 +127,6 @@ class Nav extends React.Component {
     };
   }
 
-  constructor(...args) {
-    super(...args);
-
-    this.state = { navContext: null };
-  }
-
   componentDidUpdate() {
     if (!this._needsRefocus || !this.listNode) return;
 
@@ -141,7 +141,12 @@ class Nav extends React.Component {
     let activeChild = this.listNode.querySelector('.active');
 
     let index = items.indexOf(activeChild);
-    return index === -1 ? null : items[index + offset];
+    if (index === -1) return null;
+
+    let nextIndex = index + offset;
+    if (nextIndex >= items.length) nextIndex = 0;
+    if (nextIndex < 0) nextIndex = items.length - 1;
+    return items[nextIndex];
   }
 
   handleKeyDown = event => {
