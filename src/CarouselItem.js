@@ -1,111 +1,27 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import transition from 'dom-helpers/transition';
-import Transition from 'react-transition-group/Transition';
-
-import triggerBrowserReflow from './utils/triggerBrowserReflow';
 import { createBootstrapComponent } from './ThemeProvider';
-
-const isTransitioning = s => s === 'exiting' || s === 'entering';
-const isActive = s => s === 'entered' || s === 'exiting';
 
 const propTypes = {
   /**
    * @default 'carousel-item'
    */
   bsPrefix: PropTypes.string,
-  direction: PropTypes.oneOf(['prev', 'next']),
-  onSlideStart: PropTypes.func,
-  onSlideEnd: PropTypes.func,
-  active: PropTypes.bool,
-  animateIn: PropTypes.bool,
-  animateOut: PropTypes.bool,
-  index: PropTypes.number,
-
-  /** @private */
-  slide: PropTypes.bool.isRequired,
-};
-
-const defaultProps = {
-  active: false,
-  animateIn: false,
-  animateOut: false,
 };
 
 class CarouselItem extends React.Component {
-  handleExit = () => {
-    if (this.props.onSlideStart) {
-      this.props.onSlideStart();
-    }
-  };
-
-  handleExiting = () => {
-    if (this.props.onSlideEnd) {
-      this.props.onSlideEnd();
-    }
-  };
-
   render() {
-    const {
-      bsPrefix,
-      direction,
-      active,
-      children,
-      className,
-      slide,
-      ...props
-    } = this.props;
-
-    delete props.onSlideEnd;
-    delete props.onSlideStart;
-
-    if (!slide) {
-      return (
-        <div className={classNames(className, bsPrefix, active && 'active')}>
-          {children}
-        </div>
-      );
-    }
-
-    let orderClassName, directionalClassName;
-
-    if (direction === 'next') {
-      orderClassName = `${bsPrefix}-next`;
-      directionalClassName = `${bsPrefix}-left`;
-    } else if (direction === 'prev') {
-      orderClassName = `${bsPrefix}-prev`;
-      directionalClassName = `${bsPrefix}-right`;
-    }
+    const { bsPrefix, children, className, ...props } = this.props;
 
     return (
-      <Transition
-        in={active}
-        onExit={this.handleExit}
-        onExited={this.handleExiting}
-        onEnter={triggerBrowserReflow}
-        addEndListener={(node, done) => transition.end(node, done)}
-      >
-        {state => (
-          <div
-            className={classNames(
-              className,
-              bsPrefix,
-              isActive(state) && 'active',
-              isTransitioning(state) && directionalClassName,
-              ((state === 'exited' && active) || state === 'entering') &&
-                orderClassName,
-            )}
-          >
-            {children}
-          </div>
-        )}
-      </Transition>
+      <div {...props} className={classNames(className, bsPrefix)}>
+        {children}
+      </div>
     );
   }
 }
 
 CarouselItem.propTypes = propTypes;
-CarouselItem.defaultProps = defaultProps;
 
 export default createBootstrapComponent(CarouselItem, 'carousel-item');
