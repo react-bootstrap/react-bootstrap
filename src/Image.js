@@ -28,14 +28,14 @@ class Image extends React.Component {
     /**
      * Sets image shape as thumbnail.
      */
-    thumbnail: PropTypes.bool
+    thumbnail: PropTypes.bool,
   };
 
   static defaultProps = {
     fluid: false,
     rounded: false,
     roundedCircle: false,
-    thumbnail: false
+    thumbnail: false,
   };
 
   render() {
@@ -53,7 +53,7 @@ class Image extends React.Component {
       fluid && `${bsPrefix}-fluid`,
       rounded && `rounded`,
       roundedCircle && `rounded-circle`,
-      thumbnail && `${bsPrefix}-thumbnail`
+      thumbnail && `${bsPrefix}-thumbnail`,
     );
 
     return (

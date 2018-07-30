@@ -6,30 +6,24 @@ import elementType from 'prop-types-extra/lib/elementType';
 import { createBootstrapComponent } from './ThemeProvider';
 
 const propTypes = {
-  componentClass: elementType,
+  as: elementType,
   /** Make the jumbotron full width, and without rounded corners */
   fluid: PropTypes.bool,
   /** @default 'jumbotron' */
-  bsPrefix: PropTypes.string
+  bsPrefix: PropTypes.string,
 };
 
 const defaultProps = {
-  componentClass: 'div',
-  fluid: false
+  as: 'div',
+  fluid: false,
 };
 
 class Jumbotron extends React.Component {
   render() {
-    const {
-      componentClass: Component,
-      className,
-      fluid,
-      bsPrefix,
-      ...props
-    } = this.props;
+    const { as: Component, className, fluid, bsPrefix, ...props } = this.props;
     const classes = {
       [bsPrefix]: true,
-      [`${bsPrefix}-fluid`]: fluid
+      [`${bsPrefix}-fluid`]: fluid,
     };
     return <Component {...props} className={classNames(className, classes)} />;
   }

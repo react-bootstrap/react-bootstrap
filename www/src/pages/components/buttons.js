@@ -4,20 +4,20 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
-import ButtonTypes from '../../examples/Button/Types';
-import ButtonOutlineTypes from '../../examples/Button/OutlineTypes';
-import ButtonBlock from '../../examples/Button/Block';
-import ButtonSizes from '../../examples/Button/Sizes';
 import ButtonActive from '../../examples/Button/Active';
-import ButtonTagTypes from '../../examples/Button/TagTypes';
+import ButtonBlock from '../../examples/Button/Block';
 import ButtonDisabled from '../../examples/Button/Disabled';
 import ButtonLoading from '../../examples/Button/Loading';
+import ButtonOutlineTypes from '../../examples/Button/OutlineTypes';
+import ButtonSizes from '../../examples/Button/Sizes';
+import ButtonTagTypes from '../../examples/Button/TagTypes';
 import ToggleButton from '../../examples/Button/ToggleButton';
 import ToggleButtonGroupControlled from '../../examples/Button/ToggleButtonGroupControlled';
 import ToggleButtonGroupUncontrolled from '../../examples/Button/ToggleButtonGroupUncontrolled';
+import ButtonTypes from '../../examples/Button/Types';
+import withLayout from '../../withLayout';
 
-export default function ButtonSection({ data }) {
+export default withLayout(function ButtonSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h1 className="page-header">
@@ -52,10 +52,9 @@ export default function ButtonSection({ data }) {
         Normally <code>{'<Button>'}</code> components will render a HTML{' '}
         <code>{'<button>'}</code> element. However you can render whatever you'd
         like, adding a <code>href</code> prop will automatically render an{' '}
-        <code>{'<a />'}</code> element otherwise you can specify{' '}
-        <code>componentClass</code> to render something else (like an{' '}
-        <code>input</code>). React Bootstrap will take care of the proper ARIA
-        roles for you.
+        <code>{'<a />'}</code> element. You can use the <code>as</code> prop to
+        render whatever your heart desires. React Bootstrap will take care of
+        the proper ARIA roles for you.
       </p>
       <ReactPlayground
         exampleClassName="bs-example-buttons"
@@ -104,8 +103,8 @@ export default function ButtonSection({ data }) {
       <p>
         Watch out! <code>{'<a>'}</code> element's don't naturally support a
         disabled attribute. In browsers that support it this is handled with a{' '}
-        <code>{'point-events: none'}</code> style but not all browsers support
-        it yet.
+        <code>point-events: none</code> style but not all browsers support it
+        yet.
       </p>
       <p>
         React Bootstrap will prevent any <code>onClick</code> handlers from
@@ -173,7 +172,7 @@ export default function ButtonSection({ data }) {
       <PropTable metadata={data.ToggleButton} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query ButtonQuery {

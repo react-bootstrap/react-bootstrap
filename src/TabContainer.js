@@ -4,6 +4,7 @@ import elementType from 'prop-types-extra/lib/elementType';
 import uncontrollable from 'uncontrollable';
 
 import TabContext from './TabContext';
+import SelectableContext from './SelectableContext';
 
 class TabContainer extends React.Component {
   static propTypes = {
@@ -23,7 +24,7 @@ class TabContainer extends React.Component {
           error = new Error(
             'In order to properly initialize Tabs in a way that is accessible ' +
               'to assistive technologies (such as screen readers) an `id` or a ' +
-              '`generateChildId` prop to TabContainer is required'
+              '`generateChildId` prop to TabContainer is required',
           );
         }
       }
@@ -75,24 +76,9 @@ class TabContainer extends React.Component {
      *
      * @controllable onSelect
      */
-    activeKey: PropTypes.any
+    activeKey: PropTypes.any,
   };
 
-  static getDerivedStateFromProps(
-    { onSelect, activeKey, mountOnEnter, unmountOnExit, transition },
-    prevState
-  ) {
-    return {
-      tabContext: {
-        ...prevState.tabContext,
-        activeKey,
-        onSelect,
-        mountOnEnter,
-        unmountOnExit,
-        transition
-      }
-    };
-  }
   constructor(...args) {
     super(...args);
 
@@ -104,8 +90,23 @@ class TabContainer extends React.Component {
         mountOnEnter: this.props.mountOnEnter,
         unmountOnExit: this.props.unmountOnExit,
         getControlledId: this.getControlledId,
-        getControllerId: this.getControllerId
-      }
+        getControllerId: this.getControllerId,
+      },
+    };
+  }
+
+  static getDerivedStateFromProps(
+    { activeKey, mountOnEnter, unmountOnExit, transition },
+    prevState,
+  ) {
+    return {
+      tabContext: {
+        ...prevState.tabContext,
+        activeKey,
+        mountOnEnter,
+        unmountOnExit,
+        transition,
+      },
     };
   }
 
@@ -119,11 +120,13 @@ class TabContainer extends React.Component {
   getControllerId = key => this.getKey(key, 'tab');
 
   render() {
-    const { children } = this.props;
+    const { children, onSelect } = this.props;
 
     return (
       <TabContext.Provider value={this.state.tabContext}>
-        {children}
+        <SelectableContext.Provider value={onSelect}>
+          {children}
+        </SelectableContext.Provider>
       </TabContext.Provider>
     );
   }

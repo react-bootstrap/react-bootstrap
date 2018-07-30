@@ -44,7 +44,7 @@ function getTypeName(prop) {
 
 class PropTable extends React.Component {
   static propTypes = {
-    metadata: PropTypes.object.isRequired
+    metadata: PropTypes.object.isRequired,
   };
 
   getType(prop) {
@@ -87,7 +87,9 @@ class PropTable extends React.Component {
 
   _renderRows(propsData) {
     return propsData
-      .filter(prop => prop.type && !prop.doclets.private)
+      .filter(
+        prop => prop.type && !prop.doclets.private && !prop.doclets.ignore,
+      )
       .map(propData => {
         const { name, description, doclets } = propData;
         let descHtml = description && description.childMarkdownRemark.html;
@@ -106,9 +108,9 @@ class PropTable extends React.Component {
             <td>
               {doclets.deprecated && (
                 <div className="prop-desc-heading">
-                  <strong className="text-danger">{`Deprecated: ${
-                    doclets.deprecated
-                  } `}</strong>
+                  <strong className="text-danger">
+                    {`Deprecated: ${doclets.deprecated} `}
+                  </strong>
                 </div>
               )}
               {this.renderControllableNote(propData, name)}
@@ -228,10 +230,7 @@ export const metadataFragment = graphql`
     }
     props {
       name
-      doclets {
-        type
-        controllable
-      }
+      doclets
       defaultValue {
         value
         computed

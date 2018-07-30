@@ -19,28 +19,22 @@ class Container extends React.Component {
     /**
      * You can use a custom element for this component
      */
-    componentClass: elementType
+    as: elementType,
   };
 
   static defaultProps = {
-    componentClass: 'div',
-    fluid: false
+    as: 'div',
+    fluid: false,
   };
   render() {
-    const {
-      bsPrefix,
-      fluid,
-      componentClass: Component,
-      className,
-      ...props
-    } = this.props;
+    const { bsPrefix, fluid, as: Component, className, ...props } = this.props;
     return (
       <Component
         {...props}
         className={classNames(
           className,
           bsPrefix,
-          fluid && `${bsPrefix}-fluid`
+          fluid && `${bsPrefix}-fluid`,
         )}
       />
     );

@@ -9,30 +9,50 @@
   "dependencies": {
     "bootstrap": "^4.0.0",
     "classnames": "^2.2.5",
-    "gatsby": "2.0.0-alpha.8",
-    "gatsby-link": "^1.6.30",
+    "common-tags": "^1.8.0",
+    "formik": "^0.11.11",
+    "gatsby": "^2.0.0-beta.59",
+    "gatsby-link": "^2.0.0-beta.5",
     "gatsby-plugin-catch-links": "2.0.1-1",
-    "graphql": "^0.11.7",
-    "graphql-type-json": "^0.1.4",
+    "gatsby-plugin-less": "^2.0.0-beta.5",
+    "gatsby-plugin-sass": "^2.0.0-beta.6",
+    "gatsby-remark-prismjs": "^1.2.17",
+    "gatsby-source-filesystem": "2.0.0-alpha.13",
+    "gatsby-transformer-react-docgen": "^2.1.1-beta.4",
+    "gatsby-transformer-remark": "^2.1.1-beta.4",
+    "graphql": "^0.13.2",
+    "import-sort-style-module": "^4.2.0",
     "lodash": "^4.15.0",
+    "prismjs": "^1.15.0",
     "prop-types": "^15.6.0",
-    "react": "^15.5.4",
-    "react-bootstrap": "*",
-    "react-dom": "^15.5.4",
+    "react": "^16.4.1",
+    "react-docgen": "3.0.0-rc.0",
+    "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
-    "react-live": "^1.9.2"
+    "react-live": "^1.9.2",
+    "shakespeare-data": "^2.5.0",
+    "yup": "^0.24.1"
   },
   "devDependencies": {
     "@babel/preset-flow": "^7.0.0-beta.40",
-    "gatsby-plugin-less": "2.0.0-alpha.3",
-    "gatsby-plugin-sass": "^2.0.0-alpha.3",
-    "gatsby-remark-prismjs": "^1.2.17",
-    "gatsby-source-filesystem": "2.0.0-alpha.3",
-    "gatsby-transformer-react-docgen": "2.0.1-1",
-    "gatsby-transformer-remark": "2.0.1-1"
+    "import-sort-cli": "^4.2.0",
+    "import-sort-parser-4catalyzer": "^4.0.1",
+    "less": "^3.8.0",
+    "node-sass": "^4.9.2"
+  },
+  "resolutions": {
+    "react-docgen": "3.0.0-rc.0"
+  },
+  "importSort": {
+    ".js": {
+      "style": "module",
+      "parser": "4catalyzer"
+    }
   },
   "homepage": "https://react-bootstrap.github.io/",
-  "keywords": ["gatsby"],
+  "keywords": [
+    "gatsby"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -41,6 +61,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "deploy": "gatsby build --prefix-links && gh-pages -d public"
+    "deploy": "gatsby build --prefix-links && gh-pages -d public",
+    "sort": "import-sort 'src/pages/**/*.js'"
   }
 }

@@ -3,7 +3,7 @@ class Example extends React.Component {
     super(props, context);
 
     this.state = {
-      open: false
+      open: false,
     };
   }
 

@@ -35,7 +35,7 @@ const propTypes = {
    * The value of the input, should be unique amoungst it's siblings when nested in a
    * `ToggleButtonGroup`.
    */
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
 };
 
 class ToggleButton extends React.Component {
@@ -67,7 +67,7 @@ class ToggleButton extends React.Component {
         className={classNames(className, focused && 'focus')}
         type={null}
         active={!!checked}
-        componentClass="label"
+        as="label"
       >
         <input
           name={name}

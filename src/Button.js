@@ -55,19 +55,18 @@ class Button extends React.Component {
      */
     type: PropTypes.oneOf(['button', 'reset', 'submit', null]),
 
-    componentClass: elementType
+    as: elementType,
   };
 
   static defaultProps = {
     variant: 'primary',
     active: false,
     disabled: false,
-    type: 'button'
+    type: 'button',
   };
 
   render() {
     const {
-      bsRole: _0,
       bsPrefix,
       variant,
       size,
@@ -75,7 +74,7 @@ class Button extends React.Component {
       className,
       block,
       type,
-      componentClass,
+      as,
       ...props
     } = this.props;
 
@@ -85,20 +84,20 @@ class Button extends React.Component {
       active && 'active',
       `${bsPrefix}-${variant}`,
       block && `${bsPrefix}-block`,
-      size && `${bsPrefix}-${size}`
+      size && `${bsPrefix}-${size}`,
     );
 
     if (props.href) {
       return (
         <SafeAnchor
           {...props}
-          componentClass={componentClass}
+          as={as}
           className={classNames(classes, props.disabled && 'disabled')}
         />
       );
     }
 
-    const Component = componentClass || 'button';
+    const Component = as || 'button';
     return <Component {...props} type={type} className={classes} />;
   }
 }

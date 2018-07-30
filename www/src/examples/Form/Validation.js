@@ -55,9 +55,9 @@
     <FormControl />
   </FormGroup>
 
-  <Form componentClass="fieldset" horizontal>
+  <Form as="fieldset" horizontal>
     <FormGroup controlId="formValidationError3" validationState="error">
-      <Col componentClass={FormLabel} xs={3}>
+      <Col as={FormLabel} xs={3}>
         Input with error
       </Col>
       <Col xs={9}>
@@ -67,7 +67,7 @@
     </FormGroup>
 
     <FormGroup controlId="formValidationSuccess4" validationState="success">
-      <Col componentClass={FormLabel} xs={3}>
+      <Col as={FormLabel} xs={3}>
         Input group with success
       </Col>
       <Col xs={9}>
@@ -82,7 +82,7 @@
     </FormGroup>
   </Form>
 
-  <Form componentClass="fieldset" inline>
+  <Form as="fieldset" inline>
     <FormGroup controlId="formValidationWarning4" validationState="warning">
       <FormLabel>Input with warning</FormLabel> <FormControl type="text" />
       <FormControl />

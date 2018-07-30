@@ -13,14 +13,14 @@ describe('<ThemeProvider>', () => {
         );
       }
     },
-    'foo'
+    'foo',
   );
 
   it('should use HOC value', () => {
     const wrapper = mount(
       <div>
         <Foo />
-      </div>
+      </div>,
     );
 
     wrapper.assertSingle('p.foo');
@@ -28,12 +28,12 @@ describe('<ThemeProvider>', () => {
 
   it('should provide bsPrefix overrides', () => {
     const wrapper = mount(
-      <ThemeProvider variants={{ btn: 'my-btn', foo: 'global-foo' }}>
+      <ThemeProvider prefixes={{ btn: 'my-btn', foo: 'global-foo' }}>
         <div>
           <Button variant="primary">My label</Button>
           <Foo />
         </div>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
 
     wrapper.assertSingle('button.my-btn.my-btn-primary');
@@ -42,11 +42,11 @@ describe('<ThemeProvider>', () => {
 
   it('should use prop bsPrefix first', () => {
     const wrapper = mount(
-      <ThemeProvider variants={{ foo: 'global-foo' }}>
+      <ThemeProvider prefixes={{ foo: 'global-foo' }}>
         <div>
           <Foo bsPrefix="my-foo" />
         </div>
-      </ThemeProvider>
+      </ThemeProvider>,
     );
 
     wrapper.assertSingle('p.my-foo');
@@ -57,7 +57,7 @@ describe('<ThemeProvider>', () => {
     const wrapper = mount(
       <div>
         <Foo bsPrefix="my-foo" ref={r => (ref = r)} />
-      </div>
+      </div>,
     );
 
     expect(ref).to.equal(wrapper.find('Foo').instance());

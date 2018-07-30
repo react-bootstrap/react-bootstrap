@@ -4,13 +4,16 @@ import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 import all from 'prop-types-extra/lib/all';
 import React from 'react';
+import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import uncontrollable from 'uncontrollable';
 
 import { createBootstrapComponent } from './ThemeProvider';
 import TabContext from './TabContext';
-import mapContextToProps from './utils/mapContextToProps';
+import chain from './utils/createChainedFunction';
 import NavContext from './NavContext';
 import NavbarContext from './NavbarContext';
+import CardContext from './CardContext';
+import SelectableContext from './SelectableContext';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
 
@@ -25,6 +28,8 @@ class Nav extends React.Component {
 
     /** @private */
     navbarBsPrefix: PropTypes.string,
+    /** @private */
+    cardHeaderBsPrefix: PropTypes.string,
 
     /**
      * The visual variant of the nav items.
@@ -55,7 +60,7 @@ class Nav extends React.Component {
       ({ justify, navbar }) =>
         justify && navbar
           ? Error('justify navbar `Nav`s are not supported')
-          : null
+          : null,
     ),
 
     /**
@@ -86,24 +91,30 @@ class Nav extends React.Component {
      */
     navbar: PropTypes.bool,
 
-    componentClass: elementType,
+    as: elementType,
 
     /** @private */
-    onKeyDown: PropTypes.func
+    onKeyDown: PropTypes.func,
   };
 
   static defaultProps = {
     justify: false,
     fill: false,
-    componentClass: 'ul'
+    as: 'ul',
   };
+
+  constructor(...args) {
+    super(...args);
+
+    this.state = { navContext: null };
+  }
 
   static getDerivedStateFromProps({
     activeKey,
     getControlledId,
     getControllerId,
     role,
-    onSelect
+    onSelect,
   }) {
     return {
       navContext: {
@@ -111,15 +122,9 @@ class Nav extends React.Component {
         onSelect,
         activeKey,
         getControlledId: getControlledId || noop,
-        getControllerId: getControllerId || noop
-      }
+        getControllerId: getControllerId || noop,
+      },
     };
-  }
-
-  constructor(...args) {
-    super(...args);
-
-    this.state = { navContext: null };
   }
 
   componentDidUpdate() {
@@ -136,7 +141,12 @@ class Nav extends React.Component {
     let activeChild = this.listNode.querySelector('.active');
 
     let index = items.indexOf(activeChild);
-    return index === -1 ? null : items[index + offset];
+    if (index === -1) return null;
+
+    let nextIndex = index + offset;
+    if (nextIndex >= items.length) nextIndex = 0;
+    if (nextIndex < 0) nextIndex = items.length - 1;
+    return items[nextIndex];
   }
 
   handleKeyDown = event => {
@@ -162,7 +172,11 @@ class Nav extends React.Component {
     onSelect(nextActiveChild.dataset.rbEventKey);
     this._needsRefocus = true;
   };
-
+  handleSelect = (key, event) => {
+    const { onSelect } = this.props;
+    if (key == null || !onSelect) return;
+    onSelect(key, event);
+  };
   attachRef = ref => {
     this.listNode = ref;
   };
@@ -171,18 +185,19 @@ class Nav extends React.Component {
     const {
       bsPrefix,
       navbarBsPrefix,
+      cardHeaderBsPrefix,
       variant,
       fill,
       justify,
       navbar,
       className,
       children,
-      componentClass: Component,
+      onSelect: _,
+      as: Component,
       ...props
     } = this.props;
 
     delete props.activeKey;
-    delete props.onSelect;
     delete props.getControlledId;
     delete props.getControllerId;
 
@@ -192,56 +207,70 @@ class Nav extends React.Component {
 
     return (
       <NavContext.Provider value={this.state.navContext}>
-        <Component
-          {...props}
-          ref={this.attachRef}
-          className={classNames(className, {
-            [bsPrefix]: !navbar,
-            [`${navbarBsPrefix}-nav`]: navbar,
-            [`${bsPrefix}-${variant}`]: !!variant,
-            [`${bsPrefix}-fill`]: fill,
-            [`${bsPrefix}-justified`]: justify
-          })}
-        >
-          {children}
-        </Component>
+        <SelectableContext.Provider value={this.handleSelect}>
+          <Component
+            {...props}
+            ref={this.attachRef}
+            className={classNames(className, {
+              [bsPrefix]: !navbar,
+              [`${navbarBsPrefix}-nav`]: navbar,
+              [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
+              [`${bsPrefix}-${variant}`]: !!variant,
+              [`${bsPrefix}-fill`]: fill,
+              [`${bsPrefix}-justified`]: justify,
+            })}
+          >
+            {children}
+          </Component>
+        </SelectableContext.Provider>
       </NavContext.Provider>
     );
   }
 }
 
 const UncontrolledNav = uncontrollable(createBootstrapComponent(Nav, 'nav'), {
-  activeKey: 'onSelect'
+  activeKey: 'onSelect',
 });
 
 const DecoratedNav = mapContextToProps(
-  UncontrolledNav,
-  [TabContext.Consumer, NavbarContext.Consumer],
-  (tabContext, navbarContext, { role, navbar }) => {
-    if (!tabContext && !navbarContext) return null;
+  [
+    SelectableContext.Consumer,
+    TabContext.Consumer,
+    NavbarContext.Consumer,
+    CardContext.Consumer,
+  ],
+  (
+    onSelect,
+    tabContext,
+    navbarContext,
+    cardContext,
+    { role, navbar, onSelect: propsOnSelect },
+  ) => {
+    onSelect = chain(propsOnSelect, onSelect);
+    if (!tabContext && !navbarContext && !cardContext) return { onSelect };
 
     if (navbarContext)
       return {
-        onSelect: navbarContext.onSelect,
+        onSelect,
         navbarBsPrefix: navbarContext.bsPrefix,
-        navbar: navbar == null ? true : navbar
+        navbar: navbar == null ? true : navbar,
       };
 
-    const {
-      activeKey,
-      onSelect,
-      getControllerId,
-      getControlledId
-    } = tabContext;
+    if (cardContext)
+      return { cardHeaderBsPrefix: cardContext.cardHeaderBsPrefix };
 
+    const { activeKey, getControllerId, getControlledId } = tabContext;
     return {
       activeKey,
       onSelect,
+      // pass these two through to avoid having to listen to
+      // both Tab and Nav contexts in NavLink
       getControllerId,
       getControlledId,
-      role: role || 'tablist'
+      role: role || 'tablist',
     };
-  }
+  },
+  UncontrolledNav,
 );
 
 DecoratedNav.Item = NavItem;

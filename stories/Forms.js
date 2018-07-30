@@ -26,7 +26,7 @@ storiesOf('Forms ', module)
       </FormGroup>
       <FormGroup>
         <FormLabel for="exampleFormControlSelect1">Example select</FormLabel>
-        <FormControl componentClass="select" id="exampleFormControlSelect1">
+        <FormControl as="select" id="exampleFormControlSelect1">
           <option>1</option>
           <option>2</option>
           <option>3</option>
@@ -40,7 +40,7 @@ storiesOf('Forms ', module)
         </FormLabel>
         <FormControl
           multiple
-          componentClass="select"
+          as="select"
           id="exampleFormControlSelect2"
         >
           <option>1</option>
@@ -55,7 +55,7 @@ storiesOf('Forms ', module)
           Example textarea
         </FormLabel>
         <FormControl
-          componentClass="textarea"
+          as="textarea"
           id="exampleFormControlTextarea1"
           rows="3"
         />
@@ -65,7 +65,7 @@ storiesOf('Forms ', module)
   .add('Horizontal form  ✔', () => (
     <Container>
       <Form>
-        <FormGroup componentClass={Row} controlId="inputEmail3">
+        <FormGroup as={Row} controlId="inputEmail3">
           <FormLabel column sm={2}>
             Email
           </FormLabel>
@@ -73,7 +73,7 @@ storiesOf('Forms ', module)
             <FormControl type="email" placeholder="Email" />
           </Col>
         </FormGroup>
-        <FormGroup componentClass={Row} controlId="inputPassword3">
+        <FormGroup as={Row} controlId="inputPassword3">
           <FormLabel column sm={2}>
             Password
           </FormLabel>
@@ -81,9 +81,9 @@ storiesOf('Forms ', module)
             <FormControl type="password" placeholder="Password" />
           </Col>
         </FormGroup>
-        <FormGroup componentClass="fieldset">
+        <FormGroup as="fieldset">
           <Row>
-            <Col componentClass="legend" className="col-form-legend">
+            <Col as="legend" className="col-form-legend">
               Radios
             </Col>
             <Col sm={10}>
@@ -110,13 +110,13 @@ storiesOf('Forms ', module)
             </Col>
           </Row>
         </FormGroup>
-        <FormGroup componentClass={Row}>
+        <FormGroup as={Row}>
           <Col sm={2}>Checkbox</Col>
           <Col sm={10}>
             <FormCheck type="checkbox"> Check me out</FormCheck>
           </Col>
         </FormGroup>
-        <FormGroup componentClass={Row}>
+        <FormGroup as={Row}>
           <Col sm={10}>
             <Button type="submit" bsStyle="primary">
               Sign in
@@ -138,7 +138,7 @@ storiesOf('Forms ', module)
   .add('Readonly ✔', () => <FormControl readOnly />)
   .add('Plaintext ✔', () => (
     <Form>
-      <FormGroup componentClass={Row}>
+      <FormGroup as={Row}>
         <FormLabel column sm={2}>
           Blah
         </FormLabel>
@@ -146,7 +146,7 @@ storiesOf('Forms ', module)
           <FormControl placeholder="another input" />
         </Col>
       </FormGroup>
-      <FormGroup componentClass={Row}>
+      <FormGroup as={Row}>
         <FormLabel column sm={2}>
           Example file input
         </FormLabel>
@@ -165,15 +165,15 @@ storiesOf('Forms ', module)
       <FormControl placeholder="small" bsStyle="sm" />
       <br />
 
-      <FormControl componentClass="select" bsStyle="lg">
+      <FormControl as="select" bsStyle="lg">
         <option>Large select</option>
       </FormControl>
       <br />
-      <FormControl componentClass="select">
+      <FormControl as="select">
         <option>Default select</option>
       </FormControl>
       <br />
-      <FormControl componentClass="select" bsStyle="sm">
+      <FormControl as="select" bsStyle="sm">
         <option>Small select</option>
       </FormControl>
     </Form>

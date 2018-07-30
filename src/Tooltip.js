@@ -7,7 +7,7 @@ import {
   bsClass,
   getClassSet,
   prefix,
-  splitBsProps
+  splitBsProps,
 } from './utils/bootstrapUtils';
 
 const propTypes = {
@@ -17,7 +17,7 @@ const propTypes = {
    * @required
    */
   id: isRequiredForA11y(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   ),
 
   /**
@@ -41,11 +41,11 @@ const propTypes = {
   /**
    * The "left" position value for the Tooltip arrow.
    */
-  arrowOffsetLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  arrowOffsetLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 const defaultProps = {
-  placement: 'right'
+  placement: 'right',
 };
 
 class Tooltip extends React.Component {
@@ -66,18 +66,18 @@ class Tooltip extends React.Component {
 
     const classes = {
       ...getClassSet(bsProps),
-      [placement]: true
+      [placement]: true,
     };
 
     const outerStyle = {
       top: positionTop,
       left: positionLeft,
-      ...style
+      ...style,
     };
 
     const arrowStyle = {
       top: arrowOffsetTop,
-      left: arrowOffsetLeft
+      left: arrowOffsetLeft,
     };
 
     return (

@@ -4,14 +4,14 @@ import Anchor from '../../components/Anchor';
 import LinkToSource from '../../components/LinkToSource';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import PopoverBasic from '../../examples/PopoverBasic';
-import PopoverPositioned from '../../examples/PopoverPositioned';
-import PopoverTriggerBehaviors from '../../examples/PopoverTriggerBehaviors';
 import PopoverContained from '../../examples/PopoverContained';
+import PopoverPositioned from '../../examples/PopoverPositioned';
 import PopoverPositionedScrolling from '../../examples/PopoverPositionedScrolling';
+import PopoverTriggerBehaviors from '../../examples/PopoverTriggerBehaviors';
+import withLayout from '../../withLayout';
 
-export default function PopoverSection({ data }) {
+export default withLayout(function PopoverSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -75,7 +75,7 @@ export default function PopoverSection({ data }) {
       <PropTable metadata={data.Popover} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query PopoverQuery {

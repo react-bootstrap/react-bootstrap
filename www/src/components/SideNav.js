@@ -13,6 +13,7 @@ const components = [
   'breadcrumb',
   'buttons',
   'button-group',
+  'cards',
   'carousel',
   'dropdowns',
   'forms',
@@ -32,7 +33,7 @@ const components = [
   'progress',
   'table',
   'tabs',
-  'tooltips'
+  'tooltips',
 ];
 
 const utilities = ['custom-styles', 'transitions', 'responsive-embed'];

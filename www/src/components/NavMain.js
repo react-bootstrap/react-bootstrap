@@ -7,18 +7,18 @@ import Nav from 'react-bootstrap/lib/Nav';
 const NAV_LINKS = {
   documentation: {
     link: '/getting-started/introduction',
-    title: 'Documentation'
-  }
+    title: 'Documentation',
+  },
 };
 
 const propTypes = {
-  activePage: PropTypes.string
+  activePage: PropTypes.string,
 };
 
 function NavMain({ activePage }) {
   return (
     <Navbar
-      componentClass="header"
+      as="header"
       role="banner"
       expand="md"
       variant="dark"

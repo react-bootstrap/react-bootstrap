@@ -8,13 +8,13 @@ import TabPane from './TabPane';
 /* eslint-disable react/require-render-return, react/no-unused-prop-types */
 class Tab extends React.Component {
   static propTypes = {
-    title: PropTypes.node.isRequired
+    title: PropTypes.node.isRequired,
   };
   render() {
     throw new Error(
       'ReactBootstrap: The `Tab` component is not meant to be rendered! ' +
         "It's an abstract component that is only valid as a direct Child of the `Tabs` Component. " +
-        'For custom tabs components use TabPane and TabsContainer directly'
+        'For custom tabs components use TabPane and TabsContainer directly',
     );
   }
 }

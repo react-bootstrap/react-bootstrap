@@ -6,7 +6,7 @@
   'warning',
   'info',
   'light',
-  'dark'
+  'dark',
 ].map((variant, idx) => (
   <Alert key={idx} variant={variant}>
     This is a {variant} alert with{' '}

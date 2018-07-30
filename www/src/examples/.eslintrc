@@ -40,12 +40,13 @@
     "ListGroup": false,
     "ListGroupItem": false,
     "Media": false,
-    "MenuItem": false,
+    "Dropdown.Item": false,
     "Modal": false,
     "Nav": false,
     "Navbar": false,
     "NavDropdown": false,
     "NavItem": false,
+    "NavLink": false,
     "Overlay": false,
     "OverlayTrigger": false,
     "PageHeader": false,
@@ -63,12 +64,13 @@
     "Table": false,
     "TabPane": false,
     "Tabs": false,
-    "Thumbnail": false,
     "Tooltip": false,
     "Well": false,
 
-    "bootstrapUtils": false,
+    "ThemeProvider": false,
 
-    "mountNode": false
+    "mountNode": false,
+    "yup": false,
+    "formik": false
   }
 }

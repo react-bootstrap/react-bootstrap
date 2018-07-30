@@ -10,9 +10,7 @@ describe('<Navbar>', () => {
   });
 
   it('Should add "navigation" role when not using a `<nav>`', () => {
-    mount(<Navbar componentClass="div" />).assertSingle(
-      'Navbar > div[role="navigation"]'
-    );
+    mount(<Navbar as="div" />).assertSingle('Navbar > div[role="navigation"]');
   });
 
   it('Should add fixed=top|bottom variation', () => {
@@ -34,7 +32,7 @@ describe('<Navbar>', () => {
       mount(<Navbar role="banner" />)
         .getDOMNode()
         .getAttribute('role'),
-      'banner'
+      'banner',
     );
   });
 
@@ -52,7 +50,7 @@ describe('<Navbar>', () => {
     mount(
       <Navbar>
         <Nav />
-      </Navbar>
+      </Navbar>,
     ).assertSingle('.navbar-nav');
   });
 
@@ -60,12 +58,12 @@ describe('<Navbar>', () => {
     assert(
       mount(
         <Navbar>
-          <Navbar.Toggle componentClass="p">hi</Navbar.Toggle>
-        </Navbar>
+          <Navbar.Toggle as="p">hi</Navbar.Toggle>
+        </Navbar>,
       )
         .assertSingle('p.navbar-toggler')
         .text(),
-      'hi'
+      'hi',
     );
   });
 
@@ -74,9 +72,9 @@ describe('<Navbar>', () => {
     mount(
       <Navbar onToggle={toggleSpy}>
         <Navbar.Toggle />
-      </Navbar>
+      </Navbar>,
     )
-      .find(Navbar.Toggle)
+      .find('NavbarToggle')
       .simulate('click');
 
     expect(toggleSpy).to.be.calledOnce;
@@ -89,9 +87,9 @@ describe('<Navbar>', () => {
     mount(
       <Navbar>
         <Navbar.Toggle onClick={clickSpy} />
-      </Navbar>
+      </Navbar>,
     )
-      .find(Navbar.Toggle)
+      .find('NavbarToggle')
       .simulate('click');
 
     expect(clickSpy).to.have.been.called;
@@ -101,7 +99,7 @@ describe('<Navbar>', () => {
     mount(
       <Navbar>
         <Navbar.Collapse>hello</Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     ).assertSingle('.navbar-collapse');
   });
 
@@ -109,7 +107,7 @@ describe('<Navbar>', () => {
     mount(
       <Navbar defaultExpanded>
         <Navbar.Collapse>hello</Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     ).assertSingle('Collapse[in]');
   });
 
@@ -118,7 +116,7 @@ describe('<Navbar>', () => {
       <Navbar>
         <Navbar.Toggle />
         <Navbar.Collapse>hello</Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     );
 
     let toggle = wrapper.find('.navbar-toggler');
@@ -143,11 +141,11 @@ describe('<Navbar>', () => {
       <Navbar onSelect={selectSpy}>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Nav componentClass="div">
+          <Nav as="div">
             <Nav.Link href="https://www.google.com" onClick={navItemOnClick} />
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     )
       .find('a.nav-link')
       .simulate('click');
@@ -158,7 +156,7 @@ describe('<Navbar>', () => {
     expect(selectSpy).to.be.calledOnce;
     expect(navItemOnClick).to.be.calledOnce;
     expect(event.target.getAttribute('href')).to.be.equal(
-      'https://www.google.com'
+      'https://www.google.com',
     );
     expect(preventDefaultSpy).to.not.be.called;
   });
@@ -169,13 +167,13 @@ describe('<Navbar>', () => {
       <Navbar defaultExpanded>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Nav componentClass="div">
+          <Nav as="div">
             <Nav.Link href="https://www.google.com" onClick={navItemSpy}>
               <span className="link-text">Option 1</span>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     )
       .find('.link-text')
       .simulate('click');
@@ -190,13 +188,13 @@ describe('<Navbar>', () => {
       <Navbar collapseOnSelect onToggle={toggleSpy} defaultExpanded>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Nav componentClass="div">
+          <Nav as="div">
             <Nav.Link href="#" onClick={navItemSpy}>
               <span className="link-text">Option 1</span>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     )
       .find('.link-text')
       .simulate('click');
@@ -214,13 +212,13 @@ describe('<Navbar>', () => {
       <Navbar onSelect={selectSpy}>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Nav componentClass="div">
+          <Nav as="div">
             <Nav.Link href="#home" onClick={navItemSpy}>
               <span className="link-text">Option 1</span>
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
-      </Navbar>
+      </Navbar>,
     )
       .find('.link-text')
       .simulate('click');

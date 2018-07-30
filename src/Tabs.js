@@ -70,13 +70,13 @@ const propTypes = {
   /**
    * Unmount tabs (remove it from the DOM) when it is no longer visible
    */
-  unmountOnExit: PropTypes.bool
+  unmountOnExit: PropTypes.bool,
 };
 
 const defaultProps = {
   variant: 'tabs',
   mountOnEnter: false,
-  unmountOnExit: false
+  unmountOnExit: false,
 };
 
 function getDefaultActiveKey(children) {
@@ -99,7 +99,7 @@ class Tabs extends React.Component {
 
     return (
       <NavItem
-        componentClass={NavLink}
+        as={NavLink}
         eventKey={eventKey}
         disabled={disabled}
         className={tabClassName}
@@ -116,8 +116,6 @@ class Tabs extends React.Component {
       transition,
       mountOnEnter,
       unmountOnExit,
-      className,
-      style,
       children,
       activeKey = getDefaultActiveKey(children),
       ...props
@@ -132,7 +130,7 @@ class Tabs extends React.Component {
         mountOnEnter={mountOnEnter}
         unmountOnExit={unmountOnExit}
       >
-        <Nav {...props} role="tablist" componentClass="nav">
+        <Nav {...props} role="tablist" as="nav">
           {ValidComponentChildren.map(children, this.renderTab)}
         </Nav>
 
@@ -155,5 +153,5 @@ Tabs.propTypes = propTypes;
 Tabs.defaultProps = defaultProps;
 
 export default uncontrollable(Tabs, {
-  activeKey: 'onSelect'
+  activeKey: 'onSelect',
 });

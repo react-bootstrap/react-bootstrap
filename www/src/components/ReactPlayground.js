@@ -3,8 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import * as ReactBootstrap from 'react-bootstrap';
+import * as formik from 'formik';
+import yup from 'yup';
 
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
+
+import Sonnet from './Sonnet';
 
 import '../css/prism.css';
 
@@ -13,26 +17,31 @@ const scope = {
   ReactDOM,
   classNames,
   PropTypes,
-  bootstrapUtils: ReactBootstrap.utils.bootstrapUtils
+  Sonnet,
+  formik,
+  yup,
+  bootstrapUtils: ReactBootstrap.utils.bootstrapUtils,
 };
+
+const prettierComment = /(\{\s*\/\*\s+prettier-ignore\s+\*\/\s*\})|(\/\/\s+prettier-ignore)/gim;
 
 export default class Playground extends React.Component {
   static propTypes = {
-    codeText: PropTypes.string.isRequired
+    codeText: PropTypes.string.isRequired,
   };
 
   render() {
-    const { codeText } = this.props;
+    const { codeText, exampleClassName } = this.props;
 
     return (
       <LiveProvider
-        code={codeText}
+        code={codeText.replace(prettierComment, '')}
         scope={scope}
         mountStylesheet={false}
         noInline={codeText.includes('render(')}
       >
-        <div className={classNames('bs-example', this.props.exampleClassName)}>
-          <LivePreview className="bs-example-preview" />
+        <div className={classNames('bs-example', exampleClassName)}>
+          <LivePreview />
           <LiveError />
         </div>
         <div className="bs-code-editor">

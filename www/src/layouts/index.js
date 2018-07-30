@@ -10,7 +10,7 @@ import '../css/style.less';
 import '../css/examples.less';
 
 const propTypes = {
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 };
 
 function DefaultLayout({ children, location }) {
@@ -18,7 +18,7 @@ function DefaultLayout({ children, location }) {
     <div>
       <NavMain activePage={location.pathname} />
 
-      {typeof children === 'function' ? children() : children}
+      {children}
 
       <PageFooter />
     </div>

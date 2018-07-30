@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/lib/Col';
 import SideNav from './SideNav';
 
 const propTypes = {
-  location: PropTypes.object.isRequired
+  location: PropTypes.object.isRequired,
 };
 
 function Main({ children, ...props }) {

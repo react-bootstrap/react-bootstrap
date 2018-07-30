@@ -6,14 +6,14 @@ import {
   bsClass,
   getClassSet,
   prefix,
-  splitBsProps
+  splitBsProps,
 } from './utils/bootstrapUtils';
 
 const propTypes = {
   /**
    * An icon name without "glyphicon-" prefix. See e.g. http://getbootstrap.com/components/#glyphicons
    */
-  glyph: PropTypes.string.isRequired
+  glyph: PropTypes.string.isRequired,
 };
 
 class Glyphicon extends React.Component {
@@ -23,7 +23,7 @@ class Glyphicon extends React.Component {
 
     const classes = {
       ...getClassSet(bsProps),
-      [prefix(bsProps, glyph)]: true
+      [prefix(bsProps, glyph)]: true,
     };
 
     return (

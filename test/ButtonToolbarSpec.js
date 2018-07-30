@@ -9,7 +9,7 @@ describe('ButtonToolbar', () => {
     mount(
       <ButtonToolbar>
         <Button>Title</Button>
-      </ButtonToolbar>
+      </ButtonToolbar>,
     ).assertSingle('div.btn-toolbar[role="toolbar"]');
   });
 });

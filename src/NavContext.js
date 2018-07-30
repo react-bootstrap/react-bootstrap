@@ -1,8 +1,5 @@
 import React from 'react';
 
-const NavContext = React.createContext({
-  activeKey: null,
-  onSelect() {}
-});
+const NavContext = React.createContext(null);
 
 export default NavContext;

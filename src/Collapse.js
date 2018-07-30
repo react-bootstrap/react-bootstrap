@@ -2,18 +2,19 @@ import classNames from 'classnames';
 import css from 'dom-helpers/style';
 import React from 'react';
 import PropTypes from 'prop-types';
+import onEnd from 'dom-helpers/transition/end';
 import Transition, {
   EXITED,
   ENTERED,
   ENTERING,
-  EXITING
+  EXITING,
 } from 'react-transition-group/Transition';
 
 import createChainedFunction from './utils/createChainedFunction';
 
 const MARGINS = {
   height: ['marginTop', 'marginBottom'],
-  width: ['marginLeft', 'marginRight']
+  width: ['marginLeft', 'marginRight'],
 };
 
 // reading a dimension prop will cause the browser to recalculate,
@@ -38,7 +39,7 @@ const collapseStyles = {
   [EXITED]: 'collapse',
   [EXITING]: 'collapsing',
   [ENTERING]: 'collapsing',
-  [ENTERED]: 'collapse show'
+  [ENTERED]: 'collapse show',
 };
 
 const propTypes = {
@@ -104,7 +105,7 @@ const propTypes = {
    */
   dimension: PropTypes.oneOfType([
     PropTypes.oneOf(['height', 'width']),
-    PropTypes.func
+    PropTypes.func,
   ]),
 
   /**
@@ -119,7 +120,7 @@ const propTypes = {
   /**
    * ARIA role of collapsible element
    */
-  role: PropTypes.string
+  role: PropTypes.string,
 };
 
 const defaultProps = {
@@ -130,7 +131,7 @@ const defaultProps = {
   appear: false,
 
   dimension: 'height',
-  getDimensionValue
+  getDimensionValue,
 };
 
 class Collapse extends React.Component {
@@ -165,7 +166,7 @@ class Collapse extends React.Component {
     const dimension = this.getDimension();
     elem.style[dimension] = `${this.props.getDimensionValue(
       dimension,
-      elem
+      elem,
     )}px`;
     triggerBrowserReflow(elem);
   };
@@ -192,7 +193,7 @@ class Collapse extends React.Component {
     const handleEnter = createChainedFunction(this.handleEnter, onEnter);
     const handleEntering = createChainedFunction(
       this.handleEntering,
-      onEntering
+      onEntering,
     );
     const handleEntered = createChainedFunction(this.handleEntered, onEntered);
     const handleExit = createChainedFunction(this.handleExit, onExit);
@@ -200,6 +201,7 @@ class Collapse extends React.Component {
 
     return (
       <Transition
+        addEndListener={onEnd}
         {...props}
         aria-expanded={props.role ? props.in : null}
         onEnter={handleEnter}
@@ -215,8 +217,8 @@ class Collapse extends React.Component {
               className,
               children.props.className,
               collapseStyles[state],
-              this.getDimension() === 'width' && 'width'
-            )
+              this.getDimension() === 'width' && 'width',
+            ),
           })
         }
       </Transition>

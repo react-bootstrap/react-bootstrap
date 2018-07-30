@@ -4,7 +4,7 @@ import React from 'react';
 const propTypes = {
   title: PropTypes.node,
   children: PropTypes.node,
-  theme: PropTypes.oneOf(['danger', 'warning', 'info']).isRequired
+  theme: PropTypes.oneOf(['danger', 'warning', 'info']).isRequired,
 };
 
 function Callout({ title, children, theme }) {

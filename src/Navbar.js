@@ -13,6 +13,7 @@ import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';
 import { createBootstrapComponent } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
+import SelectableContext from './SelectableContext';
 
 const propTypes = {
   /** @default 'navbar' */
@@ -63,7 +64,7 @@ const propTypes = {
   /**
    * Set a custom element for this component.
    */
-  componentClass: elementType,
+  as: elementType,
 
   /**
    * A callback fired when the `<Navbar>` body collapses or expands. Fired when
@@ -116,40 +117,39 @@ const propTypes = {
 
   /**
    * The ARIA role for the navbar, will default to 'navigation' for
-   * Navbars whose `componentClass` is something other than `<nav>`.
+   * Navbars whose `as` is something other than `<nav>`.
    *
    * @default 'navigation'
    */
-  role: PropTypes.string
+  role: PropTypes.string,
 };
 
 const defaultProps = {
-  componentClass: 'nav',
+  as: 'nav',
   expand: true,
   fluid: true,
   variant: 'light',
-  collapseOnSelect: false
+  collapseOnSelect: false,
 };
 
 class Navbar extends React.Component {
-  static getDerivedStateFromProps({ bsPrefix, expanded }, prevState) {
-    return {
-      navbarContext: {
-        ...prevState.navbarContext,
-        bsPrefix,
-        expanded
-      }
-    };
-  }
-
   constructor(...args) {
     super(...args);
 
     this.state = {
       navbarContext: {
         onToggle: this.handleToggle,
-        onSelect: this.handleCollapse
-      }
+      },
+    };
+  }
+
+  static getDerivedStateFromProps({ bsPrefix, expanded }, prevState) {
+    return {
+      navbarContext: {
+        ...prevState.navbarContext,
+        bsPrefix,
+        expanded,
+      },
     };
   }
 
@@ -179,7 +179,7 @@ class Navbar extends React.Component {
       fluid,
       className,
       children,
-      componentClass: Component,
+      as: Component,
       expanded: _1,
       onToggle: _2,
       onSelect: _3,
@@ -198,20 +198,22 @@ class Navbar extends React.Component {
 
     return (
       <NavbarContext.Provider value={this.state.navbarContext}>
-        <Component
-          {...props}
-          className={classNames(
-            className,
-            bsPrefix,
-            expand && expandClass,
-            variant && `${bsPrefix}-${variant}`,
-            bg && `bg-${bg}`,
-            sticky && `sticky-${sticky}`,
-            fixed && `fixed-${fixed}`
-          )}
-        >
-          {fluid ? children : <div className="container">{children}</div>}
-        </Component>
+        <SelectableContext.Provider value={this.handleCollapse}>
+          <Component
+            {...props}
+            className={classNames(
+              className,
+              bsPrefix,
+              expand && expandClass,
+              variant && `${bsPrefix}-${variant}`,
+              bg && `bg-${bg}`,
+              sticky && `sticky-${sticky}`,
+              fixed && `fixed-${fixed}`,
+            )}
+          >
+            {fluid ? children : <div className="container">{children}</div>}
+          </Component>
+        </SelectableContext.Provider>
       </NavbarContext.Provider>
     );
   }
@@ -222,7 +224,7 @@ Navbar.defaultProps = defaultProps;
 
 const DecoratedNavbar = createBootstrapComponent(
   uncontrollable(Navbar, { expanded: 'onToggle' }),
-  'navbar'
+  'navbar',
 );
 
 DecoratedNavbar.Brand = NavbarBrand;
@@ -230,7 +232,7 @@ DecoratedNavbar.Toggle = NavbarToggle;
 DecoratedNavbar.Collapse = NavbarCollapse;
 
 DecoratedNavbar.Text = createWithBsPrefix('navbar-text', {
-  Component: 'span'
+  Component: 'span',
 });
 
 export default DecoratedNavbar;

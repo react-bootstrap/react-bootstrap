@@ -14,11 +14,11 @@ const propTypes = {
   /**
    * this is sort of silly but needed for Button
    */
-  componentClass: elementType
+  as: elementType,
 };
 
 const defaultProps = {
-  componentClass: 'a'
+  as: 'a',
 };
 
 function isTrivialHref(href) {
@@ -30,7 +30,7 @@ function isTrivialHref(href) {
  * an anchor tag is needed, when semantically a button tag is the
  * better choice. SafeAnchor ensures that when an anchor is used like a
  * button its accessible. It also emulates input `disabled` behavior for
- * links, which is usually desirable for Buttons, NavItems, MenuItems, etc.
+ * links, which is usually desirable for Buttons, NavItems, DropdownItems, etc.
  */
 class SafeAnchor extends React.Component {
   constructor(props, context) {
@@ -65,12 +65,7 @@ class SafeAnchor extends React.Component {
   }
 
   render() {
-    const {
-      componentClass: Component,
-      disabled,
-      onKeyDown,
-      ...props
-    } = this.props;
+    const { as: Component, disabled, onKeyDown, ...props } = this.props;
 
     if (isTrivialHref(props.href)) {
       props.role = props.role || 'button';

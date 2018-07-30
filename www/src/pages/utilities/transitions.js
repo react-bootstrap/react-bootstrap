@@ -3,11 +3,11 @@ import React from 'react';
 import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
 import ReactPlayground from '../../components/ReactPlayground';
-
-import Fade from '../../examples/Fade';
 import Collapse from '../../examples/Collapse';
+import Fade from '../../examples/Fade';
+import withLayout from '../../withLayout';
 
-export default function TransitionSection({ data }) {
+export default withLayout(function TransitionSection({ data }) {
   return (
     <div className="bs-docs-section">
       <h2 className="page-header">
@@ -55,7 +55,7 @@ export default function TransitionSection({ data }) {
       <PropTable metadata={data.Fade} />
     </div>
   );
-}
+});
 
 export const query = graphql`
   query TransitionQuery {

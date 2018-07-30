@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import BaseOverlay from 'react-overlays/lib/Overlay';
+import BaseOverlay from 'react-overlays//Overlay';
 import elementType from 'prop-types-extra/lib/elementType';
 
 import Fade from './Fade';
@@ -61,14 +61,14 @@ const propTypes = {
   /**
    * Sets the direction of the Overlay.
    */
-  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left'])
+  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 };
 
 const defaultProps = {
   animation: Fade,
   rootClose: false,
   show: false,
-  placement: 'right'
+  placement: 'right',
 };
 
 class Overlay extends React.Component {
@@ -81,7 +81,7 @@ class Overlay extends React.Component {
 
     if (!transition) {
       child = cloneElement(children, {
-        className: classNames(children.props.className, 'in')
+        className: classNames(children.props.className, 'in'),
       });
     } else {
       child = children;
