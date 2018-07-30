@@ -1,3 +1,4 @@
+import { graphql } from 'gatsby';
 import capitalize from 'lodash/capitalize';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -213,15 +214,13 @@ class PropTable extends React.Component {
   }
 }
 
-export const descFragment = graphql`
+export const metadataFragment = graphql`
   fragment Description_markdown on ComponentDescription {
     childMarkdownRemark {
       html
     }
   }
-`;
 
-export const metadataFragment = graphql`
   fragment PropTable_metadata on ComponentMetadata {
     composes
     displayName

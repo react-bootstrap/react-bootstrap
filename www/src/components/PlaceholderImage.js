@@ -1,8 +1,9 @@
-import holderjs from 'holderjs';
 import React from 'react';
 
 class PlaceholderImage extends React.Component {
-  componentDidMount() {
+  async componentDidMount() {
+    const { default: holderjs } = await import('holderjs');
+
     holderjs.run({
       domain: 'holder.js',
       images: this.image.current,
