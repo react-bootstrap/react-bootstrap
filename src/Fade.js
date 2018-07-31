@@ -6,6 +6,7 @@ import Transition, {
   ENTERING,
 } from 'react-transition-group/Transition';
 import onEnd from 'dom-helpers/transition/end';
+import triggerBrowserReflow from './utils/triggerBrowserReflow';
 
 const propTypes = {
   /**
@@ -74,10 +75,6 @@ const fadeStyles = {
   [ENTERING]: 'show',
   [ENTERED]: 'show',
 };
-
-function triggerBrowserReflow(node) {
-  node.offsetHeight; // eslint-disable-line no-unused-expressions
-}
 
 class Fade extends React.Component {
   handleEnter = node => {
