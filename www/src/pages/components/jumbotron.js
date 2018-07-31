@@ -11,9 +11,9 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function JumbotronSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="jumbotron">Jumbotron</Anchor> <small>Jumbotron</small>
+    <>
+      <h2>
+        <Anchor id="jumbotron">Jumbotron</Anchor>
       </h2>
 
       <p>
@@ -29,7 +29,7 @@ export default withLayout(function JumbotronSection({ data }) {
         <LinkToSource component={data.Jumbotron.displayName} />
       </h3>
       <PropTable metadata={data.Jumbotron} />
-    </div>
+    </>
   );
 });
 

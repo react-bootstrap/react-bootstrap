@@ -25,7 +25,7 @@ class Example extends React.Component {
         <Modal
           show={this.state.show}
           onHide={this.handleHide}
-          dialogClassName="custom-modal"
+          dialogClassName="modal-90w"
           aria-labelledby="example-custom-modal-styling-title"
         >
           <Modal.Header closeButton>

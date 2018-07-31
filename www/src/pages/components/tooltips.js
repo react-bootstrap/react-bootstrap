@@ -12,9 +12,9 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function TooltipSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="tooltips">Tooltips</Anchor> <small>Tooltip</small>
+    <>
+      <h2>
+        <Anchor id="tooltips">Tooltips</Anchor>
       </h2>
 
       <p>
@@ -55,7 +55,7 @@ export default withLayout(function TooltipSection({ data }) {
         <LinkToSource component={data.Tooltip.displayName} />
       </h4>
       <PropTable metadata={data.Tooltip} />
-    </div>
+    </>
   );
 });
 

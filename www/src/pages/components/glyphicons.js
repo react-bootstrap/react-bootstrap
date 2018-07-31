@@ -9,8 +9,8 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function GlyphiconSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
+    <>
+      <h2>
         <Anchor id="glyphicons">Glyphicons</Anchor> <small>Glyphicon</small>
       </h2>
 
@@ -24,7 +24,7 @@ export default withLayout(function GlyphiconSection({ data }) {
         <Anchor id="glyphicons-props">Props</Anchor>
       </h3>
       <PropTable metadata={data.Glyphicon} />
-    </div>
+    </>
   );
 });
 

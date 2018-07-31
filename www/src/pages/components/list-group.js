@@ -15,10 +15,9 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function ListGroupSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="listgroup">List group</Anchor>{' '}
-        <small>ListGroup, ListGroupItem</small>
+    <>
+      <h2>
+        <Anchor id="listgroup">List group</Anchor>
       </h2>
 
       <p>
@@ -94,7 +93,7 @@ export default withLayout(function ListGroupSection({ data }) {
         <Anchor id="listgroup-props-item">ListGroupItem</Anchor>
         <LinkToSource component={data.ListGroupItem.displayName} />
       </h4>
-    </div>
+    </>
   );
 });
 

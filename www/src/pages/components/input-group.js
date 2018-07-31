@@ -15,7 +15,7 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function InputGroupSection({ data }) {
   return (
-    <div className="bs-docs-section">
+    <>
       <Heading h="1" id="input-group">
         InputGroup
       </Heading>
@@ -70,7 +70,7 @@ export default withLayout(function InputGroupSection({ data }) {
         Props
       </Heading>
       <ComponentApi metadata={data.InputGroup} />
-    </div>
+    </>
   );
 });
 

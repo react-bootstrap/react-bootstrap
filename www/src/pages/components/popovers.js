@@ -14,9 +14,9 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function PopoverSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="popovers">Popovers</Anchor> <small>Popover</small>
+    <>
+      <h2>
+        <Anchor id="popovers">Popovers</Anchor>
       </h2>
 
       <p>
@@ -74,7 +74,7 @@ export default withLayout(function PopoverSection({ data }) {
         <LinkToSource component={data.Popover.displayName} />
       </h3>
       <PropTable metadata={data.Popover} />
-    </div>
+    </>
   );
 });
 

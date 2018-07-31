@@ -14,7 +14,7 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function TabsSection({ data }) {
   return (
-    <div className="bs-docs-section">
+    <>
       <h2>
         <Anchor id="tabs">Tabbed components</Anchor>
       </h2>
@@ -124,7 +124,7 @@ export default withLayout(function TabsSection({ data }) {
         <LinkToSource component={data.TabPane.displayName} />
       </h4>
       <PropTable metadata={data.TabPane} />
-    </div>
+    </>
   );
 });
 

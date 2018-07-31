@@ -10,7 +10,7 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function ImageSection({ data }) {
   return (
-    <div className="bs-docs-section">
+    <>
       <Heading h="1" id="images">
         Images
       </Heading>
@@ -33,7 +33,7 @@ export default withLayout(function ImageSection({ data }) {
       <ReactPlayground codeText={Fluid} />
 
       <ComponentApi metadata={data.Image} />
-    </div>
+    </>
   );
 });
 

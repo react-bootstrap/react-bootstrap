@@ -13,7 +13,7 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function MediaSection({ data }) {
   return (
-    <div className="bs-docs-section">
+    <>
       <Heading h="1" id="media-objects">
         Media objects
       </Heading>
@@ -80,7 +80,7 @@ export default withLayout(function MediaSection({ data }) {
       </Heading>
 
       <ComponentApi metadata={data.Media} />
-    </div>
+    </>
   );
 });
 

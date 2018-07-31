@@ -11,10 +11,9 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function CarouselSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
+    <>
+      <h2>
         <Anchor id="carousels">Carousels</Anchor>{' '}
-        <small>Carousel, Carousel.Item, Carousel.Caption</small>
       </h2>
 
       <h3>
@@ -56,7 +55,7 @@ export default withLayout(function CarouselSection({ data }) {
         <LinkToSource component={data.caption.displayName} />
       </h4>
       <PropTable metadata={data.caption} />
-    </div>
+    </>
   );
 });
 

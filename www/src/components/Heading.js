@@ -1,16 +1,13 @@
 import React from 'react';
+import Anchor from './Anchor';
 
 function Heading({ h, id, subtitle, children }) {
-  const H = `h${h}`;
-
   return (
-    <H id={id}>
-      <a href={`#${id}`} className="anchor">
-        <span className="anchor-icon">#</span>
-        {children}
-      </a>
+    <Anchor as={`h${h}`} id={id} className="d-flex align-items-center">
+      {children}
+      <span className="ml-auto" />
       {subtitle}
-    </H>
+    </Anchor>
   );
 }
 

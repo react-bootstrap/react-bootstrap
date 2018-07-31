@@ -9,10 +9,9 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function ResponsiveEmbedSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="responsive-embed">Responsive embed</Anchor>{' '}
-        <small>ResponsiveEmbed</small>
+    <>
+      <h2>
+        <Anchor id="responsive-embed">Responsive embed</Anchor>
       </h2>
 
       <p>
@@ -34,7 +33,7 @@ export default withLayout(function ResponsiveEmbedSection({ data }) {
         <Anchor id="responsive-embed-props">Props</Anchor>
       </h3>
       <PropTable metadata={data.ResponsiveEmbed} />
-    </div>
+    </>
   );
 });
 

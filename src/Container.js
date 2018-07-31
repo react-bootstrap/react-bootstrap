@@ -33,7 +33,7 @@ class Container extends React.Component {
         {...props}
         className={classNames(
           className,
-          bsPrefix,
+          !fluid && bsPrefix,
           fluid && `${bsPrefix}-fluid`,
         )}
       />

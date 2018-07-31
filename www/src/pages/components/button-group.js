@@ -15,10 +15,9 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function ButtonGroupSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="btn-groups">Button groups</Anchor>{' '}
-        <small>ButtonGroup, ButtonToolbar</small>
+    <>
+      <h2>
+        <Anchor id="btn-groups">Button groups</Anchor>
       </h2>
 
       <p className="lead">
@@ -93,7 +92,7 @@ export default withLayout(function ButtonGroupSection({ data }) {
         <LinkToSource component={data.ButtonGroup.displayName} />
       </h4>
       <PropTable metadata={data.ButtonGroup} />
-    </div>
+    </>
   );
 });
 

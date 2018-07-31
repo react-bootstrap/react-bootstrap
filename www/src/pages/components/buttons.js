@@ -20,8 +20,8 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function ButtonSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h1 className="page-header">
+    <>
+      <h1>
         <Anchor id="buttons">Buttons</Anchor>
       </h1>
       <h3>
@@ -138,7 +138,7 @@ export default withLayout(function ButtonSection({ data }) {
         <LinkToSource component={data.ToggleButton.displayName} />
       </h3>
       <PropTable metadata={data.ToggleButton} />
-    </div>
+    </>
   );
 });
 

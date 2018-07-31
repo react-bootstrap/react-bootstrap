@@ -4,13 +4,14 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function Page() {
   return (
-    <div className="bs-docs-section">
-      <p>
+    <>
+      <h1>Getting help</h1>
+      <p className="lead">
         Stay up to date on the development of React-Bootstrap and reach out to
         the community with these helpful resources.
       </p>
 
-      <h3>Stack Overflow</h3>
+      <h2>Stack Overflow</h2>
       <p>
         <a href="http://stackoverflow.com/questions/ask">Ask questions</a> about
         specific problems you have faced, including details about what exactly
@@ -21,7 +22,7 @@ export default withLayout(function Page() {
         </a>.
       </p>
 
-      <h3>Live help</h3>
+      <h2>Live help</h2>
       <p>
         Bring your questions and pair with other react-bootstrap users in a{' '}
         <a href="http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap">
@@ -30,14 +31,14 @@ export default withLayout(function Page() {
         screenshare your own code with the group for feedback.
       </p>
 
-      <h3>Chat rooms</h3>
+      <h2>Chat rooms</h2>
       <p>
         Discuss questions in the <code className="js">#react-bootstrap</code>{' '}
         channel on the{' '}
         <a href="http://www.reactiflux.com/">Reactiflux Discord</a>.
       </p>
 
-      <h3>GitHub issues</h3>
+      <h2>GitHub issues</h2>
       <p>
         The issue tracker is the preferred channel for bug reports, features
         requests and submitting pull requests. See more about how we use issues
@@ -46,6 +47,6 @@ export default withLayout(function Page() {
           contribution guidelines
         </a>.
       </p>
-    </div>
+    </>
   );
 });
