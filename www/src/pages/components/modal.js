@@ -15,7 +15,7 @@ import ModalGrid from '../../examples/Modal/Grid';
 import withLayout from '../../withLayout';
 
 const styles = css`
-  /* has to be fully global becausse of modal portals */
+  /* has to be fully global because of modal portals */
   :global(.modal-90w) {
     width: 90%;
     max-width: none !important;
