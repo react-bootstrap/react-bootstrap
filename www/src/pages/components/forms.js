@@ -24,7 +24,7 @@ import CheckApi from '../../examples/Form/CheckApi';
 
 export default withLayout(function FormControlsSection({ data }) {
   return (
-    <div className="bs-docs-section">
+    <>
       <Heading h="1" id="forms">
         Forms
       </Heading>
@@ -243,7 +243,7 @@ export default withLayout(function FormControlsSection({ data }) {
       <ComponentApi metadata={data.FormLabel} />
       <ComponentApi metadata={data.FormCheck} />
       <ComponentApi metadata={data.Feedback} />
-    </div>
+    </>
   );
 });
 

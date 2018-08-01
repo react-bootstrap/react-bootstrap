@@ -1,5 +1,6 @@
 import { graphql } from 'gatsby';
 import React from 'react';
+import { css } from 'css-literal-loader/styled';
 
 import Anchor from '../../components/Anchor';
 import PropTable from '../../components/PropTable';
@@ -13,12 +14,31 @@ import GridResponsive from '../../examples/Grid/Responsive';
 import GridResponsiveAuto from '../../examples/Grid/ResponsiveAuto';
 import withLayout from '../../withLayout';
 
+const styles = css`
+  @import '../../css/theme';
+
+  .example {
+    :global {
+      .row > .col,
+      .row > [class^='col-'] {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        background-color: $brandLight;
+        border: 1px solid $brand;
+      }
+
+      .row + .row {
+        margin-top: 1rem;
+      }
+    }
+  }
+`;
+
 export default withLayout(function GridSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h1 className="page-header">
+    <>
+      <h1>
         <Anchor id="grid">Grid system</Anchor>{' '}
-        <small>Container, Row, Col, Clearfix</small>
       </h1>
       <p>
         Bootstrap’s grid system uses a series of containers, rows, and columns
@@ -45,7 +65,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridAutoLayout}
-        exampleClassName="grid-examples"
+        exampleClassName={styles.example}
       />
 
       <h3>
@@ -61,7 +81,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridAutoLayoutSizing}
-        exampleClassName="grid-examples"
+        exampleClassName={styles.example}
       />
 
       <h3>
@@ -73,7 +93,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridAutoLayoutVariable}
-        exampleClassName="grid-examples"
+        exampleClassName={styles.example}
       />
       <h3>
         <Anchor id="responsive-grids">Responsive grids</Anchor>
@@ -86,7 +106,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridResponsiveAuto}
-        exampleClassName="grid-examples"
+        exampleClassName={styles.example}
       />
       <p>
         You can also mix and match breakpoints to create different grids
@@ -94,7 +114,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridResponsive}
-        exampleClassName="grid-examples"
+        exampleClassName={styles.example}
       />
       <p>
         The <code>Col</code> breakpoint props also have a more complicated{' '}
@@ -109,7 +129,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridOrdering}
-        exampleClassName="grid-examples"
+        exampleClassName={styles.example}
       />
       <p>
         For offsetting grid columns you can set an `offset` value, or, for more
@@ -117,7 +137,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridOffsetting}
-        exampleClassName="grid-examples"
+        exampleClassName={styles.example}
       />
       <h3>
         <Anchor id="grid-props">Props</Anchor>
@@ -142,7 +162,7 @@ export default withLayout(function GridSection({ data }) {
         <Anchor id="grid-props-col">Clearfix</Anchor>
       </h4>
       <PropTable metadata={data.Clearfix} />
-    </div>
+    </>
   );
 });
 

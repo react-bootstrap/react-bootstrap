@@ -7,28 +7,26 @@ import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 import Badge from 'react-bootstrap/lib/Badge';
 import Table from 'react-bootstrap/lib/Table';
 
+import { styled } from 'css-literal-loader/styled';
+
+const Code = styled('code')`
+  white-space: nowrap;
+`;
+
+const PropDescription = styled('div')`
+  & pre {
+    border-radius: 0;
+    border-width: 0;
+    border-left-width: 3px;
+  }
+`;
+
 function cleanDocletValue(str) {
   return str
     .trim()
     .replace(/^\{/, '')
     .replace(/\}$/, '');
 }
-
-// function getPropsData(component, metadata) {
-//   let componentData = metadata[component] || {};
-//   let props = componentData.props || {};
-
-//   if (componentData.composes) {
-//     componentData.composes.forEach(other => {
-//       if (other !== component) {
-//         props = merge({}, getPropsData(other, metadata), props);
-//       }
-//     });
-//   }
-
-//   return props;
-// }
-
 function getDisplayTypeName(typeName) {
   if (typeName === 'func') return 'function';
   else if (typeName === 'bool') return 'boolean';
@@ -108,17 +106,14 @@ class PropTable extends React.Component {
 
             <td>
               {doclets.deprecated && (
-                <div className="prop-desc-heading">
+                <div className="mb-1">
                   <strong className="text-danger">
                     {`Deprecated: ${doclets.deprecated} `}
                   </strong>
                 </div>
               )}
               {this.renderControllableNote(propData, name)}
-              <div
-                className="prop-desc"
-                dangerouslySetInnerHTML={{ __html: descHtml }}
-              />
+              <PropDescription dangerouslySetInnerHTML={{ __html: descHtml }} />
             </td>
           </tr>
         );
@@ -130,7 +125,7 @@ class PropTable extends React.Component {
     if (value == null) return null;
     if (getTypeName(prop) === 'elementType')
       value = `<${value.replace(/('|")/g, '')}>`;
-    return <code>{value}</code>;
+    return <Code>{value}</Code>;
   }
 
   renderControllableNote(prop, propName) {
@@ -147,13 +142,13 @@ class PropTable extends React.Component {
       </span>
     ) : (
       <span>
-        controlled by: <code>{controllable}</code>, initial prop:{' '}
-        <code>{`default${capitalize(propName)}`}</code>
+        controlled by: <Code>{controllable}</Code>, initial prop:{' '}
+        <Code>{`default${capitalize(propName)}`}</Code>
       </span>
     );
 
     return (
-      <div className="prop-desc-heading">
+      <div className="mb-2">
         <small>
           <em className="text-info">
             <Glyphicon glyph="info-sign" />
@@ -199,7 +194,7 @@ class PropTable extends React.Component {
     }
 
     return (
-      <Table bordered striped className="prop-table">
+      <Table bordered striped className="bg-white">
         <thead>
           <tr>
             <th>Name</th>

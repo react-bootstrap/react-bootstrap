@@ -53,6 +53,7 @@ class Table extends React.Component {
   render() {
     const {
       bsPrefix,
+      className,
       striped,
       bordered,
       hover,
@@ -64,6 +65,7 @@ class Table extends React.Component {
 
     const classes = classNames(
       bsPrefix,
+      className,
       variant && `${bsPrefix}-${variant}`,
       size && `${bsPrefix}-${size}`,
       striped && `${bsPrefix}-striped`,

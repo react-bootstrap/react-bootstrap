@@ -29,6 +29,8 @@ class DropdownItem extends React.Component {
     /**
      * Styles the menu item as a horizontal rule, providing visual separation between
      * groups of menu items.
+     *
+     * @type {boolean}
      */
     divider: all(
       PropTypes.bool,

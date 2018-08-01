@@ -10,10 +10,9 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function TransitionSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="transitions">Transitions</Anchor>{' '}
-        <small>Collapse, Fade</small>
+    <>
+      <h2>
+        <Anchor id="transitions">Transitions</Anchor>
       </h2>
 
       <p>
@@ -54,7 +53,7 @@ export default withLayout(function TransitionSection({ data }) {
         <Anchor id="transitions-fade-props">Props</Anchor>
       </h4>
       <PropTable metadata={data.Fade} />
-    </div>
+    </>
   );
 });
 

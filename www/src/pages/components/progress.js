@@ -16,9 +16,9 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function ProgressBarSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="progress">Progress bars</Anchor> <small>ProgressBar</small>
+    <>
+      <h2>
+        <Anchor id="progress">Progress bars</Anchor>
       </h2>
 
       <p className="lead">
@@ -89,7 +89,7 @@ export default withLayout(function ProgressBarSection({ data }) {
         <LinkToSource component={data.ProgressBar.displayName} />
       </h3>
       <PropTable metadata={data.ProgressBar} />
-    </div>
+    </>
   );
 });
 

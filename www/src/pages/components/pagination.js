@@ -10,7 +10,7 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function PaginationSection({ data }) {
   return (
-    <div className="bs-docs-section">
+    <>
       <Heading h="1" id="pagination">
         Pagination
       </Heading>
@@ -36,7 +36,7 @@ export default withLayout(function PaginationSection({ data }) {
       </Heading>
       <ComponentApi metadata={data.Pagination} />
       <ComponentApi metadata={data.PageItem} />
-    </div>
+    </>
   );
 });
 

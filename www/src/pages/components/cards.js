@@ -28,7 +28,7 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function CardSection({ data }) {
   return (
-    <div className="bs-docs-section">
+    <>
       <Heading h="1" id="cards">
         Cards
       </Heading>
@@ -158,7 +158,7 @@ export default withLayout(function CardSection({ data }) {
 
       <ComponentApi metadata={data.Card} />
       <ComponentApi metadata={data.CardImg} />
-    </div>
+    </>
   );
 });
 

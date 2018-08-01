@@ -13,9 +13,9 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function AlertsSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="alerts">Alert messages</Anchor> <small>Alert</small>
+    <>
+      <h2>
+        <Anchor id="alerts">Alert messages</Anchor>
       </h2>
 
       <p>
@@ -51,7 +51,7 @@ export default withLayout(function AlertsSection({ data }) {
         <LinkToSource component={data.metadata.displayName} />
       </h3>
       <PropTable metadata={data.metadata} />
-    </div>
+    </>
   );
 });
 

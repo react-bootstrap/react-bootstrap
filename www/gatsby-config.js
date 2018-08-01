@@ -73,6 +73,9 @@ module.exports = {
     },
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sass',
-    'gatsby-plugin-less',
+    {
+      resolve: 'gatsby-plugin-css-literal-loader',
+      options: { extension: '.module.scss' },
+    },
   ],
 };

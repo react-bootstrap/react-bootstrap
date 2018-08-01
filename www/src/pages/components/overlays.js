@@ -11,10 +11,9 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function OverlaySection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="custom-overlays">Custom overlays</Anchor>{' '}
-        <small>Overlay</small>
+    <>
+      <h2>
+        <Anchor id="custom-overlays">Custom overlays</Anchor>
       </h2>
 
       <p>
@@ -45,7 +44,7 @@ export default withLayout(function OverlaySection({ data }) {
         <LinkToSource component={data.Overlay.displayName} />
       </h3>
       <PropTable metadata={data.Overlay} />
-    </div>
+    </>
   );
 });
 

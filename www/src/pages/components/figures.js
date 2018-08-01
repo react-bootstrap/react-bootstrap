@@ -10,10 +10,9 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function FigureSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="figures">Figures</Anchor>{' '}
-        <small>Figure, FigureImage, FigureCaption</small>
+    <>
+      <h2>
+        <Anchor id="figures">Figures</Anchor>
       </h2>
 
       <p>
@@ -48,7 +47,7 @@ export default withLayout(function FigureSection({ data }) {
         <LinkToSource component={data.caption.displayName} />
       </h4>
       <PropTable metadata={data.caption} />
-    </div>
+    </>
   );
 });
 

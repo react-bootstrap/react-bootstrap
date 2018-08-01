@@ -9,7 +9,7 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function CustomStylesSection() {
   return (
-    <div className="bs-docs-section">
+    <>
       <Heading h="1" id="custom-styles">
         Theming and Customizing styles.
       </Heading>
@@ -45,6 +45,6 @@ export default withLayout(function CustomStylesSection() {
         Changing prefixes is an escape hatch and generally shouldn't be used
       </Callout>
       <ReactPlayground codeText={Prefixes} />
-    </div>
+    </>
   );
 });

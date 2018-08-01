@@ -18,8 +18,8 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function NavSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
+    <>
+      <h2>
         <Anchor id="navs">Base Nav</Anchor>
       </h2>
 
@@ -113,7 +113,7 @@ export default withLayout(function NavSection({ data }) {
         <LinkToSource component={data.NavLink.displayName} />
       </h4>
       <PropTable metadata={data.NavLink} />
-    </div>
+    </>
   );
 });
 

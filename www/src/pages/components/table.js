@@ -13,7 +13,7 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function TableSection({ data }) {
   return (
-    <div className="bs-docs-section">
+    <>
       <Heading h="1" id="tables">
         Tables
       </Heading>
@@ -80,7 +80,7 @@ export default withLayout(function TableSection({ data }) {
         Props
       </Heading>
       <ComponentApi metadata={data.Table} />
-    </div>
+    </>
   );
 });
 

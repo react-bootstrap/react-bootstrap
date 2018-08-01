@@ -16,8 +16,8 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function NavbarSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
+    <>
+      <h2>
         <Anchor id="navbars">Navbars</Anchor>
       </h2>
       <p>
@@ -114,7 +114,7 @@ export default withLayout(function NavbarSection({ data }) {
         <LinkToSource component={data.NavbarToggle.displayName} />
       </h4>
       <PropTable metadata={data.NavbarToggle} />
-    </div>
+    </>
   );
 });
 

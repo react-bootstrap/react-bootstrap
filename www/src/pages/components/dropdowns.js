@@ -1,5 +1,6 @@
 import { graphql } from 'gatsby';
 import React from 'react';
+import { css } from 'css-literal-loader/styled';
 
 import Anchor from '../../components/Anchor';
 import ARIA from '../../components/AriaAbbr';
@@ -21,12 +22,28 @@ import SplitVariants from '../../examples/Dropdown/SplitVariants';
 import DropdownVariants from '../../examples/Dropdown/Variants';
 import withLayout from '../../withLayout';
 
-// import DropdownItem from '../../examples/Dropdown/DropdownItem';
+const styles = css`
+  .static-menu :global(.dropdown-menu) {
+    position: static;
+    display: block;
+  }
+  .custom-menu :global(.super-colors) {
+    background: linear-gradient(
+      to bottom,
+      orange,
+      yellow,
+      green,
+      cyan,
+      blue,
+      violet
+    );
+  }
+`;
 
 export default withLayout(function DropdownSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
+    <>
+      <h2>
         <Anchor id="btn-dropdowns">Dropdowns</Anchor>
       </h2>
       <h3>
@@ -117,7 +134,7 @@ export default withLayout(function DropdownSection({ data }) {
       </p>
       <ReactPlayground codeText={DropDirections} />
 
-      <h2 className="page-header">
+      <h2>
         <Anchor id="menu-items">Dropdown items</Anchor>
       </h2>
 
@@ -144,7 +161,7 @@ export default withLayout(function DropdownSection({ data }) {
       <p>Add a header to label sections of actions.</p>
       <ReactPlayground
         codeText={MenuHeaders}
-        exampleClassName="bs-example__dropdown-menu"
+        exampleClassName={styles.staticMenu}
       />
 
       <h3>
@@ -153,14 +170,8 @@ export default withLayout(function DropdownSection({ data }) {
       <p>Separate groups of related menu items with a divider.</p>
       <ReactPlayground
         codeText={MenuDividers}
-        exampleClassName="bs-example__dropdown-menu"
+        exampleClassName={styles.staticMenu}
       />
-
-      {/* <ReactPlayground
-        codeText={DropdownItem}
-        exampleClassName="bs-example__dropdown-menu"
-      /> */}
-
       <h3>
         <Anchor id="btn-dropdowns-custom">Dropdown Customization</Anchor>
       </h3>
@@ -179,7 +190,10 @@ export default withLayout(function DropdownSection({ data }) {
           <code>require("react-bootstrap/lib/DropdownToggle")</code>.
         </p>
       </div>
-      <ReactPlayground codeText={DropdownButtonCustom} />
+      <ReactPlayground
+        codeText={DropdownButtonCustom}
+        exampleClassName={styles.customMenu}
+      />
 
       <h4>Custom Dropdown Components</h4>
 
@@ -231,7 +245,7 @@ export default withLayout(function DropdownSection({ data }) {
         <LinkToSource component={data.DropdownItem.displayName} />
       </h4>
       <PropTable metadata={data.DropdownItem} />
-    </div>
+    </>
   );
 });
 

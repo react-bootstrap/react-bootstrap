@@ -12,7 +12,7 @@ import withLayout from '../../withLayout';
 
 export default withLayout(function BadgeSection({ data }) {
   return (
-    <div className="bs-docs-section">
+    <>
       <Heading h="1" id="badges">
         Badges
       </Heading>
@@ -60,7 +60,7 @@ export default withLayout(function BadgeSection({ data }) {
         Props
       </Heading>
       <ComponentApi metadata={data.metadata} />
-    </div>
+    </>
   );
 });
 

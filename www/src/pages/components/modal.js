@@ -1,5 +1,6 @@
 import { graphql } from 'gatsby';
 import React from 'react';
+import { css } from 'css-literal-loader/styled';
 
 import ComponentApi from '../../components/ComponentApi';
 import Heading from '../../components/Heading';
@@ -7,16 +8,23 @@ import ReactPlayground from '../../components/ReactPlayground';
 
 import ModalStatic from '../../examples/Modal/Static';
 import ModalBasic from '../../examples/Modal/Basic';
-import ModalContained from '../../examples/Modal/Contained';
 import ModalDefaultSizing from '../../examples/Modal/DefaultSizing';
 import ModalCustomSizing from '../../examples/Modal/CustomSizing';
 import ModalVerticallyCentered from '../../examples/Modal/VerticallyCentered';
 import ModalGrid from '../../examples/Modal/Grid';
 import withLayout from '../../withLayout';
 
+const styles = css`
+  /* has to be fully global because of modal portals */
+  :global(.modal-90w) {
+    width: 90%;
+    max-width: none !important;
+  }
+`;
+
 export default withLayout(function ModalSection({ data }) {
   return (
-    <div className="bs-docs-section">
+    <>
       <Heading h="2" id="modals">
         Modals
       </Heading>
@@ -51,28 +59,8 @@ export default withLayout(function ModalSection({ data }) {
         </p>
       </div>
 
-      <Heading h="3" id="modals-contained">
-        Contained Modal
-      </Heading>
-      <p>
-        You will need to add the following css to your project and ensure that
-        your container has the <code>modal-container</code> class.
-      </p>
-      <pre>
-        <code>
-          {`
-.modal-container {
-  position: relative;
-}
-.modal-container .modal, .modal-container .modal-backdrop {
-  position: absolute;
-}`.trim()}
-        </code>
-      </pre>
-      <ReactPlayground codeText={ModalContained} />
-
       <Heading h="3" id="modal-default-sizing">
-        Sizing modals using standard Bootstrap props
+        Sizing modals
       </Heading>
       <p>
         You can specify a bootstrap large or small modal by using the "size"
@@ -88,7 +76,10 @@ export default withLayout(function ModalSection({ data }) {
         "dialogClassName" prop. Example is using a custom css class with width
         set to 90%.
       </p>
-      <ReactPlayground codeText={ModalCustomSizing} />
+      <ReactPlayground
+        codeText={ModalCustomSizing}
+        exampleClassName={styles.custom}
+      />
 
       <Heading h="3" id="modals-multiple">
         Multiple Modals
@@ -134,7 +125,7 @@ export default withLayout(function ModalSection({ data }) {
       <ComponentApi metadata={data.ModalTitle} />
       <ComponentApi metadata={data.ModalBody} />
       <ComponentApi metadata={data.ModalFooter} />
-    </div>
+    </>
   );
 });
 
