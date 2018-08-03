@@ -143,7 +143,7 @@ class OverlayTrigger extends React.Component {
       return;
     }
 
-    if (!this.state.show || this._hoverHideDelay != null) {
+    if (this._hoverHideDelay != null) {
       return;
     }
 
@@ -168,7 +168,7 @@ class OverlayTrigger extends React.Component {
       return;
     }
 
-    if (this.state.show || this._hoverShowDelay != null) {
+    if (this._hoverShowDelay != null) {
       return;
     }
 
