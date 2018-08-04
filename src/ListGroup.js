@@ -2,8 +2,10 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
+import uncontrollable from 'uncontrollable';
 
 import { createBootstrapComponent } from './ThemeProvider';
+import AbstractNav from './AbstractNav';
 import ListGroupItem from './ListGroupItem';
 
 class ListGroup extends React.Component {
@@ -32,21 +34,23 @@ class ListGroup extends React.Component {
   };
 
   render() {
-    const {
-      className,
-      bsPrefix,
-      variant,
-      as: Component,
-      ...props
-    } = this.props;
+    const { className, bsPrefix, variant, ...props } = this.props;
 
-    const classes = classNames(className, bsPrefix, `${bsPrefix}-${variant}`);
-
-    return <Component {...props} className={classes} />;
+    return (
+      <AbstractNav
+        {...props}
+        className={classNames(className, bsPrefix, `${bsPrefix}-${variant}`)}
+      />
+    );
   }
 }
 
-const DecoratedListGroup = createBootstrapComponent(ListGroup, 'list-group');
+const DecoratedListGroup = uncontrollable(
+  createBootstrapComponent(ListGroup, 'list-group'),
+  {
+    activeKey: 'onSelect',
+  },
+);
 DecoratedListGroup.Item = ListGroupItem;
 
 export default DecoratedListGroup;

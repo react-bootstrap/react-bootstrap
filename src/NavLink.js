@@ -5,6 +5,7 @@ import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 
 import SafeAnchor from './SafeAnchor';
 import NavContext from './NavContext';
+import AbstractNavItem from './AbstractNavItem';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import chain from './utils/createChainedFunction';
 import { createBootstrapComponent } from './ThemeProvider';
@@ -70,23 +71,20 @@ class NavLink extends React.Component {
       disabled,
       className,
       href,
+      eventKey,
       onSelect: _1,
-      eventKey: _2,
       ...props
     } = this.props;
 
     return (
-      <SafeAnchor
+      <AbstractNavItem
         {...props}
         href={href}
+        eventKey={eventKey}
+        as={SafeAnchor}
         disabled={disabled}
         onClick={this.handleClick}
-        className={classNames(
-          className,
-          bsPrefix,
-          active && 'active',
-          disabled && 'disabled',
-        )}
+        className={classNames(className, bsPrefix, disabled && 'disabled')}
       />
     );
   }
@@ -110,23 +108,6 @@ export default mapContextToProps(
       eventKey: navItemKey,
       onSelect: chain(pSelect, onSelect),
     };
-
-    if (navContext) {
-      if (!role && navContext.role === 'tablist') props.role = 'tab';
-
-      props['data-rb-event-key'] = navItemKey;
-      props.id = navContext.getControllerId(eventKey);
-      props['aria-controls'] = navContext.getControlledId(eventKey);
-      props.active =
-        active == null && navItemKey != null
-          ? makeEventKey(navContext.activeKey) === navItemKey
-          : active;
-    }
-
-    if (props.role === 'tab') {
-      props.tabIndex = props.active ? tabIndex : -1;
-      props['aria-selected'] = props.active;
-    }
 
     return props;
   },

@@ -3,9 +3,15 @@ function alertClicked() {
 }
 
 render(
-  <ListGroup>
-    <ListGroupItem href="#link1">Link 1</ListGroupItem>
-    <ListGroupItem href="#link2">Link 2</ListGroupItem>
-    <ListGroupItem onClick={alertClicked}>Trigger an alert</ListGroupItem>
+  <ListGroup as="div" defaultActiveKey="#link1">
+    <ListGroup.Item action href="#link1">
+      Link 1
+    </ListGroup.Item>
+    <ListGroup.Item action href="#link2">
+      Link 2
+    </ListGroup.Item>
+    <ListGroup.Item action href="#link3">
+      Trigger an alert
+    </ListGroup.Item>
   </ListGroup>,
 );

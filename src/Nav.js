@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import qsa from 'dom-helpers/query/querySelectorAll';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 import all from 'prop-types-extra/lib/all';
@@ -8,16 +7,13 @@ import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import uncontrollable from 'uncontrollable';
 
 import { createBootstrapComponent } from './ThemeProvider';
-import TabContext from './TabContext';
 import chain from './utils/createChainedFunction';
-import NavContext from './NavContext';
 import NavbarContext from './NavbarContext';
 import CardContext from './CardContext';
 import SelectableContext from './SelectableContext';
+import AbstractNav from './AbstractNav';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
-
-const noop = () => {};
 
 class Nav extends React.Component {
   static propTypes = {
@@ -103,86 +99,15 @@ class Nav extends React.Component {
     as: 'ul',
   };
 
-  constructor(...args) {
-    super(...args);
-
-    this.state = { navContext: null };
-  }
-
-  static getDerivedStateFromProps({
-    activeKey,
-    getControlledId,
-    getControllerId,
-    role,
-    onSelect,
-  }) {
-    return {
-      navContext: {
-        role, // used by NavLink to determine it's role
-        onSelect,
-        activeKey,
-        getControlledId: getControlledId || noop,
-        getControllerId: getControllerId || noop,
-      },
-    };
-  }
-
-  componentDidUpdate() {
-    if (!this._needsRefocus || !this.listNode) return;
-
-    let activeChild = this.listNode.querySelector('[data-rb-event-key].active');
-    if (activeChild) activeChild.focus();
-  }
-
-  getNextActiveChild(offset) {
-    if (!this.listNode) return null;
-
-    let items = qsa(this.listNode, '[data-rb-event-key]:not(.disabled)');
-    let activeChild = this.listNode.querySelector('.active');
-
-    let index = items.indexOf(activeChild);
-    if (index === -1) return null;
-
-    let nextIndex = index + offset;
-    if (nextIndex >= items.length) nextIndex = 0;
-    if (nextIndex < 0) nextIndex = items.length - 1;
-    return items[nextIndex];
-  }
-
-  handleKeyDown = event => {
-    const { onKeyDown, onSelect } = this.props;
-    if (onKeyDown) onKeyDown(event);
-
-    let nextActiveChild;
-    switch (event.key) {
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        nextActiveChild = this.getNextActiveChild(-1);
-        break;
-      case 'ArrowRight':
-      case 'ArrowDown':
-        nextActiveChild = this.getNextActiveChild(1);
-        break;
-      default:
-        return;
-    }
-    if (!nextActiveChild) return;
-
-    event.preventDefault();
-    onSelect(nextActiveChild.dataset.rbEventKey);
-    this._needsRefocus = true;
-  };
   handleSelect = (key, event) => {
     const { onSelect } = this.props;
     if (key == null || !onSelect) return;
     onSelect(key, event);
   };
-  attachRef = ref => {
-    this.listNode = ref;
-  };
 
   render() {
     const {
+      as,
       bsPrefix,
       navbarBsPrefix,
       cardHeaderBsPrefix,
@@ -192,38 +117,30 @@ class Nav extends React.Component {
       navbar,
       className,
       children,
+      activeKey,
       onSelect: _,
-      as: Component,
       ...props
     } = this.props;
 
-    delete props.activeKey;
-    delete props.getControlledId;
-    delete props.getControllerId;
-
-    if (props.role === 'tablist') {
-      props.onKeyDown = this.handleKeyDown;
-    }
-
     return (
-      <NavContext.Provider value={this.state.navContext}>
-        <SelectableContext.Provider value={this.handleSelect}>
-          <Component
-            {...props}
-            ref={this.attachRef}
-            className={classNames(className, {
-              [bsPrefix]: !navbar,
-              [`${navbarBsPrefix}-nav`]: navbar,
-              [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
-              [`${bsPrefix}-${variant}`]: !!variant,
-              [`${bsPrefix}-fill`]: fill,
-              [`${bsPrefix}-justified`]: justify,
-            })}
-          >
-            {children}
-          </Component>
-        </SelectableContext.Provider>
-      </NavContext.Provider>
+      <SelectableContext.Provider value={this.handleSelect}>
+        <AbstractNav
+          as={as}
+          activeKey={activeKey}
+          onSelect={this.handleSelect}
+          className={classNames(className, {
+            [bsPrefix]: !navbar,
+            [`${navbarBsPrefix}-nav`]: navbar,
+            [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
+            [`${bsPrefix}-${variant}`]: !!variant,
+            [`${bsPrefix}-fill`]: fill,
+            [`${bsPrefix}-justified`]: justify,
+          })}
+          {...props}
+        >
+          {children}
+        </AbstractNav>
+      </SelectableContext.Provider>
     );
   }
 }
@@ -233,21 +150,15 @@ const UncontrolledNav = uncontrollable(createBootstrapComponent(Nav, 'nav'), {
 });
 
 const DecoratedNav = mapContextToProps(
-  [
-    SelectableContext.Consumer,
-    TabContext.Consumer,
-    NavbarContext.Consumer,
-    CardContext.Consumer,
-  ],
+  [SelectableContext.Consumer, NavbarContext.Consumer, CardContext.Consumer],
   (
     onSelect,
-    tabContext,
     navbarContext,
     cardContext,
-    { role, navbar, onSelect: propsOnSelect },
+    { navbar, onSelect: propsOnSelect },
   ) => {
     onSelect = chain(propsOnSelect, onSelect);
-    if (!tabContext && !navbarContext && !cardContext) return { onSelect };
+    if (!navbarContext && !cardContext) return { onSelect };
 
     if (navbarContext)
       return {
@@ -256,19 +167,7 @@ const DecoratedNav = mapContextToProps(
         navbar: navbar == null ? true : navbar,
       };
 
-    if (cardContext)
-      return { cardHeaderBsPrefix: cardContext.cardHeaderBsPrefix };
-
-    const { activeKey, getControllerId, getControlledId } = tabContext;
-    return {
-      activeKey,
-      onSelect,
-      // pass these two through to avoid having to listen to
-      // both Tab and Nav contexts in NavLink
-      getControllerId,
-      getControlledId,
-      role: role || 'tablist',
-    };
+    return { cardHeaderBsPrefix: cardContext.cardHeaderBsPrefix };
   },
   UncontrolledNav,
 );

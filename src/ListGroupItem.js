@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
+import AbstractNavItem from './AbstractNavItem';
+import { makeEventKey } from './SelectableContext';
 import { createBootstrapComponent } from './ThemeProvider';
 
 class ListGroupItem extends React.Component {
@@ -18,6 +20,11 @@ class ListGroupItem extends React.Component {
      */
     variant: PropTypes.string,
     /**
+     * Marks a ListGroupItem as actionable, applying additional hover, active and disabled styles
+     * for links and buttons.
+     */
+    action: PropTypes.bool,
+    /**
      * Sets list item as active
      */
     active: PropTypes.bool,
@@ -28,7 +35,10 @@ class ListGroupItem extends React.Component {
     disabled: PropTypes.bool,
 
     /**
-     * You can use a custom element type for this component
+     * You can use a custom element type for this component. For none `action` items, items render as `li`.
+     * For actions the default is an achor or button element depending on whether a `href` is provided.
+     *
+     * @default {'li' | 'a' | 'button'}
      */
     as: elementType,
   };
@@ -37,7 +47,6 @@ class ListGroupItem extends React.Component {
     variant: null,
     active: false,
     disabled: false,
-    as: 'li',
   };
 
   render() {
@@ -47,19 +56,28 @@ class ListGroupItem extends React.Component {
       disabled,
       className,
       variant,
-      as: Component,
+      action,
+      as,
+      eventKey,
       ...props
     } = this.props;
 
-    const classes = classNames(
-      bsPrefix,
-      active && 'active',
-      disabled && 'disabled',
-      `${bsPrefix}-${variant}`,
-      className,
+    return (
+      <AbstractNavItem
+        {...props}
+        eventKey={makeEventKey(eventKey, props.href)}
+        // eslint-disable-next-line
+        as={as || (action ? (props.href ? 'a' : 'button') : 'li')}
+        className={classNames(
+          className,
+          bsPrefix,
+          active && 'active',
+          disabled && 'disabled',
+          variant && `${bsPrefix}-${variant}`,
+          action && `${bsPrefix}-action`,
+        )}
+      />
     );
-
-    return <Component {...props} className={classes} />;
   }
 }
 
