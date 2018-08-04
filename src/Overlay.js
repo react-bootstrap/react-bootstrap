@@ -1,5 +1,6 @@
+import React from 'react';
+import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import BaseOverlay from 'react-overlays/Overlay';
 import elementType from 'prop-types-extra/lib/elementType';
@@ -26,7 +27,7 @@ const propTypes = {
   /**
    * Use animation
    */
-  animation: PropTypes.oneOfType([PropTypes.bool, elementType]),
+  transition: PropTypes.oneOfType([PropTypes.bool, elementType]),
 
   /**
    * Callback fired before the Overlay transitions in
@@ -65,34 +66,50 @@ const propTypes = {
 };
 
 const defaultProps = {
-  animation: Fade,
+  transition: Fade,
   rootClose: false,
   show: false,
-  placement: 'right',
+  placement: 'top',
 };
 
-class Overlay extends React.Component {
-  render() {
-    const { animation, children, ...props } = this.props;
+function wrapRefs(popper) {
+  const {
+    ref,
+    arrowProps: { ref: aRef },
+  } = popper;
+  popper.ref = ref.__wrapped || (ref.__wrapped = r => ref(findDOMNode(r)));
+  popper.arrowProps.ref =
+    aRef.__wrapped || (aRef.__wrapped = r => aRef(findDOMNode(r)));
+}
 
-    const transition = animation === true ? Fade : animation || null;
+function renderOverlay(overlay, popper, { transition, show }) {
+  wrapRefs(popper);
+  if (!React.isValidElement(overlay)) return overlay(popper);
 
-    let child;
-
-    if (!transition) {
-      child = cloneElement(children, {
-        className: classNames(children.props.className, 'in'),
-      });
-    } else {
-      child = children;
-    }
-
-    return (
-      <BaseOverlay {...props} transition={transition}>
-        {child}
-      </BaseOverlay>
-    );
+  let props = popper;
+  if (typeof overlay.type === 'string') {
+    const { ref, style, placement } = popper;
+    props = { style, ref, 'x-placement': placement };
   }
+  return React.cloneElement(overlay, {
+    ...props,
+    className: classNames(
+      overlay.props.className,
+      !transition && show && 'show',
+    ),
+    style: { ...overlay.props.style, ...props.style },
+  });
+}
+
+function Overlay({ children, ...props }) {
+  const transition =
+    props.transition === true ? Fade : props.transition || null;
+
+  return (
+    <BaseOverlay {...props} transition={transition}>
+      {popper => renderOverlay(children, popper, props)}
+    </BaseOverlay>
+  );
 }
 
 Overlay.propTypes = propTypes;

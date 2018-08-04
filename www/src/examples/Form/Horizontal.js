@@ -1,57 +1,57 @@
 <Form>
-  <FormGroup as={Row} controlId="formHorizontalEmail">
-    <FormLabel column sm={2}>
+  <Form.Group as={Row} controlId="formHorizontalEmail">
+    <Form.Label column sm={2}>
       Email
-    </FormLabel>
+    </Form.Label>
     <Col sm={10}>
-      <FormControl type="email" placeholder="Email" />
+      <Form.Control type="email" placeholder="Email" />
     </Col>
-  </FormGroup>
+  </Form.Group>
 
-  <FormGroup as={Row} controlId="formHorizontalPassword">
-    <FormLabel column sm={2}>
+  <Form.Group as={Row} controlId="formHorizontalPassword">
+    <Form.Label column sm={2}>
       Password
-    </FormLabel>
+    </Form.Label>
     <Col sm={10}>
-      <FormControl type="password" placeholder="Password" />
+      <Form.Control type="password" placeholder="Password" />
     </Col>
-  </FormGroup>
+  </Form.Group>
   <fieldset>
-    <FormGroup as={Row}>
-      <FormLabel as="legend" column sm={2}>
+    <Form.Group as={Row}>
+      <Form.Label as="legend" column sm={2}>
         Radios
-      </FormLabel>
+      </Form.Label>
       <Col sm={10}>
-        <FormCheck
+        <Form.Check
           type="radio"
           label="first radio"
           name="formHorizontalRadios"
           id="formHorizontalRadios1"
         />
-        <FormCheck
+        <Form.Check
           type="radio"
           label="second radio"
           name="formHorizontalRadios"
           id="formHorizontalRadios2"
         />
-        <FormCheck
+        <Form.Check
           type="radio"
           label="third radio"
           name="formHorizontalRadios"
           id="formHorizontalRadios3"
         />
       </Col>
-    </FormGroup>
+    </Form.Group>
   </fieldset>
-  <FormGroup as={Row} controlId="formHorizontalCheck">
+  <Form.Group as={Row} controlId="formHorizontalCheck">
     <Col sm={{ span: 10, offset: 2 }}>
-      <FormCheck label="Remember me" />
+      <Form.Check label="Remember me" />
     </Col>
-  </FormGroup>
+  </Form.Group>
 
-  <FormGroup as={Row}>
+  <Form.Group as={Row}>
     <Col sm={{ span: 10, offset: 2 }}>
       <Button type="submit">Sign in</Button>
     </Col>
-  </FormGroup>
+  </Form.Group>
 </Form>;

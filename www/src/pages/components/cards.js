@@ -69,25 +69,20 @@ export default withLayout(function CardSection({ data }) {
         each other.
       </p>
       <ReactPlayground codeText={CardText} />
-
-      <Heading h="2" id="card-example-images">
-        Images
-      </Heading>
-      <ReactPlayground codeText={CardImageAndText} />
-
-      <Heading h="2" id="card-example-list-groups">
+      <Heading h="3" id="card-example-list-groups">
         List Groups
       </Heading>
+      <p>Create lists of content in a card with a flush list group.</p>
       <ReactPlayground codeText={CardListGroups} />
 
       <ReactPlayground codeText={CardListGroupWithHeader} />
 
-      <Heading h="2" id="card-example-kitchen-sink">
+      <Heading h="3" id="card-example-kitchen-sink">
         Kitchen Sink
       </Heading>
       <ReactPlayground codeText={CardKitchenSink} />
 
-      <Heading h="2" id="card-example-header-and-footer">
+      <Heading h="3" id="card-example-header-and-footer">
         Header and Footer
       </Heading>
       <p>
@@ -104,14 +99,40 @@ export default withLayout(function CardSection({ data }) {
       <ReactPlayground codeText={CardWithHeaderAndQuote} />
       <ReactPlayground codeText={CardHeaderAndFooter} />
 
-      <Heading h="2" id="card-example-img-overlay">
+      <Heading h="2" id="card-example-images">
+        Images
+      </Heading>
+      <p>
+        Cards include a few options for working with images. Choose from
+        appending “image caps” at either end of a card, overlaying images with
+        card content, or simply embedding the image in a card.
+      </p>
+      <Heading h="3" id="card-example-image-caps">
+        Image caps
+      </Heading>
+      <p>
+        Similar to headers and footers, cards can include top and bottom “image
+        caps”—images at the top or bottom of a card.
+      </p>
+      <ReactPlayground codeText={CardImageAndText} />
+
+      <Heading h="3" id="card-example-img-overlay">
         Image Overlays
       </Heading>
+      <p>
+        Turn an image into a card background and overlay your card’s text.
+        Depending on the image, you may or may not need additional styles or
+        utilities.
+      </p>
       <ReactPlayground codeText={CardImgOverlay} />
 
       <Heading h="2" id="card-example-navigation">
         Navigation
       </Heading>
+      <p>
+        Add some navigation to a card’s header (or block) with React Bootstrap’s{' '}
+        <a href="../navs">Nav</a> components.
+      </p>
       <ReactPlayground codeText={CardNavTabs} />
       <ReactPlayground codeText={CardNavPills} />
 
@@ -150,14 +171,17 @@ export default withLayout(function CardSection({ data }) {
       </Heading>
       <ReactPlayground codeText={CardColumns} />
 
-      {/* PROPS SECTION */}
-
-      <Heading h="2" id="card-props">
-        Props
+      <Heading h="2" id="card-api">
+        API
       </Heading>
 
       <ComponentApi metadata={data.Card} />
-      <ComponentApi metadata={data.CardImg} />
+      <ComponentApi metadata={data.CardBody} exportedBy={data.Card} />
+      <ComponentApi metadata={data.CardImg} exportedBy={data.Card} />
+      <ComponentApi metadata={data.CardImgOverlay} exportedBy={data.Card} />
+
+      <ComponentApi metadata={data.CardDeck} />
+      <ComponentApi metadata={data.CardGroup} />
     </>
   );
 });
@@ -167,7 +191,19 @@ export const query = graphql`
     Card: componentMetadata(displayName: { eq: "Card" }) {
       ...ComponentApi_metadata
     }
+    CardBody: componentMetadata(displayName: { eq: "CardBody" }) {
+      ...ComponentApi_metadata
+    }
     CardImg: componentMetadata(displayName: { eq: "CardImg" }) {
+      ...ComponentApi_metadata
+    }
+    CardImgOverlay: componentMetadata(displayName: { eq: "CardImgOverlay" }) {
+      ...ComponentApi_metadata
+    }
+    CardDeck: componentMetadata(displayName: { eq: "CardDeck" }) {
+      ...ComponentApi_metadata
+    }
+    CardGroup: componentMetadata(displayName: { eq: "CardGroup" }) {
       ...ComponentApi_metadata
     }
   }

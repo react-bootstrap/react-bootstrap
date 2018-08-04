@@ -25,20 +25,56 @@ const styles = css`
 export default withLayout(function ModalSection({ data }) {
   return (
     <>
-      <Heading h="2" id="modals">
+      <Heading h="1" id="modals">
         Modals
       </Heading>
+      <p className="lead">
+        Add dialogs to your site for lightboxes, user notifications, or
+        completely custom content.
+      </p>
+      <Heading h="2" id="modals-overview">
+        Overview
+      </Heading>
+      <ul>
+        <li>
+          Modals are positioned over everything else in the document and remove
+          scroll from the <code>{'<body>'}</code> so that modal content scrolls
+          instead.
+        </li>
+        <li>
+          Modals are <em>unmounted</em> when closed.
+        </li>
+        <li>
+          Bootstrap only supports <strong>one</strong> modal window at a time.
+          Nested modals aren’t supported, but if you really need them the
+          underlying <code>react-overlays</code> can support them if you're
+          willing.
+        </li>
+        <li>
+          Modal's "trap" focus in them, ensuring the keyboard navigation cycles
+          through the modal, and not the rest of the page.
+        </li>
+        <li>
+          Unlike vanilla Bootstrap, <code>autoFocus</code> works in Modals
+          because React handles the implementation.
+        </li>
+      </ul>
 
+      <Heading h="2" id="modals-examples">
+        Examples
+      </Heading>
       <Heading h="3" id="modals-static">
         Static Markup
       </Heading>
-      <p>A modal dialog component</p>
+      <p>
+        Below is a <em>static</em> modal dialog (without the positioning) to
+        demostrate the look and feel of the Modal.
+      </p>
       <ReactPlayground codeText={ModalStatic} />
 
       <Heading h="3" id="modals-live">
-        Basic example
+        Live demo
       </Heading>
-      <p />
       <p>
         A modal with header, body, and set of actions in the footer. Use{' '}
         <code>{'<Modal/>'}</code> in combination with other components to show
@@ -50,7 +86,7 @@ export default withLayout(function ModalSection({ data }) {
       </p>
       <ReactPlayground codeText={ModalBasic} />
       <div className="bs-callout bs-callout-info">
-        <h4>Additional Import Options</h4>
+        <div className="h4">Additional Import Options</div>
         <p>
           The Modal Header, Title, Body, and Footer components are available as
           static properties the <code>{'<Modal/>'}</code> component, but you can
@@ -58,9 +94,26 @@ export default withLayout(function ModalSection({ data }) {
           <code>require("react-bootstrap/lib/ModalHeader")</code>.
         </p>
       </div>
+      <Heading h="3" id="modal-vertically-centered">
+        Vertically centered
+      </Heading>
+      <p>
+        You can vertically center a modal by passing the "verticallyCenter"
+        prop.
+      </p>
+      <ReactPlayground codeText={ModalVerticallyCentered} />
 
-      <Heading h="3" id="modal-default-sizing">
-        Sizing modals
+      <Heading h="3" id="modal-grid">
+        Using the grid
+      </Heading>
+      <p>
+        You can use grid layouts within a model using regular grid components
+        inside the modal content.
+      </p>
+      <ReactPlayground codeText={ModalGrid} />
+
+      <Heading h="2" id="modal-default-sizing">
+        Optional Sizes
       </Heading>
       <p>
         You can specify a bootstrap large or small modal by using the "size"
@@ -81,42 +134,8 @@ export default withLayout(function ModalSection({ data }) {
         exampleClassName={styles.custom}
       />
 
-      <Heading h="3" id="modals-multiple">
-        Multiple Modals
-      </Heading>
-      <div className="bs-callout bs-callout-warning">
-        <h4>Not supported</h4>
-        <p>
-          React-Bootstrap modals are not designed to support rendering multiple
-          modals simultaneously. You will have to add{' '}
-          <code>react-overlays</code> as a dependency and build your own modal
-          component using its{' '}
-          <a href="https://github.com/react-bootstrap/react-overlays/blob/master/src/ModalManager.js">
-            <code>{'<ModalManager/>'}</code>
-          </a>{' '}
-          component, which supports multiple modals.
-        </p>
-      </div>
-      <Heading h="3" id="modal-vertically-centered">
-        Vertically centered modals
-      </Heading>
-      <p>
-        You can vertically center a modal by passing the "verticallyCenter"
-        prop.
-      </p>
-      <ReactPlayground codeText={ModalVerticallyCentered} />
-
-      <Heading h="3" id="modal-grid">
-        Using grid in modals
-      </Heading>
-      <p>
-        You can use grid layouts within a model using regular grid components
-        inside the modal content.
-      </p>
-      <ReactPlayground codeText={ModalGrid} />
-
-      <Heading h="3" id="modals-props">
-        Props
+      <Heading h="2" id="modals-props">
+        API
       </Heading>
 
       <ComponentApi metadata={data.Modal} />

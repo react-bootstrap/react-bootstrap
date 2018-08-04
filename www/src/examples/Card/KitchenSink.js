@@ -1,5 +1,5 @@
 <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src="/200x100.png" />
+  <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
   <Card.Body>
     <Card.Title>Card Title</Card.Title>
     <Card.Text>

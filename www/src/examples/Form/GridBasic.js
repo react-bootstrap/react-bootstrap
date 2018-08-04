@@ -1,10 +1,10 @@
-<form>
+<Form>
   <Row>
     <Col>
-      <FormControl placeholder="First name" />
+      <Form.Control placeholder="First name" />
     </Col>
     <Col>
-      <FormControl placeholder="Last name" />
+      <Form.Control placeholder="Last name" />
     </Col>
   </Row>
-</form>;
+</Form>;

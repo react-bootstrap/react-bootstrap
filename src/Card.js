@@ -99,6 +99,7 @@ const DivStyledAsH6 = divWithClassName('h6');
 
 const DecoratedCard = createBootstrapComponent(Card, 'card');
 DecoratedCard.Img = CardImg;
+
 DecoratedCard.Title = createWithBsPrefix('card-title', {
   Component: DivStyledAsH5,
 });

@@ -1,11 +1,11 @@
 <Form inline>
-  <FormGroup controlId="formInlineName">
-    <FormLabel>Name</FormLabel>{' '}
-    <FormControl type="text" placeholder="Jane Doe" />
-  </FormGroup>{' '}
-  <FormGroup controlId="formInlineEmail">
-    <FormLabel>Email</FormLabel>{' '}
-    <FormControl type="email" placeholder="jane.doe@example.com" />
-  </FormGroup>{' '}
+  <Form.Group controlId="formInlineName">
+    <Form.Label>Name</Form.Label>{' '}
+    <Form.Control type="text" placeholder="Jane Doe" />
+  </Form.Group>{' '}
+  <Form.Group controlId="formInlineEmail">
+    <Form.Label>Email</Form.Label>{' '}
+    <Form.Control type="email" placeholder="jane.doe@example.com" />
+  </Form.Group>{' '}
   <Button type="submit">Send invitation</Button>
 </Form>;

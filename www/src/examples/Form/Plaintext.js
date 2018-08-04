@@ -1,19 +1,19 @@
-<form>
-  <FormGroup as={Row} controlId="formPlaintextEmail">
-    <FormLabel column sm="2">
+<Form>
+  <Form.Group as={Row} controlId="formPlaintextEmail">
+    <Form.Label column sm="2">
       Email
-    </FormLabel>
+    </Form.Label>
     <Col sm="10">
-      <FormControl plaintext readOnly defaultValue="email@example.com" />
+      <Form.Control plaintext readOnly defaultValue="email@example.com" />
     </Col>
-  </FormGroup>
+  </Form.Group>
 
-  <FormGroup as={Row} controlId="formPlaintextPassword">
-    <FormLabel column sm="2">
+  <Form.Group as={Row} controlId="formPlaintextPassword">
+    <Form.Label column sm="2">
       Password
-    </FormLabel>
+    </Form.Label>
     <Col sm="10">
-      <FormControl type="password" placeholder="Password" />
+      <Form.Control type="password" placeholder="Password" />
     </Col>
-  </FormGroup>
-</form>;
+  </Form.Group>
+</Form>;

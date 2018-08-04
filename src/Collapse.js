@@ -109,6 +109,8 @@ const propTypes = {
    * Allows for providing some custom logic for how much the Collapse component
    * should animate in its specified dimension. Called with the current
    * dimension prop value and the DOM node.
+   *
+   * @default element.offsetWidth | element.offsetHeight
    */
   getDimensionValue: PropTypes.func,
 

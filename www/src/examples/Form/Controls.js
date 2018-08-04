@@ -1,30 +1,30 @@
 function FieldGroup({ id, label, help, ...props }) {
   return (
-    <FormGroup controlId={id}>
-      <FormLabel>{label}</FormLabel>
-      <FormControl {...props} />
+    <Form.Group controlId={id}>
+      <Form.Label>{label}</Form.Label>
+      <Form.Control {...props} />
       {help && <HelpBlock>{help}</HelpBlock>}
-    </FormGroup>
+    </Form.Group>
   );
 }
 
 const formInstance = (
-  <form>
+  <Form>
     <FieldGroup
-      id="formControlsText"
+      id="Form.ControlsText"
       type="text"
       label="Text"
       placeholder="Enter text"
     />
     <FieldGroup
-      id="formControlsEmail"
+      id="Form.ControlsEmail"
       type="email"
       label="Email address"
       placeholder="Enter email"
     />
-    <FieldGroup id="formControlsPassword" label="Password" type="password" />
+    <FieldGroup id="Form.ControlsPassword" label="Password" type="password" />
     <FieldGroup
-      id="formControlsFile"
+      id="Form.ControlsFile"
       type="file"
       label="File"
       help="Example block-level help text here."
@@ -37,11 +37,11 @@ const formInstance = (
       Radio
     </Radio>
 
-    <FormGroup>
+    <Form.Group>
       <Checkbox inline>1</Checkbox> <Checkbox inline>2</Checkbox>{' '}
       <Checkbox inline>3</Checkbox>
-    </FormGroup>
-    <FormGroup>
+    </Form.Group>
+    <Form.Group>
       <Radio name="radioGroup" inline>
         1
       </Radio>{' '}
@@ -51,35 +51,35 @@ const formInstance = (
       <Radio name="radioGroup" inline>
         3
       </Radio>
-    </FormGroup>
+    </Form.Group>
 
-    <FormGroup controlId="formControlsSelect">
-      <FormLabel>Select</FormLabel>
-      <FormControl as="select" placeholder="select">
+    <Form.Group controlId="Form.ControlsSelect">
+      <Form.Label>Select</Form.Label>
+      <Form.Control as="select" placeholder="select">
         <option value="select">select</option>
         <option value="other">...</option>
-      </FormControl>
-    </FormGroup>
-    <FormGroup controlId="formControlsSelectMultiple">
-      <FormLabel>Multiple select</FormLabel>
-      <FormControl as="select" multiple>
+      </Form.Control>
+    </Form.Group>
+    <Form.Group controlId="Form.ControlsSelectMultiple">
+      <Form.Label>Multiple select</Form.Label>
+      <Form.Control as="select" multiple>
         <option value="select">select (multiple)</option>
         <option value="other">...</option>
-      </FormControl>
-    </FormGroup>
+      </Form.Control>
+    </Form.Group>
 
-    <FormGroup controlId="formControlsTextarea">
-      <FormLabel>Textarea</FormLabel>
-      <FormControl as="textarea" placeholder="textarea" />
-    </FormGroup>
+    <Form.Group controlId="Form.ControlsTextarea">
+      <Form.Label>Textarea</Form.Label>
+      <Form.Control as="textarea" placeholder="textarea" />
+    </Form.Group>
 
-    <FormGroup>
-      <FormLabel>Static text</FormLabel>
-      <FormControl.Static>email@example.com</FormControl.Static>
-    </FormGroup>
+    <Form.Group>
+      <Form.Label>Static text</Form.Label>
+      <Form.Control.Static>email@example.com</Form.Control.Static>
+    </Form.Group>
 
     <Button type="submit">Submit</Button>
-  </form>
+  </Form>
 );
 
 render(formInstance);

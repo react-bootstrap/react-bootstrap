@@ -1,9 +1,8 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import LinkToSource from '../../components/LinkToSource';
-import PropTable from '../../components/PropTable';
+import Heading from '../../components/Heading';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import CarouselControlled from '../../examples/Carousel/Controlled';
 import CarouselUncontrolled from '../../examples/Carousel/Uncontrolled';
@@ -12,49 +11,42 @@ import withLayout from '../../withLayout';
 export default withLayout(function CarouselSection({ data }) {
   return (
     <>
-      <h2>
-        <Anchor id="carousels">Carousels</Anchor>{' '}
-      </h2>
+      <Heading h="1" id="carousels">
+        Carousels
+      </Heading>
+      <p className="lead">
+        A slideshow component for cycling through elements—images or slides of
+        text—like a carousel.
+      </p>
+      <Heading h="2" id="carousels-uncontrolled">
+        Example
+      </Heading>
+      <p>
+        Carousels don’t automatically normalize slide dimensions. As such, you
+        may need to use additional utilities or custom styles to appropriately
+        size content. While carousels support previous/next controls and
+        indicators, they’re not explicitly required. Add and customize as you
+        see fit.
+      </p>
+      <ReactPlayground codeText={CarouselUncontrolled} />
 
-      <h3>
-        <Anchor id="carousels-uncontrolled">Uncontrolled</Anchor>
-      </h3>
-      <p>Allow the component to control its own state.</p>
-      <ReactPlayground
-        codeText={CarouselUncontrolled}
-        exampleClassName="bs-example-tabs"
-      />
+      <Heading h="2" id="carousels-controlled">
+        Controlled
+      </Heading>
+      <p>
+        You can can also <em>control</em> the Carousel state, via the{' '}
+        <code>activeIndex</code> prop and <code>onSelect</code> handler.
+      </p>
+      <ReactPlayground codeText={CarouselControlled} />
 
-      <h3>
-        <Anchor id="carousels-controlled">Controlled</Anchor>
-      </h3>
-      <p>Pass down the active state on render via props.</p>
-      <ReactPlayground
-        codeText={CarouselControlled}
-        exampleClassName="bs-example-tabs"
-      />
+      <Heading h="2" id="carousels-props">
+        API
+      </Heading>
 
-      <h3>
-        <Anchor id="carousels-props">Props</Anchor>
-      </h3>
+      <ComponentApi metadata={data.carousel} />
 
-      <h4>
-        <Anchor id="carousels-props-carousel">Carousel</Anchor>
-        <LinkToSource component={data.carousel.displayName} />
-      </h4>
-      <PropTable metadata={data.carousel} />
-
-      <h4>
-        <Anchor id="carousels-props-item">Carousel.Item</Anchor>
-        <LinkToSource component={data.item.displayName} />
-      </h4>
-      <PropTable metadata={data.item} />
-
-      <h4>
-        <Anchor id="carousels-props-caption">Carousel.Caption</Anchor>
-        <LinkToSource component={data.caption.displayName} />
-      </h4>
-      <PropTable metadata={data.caption} />
+      <ComponentApi metadata={data.item} exportedBy={data.carousel} />
+      <ComponentApi metadata={data.caption} exportedBy={data.carousel} />
     </>
   );
 });
@@ -63,15 +55,15 @@ export const query = graphql`
   query CarouselQuery {
     carousel: componentMetadata(displayName: { eq: "Carousel" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     item: componentMetadata(displayName: { eq: "CarouselItem" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     caption: componentMetadata(displayName: { eq: "CarouselCaption" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
   }
 `;

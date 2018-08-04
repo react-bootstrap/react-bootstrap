@@ -1,10 +1,9 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
+import Heading from '../../components/Heading';
 import ARIA from '../../components/AriaAbbr';
-import LinkToSource from '../../components/LinkToSource';
-import PropTable from '../../components/PropTable';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import TabsControlled from '../../examples/Tabs/Controlled';
 import LeftTabs from '../../examples/Tabs/LeftTabs';
@@ -15,9 +14,14 @@ import withLayout from '../../withLayout';
 export default withLayout(function TabsSection({ data }) {
   return (
     <>
-      <h2>
-        <Anchor id="tabs">Tabbed components</Anchor>
-      </h2>
+      <Heading h="2" id="tabs">
+        Tabbed components
+      </Heading>
+      <p className="lead">Dynamic tabbed interfaces</p>
+
+      <Heading h="2" id="tabs-examples">
+        Examples
+      </Heading>
 
       <p>
         Create dynamic tabbed interfaces, as described in the{' '}
@@ -33,9 +37,9 @@ export default withLayout(function TabsSection({ data }) {
         exampleClassName="bs-example-tabs"
       />
 
-      <h3>
-        <Anchor id="tabs-controlled">Controlled</Anchor>
-      </h3>
+      <Heading h="2" id="tabs-controlled">
+        Controlled
+      </Heading>
       <p>
         <code>Tabs</code> can be controlled directly when you want to handle the
         selection logic personally.
@@ -45,9 +49,9 @@ export default withLayout(function TabsSection({ data }) {
         exampleClassName="bs-example-tabs"
       />
 
-      <h3>
-        <Anchor id="tabs-no-animation">No animation</Anchor>
-      </h3>
+      <Heading h="2" id="tabs-no-animation">
+        No animation
+      </Heading>
       <p>
         Set the <code>transition</code> prop to <code>false</code>
       </p>
@@ -56,9 +60,9 @@ export default withLayout(function TabsSection({ data }) {
         exampleClassName="bs-example-tabs"
       />
 
-      <h3>
-        <Anchor id="tabs-with-dropdown">Dropdowns?</Anchor>
-      </h3>
+      <Heading h="2" id="tabs-with-dropdown">
+        Dropdowns?
+      </Heading>
       <p>
         Dynamic tabbed interfaces should not contain dropdown menus, as this
         causes both usability and accessibility issues. From a usability
@@ -73,9 +77,9 @@ export default withLayout(function TabsSection({ data }) {
         That said, it Dropdowns do work technically (sans focus management), but
         we don't make any claims about support.
       </p>
-      <h3>
-        <Anchor id="tabs-custom-layout">Custom Tab Layout</Anchor>
-      </h3>
+      <Heading h="2" id="tabs-custom-layout">
+        Custom Tab Layout
+      </Heading>
       <p>
         For more complex layouts the flexible <code>TabContainer</code>,{' '}
         <code>TabContent</code>, and <code>TabPane</code> components along with
@@ -83,7 +87,7 @@ export default withLayout(function TabsSection({ data }) {
         own Tabs component with additional markup needed.
       </p>
       <p>
-        Just create a set of NavItems each with an <code>eventKey</code>{' '}
+        Create a set of NavItems each with an <code>eventKey</code>{' '}
         corresponding to the eventKey of a <code>TabPane</code>. Wrap the whole
         thing in a <code>TabContainer</code> and you have fully functioning
         custom tabs component. Check out the below example making use of the
@@ -91,39 +95,15 @@ export default withLayout(function TabsSection({ data }) {
       </p>
       <ReactPlayground codeText={LeftTabs} exampleClassName="bs-example-tabs" />
 
-      <h3>
-        <Anchor id="tabs-props">Props</Anchor>
-      </h3>
+      <Heading h="2" id="tabs-api">
+        API
+      </Heading>
 
-      <h4>
-        <Anchor id="tabs-props-area">Tabs</Anchor>
-        <LinkToSource component={data.Tabs.displayName} />
-      </h4>
-      <PropTable metadata={data.Tabs} />
-
-      <h4>
-        <Anchor id="tabs-props-pane">Tab</Anchor>
-        <LinkToSource component={data.Tab.displayName} />
-      </h4>
-      <PropTable metadata={data.Tab} />
-
-      <h4>
-        <Anchor id="tabs-props-pane">TabContainer</Anchor>
-        <LinkToSource component={data.TabContainer.displayName} />
-      </h4>
-      <PropTable metadata={data.TabContainer} />
-
-      <h4>
-        <Anchor id="tabs-props-pane">TabContent</Anchor>
-        <LinkToSource component={data.TabContent.displayName} />
-      </h4>
-      <PropTable metadata={data.TabContent} />
-
-      <h4>
-        <Anchor id="tabs-props-pane">TabPane</Anchor>
-        <LinkToSource component={data.TabPane.displayName} />
-      </h4>
-      <PropTable metadata={data.TabPane} />
+      <ComponentApi metadata={data.Tabs} />
+      <ComponentApi metadata={data.Tab} />
+      <ComponentApi metadata={data.TabContainer} />
+      <ComponentApi metadata={data.TabContent} />
+      <ComponentApi metadata={data.TabPane} />
     </>
   );
 });
@@ -131,19 +111,19 @@ export default withLayout(function TabsSection({ data }) {
 export const query = graphql`
   query TabsQuery {
     Tabs: componentMetadata(displayName: { eq: "Tabs" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     Tab: componentMetadata(displayName: { eq: "Tab" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     TabContainer: componentMetadata(displayName: { eq: "TabContainer" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     TabContent: componentMetadata(displayName: { eq: "TabContent" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     TabPane: componentMetadata(displayName: { eq: "TabPane" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
   }
 `;

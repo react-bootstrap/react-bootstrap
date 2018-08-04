@@ -27,13 +27,10 @@ class ControlledCarousel extends React.Component {
         onSelect={this.handleSelect}
       >
         <Carousel.Item>
-          <PlaceholderImage
-            text="First slide"
+          <img
             className="d-block w-100"
-            width={900}
-            height={500}
-            bg="777"
-            fg="555"
+            src="holder.js/800x400?text=First slide&bg=373940"
+            alt="First slide"
           />
           <Carousel.Caption>
             <h3>First slide label</h3>
@@ -41,13 +38,10 @@ class ControlledCarousel extends React.Component {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <PlaceholderImage
-            text="Second slide"
+          <img
             className="d-block w-100"
-            width={900}
-            height={500}
-            bg="666"
-            fg="444"
+            src="holder.js/800x400?text=Second slide&bg=282c34"
+            alt="Third slide"
           />
 
           <Carousel.Caption>
@@ -56,14 +50,12 @@ class ControlledCarousel extends React.Component {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <PlaceholderImage
-            text="Third slide"
+          <img
             className="d-block w-100"
-            width={900}
-            height={500}
-            bg="555"
-            fg="333"
+            src="holder.js/800x400?text=Third slide&bg=20232a"
+            alt="Third slide"
           />
+
           <Carousel.Caption>
             <h3>Third slide label</h3>
             <p>

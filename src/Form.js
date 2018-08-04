@@ -5,6 +5,11 @@ import elementType from 'prop-types-extra/lib/elementType';
 
 import createWithBsPrefix from './utils/createWithBsPrefix';
 import { createBootstrapComponent } from './ThemeProvider';
+import FormGroup from './FormGroup';
+import FormControl from './FormControl';
+import FormCheck from './FormCheck';
+import FormLabel from './FormLabel';
+import FormText from './FormText';
 
 const propTypes = {
   /**
@@ -69,5 +74,10 @@ Form.defaultProps = defaultProps;
 const DecoratedForm = createBootstrapComponent(Form, 'form');
 
 DecoratedForm.Row = createWithBsPrefix('form-row');
+DecoratedForm.Group = FormGroup;
+DecoratedForm.Control = FormControl;
+DecoratedForm.Check = FormCheck;
+DecoratedForm.Label = FormLabel;
+DecoratedForm.Text = FormText;
 
 export default DecoratedForm;

@@ -31,8 +31,8 @@ export default withLayout(function PaginationSection({ data }) {
       </p>
       <ReactPlayground codeText={PaginationAdvanced} />
 
-      <Heading h="2" id="pagination-props">
-        Props
+      <Heading h="2" id="pagination-api">
+        API
       </Heading>
       <ComponentApi metadata={data.Pagination} />
       <ComponentApi metadata={data.PageItem} />

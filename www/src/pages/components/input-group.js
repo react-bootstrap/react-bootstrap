@@ -66,8 +66,8 @@ export default withLayout(function InputGroupSection({ data }) {
       </Heading>
       <ReactPlayground codeText={ButtonDropdowns} />
 
-      <Heading h="2" id="input-group-props">
-        Props
+      <Heading h="2" id="input-group-api">
+        API
       </Heading>
       <ComponentApi metadata={data.InputGroup} />
     </>

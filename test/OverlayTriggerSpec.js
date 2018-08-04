@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
+import { mount } from 'enzyme';
 
 import OverlayTrigger from '../src/OverlayTrigger';
 import Popover from '../src/Popover';
@@ -9,67 +10,71 @@ import Tooltip from '../src/Tooltip';
 
 import { render } from './helpers';
 
-xdescribe('<OverlayTrigger>', () => {
+describe('<OverlayTrigger>', () => {
   // Swallow extra props.
-  const Div = ({ className, children }) => (
-    <div className={className}>{children}</div>
-  );
+  const Div = React.forwardRef(({ className, children }, ref) => (
+    <div ref={ref} className={className}>
+      {children}
+    </div>
+  ));
 
-  it('Should create OverlayTrigger element', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
+  it('Should render OverlayTrigger element', () => {
+    mount(
       <OverlayTrigger overlay={<Div>test</Div>}>
         <button>button</button>
       </OverlayTrigger>,
-    );
-    const overlayTrigger = ReactDOM.findDOMNode(instance);
-    assert.equal(overlayTrigger.nodeName, 'BUTTON');
+    ).assertSingle('button');
   });
 
-  it('Should pass OverlayTrigger onClick prop to child', () => {
+  it('Should call OverlayTrigger onClick prop to child', () => {
     const callback = sinon.spy();
-    const instance = ReactTestUtils.renderIntoDocument(
-      <OverlayTrigger overlay={<Div>test</Div>} onClick={callback}>
-        <button>button</button>
+
+    mount(
+      <OverlayTrigger overlay={<Div>test</Div>} trigger="click">
+        <button onClick={callback}>button</button>
       </OverlayTrigger>,
-    );
-    const overlayTrigger = ReactDOM.findDOMNode(instance);
-    ReactTestUtils.Simulate.click(overlayTrigger);
-    callback.called.should.be.true;
+    )
+      .find('button')
+      .simulate('click');
+
+    callback.should.have.been.called;
   });
 
   it('Should show after click trigger', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <OverlayTrigger trigger="click" overlay={<Div>test</Div>}>
+    const wrapper = mount(
+      <OverlayTrigger trigger="click" overlay={<Div className="test" />}>
         <button>button</button>
       </OverlayTrigger>,
     );
-    const overlayTrigger = ReactDOM.findDOMNode(instance);
-    ReactTestUtils.Simulate.click(overlayTrigger);
 
-    instance.state.show.should.be.true;
+    wrapper.assertNone('.test');
+
+    wrapper.find('button').simulate('click');
+
+    wrapper.assertSingle('.test');
   });
 
   it('Should not set aria-describedby if the state is not show', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <OverlayTrigger trigger="click" overlay={<Div>test</Div>}>
+    const wrapper = mount(
+      <OverlayTrigger trigger="click" overlay={<Div />}>
         <button>button</button>
       </OverlayTrigger>,
-    );
-    const overlayTrigger = ReactDOM.findDOMNode(instance);
+    ).getDOMNode();
 
-    assert.equal(overlayTrigger.getAttribute('aria-describedby'), null);
+    assert.equal(wrapper.getAttribute('aria-describedby'), null);
   });
 
   it('Should set aria-describedby if the state is show', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
-      <OverlayTrigger trigger="click" overlay={<Div id="overlayid">test</Div>}>
+    const wrapper = mount(
+      <OverlayTrigger trigger="click" overlay={<Div id="overlayid" />}>
         <button>button</button>
       </OverlayTrigger>,
     );
-    const overlayTrigger = ReactDOM.findDOMNode(instance);
-    ReactTestUtils.Simulate.click(overlayTrigger);
 
-    overlayTrigger.getAttribute('aria-describedby').should.be;
+    wrapper
+      .find('button')
+      .simulate('click')
+      .assertSingle('[aria-describedby="overlayid"]');
   });
 
   describe('trigger handlers', () => {
@@ -102,7 +107,7 @@ xdescribe('<OverlayTrigger>', () => {
   });
 
   it('Should maintain overlay classname', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
+    const instance = mount(
       <OverlayTrigger
         trigger="click"
         overlay={<Div className="test-overlay">test</Div>}
@@ -123,7 +128,7 @@ xdescribe('<OverlayTrigger>', () => {
 
     let overlayTrigger;
 
-    const instance = ReactTestUtils.renderIntoDocument(
+    const instance = mount(
       <OverlayTrigger
         trigger="click"
         overlay={<Div>test</Div>}
@@ -180,7 +185,7 @@ xdescribe('<OverlayTrigger>', () => {
     }
     ContextHolder.childContextTypes = contextTypes;
 
-    const instance = ReactTestUtils.renderIntoDocument(<ContextHolder />);
+    const instance = mount(<ContextHolder />);
     const overlayTrigger = ReactDOM.findDOMNode(instance);
     ReactTestUtils.Simulate.click(overlayTrigger);
 
@@ -203,7 +208,7 @@ xdescribe('<OverlayTrigger>', () => {
         let overlayTrigger;
 
         beforeEach(() => {
-          instance = ReactTestUtils.renderIntoDocument(
+          instance = mount(
             <OverlayTrigger trigger="click" overlay={testCase.overlay}>
               <button>button</button>
             </OverlayTrigger>,
@@ -235,7 +240,7 @@ xdescribe('<OverlayTrigger>', () => {
         let instance;
 
         beforeEach(() => {
-          instance = ReactTestUtils.renderIntoDocument(
+          instance = mount(
             <OverlayTrigger
               overlay={<Div>test</Div>}
               trigger="click"
@@ -321,7 +326,7 @@ xdescribe('<OverlayTrigger>', () => {
           }
         }
 
-        instance = ReactTestUtils.renderIntoDocument(
+        instance = mount(
           <OverlayTrigger
             overlay={<ReplacedOverlay />}
             trigger="click"

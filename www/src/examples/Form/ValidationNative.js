@@ -22,74 +22,74 @@ class FormExample extends React.Component {
         onSubmit={e => this.handleSubmit(e)}
       >
         <Form.Row>
-          <FormGroup as={Col} md="4" controlId="validationCustom01">
-            <FormLabel>First name</FormLabel>
-            <FormControl
+          <Form.Group as={Col} md="4" controlId="validationCustom01">
+            <Form.Label>First name</Form.Label>
+            <Form.Control
               required
               type="text"
               placeholder="First name"
               defaultValue="Mark"
             />
-            <FormControl.Feedback>Looks good!</FormControl.Feedback>
-          </FormGroup>
-          <FormGroup as={Col} md="4" controlId="validationCustom02">
-            <FormLabel>Last name</FormLabel>
-            <FormControl
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="4" controlId="validationCustom02">
+            <Form.Label>Last name</Form.Label>
+            <Form.Control
               required
               type="text"
               placeholder="Last name"
               defaultValue="Otto"
             />
-            <FormControl.Feedback>Looks good!</FormControl.Feedback>
-          </FormGroup>
-          <FormGroup as={Col} md="4" controlId="validationCustomUsername">
-            <FormLabel>Username</FormLabel>
+            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+            <Form.Label>Username</Form.Label>
             <InputGroup>
               <InputGroup.Prepend>
                 <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
               </InputGroup.Prepend>
-              <FormControl
+              <Form.Control
                 type="text"
                 placeholder="Username"
                 aria-describedby="inputGroupPrepend"
                 required
               />
-              <FormControl.Feedback type="invalid">
+              <Form.Control.Feedback type="invalid">
                 Please choose a username.
-              </FormControl.Feedback>
+              </Form.Control.Feedback>
             </InputGroup>
-          </FormGroup>
+          </Form.Group>
         </Form.Row>
         <Form.Row>
-          <FormGroup as={Col} md="6" controlId="validationCustom03">
-            <FormLabel>City</FormLabel>
-            <FormControl type="text" placeholder="City" required />
-            <FormControl.Feedback type="invalid">
+          <Form.Group as={Col} md="6" controlId="validationCustom03">
+            <Form.Label>City</Form.Label>
+            <Form.Control type="text" placeholder="City" required />
+            <Form.Control.Feedback type="invalid">
               Please provide a valid city.
-            </FormControl.Feedback>
-          </FormGroup>
-          <FormGroup as={Col} md="3" controlId="validationCustom04">
-            <FormLabel>State</FormLabel>
-            <FormControl type="text" placeholder="State" required />
-            <FormControl.Feedback type="invalid">
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="3" controlId="validationCustom04">
+            <Form.Label>State</Form.Label>
+            <Form.Control type="text" placeholder="State" required />
+            <Form.Control.Feedback type="invalid">
               Please provide a valid state.
-            </FormControl.Feedback>
-          </FormGroup>
-          <FormGroup as={Col} md="3" controlId="validationCustom05">
-            <FormLabel>Zip</FormLabel>
-            <FormControl type="text" placeholder="Zip" required />
-            <FormControl.Feedback type="invalid">
+            </Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group as={Col} md="3" controlId="validationCustom05">
+            <Form.Label>Zip</Form.Label>
+            <Form.Control type="text" placeholder="Zip" required />
+            <Form.Control.Feedback type="invalid">
               Please provide a valid zip.
-            </FormControl.Feedback>
-          </FormGroup>
+            </Form.Control.Feedback>
+          </Form.Group>
         </Form.Row>
-        <FormGroup>
-          <FormCheck
+        <Form.Group>
+          <Form.Check
             required
             label="Agree to terms and conditions"
             invalidFeedback="You must agree before submitting."
           />
-        </FormGroup>
+        </Form.Group>
         <Button type="submit">Submit form</Button>
       </Form>
     );

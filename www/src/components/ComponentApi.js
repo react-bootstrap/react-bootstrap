@@ -8,8 +8,13 @@ import PropTable from './PropTable';
 
 const propTypes = {};
 
-function ComponentApi({ heading, metadata }) {
-  const name = metadata.displayName;
+function ComponentApi({ heading, metadata, exportedBy }) {
+  let name = metadata.displayName;
+  if (exportedBy) {
+    name = `${exportedBy.displayName}.${name
+      .split(exportedBy.displayName)
+      .pop()}`;
+  }
   return (
     <>
       <Heading

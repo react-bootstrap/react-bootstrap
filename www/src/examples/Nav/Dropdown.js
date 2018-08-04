@@ -7,7 +7,7 @@ class NavDropdownExample extends React.Component {
     return (
       <Nav variant="pills" activeKey="1" onSelect={k => this.handleSelect(k)}>
         <Nav.Item>
-          <Nav.Link eventKey="1" href="/home">
+          <Nav.Link eventKey="1" href="#/home">
             NavLink 1 content
           </Nav.Link>
         </Nav.Item>

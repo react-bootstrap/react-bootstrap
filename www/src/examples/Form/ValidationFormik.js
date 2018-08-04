@@ -31,20 +31,20 @@ function FormExample() {
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Row>
-            <FormGroup as={Col} md="4" controlId="validationFormik01">
-              <FormLabel>First name</FormLabel>
-              <FormControl
+            <Form.Group as={Col} md="4" controlId="validationFormik01">
+              <Form.Label>First name</Form.Label>
+              <Form.Control
                 type="text"
                 name="firstName"
                 value={values.firstName}
                 onChange={handleChange}
                 isValid={touched.firstName && !errors.firstName}
               />
-              <FormControl.Feedback>Looks good!</FormControl.Feedback>
-            </FormGroup>
-            <FormGroup as={Col} md="4" controlId="validationFormik02">
-              <FormLabel>Last name</FormLabel>
-              <FormControl
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md="4" controlId="validationFormik02">
+              <Form.Label>Last name</Form.Label>
+              <Form.Control
                 type="text"
                 name="lastName"
                 value={values.lastName}
@@ -52,15 +52,15 @@ function FormExample() {
                 isValid={touched.firstName && !errors.lastName}
               />
 
-              <FormControl.Feedback>Looks good!</FormControl.Feedback>
-            </FormGroup>
-            <FormGroup as={Col} md="4" controlId="validationFormikUsername">
-              <FormLabel>Username</FormLabel>
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md="4" controlId="validationFormikUsername">
+              <Form.Label>Username</Form.Label>
               <InputGroup>
                 <InputGroup.Prepend>
                   <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                 </InputGroup.Prepend>
-                <FormControl
+                <Form.Control
                   type="text"
                   placeholder="Username"
                   aria-describedby="inputGroupPrepend"
@@ -69,16 +69,16 @@ function FormExample() {
                   onChange={handleChange}
                   isInvalid={!!errors.username}
                 />
-                <FormControl.Feedback type="invalid">
+                <Form.Control.Feedback type="invalid">
                   {errors.username}
-                </FormControl.Feedback>
+                </Form.Control.Feedback>
               </InputGroup>
-            </FormGroup>
+            </Form.Group>
           </Form.Row>
           <Form.Row>
-            <FormGroup as={Col} md="6" controlId="validationFormik03">
-              <FormLabel>City</FormLabel>
-              <FormControl
+            <Form.Group as={Col} md="6" controlId="validationFormik03">
+              <Form.Label>City</Form.Label>
+              <Form.Control
                 type="text"
                 placeholder="City"
                 name="city"
@@ -87,13 +87,13 @@ function FormExample() {
                 isInvalid={!!errors.city}
               />
 
-              <FormControl.Feedback type="invalid">
+              <Form.Control.Feedback type="invalid">
                 {errors.city}
-              </FormControl.Feedback>
-            </FormGroup>
-            <FormGroup as={Col} md="3" controlId="validationFormik04">
-              <FormLabel>State</FormLabel>
-              <FormControl
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md="3" controlId="validationFormik04">
+              <Form.Label>State</Form.Label>
+              <Form.Control
                 type="text"
                 placeholder="State"
                 name="state"
@@ -101,13 +101,13 @@ function FormExample() {
                 onChange={handleChange}
                 isInvalid={!!errors.state}
               />
-              <FormControl.Feedback type="invalid">
+              <Form.Control.Feedback type="invalid">
                 {errors.state}
-              </FormControl.Feedback>
-            </FormGroup>
-            <FormGroup as={Col} md="3" controlId="validationFormik05">
-              <FormLabel>Zip</FormLabel>
-              <FormControl
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Form.Group as={Col} md="3" controlId="validationFormik05">
+              <Form.Label>Zip</Form.Label>
+              <Form.Control
                 type="text"
                 placeholder="Zip"
                 name="zip"
@@ -116,13 +116,13 @@ function FormExample() {
                 isInvalid={!!errors.zip}
               />
 
-              <FormControl.Feedback type="invalid">
+              <Form.Control.Feedback type="invalid">
                 {errors.zip}
-              </FormControl.Feedback>
-            </FormGroup>
+              </Form.Control.Feedback>
+            </Form.Group>
           </Form.Row>
-          <FormGroup>
-            <FormCheck
+          <Form.Group>
+            <Form.Check
               required
               name="terms"
               label="Agree to terms and conditions"
@@ -131,7 +131,7 @@ function FormExample() {
               invalidFeedback={errors.terms}
               id="validationFormik0"
             />
-          </FormGroup>
+          </Form.Group>
           <Button type="submit">Submit form</Button>
         </Form>
       )}

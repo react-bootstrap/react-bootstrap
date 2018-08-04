@@ -8,8 +8,8 @@
 
 - removed `Navbar.Header`
 - removed Navbar.Form (TBD)
+- removed `fluid`, add your own Container element.
 - `inverse` removed and replaced with `variant="dark"`
-- `fluid` now defaults to `true`, set to false to add an inner `container`
 - positioning props have been consolidated into `fixed={top|bottom}` and `sticky={top|bottom}`, staticTop has been removed
 
 ### NavbarHeader

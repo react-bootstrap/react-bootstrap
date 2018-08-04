@@ -76,8 +76,8 @@ export default withLayout(function TableSection({ data }) {
       </p>
       <ReactPlayground codeText={TableResponsiveBreakpoints} />
 
-      <Heading h="2" id="table-props">
-        Props
+      <Heading h="2" id="table-api">
+        API
       </Heading>
       <ComponentApi metadata={data.Table} />
     </>

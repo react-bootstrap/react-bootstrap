@@ -26,16 +26,19 @@ export default withLayout(function BreadcrumbSection({ data }) {
       </p>
 
       <Heading h="3" id="breadcrumbs-example">
-        Breadcrumbs Example
+        Example
       </Heading>
       <ReactPlayground codeText={Breadcrumb} />
 
-      <Heading h="2" id="breadcrumbs-props">
-        Props
+      <Heading h="2" id="breadcrumbs-api">
+        API
       </Heading>
 
       <ComponentApi metadata={data.Breadcrumb} />
-      <ComponentApi metadata={data.BreadcrumbItem} />
+      <ComponentApi
+        metadata={data.BreadcrumbItem}
+        exportedBy={data.Breadcrumb}
+      />
     </>
   );
 });

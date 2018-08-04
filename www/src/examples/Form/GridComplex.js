@@ -1,51 +1,51 @@
-<form>
+<Form>
   <Form.Row>
-    <FormGroup as={Col} controlId="formGridEmail">
-      <FormLabel>Email</FormLabel>
-      <FormControl type="email" placeholder="Enter email" />
-    </FormGroup>
+    <Form.Group as={Col} controlId="formGridEmail">
+      <Form.Label>Email</Form.Label>
+      <Form.Control type="email" placeholder="Enter email" />
+    </Form.Group>
 
-    <FormGroup as={Col} controlId="formGridPassword">
-      <FormLabel>Password</FormLabel>
-      <FormControl type="password" placeholder="Password" />
-    </FormGroup>
+    <Form.Group as={Col} controlId="formGridPassword">
+      <Form.Label>Password</Form.Label>
+      <Form.Control type="password" placeholder="Password" />
+    </Form.Group>
   </Form.Row>
 
-  <FormGroup controlId="formGridAddress1">
-    <FormLabel>Address</FormLabel>
-    <FormControl placeholder="1234 Main St" />
-  </FormGroup>
+  <Form.Group controlId="formGridAddress1">
+    <Form.Label>Address</Form.Label>
+    <Form.Control placeholder="1234 Main St" />
+  </Form.Group>
 
-  <FormGroup controlId="formGridAddress2">
-    <FormLabel>Address 2</FormLabel>
-    <FormControl placeholder="Apartment, studio, or floor" />
-  </FormGroup>
+  <Form.Group controlId="formGridAddress2">
+    <Form.Label>Address 2</Form.Label>
+    <Form.Control placeholder="Apartment, studio, or floor" />
+  </Form.Group>
 
   <Form.Row>
-    <FormGroup as={Col} controlId="formGridCity">
-      <FormLabel>City</FormLabel>
-      <FormControl />
-    </FormGroup>
+    <Form.Group as={Col} controlId="formGridCity">
+      <Form.Label>City</Form.Label>
+      <Form.Control />
+    </Form.Group>
 
-    <FormGroup as={Col} controlId="formGridState">
-      <FormLabel>State</FormLabel>
-      <FormControl as="select">
+    <Form.Group as={Col} controlId="formGridState">
+      <Form.Label>State</Form.Label>
+      <Form.Control as="select">
         <option>Choose...</option>
         <option>...</option>
-      </FormControl>
-    </FormGroup>
+      </Form.Control>
+    </Form.Group>
 
-    <FormGroup as={Col} controlId="formGridZip">
-      <FormLabel>Zip</FormLabel>
-      <FormControl />
-    </FormGroup>
+    <Form.Group as={Col} controlId="formGridZip">
+      <Form.Label>Zip</Form.Label>
+      <Form.Control />
+    </Form.Group>
   </Form.Row>
 
-  <FormGroup id="formGridCheckbox">
-    <FormCheck type="checkbox" label="Check me out" />
-  </FormGroup>
+  <Form.Group id="formGridCheckbox">
+    <Form.Check type="checkbox" label="Check me out" />
+  </Form.Group>
 
   <Button variant="primary" type="submit">
     Submit
   </Button>
-</form>;
+</Form>;
