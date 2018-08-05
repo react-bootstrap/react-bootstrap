@@ -34,7 +34,7 @@ From there you can:
 
 Yes please! See the [contributing guidelines][contributing] for details.
 
-[bootstrap]: http://getbootstrap.com
+[bootstrap]: https://getbootstrap.com/docs/3.3/
 [react]: http://facebook.github.io/react/
 
 [documentation]: http://react-bootstrap.github.io
