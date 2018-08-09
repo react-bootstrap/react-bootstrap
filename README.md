@@ -34,9 +34,9 @@ From there you can:
 
 Yes please! See the [contributing guidelines][contributing] for details.
 
-[bootstrap]: http://getbootstra.com
-[react]: http://facebook.github.io/react/
-[documentation]: http://react-bootstrap.github.io
+[bootstrap]: https://getbootstrap.com/
+[react]: https://reactjs.org/
+[documentation]: https://react-bootstrap.github.io/
 [contributing]: CONTRIBUTING.md
 [build-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg?branch=master
 [build]: https://travis-ci.org/react-bootstrap/react-bootstrap
