@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 import warning from 'warning';
+import Transition from 'react-transition-group/Transition';
 
 import {
   bsClass,
@@ -225,7 +226,9 @@ class TabPane extends React.Component {
       return null;
     }
 
-    const Transition = animation === true ? Fade : animation || null;
+    const TransitionAnimation =
+      animation === true ? Fade : animation || Transition;
+    const additionalTransitionProps = animation ? {} : { timeout: 0 };
 
     if (tabContent) {
       bsProps.bsClass = prefix(tabContent, 'pane');
@@ -259,27 +262,24 @@ class TabPane extends React.Component {
       />
     );
 
-    if (Transition) {
-      const exiting = tabContent && tabContent.exiting;
+    const exiting = tabContent && tabContent.exiting;
 
-      return (
-        <Transition
-          in={active && !exiting}
-          onEnter={createChainedFunction(this.handleEnter, onEnter)}
-          onEntering={onEntering}
-          onEntered={onEntered}
-          onExit={onExit}
-          onExiting={onExiting}
-          onExited={createChainedFunction(this.handleExited, onExited)}
-          mountOnEnter={mountOnEnter}
-          unmountOnExit={unmountOnExit}
-        >
-          {pane}
-        </Transition>
-      );
-    }
-
-    return pane;
+    return (
+      <TransitionAnimation
+        {...additionalTransitionProps}
+        in={active && !exiting}
+        onEnter={createChainedFunction(this.handleEnter, onEnter)}
+        onEntering={onEntering}
+        onEntered={onEntered}
+        onExit={onExit}
+        onExiting={onExiting}
+        onExited={createChainedFunction(this.handleExited, onExited)}
+        mountOnEnter={mountOnEnter}
+        unmountOnExit={unmountOnExit}
+      >
+        {pane}
+      </TransitionAnimation>
+    );
   }
 }
 
