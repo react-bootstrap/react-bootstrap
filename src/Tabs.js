@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import requiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import uncontrollable from 'uncontrollable';
+import elementType from 'prop-types-extra/lib/elementType';
 
 import Nav from './Nav';
 import NavItem from './NavItem';
@@ -25,7 +26,12 @@ const propTypes = {
    */
   bsStyle: PropTypes.oneOf(['tabs', 'pills']),
 
-  animation: PropTypes.bool,
+  /**
+   * Sets a default animation strategy. Use `false` to disable, `true`
+   * to enable the default `<Fade>` animation, or a react-transition-group
+   * v2 `<Transition/>` component.
+   */
+  animation: PropTypes.oneOfType([PropTypes.bool, elementType]),
 
   id: requiredForA11y(
     PropTypes.oneOfType([PropTypes.string, PropTypes.number])
