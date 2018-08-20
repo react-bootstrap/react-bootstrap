@@ -21,9 +21,9 @@
     "graphql-type-json": "^0.1.4",
     "lodash": "^4.15.0",
     "prop-types": "^15.6.0",
-    "react": "^15.5.4",
+    "react": "^16.4.2",
     "react-bootstrap": "*",
-    "react-dom": "^15.5.4",
+    "react-dom": "^16.4.2",
     "react-helmet": "^5.2.0",
     "react-live": "^1.9.2"
   },
@@ -32,7 +32,9 @@
     "@babel/preset-flow": "^7.0.0-beta.40"
   },
   "homepage": "https://react-bootstrap.github.io/",
-  "keywords": ["gatsby"],
+  "keywords": [
+    "gatsby"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",

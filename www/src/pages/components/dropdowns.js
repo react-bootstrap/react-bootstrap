@@ -153,7 +153,8 @@ export default function DropdownSection({ data }) {
           <a href="https://github.com/react-bootstrap/react-bootstrap/blob/v0.31.5/src/DropdownMenu.js#L115-L119">
             similarly to how it is implemented in{' '}
             <code>{'<Dropdown.Menu>'}</code>
-          </a>.
+          </a>
+          .
         </p>
         <p>
           You will have to add <code>react-overlays</code> as a dependency and
@@ -161,7 +162,8 @@ export default function DropdownSection({ data }) {
           <code>react-overlays</code> yourself like:{' '}
           <code>
             import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper'
-          </code>.
+          </code>
+          .
         </p>
       </div>
       <ReactPlayground codeText={DropdownButtonCustomMenu} />

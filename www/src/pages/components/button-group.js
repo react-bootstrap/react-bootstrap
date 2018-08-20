@@ -63,7 +63,8 @@ export default function ButtonGroupSection({ data }) {
       <p>
         You can place other button types within the{' '}
         <code>{'<ButtonGroup />'}</code> like{' '}
-        <code>{'<DropdownButton />'}</code>s.
+        <code>{'<DropdownButton />'}</code>
+        s.
       </p>
       <ReactPlayground codeText={ButtonGroupNested} />
 

@@ -16,7 +16,8 @@ export default function Page() {
         <code className="js">react-bootstrap</code>. You can also read through{' '}
         <a href="http://stackoverflow.com/questions/tagged/react-bootstrap">
           existing React-Bootstrap questions
-        </a>.
+        </a>
+        .
       </p>
 
       <h3>Live help</h3>
@@ -24,7 +25,8 @@ export default function Page() {
         Bring your questions and pair with other react-bootstrap users in a{' '}
         <a href="http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap">
           live Thinkful hangout
-        </a>. Hear about the challenges other developers are running into, or
+        </a>
+        . Hear about the challenges other developers are running into, or
         screenshare your own code with the group for feedback.
       </p>
 
@@ -42,7 +44,8 @@ export default function Page() {
         in the{' '}
         <a href="https://github.com/react-bootstrap/react-bootstrap/blob/master/CONTRIBUTING.md#issues">
           contribution guidelines
-        </a>.
+        </a>
+        .
       </p>
     </div>
   );

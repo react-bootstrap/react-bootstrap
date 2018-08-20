@@ -26,7 +26,8 @@ export default class HomePage extends React.Component {
               support in{' '}
               <a href="https://github.com/react-bootstrap/react-bootstrap/pull/2752">
                 #2752
-              </a>.
+              </a>
+              .
             </p>
           </Alert>
           <Alert bsStyle="warning">
@@ -66,7 +67,8 @@ export default class HomePage extends React.Component {
                 href="http://getbootstrap.com/"
               >
                 Bootstrap
-              </a>.
+              </a>
+              .
             </p>
             <p>
               <Glyphicon glyph="user" /> We actively seek to invite frequent

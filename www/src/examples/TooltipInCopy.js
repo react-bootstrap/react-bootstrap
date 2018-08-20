@@ -36,7 +36,8 @@ render(
     cleanse vegan chambray. A really ironic artisan{' '}
     <LinkWithTooltip tooltip="Another one here too" href="#" id="tooltip-3">
       whatever keytar
-    </LinkWithTooltip>, scenester farm-to-table banksy Austin{' '}
+    </LinkWithTooltip>
+    , scenester farm-to-table banksy Austin{' '}
     <LinkWithTooltip tooltip="The last tip!" href="#" id="tooltip-4">
       twitter handle
     </LinkWithTooltip>{' '}

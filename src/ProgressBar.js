@@ -77,7 +77,7 @@ const defaultProps = {
 };
 
 function getPercentage(now, min, max) {
-  const percentage = (now - min) / (max - min) * 100;
+  const percentage = ((now - min) / (max - min)) * 100;
   return Math.round(percentage * ROUND_PRECISION) / ROUND_PRECISION;
 }
 

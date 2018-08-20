@@ -188,15 +188,17 @@ var Alert = ReactBootstrap.Alert;
             and{' '}
             <a href="http://getbootstrap.com/getting-started/#support">
               Bootstrap
-            </a>.
+            </a>
+            .
           </p>
           <p>
             Unfortunately, due to the lack of resources and the will of
             dedicating the efforts to modern browsers and getting closer to
             Bootstrap's features, we will not be testing{' '}
             <code>react-bootstrap</code> against IE8 anymore.
-            <br />We will however continue supporting IE8 as long as people
-            submit PRs addressing compatibility issues with it.
+            <br />
+            We will however continue supporting IE8 as long as people submit PRs
+            addressing compatibility issues with it.
           </p>
 
           <p>

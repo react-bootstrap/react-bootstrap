@@ -28,8 +28,8 @@ export default function NavbarSection({ data }) {
       <p>
         For example <code>navbar-fixed-top</code> becomes the property{' '}
         <code>fixedTop</code>. The different properties are{' '}
-        <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>
-        , <code>inverse</code>, and <code>fluid</code>.
+        <code>fixedTop</code>, <code>fixedBottom</code>, <code>staticTop</code>,{' '}
+        <code>inverse</code>, and <code>fluid</code>.
       </p>
       <p>
         You can also align elements to the right by specifying the{' '}

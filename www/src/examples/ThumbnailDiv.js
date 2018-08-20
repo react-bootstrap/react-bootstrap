@@ -5,7 +5,8 @@
         <h3>Thumbnail label</h3>
         <p>Description</p>
         <p>
-          <Button bsStyle="primary">Button</Button>&nbsp;
+          <Button bsStyle="primary">Button</Button>
+          &nbsp;
           <Button bsStyle="default">Button</Button>
         </p>
       </Thumbnail>
@@ -15,7 +16,8 @@
         <h3>Thumbnail label</h3>
         <p>Description</p>
         <p>
-          <Button bsStyle="primary">Button</Button>&nbsp;
+          <Button bsStyle="primary">Button</Button>
+          &nbsp;
           <Button bsStyle="default">Button</Button>
         </p>
       </Thumbnail>
@@ -25,7 +27,8 @@
         <h3>Thumbnail label</h3>
         <p>Description</p>
         <p>
-          <Button bsStyle="primary">Button</Button>&nbsp;
+          <Button bsStyle="primary">Button</Button>
+          &nbsp;
           <Button bsStyle="default">Button</Button>
         </p>
       </Thumbnail>
