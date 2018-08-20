@@ -50,7 +50,7 @@ const buildEsm = step('es modules', esRoot, () =>
  * Builds a `bower.json` file and outputs it to /amd.
  * Actual code is copied by the buildDist step
  */
-const buildBower = step('bowser package', bowerRoot, async () => {
+const buildBower = step('browser package', bowerRoot, async () => {
   const pkgJson = require('../package.json');
 
   await fse.copy(
