@@ -1,3 +1,12 @@
+## [v0.32.3]
+> 2018-08-20
+
+- **Bugfix:** Fix dependencies ([#3239])
+
+[v0.32.3]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.32.2...v0.32.3
+[#3239]: https://github.com/react-bootstrap/react-bootstrap/pull/3239
+
+
 ## [v0.32.2]
 > 2018-08-17
 
