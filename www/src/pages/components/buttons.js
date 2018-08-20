@@ -101,8 +101,8 @@ export default function ButtonSection({ data }) {
       <p>
         When activating an asynchronous action from a button it is a good UX
         pattern to give the user feedback as to the loading state, this can
-        easily be done by updating your <code>{'<Button />'}</code>&#8217;s
-        props from a state change like below.
+        easily be done by updating your <code>{'<Button />'}</code>
+        &#8217;s props from a state change like below.
       </p>
       <ReactPlayground codeText={ButtonLoading} />
 

@@ -21,7 +21,8 @@ export default function ResponsiveEmbedSection({ data }) {
       </p>
       <p>
         You don't need to include <code>frameborder="0"</code> in your{' '}
-        <code>iframe</code>s.
+        <code>iframe</code>
+        s.
       </p>
       <p className="bg-warning">
         Either <b>16by9</b> or <b>4by3</b> aspect ratio via <code>a16by9</code>{' '}

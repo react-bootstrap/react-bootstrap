@@ -17,8 +17,9 @@ export default function PageHeaderSection({ data }) {
       <p>
         A simple shell for an <code>h1</code> to appropriately space out and
         segment sections of content on a page. It can utilize the{' '}
-        <code>h1</code>&#8217;s default <code>small</code> element, as well as
-        most other components (with additional styles).
+        <code>h1</code>
+        &#8217;s default <code>small</code> element, as well as most other
+        components (with additional styles).
       </p>
       <ReactPlayground codeText={PageHeader} />
 

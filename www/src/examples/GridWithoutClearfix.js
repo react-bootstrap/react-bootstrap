@@ -16,22 +16,34 @@ const gridInstance = (
   <Grid>
     <Row className="show-grid">
       <Col sm={6} md={3}>
-        <code>&lt;{'Col sm={6} md={3}'} /&gt;</code>
+        <code>
+          &lt;
+          {'Col sm={6} md={3}'} /&gt;
+        </code>
         <br />
         {dummySentences.slice(0, 6).join(' ')}
       </Col>
       <Col sm={6} md={3}>
-        <code>&lt;{'Col sm={6} md={3}'} /&gt;</code>
+        <code>
+          &lt;
+          {'Col sm={6} md={3}'} /&gt;
+        </code>
         <br />
         {dummySentences.slice(0, 4).join(' ')}
       </Col>
       <Col sm={6} md={3}>
-        <code>&lt;{'Col sm={6} md={3}'} /&gt;</code>
+        <code>
+          &lt;
+          {'Col sm={6} md={3}'} /&gt;
+        </code>
         <br />
         {dummySentences.slice(0, 6).join(' ')}
       </Col>
       <Col sm={6} md={3}>
-        <code>&lt;{'Col sm={6} md={3}'} /&gt;</code>
+        <code>
+          &lt;
+          {'Col sm={6} md={3}'} /&gt;
+        </code>
         <br />
         {dummySentences.slice(0, 2).join(' ')}
       </Col>

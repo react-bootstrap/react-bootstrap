@@ -56,7 +56,8 @@ export default function ModalSection({ data }) {
         your container has the <code>modal-container</code> class.
       </p>
       <pre>
-        {React.DOM.code(
+        {React.createElement(
+          'code',
           null,
           '.modal-container {\n' +
             '  position: relative;\n' +

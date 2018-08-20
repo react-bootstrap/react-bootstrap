@@ -173,6 +173,8 @@ describe('<TabContainer>', () => {
       instance.assertSingle('[eventKey=2]').assertSingle('.active');
 
       instance.setState({ eventKeys: [1], activeKey: 1 });
+      // XXX I have no idea why this is needed but the test fails without it.
+      instance.update();
       instance.assertSingle('[eventKey=1]').assertSingle('.active');
     });
 
@@ -195,6 +197,8 @@ describe('<TabContainer>', () => {
       instance.assertSingle('[eventKey=3]').assertSingle('.active');
 
       instance.setState({ eventKeys: [1, 2], activeKey: 2 });
+      // XXX I have no idea why this is needed but the test fails without it.
+      instance.update();
       instance.find(TabPane).length.should.equal(2);
       instance.assertSingle('[eventKey=2]').assertSingle('.active');
     });
@@ -221,9 +225,13 @@ describe('<TabContainer>', () => {
       instance.assertSingle('[eventKey=2]').assertSingle('.active');
 
       instance.setState({ eventKeys: [1, 3], activeKey: 3 });
+      // XXX I have no idea why this is needed but the test fails without it.
+      instance.update();
       instance.assertSingle('[eventKey=3]').assertSingle('.active');
 
       instance.setState({ eventKeys: [1, 4], activeKey: 4 });
+      // XXX I have no idea why this is needed but the test fails without it.
+      instance.update();
       instance.assertSingle('[eventKey=4]').assertSingle('.active');
     });
 
@@ -244,6 +252,8 @@ describe('<TabContainer>', () => {
 
       // But once event key changes again, make sure active state switches.
       instance.setState({ eventKeys: [1, 2] });
+      // XXX I have no idea why this is needed but the test fails without it.
+      instance.update();
       instance.assertSingle('[eventKey=1]').assertSingle('.active');
     });
 

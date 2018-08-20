@@ -142,7 +142,8 @@ class PropTable extends React.Component {
         <small>
           <em className="text-info">
             <Glyphicon glyph="info-sign" />
-            &nbsp;{text}
+            &nbsp;
+            {text}
           </em>
         </small>
       </div>

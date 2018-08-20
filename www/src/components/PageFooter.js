@@ -62,7 +62,8 @@ class PageFooter extends React.Component {
               target="_blank"
             >
               bootstrap
-            </a>; licensed under{' '}
+            </a>
+            ; licensed under{' '}
             <a
               href="https://creativecommons.org/licenses/by/3.0/"
               rel="noopener noreferrer"
