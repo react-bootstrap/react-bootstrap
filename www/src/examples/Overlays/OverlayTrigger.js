@@ -1,12 +1,12 @@
-const renderTooltip = ({ ref, style }) => (
+const renderTooltip = ({ props }) => (
   <div
-    ref={ref}
+    {...props}
     style={{
       backgroundColor: 'rgba(0, 0, 0, 0.85)',
       padding: '2px 10px',
       color: 'white',
       borderRadius: 3,
-      ...style,
+      ...props.style,
     }}
   >
     Simple tooltip

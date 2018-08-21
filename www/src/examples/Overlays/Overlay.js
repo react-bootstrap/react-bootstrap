@@ -19,15 +19,15 @@ class Example extends React.Component {
           Click me to see
         </Button>
         <Overlay target={target} show={show} placement="right">
-          {({ ref, style, placement, scheduleUpdate, arrowProps }) => (
+          {({ placement, scheduleUpdate, props, arrowProps }) => (
             <div
-              ref={ref}
+              {...props}
               style={{
                 backgroundColor: 'rgba(255, 100, 100, 0.85)',
                 padding: '2px 10px',
                 color: 'white',
                 borderRadius: 3,
-                ...style,
+                ...props.style,
               }}
             >
               Simple tooltip

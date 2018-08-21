@@ -94,8 +94,6 @@ class DropdownItem extends React.Component {
     const {
       bsPrefix,
       active,
-      divider,
-      header,
       className,
       children,
       eventKey: _,
@@ -104,34 +102,12 @@ class DropdownItem extends React.Component {
       ...props
     } = this.props;
 
-    if (divider) {
-      return (
-        <div
-          role="separator"
-          {...props}
-          className={classNames(className, `${bsPrefix}-divider`)}
-        />
-      );
-    }
-
-    if (header) {
-      return (
-        <div
-          role="heading"
-          {...props}
-          className={classNames(className, `${bsPrefix}-header`)}
-        >
-          {children}
-        </div>
-      );
-    }
-
     return (
       <Component
         {...props}
         className={classNames(
           className,
-          `${bsPrefix}-item`,
+          bsPrefix,
           active && 'active',
           props.disabled && 'disabled',
         )}
@@ -156,5 +132,5 @@ export default mapContextToProps(
           : props.active,
     };
   },
-  createBootstrapComponent(DropdownItem, 'dropdown'),
+  createBootstrapComponent(DropdownItem, 'dropdown-item'),
 );

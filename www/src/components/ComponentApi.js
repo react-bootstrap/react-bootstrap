@@ -9,12 +9,15 @@ import PropTable from './PropTable';
 const propTypes = {};
 
 function ComponentApi({ heading, metadata, exportedBy }) {
-  let name = metadata.displayName;
+  let { description, displayName: name } = metadata;
+  let descHtml = description && description.childMarkdownRemark.html;
+
   if (exportedBy) {
     name = `${exportedBy.displayName}.${name
       .split(exportedBy.displayName)
       .pop()}`;
   }
+
   return (
     <>
       <Heading
@@ -26,6 +29,7 @@ function ComponentApi({ heading, metadata, exportedBy }) {
       </Heading>
       {/* use composes here */}
       {/* Subcomponents? */}
+      {descHtml && <div dangerouslySetInnerHTML={{ __html: descHtml }} />}
       <PropTable metadata={metadata} />
     </>
   );
@@ -39,6 +43,11 @@ export const metadataFragment = graphql`
   fragment ComponentApi_metadata on ComponentMetadata {
     composes
     displayName
+    description {
+      childMarkdownRemark {
+        html
+      }
+    }
     ...PropTable_metadata
   }
 `;

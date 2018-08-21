@@ -35,7 +35,7 @@ class DropdownMenu extends React.Component {
      * Control the rendering of the DropdownMenu. All non-menu props
      * (listed here) are passed through to the `as` Component.
      *
-     * If providing a custom, non DOM, component. the `show` and `alignRight` props
+     * If providing a custom, non DOM, component. the `show`, `close` and `alignRight` props
      * are also injected and should be handled appropriatedly.
      */
     as: elementType,
@@ -68,26 +68,24 @@ class DropdownMenu extends React.Component {
             usePopper={!isNavbar}
             rootCloseEvent={rootCloseEvent}
           >
-            {({ ref, popper, show, alignEnd, onClose, props: menuProps }) => {
+            {({ placement, show, alignEnd, close, props: menuProps }) => {
               if (typeof Component !== 'string') {
                 menuProps.show = show;
-                menuProps.onClose = onClose;
+                menuProps.close = close;
                 menuProps.alignRight = alignEnd;
               }
-
-              if (popper) {
-                // we don't need the default style, menus are display: none when not shown.
-                props.style = popper.placement
-                  ? { ...props.style, ...popper.style }
-                  : props.style;
-                props['x-placement'] = popper.placement;
+              let style = props.style;
+              if (placement) {
+                // we don't need the default popper style,
+                // menus are display: none when not shown.
+                style = { ...style, ...menuProps.style };
+                props['x-placement'] = placement;
               }
-
               return (
                 <Component
-                  ref={ref}
                   {...props}
                   {...menuProps}
+                  style={style}
                   className={classNames(
                     className,
                     bsPrefix,

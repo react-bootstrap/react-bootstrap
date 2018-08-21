@@ -106,8 +106,10 @@ function renderNode(root) {
     <>
       {root.title && <a href={`#${root.id}`}>{root.title}</a>}
       <ul className="list-unstyled">
-        {root.children.map(item => (
-          <ListItem level={item.level}>{renderNode(item)}</ListItem>
+        {root.children.map((item, idx) => (
+          <ListItem key={idx} level={item.level}>
+            {renderNode(item)}
+          </ListItem>
         ))}
       </ul>
     </>

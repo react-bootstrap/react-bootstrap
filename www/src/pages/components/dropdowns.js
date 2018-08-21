@@ -42,7 +42,7 @@ const styles = css`
 export default withLayout(function DropdownSection({ data }) {
   return (
     <>
-      <Heading h="1" id="btn-dropdowns">
+      <Heading h="1" id="dropdowns">
         Dropdowns
       </Heading>
       <p className="lead">
@@ -70,8 +70,9 @@ export default withLayout(function DropdownSection({ data }) {
         standard defines a{' '}
         <a href="https://www.w3.org/TR/wai-aria-1.1/#menu">
           role="menu" widget
-        </a>, but it's very specific to a certain kind a menu. <ARIA /> menus,
-        must only contain <code>role="menuitem"</code>,{' '}
+        </a>
+        , but it's very specific to a certain kind a menu. <ARIA /> menus, must
+        only contain <code>role="menuitem"</code>,{' '}
         <code>role="menuitemcheckbox"</code>, or{' '}
         <code>role="menuitemradio"</code>.
       </p>
@@ -86,7 +87,7 @@ export default withLayout(function DropdownSection({ data }) {
       <Heading h="2" id="dropdown-examples">
         Examples
       </Heading>
-      <Heading h="3" id="btn-dropdowns-single">
+      <Heading h="3" id="dropdowns-single">
         Single button dropdowns
       </Heading>
       <p>
@@ -110,7 +111,7 @@ export default withLayout(function DropdownSection({ data }) {
       </p>
       <ReactPlayground codeText={DropdownVariants} />
 
-      <Heading h="3" id="btn-dropdowns-split">
+      <Heading h="3" id="dropdowns-split">
         Split button dropdowns
       </Heading>
       <p>
@@ -125,14 +126,14 @@ export default withLayout(function DropdownSection({ data }) {
       </p>
       <ReactPlayground codeText={SplitVariants} />
 
-      <Heading h="2" id="btn-dropdowns-sizing">
+      <Heading h="2" id="dropdowns-sizing">
         Sizing
       </Heading>
       <p>Dropdowns work with buttons of all sizes.</p>
       <ReactPlayground codeText={DropdownButtonSizes} />
 
-      <Heading h="2" id="btn-dropdowns-right">
-        Dropdown directions
+      <Heading h="2" id="dropdowns-directions">
+        Drop directions
       </Heading>
       <p>
         Trigger dropdown menus above, below, left, or to the right of their
@@ -148,7 +149,8 @@ export default withLayout(function DropdownSection({ data }) {
         Historically dropdown menu contents had to be links, but that’s no
         longer the case with v4. Now you can optionally use{' '}
         <code>{'<button>'}</code> elements in your dropdowns instead of just{' '}
-        <code>{'<a>'}</code>s.
+        <code>{'<a>'}</code>
+        s.
       </p>
       <ReactPlayground codeText={DropdownItemTags} />
 
@@ -178,7 +180,7 @@ export default withLayout(function DropdownSection({ data }) {
         codeText={MenuDividers}
         exampleClassName={styles.staticMenu}
       />
-      <Heading h="2" id="btn-dropdowns-custom">
+      <Heading h="2" id="dropdowns-custom">
         Customization
       </Heading>
       <p>
@@ -187,20 +189,11 @@ export default withLayout(function DropdownSection({ data }) {
         <code>Dropdown</code> Component to explicitly specify the Toggle and
         Menu components
       </p>
-      <div className="bs-callout bs-callout-info">
-        <h4>Additional Import Options</h4>
-        <p>
-          As a convenience Toggle and Menu components available as static
-          properties on the Dropdown component. However, you can also import
-          them directly, from the <code>/lib</code> directory like:{' '}
-          <code>require("react-bootstrap/lib/DropdownToggle")</code>.
-        </p>
-      </div>
       <ReactPlayground
         codeText={DropdownButtonCustom}
         exampleClassName={styles.customMenu}
       />
-      <Heading h="32" id="btn-dropdowns-custom-components">
+      <Heading h="3" id="dropdowns-custom-components">
         Custom Dropdown Components
       </Heading>
       <p>
@@ -213,7 +206,7 @@ export default withLayout(function DropdownSection({ data }) {
 
       <ReactPlayground codeText={DropdownButtonCustomMenu} />
 
-      <Heading h="2" id="btn-dropdowns-api">
+      <Heading h="2" id="dropdowns-api">
         API
       </Heading>
 
@@ -228,6 +221,11 @@ export default withLayout(function DropdownSection({ data }) {
       <ComponentApi metadata={data.DropdownMenu} exportedBy={data.Dropdown} />
 
       <ComponentApi metadata={data.DropdownItem} exportedBy={data.Dropdown} />
+      <ComponentApi metadata={data.DropdownHeader} exportedBy={data.Dropdown} />
+      <ComponentApi
+        metadata={data.DropdownDivider}
+        exportedBy={data.Dropdown}
+      />
     </>
   );
 });
@@ -255,6 +253,14 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     DropdownItem: componentMetadata(displayName: { eq: "DropdownItem" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    DropdownHeader: componentMetadata(displayName: { eq: "DropdownHeader" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    DropdownDivider: componentMetadata(displayName: { eq: "DropdownDivider" }) {
       displayName
       ...ComponentApi_metadata
     }

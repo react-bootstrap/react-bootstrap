@@ -72,42 +72,42 @@ const defaultProps = {
   placement: 'top',
 };
 
-function wrapRefs(popper) {
-  const {
-    ref,
-    arrowProps: { ref: aRef },
-  } = popper;
-  popper.ref = ref.__wrapped || (ref.__wrapped = r => ref(findDOMNode(r)));
-  popper.arrowProps.ref =
+function wrapRefs(props, arrowProps) {
+  const { ref } = props;
+  const { ref: aRef } = arrowProps;
+
+  props.ref = ref.__wrapped || (ref.__wrapped = r => ref(findDOMNode(r)));
+  arrowProps.ref =
     aRef.__wrapped || (aRef.__wrapped = r => aRef(findDOMNode(r)));
 }
 
-function renderOverlay(overlay, popper, { transition, show }) {
-  wrapRefs(popper);
-  if (!React.isValidElement(overlay)) return overlay(popper);
-
-  let props = popper;
-  if (typeof overlay.type === 'string') {
-    const { ref, style, placement } = popper;
-    props = { style, ref, 'x-placement': placement };
-  }
-  return React.cloneElement(overlay, {
-    ...props,
-    className: classNames(
-      overlay.props.className,
-      !transition && show && 'show',
-    ),
-    style: { ...overlay.props.style, ...props.style },
-  });
-}
-
-function Overlay({ children, ...props }) {
-  const transition =
-    props.transition === true ? Fade : props.transition || null;
+function Overlay({ children: overlay, transition, ...outerProps }) {
+  transition = transition === true ? Fade : transition || null;
 
   return (
-    <BaseOverlay {...props} transition={transition}>
-      {popper => renderOverlay(children, popper, props)}
+    <BaseOverlay {...outerProps} transition={transition}>
+      {({ props: overlayProps, arrowProps, show, ...props }) => {
+        wrapRefs(overlayProps, arrowProps);
+
+        if (typeof overlay === 'function')
+          return overlay({
+            ...props,
+            ...overlayProps,
+            show,
+            arrowProps,
+          });
+
+        return React.cloneElement(overlay, {
+          ...props,
+          ...overlayProps,
+          arrowProps,
+          className: classNames(
+            overlay.props.className,
+            !transition && show && 'show',
+          ),
+          style: { ...overlay.props.style, ...overlayProps.style },
+        });
+      }}
     </BaseOverlay>
   );
 }

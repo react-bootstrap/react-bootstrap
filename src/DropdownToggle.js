@@ -53,10 +53,9 @@ class DropdownToggle extends React.Component {
     // underlying component, to allow it to render size and style variants.
     return (
       <BaseDropdownToggle>
-        {({ ref, onToggle, props: toggleProps }) => (
+        {({ toggle, props: toggleProps }) => (
           <Component
-            ref={ref}
-            onClick={onToggle}
+            onClick={toggle}
             bsPrefix={childBsPrefix}
             className={classNames(
               className,

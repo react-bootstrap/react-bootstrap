@@ -41,6 +41,14 @@ const propTypes = {
   size: PropTypes.string,
 };
 
+/**
+ * A convenience component for simple or general use dropdowns. Renders a `Button` toggle and all `children`
+ * are passed directly to the default `Dropdown.Menu`.
+ *
+ * _All unknown props are passed through to the `Dropdown` component._ Only
+ * the Button `variant`, `size` and `bsPrefix` props are passed to the toggle,
+ * along with menu related props are passed to the `Dropdown.Menu`
+ */
 class DropdownButton extends React.Component {
   render() {
     const {
