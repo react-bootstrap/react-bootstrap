@@ -43,6 +43,7 @@
     "react-helmet": "^5.2.0",
     "react-live": "^1.9.2",
     "recompose": "^0.28.0",
+    "remark-slug": "^5.1.0",
     "shakespeare-data": "^2.5.0",
     "yup": "^0.24.1"
   },
