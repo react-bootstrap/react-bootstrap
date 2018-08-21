@@ -74,16 +74,17 @@ function Tooltip({
   children,
   arrowProps,
   scheduleUpdate: _,
+  outOfBoundaries: _1,
   ...props
 }) {
   return (
     <div
-      {...props}
-      role="tooltip"
       ref={innerRef}
       style={style}
+      role="tooltip"
       x-placement={placement}
       className={classNames(className, bsPrefix, `bs-tooltip-${placement}`)}
+      {...props}
     >
       <div className="arrow" {...arrowProps} />
       <div className={`${bsPrefix}-inner`}>{children}</div>

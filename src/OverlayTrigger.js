@@ -1,5 +1,6 @@
 import contains from 'dom-helpers/query/contains';
 import React, { cloneElement } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import warning from 'warning';
 
@@ -77,7 +78,25 @@ class OverlayTrigger extends React.Component {
 
     this.trigger = React.createRef();
     this.state = {
-      show: props.defaultShow,
+      show: !!props.defaultShow,
+    };
+
+    // We add aria-describedby in the case where the overlay is a role="tooltip"
+    // for other cases describedby isn't appropriate (e.g. a popover with inputs) so we don't add it.
+    this.ariaModifier = {
+      enabled: true,
+      order: 900,
+      fn: data => {
+        const { popper } = data.instance;
+        const target = this.getTarget();
+        if (!this.state.show || !target) return data;
+
+        const role = popper.getAttribute('role') || '';
+        if (popper.id && role.toLowerCase() === 'tooltip') {
+          target.setAttribute('aria-describedby', popper.id);
+        }
+        return data;
+      },
     };
   }
 
@@ -89,7 +108,7 @@ class OverlayTrigger extends React.Component {
     return React.Children.only(this.props.children).props;
   }
 
-  getTarget = () => this.trigger.current;
+  getTarget = () => ReactDOM.findDOMNode(this.trigger.current);
 
   hide() {
     this.setState({ show: false });
@@ -160,6 +179,7 @@ class OverlayTrigger extends React.Component {
   handleBlur = e => {
     const { onBlur } = this.getChildProps();
     this.handleHide(e);
+    console.log(onBlur);
     if (onBlur) onBlur(e);
   };
 
@@ -173,7 +193,13 @@ class OverlayTrigger extends React.Component {
   };
 
   render() {
-    const { trigger, overlay, children, ...props } = this.props;
+    const {
+      trigger,
+      overlay,
+      children,
+      popperConfig = {},
+      ...props
+    } = this.props;
 
     delete props.delay;
     delete props.defaultShow;
@@ -184,12 +210,9 @@ class OverlayTrigger extends React.Component {
 
     let triggers = trigger == null ? [] : [].concat(trigger);
 
-    if (this.state.show) {
-      triggerProps['aria-describedby'] = child.props.id;
-    }
-
-    if (triggers.indexOf('click') !== -1)
+    if (triggers.indexOf('click') !== -1) {
       triggerProps.onClick = this.handleClick;
+    }
 
     if (triggers.indexOf('focus') !== -1) {
       triggerProps.onFocus = this.handleShow;
@@ -215,6 +238,13 @@ class OverlayTrigger extends React.Component {
         </RefHolder>
         <Overlay
           {...props}
+          popperConfig={{
+            ...popperConfig,
+            modifiers: {
+              ...popperConfig.modifiers,
+              ariaModifier: this.ariaModifier,
+            },
+          }}
           show={this.state.show}
           onHide={this.handleHide}
           target={this.getTarget}

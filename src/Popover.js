@@ -84,12 +84,12 @@ function Popover({
 }) {
   return (
     <div
-      {...props}
       role="tooltip"
       ref={innerRef}
       style={style}
       x-placement={placement}
       className={classNames(className, bsPrefix, `bs-popover-${placement}`)}
+      {...props}
     >
       <div className="arrow" {...arrowProps} />
 
