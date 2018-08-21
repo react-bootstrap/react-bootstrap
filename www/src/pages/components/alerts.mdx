@@ -40,7 +40,6 @@ wnat to build more complicated alerts.
 <ComponentApi metadata={props.data.AlertHeading} exportedBy={props.data.Alert} />
 <ComponentApi metadata={props.data.AlertLink} exportedBy={props.data.Alert} />
 
-
 export const query = graphql`
   query AlertQuery {
     Alert: componentMetadata(displayName: { eq: "Alert" }) {
