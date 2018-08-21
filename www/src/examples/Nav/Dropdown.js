@@ -27,7 +27,7 @@ class NavDropdownExample extends React.Component {
           <NavDropdown.Item eventKey="4.3">
             Something else here
           </NavDropdown.Item>
-          <NavDropdown.Item divider />
+          <NavDropdown.Divider />
           <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>
         </NavDropdown>
       </Nav>

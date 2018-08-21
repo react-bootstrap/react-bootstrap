@@ -10,7 +10,7 @@
       <Dropdown.Item eventKey="3" active>
         Active Item
       </Dropdown.Item>
-      <Dropdown.Item divider />
+      <Dropdown.Divider />
       <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
     </Dropdown.Menu>
   </Dropdown>
@@ -24,7 +24,7 @@
       <Dropdown.Item eventKey="3" active>
         Active Item
       </Dropdown.Item>
-      <Dropdown.Item divider />
+      <Dropdown.Divider />
       <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
     </Dropdown.Menu>
   </Dropdown>

@@ -119,7 +119,7 @@ class Dropdown extends React.Component {
           {({ props: dropdownProps }) => (
             <Component
               {...props}
-              onKeyDown={dropdownProps}
+              {...dropdownProps}
               className={classNames(
                 className,
                 show && 'show',
