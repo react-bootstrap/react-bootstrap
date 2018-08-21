@@ -172,14 +172,13 @@ class OverlayTrigger extends React.Component {
 
   handleFocus = e => {
     const { onFocus } = this.getChildProps();
-    this.handleHide(e);
+    this.handleShow(e);
     if (onFocus) onFocus(e);
   };
 
   handleBlur = e => {
     const { onBlur } = this.getChildProps();
     this.handleHide(e);
-    console.log(onBlur);
     if (onBlur) onBlur(e);
   };
 
