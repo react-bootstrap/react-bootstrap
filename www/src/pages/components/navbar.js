@@ -35,26 +35,14 @@ export default withLayout(function NaπvbarSection({ data }) {
       </p>
       <ul>
         <li>
+          use the <code>expand</code> prop to allow for nvabar collapsing at
+          lower breakpoints.
+        </li>
+        <li>
           Navbars and their contents are fluid by default. Use optional{' '}
           <a href="#containers">containers </a> to limit their horizontal width.
         </li>
-        <li>
-          Modals are <em>unmounted</em> when closed.
-        </li>
-        <li>
-          Bootstrap only supports <strong>one</strong> modal window at a time.
-          Nested modals aren’t supported, but if you really need them the
-          underlying <code>react-overlays</code> can support them if you're
-          willing.
-        </li>
-        <li>
-          Modal's "trap" focus in them, ensuring the keyboard navigation cycles
-          through the modal, and not the rest of the page.
-        </li>
-        <li>
-          Unlike vanilla Bootstrap, <code>autoFocus</code> works in Modals
-          because React handles the implementation.
-        </li>
+        <li>Use spacing and flex utilities to size and position content</li>
       </ul>
 
       <p>
@@ -97,7 +85,7 @@ export default withLayout(function NaπvbarSection({ data }) {
       </Heading>
       <p>
         Theming the navbar has never been easier thanks to the combination of
-        theming classes and background-color utilities. Choose from
+        theming classes and background-color utilities. Choose from{' '}
         <code>variant="light"</code> for use with light background colors, or{' '}
         <code>variant="dark"</code> for dark background colors. Then, customize
         with the <code>bg</code> prop or any custom css!

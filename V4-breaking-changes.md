@@ -72,6 +72,8 @@
 - bsPrefixes are not passed from the parent Dropdown anymore
 - onSelect behavior is now passed to Menu and Toggle via the Context api
 - DropdownMenu is not rendered until opened
+- `divider` has been split out into `Dropdown.Divider`
+- `header` has been split out into `Dropdown.Header`
 
 ### DropdownButton/SplitButton/NavButton
 

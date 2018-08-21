@@ -7,16 +7,28 @@
     <Navbar.Brand>Brand text</Navbar.Brand>
   </Navbar>
   <br />
-  <Navbar bg="light">
+  <Navbar bg="dark">
     <Navbar.Brand href="#home">
-      <img src="/bootstrap-solid.svg" width="30" height="30" alt="" />
+      <img
+        src="/logo.svg"
+        width="30"
+        height="30"
+        className="d-inline-block align-top"
+        alt="React Bootstrap logo"
+      />
     </Navbar.Brand>
   </Navbar>
   <br />
-  <Navbar bg="light">
+  <Navbar bg="dark" variant="dark">
     <Navbar.Brand href="#home">
-      <img src="/bootstrap-solid.svg" width="30" height="30" alt="" />
-      {' Brand with some text'}
+      <img
+        alt=""
+        src="/logo.svg"
+        width="30"
+        height="30"
+        className="d-inline-block align-top"
+      />
+      {' React Bootstrap'}
     </Navbar.Brand>
   </Navbar>
 </>;
