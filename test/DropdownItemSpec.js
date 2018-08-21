@@ -2,39 +2,26 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import Button from '../src/Button';
-import DropdownItem from '../src/DropdownItem';
+import Dropdown from '../src/Dropdown';
 
-import { shouldWarn } from './helpers';
-
-describe('<DropdownItem>', () => {
+describe('<Dropdown.Item>', () => {
   it('renders divider', () => {
-    mount(<DropdownItem divider />).assertSingle(
+    mount(<Dropdown.Divider />).assertSingle(
       'div.dropdown-divider[role="separator"]',
     );
   });
 
   it('renders divider className and style', () => {
     const node = mount(
-      <DropdownItem divider className="foo bar" style={{ height: '100px' }} />,
+      <Dropdown.Divider className="foo bar" style={{ height: '100px' }} />,
     ).getDOMNode();
 
     node.className.should.match(/\bfoo bar dropdown-divider\b/);
     node.style.height.should.equal('100px');
   });
 
-  it('renders divider not children', () => {
-    shouldWarn('Children will not be rendered for dividers');
-
-    const node = mount(
-      <DropdownItem divider>Some child</DropdownItem>,
-    ).getDOMNode();
-
-    node.className.should.match(/\bdropdown-divider\b/);
-    node.innerHTML.should.not.match(/Some child/);
-  });
-
   it('renders header', () => {
-    mount(<DropdownItem header>Header text</DropdownItem>)
+    mount(<Dropdown.Header>Header text</Dropdown.Header>)
       .assertSingle('div.dropdown-header[role="heading"]')
       .text()
       .should.equal('Header text');
@@ -42,9 +29,9 @@ describe('<DropdownItem>', () => {
 
   it('renders header className and style', () => {
     const node = mount(
-      <DropdownItem header className="foo bar" style={{ height: '100px' }}>
+      <Dropdown.Header className="foo bar" style={{ height: '100px' }}>
         Header text
-      </DropdownItem>,
+      </Dropdown.Header>,
     ).getDOMNode();
 
     node.className.should.match(/\bfoo bar dropdown-header\b/);
@@ -53,9 +40,9 @@ describe('<DropdownItem>', () => {
 
   it('renders menu item link', done => {
     mount(
-      <DropdownItem onKeyDown={() => done()} href="/herpa-derpa">
+      <Dropdown.Item onKeyDown={() => done()} href="/herpa-derpa">
         Item
-      </DropdownItem>,
+      </Dropdown.Item>,
     )
       .assertSingle('a.dropdown-item[href="/herpa-derpa"]')
       .tap(a => a.text().should.equal('Item'))
@@ -63,7 +50,7 @@ describe('<DropdownItem>', () => {
   });
 
   it('should render as a button when set', () => {
-    mount(<DropdownItem as={Button} variant="success" />).assertSingle(
+    mount(<Dropdown.Item as={Button} variant="success" />).assertSingle(
       'button.dropdown-item.btn-success',
     );
   });
@@ -74,9 +61,9 @@ describe('<DropdownItem>', () => {
       done();
     };
     mount(
-      <DropdownItem onSelect={handleSelect} eventKey="1">
+      <Dropdown.Item onSelect={handleSelect} eventKey="1">
         Item
-      </DropdownItem>,
+      </Dropdown.Item>,
     ).simulate('click');
   });
 
@@ -85,7 +72,7 @@ describe('<DropdownItem>', () => {
       expect(eventKey).to.not.exist;
       done();
     };
-    mount(<DropdownItem onSelect={handleSelect}>Item</DropdownItem>).simulate(
+    mount(<Dropdown.Item onSelect={handleSelect}>Item</Dropdown.Item>).simulate(
       'click',
     );
   });
@@ -95,48 +82,24 @@ describe('<DropdownItem>', () => {
     const handleSelect = sinon.spy();
 
     mount(
-      <DropdownItem onClick={handleClick} onSelect={handleSelect}>
+      <Dropdown.Item onClick={handleClick} onSelect={handleSelect}>
         Item
-      </DropdownItem>,
+      </Dropdown.Item>,
     ).simulate('click');
 
     expect(handleClick).to.have.been.called;
     expect(handleSelect).to.have.been.called;
   });
 
-  it('does not fire onSelect when divider is clicked', () => {
-    const handleSelect = () => {
-      throw new Error('Should not invoke onSelect with divider flag applied');
-    };
-
-    mount(<DropdownItem onSelect={handleSelect} divider />)
-      .simulate('click')
-      .assertNone('a');
-  });
-
-  it('does not fire onSelect when header is clicked', () => {
-    const handleSelect = () => {
-      throw new Error('Should not invoke onSelect with header flag applied');
-    };
-
-    mount(
-      <DropdownItem onSelect={handleSelect} header>
-        Header content
-      </DropdownItem>,
-    )
-      .simulate('click')
-      .assertNone('a');
-  });
-
   it('does not pass onClick to DOM node', () => {
-    mount(<DropdownItem onSelect={() => {}}>Item</DropdownItem>)
+    mount(<Dropdown.Item onSelect={() => {}}>Item</Dropdown.Item>)
       .find('a')
       .props()
       .should.not.have.property('onSelect');
   });
 
   it('does not pass onClick to children', () => {
-    mount(<DropdownItem onSelect={() => {}}>Item</DropdownItem>)
+    mount(<Dropdown.Item onSelect={() => {}}>Item</Dropdown.Item>)
       .find('SafeAnchor')
       .props()
       .should.not.have.property('onSelect');
@@ -147,9 +110,9 @@ describe('<DropdownItem>', () => {
       throw new Error('Should not invoke onSelect event');
     };
     mount(
-      <DropdownItem onSelect={handleSelect} disabled>
+      <Dropdown.Item onSelect={handleSelect} disabled>
         Text
-      </DropdownItem>,
+      </Dropdown.Item>,
     )
       .assertSingle('a.disabled')
       .simulate('click');
@@ -157,14 +120,14 @@ describe('<DropdownItem>', () => {
 
   it('should pass through props', () => {
     let node = mount(
-      <DropdownItem
+      <Dropdown.Item
         className="test-class"
         href="#hi-mom!"
         title="hi mom!"
         style={{ height: 100 }}
       >
         Title
-      </DropdownItem>,
+      </Dropdown.Item>,
     ).getDOMNode();
 
     assert(node.className.match(/\btest-class\b/));
@@ -174,7 +137,7 @@ describe('<DropdownItem>', () => {
   });
 
   it('Should set target attribute on anchor', () => {
-    let anchor = mount(<DropdownItem target="_blank">Title</DropdownItem>)
+    let anchor = mount(<Dropdown.Item target="_blank">Title</Dropdown.Item>)
       .find('a')
       .getDOMNode();
 

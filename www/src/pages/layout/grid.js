@@ -2,8 +2,8 @@ import { graphql } from 'gatsby';
 import React from 'react';
 import { css } from 'css-literal-loader/styled';
 
-import Anchor from '../../components/Anchor';
-import PropTable from '../../components/PropTable';
+import Heading from '../../components/Heading';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import GridAutoLayout from '../../examples/Grid/AutoLayout';
 import GridAutoLayoutSizing from '../../examples/Grid/AutoLayoutSizing';
@@ -37,9 +37,9 @@ const styles = css`
 export default withLayout(function GridSection({ data }) {
   return (
     <>
-      <h1>
-        <Anchor id="grid">Grid system</Anchor>{' '}
-      </h1>
+      <Heading h="1" id="grid">
+        Grid system
+      </Heading>
       <p>
         Bootstrap’s grid system uses a series of containers, rows, and columns
         to layout and align content. It’s built with{' '}
@@ -56,9 +56,9 @@ export default withLayout(function GridSection({ data }) {
         </a>{' '}
         for background, terminology, guidelines, and code snippets.
       </p>
-      <h2>
-        <Anchor id="auto-layout">Auto-layout columns</Anchor>
-      </h2>
+      <Heading h="2" id="auto-layout">
+        Auto-layout columns
+      </Heading>
       <p>
         When no column widths are specified the <code>Col</code> component will
         render equal width columns
@@ -68,9 +68,9 @@ export default withLayout(function GridSection({ data }) {
         exampleClassName={styles.example}
       />
 
-      <h3>
-        <Anchor id="auto-layout-col-sizing">Setting one column width</Anchor>
-      </h3>
+      <Heading h="3" id="auto-layout-col-sizing">
+        Setting one column width
+      </Heading>
 
       <p>
         Auto-layout for flexbox grid columns also means you can set the width of
@@ -84,9 +84,9 @@ export default withLayout(function GridSection({ data }) {
         exampleClassName={styles.example}
       />
 
-      <h3>
-        <Anchor id="auto-layout-variable-sizes">Variable width content</Anchor>
-      </h3>
+      <Heading h="3" id="auto-layout-variable-sizes">
+        Variable width content
+      </Heading>
       <p>
         Set the column value (for any breakpoint size) to <code>"auto"</code> to
         size columns based on the natural width of their content.
@@ -95,9 +95,9 @@ export default withLayout(function GridSection({ data }) {
         codeText={GridAutoLayoutVariable}
         exampleClassName={styles.example}
       />
-      <h3>
-        <Anchor id="responsive-grids">Responsive grids</Anchor>
-      </h3>
+      <Heading h="2" id="responsive-grids">
+        Responsive grids
+      </Heading>
       <p>
         The <code>Col</code> lets you specify column widths across 5 breakpoint
         sizes (xs, sm, md, large, and xl). For every breakpoint, you can specify
@@ -139,29 +139,14 @@ export default withLayout(function GridSection({ data }) {
         codeText={GridOffsetting}
         exampleClassName={styles.example}
       />
-      <h3>
-        <Anchor id="grid-props">Props</Anchor>
-      </h3>
+      <Heading h="2" id="grid-props">
+        API
+      </Heading>
 
-      <h4>
-        <Anchor id="grid-props-grid">Grid</Anchor>
-      </h4>
-      <PropTable metadata={data.Container} />
-
-      <h4>
-        <Anchor id="grid-props-row">Row</Anchor>
-      </h4>
-      <PropTable metadata={data.Row} />
-
-      <h4>
-        <Anchor id="grid-props-col">Col</Anchor>
-      </h4>
-      <PropTable metadata={data.Col} />
-
-      <h4>
-        <Anchor id="grid-props-col">Clearfix</Anchor>
-      </h4>
-      <PropTable metadata={data.Clearfix} />
+      <ComponentApi metadata={data.Container} />
+      <ComponentApi metadata={data.Row} />
+      <ComponentApi metadata={data.Col} />
+      <ComponentApi metadata={data.Clearfix} />
     </>
   );
 });
@@ -169,16 +154,16 @@ export default withLayout(function GridSection({ data }) {
 export const query = graphql`
   query GridQuery {
     Container: componentMetadata(displayName: { eq: "Container" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     Row: componentMetadata(displayName: { eq: "Row" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     Col: componentMetadata(displayName: { eq: "Col" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     Clearfix: componentMetadata(displayName: { eq: "Clearfix" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
   }
 `;

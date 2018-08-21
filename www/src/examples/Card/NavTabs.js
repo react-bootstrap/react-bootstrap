@@ -1,8 +1,8 @@
 <Card>
   <Card.Header>
-    <Nav variant="tabs">
+    <Nav variant="tabs" defaultActiveKey="#first">
       <Nav.Item>
-        <Nav.Link active>Active</Nav.Link>
+        <Nav.Link href="#first">Active</Nav.Link>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link href="#link">Link</Nav.Link>

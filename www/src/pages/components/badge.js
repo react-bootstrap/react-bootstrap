@@ -56,8 +56,8 @@ export default withLayout(function BadgeSection({ data }) {
       </p>
       <ReactPlayground codeText={BadgePill} />
 
-      <Heading h="2" id="badges-props">
-        Props
+      <Heading h="2" id="badges-api">
+        API
       </Heading>
       <ComponentApi metadata={data.metadata} />
     </>

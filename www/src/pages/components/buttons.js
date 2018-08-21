@@ -1,9 +1,8 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import LinkToSource from '../../components/LinkToSource';
-import PropTable from '../../components/PropTable';
+import Heading from '../../components/Heading';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import ButtonActive from '../../examples/Button/Active';
 import ButtonBlock from '../../examples/Button/Block';
@@ -21,28 +20,32 @@ import withLayout from '../../withLayout';
 export default withLayout(function ButtonSection({ data }) {
   return (
     <>
-      <h1>
-        <Anchor id="buttons">Buttons</Anchor>
-      </h1>
-      <h3>
-        <Anchor id="buttons-options">Options</Anchor>
-      </h3>
+      <Heading h="1" id="buttons">
+        Buttons
+      </Heading>
+      <p className="lead">
+        Custom button styles for actions in forms, dialogs, and more with
+        support for multiple sizes, states, and more.
+      </p>
+      <Heading h="2" id="buttons-examples">
+        Examples
+      </Heading>
       <p>
         Use any of the available button style types to quickly create a styled
         button. Just modify the <code>variant</code> prop.
       </p>
       <ReactPlayground codeText={ButtonTypes} />
-      <h3>
-        <Anchor id="buttons-outline-btns">Outline buttons</Anchor>
-      </h3>
+      <Heading h="3" id="buttons-outline-btns">
+        Outline buttons
+      </Heading>
       <p>
         For a lighter touch, Buttons also come in <code>outline-*</code>{' '}
         variants with no background color.
       </p>
       <ReactPlayground codeText={ButtonOutlineTypes} />
-      <h3>
-        <Anchor id="buttons-tags">Button tags</Anchor>
-      </h3>
+      <Heading h="2" id="buttons-tags">
+        Button tags
+      </Heading>
       <p>
         Normally <code>{'<Button>'}</code> components will render a HTML{' '}
         <code>{'<button>'}</code> element. However you can render whatever you'd
@@ -52,9 +55,9 @@ export default withLayout(function ButtonSection({ data }) {
         the proper ARIA roles for you.
       </p>
       <ReactPlayground codeText={ButtonTagTypes} />
-      <h3>
-        <Anchor id="buttons-sizes">Sizes</Anchor>
-      </h3>
+      <Heading h="2" id="buttons-sizes">
+        Sizes
+      </Heading>
       <p>
         Fancy larger or smaller buttons? Add <code>size="large"</code>,{' '}
         <code>size="small"</code> for additional sizes.
@@ -65,17 +68,17 @@ export default withLayout(function ButtonSection({ data }) {
         adding <code>block</code>
       </p>
       <ReactPlayground codeText={ButtonBlock} />
-      <h3>
-        <Anchor id="buttons-active">Active state</Anchor>
-      </h3>
+      <Heading h="2" id="buttons-active">
+        Active state
+      </Heading>
       <p>
         To set a buttons active state simply set the components{' '}
         <code>active</code> prop.
       </p>
       <ReactPlayground codeText={ButtonActive} />
-      <h3>
-        <Anchor id="buttons-disabled">Disabled state</Anchor>
-      </h3>
+      <Heading h="2" id="buttons-disabled">
+        Disabled state
+      </Heading>
       <p>
         Make buttons look inactive by adding the <code>disabled</code> prop to.
       </p>
@@ -90,9 +93,9 @@ export default withLayout(function ButtonSection({ data }) {
         React Bootstrap will prevent any <code>onClick</code> handlers from
         firing regardless of the rendered element.
       </p>
-      <h3>
-        <Anchor id="buttons-loading">Button loading state</Anchor>
-      </h3>
+      <Heading h="2" id="buttons-loading">
+        Button loading state
+      </Heading>
       <p>
         When activating an asynchronous action from a button it is a good UX
         pattern to give the user feedback as to the loading state, this can
@@ -100,9 +103,9 @@ export default withLayout(function ButtonSection({ data }) {
         props from a state change like below.
       </p>
       <ReactPlayground codeText={ButtonLoading} />
-      <h3>
-        <Anchor id="buttons-checkbox-radio">Checkbox / Radio</Anchor>
-      </h3>
+      <Heading h="2" id="buttons-checkbox-radio">
+        Checkbox / Radio
+      </Heading>
       <p>
         Button's can also be used to style <code>checkbox</code> and{' '}
         <code>radio</code> form elements. This is helpful when you want a toggle
@@ -125,19 +128,11 @@ export default withLayout(function ButtonSection({ data }) {
       <ReactPlayground codeText={ToggleButtonGroupUncontrolled} />
       <h4>Controlled</h4>
       <ReactPlayground codeText={ToggleButtonGroupControlled} />
-      <h2>
-        <Anchor id="buttons-props">Props</Anchor>
-      </h2>
-      <h3>
-        <Anchor id="buttons-button-props">Button</Anchor>
-        <LinkToSource component={data.Button.displayName} />
-      </h3>
-      <PropTable metadata={data.Button} />
-      <h3>
-        <Anchor id="buttons-button-props">ToggleButton</Anchor>
-        <LinkToSource component={data.ToggleButton.displayName} />
-      </h3>
-      <PropTable metadata={data.ToggleButton} />
+      <Heading h="2" id="buttons-props">
+        API
+      </Heading>
+      <ComponentApi metadata={data.Button} />
+      <ComponentApi metadata={data.ToggleButton} />
     </>
   );
 });
@@ -146,17 +141,17 @@ export const query = graphql`
   query ButtonQuery {
     Button: componentMetadata(displayName: { eq: "Button" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     ToggleButtonGroup: componentMetadata(
       displayName: { eq: "ToggleButtonGroup" }
     ) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     ToggleButton: componentMetadata(displayName: { eq: "ToggleButton" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
   }
 `;

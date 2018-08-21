@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import all from 'prop-types-extra/lib/all';
 import elementType from 'prop-types-extra/lib/elementType';
 import React from 'react';
 import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
@@ -27,28 +26,9 @@ class DropdownItem extends React.Component {
     disabled: PropTypes.bool,
 
     /**
-     * Styles the menu item as a horizontal rule, providing visual separation between
-     * groups of menu items.
-     *
-     * @type {boolean}
-     */
-    divider: all(
-      PropTypes.bool,
-      ({ divider, children }) =>
-        divider && children
-          ? new Error('Children will not be rendered for dividers')
-          : null,
-    ),
-
-    /**
      * Value passed to the `onSelect` handler, useful for identifying the selected menu item.
      */
     eventKey: PropTypes.any,
-
-    /**
-     * Styles the menu item as a header label, useful for describing a group of menu items.
-     */
-    header: PropTypes.bool,
 
     /**
      * HTML `href` attribute corresponding to `a.href`.
@@ -74,9 +54,7 @@ class DropdownItem extends React.Component {
 
   static defaultProps = {
     as: SafeAnchor,
-    divider: false,
     disabled: false,
-    header: false,
   };
 
   handleClick = event => {
@@ -94,8 +72,6 @@ class DropdownItem extends React.Component {
     const {
       bsPrefix,
       active,
-      divider,
-      header,
       className,
       children,
       eventKey: _,
@@ -104,34 +80,12 @@ class DropdownItem extends React.Component {
       ...props
     } = this.props;
 
-    if (divider) {
-      return (
-        <div
-          role="separator"
-          {...props}
-          className={classNames(className, `${bsPrefix}-divider`)}
-        />
-      );
-    }
-
-    if (header) {
-      return (
-        <div
-          role="heading"
-          {...props}
-          className={classNames(className, `${bsPrefix}-header`)}
-        >
-          {children}
-        </div>
-      );
-    }
-
     return (
       <Component
         {...props}
         className={classNames(
           className,
-          `${bsPrefix}-item`,
+          bsPrefix,
           active && 'active',
           props.disabled && 'disabled',
         )}
@@ -156,5 +110,5 @@ export default mapContextToProps(
           : props.active,
     };
   },
-  createBootstrapComponent(DropdownItem, 'dropdown'),
+  createBootstrapComponent(DropdownItem, 'dropdown-item'),
 );

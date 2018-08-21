@@ -11,6 +11,7 @@ import DropdownMenu from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
 import DropdownItem from './DropdownItem';
 import SelectableContext from './SelectableContext';
+import createWithBsPrefix from './utils/createWithBsPrefix';
 
 const propTypes = {
   /** @default 'dropdown' */
@@ -77,14 +78,6 @@ const defaultProps = {
   navbar: false,
 };
 
-/**
- * A convenience component for simple or general use dropdowns. Renders a `Button` toggle and all `children`
- * are passed directly to the default `Dropdown.Menu`.
- *
- * **All unknown props are passed through to the `Dropdown` component. Only
- * the button `variant`, `size` and `bsPrefix` props are passed to the toggle,
- * along with menu related props are passed to the `Dropdown.Menu`**
- */
 class Dropdown extends React.Component {
   handleSelect = (key, event) => {
     if (this.props.onSelect) this.props.onSelect(key, event);
@@ -123,10 +116,10 @@ class Dropdown extends React.Component {
           onToggle={this.handleToggle}
           itemSelector={`.${bsPrefix}-item:not(.disabled):not(:disabled)`}
         >
-          {({ onKeyDown }) => (
+          {({ props: dropdownProps }) => (
             <Component
               {...props}
-              onKeyDown={onKeyDown}
+              {...dropdownProps}
               className={classNames(
                 className,
                 show && 'show',
@@ -162,5 +155,12 @@ const DecoratedDropdown = mapContextToProps(
 DecoratedDropdown.Toggle = DropdownToggle;
 DecoratedDropdown.Menu = DropdownMenu;
 DecoratedDropdown.Item = DropdownItem;
+
+DecoratedDropdown.Header = createWithBsPrefix('dropdown-header', {
+  defaultProps: { role: 'heading' },
+});
+DecoratedDropdown.Divider = createWithBsPrefix('dropdown-divider', {
+  defaultProps: { role: 'separator' },
+});
 
 export default DecoratedDropdown;

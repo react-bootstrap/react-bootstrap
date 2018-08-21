@@ -1,11 +1,10 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
+import Heading from '../../components/Heading';
 import Callout from '../../components/Callout';
 import CodeBlock from '../../components/CodeBlock';
-import LinkToSource from '../../components/LinkToSource';
-import PropTable from '../../components/PropTable';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import NavAlignement from '../../examples/Nav/Alignment';
 import NavBasic from '../../examples/Nav/Basic';
@@ -14,14 +13,16 @@ import NavDropdownImpl from '../../examples/Nav/DropdownImpl';
 import NavFill from '../../examples/Nav/Fill';
 import NavJustified from '../../examples/Nav/Justified';
 import NavStacked from '../../examples/Nav/Stacked';
+import Tabs from '../../examples/Nav/Tabs';
+import Pills from '../../examples/Nav/Pills';
 import withLayout from '../../withLayout';
 
 export default withLayout(function NavSection({ data }) {
   return (
     <>
-      <h2>
-        <Anchor id="navs">Base Nav</Anchor>
-      </h2>
+      <Heading h="1" id="navs">
+        Base Nav
+      </Heading>
 
       <p>
         Navigation bits in Bootstrap all share a general <code>Nav</code>{' '}
@@ -35,9 +36,10 @@ export default withLayout(function NavSection({ data }) {
         <code>active</code> prop styling!
       </Callout>
       <ReactPlayground codeText={NavBasic} />
-      <h3>
-        <Anchor id="navs-alignment">Alignment and orientation</Anchor>
-      </h3>
+
+      <Heading h="2" id="navs-alignment">
+        Alignment and orientation
+      </Heading>
       <p>
         You can control the the direction and orientation of the{' '}
         <code>Nav</code> by making use of the{' '}
@@ -49,9 +51,9 @@ export default withLayout(function NavSection({ data }) {
       </p>
       <ReactPlayground codeText={NavAlignement} />
 
-      <h3>
-        <Anchor id="navs-stacked">Vertical</Anchor>
-      </h3>
+      <Heading h="3" id="navs-stacked">
+        Vertical
+      </Heading>
       <p>
         Create stacked navs by changing the flex item direction with the{' '}
         <code>.flex-column</code> class, or your own css. You can even use the
@@ -60,9 +62,25 @@ export default withLayout(function NavSection({ data }) {
       </p>
       <ReactPlayground codeText={NavStacked} />
 
-      <h3>
-        <Anchor id="navs-justified">Fill and justify</Anchor>
-      </h3>
+      <Heading h="3" id="navs-tabs">
+        Tabs
+      </Heading>
+      <p>
+        Visually represent nav items as "tabs". This style pairs nicely with
+        tabbable regions created by our <a href="../tabs/">Tab components</a>
+      </p>
+      <ReactPlayground codeText={Tabs} />
+
+      <Heading h="3" id="navs-pill">
+        Pills
+      </Heading>
+
+      <p>An alternative visual variant.</p>
+      <ReactPlayground codeText={Pills} />
+
+      <Heading h="3" id="navs-justified">
+        Fill and justify
+      </Heading>
       <p>
         Force the contents of your nav to extend the full available width. To
         proportionately fill the space use <code>fill</code>. Notice that the
@@ -76,9 +94,9 @@ export default withLayout(function NavSection({ data }) {
 
       <ReactPlayground codeText={NavJustified} />
 
-      <h3>
-        <Anchor id="navs-dropdown">Using dropdowns</Anchor>
-      </h3>
+      <Heading h="2" id="navs-dropdown">
+        Using dropdowns
+      </Heading>
       <p>
         You can mix and match the Dropdown components with the NavLink and
         NavItem components to create a Dropdown that plays well in a Nav
@@ -93,26 +111,13 @@ export default withLayout(function NavSection({ data }) {
       </p>
       <ReactPlayground codeText={NavDropdown} />
 
-      <h3>
-        <Anchor id="navs-props">Props</Anchor>
-      </h3>
+      <Heading h="2" id="navs-props">
+        API
+      </Heading>
 
-      <h4>
-        <Anchor id="navs-props-nav">Nav</Anchor>
-        <LinkToSource component={data.Nav.displayName} />
-      </h4>
-      <PropTable metadata={data.Nav} />
-
-      <h4>
-        <Anchor id="navs-props-navitem">NavItem</Anchor>
-        <LinkToSource component={data.NavItem.displayName} />
-      </h4>
-      <PropTable metadata={data.NavItem} />
-      <h4>
-        <Anchor id="navs-props-navlink">NavLink</Anchor>
-        <LinkToSource component={data.NavLink.displayName} />
-      </h4>
-      <PropTable metadata={data.NavLink} />
+      <ComponentApi metadata={data.Nav} />
+      <ComponentApi metadata={data.NavItem} />
+      <ComponentApi metadata={data.NavLink} />
     </>
   );
 });
@@ -121,19 +126,19 @@ export const query = graphql`
   query NavQuery {
     Nav: componentMetadata(displayName: { eq: "Nav" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     NavItem: componentMetadata(displayName: { eq: "NavItem" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     NavLink: componentMetadata(displayName: { eq: "NavLink" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     NavDropdown: componentMetadata(displayName: { eq: "NavDropdown" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
   }
 `;

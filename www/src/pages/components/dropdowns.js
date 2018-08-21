@@ -2,10 +2,9 @@ import { graphql } from 'gatsby';
 import React from 'react';
 import { css } from 'css-literal-loader/styled';
 
-import Anchor from '../../components/Anchor';
+import Heading from '../../components/Heading';
 import ARIA from '../../components/AriaAbbr';
-import LinkToSource from '../../components/LinkToSource';
-import PropTable from '../../components/PropTable';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import DropdownBasic from '../../examples/Dropdown/Basic';
 import DropdownBasicButton from '../../examples/Dropdown/BasicButton';
@@ -43,12 +42,16 @@ const styles = css`
 export default withLayout(function DropdownSection({ data }) {
   return (
     <>
-      <h2>
-        <Anchor id="btn-dropdowns">Dropdowns</Anchor>
-      </h2>
-      <h3>
-        <Anchor id="dropdown-overview">Overview</Anchor>
-      </h3>
+      <Heading h="1" id="dropdowns">
+        Dropdowns
+      </Heading>
+      <p className="lead">
+        Toggle contextual overlays for displaying lists of links and more with
+        the Bootstrap dropdown plugin
+      </p>
+      <Heading h="2" id="dropdown-overview">
+        Overview
+      </Heading>
       <p>
         Dropdowns are toggleable, contextual overlays for displaying lists of
         links and more. Like overlays, Dropdowns are built using a third-party
@@ -56,9 +59,9 @@ export default withLayout(function DropdownSection({ data }) {
         dynamic positioning and viewport detection.
       </p>
 
-      <h3>
-        <Anchor id="dropdown-a11y">Accessibility</Anchor>
-      </h3>
+      <Heading h="2" id="dropdown-a11y">
+        Accessibility
+      </Heading>
       <p>
         The{' '}
         <a href="https://www.w3.org/TR/wai-aria/">
@@ -67,8 +70,9 @@ export default withLayout(function DropdownSection({ data }) {
         standard defines a{' '}
         <a href="https://www.w3.org/TR/wai-aria-1.1/#menu">
           role="menu" widget
-        </a>, but it's very specific to a certain kind a menu. <ARIA /> menus,
-        must only contain <code>role="menuitem"</code>,{' '}
+        </a>
+        , but it's very specific to a certain kind a menu. <ARIA /> menus, must
+        only contain <code>role="menuitem"</code>,{' '}
         <code>role="menuitemcheckbox"</code>, or{' '}
         <code>role="menuitemradio"</code>.
       </p>
@@ -80,9 +84,12 @@ export default withLayout(function DropdownSection({ data }) {
         react-bootstrap will do it's best to ensure the focus management is
         compliant with the <ARIA /> authoring guidelines for menus.
       </p>
-      <h3>
-        <Anchor id="btn-dropdowns-single">Single button dropdowns</Anchor>
-      </h3>
+      <Heading h="2" id="dropdown-examples">
+        Examples
+      </Heading>
+      <Heading h="3" id="dropdowns-single">
+        Single button dropdowns
+      </Heading>
       <p>
         The basic Dropdown is composed of a wrapping <code>Dropdown</code> and
         inner <code>DropdownMenu</code>, and <code>DropdownToggle</code>. By
@@ -104,9 +111,9 @@ export default withLayout(function DropdownSection({ data }) {
       </p>
       <ReactPlayground codeText={DropdownVariants} />
 
-      <h3>
-        <Anchor id="btn-dropdowns-split">Split button dropdowns</Anchor>
-      </h3>
+      <Heading h="3" id="dropdowns-split">
+        Split button dropdowns
+      </Heading>
       <p>
         Similarly, You create a split dropdown by combining the Dropdown
         components with another Button and a ButtonGroup.
@@ -119,84 +126,76 @@ export default withLayout(function DropdownSection({ data }) {
       </p>
       <ReactPlayground codeText={SplitVariants} />
 
-      <h3>
-        <Anchor id="btn-dropdowns-sizing">Sizing</Anchor>
-      </h3>
+      <Heading h="2" id="dropdowns-sizing">
+        Sizing
+      </Heading>
       <p>Dropdowns work with buttons of all sizes.</p>
       <ReactPlayground codeText={DropdownButtonSizes} />
 
-      <h3>
-        <Anchor id="btn-dropdowns-right">Dropdown directions</Anchor>
-      </h3>
+      <Heading h="2" id="dropdowns-directions">
+        Drop directions
+      </Heading>
       <p>
         Trigger dropdown menus above, below, left, or to the right of their
         toggle elements, with the <code>drop</code> prop.
       </p>
       <ReactPlayground codeText={DropDirections} />
 
-      <h2>
-        <Anchor id="menu-items">Dropdown items</Anchor>
-      </h2>
+      <Heading h="2" id="menu-items">
+        Dropdown items
+      </Heading>
 
       <p>
         Historically dropdown menu contents had to be links, but that’s no
         longer the case with v4. Now you can optionally use{' '}
         <code>{'<button>'}</code> elements in your dropdowns instead of just{' '}
-        <code>{'<a>'}</code>s.
+        <code>{'<a>'}</code>
+        s.
       </p>
       <ReactPlayground codeText={DropdownItemTags} />
 
-      <h3>
-        <Anchor id="menu-alignment">Menu alignment</Anchor>
-      </h3>
+      <Heading h="2" id="menu-alignment">
+        Menu alignment
+      </Heading>
       <p>
         By default, a dropdown menu is aligned to the left, but you can switch
         it by passing the <code>alignRight</code> prop.
       </p>
       <ReactPlayground codeText={MenuAlignRight} />
 
-      <h3>
-        <Anchor id="menu-headers">Menu headers</Anchor>
-      </h3>
+      <Heading h="2" id="menu-headers">
+        Menu headers
+      </Heading>
       <p>Add a header to label sections of actions.</p>
       <ReactPlayground
         codeText={MenuHeaders}
         exampleClassName={styles.staticMenu}
       />
 
-      <h3>
-        <Anchor id="menu-dividers">Menu dividers</Anchor>
-      </h3>
+      <Heading h="2" id="menu-dividers">
+        Menu dividers
+      </Heading>
       <p>Separate groups of related menu items with a divider.</p>
       <ReactPlayground
         codeText={MenuDividers}
         exampleClassName={styles.staticMenu}
       />
-      <h3>
-        <Anchor id="btn-dropdowns-custom">Dropdown Customization</Anchor>
-      </h3>
+      <Heading h="2" id="dropdowns-custom">
+        Customization
+      </Heading>
       <p>
         If the default handling of the dropdown menu and toggle components
         aren't to your liking, you can customize them, by using the more basic{' '}
         <code>Dropdown</code> Component to explicitly specify the Toggle and
         Menu components
       </p>
-      <div className="bs-callout bs-callout-info">
-        <h4>Additional Import Options</h4>
-        <p>
-          As a convenience Toggle and Menu components available as static
-          properties on the Dropdown component. However, you can also import
-          them directly, from the <code>/lib</code> directory like:{' '}
-          <code>require("react-bootstrap/lib/DropdownToggle")</code>.
-        </p>
-      </div>
       <ReactPlayground
         codeText={DropdownButtonCustom}
         exampleClassName={styles.customMenu}
       />
-
-      <h4>Custom Dropdown Components</h4>
-
+      <Heading h="3" id="dropdowns-custom-components">
+        Custom Dropdown Components
+      </Heading>
       <p>
         For those that want to customize everything, you can forgo the included
         Toggle and Menu components, and create your own. By providing custom
@@ -207,44 +206,26 @@ export default withLayout(function DropdownSection({ data }) {
 
       <ReactPlayground codeText={DropdownButtonCustomMenu} />
 
-      <h3>
-        <Anchor id="btn-dropdowns-props">Props</Anchor>
-      </h3>
+      <Heading h="2" id="dropdowns-api">
+        API
+      </Heading>
 
-      <h4>
-        <Anchor id="btn-dropdowns-props-dropdown-button">DropdownButton</Anchor>
-        <LinkToSource component={data.DropdownButton.displayName} />
-      </h4>
-      <PropTable metadata={data.DropdownButton} />
+      <ComponentApi metadata={data.DropdownButton} />
 
-      <h4>
-        <Anchor id="btn-dropdowns-props-split">SplitButton</Anchor>
-        <LinkToSource component={data.SplitButton.displayName} />
-      </h4>
-      <PropTable metadata={data.SplitButton} />
+      <ComponentApi metadata={data.SplitButton} />
 
-      <h4>
-        <Anchor id="btn-dropdowns-props-dropdown">Dropdown</Anchor>
-        <LinkToSource component={data.Dropdown.displayName} />
-      </h4>
-      <PropTable metadata={data.Dropdown} />
-      <h4>
-        <Anchor id="toggle-props">Dropdown Toggle</Anchor>
-        <LinkToSource component={data.DropdownToggle.displayName} />
-      </h4>
-      <PropTable metadata={data.DropdownToggle} />
+      <ComponentApi metadata={data.Dropdown} />
 
-      <h4>
-        <Anchor id="menu-props">Dropdown Menu</Anchor>
-        <LinkToSource component={data.DropdownMenu.displayName} />
-      </h4>
-      <PropTable metadata={data.DropdownMenu} />
+      <ComponentApi metadata={data.DropdownToggle} exportedBy={data.Dropdown} />
 
-      <h4>
-        <Anchor id="menu-item-props">Dropdown Item</Anchor>
-        <LinkToSource component={data.DropdownItem.displayName} />
-      </h4>
-      <PropTable metadata={data.DropdownItem} />
+      <ComponentApi metadata={data.DropdownMenu} exportedBy={data.Dropdown} />
+
+      <ComponentApi metadata={data.DropdownItem} exportedBy={data.Dropdown} />
+      <ComponentApi metadata={data.DropdownHeader} exportedBy={data.Dropdown} />
+      <ComponentApi
+        metadata={data.DropdownDivider}
+        exportedBy={data.Dropdown}
+      />
     </>
   );
 });
@@ -253,27 +234,35 @@ export const query = graphql`
   query DropdownQuery {
     DropdownButton: componentMetadata(displayName: { eq: "DropdownButton" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     SplitButton: componentMetadata(displayName: { eq: "SplitButton" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     Dropdown: componentMetadata(displayName: { eq: "Dropdown" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     DropdownToggle: componentMetadata(displayName: { eq: "DropdownToggle" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     DropdownMenu: componentMetadata(displayName: { eq: "DropdownMenu" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     DropdownItem: componentMetadata(displayName: { eq: "DropdownItem" }) {
       displayName
-      ...PropTable_metadata
+      ...ComponentApi_metadata
+    }
+    DropdownHeader: componentMetadata(displayName: { eq: "DropdownHeader" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    DropdownDivider: componentMetadata(displayName: { eq: "DropdownDivider" }) {
+      displayName
+      ...ComponentApi_metadata
     }
   }
 `;

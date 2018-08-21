@@ -42,6 +42,7 @@ module.exports = {
     {
       resolve: 'gatsby-transformer-react-docgen',
       options: {
+        resolver: require('./resolveHocComponents'),
         handlers: [
           // function applyBootstrapPropsHandler(docs, _, { absolutePath }) {
           //   // eslint-disable-next-line

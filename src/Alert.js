@@ -25,7 +25,7 @@ class Alert extends React.Component {
     /**
      * The Alert visual variant
      *
-     * @type('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')
+     * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light'}
      */
     variant: PropTypes.string,
 

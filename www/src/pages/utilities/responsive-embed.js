@@ -1,8 +1,8 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import PropTable from '../../components/PropTable';
+import Heading from '../../components/Heading';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import ResponsiveEmbed from '../../examples/ResponsiveEmbed';
 import withLayout from '../../withLayout';
@@ -10,9 +10,9 @@ import withLayout from '../../withLayout';
 export default withLayout(function ResponsiveEmbedSection({ data }) {
   return (
     <>
-      <h2>
-        <Anchor id="responsive-embed">Responsive embed</Anchor>
-      </h2>
+      <Heading h="1" id="responsive-embed">
+        Responsive embed
+      </Heading>
 
       <p>
         Allow browsers to determine video or slideshow dimensions based on the
@@ -29,10 +29,10 @@ export default withLayout(function ResponsiveEmbedSection({ data }) {
       </p>
       <ReactPlayground codeText={ResponsiveEmbed} />
 
-      <h3>
-        <Anchor id="responsive-embed-props">Props</Anchor>
-      </h3>
-      <PropTable metadata={data.ResponsiveEmbed} />
+      <Heading h="3" id="responsive-embed-props">
+        API
+      </Heading>
+      <ComponentApi metadata={data.ResponsiveEmbed} />
     </>
   );
 });
@@ -40,7 +40,7 @@ export default withLayout(function ResponsiveEmbedSection({ data }) {
 export const query = graphql`
   query ResponsiveEmbedQuery {
     ResponsiveEmbed: componentMetadata(displayName: { eq: "ResponsiveEmbed" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
   }
 `;

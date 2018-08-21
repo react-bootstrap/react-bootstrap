@@ -1,13 +1,13 @@
-<form>
+<Form>
   {['checkbox', 'radio'].map(type => (
     <div key={`default-${type}`} className="mb-3">
-      <FormCheck // prettier-ignore
+      <Form.Check // prettier-ignore
         type={type}
         id={`default-${type}`}
         label={`default ${type}`}
       />
 
-      <FormCheck
+      <Form.Check
         disabled
         type={type}
         label={`disabled ${type}`}
@@ -15,4 +15,4 @@
       />
     </div>
   ))}
-</form>;
+</Form>;

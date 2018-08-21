@@ -4,7 +4,7 @@
       <Dropdown.Item eventKey="1">Action</Dropdown.Item>
       <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
       <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-      <Dropdown.Item divider />
+      <Dropdown.Divider />
       <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
     </SplitButton>
   </ButtonToolbar>
@@ -19,7 +19,7 @@
       <Dropdown.Item eventKey="1">Action</Dropdown.Item>
       <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
       <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-      <Dropdown.Item divider />
+      <Dropdown.Divider />
       <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
     </SplitButton>
   </ButtonToolbar>

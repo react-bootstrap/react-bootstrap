@@ -1,6 +1,6 @@
-let active = 7;
+let active = 2;
 let items = [];
-for (let number = 1; number <= 10; number++) {
+for (let number = 1; number <= 5; number++) {
   items.push(
     <Pagination.Item active={number === active}>{number}</Pagination.Item>,
   );

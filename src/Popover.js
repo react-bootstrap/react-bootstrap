@@ -2,18 +2,17 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-
-import {
-  bsClass,
-  getClassSet,
-  prefix,
-  splitBsProps,
-} from './utils/bootstrapUtils';
+import { createBootstrapComponent } from './ThemeProvider';
 
 const propTypes = {
   /**
+   * @default 'popover'
+   */
+  bsPrefix: PropTypes.string,
+
+  /**
    * An html id attribute, necessary for accessibility
-   * @type {string}
+   * @type {string|number}
    * @required
    */
   id: isRequiredForA11y(
@@ -22,27 +21,44 @@ const propTypes = {
 
   /**
    * Sets the direction the Popover is positioned towards.
+   *
+   * > This is generally provided by the `Overlay` component positioning the popover
    */
-  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  placement: PropTypes.oneOf([
+    'auto-start',
+    'auto',
+    'auto-end',
+    'top-start',
+    'top',
+    'top-end',
+    'right-start',
+    'right',
+    'right-end',
+    'bottom-end',
+    'bottom',
+    'bottom-start',
+    'left-end',
+    'left',
+    'left-start',
+  ]),
 
   /**
-   * The "top" position value for the Popover.
+   * An Overlay injected set of props for positioning the popover arrow.
+   *
+   * > This is generally provided by the `Overlay` component positioning the popover
    */
-  positionTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  /**
-   * The "left" position value for the Popover.
-   */
-  positionLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  arrowProps: PropTypes.shape({
+    ref: PropTypes.any,
+    style: PropTypes.object,
+  }),
 
-  /**
-   * The "top" position value for the Popover arrow.
-   */
-  arrowOffsetTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  /**
-   * The "left" position value for the Popover arrow.
-   */
-  arrowOffsetLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  /** @private */
+  innerRef: PropTypes.any,
 
+  /** @private */
+  scheduleUpdate: PropTypes.func,
+  /** @private */
+  outOfBoundaries: PropTypes.func,
   /**
    * Title content
    */
@@ -53,58 +69,38 @@ const defaultProps = {
   placement: 'right',
 };
 
-class Popover extends React.Component {
-  render() {
-    const {
-      placement,
-      positionTop,
-      positionLeft,
-      arrowOffsetTop,
-      arrowOffsetLeft,
-      title,
-      className,
-      style,
-      children,
-      ...props
-    } = this.props;
+function Popover({
+  bsPrefix,
+  innerRef,
+  placement,
+  className,
+  style,
+  title,
+  children,
+  arrowProps,
+  scheduleUpdate: _,
+  outOfBoundaries: _1,
+  ...props
+}) {
+  return (
+    <div
+      role="tooltip"
+      ref={innerRef}
+      style={style}
+      x-placement={placement}
+      className={classNames(className, bsPrefix, `bs-popover-${placement}`)}
+      {...props}
+    >
+      <div className="arrow" {...arrowProps} />
 
-    const [bsProps, elementProps] = splitBsProps(props);
+      {title && <div className={`${bsPrefix}-header h3`}>{title}</div>}
 
-    const classes = {
-      ...getClassSet(bsProps),
-      [placement]: true,
-    };
-
-    const outerStyle = {
-      display: 'block',
-      top: positionTop,
-      left: positionLeft,
-      ...style,
-    };
-
-    const arrowStyle = {
-      top: arrowOffsetTop,
-      left: arrowOffsetLeft,
-    };
-
-    return (
-      <div
-        {...elementProps}
-        role="tooltip"
-        className={classNames(className, classes)}
-        style={outerStyle}
-      >
-        <div className="arrow" style={arrowStyle} />
-
-        {title && <h3 className={prefix(bsProps, 'title')}>{title}</h3>}
-
-        <div className={prefix(bsProps, 'content')}>{children}</div>
-      </div>
-    );
-  }
+      <div className={`${bsPrefix}-body`}>{children}</div>
+    </div>
+  );
 }
 
 Popover.propTypes = propTypes;
 Popover.defaultProps = defaultProps;
 
-export default bsClass('popover', Popover);
+export default createBootstrapComponent(Popover, 'popover');

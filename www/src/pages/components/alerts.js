@@ -1,9 +1,8 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import LinkToSource from '../../components/LinkToSource';
-import PropTable from '../../components/PropTable';
+import Heading from '../../components/Heading';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import Basic from '../../examples/Alert/Basic';
 import Dismissible from '../../examples/Alert/Dismissible';
@@ -14,9 +13,9 @@ import withLayout from '../../withLayout';
 export default withLayout(function AlertsSection({ data }) {
   return (
     <>
-      <h2>
-        <Anchor id="alerts">Alert messages</Anchor>
-      </h2>
+      <Heading h="1" id="alerts">
+        Alert messages
+      </Heading>
 
       <p>
         Alerts are available for any length of text, as well as an optional
@@ -24,18 +23,18 @@ export default withLayout(function AlertsSection({ data }) {
         <code>variant</code>s.
       </p>
       <ReactPlayground codeText={Basic} />
-      <h3>
-        <Anchor id="alerts-links">Links</Anchor>
-      </h3>
+      <Heading h="3" id="alerts-links">
+        Links
+      </Heading>
       <p>
         For links, use the <code>Alert.Link</code> component to provide matching
         colored links within any alert.
       </p>
       <ReactPlayground codeText={Link} />
 
-      <h3>
-        <Anchor id="alerts-dismissible">Dismissible alerts</Anchor>
-      </h3>
+      <Heading h="3" id="alerts-dismissible">
+        Dismissible alerts
+      </Heading>
       <p>
         Add the <code>dismissable</code> prop to add a functioning dismiss
         button to the Alert.
@@ -46,19 +45,26 @@ export default withLayout(function AlertsSection({ data }) {
         wnat to build more complicated alerts.
       </p>
       <ReactPlayground codeText={DismissibleControlled} />
-      <h3>
-        <Anchor id="alert-props">Props</Anchor>
-        <LinkToSource component={data.metadata.displayName} />
-      </h3>
-      <PropTable metadata={data.metadata} />
+      <Heading h="2" id="alerts-api">
+        API
+      </Heading>
+      <ComponentApi metadata={data.Alert} />
+      <ComponentApi metadata={data.AlertHeading} exportedBy={data.Alert} />
+      <ComponentApi metadata={data.AlertLink} exportedBy={data.Alert} />
     </>
   );
 });
 
 export const query = graphql`
   query AlertQuery {
-    metadata: componentMetadata(displayName: { eq: "Alert" }) {
-      ...PropTable_metadata
+    Alert: componentMetadata(displayName: { eq: "Alert" }) {
+      ...ComponentApi_metadata
+    }
+    AlertLink: componentMetadata(displayName: { eq: "AlertLink" }) {
+      ...ComponentApi_metadata
+    }
+    AlertHeading: componentMetadata(displayName: { eq: "AlertHeading" }) {
+      ...ComponentApi_metadata
     }
   }
 `;

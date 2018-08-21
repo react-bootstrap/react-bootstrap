@@ -235,14 +235,24 @@ export default withLayout(function FormControlsSection({ data }) {
         Examples
       </Heading>
 
-      <Heading h="2" id="forms-props">
-        Props
+      <Heading h="2" id="forms-api">
+        API
       </Heading>
-      <ComponentApi metadata={data.FormGroup} />
-      <ComponentApi metadata={data.FormControl} />
-      <ComponentApi metadata={data.FormLabel} />
-      <ComponentApi metadata={data.FormCheck} />
-      <ComponentApi metadata={data.Feedback} />
+      <ComponentApi metadata={data.Form} />
+      <ComponentApi metadata={data.FormRow} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FormGroup} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FormLabel} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FormControl} exportedBy={data.Form} />
+      <ComponentApi metadata={data.Feedback} exportedBy={data.FormControl} />
+      <ComponentApi metadata={data.FormCheck} exportedBy={data.Form} />
+      <ComponentApi
+        metadata={data.FormCheckInput}
+        exportedBy={data.FormCheck}
+      />
+      <ComponentApi
+        metadata={data.FormCheckLabel}
+        exportedBy={data.FormCheck}
+      />
     </>
   );
 });
@@ -250,22 +260,27 @@ export default withLayout(function FormControlsSection({ data }) {
 export const query = graphql`
   query FormQuery {
     Form: componentMetadata(displayName: { eq: "Form" }) {
-      displayName
+      ...ComponentApi_metadata
+    }
+    FormRow: componentMetadata(displayName: { eq: "FormRow" }) {
       ...ComponentApi_metadata
     }
     FormGroup: componentMetadata(displayName: { eq: "FormGroup" }) {
-      displayName
       ...ComponentApi_metadata
     }
     FormControl: componentMetadata(displayName: { eq: "FormControl" }) {
-      displayName
       ...ComponentApi_metadata
     }
     FormLabel: componentMetadata(displayName: { eq: "FormLabel" }) {
-      displayName
       ...ComponentApi_metadata
     }
     FormCheck: componentMetadata(displayName: { eq: "FormCheck" }) {
+      ...ComponentApi_metadata
+    }
+    FormCheckInput: componentMetadata(displayName: { eq: "FormCheckInput" }) {
+      ...ComponentApi_metadata
+    }
+    FormCheckLabel: componentMetadata(displayName: { eq: "FormCheckLabel" }) {
       ...ComponentApi_metadata
     }
     Feedback: componentMetadata(displayName: { eq: "Feedback" }) {

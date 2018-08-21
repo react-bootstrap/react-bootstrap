@@ -23,10 +23,6 @@ describe('<Navbar>', () => {
     mount(<Navbar variant="dark" />).assertSingle('.navbar-dark');
   });
 
-  it('Should container when fluid=false', () => {
-    mount(<Navbar fluid={false} />).assertSingle('.navbar > .container');
-  });
-
   it('Should override role attribute', () => {
     assert.ok(
       mount(<Navbar role="banner" />)

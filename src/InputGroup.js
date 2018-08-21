@@ -16,7 +16,7 @@ import { createBootstrapComponent } from './ThemeProvider';
  */
 class InputGroup extends React.Component {
   static propTypes = {
-    /** @default 'input-group */
+    /** @default 'input-group' */
     bsPrefix: PropTypes.string.isRequired,
 
     /**

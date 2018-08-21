@@ -1,9 +1,9 @@
-<form>
+<Form>
   {['checkbox', 'radio'].map(type => (
     <div key={`inline-${type}`} className="mb-3">
-      <FormCheck inline label="1" type={type} id={`inline-${type}-1`} />
-      <FormCheck inline label="2" type={type} id={`inline-${type}-2`} />
-      <FormCheck
+      <Form.Check inline label="1" type={type} id={`inline-${type}-1`} />
+      <Form.Check inline label="2" type={type} id={`inline-${type}-2`} />
+      <Form.Check
         inline
         disabled
         label="3 (disabled)"
@@ -12,4 +12,4 @@
       />
     </div>
   ))}
-</form>;
+</Form>;

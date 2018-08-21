@@ -3,7 +3,9 @@
     <Modal.Title>Modal title</Modal.Title>
   </Modal.Header>
 
-  <Modal.Body>One fine body...</Modal.Body>
+  <Modal.Body>
+    <p>Modal body text goes here.</p>
+  </Modal.Body>
 
   <Modal.Footer>
     <Button variant="secondary">Close</Button>

@@ -1,73 +1,73 @@
-<form>
-  <FormGroup controlId="formValidationSuccess1" validationState="success">
-    <FormLabel>Input with success</FormLabel>
-    <FormControl type="text" />
+<Form>
+  <Form.Group controlId="formValidationSuccess1" validationState="success">
+    <Form.Label>Input with success</Form.Label>
+    <Form.Control type="text" />
     <HelpBlock>Help text with validation state.</HelpBlock>
-  </FormGroup>
+  </Form.Group>
 
-  <FormGroup controlId="formValidationWarning1" validationState="warning">
-    <FormLabel>Input with warning</FormLabel>
-    <FormControl type="text" />
-  </FormGroup>
+  <Form.Group controlId="formValidationWarning1" validationState="warning">
+    <Form.Label>Input with warning</Form.Label>
+    <Form.Control type="text" />
+  </Form.Group>
 
-  <FormGroup controlId="formValidationError1" validationState="error">
-    <FormLabel>Input with error</FormLabel>
-    <FormControl type="text" />
-  </FormGroup>
+  <Form.Group controlId="formValidationError1" validationState="error">
+    <Form.Label>Input with error</Form.Label>
+    <Form.Control type="text" />
+  </Form.Group>
 
-  <FormGroup controlId="formValidationNull" validationState={null}>
-    <FormLabel>Input with no validation state</FormLabel>
-    <FormControl type="text" />
-  </FormGroup>
+  <Form.Group controlId="formValidationNull" validationState={null}>
+    <Form.Label>Input with no validation state</Form.Label>
+    <Form.Control type="text" />
+  </Form.Group>
 
-  <FormGroup controlId="formValidationSuccess2" validationState="success">
-    <FormLabel>Input with success and feedback icon</FormLabel>
-    <FormControl type="text" />
-    <FormControl />
-  </FormGroup>
+  <Form.Group controlId="formValidationSuccess2" validationState="success">
+    <Form.Label>Input with success and feedback icon</Form.Label>
+    <Form.Control type="text" />
+    <Form.Control />
+  </Form.Group>
 
-  <FormGroup controlId="formValidationWarning2" validationState="warning">
-    <FormLabel>Input with warning and feedback icon</FormLabel>
-    <FormControl type="text" />
-    <FormControl />
-  </FormGroup>
+  <Form.Group controlId="formValidationWarning2" validationState="warning">
+    <Form.Label>Input with warning and feedback icon</Form.Label>
+    <Form.Control type="text" />
+    <Form.Control />
+  </Form.Group>
 
-  <FormGroup controlId="formValidationError2" validationState="error">
-    <FormLabel>Input with error and feedback icon</FormLabel>
-    <FormControl type="text" />
-    <FormControl />
-  </FormGroup>
+  <Form.Group controlId="formValidationError2" validationState="error">
+    <Form.Label>Input with error and feedback icon</Form.Label>
+    <Form.Control type="text" />
+    <Form.Control />
+  </Form.Group>
 
-  <FormGroup controlId="formValidationSuccess3" validationState="success">
-    <FormLabel>Input with success and custom feedback icon</FormLabel>
-    <FormControl type="text" />
-    <FormControl.Feedback />
-  </FormGroup>
+  <Form.Group controlId="formValidationSuccess3" validationState="success">
+    <Form.Label>Input with success and custom feedback icon</Form.Label>
+    <Form.Control type="text" />
+    <Form.Control.Feedback />
+  </Form.Group>
 
-  <FormGroup controlId="formValidationWarning3" validationState="warning">
-    <FormLabel>Input group with warning</FormLabel>
+  <Form.Group controlId="formValidationWarning3" validationState="warning">
+    <Form.Label>Input group with warning</Form.Label>
     <InputGroup>
       <InputGroup.Prepend>
         <InputGroup.Text>@</InputGroup.Text>
       </InputGroup.Prepend>
-      <FormControl type="text" />
+      <Form.Control type="text" />
     </InputGroup>
-    <FormControl />
-  </FormGroup>
+    <Form.Control />
+  </Form.Group>
 
   <Form as="fieldset" horizontal>
-    <FormGroup controlId="formValidationError3" validationState="error">
-      <Col as={FormLabel} xs={3}>
+    <Form.Group controlId="formValidationError3" validationState="error">
+      <Col as={Form.Label} xs={3}>
         Input with error
       </Col>
       <Col xs={9}>
-        <FormControl type="text" />
-        <FormControl />
+        <Form.Control type="text" />
+        <Form.Control />
       </Col>
-    </FormGroup>
+    </Form.Group>
 
-    <FormGroup controlId="formValidationSuccess4" validationState="success">
-      <Col as={FormLabel} xs={3}>
+    <Form.Group controlId="formValidationSuccess4" validationState="success">
+      <Col as={Form.Label} xs={3}>
         Input group with success
       </Col>
       <Col xs={9}>
@@ -75,28 +75,28 @@
           <InputGroup.Prepend>
             <InputGroup.Text>@</InputGroup.Text>
           </InputGroup.Prepend>
-          <FormControl type="text" />
+          <Form.Control type="text" />
         </InputGroup>
-        <FormControl />
+        <Form.Control />
       </Col>
-    </FormGroup>
+    </Form.Group>
   </Form>
 
   <Form as="fieldset" inline>
-    <FormGroup controlId="formValidationWarning4" validationState="warning">
-      <FormLabel>Input with warning</FormLabel> <FormControl type="text" />
-      <FormControl />
-    </FormGroup>{' '}
-    <FormGroup controlId="formValidationError4" validationState="error">
-      <FormLabel>Input group with error</FormLabel>{' '}
+    <Form.Group controlId="formValidationWarning4" validationState="warning">
+      <Form.Label>Input with warning</Form.Label> <Form.Control type="text" />
+      <Form.Control />
+    </Form.Group>{' '}
+    <Form.Group controlId="formValidationError4" validationState="error">
+      <Form.Label>Input group with error</Form.Label>{' '}
       <InputGroup>
         <InputGroup.Prepend>
           <InputGroup.Text>@</InputGroup.Text>
         </InputGroup.Prepend>
-        <FormControl type="text" />
+        <Form.Control type="text" />
       </InputGroup>
-      <FormControl />
-    </FormGroup>
+      <Form.Control />
+    </Form.Group>
   </Form>
 
   <Checkbox validationState="success">Checkbox with success</Checkbox>
@@ -104,8 +104,8 @@
   <Checkbox validationState="error">Checkbox with error</Checkbox>
 
   {/* This requires React 15's <span>-less spaces to be exactly correct. */}
-  <FormGroup validationState="success">
+  <Form.Group validationState="success">
     <Checkbox inline>Checkbox</Checkbox> <Checkbox inline>with</Checkbox>{' '}
     <Checkbox inline>success</Checkbox>
-  </FormGroup>
-</form>;
+  </Form.Group>
+</Form>;

@@ -1,5 +1,5 @@
 <Card className="bg-dark text-white">
-  <Card.Img src="/200x100.png" alt="Card image" />
+  <Card.Img src="holder.js/100px270" alt="Card image" />
   <Card.ImgOverlay>
     <Card.Title>Card title</Card.Title>
     <Card.Text>

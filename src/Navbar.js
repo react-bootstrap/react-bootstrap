@@ -28,7 +28,8 @@ const propTypes = {
    */
   variant: PropTypes.string,
 
-  /** The breakpoint, below which, the Navbar will collapse.
+  /**
+   * The breakpoint, below which, the Navbar will collapse.
    * When `true` the Navbar will always be expanded regardless of screen size.
    */
   expand: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl']).isRequired,
@@ -54,12 +55,6 @@ const propTypes = {
    *  __Not supported in <= IE11 and other older browsers without a polyfill__
    */
   sticky: PropTypes.oneOf(['top', 'bottom']),
-
-  /**
-   * Allow the Navbar to fluidly adjust to the page or container width, instead
-   * of at the predefined screen breakpoints
-   */
-  fluid: PropTypes.bool,
 
   /**
    * Set a custom element for this component.
@@ -127,7 +122,6 @@ const propTypes = {
 const defaultProps = {
   as: 'nav',
   expand: true,
-  fluid: true,
   variant: 'light',
   collapseOnSelect: false,
 };
@@ -176,7 +170,6 @@ class Navbar extends React.Component {
       bg,
       fixed,
       sticky,
-      fluid,
       className,
       children,
       as: Component,
@@ -211,7 +204,7 @@ class Navbar extends React.Component {
               fixed && `fixed-${fixed}`,
             )}
           >
-            {fluid ? children : <div className="container">{children}</div>}
+            {children}
           </Component>
         </SelectableContext.Provider>
       </NavbarContext.Provider>

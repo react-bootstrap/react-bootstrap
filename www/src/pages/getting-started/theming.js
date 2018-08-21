@@ -7,7 +7,7 @@ import Prefixes from '../../examples/Theming/Prefixes';
 import Variants from '../../examples/Theming/Variants';
 import withLayout from '../../withLayout';
 
-export default withLayout(function CustomStylesSection() {
+export default withLayout(function ThemingSection() {
   return (
     <>
       <Heading h="1" id="custom-styles">

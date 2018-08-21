@@ -6,6 +6,7 @@ import { css } from 'css-literal-loader/styled';
 const styles = css`
   .heading {
     position: relative;
+    pointer-events: none;
 
     &:before {
       display: block;
@@ -14,6 +15,9 @@ const styles = css`
       visibility: hidden;
       content: '';
     }
+  }
+  .inner {
+    pointer-events: auto;
   }
 
   .anchor {
@@ -42,10 +46,12 @@ class Anchor extends React.Component {
 
     return (
       <Tag className={cn(className, styles.heading)} id={this.props.id}>
-        {this.props.children}
-        <a href={`#${this.props.id}`} className={styles.anchor}>
-          #
-        </a>
+        <div className={styles.inner}>
+          {this.props.children}
+          <a href={`#${this.props.id}`} className={styles.anchor}>
+            #
+          </a>
+        </div>
       </Tag>
     );
   }

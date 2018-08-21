@@ -1,4 +1,4 @@
-<div>
+<>
   <Card bg="primary" text="white" style={{ width: '18rem' }}>
     <Card.Header>Header</Card.Header>
     <Card.Body>
@@ -94,4 +94,4 @@
     </Card.Body>
   </Card>
   <br />
-</div>;
+</>;

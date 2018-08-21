@@ -12,7 +12,7 @@
     width={64}
     height={64}
     className="ml-3"
-    src="/placeholder.svg"
+    src="holder.js/64x64"
     alt="Generic placeholder"
   />
 </Media>;

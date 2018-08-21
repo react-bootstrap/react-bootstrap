@@ -3,6 +3,8 @@ import React from 'react';
 
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
+import Tooltip from 'react-bootstrap/lib/Tooltip';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import { styled } from 'css-literal-loader/styled';
 import withProps from 'recompose/withProps';
 
@@ -22,7 +24,7 @@ const StyledNavbar = withProps({
     @include media-breakpoint-up(md) {
       position: sticky;
       top: 0;
-      z-index: 2000;
+      z-index: 1040;
     }
   `,
 );
@@ -65,32 +67,42 @@ const propTypes = {
 
 function NavMain({ activePage }) {
   return (
-    <StyledNavbar expand="md" collapseOnSelect>
+    <StyledNavbar expand collapseOnSelect>
       <Navbar.Brand href="/">
         <img src={logo} alt="react-bootstrap" height={30} />
       </Navbar.Brand>
-      <Navbar.Toggle />
-      <Navbar.Collapse className="bs-navbar-collapse">
-        <Nav role="navigation" id="top">
-          {NAV_LINKS.map(({ link, title, exact }) => (
-            <StyledNavLink
-              key={link}
-              href={link}
-              active={exact ? activePage === link : activePage.startsWith(link)}
-            >
-              {title}
-            </StyledNavLink>
-          ))}
-        </Nav>
-        <Nav className="ml-auto pr-5">
+
+      <Nav role="navigation" id="top" className="d-none d-md-flex">
+        {NAV_LINKS.map(({ link, title, exact }) => (
+          <StyledNavLink
+            key={link}
+            href={link}
+            active={exact ? activePage === link : activePage.startsWith(link)}
+          >
+            {title}
+          </StyledNavLink>
+        ))}
+      </Nav>
+      <Nav className="ml-auto pr-md-5">
+        <OverlayTrigger
+          placement="bottom"
+          delay={{ show: 200 }}
+          overlay={<Tooltip id="t-discord">Github</Tooltip>}
+        >
           <StyledNavLink
             href="https://github.com/react-bootstrap/react-bootstrap"
             target="_blank"
             rel="noopener noreferrer"
           >
             <i className="fab fa-github" />
-            <span className="sr-only">github</span>
+            <span className="sr-only">Github</span>
           </StyledNavLink>
+        </OverlayTrigger>
+        <OverlayTrigger
+          placement="bottom"
+          delay={{ show: 200 }}
+          overlay={<Tooltip id="t-discord">Discord</Tooltip>}
+        >
           <StyledNavLink
             href="https://discord.gg/5PM9hB"
             target="_blank"
@@ -99,8 +111,8 @@ function NavMain({ activePage }) {
             <i className="fab fa-discord" />
             <span className="sr-only">Discord</span>
           </StyledNavLink>
-        </Nav>
-      </Navbar.Collapse>
+        </OverlayTrigger>
+      </Nav>
     </StyledNavbar>
   );
 }

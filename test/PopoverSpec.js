@@ -1,34 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactTestUtils from 'react-dom/test-utils';
+import { mount } from 'enzyme';
 
 import Popover from '../src/Popover';
 
 describe('Popover', () => {
   it('Should output a popover title and content', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    mount(
       <Popover id="test-popover" title="Popover title">
         <strong>Popover Content</strong>
       </Popover>,
+    ).assertSingle(
+      '.popover[x-placement="right"][role="tooltip"].bs-popover-right strong',
     );
-
-    assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithClass(
-        instance,
-        'popover-title',
-      ),
-    );
-    assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithClass(
-        instance,
-        'popover-content',
-      ),
-    );
-
-    assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong'),
-    );
-
-    assert.equal(ReactDOM.findDOMNode(instance).style.display, 'block');
   });
 });

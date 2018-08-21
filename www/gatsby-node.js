@@ -41,3 +41,20 @@ exports.onCreateBabelConfig = ({ actions }) => {
     name: `@babel/preset-flow`,
   });
 };
+
+exports.createPages = ({ actions }) => {
+  const { createRedirect } = actions;
+
+  createRedirect({
+    fromPath: `/components/tooltips/`,
+    isPermanent: true,
+    redirectInBrowser: true,
+    toPath: `/components/overlays/#tooltips`,
+  });
+  createRedirect({
+    fromPath: `/components/popovers/`,
+    isPermanent: true,
+    redirectInBrowser: true,
+    toPath: `/components/overlays/#popovers`,
+  });
+};

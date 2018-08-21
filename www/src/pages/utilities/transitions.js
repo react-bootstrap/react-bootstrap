@@ -1,8 +1,9 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import PropTable from '../../components/PropTable';
+import Heading from '../../components/Heading';
+import Callout from '../../components/Callout';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import Collapse from '../../examples/Collapse';
 import Fade from '../../examples/Fade';
@@ -11,48 +12,41 @@ import withLayout from '../../withLayout';
 export default withLayout(function TransitionSection({ data }) {
   return (
     <>
-      <h2>
-        <Anchor id="transitions">Transitions</Anchor>
-      </h2>
+      <Heading h="1" id="transitions">
+        Transitions
+      </Heading>
 
       <p>
         Transition components animate their children transitioning in and out.
       </p>
 
-      <h3>
-        <Anchor id="transitions-collapse">Collapse</Anchor>
-      </h3>
+      <Heading h="2" id="transitions-collapse">
+        Collapse
+      </Heading>
 
       <p>Add a collapse toggle animation to an element or component.</p>
-      <div className="bs-callout bs-callout-info">
-        <h4>Smoothing animations</h4>
-        <p>
-          If you're noticing choppy animations, and the component that's being
-          collapsed has non-zero margin or padding, try wrapping the contents of
-          your <code>&lt;Collapse&gt;</code> inside a node with no margin or
-          padding, like the <code>&lt;div&gt;</code> in the example below. This
-          will allow the height to be computed properly, so the animation can
-          proceed smoothly.
-        </p>
-      </div>
+      <Callout title="Smooth animations">
+        If you're noticing choppy animations, and the component that's being
+        collapsed has non-zero margin or padding, try wrapping the contents of
+        your <code>{'<Collapse>'}</code> inside a node with no margin or
+        padding, like the <code>{'<div>'}</code> in the example below. This will
+        allow the height to be computed properly, so the animation can proceed
+        smoothly.
+      </Callout>
       <ReactPlayground codeText={Collapse} />
 
-      <h4>
-        <Anchor id="transitions-collapse-props">Props</Anchor>
-      </h4>
-      <PropTable metadata={data.Collapse} />
-
-      <h3>
-        <Anchor id="transitions-fade">Fade</Anchor>
-      </h3>
+      <Heading h="2" id="transitions-fade">
+        Fade
+      </Heading>
 
       <p>Add a fade animation to a child element or component.</p>
       <ReactPlayground codeText={Fade} />
 
-      <h4>
-        <Anchor id="transitions-fade-props">Props</Anchor>
-      </h4>
-      <PropTable metadata={data.Fade} />
+      <Heading h="2" id="transitions-fade-api">
+        API
+      </Heading>
+      <ComponentApi metadata={data.Collapse} />
+      <ComponentApi metadata={data.Fade} />
     </>
   );
 });
@@ -60,10 +54,10 @@ export default withLayout(function TransitionSection({ data }) {
 export const query = graphql`
   query TransitionQuery {
     Fade: componentMetadata(displayName: { eq: "Fade" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     Collapse: componentMetadata(displayName: { eq: "Collapse" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
   }
 `;

@@ -31,7 +31,9 @@ export default withLayout(function ImageSection({ data }) {
         Use the <code>fluid</code> to scale image nicely to the parent element.
       </p>
       <ReactPlayground codeText={Fluid} />
-
+      <Heading h="2" id="image-api">
+        API
+      </Heading>
       <ComponentApi metadata={data.Image} />
     </>
   );
