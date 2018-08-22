@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "@babel/preset-flow": "^7.0.0-beta.40",
-    "@fortawesome/fontawesome-free": "^5.2.0",
+    "@mdx-js/mdx": "^0.15.0",
+    "@mdx-js/tag": "^0.15.0",
     "bootstrap": "^4.0.0",
     "classnames": "^2.2.5",
     "common-tags": "^1.8.0",
@@ -17,6 +18,7 @@
     "formik": "^0.11.11",
     "gatsby": "^2.0.0-beta.59",
     "gatsby-link": "^2.0.0-beta.5",
+    "gatsby-mdx": "^0.0.11",
     "gatsby-plugin-catch-links": "^2.0.2-beta.2",
     "gatsby-plugin-css-literal-loader": "^1.0.0",
     "gatsby-plugin-sass": "^2.0.0-beta.6",
@@ -41,6 +43,7 @@
     "react-helmet": "^5.2.0",
     "react-live": "^1.9.2",
     "recompose": "^0.28.0",
+    "remark-slug": "^5.1.0",
     "shakespeare-data": "^2.5.0",
     "yup": "^0.24.1"
   },

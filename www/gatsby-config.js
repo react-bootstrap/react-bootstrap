@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
 const path = require('path');
+const remarkSlug = require('remark-slug');
 const escapeRegExp = require('lodash/escapeRegExp');
 const defaultDescriptions = require('./src/defaultPropDescriptions');
 // const { addBootstrapPropTypes } = require('./bsPropUtils');
@@ -32,6 +33,13 @@ module.exports = {
     ],
   },
   plugins: [
+    {
+      resolve: 'gatsby-mdx',
+      options: {
+        defaultLayout: require.resolve('./src/layouts/ApiLayout'),
+        mdPlugins: [remarkSlug],
+      },
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {

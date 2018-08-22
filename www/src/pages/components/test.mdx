@@ -1,0 +1,16 @@
+import Layout from '../../layouts/ApiLayout'
+import ComponentApi from '../../components/ComponentApi';
+import { graphql } from 'gatsby'
+
+export default Layout
+
+## hello!
+
+<ComponentApi metadata={props.data.metadata} />
+
+export const query = graphql`
+  query TestQuery {
+    metadata: componentMetadata(displayName: { eq: "Alert" }) {
+      ...PropTable_metadata
+    }
+  }`;
