@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import withLayout from '../../withLayout';
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -25,9 +25,9 @@ import CheckApi from '../../examples/Form/CheckApi';
 export default withLayout(function FormControlsSection({ data }) {
   return (
     <>
-      <Heading h="1" id="forms">
+      <LinkedHeading h="1" id="forms">
         Forms
-      </Heading>
+      </LinkedHeading>
       <p>
         The <code>{'<FormControl>'}</code> component renders a form control with
         Bootstrap styling. The <code>{'<FormGroup>'}</code> component wraps a
@@ -54,9 +54,9 @@ export default withLayout(function FormControlsSection({ data }) {
         field groups is too specific to an individual application to admit a
         good one-size-fits-all solution.
       </p>
-      <Heading h="2" id="forms-controls">
+      <LinkedHeading h="2" id="forms-controls">
         Form controls
-      </Heading>
+      </LinkedHeading>
       <p>
         For textual form controls—like <code>input</code>s, <code>select</code>s,
         and <code>textarea</code>s—use the <code>FormControl</code> component.
@@ -64,51 +64,51 @@ export default withLayout(function FormControlsSection({ data }) {
         state, sizing, and more.
       </p>
       <ReactPlayground codeText={FormTextControls} />
-      <Heading h="3" id="forms-input-sizes">
+      <LinkedHeading h="3" id="forms-input-sizes">
         Sizing
-      </Heading>
+      </LinkedHeading>
       <p>
         Use <code>size</code> on <code>{'<FormControl>'}</code> to change the
         size of inputs.
       </p>
       <ReactPlayground codeText={FormInputSizes} />
-      <Heading h="3" id="forms-input-Plaintext">
+      <LinkedHeading h="3" id="forms-input-Plaintext">
         Plaintext
-      </Heading>
+      </LinkedHeading>
       <p>
         If you want to have elements in your form styled as plain text, use the{' '}
         <code>plaintext</code> prop on FormControls to remove the default form
         field styling and preserve the correct margin and padding.
       </p>
       <ReactPlayground codeText={Plaintext} />
-      <Heading h="2" id="forms-form-check">
+      <LinkedHeading h="2" id="forms-form-check">
         Checkboxes and Radios
-      </Heading>
+      </LinkedHeading>
       <p>
         For the non-textual checkbox and radio controls, <code>FormCheck</code>{' '}
         provides a single component for both types that adds some additional
         styling and improved layout.
       </p>
-      <Heading h="3" id="forms-check-stacked">
+      <LinkedHeading h="3" id="forms-check-stacked">
         Default (stacked)
-      </Heading>
+      </LinkedHeading>
       <p>
         By default, any number of checkboxes and radios that are immediate
         sibling will be vertically stacked and appropriately spaced with
         FormCheck.
       </p>
       <ReactPlayground codeText={Check} />
-      <Heading h="3" id="forms-check-inline">
+      <LinkedHeading h="3" id="forms-check-inline">
         Inline
-      </Heading>
+      </LinkedHeading>
       <p>
         Group checkboxes or radios on the same horizontal row by adding the{' '}
         <code>inline</code> prop.
       </p>
       <ReactPlayground codeText={CheckInline} />
-      <Heading h="3" id="forms-check-inline">
+      <LinkedHeading h="3" id="forms-check-inline">
         Without labels
-      </Heading>
+      </LinkedHeading>
       <p>
         When you render a FormCheck without a label (no <code>children</code>)
         some additional styling is applied to keep the inputs from collapsing.{' '}
@@ -118,9 +118,9 @@ export default withLayout(function FormControlsSection({ data }) {
       </p>
       <ReactPlayground codeText={NoLabels} />
 
-      <Heading h="3" id="forms-check-api">
+      <LinkedHeading h="3" id="forms-check-api">
         Customizing FormCheck rendering
-      </Heading>
+      </LinkedHeading>
 
       <p>
         When you need tighter control, or want to customize how the{' '}
@@ -135,18 +135,18 @@ export default withLayout(function FormControlsSection({ data }) {
       </p>
       <ReactPlayground codeText={CheckApi} />
 
-      <Heading h="2" id="forms-layout">
+      <LinkedHeading h="2" id="forms-layout">
         Layout
-      </Heading>
+      </LinkedHeading>
       <p>
         FormControl and FormCheck both apply <code>display: block</code> with{' '}
         <code>width: 100%</code> to controls, which means they stack vertically
         by default. Additional components and props can be used to vary this
         layout on a per-form basis.
       </p>
-      <Heading h="3" id="forms-layout-group">
+      <LinkedHeading h="3" id="forms-layout-group">
         Form group
-      </Heading>
+      </LinkedHeading>
       <p>
         The <code>FormGroup</code> component is the easiest way to add some
         structure to forms. It provides a flexible container for grouping of
@@ -160,18 +160,18 @@ export default withLayout(function FormControlsSection({ data }) {
         nested label and input together via the <code>id</code>.
       </p>
       <ReactPlayground codeText={FormGroup} />
-      <Heading h="3" id="forms-layout-grid">
+      <LinkedHeading h="3" id="forms-layout-grid">
         Form grid
-      </Heading>
+      </LinkedHeading>
       <p>
         More complex forms can be built using the grid components. Use these for
         form layouts that require multiple columns, varied widths, and
         additional alignment options.
       </p>
       <ReactPlayground codeText={GridBasic} />
-      <Heading h="4" id="forms-layout-form-row">
+      <LinkedHeading h="4" id="forms-layout-form-row">
         Form row
-      </Heading>
+      </LinkedHeading>
       <p>
         You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>,
         a variation of the standard grid row that overrides the default column
@@ -180,9 +180,9 @@ export default withLayout(function FormControlsSection({ data }) {
       <ReactPlayground codeText={FormRow} />
       <p>More complex layouts can also be created with the grid system.</p>
       <ReactPlayground codeText={GridComplex} />
-      <Heading h="3" id="forms-layout-form-row">
+      <LinkedHeading h="3" id="forms-layout-form-row">
         Horizontal forms
-      </Heading>
+      </LinkedHeading>
       <p>
         You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>,
         a variation of the standard grid row that overrides the default column
@@ -190,16 +190,16 @@ export default withLayout(function FormControlsSection({ data }) {
       </p>
       <ReactPlayground codeText={Horizontal} />
 
-      <Heading h="2" id="forms-validation">
+      <LinkedHeading h="2" id="forms-validation">
         Validation
-      </Heading>
+      </LinkedHeading>
       <p>
         Provide valuable, actionable feedback to your users with form validation
         feedback.
       </p>
-      <Heading h="3" id="forms-validation-native">
+      <LinkedHeading h="3" id="forms-validation-native">
         Native HTML5 form validation
-      </Heading>
+      </LinkedHeading>
       <p>
         For native HTML form validation–
         <a href="https://caniuse.com/#feat=form-validation">
@@ -218,9 +218,9 @@ export default withLayout(function FormControlsSection({ data }) {
       </p>
       <ReactPlayground codeText={ValidationNative} />
 
-      <Heading h="3" id="forms-validation-libraries">
+      <LinkedHeading h="3" id="forms-validation-libraries">
         Form libraries and server rendered styles.
-      </Heading>
+      </LinkedHeading>
       <p>
         It's often beneficial (especially in React) to handle form validation
         via a library like Formik, or react-formal. In those cases,{' '}
@@ -231,13 +231,13 @@ export default withLayout(function FormControlsSection({ data }) {
       </p>
       <ReactPlayground codeText={ValidationFormik} />
 
-      <Heading h="3" id="forms-validation-examples">
+      <LinkedHeading h="3" id="forms-validation-examples">
         Examples
-      </Heading>
+      </LinkedHeading>
 
-      <Heading h="2" id="forms-api">
+      <LinkedHeading h="2" id="forms-api">
         API
-      </Heading>
+      </LinkedHeading>
       <ComponentApi metadata={data.Form} />
       <ComponentApi metadata={data.FormRow} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormGroup} exportedBy={data.Form} />

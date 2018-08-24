@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 import { css } from 'css-literal-loader/styled';
 
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ARIA from '../../components/AriaAbbr';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
@@ -42,16 +42,16 @@ const styles = css`
 export default withLayout(function DropdownSection({ data }) {
   return (
     <>
-      <Heading h="1" id="dropdowns">
+      <LinkedHeading h="1" id="dropdowns">
         Dropdowns
-      </Heading>
+      </LinkedHeading>
       <p className="lead">
         Toggle contextual overlays for displaying lists of links and more with
         the Bootstrap dropdown plugin
       </p>
-      <Heading h="2" id="dropdown-overview">
+      <LinkedHeading h="2" id="dropdown-overview">
         Overview
-      </Heading>
+      </LinkedHeading>
       <p>
         Dropdowns are toggleable, contextual overlays for displaying lists of
         links and more. Like overlays, Dropdowns are built using a third-party
@@ -59,9 +59,9 @@ export default withLayout(function DropdownSection({ data }) {
         dynamic positioning and viewport detection.
       </p>
 
-      <Heading h="2" id="dropdown-a11y">
+      <LinkedHeading h="2" id="dropdown-a11y">
         Accessibility
-      </Heading>
+      </LinkedHeading>
       <p>
         The{' '}
         <a href="https://www.w3.org/TR/wai-aria/">
@@ -84,12 +84,12 @@ export default withLayout(function DropdownSection({ data }) {
         react-bootstrap will do it's best to ensure the focus management is
         compliant with the <ARIA /> authoring guidelines for menus.
       </p>
-      <Heading h="2" id="dropdown-examples">
+      <LinkedHeading h="2" id="dropdown-examples">
         Examples
-      </Heading>
-      <Heading h="3" id="dropdowns-single">
+      </LinkedHeading>
+      <LinkedHeading h="3" id="dropdowns-single">
         Single button dropdowns
-      </Heading>
+      </LinkedHeading>
       <p>
         The basic Dropdown is composed of a wrapping <code>Dropdown</code> and
         inner <code>DropdownMenu</code>, and <code>DropdownToggle</code>. By
@@ -111,9 +111,9 @@ export default withLayout(function DropdownSection({ data }) {
       </p>
       <ReactPlayground codeText={DropdownVariants} />
 
-      <Heading h="3" id="dropdowns-split">
+      <LinkedHeading h="3" id="dropdowns-split">
         Split button dropdowns
-      </Heading>
+      </LinkedHeading>
       <p>
         Similarly, You create a split dropdown by combining the Dropdown
         components with another Button and a ButtonGroup.
@@ -126,24 +126,24 @@ export default withLayout(function DropdownSection({ data }) {
       </p>
       <ReactPlayground codeText={SplitVariants} />
 
-      <Heading h="2" id="dropdowns-sizing">
+      <LinkedHeading h="2" id="dropdowns-sizing">
         Sizing
-      </Heading>
+      </LinkedHeading>
       <p>Dropdowns work with buttons of all sizes.</p>
       <ReactPlayground codeText={DropdownButtonSizes} />
 
-      <Heading h="2" id="dropdowns-directions">
+      <LinkedHeading h="2" id="dropdowns-directions">
         Drop directions
-      </Heading>
+      </LinkedHeading>
       <p>
         Trigger dropdown menus above, below, left, or to the right of their
         toggle elements, with the <code>drop</code> prop.
       </p>
       <ReactPlayground codeText={DropDirections} />
 
-      <Heading h="2" id="menu-items">
+      <LinkedHeading h="2" id="menu-items">
         Dropdown items
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Historically dropdown menu contents had to be links, but that’s no
@@ -154,35 +154,35 @@ export default withLayout(function DropdownSection({ data }) {
       </p>
       <ReactPlayground codeText={DropdownItemTags} />
 
-      <Heading h="2" id="menu-alignment">
+      <LinkedHeading h="2" id="menu-alignment">
         Menu alignment
-      </Heading>
+      </LinkedHeading>
       <p>
         By default, a dropdown menu is aligned to the left, but you can switch
         it by passing the <code>alignRight</code> prop.
       </p>
       <ReactPlayground codeText={MenuAlignRight} />
 
-      <Heading h="2" id="menu-headers">
+      <LinkedHeading h="2" id="menu-headers">
         Menu headers
-      </Heading>
+      </LinkedHeading>
       <p>Add a header to label sections of actions.</p>
       <ReactPlayground
         codeText={MenuHeaders}
         exampleClassName={styles.staticMenu}
       />
 
-      <Heading h="2" id="menu-dividers">
+      <LinkedHeading h="2" id="menu-dividers">
         Menu dividers
-      </Heading>
+      </LinkedHeading>
       <p>Separate groups of related menu items with a divider.</p>
       <ReactPlayground
         codeText={MenuDividers}
         exampleClassName={styles.staticMenu}
       />
-      <Heading h="2" id="dropdowns-custom">
+      <LinkedHeading h="2" id="dropdowns-custom">
         Customization
-      </Heading>
+      </LinkedHeading>
       <p>
         If the default handling of the dropdown menu and toggle components
         aren't to your liking, you can customize them, by using the more basic{' '}
@@ -193,9 +193,9 @@ export default withLayout(function DropdownSection({ data }) {
         codeText={DropdownButtonCustom}
         exampleClassName={styles.customMenu}
       />
-      <Heading h="3" id="dropdowns-custom-components">
+      <LinkedHeading h="3" id="dropdowns-custom-components">
         Custom Dropdown Components
-      </Heading>
+      </LinkedHeading>
       <p>
         For those that want to customize everything, you can forgo the included
         Toggle and Menu components, and create your own. By providing custom
@@ -206,9 +206,9 @@ export default withLayout(function DropdownSection({ data }) {
 
       <ReactPlayground codeText={DropdownButtonCustomMenu} />
 
-      <Heading h="2" id="dropdowns-api">
+      <LinkedHeading h="2" id="dropdowns-api">
         API
-      </Heading>
+      </LinkedHeading>
 
       <ComponentApi metadata={data.DropdownButton} />
 

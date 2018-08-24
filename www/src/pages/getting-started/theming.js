@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Callout from '../../components/Callout';
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
 import Prefixes from '../../examples/Theming/Prefixes';
 import Variants from '../../examples/Theming/Variants';
@@ -10,9 +10,9 @@ import withLayout from '../../withLayout';
 export default withLayout(function ThemingSection() {
   return (
     <>
-      <Heading h="1" id="custom-styles">
+      <LinkedHeading h="1" id="custom-styles">
         Theming and Customizing styles.
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Generally, if you stick to the bootstrap defined classes and variants,
@@ -20,9 +20,9 @@ export default withLayout(function ThemingSection() {
         ReactBootstrap, it just works. There are plently of cases tho where you
         want to color outside the lines and we try to make that easy to do.
       </p>
-      <Heading h="2" id="custom-styles-variants">
+      <LinkedHeading h="2" id="custom-styles-variants">
         New variants and sizes
-      </Heading>
+      </LinkedHeading>
       <p>
         Custom variants and sizes to should follow the leapatternd of the
         default bootstrap variants, and define css classes matching:{' '}
@@ -32,9 +32,9 @@ export default withLayout(function ThemingSection() {
       </p>
       <ReactPlayground codeText={Variants} />
 
-      <Heading h="2" id="custom-styles-prefix">
+      <LinkedHeading h="2" id="custom-styles-prefix">
         Prefixing components
-      </Heading>
+      </LinkedHeading>
       <p>
         In some cases you may need to change the base class "prefix" of one or
         more Components. You can control how a Component prefixes it's classes

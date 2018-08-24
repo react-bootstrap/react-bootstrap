@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import Callout from '../../components/Callout';
 import CodeBlock from '../../components/CodeBlock';
 import ComponentApi from '../../components/ComponentApi';
@@ -19,17 +19,17 @@ import withLayout from '../../withLayout';
 export default withLayout(function NaπvbarSection({ data }) {
   return (
     <>
-      <Heading h="1" id="navbars">
+      <LinkedHeading h="1" id="navbars">
         Navbars
-      </Heading>
+      </LinkedHeading>
       <p className="lead">
         A powerful, responsive navigation header, the navbar. Includes support
         for branding, navigation, and more
       </p>
 
-      <Heading h="2" id="navbars-overview">
+      <LinkedHeading h="2" id="navbars-overview">
         Overview
-      </Heading>
+      </LinkedHeading>
       <p>
         Here’s what you need to know before getting started with the navbar:
       </p>
@@ -53,36 +53,36 @@ export default withLayout(function NaπvbarSection({ data }) {
       </p>
 
       <ReactPlayground codeText={NavbarBasic} />
-      <Heading h="2" id="navbars-brand">
+      <LinkedHeading h="2" id="navbars-brand">
         Brand
-      </Heading>
+      </LinkedHeading>
       <p>
         A simple flexible branding component. Images are supported but will
         likely require custom styling to work well.
       </p>
       <ReactPlayground codeText={NavbarBrand} />
 
-      <Heading h="2" id="navbars-form">
+      <LinkedHeading h="2" id="navbars-form">
         Forms
-      </Heading>
+      </LinkedHeading>
       <p>
         Use <code>{'<Form inline>'}</code> and your variaous form controls
         within the Navbar. Align the contents as needed with utility classes.
       </p>
       <ReactPlayground codeText={NavbarForm} />
 
-      <Heading h="2" id="navbars-text-link">
+      <LinkedHeading h="2" id="navbars-text-link">
         Text and Non-nav links
-      </Heading>
+      </LinkedHeading>
       <p>
         Loose text and links can be wrapped <code>Navbar.Text</code> in order to
         correctly align it vertically.
       </p>
       <ReactPlayground codeText={NavbarTextLink} />
 
-      <Heading h="2" id="navbars-colors">
+      <LinkedHeading h="2" id="navbars-colors">
         Color schemes
-      </Heading>
+      </LinkedHeading>
       <p>
         Theming the navbar has never been easier thanks to the combination of
         theming classes and background-color utilities. Choose from{' '}
@@ -93,9 +93,9 @@ export default withLayout(function NaπvbarSection({ data }) {
 
       <ReactPlayground codeText={NavbarColorSchemes} />
 
-      <Heading h="2" id="navbars-containers">
+      <LinkedHeading h="2" id="navbars-containers">
         Containers
-      </Heading>
+      </LinkedHeading>
       <p>
         While not required, you can wrap the Navbar in a{' '}
         <code>{'<Container>'}</code> component to center it on a page, or add
@@ -113,9 +113,9 @@ export default withLayout(function NaπvbarSection({ data }) {
       </p>
       <ReactPlayground codeText={ContainerInside} />
 
-      <Heading h="2" id="navbars-placement">
+      <LinkedHeading h="2" id="navbars-placement">
         Placement
-      </Heading>
+      </LinkedHeading>
       <p>
         You can use Bootstrap's{' '}
         <a href="https://getbootstrap.com/docs/4.1/utilities/position/">
@@ -152,9 +152,9 @@ export default withLayout(function NaπvbarSection({ data }) {
       <h3 className="h4">Sticky bottom</h3>
       <CodeBlock codeText={` <Navbar sticky="bottom" />`} />
 
-      <Heading h="2" id="navbars-mobile-friendly">
+      <LinkedHeading h="2" id="navbars-mobile-friendly">
         Responsive behaviors
-      </Heading>
+      </LinkedHeading>
       <p>
         Use the <code>expand</code> prop as well as the{' '}
         <code>Navbar.Toggle</code> and <code>Navbar.Collapse</code> components
@@ -174,9 +174,9 @@ export default withLayout(function NaπvbarSection({ data }) {
       </Callout>
       <ReactPlayground codeText={NavbarCollapsible} />
 
-      <Heading h="2" id="navbar-api">
+      <LinkedHeading h="2" id="navbar-api">
         API
-      </Heading>
+      </LinkedHeading>
 
       <ComponentApi metadata={data.Navbar} />
       <ComponentApi metadata={data.NavbarBrand} exportedBy={data.Navbar} />

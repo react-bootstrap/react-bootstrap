@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import JumbotronBasic from '../../examples/Jumbotron/Basic';
@@ -11,9 +11,9 @@ import withLayout from '../../withLayout';
 export default withLayout(function JumbotronSection({ data }) {
   return (
     <>
-      <Heading h="1" id="jumbotron">
+      <LinkedHeading h="1" id="jumbotron">
         Jumbotron
-      </Heading>
+      </LinkedHeading>
 
       <p className="lead">
         A lightweight, flexible component that can optionally extend the entire
@@ -23,9 +23,9 @@ export default withLayout(function JumbotronSection({ data }) {
       <ReactPlayground codeText={JumbotronBasic} />
       <ReactPlayground codeText={JumbotronFluid} />
 
-      <Heading h="2" id="jumbotron-api">
+      <LinkedHeading h="2" id="jumbotron-api">
         API
-      </Heading>
+      </LinkedHeading>
       <ComponentApi metadata={data.Jumbotron} />
     </>
   );

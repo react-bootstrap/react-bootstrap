@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import Callout from '../../components/Callout';
 import CodeBlock from '../../components/CodeBlock';
 import ComponentApi from '../../components/ComponentApi';
@@ -20,9 +20,9 @@ import withLayout from '../../withLayout';
 export default withLayout(function NavSection({ data }) {
   return (
     <>
-      <Heading h="1" id="navs">
+      <LinkedHeading h="1" id="navs">
         Base Nav
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Navigation bits in Bootstrap all share a general <code>Nav</code>{' '}
@@ -37,9 +37,9 @@ export default withLayout(function NavSection({ data }) {
       </Callout>
       <ReactPlayground codeText={NavBasic} />
 
-      <Heading h="2" id="navs-alignment">
+      <LinkedHeading h="2" id="navs-alignment">
         Alignment and orientation
-      </Heading>
+      </LinkedHeading>
       <p>
         You can control the the direction and orientation of the{' '}
         <code>Nav</code> by making use of the{' '}
@@ -51,9 +51,9 @@ export default withLayout(function NavSection({ data }) {
       </p>
       <ReactPlayground codeText={NavAlignement} />
 
-      <Heading h="3" id="navs-stacked">
+      <LinkedHeading h="3" id="navs-stacked">
         Vertical
-      </Heading>
+      </LinkedHeading>
       <p>
         Create stacked navs by changing the flex item direction with the{' '}
         <code>.flex-column</code> class, or your own css. You can even use the
@@ -62,25 +62,25 @@ export default withLayout(function NavSection({ data }) {
       </p>
       <ReactPlayground codeText={NavStacked} />
 
-      <Heading h="3" id="navs-tabs">
+      <LinkedHeading h="3" id="navs-tabs">
         Tabs
-      </Heading>
+      </LinkedHeading>
       <p>
         Visually represent nav items as "tabs". This style pairs nicely with
         tabbable regions created by our <a href="../tabs/">Tab components</a>
       </p>
       <ReactPlayground codeText={Tabs} />
 
-      <Heading h="3" id="navs-pill">
+      <LinkedHeading h="3" id="navs-pill">
         Pills
-      </Heading>
+      </LinkedHeading>
 
       <p>An alternative visual variant.</p>
       <ReactPlayground codeText={Pills} />
 
-      <Heading h="3" id="navs-justified">
+      <LinkedHeading h="3" id="navs-justified">
         Fill and justify
-      </Heading>
+      </LinkedHeading>
       <p>
         Force the contents of your nav to extend the full available width. To
         proportionately fill the space use <code>fill</code>. Notice that the
@@ -94,9 +94,9 @@ export default withLayout(function NavSection({ data }) {
 
       <ReactPlayground codeText={NavJustified} />
 
-      <Heading h="2" id="navs-dropdown">
+      <LinkedHeading h="2" id="navs-dropdown">
         Using dropdowns
-      </Heading>
+      </LinkedHeading>
       <p>
         You can mix and match the Dropdown components with the NavLink and
         NavItem components to create a Dropdown that plays well in a Nav
@@ -111,9 +111,9 @@ export default withLayout(function NavSection({ data }) {
       </p>
       <ReactPlayground codeText={NavDropdown} />
 
-      <Heading h="2" id="navs-props">
+      <LinkedHeading h="2" id="navs-props">
         API
-      </Heading>
+      </LinkedHeading>
 
       <ComponentApi metadata={data.Nav} />
       <ComponentApi metadata={data.NavItem} />

@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import Figure from '../../examples/Figure';
@@ -10,24 +10,24 @@ import withLayout from '../../withLayout';
 export default withLayout(function FigureSection({ data }) {
   return (
     <>
-      <Heading h="1" id="figures">
+      <LinkedHeading h="1" id="figures">
         Figures
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Anytime you need to display a piece of content, like an image with an{' '}
         optional caption, consider using a <code>Figure</code>.
       </p>
 
-      <Heading h="2" id="figures-anchor">
+      <LinkedHeading h="2" id="figures-anchor">
         Figure
-      </Heading>
+      </LinkedHeading>
       <p>Displaying related images and text with the Figure component.</p>
       <ReactPlayground codeText={Figure} />
 
-      <Heading h="2" id="figures-props">
+      <LinkedHeading h="2" id="figures-props">
         API
-      </Heading>
+      </LinkedHeading>
 
       <ComponentApi metadata={data.figure} />
       <ComponentApi metadata={data.image} />

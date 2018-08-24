@@ -1,3 +1,5 @@
+/* eslint-disable react/no-multi-comp */
+
 import classNames from 'classnames';
 import { css, styled } from 'css-literal-loader/styled';
 import qsa from 'dom-helpers/query/querySelectorAll';
@@ -7,7 +9,6 @@ import ReactDOM from 'react-dom';
 import * as ReactBootstrap from 'react-bootstrap';
 import * as formik from 'formik';
 import yup from 'yup';
-
 import {
   LiveProvider,
   LiveEditor,
@@ -15,8 +16,8 @@ import {
   LivePreview,
   withLive,
 } from 'react-live';
-import PlaceholderImage from './PlaceholderImage';
 
+import PlaceholderImage from './PlaceholderImage';
 import Sonnet from './Sonnet';
 
 const { background, foreground } = css`
@@ -73,11 +74,105 @@ const StyledExample = styled('div')`
   }
 `;
 
-const CodeEditor = styled(LiveEditor)`
-  composes: prism from '../css/prism.module.scss';
+const editorStyles = css`
+  .container {
+    position: relative;
+  }
 
-  border-radius: 0 0 8px 8px;
+  .alert {
+    composes: p-1 from global;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    pointer-events: none;
+    font-size: 70%;
+
+    *:not(:focus) + & {
+      opacity: 0;
+    }
+  }
+
+  .editor {
+    composes: prism from '../css/prism.module.scss';
+
+    border-radius: 0 0 8px 8px;
+  }
 `;
+
+let uid = 0;
+
+class CodeEditor extends React.Component {
+  state = { ignoreTab: false };
+
+  id = `described-by-${++uid}`;
+
+  handleKeyDown = event => {
+    const { key } = event;
+
+    if (this.state.ignoreTab && key !== 'Tab' && key !== 'Shift') {
+      if (key === 'Enter') event.preventDefault();
+      this.setState({ ignoreTab: false });
+    }
+    if (!this.state.ignoreTab && key === 'Escape') {
+      this.setState({ ignoreTab: true });
+    }
+  };
+
+  handleFocus = e => {
+    if (e.target !== e.currentTarget) return;
+    this.setState({
+      ignoreTab: !this.mouseDown,
+      keyboardFocused: !this.mouseDown,
+    });
+  };
+
+  handleMouseDown = () => {
+    this.mouseDown = true;
+    window.setTimeout(() => {
+      this.mouseDown = false;
+    }, 0);
+  };
+
+  render() {
+    const { keyboardFocused, ignoreTab } = this.state;
+    return (
+      <div className={editorStyles.container}>
+        <LiveEditor
+          className={editorStyles.editor}
+          onBlur={this.handleBlur}
+          onFocus={this.handleFocus}
+          onKeyDown={this.handleKeyDown}
+          onMouseDown={this.handleMouseDown}
+          ignoreTabKey={ignoreTab}
+          aria-describedby={this.id}
+          aria-label="Example code editor"
+        />
+        {(keyboardFocused || !ignoreTab) && (
+          <ReactBootstrap.Alert
+            variant="info"
+            className={editorStyles.alert}
+            id={this.id}
+            aria-live="polite"
+          >
+            {ignoreTab ? (
+              <>
+                Press <kbd>enter</kbd> or type a key to enable tab-to-indent
+              </>
+            ) : (
+              <>
+                Press <kbd>esc</kbd> to disable tab trapping
+              </>
+            )}
+          </ReactBootstrap.Alert>
+        )}
+      </div>
+    );
+  }
+}
 
 const scope = {
   ...ReactBootstrap,
@@ -132,6 +227,8 @@ const Example = withLive(
       const { showCode, className } = this.props;
       return (
         <StyledExample
+          role="region"
+          aria-label="Code Example"
           ref={this.example}
           showCode={showCode}
           className={className}

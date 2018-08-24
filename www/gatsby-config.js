@@ -52,16 +52,6 @@ module.exports = {
       options: {
         resolver: require('./resolveHocComponents'),
         handlers: [
-          // function applyBootstrapPropsHandler(docs, _, { absolutePath }) {
-          //   // eslint-disable-next-line
-          //   let Component = require(path
-          //     .relative(__dirname, absolutePath)
-          //     .replace('src', 'lib'));
-
-          //   if (Component) {
-          //     addBootstrapPropTypes(docs, Component);
-          //   }
-          // },
           function defaultDescriptionsHandler(docs) {
             docs._props.forEach((_, name) => {
               if (defaultDescriptions[name]) {

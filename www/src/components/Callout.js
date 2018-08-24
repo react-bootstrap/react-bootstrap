@@ -33,10 +33,10 @@ const propTypes = {
 
 function Callout({ title, children, theme }) {
   return (
-    <div className={styles[theme || 'warning']}>
-      {title && <div className="h5">{title}</div>}
+    <aside role="note" className={styles[theme || 'warning']}>
+      {title && <header className="h5">{title}</header>}
       <div>{children}</div>
-    </div>
+    </aside>
   );
 }
 

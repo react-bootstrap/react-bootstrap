@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 import { css } from 'css-literal-loader/styled';
 
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 
@@ -32,17 +32,17 @@ const styles = css`
 export default withLayout(function TooltipSection({ data }) {
   return (
     <>
-      <Heading h="1" id="overlays">
+      <LinkedHeading h="1" id="overlays">
         Overlays
-      </Heading>
+      </LinkedHeading>
       <p className="lead">
         A set of components for positioning beautiful overlays, tooltips,
         popovers, and anything else you need.
       </p>
 
-      <Heading h="2" id="overlays-overview">
+      <LinkedHeading h="2" id="overlays-overview">
         Overview
-      </Heading>
+      </LinkedHeading>
 
       <p>Things to know about the react-boostrap Overlay components.</p>
       <ul>
@@ -70,18 +70,18 @@ export default withLayout(function TooltipSection({ data }) {
         </li>
       </ul>
 
-      <Heading h="2" id="overlays">
+      <LinkedHeading h="2" id="overlays">
         Overlay
-      </Heading>
+      </LinkedHeading>
       <p>
         <code>Overlay</code> is the fundemental component for positioning and
         controlling tooltip visibility. It's a wrapper around react-popper, that
         adds support for transitions, and visibility toggling.
       </p>
 
-      <Heading h="3" id="creating-an-overlay">
+      <LinkedHeading h="3" id="creating-an-overlay">
         Creating an Overlay
-      </Heading>
+      </LinkedHeading>
       <p>
         Overlays consist of at least two elements, the "overlay", the element to
         be positioned, as well as a "target", the element the overlay is
@@ -97,9 +97,9 @@ export default withLayout(function TooltipSection({ data }) {
       </p>
       <ReactPlayground codeText={Overlay} />
 
-      <Heading h="3" id="overlay-trigger">
+      <LinkedHeading h="3" id="overlay-trigger">
         OverlayTrigger
-      </Heading>
+      </LinkedHeading>
       <p>
         Since the above pattern is pretty common, but verbose, we've included{' '}
         <code>{'<OverlayTrigger>'}</code> component to help with common
@@ -122,17 +122,17 @@ export default withLayout(function TooltipSection({ data }) {
 
       <ReactPlayground codeText={OverlayTrigger} />
 
-      <Heading h="2" id="tooltips">
+      <LinkedHeading h="2" id="tooltips">
         Tooltips
-      </Heading>
+      </LinkedHeading>
       <p className="lead">
         A tooltip component for a more stylish alternative to that anchor tag{' '}
         <code>title</code> attribute.
       </p>
 
-      <Heading h="3" id="tooltip-examples">
+      <LinkedHeading h="3" id="tooltip-examples">
         Examples
-      </Heading>
+      </LinkedHeading>
 
       <p>Hover over the links below to see tooltips.</p>
       <ReactPlayground codeText={TooltipInCopy} showCode={false} />
@@ -148,14 +148,14 @@ export default withLayout(function TooltipSection({ data }) {
       </p>
       <ReactPlayground codeText={TooltipPositioned} />
 
-      <Heading h="2" id="popovers">
+      <LinkedHeading h="2" id="popovers">
         Popovers
-      </Heading>
+      </LinkedHeading>
       <p className="lead">A popover component, like those found in iOS.</p>
 
-      <Heading h="3" id="popover-examples">
+      <LinkedHeading h="3" id="popover-examples">
         Examples
-      </Heading>
+      </LinkedHeading>
 
       <ReactPlayground codeText={PopoverBasic} />
       <p>
@@ -164,9 +164,9 @@ export default withLayout(function TooltipSection({ data }) {
       </p>
       <ReactPlayground codeText={PopoverPositioned} />
 
-      <Heading h="2" id="overlays-disabled">
+      <LinkedHeading h="2" id="overlays-disabled">
         Disabled elements
-      </Heading>
+      </LinkedHeading>
       <p>
         Elements with the <code>disabled</code> attribute aren’t interactive,
         meaning users cannot hover or click them to trigger a popover (or
@@ -176,9 +176,9 @@ export default withLayout(function TooltipSection({ data }) {
       </p>
       <ReactPlayground codeText={Disabled} />
 
-      <Heading h="2" id="overlays-container">
+      <LinkedHeading h="2" id="overlays-container">
         Changing containers
-      </Heading>
+      </LinkedHeading>
       <p>
         Yopu can specify a <code>container</code> to control the DOM element the
         overlay is appended to. This is especially useful when styles conflict
@@ -189,9 +189,9 @@ export default withLayout(function TooltipSection({ data }) {
         exampleClassName={styles.contained}
       />
 
-      <Heading h="2" id="overlays-dynamic-updates">
+      <LinkedHeading h="2" id="overlays-dynamic-updates">
         Updating position dynamically
-      </Heading>
+      </LinkedHeading>
       <p>
         Since we can't know every time your overlay changes size, to reposition
         it, you need to take manual action if you want to update the position of
@@ -204,9 +204,9 @@ export default withLayout(function TooltipSection({ data }) {
       </p>
       <ReactPlayground codeText={ScheduleUpdate} />
 
-      <Heading h="2" id="overlays-api">
+      <LinkedHeading h="2" id="overlays-api">
         API
-      </Heading>
+      </LinkedHeading>
 
       <ComponentApi metadata={data.Overlay} />
       <ComponentApi metadata={data.OverlayTrigger} />

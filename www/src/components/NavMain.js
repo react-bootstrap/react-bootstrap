@@ -28,6 +28,9 @@ const StyledNavbar = withProps({
     }
   `,
 );
+const SkipToContentLink = styled('a')`
+  composes: sr-only sr-only-focusable bg-primary text-white p-4 from global;
+`;
 
 const StyledNavLink = styled(Nav.Link)`
   @import '../css/theme.scss';
@@ -68,6 +71,9 @@ const propTypes = {
 function NavMain({ activePage }) {
   return (
     <StyledNavbar expand collapseOnSelect>
+      <SkipToContentLink href="#rb-docs-content" tabIndex="0">
+        Skip to content
+      </SkipToContentLink>
       <Navbar.Brand href="/">
         <img src={logo} alt="react-bootstrap" height={30} />
       </Navbar.Brand>

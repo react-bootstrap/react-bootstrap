@@ -95,10 +95,10 @@ class PropTable extends React.Component {
 
         return (
           <tr key={name} className="prop-table-row">
-            <td>
+            <td className="text-monospace">
               {name} {this.renderRequiredBadge(propData)}
             </td>
-            <td>
+            <td className="text-monospace">
               <div>{this.getType(propData)}</div>
             </td>
 

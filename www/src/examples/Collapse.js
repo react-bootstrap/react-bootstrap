@@ -8,19 +8,24 @@ class Example extends React.Component {
   }
 
   render() {
+    const { open } = this.state;
     return (
-      <div>
-        <Button onClick={() => this.setState({ open: !this.state.open })}>
+      <>
+        <Button
+          onClick={() => this.setState({ open: !open })}
+          aria-controls="example-collapse-text"
+          aria-expanded={open}
+        >
           click
         </Button>
         <Collapse in={this.state.open}>
-          <div>
+          <div id="example-collapse-text">
             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
             terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
             labore wes anderson cred nesciunt sapiente ea proident.
           </div>
         </Collapse>
-      </div>
+      </>
     );
   }
 }

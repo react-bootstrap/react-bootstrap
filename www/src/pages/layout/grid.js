@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 import { css } from 'css-literal-loader/styled';
 
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import GridAutoLayout from '../../examples/Grid/AutoLayout';
@@ -37,9 +37,9 @@ const styles = css`
 export default withLayout(function GridSection({ data }) {
   return (
     <>
-      <Heading h="1" id="grid">
+      <LinkedHeading h="1" id="grid">
         Grid system
-      </Heading>
+      </LinkedHeading>
       <p>
         Bootstrap’s grid system uses a series of containers, rows, and columns
         to layout and align content. It’s built with{' '}
@@ -56,9 +56,9 @@ export default withLayout(function GridSection({ data }) {
         </a>{' '}
         for background, terminology, guidelines, and code snippets.
       </p>
-      <Heading h="2" id="auto-layout">
+      <LinkedHeading h="2" id="auto-layout">
         Auto-layout columns
-      </Heading>
+      </LinkedHeading>
       <p>
         When no column widths are specified the <code>Col</code> component will
         render equal width columns
@@ -68,9 +68,9 @@ export default withLayout(function GridSection({ data }) {
         exampleClassName={styles.example}
       />
 
-      <Heading h="3" id="auto-layout-col-sizing">
+      <LinkedHeading h="3" id="auto-layout-col-sizing">
         Setting one column width
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Auto-layout for flexbox grid columns also means you can set the width of
@@ -84,9 +84,9 @@ export default withLayout(function GridSection({ data }) {
         exampleClassName={styles.example}
       />
 
-      <Heading h="3" id="auto-layout-variable-sizes">
+      <LinkedHeading h="3" id="auto-layout-variable-sizes">
         Variable width content
-      </Heading>
+      </LinkedHeading>
       <p>
         Set the column value (for any breakpoint size) to <code>"auto"</code> to
         size columns based on the natural width of their content.
@@ -95,9 +95,9 @@ export default withLayout(function GridSection({ data }) {
         codeText={GridAutoLayoutVariable}
         exampleClassName={styles.example}
       />
-      <Heading h="2" id="responsive-grids">
+      <LinkedHeading h="2" id="responsive-grids">
         Responsive grids
-      </Heading>
+      </LinkedHeading>
       <p>
         The <code>Col</code> lets you specify column widths across 5 breakpoint
         sizes (xs, sm, md, large, and xl). For every breakpoint, you can specify
@@ -139,9 +139,9 @@ export default withLayout(function GridSection({ data }) {
         codeText={GridOffsetting}
         exampleClassName={styles.example}
       />
-      <Heading h="2" id="grid-props">
+      <LinkedHeading h="2" id="grid-props">
         API
-      </Heading>
+      </LinkedHeading>
 
       <ComponentApi metadata={data.Container} />
       <ComponentApi metadata={data.Row} />
