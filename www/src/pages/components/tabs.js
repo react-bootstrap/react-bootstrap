@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ARIA from '../../components/AriaAbbr';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
@@ -14,14 +14,14 @@ import withLayout from '../../withLayout';
 export default withLayout(function TabsSection({ data }) {
   return (
     <>
-      <Heading h="2" id="tabs">
+      <LinkedHeading h="2" id="tabs">
         Tabbed components
-      </Heading>
+      </LinkedHeading>
       <p className="lead">Dynamic tabbed interfaces</p>
 
-      <Heading h="2" id="tabs-examples">
+      <LinkedHeading h="2" id="tabs-examples">
         Examples
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Create dynamic tabbed interfaces, as described in the{' '}
@@ -37,9 +37,9 @@ export default withLayout(function TabsSection({ data }) {
         exampleClassName="bs-example-tabs"
       />
 
-      <Heading h="2" id="tabs-controlled">
+      <LinkedHeading h="2" id="tabs-controlled">
         Controlled
-      </Heading>
+      </LinkedHeading>
       <p>
         <code>Tabs</code> can be controlled directly when you want to handle the
         selection logic personally.
@@ -49,9 +49,9 @@ export default withLayout(function TabsSection({ data }) {
         exampleClassName="bs-example-tabs"
       />
 
-      <Heading h="2" id="tabs-no-animation">
+      <LinkedHeading h="2" id="tabs-no-animation">
         No animation
-      </Heading>
+      </LinkedHeading>
       <p>
         Set the <code>transition</code> prop to <code>false</code>
       </p>
@@ -60,9 +60,9 @@ export default withLayout(function TabsSection({ data }) {
         exampleClassName="bs-example-tabs"
       />
 
-      <Heading h="2" id="tabs-with-dropdown">
+      <LinkedHeading h="2" id="tabs-with-dropdown">
         Dropdowns?
-      </Heading>
+      </LinkedHeading>
       <p>
         Dynamic tabbed interfaces should not contain dropdown menus, as this
         causes both usability and accessibility issues. From a usability
@@ -77,9 +77,9 @@ export default withLayout(function TabsSection({ data }) {
         That said, it Dropdowns do work technically (sans focus management), but
         we don't make any claims about support.
       </p>
-      <Heading h="2" id="tabs-custom-layout">
+      <LinkedHeading h="2" id="tabs-custom-layout">
         Custom Tab Layout
-      </Heading>
+      </LinkedHeading>
       <p>
         For more complex layouts the flexible <code>TabContainer</code>,{' '}
         <code>TabContent</code>, and <code>TabPane</code> components along with
@@ -95,9 +95,9 @@ export default withLayout(function TabsSection({ data }) {
       </p>
       <ReactPlayground codeText={LeftTabs} exampleClassName="bs-example-tabs" />
 
-      <Heading h="2" id="tabs-api">
+      <LinkedHeading h="2" id="tabs-api">
         API
-      </Heading>
+      </LinkedHeading>
 
       <ComponentApi metadata={data.Tabs} />
       <ComponentApi metadata={data.Tab} />

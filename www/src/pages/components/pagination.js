@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import ComponentApi from '../../components/ComponentApi';
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
 import PaginationAdvanced from '../../examples/Pagination/Advanced';
 import PaginationBasic from '../../examples/Pagination/Basic';
@@ -11,18 +11,18 @@ import withLayout from '../../withLayout';
 export default withLayout(function PaginationSection({ data }) {
   return (
     <>
-      <Heading h="1" id="pagination">
+      <LinkedHeading h="1" id="pagination">
         Pagination
-      </Heading>
+      </LinkedHeading>
       <p>
         A set of <em>presentational</em> components for building pagination UI.
       </p>
 
       <ReactPlayground codeText={PaginationBasic} />
 
-      <Heading h="2" id="pagination-more">
+      <LinkedHeading h="2" id="pagination-more">
         More options
-      </Heading>
+      </LinkedHeading>
       <p>
         For building more complex pagination UI, there are few convenient
         sub-components for adding "First", "Previous", "Next", and "Last"
@@ -31,9 +31,9 @@ export default withLayout(function PaginationSection({ data }) {
       </p>
       <ReactPlayground codeText={PaginationAdvanced} />
 
-      <Heading h="2" id="pagination-api">
+      <LinkedHeading h="2" id="pagination-api">
         API
-      </Heading>
+      </LinkedHeading>
       <ComponentApi metadata={data.Pagination} />
       <ComponentApi metadata={data.PageItem} />
     </>

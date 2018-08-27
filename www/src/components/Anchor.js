@@ -4,32 +4,20 @@ import PropTypes from 'prop-types';
 import { css } from 'css-literal-loader/styled';
 
 const styles = css`
-  .heading {
+  .wrapper {
     position: relative;
-    pointer-events: none;
-
-    &:before {
-      display: block;
-      height: 6rem;
-      margin-top: -6rem;
-      visibility: hidden;
-      content: '';
-    }
+    display: inline-block;
+    padding-right: 1em;
   }
-  .inner {
-    pointer-events: auto;
-  }
-
   .anchor {
     font-size: 90%;
     position: absolute;
-    left: -0.9em;
+    right: 0.3em;
     padding-top: 0.1em;
-    padding-right: 0.4em;
     opacity: 0;
 
     &:focus,
-    .heading:hover & {
+    :global(.__heading):hover & {
       text-decoration: none;
       opacity: 0.5;
     }
@@ -38,20 +26,18 @@ const styles = css`
 
 class Anchor extends React.Component {
   static propTypes = {
-    id: PropTypes.any.isRequired,
+    target: PropTypes.any.isRequired,
   };
 
   render() {
-    const { as: Tag = 'div', className } = this.props;
+    const { as: Tag = 'span', className } = this.props;
 
     return (
-      <Tag className={cn(className, styles.heading)} id={this.props.id}>
-        <div className={styles.inner}>
-          {this.props.children}
-          <a href={`#${this.props.id}`} className={styles.anchor}>
-            #
-          </a>
-        </div>
+      <Tag className={cn(className, styles.wrapper)}>
+        {this.props.children}
+        <a href={`#${this.props.target}`} className={styles.anchor} aria-hidden>
+          <span aria-hidden>#</span>
+        </a>
       </Tag>
     );
   }

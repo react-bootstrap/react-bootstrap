@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import ComponentApi from '../../components/ComponentApi';
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
 import Alignment from '../../examples/Media/Alignment';
 import Basic from '../../examples/Media/Basic';
@@ -14,9 +14,9 @@ import withLayout from '../../withLayout';
 export default withLayout(function MediaSection({ data }) {
   return (
     <>
-      <Heading h="1" id="media-objects">
+      <LinkedHeading h="1" id="media-objects">
         Media objects
-      </Heading>
+      </LinkedHeading>
 
       <p>
         The media object helps build complex and repetitive components (e.g.
@@ -30,9 +30,9 @@ export default withLayout(function MediaSection({ data }) {
       </p>
       <ReactPlayground codeText={Basic} />
 
-      <Heading h="2" id="media-nesting">
+      <LinkedHeading h="2" id="media-nesting">
         Media Nesting
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Media objects can be infinitely nested, though we suggest you stop at
@@ -41,9 +41,9 @@ export default withLayout(function MediaSection({ data }) {
       </p>
       <ReactPlayground codeText={Nesting} />
 
-      <Heading h="2" id="media-alignment">
+      <LinkedHeading h="2" id="media-alignment">
         Media Alignment
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Media in a media object can be aligned with flexbox utilities to the top
@@ -51,9 +51,9 @@ export default withLayout(function MediaSection({ data }) {
       </p>
       <ReactPlayground codeText={Alignment} />
 
-      <Heading h="2" id="media-order">
+      <LinkedHeading h="2" id="media-order">
         Media Order
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Change the order of content in media objects by modifying the HTML
@@ -62,9 +62,9 @@ export default withLayout(function MediaSection({ data }) {
       </p>
       <ReactPlayground codeText={Order} />
 
-      <Heading h="2" id="media-list">
+      <LinkedHeading h="2" id="media-list">
         Media list
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Because the media object has so few structural requirements, you can
@@ -75,9 +75,9 @@ export default withLayout(function MediaSection({ data }) {
       </p>
       <ReactPlayground codeText={List} />
 
-      <Heading h="2" id="media-props">
+      <LinkedHeading h="2" id="media-props">
         Props
-      </Heading>
+      </LinkedHeading>
 
       <ComponentApi metadata={data.Media} />
     </>

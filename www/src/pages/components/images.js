@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import ComponentApi from '../../components/ComponentApi';
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
 import Fluid from '../../examples/Image/Fluid';
 import Shape from '../../examples/Image/Shape';
@@ -11,29 +11,29 @@ import withLayout from '../../withLayout';
 export default withLayout(function ImageSection({ data }) {
   return (
     <>
-      <Heading h="1" id="images">
+      <LinkedHeading h="1" id="images">
         Images
-      </Heading>
+      </LinkedHeading>
 
-      <Heading h="2" id="image-shape">
+      <LinkedHeading h="2" id="image-shape">
         Shape
-      </Heading>
+      </LinkedHeading>
       <p>
         Use the <code>rounded</code>, <code>roundedCircle</code> and{' '}
         <code>thumbnail</code> props to customise the image.
       </p>
       <ReactPlayground codeText={Shape} />
 
-      <Heading h="2" id="image-fluid">
+      <LinkedHeading h="2" id="image-fluid">
         Fluid
-      </Heading>
+      </LinkedHeading>
       <p>
         Use the <code>fluid</code> to scale image nicely to the parent element.
       </p>
       <ReactPlayground codeText={Fluid} />
-      <Heading h="2" id="image-api">
+      <LinkedHeading h="2" id="image-api">
         API
-      </Heading>
+      </LinkedHeading>
       <ComponentApi metadata={data.Image} />
     </>
   );

@@ -71,7 +71,14 @@ function Main({ children, ...props }) {
         <TocProvider>
           <Col as={SideNav} xs={12} md={3} xl={2} location={props.location} />
           <Col as={Toc} className="d-none d-xl-block" xl={2} />
-          <Col xs={12} md={9} xl={8} className={styles.main}>
+          <Col
+            xs={12}
+            md={9}
+            xl={8}
+            as="main"
+            id="rb-docs-content"
+            className={styles.main}
+          >
             {children}
           </Col>
         </TocProvider>

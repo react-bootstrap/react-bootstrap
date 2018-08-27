@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import ResponsiveEmbed from '../../examples/ResponsiveEmbed';
@@ -10,9 +10,9 @@ import withLayout from '../../withLayout';
 export default withLayout(function ResponsiveEmbedSection({ data }) {
   return (
     <>
-      <Heading h="1" id="responsive-embed">
+      <LinkedHeading h="1" id="responsive-embed">
         Responsive embed
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Allow browsers to determine video or slideshow dimensions based on the
@@ -29,9 +29,9 @@ export default withLayout(function ResponsiveEmbedSection({ data }) {
       </p>
       <ReactPlayground codeText={ResponsiveEmbed} />
 
-      <Heading h="3" id="responsive-embed-props">
+      <LinkedHeading h="3" id="responsive-embed-props">
         API
-      </Heading>
+      </LinkedHeading>
       <ComponentApi metadata={data.ResponsiveEmbed} />
     </>
   );

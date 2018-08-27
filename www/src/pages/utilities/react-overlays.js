@@ -1,14 +1,14 @@
 import React from 'react';
 
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import withLayout from '../../withLayout';
 
 export default withLayout(function ReactOverlaysSection() {
   return (
     <>
-      <Heading h="1" id="react-overlays">
+      <LinkedHeading h="1" id="react-overlays">
         React Overlays
-      </Heading>
+      </LinkedHeading>
       <p className="lead">
         Low-level components and utilities for building beautiful accessible
         overlay components

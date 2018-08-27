@@ -3,15 +3,32 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import NavMain from '../components/NavMain';
-import Anchor from '../components/Anchor';
+import Heading from '../components/Heading';
+import CodeBlock from '../components/CodeBlock';
+import LinkedHeading from '../components/LinkedHeading';
+
+const getMode = (className = '') => {
+  const [, mode] = className.match(/language-(\w+)/) || [];
+  return mode;
+};
 
 const components = {
-  h1: props => <Anchor as="h1" {...props} />,
-  h2: props => <Anchor as="h2" {...props} />,
-  h3: props => <Anchor as="h3" {...props} />,
-  h4: props => <Anchor as="h4" {...props} />,
-  h5: props => <Anchor as="h5" {...props} />,
+  h1: props => <Heading h="1" {...props} />,
+  h2: props => <LinkedHeading h="2" {...props} />,
+  h3: props => <LinkedHeading h="3" {...props} />,
+  h4: props => <LinkedHeading h="4" {...props} />,
+  h5: props => <LinkedHeading h="5" {...props} />,
+  pre: props =>
+    React.isValidElement(props.children) ? (
+      <CodeBlock
+        codeText={props.children.props.children}
+        mode={getMode(props.children.props.props.className)} // omg
+      />
+    ) : (
+      <pre {...props} />
+    ),
 };
+
 const propTypes = {
   location: PropTypes.object.isRequired,
 };

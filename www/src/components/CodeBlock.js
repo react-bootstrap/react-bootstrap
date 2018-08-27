@@ -12,12 +12,11 @@ import { stripIndent } from 'common-tags';
 
 const prism = (code, language = 'jsx') => highlight(code, languages[language]);
 
-const CodeBlock = mapProps(p => ({
+const CodeBlock = mapProps(({ mode, codeText, ...props }) => ({
+  ...props,
   dangerouslySetInnerHTML: {
     __html:
-      p.mode === null
-        ? p.codeText
-        : prism(stripIndent([p.codeText]), p.mode || 'jsx'),
+      mode === null ? codeText : prism(stripIndent([codeText]), mode || 'jsx'),
   },
 }))(
   styled('pre')`

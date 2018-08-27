@@ -2,7 +2,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 
 import ComponentApi from '../../components/ComponentApi';
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
 import TableBasic from '../../examples/Table/Basic';
 import TableDark from '../../examples/Table/Dark';
@@ -14,9 +14,9 @@ import withLayout from '../../withLayout';
 export default withLayout(function TableSection({ data }) {
   return (
     <>
-      <Heading h="1" id="tables">
+      <LinkedHeading h="1" id="tables">
         Tables
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Use the <code>striped</code>, <code>bordered</code> and{' '}
@@ -24,9 +24,9 @@ export default withLayout(function TableSection({ data }) {
       </p>
       <ReactPlayground codeText={TableBasic} />
 
-      <Heading h="2" id="table-small">
+      <LinkedHeading h="2" id="table-small">
         Small Table
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Use <code>size="sm"</code> to make tables compact by cutting cell
@@ -34,9 +34,9 @@ export default withLayout(function TableSection({ data }) {
       </p>
       <ReactPlayground codeText={TableSmall} />
 
-      <Heading h="2" id="table-inverted">
+      <LinkedHeading h="2" id="table-inverted">
         Dark Table
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Use <code>variant="dark"</code> to invert the colors of the table and
@@ -44,17 +44,17 @@ export default withLayout(function TableSection({ data }) {
       </p>
       <ReactPlayground codeText={TableDark} />
 
-      <Heading h="2" id="table-responsive">
+      <LinkedHeading h="2" id="table-responsive">
         Responsive
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Responsive tables allow tables to be scrolled horizontally with ease.
       </p>
 
-      <Heading h="3" id="table-responsive-always">
+      <LinkedHeading h="3" id="table-responsive-always">
         Always Responsive
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Across every breakpoint, use <code>responsive</code> for horizontally
@@ -63,9 +63,9 @@ export default withLayout(function TableSection({ data }) {
       </p>
       <ReactPlayground codeText={TableResponsive} />
 
-      <Heading h="3" id="table-responsive-breakpoint">
+      <LinkedHeading h="3" id="table-responsive-breakpoint">
         Breakpoint specific
-      </Heading>
+      </LinkedHeading>
 
       <p>
         Use <code>responsive="sm"</code>, <code>responsive="md"</code>,{' '}
@@ -76,9 +76,9 @@ export default withLayout(function TableSection({ data }) {
       </p>
       <ReactPlayground codeText={TableResponsiveBreakpoints} />
 
-      <Heading h="2" id="table-api">
+      <LinkedHeading h="2" id="table-api">
         API
-      </Heading>
+      </LinkedHeading>
       <ComponentApi metadata={data.Table} />
     </>
   );

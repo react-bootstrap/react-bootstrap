@@ -109,10 +109,10 @@ const defaultProps = {
   controls: true,
   activeIndex: 0,
 
-  prevIcon: <span className="carousel-control-prev-icon" aria-hidden="true" />,
+  prevIcon: <span aria-hidden="true" className="carousel-control-prev-icon" />,
   prevLabel: 'Previous',
 
-  nextIcon: <span className="carousel-control-next-icon" aria-hidden="true" />,
+  nextIcon: <span aria-hidden="true" className="carousel-control-next-icon" />,
   nextLabel: 'Next',
 };
 

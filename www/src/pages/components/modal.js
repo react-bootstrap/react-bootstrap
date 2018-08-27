@@ -3,7 +3,7 @@ import React from 'react';
 import { css } from 'css-literal-loader/styled';
 
 import ComponentApi from '../../components/ComponentApi';
-import Heading from '../../components/Heading';
+import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
 
 import ModalStatic from '../../examples/Modal/Static';
@@ -25,16 +25,16 @@ const styles = css`
 export default withLayout(function ModalSection({ data }) {
   return (
     <>
-      <Heading h="1" id="modals">
+      <LinkedHeading h="1" id="modals">
         Modals
-      </Heading>
+      </LinkedHeading>
       <p className="lead">
         Add dialogs to your site for lightboxes, user notifications, or
         completely custom content.
       </p>
-      <Heading h="2" id="modals-overview">
+      <LinkedHeading h="2" id="modals-overview">
         Overview
-      </Heading>
+      </LinkedHeading>
       <ul>
         <li>
           Modals are positioned over everything else in the document and remove
@@ -60,21 +60,21 @@ export default withLayout(function ModalSection({ data }) {
         </li>
       </ul>
 
-      <Heading h="2" id="modals-examples">
+      <LinkedHeading h="2" id="modals-examples">
         Examples
-      </Heading>
-      <Heading h="3" id="modals-static">
+      </LinkedHeading>
+      <LinkedHeading h="3" id="modals-static">
         Static Markup
-      </Heading>
+      </LinkedHeading>
       <p>
         Below is a <em>static</em> modal dialog (without the positioning) to
         demostrate the look and feel of the Modal.
       </p>
       <ReactPlayground codeText={ModalStatic} />
 
-      <Heading h="3" id="modals-live">
+      <LinkedHeading h="3" id="modals-live">
         Live demo
-      </Heading>
+      </LinkedHeading>
       <p>
         A modal with header, body, and set of actions in the footer. Use{' '}
         <code>{'<Modal/>'}</code> in combination with other components to show
@@ -94,36 +94,36 @@ export default withLayout(function ModalSection({ data }) {
           <code>require("react-bootstrap/lib/ModalHeader")</code>.
         </p>
       </div>
-      <Heading h="3" id="modal-vertically-centered">
+      <LinkedHeading h="3" id="modal-vertically-centered">
         Vertically centered
-      </Heading>
+      </LinkedHeading>
       <p>
         You can vertically center a modal by passing the "verticallyCenter"
         prop.
       </p>
       <ReactPlayground codeText={ModalVerticallyCentered} />
 
-      <Heading h="3" id="modal-grid">
+      <LinkedHeading h="3" id="modal-grid">
         Using the grid
-      </Heading>
+      </LinkedHeading>
       <p>
         You can use grid layouts within a model using regular grid components
         inside the modal content.
       </p>
       <ReactPlayground codeText={ModalGrid} />
 
-      <Heading h="2" id="modal-default-sizing">
+      <LinkedHeading h="2" id="modal-default-sizing">
         Optional Sizes
-      </Heading>
+      </LinkedHeading>
       <p>
         You can specify a bootstrap large or small modal by using the "size"
         prop.
       </p>
       <ReactPlayground codeText={ModalDefaultSizing} />
 
-      <Heading h="3" id="modal-custom-sizing">
+      <LinkedHeading h="3" id="modal-custom-sizing">
         Sizing modals using custom CSS
-      </Heading>
+      </LinkedHeading>
       <p>
         You can apply custom css to the modal dialog div using the
         "dialogClassName" prop. Example is using a custom css class with width
@@ -134,9 +134,9 @@ export default withLayout(function ModalSection({ data }) {
         exampleClassName={styles.custom}
       />
 
-      <Heading h="2" id="modals-props">
+      <LinkedHeading h="2" id="modals-props">
         API
-      </Heading>
+      </LinkedHeading>
 
       <ComponentApi metadata={data.Modal} />
       <ComponentApi metadata={data.ModalDialog} />
