@@ -3,7 +3,7 @@ import qsa from 'dom-helpers/query/querySelectorAll';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
-import { makeEventKey } from './SelectableContext';
+import SelectableContext, { makeEventKey } from './SelectableContext';
 import NavContext from './NavContext';
 import TabContext from './TabContext';
 
@@ -34,12 +34,10 @@ class AbstractNav extends React.Component {
     getControlledId,
     getControllerId,
     role,
-    onSelect,
   }) {
     return {
       navContext: {
         role, // used by NavLink to determine it's role
-        onSelect,
         activeKey: makeEventKey(activeKey),
         getControlledId: getControlledId || noop,
         getControllerId: getControllerId || noop,
@@ -69,8 +67,15 @@ class AbstractNav extends React.Component {
     return items[nextIndex];
   }
 
+  handleSelect = (key, event) => {
+    const { onSelect, parentOnSelect } = this.props;
+    if (key == null) return;
+    if (onSelect) onSelect(key, event);
+    if (parentOnSelect) parentOnSelect(key, event);
+  };
+
   handleKeyDown = event => {
-    const { onKeyDown, onSelect } = this.props;
+    const { onKeyDown } = this.props;
     if (onKeyDown) onKeyDown(event);
 
     let nextActiveChild;
@@ -89,7 +94,7 @@ class AbstractNav extends React.Component {
     if (!nextActiveChild) return;
 
     event.preventDefault();
-    onSelect(nextActiveChild.dataset.rbEventKey, event);
+    this.handleSelect(nextActiveChild.dataset.rbEventKey, event);
     this._needsRefocus = true;
   };
 
@@ -99,10 +104,12 @@ class AbstractNav extends React.Component {
 
   render() {
     const {
+      as: Component,
       onSelect: _,
+      parentOnSelect: _0,
       getControlledId: _1,
       getControllerId: _2,
-      as: Component,
+      activeKey: _3,
       ...props
     } = this.props;
 
@@ -111,21 +118,28 @@ class AbstractNav extends React.Component {
     }
 
     return (
-      <NavContext.Provider value={this.state.navContext}>
-        <Component {...props} ref={this.attachRef} />
-      </NavContext.Provider>
+      <SelectableContext.Provider value={this.handleSelect}>
+        <NavContext.Provider value={this.state.navContext}>
+          <Component
+            {...props}
+            onKeyDown={this.handleKeyDown}
+            ref={this.attachRef}
+          />
+        </NavContext.Provider>
+      </SelectableContext.Provider>
     );
   }
 }
 
 export default mapContextToProps(
-  TabContext.Consumer,
-  (tabContext, { role }) => {
-    if (!tabContext) return null;
+  [SelectableContext, TabContext],
+  (parentOnSelect, tabContext, { role }) => {
+    if (!tabContext) return { parentOnSelect };
 
     const { activeKey, getControllerId, getControlledId } = tabContext;
     return {
       activeKey,
+      parentOnSelect,
       role: role || 'tablist',
       // pass these two through to avoid having to listen to
       // both Tab and Nav contexts in NavLink

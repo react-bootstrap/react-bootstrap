@@ -38,7 +38,7 @@ class ListGroupItem extends React.Component {
      * You can use a custom element type for this component. For none `action` items, items render as `li`.
      * For actions the default is an achor or button element depending on whether a `href` is provided.
      *
-     * @default {'li' | 'a' | 'button'}
+     * @default {'div' | 'a' | 'button'}
      */
     as: elementType,
   };
@@ -49,6 +49,16 @@ class ListGroupItem extends React.Component {
     disabled: false,
   };
 
+  handleClick = event => {
+    const { onClick, disabled } = this.props;
+    if (disabled) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
+    if (onClick) onClick(event);
+  };
   render() {
     const {
       bsPrefix,
@@ -67,7 +77,8 @@ class ListGroupItem extends React.Component {
         {...props}
         eventKey={makeEventKey(eventKey, props.href)}
         // eslint-disable-next-line
-        as={as || (action ? (props.href ? 'a' : 'button') : 'li')}
+        as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
+        onClick={this.handleClick}
         className={classNames(
           className,
           bsPrefix,

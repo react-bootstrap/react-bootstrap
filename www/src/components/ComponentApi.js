@@ -43,7 +43,7 @@ function ComponentApi({ heading, metadata, exportedBy }) {
   const id = `${kebabCase(name)}-props`;
   return (
     <>
-      <Heading h={heading || '3'} id={id} title={name}>
+      <Heading h={heading || '3'} id={id} title={name} className="my-3">
         <div className="d-flex align-items-center">
           <Anchor target={id}>
             <span className=" text-monospace">{name}</span>

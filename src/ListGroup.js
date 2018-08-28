@@ -29,7 +29,7 @@ class ListGroup extends React.Component {
   };
 
   static defaultProps = {
-    as: 'ul',
+    as: 'div',
     variant: null,
   };
 
@@ -39,7 +39,11 @@ class ListGroup extends React.Component {
     return (
       <AbstractNav
         {...props}
-        className={classNames(className, bsPrefix, `${bsPrefix}-${variant}`)}
+        className={classNames(
+          className,
+          bsPrefix,
+          variant && `${bsPrefix}-${variant}`,
+        )}
       />
     );
   }

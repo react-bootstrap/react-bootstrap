@@ -7,11 +7,9 @@ render(
     <ListGroup.Item action href="#link1">
       Link 1
     </ListGroup.Item>
-    <ListGroup.Item action href="#link2">
+    <ListGroup.Item action href="#link2" disabled>
       Link 2
     </ListGroup.Item>
-    <ListGroup.Item action href="#link3">
-      Trigger an alert
-    </ListGroup.Item>
+    <ListGroup.Item action>This one is a button</ListGroup.Item>
   </ListGroup>,
 );

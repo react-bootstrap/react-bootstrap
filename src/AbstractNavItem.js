@@ -1,7 +1,9 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+
 import NavContext from './NavContext';
+import SelectableContext, { makeEventKey } from './SelectableContext';
 
 const propTypes = {
   active: PropTypes.bool,
@@ -23,41 +25,58 @@ class AbstractNavItem extends React.Component {
     const {
       active,
       className,
-      role,
       tabIndex,
       eventKey,
+      onSelect,
       as: Component,
       ...props
     } = this.props;
 
+    const navKey = makeEventKey(eventKey, props.href);
+
     return (
-      <NavContext.Consumer>
-        {navContext => {
-          if (navContext) {
-            if (!role && navContext.role === 'tablist') props.role = 'tab';
+      <SelectableContext>
+        {parentOnSelect => (
+          <NavContext.Consumer>
+            {navContext => {
+              let isActive = active;
+              if (navContext) {
+                if (!props.role && navContext.role === 'tablist')
+                  props.role = 'tab';
 
-            props['data-rb-event-key'] = eventKey;
-            props.id = navContext.getControllerId(eventKey);
-            props['aria-controls'] = navContext.getControlledId(eventKey);
-            props.active =
-              active == null && eventKey != null
-                ? navContext.activeKey === eventKey
-                : active;
-          }
+                props['data-rb-event-key'] = navKey;
+                props.id = navContext.getControllerId(navKey);
+                props['aria-controls'] = navContext.getControlledId(navKey);
 
-          if (props.role === 'tab') {
-            props.tabIndex = props.active ? tabIndex : -1;
-            props['aria-selected'] = props.active;
-          }
+                isActive =
+                  active == null && navKey != null
+                    ? navContext.activeKey === navKey
+                    : active;
+              }
 
-          return (
-            <Component
-              {...props}
-              className={classNames(className, props.active && 'active')}
-            />
-          );
-        }}
-      </NavContext.Consumer>
+              if (props.role === 'tab') {
+                props.tabIndex = isActive ? tabIndex : -1;
+                props['aria-selected'] = isActive;
+              }
+
+              return (
+                <Component
+                  {...props}
+                  className={classNames(className, isActive && 'active')}
+                  onClick={e => {
+                    const { onClick } = this.props;
+
+                    if (onClick) onClick(e);
+                    if (navKey == null) return;
+                    if (onSelect) onSelect(navKey, e);
+                    if (parentOnSelect) parentOnSelect(navKey, e);
+                  }}
+                />
+              );
+            }}
+          </NavContext.Consumer>
+        )}
+      </SelectableContext>
     );
   }
 }

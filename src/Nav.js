@@ -7,10 +7,8 @@ import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import uncontrollable from 'uncontrollable';
 
 import { createBootstrapComponent } from './ThemeProvider';
-import chain from './utils/createChainedFunction';
 import NavbarContext from './NavbarContext';
 import CardContext from './CardContext';
-import SelectableContext from './SelectableContext';
 import AbstractNav from './AbstractNav';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
@@ -99,12 +97,6 @@ class Nav extends React.Component {
     as: 'ul',
   };
 
-  handleSelect = (key, event) => {
-    const { onSelect } = this.props;
-    if (key == null || !onSelect) return;
-    onSelect(key, event);
-  };
-
   render() {
     const {
       as,
@@ -118,29 +110,25 @@ class Nav extends React.Component {
       className,
       children,
       activeKey,
-      onSelect: _,
       ...props
     } = this.props;
 
     return (
-      <SelectableContext.Provider value={this.handleSelect}>
-        <AbstractNav
-          as={as}
-          activeKey={activeKey}
-          onSelect={this.handleSelect}
-          className={classNames(className, {
-            [bsPrefix]: !navbar,
-            [`${navbarBsPrefix}-nav`]: navbar,
-            [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
-            [`${bsPrefix}-${variant}`]: !!variant,
-            [`${bsPrefix}-fill`]: fill,
-            [`${bsPrefix}-justified`]: justify,
-          })}
-          {...props}
-        >
-          {children}
-        </AbstractNav>
-      </SelectableContext.Provider>
+      <AbstractNav
+        as={as}
+        activeKey={activeKey}
+        className={classNames(className, {
+          [bsPrefix]: !navbar,
+          [`${navbarBsPrefix}-nav`]: navbar,
+          [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
+          [`${bsPrefix}-${variant}`]: !!variant,
+          [`${bsPrefix}-fill`]: fill,
+          [`${bsPrefix}-justified`]: justify,
+        })}
+        {...props}
+      >
+        {children}
+      </AbstractNav>
     );
   }
 }
@@ -150,19 +138,12 @@ const UncontrolledNav = uncontrollable(createBootstrapComponent(Nav, 'nav'), {
 });
 
 const DecoratedNav = mapContextToProps(
-  [SelectableContext.Consumer, NavbarContext.Consumer, CardContext.Consumer],
-  (
-    onSelect,
-    navbarContext,
-    cardContext,
-    { navbar, onSelect: propsOnSelect },
-  ) => {
-    onSelect = chain(propsOnSelect, onSelect);
-    if (!navbarContext && !cardContext) return { onSelect };
+  [NavbarContext.Consumer, CardContext.Consumer],
+  (navbarContext, cardContext, { navbar }) => {
+    if (!navbarContext && !cardContext) return {};
 
     if (navbarContext)
       return {
-        onSelect,
         navbarBsPrefix: navbarContext.bsPrefix,
         navbar: navbar == null ? true : navbar,
       };
