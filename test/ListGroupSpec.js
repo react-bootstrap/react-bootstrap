@@ -23,6 +23,6 @@ describe('<ListGroup>', () => {
   });
 
   it('accepts as prop', () => {
-    mount(<ListGroup as="div" />).assertSingle('div.list-group');
+    mount(<ListGroup as="ul" />).assertSingle('ul.list-group');
   });
 });

@@ -3,7 +3,7 @@ function alertClicked() {
 }
 
 render(
-  <ListGroup as="div">
+  <ListGroup>
     <ListGroup.Item action>Link 1</ListGroup.Item>
     <ListGroup.Item action>Link 2</ListGroup.Item>
     <ListGroup.Item action onClick={alertClicked}>

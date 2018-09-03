@@ -3,7 +3,7 @@ function alertClicked() {
 }
 
 render(
-  <ListGroup as="div" defaultActiveKey="#link1">
+  <ListGroup defaultActiveKey="#link1">
     <ListGroup.Item action href="#link1">
       Link 1
     </ListGroup.Item>
