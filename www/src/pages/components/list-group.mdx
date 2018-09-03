@@ -1,0 +1,139 @@
+import { graphql } from 'gatsby';
+
+import Callout from '../../components/Callout';
+import Heading from '../../components/Heading';
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+import withLayout from '../../withLayout';
+import ListGroupDefault from '../../examples/ListGroup/Default';
+import ListGroupLinked from '../../examples/ListGroup/Linked';
+import ListGroupActive from '../../examples/ListGroup/Active';
+import ListGroupDisabled from '../../examples/ListGroup/Disabled';
+import ListGroupStyle from '../../examples/ListGroup/Style';
+import ListGroupStyleActions from '../../examples/ListGroup/StyleActions';
+import ListGroupFlush from '../../examples/ListGroup/Flush';
+import ListGroupTabs from '../../examples/ListGroup/Tabs';
+
+import styles from '../../css/examples.module.scss';
+
+
+# List groups
+
+<p className="lead">
+  List groups are a flexible and powerful component for displaying a
+  series of content. Modify and extend them to support just about any
+  content within.
+</p>
+
+## Basic Example
+
+<ReactPlayground
+  codeText={ListGroupDefault}
+  exampleClassName={styles.listGroup}
+/>
+
+### Active items
+
+Set the `active` prop to indicate the list groups current active selection.
+
+<ReactPlayground
+  codeText={ListGroupActive}
+  exampleClassName={styles.listGroup}
+/>
+
+### Disabled items
+
+Set the `disabled` prop to prevent actions on a `<List.Item>`. For elements
+that aren't naturally disable-able (like anchors) `onClick` handlers are added
+that call `preventDefault` to mimick disabled behavior.
+
+<ReactPlayground
+  codeText={ListGroupDisabled}
+  exampleClassName={styles.listGroup}
+/>
+
+
+### Actionable items
+
+Toggle the `action` prop to create <em>actionable</em> list group
+items, with disabled, hover and active styles. List item actions will render
+a `<button>` or `<a>` (depending on the presence of an `href`) by default but
+can be overriden by setting the `as` prop as usual.
+
+List items `actions` are distinct from plain items to ensure that click or tap
+affordances aren't applied to non-interactive items.
+
+<ReactPlayground
+  codeText={ListGroupLinked}
+  exampleClassName={styles.listGroup}
+/>
+
+### Flush
+
+Add the `flush` variant to remove outer borders and rounded corners to render list group items
+edge-to-edge in a parent container [such as a `Card`](/components/cards/#list-groups).
+
+<ReactPlayground
+  codeText={ListGroupFlush}
+  exampleClassName={styles.listGroup}
+/>
+
+### Contextual classes
+
+Use contextual variants on `<List.Item>`s to style them with a stateful background and color.
+
+<ReactPlayground
+  codeText={ListGroupStyle}
+  exampleClassName={styles.listGroup}
+/>
+
+When paired with `action`s, additional hover and active styles apply.
+
+<ReactPlayground
+  codeText={ListGroupStyleActions}
+  exampleClassName={styles.listGroup}
+/>
+
+<Callout title="Conveying meaning to assistive technologies">
+  Using color to add meaning only provides a visual indication,
+  which will not be conveyed to users of assistive technologies – such as screen readers.
+  Ensure that information denoted by the color is either obvious from the content itself
+  (e.g. the visible text), or is included through alternative means,
+  such as additional text hidden with the <code>.sr-only</code> class.
+</Callout>
+
+## Tabbed Interfaces
+
+You can also use the [Tab][tabs] components to create ARIA compliant tabbable
+interfaces with the `<ListGroup>` component. Swap out the `<Nav>` component
+for the list group and you are good to go.
+
+<ReactPlayground
+  codeText={ListGroupTabs}
+  exampleClassName={styles.listGroup}
+/>
+
+## API
+
+<ComponentApi metadata={props.data.ListGroup} />
+<ComponentApi metadata={props.data.ListGroupItem} exportedBy={props.data.ListGroup} />
+
+
+
+export const query = graphql`
+  query ListGroupQuery {
+    ListGroup: componentMetadata(displayName: { eq: "ListGroup" }) {
+      ...ComponentApi_metadata
+    }
+    ListGroupItem: componentMetadata(displayName: { eq: "ListGroupItem" }) {
+      ...ComponentApi_metadata
+    }
+    ListGroupItemAction: componentMetadata(
+      displayName: { eq: "ListGroupItemAction" }
+    ) {
+      ...ComponentApi_metadata
+    }
+  }
+`;
+
+[tabs]: /components/tabs/

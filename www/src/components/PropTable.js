@@ -194,7 +194,7 @@ class PropTable extends React.Component {
     }
 
     return (
-      <Table bordered striped className="bg-white" responsive="sm">
+      <Table bordered striped className="bg-white mt-4 mb-5" responsive="sm">
         <thead>
           <tr>
             <th>Name</th>

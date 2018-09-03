@@ -1,12 +1,9 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 
 import SafeAnchor from './SafeAnchor';
-import NavContext from './NavContext';
-import SelectableContext, { makeEventKey } from './SelectableContext';
-import chain from './utils/createChainedFunction';
+import AbstractNavItem from './AbstractNavItem';
 import { createBootstrapComponent } from './ThemeProvider';
 
 const propTypes = {
@@ -56,79 +53,31 @@ const defaultProps = {
   disabled: false,
 };
 
-class NavLink extends React.Component {
-  handleClick = e => {
-    const { onClick, onSelect, eventKey } = this.props;
-    if (onClick) onClick(e);
-    if (eventKey != null && onSelect) onSelect(eventKey, e);
-  };
-
-  render() {
-    const {
-      active,
-      bsPrefix,
-      disabled,
-      className,
-      href,
-      onSelect: _1,
-      eventKey: _2,
-      ...props
-    } = this.props;
-
-    return (
-      <SafeAnchor
-        {...props}
-        href={href}
-        disabled={disabled}
-        onClick={this.handleClick}
-        className={classNames(
-          className,
-          bsPrefix,
-          active && 'active',
-          disabled && 'disabled',
-        )}
-      />
-    );
-  }
+function NavLink({
+  bsPrefix,
+  disabled,
+  className,
+  href,
+  eventKey,
+  onSelect,
+  innerRef,
+  ...props
+}) {
+  return (
+    <AbstractNavItem
+      {...props}
+      href={href}
+      ref={innerRef}
+      eventKey={eventKey}
+      as={SafeAnchor}
+      disabled={disabled}
+      onSelect={onSelect}
+      className={classNames(className, bsPrefix, disabled && 'disabled')}
+    />
+  );
 }
 
 NavLink.propTypes = propTypes;
 NavLink.defaultProps = defaultProps;
 
-export default mapContextToProps(
-  [SelectableContext, NavContext],
-  (
-    onSelect,
-    navContext,
-    { active, eventKey, href, role, tabIndex, onSelect: pSelect },
-  ) => {
-    let navItemKey = makeEventKey(eventKey, href);
-
-    const props = {
-      role,
-      active,
-      eventKey: navItemKey,
-      onSelect: chain(pSelect, onSelect),
-    };
-
-    if (navContext) {
-      if (!role && navContext.role === 'tablist') props.role = 'tab';
-
-      props['data-rb-event-key'] = navItemKey;
-      props.id = navContext.getControllerId(eventKey);
-      props['aria-controls'] = navContext.getControlledId(eventKey);
-      props.active =
-        active == null && navItemKey != null
-          ? makeEventKey(navContext.activeKey) === navItemKey
-          : active;
-    }
-
-    if (props.role === 'tab') {
-      props.tabIndex = props.active ? tabIndex : -1;
-      props['aria-selected'] = props.active;
-    }
-
-    return props;
-  },
-  createBootstrapComponent(NavLink, 'nav-link'),
-);
+export default createBootstrapComponent(NavLink, 'nav-link');

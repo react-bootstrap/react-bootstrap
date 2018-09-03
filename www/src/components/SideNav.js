@@ -133,7 +133,7 @@ function NavSection({ heading, location: { pathname }, items, path }) {
       </TocLink>
 
       {active && (
-        <Nav activeKey={pathname} className="d-block">
+        <Nav activeKey={pathname} onSelect={() => {}} className="d-block">
           {items.map(name => (
             <Nav.Item key={`${path}/${name}/`}>
               <TocSubLink href={`${path}/${name}/`}>

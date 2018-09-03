@@ -26,19 +26,19 @@ describe('<Nav>', () => {
       </Nav>,
     );
 
-    const items = wrapper.find('NavLink');
+    const items = wrapper.find('a.nav-link');
 
-    assert.ok(items.at(0).props().active);
-    assert.notOk(items.at(1).props().active);
+    assert.ok(items.at(0).is('.active'));
+    assert.notOk(items.at(1).is('.active'));
   });
 
-  it('Should adds style class', () => {
+  it('Should adds variant class', () => {
     mount(
       <Nav as="div" variant="tabs">
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
         <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
       </Nav>,
-    ).assertSingle('.nav.nav-tabs');
+    ).assertSingle('div.nav.nav-tabs');
   });
 
   it('Should adds justified class', () => {
@@ -47,7 +47,7 @@ describe('<Nav>', () => {
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
         <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
       </Nav>,
-    ).assertSingle('.nav.nav-justified');
+    ).assertSingle('div.nav.nav-justified');
   });
 
   it('Should adds fill class', () => {
@@ -56,7 +56,7 @@ describe('<Nav>', () => {
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
         <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
       </Nav>,
-    ).assertSingle('.nav.nav-fill');
+    ).assertSingle('div.nav.nav-fill');
   });
 
   it('Should be navbar aware', () => {
@@ -67,7 +67,7 @@ describe('<Nav>', () => {
           <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
         </Nav>
       </Navbar>,
-    ).assertSingle('.navbar-nav');
+    ).assertSingle('div.navbar-nav');
   });
 
   it('Should call on select when item is selected', done => {

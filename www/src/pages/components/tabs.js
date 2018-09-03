@@ -26,7 +26,7 @@ export default withLayout(function TabsSection({ data }) {
       <p>
         Create dynamic tabbed interfaces, as described in the{' '}
         <a href="https://www.w3.org/TR/wai-aria-practices/#tabpanel">
-          <abbr title="Web Accessibility Initiative">WAI</abbr> <ARIA />
+          <abbr title="Web Accessibility Initiative">WAI</abbr> <ARIA />{' '}
           Authoring Practices
         </a>. <code>Tabs</code> is a higher-level component for quickly creating
         a <code>Nav</code> matched with a set of <code>TabPane</code>s.

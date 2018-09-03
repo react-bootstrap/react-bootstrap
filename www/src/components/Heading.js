@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import { css } from 'css-literal-loader/styled';
 
@@ -31,10 +32,10 @@ class Heading extends React.Component {
   }
 
   render() {
-    const { h, id, children } = this.props;
+    const { h, id, children, className } = this.props;
     const H = `h${h}`;
     return (
-      <H id={id} className={styles.heading}>
+      <H id={id} className={classNames(className, styles.heading)}>
         <div className={styles.inner}>{children}</div>
       </H>
     );

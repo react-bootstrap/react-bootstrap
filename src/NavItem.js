@@ -19,7 +19,6 @@ class NavItem extends React.Component {
   };
 
   static defaultProps = {
-    role: 'presentaton',
     as: 'li',
   };
 
