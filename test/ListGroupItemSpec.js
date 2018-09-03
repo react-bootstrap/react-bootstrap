@@ -27,6 +27,7 @@ describe('<ListGroupItem>', () => {
   it('accepts as prop', () => {
     mount(<ListGroupItem as="span" />).assertSingle('span.list-group-item');
   });
+
   describe('actions', () => {
     it('renders a button', () => {
       mount(<ListGroupItem action />).assertSingle(
