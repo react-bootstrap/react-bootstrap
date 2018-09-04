@@ -7,6 +7,7 @@ class Example extends React.Component {
       show: false,
     };
   }
+
   render() {
     const { show, target } = this.state;
     return (

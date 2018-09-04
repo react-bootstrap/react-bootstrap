@@ -9,6 +9,7 @@ class Sonnet extends React.Component {
   }
 
   state = {};
+
   render() {
     const { sonnet } = this.state;
 

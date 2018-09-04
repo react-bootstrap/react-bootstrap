@@ -64,7 +64,7 @@ function FormLabel({
 
   if (column) return <Col {...props} className={classes} as="label" />;
 
-  // eslint-disable-next-line jsx-a11y/label-has-for
+  // eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control
   return <label {...props} ref={innerRef} className={classes} />;
 }
 

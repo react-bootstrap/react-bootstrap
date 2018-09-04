@@ -14,6 +14,7 @@ class Feedback extends React.Component {
     type: PropTypes.string.isRequired,
     as: elementType,
   };
+
   static defaultProps = {
     type: 'valid',
     as: 'div',

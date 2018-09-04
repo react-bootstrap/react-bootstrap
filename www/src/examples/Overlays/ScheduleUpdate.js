@@ -5,6 +5,7 @@ class UpdatingPopover extends React.Component {
       this.props.scheduleUpdate();
     }
   }
+
   render() {
     return <Popover {...this.props} />;
   }
@@ -25,10 +26,9 @@ class Example extends React.Component {
 
   componentDidMount() {
     this.timer = setInterval(() => {
-      this.setState({
-        content:
-          this.state.content === shortContent ? longContent : shortContent,
-      });
+      this.setState(state => ({
+        content: state.content === shortContent ? longContent : shortContent,
+      }));
     }, 3000);
   }
 

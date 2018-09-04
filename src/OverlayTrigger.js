@@ -110,14 +110,6 @@ class OverlayTrigger extends React.Component {
 
   getTarget = () => ReactDOM.findDOMNode(this.trigger.current);
 
-  hide() {
-    this.setState({ show: false });
-  }
-
-  show() {
-    this.setState({ show: true });
-  }
-
   handleShow = () => {
     clearTimeout(this._timeout);
     this._hoverState = 'show';
@@ -150,26 +142,6 @@ class OverlayTrigger extends React.Component {
     }, delay.hide);
   };
 
-  handleMouseOver = e => {
-    this.handleMouseOverOut(this.handleShow, e, 'fromElement');
-  };
-
-  handleMouseOut = e =>
-    this.handleMouseOverOut(this.handleHide, e, 'toElement');
-
-  // Simple implementation of mouseEnter and mouseLeave.
-  // React's built version is broken: https://github.com/facebook/react/issues/4251
-  // for cases when the trigger is disabled and mouseOut/Over can cause flicker
-  // moving from one child element to another.
-  handleMouseOverOut(handler, e, relatedNative) {
-    const target = e.currentTarget;
-    const related = e.relatedTarget || e.nativeEvent[relatedNative];
-
-    if ((!related || related !== target) && !contains(target, related)) {
-      handler(e);
-    }
-  }
-
   handleFocus = e => {
     const { onFocus } = this.getChildProps();
     this.handleShow(e);
@@ -190,6 +162,34 @@ class OverlayTrigger extends React.Component {
 
     if (onClick) onClick(e);
   };
+
+  handleMouseOver = e => {
+    this.handleMouseOverOut(this.handleShow, e, 'fromElement');
+  };
+
+  handleMouseOut = e =>
+    this.handleMouseOverOut(this.handleHide, e, 'toElement');
+
+  // Simple implementation of mouseEnter and mouseLeave.
+  // React's built version is broken: https://github.com/facebook/react/issues/4251
+  // for cases when the trigger is disabled and mouseOut/Over can cause flicker
+  // moving from one child element to another.
+  handleMouseOverOut(handler, e, relatedNative) {
+    const target = e.currentTarget;
+    const related = e.relatedTarget || e.nativeEvent[relatedNative];
+
+    if ((!related || related !== target) && !contains(target, related)) {
+      handler(e);
+    }
+  }
+
+  hide() {
+    this.setState({ show: false });
+  }
+
+  show() {
+    this.setState({ show: true });
+  }
 
   render() {
     const {

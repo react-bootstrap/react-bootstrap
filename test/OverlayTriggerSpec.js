@@ -18,7 +18,7 @@ describe('<OverlayTrigger>', () => {
   it('Should render OverlayTrigger element', () => {
     mount(
       <OverlayTrigger overlay={<Div>test</Div>}>
-        <button>button</button>
+        <button type="button">button</button>
       </OverlayTrigger>,
     ).assertSingle('button');
   });
@@ -28,7 +28,9 @@ describe('<OverlayTrigger>', () => {
 
     mount(
       <OverlayTrigger overlay={<Div>test</Div>} trigger="click">
-        <button onClick={callback}>button</button>
+        <button type="button" onClick={callback}>
+          button
+        </button>
       </OverlayTrigger>,
     )
       .find('button')
@@ -40,7 +42,7 @@ describe('<OverlayTrigger>', () => {
   it('Should show after click trigger', () => {
     const wrapper = mount(
       <OverlayTrigger trigger="click" overlay={<Div className="test" />}>
-        <button>button</button>
+        <button type="button">button</button>
       </OverlayTrigger>,
     );
 
@@ -54,7 +56,7 @@ describe('<OverlayTrigger>', () => {
   it('Should not set aria-describedby if the state is not show', () => {
     const wrapper = mount(
       <OverlayTrigger trigger="click" overlay={<Div />}>
-        <button>button</button>
+        <button type="button">button</button>
       </OverlayTrigger>,
     ).getDOMNode();
 
@@ -64,7 +66,7 @@ describe('<OverlayTrigger>', () => {
   it('Should set aria-describedby for tooltips if the state is show', done => {
     const wrapper = mount(
       <OverlayTrigger trigger="click" overlay={<Div />}>
-        <button>button</button>
+        <button type="button">button</button>
       </OverlayTrigger>,
     );
 
@@ -97,7 +99,9 @@ describe('<OverlayTrigger>', () => {
       mount(
         <div>
           <OverlayTrigger trigger="click" overlay={<Div>test</Div>}>
-            <button onClick={() => done()}>button</button>
+            <button type="button" onClick={() => done()}>
+              button
+            </button>
           </OverlayTrigger>
           <input id="target" />
         </div>,
@@ -113,7 +117,7 @@ describe('<OverlayTrigger>', () => {
         trigger="click"
         overlay={<Div className="test-overlay">test</Div>}
       >
-        <button>button</button>
+        <button type="button">button</button>
       </OverlayTrigger>,
     );
     wrapper.find('button').simulate('click');
@@ -143,7 +147,7 @@ describe('<OverlayTrigger>', () => {
           wrapper.find('button').simulate('click');
         }}
       >
-        <button>button</button>
+        <button type="button">button</button>
       </OverlayTrigger>,
     );
 
@@ -159,6 +163,7 @@ describe('<OverlayTrigger>', () => {
 
     class ContextReader extends React.Component {
       static contextTypes = contextTypes;
+
       render() {
         contextSpy(this.context.key);
         return <div />;
@@ -167,6 +172,7 @@ describe('<OverlayTrigger>', () => {
 
     class ContextHolder extends React.Component {
       static childContextTypes = contextTypes;
+
       getChildContext() {
         return { key: 'value' };
       }
@@ -174,7 +180,7 @@ describe('<OverlayTrigger>', () => {
       render() {
         return (
           <OverlayTrigger trigger="click" overlay={<ContextReader />}>
-            <button>button</button>
+            <button type="button">button</button>
           </OverlayTrigger>
         );
       }
@@ -202,7 +208,7 @@ describe('<OverlayTrigger>', () => {
         it('Should handle trigger without warnings', () => {
           mount(
             <OverlayTrigger trigger="click" overlay={testCase.overlay}>
-              <button>button</button>
+              <button type="button">button</button>
             </OverlayTrigger>,
           )
             .find('button')
@@ -233,7 +239,7 @@ describe('<OverlayTrigger>', () => {
               trigger="click"
               rootClose={testCase.rootClose}
             >
-              <button>button</button>
+              <button type="button">button</button>
             </OverlayTrigger>,
           );
           wrapper.find('button').simulate('click');
@@ -255,7 +261,7 @@ describe('<OverlayTrigger>', () => {
 
         const wrapper = mount(
           <OverlayTrigger overlay={<Div>test</Div>} trigger="click" rootClose>
-            <button>button</button>
+            <button type="button">button</button>
           </OverlayTrigger>,
           { attachTo },
         );
@@ -309,7 +315,7 @@ describe('<OverlayTrigger>', () => {
             trigger="click"
             rootClose
           >
-            <button>button</button>
+            <button type="button">button</button>
           </OverlayTrigger>,
         );
 

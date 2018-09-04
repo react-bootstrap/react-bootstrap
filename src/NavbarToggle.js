@@ -37,6 +37,7 @@ class NavbarToggle extends React.Component {
     if (onClick) onClick(e);
     if (onToggle) onToggle();
   };
+
   render() {
     const {
       bsPrefix,

@@ -5,6 +5,7 @@ class Example extends React.Component {
     this.attachRef = target => this.setState({ target });
     this.state = { show: false };
   }
+
   render() {
     const { show, target } = this.state;
     return (

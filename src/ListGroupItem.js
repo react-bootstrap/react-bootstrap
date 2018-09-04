@@ -59,6 +59,7 @@ class ListGroupItem extends React.Component {
 
     if (onClick) onClick(event);
   };
+
   render() {
     const {
       bsPrefix,

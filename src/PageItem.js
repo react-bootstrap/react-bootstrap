@@ -52,6 +52,7 @@ PageItem.defaultProps = defaultProps;
 function createButton(name, defaultValue, label = name) {
   return class extends React.Component {
     static displayName = name;
+
     render() {
       const { children, ...props } = this.props;
       delete props.active;

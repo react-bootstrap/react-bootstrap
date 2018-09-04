@@ -13,7 +13,9 @@ export default function createWithBsPrefix(
   return createBootstrapComponent(
     class extends React.Component {
       static displayName = displayName;
+
       static propTypes = { bsPrefix: () => {}, as: () => {} };
+
       render() {
         const {
           className,

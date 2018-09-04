@@ -138,12 +138,6 @@ class Collapse extends React.Component {
       : this.props.dimension;
   }
 
-  // for testing
-  _getScrollDimensionValue(elem, dimension) {
-    const scroll = `scroll${dimension[0].toUpperCase()}${dimension.slice(1)}`;
-    return `${elem[scroll]}px`;
-  }
-
   /* -- Expanding -- */
   handleEnter = elem => {
     elem.style[this.getDimension()] = '0';
@@ -171,6 +165,12 @@ class Collapse extends React.Component {
   handleExiting = elem => {
     elem.style[this.getDimension()] = '0';
   };
+
+  // for testing
+  _getScrollDimensionValue(elem, dimension) {
+    const scroll = `scroll${dimension[0].toUpperCase()}${dimension.slice(1)}`;
+    return `${elem[scroll]}px`;
+  }
 
   render() {
     const {
