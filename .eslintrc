@@ -44,7 +44,9 @@
     "react/no-array-index-key": "off",
     "react/no-string-refs": "off",
     "react/prefer-stateless-function": "off",
+    "react/destructuring-assignment": "off",
     "react/default-props-match-prop-types": "off",
+    "react/jsx-one-expression-per-line": "off",
     "import/no-named-as-default-member": "off",
     "react/jsx-filename-extension": [
       "error",

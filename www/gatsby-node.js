@@ -37,8 +37,12 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
 };
 
 exports.onCreateBabelConfig = ({ actions }) => {
-  actions.setBabelPreset({
-    name: `@babel/preset-flow`,
+  actions.setBabelOptions({
+    options: {
+      babelrc: true,
+      envName: 'docs',
+      root: path.resolve(__dirname, '../'),
+    },
   });
 };
 
