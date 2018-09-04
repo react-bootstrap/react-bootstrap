@@ -2,7 +2,6 @@ import React from 'react';
 import Alert from 'react-bootstrap/lib/Alert';
 import Badge from 'react-bootstrap/lib/Badge';
 import Container from 'react-bootstrap/lib/Container';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
 
 import withLayout from '../withLayout';
 
@@ -23,11 +22,11 @@ export default withLayout(
           <Container>
             <Alert bsStyle="warning">
               <p>
-                <Glyphicon glyph="bullhorn" /> We are actively working to reach
-                a 1.0.0 release, and we would love your help to get there.
+                We are actively working to reach a 1.0.0 release, and we would
+                love your help to get there.
               </p>
               <p>
-                <Glyphicon glyph="check" /> Check out the{' '}
+                Check out the{' '}
                 <a href="https://github.com/react-bootstrap/react-bootstrap/wiki#100-roadmap">
                   1.0.0 roadmap
                 </a>{' '}
@@ -38,7 +37,7 @@ export default withLayout(
                 to see where you can help out.
               </p>
               <p>
-                <Glyphicon glyph="sunglasses" /> A great place to start is any{' '}
+                A great place to start is any{' '}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -49,31 +48,30 @@ export default withLayout(
                 with a <Badge bsStyle="success">help-wanted</Badge> label.
               </p>
               <p>
-                <Glyphicon glyph="ok" /> We are open to pull requests that
-                address bugs, improve documentation, enhance accessibility, add
-                test coverage, or bring us closer to feature parity with{' '}
+                We are open to pull requests that address bugs, improve
+                documentation, enhance accessibility, add test coverage, or
+                bring us closer to feature parity with{' '}
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
                   href="http://getbootstrap.com/"
                 >
                   Bootstrap
-                </a>.
+                </a>
+                .
               </p>
               <p>
-                <Glyphicon glyph="user" /> We actively seek to invite frequent
-                pull request authors to join the organization.{' '}
-                <Glyphicon glyph="thumbs-up" />
+                We actively seek to invite frequent pull request authors to join
+                the organization.{' '}
               </p>
             </Alert>
             <Alert bsStyle="danger">
               <p>
-                <Glyphicon glyph="warning-sign" /> The project is under active
-                development, and APIs will change.{' '}
+                The project is under active development, and APIs will change.{' '}
               </p>
               <p>
-                <Glyphicon glyph="bullhorn" /> Prior to the 1.0.0 release,
-                breaking changes should result in a minor version bump.
+                Prior to the 1.0.0 release, breaking changes should result in a
+                minor version bump.
               </p>
             </Alert>
           </Container>

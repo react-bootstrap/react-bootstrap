@@ -117,6 +117,7 @@ class TabContainer extends React.Component {
   }
 
   getControlledId = key => this.getKey(key, 'tabpane');
+
   getControllerId = key => this.getKey(key, 'tab');
 
   render() {

@@ -57,7 +57,7 @@ module.exports = {
               if (defaultDescriptions[name]) {
                 let desc = docs.getPropDescriptor(name);
                 desc.description =
-                  desc.description || defaultDescriptions[name];
+                  desc.description.trim() || defaultDescriptions[name];
               }
             });
           },

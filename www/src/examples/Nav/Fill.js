@@ -1,4 +1,4 @@
-<Nav fill variant="tabs" activeKey="/home">
+<Nav fill variant="tabs" defaultActiveKey="/home">
   <Nav.Item>
     <Nav.Link href="/home">Active</Nav.Link>
   </Nav.Item>

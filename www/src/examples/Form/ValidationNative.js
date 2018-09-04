@@ -4,6 +4,7 @@ class FormExample extends React.Component {
 
     this.state = { validated: false };
   }
+
   handleSubmit(event) {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {

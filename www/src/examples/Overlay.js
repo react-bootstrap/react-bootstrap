@@ -15,7 +15,7 @@ class Example extends React.Component {
   }
 
   handleToggle() {
-    this.setState({ show: !this.state.show });
+    this.setState(s => ({ show: !s.show }));
   }
 
   render() {

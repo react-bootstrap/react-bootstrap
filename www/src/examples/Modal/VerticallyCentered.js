@@ -34,6 +34,7 @@ class App extends React.Component {
 
     this.state = { modalShow: false };
   }
+
   render() {
     let modalClose = () => this.setState({ modalShow: false });
 

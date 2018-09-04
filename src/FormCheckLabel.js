@@ -28,7 +28,7 @@ function FormCheckLabel({ bsPrefix, className, innerRef, htmlFor, ...props }) {
   return (
     <FormContext.Consumer>
       {({ controlId }) => (
-        <label
+        <label // eslint-disable-line jsx-a11y/label-has-associated-control
           {...props}
           ref={innerRef}
           htmlFor={htmlFor || controlId}

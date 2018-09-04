@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import elementType from 'prop-types-extra/lib/elementType';
 import React from 'react';
 
 import SafeAnchor from './SafeAnchor';
@@ -45,12 +46,16 @@ const propTypes = {
    */
   eventKey: PropTypes.any,
 
+  /** @default 'a' */
+  as: elementType,
+
   /** @private */
   onClick: PropTypes.func,
 };
 
 const defaultProps = {
   disabled: false,
+  as: SafeAnchor,
 };
 
 function NavLink({
@@ -61,6 +66,7 @@ function NavLink({
   eventKey,
   onSelect,
   innerRef,
+  as,
   ...props
 }) {
   return (
@@ -69,7 +75,7 @@ function NavLink({
       href={href}
       ref={innerRef}
       eventKey={eventKey}
-      as={SafeAnchor}
+      as={as}
       disabled={disabled}
       onSelect={onSelect}
       className={classNames(className, bsPrefix, disabled && 'disabled')}

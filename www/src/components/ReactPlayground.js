@@ -211,6 +211,11 @@ const Example = withLive(
       if (prevProps.live.element !== this.props.live.element) this.runHolder();
     };
 
+    // prevent links in examples from navigating
+    handleClick = e => {
+      if (e.target.tagName === 'A') e.preventDefault();
+    };
+
     runHolder() {
       if (!this.hjs || !this.example.current) return;
       this.hjs.run({
@@ -218,10 +223,6 @@ const Example = withLive(
         images: qsa(this.example.current, 'img'),
       });
     }
-    // prevent links in examples from navigating
-    handleClick = e => {
-      if (e.target.tagName === 'A') e.preventDefault();
-    };
 
     render() {
       const { showCode, className } = this.props;

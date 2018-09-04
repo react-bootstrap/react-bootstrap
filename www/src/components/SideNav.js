@@ -151,7 +151,7 @@ class SideNav extends React.Component {
   state = { collapsed: false };
 
   handleCollapse = () => {
-    this.setState({ collapsed: !this.state.collapsed });
+    this.setState(s => ({ collapsed: !s.collapsed }));
   };
 
   render() {

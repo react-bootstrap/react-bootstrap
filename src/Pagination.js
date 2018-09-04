@@ -25,6 +25,7 @@ class Pagination extends React.Component {
      */
     size: PropTypes.string,
   };
+
   render() {
     const { bsPrefix, className, children, size, ...props } = this.props;
 

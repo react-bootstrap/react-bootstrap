@@ -218,10 +218,7 @@ class Carousel extends React.Component {
     clearTimeout(this.timeout);
     this.isUnmounted = true;
   }
-  safeSetState(state, cb) {
-    if (this.isUnmounted) return;
-    this.setState(state, () => !this.isUnmounted && cb());
-  }
+
   handleSlideEnd = () => {
     const pendingIndex = this._pendingIndex;
     this._isSliding = false;
@@ -297,6 +294,11 @@ class Carousel extends React.Component {
 
     this.select(index, e, 'prev');
   };
+
+  safeSetState(state, cb) {
+    if (this.isUnmounted) return;
+    this.setState(state, () => !this.isUnmounted && cb());
+  }
 
   // This might be a public API.
   pause() {

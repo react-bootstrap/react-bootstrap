@@ -1,6 +1,8 @@
 import React from 'react';
 
 class PlaceholderImage extends React.Component {
+  image = React.createRef();
+
   async componentDidMount() {
     const { default: holderjs } = await import('holderjs');
 
@@ -13,8 +15,6 @@ class PlaceholderImage extends React.Component {
     });
     holderjs.setResizeUpdate(this.image.current, false);
   }
-
-  image = React.createRef();
 
   render() {
     const { width, height, text, bg, fg, ...rest } = this.props;

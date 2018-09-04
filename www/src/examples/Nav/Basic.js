@@ -1,6 +1,5 @@
 <Nav
   activeKey="/home"
-  role="tablist"
   onSelect={selectedKey => alert(`selected ${selectedKey}`)}
 >
   <Nav.Item>

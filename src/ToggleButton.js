@@ -44,9 +44,11 @@ class ToggleButton extends React.Component {
   handleFocus = e => {
     if (e.target.tagName === 'INPUT') this.setState({ focused: true });
   };
+
   handleBlur = e => {
     if (e.target.tagName === 'INPUT') this.setState({ focused: false });
   };
+
   render() {
     const {
       children,

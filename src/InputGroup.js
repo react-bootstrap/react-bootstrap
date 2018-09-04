@@ -28,9 +28,11 @@ class InputGroup extends React.Component {
 
     as: elementType,
   };
+
   static defaultProps = {
     as: 'div',
   };
+
   render() {
     const { bsPrefix, size, className, as: Component, ...props } = this.props;
 

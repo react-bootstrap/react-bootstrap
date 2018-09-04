@@ -26,6 +26,7 @@ class Container extends React.Component {
     as: 'div',
     fluid: false,
   };
+
   render() {
     const { bsPrefix, fluid, as: Component, className, ...props } = this.props;
     return (

@@ -10,6 +10,7 @@ class Tab extends React.Component {
   static propTypes = {
     title: PropTypes.node.isRequired,
   };
+
   render() {
     throw new Error(
       'ReactBootstrap: The `Tab` component is not meant to be rendered! ' +

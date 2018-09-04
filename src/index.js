@@ -27,7 +27,6 @@ export FormGroup from './FormGroup';
 export FormLabel from './FormLabel';
 export FormText from './FormText';
 
-export Glyphicon from './Glyphicon';
 export Container from './Container';
 export Image from './Image';
 export Figure from './Figure';

@@ -29,7 +29,7 @@ const StyledNavbar = withProps({
   `,
 );
 const SkipToContentLink = styled('a')`
-  composes: sr-only sr-only-focusable bg-primary text-white p-4 from global;
+  composes: sr-only sr-only-focusable bg-primary text-white px-4 py-2 mr-2 from global;
 `;
 
 const StyledNavLink = styled(Nav.Link)`
