@@ -1,3 +1,4 @@
+import { graphql } from 'gatsby';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -217,10 +218,7 @@ export const metadataFragment = graphql`
     }
     props {
       name
-      doclets {
-        type
-        controllable
-      }
+      doclets
       defaultValue {
         value
         computed

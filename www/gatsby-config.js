@@ -9,7 +9,7 @@ const nodeModules = `${path.sep}node_modules${path.sep}`;
 
 // eslint-disable-next-line
 require('@babel/register')({
-  ...require('../.babelrc.js'),
+  ...require('../.babelrc.js')({ env: () => 'build' }),
   only: [
     // Only the src directory
     new RegExp(`^${escapeRegExp(path.join(root, '/src/'))}`, 'i')
@@ -32,6 +32,7 @@ module.exports = {
     ]
   },
   plugins: [
+    'gatsby-plugin-layout',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
