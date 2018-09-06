@@ -62,9 +62,6 @@
           "children",
           "className",
           "style",
-          "bsStyle",
-          "bsClass",
-          "bsSize"
         ]
       }
     ],

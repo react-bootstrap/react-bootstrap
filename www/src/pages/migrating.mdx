@@ -1,0 +1,117 @@
+# Migrating to v1
+
+React Bootstrap v1 adds full compatibility with Bootstrap 4. Because bootstrap 4 is a major rewrite of the project there
+are significant breaking changes from the pre `v1` react-bootstrap.
+
+## Versioning
+
+Because there is still a lot of project depending on bootstrap 3 and
+react-bootstrap's support, we will continue to provide general maintainance
+for the bootstrap 3 components for a while. `react-bootstrap` package versions will be as follows:
+
+ - Bootstrap 3 support will continue in react-bootstrap versions < `v1.0.0`
+ - Bootstrap 4 support will be in react-bootstrap versions >= `v1.0.0`
+
+We are **not** committing to keeping breaking changes in lockstep with bootstraps major releases,
+there may be a react-bootstrap v2 targeting Bootstrap v4 depending on what's best for the project.
+
+## Summary of breaking changes from v0.32.0
+
+Below is a _rough_ account of the breaking API changes as well as the minimal change to migrate
+
+- `bsStyle` -> `variant`
+- `bsClass` -> `bsPrefix`
+- `bsRole` has been removed from all components. Components now communicate
+via context to allow intermediate nesting of child components
+- `componentClass` -> `as`
+
+### Grid
+
+- renamed to Container
+
+#### Col
+
+- removed visibility props
+- consolidated col `span`, `offset`, and `order` into an object value prop per breakpoint.
+
+
+### Navbar
+
+- removed `Navbar.Header`
+- removed `Navbar.Form`
+- removed `fluid`, use your own `Container` component in.
+- `inverse` removed and replaced with `variant="dark"`
+- positioning props have been consolidated into `fixed={top|bottom}` and `sticky={top|bottom}`, staticTop has been removed
+
+#### NavbarHeader
+
+- removed, not present in v4
+
+#### NavbarToggle
+
+- name changed to `NavbarToggler`
+
+#### NavbarBrand
+
+- Renders a `<a>` when an `href` is provided
+- The presence of `children` does not skip the wrapping `span`, use `as` along with `children` for custom rendering
+
+### Nav
+
+- `activeHref` is removed (only activeKey now)
+- `bsStyle` renamed to `variant`
+- NavLink hrefs will be used as `eventKey`s when `eventKey` is absent
+- Local `onSelect` handlers are ignored when in the context of a TabContainer or Navbar (MAYBE ADD BACK?)
+
+#### Nav.Item
+
+- Renders _only_ the outer "item" element, use inconjunction with the new `NavLink` component
+- default element changed to `<div>` from a `<li>`
+- `active` prop removed and moved to `NavLink`
+
+
+### InputGroup
+
+- removed InputGroupButton, and InputGroupAddon
+- added InputGroup.Prepend, InputGroup.Append, InputGroup.Text, InputGroup.Checkbox, InputGroup.Radio
+
+### Badge & Label
+
+- removed `Label`, the `Badge` component covers both
+- `bsStyle` renamed to `variant`
+
+### Panel
+
+- removed, replaced with Card components
+
+### Dropdown
+
+- Removed the `disabled` prop on Dropdown, pass it directly to Dropdown.Toggle
+- Removed bsRole, use function children to render custom Toggles or Menus
+- Removed SplitButton.toggle (replaced with a `split` prop on the basic Toggle)
+- `noCaret` is removed because it's not optional with the styles anymore
+- bsPrefixes are not passed from the parent Dropdown anymore
+- onSelect behavior is now passed to Menu and Toggle via the Context api
+- DropdownMenu is not rendered until opened
+- `divider` has been split out into `Dropdown.Divider`
+- `header` has been split out into `Dropdown.Header`
+
+#### DropdownButton
+
+- Extra props are passed to the underlying Dropdown component, not the Toggle.
+
+#### SplitButton
+
+- Extra props are passed to the underlying Dropdown component, not the Toggle.
+
+### NavButton
+
+- Extra props are passed to the underlying Dropdown component, not the Toggle.
+
+#### MenuItem
+
+- renamed from to `DropdownItem`
+
+### Alert
+
+- `onDismiss` renamed to `onClose`

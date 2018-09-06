@@ -193,7 +193,7 @@ const Example = withLive(
     constructor() {
       super();
 
-      this.example = React.createRef();
+      this.example = null;
 
       import('holderjs').then(({ default: hjs }) => {
         this.hjs = hjs;
@@ -216,11 +216,17 @@ const Example = withLive(
       if (e.target.tagName === 'A') e.preventDefault();
     };
 
+    attachRef = ref => {
+      this.example = ref;
+      this.runHolder();
+    };
+
     runHolder() {
-      if (!this.hjs || !this.example.current) return;
+      if (!this.hjs || !this.example) return;
+
       this.hjs.run({
         theme: 'gray',
-        images: qsa(this.example.current, 'img'),
+        images: qsa(this.example, 'img'),
       });
     }
 
@@ -230,7 +236,7 @@ const Example = withLive(
         <StyledExample
           role="region"
           aria-label="Code Example"
-          ref={this.example}
+          ref={this.attachRef}
           showCode={showCode}
           className={className}
           onClick={this.handleClick}

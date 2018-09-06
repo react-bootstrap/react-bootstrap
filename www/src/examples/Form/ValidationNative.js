@@ -88,7 +88,7 @@ class FormExample extends React.Component {
           <Form.Check
             required
             label="Agree to terms and conditions"
-            invalidFeedback="You must agree before submitting."
+            feedback="You must agree before submitting."
           />
         </Form.Group>
         <Button type="submit">Submit form</Button>

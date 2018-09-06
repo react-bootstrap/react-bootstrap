@@ -1,12 +1,12 @@
 <div>
-  <InputGroup size="sm" class="mb-3">
+  <InputGroup size="sm" className="mb-3">
     <InputGroup.Prepend>
       <InputGroup.Text id="inputGroup-sizing-sm">Small</InputGroup.Text>
     </InputGroup.Prepend>
     <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
   </InputGroup>
   <br />
-  <InputGroup class="mb-3">
+  <InputGroup className="mb-3">
     <InputGroup.Prepend>
       <InputGroup.Text id="inputGroup-sizing-default">Default</InputGroup.Text>
     </InputGroup.Prepend>

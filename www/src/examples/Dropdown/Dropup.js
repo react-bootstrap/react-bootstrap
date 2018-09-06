@@ -1,4 +1,4 @@
-<div>
+<>
   <ButtonToolbar>
     <SplitButton title="Dropup" dropup id="dropdown-button-dropup">
       <Dropdown.Item eventKey="1">Action</Dropdown.Item>
@@ -23,4 +23,4 @@
       <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
     </SplitButton>
   </ButtonToolbar>
-</div>;
+</>;

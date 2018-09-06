@@ -49,7 +49,7 @@ class DropdownToggle extends React.Component {
       ...props
     } = this.props;
 
-    // This intentionally forwards bsSize and bsStyle (if set) to the
+    // This intentionally forwards size and variant (if set) to the
     // underlying component, to allow it to render size and style variants.
     return (
       <BaseDropdownToggle>

@@ -1,6 +1,7 @@
-<Dropdown as={ButtonGroup} id="dropdown-split-basic">
+<Dropdown as={ButtonGroup}>
   <Button variant="success">Split Button</Button>
-  <Dropdown.Toggle variant="success" split />
+
+  <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
 
   <Dropdown.Menu>
     <Dropdown.Item hred="#/action-1">Action</Dropdown.Item>

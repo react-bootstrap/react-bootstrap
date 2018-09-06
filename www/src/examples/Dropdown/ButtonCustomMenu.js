@@ -72,8 +72,10 @@ class CustomMenu extends React.Component {
 }
 
 render(
-  <Dropdown id="dropdown-custom-menu">
-    <Dropdown.Toggle as={CustomToggle}>Custom toggle</Dropdown.Toggle>
+  <Dropdown>
+    <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+      Custom toggle
+    </Dropdown.Toggle>
 
     <Dropdown.Menu as={CustomMenu}>
       <Dropdown.Item eventKey="1">Red</Dropdown.Item>

@@ -27,7 +27,6 @@
     "gatsby-source-filesystem": "2.0.1-rc.1",
     "gatsby-transformer-react-docgen": "^2.1.1-rc.1",
     "gatsby-transformer-remark": "^2.1.1-rc.1",
-    "graphql": "^0.13.2",
     "holderjs": "^2.9.4",
     "import-sort-cli": "^4.2.0",
     "import-sort-parser-4catalyzer": "^4.0.1",
@@ -49,7 +48,7 @@
     "yup": "^0.24.1"
   },
   "resolutions": {
-    "react-docgen": "3.0.0-rc.0"
+    "react-docgen": "3.0.0-rc.1"
   },
   "importSort": {
     ".js": {
