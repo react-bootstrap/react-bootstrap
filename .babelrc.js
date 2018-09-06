@@ -40,7 +40,10 @@ module.exports = api => {
       ['@babel/plugin-proposal-class-properties', { loose: true }],
       '@babel/plugin-proposal-export-default-from',
       '@babel/plugin-proposal-export-namespace-from',
-      ['@babel/plugin-transform-runtime', { useESModules: !modules }],
+      [
+        '@babel/plugin-transform-runtime',
+        { useESModules: !modules, corejs: 2 }
+      ],
       'babel-plugin-dev-expression',
       modules && 'babel-plugin-add-module-exports',
       api.env() === 'test' && 'babel-plugin-istanbul'
