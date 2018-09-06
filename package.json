@@ -114,7 +114,7 @@
     "webpack": "^4.4.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0",
+    "@babel/runtime-corejs2": "^7.0.0",
     "classnames": "^2.2.5",
     "dom-helpers": "^3.2.0",
     "invariant": "^2.2.4",
