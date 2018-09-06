@@ -3,6 +3,7 @@ module.exports = api => {
   let modules = true;
 
   switch (api.env()) {
+    case 'docs':
     case 'test':
       dev = true;
       modules = false;

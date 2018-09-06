@@ -1,11 +1,12 @@
 const path = require('path');
 
-exports.modifyWebpackConfig = function modifyWebpackConfig({
+exports.onCreateWebpackConfig = function onCreateWebpackConfig({
   actions,
   plugins,
   loaders
 }) {
   actions.setWebpackConfig({
+    devtool: 'cheap-inline-module-source-map',
     module: {
       rules: [
         {
@@ -28,19 +29,11 @@ exports.modifyWebpackConfig = function modifyWebpackConfig({
 };
 
 exports.onCreateBabelConfig = ({ actions }) => {
-  actions.setBabelPreset({
-    name: `@babel/preset-flow`
+  actions.setBabelOptions({
+    options: {
+      babelrc: true,
+      envName: 'docs',
+      root: path.resolve(__dirname, '../')
+    }
   });
-};
-
-exports.onCreatePage = ({ page }) => {
-  if (page.path.startsWith('/getting-started')) {
-    page.layout = 'getting-started';
-  } else if (page.path.startsWith('/layout')) {
-    page.layout = 'layout';
-  } else if (page.path.startsWith('/components')) {
-    page.layout = 'components';
-  } else if (page.path.startsWith('/utilities')) {
-    page.layout = 'utilities';
-  }
 };

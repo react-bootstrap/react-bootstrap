@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint-config-airbnb", "prettier"],
+  "extends": ["eslint-config-airbnb", "prettier", "prettier/react"],
   "env": {
     "browser": true
   },
@@ -100,28 +100,6 @@
         "jsx-a11y/tabindex-no-positive": "off",
         "jsx-a11y/no-static-element-interactions": "off",
         "import/first": "off"
-      }
-    },
-    {
-      "files": ["www/src/**/*"],
-      "globals": {
-        "graphql": false
-      },
-      "rules": {
-        "global-require": "off",
-        "no-console": "off",
-        "react/no-unescaped-entities": "off",
-        "react/prop-types": "off",
-        "import/no-webpack-loader-syntax": "off"
-      },
-      "settings": {
-        "import/core-modules": "react-bootstrap"
-      }
-    },
-    {
-      "files": ["www/src/examples/*"],
-      "rules": {
-        "comma-dangle": "off"
       }
     }
   ]
