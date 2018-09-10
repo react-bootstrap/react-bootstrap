@@ -6,7 +6,7 @@
   </ButtonGroup>
   <ButtonGroup toggle className="mt-3">
     <ToggleButton type="radio" name="radio" defaultChecked value="1">
-      > Active
+      Active
     </ToggleButton>
     <ToggleButton type="radio" name="radio" value="2">
       Radio

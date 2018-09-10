@@ -1,5 +1,6 @@
 const path = require('path');
 const remarkSlug = require('remark-slug');
+const { cleanDoclets } = require('gatsby-transformer-react-docgen/Doclets');
 const defaultDescriptions = require('./src/defaultPropDescriptions');
 
 module.exports = {
@@ -36,9 +37,11 @@ module.exports = {
           function defaultDescriptionsHandler(docs) {
             docs._props.forEach((_, name) => {
               if (defaultDescriptions[name]) {
-                let desc = docs.getPropDescriptor(name);
-                desc.description =
-                  desc.description.trim() || defaultDescriptions[name];
+                let prop = docs.getPropDescriptor(name);
+                let dflt = defaultDescriptions[name];
+
+                if (dflt && !cleanDoclets(prop.description))
+                  prop.description = `${dflt}\n${prop.description}`;
               }
             });
           },

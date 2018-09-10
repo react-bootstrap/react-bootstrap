@@ -75,6 +75,7 @@ class Button extends React.Component {
       block,
       type,
       as,
+      innerRef,
       ...props
     } = this.props;
 
@@ -92,14 +93,20 @@ class Button extends React.Component {
         <SafeAnchor
           {...props}
           as={as}
+          innerRef={innerRef}
           className={classNames(classes, props.disabled && 'disabled')}
         />
       );
     }
 
     const Component = as || 'button';
+    if (innerRef) props.ref = innerRef;
+
     return <Component {...props} type={type} className={classes} />;
   }
 }
 
-export default createBootstrapComponent(Button, 'btn');
+export default createBootstrapComponent(Button, {
+  prefix: 'btn',
+  forwardRefAs: 'innerRef',
+});

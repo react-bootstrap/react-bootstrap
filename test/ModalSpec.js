@@ -12,13 +12,14 @@ describe('<Modal>', () => {
 
   it('Should render the modal content', () => {
     const noOp = () => {};
-    const instance = mount(
+    mount(
       <Modal show onHide={noOp} animation={false}>
         <strong>Message</strong>
       </Modal>,
-    ).instance();
-
-    assert.ok(instance._modal.dialog.querySelector('strong'));
+    )
+      .find('strong')
+      .text()
+      .should.equal('Message');
   });
 
   it('Should close the modal when the modal dialog is clicked', done => {
