@@ -1,16 +1,31 @@
 import React from 'react';
+import { styled } from 'css-literal-loader/styled';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import Tooltip from 'react-bootstrap/lib/Tooltip';
+
 import { version } from '../../../package.json';
+
+const Link = styled('a')`
+  font-size: 1rem;
+  padding: 0 0.5rem;
+`;
 
 export default props => {
   const { component } = props;
   const linkToComponentOnGitHub = `//github.com/react-bootstrap/react-bootstrap/tree/v${version}/src/${component}.js`;
+
   return (
-    <a
-      className="link-to-source"
-      href={linkToComponentOnGitHub}
-      alt={`View source code for ${component}`}
+    <OverlayTrigger
+      overlay={
+        <Tooltip id={`view-${component}-source-tooltip`}>
+          View source file
+        </Tooltip>
+      }
     >
-      [source]
-    </a>
+      <Link href={linkToComponentOnGitHub}>
+        <i className="fas fa-code" />
+        <span className="sr-only">view source file</span>
+      </Link>
+    </OverlayTrigger>
   );
 };

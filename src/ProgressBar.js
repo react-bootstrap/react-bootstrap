@@ -2,14 +2,8 @@ import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  bsClass as setBsClass,
-  bsStyles,
-  getClassSet,
-  prefix,
-  splitBsProps
-} from './utils/bootstrapUtils';
-import { State } from './utils/StyleConfig';
+import { createBootstrapComponent } from './ThemeProvider';
+
 import ValidComponentChildren from './utils/ValidComponentChildren';
 
 const ROUND_PRECISION = 1000;
@@ -36,7 +30,7 @@ function onlyProgressBar(props, propName, componentName) {
      *
      * see https://github.com/gaearon/react-hot-loader#checking-element-types
      */
-    const element = <ProgressBar />;
+    const element = <DecoratedProgressBar />;
     if (child.type === element.type) return;
 
     const childIdentifier = React.isValidElement(child)
@@ -44,7 +38,7 @@ function onlyProgressBar(props, propName, componentName) {
       : child;
     error = new Error(
       `Children of ${componentName} can contain only ProgressBar ` +
-        `components. Found ${childIdentifier}.`
+        `components. Found ${childIdentifier}.`,
     );
   });
 
@@ -52,28 +46,73 @@ function onlyProgressBar(props, propName, componentName) {
 }
 
 const propTypes = {
+  /**
+   * Minimum value progress can begin from
+   */
   min: PropTypes.number,
+
+  /**
+   * Current value of progress
+   */
   now: PropTypes.number,
+
+  /**
+   * Maximum value progress can reach
+   */
   max: PropTypes.number,
+
+  /**
+   * Show label that represents visual percentage.
+   * EG. 60%
+   */
   label: PropTypes.node,
+
+  /**
+   * Hide's the label visually.
+   */
   srOnly: PropTypes.bool,
+
+  /**
+   * Uses a gradient to create a striped effect.
+   */
   striped: PropTypes.bool,
-  active: PropTypes.bool,
+
+  /**
+   * Animate's the stripes from right to left
+   */
+  animated: PropTypes.bool,
+
+  /**
+   * @private
+   * @default 'progress-bar'
+   */
+  bsPrefix: PropTypes.string,
+
+  /**
+   * Sets the background class of the progress bar.
+   *
+   * @type ('success'|'danger'|'warning'|'info')
+   */
+  variant: PropTypes.string,
+
+  /**
+   * Child elements (only allows elements of type <ProgressBar />)
+   */
   children: onlyProgressBar,
 
   /**
    * @private
    */
-  isChild: PropTypes.bool
+  isChild: PropTypes.bool,
 };
 
 const defaultProps = {
   min: 0,
   max: 100,
-  active: false,
+  animated: false,
   isChild: false,
   srOnly: false,
-  striped: false
+  striped: false,
 };
 
 function getPercentage(now, min, max) {
@@ -89,24 +128,22 @@ class ProgressBar extends React.Component {
     label,
     srOnly,
     striped,
-    active,
+    animated,
     className,
     style,
+    variant,
+    bsPrefix,
     ...props
   }) {
-    const [bsProps, elementProps] = splitBsProps(props);
-
-    const classes = {
-      ...getClassSet(bsProps),
-      active,
-      [prefix(bsProps, 'striped')]: active || striped
-    };
-
     return (
       <div
-        {...elementProps}
+        {...props}
         role="progressbar"
-        className={classNames(className, classes)}
+        className={classNames(className, `${bsPrefix}-bar`, {
+          [`bg-${variant}`]: variant,
+          [`${bsPrefix}-bar-animated`]: animated,
+          [`${bsPrefix}-bar-striped`]: animated || striped,
+        })}
         style={{ width: `${getPercentage(now, min, max)}%`, ...style }}
         aria-valuenow={now}
         aria-valuemin={min}
@@ -131,19 +168,19 @@ class ProgressBar extends React.Component {
       label,
       srOnly,
       striped,
-      active,
-      bsClass,
-      bsStyle,
+      animated,
+      bsPrefix,
+      variant,
       className,
       children,
       ...wrapperProps
     } = props;
 
     return (
-      <div {...wrapperProps} className={classNames(className, 'progress')}>
+      <div {...wrapperProps} className={classNames(className, bsPrefix)}>
         {children
           ? ValidComponentChildren.map(children, child =>
-              cloneElement(child, { isChild: true })
+              cloneElement(child, { isChild: true }),
             )
           : this.renderProgressBar({
               min,
@@ -152,9 +189,9 @@ class ProgressBar extends React.Component {
               label,
               srOnly,
               striped,
-              active,
-              bsClass,
-              bsStyle
+              animated,
+              bsPrefix,
+              variant,
             })}
       </div>
     );
@@ -163,8 +200,6 @@ class ProgressBar extends React.Component {
 
 ProgressBar.propTypes = propTypes;
 ProgressBar.defaultProps = defaultProps;
+const DecoratedProgressBar = createBootstrapComponent(ProgressBar, 'progress');
 
-export default setBsClass(
-  'progress-bar',
-  bsStyles(Object.values(State), ProgressBar)
-);
+export default DecoratedProgressBar;

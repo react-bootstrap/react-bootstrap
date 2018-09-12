@@ -30,23 +30,20 @@ module.exports = api => {
           shippedProposals: true,
           modules: modules ? 'commonjs' : false,
           targets: {
-            browsers: ['last 4 versions', 'not ie <= 8']
-          }
-        }
+            browsers: ['last 4 versions', 'not ie <= 8'],
+          },
+        },
       ],
-      ['@babel/preset-react', { development: dev }]
+      ['@babel/preset-react', { development: dev }],
     ],
     plugins: [
       ['@babel/plugin-proposal-class-properties', { loose: true }],
       '@babel/plugin-proposal-export-default-from',
       '@babel/plugin-proposal-export-namespace-from',
-      [
-        '@babel/plugin-transform-runtime',
-        { useESModules: !modules, corejs: 2 }
-      ],
+      ['@babel/plugin-transform-runtime', { useESModules: !modules }],
       'babel-plugin-dev-expression',
       modules && 'babel-plugin-add-module-exports',
-      api.env() === 'test' && 'babel-plugin-istanbul'
-    ].filter(Boolean)
+      api.env() === 'test' && 'babel-plugin-istanbul',
+    ].filter(Boolean),
   };
 };

@@ -1,7 +1,8 @@
+import React from 'react';
+import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
-import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import BaseOverlay from 'react-overlays/lib/Overlay';
+import BaseOverlay from 'react-overlays/Overlay';
 import elementType from 'prop-types-extra/lib/elementType';
 
 import Fade from './Fade';
@@ -26,7 +27,7 @@ const propTypes = {
   /**
    * Use animation
    */
-  animation: PropTypes.oneOfType([PropTypes.bool, elementType]),
+  transition: PropTypes.oneOfType([PropTypes.bool, elementType]),
 
   /**
    * Callback fired before the Overlay transitions in
@@ -61,38 +62,54 @@ const propTypes = {
   /**
    * Sets the direction of the Overlay.
    */
-  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left'])
+  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 };
 
 const defaultProps = {
-  animation: Fade,
+  transition: Fade,
   rootClose: false,
   show: false,
-  placement: 'right'
+  placement: 'top',
 };
 
-class Overlay extends React.Component {
-  render() {
-    const { animation, children, ...props } = this.props;
+function wrapRefs(props, arrowProps) {
+  const { ref } = props;
+  const { ref: aRef } = arrowProps;
 
-    const transition = animation === true ? Fade : animation || null;
+  props.ref = ref.__wrapped || (ref.__wrapped = r => ref(findDOMNode(r)));
+  arrowProps.ref =
+    aRef.__wrapped || (aRef.__wrapped = r => aRef(findDOMNode(r)));
+}
 
-    let child;
+function Overlay({ children: overlay, transition, ...outerProps }) {
+  transition = transition === true ? Fade : transition || null;
 
-    if (!transition) {
-      child = cloneElement(children, {
-        className: classNames(children.props.className, 'in')
-      });
-    } else {
-      child = children;
-    }
+  return (
+    <BaseOverlay {...outerProps} transition={transition}>
+      {({ props: overlayProps, arrowProps, show, ...props }) => {
+        wrapRefs(overlayProps, arrowProps);
 
-    return (
-      <BaseOverlay {...props} transition={transition}>
-        {child}
-      </BaseOverlay>
-    );
-  }
+        if (typeof overlay === 'function')
+          return overlay({
+            ...props,
+            ...overlayProps,
+            show,
+            arrowProps,
+          });
+
+        return React.cloneElement(overlay, {
+          ...props,
+          ...overlayProps,
+          arrowProps,
+          className: classNames(
+            overlay.props.className,
+            !transition && show && 'show',
+          ),
+          style: { ...overlay.props.style, ...overlayProps.style },
+        });
+      }}
+    </BaseOverlay>
+  );
 }
 
 Overlay.propTypes = propTypes;

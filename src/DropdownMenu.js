@@ -1,146 +1,112 @@
 import classNames from 'classnames';
-import keycode from 'keycode';
+import { findDOMNode } from 'react-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import RootCloseWrapper from 'react-overlays/lib/RootCloseWrapper';
+import elementType from 'prop-types-extra/lib/elementType';
+import BaseDropdownMenu from 'react-overlays/DropdownMenu';
+import NavbarContext from './NavbarContext';
 
-import {
-  bsClass,
-  getClassSet,
-  prefix,
-  splitBsPropsAndOmit
-} from './utils/bootstrapUtils';
-import createChainedFunction from './utils/createChainedFunction';
-import ValidComponentChildren from './utils/ValidComponentChildren';
+import { createBootstrapComponent } from './ThemeProvider';
 
-const propTypes = {
-  open: PropTypes.bool,
-  pullRight: PropTypes.bool,
-  onClose: PropTypes.func,
-  labelledBy: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onSelect: PropTypes.func,
-  rootCloseEvent: PropTypes.oneOf(['click', 'mousedown'])
-};
-
-const defaultProps = {
-  bsRole: 'menu',
-  pullRight: false
+const wrapRef = props => {
+  const { ref } = props;
+  props.ref = ref.__wrapped || (ref.__wrapped = r => ref(findDOMNode(r)));
+  return props;
 };
 
 class DropdownMenu extends React.Component {
-  constructor(props) {
-    super(props);
+  static propTypes = {
+    /**
+     * @default 'dropdown-menu'
+     */
+    bsPrefix: PropTypes.string,
 
-    this.handleRootClose = this.handleRootClose.bind(this);
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-  }
+    /** Controls the visibility of the Dropdown menu  */
+    show: PropTypes.bool,
 
-  getFocusableMenuItems() {
-    const node = ReactDOM.findDOMNode(this);
-    if (!node) {
-      return [];
-    }
+    /** Aligns the Dropdown menu to the right of it's container. */
+    alignRight: PropTypes.bool,
 
-    return Array.from(node.querySelectorAll('[tabIndex="-1"]'));
-  }
+    onSelect: PropTypes.func,
 
-  getItemsAndActiveIndex() {
-    const items = this.getFocusableMenuItems();
-    const activeIndex = items.indexOf(document.activeElement);
+    /**
+     * Which event when fired outside the component will cause it to be closed
+     *
+     * *Note: For custom dropdown components, you will have to pass the
+     * `rootCloseEvent` to `<RootCloseWrapper>` in your custom dropdown menu
+     * component ([similarly to how it is implemented in `<Dropdown.Menu>`](https://github.com/react-bootstrap/react-bootstrap/blob/v0.31.5/src/DropdownMenu.js#L115-L119)).*
+     */
+    rootCloseEvent: PropTypes.oneOf(['click', 'mousedown']),
 
-    return { items, activeIndex };
-  }
+    /**
+     * Control the rendering of the DropdownMenu. All non-menu props
+     * (listed here) are passed through to the `as` Component.
+     *
+     * If providing a custom, non DOM, component. the `show`, `close` and `alignRight` props
+     * are also injected and should be handled appropriatedly.
+     */
+    as: elementType,
+  };
 
-  focusNext() {
-    const { items, activeIndex } = this.getItemsAndActiveIndex();
-    if (items.length === 0) {
-      return;
-    }
-
-    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
-    items[nextIndex].focus();
-  }
-
-  focusPrevious() {
-    const { items, activeIndex } = this.getItemsAndActiveIndex();
-    if (items.length === 0) {
-      return;
-    }
-
-    const prevIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
-    items[prevIndex].focus();
-  }
-
-  handleKeyDown(event) {
-    switch (event.keyCode) {
-      case keycode.codes.down:
-        this.focusNext();
-        event.preventDefault();
-        break;
-      case keycode.codes.up:
-        this.focusPrevious();
-        event.preventDefault();
-        break;
-      case keycode.codes.esc:
-      case keycode.codes.tab:
-        this.props.onClose(event, { source: 'keydown' });
-        break;
-      default:
-    }
-  }
-
-  handleRootClose(event) {
-    this.props.onClose(event, { source: 'rootClose' });
-  }
+  static defaultProps = {
+    alignRight: false,
+    as: 'div',
+  };
 
   render() {
     const {
-      open,
-      pullRight,
-      labelledBy,
-      onSelect,
+      bsPrefix,
       className,
+      alignRight,
       rootCloseEvent,
-      children,
+      show: showProps,
+      as: Component,
       ...props
     } = this.props;
 
-    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['onClose']);
-
-    const classes = {
-      ...getClassSet(bsProps),
-      [prefix(bsProps, 'right')]: pullRight
-    };
-
     return (
-      <RootCloseWrapper
-        disabled={!open}
-        onRootClose={this.handleRootClose}
-        event={rootCloseEvent}
-      >
-        <ul
-          {...elementProps}
-          role="menu"
-          className={classNames(className, classes)}
-          aria-labelledby={labelledBy}
-        >
-          {ValidComponentChildren.map(children, child =>
-            React.cloneElement(child, {
-              onKeyDown: createChainedFunction(
-                child.props.onKeyDown,
-                this.handleKeyDown
-              ),
-              onSelect: createChainedFunction(child.props.onSelect, onSelect)
-            })
-          )}
-        </ul>
-      </RootCloseWrapper>
+      <NavbarContext>
+        {isNavbar => (
+          <BaseDropdownMenu
+            show={showProps}
+            alignEnd={alignRight}
+            usePopper={!isNavbar}
+            rootCloseEvent={rootCloseEvent}
+          >
+            {({ placement, show, alignEnd, close, props: menuProps }) => {
+              wrapRef(menuProps);
+              // For custom components provide additional, non-DOM, props;
+              if (typeof Component !== 'string') {
+                menuProps.show = show;
+                menuProps.close = close;
+                menuProps.alignRight = alignEnd;
+              }
+              let style = props.style;
+              if (placement) {
+                // we don't need the default popper style,
+                // menus are display: none when not shown.
+                style = { ...style, ...menuProps.style };
+                props['x-placement'] = placement;
+              }
+              return (
+                <Component
+                  {...props}
+                  {...menuProps}
+                  style={style}
+                  className={classNames(
+                    className,
+                    bsPrefix,
+                    show && 'show',
+                    alignRight && `${bsPrefix}-right`,
+                  )}
+                />
+              );
+            }}
+          </BaseDropdownMenu>
+        )}
+      </NavbarContext>
     );
   }
 }
 
-DropdownMenu.propTypes = propTypes;
-DropdownMenu.defaultProps = defaultProps;
-
-export default bsClass('dropdown-menu', DropdownMenu);
+export default createBootstrapComponent(DropdownMenu, 'dropdown-menu');

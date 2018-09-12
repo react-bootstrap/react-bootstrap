@@ -2,29 +2,25 @@ import classNames from 'classnames';
 import css from 'dom-helpers/style';
 import React from 'react';
 import PropTypes from 'prop-types';
+import onEnd from 'dom-helpers/transition/end';
 import Transition, {
   EXITED,
   ENTERED,
   ENTERING,
-  EXITING
+  EXITING,
 } from 'react-transition-group/Transition';
 
-import capitalize from './utils/capitalize';
+import triggerBrowserReflow from './utils/triggerBrowserReflow';
 import createChainedFunction from './utils/createChainedFunction';
 
 const MARGINS = {
   height: ['marginTop', 'marginBottom'],
-  width: ['marginLeft', 'marginRight']
+  width: ['marginLeft', 'marginRight'],
 };
 
-// reading a dimension prop will cause the browser to recalculate,
-// which will let our animations work
-function triggerBrowserReflow(node) {
-  node.offsetHeight; // eslint-disable-line no-unused-expressions
-}
-
 function getDimensionValue(dimension, elem) {
-  let value = elem[`offset${capitalize(dimension)}`];
+  let offset = `offset${dimension[0].toUpperCase()}${dimension.slice(1)}`;
+  let value = elem[offset];
   let margins = MARGINS[dimension];
 
   return (
@@ -38,7 +34,7 @@ const collapseStyles = {
   [EXITED]: 'collapse',
   [EXITING]: 'collapsing',
   [ENTERING]: 'collapsing',
-  [ENTERED]: 'collapse in'
+  [ENTERED]: 'collapse show',
 };
 
 const propTypes = {
@@ -104,7 +100,7 @@ const propTypes = {
    */
   dimension: PropTypes.oneOfType([
     PropTypes.oneOf(['height', 'width']),
-    PropTypes.func
+    PropTypes.func,
   ]),
 
   /**
@@ -113,13 +109,15 @@ const propTypes = {
    * Allows for providing some custom logic for how much the Collapse component
    * should animate in its specified dimension. Called with the current
    * dimension prop value and the DOM node.
+   *
+   * @default element.offsetWidth | element.offsetHeight
    */
   getDimensionValue: PropTypes.func,
 
   /**
    * ARIA role of collapsible element
    */
-  role: PropTypes.string
+  role: PropTypes.string,
 };
 
 const defaultProps = {
@@ -130,7 +128,7 @@ const defaultProps = {
   appear: false,
 
   dimension: 'height',
-  getDimensionValue
+  getDimensionValue,
 };
 
 class Collapse extends React.Component {
@@ -138,11 +136,6 @@ class Collapse extends React.Component {
     return typeof this.props.dimension === 'function'
       ? this.props.dimension()
       : this.props.dimension;
-  }
-
-  // for testing
-  _getScrollDimensionValue(elem, dimension) {
-    return `${elem[`scroll${capitalize(dimension)}`]}px`;
   }
 
   /* -- Expanding -- */
@@ -164,7 +157,7 @@ class Collapse extends React.Component {
     const dimension = this.getDimension();
     elem.style[dimension] = `${this.props.getDimensionValue(
       dimension,
-      elem
+      elem,
     )}px`;
     triggerBrowserReflow(elem);
   };
@@ -172,6 +165,12 @@ class Collapse extends React.Component {
   handleExiting = elem => {
     elem.style[this.getDimension()] = '0';
   };
+
+  // for testing
+  _getScrollDimensionValue(elem, dimension) {
+    const scroll = `scroll${dimension[0].toUpperCase()}${dimension.slice(1)}`;
+    return `${elem[scroll]}px`;
+  }
 
   render() {
     const {
@@ -191,7 +190,7 @@ class Collapse extends React.Component {
     const handleEnter = createChainedFunction(this.handleEnter, onEnter);
     const handleEntering = createChainedFunction(
       this.handleEntering,
-      onEntering
+      onEntering,
     );
     const handleEntered = createChainedFunction(this.handleEntered, onEntered);
     const handleExit = createChainedFunction(this.handleExit, onExit);
@@ -199,6 +198,7 @@ class Collapse extends React.Component {
 
     return (
       <Transition
+        addEndListener={onEnd}
         {...props}
         aria-expanded={props.role ? props.in : null}
         onEnter={handleEnter}
@@ -214,8 +214,8 @@ class Collapse extends React.Component {
               className,
               children.props.className,
               collapseStyles[state],
-              this.getDimension() === 'width' && 'width'
-            )
+              this.getDimension() === 'width' && 'width',
+            ),
           })
         }
       </Transition>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import FormControl from '../src/FormControl';
 import FormGroup from '../src/FormGroup';
@@ -8,35 +8,36 @@ import { shouldWarn } from './helpers';
 
 describe('<FormControl>', () => {
   it('should render correctly', () => {
-    shallow(
-      <FormControl type="text" id="foo" name="bar" className="my-control" />
+    mount(
+      <FormControl type="text" id="foo" name="bar" className="my-control" />,
     ).assertSingle('input#foo.form-control.my-control[name="bar"]');
   });
 
   it('should support textarea', () => {
-    shallow(<FormControl componentClass="textarea" />).assertSingle(
-      'textarea.form-control'
-    );
+    mount(<FormControl as="textarea" />).assertSingle('textarea.form-control');
   });
 
   it('should support select', () => {
-    shallow(<FormControl componentClass="select" />).assertSingle(
-      'select.form-control'
-    );
+    mount(<FormControl as="select" />).assertSingle('select.form-control');
   });
 
-  it('should not render .form-control for type="file"', () => {
-    shallow(<FormControl type="file" />)
-      .assertSingle('input[type="file"]')
-      .find('.form-control')
-      .should.have.length(0);
+  it('should support type=file', () => {
+    mount(<FormControl type="file" />)
+      .assertSingle('[type="file"].form-control-file')
+      .assertNone('.form-control');
+  });
+
+  it('should support plaintext inputs', () => {
+    mount(<FormControl plaintext />).assertSingle(
+      'input.form-control-plaintext',
+    );
   });
 
   it('should use controlId for id', () => {
     mount(
       <FormGroup controlId="foo">
         <FormControl type="text" />
-      </FormGroup>
+      </FormGroup>,
     ).assertSingle('input#foo.form-control');
   });
 
@@ -46,18 +47,18 @@ describe('<FormControl>', () => {
     mount(
       <FormGroup controlId="foo">
         <FormControl type="text" id="bar" />
-      </FormGroup>
+      </FormGroup>,
     ).assertSingle('input#bar.form-control');
   });
 
-  it('should support inputRef', () => {
+  it('should support ref forwarding', () => {
     class Container extends React.Component {
       render() {
         return (
           <FormGroup controlId="foo">
             <FormControl
               type="text"
-              inputRef={ref => {
+              ref={ref => {
                 this.input = ref;
               }}
             />
@@ -71,8 +72,8 @@ describe('<FormControl>', () => {
   });
 
   it('should properly display size of FormControl', () => {
-    mount(<FormControl type="text" bsSize="lg" />).assertSingle(
-      'input.form-control.input-lg'
+    mount(<FormControl type="text" size="lg" />).assertSingle(
+      'input.form-control.form-control-lg',
     );
   });
 });

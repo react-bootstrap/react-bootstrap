@@ -15,7 +15,7 @@ export function generatedId(name) {
       if (!error && !props.id) {
         error = new Error(
           `In order to properly initialize the ${name} in a way that is accessible to assistive technologies ` +
-            `(such as screen readers) an \`id\` or a \`generateChildId\` prop to ${name} is required`
+            `(such as screen readers) an \`id\` or a \`generateChildId\` prop to ${name} is required`,
         );
       }
     }
@@ -31,7 +31,7 @@ export function requiredRoles(...roles) {
       if (
         !ValidComponentChildren.some(
           props.children,
-          child => child.props.bsRole === role
+          child => child.props.bsRole === role,
         )
       ) {
         missing = role;
@@ -45,7 +45,7 @@ export function requiredRoles(...roles) {
       return new Error(
         `(children) ${component} - Missing a required child with bsRole: ` +
           `${missing}. ${component} must have at least one child of each of ` +
-          `the following bsRoles: ${roles.join(', ')}`
+          `the following bsRoles: ${roles.join(', ')}`,
       );
     }
 
@@ -60,7 +60,7 @@ export function exclusiveRoles(...roles) {
     roles.every(role => {
       const childrenWithRole = ValidComponentChildren.filter(
         props.children,
-        child => child.props.bsRole === role
+        child => child.props.bsRole === role,
       );
 
       if (childrenWithRole.length > 1) {
@@ -75,7 +75,7 @@ export function exclusiveRoles(...roles) {
       return new Error(
         `(children) ${component} - Duplicate children detected of bsRole: ` +
           `${duplicate}. Only one child each allowed with the following ` +
-          `bsRoles: ${roles.join(', ')}`
+          `bsRoles: ${roles.join(', ')}`,
       );
     }
 

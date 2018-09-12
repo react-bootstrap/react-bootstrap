@@ -44,7 +44,11 @@
     "react/no-array-index-key": "off",
     "react/no-string-refs": "off",
     "react/prefer-stateless-function": "off",
+    "react/destructuring-assignment": "off",
     "react/default-props-match-prop-types": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/forbid-foreign-prop-types": "off",
+    "import/no-named-as-default-member": "off",
     "react/jsx-filename-extension": [
       "error",
       {
@@ -58,9 +62,6 @@
           "children",
           "className",
           "style",
-          "bsStyle",
-          "bsClass",
-          "bsSize"
         ]
       }
     ],
@@ -74,6 +75,15 @@
       "ForOfStatement",
       "LabeledStatement",
       "WithStatement"
+    ],
+    "no-unused-vars": [
+      2,
+      {
+        "vars": "all",
+        "args": "after-used",
+        "varsIgnorePattern": "^_\\d?$",
+        "argsIgnorePattern": "^_\\d?$"
+      }
     ]
   },
   "overrides": [

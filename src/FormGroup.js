@@ -1,73 +1,62 @@
 import classNames from 'classnames';
-import React from 'react';
 import PropTypes from 'prop-types';
+import elementType from 'prop-types-extra/lib/elementType';
+import React from 'react';
 
-import {
-  bsClass,
-  bsSizes,
-  getClassSet,
-  splitBsPropsAndOmit
-} from './utils/bootstrapUtils';
-import { Size } from './utils/StyleConfig';
-import ValidComponentChildren from './utils/ValidComponentChildren';
+import FormContext from './FormContext';
+import { createBootstrapComponent } from './ThemeProvider';
 
 const propTypes = {
+  /**
+   * @default 'form-group'
+   */
+  bsPrefix: PropTypes.string,
+
+  as: elementType,
+
   /**
    * Sets `id` on `<FormControl>` and `htmlFor` on `<FormGroup.Label>`.
    */
   controlId: PropTypes.string,
-  validationState: PropTypes.oneOf(['success', 'warning', 'error', null])
+
+  /**
+   * The FormGroup `ref` will be forwarded to the underlying element.
+   * Unless the FormGroup is rendered `as` a composite component,
+   * it will be a DOM node, when resolved.
+   *
+   * @type {ReactRef}
+   * @alias ref
+   */
+  innerRef: PropTypes.any,
 };
 
-const childContextTypes = {
-  $bs_formGroup: PropTypes.object.isRequired
+const defaultProps = {
+  as: 'div',
 };
 
-class FormGroup extends React.Component {
-  getChildContext() {
-    const { controlId, validationState } = this.props;
-
-    return {
-      $bs_formGroup: {
-        controlId,
-        validationState
-      }
-    };
-  }
-
-  hasFeedback(children) {
-    return ValidComponentChildren.some(
-      children,
-      child =>
-        child.props.bsRole === 'feedback' ||
-        (child.props.children && this.hasFeedback(child.props.children))
-    );
-  }
-
-  render() {
-    const { validationState, className, children, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsPropsAndOmit(props, ['controlId']);
-
-    const classes = {
-      ...getClassSet(bsProps),
-      'has-feedback': this.hasFeedback(children)
-    };
-    if (validationState) {
-      classes[`has-${validationState}`] = true;
-    }
-
-    return (
-      <div {...elementProps} className={classNames(className, classes)}>
+function FormGroup({
+  bsPrefix,
+  innerRef,
+  className,
+  children,
+  controlId,
+  as: Component,
+  ...props
+}) {
+  return (
+    <FormContext.Provider value={{ controlId }}>
+      <Component
+        {...props}
+        ref={innerRef}
+        className={classNames(className, bsPrefix)}
+      >
         {children}
-      </div>
-    );
-  }
+      </Component>
+    </FormContext.Provider>
+  );
 }
 
 FormGroup.propTypes = propTypes;
-FormGroup.childContextTypes = childContextTypes;
+FormGroup.defaultProps = defaultProps;
 
-export default bsClass(
-  'form-group',
-  bsSizes([Size.LARGE, Size.SMALL], FormGroup)
-);
+export default createBootstrapComponent(FormGroup, 'form-group');

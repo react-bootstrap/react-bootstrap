@@ -1,0 +1,21 @@
+
+
+.list-group :global(.list-group) {
+  max-width: 400px;
+}
+
+.static-dropdown-menu :global(.dropdown-menu) {
+  position: static;
+  display: block;
+}
+.custom-dropdown-menu :global(.super-colors) {
+  background: linear-gradient(
+    to bottom,
+    orange,
+    yellow,
+    green,
+    cyan,
+    blue,
+    violet
+  );
+}

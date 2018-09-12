@@ -1,14 +1,14 @@
 import classNames from 'classnames';
-import React from 'react';
+import capitalize from 'lodash/capitalize';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
+import React from 'react';
 
 import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
-import capitalize from './utils/capitalize';
 import { DEVICE_SIZES } from './utils/StyleConfig';
 
 const propTypes = {
-  componentClass: elementType,
+  as: elementType,
 
   /**
    * Apply clearfix
@@ -41,16 +41,16 @@ const propTypes = {
    *
    * adds class `visible-lg-block`
    */
-  visibleLgBlock: PropTypes.bool
+  visibleLgBlock: PropTypes.bool,
 };
 
 const defaultProps = {
-  componentClass: 'div'
+  as: 'div',
 };
 
 class Clearfix extends React.Component {
   render() {
-    const { componentClass: Component, className, ...props } = this.props;
+    const { as: Component, className, ...props } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = getClassSet(bsProps);

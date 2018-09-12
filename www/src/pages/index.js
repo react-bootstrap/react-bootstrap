@@ -1,83 +1,164 @@
 import React from 'react';
+import Button from 'react-bootstrap/lib/Button';
+import Container from 'react-bootstrap/lib/Container';
+import Jumbotron from 'react-bootstrap/lib/Jumbotron';
+import { styled } from 'css-literal-loader/styled';
+import pkg from '../../../package.json';
 
-import Grid from 'react-bootstrap/lib/Grid';
-import Alert from 'react-bootstrap/lib/Alert';
-import Glyphicon from 'react-bootstrap/lib/Glyphicon';
-import Label from 'react-bootstrap/lib/Label';
+import withLayout from '../withLayout';
 
-export default class HomePage extends React.Component {
-  render() {
-    return (
-      <div>
-        <main className="bs-docs-masthead" id="content" role="main">
-          <div className="container">
-            <span className="bs-docs-booticon bs-docs-booticon-lg bs-docs-booticon-outline" />
-            <p className="lead">
-              The most popular front-end framework, rebuilt for React.
-            </p>
-          </div>
-        </main>
+const MastHead = styled(Jumbotron)`
+  @import '../css/theme';
 
-        <Grid>
-          <Alert bsStyle="info">
-            <p>
-              <Glyphicon glyph="warning-sign" /> React-Bootstrap currently
-              targets Bootstrap v3. We are actively working on Bootstrap v4
-              support in{' '}
-              <a href="https://github.com/react-bootstrap/react-bootstrap/pull/2752">
-                #2752
-              </a>
-              .
-            </p>
-          </Alert>
-          <Alert bsStyle="warning">
-            <p>
-              <Glyphicon glyph="bullhorn" /> We are actively working to reach a
-              1.0.0 release, and we would love your help to get there.
-            </p>
-            <p>
-              <Glyphicon glyph="check" /> Check out the{' '}
-              <a href="https://github.com/react-bootstrap/react-bootstrap/wiki#100-roadmap">
-                1.0.0 roadmap
-              </a>{' '}
-              and{' '}
-              <a href="https://github.com/react-bootstrap/react-bootstrap/blob/master/CONTRIBUTING.md">
-                contributing guidelines
-              </a>{' '}
-              to see where you can help out.
-            </p>
-            <p>
-              <Glyphicon glyph="sunglasses" /> A great place to start is any{' '}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://github.com/react-bootstrap/react-bootstrap/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22"
-              >
-                issue
-              </a>{' '}
-              with a <Label bsStyle="success">help-wanted</Label> label.
-            </p>
-            <p>
-              <Glyphicon glyph="ok" /> We are open to pull requests that address
-              bugs, improve documentation, enhance accessibility, add test
-              coverage, or bring us closer to feature parity with{' '}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="http://getbootstrap.com/"
-              >
-                Bootstrap
-              </a>
-              .
-            </p>
-            <p>
-              <Glyphicon glyph="user" /> We actively seek to invite frequent
-              pull request authors to join the organization.{' '}
-              <Glyphicon glyph="thumbs-up" />
-            </p>
-          </Alert>
-        </Grid>
-      </div>
-    );
+  background-color: $dark;
+  padding: 0;
+  color: white;
+`;
+
+const Content = styled('div')`
+  background-image: url('../assets/logo-subtle.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 450px;
+  margin: 0 auto;
+  max-width: 800px;
+
+  @media (max-width: 800px) {
+    padding: 0 40px;
+    text-align: center;
   }
-}
+`;
+
+const Heading = styled('h1')`
+  @import '../css/theme';
+
+  color: $brand;
+  font-weight: bold;
+  font-size: 3.2rem;
+  margin: 2rem 0;
+`;
+
+const SubHeading = styled('p')`
+  composes: lead from global;
+
+  line-height: 2;
+  font-size: 1.6rem;
+`;
+
+const BrandButton = styled(Button)`
+  @import '../css/theme';
+
+  &:global(.btn-brand) {
+    @include button-outline-variant($brand, $dark);
+  }
+`;
+
+const FeatureCard = styled('div')`
+  @import '../css/theme';
+
+  composes: px-4 py-3 from global;
+
+  flex: 1 1 0;
+  font-weight: 400;
+  line-height: 1.6;
+
+  & h2 {
+    font-size: 1.6rem;
+    color: $subtle;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+`;
+
+export default withLayout(
+  class HomePage extends React.Component {
+    render() {
+      return (
+        <div>
+          <main className="bs-docs-masthead" id="content" role="main">
+            <MastHead fluid>
+              <Content>
+                <Heading>React Bootstrap</Heading>
+                <SubHeading>
+                  The most popular front-end framework
+                  <br />
+                  <strong>Rebuilt</strong> for React.
+                </SubHeading>
+                <div>
+                  <BrandButton
+                    size="lg"
+                    variant="brand"
+                    className="mr-3 px-5"
+                    href="/getting-started"
+                  >
+                    Get started
+                  </BrandButton>
+                  <Button
+                    size="lg"
+                    href="/components/alerts"
+                    className="px-5"
+                    variant="outline-light"
+                  >
+                    Components
+                  </Button>
+                </div>
+                <div className="text-muted mt-3">
+                  Current version: {pkg.version}
+                </div>
+              </Content>
+            </MastHead>
+          </main>
+
+          <Container className="d-flex justify-content-between">
+            <FeatureCard>
+              <h2>Rebuilt with React</h2>
+              <p>
+                React bootstrap replaces the Bootstrap javascript. Each
+                component has been built from stratch as a true React
+                components, without uneeded dependencies like jQuery.
+              </p>
+              <p>
+                As one of the oldest React libraries, react bootstrap as evolved
+                and grown along-side React, making it an exellent choice as your
+                UI foundation.
+              </p>
+            </FeatureCard>
+
+            <FeatureCard>
+              <h2>Bootstrap at it's core</h2>
+              <p>
+                Built with compatibility in mind, we embrace our bootstrap core
+                and strive to be compatible with the worlds largest UI
+                ecosystem.
+              </p>
+              <p>
+                By relying entirely on the Bootstrap stylesheet, React
+                bootstrap, just works with the thousands of bootstrap themes you
+                already love.
+              </p>
+              <p />
+            </FeatureCard>
+
+            <FeatureCard>
+              <h2>Accessible by default</h2>
+
+              <p>
+                The React component model gives us more control over form and
+                function of each component.
+              </p>
+              <p>
+                Each component is implemented with accessibilty in mind. The
+                result is a set of accessible-by-default components, over what
+                is possible from plain Bootstrap.
+              </p>
+            </FeatureCard>
+          </Container>
+        </div>
+      );
+    }
+  },
+);

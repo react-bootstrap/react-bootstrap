@@ -1,84 +1,125 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Link from 'gatsby-link';
 
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
-import FormControl from 'react-bootstrap/lib/FormControl';
+import Tooltip from 'react-bootstrap/lib/Tooltip';
+import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import { styled } from 'css-literal-loader/styled';
+import withProps from 'recompose/withProps';
 
-const NAV_LINKS = {
-  documentation: {
-    link: '/getting-started/introduction',
-    title: 'Documentation'
+import logo from '../assets/logo.svg';
+
+const StyledNavbar = withProps({
+  as: 'header',
+  variant: 'dark',
+  role: 'banner',
+})(
+  styled(Navbar)`
+    @import '../css/theme.scss';
+
+    min-height: 4rem;
+    background-color: $darker;
+
+    @include media-breakpoint-up(md) {
+      position: sticky;
+      top: 0;
+      z-index: 1040;
+    }
+  `,
+);
+const SkipToContentLink = styled('a')`
+  composes: sr-only sr-only-focusable bg-primary text-white px-4 py-2 mr-2 from global;
+`;
+
+const StyledNavLink = styled(Nav.Link)`
+  @import '../css/theme.scss';
+
+  & + & {
+    margin-left: $spacer;
   }
-};
 
-// We don't want to include react-router-bootstrap as a dependency here, so we
-// need to fudge our own `<NavItem>` substitutes, and hide unknown props from
-// them.
+  &:global(.active) {
+    font-width: 700;
+  }
 
-function Wrapper({ children }) {
-  return children;
-}
+  & i {
+    font-size: 1.2em;
+  }
+`;
+
+const NAV_LINKS = [
+  {
+    link: '/',
+    title: 'Home',
+    exact: true,
+  },
+  {
+    link: '/getting-started/introduction',
+    title: 'Getting Started',
+  },
+  {
+    link: '/components/alerts',
+    title: 'Components',
+  },
+];
 
 const propTypes = {
-  activePage: PropTypes.string
+  activePage: PropTypes.string,
 };
 
-function attachSearch(ref) {
-  if (ref)
-    window.docsearch({
-      apiKey: '68117ff90f086cb491d7e7e984cd7b75',
-      indexName: 'react_bootstrap',
-      inputSelector: ref,
-      debug: false // Set debug to true if you want to inspect the dropdown
-    });
-}
 function NavMain({ activePage }) {
   return (
-    <Navbar
-      staticTop
-      componentClass="header"
-      className="bs-docs-nav"
-      role="banner"
-    >
-      <Navbar.Header>
-        <Navbar.Brand>
-          <Link to="/">React-Bootstrap</Link>
-        </Navbar.Brand>
-        <Navbar.Toggle />
-      </Navbar.Header>
-      <Navbar.Collapse className="bs-navbar-collapse">
-        <Nav role="navigation" id="top">
-          {Object.values(NAV_LINKS).map(({ link, title }) => (
-            <Wrapper key={link}>
-              <li className={activePage.startsWith(link) ? 'active' : null}>
-                <Link to={link}>{title}</Link>
-              </li>
-            </Wrapper>
-          ))}
-          <Wrapper>
-            <li>
-              <a
-                href="https://github.com/react-bootstrap/react-bootstrap"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
-            </li>
-          </Wrapper>
-        </Nav>
-        <Navbar.Form pullRight>
-          <FormControl
-            type="search"
-            className="bs-search-bar"
-            placeholder="Search…"
-            inputRef={attachSearch}
-          />
-        </Navbar.Form>
-      </Navbar.Collapse>
-    </Navbar>
+    <StyledNavbar expand collapseOnSelect>
+      <SkipToContentLink href="#rb-docs-content" tabIndex="0">
+        Skip to content
+      </SkipToContentLink>
+      <Navbar.Brand href="/">
+        <img src={logo} alt="react-bootstrap" height={30} />
+      </Navbar.Brand>
+
+      <Nav role="navigation" id="top" className="d-none d-md-flex">
+        {NAV_LINKS.map(({ link, title, exact }) => (
+          <StyledNavLink
+            key={link}
+            href={link}
+            active={exact ? activePage === link : activePage.startsWith(link)}
+          >
+            {title}
+          </StyledNavLink>
+        ))}
+      </Nav>
+      <Nav className="ml-auto pr-md-5">
+        <OverlayTrigger
+          placement="bottom"
+          delay={{ show: 200 }}
+          overlay={<Tooltip id="t-discord">Github</Tooltip>}
+        >
+          <StyledNavLink
+            href="https://github.com/react-bootstrap/react-bootstrap"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fab fa-github" />
+            <span className="sr-only">Github</span>
+          </StyledNavLink>
+        </OverlayTrigger>
+        <OverlayTrigger
+          placement="bottom"
+          delay={{ show: 200 }}
+          overlay={<Tooltip id="t-discord">Discord</Tooltip>}
+        >
+          <StyledNavLink
+            href="https://discord.gg/5PM9hB"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fab fa-discord" />
+            <span className="sr-only">Discord</span>
+          </StyledNavLink>
+        </OverlayTrigger>
+      </Nav>
+    </StyledNavbar>
   );
 }
 

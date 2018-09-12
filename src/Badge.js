@@ -1,57 +1,47 @@
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import React from 'react';
-import PropTypes from 'prop-types';
 
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
-
-// TODO: `pullRight` doesn't belong here. There's no special handling here.
-
-const propTypes = {
-  pullRight: PropTypes.bool
-};
-
-const defaultProps = {
-  pullRight: false
-};
+import { createBootstrapComponent } from './ThemeProvider';
 
 class Badge extends React.Component {
-  hasContent(children) {
-    let result = false;
+  static propTypes = {
+    /** @default 'badge' */
+    bsPrefix: PropTypes.string.isRequired,
 
-    React.Children.forEach(children, child => {
-      if (result) {
-        return;
-      }
+    /**
+     * The visual style of the badge
+     *
+     * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info|'light'|'dark')}
+     */
+    variant: PropTypes.string,
 
-      if (child || child === 0) {
-        result = true;
-      }
-    });
+    /**
+     * Add the `pill` modifier to make badges more rounded with
+     * some additional horizontal padding
+     */
+    pill: PropTypes.bool.isRequired,
+  };
 
-    return result;
-  }
+  static defaultProps = {
+    pill: false,
+  };
 
   render() {
-    const { pullRight, className, children, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
-
-    const classes = {
-      ...getClassSet(bsProps),
-      'pull-right': pullRight,
-
-      // Hack for collapsing on IE8.
-      hidden: !this.hasContent(children)
-    };
+    const { bsPrefix, variant, pill, className, ...props } = this.props;
 
     return (
-      <span {...elementProps} className={classNames(className, classes)}>
-        {children}
-      </span>
+      <span
+        {...props}
+        className={classNames(
+          className,
+          bsPrefix,
+          pill && `${bsPrefix}-pill`,
+          variant && `${bsPrefix}-${variant}`,
+        )}
+      />
     );
   }
 }
 
-Badge.propTypes = propTypes;
-Badge.defaultProps = defaultProps;
-
-export default bsClass('badge', Badge);
+export default createBootstrapComponent(Badge, 'badge');

@@ -1,0 +1,117 @@
+import { graphql } from 'gatsby';
+
+import Callout from '../../components/Callout';
+import CodeBlock from '../../components/CodeBlock';
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+import NavAlignement from '../../examples/Nav/Alignment';
+import NavBasic from '../../examples/Nav/Basic';
+import NavDropdown from '../../examples/Nav/Dropdown';
+import NavDropdownImpl from '../../examples/Nav/DropdownImpl';
+import NavFill from '../../examples/Nav/Fill';
+import NavJustified from '../../examples/Nav/Justified';
+import NavStacked from '../../examples/Nav/Stacked';
+import Tabs from '../../examples/Nav/Tabs';
+import Pills from '../../examples/Nav/Pills';
+
+
+export const query = graphql`
+  query NavQuery {
+    Nav: componentMetadata(displayName: { eq: "Nav" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    NavItem: componentMetadata(displayName: { eq: "NavItem" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    NavLink: componentMetadata(displayName: { eq: "NavLink" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    NavDropdown: componentMetadata(displayName: { eq: "NavDropdown" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+  }
+`;
+
+# Base Nav
+
+Navigation bits in Bootstrap all share a general `Nav`
+component and styles. Swap `variant`s to switch between each
+style. The base `Nav` component is built with flexbox and
+provide a strong foundation for building all types of navigation
+components.
+
+<Callout theme="warning">
+  The basic, variant-less, <code>Nav</code> component does not include any{' '}
+  <code>active</code> prop styling!
+</Callout>
+
+<ReactPlayground codeText={NavBasic} />
+
+## Alignment and orientation
+
+You can control the the direction and orientation of the
+`Nav` by making use of the [flexbox layout][0] utility classes.
+By default, navs are left-aligned, but that is easily changed to center or right-aligned.
+
+<ReactPlayground codeText={NavAlignement} />
+
+### Vertical
+
+Create stacked navs by changing the flex item direction with the
+`.flex-column` class, or your own css. You can even use the
+responsive versions to stack in some viewports but not others (e.g.
+`.flex-sm-column`).
+
+<ReactPlayground codeText={NavStacked} />
+
+## Tabs
+
+Visually represent nav items as "tabs". This style pairs nicely with
+tabbable regions created by our [Tab components]("../tabs/")
+
+<ReactPlayground codeText={Tabs} />
+
+## Pills
+
+An alternative visual variant.
+
+<ReactPlayground codeText={Pills} />
+
+## Fill and justify
+
+Force the contents of your nav to extend the full available width. To
+proportionately fill the space use `fill`. Notice that the
+nav is the entire width but each nav item is a different size.
+
+<ReactPlayground codeText={NavFill} />
+
+If you want each NavItem to be the same size use `justify`.
+
+<ReactPlayground codeText={NavJustified} />
+
+## Using dropdowns
+
+You can mix and match the Dropdown components with the NavLink and
+NavItem components to create a Dropdown that plays well in a Nav
+component
+
+<CodeBlock codeText={NavDropdownImpl} />
+
+The above demostrates how flexible the component model can be. But if
+you didn't want to roll your own versions we've included a
+straight-forward `<NavDropdown>` that works for most cases.
+
+<ReactPlayground codeText={NavDropdown} />
+
+## API
+
+<ComponentApi metadata={props.data.Nav} />
+<ComponentApi metadata={props.data.NavItem} exportedBy={props.data.Nav} />
+<ComponentApi metadata={props.data.NavLink} exportedBy={props.data.Nav} />
+
+
+[0]: https://getbootstrap.com/docs/4.0/layout/grid/#horizontal-alignment

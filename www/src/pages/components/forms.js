@@ -1,38 +1,42 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import LinkToSource from '../../components/LinkToSource';
-import PropTable from '../../components/PropTable';
+import withLayout from '../../withLayout';
+import LinkedHeading from '../../components/LinkedHeading';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import FormBasic from '../../examples/FormBasic';
-import FormControls from '../../examples/FormControls';
-import FormInline from '../../examples/FormInline';
-import FormHorizontal from '../../examples/FormHorizontal';
-import FormInputSizes from '../../examples/FormInputSizes';
-import FormInputAddons from '../../examples/FormInputAddons';
-import FormValidation from '../../examples/FormValidation';
+import FormBasic from '../../examples/Form/Basic';
+import FormTextControls from '../../examples/Form/TextControls';
+import FormInputSizes from '../../examples/Form/InputSizes';
+import Plaintext from '../../examples/Form/Plaintext';
+import Check from '../../examples/Form/Check';
+import CheckInline from '../../examples/Form/CheckInline';
+import NoLabels from '../../examples/Form/NoLabels';
+import FormGroup from '../../examples/Form/FormGroup';
+import GridBasic from '../../examples/Form/GridBasic';
+import FormRow from '../../examples/Form/FormRow';
+import GridComplex from '../../examples/Form/GridComplex';
+import Horizontal from '../../examples/Form/Horizontal';
+import ValidationNative from '../../examples/Form/ValidationNative';
+import ValidationFormik from '../../examples/Form/ValidationFormik';
+import CheckApi from '../../examples/Form/CheckApi';
 
-export default function FormControlsSection({ data }) {
+export default withLayout(function FormControlsSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="forms">Forms</Anchor>{' '}
-        <small>FormGroup, FormControl, ControlLabel</small>
-      </h2>
-
+    <>
+      <LinkedHeading h="1" id="forms">
+        Forms
+      </LinkedHeading>
       <p>
         The <code>{'<FormControl>'}</code> component renders a form control with
         Bootstrap styling. The <code>{'<FormGroup>'}</code> component wraps a
         form control with proper spacing, along with support for a label, help
         text, and validation state. To ensure accessibility, set{' '}
         <code>controlId</code> on <code>{'<FormGroup>'}</code>, and use{' '}
-        <code>{'<ControlLabel>'}</code> for the label.
+        <code>{'<FormLabel>'}</code> for the label.
       </p>
-
       <ReactPlayground codeText={FormBasic} />
-
       <p>
         The <code>{'<FormControl>'}</code> component directly renders the{' '}
         <code>{'<input>'}</code> or other specified component. If you need to
@@ -50,233 +54,237 @@ export default function FormControlsSection({ data }) {
         field groups is too specific to an individual application to admit a
         good one-size-fits-all solution.
       </p>
-
-      <h3>
-        <Anchor id="forms-props">Props</Anchor>
-      </h3>
-
-      <h4>
-        <Anchor id="forms-props-form-group">FormGroup</Anchor>
-        <LinkToSource component={data.FormGroup.displayName} />
-      </h4>
-      <PropTable metadata={data.FormGroup} />
-
-      <h4>
-        <Anchor id="forms-props-form-control">FormControl</Anchor>
-        <LinkToSource component={data.FormControl.displayName} />
-      </h4>
-      <PropTable metadata={data.FormControl} />
-
-      <h4>
-        <Anchor id="forms-props-control-label">ControlLabel</Anchor>
-        <LinkToSource component={data.ControlLabel.displayName} />
-      </h4>
-      <PropTable metadata={data.ControlLabel} />
-
-      <h2 className="page-header">
-        <Anchor id="forms-controls">Supported controls</Anchor>{' '}
-        <small>Checkbox, Radio, FormControl.Static, HelpBlock</small>
-      </h2>
-
+      <LinkedHeading h="2" id="forms-controls">
+        Form controls
+      </LinkedHeading>
       <p>
-        Examples of standard form controls supported in an example form layout,
-        using a custom <code>{'<FieldGroup>'}</code> component. Use{' '}
-        <code>{'<FormControl>'}</code> for <code>{'<input>'}</code>,{' '}
-        <code>{'<textarea>'}</code>, and <code>{'<select>'}</code>. Use{' '}
-        <code>{'<Checkbox>'}</code> and <code>{'<Radio>'}</code> for checkboxes
-        and radios respectively, optionally with <code>inline</code> to render
-        multiple on the same line. Use <code>{'<FormControl.Static>'}</code> for
-        static text.
+        For textual form controls—like <code>input</code>s, <code>select</code>s,
+        and <code>textarea</code>s—use the <code>FormControl</code> component.
+        FormControl adds some additional styles for general appearance, focus
+        state, sizing, and more.
       </p>
-      <ReactPlayground codeText={FormControls} />
-
-      <h3>
-        <Anchor id="forms-controls-props">Props</Anchor>
-      </h3>
-
-      <h4>
-        <Anchor id="forms-props-checkbox">Checkbox</Anchor>
-        <LinkToSource component={data.Checkbox.displayName} />
-      </h4>
-      <PropTable metadata={data.Checkbox} />
-
-      <h4>
-        <Anchor id="forms-props-radio">Radio</Anchor>
-        <LinkToSource component={data.Radio.displayName} />
-      </h4>
-      <PropTable metadata={data.Radio} />
-
-      <h4>
-        <Anchor id="forms-props-form-control-static">FormControl.Static</Anchor>
-        <LinkToSource component={data.FormControlStatic.displayName} />
-      </h4>
-      <PropTable metadata={data.FormControlStatic} />
-
-      <h4>
-        <Anchor id="forms-props-help-block">HelpBlock</Anchor>
-        <LinkToSource component={data.HelpBlock.displayName} />
-      </h4>
-      <PropTable metadata={data.HelpBlock} />
-
-      <h2 className="page-header">
-        <Anchor id="forms-layout">Form layout</Anchor> <small>Form</small>
-      </h2>
-
-      <h3>
-        <Anchor id="forms-inline">Inline forms</Anchor>
-      </h3>
+      <ReactPlayground codeText={FormTextControls} />
+      <LinkedHeading h="3" id="forms-input-sizes">
+        Sizing
+      </LinkedHeading>
       <p>
-        Use <code>{'<Form inline>'}</code> instead of <code>{'<form>'}</code>.
-        JSX strips whitespace between lines, so you will need to manually add
-        spaces. Additionally, Bootstrap assigns inline form controls{' '}
-        <code>width: auto</code> by default, so you may need to set custom
-        widths.
-      </p>
-      <ReactPlayground codeText={FormInline} />
-
-      <h3>
-        <Anchor id="forms-horizontal">Horizontal forms</Anchor>
-      </h3>
-      <p>
-        Use <code>{'<Form horizontal>'}</code> instead of{' '}
-        <code>{'<form>'}</code>, then use <code>{'<Col>'}</code>s to align
-        labels and controls. Do not use <code>{'<Row>'}</code> here, as{' '}
-        <code>{'<FormGroup>'}</code> will already serve as a grid row in a
-        horizontal form.
-      </p>
-      <ReactPlayground codeText={FormHorizontal} />
-
-      <h3>
-        <Anchor id="forms-layout-props">Props</Anchor>
-      </h3>
-
-      <h4>
-        <Anchor id="forms-props-form">Form</Anchor>
-        <LinkToSource component={data.Form.displayName} />
-        <small>(only needed for horizontal or inline forms)</small>
-      </h4>
-      <PropTable metadata={data.Form} />
-
-      <h2 className="page-header">
-        <Anchor id="forms-input-groups">Input groups</Anchor>
-        <small>InputGroup, InputGroup.Addon, InputGroup.Button</small>
-      </h2>
-
-      <h3>
-        <Anchor id="forms-input-addons">Input add-ons</Anchor>
-      </h3>
-      <p>
-        Wrap your form control in an <code>{'<InputGroup>'}</code>, then use for
-        normal add-ons and for button add-ons. Exotic configurations may require
-        CSS on your side.
-      </p>
-      <ReactPlayground codeText={FormInputAddons} />
-
-      <h3>
-        <Anchor id="forms-input-sizes">Input sizes</Anchor>
-      </h3>
-      <p>
-        Use <code>bsSize</code> on <code>{'<FormGroup>'}</code> or{' '}
-        <code>{'<InputGroup>'}</code> to change the size of inputs. It also
-        works with add-ons and most other options.
+        Use <code>size</code> on <code>{'<FormControl>'}</code> to change the
+        size of inputs.
       </p>
       <ReactPlayground codeText={FormInputSizes} />
+      <LinkedHeading h="3" id="forms-input-Plaintext">
+        Plaintext
+      </LinkedHeading>
+      <p>
+        If you want to have elements in your form styled as plain text, use the{' '}
+        <code>plaintext</code> prop on FormControls to remove the default form
+        field styling and preserve the correct margin and padding.
+      </p>
+      <ReactPlayground codeText={Plaintext} />
+      <LinkedHeading h="2" id="forms-form-check">
+        Checkboxes and Radios
+      </LinkedHeading>
+      <p>
+        For the non-textual checkbox and radio controls, <code>FormCheck</code>{' '}
+        provides a single component for both types that adds some additional
+        styling and improved layout.
+      </p>
+      <LinkedHeading h="3" id="forms-check-stacked">
+        Default (stacked)
+      </LinkedHeading>
+      <p>
+        By default, any number of checkboxes and radios that are immediate
+        sibling will be vertically stacked and appropriately spaced with
+        FormCheck.
+      </p>
+      <ReactPlayground codeText={Check} />
+      <LinkedHeading h="3" id="forms-check-inline">
+        Inline
+      </LinkedHeading>
+      <p>
+        Group checkboxes or radios on the same horizontal row by adding the{' '}
+        <code>inline</code> prop.
+      </p>
+      <ReactPlayground codeText={CheckInline} />
+      <LinkedHeading h="3" id="forms-check-inline">
+        Without labels
+      </LinkedHeading>
+      <p>
+        When you render a FormCheck without a label (no <code>children</code>)
+        some additional styling is applied to keep the inputs from collapsing.{' '}
+        <strong>
+          Remember to add an <code>aria-label</code> when omitting labels!
+        </strong>
+      </p>
+      <ReactPlayground codeText={NoLabels} />
 
-      <h3>
-        <Anchor id="forms-input-groups-props">Props</Anchor>
-      </h3>
-
-      <h4>
-        <Anchor id="forms-props-input-group">InputGroup</Anchor>
-        <LinkToSource component={data.InputGroup.displayName} />
-      </h4>
-      <PropTable metadata={data.InputGroup} />
-
-      <h4>
-        <Anchor id="forms-props-input-group-addon">InputGroup.Addon</Anchor>
-        <LinkToSource component={data.InputGroupAddon.displayName} />
-      </h4>
-      <PropTable metadata={data.InputGroupAddon} />
-
-      <h4>
-        <Anchor id="forms-props-input-group-button">InputGroup.Button</Anchor>
-        <LinkToSource component={data.InputGroupButton.displayName} />
-      </h4>
-      <PropTable metadata={data.InputGroupButton} />
-
-      <h2 className="page-header">
-        <Anchor id="forms-validation">Validation states</Anchor>
-        <small>FormControl.Feedback</small>
-      </h2>
+      <LinkedHeading h="3" id="forms-check-api">
+        Customizing FormCheck rendering
+      </LinkedHeading>
 
       <p>
-        Set <code>validationState</code> to one of <code>'success'</code>,{' '}
-        <code>'warning'</code> or <code>'error'</code> to show validation state.
-        Set <code>validationState</code> to <code>null</code> (or{' '}
-        <code>undefined</code>) to hide validation state. Add{' '}
-        <code>{'<FormControl.Feedback>'}</code> for a feedback icon when
-        validation state is set.
+        When you need tighter control, or want to customize how the{' '}
+        <code>FormCheck</code> component renders, it may better to use it's
+        constituent parts directly.
       </p>
-      <ReactPlayground codeText={FormValidation} />
+      <p>
+        By provided <code>children</code> to the <code>FormCheck</code> you can
+        forgo the default rendering and handle it yourself. (You can still
+        provide an <code>id</code> to the <code>FormCheck</code> or{' '}
+        <code>FormGroup</code> and have it propogate to the label and input).
+      </p>
+      <ReactPlayground codeText={CheckApi} />
 
-      <h3>
-        <Anchor id="forms-validation-props">Props</Anchor>
-      </h3>
+      <LinkedHeading h="2" id="forms-layout">
+        Layout
+      </LinkedHeading>
+      <p>
+        FormControl and FormCheck both apply <code>display: block</code> with{' '}
+        <code>width: 100%</code> to controls, which means they stack vertically
+        by default. Additional components and props can be used to vary this
+        layout on a per-form basis.
+      </p>
+      <LinkedHeading h="3" id="forms-layout-group">
+        Form group
+      </LinkedHeading>
+      <p>
+        The <code>FormGroup</code> component is the easiest way to add some
+        structure to forms. It provides a flexible container for grouping of
+        labels, controls, optional help text, and form validation messaging. By
+        default it only applies margin-bottom, but it picks up additional styles
+        in <code>{'<Form inline >'}</code> as needed. Use it with{' '}
+        <code>fieldset</code>s, <code>div</code>s, or nearly any other element.
+      </p>
+      <p>
+        You also add the <code>controlId</code> prop to accessibly wire the
+        nested label and input together via the <code>id</code>.
+      </p>
+      <ReactPlayground codeText={FormGroup} />
+      <LinkedHeading h="3" id="forms-layout-grid">
+        Form grid
+      </LinkedHeading>
+      <p>
+        More complex forms can be built using the grid components. Use these for
+        form layouts that require multiple columns, varied widths, and
+        additional alignment options.
+      </p>
+      <ReactPlayground codeText={GridBasic} />
+      <LinkedHeading h="4" id="forms-layout-form-row">
+        Form row
+      </LinkedHeading>
+      <p>
+        You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>,
+        a variation of the standard grid row that overrides the default column
+        gutters for tighter and more compact layouts.
+      </p>
+      <ReactPlayground codeText={FormRow} />
+      <p>More complex layouts can also be created with the grid system.</p>
+      <ReactPlayground codeText={GridComplex} />
+      <LinkedHeading h="3" id="forms-layout-form-row">
+        Horizontal forms
+      </LinkedHeading>
+      <p>
+        You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>,
+        a variation of the standard grid row that overrides the default column
+        gutters for tighter and more compact layouts.
+      </p>
+      <ReactPlayground codeText={Horizontal} />
 
-      <h4>
-        <Anchor id="forms-props-form-control-feedback">
-          FormControl.Feedback
-        </Anchor>
-        <LinkToSource component={data.FormControlFeedback.displayName} />
-      </h4>
-      <PropTable metadata={data.FormControlFeedback} />
-    </div>
+      <LinkedHeading h="2" id="forms-validation">
+        Validation
+      </LinkedHeading>
+      <p>
+        Provide valuable, actionable feedback to your users with form validation
+        feedback.
+      </p>
+      <LinkedHeading h="3" id="forms-validation-native">
+        Native HTML5 form validation
+      </LinkedHeading>
+      <p>
+        For native HTML form validation–
+        <a href="https://caniuse.com/#feat=form-validation">
+          available in all our supported browsers
+        </a>, the <code>:valid</code> and <code>:invalid</code> pseudo selectors
+        are used to apply validation styles as well as display feedback
+        messages.
+      </p>
+      <p>
+        Bootstrap scopes the <code>:valid</code> and <code>:invalid</code>{' '}
+        styles to parent <code>.was-validated</code> class, usually applied to
+        the <code>Form</code> (you can use the <code>validated</code> prop as a
+        shortcut). Otherwise, any required field without a value shows up as
+        invalid on page load. This way, you may choose when to activate them
+        (typically after form submission is attempted).
+      </p>
+      <ReactPlayground codeText={ValidationNative} />
+
+      <LinkedHeading h="3" id="forms-validation-libraries">
+        Form libraries and server rendered styles.
+      </LinkedHeading>
+      <p>
+        It's often beneficial (especially in React) to handle form validation
+        via a library like Formik, or react-formal. In those cases,{' '}
+        <code>isValid</code> and <code>isInvalid</code> props can be added to
+        form controls to manually apply validation styles. Below is a quick
+        example integrating with{' '}
+        <a href="https://github.com/jaredpalmer/formik">Formik</a>.
+      </p>
+      <ReactPlayground codeText={ValidationFormik} />
+
+      <LinkedHeading h="3" id="forms-validation-examples">
+        Examples
+      </LinkedHeading>
+
+      <LinkedHeading h="2" id="forms-api">
+        API
+      </LinkedHeading>
+      <ComponentApi metadata={data.Form} />
+      <ComponentApi metadata={data.FormRow} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FormGroup} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FormLabel} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FormControl} exportedBy={data.Form} />
+      <ComponentApi metadata={data.Feedback} exportedBy={data.FormControl} />
+      <ComponentApi metadata={data.FormCheck} exportedBy={data.Form} />
+      <ComponentApi
+        metadata={data.FormCheckInput}
+        exportedBy={data.FormCheck}
+      />
+      <ComponentApi
+        metadata={data.FormCheckLabel}
+        exportedBy={data.FormCheck}
+      />
+    </>
   );
-}
+});
 
 export const query = graphql`
   query FormQuery {
     Form: componentMetadata(displayName: { eq: "Form" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
+    }
+    FormRow: componentMetadata(displayName: { eq: "FormRow" }) {
+      ...ComponentApi_metadata
     }
     FormGroup: componentMetadata(displayName: { eq: "FormGroup" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
     FormControl: componentMetadata(displayName: { eq: "FormControl" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
-    ControlLabel: componentMetadata(displayName: { eq: "ControlLabel" }) {
-      ...PropTable_metadata
+    FormLabel: componentMetadata(displayName: { eq: "FormLabel" }) {
+      ...ComponentApi_metadata
     }
-    Checkbox: componentMetadata(displayName: { eq: "Checkbox" }) {
-      ...PropTable_metadata
+    FormCheck: componentMetadata(displayName: { eq: "FormCheck" }) {
+      ...ComponentApi_metadata
     }
-    Radio: componentMetadata(displayName: { eq: "Radio" }) {
-      ...PropTable_metadata
+    FormCheckInput: componentMetadata(displayName: { eq: "FormCheckInput" }) {
+      ...ComponentApi_metadata
     }
-    FormControlStatic: componentMetadata(
-      displayName: { eq: "FormControlStatic" }
-    ) {
-      ...PropTable_metadata
+    FormCheckLabel: componentMetadata(displayName: { eq: "FormCheckLabel" }) {
+      ...ComponentApi_metadata
     }
-    HelpBlock: componentMetadata(displayName: { eq: "HelpBlock" }) {
-      ...PropTable_metadata
-    }
-    InputGroup: componentMetadata(displayName: { eq: "InputGroup" }) {
-      ...PropTable_metadata
-    }
-    InputGroupAddon: componentMetadata(displayName: { eq: "InputGroupAddon" }) {
-      ...PropTable_metadata
-    }
-    InputGroupButton: componentMetadata(
-      displayName: { eq: "InputGroupButton" }
-    ) {
-      ...PropTable_metadata
-    }
-    FormControlFeedback: componentMetadata(
-      displayName: { eq: "FormControlFeedback" }
-    ) {
-      ...PropTable_metadata
+    Feedback: componentMetadata(displayName: { eq: "Feedback" }) {
+      ...ComponentApi_metadata
     }
   }
 `;

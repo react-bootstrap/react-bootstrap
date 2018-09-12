@@ -54,7 +54,7 @@ export const bsStyles = curry((styles, defaultStyle, Component) => {
 
   Component.propTypes = {
     ...propTypes,
-    bsStyle: propType
+    bsStyle: propType,
   };
 
   if (defaultStyle !== undefined) {
@@ -98,7 +98,7 @@ export const bsSizes = curry((sizes, defaultSize, Component) => {
 
   Component.propTypes = {
     ...propTypes,
-    bsSize: propType
+    bsSize: propType,
   };
 
   if (defaultSize !== undefined) {
@@ -113,7 +113,7 @@ export const bsSizes = curry((sizes, defaultSize, Component) => {
 
 export function getClassSet(props) {
   const classes = {
-    [prefix(props)]: true
+    [prefix(props)]: true,
   };
 
   if (props.bsSize) {
@@ -133,7 +133,7 @@ function getBsProps(props) {
     bsClass: props.bsClass,
     bsSize: props.bsSize,
     bsStyle: props.bsStyle,
-    bsRole: props.bsRole
+    bsRole: props.bsRole,
   };
 }
 

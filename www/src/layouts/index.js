@@ -1,35 +1,46 @@
+import { MDXProvider } from '@mdx-js/tag';
 import PropTypes from 'prop-types';
 import React from 'react';
-import 'bootstrap/less/bootstrap.less';
 
-import GettingStarted from './getting-started';
-import Layout from './layout';
-import Default from './default';
-import Utilities from './utilities';
-import Components from './components';
+import NavMain from '../components/NavMain';
+import Heading from '../components/Heading';
+import CodeBlock from '../components/CodeBlock';
+import LinkedHeading from '../components/LinkedHeading';
 
-import '../css/docs.css';
-import '../css/style.less';
-
-const propTypes = {
-  location: PropTypes.object.isRequired
+const getMode = (className = '') => {
+  const [, mode] = className.match(/language-(\w+)/) || [];
+  return mode;
 };
 
-function DefaultLayout(props) {
-  const { location } = props;
-  if (location.pathname.startsWith('/getting-started')) {
-    return <GettingStarted {...props} />;
-  }
-  if (location.pathname.startsWith('/layout')) {
-    return <Layout {...props} />;
-  }
-  if (location.pathname.startsWith('/components')) {
-    return <Components {...props} />;
-  }
-  if (location.pathname.startsWith('/utilities')) {
-    return <Utilities {...props} />;
-  }
-  return <Default {...props} />;
+const components = {
+  wrapper: props => <React.Fragment {...props} />,
+  h1: props => <Heading h="1" {...props} />,
+  h2: props => <LinkedHeading h="2" {...props} />,
+  h3: props => <LinkedHeading h="3" {...props} />,
+  h4: props => <LinkedHeading h="4" {...props} />,
+  h5: props => <LinkedHeading h="5" {...props} />,
+  pre: props =>
+    React.isValidElement(props.children) ? (
+      <CodeBlock
+        codeText={props.children.props.children}
+        mode={getMode(props.children.props.props.className)} // omg
+      />
+    ) : (
+      <pre {...props} />
+    ),
+};
+
+const propTypes = {
+  location: PropTypes.object.isRequired,
+};
+
+function DefaultLayout({ children, location }) {
+  return (
+    <div>
+      <NavMain activePage={location.pathname} />
+      <MDXProvider components={components}>{children}</MDXProvider>
+    </div>
+  );
 }
 
 DefaultLayout.propTypes = propTypes;

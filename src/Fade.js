@@ -3,8 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Transition, {
   ENTERED,
-  ENTERING
+  ENTERING,
 } from 'react-transition-group/Transition';
+import onEnd from 'dom-helpers/transition/end';
+import triggerBrowserReflow from './utils/triggerBrowserReflow';
 
 const propTypes = {
   /**
@@ -58,7 +60,7 @@ const propTypes = {
   /**
    * Callback fired after the component has faded out
    */
-  onExited: PropTypes.func
+  onExited: PropTypes.func,
 };
 
 const defaultProps = {
@@ -66,20 +68,25 @@ const defaultProps = {
   timeout: 300,
   mountOnEnter: false,
   unmountOnExit: false,
-  appear: false
+  appear: false,
 };
 
 const fadeStyles = {
-  [ENTERING]: 'in',
-  [ENTERED]: 'in'
+  [ENTERING]: 'show',
+  [ENTERED]: 'show',
 };
 
 class Fade extends React.Component {
+  handleEnter = node => {
+    triggerBrowserReflow(node);
+    if (this.props.onEnter) this.props.onEnter(node);
+  };
+
   render() {
     const { className, children, ...props } = this.props;
 
     return (
-      <Transition {...props}>
+      <Transition addEndListener={onEnd} {...props} onEnter={this.handleEnter}>
         {(status, innerProps) =>
           React.cloneElement(children, {
             ...innerProps,
@@ -87,8 +94,8 @@ class Fade extends React.Component {
               'fade',
               className,
               children.props.className,
-              fadeStyles[status]
-            )
+              fadeStyles[status],
+            ),
           })
         }
       </Transition>

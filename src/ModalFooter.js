@@ -1,31 +1,25 @@
 import classNames from 'classnames';
 import React from 'react';
+import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
 
-import { bsClass, getClassSet, splitBsProps } from './utils/bootstrapUtils';
-
-const propTypes = {
-  componentClass: elementType
-};
-
-const defaultProps = {
-  componentClass: 'div'
-};
+import { createBootstrapComponent } from './ThemeProvider';
 
 class ModalFooter extends React.Component {
+  static propTypes = {
+    bsPrefix: PropTypes.string,
+    as: elementType,
+  };
+
+  static defaultProps = {
+    as: 'div',
+  };
+
   render() {
-    const { componentClass: Component, className, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
+    const { as: Component, bsPrefix, className, ...props } = this.props;
 
-    const classes = getClassSet(bsProps);
-
-    return (
-      <Component {...elementProps} className={classNames(className, classes)} />
-    );
+    return <Component {...props} className={classNames(className, bsPrefix)} />;
   }
 }
 
-ModalFooter.propTypes = propTypes;
-ModalFooter.defaultProps = defaultProps;
-
-export default bsClass('modal-footer', ModalFooter);
+export default createBootstrapComponent(ModalFooter, 'modal-footer');

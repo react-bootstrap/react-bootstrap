@@ -1,97 +1,92 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import PropTable from '../../components/PropTable';
+import ComponentApi from '../../components/ComponentApi';
+import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
+import Alignment from '../../examples/Media/Alignment';
+import Basic from '../../examples/Media/Basic';
+import List from '../../examples/Media/List';
+import Nesting from '../../examples/Media/Nesting';
+import Order from '../../examples/Media/Order';
+import withLayout from '../../withLayout';
 
-import MediaList from '../../examples/MediaList';
-import MediaObject from '../../examples/MediaObject';
-import MediaAlignment from '../../examples/MediaAlignment';
-
-export default function MediaSection({ data }) {
+export default withLayout(function MediaSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="media-objects">Media objects</Anchor>{' '}
-        <small>
-          Media, Media.Left, Media.Right, Media.Heading, Media.List,
-          Media.ListItem
-        </small>
-      </h2>
+    <>
+      <LinkedHeading h="1" id="media-objects">
+        Media objects
+      </LinkedHeading>
 
       <p>
-        Abstract object styles for building various types of components (like
-        blog comments, Tweets, etc) that feature a <code>left</code> or{' '}
-        <code>right</code> aligned image alongside textual content.
+        The media object helps build complex and repetitive components (e.g.
+        blog comments, tweets, the like and more) where some media is positioned
+        alongside content that doesn’t wrap around said media. Plus, it does
+        this with only two required classes thanks to flexbox. Below is an
+        example of a single media object. Only two classes are required—the
+        wrapping <code>Media</code> and the <code>Media.Body</code> around your
+        content. Optional padding and margin can be controlled through spacing
+        utilities.
       </p>
-      <ReactPlayground codeText={MediaObject} />
+      <ReactPlayground codeText={Basic} />
 
-      <h3>
-        <Anchor id="media-alignment">Media Alignment</Anchor>
-      </h3>
+      <LinkedHeading h="2" id="media-nesting">
+        Media Nesting
+      </LinkedHeading>
+
       <p>
-        The images or other media can be aligned top, middle, or bottom. The
-        default is top aligned.
+        Media objects can be infinitely nested, though we suggest you stop at
+        some point. Place nested <code>Media</code> within the{' '}
+        <code>Media.Body</code> of a parent media object.
       </p>
-      <ReactPlayground codeText={MediaAlignment} />
+      <ReactPlayground codeText={Nesting} />
 
-      <h3>
-        <Anchor id="media-list">Media list</Anchor>
-      </h3>
+      <LinkedHeading h="2" id="media-alignment">
+        Media Alignment
+      </LinkedHeading>
+
       <p>
-        You can use media inside list (useful for comment threads or articles
-        lists).
+        Media in a media object can be aligned with flexbox utilities to the top
+        (default), middle, or end of your <code>Media.Body</code> content.
       </p>
-      <ReactPlayground codeText={MediaList} />
+      <ReactPlayground codeText={Alignment} />
 
-      <h3>
-        <Anchor id="media-props">Props</Anchor>
-      </h3>
+      <LinkedHeading h="2" id="media-order">
+        Media Order
+      </LinkedHeading>
 
-      <h4>
-        <Anchor id="media-media-props">Media</Anchor>
-      </h4>
-      <PropTable metadata={data.Media} />
+      <p>
+        Change the order of content in media objects by modifying the HTML
+        itself, or by adding some custom flexbox CSS to set the{' '}
+        <code>order</code> property (to an integer of your choosing).
+      </p>
+      <ReactPlayground codeText={Order} />
 
-      <h4>
-        <Anchor id="media-left-props">Media.Left</Anchor>
-      </h4>
-      <PropTable metadata={data.MediaLeft} />
+      <LinkedHeading h="2" id="media-list">
+        Media list
+      </LinkedHeading>
 
-      <h4>
-        <Anchor id="media-right-props">Media.Right</Anchor>
-      </h4>
-      <PropTable metadata={data.MediaRight} />
+      <p>
+        Because the media object has so few structural requirements, you can
+        also use these classes on list HTML elements. On your <code>ul</code> or{' '}
+        <code>ol</code> , add the .list-unstyled to remove any browser default
+        list styles, use <code>{'<Media as="li">'}</code> to render as a list
+        item. As always, use spacing utilities wherever needed to fine tune.
+      </p>
+      <ReactPlayground codeText={List} />
 
-      <h4>
-        <Anchor id="media-heading-props">Media.Heading</Anchor>
-      </h4>
-      <PropTable metadata={data.MediaHeading} />
+      <LinkedHeading h="2" id="media-props">
+        Props
+      </LinkedHeading>
 
-      <h4>
-        <Anchor id="media-body-props">Media.Body</Anchor>
-      </h4>
-      <PropTable metadata={data.MediaBody} />
-    </div>
+      <ComponentApi metadata={data.Media} />
+    </>
   );
-}
+});
 
 export const query = graphql`
   query MediaQuery {
     Media: componentMetadata(displayName: { eq: "Media" }) {
-      ...PropTable_metadata
-    }
-    MediaLeft: componentMetadata(displayName: { eq: "MediaLeft" }) {
-      ...PropTable_metadata
-    }
-    MediaRight: componentMetadata(displayName: { eq: "MediaRight" }) {
-      ...PropTable_metadata
-    }
-    MediaHeading: componentMetadata(displayName: { eq: "MediaHeading" }) {
-      ...PropTable_metadata
-    }
-    MediaBody: componentMetadata(displayName: { eq: "MediaBody" }) {
       ...PropTable_metadata
     }
   }
