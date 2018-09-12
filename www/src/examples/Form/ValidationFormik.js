@@ -128,7 +128,7 @@ function FormExample() {
               label="Agree to terms and conditions"
               onChange={handleChange}
               isInvalid={!!errors.terms}
-              invalidFeedback={errors.terms}
+              feedback={errors.terms}
               id="validationFormik0"
             />
           </Form.Group>

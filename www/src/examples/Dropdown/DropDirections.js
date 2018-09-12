@@ -6,6 +6,7 @@
         variant="secondary"
         title={` Drop ${direction} `}
         id={`dropdown-button-drop-${direction}`}
+        key={direction}
       >
         <Dropdown.Item eventKey="1">Action</Dropdown.Item>
         <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
@@ -23,6 +24,7 @@
         variant="secondary"
         title={`Drop ${direction}`}
         id={`dropdown-button-drop-${direction}`}
+        key={direction}
       >
         <Dropdown.Item eventKey="1">Action</Dropdown.Item>
         <Dropdown.Item eventKey="2">Another action</Dropdown.Item>

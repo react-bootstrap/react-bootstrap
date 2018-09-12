@@ -1,6 +1,6 @@
 <ButtonToolbar>
-  <Dropdown id="dropdown-custom-1">
-    <Dropdown.Toggle>Pow! Zoom!</Dropdown.Toggle>
+  <Dropdown>
+    <Dropdown.Toggle id="dropdown-custom-1">Pow! Zoom!</Dropdown.Toggle>
     <Dropdown.Menu className="super-colors">
       <Dropdown.Item eventKey="1">Action</Dropdown.Item>
       <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
@@ -12,9 +12,9 @@
     </Dropdown.Menu>
   </Dropdown>
 
-  <Dropdown as={ButtonGroup} id="dropdown-custom-2">
+  <Dropdown as={ButtonGroup}>
     <Button variant="info">mix it up style-wise</Button>
-    <Dropdown.Toggle split variant="success" />
+    <Dropdown.Toggle split variant="success" id="dropdown-custom-2" />
     <Dropdown.Menu className="super-colors">
       <Dropdown.Item eventKey="1">Action</Dropdown.Item>
       <Dropdown.Item eventKey="2">Another action</Dropdown.Item>

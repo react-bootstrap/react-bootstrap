@@ -4,6 +4,8 @@ import React from 'react';
 
 import Button from './Button';
 
+const noop = () => {};
+
 const propTypes = {
   /**
    * The `<input>` element `type`
@@ -17,7 +19,7 @@ const propTypes = {
   name: PropTypes.string,
 
   /**
-   * The checked state of the input, managed by `<ToggleButtonGroup>`` automatically
+   * The checked state of the input, managed by `<ToggleButtonGroup>` automatically
    */
   checked: PropTypes.bool,
 
@@ -36,6 +38,15 @@ const propTypes = {
    * `ToggleButtonGroup`.
    */
   value: PropTypes.any.isRequired,
+
+  /**
+   * A ref attached to the `<input>` element
+   * @type {ReactRef}
+   */
+  inputRef: PropTypes.any,
+
+  /** @ignore */
+  innerRef: PropTypes.any,
 };
 
 class ToggleButton extends React.Component {
@@ -58,15 +69,22 @@ class ToggleButton extends React.Component {
       type,
       onChange,
       value,
+      disabled,
+      inputRef,
+      innerRef,
       ...props
     } = this.props;
     const { focused } = this.state;
-    const disabled = props.disabled;
 
     return (
       <Button
         {...props}
-        className={classNames(className, focused && 'focus')}
+        ref={innerRef}
+        className={classNames(
+          className,
+          focused && 'focus',
+          disabled && 'disabled',
+        )}
         type={null}
         active={!!checked}
         as="label"
@@ -75,12 +93,13 @@ class ToggleButton extends React.Component {
           name={name}
           type={type}
           value={value}
+          ref={inputRef}
           autoComplete="off"
           checked={!!checked}
           disabled={!!disabled}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
-          onChange={onChange}
+          onChange={onChange || noop}
         />
 
         {children}
@@ -91,4 +110,6 @@ class ToggleButton extends React.Component {
 
 ToggleButton.propTypes = propTypes;
 
-export default ToggleButton;
+export default React.forwardRef((props, ref) => (
+  <ToggleButton innerRef={ref} {...props} />
+));

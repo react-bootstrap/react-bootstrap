@@ -26,13 +26,11 @@ class CustomMenu extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
 
-    this.state = {
-      value: '',
-    };
+    this.state = { value: '' };
   }
 
   handleChange(e) {
-    this.setState({ value: e.target.value });
+    this.setState({ value: e.target.value.toLowerCase().trim() });
   }
 
   render() {
@@ -46,16 +44,10 @@ class CustomMenu extends React.Component {
     const { value } = this.state;
 
     return (
-      <div
-        className={className}
-        aria-labelledby={labeledBy}
-        style={{ ...style, padding: '' }}
-      >
+      <div style={style} className={className} aria-labelledby={labeledBy}>
         <FormControl
-          ref={c => {
-            this.input = c;
-          }}
-          type="text"
+          autoFocus
+          className="mx-3 my-2 w-auto"
           placeholder="Type to filter..."
           onChange={this.handleChange}
           value={value}
@@ -63,7 +55,7 @@ class CustomMenu extends React.Component {
         <ul className="list-unstyled">
           {React.Children.toArray(children).filter(
             child =>
-              !value.trim() || child.props.children.indexOf(value) !== -1,
+              !value || child.props.children.toLowerCase().startsWith(value),
           )}
         </ul>
       </div>
@@ -72,8 +64,10 @@ class CustomMenu extends React.Component {
 }
 
 render(
-  <Dropdown id="dropdown-custom-menu">
-    <Dropdown.Toggle as={CustomToggle}>Custom toggle</Dropdown.Toggle>
+  <Dropdown>
+    <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+      Custom toggle
+    </Dropdown.Toggle>
 
     <Dropdown.Menu as={CustomMenu}>
       <Dropdown.Item eventKey="1">Red</Dropdown.Item>

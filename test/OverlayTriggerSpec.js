@@ -50,7 +50,7 @@ describe('<OverlayTrigger>', () => {
 
     wrapper.find('button').simulate('click');
 
-    wrapper.assertSingle('.test');
+    wrapper.assertSingle('div.test');
   });
 
   it('Should not set aria-describedby if the state is not show', () => {
@@ -122,7 +122,7 @@ describe('<OverlayTrigger>', () => {
     );
     wrapper.find('button').simulate('click');
 
-    wrapper.assertSingle('.test-overlay');
+    wrapper.assertSingle('div.test-overlay');
   });
 
   it('Should pass transition callbacks to Transition', done => {

@@ -1,11 +1,9 @@
-import { MDXProvider } from '@mdx-js/tag';
-import PropTypes from 'prop-types';
-import React from 'react';
+const { MDXProvider } = require('@mdx-js/tag');
+const React = require('react');
 
-import NavMain from '../components/NavMain';
-import Heading from '../components/Heading';
-import CodeBlock from '../components/CodeBlock';
-import LinkedHeading from '../components/LinkedHeading';
+const Heading = require('./components/Heading');
+const CodeBlock = require('./components/CodeBlock');
+const LinkedHeading = require('./components/LinkedHeading');
 
 const getMode = (className = '') => {
   const [, mode] = className.match(/language-(\w+)/) || [];
@@ -30,19 +28,6 @@ const components = {
     ),
 };
 
-const propTypes = {
-  location: PropTypes.object.isRequired,
-};
-
-function DefaultLayout({ children, location }) {
-  return (
-    <div>
-      <NavMain activePage={location.pathname} />
-      <MDXProvider components={components}>{children}</MDXProvider>
-    </div>
-  );
-}
-
-DefaultLayout.propTypes = propTypes;
-
-export default DefaultLayout;
+module.exports = ({ element }) => (
+  <MDXProvider components={components}>{element}</MDXProvider>
+);

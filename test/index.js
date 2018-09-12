@@ -1,6 +1,6 @@
 import deprecated from 'prop-types-extra/lib/deprecated';
 import Enzyme, { ShallowWrapper, ReactWrapper } from 'enzyme';
-import Adapter from '@monastic.panic/enzyme-adapter-react-16';
+import Adapter from 'enzyme-adapter-react-16';
 
 import { _resetWarned } from '../src/utils/deprecationWarning';
 

@@ -21,7 +21,7 @@ class NavDropdownExample extends React.Component {
             NavLink 3 content
           </Nav.Link>
         </Nav.Item>
-        <NavDropdown eventKey="4" title="Dropdown" id="nav-dropdown">
+        <NavDropdown title="Dropdown" id="nav-dropdown">
           <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
           <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>
           <NavDropdown.Item eventKey="4.3">

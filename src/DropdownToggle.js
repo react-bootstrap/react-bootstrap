@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import elementType from 'prop-types-extra/lib/elementType';
@@ -7,6 +8,12 @@ import React from 'react';
 
 import Button from './Button';
 import { createBootstrapComponent } from './ThemeProvider';
+
+const wrapRef = props => {
+  const { ref } = props;
+  props.ref = ref.__wrapped || (ref.__wrapped = r => ref(findDOMNode(r)));
+  return props;
+};
 
 class DropdownToggle extends React.Component {
   static propTypes = {
@@ -49,7 +56,7 @@ class DropdownToggle extends React.Component {
       ...props
     } = this.props;
 
-    // This intentionally forwards bsSize and bsStyle (if set) to the
+    // This intentionally forwards size and variant (if set) to the
     // underlying component, to allow it to render size and style variants.
     return (
       <BaseDropdownToggle>
@@ -62,7 +69,7 @@ class DropdownToggle extends React.Component {
               bsPrefix,
               split && `${bsPrefix}-split`,
             )}
-            {...toggleProps}
+            {...wrapRef(toggleProps)}
             {...props}
           >
             {children}

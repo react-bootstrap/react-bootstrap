@@ -1,4 +1,6 @@
 import { graphql } from 'gatsby';
+
+import sortBy from 'lodash/sortBy';
 import capitalize from 'lodash/capitalize';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -84,7 +86,7 @@ class PropTable extends React.Component {
   }
 
   _renderRows(propsData) {
-    return propsData
+    return sortBy(propsData, _ => (_.name === 'bsPrefix' ? 'zzzzzz' : _.name))
       .filter(
         prop => prop.type && !prop.doclets.private && !prop.doclets.ignore,
       )

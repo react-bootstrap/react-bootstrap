@@ -20,13 +20,24 @@ import {
 import PlaceholderImage from './PlaceholderImage';
 import Sonnet from './Sonnet';
 
-const { background, foreground } = css`
-  @import '../css/theme';
+const scope = {
+  ...ReactBootstrap,
+  ReactDOM,
+  classNames,
+  PropTypes,
+  Sonnet,
+  formik,
+  yup,
+  PlaceholderImage,
+};
 
-  :export {
-    background: $lighter;
-    foreground: $subtleOnDark;
-  }
+const StyledError = styled(LiveError)`
+  composes: alert alert-danger text-monospace from global;
+
+  border-radius: 0;
+  border-width: 0.2rem;
+  margin-bottom: 0;
+  white-space: pre;
 `;
 
 const StyledProvider = styled(LiveProvider)`
@@ -34,6 +45,27 @@ const StyledProvider = styled(LiveProvider)`
 
   background-color: $body-bg;
   margin-bottom: 3rem;
+`;
+
+const StyledEditor = styled(LiveEditor)`
+  composes: prism from '../css/prism.module.scss';
+  border-radius: 0 0 8px 8px;
+`;
+
+const EditorInfoMessage = styled('div')`
+  composes: p-2 alert alert-info from global;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  pointer-events: none;
+  font-size: 70%;
+
+  *:not(:focus) + & {
+    opacity: 0;
+  }
 `;
 
 const StyledExample = styled('div')`
@@ -74,38 +106,9 @@ const StyledExample = styled('div')`
   }
 `;
 
-const editorStyles = css`
-  .container {
-    position: relative;
-  }
-
-  .alert {
-    composes: p-1 from global;
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    pointer-events: none;
-    font-size: 70%;
-
-    *:not(:focus) + & {
-      opacity: 0;
-    }
-  }
-
-  .editor {
-    composes: prism from '../css/prism.module.scss';
-
-    border-radius: 0 0 8px 8px;
-  }
-`;
-
 let uid = 0;
 
-class CodeEditor extends React.Component {
+class Editor extends React.Component {
   state = { ignoreTab: false };
 
   id = `described-by-${++uid}`;
@@ -140,9 +143,8 @@ class CodeEditor extends React.Component {
   render() {
     const { keyboardFocused, ignoreTab } = this.state;
     return (
-      <div className={editorStyles.container}>
-        <LiveEditor
-          className={editorStyles.editor}
+      <div className="position-relative">
+        <StyledEditor
           onBlur={this.handleBlur}
           onFocus={this.handleFocus}
           onKeyDown={this.handleKeyDown}
@@ -152,12 +154,7 @@ class CodeEditor extends React.Component {
           aria-label="Example code editor"
         />
         {(keyboardFocused || !ignoreTab) && (
-          <ReactBootstrap.Alert
-            variant="info"
-            className={editorStyles.alert}
-            id={this.id}
-            aria-live="polite"
-          >
+          <EditorInfoMessage id={this.id} aria-live="polite">
             {ignoreTab ? (
               <>
                 Press <kbd>enter</kbd> or type a key to enable tab-to-indent
@@ -167,33 +164,30 @@ class CodeEditor extends React.Component {
                 Press <kbd>esc</kbd> to disable tab trapping
               </>
             )}
-          </ReactBootstrap.Alert>
+          </EditorInfoMessage>
         )}
       </div>
     );
   }
 }
 
-const scope = {
-  ...ReactBootstrap,
-  ReactDOM,
-  classNames,
-  PropTypes,
-  Sonnet,
-  formik,
-  yup,
-  PlaceholderImage,
-  bootstrapUtils: ReactBootstrap.utils.bootstrapUtils,
-};
-
 const prettierComment = /(\{\s*\/\*\s+prettier-ignore\s+\*\/\s*\})|(\/\/\s+prettier-ignore)/gim;
 
-const Example = withLive(
+const { background, foreground } = css`
+  @import '../css/theme';
+
+  :export {
+    background: $lighter;
+    foreground: $subtleOnDark;
+  }
+`;
+
+const Preview = withLive(
   class extends React.Component {
     constructor() {
       super();
 
-      this.example = React.createRef();
+      this.example = null;
 
       import('holderjs').then(({ default: hjs }) => {
         this.hjs = hjs;
@@ -216,28 +210,36 @@ const Example = withLive(
       if (e.target.tagName === 'A') e.preventDefault();
     };
 
+    attachRef = ref => {
+      this.example = ref;
+      this.runHolder();
+    };
+
     runHolder() {
-      if (!this.hjs || !this.example.current) return;
+      if (!this.hjs || !this.example) return;
+
       this.hjs.run({
         theme: 'gray',
-        images: qsa(this.example.current, 'img'),
+        images: qsa(this.example, 'img'),
       });
     }
 
     render() {
       const { showCode, className } = this.props;
       return (
-        <StyledExample
-          role="region"
-          aria-label="Code Example"
-          ref={this.example}
-          showCode={showCode}
-          className={className}
-          onClick={this.handleClick}
-        >
-          <LivePreview />
-          <LiveError />
-        </StyledExample>
+        <>
+          <StyledExample
+            role="region"
+            aria-label="Code Example"
+            ref={this.attachRef}
+            showCode={showCode}
+            className={className}
+            onClick={this.handleClick}
+          >
+            <LivePreview />
+          </StyledExample>
+          <StyledError />
+        </>
       );
     }
   },
@@ -259,8 +261,8 @@ export default class Playground extends React.Component {
         mountStylesheet={false}
         noInline={codeText.includes('render(')}
       >
-        <Example showCode={showCode} className={exampleClassName} />
-        {showCode && <CodeEditor onChange={this.handleChange} />}
+        <Preview showCode={showCode} className={exampleClassName} />
+        {showCode && <Editor onChange={this.handleChange} />}
       </StyledProvider>
     );
   }

@@ -1466,9 +1466,9 @@ babel-plugin-pluck-imports@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-pluck-imports/-/babel-plugin-pluck-imports-0.0.1.tgz#e5a68b33c66213c62499c0be620ab6583055d9c0"
 
-babel-plugin-remove-graphql-queries@^2.0.2-rc.2:
-  version "2.0.2-rc.2"
-  resolved "https://registry.yarnpkg.com/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-2.0.2-rc.2.tgz#85ae3b8d46ebaa27e128d15321d67acd409d95e2"
+babel-plugin-remove-graphql-queries@^2.0.2-rc.3:
+  version "2.0.2-rc.3"
+  resolved "https://registry.yarnpkg.com/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-2.0.2-rc.3.tgz#82f8984e06585db4e8fe02caa68d03cec918fd57"
 
 babel-plugin-syntax-class-properties@^6.8.0:
   version "6.13.0"
@@ -4219,13 +4219,12 @@ gatsby-react-router-scroll@^2.0.0-rc.2:
     scroll-behavior "^0.9.9"
     warning "^3.0.0"
 
-gatsby-remark-prismjs@^1.2.17:
-  version "1.2.24"
-  resolved "http://registry.npmjs.org/gatsby-remark-prismjs/-/gatsby-remark-prismjs-1.2.24.tgz#b2cc4e9c4e71c08d89a32fd847244f927f4a7b79"
+gatsby-remark-prismjs@^3.0.0-rc.2:
+  version "3.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-prismjs/-/gatsby-remark-prismjs-3.0.0-rc.2.tgz#80e9c13547e545a0f61428320e16d53f0b02ac00"
   dependencies:
-    babel-runtime "^6.26.0"
-    parse-numeric-range "0.0.2"
-    prismjs "^1.12.2"
+    "@babel/runtime" "^7.0.0"
+    parse-numeric-range "^0.0.2"
     unist-util-visit "^1.3.0"
 
 gatsby-source-filesystem@2.0.1-rc.1:
@@ -4280,9 +4279,9 @@ gatsby-transformer-remark@^2.1.1-rc.1:
     unist-util-select "^1.5.0"
     unist-util-visit "^1.3.0"
 
-gatsby@^2.0.0-rc.9:
-  version "2.0.0-rc.9"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.0.0-rc.9.tgz#7c1c981839a2e4dedbeb209f1e2c91da9a8edb40"
+gatsby@^2.0.0-rc.15:
+  version "2.0.0-rc.15"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.0.0-rc.15.tgz#994ceabf049e0020fa799928d77658ab95cb0290"
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/core" "^7.0.0"
@@ -4303,7 +4302,7 @@ gatsby@^2.0.0-rc.9:
     babel-plugin-add-module-exports "^0.2.1"
     babel-plugin-dynamic-import-node "^1.2.0"
     babel-plugin-macros "^2.4.0"
-    babel-plugin-remove-graphql-queries "^2.0.2-rc.2"
+    babel-plugin-remove-graphql-queries "^2.0.2-rc.3"
     better-queue "^3.8.6"
     bluebird "^3.5.0"
     chalk "^2.3.2"
@@ -6988,7 +6987,7 @@ parse-latin@^4.0.0:
     unist-util-modify-children "^1.0.0"
     unist-util-visit-children "^1.0.0"
 
-parse-numeric-range@0.0.2:
+parse-numeric-range@^0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/parse-numeric-range/-/parse-numeric-range-0.0.2.tgz#b4f09d413c7adbcd987f6e9233c7b4b210c938e4"
 
@@ -7479,7 +7478,7 @@ prismjs@1.6:
   optionalDependencies:
     clipboard "^1.5.5"
 
-prismjs@^1.12.2, prismjs@^1.15.0:
+prismjs@^1.15.0:
   version "1.15.0"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.15.0.tgz#8801d332e472091ba8def94976c8877ad60398d9"
   optionalDependencies:
@@ -7699,7 +7698,19 @@ react-dev-utils@^4.2.1:
   dependencies:
     ast-types "0.11.5"
 
-react-docgen@3.0.0-beta12, react-docgen@3.0.0-rc.0:
+react-docgen@3.0.0-beta12, react-docgen@3.0.0-rc.1:
+  version "3.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/react-docgen/-/react-docgen-3.0.0-rc.1.tgz#a4e33dba1454459294276afdec87ef3958167eb0"
+  dependencies:
+    "@babel/parser" "7.0.0-beta.53"
+    async "^2.1.4"
+    babel-runtime "^6.9.2"
+    commander "^2.9.0"
+    doctrine "^2.0.0"
+    node-dir "^0.1.10"
+    recast "^0.15.0"
+
+react-docgen@3.0.0-rc.0:
   version "3.0.0-rc.0"
   resolved "https://registry.yarnpkg.com/react-docgen/-/react-docgen-3.0.0-rc.0.tgz#6452afc31649d651c9bafce9b94a470581530b76"
   dependencies:

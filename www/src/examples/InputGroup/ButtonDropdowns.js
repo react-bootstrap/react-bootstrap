@@ -4,6 +4,7 @@
       as={InputGroup.Prepend}
       variant="outline-secondary"
       title="Dropdown"
+      id="input-group-dropdown-1"
     >
       <Dropdown.Item href="#">Action</Dropdown.Item>
       <Dropdown.Item href="#">Another action</Dropdown.Item>
@@ -25,6 +26,7 @@
       as={InputGroup.Append}
       variant="outline-secondary"
       title="Dropdown"
+      id="input-group-dropdown-2"
     >
       <Dropdown.Item href="#">Action</Dropdown.Item>
       <Dropdown.Item href="#">Another action</Dropdown.Item>

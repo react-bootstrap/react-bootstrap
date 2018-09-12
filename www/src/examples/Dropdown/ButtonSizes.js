@@ -5,6 +5,7 @@
         size="lg"
         title="Drop small"
         id={`dropdown-button-drop-${idx}`}
+        key={idx}
       >
         <Dropdown.Item eventKey="1">Action</Dropdown.Item>
         <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
@@ -21,6 +22,7 @@
         variant="secondary"
         title="Drop small"
         id={`dropdown-button-drop-${idx}`}
+        key={idx}
       >
         <Dropdown.Item eventKey="1">Action</Dropdown.Item>
         <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
