@@ -28,7 +28,7 @@ const styles = css`
 const propTypes = {
   title: PropTypes.node,
   children: PropTypes.node,
-  theme: PropTypes.oneOf(['danger', 'warning']).isRequired,
+  theme: PropTypes.oneOf(['danger', 'warning']),
 };
 
 function Callout({ title, children, theme }) {

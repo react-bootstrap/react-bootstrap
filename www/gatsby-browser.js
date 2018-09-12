@@ -1,3 +1,3 @@
 require('./src/css/global.scss');
 
-exports.onClientEntry = () => {};
+exports.wrapPageElement = require(`./src/wrap-page`);

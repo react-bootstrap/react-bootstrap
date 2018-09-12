@@ -50,7 +50,7 @@ describe('<Alert>', () => {
           <Alert.Heading>Well done</Alert.Heading>
           Message
         </Alert>,
-      ).assertSingle('.alert-heading');
+      ).assertSingle('div.alert-heading');
     });
 
     it('Should have div styled as an h4 by default', () => {

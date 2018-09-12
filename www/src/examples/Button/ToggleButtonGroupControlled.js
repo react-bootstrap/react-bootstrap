@@ -20,12 +20,9 @@ class ToggleButtonGroupControlled extends React.Component {
         value={this.state.value}
         onChange={this.handleChange}
       >
-        <ToggleButton value={1}>Checkbox 1 (pre-checked)</ToggleButton>
-        <ToggleButton value={2}>Checkbox 2</ToggleButton>
-        <ToggleButton value={3}>Checkbox 3 (pre-checked)</ToggleButton>
-        <ToggleButton value={4} disabled>
-          Checkbox 4 (disabled)
-        </ToggleButton>
+        <ToggleButton value={1}>Option 1</ToggleButton>
+        <ToggleButton value={2}>Option 2</ToggleButton>
+        <ToggleButton value={3}>Option 3</ToggleButton>
       </ToggleButtonGroup>
     );
   }

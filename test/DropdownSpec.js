@@ -52,7 +52,7 @@ describe('<Dropdown>', () => {
 
   it('forwards alignRight to menu', () => {
     mount(<Dropdown alignRight>{dropdownChildren}</Dropdown>).assertSingle(
-      'DropdownMenu[alignEnd=true]',
+      'ReactOverlaysDropdownMenu[alignEnd=true]',
     );
   });
 

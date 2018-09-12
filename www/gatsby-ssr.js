@@ -38,3 +38,5 @@ exports.onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
     />,
   ]);
 };
+
+exports.wrapPageElement = require(`./src/wrap-page`);

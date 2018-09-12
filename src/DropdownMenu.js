@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { findDOMNode } from 'react-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
@@ -6,6 +7,12 @@ import BaseDropdownMenu from 'react-overlays/DropdownMenu';
 import NavbarContext from './NavbarContext';
 
 import { createBootstrapComponent } from './ThemeProvider';
+
+const wrapRef = props => {
+  const { ref } = props;
+  props.ref = ref.__wrapped || (ref.__wrapped = r => ref(findDOMNode(r)));
+  return props;
+};
 
 class DropdownMenu extends React.Component {
   static propTypes = {
@@ -57,8 +64,6 @@ class DropdownMenu extends React.Component {
       ...props
     } = this.props;
 
-    // For custom components provide additional, non-DOM, props;
-
     return (
       <NavbarContext>
         {isNavbar => (
@@ -69,6 +74,8 @@ class DropdownMenu extends React.Component {
             rootCloseEvent={rootCloseEvent}
           >
             {({ placement, show, alignEnd, close, props: menuProps }) => {
+              wrapRef(menuProps);
+              // For custom components provide additional, non-DOM, props;
               if (typeof Component !== 'string') {
                 menuProps.show = show;
                 menuProps.close = close;

@@ -11,6 +11,7 @@ const propTypes = {
   disabled: PropTypes.bool,
   role: PropTypes.string,
   tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
   /**
    * this is sort of silly but needed for Button
    */
@@ -65,7 +66,13 @@ class SafeAnchor extends React.Component {
   }
 
   render() {
-    const { as: Component, disabled, onKeyDown, ...props } = this.props;
+    const {
+      as: Component,
+      disabled,
+      onKeyDown,
+      innerRef,
+      ...props
+    } = this.props;
 
     if (isTrivialHref(props.href)) {
       props.role = props.role || 'button';
@@ -78,7 +85,7 @@ class SafeAnchor extends React.Component {
       props.tabIndex = -1;
       props['aria-disabled'] = true;
     }
-
+    if (innerRef) props.ref = innerRef;
     return (
       <Component
         {...props}

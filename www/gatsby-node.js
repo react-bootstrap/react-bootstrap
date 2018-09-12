@@ -18,7 +18,6 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
       ],
     },
     resolve: {
-      modules: [path.resolve(__dirname, '../node_modules')],
       alias: {
         react: path.resolve(__dirname, '../node_modules/react'),
         'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
@@ -32,14 +31,12 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
     ],
   });
 
-  const current = getConfig();
-  current.module.rules = current.module.rules.filter(r => r.enforce !== 'pre');
+  getConfig().resolve.modules = ['node_modules'];
 };
 
 exports.onCreateBabelConfig = ({ actions }) => {
   actions.setBabelOptions({
     options: {
-      babelrc: true,
       envName: 'docs',
       root: path.resolve(__dirname, '../'),
     },

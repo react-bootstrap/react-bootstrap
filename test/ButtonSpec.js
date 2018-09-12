@@ -26,6 +26,27 @@ describe('<Button>', () => {
       .should.equal('submit');
   });
 
+  it('should forward refs to the button', () => {
+    const ref = React.createRef();
+    mount(
+      <div>
+        <Button ref={ref}>Yo</Button>
+      </div>,
+    );
+
+    ref.current.tagName.should.equal('BUTTON');
+
+    mount(
+      <div>
+        <Button ref={ref} href="a">
+          Yo
+        </Button>
+      </div>,
+    );
+
+    ref.current.tagName.should.equal('A');
+  });
+
   it('Should output an anchor if called with a href', () => {
     let href = '/url';
 
