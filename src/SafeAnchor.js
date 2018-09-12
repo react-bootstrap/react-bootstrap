@@ -15,8 +15,6 @@ const propTypes = {
    * this is sort of silly but needed for Button
    */
   as: elementType,
-
-  /**  */
 };
 
 const defaultProps = {

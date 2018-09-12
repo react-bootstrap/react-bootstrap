@@ -26,7 +26,7 @@ describe('<Button>', () => {
       .should.equal('submit');
   });
 
-  it('should forward refs to the butto', () => {
+  it('should forward refs to the button', () => {
     const ref = React.createRef();
     mount(
       <div>
