@@ -12,7 +12,6 @@ export CardImg from './CardImg';
 export CardGroup from './CardGroup';
 export Carousel from './Carousel';
 export CarouselItem from './CarouselItem';
-export Clearfix from './Clearfix';
 export CloseButton from './CloseButton';
 export Col from './Col';
 export Collapse from './Collapse';
