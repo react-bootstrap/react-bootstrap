@@ -1,16 +1,20 @@
 # React-Bootstrap [![Travis][build-badge]][build] [![npm][npm-badge]][npm]
 
-[Bootstrap 3][bootstrap] components built with [React][react].
+[Bootstrap 4][bootstrap] components built with [React][react].
 
 [![Codecov][codecov-badge]][codecov]
 [![Discord][discord-badge]][discord]
 [![Thinkful][thinkful-badge]][thinkful]
 
-**Under active development - APIs will change.** Check out the [1.0.0 roadmap](https://github.com/react-bootstrap/react-bootstrap/wiki#100-roadmap) and [contributing guidelines][contributing] to see where you can help out. Prior to the 1.0.0 release, deprecations or breaking changes will result in a minor version bump.
-
 ## Docs
 
-See the [documentation][documentation] with live editable examples.
+See the [documentation][documentation] with live editable examples as well as docs for **[migrating from bootstrap 3](https://react-bootstrap.netlify.com/migrating/)**
+
+For the latest bootstrap 3 compatible release check out: https://react-bootstrap.github.io/
+
+### Migrating from bootstrap3
+
+Check out our
 
 ## Related modules
 
@@ -36,7 +40,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [bootstrap]: https://getbootstrap.com/
 [react]: https://reactjs.org/
-[documentation]: https://react-bootstrap.github.io/
+[documentation]: https://react-bootstrap.netlify.com
 [contributing]: CONTRIBUTING.md
 [build-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg?branch=master
 [build]: https://travis-ci.org/react-bootstrap/react-bootstrap

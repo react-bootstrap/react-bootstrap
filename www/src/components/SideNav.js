@@ -1,7 +1,7 @@
 import startCase from 'lodash/startCase';
 import React from 'react';
 import Nav from 'react-bootstrap/lib/Nav';
-import FormControl from 'react-bootstrap/lib/FormControl';
+// import FormControl from 'react-bootstrap/lib/FormControl';
 
 import { styled } from 'css-literal-loader/styled';
 import Button from 'react-bootstrap/lib/Button';
@@ -124,35 +124,44 @@ const components = [
 
 const utilities = ['transitions', 'responsive-embed', 'react-overlays'];
 
-function attachSearch(ref) {
-  if (ref)
-    window.docsearch({
-      apiKey: '68117ff90f086cb491d7e7e984cd7b75',
-      indexName: 'react_bootstrap',
-      inputSelector: ref,
-      debug: false, // Set debug to true if you want to inspect the dropdown
-    });
-}
+// We need to configure this
+// function attachSearch(ref) {
+//   if (ref)
+//     window.docsearch({
+//       apiKey: '68117ff90f086cb491d7e7e984cd7b75',
+//       indexName: 'react_bootstrap',
+//       inputSelector: ref,
+//       debug: false, // Set debug to true if you want to inspect the dropdown
+//     });
+// }
 
 function NavSection({ heading, location: { pathname }, items, path }) {
   let active = pathname.startsWith(path);
   return (
     <>
-      <TocLink active={active} href={`${path}/${items[0]}/`}>
+      <TocLink
+        active={active}
+        className="js-search-toc-item"
+        href={items ? `${path}/${items[0]}/` : `${path}/`}
+      >
         {heading}
       </TocLink>
 
-      {active && (
-        <Nav activeKey={pathname} onSelect={() => {}} className="d-block">
-          {items.map(name => (
-            <Nav.Item key={`${path}/${name}/`}>
-              <TocSubLink href={`${path}/${name}/`}>
-                {startCase(name.toLowerCase())}
-              </TocSubLink>
-            </Nav.Item>
-          ))}
-        </Nav>
-      )}
+      {items &&
+        active && (
+          <Nav activeKey={pathname} onSelect={() => {}} className="d-block">
+            {items.map(name => (
+              <Nav.Item key={`${path}/${name}/`}>
+                <TocSubLink
+                  href={`${path}/${name}/`}
+                  className="js-search-toc-subitem"
+                >
+                  {startCase(name.toLowerCase())}
+                </TocSubLink>
+              </Nav.Item>
+            ))}
+          </Nav>
+        )}
     </>
   );
 }
@@ -168,8 +177,8 @@ class SideNav extends React.Component {
     const { location, ...props } = this.props;
     return (
       <SidePanel {...props}>
-        <form className="py-3 d-flex align-items-center">
-          <FormControl type="text" placeholder="Search…" ref={attachSearch} />
+        <form className="py-3 d-md-none d-flex align-items-center justify-content-end">
+          {/* <FormControl type="text" placeholder="Search…" ref={attachSearch} /> */}
           <MenuButton onClick={this.handleCollapse}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -214,6 +223,11 @@ class SideNav extends React.Component {
               location={location}
               items={utilities}
               path="/utilities"
+            />
+            <NavSection
+              heading="Migrating"
+              location={location}
+              path="/migrating"
             />
           </TableOfContents>
         </Collapse>
