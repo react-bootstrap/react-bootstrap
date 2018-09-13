@@ -18,7 +18,7 @@ describe('<Tabs>', () => {
     );
 
     wrapper.assertSingle('TabPane[eventKey=1] .active');
-    wrapper.assertSingle('NavLink[eventKey="1"] a.active');
+    wrapper.assertSingle('NavLink[eventKey=1] a.active');
   });
 
   it('Should allow tab to have React components', () => {
