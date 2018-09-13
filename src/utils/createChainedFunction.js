@@ -15,9 +15,7 @@ function createChainedFunction(...funcs) {
       );
     }
 
-    if (acc === null) {
-      return f;
-    }
+    if (acc === null) return f;
 
     return function chainedFunction(...args) {
       acc.apply(this, args);

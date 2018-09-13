@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { createBootstrapComponent } from './ThemeProvider';
 
-import ValidComponentChildren from './utils/ValidComponentChildren';
+import { map } from './utils/ElementChildren';
 
 const ROUND_PRECISION = 1000;
 
@@ -179,9 +179,7 @@ class ProgressBar extends React.Component {
     return (
       <div {...wrapperProps} className={classNames(className, bsPrefix)}>
         {children
-          ? ValidComponentChildren.map(children, child =>
-              cloneElement(child, { isChild: true }),
-            )
+          ? map(children, child => cloneElement(child, { isChild: true }))
           : this.renderProgressBar({
               min,
               now,

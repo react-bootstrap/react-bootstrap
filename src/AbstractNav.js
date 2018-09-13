@@ -1,7 +1,7 @@
 import React from 'react';
 import qsa from 'dom-helpers/query/querySelectorAll';
 import PropTypes from 'prop-types';
-import elementType from 'prop-types-extra/lib/elementType';
+import { elementType } from 'prop-types-extra';
 import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import NavContext from './NavContext';

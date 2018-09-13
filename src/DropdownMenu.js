@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
-import elementType from 'prop-types-extra/lib/elementType';
+import { elementType } from 'prop-types-extra';
 import BaseDropdownMenu from 'react-overlays/DropdownMenu';
 import NavbarContext from './NavbarContext';
 

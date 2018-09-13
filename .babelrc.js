@@ -44,6 +44,10 @@ module.exports = api => {
       'babel-plugin-dev-expression',
       modules && 'babel-plugin-add-module-exports',
       api.env() === 'test' && 'babel-plugin-istanbul',
+      !dev && [
+        'transform-react-remove-prop-types',
+        { removeImport: true, additionalLibraries: ['prop-types-extra'] },
+      ],
     ].filter(Boolean),
   };
 };

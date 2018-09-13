@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import elementType from 'prop-types-extra/lib/elementType';
+import { elementType } from 'prop-types-extra';
 import requiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import uncontrollable from 'uncontrollable';
 
@@ -11,7 +11,7 @@ import UncontrolledTabContainer from './TabContainer';
 import TabContent from './TabContent';
 import TabPane from './TabPane';
 
-import * as ValidComponentChildren from './utils/ValidComponentChildren';
+import { forEach, map } from './utils/ElementChildren';
 
 const TabContainer = UncontrolledTabContainer.ControlledComponent;
 
@@ -81,7 +81,7 @@ const defaultProps = {
 
 function getDefaultActiveKey(children) {
   let defaultActiveKey;
-  ValidComponentChildren.forEach(children, child => {
+  forEach(children, child => {
     if (defaultActiveKey == null) {
       defaultActiveKey = child.props.eventKey;
     }
@@ -131,11 +131,11 @@ class Tabs extends React.Component {
         unmountOnExit={unmountOnExit}
       >
         <Nav {...props} role="tablist" as="nav">
-          {ValidComponentChildren.map(children, this.renderTab)}
+          {map(children, this.renderTab)}
         </Nav>
 
         <TabContent>
-          {ValidComponentChildren.map(children, child => {
+          {map(children, child => {
             const childProps = { ...child.props };
             delete childProps.title;
             delete childProps.disabled;

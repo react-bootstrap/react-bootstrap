@@ -64,5 +64,3 @@ export ThemeProvider from './ThemeProvider';
 export ToggleButton from './ToggleButton';
 export ToggleButtonGroup from './ToggleButtonGroup';
 export Tooltip from './Tooltip';
-
-export * as utils from './utils';

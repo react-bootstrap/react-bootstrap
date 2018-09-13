@@ -75,6 +75,7 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-dev-expression": "^0.2.1",
     "babel-plugin-istanbul": "^5.0.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.15",
     "chai": "^4.1.2",
     "chalk": "^2.3.2",
     "codecov": "^3.1.0",
