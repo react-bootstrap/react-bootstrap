@@ -28,17 +28,18 @@ const defaultProps = {
 class ResponsiveEmbed extends React.Component {
   render() {
     const { bsPrefix, className, children, aspectRatio, ...props } = this.props;
-
+    const child = React.Children.only(children);
     return (
       <div
+        {...props}
         className={classNames(
           bsPrefix,
+          className,
           aspectRatio && `${bsPrefix}-${aspectRatio}`,
         )}
       >
-        {React.cloneElement(children, {
-          ...props,
-          className: classNames(className, `${bsPrefix}-item`),
+        {React.cloneElement(child, {
+          className: classNames(child.props.className, `${bsPrefix}-item`),
         })}
       </div>
     );

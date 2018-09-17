@@ -29,7 +29,7 @@ function createBootstrapComponent(Component, opts) {
   const { prefix, forwardRefAs = isClassy ? 'ref' : 'innerRef' } = opts;
 
   return forwardRef(
-    (props, ref) => {
+    ({ ...props }, ref) => {
       props[forwardRefAs] = ref;
       return (
         <Consumer>
