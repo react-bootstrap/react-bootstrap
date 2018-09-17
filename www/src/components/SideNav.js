@@ -28,14 +28,24 @@ const SidePanel = styled('div')`
   @include media-breakpoint-up(md) {
     position: sticky;
     top: 4rem;
+    z-index: 1000;
     height: calc(100vh - 4rem);
     background-color: #f7f7f7;
-    overflow: hidden;
     border-right: 1px solid $divider;
   }
 
   & > * + * {
     border-top: 1px solid $divider;
+  }
+`;
+
+const OverflowWrapper = styled('div')`
+  @import '../css/theme';
+
+  @include media-breakpoint-up(md) {
+    overflow: hidden;
+    display: block !important;
+    height: 100% !important;
   }
 `;
 
@@ -45,7 +55,6 @@ const TableOfContents = styled('nav')`
   composes: pt-2 pb-4 from global;
 
   @include media-breakpoint-up(md) {
-    display: block !important;
     height: 100% !important;
     overflow: auto;
     margin-right: -40px;
@@ -132,7 +141,7 @@ function attachSearch(ref) {
       apiKey: '00f98b765b687b91399288e7c4c68ce1',
       indexName: 'react_bootstrap_v4',
       inputSelector: ref,
-      debug: false, // Set debug to true if you want to inspect the dropdown
+      debug: process.env.NODE_ENV !== 'production', // Set debug to true if you want to inspect the dropdown
     });
 }
 
@@ -178,7 +187,7 @@ class SideNav extends React.Component {
     const { location, ...props } = this.props;
     return (
       <SidePanel {...props}>
-        <form className="py-3 d-md-none d-flex align-items-center justify-content-end">
+        <form className="py-3 d-flex align-items-center">
           <FormControl type="text" placeholder="Search…" ref={attachSearch} />
           <MenuButton onClick={this.handleCollapse}>
             <svg
@@ -200,37 +209,39 @@ class SideNav extends React.Component {
           </MenuButton>
         </form>
         <Collapse in={this.state.collapsed}>
-          <TableOfContents role="complementary">
-            <NavSection
-              heading="Getting started"
-              path="/getting-started"
-              location={location}
-              items={gettingStarted}
-            />
-            <NavSection
-              heading="Layout"
-              location={location}
-              items={layout}
-              path="/layout"
-            />
-            <NavSection
-              heading="Components"
-              location={location}
-              items={components}
-              path="/components"
-            />
-            <NavSection
-              heading="Utilities"
-              location={location}
-              items={utilities}
-              path="/utilities"
-            />
-            <NavSection
-              heading="Migrating"
-              location={location}
-              path="/migrating"
-            />
-          </TableOfContents>
+          <OverflowWrapper>
+            <TableOfContents role="complementary">
+              <NavSection
+                heading="Getting started"
+                path="/getting-started"
+                location={location}
+                items={gettingStarted}
+              />
+              <NavSection
+                heading="Layout"
+                location={location}
+                items={layout}
+                path="/layout"
+              />
+              <NavSection
+                heading="Components"
+                location={location}
+                items={components}
+                path="/components"
+              />
+              <NavSection
+                heading="Utilities"
+                location={location}
+                items={utilities}
+                path="/utilities"
+              />
+              <NavSection
+                heading="Migrating"
+                location={location}
+                path="/migrating"
+              />
+            </TableOfContents>
+          </OverflowWrapper>
         </Collapse>
       </SidePanel>
     );

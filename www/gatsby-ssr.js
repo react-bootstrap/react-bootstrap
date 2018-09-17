@@ -23,11 +23,6 @@ exports.onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
       integrity="sha384-HbmWTHay9psM8qyzEKPc8odH4DsOuzdejtnr+OFtDmOcIVnhgReQ4GZBH7uwcjf6"
       crossOrigin="anonymous"
     />,
-    <link
-      key="eeee"
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css"
-    />,
   ]);
 
   setPostBodyComponents([
