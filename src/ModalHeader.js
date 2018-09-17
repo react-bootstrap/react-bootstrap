@@ -7,8 +7,6 @@ import createChainedFunction from './utils/createChainedFunction';
 import CloseButton from './CloseButton';
 import ModalContext from './ModalContext';
 
-// TODO: `aria-label` should be `closeLabel`.
-
 const propTypes = {
   bsPrefix: PropTypes.string,
 

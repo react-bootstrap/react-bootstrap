@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import forwardRef from 'react-context-toolbox/lib/forwardRef';
 import React from 'react';
 
 const { Provider, Consumer } = React.createContext(new Map());
@@ -11,8 +12,8 @@ class ThemeProvider extends React.Component {
   constructor(...args) {
     super(...args);
     this.prefixes = new Map();
-    Object.entries(this.props.prefixes).forEach(([key, value]) => {
-      this.prefixes.set(key, value);
+    Object.keys(this.props.prefixes).forEach(key => {
+      this.prefixes.set(key, this.props.prefixes[key]);
     });
   }
 
@@ -25,29 +26,24 @@ function createBootstrapComponent(Component, opts) {
   if (typeof opts === 'string') opts = { prefix: opts };
   const isClassy = Component.prototype && Component.prototype.isReactComponent;
   // If it's a functional component make sure we don't break it with a ref
-
   const { prefix, forwardRefAs = isClassy ? 'ref' : 'innerRef' } = opts;
 
-  const name = Component.displayName || Component.name;
-  // This looks like a function component but it's not,
-  // it's passed to forwardRef directly, and named for the dev-tools
-  // eslint-disable-next-line react/prop-types
-  function forwardRef({ bsPrefix, ...props }, ref) {
-    props[forwardRefAs] = ref;
-    return (
-      <Consumer>
-        {prefixes => (
-          <Component
-            {...props}
-            bsPrefix={bsPrefix || prefixes.get(prefix) || prefix}
-          />
-        )}
-      </Consumer>
-    );
-  }
-  forwardRef.displayName = `Bootstrap(${name})`;
-
-  return React.forwardRef(forwardRef);
+  return forwardRef(
+    ({ ...props }, ref) => {
+      props[forwardRefAs] = ref;
+      return (
+        <Consumer>
+          {prefixes => (
+            <Component
+              {...props}
+              bsPrefix={props.bsPrefix || prefixes.get(prefix) || prefix}
+            />
+          )}
+        </Consumer>
+      );
+    },
+    { displayName: `Bootstrap(${Component.displayName || Component.name})` },
+  );
 }
 
 export { createBootstrapComponent, Consumer as ThemeConsumer };

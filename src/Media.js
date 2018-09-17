@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import elementType from 'prop-types-extra/lib/elementType';
+import { elementType } from 'prop-types-extra';
 
 import createWithBsPrefix from './utils/createWithBsPrefix';
 import { createBootstrapComponent } from './ThemeProvider';

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import elementType from 'prop-types-extra/lib/elementType';
+import { elementType } from 'prop-types-extra';
 import React from 'react';
 
 import FormContext from './FormContext';

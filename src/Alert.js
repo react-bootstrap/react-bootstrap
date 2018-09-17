@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import elementType from 'prop-types-extra/lib/elementType';
+import { elementType } from 'prop-types-extra';
 import uncontrollable from 'uncontrollable';
 import divWithClassName from './utils/divWithClassName';
 

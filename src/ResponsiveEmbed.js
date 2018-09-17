@@ -1,56 +1,45 @@
 import classNames from 'classnames';
-import React, { cloneElement } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import warning from 'warning';
 
-import {
-  bsClass,
-  getClassSet,
-  prefix,
-  splitBsProps,
-} from './utils/bootstrapUtils';
-
-// TODO: This should probably take a single `aspectRatio` prop.
+import { createBootstrapComponent } from './ThemeProvider';
 
 const propTypes = {
+  /**
+   * @default 'embed-responsive'
+   */
+  bsPrefix: PropTypes.string,
+
   /**
    * This component requires a single child element
    */
   children: PropTypes.element.isRequired,
+
   /**
-   * 16by9 aspect ratio
+   * Set the aspect ration of the embed
    */
-  a16by9: PropTypes.bool,
-  /**
-   * 4by3 aspect ratio
-   */
-  a4by3: PropTypes.bool,
+  aspectRatio: PropTypes.oneOf(['21by9', '16by9', '4by3', '1by1']),
 };
 
 const defaultProps = {
-  a16by9: false,
-  a4by3: false,
+  aspectRatio: '1by1',
 };
 
 class ResponsiveEmbed extends React.Component {
   render() {
-    const { a16by9, a4by3, className, children, ...props } = this.props;
-    const [bsProps, elementProps] = splitBsProps(props);
-
-    warning(a16by9 || a4by3, 'Either `a16by9` or `a4by3` must be set.');
-    warning(!(a16by9 && a4by3), 'Only one of `a16by9` or `a4by3` can be set.');
-
-    const classes = {
-      ...getClassSet(bsProps),
-      [prefix(bsProps, '16by9')]: a16by9,
-      [prefix(bsProps, '4by3')]: a4by3,
-    };
-
+    const { bsPrefix, className, children, aspectRatio, ...props } = this.props;
+    const child = React.Children.only(children);
     return (
-      <div className={classNames(classes)}>
-        {cloneElement(children, {
-          ...elementProps,
-          className: classNames(className, prefix(bsProps, 'item')),
+      <div
+        {...props}
+        className={classNames(
+          bsPrefix,
+          className,
+          aspectRatio && `${bsPrefix}-${aspectRatio}`,
+        )}
+      >
+        {React.cloneElement(child, {
+          className: classNames(child.props.className, `${bsPrefix}-item`),
         })}
       </div>
     );
@@ -60,4 +49,4 @@ class ResponsiveEmbed extends React.Component {
 ResponsiveEmbed.propTypes = propTypes;
 ResponsiveEmbed.defaultProps = defaultProps;
 
-export default bsClass('embed-responsive', ResponsiveEmbed);
+export default createBootstrapComponent(ResponsiveEmbed, 'embed-responsive');

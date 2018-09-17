@@ -8,9 +8,12 @@ import uncontrollable from 'uncontrollable';
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
 import SafeAnchor from './SafeAnchor';
-import * as ValidComponentChildren from './utils/ValidComponentChildren';
+import { map, forEach } from './utils/ElementChildren';
 import triggerBrowserReflow from './utils/triggerBrowserReflow';
 import { createBootstrapComponent } from './ThemeProvider';
+
+const countChildren = c =>
+  React.Children.toArray(c).filter(React.isValidElement).length;
 
 // TODO: `slide` should be `animate`.
 
@@ -137,8 +140,7 @@ class Carousel extends React.Component {
     { activeIndex: previousActiveIndex },
   ) {
     if (nextProps.activeIndex !== previousActiveIndex) {
-      const lastPossibleIndex =
-        ValidComponentChildren.count(nextProps.children) - 1;
+      const lastPossibleIndex = countChildren(nextProps.children) - 1;
 
       const nextIndex = Math.max(
         0,
@@ -268,7 +270,7 @@ class Carousel extends React.Component {
     const { wrap, activeIndex } = this.props;
 
     let index = activeIndex + 1;
-    const count = ValidComponentChildren.count(this.props.children);
+    const count = countChildren(this.props.children);
 
     if (index > count - 1) {
       if (!wrap) return;
@@ -288,7 +290,7 @@ class Carousel extends React.Component {
 
     if (index < 0) {
       if (!wrap) return;
-      index = ValidComponentChildren.count(this.props.children) - 1;
+      index = countChildren(this.props.children) - 1;
     }
 
     this.select(index, e, 'prev');
@@ -322,7 +324,7 @@ class Carousel extends React.Component {
 
   to(index, event) {
     const { children } = this.props;
-    if (index < 0 || index > ValidComponentChildren.count(children) - 1) {
+    if (index < 0 || index > countChildren(children) - 1) {
       return;
     }
 
@@ -366,7 +368,7 @@ class Carousel extends React.Component {
       nextLabel,
     } = properties;
 
-    const count = ValidComponentChildren.count(children);
+    const count = countChildren(children);
 
     return [
       (wrap || activeIndex !== 0) && (
@@ -397,7 +399,7 @@ class Carousel extends React.Component {
     const { bsPrefix } = this.props;
     let indicators = [];
 
-    ValidComponentChildren.forEach(children, (child, index) => {
+    forEach(children, (child, index) => {
       indicators.push(
         <li
           key={index}
@@ -461,7 +463,7 @@ class Carousel extends React.Component {
         {indicators && this.renderIndicators(children, activeIndex)}
 
         <div className={`${bsPrefix}-inner`} ref={this.carousel}>
-          {ValidComponentChildren.map(children, (child, index) => {
+          {map(children, (child, index) => {
             const current = index === activeIndex;
             const previous = index === previousActiveIndex;
 

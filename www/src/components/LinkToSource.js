@@ -22,7 +22,7 @@ export default props => {
         </Tooltip>
       }
     >
-      <Link href={linkToComponentOnGitHub}>
+      <Link href={linkToComponentOnGitHub} className="js-search-exclude">
         <i className="fas fa-code" />
         <span className="sr-only">view source file</span>
       </Link>

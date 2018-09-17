@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
-import elementType from 'prop-types-extra/lib/elementType';
+import { elementType } from 'prop-types-extra';
 import BaseDropdown from 'react-overlays/Dropdown';
 
 import chain from './utils/createChainedFunction';

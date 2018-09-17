@@ -7,7 +7,7 @@ import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import React from 'react';
 import PropTypes from 'prop-types';
 import BaseModal from 'react-overlays/Modal';
-import elementType from 'prop-types-extra/lib/elementType';
+import { elementType } from 'prop-types-extra';
 
 import Fade from './Fade';
 import Body from './ModalBody';
@@ -16,13 +16,21 @@ import Footer from './ModalFooter';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
 import BootstrapModalManager from './utils/BootstrapModalManager';
-import splitComponentProps from './utils/splitComponentProps';
 import { createBootstrapComponent } from './ThemeProvider';
 import ModalContext from './ModalContext';
 
 const propTypes = {
-  ...BaseModal.propTypes,
-  ...ModalDialog.propTypes,
+  /**
+   * Render a large or small modal.
+   *
+   * @type ('sm'|'lg')
+   */
+  size: PropTypes.string,
+
+  /**
+   * vertically center the Dialog in the window
+   */
+  centered: PropTypes.bool,
 
   /**
    * Include a backdrop component. Specify 'static' for a backdrop that doesn't
@@ -57,11 +65,6 @@ const propTypes = {
    * modal component.
    */
   dialogAs: elementType,
-
-  /**
-   * Specify whether the Component should be vertically centered.
-   */
-  centered: PropTypes.bool,
 
   /**
    * When `true` The modal will automatically shift focus to itself when it
@@ -128,11 +131,16 @@ const propTypes = {
   /**
    * @private
    */
-  container: BaseModal.propTypes.container,
+  container: PropTypes.any,
 };
 
 const defaultProps = {
-  ...BaseModal.defaultProps,
+  show: false,
+  backdrop: true,
+  keyboard: true,
+  autoFocus: true,
+  enforceFocus: true,
+  restoreFocus: true,
   animation: true,
   dialogAs: ModalDialog,
   manager: new BootstrapModalManager(),
@@ -153,9 +161,7 @@ class Modal extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      style: {},
-    };
+    this.state = { style: {} };
     this.modalContext = {
       onHide: () => this.props.onHide(),
     };
@@ -258,43 +264,71 @@ class Modal extends React.Component {
   render() {
     const {
       bsPrefix,
-      backdrop,
-      animation,
-      show,
-      dialogClassName,
-      dialogAs: Dialog,
       className,
       style,
-      children, // Just in case this get added to BaseModal propTypes.
-      onEntering: _0,
-      onExited: _1,
+      dialogClassName,
+      children,
+      dialogAs: Dialog,
+
+      /* BaseModal props */
+      show,
+      animation,
+      backdrop,
+      keyboard,
+      onEscapeKeyDown,
+      onShow,
+      onHide,
+      container,
+      autoFocus,
+      enforceFocus,
+      restoreFocus,
+      onEntered,
+      onExit,
+      onExiting,
+      onExited: _,
+      onEntering: _1,
+      onEnter: _6,
+      onEntering: _4,
       backdropClassName: _2,
+      backdropStyle: _3,
       ...props
     } = this.props;
 
-    const [baseModalProps, dialogProps] = splitComponentProps(props, BaseModal);
     const clickHandler = backdrop === true ? this.handleClick : null;
+
     return (
       <ModalContext.Provider value={this.modalContext}>
         <BaseModal
-          {...baseModalProps}
-          ref={this.setModalRef}
-          show={show}
-          style={{ ...style, ...this.state.style }}
-          className={classNames(className, bsPrefix)}
-          containerClassName={`${bsPrefix}-open`}
-          transition={animation ? DialogTransition : undefined}
-          backdrop={backdrop}
-          backdropTransition={animation ? BackdropTransition : undefined}
-          renderBackdrop={this.renderBackdrop}
-          onClick={clickHandler}
-          onMouseUp={this.handleMouseUp}
-          onEnter={this.handleEnter}
-          onEntering={this.handleEntering}
-          onExited={this.handleExited}
+          {...{
+            show,
+            backdrop,
+            container,
+            keyboard,
+            autoFocus,
+            enforceFocus,
+            restoreFocus,
+            onEscapeKeyDown,
+            onShow,
+            onHide,
+            onEntered,
+            onExit,
+            onExiting,
+            ref: this.setModalRef,
+            style: { ...style, ...this.state.style },
+            className: classNames(className, bsPrefix),
+            containerClassName: `${bsPrefix}-open`,
+            transition: animation ? DialogTransition : undefined,
+            backdropTransition: animation ? BackdropTransition : undefined,
+            renderBackdrop: this.renderBackdrop,
+            onClick: clickHandler,
+            onMouseUp: this.handleMouseUp,
+            onEnter: this.handleEnter,
+            onEntering: this.handleEntering,
+            onExited: this.handleExited,
+          }}
         >
           <Dialog
-            {...dialogProps}
+            {...props}
             onMouseDown={this.handleDialogMouseDown}
             className={dialogClassName}
           >

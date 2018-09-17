@@ -4,7 +4,7 @@ import invariant from 'invariant';
 import uncontrollable from 'uncontrollable';
 
 import chainFunction from './utils/createChainedFunction';
-import ValidChildren from './utils/ValidComponentChildren';
+import { map } from './utils/ElementChildren';
 import ButtonGroup from './ButtonGroup';
 import ToggleButton from './ToggleButton';
 
@@ -82,7 +82,7 @@ class ToggleButtonGroup extends React.Component {
 
     return (
       <ButtonGroup {...props} toggle>
-        {ValidChildren.map(children, child => {
+        {map(children, child => {
           const { value, onChange } = child.props;
           const handler = e => this.handleToggle(value, e);
 

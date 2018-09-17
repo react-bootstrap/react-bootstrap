@@ -146,7 +146,6 @@ export default withLayout(function GridSection({ data }) {
       <ComponentApi metadata={data.Container} />
       <ComponentApi metadata={data.Row} />
       <ComponentApi metadata={data.Col} />
-      <ComponentApi metadata={data.Clearfix} />
     </>
   );
 });
@@ -160,9 +159,6 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     Col: componentMetadata(displayName: { eq: "Col" }) {
-      ...ComponentApi_metadata
-    }
-    Clearfix: componentMetadata(displayName: { eq: "Clearfix" }) {
       ...ComponentApi_metadata
     }
   }

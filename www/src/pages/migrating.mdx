@@ -23,10 +23,13 @@ Below is a _rough_ account of the breaking API changes as well as the minimal ch
 - `bsRole` has been removed from all components. Components now communicate
 via context to allow intermediate nesting of child components
 - `componentClass` -> `as`
+- All utils have been removed from main exports, most were internal already and the rest have been moved to external libraries
+
 
 ### Grid
 
 - renamed to Container
+- removed Clearfix
 
 #### Col
 
