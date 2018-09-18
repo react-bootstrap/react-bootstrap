@@ -5,10 +5,13 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
   actions,
   plugins,
   loaders,
+  stage,
   getConfig,
 }) {
   actions.setWebpackConfig({
-    devtool: 'cheap-inline-module-source-map',
+    devtool: stage.includes('develop')
+      ? 'cheap-inline-module-source-map'
+      : 'source-map',
     module: {
       rules: [
         {

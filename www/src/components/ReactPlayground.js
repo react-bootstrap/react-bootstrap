@@ -188,7 +188,9 @@ const Preview = withLive(
       super();
 
       this.example = null;
+    }
 
+    componentDidMount() {
       import('holderjs').then(({ default: hjs }) => {
         this.hjs = hjs;
         hjs.addTheme('gray', {
@@ -201,9 +203,9 @@ const Preview = withLive(
       });
     }
 
-    componentDidUpdate = prevProps => {
+    componentDidUpdate(prevProps) {
       if (prevProps.live.element !== this.props.live.element) this.runHolder();
-    };
+    }
 
     // prevent links in examples from navigating
     handleClick = e => {

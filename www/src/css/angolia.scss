@@ -191,22 +191,6 @@
   }
 }
 
-// .algolia-autocomplete .ds-dropdown-menu:before {
-//   display: block;
-//   position: absolute;
-//   content: '';
-//   width: 14px;
-//   height: 14px;
-//   background: #373940;
-//   z-index: 1000;
-//   top: -7px;
-//   border-top: 1px solid #373940;
-//   border-right: 1px solid #373940;
-//   -webkit-transform: rotate(-45deg);
-//   transform: rotate(-45deg);
-//   border-radius: 2px;
-// }
-
 .algolia-autocomplete .ds-dropdown-menu {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
 }

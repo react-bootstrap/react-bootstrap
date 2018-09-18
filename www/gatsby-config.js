@@ -15,6 +15,7 @@ module.exports = {
     ],
   },
   plugins: [
+    'gatsby-plugin-sorted-assets',
     {
       resolve: 'gatsby-mdx',
       options: {

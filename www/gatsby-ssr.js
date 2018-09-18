@@ -3,6 +3,12 @@ const React = require('react');
 exports.onRenderBody = ({ setHeadComponents, setPostBodyComponents }) => {
   setHeadComponents([
     <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossOrigin="anonymous"
+    />,
+    <link
       key="solid"
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.2.0/css/solid.css"
