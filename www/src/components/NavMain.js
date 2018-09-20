@@ -110,7 +110,7 @@ function NavMain({ activePage }) {
           overlay={<Tooltip id="t-discord">Discord</Tooltip>}
         >
           <StyledNavLink
-            href="https://discord.gg/5PM9hB"
+            href="https://discord.gg/0ZcbPKXt5bXLs9XK"
             target="_blank"
             rel="noopener noreferrer"
           >
