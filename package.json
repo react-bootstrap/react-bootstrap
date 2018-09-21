@@ -25,7 +25,7 @@
     "tdd": "karma start",
     "test": "npm run lint && npm run test-browser && npm run test-node",
     "test-browser": "cross-env NODE_ENV=test karma start --single-run",
-    "test-node": "cross-env NODE_ENV=test-server mocha --compilers js:@babel/register test/server/*Spec.js",
+    "test-node": "cross-env NODE_ENV=test-server mocha --require @babel/register test/server/*Spec.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
