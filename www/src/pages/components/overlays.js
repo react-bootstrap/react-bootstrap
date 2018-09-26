@@ -180,7 +180,7 @@ export default withLayout(function TooltipSection({ data }) {
         Changing containers
       </LinkedHeading>
       <p>
-        Yopu can specify a <code>container</code> to control the DOM element the
+        You can specify a <code>container</code> to control the DOM element the
         overlay is appended to. This is especially useful when styles conflict
         with your Overlay's.
       </p>
