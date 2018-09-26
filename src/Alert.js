@@ -50,7 +50,8 @@ class Alert extends React.Component {
     onClose: PropTypes.func,
 
     /**
-     * Sets the text for alert close button.
+     * Provides an accessible label for the close button.
+     * It is used for Assistive Technology when the label text is not readable.
      */
     closeLabel: PropTypes.string,
 
