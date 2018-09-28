@@ -177,6 +177,44 @@ export default withLayout(
               </FeatureCard>
             </Row>
           </Container>
+          <Container>
+            <h1>react-bootstrap vs. react + bootstrap</h1>
+            <p>
+              <b>Simplification of components:</b>
+              The CSS and details of Bootstrap components are rather
+              opinionated. React-bootstrap aims to help simplify the use of
+              Bootstrap specifics by abstracting them in components.{' '}
+            </p>
+            <p>
+              For example, below is the same component in bootstrap and
+              react-bootstrap
+            </p>
+            <p>
+              <b>Bootstrap Alert component:</b>
+              <div>{`<div class="alert alert-dark" role="alert"> `}</div>
+              <div>
+                {`A simple primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.`}
+              </div>
+              <div>{`</div>`}</div>
+            </p>
+            <b>React-bootstrap:</b>
+            {`<Alert variant="success">
+              This is a success alert with{' '}  
+              <Alert.Link href="#">an example link</Alert.Link>. Give it a click if you like.
+              </Alert> `}
+            <p>
+              <b>Declarative versus imperative:</b> Bootstrap uses jQuery, which
+              is more imperative and may interfere with the way React uses the
+              virtual DOM.
+            </p>
+            <p>
+              <b>DOM rendering: </b> Since Bootstrap uses jQuery and
+              Bootstrap-React does not, the way updates are rendered between the
+              two will differ. Updates using jQuery is done with direct
+              manipulation of the DOM, while React uses updates to the state to
+              update the virtual DOM.
+            </p>
+          </Container>
         </main>
       );
     }
