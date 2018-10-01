@@ -141,8 +141,13 @@ export default withLayout(
                   component, without unneeded dependencies like jQuery.
                 </p>
                 <p>
+<<<<<<< HEAD
                   As one of the oldest React libraries, React-Bootstrap has
                   evolved and grown alongside React, making it an excellent
+=======
+                  As one of the oldest React libraries, react bootstrap has
+                  evolved and grown along-side React, making it an exellent
+>>>>>>> took out unncessary  comma
                   choice as your UI foundation.
                 </p>
               </FeatureCard>
@@ -156,8 +161,8 @@ export default withLayout(
                 </p>
                 <p>
                   By relying entirely on the Bootstrap stylesheet, React
-                  bootstrap, just works with the thousands of bootstrap themes
-                  you already love.
+                  bootstrap works with the thousands of bootstrap themes you
+                  already love.
                 </p>
                 <p />
               </FeatureCard>
