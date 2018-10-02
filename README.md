@@ -6,23 +6,23 @@
 [![Discord][discord-badge]][discord]
 [![Thinkful][thinkful-badge]][thinkful]
 
-## Docs
+#Docs
 
 See the [documentation][documentation] with live editable examples as well as docs.
 
 To find the documentation for the latest Bootstrap 3 compatible release, check out: https://react-bootstrap.github.io/
 
-### Migrating from Bootstrap 3 to Bootstrap 4
+#Migrating from Bootstrap 3 to Bootstrap 4
 
 If you would like to update React-Bootstrap within an existing project to use Bootstrap 4, please read our docs for **[migrating to React-Bootstrap V1](https://react-bootstrap.netlify.com/migrating/)**.
 
-## Related modules
+# Related modules
 
 * [react-router-bootstrap][react-router-bootstrap] – Integration with [React Router][react-router]
 * [React Bootstrap Extended][react-bootstrap-extended] - A version of React Bootstrap where each component has extra props that map to bootstrap's utility classes. For example, `pullRight` adds the class `pull-right` to a component.
 * [Awesome React Bootstrap Components][awesome-react-bootstrap-components] - Additional components like off-canvas navbar, switch and sliders.
 
-## Local setup
+# Local setup
 
 Yarn is the our package manager of choice here. Check out setup
 instructions [here](https://yarnpkg.com/en/docs/install) if you don't have it installed already.
@@ -34,7 +34,7 @@ From there you can:
 - Start a local copy of the docs site with `yarn start`
 - Or build a local copy of the library with `yarn run build`
 
-## Contributions
+# Contributions
 
 Yes please! See the [contributing guidelines][contributing] for details.
 
