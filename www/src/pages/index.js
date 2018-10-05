@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/lib/Button';
 import Container from 'react-bootstrap/lib/Container';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import { styled } from 'css-literal-loader/styled';
-import withProps from 'recompose/withProps';
+// import withProps from 'recompose/withProps';
 import pkg from '../../../package.json';
 
 import withLayout from '../withLayout';
@@ -119,27 +119,27 @@ export default withLayout(
               <h2>Rebuilt with React</h2>
               <p>
                 React bootstrap replaces the Bootstrap javascript. Each
-                component has been built from stratch as a true React
-                components, without uneeded dependencies like jQuery.
+                component has been built from stratch as true React components,
+                without unneeded dependencies like jQuery.
               </p>
               <p>
-                As one of the oldest React libraries, react bootstrap as evolved
-                and grown along-side React, making it an exellent choice as your
-                UI foundation.
+                As one of the oldest React libraries, react bootstrap has
+                evolved and grown alongside React, making it an exellent choice
+                as your UI foundation.
               </p>
             </FeatureCard>
 
             <FeatureCard>
               <h2>Bootstrap at it's core</h2>
               <p>
-                Built with compatibility in mind, we embrace our bootstrap core
-                and strive to be compatible with the worlds largest UI
+                Built with compatibility in mind, we embrace our Bootstrap core
+                and strive to be compatible with the world's largest UI
                 ecosystem.
               </p>
               <p>
-                By relying entirely on the Bootstrap stylesheet, React
-                bootstrap, just works with the thousands of bootstrap themes you
-                already love.
+                By relying entirely on the Bootstrap stylesheet, React bootstrap
+                just works with the thousands of bootstrap themes you already
+                love.
               </p>
               <p />
             </FeatureCard>
