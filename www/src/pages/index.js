@@ -137,12 +137,12 @@ export default withLayout(
                 <h2>Rebuilt with React</h2>
                 <p>
                   React bootstrap replaces the Bootstrap javascript. Each
-                  component has been built from stratch as a true React
-                  components, without uneeded dependencies like jQuery.
+                  component has been built from stratch as true React
+                  components, without unneeded dependencies like jQuery.
                 </p>
                 <p>
-                  As one of the oldest React libraries, react bootstrap as
-                  evolved and grown along-side React, making it an exellent
+                  As one of the oldest React libraries, react bootstrap has
+                  evolved and grown alongside React, making it an exellent
                   choice as your UI foundation.
                 </p>
               </FeatureCard>
@@ -150,13 +150,13 @@ export default withLayout(
               <FeatureCard>
                 <h2>Bootstrap at it's core</h2>
                 <p>
-                  Built with compatibility in mind, we embrace our bootstrap
+                  Built with compatibility in mind, we embrace our Bootstrap
                   core and strive to be compatible with the worlds largest UI
                   ecosystem.
                 </p>
                 <p>
                   By relying entirely on the Bootstrap stylesheet, React
-                  bootstrap, just works with the thousands of bootstrap themes
+                  bootstrap just works with the thousands of bootstrap themes
                   you already love.
                 </p>
                 <p />
