@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/lib/Button';
 import Container from 'react-bootstrap/lib/Container';
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 import { styled } from 'css-literal-loader/styled';
-// import withProps from 'recompose/withProps';
 import pkg from '../../../package.json';
 
 import withLayout from '../withLayout';
