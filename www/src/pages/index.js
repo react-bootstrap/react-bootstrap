@@ -137,11 +137,11 @@ export default withLayout(
                 <h2>Rebuilt with React</h2>
                 <p>
                   React bootstrap replaces the Bootstrap javascript. Each
-                  component has been built from stratch as a true React
+                  component has been built from stratch as true React
                   components, without uneeded dependencies like jQuery.
                 </p>
                 <p>
-                  As one of the oldest React libraries, react bootstrap as
+                  As one of the oldest React libraries, react bootstrap has
                   evolved and grown along-side React, making it an exellent
                   choice as your UI foundation.
                 </p>
@@ -151,7 +151,7 @@ export default withLayout(
                 <h2>Bootstrap at it's core</h2>
                 <p>
                   Built with compatibility in mind, we embrace our bootstrap
-                  core and strive to be compatible with the worlds largest UI
+                  core and strive to be compatible with the world's largest UI
                   ecosystem.
                 </p>
                 <p>
