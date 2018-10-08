@@ -3,27 +3,29 @@ class Example extends React.Component {
     super(props, context);
 
     this.state = {
-      open: false
+      open: false,
     };
   }
 
   render() {
+    const { open } = this.state;
     return (
-      <div>
-        <Button onClick={() => this.setState({ open: !this.state.open })}>
+      <>
+        <Button
+          onClick={() => this.setState({ open: !open })}
+          aria-controls="example-collapse-text"
+          aria-expanded={open}
+        >
           click
         </Button>
         <Collapse in={this.state.open}>
-          <div>
-            <Well>
-              Anim pariatur cliche reprehenderit, enim eiusmod high life
-              accusamus terry richardson ad squid. Nihil anim keffiyeh
-              helvetica, craft beer labore wes anderson cred nesciunt sapiente
-              ea proident.
-            </Well>
+          <div id="example-collapse-text">
+            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+            terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
+            labore wes anderson cred nesciunt sapiente ea proident.
           </div>
         </Collapse>
-      </div>
+      </>
     );
   }
 }

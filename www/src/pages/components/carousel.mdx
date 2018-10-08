@@ -1,0 +1,53 @@
+import { graphql } from 'gatsby';
+
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+import CarouselControlled from '../../examples/Carousel/Controlled';
+import CarouselUncontrolled from '../../examples/Carousel/Uncontrolled';
+
+# Carousels
+
+<p className="lead">
+  A slideshow component for cycling through elements—images or slides of
+  text—like a carousel.
+</p>
+
+## Example
+
+Carousels don’t automatically normalize slide dimensions. As such, you
+may need to use additional utilities or custom styles to appropriately
+size content. While carousels support previous/next controls and
+indicators, they’re not explicitly required. Add and customize as you
+see fit.
+
+<ReactPlayground codeText={CarouselUncontrolled} />
+
+## Controlled
+
+You can can also _control_ the Carousel state, via the
+`activeIndex` prop and `onSelect` handler.
+
+<ReactPlayground codeText={CarouselControlled} />
+
+## API
+
+<ComponentApi metadata={props.data.carousel} />
+<ComponentApi metadata={props.data.item} exportedBy={props.data.carousel} />
+<ComponentApi metadata={props.data.caption} exportedBy={props.data.carousel} />
+
+export const query = graphql`
+  query CarouselQuery {
+    carousel: componentMetadata(displayName: { eq: "Carousel" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    item: componentMetadata(displayName: { eq: "CarouselItem" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+    caption: componentMetadata(displayName: { eq: "CarouselCaption" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+  }
+`;

@@ -1,36 +1,28 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactTestUtils from 'react-dom/test-utils';
+import { mount } from 'enzyme';
 
 import Jumbotron from '../src/Jumbotron';
 
 describe('<Jumbotron>', () => {
   it('Should output a div with content', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    mount(
       <Jumbotron>
         <strong>Content</strong>
-      </Jumbotron>
-    );
-
-    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
-    assert.ok(
-      ReactTestUtils.findRenderedDOMComponentWithTag(instance, 'strong')
-    );
+      </Jumbotron>,
+    ).assertSingle('div.jumbotron strong');
   });
 
-  it('Should have a jumbotron class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Jumbotron>Content</Jumbotron>
+  it('Should have a fluid class', () => {
+    mount(<Jumbotron fluid>Content</Jumbotron>).assertSingle(
+      'div.jumbotron-fluid',
     );
-    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bjumbotron\b/));
   });
 
   it('Should override node class', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <Jumbotron componentClass="section">
+    mount(
+      <Jumbotron as="section">
         <strong>Content</strong>
-      </Jumbotron>
-    );
-    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'SECTION');
+      </Jumbotron>,
+    ).assertSingle('section.jumbotron strong');
   });
 });

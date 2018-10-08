@@ -1,3 +1,31 @@
+## [v0.32.3]
+> 2018-08-20
+
+- **Bugfix:** Fix dependencies ([#3239], [#3240])
+
+[v0.32.3]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.32.2...v0.32.3
+[#3239]: https://github.com/react-bootstrap/react-bootstrap/pull/3239
+[#3240]: https://github.com/react-bootstrap/react-bootstrap/pull/3240
+
+
+## [v0.32.2]
+> 2018-08-17
+
+- **Feature:** Support custom `animation` for `<Tabs>` ([#3222])
+- **Bugfix:** Fix `<ProgressBar>` compatibility with React Hot Loader ([#2965])
+- **Docs:** Add search to docs ([#3094])
+- **Chore:** Upgrade to Babel 7 ([#3044])
+- **Chore:** Upgrade to webpack 4 ([#3075], [#3100])
+
+[v0.32.2]: https://github.com/react-bootstrap/react-bootstrap/compare/v0.32.1...v0.32.2
+[#2965]: https://github.com/react-bootstrap/react-bootstrap/pull/2965
+[#3044]: https://github.com/react-bootstrap/react-bootstrap/pull/3044
+[#3075]: https://github.com/react-bootstrap/react-bootstrap/pull/3075
+[#3094]: https://github.com/react-bootstrap/react-bootstrap/pull/3094
+[#3100]: https://github.com/react-bootstrap/react-bootstrap/pull/3100
+[#3222]: https://github.com/react-bootstrap/react-bootstrap/pull/3222
+
+
 ## [v0.32.1]
 > 2018-01-24
 

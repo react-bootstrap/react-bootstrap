@@ -1,14 +1,14 @@
 module.exports = (distRoot, optimize) => ({
   mode: 'production',
   optimization: {
-    minimize: !!optimize
+    minimize: !!optimize,
   },
   entry: './src/index.js',
   output: {
     path: distRoot,
     filename: optimize ? 'react-bootstrap.min.js' : 'react-bootstrap.js',
     library: 'ReactBootstrap',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
   },
   module: {
     rules: [
@@ -18,24 +18,24 @@ module.exports = (distRoot, optimize) => ({
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,
-            envName: `dist-${optimize ? 'prod' : 'dev'}`
-          }
-        }
-      }
-    ]
+            envName: `dist-${optimize ? 'prod' : 'dev'}`,
+          },
+        },
+      },
+    ],
   },
   externals: {
     react: {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
-      amd: 'react'
+      amd: 'react',
     },
     'react-dom': {
       root: 'ReactDOM',
       commonjs2: 'react-dom',
       commonjs: 'react-dom',
-      amd: 'react-dom'
-    }
-  }
+      amd: 'react-dom',
+    },
+  },
 });

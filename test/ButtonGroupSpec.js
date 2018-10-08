@@ -1,73 +1,40 @@
+import { mount } from 'enzyme';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactTestUtils from 'react-dom/test-utils';
-
 import ButtonGroup from '../src/ButtonGroup';
 import Button from '../src/Button';
 
-import { shouldWarn } from './helpers';
-
 describe('ButtonGroup', () => {
   it('Should output a button group', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    mount(
       <ButtonGroup>
         <Button>Title</Button>
-      </ButtonGroup>
-    );
-    assert.equal(ReactDOM.findDOMNode(instance).nodeName, 'DIV');
-    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-group\b/));
+      </ButtonGroup>,
+    ).assertSingle('div.btn-group');
   });
 
   it('Should add size', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <ButtonGroup bsSize="large">
+    mount(
+      <ButtonGroup size="lg">
         <Button>Title</Button>
-      </ButtonGroup>
-    );
-    assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\bbtn-group-lg\b/)
-    );
+      </ButtonGroup>,
+    ).assertSingle('.btn-group-lg');
   });
 
   it('Should add vertical variation', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
+    mount(
       <ButtonGroup vertical>
         <Button>Title</Button>
-      </ButtonGroup>
-    );
-    assert.equal(
-      ReactDOM.findDOMNode(instance).className.trim(),
-      'btn-group-vertical'
-    );
+      </ButtonGroup>,
+    )
+      .tap(b => b.assertSingle('.btn-group-vertical'))
+      .assertNone('.btn-group');
   });
 
-  it('Should add block variation', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <ButtonGroup vertical block>
+  it('Should add toggle variation', () => {
+    mount(
+      <ButtonGroup toggle>
         <Button>Title</Button>
-      </ButtonGroup>
-    );
-    assert.ok(ReactDOM.findDOMNode(instance).className.match(/\bbtn-block\b/));
-  });
-
-  it('Should warn about block without vertical', () => {
-    shouldWarn('`block` requires `vertical` to be set to have any effect');
-
-    ReactTestUtils.renderIntoDocument(
-      <ButtonGroup block>
-        <Button>Title</Button>
-      </ButtonGroup>
-    );
-  });
-
-  it('Should add justified variation', () => {
-    let instance = ReactTestUtils.renderIntoDocument(
-      <ButtonGroup justified>
-        <Button>Title</Button>
-      </ButtonGroup>
-    );
-    assert.ok(
-      ReactDOM.findDOMNode(instance).className.match(/\bbtn-group-justified\b/)
-    );
+      </ButtonGroup>,
+    ).assertSingle('.btn-group.btn-group-toggle');
   });
 });

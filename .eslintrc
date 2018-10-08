@@ -1,5 +1,5 @@
 {
-  "extends": ["eslint-config-airbnb", "prettier"],
+  "extends": ["eslint-config-airbnb", "prettier", "prettier/react"],
   "env": {
     "browser": true
   },
@@ -44,7 +44,11 @@
     "react/no-array-index-key": "off",
     "react/no-string-refs": "off",
     "react/prefer-stateless-function": "off",
+    "react/destructuring-assignment": "off",
     "react/default-props-match-prop-types": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/forbid-foreign-prop-types": "error",
+    "import/no-named-as-default-member": "off",
     "react/jsx-filename-extension": [
       "error",
       {
@@ -58,9 +62,6 @@
           "children",
           "className",
           "style",
-          "bsStyle",
-          "bsClass",
-          "bsSize"
         ]
       }
     ],
@@ -74,6 +75,15 @@
       "ForOfStatement",
       "LabeledStatement",
       "WithStatement"
+    ],
+    "no-unused-vars": [
+      2,
+      {
+        "vars": "all",
+        "args": "after-used",
+        "varsIgnorePattern": "^_\\d?$",
+        "argsIgnorePattern": "^_\\d?$"
+      }
     ]
   },
   "overrides": [
@@ -100,28 +110,6 @@
         "jsx-a11y/tabindex-no-positive": "off",
         "jsx-a11y/no-static-element-interactions": "off",
         "import/first": "off"
-      }
-    },
-    {
-      "files": ["www/src/**/*"],
-      "globals": {
-        "graphql": false
-      },
-      "rules": {
-        "global-require": "off",
-        "no-console": "off",
-        "react/no-unescaped-entities": "off",
-        "react/prop-types": "off",
-        "import/no-webpack-loader-syntax": "off"
-      },
-      "settings": {
-        "import/core-modules": "react-bootstrap"
-      }
-    },
-    {
-      "files": ["www/src/examples/*"],
-      "rules": {
-        "comma-dangle": "off"
       }
     }
   ]

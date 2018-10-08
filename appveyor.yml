@@ -6,14 +6,14 @@ environment:
 install:
   # Get the latest stable version of io.js
   - ps: Install-Product node $env:NODE_VERSION
-  - set PATH=%APPDATA%\npm;%PATH%
   - node --version
   - yarn --version
   - yarn bootstrap
 
 # No need for MSBuild on this project
 build: off
-
+cache:
+ - "%LOCALAPPDATA%\\Yarn"
 test_script:
   - yarn test
 
@@ -21,3 +21,4 @@ branches:
   only:
     - master
     - next
+    - v4-support

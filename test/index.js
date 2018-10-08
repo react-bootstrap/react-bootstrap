@@ -1,18 +1,25 @@
 import deprecated from 'prop-types-extra/lib/deprecated';
-
-import { _resetWarned } from '../src/utils/deprecationWarning';
-
+import Util from 'util';
 import Enzyme, { ShallowWrapper, ReactWrapper } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-15';
+import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 function assertLength(length) {
   return function $assertLength(selector) {
     let result = this.find(selector);
-    expect(result).to.have.length(length);
+    expect(
+      result,
+      `Expected to find ${length} match but found ${
+        result.length
+      } for selector "${selector}" on element: \n\n${this.debug()}`,
+    ).to.have.length(length);
     return result;
   };
+}
+
+function print() {
+  return this.tap(f => console.log(f.debug()));
 }
 
 ReactWrapper.prototype.assertSingle = assertLength(1);
@@ -21,9 +28,15 @@ ShallowWrapper.prototype.assertSingle = assertLength(1);
 ReactWrapper.prototype.assertNone = assertLength(0);
 ShallowWrapper.prototype.assertNone = assertLength(0);
 
+ReactWrapper.prototype.print = print;
+ReactWrapper.prototype.printDOM = function printDOM() {
+  return this.tap(f => console.log(f.html()));
+};
+
+ShallowWrapper.prototype.print = print;
+
 beforeEach(() => {
-  /* eslint-disable no-console */
-  sinon.stub(console, 'error').callsFake(msg => {
+  sinon.stub(console, 'error').callsFake((msg, ...args) => {
     let expected = false;
 
     console.error.expected.forEach(about => {
@@ -38,25 +51,21 @@ beforeEach(() => {
     }
 
     console.error.threw = true;
-    throw new Error(msg);
+    throw new Error(Util.format(msg, ...args));
   });
 
   console.error.expected = [];
   console.error.warned = Object.create(null);
   console.error.threw = false;
-  /* eslint-enable no-console */
 });
 
 afterEach(() => {
-  /* eslint-disable no-console */
   if (!console.error.threw && console.error.expected.length) {
     expect(console.error.warned).to.have.keys(console.error.expected);
   }
 
   console.error.restore();
-  /* eslint-enable no-console */
 
-  _resetWarned();
   deprecated._resetWarned();
 });
 

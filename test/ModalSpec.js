@@ -1,36 +1,25 @@
 import events from 'dom-helpers/events';
 import React from 'react';
-import ReactDOM from 'react-dom';
-import ReactTestUtils from 'react-dom/test-utils';
-import BaseModal from 'react-overlays/lib/Modal';
+import { mount } from 'enzyme';
 
 import Modal from '../src/Modal';
 
-import { render } from './helpers';
-
 describe('<Modal>', () => {
-  let mountPoint;
-
-  beforeEach(() => {
-    mountPoint = document.createElement('div');
-    document.body.appendChild(mountPoint);
-  });
-
   afterEach(() => {
-    ReactDOM.unmountComponentAtNode(mountPoint);
-    document.body.removeChild(mountPoint);
+    // make sure the dangling portal elements get cleaned up
+    document.body.innerHTML = '';
   });
 
   it('Should render the modal content', () => {
     const noOp = () => {};
-    const instance = render(
+    mount(
       <Modal show onHide={noOp} animation={false}>
         <strong>Message</strong>
       </Modal>,
-      mountPoint
-    );
-
-    assert.ok(instance._modal.getDialogElement().querySelector('strong'));
+    )
+      .find('strong')
+      .text()
+      .should.equal('Message');
   });
 
   it('Should close the modal when the modal dialog is clicked', done => {
@@ -38,30 +27,24 @@ describe('<Modal>', () => {
       done();
     };
 
-    const instance = render(
+    mount(
       <Modal show onHide={doneOp}>
         <strong>Message</strong>
       </Modal>,
-      mountPoint
-    );
-
-    const dialog = instance._modal.getDialogElement();
-
-    ReactTestUtils.Simulate.click(dialog);
+    )
+      .find('div.modal') // the modal-dialog element is pointer-events: none;
+      .simulate('click');
   });
 
   it('Should not close the modal when the "static" dialog is clicked', () => {
     const onHideSpy = sinon.spy();
-    const instance = render(
+    mount(
       <Modal show onHide={onHideSpy} backdrop="static">
         <strong>Message</strong>
       </Modal>,
-      mountPoint
-    );
-
-    const dialog = instance._modal.getDialogElement();
-
-    ReactTestUtils.Simulate.click(dialog);
+    )
+      .find('ModalDialog')
+      .simulate('click');
 
     expect(onHideSpy).to.not.have.been.called;
   });
@@ -71,138 +54,78 @@ describe('<Modal>', () => {
       done();
     };
 
-    const instance = render(
+    mount(
       <Modal show onHide={doneOp}>
         <Modal.Header closeButton />
         <strong>Message</strong>
       </Modal>,
-      mountPoint
-    );
-
-    const button = instance._modal
-      .getDialogElement()
-      .getElementsByClassName('close')[0];
-
-    ReactTestUtils.Simulate.click(button);
+    )
+      .find('.close')
+      .simulate('click');
   });
 
   it('Should pass className to the dialog', () => {
     const noOp = () => {};
-    const instance = render(
+    mount(
       <Modal show className="mymodal" onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-      mountPoint
-    );
-
-    const dialog = instance._modal.getDialogElement();
-
-    assert.ok(dialog.className.match(/\bmymodal\b/));
-  });
-
-  it('Should use bsClass on the dialog', () => {
-    const noOp = () => {};
-    const instance = render(
-      <Modal show bsClass="mymodal" onHide={noOp}>
-        <strong>Message</strong>
-      </Modal>,
-      mountPoint
-    );
-
-    const modal = instance._modal.getDialogElement();
-
-    assert.ok(modal.className.match(/\bmymodal\b/));
-    assert.ok(modal.children[0].className.match(/\bmymodal-dialog\b/));
-    assert.ok(
-      modal.children[0].children[0].className.match(/\bmymodal-content\b/)
-    );
-
-    const baseModal = ReactTestUtils.findRenderedComponentWithType(
-      instance,
-      BaseModal
-    );
-    assert.ok(baseModal.backdrop.className.match(/\bmymodal-backdrop\b/));
+    ).assertSingle('div.modal.mymodal');
   });
 
   it('Should use backdropClassName to add classes to the backdrop', () => {
     const noOp = () => {};
-    const instance = render(
+
+    mount(
       <Modal show backdropClassName="my-modal-backdrop" onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-      mountPoint
-    );
-
-    const baseModal = ReactTestUtils.findRenderedComponentWithType(
-      instance,
-      BaseModal
-    );
-    assert.ok(
-      baseModal.backdrop.className.match(/\bmodal-backdrop my-modal-backdrop\b/)
-    );
+    ).find('.modal-backdrop.my-modal-backdrop');
   });
 
-  it('Should pass bsSize to the dialog', () => {
+  it('Should pass size to the dialog', () => {
     const noOp = () => {};
-    const instance = render(
-      <Modal show bsSize="small" onHide={noOp}>
+    mount(
+      <Modal show size="sm" onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-      mountPoint
-    );
-
-    const dialog = instance._modal
-      .getDialogElement()
-      .getElementsByClassName('modal-dialog')[0];
-
-    assert.ok(dialog.className.match(/\bmodal-sm\b/));
+    ).find('.modal-dialog.modal-sm');
   });
 
   it('Should pass dialog style to the dialog', () => {
     const noOp = () => {};
-    const instance = render(
-      <Modal show style={{ top: 1000 }} onHide={noOp}>
+    const dialog = mount(
+      <Modal show style={{ color: 'red' }} onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-      mountPoint
-    );
+    )
+      .find('div.modal')
+      .getDOMNode();
 
-    const dialog = instance._modal.getDialogElement();
-
-    assert.ok(dialog.style.top === '1000px');
+    assert.ok(dialog.style.color === 'red');
   });
 
   it('Should pass dialogClassName to the dialog', () => {
     const noOp = () => {};
-    const instance = render(
-      <Modal show dialogClassName="testCss" onHide={noOp}>
+    mount(
+      <Modal show dialogClassName="my-dialog" onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-      mountPoint
-    );
-
-    const dialog = instance._modal
-      .getDialogElement()
-      .querySelector('.modal-dialog');
-
-    assert.ok(dialog.className.match(/\btestCss\b/));
+    ).assertSingle('.modal-dialog.my-dialog');
   });
 
-  it('Should use dialogComponentClass', () => {
+  it('Should use dialogAs', () => {
     const noOp = () => {};
 
     function CustomDialog() {
       return <div className="custom-dialog" tabIndex="-1" />;
     }
 
-    const instance = render(
-      <Modal show dialogComponentClass={CustomDialog} onHide={noOp}>
+    mount(
+      <Modal show dialogAs={CustomDialog} onHide={noOp}>
         <strong>Message</strong>
       </Modal>,
-      mountPoint
-    );
-
-    assert.equal(instance._modal.getDialogElement().className, 'custom-dialog');
+    ).assertSingle('.custom-dialog');
   });
 
   it('Should pass transition callbacks to Transition', done => {
@@ -211,7 +134,7 @@ describe('<Modal>', () => {
       ++count;
     };
 
-    const instance = render(
+    const instance = mount(
       <Modal
         show
         onHide={() => {}}
@@ -226,12 +149,11 @@ describe('<Modal>', () => {
         onEntering={increment}
         onEntered={() => {
           increment();
-          instance.renderWithProps({ show: false });
+          instance.setProps({ show: false });
         }}
       >
         <strong>Message</strong>
       </Modal>,
-      mountPoint
     );
   });
 
@@ -252,7 +174,7 @@ describe('<Modal>', () => {
           super(props, context);
 
           this.state = {
-            show: true
+            show: true,
           };
         }
 
@@ -265,7 +187,7 @@ describe('<Modal>', () => {
         }
       }
 
-      const instance = render(<Component />, mountPoint);
+      const instance = mount(<Component />);
       instance.setState({ show: false });
 
       expect(offSpy).to.have.been.calledWith(window, 'resize');

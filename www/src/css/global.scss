@@ -1,0 +1,19 @@
+@import './theme.scss';
+@import './angolia.scss';
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: $body-bg;
+  color: $text;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, Courier New, monospace;
+  background-color: transparentize($note, 0.75);
+  color: $text;
+  padding: 0.1rem;
+}

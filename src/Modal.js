@@ -1,14 +1,13 @@
 import classNames from 'classnames';
 import events from 'dom-helpers/events';
 import ownerDocument from 'dom-helpers/ownerDocument';
+
 import canUseDOM from 'dom-helpers/util/inDOM';
 import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import BaseModal from 'react-overlays/lib/Modal';
-import isOverflowing from 'react-overlays/lib/utils/isOverflowing';
-import elementType from 'prop-types-extra/lib/elementType';
+import BaseModal from 'react-overlays/Modal';
+import { elementType } from 'prop-types-extra';
 
 import Fade from './Fade';
 import Body from './ModalBody';
@@ -16,14 +15,22 @@ import ModalDialog from './ModalDialog';
 import Footer from './ModalFooter';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
-import { bsClass, bsSizes, prefix } from './utils/bootstrapUtils';
-import createChainedFunction from './utils/createChainedFunction';
-import splitComponentProps from './utils/splitComponentProps';
-import { Size } from './utils/StyleConfig';
+import BootstrapModalManager from './utils/BootstrapModalManager';
+import { createBootstrapComponent } from './ThemeProvider';
+import ModalContext from './ModalContext';
 
 const propTypes = {
-  ...BaseModal.propTypes,
-  ...ModalDialog.propTypes,
+  /**
+   * Render a large or small modal.
+   *
+   * @type ('sm'|'lg')
+   */
+  size: PropTypes.string,
+
+  /**
+   * vertically center the Dialog in the window
+   */
+  centered: PropTypes.bool,
 
   /**
    * Include a backdrop component. Specify 'static' for a backdrop that doesn't
@@ -48,11 +55,16 @@ const propTypes = {
   animation: PropTypes.bool,
 
   /**
+   * A css class to apply to the Modal dialog DOM node.
+   */
+  dialogClassName: PropTypes.string,
+
+  /**
    * A Component type that provides the modal content Markup. This is a useful
    * prop when you want to use your own styles and markup to create a custom
    * modal component.
    */
-  dialogComponentClass: elementType,
+  dialogAs: elementType,
 
   /**
    * When `true` The modal will automatically shift focus to itself when it
@@ -119,28 +131,28 @@ const propTypes = {
   /**
    * @private
    */
-  container: BaseModal.propTypes.container
+  container: PropTypes.any,
 };
 
 const defaultProps = {
-  ...BaseModal.defaultProps,
+  show: false,
+  backdrop: true,
+  keyboard: true,
+  autoFocus: true,
+  enforceFocus: true,
+  restoreFocus: true,
   animation: true,
-  dialogComponentClass: ModalDialog
-};
-
-const childContextTypes = {
-  $bs_modal: PropTypes.shape({
-    onHide: PropTypes.func
-  })
+  dialogAs: ModalDialog,
+  manager: new BootstrapModalManager(),
 };
 
 /* eslint-disable no-use-before-define, react/no-multi-comp */
 function DialogTransition(props) {
-  return <Fade {...props} timeout={Modal.TRANSITION_DURATION} />;
+  return <Fade {...props} />;
 }
 
 function BackdropTransition(props) {
-  return <Fade {...props} timeout={Modal.BACKDROP_TRANSITION_DURATION} />;
+  return <Fade {...props} />;
 }
 
 /* eslint-enable no-use-before-define */
@@ -149,147 +161,198 @@ class Modal extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.handleEntering = this.handleEntering.bind(this);
-    this.handleExited = this.handleExited.bind(this);
-    this.handleWindowResize = this.handleWindowResize.bind(this);
-    this.handleDialogClick = this.handleDialogClick.bind(this);
-    this.setModalRef = this.setModalRef.bind(this);
-
-    this.state = {
-      style: {}
-    };
-  }
-
-  getChildContext() {
-    return {
-      $bs_modal: {
-        onHide: this.props.onHide
-      }
+    this.state = { style: {} };
+    this.modalContext = {
+      onHide: () => this.props.onHide(),
     };
   }
 
   componentWillUnmount() {
     // Clean up the listener if we need to.
-    this.handleExited();
+    events.off(window, 'resize', this.handleWindowResize);
   }
 
-  setModalRef(ref) {
+  setModalRef = ref => {
     this._modal = ref;
-  }
+  };
 
-  handleDialogClick(e) {
-    if (e.target !== e.currentTarget) {
+  // We prevent the modal from closing during a drag by detecting where the
+  // the click originates from. If it starts in the modal and then ends outside
+  // don't close.
+  handleDialogMouseDown = () => {
+    this._waitingForMouseUp = true;
+  };
+
+  handleMouseUp = e => {
+    if (this._waitingForMouseUp && e.target === this._modal.dialog) {
+      this._ignoreBackdropClick = true;
+    }
+    this._waitingForMouseUp = false;
+  };
+
+  handleClick = e => {
+    if (this._ignoreBackdropClick || e.target !== e.currentTarget) {
+      this._ignoreBackdropClick = false;
       return;
     }
 
     this.props.onHide();
-  }
+  };
 
-  handleEntering() {
-    // FIXME: This should work even when animation is disabled.
-    events.on(window, 'resize', this.handleWindowResize);
-    this.updateStyle();
-  }
-
-  handleExited() {
-    // FIXME: This should work even when animation is disabled.
-    events.off(window, 'resize', this.handleWindowResize);
-  }
-
-  handleWindowResize() {
-    this.updateStyle();
-  }
-
-  updateStyle() {
-    if (!canUseDOM) {
-      return;
+  handleEnter = (node, ...args) => {
+    if (node) {
+      node.style.display = 'block';
+      this.updateDialogStyle(node);
     }
 
-    const dialogNode = this._modal.getDialogElement();
-    const dialogHeight = dialogNode.scrollHeight;
+    if (this.props.onEnter) this.props.onEnter(node, ...args);
+  };
 
-    const document = ownerDocument(dialogNode);
-    const bodyIsOverflowing = isOverflowing(
-      ReactDOM.findDOMNode(this.props.container || document.body)
-    );
+  handleEntering = (node, ...args) => {
+    if (this.props.onEntering) this.props.onEntering(node, ...args);
+
+    // FIXME: This should work even when animation is disabled.
+    events.on(window, 'resize', this.handleWindowResize);
+  };
+
+  handleExited = (node, ...args) => {
+    if (node) node.style.display = ''; // RHL removes it sometimes
+    if (this.props.onExited) this.props.onExited(...args);
+
+    // FIXME: This should work even when animation is disabled.
+    events.off(window, 'resize', this.handleWindowResize);
+  };
+
+  handleWindowResize = () => {
+    this.updateDialogStyle(this._modal.dialog);
+  };
+
+  updateDialogStyle(node) {
+    if (!canUseDOM) return;
+    const { manager } = this.props;
+
+    const containerIsOverflowing = manager.isContainerOverflowing(this._modal);
+
     const modalIsOverflowing =
-      dialogHeight > document.documentElement.clientHeight;
+      node.scrollHeight > ownerDocument(node).documentElement.clientHeight;
 
     this.setState({
       style: {
         paddingRight:
-          bodyIsOverflowing && !modalIsOverflowing
+          containerIsOverflowing && !modalIsOverflowing
             ? getScrollbarSize()
             : undefined,
         paddingLeft:
-          !bodyIsOverflowing && modalIsOverflowing
+          !containerIsOverflowing && modalIsOverflowing
             ? getScrollbarSize()
-            : undefined
-      }
+            : undefined,
+      },
     });
   }
 
+  renderBackdrop = props => {
+    const { bsPrefix, backdropClassName } = this.props;
+
+    return (
+      <div
+        {...props}
+        className={classNames(`${bsPrefix}-backdrop`, backdropClassName)}
+      />
+    );
+  };
+
   render() {
     const {
-      backdrop,
-      backdropClassName,
-      animation,
-      show,
-      dialogComponentClass: Dialog,
+      bsPrefix,
       className,
       style,
-      children, // Just in case this get added to BaseModal propTypes.
-      onEntering,
-      onExited,
+      dialogClassName,
+      children,
+      dialogAs: Dialog,
+
+      /* BaseModal props */
+      show,
+      animation,
+      backdrop,
+      keyboard,
+      onEscapeKeyDown,
+      onShow,
+      onHide,
+      container,
+      autoFocus,
+      enforceFocus,
+      restoreFocus,
+      onEntered,
+      onExit,
+      onExiting,
+      onExited: _,
+      onEntering: _1,
+      onEnter: _6,
+      onEntering: _4,
+      backdropClassName: _2,
+      backdropStyle: _3,
       ...props
     } = this.props;
 
-    const [baseModalProps, dialogProps] = splitComponentProps(props, BaseModal);
-
-    const inClassName = show && !animation && 'in';
+    const clickHandler = backdrop === true ? this.handleClick : null;
 
     return (
-      <BaseModal
-        {...baseModalProps}
-        ref={this.setModalRef}
-        show={show}
-        containerClassName={prefix(props, 'open')}
-        transition={animation ? DialogTransition : undefined}
-        backdrop={backdrop}
-        backdropTransition={animation ? BackdropTransition : undefined}
-        backdropClassName={classNames(
-          prefix(props, 'backdrop'),
-          backdropClassName,
-          inClassName
-        )}
-        onEntering={createChainedFunction(onEntering, this.handleEntering)}
-        onExited={createChainedFunction(onExited, this.handleExited)}
-      >
-        <Dialog
-          {...dialogProps}
-          style={{ ...this.state.style, ...style }}
-          className={classNames(className, inClassName)}
-          onClick={backdrop === true ? this.handleDialogClick : null}
+      <ModalContext.Provider value={this.modalContext}>
+        <BaseModal
+          {...{
+            show,
+            backdrop,
+            container,
+            keyboard,
+            autoFocus,
+            enforceFocus,
+            restoreFocus,
+            onEscapeKeyDown,
+            onShow,
+            onHide,
+            onEntered,
+            onExit,
+            onExiting,
+            ref: this.setModalRef,
+            style: { ...style, ...this.state.style },
+            className: classNames(className, bsPrefix),
+            containerClassName: `${bsPrefix}-open`,
+            transition: animation ? DialogTransition : undefined,
+            backdropTransition: animation ? BackdropTransition : undefined,
+            renderBackdrop: this.renderBackdrop,
+            onClick: clickHandler,
+            onMouseUp: this.handleMouseUp,
+            onEnter: this.handleEnter,
+            onEntering: this.handleEntering,
+            onExited: this.handleExited,
+          }}
         >
-          {children}
-        </Dialog>
-      </BaseModal>
+          <Dialog
+            {...props}
+            onMouseDown={this.handleDialogMouseDown}
+            className={dialogClassName}
+          >
+            {children}
+          </Dialog>
+        </BaseModal>
+      </ModalContext.Provider>
     );
   }
 }
 
 Modal.propTypes = propTypes;
 Modal.defaultProps = defaultProps;
-Modal.childContextTypes = childContextTypes;
 
-Modal.Body = Body;
-Modal.Header = Header;
-Modal.Title = Title;
-Modal.Footer = Footer;
+const DecoratedModal = createBootstrapComponent(Modal, 'modal');
 
-Modal.Dialog = ModalDialog;
+DecoratedModal.Body = Body;
+DecoratedModal.Header = Header;
+DecoratedModal.Title = Title;
+DecoratedModal.Footer = Footer;
 
-Modal.TRANSITION_DURATION = 300;
-Modal.BACKDROP_TRANSITION_DURATION = 150;
+DecoratedModal.Dialog = ModalDialog;
 
-export default bsClass('modal', bsSizes([Size.LARGE, Size.SMALL], Modal));
+DecoratedModal.TRANSITION_DURATION = 300;
+DecoratedModal.BACKDROP_TRANSITION_DURATION = 150;
+
+export default DecoratedModal;

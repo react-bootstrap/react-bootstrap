@@ -1,18 +1,18 @@
+import { graphql } from 'gatsby';
 import React from 'react';
 
-import Anchor from '../../components/Anchor';
-import PropTable from '../../components/PropTable';
+import LinkedHeading from '../../components/LinkedHeading';
+import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import ResponsiveEmbed from '../../examples/ResponsiveEmbed';
+import withLayout from '../../withLayout';
 
-export default function ResponsiveEmbedSection({ data }) {
+export default withLayout(function ResponsiveEmbedSection({ data }) {
   return (
-    <div className="bs-docs-section">
-      <h2 className="page-header">
-        <Anchor id="responsive-embed">Responsive embed</Anchor>{' '}
-        <small>ResponsiveEmbed</small>
-      </h2>
+    <>
+      <LinkedHeading h="1" id="responsive-embed">
+        Responsive embed
+      </LinkedHeading>
 
       <p>
         Allow browsers to determine video or slideshow dimensions based on the
@@ -21,7 +21,8 @@ export default function ResponsiveEmbedSection({ data }) {
       </p>
       <p>
         You don't need to include <code>frameborder="0"</code> in your{' '}
-        <code>iframe</code>s.
+        <code>iframe</code>
+        s.
       </p>
       <p className="bg-warning">
         Either <b>16by9</b> or <b>4by3</b> aspect ratio via <code>a16by9</code>{' '}
@@ -29,18 +30,18 @@ export default function ResponsiveEmbedSection({ data }) {
       </p>
       <ReactPlayground codeText={ResponsiveEmbed} />
 
-      <h3>
-        <Anchor id="responsive-embed-props">Props</Anchor>
-      </h3>
-      <PropTable metadata={data.ResponsiveEmbed} />
-    </div>
+      <LinkedHeading h="3" id="responsive-embed-props">
+        API
+      </LinkedHeading>
+      <ComponentApi metadata={data.ResponsiveEmbed} />
+    </>
   );
-}
+});
 
 export const query = graphql`
   query ResponsiveEmbedQuery {
     ResponsiveEmbed: componentMetadata(displayName: { eq: "ResponsiveEmbed" }) {
-      ...PropTable_metadata
+      ...ComponentApi_metadata
     }
   }
 `;
