@@ -24,6 +24,9 @@ class DropdownMenu extends React.Component {
     /** Controls the visibility of the Dropdown menu  */
     show: PropTypes.bool,
 
+    /** Have the dropdown switch to it's opposite placement when necessary to stay on screen. */
+    flip: PropTypes.bool,
+
     /** Aligns the Dropdown menu to the right of it's container. */
     alignRight: PropTypes.bool,
 
@@ -46,11 +49,17 @@ class DropdownMenu extends React.Component {
      * are also injected and should be handled appropriatedly.
      */
     as: elementType,
+
+    /**
+     * A set of popper options and props passed directly to react-popper's Popper component.
+     */
+    popperConfig: PropTypes.object,
   };
 
   static defaultProps = {
     alignRight: false,
     as: 'div',
+    flip: true,
   };
 
   render() {
@@ -59,6 +68,8 @@ class DropdownMenu extends React.Component {
       className,
       alignRight,
       rootCloseEvent,
+      flip,
+      popperConfig,
       show: showProps,
       as: Component,
       ...props
@@ -68,9 +79,11 @@ class DropdownMenu extends React.Component {
       <NavbarContext>
         {isNavbar => (
           <BaseDropdownMenu
+            flip={flip}
             show={showProps}
             alignEnd={alignRight}
             usePopper={!isNavbar}
+            popperConfig={popperConfig}
             rootCloseEvent={rootCloseEvent}
           >
             {({ placement, show, alignEnd, close, props: menuProps }) => {
