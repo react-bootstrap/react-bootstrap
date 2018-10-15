@@ -3,7 +3,7 @@ import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { elementType } from 'prop-types-extra';
-import BaseDropdownToggle from 'react-overlays//DropdownToggle';
+import BaseDropdownToggle from 'react-overlays/DropdownToggle';
 import React from 'react';
 
 import Button from './Button';
