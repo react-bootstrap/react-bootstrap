@@ -110,7 +110,7 @@ class DropdownMenu extends React.Component {
                     className,
                     bsPrefix,
                     show && 'show',
-                    alignRight && `${bsPrefix}-right`,
+                    alignEnd && `${bsPrefix}-right`,
                   )}
                 />
               );
