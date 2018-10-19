@@ -19,7 +19,7 @@ class NavItem extends React.Component {
   };
 
   static defaultProps = {
-    as: 'li',
+    as: 'div',
   };
 
   render() {
