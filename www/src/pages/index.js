@@ -148,7 +148,7 @@ export default withLayout(
               </FeatureCard>
 
               <FeatureCard>
-                <h2>Bootstrap at it's core</h2>
+                <h2>Bootstrap at its core</h2>
                 <p>
                   Built with compatibility in mind, we embrace our bootstrap
                   core and strive to be compatible with the world's largest UI
