@@ -58,7 +58,7 @@ const propTypes = {
   /** @private */
   scheduleUpdate: PropTypes.func,
   /** @private */
-  outOfBoundaries: PropTypes.func,
+  outOfBoundaries: PropTypes.bool,
   /**
    * Title content
    */
