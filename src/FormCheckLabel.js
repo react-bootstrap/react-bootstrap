@@ -27,12 +27,16 @@ const defaultProps = {
 function FormCheckLabel({ bsPrefix, className, innerRef, htmlFor, ...props }) {
   return (
     <FormContext.Consumer>
-      {({ controlId }) => (
+      {({ controlId, custom }) => (
         <label // eslint-disable-line jsx-a11y/label-has-associated-control
           {...props}
           ref={innerRef}
           htmlFor={htmlFor || controlId}
-          className={classNames(className, bsPrefix)}
+          className={classNames(
+            className,
+            !custom && bsPrefix,
+            custom && 'custom-control-label',
+          )}
         />
       )}
     </FormContext.Consumer>

@@ -45,6 +45,9 @@ class FormCheck extends React.Component {
     title: PropTypes.string,
     label: PropTypes.node,
 
+    /** Use Bootstrap's custom form elements to replace the browser defaults */
+    custom: PropTypes.bool,
+
     /** The type of checkable. */
     type: PropTypes.oneOf(['radio', 'checkbox']).isRequired,
 
@@ -83,6 +86,7 @@ class FormCheck extends React.Component {
       type,
       label,
       children,
+      custom,
       ...props
     } = this.props;
 
@@ -102,14 +106,18 @@ class FormCheck extends React.Component {
 
     return (
       <FormContext.Transform
-        mapToValue={({ controlId }) => ({ controlId: id || controlId })}
+        mapToValue={({ controlId }) => ({
+          controlId: id || controlId,
+          custom,
+        })}
       >
         <div
           style={style}
           className={classNames(
             className,
-            bsPrefix,
-            inline && `${bsPrefix}-inline`,
+            !custom && bsPrefix,
+            custom && `custom-control custom-${type}`,
+            inline && `${custom ? 'custom-control' : bsPrefix}-inline`,
           )}
         >
           {children || (

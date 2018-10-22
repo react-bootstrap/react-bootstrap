@@ -80,4 +80,20 @@ describe('<FormCheck>', () => {
 
     expect(instance.input.tagName).to.equal('INPUT');
   });
+
+  it('should support custom', () => {
+    const wrapper = mount(<FormCheck custom label="My label" />);
+
+    wrapper
+      .assertSingle('div.custom-control')
+      .assertSingle('div.custom-checkbox')
+      .assertSingle('input.custom-control-input');
+
+    wrapper.assertSingle('label.custom-control-label');
+  });
+
+  it('should support custom with inline', () => {
+    const wrapper = mount(<FormCheck custom inline label="My label" />);
+    wrapper.assertSingle('div.custom-control-inline');
+  });
 });
