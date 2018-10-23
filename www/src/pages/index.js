@@ -137,7 +137,7 @@ export default withLayout(
                 <h2>Rebuilt with React</h2>
                 <p>
                   React bootstrap replaces the Bootstrap javascript. Each
-                  component has been built from stratch as true React
+                  component has been built from scratch as true React
                   components, without uneeded dependencies like jQuery.
                 </p>
                 <p>
