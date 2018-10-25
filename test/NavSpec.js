@@ -168,6 +168,7 @@ describe('<Nav>', () => {
             NavItem 4 content
           </NavItem>
           <NavItem eventKey={5}>NavItem 5 content</NavItem>
+          {false && <NavItem eventKey={6}>NavItem 6 content</NavItem>}
         </Nav>,
         { attachTo: mountPoint }
       );
