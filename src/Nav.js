@@ -157,7 +157,8 @@ class Nav extends React.Component {
 
   getNextActiveChild(offset) {
     const { children } = this.props;
-    const validChildren = children.filter(
+    const validChildren = ValidComponentChildren.filter(
+      children,
       child => child.props.eventKey != null && !child.props.disabled
     );
     const { activeKey, activeHref } = this.getActiveProps();
