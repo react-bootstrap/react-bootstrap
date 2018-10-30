@@ -51,7 +51,7 @@ const propTypes = {
    *   isOpen: boolean,
    *   event: SyntheticEvent,
    *   metadata: {
-   *     source: 'select' | 'click' | 'rootCloose' | 'keydown'
+   *     source: 'select' | 'click' | 'rootClose' | 'keydown'
    *   }
    * ): void
    * ```

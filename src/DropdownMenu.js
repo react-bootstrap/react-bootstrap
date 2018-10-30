@@ -46,7 +46,7 @@ class DropdownMenu extends React.Component {
      * (listed here) are passed through to the `as` Component.
      *
      * If providing a custom, non DOM, component. the `show`, `close` and `alignRight` props
-     * are also injected and should be handled appropriatedly.
+     * are also injected and should be handled appropriately.
      */
     as: elementType,
 
