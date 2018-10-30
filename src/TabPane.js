@@ -150,7 +150,7 @@ class TabPane extends React.Component {
 }
 
 export default mapContextToProps(
-  TabContext.Consumer,
+  TabContext,
   (context, props) => {
     if (!context) return null;
     const { activeKey, getControlledId, getControllerId, ...rest } = context;
