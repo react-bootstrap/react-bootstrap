@@ -76,7 +76,7 @@ class DropdownMenu extends React.Component {
     } = this.props;
 
     return (
-      <NavbarContext>
+      <NavbarContext.Consumer>
         {isNavbar => (
           <BaseDropdownMenu
             flip={flip}
@@ -117,7 +117,7 @@ class DropdownMenu extends React.Component {
             }}
           </BaseDropdownMenu>
         )}
-      </NavbarContext>
+      </NavbarContext.Consumer>
     );
   }
 }

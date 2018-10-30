@@ -35,7 +35,7 @@ class AbstractNavItem extends React.Component {
     const navKey = makeEventKey(eventKey, props.href);
 
     return (
-      <SelectableContext>
+      <SelectableContext.Consumer>
         {parentOnSelect => (
           <NavContext.Consumer>
             {navContext => {
@@ -76,7 +76,7 @@ class AbstractNavItem extends React.Component {
             }}
           </NavContext.Consumer>
         )}
-      </SelectableContext>
+      </SelectableContext.Consumer>
     );
   }
 }
