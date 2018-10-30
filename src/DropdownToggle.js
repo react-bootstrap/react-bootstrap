@@ -21,7 +21,6 @@ class DropdownToggle extends React.Component {
      * @default 'dropdown-toggle'
      */
     bsPrefix: PropTypes.string,
-    title: PropTypes.string,
 
     /**
      * An html id attribute, necessary for assistive technologies, such as screen readers.
