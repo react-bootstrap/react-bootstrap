@@ -20,7 +20,7 @@ describe('<Nav>', () => {
 
   it('Should set the correct item active', () => {
     const wrapper = mount(
-      <Nav as="div" variant="pills" defaultActiveKey={1}>
+      <Nav variant="pills" defaultActiveKey={1}>
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
         <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
       </Nav>,
@@ -34,7 +34,7 @@ describe('<Nav>', () => {
 
   it('Should adds variant class', () => {
     mount(
-      <Nav as="div" variant="tabs">
+      <Nav variant="tabs">
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
         <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
       </Nav>,
@@ -43,7 +43,7 @@ describe('<Nav>', () => {
 
   it('Should adds justified class', () => {
     mount(
-      <Nav justify as="div">
+      <Nav justify>
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
         <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
       </Nav>,
@@ -52,7 +52,7 @@ describe('<Nav>', () => {
 
   it('Should adds fill class', () => {
     mount(
-      <Nav fill as="div">
+      <Nav fill>
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
         <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
       </Nav>,
@@ -62,7 +62,7 @@ describe('<Nav>', () => {
   it('Should be navbar aware', () => {
     mount(
       <Navbar>
-        <Nav as="div">
+        <Nav>
           <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
           <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
         </Nav>
@@ -77,7 +77,7 @@ describe('<Nav>', () => {
     }
 
     mount(
-      <Nav as="div" onSelect={handleSelect}>
+      <Nav onSelect={handleSelect}>
         <Nav.Link eventKey={1}>Tab 1 content</Nav.Link>
         <Nav.Link eventKey={2}>
           <span>Tab 2 content</span>
@@ -91,7 +91,7 @@ describe('<Nav>', () => {
 
   it('Should set the correct item active by href', () => {
     mount(
-      <Nav as="div" defaultActiveKey="#item1">
+      <Nav defaultActiveKey="#item1">
         <Nav.Link href="#item1" className="test-selected">
           Pill 1 content
         </Nav.Link>
@@ -207,7 +207,7 @@ describe('<Nav>', () => {
   describe('Web Accessibility', () => {
     it('Should have tablist and tab roles', () => {
       const wrapper = mount(
-        <Nav role="tablist" as="div">
+        <Nav role="tablist">
           <Nav.Link key={1}>Tab 1 content</Nav.Link>
           <Nav.Link key={2}>Tab 2 content</Nav.Link>
         </Nav>,

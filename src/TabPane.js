@@ -17,6 +17,8 @@ class TabPane extends React.Component {
      */
     bsPrefix: PropTypes.string,
 
+    as: elementType,
+
     /**
      * A key that associates the `TabPane` with it's controlling `NavLink`.
      */
@@ -102,6 +104,7 @@ class TabPane extends React.Component {
       mountOnEnter,
       unmountOnExit,
       transition: Transition,
+      as: Component = 'div',
       eventKey: _,
       ...props
     } = this.props;
@@ -109,7 +112,7 @@ class TabPane extends React.Component {
     if (!active && unmountOnExit) return null;
 
     let pane = (
-      <div
+      <Component
         {...props}
         role="tabpanel"
         aria-hidden={!active}

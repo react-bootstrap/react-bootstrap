@@ -9,7 +9,7 @@ describe('<NavItem>', () => {
       <NavItem className="custom-class">
         <strong>Children</strong>
       </NavItem>,
-    ).assertSingle('li.nav-item.custom-class strong');
+    ).assertSingle('div.nav-item.custom-class strong');
   });
 
   it('should allow custom elements instead of "div"', () => {

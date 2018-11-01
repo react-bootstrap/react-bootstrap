@@ -94,7 +94,7 @@ class Nav extends React.Component {
   static defaultProps = {
     justify: false,
     fill: false,
-    as: 'nav',
+    as: 'div',
   };
 
   render() {
