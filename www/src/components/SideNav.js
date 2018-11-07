@@ -140,7 +140,7 @@ function attachSearch(ref) {
     window.docsearch({
       apiKey: '00f98b765b687b91399288e7c4c68ce1',
       indexName: 'react_bootstrap_v4',
-      inputSelector: ref,
+      inputSelector: `#${ref.id}`,
       debug: process.env.NODE_ENV !== 'production', // Set debug to true if you want to inspect the dropdown
     });
 }
@@ -188,7 +188,12 @@ class SideNav extends React.Component {
     return (
       <SidePanel {...props}>
         <form className="py-3 d-flex align-items-center">
-          <FormControl type="text" placeholder="Search…" ref={attachSearch} />
+          <FormControl
+            id="docs-search-input"
+            type="text"
+            placeholder="Search…"
+            ref={attachSearch}
+          />
           <MenuButton onClick={this.handleCollapse}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

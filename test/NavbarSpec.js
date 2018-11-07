@@ -47,7 +47,7 @@ describe('<Navbar>', () => {
       <Navbar>
         <Nav />
       </Navbar>,
-    ).assertSingle('ul.navbar-nav');
+    ).assertSingle('div.navbar-nav');
   });
 
   it('Should add custom toggle', () => {
@@ -58,8 +58,8 @@ describe('<Navbar>', () => {
         </Navbar>,
       )
         .assertSingle('p.navbar-toggler')
-        .text(),
-      'hi',
+        .text()
+        .should.equal('hi'),
     );
   });
 
