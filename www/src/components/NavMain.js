@@ -26,11 +26,11 @@ const propTypes = {
 };
 
 function attachSearch(ref) {
-  if (ref)
+  if (ref && window.docsearch)
     window.docsearch({
       apiKey: '68117ff90f086cb491d7e7e984cd7b75',
       indexName: 'react_bootstrap',
-      inputSelector: ref,
+      inputSelector: `#${ref.id}`,
       debug: false // Set debug to true if you want to inspect the dropdown
     });
 }
@@ -72,6 +72,7 @@ function NavMain({ activePage }) {
         <Navbar.Form pullRight>
           <FormControl
             type="search"
+            id="docs-search-input"
             className="bs-search-bar"
             placeholder="Search…"
             inputRef={attachSearch}
