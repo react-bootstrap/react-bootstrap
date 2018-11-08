@@ -14,13 +14,14 @@
   "scripts": {
     "bootstrap": "yarn && yarn --cwd www",
     "build": "node tools/build.js",
-    "build-docs": "yarn --cwd www run build",
+    "build-docs": "yarn --cwd www build",
+    "deploy-docs": "yarn --cwd www deploy",
     "start": "yarn --cwd www run develop",
     "ci-lint": "eslint --rule 'prettier/prettier: 2'",
     "format": "npm run ci-lint . -- --fix",
     "lint": "npm run ci-lint .",
     "precommit": "lint-staged",
-    "release": "npm run build-docs && release",
+    "release": "release && yarn deploy-docs",
     "tdd": "karma start",
     "test": "npm run lint && npm run test-browser && npm run test-node",
     "test-browser": "cross-env NODE_ENV=test karma start --single-run",
@@ -128,8 +129,6 @@
     "warning": "^3.0.0"
   },
   "release-script": {
-    "bowerRepo": "git@github.com:react-bootstrap/react-bootstrap-bower.git",
-    "docsRepo": "git@github.com:react-bootstrap/react-bootstrap.github.io.git",
-    "docsRoot": "www/public/"
+    "bowerRepo": "git@github.com:react-bootstrap/react-bootstrap-bower.git"
   }
 }

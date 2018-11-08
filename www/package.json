@@ -40,7 +40,7 @@
   "scripts": {
     "develop": "gatsby develop",
     "build": "gatsby build",
-    "deploy": "gatsby build --prefix-links && gh-pages -d public"
+    "deploy": "gatsby build --prefix-links && gh-pages -d public --branch master --repo https://github.com/react-bootstrap/react-bootstrap.github.io.git"
   },
   "resolutions": {
     "react-docgen": "3.0.0-rc.0"
