@@ -51,14 +51,15 @@ function FormCheckInput({
 }) {
   return (
     <FormContext.Consumer>
-      {({ controlId }) => (
+      {({ controlId, custom }) => (
         <input
           {...props}
           ref={innerRef}
           id={id || controlId}
           className={classNames(
             className,
-            bsPrefix,
+            !custom && bsPrefix,
+            custom && 'custom-control-input',
             isValid && 'is-valid',
             isInvalid && 'is-invalid',
             isStatic && 'position-static',
