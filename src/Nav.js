@@ -138,7 +138,7 @@ const UncontrolledNav = uncontrollable(createBootstrapComponent(Nav, 'nav'), {
 });
 
 const DecoratedNav = mapContextToProps(
-  [NavbarContext.Consumer, CardContext.Consumer],
+  [NavbarContext, CardContext],
   (navbarContext, cardContext, { navbar }) => {
     if (!navbarContext && !cardContext) return {};
 

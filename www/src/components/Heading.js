@@ -43,7 +43,7 @@ class Heading extends React.Component {
 }
 
 export default mapContextToProps(
-  TocContext,
+  TocContext.Consumer,
   c => ({ registerNode: c.registerNode }),
   Heading,
 );
