@@ -7,11 +7,16 @@ import SafeAnchor from './SafeAnchor';
 
 const propTypes = {
   eventKey: PropTypes.any,
+  /** A CSS class to be applied to the <li> of the PaginationItem. */
   className: PropTypes.string,
+  /** A callback fired when this PaginationItem is selected. */
   onSelect: PropTypes.func,
+  /** Disables the PaginationItem. */
   disabled: PropTypes.bool,
+  /** Styles PaginationItem as active, and renders a `<span>` instead of an `<a>`. */
   active: PropTypes.bool,
-  activeLabel: PropTypes.string.isRequired
+  /** An accessible label indicating the active state.. */
+  activeLabel: PropTypes.string
 };
 
 const defaultProps = {
@@ -46,7 +51,9 @@ PaginationItem.defaultProps = defaultProps;
 function createButton(name, defaultValue, label = name) {
   return class extends React.Component {
     static displayName = name;
+
     static propTypes = { disabled: PropTypes.bool };
+
     render() {
       const { disabled, children, className, ...props } = this.props;
       const Component = disabled ? 'span' : SafeAnchor;
