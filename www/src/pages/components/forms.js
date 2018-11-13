@@ -21,6 +21,8 @@ import Horizontal from '../../examples/Form/Horizontal';
 import ValidationNative from '../../examples/Form/ValidationNative';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
 import CheckApi from '../../examples/Form/CheckApi';
+import CheckCustom from '../../examples/Form/CheckCustom';
+import CheckCustomInline from '../../examples/Form/CheckCustomInline';
 
 export default withLayout(function FormControlsSection({ data }) {
   return (
@@ -234,6 +236,36 @@ export default withLayout(function FormControlsSection({ data }) {
       <LinkedHeading h="3" id="forms-validation-examples">
         Examples
       </LinkedHeading>
+
+      <LinkedHeading h="2" id="forms-custom">
+        Custom forms
+      </LinkedHeading>
+      <p>
+        For even more customization and cross browser consistency, use our
+        completely custom form elements to replace the browser defaults. They’re
+        built on top of semantic and accessible markup, so they’re solid
+        replacements for any default form control.
+      </p>
+      <LinkedHeading h="3" id="forms-custom-checkboxes-and-radios">
+        Checkboxes and radios
+      </LinkedHeading>
+      <p>
+        Custom checkbox and radio styles are achieved with a resourceful use of
+        the <code>:checked</code> selector and <code>:after</code> psuedo
+        elements, but are Structurally similar to the default{' '}
+        <code>FormCheck</code>. By default the checked and indeterminate icons
+        use embedded svg icons from{' '}
+        <a href="https://useiconic.com/open">Open Iconic</a>.
+      </p>
+
+      <p>
+        Apply Bootstrap's custom elements by adding the <code>custom</code>{' '}
+        prop.
+      </p>
+      <ReactPlayground codeText={CheckCustom} />
+
+      <h3>Inline</h3>
+      <ReactPlayground codeText={CheckCustomInline} />
 
       <LinkedHeading h="2" id="forms-api">
         API

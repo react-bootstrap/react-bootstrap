@@ -145,7 +145,7 @@ const UncontrolledDropdown = createBootstrapComponent(
 );
 
 const DecoratedDropdown = mapContextToProps(
-  SelectableContext.Consumer,
+  SelectableContext,
   (onSelect, props) => ({
     onSelect: chain(props.onSelect, onSelect),
   }),

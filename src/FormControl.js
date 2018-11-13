@@ -141,7 +141,7 @@ const mapContext = ({ controlId }, { id }) => {
 };
 
 const DecoratedFormControl = mapContextToProps(
-  FormContext.Consumer,
+  FormContext,
   mapContext,
   createBootstrapComponent(FormControl, {
     prefix: 'form-control',

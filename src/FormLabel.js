@@ -82,7 +82,7 @@ const mapContext = ({ controlId }, { htmlFor }) => {
 };
 
 export default mapContextToProps(
-  FormContext.Consumer,
+  FormContext,
   mapContext,
   createBootstrapComponent(FormLabel, 'form-label'),
 );
