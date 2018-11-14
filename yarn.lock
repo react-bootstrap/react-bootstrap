@@ -8963,13 +8963,12 @@ rc@^1.2.7:
 react-context-toolbox@^1.2.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/react-context-toolbox/-/react-context-toolbox-1.2.2.tgz#3fd9a07b0618ae398d232098a04c2b9f0abdbb86"
-<<<<<<< HEAD
+  integrity sha512-CAwJQdK5JnBA7ADDf9grZGmecddr0/Y18e1FJj5L6RgAwOFtQ733No3pYzQw5c06m26iHcaCVbp0C0XTNdEkmw==
+
 react-context-toolbox@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/react-context-toolbox/-/react-context-toolbox-1.2.3.tgz#381238f60422f6034ca706b56994da147ff87b6d"
-=======
-  integrity sha512-CAwJQdK5JnBA7ADDf9grZGmecddr0/Y18e1FJj5L6RgAwOFtQ733No3pYzQw5c06m26iHcaCVbp0C0XTNdEkmw==
->>>>>>> more
+  integrity sha512-ArHw0UFDM6X8Z9lHZ1rZOhMcn8TXWC9y9sFpeJm11YTIlQsN4A0MadKcps2pCGMwWKmH0o/67t+TmVapwWm5Sw==
 
 react-dev-utils@^5.0.0:
   version "5.0.1"
