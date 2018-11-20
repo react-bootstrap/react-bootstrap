@@ -26,6 +26,13 @@ to use a CDN for the stylesheet, it may helpful to install
 npm install react-bootstrap@next bootstrap
 ```
 
+In order for react-bootstrap components to be styled correctly, bootstrap's css must be imported 
+somewhere in your project (usually in the entry point of your program).
+
+```js
+import 'bootstrap/dist/css/bootstrap.min.css';
+```
+
 ### Importing
 
 You should import individual components from
