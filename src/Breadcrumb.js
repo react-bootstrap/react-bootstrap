@@ -45,7 +45,6 @@ class Breadcrumb extends React.Component {
     return (
       <Component aria-label={label} className={className} {...props}>
         <ol
-          role="navigation"
           {...listProps}
           className={classNames(bsPrefix, listProps.className)}
         >
