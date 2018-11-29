@@ -272,6 +272,7 @@ class Modal extends React.Component {
 
       /* BaseModal props */
       show,
+      manager,
       animation,
       backdrop,
       keyboard,
@@ -313,6 +314,7 @@ class Modal extends React.Component {
             onEntered,
             onExit,
             onExiting,
+            manager,
             ref: this.setModalRef,
             style: { ...style, ...this.state.style },
             className: classNames(className, bsPrefix),
