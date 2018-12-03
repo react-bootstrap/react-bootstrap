@@ -10,3 +10,4 @@ tmp-*-repo/
 .babel-cache/
 coverage/
 .idea
+.vs/
