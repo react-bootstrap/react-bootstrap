@@ -12,14 +12,14 @@ See the [documentation][documentation] with live editable examples as well as do
 
 To find the documentation for the latest Bootstrap 3 compatible release, check out: https://react-bootstrap.github.io/
 
+### Migrating from Bootstrap 3 to Bootstrap 4
+
+If you would like to update React-Bootstrap within an existing project to use Bootstrap 4, please read our docs for **[migrating to React-Bootstrap V1](https://react-bootstrap.netlify.com/migrating/)**.
+
 ## Related modules
 
 - [react-router-bootstrap][react-router-bootstrap] – Integration with [React Router][react-router]
 - [Awesome React Bootstrap Components][awesome-react-bootstrap-components] - Additional components like off-canvas navbar, switch and sliders.
-
-### Migrating from Bootstrap 3 to Bootstrap 4
-
-If you would like to update React-Bootstrap within an existing project to use Bootstrap 4, please read our docs for **[migrating to React-Bootstrap V1](https://react-bootstrap.netlify.com/migrating/)**.
 
 ## Local setup
 
