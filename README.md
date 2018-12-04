@@ -18,8 +18,8 @@ If you would like to update React-Bootstrap within an existing project to use Bo
 
 ## Related modules
 
-- [react-router-bootstrap][react-router-bootstrap] – Integration with [React Router][react-router]
-- [Awesome React Bootstrap Components][awesome-react-bootstrap-components] - Additional components like off-canvas navbar, switch and sliders.
+* [react-router-bootstrap][react-router-bootstrap] – Integration with [React Router][react-router]
+* [Awesome React Bootstrap Components][awesome-react-bootstrap-components] - Additional components like off-canvas navbar, switch and sliders.
 
 ## Local setup
 
