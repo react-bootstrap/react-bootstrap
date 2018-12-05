@@ -19,7 +19,6 @@ If you would like to update React-Bootstrap within an existing project to use Bo
 ## Related modules
 
 * [react-router-bootstrap][react-router-bootstrap] – Integration with [React Router][react-router]
-* [React Bootstrap Extended][react-bootstrap-extended] - A version of React Bootstrap where each component has extra props that map to bootstrap's utility classes. For example, `pullRight` adds the class `pull-right` to a component.
 * [Awesome React Bootstrap Components][awesome-react-bootstrap-components] - Additional components like off-canvas navbar, switch and sliders.
 
 ## Local setup
