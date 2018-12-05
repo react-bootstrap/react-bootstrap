@@ -22,10 +22,10 @@ describe('<Breadcrumb>', () => {
       .should.have.length(1);
   });
 
-  it('Should have a navigation role', () => {
+  it('Should not have a navigation role', () => {
     mount(<Breadcrumb className="custom-one custom-two" />)
       .find('ol[role="navigation"]')
-      .should.have.length(1);
+      .should.have.length(0);
   });
 
   it('Should have an aria-label in ol', () => {
