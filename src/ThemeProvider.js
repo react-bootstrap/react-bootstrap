@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import forwardRef from 'react-context-toolbox/lib/forwardRef';
+import forwardRef from 'react-context-toolbox/forwardRef';
 import React from 'react';
 
 const { Provider, Consumer } = React.createContext(new Map());
