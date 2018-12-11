@@ -7,37 +7,37 @@ import ModalDialog = require('./ModalDialog');
 import ModalFooter = require('./ModalFooter');
 
 declare namespace Modal {
-    interface ModalProps extends TransitionCallbacks, React.HTMLProps<Modal> {
-        // Required
-        onHide: Function;
+  interface ModalProps extends TransitionCallbacks, React.HTMLProps<Modal> {
+    // Required
+    onHide: Function;
 
-        // Optional
-        animation?: boolean;
-        autoFocus?: boolean;
-        backdrop?: boolean | string;
-        backdropClassName?: string;
-        backdropStyle?: any;
-        backdropTransitionTimeout?: number;
-        bsSize?: Sizes;
-        container?: any; // TODO: Add more specific type
-        containerClassName?: string;
-        dialogClassName?: string;
-        dialogComponent?: any; // TODO: Add more specific type
-        dialogTransitionTimeout?: number;
-        enforceFocus?: boolean;
-        keyboard?: boolean;
-        onBackdropClick?: (node: HTMLElement) => any;
-        onEscapeKeyUp?: (node: HTMLElement) => any;
-        onShow?: (node: HTMLElement) => any;
-        show?: boolean;
-        transition?: React.ReactElement<any>;
-    }
+    // Optional
+    animation?: boolean;
+    autoFocus?: boolean;
+    backdrop?: boolean | string;
+    backdropClassName?: string;
+    backdropStyle?: any;
+    backdropTransitionTimeout?: number;
+    size: string;
+    container?: any; // TODO: Add more specific type
+    containerClassName?: string;
+    dialogClassName?: string;
+    dialogComponent?: any; // TODO: Add more specific type
+    dialogTransitionTimeout?: number;
+    enforceFocus?: boolean;
+    keyboard?: boolean;
+    onBackdropClick?: (node: HTMLElement) => any;
+    onEscapeKeyUp?: (node: HTMLElement) => any;
+    onShow?: (node: HTMLElement) => any;
+    show?: boolean;
+    transition?: React.ReactElement<any>;
+  }
 }
 declare class Modal extends React.Component<Modal.ModalProps> {
-    static Body: typeof ModalBody;
-    static Header: typeof ModalHeader;
-    static Title: typeof ModalTitle;
-    static Footer: typeof ModalFooter;
-    static Dialog: typeof ModalDialog;
+  static Body: typeof ModalBody;
+  static Header: typeof ModalHeader;
+  static Title: typeof ModalTitle;
+  static Footer: typeof ModalFooter;
+  static Dialog: typeof ModalDialog;
 }
 export = Modal;

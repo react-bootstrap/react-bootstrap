@@ -2,16 +2,16 @@ import * as React from 'react';
 import { Sizes } from 'react-bootstrap';
 
 declare namespace Tooltip {
-    export interface TooltipProps extends React.HTMLProps<Tooltip> {
-        // Optional
-        arrowOffsetLeft?: number | string;
-        arrowOffsetTop?: number | string;
-        bsSize?: Sizes;
-        bsStyle?: string;
-        placement?: string;
-        positionLeft?: number;
-        positionTop?: number;
-    }
+  export interface TooltipProps extends React.HTMLProps<Tooltip> {
+    // Optional
+    arrowOffsetLeft?: number | string;
+    arrowOffsetTop?: number | string;
+    size: string;
+    variant?: string;
+    placement?: string;
+    positionLeft?: number;
+    positionTop?: number;
+  }
 }
-declare class Tooltip extends React.Component<Tooltip.TooltipProps> { }
+declare class Tooltip extends React.Component<Tooltip.TooltipProps> {}
 export = Tooltip;
