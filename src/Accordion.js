@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createBootstrapComponent } from './ThemeProvider';
 import Button from './Button';
 import Card from './Card';
+import Collapse from './Collapse';
 
 class Accordion extends Component {
   //   state = {
@@ -22,21 +23,28 @@ class Accordion extends Component {
           // at any given time).
           <Card props={CurCard.props}>
             {React.Children.map(
+              // Wrap the header with a button component
               CurCard.props.children,
               CardElement =>
                 // Identify the headers
                 CardElement.props.className === 'header' ? (
                   // If it is a header, wrap it with a button
                   <Button>{CardElement}</Button>
-                ) : (
+                ) : null,
+            )}
+            <Collapse className="accordion-collapse">
+              {React.Children.map(
+                // Wrap every other element with a collapse component
+                CurCard.props.children,
+                CardElement =>
                   // If it is not, just return the element as normal.
                   // TODO: Figure out a way to wrap every card element in a single Collapse component,
                   // except for the header (which should be wrapped in a Button component)
-                  CardElement
-                ),
-            )}
+                  CardElement.props.className === 'header' ? null : CardElement,
+              )}
+            </Collapse>
           </Card>
-        ))}; )
+        ))}
       </div>
     );
   }
