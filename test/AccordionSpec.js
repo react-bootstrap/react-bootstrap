@@ -34,7 +34,7 @@ describe('<Accordion>', () => {
     });
   });
 
-  it('should wrap every Card child in a Collapse component (besides the header', () => {
+  it('should wrap every Card child in a Collapse component (besides the header)', () => {
     let wrapper = mount(
       <Accordion>
         <Card>
@@ -46,9 +46,8 @@ describe('<Accordion>', () => {
     );
 
     let collapse = wrapper.find('.accordion-collapse');
-    collapse.should.have.length(1);
 
     collapse.find('.card-header').should.not.have.length(1);
-    collapse.children().should.have.length(2);
+    collapse.find('.card-body').should.have.length(2);
   });
 });

@@ -32,16 +32,21 @@ class Accordion extends Component {
                   <Button>{CardElement}</Button>
                 ) : null,
             )}
-            <Collapse className="accordion-collapse">
-              {React.Children.map(
-                // Wrap every other element with a collapse component
-                CurCard.props.children,
-                CardElement =>
-                  // If it is not, just return the element as normal.
-                  // TODO: Figure out a way to wrap every card element in a single Collapse component,
-                  // except for the header (which should be wrapped in a Button component)
-                  CardElement.props.className === 'header' ? null : CardElement,
-              )}
+            <Collapse
+              className="accordion-collapse"
+              getDimensionValue={() => 15}
+            >
+              <div ref="panel">
+                {React.Children.map(
+                  // Wrap every other element with a collapse component
+                  CurCard.props.children,
+                  CardElement =>
+                    // If it is not header, just return the element as normal.
+                    CardElement.props.className === 'header'
+                      ? null
+                      : CardElement,
+                )}
+              </div>
             </Collapse>
           </Card>
         ))}
