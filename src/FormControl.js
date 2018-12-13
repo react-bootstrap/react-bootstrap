@@ -32,7 +32,7 @@ const propTypes = {
    * <FormControl inputRef={ref => { this.input = ref; }} />
    * ```
    */
-  inputRef: PropTypes.func
+  inputRef: PropTypes.any,
 };
 
 const defaultProps = {
