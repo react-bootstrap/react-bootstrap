@@ -133,7 +133,8 @@ export default withLayout(function NaπvbarSection({ data }) {
           <a href="https://caniuse.com/#feat=css-sticky">
             isn’t fully supported in every browser
           </a>
-        </strong>.
+        </strong>
+        .
       </p>
 
       <p>

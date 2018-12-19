@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 
 import classNames from 'classnames';
-import { css, styled } from 'css-literal-loader/styled';
+import styled, { css } from 'astroturf';
 import qsa from 'dom-helpers/query/querySelectorAll';
 import React from 'react';
 import PropTypes from 'prop-types';

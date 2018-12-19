@@ -20,7 +20,8 @@ render(
     cleanse vegan chambray. A really ironic artisan{' '}
     <Link title="Another one here too" id="t-3">
       whatever keytar
-    </Link>, scenester farm-to-table banksy Austin{' '}
+    </Link>
+    , scenester farm-to-table banksy Austin{' '}
     <Link title="The last tip!" id="t-4">
       twitter handle
     </Link>{' '}

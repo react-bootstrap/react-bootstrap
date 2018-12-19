@@ -28,8 +28,9 @@ export default withLayout(function TabsSection({ data }) {
         <a href="https://www.w3.org/TR/wai-aria-practices/#tabpanel">
           <abbr title="Web Accessibility Initiative">WAI</abbr> <ARIA />{' '}
           Authoring Practices
-        </a>. <code>Tabs</code> is a higher-level component for quickly creating
-        a <code>Nav</code> matched with a set of <code>TabPane</code>s.
+        </a>
+        . <code>Tabs</code> is a higher-level component for quickly creating a{' '}
+        <code>Nav</code> matched with a set of <code>TabPane</code>s.
       </p>
 
       <ReactPlayground

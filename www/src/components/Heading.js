@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
-import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
-import { css } from 'css-literal-loader/styled';
+import mapContextToProps from 'react-context-toolbox/mapContextToProps';
+import { css } from 'astroturf';
 
 import { TocContext } from './Toc';
 
@@ -43,7 +43,7 @@ class Heading extends React.Component {
 }
 
 export default mapContextToProps(
-  TocContext.Consumer,
+  TocContext,
   c => ({ registerNode: c.registerNode }),
   Heading,
 );

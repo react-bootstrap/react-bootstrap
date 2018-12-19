@@ -58,7 +58,7 @@ module.exports = {
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sass',
     {
-      resolve: 'gatsby-plugin-css-literal-loader',
+      resolve: 'gatsby-plugin-astroturf',
       options: { extension: '.module.scss' },
     },
   ],

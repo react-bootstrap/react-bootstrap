@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import Badge from 'react-bootstrap/lib/Badge';
 import Table from 'react-bootstrap/lib/Table';
 
-import { styled } from 'css-literal-loader/styled';
+import styled from 'astroturf';
 
 const Code = styled('code')`
   white-space: nowrap;

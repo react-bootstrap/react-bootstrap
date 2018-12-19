@@ -19,8 +19,9 @@ export default withLayout(function ReactOverlaysSection() {
         are built on top of components from{' '}
         <a href="https://react-bootstrap.github.io/react-overlays/">
           react-overlays
-        </a>, if you find yourself at the limit of a Bootstrap component,
-        consider using the <code>react-overlays</code> base component directly.
+        </a>
+        , if you find yourself at the limit of a Bootstrap component, consider
+        using the <code>react-overlays</code> base component directly.
       </p>
     </>
   );

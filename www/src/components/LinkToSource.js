@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled } from 'css-literal-loader/styled';
+import styled from 'astroturf';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 

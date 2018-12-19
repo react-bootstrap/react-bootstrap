@@ -1,5 +1,5 @@
 import React from 'react';
-import transformContext from 'react-context-toolbox/lib/transformContext';
+import transformContext from 'react-context-toolbox/transformContext';
 
 const FormContext = React.createContext({ controlId: undefined });
 
