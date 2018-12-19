@@ -60,10 +60,10 @@ export default withLayout(function FormControlsSection({ data }) {
         Form controls
       </LinkedHeading>
       <p>
-        For textual form controls—like <code>input</code>s, <code>select</code>s,
-        and <code>textarea</code>s—use the <code>FormControl</code> component.
-        FormControl adds some additional styles for general appearance, focus
-        state, sizing, and more.
+        For textual form controls—like <code>input</code>s, <code>select</code>
+        s, and <code>textarea</code>s—use the <code>FormControl</code>{' '}
+        component. FormControl adds some additional styles for general
+        appearance, focus state, sizing, and more.
       </p>
       <ReactPlayground codeText={FormTextControls} />
       <LinkedHeading h="3" id="forms-input-sizes">
@@ -175,8 +175,8 @@ export default withLayout(function FormControlsSection({ data }) {
         Form row
       </LinkedHeading>
       <p>
-        You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>,
-        a variation of the standard grid row that overrides the default column
+        You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>
+        , a variation of the standard grid row that overrides the default column
         gutters for tighter and more compact layouts.
       </p>
       <ReactPlayground codeText={FormRow} />
@@ -186,8 +186,8 @@ export default withLayout(function FormControlsSection({ data }) {
         Horizontal forms
       </LinkedHeading>
       <p>
-        You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>,
-        a variation of the standard grid row that overrides the default column
+        You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>
+        , a variation of the standard grid row that overrides the default column
         gutters for tighter and more compact layouts.
       </p>
       <ReactPlayground codeText={Horizontal} />
@@ -206,9 +206,9 @@ export default withLayout(function FormControlsSection({ data }) {
         For native HTML form validation–
         <a href="https://caniuse.com/#feat=form-validation">
           available in all our supported browsers
-        </a>, the <code>:valid</code> and <code>:invalid</code> pseudo selectors
-        are used to apply validation styles as well as display feedback
-        messages.
+        </a>
+        , the <code>:valid</code> and <code>:invalid</code> pseudo selectors are
+        used to apply validation styles as well as display feedback messages.
       </p>
       <p>
         Bootstrap scopes the <code>:valid</code> and <code>:invalid</code>{' '}

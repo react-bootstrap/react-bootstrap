@@ -11,9 +11,8 @@ import React from 'react';
 function map(children, func) {
   let index = 0;
 
-  return React.Children.map(
-    children,
-    child => (React.isValidElement(child) ? func(child, index++) : child),
+  return React.Children.map(children, child =>
+    React.isValidElement(child) ? func(child, index++) : child,
   );
 }
 

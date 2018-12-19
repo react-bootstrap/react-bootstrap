@@ -109,7 +109,7 @@
     "lint-staged": "^8.1.0",
     "lodash": "^4.17.11",
     "mocha": "^5.2.0",
-    "prettier": "~1.15.3",
+    "prettier": "^1.15.3",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-test-renderer": "^16.6.3",
