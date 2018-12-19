@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { elementType } from 'prop-types-extra';
 import React from 'react';
-import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
+import mapContextToProps from 'react-context-toolbox/mapContextToProps';
 
 import chain from './utils/createChainedFunction';
 import SafeAnchor from './SafeAnchor';

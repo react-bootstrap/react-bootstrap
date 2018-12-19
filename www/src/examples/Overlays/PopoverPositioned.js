@@ -2,6 +2,7 @@
   {['top', 'right', 'bottom', 'left'].map(placement => (
     <OverlayTrigger
       trigger="click"
+      key={placement}
       placement={placement}
       overlay={
         <Popover

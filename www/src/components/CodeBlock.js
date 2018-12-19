@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { styled } from 'css-literal-loader/styled';
+import styled from 'astroturf';
 import mapProps from 'recompose/mapProps';
 
 import { highlight, languages } from 'prismjs/components/prism-core';
