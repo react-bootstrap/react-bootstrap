@@ -3,11 +3,18 @@ const React = require('react');
 const { join } = require('path');
 
 const prefix = __PATH_PREFIX__; // eslint-disable-line no-undef
-const { css } = fs.readJsonSync(`./public/sorted-assets.json`);
+let css;
+try {
+  ({ css } = fs.readJsonSync(`./public/sorted-assets.json`));
+} catch (err) {
+  /** why does this happen? */
+}
 
 const styleMap = new Set(css.map(({ file }) => `${prefix}/${file}`));
 
 exports.onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
+  if (!css) return;
+
   const pageStyles = new Set();
   const headComponents = getHeadComponents().filter(el => {
     let href = el && (el.props.href || el.props['data-href']);
