@@ -10,7 +10,7 @@ try {
   /** why does this happen? */
 }
 
-const styleMap = new Set(css.map(({ file }) => `${prefix}/${file}`));
+const styleMap = css && new Set(css.map(({ file }) => `${prefix}/${file}`));
 
 exports.onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
   if (!css) return;
@@ -34,20 +34,25 @@ exports.onPreRenderHTML = ({ getHeadComponents, replaceHeadComponents }) => {
 
       if (rel === `prefetch`) {
         headComponents.push(
-          <link as="style" rel={rel} key={file} href={href} />,
+          React.createElement('link', {
+            rel,
+            href,
+            as: 'style',
+            key: file,
+          }),
         );
       } else {
         headComponents.push(
-          <style
-            key={file}
-            data-href={href}
-            dangerouslySetInnerHTML={{
+          React.createElement('style', {
+            key: file,
+            'data-href': href,
+            dangerouslySetInnerHTML: {
               __html: fs.readFileSync(
                 join(process.cwd(), `public`, file),
                 `utf8`,
               ),
-            }}
-          />,
+            },
+          }),
         );
       }
     }
