@@ -4,6 +4,14 @@ import SafeAnchor from './SafeAnchor';
 
 import { BsPrefixComponent } from './helpers';
 
+declare class AlertLink<
+  As extends React.ReactType = typeof SafeAnchor
+> extends BsPrefixComponent<As> {}
+
+declare class AlertHeading<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As> {}
+
 export interface AlertProps extends React.HTMLProps<Alert> {
   bsPrefix?: string;
   variant?:
@@ -23,16 +31,9 @@ export interface AlertProps extends React.HTMLProps<Alert> {
   transition?: React.ReactType;
 }
 
-declare class Alert extends React.Component<AlertProps> {}
-
-declare namespace Alert {
-  class Link<
-    As extends React.ReactType = typeof SafeAnchor
-  > extends BsPrefixComponent<As> {}
-
-  class Heading<As extends React.ReactType = 'div'> extends BsPrefixComponent<
-    As
-  > {}
+declare class Alert extends React.Component<AlertProps> {
+  public static Link: typeof AlertLink;
+  public static Heading: typeof AlertHeading;
 }
 
 export default Alert;

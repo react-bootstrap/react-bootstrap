@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ButtonGroup } from '..';
-import { Omit } from './helpers';
+import { Omit, PropsOf } from './helpers';
 
 declare namespace ToggleButtonGroup {
   interface BaseProps {
@@ -31,7 +31,7 @@ declare namespace ToggleButtonGroup {
 
   export type ToggleButtonGroupProps = BaseProps &
     (RadioProps | CheckboxProps) &
-    Omit<ButtonGroup.ButtonGroupProps, 'onChange'> &
+    Omit<PropsOf<typeof ButtonGroup>, 'onChange'> &
     Omit<
       React.HTMLProps<ToggleButtonGroup>,
       'defaultValue' | 'type' | 'value' | 'onChange'

@@ -1,16 +1,16 @@
 import * as React from 'react';
 
-declare namespace ButtonGroup {
-  export interface ButtonGroupProps extends React.HTMLProps<ButtonGroup> {
-    block?: boolean;
-    // size: string;
-    variant?: string;
-    justified?: boolean;
-    vertical?: boolean;
-  }
+import { BsPrefixComponent } from './helpers';
+
+declare interface ButtonGroupProps {
+  role?: string;
+  size?: 'sm' | 'lg' | string;
+  toggle?: boolean;
+  vertical?: boolean;
 }
-declare class ButtonGroup extends React.Component<
-  ButtonGroup.ButtonGroupProps
-> {}
+
+declare class ButtonGroup<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As, ButtonGroupProps> {}
 
 export default ButtonGroup;

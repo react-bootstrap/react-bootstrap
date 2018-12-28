@@ -21,7 +21,7 @@ export type ReplaceProps<Inner extends React.ReactType, P> = Omit<
   P;
 
 export interface BsPrefixProps<As extends React.ReactType> {
-  as: As;
+  as?: As;
   bsPrefix?: string;
 }
 
