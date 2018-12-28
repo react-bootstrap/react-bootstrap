@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
 
 declare namespace Thumbnail {
   export interface ThumbnailProps extends React.HTMLProps<Thumbnail> {
-    size: string;
+    // size: string;
     variant?: string;
   }
 }

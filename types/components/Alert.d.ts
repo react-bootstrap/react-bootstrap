@@ -1,15 +1,38 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
+
+import SafeAnchor from './SafeAnchor';
+
+import { BsPrefixComponent } from './helpers';
+
+export interface AlertProps extends React.HTMLProps<Alert> {
+  bsPrefix?: string;
+  variant?:
+    | string
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'info'
+    | 'dark'
+    | 'light';
+  dismissible?: boolean;
+  show?: boolean;
+  onClose?: () => void;
+  closeLabel?: string;
+  transition?: React.ReactType;
+}
+
+declare class Alert extends React.Component<AlertProps> {}
 
 declare namespace Alert {
-  export interface AlertProps extends React.HTMLProps<Alert> {
-    size: string;
-    variant?: string;
-    closeLabel?: string;
-    /** @deprecated since v0.29.0 */ dismissAfter?: number;
-    // TODO: Add more specific type
-    onDismiss?: Function;
-  }
+  class Link<
+    As extends React.ReactType = typeof SafeAnchor
+  > extends BsPrefixComponent<As> {}
+
+  class Heading<As extends React.ReactType = 'div'> extends BsPrefixComponent<
+    As
+  > {}
 }
-declare class Alert extends React.Component<Alert.AlertProps> {}
-export = Alert;
+
+export default Alert;

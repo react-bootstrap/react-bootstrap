@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SelectCallback } from 'react-bootstrap';
+import { SelectCallback } from './helpers';
 
 declare namespace PanelFooter {
   export interface PanelFooterProps extends React.HTMLProps<PanelFooter> {

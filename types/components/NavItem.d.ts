@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Sizes, SelectCallback } from 'react-bootstrap';
+import { SelectCallback } from './helpers';
 
 declare namespace NavItem {
   export interface NavItemProps extends React.HTMLProps<NavItem> {
     active?: boolean;
     brand?: any; // TODO: Add more specific type
-    size: string;
+    // size: string;
     variant?: string;
     componentClass?: React.ReactType;
     defaultNavExpanded?: boolean;

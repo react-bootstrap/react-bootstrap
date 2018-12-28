@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Sizes, Omit } from 'react-bootstrap';
+import { Omit } from './helpers';
 
 declare namespace ProgressBar {
   export interface ProgressBarProps
     extends Omit<React.HTMLProps<ProgressBar>, 'label'> {
     // Optional
     active?: boolean;
-    size: string;
+    // size: string;
     variant?: string;
     interpolatedClass?: any; // TODO: Add more specific type
     max?: number;
@@ -14,7 +14,7 @@ declare namespace ProgressBar {
     now?: number;
     srOnly?: boolean;
     striped?: boolean;
-    label?: React.ReactNode;
+    // label?: React.ReactNode;
   }
 }
 declare class ProgressBar extends React.Component<

@@ -11,6 +11,7 @@
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",
   "module": "es/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "bootstrap": "yarn && yarn --cwd www",
     "build": "node tools/build.js",
@@ -27,7 +28,8 @@
     "test-browser": "cross-env NODE_ENV=test karma start --single-run",
     "test-node": "cross-env NODE_ENV=test-server mocha --require @babel/register test/server/*Spec.js",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "dtslint": "dtslint types"
   },
   "lint-staged": {
     "*.js": [

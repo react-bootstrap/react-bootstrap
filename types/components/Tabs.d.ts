@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SelectCallback } from 'react-bootstrap';
+import { SelectCallback } from './helpers';
 
 declare namespace Tabs {
   export interface TabsProps extends React.HTMLProps<Tabs> {

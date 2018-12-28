@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SelectCallback } from 'react-bootstrap';
+import { SelectCallback } from './helpers';
 import DropdownToggle = require('./DropdownToggle');
 import DropdownMenu = require('./DropdownMenu');
 import DropdownItem = require('./DropdownItem');

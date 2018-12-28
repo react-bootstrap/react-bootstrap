@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
 
 declare namespace ListGroupItem {
   export interface ListGroupItemProps extends React.HTMLProps<ListGroupItem> {
     active?: any;
-    size: string;
+    // size: string;
     variant?: string;
     eventKey?: any;
     header?: React.ReactNode;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Omit, Sizes, SelectCallback } from 'react-bootstrap';
+import { Omit, SelectCallback } from './helpers';
 import CarouselItem = require('./CarouselItem');
 import CarouselCaption = require('./CarouselCaption');
 

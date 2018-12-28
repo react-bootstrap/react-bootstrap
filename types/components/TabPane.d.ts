@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TransitionCallbacks } from 'react-bootstrap';
+import { TransitionCallbacks } from './helpers';
 
 declare namespace TabPane {
   export interface TabPaneProps

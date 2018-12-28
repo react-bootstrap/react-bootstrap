@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TransitionCallbacks, Omit } from 'react-bootstrap';
+import { TransitionCallbacks, Omit } from './helpers';
 import TabContainer = require('./TabContainer');
 import TabPane = require('./TabPane');
 import TabContent = require('./TabContent');
@@ -14,7 +14,7 @@ declare namespace Tab {
     eventKey?: any; // TODO: Add more specific type
     unmountOnExit?: boolean;
     tabClassName?: string;
-    title?: React.ReactNode; // Override HTMLProps.title to allow nodes not just strings
+    // title?: React.ReactNode; // Override HTMLProps.title to allow nodes not just strings
   }
 }
 declare class Tab extends React.Component<Tab.TabProps> {

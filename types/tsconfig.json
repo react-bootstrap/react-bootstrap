@@ -13,7 +13,9 @@
     "strictFunctionTypes": true,
     "target": "es5",
     "typeRoots": ["../"],
-    "types": []
-  },
-  "include": ["./*.ts", "./*.tsx"]
+    "types": [],
+    "paths": {
+      "react-bootstrap": ["types/index.d.ts"]
+    }
+  }
 }

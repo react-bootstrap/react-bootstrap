@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
 
 declare namespace Label {
   export interface LabelProps extends React.HTMLProps<Label> {
-    size: string;
+    // size: string;
     variant?: string;
   }
 }

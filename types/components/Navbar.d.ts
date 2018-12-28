@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
 import NavbarBrand = require('./NavbarBrand');
 import NavbarCollapse = require('./NavbarCollapse');
 import NavbarHeader = require('./NavbarHeader');
@@ -8,7 +7,7 @@ import NavbarToggle = require('./NavbarToggle');
 declare namespace Navbar {
   export interface NavbarProps extends React.HTMLProps<Navbar> {
     brand?: any; // TODO: Add more specific type
-    size: string;
+    // size: string;
     bg: string;
     variant?: string;
     collapseOnSelect?: boolean;

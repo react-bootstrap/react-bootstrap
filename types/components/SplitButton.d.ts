@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { Sizes, Omit } from 'react-bootstrap';
+import { Omit } from './helpers';
 
 declare namespace SplitButton {
   export interface SplitButtonProps
     extends Omit<React.HTMLProps<SplitButton>, 'title'> {
     variant?: string;
-    size: string;
+    // size: string;
     dropdownTitle?: any; // TODO: Add more specific type
     dropup?: boolean;
     pullRight?: boolean;
-    title: React.ReactNode;
+    // title: React.ReactNode;
     id: string;
   }
 }

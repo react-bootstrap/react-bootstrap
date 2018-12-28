@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
 
 declare namespace ButtonToolbar {
   export interface ButtonToolbarProps extends React.HTMLProps<ButtonToolbar> {
     block?: boolean;
-    size: string;
+    // size: string;
     variant?: string;
     justified?: boolean;
     vertical?: boolean;

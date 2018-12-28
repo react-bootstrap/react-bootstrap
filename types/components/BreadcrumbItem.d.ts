@@ -1,12 +1,17 @@
 import * as React from 'react';
 
-declare namespace BreadcrumbItem {
-    export interface BreadcrumbItemProps extends React.Props<BreadcrumbItem> {
-        active?: boolean;
-        href?: string;
-        title?: React.ReactNode;
-        target?: string;
-    }
+import { BsPrefixComponent } from './helpers';
+
+declare interface BreadcrumbItemProps {
+  active?: boolean;
+  href?: string;
+  target?: string;
+  title?: React.ReactNode;
 }
-declare class BreadcrumbItem extends React.Component<BreadcrumbItem.BreadcrumbItemProps> { }
-export = BreadcrumbItem;
+
+declare class BreadcrumbItem extends BsPrefixComponent<
+  'li',
+  BreadcrumbItemProps
+> {}
+
+export default BreadcrumbItem;

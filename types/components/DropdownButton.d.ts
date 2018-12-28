@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Sizes, Omit } from 'react-bootstrap';
+import { Omit } from './helpers';
 import { DropdownBaseProps } from './Dropdown';
 
 declare namespace DropdownButton {

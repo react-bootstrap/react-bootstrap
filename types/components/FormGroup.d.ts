@@ -1,10 +1,9 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
 
 declare namespace FormGroup {
   export interface FormGroupProps extends React.HTMLProps<FormGroup> {
     bsPrefix?: string;
-    size: string;
+    // size: string;
     controlId?: string;
     validationState?: 'success' | 'warning' | 'error' | null;
   }

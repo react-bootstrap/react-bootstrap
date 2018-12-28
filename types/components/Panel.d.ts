@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TransitionCallbacks, Sizes, SelectCallback } from 'react-bootstrap';
+import { TransitionCallbacks, SelectCallback } from './helpers';
 import PanelHeading = require('./PanelHeading');
 import PanelTitle = require('./PanelTitle');
 import PanelToggle = require('./PanelToggle');

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Sizes, TransitionCallbacks } from 'react-bootstrap';
+import { TransitionCallbacks } from './helpers';
 import ModalBody = require('./ModalBody');
 import ModalHeader = require('./ModalHeader');
 import ModalTitle = require('./ModalTitle');
@@ -18,7 +18,7 @@ declare namespace Modal {
     backdropClassName?: string;
     backdropStyle?: any;
     backdropTransitionTimeout?: number;
-    size: string;
+    // size: string;
     container?: any; // TODO: Add more specific type
     containerClassName?: string;
     dialogClassName?: string;
