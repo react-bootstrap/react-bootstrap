@@ -28,6 +28,8 @@ export { default as BreadcrumbItem } from './components/BreadcrumbItem';
 export { default as Button } from './components/Button';
 export { default as ButtonGroup } from './components/ButtonGroup';
 export { default as ButtonToolbar } from './components/ButtonToolbar';
+export { default as Card } from './components/Card';
+export { default as CardImg } from './components/CardImg';
 
 // import { BadgeProps } from './Badge';
 // import Breadcrumb = require('./Breadcrumb');
