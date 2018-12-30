@@ -11,9 +11,12 @@ import {
   Card,
   CardColumns,
   Carousel,
+  Container,
+  Col,
+  Row,
 } from 'react-bootstrap';
 
-<Alert>Woop woop</Alert>;
+<Alert dismissible>Woop woop</Alert>;
 <Alert.Link as="a" href="blah" />;
 <Alert.Heading as="h3" />;
 
@@ -86,3 +89,22 @@ import {
     </Carousel.Caption>
   </Carousel.Item>
 </Carousel>;
+
+<Container fluid>
+  <Row className="justify-content-md-center">
+    <Col xs lg="2">
+      1 of 3
+    </Col>
+    <Col md="auto">Variable width content</Col>
+    <Col xs lg={2}>
+      3 of 3
+    </Col>
+  </Row>
+  <Row noGutters>
+    <Col>1 of 3</Col>
+    <Col md="auto">Variable width content</Col>
+    <Col xs md={{ span: 4, offset: 4 }}>
+      3 of 3
+    </Col>
+  </Row>
+</Container>;
