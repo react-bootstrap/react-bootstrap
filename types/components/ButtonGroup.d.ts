@@ -4,7 +4,7 @@ import { BsPrefixComponent } from './helpers';
 
 declare interface ButtonGroupProps {
   role?: string;
-  size?: 'sm' | 'lg' | string;
+  size?: 'sm' | 'lg';
   toggle?: boolean;
   vertical?: boolean;
 }

@@ -29,7 +29,12 @@ export { default as Button } from './components/Button';
 export { default as ButtonGroup } from './components/ButtonGroup';
 export { default as ButtonToolbar } from './components/ButtonToolbar';
 export { default as Card } from './components/Card';
+export { default as CardColumns } from './components/CardColumns';
+export { default as CardDeck } from './components/CardDeck';
 export { default as CardImg } from './components/CardImg';
+export { default as CardGroup } from './components/CardGroup';
+export { default as Carousel } from './components/Carousel';
+export { default as CarouselItem } from './components/CarouselItem';
 
 // import { BadgeProps } from './Badge';
 // import Breadcrumb = require('./Breadcrumb');

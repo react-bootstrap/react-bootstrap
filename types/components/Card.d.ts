@@ -38,7 +38,6 @@ declare class CardImgOverlay<
 
 export interface CardProps {
   bg?:
-    | string
     | 'primary'
     | 'secondary'
     | 'success'
@@ -48,7 +47,6 @@ export interface CardProps {
     | 'dark'
     | 'light';
   text?:
-    | string
     | 'primary'
     | 'secondary'
     | 'success'
@@ -60,7 +58,6 @@ export interface CardProps {
     | 'white'
     | 'muted';
   border?:
-    | string
     | 'primary'
     | 'secondary'
     | 'success'

@@ -15,7 +15,6 @@ declare class AlertHeading<
 export interface AlertProps extends React.HTMLProps<Alert> {
   bsPrefix?: string;
   variant?:
-    | string
     | 'primary'
     | 'secondary'
     | 'success'

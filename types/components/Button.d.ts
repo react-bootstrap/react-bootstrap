@@ -6,7 +6,6 @@ declare interface ButtonProps {
   active?: boolean;
   block?: boolean;
   variant?:
-    | string
     | 'primary'
     | 'secondary'
     | 'success'
@@ -24,7 +23,7 @@ declare interface ButtonProps {
     | 'outline-info'
     | 'outline-dark'
     | 'outline-light';
-  size?: 'sm' | 'lg' | string;
+  size?: 'sm' | 'lg';
   type?: 'button' | 'reset' | 'submit';
   href?: string;
   disabled?: boolean;
