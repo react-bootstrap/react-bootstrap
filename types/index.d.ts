@@ -37,6 +37,8 @@ export { default as Carousel } from './components/Carousel';
 export { default as CarouselItem } from './components/CarouselItem';
 export { default as CloseButton } from './components/CloseButton';
 export { default as Col } from './components/Col';
+export { default as Collapse } from './components/Collapse';
+export { default as Fade } from './components/Fade';
 
 export { default as Container } from './components/Container';
 export { default as Row } from './components/Row';
