@@ -38,6 +38,8 @@ export { default as CarouselItem } from './components/CarouselItem';
 export { default as CloseButton } from './components/CloseButton';
 export { default as Col } from './components/Col';
 export { default as Collapse } from './components/Collapse';
+export { default as Dropdown } from './components/Dropdown';
+export { default as DropdownButton } from './components/DropdownButton';
 export { default as Fade } from './components/Fade';
 
 export { default as Container } from './components/Container';

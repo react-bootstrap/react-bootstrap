@@ -1,31 +1,27 @@
 import * as React from 'react';
 import { SelectCallback } from './helpers';
-import DropdownToggle = require('./DropdownToggle');
-import DropdownMenu = require('./DropdownMenu');
-import DropdownItem = require('./DropdownItem');
 
-declare namespace Dropdown {
-  export interface DropdownBaseProps {
-    bsPrefix?: string;
-    componentClass?: React.ReactType;
-    disabled?: boolean;
-    dropup?: boolean;
-    id: string;
-    onClose?: Function;
-    onSelect?: SelectCallback;
-    onToggle?: (isOpen: boolean) => void;
-    open?: boolean;
-    pullRight?: boolean;
-    role?: string;
-  }
+import DropdownToggle from './DropdownToggle';
+import DropdownMenu from './DropdownMenu';
+import DropdownItem from './DropdownItem';
 
-  export type DropdownProps = Dropdown.DropdownBaseProps &
-    React.HTMLProps<Dropdown>;
+export interface DropdownProps extends React.HTMLProps<Dropdown> {
+  drop?: 'up' | 'left' | 'right' | 'down';
+  alightRight?: boolean;
+  show?: boolean;
+  flip?: boolean;
+  onToggle?: (
+    isOpen: boolean,
+    event: React.SyntheticEvent<Dropdown>,
+    metadata: { source: 'select' | 'click' | 'rootClose' | 'keydown' },
+  ) => void;
+  onSelect?: SelectCallback;
 }
 
-declare class Dropdown extends React.Component<Dropdown.DropdownProps> {
-  public static Menu: typeof DropdownMenu;
+declare class Dropdown extends React.Component<DropdownProps> {
   public static Toggle: typeof DropdownToggle;
+  public static Menu: typeof DropdownMenu;
   public static Item: typeof DropdownItem;
 }
-export = Dropdown;
+
+export default Dropdown;

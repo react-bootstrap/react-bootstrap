@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { SelectCallback } from './helpers';
 
-declare namespace DropdownMenu {
-  export interface DropdownMenuProps extends React.HTMLProps<DropdownMenu> {
-    labelledBy?: string | number;
-    onClose?: Function;
-    onSelect?: SelectCallback;
-    open?: boolean;
-    pullRight?: boolean;
-    alignRight?: boolean;
-  }
+import { BsPrefixComponent, SelectCallback } from './helpers';
+
+declare interface DropdownMenuProps {
+  show?: true;
+  flip?: true;
+  alightRight?: true;
+  onSelect?: SelectCallback;
+  rootCloseEvent?: 'click' | 'mousedown';
+  popperConfig?: object;
 }
-declare class DropdownMenu extends React.Component<
-  DropdownMenu.DropdownMenuProps
-> {}
-export = DropdownMenu;
+
+declare class DropdownMenu<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As, DropdownMenuProps> {}
+
+export default DropdownMenu;
