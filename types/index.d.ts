@@ -35,6 +35,7 @@ export { default as CardImg } from './components/CardImg';
 export { default as CardGroup } from './components/CardGroup';
 export { default as Carousel } from './components/Carousel';
 export { default as CarouselItem } from './components/CarouselItem';
+export { default as CloseButton } from './components/CloseButton';
 
 // import { BadgeProps } from './Badge';
 // import Breadcrumb = require('./Breadcrumb');
