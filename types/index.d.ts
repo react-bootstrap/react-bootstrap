@@ -50,4 +50,6 @@ export { default as FormLabel } from './components/FormLabel';
 export { default as FormText } from './components/FormText';
 
 export { default as Container } from './components/Container';
+export { default as Image } from './components/Image';
+export { default as Figure } from './components/Figure';
 export { default as Row } from './components/Row';
