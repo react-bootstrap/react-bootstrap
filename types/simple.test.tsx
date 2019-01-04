@@ -20,6 +20,7 @@ import {
   FormControl,
   InputGroup,
   ListGroup,
+  Modal,
 } from 'react-bootstrap';
 
 <Alert dismissible>Woop woop</Alert>;
@@ -224,3 +225,18 @@ import {
   </ListGroup.Item>
   <ListGroup.Item action>This one is a button</ListGroup.Item>
 </ListGroup>;
+
+<Modal show={false} onHide={() => {}}>
+  <Modal.Header closeButton>
+    <Modal.Title>Modal heading</Modal.Title>
+  </Modal.Header>
+  <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+  <Modal.Footer>
+    <Button variant="secondary" onClick={() => {}}>
+      Close
+    </Button>
+    <Button variant="primary" onClick={() => {}}>
+      Save Changes
+    </Button>
+  </Modal.Footer>
+</Modal>;

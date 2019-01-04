@@ -1,43 +1,43 @@
 import * as React from 'react';
-import { TransitionCallbacks } from './helpers';
-import ModalBody = require('./ModalBody');
-import ModalHeader = require('./ModalHeader');
-import ModalTitle = require('./ModalTitle');
-import ModalDialog = require('./ModalDialog');
-import ModalFooter = require('./ModalFooter');
 
-declare namespace Modal {
-  interface ModalProps extends TransitionCallbacks, React.HTMLProps<Modal> {
-    // Required
-    onHide: Function;
+import ModalBody from './ModalBody';
+import ModalHeader from './ModalHeader';
+import ModalTitle from './ModalTitle';
+import ModalFooter from './ModalFooter';
+import ModalDialog from './ModalDialog';
 
-    // Optional
-    animation?: boolean;
-    autoFocus?: boolean;
-    backdrop?: boolean | string;
-    backdropClassName?: string;
-    backdropStyle?: any;
-    backdropTransitionTimeout?: number;
-    // size: string;
-    container?: any; // TODO: Add more specific type
-    containerClassName?: string;
-    dialogClassName?: string;
-    dialogComponent?: any; // TODO: Add more specific type
-    dialogTransitionTimeout?: number;
-    enforceFocus?: boolean;
-    keyboard?: boolean;
-    onBackdropClick?: (node: HTMLElement) => any;
-    onEscapeKeyUp?: (node: HTMLElement) => any;
-    onShow?: (node: HTMLElement) => any;
-    show?: boolean;
-    transition?: React.ReactElement<any>;
-  }
+import {
+  BsPrefixComponent,
+  SelectCallback,
+  TransitionCallbacks,
+} from './helpers';
+
+declare interface ModalProps extends TransitionCallbacks {
+  size?: 'sm' | 'lg';
+  centered?: boolean;
+  backdrop?: 'static' | boolean;
+  backdropClassName?: string;
+  keyboard?: boolean;
+  animation?: boolean;
+  dialogClassName?: string;
+  dialogAs?: React.ReactType;
+  autoFocus?: boolean;
+  enforceFocus?: boolean;
+  restoreFocus?: boolean;
+  show?: boolean;
+  onHide?: () => void;
+  container?: any;
 }
-declare class Modal extends React.Component<Modal.ModalProps> {
-  static Body: typeof ModalBody;
-  static Header: typeof ModalHeader;
-  static Title: typeof ModalTitle;
-  static Footer: typeof ModalFooter;
-  static Dialog: typeof ModalDialog;
+
+declare class Modal<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As, ModalProps> {
+  public static Body: typeof ModalBody;
+  public static Header: typeof ModalHeader;
+  public static Title: typeof ModalTitle;
+  public static Footer: typeof ModalFooter;
+
+  public static Dialog: typeof ModalDialog;
 }
-export = Modal;
+
+export default Modal;
