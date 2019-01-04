@@ -1,21 +1,27 @@
 import * as React from 'react';
-import FormControlFeedback = require('./FormControlFeedback');
-import FormControlStatic = require('./FormControlStatic');
 
-declare namespace FormControl {
-  export interface FormControlProps extends React.HTMLProps<FormControl> {
-    bsPrefix?: string;
-    // size: string;
-    componentClass?: React.ReactType;
-    id?: string;
-    inputRef?: (instance: HTMLInputElement) => void;
-    type?: string;
-  }
+import Feedback from './Feedback';
+
+import { BsPrefixComponent } from './helpers';
+
+declare interface FormControlProps {
+  innerRef?: React.LegacyRef<this>;
+  size?: 'sm' | 'lg';
+  plaintext?: boolean;
+  readOnly?: boolean;
+  disabled?: boolean;
+  value?: string;
+  onChange?: React.FormEventHandler<this>;
+  type?: string;
+  id?: string;
+  isValid?: boolean;
+  isInvalid?: boolean;
 }
-declare class FormControl extends React.Component<
-  FormControl.FormControlProps
-> {
-  public static Feedback: typeof FormControlFeedback;
-  public static Static: typeof FormControlStatic;
+
+declare class Form<
+  As extends React.ReactType = 'input'
+> extends BsPrefixComponent<As, FormControlProps> {
+  public static Feedback: typeof Feedback;
 }
-export = FormControl;
+
+export default Form;
