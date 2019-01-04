@@ -1,12 +1,20 @@
 import * as React from 'react';
 
-declare namespace ListGroup {
-  interface ListGroupProps extends React.HTMLProps<ListGroup> {
-    bsPrefix?: string;
-    componentClass?: React.ReactType; // Added since v0.30.0
-    // TODO: Add more specific type
-    fill?: boolean;
-  }
+import ListGroupItem from './ListGroupItem';
+
+import { BsPrefixComponent, SelectCallback } from './helpers';
+
+declare interface ListGroupProps {
+  variant?: 'flush';
+  activeKey?: unknown;
+  defaultActiveKey?: unknown;
+  onSelect?: SelectCallback;
 }
-declare class ListGroup extends React.Component<ListGroup.ListGroupProps> {}
-export = ListGroup;
+
+declare class ListGroup<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As, ListGroupProps> {
+  public static Item: typeof ListGroupItem;
+}
+
+export default ListGroup;

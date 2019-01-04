@@ -52,4 +52,8 @@ export { default as FormText } from './components/FormText';
 export { default as Container } from './components/Container';
 export { default as Image } from './components/Image';
 export { default as Figure } from './components/Figure';
+export { default as InputGroup } from './components/InputGroup';
+export { default as Jumbotron } from './components/Jumbotron';
+export { default as ListGroup } from './components/ListGroup';
+export { default as ListGroupItem } from './components/ListGroupItem';
 export { default as Row } from './components/Row';
