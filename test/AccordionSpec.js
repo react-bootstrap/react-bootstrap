@@ -9,6 +9,23 @@ describe('<Accordion>', () => {
     mount(<Accordion />).assertSingle('div');
   });
 
+  it('should not add any new elements', () => {
+    let wrapper = mount(
+      <Accordion>
+        <Card>
+          <Card.Header className="header">This is a header</Card.Header>
+          <Card.Body>This is the body</Card.Body>
+        </Card>
+      </Accordion>,
+    );
+
+    wrapper.children().should.have.length(1);
+
+    let card = wrapper.find('.card');
+
+    card.children().should.have.length(2);
+  })
+
   it('should decorate the header of the card with a button', () => {
     let wrapper = mount(
       <Accordion>
