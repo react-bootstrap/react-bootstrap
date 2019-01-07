@@ -24,7 +24,7 @@ describe('<Accordion>', () => {
     let card = wrapper.find('.card');
 
     card.children().should.have.length(2);
-  })
+  });
 
   it('should decorate the header of the card with a button', () => {
     let wrapper = mount(
