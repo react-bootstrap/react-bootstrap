@@ -36,7 +36,7 @@ class Accordion extends Component {
           // the other nested card components.
           // to expand or collapse at a time (no more than 1 component should be expanded
           // at any given time).
-          <Card props={CurCard.bsPrefix}>
+          <Card props={CurCard.props}>
             {React.Children.map(
               // Wrap the header with a button component
               CurCard.props.children,

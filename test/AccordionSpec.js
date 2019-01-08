@@ -67,4 +67,25 @@ describe('<Accordion>', () => {
     collapse.find('.card-header').should.not.have.length(1);
     collapse.find('.card-body').should.have.length(2);
   });
+
+  it('should only have one card collapsed', () => {
+    let wrapper = mount(
+      <Accordion>
+        <Card>
+          <Card.Header className="header">This is a header</Card.Header>
+          <Card.Body>This is the body</Card.Body>
+        </Card>
+        <Card>
+          <Card.Header className="header">This is another header</Card.Header>
+          <Card.Body>This is another body</Card.Body>
+        </Card>
+      </Accordion>,
+    );
+    let collapses = wrapper.find('.accordion-collapse');
+
+    collapses.forEach((collapse, i) => {
+      if(collapse.props().in)
+        collapse.props().in.should.equal(i === 0); // The first element should be the only element that's expanded
+    })
+  })
 });
