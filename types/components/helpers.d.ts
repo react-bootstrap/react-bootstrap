@@ -30,15 +30,10 @@ export class BsPrefixComponent<
   P = {}
 > extends React.Component<ReplaceProps<As, BsPrefixProps<As> & P>> {}
 
-export interface SelectCallback extends React.EventHandler<any> {
-  (eventKey: any, e: React.SyntheticEvent<{}>): void;
-  /**
-   * @deprecated
-   * This signature is a hack so can still derive from HTMLProps.
-   * It does not reflect the underlying event and should not be used.
-   */
-  (e: React.MouseEvent<{}>): void;
-}
+export type SelectCallback = (
+  eventKey: any,
+  e: React.SyntheticEvent<{}>,
+) => void;
 
 export interface TransitionCallbacks {
   onEnter?(node: HTMLElement): any;

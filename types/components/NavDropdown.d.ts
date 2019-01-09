@@ -1,22 +1,25 @@
 import * as React from 'react';
-import { Omit } from './helpers';
-import { DropdownBaseProps } from './Dropdown';
-import Dropdown = require('./Dropdown');
 
-declare namespace NavDropdown {
-  export interface NavDropdownBaseProps extends DropdownBaseProps {
-    active?: boolean;
-    noCaret?: boolean;
-    eventKey?: any;
-    title: React.ReactNode;
-  }
+import Dropdown from './Dropdown';
 
-  export type NavDropdownProps = NavDropdownBaseProps &
-    Omit<React.HTMLProps<NavDropdown>, 'title'>;
+import { ReplaceProps, PropsOf } from './helpers';
+
+declare interface NavDropdownProps {
+  id: string;
+  title: string;
+  disabled?: boolean;
+  active?: boolean;
+  menuRole?: string;
+  rootCloseEvent?: 'click' | 'mousedown';
+  bsPrefix?: string;
 }
+
 declare class NavDropdown extends React.Component<
-  NavDropdown.NavDropdownProps
+  ReplaceProps<typeof Dropdown, NavDropdownProps>
 > {
   public static Item: typeof Dropdown.Item;
+  public static Divider: typeof Dropdown.Divider;
+  public static Header: typeof Dropdown.Header;
 }
-export = NavDropdown;
+
+export default NavDropdown;
