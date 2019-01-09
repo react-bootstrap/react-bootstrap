@@ -17,18 +17,18 @@ declare class InputGroupText<
 declare class InputGroupCheckbox extends BsPrefixComponent<'input'> {}
 declare class InputGroupRadio extends BsPrefixComponent<'input'> {}
 
-declare interface InputGroupProps {
+interface InputGroupProps {
   size?: 'sm' | 'lg';
 }
 
 declare class InputGroup<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As, InputGroupProps> {
-  public static Append: typeof InputGroupAppend;
-  public static Prepend: typeof InputGroupPrepend;
-  public static Text: typeof InputGroupText;
-  public static Checkbox: typeof InputGroupCheckbox;
-  public static Radio: typeof InputGroupRadio;
+  static Append: typeof InputGroupAppend;
+  static Prepend: typeof InputGroupPrepend;
+  static Text: typeof InputGroupText;
+  static Checkbox: typeof InputGroupCheckbox;
+  static Radio: typeof InputGroupRadio;
 }
 
 export default InputGroup;

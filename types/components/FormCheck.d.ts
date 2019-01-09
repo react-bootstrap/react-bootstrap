@@ -5,7 +5,7 @@ import FormCheckLabel from './FormCheckLabel';
 
 import { BsPrefixComponent } from './helpers';
 
-declare interface FormCheckProps {
+interface FormCheckProps {
   innerRef?: React.LegacyRef<this>;
   id?: string;
   inline?: boolean;
@@ -22,8 +22,8 @@ declare interface FormCheckProps {
 declare class FormCheck<
   As extends React.ReactType = 'input'
 > extends BsPrefixComponent<As, FormCheckProps> {
-  public static Input: typeof FormCheckInput;
-  public static Label: typeof FormCheckLabel;
+  static Input: typeof FormCheckInput;
+  static Label: typeof FormCheckLabel;
 }
 
 export default FormCheck;

@@ -5,7 +5,7 @@ import NavLink from './NavLink';
 
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
-declare interface NavProps {
+interface NavProps {
   navbarBsPrefix?: string;
   cardHeaderBsPrefix?: string;
   variant?: 'tabs' | 'pills';
@@ -22,8 +22,8 @@ declare class Nav<As extends React.ReactType = 'div'> extends BsPrefixComponent<
   As,
   NavProps
 > {
-  public static Item: typeof NavItem;
-  public static Link: typeof NavLink;
+  static Item: typeof NavItem;
+  static Link: typeof NavLink;
 }
 
 export default Nav;

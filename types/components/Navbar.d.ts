@@ -10,7 +10,7 @@ declare class NavbarText<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare interface NavbarProps {
+interface NavbarProps {
   variant?: 'light' | 'dark';
   expand?: true | 'sm' | 'md' | 'lg' | 'xl';
   bg?: string;
@@ -26,10 +26,10 @@ declare interface NavbarProps {
 declare class Navbar<
   As extends React.ReactType = 'nav'
 > extends BsPrefixComponent<As, NavbarProps> {
-  public static Brand: typeof NavbarBrand;
-  public static Toggle: typeof NavbarToggle;
-  public static Collapse: typeof NavbarCollapse;
-  public static Text: typeof NavbarText;
+  static Brand: typeof NavbarBrand;
+  static Toggle: typeof NavbarToggle;
+  static Collapse: typeof NavbarCollapse;
+  static Text: typeof NavbarText;
 }
 
 export default Navbar;

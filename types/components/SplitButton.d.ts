@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Omit } from './helpers';
 
 declare namespace SplitButton {
-  export interface SplitButtonProps
+  interface SplitButtonProps
     extends Omit<React.HTMLProps<SplitButton>, 'title'> {
     variant?: string;
     // size: string;

@@ -4,7 +4,7 @@ import Feedback from './Feedback';
 
 import { BsPrefixComponent } from './helpers';
 
-declare interface FormControlProps {
+interface FormControlProps {
   innerRef?: React.LegacyRef<this>;
   size?: 'sm' | 'lg';
   plaintext?: boolean;
@@ -21,7 +21,7 @@ declare interface FormControlProps {
 declare class Form<
   As extends React.ReactType = 'input'
 > extends BsPrefixComponent<As, FormControlProps> {
-  public static Feedback: typeof Feedback;
+  static Feedback: typeof Feedback;
 }
 
 export default Form;

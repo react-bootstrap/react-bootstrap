@@ -4,7 +4,7 @@ import { default as BreadcrumbItem } from './BreadcrumbItem';
 
 import { BsPrefixComponent } from './helpers';
 
-declare interface BreadcrumbProps {
+interface BreadcrumbProps {
   label?: string;
   listProps?: React.OlHTMLAttributes<any>;
 }
@@ -12,7 +12,7 @@ declare interface BreadcrumbProps {
 declare class Breadcrumb<
   As extends React.ReactType = 'nav'
 > extends BsPrefixComponent<As, BreadcrumbProps> {
-  public static Item: typeof BreadcrumbItem;
+  static Item: typeof BreadcrumbItem;
 }
 
 export default Breadcrumb;

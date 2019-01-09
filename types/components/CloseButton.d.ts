@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-declare interface CloseButtonProps {
+interface CloseButtonProps {
   label?: string;
   onClick?: React.MouseEventHandler<CloseButton>;
 }

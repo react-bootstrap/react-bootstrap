@@ -9,7 +9,7 @@ declare class MediaBody<
 declare class Media<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As> {
-  public static Body: typeof MediaBody;
+  static Body: typeof MediaBody;
 }
 
 export default Media;

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 declare namespace Thumbnail {
-  export interface ThumbnailProps extends React.HTMLProps<Thumbnail> {
+  interface ThumbnailProps extends React.HTMLProps<Thumbnail> {
     // size: string;
     variant?: string;
   }

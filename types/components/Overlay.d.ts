@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TransitionCallbacks } from './helpers';
 
 declare namespace Overlay {
-  export interface OverlayProps extends TransitionCallbacks {
+  interface OverlayProps extends TransitionCallbacks {
     // Optional
     animation?: any; // TODO: Add more specific type
     container?: any; // TODO: Add more specific type

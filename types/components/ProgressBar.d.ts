@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Omit } from './helpers';
 
 declare namespace ProgressBar {
-  export interface ProgressBarProps
+  interface ProgressBarProps
     extends Omit<React.HTMLProps<ProgressBar>, 'label'> {
     // Optional
     active?: boolean;

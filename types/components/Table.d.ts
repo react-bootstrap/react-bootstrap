@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 declare namespace Table {
-  export interface TableProps extends React.HTMLProps<Table> {
+  interface TableProps extends React.HTMLProps<Table> {
     bordered?: boolean;
     condensed?: boolean;
     hover?: boolean;

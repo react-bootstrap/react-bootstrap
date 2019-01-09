@@ -4,7 +4,7 @@ import Dropdown from './Dropdown';
 
 import { ReplaceProps, PropsOf } from './helpers';
 
-declare interface NavDropdownProps {
+interface NavDropdownProps {
   id: string;
   title: string;
   disabled?: boolean;
@@ -17,9 +17,9 @@ declare interface NavDropdownProps {
 declare class NavDropdown extends React.Component<
   ReplaceProps<typeof Dropdown, NavDropdownProps>
 > {
-  public static Item: typeof Dropdown.Item;
-  public static Divider: typeof Dropdown.Divider;
-  public static Header: typeof Dropdown.Header;
+  static Item: typeof Dropdown.Item;
+  static Divider: typeof Dropdown.Divider;
+  static Header: typeof Dropdown.Header;
 }
 
 export default NavDropdown;

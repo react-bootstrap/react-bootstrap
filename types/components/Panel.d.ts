@@ -8,7 +8,7 @@ import PanelBody = require('./PanelBody');
 import PanelFooter = require('./PanelFooter');
 
 declare namespace Panel {
-  export interface PanelProps
+  interface PanelProps
     extends TransitionCallbacks,
       React.HTMLProps<Panel> {
     variant?: string;

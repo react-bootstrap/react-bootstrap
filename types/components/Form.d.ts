@@ -12,7 +12,7 @@ declare class FormRow<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare interface FormProps {
+interface FormProps {
   innerRef?: React.LegacyRef<this>;
   inline?: boolean;
   validated?: boolean;
@@ -21,12 +21,12 @@ declare interface FormProps {
 declare class Form<
   As extends React.ReactType = 'form'
 > extends BsPrefixComponent<As, FormProps> {
-  public static Row: typeof FormRow;
-  public static Group: typeof FormGroup;
-  public static Control: typeof FormControl;
-  public static Check: typeof FormCheck;
-  public static Label: typeof FormLabel;
-  public static Text: typeof FormText;
+  static Row: typeof FormRow;
+  static Group: typeof FormGroup;
+  static Control: typeof FormControl;
+  static Check: typeof FormCheck;
+  static Label: typeof FormLabel;
+  static Text: typeof FormText;
 }
 
 export default Form;

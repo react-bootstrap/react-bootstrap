@@ -4,7 +4,7 @@ import ListGroupItem from './ListGroupItem';
 
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
-declare interface ListGroupProps {
+interface ListGroupProps {
   variant?: 'flush';
   activeKey?: unknown;
   defaultActiveKey?: unknown;
@@ -14,7 +14,7 @@ declare interface ListGroupProps {
 declare class ListGroup<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As, ListGroupProps> {
-  public static Item: typeof ListGroupItem;
+  static Item: typeof ListGroupItem;
 }
 
 export default ListGroup;

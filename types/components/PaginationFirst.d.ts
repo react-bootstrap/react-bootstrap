@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SelectCallback } from './helpers';
 
 declare namespace PaginationFirst {
-  export interface PaginationFirstProps
+  interface PaginationFirstProps
     extends React.HTMLProps<PaginationFirst> {
     disabled?: boolean;
   }

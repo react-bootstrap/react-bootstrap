@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SelectCallback } from './helpers';
 
 declare namespace PanelFooter {
-  export interface PanelFooterProps extends React.HTMLProps<PanelFooter> {
+  interface PanelFooterProps extends React.HTMLProps<PanelFooter> {
     bsPrefix?: string;
   }
 }

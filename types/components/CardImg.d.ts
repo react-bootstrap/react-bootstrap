@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-declare interface CardImgProps {
+interface CardImgProps {
   variant?: 'top' | 'bottom';
 }
 

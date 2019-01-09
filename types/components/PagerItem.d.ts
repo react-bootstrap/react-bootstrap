@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SelectCallback } from './helpers';
 
 declare namespace PagerItem {
-  export interface PagerItemProps extends React.HTMLProps<PagerItem> {
+  interface PagerItemProps extends React.HTMLProps<PagerItem> {
     disabled?: boolean;
     eventKey?: any;
     next?: boolean;

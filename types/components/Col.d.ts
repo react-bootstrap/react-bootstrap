@@ -21,7 +21,7 @@ type ColSpec =
   | ColSize
   | { span?: ColSize; offset?: NumberAttr; order?: NumberAttr };
 
-declare interface ColProps {
+interface ColProps {
   xs?: ColSpec;
   sm?: ColSpec;
   md?: ColSpec;

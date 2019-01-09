@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SelectCallback } from './helpers';
 
 declare namespace PaginationLast {
-  export interface PaginationLastProps extends React.HTMLProps<PaginationLast> {
+  interface PaginationLastProps extends React.HTMLProps<PaginationLast> {
     disabled?: boolean;
   }
 }

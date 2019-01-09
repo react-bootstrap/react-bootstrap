@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 declare namespace SafeAnchor {
-  export interface SafeAnchorProps extends React.HTMLProps<SafeAnchor> {
+  interface SafeAnchorProps extends React.HTMLProps<SafeAnchor> {
     href?: string;
     onClick?: React.MouseEventHandler<{}>;
     disabled?: boolean;

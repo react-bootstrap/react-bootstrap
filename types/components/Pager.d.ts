@@ -3,7 +3,7 @@ import { SelectCallback } from './helpers';
 import PagerItem = require('./PagerItem');
 
 declare namespace Pager {
-  export interface PagerProps extends React.HTMLProps<Pager> {
+  interface PagerProps extends React.HTMLProps<Pager> {
     onSelect?: SelectCallback;
   }
 }

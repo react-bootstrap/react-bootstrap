@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
-declare interface DropdownMenuProps {
+interface DropdownMenuProps {
   show?: true;
   flip?: true;
   alightRight?: true;

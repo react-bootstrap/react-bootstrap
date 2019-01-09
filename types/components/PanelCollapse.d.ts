@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SelectCallback } from './helpers';
 
 declare namespace PanelCollapse {
-  export interface PanelCollapseProps extends React.HTMLProps<PanelCollapse> {
+  interface PanelCollapseProps extends React.HTMLProps<PanelCollapse> {
     bsPrefix?: string;
     onEnter?: Function;
     onEntering?: Function;

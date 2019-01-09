@@ -8,7 +8,7 @@ import PaginationEllipsis = require('./PaginationEllipsis');
 import PaginationItem = require('./PaginationItem');
 
 declare namespace Pagination {
-  export interface PaginationProps extends React.HTMLProps<Pagination> {
+  interface PaginationProps extends React.HTMLProps<Pagination> {
     // size: string;
   }
 }

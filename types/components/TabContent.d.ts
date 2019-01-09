@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 declare namespace TabContent {
-    export interface TabContentProps extends React.HTMLProps<TabContent> {
+    interface TabContentProps extends React.HTMLProps<TabContent> {
         componentClass?: React.ReactType,
         animation?: boolean | React.ReactType;
         mountOnEnter?: boolean;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TransitionCallbacks } from './helpers';
 
 declare namespace TabPane {
-  export interface TabPaneProps
+  interface TabPaneProps
     extends TransitionCallbacks,
       React.HTMLProps<TabPane> {
     animation?: boolean | React.ComponentClass<any>;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SelectCallback } from './helpers';
 
 declare namespace PanelGroup {
-  export interface PanelGroupProps extends React.HTMLProps<PanelGroup> {
+  interface PanelGroupProps extends React.HTMLProps<PanelGroup> {
     accordion?: boolean;
     activeKey?: any;
     defaultActiveKey?: any;

@@ -5,7 +5,7 @@ import CarouselCaption from './CarouselCaption';
 
 import { ReplaceProps, SelectCallback } from './helpers';
 
-export interface CarouselProps {
+interface CarouselProps {
   bsPrefix?: string;
   slide?: boolean;
   fade?: boolean;
@@ -27,8 +27,8 @@ export interface CarouselProps {
 declare class Carousel extends React.Component<
   ReplaceProps<'div', CarouselProps>
 > {
-  public static Item: typeof CarouselItem;
-  public static Caption: typeof CarouselCaption;
+  static Item: typeof CarouselItem;
+  static Caption: typeof CarouselCaption;
 }
 
 export default Carousel;

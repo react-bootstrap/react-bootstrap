@@ -12,7 +12,7 @@ import {
   TransitionCallbacks,
 } from './helpers';
 
-declare interface ModalProps extends TransitionCallbacks {
+interface ModalProps extends TransitionCallbacks {
   size?: 'sm' | 'lg';
   centered?: boolean;
   backdrop?: 'static' | boolean;
@@ -32,12 +32,12 @@ declare interface ModalProps extends TransitionCallbacks {
 declare class Modal<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As, ModalProps> {
-  public static Body: typeof ModalBody;
-  public static Header: typeof ModalHeader;
-  public static Title: typeof ModalTitle;
-  public static Footer: typeof ModalFooter;
+  static Body: typeof ModalBody;
+  static Header: typeof ModalHeader;
+  static Title: typeof ModalTitle;
+  static Footer: typeof ModalFooter;
 
-  public static Dialog: typeof ModalDialog;
+  static Dialog: typeof ModalDialog;
 }
 
 export default Modal;

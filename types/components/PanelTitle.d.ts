@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SelectCallback } from './helpers';
 
 declare namespace PanelTitle {
-  export interface PanelTitleProps extends React.HTMLProps<PanelTitle> {
+  interface PanelTitleProps extends React.HTMLProps<PanelTitle> {
     componentClass?: string;
     bsPrefix?: string;
     toggle?: boolean;

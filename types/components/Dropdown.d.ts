@@ -13,7 +13,7 @@ declare class DropdownHeader<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As> {}
 
-export interface DropdownProps extends React.HTMLProps<Dropdown> {
+interface DropdownProps {
   drop?: 'up' | 'left' | 'right' | 'down';
   alightRight?: boolean;
   show?: boolean;
@@ -26,12 +26,14 @@ export interface DropdownProps extends React.HTMLProps<Dropdown> {
   onSelect?: SelectCallback;
 }
 
-declare class Dropdown extends React.Component<DropdownProps> {
-  public static Toggle: typeof DropdownToggle;
-  public static Menu: typeof DropdownMenu;
-  public static Item: typeof DropdownItem;
-  public static Divider: typeof DropdownDivider;
-  public static Header: typeof DropdownHeader;
+declare class Dropdown<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As, DropdownProps> {
+  static Toggle: typeof DropdownToggle;
+  static Menu: typeof DropdownMenu;
+  static Item: typeof DropdownItem;
+  static Divider: typeof DropdownDivider;
+  static Header: typeof DropdownHeader;
 }
 
 export default Dropdown;

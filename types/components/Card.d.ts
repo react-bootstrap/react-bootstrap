@@ -36,7 +36,7 @@ declare class CardImgOverlay<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As> {}
 
-export interface CardProps {
+interface CardProps {
   bg?:
     | 'primary'
     | 'secondary'
@@ -72,15 +72,15 @@ export interface CardProps {
 declare class Card<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As, CardProps> {
-  public static Img: typeof CardImg;
-  public static Title: typeof CardTitle;
-  public static Subtitle: typeof CardSubtitle;
-  public static Body: typeof CardBody;
-  public static Link: typeof CardLink;
-  public static Text: typeof CardText;
-  public static Header: typeof CardHeader;
-  public static Footer: typeof CardFooter;
-  public static ImgOverlay: typeof CardImgOverlay;
+  static Img: typeof CardImg;
+  static Title: typeof CardTitle;
+  static Subtitle: typeof CardSubtitle;
+  static Body: typeof CardBody;
+  static Link: typeof CardLink;
+  static Text: typeof CardText;
+  static Header: typeof CardHeader;
+  static Footer: typeof CardFooter;
+  static ImgOverlay: typeof CardImgOverlay;
 }
 
 export default Card;

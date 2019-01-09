@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SelectCallback } from './helpers';
 
 declare namespace PanelToggle {
-  export interface PanelToggleProps extends React.HTMLProps<PanelToggle> {
+  interface PanelToggleProps extends React.HTMLProps<PanelToggle> {
     componentClass?: string;
   }
 }

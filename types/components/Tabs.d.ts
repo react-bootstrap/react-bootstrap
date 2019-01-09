@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SelectCallback } from './helpers';
 
 declare namespace Tabs {
-  export interface TabsProps extends React.HTMLProps<Tabs> {
+  interface TabsProps extends React.HTMLProps<Tabs> {
     activeKey?: any;
     animation?: boolean;
     variant?: string;

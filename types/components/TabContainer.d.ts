@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 declare namespace TabContainer {
-  export interface TabContainerProps
+  interface TabContainerProps
     extends React.HTMLAttributes<TabContainer> {
     activeKey?: any;
     defaultActiveKey?: any;

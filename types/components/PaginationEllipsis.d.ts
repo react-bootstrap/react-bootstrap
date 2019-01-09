@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SelectCallback } from './helpers';
 
 declare namespace PaginationEllipsis {
-  export interface PaginationEllipsisProps
+  interface PaginationEllipsisProps
     extends React.HTMLProps<PaginationEllipsis> {
     disabled?: boolean;
   }

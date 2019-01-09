@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-declare interface ModalHeaderProps {
+interface ModalHeaderProps {
   closeLabel?: string;
   closeButton?: boolean;
   onHide?: () => void;

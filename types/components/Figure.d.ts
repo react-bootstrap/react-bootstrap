@@ -8,8 +8,8 @@ import { BsPrefixComponent } from './helpers';
 declare class Figure<
   As extends React.ReactType = 'figure'
 > extends BsPrefixComponent<As> {
-  public static Image: typeof FigureImage;
-  public static Caption: typeof FigureCaption;
+  static Image: typeof FigureImage;
+  static Caption: typeof FigureCaption;
 }
 
 export default Figure;

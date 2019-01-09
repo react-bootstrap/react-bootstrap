@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-declare interface ImageProps {
+interface ImageProps {
   fluid?: boolean;
   rounded?: boolean;
   roundedCircle?: boolean;
