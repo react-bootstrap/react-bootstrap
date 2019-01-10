@@ -17,7 +17,11 @@ class Example extends React.Component {
           Click me!
         </Button>
         <Overlay target={target} show={show} placement="right">
-          {props => <Tooltip {...props}>My Tooltip</Tooltip>}
+          {props => (
+            <Tooltip id="overlay-example" {...props}>
+              My Tooltip
+            </Tooltip>
+          )}
         </Overlay>
       </>
     );

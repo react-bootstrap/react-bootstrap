@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { css } from 'css-literal-loader/styled';
+import { css } from 'astroturf';
 
 import ComponentApi from '../../components/ComponentApi';
 import LinkedHeading from '../../components/LinkedHeading';

@@ -1,7 +1,7 @@
 import { graphql } from 'gatsby';
 import kebabCase from 'lodash/kebabCase';
 import React from 'react';
-import { styled } from 'css-literal-loader/styled';
+import styled from 'astroturf';
 
 import Heading from './Heading';
 import Anchor from './Anchor';

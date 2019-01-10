@@ -39,8 +39,9 @@ export default function PageItem({
     >
       <Component className="page-link" disabled={disabled} {...props}>
         {children}
-        {active &&
-          activeLabel && <span className="sr-only">{activeLabel}</span>}
+        {active && activeLabel && (
+          <span className="sr-only">{activeLabel}</span>
+        )}
       </Component>
     </li>
   );

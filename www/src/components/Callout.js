@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { css } from 'css-literal-loader/styled';
+import { css } from 'astroturf';
 
 const styles = css`
   @import '../css/theme';

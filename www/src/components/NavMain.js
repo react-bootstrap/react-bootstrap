@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import Tooltip from 'react-bootstrap/lib/Tooltip';
 import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import { styled } from 'css-literal-loader/styled';
+import styled from 'astroturf';
 import withProps from 'recompose/withProps';
 
 import logo from '../assets/logo.svg';

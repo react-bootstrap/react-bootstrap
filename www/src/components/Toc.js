@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled } from 'css-literal-loader/styled';
+import styled from 'astroturf';
 
 export const TocContext = React.createContext();
 

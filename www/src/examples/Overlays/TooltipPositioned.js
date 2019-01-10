@@ -1,9 +1,10 @@
 <ButtonToolbar>
   {['top', 'right', 'bottom', 'left'].map(placement => (
     <OverlayTrigger
+      key={placement}
       placement={placement}
       overlay={
-        <Tooltip id="tooltip">
+        <Tooltip id={`tooltip-${placement}`}>
           Tooltip on <strong>{placement}</strong>.
         </Tooltip>
       }

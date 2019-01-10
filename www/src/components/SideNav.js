@@ -4,7 +4,7 @@ import React from 'react';
 import Nav from 'react-bootstrap/lib/Nav';
 import FormControl from 'react-bootstrap/lib/FormControl';
 
-import { styled } from 'css-literal-loader/styled';
+import styled from 'astroturf';
 import Button from 'react-bootstrap/lib/Button';
 import Collapse from 'react-bootstrap/lib/Collapse';
 import withProps from 'recompose/withProps';
@@ -160,18 +160,17 @@ function NavSection({ heading, location: { pathname }, items, path }) {
         {heading}
       </TocLink>
 
-      {items &&
-        active && (
-          <Nav activeKey={pathname} onSelect={() => {}} className="d-block">
-            {items.map(name => (
-              <Nav.Item key={`${path}/${name}/`}>
-                <TocSubLink href={`${path}/${name}/`}>
-                  {startCase(name.toLowerCase())}
-                </TocSubLink>
-              </Nav.Item>
-            ))}
-          </Nav>
-        )}
+      {items && active && (
+        <Nav activeKey={pathname} onSelect={() => {}} className="d-block">
+          {items.map(name => (
+            <Nav.Item key={`${path}/${name}/`}>
+              <TocSubLink href={`${path}/${name}/`}>
+                {startCase(name.toLowerCase())}
+              </TocSubLink>
+            </Nav.Item>
+          ))}
+        </Nav>
+      )}
     </>
   );
 }
