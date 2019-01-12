@@ -16,7 +16,6 @@ class Accordion extends Component {
     this.state = {
       openedId: 0,
     };
-    this.onClick = this.onClick.bind(this);
   }
 
   onClick = id => {
