@@ -1,19 +1,16 @@
 import * as React from 'react';
-import { Omit } from './helpers';
 
-declare namespace Popover {
-  interface PopoverProps
-    extends Omit<React.HTMLProps<Popover>, 'title'> {
-    // Optional
-    arrowOffsetLeft?: number | string;
-    arrowOffsetTop?: number | string;
-    // size: string;
-    variant?: string;
-    placement?: string;
-    positionLeft?: number | string; // String support added since v0.30.0
-    positionTop?: number | string; // String support added since v0.30.0
-    // title?: React.ReactNode;
-  }
+import { Placement } from './Overlay';
+
+import { BsPrefixComponent } from './helpers';
+
+interface PopoverProps {
+  id: string | number;
+  placement?: Placement;
+  title?: string;
+  arrowProps?: { ref: any; style: object };
 }
-declare class Popover extends React.Component<Popover.PopoverProps> {}
-export = Popover;
+
+declare class Popover extends BsPrefixComponent<'div', PopoverProps> {}
+
+export default Popover;

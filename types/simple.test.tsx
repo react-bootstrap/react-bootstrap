@@ -23,6 +23,9 @@ import {
   Modal,
   Nav,
   NavDropdown,
+  OverlayTrigger,
+  Tooltip,
+  Pagination,
 } from 'react-bootstrap';
 
 <Alert dismissible>Woop woop</Alert>;
@@ -267,3 +270,32 @@ import {
     <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>
   </NavDropdown>
 </Nav>;
+
+<OverlayTrigger
+  placement="left"
+  overlay={
+    <Tooltip id="tooltip-left">
+      Tooltip on <strong>left</strong>.
+    </Tooltip>
+  }
+>
+  <Button variant="secondary">Tooltip on left</Button>
+</OverlayTrigger>;
+
+<Pagination>
+  <Pagination.First />
+  <Pagination.Prev />
+  <Pagination.Item>{1}</Pagination.Item>
+  <Pagination.Ellipsis />
+
+  <Pagination.Item>{10}</Pagination.Item>
+  <Pagination.Item>{11}</Pagination.Item>
+  <Pagination.Item active>{12}</Pagination.Item>
+  <Pagination.Item>{13}</Pagination.Item>
+  <Pagination.Item disabled>{14}</Pagination.Item>
+
+  <Pagination.Ellipsis />
+  <Pagination.Item>{20}</Pagination.Item>
+  <Pagination.Next />
+  <Pagination.Last />
+</Pagination>;
