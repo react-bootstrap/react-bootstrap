@@ -1,23 +1,18 @@
 import * as React from 'react';
-import { Omit } from './helpers';
 
-declare namespace ProgressBar {
-  interface ProgressBarProps
-    extends Omit<React.HTMLProps<ProgressBar>, 'label'> {
-    // Optional
-    active?: boolean;
-    // size: string;
-    variant?: string;
-    interpolatedClass?: any; // TODO: Add more specific type
-    max?: number;
-    min?: number;
-    now?: number;
-    srOnly?: boolean;
-    striped?: boolean;
-    // label?: React.ReactNode;
-  }
+import { BsPrefixComponent } from './helpers';
+
+interface ProgressBarProps {
+  min?: number;
+  now?: number;
+  max?: number;
+  label?: React.ReactNode;
+  srOnly?: boolean;
+  striped?: boolean;
+  animated?: boolean;
+  variant?: 'success' | 'danger' | 'warning' | 'info';
 }
-declare class ProgressBar extends React.Component<
-  ProgressBar.ProgressBarProps
-> {}
-export = ProgressBar;
+
+declare class ProgressBar extends BsPrefixComponent<'div', ProgressBarProps> {}
+
+export default ProgressBar;

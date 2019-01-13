@@ -72,5 +72,7 @@ export { default as OverlayTrigger } from './components/OverlayTrigger';
 export { default as PageItem } from './components/PageItem';
 export { default as Pagination } from './components/Pagination';
 export { default as Popover } from './components/Popover';
+export { default as ProgressBar } from './components/ProgressBar';
+export { default as ResponsiveEmbed } from './components/ResponsiveEmbed';
 export { default as Row } from './components/Row';
 export { default as Tooltip } from './components/Tooltip';

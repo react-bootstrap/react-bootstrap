@@ -26,6 +26,7 @@ import {
   OverlayTrigger,
   Tooltip,
   Pagination,
+  ProgressBar,
 } from 'react-bootstrap';
 
 <Alert dismissible>Woop woop</Alert>;
@@ -299,3 +300,10 @@ import {
   <Pagination.Next />
   <Pagination.Last />
 </Pagination>;
+
+<div>
+  <ProgressBar striped variant="success" min={-10} now={40} max={200} />
+  <ProgressBar striped animated variant="info" now={20} />
+  <ProgressBar striped variant="warning" now={60} />
+  <ProgressBar striped variant="danger" now={80} />
+</div>;
