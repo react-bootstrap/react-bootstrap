@@ -27,6 +27,8 @@ import {
   Tooltip,
   Pagination,
   ProgressBar,
+  Tabs,
+  Tab,
 } from 'react-bootstrap';
 
 <Alert dismissible>Woop woop</Alert>;
@@ -307,3 +309,15 @@ import {
   <ProgressBar striped variant="warning" now={60} />
   <ProgressBar striped variant="danger" now={80} />
 </div>;
+
+<Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+  <Tab eventKey="home" title="Home">
+    <div />
+  </Tab>
+  <Tab eventKey="profile" title="Profile">
+    <div />
+  </Tab>
+  <Tab eventKey="contact" title="Contact" disabled>
+    <div />
+  </Tab>
+</Tabs>;

@@ -1,19 +1,28 @@
 import * as React from 'react';
-import { Omit } from './helpers';
 
-declare namespace SplitButton {
-  interface SplitButtonProps
-    extends Omit<React.HTMLProps<SplitButton>, 'title'> {
-    variant?: string;
-    // size: string;
-    dropdownTitle?: any; // TODO: Add more specific type
-    dropup?: boolean;
-    pullRight?: boolean;
-    // title: React.ReactNode;
-    id: string;
-  }
+import DropdownToggle from './DropdownToggle';
+import Dropdown from './Dropdown';
+
+import { ReplaceProps, PropsOf } from './helpers';
+
+type PropsFromToggle = Partial<
+  Pick<PropsOf<typeof DropdownToggle>, 'size' | 'variant' | 'disabled'>
+>;
+
+interface SplitButtonProps extends PropsFromToggle {
+  id: string | number;
+  toggleLabel?: string;
+  href?: string;
+  target?: string;
+  onClick?: React.MouseEventHandler<this>;
+  title: React.ReactNode;
+  menuRole?: string;
+  rootCloseEvent?: 'click' | 'mousedown';
+  bsPrefix?: string;
 }
+
 declare class SplitButton extends React.Component<
-  SplitButton.SplitButtonProps
+  ReplaceProps<typeof Dropdown, SplitButtonProps>
 > {}
-export = SplitButton;
+
+export default SplitButton;
