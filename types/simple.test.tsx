@@ -29,6 +29,8 @@ import {
   ProgressBar,
   Tabs,
   Tab,
+  ToggleButtonGroup,
+  ToggleButton,
 } from 'react-bootstrap';
 
 <Alert dismissible>Woop woop</Alert>;
@@ -321,3 +323,9 @@ import {
     <div />
   </Tab>
 </Tabs>;
+
+<ToggleButtonGroup type="checkbox" name="options" defaultValue={1}>
+  <ToggleButton value={1}>Radio 1 (pre-checked)</ToggleButton>
+  <ToggleButton value={2}>Radio 2</ToggleButton>
+  <ToggleButton value={3}>Radio 3</ToggleButton>
+</ToggleButtonGroup>;

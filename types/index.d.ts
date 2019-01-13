@@ -83,4 +83,7 @@ export { default as TabContent } from './components/TabContent';
 export { default as Table } from './components/Table';
 export { default as TabPane } from './components/TabPane';
 export { default as Tabs } from './components/Tabs';
+export { default as ThemeProvider } from './components/ThemeProvider';
+export { default as ToggleButton } from './components/ToggleButton';
+export { default as ToggleButtonGroup } from './components/ToggleButtonGroup';
 export { default as Tooltip } from './components/Tooltip';
