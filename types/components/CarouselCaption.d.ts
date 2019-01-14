@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-declare namespace CarouselCaption {
-    export interface CarouselCaptionProps extends React.HTMLProps<CarouselCaption> {
-        componentClass?: React.ReactType;
-    }
-}
-declare class CarouselCaption extends React.Component<CarouselCaption.CarouselCaptionProps> { }
-export = CarouselCaption;
+import { BsPrefixComponent } from './helpers';
+
+declare class CarouselCaption<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As> {}
+
+export default CarouselCaption;

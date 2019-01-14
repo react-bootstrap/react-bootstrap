@@ -1,29 +1,37 @@
 import * as React from 'react';
 
-declare namespace Col {
-    export interface ColProps extends React.HTMLProps<Col> {
-        componentClass?: React.ReactType;
-        lg?: number;
-        lgHidden?: boolean;
-        lgOffset?: number;
-        lgPull?: number;
-        lgPush?: number;
-        md?: number;
-        mdHidden?: boolean;
-        mdOffset?: number;
-        mdPull?: number;
-        mdPush?: number;
-        sm?: number;
-        smHidden?: boolean;
-        smOffset?: number;
-        smPull?: number;
-        smPush?: number;
-        xs?: number;
-        xsHidden?: boolean;
-        xsOffset?: number;
-        xsPull?: number;
-        xsPush?: number;
-    }
+import { BsPrefixComponent } from './helpers';
+
+type NumberAttr =
+  | number
+  | '1'
+  | '2'
+  | '3'
+  | '4'
+  | '5'
+  | '6'
+  | '7'
+  | '8'
+  | '9'
+  | '10'
+  | '11'
+  | '12';
+type ColSize = true | 'auto' | NumberAttr;
+type ColSpec =
+  | ColSize
+  | { span?: ColSize; offset?: NumberAttr; order?: NumberAttr };
+
+interface ColProps {
+  xs?: ColSpec;
+  sm?: ColSpec;
+  md?: ColSpec;
+  lg?: ColSpec;
+  xl?: ColSpec;
 }
-declare class Col extends React.Component<Col.ColProps> { }
-export = Col;
+
+declare class Col<As extends React.ReactType = 'div'> extends BsPrefixComponent<
+  As,
+  ColProps
+> {}
+
+export default Col;

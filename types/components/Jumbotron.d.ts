@@ -1,9 +1,13 @@
 import * as React from 'react';
 
-declare namespace Jumbotron {
-    export interface JumbotronProps extends React.HTMLProps<Jumbotron> {
-        componentClass?: React.ReactType;
-    }
+import { BsPrefixComponent } from './helpers';
+
+interface JumbotronProps {
+  fluid?: boolean;
 }
-declare class Jumbotron extends React.Component<Jumbotron.JumbotronProps> { }
-export = Jumbotron;
+
+declare class Jumbotron<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As, JumbotronProps> {}
+
+export default Jumbotron;

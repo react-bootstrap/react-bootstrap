@@ -1,13 +1,14 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
 
-declare namespace FormGroup {
-    export interface FormGroupProps extends React.HTMLProps<FormGroup> {
-        bsClass?: string;
-        bsSize?: Sizes;
-        controlId?: string;
-        validationState?: "success" | "warning" | "error" | null;
-    }
+import { BsPrefixComponent } from './helpers';
+
+interface FormGroupProps {
+  innerRef?: React.LegacyRef<this>;
+  controlId?: string;
 }
-declare class FormGroup extends React.Component<FormGroup.FormGroupProps> { }
-export = FormGroup;
+
+declare class Form<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As, FormGroupProps> {}
+
+export default Form;

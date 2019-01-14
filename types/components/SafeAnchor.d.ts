@@ -1,13 +1,18 @@
 import * as React from 'react';
 
-declare namespace SafeAnchor {
-    export interface SafeAnchorProps extends React.HTMLProps<SafeAnchor> {
-        href?: string;
-        onClick?: React.MouseEventHandler<{}>;
-        disabled?: boolean;
-        role?: string;
-        componentClass?: React.ReactType;
-    }
+import { BsPrefixComponent } from './helpers';
+
+interface SafeAnchorProps {
+  href?: string;
+  onClick?: React.MouseEventHandler<this>;
+  onKeyDown?: React.KeyboardEventHandler<this>;
+  disabled?: boolean;
+  role?: string;
+  tabIndex: number | string;
 }
-declare class SafeAnchor extends React.Component<SafeAnchor.SafeAnchorProps> { }
-export = SafeAnchor;
+
+declare class SafeAnchor<
+  As extends React.ReactType = 'a'
+> extends BsPrefixComponent<As, SafeAnchorProps> {}
+
+export default SafeAnchor;

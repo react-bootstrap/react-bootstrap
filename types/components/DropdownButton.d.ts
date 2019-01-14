@@ -1,20 +1,24 @@
 import * as React from 'react';
-import { Sizes, Omit } from 'react-bootstrap';
-import { DropdownBaseProps } from './Dropdown';
 
-declare namespace DropdownButton {
-    export interface DropdownButtonBaseProps extends DropdownBaseProps {
-        block?: boolean;
-        bsSize?: Sizes;
-        bsStyle?: string | null;
-        navItem?: boolean;
-        noCaret?: boolean;
-        pullRight?: boolean;
-        title: React.ReactNode;
-    }
+import DropdownToggle from './DropdownToggle';
+import Dropdown from './Dropdown';
 
-    export type DropdownButtonProps = DropdownButtonBaseProps & Omit<React.HTMLProps<DropdownButton>, 'title'>;
+import { ReplaceProps, PropsOf } from './helpers';
 
+type PropsFromToggle = Partial<
+  Pick<PropsOf<typeof DropdownToggle>, 'href' | 'size' | 'variant' | 'disabled'>
+>;
+
+interface DropdownButtonProps extends PropsFromToggle {
+  id: string;
+  title: string;
+  menuRole?: string;
+  rootCloseEvent?: 'click' | 'mousedown';
+  bsPrefix?: string;
 }
-declare class DropdownButton extends React.Component<DropdownButton.DropdownButtonProps> { }
-export = DropdownButton;
+
+declare class DropdownButton extends React.Component<
+  ReplaceProps<typeof Dropdown, DropdownButtonProps>
+> {}
+
+export default DropdownButton;

@@ -1,24 +1,29 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
 
-declare namespace Nav {
-    export interface NavProps extends React.HTMLProps<Nav> {
-        // Optional
-        activeHref?: string;
-        activeKey?: any;
-        bsSize?: Sizes;
-        bsStyle?: string;
-        collapsible?: boolean;
-        eventKey?: any;
-        expanded?: boolean;
-        justified?: boolean;
-        navbar?: boolean;
-        pullRight?: boolean;
-        right?: boolean;
-        stacked?: boolean;
-        ulClassName?: string;
-        ulId?: string;
-    }
+import NavItem from './NavItem';
+import NavLink from './NavLink';
+
+import { BsPrefixComponent, SelectCallback } from './helpers';
+
+interface NavProps {
+  navbarBsPrefix?: string;
+  cardHeaderBsPrefix?: string;
+  variant?: 'tabs' | 'pills';
+  activeKey?: unknown;
+  fill?: boolean;
+  justify?: boolean;
+  onSelect?: SelectCallback;
+  role?: string;
+  navbar?: boolean;
+  onKeyDown?: React.KeyboardEventHandler<this>;
 }
-declare class Nav extends React.Component<Nav.NavProps> { }
-export = Nav;
+
+declare class Nav<As extends React.ReactType = 'div'> extends BsPrefixComponent<
+  As,
+  NavProps
+> {
+  static Item: typeof NavItem;
+  static Link: typeof NavLink;
+}
+
+export default Nav;

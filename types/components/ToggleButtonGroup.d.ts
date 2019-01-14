@@ -1,38 +1,31 @@
 import * as React from 'react';
-import { ButtonGroup } from 'react-bootstrap';
-import { Omit } from "../index";
 
-declare namespace ToggleButtonGroup {
-  interface BaseProps {
-    /**
-     * You'll usually want to use string|number|string[]|number[] here,
-     * but you can technically use any|any[].
-     */
-    defaultValue?: any;
-    /**
-     * You'll usually want to use string|number|string[]|number[] here,
-     * but you can technically use any|any[].
-     */
-    value?: any;
-  }
+import ButtonGroup from './ButtonGroup';
 
-  interface RadioProps {
-    /** Required if `type` is set to "radio" */
-    name: string;
-    type: "radio";
-    onChange?(value: any): void;
-  }
+import { BsPrefixComponent } from './helpers';
 
-  interface CheckboxProps {
-    name?: string;
-    type: "checkbox";
-    onChange?(values: any[]): void;
-  }
-
-  export type ToggleButtonGroupProps = BaseProps
-    & (RadioProps | CheckboxProps)
-    & Omit<ButtonGroup.ButtonGroupProps, "onChange">
-    & Omit<React.HTMLProps<ToggleButtonGroup>, "defaultValue" | "type" | "value" | "onChange">;
+interface ToggleButtonRadioProps<T> {
+  type?: 'radio';
+  name: string;
+  value?: T;
+  defaultValue?: T;
+  onChange?: (value: T) => void;
 }
-declare class ToggleButtonGroup extends React.Component<ToggleButtonGroup.ToggleButtonGroupProps> { }
-export = ToggleButtonGroup;
+interface ToggleButtonCheckboxProps<T> {
+  type: 'checkbox';
+  name?: string;
+  value?: T;
+  defaultValue?: T;
+  onChange?: (value: T[]) => void;
+}
+
+type ToggleButtonGroupProps<T> =
+  | ToggleButtonRadioProps<T>
+  | ToggleButtonCheckboxProps<T>;
+
+declare class ToggleButtonGroup<
+  T,
+  As extends React.ReactType = typeof ButtonGroup
+> extends BsPrefixComponent<As, ToggleButtonGroupProps<T>> {}
+
+export default ToggleButtonGroup;

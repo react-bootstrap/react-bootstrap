@@ -1,16 +1,34 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
-import InputGroupAddon = require('./InputGroupAddon');
-import InputGroupButton = require('./InputGroupButton');
 
-declare namespace InputGroup {
-    export interface InputGroupProps extends React.HTMLProps<InputGroup> {
-        bsClass?: string;
-        bsSize?: Sizes;
-    }
+import { BsPrefixComponent } from './helpers';
+
+declare class InputGroupAppend<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As> {}
+
+declare class InputGroupPrepend<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As> {}
+
+declare class InputGroupText<
+  As extends React.ReactType = 'span'
+> extends BsPrefixComponent<As> {}
+
+declare class InputGroupCheckbox extends BsPrefixComponent<'input'> {}
+declare class InputGroupRadio extends BsPrefixComponent<'input'> {}
+
+interface InputGroupProps {
+  size?: 'sm' | 'lg';
 }
-declare class InputGroup extends React.Component<InputGroup.InputGroupProps> {
-    public static Addon: typeof InputGroupAddon;
-    public static Button: typeof InputGroupButton;
+
+declare class InputGroup<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As, InputGroupProps> {
+  static Append: typeof InputGroupAppend;
+  static Prepend: typeof InputGroupPrepend;
+  static Text: typeof InputGroupText;
+  static Checkbox: typeof InputGroupCheckbox;
+  static Radio: typeof InputGroupRadio;
 }
-export = InputGroup;
+
+export default InputGroup;

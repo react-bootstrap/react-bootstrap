@@ -1,7 +1,9 @@
 import * as React from 'react';
 
-declare namespace NavbarCollapse {
-    export type NavbarCollapseProps = React.HTMLProps<NavbarCollapse>;
-}
-declare class NavbarCollapse extends React.Component<NavbarCollapse.NavbarCollapseProps> { }
-export = NavbarCollapse
+import Collapse from './Collapse';
+
+import { BsPrefixComponent } from './helpers';
+
+declare class NavbarCollapse extends BsPrefixComponent<typeof Collapse> {}
+
+export default NavbarCollapse;

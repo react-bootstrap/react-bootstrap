@@ -1,19 +1,37 @@
 import * as React from 'react';
-import { TransitionCallbacks } from 'react-bootstrap';
 
-declare namespace Overlay {
-    export interface OverlayProps extends TransitionCallbacks {
-        // Optional
-        animation?: any; // TODO: Add more specific type
-        container?: any; // TODO: Add more specific type
-        containerPadding?: number; // TODO: Add more specific type
-        onHide?: Function;
-        placement?: string;
-        rootClose?: boolean;
-        show?: boolean;
-        target?: Function | React.ReactInstance;
-        shouldUpdatePosition?: boolean;
-    }
+import { TransitionCallbacks } from './helpers';
+
+type ComponentOrElement = React.ReactInstance | Node;
+export type Placement =
+  | 'auto-start'
+  | 'auto'
+  | 'auto-end'
+  | 'top-start'
+  | 'top'
+  | 'top-end'
+  | 'right-start'
+  | 'right'
+  | 'right-end'
+  | 'bottom-end'
+  | 'bottom'
+  | 'bottom-start'
+  | 'left-end'
+  | 'left'
+  | 'left-start';
+
+interface OverlayProps extends TransitionCallbacks {
+  container?: ComponentOrElement | ((props: object) => ComponentOrElement);
+  target?: ComponentOrElement | ((props: object) => ComponentOrElement);
+  show?: boolean;
+  popperConfig?: object;
+  rootClose?: boolean;
+  rootCloseEvent?: 'click' | 'mousedown';
+  onHide?: () => void;
+  transition?: boolean | React.ReactType;
+  placement?: Placement;
 }
-declare class Overlay extends React.Component<Overlay.OverlayProps> { }
-export = Overlay;
+
+declare class Overlay extends React.Component<OverlayProps> {}
+
+export default Overlay;

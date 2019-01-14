@@ -1,60 +1,35 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
-import NavbarBrand = require('./NavbarBrand');
-import NavbarCollapse = require('./NavbarCollapse');
-import NavbarHeader = require('./NavbarHeader');
-import NavbarToggle = require('./NavbarToggle');
 
-declare namespace Navbar {
-    export interface NavbarProps extends React.HTMLProps<Navbar> {
-        brand?: any; // TODO: Add more specific type
-        bsSize?: Sizes;
-        bg: string;
-        bsStyle?: string;
-        collapseOnSelect?: boolean;
-        componentClass?: React.ReactType;
-        defaultNavExpanded?: boolean;
-        fixedBottom?: boolean;
-        fixedTop?: boolean;
-        fluid?: boolean;
-        inverse?: boolean;
-        expanded?: boolean;
-        onToggle?: Function;
-        staticTop?: boolean;
-        toggleButton?: any; // TODO: Add more specific type
-        toggleNavKey?: string | number;
-        expand: string;
-    }
-}
-declare class Navbar extends React.Component<Navbar.NavbarProps> {
-    static Brand: typeof NavbarBrand;
-    static Collapse: typeof NavbarCollapse;
-    static Header: typeof NavbarHeader;
-    static Toggle: typeof NavbarToggle;
-    static Link: typeof NavbarLink;
-    static Text: typeof NavbarText;
-    static Form: typeof NavbarForm;
-}
-export = Navbar;
+import NavbarBrand from './NavbarBrand';
+import NavbarToggle from './NavbarToggle';
+import NavbarCollapse from './NavbarCollapse';
 
-/**
- * the classes below aren't present in lib/
- */
+import { BsPrefixComponent, SelectCallback } from './helpers';
 
-interface NavbarLinkProps extends React.HTMLProps<NavbarLink> {
-  href: string;
-  onClick?: React.MouseEventHandler<any>;
-}
-declare class NavbarLink extends React.Component<NavbarLinkProps> { }
+declare class NavbarText<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As> {}
 
-interface NavbarTextProps extends React.HTMLProps<NavbarText> {
-  pullRight?: boolean;
+interface NavbarProps {
+  variant?: 'light' | 'dark';
+  expand?: true | 'sm' | 'md' | 'lg' | 'xl';
+  bg?: string;
+  fixed?: 'top' | 'bottom';
+  sticky?: 'top' | 'bottom';
+  onToggle?: (expanded: boolean) => void;
+  onSelect?: SelectCallback;
+  collapseOnSelect?: boolean;
+  expanded?: boolean;
+  role?: string;
 }
-declare class NavbarText extends React.Component<NavbarTextProps> { }
 
-interface NavbarFormProps extends React.HTMLProps<NavbarForm> {
-  componentClass?: React.ReactType;
-  pullRight?: boolean;
-  pullLeft?: boolean;
+declare class Navbar<
+  As extends React.ReactType = 'nav'
+> extends BsPrefixComponent<As, NavbarProps> {
+  static Brand: typeof NavbarBrand;
+  static Toggle: typeof NavbarToggle;
+  static Collapse: typeof NavbarCollapse;
+  static Text: typeof NavbarText;
 }
-declare class NavbarForm extends React.Component<NavbarFormProps> { }
+
+export default Navbar;

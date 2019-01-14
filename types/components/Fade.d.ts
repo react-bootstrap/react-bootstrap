@@ -1,14 +1,15 @@
 import * as React from 'react';
-import { TransitionCallbacks } from 'react-bootstrap';
+import { TransitionCallbacks } from './helpers';
 
-declare namespace Fade {
-    export interface FadeProps extends TransitionCallbacks, React.HTMLProps<Fade> {
-        in?: boolean;
-        timeout?: number;
-        mountOnEnter?: boolean;
-        appear?: boolean;
-        unmountOnExit?: boolean;
-    }
+interface FadeProps
+  extends TransitionCallbacks,
+    React.ClassAttributes<Fade> {
+  in?: boolean;
+  mountOnEnter?: boolean;
+  unmountOnExit?: boolean;
+  appear?: boolean;
+  timeout?: number;
 }
-declare class Fade extends React.Component<Fade.FadeProps> { }
-export = Fade;
+declare class Fade extends React.Component<FadeProps> {}
+
+export default Fade;

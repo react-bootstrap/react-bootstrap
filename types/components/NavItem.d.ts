@@ -1,27 +1,13 @@
 import * as React from 'react';
-import { Sizes, SelectCallback } from 'react-bootstrap';
 
-declare namespace NavItem {
-    export interface NavItemProps extends React.HTMLProps<NavItem> {
-        active?: boolean;
-        brand?: any; // TODO: Add more specific type
-        bsSize?: Sizes;
-        bsStyle?: string;
-        componentClass?: React.ReactType;
-        defaultNavExpanded?: boolean;
-        eventKey?: any;
-        fixedBottom?: boolean;
-        fixedTop?: boolean;
-        fluid?: boolean;
-        inverse?: boolean;
-        linkId?: string;
-        navExpanded?: boolean;
-        onSelect?: SelectCallback;
-        onToggle?: Function;
-        staticTop?: boolean;
-        toggleButton?: any; // TODO: Add more specific type
-        toggleNavKey?: string | number;
-    }
+import { BsPrefixComponent } from './helpers';
+
+interface NavItemProps {
+  role?: string;
 }
-declare class NavItem extends React.Component<NavItem.NavItemProps> { }
-export = NavItem;
+
+declare class NavItem<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As, NavItemProps> {}
+
+export default NavItem;

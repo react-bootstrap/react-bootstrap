@@ -1,9 +1,14 @@
 import * as React from 'react';
 
-declare namespace Row {
-    export interface RowProps extends React.HTMLProps<Row> {
-        componentClass?: React.ReactType;
-    }
+import { BsPrefixComponent } from './helpers';
+
+interface RowProps {
+  noGutters?: boolean;
 }
-declare class Row extends React.Component<Row.RowProps> { }
-export = Row;
+
+declare class Row<As extends React.ReactType = 'div'> extends BsPrefixComponent<
+  As,
+  RowProps
+> {}
+
+export default Row;

@@ -1,46 +1,21 @@
 import * as React from 'react';
 
-declare namespace DropdownItem {
-    export interface DropdownItemProps {
-        /** @default 'dropdown' */
-        bsPrefix?: string;
+import SafeAnchor from './SafeAnchor';
 
-        /**
-         * Highlight the menu item as active.
-         */
-        active?: boolean;
+import { BsPrefixComponent } from './helpers';
 
-        /**
-         * Disable the menu item, making it unselectable.
-         */
-        disabled?: boolean;
-
-        /**
-         * Value passed to the `onSelect` handler, useful for identifying the selected menu item.
-         */
-        eventKey?: any;
-
-        /**
-         * HTML `href` attribute corresponding to `a.href`.
-         */
-        href?: string;
-
-        /**
-         * Callback fired when the menu item is clicked.
-         */
-        onClick?: (event: React.SyntheticEvent) => void;
-
-        /**
-         * Callback fired when the menu item is selected.
-         *
-         * ```js
-         * (eventKey: any, event: Object) => any
-         * ```
-         */
-        onSelect?: (eventKey: any, event: React.SyntheticEvent) => any;
-
-        as?: any; // tbu
-    }
+interface DropdownItemProps<T> {
+  active?: boolean;
+  disabled?: boolean;
+  eventKey?: T;
+  href?: string;
+  onClick?: React.MouseEventHandler<this>;
+  onSelect?: (eventKey: T, e: React.SyntheticEvent<this>) => void;
 }
-declare class DropdownItem extends React.Component<DropdownItem.DropdownItemProps> { }
-export = DropdownItem;
+
+declare class DropdownItem<
+  EventKey,
+  As extends React.ReactType = typeof SafeAnchor
+> extends BsPrefixComponent<As, DropdownItemProps<EventKey>> {}
+
+export default DropdownItem;
