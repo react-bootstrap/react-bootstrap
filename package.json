@@ -16,7 +16,7 @@
     "build": "node tools/build.js",
     "build-docs": "yarn --cwd www run build",
     "start": "yarn --cwd www run develop",
-    "ci-lint": "eslint --rule 'prettier/prettier: 2'",
+    "ci-lint": "eslint --rule \"prettier/prettier: 2\"",
     "format": "npm run ci-lint . -- --fix",
     "lint": "npm run ci-lint .",
     "precommit": "lint-staged",
