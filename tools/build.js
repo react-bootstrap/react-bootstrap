@@ -8,17 +8,17 @@ const getConfig = require('./dist.webpack.config');
 
 const targets = process.argv.slice(2);
 
-const srcRoot = path.join(__dirname, '../src/');
-const typesRoot = path.join(__dirname, '../types/');
-const distRoot = path.join(__dirname, '../dist/');
-const libRoot = path.join(__dirname, '../lib/');
-const esRoot = path.join(__dirname, '../es/');
+const srcRoot = path.join(__dirname, '../src');
+const typesRoot = path.join(__dirname, '../types');
 
-const clean = async dir => fse.existsSync(dir) && fse.remove(dir);
+const libRoot = path.join(__dirname, '../lib');
+const distRoot = path.join(libRoot, 'dist');
+const esRoot = path.join(libRoot, 'es');
+
+const clean = () => fse.existsSync(libRoot) && fse.remove(libRoot);
 
 const step = (name, root, fn) => async () => {
   console.log(cyan('Building: ') + green(name));
-  await clean(root);
   await fn();
   console.log(cyan('Built: ') + green(name));
 };
@@ -75,11 +75,15 @@ console.log(
   green(`Building targets: ${targets.length ? targets.join(', ') : 'all'}\n`),
 );
 
-Promise.all([
-  has('lib') && buildLib(),
-  has('es') && buildEsm(),
-  has('dist') && buildDist(),
-]).catch(err => {
-  if (err) console.error(red(err.stack || err.toString()));
-  process.exit(1);
-});
+clean()
+  .then(() =>
+    Promise.all([
+      has('lib') && buildLib(),
+      has('es') && buildEsm(),
+      has('dist') && buildDist(),
+    ]),
+  )
+  .catch(err => {
+    if (err) console.error(red(err.stack || err.toString()));
+    process.exit(1);
+  });

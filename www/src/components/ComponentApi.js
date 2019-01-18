@@ -23,8 +23,8 @@ const propTypes = {};
 
 const Import = ({ name }) => (
   <Code aria-label={`Import code for the ${name} component`}>
-    <Keyword>import</Keyword> {name} <Keyword>from</Keyword>{' '}
-    'react-bootstrap/lib/{name}'
+    <Keyword>import</Keyword> {name} <Keyword>from</Keyword> 'react-bootstrap/
+    {name}'
   </Code>
 );
 
