@@ -1,7 +1,7 @@
 version: '{build}'
 
 environment:
-  NODE_VERSION: "8"
+  NODE_VERSION: '8'
 # Install scripts. (runs after repo cloning)
 install:
   # Get the latest stable version of io.js
@@ -13,7 +13,7 @@ install:
 # No need for MSBuild on this project
 build: off
 cache:
- - "%LOCALAPPDATA%\\Yarn"
+  - "%LOCALAPPDATA%\\Yarn"
 test_script:
   - yarn test
 
@@ -21,4 +21,3 @@ branches:
   only:
     - master
     - next
-    - v4-support

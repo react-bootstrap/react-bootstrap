@@ -18,8 +18,7 @@ module.exports = {
         config: {
           resolve: {
             alias: {
-              'react-bootstrap$': path.resolve(__dirname, '../src/index.js'),
-              'react-bootstrap/lib': path.resolve(__dirname, '../src'),
+              'react-bootstrap': path.resolve(__dirname, '../src'),
             },
           },
         },

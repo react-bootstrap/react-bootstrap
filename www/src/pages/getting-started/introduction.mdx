@@ -3,9 +3,7 @@ import CodeBlock from '../../components/CodeBlock';
 
 # Introduction
 
-<p className="lead">
-Learn how to include React Bootstrap in your project
-</p>
+<p className="lead">Learn how to include React Bootstrap in your project</p>
 
 ## JavaScript
 
@@ -28,15 +26,14 @@ npm install react-bootstrap@next bootstrap
 
 ### Importing
 
-You should import individual components from
-`react-bootstrap/lib` rather than the entire library.
+You should import individual components like:
+`react-bootstrap/Button` rather than the entire library.
 Doing so pulls in only the specific components that you use, which
 can significantly reduce the amount of code you end up sending to
 the client.
 
-
 ```jsx
-import Button from 'react-bootstrap/lib/Button';
+import Button from 'react-bootstrap/Button';
 
 // or less ideally
 import { Button } from 'react-bootstrap';
@@ -51,16 +48,24 @@ bundles are available on [CDNJS](https://cdnjs.com/libraries/react-bootstrap), a
 well as in the npm package.
 
 ```html
-<script src="https://unpkg.com/react/umd/react.production.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom/umd/react-dom.production.js" crossorigin></script>
-<script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin></script>
+<script
+  src="https://unpkg.com/react/umd/react.production.js"
+  crossorigin
+></script>
+<script
+  src="https://unpkg.com/react-dom/umd/react-dom.production.js"
+  crossorigin
+></script>
+<script
+  src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
+  crossorigin
+></script>
 <script>
   var Alert = ReactBootstrap.Alert;
 </script>
 ```
 
 ## Stylesheets
-
 
 Because React-Bootstrap doesn't depend on a very precise version of
 Bootstrap, we don't ship with any included css. However, some
@@ -75,7 +80,7 @@ simplest way is to include the latest styles from the CDN.
   href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"
   integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
   crossorigin="anonymous"
->
+/>
 ```
 
 For more advanced use cases you can also use a bundler like Webpack
@@ -90,14 +95,13 @@ React-Bootstrap is compatible with existing Bootstrap themes. Just
 follow the installation instructions for your theme of choice.
 
 <Callout theme="danger" title="Watchout!">
-  Because React-Bootstrap completely reimplements Bootstrap's
-  JavaScript, it's not automatically compatible with themes that
-  extend the default JavaScript behaviors.
+  Because React-Bootstrap completely reimplements Bootstrap's JavaScript, it's
+  not automatically compatible with themes that extend the default JavaScript
+  behaviors.
 </Callout>
 
 ## Browser support
 
 We aim to support all browsers supported by both
 [React](http://facebook.github.io/react/docs/working-with-the-browser.html#browser-support-and-polyfills)
-and  [Bootstrap](http://getbootstrap.com/getting-started/#support)
-
+and [Bootstrap](http://getbootstrap.com/getting-started/#support)
