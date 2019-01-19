@@ -1,6 +1,6 @@
 module.exports = api => {
   let dev = false;
-  let modules = true;
+  let modules = 'commonjs';
 
   switch (api.env()) {
     case 'docs':
@@ -22,32 +22,6 @@ module.exports = api => {
   }
 
   return {
-    presets: [
-      [
-        '@babel/preset-env',
-        {
-          loose: true,
-          shippedProposals: true,
-          modules: modules ? 'commonjs' : false,
-          targets: {
-            browsers: ['last 4 versions', 'not ie <= 8'],
-          },
-        },
-      ],
-      ['@babel/preset-react', { development: dev }],
-    ],
-    plugins: [
-      ['@babel/plugin-proposal-class-properties', { loose: true }],
-      '@babel/plugin-proposal-export-default-from',
-      '@babel/plugin-proposal-export-namespace-from',
-      ['@babel/plugin-transform-runtime', { useESModules: !modules }],
-      'babel-plugin-dev-expression',
-      modules && 'babel-plugin-add-module-exports',
-      api.env() === 'test' && 'babel-plugin-istanbul',
-      !dev && [
-        'transform-react-remove-prop-types',
-        { removeImport: true, additionalLibraries: ['prop-types-extra'] },
-      ],
-    ].filter(Boolean),
+    presets: [['@react-bootstrap', { dev, modules, removePropTypes: !dev }]],
   };
 };

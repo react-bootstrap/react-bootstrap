@@ -1,12 +1,12 @@
 import startCase from 'lodash/startCase';
 import classNames from 'classnames';
 import React from 'react';
-import Nav from 'react-bootstrap/lib/Nav';
-import FormControl from 'react-bootstrap/lib/FormControl';
+import Nav from 'react-bootstrap/Nav';
+import FormControl from 'react-bootstrap/FormControl';
 
 import styled from 'astroturf';
-import Button from 'react-bootstrap/lib/Button';
-import Collapse from 'react-bootstrap/lib/Collapse';
+import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
 import withProps from 'recompose/withProps';
 
 const MenuButton = withProps({ variant: 'link' })(

@@ -29,4 +29,3 @@ branches:
   only:
     - master
     - next
-    - v4-support
