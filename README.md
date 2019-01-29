@@ -14,12 +14,12 @@ To find the documentation for the latest Bootstrap 3 compatible release, check o
 
 ### Migrating from Bootstrap 3 to Bootstrap 4
 
-If you would like to update React-Bootstrap within an existing project to use Bootstrap 4, please read our docs for **[migrating to React-Bootstrap V1](https://react-bootstrap.netlify.com/migrating/)**.
+If you would like to update React-Bootstrap within an existing project to use Bootstrap 4, please read our docs for **[migrating to React-Bootstrap V1](https://react-bootstrap.github.io/migrating/)**.
 
 ## Related modules
 
-* [react-router-bootstrap][react-router-bootstrap] – Integration with [React Router][react-router]
-* [Awesome React Bootstrap Components][awesome-react-bootstrap-components] - Additional components like off-canvas navbar, switch and sliders.
+- [react-router-bootstrap][react-router-bootstrap] – Integration with [React Router][react-router]
+- [Awesome React Bootstrap Components][awesome-react-bootstrap-components] - Additional components like off-canvas navbar, switch and sliders.
 
 ## Local setup
 
@@ -39,7 +39,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [bootstrap]: https://getbootstrap.com/
 [react]: https://reactjs.org/
-[documentation]: https://react-bootstrap.netlify.com
+[documentation]: https://react-bootstrap.github.io/
 [contributing]: CONTRIBUTING.md
 [build-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg?branch=master
 [build]: https://travis-ci.org/react-bootstrap/react-bootstrap

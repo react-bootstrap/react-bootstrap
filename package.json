@@ -20,7 +20,7 @@
     "format": "npm run ci-lint . -- --fix",
     "lint": "npm run ci-lint .",
     "precommit": "lint-staged",
-    "release": "yarn changelog && rollout",
+    "release": "rollout",
     "prepublishOnly": "npm run build",
     "tdd": "karma start",
     "test": "npm run lint && npm run dtslint && npm run test-browser && npm run test-node",
