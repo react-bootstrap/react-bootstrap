@@ -4,7 +4,10 @@ import Link from 'gatsby-link';
 
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
+import NavItem from 'react-bootstrap/lib/NavItem';
 import FormControl from 'react-bootstrap/lib/FormControl';
+
+import config from '../config';
 
 const NAV_LINKS = {
   documentation: {
@@ -69,6 +72,7 @@ function NavMain({ activePage }) {
             </li>
           </Wrapper>
         </Nav>
+
         <Navbar.Form pullRight>
           <FormControl
             type="search"
@@ -78,6 +82,14 @@ function NavMain({ activePage }) {
             inputRef={attachSearch}
           />
         </Navbar.Form>
+        <Nav pullRight>
+          <NavItem href="https://github.com/react-bootstrap/react-bootstrap/releases">
+            v{config.version}
+          </NavItem>
+          <NavItem href="https://getbootstrap.com/docs/3.3/css/">
+            Supports Bootstrap v{config.bootstrapVersion}
+          </NavItem>
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );
