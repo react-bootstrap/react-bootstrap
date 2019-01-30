@@ -1,5 +1,7 @@
 import Callout from '../../components/Callout';
-import CodeBlock from '../../components/CodeBlock';
+import BrowserGlobalsCodeBlock from '../../components/BrowserGlobalsCodeBlock';
+import CssCodeBlock from '../../components/CssCodeBlock';
+import DocLink from '../../components/DocLink';
 
 # Introduction
 
@@ -17,11 +19,11 @@ The best way to consume React Bootstrap is via the npm package which
 you can install with `npm` (or yarn if you prefer).
 
 If you plan on customizing the Bootstrap Sass files, or don't want
-to use a CDN for the stylesheet, it may helpful to install
-[vanilla Bootstrap](https://getbootstrap.com/docs/4.1/getting-started/download/#npm) as well.
+to use a CDN for the stylesheet, it may helpful to
+install <DocLink path="/getting-started/download/#npm">vanilla Bootstrap</DocLink> as well.
 
 ```jsx
-npm install react-bootstrap@next bootstrap
+npm install react-bootstrap bootstrap
 ```
 
 ### Importing
@@ -44,26 +46,10 @@ import { Button } from 'react-bootstrap';
 We provide `react-bootstrap.js` and
 `react-bootstrap.min.js` bundles with all components
 exported on the `window.ReactBootstrap` object. These
-bundles are available on [CDNJS](https://cdnjs.com/libraries/react-bootstrap), as
+bundles are available on [unpkg](https://unpkg.com/react-bootstrap/), as
 well as in the npm package.
 
-```html
-<script
-  src="https://unpkg.com/react/umd/react.production.js"
-  crossorigin
-></script>
-<script
-  src="https://unpkg.com/react-dom/umd/react-dom.production.js"
-  crossorigin
-></script>
-<script
-  src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
-  crossorigin
-></script>
-<script>
-  var Alert = ReactBootstrap.Alert;
-</script>
-```
+<BrowserGlobalsCodeBlock />
 
 ## Stylesheets
 
@@ -73,15 +59,7 @@ stylesheet **is required** to use these components. How
 and which bootstrap styles you include is up to you, but the
 simplest way is to include the latest styles from the CDN.
 
-```html
-<!-- Latest compiled and minified CSS -->
-<link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"
-  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-  crossorigin="anonymous"
-/>
-```
+<CssCodeBlock />
 
 For more advanced use cases you can also use a bundler like Webpack
 or Browserify to include the css files for you as part of your build
@@ -104,4 +82,4 @@ follow the installation instructions for your theme of choice.
 
 We aim to support all browsers supported by both
 [React](http://facebook.github.io/react/docs/working-with-the-browser.html#browser-support-and-polyfills)
-and [Bootstrap](http://getbootstrap.com/getting-started/#support)
+and <DocLink path="/getting-started/browsers-devices/#supported-browsers">Bootstrap</DocLink>.

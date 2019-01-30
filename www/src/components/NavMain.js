@@ -93,7 +93,22 @@ function NavMain({ activePage }) {
         <OverlayTrigger
           placement="bottom"
           delay={{ show: 200 }}
-          overlay={<Tooltip id="t-discord">Github</Tooltip>}
+          overlay={
+            <Tooltip id="t-version">
+              Compatible with Bootstrap v
+              {config.bootstrapVersion
+                .split('.')
+                .slice(0, 2)
+                .join('.')}
+            </Tooltip>
+          }
+        >
+          <StyledNavLink>v{config.version}</StyledNavLink>
+        </OverlayTrigger>
+        <OverlayTrigger
+          placement="bottom"
+          delay={{ show: 200 }}
+          overlay={<Tooltip id="t-github">Github</Tooltip>}
         >
           <StyledNavLink
             href="https://github.com/react-bootstrap/react-bootstrap"

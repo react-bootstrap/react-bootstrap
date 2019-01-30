@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   globals: {
     graphql: false,
+    config: false,
   },
   rules: {
     'global-require': 'off',
