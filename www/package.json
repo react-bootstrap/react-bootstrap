@@ -12,7 +12,7 @@
     "@mdx-js/tag": "^0.15.0",
     "@reach/router": "^1.2.1",
     "astroturf": "^0.8.1",
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^4.2.1",
     "classnames": "^2.2.5",
     "common-tags": "^1.8.0",
     "css-literal-loader": "^0.5.2",

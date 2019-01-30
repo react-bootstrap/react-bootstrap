@@ -1,5 +1,12 @@
 const path = require('path');
 const _ = require('lodash');
+const config = require('./config');
+
+const stringifiedConfig = {};
+// eslint-disable-next-line no-restricted-syntax
+for (const [key, value] of Object.entries(config)) {
+  stringifiedConfig[key] = JSON.stringify(value);
+}
 
 exports.onCreateWebpackConfig = function onCreateWebpackConfig({
   actions,
@@ -30,6 +37,9 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
     plugins: [
       // See https://github.com/FormidableLabs/react-live/issues/5
       plugins.ignore(/^(xor|props)$/),
+      plugins.define({
+        config: stringifiedConfig,
+      }),
     ],
   });
 

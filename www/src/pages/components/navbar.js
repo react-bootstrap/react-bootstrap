@@ -118,9 +118,7 @@ export default withLayout(function NaπvbarSection({ data }) {
       </LinkedHeading>
       <p>
         You can use Bootstrap's{' '}
-        <a href="https://getbootstrap.com/docs/4.1/utilities/position/">
-          position utilities
-        </a>{' '}
+        <a href={`${config.docUrl}/utilities/position/`}>position utilities</a>{' '}
         to place navbars in non-static positions. Choose from fixed to the top,
         fixed to the bottom, or stickied to the top (scrolls with the page until
         it reaches the top, then stays there). Fixed navbars use{' '}
