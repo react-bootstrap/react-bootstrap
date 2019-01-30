@@ -19,13 +19,10 @@ const shortVersion = bootstrapVersion
   .slice(0, 2)
   .join('.');
 
-console.log(`https://getbootstrap.com/docs/${shortVersion}`);
-
 const config = {
   bootstrapVersion,
   docsUrl: `https://getbootstrap.com/docs/${shortVersion}`,
   version: require('../package.json').version,
-  jsHash: getIntegrity('../lib/dist/react-bootstrap.min.js'),
   cssHash: getIntegrity('bootstrap/dist/css/bootstrap.min.css'),
 };
 

@@ -17,7 +17,6 @@ function BrowserGlobalsCodeBlock() {
 
 <script
   src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
-  integrity="${config.jsHash}"
   crossorigin
 />
 
