@@ -147,20 +147,24 @@ class Collapse extends React.Component {
 
   /* -- Expanding -- */
   handleEnter = elem => {
+    if (!elem.style) return;
     elem.style[this.getDimension()] = '0';
   };
 
   handleEntering = elem => {
+    if (!elem.style) return;
     const dimension = this.getDimension();
     elem.style[dimension] = this._getScrollDimensionValue(elem, dimension);
   };
 
   handleEntered = elem => {
+    if (!elem.style) return;
     elem.style[this.getDimension()] = null;
   };
 
   /* -- Collapsing -- */
   handleExit = elem => {
+    if (!elem.style) return;
     const dimension = this.getDimension();
     elem.style[dimension] = `${this.props.getDimensionValue(
       dimension,
@@ -170,6 +174,7 @@ class Collapse extends React.Component {
   };
 
   handleExiting = elem => {
+    if (!elem.style) return;
     elem.style[this.getDimension()] = '0';
   };
 
