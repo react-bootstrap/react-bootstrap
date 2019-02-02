@@ -20,7 +20,7 @@ class Example extends React.Component {
           Click me to see
         </Button>
         <Overlay target={target} show={show} placement="right">
-          {({ placement, scheduleUpdate, arrowProps, ...props }) => (
+          {({ placement, scheduleUpdate, arrowProps, outOfBoundaries, show, ...props }) => (
             <div
               {...props}
               style={{
