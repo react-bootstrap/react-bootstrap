@@ -4,7 +4,7 @@ import Feedback from './Feedback';
 
 import { BsPrefixComponent } from './helpers';
 
-interface FormControlProps {
+export interface FormControlProps {
   innerRef?: React.LegacyRef<this>;
   size?: 'sm' | 'lg';
   plaintext?: boolean;

@@ -12,7 +12,7 @@ declare class AlertHeading<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As> {}
 
-interface AlertProps extends React.HTMLProps<Alert> {
+export interface AlertProps extends React.HTMLProps<Alert> {
   bsPrefix?: string;
   variant?:
     | 'primary'

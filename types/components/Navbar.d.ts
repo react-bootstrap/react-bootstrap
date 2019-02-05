@@ -10,7 +10,7 @@ declare class NavbarText<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As> {}
 
-interface NavbarProps {
+export interface NavbarProps {
   variant?: 'light' | 'dark';
   expand?: true | 'sm' | 'md' | 'lg' | 'xl';
   bg?: string;

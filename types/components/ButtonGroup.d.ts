@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface ButtonGroupProps {
+export interface ButtonGroupProps {
   role?: string;
   size?: 'sm' | 'lg';
   toggle?: boolean;

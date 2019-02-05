@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface TableProps {
+export interface TableProps {
   striped?: boolean;
   bordered?: boolean;
   hover?: boolean;

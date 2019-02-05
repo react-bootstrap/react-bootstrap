@@ -6,7 +6,7 @@ import { PropsOf } from './helpers';
 
 type TriggerType = 'hover' | 'click' | 'focus';
 
-interface OverlayTriggerProps extends PropsOf<typeof Overlay> {
+export interface OverlayTriggerProps extends PropsOf<typeof Overlay> {
   children: React.ReactNode;
   trigger?: TriggerType | TriggerType[];
   delay?: number | { show: number; hide: number };

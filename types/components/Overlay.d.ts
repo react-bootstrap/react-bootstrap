@@ -20,7 +20,7 @@ export type Placement =
   | 'left'
   | 'left-start';
 
-interface OverlayProps extends TransitionCallbacks {
+export interface OverlayProps extends TransitionCallbacks {
   container?: ComponentOrElement | ((props: object) => ComponentOrElement);
   target?: ComponentOrElement | ((props: object) => ComponentOrElement);
   show?: boolean;

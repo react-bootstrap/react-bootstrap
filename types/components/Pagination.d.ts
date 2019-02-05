@@ -4,7 +4,7 @@ import PageItem, { First, Prev, Ellipsis, Next, Last } from './PageItem';
 
 import { BsPrefixComponent } from './helpers';
 
-interface PaginationProps {
+export interface PaginationProps {
   size?: 'sm' | 'lg';
 }
 

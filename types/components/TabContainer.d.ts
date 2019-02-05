@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
-interface TabContainerProps {
+export interface TabContainerProps {
   id?: string;
   transition?: false | React.ReactType;
   mountOnEnter?: boolean;

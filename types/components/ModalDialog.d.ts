@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface ModalDialogProps {
+export interface ModalDialogProps {
   size?: 'sm' | 'lg';
   centered?: boolean;
 }

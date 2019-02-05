@@ -5,7 +5,7 @@ import NavLink from './NavLink';
 
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
-interface NavProps {
+export interface NavProps {
   navbarBsPrefix?: string;
   cardHeaderBsPrefix?: string;
   variant?: 'tabs' | 'pills';

@@ -9,7 +9,7 @@ type PropsFromToggle = Partial<
   Pick<PropsOf<typeof DropdownToggle>, 'size' | 'variant' | 'disabled'>
 >;
 
-interface SplitButtonProps extends PropsFromToggle {
+export interface SplitButtonProps extends PropsFromToggle {
   id: string | number;
   toggleLabel?: string;
   href?: string;

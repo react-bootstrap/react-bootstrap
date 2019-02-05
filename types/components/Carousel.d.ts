@@ -5,7 +5,7 @@ import CarouselCaption from './CarouselCaption';
 
 import { ReplaceProps, SelectCallback } from './helpers';
 
-interface CarouselProps {
+export interface CarouselProps {
   bsPrefix?: string;
   slide?: boolean;
   fade?: boolean;

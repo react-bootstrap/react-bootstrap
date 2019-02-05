@@ -4,7 +4,7 @@ import SafeAnchor from './SafeAnchor';
 
 import { BsPrefixComponent } from './helpers';
 
-interface PageItemProps {
+export interface PageItemProps {
   disabled?: boolean;
   active?: boolean;
   activeLabel?: string;

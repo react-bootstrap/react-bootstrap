@@ -4,14 +4,14 @@ import ButtonGroup from './ButtonGroup';
 
 import { BsPrefixComponent } from './helpers';
 
-interface ToggleButtonRadioProps<T> {
+export interface ToggleButtonRadioProps<T> {
   type?: 'radio';
   name: string;
   value?: T;
   defaultValue?: T;
   onChange?: (value: T) => void;
 }
-interface ToggleButtonCheckboxProps<T> {
+export interface ToggleButtonCheckboxProps<T> {
   type: 'checkbox';
   name?: string;
   value?: T;
@@ -19,7 +19,7 @@ interface ToggleButtonCheckboxProps<T> {
   onChange?: (value: T[]) => void;
 }
 
-type ToggleButtonGroupProps<T> =
+export type ToggleButtonGroupProps<T> =
   | ToggleButtonRadioProps<T>
   | ToggleButtonCheckboxProps<T>;
 

@@ -13,7 +13,7 @@ declare class DropdownHeader<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As> {}
 
-interface DropdownProps {
+export interface DropdownProps {
   drop?: 'up' | 'left' | 'right' | 'down';
   alignRight?: boolean;
   show?: boolean;

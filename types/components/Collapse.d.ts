@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TransitionCallbacks } from './helpers';
 
-interface CollapseProps
+export interface CollapseProps
   extends TransitionCallbacks,
     React.ClassAttributes<Collapse> {
   in?: boolean;

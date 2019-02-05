@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface ButtonProps {
+export interface ButtonProps {
   active?: boolean;
   block?: boolean;
   variant?:

@@ -4,7 +4,7 @@ import { default as BreadcrumbItem } from './BreadcrumbItem';
 
 import { BsPrefixComponent } from './helpers';
 
-interface BreadcrumbProps {
+export interface BreadcrumbProps {
   label?: string;
   listProps?: React.OlHTMLAttributes<any>;
 }

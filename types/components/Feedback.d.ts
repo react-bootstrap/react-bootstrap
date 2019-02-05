@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface FeedbackProps {
+export interface FeedbackProps {
   bsPrefix?: never;
   type?: 'valid' | 'invalid';
 }
