@@ -5,7 +5,7 @@ import { BsPrefixComponent, SelectCallback } from './helpers';
 interface DropdownMenuProps {
   show?: true;
   flip?: true;
-  alightRight?: true;
+  alignRight?: true;
   onSelect?: SelectCallback;
   rootCloseEvent?: 'click' | 'mousedown';
   popperConfig?: object;
