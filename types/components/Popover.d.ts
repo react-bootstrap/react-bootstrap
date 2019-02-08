@@ -7,7 +7,7 @@ import { BsPrefixComponent } from './helpers';
 interface PopoverProps {
   id: string | number;
   placement?: Placement;
-  title?: string;
+  title?: React.ReactNode;
   arrowProps?: { ref: any; style: object };
 }
 

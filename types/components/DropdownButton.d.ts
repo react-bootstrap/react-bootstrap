@@ -11,7 +11,7 @@ type PropsFromToggle = Partial<
 
 interface DropdownButtonProps extends PropsFromToggle {
   id: string;
-  title: string;
+  title: React.ReactNode;
   menuRole?: string;
   rootCloseEvent?: 'click' | 'mousedown';
   bsPrefix?: string;
