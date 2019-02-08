@@ -6,9 +6,7 @@ import { createBootstrapComponent } from './ThemeProvider';
 import AccordionContext from './AccordionContext';
 import AccordionToggle from './AccordionToggle';
 import SelectableContext from './SelectableContext';
-// import Button from './Button';
-// import Card from './Card';
-// import Collapse from './Collapse';
+import AccordionCollapse from './AccordionCollapse';
 
 class Accordion extends React.Component {
   static propTypes = {
@@ -20,20 +18,22 @@ class Accordion extends React.Component {
     as: 'div',
   };
 
-  // state = {
-  //   openedId: 0,
-  // };
+  state = {
+    openedId: '0',
+  };
 
-  onClick = (/* id */) => {
-    // this.setState({
-    //   openedId: id,
-    // });
+  onClick = id => {
+    this.setState({
+      openedId: id,
+    });
   };
 
   render() {
     const { bsPrefix, as: Component, children, ...props } = this.props;
     return (
-      <AccordionContext.Provider value={this.onClick}>
+      <AccordionContext.Provider
+        value={{ onClick: this.onClick, activeEventKey: this.state.openedId }}
+      >
         <SelectableContext.Provider value={null}>
           <Component {...props} className={classNames(bsPrefix)}>
             {children}
@@ -47,5 +47,6 @@ class Accordion extends React.Component {
 const DecoratedAccordion = createBootstrapComponent(Accordion, 'accordion');
 
 DecoratedAccordion.Toggle = AccordionToggle;
+DecoratedAccordion.Collapse = AccordionCollapse;
 
 export default DecoratedAccordion;

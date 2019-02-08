@@ -1,27 +1,52 @@
-import React, { Component } from 'react';
+import classNames from 'classnames';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { elementType } from 'prop-types-extra';
 
 import { createBootstrapComponent } from './ThemeProvider';
 import AccordionContext from './AccordionContext';
 
-class AccordionToggle extends Component {
+class AccordionToggle extends React.Component {
   static propTypes = {
+    bsPrefix: PropTypes.string,
+    children: PropTypes.node,
     eventKey: PropTypes.string,
+    as: elementType,
+  };
+
+  static defaultProps = {
+    as: 'button',
   };
 
   handleClick = () => {
-    const { onClick } = this.accordionContext;
-    onClick(this.state.eventKey);
+    const onClick = this.accordionContext;
+    onClick(this.props.eventKey);
   };
 
   render() {
-    const { children, /* eventKey, */ ...props } = this.props;
+    const {
+      as: Component,
+      bsPrefix,
+      children,
+      className,
+      eventKey,
+      ...props
+    } = this.props;
+
+    if (Component === 'button') {
+      props.type = 'button';
+    }
+
     return (
       <AccordionContext.Consumer>
         {context => {
-          this.accordionContext = context;
+          this.accordionContext = context.onClick;
           return (
-            <Component {...props} onClick={this.handleClick}>
+            <Component
+              {...props}
+              onClick={() => this.handleClick(eventKey)}
+              className={classNames(className, bsPrefix)}
+            >
               {children}
             </Component>
           );
