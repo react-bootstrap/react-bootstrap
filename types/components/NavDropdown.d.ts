@@ -6,7 +6,7 @@ import { ReplaceProps, PropsOf } from './helpers';
 
 interface NavDropdownProps {
   id: string;
-  title: string;
+  title: React.ReactNode;
   disabled?: boolean;
   active?: boolean;
   menuRole?: string;
