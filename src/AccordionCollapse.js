@@ -9,6 +9,9 @@ class AccordionCollapse extends React.Component {
   static propTypes = {
     /** @default 'accordion-collapse' */
     bsPrefix: PropTypes.string,
+    /**
+     * A key that corresponds to the toggler that triggers this collapse's expand or collapse.
+     */
     eventKey: PropTypes.string,
   };
 

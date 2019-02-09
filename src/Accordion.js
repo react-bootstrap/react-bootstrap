@@ -10,8 +10,11 @@ import AccordionCollapse from './AccordionCollapse';
 
 class Accordion extends React.Component {
   static propTypes = {
+    /** Set a custom element for this component. */
     as: elementType,
-    children: PropTypes.instanceOf(Object),
+
+    /** @default 'accordion' */
+    bsPrefix: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -29,13 +32,19 @@ class Accordion extends React.Component {
   };
 
   render() {
-    const { bsPrefix, as: Component, children, ...props } = this.props;
+    const {
+      as: Component,
+      bsPrefix,
+      children,
+      className,
+      ...props
+    } = this.props;
     return (
       <AccordionContext.Provider
         value={{ onClick: this.onClick, activeEventKey: this.state.openedId }}
       >
         <SelectableContext.Provider value={null}>
-          <Component {...props} className={classNames(bsPrefix)}>
+          <Component {...props} className={classNames(className, bsPrefix)}>
             {children}
           </Component>
         </SelectableContext.Provider>

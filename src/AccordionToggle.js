@@ -8,11 +8,24 @@ import AccordionContext from './AccordionContext';
 
 class AccordionToggle extends React.Component {
   static propTypes = {
-    bsPrefix: PropTypes.string,
-    children: PropTypes.node,
-    eventKey: PropTypes.string,
-    onClick: PropTypes.func,
+    /**
+     * Set a custom element for this component.
+     */
     as: elementType,
+
+    /** @default 'accordion-toggler' */
+    bsPrefix: PropTypes.string,
+    /**
+     * A key that corresponds to the collapse component that gets triggered
+     * when this has been clicked.
+     */
+    eventKey: PropTypes.string.isRequired,
+
+    /**
+     * A callback function to perform additional operations with this toggler
+     * gets triggered.
+     */
+    onClick: PropTypes.func,
   };
 
   static defaultProps = {
