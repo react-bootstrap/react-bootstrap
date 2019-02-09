@@ -1,5 +1,12 @@
 const path = require('path');
 const _ = require('lodash');
+const config = require('./config');
+
+const stringifiedConfig = {};
+// eslint-disable-next-line no-restricted-syntax
+for (const [key, value] of Object.entries(config)) {
+  stringifiedConfig[key] = JSON.stringify(value);
+}
 
 exports.onCreateWebpackConfig = function onCreateWebpackConfig({
   actions,
@@ -24,13 +31,15 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
       alias: {
         react: path.resolve(__dirname, '../node_modules/react'),
         'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
-        'react-bootstrap$': path.resolve(__dirname, '../src/index.js'),
-        'react-bootstrap/lib': path.resolve(__dirname, '../src'),
+        'react-bootstrap': path.resolve(__dirname, '../src'),
       },
     },
     plugins: [
       // See https://github.com/FormidableLabs/react-live/issues/5
       plugins.ignore(/^(xor|props)$/),
+      plugins.define({
+        config: stringifiedConfig,
+      }),
     ],
   });
 

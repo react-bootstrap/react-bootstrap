@@ -1,11 +1,13 @@
 import * as React from 'react';
 
-declare namespace Container {
-    export interface ContainerProps extends React.HTMLProps<Container> {
-        componentClass?: React.ReactType;
-        fluid?: boolean;
-        bsClass?: string;
-    }
+import { BsPrefixComponent } from './helpers';
+
+interface ContainerProps {
+  fluid?: boolean;
 }
-declare class Container extends React.Component<Container.ContainerProps> { }
-export = Container;
+
+declare class Container<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As, ContainerProps> {}
+
+export default Container;

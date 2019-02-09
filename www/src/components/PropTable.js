@@ -5,8 +5,8 @@ import capitalize from 'lodash/capitalize';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Badge from 'react-bootstrap/lib/Badge';
-import Table from 'react-bootstrap/lib/Table';
+import Badge from 'react-bootstrap/Badge';
+import Table from 'react-bootstrap/Table';
 
 import styled from 'astroturf';
 

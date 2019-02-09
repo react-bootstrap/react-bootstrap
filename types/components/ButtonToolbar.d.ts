@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
 
-declare namespace ButtonToolbar {
-    export interface ButtonToolbarProps extends React.HTMLProps<ButtonToolbar> {
-        block?: boolean;
-        bsSize?: Sizes;
-        bsStyle?: string;
-        justified?: boolean;
-        vertical?: boolean;
-    }
+import { BsPrefixComponent } from './helpers';
+
+interface ButtonToolbarProps {
+  role?: string;
 }
-declare class ButtonToolbar extends React.Component<ButtonToolbar.ButtonToolbarProps> { }
-export = ButtonToolbar;
+
+declare class ButtonToolbar extends BsPrefixComponent<
+  'div',
+  ButtonToolbarProps
+> {}
+
+export default ButtonToolbar;

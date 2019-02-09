@@ -1,9 +1,13 @@
 import * as React from 'react';
 
-declare namespace NavbarToggle {
-    export interface NavbarToggleProps extends React.HTMLProps<NavbarToggle> {
-        onClick?: React.MouseEventHandler<any>;
-    }
+import { BsPrefixComponent } from './helpers';
+
+interface NavbarToggleProps {
+  label?: string;
 }
-declare class NavbarToggle extends React.Component<NavbarToggle.NavbarToggleProps> { }
-export = NavbarToggle;
+
+declare class NavbarToggle<
+  As extends React.ReactType = 'button'
+> extends BsPrefixComponent<As, NavbarToggleProps> {}
+
+export default NavbarToggle;

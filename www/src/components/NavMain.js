@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Navbar from 'react-bootstrap/lib/Navbar';
-import Nav from 'react-bootstrap/lib/Nav';
-import Tooltip from 'react-bootstrap/lib/Tooltip';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import styled from 'astroturf';
 import withProps from 'recompose/withProps';
 
@@ -93,7 +93,22 @@ function NavMain({ activePage }) {
         <OverlayTrigger
           placement="bottom"
           delay={{ show: 200 }}
-          overlay={<Tooltip id="t-discord">Github</Tooltip>}
+          overlay={
+            <Tooltip id="t-version">
+              Compatible with Bootstrap v
+              {config.bootstrapVersion
+                .split('.')
+                .slice(0, 2)
+                .join('.')}
+            </Tooltip>
+          }
+        >
+          <StyledNavLink>v{config.version}</StyledNavLink>
+        </OverlayTrigger>
+        <OverlayTrigger
+          placement="bottom"
+          delay={{ show: 200 }}
+          overlay={<Tooltip id="t-github">Github</Tooltip>}
         >
           <StyledNavLink
             href="https://github.com/react-bootstrap/react-bootstrap"

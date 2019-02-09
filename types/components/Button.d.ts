@@ -1,16 +1,36 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
 
-declare namespace Button {
-    export interface ButtonProps extends React.HTMLProps<Button> {
-        bsClass?: string;
-        active?: boolean;
-        block?: boolean;
-        bsStyle?: string | null;
-        bsSize?: Sizes;
-        componentClass?: React.ReactType;
-        disabled?: boolean;
-    }
+import { BsPrefixComponent } from './helpers';
+
+interface ButtonProps {
+  active?: boolean;
+  block?: boolean;
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'info'
+    | 'dark'
+    | 'light'
+    | 'link'
+    | 'outline-primary'
+    | 'outline-secondary'
+    | 'outline-success'
+    | 'outline-danger'
+    | 'outline-warning'
+    | 'outline-info'
+    | 'outline-dark'
+    | 'outline-light';
+  size?: 'sm' | 'lg';
+  type?: 'button' | 'reset' | 'submit';
+  href?: string;
+  disabled?: boolean;
 }
-declare class Button extends React.Component<Button.ButtonProps> { }
-export = Button;
+
+declare class Button<
+  As extends React.ReactType = 'button'
+> extends BsPrefixComponent<As, ButtonProps> {}
+
+export default Button;

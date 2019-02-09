@@ -1,12 +1,9 @@
 import * as React from 'react';
 
-declare namespace TabContent {
-    export interface TabContentProps extends React.HTMLProps<TabContent> {
-        componentClass?: React.ReactType,
-        animation?: boolean | React.ReactType;
-        mountOnEnter?: boolean;
-        unmountOnExit?: boolean;
-    }
-}
-declare class TabContent extends React.Component<TabContent.TabContentProps> { }
-export = TabContent;
+import { BsPrefixComponent, SelectCallback } from './helpers';
+
+declare class TabContent<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As> {}
+
+export default TabContent;

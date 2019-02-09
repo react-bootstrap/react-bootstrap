@@ -24,9 +24,8 @@ export default withLayout(function ResponsiveEmbedSection({ data }) {
         <code>iframe</code>
         s.
       </p>
-      <p className="bg-warning">
-        Either <b>16by9</b> or <b>4by3</b> aspect ratio via <code>a16by9</code>{' '}
-        or <code>a4by3</code> attribute must be set.
+      <p>
+        The aspect ratio is controlled via the <code>aspectRatio</code> prop.
       </p>
       <ReactPlayground codeText={ResponsiveEmbed} />
 

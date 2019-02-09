@@ -1,12 +1,15 @@
 import * as React from 'react';
 
-declare namespace ModalHeader {
-    export interface ModalHeaderProps extends React.HTMLProps<ModalHeader> {
-        closeButton?: boolean;
-        closeLabel?: string;
-        onHide?: Function;
-        bsClass?: string;
-    }
+import { BsPrefixComponent } from './helpers';
+
+interface ModalHeaderProps {
+  closeLabel?: string;
+  closeButton?: boolean;
+  onHide?: () => void;
 }
-declare class ModalHeader extends React.Component<ModalHeader.ModalHeaderProps> { }
-export = ModalHeader;
+
+declare class ModalHeader<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As, ModalHeaderProps> {}
+
+export default ModalHeader;

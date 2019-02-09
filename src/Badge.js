@@ -12,7 +12,7 @@ class Badge extends React.Component {
     /**
      * The visual style of the badge
      *
-     * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info|'light'|'dark')}
+     * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
      */
     variant: PropTypes.string,
 

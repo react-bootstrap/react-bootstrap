@@ -1,7 +1,13 @@
 import * as React from 'react';
 
-declare namespace NavbarBrand {
-    export type  NavbarBrandProps = React.HTMLProps<NavbarBrand>;
+import { BsPrefixComponent } from './helpers';
+
+interface NavbarBrandProps {
+  href?: string;
 }
-declare class NavbarBrand extends React.Component<NavbarBrand.NavbarBrandProps> { }
-export = NavbarBrand;
+
+declare class NavbarBrand<
+  As extends React.ReactType = 'a'
+> extends BsPrefixComponent<As, NavbarBrandProps> {}
+
+export default NavbarBrand;

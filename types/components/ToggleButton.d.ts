@@ -1,12 +1,22 @@
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
 
-declare namespace ToggleButton {
-    export interface ToggleButtonProps extends React.HTMLProps<ToggleButton> {
-        checked?: boolean;
-        name?: string;
-        value: number | string;
-    }
+import Button from './Button';
+
+import { BsPrefixComponent } from './helpers';
+
+interface ToggleButtonProps {
+  type?: 'checkbox' | 'radio';
+  name?: string;
+  checked?: boolean;
+  diabled?: boolean;
+  onChange?: React.ChangeEventHandler<this>;
+  value: unknown;
+  inputRef?: React.LegacyRef<this>;
+  innerRef?: React.LegacyRef<this>;
 }
-declare class ToggleButton extends React.Component<ToggleButton.ToggleButtonProps & Button.ButtonProps> { }
-export = ToggleButton;
+
+declare class ToggleButton<
+  As extends React.ReactType = typeof Button
+> extends BsPrefixComponent<As, ToggleButtonProps> {}
+
+export default ToggleButton;

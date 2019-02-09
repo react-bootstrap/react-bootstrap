@@ -1,12 +1,14 @@
 import * as React from 'react';
 
-declare namespace Image {
-    export interface ImageProps extends React.HTMLProps<Image> {
-        circle?: boolean;
-        responsive?: boolean;
-        rounded?: boolean;
-        thumbnail?: boolean;
-    }
+import { BsPrefixComponent } from './helpers';
+
+interface ImageProps {
+  fluid?: boolean;
+  rounded?: boolean;
+  roundedCircle?: boolean;
+  thumbnail?: boolean;
 }
-declare class Image extends React.Component<Image.ImageProps> { }
-export = Image;
+
+declare class Image extends BsPrefixComponent<'img', ImageProps> {}
+
+export default Image;

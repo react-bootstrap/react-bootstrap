@@ -1,15 +1,16 @@
 import * as React from 'react';
 
-declare namespace Table {
-    export interface TableProps extends React.HTMLProps<Table> {
-        bordered?: boolean;
-        condensed?: boolean;
-        hover?: boolean;
-        responsive?: boolean;
-        striped?: boolean;
-        fill?: boolean;
-        bsClass?: string;
-    }
+import { BsPrefixComponent } from './helpers';
+
+interface TableProps {
+  striped?: boolean;
+  bordered?: boolean;
+  hover?: boolean;
+  size?: string;
+  variant?: string;
+  responsive?: boolean | string;
 }
-declare class Table extends React.Component<Table.TableProps> { }
-export = Table;
+
+declare class Table extends BsPrefixComponent<'table', TableProps> {}
+
+export default Table;

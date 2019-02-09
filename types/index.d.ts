@@ -1,4 +1,6 @@
-// Type definitions for react-bootstrap v1.0
+// These type definitions were originally from DefinitelyTyped
+// They have since been incorporated into this project directly
+//
 // Project: https://github.com/react-bootstrap/react-bootstrap
 // Adapted from v0.32 Definitions by: Richard Davies <https://github.com/rathga>
 // [....others....]
@@ -17,33 +19,6 @@
 //                 Andrew Makarov <https://github.com/r3nya>
 //                 Duong Tran <https://github.com/t49tran>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.1
-
-
-
-import * as React from 'react';
-
-export type Omit<T, K extends keyof T> = Pick<T, ({ [P in keyof T]: P } & { [P in K]: never } & { [x: string]: never, [x: number]: never })[keyof T]>;
-
-export type Sizes = 'xs' | 'xsmall' | 'sm' | 'small' | 'medium' | 'lg' | 'large';
-
-export interface SelectCallback extends React.EventHandler<any> {
-  (eventKey: any, e: React.SyntheticEvent<{}>): void;
-  /**
-   * @deprecated
-   * This signature is a hack so can still derive from HTMLProps.
-   * It does not reflect the underlying event and should not be used.
-   */
-  (e: React.MouseEvent<{}>): void;
-}
-
-export interface TransitionCallbacks {
-  onEnter?(node: HTMLElement): any;
-  onEntered?(node: HTMLElement): any;
-  onEntering?(node: HTMLElement): any;
-  onExit?(node: HTMLElement): any;
-  onExited?(node: HTMLElement): any;
-  onExiting?(node: HTMLElement): any;
-}
+// TypeScript Version: 3.0
 
 export * from './components';

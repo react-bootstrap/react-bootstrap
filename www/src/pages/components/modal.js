@@ -90,8 +90,8 @@ export default withLayout(function ModalSection({ data }) {
         <p>
           The Modal Header, Title, Body, and Footer components are available as
           static properties the <code>{'<Modal/>'}</code> component, but you can
-          also, import them directly from the <code>/lib</code> directory like:{' '}
-          <code>require("react-bootstrap/lib/ModalHeader")</code>.
+          also, import them directly like:{' '}
+          <code>require("react-bootstrap/ModalHeader")</code>.
         </p>
       </div>
       <LinkedHeading h="3" id="modal-vertically-centered">

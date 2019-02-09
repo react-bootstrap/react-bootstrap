@@ -1,17 +1,15 @@
 import * as React from 'react';
-import { Sizes } from 'react-bootstrap';
 
-declare namespace Tooltip {
-    export interface TooltipProps extends React.HTMLProps<Tooltip> {
-        // Optional
-        arrowOffsetLeft?: number | string;
-        arrowOffsetTop?: number | string;
-        bsSize?: Sizes;
-        bsStyle?: string;
-        placement?: string;
-        positionLeft?: number;
-        positionTop?: number;
-    }
+import { Placement } from './Overlay';
+
+import { BsPrefixComponent } from './helpers';
+
+interface TooltipProps {
+  id: string | number;
+  placement?: Placement;
+  arrowProps?: { ref: any; style: object };
 }
-declare class Tooltip extends React.Component<Tooltip.TooltipProps> { }
-export = Tooltip;
+
+declare class Tooltip extends BsPrefixComponent<'div', TooltipProps> {}
+
+export default Tooltip;

@@ -1,30 +1,34 @@
 import * as React from 'react';
-import { Omit, Sizes, SelectCallback } from 'react-bootstrap';
-import CarouselItem = require('./CarouselItem');
-import CarouselCaption = require('./CarouselCaption');
 
-declare namespace Carousel {
-    export type CarouselProps = Omit<React.HTMLProps<Carousel>, 'wrap'> & {
-        activeIndex?: number;
-        bsSize?: Sizes;
-        bsStyle?: string;
-        controls?: boolean;
-        defaultActiveIndex?: number;
-        direction?: string;
-        indicators?: boolean;
-        interval?: number | null;
-        nextIcon?: React.ReactNode;
-        onSelect?: SelectCallback;
-        // TODO: Add more specific type
-        onSlideEnd?: Function;
-        pauseOnHover?: boolean;
-        prevIcon?: React.ReactNode;
-        slide?: boolean;
-        wrap?: boolean;
-    };
+import CarouselItem from './CarouselItem';
+import CarouselCaption from './CarouselCaption';
+
+import { ReplaceProps, SelectCallback } from './helpers';
+
+interface CarouselProps {
+  bsPrefix?: string;
+  slide?: boolean;
+  fade?: boolean;
+  wrap?: boolean;
+  indicators?: boolean;
+  interval?: number;
+  controls?: boolean;
+  pauseOnHover?: boolean;
+  keyboard?: boolean;
+  onSelect?: (eventKey: any, direction: 'prev' | 'next', event: object) => void;
+  onSlideEnd?: () => void;
+  activeIndex?: number;
+  prevIcon?: React.ReactNode;
+  prevLabel?: string;
+  nextIcon?: React.ReactNode;
+  nextLabel?: string;
 }
-declare class Carousel extends React.Component<Carousel.CarouselProps> {
-    public static Caption: typeof CarouselCaption;
-    public static Item: typeof CarouselItem;
+
+declare class Carousel extends React.Component<
+  ReplaceProps<'div', CarouselProps>
+> {
+  static Item: typeof CarouselItem;
+  static Caption: typeof CarouselCaption;
 }
-export = Carousel;
+
+export default Carousel;
