@@ -11,6 +11,7 @@ class AccordionToggle extends React.Component {
     bsPrefix: PropTypes.string,
     children: PropTypes.node,
     eventKey: PropTypes.string,
+    onClick: PropTypes.func,
     as: elementType,
   };
 
@@ -19,8 +20,9 @@ class AccordionToggle extends React.Component {
   };
 
   handleClick = () => {
-    const onClick = this.accordionContext;
-    onClick(this.props.eventKey);
+    const handleClick = this.accordionContext;
+    handleClick(this.props.eventKey);
+    if (this.props.onClick) this.props.onClick(this.props.eventKey);
   };
 
   render() {
