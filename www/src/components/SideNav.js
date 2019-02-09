@@ -107,6 +107,7 @@ const layout = ['grid', 'media'];
 
 const components = [
   'alerts',
+  'accordion',
   'badge',
   'breadcrumb',
   'buttons',

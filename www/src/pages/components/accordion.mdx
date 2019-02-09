@@ -1,0 +1,42 @@
+import { graphql } from 'gatsby';
+
+import Callout from '../../components/Callout';
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+
+import Basic from '../../examples/Accordion/Basic';
+
+# Accordion
+
+<p className="lead">
+  Accordions provide a way to restrict Card components to only open one at a time.
+</p>
+
+## Examples
+
+Accordions use Card components to provide styling of the Accordion components.
+Use AccordionToggle to provide a button that switches between each AccordionCollapse component.
+
+### Basic Example
+
+<ReactPlayground codeText={Basic} />
+
+## API
+
+<ComponentApi metadata={props.data.Accordion} />
+<ComponentApi metadata={props.data.AccordionToggle} exportedBy={props.data.Accordion} />
+<ComponentApi metadata={props.data.AccordionCollapse} exportedBy={props.data.Accordion} />
+
+export const query = graphql`
+  query AccordionQuery {
+    Accordion: componentMetadata(displayName: { eq: "Accordion" }) {
+      ...ComponentApi_metadata
+    }
+    AccordionToggle: componentMetadata(displayName: { eq: "AccordionToggle" }) {
+      ...ComponentApi_metadata
+    }
+    AccordionCollapse: componentMetadata(displayName: { eq: "AccordionCollapse" }) {
+      ...ComponentApi_metadata
+    }
+  }
+`;
