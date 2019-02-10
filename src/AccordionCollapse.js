@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -12,17 +13,17 @@ class AccordionCollapse extends React.Component {
     /**
      * A key that corresponds to the toggler that triggers this collapse's expand or collapse.
      */
-    eventKey: PropTypes.string,
+    eventKey: PropTypes.string.isRequired,
   };
 
   render() {
-    const { children, bsPrefix, eventKey, ...props } = this.props;
+    const { bsPrefix, children, className, eventKey, ...props } = this.props;
 
     return (
       <AccordionContext.Consumer>
         {context => (
           <Collapse in={context.activeEventKey === eventKey} {...props}>
-            <div className={bsPrefix}>{children}</div>
+            <div className={classNames(className, bsPrefix)}>{children}</div>
           </Collapse>
         )}
       </AccordionContext.Consumer>

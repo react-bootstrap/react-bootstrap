@@ -14,7 +14,7 @@ class Accordion extends React.Component {
     as: elementType,
 
     /** @default 'accordion' */
-    bsPrefix: PropTypes.string.isRequired,
+    bsPrefix: PropTypes.string,
   };
 
   static defaultProps = {

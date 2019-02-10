@@ -48,9 +48,7 @@ class AccordionToggle extends React.Component {
       ...props
     } = this.props;
 
-    if (Component === 'button') {
-      props.type = 'button';
-    }
+    if (Component === 'button') props.type = 'button';
 
     return (
       <AccordionContext.Consumer>
