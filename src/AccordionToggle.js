@@ -33,8 +33,7 @@ class AccordionToggle extends React.Component {
   };
 
   handleClick = () => {
-    const handleClick = this.accordionContext;
-    handleClick(this.props.eventKey);
+    this.accordionContextOnClick(this.props.eventKey);
     if (this.props.onClick) this.props.onClick(this.props.eventKey);
   };
 
@@ -53,7 +52,7 @@ class AccordionToggle extends React.Component {
     return (
       <AccordionContext.Consumer>
         {context => {
-          this.accordionContext = context.onClick;
+          this.accordionContextOnClick = context.onClick.bind(this);
           return (
             <Component
               {...props}
