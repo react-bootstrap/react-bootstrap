@@ -19,7 +19,9 @@ import { createBootstrapComponent } from './ThemeProvider';
 import ModalContext from './ModalContext';
 
 const propTypes = {
-  /** @default 'modal' */
+  /**
+   * @default 'modal'
+   */
   bsPrefix: PropTypes.string,
 
   /**
@@ -50,6 +52,11 @@ const propTypes = {
    * Close the modal when escape key is pressed
    */
   keyboard: PropTypes.bool,
+
+  /**
+   * Allows scrolling the `<Modal.Body>` instead of the entire Modal when overflowing.
+   */
+  scrollable: PropTypes.bool,
 
   /**
    * Open and close the Modal with a slide and fade animation.
@@ -94,7 +101,9 @@ const propTypes = {
    */
   show: PropTypes.bool,
 
-  /** Callback fired when the modal has switch to `show` */
+  /**
+   * A callback fired when the Modal is opening.
+   */
   onShow: PropTypes.func,
 
   /**
@@ -102,6 +111,11 @@ const propTypes = {
    * clicked. Required if either are specified.
    */
   onHide: PropTypes.func,
+
+  /**
+   * A callback fired when the escape key, if specified in `keyboard`, is pressed.
+   */
+  onEscapeKeyDown: PropTypes.func,
 
   /**
    * Callback fired before the Modal transitions in
@@ -133,13 +147,16 @@ const propTypes = {
    */
   onExited: PropTypes.func,
 
-  /** @private */
-  container: PropTypes.any,
+  /**
+   * A ModalManager instance used to track and manage the state of open
+   * Modals. Useful when customizing how modals interact within a container
+   */
+  manager: PropTypes.object.isRequired,
 
-  /** @private */
-  manager: PropTypes.any,
-  /** @private */
-  onEscapeKeyDown: PropTypes.any,
+  /**
+   * @private
+   */
+  container: PropTypes.any,
 };
 
 const defaultProps = {
@@ -280,10 +297,10 @@ class Modal extends React.Component {
 
       /* BaseModal props */
       show,
-      manager,
       animation,
       backdrop,
       keyboard,
+      manager,
       onEscapeKeyDown,
       onShow,
       onHide,
