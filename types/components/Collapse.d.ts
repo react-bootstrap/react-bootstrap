@@ -4,6 +4,8 @@ import { TransitionCallbacks } from './helpers';
 export interface CollapseProps
   extends TransitionCallbacks,
     React.ClassAttributes<Collapse> {
+  id?: string;
+  className?: string;
   in?: boolean;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
