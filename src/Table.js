@@ -22,6 +22,11 @@ class Table extends React.Component {
     bordered: PropTypes.bool,
 
     /**
+     * Removes all borders on the table and cells, including table header.
+     */
+    borderless: PropTypes.bool,
+
+    /**
      * Enable a hover state on table rows within a `<tbody>`.
      */
     hover: PropTypes.bool,
@@ -56,6 +61,7 @@ class Table extends React.Component {
       className,
       striped,
       bordered,
+      borderless,
       hover,
       size,
       variant,
@@ -70,6 +76,7 @@ class Table extends React.Component {
       size && `${bsPrefix}-${size}`,
       striped && `${bsPrefix}-striped`,
       bordered && `${bsPrefix}-bordered`,
+      borderless && `${bsPrefix}-borderless`,
       hover && `${bsPrefix}-hover`,
     );
 
