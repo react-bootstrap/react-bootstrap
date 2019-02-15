@@ -37,7 +37,7 @@ class Col extends React.Component {
     as: elementType,
 
     /**
-     * The number of columns to span on sxtra small devices (<576px)
+     * The number of columns to span on extra small devices (<576px)
      *
      * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
      */

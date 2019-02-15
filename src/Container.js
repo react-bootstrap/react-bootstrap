@@ -13,7 +13,7 @@ class Container extends React.Component {
     bsPrefix: PropTypes.string,
 
     /**
-     * Allow the Container to fill all of it's availble horizontal space.
+     * Allow the Container to fill all of its available horizontal space.
      */
     fluid: PropTypes.bool,
     /**
