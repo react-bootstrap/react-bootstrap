@@ -15,7 +15,7 @@ declare class DropdownHeader<
 
 interface DropdownProps {
   drop?: 'up' | 'left' | 'right' | 'down';
-  alightRight?: boolean;
+  alignRight?: boolean;
   show?: boolean;
   flip?: boolean;
   onToggle?: (
