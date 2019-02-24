@@ -131,7 +131,7 @@ class TabPane extends React.Component {
           onExiting={onExiting}
           onExited={onExited}
           mountOnEnter={mountOnEnter}
-          unmountOnExit={mountOnEnter}
+          unmountOnExit={unmountOnExit}
         >
           {pane}
         </Transition>
