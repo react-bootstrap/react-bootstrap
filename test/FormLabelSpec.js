@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
+import Col from '../src/Col';
 import FormLabel from '../src/FormLabel';
 import FormGroup from '../src/FormGroup';
 
@@ -20,9 +21,10 @@ describe('<FormLabel>', () => {
       </FormGroup>,
     ).assertSingle('label[htmlFor="foo"].form-label');
   });
+
   it('should render as a Col', () => {
     mount(
-      <FormLabel column sm={4}>
+      <FormLabel as={Col} sm={4}>
         Label
       </FormLabel>,
     ).assertSingle('label.col-sm-4.col-form-label');
