@@ -23,12 +23,6 @@ const propTypes = {
   htmlFor: PropTypes.string,
 
   /**
-   * Renders the FormLabel as a `<Col>` component (accepting all the same props),
-   * as well as adding additional styling for horizontal forms.
-   */
-  column: PropTypes.bool,
-
-  /**
    * The FormLabel `ref` will be forwarded to the underlying element.
    * Unless the FormLabel is rendered `as` a composite component,
    * it will be a DOM node, when resolved.
@@ -47,19 +41,18 @@ const propTypes = {
 
 const defaultProps = {
   as: 'label',
-  column: false,
   srOnly: false,
 };
 
 function FormLabel({
   as: Component,
   bsPrefix,
-  column,
   srOnly,
   className,
   innerRef,
   ...props
 }) {
+  const column = Component === Col;
   const classes = classNames(
     className,
     bsPrefix,
