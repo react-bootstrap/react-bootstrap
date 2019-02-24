@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import warning from 'warning';
+import { elementType } from 'prop-types-extra';
 
 import mapContextToProps from 'react-context-toolbox/mapContextToProps';
 import Col from './Col';
@@ -13,6 +14,8 @@ const propTypes = {
    * @default 'form-label'
    */
   bsPrefix: PropTypes.string,
+
+  as: elementType,
 
   /**
    * Uses `controlId` from `<FormGroup>` if not explicitly specified.
@@ -43,11 +46,13 @@ const propTypes = {
 };
 
 const defaultProps = {
+  as: 'label',
   column: false,
   srOnly: false,
 };
 
 function FormLabel({
+  as: Component,
   bsPrefix,
   column,
   srOnly,
