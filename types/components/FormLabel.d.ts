@@ -4,11 +4,12 @@ import { BsPrefixComponent } from './helpers';
 
 interface FormLabelProps {
   htmlFor?: string;
-  column?: boolean;
   innerRef?: React.LegacyRef<this>;
   srOnly?: boolean;
 }
 
-declare class FormLabel extends BsPrefixComponent<'label', FormLabelProps> {}
+declare class FormLabel<
+  As extends React.ReactType = 'label'
+> extends BsPrefixComponent<As, FormLabelProps> {}
 
 export default FormLabel;
