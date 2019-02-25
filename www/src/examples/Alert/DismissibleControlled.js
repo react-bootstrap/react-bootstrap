@@ -1,4 +1,4 @@
-class AlertDismissable extends React.Component {
+class AlertDismissible extends React.Component {
   constructor(props) {
     super(props);
 
@@ -31,4 +31,4 @@ class AlertDismissable extends React.Component {
   }
 }
 
-render(<AlertDismissable />);
+render(<AlertDismissible />);
