@@ -55,7 +55,7 @@ class DropdownToggle extends React.Component {
       ...props
     } = this.props;
 
-    if (Component === DropdownToggle.defaultProps.as) {
+    if (childBsPrefix !== undefined) {
       props.bsPrefix = childBsPrefix;
     }
 
