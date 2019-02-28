@@ -55,6 +55,10 @@ class DropdownToggle extends React.Component {
       ...props
     } = this.props;
 
+    if (childBsPrefix !== undefined) {
+      props.bsPrefix = childBsPrefix;
+    }
+
     // This intentionally forwards size and variant (if set) to the
     // underlying component, to allow it to render size and style variants.
     return (
@@ -62,7 +66,6 @@ class DropdownToggle extends React.Component {
         {({ toggle, props: toggleProps }) => (
           <Component
             onClick={toggle}
-            bsPrefix={childBsPrefix}
             className={classNames(
               className,
               bsPrefix,
