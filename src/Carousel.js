@@ -167,7 +167,7 @@ class Carousel extends React.Component {
   }
 
   componentDidUpdate(_, prevState) {
-    const { bsPrefix, slide } = this.props;
+    const { bsPrefix, slide, onSlideEnd } = this.props;
     if (
       !slide ||
       this.state.activeIndex === prevState.activeIndex ||
@@ -204,12 +204,15 @@ class Carousel extends React.Component {
             currentClasses: classNames(orderClassName, directionalClassName),
           },
           () =>
-            transition.end(nextElement, () =>
+            transition.end(nextElement, () => {
               this.safeSetState(
                 { prevClasses: '', currentClasses: 'active' },
                 this.handleSlideEnd,
-              ),
-            ),
+              );
+              if (onSlideEnd) {
+                onSlideEnd();
+              }
+            }),
         );
       },
     );
