@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import styles from 'dom-helpers/style';
 import transition from 'dom-helpers/transition';
 import React, { cloneElement } from 'react';
+import { elementType } from 'prop-types-extra';
 import PropTypes from 'prop-types';
 import uncontrollable from 'uncontrollable';
 
@@ -22,6 +23,7 @@ const propTypes = {
    * @default 'carousel'
    */
   bsPrefix: PropTypes.string,
+  as: elementType,
 
   /**
    * Enables animation on the Carousel as it transitions between slides.
@@ -101,6 +103,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  as: 'div',
   slide: true,
   fade: false,
   interval: 5000,
@@ -418,6 +421,7 @@ class Carousel extends React.Component {
 
   render() {
     const {
+      as: Component,
       bsPrefix,
       slide,
       fade,
@@ -448,7 +452,7 @@ class Carousel extends React.Component {
 
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-      <div
+      <Component
         {...props}
         className={classNames(
           className,
@@ -488,7 +492,7 @@ class Carousel extends React.Component {
             nextIcon,
             nextLabel,
           })}
-      </div>
+      </Component>
     );
   }
 }
