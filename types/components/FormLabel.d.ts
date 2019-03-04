@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface FeedbackProps {
+export interface FormLabelProps {
   htmlFor?: string;
   column?: boolean;
   innerRef?: React.LegacyRef<this>;
   srOnly?: boolean;
 }
 
-declare class Feedback extends BsPrefixComponent<'label', FeedbackProps> {}
+declare class FormLabel extends BsPrefixComponent<'label', FormLabelProps> {}
 
-export default Feedback;
+export default FormLabel;

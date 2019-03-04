@@ -4,7 +4,7 @@ import SafeAnchor from './SafeAnchor';
 
 import { BsPrefixComponent } from './helpers';
 
-interface DropdownItemProps<T> {
+export interface DropdownItemProps<T> {
   active?: boolean;
   disabled?: boolean;
   eventKey?: T;

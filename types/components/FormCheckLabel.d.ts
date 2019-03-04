@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface FormCheckLabelProps {
+export interface FormCheckLabelProps {
   htmlFor?: string;
   innerRef?: React.LegacyRef<this>;
 }

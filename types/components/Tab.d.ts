@@ -6,7 +6,7 @@ import TabPane from './TabPane';
 
 import { BsPrefixComponent, PropsOf } from './helpers';
 
-interface TabProps extends PropsOf<typeof TabPane> {
+export interface TabProps extends PropsOf<typeof TabPane> {
   eventKey?: unknown;
   title: React.ReactNode;
   disabled?: boolean;

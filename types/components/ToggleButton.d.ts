@@ -4,7 +4,7 @@ import Button from './Button';
 
 import { BsPrefixComponent } from './helpers';
 
-interface ToggleButtonProps {
+export interface ToggleButtonProps {
   type?: 'checkbox' | 'radio';
   name?: string;
   checked?: boolean;

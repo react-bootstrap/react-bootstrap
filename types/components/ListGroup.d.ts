@@ -4,7 +4,7 @@ import ListGroupItem from './ListGroupItem';
 
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
-interface ListGroupProps {
+export interface ListGroupProps {
   variant?: 'flush';
   activeKey?: unknown;
   defaultActiveKey?: unknown;

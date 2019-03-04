@@ -4,7 +4,7 @@ import SafeAnchor from './SafeAnchor';
 
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
-interface NavLinkProps {
+export interface NavLinkProps {
   active?: boolean;
   disabled?: boolean;
   role?: string;

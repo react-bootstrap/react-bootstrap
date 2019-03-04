@@ -12,7 +12,7 @@ import {
   TransitionCallbacks,
 } from './helpers';
 
-interface ModalProps extends TransitionCallbacks {
+export interface ModalProps extends TransitionCallbacks {
   size?: 'sm' | 'lg';
   centered?: boolean;
   backdrop?: 'static' | boolean;

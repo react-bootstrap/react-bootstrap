@@ -4,7 +4,7 @@ import Dropdown from './Dropdown';
 
 import { ReplaceProps, PropsOf } from './helpers';
 
-interface NavDropdownProps {
+export interface NavDropdownProps {
   id: string;
   title: React.ReactNode;
   disabled?: boolean;

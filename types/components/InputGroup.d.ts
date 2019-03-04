@@ -17,7 +17,7 @@ declare class InputGroupText<
 declare class InputGroupCheckbox extends BsPrefixComponent<'input'> {}
 declare class InputGroupRadio extends BsPrefixComponent<'input'> {}
 
-interface InputGroupProps {
+export interface InputGroupProps {
   size?: 'sm' | 'lg';
 }
 

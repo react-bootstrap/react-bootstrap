@@ -4,7 +4,7 @@ import { Placement } from './Overlay';
 
 import { BsPrefixComponent } from './helpers';
 
-interface PopoverProps {
+export interface PopoverProps {
   id: string | number;
   placement?: Placement;
   title?: React.ReactNode;

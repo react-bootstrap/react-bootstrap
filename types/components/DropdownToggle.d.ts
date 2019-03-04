@@ -4,7 +4,7 @@ import Button from './Button';
 
 import { BsPrefixComponent, PropsOf } from './helpers';
 
-interface DropdownToggleProps extends PropsOf<typeof Button> {
+export interface DropdownToggleProps extends PropsOf<typeof Button> {
   id: string;
   split?: boolean;
   childBsPrefix?: string;

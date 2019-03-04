@@ -9,7 +9,7 @@ type PropsFromToggle = Partial<
   Pick<PropsOf<typeof DropdownToggle>, 'href' | 'size' | 'variant' | 'disabled'>
 >;
 
-interface DropdownButtonProps extends PropsFromToggle {
+export interface DropdownButtonProps extends PropsFromToggle {
   id: string;
   title: React.ReactNode;
   menuRole?: string;

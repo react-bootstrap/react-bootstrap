@@ -4,7 +4,7 @@ import Nav from './Nav';
 
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
-interface TabsProps {
+export interface TabsProps {
   activeKey?: unknown;
   defaultActiveKey?: unknown;
   onSelect?: SelectCallback;

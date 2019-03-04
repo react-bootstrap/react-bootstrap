@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface FormCheckInputProps {
+export interface FormCheckInputProps {
   id?: string;
   type?: 'checkbox' | 'radio';
   isStatic?: boolean;
