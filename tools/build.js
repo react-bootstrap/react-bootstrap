@@ -15,7 +15,7 @@ const libRoot = path.join(__dirname, '../lib');
 const distRoot = path.join(libRoot, 'dist');
 const esRoot = path.join(libRoot, 'es');
 
-const clean = () => fse.existsSync(libRoot) && fse.remove(libRoot);
+const clean = async () => fse.existsSync(libRoot) && fse.remove(libRoot);
 
 const step = (name, root, fn) => async () => {
   console.log(cyan('Building: ') + green(name));
