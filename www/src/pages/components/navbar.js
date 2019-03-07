@@ -31,11 +31,11 @@ export default withLayout(function NaπvbarSection({ data }) {
         Overview
       </LinkedHeading>
       <p>
-        Here’s what you need to know before getting started with the navbar:
+        Here’s what you need to know before getting started with the Navbar:
       </p>
       <ul>
         <li>
-          use the <code>expand</code> prop to allow for nvabar collapsing at
+          Use the <code>expand</code> prop to allow for collapsing the Navbar at
           lower breakpoints.
         </li>
         <li>
