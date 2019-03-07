@@ -59,7 +59,7 @@ class Button extends React.Component {
   };
 
   static defaultProps = {
-    variant: 'primary',
+    variant: 'default',
     active: false,
     disabled: false,
     type: 'button',
