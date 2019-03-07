@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
 import { createBootstrapComponent } from './ThemeProvider';
 import BreadcrumbItem from './BreadcrumbItem';
@@ -22,7 +21,7 @@ class Breadcrumb extends React.Component {
      */
     listProps: PropTypes.object,
 
-    as: elementType,
+    as: PropTypes.elementType,
   };
 
   static defaultProps = {

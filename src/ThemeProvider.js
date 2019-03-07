@@ -36,6 +36,7 @@ function createBootstrapComponent(Component, opts) {
           {prefixes => (
             <Component
               {...props}
+              // eslint-disable-next-line react/prop-types
               bsPrefix={props.bsPrefix || prefixes.get(prefix) || prefix}
             />
           )}

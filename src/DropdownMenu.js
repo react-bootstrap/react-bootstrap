@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import BaseDropdownMenu from 'react-overlays/DropdownMenu';
 import NavbarContext from './NavbarContext';
 
@@ -48,7 +48,7 @@ class DropdownMenu extends React.Component {
      * If providing a custom, non DOM, component. the `show`, `close` and `alignRight` props
      * are also injected and should be handled appropriately.
      */
-    as: elementType,
+    as: PropTypes.elementType,
 
     /**
      * A set of popper options and props passed directly to react-popper's Popper component.

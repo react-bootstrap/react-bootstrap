@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
 import { createBootstrapComponent } from './ThemeProvider';
 import createWithBsPrefix from './utils/createWithBsPrefix';
@@ -45,7 +44,7 @@ class Card extends React.Component {
      */
     body: PropTypes.bool,
 
-    as: elementType,
+    as: PropTypes.elementType,
   };
 
   static defaultProps = {

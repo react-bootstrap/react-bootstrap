@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
 import createChainedFunction from './utils/createChainedFunction';
 
@@ -15,7 +14,10 @@ const propTypes = {
   /**
    * this is sort of silly but needed for Button
    */
-  as: elementType,
+  as: PropTypes.elementType,
+
+  /** @private */
+  innerRef: PropTypes.any,
 };
 
 const defaultProps = {

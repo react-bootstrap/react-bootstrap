@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import uncontrollable from 'uncontrollable';
 
 import createWithBsPrefix from './utils/createWithBsPrefix';
@@ -56,7 +56,7 @@ const propTypes = {
   /**
    * Set a custom element for this component.
    */
-  as: elementType,
+  as: PropTypes.elementType,
 
   /**
    * A callback fired when the `<Navbar>` body collapses or expands. Fired when

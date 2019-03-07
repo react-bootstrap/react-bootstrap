@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import warning from 'warning';
 
 import mapContextToProps from 'react-context-toolbox/mapContextToProps';
@@ -36,7 +36,7 @@ const propTypes = {
    *
    * @type {('input'|'textarea'|elementType)}
    */
-  as: elementType,
+  as: PropTypes.elementType,
 
   /**
    * Render the input as plain text. Generally used along side `readOnly`.

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import mapContextToProps from 'react-context-toolbox/mapContextToProps';
-import { elementType } from 'prop-types-extra';
+
 import BaseDropdown from 'react-overlays/Dropdown';
 
 import chain from './utils/createChainedFunction';
@@ -21,7 +21,7 @@ const propTypes = {
    */
   drop: PropTypes.oneOf(['up', 'left', 'right', 'down']),
 
-  as: elementType,
+  as: PropTypes.elementType,
 
   /**
    * Align the menu to the right side of the Dropdown toggle

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { elementType } from 'prop-types-extra';
+
 import { createBootstrapComponent } from './ThemeProvider';
 
 const propTypes = {
@@ -9,7 +9,7 @@ const propTypes = {
    * @default 'carousel-caption'
    */
   bsPrefix: PropTypes.string,
-  as: elementType,
+  as: PropTypes.elementType,
 };
 
 const defaultProps = {

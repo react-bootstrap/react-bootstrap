@@ -59,6 +59,9 @@ const propTypes = {
 
   /** @private */
   scheduleUpdate: PropTypes.func,
+
+  /** @private */
+  outOfBoundaries: PropTypes.any,
 };
 
 const defaultProps = {

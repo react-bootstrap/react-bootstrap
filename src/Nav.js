@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import all from 'prop-types-extra/lib/all';
 import React from 'react';
 import mapContextToProps from 'react-context-toolbox/mapContextToProps';
@@ -83,7 +83,7 @@ class Nav extends React.Component {
      */
     navbar: PropTypes.bool,
 
-    as: elementType,
+    as: PropTypes.elementType,
 
     /** @private */
     onKeyDown: PropTypes.func,

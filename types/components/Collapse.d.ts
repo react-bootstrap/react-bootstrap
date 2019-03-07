@@ -12,7 +12,7 @@ export interface CollapseProps
   dimension?: 'height' | 'width' | (() => 'height' | 'width');
   getDimensionValue?: (
     dimension: number,
-    element: React.ReactElement<any>,
+    element: React.ReactElement,
   ) => number;
   role?: string;
 }

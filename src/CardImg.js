@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
 import { createBootstrapComponent } from './ThemeProvider';
 
@@ -20,7 +19,7 @@ class CardImg extends React.Component {
      */
     variant: PropTypes.oneOf(['top', 'bottom', null]),
 
-    as: elementType,
+    as: PropTypes.elementType,
   };
 
   static defaultProps = {

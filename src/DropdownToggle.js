@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import { elementType } from 'prop-types-extra';
+
 import BaseDropdownToggle from 'react-overlays/DropdownToggle';
 import React from 'react';
 
@@ -31,7 +31,7 @@ class DropdownToggle extends React.Component {
 
     split: PropTypes.bool,
 
-    as: elementType,
+    as: PropTypes.elementType,
 
     /**
      * to passthrough to the underlying button or whatever from DropdownButton

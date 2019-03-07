@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import uncontrollable from 'uncontrollable';
 
 import { createBootstrapComponent } from './ThemeProvider';
@@ -25,7 +25,7 @@ class ListGroup extends React.Component {
     /**
      * You can use a custom element type for this component.
      */
-    as: elementType,
+    as: PropTypes.elementType,
   };
 
   static defaultProps = {

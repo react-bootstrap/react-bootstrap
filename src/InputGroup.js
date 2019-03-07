@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import React from 'react';
 
 import createWithBsPrefix from './utils/createWithBsPrefix';
@@ -26,7 +26,7 @@ class InputGroup extends React.Component {
      */
     size: PropTypes.string,
 
-    as: elementType,
+    as: PropTypes.elementType,
   };
 
   static defaultProps = {

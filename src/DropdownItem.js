@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import React from 'react';
 import mapContextToProps from 'react-context-toolbox/mapContextToProps';
 
@@ -49,7 +49,7 @@ class DropdownItem extends React.Component {
      */
     onSelect: PropTypes.func,
 
-    as: elementType,
+    as: PropTypes.elementType,
   };
 
   static defaultProps = {

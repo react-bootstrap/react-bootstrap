@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
 import { createBootstrapComponent } from './ThemeProvider';
 
@@ -36,7 +35,7 @@ class ButtonGroup extends React.Component {
      */
     role: PropTypes.string,
 
-    as: elementType,
+    as: PropTypes.elementType,
   };
 
   static defaultProps = {

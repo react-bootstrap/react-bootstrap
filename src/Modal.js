@@ -7,7 +7,6 @@ import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import React from 'react';
 import PropTypes from 'prop-types';
 import BaseModal from 'react-overlays/Modal';
-import { elementType } from 'prop-types-extra';
 
 import Fade from './Fade';
 import Body from './ModalBody';
@@ -20,6 +19,9 @@ import { createBootstrapComponent } from './ThemeProvider';
 import ModalContext from './ModalContext';
 
 const propTypes = {
+  /** @default 'modal' */
+  bsPrefix: PropTypes.string,
+
   /**
    * Render a large or small modal.
    *
@@ -64,7 +66,7 @@ const propTypes = {
    * prop when you want to use your own styles and markup to create a custom
    * modal component.
    */
-  dialogAs: elementType,
+  dialogAs: PropTypes.elementType,
 
   /**
    * When `true` The modal will automatically shift focus to itself when it
@@ -91,6 +93,9 @@ const propTypes = {
    * When `true` The modal will show itself.
    */
   show: PropTypes.bool,
+
+  /** Callback fired when the modal has switch to `show` */
+  onShow: PropTypes.func,
 
   /**
    * A callback fired when the header closeButton or non-static backdrop is
@@ -128,10 +133,13 @@ const propTypes = {
    */
   onExited: PropTypes.func,
 
-  /**
-   * @private
-   */
+  /** @private */
   container: PropTypes.any,
+
+  /** @private */
+  manager: PropTypes.any,
+  /** @private */
+  onEscapeKeyDown: PropTypes.any,
 };
 
 const defaultProps = {
@@ -291,7 +299,6 @@ class Modal extends React.Component {
       onEnter: _6,
       onEntering: _4,
       backdropClassName: _2,
-      backdropStyle: _3,
       ...props
     } = this.props;
 

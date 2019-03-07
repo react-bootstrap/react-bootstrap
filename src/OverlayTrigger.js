@@ -49,6 +49,11 @@ const propTypes = {
    */
   overlay: PropTypes.oneOfType([PropTypes.func, PropTypes.element.isRequired]),
 
+  /**
+   * A Popper.js config object passed to the the underlying popper instance.
+   */
+  popperConfig: PropTypes.object,
+
   // Overridden props from `<Overlay>`.
   /**
    * @private
