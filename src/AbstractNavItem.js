@@ -12,8 +12,13 @@ const propTypes = {
   href: PropTypes.string,
   tabIndex: PropTypes.string,
   eventKey: PropTypes.any,
+  onclick: PropTypes.func,
 
   as: PropTypes.any,
+
+  onSelect: PropTypes.func,
+
+  onClick: PropTypes.func,
 };
 
 const defaultProps = {

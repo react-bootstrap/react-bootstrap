@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
 import { createBootstrapComponent } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
@@ -22,7 +21,7 @@ class NavbarToggle extends React.Component {
      */
     children: PropTypes.node,
 
-    as: elementType,
+    as: PropTypes.elementType,
   };
 
   static defaultProps = {

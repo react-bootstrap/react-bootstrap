@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import React from 'react';
 
 import FormContext from './FormContext';
@@ -12,7 +12,7 @@ const propTypes = {
    */
   bsPrefix: PropTypes.string,
 
-  as: elementType,
+  as: PropTypes.elementType,
 
   /**
    * Sets `id` on `<FormControl>` and `htmlFor` on `<FormGroup.Label>`.

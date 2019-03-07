@@ -54,13 +54,13 @@ describe('<OverlayTrigger>', () => {
   });
 
   it('Should not set aria-describedby if the state is not show', () => {
-    const wrapper = mount(
+    const [button] = mount(
       <OverlayTrigger trigger="click" overlay={<Div />}>
         <button type="button">button</button>
       </OverlayTrigger>,
     ).getDOMNode();
 
-    assert.equal(wrapper.getAttribute('aria-describedby'), null);
+    assert.equal(button.getAttribute('aria-describedby'), null);
   });
 
   it('Should set aria-describedby for tooltips if the state is show', done => {
@@ -266,7 +266,7 @@ describe('<OverlayTrigger>', () => {
           { attachTo },
         );
 
-        const node = wrapper.getDOMNode();
+        const [node] = wrapper.getDOMNode();
         expect(wrapper.state('show')).to.be.false;
 
         node.click();

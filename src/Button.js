@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
 import { createBootstrapComponent } from './ThemeProvider';
 import SafeAnchor from './SafeAnchor';
@@ -55,7 +54,9 @@ class Button extends React.Component {
      */
     type: PropTypes.oneOf(['button', 'reset', 'submit', null]),
 
-    as: elementType,
+    as: PropTypes.elementType,
+    /** @private */
+    innerRef: PropTypes.any,
   };
 
   static defaultProps = {

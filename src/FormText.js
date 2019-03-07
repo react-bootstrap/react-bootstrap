@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import React from 'react';
 
 import { createBootstrapComponent } from './ThemeProvider';
@@ -24,7 +24,7 @@ const propTypes = {
    * since it's so commonly used here.
    */
   muted: PropTypes.bool,
-  as: elementType,
+  as: PropTypes.elementType,
 };
 
 const defaultProps = {

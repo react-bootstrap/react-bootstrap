@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
 import { createBootstrapComponent } from './ThemeProvider';
 
@@ -34,7 +33,7 @@ class Col extends React.Component {
      */
     bsPrefix: PropTypes.string,
 
-    as: elementType,
+    as: PropTypes.elementType,
 
     /**
      * The number of columns to span on extra small devices (<576px)

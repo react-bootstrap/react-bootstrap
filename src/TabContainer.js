@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 import uncontrollable from 'uncontrollable';
 
 import TabContext from './TabContext';
@@ -40,7 +39,10 @@ class TabContainer extends React.Component {
      * @type {{Transition | false}}
      * @default {Fade}
      */
-    transition: PropTypes.oneOfType([PropTypes.oneOf([false]), elementType]),
+    transition: PropTypes.oneOfType([
+      PropTypes.oneOf([false]),
+      PropTypes.elementType,
+    ]),
     /**
      * Wait until the first "enter" transition to mount tabs (add them to the DOM)
      */

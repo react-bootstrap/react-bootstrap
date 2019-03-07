@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
 import mapContextToProps from 'react-context-toolbox/mapContextToProps';
 import { createBootstrapComponent } from './ThemeProvider';
@@ -17,7 +16,7 @@ class TabPane extends React.Component {
      */
     bsPrefix: PropTypes.string,
 
-    as: elementType,
+    as: PropTypes.elementType,
 
     /**
      * A key that associates the `TabPane` with it's controlling `NavLink`.
@@ -35,7 +34,7 @@ class TabPane extends React.Component {
      * `true` to enable the default `<Fade>` animation or
      * a react-transition-group v2 `<Transition/>` component.
      */
-    transition: PropTypes.oneOfType([PropTypes.bool, elementType]),
+    transition: PropTypes.oneOfType([PropTypes.bool, PropTypes.elementType]),
 
     /**
      *

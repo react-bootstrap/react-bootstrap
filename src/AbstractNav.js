@@ -1,7 +1,7 @@
 import React from 'react';
 import qsa from 'dom-helpers/query/querySelectorAll';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import mapContextToProps from 'react-context-toolbox/mapContextToProps';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import NavContext from './NavContext';
@@ -13,10 +13,18 @@ class AbstractNav extends React.Component {
   static propTypes = {
     onSelect: PropTypes.func.isRequired,
 
-    as: elementType,
+    as: PropTypes.elementType,
 
     /** @private */
     onKeyDown: PropTypes.func,
+    /** @private */
+    parentOnSelect: PropTypes.func,
+    /** @private */
+    getControlledId: PropTypes.func,
+    /** @private */
+    getControllerId: PropTypes.func,
+    /** @private */
+    activeKey: PropTypes.any,
   };
 
   static defaultProps = {

@@ -64,7 +64,7 @@ export default class ${upperFirst(
   static propTypes = {
     /** @default ${prefixNode.raw} */
     bsPrefix: PropTypes.string.isRequired,
-    as: elementType,
+    as: PropTypes.elementType,
   }
   static defaultProps = {
     as: ${type}

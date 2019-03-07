@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import mapContextToProps from 'react-context-toolbox/mapContextToProps';
-import { elementType } from 'prop-types-extra';
+
 import BaseDropdown from 'react-overlays/Dropdown';
 
 import chain from './utils/createChainedFunction';
@@ -21,7 +21,7 @@ const propTypes = {
    */
   drop: PropTypes.oneOf(['up', 'left', 'right', 'down']),
 
-  as: elementType,
+  as: PropTypes.elementType,
 
   /**
    * Align the menu to the right side of the Dropdown toggle
@@ -69,6 +69,16 @@ const propTypes = {
    */
   onSelect: PropTypes.func,
 
+  /**
+   * Controls the focus behavior for when the Dropdown is opened. Set to
+   * `true` to always focus the first menu item, `keyboard` to focus only when
+   * navigating via the keyboard, or `false` to disable completely
+   *
+   * The Default behavior is `false` **unless** the Menu has a `role="menu"`
+   * where it will default to `keyboard` to match the recommended [ARIA Authoring practices](https://www.w3.org/TR/wai-aria-practices-1.1/#menubutton).
+   */
+  focusFirstItemOnShow: PropTypes.oneOf([false, true, 'keyboard']),
+
   /** @private */
   navbar: PropTypes.bool,
 };
@@ -97,8 +107,9 @@ class Dropdown extends React.Component {
       drop,
       show,
       className,
-      as: Component,
       alignRight,
+      focusFirstItemOnShow,
+      as: Component,
       onSelect: _1,
       onToggle: _3,
       navbar: _4,
@@ -114,6 +125,7 @@ class Dropdown extends React.Component {
           show={show}
           alignEnd={alignRight}
           onToggle={this.handleToggle}
+          focusFirstItemOnShow={focusFirstItemOnShow}
           itemSelector={`.${bsPrefix}-item:not(.disabled):not(:disabled)`}
         >
           {({ props: dropdownProps }) => (

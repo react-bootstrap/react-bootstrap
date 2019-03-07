@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
 import createWithBsPrefix from './utils/createWithBsPrefix';
 import { createBootstrapComponent } from './ThemeProvider';
@@ -38,7 +37,7 @@ const propTypes = {
    * toggle any validation styles on the forms elements.
    */
   validated: PropTypes.bool,
-  as: elementType,
+  as: PropTypes.elementType,
 };
 
 const defaultProps = {

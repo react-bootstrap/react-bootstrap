@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import React from 'react';
 
 import SafeAnchor from './SafeAnchor';
@@ -47,10 +47,10 @@ const propTypes = {
   eventKey: PropTypes.any,
 
   /** @default 'a' */
-  as: elementType,
+  as: PropTypes.elementType,
 
   /** @private */
-  onClick: PropTypes.func,
+  innerRef: PropTypes.any,
 };
 
 const defaultProps = {

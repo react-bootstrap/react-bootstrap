@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import uncontrollable from 'uncontrollable';
 import divWithClassName from './utils/divWithClassName';
 
@@ -55,7 +55,7 @@ class Alert extends React.Component {
     closeLabel: PropTypes.string,
 
     /** A `react-transition-group` Transition component used to animate the Alert on dismissal. */
-    transition: elementType,
+    transition: PropTypes.elementType,
   };
 
   static defaultProps = {

@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { elementType } from 'prop-types-extra';
 
 import { createBootstrapComponent } from './ThemeProvider';
 
 const propTypes = {
-  as: elementType,
+  as: PropTypes.elementType,
   /** Make the jumbotron full width, and without rounded corners */
   fluid: PropTypes.bool,
   /** @default 'jumbotron' */

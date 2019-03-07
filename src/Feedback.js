@@ -2,8 +2,6 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { elementType } from 'prop-types-extra';
-
 class Feedback extends React.Component {
   static propTypes = {
     /**
@@ -12,7 +10,7 @@ class Feedback extends React.Component {
      * @type {('valid'|'invalid')}
      */
     type: PropTypes.string.isRequired,
-    as: elementType,
+    as: PropTypes.elementType,
   };
 
   static defaultProps = {
