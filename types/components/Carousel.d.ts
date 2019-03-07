@@ -3,7 +3,7 @@ import * as React from 'react';
 import CarouselItem from './CarouselItem';
 import CarouselCaption from './CarouselCaption';
 
-import { ReplaceProps, SelectCallback } from './helpers';
+import { ReplaceProps, SelectCallback, BsPrefixComponent } from './helpers';
 
 export interface CarouselProps {
   bsPrefix?: string;
@@ -24,9 +24,9 @@ export interface CarouselProps {
   nextLabel?: string;
 }
 
-declare class Carousel extends React.Component<
-  ReplaceProps<'div', CarouselProps>
-> {
+declare class Carousel<
+  As extends React.ReactType = 'div'
+> extends BsPrefixComponent<As, CarouselProps> {
   static Item: typeof CarouselItem;
   static Caption: typeof CarouselCaption;
 }

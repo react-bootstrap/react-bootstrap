@@ -134,7 +134,7 @@
     "invariant": "^2.2.3",
     "keycode": "^2.1.2",
     "popper.js": "^1.14.6",
-    "prop-types": "^15.6.2",
+    "prop-types": "^15.7.2",
     "prop-types-extra": "^1.1.0",
     "react-context-toolbox": "^2.0.2",
     "react-overlays": "^1.0.0",
