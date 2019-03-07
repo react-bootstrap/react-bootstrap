@@ -2,36 +2,36 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import BreadcrumbItem from './BreadcrumbItem';
 
-class Breadcrumb extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'breadcrumb'
-     */
-    bsPrefix: PropTypes.string,
-    /**
-     * ARIA label for the nav element
-     * https://www.w3.org/TR/wai-aria-practices/#breadcrumb
-     */
-    label: PropTypes.string,
-    /**
-     * Additional props passed as-is to the underlying `<ul>` element
-     */
-    listProps: PropTypes.object,
+const propTypes = {
+  /**
+   * @default 'breadcrumb'
+   */
+  bsPrefix: PropTypes.string,
+  /**
+   * ARIA label for the nav element
+   * https://www.w3.org/TR/wai-aria-practices/#breadcrumb
+   */
+  label: PropTypes.string,
+  /**
+   * Additional props passed as-is to the underlying `<ul>` element
+   */
+  listProps: PropTypes.object,
 
-    as: PropTypes.elementType,
-  };
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    label: 'breadcrumb',
-    listProps: {},
-    as: 'nav',
-  };
+const defaultProps = {
+  label: 'breadcrumb',
+  listProps: {},
+  as: 'nav',
+};
 
-  render() {
-    const {
+const Breadcrumb = React.forwardRef(
+  (
+    {
       bsPrefix,
       className,
       listProps,
@@ -39,22 +39,25 @@ class Breadcrumb extends React.Component {
       label,
       as: Component,
       ...props
-    } = this.props;
+    },
+    ref,
+  ) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'breadcrumb');
 
     return (
-      <Component aria-label={label} className={className} {...props}>
-        <ol
-          {...listProps}
-          className={classNames(bsPrefix, listProps.className)}
-        >
+      <Component aria-label={label} className={className} ref={ref} {...props}>
+        <ol {...listProps} className={classNames(prefix, listProps.className)}>
           {children}
         </ol>
       </Component>
     );
-  }
-}
+  },
+);
 
-const DecoratedBreadcrumb = createBootstrapComponent(Breadcrumb, 'breadcrumb');
-DecoratedBreadcrumb.Item = BreadcrumbItem;
+Breadcrumb.displayName = 'Breadcrumb';
+Breadcrumb.propTypes = propTypes;
+Breadcrumb.defaultProps = defaultProps;
 
-export default DecoratedBreadcrumb;
+Breadcrumb.Item = BreadcrumbItem;
+
+export default Breadcrumb;

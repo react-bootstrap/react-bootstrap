@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import FormContext from './FormContext';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /**
@@ -27,36 +26,37 @@ const propTypes = {
    * @type {ReactRef}
    * @alias ref
    */
-  innerRef: PropTypes.any,
+  _ref: PropTypes.any,
 };
 
 const defaultProps = {
   as: 'div',
 };
 
-function FormGroup({
-  bsPrefix,
-  innerRef,
-  className,
-  children,
-  controlId,
-  as: Component,
-  ...props
-}) {
-  return (
-    <FormContext.Provider value={{ controlId }}>
-      <Component
-        {...props}
-        ref={innerRef}
-        className={classNames(className, bsPrefix)}
-      >
-        {children}
-      </Component>
-    </FormContext.Provider>
-  );
-}
+const FormGroup = React.forwardRef(
+  (
+    { bsPrefix, className, children, controlId, as: Component, ...props },
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-group');
+    const context = useMemo(() => ({ controlId }), [controlId]);
 
+    return (
+      <FormContext.Provider value={context}>
+        <Component
+          {...props}
+          ref={ref}
+          className={classNames(className, bsPrefix)}
+        >
+          {children}
+        </Component>
+      </FormContext.Provider>
+    );
+  },
+);
+
+FormGroup.displayName = 'FormGroup';
 FormGroup.propTypes = propTypes;
 FormGroup.defaultProps = defaultProps;
 
-export default createBootstrapComponent(FormGroup, 'form-group');
+export default FormGroup;

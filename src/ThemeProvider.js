@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
-import forwardRef from 'react-context-toolbox/forwardRef';
-import React from 'react';
+import forwardRef from '@restart/context/forwardRef';
+import React, { useContext } from 'react';
 
-const { Provider, Consumer } = React.createContext(new Map());
+const ThemeContext = React.createContext(new Map());
+const { Consumer, Provider } = ThemeContext;
 
 class ThemeProvider extends React.Component {
   static propTypes = {
@@ -20,6 +21,11 @@ class ThemeProvider extends React.Component {
   render() {
     return <Provider value={this.prefixes}>{this.props.children}</Provider>;
   }
+}
+
+export function useBootstrapPrefix(prefix, defaultPrefix) {
+  const prefixes = useContext(ThemeContext);
+  return prefix || prefixes.get(defaultPrefix) || defaultPrefix;
 }
 
 function createBootstrapComponent(Component, opts) {

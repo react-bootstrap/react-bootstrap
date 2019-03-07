@@ -2,32 +2,33 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Feedback extends React.Component {
-  static propTypes = {
-    /**
-     * Specify whether the feedback is for valid or invalid fields
-     *
-     * @type {('valid'|'invalid')}
-     */
-    type: PropTypes.string.isRequired,
-    as: PropTypes.elementType,
-  };
+const propTypes = {
+  /**
+   * Specify whether the feedback is for valid or invalid fields
+   *
+   * @type {('valid'|'invalid')}
+   */
+  type: PropTypes.string.isRequired,
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    type: 'valid',
-    as: 'div',
-  };
+const defaultProps = {
+  type: 'valid',
+  as: 'div',
+};
 
-  render() {
-    const { as: Component, className, type, ...props } = this.props;
+const Feedback = React.forwardRef(
+  ({ as: Component, className, type, ...props }, ref) => (
+    <Component
+      {...props}
+      ref={ref}
+      className={classNames(className, type && `${type}-feedback`)}
+    />
+  ),
+);
 
-    return (
-      <Component
-        {...props}
-        className={classNames(className, type && `${type}-feedback`)}
-      />
-    );
-  }
-}
+Feedback.displayName = 'Feedback';
+Feedback.propTypes = propTypes;
+Feedback.defaultProps = defaultProps;
 
 export default Feedback;

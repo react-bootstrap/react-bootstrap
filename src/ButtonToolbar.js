@@ -2,31 +2,37 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-class ButtonToolbar extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'btn-toolbar'
-     */
-    bsPrefix: PropTypes.string,
+const propTypes = {
+  /**
+   * @default 'btn-toolbar'
+   */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * The ARIA role describing the button toolbar. Generally the default
-     * "toolbar" role is correct. An `aria-label` or `aria-labelledby`
-     * prop is also recommended.
-     */
-    role: PropTypes.string,
-  };
+  /**
+   * The ARIA role describing the button toolbar. Generally the default
+   * "toolbar" role is correct. An `aria-label` or `aria-labelledby`
+   * prop is also recommended.
+   */
+  role: PropTypes.string,
+};
 
-  static defaultProps = {
-    role: 'toolbar',
-  };
+const defaultProps = {
+  role: 'toolbar',
+};
 
-  render() {
-    const { bsPrefix, className, ...props } = this.props;
-    return <div {...props} className={classNames(className, bsPrefix)} />;
-  }
-}
+const ButtonToolbar = React.forwardRef(
+  ({ bsPrefix, className, ...props }, ref) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'btn-toolbar');
 
-export default createBootstrapComponent(ButtonToolbar, 'btn-toolbar');
+    return (
+      <div {...props} ref={ref} className={classNames(className, prefix)} />
+    );
+  },
+);
+
+ButtonToolbar.displayName = 'ButtonToolbar';
+ButtonToolbar.propTypes = propTypes;
+ButtonToolbar.defaultProps = defaultProps;
+export default ButtonToolbar;

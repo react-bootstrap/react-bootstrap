@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import mapContextToProps from 'react-context-toolbox/mapContextToProps';
+import mapContextToProps from '@restart/context/mapContextToProps';
 import { css } from 'astroturf';
 
 import { TocContext } from './Toc';

@@ -1,12 +1,11 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import mapContextToProps from 'react-context-toolbox/mapContextToProps';
-
 import BaseDropdown from 'react-overlays/Dropdown';
+import useUncontrolled from 'uncontrollable/hook';
+import useEventCallback from '@restart/hooks/useEventCallback';
 
-import chain from './utils/createChainedFunction';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import DropdownMenu from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
 import DropdownItem from './DropdownItem';
@@ -88,91 +87,80 @@ const defaultProps = {
   navbar: false,
 };
 
-class Dropdown extends React.Component {
-  handleSelect = (key, event) => {
-    if (this.props.onSelect) this.props.onSelect(key, event);
+const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
+  const {
+    bsPrefix,
+    drop,
+    show,
+    className,
+    alignRight,
+    onSelect,
+    onToggle,
+    focusFirstItemOnShow,
+    as: Component,
+    navbar: _4,
+    ...props
+  } = useUncontrolled(uncontrolledProps, { show: 'onToggle' });
 
-    this.handleToggle(false, event, 'select');
-  };
+  const onSelectCtx = useContext(SelectableContext);
+  const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
 
-  handleToggle = (show, event, source = event.type) => {
-    if (event.currentTarget === document) source = 'rootClose';
+  const handleToggle = useEventCallback(
+    (nextShow, event, source = event.type) => {
+      if (event.currentTarget === document) source = 'rootClose';
+      onToggle(nextShow, event, { source });
+    },
+  );
 
-    this.props.onToggle(show, event, { source });
-  };
+  const handleSelect = useEventCallback((key, event) => {
+    if (onSelectCtx) onSelectCtx(key, event);
+    if (onSelect) onSelect(key, event);
+    handleToggle(false, event, 'select');
+  });
 
-  render() {
-    const {
-      bsPrefix,
-      drop,
-      show,
-      className,
-      alignRight,
-      focusFirstItemOnShow,
-      as: Component,
-      onSelect: _1,
-      onToggle: _3,
-      navbar: _4,
-      ...props
-    } = this.props;
+  return (
+    <SelectableContext.Provider value={handleSelect}>
+      <BaseDropdown.ControlledComponent
+        drop={drop}
+        show={show}
+        alignEnd={alignRight}
+        onToggle={handleToggle}
+        focusFirstItemOnShow={focusFirstItemOnShow}
+        itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
+      >
+        {({ props: dropdownProps }) => (
+          <Component
+            {...props}
+            {...dropdownProps}
+            ref={ref}
+            className={classNames(
+              className,
+              show && 'show',
+              (!drop || drop === 'down') && prefix,
+              drop === 'up' && 'dropup',
+              drop === 'right' && 'dropright',
+              drop === 'left' && 'dropleft',
+            )}
+          />
+        )}
+      </BaseDropdown.ControlledComponent>
+    </SelectableContext.Provider>
+  );
+});
 
-    delete props.onToggle;
-
-    return (
-      <SelectableContext.Provider value={this.handleSelect}>
-        <BaseDropdown.ControlledComponent
-          drop={drop}
-          show={show}
-          alignEnd={alignRight}
-          onToggle={this.handleToggle}
-          focusFirstItemOnShow={focusFirstItemOnShow}
-          itemSelector={`.${bsPrefix}-item:not(.disabled):not(:disabled)`}
-        >
-          {({ props: dropdownProps }) => (
-            <Component
-              {...props}
-              {...dropdownProps}
-              className={classNames(
-                className,
-                show && 'show',
-                (!drop || drop === 'down') && bsPrefix,
-                drop === 'up' && 'dropup',
-                drop === 'right' && 'dropright',
-                drop === 'left' && 'dropleft',
-              )}
-            />
-          )}
-        </BaseDropdown.ControlledComponent>
-      </SelectableContext.Provider>
-    );
-  }
-}
-
+Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = propTypes;
 Dropdown.defaultProps = defaultProps;
 
-const UncontrolledDropdown = createBootstrapComponent(
-  BaseDropdown.deferControlTo(Dropdown),
-  'dropdown',
-);
+Dropdown.Toggle = DropdownToggle;
+Dropdown.Menu = DropdownMenu;
+Dropdown.Item = DropdownItem;
 
-const DecoratedDropdown = mapContextToProps(
-  SelectableContext,
-  (onSelect, props) => ({
-    onSelect: chain(props.onSelect, onSelect),
-  }),
-  UncontrolledDropdown,
-);
-
-DecoratedDropdown.Toggle = DropdownToggle;
-DecoratedDropdown.Menu = DropdownMenu;
-DecoratedDropdown.Item = DropdownItem;
-
-DecoratedDropdown.Header = createWithBsPrefix('dropdown-header', {
+Dropdown.Header = createWithBsPrefix('dropdown-header', {
   defaultProps: { role: 'heading' },
 });
-DecoratedDropdown.Divider = createWithBsPrefix('dropdown-divider', {
+Dropdown.Divider = createWithBsPrefix('dropdown-divider', {
   defaultProps: { role: 'separator' },
 });
 
-export default DecoratedDropdown;
+export default Dropdown;

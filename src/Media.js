@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import createWithBsPrefix from './utils/createWithBsPrefix';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /**
    * @default 'media'
    */
-  bsPrefix: PropTypes.string.isRequired,
+  bsPrefix: PropTypes.string,
 
   as: PropTypes.elementType,
 };
@@ -18,19 +18,23 @@ const defaultProps = {
   as: 'div',
 };
 
-class Media extends React.Component {
-  render() {
-    const { bsPrefix, className, as: Component, ...props } = this.props;
+const Media = React.forwardRef(
+  ({ bsPrefix, className, as: Component, ...props }, ref) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'media');
+    return (
+      <Component
+        {...props}
+        ref={ref}
+        className={classNames(className, prefix)}
+      />
+    );
+  },
+);
 
-    return <Component {...props} className={classNames(className, bsPrefix)} />;
-  }
-}
-
+Media.displayName = 'Media';
 Media.propTypes = propTypes;
 Media.defaultProps = defaultProps;
 
-const DecoratedMedia = createBootstrapComponent(Media, 'media');
+Media.Body = createWithBsPrefix('media-body');
 
-DecoratedMedia.Body = createWithBsPrefix('media-body');
-
-export default DecoratedMedia;
+export default Media;

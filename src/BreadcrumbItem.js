@@ -3,49 +3,50 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SafeAnchor from './SafeAnchor';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-class BreadcrumbItem extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'breadcrumb-item'
-     */
-    bsPrefix: PropTypes.string,
-    /**
-     * Adds a visual "active" state to a Breadcrumb
-     * Item and disables the link.
-     */
-    active: PropTypes.bool,
-    /**
-     * `href` attribute for the inner `a` element
-     */
-    href: PropTypes.string,
-    /**
-     * `title` attribute for the inner `a` element
-     */
-    title: PropTypes.node,
-    /**
-     * `target` attribute for the inner `a` element
-     */
-    target: PropTypes.string,
+const propTypes = {
+  /**
+   * @default 'breadcrumb-item'
+   */
+  bsPrefix: PropTypes.string,
+  /**
+   * Adds a visual "active" state to a Breadcrumb
+   * Item and disables the link.
+   */
+  active: PropTypes.bool,
+  /**
+   * `href` attribute for the inner `a` element
+   */
+  href: PropTypes.string,
+  /**
+   * `title` attribute for the inner `a` element
+   */
+  title: PropTypes.node,
+  /**
+   * `target` attribute for the inner `a` element
+   */
+  target: PropTypes.string,
 
-    as: PropTypes.elementType,
-  };
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    active: false,
-    as: 'li',
-  };
+const defaultProps = {
+  active: false,
+  as: 'li',
+};
 
-  render() {
-    const { bsPrefix, active, className, as: Component, ...props } = this.props;
+const BreadcrumbItem = React.forwardRef(
+  ({ bsPrefix, active, className, as: Component, ...props }, ref) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'breadcrumb-item');
 
     const { href, title, target, ...elementProps } = props;
     const linkProps = { href, title, target };
 
     return (
       <Component
-        className={classNames(bsPrefix, className, { active })}
+        ref={ref}
+        className={classNames(prefix, className, { active })}
         aria-current={active ? 'page' : undefined}
       >
         {active ? (
@@ -55,7 +56,11 @@ class BreadcrumbItem extends React.Component {
         )}
       </Component>
     );
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(BreadcrumbItem, 'breadcrumb-item');
+BreadcrumbItem.displayName = 'BreadcrumbItem';
+BreadcrumbItem.propTypes = propTypes;
+BreadcrumbItem.defaultProps = defaultProps;
+
+export default BreadcrumbItem;
