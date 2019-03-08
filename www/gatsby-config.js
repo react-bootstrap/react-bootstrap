@@ -1,6 +1,6 @@
 const path = require('path');
 const remarkSlug = require('remark-slug');
-const { cleanDoclets } = require('gatsby-transformer-react-docgen/Doclets');
+const { cleanDoclets } = require('gatsby-transformer-react-docgen/doclets');
 const defaultDescriptions = require('./src/defaultPropDescriptions');
 
 module.exports = {
