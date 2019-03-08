@@ -7,4 +7,4 @@
       <Form.Control placeholder="Last name" />
     </Col>
   </Row>
-</Form>;
+</Form>
