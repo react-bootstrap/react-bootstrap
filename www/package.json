@@ -28,7 +28,7 @@
     "gatsby-plugin-sass": "^2.0.10",
     "gatsby-remark-prismjs": "^3.2.4",
     "gatsby-source-filesystem": "2.0.20",
-    "gatsby-transformer-react-docgen": "^3.0.5",
+    "gatsby-transformer-react-docgen": "npm:@monastic.panic/gatsby-transformer-react-docgen@4.0.0-4",
     "gatsby-transformer-remark": "^2.2.4",
     "gh-pages": "^2.0.1",
     "holderjs": "^2.9.6",
@@ -42,7 +42,7 @@
     "prop-types": "^15.6.0",
     "react": "^16.8.1",
     "react-context-toolbox": "^2.0.2",
-    "react-docgen": "3.0.0",
+    "react-docgen": "^4.1.0",
     "react-dom": "^16.8.1",
     "react-helmet": "^5.2.0",
     "react-live": "^1.12.0",
@@ -50,9 +50,6 @@
     "remark-slug": "^5.1.1",
     "shakespeare-data": "^3.0.0",
     "yup": "^0.26.10"
-  },
-  "resolutions": {
-    "react-docgen": "3.0.0"
   },
   "importSort": {
     ".js": {

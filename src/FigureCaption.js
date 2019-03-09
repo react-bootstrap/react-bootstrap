@@ -1,5 +1,7 @@
 import createWithBsPrefix from './utils/createWithBsPrefix';
 
-export default createWithBsPrefix('figure-caption', {
+const FigureCaption = createWithBsPrefix('figure-caption', {
   Component: 'figcaption',
 });
+
+export default FigureCaption;
