@@ -4690,10 +4690,10 @@ gatsby-source-filesystem@2.0.20:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
-"gatsby-transformer-react-docgen@npm:@monastic.panic/gatsby-transformer-react-docgen@4.0.0-4":
-  version "4.0.0-4"
-  resolved "https://registry.yarnpkg.com/@monastic.panic/gatsby-transformer-react-docgen/-/gatsby-transformer-react-docgen-4.0.0-4.tgz#3995e67b9335eec3304c013390c6ae1c742bad79"
-  integrity sha512-0gxAer7WJBdR+265SvbZueFX7jzkVt9WUaqOwqxuipzrm3ueVZrdi8Gda8J2fXNEf+zYsEVlSlH8Kn+SW36+Jg==
+"gatsby-transformer-react-docgen@npm:@monastic.panic/gatsby-transformer-react-docgen@4.0.0-5":
+  version "4.0.0-5"
+  resolved "https://registry.yarnpkg.com/@monastic.panic/gatsby-transformer-react-docgen/-/gatsby-transformer-react-docgen-4.0.0-5.tgz#ad022901d5a35871daca0f7d3998a115528f0b1f"
+  integrity sha512-GQHckLk0tbU53MOFoMpg+qe1ART3wyDDGqN9sVCCDlz22U3rVv+10b0dheeYK3xpVnRqQvBKSjt+3fbKBCDwIQ==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/runtime" "^7.0.0"

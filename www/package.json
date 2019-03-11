@@ -28,7 +28,7 @@
     "gatsby-plugin-sass": "^2.0.10",
     "gatsby-remark-prismjs": "^3.2.4",
     "gatsby-source-filesystem": "2.0.20",
-    "gatsby-transformer-react-docgen": "npm:@monastic.panic/gatsby-transformer-react-docgen@4.0.0-4",
+    "gatsby-transformer-react-docgen": "npm:@monastic.panic/gatsby-transformer-react-docgen@4.0.0-5",
     "gatsby-transformer-remark": "^2.2.4",
     "gh-pages": "^2.0.1",
     "holderjs": "^2.9.6",
