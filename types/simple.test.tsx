@@ -27,6 +27,7 @@ import {
   Tooltip,
   Pagination,
   ProgressBar,
+  Spinner,
   Tabs,
   Tab,
   ToggleButtonGroup,
@@ -286,6 +287,18 @@ import {
 >
   <Button variant="secondary">Tooltip on left</Button>
 </OverlayTrigger>;
+
+<Spinner
+  as="span"
+  animation="border"
+  variant="primary"
+  size="sm"
+  role="state"
+/>;
+
+<Spinner animation="grow">
+  <span>Something Inside</span>
+</Spinner>;
 
 <Pagination>
   <Pagination.First />

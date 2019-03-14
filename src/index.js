@@ -53,6 +53,7 @@ export ProgressBar from './ProgressBar';
 export ResponsiveEmbed from './ResponsiveEmbed';
 export Row from './Row';
 export SafeAnchor from './SafeAnchor';
+export Spinner from './Spinner';
 export SplitButton from './SplitButton';
 export Tab from './Tab';
 export TabContainer from './TabContainer';

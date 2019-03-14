@@ -76,6 +76,7 @@ export { default as ProgressBar, ProgressBarProps } from './ProgressBar';
 export { default as ResponsiveEmbed, ResponsiveEmbedProps } from './ResponsiveEmbed';
 export { default as Row, RowProps } from './Row';
 export { default as SafeAnchor, SafeAnchorProps } from './SafeAnchor';
+export { default as Spinner, SpinnerProps } from './Spinner';
 export { default as SplitButton, SplitButtonProps } from './SplitButton';
 export { default as Tab, TabProps } from './Tab';
 export { default as TabContainer, TabContainerProps } from './TabContainer';

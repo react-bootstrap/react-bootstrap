@@ -1,0 +1,83 @@
+import { graphql } from 'gatsby';
+
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+import SpinnerBasic from '../../examples/Spinner/Basic';
+import SpinnerBorder from '../../examples/Spinner/Border';
+import SpinnerGrow from '../../examples/Spinner/Grow';
+import SpinnerVariants from '../../examples/Spinner/Variants';
+import SpinnerSizes from '../../examples/Spinner/Sizes';
+import SpinnerButtons from '../../examples/Spinner/Buttons';
+
+
+# Spinners
+
+Spinners can be used to show the loading state in your projects.
+Spinners can be used as a
+
+<ReactPlayground codeText={SpinnerBasic} />
+
+## Animations
+
+Bootstrap offers two animation styles for spinners. The animation style
+can be configured with the `animation` property. An animation style
+must always be provided when creating a spinner.
+
+** Border Spinner - `border`**
+
+<ReactPlayground codeText={SpinnerBorder} />
+
+** Grow Spinner - `grow` **
+
+<ReactPlayground codeText={SpinnerGrow} />
+
+## Variants
+
+All standard visual variants are available for both animation styles by
+setting the `variant` property. Alternatively spinners can be custom
+sized with the `style` property, or custom CSS classes.
+
+<ReactPlayground codeText={SpinnerVariants} />
+
+## Sizing
+
+In addition to the standard size, a smaller additional preconfigured
+size is available by configuring the `size` property to `sm`.
+
+<ReactPlayground codeText={SpinnerSizes} />
+
+## Buttons
+
+Like the original Bootstrap spinners, these can also be used with
+buttons. To use this component out-of-the-box it is recommended you
+change the element type to `span` by configuring the `as` property when
+using spinners inside buttons.
+
+<ReactPlayground codeText={SpinnerButtons} />
+
+## Accessibility
+
+To ensure the maximum accessibility for spinner components it is
+recommended you provide a relevant ARIA `role` property,
+and include screenreader-only readable text representation of the
+spinner's meaning inside the component using Bootstrap's `sr-only`
+class.
+
+The example below provides an example of accessible usage of this
+ component.
+
+<ReactPlayground codeText={SpinnerBasic} />
+
+## API
+
+<ComponentApi metadata={props.data.metadata} />
+
+
+export const query = graphql`
+  query Spinner {
+    metadata: componentMetadata(displayName: { eq: "Spinner" }) {
+      displayName
+      ...ComponentApi_metadata
+    }
+  }
+`;
