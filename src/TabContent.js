@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { elementType } from 'prop-types-extra';
 
 import { createBootstrapComponent } from './ThemeProvider';
 
@@ -12,7 +11,7 @@ class TabContent extends React.Component {
      */
     bsPrefix: PropTypes.string,
 
-    as: elementType,
+    as: PropTypes.elementType,
   };
 
   static defaultProps = {

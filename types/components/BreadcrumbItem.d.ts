@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface BreadcrumbItemProps {
+export interface BreadcrumbItemProps {
   active?: boolean;
   href?: string;
   target?: string;

@@ -9,6 +9,8 @@ module.exports = (ast, recast) => {
     types: { namedTypes: types },
   } = recast;
 
+  let components = resolver.findAllComponentDefinitions(ast, recast);
+
   const getComment = path => {
     let searchPath = path;
     while (searchPath && !types.Statement.check(searchPath.node)) {
@@ -23,8 +25,6 @@ module.exports = (ast, recast) => {
     if (comment) comment = `/${comment}*/`;
     return comment;
   };
-
-  let components = resolver.findAllComponentDefinitions(ast, recast);
 
   recast.visit(ast, {
     visitCallExpression(path) {
@@ -64,7 +64,7 @@ export default class ${upperFirst(
   static propTypes = {
     /** @default ${prefixNode.raw} */
     bsPrefix: PropTypes.string.isRequired,
-    as: elementType,
+    as: PropTypes.elementType,
   }
   static defaultProps = {
     as: ${type}

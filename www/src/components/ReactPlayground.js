@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import * as ReactBootstrap from 'react-bootstrap';
 import * as formik from 'formik';
-import yup from 'yup';
+import * as yup from 'yup';
 import {
   LiveProvider,
   LiveEditor,

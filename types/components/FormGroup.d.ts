@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface FormGroupProps {
+export interface FormGroupProps {
   innerRef?: React.LegacyRef<this>;
   controlId?: string;
 }

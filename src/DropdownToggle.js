@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import { elementType } from 'prop-types-extra';
+
 import BaseDropdownToggle from 'react-overlays/DropdownToggle';
 import React from 'react';
 
@@ -31,7 +31,7 @@ class DropdownToggle extends React.Component {
 
     split: PropTypes.bool,
 
-    as: elementType,
+    as: PropTypes.elementType,
 
     /**
      * to passthrough to the underlying button or whatever from DropdownButton
@@ -55,6 +55,10 @@ class DropdownToggle extends React.Component {
       ...props
     } = this.props;
 
+    if (childBsPrefix !== undefined) {
+      props.bsPrefix = childBsPrefix;
+    }
+
     // This intentionally forwards size and variant (if set) to the
     // underlying component, to allow it to render size and style variants.
     return (
@@ -62,7 +66,6 @@ class DropdownToggle extends React.Component {
         {({ toggle, props: toggleProps }) => (
           <Component
             onClick={toggle}
-            bsPrefix={childBsPrefix}
             className={classNames(
               className,
               bsPrefix,
@@ -79,4 +82,5 @@ class DropdownToggle extends React.Component {
   }
 }
 
+// Needs to be a class FTM, because it needs to accept a ref that can be used with findDOMNode
 export default createBootstrapComponent(DropdownToggle, 'dropdown-toggle');

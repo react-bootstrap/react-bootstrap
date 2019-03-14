@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
 import AbstractNavItem from './AbstractNavItem';
 import { makeEventKey } from './SelectableContext';
@@ -40,7 +39,12 @@ class ListGroupItem extends React.Component {
      *
      * @default {'div' | 'a' | 'button'}
      */
-    as: elementType,
+    as: PropTypes.elementType,
+
+    /** @private */
+    eventKey: PropTypes.any,
+    /** @private */
+    onClick: PropTypes.func,
   };
 
   static defaultProps = {

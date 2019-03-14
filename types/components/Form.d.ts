@@ -12,7 +12,7 @@ declare class FormRow<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As> {}
 
-interface FormProps {
+export interface FormProps {
   innerRef?: React.LegacyRef<this>;
   inline?: boolean;
   validated?: boolean;

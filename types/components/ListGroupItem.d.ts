@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface ListGroupItemProps {
+export interface ListGroupItemProps {
   action?: boolean;
   active?: boolean;
   disabled?: boolean;

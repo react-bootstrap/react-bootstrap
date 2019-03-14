@@ -15,7 +15,7 @@ const libRoot = path.join(__dirname, '../lib');
 const distRoot = path.join(libRoot, 'dist');
 const esRoot = path.join(libRoot, 'es');
 
-const clean = () => fse.existsSync(libRoot) && fse.remove(libRoot);
+const clean = () => fse.existsSync(libRoot) && fse.removeSync(libRoot);
 
 const step = (name, root, fn) => async () => {
   console.log(cyan('Building: ') + green(name));
@@ -75,15 +75,13 @@ console.log(
   green(`Building targets: ${targets.length ? targets.join(', ') : 'all'}\n`),
 );
 
-clean()
-  .then(() =>
-    Promise.all([
-      has('lib') && buildLib(),
-      has('es') && buildEsm(),
-      has('dist') && buildDist(),
-    ]),
-  )
-  .catch(err => {
-    if (err) console.error(red(err.stack || err.toString()));
-    process.exit(1);
-  });
+clean();
+
+Promise.all([
+  has('lib') && buildLib(),
+  has('es') && buildEsm(),
+  has('dist') && buildDist(),
+]).catch(err => {
+  if (err) console.error(red(err.stack || err.toString()));
+  process.exit(1);
+});

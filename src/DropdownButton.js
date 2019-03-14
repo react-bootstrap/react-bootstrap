@@ -49,9 +49,9 @@ const propTypes = {
  * the Button `variant`, `size` and `bsPrefix` props are passed to the toggle,
  * along with menu related props are passed to the `Dropdown.Menu`
  */
-class DropdownButton extends React.Component {
-  render() {
-    const {
+const DropdownButton = React.forwardRef(
+  (
+    {
       title,
       children,
       bsPrefix,
@@ -63,28 +63,28 @@ class DropdownButton extends React.Component {
       href,
       id,
       ...props
-    } = this.props;
+    },
+    ref,
+  ) => (
+    <Dropdown ref={ref} {...props}>
+      <Dropdown.Toggle
+        id={id}
+        href={href}
+        size={size}
+        variant={variant}
+        disabled={disabled}
+        childBsPrefix={bsPrefix}
+      >
+        {title}
+      </Dropdown.Toggle>
+      <Dropdown.Menu role={menuRole} rootCloseEvent={rootCloseEvent}>
+        {children}
+      </Dropdown.Menu>
+    </Dropdown>
+  ),
+);
 
-    return (
-      <Dropdown {...props}>
-        <Dropdown.Toggle
-          id={id}
-          href={href}
-          size={size}
-          variant={variant}
-          disabled={disabled}
-          childBsPrefix={bsPrefix}
-        >
-          {title}
-        </Dropdown.Toggle>
-        <Dropdown.Menu role={menuRole} rootCloseEvent={rootCloseEvent}>
-          {children}
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  }
-}
-
+DropdownButton.displayName = 'DropdownButton';
 DropdownButton.propTypes = propTypes;
 
 export default DropdownButton;

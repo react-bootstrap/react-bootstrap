@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface SafeAnchorProps {
+export interface SafeAnchorProps {
   href?: string;
   onClick?: React.MouseEventHandler<this>;
   onKeyDown?: React.KeyboardEventHandler<this>;

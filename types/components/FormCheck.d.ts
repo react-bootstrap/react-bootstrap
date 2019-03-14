@@ -5,7 +5,7 @@ import FormCheckLabel from './FormCheckLabel';
 
 import { BsPrefixComponent } from './helpers';
 
-interface FormCheckProps {
+export interface FormCheckProps {
   innerRef?: React.LegacyRef<this>;
   id?: string;
   inline?: boolean;

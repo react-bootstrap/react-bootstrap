@@ -2,10 +2,10 @@ import * as React from 'react';
 
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
-interface DropdownMenuProps {
+export interface DropdownMenuProps {
   show?: true;
   flip?: true;
-  alightRight?: true;
+  alignRight?: true;
   onSelect?: SelectCallback;
   rootCloseEvent?: 'click' | 'mousedown';
   popperConfig?: object;

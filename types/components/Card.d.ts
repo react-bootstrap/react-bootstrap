@@ -36,7 +36,7 @@ declare class CardImgOverlay<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As> {}
 
-interface CardProps {
+export interface CardProps {
   bg?:
     | 'primary'
     | 'secondary'

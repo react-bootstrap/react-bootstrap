@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TransitionCallbacks } from './helpers';
 
-interface FadeProps
+export interface FadeProps
   extends TransitionCallbacks,
     React.ClassAttributes<Fade> {
   in?: boolean;

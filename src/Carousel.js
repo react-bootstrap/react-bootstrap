@@ -22,6 +22,7 @@ const propTypes = {
    * @default 'carousel'
    */
   bsPrefix: PropTypes.string,
+  as: PropTypes.elementType,
 
   /**
    * Enables animation on the Carousel as it transitions between slides.
@@ -101,6 +102,7 @@ const propTypes = {
 };
 
 const defaultProps = {
+  as: 'div',
   slide: true,
   fade: false,
   interval: 5000,
@@ -167,7 +169,7 @@ class Carousel extends React.Component {
   }
 
   componentDidUpdate(_, prevState) {
-    const { bsPrefix, slide } = this.props;
+    const { bsPrefix, slide, onSlideEnd } = this.props;
     if (
       !slide ||
       this.state.activeIndex === prevState.activeIndex ||
@@ -204,12 +206,15 @@ class Carousel extends React.Component {
             currentClasses: classNames(orderClassName, directionalClassName),
           },
           () =>
-            transition.end(nextElement, () =>
+            transition.end(nextElement, () => {
               this.safeSetState(
                 { prevClasses: '', currentClasses: 'active' },
                 this.handleSlideEnd,
-              ),
-            ),
+              );
+              if (onSlideEnd) {
+                onSlideEnd();
+              }
+            }),
         );
       },
     );
@@ -418,6 +423,7 @@ class Carousel extends React.Component {
 
   render() {
     const {
+      as: Component,
       bsPrefix,
       slide,
       fade,
@@ -448,7 +454,7 @@ class Carousel extends React.Component {
 
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-      <div
+      <Component
         {...props}
         className={classNames(
           className,
@@ -488,7 +494,7 @@ class Carousel extends React.Component {
             nextIcon,
             nextLabel,
           })}
-      </div>
+      </Component>
     );
   }
 }

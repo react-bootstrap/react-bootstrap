@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-interface ThemeProviderProps {
+export interface ThemeProviderProps {
   prefixes: object;
 }
 

@@ -128,6 +128,7 @@ const components = [
   'pagination',
   'popovers',
   'progress',
+  'spinners',
   'table',
   'tabs',
   'tooltips',

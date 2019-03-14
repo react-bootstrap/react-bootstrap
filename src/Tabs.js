@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import requiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import uncontrollable from 'uncontrollable';
 
@@ -38,7 +38,10 @@ const propTypes = {
    * @type {Transition | false}
    * @default {Fade}
    */
-  transition: PropTypes.oneOfType([PropTypes.oneOf([false]), elementType]),
+  transition: PropTypes.oneOfType([
+    PropTypes.oneOf([false]),
+    PropTypes.elementType,
+  ]),
 
   /**
    * HTML id attribute, required if no `generateChildId` prop

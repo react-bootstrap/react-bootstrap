@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
-import forwardRef from 'react-context-toolbox/forwardRef';
-import React from 'react';
+import forwardRef from '@restart/context/forwardRef';
+import React, { useContext } from 'react';
 
-const { Provider, Consumer } = React.createContext(new Map());
+const ThemeContext = React.createContext(new Map());
+const { Consumer, Provider } = ThemeContext;
 
 class ThemeProvider extends React.Component {
   static propTypes = {
@@ -22,6 +23,11 @@ class ThemeProvider extends React.Component {
   }
 }
 
+export function useBootstrapPrefix(prefix, defaultPrefix) {
+  const prefixes = useContext(ThemeContext);
+  return prefix || prefixes.get(defaultPrefix) || defaultPrefix;
+}
+
 function createBootstrapComponent(Component, opts) {
   if (typeof opts === 'string') opts = { prefix: opts };
   const isClassy = Component.prototype && Component.prototype.isReactComponent;
@@ -36,6 +42,7 @@ function createBootstrapComponent(Component, opts) {
           {prefixes => (
             <Component
               {...props}
+              // eslint-disable-next-line react/prop-types
               bsPrefix={props.bsPrefix || prefixes.get(prefix) || prefix}
             />
           )}

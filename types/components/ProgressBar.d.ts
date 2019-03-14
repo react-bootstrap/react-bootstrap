@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-interface ProgressBarProps {
+export interface ProgressBarProps {
   min?: number;
   now?: number;
   max?: number;
