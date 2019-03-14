@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
+import useEventCallback from '@restart/hooks/useEventCallback';
 
-import { createBootstrapComponent } from './ThemeProvider';
-import createChainedFunction from './utils/createChainedFunction';
+import { useBootstrapPrefix } from './ThemeProvider';
 import CloseButton from './CloseButton';
 import ModalContext from './ModalContext';
 
@@ -35,9 +35,9 @@ const defaultProps = {
   closeButton: false,
 };
 
-class ModalHeader extends React.Component {
-  render() {
-    const {
+const ModalHeader = React.forwardRef(
+  (
+    {
       bsPrefix,
       closeLabel,
       closeButton,
@@ -45,31 +45,32 @@ class ModalHeader extends React.Component {
       className,
       children,
       ...props
-    } = this.props;
+    },
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'modal-header');
+
+    const context = useContext(ModalContext);
+
+    const handleClick = useEventCallback(() => {
+      if (context) context.onHide();
+      if (onHide) onHide();
+    });
 
     return (
-      <ModalContext.Consumer>
-        {context => (
-          <div {...props} className={classNames(className, bsPrefix)}>
-            {children}
+      <div ref={ref} {...props} className={classNames(className, bsPrefix)}>
+        {children}
 
-            {closeButton && (
-              <CloseButton
-                label={closeLabel}
-                onClick={createChainedFunction(
-                  context && context.onHide,
-                  onHide,
-                )}
-              />
-            )}
-          </div>
+        {closeButton && (
+          <CloseButton label={closeLabel} onClick={handleClick} />
         )}
-      </ModalContext.Consumer>
+      </div>
     );
-  }
-}
+  },
+);
 
+ModalHeader.displayName = 'ModalHeader';
 ModalHeader.propTypes = propTypes;
 ModalHeader.defaultProps = defaultProps;
 
-export default createBootstrapComponent(ModalHeader, 'modal-header');
+export default ModalHeader;

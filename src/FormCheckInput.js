@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import FormContext from './FormContext';
 
 const propTypes = {
@@ -28,49 +28,41 @@ const propTypes = {
 
   /** Manually style the input as invalid */
   isInvalid: PropTypes.bool.isRequired,
-
-  /**
-   * @private
-   */
-  innerRef: PropTypes.any,
 };
 
 const defaultProps = {
   type: 'checkbox',
 };
 
-function FormCheckInput({
-  id,
-  bsPrefix,
-  className,
-  isValid,
-  isInvalid,
-  innerRef,
-  isStatic,
-  ...props
-}) {
-  return (
-    <FormContext.Consumer>
-      {({ controlId, custom }) => (
-        <input
-          {...props}
-          ref={innerRef}
-          id={id || controlId}
-          className={classNames(
-            className,
-            !custom && bsPrefix,
-            custom && 'custom-control-input',
-            isValid && 'is-valid',
-            isInvalid && 'is-invalid',
-            isStatic && 'position-static',
-          )}
-        />
-      )}
-    </FormContext.Consumer>
-  );
-}
+const FormCheckInput = React.forwardRef(
+  (
+    { id, bsPrefix, className, isValid, isInvalid, isStatic, ...props },
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check-input');
 
+    const { controlId, custom } = useContext(FormContext);
+
+    return (
+      <input
+        {...props}
+        ref={ref}
+        id={id || controlId}
+        className={classNames(
+          className,
+          !custom && bsPrefix,
+          custom && 'custom-control-input',
+          isValid && 'is-valid',
+          isInvalid && 'is-invalid',
+          isStatic && 'position-static',
+        )}
+      />
+    );
+  },
+);
+
+FormCheckInput.displayName = 'FormCheckInput';
 FormCheckInput.propTypes = propTypes;
 FormCheckInput.defaultProps = defaultProps;
 
-export default createBootstrapComponent(FormCheckInput, 'form-check-input');
+export default FormCheckInput;

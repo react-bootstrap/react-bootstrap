@@ -2,40 +2,41 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-class NavItem extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'nav-item'
-     */
-    bsPrefix: PropTypes.string,
+const propTypes = {
+  /**
+   * @default 'nav-item'
+   */
+  bsPrefix: PropTypes.string,
 
-    /** The ARIA role of the component */
-    role: PropTypes.string,
+  /** The ARIA role of the component */
+  role: PropTypes.string,
 
-    as: PropTypes.elementType,
-  };
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    as: 'div',
-  };
+const defaultProps = {
+  as: 'div',
+};
 
-  render() {
-    const {
-      bsPrefix,
-      className,
-      children,
-      as: Component,
-      ...props
-    } = this.props;
-
+const NavItem = React.forwardRef(
+  ({ bsPrefix, className, children, as: Component, ...props }, ref) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-item');
     return (
-      <Component {...props} className={classNames(className, bsPrefix)}>
+      <Component
+        {...props}
+        ref={ref}
+        className={classNames(className, bsPrefix)}
+      >
         {children}
       </Component>
     );
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(NavItem, 'nav-item');
+NavItem.displayName = 'NavItem';
+NavItem.propTypes = propTypes;
+NavItem.defaultProps = defaultProps;
+
+export default NavItem;

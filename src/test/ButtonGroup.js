@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { elementType } from 'prop-types-extra';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix } from '../ThemeProvider';
 
 const propTypes = {
   /**
@@ -34,7 +35,7 @@ const propTypes = {
    */
   role: PropTypes.string,
 
-  as: PropTypes.elementType,
+  as: elementType,
 };
 
 const defaultProps = {

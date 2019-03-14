@@ -2,91 +2,81 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import SafeAnchor from './SafeAnchor';
 
-class Button extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'btn'
-     */
-    bsPrefix: PropTypes.string,
+const propTypes = {
+  /**
+   * @default 'btn'
+   */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * One or more button variant combinations
-     *
-     * buttons may be one of a variety of visual variants such as:
-     *
-     * `'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light', 'link'`
-     *
-     * as well as "outline" versions (prefixed by 'outline-*')
-     *
-     * `'outline-primary', 'outline-secondary', 'outline-success', 'outline-danger', 'outline-warning', 'outline-info', 'outline-dark', 'outline-light'`
-     */
-    variant: PropTypes.string,
+  /**
+   * One or more button variant combinations
+   *
+   * buttons may be one of a variety of visual variants such as:
+   *
+   * `'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark', 'light', 'link'`
+   *
+   * as well as "outline" versions (prefixed by 'outline-*')
+   *
+   * `'outline-primary', 'outline-secondary', 'outline-success', 'outline-danger', 'outline-warning', 'outline-info', 'outline-dark', 'outline-light'`
+   */
+  variant: PropTypes.string,
 
-    /**
-     * Specifies a large or small button.
-     *
-     * @type ('sm'|'lg')
-     */
-    size: PropTypes.string,
+  /**
+   * Specifies a large or small button.
+   *
+   * @type ('sm'|'lg')
+   */
+  size: PropTypes.string,
 
-    /** Spans the full width of the Button parent */
-    block: PropTypes.bool,
+  /** Spans the full width of the Button parent */
+  block: PropTypes.bool,
 
-    /** Manually set the visual state of the button to `:active` */
-    active: PropTypes.bool,
+  /** Manually set the visual state of the button to `:active` */
+  active: PropTypes.bool,
 
-    /**
-     * Disables the Button, preventing mouse events,
-     * even if the underlying component is an `<a>` element
-     */
-    disabled: PropTypes.bool,
+  /**
+   * Disables the Button, preventing mouse events,
+   * even if the underlying component is an `<a>` element
+   */
+  disabled: PropTypes.bool,
 
-    /** Providing a `href` will render an `<a>` element, _styled_ as a button. */
-    href: PropTypes.string,
+  /** Providing a `href` will render an `<a>` element, _styled_ as a button. */
+  href: PropTypes.string,
 
-    /**
-     * Defines HTML button type attribute.
-     *
-     * @default 'button'
-     */
-    type: PropTypes.oneOf(['button', 'reset', 'submit', null]),
+  /**
+   * Defines HTML button type attribute.
+   *
+   * @default 'button'
+   */
+  type: PropTypes.oneOf(['button', 'reset', 'submit', null]),
 
-    as: PropTypes.elementType,
-    /** @private */
-    innerRef: PropTypes.any,
-  };
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    variant: 'primary',
-    active: false,
-    disabled: false,
-    type: 'button',
-  };
+const defaultProps = {
+  variant: 'primary',
+  active: false,
+  disabled: false,
+  type: 'button',
+};
 
-  render() {
-    const {
-      bsPrefix,
-      variant,
-      size,
-      active,
-      className,
-      block,
-      type,
-      as,
-      innerRef,
-      ...props
-    } = this.props;
+const Button = React.forwardRef(
+  (
+    { bsPrefix, variant, size, active, className, block, type, as, ...props },
+    ref,
+  ) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'btn');
 
     const classes = classNames(
       className,
-      bsPrefix,
+      prefix,
       active && 'active',
-      `${bsPrefix}-${variant}`,
-      block && `${bsPrefix}-block`,
-      size && `${bsPrefix}-${size}`,
+      `${prefix}-${variant}`,
+      block && `${prefix}-block`,
+      size && `${prefix}-${size}`,
     );
 
     if (props.href) {
@@ -94,20 +84,21 @@ class Button extends React.Component {
         <SafeAnchor
           {...props}
           as={as}
-          innerRef={innerRef}
+          innerRef={ref}
           className={classNames(classes, props.disabled && 'disabled')}
         />
       );
     }
 
     const Component = as || 'button';
-    if (innerRef) props.ref = innerRef;
+    if (ref) props.ref = ref;
 
     return <Component {...props} type={type} className={classes} />;
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(Button, {
-  prefix: 'btn',
-  forwardRefAs: 'innerRef',
-});
+Button.displayName = 'Button';
+Button.propTypes = propTypes;
+Button.defaultProps = defaultProps;
+
+export default Button;

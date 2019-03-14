@@ -1,12 +1,11 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import warning from 'warning';
 
-import mapContextToProps from 'react-context-toolbox/mapContextToProps';
 import Col from './Col';
 import FormContext from './FormContext';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /**
@@ -33,7 +32,7 @@ const propTypes = {
    * @type {ReactRef}
    * @alias ref
    */
-  innerRef: PropTypes.any,
+  _ref: PropTypes.any,
 
   /**
    * Hides the label visually while still allowing it to be
@@ -47,42 +46,39 @@ const defaultProps = {
   srOnly: false,
 };
 
-function FormLabel({
-  bsPrefix,
-  column,
-  srOnly,
-  className,
-  innerRef,
-  ...props
-}) {
-  const classes = classNames(
-    className,
-    bsPrefix,
-    srOnly && 'sr-only',
-    column && 'col-form-label',
-  );
+const FormLabel = React.forwardRef(
+  ({ bsPrefix, column, srOnly, className, htmlFor, ...props }, ref) => {
+    const { controlId } = useContext(FormContext);
 
-  if (column) return <Col {...props} className={classes} as="label" />;
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-label');
 
-  // eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control
-  return <label {...props} ref={innerRef} className={classes} />;
-}
+    const classes = classNames(
+      className,
+      bsPrefix,
+      srOnly && 'sr-only',
+      column && 'col-form-label',
+    );
 
+    if (column) return <Col {...props} className={classes} as="label" />;
+
+    warning(
+      controlId == null || !htmlFor,
+      '`controlId` is ignored on `<FormLabel>` when `htmlFor` is specified.',
+    );
+    return (
+      // eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control
+      <label
+        {...props}
+        htmlFor={htmlFor || controlId}
+        ref={ref}
+        className={classes}
+      />
+    );
+  },
+);
+
+FormLabel.displayName = 'FormLabel';
 FormLabel.propTypes = propTypes;
 FormLabel.defaultProps = defaultProps;
 
-const mapContext = ({ controlId }, { htmlFor }) => {
-  warning(
-    controlId == null || !htmlFor,
-    '`controlId` is ignored on `<FormLabel>` when `htmlFor` is specified.',
-  );
-  return {
-    htmlFor: htmlFor || controlId,
-  };
-};
-
-export default mapContextToProps(
-  FormContext,
-  mapContext,
-  createBootstrapComponent(FormLabel, 'form-label'),
-);
+export default FormLabel;

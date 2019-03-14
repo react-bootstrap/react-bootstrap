@@ -10,6 +10,10 @@ import Table from 'react-bootstrap/Table';
 
 import styled from 'astroturf';
 
+function getDoclet(doclets = [], tag) {
+  return doclets.find(d => d.tag === tag);
+}
+
 const Code = styled('code')`
   white-space: nowrap;
 `;
@@ -34,11 +38,15 @@ function getDisplayTypeName(typeName) {
 
   return typeName;
 }
+
 function getTypeName(prop) {
   const type = prop.type || {};
-  let name = getDisplayTypeName(type.name);
-  let doclets = prop.doclets || {};
-  if (name === 'custom') return cleanDocletValue(doclets.type || type.raw);
+  const name = getDisplayTypeName(type.name);
+
+  if (name === 'custom') {
+    const dType = getDoclet(prop.doclets, 'type');
+    return cleanDocletValue((dType && dType.value) || type.raw);
+  }
   return name;
 }
 
@@ -50,7 +58,7 @@ class PropTable extends React.Component {
   getType(prop) {
     let type = prop.type || {};
     let name = getDisplayTypeName(type.name);
-    let doclets = prop.doclets || {};
+    const docletType = getDoclet(prop.doclets, 'type');
 
     switch (name) {
       case 'object':
@@ -79,7 +87,7 @@ class PropTable extends React.Component {
       case 'enum':
         return this.renderEnum(type);
       case 'custom':
-        return cleanDocletValue(doclets.type || type.raw);
+        return cleanDocletValue((docletType && docletType.value) || type.raw);
       default:
         return name;
     }
@@ -92,6 +100,7 @@ class PropTable extends React.Component {
       )
       .map(propData => {
         const { name, description, doclets } = propData;
+        const deprecated = getDoclet(doclets, 'deprecated');
         let descHtml = description && description.childMarkdownRemark.html;
 
         return (
@@ -106,10 +115,10 @@ class PropTable extends React.Component {
             <td>{this.renderDefaultValue(propData)}</td>
 
             <td>
-              {doclets.deprecated && (
+              {!!deprecated && (
                 <div className="mb-1">
                   <strong className="text-danger">
-                    {`Deprecated: ${doclets.deprecated} `}
+                    {`Deprecated: ${deprecated.value} `}
                   </strong>
                 </div>
               )}
@@ -130,8 +139,8 @@ class PropTable extends React.Component {
   }
 
   renderControllableNote(prop, propName) {
-    let controllable = prop.doclets.controllable;
-    let isHandler = getDisplayTypeName(prop.type.name) === 'function';
+    const controllable = getDoclet(prop.doclets, 'controllable');
+    const isHandler = getDisplayTypeName(prop.type.name) === 'function';
 
     if (!controllable) {
       return false;
@@ -139,11 +148,11 @@ class PropTable extends React.Component {
 
     let text = isHandler ? (
       <span>
-        controls <code>{controllable}</code>
+        controls <code>{controllable.value}</code>
       </span>
     ) : (
       <span>
-        controlled by: <Code>{controllable}</Code>, initial prop:{' '}
+        controlled by: <Code>{controllable.value}</Code>, initial prop:{' '}
         <Code>{`default${capitalize(propName)}`}</Code>
       </span>
     );

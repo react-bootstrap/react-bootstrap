@@ -129,6 +129,8 @@
   "dependencies": {
     "@babel/runtime": "^7.3.4",
     "@react-bootstrap/react-popper": "1.2.1",
+    "@restart/context": "^2.1.2",
+    "@restart/hooks": "^0.1.1",
     "classnames": "^2.2.6",
     "dom-helpers": "^3.4.0",
     "invariant": "^2.2.3",
@@ -136,7 +138,6 @@
     "popper.js": "^1.14.7",
     "prop-types": "^15.7.2",
     "prop-types-extra": "^1.1.0",
-    "react-context-toolbox": "^2.0.2",
     "react-overlays": "^1.2.0",
     "react-transition-group": "^2.6.0",
     "uncontrollable": "^6.1.0",

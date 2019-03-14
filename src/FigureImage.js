@@ -4,39 +4,41 @@ import React from 'react';
 
 import Image from './Image';
 
-class FigureImage extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'img'
-     */
-    bsPrefix: PropTypes.string,
-    /**
-     * Sets image as fluid image.
-     */
-    fluid: PropTypes.bool,
+const propTypes = {
+  /**
+   * @default 'img'
+   */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * Sets image shape as rounded.
-     */
-    rounded: PropTypes.bool,
+  /**
+   * Sets image as fluid image.
+   */
+  fluid: PropTypes.bool,
 
-    /**
-     * Sets image shape as circle.
-     */
-    roundedCircle: PropTypes.bool,
+  /**
+   * Sets image shape as rounded.
+   */
+  rounded: PropTypes.bool,
 
-    /**
-     * Sets image shape as thumbnail.
-     */
-    thumbnail: PropTypes.bool,
-  };
+  /**
+   * Sets image shape as circle.
+   */
+  roundedCircle: PropTypes.bool,
 
-  static defaultProps = { fluid: true };
+  /**
+   * Sets image shape as thumbnail.
+   */
+  thumbnail: PropTypes.bool,
+};
 
-  render() {
-    const { className, ...props } = this.props;
-    return <Image {...props} className={classNames(className, 'figure-img')} />;
-  }
-}
+const defaultProps = { fluid: true };
+
+const FigureImage = React.forwardRef(({ className, ...props }, ref) => (
+  <Image ref={ref} {...props} className={classNames(className, 'figure-img')} />
+));
+
+FigureImage.displayName = 'FigureImage';
+FigureImage.propTypes = propTypes;
+FigureImage.defaultProps = defaultProps;
 
 export default FigureImage;

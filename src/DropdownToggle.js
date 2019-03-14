@@ -82,4 +82,5 @@ class DropdownToggle extends React.Component {
   }
 }
 
+// Needs to be a class FTM, because it needs to accept a ref that can be used with findDOMNode
 export default createBootstrapComponent(DropdownToggle, 'dropdown-toggle');

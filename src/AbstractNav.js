@@ -2,7 +2,7 @@ import React from 'react';
 import qsa from 'dom-helpers/query/querySelectorAll';
 import PropTypes from 'prop-types';
 
-import mapContextToProps from 'react-context-toolbox/mapContextToProps';
+import mapContextToProps from '@restart/context/mapContextToProps';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import NavContext from './NavContext';
 import TabContext from './TabContext';
