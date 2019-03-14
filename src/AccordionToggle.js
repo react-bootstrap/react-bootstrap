@@ -59,10 +59,11 @@ class AccordionToggle extends React.Component {
                   if (child.props && child.props.type === 'button') {
                     // grab the old click
                     let givenClick = child.props.onClick;
-                    child.props.onClick = () => {
+                    let newOnClick = () => {
                       this.accordionContextOnClick(eventKey);
                       if (givenClick) givenClick(eventKey);
                     };
+                    return React.cloneElement(child, { onClick: newOnClick });
                   }
                   return child;
                 })}
