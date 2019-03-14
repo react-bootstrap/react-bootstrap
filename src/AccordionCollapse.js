@@ -1,37 +1,36 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Collapse from './Collapse';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionContext from './AccordionContext';
 
-class AccordionCollapse extends React.Component {
-  static propTypes = {
-    /** @default 'accordion-collapse' */
-    bsPrefix: PropTypes.string,
-    /**
-     * A key that corresponds to the toggler that triggers this collapse's expand or collapse.
-     */
-    eventKey: PropTypes.string.isRequired,
-  };
+const propTypes = {
+  /** @default 'accordion-collapse' */
+  bsPrefix: PropTypes.string,
+  /**
+   * A key that corresponds to the toggler that triggers this collapse's expand or collapse.
+   */
+  eventKey: PropTypes.string.isRequired,
+};
 
-  render() {
-    const { bsPrefix, children, className, eventKey, ...props } = this.props;
+const AccordionCollapse = React.forwardRef(
+  ({ bsPrefix, children, className, eventKey, ...props }, ref) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion-collapse');
+
+    const context = useContext(AccordionContext);
 
     return (
-      <AccordionContext.Consumer>
-        {context => (
-          <Collapse in={context.activeEventKey === eventKey} {...props}>
-            <div className={classNames(className, bsPrefix)}>{children}</div>
-          </Collapse>
-        )}
-      </AccordionContext.Consumer>
+      <Collapse in={context.activeEventKey === eventKey} {...props}>
+        <div ref={ref} className={classNames(className, bsPrefix)}>
+          {children}
+        </div>
+      </Collapse>
     );
-  }
-}
-
-export default createBootstrapComponent(
-  AccordionCollapse,
-  'accordion-collapse',
+  },
 );
+
+AccordionCollapse.propTypes = propTypes;
+
+export default AccordionCollapse;
