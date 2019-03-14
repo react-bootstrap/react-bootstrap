@@ -29,13 +29,12 @@ class AccordionToggle extends React.Component {
   };
 
   static defaultProps = {
-    as: 'button',
+    as: 'div',
   };
 
-  handleClick = () => {
-    this.accordionContextOnClick(this.props.eventKey);
-    if (this.props.onClick) this.props.onClick(this.props.eventKey);
-  };
+  // handleClick = () => {
+  //   this.accordionContextOnClick(this.props.eventKey);
+  // };
 
   render() {
     const {
@@ -47,19 +46,26 @@ class AccordionToggle extends React.Component {
       ...props
     } = this.props;
 
-    if (Component === 'button') props.type = 'button';
+    // if (Component === 'button') props.type = 'button';
 
     return (
       <AccordionContext.Consumer>
         {context => {
           this.accordionContextOnClick = context.onClick.bind(this);
           return (
-            <Component
-              {...props}
-              onClick={() => this.handleClick(eventKey)}
-              className={classNames(className, bsPrefix)}
-            >
-              {children}
+            <Component {...props} className={classNames(className, bsPrefix)}>
+              {children &&
+                React.Children.map(children, child => {
+                  if (child.props && child.props.type === 'button') {
+                    // grab the old click
+                    let givenClick = child.props.onClick;
+                    child.props.onClick = () => {
+                      this.accordionContextOnClick(eventKey);
+                      if (givenClick) givenClick(eventKey);
+                    };
+                  }
+                  return child;
+                })}
             </Component>
           );
         }}

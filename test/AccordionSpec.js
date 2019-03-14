@@ -60,13 +60,21 @@ describe('<Accordion>', () => {
       <Accordion>
         <Card>
           <Card.Header>
-            <Accordion.Toggle eventKey="0" onClick={onClickSpy} />
+            <Accordion.Toggle eventKey="0">
+              <button type="button" onClick={onClickSpy}>
+                click me!
+              </button>
+            </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0" />
         </Card>
         <Card>
           <Card.Header>
-            <Accordion.Toggle eventKey="1" onClick={onClickSpy} />
+            <Accordion.Toggle eventKey="1">
+              <button type="button" onClick={onClickSpy}>
+                click me!
+              </button>
+            </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="1" />
         </Card>
@@ -74,9 +82,9 @@ describe('<Accordion>', () => {
     )
       .find('.accordion-toggler')
       .at(0)
+      .find('button')
       .simulate('click');
 
     expect(onClickSpy).to.be.calledOnce;
-    expect(onClickSpy).to.be.calledWith('0');
   });
 });
