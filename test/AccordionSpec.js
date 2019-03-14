@@ -86,5 +86,6 @@ describe('<Accordion>', () => {
       .simulate('click');
 
     expect(onClickSpy).to.be.calledOnce;
+    expect(onClickSpy).to.be.calledWith('0');
   });
 });
