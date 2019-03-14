@@ -2,9 +2,12 @@
   <Card>
     <Card.Header>
       <Accordion.Toggle eventKey="0">
-        <Button onClick={key => console.log(`I've been clicked by : ${key}`)}>
+        <button
+          type="button"
+          onClick={key => console.log(`I've been clicked by : ${key}`)}
+        >
           Click me!
-        </Button>
+        </button>
       </Accordion.Toggle>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
@@ -14,9 +17,12 @@
   <Card>
     <Card.Header>
       <Accordion.Toggle eventKey="1">
-        <Button onClick={key => console.log(`I've been clicked by : ${key}`)}>
+        <button
+          type="button"
+          onClick={key => console.log(`I've been clicked by : ${key}`)}
+        >
           Click me!
-        </Button>
+        </button>
       </Accordion.Toggle>
     </Card.Header>
     <Accordion.Collapse eventKey="1">
