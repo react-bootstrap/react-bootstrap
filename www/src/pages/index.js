@@ -170,7 +170,7 @@ export default withLayout(
                   function of each component.
                 </p>
                 <p>
-                  Each component is implemented with accessibilty in mind. The
+                  Each component is implemented with accessibility in mind. The
                   result is a set of accessible-by-default components, over what
                   is possible from plain Bootstrap.
                 </p>
