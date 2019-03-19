@@ -17,6 +17,7 @@ export Col from './Col';
 export Collapse from './Collapse';
 export Dropdown from './Dropdown';
 export DropdownButton from './DropdownButton';
+export DropdownItem from './DropdownItem';
 export Fade from './Fade';
 
 export Form from './Form';
