@@ -37,16 +37,13 @@ function createBootstrapComponent(Component, opts) {
   return forwardRef(
     ({ ...props }, ref) => {
       props[forwardRefAs] = ref;
+      const prefixes = useContext(ThemeContext);
       return (
-        <Consumer>
-          {prefixes => (
-            <Component
-              {...props}
-              // eslint-disable-next-line react/prop-types
-              bsPrefix={props.bsPrefix || prefixes.get(prefix) || prefix}
-            />
-          )}
-        </Consumer>
+        <Component
+          {...props}
+          // eslint-disable-next-line react/prop-types
+          bsPrefix={props.bsPrefix || prefixes.get(prefix) || prefix}
+        />
       );
     },
     { displayName: `Bootstrap(${Component.displayName || Component.name})` },
