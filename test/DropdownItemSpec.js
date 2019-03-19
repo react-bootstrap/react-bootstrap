@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 import Button from '../src/Button';
 import Dropdown from '../src/Dropdown';
+import { DropdownItem } from '../src';
 
 describe('<Dropdown.Item>', () => {
   it('renders divider', () => {
@@ -142,5 +143,11 @@ describe('<Dropdown.Item>', () => {
       .getDOMNode();
 
     assert.equal(anchor.getAttribute('target'), '_blank');
+  });
+});
+
+describe('<DropdownItem />', () => {
+  it('is the alias of Dropdown.Item', () => {
+    assert.equal(DropdownItem, Dropdown.Item);
   });
 });
