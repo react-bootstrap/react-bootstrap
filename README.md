@@ -12,6 +12,9 @@ See the [documentation][documentation] with live editable examples and API docum
 
 To find the documentation for the latest Bootstrap 3 compatible release, [go here](https://5c507d49471426000887a6a7--react-bootstrap.netlify.com/).
 
+#### Component collection
+[Explore components](https://bit.dev/react-bootstrap/react-bootstrap), play with examples and install individually.
+
 ### Migrating from Bootstrap 3 to Bootstrap 4
 
 If you would like to update React-Bootstrap within an existing project to use Bootstrap 4, please read our docs for **[migrating to React-Bootstrap V1](https://react-bootstrap.github.io/migrating/)**.
