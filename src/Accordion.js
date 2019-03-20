@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionContext from './AccordionContext';
 import AccordionToggle from './AccordionToggle';
@@ -10,7 +9,7 @@ import AccordionCollapse from './AccordionCollapse';
 
 const propTypes = {
   /** Set a custom element for this component. */
-  as: elementType,
+  as: PropTypes.elementType,
 
   /** @default 'accordion' */
   bsPrefix: PropTypes.string,

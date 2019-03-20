@@ -80,9 +80,8 @@ describe('<Accordion>', () => {
         </Card>
       </Accordion>,
     )
-      .find('.accordion-toggler')
-      .at(0)
       .find('button')
+      .at(0)
       .simulate('click');
 
     expect(onClickSpy).to.be.calledOnce;
