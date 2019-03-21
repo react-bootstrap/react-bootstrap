@@ -19,7 +19,6 @@
     "ci-lint": "eslint --rule \"prettier/prettier: 2\"",
     "format": "npm run ci-lint . -- --fix",
     "lint": "npm run ci-lint .",
-    "precommit": "lint-staged",
     "release": "rollout",
     "prepublishOnly": "npm run build",
     "tdd": "karma start",
@@ -29,6 +28,11 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "dtslint": "dtslint types"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.js": [
@@ -103,7 +107,7 @@
     "execa": "^1.0.0",
     "fs-extra": "^7.0.1",
     "husky": "^1.3.1",
-    "karma": "^3.1.4",
+    "karma": "^4.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-cli": "^2.0.0",
     "karma-coverage": "^1.1.2",

@@ -33,6 +33,10 @@ class ListGroupItem extends React.Component {
      */
     disabled: PropTypes.bool,
 
+    eventKey: PropTypes.string,
+
+    onClick: PropTypes.func,
+
     /**
      * You can use a custom element type for this component. For none `action` items, items render as `li`.
      * For actions the default is an achor or button element depending on whether a `href` is provided.
@@ -40,11 +44,6 @@ class ListGroupItem extends React.Component {
      * @default {'div' | 'a' | 'button'}
      */
     as: PropTypes.elementType,
-
-    /** @private */
-    eventKey: PropTypes.any,
-    /** @private */
-    onClick: PropTypes.func,
   };
 
   static defaultProps = {
