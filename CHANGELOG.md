@@ -1,3 +1,42 @@
+# [1.0.0-beta.6](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2019-03-21)
+
+
+### Bug Fixes
+
+* add missing props to Navbar.Collapse ([#3519](https://github.com/react-bootstrap/react-bootstrap/issues/3519)) ([dd75d22](https://github.com/react-bootstrap/react-bootstrap/commit/dd75d22))
+* added 'onSlideEnd' to Carousel (fix: [#3405](https://github.com/react-bootstrap/react-bootstrap/issues/3405)) ([#3515](https://github.com/react-bootstrap/react-bootstrap/issues/3515)) ([b836c9c](https://github.com/react-bootstrap/react-bootstrap/commit/b836c9c))
+* Do not pass through undefined child bsPrefix in Dropdown.Toggle ([#3507](https://github.com/react-bootstrap/react-bootstrap/issues/3507)) ([e7bf8db](https://github.com/react-bootstrap/react-bootstrap/commit/e7bf8db)), closes [#3456](https://github.com/react-bootstrap/react-bootstrap/issues/3456)
+* Fix clean method to return Promise always ([#3501](https://github.com/react-bootstrap/react-bootstrap/issues/3501)) ([6f03223](https://github.com/react-bootstrap/react-bootstrap/commit/6f03223))
+* Fix typo with alignRight prop ([#3488](https://github.com/react-bootstrap/react-bootstrap/issues/3488)) ([08510be](https://github.com/react-bootstrap/react-bootstrap/commit/08510be)), closes [#3487](https://github.com/react-bootstrap/react-bootstrap/issues/3487)
+* fix unmountOnExit prop ([#3498](https://github.com/react-bootstrap/react-bootstrap/issues/3498)) ([e8b24be](https://github.com/react-bootstrap/react-bootstrap/commit/e8b24be))
+* form validation example (fix: [#3485](https://github.com/react-bootstrap/react-bootstrap/issues/3485)) ([#3516](https://github.com/react-bootstrap/react-bootstrap/issues/3516)) ([9b8627f](https://github.com/react-bootstrap/react-bootstrap/commit/9b8627f))
+
+
+### Features
+
+* add scrollable prop to Modal ([#3469](https://github.com/react-bootstrap/react-bootstrap/issues/3469)) ([a7e800e](https://github.com/react-bootstrap/react-bootstrap/commit/a7e800e))
+* add support for Spinners ([#3541](https://github.com/react-bootstrap/react-bootstrap/issues/3541)) ([2adb7c6](https://github.com/react-bootstrap/react-bootstrap/commit/2adb7c6))
+* add support for table-borderless, fixes react-bootstrap/react-bootstrap[#3470](https://github.com/react-bootstrap/react-bootstrap/issues/3470) ([#3473](https://github.com/react-bootstrap/react-bootstrap/issues/3473)) ([22e9316](https://github.com/react-bootstrap/react-bootstrap/commit/22e9316))
+* added 'as' prop to Carousel (fix: [#3509](https://github.com/react-bootstrap/react-bootstrap/issues/3509)) ([#3514](https://github.com/react-bootstrap/react-bootstrap/issues/3514)) ([a25d03c](https://github.com/react-bootstrap/react-bootstrap/commit/a25d03c))
+* support `focusFirstItemOnShow` prop on Dropdowns ([c614940](https://github.com/react-bootstrap/react-bootstrap/commit/c614940))
+
+
+
+# [1.0.0-beta.5](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2019-01-25)
+
+
+### chore
+
+* **build:** clean up build tooling ([e71fa89](https://github.com/react-bootstrap/react-bootstrap/commit/e71fa89))
+
+
+### BREAKING CHANGES
+
+* **build:** remove bower build, use npm
+* **build:** cherry picked imports no longer have to specify `lib` in the import
+
+
+
 # [1.0.0-beta.4](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2019-01-18)
 
 ### Bug Fixes
