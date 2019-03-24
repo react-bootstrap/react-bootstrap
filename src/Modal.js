@@ -175,7 +175,6 @@ const defaultProps = {
   autoFocus: true,
   enforceFocus: true,
   restoreFocus: true,
-  restoreFocusOptions: {},
   animation: true,
   dialogAs: ModalDialog,
   manager: new BootstrapModalManager(),
