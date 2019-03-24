@@ -43,7 +43,7 @@ const ModalDialog = React.forwardRef(
           className,
           size && `${bsPrefix}-${size}`,
           centered && `${dialogClass}-centered`,
-          scrollable && `${bsPrefix}-scrollable`,
+          scrollable && `${dialogClass}-scrollable`,
         )}
       >
         <div className={classNames(`${bsPrefix}-content`)}>{children}</div>
