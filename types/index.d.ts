@@ -18,7 +18,8 @@
 //                 Johann Rakotoharisoa <https://github.com/jrakotoharisoa>
 //                 Andrew Makarov <https://github.com/r3nya>
 //                 Duong Tran <https://github.com/t49tran>
+//                 Bartosz Łaniewski <https://github.com/Bartozzz>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.0
+// TypeScript Version: 3.1
 
 export * from './components';
