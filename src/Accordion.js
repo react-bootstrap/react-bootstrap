@@ -23,42 +23,35 @@ const defaultProps = {
   as: 'div',
 };
 
-const Accordion = React.forwardRef(
-  // ({ as: Component, defaultActiveKey, bsPrefix, children, className, ...props }, ref) => {
-  (props, ref) => {
-    let {
-      as: Component,
-      activeKey,
-      bsPrefix,
-      children,
-      className,
-      onClick,
-      ...controlledProps
-    } = useUncontrolled(props, {
-      activeKey: 'onClick',
-    });
+const Accordion = React.forwardRef((props, ref) => {
+  let {
+    as: Component,
+    activeKey,
+    bsPrefix,
+    children,
+    className,
+    onClick,
+    ...controlledProps
+  } = useUncontrolled(props, {
+    activeKey: 'onClick',
+  });
 
-    // const [openedId, setOpenedId] = useState(activeKey);
+  bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion');
 
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion');
-
-    // const onClick = id => setOpenedId(id);
-
-    return (
-      <AccordionContext.Provider value={{ onClick, activeEventKey: activeKey }}>
-        <SelectableContext.Provider value={null}>
-          <Component
-            ref={ref}
-            {...controlledProps}
-            className={classNames(className, bsPrefix)}
-          >
-            {children}
-          </Component>
-        </SelectableContext.Provider>
-      </AccordionContext.Provider>
-    );
-  },
-);
+  return (
+    <AccordionContext.Provider value={{ onClick, activeEventKey: activeKey }}>
+      <SelectableContext.Provider value={null}>
+        <Component
+          ref={ref}
+          {...controlledProps}
+          className={classNames(className, bsPrefix)}
+        >
+          {children}
+        </Component>
+      </SelectableContext.Provider>
+    </AccordionContext.Provider>
+  );
+});
 
 Accordion.propTypes = propTypes;
 Accordion.defaultProps = defaultProps;
