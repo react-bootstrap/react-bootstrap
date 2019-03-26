@@ -30,7 +30,7 @@ describe('<Accordion>', () => {
 
   it('should only have one card collapsed', () => {
     let wrapper = mount(
-      <Accordion>
+      <Accordion defaultActiveKey="0">
         <Card>
           <Card.Header>
             <Accordion.Toggle eventKey="0" />

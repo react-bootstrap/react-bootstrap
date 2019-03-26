@@ -1,6 +1,7 @@
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import useUncontrolled from 'uncontrollable/hook';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionContext from './AccordionContext';
 import AccordionToggle from './AccordionToggle';
@@ -13,6 +14,9 @@ const propTypes = {
 
   /** @default 'accordion' */
   bsPrefix: PropTypes.string,
+
+  /** Set a default active key for this component to be opened on start */
+  activeKey: PropTypes.string,
 };
 
 const defaultProps = {
@@ -20,19 +24,32 @@ const defaultProps = {
 };
 
 const Accordion = React.forwardRef(
-  ({ as: Component, bsPrefix, children, className, ...props }, ref) => {
+  // ({ as: Component, defaultActiveKey, bsPrefix, children, className, ...props }, ref) => {
+  (props, ref) => {
+    let {
+      as: Component,
+      activeKey,
+      bsPrefix,
+      children,
+      className,
+      onClick,
+      ...controlledProps
+    } = useUncontrolled(props, {
+      activeKey: 'onClick',
+    });
+
+    // const [openedId, setOpenedId] = useState(activeKey);
+
     bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion');
 
-    const [openedId, setOpenedId] = useState('0');
-
-    const onClick = id => setOpenedId(id);
+    // const onClick = id => setOpenedId(id);
 
     return (
-      <AccordionContext.Provider value={{ onClick, activeEventKey: openedId }}>
+      <AccordionContext.Provider value={{ onClick, activeEventKey: activeKey }}>
         <SelectableContext.Provider value={null}>
           <Component
             ref={ref}
-            {...props}
+            {...controlledProps}
             className={classNames(className, bsPrefix)}
           >
             {children}

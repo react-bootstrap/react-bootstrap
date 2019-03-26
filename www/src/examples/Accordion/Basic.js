@@ -1,4 +1,4 @@
-<Accordion>
+<Accordion defaultActiveKey="0">
   <Card>
     <Card.Header>
       <Accordion.Toggle eventKey="0">
