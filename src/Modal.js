@@ -226,7 +226,6 @@ class Modal extends React.Component {
 
   handleEnter = (node, ...args) => {
     if (node) {
-      node.style.display = 'block';
       this.updateDialogStyle(node);
     }
 
@@ -241,7 +240,6 @@ class Modal extends React.Component {
   };
 
   handleExited = (node, ...args) => {
-    if (node) node.style.display = ''; // RHL removes it sometimes
     if (this.props.onExited) this.props.onExited(...args);
 
     // FIXME: This should work even when animation is disabled.
@@ -340,7 +338,7 @@ class Modal extends React.Component {
             onExiting,
             manager,
             ref: this.setModalRef,
-            style: { ...style, ...this.state.style },
+            style: { ...style, display: 'block', ...this.state.style },
             className: classNames(className, bsPrefix),
             containerClassName: `${bsPrefix}-open`,
             transition: animation ? DialogTransition : undefined,
