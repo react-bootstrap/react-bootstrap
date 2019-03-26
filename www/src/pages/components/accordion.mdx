@@ -5,6 +5,7 @@ import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 
 import Basic from '../../examples/Accordion/Basic';
+import AllCollapse from '../../examples/Accordion/AllCollapse';
 
 # Accordion
 
@@ -20,6 +21,12 @@ Use AccordionToggle to provide a button that switches between each AccordionColl
 ### Basic Example
 
 <ReactPlayground codeText={Basic} />
+
+### Fully Collapsed State
+
+If you want your Accordion to start in a fully-collapsed stated, then simply don't pass in a `defaultActiveKey`.
+
+<ReactPlayground codeText={AllCollapse} />
 
 ## API
 
