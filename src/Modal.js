@@ -226,6 +226,7 @@ class Modal extends React.Component {
 
   handleEnter = (node, ...args) => {
     if (node) {
+      node.style.display = 'block';
       this.updateDialogStyle(node);
     }
 
@@ -240,6 +241,7 @@ class Modal extends React.Component {
   };
 
   handleExited = (node, ...args) => {
+    if (node) node.style.display = ''; // RHL removes it sometimes
     if (this.props.onExited) this.props.onExited(...args);
 
     // FIXME: This should work even when animation is disabled.
@@ -318,6 +320,13 @@ class Modal extends React.Component {
     } = this.props;
 
     const clickHandler = backdrop === true ? this.handleClick : null;
+    const baseModalStyle = {
+      ...style,
+      ...this.state.style,
+    };
+
+    // Sets `display` always block when `animation` is false
+    if (!animation) baseModalStyle.display = 'block';
 
     return (
       <ModalContext.Provider value={this.modalContext}>
@@ -338,7 +347,7 @@ class Modal extends React.Component {
             onExiting,
             manager,
             ref: this.setModalRef,
-            style: { ...style, display: 'block', ...this.state.style },
+            style: baseModalStyle,
             className: classNames(className, bsPrefix),
             containerClassName: `${bsPrefix}-open`,
             transition: animation ? DialogTransition : undefined,
