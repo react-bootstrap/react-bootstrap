@@ -13,20 +13,15 @@ const propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-const AccordionCollapse = React.forwardRef((
-  { children, eventKey, ...props } /* ref */,
-) => {
+const AccordionCollapse = ({ children, eventKey, ...props }) => {
   const context = useContext(AccordionContext);
 
   return (
-    <Collapse
-      /* ref={ref} */ in={context.activeEventKey === eventKey}
-      {...props}
-    >
+    <Collapse in={context.activeEventKey === eventKey} {...props}>
       {React.Children.only(children)}
     </Collapse>
   );
-});
+};
 
 AccordionCollapse.propTypes = propTypes;
 
