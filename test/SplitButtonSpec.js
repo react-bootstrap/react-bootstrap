@@ -97,6 +97,14 @@ describe('<SplitButton>', () => {
       .should.equal('Toggle dropdown');
   });
 
+  it('applies alignRight to dropdown menu', () => {
+    mount(
+      <SplitButton title="Title" id="test-id" alignRight>
+        <DropdownItem>Item 1</DropdownItem>
+      </SplitButton>,
+    ).find('.dropdown-menu.dropdown-menu-right');
+  });
+
   it('should set aria-label on toggle from toggleLabel', () => {
     mount(
       <SplitButton title="Title" id="test-id" toggleLabel="Label">

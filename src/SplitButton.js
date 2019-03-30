@@ -34,6 +34,11 @@ class SplitButton extends React.Component {
     /** The content of the non-toggle Button.  */
     title: PropTypes.node.isRequired,
 
+    /**
+     * Align the menu to the right side of the Dropdown toggle
+     */
+    alignRight: PropTypes.bool,
+
     /** Disables both Buttons  */
     disabled: PropTypes.bool,
 
@@ -65,6 +70,7 @@ class SplitButton extends React.Component {
       size,
       variant,
       title,
+      alignRight,
       toggleLabel,
       children,
       onClick,
@@ -99,7 +105,11 @@ class SplitButton extends React.Component {
           <span className="sr-only">{toggleLabel}</span>
         </Dropdown.Toggle>
 
-        <Dropdown.Menu role={menuRole} rootCloseEvent={rootCloseEvent}>
+        <Dropdown.Menu
+          role={menuRole}
+          alignRight={alignRight}
+          rootCloseEvent={rootCloseEvent}
+        >
           {children}
         </Dropdown.Menu>
       </Dropdown>
