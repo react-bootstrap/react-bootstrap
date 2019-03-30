@@ -9,14 +9,17 @@ import SelectableContext from './SelectableContext';
 import AccordionCollapse from './AccordionCollapse';
 
 const propTypes = {
-  /** Set a custom element for this component. */
+  /** Set a custom element for this component */
   as: PropTypes.elementType,
 
   /** @default 'accordion' */
   bsPrefix: PropTypes.string,
 
-  /** Set a default active key for this component to be opened on start */
+  /** The current active key that corresponds to the currently expanded card */
   activeKey: PropTypes.string,
+
+  /** The default active key that is expanded on start */
+  defaultActiveKey: PropTypes.string,
 };
 
 const defaultProps = {

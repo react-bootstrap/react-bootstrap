@@ -9,6 +9,8 @@ const propTypes = {
    * A key that corresponds to the toggler that triggers this collapse's expand or collapse.
    */
   eventKey: PropTypes.string.isRequired,
+
+  children: PropTypes.element.isRequired,
 };
 
 const AccordionCollapse = React.forwardRef(
@@ -16,8 +18,8 @@ const AccordionCollapse = React.forwardRef(
     const context = useContext(AccordionContext);
 
     return (
-      <Collapse in={context.activeEventKey === eventKey} {...props}>
-        <div ref={ref}>{children}</div>
+      <Collapse ref={ref} in={context.activeEventKey === eventKey} {...props}>
+        {React.Children.only(children)}
       </Collapse>
     );
   },

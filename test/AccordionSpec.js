@@ -16,7 +16,9 @@ describe('<Accordion>', () => {
           <Card.Header>
             <Accordion.Toggle eventKey="0" />
           </Card.Header>
-          <Accordion.Collapse eventKey="0" />
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>body text</Card.Body>
+          </Accordion.Collapse>
         </Card>
       </Accordion>,
     );
@@ -35,13 +37,17 @@ describe('<Accordion>', () => {
           <Card.Header>
             <Accordion.Toggle eventKey="0" />
           </Card.Header>
-          <Accordion.Collapse eventKey="0" />
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>body text</Card.Body>
+          </Accordion.Collapse>
         </Card>
         <Card>
           <Card.Header>
             <Accordion.Toggle eventKey="1" />
           </Card.Header>
-          <Accordion.Collapse eventKey="1" />
+          <Accordion.Collapse eventKey="1">
+            <Card.Body>body text</Card.Body>
+          </Accordion.Collapse>
         </Card>
       </Accordion>,
     );
@@ -60,28 +66,25 @@ describe('<Accordion>', () => {
       <Accordion>
         <Card>
           <Card.Header>
-            <Accordion.Toggle eventKey="0">
-              <button type="button" onClick={onClickSpy}>
-                click me!
-              </button>
-            </Accordion.Toggle>
+            <Accordion.Toggle onClick={onClickSpy} eventKey="0" />
           </Card.Header>
-          <Accordion.Collapse eventKey="0" />
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>body text</Card.Body>
+          </Accordion.Collapse>
         </Card>
         <Card>
           <Card.Header>
-            <Accordion.Toggle eventKey="1">
-              <button type="button" onClick={onClickSpy}>
-                click me!
-              </button>
-            </Accordion.Toggle>
+            <Accordion.Toggle onClick={onClickSpy} eventKey="1" />
           </Card.Header>
-          <Accordion.Collapse eventKey="1" />
+          <Accordion.Collapse eventKey="1">
+            <Card.Body>body text</Card.Body>
+          </Accordion.Collapse>
         </Card>
       </Accordion>,
     )
-      .find('button')
+      .find('.card-header')
       .at(0)
+      .find('button')
       .simulate('click');
 
     expect(onClickSpy).to.be.calledOnce;
