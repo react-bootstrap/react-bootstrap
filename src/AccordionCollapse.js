@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Collapse from './Collapse';
-import AccordionContext from './AccordionContext';
+import SelectableContext from './SelectableContext';
 
 const propTypes = {
   /**
@@ -14,7 +14,7 @@ const propTypes = {
 };
 
 const AccordionCollapse = ({ children, eventKey, ...props }) => {
-  const context = useContext(AccordionContext);
+  const context = useContext(SelectableContext);
 
   return (
     <Collapse in={context.activeEventKey === eventKey} {...props}>

@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useUncontrolled from 'uncontrollable/hook';
 import { useBootstrapPrefix } from './ThemeProvider';
-import AccordionContext from './AccordionContext';
 import AccordionToggle from './AccordionToggle';
 import SelectableContext from './SelectableContext';
 import AccordionCollapse from './AccordionCollapse';
@@ -42,17 +41,15 @@ const Accordion = React.forwardRef((props, ref) => {
   bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion');
 
   return (
-    <AccordionContext.Provider value={{ onClick, activeEventKey: activeKey }}>
-      <SelectableContext.Provider value={null}>
-        <Component
-          ref={ref}
-          {...controlledProps}
-          className={classNames(className, bsPrefix)}
-        >
-          {children}
-        </Component>
-      </SelectableContext.Provider>
-    </AccordionContext.Provider>
+    <SelectableContext.Provider value={{ onClick, activeEventKey: activeKey }}>
+      <Component
+        ref={ref}
+        {...controlledProps}
+        className={classNames(className, bsPrefix)}
+      >
+        {children}
+      </Component>
+    </SelectableContext.Provider>
   );
 });
 

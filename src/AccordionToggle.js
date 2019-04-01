@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import AccordionContext from './AccordionContext';
+import SelectableContext from './SelectableContext';
 
 const propTypes = {
   /** Set a custom element for this component */
@@ -24,7 +24,7 @@ const defaultProps = {
 
 const AccordionToggle = React.forwardRef(
   ({ as: Component, children, eventKey, onClick, ...props }, ref) => {
-    const context = useContext(AccordionContext);
+    const context = useContext(SelectableContext);
 
     return (
       <Component
