@@ -337,7 +337,7 @@ import {
   </Tab>
 </Tabs>;
 
-<ToggleButtonGroup type="checkbox" name="options" defaultValue={1}>
+<ToggleButtonGroup type="checkbox" name="options" defaultValue={[1]}>
   <ToggleButton value={1}>Radio 1 (pre-checked)</ToggleButton>
   <ToggleButton value={2}>Radio 2</ToggleButton>
   <ToggleButton value={3}>Radio 3</ToggleButton>
