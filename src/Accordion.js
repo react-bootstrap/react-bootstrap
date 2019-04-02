@@ -6,6 +6,7 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionToggle from './AccordionToggle';
 import SelectableContext from './SelectableContext';
 import AccordionCollapse from './AccordionCollapse';
+import AccordionContext from './AccordionContext';
 
 const propTypes = {
   /** Set a custom element for this component */
@@ -41,15 +42,17 @@ const Accordion = React.forwardRef((props, ref) => {
   bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion');
 
   return (
-    <SelectableContext.Provider value={{ onClick, activeEventKey: activeKey }}>
-      <Component
-        ref={ref}
-        {...controlledProps}
-        className={classNames(className, bsPrefix)}
-      >
-        {children}
-      </Component>
-    </SelectableContext.Provider>
+    <AccordionContext.Provider value={activeKey}>
+      <SelectableContext.Provider value={onClick}>
+        <Component
+          ref={ref}
+          {...controlledProps}
+          className={classNames(className, bsPrefix)}
+        >
+          {children}
+        </Component>
+      </SelectableContext.Provider>
+    </AccordionContext.Provider>
   );
 });
 
