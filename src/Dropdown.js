@@ -96,6 +96,7 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
     alignRight,
     onSelect,
     onToggle,
+    flip,
     focusFirstItemOnShow,
     as: Component,
     navbar: _4,
@@ -125,6 +126,7 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
         show={show}
         alignEnd={alignRight}
         onToggle={handleToggle}
+        flip={flip}
         focusFirstItemOnShow={focusFirstItemOnShow}
         itemSelector={`.${prefix}-item:not(.disabled):not(:disabled)`}
       >
