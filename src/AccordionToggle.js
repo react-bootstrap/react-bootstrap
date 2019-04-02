@@ -25,13 +25,13 @@ const defaultProps = {
 
 const AccordionToggle = React.forwardRef(
   ({ as: Component, children, eventKey, onClick, ...props }, ref) => {
-    const contextOnClick = useContext(SelectableContext);
+    const onSelect = useContext(SelectableContext);
 
     return (
       <Component
         ref={ref}
         onClick={() => {
-          contextOnClick(eventKey);
+          onSelect(eventKey);
           if (onClick) onClick(eventKey);
         }}
         {...props}

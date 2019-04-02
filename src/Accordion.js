@@ -33,17 +33,17 @@ const Accordion = React.forwardRef((props, ref) => {
     bsPrefix,
     children,
     className,
-    onClick,
+    onSelect,
     ...controlledProps
   } = useUncontrolled(props, {
-    activeKey: 'onClick',
+    activeKey: 'onSelect',
   });
 
   bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion');
 
   return (
     <AccordionContext.Provider value={activeKey}>
-      <SelectableContext.Provider value={onClick}>
+      <SelectableContext.Provider value={onSelect}>
         <Component
           ref={ref}
           {...controlledProps}
