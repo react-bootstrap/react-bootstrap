@@ -14,8 +14,8 @@ export interface ToggleButtonRadioProps<T> {
 export interface ToggleButtonCheckboxProps<T> {
   type: 'checkbox';
   name?: string;
-  value?: T;
-  defaultValue?: T;
+  value?: T[];
+  defaultValue?: T[];
   onChange?: (value: T[]) => void;
 }
 
