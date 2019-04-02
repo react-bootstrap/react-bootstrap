@@ -5,6 +5,7 @@ import { BsPrefixComponent } from './helpers';
 export interface TableProps {
   striped?: boolean;
   bordered?: boolean;
+  borderless?: boolean;
   hover?: boolean;
   size?: string;
   variant?: string;
