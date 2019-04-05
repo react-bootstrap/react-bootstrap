@@ -94,6 +94,31 @@ const ButtonToolbar = styled('div')`
   }
 `;
 
+const Divider = styled('hr')`
+  @import '../css/theme';
+  border-bottom-color: rgb(236, 236, 236);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  box-sizing: content-box;
+  height: 1px;
+  border-top: none;
+`;
+
+const DetailCard = styled('div')`
+  @import '../css/theme';
+
+  composes: px-4 py-3 from global;
+  font-weight: 400;
+  line-height: 1.6;
+
+  & h2 {
+    font-size: 1.6rem;
+    color: $subtle;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+`;
+
 export default withLayout(
   class HomePage extends React.Component {
     render() {
@@ -183,42 +208,41 @@ export default withLayout(
             </Row>
           </Container>
           <Container>
-            <h1>react-bootstrap vs. react + bootstrap</h1>
-            <p>
-              <b>Simplification of components:</b>
-              The CSS and details of Bootstrap components are rather
-              opinionated. React-bootstrap aims to help simplify the use of
-              Bootstrap specifics by abstracting them in components.{' '}
-            </p>
-            <p>
-              For example, below is the same component in bootstrap and
-              react-bootstrap
-            </p>
-            <p>
-              <b>Bootstrap Alert component:</b>
-              <div>{`<div class="alert alert-dark" role="alert"> `}</div>
-              <div>
-                {`A simple primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.`}
-              </div>
-              <div>{`</div>`}</div>
-            </p>
-            <b>React-bootstrap:</b>
-            {`<Alert variant="success">
-              This is a success alert with{' '}  
-              <Alert.Link href="#">an example link</Alert.Link>. Give it a click if you like.
-              </Alert> `}
-            <p>
-              <b>Declarative versus imperative:</b> Bootstrap uses jQuery, which
-              is more imperative and may interfere with the way React uses the
-              virtual DOM.
-            </p>
-            <p>
-              <b>DOM rendering: </b> Since Bootstrap uses jQuery and
-              Bootstrap-React does not, the way updates are rendered between the
-              two will differ. Updates using jQuery is done with direct
-              manipulation of the DOM, while React uses updates to the state to
-              update the virtual DOM.
-            </p>
+            <Divider />
+          </Container>
+          <Container>
+            <Row>
+              <DetailCard>
+                <p>
+                  <b>Bootstrap with React Component Style: </b>
+                  The CSS and details of Bootstrap components are rather
+                  opinionated. lengthy. React-bootstrap aims to help simplify
+                  this by consolidating the original Bootstrap specifics into
+                  React-styled components.
+                </p>
+              </DetailCard>
+
+              <DetailCard>
+                <p>
+                  <b>Bootstrap with a virtual DOM: </b> Since Bootstrap uses
+                  jQuery and Bootstrap-React does not, the way methods and
+                  events are rendered between the the two will differ. Methods
+                  and events using jQuery is done with direct manipulation of
+                  the DOM, while React uses updates to the state to update the
+                  virtual DOM. Since Bootstrap may interfere with the way React
+                  uses the virtual DOM, React bootstrap provides a more reliable
+                  solution by incorporating Bootstrap into React's virtual DOM.
+                </p>
+              </DetailCard>
+
+              <DetailCard>
+                <p>
+                  <b>Bootstrap with state: </b> Since React bootstrap is built
+                  with React Javascript, state can be passed within React
+                  bootstrap components as a prop.
+                </p>
+              </DetailCard>
+            </Row>
           </Container>
         </main>
       );
