@@ -65,7 +65,7 @@ const DropdownItem = React.forwardRef(
       href,
       onClick,
       onSelect,
-      active,
+      active: propActive,
       as: Component,
       ...props
     },
@@ -78,8 +78,10 @@ const DropdownItem = React.forwardRef(
     const { activeKey } = navContext || {};
     const key = makeEventKey(eventKey, href);
 
-    const shouldAddActiveClass =
-      active == null && key != null ? makeEventKey(activeKey) === key : active;
+    const active =
+      propActive == null && key != null
+        ? makeEventKey(activeKey) === key
+        : propActive;
 
     const handleClick = useEventCallback(event => {
       // SafeAnchor handles the disabled case, but we handle it here
@@ -99,7 +101,7 @@ const DropdownItem = React.forwardRef(
         className={classNames(
           className,
           prefix,
-          shouldAddActiveClass && 'active',
+          active && 'active',
           disabled && 'disabled',
         )}
         onClick={handleClick}
