@@ -1,10 +1,7 @@
 <Accordion defaultActiveKey="0">
   <Card>
     <Card.Header>
-      <Accordion.Toggle
-        onClick={key => console.log(`I've been clicked by : ${key}`)}
-        eventKey="0"
-      >
+      <Accordion.Toggle as={Button} variant="link" eventKey="0">
         Click me!
       </Accordion.Toggle>
     </Card.Header>
@@ -14,10 +11,7 @@
   </Card>
   <Card>
     <Card.Header>
-      <Accordion.Toggle
-        onClick={key => console.log(`I've been clicked by : ${key}`)}
-        eventKey="1"
-      >
+      <Accordion.Toggle as={Button} variant="link" eventKey="1">
         Click me!
       </Accordion.Toggle>
     </Card.Header>

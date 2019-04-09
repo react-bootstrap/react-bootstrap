@@ -30,9 +30,9 @@ const AccordionToggle = React.forwardRef(
     return (
       <Component
         ref={ref}
-        onClick={() => {
-          onSelect(eventKey);
-          if (onClick) onClick(eventKey);
+        onClick={e => {
+          onSelect(eventKey, e);
+          if (onClick) onClick(e);
         }}
         {...props}
       >
