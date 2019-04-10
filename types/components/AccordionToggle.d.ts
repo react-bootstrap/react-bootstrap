@@ -1,0 +1,14 @@
+import * as React from 'react';
+
+import { BsPrefixComponent } from './helpers';
+
+export interface AccordionToggleProps {
+  eventKey: string;
+  onClick: Function;
+}
+
+declare class AccordionToggle<
+  As extends React.ReactType = 'button'
+> extends BsPrefixComponent<As, AccordionToggleProps> {}
+
+export default AccordionToggle;
