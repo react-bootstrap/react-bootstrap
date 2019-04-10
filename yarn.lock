@@ -4552,26 +4552,26 @@ download-file-sync@^1.0.4:
   resolved "https://registry.yarnpkg.com/download-file-sync/-/download-file-sync-1.0.4.tgz#d3e3c543f836f41039455b9034c72e355b036019"
   integrity sha1-0+PFQ/g29BA5RVuQNMcuNVsDYBk=
 
-dts-critic@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/dts-critic/-/dts-critic-1.0.4.tgz#75aa92e59602a36a8fda113964fce24f80241591"
-  integrity sha512-pBIkn1L8fFtYnoftv6e6KYO9zieDQU0AbbdKZWEp/M3VFvDyythNfcAUv+QRncboQQxmo3bDGBoVkZbSXdzBBA==
+dts-critic@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/dts-critic/-/dts-critic-1.0.5.tgz#b96fbcfe1434a7afb6e09d41a7b70d713c83f67d"
+  integrity sha512-//zIvVV+sAp9Gmke7Ao+e3dGFqzX5f8xvu3CS2uGyxt98+rLHaEyAr0mhdsnQGhSHooD4A/8rQGtmpxqo8Qa+g==
   dependencies:
     definitelytyped-header-parser "^1.0.1"
     download-file-sync "^1.0.4"
     yargs "^12.0.5"
 
-dtslint@^0.5.9:
-  version "0.5.9"
-  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.5.9.tgz#462299c97f675a224758a3aafa2a519737584f9c"
-  integrity sha512-/RU8h05QMS1DLZsMsDpJ6rvtEXrXQ0KRGT0q7IkqvDbCDa3fJRGLqGrVFLLaUTCl/4p2+sgsOEBCPsFqV5BRXA==
+dtslint@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.6.1.tgz#c349ea9866fbb710de26ab99af2b1f8342a96032"
+  integrity sha512-0YWn8o5LxjuEtr3G7CoDJev0fv0qwhm4ThOsnitWYWpBf/EBUs/DK7IenZkB2/lozJ7W+RVO5fJKJ5wwbE+Y3g==
   dependencies:
     definitelytyped-header-parser "^1.0.1"
-    dts-critic "^1.0.4"
+    dts-critic "^1.0.5"
     fs-extra "^6.0.1"
     request "^2.88.0"
     strip-json-comments "^2.0.1"
-    tslint "^5.14.0"
+    tslint "5.14.0"
     typescript next
 
 duplexer@^0.1.1:
@@ -11111,7 +11111,7 @@ tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
 
-tslint@^5.14.0:
+tslint@5.14.0:
   version "5.14.0"
   resolved "https://registry.yarnpkg.com/tslint/-/tslint-5.14.0.tgz#be62637135ac244fc9b37ed6ea5252c9eba1616e"
   integrity sha512-IUla/ieHVnB8Le7LdQFRGlVJid2T/gaJe5VkjzRVSRR6pA2ODYrnfR1hmxi+5+au9l50jBwpbBL34txgv4NnTQ==
