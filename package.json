@@ -69,7 +69,7 @@
     "@babel/register": "^7.4.0",
     "@react-bootstrap/babel-preset": "^1.1.3",
     "@react-bootstrap/eslint-config": "^1.1.1",
-    "@storybook/react": "^3.4.8",
+    "@storybook/react": "^5.0.6",
     "@types/react": "^16.8.10",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
