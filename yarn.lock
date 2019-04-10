@@ -819,10 +819,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@react-bootstrap/babel-preset@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@react-bootstrap/babel-preset/-/babel-preset-1.1.2.tgz#288284818e717c767fa42d1d3252f3af712f1825"
-  integrity sha512-QawNps4lhZay1wRG0k8JlX5obEO95yaDAh7QatJos81tD+SHNZXkjY4N9l8dx2opN5fSQxPy/SR8LYwlvi+exA==
+"@react-bootstrap/babel-preset@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@react-bootstrap/babel-preset/-/babel-preset-1.1.3.tgz#1576027187c42d24b5a867e896251c730cc260f5"
+  integrity sha512-FzTfLMpxOWKv4AeUAMnRSRIbOKesrpNSf4mO0m/jV60YLZ+jo4Oui5DT9iE8ocFsajHFKeaYetideyF0OB53Wg==
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/plugin-proposal-class-properties" "^7.0.0"
