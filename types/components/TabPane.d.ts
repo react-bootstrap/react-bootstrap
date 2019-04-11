@@ -3,7 +3,7 @@ import * as React from 'react';
 import { BsPrefixComponent, TransitionCallbacks } from './helpers';
 
 export interface TabPaneProps extends TransitionCallbacks {
-  eventKey?: unknown;
+  eventKey?: string;
   active?: boolean;
   transition?: false | React.ReactType;
   bsClass?: string;

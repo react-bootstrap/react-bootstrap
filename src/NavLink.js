@@ -44,7 +44,7 @@ const propTypes = {
    * Uniquely idenifies the `NavItem` amoungst its siblings,
    * used to determine and control the active state ofthe parent `Nav`
    */
-  eventKey: PropTypes.any,
+  eventKey: PropTypes.string,
 
   /** @default 'a' */
   as: PropTypes.elementType,

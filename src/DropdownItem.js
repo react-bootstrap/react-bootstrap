@@ -25,7 +25,7 @@ const propTypes = {
   /**
    * Value passed to the `onSelect` handler, useful for identifying the selected menu item.
    */
-  eventKey: PropTypes.any,
+  eventKey: PropTypes.string,
 
   /**
    * HTML `href` attribute corresponding to `a.href`.

@@ -18,7 +18,7 @@ const propTypes = {
   /**
    * A key that associates the `TabPane` with it's controlling `NavLink`.
    */
-  eventKey: PropTypes.any,
+  eventKey: PropTypes.string,
 
   /**
    * Toggles the active state of the TabPane, this is generally controlled by a

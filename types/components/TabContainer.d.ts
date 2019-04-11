@@ -7,7 +7,7 @@ export interface TabContainerProps {
   transition?: false | React.ReactType;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
-  generateChildId?: (eventKey: unknown, type: 'tab' | 'pane') => string;
+  generateChildId?: (eventKey: string, type: 'tab' | 'pane') => string;
   onSelect?: SelectCallback;
   activeKey?: unknown;
   defaultActiveKey?: unknown;

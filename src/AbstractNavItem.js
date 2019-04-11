@@ -12,7 +12,7 @@ const propTypes = {
 
   href: PropTypes.string,
   tabIndex: PropTypes.string,
-  eventKey: PropTypes.any,
+  eventKey: PropTypes.string,
   onclick: PropTypes.func,
 
   as: PropTypes.any,

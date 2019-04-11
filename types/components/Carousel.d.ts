@@ -15,7 +15,7 @@ export interface CarouselProps {
   controls?: boolean;
   pauseOnHover?: boolean;
   keyboard?: boolean;
-  onSelect?: (eventKey: any, direction: 'prev' | 'next', event: object) => void;
+  onSelect?: (eventKey: string, direction: 'prev' | 'next', event: object) => void;
   onSlideEnd?: () => void;
   activeIndex?: number;
   prevIcon?: React.ReactNode;

@@ -31,7 +31,7 @@ export class BsPrefixComponent<
 > extends React.Component<ReplaceProps<As, BsPrefixProps<As> & P>> {}
 
 export type SelectCallback = (
-  eventKey: any,
+  eventKey: string,
   e: React.SyntheticEvent<{}>,
 ) => void;
 

@@ -10,7 +10,7 @@ export interface NavLinkProps {
   role?: string;
   href?: string;
   onSelect?: SelectCallback;
-  eventKey?: unknown;
+  eventKey?: string;
 }
 
 declare class NavLink<
