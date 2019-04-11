@@ -22,6 +22,18 @@ describe('<Modal>', () => {
       .should.equal('Message');
   });
 
+  it('Should sets `display: block` to `div.modal` when animation is false', () => {
+    const node = mount(
+      <Modal show animation={false}>
+        <strong>Message</strong>
+      </Modal>,
+    )
+      .find('div.modal')
+      .getDOMNode();
+
+    expect(node.style.display).to.equal('block');
+  });
+
   it('Should close the modal when the modal dialog is clicked', done => {
     const doneOp = () => {
       done();
