@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Dropdown from 'react-bootstrap/Dropdown';
 import styled from 'astroturf';
 import withProps from 'recompose/withProps';
 
@@ -46,6 +47,12 @@ const StyledNavLink = styled(Nav.Link)`
   & i {
     font-size: 1.2em;
   }
+`;
+
+const StyledDropdown = styled(Dropdown)`
+  @import '../css/theme.scss';
+
+  margin-right: $spacer;
 `;
 
 const NAV_LINKS = [
@@ -90,21 +97,21 @@ function NavMain({ activePage }) {
         ))}
       </Nav>
       <Nav className="ml-auto pr-md-5">
-        <OverlayTrigger
-          placement="bottom"
-          delay={{ show: 200 }}
-          overlay={
-            <Tooltip id="t-version">
-              Compatible with Bootstrap v
-              {config.bootstrapVersion
-                .split('.')
-                .slice(0, 2)
-                .join('.')}
-            </Tooltip>
-          }
-        >
-          <StyledNavLink>v{config.version}</StyledNavLink>
-        </OverlayTrigger>
+        <StyledDropdown id="t-version">
+          <Dropdown.Toggle id="dropdown-version" variant="outline-light">
+            v{config.version} (Bootstrap{' '}
+            {config.bootstrapVersion
+              .split('.')
+              .slice(0, 2)
+              .join('.')}
+            )
+          </Dropdown.Toggle>
+          <Dropdown.Menu className="w-100">
+            <Dropdown.Item href="https://5c507d49471426000887a6a7--react-bootstrap.netlify.com/">
+              v0.32.4 (Bootstrap 3)
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </StyledDropdown>
         <OverlayTrigger
           placement="bottom"
           delay={{ show: 200 }}
