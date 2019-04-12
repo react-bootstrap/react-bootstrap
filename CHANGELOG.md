@@ -1,3 +1,24 @@
+# [1.0.0-beta.7](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2019-04-12)
+
+
+### Bug Fixes
+
+* DropDownItem prop-types active prop (fix: [#3598](https://github.com/react-bootstrap/react-bootstrap/issues/3598)) ([#3608](https://github.com/react-bootstrap/react-bootstrap/issues/3608)) ([cf13d90](https://github.com/react-bootstrap/react-bootstrap/commit/cf13d90))
+* Fix Babel config for Google WRS support ([#3622](https://github.com/react-bootstrap/react-bootstrap/issues/3622)) ([5e2cd00](https://github.com/react-bootstrap/react-bootstrap/commit/5e2cd00))
+* Fix up accordions a bit ([#3615](https://github.com/react-bootstrap/react-bootstrap/issues/3615)) ([511e566](https://github.com/react-bootstrap/react-bootstrap/commit/511e566))
+* modal dialog scrollable ([#3566](https://github.com/react-bootstrap/react-bootstrap/issues/3566)) ([e45597d](https://github.com/react-bootstrap/react-bootstrap/commit/e45597d))
+* Update dependencies ([#3578](https://github.com/react-bootstrap/react-bootstrap/issues/3578)) ([a2c0c9d](https://github.com/react-bootstrap/react-bootstrap/commit/a2c0c9d))
+* Value typing for Checkbox ToggleButtonGroup ([#3584](https://github.com/react-bootstrap/react-bootstrap/issues/3584)) ([7a27c07](https://github.com/react-bootstrap/react-bootstrap/commit/7a27c07))
+* **Modal:** set display block always, fixes [#3399](https://github.com/react-bootstrap/react-bootstrap/issues/3399) ([#3571](https://github.com/react-bootstrap/react-bootstrap/issues/3571)) ([0cd1c30](https://github.com/react-bootstrap/react-bootstrap/commit/0cd1c30))
+* **types:** defaultActiveKey to NavProps in Nav.d.ts ([#3638](https://github.com/react-bootstrap/react-bootstrap/issues/3638)) ([8819727](https://github.com/react-bootstrap/react-bootstrap/commit/8819727))
+
+
+### Features
+
+* enhanced Alert dismissible example ([#3599](https://github.com/react-bootstrap/react-bootstrap/issues/3599)) ([#3602](https://github.com/react-bootstrap/react-bootstrap/issues/3602)) ([be17781](https://github.com/react-bootstrap/react-bootstrap/commit/be17781))
+
+
+
 # [1.0.0-beta.6](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2019-03-21)
 
 
