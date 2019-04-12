@@ -10,6 +10,7 @@ export interface NavProps {
   cardHeaderBsPrefix?: string;
   variant?: 'tabs' | 'pills';
   activeKey?: unknown;
+  defaultActiveKey?: unknown;
   fill?: boolean;
   justify?: boolean;
   onSelect?: SelectCallback;
