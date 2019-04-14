@@ -16,7 +16,7 @@ cache:
 
 addons:
   chrome: stable
-  firefox: stable
+  firefox: latest
 
 before_install:
   - export DISPLAY=:99.0
