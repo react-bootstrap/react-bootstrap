@@ -1,10 +1,8 @@
 sudo: false
 
-dist: xenial
-
 language: node_js
 node_js:
-  - "10"
+  - lts/*
 
 env:
   - BROWSER=ChromeCi
@@ -16,9 +14,13 @@ cache:
     - node_modules
     - www/node_modules
 
-before_install:	
-  - export CHROME_BIN=chromium-browser	
+addons:
+  chrome: stable
+  firefox: stable
+
+before_install:
   - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 
 install:
   - yarn bootstrap
