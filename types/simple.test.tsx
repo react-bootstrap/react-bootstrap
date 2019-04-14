@@ -42,7 +42,7 @@ import {
 <Accordion defaultActiveKey="0">
   <Card>
     <Card.Header>
-      <Accordion.Toggle as={Button} variant="link" eventKey="0">
+      <Accordion.Toggle eventKey="0">
         Click me!
       </Accordion.Toggle>
     </Card.Header>

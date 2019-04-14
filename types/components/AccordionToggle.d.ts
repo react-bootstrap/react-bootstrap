@@ -4,11 +4,11 @@ import { BsPrefixComponent } from './helpers';
 
 export interface AccordionToggleProps {
   eventKey: string;
-  onClick?: (arg0?: React.SyntheticEvent) => any;
+  onClick?: (event?: React.SyntheticEvent) => void;
 }
 
 declare class AccordionToggle<
-  As extends React.ReactType = typeof Button
+  As extends React.ReactType = 'button'
   > extends BsPrefixComponent<As, AccordionToggleProps> { }
 
 export default AccordionToggle;
