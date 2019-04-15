@@ -11,7 +11,7 @@ export interface CarouselProps {
   fade?: boolean;
   wrap?: boolean;
   indicators?: boolean;
-  interval?: number;
+  interval?: number | null;
   controls?: boolean;
   pauseOnHover?: boolean;
   keyboard?: boolean;
