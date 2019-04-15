@@ -52,7 +52,7 @@ const propTypes = {
   controls: PropTypes.bool,
 
   /**
-   * Temporarily puase the slide interval when the mouse hovers over a slide.
+   * Temporarily pause the slide interval when the mouse hovers over a slide.
    */
   pauseOnHover: PropTypes.bool,
 
