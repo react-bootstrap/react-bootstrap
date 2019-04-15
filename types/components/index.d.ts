@@ -21,6 +21,9 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 3.0
 
+export { default as Accordion, AccordionProps } from './Accordion';
+export { default as AccordionCollapse, AccordionCollapseProps } from './AccordionCollapse';
+export { default as AccordionToggle, AccordionToggleProps } from './AccordionToggle';
 export { default as Alert, AlertProps } from './Alert';
 export { default as Badge, BadgeProps } from './Badge';
 export { default as Breadcrumb, BreadcrumbProps } from './Breadcrumb';

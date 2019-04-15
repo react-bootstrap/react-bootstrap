@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {
   Alert,
+  Accordion,
   Badge,
   Breadcrumb,
   BreadcrumbItem,
@@ -37,6 +38,19 @@ import {
 <Alert dismissible>Woop woop</Alert>;
 <Alert.Link as="a" href="blah" />;
 <Alert.Heading as="h3" />;
+
+<Accordion defaultActiveKey="0">
+  <Card>
+    <Card.Header>
+      <Accordion.Toggle eventKey="0">
+        Click me!
+      </Accordion.Toggle>
+    </Card.Header>
+    <Accordion.Collapse eventKey="0">
+      <Card.Body>Hello! I'm the body</Card.Body>
+    </Accordion.Collapse>
+  </Card>
+</Accordion>;
 
 <Badge pill={false}>42</Badge>;
 
