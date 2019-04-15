@@ -5,7 +5,8 @@ import Link from 'gatsby-link';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import FormControl from 'react-bootstrap/lib/FormControl';
+import MenuItem from 'react-bootstrap/lib/MenuItem';
+import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 
 import config from '../config';
 
@@ -28,15 +29,6 @@ const propTypes = {
   activePage: PropTypes.string
 };
 
-function attachSearch(ref) {
-  if (ref && window.docsearch)
-    window.docsearch({
-      apiKey: '68117ff90f086cb491d7e7e984cd7b75',
-      indexName: 'react_bootstrap',
-      inputSelector: `#${ref.id}`,
-      debug: false // Set debug to true if you want to inspect the dropdown
-    });
-}
 function NavMain({ activePage }) {
   return (
     <Navbar
@@ -73,19 +65,10 @@ function NavMain({ activePage }) {
           </Wrapper>
         </Nav>
 
-        <Navbar.Form pullRight>
-          <FormControl
-            type="search"
-            id="docs-search-input"
-            className="bs-search-bar"
-            placeholder="Search…"
-            inputRef={attachSearch}
-          />
-        </Navbar.Form>
         <Nav pullRight>
-          <NavItem href="https://github.com/react-bootstrap/react-bootstrap/releases">
-            v{config.version}
-          </NavItem>
+          <NavDropdown title={`v${config.version}`} id="version-dropdown">
+            <MenuItem href="https://react-bootstrap.netlify.com">react-bootstrap for Bootstrap 4</MenuItem>
+          </NavDropdown>
           <NavItem href="https://getbootstrap.com/docs/3.3/css/">
             Supports Bootstrap v{config.bootstrapVersion}
           </NavItem>
