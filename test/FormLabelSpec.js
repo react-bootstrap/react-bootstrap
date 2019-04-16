@@ -27,6 +27,13 @@ describe('<FormLabel>', () => {
       </FormLabel>,
     ).assertSingle('label.col-sm-4.col-form-label');
   });
+  it('should use controlId for htmlFor when render as Col', () => {
+    mount(
+      <FormGroup controlId="foo">
+        <FormLabel column sm={4} />
+      </FormGroup>,
+    ).assertSingle('label[htmlFor="foo"].col-sm-4.col-form-label');
+  });
 
   it('should respect srOnly', () => {
     mount(<FormLabel srOnly>Label</FormLabel>).assertSingle(
