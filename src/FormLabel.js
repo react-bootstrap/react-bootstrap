@@ -67,12 +67,12 @@ const FormLabel = React.forwardRef(
 
     if (column)
       return (
-        <Col {...props} htmlFor={htmlFor} className={classes} as="label" />
+        <Col as="label" className={classes} htmlFor={htmlFor} {...props} />
       );
 
     return (
       // eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control
-      <label {...props} htmlFor={htmlFor} ref={ref} className={classes} />
+      <label ref={ref} className={classes} htmlFor={htmlFor} {...props} />
     );
   },
 );
