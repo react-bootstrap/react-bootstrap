@@ -4889,9 +4889,9 @@ karma-webpack@^3.0.5:
     webpack-dev-middleware "^2.0.6"
 
 karma@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/karma/-/karma-4.0.1.tgz#2581d6caa0d4cd28b65131561b47bad6d5478773"
-  integrity sha512-ind+4s03BqIXas7ZmraV3/kc5+mnqwCd+VDX1FndS6jxbt03kQKX2vXrWxNLuCjVYmhMwOZosAEKMM0a2q7w7A==
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/karma/-/karma-4.1.0.tgz#d07387c9743a575b40faf73e8a3eb5421c2193e1"
+  integrity sha512-xckiDqyNi512U4dXGOOSyLKPwek6X/vUizSy2f3geYevbLj+UIdvNwbn7IwfUIL2g1GXEPWt/87qFD1fBbl/Uw==
   dependencies:
     bluebird "^3.3.0"
     body-parser "^1.16.1"
