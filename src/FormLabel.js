@@ -59,28 +59,20 @@ const FormLabel = React.forwardRef(
       column && 'col-form-label',
     );
 
-    if (column)
-      return (
-        <Col
-          {...props}
-          htmlFor={htmlFor || controlId}
-          className={classes}
-          as="label"
-        />
-      );
-
     warning(
       controlId == null || !htmlFor,
       '`controlId` is ignored on `<FormLabel>` when `htmlFor` is specified.',
     );
+    htmlFor = htmlFor || controlId;
+
+    if (column)
+      return (
+        <Col {...props} htmlFor={htmlFor} className={classes} as="label" />
+      );
+
     return (
       // eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control
-      <label
-        {...props}
-        htmlFor={htmlFor || controlId}
-        ref={ref}
-        className={classes}
-      />
+      <label {...props} htmlFor={htmlFor} ref={ref} className={classes} />
     );
   },
 );
