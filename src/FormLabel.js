@@ -59,7 +59,15 @@ const FormLabel = React.forwardRef(
       column && 'col-form-label',
     );
 
-    if (column) return <Col {...props} className={classes} as="label" />;
+    if (column)
+      return (
+        <Col
+          {...props}
+          htmlFor={htmlFor || controlId}
+          className={classes}
+          as="label"
+        />
+      );
 
     warning(
       controlId == null || !htmlFor,
