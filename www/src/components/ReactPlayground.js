@@ -40,7 +40,7 @@ const StyledError = styled(LiveError)`
   white-space: pre;
 `;
 
-const StyledProvider = styled(LiveProvider)`
+const StyledLiveProviderChild = styled.div`
   @import '../css/theme';
 
   background-color: $body-bg;
@@ -257,15 +257,17 @@ export default class Playground extends React.Component {
     const { codeText, exampleClassName, showCode = true } = this.props;
 
     return (
-      <StyledProvider
+      <LiveProvider
         scope={scope}
         code={codeText.replace(prettierComment, '')}
         mountStylesheet={false}
         noInline={codeText.includes('render(')}
       >
-        <Preview showCode={showCode} className={exampleClassName} />
-        {showCode && <Editor onChange={this.handleChange} />}
-      </StyledProvider>
+        <StyledLiveProviderChild>
+          <Preview showCode={showCode} className={exampleClassName} />
+          {showCode && <Editor onChange={this.handleChange} />}
+        </StyledLiveProviderChild>
+      </LiveProvider>
     );
   }
 }
