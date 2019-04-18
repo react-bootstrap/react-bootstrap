@@ -67,8 +67,8 @@ export default withLayout(function NaπvbarSection({ data }) {
         Forms
       </LinkedHeading>
       <p>
-        Use <code>{'<Form inline>'}</code> and your various form controls
-        within the Navbar. Align the contents as needed with utility classes.
+        Use <code>{'<Form inline>'}</code> and your various form controls within
+        the Navbar. Align the contents as needed with utility classes.
       </p>
       <ReactPlayground codeText={NavbarForm} />
 
