@@ -19,7 +19,7 @@ const CodeBlock = mapProps(({ mode, codeText, ...props }) => ({
       mode === null ? codeText : prism(stripIndent([codeText]), mode || 'jsx'),
   },
 }))(
-  styled('pre')`
+  styled.pre`
     composes: prism from '../css/prism.module.scss';
 
     border-radius: 8px;
