@@ -35,7 +35,7 @@ class PageFooter extends React.Component {
               <li>
                 <iframe
                   src="https://platform.twitter.com/widgets/follow_button.html?screen_name=react_bootstrap&show_screen_name=true"
-                  width={230}
+                  width={235}
                   height={20}
                   title="twitter"
                   allowTransparency="true"
