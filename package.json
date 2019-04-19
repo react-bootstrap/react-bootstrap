@@ -16,9 +16,8 @@
     "build-docs": "yarn --cwd www run build",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "start": "yarn --cwd www run develop",
-    "ci-lint": "eslint --rule \"prettier/prettier: 2\"",
-    "format": "npm run ci-lint . -- --fix",
-    "lint": "npm run ci-lint .",
+    "format": "eslint . --fix",
+    "lint": "eslint .",
     "release": "rollout",
     "prepublishOnly": "npm run build",
     "tdd": "karma start",
@@ -34,7 +33,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "npm run ci-lint -- --fix",
+      "eslint --fix",
       "git add"
     ]
   },
