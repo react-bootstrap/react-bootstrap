@@ -16,7 +16,7 @@
     "build-docs": "yarn --cwd www run build",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "start": "yarn --cwd www run develop",
-    "format": "eslint . -- --fix",
+    "format": "eslint . --fix",
     "lint": "eslint .",
     "release": "rollout",
     "prepublishOnly": "npm run build",
@@ -33,7 +33,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint -- --fix",
+      "eslint --fix",
       "git add"
     ]
   },
