@@ -49,7 +49,8 @@ const StyledLiveProviderChild = styled.div`
 
 const StyledEditor = styled(LiveEditor)`
   composes: prism from '../css/prism.module.scss';
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 8px 8px !important;
+  padding: 10px !important;
 `;
 
 const EditorInfoMessage = styled('div')`
@@ -259,7 +260,7 @@ export default class Playground extends React.Component {
     return (
       <LiveProvider
         scope={scope}
-        code={codeText.replace(prettierComment, '')}
+        code={codeText.replace(prettierComment, '').trim()}
         mountStylesheet={false}
         noInline={codeText.includes('render(')}
       >
