@@ -132,6 +132,7 @@ const components = [
   'table',
   'tabs',
   'tooltips',
+  'toasts',
 ];
 
 const utilities = ['transitions', 'responsive-embed', 'react-overlays'];
