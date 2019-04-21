@@ -9,58 +9,35 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * Specifies a large or small toast.
-   *
-   * @type ('sm'|'lg')
+   * When `true` The modal will show itself.
    */
-  size: PropTypes.string,
+  show: PropTypes.bool,
 
-  /**
-   * Specify whether the Component should be vertically centered
-   */
-  centered: PropTypes.bool,
-
-  /**
-   * Allows scrolling the `<Toast.Body>` instead of the entire Toast when overflowing.
-   */
-  scrollable: PropTypes.bool,
+  /** A `react-transition-group` Transition component used to animate the Alert on dismissal. */
+  transition: PropTypes.elementType,
 };
 
 const ToastDialog = React.forwardRef(
   (
-    {
-      bsPrefix,
-      className,
-      centered,
-      size,
-      children,
-      scrollable,
-      show,
-      ...props
-    },
+    { bsPrefix, className, children, transition: Transition, show, ...props },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'toast');
     const dialogClass = `${bsPrefix}`;
 
     return (
-      <div
-        {...props}
-        ref={ref}
-        className={classNames(
-          dialogClass,
-          className,
-          show && 'show',
-          size && `${bsPrefix}-${size}`,
-          centered && `${dialogClass}-centered`,
-          scrollable && `${dialogClass}-scrollable`,
-        )}
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
-      >
-        {children}
-      </div>
+      <Transition in={show}>
+        <div
+          {...props}
+          ref={ref}
+          className={classNames(dialogClass, className, show && 'show')}
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          {children}
+        </div>
+      </Transition>
     );
   },
 );

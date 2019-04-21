@@ -1,9 +1,3 @@
-import classNames from 'classnames';
-import events from 'dom-helpers/events';
-import ownerDocument from 'dom-helpers/ownerDocument';
-
-import canUseDOM from 'dom-helpers/util/inDOM';
-import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -56,6 +50,9 @@ const propTypes = {
    * When `true` The modal will show itself.
    */
   show: PropTypes.bool,
+
+  /** A `react-transition-group` Transition component used to animate the Alert on dismissal. */
+  transition: PropTypes.elementType,
 };
 
 const defaultProps = {
@@ -64,29 +61,14 @@ const defaultProps = {
   delay: 500,
   dialogAs: ToastDialog,
   show: true,
+  transition: Fade,
 };
-
-/* eslint-disable no-use-before-define, react/no-multi-comp */
-function DialogTransition(props) {
-  return <Fade {...props} />;
-}
-
-function BackdropTransition(props) {
-  return <Fade {...props} />;
-}
 
 /* eslint-enable no-use-before-define */
 
-const Toast = ({
-  style,
-  dialogClassName,
-  children,
-  dialogAs: Dialog,
-
-  /* BaseToast props */
-  animation,
-  ...props
-}) => <Dialog {...props}>{children}</Dialog>;
+const Toast = ({ children, dialogAs: Dialog, ...props }) => (
+  <Dialog {...props}>{children}</Dialog>
+);
 
 Toast.propTypes = propTypes;
 Toast.defaultProps = defaultProps;

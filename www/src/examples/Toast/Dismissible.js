@@ -11,23 +11,15 @@ class Example extends React.Component {
     const handleShow = () => this.setState({ show: true });
     if (this.state.show) {
       return (
-        <Toast onClose={handleDismiss}>
-          <Toast.Header>
+        <Toast>
+          <Toast.Header onClose={handleDismiss}>
             <img
-              src="https://via.placeholder.com/30"
+              src="https://via.placeholder.com/20"
               className="rounded mr-2"
-              alt="..."
+              alt=""
             />
             <strong className="mr-auto">Bootstrap</strong>
             <small>11 mins ago</small>
-            <button
-              type="button"
-              className="ml-2 mb-1 close"
-              data-dismiss="toast"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
           </Toast.Header>
           <Toast.Body>Woohoo, you're reading this text in a Toast!</Toast.Body>
         </Toast>

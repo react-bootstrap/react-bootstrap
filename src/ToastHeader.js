@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -26,12 +26,12 @@ const propTypes = {
    * a Toast component, the onHide will automatically be propagated up to the
    * parent Toast `onHide`.
    */
-  onHide: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 const defaultProps = {
   closeLabel: 'Close',
-  closeButton: false,
+  closeButton: true,
 };
 
 const ToastHeader = React.forwardRef(
@@ -40,7 +40,7 @@ const ToastHeader = React.forwardRef(
       bsPrefix,
       closeLabel,
       closeButton,
-      onHide,
+      onClose,
       className,
       children,
       ...props
@@ -50,7 +50,9 @@ const ToastHeader = React.forwardRef(
     bsPrefix = useBootstrapPrefix(bsPrefix, 'toast-header');
 
     const handleClick = useEventCallback(() => {
-      if (onHide) onHide();
+      if (onClose) {
+        onClose();
+      }
     });
 
     return (
@@ -58,7 +60,12 @@ const ToastHeader = React.forwardRef(
         {children}
 
         {closeButton && (
-          <CloseButton label={closeLabel} onClick={handleClick} />
+          <CloseButton
+            label={closeLabel}
+            onClick={handleClick}
+            className="ml-2 mb-1"
+            data-dismiss="toast"
+          />
         )}
       </div>
     );
