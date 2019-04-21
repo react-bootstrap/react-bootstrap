@@ -49,8 +49,10 @@ const StyledLiveProviderChild = styled.div`
 
 const StyledEditor = styled(LiveEditor)`
   composes: prism from '../css/prism.module.scss';
+  @import '../css/theme';
+  font-family: $font-family-monospace !important;
+
   border-radius: 0 0 8px 8px !important;
-  padding: 10px !important;
 `;
 
 const EditorInfoMessage = styled('div')`
@@ -153,6 +155,7 @@ class Editor extends React.Component {
           ignoreTabKey={ignoreTab}
           aria-describedby={this.id}
           aria-label="Example code editor"
+          padding={20}
         />
         {(keyboardFocused || !ignoreTab) && (
           <EditorInfoMessage id={this.id} aria-live="polite">
@@ -256,11 +259,16 @@ export default class Playground extends React.Component {
 
   render() {
     const { codeText, exampleClassName, showCode = true } = this.props;
+    // Remove the prettier comments and the trailing semicolons in JSX in displayed code.
+    const code = codeText
+      .replace(prettierComment, '')
+      .trim()
+      .replace(/>;$/, '>');
 
     return (
       <LiveProvider
         scope={scope}
-        code={codeText.replace(prettierComment, '').trim()}
+        code={code}
         mountStylesheet={false}
         noInline={codeText.includes('render(')}
       >
