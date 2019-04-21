@@ -98,7 +98,7 @@ export default withLayout(function ModalSection({ data }) {
         Vertically centered
       </LinkedHeading>
       <p>
-        You can vertically center a modal by passing the "verticallyCenter"
+        You can vertically center a modal by passing the "centered"
         prop.
       </p>
       <ReactPlayground codeText={ModalVerticallyCentered} />
