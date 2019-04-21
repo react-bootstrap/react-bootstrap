@@ -17,30 +17,30 @@ const propTypes = {
   transition: PropTypes.elementType,
 };
 
-const ToastDialog = React.forwardRef(
-  (
-    { bsPrefix, className, children, transition: Transition, show, ...props },
-    ref,
-  ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'toast');
-    const dialogClass = `${bsPrefix}`;
-
-    return (
-      <Transition in={show}>
-        <div
-          {...props}
-          ref={ref}
-          className={classNames(dialogClass, className, show && 'show')}
-          role="alert"
-          aria-live="assertive"
-          aria-atomic="true"
-        >
-          {children}
-        </div>
-      </Transition>
-    );
-  },
-);
+const ToastDialog = ({
+  bsPrefix,
+  className,
+  children,
+  transition: Transition,
+  show,
+  ...props
+}) => {
+  bsPrefix = useBootstrapPrefix(bsPrefix, 'toast');
+  const dialogClass = `${bsPrefix}`;
+  return (
+    <Transition in={show}>
+      <div
+        {...props}
+        className={classNames(dialogClass, className, show && 'show')}
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        {children}
+      </div>
+    </Transition>
+  );
+};
 
 ToastDialog.displayName = 'ToastDialog';
 ToastDialog.propTypes = propTypes;
