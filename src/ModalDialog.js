@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
-  /** @default 'toast' */
+  /** @default 'modal' */
   bsPrefix: PropTypes.string,
 
   /**
-   * Specifies a large or small toast.
+   * Specifies a large or small modal.
    *
    * @type ('sm'|'lg')
    */
@@ -21,27 +21,18 @@ const propTypes = {
   centered: PropTypes.bool,
 
   /**
-   * Allows scrolling the `<Toast.Body>` instead of the entire Toast when overflowing.
+   * Allows scrolling the `<Modal.Body>` instead of the entire Modal when overflowing.
    */
   scrollable: PropTypes.bool,
 };
 
-const ToastDialog = React.forwardRef(
+const ModalDialog = React.forwardRef(
   (
-    {
-      bsPrefix,
-      className,
-      centered,
-      size,
-      children,
-      scrollable,
-      show,
-      ...props
-    },
+    { bsPrefix, className, centered, size, children, scrollable, ...props },
     ref,
   ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'toast');
-    const dialogClass = `${bsPrefix}`;
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
+    const dialogClass = `${bsPrefix}-dialog`;
 
     return (
       <div
@@ -50,22 +41,18 @@ const ToastDialog = React.forwardRef(
         className={classNames(
           dialogClass,
           className,
-          show && 'show',
           size && `${bsPrefix}-${size}`,
           centered && `${dialogClass}-centered`,
           scrollable && `${dialogClass}-scrollable`,
         )}
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
       >
-        {children}
+        <div className={classNames(`${bsPrefix}-content`)}>{children}</div>
       </div>
     );
   },
 );
 
-ToastDialog.displayName = 'ToastDialog';
-ToastDialog.propTypes = propTypes;
+ModalDialog.displayName = 'ModalDialog';
+ModalDialog.propTypes = propTypes;
 
-export default ToastDialog;
+export default ModalDialog;
