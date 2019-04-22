@@ -10,7 +10,7 @@ import ToastStacking from '../../examples/Toast/Stacking';
 import ToastPlacement from '../../examples/Toast/Placement';
 import ToastPlacementMulti from '../../examples/Toast/PlacementMulti';
 
-# Alerts
+# Toasts
 
 <p className="lead">
   Push notifications to your visitors with a toast, a lightweight and easily customizable alert message.
@@ -56,7 +56,7 @@ For systems that generate more notifications, consider using a wrapping element 
 
 export const query = graphql`
   query ToastQuery {
-    Toast: componentMetadata(displayName: { eq: "Alert" }) {
+    Toast: componentMetadata(displayName: { eq: "Toast" }) {
       ...ComponentApi_metadata
     }
     ToastHeader: componentMetadata(displayName: { eq: "ToastHeader" }) {

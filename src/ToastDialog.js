@@ -13,34 +13,66 @@ const propTypes = {
    */
   show: PropTypes.bool,
 
-  /** A `react-transition-group` Transition component used to animate the Alert on dismissal. */
+  /** A `react-transition-group` Transition component used to animate the Toast on dismissal. */
   transition: PropTypes.elementType,
 };
 
-const ToastDialog = ({
-  bsPrefix,
-  className,
-  children,
-  transition: Transition,
-  show,
-  ...props
-}) => {
-  bsPrefix = useBootstrapPrefix(bsPrefix, 'toast');
-  const dialogClass = `${bsPrefix}`;
-  return (
-    <Transition in={show}>
+class ToastDialog extends React.Component {
+  state = {
+    show: true,
+  };
+
+  componentDidMount() {
+    const { animation, transition, delay } = this.props;
+    if (!transition || !animation) {
+      window.setTimeout(() => {
+        this.setState({
+          show: false,
+        });
+      }, delay);
+    }
+  }
+
+  render() {
+    const {
+      bsPrefix,
+      className,
+      children,
+      transition: Transition,
+      show: _show,
+      animation,
+      delay,
+      ...props
+    } = this.props;
+
+    const show = this.state.show || _show;
+    const useAnimation = Transition && animation;
+    const toast = (
       <div
         {...props}
-        className={classNames(dialogClass, className, show && 'show')}
+        className={classNames(
+          bsPrefix,
+          className,
+          !useAnimation && show && 'show',
+        )}
         role="alert"
         aria-live="assertive"
         aria-atomic="true"
       >
         {children}
       </div>
-    </Transition>
-  );
-};
+    );
+
+    if (useAnimation) {
+      return (
+        <Transition in={show} unmountOnExit>
+          {toast}
+        </Transition>
+      );
+    }
+    return toast;
+  }
+}
 
 ToastDialog.displayName = 'ToastDialog';
 ToastDialog.propTypes = propTypes;

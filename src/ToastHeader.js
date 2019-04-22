@@ -34,43 +34,38 @@ const defaultProps = {
   closeButton: true,
 };
 
-const ToastHeader = React.forwardRef(
-  (
-    {
-      bsPrefix,
-      closeLabel,
-      closeButton,
-      onClose,
-      className,
-      children,
-      ...props
-    },
-    ref,
-  ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'toast-header');
+const ToastHeader = ({
+  bsPrefix,
+  closeLabel,
+  closeButton,
+  onClose,
+  className,
+  children,
+  ...props
+}) => {
+  bsPrefix = useBootstrapPrefix(bsPrefix, 'toast-header');
 
-    const handleClick = useEventCallback(() => {
-      if (onClose) {
-        onClose();
-      }
-    });
+  const handleClick = useEventCallback(() => {
+    if (onClose) {
+      onClose();
+    }
+  });
 
-    return (
-      <div ref={ref} {...props} className={classNames(className, bsPrefix)}>
-        {children}
+  return (
+    <div {...props} className={classNames(className, bsPrefix)}>
+      {children}
 
-        {closeButton && (
-          <CloseButton
-            label={closeLabel}
-            onClick={handleClick}
-            className="ml-2 mb-1"
-            data-dismiss="toast"
-          />
-        )}
-      </div>
-    );
-  },
-);
+      {closeButton && (
+        <CloseButton
+          label={closeLabel}
+          onClick={handleClick}
+          className="ml-2 mb-1"
+          data-dismiss="toast"
+        />
+      )}
+    </div>
+  );
+};
 
 ToastHeader.displayName = 'ToastHeader';
 ToastHeader.propTypes = propTypes;
