@@ -45,32 +45,22 @@ const propTypes = {
 };
 
 class ToastDialog extends React.Component {
-  state = {
-    hiddenByAutohide: false,
-  };
-
-  modalContext = {
-    onClose: () => this.props.onClose(),
-  };
-
-  componentDidMount() {
-    this.startAutohide();
+  constructor(props) {
+    super(props);
+    this.toastContext = {
+      onClose: () => this.props.onClose(),
+    };
   }
 
-  startAutohide = () => {
-    const { autohide, delay } = this.props;
-    if (autohide) {
-      // const context = useContext(ToastContext);
-      window.setTimeout(() => {
-        this.setState({
-          hiddenByAutohide: true,
-        });
-        // if (context) {
-        //   context.onClose();
-        // }
+  componentDidUpdate(prevProps) {
+    const { autohide, delay, show } = this.props;
+    if (!this.autohideInterval && autohide && show !== prevProps.show) {
+      this.autohideInterval = window.setTimeout(() => {
+        this.props.onClose();
+        this.autohideInterval = null;
       }, delay);
     }
-  };
+  }
 
   render() {
     const {
@@ -78,15 +68,13 @@ class ToastDialog extends React.Component {
       className,
       children,
       transition: Transition,
-      show: _show,
+      show,
       animation,
       delay: _delay,
       autohide: _autohide,
       ...props
     } = this.props;
-    const { hiddenByAutohide } = this.state;
 
-    const show = _show && !hiddenByAutohide;
     const useAnimation = Transition && animation;
     const toast = (
       <div
@@ -113,7 +101,7 @@ class ToastDialog extends React.Component {
     }
     return (
       <ToastContext.Provider value={this.toastContext}>
-        {toast};
+        {toast}
       </ToastContext.Provider>
     );
   }

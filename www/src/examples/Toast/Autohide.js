@@ -8,12 +8,12 @@ class Example extends React.Component {
 
   render() {
     const { show } = this.state;
-    const toggleShow = () => this.setState({ show: true });
+    const handleShow = () => this.setState({ show: true });
     const handleClose = () => this.setState({ show: false });
     return (
       <Row>
         <Col xs={6}>
-          <Toast onClose={handleClose} show={show} delay={5000} autohide>
+          <Toast onClose={handleClose} show={show} delay={3000} autohide>
             <Toast.Header>
               <img
                 src="https://via.placeholder.com/20"
@@ -29,7 +29,7 @@ class Example extends React.Component {
           </Toast>
         </Col>
         <Col xs={6}>
-          <Button onClick={toggleShow}>Show Toast</Button>
+          <Button onClick={handleShow}>Show Toast</Button>
         </Col>
       </Row>
     );
