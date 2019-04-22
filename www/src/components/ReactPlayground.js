@@ -40,7 +40,7 @@ const StyledError = styled(LiveError)`
   white-space: pre;
 `;
 
-const StyledProvider = styled(LiveProvider)`
+const StyledLiveProviderChild = styled.div`
   @import '../css/theme';
 
   background-color: $body-bg;
@@ -49,7 +49,10 @@ const StyledProvider = styled(LiveProvider)`
 
 const StyledEditor = styled(LiveEditor)`
   composes: prism from '../css/prism.module.scss';
-  border-radius: 0 0 8px 8px;
+  @import '../css/theme';
+  font-family: $font-family-monospace !important;
+
+  border-radius: 0 0 8px 8px !important;
 `;
 
 const EditorInfoMessage = styled('div')`
@@ -152,6 +155,7 @@ class Editor extends React.Component {
           ignoreTabKey={ignoreTab}
           aria-describedby={this.id}
           aria-label="Example code editor"
+          padding={20}
         />
         {(keyboardFocused || !ignoreTab) && (
           <EditorInfoMessage id={this.id} aria-live="polite">
@@ -255,17 +259,24 @@ export default class Playground extends React.Component {
 
   render() {
     const { codeText, exampleClassName, showCode = true } = this.props;
+    // Remove the prettier comments and the trailing semicolons in JSX in displayed code.
+    const code = codeText
+      .replace(prettierComment, '')
+      .trim()
+      .replace(/>;$/, '>');
 
     return (
-      <StyledProvider
+      <LiveProvider
         scope={scope}
-        code={codeText.replace(prettierComment, '')}
+        code={code}
         mountStylesheet={false}
         noInline={codeText.includes('render(')}
       >
-        <Preview showCode={showCode} className={exampleClassName} />
-        {showCode && <Editor onChange={this.handleChange} />}
-      </StyledProvider>
+        <StyledLiveProviderChild>
+          <Preview showCode={showCode} className={exampleClassName} />
+          {showCode && <Editor onChange={this.handleChange} />}
+        </StyledLiveProviderChild>
+      </LiveProvider>
     );
   }
 }

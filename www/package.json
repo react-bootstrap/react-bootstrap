@@ -38,7 +38,7 @@
     "react": "^16.8.6",
     "react-docgen": "^4.1.0",
     "react-dom": "^16.8.6",
-    "react-live": "^1.12.0",
+    "react-live": "^2.0.1",
     "recompose": "^0.30.0",
     "remark-slug": "^5.1.1",
     "shakespeare-data": "^3.0.0",
