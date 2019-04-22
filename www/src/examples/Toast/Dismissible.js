@@ -14,8 +14,8 @@ class Example extends React.Component {
     return (
       <Row>
         <Col xs={6}>
-          <Toast show={showA}>
-            <Toast.Header onClose={toggleShowA}>
+          <Toast show={showA} onClose={toggleShowA}>
+            <Toast.Header>
               <img
                 src="https://via.placeholder.com/20"
                 className="rounded mr-2"
@@ -35,8 +35,8 @@ class Example extends React.Component {
           </Button>
         </Col>
         <Col xs={6} className="my-1">
-          <Toast show={showB} animation={false}>
-            <Toast.Header onClose={toggleShowB}>
+          <Toast onClose={toggleShowB} show={showB} animation={false}>
+            <Toast.Header>
               <img
                 src="https://via.placeholder.com/20"
                 className="rounded mr-2"

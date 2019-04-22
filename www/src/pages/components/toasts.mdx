@@ -9,6 +9,7 @@ import ToastDismissible from '../../examples/Toast/Dismissible';
 import ToastStacking from '../../examples/Toast/Stacking';
 import ToastPlacement from '../../examples/Toast/Placement';
 import ToastPlacementMulti from '../../examples/Toast/PlacementMulti';
+import ToastAutohide from '../../examples/Toast/Autohide';
 
 # Toasts
 
@@ -47,6 +48,12 @@ Place toasts with custom CSS as you need them. The top right is often used for n
 For systems that generate more notifications, consider using a wrapping element so they can easily stack.
 
 <ReactPlayground codeText={ToastPlacementMulti} />
+
+### Autohide
+
+A Toast can also automatically hide after X milliseconds. For that, use the `autohide` prop in combination with `delay` the prop to sepecify the delay.
+
+<ReactPlayground codeText={ToastAutohide} />
 
 ## API
 

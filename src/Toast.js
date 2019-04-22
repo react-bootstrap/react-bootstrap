@@ -41,8 +41,7 @@ const propTypes = {
   delay: PropTypes.number,
 
   /**
-   * A callback fired when the header closeButton or non-static backdrop is
-   * clicked. Required if either are specified.
+   * A Callback fired when the close button is clicked.
    */
   onClose: PropTypes.func,
 
@@ -57,7 +56,7 @@ const propTypes = {
 
 const defaultProps = {
   animation: true,
-  autohide: true,
+  autohide: false,
   delay: 500,
   dialogAs: ToastDialog,
   show: true,

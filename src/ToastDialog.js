@@ -1,12 +1,39 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import { useBootstrapPrefix } from './ThemeProvider';
+import ToastContext from './ToastContext';
 
 const propTypes = {
   /** @default 'toast' */
   bsPrefix: PropTypes.string,
+
+  /**
+   * Apply a CSS fade transition to the toast
+   */
+  animation: PropTypes.bool,
+
+  /**
+   * A Component type that provides the toast content Markup. This is a useful
+   * prop when you want to use your own styles and markup to create a custom
+   * toast component.
+   */
+  dialogAs: PropTypes.elementType,
+
+  /**
+   * Auto hide the toast
+   */
+  autohide: PropTypes.bool,
+
+  /**
+   * Delay hiding the toast (ms)
+   */
+  delay: PropTypes.number,
+
+  /**
+   * A callback fired when the header closeButton or non-static backdrop is
+   * clicked. Required if either are specified.
+   */
+  onClose: PropTypes.func,
 
   /**
    * When `true` The modal will show itself.
@@ -19,19 +46,31 @@ const propTypes = {
 
 class ToastDialog extends React.Component {
   state = {
-    show: true,
+    hiddenByAutohide: false,
+  };
+
+  modalContext = {
+    onClose: () => this.props.onClose(),
   };
 
   componentDidMount() {
-    const { animation, transition, delay } = this.props;
-    if (!transition || !animation) {
+    this.startAutohide();
+  }
+
+  startAutohide = () => {
+    const { autohide, delay } = this.props;
+    if (autohide) {
+      // const context = useContext(ToastContext);
       window.setTimeout(() => {
         this.setState({
-          show: false,
+          hiddenByAutohide: true,
         });
+        // if (context) {
+        //   context.onClose();
+        // }
       }, delay);
     }
-  }
+  };
 
   render() {
     const {
@@ -41,11 +80,13 @@ class ToastDialog extends React.Component {
       transition: Transition,
       show: _show,
       animation,
-      delay,
+      delay: _delay,
+      autohide: _autohide,
       ...props
     } = this.props;
+    const { hiddenByAutohide } = this.state;
 
-    const show = this.state.show || _show;
+    const show = _show && !hiddenByAutohide;
     const useAnimation = Transition && animation;
     const toast = (
       <div
@@ -65,12 +106,16 @@ class ToastDialog extends React.Component {
 
     if (useAnimation) {
       return (
-        <Transition in={show} unmountOnExit>
-          {toast}
-        </Transition>
+        <ToastContext.Provider value={this.toastContext}>
+          <Transition in={show}>{toast}</Transition>
+        </ToastContext.Provider>
       );
     }
-    return toast;
+    return (
+      <ToastContext.Provider value={this.toastContext}>
+        {toast};
+      </ToastContext.Provider>
+    );
   }
 }
 

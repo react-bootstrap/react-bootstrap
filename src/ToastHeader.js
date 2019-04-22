@@ -1,10 +1,11 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import CloseButton from './CloseButton';
+import ToastContext from './ToastContext';
 
 const propTypes = {
   bsPrefix: PropTypes.string,
@@ -20,13 +21,6 @@ const propTypes = {
    * Specify whether the Component should contain a close button
    */
   closeButton: PropTypes.bool,
-
-  /**
-   * A Callback fired when the close button is clicked. If used directly inside
-   * a Toast component, the onHide will automatically be propagated up to the
-   * parent Toast `onHide`.
-   */
-  onClose: PropTypes.func,
 };
 
 const defaultProps = {
@@ -38,16 +32,17 @@ const ToastHeader = ({
   bsPrefix,
   closeLabel,
   closeButton,
-  onClose,
   className,
   children,
   ...props
 }) => {
   bsPrefix = useBootstrapPrefix(bsPrefix, 'toast-header');
 
+  const context = useContext(ToastContext);
+
   const handleClick = useEventCallback(() => {
-    if (onClose) {
-      onClose();
+    if (context) {
+      context.onClose();
     }
   });
 
