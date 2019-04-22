@@ -63,8 +63,6 @@ const defaultProps = {
   transition: Fade,
 };
 
-/* eslint-enable no-use-before-define */
-
 const Toast = ({ children, dialogAs: Dialog, ...props }) => (
   <Dialog {...props}>{children}</Dialog>
 );
