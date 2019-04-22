@@ -20,7 +20,7 @@ module.exports = {
       resolve: 'gatsby-mdx',
       options: {
         defaultLayout: require.resolve('./src/layouts/ApiLayout'),
-        mdPlugins: [remarkSlug],
+        remarkPlugins: [remarkSlug],
       },
     },
     {
