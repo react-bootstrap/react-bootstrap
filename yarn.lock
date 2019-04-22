@@ -2904,10 +2904,10 @@ dts-critic@^1.0.6:
     download-file-sync "^1.0.4"
     yargs "^12.0.5"
 
-dtslint@^0.6.1:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.6.2.tgz#3b35332d5fa727544ea3f630224e67f3b84b8ea2"
-  integrity sha512-JClRWsqxFNtSKz4dLcDhVfoTHNSAavgDbzvRKspPfi+FDtYnzrFFxC4gLIsqP77faVLSwCkEUPoK7PThh9B4Tg==
+dtslint@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.7.0.tgz#30f11d4efba257730a34159ada87750090ca0468"
+  integrity sha512-7swnnfKnkjW8Vidvn0rP9wNCnzANuCj3V2ZFhYjwejGDzpuKtcuINPGWmeBIn1rsIaU6cBsZcleE9lHhX8Phqg==
   dependencies:
     definitelytyped-header-parser "^1.0.1"
     dts-critic "^1.0.6"
