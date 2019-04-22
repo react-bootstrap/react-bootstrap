@@ -1,4 +1,4 @@
-import { MDXProvider } from '@mdx-js/tag';
+import { MDXProvider } from '@mdx-js/react';
 import PropTypes from 'prop-types';
 import React from 'react';
 

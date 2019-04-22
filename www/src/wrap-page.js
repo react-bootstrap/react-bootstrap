@@ -1,4 +1,4 @@
-const { MDXProvider } = require('@mdx-js/tag');
+const { MDXProvider } = require('@mdx-js/react');
 const React = require('react');
 
 const Heading = require('./components/Heading');
