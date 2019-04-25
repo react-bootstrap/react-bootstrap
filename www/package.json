@@ -25,7 +25,7 @@
     "gatsby-remark-prismjs": "^3.2.8",
     "gatsby-source-filesystem": "2.0.32",
     "gatsby-transformer-react-docgen": "npm:@monastic.panic/gatsby-transformer-react-docgen@4.0.0-5",
-    "gatsby-transformer-remark": "^2.3.10",
+    "gatsby-transformer-remark": "^2.3.12",
     "gh-pages": "^2.0.1",
     "holderjs": "^2.9.6",
     "import-sort-cli": "^6.0.0",
