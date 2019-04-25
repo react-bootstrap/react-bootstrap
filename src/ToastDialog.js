@@ -42,6 +42,9 @@ const propTypes = {
 
   /** A `react-transition-group` Transition component used to animate the Toast on dismissal. */
   transition: PropTypes.elementType,
+
+  /** @ignore */
+  innerRef: PropTypes.any,
 };
 
 class ToastDialog extends React.Component {
@@ -72,6 +75,7 @@ class ToastDialog extends React.Component {
       animation,
       delay: _delay,
       autohide: _autohide,
+      innerRef,
       ...props
     } = this.props;
 
@@ -79,6 +83,7 @@ class ToastDialog extends React.Component {
     const toast = (
       <div
         {...props}
+        ref={innerRef}
         className={classNames(
           bsPrefix,
           className,

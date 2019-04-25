@@ -57,7 +57,7 @@ const propTypes = {
 const defaultProps = {
   animation: true,
   autohide: false,
-  delay: 500,
+  delay: 3000,
   dialogAs: ToastDialog,
   show: true,
   transition: Fade,
