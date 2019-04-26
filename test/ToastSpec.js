@@ -1,27 +1,18 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import Toast from '../src/Toast';
 
 describe('Toasts', () => {
   it('will render an entire toast', () => {
-    const result = shallow(
+    mount(
       <Toast>
-        <Toast.Header>header-content</Toast.Header>
-        <Toast.Body>body-content</Toast.Body>
+        <Toast.Header />
+        <Toast.Body />
       </Toast>,
-    ).equals(
-      <div
-        className="toast"
-        role="alert"
-        aria-live="assertive"
-        aria-atomic="true"
-      >
-        <div className="toast-header">header-content</div>
-        <div className="toast-body">body-content</div>
-      </div>,
+    ).assertSingle(
+      'div.toast[role="alert"][aria-live="assertive"][aria-atomic="true"]',
     );
-    expect(result).to.equal(true);
   });
 
   it('should trigger the onClose event after clicking on the close button', () => {
