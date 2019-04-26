@@ -1,24 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import Fade from './Fade';
 import Header from './ToastHeader';
 import Body from './ToastBody';
 import { createBootstrapComponent } from './ThemeProvider';
-import ToastDialog from './ToastDialog';
+import ToastContext from './ToastContext';
 
 const propTypes = {
   /**
    * @default 'toast'
    */
   bsPrefix: PropTypes.string,
-
-  /**
-   * A Component type that provides the toast content Markup. This is a useful
-   * prop when you want to use your own styles and markup to create a custom
-   * toast component.
-   */
-  dialogAs: PropTypes.elementType,
 
   /**
    * Apply a CSS fade transition to the toast
@@ -47,20 +41,91 @@ const propTypes = {
 
   /** A `react-transition-group` Transition component used to animate the Toast on dismissal. */
   transition: PropTypes.elementType,
+
+  /** @ignore */
+  innerRef: PropTypes.any,
 };
 
 const defaultProps = {
   animation: true,
   autohide: false,
   delay: 3000,
-  dialogAs: ToastDialog,
   show: true,
   transition: Fade,
 };
 
-const Toast = ({ children, dialogAs: Dialog, ...props }) => (
-  <Dialog {...props}>{children}</Dialog>
-);
+class Toast extends React.Component {
+  constructor(props) {
+    super(props);
+    this.toastContext = {
+      onClose: () => this.props.onClose(),
+    };
+    const { autohide } = props;
+    if (autohide) {
+      this.setTimeout(props.delay);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { autohide, delay, show } = this.props;
+    if (!this.autohideInterval && autohide && show !== prevProps.show) {
+      this.setTimeout(delay);
+    }
+  }
+
+  setTimeout = delay => {
+    this.autohideInterval = window.setTimeout(() => {
+      this.props.onClose();
+      this.autohideInterval = null;
+    }, delay);
+  };
+
+  render() {
+    const {
+      bsPrefix,
+      className,
+      children,
+      transition: Transition,
+      show,
+      animation,
+      delay: _delay,
+      autohide: _autohide,
+      innerRef,
+      ...props
+    } = this.props;
+
+    const useAnimation = Transition && animation;
+    const toast = (
+      <div
+        {...props}
+        ref={innerRef}
+        className={classNames(
+          bsPrefix,
+          className,
+          !useAnimation && show && 'show',
+        )}
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        {children}
+      </div>
+    );
+
+    if (useAnimation) {
+      return (
+        <ToastContext.Provider value={this.toastContext}>
+          <Transition in={show}>{toast}</Transition>
+        </ToastContext.Provider>
+      );
+    }
+    return (
+      <ToastContext.Provider value={this.toastContext}>
+        {toast}
+      </ToastContext.Provider>
+    );
+  }
+}
 
 Toast.propTypes = propTypes;
 Toast.defaultProps = defaultProps;
