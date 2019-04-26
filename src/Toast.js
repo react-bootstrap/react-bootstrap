@@ -62,19 +62,19 @@ class Toast extends React.Component {
     };
     const { autohide } = props;
     if (autohide) {
-      this.setTimeout(props.delay);
+      this.scheduleAutohideTimeout(props.delay);
     }
   }
 
   componentDidUpdate(prevProps) {
     const { autohide, delay, show } = this.props;
     if (!this.autohideInterval && autohide && show !== prevProps.show) {
-      this.setTimeout(delay);
+      this.scheduleAutohideTimeout(delay);
     }
   }
 
-  setTimeout = delay => {
-    this.autohideInterval = window.setTimeout(() => {
+  scheduleAutohideTimeout = delay => {
+    this.autohideInterval = setTimeout(() => {
       this.props.onClose();
       this.autohideInterval = null;
     }, delay);
