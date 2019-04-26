@@ -13,13 +13,6 @@ const propTypes = {
   animation: PropTypes.bool,
 
   /**
-   * A Component type that provides the toast content Markup. This is a useful
-   * prop when you want to use your own styles and markup to create a custom
-   * toast component.
-   */
-  dialogAs: PropTypes.elementType,
-
-  /**
    * Auto hide the toast
    */
   autohide: PropTypes.bool,

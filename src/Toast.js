@@ -14,21 +14,16 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * Apply a CSS fade transition to the toast
-   */
-  animation: PropTypes.bool,
-
-  /**
-   * A css class to apply to the Toast dialog DOM node.
-   */
-  dialogClassName: PropTypes.string,
-
-  /**
    * A Component type that provides the toast content Markup. This is a useful
    * prop when you want to use your own styles and markup to create a custom
    * toast component.
    */
   dialogAs: PropTypes.elementType,
+
+  /**
+   * Apply a CSS fade transition to the toast
+   */
+  animation: PropTypes.bool,
 
   /**
    * Auto hide the toast
