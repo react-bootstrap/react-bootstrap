@@ -16,7 +16,7 @@
     "common-tags": "^1.8.0",
     "dom-helpers": "^3.4.0",
     "formik": "^1.5.3",
-    "gatsby": "^2.3.30",
+    "gatsby": "^2.3.31",
     "gatsby-link": "^2.0.16",
     "gatsby-mdx": "0.4.3",
     "gatsby-plugin-astroturf": "^0.2.1",
