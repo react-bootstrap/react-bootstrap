@@ -5,7 +5,7 @@ import Toast from '../src/Toast';
 
 describe('Toasts', () => {
   it('will render an entire toast', () => {
-    shallow(
+    const result = shallow(
       <Toast>
         <Toast.Header>header-content</Toast.Header>
         <Toast.Body>body-content</Toast.Body>
@@ -21,6 +21,7 @@ describe('Toasts', () => {
         <div className="toast-body">body-content</div>
       </div>,
     );
+    expect(result).to.equal(true);
   });
 
   it('should trigger the onClose event after clicking on the close button', () => {

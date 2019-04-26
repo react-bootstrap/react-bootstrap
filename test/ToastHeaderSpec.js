@@ -6,20 +6,20 @@ import Toast from '../src/Toast';
 describe('Toast.Header', () => {
   it('will pass all props to the created div and renders its children', () => {
     const content = <strong>Content</strong>;
-    shallow(
-      <Toast.Header className="custom-class">{content}</Toast.Header>,
-    ).equals(
-      <div className="toast-header custom-class">
+    const result = shallow(<Toast.Header>{content}</Toast.Header>).equals(
+      <div className="toast-header">
         {content}
         <button
           type="button"
-          className="ml-2 mb-1 close"
-          data-dismiss="toast"
+          className="close ml-2 mb-1"
           aria-label="Close"
+          data-dismiss="toast"
         >
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true">×</span>
+          <span className="sr-only">Close</span>
         </button>
       </div>,
     );
+    expect(result).to.equal(true);
   });
 });

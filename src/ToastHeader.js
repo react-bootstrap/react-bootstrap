@@ -47,7 +47,7 @@ const ToastHeader = ({
   });
 
   return (
-    <div {...props} className={classNames(className, bsPrefix)}>
+    <div {...props} className={classNames(bsPrefix, className)}>
       {children}
 
       {closeButton && (
