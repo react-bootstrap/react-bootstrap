@@ -46,17 +46,25 @@ class ToastDialog extends React.Component {
     this.toastContext = {
       onClose: () => this.props.onClose(),
     };
+    const { autohide } = props;
+    if (autohide) {
+      this.setTimeout(props.delay);
+    }
   }
 
   componentDidUpdate(prevProps) {
     const { autohide, delay, show } = this.props;
     if (!this.autohideInterval && autohide && show !== prevProps.show) {
-      this.autohideInterval = window.setTimeout(() => {
-        this.props.onClose();
-        this.autohideInterval = null;
-      }, delay);
+      this.setTimeout(delay);
     }
   }
+
+  setTimeout = delay => {
+    this.autohideInterval = window.setTimeout(() => {
+      this.props.onClose();
+      this.autohideInterval = null;
+    }, delay);
+  };
 
   render() {
     const {
