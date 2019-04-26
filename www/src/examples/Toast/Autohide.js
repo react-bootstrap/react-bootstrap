@@ -16,7 +16,7 @@ class Example extends React.Component {
           <Toast onClose={handleClose} show={show} delay={3000} autohide>
             <Toast.Header>
               <img
-                src="https://via.placeholder.com/20"
+                src="holder.js/20x20?text=%20"
                 className="rounded mr-2"
                 alt=""
               />

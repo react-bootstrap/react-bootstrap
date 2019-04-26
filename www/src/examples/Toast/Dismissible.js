@@ -17,7 +17,7 @@ class Example extends React.Component {
           <Toast show={showA} onClose={toggleShowA}>
             <Toast.Header>
               <img
-                src="https://via.placeholder.com/20"
+                src="holder.js/20x20?text=%20"
                 className="rounded mr-2"
                 alt=""
               />
@@ -38,7 +38,7 @@ class Example extends React.Component {
           <Toast onClose={toggleShowB} show={showB} animation={false}>
             <Toast.Header>
               <img
-                src="https://via.placeholder.com/20"
+                src="holder.js/20x20?text=%20"
                 className="rounded mr-2"
                 alt=""
               />
