@@ -23,7 +23,7 @@ const components = {
     React.isValidElement(props.children) ? (
       <CodeBlock
         codeText={props.children.props.children}
-        mode={getMode(props.children.props.props.className)} // omg
+        mode={getMode(props.children.props.className)}
       />
     ) : (
       <pre {...props} />
