@@ -163,7 +163,7 @@ class Collapse extends React.Component {
   };
 
   handleExiting = elem => {
-    elem.style[this.getDimension()] = '0';
+    elem.style[this.getDimension()] = null;
   };
 
   // for testing
