@@ -42,12 +42,18 @@ const propTypes = {
 
 const defaultProps = {
   inline: false,
-  as: 'form',
 };
 
 const Form = React.forwardRef(
   (
-    { bsPrefix, inline, className, validated, as: Component, ...props },
+    {
+      bsPrefix,
+      inline,
+      className,
+      validated,
+      as: Component = 'form',
+      ...props
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form');

@@ -21,12 +21,11 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'div',
   fluid: false,
 };
 
 const Container = React.forwardRef(
-  ({ bsPrefix, fluid, as: Component, className, ...props }, ref) => {
+  ({ bsPrefix, fluid, as: Component = 'div', className, ...props }, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'container');
     return (
       <Component

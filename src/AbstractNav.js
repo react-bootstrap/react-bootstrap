@@ -27,9 +27,7 @@ class AbstractNav extends React.Component {
     activeKey: PropTypes.any,
   };
 
-  static defaultProps = {
-    as: 'ul',
-  };
+  static defaultProps = {};
 
   constructor(...args) {
     super(...args);
@@ -112,7 +110,7 @@ class AbstractNav extends React.Component {
 
   render() {
     const {
-      as: Component,
+      as: Component = 'ul',
       onSelect: _,
       parentOnSelect: _0,
       getControlledId: _1,

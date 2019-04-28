@@ -14,15 +14,15 @@ class TabContent extends React.Component {
     as: PropTypes.elementType,
   };
 
-  static defaultProps = {
-    as: 'div',
-  };
-
   render() {
-    const { bsPrefix, as: Component, className, ...props } = this.props;
+    const { bsPrefix, as: Component = 'div', className, ...props } = this.props;
 
     return <Component {...props} className={classNames(className, bsPrefix)} />;
   }
 }
 
-export default createBootstrapComponent(TabContent, 'tab-content');
+const BootstrapTabContent = createBootstrapComponent(TabContent, 'tab-content');
+
+BootstrapTabContent.defaultProps = {};
+
+export default BootstrapTabContent;

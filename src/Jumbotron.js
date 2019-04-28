@@ -4,22 +4,27 @@ import classNames from 'classnames';
 
 import { createBootstrapComponent } from './ThemeProvider';
 
-const propTypes = {
-  as: PropTypes.elementType,
-  /** Make the jumbotron full width, and without rounded corners */
-  fluid: PropTypes.bool,
-  /** @default 'jumbotron' */
-  bsPrefix: PropTypes.string,
-};
-
 const defaultProps = {
-  as: 'div',
   fluid: false,
 };
 
 class Jumbotron extends React.Component {
+  static propTypes = {
+    as: PropTypes.elementType,
+    /** Make the jumbotron full width, and without rounded corners */
+    fluid: PropTypes.bool,
+    /** @default 'jumbotron' */
+    bsPrefix: PropTypes.string,
+  };
+
   render() {
-    const { as: Component, className, fluid, bsPrefix, ...props } = this.props;
+    const {
+      as: Component = 'div',
+      className,
+      fluid,
+      bsPrefix,
+      ...props
+    } = this.props;
     const classes = {
       [bsPrefix]: true,
       [`${bsPrefix}-fluid`]: fluid,
@@ -28,7 +33,8 @@ class Jumbotron extends React.Component {
   }
 }
 
-Jumbotron.propTypes = propTypes;
-Jumbotron.defaultProps = defaultProps;
+const BootstrapJumbotron = createBootstrapComponent(Jumbotron, 'jumbotron');
 
-export default createBootstrapComponent(Jumbotron, 'jumbotron');
+BootstrapJumbotron.defaultProps = defaultProps;
+
+export default BootstrapJumbotron;

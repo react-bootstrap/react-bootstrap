@@ -6,6 +6,8 @@ import React from 'react';
 import createWithBsPrefix from './utils/createWithBsPrefix';
 import { createBootstrapComponent } from './ThemeProvider';
 
+const defaultProps = {};
+
 /**
  *
  * @property {InputGroupAppend} Append
@@ -29,12 +31,14 @@ class InputGroup extends React.Component {
     as: PropTypes.elementType,
   };
 
-  static defaultProps = {
-    as: 'div',
-  };
-
   render() {
-    const { bsPrefix, size, className, as: Component, ...props } = this.props;
+    const {
+      bsPrefix,
+      size,
+      className,
+      as: Component = 'div',
+      ...props
+    } = this.props;
 
     return (
       <Component
@@ -70,6 +74,8 @@ const InputGroupRadio = props => (
 );
 
 const DecoratedInputGroup = createBootstrapComponent(InputGroup, 'input-group');
+
+DecoratedInputGroup.defaultProps = defaultProps;
 
 DecoratedInputGroup.Text = InputGroupText;
 DecoratedInputGroup.Radio = InputGroupRadio;

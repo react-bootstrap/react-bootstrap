@@ -22,13 +22,11 @@ const propTypes = {
   defaultActiveKey: PropTypes.string,
 };
 
-const defaultProps = {
-  as: 'div',
-};
+const defaultProps = {};
 
 const Accordion = React.forwardRef((props, ref) => {
   let {
-    as: Component,
+    as: Component = 'div',
     activeKey,
     bsPrefix,
     children,

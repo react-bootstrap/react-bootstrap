@@ -26,7 +26,6 @@ const propTypes = {
 const defaultProps = {
   label: 'breadcrumb',
   listProps: {},
-  as: 'nav',
 };
 
 const Breadcrumb = React.forwardRef(
@@ -37,7 +36,7 @@ const Breadcrumb = React.forwardRef(
       listProps,
       children,
       label,
-      as: Component,
+      as: Component = 'nav',
       ...props
     },
     ref,

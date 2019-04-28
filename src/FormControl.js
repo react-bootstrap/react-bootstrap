@@ -75,9 +75,7 @@ const propTypes = {
   isInvalid: PropTypes.bool,
 };
 
-const defaultProps = {
-  as: 'input',
-};
+const defaultProps = {};
 
 const FormControl = React.forwardRef(
   (
@@ -91,7 +89,7 @@ const FormControl = React.forwardRef(
       isInvalid,
       plaintext,
       readOnly,
-      as: Component,
+      as: Component = 'input',
       ...props
     },
     ref,

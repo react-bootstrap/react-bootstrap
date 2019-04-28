@@ -19,12 +19,13 @@ const propTypes = {
   children: PropTypes.element,
 };
 
-const defaultProps = {
-  as: 'button',
-};
+const defaultProps = {};
 
 const AccordionToggle = React.forwardRef(
-  ({ as: Component, children, eventKey, onClick, ...props }, ref) => {
+  (
+    { as: Component = 'button', children, eventKey, onClick, ...props },
+    ref,
+  ) => {
     const onSelect = useContext(SelectableContext);
 
     return (

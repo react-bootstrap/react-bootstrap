@@ -57,7 +57,6 @@ const propTypes = {
 
 const defaultProps = {
   alignRight: false,
-  as: 'div',
   flip: true,
 };
 
@@ -71,7 +70,7 @@ const DropdownMenu = React.forwardRef(
       flip,
       popperConfig,
       show: showProps,
-      as: Component,
+      as: Component = 'div',
       ...props
     },
     ref,

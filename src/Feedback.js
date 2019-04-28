@@ -14,11 +14,10 @@ const propTypes = {
 
 const defaultProps = {
   type: 'valid',
-  as: 'div',
 };
 
 const Feedback = React.forwardRef(
-  ({ as: Component, className, type, ...props }, ref) => (
+  ({ as: Component = 'div', className, type, ...props }, ref) => (
     <Component
       {...props}
       ref={ref}

@@ -14,13 +14,12 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  as: 'div',
-};
+const defaultProps = {};
 
 const Media = React.forwardRef(
-  ({ bsPrefix, className, as: Component, ...props }, ref) => {
+  ({ bsPrefix, className, as: Component = 'div', ...props }, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'media');
+
     return (
       <Component
         {...props}

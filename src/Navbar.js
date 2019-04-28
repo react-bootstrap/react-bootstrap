@@ -117,7 +117,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'nav',
   expand: true,
   variant: 'light',
   collapseOnSelect: false,
@@ -169,7 +168,7 @@ class Navbar extends React.Component {
       sticky,
       className,
       children,
-      as: Component,
+      as: Component = 'nav',
       expanded: _1,
       onToggle: _2,
       onSelect: _3,
@@ -210,13 +209,13 @@ class Navbar extends React.Component {
 }
 
 Navbar.propTypes = propTypes;
-Navbar.defaultProps = defaultProps;
 
 const DecoratedNavbar = createBootstrapComponent(
   uncontrollable(Navbar, { expanded: 'onToggle' }),
   'navbar',
 );
 
+DecoratedNavbar.defaultProps = defaultProps;
 DecoratedNavbar.Brand = NavbarBrand;
 DecoratedNavbar.Toggle = NavbarToggle;
 DecoratedNavbar.Collapse = NavbarCollapse;

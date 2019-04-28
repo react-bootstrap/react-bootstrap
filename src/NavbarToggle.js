@@ -26,12 +26,19 @@ const propTypes = {
 
 const defaultProps = {
   label: 'Toggle navigation',
-  as: 'button',
 };
 
 const NavbarToggle = React.forwardRef(
   (
-    { bsPrefix, className, children, label, as: Component, onClick, ...props },
+    {
+      bsPrefix,
+      className,
+      children,
+      label,
+      as: Component = 'button',
+      onClick,
+      ...props
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-toggler');

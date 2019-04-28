@@ -27,12 +27,10 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  as: 'small',
-};
+const defaultProps = {};
 
 const FormText = React.forwardRef(
-  ({ bsPrefix, className, as: Component, ...props }, ref) => {
+  ({ bsPrefix, className, as: Component = 'small', ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-text');
     return (
       <Component

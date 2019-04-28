@@ -20,9 +20,7 @@ const propTypes = {
   innerRef: PropTypes.any,
 };
 
-const defaultProps = {
-  as: 'a',
-};
+const defaultProps = {};
 
 function isTrivialHref(href) {
   return !href || href.trim() === '#';
@@ -69,7 +67,7 @@ class SafeAnchor extends React.Component {
 
   render() {
     const {
-      as: Component,
+      as: Component = 'a',
       disabled,
       onKeyDown,
       innerRef,

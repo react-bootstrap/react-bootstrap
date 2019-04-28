@@ -29,16 +29,16 @@ class ListGroup extends React.Component {
   };
 
   static defaultProps = {
-    as: 'div',
     variant: null,
   };
 
   render() {
-    const { className, bsPrefix, variant, ...props } = this.props;
+    const { className, bsPrefix, variant, as = 'div', ...props } = this.props;
 
     return (
       <AbstractNav
         {...props}
+        as={as}
         className={classNames(
           className,
           bsPrefix,

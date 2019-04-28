@@ -49,10 +49,6 @@ class Spinner extends React.Component {
     as: PropTypes.elementType,
   };
 
-  static defaultProps = {
-    as: 'div',
-  };
-
   render() {
     const {
       bsPrefix,
@@ -60,11 +56,10 @@ class Spinner extends React.Component {
       animation,
       size,
       children,
-      as,
+      as: Component = 'div',
       className,
       ...props
     } = this.props;
-    const Component = as;
     const bsSpinnerPrefix = `${bsPrefix}-${animation}`;
 
     return (
@@ -83,4 +78,8 @@ class Spinner extends React.Component {
   }
 }
 
-export default createBootstrapComponent(Spinner, 'spinner');
+const BootstrapSpinner = createBootstrapComponent(Spinner, 'spinner');
+
+BootstrapSpinner.defaultProps = {};
+
+export default BootstrapSpinner;

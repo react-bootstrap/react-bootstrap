@@ -16,13 +16,12 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  as: 'div',
-};
+const defaultProps = {};
 
 const NavItem = React.forwardRef(
-  ({ bsPrefix, className, children, as: Component, ...props }, ref) => {
+  ({ bsPrefix, className, children, as: Component = 'div', ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-item');
+
     return (
       <Component
         {...props}

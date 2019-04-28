@@ -83,7 +83,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'div',
   navbar: false,
 };
 
@@ -97,7 +96,7 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
     onSelect,
     onToggle,
     focusFirstItemOnShow,
-    as: Component,
+    as: Component = 'div',
     navbar: _4,
     ...props
   } = useUncontrolled(uncontrolledProps, { show: 'onToggle' });

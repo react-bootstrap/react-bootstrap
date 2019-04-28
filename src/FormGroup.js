@@ -29,13 +29,18 @@ const propTypes = {
   _ref: PropTypes.any,
 };
 
-const defaultProps = {
-  as: 'div',
-};
+const defaultProps = {};
 
 const FormGroup = React.forwardRef(
   (
-    { bsPrefix, className, children, controlId, as: Component, ...props },
+    {
+      bsPrefix,
+      className,
+      children,
+      controlId,
+      as: Component = 'div',
+      ...props
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-group');

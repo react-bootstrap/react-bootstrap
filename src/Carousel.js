@@ -102,7 +102,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'div',
   slide: true,
   fade: false,
   interval: 5000,
@@ -423,7 +422,7 @@ class Carousel extends React.Component {
 
   render() {
     const {
-      as: Component,
+      as: Component = 'div',
       bsPrefix,
       slide,
       fade,

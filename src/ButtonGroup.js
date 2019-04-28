@@ -41,7 +41,6 @@ const defaultProps = {
   vertical: false,
   toggle: false,
   role: 'group',
-  as: 'div',
 };
 
 const ButtonGroup = React.forwardRef((props, ref) => {
@@ -51,7 +50,7 @@ const ButtonGroup = React.forwardRef((props, ref) => {
     toggle,
     vertical,
     className,
-    as: Component,
+    as: Component = 'div',
     ...rest
   } = props;
 

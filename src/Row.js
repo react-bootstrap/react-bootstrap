@@ -17,16 +17,11 @@ class Row extends React.Component {
     as: PropTypes.elementType,
   };
 
-  static defaultProps = {
-    as: 'div',
-    noGutters: false,
-  };
-
   render() {
     const {
       bsPrefix,
       noGutters,
-      as: Component,
+      as: Component = 'div',
       className,
       ...props
     } = this.props;
@@ -40,4 +35,10 @@ class Row extends React.Component {
   }
 }
 
-export default createBootstrapComponent(Row, 'row');
+const BootstrapRow = createBootstrapComponent(Row, 'row');
+
+BootstrapRow.defaultProps = {
+  noGutters: false,
+};
+
+export default BootstrapRow;

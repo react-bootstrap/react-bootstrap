@@ -50,7 +50,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'div',
   body: false,
 };
 
@@ -64,7 +63,7 @@ const Card = React.forwardRef(
       border,
       body,
       children,
-      as: Component,
+      as: Component = 'div',
       ...props
     },
     ref,

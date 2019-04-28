@@ -22,12 +22,11 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'img',
   variant: null,
 };
 
 const CardImg = React.forwardRef(
-  ({ bsPrefix, className, variant, as: Component, ...props }, ref) => {
+  ({ bsPrefix, className, variant, as: Component = 'img', ...props }, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'card-img');
 
     return (
