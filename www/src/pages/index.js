@@ -96,12 +96,13 @@ const ButtonToolbar = styled('div')`
 
 const Divider = styled('hr')`
   @import '../css/theme';
-  border-bottom-color: rgb(236, 236, 236);
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-top-color: rgb(236, 236, 236);
+  border-top-style: solid;
+  border-top-width: 1px;
+  padding-top: 15px;
   box-sizing: content-box;
   height: 1px;
-  border-top: none;
+  border-bottom: none;
 `;
 
 const DetailCard = styled('div')`
