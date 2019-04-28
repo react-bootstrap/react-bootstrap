@@ -15,4 +15,12 @@ describe('Media', () => {
   it('should allow custom elements instead of "div"', () => {
     mount(<Media as="section" />).assertSingle('section.media');
   });
+
+  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
+    expect(Media.defaultProps.as).to.be.undefined;
+  });
+
+  it('Should have div as default component', () => {
+    mount(<Media />).assertSingle('div');
+  });
 });

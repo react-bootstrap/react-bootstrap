@@ -252,4 +252,13 @@ describe('<Dropdown>', () => {
     wrapper.assertSingle('button.my-toggle');
     wrapper.assertSingle('div.my-menu');
   });
+
+  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
+    expect(Dropdown.defaultProps.as).to.be.undefined;
+  });
+
+  it('Should have div as default component', () => {
+    const wrapper = mount(<Dropdown />);
+    expect(wrapper.find('div').length).to.equal(1);
+  });
 });

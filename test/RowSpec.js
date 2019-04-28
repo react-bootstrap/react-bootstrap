@@ -15,4 +15,8 @@ describe('Row', () => {
   it('should allow custom elements instead of "div"', () => {
     mount(<Row as="section" />).assertSingle('section.row');
   });
+
+  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
+    expect(Row.defaultProps.as).to.be.undefined;
+  });
 });

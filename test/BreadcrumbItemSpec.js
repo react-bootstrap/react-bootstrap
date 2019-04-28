@@ -119,4 +119,12 @@ describe('<Breadcrumb.Item>', () => {
       .prop('target')
       .should.eq('_blank');
   });
+
+  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
+    expect(Breadcrumb.Item.defaultProps.as).to.be.undefined;
+  });
+
+  it('Should have li as default component', () => {
+    mount(<Breadcrumb.Item />).assertSingle('li');
+  });
 });

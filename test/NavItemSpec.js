@@ -15,4 +15,12 @@ describe('<NavItem>', () => {
   it('should allow custom elements instead of "div"', () => {
     mount(<NavItem as="section" />).assertSingle('section.nav-item');
   });
+
+  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
+    expect(NavItem.defaultProps.as).to.be.undefined;
+  });
+
+  it('Should have div as default component', () => {
+    mount(<NavItem />).assertSingle('div');
+  });
 });

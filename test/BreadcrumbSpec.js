@@ -33,4 +33,12 @@ describe('<Breadcrumb>', () => {
       .find('nav[aria-label="breadcrumb"]')
       .should.have.length(1);
   });
+
+  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
+    expect(Breadcrumb.defaultProps.as).to.be.undefined;
+  });
+
+  it('Should have nav as default component', () => {
+    mount(<Breadcrumb />).assertSingle('nav');
+  });
 });
