@@ -15,7 +15,7 @@
     "classnames": "^2.2.6",
     "common-tags": "^1.8.0",
     "dom-helpers": "^3.4.0",
-    "formik": "^1.5.3",
+    "formik": "^1.5.4",
     "gatsby": "^2.3.32",
     "gatsby-link": "^2.0.16",
     "gatsby-mdx": "0.4.3",
