@@ -18,7 +18,6 @@ const CloseButton = React.forwardRef(
       type="button"
       className={classNames('close', className)}
       onClick={onClick}
-      aria-label={label}
       {...props}
     >
       <span aria-hidden="true">&times;</span>
