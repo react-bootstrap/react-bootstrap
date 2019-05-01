@@ -23,7 +23,7 @@
     "gatsby-plugin-catch-links": "^2.0.13",
     "gatsby-plugin-sass": "^2.0.11",
     "gatsby-remark-prismjs": "^3.2.8",
-    "gatsby-source-filesystem": "2.0.32",
+    "gatsby-source-filesystem": "2.0.33",
     "gatsby-transformer-react-docgen": "npm:@monastic.panic/gatsby-transformer-react-docgen@4.0.0-5",
     "gatsby-transformer-remark": "^2.3.12",
     "gh-pages": "^2.0.1",
