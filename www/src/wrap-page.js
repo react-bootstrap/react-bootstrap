@@ -1,5 +1,6 @@
 require('bootstrap/dist/css/bootstrap.min.css');
 const React = require('react');
+const { MDXProvider } = require('@mdx-js/react');
 
 const Heading = require('./components/Heading');
 const CodeBlock = require('./components/CodeBlock');
