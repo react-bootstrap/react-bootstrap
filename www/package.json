@@ -21,7 +21,7 @@
     "docsearch.js": "^2.6.2",
     "dom-helpers": "^3.4.0",
     "formik": "^1.5.4",
-    "gatsby": "^2.3.33",
+    "gatsby": "^2.3.35",
     "gatsby-link": "^2.0.17",
     "gatsby-mdx": "0.4.3",
     "gatsby-plugin-astroturf": "^0.2.1",
