@@ -1,4 +1,4 @@
-const { MDXProvider } = require('@mdx-js/react');
+require('bootstrap/dist/css/bootstrap.min.css');
 const React = require('react');
 
 const Heading = require('./components/Heading');

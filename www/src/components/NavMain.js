@@ -8,6 +8,9 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Dropdown from 'react-bootstrap/Dropdown';
 import styled from 'astroturf';
 import withProps from 'recompose/withProps';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDiscord } from '@fortawesome/free-brands-svg-icons/faDiscord';
+import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
 
 import logo from '../assets/logo.svg';
 
@@ -42,10 +45,6 @@ const StyledNavLink = styled(Nav.Link)`
 
   &:global(.active) {
     font-width: 700;
-  }
-
-  & i {
-    font-size: 1.2em;
   }
 `;
 
@@ -122,7 +121,7 @@ function NavMain({ activePage }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i className="fab fa-github" />
+            <FontAwesomeIcon icon={faGithub} size="lg" />
             <span className="sr-only">Github</span>
           </StyledNavLink>
         </OverlayTrigger>
@@ -136,7 +135,7 @@ function NavMain({ activePage }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i className="fab fa-discord" />
+            <FontAwesomeIcon icon={faDiscord} size="lg" />
             <span className="sr-only">Discord</span>
           </StyledNavLink>
         </OverlayTrigger>
