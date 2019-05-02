@@ -7,6 +7,10 @@
     "url": "https://github.com/react-bootstrap/react-bootstrap/issues"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.17",
+    "@fortawesome/free-brands-svg-icons": "^5.8.1",
+    "@fortawesome/free-solid-svg-icons": "^5.8.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "@mdx-js/mdx": "^0.20.3",
     "@mdx-js/tag": "^0.20.3",
     "@restart/context": "^2.1.4",
@@ -14,6 +18,7 @@
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
     "common-tags": "^1.8.0",
+    "docsearch.js": "^2.6.2",
     "dom-helpers": "^3.4.0",
     "formik": "^1.5.4",
     "gatsby": "^2.3.33",

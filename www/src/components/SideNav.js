@@ -138,12 +138,14 @@ const utilities = ['transitions', 'responsive-embed', 'react-overlays'];
 
 // We need to configure this
 function attachSearch(ref) {
-  if (ref && window.docsearch)
-    window.docsearch({
-      apiKey: '00f98b765b687b91399288e7c4c68ce1',
-      indexName: 'react_bootstrap_v4',
-      inputSelector: `#${ref.id}`,
-      debug: process.env.NODE_ENV !== 'production', // Set debug to true if you want to inspect the dropdown
+  if (ref && window)
+    import('docsearch.js').then(({ default: docsearch }) => {
+      docsearch({
+        apiKey: '00f98b765b687b91399288e7c4c68ce1',
+        indexName: 'react_bootstrap_v4',
+        inputSelector: `#${ref.id}`,
+        debug: process.env.NODE_ENV !== 'production', // Set debug to true if you want to inspect the dropdown
+      });
     });
 }
 

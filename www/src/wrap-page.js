@@ -1,3 +1,5 @@
+require('bootstrap/dist/css/bootstrap.min.css');
+
 const { MDXProvider } = require('@mdx-js/tag');
 const React = require('react');
 
