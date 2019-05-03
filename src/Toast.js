@@ -71,11 +71,15 @@ const Toast = ({
 }) => {
   useEffect(() => {
     if (autohide && show) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         onClose();
       }, delay);
+      return () => {
+        clearTimeout(timer);
+      };
     }
-  });
+    return () => null;
+  }, [autohide, show]);
   const useAnimation = Transition && animation;
   const toast = (
     <div
