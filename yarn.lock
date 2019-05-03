@@ -869,9 +869,9 @@
   integrity sha512-INJYZQJP7g+IoDUh/475NlGiTeMfwTXUEr3tmRneckHIxNolGOW9CTq83S8cxq0CgJwwcMzMJFchxvlwe7Rk8Q==
 
 "@restart/hooks@^0.2.3":
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.2.9.tgz#3ff9b64e3d17a92c277566d99bcbb7ffe07a39e5"
-  integrity sha512-57KkRovmDgELedda1nNTafmUm8BywtfYOZLI5LrWEaeR/RzYITO+LAgioqWqOIatlEn/GionoPWjvgFu/BmXzg==
+  version "0.2.11"
+  resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.2.11.tgz#5968dd5b9ce880522259e5177413ce011529cad8"
+  integrity sha512-1FcdDKzz4YB+zC6Nu6exSPjuDoNsivalKcKhDHS6VTMo3xLQNrv4lwDOkhHv4/Mz1VtcLDUhbgb9fheZ+QMEcA==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
