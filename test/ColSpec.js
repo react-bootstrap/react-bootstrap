@@ -27,10 +27,6 @@ describe('Col', () => {
     ).assertSingle('.col-md-8.order-md-1.col-4.offset-1.order-lg-last');
   });
 
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(Col.defaultProps.as).to.be.undefined;
-  });
-
   it('Should have div as default component', () => {
     mount(<Col />).assertSingle('div');
   });

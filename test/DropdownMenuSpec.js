@@ -33,8 +33,4 @@ describe('<Dropdown.Menu>', () => {
       </DropdownMenu>,
     ).assertSingle('.dropdown-menu-right');
   });
-
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(DropdownMenu.defaultProps.as).to.be.undefined;
-  });
 });

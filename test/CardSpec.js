@@ -44,10 +44,6 @@ describe('<Card>', () => {
     mount(<Card body>test</Card>).assertSingle('.card-body');
   });
 
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(Card.defaultProps.as).to.be.undefined;
-  });
-
   it('Should have div as default component', () => {
     const wrapper = mount(<Card />);
     expect(wrapper.find('div').length).to.equal(1);

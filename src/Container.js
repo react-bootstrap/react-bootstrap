@@ -25,6 +25,7 @@ const defaultProps = {
 };
 
 const Container = React.forwardRef(
+  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   ({ bsPrefix, fluid, as: Component = 'div', className, ...props }, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'container');
     return (

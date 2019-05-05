@@ -16,10 +16,6 @@ describe('<FormText>', () => {
     ).to.equal('Help contents');
   });
 
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(FormText.defaultProps.as).to.be.undefined;
-  });
-
   it('Should have small as default component', () => {
     mount(<FormText />).assertSingle('small');
   });

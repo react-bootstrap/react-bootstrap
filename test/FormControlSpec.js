@@ -77,10 +77,6 @@ describe('<FormControl>', () => {
     );
   });
 
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(FormControl.defaultProps.as).to.be.undefined;
-  });
-
   it('Should have input as default component', () => {
     mount(<FormControl />).assertSingle('input');
   });

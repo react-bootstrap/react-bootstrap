@@ -25,10 +25,6 @@ describe('<Form>', () => {
       .assertSingle('FormGroup');
   });
 
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(Form.defaultProps.as).to.be.undefined;
-  });
-
   it('Should have form as default component', () => {
     mount(<Form />).assertSingle('form');
   });

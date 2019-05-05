@@ -25,11 +25,6 @@ describe('<Jumbotron>', () => {
       </Jumbotron>,
     ).assertSingle('section.jumbotron strong');
   });
-
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(Jumbotron.defaultProps.as).to.be.undefined;
-  });
-
   it('Should have div as default component', () => {
     mount(<Jumbotron />).assertSingle('div');
   });

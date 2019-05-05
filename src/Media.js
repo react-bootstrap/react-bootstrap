@@ -14,9 +14,8 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {};
-
 const Media = React.forwardRef(
+  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   ({ bsPrefix, className, as: Component = 'div', ...props }, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'media');
 
@@ -32,7 +31,6 @@ const Media = React.forwardRef(
 
 Media.displayName = 'Media';
 Media.propTypes = propTypes;
-Media.defaultProps = defaultProps;
 
 Media.Body = createWithBsPrefix('media-body');
 

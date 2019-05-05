@@ -17,10 +17,15 @@ class Row extends React.Component {
     as: PropTypes.elementType,
   };
 
+  static defaultProps = {
+    noGutters: false,
+  };
+
   render() {
     const {
       bsPrefix,
       noGutters,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       className,
       ...props
@@ -35,10 +40,4 @@ class Row extends React.Component {
   }
 }
 
-const BootstrapRow = createBootstrapComponent(Row, 'row');
-
-BootstrapRow.defaultProps = {
-  noGutters: false,
-};
-
-export default BootstrapRow;
+export default createBootstrapComponent(Row, 'row');

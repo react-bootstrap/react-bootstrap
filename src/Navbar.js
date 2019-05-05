@@ -168,6 +168,7 @@ class Navbar extends React.Component {
       sticky,
       className,
       children,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'nav',
       expanded: _1,
       onToggle: _2,
@@ -209,13 +210,13 @@ class Navbar extends React.Component {
 }
 
 Navbar.propTypes = propTypes;
+Navbar.defaultProps = defaultProps;
 
 const DecoratedNavbar = createBootstrapComponent(
   uncontrollable(Navbar, { expanded: 'onToggle' }),
   'navbar',
 );
 
-DecoratedNavbar.defaultProps = defaultProps;
 DecoratedNavbar.Brand = NavbarBrand;
 DecoratedNavbar.Toggle = NavbarToggle;
 DecoratedNavbar.Collapse = NavbarCollapse;

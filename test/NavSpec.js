@@ -203,10 +203,6 @@ describe('<Nav>', () => {
       expect(document.activeElement).to.equal(anchors.at(4).getDOMNode());
     });
 
-    it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-      expect(Nav.defaultProps.as).to.be.undefined;
-    });
-
     it('Should have div as default component', () => {
       mount(<Nav />).assertSingle('div');
     });

@@ -28,10 +28,6 @@ describe('<Spinner>', () => {
     ).assertSingle('div.spinner-grow span#testChild');
   });
 
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(Spinner.defaultProps.as).to.be.undefined;
-  });
-
   it('Should have div as default component', () => {
     mount(<Spinner animation="border" />).assertSingle('div');
   });

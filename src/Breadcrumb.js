@@ -36,6 +36,7 @@ const Breadcrumb = React.forwardRef(
       listProps,
       children,
       label,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'nav',
       ...props
     },

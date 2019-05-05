@@ -37,10 +37,6 @@ describe('<FormGroup>', () => {
     wrapper.assertSingle('input[id="my-control"]');
   });
 
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(FormGroup.defaultProps.as).to.be.undefined;
-  });
-
   it('Should have div as default component', () => {
     const wrapper = mount(<FormGroup />);
     expect(wrapper.find('div').length).to.equal(1);

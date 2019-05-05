@@ -38,10 +38,6 @@ describe('ButtonGroup', () => {
     ).assertSingle('.btn-group.btn-group-toggle');
   });
 
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(ButtonGroup.defaultProps.as).to.be.undefined;
-  });
-
   it('Should have div as default component', () => {
     mount(<ButtonGroup />).assertSingle('div');
   });

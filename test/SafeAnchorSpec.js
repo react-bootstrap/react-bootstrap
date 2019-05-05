@@ -120,10 +120,6 @@ describe('SafeAnchor', () => {
     ).to.not.exist;
   });
 
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(SafeAnchor.defaultProps.as).to.be.undefined;
-  });
-
   it('Should have a as default component', () => {
     mount(<SafeAnchor />).assertSingle('a');
   });

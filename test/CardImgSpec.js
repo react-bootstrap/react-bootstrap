@@ -30,10 +30,6 @@ describe('<CardImg>', () => {
       mount(<CardImg variant="bottom" />).assertSingle('.card-img-bottom');
     });
 
-    it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-      expect(CardImg.defaultProps.as).to.be.undefined;
-    });
-
     it('Should have img as default component', () => {
       mount(<CardImg />).assertSingle('img');
     });

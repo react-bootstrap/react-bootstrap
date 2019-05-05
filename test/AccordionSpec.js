@@ -90,10 +90,6 @@ describe('<Accordion>', () => {
     expect(onClickSpy).to.be.calledOnce;
   });
 
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(Accordion.defaultProps.as).to.be.undefined;
-  });
-
   it('Should have div as default component', () => {
     mount(<Accordion />).assertSingle('div');
   });

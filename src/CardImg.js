@@ -26,6 +26,7 @@ const defaultProps = {
 };
 
 const CardImg = React.forwardRef(
+  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   ({ bsPrefix, className, variant, as: Component = 'img', ...props }, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'card-img');
 

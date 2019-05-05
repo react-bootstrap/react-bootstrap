@@ -63,6 +63,7 @@ const Card = React.forwardRef(
       border,
       body,
       children,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       ...props
     },

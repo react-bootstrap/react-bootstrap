@@ -18,10 +18,6 @@ describe('<Container>', () => {
     mount(<Container as="section" />).assertSingle('section.container');
   });
 
-  it('Should define default "as" in prop destructuring instead of deafultProps', () => {
-    expect(Container.defaultProps.as).to.be.undefined;
-  });
-
   it('Should have div as default component', () => {
     mount(<Container />).assertSingle('div');
   });

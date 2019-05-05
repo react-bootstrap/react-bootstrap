@@ -16,9 +16,8 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {};
-
 const NavItem = React.forwardRef(
+  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   ({ bsPrefix, className, children, as: Component = 'div', ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-item');
 
@@ -36,6 +35,5 @@ const NavItem = React.forwardRef(
 
 NavItem.displayName = 'NavItem';
 NavItem.propTypes = propTypes;
-NavItem.defaultProps = defaultProps;
 
 export default NavItem;

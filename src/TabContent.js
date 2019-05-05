@@ -15,14 +15,11 @@ class TabContent extends React.Component {
   };
 
   render() {
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     const { bsPrefix, as: Component = 'div', className, ...props } = this.props;
 
     return <Component {...props} className={classNames(className, bsPrefix)} />;
   }
 }
 
-const BootstrapTabContent = createBootstrapComponent(TabContent, 'tab-content');
-
-BootstrapTabContent.defaultProps = {};
-
-export default BootstrapTabContent;
+export default createBootstrapComponent(TabContent, 'tab-content');
