@@ -67,3 +67,6 @@ export ThemeProvider from './ThemeProvider';
 export ToggleButton from './ToggleButton';
 export ToggleButtonGroup from './ToggleButtonGroup';
 export Tooltip from './Tooltip';
+export Toast from './Toast';
+export ToastBody from './ToastBody';
+export ToastHeader from './ToastHeader';
