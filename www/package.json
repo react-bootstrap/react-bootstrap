@@ -41,7 +41,7 @@
     "prismjs": "^1.16.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-docgen": "^4.1.0",
+    "react-docgen": "^4.1.1",
     "react-dom": "^16.8.6",
     "react-live": "^2.0.1",
     "recompose": "^0.30.0",
