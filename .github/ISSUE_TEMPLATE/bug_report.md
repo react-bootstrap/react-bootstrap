@@ -26,7 +26,7 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Desktop (please complete the following information):**
+**Environment (please complete the following information):**
  - Operating System: [e.g. macOS]
  - Browser, Version [e.g. Chrome 74]
  - React-Bootstrap Version [e.g. 1.0.0-beta.8]
