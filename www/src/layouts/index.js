@@ -1,4 +1,4 @@
-import { MDXProvider } from '@mdx-js/tag';
+import { MDXProvider } from '@mdx-js/react';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -23,7 +23,7 @@ const components = {
     React.isValidElement(props.children) ? (
       <CodeBlock
         codeText={props.children.props.children}
-        mode={getMode(props.children.props.props.className)} // omg
+        mode={getMode(props.children.props.className)}
       />
     ) : (
       <pre {...props} />
