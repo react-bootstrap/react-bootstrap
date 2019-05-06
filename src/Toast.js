@@ -99,7 +99,7 @@ const Toast = ({
   );
 
   const toastContext = {
-    onClose: () => onClose(),
+    onClose,
   };
 
   return (
