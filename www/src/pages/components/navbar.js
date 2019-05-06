@@ -1,19 +1,19 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import LinkedHeading from '../../components/LinkedHeading';
 import Callout from '../../components/Callout';
 import CodeBlock from '../../components/CodeBlock';
 import ComponentApi from '../../components/ComponentApi';
+import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
 import NavbarBasic from '../../examples/Navbar/Basic';
 import NavbarBrand from '../../examples/Navbar/Brand';
 import NavbarCollapsible from '../../examples/Navbar/Collapsible';
 import NavbarColorSchemes from '../../examples/Navbar/ColorSchemes';
+import ContainerInside from '../../examples/Navbar/ContainerInside';
+import ContainerOutside from '../../examples/Navbar/ContainerOutside';
 import NavbarForm from '../../examples/Navbar/Form';
 import NavbarTextLink from '../../examples/Navbar/TextLink';
-import ContainerOutside from '../../examples/Navbar/ContainerOutside';
-import ContainerInside from '../../examples/Navbar/ContainerInside';
 import withLayout from '../../withLayout';
 
 export default withLayout(function NaπvbarSection({ data }) {

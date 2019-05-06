@@ -25,8 +25,21 @@ install:
 
 after_success:
   - node_modules/.bin/codecov
+after_success:
+  - if ([ ! -z "$TRAVIS_TAG" ]); then
+    yarn build-docs
+  fi
+  - yarn codecov
 
 branches:
   only:
     - master
-    - next
+
+deploy:
+  provider: pages
+  repo: react-bootstrap/react-bootstrap.github.io
+  local-dir: www/public
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  on:
+    tags: true

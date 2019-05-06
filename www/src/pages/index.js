@@ -1,13 +1,13 @@
+import styled from 'astroturf';
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
-import styled from 'astroturf';
+import Row from 'react-bootstrap/Row';
 import withProps from 'recompose/withProps';
-import pkg from '../../../package.json';
 
+import pkg from '../../../package.json';
 import withLayout from '../withLayout';
 
 const MastHead = styled(Jumbotron)`

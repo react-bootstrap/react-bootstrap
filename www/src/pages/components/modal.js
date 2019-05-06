@@ -1,17 +1,16 @@
+import { css } from 'astroturf';
 import { graphql } from 'gatsby';
 import React from 'react';
-import { css } from 'astroturf';
 
 import ComponentApi from '../../components/ComponentApi';
 import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
-
-import ModalStatic from '../../examples/Modal/Static';
 import ModalBasic from '../../examples/Modal/Basic';
-import ModalDefaultSizing from '../../examples/Modal/DefaultSizing';
 import ModalCustomSizing from '../../examples/Modal/CustomSizing';
-import ModalVerticallyCentered from '../../examples/Modal/VerticallyCentered';
+import ModalDefaultSizing from '../../examples/Modal/DefaultSizing';
 import ModalGrid from '../../examples/Modal/Grid';
+import ModalStatic from '../../examples/Modal/Static';
+import ModalVerticallyCentered from '../../examples/Modal/VerticallyCentered';
 import withLayout from '../../withLayout';
 
 const styles = css`

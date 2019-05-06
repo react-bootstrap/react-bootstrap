@@ -1,9 +1,9 @@
+import { css } from 'astroturf';
 import { graphql } from 'gatsby';
 import React from 'react';
-import { css } from 'astroturf';
 
-import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
+import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
 import GridAutoLayout from '../../examples/Grid/AutoLayout';
 import GridAutoLayoutSizing from '../../examples/Grid/AutoLayoutSizing';

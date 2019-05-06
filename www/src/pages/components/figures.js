@@ -1,8 +1,8 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
+import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
 import Figure from '../../examples/Figure';
 import withLayout from '../../withLayout';

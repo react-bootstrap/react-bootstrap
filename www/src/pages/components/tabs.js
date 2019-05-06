@@ -1,9 +1,9 @@
 import { graphql } from 'gatsby';
 import React from 'react';
 
-import LinkedHeading from '../../components/LinkedHeading';
 import ARIA from '../../components/AriaAbbr';
 import ComponentApi from '../../components/ComponentApi';
+import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
 import TabsControlled from '../../examples/Tabs/Controlled';
 import LeftTabs from '../../examples/Tabs/LeftTabs';
