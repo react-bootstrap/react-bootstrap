@@ -27,12 +27,9 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  as: 'small',
-};
-
 const FormText = React.forwardRef(
-  ({ bsPrefix, className, as: Component, ...props }, ref) => {
+  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+  ({ bsPrefix, className, as: Component = 'small', ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-text');
     return (
       <Component
@@ -46,6 +43,5 @@ const FormText = React.forwardRef(
 
 FormText.displayName = 'FormText';
 FormText.propTypes = propTypes;
-FormText.defaultProps = defaultProps;
 
 export default FormText;

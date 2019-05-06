@@ -26,12 +26,20 @@ const propTypes = {
 
 const defaultProps = {
   label: 'Toggle navigation',
-  as: 'button',
 };
 
 const NavbarToggle = React.forwardRef(
   (
-    { bsPrefix, className, children, label, as: Component, onClick, ...props },
+    {
+      bsPrefix,
+      className,
+      children,
+      label,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'button',
+      onClick,
+      ...props
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-toggler');

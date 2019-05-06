@@ -83,7 +83,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'div',
   navbar: false,
 };
 
@@ -97,7 +96,8 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
     onSelect,
     onToggle,
     focusFirstItemOnShow,
-    as: Component,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as: Component = 'div',
     navbar: _4,
     ...props
   } = useUncontrolled(uncontrolledProps, { show: 'onToggle' });

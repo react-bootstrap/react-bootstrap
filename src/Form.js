@@ -42,12 +42,19 @@ const propTypes = {
 
 const defaultProps = {
   inline: false,
-  as: 'form',
 };
 
 const Form = React.forwardRef(
   (
-    { bsPrefix, inline, className, validated, as: Component, ...props },
+    {
+      bsPrefix,
+      inline,
+      className,
+      validated,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'form',
+      ...props
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form');

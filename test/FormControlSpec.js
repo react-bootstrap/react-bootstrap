@@ -76,4 +76,8 @@ describe('<FormControl>', () => {
       'input.form-control.form-control-lg',
     );
   });
+
+  it('Should have input as default component', () => {
+    mount(<FormControl />).assertSingle('input');
+  });
 });

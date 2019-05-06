@@ -252,4 +252,9 @@ describe('<Dropdown>', () => {
     wrapper.assertSingle('button.my-toggle');
     wrapper.assertSingle('div.my-menu');
   });
+
+  it('Should have div as default component', () => {
+    const wrapper = mount(<Dropdown />);
+    expect(wrapper.find('div').length).to.equal(1);
+  });
 });

@@ -24,4 +24,8 @@ describe('<Form>', () => {
       .assertSingle('fieldset.my-form')
       .assertSingle('FormGroup');
   });
+
+  it('Should have form as default component', () => {
+    mount(<Form />).assertSingle('form');
+  });
 });

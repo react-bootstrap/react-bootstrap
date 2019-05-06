@@ -15,4 +15,8 @@ describe('<FormText>', () => {
         .text(),
     ).to.equal('Help contents');
   });
+
+  it('Should have small as default component', () => {
+    mount(<FormText />).assertSingle('small');
+  });
 });

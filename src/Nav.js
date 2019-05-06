@@ -88,12 +88,11 @@ const propTypes = {
 const defaultProps = {
   justify: false,
   fill: false,
-  as: 'div',
 };
 
 const Nav = React.forwardRef((uncontrolledProps, ref) => {
   let {
-    as,
+    as = 'div',
     bsPrefix,
     variant,
     fill,

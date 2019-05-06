@@ -89,4 +89,8 @@ describe('<Accordion>', () => {
 
     expect(onClickSpy).to.be.calledOnce;
   });
+
+  it('Should have div as default component', () => {
+    mount(<Accordion />).assertSingle('div');
+  });
 });

@@ -119,4 +119,8 @@ describe('SafeAnchor', () => {
         .prop('role'),
     ).to.not.exist;
   });
+
+  it('Should have a as default component', () => {
+    mount(<SafeAnchor />).assertSingle('a');
+  });
 });

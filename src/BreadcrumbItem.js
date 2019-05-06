@@ -33,11 +33,11 @@ const propTypes = {
 
 const defaultProps = {
   active: false,
-  as: 'li',
 };
 
 const BreadcrumbItem = React.forwardRef(
-  ({ bsPrefix, active, className, as: Component, ...props }, ref) => {
+  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+  ({ bsPrefix, active, className, as: Component = 'li', ...props }, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'breadcrumb-item');
 
     const { href, title, target, ...elementProps } = props;

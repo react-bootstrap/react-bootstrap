@@ -37,4 +37,8 @@ describe('ButtonGroup', () => {
       </ButtonGroup>,
     ).assertSingle('.btn-group.btn-group-toggle');
   });
+
+  it('Should have div as default component', () => {
+    mount(<ButtonGroup />).assertSingle('div');
+  });
 });

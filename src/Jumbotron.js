@@ -13,13 +13,19 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'div',
   fluid: false,
 };
 
 class Jumbotron extends React.Component {
   render() {
-    const { as: Component, className, fluid, bsPrefix, ...props } = this.props;
+    const {
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      className,
+      fluid,
+      bsPrefix,
+      ...props
+    } = this.props;
     const classes = {
       [bsPrefix]: true,
       [`${bsPrefix}-fluid`]: fluid,

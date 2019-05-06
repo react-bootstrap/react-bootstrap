@@ -19,12 +19,18 @@ const propTypes = {
   children: PropTypes.element,
 };
 
-const defaultProps = {
-  as: 'button',
-};
-
 const AccordionToggle = React.forwardRef(
-  ({ as: Component, children, eventKey, onClick, ...props }, ref) => {
+  (
+    {
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'button',
+      children,
+      eventKey,
+      onClick,
+      ...props
+    },
+    ref,
+  ) => {
     const onSelect = useContext(SelectableContext);
 
     return (
@@ -43,6 +49,5 @@ const AccordionToggle = React.forwardRef(
 );
 
 AccordionToggle.propTypes = propTypes;
-AccordionToggle.defaultProps = defaultProps;
 
 export default AccordionToggle;

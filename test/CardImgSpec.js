@@ -29,5 +29,9 @@ describe('<CardImg>', () => {
     it('bottom', () => {
       mount(<CardImg variant="bottom" />).assertSingle('.card-img-bottom');
     });
+
+    it('Should have img as default component', () => {
+      mount(<CardImg />).assertSingle('img');
+    });
   });
 });

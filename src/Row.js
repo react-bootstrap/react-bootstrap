@@ -18,7 +18,6 @@ class Row extends React.Component {
   };
 
   static defaultProps = {
-    as: 'div',
     noGutters: false,
   };
 
@@ -26,7 +25,8 @@ class Row extends React.Component {
     const {
       bsPrefix,
       noGutters,
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
       className,
       ...props
     } = this.props;
