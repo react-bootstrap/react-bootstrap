@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@4c/cli-core@^1.4.1":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@4c/cli-core/-/cli-core-1.4.1.tgz#6332992eb8ce449490672913b288e9b44e08ac2d"
-  integrity sha512-kspKUkcha24mBNux5T3i9E4eLPgX1nWtvbu0t4hE4epAK/fkzshvShmhN8An5S80o4ZxzPXUce0PF61Ey+ZjnQ==
+"@4c/cli-core@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@4c/cli-core/-/cli-core-1.4.2.tgz#271186d73b7eae94777da90c4f5c3e1cd6a652ac"
+  integrity sha512-zHxLa+Xxh8GtmFW56fJ8VWH2+2L7NMt9e8UeKRYLLh1GqK4R9xTQ3rGts6GmWjleL+qJEOnhr0ZzY5BUBY2NrQ==
   dependencies:
     chalk "^2.4.2"
     execa "^1.0.0"
@@ -31,11 +31,11 @@
     yargs "^13.2.1"
 
 "@4c/rollout@^1.3.3":
-  version "1.3.4"
-  resolved "https://registry.yarnpkg.com/@4c/rollout/-/rollout-1.3.4.tgz#ef4d19bbdd394ecba8ebf1438481162981a585f2"
-  integrity sha512-zdP5AjBT0akNw+bRvESJNF5bkqaI3BlwLyy6W9wdouW79wa4/LxdIGqT+GZ0b4RQpzPN/sPHdc8Okv7nzxA7VQ==
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/@4c/rollout/-/rollout-1.3.5.tgz#4e48b894d142b567615cda492b26599e4065566e"
+  integrity sha512-pmDj/ZrMdnwtW9q0MoCWlJrnKimHVMCknpjv58jT0wfTlVxQq4ytr0NMQgUPrvGzAbls2HpGrFOUlH7nxn8Xpw==
   dependencies:
-    "@4c/cli-core" "^1.4.1"
+    "@4c/cli-core" "^1.4.2"
     "@4c/file-butler" "^2.3.0"
     chalk "^2.4.2"
     common-tags "^1.8.0"
