@@ -837,12 +837,13 @@
     babel-plugin-transform-react-remove-prop-types "^0.4.15"
 
 "@react-bootstrap/eslint-config@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@react-bootstrap/eslint-config/-/eslint-config-1.1.1.tgz#402dbe5c339e3ab6660966a94aea8cb33befb46f"
-  integrity sha512-V4Q8ovSzYA1TrrS70t0N9xDBlp430+CTvyV0vfsyc7pUJEi65lkIF2xpHIz/m4qNwzwJ76f9iJ0WKdCoOXxBdA==
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@react-bootstrap/eslint-config/-/eslint-config-1.2.0.tgz#7796fb67bbc6383adb29beeab93f5ff36e32050d"
+  integrity sha512-BHC/DnjpfA3fzKoMtT2o9qndOjKWZTicInaFkdJZq0PpzvuA7tPSqiLuprJCo0RYAzdg3hNTWN+qAXWll1Wu3w==
   dependencies:
     eslint-config-airbnb "^17.1.0"
     eslint-config-prettier "^3.0.1"
+    eslint-plugin-react-hooks "^1.5.1"
 
 "@react-bootstrap/react-popper@1.2.1":
   version "1.2.1"
@@ -3348,6 +3349,11 @@ eslint-plugin-prettier@^3.0.1:
   integrity sha512-XWX2yVuwVNLOUhQijAkXz+rMPPoCr7WFiAl8ig6I7Xn+pPVhDhzg4DxHpmbeb0iqjO9UronEA3Tb09ChnFVHHA==
   dependencies:
     prettier-linter-helpers "^1.0.0"
+
+eslint-plugin-react-hooks@^1.5.1:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-1.6.0.tgz#348efcda8fb426399ac7b8609607c7b4025a6f5f"
+  integrity sha512-lHBVRIaz5ibnIgNG07JNiAuBUeKhEf8l4etNx5vfAEwqQ5tcuK3jV9yjmopPgQDagQb7HwIuQVsE3IVcGrRnag==
 
 eslint-plugin-react@^7.12.4:
   version "7.13.0"
