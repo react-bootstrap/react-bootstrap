@@ -31,9 +31,9 @@
     yargs "^13.2.1"
 
 "@4c/rollout@^1.3.3":
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/@4c/rollout/-/rollout-1.3.5.tgz#4e48b894d142b567615cda492b26599e4065566e"
-  integrity sha512-pmDj/ZrMdnwtW9q0MoCWlJrnKimHVMCknpjv58jT0wfTlVxQq4ytr0NMQgUPrvGzAbls2HpGrFOUlH7nxn8Xpw==
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/@4c/rollout/-/rollout-1.3.6.tgz#a0152d14f42fe73dd3f758891909f1e746a67326"
+  integrity sha512-xys04NZAD0S93ldnfJu2x2kLAl84C8+ZWlla85KL1rAlMtxQEKkqRqbwb909Jwk4oXOOUCNap2Pit5lBr8a6Dg==
   dependencies:
     "@4c/cli-core" "^1.4.2"
     "@4c/file-butler" "^2.3.0"
