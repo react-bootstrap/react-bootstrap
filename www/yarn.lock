@@ -9302,10 +9302,10 @@ react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-live@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-live/-/react-live-2.0.1.tgz#cf1c1e75523073b2fba14384a465bf968c6dedc1"
-  integrity sha512-43srRqV+3yeHEZQOETWPiZkaLnx0/ldRtR/+F9/vFBYa/N8OMVVjPT4yl0qQCP6suIZ6cB/8eWw6vWgOTH0XOQ==
+react-live@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-live/-/react-live-2.1.1.tgz#6972fe34fa18cb1cb8cef2a41ae7205eea6efbc1"
+  integrity sha512-8t9oR7UMe+OriIS+FuhLMLtFxcV8N6WuOLuXj9sppCn38YBjp8raRkduNI828Z1Zcx1f1HOnoc+97I5mHVEPxA==
   dependencies:
     buble "0.19.6"
     core-js "^2.4.1"
