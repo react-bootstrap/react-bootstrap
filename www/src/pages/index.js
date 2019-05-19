@@ -141,7 +141,7 @@ export default withLayout(
                   components, without unneeded dependencies like jQuery.
                 </p>
                 <p>
-                  As one of the oldest React libraries, react bootstrap has
+                   As one of the oldest React libraries, React-Bootstrap has
                   evolved and grown along-side React, making it an excellent
                   choice as your UI foundation.
                 </p>
