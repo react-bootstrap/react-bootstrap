@@ -142,7 +142,7 @@ export default withLayout(
                 </p>
                 <p>
                    As one of the oldest React libraries, React-Bootstrap has
-                  evolved and grown along-side React, making it an excellent
+                  evolved and grown alongside React, making it an excellent
                   choice as your UI foundation.
                 </p>
               </FeatureCard>
