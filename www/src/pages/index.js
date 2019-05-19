@@ -138,11 +138,11 @@ export default withLayout(
                 <p>
                   React bootstrap replaces the Bootstrap javascript. Each
                   component has been built from scratch as true React
-                  components, without uneeded dependencies like jQuery.
+                  components, without unneeded dependencies like jQuery.
                 </p>
                 <p>
                   As one of the oldest React libraries, react bootstrap has
-                  evolved and grown along-side React, making it an exellent
+                  evolved and grown along-side React, making it an excellent
                   choice as your UI foundation.
                 </p>
               </FeatureCard>
