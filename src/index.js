@@ -51,6 +51,8 @@ export OverlayTrigger from './OverlayTrigger';
 export PageItem from './PageItem';
 export Pagination from './Pagination';
 export Popover from './Popover';
+export PopoverContent from './PopoverContent';
+export PopoverTitle from './PopoverTitle';
 export ProgressBar from './ProgressBar';
 export ResponsiveEmbed from './ResponsiveEmbed';
 export Row from './Row';

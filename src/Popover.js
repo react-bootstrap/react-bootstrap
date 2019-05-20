@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { createBootstrapComponent } from './ThemeProvider';
+import PopoverTitle from './PopoverTitle';
+import PopoverContent from './PopoverContent';
 
 const propTypes = {
   /**
@@ -59,10 +61,6 @@ const propTypes = {
   scheduleUpdate: PropTypes.func,
   /** @private */
   outOfBoundaries: PropTypes.bool,
-  /**
-   * Title content
-   */
-  title: PropTypes.node,
 };
 
 const defaultProps = {
@@ -75,7 +73,6 @@ function Popover({
   placement,
   className,
   style,
-  title,
   children,
   arrowProps,
   scheduleUpdate: _,
@@ -92,15 +89,15 @@ function Popover({
       {...props}
     >
       <div className="arrow" {...arrowProps} />
-
-      {title && <div className={`${bsPrefix}-header h3`}>{title}</div>}
-
-      <div className={`${bsPrefix}-body`}>{children}</div>
+      {children}
     </div>
   );
 }
 
 Popover.propTypes = propTypes;
 Popover.defaultProps = defaultProps;
+
+Popover.PopoverTitle = PopoverTitle;
+Popover.PopoverContent = PopoverContent;
 
 export default createBootstrapComponent(Popover, 'popover');
