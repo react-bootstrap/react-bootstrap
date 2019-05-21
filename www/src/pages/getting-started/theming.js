@@ -15,10 +15,10 @@ export default withLayout(function ThemingSection() {
       </LinkedHeading>
 
       <p>
-        Generally, if you stick to the bootstrap defined classes and variants,
+        Generally, if you stick to the Bootstrap defined classes and variants,
         there isn't anything you need to do to use a custom theme with
-        ReactBootstrap, it just works. There are plently of cases tho where you
-        want to color outside the lines and we try to make that easy to do.
+        React-Bootstrap. It just works. But we also make coloring outside the
+        lines easy to do.
       </p>
       <LinkedHeading h="2" id="custom-styles-variants">
         New variants and sizes
@@ -42,7 +42,7 @@ export default withLayout(function ThemingSection() {
         <code>ThemeProvider</code> Component.
       </p>
       <Callout theme="warning">
-        Changing prefixes is an escape hatch and generally shouldn't be used
+        Changing prefixes is an escape hatch and generally shouldn't be used.
       </Callout>
       <ReactPlayground codeText={Prefixes} />
     </>
