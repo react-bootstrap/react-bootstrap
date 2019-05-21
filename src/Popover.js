@@ -97,7 +97,9 @@ function Popover({
 Popover.propTypes = propTypes;
 Popover.defaultProps = defaultProps;
 
-Popover.PopoverTitle = PopoverTitle;
-Popover.PopoverContent = PopoverContent;
+const DecoratedPopover = createBootstrapComponent(Popover, 'popover');
 
-export default createBootstrapComponent(Popover, 'popover');
+DecoratedPopover.Title = PopoverTitle;
+DecoratedPopover.Content = PopoverContent;
+
+export default DecoratedPopover;
