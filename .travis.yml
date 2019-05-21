@@ -16,9 +16,11 @@ addons:
   chrome: stable
   firefox: latest
 
+services:
+  - xvfb
+
 before_install:
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
 
 install:
   - yarn bootstrap
