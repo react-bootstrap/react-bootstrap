@@ -96,7 +96,7 @@ function Popover({
       {...props}
     >
       <div className="arrow" {...arrowProps} />
-      {content ? <PopoverContent>children</PopoverContent> : children}
+      {content ? <PopoverContent>{children}</PopoverContent> : children}
     </div>
   );
 }
