@@ -20,7 +20,7 @@
     "common-tags": "^1.8.0",
     "docsearch.js": "^2.6.3",
     "dom-helpers": "^3.4.0",
-    "formik": "^1.5.4",
+    "formik": "^1.5.7",
     "gatsby": "^2.5.0",
     "gatsby-link": "^2.1.1",
     "gatsby-mdx": "0.6.3",
