@@ -212,6 +212,8 @@ export default withLayout(function TooltipSection({ data }) {
       <ComponentApi metadata={data.OverlayTrigger} />
       <ComponentApi metadata={data.Tooltip} />
       <ComponentApi metadata={data.Popover} />
+      <ComponentApi metadata={data.PopoverContent} />
+      <ComponentApi metadata={data.PopoverTitle} />
     </>
   );
 });
