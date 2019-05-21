@@ -54,6 +54,12 @@ const propTypes = {
     style: PropTypes.object,
   }),
 
+  /**
+   * When this prop is set, it creates a Popover with a Popover.Content inside
+   * passing the children directly to it
+   */
+  content: PropTypes.bool,
+
   /** @private */
   innerRef: PropTypes.any,
 
@@ -74,6 +80,7 @@ function Popover({
   className,
   style,
   children,
+  content,
   arrowProps,
   scheduleUpdate: _,
   outOfBoundaries: _1,
@@ -89,7 +96,7 @@ function Popover({
       {...props}
     >
       <div className="arrow" {...arrowProps} />
-      {children}
+      {content ? <PopoverContent>children</PopoverContent> : children}
     </div>
   );
 }

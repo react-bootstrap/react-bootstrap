@@ -10,7 +10,7 @@ const propTypes = {
 
 const PopoverTitle = React.forwardRef(
   ({ bsPrefix, className, children, ...props }, ref) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, `${bsPrefix}-header h3`);
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'popover-header h3');
 
     return (
       <div ref={ref} {...props} className={classNames(className, bsPrefix)}>
