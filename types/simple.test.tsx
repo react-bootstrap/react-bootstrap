@@ -175,7 +175,7 @@ import {
     </Form.Control>
   </Form.Group>
   <Form.Group controlId="exampleForm.ControlSelect2">
-    <Form.Label>Example multiple select</Form.Label>
+    <Form.Label column={false}>Example multiple select</Form.Label>
     <Form.Control as="select">
       <option>1</option>
       <option>2</option>
@@ -187,6 +187,14 @@ import {
   <Form.Group controlId="exampleForm.ControlTextarea1">
     <Form.Label>Example textarea</Form.Label>
     <Form.Control as="textarea" rows={3} />
+  </Form.Group>
+  <Form.Group as={Row} controlId="exampleForm.HorizontalControl">
+    <Form.Label column sm={2}>
+      Horizontal
+    </Form.Label>
+    <Col sm={10}>
+      <Form.Control type="text" placeholder="Hoizontal" />
+    </Col>
   </Form.Group>
 </Form>;
 
