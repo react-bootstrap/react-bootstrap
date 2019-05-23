@@ -3,9 +3,9 @@ import * as React from 'react';
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
 export interface DropdownMenuProps {
-  show?: true;
-  flip?: true;
-  alignRight?: true;
+  show?: boolean;
+  flip?: boolean;
+  alignRight?: boolean;
   onSelect?: SelectCallback;
   rootCloseEvent?: 'click' | 'mousedown';
   popperConfig?: object;
