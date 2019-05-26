@@ -74,7 +74,7 @@ export default withLayout(function TooltipSection({ data }) {
         Overlay
       </LinkedHeading>
       <p>
-        <code>Overlay</code> is the fundemental component for positioning and
+        <code>Overlay</code> is the fundamental component for positioning and
         controlling tooltip visibility. It's a wrapper around react-popper, that
         adds support for transitions, and visibility toggling.
       </p>
