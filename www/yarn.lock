@@ -806,10 +806,10 @@
     signedsource "^1.0.0"
     yargs "^9.0.0"
 
-"@mdx-js/mdx@^1.0.19":
-  version "1.0.19"
-  resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-1.0.19.tgz#ee5323fb2f00f8910b64d58126f54c08d61b3e73"
-  integrity sha512-li3zrfEY7htShibDeyVE9GRi7o6vA1QnBg9f07anNNa0689GPxOF9eIRqkj5k3ecDnilHURPyw74k1430hRTVw==
+"@mdx-js/mdx@^1.0.20":
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-1.0.20.tgz#422e15bfa5ca6459402783fb57e8b5d5d37a719f"
+  integrity sha512-TSiHGyYBOwqKgDane9N/dB3VvpsmU7zZunJAUBL4QEcWcpd5wOzSb9vPoWGiOMmIdgFArm24QkTPFUVOgvKHAQ==
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-syntax-jsx" "^7.2.0"
@@ -819,7 +819,7 @@
     hast-util-raw "^5.0.0"
     lodash.uniq "^4.5.0"
     mdast-util-to-hast "^4.0.0"
-    remark-mdx "^1.0.18"
+    remark-mdx "^1.0.20"
     remark-parse "^6.0.0"
     remark-squeeze-paragraphs "^3.0.1"
     to-style "^1.3.3"
@@ -9728,10 +9728,10 @@ relay-runtime@2.0.0:
     "@babel/runtime" "^7.0.0"
     fbjs "^1.0.0"
 
-remark-mdx@^1.0.18:
-  version "1.0.18"
-  resolved "https://registry.yarnpkg.com/remark-mdx/-/remark-mdx-1.0.18.tgz#a686bcb1166ae673bc77d9e459dbd576443bf854"
-  integrity sha512-PLsY2LNXuJ8YHaxjuOpRk+hDviB7jBFwLmLN4m4P5/Ev+NlmG8uXisAkP4P4Al47CPmJyKHQRJMjA8mWu4exVw==
+remark-mdx@^1.0.20:
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/remark-mdx/-/remark-mdx-1.0.20.tgz#580e57c035bd1658beeacffc30f81ca56e8447e4"
+  integrity sha512-yUDI87lzeYsTL3LyArD2DWxzYMxdJuJuvVAjteWcJQvY6ZgYNcVPnVzDXiD80SRQOf3/tXW5P2E/EsnBlNW8lw==
   dependencies:
     "@babel/core" "^7.2.2"
     "@babel/helper-plugin-utils" "^7.0.0"

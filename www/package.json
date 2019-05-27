@@ -11,7 +11,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.8.2",
     "@fortawesome/free-solid-svg-icons": "^5.8.2",
     "@fortawesome/react-fontawesome": "^0.1.4",
-    "@mdx-js/mdx": "^1.0.19",
+    "@mdx-js/mdx": "^1.0.20",
     "@mdx-js/react": "^1.0.20",
     "@restart/context": "^2.1.4",
     "astroturf": "^0.9.5",
