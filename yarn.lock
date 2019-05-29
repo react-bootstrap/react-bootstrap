@@ -862,10 +862,10 @@
   resolved "https://registry.yarnpkg.com/@restart/context/-/context-2.1.4.tgz#a99d87c299a34c28bd85bb489cb07bfd23149c02"
   integrity sha512-INJYZQJP7g+IoDUh/475NlGiTeMfwTXUEr3tmRneckHIxNolGOW9CTq83S8cxq0CgJwwcMzMJFchxvlwe7Rk8Q==
 
-"@restart/hooks@^0.2.3":
-  version "0.2.13"
-  resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.2.13.tgz#de9a2dfd6dacac3b60f9b19614cdd49f90e434c3"
-  integrity sha512-riuYub4Xx/Pk+YUPRHZPwJd2+rAJSsRd4Pqkqvhzu+AbkDdNi4y+kYEQicnAofbfTA5apRPm3cK9sWc6Gj5DNg==
+"@restart/hooks@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.3.0.tgz#176a73e703133230e613cca4e536265657099bb5"
+  integrity sha512-meqDR+pO53h6Aq1Fk/I1U9uF0pj4tugZb3PWWwYFwKGtr7fPwgyxxkkdddSo1zhL/VDAUxwqFKB3wuP2Z1txjg==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
