@@ -10,8 +10,9 @@ class FormExample extends React.Component {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    } else {
+      this.setState({ validated: true });
     }
-    this.setState({ validated: true });
   }
 
   render() {
