@@ -1,6 +1,6 @@
 const popover = triggerBehavior => (
   <Popover id={`popover-trigger-${triggerBehavior}`}>
-    <Popover.Title>Popover bottom</Popover.Title>
+    <Popover.Title as="h3">Popover bottom</Popover.Title>
     <Popover.Content>
       <strong>Holy guacamole!</strong> Check this info.
     </Popover.Content>

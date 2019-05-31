@@ -24,7 +24,7 @@ class Example extends React.Component {
           containerPadding={20}
         >
           <Popover id="popover-contained">
-            <Popover.Title>Popover bottom</Popover.Title>
+            <Popover.Title as="h3">Popover bottom</Popover.Title>
             <Popover.Content>
               <strong>Holy guacamole!</strong> Check this info.
             </Popover.Content>
