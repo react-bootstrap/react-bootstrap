@@ -47,8 +47,8 @@ export default withLayout(function InputGroupSection({ data }) {
         Multiple inputs
       </LinkedHeading>
       <p>
-        While multiple inputss are supported visually, validation styles are
-        only available for input groups with a single input.
+        While multiple inputs are supported visually, validation styles are only
+        available for input groups with a single input.
       </p>
       <ReactPlayground codeText={MultipleInputs} />
       <LinkedHeading h="2" id="input-group-multiple-addons">
