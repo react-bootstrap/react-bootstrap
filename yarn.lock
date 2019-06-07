@@ -2765,7 +2765,7 @@ define-property@^2.0.2:
     is-descriptor "^1.0.2"
     isobject "^3.0.1"
 
-definitelytyped-header-parser@1.2.0, definitelytyped-header-parser@^1.0.1:
+definitelytyped-header-parser@1.2.0, definitelytyped-header-parser@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/definitelytyped-header-parser/-/definitelytyped-header-parser-1.2.0.tgz#f21374b8a18fabcd3ba4b008a0bcbc9db2b7b4c4"
   integrity sha512-xpg8uu/2YD/reaVsZV4oJ4g7UDYFqQGWvT1W9Tsj6q4VtWBSaig38Qgah0ZMnQGF9kAsAim08EXDO1nSi0+Nog==
@@ -2936,22 +2936,22 @@ download-file-sync@^1.0.4:
   resolved "https://registry.yarnpkg.com/download-file-sync/-/download-file-sync-1.0.4.tgz#d3e3c543f836f41039455b9034c72e355b036019"
   integrity sha1-0+PFQ/g29BA5RVuQNMcuNVsDYBk=
 
-dts-critic@^1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/dts-critic/-/dts-critic-1.0.9.tgz#af666a43bb1b22b031b9437fd3dfb11a509b42b9"
-  integrity sha512-fUh7YSqC+usC0r4pnslxPr02XB9txKEvk/4drxAbSNx1CZDHSkpIAXlTSp6zAz1dBM09/qakRsAsr3r6zKNl2Q==
+dts-critic@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/dts-critic/-/dts-critic-1.2.0.tgz#fc358cad7461180ad426438ab88b249fedebd5c0"
+  integrity sha512-z6VI1Sz7xxy0BgN6YsWuG9hbRIfph3U9hwrfNHLnLzsq865VYyjo5xKKUgXPuqMgJ04BUF1LGYQJ+kWyWwvUvQ==
   dependencies:
-    definitelytyped-header-parser "^1.0.1"
+    definitelytyped-header-parser "^1.2.0"
     download-file-sync "^1.0.4"
     yargs "^12.0.5"
 
 dtslint@^0.7.0:
-  version "0.7.7"
-  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.7.7.tgz#59ba5c677fe0df18bf461327d74565d6985d2b62"
-  integrity sha512-LM6uabvnCrNb04J91Ad0kwGTKzGOJY0aT1TnAIoQqJPK1QlYHg0ETm+RfchGIAlUGERDSJJfz7st58mnP20Sbw==
+  version "0.7.8"
+  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.7.8.tgz#379556be24c5fb56639fdf969f7ab8b1d946ad53"
+  integrity sha512-DELBcTWr51kyufawhmBC2OQ/lwkjubeta/hbS9Dx851Wo/AmMSZ2tZa0Z3dfkC0yq4Dj2yAdZeNExc0nCPK5dQ==
   dependencies:
     definitelytyped-header-parser "1.2.0"
-    dts-critic "^1.0.9"
+    dts-critic "^1.2.0"
     fs-extra "^6.0.1"
     request "^2.88.0"
     strip-json-comments "^2.0.1"
