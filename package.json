@@ -98,7 +98,7 @@
     "karma-mocha-reporter": "^2.2.5",
     "karma-sinon-chai": "^2.0.2",
     "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^3.0.5",
+    "karma-webpack": "^4.0.2",
     "lint-staged": "^8.1.5",
     "lodash": "^4.17.11",
     "mocha": "^6.0.2",
