@@ -4944,10 +4944,10 @@ gatsby-transformer-remark@^2.3.12:
     unist-util-select "^1.5.0"
     unist-util-visit "^1.3.0"
 
-gatsby@^2.8.6:
-  version "2.8.6"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.8.6.tgz#3cd65805e2b5b120ee011761ef771bbbdacf3942"
-  integrity sha512-se7mFL63dJ3L9fl6YB8FwEHA6EHrU/z+p4yTzZvEOqseXrGMYoT+xCWvX9lgpTF7zEIb2TTgyfbN69ww+Je3mA==
+gatsby@^2.8.7:
+  version "2.8.7"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.8.7.tgz#12ff3f62fb0f6d6da0c362dbf0f85d9bc77a6d71"
+  integrity sha512-1q9CxrwWM1b6dkLBpFRFMGkU5Xb/H+PgbKiueSqrrTTMZXthyQfJCW26+GLWdScK/3eXwdevoRStqk3tRP3Gzg==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/core" "^7.0.0"
