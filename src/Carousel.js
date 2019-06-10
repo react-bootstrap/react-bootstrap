@@ -151,7 +151,8 @@ class Carousel extends React.Component {
       let direction;
       if (
         (nextIndex === 0 && previousActiveIndex >= lastPossibleIndex) ||
-        previousActiveIndex <= nextIndex
+        (previousActiveIndex <= nextIndex &&
+          !(previousActiveIndex === 0 && nextIndex >= lastPossibleIndex))
       ) {
         direction = 'next';
       } else {
