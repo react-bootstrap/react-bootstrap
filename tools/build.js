@@ -35,7 +35,6 @@ const copyTypes = dest => shell(`cpy ${typesRoot}/components/*.d.ts ${dest}`);
  */
 const buildLib = step('commonjs modules', libRoot, async () => {
   await shell(`npx babel ${srcRoot} --out-dir ${libRoot} --env-name "lib"`);
-
   await copyTypes(libRoot);
 });
 
