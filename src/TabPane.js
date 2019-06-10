@@ -159,7 +159,7 @@ const TabPane = React.forwardRef((props, ref) => {
         onExiting={onExiting}
         onExited={onExited}
         mountOnEnter={mountOnEnter}
-        unmountOnExit={mountOnEnter}
+        unmountOnExit={unmountOnExit}
       >
         {pane}
       </Transition>
