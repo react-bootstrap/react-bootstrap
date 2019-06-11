@@ -45,4 +45,14 @@ describe('Toasts', () => {
     clock.tick(500);
     expect(onCloseSpy).to.be.calledOnce;
   });
+
+  it('should clearTimeout after unmount', () => {
+    const wrapper = mount(
+      <Toast delay={500} show autohide>
+        <Toast.Header>header-content</Toast.Header>
+        <Toast.Body>body-content</Toast.Body>
+      </Toast>,
+    );
+    wrapper.unmount();
+  });
 });
