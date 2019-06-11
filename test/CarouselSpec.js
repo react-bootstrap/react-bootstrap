@@ -238,4 +238,19 @@ describe('<Carousel>', () => {
     const wrapper = mount(<Carousel>{items}</Carousel>);
     wrapper.find('div').length.should.equal(4);
   });
+
+  it('Should go through the items after given seconds', () => {
+    const clock = sinon.useFakeTimers({
+      toFake: ['setInterval', 'setTimeout'],
+    });
+    const onSelectSpy = sinon.spy();
+    const interval = 500;
+    mount(
+      <Carousel interval={interval} onSelect={onSelectSpy}>
+        {items}
+      </Carousel>,
+    );
+    clock.tick(interval * 2);
+    expect(onSelectSpy).to.be.calledOnce;
+  });
 });
