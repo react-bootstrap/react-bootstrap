@@ -264,6 +264,7 @@ describe('<Carousel>', () => {
         {items}
       </Carousel>,
     );
+
     wrapper.simulate('keyDown', {
       key: 'ArrowRight',
     });
@@ -271,7 +272,7 @@ describe('<Carousel>', () => {
     expect(onSelectSpy).to.be.calledOnce;
     expect(onSelectSpy.getCall(0).args[0]).to.equal(1);
 
-    clock.tick(50);
+    clock.tick(150);
 
     wrapper.simulate('keyDown', {
       key: 'ArrowLeft',
