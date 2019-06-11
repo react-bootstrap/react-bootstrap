@@ -253,4 +253,31 @@ describe('<Carousel>', () => {
     clock.tick(interval * 2);
     expect(onSelectSpy).to.be.calledOnce;
   });
+
+  it('Should handle Keyboard events', () => {
+    const clock = sinon.useFakeTimers({
+      toFake: ['setTimeout'],
+    });
+    const onSelectSpy = sinon.spy();
+    const wrapper = mount(
+      <Carousel interval={0} onSelect={onSelectSpy}>
+        {items}
+      </Carousel>,
+    );
+    wrapper.simulate('keyDown', {
+      key: 'ArrowRight',
+    });
+    clock.tick(50);
+    expect(onSelectSpy).to.be.calledOnce;
+    expect(onSelectSpy.getCall(0).args[0]).to.equal(1);
+
+    clock.tick(50);
+
+    wrapper.simulate('keyDown', {
+      key: 'ArrowLeft',
+    });
+    clock.tick(50);
+    expect(onSelectSpy).to.be.calledTwice;
+    expect(onSelectSpy.getCall(1).args[0]).to.equal(0);
+  });
 });
