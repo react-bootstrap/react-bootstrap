@@ -2961,10 +2961,10 @@ dts-critic@^1.2.0:
     download-file-sync "^1.0.4"
     yargs "^12.0.5"
 
-dtslint@^0.7.0:
-  version "0.7.9"
-  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.7.9.tgz#2faa7fff107a57414efa192645b294a9308632f2"
-  integrity sha512-/xXZyHTb6k6fg5odUhnWZcZ4ahhDFS78Rvsk4N655Kst5OMivZSow4luvZewzzdNd/ylRRljFGOk4kynOGNyXQ==
+dtslint@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.8.0.tgz#250c1ae384faca36d9136c46b41f848436d1980b"
+  integrity sha512-uDIPC2UPgVM1QXceRBZiTwX3uCb1jzo3Z8rU9ycTSl0p/dkFi7GGNR/MDO4SxSeHw9HaubetafqFZK1l3oKNrw==
   dependencies:
     definitelytyped-header-parser "1.2.0"
     dts-critic "^1.2.0"
