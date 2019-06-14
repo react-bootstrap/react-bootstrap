@@ -2961,10 +2961,10 @@ dts-critic@^1.2.0:
     download-file-sync "^1.0.4"
     yargs "^12.0.5"
 
-dtslint@^0.7.0:
-  version "0.7.9"
-  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.7.9.tgz#2faa7fff107a57414efa192645b294a9308632f2"
-  integrity sha512-/xXZyHTb6k6fg5odUhnWZcZ4ahhDFS78Rvsk4N655Kst5OMivZSow4luvZewzzdNd/ylRRljFGOk4kynOGNyXQ==
+dtslint@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-0.8.0.tgz#250c1ae384faca36d9136c46b41f848436d1980b"
+  integrity sha512-uDIPC2UPgVM1QXceRBZiTwX3uCb1jzo3Z8rU9ycTSl0p/dkFi7GGNR/MDO4SxSeHw9HaubetafqFZK1l3oKNrw==
   dependencies:
     definitelytyped-header-parser "1.2.0"
     dts-critic "^1.2.0"
@@ -4271,9 +4271,9 @@ https-proxy-agent@^2.2.1:
     debug "^3.1.0"
 
 husky@^2.1.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/husky/-/husky-2.4.0.tgz#1bac7c44588f6e91f808b72efc82d24a57194f36"
-  integrity sha512-3k1wuZU20gFkphNWMjh2ISCFaqfbaLY7R9FST2Mj9HeRhUK9ydj9qQR8qfXlog3EctVGsyeilcZkIT7uBZDDVA==
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-2.4.1.tgz#dd00f9646f8693b93f7b3a12ba4be00be0eff7ab"
+  integrity sha512-ZRwMWHr7QruR22dQ5l3rEGXQ7rAQYsJYqaeCd+NyOsIFczAtqaApZQP3P4HwLZjCtFbm3SUNYoKuoBXX3AYYfw==
   dependencies:
     cosmiconfig "^5.2.0"
     execa "^1.0.0"
@@ -8231,9 +8231,9 @@ webpack-sources@^1.1.0, webpack-sources@^1.3.0:
     source-map "~0.6.1"
 
 webpack@^4.29.6:
-  version "4.33.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.33.0.tgz#c30fc4307db432e5c5e3333aaa7c16a15a3b277e"
-  integrity sha512-ggWMb0B2QUuYso6FPZKUohOgfm+Z0sVFs8WwWuSH1IAvkWs428VDNmOlAxvHGTB9Dm/qOB/qtE5cRx5y01clxw==
+  version "4.34.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.34.0.tgz#a4c30129482f7b4ece4c0842002dedf2b56fab58"
+  integrity sha512-ry2IQy1wJjOefLe1uJLzn5tG/DdIKzQqNlIAd2L84kcaADqNvQDTBlo8UcCNyDaT5FiaB+16jhAkb63YeG3H8Q==
   dependencies:
     "@webassemblyjs/ast" "1.8.5"
     "@webassemblyjs/helper-module-context" "1.8.5"
