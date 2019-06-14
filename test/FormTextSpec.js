@@ -19,4 +19,17 @@ describe('<FormText>', () => {
   it('Should have small as default component', () => {
     mount(<FormText />).assertSingle('small');
   });
+
+  it('Should have "form-text" & "text-muted" class', () => {
+    expect(
+      mount(<FormText muted />)
+        .find('small')
+        .hasClass('form-text'),
+    ).to.equal(true);
+    expect(
+      mount(<FormText muted />)
+        .find('small')
+        .hasClass('text-muted'),
+    ).to.equal(true);
+  });
 });
