@@ -29,15 +29,12 @@ const propTypes = {
 
 const FormText = React.forwardRef(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-  ({ bsPrefix, className, as: Component = 'small', ...props }, ref) => {
+  ({ bsPrefix, className, as: Component = 'small', muted, ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-text');
-    return (
-      <Component
-        {...props}
-        ref={ref}
-        className={classNames(className, bsPrefix)}
-      />
-    );
+
+    const classes = classNames(className, bsPrefix, muted && 'text-muted');
+
+    return <Component {...props} ref={ref} className={classes} />;
   },
 );
 
