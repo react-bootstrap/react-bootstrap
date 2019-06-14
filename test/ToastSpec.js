@@ -47,12 +47,14 @@ describe('Toasts', () => {
   });
 
   it('should clearTimeout after unmount', () => {
+    let onCloseSpy = sinon.spy();
     const wrapper = mount(
-      <Toast delay={500} show autohide>
+      <Toast delay={500} onClose={onCloseSpy} show autohide>
         <Toast.Header>header-content</Toast.Header>
         <Toast.Body>body-content</Toast.Body>
       </Toast>,
     );
     wrapper.unmount();
+    expect(onCloseSpy).to.be.not.called;
   });
 });
