@@ -32,9 +32,13 @@ const FormText = React.forwardRef(
   ({ bsPrefix, className, as: Component = 'small', muted, ...props }, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-text');
 
-    const classes = classNames(className, bsPrefix, muted && 'text-muted');
-
-    return <Component {...props} ref={ref} className={classes} />;
+    return (
+      <Component
+        {...props}
+        ref={ref}
+        className={classNames(className, bsPrefix, muted && 'text-muted')}
+      />
+    );
   },
 );
 

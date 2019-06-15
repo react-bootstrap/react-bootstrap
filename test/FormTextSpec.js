@@ -23,13 +23,8 @@ describe('<FormText>', () => {
   it('Should have "form-text" & "text-muted" class', () => {
     expect(
       mount(<FormText muted />)
-        .find('small')
-        .hasClass('form-text'),
-    ).to.equal(true);
-    expect(
-      mount(<FormText muted />)
-        .find('small')
+        .find('small.form-text')
         .hasClass('text-muted'),
-    ).to.equal(true);
+    ).to.be.true;
   });
 });
