@@ -184,9 +184,13 @@ export default withLayout(
                 <p>
                   As one of the oldest React libraries, react-bootstrap has
                   evolved and grown alongside React, making it an excellent
+<<<<<<< HEAD
                   choice as your UI foundation. If you have React set up and
                   installed, you have everything you need.
 >>>>>>> fix woord
+=======
+                  choice as your UI foundation.
+>>>>>>> add examples on why-react-bootstrap page
                 </p>
               </FeatureCard>
 
@@ -228,6 +232,8 @@ export default withLayout(
               <DetailCard>
                 <p>
                   <b>A Simple React Component</b>
+                </p>
+                <p>
                   The CSS and details of Bootstrap components are rather
                   opinionated and lengthy. React-bootstrap simplifies this by
                   condensing the original Bootstrap into React-styled

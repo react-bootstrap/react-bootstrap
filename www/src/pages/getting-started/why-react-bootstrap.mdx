@@ -6,7 +6,7 @@ opinionated and lengthy. React-bootstrap simplifies
 this by condensing the original Bootstrap into React-styled
 components.
 
-### Vanilla Bootstrap
+### Bootstrap
 ```
 <div class="alert alert-primary" role="alert">
   A simple primary alert—check it out!
@@ -14,12 +14,14 @@ components.
 ```
 
 ### React Bootstrap
+
 ```
-<Alert key=0 variant=“primary">
-    This is a primary alert—check it out!
-</Alert>
- ```
-### Reliability with React’s Virtual DOM
+<Alert key="0" variant="primary">
+  This is a primary alert—check it out!
+</Alert>;
+```
+
+## Reliability with React’s Virtual DOM
 React-Bootstrap is a complete re-implementation of the
 Bootstrap components using React. It has no dependency
 on either bootstrap.js or jQuery. 
@@ -31,14 +33,104 @@ In this way, React-bootstrap provides a more reliable
 solution by incorporating Bootstrap functionality into 
 React's virtual DOM. 
 
-### Bootstrap with state
+### React-bootstrap
+```
+<Alert dismissible variant="danger">
+  <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+  <p>
+    Change this and that and try again.
+  </p>
+</Alert>;
+```
+
+### Bootstrap
+```
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Oh snap! You got an error!</strong> 
+  <p> 
+    Change this and that and try again.
+  </p>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+```
+
+
+## Bootstrap with state
 Since React bootstrap is built with React Javascript, state
 can be passed within React-bootstrap components as a prop.
 It also makes it easier to manage the state as updates are
 made using React’s state instead of directly manipulating
-the state of the DOM. 
+the state of the DOM. This also gives a lot of flexibility 
+when creating more complex components.
 
-### A Simpler Set up
+### React-bootstrap
+```
+class AlertDismissable extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { show: true };
+  }
+
+  render() {
+    const handleHide = () => this.setState({ show: false });
+    const handleShow = () => this.setState({ show: true });
+    return (
+      <>
+        <Alert show={this.state.show} variant="success">
+          <Alert.Heading>How's it going?!</Alert.Heading>
+          <p>
+            Duis mollis, est non commodo luctus.
+          </p>
+          <hr />
+          <div className="d-flex justify-content-end">
+            <Button onClick={handleHide} variant="outline-success">
+              Close me ya'll!
+            </Button>
+          </div>
+        </Alert>
+
+        {!this.state.show && <Button onClick={handleShow}>Show Alert</Button>}
+      </>
+    );
+  }
+}
+
+render(<AlertDismissable />);
+```
+
+### Bootstrap
+```
+// html
+<div class="alert alert-success alert-dismissible fade show firstCollapsible" role="alert">
+  <strong>How's it going?!</strong> 
+  <p> 
+    Duis mollis, est non commodo luctus.
+  </p>
+  <hr/>
+  <div class="d-flex justify-content-end">
+	<button type="button" class="btn btn-outline-success">Close me ya'll!</button>
+  </div>
+</div>
+<div class="d-flex justify-content-start alert fade show">
+	<button type="button" class="btn btn-primary d-none secondCollapsible">Show Alert</button>
+</div>
+
+// javascript
+$('.btn-outline-success').on('click', function(e) {
+    $('.firstCollapsible').addClass('d-none');
+    $('.secondCollapsible').removeClass('d-none');
+})
+
+$('.btn-primary').on('click', function(e) {
+    $('.firstCollapsible').removeClass('d-none');
+    $('.secondCollapsible').addClass('d-none');
+})
+```
+
+## A Simpler Set up
 React-bootstrap is less verbose than Bootstrap since jQuery
 and Popper are not required for its javascript. If you have
 React setup and React-Bootstrap installed you have everything
