@@ -1,61 +1,64 @@
 # Why React-bootstrap?
-
-## A Simple React Component
-The CSS and details of Bootstrap components are rather
-opinionated and lengthy. React-bootstrap simplifies
-this by condensing the original Bootstrap into React-styled
-components.
-
-### Bootstrap
-```
-<div class="alert alert-primary" role="alert">
-  A simple primary alert—check it out!
-</div>
-```
-
-### React Bootstrap
-
-```
-<Alert key="0" variant="primary">
-  This is a primary alert—check it out!
-</Alert>;
-```
-
-## Reliability with React’s Virtual DOM
 React-Bootstrap is a complete re-implementation of the
-Bootstrap components using React. It has no dependency
-on either bootstrap.js or jQuery. 
+Bootstrap components using React. It has **no dependency
+on either `bootstrap.js` or jQuery.** If you have React 
+setup and React-Bootstrap installed, you have everything 
+you need. 
 
 Methods and events using jQuery is done imperatively
 by directly manipulating the DOM. In contrast, React
 uses updates to the state to update the virtual DOM.
 In this way, React-bootstrap provides a more reliable
 solution by incorporating Bootstrap functionality into 
-React's virtual DOM. 
+React's virtual DOM. Below are a few examples of how
+React-Bootstrap components differ from Bootstrap.
 
-### React-bootstrap
-```
-<Alert dismissible variant="danger">
-  <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-  <p>
-    Change this and that and try again.
-  </p>
-</Alert>;
-```
+## A Simple React Component
+The CSS and details of Bootstrap components are rather
+opinionated and lengthy. React-bootstrap simplifies
+this by condensing the original Bootstrap into React-styled
+components. 
 
 ### Bootstrap
 ```
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Oh snap! You got an error!</strong> 
-  <p> 
-    Change this and that and try again.
-  </p>
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+import React from 'react';
+
+class Example extends React.Component {
+  render() {
+    return (
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Oh snap! You got an error!</strong> 
+        <p> 
+          Change this and that and try again.
+        </p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    )
+  }
+}
+
 ```
 
+### React Bootstrap
+```
+import React, { Component } from 'react';
+import { Alert } from 'react-bootstrap';
+
+class Example extends React.Component {
+  render() {
+    return (
+      <Alert dismissible variant="danger">
+        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+        <p>
+          Change this and that and try again.
+        </p>
+      </Alert>;
+    )
+  }
+}
+```
 
 ## Bootstrap with state
 Since React bootstrap is built with React Javascript, state
@@ -103,7 +106,7 @@ render(<AlertDismissable />);
 
 ### Bootstrap
 ```
-// html
+// HTML
 <div class="alert alert-success alert-dismissible fade show firstCollapsible" role="alert">
   <strong>How's it going?!</strong> 
   <p> 
@@ -118,7 +121,7 @@ render(<AlertDismissable />);
 	<button type="button" class="btn btn-primary d-none secondCollapsible">Show Alert</button>
 </div>
 
-// javascript
+// Javascript
 $('.btn-outline-success').on('click', function(e) {
     $('.firstCollapsible').addClass('d-none');
     $('.secondCollapsible').removeClass('d-none');
@@ -129,9 +132,3 @@ $('.btn-primary').on('click', function(e) {
     $('.secondCollapsible').addClass('d-none');
 })
 ```
-
-## A Simpler Set up
-React-bootstrap is less verbose than Bootstrap since jQuery
-and Popper are not required for its javascript. If you have
-React setup and React-Bootstrap installed you have everything
-you need. 

@@ -22,6 +22,22 @@ npm install react-bootstrap bootstrap
 
 Using create-react-app? Find additional documentation on integrating react-bootstrap [here](https://facebook.github.io/create-react-app/docs/adding-bootstrap)
 
+## Stylesheets
+
+Because React-Bootstrap doesn't depend on a very precise version of
+Bootstrap, we don't ship with any included css. However, some
+stylesheet **is required** to use these components. How
+and which bootstrap styles you include is up to you, but the
+simplest way is to include the latest styles from the CDN.
+
+<CssCodeBlock />
+
+For more advanced use cases you can also use a bundler like Webpack
+or Browserify to include the css files for you as part of your build
+process but that is beyond the scope of this guide. Also see
+[http://getbootstrap.com/customize/](http://getbootstrap.com/customize/) for details about customizing stylesheets to match your component
+use.
+
 ### Importing
 
 You should import individual components like:
@@ -46,37 +62,6 @@ bundles are available on [unpkg](https://unpkg.com/react-bootstrap/), as
 well as in the npm package.
 
 <BrowserGlobalsCodeBlock />
-
-## Stylesheets
-
-Because React-Bootstrap doesn't depend on a very precise version of
-Bootstrap, we don't ship with any included css. However, some
-stylesheet **is required** to use these components. How
-and which bootstrap styles you include is up to you, but the
-simplest way is to include the latest styles from the CDN.
-
-<CssCodeBlock />
-
-For more advanced use cases you can also use a bundler like Webpack
-or Browserify to include the css files for you as part of your build
-process but that is beyond the scope of this guide. Also see
-[http://getbootstrap.com/customize/](http://getbootstrap.com/customize/) for details about customizing stylesheets to match your component
-use.
-
-### Quickstart
-
-
-
-### Themes
-
-React-Bootstrap is compatible with existing Bootstrap themes. Just
-follow the installation instructions for your theme of choice.
-
-<Callout theme="danger" title="Watch out!">
-  Because React-Bootstrap completely reimplements Bootstrap's JavaScript, it's
-  not automatically compatible with themes that extend the default JavaScript
-  behaviors.
-</Callout>
 
 ## Browser support
 

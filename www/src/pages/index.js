@@ -94,32 +94,6 @@ const ButtonToolbar = styled('div')`
   }
 `;
 
-const Divider = styled('hr')`
-  @import '../css/theme';
-  border-top-color: rgb(236, 236, 236);
-  border-top-style: solid;
-  border-top-width: 1px;
-  padding-top: 15px;
-  box-sizing: content-box;
-  height: 1px;
-  border-bottom: none;
-`;
-
-const DetailCard = styled('div')`
-  @import '../css/theme';
-
-  composes: px-4 py-3 from global;
-  font-weight: 400;
-  line-height: 1.6;
-
-  & h2 {
-    font-size: 1.6rem;
-    color: $subtle;
-    font-weight: 300;
-    margin-bottom: 1rem;
-  }
-`;
-
 export default withLayout(
   class HomePage extends React.Component {
     render() {
@@ -222,45 +196,6 @@ export default withLayout(
                   is possible from plain Bootstrap.
                 </p>
               </FeatureCard>
-            </Row>
-          </Container>
-          <Container>
-            <Divider />
-          </Container>
-          <Container>
-            <Row>
-              <DetailCard>
-                <p>
-                  <b>A Simple React Component</b>
-                </p>
-                <p>
-                  The CSS and details of Bootstrap components are rather
-                  opinionated and lengthy. React-bootstrap simplifies this by
-                  condensing the original Bootstrap into React-styled
-                  components.
-                </p>
-              </DetailCard>
-
-              <DetailCard>
-                <p>
-                  <b>Bootstrap with a virtual DOM: </b> Since Bootstrap uses
-                  jQuery and Bootstrap-React does not, the way methods and
-                  events are rendered between the the two will differ. Methods
-                  and events using jQuery is done with direct manipulation of
-                  the DOM, while React uses updates to the state to update the
-                  virtual DOM. Since Bootstrap may interfere with the way React
-                  uses the virtual DOM, React bootstrap provides a more reliable
-                  solution by incorporating Bootstrap into React's virtual DOM.
-                </p>
-              </DetailCard>
-
-              <DetailCard>
-                <p>
-                  <b>Bootstrap with state: </b> Since React bootstrap is built
-                  with React Javascript, state can be passed within React
-                  bootstrap components as a prop.
-                </p>
-              </DetailCard>
             </Row>
           </Container>
         </main>

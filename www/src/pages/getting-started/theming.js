@@ -45,6 +45,12 @@ export default withLayout(function ThemingSection() {
         Changing prefixes is an escape hatch and generally shouldn't be used.
       </Callout>
       <ReactPlayground codeText={Prefixes} />
+
+      <Callout theme="danger" title="Watch out!">
+        Because React-Bootstrap completely reimplements Bootstrap's JavaScript,
+        it's not automatically compatible with themes that extend the default
+        JavaScript behaviors.
+      </Callout>
     </>
   );
 });
