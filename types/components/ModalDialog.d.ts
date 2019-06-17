@@ -3,7 +3,7 @@ import * as React from 'react';
 import { BsPrefixComponent } from './helpers';
 
 export interface ModalDialogProps {
-  size?: 'sm' | 'lg';
+  size?: 'sm' | 'lg' | 'xl';
   centered?: boolean;
   scrollable?: boolean;
 }
