@@ -45,7 +45,7 @@
     "react-dom": "^16.8.6",
     "react-live": "^2.1.2",
     "recompose": "^0.30.0",
-    "remark-slug": "^5.1.1",
+    "remark-slug": "^5.1.2",
     "shakespeare-data": "^3.0.0",
     "yup": "^0.27.0"
   },
