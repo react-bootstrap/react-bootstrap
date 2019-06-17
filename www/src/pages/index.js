@@ -136,35 +136,14 @@ export default withLayout(
               <FeatureCard>
                 <h2>Rebuilt with React</h2>
                 <p>
-<<<<<<< HEAD
                   React bootstrap replaces the Bootstrap javascript. Each
                   component has been built from scratch as a true React
                   component, without unneeded dependencies like jQuery.
                 </p>
                 <p>
-<<<<<<< HEAD
-                  As one of the oldest React libraries, React-Bootstrap has
-                  evolved and grown alongside React, making it an excellent
-=======
                   As one of the oldest React libraries, react bootstrap has
                   evolved and grown along-side React, making it an exellent
->>>>>>> took out unncessary  comma
                   choice as your UI foundation.
-=======
-                  React-bootstrap replaces the Bootstrap javascript. Each
-                  component has been built from scratch as true React
-                  components, without unneeded dependencies like jQuery.
-                </p>
-                <p>
-                  As one of the oldest React libraries, react-bootstrap has
-                  evolved and grown alongside React, making it an excellent
-<<<<<<< HEAD
-                  choice as your UI foundation. If you have React set up and
-                  installed, you have everything you need.
->>>>>>> fix woord
-=======
-                  choice as your UI foundation.
->>>>>>> add examples on why-react-bootstrap page
                 </p>
               </FeatureCard>
 
