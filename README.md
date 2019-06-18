@@ -1,4 +1,4 @@
-# React-Bootstrap 
+# React-Bootstrap
 
 [![Travis CI Build status][travis-badge]][travis-link]
 [![Appveyor Build status][appveyor-badge]][appveyor-link]
@@ -36,6 +36,10 @@ From there you can:
 - Run the tests once with `yarn test` (Or run them in watch mode with `yarn run tdd`).
 - Start a local copy of the docs site with `yarn start`
 - Or build a local copy of the library with `yarn run build`
+
+## CodeSandbox Examples
+
+[Click here](https://github.com/react-bootstrap/code-sandbox-examples) to explore some React-Bootstrap [CodeSandbox](https://codesandbox.io/) examples.
 
 ## Contributions
 
