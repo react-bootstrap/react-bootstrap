@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import BaseDropdown from 'react-overlays/Dropdown';
-import useUncontrolled from 'uncontrollable/hook';
+import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import { useBootstrapPrefix } from './ThemeProvider';

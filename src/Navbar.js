@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import uncontrollable from 'uncontrollable';
+import { uncontrollable } from 'uncontrollable';
 
 import createWithBsPrefix from './utils/createWithBsPrefix';
 import NavbarBrand from './NavbarBrand';
