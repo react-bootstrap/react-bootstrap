@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { elementType } from 'prop-types-extra';
-import useControllable from 'uncontrollable/hook';
+import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
 import createWithBsPrefix from './utils/createWithBsPrefix';
@@ -76,7 +76,7 @@ const Alert = React.forwardRef((uncontrolledProps, ref) => {
     dismissible,
     transition: Transition,
     ...props
-  } = useControllable(uncontrolledProps, controllables);
+  } = useUncontrolled(uncontrolledProps, controllables);
 
   const prefix = useBootstrapPrefix(bsPrefix, 'alert');
   const handleClose = useEventCallback(e => {
