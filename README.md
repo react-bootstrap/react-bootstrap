@@ -41,6 +41,8 @@ From there you can:
 
 [Click here](https://github.com/react-bootstrap/code-sandbox-examples) to explore some React-Bootstrap [CodeSandbox](https://codesandbox.io/) examples.
 
+[Click here](https://codesandbox.io/s/github/react-bootstrap/code-sandbox-examples/tree/master/basic) to automatically open [CodeSandbox](https://codesandbox.io/) with the React-Bootstrap [CodeSandbox Examples GitHub Repository](https://github.com/react-bootstrap/code-sandbox-examples) as a workspace.
+
 ## Contributions
 
 Yes please! See the [contributing guidelines][contributing] for details.
