@@ -6,15 +6,9 @@ const ThemeContext = React.createContext({});
 const { Consumer, Provider } = ThemeContext;
 
 function ThemeProvider({ prefixes, children }) {
-  const prefixCopy = useMemo(() => {
-    const outPrefixes = {};
+  const copiedPrefixes = useMemo(() => ({ ...prefixes }), [prefixes]);
 
-    Object.assign(outPrefixes, prefixes);
-
-    return outPrefixes;
-  }, [prefixes]);
-
-  return <Provider value={prefixCopy}>{children}</Provider>;
+  return <Provider value={copiedPrefixes}>{children}</Provider>;
 }
 
 ThemeProvider.propTypes = {
