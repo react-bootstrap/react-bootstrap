@@ -22,7 +22,7 @@ Steps to reproduce the behavior:
 
 ## Reproducable Example
 
-Minimal example by using [CodeSandbox](https://codesandbox.io).
+Minimal example by using [CodeSandbox](https://codesandbox.io/s/github/react-bootstrap/code-sandbox-examples/tree/master/basic).
 
 ## Expected behavior
 
