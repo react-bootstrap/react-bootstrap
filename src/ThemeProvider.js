@@ -5,7 +5,7 @@ import React, { useContext, useMemo } from 'react';
 const ThemeContext = React.createContext({});
 const { Consumer, Provider } = ThemeContext;
 
-const ThemeProvider = props => {
+function ThemeProvider({ prefixes, children }) {
   const prefixes = useMemo(() => {
     const outPrefixes = {};
 
