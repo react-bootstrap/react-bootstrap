@@ -3,7 +3,7 @@ import styles from 'dom-helpers/style';
 import transition from 'dom-helpers/transition';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import uncontrollable from 'uncontrollable';
+import { uncontrollable } from 'uncontrollable';
 
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
