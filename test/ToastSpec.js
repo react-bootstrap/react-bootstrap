@@ -47,6 +47,9 @@ describe('Toasts', () => {
   });
 
   it('should clearTimeout after unmount', () => {
+    const clock = sinon.useFakeTimers({
+      toFake: ['setTimeout'],
+    });
     let onCloseSpy = sinon.spy();
     const wrapper = mount(
       <Toast delay={500} onClose={onCloseSpy} show autohide>
@@ -55,6 +58,7 @@ describe('Toasts', () => {
       </Toast>,
     );
     wrapper.unmount();
+    clock.tick(500);
     expect(onCloseSpy).to.be.not.called;
   });
 });
