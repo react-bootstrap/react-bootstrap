@@ -806,6 +806,33 @@
     signedsource "^1.0.0"
     yargs "^9.0.0"
 
+"@hapi/hoek@6.x.x":
+  version "6.2.4"
+  resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-6.2.4.tgz#4b95fbaccbfba90185690890bdf1a2fbbda10595"
+  integrity sha512-HOJ20Kc93DkDVvjwHyHawPwPkX44sIrbXazAUDiUXaY2R9JwQGo2PhFfnQtdrsIe4igjG2fPgMra7NYw7qhy0A==
+
+"@hapi/joi@^14.0.0":
+  version "14.5.0"
+  resolved "https://registry.yarnpkg.com/@hapi/joi/-/joi-14.5.0.tgz#197e06edbd90436150f7f02154a83d0a82753188"
+  integrity sha512-q8oNlQWQpN14j6lMkaQqVdG8km+Ni32ZeuJ+sSOB+5a5VsIY6KVpPvdoMU/XKyAS7P7qP0TgM9fFGC2d8dB6hA==
+  dependencies:
+    "@hapi/hoek" "6.x.x"
+    "@hapi/marker" "1.x.x"
+    "@hapi/topo" "3.x.x"
+    isemail "3.x.x"
+
+"@hapi/marker@1.x.x":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@hapi/marker/-/marker-1.0.0.tgz#65b0b2b01d1be06304886ce9b4b77b1bfb21a769"
+  integrity sha512-JOfdekTXnJexfE8PyhZFyHvHjt81rBFSAbTIRAhF2vv/2Y1JzoKsGqxH/GpZJoF7aEfYok8JVcAHmSz1gkBieA==
+
+"@hapi/topo@3.x.x":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@hapi/topo/-/topo-3.1.0.tgz#5c47cd9637c2953db185aa957a27bcb2a8b7a6f8"
+  integrity sha512-gZDI/eXOIk8kP2PkUKjWu9RW8GGVd2Hkgjxyr/S7Z+JF+0mr7bAlbw+DkTRxnD580o8Kqxlnba9wvqp5aOHBww==
+  dependencies:
+    "@hapi/hoek" "6.x.x"
+
 "@mdx-js/mdx@^1.0.21":
   version "1.0.21"
   resolved "https://registry.yarnpkg.com/@mdx-js/mdx/-/mdx-1.0.21.tgz#028a7975fff026222f7ace19c8c130290c649025"
@@ -1795,7 +1822,7 @@ better-assert@~1.0.0:
   dependencies:
     callsite "1.0.0"
 
-better-opn@0.1.4:
+better-opn@0.1.4, better-opn@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/better-opn/-/better-opn-0.1.4.tgz#271d03bd8bcb8406d2d9d4cda5c0944d726ea171"
   integrity sha512-7V92EnOdjWOB9lKsVsthCcu1FdFT5qNJVTiOgGy5wPuTsSptMMxm2G1FGHgWu22MyX3tyDRzTWk4lxY2Ppdu7A==
@@ -4722,13 +4749,14 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-gatsby-cli@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.7.0.tgz#5fd22f0e2489f7153f552e489753cd9fc8a0daff"
-  integrity sha512-TJDKGiQXbnwEUqClanlHJl0zhxDeNkX5ocTIvbc05HU1HY7GKGhy98wgws0F0RQW9YwGs4TIFvFZHaPdJoYvqQ==
+gatsby-cli@^2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.7.2.tgz#202dc123739b03cf748df9177fc53d714471d064"
+  integrity sha512-fL0wBRRReRCgoE0G4uXRCYj3AI9K8uMdWh+LB+XGWiA+nQrsJByn+Vo0DhIqwzSAZxrXP3Nj3IIe6+PHH3Uopw==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/runtime" "^7.0.0"
+    better-opn "^0.1.4"
     bluebird "^3.5.0"
     chalk "^2.4.2"
     ci-info "^2.0.0"
@@ -4813,6 +4841,20 @@ gatsby-mdx@0.6.3:
     unist-util-remove "^1.0.1"
     unist-util-visit "^1.4.0"
 
+gatsby-page-utils@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/gatsby-page-utils/-/gatsby-page-utils-0.0.2.tgz#0eb341abcdd0a21a8e85a4fe6fb736956d95e0ad"
+  integrity sha512-8fG4KuLtck5q2HPdHmFs69a34CAO2cL1js7WCuFPma3P53lLF5Ui1v5o6cTouF3Yms3Gah8piM3zIWhG7mCHtQ==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    bluebird "^3.5.0"
+    chokidar "2.1.2"
+    fs-exists-cached "^1.0.0"
+    glob "^7.1.1"
+    lodash "^4.17.10"
+    micromatch "^3.1.10"
+    slash "^1.0.0"
+
 gatsby-plugin-astroturf@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-astroturf/-/gatsby-plugin-astroturf-0.2.1.tgz#b5ed009f5bb682dc78840a0adf25823c6d539aef"
@@ -4826,19 +4868,18 @@ gatsby-plugin-catch-links@^2.1.0:
     "@babel/runtime" "^7.0.0"
     escape-string-regexp "^1.0.5"
 
-gatsby-plugin-page-creator@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-page-creator/-/gatsby-plugin-page-creator-2.1.0.tgz#9d346d52ca0329c2a3a21a8a7cd84e444ae8bbb8"
-  integrity sha512-CBor9MlQMNFzOY+Mq2hcc6gznN4u8z/lSevo7Te3x54dI7A9O8c0zmLBslPQuSm4OXKqrXqSe4KjuEC6V6Uj/g==
+gatsby-plugin-page-creator@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-page-creator/-/gatsby-plugin-page-creator-2.1.1.tgz#0d8493ef7d0614080b93370782f4666a11f7333a"
+  integrity sha512-6pzu0tLyzlqzWOKpIxj9sHYALdJLh4KRpqYSfrJpSLefw/gbff3h4CDnrHRsOCaaop8UEAkZkI1XGnhcsBFEVQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     bluebird "^3.5.0"
-    chokidar "2.1.2"
     fs-exists-cached "^1.0.0"
+    gatsby-page-utils "^0.0.2"
     glob "^7.1.1"
     lodash "^4.17.10"
     micromatch "^3.1.10"
-    slash "^1.0.0"
 
 gatsby-plugin-sass@^2.1.0:
   version "2.1.0"
@@ -4946,10 +4987,10 @@ gatsby-transformer-remark@^2.5.0:
     unist-util-select "^1.5.0"
     unist-util-visit "^1.3.0"
 
-gatsby@^2.10.0:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.10.0.tgz#01c608d68ca77f28a29d54d627b5738ee7b0f4f2"
-  integrity sha512-Rei8Ad2g3Gqe/ZJYNCBykk4TKy4mGx1b9hRxhpxcllgifI/HsnKI3yfXeuzfmjkK40e/SJrI7DPdbgdzDTciNg==
+gatsby@^2.10.5:
+  version "2.10.5"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.10.5.tgz#01dca1595d6ce97ae00666594308ad00120479a9"
+  integrity sha512-HUXw1GSaYiWzXh44wJFgTO+2P9DEqAwvsQvEkQ/z4dBM71ygkXQpeO0OxWebZ790OB0321h2juV1JaxhLFFb/Q==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/core" "^7.0.0"
@@ -4958,6 +4999,7 @@ gatsby@^2.10.0:
     "@babel/runtime" "^7.0.0"
     "@babel/traverse" "^7.0.0"
     "@gatsbyjs/relay-compiler" "2.0.0-printer-fix.2"
+    "@hapi/joi" "^14.0.0"
     "@mikaelkristiansson/domready" "^1.0.9"
     "@pieh/friendly-errors-webpack-plugin" "1.7.0-chalk-2"
     "@reach/router" "^1.1.1"
@@ -5007,10 +5049,10 @@ gatsby@^2.10.0:
     flat "^4.0.0"
     fs-exists-cached "1.0.0"
     fs-extra "^5.0.0"
-    gatsby-cli "^2.7.0"
+    gatsby-cli "^2.7.2"
     gatsby-graphiql-explorer "^0.2.0"
     gatsby-link "^2.2.0"
-    gatsby-plugin-page-creator "^2.1.0"
+    gatsby-plugin-page-creator "^2.1.1"
     gatsby-react-router-scroll "^2.1.0"
     gatsby-telemetry "^1.1.0"
     glob "^7.1.1"
@@ -5023,7 +5065,6 @@ gatsby@^2.10.0:
     is-relative-url "^2.0.0"
     is-wsl "^1.1.0"
     jest-worker "^23.2.0"
-    joi "^14.0.0"
     json-loader "^0.5.7"
     json-stringify-safe "^5.0.1"
     lodash "^4.17.10"
@@ -5046,7 +5087,7 @@ gatsby@^2.10.0:
     postcss-loader "^2.1.3"
     prop-types "^15.6.1"
     raw-loader "^0.5.1"
-    react-dev-utils "^4.2.1"
+    react-dev-utils "^4.2.3"
     react-error-overlay "^3.0.0"
     react-hot-loader "^4.8.4"
     redux "^4.0.0"
@@ -5695,11 +5736,6 @@ hmac-drbg@^1.0.0:
     hash.js "^1.0.3"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
-
-hoek@6.x.x:
-  version "6.1.3"
-  resolved "https://registry.yarnpkg.com/hoek/-/hoek-6.1.3.tgz#73b7d33952e01fe27a38b0457294b79dd8da242c"
-  integrity sha512-YXXAAhmF9zpQbC7LEcREFtXfGq5K1fmd+4PHkBq8NUqmzW3G+Dq10bI/i0KucLRwss3YYFQ0fSfoxBZYiGUqtQ==
 
 hogan.js@^3.0.2:
   version "3.0.2"
@@ -6728,15 +6764,6 @@ jest-worker@^23.2.0:
   integrity sha1-+vcGqNo2+uYOsmlXJX+ntdjqArk=
   dependencies:
     merge-stream "^1.0.1"
-
-joi@^14.0.0:
-  version "14.3.1"
-  resolved "https://registry.yarnpkg.com/joi/-/joi-14.3.1.tgz#164a262ec0b855466e0c35eea2a885ae8b6c703c"
-  integrity sha512-LQDdM+pkOrpAn4Lp+neNIFV3axv1Vna3j38bisbQhETPMANYRbFJFUyOZcOClYvM/hppMhGWuKSFEK9vjrB+bQ==
-  dependencies:
-    hoek "6.x.x"
-    isemail "3.x.x"
-    topo "3.x.x"
 
 js-base64@^2.1.8:
   version "2.5.1"
@@ -9336,7 +9363,7 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dev-utils@^4.2.1:
+react-dev-utils@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-4.2.3.tgz#5b42d9ea58d5e9e017a2f57a40a8af408a3a46fb"
   integrity sha512-uvmkwl5uMexCmC0GUv1XGQP0YjfYePJufGg4YYiukhqk2vN1tQxwWJIBERqhOmSi80cppZg8mZnPP/kOMf1sUQ==
@@ -11235,13 +11262,6 @@ toidentifier@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.0.tgz#7e1be3470f1e77948bc43d94a3c8f4d7752ba553"
   integrity sha512-yaOH/Pk/VEhBWWTlhI+qXxDFXlejDGcQipMlyxda9nthulaxLZUNcUqFxokp0vcYnvteJln5FNQDRrxj3YcbVw==
-
-topo@3.x.x:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/topo/-/topo-3.0.3.tgz#d5a67fb2e69307ebeeb08402ec2a2a6f5f7ad95c"
-  integrity sha512-IgpPtvD4kjrJ7CRA3ov2FhWQADwv+Tdqbsf1ZnPUSAtCJ9e1Z44MmoSGDXGk4IppoZA7jd/QRkNddlLJWlUZsQ==
-  dependencies:
-    hoek "6.x.x"
 
 toposort@^2.0.2:
   version "2.0.2"
