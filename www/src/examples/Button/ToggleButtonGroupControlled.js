@@ -1,31 +1,15 @@
-class ToggleButtonGroupControlled extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+function ToggleButtonGroupControlled() {
+  const [value, setValue] = React.useState([1, 3]);
 
-    this.handleChange = this.handleChange.bind(this);
+  const handleChange = val => setValue(val);
 
-    this.state = {
-      value: [1, 3],
-    };
-  }
-
-  handleChange(value, event) {
-    this.setState({ value });
-  }
-
-  render() {
-    return (
-      <ToggleButtonGroup
-        type="checkbox"
-        value={this.state.value}
-        onChange={this.handleChange}
-      >
-        <ToggleButton value={1}>Option 1</ToggleButton>
-        <ToggleButton value={2}>Option 2</ToggleButton>
-        <ToggleButton value={3}>Option 3</ToggleButton>
-      </ToggleButtonGroup>
-    );
-  }
+  return (
+    <ToggleButtonGroup type="checkbox" value={value} onChange={handleChange}>
+      <ToggleButton value={1}>Option 1</ToggleButton>
+      <ToggleButton value={2}>Option 2</ToggleButton>
+      <ToggleButton value={3}>Option 3</ToggleButton>
+    </ToggleButtonGroup>
+  );
 }
 
 render(<ToggleButtonGroupControlled />);
