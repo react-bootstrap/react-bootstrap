@@ -100,7 +100,7 @@
     "karma-sinon-chai": "^2.0.2",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^4.0.2",
-    "lint-staged": "^8.1.5",
+    "lint-staged": "^9.0.1",
     "lodash": "^4.17.11",
     "mocha": "^6.0.2",
     "prettier": "^1.16.4",
