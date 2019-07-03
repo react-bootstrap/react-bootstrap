@@ -2,25 +2,25 @@ language: node_js
 node_js:
   - node
 
+jobs:
+  include:
+    - stage: Chrome
+      addons:
+        chrome: stable
+      env: BROWSER=ChromeCi
+    - stage: Firefox
+      addons:
+        firefox: latest
+      env: BROWSER=Firefox
+
+services:
+  - xvfb
+
 cache:
   yarn: true
   npm: true
   directories:
     - www/node_modules
-
-jobs:
-  include:
-    - stage: Chrome
-      env: BROWSER=ChromeCi
-      addons:
-        chrome: stable
-    - stage: Firefox
-      env: BROWSER=Firefox
-      addons:
-        firefox: latest
-
-services:
-  - xvfb
 
 before_install:
   - export DISPLAY=:99.0
