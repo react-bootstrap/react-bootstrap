@@ -14,9 +14,6 @@ jobs:
 services:
   - xvfb
 
-env:
-  - DISPLAY=:99.0
-
 cache:
   yarn: true
   npm: true
