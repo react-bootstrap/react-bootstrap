@@ -123,8 +123,8 @@ const defaultProps = {
 };
 
 class Navbar extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
 
     this.state = {
       navbarContext: {

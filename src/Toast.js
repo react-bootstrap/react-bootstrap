@@ -79,7 +79,7 @@ const Toast = ({
       };
     }
     return () => null;
-  }, [autohide, show]);
+  }, [autohide, delay, onClose, show]);
   const useAnimation = Transition && animation;
   const toast = (
     <div

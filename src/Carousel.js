@@ -120,17 +120,14 @@ const defaultProps = {
 };
 
 class Carousel extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  state = {
+    prevClasses: '',
+    currentClasses: 'active',
+  };
 
-    this.state = {
-      prevClasses: '',
-      currentClasses: 'active',
-    };
-    this.isUnmounted = false;
+  isUnmounted = false;
 
-    this.carousel = React.createRef();
-  }
+  carousel = React.createRef();
 
   componentDidMount() {
     this.cycle();
