@@ -1,7 +1,7 @@
 function ToggleButtonGroupControlled() {
   const [value, setValue] = useState([1, 3]);
 
-  const handleChange = val => setValue(val);
+  const handleChange = (val, event) => setValue(val);
 
   return (
     <ToggleButtonGroup type="checkbox" value={value} onChange={handleChange}>
