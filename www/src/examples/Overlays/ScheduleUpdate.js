@@ -1,15 +1,16 @@
-class UpdatingPopover extends React.Component {
-  componentDidUpdate(prevProps) {
-    if (prevProps.children !== this.props.children) {
+const UpdatingPopover = React.forwardRef(
+  ({ scheduleUpdate, children, ...props }, ref) => {
+    useEffect(() => {
       console.log('updating!');
-      this.props.scheduleUpdate();
-    }
-  }
-
-  render() {
-    return <Popover {...this.props} />;
-  }
-}
+      scheduleUpdate();
+    }, [children, scheduleUpdate]);
+    return (
+      <Popover ref={ref} {...props}>
+        {children}
+      </Popover>
+    );
+  },
+);
 
 const longContent = `
   Very long
