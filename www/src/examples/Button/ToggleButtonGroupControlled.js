@@ -1,5 +1,5 @@
 function ToggleButtonGroupControlled() {
-  const [value, setValue] = React.useState([1, 3]);
+  const [value, setValue] = useState([1, 3]);
 
   const handleChange = val => setValue(val);
 

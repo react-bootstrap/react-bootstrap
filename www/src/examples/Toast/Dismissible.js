@@ -1,6 +1,6 @@
 function Example() {
-  const [showA, setShowA] = React.useState(true);
-  const [showB, setShowB] = React.useState(true);
+  const [showA, setShowA] = useState(true);
+  const [showB, setShowB] = useState(true);
 
   const toggleShowA = () => setShowA(!showA);
   const toggleShowB = () => setShowB(!showB);

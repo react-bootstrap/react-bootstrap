@@ -38,7 +38,7 @@ function MydModalWithGrid(props) {
 }
 
 function App() {
-  const [modalShow, setModalShow] = React.useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   return (
     <ButtonToolbar>

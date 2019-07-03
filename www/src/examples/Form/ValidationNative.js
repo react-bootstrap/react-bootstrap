@@ -1,5 +1,5 @@
 function FormExample() {
-  const [validated, setValidated] = React.useState(false);
+  const [validated, setValidated] = useState(false);
 
   const handleSubmit = event => {
     const form = event.currentTarget;

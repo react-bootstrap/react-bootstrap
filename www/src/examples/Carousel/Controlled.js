@@ -1,5 +1,5 @@
 function ControlledCarousel() {
-  const [state, setState] = React.useState({ index: 0, direction: null });
+  const [state, setState] = useState({ index: 0, direction: null });
 
   const handleSelect = (selectedIndex, e) =>
     setState({

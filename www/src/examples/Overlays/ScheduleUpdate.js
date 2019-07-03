@@ -19,9 +19,9 @@ const longContent = `
 const shortContent = 'Short and sweet!';
 
 function Example() {
-  const [content, setContent] = React.useState(shortContent);
+  const [content, setContent] = useState(shortContent);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const timerId = setInterval(() => {
       setContent(content === shortContent ? longContent : shortContent);
     }, 3000);

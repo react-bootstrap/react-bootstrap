@@ -1,5 +1,5 @@
 function AlertDismissible() {
-  const [show, setShow] = React.useState(true);
+  const [show, setShow] = useState(true);
 
   return (
     <>

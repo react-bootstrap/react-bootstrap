@@ -1,6 +1,6 @@
 function Example() {
-  const [smShow, setSmShow] = React.useState(false);
-  const [lgShow, setLgShow] = React.useState(false);
+  const [smShow, setSmShow] = useState(false);
+  const [lgShow, setLgShow] = useState(false);
 
   return (
     <ButtonToolbar>

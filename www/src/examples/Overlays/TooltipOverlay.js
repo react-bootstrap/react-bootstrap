@@ -1,6 +1,6 @@
 function Example() {
-  const [show, setShow] = React.useState(false);
-  const [target, setTarget] = React.useState(null);
+  const [show, setShow] = useState(false);
+  const [target, setTarget] = useState(null);
 
   const attachRef = targ => setTarget(targ);
 

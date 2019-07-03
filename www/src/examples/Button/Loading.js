@@ -3,9 +3,9 @@ function simulateNetworkRequest() {
 }
 
 function LoadingButton() {
-  const [isLoading, setLoading] = React.useState(false);
+  const [isLoading, setLoading] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLoading) {
       simulateNetworkRequest().then(() => {
         setLoading(false);

@@ -1,5 +1,5 @@
 function ControlledTabs() {
-  const [key, setKey] = React.useState('home');
+  const [key, setKey] = useState('home');
 
   return (
     <Tabs id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)}>
