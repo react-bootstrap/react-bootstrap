@@ -3,7 +3,7 @@
 import classNames from 'classnames';
 import styled, { css } from 'astroturf';
 import qsa from 'dom-helpers/query/querySelectorAll';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import * as ReactBootstrap from 'react-bootstrap';
@@ -22,6 +22,7 @@ import Sonnet from './Sonnet';
 
 const scope = {
   useEffect,
+  useRef,
   useState,
   ...ReactBootstrap,
   ReactDOM,

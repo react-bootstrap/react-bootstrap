@@ -1,15 +1,13 @@
 function Example() {
   const [show, setShow] = useState(false);
-  const [target, setTarget] = useState(null);
-
-  const attachRef = targ => setTarget(targ);
+  const target = useRef(null);
 
   return (
     <>
-      <Button ref={attachRef} onClick={() => setShow(!show)}>
+      <Button ref={target} onClick={() => setShow(!show)}>
         Click me!
       </Button>
-      <Overlay target={target} show={show} placement="right">
+      <Overlay target={target.current} show={show} placement="right">
         {props => (
           <Tooltip id="overlay-example" {...props}>
             My Tooltip
