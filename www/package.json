@@ -29,7 +29,7 @@
     "gatsby-plugin-catch-links": "^2.1.0",
     "gatsby-plugin-sass": "^2.1.0",
     "gatsby-remark-prismjs": "^3.3.0",
-    "gatsby-source-filesystem": "2.1.1",
+    "gatsby-source-filesystem": "2.1.2",
     "gatsby-transformer-react-docgen": "^4.1.0",
     "gatsby-transformer-remark": "^2.5.0",
     "gh-pages": "^2.0.1",
