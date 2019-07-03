@@ -1,7 +1,13 @@
 function ToggleButtonGroupControlled() {
   const [value, setValue] = useState([1, 3]);
 
-  const handleChange = (val, event) => setValue(val);
+  /*
+   * The second argument that will be passed to
+   * `handleChange` from `ToggleButtonGroup`
+   * is the SyntheticEvent object, but we are
+   * not using it in this example so we will omit it.
+   */
+  const handleChange = val => setValue(val);
 
   return (
     <ToggleButtonGroup type="checkbox" value={value} onChange={handleChange}>
