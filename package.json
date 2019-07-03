@@ -89,7 +89,7 @@
     "eslint-plugin-react": "^7.12.4",
     "execa": "^2.0.0",
     "fs-extra": "^8.0.0",
-    "husky": "^2.1.0",
+    "husky": "^3.0.0",
     "karma": "^4.0.1",
     "karma-chrome-launcher": "^2.2.0",
     "karma-cli": "^2.0.0",
