@@ -32,7 +32,6 @@ module.exports = {
       rules: {
         'comma-dangle': 'off',
         'no-console': 'off',
-        'no-undef': 'off'
       },
     },
   ],
