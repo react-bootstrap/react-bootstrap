@@ -1,11 +1,11 @@
 language: node_js
 node_js:
-  - stable
+  - node
 
 cache:
+  yarn: true
+  npm: true
   directories:
-    - ~/.yarn-cache
-    - node_modules
     - www/node_modules
 
 jobs:
