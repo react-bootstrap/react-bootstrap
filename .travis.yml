@@ -4,26 +4,24 @@ node_js:
 
 jobs:
   include:
-    - stage: Chrome
-      addons:
+    - addons:
         chrome: stable
       env: BROWSER=ChromeCi
-    - stage: Firefox
-      addons:
+    - addons:
         firefox: latest
       env: BROWSER=Firefox
 
 services:
   - xvfb
 
+env:
+  - DISPLAY=:99.0
+
 cache:
   yarn: true
   npm: true
   directories:
     - www/node_modules
-
-before_install:
-  - export DISPLAY=:99.0
 
 install:
   - yarn bootstrap
