@@ -81,8 +81,8 @@ class TabContainer extends React.Component {
     activeKey: PropTypes.any,
   };
 
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
 
     this.state = {
       tabContext: {

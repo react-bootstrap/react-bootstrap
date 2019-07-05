@@ -79,7 +79,9 @@ const Toast = ({
       };
     }
     return () => null;
-  }, [autohide, show]);
+    // also clear the Timeout of the delay has changed
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autohide, onClose, show]);
   const useAnimation = Transition && animation;
   const toast = (
     <div
