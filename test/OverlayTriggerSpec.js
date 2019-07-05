@@ -283,16 +283,13 @@ describe('<OverlayTrigger>', () => {
     describe('replaced overlay', () => {
       it('Should still be shown', () => {
         class ReplacedOverlay extends React.Component {
-          constructor(props) {
-            super(props);
+          state = {
+            replaced: false,
+          };
 
-            this.handleClick = this.handleClick.bind(this);
-            this.state = { replaced: false };
-          }
-
-          handleClick() {
+          handleClick = () => {
             this.setState({ replaced: true });
-          }
+          };
 
           render() {
             if (this.state.replaced) {
