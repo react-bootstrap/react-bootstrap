@@ -63,7 +63,7 @@ describe('<Toast>', () => {
       );
       wrapper.unmount();
       clock.tick(1000);
-      expect(onCloseSpy).to.be.not.called;
+      expect(onCloseSpy).not.to.have.been.called;
     } finally {
       clock.restore();
     }
