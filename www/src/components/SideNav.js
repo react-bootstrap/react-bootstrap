@@ -103,7 +103,7 @@ const TocSubLink = styled(TocLink)`
 
 const gettingStarted = ['introduction', 'theming', 'support'];
 
-const layout = ['grid', 'media'];
+const layout = ['float', 'grid', 'media'];
 
 const components = [
   'alerts',
