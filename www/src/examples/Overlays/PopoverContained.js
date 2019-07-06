@@ -23,8 +23,11 @@ class Example extends React.Component {
           container={this}
           containerPadding={20}
         >
-          <Popover id="popover-contained" title="Popover bottom">
-            <strong>Holy guacamole!</strong> Check this info.
+          <Popover id="popover-contained">
+            <Popover.Title as="h3">Popover bottom</Popover.Title>
+            <Popover.Content>
+              <strong>Holy guacamole!</strong> Check this info.
+            </Popover.Content>
           </Popover>
         </Overlay>
       </ButtonToolbar>

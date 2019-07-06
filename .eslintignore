@@ -4,3 +4,4 @@ coverage/
 **/node_modules/**
 www/.cache
 www/public
+www/plugins

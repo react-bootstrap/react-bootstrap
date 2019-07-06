@@ -75,10 +75,6 @@ const propTypes = {
   isInvalid: PropTypes.bool,
 };
 
-const defaultProps = {
-  as: 'input',
-};
-
 const FormControl = React.forwardRef(
   (
     {
@@ -91,7 +87,8 @@ const FormControl = React.forwardRef(
       isInvalid,
       plaintext,
       readOnly,
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'input',
       ...props
     },
     ref,
@@ -136,7 +133,6 @@ const FormControl = React.forwardRef(
 
 FormControl.displayName = 'FormControl';
 FormControl.propTypes = propTypes;
-FormControl.defaultProps = defaultProps;
 
 FormControl.Feedback = Feedback;
 

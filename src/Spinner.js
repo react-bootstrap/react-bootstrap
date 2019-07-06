@@ -49,10 +49,6 @@ class Spinner extends React.Component {
     as: PropTypes.elementType,
   };
 
-  static defaultProps = {
-    as: 'div',
-  };
-
   render() {
     const {
       bsPrefix,
@@ -60,11 +56,11 @@ class Spinner extends React.Component {
       animation,
       size,
       children,
-      as,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
       className,
       ...props
     } = this.props;
-    const Component = as;
     const bsSpinnerPrefix = `${bsPrefix}-${animation}`;
 
     return (

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import uncontrollable from 'uncontrollable';
+import { uncontrollable } from 'uncontrollable';
 
 import { createBootstrapComponent } from './ThemeProvider';
 import AbstractNav from './AbstractNav';
@@ -29,16 +29,16 @@ class ListGroup extends React.Component {
   };
 
   static defaultProps = {
-    as: 'div',
     variant: null,
   };
 
   render() {
-    const { className, bsPrefix, variant, ...props } = this.props;
+    const { className, bsPrefix, variant, as = 'div', ...props } = this.props;
 
     return (
       <AbstractNav
         {...props}
+        as={as}
         className={classNames(
           className,
           bsPrefix,

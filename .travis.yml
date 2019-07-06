@@ -1,10 +1,6 @@
 language: node_js
 node_js:
-  - lts/*
-
-env:
-  - BROWSER=ChromeCi
-  - BROWSER=Firefox
+  - stable
 
 cache:
   directories:
@@ -12,13 +8,22 @@ cache:
     - node_modules
     - www/node_modules
 
-addons:
-  chrome: stable
-  firefox: latest
+jobs:
+  include:
+    - stage: Chrome
+      env: BROWSER=ChromeCi
+      addons:
+        chrome: stable
+    - stage: Firefox
+      env: BROWSER=Firefox
+      addons:
+        firefox: latest
+
+services:
+  - xvfb
 
 before_install:
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
 
 install:
   - yarn bootstrap

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import uncontrollable from 'uncontrollable';
+import { uncontrollable } from 'uncontrollable';
 
 import TabContext from './TabContext';
 import SelectableContext from './SelectableContext';
@@ -81,8 +81,8 @@ class TabContainer extends React.Component {
     activeKey: PropTypes.any,
   };
 
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
 
     this.state = {
       tabContext: {

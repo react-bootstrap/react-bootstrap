@@ -71,7 +71,7 @@ export default withLayout(function TooltipSection({ data }) {
         Overlay
       </LinkedHeading>
       <p>
-        <code>Overlay</code> is the fundemental component for positioning and
+        <code>Overlay</code> is the fundamental component for positioning and
         controlling tooltip visibility. It's a wrapper around react-popper, that
         adds support for transitions, and visibility toggling.
       </p>
@@ -209,6 +209,8 @@ export default withLayout(function TooltipSection({ data }) {
       <ComponentApi metadata={data.OverlayTrigger} />
       <ComponentApi metadata={data.Tooltip} />
       <ComponentApi metadata={data.Popover} />
+      <ComponentApi metadata={data.PopoverContent} />
+      <ComponentApi metadata={data.PopoverTitle} />
     </>
   );
 });
@@ -219,6 +221,12 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     Popover: componentMetadata(displayName: { eq: "Popover" }) {
+      ...ComponentApi_metadata
+    }
+    PopoverContent: componentMetadata(displayName: { eq: "PopoverContent" }) {
+      ...ComponentApi_metadata
+    }
+    PopoverTitle: componentMetadata(displayName: { eq: "PopoverTitle" }) {
       ...ComponentApi_metadata
     }
     Overlay: componentMetadata(displayName: { eq: "Overlay" }) {

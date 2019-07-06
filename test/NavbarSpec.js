@@ -223,4 +223,9 @@ describe('<Navbar>', () => {
     expect(selectSpy).to.be.calledOnce;
     expect(selectSpy).to.be.calledWith('#home');
   });
+
+  it('Should have nav as default component', () => {
+    const wrapper = mount(<Navbar />);
+    expect(wrapper.find('nav').length).to.equal(1);
+  });
 });

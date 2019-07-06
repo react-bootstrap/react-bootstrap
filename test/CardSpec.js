@@ -43,4 +43,9 @@ describe('<Card>', () => {
   it('allows for the body shorthand', () => {
     mount(<Card body>test</Card>).assertSingle('.card-body');
   });
+
+  it('Should have div as default component', () => {
+    const wrapper = mount(<Card />);
+    expect(wrapper.find('div').length).to.equal(1);
+  });
 });

@@ -202,6 +202,10 @@ describe('<Nav>', () => {
       expect(instance.prop('activeKey')).to.equal('5');
       expect(document.activeElement).to.equal(anchors.at(4).getDOMNode());
     });
+
+    it('Should have div as default component', () => {
+      mount(<Nav />).assertSingle('div');
+    });
   });
 
   describe('Web Accessibility', () => {

@@ -27,4 +27,8 @@ describe('<Spinner>', () => {
       </Spinner>,
     ).assertSingle('div.spinner-grow span#testChild');
   });
+
+  it('Should have div as default component', () => {
+    mount(<Spinner animation="border" />).assertSingle('div');
+  });
 });

@@ -119,4 +119,8 @@ describe('<Breadcrumb.Item>', () => {
       .prop('target')
       .should.eq('_blank');
   });
+
+  it('Should have li as default component', () => {
+    mount(<Breadcrumb.Item />).assertSingle('li');
+  });
 });

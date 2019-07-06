@@ -9,9 +9,9 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * Specifies a large or small modal.
+   * Render a large, extra large or small modal.
    *
-   * @type ('sm'|'lg')
+   * @type ('sm'|'lg','xl')
    */
   size: PropTypes.string,
 

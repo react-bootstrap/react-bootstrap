@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import invariant from 'invariant';
-import uncontrollable from 'uncontrollable';
+import { uncontrollable } from 'uncontrollable';
 
 import chainFunction from './utils/createChainedFunction';
 import { map } from './utils/ElementChildren';

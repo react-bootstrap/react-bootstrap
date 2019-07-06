@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import all from 'prop-types-extra/lib/all';
 import React, { useContext } from 'react';
-import useUncontrolled from 'uncontrollable/hook';
+import { useUncontrolled } from 'uncontrollable';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
@@ -88,12 +88,11 @@ const propTypes = {
 const defaultProps = {
   justify: false,
   fill: false,
-  as: 'div',
 };
 
 const Nav = React.forwardRef((uncontrolledProps, ref) => {
   let {
-    as,
+    as = 'div',
     bsPrefix,
     variant,
     fill,

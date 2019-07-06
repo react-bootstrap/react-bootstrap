@@ -57,7 +57,6 @@ const propTypes = {
 
 const defaultProps = {
   alignRight: false,
-  as: 'div',
   flip: true,
 };
 
@@ -71,7 +70,8 @@ const DropdownMenu = React.forwardRef(
       flip,
       popperConfig,
       show: showProps,
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
       ...props
     },
     ref,

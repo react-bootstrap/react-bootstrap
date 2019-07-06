@@ -15,4 +15,8 @@ describe('<NavItem>', () => {
   it('should allow custom elements instead of "div"', () => {
     mount(<NavItem as="section" />).assertSingle('section.nav-item');
   });
+
+  it('Should have div as default component', () => {
+    mount(<NavItem />).assertSingle('div');
+  });
 });

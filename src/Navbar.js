@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import uncontrollable from 'uncontrollable';
+import { uncontrollable } from 'uncontrollable';
 
 import createWithBsPrefix from './utils/createWithBsPrefix';
 import NavbarBrand from './NavbarBrand';
@@ -117,22 +117,17 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'nav',
   expand: true,
   variant: 'light',
   collapseOnSelect: false,
 };
 
 class Navbar extends React.Component {
-  constructor(...args) {
-    super(...args);
-
-    this.state = {
-      navbarContext: {
-        onToggle: this.handleToggle,
-      },
-    };
-  }
+  state = {
+    navbarContext: {
+      onToggle: () => this.handleToggle(),
+    },
+  };
 
   static getDerivedStateFromProps({ bsPrefix, expanded }, prevState) {
     return {
@@ -169,7 +164,8 @@ class Navbar extends React.Component {
       sticky,
       className,
       children,
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'nav',
       expanded: _1,
       onToggle: _2,
       onSelect: _3,

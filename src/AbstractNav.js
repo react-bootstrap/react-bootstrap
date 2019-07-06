@@ -27,15 +27,9 @@ class AbstractNav extends React.Component {
     activeKey: PropTypes.any,
   };
 
-  static defaultProps = {
-    as: 'ul',
+  state = {
+    navContext: null,
   };
-
-  constructor(...args) {
-    super(...args);
-
-    this.state = { navContext: null };
-  }
 
   static getDerivedStateFromProps({
     activeKey,
@@ -112,7 +106,8 @@ class AbstractNav extends React.Component {
 
   render() {
     const {
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'ul',
       onSelect: _,
       parentOnSelect: _0,
       getControlledId: _1,

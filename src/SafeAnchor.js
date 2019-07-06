@@ -20,10 +20,6 @@ const propTypes = {
   innerRef: PropTypes.any,
 };
 
-const defaultProps = {
-  as: 'a',
-};
-
 function isTrivialHref(href) {
   return !href || href.trim() === '#';
 }
@@ -69,7 +65,8 @@ class SafeAnchor extends React.Component {
 
   render() {
     const {
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'a',
       disabled,
       onKeyDown,
       innerRef,
@@ -99,6 +96,5 @@ class SafeAnchor extends React.Component {
 }
 
 SafeAnchor.propTypes = propTypes;
-SafeAnchor.defaultProps = defaultProps;
 
 export default SafeAnchor;

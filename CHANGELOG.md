@@ -1,3 +1,26 @@
+# [1.0.0-beta.9](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2019-05-30)
+
+
+### Bug Fixes
+
+* **Collapse:** remove 0px menu height on resize and expand/collapse ([#3687](https://github.com/react-bootstrap/react-bootstrap/issues/3687)) ([787a19e](https://github.com/react-bootstrap/react-bootstrap/commit/787a19e))
+* Accordion Component not collapsing when toggled twice ([cd842f7](https://github.com/react-bootstrap/react-bootstrap/commit/cd842f7)), closes [#3726](https://github.com/react-bootstrap/react-bootstrap/issues/3726)
+* ran prettier to fix CI ([#3678](https://github.com/react-bootstrap/react-bootstrap/issues/3678)) ([1719da5](https://github.com/react-bootstrap/react-bootstrap/commit/1719da5))
+* **types:** add bootstrap sizes for Form.Label as column ([#3731](https://github.com/react-bootstrap/react-bootstrap/issues/3731)) ([cdb7b6b](https://github.com/react-bootstrap/react-bootstrap/commit/cdb7b6b)), closes [#3481](https://github.com/react-bootstrap/react-bootstrap/issues/3481)
+* **types:** add scrollable to ModalProps interface to match component ([#3742](https://github.com/react-bootstrap/react-bootstrap/issues/3742)) ([57e7bf4](https://github.com/react-bootstrap/react-bootstrap/commit/57e7bf4))
+* **types:** alignRight type ([#3828](https://github.com/react-bootstrap/react-bootstrap/issues/3828)) ([1dd21eb](https://github.com/react-bootstrap/react-bootstrap/commit/1dd21eb))
+
+
+### Features
+
+* **docs:** optimized style and script loading ([#3713](https://github.com/react-bootstrap/react-bootstrap/issues/3713)) ([4b362a3](https://github.com/react-bootstrap/react-bootstrap/commit/4b362a3))
+
+
+
+# [1.0.0-beta.8](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.7...v1.0.0-beta.8) (2019-04-12)
+
+
+
 # [1.0.0-beta.7](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.6...v1.0.0-beta.7) (2019-04-12)
 
 

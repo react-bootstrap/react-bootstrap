@@ -15,4 +15,8 @@ describe('Media', () => {
   it('should allow custom elements instead of "div"', () => {
     mount(<Media as="section" />).assertSingle('section.media');
   });
+
+  it('Should have div as default component', () => {
+    mount(<Media />).assertSingle('div');
+  });
 });

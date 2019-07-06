@@ -3,7 +3,7 @@ import styles from 'dom-helpers/style';
 import transition from 'dom-helpers/transition';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import uncontrollable from 'uncontrollable';
+import { uncontrollable } from 'uncontrollable';
 
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
@@ -102,7 +102,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'div',
   slide: true,
   fade: false,
   interval: 5000,
@@ -121,17 +120,14 @@ const defaultProps = {
 };
 
 class Carousel extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  state = {
+    prevClasses: '',
+    currentClasses: 'active',
+  };
 
-    this.state = {
-      prevClasses: '',
-      currentClasses: 'active',
-    };
-    this.isUnmounted = false;
+  isUnmounted = false;
 
-    this.carousel = React.createRef();
-  }
+  carousel = React.createRef();
 
   componentDidMount() {
     this.cycle();
@@ -423,7 +419,8 @@ class Carousel extends React.Component {
 
   render() {
     const {
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
       bsPrefix,
       slide,
       fade,

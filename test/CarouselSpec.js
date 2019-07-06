@@ -233,4 +233,9 @@ describe('<Carousel>', () => {
     wrapper.find('.carousel-indicators > li').length.should.equal(1);
     wrapper.find('div.carousel-item').length.should.equal(1);
   });
+
+  it('Should have div as default component', () => {
+    const wrapper = mount(<Carousel>{items}</Carousel>);
+    wrapper.find('div').length.should.equal(4);
+  });
 });
