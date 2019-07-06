@@ -26,23 +26,7 @@ const propTypes = {
    *
    * > This is generally provided by the `Overlay` component positioning the popover
    */
-  placement: PropTypes.oneOf([
-    'auto-start',
-    'auto',
-    'auto-end',
-    'top-start',
-    'top',
-    'top-end',
-    'right-start',
-    'right',
-    'right-end',
-    'bottom-end',
-    'bottom',
-    'bottom-start',
-    'left-end',
-    'left',
-    'left-start',
-  ]),
+  placement: PropTypes.oneOf(['auto', 'top', 'bottom', 'left', 'right']),
 
   /**
    * An Overlay injected set of props for positioning the popover arrow.
