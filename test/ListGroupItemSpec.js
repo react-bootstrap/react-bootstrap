@@ -40,4 +40,22 @@ describe('<ListGroupItem>', () => {
       );
     });
   });
+
+  describe('onClick', () => {
+    it('Should call on click', () => {
+      const listGroupItemOnClick = sinon.spy();
+      const wrapper = mount(<ListGroupItem onClick={listGroupItemOnClick} />);
+      wrapper.find('div.list-group-item').simulate('click');
+      expect(listGroupItemOnClick).to.be.calledOnce;
+    });
+
+    it('Should not call if disabled', () => {
+      const listGroupItemOnClick = sinon.spy();
+      const wrapper = mount(
+        <ListGroupItem onClick={listGroupItemOnClick} disabled />,
+      );
+      wrapper.find('div.list-group-item').simulate('click');
+      expect(listGroupItemOnClick).not.to.have.been.called;
+    });
+  });
 });
