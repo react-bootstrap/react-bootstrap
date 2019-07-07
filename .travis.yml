@@ -29,8 +29,6 @@ install:
   - yarn bootstrap
 
 after_success:
-  - node_modules/.bin/codecov
-after_success:
   - if ([ ! -z "$TRAVIS_TAG" ]); then
     yarn build-docs
   fi
