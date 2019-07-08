@@ -36,44 +36,44 @@ function createBootstrapComponent(Component, opts) {
   // If it's a functional component make sure we don't break it with a ref
   const { prefix, forwardRefAs = isClassy ? 'ref' : 'innerRef' } = opts;
 
-  return forwardRef(
-    // eslint-disable-next-line react/prop-types
-    ({ className, float, ...props }, ref) => {
-      props[forwardRefAs] = ref;
-      const prefixes = useContext(ThemeContext);
-      let floats = null;
-      if (float && Object.keys(float).length > 0) {
-        floats = Object.entries(float).reduce(
-          (acc, [property, value]) =>
-            acc +
-            (property !== 'default'
-              ? `float-${property}-${value} `
-              : `float-${value} `),
-          '',
-        );
-      }
-      return (
-        <Component
-          {...props}
-          className={classNames(className, floats)}
-          // eslint-disable-next-line react/prop-types
-          bsPrefix={props.bsPrefix || prefixes.get(prefix) || prefix}
-        />
+  const BootstrapComponent = ({ className, float, ...props }, ref) => {
+    props[forwardRefAs] = ref;
+    const prefixes = useContext(ThemeContext);
+    let floats = null;
+    if (float && Object.keys(float).length > 0) {
+      floats = Object.entries(float).reduce(
+        (acc, [property, value]) =>
+          acc +
+          (property !== 'default'
+            ? `float-${property}-${value} `
+            : `float-${value} `),
+        '',
       );
-    },
-    { displayName: `Bootstrap(${Component.displayName || Component.name})` },
-  );
-}
+    }
+    return (
+      <Component
+        {...props}
+        className={classNames(className, floats)}
+        // eslint-disable-next-line react/prop-types
+        bsPrefix={props.bsPrefix || prefixes.get(prefix) || prefix}
+      />
+    );
+  };
 
-createBootstrapComponent.propTypes = {
-  float: PropTypes.exact({
-    default: PropTypes.string,
-    sm: PropTypes.string,
-    md: PropTypes.string,
-    lg: PropTypes.string,
-    xl: PropTypes.string,
-  }),
-};
+  BootstrapComponent.propTypes = {
+    float: PropTypes.exact({
+      default: PropTypes.string,
+      sm: PropTypes.string,
+      md: PropTypes.string,
+      lg: PropTypes.string,
+      xl: PropTypes.string,
+    }),
+  };
+
+  return forwardRef(BootstrapComponent, {
+    displayName: `Bootstrap(${Component.displayName || Component.name})`,
+  });
+}
 
 export { createBootstrapComponent, Consumer as ThemeConsumer };
 export default ThemeProvider;
