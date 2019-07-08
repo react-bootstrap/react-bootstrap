@@ -103,7 +103,7 @@ const TocSubLink = styled(TocLink)`
 
 const gettingStarted = ['introduction', 'theming', 'support'];
 
-const layout = ['float', 'grid', 'media'];
+const layout = ['grid', 'media'];
 
 const components = [
   'alerts',
@@ -135,7 +135,12 @@ const components = [
   'toasts',
 ];
 
-const utilities = ['transitions', 'responsive-embed', 'react-overlays'];
+const utilities = [
+  'float',
+  'transitions',
+  'responsive-embed',
+  'react-overlays',
+];
 
 // We need to configure this
 function attachSearch(ref) {

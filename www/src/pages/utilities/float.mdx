@@ -1,0 +1,34 @@
+
+import ReactPlayground from '../../components/ReactPlayground';
+
+import ToastExample from '../../examples/Float/ToastExample';
+
+# Float
+
+Bootstrap allows for floats to be toggled on any Bootstrap component,
+so this re-implementation aims to provide the same support.
+
+## Supported Components
+
+TODO: Find all instances of components implementing `createBootstrapComponent`
+
+## Basic Example
+
+For the supported components, passing in an object to the `float` prop
+with valid properties will allow to use the power of Bootstrap float classes
+
+<ReactPlayground codeText={ToastExample} />
+
+## Supported Props
+
+These are the list of properties that can be in the `float` prop object:
+- default
+- sm
+- md
+- lg
+- xl
+
+Out of these properties, the following values can be passsed in:
+- left
+- right
+- none
