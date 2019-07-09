@@ -3,13 +3,22 @@
 React Bootstrap v1 adds full compatibility with Bootstrap 4. Because bootstrap 4 is a major rewrite of the project there
 are significant breaking changes from the pre `v1` react-bootstrap.
 
+**PLEASE FIRST READ THE UPSTREAM BOOSTRAP MIGRATION GUIDE**
+
+> https://getbootstrap.com/docs/4.3/migration/
+
+React-Bootstrap _only_ contains components that are present in vanilla Bootstrap. If functionality
+was removed from Bootstrap, then it was also removed from React-Bootstrap. This guide does not
+repeat information found in the upstream migration guide. Its goal is to document React-Bootstrap-specific
+API changes and additions.
+
 ## Versioning
 
 We will continue to provide general maintainance for Bootstrap 3 components, because there are many projects that continue to depend on Bootstrap 3 support in
 `react-bootstrap`. `react-bootstrap` package versions will be as follows:
 
- - Bootstrap 3 support will continue in react-bootstrap versions < `v1.0.0`
- - Bootstrap 4 support will be in react-bootstrap versions >= `v1.0.0`
+- Bootstrap 3 support will continue in react-bootstrap versions < `v1.0.0`
+- Bootstrap 4 support will be in react-bootstrap versions >= `v1.0.0`
 
 We are **not** committing to keeping breaking changes in lockstep with bootstraps major releases,
 there may be a react-bootstrap v2 targeting Bootstrap v4 depending on what's best for the project.
@@ -21,10 +30,9 @@ Below is a _rough_ account of the breaking API changes as well as the minimal ch
 - `bsStyle` -> `variant`
 - `bsClass` -> `bsPrefix`
 - `bsRole` has been removed from all components. Components now communicate
-via context to allow intermediate nesting of child components
+  via context to allow intermediate nesting of child components
 - `componentClass` -> `as`
 - All utils have been removed from main exports, most were internal already and the rest have been moved to external libraries
-
 
 ### Grid
 
@@ -35,7 +43,6 @@ via context to allow intermediate nesting of child components
 
 - removed visibility props
 - consolidated col `span`, `offset`, and `order` into an object value prop per breakpoint.
-
 
 ### Navbar
 
@@ -70,7 +77,6 @@ via context to allow intermediate nesting of child components
 - Renders _only_ the outer "item" element, use inconjunction with the new `NavLink` component
 - default element changed to `<div>` from a `<li>`
 - `active` prop removed and moved to `NavLink`
-
 
 ### InputGroup
 

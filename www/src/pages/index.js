@@ -5,7 +5,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import styled from 'astroturf';
-import withProps from 'recompose/withProps';
 import pkg from '../../../package.json';
 
 import withLayout from '../withLayout';
@@ -63,22 +62,20 @@ const BrandButton = styled(Button)`
   }
 `;
 
-const FeatureCard = withProps({ md: 4 })(
-  styled(Col)`
-    @import '../css/theme';
+const FeatureCard = styled(Col).attrs({ md: 4 })`
+  @import '../css/theme';
 
-    composes: px-4 py-3 from global;
-    font-weight: 400;
-    line-height: 1.6;
+  composes: px-4 py-3 from global;
+  font-weight: 400;
+  line-height: 1.6;
 
-    & h2 {
-      font-size: 1.6rem;
-      color: $subtle;
-      font-weight: 300;
-      margin-bottom: 0.6rem;
-    }
-  `,
-);
+  & h2 {
+    font-size: 1.6rem;
+    color: $subtle;
+    font-weight: 300;
+    margin-bottom: 0.6rem;
+  }
+`;
 
 const ButtonToolbar = styled('div')`
   @import '../css/theme';
