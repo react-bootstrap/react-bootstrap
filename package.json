@@ -119,7 +119,6 @@
     "@restart/hooks": "^0.3.0",
     "classnames": "^2.2.6",
     "dom-helpers": "^3.4.0",
-    "hammerjs": "^2.0.8",
     "invariant": "^2.2.4",
     "keycode": "^2.2.0",
     "popper.js": "^1.14.7",

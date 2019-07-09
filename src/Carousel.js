@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import styles from 'dom-helpers/style';
 import transition from 'dom-helpers/transition';
-import Hammer from 'hammerjs';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { uncontrollable } from 'uncontrollable';
@@ -130,6 +129,7 @@ class Carousel extends React.Component {
   state = {
     prevClasses: '',
     currentClasses: 'active',
+    touchStartX: 0,
   };
 
   isUnmounted = false;
@@ -138,26 +138,12 @@ class Carousel extends React.Component {
 
   componentDidMount() {
     this.cycle();
-    if (this.carousel && this.props.touch) {
-      this.hammer = new Hammer(this.carousel.current);
-      this.hammer.on('swipe', ev => {
-        const lastPossibleIndex = countChildren(this.props.children) - 1;
-        if (ev.direction === Hammer.DIRECTION_LEFT) {
-          this.to(
-            this.state.activeIndex === lastPossibleIndex
-              ? 0
-              : this.state.activeIndex + 1,
-            ev,
-          );
-        } else if (ev.direction === Hammer.DIRECTION_RIGHT) {
-          this.to(
-            this.state.activeIndex === 0
-              ? lastPossibleIndex
-              : this.state.activeIndex - 1,
-            ev,
-          );
-        }
-      });
+    if (this.carousel && this.carousel.current && this.props.touch) {
+      this.carousel.current.addEventListener(
+        'touchstart',
+        this.handleTouchStart,
+      );
+      this.carousel.current.addEventListener('touchend', this.handleTouchEnd);
     }
   }
 
@@ -247,11 +233,43 @@ class Carousel extends React.Component {
   componentWillUnmount() {
     clearTimeout(this.timeout);
     this.isUnmounted = true;
-    if (this.hammer) {
-      this.hammer.stop();
-      this.hammer.destroy();
+    if (this.carousel && this.carousel.current && this.props.touch) {
+      this.carousel.current.removeEventListener(
+        'touchstart',
+        this.handleTouchStart,
+      );
+      this.carousel.current.removeEventListener(
+        'touchend',
+        this.handleTouchEnd,
+      );
     }
   }
+
+  handleTouchStart = e => {
+    this.setState({ touchStartX: e.changedTouches[0].screenX });
+  };
+
+  handleTouchEnd = e => {
+    const lastPossibleIndex = countChildren(this.props.children) - 1;
+
+    // Going left
+    if (e.changedTouches[0].screenX < this.state.touchStartX) {
+      this.to(
+        this.state.activeIndex === lastPossibleIndex
+          ? 0
+          : this.state.activeIndex + 1,
+        e,
+      );
+      // Going right
+    } else {
+      this.to(
+        this.state.activeIndex === 0
+          ? lastPossibleIndex
+          : this.state.activeIndex - 1,
+        e,
+      );
+    }
+  };
 
   handleSlideEnd = () => {
     const pendingIndex = this._pendingIndex;
