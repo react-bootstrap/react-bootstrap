@@ -287,4 +287,24 @@ describe('<Carousel>', () => {
       clock.restore();
     }
   });
+  it('should handle touch events', () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const onSelectSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel interval={0} onSelect={onSelectSpy} touch>
+          {items}
+        </Carousel>,
+      );
+
+      wrapper.simulate('touchStart', { changedTouches: [{ screenX: 0 }] });
+      wrapper.simulate('touchEnd', { changedTouches: [{ screenX: 50 }] });
+
+      clock.tick(100);
+      expect(onSelectSpy).to.have.been.calledOnce;
+    } finally {
+      clock.restore();
+    }
+  });
 });
