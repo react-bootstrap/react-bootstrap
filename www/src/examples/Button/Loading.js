@@ -2,38 +2,28 @@ function simulateNetworkRequest() {
   return new Promise(resolve => setTimeout(resolve, 2000));
 }
 
-class LoadingButton extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+function LoadingButton() {
+  const [isLoading, setLoading] = useState(false);
 
-    this.handleClick = this.handleClick.bind(this);
-
-    this.state = {
-      isLoading: false,
-    };
-  }
-
-  handleClick() {
-    this.setState({ isLoading: true }, () => {
+  useEffect(() => {
+    if (isLoading) {
       simulateNetworkRequest().then(() => {
-        this.setState({ isLoading: false });
+        setLoading(false);
       });
-    });
-  }
+    }
+  }, [isLoading]);
 
-  render() {
-    const { isLoading } = this.state;
+  const handleClick = () => setLoading(true);
 
-    return (
-      <Button
-        variant="primary"
-        disabled={isLoading}
-        onClick={!isLoading ? this.handleClick : null}
-      >
-        {isLoading ? 'Loading…' : 'Click to load'}
-      </Button>
-    );
-  }
+  return (
+    <Button
+      variant="primary"
+      disabled={isLoading}
+      onClick={!isLoading ? handleClick : null}
+    >
+      {isLoading ? 'Loading…' : 'Click to load'}
+    </Button>
+  );
 }
 
 render(<LoadingButton />);
