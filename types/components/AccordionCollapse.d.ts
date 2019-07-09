@@ -7,8 +7,8 @@ import { BsPrefixComponent } from './helpers';
 export interface AccordionCollapseProps
   extends CollapseProps,
     React.HTMLAttributes<HTMLDivElement> {
-        eventKey: string;
-    }
+  eventKey: string;
+}
 
 declare class AccordionCollapse extends BsPrefixComponent<
   typeof Collapse,
