@@ -29,9 +29,9 @@ const prism = (code, language = 'jsx') => highlight(code, languages[language]);
 const CodeBlock = ({ mode, codeText, ...props }) => {
   // There is a weird bug that seems to be hydration related where the wrong
   // inner html is rendered even though the props are correct. To work around
-  // it we forcable remount the component when it looks like its rendered output
-  // is wrong
-  const [version, setVersion] = useState(1);
+  // it, we forcibly remount the component when it looks like its rendered output
+  // is wrong.
+  const [version, setVersion] = useState(0);
   const ref = useRef();
   useEffect(() => {
     if (ref.current.innerText !== codeText.trim()) {
