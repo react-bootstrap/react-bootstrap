@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import styles from 'dom-helpers/style';
 import transition from 'dom-helpers/transition';
+import Hammer from 'hammerjs';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 import { uncontrollable } from 'uncontrollable';
@@ -99,6 +100,11 @@ const propTypes = {
    * Set to null to deactivate.
    */
   nextLabel: PropTypes.string,
+
+  /**
+   * Whether the carousel should support left/right swipe interactions on touchscreen devices.
+   */
+  touch: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -117,6 +123,7 @@ const defaultProps = {
 
   nextIcon: <span aria-hidden="true" className="carousel-control-next-icon" />,
   nextLabel: 'Next',
+  touch: true,
 };
 
 class Carousel extends React.Component {
@@ -131,6 +138,27 @@ class Carousel extends React.Component {
 
   componentDidMount() {
     this.cycle();
+    if (this.carousel && this.props.touch) {
+      this.hammer = new Hammer(this.carousel.current);
+      this.hammer.on('swipe', ev => {
+        const lastPossibleIndex = countChildren(this.props.children) - 1;
+        if (ev.direction === Hammer.DIRECTION_LEFT) {
+          this.to(
+            this.state.activeIndex === lastPossibleIndex
+              ? 0
+              : this.state.activeIndex + 1,
+            ev,
+          );
+        } else if (ev.direction === Hammer.DIRECTION_RIGHT) {
+          this.to(
+            this.state.activeIndex === 0
+              ? lastPossibleIndex
+              : this.state.activeIndex - 1,
+            ev,
+          );
+        }
+      });
+    }
   }
 
   static getDerivedStateFromProps(
@@ -219,6 +247,10 @@ class Carousel extends React.Component {
   componentWillUnmount() {
     clearTimeout(this.timeout);
     this.isUnmounted = true;
+    if (this.hammer) {
+      this.hammer.stop();
+      this.hammer.destroy();
+    }
   }
 
   handleSlideEnd = () => {
@@ -427,6 +459,8 @@ class Carousel extends React.Component {
       indicators,
       controls,
       wrap,
+      // eslint-disable-next-line no-unused-vars
+      touch,
       prevIcon,
       prevLabel,
       nextIcon,
