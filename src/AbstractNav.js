@@ -49,7 +49,7 @@ const AbstractNav = React.forwardRef(
     if (!listNode) listNode = useRef(null);
 
     const getNextActiveChild = offset => {
-      if (!listNode) return null;
+      if (!listNode.current) return null;
 
       let items = qsa(listNode.current, '[data-rb-event-key]:not(.disabled)');
       let activeChild = listNode.current.querySelector('.active');
@@ -93,14 +93,14 @@ const AbstractNav = React.forwardRef(
     };
 
     useEffect(() => {
-      if (listNode && needsRefocus) {
+      if (listNode.current && needsRefocus) {
         let activeChild = listNode.current.querySelector(
           '[data-rb-event-key].active',
         );
 
         if (activeChild) activeChild.focus();
       }
-    }, [listNode, needsRefocus]);
+    }, [listNode.current, needsRefocus]);
 
     return (
       <SelectableContext.Provider value={handleSelect}>
