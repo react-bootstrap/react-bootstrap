@@ -1,56 +1,41 @@
-class Example extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+function Example() {
+  const [smShow, setSmShow] = useState(false);
+  const [lgShow, setLgShow] = useState(false);
 
-    this.state = {
-      smShow: false,
-      lgShow: false,
-    };
-  }
+  return (
+    <ButtonToolbar>
+      <Button onClick={() => setSmShow(true)}>Small modal</Button>
+      <Button onClick={() => setLgShow(true)}>Large modal</Button>
 
-  render() {
-    let smClose = () => this.setState({ smShow: false });
-    let lgClose = () => this.setState({ lgShow: false });
+      <Modal
+        size="sm"
+        show={smShow}
+        onHide={() => setSmShow(false)}
+        aria-labelledby="example-modal-sizes-title-sm"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-sm">
+            Small Modal
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>...</Modal.Body>
+      </Modal>
 
-    return (
-      <ButtonToolbar>
-        <Button onClick={() => this.setState({ smShow: true })}>
-          Small modal
-        </Button>
-        <Button onClick={() => this.setState({ lgShow: true })}>
-          Large modal
-        </Button>
-
-        <Modal
-          size="sm"
-          show={this.state.smShow}
-          onHide={smClose}
-          aria-labelledby="example-modal-sizes-title-sm"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="example-modal-sizes-title-sm">
-              Small Modal
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>...</Modal.Body>
-        </Modal>
-
-        <Modal
-          size="lg"
-          show={this.state.lgShow}
-          onHide={lgClose}
-          aria-labelledby="example-modal-sizes-title-lg"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="example-modal-sizes-title-lg">
-              Large Modal
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>...</Modal.Body>
-        </Modal>
-      </ButtonToolbar>
-    );
-  }
+      <Modal
+        size="lg"
+        show={lgShow}
+        onHide={() => setLgShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+            Large Modal
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>...</Modal.Body>
+      </Modal>
+    </ButtonToolbar>
+  );
 }
 
 render(<Example />);

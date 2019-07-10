@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import useUncontrolled from 'uncontrollable/hook';
+import { useUncontrolled } from 'uncontrollable';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AccordionToggle from './AccordionToggle';
 import SelectableContext from './SelectableContext';

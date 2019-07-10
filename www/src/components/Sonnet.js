@@ -1,8 +1,8 @@
 import React from 'react';
 
 class Sonnet extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
     import('shakespeare-data').then(s =>
       this.setState({ sonnet: s.sonnets.random() }),
     );

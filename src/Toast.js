@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -69,17 +69,28 @@ const Toast = ({
   innerRef,
   ...props
 }) => {
+  const delayRef = useRef(delay);
+  const onCloseRef = useRef(onClose);
+
+  // We use refs for these, because we don't want to restart the autohide
+  // timer in case these values change.
+  delayRef.current = delay;
+  onCloseRef.current = onClose;
+
   useEffect(() => {
-    if (autohide && show) {
-      const timer = setTimeout(() => {
-        onClose();
-      }, delay);
-      return () => {
-        clearTimeout(timer);
-      };
+    if (!(autohide && show)) {
+      return undefined;
     }
-    return () => null;
+
+    const autohideHandle = setTimeout(() => {
+      onCloseRef.current();
+    }, delayRef.current);
+
+    return () => {
+      clearTimeout(autohideHandle);
+    };
   }, [autohide, show]);
+
   const useAnimation = Transition && animation;
   const toast = (
     <div

@@ -3,7 +3,7 @@ import styles from 'dom-helpers/style';
 import transition from 'dom-helpers/transition';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
-import uncontrollable from 'uncontrollable';
+import { uncontrollable } from 'uncontrollable';
 
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
@@ -120,17 +120,14 @@ const defaultProps = {
 };
 
 class Carousel extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  state = {
+    prevClasses: '',
+    currentClasses: 'active',
+  };
 
-    this.state = {
-      prevClasses: '',
-      currentClasses: 'active',
-    };
-    this.isUnmounted = false;
+  isUnmounted = false;
 
-    this.carousel = React.createRef();
-  }
+  carousel = React.createRef();
 
   componentDidMount() {
     this.cycle();
