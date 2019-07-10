@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import qsa from 'dom-helpers/query/querySelectorAll';
 import PropTypes from 'prop-types';
 
@@ -9,130 +9,117 @@ import TabContext from './TabContext';
 
 const noop = () => {};
 
-class AbstractNav extends React.Component {
-  static propTypes = {
-    onSelect: PropTypes.func.isRequired,
+const propTypes = {
+  onSelect: PropTypes.func.isRequired,
 
-    as: PropTypes.elementType,
+  as: PropTypes.elementType,
 
-    /** @private */
-    onKeyDown: PropTypes.func,
-    /** @private */
-    parentOnSelect: PropTypes.func,
-    /** @private */
-    getControlledId: PropTypes.func,
-    /** @private */
-    getControllerId: PropTypes.func,
-    /** @private */
-    activeKey: PropTypes.any,
-  };
+  /** @private */
+  onKeyDown: PropTypes.func,
+  /** @private */
+  parentOnSelect: PropTypes.func,
+  /** @private */
+  getControlledId: PropTypes.func,
+  /** @private */
+  getControllerId: PropTypes.func,
+  /** @private */
+  activeKey: PropTypes.any,
+};
 
-  state = {
-    navContext: null,
-  };
-
-  static getDerivedStateFromProps({
-    activeKey,
-    getControlledId,
-    getControllerId,
-    role,
-  }) {
-    return {
-      navContext: {
-        role, // used by NavLink to determine it's role
-        activeKey: makeEventKey(activeKey),
-        getControlledId: getControlledId || noop,
-        getControllerId: getControllerId || noop,
-      },
-    };
-  }
-
-  componentDidUpdate() {
-    if (!this._needsRefocus || !this.listNode) return;
-
-    let activeChild = this.listNode.querySelector('[data-rb-event-key].active');
-    if (activeChild) activeChild.focus();
-  }
-
-  getNextActiveChild(offset) {
-    if (!this.listNode) return null;
-
-    let items = qsa(this.listNode, '[data-rb-event-key]:not(.disabled)');
-    let activeChild = this.listNode.querySelector('.active');
-
-    let index = items.indexOf(activeChild);
-    if (index === -1) return null;
-
-    let nextIndex = index + offset;
-    if (nextIndex >= items.length) nextIndex = 0;
-    if (nextIndex < 0) nextIndex = items.length - 1;
-    return items[nextIndex];
-  }
-
-  handleSelect = (key, event) => {
-    const { onSelect, parentOnSelect } = this.props;
-    if (key == null) return;
-    if (onSelect) onSelect(key, event);
-    if (parentOnSelect) parentOnSelect(key, event);
-  };
-
-  handleKeyDown = event => {
-    const { onKeyDown } = this.props;
-    if (onKeyDown) onKeyDown(event);
-
-    let nextActiveChild;
-    switch (event.key) {
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        nextActiveChild = this.getNextActiveChild(-1);
-        break;
-      case 'ArrowRight':
-      case 'ArrowDown':
-        nextActiveChild = this.getNextActiveChild(1);
-        break;
-      default:
-        return;
-    }
-    if (!nextActiveChild) return;
-
-    event.preventDefault();
-    this.handleSelect(nextActiveChild.dataset.rbEventKey, event);
-    this._needsRefocus = true;
-  };
-
-  attachRef = ref => {
-    this.listNode = ref;
-  };
-
-  render() {
-    const {
+const AbstractNav = React.forwardRef(
+  (
+    {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'ul',
-      onSelect: _,
-      parentOnSelect: _0,
-      getControlledId: _1,
-      getControllerId: _2,
-      activeKey: _3,
+      onSelect,
+      parentOnSelect,
+      getControlledId,
+      getControllerId,
+      activeKey,
+      role,
+      onKeyDown,
       ...props
-    } = this.props;
-
-    if (props.role === 'tablist') {
-      props.onKeyDown = this.handleKeyDown;
+    },
+    listNode,
+  ) => {
+    if (role === 'tablist') {
+      onKeyDown = handleKeyDown;
     }
 
+    const [needsRefocus, setRefocus] = useState(false);
+    const [navContext] = useState({
+      role, // used by NavLink to determine it's role
+      activeKey: makeEventKey(activeKey),
+      getControlledId: getControlledId || noop,
+      getControllerId: getControllerId || noop,
+    });
+
+    if(!listNode) listNode = useRef(null);
+
+    const getNextActiveChild = offset => {
+      if (!listNode) return null;
+
+      let items = qsa(listNode.current, '[data-rb-event-key]:not(.disabled)');
+      let activeChild = listNode.current.querySelector('.active');
+
+      let index = items.indexOf(activeChild);
+      if (index === -1) return null;
+
+      let nextIndex = index + offset;
+      if (nextIndex >= items.length) nextIndex = 0;
+      if (nextIndex < 0) nextIndex = items.length - 1;
+      return items[nextIndex];
+    };
+
+    const handleSelect = (key, event) => {
+      if (key == null) return;
+      if (onSelect) onSelect(key, event);
+      if (parentOnSelect) parentOnSelect(key, event);
+    };
+
+    const handleKeyDown = event => {
+      const { onKeyDown } = props;
+      if (onKeyDown) onKeyDown(event);
+
+      let nextActiveChild;
+      switch (event.key) {
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          nextActiveChild = getNextActiveChild(-1);
+          break;
+        case 'ArrowRight':
+        case 'ArrowDown':
+          nextActiveChild = getNextActiveChild(1);
+          break;
+        default:
+          return;
+      }
+      if (!nextActiveChild) return;
+
+      event.preventDefault();
+      handleSelect(nextActiveChild.dataset.rbEventKey, event);
+      setRefocus(true);
+    };
+
+    useEffect(() => {
+      if(listNode && needsRefocus) {
+      let activeChild = listNode.current.querySelector('[data-rb-event-key].active');
+      console.log(`active child: ${activeChild}`);
+      if (activeChild) activeChild.focus();
+      }
+    }, [listNode, needsRefocus]);
+
     return (
-      <SelectableContext.Provider value={this.handleSelect}>
-        <NavContext.Provider value={this.state.navContext}>
-          <Component
-            {...props}
-            onKeyDown={this.handleKeyDown}
-            ref={this.attachRef}
-          />
+      <SelectableContext.Provider value={handleSelect}>
+        <NavContext.Provider value={navContext}>
+          <Component {...props} onKeyDown={handleKeyDown} ref={listNode} />
         </NavContext.Provider>
       </SelectableContext.Provider>
     );
-  }
-}
+  },
+);
+
+AbstractNav.propTypes = propTypes;
 
 export default mapContextToProps(
   [SelectableContext, TabContext],
