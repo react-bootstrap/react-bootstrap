@@ -14,6 +14,8 @@ const propTypes = {
 
   as: PropTypes.elementType,
 
+  role: PropTypes.string,
+
   /** @private */
   onKeyDown: PropTypes.func,
   /** @private */
@@ -42,19 +44,9 @@ const AbstractNav = React.forwardRef(
     },
     listNode,
   ) => {
-    if (role === 'tablist') {
-      onKeyDown = handleKeyDown;
-    }
-
     const [needsRefocus, setRefocus] = useState(false);
-    const [navContext] = useState({
-      role, // used by NavLink to determine it's role
-      activeKey: makeEventKey(activeKey),
-      getControlledId: getControlledId || noop,
-      getControllerId: getControllerId || noop,
-    });
 
-    if(!listNode) listNode = useRef(null);
+    if (!listNode) listNode = useRef(null);
 
     const getNextActiveChild = offset => {
       if (!listNode) return null;
@@ -78,7 +70,6 @@ const AbstractNav = React.forwardRef(
     };
 
     const handleKeyDown = event => {
-      const { onKeyDown } = props;
       if (onKeyDown) onKeyDown(event);
 
       let nextActiveChild;
@@ -102,16 +93,25 @@ const AbstractNav = React.forwardRef(
     };
 
     useEffect(() => {
-      if(listNode && needsRefocus) {
-      let activeChild = listNode.current.querySelector('[data-rb-event-key].active');
-      console.log(`active child: ${activeChild}`);
-      if (activeChild) activeChild.focus();
+      if (listNode && needsRefocus) {
+        let activeChild = listNode.current.querySelector(
+          '[data-rb-event-key].active',
+        );
+
+        if (activeChild) activeChild.focus();
       }
     }, [listNode, needsRefocus]);
 
     return (
       <SelectableContext.Provider value={handleSelect}>
-        <NavContext.Provider value={navContext}>
+        <NavContext.Provider
+          value={{
+            role, // used by NavLink to determine it's role
+            activeKey: makeEventKey(activeKey),
+            getControlledId: getControlledId || noop,
+            getControllerId: getControllerId || noop,
+          }}
+        >
           <Component {...props} onKeyDown={handleKeyDown} ref={listNode} />
         </NavContext.Provider>
       </SelectableContext.Provider>
