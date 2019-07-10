@@ -138,13 +138,6 @@ class Carousel extends React.Component {
 
   componentDidMount() {
     this.cycle();
-    if (this.carousel && this.carousel.current && this.props.touch) {
-      this.carousel.current.addEventListener(
-        'touchstart',
-        this.handleTouchStart,
-      );
-      this.carousel.current.addEventListener('touchend', this.handleTouchEnd);
-    }
   }
 
   static getDerivedStateFromProps(
@@ -233,16 +226,6 @@ class Carousel extends React.Component {
   componentWillUnmount() {
     clearTimeout(this.timeout);
     this.isUnmounted = true;
-    if (this.carousel && this.carousel.current && this.props.touch) {
-      this.carousel.current.removeEventListener(
-        'touchstart',
-        this.handleTouchStart,
-      );
-      this.carousel.current.removeEventListener(
-        'touchend',
-        this.handleTouchEnd,
-      );
-    }
   }
 
   handleTouchStart = e => {
@@ -477,7 +460,6 @@ class Carousel extends React.Component {
       indicators,
       controls,
       wrap,
-      // eslint-disable-next-line no-unused-vars
       touch,
       prevIcon,
       prevLabel,
@@ -504,6 +486,8 @@ class Carousel extends React.Component {
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <Component
+        onTouchStart={touch ? this.handleTouchStart : undefined}
+        onTouchEnd={touch ? this.handleTouchEnd : undefined}
         {...props}
         className={classNames(
           className,

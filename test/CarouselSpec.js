@@ -298,11 +298,21 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
 
+      wrapper.simulate('touchStart', { changedTouches: [{ screenX: 50 }] });
+      wrapper.simulate('touchEnd', { changedTouches: [{ screenX: 0 }] });
+
+      clock.tick(50);
+      expect(onSelectSpy).to.have.been.calledOnce;
+      expect(onSelectSpy.getCall(0).args[0]).to.equal(1);
+
+      clock.tick(150);
+
       wrapper.simulate('touchStart', { changedTouches: [{ screenX: 0 }] });
       wrapper.simulate('touchEnd', { changedTouches: [{ screenX: 50 }] });
 
-      clock.tick(100);
-      expect(onSelectSpy).to.have.been.calledOnce;
+      clock.tick(50);
+      expect(onSelectSpy).to.have.been.calledTwice;
+      expect(onSelectSpy.getCall(1).args[0]).to.equal(0);
     } finally {
       clock.restore();
     }
