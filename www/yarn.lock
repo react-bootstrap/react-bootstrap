@@ -4938,10 +4938,10 @@ gatsby-remark-prismjs@^3.3.1:
     parse-numeric-range "^0.0.2"
     unist-util-visit "^1.3.0"
 
-gatsby-source-filesystem@2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.1.2.tgz#b7ce69d4b819924d22f91339b419624cfb3c4f43"
-  integrity sha512-mrlQ00Es+qjb2MCIEHAkv/F3yfR5IgI8z2q54tqpxu4amlUy3SQH5ThJDGD7Ya574ub9aKdHOr8virTssmTDgA==
+gatsby-source-filesystem@2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.1.3.tgz#993094848579448cbbd196593ff5305ba41b8531"
+  integrity sha512-NaC5UKxVwwDUnEuCYflAz2LkcW7++EV2ZxiFPaBn7LCl2tWpsfIjqBID2cUrftxqyURTUITSAY1Sw/mLuprcqQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     better-queue "^3.8.7"
