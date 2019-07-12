@@ -4993,10 +4993,10 @@ gatsby-transformer-react-docgen@^4.1.1:
     react-docgen "^4.1.0"
     react-docgen-displayname-handler " ^2.1.0"
 
-gatsby-transformer-remark@^2.6.2:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.6.2.tgz#aa88a8ea02f99eaa0bea2d538ab6225740783062"
-  integrity sha512-nuz8keCrmEDtLguNRpUp9pR9tsyJpvRX4NV4CCvhYZOhAC05LzAgTIpRFEB+Csuy9ZN12pRI2p6bCSXaJi7RZA==
+gatsby-transformer-remark@^2.6.3:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.6.3.tgz#501943e809e37a2d4e698a59aff1d6257ca99a7d"
+  integrity sha512-0k3Lz+qhj/tgF7zfBP9NdYlL2+Ugug+Y2C12HI3jPT0qVH8ici7ZBkoyytaN++cl/nbchwdsaj3DU6irpBOlXA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     bluebird "^3.5.0"
