@@ -15,6 +15,8 @@ import { createBootstrapComponent } from './ThemeProvider';
 const countChildren = c =>
   React.Children.toArray(c).filter(React.isValidElement).length;
 
+const SWIPE_THRESHOLD = 40;
+
 // TODO: `slide` should be `animate`.
 
 const propTypes = {
@@ -234,6 +236,13 @@ class Carousel extends React.Component {
 
   handleTouchEnd = e => {
     const lastPossibleIndex = countChildren(this.props.children) - 1;
+
+    // If the swipe is under the threshold, don't do anything.
+    if (
+      Math.abs(e.changedTouches[0].screenX - this.state.touchStartX) <
+      SWIPE_THRESHOLD
+    )
+      return;
 
     // Going left
     if (e.changedTouches[0].screenX < this.state.touchStartX) {
