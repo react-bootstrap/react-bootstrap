@@ -15,6 +15,8 @@ import { createBootstrapComponent } from './ThemeProvider';
 const countChildren = c =>
   React.Children.toArray(c).filter(React.isValidElement).length;
 
+const SWIPE_THRESHOLD = 40;
+
 // TODO: `slide` should be `animate`.
 
 const propTypes = {
@@ -99,6 +101,11 @@ const propTypes = {
    * Set to null to deactivate.
    */
   nextLabel: PropTypes.string,
+
+  /**
+   * Whether the carousel should support left/right swipe interactions on touchscreen devices.
+   */
+  touch: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -117,12 +124,14 @@ const defaultProps = {
 
   nextIcon: <span aria-hidden="true" className="carousel-control-next-icon" />,
   nextLabel: 'Next',
+  touch: true,
 };
 
 class Carousel extends React.Component {
   state = {
     prevClasses: '',
     currentClasses: 'active',
+    touchStartX: 0,
   };
 
   isUnmounted = false;
@@ -220,6 +229,25 @@ class Carousel extends React.Component {
     clearTimeout(this.timeout);
     this.isUnmounted = true;
   }
+
+  handleTouchStart = e => {
+    this.setState({ touchStartX: e.changedTouches[0].screenX });
+  };
+
+  handleTouchEnd = e => {
+    // If the swipe is under the threshold, don't do anything.
+    if (
+      Math.abs(e.changedTouches[0].screenX - this.state.touchStartX) <
+      SWIPE_THRESHOLD
+    )
+      return;
+
+    // Going left
+    if (e.changedTouches[0].screenX < this.state.touchStartX)
+      this.handlePrev(e);
+    // Going right
+    else this.handleNext(e);
+  };
 
   handleSlideEnd = () => {
     const pendingIndex = this._pendingIndex;
@@ -427,6 +455,7 @@ class Carousel extends React.Component {
       indicators,
       controls,
       wrap,
+      touch,
       prevIcon,
       prevLabel,
       nextIcon,
@@ -452,6 +481,8 @@ class Carousel extends React.Component {
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <Component
+        onTouchStart={touch ? this.handleTouchStart : undefined}
+        onTouchEnd={touch ? this.handleTouchEnd : undefined}
         {...props}
         className={classNames(
           className,

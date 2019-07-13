@@ -287,4 +287,63 @@ describe('<Carousel>', () => {
       clock.restore();
     }
   });
+
+  describe('touch events', () => {
+    // const clock = sinon.useFakeTimers();
+    let clock, wrapper, onSelectSpy;
+
+    beforeEach(() => {
+      onSelectSpy = sinon.spy();
+      wrapper = mount(
+        <Carousel interval={0} onSelect={onSelectSpy} touch>
+          {items}
+        </Carousel>,
+      );
+
+      clock = sinon.useFakeTimers();
+    });
+    afterEach(() => {
+      clock.tick(150);
+    });
+    it('should swipe left', () => {
+      try {
+        wrapper.simulate('touchStart', { changedTouches: [{ screenX: 50 }] });
+        wrapper.simulate('touchEnd', { changedTouches: [{ screenX: 0 }] });
+
+        clock.tick(50);
+        expect(onSelectSpy).to.have.been.calledOnce;
+        expect(onSelectSpy.getCall(0).args[0]).to.equal(1);
+      } finally {
+        clock.restore();
+      }
+    });
+
+    it('should swipe right', () => {
+      try {
+        wrapper.simulate('touchStart', { changedTouches: [{ screenX: 0 }] });
+        wrapper.simulate('touchEnd', { changedTouches: [{ screenX: 50 }] });
+
+        clock.tick(50);
+        expect(onSelectSpy).to.have.been.calledOnce;
+        expect(onSelectSpy.getCall(0).args[0]).to.equal(1);
+      } finally {
+        clock.restore();
+      }
+    });
+
+    it('should not swipe if swipe detected is under the swipe threshold', () => {
+      const SWIPE_THRESHOLD = 40;
+      try {
+        wrapper.simulate('touchStart', { changedTouches: [{ screenX: 0 }] });
+        wrapper.simulate('touchEnd', {
+          changedTouches: [{ screenX: SWIPE_THRESHOLD - 5 }],
+        });
+
+        clock.tick(50);
+        expect(onSelectSpy).to.not.have.been.called;
+      } finally {
+        clock.restore();
+      }
+    });
+  });
 });
