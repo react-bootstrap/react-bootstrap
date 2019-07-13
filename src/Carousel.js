@@ -235,8 +235,6 @@ class Carousel extends React.Component {
   };
 
   handleTouchEnd = e => {
-    const lastPossibleIndex = countChildren(this.props.children) - 1;
-
     // If the swipe is under the threshold, don't do anything.
     if (
       Math.abs(e.changedTouches[0].screenX - this.state.touchStartX) <
@@ -245,22 +243,10 @@ class Carousel extends React.Component {
       return;
 
     // Going left
-    if (e.changedTouches[0].screenX < this.state.touchStartX) {
-      this.to(
-        this.state.activeIndex === lastPossibleIndex
-          ? 0
-          : this.state.activeIndex + 1,
-        e,
-      );
-      // Going right
-    } else {
-      this.to(
-        this.state.activeIndex === 0
-          ? lastPossibleIndex
-          : this.state.activeIndex - 1,
-        e,
-      );
-    }
+    if (e.changedTouches[0].screenX < this.state.touchStartX)
+      this.handlePrev(e);
+    // Going right
+    else this.handleNext(e);
   };
 
   handleSlideEnd = () => {
