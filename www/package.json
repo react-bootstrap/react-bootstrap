@@ -30,7 +30,7 @@
     "gatsby-plugin-sass": "^2.1.3",
     "gatsby-remark-prismjs": "^3.3.2",
     "gatsby-source-filesystem": "2.1.4",
-    "gatsby-transformer-react-docgen": "^4.1.1",
+    "gatsby-transformer-react-docgen": "^4.1.3",
     "gatsby-transformer-remark": "^2.6.5",
     "gh-pages": "^2.0.1",
     "holderjs": "^2.9.6",
