@@ -859,10 +859,10 @@
     unist-builder "^1.0.1"
     unist-util-visit "^1.3.0"
 
-"@mdx-js/react@^1.0.23":
-  version "1.0.23"
-  resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-1.0.23.tgz#4120079ee4dda6a484b15a4ba8f17909b59bb829"
-  integrity sha512-cyBgTbeeqiocAh49gU6E+6bQAhNaW36QZjlkGcOKD5APWYlT9sBcI730lB4zjlaVvetl2Luk9QyWh/SPBoc+EA==
+"@mdx-js/react@^1.0.27":
+  version "1.0.27"
+  resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-1.0.27.tgz#7461e39f8880eceff8f48b0240e6cdc0f01cc8db"
+  integrity sha512-sCv3ItE5L6rdpnZR0s69C8KFgz4pmhGsH4de0ZiO+fiCC/L6asuKLubf9QZk3oG3vjebym/V593CE15vRXvvwQ==
 
 "@mikaelkristiansson/domready@^1.0.9":
   version "1.0.9"
