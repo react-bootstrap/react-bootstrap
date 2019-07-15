@@ -4936,10 +4936,10 @@ gatsby-react-router-scroll@^2.1.3:
     scroll-behavior "^0.9.9"
     warning "^3.0.0"
 
-gatsby-remark-prismjs@^3.3.2:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-prismjs/-/gatsby-remark-prismjs-3.3.2.tgz#18d46afcb9a57c8e42192be98dda1a28d9a3c652"
-  integrity sha512-VpJHfBzhU3fJJzGy7fykbJlA+WMTBFS3dFgo6meVpO/cBf5V+9+6qKXl6mWnNaK0naJZaS7T+svvR6Chn4RCEg==
+gatsby-remark-prismjs@^3.3.3:
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-prismjs/-/gatsby-remark-prismjs-3.3.3.tgz#9bbe4650bf466e708d98b20a269c9b322ae50e5b"
+  integrity sha512-IQOv7b7w6c3+KsWju76Iezwme7o40Bov01czhSROcj41RkGSKDE38IAly2tZxTfpKNH1Hw8yDu6CivfEQiWzDg==
   dependencies:
     "@babel/runtime" "^7.0.0"
     parse-numeric-range "^0.0.2"
