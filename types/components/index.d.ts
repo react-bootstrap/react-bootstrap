@@ -74,7 +74,10 @@ export { default as Overlay, OverlayProps } from './Overlay';
 export { default as OverlayTrigger, OverlayTriggerProps } from './OverlayTrigger';
 export { default as PageItem, PageItemProps } from './PageItem';
 export { default as Pagination, PaginationProps } from './Pagination';
+
 export { default as Popover, PopoverProps } from './Popover';
+export { default as PopoverTitle } from './PopoverTitle';
+export { default as PopoverContent } from './PopoverContent';
 export { default as ProgressBar, ProgressBarProps } from './ProgressBar';
 export { default as ResponsiveEmbed, ResponsiveEmbedProps } from './ResponsiveEmbed';
 export { default as Row, RowProps } from './Row';
