@@ -21,7 +21,7 @@ describe('<Tabs>', () => {
     wrapper.assertSingle('NavLink[eventKey=1] a.active');
   });
 
-  it('Should get defaultActiveKey (if null) from first child tab with eventKey', () => {
+  it('should get defaultActiveKey (if null) from first child tab with eventKey', () => {
     const wrapper = mount(
       <Tabs id="test">
         <Tab title="Tab 1" eventKey={1}>
