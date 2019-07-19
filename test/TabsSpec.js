@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 import Tab from '../src/Tab';
 import Tabs from '../src/Tabs';
@@ -17,6 +17,21 @@ describe('<Tabs>', () => {
       </Tabs>,
     );
 
+    wrapper.assertSingle('TabPane[eventKey=1] .active');
+    wrapper.assertSingle('NavLink[eventKey=1] a.active');
+  });
+
+  it('should get defaultActiveKey (if null) from first child tab with eventKey', () => {
+    const wrapper = mount(
+      <Tabs id="test">
+        <Tab title="Tab 1" eventKey={1}>
+          Tab 1 content
+        </Tab>
+        <Tab title="Tab 2" eventKey={2}>
+          Tab 2 content
+        </Tab>
+      </Tabs>,
+    );
     wrapper.assertSingle('TabPane[eventKey=1] .active');
     wrapper.assertSingle('NavLink[eventKey=1] a.active');
   });
@@ -97,5 +112,17 @@ describe('<Tabs>', () => {
         </Tab>
       </Tabs>,
     ).assertSingle('a.nav-link.disabled');
+  });
+});
+
+describe('<Tab>', () => {
+  it('should throw error message on attempt to render', () => {
+    expect(() =>
+      shallow(
+        <Tab title="Tab 1" eventKey={1}>
+          Tab 1 content
+        </Tab>,
+      ),
+    ).to.throw();
   });
 });
