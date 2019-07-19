@@ -1,3 +1,6 @@
+import DismissibleControlled from '../../examples/Alert/DismissibleControlled';
+import ReactPlayground from '../../components/ReactPlayground';
+
 # Why React-bootstrap?
 React-Bootstrap is a complete re-implementation of the
 Bootstrap components using React. It has **no dependency
@@ -65,40 +68,8 @@ the state of the DOM. This also gives a lot of flexibility
 when creating more complex components.
 
 ### React-bootstrap
-```
-class AlertDismissable extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = { show: true };
-  }
-
-  render() {
-    const handleHide = () => this.setState({ show: false });
-    const handleShow = () => this.setState({ show: true });
-    return (
-      <>
-        <Alert show={this.state.show} variant="success">
-          <Alert.Heading>How's it going?!</Alert.Heading>
-          <p>
-            Duis mollis, est non commodo luctus.
-          </p>
-          <hr />
-          <div className="d-flex justify-content-end">
-            <Button onClick={handleHide} variant="outline-success">
-              Close me ya'll!
-            </Button>
-          </div>
-        </Alert>
-
-        {!this.state.show && <Button onClick={handleShow}>Show Alert</Button>}
-      </>
-    );
-  }
-}
-
-render(<AlertDismissable />);
-```
+<ReactPlayground codeText={DismissibleControlled} />
 
 ### Bootstrap
 ```
@@ -106,7 +77,9 @@ render(<AlertDismissable />);
 <div class="alert alert-success alert-dismissible fade show firstCollapsible" role="alert">
   <strong>How's it going?!</strong> 
   <p> 
-    Duis mollis, est non commodo luctus.
+    Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
+    eget lacinia odio sem nec elit. Cras mattis consectetur purus sit
+    amet fermentum.
   </p>
   <hr/>
   <div class="d-flex justify-content-end">
