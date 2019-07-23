@@ -123,15 +123,11 @@ const defaultProps = {
 };
 
 class Navbar extends React.Component {
-  constructor(...args) {
-    super(...args);
-
-    this.state = {
-      navbarContext: {
-        onToggle: this.handleToggle,
-      },
-    };
-  }
+  state = {
+    navbarContext: {
+      onToggle: () => this.handleToggle(),
+    },
+  };
 
   static getDerivedStateFromProps({ bsPrefix, expanded }, prevState) {
     return {

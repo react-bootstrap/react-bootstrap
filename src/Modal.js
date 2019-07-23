@@ -183,14 +183,11 @@ function BackdropTransition(props) {
 /* eslint-enable no-use-before-define */
 
 class Modal extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  state = { style: {} };
 
-    this.state = { style: {} };
-    this.modalContext = {
-      onHide: () => this.props.onHide(),
-    };
-  }
+  modalContext = {
+    onHide: () => this.props.onHide(),
+  };
 
   componentWillUnmount() {
     // Clean up the listener if we need to.

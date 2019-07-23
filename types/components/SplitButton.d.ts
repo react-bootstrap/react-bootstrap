@@ -3,10 +3,13 @@ import * as React from 'react';
 import DropdownToggle from './DropdownToggle';
 import Dropdown from './Dropdown';
 
-import { ReplaceProps, PropsOf } from './helpers';
+import { ReplaceProps } from './helpers';
 
 type PropsFromToggle = Partial<
-  Pick<PropsOf<typeof DropdownToggle>, 'size' | 'variant' | 'disabled'>
+  Pick<
+    React.ComponentPropsWithRef<typeof DropdownToggle>,
+    'size' | 'variant' | 'disabled'
+  >
 >;
 
 export interface SplitButtonProps extends PropsFromToggle {

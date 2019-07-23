@@ -7,16 +7,10 @@ import DocLink from '../../components/DocLink';
 
 <p className="lead">Learn how to include React Bootstrap in your project</p>
 
-## JavaScript
-
-React-Bootstrap is a complete re-implementation of the Bootstrap
-components using React. It has **no dependency on either `bootstrap.js` or jQuery**.
-If you have React setup and React-Bootstrap installed you have everything you need.
-
 ### Installation
 
-The best way to consume React Bootstrap is via the npm package which
-you can install with `npm` (or yarn if you prefer).
+The best way to consume React-Bootstrap is via the npm package which
+you can install with `npm` (or `yarn` if you prefer).
 
 If you plan on customizing the Bootstrap Sass files, or don't want
 to use a CDN for the stylesheet, it may be helpful to
@@ -25,6 +19,31 @@ install <DocLink path="/getting-started/download/#npm">vanilla Bootstrap</DocLin
 ```
 npm install react-bootstrap bootstrap
 ```
+
+## Stylesheets
+
+Because React-Bootstrap doesn't depend on a very precise version of
+Bootstrap, we don't ship with any included css. However, some
+stylesheet **is required** to use these components. 
+
+```
+{/* The following line can be included in your src/index.js or App.js file*/}
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+```
+How and which Bootstrap styles you include is up to you, but the
+simplest way is to include the latest styles from the CDN. A little
+more information about the benefits of using a CDN can be found
+[here](https://www.w3schools.com/bootstrap/bootstrap_get_started.asp).
+
+<CssCodeBlock />
+
+For more advanced use cases you can also use a bundler like Webpack
+or Browserify to include the CSS files for you as part of your build
+process but that is beyond the scope of this guide. Also see
+[the Bootstrap docs](https://getbootstrap.com/docs/4.3/getting-started/theming/) 
+for details about customizing stylesheets to match your component
+use.
 
 ### Importing
 
@@ -51,21 +70,11 @@ well as in the npm package.
 
 <BrowserGlobalsCodeBlock />
 
-## Stylesheets
+### Examples
 
-Because React-Bootstrap doesn't depend on a very precise version of
-Bootstrap, we don't ship with any included css. However, some
-stylesheet **is required** to use these components. How
-and which bootstrap styles you include is up to you, but the
-simplest way is to include the latest styles from the CDN.
-
-<CssCodeBlock />
-
-For more advanced use cases you can also use a bundler like Webpack
-or Browserify to include the css files for you as part of your build
-process but that is beyond the scope of this guide. Also see
-[http://getbootstrap.com/customize/](http://getbootstrap.com/customize/) for details about customizing stylesheets to match your component
-use.
+React-Bootstrap has started a repo with a few basic CodeSandbox examples.
+[Click here](https://github.com/react-bootstrap/react-bootstrap#codesandbox-examples) 
+to check them out.
 
 ### Themes
 
@@ -76,6 +85,14 @@ follow the installation instructions for your theme of choice.
   Because React-Bootstrap completely reimplements Bootstrap's JavaScript, it's
   not automatically compatible with themes that extend the default JavaScript
   behaviors.
+</Callout>
+
+<Callout theme="warning" title="Create React App">
+
+If you would like to add a custom theme on your app using Create React
+App, they have additional documentation for Create React App and
+Bootstrap
+[here](https://facebook.github.io/create-react-app/docs/adding-bootstrap#using-a-custom-theme)
 </Callout>
 
 ## Browser support

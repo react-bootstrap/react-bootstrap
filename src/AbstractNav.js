@@ -27,11 +27,9 @@ class AbstractNav extends React.Component {
     activeKey: PropTypes.any,
   };
 
-  constructor(...args) {
-    super(...args);
-
-    this.state = { navContext: null };
-  }
+  state = {
+    navContext: null,
+  };
 
   static getDerivedStateFromProps({
     activeKey,

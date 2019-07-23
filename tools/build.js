@@ -23,7 +23,8 @@ const step = (name, root, fn) => async () => {
   console.log(cyan('Built: ') + green(name));
 };
 
-const shell = cmd => execa.shell(cmd, { stdio: ['pipe', 'pipe', 'inherit'] });
+const shell = cmd =>
+  execa(cmd, { stdio: ['pipe', 'pipe', 'inherit'], shell: true });
 
 const has = t => !targets.length || targets.includes(t);
 

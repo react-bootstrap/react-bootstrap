@@ -182,13 +182,9 @@ describe('<Modal>', () => {
 
     it('should remove resize listener when unmounted', () => {
       class Component extends React.Component {
-        constructor(props, context) {
-          super(props, context);
-
-          this.state = {
-            show: true,
-          };
-        }
+        state = {
+          show: true,
+        };
 
         render() {
           if (!this.state.show) {

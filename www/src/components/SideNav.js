@@ -7,16 +7,13 @@ import FormControl from 'react-bootstrap/FormControl';
 import styled from 'astroturf';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
-import withProps from 'recompose/withProps';
 
-const MenuButton = withProps({ variant: 'link' })(
-  styled(Button)`
-    composes: p-0 d-md-none ml-3 from global;
+const MenuButton = styled(Button).attrs({ variant: 'link' })`
+  composes: p-0 d-md-none ml-3 from global;
 
-    line-height: 1;
-    color: #212529;
-  `,
-);
+  line-height: 1;
+  color: #212529;
+`;
 
 const SidePanel = styled('div')`
   @import '../css/theme';
@@ -101,7 +98,12 @@ const TocSubLink = styled(TocLink)`
   padding-top: 0.25rem;
 `;
 
-const gettingStarted = ['introduction', 'theming', 'support'];
+const gettingStarted = [
+  'introduction',
+  'why-react-bootstrap',
+  'theming',
+  'support',
+];
 
 const layout = ['grid', 'media'];
 

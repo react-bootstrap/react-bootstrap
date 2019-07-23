@@ -5,3 +5,4 @@ coverage/
 www/.cache
 www/public
 www/plugins
+**/*.d.ts

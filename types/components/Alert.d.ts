@@ -12,7 +12,7 @@ declare class AlertHeading<
   As extends React.ReactType = 'div'
 > extends BsPrefixComponent<As> {}
 
-export interface AlertProps extends React.HTMLProps<Alert> {
+export interface AlertProps extends React.HTMLProps<HTMLDivElement> {
   bsPrefix?: string;
   variant?:
     | 'primary'
@@ -30,9 +30,9 @@ export interface AlertProps extends React.HTMLProps<Alert> {
   transition?: React.ReactType;
 }
 
-declare class Alert extends React.Component<AlertProps> {
-  static Link: typeof AlertLink;
-  static Heading: typeof AlertHeading;
-}
+declare const Alert: React.ForwardRefExoticComponent<AlertProps> & {
+  Link: typeof AlertLink;
+  Heading: typeof AlertHeading;
+};
 
 export default Alert;

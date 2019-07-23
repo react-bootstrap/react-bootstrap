@@ -145,6 +145,4 @@ Nav.defaultProps = defaultProps;
 Nav.Item = NavItem;
 Nav.Link = NavLink;
 
-Nav._Nav = Nav; // for Testing until enzyme is working with context
-
 export default Nav;

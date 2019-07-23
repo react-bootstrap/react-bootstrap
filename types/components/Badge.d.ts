@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export interface BadgeProps extends React.HTMLProps<Badge> {
+export interface BadgeProps extends React.HTMLProps<HTMLSpanElement> {
   bsPrefix?: string;
   variant?:
     | 'primary'
@@ -14,6 +14,6 @@ export interface BadgeProps extends React.HTMLProps<Badge> {
   pill?: boolean;
 }
 
-declare class Badge extends React.Component<BadgeProps> {}
+declare const Badge: React.ForwardRefExoticComponent<BadgeProps>;
 
 export default Badge;

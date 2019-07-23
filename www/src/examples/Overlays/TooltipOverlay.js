@@ -1,31 +1,21 @@
-class Example extends React.Component {
-  constructor(...args) {
-    super(...args);
+function Example() {
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
 
-    this.attachRef = target => this.setState({ target });
-    this.state = { show: false };
-  }
-
-  render() {
-    const { show, target } = this.state;
-    return (
-      <>
-        <Button
-          ref={this.attachRef}
-          onClick={() => this.setState({ show: !show })}
-        >
-          Click me!
-        </Button>
-        <Overlay target={target} show={show} placement="right">
-          {props => (
-            <Tooltip id="overlay-example" {...props}>
-              My Tooltip
-            </Tooltip>
-          )}
-        </Overlay>
-      </>
-    );
-  }
+  return (
+    <>
+      <Button ref={target} onClick={() => setShow(!show)}>
+        Click me!
+      </Button>
+      <Overlay target={target.current} show={show} placement="right">
+        {props => (
+          <Tooltip id="overlay-example" {...props}>
+            My Tooltip
+          </Tooltip>
+        )}
+      </Overlay>
+    </>
+  );
 }
 
 render(<Example />);

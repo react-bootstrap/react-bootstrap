@@ -10,8 +10,8 @@ class ThemeProvider extends React.Component {
     prefixes: PropTypes.object.isRequired,
   };
 
-  constructor(...args) {
-    super(...args);
+  constructor(props) {
+    super(props);
     this.prefixes = new Map();
     Object.keys(this.props.prefixes).forEach(key => {
       this.prefixes.set(key, this.props.prefixes[key]);

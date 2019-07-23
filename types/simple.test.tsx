@@ -27,6 +27,7 @@ import {
   OverlayTrigger,
   Tooltip,
   Pagination,
+  Popover,
   ProgressBar,
   Spinner,
   Tabs,
@@ -35,16 +36,16 @@ import {
   ToggleButton,
 } from 'react-bootstrap';
 
-<Alert dismissible>Woop woop</Alert>;
+<Alert ref={React.createRef<HTMLDivElement>()} dismissible>
+  Woop woop
+</Alert>;
 <Alert.Link as="a" href="blah" />;
 <Alert.Heading as="h3" />;
 
 <Accordion defaultActiveKey="0">
   <Card>
     <Card.Header>
-      <Accordion.Toggle eventKey="0">
-        Click me!
-      </Accordion.Toggle>
+      <Accordion.Toggle eventKey="0">Click me!</Accordion.Toggle>
     </Card.Header>
     <Accordion.Collapse eventKey="0">
       <Card.Body>Hello! I'm the body</Card.Body>
@@ -52,7 +53,9 @@ import {
   </Card>
 </Accordion>;
 
-<Badge pill={false}>42</Badge>;
+<Badge pill={false} ref={React.createRef<HTMLSpanElement>()}>
+  42
+</Badge>;
 
 <Breadcrumb listProps={{ type: 'I' }}>
   <Breadcrumb.Item />
@@ -147,7 +150,7 @@ import {
   </Dropdown.Toggle>
 
   <Dropdown.Menu>
-    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+    <Dropdown.Item eventKey="key">Action</Dropdown.Item>
     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
   </Dropdown.Menu>
@@ -339,6 +342,13 @@ import {
   <Pagination.Next />
   <Pagination.Last />
 </Pagination>;
+
+<Popover id="test-popover">
+  <Popover.Title>Popover title</Popover.Title>
+  <Popover.Content>
+    <strong>Popover Content</strong>
+  </Popover.Content>
+</Popover>;
 
 <div>
   <ProgressBar striped variant="success" min={-10} now={40} max={200} />

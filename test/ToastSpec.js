@@ -3,8 +3,8 @@ import { mount } from 'enzyme';
 
 import Toast from '../src/Toast';
 
-describe('Toasts', () => {
-  it('will render an entire toast', () => {
+describe('<Toast>', () => {
+  it('should render an entire toast', () => {
     mount(
       <Toast>
         <Toast.Header />
@@ -16,7 +16,8 @@ describe('Toasts', () => {
   });
 
   it('should trigger the onClose event after clicking on the close button', () => {
-    let onCloseSpy = sinon.spy();
+    const onCloseSpy = sinon.spy();
+
     mount(
       <Toast onClose={onCloseSpy}>
         <Toast.Header>header-content</Toast.Header>
@@ -28,21 +29,43 @@ describe('Toasts', () => {
       .find('button')
       .simulate('click');
 
-    expect(onCloseSpy).to.be.calledOnce;
+    expect(onCloseSpy).to.have.been.calledOnce;
   });
 
   it('should trigger the onClose event after the autohide delay', () => {
-    const clock = sinon.useFakeTimers({
-      toFake: ['setTimeout'],
-    });
-    const onCloseSpy = sinon.spy();
-    mount(
-      <Toast onClose={onCloseSpy} delay={500} show autohide>
-        <Toast.Header>header-content</Toast.Header>
-        <Toast.Body>body-content</Toast.Body>
-      </Toast>,
-    );
-    clock.tick(500);
-    expect(onCloseSpy).to.be.calledOnce;
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const onCloseSpy = sinon.spy();
+      mount(
+        <Toast onClose={onCloseSpy} delay={500} show autohide>
+          <Toast.Header>header-content</Toast.Header>
+          <Toast.Body>body-content</Toast.Body>
+        </Toast>,
+      );
+      clock.tick(1000);
+      expect(onCloseSpy).to.have.been.calledOnce;
+    } finally {
+      clock.restore();
+    }
+  });
+
+  it('should clearTimeout after unmount', () => {
+    const clock = sinon.useFakeTimers();
+
+    try {
+      const onCloseSpy = sinon.spy();
+      const wrapper = mount(
+        <Toast delay={500} onClose={onCloseSpy} show autohide>
+          <Toast.Header>header-content</Toast.Header>
+          <Toast.Body>body-content</Toast.Body>
+        </Toast>,
+      );
+      wrapper.unmount();
+      clock.tick(1000);
+      expect(onCloseSpy).not.to.have.been.called;
+    } finally {
+      clock.restore();
+    }
   });
 });

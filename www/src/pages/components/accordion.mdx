@@ -7,6 +7,7 @@ import ReactPlayground from '../../components/ReactPlayground';
 import Basic from '../../examples/Accordion/Basic';
 import AllCollapse from '../../examples/Accordion/AllCollapse';
 import EntireHeaderClickable from '../../examples/Accordion/EntireHeaderClickable';
+import CustomToggle from '../../examples/Accordion/CustomToggle.js';
 
 # Accordion
 
@@ -37,11 +38,23 @@ underlying component to be a CardHeader component.
 
 <ReactPlayground codeText={EntireHeaderClickable} />
 
+### Custom Toggle
+
+You can now hook into the Accordion toggle functionality via `useAccordionToggle` to make custom toggle components.
+
+<ReactPlayground codeText={CustomToggle} />
+
 ## API
 
 <ComponentApi metadata={props.data.Accordion} />
 <ComponentApi metadata={props.data.AccordionToggle} exportedBy={props.data.Accordion} />
 <ComponentApi metadata={props.data.AccordionCollapse} exportedBy={props.data.Accordion} />
+
+### useAccordionToggle
+
+```js
+const decoratedOnClick = useAccordionToggle(eventKey, onClick);
+```
 
 export const query = graphql`
   query AccordionQuery {

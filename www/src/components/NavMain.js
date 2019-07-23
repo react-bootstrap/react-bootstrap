@@ -7,31 +7,29 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Dropdown from 'react-bootstrap/Dropdown';
 import styled from 'astroturf';
-import withProps from 'recompose/withProps';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons/faDiscord';
 import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
 
 import logo from '../assets/logo.svg';
 
-const StyledNavbar = withProps({
+const StyledNavbar = styled(Navbar).attrs({
   as: 'header',
   variant: 'dark',
   role: 'banner',
-})(
-  styled(Navbar)`
-    @import '../css/theme.scss';
+})`
+  @import '../css/theme.scss';
 
-    min-height: 4rem;
-    background-color: $darker;
+  min-height: 4rem;
+  background-color: $darker;
 
-    @include media-breakpoint-up(md) {
-      position: sticky;
-      top: 0;
-      z-index: 1040;
-    }
-  `,
-);
+  @include media-breakpoint-up(md) {
+    position: sticky;
+    top: 0;
+    z-index: 1040;
+  }
+`;
+
 const SkipToContentLink = styled('a')`
   composes: sr-only sr-only-focusable bg-primary text-white px-4 py-2 mr-2 from global;
 `;

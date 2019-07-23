@@ -4,13 +4,13 @@ import { BsPrefixComponent } from './helpers';
 import AccordionToggle from './AccordionToggle';
 import AccordionCollapse from './AccordionCollapse';
 
-export interface AccordionProps extends React.HTMLProps<Accordion> {
+export interface AccordionProps {
   activeKey?: string;
-  defaultActiveKey?: string
+  defaultActiveKey?: string;
 }
 
 declare class Accordion<
-As extends React.ElementType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, AccordionProps> {
   static Toggle: typeof AccordionToggle;
   static Collapse: typeof AccordionCollapse;

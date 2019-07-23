@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import Dropdown from './Dropdown';
 
-import { ReplaceProps, PropsOf } from './helpers';
+import { ReplaceProps } from './helpers';
 
 export interface NavDropdownProps {
   id: string;
