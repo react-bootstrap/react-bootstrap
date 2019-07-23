@@ -1,9 +1,7 @@
-// Working around benmosher/eslint-plugin-import#1396.
-/* eslint-disable import/no-extraneous-dependencies */
-const path = require('path');
-/* eslint-enable import/no-extraneous-dependencies */
-const remarkSlug = require('remark-slug');
 const { cleanDoclets } = require('gatsby-transformer-react-docgen/doclets');
+const path = require('path');
+const remarkSlug = require('remark-slug');
+
 const defaultDescriptions = require('./src/defaultPropDescriptions');
 
 module.exports = {

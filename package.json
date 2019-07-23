@@ -81,6 +81,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^6.0.1",
+    "eslint-import-resolver-node": "^0.3.2",
     "eslint-import-resolver-webpack": "^0.11.1",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",

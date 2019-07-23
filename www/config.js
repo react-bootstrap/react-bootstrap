@@ -1,8 +1,5 @@
-// Working around benmosher/eslint-plugin-import#1396.
-/* eslint-disable import/no-extraneous-dependencies */
-const fs = require('fs');
 const crypto = require('crypto');
-/* eslint-enable import/no-extraneous-dependencies */
+const fs = require('fs');
 
 function getIntegrity(file) {
   const algo = 'sha384';

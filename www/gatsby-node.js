@@ -1,8 +1,6 @@
-// Working around benmosher/eslint-plugin-import#1396.
-/* eslint-disable import/no-extraneous-dependencies */
-const path = require('path');
-/* eslint-enable import/no-extraneous-dependencies */
 const _ = require('lodash');
+const path = require('path');
+
 const config = require('./config');
 
 const stringifiedConfig = {};
