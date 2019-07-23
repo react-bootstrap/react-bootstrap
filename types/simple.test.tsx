@@ -27,6 +27,7 @@ import {
   OverlayTrigger,
   Tooltip,
   Pagination,
+  Popover,
   ProgressBar,
   Spinner,
   Tabs,
@@ -341,6 +342,13 @@ import {
   <Pagination.Next />
   <Pagination.Last />
 </Pagination>;
+
+<Popover id="test-popover">
+  <Popover.Title>Popover title</Popover.Title>
+  <Popover.Content>
+    <strong>Popover Content</strong>
+  </Popover.Content>
+</Popover>;
 
 <div>
   <ProgressBar striped variant="success" min={-10} now={40} max={200} />
