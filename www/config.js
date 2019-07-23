@@ -1,5 +1,5 @@
-const fs = require('fs');
 const crypto = require('crypto');
+const fs = require('fs');
 
 function getIntegrity(file) {
   const algo = 'sha384';

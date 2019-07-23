@@ -1,1 +1,1 @@
-exports.wrapPageElement = require(`./src/wrap-page`);
+exports.wrapPageElement = require('./src/wrap-page');

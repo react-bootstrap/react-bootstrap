@@ -15,16 +15,16 @@
     "build": "node tools/build.js",
     "build-docs": "yarn --cwd www run build",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "start": "yarn --cwd www run develop",
+    "dtslint": "dtslint types",
     "format": "eslint . --fix",
     "lint": "eslint .",
-    "release": "rollout",
     "prepublishOnly": "npm run build",
+    "release": "rollout",
+    "start": "yarn --cwd www run develop",
     "tdd": "karma start",
     "test": "npm run lint && npm run dtslint && npm run test-browser && npm run test-node",
     "test-browser": "cross-env NODE_ENV=test karma start --single-run",
-    "test-node": "cross-env NODE_ENV=test-server mocha --require @babel/register test/server/*Spec.js",
-    "dtslint": "dtslint types"
+    "test-node": "cross-env NODE_ENV=test-server mocha --require @babel/register test/server/*Spec.js"
   },
   "husky": {
     "hooks": {
@@ -81,6 +81,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^6.0.1",
+    "eslint-import-resolver-node": "^0.3.2",
     "eslint-import-resolver-webpack": "^0.11.1",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",

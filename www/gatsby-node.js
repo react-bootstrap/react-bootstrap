@@ -1,5 +1,6 @@
-const path = require('path');
 const _ = require('lodash');
+const path = require('path');
+
 const config = require('./config');
 
 const stringifiedConfig = {};
