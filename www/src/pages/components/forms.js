@@ -133,7 +133,7 @@ export default withLayout(function FormControlsSection({ data }) {
         By provided <code>children</code> to the <code>FormCheck</code> you can
         forgo the default rendering and handle it yourself. (You can still
         provide an <code>id</code> to the <code>FormCheck</code> or{' '}
-        <code>FormGroup</code> and have it propogate to the label and input).
+        <code>FormGroup</code> and have it propagate to the label and input).
       </p>
       <ReactPlayground codeText={CheckApi} />
 
@@ -251,7 +251,7 @@ export default withLayout(function FormControlsSection({ data }) {
       </LinkedHeading>
       <p>
         Custom checkbox and radio styles are achieved with a resourceful use of
-        the <code>:checked</code> selector and <code>:after</code> psuedo
+        the <code>:checked</code> selector and <code>:after</code> pseudo
         elements, but are Structurally similar to the default{' '}
         <code>FormCheck</code>. By default the checked and indeterminate icons
         use embedded svg icons from{' '}

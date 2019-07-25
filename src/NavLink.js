@@ -41,7 +41,7 @@ const propTypes = {
   onSelect: PropTypes.func,
 
   /**
-   * Uniquely idenifies the `NavItem` amoungst its siblings,
+   * Uniquely idenifies the `NavItem` amongst its siblings,
    * used to determine and control the active state ofthe parent `Nav`
    */
   eventKey: PropTypes.any,

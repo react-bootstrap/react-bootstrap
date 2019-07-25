@@ -34,7 +34,7 @@ const propTypes = {
    */
   onChange: PropTypes.func,
   /**
-   * The value of the input, should be unique amoungst it's siblings when nested in a
+   * The value of the input, should be unique amongst it's siblings when nested in a
    * `ToggleButtonGroup`.
    */
   value: PropTypes.any.isRequired,

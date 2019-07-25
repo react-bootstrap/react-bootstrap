@@ -20,7 +20,7 @@ Steps to reproduce the behavior:
 3. Scroll down to '....'
 4. See error
 
-## Reproducable Example
+## Reproducible Example
 
 Minimal example by using [CodeSandbox](https://codesandbox.io/s/github/react-bootstrap/code-sandbox-examples/tree/master/basic).
 
