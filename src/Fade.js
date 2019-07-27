@@ -76,32 +76,33 @@ const fadeStyles = {
   [ENTERED]: 'show',
 };
 
-class Fade extends React.Component {
-  handleEnter = node => {
+const Fade = React.forwardRef(({ className, children, ...props }, ref) => {
+  const handleEnter = node => {
     triggerBrowserReflow(node);
-    if (this.props.onEnter) this.props.onEnter(node);
+    if (props.onEnter) props.onEnter(node);
   };
 
-  render() {
-    const { className, children, ...props } = this.props;
-
-    return (
-      <Transition addEndListener={onEnd} {...props} onEnter={this.handleEnter}>
-        {(status, innerProps) =>
-          React.cloneElement(children, {
-            ...innerProps,
-            className: classNames(
-              'fade',
-              className,
-              children.props.className,
-              fadeStyles[status],
-            ),
-          })
-        }
-      </Transition>
-    );
-  }
-}
+  return (
+    <Transition
+      ref={ref}
+      addEndListener={onEnd}
+      {...props}
+      onEnter={handleEnter}
+    >
+      {(status, innerProps) =>
+        React.cloneElement(children, {
+          ...innerProps,
+          className: classNames(
+            'fade',
+            className,
+            children.props.className,
+            fadeStyles[status],
+          ),
+        })
+      }
+    </Transition>
+  );
+});
 
 Fade.propTypes = propTypes;
 Fade.defaultProps = defaultProps;
