@@ -217,7 +217,7 @@ describe('<Nav>', () => {
         </Nav>,
       );
 
-      wrapper.assertSingle('div[role="tablist"]');
+      wrapper.assertSingle('.nav[role="tablist"]');
       wrapper.find('a[role="tab"]').length.should.equal(2);
     });
   });
