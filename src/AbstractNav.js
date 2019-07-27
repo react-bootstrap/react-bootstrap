@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import qsa from 'dom-helpers/query/querySelectorAll';
 import PropTypes from 'prop-types';
 
-import mapContextToProps from '@restart/context/mapContextToProps';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import NavContext from './NavContext';
 import TabContext from './TabContext';
@@ -28,15 +27,16 @@ const propTypes = {
   activeKey: PropTypes.any,
 };
 
+const defaultProps = {
+  role: 'tablist',
+};
+
 const AbstractNav = React.forwardRef(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'ul',
       onSelect,
-      parentOnSelect,
-      getControlledId,
-      getControllerId,
       activeKey,
       role,
       onKeyDown,
@@ -44,6 +44,17 @@ const AbstractNav = React.forwardRef(
     },
     listNode,
   ) => {
+    const parentOnSelect = useContext(SelectableContext);
+    const tabContext = useContext(TabContext);
+
+    let getControlledId, getControllerId;
+
+    if (tabContext) {
+      activeKey = tabContext.activeKey;
+      getControlledId = tabContext.getControlledId;
+      getControllerId = tabContext.getControllerId;
+    }
+
     const [needsRefocus, setRefocus] = useState(false);
 
     if (!listNode) listNode = useRef(null);
@@ -100,7 +111,7 @@ const AbstractNav = React.forwardRef(
 
         if (activeChild) activeChild.focus();
       }
-    }, [listNode.current, needsRefocus]);
+    }, [listNode, needsRefocus]);
 
     return (
       <SelectableContext.Provider value={handleSelect}>
@@ -120,22 +131,6 @@ const AbstractNav = React.forwardRef(
 );
 
 AbstractNav.propTypes = propTypes;
+AbstractNav.defaultProps = defaultProps;
 
-export default mapContextToProps(
-  [SelectableContext, TabContext],
-  (parentOnSelect, tabContext, { role }) => {
-    if (!tabContext) return { parentOnSelect };
-
-    const { activeKey, getControllerId, getControlledId } = tabContext;
-    return {
-      activeKey,
-      parentOnSelect,
-      role: role || 'tablist',
-      // pass these two through to avoid having to listen to
-      // both Tab and Nav contexts in NavLink
-      getControllerId,
-      getControlledId,
-    };
-  },
-  AbstractNav,
-);
+export default AbstractNav;
