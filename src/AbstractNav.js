@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import NavContext from './NavContext';
 import TabContext from './TabContext';
+import { useMergedRefs } from './utils/mergedRefs';
 
 const noop = () => {};
 
@@ -42,7 +43,7 @@ const AbstractNav = React.forwardRef(
       onKeyDown,
       ...props
     },
-    listNode,
+    ref,
   ) => {
     const parentOnSelect = useContext(SelectableContext);
     const tabContext = useContext(TabContext);
@@ -57,7 +58,7 @@ const AbstractNav = React.forwardRef(
 
     const [needsRefocus, setRefocus] = useState(false);
 
-    if (!listNode) listNode = useRef(null);
+    const listNode = useRef(null);
 
     const getNextActiveChild = offset => {
       if (!listNode.current) return null;
@@ -113,6 +114,8 @@ const AbstractNav = React.forwardRef(
       }
     }, [listNode, needsRefocus]);
 
+    const mergedRef = useMergedRefs(ref, listNode);
+
     return (
       <SelectableContext.Provider value={handleSelect}>
         <NavContext.Provider
@@ -123,7 +126,7 @@ const AbstractNav = React.forwardRef(
             getControllerId: getControllerId || noop,
           }}
         >
-          <Component {...props} onKeyDown={handleKeyDown} ref={listNode} />
+          <Component {...props} onKeyDown={handleKeyDown} ref={mergedRef} />
         </NavContext.Provider>
       </SelectableContext.Provider>
     );
