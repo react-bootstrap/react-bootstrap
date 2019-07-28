@@ -2,55 +2,55 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import React from 'react';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-class Spinner extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'spinner'
-     */
-    bsPrefix: PropTypes.string.isRequired,
+const propTypes = {
+  /**
+   * @default 'spinner'
+   */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * The visual color style of the spinner
-     *
-     * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
-     */
-    variant: PropTypes.string,
+  /**
+   * The visual color style of the spinner
+   *
+   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
+   */
+  variant: PropTypes.string,
 
-    /**
-     * Changes the animation style of the spinner.
-     *
-     * @type {('border'|'grow')}
-     * @default true
-     */
-    animation: PropTypes.oneOf(['border', 'grow']).isRequired,
+  /**
+   * Changes the animation style of the spinner.
+   *
+   * @type {('border'|'grow')}
+   * @default true
+   */
+  animation: PropTypes.oneOf(['border', 'grow']).isRequired,
 
-    /**
-     * Component size variations.
-     *
-     * @type {('sm')}
-     */
-    size: PropTypes.string,
+  /**
+   * Component size variations.
+   *
+   * @type {('sm')}
+   */
+  size: PropTypes.string,
 
-    /**
-     * This component may be used to wrap child elements or components.
-     */
-    children: PropTypes.element,
+  /**
+   * This component may be used to wrap child elements or components.
+   */
+  children: PropTypes.element,
 
-    /**
-     * An ARIA accessible role applied to the Menu component. This should generally be set to 'status'
-     */
-    role: PropTypes.string,
+  /**
+   * An ARIA accessible role applied to the Menu component. This should generally be set to 'status'
+   */
+  role: PropTypes.string,
 
-    /**
-     * @default div
-     */
-    as: PropTypes.elementType,
-  };
+  /**
+   * @default div
+   */
+  as: PropTypes.elementType,
+};
 
-  render() {
-    const {
+const Spinner = React.forwardRef(
+  (
+    {
       bsPrefix,
       variant,
       animation,
@@ -60,11 +60,15 @@ class Spinner extends React.Component {
       as: Component = 'div',
       className,
       ...props
-    } = this.props;
+    },
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'spinner');
     const bsSpinnerPrefix = `${bsPrefix}-${animation}`;
 
     return (
       <Component
+        ref={ref}
         {...props}
         className={classNames(
           className,
@@ -76,7 +80,9 @@ class Spinner extends React.Component {
         {children}
       </Component>
     );
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(Spinner, 'spinner');
+Spinner.propTypes = propTypes;
+
+export default Spinner;
