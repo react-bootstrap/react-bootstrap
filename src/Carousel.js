@@ -243,10 +243,10 @@ class Carousel extends React.Component {
       return;
 
     if (e.changedTouches[0].screenX < this.state.touchStartX) {
-      // Going right
+      // Swiping left to navigate to next item.
       this.handleNext(e);
     } else {
-      // Going left
+      // Swiping right to navigate to previous item.
       this.handlePrev(e);
     }
   };

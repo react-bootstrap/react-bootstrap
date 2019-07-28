@@ -290,7 +290,10 @@ describe('<Carousel>', () => {
 
   describe('touch events', () => {
     let clock, wrapper, onSelectSpy;
-    const slideItems = [...items, <Carousel.Item key={3}>Item 3 content</Carousel.Item>];
+    const slideItems = [
+      ...items,
+      <Carousel.Item key={3}>Item 3 content</Carousel.Item>,
+    ];
     beforeEach(() => {
       onSelectSpy = sinon.spy();
       wrapper = mount(
