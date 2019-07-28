@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import requiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import { uncontrollable } from 'uncontrollable';
+import { useUncontrolled } from 'uncontrollable';
 
 import Nav from './Nav';
 import NavLink from './NavLink';
@@ -93,8 +93,8 @@ function getDefaultActiveKey(children) {
   return defaultActiveKey;
 }
 
-class Tabs extends React.Component {
-  renderTab(child) {
+const Tabs = React.forwardRef((props, ref) => {
+  const renderTab = child => {
     const { title, eventKey, disabled, tabClassName } = child.props;
     if (title == null) {
       return null;
@@ -110,51 +110,51 @@ class Tabs extends React.Component {
         {title}
       </NavItem>
     );
-  }
+  };
 
-  render() {
-    const {
-      id,
-      onSelect,
-      transition,
-      mountOnEnter,
-      unmountOnExit,
-      children,
-      activeKey = getDefaultActiveKey(children),
-      ...props
-    } = this.props;
+  const {
+    id,
+    onSelect,
+    transition,
+    mountOnEnter,
+    unmountOnExit,
+    children,
+    activeKey = getDefaultActiveKey(children),
+    ...controlledProps
+  } = useUncontrolled(props, {
+    activeKey: 'onSelect',
+  });
 
-    return (
-      <TabContainer
-        id={id}
-        activeKey={activeKey}
-        onSelect={onSelect}
-        transition={transition}
-        mountOnEnter={mountOnEnter}
-        unmountOnExit={unmountOnExit}
-      >
-        <Nav {...props} role="tablist" as="nav">
-          {map(children, this.renderTab)}
-        </Nav>
+  return (
+    <TabContainer
+      ref={ref}
+      id={id}
+      activeKey={activeKey}
+      onSelect={onSelect}
+      transition={transition}
+      mountOnEnter={mountOnEnter}
+      unmountOnExit={unmountOnExit}
+    >
+      <Nav {...controlledProps} role="tablist" as="nav">
+        {map(children, renderTab)}
+      </Nav>
 
-        <TabContent>
-          {map(children, child => {
-            const childProps = { ...child.props };
-            delete childProps.title;
-            delete childProps.disabled;
-            delete childProps.tabClassName;
+      <TabContent>
+        {map(children, child => {
+          const childProps = { ...child.props };
 
-            return <TabPane {...childProps} />;
-          })}
-        </TabContent>
-      </TabContainer>
-    );
-  }
-}
+          delete childProps.title;
+          delete childProps.disabled;
+          delete childProps.tabClassName;
+
+          return <TabPane {...childProps} />;
+        })}
+      </TabContent>
+    </TabContainer>
+  );
+});
 
 Tabs.propTypes = propTypes;
 Tabs.defaultProps = defaultProps;
 
-export default uncontrollable(Tabs, {
-  activeKey: 'onSelect',
-});
+export default Tabs;
