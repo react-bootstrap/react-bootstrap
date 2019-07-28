@@ -84,7 +84,7 @@ const Button = React.forwardRef(
         <SafeAnchor
           {...props}
           as={as}
-          innerRef={ref}
+          ref={ref}
           className={classNames(classes, props.disabled && 'disabled')}
         />
       );
