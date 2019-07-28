@@ -22,6 +22,7 @@ export interface CarouselProps {
   prevLabel?: string;
   nextIcon?: React.ReactNode;
   nextLabel?: string;
+  touch?: boolean;
 }
 
 declare class Carousel<

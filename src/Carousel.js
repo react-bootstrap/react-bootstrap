@@ -242,11 +242,13 @@ class Carousel extends React.Component {
     )
       return;
 
-    // Going left
-    if (e.changedTouches[0].screenX < this.state.touchStartX)
+    if (e.changedTouches[0].screenX < this.state.touchStartX) {
+      // Going right
+      this.handleNext(e);
+    } else {
+      // Going left
       this.handlePrev(e);
-    // Going right
-    else this.handleNext(e);
+    }
   };
 
   handleSlideEnd = () => {
