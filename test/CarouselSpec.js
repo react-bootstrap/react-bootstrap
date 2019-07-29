@@ -289,14 +289,16 @@ describe('<Carousel>', () => {
   });
 
   describe('touch events', () => {
-    // const clock = sinon.useFakeTimers();
     let clock, wrapper, onSelectSpy;
-
+    const slideItems = [
+      ...items,
+      <Carousel.Item key={3}>Item 3 content</Carousel.Item>,
+    ];
     beforeEach(() => {
       onSelectSpy = sinon.spy();
       wrapper = mount(
-        <Carousel interval={0} onSelect={onSelectSpy} touch>
-          {items}
+        <Carousel activeIndex={1} interval={null} onSelect={onSelectSpy} touch>
+          {slideItems}
         </Carousel>,
       );
 
@@ -305,27 +307,27 @@ describe('<Carousel>', () => {
     afterEach(() => {
       clock.tick(150);
     });
-    it('should swipe left', () => {
+    it('should swipe right', () => {
       try {
         wrapper.simulate('touchStart', { changedTouches: [{ screenX: 50 }] });
         wrapper.simulate('touchEnd', { changedTouches: [{ screenX: 0 }] });
 
         clock.tick(50);
         expect(onSelectSpy).to.have.been.calledOnce;
-        expect(onSelectSpy.getCall(0).args[0]).to.equal(1);
+        expect(onSelectSpy.getCall(0).args[0]).to.equal(2);
       } finally {
         clock.restore();
       }
     });
 
-    it('should swipe right', () => {
+    it('should swipe left', () => {
       try {
         wrapper.simulate('touchStart', { changedTouches: [{ screenX: 0 }] });
         wrapper.simulate('touchEnd', { changedTouches: [{ screenX: 50 }] });
 
         clock.tick(50);
         expect(onSelectSpy).to.have.been.calledOnce;
-        expect(onSelectSpy.getCall(0).args[0]).to.equal(1);
+        expect(onSelectSpy.getCall(0).args[0]).to.equal(0);
       } finally {
         clock.restore();
       }
