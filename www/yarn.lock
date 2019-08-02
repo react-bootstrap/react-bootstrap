@@ -16,7 +16,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@7.5.5":
+"@babel/core@7.5.5", "@babel/core@^7.0.0", "@babel/core@^7.2.2", "@babel/core@^7.3.4", "@babel/core@^7.4.3":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.5.5.tgz#17b2686ef0d6bc58f963dddd68ab669755582c30"
   integrity sha512-i4qoSr2KTtce0DmkuuQBV4AuQgGPUcPXMr9L5MyYAtk06z068lQ10a4O009fe5OB/DfNV+h+qqT7ddNV8UnRjg==
@@ -32,26 +32,6 @@
     debug "^4.1.0"
     json5 "^2.1.0"
     lodash "^4.17.13"
-    resolve "^1.3.2"
-    semver "^5.4.1"
-    source-map "^0.5.0"
-
-"@babel/core@^7.0.0", "@babel/core@^7.2.2", "@babel/core@^7.3.4", "@babel/core@^7.4.3":
-  version "7.5.4"
-  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.5.4.tgz#4c32df7ad5a58e9ea27ad025c11276324e0b4ddd"
-  integrity sha512-+DaeBEpYq6b2+ZmHx3tHspC+ZRflrvLqwfv8E3hNr5LVQoyBnL8RPKSBCg+rK2W2My9PWlujBiqd0ZPsR9Q6zQ==
-  dependencies:
-    "@babel/code-frame" "^7.0.0"
-    "@babel/generator" "^7.5.0"
-    "@babel/helpers" "^7.5.4"
-    "@babel/parser" "^7.5.0"
-    "@babel/template" "^7.4.4"
-    "@babel/traverse" "^7.5.0"
-    "@babel/types" "^7.5.0"
-    convert-source-map "^1.1.0"
-    debug "^4.1.0"
-    json5 "^2.1.0"
-    lodash "^4.17.11"
     resolve "^1.3.2"
     semver "^5.4.1"
     source-map "^0.5.0"
@@ -242,15 +222,6 @@
     "@babel/traverse" "^7.1.0"
     "@babel/types" "^7.2.0"
 
-"@babel/helpers@^7.5.4":
-  version "7.5.4"
-  resolved "https://registry.yarnpkg.com/@babel/helpers/-/helpers-7.5.4.tgz#2f00608aa10d460bde0ccf665d6dcf8477357cf0"
-  integrity sha512-6LJ6xwUEJP51w0sIgKyfvFMJvIb9mWAfohJp0+m6eHJigkFdcH8duZ1sfhn0ltJRzwUIT/yqqhdSfRpCpL7oow==
-  dependencies:
-    "@babel/template" "^7.4.4"
-    "@babel/traverse" "^7.5.0"
-    "@babel/types" "^7.5.0"
-
 "@babel/helpers@^7.5.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/helpers/-/helpers-7.5.5.tgz#63908d2a73942229d1e6685bc2a0e730dde3b75e"
@@ -312,18 +283,10 @@
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-syntax-json-strings" "^7.2.0"
 
-"@babel/plugin-proposal-object-rest-spread@7.5.5":
+"@babel/plugin-proposal-object-rest-spread@7.5.5", "@babel/plugin-proposal-object-rest-spread@^7.0.0", "@babel/plugin-proposal-object-rest-spread@^7.4.3", "@babel/plugin-proposal-object-rest-spread@^7.5.4":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.5.5.tgz#61939744f71ba76a3ae46b5eea18a54c16d22e58"
   integrity sha512-F2DxJJSQ7f64FyTVl5cw/9MWn6naXGdk3Q3UhDbFEEHv+EilCPoeRD3Zh/Utx1CJz4uyKlQ4uH+bJPbEhMV7Zw==
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.0.0"
-    "@babel/plugin-syntax-object-rest-spread" "^7.2.0"
-
-"@babel/plugin-proposal-object-rest-spread@^7.0.0", "@babel/plugin-proposal-object-rest-spread@^7.4.3", "@babel/plugin-proposal-object-rest-spread@^7.5.4":
-  version "7.5.4"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.5.4.tgz#250de35d867ce8260a31b1fdac6c4fc1baa99331"
-  integrity sha512-KCx0z3y7y8ipZUMAEEJOyNi11lMb/FOPUjjB113tfowgw0c16EGYos7worCKBcUAh2oG+OBnoUhsnTSoLpV9uA==
   dependencies:
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-syntax-object-rest-spread" "^7.2.0"
@@ -788,7 +751,7 @@
     "@babel/parser" "^7.4.4"
     "@babel/types" "^7.4.4"
 
-"@babel/traverse@^7.0.0", "@babel/traverse@^7.0.0-beta.38", "@babel/traverse@^7.0.0-beta.54", "@babel/traverse@^7.1.0", "@babel/traverse@^7.4.4", "@babel/traverse@^7.5.0":
+"@babel/traverse@^7.0.0", "@babel/traverse@^7.0.0-beta.38", "@babel/traverse@^7.0.0-beta.54", "@babel/traverse@^7.1.0", "@babel/traverse@^7.4.4":
   version "7.5.0"
   resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.5.0.tgz#4216d6586854ef5c3c4592dab56ec7eb78485485"
   integrity sha512-SnA9aLbyOCcnnbQEGwdfBggnc142h/rbqqsXcaATj2hZcegCl903pUD/lfpsNBlBSuWow/YDfRyJuWi2EPR5cg==
@@ -2324,7 +2287,7 @@ camel-case@^3.0.0:
     no-case "^2.2.0"
     upper-case "^1.1.1"
 
-camelcase-css@2.0.1:
+camelcase-css@2.0.1, camelcase-css@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/camelcase-css/-/camelcase-css-2.0.1.tgz#ee978f6947914cc30c6b44741b6ed1df7f043fd5"
   integrity sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==
@@ -4935,10 +4898,10 @@ gatsby-plugin-catch-links@^2.1.2:
     "@babel/runtime" "^7.0.0"
     escape-string-regexp "^1.0.5"
 
-gatsby-plugin-mdx@^1.0.19:
-  version "1.0.19"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-1.0.19.tgz#e259daed7b35736ba68f3440eabe9d64257a3c14"
-  integrity sha512-9kB2Sdr4f3x7Iao3g+qWuAdXavqlJ6qq1hDLIkceXHntB9w4MFwkGfDBMXzZwxEVVz2qIbrfo4JDh9Imcr6tZA==
+gatsby-plugin-mdx@^1.0.22:
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-1.0.22.tgz#b5c429540a8c41b582d55ad9604b85a38be77203"
+  integrity sha512-+ZBuy7I0a4T+udlPnoUgII6PIm3YKHv26hNBXhZYTPk//R4LiCD3vlhZeeHqHAQaOamNquHt7DPxXZezNIATkw==
   dependencies:
     "@babel/core" "^7.4.3"
     "@babel/generator" "^7.5.5"
@@ -4947,6 +4910,7 @@ gatsby-plugin-mdx@^1.0.19:
     "@babel/preset-env" "^7.4.3"
     "@babel/preset-react" "^7.0.0"
     "@babel/types" "^7.5.5"
+    camelcase-css "^2.0.1"
     change-case "^3.1.0"
     core-js "2"
     dataloader "^1.4.0"
@@ -4968,7 +4932,7 @@ gatsby-plugin-mdx@^1.0.19:
     retext-english "^3.0.2"
     slash "^2.0.0"
     static-site-generator-webpack-plugin "^3.4.2"
-    to-style "^1.3.3"
+    style-to-object "^0.2.3"
     underscore.string "^3.3.4"
     unified "^8.3.2"
     unist-util-map "^1.0.4"
@@ -11220,7 +11184,7 @@ style-loader@^0.21.0:
     loader-utils "^1.1.0"
     schema-utils "^0.4.5"
 
-style-to-object@0.2.3, style-to-object@^0.2.1:
+style-to-object@0.2.3, style-to-object@^0.2.1, style-to-object@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/style-to-object/-/style-to-object-0.2.3.tgz#afcf42bc03846b1e311880c55632a26ad2780bcb"
   integrity sha512-1d/k4EY2N7jVLOqf2j04dTc37TPOv/hHxZmvpg8Pdh8UYydxeu/C1W1U4vD8alzf5V2Gt7rLsmkr4dxAlDm9ng==
@@ -11501,11 +11465,6 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     extend-shallow "^3.0.2"
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
-
-to-style@^1.3.3:
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/to-style/-/to-style-1.3.3.tgz#63a2b70a6f4a7d4fdc2ed57a0be4e7235cb6699c"
-  integrity sha1-Y6K3Cm9KfU/cLtV6C+TnI1y2aZw=
 
 toidentifier@1.0.0:
   version "1.0.0"
