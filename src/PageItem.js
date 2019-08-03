@@ -67,8 +67,8 @@ function createButton(name, defaultValue, label = name) {
   };
 }
 
-export const First = createButton('First', '\u00ab');
-export const Prev = createButton('Prev', '\u2039', 'Previous');
-export const Ellipsis = createButton('Ellipsis', '\u2026', 'More');
-export const Next = createButton('Next', '\u203a');
-export const Last = createButton('Last', '\u00bb');
+export const First = createButton('First', '«');
+export const Prev = createButton('Prev', '‹', 'Previous');
+export const Ellipsis = createButton('Ellipsis', '…', 'More');
+export const Next = createButton('Next', '›');
+export const Last = createButton('Last', '»');
