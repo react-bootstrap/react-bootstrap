@@ -8,7 +8,7 @@ import TabPane from './TabPane';
 /* eslint-disable react/require-render-return, react/no-unused-prop-types */
 class Tab extends React.Component {
   static propTypes = {
-    title: PropTypes.node,
+    title: PropTypes.node.isRequired,
   };
 
   render() {

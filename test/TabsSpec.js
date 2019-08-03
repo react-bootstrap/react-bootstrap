@@ -4,6 +4,8 @@ import { mount, shallow } from 'enzyme';
 import Tab from '../src/Tab';
 import Tabs from '../src/Tabs';
 
+import { shouldWarn } from './helpers';
+
 describe('<Tabs>', () => {
   it('Should show the correct tab', () => {
     const wrapper = mount(
@@ -115,6 +117,7 @@ describe('<Tabs>', () => {
   });
 
   it('Should not render a Tab without a title', () => {
+    shouldWarn('Failed prop');
     mount(
       <Tabs id="test" defaultActiveKey={1}>
         <Tab eventKey={1}>Tab 1 content</Tab>
