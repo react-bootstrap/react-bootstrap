@@ -201,4 +201,16 @@ describe('<Modal>', () => {
       expect(offSpy).to.have.been.calledWith(window, 'resize');
     });
   });
+  it('Should close once it was clicked outside of the Modal', () => {
+    const onHideSpy = sinon.spy();
+    mount(
+      <Modal show onHide={onHideSpy}>
+        <strong>Message</strong>
+      </Modal>,
+    )
+      .find('div.modal.show')
+      .simulate('click');
+
+    expect(onHideSpy).to.have.been.called;
+  });
 });
