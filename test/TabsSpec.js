@@ -4,6 +4,8 @@ import { mount, shallow } from 'enzyme';
 import Tab from '../src/Tab';
 import Tabs from '../src/Tabs';
 
+import { shouldWarn } from './helpers';
+
 describe('<Tabs>', () => {
   it('Should show the correct tab', () => {
     const wrapper = mount(
@@ -112,6 +114,20 @@ describe('<Tabs>', () => {
         </Tab>
       </Tabs>,
     ).assertSingle('a.nav-link.disabled');
+  });
+
+  it('Should not render a Tab without a title', () => {
+    shouldWarn('Failed prop');
+    mount(
+      <Tabs id="test" defaultActiveKey={1}>
+        <Tab eventKey={1}>Tab 1 content</Tab>
+        <Tab title="Tab 2" eventKey={2} disabled>
+          Tab 2 content
+        </Tab>
+      </Tabs>,
+    )
+      .find('a.nav-link')
+      .should.have.length(1);
   });
 });
 

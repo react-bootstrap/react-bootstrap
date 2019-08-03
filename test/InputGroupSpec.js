@@ -8,4 +8,24 @@ describe('<InputGroup>', () => {
     const wrapper = mount(<InputGroup />);
     expect(wrapper.find('div').length).to.equal(1);
   });
+
+  describe('<Checkbox>', () => {
+    it('Should forward props to underlying input element', () => {
+      const name = 'foobar';
+      const wrapper = mount(<InputGroup.Checkbox name={name} />);
+      const input = wrapper.find(`span>input[type="checkbox"]`);
+      expect(input.length).to.equal(1);
+      expect(input.prop('name')).to.equal(name);
+    });
+  });
+
+  describe('<Radio>', () => {
+    it('Should forward props to underlying input element', () => {
+      const name = 'foobar';
+      const wrapper = mount(<InputGroup.Radio name={name} />);
+      const input = wrapper.find(`span>input[type="radio"]`);
+      expect(input.length).to.equal(1);
+      expect(input.prop('name')).to.equal(name);
+    });
+  });
 });
