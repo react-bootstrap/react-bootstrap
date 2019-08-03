@@ -65,17 +65,7 @@ const defaultProps = {
 
 const Button = React.forwardRef(
   (
-    {
-      bsPrefix,
-      variant,
-      size,
-      active,
-      className,
-      block,
-      type,
-      as: Component = 'button',
-      ...props
-    },
+    { bsPrefix, variant, size, active, className, block, type, as, ...props },
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'btn');
@@ -93,6 +83,7 @@ const Button = React.forwardRef(
       return (
         <SafeAnchor
           {...props}
+          as={as}
           innerRef={ref}
           className={classNames(classes, props.disabled && 'disabled')}
         />
@@ -103,10 +94,11 @@ const Button = React.forwardRef(
       props.ref = ref;
     }
 
-    if (Component === 'button') {
+    if (!as) {
       props.type = type;
     }
 
+    const Component = as || 'button';
     return <Component {...props} className={classes} />;
   },
 );
