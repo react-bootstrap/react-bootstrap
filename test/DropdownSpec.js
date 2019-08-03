@@ -257,4 +257,26 @@ describe('<Dropdown>', () => {
     const wrapper = mount(<Dropdown />);
     expect(wrapper.find('div').length).to.equal(1);
   });
+
+  it('Should also accept a custom component', () => {
+    const customComponent = React.forwardRef(
+      (
+        {
+          // eslint-disable-next-line no-unused-vars
+          show,
+          // eslint-disable-next-line no-unused-vars
+          close,
+          // eslint-disable-next-line no-unused-vars
+          alignRight,
+          ...props
+        },
+        ref,
+      ) => <div ref={ref} id="custom-component" {...props} />,
+    );
+    mount(
+      <Dropdown.Menu show as={customComponent}>
+        <Dropdown.Item>Example Item</Dropdown.Item>
+      </Dropdown.Menu>,
+    ).assertSingle('#custom-component');
+  });
 });
