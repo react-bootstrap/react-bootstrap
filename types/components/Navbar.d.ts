@@ -12,7 +12,7 @@ declare class NavbarText<
 
 export interface NavbarProps {
   variant?: 'light' | 'dark';
-  expand?: true | 'sm' | 'md' | 'lg' | 'xl';
+  expand?: boolean | 'sm' | 'md' | 'lg' | 'xl';
   bg?: string;
   fixed?: 'top' | 'bottom';
   sticky?: 'top' | 'bottom';
