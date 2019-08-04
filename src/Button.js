@@ -90,10 +90,16 @@ const Button = React.forwardRef(
       );
     }
 
-    const Component = as || 'button';
-    if (ref) props.ref = ref;
+    if (ref) {
+      props.ref = ref;
+    }
 
-    return <Component {...props} type={type} className={classes} />;
+    if (!as) {
+      props.type = type;
+    }
+
+    const Component = as || 'button';
+    return <Component {...props} className={classes} />;
   },
 );
 
