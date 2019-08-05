@@ -7,7 +7,7 @@
     "url": "https://github.com/react-bootstrap/react-bootstrap/issues"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.20",
+    "@fortawesome/fontawesome-svg-core": "^1.2.21",
     "@fortawesome/free-brands-svg-icons": "^5.10.1",
     "@fortawesome/free-solid-svg-icons": "^5.10.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
