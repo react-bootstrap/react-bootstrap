@@ -77,6 +77,7 @@ const InputGroupRadio = props => (
 );
 
 InputGroup.propTypes = propTypes;
+InputGroup.displayName = 'InputGroup';
 
 InputGroup.Text = InputGroupText;
 InputGroup.Radio = InputGroupRadio;

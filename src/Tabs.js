@@ -93,25 +93,25 @@ function getDefaultActiveKey(children) {
   return defaultActiveKey;
 }
 
+function renderTab(child) {
+  const { title, eventKey, disabled, tabClassName } = child.props;
+  if (title == null) {
+    return null;
+  }
+
+  return (
+    <NavItem
+      as={NavLink}
+      eventKey={eventKey}
+      disabled={disabled}
+      className={tabClassName}
+    >
+      {title}
+    </NavItem>
+  );
+}
+
 const Tabs = React.forwardRef((props, ref) => {
-  const renderTab = child => {
-    const { title, eventKey, disabled, tabClassName } = child.props;
-    if (title == null) {
-      return null;
-    }
-
-    return (
-      <NavItem
-        as={NavLink}
-        eventKey={eventKey}
-        disabled={disabled}
-        className={tabClassName}
-      >
-        {title}
-      </NavItem>
-    );
-  };
-
   const {
     id,
     onSelect,
@@ -156,5 +156,6 @@ const Tabs = React.forwardRef((props, ref) => {
 
 Tabs.propTypes = propTypes;
 Tabs.defaultProps = defaultProps;
+Tabs.displayName = 'Tabs';
 
 export default Tabs;

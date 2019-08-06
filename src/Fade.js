@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import Transition, {
   ENTERED,
@@ -77,10 +77,13 @@ const fadeStyles = {
 };
 
 const Fade = React.forwardRef(({ className, children, ...props }, ref) => {
-  const handleEnter = node => {
-    triggerBrowserReflow(node);
-    if (props.onEnter) props.onEnter(node);
-  };
+  const handleEnter = useCallback(
+    node => {
+      triggerBrowserReflow(node);
+      if (props.onEnter) props.onEnter(node);
+    },
+    [props],
+  );
 
   return (
     <Transition
@@ -106,5 +109,6 @@ const Fade = React.forwardRef(({ className, children, ...props }, ref) => {
 
 Fade.propTypes = propTypes;
 Fade.defaultProps = defaultProps;
+Fade.displayName = 'Fade';
 
 export default Fade;

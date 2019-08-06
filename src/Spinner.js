@@ -84,5 +84,6 @@ const Spinner = React.forwardRef(
 );
 
 Spinner.propTypes = propTypes;
+Spinner.displayName = 'Spinner';
 
 export default Spinner;

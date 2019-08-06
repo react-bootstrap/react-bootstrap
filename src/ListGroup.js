@@ -61,6 +61,7 @@ const ListGroup = React.forwardRef((props, ref) => {
 
 ListGroup.propTypes = propTypes;
 ListGroup.defaultProps = defaultProps;
+ListGroup.displayName = 'ListGroup';
 
 ListGroup.Item = ListGroupItem;
 

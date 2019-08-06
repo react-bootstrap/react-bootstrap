@@ -98,6 +98,13 @@ describe('<Dropdown.Item>', () => {
       .should.not.have.property('onSelect');
   });
 
+  it('does not pass onSelect to children', () => {
+    mount(<Dropdown.Item onSelect={() => {}}>Item</Dropdown.Item>)
+      .find('SafeAnchor')
+      .props()
+      .should.not.have.property('onSelect');
+  });
+
   it('disabled link', () => {
     const handleSelect = () => {
       throw new Error('Should not invoke onSelect event');

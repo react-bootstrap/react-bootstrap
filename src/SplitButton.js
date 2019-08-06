@@ -105,5 +105,6 @@ const SplitButton = React.forwardRef(
 
 SplitButton.propTypes = propTypes;
 SplitButton.defaultProps = defaultProps;
+SplitButton.displayName = 'SplitButton';
 
 export default SplitButton;

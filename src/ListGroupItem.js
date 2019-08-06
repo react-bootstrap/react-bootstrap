@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import AbstractNavItem from './AbstractNavItem';
@@ -71,15 +71,18 @@ const ListGroupItem = React.forwardRef(
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group-item');
 
-    const handleClick = event => {
-      if (disabled) {
-        event.preventDefault();
-        event.stopPropagation();
-        return;
-      }
+    const handleClick = useCallback(
+      event => {
+        if (disabled) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
 
-      if (onClick) onClick(event);
-    };
+        if (onClick) onClick(event);
+      },
+      [disabled, onClick],
+    );
 
     return (
       <AbstractNavItem
@@ -104,5 +107,6 @@ const ListGroupItem = React.forwardRef(
 
 ListGroupItem.propTypes = propTypes;
 ListGroupItem.defaultProps = defaultProps;
+ListGroupItem.displayName = 'ListGroupItem';
 
 export default ListGroupItem;

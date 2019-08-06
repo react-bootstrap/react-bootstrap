@@ -87,5 +87,6 @@ const SafeAnchor = React.forwardRef(
 );
 
 SafeAnchor.propTypes = propTypes;
+SafeAnchor.displayName = 'SafeAnchor';
 
 export default SafeAnchor;
