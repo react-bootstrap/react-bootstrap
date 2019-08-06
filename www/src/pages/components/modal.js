@@ -90,7 +90,7 @@ export default withLayout(function ModalSection({ data }) {
         Without Animation
       </LinkedHeading>
       <p>
-        A Modal can also be without an animation. For that just set the
+        A Modal can also be without an animation. For that set the
         "animation" prop to <code>false</code>.
       </p>
       <ReactPlayground codeText={ModalWithoutAnimation} />
