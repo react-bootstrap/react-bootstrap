@@ -9,7 +9,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@7.5.5", "@babel/core@^7.0.0", "@babel/core@^7.2.2", "@babel/core@^7.3.4", "@babel/core@^7.4.3":
+"@babel/core@7.5.5", "@babel/core@^7.0.0", "@babel/core@^7.2.2", "@babel/core@^7.4.3", "@babel/core@^7.5.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.5.5.tgz#17b2686ef0d6bc58f963dddd68ab669755582c30"
   integrity sha512-i4qoSr2KTtce0DmkuuQBV4AuQgGPUcPXMr9L5MyYAtk06z068lQ10a4O009fe5OB/DfNV+h+qqT7ddNV8UnRjg==
@@ -1542,24 +1542,29 @@ astral-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-1.0.0.tgz#6c8c3fb827dd43ee3918f27b82782ab7658a6fd9"
   integrity sha512-+Ryf6g3BKoRc7jfp7ad8tM4TtMiaWvbF/1/sQcZPkkS7ag3D5nMBCe2UfOTONtAkaG0tO0ij3C5Lwmf1EiyjHg==
 
-astroturf@^0.9.9:
-  version "0.9.9"
-  resolved "https://registry.yarnpkg.com/astroturf/-/astroturf-0.9.9.tgz#728aa2f82074e249980bca74fb464c8c3c528819"
-  integrity sha512-d9seNRBySKvA8oz6O97oUO9njA1fm39FC32ARYO1lO+Osb94m1o7LslopiEx/p0jOb9TP3ZxZ/Fkbpq2665NMg==
+astroturf@^0.9.10:
+  version "0.9.10"
+  resolved "https://registry.yarnpkg.com/astroturf/-/astroturf-0.9.10.tgz#9d04c6880e1a426b2e7df13b9dda79e3677f6fb9"
+  integrity sha512-8hfqyjPJBuDzXzhQzZJNw5E5D0udLL+P7so/Y5aqHv/X/svGzlmdVhmIznuILpfYa+05daa0pBzJBYIqW8HTUg==
   dependencies:
-    "@babel/core" "^7.3.4"
+    "@babel/code-frame" "^7.5.5"
+    "@babel/core" "^7.5.5"
     "@babel/generator" "^7.3.4"
+    "@babel/helper-module-imports" "^7.0.0"
     "@babel/template" "^7.2.2"
     "@babel/types" "^7.3.4"
+    chalk "^2.4.2"
     common-tags "^1.8.0"
     css-loader "^3.0.0"
     errno "^0.1.7"
+    fast-levenshtein "^2.0.6"
     fs-extra "^8.0.0"
     loader-utils "^1.2.3"
-    lodash "^4.17.11"
+    lodash "^4.17.15"
     memory-fs "^0.4.1"
     postcss-loader "^3.0.0"
     postcss-nested "^4.1.1"
+    resolve "^1.11.1"
 
 async-each@^1.0.1:
   version "1.0.3"
@@ -10165,10 +10170,10 @@ resolve-url@^0.2.1:
   resolved "https://registry.yarnpkg.com/resolve-url/-/resolve-url-0.2.1.tgz#2c637fe77c893afd2a663fe21aa9080068e2052a"
   integrity sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
 
-resolve@^1.10.0, resolve@^1.10.1, resolve@^1.11.0, resolve@^1.3.2, resolve@^1.5.0, resolve@^1.8.1:
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.11.1.tgz#ea10d8110376982fef578df8fc30b9ac30a07a3e"
-  integrity sha512-vIpgF6wfuJOZI7KKKSP+HmiKggadPQAdsp5HiC1mvqnfp0gF1vdwgBWZIdrVft9pgqoMFQN+R7BSWZiBxx+BBw==
+resolve@^1.10.0, resolve@^1.10.1, resolve@^1.11.0, resolve@^1.11.1, resolve@^1.3.2, resolve@^1.5.0, resolve@^1.8.1:
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.12.0.tgz#3fc644a35c84a48554609ff26ec52b66fa577df6"
+  integrity sha512-B/dOmuoAik5bKcD6s6nXDCjzUKnaDvdkRyAk6rsmsKLipWj4797iothd7jmmUhWTfinVMU+wc56rYKsit2Qy4w==
   dependencies:
     path-parse "^1.0.6"
 
