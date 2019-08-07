@@ -877,10 +877,10 @@
     unist-builder "1.0.4"
     unist-util-visit "1.4.1"
 
-"@mdx-js/react@^1.1.5":
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-1.1.5.tgz#5e257debcdd0a60da992699385edef0abb891cb7"
-  integrity sha512-c+tfNfvsInS5PRjTMGqxI+LyLrlxKyX/TNqeNG1DLKGjjf9cFlDshu7tnqZZhGa/VBu0c/XXkK8ZkXjpmfhweQ==
+"@mdx-js/react@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-1.1.6.tgz#ad78d69c7b8942e1ab126e47ae67a604856ade24"
+  integrity sha512-IQf5WIuInyk85liH1jXoK16pRr3ExQAuR4tzE1GnXK6IyuZoj3DBKMlwKZ93Fa5WF31o3Vc39CIkosuC/xIHhQ==
 
 "@mikaelkristiansson/domready@^1.0.9":
   version "1.0.9"
