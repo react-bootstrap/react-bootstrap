@@ -32,9 +32,9 @@ const propTypes = {
   },
 
   /**
-   * Sets a default animation strategy for all children `<TabPane>`s. Use
-   * `false` to disable, `true` to enable the default `<Fade>` animation or
-   * a react-transition-group v2 `<Transition/>` component.
+   * Sets a default animation strategy for all children `<TabPane>`s.
+   * Defaults to `<Fade>` animation; else, use `false` to disable, or a
+   * custom react-transition-group `<Transition/>` component.
    *
    * @type {{Transition | false}}
    * @default {Fade}
