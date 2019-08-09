@@ -3,10 +3,7 @@ import * as React from 'react';
 import ToastBody from './ToastBody';
 import ToastHeader from './ToastHeader';
 
-import {
-  BsPrefixComponent,
-  TransitionCallbacks,
-} from './helpers';
+import { BsPrefixComponent, TransitionCallbacks } from './helpers';
 
 export interface ToastProps extends TransitionCallbacks {
   animation?: boolean;
@@ -14,7 +11,7 @@ export interface ToastProps extends TransitionCallbacks {
   delay?: number;
   onClose?: () => void;
   show: boolean;
-  transition: boolean | React.ElementType,
+  transition: boolean | React.ElementType;
 }
 
 declare class Toast extends BsPrefixComponent<'div', ToastProps> {

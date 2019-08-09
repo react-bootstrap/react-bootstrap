@@ -2,19 +2,19 @@ import * as React from 'react';
 
 export type Omit<T, U> = Pick<T, Exclude<keyof T, keyof U>>;
 
-export type ReplaceProps<Inner extends React.ReactType, P> = Omit<
+export type ReplaceProps<Inner extends React.ElementType, P> = Omit<
   React.ComponentPropsWithRef<Inner>,
   P
 > &
   P;
 
-export interface BsPrefixProps<As extends React.ReactType> {
+export interface BsPrefixProps<As extends React.ElementType> {
   as?: As;
   bsPrefix?: string;
 }
 
 export class BsPrefixComponent<
-  As extends React.ReactType,
+  As extends React.ElementType,
   P = {}
 > extends React.Component<ReplaceProps<As, BsPrefixProps<As> & P>> {}
 

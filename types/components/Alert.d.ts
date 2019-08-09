@@ -5,11 +5,11 @@ import SafeAnchor from './SafeAnchor';
 import { BsPrefixComponent } from './helpers';
 
 declare class AlertLink<
-  As extends React.ReactType = typeof SafeAnchor
+  As extends React.ElementType = typeof SafeAnchor
 > extends BsPrefixComponent<As> {}
 
 declare class AlertHeading<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 export interface AlertProps extends React.HTMLProps<HTMLDivElement> {
@@ -27,7 +27,7 @@ export interface AlertProps extends React.HTMLProps<HTMLDivElement> {
   show?: boolean;
   onClose?: () => void;
   closeLabel?: string;
-  transition?: React.ReactType;
+  transition?: React.ElementType;
 }
 
 declare const Alert: React.ForwardRefExoticComponent<AlertProps> & {

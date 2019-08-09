@@ -18,7 +18,7 @@ export interface ListGroupItemProps {
 }
 
 declare class ListGroupItem<
-  As extends React.ReactType = 'a'
+  As extends React.ElementType = 'a'
 > extends BsPrefixComponent<As, ListGroupItemProps> {}
 
 export default ListGroupItem;

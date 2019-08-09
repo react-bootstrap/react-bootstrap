@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { default as BreadcrumbItem } from './BreadcrumbItem';
+import BreadcrumbItem from './BreadcrumbItem';
 
 import { BsPrefixComponent } from './helpers';
 
@@ -10,7 +10,7 @@ export interface BreadcrumbProps {
 }
 
 declare class Breadcrumb<
-  As extends React.ReactType = 'nav'
+  As extends React.ElementType = 'nav'
 > extends BsPrefixComponent<As, BreadcrumbProps> {
   static Item: typeof BreadcrumbItem;
 }

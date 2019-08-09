@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import { Placement } from './Overlay';
+import PopoverContent from './PopoverContent';
+import PopoverTitle from './PopoverTitle';
 
 import { BsPrefixComponent } from './helpers';
 
@@ -11,6 +13,9 @@ export interface PopoverProps {
   arrowProps?: { ref: any; style: object };
 }
 
-declare class Popover extends BsPrefixComponent<'div', PopoverProps> {}
+declare class Popover extends BsPrefixComponent<'div', PopoverProps> {
+  static Title: typeof PopoverTitle;
+  static Content: typeof PopoverContent;
+}
 
 export default Popover;

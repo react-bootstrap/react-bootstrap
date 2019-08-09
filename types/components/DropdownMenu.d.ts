@@ -12,7 +12,7 @@ export interface DropdownMenuProps {
 }
 
 declare class DropdownMenu<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, DropdownMenuProps> {}
 
 export default DropdownMenu;

@@ -69,6 +69,8 @@
 
     "ThemeProvider": false,
 
+    "useAccordionToggle": false, 
+
     "mountNode": false,
     "yup": false,
     "formik": false,

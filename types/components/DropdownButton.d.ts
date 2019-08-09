@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import DropdownToggle from './DropdownToggle';
 import Dropdown from './Dropdown';
+import DropdownToggle from './DropdownToggle';
 
 import { ReplaceProps } from './helpers';
 

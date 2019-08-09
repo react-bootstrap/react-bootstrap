@@ -1,18 +1,18 @@
 import * as React from 'react';
 
 import NavbarBrand from './NavbarBrand';
-import NavbarToggle from './NavbarToggle';
 import NavbarCollapse from './NavbarCollapse';
+import NavbarToggle from './NavbarToggle';
 
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
 declare class NavbarText<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 export interface NavbarProps {
   variant?: 'light' | 'dark';
-  expand?: true | 'sm' | 'md' | 'lg' | 'xl';
+  expand?: boolean | 'sm' | 'md' | 'lg' | 'xl';
   bg?: string;
   fixed?: 'top' | 'bottom';
   sticky?: 'top' | 'bottom';
@@ -24,7 +24,7 @@ export interface NavbarProps {
 }
 
 declare class Navbar<
-  As extends React.ReactType = 'nav'
+  As extends React.ElementType = 'nav'
 > extends BsPrefixComponent<As, NavbarProps> {
   static Brand: typeof NavbarBrand;
   static Toggle: typeof NavbarToggle;

@@ -20,7 +20,7 @@ export interface FormCheckProps {
 }
 
 declare class FormCheck<
-  As extends React.ReactType = 'input'
+  As extends React.ElementType = 'input'
 > extends BsPrefixComponent<As, FormCheckProps> {
   static Input: typeof FormCheckInput;
   static Label: typeof FormCheckLabel;

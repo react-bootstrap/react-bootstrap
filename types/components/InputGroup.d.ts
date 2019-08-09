@@ -3,15 +3,15 @@ import * as React from 'react';
 import { BsPrefixComponent } from './helpers';
 
 declare class InputGroupAppend<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 declare class InputGroupPrepend<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 declare class InputGroupText<
-  As extends React.ReactType = 'span'
+  As extends React.ElementType = 'span'
 > extends BsPrefixComponent<As> {}
 
 declare class InputGroupCheckbox extends BsPrefixComponent<'input'> {}
@@ -22,7 +22,7 @@ export interface InputGroupProps {
 }
 
 declare class InputGroup<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, InputGroupProps> {
   static Append: typeof InputGroupAppend;
   static Prepend: typeof InputGroupPrepend;

@@ -19,7 +19,7 @@ export interface SpinnerProps {
 }
 
 declare class Spinner<
-  As extends React.ReactType = typeof Spinner
+  As extends React.ElementType = typeof Spinner
 > extends BsPrefixComponent<As, SpinnerProps> {}
 
 export default Spinner;

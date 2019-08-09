@@ -98,7 +98,12 @@ const TocSubLink = styled(TocLink)`
   padding-top: 0.25rem;
 `;
 
-const gettingStarted = ['introduction', 'theming', 'support'];
+const gettingStarted = [
+  'introduction',
+  'why-react-bootstrap',
+  'theming',
+  'support',
+];
 
 const layout = ['grid', 'media'];
 

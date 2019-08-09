@@ -1,3 +1,38 @@
+# [1.0.0-beta.10](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2019-07-15)
+
+
+### Bug Fixes
+
+* **FormText:** 'muted' prop bug in <FormText />. ([#3901](https://github.com/react-bootstrap/react-bootstrap/issues/3901)) ([0bb8a6f](https://github.com/react-bootstrap/react-bootstrap/commit/0bb8a6f))
+* even more explicit arguments for callback function ([e4e85a3](https://github.com/react-bootstrap/react-bootstrap/commit/e4e85a3))
+* **TabPane:** wrong assigned Transition event(unmountOnExit) ([b3c44c2](https://github.com/react-bootstrap/react-bootstrap/commit/b3c44c2))
+* **types:** Alert and Badge ref typing ([d11cfed](https://github.com/react-bootstrap/react-bootstrap/commit/d11cfed))
+* **types:** type clean up for eventKey and removal of some unneeded type helpers ([6742c05](https://github.com/react-bootstrap/react-bootstrap/commit/6742c05))
+* build step due execa version bump (fix [#3964](https://github.com/react-bootstrap/react-bootstrap/issues/3964)) ([63d9a8b](https://github.com/react-bootstrap/react-bootstrap/commit/63d9a8b))
+* enzyme not properly firing event handlers during testing ([085f862](https://github.com/react-bootstrap/react-bootstrap/commit/085f862))
+* explicit arguments for function callback of ToggleButtonGroup ([c037abc](https://github.com/react-bootstrap/react-bootstrap/commit/c037abc))
+* more explicit argument syntax for ToggleButtonGroup callback ([20eb49d](https://github.com/react-bootstrap/react-bootstrap/commit/20eb49d))
+* Popover placement prop-types to correct list of props ([7c0c490](https://github.com/react-bootstrap/react-bootstrap/commit/7c0c490))
+* revert ignore linting error issue and add bindings for global ([22895f0](https://github.com/react-bootstrap/react-bootstrap/commit/22895f0))
+* separate state variables for Controlled example of Carousel ([f53405f](https://github.com/react-bootstrap/react-bootstrap/commit/f53405f))
+* Use `useRef` rather than `useState` for DOM references ([1877431](https://github.com/react-bootstrap/react-bootstrap/commit/1877431))
+
+
+### Features
+
+* Add a swipe threshold as per the upstream implementation ([3fc2ce5](https://github.com/react-bootstrap/react-bootstrap/commit/3fc2ce5))
+* Add Carousel touch support via Hammer.js ([0b6a4fa](https://github.com/react-bootstrap/react-bootstrap/commit/0b6a4fa))
+* Add useAccordionToggle hook ([140ddf7](https://github.com/react-bootstrap/react-bootstrap/commit/140ddf7))
+* modulate Popover Components ([#3811](https://github.com/react-bootstrap/react-bootstrap/issues/3811)) ([f608c42](https://github.com/react-bootstrap/react-bootstrap/commit/f608c42))
+* Re-implement touch functionality for Carousel natively ([b0d2297](https://github.com/react-bootstrap/react-bootstrap/commit/b0d2297))
+
+
+### BREAKING CHANGES
+
+* Popovers now expose sub components Content, Title for building up popovers
+
+
+
 # [1.0.0-beta.9](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.8...v1.0.0-beta.9) (2019-05-30)
 
 

@@ -34,5 +34,11 @@ module.exports = {
         'no-console': 'off',
       },
     },
+    {
+      files: ['config.js', 'gatsby-config.js', 'gatsby-node.js'],
+      settings: {
+        'import/resolver': 'node'
+      }
+    }
   ],
 };

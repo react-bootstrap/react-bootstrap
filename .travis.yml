@@ -1,29 +1,24 @@
 language: node_js
 node_js:
-  - stable
-
-cache:
-  directories:
-    - ~/.yarn-cache
-    - node_modules
-    - www/node_modules
+  - node
 
 jobs:
   include:
-    - stage: Chrome
-      env: BROWSER=ChromeCi
-      addons:
+    - addons:
         chrome: stable
-    - stage: Firefox
-      env: BROWSER=Firefox
-      addons:
+      env: BROWSER=ChromeCi
+    - addons:
         firefox: latest
+      env: BROWSER=Firefox
 
 services:
   - xvfb
 
-before_install:
-  - export DISPLAY=:99.0
+cache:
+  yarn: true
+  npm: true
+  directories:
+    - www/node_modules
 
 install:
   - yarn bootstrap

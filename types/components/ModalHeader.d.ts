@@ -9,7 +9,7 @@ export interface ModalHeaderProps {
 }
 
 declare class ModalHeader<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, ModalHeaderProps> {}
 
 export default ModalHeader;

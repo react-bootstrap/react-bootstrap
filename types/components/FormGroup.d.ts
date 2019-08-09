@@ -8,7 +8,7 @@ export interface FormGroupProps {
 }
 
 declare class Form<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, FormGroupProps> {}
 
 export default Form;

@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { TransitionCallbacks } from './helpers';
 
 export interface CollapseProps
@@ -16,6 +17,7 @@ export interface CollapseProps
   ) => number;
   role?: string;
 }
+
 declare class Collapse extends React.Component<CollapseProps> {}
 
 export default Collapse;

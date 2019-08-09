@@ -2,59 +2,67 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { uncontrollable } from 'uncontrollable';
+import { useUncontrolled } from 'uncontrollable';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import AbstractNav from './AbstractNav';
 import ListGroupItem from './ListGroupItem';
 
-class ListGroup extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'list-group'
-     */
-    bsPrefix: PropTypes.string.isRequired,
+const propTypes = {
+  /**
+   * @default 'list-group'
+   */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * Adds a variant to the list-group
-     *
-     * @type {('flush')}
-     */
-    variant: PropTypes.oneOf(['flush', null]),
+  /**
+   * Adds a variant to the list-group
+   *
+   * @type {('flush')}
+   */
+  variant: PropTypes.oneOf(['flush', null]),
 
-    /**
-     * You can use a custom element type for this component.
-     */
-    as: PropTypes.elementType,
-  };
+  /**
+   * You can use a custom element type for this component.
+   */
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    variant: null,
-  };
+const defaultProps = {
+  variant: null,
+};
 
-  render() {
-    const { className, bsPrefix, variant, as = 'div', ...props } = this.props;
-
-    return (
-      <AbstractNav
-        {...props}
-        as={as}
-        className={classNames(
-          className,
-          bsPrefix,
-          variant && `${bsPrefix}-${variant}`,
-        )}
-      />
-    );
-  }
-}
-
-const DecoratedListGroup = uncontrollable(
-  createBootstrapComponent(ListGroup, 'list-group'),
-  {
+const ListGroup = React.forwardRef((props, ref) => {
+  let {
+    className,
+    bsPrefix,
+    variant,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as = 'div',
+    ...controlledProps
+  } = useUncontrolled(props, {
     activeKey: 'onSelect',
-  },
-);
-DecoratedListGroup.Item = ListGroupItem;
+  });
 
-export default DecoratedListGroup;
+  bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group');
+
+  return (
+    <AbstractNav
+      ref={ref}
+      {...controlledProps}
+      as={as}
+      className={classNames(
+        className,
+        bsPrefix,
+        variant && `${bsPrefix}-${variant}`,
+      )}
+    />
+  );
+});
+
+ListGroup.propTypes = propTypes;
+ListGroup.defaultProps = defaultProps;
+ListGroup.displayName = 'ListGroup';
+
+ListGroup.Item = ListGroupItem;
+
+export default ListGroup;

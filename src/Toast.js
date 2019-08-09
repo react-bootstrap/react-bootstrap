@@ -1,11 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+import useTimeout from '@restart/hooks/useTimeout';
 import Fade from './Fade';
 import Header from './ToastHeader';
 import Body from './ToastBody';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import ToastContext from './ToastContext';
 
 const propTypes = {
@@ -56,76 +57,82 @@ const defaultProps = {
   transition: Fade,
 };
 
-const Toast = ({
-  bsPrefix,
-  className,
-  children,
-  transition: Transition,
-  show,
-  animation,
-  delay,
-  autohide,
-  onClose,
-  innerRef,
-  ...props
-}) => {
-  const delayRef = useRef(delay);
-  const onCloseRef = useRef(onClose);
+const Toast = React.forwardRef(
+  (
+    {
+      bsPrefix,
+      className,
+      children,
+      transition: Transition,
+      show,
+      animation,
+      delay,
+      autohide,
+      onClose,
+      ...props
+    },
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix('toast');
+    const delayRef = useRef(delay);
+    const onCloseRef = useRef(onClose);
 
-  // We use refs for these, because we don't want to restart the autohide
-  // timer in case these values change.
-  delayRef.current = delay;
-  onCloseRef.current = onClose;
+    useEffect(() => {
+      // We use refs for these, because we don't want to restart the autohide
+      // timer in case these values change.
+      delayRef.current = delay;
+      onCloseRef.current = onClose;
+    }, [delay, onClose]);
 
-  useEffect(() => {
-    if (!(autohide && show)) {
-      return undefined;
-    }
-
-    const autohideHandle = setTimeout(() => {
+    const autohideTimeout = useTimeout();
+    const autohideFunc = useCallback(() => {
+      if (!(autohide && show)) {
+        return;
+      }
       onCloseRef.current();
-    }, delayRef.current);
+    }, [autohide, show]);
 
-    return () => {
-      clearTimeout(autohideHandle);
+    autohideTimeout.set(autohideFunc, delayRef.current);
+
+    const useAnimation = useMemo(() => Transition && animation, [
+      Transition,
+      animation,
+    ]);
+
+    const toast = (
+      <div
+        {...props}
+        ref={ref}
+        className={classNames(
+          bsPrefix,
+          className,
+          !useAnimation && show && 'show',
+        )}
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        {children}
+      </div>
+    );
+
+    const toastContext = {
+      onClose,
     };
-  }, [autohide, show]);
 
-  const useAnimation = Transition && animation;
-  const toast = (
-    <div
-      {...props}
-      ref={innerRef}
-      className={classNames(
-        bsPrefix,
-        className,
-        !useAnimation && show && 'show',
-      )}
-      role="alert"
-      aria-live="assertive"
-      aria-atomic="true"
-    >
-      {children}
-    </div>
-  );
-
-  const toastContext = {
-    onClose,
-  };
-
-  return (
-    <ToastContext.Provider value={toastContext}>
-      {useAnimation ? <Transition in={show}>{toast}</Transition> : toast}
-    </ToastContext.Provider>
-  );
-};
+    return (
+      <ToastContext.Provider value={toastContext}>
+        {useAnimation ? <Transition in={show}>{toast}</Transition> : toast}
+      </ToastContext.Provider>
+    );
+  },
+);
 
 Toast.propTypes = propTypes;
 Toast.defaultProps = defaultProps;
+Toast.displayName = 'Toast';
 
-const DecoratedToast = createBootstrapComponent(Toast, 'toast');
+Toast.Body = Body;
+Toast.Header = Header;
 
-DecoratedToast.Body = Body;
-DecoratedToast.Header = Header;
-
-export default DecoratedToast;
+export default Toast;

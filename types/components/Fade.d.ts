@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import { TransitionCallbacks } from './helpers';
 
 export interface FadeProps
@@ -10,6 +11,7 @@ export interface FadeProps
   appear?: boolean;
   timeout?: number;
 }
+
 declare class Fade extends React.Component<FadeProps> {}
 
 export default Fade;

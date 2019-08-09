@@ -1,11 +1,10 @@
 # React-Bootstrap
 
+> [Bootstrap 4][bootstrap] components built with [React][react].
+
 [![Travis CI Build status][travis-badge]][travis-link]
 [![Appveyor Build status][appveyor-badge]][appveyor-link]
 [![npm][npm-badge]][npm]
-
-[Bootstrap 4][bootstrap] components built with [React][react].
-
 [![Codecov][codecov-badge]][codecov]
 [![Discord][discord-badge]][discord]
 [![Thinkful][thinkful-badge]][thinkful]
