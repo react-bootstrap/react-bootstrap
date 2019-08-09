@@ -4,6 +4,6 @@ import { BsPrefixComponent } from './helpers';
 
 declare class ToastBody<
   As extends React.ReactType = 'div'
-  > extends BsPrefixComponent<As> { }
+> extends BsPrefixComponent<As> {}
 
 export default ToastBody;

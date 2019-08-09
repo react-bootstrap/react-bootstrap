@@ -17,7 +17,7 @@ export interface FormLabelWithColProps extends FormLabelBaseProps, ColProps {
   column: true;
 }
 
-export type FormLabelProps = FormLabelWithColProps | FormLabelOwnProps
+export type FormLabelProps = FormLabelWithColProps | FormLabelOwnProps;
 
 declare class FormLabel extends BsPrefixComponent<'label', FormLabelProps> {}
 

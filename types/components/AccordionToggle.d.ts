@@ -9,6 +9,6 @@ export interface AccordionToggleProps {
 
 declare class AccordionToggle<
   As extends React.ReactType = 'button'
-  > extends BsPrefixComponent<As, AccordionToggleProps> { }
+> extends BsPrefixComponent<As, AccordionToggleProps> {}
 
 export default AccordionToggle;
