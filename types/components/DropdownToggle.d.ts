@@ -4,8 +4,7 @@ import Button from './Button';
 
 import { BsPrefixComponent } from './helpers';
 
-export interface DropdownToggleProps
-  extends React.ComponentPropsWithRef<typeof Button> {
+export interface DropdownToggleProps {
   id: string;
   split?: boolean;
   childBsPrefix?: string;
