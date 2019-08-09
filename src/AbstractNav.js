@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import qsa from 'dom-helpers/query/querySelectorAll';
 import PropTypes from 'prop-types';
+import useMergedRefs from '@restart/hooks/useMergedRefs';
 
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import NavContext from './NavContext';
 import TabContext from './TabContext';
-import { useMergedRefs } from './utils/mergedRefs';
 
 const noop = () => {};
 
