@@ -40,7 +40,7 @@
     "node-sass": "^4.12.0",
     "prismjs": "^1.17.1",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
+    "react": "^16.9.0",
     "react-docgen": "^4.1.1",
     "react-dom": "^16.8.6",
     "react-live": "^2.1.2",
