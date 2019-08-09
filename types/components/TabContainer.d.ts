@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { BsPrefixComponent, SelectCallback } from './helpers';
+import { SelectCallback } from './helpers';
 
 export interface TabContainerProps {
   id?: string;
-  transition?: false | React.ReactType;
+  transition?: false | React.ElementType;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
   generateChildId?: (eventKey: unknown, type: 'tab' | 'pane') => string;

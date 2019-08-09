@@ -13,10 +13,9 @@ export interface TabProps extends React.ComponentPropsWithRef<typeof TabPane> {
   tabClassName?: string;
 }
 
-declare class Tab<As extends React.ReactType = 'div'> extends BsPrefixComponent<
-  As,
-  TabProps
-> {
+declare class Tab<
+  As extends React.ElementType = 'div'
+> extends BsPrefixComponent<As, TabProps> {
   static Container: typeof TabContainer;
   static Content: typeof TabContent;
   static Pane: typeof TabPane;

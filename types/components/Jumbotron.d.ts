@@ -7,7 +7,7 @@ export interface JumbotronProps {
 }
 
 declare class Jumbotron<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, JumbotronProps> {}
 
 export default Jumbotron;

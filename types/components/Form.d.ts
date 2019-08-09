@@ -1,15 +1,15 @@
 import * as React from 'react';
 
-import FormGroup from './FormGroup';
-import FormControl from './FormControl';
 import FormCheck from './FormCheck';
+import FormControl from './FormControl';
+import FormGroup from './FormGroup';
 import FormLabel from './FormLabel';
 import FormText from './FormText';
 
 import { BsPrefixComponent } from './helpers';
 
 declare class FormRow<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 export interface FormProps {
@@ -19,7 +19,7 @@ export interface FormProps {
 }
 
 declare class Form<
-  As extends React.ReactType = 'form'
+  As extends React.ElementType = 'form'
 > extends BsPrefixComponent<As, FormProps> {
   static Row: typeof FormRow;
   static Group: typeof FormGroup;

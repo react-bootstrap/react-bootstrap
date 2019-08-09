@@ -1,16 +1,17 @@
 import * as React from 'react';
+
+import DropdownItem from './DropdownItem';
+import DropdownMenu from './DropdownMenu';
+import DropdownToggle from './DropdownToggle';
+
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
-import DropdownToggle from './DropdownToggle';
-import DropdownMenu from './DropdownMenu';
-import DropdownItem from './DropdownItem';
-
 declare class DropdownDivider<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 declare class DropdownHeader<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 export interface DropdownProps {
@@ -27,7 +28,7 @@ export interface DropdownProps {
 }
 
 declare class Dropdown<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, DropdownProps> {
   static Toggle: typeof DropdownToggle;
   static Menu: typeof DropdownMenu;

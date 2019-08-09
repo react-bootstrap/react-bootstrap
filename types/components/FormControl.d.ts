@@ -19,7 +19,7 @@ export interface FormControlProps {
 }
 
 declare class Form<
-  As extends React.ReactType = 'input'
+  As extends React.ElementType = 'input'
 > extends BsPrefixComponent<As, FormControlProps> {
   static Feedback: typeof Feedback;
 }

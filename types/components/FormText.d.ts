@@ -8,7 +8,7 @@ export interface FormTextProps {
 }
 
 declare class FormText<
-  As extends React.ReactType = 'small'
+  As extends React.ElementType = 'small'
 > extends BsPrefixComponent<As, FormTextProps> {}
 
 export default FormText;

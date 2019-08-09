@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import CarouselItem from './CarouselItem';
 import CarouselCaption from './CarouselCaption';
+import CarouselItem from './CarouselItem';
 
-import { ReplaceProps, SelectCallback, BsPrefixComponent } from './helpers';
+import { BsPrefixComponent } from './helpers';
 
 export interface CarouselProps {
   bsPrefix?: string;
@@ -26,7 +26,7 @@ export interface CarouselProps {
 }
 
 declare class Carousel<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, CarouselProps> {
   static Item: typeof CarouselItem;
   static Caption: typeof CarouselCaption;

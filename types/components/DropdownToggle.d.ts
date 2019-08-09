@@ -12,7 +12,7 @@ export interface DropdownToggleProps
 }
 
 declare class DropdownToggle<
-  As extends React.ReactType = typeof Button
+  As extends React.ElementType = typeof Button
 > extends BsPrefixComponent<As, DropdownToggleProps> {}
 
 export default DropdownToggle;

@@ -1,8 +1,9 @@
 import * as React from 'react';
 
-import { BsPrefixComponent } from './helpers';
-import AccordionToggle from './AccordionToggle';
 import AccordionCollapse from './AccordionCollapse';
+import AccordionToggle from './AccordionToggle';
+
+import { BsPrefixComponent } from './helpers';
 
 export interface AccordionProps {
   activeKey?: string;

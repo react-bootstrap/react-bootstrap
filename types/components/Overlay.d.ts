@@ -28,7 +28,7 @@ export interface OverlayProps extends TransitionCallbacks {
   rootClose?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
   onHide?: () => void;
-  transition?: boolean | React.ReactType;
+  transition?: boolean | React.ElementType;
   placement?: Placement;
 }
 

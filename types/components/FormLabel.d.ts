@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import { BsPrefixComponent } from './helpers';
 import { ColProps } from './Col';
+
+import { BsPrefixComponent } from './helpers';
 
 interface FormLabelBaseProps {
   htmlFor?: string;

@@ -8,7 +8,7 @@ export interface ToastHeaderProps {
 }
 
 declare class ToastHeader<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, ToastHeaderProps> {}
 
 export default ToastHeader;

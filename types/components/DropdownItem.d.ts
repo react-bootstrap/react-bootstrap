@@ -14,7 +14,7 @@ export interface DropdownItemProps {
 }
 
 declare class DropdownItem<
-  As extends React.ReactType = typeof SafeAnchor
+  As extends React.ElementType = typeof SafeAnchor
 > extends BsPrefixComponent<As, DropdownItemProps> {}
 
 export default DropdownItem;

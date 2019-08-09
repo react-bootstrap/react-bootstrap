@@ -1,21 +1,19 @@
 {
   "compilerOptions": {
-    "baseUrl": "../",
     "forceConsistentCasingInFileNames": true,
     "jsx": "react",
-    "lib": ["dom", "es2016", "esnext.asynciterable"],
+    "lib": ["es2016", "dom"],
     "module": "commonjs",
-    "noEmit": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "strict": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
-    "target": "es5",
-    "typeRoots": ["../"],
     "types": [],
+    "noEmit": true,
+    "baseUrl": ".",
     "paths": {
-      "react-bootstrap": ["types/index.d.ts"]
+      "react-bootstrap": ["."]
     }
   }
 }

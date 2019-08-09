@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import SafeAnchor from './SafeAnchor';
 
 import { BsPrefixComponent } from './helpers';

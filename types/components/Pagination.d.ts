@@ -1,6 +1,4 @@
-import * as React from 'react';
-
-import PageItem, { First, Prev, Ellipsis, Next, Last } from './PageItem';
+import PageItem, { Ellipsis, First, Last, Next, Prev } from './PageItem';
 
 import { BsPrefixComponent } from './helpers';
 
