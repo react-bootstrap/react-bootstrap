@@ -26,5 +26,6 @@ const AccordionCollapse = React.forwardRef(
 );
 
 AccordionCollapse.propTypes = propTypes;
+AccordionCollapse.displayName = 'AccordionCollapse';
 
 export default AccordionCollapse;
