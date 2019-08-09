@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import { Placement } from './Overlay';
 
 import { BsPrefixComponent } from './helpers';

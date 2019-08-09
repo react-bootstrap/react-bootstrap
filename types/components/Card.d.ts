@@ -1,39 +1,39 @@
 import * as React from 'react';
 
-import { default as CardImg } from './CardImg';
+import CardImg from './CardImg';
 
 import { BsPrefixComponent } from './helpers';
 
 declare class CardTitle<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 declare class CardSubtitle<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 declare class CardBody<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 declare class CardLink<
-  As extends React.ReactType = 'a'
+  As extends React.ElementType = 'a'
 > extends BsPrefixComponent<As> {}
 
 declare class CardText<
-  As extends React.ReactType = 'p'
+  As extends React.ElementType = 'p'
 > extends BsPrefixComponent<As> {}
 
 declare class CardHeader<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 declare class CardFooter<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 declare class CardImgOverlay<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 export interface CardProps {
@@ -70,7 +70,7 @@ export interface CardProps {
 }
 
 declare class Card<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, CardProps> {
   static Img: typeof CardImg;
   static Title: typeof CardTitle;

@@ -9,14 +9,14 @@ export interface TabsProps {
   defaultActiveKey?: unknown;
   onSelect?: SelectCallback;
   variant?: 'tabs' | 'pills';
-  transition?: false | React.ReactType;
+  transition?: false | React.ElementType;
   id: string;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
 }
 
 declare class Tabs<
-  As extends React.ReactType = typeof Nav
+  As extends React.ElementType = typeof Nav
 > extends BsPrefixComponent<As, TabsProps> {}
 
 export default Tabs;

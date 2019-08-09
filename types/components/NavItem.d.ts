@@ -7,7 +7,7 @@ export interface NavItemProps {
 }
 
 declare class NavItem<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, NavItemProps> {}
 
 export default NavItem;

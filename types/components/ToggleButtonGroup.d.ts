@@ -25,7 +25,7 @@ export type ToggleButtonGroupProps<T> =
 
 declare class ToggleButtonGroup<
   T,
-  As extends React.ReactType = typeof ButtonGroup
+  As extends React.ElementType = typeof ButtonGroup
 > extends BsPrefixComponent<As, ToggleButtonGroupProps<T>> {}
 
 export default ToggleButtonGroup;

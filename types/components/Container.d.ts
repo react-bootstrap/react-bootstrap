@@ -7,7 +7,7 @@ export interface ContainerProps {
 }
 
 declare class Container<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, ContainerProps> {}
 
 export default Container;

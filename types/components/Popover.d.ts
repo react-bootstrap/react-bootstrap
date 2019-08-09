@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import { Placement } from './Overlay';
-
-import { BsPrefixComponent } from './helpers';
 import PopoverContent from './PopoverContent';
 import PopoverTitle from './PopoverTitle';
+
+import { BsPrefixComponent } from './helpers';
 
 export interface PopoverProps {
   id: string | number;

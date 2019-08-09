@@ -14,7 +14,7 @@ export interface NavLinkProps {
 }
 
 declare class NavLink<
-  As extends React.ReactType = typeof SafeAnchor
+  As extends React.ElementType = typeof SafeAnchor
 > extends BsPrefixComponent<As, NavLinkProps> {}
 
 export default NavLink;

@@ -7,7 +7,7 @@ export interface CardImgProps {
 }
 
 declare class CardImg<
-  As extends React.ReactType = 'img'
+  As extends React.ElementType = 'img'
 > extends BsPrefixComponent<As, CardImgProps> {}
 
 export default CardImg;

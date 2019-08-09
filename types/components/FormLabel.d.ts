@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import { BsPrefixComponent } from './helpers';
 import { ColProps } from './Col';
+
+import { BsPrefixComponent } from './helpers';
 
 interface FormLabelBaseProps {
   htmlFor?: string;
@@ -17,7 +18,7 @@ export interface FormLabelWithColProps extends FormLabelBaseProps, ColProps {
   column: true;
 }
 
-export type FormLabelProps = FormLabelWithColProps | FormLabelOwnProps
+export type FormLabelProps = FormLabelWithColProps | FormLabelOwnProps;
 
 declare class FormLabel extends BsPrefixComponent<'label', FormLabelProps> {}
 

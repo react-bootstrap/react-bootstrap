@@ -10,7 +10,7 @@ export interface ButtonGroupProps {
 }
 
 declare class ButtonGroup<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, ButtonGroupProps> {}
 
 export default ButtonGroup;

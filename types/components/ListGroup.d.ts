@@ -12,7 +12,7 @@ export interface ListGroupProps {
 }
 
 declare class ListGroup<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, ListGroupProps> {
   static Item: typeof ListGroupItem;
 }
