@@ -117,3 +117,6 @@ export {
   ToggleButtonRadioProps,
 } from './ToggleButtonGroup';
 export { default as Tooltip, TooltipProps } from './Tooltip';
+export { default as Toast, ToastProps } from './Toast';
+export { default as ToastHeader, ToastHeaderProps } from './ToastHeader';
+export { default as ToastBody } from './ToastBody';
