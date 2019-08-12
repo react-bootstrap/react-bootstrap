@@ -238,13 +238,4 @@ describe('<Carousel>', () => {
     const wrapper = mount(<Carousel>{items}</Carousel>);
     wrapper.find('div').length.should.equal(4);
   });
-
-  it('Should move backwards if left control is clicked on the first item', () => {
-    const wrapper = mount(<Carousel defaultActiveIndex={0}>{items}</Carousel>);
-    wrapper.find('a.carousel-control-prev').simulate('click');
-
-    setTimeout(() => {
-      wrapper.assertSingle('.carousel-item-left');
-    }, 100);
-  });
 });
