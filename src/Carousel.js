@@ -99,7 +99,7 @@ class Carousel extends React.Component {
     this.waitForNext();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) { // eslint-disable-line
     const activeIndex = this.getActiveIndex();
 
     if (
