@@ -49,7 +49,7 @@ function FormExample() {
                 name="lastName"
                 value={values.lastName}
                 onChange={handleChange}
-                isValid={touched.firstName && !errors.lastName}
+                isValid={touched.lastName && !errors.lastName}
               />
 
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
