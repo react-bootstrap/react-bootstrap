@@ -22,7 +22,7 @@
     "dom-helpers": "^3.4.0",
     "formik": "^1.5.8",
     "gatsby": "^2.13.61",
-    "gatsby-link": "^2.2.2",
+    "gatsby-link": "^2.2.5",
     "gatsby-plugin-astroturf": "^0.2.1",
     "gatsby-plugin-catch-links": "^2.1.2",
     "gatsby-plugin-mdx": "^1.0.23",
