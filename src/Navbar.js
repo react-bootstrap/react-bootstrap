@@ -2,19 +2,19 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { uncontrollable } from 'uncontrollable';
+import { useUncontrolled } from 'uncontrollable';
 
 import createWithBsPrefix from './utils/createWithBsPrefix';
 import NavbarBrand from './NavbarBrand';
 import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
 import SelectableContext from './SelectableContext';
 
 const propTypes = {
   /** @default 'navbar' */
-  bsPrefix: PropTypes.string.isRequired,
+  bsPrefix: PropTypes.string,
 
   /**
    * The general visual variant a the Navbar.
@@ -122,103 +122,82 @@ const defaultProps = {
   collapseOnSelect: false,
 };
 
-class Navbar extends React.Component {
-  state = {
-    navbarContext: {
-      onToggle: () => this.handleToggle(),
-    },
-  };
+const Navbar = React.forwardRef((props, ref) => {
+  let {
+    bsPrefix,
+    expand,
+    variant,
+    bg,
+    fixed,
+    sticky,
+    className,
+    children,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as: Component = 'nav',
+    expanded,
+    onToggle,
+    onSelect,
+    collapseOnSelect,
+    ...controlledProps
+  } = useUncontrolled(props, {
+    expanded: 'onToggle',
+  });
 
-  static getDerivedStateFromProps({ bsPrefix, expanded }, prevState) {
-    return {
-      navbarContext: {
-        ...prevState.navbarContext,
-        bsPrefix,
-        expanded,
-      },
-    };
-  }
+  bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar');
 
-  handleCollapse = (...args) => {
-    const { onToggle, expanded, collapseOnSelect, onSelect } = this.props;
-
+  const handleCollapse = (...args) => {
     if (onSelect) onSelect(...args);
     if (collapseOnSelect && expanded) {
       onToggle(false);
     }
   };
 
-  handleToggle = () => {
-    const { onToggle, expanded } = this.props;
-
+  const handleToggle = () => {
     onToggle(!expanded);
   };
 
-  render() {
-    const {
-      bsPrefix,
-      expand,
-      variant,
-      bg,
-      fixed,
-      sticky,
-      className,
-      children,
-      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as: Component = 'nav',
-      expanded: _1,
-      onToggle: _2,
-      onSelect: _3,
-      collapseOnSelect: _4,
-      ...props
-    } = this.props;
-
-    // will result in some false positives but that seems better
-    // than false negatives. strict `undefined` check allows explicit
-    // "nulling" of the role if the user really doesn't want one
-    if (props.role === undefined && Component !== 'nav') {
-      props.role = 'navigation';
-    }
-    let expandClass = `${bsPrefix}-expand`;
-    if (typeof expand === 'string') expandClass = `${expandClass}-${expand}`;
-
-    return (
-      <NavbarContext.Provider value={this.state.navbarContext}>
-        <SelectableContext.Provider value={this.handleCollapse}>
-          <Component
-            {...props}
-            className={classNames(
-              className,
-              bsPrefix,
-              expand && expandClass,
-              variant && `${bsPrefix}-${variant}`,
-              bg && `bg-${bg}`,
-              sticky && `sticky-${sticky}`,
-              fixed && `fixed-${fixed}`,
-            )}
-          >
-            {children}
-          </Component>
-        </SelectableContext.Provider>
-      </NavbarContext.Provider>
-    );
+  // will result in some false positives but that seems better
+  // than false negatives. strict `undefined` check allows explicit
+  // "nulling" of the role if the user really doesn't want one
+  if (controlledProps.role === undefined && Component !== 'nav') {
+    controlledProps.role = 'navigation';
   }
-}
+  let expandClass = `${bsPrefix}-expand`;
+  if (typeof expand === 'string') expandClass = `${expandClass}-${expand}`;
+
+  return (
+    <NavbarContext.Provider value={{ handleToggle, bsPrefix, expanded }}>
+      <SelectableContext.Provider value={handleCollapse}>
+        <Component
+          ref={ref}
+          {...controlledProps}
+          className={classNames(
+            className,
+            bsPrefix,
+            expand && expandClass,
+            variant && `${bsPrefix}-${variant}`,
+            bg && `bg-${bg}`,
+            sticky && `sticky-${sticky}`,
+            fixed && `fixed-${fixed}`,
+          )}
+        >
+          {children}
+        </Component>
+      </SelectableContext.Provider>
+    </NavbarContext.Provider>
+  );
+});
 
 Navbar.propTypes = propTypes;
 Navbar.defaultProps = defaultProps;
+Navbar.displayName = 'Navbar';
 
-const DecoratedNavbar = createBootstrapComponent(
-  uncontrollable(Navbar, { expanded: 'onToggle' }),
-  'navbar',
-);
+Navbar.Brand = NavbarBrand;
+Navbar.Toggle = NavbarToggle;
+Navbar.Collapse = NavbarCollapse;
 
-DecoratedNavbar.Brand = NavbarBrand;
-DecoratedNavbar.Toggle = NavbarToggle;
-DecoratedNavbar.Collapse = NavbarCollapse;
-
-DecoratedNavbar.Text = createWithBsPrefix('navbar-text', {
+Navbar.Text = createWithBsPrefix('navbar-text', {
   Component: 'span',
 });
 
-export default DecoratedNavbar;
+export default Navbar;
