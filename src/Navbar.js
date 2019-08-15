@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 
 import { useUncontrolled } from 'uncontrollable';
@@ -145,12 +145,15 @@ const Navbar = React.forwardRef((props, ref) => {
 
   bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar');
 
-  const handleCollapse = (...args) => {
-    if (onSelect) onSelect(...args);
-    if (collapseOnSelect && expanded) {
-      onToggle(false);
-    }
-  };
+  const handleCollapse = useCallback(
+    (...args) => {
+      if (onSelect) onSelect(...args);
+      if (collapseOnSelect && expanded) {
+        onToggle(false);
+      }
+    },
+    [onSelect, collapseOnSelect, expanded, onToggle],
+  );
 
   // will result in some false positives but that seems better
   // than false negatives. strict `undefined` check allows explicit
