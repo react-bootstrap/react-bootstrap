@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { useUncontrolled } from 'uncontrollable';
@@ -152,10 +152,6 @@ const Navbar = React.forwardRef((props, ref) => {
     }
   };
 
-  const handleToggle = () => {
-    onToggle(!expanded);
-  };
-
   // will result in some false positives but that seems better
   // than false negatives. strict `undefined` check allows explicit
   // "nulling" of the role if the user really doesn't want one
@@ -165,8 +161,17 @@ const Navbar = React.forwardRef((props, ref) => {
   let expandClass = `${bsPrefix}-expand`;
   if (typeof expand === 'string') expandClass = `${expandClass}-${expand}`;
 
+  const navbarContext = useMemo(
+    () => ({
+      handleToggle: () => onToggle(!expanded),
+      bsPrefix,
+      expanded,
+    }),
+    [bsPrefix, expanded, onToggle],
+  );
+
   return (
-    <NavbarContext.Provider value={{ handleToggle, bsPrefix, expanded }}>
+    <NavbarContext.Provider value={navbarContext}>
       <SelectableContext.Provider value={handleCollapse}>
         <Component
           ref={ref}
