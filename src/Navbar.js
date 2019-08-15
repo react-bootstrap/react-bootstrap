@@ -166,7 +166,7 @@ const Navbar = React.forwardRef((props, ref) => {
 
   const navbarContext = useMemo(
     () => ({
-      handleToggle: () => onToggle(!expanded),
+      onToggle: () => onToggle(!expanded),
       bsPrefix,
       expanded,
     }),
