@@ -2,20 +2,21 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-declare class InputGroupAppend<
+export declare class InputGroupAppend<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class InputGroupPrepend<
+export declare class InputGroupPrepend<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class InputGroupText<
+export declare class InputGroupText<
   As extends React.ElementType = 'span'
 > extends BsPrefixComponent<As> {}
 
-declare class InputGroupCheckbox extends BsPrefixComponent<'input'> {}
-declare class InputGroupRadio extends BsPrefixComponent<'input'> {}
+export declare class InputGroupCheckbox extends BsPrefixComponent<'input'> {}
+
+export declare class InputGroupRadio extends BsPrefixComponent<'input'> {}
 
 export interface InputGroupProps {
   size?: 'sm' | 'lg';

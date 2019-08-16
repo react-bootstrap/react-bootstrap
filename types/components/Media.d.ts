@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-declare class MediaBody<
+export declare class MediaBody<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 

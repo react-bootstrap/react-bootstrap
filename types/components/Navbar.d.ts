@@ -6,7 +6,7 @@ import NavbarToggle from './NavbarToggle';
 
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
-declare class NavbarText<
+export declare class NavbarText<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 

@@ -4,11 +4,11 @@ import SafeAnchor from './SafeAnchor';
 
 import { BsPrefixComponent } from './helpers';
 
-declare class AlertLink<
+export declare class AlertLink<
   As extends React.ElementType = typeof SafeAnchor
 > extends BsPrefixComponent<As> {}
 
-declare class AlertHeading<
+export declare class AlertHeading<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 

@@ -8,7 +8,7 @@ import FormText from './FormText';
 
 import { BsPrefixComponent } from './helpers';
 
-declare class FormRow<
+export declare class FormRow<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 

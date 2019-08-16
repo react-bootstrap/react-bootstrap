@@ -4,35 +4,38 @@ import CardImg from './CardImg';
 
 import { BsPrefixComponent } from './helpers';
 
-declare class CardTitle<
+// These are exported so they can be re-used in other definitions. They should
+// not be used directly.
+
+export declare class CardTitle<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class CardSubtitle<
+export declare class CardSubtitle<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class CardBody<
+export declare class CardBody<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class CardLink<
+export declare class CardLink<
   As extends React.ElementType = 'a'
 > extends BsPrefixComponent<As> {}
 
-declare class CardText<
+export declare class CardText<
   As extends React.ElementType = 'p'
 > extends BsPrefixComponent<As> {}
 
-declare class CardHeader<
+export declare class CardHeader<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class CardFooter<
+export declare class CardFooter<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class CardImgOverlay<
+export declare class CardImgOverlay<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
