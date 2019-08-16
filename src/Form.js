@@ -1,14 +1,14 @@
 import classNames from 'classnames';
-import React from 'react';
 import PropTypes from 'prop-types';
-
-import createWithBsPrefix from './utils/createWithBsPrefix';
-import { useBootstrapPrefix } from './ThemeProvider';
-import FormGroup from './FormGroup';
-import FormControl from './FormControl';
+import React from 'react';
 import FormCheck from './FormCheck';
+import FormControl from './FormControl';
+import FormGroup from './FormGroup';
 import FormLabel from './FormLabel';
 import FormText from './FormText';
+import Switch from './Switch';
+import { useBootstrapPrefix } from './ThemeProvider';
+import createWithBsPrefix from './utils/createWithBsPrefix';
 
 const propTypes = {
   /**
@@ -80,6 +80,7 @@ Form.Row = createWithBsPrefix('form-row');
 Form.Group = FormGroup;
 Form.Control = FormControl;
 Form.Check = FormCheck;
+Form.Switch = Switch;
 Form.Label = FormLabel;
 Form.Text = FormText;
 
