@@ -6,11 +6,11 @@ import DropdownToggle from './DropdownToggle';
 
 import { BsPrefixComponent, SelectCallback } from './helpers';
 
-declare class DropdownDivider<
+export class DropdownDivider<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class DropdownHeader<
+export class DropdownHeader<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 

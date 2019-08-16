@@ -4,35 +4,35 @@ import CardImg from './CardImg';
 
 import { BsPrefixComponent } from './helpers';
 
-declare class CardTitle<
+export class CardTitle<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class CardSubtitle<
+export class CardSubtitle<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class CardBody<
+export class CardBody<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class CardLink<
+export class CardLink<
   As extends React.ElementType = 'a'
 > extends BsPrefixComponent<As> {}
 
-declare class CardText<
+export class CardText<
   As extends React.ElementType = 'p'
 > extends BsPrefixComponent<As> {}
 
-declare class CardHeader<
+export class CardHeader<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class CardFooter<
+export class CardFooter<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-declare class CardImgOverlay<
+export class CardImgOverlay<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
