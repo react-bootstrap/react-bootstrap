@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const path = require('path');
 const fse = require('fs-extra');
 const execa = require('execa');
-const cherryPick = require('../../cherry-pick').default;
+const cherryPick = require('cherry-pick').default;
 const getConfig = require('./dist.webpack.config');
 
 const targets = process.argv.slice(2);
