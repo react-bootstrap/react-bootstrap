@@ -1,28 +1,28 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-
-import withLayout from '../../withLayout';
-import LinkedHeading from '../../components/LinkedHeading';
+import Callout from '../../components/Callout';
 import ComponentApi from '../../components/ComponentApi';
+import LinkedHeading from '../../components/LinkedHeading';
 import ReactPlayground from '../../components/ReactPlayground';
-
 import FormBasic from '../../examples/Form/Basic';
-import FormTextControls from '../../examples/Form/TextControls';
-import FormInputSizes from '../../examples/Form/InputSizes';
-import Plaintext from '../../examples/Form/Plaintext';
 import Check from '../../examples/Form/Check';
-import CheckInline from '../../examples/Form/CheckInline';
-import NoLabels from '../../examples/Form/NoLabels';
-import FormGroup from '../../examples/Form/FormGroup';
-import GridBasic from '../../examples/Form/GridBasic';
-import FormRow from '../../examples/Form/FormRow';
-import GridComplex from '../../examples/Form/GridComplex';
-import Horizontal from '../../examples/Form/Horizontal';
-import ValidationNative from '../../examples/Form/ValidationNative';
-import ValidationFormik from '../../examples/Form/ValidationFormik';
 import CheckApi from '../../examples/Form/CheckApi';
 import CheckCustom from '../../examples/Form/CheckCustom';
 import CheckCustomInline from '../../examples/Form/CheckCustomInline';
+import CheckInline from '../../examples/Form/CheckInline';
+import FormGroup from '../../examples/Form/FormGroup';
+import FormRow from '../../examples/Form/FormRow';
+import GridBasic from '../../examples/Form/GridBasic';
+import GridComplex from '../../examples/Form/GridComplex';
+import Horizontal from '../../examples/Form/Horizontal';
+import FormInputSizes from '../../examples/Form/InputSizes';
+import NoLabels from '../../examples/Form/NoLabels';
+import Plaintext from '../../examples/Form/Plaintext';
+import Switch from '../../examples/Form/Switch';
+import FormTextControls from '../../examples/Form/TextControls';
+import ValidationFormik from '../../examples/Form/ValidationFormik';
+import ValidationNative from '../../examples/Form/ValidationNative';
+import withLayout from '../../withLayout';
 
 export default withLayout(function FormControlsSection({ data }) {
   return (
@@ -263,6 +263,21 @@ export default withLayout(function FormControlsSection({ data }) {
         prop.
       </p>
       <ReactPlayground codeText={CheckCustom} />
+
+      <LinkedHeading h="3" id="forms-custom-switch">
+        Switches
+      </LinkedHeading>
+      <p>
+        A switch has the markup of a custom checkbox but uses{' '}
+        <code>type="switch"</code> to render a toggle switch. Switches also
+        support the same customizable children as <code>{'<FormCheck>'}</code>.
+      </p>
+
+      <ReactPlayground codeText={Switch} />
+      <Callout>
+        You can also use the <code>{'<Form.Switch>'}</code> alias which
+        encapsulates the above, in a very small component wrapper.
+      </Callout>
 
       <h3>Inline</h3>
       <ReactPlayground codeText={CheckCustomInline} />

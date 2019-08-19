@@ -1,18 +1,25 @@
 import classNames from 'classnames';
-import React, { useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
-
-import { useBootstrapPrefix } from './ThemeProvider';
-import FormContext from './FormContext';
+import all from 'prop-types-extra/lib/all';
+import React, { useContext, useMemo } from 'react';
 import Feedback from './Feedback';
 import FormCheckInput from './FormCheckInput';
 import FormCheckLabel from './FormCheckLabel';
+import FormContext from './FormContext';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /**
    * @default 'form-check'
    */
   bsPrefix: PropTypes.string,
+
+  /**
+   * A seperate bsPrefix used for custom controls
+   *
+   * @default 'custom-control'
+   */
+  bsCustomPrefix: PropTypes.string,
 
   /**
    * The FormCheck `ref` will be forwarded to the underlying input element,
@@ -29,7 +36,7 @@ const propTypes = {
   /**
    * Provide a function child to manually handle the layout of the FormCheck's inner components.
    *
-   * ````
+   * ```jsx
    * <FormCheck>
    *   <FormCheck.Input isInvalid type={radio} />
    *   <FormCheck.Label>Allow us to contact you?</FormCheck.Label>
@@ -47,8 +54,17 @@ const propTypes = {
   /** Use Bootstrap's custom form elements to replace the browser defaults */
   custom: PropTypes.bool,
 
-  /** The type of checkable. */
-  type: PropTypes.oneOf(['radio', 'checkbox']).isRequired,
+  /**
+   * The type of checkable.
+   * @type {('radio' | 'checkbox' | 'switch')}
+   */
+  type: all(
+    PropTypes.oneOf(['radio', 'checkbox', 'switch']).isRequired,
+    ({ type, custom }) =>
+      type === 'switch' && custom === false
+        ? Error('`custom` cannot be set to `false` when the type is `switch`')
+        : null,
+  ),
 
   /** Manually style the input as valid */
   isValid: PropTypes.bool.isRequired,
@@ -74,6 +90,7 @@ const FormCheck = React.forwardRef(
     {
       id,
       bsPrefix,
+      bsCustomPrefix,
       inline,
       disabled,
       isValid,
@@ -85,12 +102,16 @@ const FormCheck = React.forwardRef(
       type,
       label,
       children,
-      custom,
+      custom: propCustom,
       ...props
     },
     ref,
   ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check');
+    const custom = type === 'switch' ? true : propCustom;
+
+    bsPrefix = custom
+      ? useBootstrapPrefix(bsCustomPrefix, 'custom-control')
+      : useBootstrapPrefix(bsPrefix, 'form-check');
 
     const { controlId } = useContext(FormContext);
     const innerFormContext = useMemo(
@@ -106,7 +127,7 @@ const FormCheck = React.forwardRef(
     const input = (
       <FormCheckInput
         {...props}
-        type={type}
+        type={type === 'switch' ? 'checkbox' : type}
         ref={ref}
         isValid={isValid}
         isInvalid={isInvalid}
@@ -121,9 +142,9 @@ const FormCheck = React.forwardRef(
           style={style}
           className={classNames(
             className,
-            !custom && bsPrefix,
-            custom && `custom-control custom-${type}`,
-            inline && `${custom ? 'custom-control' : bsPrefix}-inline`,
+            bsPrefix,
+            custom && `custom-${type}`,
+            inline && `${bsPrefix}-inline`,
           )}
         >
           {children || (

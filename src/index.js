@@ -25,6 +25,7 @@ export Fade from './Fade';
 export Form from './Form';
 export FormControl from './FormControl';
 export FormCheck from './FormCheck';
+export Switch from './Switch';
 export FormGroup from './FormGroup';
 export FormLabel from './FormLabel';
 export FormText from './FormText';
