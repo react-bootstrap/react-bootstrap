@@ -1,15 +1,21 @@
 import classNames from 'classnames';
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-
-import { useBootstrapPrefix } from './ThemeProvider';
+import React, { useContext } from 'react';
 import FormContext from './FormContext';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /**
    * @default 'form-check-input'
    */
   bsPrefix: PropTypes.string,
+
+  /**
+   * A seperate bsPrefix used for custom controls
+   *
+   * @default 'custom-control'
+   */
+  bsCustomPrefix: PropTypes.string,
 
   /** A HTML id attribute, necessary for proper form accessibility. */
   id: PropTypes.string,
@@ -36,12 +42,22 @@ const defaultProps = {
 
 const FormCheckInput = React.forwardRef(
   (
-    { id, bsPrefix, className, isValid, isInvalid, isStatic, ...props },
+    {
+      id,
+      bsPrefix,
+      bsCustomPrefix,
+      className,
+      isValid,
+      isInvalid,
+      isStatic,
+      ...props
+    },
     ref,
   ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check-input');
-
     const { controlId, custom } = useContext(FormContext);
+    bsPrefix = custom
+      ? useBootstrapPrefix(bsCustomPrefix, 'custom-control-input')
+      : useBootstrapPrefix(bsPrefix, 'form-check-input');
 
     return (
       <input
@@ -50,8 +66,7 @@ const FormCheckInput = React.forwardRef(
         id={id || controlId}
         className={classNames(
           className,
-          !custom && bsPrefix,
-          custom && 'custom-control-input',
+          bsPrefix,
           isValid && 'is-valid',
           isInvalid && 'is-invalid',
           isStatic && 'position-static',

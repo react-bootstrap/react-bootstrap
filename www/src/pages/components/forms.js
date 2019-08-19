@@ -270,7 +270,7 @@ export default withLayout(function FormControlsSection({ data }) {
       <p>
         A switch has the markup of a custom checkbox but uses{' '}
         <code>type="switch"</code> to render a toggle switch. Switches also
-        support the same custom.
+        support the same customizable children as <code>{'<FormCheck>'}</code>.
       </p>
 
       <ReactPlayground codeText={Switch} />

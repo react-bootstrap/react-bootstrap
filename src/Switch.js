@@ -2,7 +2,7 @@ import React from 'react';
 import FormCheck from './FormCheck';
 
 const Switch = React.forwardRef((props, ref) => (
-  <FormCheck {...props} ref={ref} custom type="switch" />
+  <FormCheck {...props} ref={ref} type="switch" />
 ));
 
 Switch.displayName = 'Switch';

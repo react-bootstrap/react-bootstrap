@@ -1,9 +1,7 @@
 import classNames from 'classnames';
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-
+import React, { useContext } from 'react';
 import warning from 'warning';
-
 import Feedback from './Feedback';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -33,7 +31,7 @@ const propTypes = {
   /**
    * The underlying HTML element to use when rendering the FormControl.
    *
-   * @type {('input'|'textarea'|elementType)}
+   * @type {('input'|'textarea'|'select'|elementType)}
    */
   as: PropTypes.elementType,
 

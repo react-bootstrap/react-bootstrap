@@ -15,6 +15,13 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
+   * A seperate bsPrefix used for custom controls
+   *
+   * @default 'custom-control'
+   */
+  bsCustomPrefix: PropTypes.string,
+
+  /**
    * The FormCheck `ref` will be forwarded to the underlying input element,
    * which means it will be a DOM node, when resolved.
    *
@@ -29,7 +36,7 @@ const propTypes = {
   /**
    * Provide a function child to manually handle the layout of the FormCheck's inner components.
    *
-   * ````
+   * ```jsx
    * <FormCheck>
    *   <FormCheck.Input isInvalid type={radio} />
    *   <FormCheck.Label>Allow us to contact you?</FormCheck.Label>
@@ -83,6 +90,7 @@ const FormCheck = React.forwardRef(
     {
       id,
       bsPrefix,
+      bsCustomPrefix,
       inline,
       disabled,
       isValid,
@@ -94,13 +102,16 @@ const FormCheck = React.forwardRef(
       type,
       label,
       children,
+      custom: propCustom,
       ...props
     },
     ref,
   ) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check');
+    const custom = type === 'switch' ? true : propCustom;
 
-    const custom = type === 'switch' ? true : props.custom;
+    bsPrefix = custom
+      ? useBootstrapPrefix(bsCustomPrefix, 'custom-control')
+      : useBootstrapPrefix(bsPrefix, 'form-check');
 
     const { controlId } = useContext(FormContext);
     const innerFormContext = useMemo(
@@ -131,9 +142,9 @@ const FormCheck = React.forwardRef(
           style={style}
           className={classNames(
             className,
-            !custom && bsPrefix,
-            custom && `custom-control custom-${type}`,
-            inline && `${custom ? 'custom-control' : bsPrefix}-inline`,
+            bsPrefix,
+            custom && `custom-${type}`,
+            inline && `${bsPrefix}-inline`,
           )}
         >
           {children || (
