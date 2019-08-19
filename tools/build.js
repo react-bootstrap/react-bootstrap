@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const path = require('path');
 const fse = require('fs-extra');
 const execa = require('execa');
+const cherryPick = require('cherry-pick').default;
 const getConfig = require('./dist.webpack.config');
 
 const targets = process.argv.slice(2);
@@ -13,11 +14,12 @@ const typesRoot = path.join(__dirname, '../types');
 
 const libRoot = path.join(__dirname, '../lib');
 const distRoot = path.join(libRoot, 'dist');
-const esRoot = path.join(libRoot, 'es');
+const cjsRoot = path.join(libRoot, 'cjs');
+const esRoot = path.join(libRoot, 'esm');
 
 const clean = () => fse.existsSync(libRoot) && fse.removeSync(libRoot);
 
-const step = (name, root, fn) => async () => {
+const step = (name, fn) => async () => {
   console.log(cyan('Building: ') + green(name));
   await fn();
   console.log(cyan('Built: ') + green(name));
@@ -34,8 +36,8 @@ const copyTypes = dest => shell(`cpy ${typesRoot}/components/*.d.ts ${dest}`);
  * Run babel over the src directory and output
  * compiled common js files to ./lib.
  */
-const buildLib = step('commonjs modules', libRoot, async () => {
-  await shell(`npx babel ${srcRoot} --out-dir ${libRoot} --env-name "lib"`);
+const buildLib = step('commonjs modules', async () => {
+  await shell(`npx babel ${srcRoot} --out-dir ${cjsRoot} --env-name "cjs"`);
   await copyTypes(libRoot);
 });
 
@@ -43,7 +45,7 @@ const buildLib = step('commonjs modules', libRoot, async () => {
  * Run babel over the src directory and output
  * compiled es modules (but otherwise es5) to /es
  */
-const buildEsm = step('es modules', esRoot, async () => {
+const buildEsm = step('es modules', async () => {
   await shell(`npx babel ${srcRoot} --out-dir ${esRoot} --env-name "esm"`);
   await copyTypes(esRoot);
 });
@@ -54,7 +56,6 @@ const buildEsm = step('es modules', esRoot, async () => {
  */
 const buildDist = step(
   'browser distributable',
-  distRoot,
   () =>
     new Promise((resolve, reject) => {
       webpack(
@@ -71,6 +72,16 @@ const buildDist = step(
     }),
 );
 
+const buildDirectories = step('Linking directories', () =>
+  cherryPick({
+    name: require('../package.json').name,
+    inputDir: '../src',
+    cjsDir: 'cjs',
+    esmDir: 'esm',
+    cwd: libRoot,
+  }),
+);
+
 console.log(
   green(`Building targets: ${targets.length ? targets.join(', ') : 'all'}\n`),
 );
@@ -81,7 +92,9 @@ Promise.all([
   has('lib') && buildLib(),
   has('es') && buildEsm(),
   has('dist') && buildDist(),
-]).catch(err => {
-  if (err) console.error(red(err.stack || err.toString()));
-  process.exit(1);
-});
+])
+  .then(buildDirectories)
+  .catch(err => {
+    if (err) console.error(red(err.stack || err.toString()));
+    process.exit(1);
+  });

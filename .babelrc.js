@@ -15,21 +15,22 @@ module.exports = api => {
     case 'esm':
       modules = false;
       break;
-    case 'lib':
+    case 'cjs':
     default:
       modules = 'commonjs';
   }
 
   return {
     presets: [
-      ['@react-bootstrap', {
-        dev,
-        modules,
-        removePropTypes: !dev,
-      }],
+      [
+        '@react-bootstrap',
+        {
+          dev,
+          modules,
+          removePropTypes: !dev,
+        },
+      ],
     ],
-    plugins: [
-      env === 'test' && 'istanbul',
-    ].filter(Boolean),
+    plugins: [env === 'test' && 'istanbul'].filter(Boolean),
   };
 };
