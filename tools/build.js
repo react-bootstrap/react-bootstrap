@@ -74,7 +74,6 @@ const buildDist = step(
 
 const buildDirectories = step('Linking directories', () =>
   cherryPick({
-    name: require('../package.json').name,
     inputDir: '../src',
     cjsDir: 'cjs',
     esmDir: 'esm',
