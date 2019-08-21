@@ -43,7 +43,7 @@
     "react": "^16.9.0",
     "react-docgen": "^4.1.1",
     "react-dom": "^16.9.0",
-    "react-live": "^2.1.2",
+    "react-live": "^2.2.0",
     "remark-slug": "^5.1.2",
     "shakespeare-data": "^3.0.0",
     "yup": "^0.27.0"
