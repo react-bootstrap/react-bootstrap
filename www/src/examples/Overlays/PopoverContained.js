@@ -3,9 +3,9 @@ function Example() {
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
 
-  const handleClick = ({ target }) => {
+  const handleClick = event => {
     setShow(!show);
-    setTarget(target);
+    setTarget(event.target);
   };
 
   return (
