@@ -3,11 +3,10 @@ const path = require('path');
 
 const config = require('./config');
 
-const stringifiedConfig = {};
-// eslint-disable-next-line no-restricted-syntax
-for (const [key, value] of Object.entries(config)) {
-  stringifiedConfig[key] = JSON.stringify(value);
-}
+const stringifiedConfig = Object.entries(config).reduce(
+  (acc, [key, value]) => ({ ...acc, [key]: JSON.stringify(value) }),
+  {},
+);
 
 exports.onCreateWebpackConfig = function onCreateWebpackConfig({
   actions,
