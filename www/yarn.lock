@@ -4963,10 +4963,10 @@ gatsby-plugin-page-creator@^2.1.6:
     lodash "^4.17.14"
     micromatch "^3.1.10"
 
-gatsby-plugin-sass@^2.1.9:
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-sass/-/gatsby-plugin-sass-2.1.9.tgz#095b733ef4155962ff06ac755311e3e643830581"
-  integrity sha512-HeK43EEV85OcibjxTIVQLEW2uLIyYJ9q87mQnTRj12AwtbFuQyv2XnYezEcqDmgxC/r9R4HQzJOBnUHEp3DZfA==
+gatsby-plugin-sass@^2.1.10:
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-sass/-/gatsby-plugin-sass-2.1.10.tgz#3257a01351cd7e18248c73c1683c4598359a10ef"
+  integrity sha512-5uVN0PXsmqfWlBBkko/RscI7EB+Be7Y7tirN+PX4WzbdziELGzwjph8GdS3j0dQbGbB9UmhCBWhtSGEVxP6loQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     sass-loader "^7.0.1"
