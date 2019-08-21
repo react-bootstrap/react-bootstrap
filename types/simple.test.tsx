@@ -54,9 +54,7 @@ import {
   </Card>
 </Accordion>;
 
-<Badge pill={false} ref={React.createRef<HTMLSpanElement>()}>
-  42
-</Badge>;
+<Badge pill={false}>42</Badge>;
 
 <Breadcrumb listProps={{ type: 'I' }}>
   <Breadcrumb.Item />
