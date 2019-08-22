@@ -56,7 +56,7 @@ import {
 
 <Badge pill={false}>42</Badge>;
 
-<Badge as="a" href="#" variant="primary" pill>
+<Badge as="a" href="#" variant="primary" pill>42</Badge>;
 
 <Breadcrumb listProps={{ type: 'I' }}>
   <Breadcrumb.Item />
