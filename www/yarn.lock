@@ -9,7 +9,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@7.5.5", "@babel/core@^7.0.0", "@babel/core@^7.2.2", "@babel/core@^7.4.3", "@babel/core@^7.5.5":
+"@babel/core@7.5.5", "@babel/core@^7.0.0", "@babel/core@^7.2.2", "@babel/core@^7.4.3", "@babel/core@^7.4.4", "@babel/core@^7.5.5":
   version "7.5.5"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.5.5.tgz#17b2686ef0d6bc58f963dddd68ab669755582c30"
   integrity sha512-i4qoSr2KTtce0DmkuuQBV4AuQgGPUcPXMr9L5MyYAtk06z068lQ10a4O009fe5OB/DfNV+h+qqT7ddNV8UnRjg==
@@ -1535,7 +1535,7 @@ ast-types@0.11.5:
   resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.11.5.tgz#9890825d660c03c28339f315e9fa0a360e31ec28"
   integrity sha512-oJjo+5e7/vEc2FBK8gUalV0pba4L3VdBIs2EKhOLHLcOd2FgQIVQN9xb0eZ9IjEWyAL7vq6fGJxOvVvdCHNyMw==
 
-ast-types@0.12.4:
+ast-types@0.12.4, ast-types@^0.12.4:
   version "0.12.4"
   resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.12.4.tgz#71ce6383800f24efc9a1a3308f3a6e420a0974d1"
   integrity sha512-ky/YVYCbtVAS8TdMIaTiPFHwEpRB5z1hctepJplTr3UW5q8TDrpIMCILyk8pmLxGtn2KCtC/lSn7zOsaI7nzDw==
@@ -5033,17 +5033,17 @@ gatsby-telemetry@^1.1.14:
     stack-utils "1.0.2"
     uuid "3.3.2"
 
-gatsby-transformer-react-docgen@^4.1.3:
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-react-docgen/-/gatsby-transformer-react-docgen-4.1.3.tgz#47304c19abb32021ca3259ba1b1eae1f1468e5df"
-  integrity sha512-fqocaqF2R5UTTzp9J/8ClmJf/TawFTBoIAnOG7DMAL4qmxS9r10CbaVYsr+FDvoyfL/flgOSpZMjt4DwoFkoOw==
+gatsby-transformer-react-docgen@^5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-react-docgen/-/gatsby-transformer-react-docgen-5.0.4.tgz#83cf890f371ece46d5b9c4911793a647423302dc"
+  integrity sha512-qmNlma4QBI+wE6jCd2t/DsueqtFzX9uqsK7qepjXid50H/ugngpVNc5M/QCYuXHVew6RiX2csv0j3aAm7Z/r3w==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/runtime" "^7.0.0"
     "@babel/types" "^7.0.0"
-    common-tags "^1.4.0"
-    react-docgen "^4.1.0"
-    react-docgen-displayname-handler " ^2.1.0"
+    common-tags "^1.8.0"
+    react-docgen "^5.0.0-beta.1"
+    react-docgen-displayname-handler "^2.1.1"
 
 gatsby-transformer-remark@^2.6.15:
   version "2.6.15"
@@ -9610,14 +9610,14 @@ react-dev-utils@^4.2.3:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-"react-docgen-displayname-handler@ ^2.1.0":
+react-docgen-displayname-handler@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-docgen-displayname-handler/-/react-docgen-displayname-handler-2.1.1.tgz#a7863a2cc0058ac3c72e6348fa5e40cc4278c5ae"
   integrity sha512-Dmu+WnQt5TRDokaQ6uGvgcxrIh92c6uhuljsuueEphTcy/1nKh8/Ep6RUmpd77G1iN2rqg5+4ztGAT7LJjVdpg==
   dependencies:
     ast-types "0.11.5"
 
-react-docgen@^4.1.0, react-docgen@^4.1.1:
+react-docgen@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/react-docgen/-/react-docgen-4.1.1.tgz#8fef0212dbf14733e09edecef1de6b224d87219e"
   integrity sha512-o1wdswIxbgJRI4pckskE7qumiFyqkbvCO++TylEDOo2RbMiueIOg8YzKU4X9++r0DjrbXePw/LHnh81GRBTWRw==
@@ -9629,6 +9629,20 @@ react-docgen@^4.1.0, react-docgen@^4.1.1:
     doctrine "^3.0.0"
     node-dir "^0.1.10"
     recast "^0.17.3"
+
+react-docgen@^5.0.0-beta.1:
+  version "5.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/react-docgen/-/react-docgen-5.0.0-beta.1.tgz#3654ab8f5cb7abacbfc122c1950c45d8e77048da"
+  integrity sha512-CbbHF5jXrgyXuP3gQcN1zG4YpNj5QQuxTsEhKH3UXQN01V4cho/eL926ya6ecCWryUtlK97QGRxtK48KbCtXEQ==
+  dependencies:
+    "@babel/core" "^7.4.4"
+    "@babel/runtime" "^7.0.0"
+    ast-types "^0.12.4"
+    async "^2.1.4"
+    commander "^2.19.0"
+    doctrine "^3.0.0"
+    node-dir "^0.1.10"
+    strip-indent "^2.0.0"
 
 react-dom@^16.9.0:
   version "16.9.0"
@@ -11178,6 +11192,11 @@ strip-indent@^1.0.1:
   integrity sha1-DHlipq3vp7vUrDZkYKY4VSrhoKI=
   dependencies:
     get-stdin "^4.0.1"
+
+strip-indent@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/strip-indent/-/strip-indent-2.0.0.tgz#5ef8db295d01e6ed6cbf7aab96998d7822527b68"
+  integrity sha1-XvjbKV0B5u1sv3qrlpmNeCJSe2g=
 
 strip-json-comments@^2.0.1, strip-json-comments@~2.0.1:
   version "2.0.1"
