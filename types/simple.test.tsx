@@ -54,7 +54,9 @@ import {
   </Card>
 </Accordion>;
 
-<Badge pill={false} ref={React.createRef<HTMLSpanElement>()}>
+<Badge pill={false}>42</Badge>;
+
+<Badge as="a" href="#" variant="primary" pill>
   42
 </Badge>;
 
