@@ -5045,10 +5045,10 @@ gatsby-transformer-react-docgen@^4.1.3:
     react-docgen "^4.1.0"
     react-docgen-displayname-handler " ^2.1.0"
 
-gatsby-transformer-remark@^2.6.17:
-  version "2.6.17"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.6.17.tgz#5c61f76257b0141485db33d11fe718557e99a264"
-  integrity sha512-LZxBXQMZ+Q7HRLECMjGO9dCWwEz7Ct7rFdHH/jeqnOIQnVavDavjNjS5a//Xp+P2RU7SzoXcRqzHeFkHXJpibA==
+gatsby-transformer-remark@^2.6.18:
+  version "2.6.18"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.6.18.tgz#0834017c5d11dccb80650d0b5e50feafc26c61fc"
+  integrity sha512-qPaNYzwYkQsSKS3ynJ2EWrI8jwAu/SBRvfVRMJI2mM6jKDWYhHIlKkzqZuOVVok1kKivagMLpZtJrDLvcDrthg==
   dependencies:
     "@babel/runtime" "^7.0.0"
     bluebird "^3.5.5"
@@ -11852,7 +11852,7 @@ unist-util-visit@2.0.0:
     unist-util-is "^4.0.0"
     unist-util-visit-parents "^3.0.0"
 
-unist-util-visit@^1.0.0, unist-util-visit@^1.1.0, unist-util-visit@^1.3.0, unist-util-visit@^1.4.0, unist-util-visit@^1.4.1:
+unist-util-visit@^1.0.0, unist-util-visit@^1.1.0, unist-util-visit@^1.4.0, unist-util-visit@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/unist-util-visit/-/unist-util-visit-1.4.1.tgz#4724aaa8486e6ee6e26d7ff3c8685960d560b1e3"
   integrity sha512-AvGNk7Bb//EmJZyhtRUnNMEpId/AZ5Ph/KUpTI09WHQuDZHKovQ1oEv3mfmKpWKtoMzyMC4GLBm1Zy5k12fjIw==
