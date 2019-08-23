@@ -104,7 +104,7 @@ function NavMain({ activePage }) {
             )
           </Dropdown.Toggle>
           <Dropdown.Menu className="w-100">
-            <Dropdown.Item href="https://5c507d49471426000887a6a7--react-bootstrap.netlify.com/">
+            <Dropdown.Item href="https://react-bootstrap-v3.netlify.com">
               v0.32.4 (Bootstrap 3)
             </Dropdown.Item>
           </Dropdown.Menu>
