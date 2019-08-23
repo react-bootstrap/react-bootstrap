@@ -4,7 +4,7 @@
 
 [![Codecov][codecov-badge]][codecov]
 [![Discord][discord-badge]][discord]
-[![Thinkful][thinkful-badge]][thinkful]
+[![Netlify][netlify-badge]][netlify]
 
 __Under active development - APIs will change.__ Check out the [1.0.0 roadmap](https://github.com/react-bootstrap/react-bootstrap/wiki#100-roadmap) and [contributing guidelines][contributing] to see where you can help out. Prior to the 1.0.0 release, deprecations or breaking changes will result in a minor version bump.
 
@@ -51,11 +51,11 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [react-bootstrap-extended]: https://github.com/rbalicki2/react-bootstrap-extended
 [awesome-react-bootstrap-components]: https://github.com/Hermanya/awesome-react-bootstrap-components
 
-[thinkful-badge]: https://tf-assets-staging.s3.amazonaws.com/badges/thinkful_repo_badge.svg
-[thinkful]: http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=react-bootstrap
-
 [codecov-badge]: https://img.shields.io/codecov/c/github/react-bootstrap/react-bootstrap/master.svg
 [codecov]: https://codecov.io/gh/react-bootstrap/react-bootstrap
 
 [discord-badge]: https://img.shields.io/badge/Discord-Join%20chat%20%E2%86%92-738bd7.svg
 [discord]: https://discord.gg/0ZcbPKXt5bXLs9XK
+
+[netlify-badge]: https://api.netlify.com/api/v1/badges/a74fbeb8-f950-4c97-854d-7c8363bef45e/deploy-status
+[netlify]: https://app.netlify.com/sites/react-bootstrap-v3/deploys
