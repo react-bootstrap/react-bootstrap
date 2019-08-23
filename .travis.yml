@@ -6,13 +6,10 @@ jobs:
   include:
     - addons:
         chrome: stable
-      env: BROWSER=ChromeCi
+      env: BROWSER=ChromeHeadless
     - addons:
         firefox: latest
-      env: BROWSER=Firefox
-
-services:
-  - xvfb
+      env: BROWSER=FirefoxHeadless
 
 cache:
   yarn: true

@@ -1,0 +1,20 @@
+name: Node CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [ChromeHeadless, FirefoxHeadless]
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Installing Dependencies
+      run: yarn bootstrap
+    - name: Running Tests
+      run: yarn test
+      env:
+        BROWSER: ${{ matrix.browser }}
