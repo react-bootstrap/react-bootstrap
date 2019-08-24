@@ -7,9 +7,9 @@ jobs:
       matrix:
         browser: [ChromeHeadless, FirefoxHeadless]
         os: [ubuntu-latest, windows-latest, macOS-latest]
-      exclude:
-      - os: macOS-latest
-        browser: FirefoxHeadless
+        exclude:
+        - os: macOS-latest
+          browser: FirefoxHeadless
     steps:
     - uses: actions/checkout@v1
     - name: Setup Node.js
