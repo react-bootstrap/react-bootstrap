@@ -20,10 +20,6 @@ cache:
 install:
   - yarn bootstrap
 
-after_success:
-  - node_modules/.bin/codecov
-
 branches:
   only:
     - master
-    - next

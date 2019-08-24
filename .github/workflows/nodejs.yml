@@ -26,5 +26,9 @@ jobs:
       run: yarn test
       env:
         BROWSER: ${{ matrix.browser }}
+    - name: Upload Test Coverage to codecov
+      # Only upload it a single time
+      if: matrix.os == 'ubuntu-latest' && matrix.browser == 'ChromeHeadless'
+      run: yarn run codecov
     - name: Build Project
       run: yarn build
