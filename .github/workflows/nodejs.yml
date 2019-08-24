@@ -16,7 +16,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    - name: Installing Dependencies
+    - name: Install Chrome (macOS)
+      if: matrix.os == macOS-latest
+      run: brew cask install google-chrome
+    - name: Install Dependencies
       run: yarn bootstrap
     - name: Running Tests
       run: yarn test
