@@ -17,7 +17,7 @@ jobs:
       with:
         node-version: 12.x
     - name: Install Chrome (macOS)
-      if: matrix.os == macOS-latest
+      if: matrix.os == 'macOS-latest'
       run: brew cask install google-chrome
     - name: Install Dependencies
       run: yarn bootstrap
