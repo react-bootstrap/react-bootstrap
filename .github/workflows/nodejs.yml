@@ -2,10 +2,11 @@ name: Node CI
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         browser: [ChromeHeadless, FirefoxHeadless]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
     - uses: actions/checkout@v1
     - name: Setup Node.js
