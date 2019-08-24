@@ -86,8 +86,7 @@ describe('<TabContainer>', () => {
         </div>
       </TabContainer>,
     );
-
-    instance.assertSingle('.nav[role="tablist"]');
+    instance.assertSingle('div.nav[role="tablist"]');
 
     instance
       .find('NavLink a')
@@ -112,7 +111,7 @@ describe('<TabContainer>', () => {
       </TabContainer>,
     );
 
-    instance.assertSingle('.nav[role="navigation"]');
+    instance.assertSingle('div.nav[role="navigation"]');
 
     // make sure its not passed to the Nav.Link
     expect(

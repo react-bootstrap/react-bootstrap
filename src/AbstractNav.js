@@ -126,7 +126,12 @@ const AbstractNav = React.forwardRef(
             getControllerId: getControllerId || noop,
           }}
         >
-          <Component {...props} onKeyDown={handleKeyDown} ref={mergedRef} />
+          <Component
+            {...props}
+            onKeyDown={handleKeyDown}
+            ref={mergedRef}
+            role={role}
+          />
         </NavContext.Provider>
       </SelectableContext.Provider>
     );
