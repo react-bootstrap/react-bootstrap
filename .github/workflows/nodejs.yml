@@ -18,8 +18,11 @@ jobs:
       with:
         node-version: 12.x
     - name: Install Chrome (macOS)
-      if: matrix.os == 'macOS-latest'
+      if: matrix.os == 'macOS-latest' && matrix.browser == 'ChromeHeadless'
       run: brew cask install google-chrome
+    - name: Install Firefox (macOS)
+      if: matrix.os == 'macOS-latest' && matrix.browser == 'FirefoxHeadless'
+      run: brew cask install firefox
     - name: Install Dependencies
       run: yarn bootstrap
     - name: Run Tests
