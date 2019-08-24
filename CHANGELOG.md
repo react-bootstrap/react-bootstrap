@@ -1,3 +1,48 @@
+# [1.0.0-beta.12](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2019-08-16)
+
+
+### Bug Fixes
+
+* Export declared classes ([0822533](https://github.com/react-bootstrap/react-bootstrap/commit/0822533))
+* **navbar:** context linking issues due to incorrect name ([ab49a83](https://github.com/react-bootstrap/react-bootstrap/commit/ab49a83))
+* **navbar:** resolve lifecycle warning issue ([7dacfaf](https://github.com/react-bootstrap/react-bootstrap/commit/7dacfaf)), closes [#4240](https://github.com/react-bootstrap/react-bootstrap/issues/4240)
+* **types:** Toast component ([#4246](https://github.com/react-bootstrap/react-bootstrap/issues/4246)) ([c30e131](https://github.com/react-bootstrap/react-bootstrap/commit/c30e131))
+
+
+### Performance Improvements
+
+* **navbar:** memoize callback function ([dd0003d](https://github.com/react-bootstrap/react-bootstrap/commit/dd0003d))
+* **navbar:** memoize context provider value ([41f32e1](https://github.com/react-bootstrap/react-bootstrap/commit/41f32e1))
+
+
+
+# [1.0.0-beta.11](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.10...v1.0.0-beta.11) (2019-08-09)
+
+
+### Bug Fixes
+
+* **AbstractNav:** allow passed in refs to be properly forwarded ([#4031](https://github.com/react-bootstrap/react-bootstrap/issues/4031)) ([bda567f](https://github.com/react-bootstrap/react-bootstrap/commit/bda567f))
+* Fix DropdownToggleProps ([686629d](https://github.com/react-bootstrap/react-bootstrap/commit/686629d))
+* **Modal:** directly show backdrop if no animation (fix: [#4190](https://github.com/react-bootstrap/react-bootstrap/issues/4190)) ([#4192](https://github.com/react-bootstrap/react-bootstrap/issues/4192)) ([0d02bf6](https://github.com/react-bootstrap/react-bootstrap/commit/0d02bf6))
+* Apply suggestions from code review ([c3fab88](https://github.com/react-bootstrap/react-bootstrap/commit/c3fab88))
+* **Button:** not pass type prop to custom comp (fix: [#3340](https://github.com/react-bootstrap/react-bootstrap/issues/3340)) ([#4173](https://github.com/react-bootstrap/react-bootstrap/issues/4173)) ([5725f65](https://github.com/react-bootstrap/react-bootstrap/commit/5725f65))
+* **Carousel:** fixes [#4136](https://github.com/react-bootstrap/react-bootstrap/issues/4136) - reverse carousel slide navigation direction for touch ([#4137](https://github.com/react-bootstrap/react-bootstrap/issues/4137)) ([5be68b7](https://github.com/react-bootstrap/react-bootstrap/commit/5be68b7))
+* Input and List Group components not properly forwarding refs ([8c0cf4a](https://github.com/react-bootstrap/react-bootstrap/commit/8c0cf4a)), closes [#4012](https://github.com/react-bootstrap/react-bootstrap/issues/4012) [#4031](https://github.com/react-bootstrap/react-bootstrap/issues/4031)
+* Remove assertions that test implementation details ([44d5e28](https://github.com/react-bootstrap/react-bootstrap/commit/44d5e28))
+
+
+### Features
+
+* Add simple Popover type test ([#4103](https://github.com/react-bootstrap/react-bootstrap/issues/4103)) ([7715513](https://github.com/react-bootstrap/react-bootstrap/commit/7715513)), closes [#4093](https://github.com/react-bootstrap/react-bootstrap/issues/4093)
+* Migrate Fade and Jumbotron to be ref forwarders ([9240fe0](https://github.com/react-bootstrap/react-bootstrap/commit/9240fe0))
+* Migrate SafeAnchor to be a ref forwarder ([fc41617](https://github.com/react-bootstrap/react-bootstrap/commit/fc41617))
+* Migrate Spinner and SplitButton to be ref forwarders ([8cb7306](https://github.com/react-bootstrap/react-bootstrap/commit/8cb7306))
+* Migrate Tabs to be a ref forwarder ([f16d29b](https://github.com/react-bootstrap/react-bootstrap/commit/f16d29b))
+* Migrate Toast and ToastHeader to be ref forwarders ([7fa9489](https://github.com/react-bootstrap/react-bootstrap/commit/7fa9489))
+* Migrate Tooltip to be a ref forwarder ([df29001](https://github.com/react-bootstrap/react-bootstrap/commit/df29001))
+
+
+
 # [1.0.0-beta.10](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2019-07-15)
 
 
