@@ -11,7 +11,8 @@ jobs:
         - os: macOS-latest
           browser: FirefoxHeadless
     steps:
-    - uses: actions/checkout@v1
+    - name: Checking out Repository
+      uses: actions/checkout@v1
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
@@ -21,7 +22,9 @@ jobs:
       run: brew cask install google-chrome
     - name: Install Dependencies
       run: yarn bootstrap
-    - name: Running Tests
+    - name: Run Tests
       run: yarn test
       env:
         BROWSER: ${{ matrix.browser }}
+    - name: Build Project
+      run: yarn build

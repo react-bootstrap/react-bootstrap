@@ -3,7 +3,6 @@
 > [Bootstrap 4][bootstrap] components built with [React][react].
 
 [![Travis CI Build status][travis-badge]][travis-link]
-[![Appveyor Build status][appveyor-badge]][appveyor-link]
 [![npm][npm-badge]][npm]
 [![Codecov][codecov-badge]][codecov]
 [![Discord][discord-badge]][discord]
@@ -52,8 +51,6 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [contributing]: CONTRIBUTING.md
 [travis-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg?branch=master
 [travis-link]: https://travis-ci.org/react-bootstrap/react-bootstrap
-[appveyor-badge]: https://ci.appveyor.com/api/projects/status/ylitpyo6n5yq1s6i?svg=true
-[appveyor-link]: https://ci.appveyor.com/project/react-bootstrap/react-bootstrap
 [npm-badge]: https://badge.fury.io/js/react-bootstrap.svg
 [npm]: http://badge.fury.io/js/react-bootstrap
 [react-router-bootstrap]: https://github.com/react-bootstrap/react-router-bootstrap
