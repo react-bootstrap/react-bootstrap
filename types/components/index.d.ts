@@ -29,6 +29,7 @@ export {
 export {
   default as AccordionToggle,
   AccordionToggleProps,
+  useAccordionToggle,
 } from './AccordionToggle';
 export { default as Alert, AlertProps } from './Alert';
 export { default as Badge, BadgeProps } from './Badge';

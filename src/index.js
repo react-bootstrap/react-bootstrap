@@ -1,5 +1,6 @@
 export Accordion from './Accordion';
-export useAccordionToggle from './useAccordionToggle';
+export AccordionToggle, { useAccordionToggle } from './AccordionToggle';
+export AccordionCollapse from './AccordionCollapse';
 export Alert from './Alert';
 export Badge from './Badge';
 export Breadcrumb from './Breadcrumb';
