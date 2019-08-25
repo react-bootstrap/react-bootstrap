@@ -120,24 +120,24 @@ function getPercentage(now, min, max) {
   return Math.round(percentage * ROUND_PRECISION) / ROUND_PRECISION;
 }
 
-const RenderProgressBar = React.forwardRef(
-  (
-    {
-      min,
-      now,
-      max,
-      label,
-      srOnly,
-      striped,
-      animated,
-      className,
-      style,
-      variant,
-      bsPrefix,
-      ...props
-    },
-    ref,
-  ) => (
+function renderProgressBar(
+  {
+    min,
+    now,
+    max,
+    label,
+    srOnly,
+    striped,
+    animated,
+    className,
+    style,
+    variant,
+    bsPrefix,
+    ...props
+  },
+  ref,
+) {
+  return (
     <div
       ref={ref}
       {...props}
@@ -154,17 +154,16 @@ const RenderProgressBar = React.forwardRef(
     >
       {srOnly ? <span className="sr-only">{label}</span> : label}
     </div>
-  ),
-);
+  );
+}
 
-RenderProgressBar.propTypes = propTypes;
-RenderProgressBar.defaultProps = propTypes;
+renderProgressBar.propTypes = propTypes;
 
 const ProgressBar = React.forwardRef(({ isChild, ...props }, ref) => {
   props.bsPrefix = useBootstrapPrefix(props.bsPrefix, 'progress');
 
   if (isChild) {
-    return <RenderProgressBar {...props} />;
+    return renderProgressBar(props, ref);
   }
 
   const {
@@ -188,22 +187,22 @@ const ProgressBar = React.forwardRef(({ isChild, ...props }, ref) => {
       {...wrapperProps}
       className={classNames(className, bsPrefix)}
     >
-      {children ? (
-        map(children, child => cloneElement(child, { isChild: true }))
-      ) : (
-        <RenderProgressBar
-          ref={ref}
-          min={min}
-          now={now}
-          max={max}
-          label={label}
-          srOnly={srOnly}
-          striped={striped}
-          animated={animated}
-          bsPrefix={bsPrefix}
-          variant={variant}
-        />
-      )}
+      {children
+        ? map(children, child => cloneElement(child, { isChild: true }))
+        : renderProgressBar(
+            {
+              min,
+              now,
+              max,
+              label,
+              srOnly,
+              striped,
+              animated,
+              bsPrefix,
+              variant,
+            },
+            ref,
+          )}
     </div>
   );
 });
