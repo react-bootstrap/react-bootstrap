@@ -7,6 +7,12 @@ export interface AccordionToggleProps {
   onClick?: (event?: React.SyntheticEvent) => void;
 }
 
+export interface useAccordionToggle {
+  (eventKey: string, onClick: (event?: React.SyntheticEvent) => void): (
+    event?: React.SyntheticEvent,
+  ) => void;
+}
+
 declare class AccordionToggle<
   As extends React.ElementType = 'button'
 > extends BsPrefixComponent<As, AccordionToggleProps> {}

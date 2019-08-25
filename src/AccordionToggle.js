@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import useAccordionToggle from './useAccordionToggle';
+import SelectableContext from './SelectableContext';
+import AccordionContext from './AccordionContext';
 
 const propTypes = {
   /** Set a custom element for this component */
@@ -18,6 +19,22 @@ const propTypes = {
   /** Children prop should only contain a single child, and  is enforced as such */
   children: PropTypes.element,
 };
+
+export function useAccordionToggle(eventKey, onClick) {
+  const contextEventKey = useContext(AccordionContext);
+  const onSelect = useContext(SelectableContext);
+
+  return e => {
+    /* 
+      Compare the event key in context with the given event key.
+      If they are the same, then collapse the component.
+    */
+    let eventKeyPassed = eventKey === contextEventKey ? null : eventKey;
+
+    onSelect(eventKeyPassed, e);
+    if (onClick) onClick(e);
+  };
+}
 
 const AccordionToggle = React.forwardRef(
   (
