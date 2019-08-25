@@ -1,15 +1,11 @@
 language: node_js
 node_js:
   - node
-
-jobs:
-  include:
-    - addons:
-        chrome: stable
-      env: BROWSER=ChromeHeadless
-    - addons:
-        firefox: latest
-      env: BROWSER=FirefoxHeadless
+env:
+  global:
+    - BROWSER=ChromeHeadless
+addons:
+  chrome: stable
 
 cache:
   yarn: true
