@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -44,15 +44,11 @@ const Image = React.forwardRef(
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'img');
 
-    const classes = useMemo(
-      () =>
-        classNames(
-          fluid && `${bsPrefix}-fluid`,
-          rounded && `rounded`,
-          roundedCircle && `rounded-circle`,
-          thumbnail && `${bsPrefix}-thumbnail`,
-        ),
-      [fluid, rounded, roundedCircle, thumbnail, bsPrefix],
+    const classes = classNames(
+      fluid && `${bsPrefix}-fluid`,
+      rounded && `rounded`,
+      roundedCircle && `rounded-circle`,
+      thumbnail && `${bsPrefix}-thumbnail`,
     );
 
     return (
