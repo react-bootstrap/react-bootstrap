@@ -21,10 +21,6 @@ const propTypes = {
   htmlFor: PropTypes.string,
 };
 
-const defaultProps = {
-  type: 'checkbox',
-};
-
 const FormCheckLabel = React.forwardRef(
   ({ bsPrefix, bsCustomPrefix, className, htmlFor, ...props }, ref) => {
     const { controlId, custom } = useContext(FormContext);
@@ -45,6 +41,5 @@ const FormCheckLabel = React.forwardRef(
 
 FormCheckLabel.displayName = 'FormCheckLabel';
 FormCheckLabel.propTypes = propTypes;
-FormCheckLabel.defaultProps = defaultProps;
 
 export default FormCheckLabel;
