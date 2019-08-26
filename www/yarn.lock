@@ -723,10 +723,10 @@
     "@babel/plugin-transform-react-jsx-self" "^7.0.0"
     "@babel/plugin-transform-react-jsx-source" "^7.0.0"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.5":
-  version "7.5.4"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.4.tgz#cb7d1ad7c6d65676e66b47186577930465b5271b"
-  integrity sha512-Na84uwyImZZc3FKf4aUF1tysApzwf3p2yuFBIyBfbzT5glzKTdvYI4KVW4kcgjrzoGUjC7w3YyCHcJKaRxsr2Q==
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.4.2", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.5":
+  version "7.5.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
+  integrity sha512-28QvEGyQyNkB0/m2B4FU7IEZGK2NUrcMtT6BZEFALTguLk+AUT6ofsHtPk5QyjAdUkpMJ+/Em+quwz4HOt30AQ==
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -5013,12 +5013,12 @@ gatsby-react-router-scroll@^2.1.5:
     scroll-behavior "^0.9.10"
     warning "^3.0.0"
 
-gatsby-remark-prismjs@^3.3.8:
-  version "3.3.8"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-prismjs/-/gatsby-remark-prismjs-3.3.8.tgz#9757ebb15ee4ed5f27aead8d8074a6320863c7f6"
-  integrity sha512-Nd9j1RhUtyUZswmx3xmLjegxoq/bZ0eGs5ceD42xCS6P7wQuMFYV2tPh2TGwN/T9D2dmo8NioJhPkwdEGglP/g==
+gatsby-remark-prismjs@^3.3.9:
+  version "3.3.9"
+  resolved "https://registry.yarnpkg.com/gatsby-remark-prismjs/-/gatsby-remark-prismjs-3.3.9.tgz#20eb5fdf1d5481672517058216e8e817fc43c986"
+  integrity sha512-23IoJjj6/opxHAW6QfLGQaO8enA+JK6fYJXwcJ3F+++AcN0EIHM3Sc3sRz9GxuSni2PW9MlWHKo5noqrlabUjA==
   dependencies:
-    "@babel/runtime" "^7.0.0"
+    "@babel/runtime" "^7.5.5"
     parse-numeric-range "^0.0.2"
     unist-util-visit "^1.4.1"
 
