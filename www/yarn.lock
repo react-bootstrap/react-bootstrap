@@ -5194,14 +5194,14 @@ gatsby-transformer-react-docgen@^4.1.3:
     react-docgen "^4.1.0"
     react-docgen-displayname-handler " ^2.1.0"
 
-gatsby-transformer-remark@^2.6.18:
-  version "2.6.18"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.6.18.tgz#0834017c5d11dccb80650d0b5e50feafc26c61fc"
-  integrity sha512-qPaNYzwYkQsSKS3ynJ2EWrI8jwAu/SBRvfVRMJI2mM6jKDWYhHIlKkzqZuOVVok1kKivagMLpZtJrDLvcDrthg==
+gatsby-transformer-remark@^2.6.19:
+  version "2.6.19"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.6.19.tgz#96ec945425ca8f3859b29e6d31a9395f995c8b04"
+  integrity sha512-GzGMb4/YXeN3dDYF1/rUZgJDEBI1peJ+Gowop5y9tfh7NfgZPsdxxSwKTuJ0Q1zMuEKboiOVfvtU1/pnU+vRwQ==
   dependencies:
-    "@babel/runtime" "^7.0.0"
+    "@babel/runtime" "^7.5.5"
     bluebird "^3.5.5"
-    gatsby-core-utils "^1.0.5"
+    gatsby-core-utils "^1.0.6"
     gray-matter "^4.0.2"
     hast-util-raw "^4.0.0"
     hast-util-to-html "^4.0.1"
