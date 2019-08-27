@@ -2,7 +2,8 @@
 
 > [Bootstrap 4][bootstrap] components built with [React][react].
 
-[![Travis CI Build status][travis-badge]][travis-link]
+[![GitHub Actions Build status][gh-actions-badge]][gh-actions]
+[![Travis CI Build status][travis-badge]][travis]
 [![npm][npm-badge]][npm]
 [![Codecov][codecov-badge]][codecov]
 [![Discord][discord-badge]][discord]
@@ -50,7 +51,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [documentation]: https://react-bootstrap.github.io/
 [contributing]: CONTRIBUTING.md
 [travis-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg?branch=master
-[travis-link]: https://travis-ci.org/react-bootstrap/react-bootstrap
+[travis]: https://travis-ci.org/react-bootstrap/react-bootstrap
 [npm-badge]: https://badge.fury.io/js/react-bootstrap.svg
 [npm]: http://badge.fury.io/js/react-bootstrap
 [react-router-bootstrap]: https://github.com/react-bootstrap/react-router-bootstrap
@@ -63,3 +64,5 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [discord]: https://discord.gg/0ZcbPKXt5bXLs9XK
 [netlify-badge]: https://api.netlify.com/api/v1/badges/91501718-8820-4d69-b7fe-1616eff5914e/deploy-status
 [netlify]: https://app.netlify.com/sites/react-bootstrap/deploys
+[gh-actions-badge]: https://github.com/react-bootstrap/react-bootstrap/workflows/Node%20CI/badge.svg
+[gh-actions]: https://github.com/react-bootstrap/react-bootstrap/actions
