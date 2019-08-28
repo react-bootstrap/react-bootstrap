@@ -14,6 +14,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
+    - name: Update Brew (macOS)
+      if: matrix.os == 'macOS-latest'
+      run: brew update
     - name: Install Chrome (macOS)
       if: matrix.os == 'macOS-latest' && matrix.browser == 'ChromeHeadless'
       run: brew cask install google-chrome
