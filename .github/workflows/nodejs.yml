@@ -28,5 +28,7 @@ jobs:
         BROWSER: ${{ matrix.browser }}
     - name: Upload Test Coverage to codecov
       run: yarn run codecov
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     - name: Build Project
       run: yarn build
