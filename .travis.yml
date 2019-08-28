@@ -1,18 +1,11 @@
 language: node_js
 node_js:
   - node
-
-jobs:
-  include:
-    - addons:
-        chrome: stable
-      env: BROWSER=ChromeCi
-    - addons:
-        firefox: latest
-      env: BROWSER=Firefox
-
-services:
-  - xvfb
+env:
+  global:
+    - BROWSER=ChromeHeadless
+addons:
+  chrome: stable
 
 cache:
   yarn: true
@@ -23,10 +16,6 @@ cache:
 install:
   - yarn bootstrap
 
-after_success:
-  - node_modules/.bin/codecov
-
 branches:
   only:
     - master
-    - next
