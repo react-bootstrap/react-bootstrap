@@ -23,7 +23,7 @@ const styles = css`
       .row > [class^='col-'] {
         padding-top: 0.75rem;
         padding-bottom: 0.75rem;
-        background-color: $brandLight;
+        background-color: $brand-light;
         border: 1px solid $brand;
       }
 

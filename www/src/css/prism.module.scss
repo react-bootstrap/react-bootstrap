@@ -76,7 +76,7 @@ $operator: #fc929e;
       color: $variable;
     }
     &.attr-value {
-      color: string;
+      color: $string;
     }
     &.keyword {
       color: $keyword;
@@ -89,7 +89,7 @@ $operator: #fc929e;
       font-weight: 400;
     }
     &.bold {
-      font-style: 700;
+      font-weight: 700;
     }
     &.italic {
       font-style: italic;
