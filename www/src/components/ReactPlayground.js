@@ -157,12 +157,9 @@ function Preview({ showCode, className }) {
 }
 
 const StyledEditor = styled(LiveEditor)`
-  @import '../css/theme';
-
   composes: prism from '../css/prism.module.scss';
 
   border-radius: 0 0 8px 8px !important;
-  font-family: $font-family-monospace !important;
 `;
 
 const EditorInfoMessage = styled('div')`

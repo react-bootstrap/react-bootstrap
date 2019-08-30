@@ -17,13 +17,13 @@ $operator: #fc929e;
 
 .prism {
   display: block;
+  color: $white;
+  background-color: $dark;
+  font-family: $font-family-monospace !important;
   font-size: 14px;
   line-height: 20px;
   white-space: pre-wrap;
   word-break: break-word;
-  padding: 20px;
-  color: $white;
-  background-color: $dark;
 
   & :global .token {
     &.attr-name {
@@ -50,21 +50,26 @@ $operator: #fc929e;
     &.boolean {
       color: $boolean;
     }
+
     &.tag {
       color: $tag;
     }
+
     &.string {
       color: $string;
     }
+
     &.punctuation {
       color: $punctuation;
     }
+
     &.selector,
     &.char,
     &.builtin,
     &.inserted {
       color: $char;
     }
+
     &.function {
       color: $function;
     }
@@ -75,25 +80,32 @@ $operator: #fc929e;
     &.variable {
       color: $variable;
     }
+
     &.attr-value {
       color: $string;
     }
+
     &.keyword {
       color: $keyword;
     }
+
     &.atrule,
     &.class-name {
       color: $className;
     }
+
     &.important {
       font-weight: 400;
     }
+
     &.bold {
       font-weight: 700;
     }
+
     &.italic {
       font-style: italic;
     }
+
     &.entity {
       cursor: help;
     }
