@@ -39,13 +39,12 @@ const scope = {
   PlaceholderImage,
 };
 
-const StyledProvider = styled('div').attrs(props => ({
-  children: <LiveProvider {...props} />,
-}))`
+const StyledContainer = styled('div')`
   @import '../css/theme';
 
-  background-color: $body-bg;
+  position: relative;
   margin-bottom: 3rem;
+  background-color: $body-bg;
 `;
 
 const StyledExample = styled('div')`
@@ -267,15 +266,17 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
     .replace(/>;$/, '>');
 
   return (
-    <StyledProvider
-      scope={scope}
-      code={code}
-      mountStylesheet={false}
-      noInline={codeText.includes('render(')}
-    >
-      <Preview showCode={showCode} className={exampleClassName} />
-      {showCode && <Editor />}
-    </StyledProvider>
+    <StyledContainer>
+      <LiveProvider
+        scope={scope}
+        code={code}
+        mountStylesheet={false}
+        noInline={codeText.includes('render(')}
+      >
+        <Preview showCode={showCode} className={exampleClassName} />
+        {showCode && <Editor />}
+      </LiveProvider>
+    </StyledContainer>
   );
 }
 
