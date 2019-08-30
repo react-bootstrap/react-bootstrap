@@ -39,42 +39,11 @@ const scope = {
   PlaceholderImage,
 };
 
-const StyledError = styled(LiveError)`
-  composes: alert alert-danger text-monospace from global;
-
-  border-radius: 0;
-  border-width: 0.2rem;
-  margin-bottom: 0;
-  white-space: pre;
-`;
-
-const StyledLiveProviderChild = styled.div`
+const StyledLiveProviderChild = styled('div')`
   @import '../css/theme';
 
   background-color: $body-bg;
   margin-bottom: 3rem;
-`;
-
-const StyledEditor = styled(LiveEditor)`
-  @import '../css/theme';
-
-  composes: prism from '../css/prism.module.scss';
-
-  border-radius: 0 0 8px 8px !important;
-  font-family: $font-family-monospace !important;
-`;
-
-const EditorInfoMessage = styled('div')`
-  composes: p-2 alert alert-info from global;
-
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  font-size: 70%;
-  pointer-events: none;
 `;
 
 const StyledExample = styled('div')`
@@ -113,6 +82,99 @@ const StyledExample = styled('div')`
       content: '';
     }
   }
+`;
+
+const StyledError = styled(LiveError)`
+  composes: alert alert-danger text-monospace from global;
+
+  border-radius: 0;
+  border-width: 0.2rem;
+  margin-bottom: 0;
+  white-space: pre;
+`;
+
+const { background, foreground, fontFamily } = css`
+  @import '../css/theme';
+
+  :export {
+    background: $lighter;
+    foreground: $subtle-on-dark;
+    font-family: $font-family-base;
+  }
+`;
+
+function Preview({ showCode, className }) {
+  const exampleRef = useRef();
+  const [hjs, setHjs] = useState(null);
+  const live = useContext(LiveContext);
+
+  useEffect(() => {
+    import('holderjs').then(({ default: hjs_ }) => {
+      hjs_.addTheme('gray', {
+        bg: background,
+        fg: foreground,
+        font: fontFamily,
+        fontweight: 'normal',
+      });
+
+      setHjs(hjs_);
+    });
+  }, []);
+
+  useIsomorphicEffect(() => {
+    if (!hjs) {
+      return;
+    }
+
+    hjs.run({
+      theme: 'gray',
+      images: qsa(exampleRef.current, 'img'),
+    });
+  }, [hjs, live.element]);
+
+  const handleClick = useCallback(e => {
+    if (e.target.tagName === 'A') {
+      e.preventDefault();
+    }
+  }, []);
+
+  return (
+    <>
+      <StyledExample
+        ref={exampleRef}
+        role="region"
+        aria-label="Code Example"
+        showCode={showCode}
+        className={className}
+        onClick={handleClick}
+      >
+        <LivePreview />
+      </StyledExample>
+      <StyledError />
+    </>
+  );
+}
+
+const StyledEditor = styled(LiveEditor)`
+  @import '../css/theme';
+
+  composes: prism from '../css/prism.module.scss';
+
+  border-radius: 0 0 8px 8px !important;
+  font-family: $font-family-monospace !important;
+`;
+
+const EditorInfoMessage = styled('div')`
+  composes: p-2 alert alert-info from global;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  font-size: 70%;
+  pointer-events: none;
 `;
 
 let uid = 0;
@@ -189,68 +251,6 @@ function Editor() {
   );
 }
 
-const { background, foreground, fontFamily } = css`
-  @import '../css/theme';
-
-  :export {
-    background: $lighter;
-    foreground: $subtle-on-dark;
-    font-family: $font-family-base;
-  }
-`;
-
-function Preview({ showCode, className }) {
-  const exampleRef = useRef();
-  const [hjs, setHjs] = useState(null);
-  const live = useContext(LiveContext);
-
-  useEffect(() => {
-    import('holderjs').then(({ default: hjs_ }) => {
-      hjs_.addTheme('gray', {
-        bg: background,
-        fg: foreground,
-        font: fontFamily,
-        fontweight: 'normal',
-      });
-
-      setHjs(hjs_);
-    });
-  }, []);
-
-  useIsomorphicEffect(() => {
-    if (!hjs) {
-      return;
-    }
-
-    hjs.run({
-      theme: 'gray',
-      images: qsa(exampleRef.current, 'img'),
-    });
-  }, [hjs, live.element]);
-
-  const handleClick = useCallback(e => {
-    if (e.target.tagName === 'A') {
-      e.preventDefault();
-    }
-  }, []);
-
-  return (
-    <>
-      <StyledExample
-        ref={exampleRef}
-        role="region"
-        aria-label="Code Example"
-        showCode={showCode}
-        className={className}
-        onClick={handleClick}
-      >
-        <LivePreview />
-      </StyledExample>
-      <StyledError />
-    </>
-  );
-}
-
 const PRETTIER_IGNORE_REGEX = /({\s*\/\*\s+prettier-ignore\s+\*\/\s*})|(\/\/\s+prettier-ignore)/gim;
 
 const propTypes = {
@@ -258,7 +258,7 @@ const propTypes = {
 };
 
 function Playground({ codeText, exampleClassName, showCode = true }) {
-  // Remove the prettier comments and the trailing semicolons in JSX in displayed code.
+  // Remove Prettier comments and trailing semicolons in JSX in displayed code.
   const code = codeText
     .replace(PRETTIER_IGNORE_REGEX, '')
     .trim()
