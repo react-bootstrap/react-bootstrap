@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef, useContext } from 'react';
 import qsa from 'dom-helpers/query/querySelectorAll';
 import PropTypes from 'prop-types';
+import React, { useContext, useEffect, useRef } from 'react';
+import useForceUpdate from '@restart/hooks/useForceUpdate';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
-
-import SelectableContext, { makeEventKey } from './SelectableContext';
 import NavContext from './NavContext';
+import SelectableContext, { makeEventKey } from './SelectableContext';
 import TabContext from './TabContext';
 
 const noop = () => {};
@@ -28,10 +28,6 @@ const propTypes = {
   activeKey: PropTypes.any,
 };
 
-const defaultProps = {
-  role: 'tablist',
-};
-
 const AbstractNav = React.forwardRef(
   (
     {
@@ -45,18 +41,22 @@ const AbstractNav = React.forwardRef(
     },
     ref,
   ) => {
+    // A ref and forceUpdate for refocus, b/c we only want to trigger when needed
+    // and don't want to reset the set in the effect
+    const forceUpdate = useForceUpdate();
+    const needsRefocusRef = useRef(false);
+
     const parentOnSelect = useContext(SelectableContext);
     const tabContext = useContext(TabContext);
 
     let getControlledId, getControllerId;
 
     if (tabContext) {
+      role = role || 'tablist';
       activeKey = tabContext.activeKey;
       getControlledId = tabContext.getControlledId;
       getControllerId = tabContext.getControllerId;
     }
-
-    const [needsRefocus, setRefocus] = useState(false);
 
     const listNode = useRef(null);
 
@@ -101,18 +101,21 @@ const AbstractNav = React.forwardRef(
 
       event.preventDefault();
       handleSelect(nextActiveChild.dataset.rbEventKey, event);
-      setRefocus(true);
+      needsRefocusRef.current = true;
+      forceUpdate();
     };
 
     useEffect(() => {
-      if (listNode.current && needsRefocus) {
+      if (listNode.current && needsRefocusRef.current) {
         let activeChild = listNode.current.querySelector(
           '[data-rb-event-key].active',
         );
 
         if (activeChild) activeChild.focus();
       }
-    }, [listNode, needsRefocus]);
+
+      needsRefocusRef.current = false;
+    });
 
     const mergedRef = useMergedRefs(ref, listNode);
 
@@ -139,6 +142,5 @@ const AbstractNav = React.forwardRef(
 );
 
 AbstractNav.propTypes = propTypes;
-AbstractNav.defaultProps = defaultProps;
 
 export default AbstractNav;

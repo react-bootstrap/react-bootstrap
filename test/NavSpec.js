@@ -1,9 +1,7 @@
-import React from 'react';
 import { mount } from 'enzyme';
-
+import React from 'react';
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
-
 import { shouldWarn } from './helpers';
 
 describe('<Nav>', () => {
@@ -211,11 +209,16 @@ describe('<Nav>', () => {
   describe('Web Accessibility', () => {
     it('Should have tablist and tab roles', () => {
       const wrapper = mount(
-        <Nav role="tablist">
+        <Nav>
           <Nav.Link key={1}>Tab 1 content</Nav.Link>
           <Nav.Link key={2}>Tab 2 content</Nav.Link>
         </Nav>,
       );
+
+      wrapper.assertNone('div.nav[role="tablist"]');
+      wrapper.assertNone('a[role="tab"]');
+
+      wrapper.setProps({ role: 'tablist' });
 
       wrapper.assertSingle('div.nav[role="tablist"]');
       wrapper.find('a[role="tab"]').length.should.equal(2);
