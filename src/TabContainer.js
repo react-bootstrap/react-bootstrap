@@ -5,6 +5,7 @@ import { useUncontrolled } from 'uncontrollable';
 import TabContext from './TabContext';
 import SelectableContext from './SelectableContext';
 
+/* eslint-disable react/no-unused-prop-types */
 const propTypes = {
   /**
    * HTML id attribute, required if no `generateChildId` prop
