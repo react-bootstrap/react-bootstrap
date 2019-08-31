@@ -38,12 +38,12 @@ const propTypes = {
   activeKey: PropTypes.any,
 
   /**
-   * Have all `NavItem`s to proportionatly fill all available width.
+   * Have all `NavItem`s proportionately fill all available width.
    */
   fill: PropTypes.bool,
 
   /**
-   * Have all `NavItem`s to evenly fill all available width.
+   * Have all `NavItem`s evenly fill all available width.
    *
    * @type {boolean}
    */
