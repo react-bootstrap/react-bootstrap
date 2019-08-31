@@ -121,7 +121,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.2",
-    "@react-bootstrap/react-popper": "1.2.1",
     "@restart/context": "^2.1.4",
     "@restart/hooks": "^0.3.11",
     "classnames": "^2.2.6",
