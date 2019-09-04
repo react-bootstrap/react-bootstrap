@@ -7,13 +7,11 @@ import { useUncontrolled } from 'uncontrollable';
 import Nav from './Nav';
 import NavLink from './NavLink';
 import NavItem from './NavItem';
-import UncontrolledTabContainer from './TabContainer';
+import TabContainer from './TabContainer';
 import TabContent from './TabContent';
 import TabPane from './TabPane';
 
 import { forEach, map } from './utils/ElementChildren';
-
-const TabContainer = UncontrolledTabContainer.ControlledComponent;
 
 const propTypes = {
   /**
