@@ -61,7 +61,7 @@ const NavbarToggle = React.forwardRef(
         ref={ref}
         onClick={handleClick}
         aria-label={label}
-        className={classNames(className, bsPrefix, !!expanded && 'collapsed')}
+        className={classNames(className, bsPrefix, !expanded && 'collapsed')}
       >
         {children || <span className={`${bsPrefix}-icon`} />}
       </Component>
