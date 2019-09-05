@@ -119,7 +119,7 @@ describe('<Navbar>', () => {
     let collapse = wrapper.find('Collapse');
 
     expect(collapse.is('[in=false]')).to.equal(true);
-    expect(toggle.hasClass('collapsed')).to.equal(false);
+    expect(toggle.hasClass('collapsed')).to.equal(true);
 
     toggle.simulate('click');
 
@@ -127,7 +127,7 @@ describe('<Navbar>', () => {
     collapse = wrapper.find('Collapse');
 
     expect(collapse.is('[in=true]')).to.equal(true);
-    expect(toggle.hasClass('collapsed')).to.equal(true);
+    expect(toggle.hasClass('collapsed')).to.equal(false);
   });
 
   it('Should open external href link in collapseOnSelect', () => {
