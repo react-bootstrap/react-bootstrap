@@ -5051,10 +5051,10 @@ gatsby-plugin-catch-links@^2.1.8:
     "@babel/runtime" "^7.5.5"
     escape-string-regexp "^1.0.5"
 
-gatsby-plugin-mdx@^1.0.38:
-  version "1.0.38"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-1.0.38.tgz#a10e2e20ee06f8bc042b230a5015fb3c3ad50915"
-  integrity sha512-h8OQcsEZEq1vH/Kf0fQPRp0orRuiv6haz8bSggtnPML5oHE3uigfcAKTeTqYaeWZ0P2KWTOJWT4hyAVnF6Oi6g==
+gatsby-plugin-mdx@^1.0.39:
+  version "1.0.39"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-1.0.39.tgz#fa945797b1a7cc8cd3ede386d270899a936903e8"
+  integrity sha512-62WkSCdDHEgnhhscTnXjC8THHwS7Sui9FR8Yg2cC2ce+oOtLm26Afjsi5lGlNjqrU8uGxytCwn9w8z5NEoH0kA==
   dependencies:
     "@babel/core" "^7.5.5"
     "@babel/generator" "^7.5.5"
