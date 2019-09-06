@@ -22,6 +22,26 @@ describe('<ListGroup>', () => {
     );
   });
 
+  it('accepts global horizontal', () => {
+    mount(<ListGroup layout="horizontal" />).assertSingle(
+      'div.list-group.list-group-horizontal',
+    );
+  });
+  it('accepts responsive horizontal', () => {
+    mount(<ListGroup layout="horizontal-sm" />).assertSingle(
+      'div.list-group.list-group-horizontal-sm',
+    );
+    mount(<ListGroup layout="horizontal-md" />).assertSingle(
+      'div.list-group.list-group-horizontal-md',
+    );
+    mount(<ListGroup layout="horizontal-lg" />).assertSingle(
+      'div.list-group.list-group-horizontal-lg',
+    );
+    mount(<ListGroup layout="horizontal-xl" />).assertSingle(
+      'div.list-group.list-group-horizontal-xl',
+    );
+  });
+
   it('accepts as prop', () => {
     mount(<ListGroup as="ul" />).assertSingle('ul.list-group');
   });
