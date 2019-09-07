@@ -48,8 +48,6 @@ const defaultProps = {
   layout: null,
 };
 
-const horizontalPrefix = 'list-group';
-
 const ListGroup = React.forwardRef((props, ref) => {
   let {
     className,
@@ -74,7 +72,7 @@ const ListGroup = React.forwardRef((props, ref) => {
         className,
         bsPrefix,
         variant && `${bsPrefix}-${variant}`,
-        layout && `${horizontalPrefix}-${layout}`,
+        layout && `${bsPrefix}-${layout}`,
       )}
     />
   );
