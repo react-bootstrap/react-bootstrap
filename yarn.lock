@@ -8379,9 +8379,9 @@ uncontrollable@^6.0.0:
     invariant "^2.2.4"
 
 uncontrollable@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/uncontrollable/-/uncontrollable-7.0.0.tgz#6aa0b972e3aa6b7ea100e67e20c1ee1c7fbe0803"
-  integrity sha512-HFhKHDACiAsTYoV3el/LP4PqcLzqyWrNRHE6nMdr0h8f7qbvTPXIN2S4q+tdfc64PHEXaSFBs/fKVB2+UwSYOA==
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/uncontrollable/-/uncontrollable-7.0.1.tgz#9451ecd13ed480c3e8318c2ee5f0f7522b13b33c"
+  integrity sha512-MGlbii7jczJYfY2GbmZi4j1JmB/6giM0Xc/WcKfxEN5W86KS8NPH/Fq/AD1nKjiFEMq7/MRwTCtzKWCeYgiWMA==
   dependencies:
     "@babel/runtime" "^7.4.5"
     invariant "^2.2.4"
