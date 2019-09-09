@@ -89,7 +89,7 @@ const TocLink = styled(Nav.Link)`
   &:focus,
   &:active {
     text-decoration: none;
-    color: $subtleOnDark;
+    color: $subtle-on-dark;
   }
 `;
 

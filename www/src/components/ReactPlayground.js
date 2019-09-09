@@ -1,21 +1,26 @@
-/* eslint-disable react/no-multi-comp */
-
-import classNames from 'classnames';
 import styled, { css } from 'astroturf';
+import classNames from 'classnames';
 import qsa from 'dom-helpers/query/querySelectorAll';
-import React, { useEffect, useRef, useState } from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
-import * as ReactBootstrap from 'react-bootstrap';
 import * as formik from 'formik';
-import * as yup from 'yup';
+import PropTypes from 'prop-types';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import * as ReactBootstrap from 'react-bootstrap';
+import ReactDOM from 'react-dom';
 import {
+  LiveContext,
   LiveProvider,
   LiveEditor,
   LiveError,
   LivePreview,
-  withLive,
 } from 'react-live';
+import * as yup from 'yup';
+import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 
 import PlaceholderImage from './PlaceholderImage';
 import Sonnet from './Sonnet';
@@ -34,44 +39,12 @@ const scope = {
   PlaceholderImage,
 };
 
-const StyledError = styled(LiveError)`
-  composes: alert alert-danger text-monospace from global;
-
-  border-radius: 0;
-  border-width: 0.2rem;
-  margin-bottom: 0;
-  white-space: pre;
-`;
-
-const StyledLiveProviderChild = styled.div`
+const StyledContainer = styled('div')`
   @import '../css/theme';
 
-  background-color: $body-bg;
+  position: relative;
   margin-bottom: 3rem;
-`;
-
-const StyledEditor = styled(LiveEditor)`
-  composes: prism from '../css/prism.module.scss';
-  @import '../css/theme';
-  font-family: $font-family-monospace !important;
-
-  border-radius: 0 0 8px 8px !important;
-`;
-
-const EditorInfoMessage = styled('div')`
-  composes: p-2 alert alert-info from global;
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  pointer-events: none;
-  font-size: 70%;
-
-  *:not(:focus) + & {
-    opacity: 0;
-  }
+  background-color: $body-bg;
 `;
 
 const StyledExample = styled('div')`
@@ -80,14 +53,14 @@ const StyledExample = styled('div')`
   composes: bs-example from global;
 
   position: relative;
-  color: $body-color;
   padding: 1rem;
   border-style: solid;
   border-color: rgb(236, 236, 236);
-  margin-right: 0;
-  margin-left: 0;
   border-width: 0.2rem;
   border-radius: 8px;
+  margin-right: 0;
+  margin-left: 0;
+  color: $body-color;
 
   &.show-code {
     border-width: 0.2rem 0.2rem 0 0.2rem;
@@ -112,174 +85,198 @@ const StyledExample = styled('div')`
   }
 `;
 
-let uid = 0;
+const StyledError = styled(LiveError)`
+  composes: alert alert-danger text-monospace from global;
 
-class Editor extends React.Component {
-  state = { ignoreTab: false };
+  border-radius: 0;
+  border-width: 0.2rem;
+  margin-bottom: 0;
+  white-space: pre;
+`;
 
-  id = `described-by-${++uid}`;
-
-  handleKeyDown = event => {
-    const { key } = event;
-
-    if (this.state.ignoreTab && key !== 'Tab' && key !== 'Shift') {
-      if (key === 'Enter') event.preventDefault();
-      this.setState({ ignoreTab: false });
-    }
-    if (!this.state.ignoreTab && key === 'Escape') {
-      this.setState({ ignoreTab: true });
-    }
-  };
-
-  handleFocus = e => {
-    if (e.target !== e.currentTarget) return;
-    this.setState({
-      ignoreTab: !this.mouseDown,
-      keyboardFocused: !this.mouseDown,
-    });
-  };
-
-  handleMouseDown = () => {
-    this.mouseDown = true;
-    window.setTimeout(() => {
-      this.mouseDown = false;
-    }, 0);
-  };
-
-  render() {
-    const { keyboardFocused, ignoreTab } = this.state;
-    return (
-      <div className="position-relative">
-        <StyledEditor
-          onBlur={this.handleBlur}
-          onFocus={this.handleFocus}
-          onKeyDown={this.handleKeyDown}
-          onMouseDown={this.handleMouseDown}
-          ignoreTabKey={ignoreTab}
-          aria-describedby={this.id}
-          aria-label="Example code editor"
-          padding={20}
-        />
-        {(keyboardFocused || !ignoreTab) && (
-          <EditorInfoMessage id={this.id} aria-live="polite">
-            {ignoreTab ? (
-              <>
-                Press <kbd>enter</kbd> or type a key to enable tab-to-indent
-              </>
-            ) : (
-              <>
-                Press <kbd>esc</kbd> to disable tab trapping
-              </>
-            )}
-          </EditorInfoMessage>
-        )}
-      </div>
-    );
-  }
-}
-
-const prettierComment = /(\{\s*\/\*\s+prettier-ignore\s+\*\/\s*\})|(\/\/\s+prettier-ignore)/gim;
-
-const { background, foreground } = css`
+const { background, foreground, fontFamily } = css`
   @import '../css/theme';
 
   :export {
     background: $lighter;
-    foreground: $subtleOnDark;
+    foreground: $subtle-on-dark;
+    font-family: $font-family-base;
   }
 `;
 
-const Preview = withLive(
-  class extends React.Component {
-    constructor() {
-      super();
+function Preview({ showCode, className }) {
+  const exampleRef = useRef();
+  const [hjs, setHjs] = useState(null);
+  const live = useContext(LiveContext);
 
-      this.example = null;
-    }
-
-    componentDidMount() {
-      import('holderjs').then(({ default: hjs }) => {
-        this.hjs = hjs;
-        hjs.addTheme('gray', {
-          bg: background,
-          fg: foreground,
-          font: 'Helvetica',
-          fontweight: 'normal',
-        });
-        this.runHolder();
+  useEffect(() => {
+    import('holderjs').then(({ default: hjs_ }) => {
+      hjs_.addTheme('gray', {
+        bg: background,
+        fg: foreground,
+        font: fontFamily,
+        fontweight: 'normal',
       });
+
+      setHjs(hjs_);
+    });
+  }, []);
+
+  useIsomorphicEffect(() => {
+    if (!hjs) {
+      return;
     }
 
-    componentDidUpdate(prevProps) {
-      if (prevProps.live.element !== this.props.live.element) this.runHolder();
+    hjs.run({
+      theme: 'gray',
+      images: qsa(exampleRef.current, 'img'),
+    });
+  }, [hjs, live.element]);
+
+  const handleClick = useCallback(e => {
+    if (e.target.tagName === 'A') {
+      e.preventDefault();
     }
+  }, []);
 
-    // prevent links in examples from navigating
-    handleClick = e => {
-      if (e.target.tagName === 'A') e.preventDefault();
-    };
+  return (
+    <>
+      <StyledExample
+        ref={exampleRef}
+        role="region"
+        aria-label="Code Example"
+        showCode={showCode}
+        className={className}
+        onClick={handleClick}
+      >
+        <LivePreview />
+      </StyledExample>
+      <StyledError />
+    </>
+  );
+}
 
-    attachRef = ref => {
-      this.example = ref;
-      this.runHolder();
-    };
+const StyledEditor = styled(LiveEditor)`
+  composes: prism from '../css/prism.module.scss';
 
-    runHolder() {
-      if (!this.hjs || !this.example) return;
+  border-radius: 0 0 8px 8px !important;
+`;
 
-      this.hjs.run({
-        theme: 'gray',
-        images: qsa(this.example, 'img'),
-      });
-    }
+const EditorInfoMessage = styled('div')`
+  composes: p-2 alert alert-info from global;
 
-    render() {
-      const { showCode, className } = this.props;
-      return (
-        <>
-          <StyledExample
-            role="region"
-            aria-label="Code Example"
-            ref={this.attachRef}
-            showCode={showCode}
-            className={className}
-            onClick={this.handleClick}
-          >
-            <LivePreview />
-          </StyledExample>
-          <StyledError />
-        </>
-      );
-    }
-  },
-);
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  font-size: 70%;
+  pointer-events: none;
+`;
 
-// eslint-disable-next-line react/no-multi-comp
-export default class Playground extends React.Component {
-  static propTypes = {
-    codeText: PropTypes.string.isRequired,
-  };
+let uid = 0;
 
-  render() {
-    const { codeText, exampleClassName, showCode = true } = this.props;
-    // Remove the prettier comments and the trailing semicolons in JSX in displayed code.
-    const code = codeText
-      .replace(prettierComment, '')
-      .trim()
-      .replace(/>;$/, '>');
+function Editor() {
+  const [focused, setFocused] = useState(false);
+  const [ignoreTab, setIgnoreTab] = useState(false);
+  const [keyboardFocused, setKeyboardFocused] = useState(false);
+  const mouseDownRef = useRef(false);
 
-    return (
+  const idRef = useRef(null);
+  if (idRef.current === null) idRef.current = `described-by-${++uid}`;
+  const id = idRef.current;
+
+  const handleKeyDown = useCallback(
+    e => {
+      if (ignoreTab) {
+        if (e.key !== 'Tab' && e.key !== 'Shift') {
+          if (e.key === 'Enter') e.preventDefault();
+          setIgnoreTab(false);
+        }
+      } else if (e.key === 'Escape') {
+        setIgnoreTab(true);
+      }
+    },
+    [ignoreTab],
+  );
+
+  const handleFocus = useCallback(() => {
+    setFocused(true);
+    setIgnoreTab(!mouseDownRef.current);
+    setKeyboardFocused(!mouseDownRef.current);
+  }, []);
+
+  const handleBlur = useCallback(() => {
+    setFocused(false);
+  }, []);
+
+  const handleMouseDown = useCallback(() => {
+    mouseDownRef.current = true;
+    window.setTimeout(() => {
+      mouseDownRef.current = false;
+    });
+  }, []);
+
+  const showMessage = keyboardFocused || (focused && !ignoreTab);
+
+  return (
+    <div className="position-relative">
+      <StyledEditor
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onKeyDown={handleKeyDown}
+        onMouseDown={handleMouseDown}
+        ignoreTabKey={ignoreTab}
+        aria-describedby={showMessage ? id : null}
+        aria-label="Example code editor"
+        padding={20}
+      />
+      {showMessage && (
+        <EditorInfoMessage id={id} aria-live="polite">
+          {ignoreTab ? (
+            <>
+              Press <kbd>enter</kbd> or type a key to enable tab-to-indent
+            </>
+          ) : (
+            <>
+              Press <kbd>esc</kbd> to disable tab trapping
+            </>
+          )}
+        </EditorInfoMessage>
+      )}
+    </div>
+  );
+}
+
+const PRETTIER_IGNORE_REGEX = /({\s*\/\*\s+prettier-ignore\s+\*\/\s*})|(\/\/\s+prettier-ignore)/gim;
+
+const propTypes = {
+  codeText: PropTypes.string.isRequired,
+};
+
+function Playground({ codeText, exampleClassName, showCode = true }) {
+  // Remove Prettier comments and trailing semicolons in JSX in displayed code.
+  const code = codeText
+    .replace(PRETTIER_IGNORE_REGEX, '')
+    .trim()
+    .replace(/>;$/, '>');
+
+  return (
+    <StyledContainer>
       <LiveProvider
         scope={scope}
         code={code}
         mountStylesheet={false}
         noInline={codeText.includes('render(')}
       >
-        <StyledLiveProviderChild>
-          <Preview showCode={showCode} className={exampleClassName} />
-          {showCode && <Editor onChange={this.handleChange} />}
-        </StyledLiveProviderChild>
+        <Preview showCode={showCode} className={exampleClassName} />
+        {showCode && <Editor />}
       </LiveProvider>
-    );
-  }
+    </StyledContainer>
+  );
 }
+
+Playground.propTypes = propTypes;
+
+export default Playground;
