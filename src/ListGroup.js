@@ -24,18 +24,11 @@ const propTypes = {
   /**
    * Changes the flow of the list group items from vertical to horizontal.
    * A value of `null` (the default) sets it to vertical for all breakpoints;
-   * `horizontal` sets it go horizontal for all breakpoints, while `horizontal-{sm|md|lg|xl}`
+   * Just including the prop sets it for all breakpoints, while `{sm|md|lg|xl}`
    * makes the list group horizontal starting at that breakpoint’s `min-width`.
-   * @type {('horizontal'|'horizontal-sm'|'horizontal-md'|'horizontal-lg'|'horizontal-xl')}
+   * @type {(true|'sm'|'md'|'lg'|'xl')}
    */
-  layout: PropTypes.oneOf([
-    'horizontal',
-    'horizontal-sm',
-    'horizontal-md',
-    'horizontal-lg',
-    'horizontal-xl',
-    null,
-  ]),
+  horizontal: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', null]),
 
   /**
    * You can use a custom element type for this component.
@@ -45,7 +38,7 @@ const propTypes = {
 
 const defaultProps = {
   variant: null,
-  layout: null,
+  horizontal: null,
 };
 
 const ListGroup = React.forwardRef((props, ref) => {
@@ -53,7 +46,7 @@ const ListGroup = React.forwardRef((props, ref) => {
     className,
     bsPrefix,
     variant,
-    layout,
+    horizontal,
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as = 'div',
     ...controlledProps
@@ -62,6 +55,10 @@ const ListGroup = React.forwardRef((props, ref) => {
   });
 
   bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group');
+  let horziontalString = 'horizontal';
+  if (horizontal && horizontal !== true) {
+    horziontalString = `horizontal-${horizontal}`;
+  }
 
   return (
     <AbstractNav
@@ -72,7 +69,7 @@ const ListGroup = React.forwardRef((props, ref) => {
         className,
         bsPrefix,
         variant && `${bsPrefix}-${variant}`,
-        layout && `${bsPrefix}-${layout}`,
+        horizontal && `${bsPrefix}-${horziontalString}`,
       )}
     />
   );
