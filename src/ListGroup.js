@@ -58,7 +58,8 @@ const ListGroup = React.forwardRef((props, ref) => {
 
   let horizontalVariant;
   if (horizontal) {
-    horizontalVariant = horizontal === true ? 'horizontal' : `horizontal-${horizontal}`;
+    horizontalVariant =
+      horizontal === true ? 'horizontal' : `horizontal-${horizontal}`;
   } else {
     horizontalVariant = null;
   }
