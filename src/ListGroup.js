@@ -55,9 +55,12 @@ const ListGroup = React.forwardRef((props, ref) => {
   });
 
   bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group');
-  let horziontalString = 'horizontal';
-  if (horizontal && horizontal !== true) {
-    horziontalString = `horizontal-${horizontal}`;
+
+  let horizontalVariant;
+  if (horizontal) {
+    horizontalVariant = horizontal === true ? 'horizontal' : `horizontal-${horizontal}`;
+  } else {
+    horizontalVariant = null;
   }
 
   return (
@@ -69,7 +72,7 @@ const ListGroup = React.forwardRef((props, ref) => {
         className,
         bsPrefix,
         variant && `${bsPrefix}-${variant}`,
-        horizontal && `${bsPrefix}-${horziontalString}`,
+        horizontalVariant && `${bsPrefix}-${horizontalVariant}`,
       )}
     />
   );
