@@ -5097,12 +5097,12 @@ gatsby-plugin-page-creator@^2.1.16:
     lodash "^4.17.15"
     micromatch "^3.1.10"
 
-gatsby-plugin-sass@^2.1.13:
-  version "2.1.13"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-sass/-/gatsby-plugin-sass-2.1.13.tgz#f04319aea62455b1e40976f62fe62639439381be"
-  integrity sha512-3UZjKIH04225Oh+0wK/fVPfvpQ3q71XfxbmjP072RXBIuRFHWoNKCwwrP7ouEYqmS+sTF4Vlq4asTYupM3Smsg==
+gatsby-plugin-sass@^2.1.14:
+  version "2.1.14"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-sass/-/gatsby-plugin-sass-2.1.14.tgz#16c21f9bfdded165c5bd0f7b46b6ff6f1801d627"
+  integrity sha512-ly9iy6wdd9oojP5XupZTvcBjwxDsvY7lXcZDQmhVNMWJPSw9O2AHjLEW2BSa7pSL4p/SOGdHdIboSDAZJtZMyg==
   dependencies:
-    "@babel/runtime" "^7.5.5"
+    "@babel/runtime" "^7.6.0"
     sass-loader "^7.3.1"
 
 gatsby-react-router-scroll@^2.1.7:
