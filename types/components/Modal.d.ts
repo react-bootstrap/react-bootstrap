@@ -21,9 +21,11 @@ export interface ModalProps extends TransitionCallbacks {
   enforceFocus?: boolean;
   restoreFocus?: boolean;
   show?: boolean;
+  onShow?: () => void;
   onHide?: () => void;
   container?: any;
   scrollable?: boolean;
+  onEscapeKeyDown?: () => void;
 }
 
 declare class Modal<
