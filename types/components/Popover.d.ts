@@ -11,6 +11,7 @@ export interface PopoverProps {
   placement?: Placement;
   title?: React.ReactNode;
   arrowProps?: { ref: any; style: object };
+  content?: boolean;
 }
 
 declare class Popover extends BsPrefixComponent<'div', PopoverProps> {
