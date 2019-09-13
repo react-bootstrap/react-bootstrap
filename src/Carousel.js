@@ -506,7 +506,7 @@ class Carousel extends React.Component {
             return cloneElement(child, {
               className: classNames(
                 child.props.className,
-                `${bsPrefix}-item`,
+                //`${bsPrefix}-item`,
                 current && currentClasses,
                 previous && prevClasses,
               ),
