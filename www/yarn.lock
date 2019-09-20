@@ -5060,10 +5060,10 @@ gatsby-plugin-astroturf@^0.2.1:
   resolved "https://registry.yarnpkg.com/gatsby-plugin-astroturf/-/gatsby-plugin-astroturf-0.2.1.tgz#b5ed009f5bb682dc78840a0adf25823c6d539aef"
   integrity sha512-BjlGgfMVQVJjAeIKfCy+b+MyWWGAbAQKn20CGBsWcvGl/Yj+dYNUgptLqdpV1mBKA8JKmL5QDx60vnW9ouR7EA==
 
-gatsby-plugin-catch-links@^2.1.9:
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-catch-links/-/gatsby-plugin-catch-links-2.1.9.tgz#74a21ca7a55e1cb49f1776d8913b7da8b1d02779"
-  integrity sha512-UWOty2yuV2tINSv5ToKJfFXUYtaSKtP4zRVeZ3dx+m2v7WO61ap/o3JEMWUAG1n+VaN+TIq2T5Qc9Ln0emDloQ==
+gatsby-plugin-catch-links@^2.1.10:
+  version "2.1.10"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-catch-links/-/gatsby-plugin-catch-links-2.1.10.tgz#2100a84630191c219a44e0a85ed267e2b69bfcfe"
+  integrity sha512-PgssZHRzO0Eu0i+KltQNRXKOe21dDdVtJ3QxEG/CrnCL5LrVePcO048XwJOV2wCwGkpaeli4G7yVWIHlnxgjaw==
   dependencies:
     "@babel/runtime" "^7.6.0"
     escape-string-regexp "^1.0.5"
