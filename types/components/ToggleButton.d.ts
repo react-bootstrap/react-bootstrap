@@ -8,7 +8,7 @@ export interface ToggleButtonProps {
   type?: 'checkbox' | 'radio';
   name?: string;
   checked?: boolean;
-  diabled?: boolean;
+  disabled?: boolean;
   onChange?: React.ChangeEventHandler<this>;
   value: unknown;
   inputRef?: React.LegacyRef<this>;
