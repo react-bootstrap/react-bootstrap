@@ -2200,9 +2200,9 @@ code-point-at@^1.0.0:
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
 codecov@^3.5.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.6.0.tgz#6915561b7064c064e30a588ea23c1384b14d744b"
-  integrity sha512-d9SEDdgEZ1PDXLY52itsk5pMmxVbqmT4+8OCzmZOHUUOxWpmnPK2Fgz35yYUipT8QqkrDRihIvIJKjRynUdk4g==
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.6.1.tgz#f39fc49413445555f81f8e3ca5730992843b4517"
+  integrity sha512-IUJB6WG47nWK7o50etF8jBadxdMw7DmoQg05yIljstXFBGB6clOZsIj6iD4P82T2YaIU3qq+FFu8K9pxgkCJDQ==
   dependencies:
     argv "^0.0.2"
     ignore-walk "^3.0.1"
