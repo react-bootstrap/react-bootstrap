@@ -9,9 +9,7 @@ export interface BreadcrumbProps {
   listProps?: React.OlHTMLAttributes<any>;
 }
 
-declare class Breadcrumb<
-  As extends React.ElementType = 'nav'
-> extends BsPrefixComponent<As, BreadcrumbProps> {
+declare class Breadcrumb extends BsPrefixComponent<'nav', BreadcrumbProps> {
   static Item: typeof BreadcrumbItem;
 }
 

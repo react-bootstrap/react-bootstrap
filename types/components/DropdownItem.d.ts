@@ -13,8 +13,6 @@ export interface DropdownItemProps {
   onSelect?: SelectCallback;
 }
 
-declare class DropdownItem<
-  As extends React.ElementType = typeof SafeAnchor
-> extends BsPrefixComponent<As, DropdownItemProps> {}
+declare class DropdownItem extends BsPrefixComponent<typeof SafeAnchor, DropdownItemProps> {}
 
 export default DropdownItem;

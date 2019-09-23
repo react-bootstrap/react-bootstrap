@@ -29,8 +29,6 @@ export interface ColProps {
   xl?: ColSpec;
 }
 
-declare class Col<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ColProps> {}
+declare class Col extends BsPrefixComponent<'div', ColProps> {}
 
 export default Col;

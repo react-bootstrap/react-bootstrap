@@ -7,8 +7,6 @@ export interface ToastHeaderProps {
   closeButton?: boolean;
 }
 
-declare class ToastHeader<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ToastHeaderProps> {}
+declare class ToastHeader extends BsPrefixComponent<'div', ToastHeaderProps> {}
 
 export default ToastHeader;

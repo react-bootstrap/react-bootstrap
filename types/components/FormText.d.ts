@@ -7,8 +7,6 @@ export interface FormTextProps {
   muted?: boolean;
 }
 
-declare class FormText<
-  As extends React.ElementType = 'small'
-> extends BsPrefixComponent<As, FormTextProps> {}
+declare class FormText extends BsPrefixComponent<'small', FormTextProps> {}
 
 export default FormText;

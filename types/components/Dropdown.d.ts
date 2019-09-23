@@ -27,9 +27,7 @@ export interface DropdownProps {
   onSelect?: SelectCallback;
 }
 
-declare class Dropdown<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, DropdownProps> {
+declare class Dropdown extends BsPrefixComponent<'div', DropdownProps> {
   static Toggle: typeof DropdownToggle;
   static Menu: typeof DropdownMenu;
   static Item: typeof DropdownItem;

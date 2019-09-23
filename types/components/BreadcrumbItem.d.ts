@@ -9,8 +9,6 @@ export interface BreadcrumbItemProps {
   title?: React.ReactNode;
 }
 
-declare class BreadcrumbItem<
-  As extends React.ElementType = 'li'
-> extends BsPrefixComponent<As, BreadcrumbItemProps> {}
+declare class BreadcrumbItem extends BsPrefixComponent<'li', BreadcrumbItemProps> {}
 
 export default BreadcrumbItem;

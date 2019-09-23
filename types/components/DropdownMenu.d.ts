@@ -11,8 +11,6 @@ export interface DropdownMenuProps {
   popperConfig?: object;
 }
 
-declare class DropdownMenu<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, DropdownMenuProps> {}
+declare class DropdownMenu extends BsPrefixComponent<'div', DropdownMenuProps> {}
 
 export default DropdownMenu;

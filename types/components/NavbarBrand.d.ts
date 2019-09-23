@@ -6,8 +6,6 @@ export interface NavbarBrandProps {
   href?: string;
 }
 
-declare class NavbarBrand<
-  As extends React.ElementType = 'a'
-> extends BsPrefixComponent<As, NavbarBrandProps> {}
+declare class NavbarBrand extends BsPrefixComponent<'a', NavbarBrandProps> {}
 
 export default NavbarBrand;

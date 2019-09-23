@@ -7,8 +7,6 @@ export interface FeedbackProps {
   type?: 'valid' | 'invalid';
 }
 
-declare class Feedback<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, FeedbackProps> {}
+declare class Feedback extends BsPrefixComponent<'div', FeedbackProps> {}
 
 export default Feedback;

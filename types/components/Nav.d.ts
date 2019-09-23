@@ -19,9 +19,7 @@ export interface NavProps {
   onKeyDown?: React.KeyboardEventHandler<this>;
 }
 
-declare class Nav<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, NavProps> {
+declare class Nav extends BsPrefixComponent<'div', NavProps> {
   static Item: typeof NavItem;
   static Link: typeof NavLink;
 }

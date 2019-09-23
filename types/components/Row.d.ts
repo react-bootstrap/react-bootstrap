@@ -6,8 +6,6 @@ export interface RowProps {
   noGutters?: boolean;
 }
 
-declare class Row<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, RowProps> {}
+declare class Row extends BsPrefixComponent<'div', RowProps> {}
 
 export default Row;

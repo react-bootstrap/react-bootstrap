@@ -15,8 +15,6 @@ export interface TabsProps {
   unmountOnExit?: boolean;
 }
 
-declare class Tabs<
-  As extends React.ElementType = typeof Nav
-> extends BsPrefixComponent<As, TabsProps> {}
+declare class Tabs extends BsPrefixComponent<typeof Nav, TabsProps> {}
 
 export default Tabs;

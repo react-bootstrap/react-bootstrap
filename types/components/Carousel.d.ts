@@ -25,9 +25,7 @@ export interface CarouselProps {
   touch?: boolean;
 }
 
-declare class Carousel<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, CarouselProps> {
+declare class Carousel extends BsPrefixComponent<'div', CarouselProps> {
   static Item: typeof CarouselItem;
   static Caption: typeof CarouselCaption;
 }

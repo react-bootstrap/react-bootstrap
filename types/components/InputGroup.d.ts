@@ -22,9 +22,7 @@ export interface InputGroupProps {
   size?: 'sm' | 'lg';
 }
 
-declare class InputGroup<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, InputGroupProps> {
+declare class InputGroup extends BsPrefixComponent<'div', InputGroupProps> {
   static Append: typeof InputGroupAppend;
   static Prepend: typeof InputGroupPrepend;
   static Text: typeof InputGroupText;

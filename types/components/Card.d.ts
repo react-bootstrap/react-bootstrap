@@ -69,9 +69,7 @@ export interface CardProps {
   body?: boolean;
 }
 
-declare class Card<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, CardProps> {
+declare class Card extends BsPrefixComponent<'div', CardProps> {
   static Img: typeof CardImg;
   static Title: typeof CardTitle;
   static Subtitle: typeof CardSubtitle;

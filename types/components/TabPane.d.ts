@@ -11,8 +11,6 @@ export interface TabPaneProps extends TransitionCallbacks {
   unmountOnExit?: boolean;
 }
 
-declare class TabPane<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, TabPaneProps> {}
+declare class TabPane extends BsPrefixComponent<'div', TabPaneProps> {}
 
 export default TabPane;

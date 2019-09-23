@@ -6,8 +6,6 @@ export interface ContainerProps {
   fluid?: boolean;
 }
 
-declare class Container<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ContainerProps> {}
+declare class Container extends BsPrefixComponent<'div', ContainerProps> {}
 
 export default Container;

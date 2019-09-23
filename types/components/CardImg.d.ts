@@ -6,8 +6,6 @@ export interface CardImgProps {
   variant?: 'top' | 'bottom';
 }
 
-declare class CardImg<
-  As extends React.ElementType = 'img'
-> extends BsPrefixComponent<As, CardImgProps> {}
+declare class CardImg extends BsPrefixComponent<'img', CardImgProps> {}
 
 export default CardImg;

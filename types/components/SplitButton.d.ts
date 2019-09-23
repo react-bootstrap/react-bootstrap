@@ -3,16 +3,10 @@ import * as React from 'react';
 import DropdownToggle from './DropdownToggle';
 import Dropdown from './Dropdown';
 
-import { ReplaceProps } from './helpers';
+import { ReplaceProps, BsPrefixComponent } from './helpers';
+import { ButtonVariant, ButtonSize } from './Button';
 
-type PropsFromToggle = Partial<
-  Pick<
-    React.ComponentPropsWithRef<typeof DropdownToggle>,
-    'size' | 'variant' | 'disabled'
-  >
->;
-
-export interface SplitButtonProps extends PropsFromToggle {
+export interface SplitButtonProps  {
   id: string | number;
   toggleLabel?: string;
   href?: string;
@@ -22,10 +16,12 @@ export interface SplitButtonProps extends PropsFromToggle {
   menuRole?: string;
   rootCloseEvent?: 'click' | 'mousedown';
   bsPrefix?: string;
+
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  disabled?: boolean;
 }
 
-declare class SplitButton extends React.Component<
-  ReplaceProps<typeof Dropdown, SplitButtonProps>
-> {}
+declare class SplitButton extends BsPrefixComponent<'div', SplitButtonProps> {}
 
 export default SplitButton;

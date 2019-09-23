@@ -28,9 +28,7 @@ export interface ModalProps extends TransitionCallbacks {
   onEscapeKeyDown?: () => void;
 }
 
-declare class Modal<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ModalProps> {
+declare class Modal extends BsPrefixComponent<'div', ModalProps> {
   static Body: typeof ModalBody;
   static Header: typeof ModalHeader;
   static Title: typeof ModalTitle;

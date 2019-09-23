@@ -11,9 +11,7 @@ export interface ListGroupProps {
   onSelect?: SelectCallback;
 }
 
-declare class ListGroup<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ListGroupProps> {
+declare class ListGroup extends BsPrefixComponent<'div', ListGroupProps> {
   static Item: typeof ListGroupItem;
 }
 

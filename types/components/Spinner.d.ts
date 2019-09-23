@@ -18,8 +18,6 @@ export interface SpinnerProps {
   bsPrefix?: string;
 }
 
-declare class Spinner<
-  As extends React.ElementType = typeof Spinner
-> extends BsPrefixComponent<As, SpinnerProps> {}
+declare class Spinner extends BsPrefixComponent<'div', SpinnerProps> {}
 
 export default Spinner;

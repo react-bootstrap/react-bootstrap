@@ -8,18 +8,18 @@ export type ReplaceProps<Inner extends React.ElementType, P> = Omit<
 > &
   P;
 
-export interface BsPrefixProps<As extends React.ElementType> {
-  as?: As;
+export interface BsPrefixProps {
+  as?: React.ElementType;
   bsPrefix?: string;
 }
 
 export class BsPrefixComponent<
   As extends React.ElementType,
   P = {}
-> extends React.Component<ReplaceProps<As, BsPrefixProps<As> & P>> {}
+> extends React.Component<ReplaceProps<As, BsPrefixProps & P>> {}
 
 export type SelectCallback = (
-  eventKey: string,
+  eventKey: unknown,
   e: React.SyntheticEvent<unknown>,
 ) => void;
 

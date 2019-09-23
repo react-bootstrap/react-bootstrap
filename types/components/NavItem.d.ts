@@ -6,8 +6,6 @@ export interface NavItemProps {
   role?: string;
 }
 
-declare class NavItem<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, NavItemProps> {}
+declare class NavItem extends BsPrefixComponent<'div', NavItemProps> {}
 
 export default NavItem;

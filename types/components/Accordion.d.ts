@@ -10,9 +10,7 @@ export interface AccordionProps {
   defaultActiveKey?: string;
 }
 
-declare class Accordion<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, AccordionProps> {
+declare class Accordion extends BsPrefixComponent<'div', AccordionProps> {
   static Toggle: typeof AccordionToggle;
   static Collapse: typeof AccordionCollapse;
 }

@@ -8,8 +8,6 @@ export interface ModalHeaderProps {
   onHide?: () => void;
 }
 
-declare class ModalHeader<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ModalHeaderProps> {}
+declare class ModalHeader extends BsPrefixComponent<'div', ModalHeaderProps> {}
 
 export default ModalHeader;

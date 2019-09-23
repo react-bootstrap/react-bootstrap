@@ -18,9 +18,7 @@ export interface FormProps {
   validated?: boolean;
 }
 
-declare class Form<
-  As extends React.ElementType = 'form'
-> extends BsPrefixComponent<As, FormProps> {
+declare class Form extends BsPrefixComponent<'form', FormProps> {
   static Row: typeof FormRow;
   static Group: typeof FormGroup;
   static Control: typeof FormControl;

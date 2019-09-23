@@ -13,8 +13,6 @@ export interface NavLinkProps {
   eventKey?: unknown;
 }
 
-declare class NavLink<
-  As extends React.ElementType = typeof SafeAnchor
-> extends BsPrefixComponent<As, NavLinkProps> {}
+declare class NavLink extends BsPrefixComponent<typeof SafeAnchor, NavLinkProps> { }
 
 export default NavLink;

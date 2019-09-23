@@ -23,9 +23,7 @@ export interface NavbarProps {
   role?: string;
 }
 
-declare class Navbar<
-  As extends React.ElementType = 'nav'
-> extends BsPrefixComponent<As, NavbarProps> {
+declare class Navbar extends BsPrefixComponent<'nav', NavbarProps> {
   static Brand: typeof NavbarBrand;
   static Toggle: typeof NavbarToggle;
   static Collapse: typeof NavbarCollapse;

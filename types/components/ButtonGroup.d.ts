@@ -9,8 +9,6 @@ export interface ButtonGroupProps {
   vertical?: boolean;
 }
 
-declare class ButtonGroup<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ButtonGroupProps> {}
+declare class ButtonGroup extends BsPrefixComponent<'div', ButtonGroupProps> {}
 
 export default ButtonGroup;

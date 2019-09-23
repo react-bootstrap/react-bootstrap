@@ -3,25 +3,22 @@ import * as React from 'react';
 import Dropdown from './Dropdown';
 import DropdownToggle from './DropdownToggle';
 
-import { ReplaceProps } from './helpers';
+import { BsPrefixComponent } from './helpers';
+import { ButtonVariant, ButtonSize } from './Button';
 
-type PropsFromToggle = Partial<
-  Pick<
-    React.ComponentPropsWithRef<typeof DropdownToggle>,
-    'href' | 'size' | 'variant' | 'disabled'
-  >
->;
-
-export interface DropdownButtonProps extends PropsFromToggle {
+export interface DropdownButtonProps {
   id: string;
   title: React.ReactNode;
   menuRole?: string;
   rootCloseEvent?: 'click' | 'mousedown';
   bsPrefix?: string;
+
+  href?: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  disabled?: boolean;
 }
 
-declare class DropdownButton extends React.Component<
-  ReplaceProps<typeof Dropdown, DropdownButtonProps>
-> {}
+declare class DropdownButton extends BsPrefixComponent<'button', DropdownButtonProps> {}
 
 export default DropdownButton;

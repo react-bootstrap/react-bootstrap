@@ -1,6 +1,8 @@
 import * as React from 'react';
+
 import FormCheckInput from './FormCheckInput';
 import FormCheckLabel from './FormCheckLabel';
+
 import { BsPrefixComponent } from './helpers';
 
 export interface FormCheckProps {
@@ -18,9 +20,7 @@ export interface FormCheckProps {
   feedback?: React.ReactNode;
 }
 
-declare class FormCheck<
-  As extends React.ElementType = 'input'
-> extends BsPrefixComponent<As, FormCheckProps> {
+declare class FormCheck extends BsPrefixComponent<'input', FormCheckProps> {
   static Input: typeof FormCheckInput;
   static Label: typeof FormCheckLabel;
 }

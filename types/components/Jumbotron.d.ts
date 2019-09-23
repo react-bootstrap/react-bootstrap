@@ -6,8 +6,6 @@ export interface JumbotronProps {
   fluid?: boolean;
 }
 
-declare class Jumbotron<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, JumbotronProps> {}
+declare class Jumbotron extends BsPrefixComponent<'div', JumbotronProps> {}
 
 export default Jumbotron;

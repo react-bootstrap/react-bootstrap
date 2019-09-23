@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { BsPrefixComponent } from './helpers';
 
-export interface BadgeProps {
+export interface BadgeProps extends React.HTMLProps<HTMLSpanElement> {
   bsPrefix?: string;
   variant?:
     | 'primary'
@@ -15,8 +14,6 @@ export interface BadgeProps {
   pill?: boolean;
 }
 
-declare class Badge<
-  As extends React.ElementType = 'span'
-> extends BsPrefixComponent<As, BadgeProps> {}
+declare const Badge: React.ForwardRefExoticComponent<BadgeProps>;
 
 export default Badge;

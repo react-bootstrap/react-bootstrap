@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import Feedback from './Feedback';
+
 import { BsPrefixComponent } from './helpers';
 
 export interface FormControlProps {
@@ -16,10 +18,8 @@ export interface FormControlProps {
   isInvalid?: boolean;
 }
 
-declare class FormControl<
-  As extends React.ElementType = 'input'
-> extends BsPrefixComponent<As, FormControlProps> {
+declare class Form extends BsPrefixComponent<'input', FormControlProps> {
   static Feedback: typeof Feedback;
 }
 
-export default FormControl;
+export default Form;
