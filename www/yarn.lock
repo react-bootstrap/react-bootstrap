@@ -5236,10 +5236,10 @@ gatsby-transformer-remark@^2.6.24:
     unist-util-select "^1.5.0"
     unist-util-visit "^1.4.1"
 
-gatsby@^2.15.20:
-  version "2.15.20"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.15.20.tgz#f79aae8f086b49b08dc1126866c8a77b4039849c"
-  integrity sha512-/z7FtYZCZLMh31Tp1sHmdoqGZFiLsSRxSbkUis2TxHFL+bfUpiHAaebKW+OOt0ILUlaGBLNVbbuwJzjxv4kxHg==
+gatsby@^2.15.21:
+  version "2.15.21"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.15.21.tgz#d313bd6c4eed48dd2d1c682e9e4b80045a0257af"
+  integrity sha512-mSiWjKDugVRswf0jCBpMCO7NQToBXXooZqMXB9eftUjowCJQyBOxZdJzB73brQQOltUoZp4ib6n4t7mpFwFuzA==
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/core" "^7.6.0"
@@ -5316,7 +5316,7 @@ gatsby@^2.15.20:
     invariant "^2.2.4"
     is-relative "^1.0.0"
     is-relative-url "^3.0.0"
-    is-wsl "^2.1.0"
+    is-wsl "^2.1.1"
     jest-worker "^24.9.0"
     json-loader "^0.5.7"
     json-stringify-safe "^5.0.1"
@@ -7059,10 +7059,10 @@ is-wsl@^1.1.0:
   resolved "https://registry.yarnpkg.com/is-wsl/-/is-wsl-1.1.0.tgz#1f16e4aa22b04d1336b66188a66af3c600c3a66d"
   integrity sha1-HxbkqiKwTRM2tmGIpmrzxgDDpm0=
 
-is-wsl@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/is-wsl/-/is-wsl-2.1.0.tgz#94369bbeb2249ef07b831b1b08590e686330ccbb"
-  integrity sha512-pFTjpv/x5HRj8kbZ/Msxi9VrvtOMRBqaDi3OIcbwPI3OuH+r3lLxVWukLITBaOGJIbA/w2+M1eVmVa4XNQlAmQ==
+is-wsl@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/is-wsl/-/is-wsl-2.1.1.tgz#4a1c152d429df3d441669498e2486d3596ebaf1d"
+  integrity sha512-umZHcSrwlDHo2TGMXv0DZ8dIUGunZ2Iv68YZnrmCiBPkZ4aaOhtv7pXJKeki9k3qJ3RJr0cDyitcl5wEH3AYog==
 
 isarray@0.0.1:
   version "0.0.1"
