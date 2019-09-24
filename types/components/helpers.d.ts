@@ -18,6 +18,11 @@ export class BsPrefixComponent<
   P = {}
 > extends React.Component<ReplaceProps<As, BsPrefixProps<As> & P>> {}
 
+export type BsPrefixComponentClass<
+  As extends React.ElementType,
+  P = {}
+  > = React.ComponentClass<ReplaceProps<As, BsPrefixProps<As> & P>>;
+
 export type SelectCallback = (
   eventKey: string,
   e: React.SyntheticEvent<unknown>,

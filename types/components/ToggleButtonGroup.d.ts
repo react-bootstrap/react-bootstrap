@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import ButtonGroup from './ButtonGroup';
+import ButtonGroup, { ButtonGroupProps } from './ButtonGroup';
 
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixComponent, BsPrefixComponentClass } from './helpers';
 
 export interface ToggleButtonRadioProps<T> {
   type?: 'radio';
@@ -25,7 +25,7 @@ export type ToggleButtonGroupProps<T> =
 
 declare class ToggleButtonGroup<
   T,
-  As extends React.ElementType = typeof ButtonGroup
+  As extends React.ElementType = BsPrefixComponentClass<'a', ButtonGroupProps>
 > extends BsPrefixComponent<As, ToggleButtonGroupProps<T>> {}
 
 export default ToggleButtonGroup;

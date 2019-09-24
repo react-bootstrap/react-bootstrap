@@ -8,7 +8,7 @@ export interface SafeAnchorProps {
   onKeyDown?: React.KeyboardEventHandler<this>;
   disabled?: boolean;
   role?: string;
-  tabIndex: number | string;
+  tabIndex?: number | string;
 }
 
 declare class SafeAnchor<

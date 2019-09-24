@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import Button from './Button';
+import Button, { ButtonProps } from './Button';
 
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixComponent, BsPrefixComponentClass } from './helpers';
 
 export interface ToggleButtonProps {
   type?: 'checkbox' | 'radio';
@@ -16,7 +16,7 @@ export interface ToggleButtonProps {
 }
 
 declare class ToggleButton<
-  As extends React.ElementType = typeof Button
+  As extends React.ElementType = BsPrefixComponentClass<'button', ButtonProps>
 > extends BsPrefixComponent<As, ToggleButtonProps> {}
 
 export default ToggleButton;
