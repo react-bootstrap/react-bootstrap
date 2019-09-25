@@ -386,3 +386,17 @@ import {
   <ToggleButton value={2}>Radio 2</ToggleButton>
   <ToggleButton value={3}>Radio 3</ToggleButton>
 </ToggleButtonGroup>;
+
+// As = ComponentClass
+<Tabs invalidProp="2" />; // $ExpectError
+<AlerLink invalidProp="2" />; // $ExpectError
+<DropdownItem invalidProp="2" />; // $ExpectError
+<NavLink invalidProp="2" />; // $ExpectError
+<Spinner invalidProp="2" />; // $ExpectError
+<ToggleButton invalidProp="2" />; // $ExpectError
+<ToggleButtonGroup invalidProp="2" />; // $ExpectError
+
+// As = intrinsic
+<Button invalidProp="2" />; // $ExpectError
+<Alert invalidProp="2" />; // $ExpectError
+<Badge invalidProp="2" />; // $ExpectError
