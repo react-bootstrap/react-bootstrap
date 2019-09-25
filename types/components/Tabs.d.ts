@@ -1,8 +1,12 @@
 import * as React from 'react';
 
-import Nav from './Nav';
+import Nav, { NavProps } from './Nav';
 
-import { BsPrefixComponent, SelectCallback } from './helpers';
+import {
+  BsPrefixComponent,
+  SelectCallback,
+  BsPrefixComponentClass,
+} from './helpers';
 
 export interface TabsProps {
   activeKey?: unknown;
@@ -16,7 +20,7 @@ export interface TabsProps {
 }
 
 declare class Tabs<
-  As extends React.ElementType = typeof Nav
+  As extends React.ElementType = BsPrefixComponentClass<'div', NavProps>
 > extends BsPrefixComponent<As, TabsProps> {}
 
 export default Tabs;
