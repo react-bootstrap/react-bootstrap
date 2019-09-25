@@ -21,7 +21,7 @@ export class BsPrefixComponent<
 export type BsPrefixComponentClass<
   As extends React.ElementType,
   P = {}
-  > = React.ComponentClass<ReplaceProps<As, BsPrefixProps<As> & P>>;
+> = React.ComponentClass<ReplaceProps<As, BsPrefixProps<As> & P>>;
 
 export type SelectCallback = (
   eventKey: string,

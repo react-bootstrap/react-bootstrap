@@ -2,7 +2,11 @@ import * as React from 'react';
 
 import SafeAnchor, { SafeAnchorProps } from './SafeAnchor';
 
-import { BsPrefixComponent, SelectCallback, BsPrefixComponentClass } from './helpers';
+import {
+  BsPrefixComponent,
+  SelectCallback,
+  BsPrefixComponentClass,
+} from './helpers';
 
 export interface DropdownItemProps {
   active?: boolean;
