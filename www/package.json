@@ -15,7 +15,7 @@
     "@mdx-js/react": "^1.5.0",
     "@restart/context": "^2.1.4",
     "@restart/hooks": "^0.3.14",
-    "astroturf": "^0.9.17",
+    "astroturf": "^0.9.18",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
     "common-tags": "^1.8.0",

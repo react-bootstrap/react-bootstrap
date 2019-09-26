@@ -1661,10 +1661,10 @@ astral-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-1.0.0.tgz#6c8c3fb827dd43ee3918f27b82782ab7658a6fd9"
   integrity sha512-+Ryf6g3BKoRc7jfp7ad8tM4TtMiaWvbF/1/sQcZPkkS7ag3D5nMBCe2UfOTONtAkaG0tO0ij3C5Lwmf1EiyjHg==
 
-astroturf@^0.9.17:
-  version "0.9.17"
-  resolved "https://registry.yarnpkg.com/astroturf/-/astroturf-0.9.17.tgz#a08b5ee43ea65a85db7fb666c7c7bce7231e673e"
-  integrity sha512-Eg64AV5/Si5CSOKggleRznKcLU3sVJK6uei5Uq2jjbEKuku7TBUasFQoAc4JKxEAwcinlNG2ga/PuZ+NRMbPEw==
+astroturf@^0.9.18:
+  version "0.9.18"
+  resolved "https://registry.yarnpkg.com/astroturf/-/astroturf-0.9.18.tgz#370e744731e4690506b82ed2dc09667e5ff62107"
+  integrity sha512-7Crzbx3e9IrM3EbtQSizQBOM+F9fxDP3DGqDo7DrPsCig7Hd6TMhySsC2G6wrqcLfaTE3LZGB3mGeDJIZG2sXA==
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/core" "^7.5.5"
