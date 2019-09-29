@@ -392,7 +392,7 @@ import {
 <AlerLink invalidProp="2" />; // $ExpectError
 <DropdownItem invalidProp="2" />; // $ExpectError
 <NavLink invalidProp="2" />; // $ExpectError
-<Spinner invalidProp="2" />; // $ExpectError
+<Spinner invalidProp="2" animation="border" />; // $ExpectError
 <ToggleButton invalidProp="2" />; // $ExpectError
 <ToggleButtonGroup invalidProp="2" />; // $ExpectError
 
@@ -400,3 +400,11 @@ import {
 <Button invalidProp="2" />; // $ExpectError
 <Alert invalidProp="2" />; // $ExpectError
 <Badge invalidProp="2" />; // $ExpectError
+
+// AS = ComponentClass
+<Spinner as={Button} colSpan="secondary" />; // $ExpectError
+<Spinner as={Button} active animation="border" />;
+
+// As = Intrinsic
+<Button<'img'> as="img" bla="foo" />; // $ExpectError
+<Button as="img" src="bla" />;
