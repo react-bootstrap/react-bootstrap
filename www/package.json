@@ -21,7 +21,7 @@
     "common-tags": "^1.8.0",
     "copy-text-to-clipboard": "^2.1.1",
     "docsearch.js": "^2.6.3",
-    "dom-helpers": "^3.4.0",
+    "dom-helpers": "^5.1.0",
     "formik": "^1.5.8",
     "gatsby": "^2.15.28",
     "gatsby-link": "^2.2.15",
