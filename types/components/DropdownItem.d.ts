@@ -1,8 +1,12 @@
 import * as React from 'react';
 
-import SafeAnchor from './SafeAnchor';
+import SafeAnchor, { SafeAnchorProps } from './SafeAnchor';
 
-import { BsPrefixComponent, SelectCallback } from './helpers';
+import {
+  BsPrefixComponent,
+  SelectCallback,
+  BsPrefixComponentClass,
+} from './helpers';
 
 export interface DropdownItemProps {
   active?: boolean;
@@ -14,7 +18,8 @@ export interface DropdownItemProps {
 }
 
 declare class DropdownItem<
-  As extends React.ElementType = typeof SafeAnchor
+  // Need to use BsPrefixComponentClass to get proper type checking.
+  As extends React.ElementType = BsPrefixComponentClass<'a', SafeAnchorProps>
 > extends BsPrefixComponent<As, DropdownItemProps> {}
 
 export default DropdownItem;
