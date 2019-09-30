@@ -18,6 +18,7 @@ export interface DropdownItemProps {
 }
 
 declare class DropdownItem<
+  // Need to use BsPrefixComponentClass to get proper type checking.
   As extends React.ElementType = BsPrefixComponentClass<'a', SafeAnchorProps>
 > extends BsPrefixComponent<As, DropdownItemProps> {}
 

@@ -5,6 +5,7 @@ import SafeAnchor, { SafeAnchorProps } from './SafeAnchor';
 import { BsPrefixComponent, BsPrefixComponentClass } from './helpers';
 
 export class AlertLink<
+  // Need to use BsPrefixComponentClass to get proper type checking.
   As extends React.ElementType = BsPrefixComponentClass<'a', SafeAnchorProps>
 > extends BsPrefixComponent<As> {}
 

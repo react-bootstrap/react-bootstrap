@@ -18,6 +18,7 @@ export class BsPrefixComponent<
   P = {}
 > extends React.Component<ReplaceProps<As, BsPrefixProps<As> & P>> {}
 
+// Need to use this instead of typeof Component to get proper type checking.
 export type BsPrefixComponentClass<
   As extends React.ElementType,
   P = {}

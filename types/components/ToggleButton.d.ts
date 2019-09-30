@@ -16,6 +16,7 @@ export interface ToggleButtonProps {
 }
 
 declare class ToggleButton<
+  // Need to use BsPrefixComponentClass to get proper type checking.
   As extends React.ElementType = BsPrefixComponentClass<'button', ButtonProps>
 > extends BsPrefixComponent<As, ToggleButtonProps> {}
 

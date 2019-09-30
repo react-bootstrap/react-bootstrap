@@ -11,6 +11,7 @@ export interface DropdownToggleProps {
 }
 
 declare class DropdownToggle<
+  // Need to use BsPrefixComponentClass to get proper type checking.
   As extends React.ElementType = BsPrefixComponentClass<'button', ButtonProps>
 > extends BsPrefixComponent<As, DropdownToggleProps> {}
 

@@ -20,6 +20,7 @@ export interface TabsProps {
 }
 
 declare class Tabs<
+  // Need to use BsPrefixComponentClass to get proper type checking.
   As extends React.ElementType = BsPrefixComponentClass<'div', NavProps>
 > extends BsPrefixComponent<As, TabsProps> {}
 

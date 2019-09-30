@@ -389,9 +389,9 @@ import {
 
 // As = ComponentClass
 <Tabs invalidProp="2" />; // $ExpectError
-<AlerLink invalidProp="2" />; // $ExpectError
-<DropdownItem invalidProp="2" />; // $ExpectError
-<NavLink invalidProp="2" />; // $ExpectError
+<Alert.Link invalidProp="2" />; // $ExpectError
+<Dropdown.Item invalidProp="2" />; // $ExpectError
+<Nav.Link invalidProp="2" />; // $ExpectError
 <Spinner invalidProp="2" animation="border" />; // $ExpectError
 <ToggleButton invalidProp="2" />; // $ExpectError
 <ToggleButtonGroup invalidProp="2" />; // $ExpectError
