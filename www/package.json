@@ -43,7 +43,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.10.1",
     "react-docgen": "^4.1.1",
-    "react-dom": "^16.9.0",
+    "react-dom": "^16.10.1",
     "react-live": "^2.2.0",
     "remark-slug": "^5.1.2",
     "shakespeare-data": "^3.0.0",
