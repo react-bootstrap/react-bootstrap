@@ -19,6 +19,7 @@
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
     "common-tags": "^1.8.0",
+    "copy-text-to-clipboard": "^2.1.1",
     "docsearch.js": "^2.6.3",
     "dom-helpers": "^3.4.0",
     "formik": "^1.5.8",
