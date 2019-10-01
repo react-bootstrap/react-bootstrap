@@ -46,7 +46,9 @@ PaginationItem.defaultProps = defaultProps;
 function createButton(name, defaultValue, label = name) {
   return class extends React.Component {
     static displayName = name;
+
     static propTypes = { disabled: PropTypes.bool };
+
     render() {
       const { disabled, children, className, ...props } = this.props;
       const Component = disabled ? 'span' : SafeAnchor;

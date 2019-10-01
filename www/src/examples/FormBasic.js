@@ -12,8 +12,8 @@ class FormExample extends React.Component {
   getValidationState() {
     const length = this.state.value.length;
     if (length > 10) return 'success';
-    else if (length > 5) return 'warning';
-    else if (length > 0) return 'error';
+    if (length > 5) return 'warning';
+    if (length > 0) return 'error';
     return null;
   }
 

@@ -67,7 +67,9 @@ function NavMain({ activePage }) {
 
         <Nav pullRight>
           <NavDropdown title={`v${config.version}`} id="version-dropdown">
-            <MenuItem href="https://react-bootstrap.netlify.com">React-Bootstrap for Bootstrap 4</MenuItem>
+            <MenuItem href="https://react-bootstrap.netlify.com">
+              React-Bootstrap for Bootstrap 4
+            </MenuItem>
           </NavDropdown>
           <NavItem href="https://getbootstrap.com/docs/3.3/css/">
             Supports Bootstrap v{config.bootstrapVersion}

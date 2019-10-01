@@ -37,7 +37,8 @@ class PropTable extends React.Component {
   getDisplayTypeName(typeName) {
     if (typeName === 'func') {
       return 'function';
-    } else if (typeName === 'bool') {
+    }
+    if (typeName === 'bool') {
       return 'boolean';
     }
 

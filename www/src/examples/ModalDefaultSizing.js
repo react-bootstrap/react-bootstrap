@@ -141,6 +141,7 @@ class App extends React.Component {
       lgShow: false
     };
   }
+
   render() {
     let smClose = () => this.setState({ smShow: false });
     let lgClose = () => this.setState({ lgShow: false });

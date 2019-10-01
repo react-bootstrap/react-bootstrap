@@ -23,6 +23,7 @@ class Trigger extends React.Component {
   handleHide() {
     this.setState({ show: false });
   }
+
   render() {
     return (
       <div className="modal-container" style={{ height: 200 }}>
