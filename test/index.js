@@ -1,9 +1,8 @@
+import Enzyme, { ShallowWrapper, ReactWrapper } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import deprecated from 'prop-types-extra/lib/deprecated';
 
 import { _resetWarned } from '../src/utils/deprecationWarning';
-
-import Enzyme, { ShallowWrapper, ReactWrapper } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
