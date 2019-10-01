@@ -117,4 +117,12 @@ describe('<FormCheck>', () => {
 
     wrapper.assertSingle('label.custom-control-label');
   });
+
+  it('should support "as"', () => {
+    const Surrogate = ({ className = '', ...rest }) => (
+      <input className={`extraClass ${className}'`} {...rest} />
+    );
+    const wrapper = mount(<FormCheck as={Surrogate} />);
+    wrapper.assertSingle('input.extraClass[type="checkbox"]');
+  });
 });

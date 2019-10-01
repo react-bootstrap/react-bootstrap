@@ -30,6 +30,13 @@ const propTypes = {
    */
   _ref: PropTypes.any,
 
+  /**
+   * The underlying HTML element to use when rendering the FormCheck.
+   *
+   * @type {('input'|elementType)}
+   */
+  as: PropTypes.elementType,
+
   /** A HTML id attribute, necessary for proper form accessibility. */
   id: PropTypes.string,
 
@@ -103,6 +110,8 @@ const FormCheck = React.forwardRef(
       label,
       children,
       custom: propCustom,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as = 'input',
       ...props
     },
     ref,
@@ -133,6 +142,7 @@ const FormCheck = React.forwardRef(
         isInvalid={isInvalid}
         isStatic={!hasLabel}
         disabled={disabled}
+        as={as}
       />
     );
 

@@ -17,6 +17,13 @@ const propTypes = {
    */
   bsCustomPrefix: PropTypes.string,
 
+  /**
+   * The underlying HTML element to use when rendering the FormCheckInput.
+   *
+   * @type {('input'|elementType)}
+   */
+  as: PropTypes.elementType,
+
   /** A HTML id attribute, necessary for proper form accessibility. */
   id: PropTypes.string,
 
@@ -50,6 +57,8 @@ const FormCheckInput = React.forwardRef(
       isValid,
       isInvalid,
       isStatic,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'input',
       ...props
     },
     ref,
@@ -60,7 +69,7 @@ const FormCheckInput = React.forwardRef(
       : useBootstrapPrefix(bsPrefix, 'form-check-input');
 
     return (
-      <input
+      <Component
         {...props}
         ref={ref}
         id={id || controlId}
