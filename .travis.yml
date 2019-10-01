@@ -17,6 +17,11 @@ services:
 cache:
   yarn: true
   npm: true
+  directories:
+    - www/node_modules
+
+install:
+  - yarn bootstrap
 
 after_script:
   - node_modules/.bin/codecov
