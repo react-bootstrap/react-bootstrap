@@ -1,4 +1,11 @@
-const renderTooltip = props => (
+const renderTooltip = ({
+  placement,
+  scheduleUpdate,
+  arrowProps,
+  outOfBoundaries,
+  show,
+  ...props
+}) => (
   <div
     {...props}
     style={{
