@@ -1,28 +1,10 @@
-const renderTooltip = ({
-  placement,
-  scheduleUpdate,
-  arrowProps,
-  outOfBoundaries,
-  show,
-  ...props
-}) => (
-  <div
-    {...props}
-    style={{
-      backgroundColor: 'rgba(0, 0, 0, 0.85)',
-      padding: '2px 10px',
-      color: 'white',
-      borderRadius: 3,
-      ...props.style,
-    }}
-  >
-    Simple tooltip
-  </div>
-);
+function renderTooltip(props) {
+  return <Tooltip {...props}>Simple tooltip</Tooltip>;
+}
 
 const Example = () => (
   <OverlayTrigger
-    placement="right-start"
+    placement="right"
     delay={{ show: 250, hide: 400 }}
     overlay={renderTooltip}
   >
