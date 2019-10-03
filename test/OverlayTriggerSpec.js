@@ -39,18 +39,69 @@ describe('<OverlayTrigger>', () => {
     callback.should.have.been.called;
   });
 
-  it('Should show after click trigger', () => {
-    const wrapper = mount(
-      <OverlayTrigger trigger="click" overlay={<Div className="test" />}>
-        <button type="button">button</button>
-      </OverlayTrigger>,
-    );
+  describe('trigger handlers', () => {
+    [
+      {
+        trigger: 'click',
+        event: 'click',
+      },
+      {
+        trigger: 'hover',
+        event: 'mouseOver',
+      },
+      {
+        trigger: 'focus',
+        event: 'focus',
+      },
+    ].forEach(({ trigger, event }) => {
+      it(`Should show after ${trigger} trigger`, () => {
+        const wrapper = mount(
+          <OverlayTrigger trigger={trigger} overlay={<Div className="test" />}>
+            <button type="button">button</button>
+          </OverlayTrigger>,
+        );
 
-    wrapper.assertNone('.test');
+        wrapper.assertNone('div.test');
 
-    wrapper.find('button').simulate('click');
+        wrapper.find('button').simulate(event);
 
-    wrapper.assertSingle('div.test');
+        wrapper.assertSingle('div.test');
+      });
+    });
+
+    it('Should hide after blur for the focus trigger', () => {
+      const wrapper = mount(
+        <OverlayTrigger
+          defaultShow
+          trigger="focus"
+          overlay={<Div className="test" />}
+        >
+          <button type="button">button</button>
+        </OverlayTrigger>,
+      );
+      wrapper.assertSingle('div.test.show');
+
+      wrapper.find('button').simulate('blur');
+
+      wrapper.assertNone('div.test.show');
+    });
+
+    it('Should hide after mouseOut for the hover trigger', () => {
+      const wrapper = mount(
+        <OverlayTrigger
+          defaultShow
+          trigger="hover"
+          overlay={<Div className="test" />}
+        >
+          <button type="button">button</button>
+        </OverlayTrigger>,
+      );
+      wrapper.assertSingle('div.test.show');
+
+      wrapper.find('button').simulate('mouseOut');
+
+      wrapper.assertNone('div.test.show');
+    });
   });
 
   it('Should not set aria-describedby if the state is not show', () => {
@@ -82,7 +133,7 @@ describe('<OverlayTrigger>', () => {
     });
   });
 
-  describe('trigger handlers', () => {
+  describe('maintain trigger handlers', () => {
     let mountPoint;
 
     beforeEach(() => {
@@ -95,11 +146,12 @@ describe('<OverlayTrigger>', () => {
       document.body.removeChild(mountPoint);
     });
 
-    it('Should keep trigger handlers', done => {
+    it('Should keep trigger handlers', () => {
+      const triggerSpy = sinon.spy();
       mount(
         <div>
           <OverlayTrigger trigger="click" overlay={<Div>test</Div>}>
-            <button type="button" onClick={() => done()}>
+            <button type="button" onClick={triggerSpy}>
               button
             </button>
           </OverlayTrigger>
@@ -108,6 +160,8 @@ describe('<OverlayTrigger>', () => {
       )
         .find('button')
         .simulate('click');
+
+      triggerSpy.should.have.been.calledOnce;
     });
   });
 
