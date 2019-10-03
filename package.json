@@ -1,10 +1,10 @@
 {
   "name": "react-bootstrap",
-  "version": "1.0.0-beta.12",
+  "version": "1.0.0-beta.13",
   "description": "Bootstrap 4 components built with React",
   "repository": {
     "type": "git",
-    "url": "react-bootstrap/react-bootstrap"
+    "url": "git+https://github.com/react-bootstrap/react-bootstrap.git"
   },
   "homepage": "https://react-bootstrap.github.io/",
   "sideEffects": false,
@@ -59,7 +59,10 @@
     "react-component",
     "bootstrap"
   ],
-  "author": "Stephen J. Collings <stevoland@gmail.com>",
+  "author": {
+    "name": "Stephen J. Collings",
+    "email": "stevoland@gmail.com"
+  },
   "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0",
@@ -138,5 +141,10 @@
   },
   "release": {
     "publishDir": "lib"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/react-bootstrap/react-bootstrap/issues"
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "react-bootstrap@1.0.0-beta.12"
 }
