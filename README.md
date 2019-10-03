@@ -36,6 +36,11 @@ From there you can:
 - Start a local copy of the docs site with `yarn start`
 - Or build a local copy of the library with `yarn run build`
 
+Alternatively You can also use Gitpod  ( a free online IDE that will automate your dev setup ) for running the development server with a single click. It will launch a ready to code VS Code workspace with the dependencies pre-installed and the web server running so that you can start hacking around without wasting any precious time on development setup.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/react-bootstrap/react-bootstrap/)
+
+
 ## CodeSandbox Examples
 
 [Click here](https://github.com/react-bootstrap/code-sandbox-examples) to explore some React-Bootstrap [CodeSandbox](https://codesandbox.io/) examples.
