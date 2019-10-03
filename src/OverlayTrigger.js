@@ -72,7 +72,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  defaultOverlayShown: false,
+  defaultShow: false,
   trigger: ['hover', 'focus'],
 };
 
@@ -149,19 +149,18 @@ class OverlayTrigger extends React.Component {
 
   handleFocus = e => {
     const { onFocus } = this.getChildProps();
-    this.handleShow(e);
+    this.handleShow();
     if (onFocus) onFocus(e);
   };
 
   handleBlur = e => {
     const { onBlur } = this.getChildProps();
-    this.handleHide(e);
+    this.handleHide();
     if (onBlur) onBlur(e);
   };
 
   handleClick = e => {
     const { onClick } = this.getChildProps();
-
     if (this.state.show) this.hide();
     else this.show();
 
@@ -184,7 +183,7 @@ class OverlayTrigger extends React.Component {
     const related = e.relatedTarget || e.nativeEvent[relatedNative];
 
     if ((!related || related !== target) && !contains(target, related)) {
-      handler(e);
+      handler();
     }
   }
 
@@ -212,18 +211,18 @@ class OverlayTrigger extends React.Component {
 
     const triggerProps = {};
 
-    let triggers = trigger == null ? [] : [].concat(trigger);
+    let triggers = trigger ? [].concat(trigger) : [];
 
-    if (triggers.indexOf('click') !== -1) {
+    if (triggers.includes('click')) {
       triggerProps.onClick = this.handleClick;
     }
 
-    if (triggers.indexOf('focus') !== -1) {
-      triggerProps.onFocus = this.handleShow;
-      triggerProps.onBlur = this.handleHide;
+    if (triggers.includes('focus')) {
+      triggerProps.onFocus = this.handleFocus;
+      triggerProps.onBlur = this.handleBlur;
     }
 
-    if (triggers.indexOf('hover') !== -1) {
+    if (triggers.includes('hover')) {
       warning(
         triggers.length >= 1,
         '[react-bootstrap] Specifying only the `"hover"` trigger limits the ' +
