@@ -23,20 +23,54 @@ describe('<OverlayTrigger>', () => {
     ).assertSingle('button');
   });
 
-  it('Should call OverlayTrigger onClick prop to child', () => {
-    const callback = sinon.spy();
+  describe('forward triggers to child', () => {
+    it(`Should call child's onClick for the click trigger`, () => {
+      const callback = sinon.spy();
 
-    mount(
-      <OverlayTrigger overlay={<Div>test</Div>} trigger="click">
-        <button type="button" onClick={callback}>
-          button
-        </button>
-      </OverlayTrigger>,
-    )
-      .find('button')
-      .simulate('click');
+      mount(
+        <OverlayTrigger overlay={<Div>test</Div>} trigger="click">
+          <button type="button" onClick={callback}>
+            button
+          </button>
+        </OverlayTrigger>,
+      )
+        .find('button')
+        .simulate('click');
 
-    callback.should.have.been.called;
+      callback.should.have.been.called;
+    });
+
+    it(`Should call child's onFocus for the focus trigger`, () => {
+      const callback = sinon.spy();
+
+      mount(
+        <OverlayTrigger overlay={<Div>test</Div>} trigger="focus">
+          <button type="button" onFocus={callback}>
+            button
+          </button>
+        </OverlayTrigger>,
+      )
+        .find('button')
+        .simulate('focus');
+
+      callback.should.have.been.called;
+    });
+
+    it(`Should call child's onBlur for the focus trigger`, () => {
+      const callback = sinon.spy();
+
+      mount(
+        <OverlayTrigger overlay={<Div>test</Div>} trigger="focus">
+          <button type="button" onBlur={callback}>
+            button
+          </button>
+        </OverlayTrigger>,
+      )
+        .find('button')
+        .simulate('blur');
+
+      callback.should.have.been.called;
+    });
   });
 
   describe('trigger handlers', () => {
@@ -67,6 +101,29 @@ describe('<OverlayTrigger>', () => {
 
         wrapper.assertSingle('div.test');
       });
+    });
+
+    it('Should allow multiple triggers (click and focus)', () => {
+      const wrapper = mount(
+        <OverlayTrigger
+          trigger={['focus', 'click']}
+          overlay={<Div className="test" />}
+        >
+          <button type="button">button</button>
+        </OverlayTrigger>,
+      );
+
+      wrapper.assertNone('div.test.show');
+
+      wrapper.find('button').simulate('click');
+      wrapper.assertSingle('div.test.show');
+
+      // hide the element
+      wrapper.find('button').simulate('click');
+      wrapper.assertNone('div.test.show');
+
+      wrapper.find('button').simulate('focus');
+      wrapper.assertSingle('div.test.show');
     });
 
     it('Should hide after blur for the focus trigger', () => {
