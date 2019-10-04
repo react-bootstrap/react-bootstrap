@@ -1,4 +1,5 @@
 /* eslint-disable react/no-danger */
+
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { css } from 'astroturf';
@@ -14,6 +15,7 @@ const styles = css`
   .block {
     composes: prism from '../css/prism.module.scss';
 
+    padding: 20px; // Matching padding in <Editor>.
     border-radius: 8px;
     margin: 0 -1rem 3rem;
 
