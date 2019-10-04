@@ -48,9 +48,6 @@ const propTypes = {
 
   /** @default 'a' */
   as: PropTypes.elementType,
-
-  /** @private */
-  innerRef: PropTypes.any,
 };
 
 const defaultProps = {
