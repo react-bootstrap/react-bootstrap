@@ -57,6 +57,7 @@ const Table = React.forwardRef(
   (
     {
       bsPrefix,
+      className,
       striped,
       bordered,
       borderless,
@@ -64,7 +65,6 @@ const Table = React.forwardRef(
       size,
       variant,
       responsive,
-      className,
       ...otherProps
     },
     ref,
