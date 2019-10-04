@@ -8,8 +8,8 @@
   },
   "homepage": "https://react-bootstrap.github.io/",
   "sideEffects": false,
-  "main": "lib/index.js",
-  "module": "lib/es/index.js",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
   "scripts": {
     "bootstrap": "yarn && yarn --cwd www",
     "build": "node tools/build.js",
