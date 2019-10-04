@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap",
-  "version": "1.0.0-beta.13",
+  "version": "1.0.0-beta.14",
   "description": "Bootstrap 4 components built with React",
   "repository": {
     "type": "git",
@@ -146,5 +146,5 @@
     "url": "https://github.com/react-bootstrap/react-bootstrap/issues"
   },
   "readme": "ERROR: No README data found!",
-  "_id": "react-bootstrap@1.0.0-beta.12"
+  "_id": "react-bootstrap@1.0.0-beta.13"
 }
