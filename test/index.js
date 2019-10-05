@@ -5,8 +5,8 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-function assertLength(length) {
-  return function $assertLength(selector) {
+const assertLength = length =>
+  function $assertLength(selector) {
     let result = this.find(selector);
     expect(
       result,
@@ -16,24 +16,12 @@ function assertLength(length) {
     ).to.have.length(length);
     return result;
   };
-}
-
-function print() {
-  return this.tap(f => console.log(f.debug()));
-}
 
 ReactWrapper.prototype.assertSingle = assertLength(1);
 ShallowWrapper.prototype.assertSingle = assertLength(1);
 
 ReactWrapper.prototype.assertNone = assertLength(0);
 ShallowWrapper.prototype.assertNone = assertLength(0);
-
-ReactWrapper.prototype.print = print;
-ReactWrapper.prototype.printDOM = function printDOM() {
-  return this.tap(f => console.log(f.html()));
-};
-
-ShallowWrapper.prototype.print = print;
 
 beforeEach(() => {
   sinon.stub(console, 'error').callsFake((msg, ...args) => {
