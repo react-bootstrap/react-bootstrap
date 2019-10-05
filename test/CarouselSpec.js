@@ -10,7 +10,7 @@ describe('<Carousel>', () => {
     <Carousel.Item key={3}>Item 3 content</Carousel.Item>,
   ];
 
-  it('should should show the first item be default and render all', () => {
+  it('should show the first item by default and render all', () => {
     const wrapper = mount(<Carousel>{items}</Carousel>);
 
     const carouselItems = wrapper.find('CarouselItem');
@@ -336,7 +336,7 @@ describe('<Carousel>', () => {
       clock.restore();
     });
 
-    it(`should wrap to last from first`, () => {
+    it('should wrap to last from first', () => {
       const onSelectSpy = sinon.spy();
 
       const wrapper = mount(
@@ -353,7 +353,7 @@ describe('<Carousel>', () => {
       sinon.assert.calledWith(onSelectSpy, items.length - 1);
     });
 
-    it(`should wrap from first to last`, () => {
+    it('should wrap from first to last', () => {
       const onSelectSpy = sinon.spy();
 
       const wrapper = mount(
@@ -390,7 +390,7 @@ describe('<Carousel>', () => {
         },
       },
     ].forEach(({ caseName, activeIndex, eventPayload }) => {
-      it(`should not wrap (without wrap prop) for ${caseName}`, () => {
+      it(`should not wrap with wrap unset for ${caseName}`, () => {
         const onSelectSpy = sinon.spy();
         const wrapper = mount(
           <Carousel
