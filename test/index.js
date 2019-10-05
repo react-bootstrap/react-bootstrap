@@ -5,8 +5,8 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-const assertLength = length =>
-  function $assertLength(selector) {
+function assertLength(length) {
+  return function $assertLength(selector) {
     let result = this.find(selector);
     expect(
       result,
@@ -16,6 +16,7 @@ const assertLength = length =>
     ).to.have.length(length);
     return result;
   };
+}
 
 ReactWrapper.prototype.assertSingle = assertLength(1);
 ShallowWrapper.prototype.assertSingle = assertLength(1);
