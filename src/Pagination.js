@@ -5,6 +5,20 @@ import React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 import PageItem, { First, Prev, Ellipsis, Next, Last } from './PageItem';
 
+const propTypes = {
+  /**
+   * @default 'pagination'
+   * */
+  bsPrefix: PropTypes.string,
+
+  /**
+   * Set's the size of all PageItems.
+   *
+   * @type {('sm'|'lg')}
+   */
+  size: PropTypes.string,
+};
+
 /**
  * @property {PageItem} Item
  * @property {PageItem} First
@@ -32,19 +46,7 @@ const Pagination = React.forwardRef(
   },
 );
 
-Pagination.propTypes = {
-  /**
-   * @default 'pagination'
-   * */
-  bsPrefix: PropTypes.string,
-
-  /**
-   * Set's the size of all PageItems.
-   *
-   * @type {('sm'|'lg')}
-   */
-  size: PropTypes.string,
-};
+Pagination.propTypes = propTypes;
 
 Pagination.First = First;
 Pagination.Prev = Prev;
