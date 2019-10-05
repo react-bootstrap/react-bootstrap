@@ -213,16 +213,16 @@ class OverlayTrigger extends React.Component {
 
     let triggers = trigger ? [].concat(trigger) : [];
 
-    if (triggers.includes('click')) {
+    if (triggers.indexOf('click') !== -1) {
       triggerProps.onClick = this.handleClick;
     }
 
-    if (triggers.includes('focus')) {
+    if (triggers.indexOf('focus') !== -1) {
       triggerProps.onFocus = this.handleFocus;
       triggerProps.onBlur = this.handleBlur;
     }
 
-    if (triggers.includes('hover')) {
+    if (triggers.indexOf('hover') !== -1) {
       warning(
         triggers.length >= 1,
         '[react-bootstrap] Specifying only the `"hover"` trigger limits the ' +
