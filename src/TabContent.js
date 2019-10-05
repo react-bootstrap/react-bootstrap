@@ -4,6 +4,15 @@ import React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 
+const propTypes = {
+  /**
+   * @default 'tab-content'
+   */
+  bsPrefix: PropTypes.string,
+
+  as: PropTypes.elementType,
+};
+
 const TabContent = React.forwardRef(
   (
     {
@@ -26,13 +35,6 @@ const TabContent = React.forwardRef(
   },
 );
 
-TabContent.propTypes = {
-  /**
-   * @default 'tab-content'
-   */
-  bsPrefix: PropTypes.string,
-
-  as: PropTypes.elementType,
-};
+TabContent.propTypes = propTypes;
 
 export default TabContent;
