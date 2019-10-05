@@ -50,21 +50,18 @@ describe('<SplitButton>', () => {
       .simulate('click');
   });
 
-  it('should not invoke onClick when SplitButton.Toggle is clicked (prop)', done => {
+  it('should not invoke onClick when SplitButton.Toggle is clicked (prop)', () => {
     let onClickSpy = sinon.spy();
 
     const wrapper = mount(
-      <SplitButton title="Title" id="test-id" onClick={() => done()}>
+      <SplitButton title="Title" id="test-id" onClick={onClickSpy}>
         <DropdownItem>Item 1</DropdownItem>
       </SplitButton>,
     );
 
     wrapper.find('button.dropdown-toggle').simulate('click');
 
-    setTimeout(() => {
-      onClickSpy.should.not.have.been.called;
-      done();
-    }, 10);
+    expect(onClickSpy.callCount).to.equal(0);
   });
 
   it('Should pass disabled to both buttons', () => {

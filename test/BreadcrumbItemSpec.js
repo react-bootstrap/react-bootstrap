@@ -53,7 +53,7 @@ describe('<Breadcrumb.Item>', () => {
 
     instance.find('a').simulate('click');
 
-    expect(handleClick).to.have.property('callCount', 1);
+    expect(handleClick.callCount).to.equal(1);
   });
 
   it('Should apply id onto the anchor', () => {
