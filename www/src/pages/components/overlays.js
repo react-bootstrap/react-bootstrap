@@ -117,7 +117,7 @@ export default withLayout(function TooltipSection({ data }) {
         <a href="https://reactjs.org/docs/react-api.html#reactforwardref">
           forwardRef()
         </a>{' '}
-        for stateless function components.
+        for function components.
       </p>
 
       <ReactPlayground codeText={OverlayTrigger} />

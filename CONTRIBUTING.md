@@ -30,7 +30,7 @@ Try and be consistent with the overall style and API of the library as a whole. 
 
 Avoid unnecessary Higher Order Components (HOCs), unless they add a significant amount of value or abstract way something that would otherwise complicate many components (like `uncontrollable`). It's not that HOC's are bad, but we want to try and keep these low level ui blocks as flat and straightforward as possible. Prefer to work explicitly in the component and avoid over optimization up front.
 
-Components should not be stateless function components by default, folks often add `refs` to them so "stateful" class components are a better default for `react-bootstrap` components. Components should also **not** use `PureComponent` by default. For a variety of reasons the sort of components these are don't generally benefit from that optimization, and may cause bugs.
+Components should not be function components by default. Folks often add `refs` to them so class components are a better default for `react-bootstrap` components. Components should also **not** use `PureComponent` by default. For a variety of reasons the sort of components these are don't generally benefit from that optimization, and may cause bugs.
 
 ### Accessible by Default
 
