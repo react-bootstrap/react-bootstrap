@@ -1,5 +1,6 @@
 import { mount } from 'enzyme';
 import React from 'react';
+import Card from '../src/Card';
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
 import { shouldWarn } from './helpers';
@@ -16,7 +17,11 @@ describe('<Nav>', () => {
     document.body.removeChild(mountPoint);
   });
 
-  it('Should set the correct item active', () => {
+  it('should have div as default component', () => {
+    mount(<Nav />).assertSingle('div');
+  });
+
+  it('should set the correct item active', () => {
     const wrapper = mount(
       <Nav variant="pills" defaultActiveKey={1}>
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
@@ -30,7 +35,7 @@ describe('<Nav>', () => {
     assert.notOk(items.at(1).is('.active'));
   });
 
-  it('Should adds variant class', () => {
+  it('should adds variant class', () => {
     mount(
       <Nav variant="tabs">
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
@@ -39,7 +44,7 @@ describe('<Nav>', () => {
     ).assertSingle('div.nav.nav-tabs');
   });
 
-  it('Should adds justified class', () => {
+  it('should adds justified class', () => {
     mount(
       <Nav justify>
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
@@ -48,7 +53,7 @@ describe('<Nav>', () => {
     ).assertSingle('div.nav.nav-justified');
   });
 
-  it('Should adds fill class', () => {
+  it('should adds fill class', () => {
     mount(
       <Nav fill>
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
@@ -57,7 +62,7 @@ describe('<Nav>', () => {
     ).assertSingle('div.nav.nav-fill');
   });
 
-  it('Should be navbar aware', () => {
+  it('should be navbar aware', () => {
     mount(
       <Navbar>
         <Nav>
@@ -68,7 +73,18 @@ describe('<Nav>', () => {
     ).assertSingle('div.navbar-nav');
   });
 
-  it('Should call on select when item is selected', done => {
+  it('should be card aware', () => {
+    mount(
+      <Card>
+        <Nav variant="pills">
+          <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
+          <Nav.Link eventKey={2}>Pill 2 content</Nav.Link>
+        </Nav>
+      </Card>,
+    ).assertSingle('div.card-header-pills');
+  });
+
+  it('should call on select when item is selected', done => {
     function handleSelect(key) {
       assert.equal(key, '2');
       done();
@@ -87,7 +103,7 @@ describe('<Nav>', () => {
       .simulate('click');
   });
 
-  it('Should set the correct item active by href', () => {
+  it('should set the correct item active by href', () => {
     mount(
       <Nav defaultActiveKey="#item1">
         <Nav.Link href="#item1" className="test-selected">
@@ -98,23 +114,30 @@ describe('<Nav>', () => {
     ).assertSingle('a.test-selected.active');
   });
 
-  it('Should warn when attempting to use a justify navbar nav', () => {
+  it('should warn when attempting to use a justify navbar nav', () => {
     shouldWarn('justify navbar `Nav`s are not supported');
 
     mount(<Nav navbar justify />);
   });
 
   describe('keyboard navigation', () => {
-    let instance;
+    let wrapper;
     let selectSpy;
+    let keyDownSpy;
 
     beforeEach(() => {
       selectSpy = sinon.spy(activeKey => {
-        instance.setProps({ activeKey });
+        wrapper.setProps({ activeKey });
       });
+      keyDownSpy = sinon.spy();
 
-      instance = mount(
-        <Nav activeKey={1} onSelect={selectSpy} role="tablist">
+      wrapper = mount(
+        <Nav
+          activeKey={1}
+          onSelect={selectSpy}
+          onKeyDown={keyDownSpy}
+          role="tablist"
+        >
           <Nav.Link eventKey={1}>Nav.Link 1 content</Nav.Link>
           <Nav.Link eventKey={2} disabled>
             Nav.Link 2 content
@@ -129,10 +152,10 @@ describe('<Nav>', () => {
       );
     });
 
-    afterEach(() => instance.unmount());
+    afterEach(() => wrapper.unmount());
 
     it('only the active tab should be focusable', () => {
-      const links = instance.find('a').map(n => n.getDOMNode());
+      const links = wrapper.find('a').map(n => n.getDOMNode());
 
       expect(links[0].getAttribute('tabindex')).to.not.equal('-1');
       expect(links[1].getAttribute('tabindex')).to.equal('-1');
@@ -142,7 +165,7 @@ describe('<Nav>', () => {
     });
 
     it('should focus the next tab on arrow key', () => {
-      const anchors = instance.find('a');
+      const anchors = wrapper.find('a');
 
       anchors
         .at(0)
@@ -151,15 +174,15 @@ describe('<Nav>', () => {
           key: 'ArrowRight',
         });
 
-      expect(instance.prop('activeKey')).to.equal('3');
+      expect(wrapper.prop('activeKey')).to.equal('3');
 
       expect(document.activeElement).to.equal(anchors.at(2).getDOMNode());
     });
 
     it('should focus the previous tab on arrow key', () => {
-      instance.setProps({ activeKey: 5 });
+      wrapper.setProps({ activeKey: 5 });
 
-      const anchors = instance.find('a');
+      const anchors = wrapper.find('a');
 
       anchors
         .at(4)
@@ -168,13 +191,13 @@ describe('<Nav>', () => {
           key: 'ArrowLeft',
         });
 
-      expect(instance.prop('activeKey')).to.equal('3');
+      expect(wrapper.prop('activeKey')).to.equal('3');
       expect(document.activeElement).to.equal(anchors.at(2).getDOMNode());
     });
 
     it('should wrap to the next tab on arrow key', () => {
-      instance.setProps({ activeKey: 5 });
-      const anchors = instance.find('a');
+      wrapper.setProps({ activeKey: 5 });
+      const anchors = wrapper.find('a');
 
       anchors
         .at(4)
@@ -183,12 +206,12 @@ describe('<Nav>', () => {
           key: 'ArrowDown',
         });
 
-      expect(instance.prop('activeKey')).to.equal('1');
+      expect(wrapper.prop('activeKey')).to.equal('1');
       expect(document.activeElement).to.equal(anchors.at(0).getDOMNode());
     });
 
     it('should wrap to the previous tab on arrow key', () => {
-      const anchors = instance.find('a');
+      const anchors = wrapper.find('a');
 
       anchors
         .at(0)
@@ -197,17 +220,42 @@ describe('<Nav>', () => {
           key: 'ArrowUp',
         });
 
-      expect(instance.prop('activeKey')).to.equal('5');
+      expect(wrapper.prop('activeKey')).to.equal('5');
       expect(document.activeElement).to.equal(anchors.at(4).getDOMNode());
     });
 
-    it('Should have div as default component', () => {
-      mount(<Nav />).assertSingle('div');
+    it('should forward to a onKeyDown listener', () => {
+      const anchors = wrapper.find('a');
+
+      anchors
+        .at(0)
+        .tap(a => a.getDOMNode().focus())
+        .simulate('keydown', {
+          key: 'ArrowUp',
+        });
+
+      sinon.assert.calledOnce(keyDownSpy);
+    });
+
+    ['a', 'b', 'left', 'up'].forEach(({ key }) => {
+      it(`should ignore non-arrow keys: case ${key}`, () => {
+        const anchors = wrapper.find('a');
+
+        anchors
+          .at(0)
+          .tap(a => a.getDOMNode().focus())
+          .simulate('keydown', {
+            key,
+          });
+
+        expect(document.activeElement).to.equal(anchors.at(0).getDOMNode());
+        sinon.assert.calledOnce(keyDownSpy);
+      });
     });
   });
 
   describe('Web Accessibility', () => {
-    it('Should have tablist and tab roles', () => {
+    it('should have tablist and tab roles', () => {
       const wrapper = mount(
         <Nav>
           <Nav.Link key={1}>Tab 1 content</Nav.Link>
