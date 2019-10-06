@@ -35,7 +35,7 @@ describe('<Nav>', () => {
     assert.notOk(items.at(1).is('.active'));
   });
 
-  it('should adds variant class', () => {
+  it('should add variant class', () => {
     mount(
       <Nav variant="tabs">
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
@@ -44,7 +44,7 @@ describe('<Nav>', () => {
     ).assertSingle('div.nav.nav-tabs');
   });
 
-  it('should adds justified class', () => {
+  it('should add justified class', () => {
     mount(
       <Nav justify>
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
@@ -53,7 +53,7 @@ describe('<Nav>', () => {
     ).assertSingle('div.nav.nav-justified');
   });
 
-  it('should adds fill class', () => {
+  it('should add fill class', () => {
     mount(
       <Nav fill>
         <Nav.Link eventKey={1}>Pill 1 content</Nav.Link>
