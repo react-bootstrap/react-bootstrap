@@ -25,6 +25,7 @@ export interface DropdownProps {
     metadata: { source: 'select' | 'click' | 'rootClose' | 'keydown' },
   ) => void;
   onSelect?: SelectCallback;
+  navbar?: boolean;
 }
 
 declare class Dropdown<
