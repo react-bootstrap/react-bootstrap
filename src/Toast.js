@@ -44,9 +44,6 @@ const propTypes = {
    * A `react-transition-group` Transition component used to animate the Toast on dismissal.
    */
   transition: PropTypes.elementType,
-
-  /** @ignore */
-  innerRef: PropTypes.any,
 };
 
 const defaultProps = {
