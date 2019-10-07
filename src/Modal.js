@@ -14,7 +14,7 @@ import ModalDialog from './ModalDialog';
 import Footer from './ModalFooter';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
-import BootstrapModalManager from './utils/BootstrapModalManager';
+import BootstrapModalManager from './BootstrapModalManager';
 import { createBootstrapComponent } from './ThemeProvider';
 import ModalContext from './ModalContext';
 

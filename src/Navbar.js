@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { useUncontrolled } from 'uncontrollable';
 
-import createWithBsPrefix from './utils/createWithBsPrefix';
+import createWithBsPrefix from './createWithBsPrefix';
 import NavbarBrand from './NavbarBrand';
 import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';

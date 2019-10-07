@@ -1,17 +1,16 @@
 import classNames from 'classnames';
 import css from 'dom-helpers/style';
-import React from 'react';
-import PropTypes from 'prop-types';
 import onEnd from 'dom-helpers/transition/end';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Transition, {
-  EXITED,
   ENTERED,
   ENTERING,
+  EXITED,
   EXITING,
 } from 'react-transition-group/Transition';
-
-import triggerBrowserReflow from './utils/triggerBrowserReflow';
-import createChainedFunction from './utils/createChainedFunction';
+import createChainedFunction from './createChainedFunction';
+import triggerBrowserReflow from './triggerBrowserReflow';
 
 const MARGINS = {
   height: ['marginTop', 'marginBottom'],

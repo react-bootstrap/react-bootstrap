@@ -8,7 +8,7 @@ import FormLabel from './FormLabel';
 import FormText from './FormText';
 import Switch from './Switch';
 import { useBootstrapPrefix } from './ThemeProvider';
-import createWithBsPrefix from './utils/createWithBsPrefix';
+import createWithBsPrefix from './createWithBsPrefix';
 
 const propTypes = {
   /**

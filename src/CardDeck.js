@@ -1,3 +1,3 @@
-import createWithBsPrefix from './utils/createWithBsPrefix';
+import createWithBsPrefix from './createWithBsPrefix';
 
 export default createWithBsPrefix('card-deck');
