@@ -160,7 +160,7 @@ describe('<Panel>', () => {
   });
 
   it('Should toggle when uncontrolled', () => {
-    const inst = mount(
+    const wrapper = mount(
       <Panel defaultExpanded={false}>
         <Panel.Heading>
           <Panel.Title toggle>foo</Panel.Title>
@@ -170,12 +170,11 @@ describe('<Panel>', () => {
       </Panel>
     );
 
-    inst.assertSingle('a').simulate('click');
+    wrapper.find('a').simulate('click');
 
-    inst
-      .children() // get pass controlled wrapper
-      .prop('expanded')
-      .should.equal(true);
+    expect(wrapper.find(Panel.ControlledComponent).props().expanded).to.equal(
+      true
+    );
   });
 
   describe('Web Accessibility', () => {

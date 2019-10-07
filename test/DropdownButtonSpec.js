@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactTestUtils from 'react-dom/test-utils';
+import { mount } from 'enzyme';
 
 import Dropdown from '../src/Dropdown';
 import DropdownButton from '../src/DropdownButton';
@@ -224,30 +225,24 @@ describe('<DropdownButton>', () => {
   });
 
   it('should pass defaultOpen to `<Dropdown>`', () => {
-    const instance = ReactTestUtils.renderIntoDocument(
+    const wrapper = mount(
       <DropdownButton id="test-id" title="title" defaultOpen>
         <MenuItem eventKey="1">MenuItem 1 content</MenuItem>
       </DropdownButton>
     );
 
-    const dropdown = ReactTestUtils.findRenderedComponentWithType(
-      instance,
-      Dropdown
-    );
-    const toggle = ReactTestUtils.findRenderedComponentWithType(
-      instance,
-      DropdownToggle
-    );
+    const dropdown = wrapper.find(Dropdown).first();
+    const toggle = wrapper.find(DropdownToggle).first();
 
-    expect(dropdown.props.defaultOpen).to.equal(true);
-    expect(toggle.props.defaultOpen).to.not.exist;
+    expect(dropdown.props().defaultOpen).to.equal(true);
+    expect(toggle.props().defaultOpen).to.not.exist;
   });
 
   it('should pass onMouseEnter and onMouseLeave to `<Dropdown>`', () => {
     const onMouseEnter = () => {};
     const onMouseLeave = () => {};
 
-    const instance = ReactTestUtils.renderIntoDocument(
+    const wrapper = mount(
       <DropdownButton
         id="test-id"
         title="title"
@@ -258,19 +253,13 @@ describe('<DropdownButton>', () => {
       </DropdownButton>
     );
 
-    const dropdown = ReactTestUtils.findRenderedComponentWithType(
-      instance,
-      Dropdown
-    );
-    const toggle = ReactTestUtils.findRenderedComponentWithType(
-      instance,
-      DropdownToggle
-    );
+    const dropdown = wrapper.find(Dropdown).first();
+    const toggle = wrapper.find(DropdownToggle).first();
 
-    expect(dropdown.props.onMouseEnter).to.equal(onMouseEnter);
-    expect(dropdown.props.onMouseLeave).to.equal(onMouseLeave);
+    expect(dropdown.props().onMouseEnter).to.equal(onMouseEnter);
+    expect(dropdown.props().onMouseLeave).to.equal(onMouseLeave);
 
-    expect(toggle.props.onMouseEnter).to.not.exist;
-    expect(toggle.props.onMouseLeave).to.not.exist;
+    expect(toggle.props().onMouseEnter).to.not.exist;
+    expect(toggle.props().onMouseLeave).to.not.exist;
   });
 });

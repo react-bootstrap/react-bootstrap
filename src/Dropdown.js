@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom';
 import all from 'prop-types-extra/lib/all';
 import elementType from 'prop-types-extra/lib/elementType';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import uncontrollable from 'uncontrollable';
+import { uncontrollable } from 'uncontrollable';
 import warning from 'warning';
 
 import ButtonGroup from './ButtonGroup';

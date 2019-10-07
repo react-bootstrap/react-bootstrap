@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import elementType from 'prop-types-extra/lib/elementType';
-import uncontrollable from 'uncontrollable';
+import { uncontrollable } from 'uncontrollable';
 
 import Grid from './Grid';
 import NavbarBrand from './NavbarBrand';
@@ -259,8 +259,6 @@ UncontrollableNavbar.Text = createSimpleWrapper('p', 'text', 'NavbarText');
 UncontrollableNavbar.Link = createSimpleWrapper('a', 'link', 'NavbarLink');
 
 // Set bsStyles here so they can be overridden.
-export default bsStyles(
-  [Style.DEFAULT, Style.INVERSE],
-  Style.DEFAULT,
+export default bsStyles([Style.DEFAULT, Style.INVERSE], Style.DEFAULT)(
   UncontrollableNavbar
 );

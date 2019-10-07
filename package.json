@@ -125,7 +125,7 @@
     "react-overlays": "^0.8.0",
     "react-prop-types": "^0.4.0",
     "react-transition-group": "^2.0.0",
-    "uncontrollable": "^5.0.0",
+    "uncontrollable": "^7.0.2",
     "warning": "^3.0.0"
   },
   "release-script": {

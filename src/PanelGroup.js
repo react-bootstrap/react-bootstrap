@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
-import uncontrollable from 'uncontrollable';
+import { uncontrollable } from 'uncontrollable';
 
 import {
   bsClass,
