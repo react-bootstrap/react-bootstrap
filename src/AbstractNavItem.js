@@ -49,7 +49,10 @@ const AbstractNavItem = React.forwardRef(
     if (navContext) {
       if (!props.role && navContext.role === 'tablist') props.role = 'tab';
 
-      id = navContext.getControllerId(navKey);
+      const controllerId = navContext.getControllerId(navKey);
+      if (controllerId) {
+        id = controllerId;
+      }
 
       props['data-rb-event-key'] = navKey;
       props['aria-controls'] = navContext.getControlledId(navKey);
