@@ -35,6 +35,7 @@ const AbstractNavItem = React.forwardRef(
       onSelect,
       onClick,
       as: Component,
+      id: _id,
       ...props
     },
     ref,
@@ -42,15 +43,15 @@ const AbstractNavItem = React.forwardRef(
     const navKey = makeEventKey(eventKey, props.href);
     const parentOnSelect = useContext(SelectableContext);
     const navContext = useContext(NavContext);
+    let id = _id;
 
     let isActive = active;
     if (navContext) {
       if (!props.role && navContext.role === 'tablist') props.role = 'tab';
 
+      id = navContext.getControllerId(navKey);
+
       props['data-rb-event-key'] = navKey;
-      if (!props.id) {
-        props.id = navContext.getControllerId(navKey);
-      }
       props['aria-controls'] = navContext.getControlledId(navKey);
 
       isActive =
@@ -76,6 +77,7 @@ const AbstractNavItem = React.forwardRef(
         {...props}
         ref={ref}
         onClick={handleOnclick}
+        id={id}
         className={classNames(className, isActive && 'active')}
       />
     );
