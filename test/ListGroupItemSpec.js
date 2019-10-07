@@ -8,6 +8,10 @@ describe('<ListGroupItem>', () => {
     mount(<ListGroupItem />).assertSingle('div.list-group-item');
   });
 
+  it('should output a div with an id', () => {
+    mount(<ListGroupItem id="foo" />).assertSingle('div#foo.list-group-item');
+  });
+
   it('accepts variants', () => {
     mount(<ListGroupItem variant="success" />).assertSingle(
       'div.list-group-item.list-group-item-success',

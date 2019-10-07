@@ -90,7 +90,7 @@ const ListGroupItem = React.forwardRef(
         {...props}
         eventKey={makeEventKey(eventKey, props.href)}
         // eslint-disable-next-line
-      as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
+        as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
         onClick={handleClick}
         className={classNames(
           className,

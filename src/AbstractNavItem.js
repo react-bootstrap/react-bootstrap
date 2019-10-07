@@ -18,6 +18,7 @@ const propTypes = {
   as: PropTypes.any,
   onClick: PropTypes.func,
   onSelect: PropTypes.func,
+  id: PropTypes.string,
 };
 
 const defaultProps = {
@@ -47,7 +48,9 @@ const AbstractNavItem = React.forwardRef(
       if (!props.role && navContext.role === 'tablist') props.role = 'tab';
 
       props['data-rb-event-key'] = navKey;
-      props.id = navContext.getControllerId(navKey);
+      if (!props.id) {
+        props.id = navContext.getControllerId(navKey);
+      }
       props['aria-controls'] = navContext.getControlledId(navKey);
 
       isActive =
