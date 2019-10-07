@@ -5,8 +5,8 @@ import { elementType } from 'prop-types-extra';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
-import createWithBsPrefix from './utils/createWithBsPrefix';
-import divWithClassName from './utils/divWithClassName';
+import createWithBsPrefix from './createWithBsPrefix';
+import divWithClassName from './divWithClassName';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Fade from './Fade';
 import CloseButton from './CloseButton';

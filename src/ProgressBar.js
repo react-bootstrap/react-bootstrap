@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { map } from './utils/ElementChildren';
+import { map } from './ElementChildren';
 
 const ROUND_PRECISION = 1000;
 

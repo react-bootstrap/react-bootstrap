@@ -3,8 +3,8 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import createWithBsPrefix from './utils/createWithBsPrefix';
-import divWithClassName from './utils/divWithClassName';
+import createWithBsPrefix from './createWithBsPrefix';
+import divWithClassName from './divWithClassName';
 import CardContext from './CardContext';
 import CardImg from './CardImg';
 

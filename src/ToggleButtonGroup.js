@@ -3,8 +3,8 @@ import React from 'react';
 import invariant from 'invariant';
 import { useUncontrolled } from 'uncontrollable';
 
-import chainFunction from './utils/createChainedFunction';
-import { map } from './utils/ElementChildren';
+import chainFunction from './createChainedFunction';
+import { map } from './ElementChildren';
 import ButtonGroup from './ButtonGroup';
 import ToggleButton from './ToggleButton';
 

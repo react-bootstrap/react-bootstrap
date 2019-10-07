@@ -11,7 +11,7 @@ import TabContainer from './TabContainer';
 import TabContent from './TabContent';
 import TabPane from './TabPane';
 
-import { forEach, map } from './utils/ElementChildren';
+import { forEach, map } from './ElementChildren';
 
 const propTypes = {
   /**
