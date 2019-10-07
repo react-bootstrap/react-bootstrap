@@ -2101,10 +2101,10 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@^3.0.5, bluebird@^3.5.5:
-  version "3.5.5"
-  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.5.tgz#a8d0afd73251effbbd5fe384a77d73003c17a71f"
-  integrity sha512-5am6HnnfN+urzt4yfg7IgTbotDjIT/u8AJpEt0sIU9FtXfVeezXAPKswrG+xKUCOYAINpSdgZVDU6QFh+cuH3w==
+bluebird@^3.0.5, bluebird@^3.5.5, bluebird@^3.7.0:
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.0.tgz#56a6a886e03f6ae577cffedeb524f8f2450293cf"
+  integrity sha512-aBQ1FxIa7kSWCcmKHlcHFlT2jt6J/l4FzC7KcPELkOJOsPOb/bccdhmIrKDfXhwFrmc7vDoDrrepFvGqjyXGJg==
 
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
@@ -5264,13 +5264,13 @@ gatsby-transformer-react-docgen@^4.1.3:
     react-docgen "^4.1.0"
     react-docgen-displayname-handler " ^2.1.0"
 
-gatsby-transformer-remark@^2.6.26:
-  version "2.6.26"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.6.26.tgz#46882582d4ff995cdb9919cb5cb4a23db10b7ecd"
-  integrity sha512-AEVP+j6oMncW7O1RYAHsmMc1WUlm/bftrtKS66ZKGVHODJQ33qLN8orC3cs/FY90Za7nDt8OnnGhB6MgNuIidg==
+gatsby-transformer-remark@^2.6.27:
+  version "2.6.27"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.6.27.tgz#f755d6e993a20d7ca21dcde6f85e24a48fdbd670"
+  integrity sha512-116aFyLC8GeVfQbFUiP6rJdM+8iNm013NqMG3aTwwLtlHev957M/062KezjiDdZDRUPmOATwq0QNqUXiwF9s+g==
   dependencies:
     "@babel/runtime" "^7.6.2"
-    bluebird "^3.5.5"
+    bluebird "^3.7.0"
     gatsby-core-utils "^1.0.12"
     gray-matter "^4.0.2"
     hast-util-raw "^4.0.0"
