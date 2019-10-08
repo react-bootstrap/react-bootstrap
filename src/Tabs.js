@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import requiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import uncontrollable from 'uncontrollable';
+import { uncontrollable } from 'uncontrollable';
 import elementType from 'prop-types-extra/lib/elementType';
 
 import Nav from './Nav';

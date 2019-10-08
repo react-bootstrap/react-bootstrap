@@ -178,7 +178,7 @@ export function splitBsPropsAndOmit(props, omittedPropNames) {
  * in order to validate the new variant.
  */
 export function addStyle(Component, ...styleVariant) {
-  bsStyles(styleVariant, Component);
+  bsStyles(styleVariant)(Component);
 }
 
 export const _curry = curry;
