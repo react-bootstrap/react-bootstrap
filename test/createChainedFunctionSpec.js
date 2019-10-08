@@ -1,5 +1,5 @@
 /* eslint no-new-func: 0 */
-import createChainedFunction from '../../src/utils/createChainedFunction';
+import createChainedFunction from '../src/createChainedFunction';
 
 describe('createChainedFunction', () => {
   it('returns null with no arguments', () => {

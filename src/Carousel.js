@@ -8,8 +8,8 @@ import { uncontrollable } from 'uncontrollable';
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
 import SafeAnchor from './SafeAnchor';
-import { map, forEach } from './utils/ElementChildren';
-import triggerBrowserReflow from './utils/triggerBrowserReflow';
+import { map, forEach } from './ElementChildren';
+import triggerBrowserReflow from './triggerBrowserReflow';
 import { createBootstrapComponent } from './ThemeProvider';
 
 const countChildren = c =>
@@ -506,7 +506,6 @@ class Carousel extends React.Component {
             return cloneElement(child, {
               className: classNames(
                 child.props.className,
-                `${bsPrefix}-item`,
                 current && currentClasses,
                 previous && prevClasses,
               ),

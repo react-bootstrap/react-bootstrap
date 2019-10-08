@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import createChainedFunction from './utils/createChainedFunction';
+import createChainedFunction from './createChainedFunction';
 
 const propTypes = {
   href: PropTypes.string,

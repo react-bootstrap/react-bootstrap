@@ -1,5 +1,13 @@
 name: Node CI
-on: [push]
+on:
+  push:
+    branches:
+      - master
+      - bs3-dev
+  pull_request:
+    branches:
+      - master
+      - bs3-dev
 jobs:
   build:
     runs-on: ${{ matrix.os }}

@@ -10,7 +10,7 @@ import DropdownMenu from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
 import DropdownItem from './DropdownItem';
 import SelectableContext from './SelectableContext';
-import createWithBsPrefix from './utils/createWithBsPrefix';
+import createWithBsPrefix from './createWithBsPrefix';
 
 const propTypes = {
   /** @default 'dropdown' */

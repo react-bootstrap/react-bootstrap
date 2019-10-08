@@ -65,7 +65,7 @@ const Table = React.forwardRef(
       size,
       variant,
       responsive,
-      ...otherProps
+      ...props
     },
     ref,
   ) => {
@@ -81,7 +81,7 @@ const Table = React.forwardRef(
       hover && `${decoratedBsPrefix}-hover`,
     );
 
-    const table = <table {...otherProps} className={classes} ref={ref} />;
+    const table = <table {...props} className={classes} ref={ref} />;
     if (responsive) {
       let responsiveClass = `${decoratedBsPrefix}-responsive`;
       if (typeof responsive === 'string') {

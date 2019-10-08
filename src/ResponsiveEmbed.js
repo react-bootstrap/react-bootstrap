@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /**
@@ -25,28 +25,32 @@ const defaultProps = {
   aspectRatio: '1by1',
 };
 
-class ResponsiveEmbed extends React.Component {
-  render() {
-    const { bsPrefix, className, children, aspectRatio, ...props } = this.props;
+const ResponsiveEmbed = React.forwardRef(
+  ({ bsPrefix, className, children, aspectRatio, ...props }, ref) => {
+    const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'embed-responsive');
     const child = React.Children.only(children);
     return (
       <div
+        ref={ref}
         {...props}
         className={classNames(
-          bsPrefix,
+          decoratedBsPrefix,
           className,
-          aspectRatio && `${bsPrefix}-${aspectRatio}`,
+          aspectRatio && `${decoratedBsPrefix}-${aspectRatio}`,
         )}
       >
         {React.cloneElement(child, {
-          className: classNames(child.props.className, `${bsPrefix}-item`),
+          className: classNames(
+            child.props.className,
+            `${decoratedBsPrefix}-item`,
+          ),
         })}
       </div>
     );
-  }
-}
+  },
+);
 
 ResponsiveEmbed.propTypes = propTypes;
 ResponsiveEmbed.defaultProps = defaultProps;
 
-export default createBootstrapComponent(ResponsiveEmbed, 'embed-responsive');
+export default ResponsiveEmbed;

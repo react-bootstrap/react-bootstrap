@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import PopoverTitle from './PopoverTitle';
 import PopoverContent from './PopoverContent';
 
@@ -45,9 +45,6 @@ const propTypes = {
   content: PropTypes.bool,
 
   /** @private */
-  innerRef: PropTypes.any,
-
-  /** @private */
   scheduleUpdate: PropTypes.func,
   /** @private */
   outOfBoundaries: PropTypes.bool,
@@ -57,40 +54,47 @@ const defaultProps = {
   placement: 'right',
 };
 
-function Popover({
-  bsPrefix,
-  innerRef,
-  placement,
-  className,
-  style,
-  children,
-  content,
-  arrowProps,
-  scheduleUpdate: _,
-  outOfBoundaries: _1,
-  ...props
-}) {
-  return (
-    <div
-      role="tooltip"
-      ref={innerRef}
-      style={style}
-      x-placement={placement}
-      className={classNames(className, bsPrefix, `bs-popover-${placement}`)}
-      {...props}
-    >
-      <div className="arrow" {...arrowProps} />
-      {content ? <PopoverContent>{children}</PopoverContent> : children}
-    </div>
-  );
-}
+const Popover = React.forwardRef(
+  (
+    {
+      bsPrefix,
+      placement,
+      className,
+      style,
+      children,
+      content,
+      arrowProps,
+      scheduleUpdate: _,
+      outOfBoundaries: _1,
+      ...props
+    },
+    ref,
+  ) => {
+    const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'popover');
+    return (
+      <div
+        ref={ref}
+        role="tooltip"
+        style={style}
+        x-placement={placement}
+        className={classNames(
+          className,
+          decoratedBsPrefix,
+          `bs-popover-${placement}`,
+        )}
+        {...props}
+      >
+        <div className="arrow" {...arrowProps} />
+        {content ? <PopoverContent>{children}</PopoverContent> : children}
+      </div>
+    );
+  },
+);
 
 Popover.propTypes = propTypes;
 Popover.defaultProps = defaultProps;
 
-const DecoratedPopover = createBootstrapComponent(Popover, 'popover');
+Popover.Title = PopoverTitle;
+Popover.Content = PopoverContent;
 
-DecoratedPopover.Title = PopoverTitle;
-DecoratedPopover.Content = PopoverContent;
-
-export default DecoratedPopover;
+export default Popover;
