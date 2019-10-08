@@ -18,7 +18,6 @@ const propTypes = {
   as: PropTypes.any,
   onClick: PropTypes.func,
   onSelect: PropTypes.func,
-  id: PropTypes.string,
 };
 
 const defaultProps = {
@@ -35,7 +34,6 @@ const AbstractNavItem = React.forwardRef(
       onSelect,
       onClick,
       as: Component,
-      id: _id,
       ...props
     },
     ref,
@@ -43,7 +41,6 @@ const AbstractNavItem = React.forwardRef(
     const navKey = makeEventKey(eventKey, props.href);
     const parentOnSelect = useContext(SelectableContext);
     const navContext = useContext(NavContext);
-    let id = _id;
 
     let isActive = active;
     if (navContext) {
@@ -51,7 +48,7 @@ const AbstractNavItem = React.forwardRef(
 
       const controllerId = navContext.getControllerId(navKey);
       if (controllerId) {
-        id = controllerId;
+        props.id = controllerId;
       }
 
       props['data-rb-event-key'] = navKey;
@@ -80,7 +77,6 @@ const AbstractNavItem = React.forwardRef(
         {...props}
         ref={ref}
         onClick={handleOnclick}
-        id={id}
         className={classNames(className, isActive && 'active')}
       />
     );
