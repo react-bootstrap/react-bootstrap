@@ -73,6 +73,7 @@ const NavDropdown = React.forwardRef(
   ),
 );
 
+NavDropdown.displayName = 'NavDropdown';
 NavDropdown.propTypes = propTypes;
 NavDropdown.Item = Dropdown.Item;
 NavDropdown.Divider = Dropdown.Divider;
