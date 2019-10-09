@@ -38,6 +38,43 @@ more information about the benefits of using a CDN can be found
 
 <CssCodeBlock />
 
+In case you are using **Sass** the simplest way is to include the Bootstrap’s source Sass files
+in your main Sass file and then require it on your `src/index.js` or `App.js` file
+
+```
+/* The following line can be included in a src/App.scss */
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+{/* The following line can be included in your src/index.js or App.js file*/}
+
+import './App.scss';
+```
+
+If you wish to customize the Bootstrap theme or any Bootstrap variables
+you can create a custom Sass file
+
+```
+/* The following block can be included in a custom.scss */
+
+/* make the customizations */
+$theme-colors: (
+    "info": tomato,
+    "danger": teal
+);
+
+/* import bootstrap to set changes */
+@import "../node_modules/bootstrap/scss/bootstrap";
+```
+
+And import it on the main Sass file
+
+```
+/* The following line can be included in a src/App.scss */
+
+@import "custom";
+```
+
 For more advanced use cases you can also use a bundler like Webpack
 or Browserify to include the CSS files for you as part of your build
 process but that is beyond the scope of this guide. Also see
