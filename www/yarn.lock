@@ -1673,16 +1673,17 @@ astral-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-1.0.0.tgz#6c8c3fb827dd43ee3918f27b82782ab7658a6fd9"
   integrity sha512-+Ryf6g3BKoRc7jfp7ad8tM4TtMiaWvbF/1/sQcZPkkS7ag3D5nMBCe2UfOTONtAkaG0tO0ij3C5Lwmf1EiyjHg==
 
-astroturf@^0.9.18:
-  version "0.9.18"
-  resolved "https://registry.yarnpkg.com/astroturf/-/astroturf-0.9.18.tgz#370e744731e4690506b82ed2dc09667e5ff62107"
-  integrity sha512-7Crzbx3e9IrM3EbtQSizQBOM+F9fxDP3DGqDo7DrPsCig7Hd6TMhySsC2G6wrqcLfaTE3LZGB3mGeDJIZG2sXA==
+astroturf@^0.9.20:
+  version "0.9.20"
+  resolved "https://registry.yarnpkg.com/astroturf/-/astroturf-0.9.20.tgz#21813de20aa77acd2b30bf9de5dce0988047316b"
+  integrity sha512-EtLrt2mD4erGn6Qm42bOJRhFs5hsi98nKbFJxm1+H+wKT7tCYsA6InTXvmBdwspLPzMLzT2Ru2SvZPHVzL0JiA==
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/core" "^7.5.5"
     "@babel/generator" "^7.3.4"
     "@babel/helper-module-imports" "^7.0.0"
     "@babel/template" "^7.2.2"
+    "@babel/traverse" "^7.6.2"
     "@babel/types" "^7.3.4"
     chalk "^2.4.2"
     common-tags "^1.8.0"
