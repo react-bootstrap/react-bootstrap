@@ -13,7 +13,7 @@ import {
 const propTypes = {
   /**
    * An html id attribute, necessary for accessibility
-   * @type {string}
+   * @type {string|number}
    * @required
    */
   id: isRequiredForA11y(
@@ -22,52 +22,52 @@ const propTypes = {
 
   /**
    * Sets the direction the Popover is positioned towards.
+   *
+   * > This is generally provided by the `Overlay` component positioning the popover
    */
-  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  placement: PropTypes.oneOf(['auto', 'top', 'bottom', 'left', 'right']),
 
   /**
-   * The "top" position value for the Popover.
+   * An Overlay injected set of props for positioning the popover arrow.
+   *
+   * > This is generally provided by the `Overlay` component positioning the popover
    */
-  positionTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  /**
-   * The "left" position value for the Popover.
-   */
-  positionLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-
-  /**
-   * The "top" position value for the Popover arrow.
-   */
-  arrowOffsetTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  /**
-   * The "left" position value for the Popover arrow.
-   */
-  arrowOffsetLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  arrowProps: PropTypes.shape({
+    ref: PropTypes.any,
+    style: PropTypes.object
+  }),
 
   /**
    * Title content
    */
-  title: PropTypes.node
+  title: PropTypes.node,
+
+  /** @private */
+  scheduleUpdate: PropTypes.func,
+  /** @private */
+  outOfBoundaries: PropTypes.bool
 };
 
 const defaultProps = {
   placement: 'right'
 };
 
-class Popover extends React.Component {
-  render() {
-    const {
+const Popover = React.forwardRef(
+  (
+    {
       placement,
-      positionTop,
-      positionLeft,
-      arrowOffsetTop,
-      arrowOffsetLeft,
       title,
       className,
       style,
       children,
+      content,
+      arrowProps,
+      scheduleUpdate: _,
+      outOfBoundaries: _1,
       ...props
-    } = this.props;
-
+    },
+    ref
+  ) => {
     const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
@@ -75,26 +75,16 @@ class Popover extends React.Component {
       [placement]: true
     };
 
-    const outerStyle = {
-      display: 'block',
-      top: positionTop,
-      left: positionLeft,
-      ...style
-    };
-
-    const arrowStyle = {
-      top: arrowOffsetTop,
-      left: arrowOffsetLeft
-    };
-
     return (
       <div
         {...elementProps}
+        ref={ref}
         role="tooltip"
+        style={style}
+        x-placement={placement}
         className={classNames(className, classes)}
-        style={outerStyle}
       >
-        <div className="arrow" style={arrowStyle} />
+        <div className="arrow" {...arrowProps} />
 
         {title && <h3 className={prefix(bsProps, 'title')}>{title}</h3>}
 
@@ -102,9 +92,10 @@ class Popover extends React.Component {
       </div>
     );
   }
-}
+);
 
 Popover.propTypes = propTypes;
 Popover.defaultProps = defaultProps;
+Popover.displayName = 'Popover';
 
-export default bsClass('popover', Popover);
+export default bsClass('popover')(Popover);

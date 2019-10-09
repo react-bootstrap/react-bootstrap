@@ -1,22 +1,45 @@
 import classNames from 'classnames';
-import React, { cloneElement } from 'react';
+import React from 'react';
+import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
-import BaseOverlay from 'react-overlays/lib/Overlay';
-import elementType from 'prop-types-extra/lib/elementType';
+import BaseOverlay from 'react-overlays/Overlay';
+import { componentOrElement, elementType } from 'prop-types-extra';
 
 import Fade from './Fade';
 
 const propTypes = {
-  ...BaseOverlay.propTypes,
+  /**
+   * A component instance, DOM node, or function that returns either.
+   * The `container` element will have the Overlay appended to it via a React portal.
+   */
+  container: PropTypes.oneOfType([componentOrElement, PropTypes.func]),
+
+  /**
+   * A component instance, DOM node, or function that returns either.
+   * The overlay will be positioned in relation to the `target`
+   */
+  target: PropTypes.oneOfType([componentOrElement, PropTypes.func]),
 
   /**
    * Set the visibility of the Overlay
    */
   show: PropTypes.bool,
+
+  /**
+   * A set of popper options and props passed directly to react-popper's Popper component.
+   */
+  popperConfig: PropTypes.object,
+
   /**
    * Specify whether the overlay should trigger onHide when the user clicks outside the overlay
    */
   rootClose: PropTypes.bool,
+
+  /**
+   * Specify event for triggering a "root close" toggle.
+   */
+  rootCloseEvent: PropTypes.oneOf(['click', 'mousedown']),
+
   /**
    * A callback invoked by the overlay when it wishes to be hidden. Required if
    * `rootClose` is specified.
@@ -24,9 +47,10 @@ const propTypes = {
   onHide: PropTypes.func,
 
   /**
-   * Use animation
+   * Animate the entering and exiting of the Ovelay. `true` will use the `<Fade>` transition,
+   * or a custom react-transition-group `<Transition>` component can be provided.
    */
-  animation: PropTypes.oneOfType([PropTypes.bool, elementType]),
+  transition: PropTypes.oneOfType([PropTypes.bool, elementType]),
 
   /**
    * Callback fired before the Overlay transitions in
@@ -59,40 +83,72 @@ const propTypes = {
   onExited: PropTypes.func,
 
   /**
-   * Sets the direction of the Overlay.
+   * The placement of the Overlay in relation to its `target`.
    */
-  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left'])
+  placement: PropTypes.oneOf([
+    'auto-start',
+    'auto',
+    'auto-end',
+    'top-start',
+    'top',
+    'top-end',
+    'right-start',
+    'right',
+    'right-end',
+    'bottom-end',
+    'bottom',
+    'bottom-start',
+    'left-end',
+    'left',
+    'left-start'
+  ])
 };
 
 const defaultProps = {
-  animation: Fade,
+  transition: Fade,
   rootClose: false,
   show: false,
   placement: 'right'
 };
 
-class Overlay extends React.Component {
-  render() {
-    const { animation, children, ...props } = this.props;
+function wrapRefs(props, arrowProps) {
+  const { ref } = props;
+  const { ref: aRef } = arrowProps;
 
-    const transition = animation === true ? Fade : animation || null;
+  props.ref = ref.__wrapped || (ref.__wrapped = r => ref(findDOMNode(r)));
+  arrowProps.ref =
+    aRef.__wrapped || (aRef.__wrapped = r => aRef(findDOMNode(r)));
+}
 
-    let child;
+function Overlay({ children: overlay, transition, ...outerProps }) {
+  transition = transition === true ? Fade : transition || null;
 
-    if (!transition) {
-      child = cloneElement(children, {
-        className: classNames(children.props.className, 'in')
-      });
-    } else {
-      child = children;
-    }
+  return (
+    <BaseOverlay {...outerProps} transition={transition}>
+      {({ props: overlayProps, arrowProps, show, ...props }) => {
+        wrapRefs(overlayProps, arrowProps);
 
-    return (
-      <BaseOverlay {...props} transition={transition}>
-        {child}
-      </BaseOverlay>
-    );
-  }
+        if (typeof overlay === 'function')
+          return overlay({
+            ...props,
+            ...overlayProps,
+            show,
+            arrowProps
+          });
+
+        return React.cloneElement(overlay, {
+          ...props,
+          ...overlayProps,
+          arrowProps,
+          className: classNames(
+            overlay.props.className,
+            !transition && show && 'show'
+          ),
+          style: { ...overlay.props.style, ...overlayProps.style }
+        });
+      }}
+    </BaseOverlay>
+  );
 }
 
 Overlay.propTypes = propTypes;

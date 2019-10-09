@@ -22,46 +22,64 @@ const propTypes = {
 
   /**
    * Sets the direction the Tooltip is positioned towards.
+   *
+   * > This is generally provided by the `Overlay` component positioning the tooltip
    */
-  placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  placement: PropTypes.oneOf([
+    'auto-start',
+    'auto',
+    'auto-end',
+    'top-start',
+    'top',
+    'top-end',
+    'right-start',
+    'right',
+    'right-end',
+    'bottom-end',
+    'bottom',
+    'bottom-start',
+    'left-end',
+    'left',
+    'left-start'
+  ]),
 
   /**
-   * The "top" position value for the Tooltip.
+   * An Overlay injected set of props for positioning the tooltip arrow.
+   *
+   * > This is generally provided by the `Overlay` component positioning the tooltip
+   *
+   * @type {{ ref: ReactRef, style: Object }}
    */
-  positionTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  /**
-   * The "left" position value for the Tooltip.
-   */
-  positionLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  arrowProps: PropTypes.shape({
+    ref: PropTypes.any,
+    style: PropTypes.object
+  }),
 
-  /**
-   * The "top" position value for the Tooltip arrow.
-   */
-  arrowOffsetTop: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  /**
-   * The "left" position value for the Tooltip arrow.
-   */
-  arrowOffsetLeft: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  /** @private */
+  scheduleUpdate: PropTypes.func,
+
+  /** @private */
+  outOfBoundaries: PropTypes.any
 };
 
 const defaultProps = {
   placement: 'right'
 };
 
-class Tooltip extends React.Component {
-  render() {
-    const {
+const Tooltip = React.forwardRef(
+  (
+    {
       placement,
-      positionTop,
-      positionLeft,
-      arrowOffsetTop,
-      arrowOffsetLeft,
       className,
       style,
       children,
+      arrowProps,
+      scheduleUpdate: _,
+      outOfBoundaries: _1,
       ...props
-    } = this.props;
-
+    },
+    ref
+  ) => {
     const [bsProps, elementProps] = splitBsProps(props);
 
     const classes = {
@@ -69,33 +87,24 @@ class Tooltip extends React.Component {
       [placement]: true
     };
 
-    const outerStyle = {
-      top: positionTop,
-      left: positionLeft,
-      ...style
-    };
-
-    const arrowStyle = {
-      top: arrowOffsetTop,
-      left: arrowOffsetLeft
-    };
-
     return (
       <div
         {...elementProps}
+        ref={ref}
+        style={style}
         role="tooltip"
+        x-placement={placement}
         className={classNames(className, classes)}
-        style={outerStyle}
       >
-        <div className={prefix(bsProps, 'arrow')} style={arrowStyle} />
-
+        <div className={prefix(bsProps, 'arrow')} {...arrowProps} />
         <div className={prefix(bsProps, 'inner')}>{children}</div>
       </div>
     );
   }
-}
+);
 
 Tooltip.propTypes = propTypes;
 Tooltip.defaultProps = defaultProps;
+Tooltip.displayName = 'Tooltip';
 
-export default bsClass('tooltip', Tooltip);
+export default bsClass('tooltip')(Tooltip);

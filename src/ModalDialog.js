@@ -18,15 +18,8 @@ const propTypes = {
   dialogClassName: PropTypes.string
 };
 
-class ModalDialog extends React.Component {
-  render() {
-    const {
-      dialogClassName,
-      className,
-      style,
-      children,
-      ...props
-    } = this.props;
+const ModalDialog = React.forwardRef(
+  ({ dialogClassName, className, style, children, ...props }, ref) => {
     const [bsProps, elementProps] = splitBsProps(props);
 
     const bsClassName = prefix(bsProps);
@@ -42,6 +35,7 @@ class ModalDialog extends React.Component {
     return (
       <div
         {...elementProps}
+        ref={ref}
         tabIndex="-1"
         role="dialog"
         style={modalStyle}
@@ -55,8 +49,9 @@ class ModalDialog extends React.Component {
       </div>
     );
   }
-}
+);
 
 ModalDialog.propTypes = propTypes;
+ModalDialog.displayName = 'ModalDialog';
 
-export default bsClass('modal', bsSizes([Size.LARGE, Size.SMALL], ModalDialog));
+export default bsClass('modal', bsSizes([Size.LARGE, Size.SMALL]))(ModalDialog);

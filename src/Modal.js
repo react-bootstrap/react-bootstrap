@@ -6,8 +6,8 @@ import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import BaseModal from 'react-overlays/lib/Modal';
-import isOverflowing from 'react-overlays/lib/utils/isOverflowing';
+import BaseModal from 'react-overlays/Modal';
+import isOverflowing from 'react-overlays/utils/isOverflowing';
 import elementType from 'prop-types-extra/lib/elementType';
 
 import Fade from './Fade';
@@ -123,7 +123,14 @@ const propTypes = {
 };
 
 const defaultProps = {
-  ...BaseModal.defaultProps,
+  show: false,
+  backdrop: true,
+  keyboard: true,
+  autoFocus: true,
+  enforceFocus: true,
+  restoreFocus: true,
+  onHide: () => {},
+  manager: BaseModal.defaultProps.manager,
   animation: true,
   dialogComponentClass: ModalDialog
 };
@@ -153,7 +160,6 @@ class Modal extends React.Component {
     this.handleExited = this.handleExited.bind(this);
     this.handleWindowResize = this.handleWindowResize.bind(this);
     this.handleDialogClick = this.handleDialogClick.bind(this);
-    this.setModalRef = this.setModalRef.bind(this);
 
     this.state = {
       style: {}
@@ -173,9 +179,7 @@ class Modal extends React.Component {
     this.handleExited();
   }
 
-  setModalRef(ref) {
-    this._modal = ref;
-  }
+  _dialog = React.createRef();
 
   handleDialogClick(e) {
     if (e.target !== e.currentTarget) {
@@ -205,7 +209,7 @@ class Modal extends React.Component {
       return;
     }
 
-    const dialogNode = this._modal.getDialogElement();
+    const dialogNode = ReactDOM.findDOMNode(this._dialog.current);
     const dialogHeight = dialogNode.scrollHeight;
 
     const document = ownerDocument(dialogNode);
@@ -233,6 +237,8 @@ class Modal extends React.Component {
     const {
       backdrop,
       backdropClassName,
+      backdropStyle,
+      renderBackdrop: renderCustomBackdrop,
       animation,
       show,
       dialogComponentClass: Dialog,
@@ -248,32 +254,46 @@ class Modal extends React.Component {
 
     const inClassName = show && !animation && 'in';
 
+    const renderBackdrop =
+      renderCustomBackdrop ||
+      (backdropProps => (
+        <div
+          {...backdropProps}
+          style={backdropStyle}
+          className={classNames(
+            prefix(props, 'backdrop'),
+            backdropClassName,
+            inClassName
+          )}
+        />
+      ));
+
     return (
       <BaseModal
         {...baseModalProps}
-        ref={this.setModalRef}
         show={show}
         containerClassName={prefix(props, 'open')}
         transition={animation ? DialogTransition : undefined}
         backdrop={backdrop}
         backdropTransition={animation ? BackdropTransition : undefined}
-        backdropClassName={classNames(
-          prefix(props, 'backdrop'),
-          backdropClassName,
-          inClassName
-        )}
+        renderBackdrop={renderBackdrop}
         onEntering={createChainedFunction(onEntering, this.handleEntering)}
         onExited={createChainedFunction(onExited, this.handleExited)}
-      >
-        <Dialog
-          {...dialogProps}
-          style={{ ...this.state.style, ...style }}
-          className={classNames(className, inClassName)}
-          onClick={backdrop === true ? this.handleDialogClick : null}
-        >
-          {children}
-        </Dialog>
-      </BaseModal>
+        renderDialog={moreDialogProps =>
+          React.cloneElement(
+            <Dialog
+              {...dialogProps}
+              {...moreDialogProps}
+              style={{ ...this.state.style, ...style }}
+              className={classNames(className, inClassName)}
+              onClick={backdrop === true ? this.handleDialogClick : null}
+            >
+              {children}
+            </Dialog>,
+            { ref: this._dialog }
+          )
+        }
+      />
     );
   }
 }
