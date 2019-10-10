@@ -66,7 +66,7 @@ const ToggleButton = React.forwardRef(
       checked,
       type,
       onChange,
-      onFocus,
+      toggleFocus,
       value,
       disabled,
       focused,
