@@ -29,7 +29,7 @@
     semver "^5.4.1"
     source-map "^0.5.0"
 
-"@babel/core@^7.0.0", "@babel/core@^7.2.2", "@babel/core@^7.5.5", "@babel/core@^7.6.2", "@babel/core@^7.6.3":
+"@babel/core@^7.0.0", "@babel/core@^7.2.2", "@babel/core@^7.5.5", "@babel/core@^7.6.3":
   version "7.6.3"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.6.3.tgz#44de824e89eaa089bb12da7337bc9bdff2ab68f9"
   integrity sha512-QfQ5jTBgXLzJuo7Mo8bZK/ePywmgNRgk/UQykiKwEtZPiFIn8ZqE6jB+AnD1hbB1S2xQyL4//it5vuAUOVAMTw==
@@ -675,7 +675,7 @@
     core-js "^2.6.5"
     regenerator-runtime "^0.13.2"
 
-"@babel/preset-env@^7.6.2", "@babel/preset-env@^7.6.3":
+"@babel/preset-env@^7.6.3":
   version "7.6.3"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.6.3.tgz#9e1bf05a2e2d687036d24c40e4639dc46cef2271"
   integrity sha512-CWQkn7EVnwzlOdR5NOm2+pfgSNEZmvGjOhlCHBDq0J8/EStr+G+FvPEiz9B56dR6MoiUFjXhfE4hjLoAKKJtIQ==
@@ -731,7 +731,7 @@
     js-levenshtein "^1.1.3"
     semver "^5.5.0"
 
-"@babel/preset-react@^7.0.0", "@babel/preset-react@^7.6.3":
+"@babel/preset-react@^7.6.3":
   version "7.6.3"
   resolved "https://registry.yarnpkg.com/@babel/preset-react/-/preset-react-7.6.3.tgz#d5242c828322520205ae4eda5d4f4f618964e2f6"
   integrity sha512-07yQhmkZmRAfwREYIQgW0HEwMY9GBJVuPY4Q12UC72AbfaawuupVWa8zQs2tlL+yun45Nv/1KreII/0PLfEsgA==
@@ -773,7 +773,7 @@
     globals "^11.1.0"
     lodash "^4.17.13"
 
-"@babel/types@^7.0.0", "@babel/types@^7.0.0-beta.38", "@babel/types@^7.0.0-beta.54", "@babel/types@^7.2.0", "@babel/types@^7.3.0", "@babel/types@^7.3.4", "@babel/types@^7.4.4", "@babel/types@^7.5.5", "@babel/types@^7.6.0", "@babel/types@^7.6.1", "@babel/types@^7.6.3":
+"@babel/types@^7.0.0", "@babel/types@^7.0.0-beta.38", "@babel/types@^7.0.0-beta.54", "@babel/types@^7.2.0", "@babel/types@^7.3.0", "@babel/types@^7.3.4", "@babel/types@^7.4.4", "@babel/types@^7.5.5", "@babel/types@^7.6.0", "@babel/types@^7.6.3":
   version "7.6.3"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.6.3.tgz#3f07d96f854f98e2fbd45c64b0cb942d11e8ba09"
   integrity sha512-CqbcpTxMcpuQTMhjI37ZHVgjBkysg5icREQIEZ0eG1yCNwg3oy+5AaLiOKmjsCj6nqOsa6Hf0ObjRVwokb7srA==
@@ -5103,18 +5103,18 @@ gatsby-plugin-catch-links@^2.1.12:
     "@babel/runtime" "^7.6.2"
     escape-string-regexp "^1.0.5"
 
-gatsby-plugin-mdx@^1.0.49:
-  version "1.0.49"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-1.0.49.tgz#03ff15182a31f9e94f297218da14ca5827714c14"
-  integrity sha512-8xea+eI/e50vMwnzBCTuadKfL6Ab1m0RpPksbd8ckSmMIb+/mhw4vEt/ObLw4MDkMPM2a3b6FbMBhHJCuGhJgQ==
+gatsby-plugin-mdx@^1.0.50:
+  version "1.0.50"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-1.0.50.tgz#d2e46e2a464bb4e9f7cc7e18227cba2b8e7f77da"
+  integrity sha512-s4ttDcvrhqCd+zMpYJBuRwi7VXIayBpQZxjpBnzuFVWhgUWw9eM5xoNRw02g613aaxCqTewucUyhuW1JwuBSeg==
   dependencies:
-    "@babel/core" "^7.6.2"
-    "@babel/generator" "^7.6.2"
+    "@babel/core" "^7.6.3"
+    "@babel/generator" "^7.6.3"
     "@babel/helper-plugin-utils" "^7.0.0"
     "@babel/plugin-proposal-object-rest-spread" "^7.6.2"
-    "@babel/preset-env" "^7.6.2"
-    "@babel/preset-react" "^7.0.0"
-    "@babel/types" "^7.6.1"
+    "@babel/preset-env" "^7.6.3"
+    "@babel/preset-react" "^7.6.3"
+    "@babel/types" "^7.6.3"
     camelcase-css "^2.0.1"
     change-case "^3.1.0"
     core-js "2"
