@@ -44,7 +44,6 @@ const propTypes = {
    * @type {ReactRef}
    */
   inputRef: PropTypes.any,
-
 };
 
 const ToggleButton = React.forwardRef(
@@ -59,10 +58,9 @@ const ToggleButton = React.forwardRef(
       value,
       disabled,
       inputRef,
-      innerRef,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { focused } = this.state;
 
