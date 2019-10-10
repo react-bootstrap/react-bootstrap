@@ -9,7 +9,9 @@ export interface ToggleButtonProps {
   name?: string;
   checked?: boolean;
   disabled?: boolean;
+  focused?: boolean;
   onChange?: React.ChangeEventHandler<this>;
+  onFocus?: React.FocusEventHandler<this>;
   value: unknown;
   inputRef?: React.LegacyRef<this>;
 }
