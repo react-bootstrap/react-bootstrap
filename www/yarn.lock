@@ -5099,12 +5099,12 @@ gatsby-graphiql-explorer@^0.2.22:
   dependencies:
     "@babel/runtime" "^7.6.2"
 
-gatsby-link@^2.2.15, gatsby-link@^2.2.18:
-  version "2.2.18"
-  resolved "https://registry.yarnpkg.com/gatsby-link/-/gatsby-link-2.2.18.tgz#e655ef6845dc55313e114b79aafa7c4a39a487d1"
-  integrity sha512-+ubAV0vWvNmCMn7ANdkAAu3UHL/wbi6ZjKXIioXynmN9RRYVF5E+P9Gnc1RbZck3suHo+xPSgMvrh7wBzoXA3w==
+gatsby-link@^2.2.18, gatsby-link@^2.2.19:
+  version "2.2.19"
+  resolved "https://registry.yarnpkg.com/gatsby-link/-/gatsby-link-2.2.19.tgz#982b86cd902b5da3d62aa98b5549449d6cd9d4d3"
+  integrity sha512-Xpq358LpWxD7OdYFXJ+PSg0GnYL6ATpF08aOlgkp8w380+ntYWYfMpOKtaiHJR4D4wswO7c/w/AWK01Uup1PKw==
   dependencies:
-    "@babel/runtime" "^7.6.2"
+    "@babel/runtime" "^7.6.3"
     "@types/reach__router" "^1.2.5"
     prop-types "^15.7.2"
 
