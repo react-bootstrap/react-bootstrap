@@ -46,10 +46,9 @@ module.exports = {
         handlers: [
           function applyBootstrapPropsHandler(docs, _, { absolutePath }) {
             // eslint-disable-next-line
-            let Component = require(absolutePath);
-
-            if (Component) {
-              addBootstrapPropTypes(docs, Component);
+            const module = require(absolutePath);
+            if (module && module.default) {
+              addBootstrapPropTypes(docs, module.default);
             }
           },
           function defaultDescriptionsHandler(docs) {

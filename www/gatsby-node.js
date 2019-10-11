@@ -10,7 +10,7 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
     module: {
       rules: [
         {
-          test: /src\/examples\//,
+          include: path.resolve(__dirname, 'src/examples'),
           use: loaders.raw()
         }
       ]
