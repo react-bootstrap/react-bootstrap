@@ -2,8 +2,6 @@ import invariant from 'invariant';
 import { useCallback } from 'react';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 
-const isReactClassComponent = c => c && c.isReactComponent;
-
 export default function useWrappedRefWithWarning(ref, componentName) {
   if (!__DEV__) return ref;
 
@@ -11,7 +9,7 @@ export default function useWrappedRefWithWarning(ref, componentName) {
   const warningRef = useCallback(
     refValue => {
       invariant(
-        refValue == null || !isReactClassComponent(refValue),
+        refValue == null || !refValue.isReactComponent,
         `${componentName} injected a ref to a provided \`as\` component that resolved to a component instance instead of a DOM element. ` +
           'Use `React.forwardRef` to provide the injected ref to the class component as a prop in order to pass it directly to a DOM element',
       );
