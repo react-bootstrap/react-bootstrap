@@ -1,22 +1,21 @@
 import classNames from 'classnames';
-import events from 'dom-helpers/events';
+import addEventListener from 'dom-helpers/addEventListener';
+import canUseDOM from 'dom-helpers/canUseDOM';
 import ownerDocument from 'dom-helpers/ownerDocument';
-
-import canUseDOM from 'dom-helpers/util/inDOM';
-import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import React from 'react';
+import removeEventListener from 'dom-helpers/removeEventListener';
+import getScrollbarSize from 'dom-helpers/scrollbarSize';
 import PropTypes from 'prop-types';
+import React from 'react';
 import BaseModal from 'react-overlays/Modal';
-
+import BootstrapModalManager from './BootstrapModalManager';
 import Fade from './Fade';
 import Body from './ModalBody';
+import ModalContext from './ModalContext';
 import ModalDialog from './ModalDialog';
 import Footer from './ModalFooter';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
-import BootstrapModalManager from './BootstrapModalManager';
 import { createBootstrapComponent } from './ThemeProvider';
-import ModalContext from './ModalContext';
 
 const propTypes = {
   /**
@@ -191,7 +190,7 @@ class Modal extends React.Component {
 
   componentWillUnmount() {
     // Clean up the listener if we need to.
-    events.off(window, 'resize', this.handleWindowResize);
+    removeEventListener(window, 'resize', this.handleWindowResize);
   }
 
   setModalRef = ref => {
@@ -234,7 +233,7 @@ class Modal extends React.Component {
     if (this.props.onEntering) this.props.onEntering(node, ...args);
 
     // FIXME: This should work even when animation is disabled.
-    events.on(window, 'resize', this.handleWindowResize);
+    addEventListener(window, 'resize', this.handleWindowResize);
   };
 
   handleExited = (node, ...args) => {
@@ -242,7 +241,7 @@ class Modal extends React.Component {
     if (this.props.onExited) this.props.onExited(...args);
 
     // FIXME: This should work even when animation is disabled.
-    events.off(window, 'resize', this.handleWindowResize);
+    removeEventListener(window, 'resize', this.handleWindowResize);
   };
 
   handleWindowResize = () => {

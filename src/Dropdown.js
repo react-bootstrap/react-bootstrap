@@ -1,15 +1,14 @@
 import classNames from 'classnames';
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import BaseDropdown from 'react-overlays/Dropdown';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
-
-import { useBootstrapPrefix } from './ThemeProvider';
+import DropdownItem from './DropdownItem';
 import DropdownMenu from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
-import DropdownItem from './DropdownItem';
 import SelectableContext from './SelectableContext';
+import { useBootstrapPrefix } from './ThemeProvider';
 import createWithBsPrefix from './createWithBsPrefix';
 
 const propTypes = {
@@ -120,7 +119,7 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
 
   return (
     <SelectableContext.Provider value={handleSelect}>
-      <BaseDropdown.ControlledComponent
+      <BaseDropdown
         drop={drop}
         show={show}
         alignEnd={alignRight}
@@ -143,7 +142,7 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
             )}
           />
         )}
-      </BaseDropdown.ControlledComponent>
+      </BaseDropdown>
     </SelectableContext.Provider>
   );
 });

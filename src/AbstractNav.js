@@ -1,4 +1,4 @@
-import qsa from 'dom-helpers/query/querySelectorAll';
+import qsa from 'dom-helpers/querySelectorAll';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useRef } from 'react';
 import useForceUpdate from '@restart/hooks/useForceUpdate';

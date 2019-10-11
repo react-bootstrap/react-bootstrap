@@ -1,11 +1,10 @@
 /* eslint-disable max-classes-per-file */
 
-import contains from 'dom-helpers/query/contains';
+import contains from 'dom-helpers/contains';
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import warning from 'warning';
-
 import Overlay from './Overlay';
 
 class RefHolder extends React.Component {

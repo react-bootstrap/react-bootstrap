@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import React, { useCallback } from 'react';
+import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
 import Transition, {
   ENTERED,
   ENTERING,
 } from 'react-transition-group/Transition';
-import onEnd from 'dom-helpers/transition/end';
 import triggerBrowserReflow from './triggerBrowserReflow';
 
 const propTypes = {
@@ -88,7 +88,7 @@ const Fade = React.forwardRef(({ className, children, ...props }, ref) => {
   return (
     <Transition
       ref={ref}
-      addEndListener={onEnd}
+      addEndListener={transitionEnd}
       {...props}
       onEnter={handleEnter}
     >
