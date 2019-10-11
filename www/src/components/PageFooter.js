@@ -54,8 +54,7 @@ class PageFooter extends React.Component {
             >
               MIT
             </a>
-            {'. '}
-            Documentation based, in part, on{' '}
+            . Documentation based, in part, on{' '}
             <a
               href="https://getbootstrap.com/docs/3.3/"
               rel="noopener noreferrer"

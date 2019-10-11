@@ -1,7 +1,7 @@
 {
-  "name": "react-bootstrap",
-  "version": "0.32.4",
-  "description": "Bootstrap 3 components built with React",
+  "name": "@clertonraf/react-bootstrap",
+  "version": "0.32.5",
+  "description": "Bootstrap 3 components built with React (without warnings)",
   "repository": {
     "type": "git",
     "url": "react-bootstrap/react-bootstrap"

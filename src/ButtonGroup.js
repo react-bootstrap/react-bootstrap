@@ -19,12 +19,10 @@ const propTypes = {
    * Display block buttons; only useful when used with the "vertical" prop.
    * @type {bool}
    */
-  block: all(
-    PropTypes.bool,
-    ({ block, vertical }) =>
-      block && !vertical
-        ? new Error('`block` requires `vertical` to be set to have any effect')
-        : null
+  block: all(PropTypes.bool, ({ block, vertical }) =>
+    block && !vertical
+      ? new Error('`block` requires `vertical` to be set to have any effect')
+      : null
   )
 };
 

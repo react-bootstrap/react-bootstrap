@@ -22,12 +22,10 @@ const propTypes = {
    * Styles the menu item as a horizontal rule, providing visual separation between
    * groups of menu items.
    */
-  divider: all(
-    PropTypes.bool,
-    ({ divider, children }) =>
-      divider && children
-        ? new Error('Children will not be rendered for dividers')
-        : null
+  divider: all(PropTypes.bool, ({ divider, children }) =>
+    divider && children
+      ? new Error('Children will not be rendered for dividers')
+      : null
   ),
 
   /**

@@ -32,10 +32,7 @@ const gridInstance = (
         {dummySentences.slice(0, 4).join(' ')}
       </Col>
       <Clearfix visibleSmBlock>
-        <code>
-          &lt;
-          {'Clearfix visibleSmBlock'} /&gt;
-        </code>
+        <code>&lt; Clearfix visibleSmBlock /&gt;</code>
       </Clearfix>
       <Col sm={6} md={3}>
         <code>

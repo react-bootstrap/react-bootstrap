@@ -40,12 +40,10 @@ const propTypes = {
    */
   stacked: PropTypes.bool,
 
-  justified: all(
-    PropTypes.bool,
-    ({ justified, navbar }) =>
-      justified && navbar
-        ? Error('justified navbar `Nav`s are not supported')
-        : null
+  justified: all(PropTypes.bool, ({ justified, navbar }) =>
+    justified && navbar
+      ? Error('justified navbar `Nav`s are not supported')
+      : null
   ),
 
   /**
