@@ -63,14 +63,14 @@ const ToggleButton = React.forwardRef(
     },
     ref,
   ) => {
-    const [focused, setFocus] = useState(false);
+    const [focused, setFocused] = useState(false);
 
     const handleFocus = e => {
-      if (e.target.tagName === 'INPUT') setFocus(true);
+      if (e.target.tagName === 'INPUT') setFocused(true);
     };
 
     const handleBlur = e => {
-      if (e.target.tagName === 'INPUT') setFocus(false);
+      if (e.target.tagName === 'INPUT') setFocused(false);
     };
 
     return (
