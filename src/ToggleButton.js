@@ -65,13 +65,9 @@ const ToggleButton = React.forwardRef(
   ) => {
     const [focused, setFocused] = useState(false);
 
-    const handleFocus = e => {
-      if (e.target.tagName === 'INPUT') setFocused(true);
-    };
-
-    const handleBlur = e => {
-      if (e.target.tagName === 'INPUT') setFocused(false);
-    };
+    const toggleFocus = useCallback(e => {
+      if (e.target.tagName === 'INPUT') setFocused(!focused);
+    }, []);
 
     return (
       <Button
@@ -94,8 +90,8 @@ const ToggleButton = React.forwardRef(
           autoComplete="off"
           checked={!!checked}
           disabled={!!disabled}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
+          onFocus={toggleFocus}
+          onBlur={toggleFocus}
           onChange={onChange || noop}
         />
 
