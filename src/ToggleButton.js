@@ -29,20 +29,10 @@ const propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * The focused state of the input
-   */
-  focused: PropTypes.bool,
-
-  /**
    * A callback fired when the underlying input element changes. This is passed
    * directly to the `<input>` so shares the same signature as a native `onChange` event.
    */
   onChange: PropTypes.func,
-
-  /**
-   * A callback fired when the underlying input element is focused or blurred.
-   */
-  toggleFocus: PropTypes.func,
 
   /**
    * The value of the input, should be unique amongst it's siblings when nested in a
@@ -66,22 +56,21 @@ const ToggleButton = React.forwardRef(
       checked,
       type,
       onChange,
-      toggleFocus,
       value,
       disabled,
-      focused,
       inputRef,
       ...props
     },
     ref,
   ) => {
+    const [focused, setFocus] = useState(false);
 
     const handleFocus = e => {
-      if (e.target.tagName === 'INPUT') toggleFocus(true);
+      if (e.target.tagName === 'INPUT') setFocus(true);
     };
 
     const handleBlur = e => {
-      if (e.target.tagName === 'INPUT') toggleFocus(false);
+      if (e.target.tagName === 'INPUT') setFocus(false);
     };
 
     return (
