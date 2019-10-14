@@ -98,7 +98,7 @@ const ToggleButton = React.forwardRef(
         {children}
       </Button>
     );
-  }
+  },
 );
 
 ToggleButton.propTypes = propTypes;
