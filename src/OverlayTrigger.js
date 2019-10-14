@@ -43,6 +43,10 @@ const propTypes = {
    * control, consider using the Overlay component directly.
    */
   defaultShow: PropTypes.bool,
+  /**
+    The initial flip state of the Overlay.
+   */
+  flip: PropTypes.bool,
 
   /**
    * An element or text to overlay next to the target.

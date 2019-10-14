@@ -10,6 +10,7 @@ export interface OverlayTriggerProps
   trigger?: TriggerType | TriggerType[];
   delay?: number | { show: number; hide: number };
   defaultShow?: boolean;
+  flip?: boolean;
   overlay: React.ReactNode | (() => React.ReactNode);
   target?: never;
   onHide?: never;
