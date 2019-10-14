@@ -37,6 +37,7 @@ function ComponentApi({ heading, metadata, exportedBy }) {
 
       <ImportApi name={importName} />
       {/* use composes here */}
+      {/* eslint-disable-next-line react/no-danger */}
       {descHtml && <div dangerouslySetInnerHTML={{ __html: descHtml }} />}
       <PropTable metadata={metadata} />
     </>
