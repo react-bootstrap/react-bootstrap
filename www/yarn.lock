@@ -1661,10 +1661,10 @@ astral-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/astral-regex/-/astral-regex-1.0.0.tgz#6c8c3fb827dd43ee3918f27b82782ab7658a6fd9"
   integrity sha512-+Ryf6g3BKoRc7jfp7ad8tM4TtMiaWvbF/1/sQcZPkkS7ag3D5nMBCe2UfOTONtAkaG0tO0ij3C5Lwmf1EiyjHg==
 
-astroturf@^0.9.20:
-  version "0.9.20"
-  resolved "https://registry.yarnpkg.com/astroturf/-/astroturf-0.9.20.tgz#21813de20aa77acd2b30bf9de5dce0988047316b"
-  integrity sha512-EtLrt2mD4erGn6Qm42bOJRhFs5hsi98nKbFJxm1+H+wKT7tCYsA6InTXvmBdwspLPzMLzT2Ru2SvZPHVzL0JiA==
+astroturf@^0.9.21:
+  version "0.9.21"
+  resolved "https://registry.yarnpkg.com/astroturf/-/astroturf-0.9.21.tgz#c9803cc647066ab1854909ee0a0dd8dc94c25c85"
+  integrity sha512-SprFt5olEMitc+xJbiTqueOKh5SP6/xZz8d3BEDkGfnAIAPOd3T8GdtoVSJEnulh6AnMDt2TRLuPDCqVAiztww==
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/core" "^7.5.5"
@@ -1681,7 +1681,7 @@ astroturf@^0.9.20:
     fs-extra "^8.0.0"
     loader-utils "^1.2.3"
     lodash "^4.17.15"
-    memory-fs "^0.4.1"
+    memory-fs "^0.5.0"
     postcss-loader "^3.0.0"
     postcss-nested "^4.1.1"
     resolve "^1.11.1"
@@ -7929,6 +7929,14 @@ memory-fs@^0.4.0, memory-fs@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.4.1.tgz#3a9a20b8462523e447cfbc7e8bb80ed667bfc552"
   integrity sha1-OpoguEYlI+RHz7x+i7gO1me/xVI=
+  dependencies:
+    errno "^0.1.3"
+    readable-stream "^2.0.1"
+
+memory-fs@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.5.0.tgz#324c01288b88652966d161db77838720845a8e3c"
+  integrity sha512-jA0rdU5KoQMC0e6ppoNRtpp6vjFq6+NY7r8hywnC7V+1Xj/MtHwGIbB1QaK/dunyjWteJzmkpd7ooeWg10T7GA==
   dependencies:
     errno "^0.1.3"
     readable-stream "^2.0.1"
