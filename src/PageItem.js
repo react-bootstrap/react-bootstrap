@@ -24,15 +24,7 @@ const defaultProps = {
 
 const PageItem = React.forwardRef(
   (
-    {
-      active,
-      disabled,
-      className,
-      style,
-      activeLabel,
-      children,
-      ...props
-    },
+    { active, disabled, className, style, activeLabel, children, ...props },
     ref,
   ) => {
     const Component = active || disabled ? 'span' : SafeAnchor;
@@ -50,11 +42,12 @@ const PageItem = React.forwardRef(
         </Component>
       </li>
     );
-  }
-)
+  },
+);
 
 PageItem.propTypes = propTypes;
 PageItem.defaultProps = defaultProps;
+PageItem.displayName = 'PageItem';
 
 export default PageItem;
 
