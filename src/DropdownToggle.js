@@ -7,7 +7,7 @@ import BaseDropdownToggle from 'react-overlays/DropdownToggle';
 import React from 'react';
 
 import Button from './Button';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const wrapRef = props => {
   const { ref } = props;
@@ -15,72 +15,74 @@ const wrapRef = props => {
   return props;
 };
 
-class DropdownToggle extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'dropdown-toggle'
-     */
-    bsPrefix: PropTypes.string,
+const propTypes = {
+  /**
+   * @default 'dropdown-toggle'
+   */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * An html id attribute, necessary for assistive technologies, such as screen readers.
-     * @type {string|number}
-     * @required
-     */
-    id: isRequiredForA11y(PropTypes.any),
+  /**
+   * An html id attribute, necessary for assistive technologies, such as screen readers.
+   * @type {string|number}
+   * @required
+   */
+  id: isRequiredForA11y(PropTypes.any),
 
-    split: PropTypes.bool,
+  split: PropTypes.bool,
 
-    as: PropTypes.elementType,
+  as: PropTypes.elementType,
 
-    /**
-     * to passthrough to the underlying button or whatever from DropdownButton
-     * @private
-     */
-    childBsPrefix: PropTypes.string,
-  };
+  /**
+   * to passthrough to the underlying button or whatever from DropdownButton
+   * @private
+   */
+  childBsPrefix: PropTypes.string,
+};
 
-  static defaultProps = {
-    as: Button,
-  };
+const defaultProps = {
+  as: Button,
+};
 
-  render() {
-    const {
-      bsPrefix,
-      split,
-      className,
-      children,
-      childBsPrefix,
-      as: Component,
-      ...props
-    } = this.props;
+const DropdownToggle = React.forwardRef((props, ref) => {
+  const {
+    bsPrefix,
+    split,
+    className,
+    children,
+    childBsPrefix,
+    as: Component,
+    ...otherProps
+  } = props;
 
-    if (childBsPrefix !== undefined) {
-      props.bsPrefix = childBsPrefix;
-    }
-
-    // This intentionally forwards size and variant (if set) to the
-    // underlying component, to allow it to render size and style variants.
-    return (
-      <BaseDropdownToggle>
-        {({ toggle, props: toggleProps }) => (
-          <Component
-            onClick={toggle}
-            className={classNames(
-              className,
-              bsPrefix,
-              split && `${bsPrefix}-split`,
-            )}
-            {...wrapRef(toggleProps)}
-            {...props}
-          >
-            {children}
-          </Component>
-        )}
-      </BaseDropdownToggle>
-    );
+  if (childBsPrefix !== undefined) {
+    otherProps.bsPrefix = childBsPrefix;
   }
-}
 
-// Needs to be a class FTM, because it needs to accept a ref that can be used with findDOMNode
-export default createBootstrapComponent(DropdownToggle, 'dropdown-toggle');
+  const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'dropdown-toggle');
+
+  // This intentionally forwards size and variant (if set) to the
+  // underlying component, to allow it to render size and style variants.
+  return (
+    <BaseDropdownToggle ref={ref}>
+      {({ toggle, props: toggleProps }) => (
+        <Component
+          onClick={toggle}
+          className={classNames(
+            className,
+            decoratedBsPrefix,
+            split && `${decoratedBsPrefix}-split`,
+          )}
+          {...wrapRef(toggleProps)}
+          {...otherProps}
+        >
+          {children}
+        </Component>
+      )}
+    </BaseDropdownToggle>
+  );
+});
+
+DropdownToggle.propTypes = propTypes;
+DropdownToggle.defaultProps = defaultProps;
+
+export default DropdownToggle;
