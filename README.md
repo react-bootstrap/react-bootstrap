@@ -9,7 +9,7 @@
 [![Discord][discord-badge]][discord]
 [![Netlify][netlify-badge]][netlify]
 
-## Docs
+## Documents
 
 See the [documentation][documentation] with live editable examples and API documention.
 
