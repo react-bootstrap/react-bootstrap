@@ -5076,10 +5076,10 @@ gatsby-graphiql-explorer@^0.2.23:
   dependencies:
     "@babel/runtime" "^7.6.3"
 
-gatsby-link@^2.2.20:
-  version "2.2.20"
-  resolved "https://registry.yarnpkg.com/gatsby-link/-/gatsby-link-2.2.20.tgz#fe04e507053e8762dc91736172ee3cee17a64b89"
-  integrity sha512-giAmg+s6s8IZ14U+fSdWFEQ85hvGxL2Ar9kl5h6+lRctu0D0h7VFGJddSdteIcLUspuZNdSk1VT9atTSO2bxQw==
+gatsby-link@^2.2.20, gatsby-link@^2.2.22:
+  version "2.2.22"
+  resolved "https://registry.yarnpkg.com/gatsby-link/-/gatsby-link-2.2.22.tgz#d9379e8ab42e065ed0f44331e69933dfe4dbed70"
+  integrity sha512-Cv73tFFFQ98grOhhBhI07bsd/w4g/RklLJmaqBucSU8v7MQ9EQorvOX0snly2dQurbNNSfU2XkNNPFrRBGNb0g==
   dependencies:
     "@babel/runtime" "^7.6.3"
     "@types/reach__router" "^1.2.6"
