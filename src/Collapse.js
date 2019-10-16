@@ -125,7 +125,6 @@ const defaultProps = {
   mountOnEnter: false,
   unmountOnExit: false,
   appear: false,
-
   dimension: 'height',
   getDimensionValue,
 };
@@ -142,10 +141,11 @@ const Collapse = React.forwardRef((props, ref) => {
     ...otherProps
   } = props;
 
+  delete otherProps.dimension;
+  delete otherProps.getDimensionValue;
+
   const getDimension = () =>
-    typeof otherProps.dimension === 'function'
-      ? otherProps.dimension()
-      : otherProps.dimension;
+    typeof props.dimension === 'function' ? props.dimension() : props.dimension;
 
   // for testing
   const _getScrollDimensionValue = (elem, dimension) => {
@@ -170,10 +170,7 @@ const Collapse = React.forwardRef((props, ref) => {
   /* -- Collapsing -- */
   const _handleExit = elem => {
     const dimension = getDimension();
-    elem.style[dimension] = `${otherProps.getDimensionValue(
-      dimension,
-      elem,
-    )}px`;
+    elem.style[dimension] = `${props.getDimensionValue(dimension, elem)}px`;
     triggerBrowserReflow(elem);
   };
 
@@ -191,7 +188,7 @@ const Collapse = React.forwardRef((props, ref) => {
     <Transition
       ref={ref}
       {...otherProps}
-      aria-expanded={otherProps.role ? otherProps.in : null}
+      aria-expanded={props.role ? props.in : null}
       addEndListener={onEnd}
       onEnter={handleEnter}
       onEntering={handleEntering}
