@@ -7,7 +7,7 @@ import DocLink from '../../components/DocLink';
 
 <p className="lead">Learn how to include React Bootstrap in your project</p>
 
-### Installation
+## Installation
 
 The best way to consume React-Bootstrap is via the npm package which
 you can install with `npm` (or `yarn` if you prefer).
@@ -26,6 +26,8 @@ Because React-Bootstrap doesn't depend on a very precise version of
 Bootstrap, we don't ship with any included css. However, some
 stylesheet **is required** to use these components. 
 
+### Css
+
 ```
 {/* The following line can be included in your src/index.js or App.js file*/}
 
@@ -38,8 +40,12 @@ more information about the benefits of using a CDN can be found
 
 <CssCodeBlock />
 
+### Sass
+
 In case you are using **Sass** the simplest way is to include the Bootstrap’s source Sass files
-in your main Sass file and then require it on your `src/index.js` or `App.js` file
+in your main Sass file and then require it on your `src/index.js` or `App.js` file.
+This applies to a typical `create-react-app` application in other use cases you might have to setup
+the bundler of your choice to compile Sass/SCSS stylesheets to css.
 
 ```
 /* The following line can be included in a src/App.scss */
@@ -50,6 +56,8 @@ in your main Sass file and then require it on your `src/index.js` or `App.js` fi
 
 import './App.scss';
 ```
+
+#### Customize Bootstrap
 
 If you wish to customize the Bootstrap theme or any Bootstrap variables
 you can create a custom Sass file
@@ -75,11 +83,10 @@ And import it on the main Sass file
 @import "custom";
 ```
 
-For more advanced use cases you can also use a bundler like Webpack
-or Browserify to include the CSS files for you as part of your build
-process but that is beyond the scope of this guide. Also see
-[the Bootstrap docs](https://getbootstrap.com/docs/4.3/getting-started/theming/) 
-for details about customizing stylesheets to match your component
+### Advanced usage
+
+See [the Bootstrap docs](https://getbootstrap.com/docs/4.3/getting-started/theming/)
+for more advanced use cases and details about customizing stylesheets to match your component
 use.
 
 ### Importing
