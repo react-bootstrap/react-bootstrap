@@ -33,6 +33,7 @@ const has = t => !targets.length || targets.includes(t);
 const copyTypes = dest => shell(`cpy ${typesRoot}/components/*.d.ts ${dest}`);
 
 /**
+ * modification by pasindu janith perera....................
  * Run babel over the src directory and output
  * compiled common js files to ./lib.
  */
