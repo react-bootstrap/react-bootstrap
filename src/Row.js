@@ -11,7 +11,7 @@ const propTypes = {
    */
   bsPrefix: PropTypes.string,
 
-  /** Removes the gutter spacing between `Col`s as well as any added negative margins. */
+  
   noGutters: PropTypes.bool.isRequired,
   as: PropTypes.elementType,
 };

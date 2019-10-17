@@ -12,7 +12,7 @@ const propTypes = {
   /** Styles PageItem as active, and renders a `<span>` instead of an `<a>`. */
   active: PropTypes.bool,
 
-  /** An accessible label indicating the active state.. */
+
   activeLabel: PropTypes.string,
 };
 

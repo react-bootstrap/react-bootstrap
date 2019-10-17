@@ -13,14 +13,10 @@ const propTypes = {
    */
   bsPrefix: PropTypes.string,
 
-  /**
-   * The active state of the NavItem item.
-   */
+ 
   active: PropTypes.bool,
 
-  /**
-   * The disabled state of the NavItem item.
-   */
+  
   disabled: PropTypes.bool,
 
   /**
