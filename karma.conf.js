@@ -53,7 +53,13 @@ module.exports = config => {
       dir: 'coverage',
     },
 
-    browsers: env.BROWSER ? env.BROWSER.split(',') : ['Chrome'],
+    browsers: env.BROWSER ? env.BROWSER.split(',') : ['Chrome_Without_Sandbox'],
+    customLaunchers: {
+      Chrome_Without_Sandbox: {
+        base: 'Chrome',
+        flags: ['--no-sandbox', '--disable-setuid-sandbox'],
+      },
+    },
 
     singleRun: env.CONTINUOUS_INTEGRATION === 'true',
   });

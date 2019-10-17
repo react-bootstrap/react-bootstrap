@@ -1,7 +1,7 @@
-FROM gitpod/workspace-full
+FROM gitpod/workspace-full-vnc
 
 USER gitpod
 
-RUN sudo apt-add-repository -yu universe && \
-    sudo apt-get install chromium-browser && \
+RUN sudo apt-get update && \
+    sudo apt-get install -yq chromium-browser && \
     sudo rm -rf /var/lib/apt/lists/*
