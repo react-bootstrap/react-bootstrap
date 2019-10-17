@@ -3,6 +3,8 @@ import { mount } from 'enzyme';
 
 import ListGroup from '../src/ListGroup';
 
+import { shouldWarn } from './helpers';
+
 describe('<ListGroup>', () => {
   it('Should render correctly "list-group"', () => {
     mount(<ListGroup />).assertSingle('div.list-group');
@@ -40,6 +42,11 @@ describe('<ListGroup>', () => {
     mount(<ListGroup horizontal="xl" />).assertSingle(
       'div.list-group.list-group-horizontal-xl',
     );
+  });
+
+  it('throws a warning if flush and horizontal are used', () => {
+    shouldWarn('together');
+    mount(<ListGroup horizontal variant="flush" />);
   });
 
   it('accepts as prop', () => {

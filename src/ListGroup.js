@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import warning from 'warning';
 
 import { useUncontrolled } from 'uncontrollable';
 
@@ -63,6 +64,11 @@ const ListGroup = React.forwardRef((props, ref) => {
   } else {
     horizontalVariant = null;
   }
+
+  warning(
+    !(horizontal && variant === 'flush'),
+    '`variant="flush"` and `horizontal` should not be used together.',
+  );
 
   return (
     <AbstractNav
