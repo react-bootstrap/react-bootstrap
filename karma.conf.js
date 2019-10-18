@@ -54,6 +54,12 @@ module.exports = config => {
     },
 
     browsers: env.BROWSER ? env.BROWSER.split(',') : ['Chrome'],
+    customLaunchers: {
+      Chrome_Without_Sandbox: {
+        base: 'Chrome',
+        flags: ['--no-sandbox', '--disable-setuid-sandbox'],
+      },
+    },
 
     singleRun: env.CONTINUOUS_INTEGRATION === 'true',
   });

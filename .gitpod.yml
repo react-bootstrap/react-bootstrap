@@ -1,0 +1,9 @@
+image:
+  file: .gitpod.Dockerfile
+tasks:
+  - command: gp await-port 8000 && sleep 3 && gp preview $(gp url 8000)
+  - init: yarn run bootstrap
+    command: yarn start
+ports:
+  - port: 8000
+    onOpen: ignore
