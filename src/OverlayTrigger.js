@@ -1,3 +1,5 @@
+/* eslint-disable max-classes-per-file */
+
 import contains from 'dom-helpers/query/contains';
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';

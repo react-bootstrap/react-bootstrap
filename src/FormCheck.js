@@ -158,7 +158,7 @@ const FormCheck = React.forwardRef(
           )}
         >
           {children || (
-            <React.Fragment>
+            <>
               {input}
               {hasLabel && (
                 <FormCheckLabel title={title}>{label}</FormCheckLabel>
@@ -168,7 +168,7 @@ const FormCheck = React.forwardRef(
                   {feedback}
                 </Feedback>
               )}
-            </React.Fragment>
+            </>
           )}
         </div>
       </FormContext.Provider>
