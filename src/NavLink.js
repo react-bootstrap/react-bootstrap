@@ -32,6 +32,12 @@ const propTypes = {
   /** The HTML href attribute for the `NavLink` */
   href: PropTypes.string,
 
+  /** The HTML target attribute for the `NavLink` */
+  target: PropTypes.oneOf(['_self', '_blank', '_parent', '_top']),
+
+  /** The HTML rel attribute for the `NavLink` */
+  rel: PropTypes.string,
+
   /** A callback fired when the `NavLink` is selected.
    *
    * ```js
@@ -57,7 +63,18 @@ const defaultProps = {
 
 const NavLink = React.forwardRef(
   (
-    { bsPrefix, disabled, className, href, eventKey, onSelect, as, ...props },
+    {
+      bsPrefix,
+      disabled,
+      className,
+      href,
+      target,
+      rel,
+      eventKey,
+      onSelect,
+      as,
+      ...props
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-link');
@@ -65,6 +82,8 @@ const NavLink = React.forwardRef(
       <AbstractNavItem
         {...props}
         href={href}
+        target={target}
+        rel={rel}
         ref={ref}
         eventKey={eventKey}
         as={as}
