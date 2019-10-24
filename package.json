@@ -128,7 +128,7 @@
     "@restart/hooks": "^0.3.11",
     "@types/react": "^16.8.23",
     "classnames": "^2.2.6",
-    "dom-helpers": "^3.4.0",
+    "dom-helpers": "^5.1.2",
     "invariant": "^2.2.4",
     "keycode": "^2.2.0",
     "popper.js": "^1.14.7",
