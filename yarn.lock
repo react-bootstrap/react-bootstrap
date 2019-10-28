@@ -893,9 +893,9 @@
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
 
 "@react-bootstrap/eslint-config@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@react-bootstrap/eslint-config/-/eslint-config-1.3.1.tgz#fc3690dafca807f0c8e9392269148fc3c776e4f4"
-  integrity sha512-FqMJhrjMa4LdrmbXnaohYGOcKPiAe8qgDQ4eWeuMrP0urqaEMjP2YL6C6Ir/EUXO0FlVMPziYiCx01xY4WFlkg==
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@react-bootstrap/eslint-config/-/eslint-config-1.3.2.tgz#7f49b343cf78e3b9ed23d1de5c38656edeea05bb"
+  integrity sha512-TXC9PiX8pANW+frZ5KZJ+FZanfFIc2I0BBlMQeUgR24nhb25AtZzCO40QcuBisBtz143o4+luwZmQpAbCC64ow==
   dependencies:
     eslint-config-airbnb "^18.0.1"
     eslint-config-prettier "^6.4.0"
