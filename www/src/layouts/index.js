@@ -7,6 +7,8 @@ import Heading from '../components/Heading';
 import CodeBlock from '../components/CodeBlock';
 import LinkedHeading from '../components/LinkedHeading';
 
+import SEO from '../seo';
+
 const getMode = (className = '') => {
   const [, mode] = className.match(/language-(\w+)/) || [];
   return mode;
@@ -37,6 +39,7 @@ const propTypes = {
 function DefaultLayout({ children, location }) {
   return (
     <div>
+      <SEO pathname={location.pathname} />
       <NavMain activePage={location.pathname} />
       <MDXProvider components={components}>{children}</MDXProvider>
     </div>

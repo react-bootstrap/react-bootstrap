@@ -6,8 +6,11 @@ const defaultDescriptions = require('./src/defaultPropDescriptions');
 
 module.exports = {
   siteMetadata: {
-    title: 'React-Bootstrap Documentation',
+    title: 'React-Bootstrap',
+    titleTemplate: '%s · React-Bootstrap Documentation',
     author: 'react bootstrap contributors',
+    description: 'The most popular front-end framework, rebuilt for React.',
+    url: 'https://react-bootstrap.github.io',
     browsers: [
       'last 4 Chrome versions',
       'last 4 Firefox versions',
@@ -64,5 +67,6 @@ module.exports = {
       resolve: 'gatsby-plugin-astroturf',
       options: { extension: '.module.scss' },
     },
+    `gatsby-plugin-react-helmet`,
   ],
 };
