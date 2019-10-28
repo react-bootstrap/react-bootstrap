@@ -29,8 +29,12 @@ module.exports = config => {
           },
         ],
       },
+      resolve: {
+        symlinks: false,
+      },
       plugins: [
         new DefinePlugin({
+          __DEV__: true,
           'process.env.NODE_ENV': JSON.stringify('test'),
         }),
       ],

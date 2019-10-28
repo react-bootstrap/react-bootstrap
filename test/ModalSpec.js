@@ -1,7 +1,5 @@
-import events from 'dom-helpers/events';
-import React from 'react';
 import { mount } from 'enzyme';
-
+import React from 'react';
 import Modal from '../src/Modal';
 
 describe('<Modal>', () => {
@@ -170,11 +168,11 @@ describe('<Modal>', () => {
     let offSpy;
 
     beforeEach(() => {
-      offSpy = sinon.spy(events, 'off');
+      offSpy = sinon.spy(window, 'removeEventListener');
     });
 
     afterEach(() => {
-      events.off.restore();
+      offSpy.restore();
     });
 
     it('should remove resize listener when unmounted', () => {
@@ -195,9 +193,10 @@ describe('<Modal>', () => {
       const instance = mount(<Component />);
       instance.setState({ show: false });
 
-      expect(offSpy).to.have.been.calledWith(window, 'resize');
+      expect(offSpy).to.have.been.calledWith('resize');
     });
   });
+
   it('Should close once it was clicked outside of the Modal', () => {
     const onHideSpy = sinon.spy();
     mount(

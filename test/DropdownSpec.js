@@ -1,7 +1,6 @@
+import { mount } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount } from 'enzyme';
-
 import Dropdown from '../src/Dropdown';
 
 describe('<Dropdown>', () => {
@@ -51,9 +50,23 @@ describe('<Dropdown>', () => {
   });
 
   it('forwards alignRight to menu', () => {
-    mount(<Dropdown alignRight>{dropdownChildren}</Dropdown>).assertSingle(
-      'ReactOverlaysDropdownMenu[alignEnd=true]',
+    const Menu = React.forwardRef(
+      ({ show: _, close: _1, alignRight, ...props }, ref) => (
+        <div {...props} data-align-right={alignRight} ref={ref} />
+      ),
     );
+
+    mount(
+      <Dropdown alignRight show>
+        <Dropdown.Toggle id="test-id" key="toggle">
+          Child Title
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu key="menu" as={Menu}>
+          <Dropdown.Item>Item 1</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>,
+    ).assertSingle('div[data-align-right=true]');
   });
 
   // NOTE: The onClick event handler is invoked for both the Enter and Space

@@ -1,6 +1,6 @@
-import qsa from 'dom-helpers/query/querySelectorAll';
-import css from 'dom-helpers/style';
-import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
+import css from 'dom-helpers/css';
+import qsa from 'dom-helpers/querySelectorAll';
+import getScrollbarSize from 'dom-helpers/scrollbarSize';
 import ModalManager from 'react-overlays/ModalManager';
 
 const Selector = {

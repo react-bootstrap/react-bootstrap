@@ -7,9 +7,7 @@
     "expect": true,
     "sinon": true
   },
-  "plugins": [
-    "mocha"
-  ],
+  "plugins": ["mocha"],
   "rules": {
     "no-script-url": 0,
     "no-unused-expressions": 0,
@@ -17,6 +15,6 @@
     "react/no-multi-comp": 0,
     "react/prop-types": 0,
     "mocha/no-exclusive-tests": 2,
-    "no-unused-vars": [2, { "varsIgnorePattern": "^_$" }]
+    "max-classes-per-file": "off"
   }
 }

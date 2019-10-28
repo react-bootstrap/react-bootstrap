@@ -1,16 +1,15 @@
 import classNames from 'classnames';
-import styles from 'dom-helpers/style';
-import transition from 'dom-helpers/transition';
-import React, { cloneElement } from 'react';
+import styles from 'dom-helpers/css';
+import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
+import React, { cloneElement } from 'react';
 import { uncontrollable } from 'uncontrollable';
-
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
+import { forEach, map } from './ElementChildren';
 import SafeAnchor from './SafeAnchor';
-import { map, forEach } from './ElementChildren';
-import triggerBrowserReflow from './triggerBrowserReflow';
 import { createBootstrapComponent } from './ThemeProvider';
+import triggerBrowserReflow from './triggerBrowserReflow';
 
 const countChildren = c =>
   React.Children.toArray(c).filter(React.isValidElement).length;
@@ -211,7 +210,7 @@ class Carousel extends React.Component {
             currentClasses: classNames(orderClassName, directionalClassName),
           },
           () =>
-            transition.end(nextElement, () => {
+            transitionEnd(nextElement, () => {
               this.safeSetState(
                 { prevClasses: '', currentClasses: 'active' },
                 this.handleSlideEnd,
