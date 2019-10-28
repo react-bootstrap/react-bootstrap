@@ -22,7 +22,7 @@
     "copy-text-to-clipboard": "^2.1.1",
     "docsearch.js": "^2.6.3",
     "dom-helpers": "^5.1.2",
-    "formik": "^1.5.8",
+    "formik": "^2.0.2",
     "gatsby": "^2.17.2",
     "gatsby-link": "^2.2.20",
     "gatsby-plugin-astroturf": "^0.2.1",
