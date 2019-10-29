@@ -5186,10 +5186,10 @@ gatsby-plugin-catch-links@^2.1.15:
     "@babel/runtime" "^7.6.3"
     escape-string-regexp "^1.0.5"
 
-gatsby-plugin-mdx@^1.0.53:
-  version "1.0.53"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-1.0.53.tgz#a81a273b3489c6734992c7b3ae27195e6369793e"
-  integrity sha512-F/y9q1xud83ANEKijWnR5YpmDYuW++KSO3xtSWo3pYeCh8QwdCGpaJseMuZlGpdpeNKc9ceB+eWvBWkewVpcMw==
+gatsby-plugin-mdx@^1.0.54:
+  version "1.0.54"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-mdx/-/gatsby-plugin-mdx-1.0.54.tgz#f582d9a8633427f44b2f11b9d1f3845b58331d0e"
+  integrity sha512-rIvbAV2R+FBVZEL7DqwKtGSO5+lHckR7SEQnxLX0syC5B09QOcQYdgpMEm3CDq+aWZB1dZS259KtrynKzoVROw==
   dependencies:
     "@babel/core" "^7.6.4"
     "@babel/generator" "^7.6.4"
@@ -5222,7 +5222,7 @@ gatsby-plugin-mdx@^1.0.53:
     static-site-generator-webpack-plugin "^3.4.2"
     style-to-object "^0.2.3"
     underscore.string "^3.3.5"
-    unified "^8.4.0"
+    unified "^8.4.1"
     unist-util-map "^1.0.5"
     unist-util-remove "^1.0.3"
     unist-util-visit "^1.4.1"
@@ -12249,10 +12249,10 @@ unified@^7.0.0:
     vfile "^3.0.0"
     x-is-string "^0.1.0"
 
-unified@^8.4.0:
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/unified/-/unified-8.4.0.tgz#5bb8a05c2a0b9dcc56152312ad8e4578a0d90af7"
-  integrity sha512-hQqeCrzqqS3vk8WbvbjYgaxe9WqmZF32Y3lz/kY5A8/5RdJbxoa4yOIAYpSEvqii9n2MTI2OL1+ByoVJYLhlUg==
+unified@^8.4.1:
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/unified/-/unified-8.4.1.tgz#99bd0393f58a139eaa51832cfbcc0e7f6573a1e1"
+  integrity sha512-YPj/uIIZSO7mMIZQj/5Z3hDl4lshWYRQGs5TgUCjHTVdklUWH+O94mK5Cy77SEcmEUwGhnUcudMuH/zIwporqw==
   dependencies:
     bail "^1.0.0"
     extend "^3.0.0"
