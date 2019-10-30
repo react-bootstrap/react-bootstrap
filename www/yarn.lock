@@ -1104,7 +1104,7 @@
     "@types/unist" "*"
     "@types/vfile-message" "*"
 
-"@typescript-eslint/eslint-plugin@^2.5.0":
+"@typescript-eslint/eslint-plugin@^2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-2.6.0.tgz#e82ed43fc4527b21bfe35c20a2d6e4ed49fc7957"
   integrity sha512-iCcXREU4RciLmLniwKLRPCOFVXrkF7z27XuHq5DrykpREv/mz6ztKAyLg2fdkM0hQC7659p5ZF5uStH7uzAJ/w==
@@ -1124,7 +1124,7 @@
     "@typescript-eslint/typescript-estree" "2.6.0"
     eslint-scope "^5.0.0"
 
-"@typescript-eslint/parser@^2.5.0":
+"@typescript-eslint/parser@^2.6.0":
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-2.6.0.tgz#5106295c6a7056287b4719e24aae8d6293d5af49"
   integrity sha512-AvLejMmkcjRTJ2KD72v565W4slSrrzUIzkReu1JN34b8JnsEsxx7S9Xx/qXEuMQas0mkdUfETr0j3zOhq2DIqQ==
@@ -5107,10 +5107,10 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-gatsby-cli@^2.8.7:
-  version "2.8.7"
-  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.8.7.tgz#172ef50075e075e97bf2fc949f9b650ef42376c2"
-  integrity sha512-/lp/afahhg2GSZv8cDFcIl6hsV2YZzAxkfuiM9gSDU8Pe6C19JaTex8PBGuXHR0NN2L4u7rItXe21beqxy9GAQ==
+gatsby-cli@^2.8.8:
+  version "2.8.8"
+  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.8.8.tgz#b8f88ef4cfc42442ec805b02b3ad0d2340114881"
+  integrity sha512-j8xhEA3G0msqBY5Iu1ddZkBybV+gwiLEVOtO1GwSwv4moJunWkTjWW9tn9sVKOpQdRnEZ11z5ducVY/kBJRENA==
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/runtime" "^7.6.3"
@@ -5368,10 +5368,10 @@ gatsby-transformer-remark@^2.6.32:
     unist-util-select "^1.5.0"
     unist-util-visit "^1.4.1"
 
-gatsby@^2.17.6:
-  version "2.17.6"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.17.6.tgz#b58459776333345dfdb0dfa5c59144a2646a11ea"
-  integrity sha512-JCAgtDxfdpKxKOxvT2OukZyef8cFc/4E/ZOKpziBHQY+eJq6510KKzD/52yRtXV/iw0ByA4RwGZEKrUovZLVQw==
+gatsby@^2.17.7:
+  version "2.17.7"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.17.7.tgz#8aa71868044a42e27dc0314f5c99bac8777e0ff5"
+  integrity sha512-gAqV+ZIdF2Tj55Rpt1Vmm0tTUsvdN+TgcA2R1MdsoAZ9VdALKpCNFJWe1EDB761qmjp8PGpHg9X2RMmxwrsq7Q==
   dependencies:
     "@babel/code-frame" "^7.5.5"
     "@babel/core" "^7.6.4"
@@ -5384,8 +5384,8 @@ gatsby@^2.17.6:
     "@mikaelkristiansson/domready" "^1.0.9"
     "@pieh/friendly-errors-webpack-plugin" "1.7.0-chalk-2"
     "@reach/router" "^1.2.1"
-    "@typescript-eslint/eslint-plugin" "^2.5.0"
-    "@typescript-eslint/parser" "^2.5.0"
+    "@typescript-eslint/eslint-plugin" "^2.6.0"
+    "@typescript-eslint/parser" "^2.6.0"
     address "1.1.2"
     autoprefixer "^9.7.0"
     axios "^0.19.0"
@@ -5433,7 +5433,7 @@ gatsby@^2.17.6:
     flat "^4.1.0"
     fs-exists-cached "1.0.0"
     fs-extra "^8.1.0"
-    gatsby-cli "^2.8.7"
+    gatsby-cli "^2.8.8"
     gatsby-core-utils "^1.0.17"
     gatsby-graphiql-explorer "^0.2.26"
     gatsby-link "^2.2.22"
