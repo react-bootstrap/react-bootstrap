@@ -1,0 +1,429 @@
+/* -- container -- */
+.modal, .modal-mask {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+.modal {
+    position: fixed;
+}
+/* -- mask -- */
+.modal-mask {
+    position: absolute;
+    background: rgba(0, 0, 0, .3);
+}
+/* -- dialog -- */
+.modal-dialog {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 101;
+    padding: 30px 36px;
+    background: var(--white);
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+.modal-dialog .modal-heading {
+    color: var(--dark-bush);
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 23px;
+    margin-bottom: 6px;
+}
+.modal-dialog .modal-content {
+    color: var(--dark-bush);
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 0;
+}
+.modal-dialog:focus {
+    outline: none;
+}
+/* -- close button -- */
+.modal-close {
+    left: 0;
+    position: fixed;
+    cursor: pointer;
+    bottom: 0;
+    height: 44px;
+    width: 100%;
+    background: #f1f1f1;
+    color: #000;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+/* -- fade -- */
+@-webkit-keyframes modal-fade-enter {
+    from {
+        opacity: 0;
+   }
+}
+@keyframes modal-fade-enter {
+    from {
+        opacity: 0;
+   }
+}
+.modal-fade-enter {
+    -webkit-animation: modal-fade-enter both ease-in;
+    animation: modal-fade-enter both ease-in;
+}
+@-webkit-keyframes modal-fade-leave {
+    to {
+        opacity: 0;
+   }
+}
+@keyframes modal-fade-leave {
+    to {
+        opacity: 0;
+   }
+}
+.modal-fade-leave {
+    -webkit-animation: modal-fade-leave both ease-out;
+    animation: modal-fade-leave both ease-out;
+}
+/* -- zoom -- */
+@-webkit-keyframes modal-zoom-enter {
+    from {
+        -webkit-transform: scale3d(0.3, 0.3, 0.3);
+        transform: scale3d(0.3, 0.3, 0.3);
+   }
+}
+@keyframes modal-zoom-enter {
+    from {
+        -webkit-transform: scale3d(0.3, 0.3, 0.3);
+        transform: scale3d(0.3, 0.3, 0.3);
+   }
+}
+.modal-zoom-enter {
+    -webkit-animation: modal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);
+    animation: modal-zoom-enter both cubic-bezier(0.4, 0, 0, 1.5);
+}
+@-webkit-keyframes modal-zoom-leave {
+    to {
+        -webkit-transform: scale3d(0.3, 0.3, 0.3);
+        transform: scale3d(0.3, 0.3, 0.3);
+   }
+}
+@keyframes modal-zoom-leave {
+    to {
+        -webkit-transform: scale3d(0.3, 0.3, 0.3);
+        transform: scale3d(0.3, 0.3, 0.3);
+   }
+}
+.modal-zoom-leave {
+    -webkit-animation: modal-zoom-leave both;
+    animation: modal-zoom-leave both;
+}
+/* -- slideDown -- */
+@-webkit-keyframes modal-slideDown-enter {
+    from {
+        -webkit-transform: translate3d(0, -100px, 0);
+        transform: translate3d(0, -100px, 0);
+   }
+}
+@keyframes modal-slideDown-enter {
+    from {
+        -webkit-transform: translate3d(0, -100px, 0);
+        transform: translate3d(0, -100px, 0);
+   }
+}
+.modal-slideDown-enter {
+    -webkit-animation: modal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);
+    animation: modal-slideDown-enter both cubic-bezier(0.4, 0, 0, 1.5);
+}
+@-webkit-keyframes modal-slideDown-leave {
+    to {
+        -webkit-transform: translate3d(0, -100px, 0);
+        transform: translate3d(0, -100px, 0);
+   }
+}
+@keyframes modal-slideDown-leave {
+    to {
+        -webkit-transform: translate3d(0, -100px, 0);
+        transform: translate3d(0, -100px, 0);
+   }
+}
+.modal-slideDown-leave {
+    -webkit-animation: modal-slideDown-leave both;
+    animation: modal-slideDown-leave both;
+}
+/* -- slideLeft -- */
+@-webkit-keyframes modal-slideLeft-enter {
+    from {
+        -webkit-transform: translate3d(-150px, 0, 0);
+        transform: translate3d(-150px, 0, 0);
+   }
+}
+@keyframes modal-slideLeft-enter {
+    from {
+        -webkit-transform: translate3d(-150px, 0, 0);
+        transform: translate3d(-150px, 0, 0);
+   }
+}
+.modal-slideLeft-enter {
+    -webkit-animation: modal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5);
+    animation: modal-slideLeft-enter both cubic-bezier(0.4, 0, 0, 1.5);
+}
+@-webkit-keyframes modal-slideLeft-leave {
+    to {
+        -webkit-transform: translate3d(-150px, 0, 0);
+        transform: translate3d(-150px, 0, 0);
+   }
+}
+@keyframes modal-slideLeft-leave {
+    to {
+        -webkit-transform: translate3d(-150px, 0, 0);
+        transform: translate3d(-150px, 0, 0);
+   }
+}
+.modal-slideLeft-leave {
+    -webkit-animation: modal-slideLeft-leave both;
+    animation: modal-slideLeft-leave both;
+}
+/* -- slideRight -- */
+@-webkit-keyframes modal-slideRight-enter {
+    from {
+        -webkit-transform: translate3d(150px, 0, 0);
+        transform: translate3d(150px, 0, 0);
+   }
+}
+@keyframes modal-slideRight-enter {
+    from {
+        -webkit-transform: translate3d(150px, 0, 0);
+        transform: translate3d(150px, 0, 0);
+   }
+}
+.modal-slideRight-enter {
+    -webkit-animation: modal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5);
+    animation: modal-slideRight-enter both cubic-bezier(0.4, 0, 0, 1.5);
+}
+@-webkit-keyframes modal-slideRight-leave {
+    to {
+        -webkit-transform: translate3d(150px, 0, 0);
+        transform: translate3d(150px, 0, 0);
+   }
+}
+@keyframes modal-slideRight-leave {
+    to {
+        -webkit-transform: translate3d(150px, 0, 0);
+        transform: translate3d(150px, 0, 0);
+   }
+}
+.modal-slideRight-leave {
+    -webkit-animation: modal-slideRight-leave both;
+    animation: modal-slideRight-leave both;
+}
+/* -- slideUp -- */
+@-webkit-keyframes modal-slideUp-enter {
+    from {
+        -webkit-transform: translate3d(0, 100px, 0);
+        transform: translate3d(0, 100px, 0);
+   }
+}
+@keyframes modal-slideUp-enter {
+    from {
+        -webkit-transform: translate3d(0, 100px, 0);
+        transform: translate3d(0, 100px, 0);
+   }
+}
+.modal-slideUp-enter {
+    -webkit-animation: modal-slideUp-enter both ease-out;
+    animation: modal-slideUp-enter both ease-out;
+}
+@-webkit-keyframes modal-slideUp-leave {
+    to {
+        -webkit-transform: translate3d(0, 100px, 0);
+        transform: translate3d(0, 100px, 0);
+   }
+}
+@keyframes modal-slideUp-leave {
+    to {
+        -webkit-transform: translate3d(0, 100px, 0);
+        transform: translate3d(0, 100px, 0);
+   }
+}
+.modal-slideUp-leave {
+    -webkit-animation: modal-slideUp-leave both;
+    animation: modal-slideUp-leave both;
+}
+/* -- flip -- */
+@-webkit-keyframes modal-flip-enter {
+    from {
+        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
+   }
+    70% {
+        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
+   }
+    to {
+        -webkit-transform: perspective(400px);
+        transform: perspective(400px);
+   }
+}
+@keyframes modal-flip-enter {
+    from {
+        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, 60deg);
+   }
+    70% {
+        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
+   }
+    to {
+        -webkit-transform: perspective(400px);
+        transform: perspective(400px);
+   }
+}
+.modal-flip-enter {
+    -webkit-animation: modal-flip-enter both ease-in;
+    animation: modal-flip-enter both ease-in;
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+}
+@-webkit-keyframes modal-flip-leave {
+    from {
+        -webkit-transform: perspective(400px);
+        transform: perspective(400px);
+   }
+    30% {
+        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
+   }
+    to {
+        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 45deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, 45deg);
+   }
+}
+@keyframes modal-flip-leave {
+    from {
+        -webkit-transform: perspective(400px);
+        transform: perspective(400px);
+   }
+    30% {
+        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, -15deg);
+   }
+    to {
+        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 45deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, 45deg);
+   }
+}
+.modal-flip-leave {
+    -webkit-animation: modal-flip-leave both;
+    animation: modal-flip-leave both;
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+}
+/* -- rotate -- */
+@-webkit-keyframes modal-rotate-enter {
+    from {
+        -webkit-transform: rotate3d(0, 0, 1, -180deg) scale3d(0.3, 0.3, 0.3);
+        transform: rotate3d(0, 0, 1, -180deg) scale3d(0.3, 0.3, 0.3);
+   }
+}
+@keyframes modal-rotate-enter {
+    from {
+        -webkit-transform: rotate3d(0, 0, 1, -180deg) scale3d(0.3, 0.3, 0.3);
+        transform: rotate3d(0, 0, 1, -180deg) scale3d(0.3, 0.3, 0.3);
+   }
+}
+.modal-rotate-enter {
+    -webkit-animation: modal-rotate-enter both;
+    animation: modal-rotate-enter both;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+}
+@-webkit-keyframes modal-rotate-leave {
+    to {
+        -webkit-transform: rotate3d(0, 0, 1, 180deg) scale3d(0.3, 0.3, 0.3);
+        transform: rotate3d(0, 0, 1, 180deg) scale3d(0.3, 0.3, 0.3);
+   }
+}
+@keyframes modal-rotate-leave {
+    to {
+        -webkit-transform: rotate3d(0, 0, 1, 180deg) scale3d(0.3, 0.3, 0.3);
+        transform: rotate3d(0, 0, 1, 180deg) scale3d(0.3, 0.3, 0.3);
+   }
+}
+.modal-rotate-leave {
+    -webkit-animation: modal-rotate-leave both;
+    animation: modal-rotate-leave both;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+}
+/* -- door -- */
+@-webkit-keyframes modal-door-enter {
+    from {
+        -webkit-transform: scale3d(0, 1, 1);
+        transform: scale3d(0, 1, 1);
+   }
+}
+@keyframes modal-door-enter {
+    from {
+        -webkit-transform: scale3d(0, 1, 1);
+        transform: scale3d(0, 1, 1);
+   }
+}
+.modal-door-enter {
+    -webkit-animation: modal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);
+    animation: modal-door-enter both cubic-bezier(0.4, 0, 0, 1.5);
+}
+@-webkit-keyframes modal-door-leave {
+    60% {
+        -webkit-transform: scale3d(0.01, 1, 1);
+        transform: scale3d(0.01, 1, 1);
+   }
+    to {
+        -webkit-transform: scale3d(0, 1, 0.1);
+        transform: scale3d(0, 1, 0.1);
+   }
+}
+@keyframes modal-door-leave {
+    60% {
+        -webkit-transform: scale3d(0.01, 1, 1);
+        transform: scale3d(0.01, 1, 1);
+   }
+    to {
+        -webkit-transform: scale3d(0, 1, 0.1);
+        transform: scale3d(0, 1, 0.1);
+   }
+}
+.modal-door-leave {
+    -webkit-animation: modal-door-leave both;
+    animation: modal-door-leave both;
+}
+.checkmark {
+    display: inline-block;
+    background: var(--success);
+    height: 45px;
+    width: 45px;
+    border-radius: 50px;
+    position: relative;
+}
+.checkmark:after {
+    content: '';
+    display: block;
+    width: 7px;
+    height: 18px;
+    border: solid var(--white);
+    border-width: 0 0px 0px 0;
+    transform: rotate(50deg);
+    position: absolute;
+    top: 23%;
+    left: 42%;
+}
+.cancelmodal {
+    height: 280px;
+    width: 96%;
+}
