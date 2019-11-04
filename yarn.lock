@@ -8429,9 +8429,9 @@ ultron@~1.1.0:
   integrity sha512-UIEXBNeYmKptWH6z8ZnqTeS8fV74zG0/eRU9VGkpzz+LIJNs8W/zM/L+7ctCkRrgbNnnR0xxw4bKOr0cW0N0Og==
 
 uncontrollable@^7.0.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/uncontrollable/-/uncontrollable-7.1.0.tgz#de2a4e8a2edca06024c81228a54503d23bb83e51"
-  integrity sha512-ie1drnxEKHREeGehl+26HvnCkwhTxxwFGt4FpoBvjmv8qyljIkCHpYVYAwYroTQyXFgEbDc4zoZKtr/EAN9eJw==
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/uncontrollable/-/uncontrollable-7.1.1.tgz#f67fed3ef93637126571809746323a9db815d556"
+  integrity sha512-EcPYhot3uWTS3w00R32R2+vS8Vr53tttrvMj/yA1uYRhf8hbTG2GyugGqWDY0qIskxn0uTTojVd6wPYW9ZEf8Q==
   dependencies:
     "@babel/runtime" "^7.6.3"
     "@types/react" "^16.9.11"
