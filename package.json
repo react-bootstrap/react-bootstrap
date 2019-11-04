@@ -86,7 +86,7 @@
     "conventional-changelog-cli": "^2.0.21",
     "cpy-cli": "^2.0.0",
     "cross-env": "^6.0.0",
-    "dtslint": "^0.9.0",
+    "dtslint": "^1.0.2",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^6.0.1",
