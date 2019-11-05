@@ -112,6 +112,36 @@ describe('<Dropdown>', () => {
     onToggle.should.have.been.calledWith(false);
   });
 
+  it('closes when a nested Dropdown\'s Dropdown.Item is selected', () => {
+    const onToggle = sinon.spy();
+
+    const parentDropdown = (
+      <Dropdown>
+        <Dropdown.Toggle id="test-id">
+          Parent Title
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item>Item 1</Dropdown.Item>
+          {simpleDropdown}
+        </Dropdown.Menu>
+      </Dropdown>
+    );
+
+    const wrapper = mount(parentDropdown).setProps({ show: true, onToggle });
+    wrapper.assertSingle('.dropdown.show');
+
+    wrapper
+      .find('.dropdown-menu .dropdown button')
+      .simulate('click');
+
+    wrapper
+      .find('.dropdown-menu .dropdown .dropdown-menu a')
+      .first()
+      .simulate('click');
+
+    onToggle.should.have.been.calledWith(false);
+  });
+
   it('has aria-labelledby same id as toggle button', () => {
     const wrapper = mount(
       React.cloneElement(simpleDropdown, { defaultShow: true }),
