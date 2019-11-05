@@ -26,15 +26,17 @@ All commits that fix bugs or add features need a test. You can run `npm run tdd 
 
 ## API Design
 
-Try and be consistent with the overall style and API of the library as a whole. Generally, we avoid monolithic or very high level component API's. React bootstrap is a toolbox! Prefer to split components out into "sub components" as they make sense. This is usually indicated by the bootstrap css classes, e.g. `.nav`, `.nav-item`, and `nav-link` translate into `<Nav>`, `<NavItem>`, and `<NavLink>` components.
+Try and be consistent with the overall style and API of the library as a whole. Generally, we avoid monolithic or very high level component APIs. React bootstrap is a toolbox! Prefer to split components out into "sub components" as they make sense. This is usually indicated by the bootstrap CSS classes, e.g. `.nav`, `.nav-item`, and `nav-link` translate into `<Nav>`, `<NavItem>`, and `<NavLink>` components.
 
-Avoid unnecessary Higher Order Components (HOCs), unless they add a significant amount of value or abstract way something that would otherwise complicate many components (like `uncontrollable`). It's not that HOC's are bad, but we want to try and keep these low level ui blocks as flat and straightforward as possible. Prefer to work explicitly in the component and avoid over optimization up front.
+Avoid unnecessary Higher Order Components (HOCs), unless they add a significant amount of value or abstract way something that would otherwise complicate many components (like `uncontrollable`). It's not that HOCs are bad, but we want to try and keep these low level UI blocks as flat and straightforward as possible. Prefer to work explicitly in the component and avoid over optimization up front.
 
 Components should not be function components by default. Folks often add `refs` to them so class components are a better default for `react-bootstrap` components. Components should also **not** use `PureComponent` by default. For a variety of reasons the sort of components these are don't generally benefit from that optimization, and may cause bugs.
 
 ### Accessible by Default
 
-React-bootstrap takes web accessibility seriously and we take advantage of the React component model to add better defaults that plain bootstrap can (being mostly css). Often this means, making sure the a11y details present in the [bootstrap docs](https://getbootstrap.com/) are added as defaults to components where possible. Usually this means handling `aria-selected`/`aria-controls` for tab like components or having a default label for an icon only button, or making it easier to apply `htmlFor` and `id` to form controls. **There are plently of cases where the correct a11y is only possible from the user** that's ok! We can't handle every case.
+React-bootstrap takes web accessibility (a11y) seriously and we take advantage of the React component model to add better defaults that plain bootstrap can (being mostly CSS). Often this means, making sure the a11y details present in the [bootstrap docs](https://getbootstrap.com/) are added as defaults to components where possible. Usually this means handling `aria-selected`/`aria-controls` for tab like components or having a default label for an icon only button, or making it easier to apply `htmlFor` and `id` to form controls.
+
+**There are plenty of cases where the correct a11y is only possible from the user's code and that's okay!** We can't handle every case.
 
 ## Visual Changes
 
