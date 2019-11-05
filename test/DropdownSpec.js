@@ -113,14 +113,12 @@ describe('<Dropdown>', () => {
     onToggle.should.have.been.calledWith(false);
   });
 
-  it('closes when a nested Dropdown\'s Dropdown.Item is selected', () => {
+  it("closes when a nested Dropdown's Dropdown.Item is selected", () => {
     const onToggle = sinon.spy();
 
     const parentDropdown = (
       <Dropdown>
-        <Dropdown.Toggle id="test-id">
-          Parent Title
-        </Dropdown.Toggle>
+        <Dropdown.Toggle id="test-id">Parent Title</Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item>Item 1</Dropdown.Item>
           {simpleDropdown}
@@ -131,8 +129,7 @@ describe('<Dropdown>', () => {
     const wrapper = mount(parentDropdown).setProps({ show: true, onToggle });
     wrapper.assertSingle('.dropdown.show');
 
-    wrapper
-      .find('.dropdown-menu .dropdown button')
+    wrapper.find('.dropdown-menu .dropdown button')
       .simulate('click');
 
     wrapper
@@ -163,8 +160,8 @@ describe('<Dropdown>', () => {
       .find('.dropdown-menu a')
       .first()
       .simulate('click');
-      
-      expect(spy).to.not.have.been.called;
+
+    expect(spy).to.not.have.been.called;
   });
 
   it('has aria-labelledby same id as toggle button', () => {
