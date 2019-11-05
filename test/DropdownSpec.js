@@ -129,8 +129,7 @@ describe('<Dropdown>', () => {
     const wrapper = mount(parentDropdown).setProps({ show: true, onToggle });
     wrapper.assertSingle('.dropdown.show');
 
-    wrapper.find('.dropdown-menu .dropdown button')
-      .simulate('click');
+    wrapper.find('.dropdown-menu .dropdown button').simulate('click');
 
     wrapper
       .find('.dropdown-menu .dropdown .dropdown-menu a')
