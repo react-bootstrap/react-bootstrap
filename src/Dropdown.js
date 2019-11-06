@@ -112,11 +112,10 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
   );
 
   const handleSelect = useEventCallback((key, event) => {
-    if (onSelectCtx && onSelectCtx.isDropdownSelCtx) onSelectCtx(key, event);
+    if (onSelectCtx) onSelectCtx(key, event);
     if (onSelect) onSelect(key, event);
     handleToggle(false, event, 'select');
   });
-  handleSelect.isDropdownSelCtx = true;
 
   return (
     <SelectableContext.Provider value={handleSelect}>

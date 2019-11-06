@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 import Accordion from '../src/Accordion';
 import Card from '../src/Card';
+import SelectableContext from '../src/SelectableContext';
 
 describe('<Accordion>', () => {
   it('should output a div', () => {
@@ -88,5 +89,35 @@ describe('<Accordion>', () => {
       .at(1)
       .getDOMNode()
       .className.should.include('collapsing');
+  });
+
+  it('does not collapse when AccordionCollapse child with SelectableContext is selected', () => {
+    const wrapper = mount(
+      <Accordion defaultActiveKey="0">
+        <Card>
+          <Card.Header>
+            <Accordion.Toggle eventKey="0" />
+          </Card.Header>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>
+              <SelectableContext.Consumer>
+                {value => (value ? <span onClick={value} /> : <span />)}
+              </SelectableContext.Consumer>
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>,
+    );
+
+    wrapper
+      .find('AccordionCollapse CardBody span')
+      .first()
+      .simulate('click');
+
+    wrapper
+      .find('AccordionCollapse')
+      .at(0)
+      .getDOMNode()
+      .className.should.include('collapse');
   });
 });

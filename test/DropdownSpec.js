@@ -1,7 +1,6 @@
 import { mount } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SelectableContext from '../src/SelectableContext';
 import Dropdown from '../src/Dropdown';
 
 describe('<Dropdown>', () => {
@@ -137,30 +136,6 @@ describe('<Dropdown>', () => {
       .simulate('click');
 
     onToggle.should.have.been.calledWith(false);
-  });
-
-  it('does not trigger "SelectableContext" of surrounding components', () => {
-    const spy = sinon.spy();
-
-    const contextDropdown = (
-      <SelectableContext.Provider value={spy}>
-        {simpleDropdown}
-      </SelectableContext.Provider>
-    );
-
-    const wrapper = mount(contextDropdown);
-
-    wrapper
-      .find('.dropdown button')
-      .first()
-      .simulate('click');
-
-    wrapper
-      .find('.dropdown-menu a')
-      .first()
-      .simulate('click');
-
-    expect(spy).to.not.have.been.called;
   });
 
   it('has aria-labelledby same id as toggle button', () => {

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-
+import SelectableContext from './SelectableContext';
 import Collapse from './Collapse';
 import AccordionContext from './AccordionContext';
 
@@ -19,7 +19,11 @@ const AccordionCollapse = React.forwardRef(
 
     return (
       <Collapse ref={ref} in={contextEventKey === eventKey} {...props}>
-        <div>{React.Children.only(children)}</div>
+        <div>
+          <SelectableContext.Provider value={()=>{}}>
+            {React.Children.only(children)}
+          </SelectableContext.Provider>
+        </div>
       </Collapse>
     );
   },
