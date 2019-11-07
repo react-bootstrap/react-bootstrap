@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@4c/cli-core@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@4c/cli-core/-/cli-core-2.0.1.tgz#8911805190ad5a87e03c8c12f16351d0086c1aa2"
-  integrity sha512-/EQN19rbbPTPz9y4GeayrHYKojAaXe+n8R2KuQBSjMSSYHRwWtogNxEcr4pKiAn4Aim4tZfozSlIHK1+4RTbjQ==
+"@4c/cli-core@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@4c/cli-core/-/cli-core-2.0.2.tgz#b15f53ab334faca1ee7753a88d92c4e366c3e891"
+  integrity sha512-1k8Zg08rzoQemFsPd0wTr8HSUVNWZG1r2m2lj9Vks942F0Q8sCly+KZ5mQrlF2Bje7Dh69pnvCTZbu1X5jFNyA==
   dependencies:
     chalk "^2.4.2"
-    execa "^2.0.4"
+    execa "^3.1.0"
     fs-extra "^8.1.0"
     globby "^10.0.1"
     inquirer "^7.0.0"
@@ -21,30 +21,30 @@
     text-table "^0.2.0"
     yargs "^14.0.0"
 
-"@4c/file-butler@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@4c/file-butler/-/file-butler-4.0.1.tgz#8a97ed09d9778bd676c7d5fcf4e32f22df4dc49b"
-  integrity sha512-6ti0ovqoXkGOQ1R0hauwh+DW5tILp/VHjVa4CxKzE0E0vA547cBQ5RrlRUxtUIzTBE2CvJ1KZHfkqOPyByjDOQ==
+"@4c/file-butler@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@4c/file-butler/-/file-butler-4.0.2.tgz#8bb8b24a10b10467d97b0463433adeaed5f7bbfb"
+  integrity sha512-sbTtUWrcv1rNrUNBhAFohL5Znz9v5MOF1ZAH2YCEVXUeKr0gRkBzIjfXxMLWduAYfOgSjhhd6H+nYzMU4bHETg==
   dependencies:
-    "@4c/cli-core" "^2.0.1"
+    "@4c/cli-core" "^2.0.2"
     cpy "^7.0.0"
     fs-extra "^8.1.0"
     globby "^10.0.1"
     yargs "^14.0.0"
 
 "@4c/rollout@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@4c/rollout/-/rollout-2.0.1.tgz#d8bddce9ffaa1e9e55d5d7cafa8da79f91d600ab"
-  integrity sha512-d8CBPiWIHKyCLLmoDW0GwEhkzv16KhvZaP+iU282rZ5J1Y8qytAyugsl7AdBjiBh45y7M3pilcmhlyhFf3rBcA==
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@4c/rollout/-/rollout-2.0.2.tgz#45cf120f1f3e8968cf07712a75e7723329be472f"
+  integrity sha512-La6hStSN+JfWmj9NC5f9PN1YoObBQCZ71e7QxS2UjNMGcvXCCRD/HHrxP/Jm04WNq+hNRvWz+RQb0pCW/11Yaw==
   dependencies:
-    "@4c/cli-core" "^2.0.1"
-    "@4c/file-butler" "^4.0.1"
+    "@4c/cli-core" "^2.0.2"
+    "@4c/file-butler" "^4.0.2"
     chalk "^2.4.2"
     common-tags "^1.8.0"
     conventional-changelog "^3.0.6"
     conventional-changelog-angular "^5.0.3"
     conventional-recommended-bump "^6.0.0"
-    execa "^2.0.4"
+    execa "^3.1.0"
     fs-extra "^8.1.0"
     has-yarn "^2.1.0"
     listr "^0.14.3"
@@ -3671,7 +3671,7 @@ execa@^1.0.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
-execa@^2.0.3, execa@^2.0.4:
+execa@^2.0.3:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/execa/-/execa-2.1.0.tgz#e5d3ecd837d2a60ec50f3da78fd39767747bbe99"
   integrity sha512-Y/URAVapfbYy2Xp/gb6A0E7iR8xeqOCXsuuaoMn7A5PzrXUK84E1gyiEfq0wQd/GHA6GsoHWwhNq8anb0mleIw==
