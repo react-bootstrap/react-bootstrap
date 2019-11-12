@@ -28,7 +28,7 @@
     "gatsby-plugin-astroturf": "^0.2.1",
     "gatsby-plugin-catch-links": "^2.1.16",
     "gatsby-plugin-mdx": "^1.0.56",
-    "gatsby-plugin-sass": "^2.1.20",
+    "gatsby-plugin-sass": "^2.1.21",
     "gatsby-remark-prismjs": "^3.3.22",
     "gatsby-source-filesystem": "2.1.36",
     "gatsby-transformer-react-docgen": "^4.1.3",
