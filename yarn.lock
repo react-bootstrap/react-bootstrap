@@ -3133,10 +3133,10 @@ dot-prop@^3.0.0:
   dependencies:
     is-obj "^1.0.0"
 
-dts-critic@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/dts-critic/-/dts-critic-2.2.2.tgz#cbb9a4330d48d07346d291a5d49547acad8b3646"
-  integrity sha512-TaPmQCs4uCgukBE62Pw2II49rtbS2rD5hmraK3jbPaMgSIVr2eISaTzTs392fFRN0WASQj6oZsgTFKgJusLgxw==
+dts-critic@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/dts-critic/-/dts-critic-2.2.3.tgz#37b6b604dd2df77d960e59ab501aadc165ef6309"
+  integrity sha512-65raFj90yesT1yl3zNVsx/ywGSs2ghytSGjZpaddnG8OLsezh/Cz3UaLHSEJFH5+K2vcuud4l0l5WeoXId0ptg==
   dependencies:
     command-exists "^1.2.8"
     definitelytyped-header-parser "^3.8.1"
@@ -3144,12 +3144,12 @@ dts-critic@^2.2.2:
     yargs "^12.0.5"
 
 dtslint@^2.0.0:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-2.0.1.tgz#1b0e11047eb9b1975dda6777c7e8193e041db372"
-  integrity sha512-AiTv/GAn3Gg/WNBFFOfRn26sXpRpX/ZaTES+bcOaPPz6lnv/xh9L8PkpgcWfNyhQqEhsPi1JAoS24sCX3MYZ0g==
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/dtslint/-/dtslint-2.0.2.tgz#16f918b3705f6016bce5c3d4dbb29b286a76ca73"
+  integrity sha512-ij6Y8uI/mYXrCk9mBcPDJeBQXI7jPMG7p08RFbnug63tesEdKzh+9PQhtCv27LMV+bw7vH5V2MPciSAr5tWtrA==
   dependencies:
     definitelytyped-header-parser "3.8.1"
-    dts-critic "^2.2.2"
+    dts-critic "^2.2.3"
     fs-extra "^6.0.1"
     request "^2.88.0"
     strip-json-comments "^2.0.1"
