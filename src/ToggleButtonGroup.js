@@ -67,7 +67,10 @@ const ToggleButtonGroup = React.forwardRef((props, ref) => {
     }
 
     if (isActive) {
-      onChange(values.filter(n => n !== inputVal), event);
+      onChange(
+        values.filter(n => n !== inputVal),
+        event,
+      );
     } else {
       onChange([...values, inputVal], event);
     }
