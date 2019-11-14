@@ -10,6 +10,7 @@
   "sideEffects": false,
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "bootstrap": "yarn && yarn --cwd www",
     "build": "node tools/build.js",
