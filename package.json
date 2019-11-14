@@ -19,7 +19,7 @@
     "format": "eslint . --fix && npm run prettier -- --write",
     "lint": "eslint . && npm run prettier -- -l",
     "postrelease": "yarn --cwd www deploy",
-    "prepublishOnly": "npm run build",
+    "prepare": "npm run build",
     "prettier": "prettier \"types/**/*.{ts,tsx}\"",
     "release": "rollout",
     "start": "yarn --cwd www develop",
