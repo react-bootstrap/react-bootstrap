@@ -52,7 +52,7 @@ export default withLayout(function TooltipSection({ data }) {
            a tiny React wrapper around{' '}
           <a href="https://popper.js.org/">Popper.js</a>. It's included
            automatically with React-Bootstrap, but you should reference the API
-          for more advanced use-cases.
+           for more advanced use cases.
         </li>
         <li>
           The <code>{'<Tooltip>'}</code> and <code>{'<Popover>'}</code>{' '}
