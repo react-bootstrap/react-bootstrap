@@ -47,12 +47,12 @@ export default withLayout(function TooltipSection({ data }) {
       <p>Things to know about the react-boostrap Overlay components.</p>
       <ul>
         <li>
-           Overlays rely on the third-party library{' '}
+          Overlays rely on the third-party library{' '}
           <a href="https://github.com/FezVrasta/react-popper">react-popper</a>,
-           a tiny React wrapper around{' '}
+          a tiny React wrapper around{' '}
           <a href="https://popper.js.org/">Popper.js</a>. It's included
-           automatically with React-Bootstrap, but you should reference the API
-           for more advanced use cases.
+          automatically with React-Bootstrap, but you should reference the API
+          for more advanced use cases.
         </li>
         <li>
           The <code>{'<Tooltip>'}</code> and <code>{'<Popover>'}</code>{' '}
