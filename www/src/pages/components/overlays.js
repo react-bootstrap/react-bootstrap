@@ -49,7 +49,7 @@ export default withLayout(function TooltipSection({ data }) {
         <li>
           Overlays rely on a 3rd party library{' '}
           <a href="https://github.com/FezVrasta/react-popper">react-popper</a>,
-          a tiny react wrapper around{' '}
+           a tiny React wrapper around{' '}
           <a href="https://popper.js.org/">Popper.js</a>. It's included
            automatically with React-Bootstrap, but you should reference the API
           for more advanced use-cases.
