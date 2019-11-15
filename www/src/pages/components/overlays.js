@@ -44,7 +44,7 @@ export default withLayout(function TooltipSection({ data }) {
         Overview
       </LinkedHeading>
 
-      <p>Things to know about the react-boostrap Overlay components.</p>
+       <p>Things to know about the React-Boostrap Overlay components.</p>
       <ul>
         <li>
           Overlays rely on the third-party library{' '}
