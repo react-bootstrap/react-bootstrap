@@ -5267,10 +5267,10 @@ gatsby-plugin-page-creator@^2.1.29:
     lodash "^4.17.15"
     micromatch "^3.1.10"
 
-gatsby-plugin-sass@^2.1.22:
-  version "2.1.22"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-sass/-/gatsby-plugin-sass-2.1.22.tgz#0204e20e00b270cf30eb0e592201c49377909314"
-  integrity sha512-ur/OIlpqS+XiUs+IjBgWTT0L6af+1CMpHQD+zjI92sjnSAv5bUF0PBFI5nDY8B5Vih90u4Uyw5nph5vsoWrTgw==
+gatsby-plugin-sass@^2.1.23:
+  version "2.1.23"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-sass/-/gatsby-plugin-sass-2.1.23.tgz#9c6bd94665b7bc8c5b2aac28c216a6823c10714d"
+  integrity sha512-m5XcVrD5Tu9i5KJMteEoB7lk5Pc8xkbJ6coNEcYikKnzpNXed8oLQlFBsQibd9wGrog8SQ2K71UUZ5Ymq3HFsg==
   dependencies:
     "@babel/runtime" "^7.7.2"
     sass-loader "^7.3.1"
