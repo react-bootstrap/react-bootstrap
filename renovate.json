@@ -6,5 +6,5 @@
     "schedule:daily"
   ],
   "rangeStrategy": "update-lockfile",
-  "semanticCommitType": "chore"
+  "semanticCommits": true
 }
