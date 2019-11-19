@@ -1,5 +1,4 @@
 {
-  "extends": [
-    "config:base"
-  ]
+  "extends": ["config:base", ":disablePeerDependencies", "schedule:daily"],
+  "rangeStrategy": "update-lockfile"
 }
