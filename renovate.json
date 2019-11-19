@@ -2,10 +2,9 @@
   "extends": [
     "config:base",
     ":disablePeerDependencies",
+    ":semanticCommitTypeAll(chore)",
     "group:allNonMajor",
     "schedule:daily"
   ],
-  "rangeStrategy": "update-lockfile",
-  "semanticCommits": true,
-  "semanticCommitType": "chore"
+  "rangeStrategy": "update-lockfile"
 }
