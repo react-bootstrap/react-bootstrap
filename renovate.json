@@ -6,5 +6,6 @@
     "group:allNonMajor",
     "schedule:daily"
   ],
-  "rangeStrategy": "update-lockfile"
+  "rangeStrategy": "update-lockfile",
+  "semanticCommits": true
 }
