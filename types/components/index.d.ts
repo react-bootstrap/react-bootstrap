@@ -83,6 +83,7 @@ export { default as Navbar, NavbarProps } from './Navbar';
 export { default as NavbarBrand, NavbarBrandProps } from './NavbarBrand';
 export { default as NavDropdown, NavDropdownProps } from './NavDropdown';
 export { default as NavItem, NavItemProps } from './NavItem';
+export { default as NavLink, NavLinkProps } from './NavLink';
 export { default as Overlay, OverlayProps } from './Overlay';
 export {
   default as OverlayTrigger,
