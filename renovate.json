@@ -4,8 +4,14 @@
     ":disablePeerDependencies",
     ":semanticCommitTypeAll(chore)",
     "group:allNonMajor",
-    "schedule:daily"
+    "schedule:weekly"
   ],
   "rangeStrategy": "update-lockfile",
-  "semanticCommits": true
+  "semanticCommits": true,
+  "packageRules": [
+    {
+      "depTypeList": ["devDependencies"],
+      "rangeStrategy": "bump"
+    }
+  ]
 }
