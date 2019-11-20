@@ -7,8 +7,14 @@
     "schedule:weekly"
   ],
   "major": {
-    "masterIssueApproval": true,
+    "masterIssueApproval": true
   },
   "rangeStrategy": "update-lockfile",
-  "semanticCommits": true
+  "semanticCommits": true,
+  "packageRules": [
+    {
+      "depTypeList": ["devDependencies"],
+      "rangeStrategy": "bump"
+    }
+  ]
 }
