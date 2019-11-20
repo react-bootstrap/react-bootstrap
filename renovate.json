@@ -4,8 +4,11 @@
     ":disablePeerDependencies",
     ":semanticCommitTypeAll(chore)",
     "group:allNonMajor",
-    "schedule:daily"
+    "schedule:weekly"
   ],
+  "major": {
+    "masterIssueApproval": true,
+  },
   "rangeStrategy": "update-lockfile",
   "semanticCommits": true
 }
