@@ -14,7 +14,7 @@ export default class BootstrapModalManager extends ModalManager {
     const actual = element.style[prop];
     element.dataset[prop] = actual;
     css(element, {
-      [prop]: `${parseFloat(css(element, prop)) + adjust}px`
+      [prop]: `${parseFloat(css(element, prop)) + adjust}px`,
     });
   };
 
