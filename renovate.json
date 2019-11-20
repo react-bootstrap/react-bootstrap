@@ -6,9 +6,6 @@
     "group:allNonMajor",
     "schedule:weekly"
   ],
-  "major": {
-    "masterIssueApproval": true
-  },
   "rangeStrategy": "update-lockfile",
   "semanticCommits": true,
   "packageRules": [
