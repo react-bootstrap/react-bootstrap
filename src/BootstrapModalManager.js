@@ -13,14 +13,16 @@ export default class BootstrapModalManager extends ModalManager {
   adjustAndStore = (prop, element, adjust) => {
     const actual = element.style[prop];
     element.dataset[prop] = actual;
-    css(element, prop, `${parseFloat(css(element, prop)) + adjust}px`);
+    css(element, {
+      [prop]: `${parseFloat(css(element, prop)) + adjust}px`,
+    });
   };
 
   restore = (prop, element) => {
     const value = element.dataset[prop];
     if (value !== undefined) {
       delete element.dataset[prop];
-      css(element, prop, value);
+      css(element, { [prop]: value });
     }
   };
 
