@@ -1,3 +1,83 @@
+# [1.0.0-beta.15](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2019-11-18)
+
+
+### Bug Fixes
+
+* **FormControl:** onChange and innerRef ts decls ([#3583](https://github.com/react-bootstrap/react-bootstrap/issues/3583),[#3568](https://github.com/react-bootstrap/react-bootstrap/issues/3568),[#2781](https://github.com/react-bootstrap/react-bootstrap/issues/2781)) ([#4435](https://github.com/react-bootstrap/react-bootstrap/issues/4435)) ([74a36bc](https://github.com/react-bootstrap/react-bootstrap/commit/74a36bcf8cc2d355efd420674b31ed22c14e2893))
+* added eslint pragma for ignoring dangerouslySetInnerHTML ([ce7a4bd](https://github.com/react-bootstrap/react-bootstrap/commit/ce7a4bd9473c2e7368836c09ea476cacbba863cb))
+* cleanup ([210799d](https://github.com/react-bootstrap/react-bootstrap/commit/210799d0f5ca735cec2bcf095e06a298a6899b93))
+* duplicate class "carousel-item" ([#4609](https://github.com/react-bootstrap/react-bootstrap/issues/4609)) ([34e3905](https://github.com/react-bootstrap/react-bootstrap/commit/34e39053272ee9bc73b4b92d4fbd2281dc840588))
+* ordering of propTypes ([e7efa8f](https://github.com/react-bootstrap/react-bootstrap/commit/e7efa8f9c9a06e19b30c35ea39f72d031b61d75d))
+* removed sponsorship section ([cee3efa](https://github.com/react-bootstrap/react-bootstrap/commit/cee3efa2136f43441313cbb8b25a2ea3a1e8c09f))
+* updated Overlay Trigger to support flip property ([#4660](https://github.com/react-bootstrap/react-bootstrap/issues/4660)) ([ed77ae7](https://github.com/react-bootstrap/react-bootstrap/commit/ed77ae72a7a0fae825a008adb76136b83b46e063))
+* **Pagination:** support for ref attribute ([#4593](https://github.com/react-bootstrap/react-bootstrap/issues/4593)) ([e5caa0f](https://github.com/react-bootstrap/react-bootstrap/commit/e5caa0f545a3397e51ae7a0a74904235b19ff4ac))
+* **Popover:** support for ref attribute ([0ad84a8](https://github.com/react-bootstrap/react-bootstrap/commit/0ad84a8431425a2c5d46264a25d0f40b718f2dce))
+* **ResponsiveEmbed:** support for ref attribute ([4da7ef6](https://github.com/react-bootstrap/react-bootstrap/commit/4da7ef6f4021c1782b403faca7b9128168ebf979))
+* **TabContent:** support for ref attribute ([334ff8d](https://github.com/react-bootstrap/react-bootstrap/commit/334ff8d91201bdddb849369053532f14d6b11a1f))
+* **Table:** allow passed in refs to be properly forwarded ([#4592](https://github.com/react-bootstrap/react-bootstrap/issues/4592)) ([0e10671](https://github.com/react-bootstrap/react-bootstrap/commit/0e106711331b05d5685fde31c46114621995fc5c))
+* **toggle-button-group:** migrate to be ref forwarder ([ba45a53](https://github.com/react-bootstrap/react-bootstrap/commit/ba45a53c94abf9b5d857cc037b296ac6c70e55eb)), closes [#4194](https://github.com/react-bootstrap/react-bootstrap/issues/4194)
+* tests ([d21f42a](https://github.com/react-bootstrap/react-bootstrap/commit/d21f42ab1227f52fa830f79c07b08641a9de55ca))
+* use normal function instead arrow ([e3a28cb](https://github.com/react-bootstrap/react-bootstrap/commit/e3a28cb86e70fcd9ed80fe4382d9e31fa7ceb2e2))
+
+
+### chore
+
+* update react overlays ([#4661](https://github.com/react-bootstrap/react-bootstrap/issues/4661)) ([50a3714](https://github.com/react-bootstrap/react-bootstrap/commit/50a37146cb372fe708efe11815d3ee9f468518ca))
+
+
+### Features
+
+* add ref Forwarding to NavDropdown ([#4626](https://github.com/react-bootstrap/react-bootstrap/issues/4626)) ([be52005](https://github.com/react-bootstrap/react-bootstrap/commit/be520054f484adb79c87b7a6888d91db3636eb9d))
+* have Page item forward ref ([#4664](https://github.com/react-bootstrap/react-bootstrap/issues/4664)) ([1baf794](https://github.com/react-bootstrap/react-bootstrap/commit/1baf794aba1170c8cbe1911c30e6c33cb91614ea)), closes [#4194](https://github.com/react-bootstrap/react-bootstrap/issues/4194) [#4194](https://github.com/react-bootstrap/react-bootstrap/issues/4194)
+
+
+### BREAKING CHANGES
+
+* custom Dropdown Menu's and Toggles can no longer be class components unless they are wrapped in forwardRef()
+
+
+
+# [1.0.0-beta.14](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.13...v1.0.0-beta.14) (2019-10-04)
+
+
+### Bug Fixes
+
+* Fix main and module ([4f49265](https://github.com/react-bootstrap/react-bootstrap/commit/4f49265e0db4e2cf7cb8ab42ffee8c22ee64859f))
+
+
+
+# [1.0.0-beta.13](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.12...v1.0.0-beta.13) (2019-10-03)
+
+
+### Bug Fixes
+
+* **types:** add missing Popover and Modal props. ([#4464](https://github.com/react-bootstrap/react-bootstrap/issues/4464)) ([b0ad147](https://github.com/react-bootstrap/react-bootstrap/commit/b0ad1479a924fef709374810951f33f7b322687f))
+* linting issue ([9b5a8be](https://github.com/react-bootstrap/react-bootstrap/commit/9b5a8befe65c161544bd37930da979450a4c8ee8))
+* navbar toggle correct 'collapsed' className when collapsed ([#4412](https://github.com/react-bootstrap/react-bootstrap/issues/4412)) ([bcb0c8e](https://github.com/react-bootstrap/react-bootstrap/commit/bcb0c8e039d5fa1d6d8e6f107d7495b5b126744c))
+* **TabContainer:** Resolve lifecycle deprecation ([#4370](https://github.com/react-bootstrap/react-bootstrap/issues/4370)) ([8103448](https://github.com/react-bootstrap/react-bootstrap/commit/8103448522be91f243219fbe76e5566fb85de1c8))
+* navs have the wrong role, as well as tabs navigation visual glitch ([#4372](https://github.com/react-bootstrap/react-bootstrap/issues/4372)) ([5e1668a](https://github.com/react-bootstrap/react-bootstrap/commit/5e1668a441cef8c5ddf93c51815dc16a16efa762)), closes [#4371](https://github.com/react-bootstrap/react-bootstrap/issues/4371)
+* **AbstractNav:** Re-add role attribute to abstract nav ([#4331](https://github.com/react-bootstrap/react-bootstrap/issues/4331)) ([6c2dd84](https://github.com/react-bootstrap/react-bootstrap/commit/6c2dd84db0a021edda3d3dd50f3a54d6b4781aba))
+* **form:** remove unused default props definition (fix: [#4335](https://github.com/react-bootstrap/react-bootstrap/issues/4335)) ([#4349](https://github.com/react-bootstrap/react-bootstrap/issues/4349)) ([b813842](https://github.com/react-bootstrap/react-bootstrap/commit/b8138426482cb30c2462dd96a33abb03f31ec94d))
+* **progress-bar:** cleanup implementation to be closer to previous ([355fe42](https://github.com/react-bootstrap/react-bootstrap/commit/355fe42fce9718b54a97755fb9c95bc99e9c3de3))
+
+
+### Features
+
+* **hooks:** migrate useAccordionToggle to be named export ([a978ebb](https://github.com/react-bootstrap/react-bootstrap/commit/a978ebb3ef7d5d31d5bc61c7c7dd0c51469d3aa5))
+* **refs:** migrate more components to properly forward their refs ([7d5eef1](https://github.com/react-bootstrap/react-bootstrap/commit/7d5eef10c5dbfc9a45388cb7fe033b0d96fba6f4)), closes [#4194](https://github.com/react-bootstrap/react-bootstrap/issues/4194)
+* add Switches ([#4268](https://github.com/react-bootstrap/react-bootstrap/issues/4268)) ([98297c6](https://github.com/react-bootstrap/react-bootstrap/commit/98297c6f6a542e2beffae3f63d48c3758f3cb5ef))
+* Add the as prop to Badge to support actionable badges ([#4295](https://github.com/react-bootstrap/react-bootstrap/issues/4295)) ([db09dc0](https://github.com/react-bootstrap/react-bootstrap/commit/db09dc0c8b19b2e7d2d63e2c9cd9cdaf3a5ded32)), closes [#4227](https://github.com/react-bootstrap/react-bootstrap/issues/4227)
+* **types:** add useAccordionToggle types ([714066d](https://github.com/react-bootstrap/react-bootstrap/commit/714066d74595fc27ba0ecd724aebb3371c23fb90)), closes [#4191](https://github.com/react-bootstrap/react-bootstrap/issues/4191)
+
+
+### BREAKING CHANGES
+
+* **hooks:** useAccordionToggle is now being exported from
+`AccordionToggle` rather than `useAccordionToggle`. It also needs
+to be imported as a named import, rather than an unnamed import.
+
+
+
 # [1.0.0-beta.12](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.11...v1.0.0-beta.12) (2019-08-16)
 
 
