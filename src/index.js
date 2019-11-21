@@ -49,6 +49,7 @@ export Navbar from './Navbar';
 export NavbarBrand from './NavbarBrand';
 export NavDropdown from './NavDropdown';
 export NavItem from './NavItem';
+export NavLink from './NavLink';
 export Overlay from './Overlay';
 export OverlayTrigger from './OverlayTrigger';
 export PageItem from './PageItem';
