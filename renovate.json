@@ -1,17 +1,3 @@
 {
-  "extends": [
-    "config:base",
-    ":disablePeerDependencies",
-    ":semanticCommitTypeAll(chore)",
-    "group:allNonMajor",
-    "schedule:weekly"
-  ],
-  "rangeStrategy": "update-lockfile",
-  "semanticCommits": true,
-  "packageRules": [
-    {
-      "depTypeList": ["devDependencies"],
-      "rangeStrategy": "bump"
-    }
-  ]
+  "extends": ["github>4Catalyzer/renovate-config:library"]
 }
