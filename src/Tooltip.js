@@ -59,6 +59,9 @@ const propTypes = {
 
   /** @private */
   outOfBoundaries: PropTypes.any,
+
+  /** @private */
+  show: PropTypes.any,
 };
 
 const defaultProps = {
@@ -76,6 +79,7 @@ const Tooltip = React.forwardRef(
       arrowProps,
       scheduleUpdate: _,
       outOfBoundaries: _1,
+      show: _2,
       ...props
     },
     ref,
