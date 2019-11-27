@@ -5,29 +5,31 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Dropdown from 'react-bootstrap/Dropdown';
 import styled from 'astroturf';
-import withProps from 'recompose/withProps';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDiscord } from '@fortawesome/free-brands-svg-icons/faDiscord';
+import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
 
 import logo from '../assets/logo.svg';
 
-const StyledNavbar = withProps({
+const StyledNavbar = styled(Navbar).attrs({
   as: 'header',
   variant: 'dark',
   role: 'banner',
-})(
-  styled(Navbar)`
-    @import '../css/theme.scss';
+})`
+  @import '../css/theme.scss';
 
-    min-height: 4rem;
-    background-color: $darker;
+  min-height: 4rem;
+  background-color: $darker;
 
-    @include media-breakpoint-up(md) {
-      position: sticky;
-      top: 0;
-      z-index: 1040;
-    }
-  `,
-);
+  @include media-breakpoint-up(md) {
+    position: sticky;
+    top: 0;
+    z-index: 1040;
+  }
+`;
+
 const SkipToContentLink = styled('a')`
   composes: sr-only sr-only-focusable bg-primary text-white px-4 py-2 mr-2 from global;
 `;
@@ -42,10 +44,12 @@ const StyledNavLink = styled(Nav.Link)`
   &:global(.active) {
     font-width: 700;
   }
+`;
 
-  & i {
-    font-size: 1.2em;
-  }
+const StyledDropdown = styled(Dropdown)`
+  @import '../css/theme.scss';
+
+  margin-right: $spacer;
 `;
 
 const NAV_LINKS = [
@@ -90,21 +94,21 @@ function NavMain({ activePage }) {
         ))}
       </Nav>
       <Nav className="ml-auto pr-md-5">
-        <OverlayTrigger
-          placement="bottom"
-          delay={{ show: 200 }}
-          overlay={
-            <Tooltip id="t-version">
-              Compatible with Bootstrap v
-              {config.bootstrapVersion
-                .split('.')
-                .slice(0, 2)
-                .join('.')}
-            </Tooltip>
-          }
-        >
-          <StyledNavLink>v{config.version}</StyledNavLink>
-        </OverlayTrigger>
+        <StyledDropdown id="t-version">
+          <Dropdown.Toggle id="dropdown-version" variant="outline-light">
+            v{config.version} (Bootstrap{' '}
+            {config.bootstrapVersion
+              .split('.')
+              .slice(0, 2)
+              .join('.')}
+            )
+          </Dropdown.Toggle>
+          <Dropdown.Menu className="w-100">
+            <Dropdown.Item href="https://react-bootstrap-v3.netlify.com">
+              v0.32.4 (Bootstrap 3)
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </StyledDropdown>
         <OverlayTrigger
           placement="bottom"
           delay={{ show: 200 }}
@@ -115,7 +119,7 @@ function NavMain({ activePage }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i className="fab fa-github" />
+            <FontAwesomeIcon icon={faGithub} size="lg" />
             <span className="sr-only">Github</span>
           </StyledNavLink>
         </OverlayTrigger>
@@ -129,7 +133,7 @@ function NavMain({ activePage }) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <i className="fab fa-discord" />
+            <FontAwesomeIcon icon={faDiscord} size="lg" />
             <span className="sr-only">Discord</span>
           </StyledNavLink>
         </OverlayTrigger>

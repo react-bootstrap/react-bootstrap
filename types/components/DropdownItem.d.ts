@@ -1,21 +1,25 @@
 import * as React from 'react';
 
-import SafeAnchor from './SafeAnchor';
+import SafeAnchor, { SafeAnchorProps } from './SafeAnchor';
 
-import { BsPrefixComponent } from './helpers';
+import {
+  BsPrefixComponent,
+  SelectCallback,
+  BsPrefixComponentClass,
+} from './helpers';
 
-export interface DropdownItemProps<T> {
+export interface DropdownItemProps {
   active?: boolean;
   disabled?: boolean;
-  eventKey?: T;
+  eventKey?: string;
   href?: string;
   onClick?: React.MouseEventHandler<this>;
-  onSelect?: (eventKey: T, e: React.SyntheticEvent<this>) => void;
+  onSelect?: SelectCallback;
 }
 
 declare class DropdownItem<
-  EventKey,
-  As extends React.ReactType = typeof SafeAnchor
-> extends BsPrefixComponent<As, DropdownItemProps<EventKey>> {}
+  // Need to use BsPrefixComponentClass to get proper type checking.
+  As extends React.ElementType = BsPrefixComponentClass<'a', SafeAnchorProps>
+> extends BsPrefixComponent<As, DropdownItemProps> {}
 
 export default DropdownItem;

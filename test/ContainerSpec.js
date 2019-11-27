@@ -17,4 +17,8 @@ describe('<Container>', () => {
   it('allows custom elements instead of "div"', () => {
     mount(<Container as="section" />).assertSingle('section.container');
   });
+
+  it('Should have div as default component', () => {
+    mount(<Container />).assertSingle('div');
+  });
 });

@@ -8,7 +8,7 @@ export interface FeedbackProps {
 }
 
 declare class Feedback<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, FeedbackProps> {}
 
 export default Feedback;

@@ -5,14 +5,14 @@ import { BsPrefixComponent, TransitionCallbacks } from './helpers';
 export interface TabPaneProps extends TransitionCallbacks {
   eventKey?: unknown;
   active?: boolean;
-  transition?: false | React.ReactType;
+  transition?: false | React.ElementType;
   bsClass?: string;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
 }
 
 declare class TabPane<
-  As extends React.ReactType = 'div'
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, TabPaneProps> {}
 
 export default TabPane;

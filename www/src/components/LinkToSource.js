@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'astroturf';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCode } from '@fortawesome/free-solid-svg-icons/faCode';
 
 import { version } from '../../../package.json';
 
@@ -23,7 +25,7 @@ export default props => {
       }
     >
       <Link href={linkToComponentOnGitHub} className="js-search-exclude">
-        <i className="fas fa-code" />
+        <FontAwesomeIcon icon={faCode} />
         <span className="sr-only">view source file</span>
       </Link>
     </OverlayTrigger>

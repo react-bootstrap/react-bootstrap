@@ -2,8 +2,22 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import PageItem, { First, Prev, Ellipsis, Next, Last } from './PageItem';
+
+const propTypes = {
+  /**
+   * @default 'pagination'
+   * */
+  bsPrefix: PropTypes.string,
+
+  /**
+   * Set's the size of all PageItems.
+   *
+   * @type {('sm'|'lg')}
+   */
+  size: PropTypes.string,
+};
 
 /**
  * @property {PageItem} Item
@@ -13,44 +27,32 @@ import PageItem, { First, Prev, Ellipsis, Next, Last } from './PageItem';
  * @property {PageItem} Next
  * @property {PageItem} Last
  */
-class Pagination extends React.Component {
-  static propTypes = {
-    /** @default 'pagination' */
-    bsPrefix: PropTypes.string.isRequired,
-
-    /**
-     * Set's the size of all PageItems.
-     *
-     * @type {('sm'|'lg')}
-     */
-    size: PropTypes.string,
-  };
-
-  render() {
-    const { bsPrefix, className, children, size, ...props } = this.props;
-
+const Pagination = React.forwardRef(
+  ({ bsPrefix, className, children, size, ...props }, ref) => {
+    const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'pagination');
     return (
       <ul
+        ref={ref}
         {...props}
         className={classNames(
           className,
-          bsPrefix,
-          size && `${bsPrefix}-${size}`,
+          decoratedBsPrefix,
+          size && `${decoratedBsPrefix}-${size}`,
         )}
       >
         {children}
       </ul>
     );
-  }
-}
+  },
+);
 
-const DecoratedPagination = createBootstrapComponent(Pagination, 'pagination');
+Pagination.propTypes = propTypes;
 
-DecoratedPagination.First = First;
-DecoratedPagination.Prev = Prev;
-DecoratedPagination.Ellipsis = Ellipsis;
-DecoratedPagination.Item = PageItem;
-DecoratedPagination.Next = Next;
-DecoratedPagination.Last = Last;
+Pagination.First = First;
+Pagination.Prev = Prev;
+Pagination.Ellipsis = Ellipsis;
+Pagination.Item = PageItem;
+Pagination.Next = Next;
+Pagination.Last = Last;
 
-export default DecoratedPagination;
+export default Pagination;

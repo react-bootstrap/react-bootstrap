@@ -40,7 +40,8 @@ export default withLayout(function NaπvbarSection({ data }) {
         </li>
         <li>
           Navbars and their contents are fluid by default. Use optional{' '}
-          <a href="#containers">containers </a> to limit their horizontal width.
+          <a href="#navbars-containers">containers </a> to limit their
+          horizontal width.
         </li>
         <li>Use spacing and flex utilities to size and position content</li>
       </ul>
@@ -66,8 +67,8 @@ export default withLayout(function NaπvbarSection({ data }) {
         Forms
       </LinkedHeading>
       <p>
-        Use <code>{'<Form inline>'}</code> and your variaous form controls
-        within the Navbar. Align the contents as needed with utility classes.
+        Use <code>{'<Form inline>'}</code> and your various form controls within
+        the Navbar. Align the contents as needed with utility classes.
       </p>
       <ReactPlayground codeText={NavbarForm} />
 

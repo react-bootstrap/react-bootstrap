@@ -7,7 +7,7 @@ export interface NavbarToggleProps {
 }
 
 declare class NavbarToggle<
-  As extends React.ReactType = 'button'
+  As extends React.ElementType = 'button'
 > extends BsPrefixComponent<As, NavbarToggleProps> {}
 
 export default NavbarToggle;

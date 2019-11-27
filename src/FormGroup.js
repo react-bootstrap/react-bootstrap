@@ -29,13 +29,17 @@ const propTypes = {
   _ref: PropTypes.any,
 };
 
-const defaultProps = {
-  as: 'div',
-};
-
 const FormGroup = React.forwardRef(
   (
-    { bsPrefix, className, children, controlId, as: Component, ...props },
+    {
+      bsPrefix,
+      className,
+      children,
+      controlId,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      ...props
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-group');
@@ -57,6 +61,5 @@ const FormGroup = React.forwardRef(
 
 FormGroup.displayName = 'FormGroup';
 FormGroup.propTypes = propTypes;
-FormGroup.defaultProps = defaultProps;
 
 export default FormGroup;

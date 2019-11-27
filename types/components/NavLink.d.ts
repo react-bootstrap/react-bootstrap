@@ -1,8 +1,12 @@
 import * as React from 'react';
 
-import SafeAnchor from './SafeAnchor';
+import SafeAnchor, { SafeAnchorProps } from './SafeAnchor';
 
-import { BsPrefixComponent, SelectCallback } from './helpers';
+import {
+  BsPrefixComponent,
+  SelectCallback,
+  BsPrefixComponentClass,
+} from './helpers';
 
 export interface NavLinkProps {
   active?: boolean;
@@ -14,7 +18,8 @@ export interface NavLinkProps {
 }
 
 declare class NavLink<
-  As extends React.ReactType = typeof SafeAnchor
+  // Need to use BsPrefixComponentClass to get proper type checking.
+  As extends React.ElementType = BsPrefixComponentClass<'a', SafeAnchorProps>
 > extends BsPrefixComponent<As, NavLinkProps> {}
 
 export default NavLink;

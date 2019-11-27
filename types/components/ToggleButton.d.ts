@@ -1,22 +1,22 @@
 import * as React from 'react';
 
-import Button from './Button';
+import Button, { ButtonProps } from './Button';
 
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixComponent, BsPrefixComponentClass } from './helpers';
 
 export interface ToggleButtonProps {
   type?: 'checkbox' | 'radio';
   name?: string;
   checked?: boolean;
-  diabled?: boolean;
+  disabled?: boolean;
   onChange?: React.ChangeEventHandler<this>;
   value: unknown;
   inputRef?: React.LegacyRef<this>;
-  innerRef?: React.LegacyRef<this>;
 }
 
 declare class ToggleButton<
-  As extends React.ReactType = typeof Button
+  // Need to use BsPrefixComponentClass to get proper type checking.
+  As extends React.ElementType = BsPrefixComponentClass<'button', ButtonProps>
 > extends BsPrefixComponent<As, ToggleButtonProps> {}
 
 export default ToggleButton;

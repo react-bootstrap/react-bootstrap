@@ -3,8 +3,8 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import createWithBsPrefix from './utils/createWithBsPrefix';
-import divWithClassName from './utils/divWithClassName';
+import createWithBsPrefix from './createWithBsPrefix';
+import divWithClassName from './divWithClassName';
 import CardContext from './CardContext';
 import CardImg from './CardImg';
 
@@ -50,7 +50,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'div',
   body: false,
 };
 
@@ -64,7 +63,8 @@ const Card = React.forwardRef(
       border,
       body,
       children,
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
       ...props
     },
     ref,

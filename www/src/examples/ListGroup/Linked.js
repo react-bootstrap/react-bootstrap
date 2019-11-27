@@ -10,6 +10,8 @@ render(
     <ListGroup.Item action href="#link2" disabled>
       Link 2
     </ListGroup.Item>
-    <ListGroup.Item action>This one is a button</ListGroup.Item>
+    <ListGroup.Item action onClick={alertClicked}>
+      This one is a button
+    </ListGroup.Item>
   </ListGroup>,
 );

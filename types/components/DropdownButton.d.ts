@@ -1,12 +1,15 @@
 import * as React from 'react';
 
-import DropdownToggle from './DropdownToggle';
 import Dropdown from './Dropdown';
+import DropdownToggle from './DropdownToggle';
 
-import { ReplaceProps, PropsOf } from './helpers';
+import { ReplaceProps } from './helpers';
 
 type PropsFromToggle = Partial<
-  Pick<PropsOf<typeof DropdownToggle>, 'href' | 'size' | 'variant' | 'disabled'>
+  Pick<
+    React.ComponentPropsWithRef<typeof DropdownToggle>,
+    'href' | 'size' | 'variant' | 'disabled'
+  >
 >;
 
 export interface DropdownButtonProps extends PropsFromToggle {

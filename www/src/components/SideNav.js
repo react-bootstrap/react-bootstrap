@@ -7,16 +7,13 @@ import FormControl from 'react-bootstrap/FormControl';
 import styled from 'astroturf';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
-import withProps from 'recompose/withProps';
 
-const MenuButton = withProps({ variant: 'link' })(
-  styled(Button)`
-    composes: p-0 d-md-none ml-3 from global;
+const MenuButton = styled(Button).attrs({ variant: 'link' })`
+  composes: p-0 d-md-none ml-3 from global;
 
-    line-height: 1;
-    color: #212529;
-  `,
-);
+  line-height: 1;
+  color: #212529;
+`;
 
 const SidePanel = styled('div')`
   @import '../css/theme';
@@ -92,7 +89,7 @@ const TocLink = styled(Nav.Link)`
   &:focus,
   &:active {
     text-decoration: none;
-    color: $subtleOnDark;
+    color: $subtle-on-dark;
   }
 `;
 
@@ -101,12 +98,18 @@ const TocSubLink = styled(TocLink)`
   padding-top: 0.25rem;
 `;
 
-const gettingStarted = ['introduction', 'theming', 'support'];
+const gettingStarted = [
+  'introduction',
+  'why-react-bootstrap',
+  'theming',
+  'support',
+];
 
 const layout = ['grid', 'media'];
 
 const components = [
   'alerts',
+  'accordion',
   'badge',
   'breadcrumb',
   'buttons',
@@ -131,18 +134,21 @@ const components = [
   'table',
   'tabs',
   'tooltips',
+  'toasts',
 ];
 
 const utilities = ['transitions', 'responsive-embed', 'react-overlays'];
 
 // We need to configure this
 function attachSearch(ref) {
-  if (ref && window.docsearch)
-    window.docsearch({
-      apiKey: '00f98b765b687b91399288e7c4c68ce1',
-      indexName: 'react_bootstrap_v4',
-      inputSelector: `#${ref.id}`,
-      debug: process.env.NODE_ENV !== 'production', // Set debug to true if you want to inspect the dropdown
+  if (ref && window)
+    import('docsearch.js').then(({ default: docsearch }) => {
+      docsearch({
+        apiKey: '00f98b765b687b91399288e7c4c68ce1',
+        indexName: 'react_bootstrap_v4',
+        inputSelector: `#${ref.id}`,
+        debug: process.env.NODE_ENV !== 'production', // Set debug to true if you want to inspect the dropdown
+      });
     });
 }
 
@@ -245,6 +251,7 @@ class SideNav extends React.Component {
                 location={location}
                 path="/migrating"
               />
+              <NavSection heading="About" location={location} path="/about" />
             </TableOfContents>
           </OverflowWrapper>
         </Collapse>

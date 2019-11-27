@@ -1,7 +1,6 @@
+import { mount } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { mount } from 'enzyme';
-
 import Dropdown from '../src/Dropdown';
 
 describe('<Dropdown>', () => {
@@ -51,9 +50,23 @@ describe('<Dropdown>', () => {
   });
 
   it('forwards alignRight to menu', () => {
-    mount(<Dropdown alignRight>{dropdownChildren}</Dropdown>).assertSingle(
-      'ReactOverlaysDropdownMenu[alignEnd=true]',
+    const Menu = React.forwardRef(
+      ({ show: _, close: _1, alignRight, ...props }, ref) => (
+        <div {...props} data-align-right={alignRight} ref={ref} />
+      ),
     );
+
+    mount(
+      <Dropdown alignRight show>
+        <Dropdown.Toggle id="test-id" key="toggle">
+          Child Title
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu key="menu" as={Menu}>
+          <Dropdown.Item>Item 1</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>,
+    ).assertSingle('div[data-align-right=true]');
   });
 
   // NOTE: The onClick event handler is invoked for both the Enter and Space
@@ -251,5 +264,32 @@ describe('<Dropdown>', () => {
     wrapper.assertSingle('div.my-dropdown');
     wrapper.assertSingle('button.my-toggle');
     wrapper.assertSingle('div.my-menu');
+  });
+
+  it('Should have div as default component', () => {
+    const wrapper = mount(<Dropdown />);
+    expect(wrapper.find('div').length).to.equal(1);
+  });
+
+  it('Should also accept a custom component', () => {
+    const customComponent = React.forwardRef(
+      (
+        {
+          // eslint-disable-next-line no-unused-vars
+          show,
+          // eslint-disable-next-line no-unused-vars
+          close,
+          // eslint-disable-next-line no-unused-vars
+          alignRight,
+          ...props
+        },
+        ref,
+      ) => <div ref={ref} id="custom-component" {...props} />,
+    );
+    mount(
+      <Dropdown.Menu show as={customComponent}>
+        <Dropdown.Item>Example Item</Dropdown.Item>
+      </Dropdown.Menu>,
+    ).assertSingle('#custom-component');
   });
 });

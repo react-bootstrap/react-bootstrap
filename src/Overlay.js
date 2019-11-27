@@ -83,7 +83,7 @@ const propTypes = {
   onExited: PropTypes.func,
 
   /**
-   * The placement of the OVerlay in relation to it's `target`.
+   * The placement of the Overlay in relation to it's `target`.
    */
   placement: PropTypes.oneOf([
     'auto-start',

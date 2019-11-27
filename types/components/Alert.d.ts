@@ -1,18 +1,19 @@
 import * as React from 'react';
 
-import SafeAnchor from './SafeAnchor';
+import SafeAnchor, { SafeAnchorProps } from './SafeAnchor';
 
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixComponent, BsPrefixComponentClass } from './helpers';
 
-declare class AlertLink<
-  As extends React.ReactType = typeof SafeAnchor
+export class AlertLink<
+  // Need to use BsPrefixComponentClass to get proper type checking.
+  As extends React.ElementType = BsPrefixComponentClass<'a', SafeAnchorProps>
 > extends BsPrefixComponent<As> {}
 
-declare class AlertHeading<
-  As extends React.ReactType = 'div'
+export class AlertHeading<
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
-export interface AlertProps extends React.HTMLProps<Alert> {
+export interface AlertProps extends React.HTMLProps<HTMLDivElement> {
   bsPrefix?: string;
   variant?:
     | 'primary'
@@ -27,12 +28,12 @@ export interface AlertProps extends React.HTMLProps<Alert> {
   show?: boolean;
   onClose?: () => void;
   closeLabel?: string;
-  transition?: React.ReactType;
+  transition?: React.ElementType;
 }
 
-declare class Alert extends React.Component<AlertProps> {
-  static Link: typeof AlertLink;
-  static Heading: typeof AlertHeading;
-}
+declare const Alert: React.ForwardRefExoticComponent<AlertProps> & {
+  Link: typeof AlertLink;
+  Heading: typeof AlertHeading;
+};
 
 export default Alert;

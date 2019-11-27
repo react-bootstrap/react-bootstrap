@@ -1,13 +1,12 @@
 module.exports = api => {
-  let dev = false;
-  let modules = 'commonjs';
+  const env = api.env();
 
-  switch (api.env()) {
+  let dev = false;
+  let modules;
+
+  switch (env) {
     case 'docs':
     case 'test':
-      dev = true;
-      modules = false;
-      break;
     case 'dist-dev':
       dev = true;
       modules = false;
@@ -16,12 +15,22 @@ module.exports = api => {
     case 'esm':
       modules = false;
       break;
-    case 'build':
+    case 'cjs':
     default:
-      break;
+      modules = 'commonjs';
   }
 
   return {
-    presets: [['@react-bootstrap', { dev, modules, removePropTypes: !dev }]],
+    presets: [
+      [
+        '@react-bootstrap',
+        {
+          dev,
+          modules,
+          removePropTypes: !dev,
+        },
+      ],
+    ],
+    plugins: [env === 'test' && 'istanbul'].filter(Boolean),
   };
 };

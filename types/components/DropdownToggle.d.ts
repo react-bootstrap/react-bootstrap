@@ -1,17 +1,18 @@
 import * as React from 'react';
 
-import Button from './Button';
+import Button, { ButtonProps } from './Button';
 
-import { BsPrefixComponent, PropsOf } from './helpers';
+import { BsPrefixComponent, BsPrefixComponentClass } from './helpers';
 
-export interface DropdownToggleProps extends PropsOf<typeof Button> {
+export interface DropdownToggleProps {
   id: string;
   split?: boolean;
   childBsPrefix?: string;
 }
 
 declare class DropdownToggle<
-  As extends React.ReactType = typeof Button
+  // Need to use BsPrefixComponentClass to get proper type checking.
+  As extends React.ElementType = BsPrefixComponentClass<'button', ButtonProps>
 > extends BsPrefixComponent<As, DropdownToggleProps> {}
 
 export default DropdownToggle;

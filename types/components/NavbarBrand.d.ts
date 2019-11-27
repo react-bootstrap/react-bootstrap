@@ -7,7 +7,7 @@ export interface NavbarBrandProps {
 }
 
 declare class NavbarBrand<
-  As extends React.ReactType = 'a'
+  As extends React.ElementType = 'a'
 > extends BsPrefixComponent<As, NavbarBrandProps> {}
 
 export default NavbarBrand;

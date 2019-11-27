@@ -11,9 +11,8 @@ export interface FormCheckInputProps {
   innerRef?: React.LegacyRef<this>;
 }
 
-declare class FormCheckInput extends BsPrefixComponent<
-  'input',
-  FormCheckInputProps
-> {}
+declare class FormCheckInput<
+  As extends React.ElementType = 'input'
+> extends BsPrefixComponent<As, FormCheckInputProps> {}
 
 export default FormCheckInput;

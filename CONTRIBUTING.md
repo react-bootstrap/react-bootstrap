@@ -22,18 +22,21 @@ _Note: Occasionally issues are opened that are unclear, or we cannot verify them
 
 ## Tests
 
-All commits that fix bugs or add features need a test.
+All commits that fix bugs or add features need a test. You can run `npm run tdd MyComponentName` for component specific tests.
 
-## Code Style
+## API Design
 
-Please adhere to the current code styling. We have included an `.editorconfig`
-at the repo's root to facilitate uniformity regardless of your editor. See the
-[editor config site][editorconfig] for integration details.
+Try and be consistent with the overall style and API of the library as a whole. Generally, we avoid monolithic or very high level component APIs. React bootstrap is a toolbox! Prefer to split components out into "sub components" as they make sense. This is usually indicated by the bootstrap CSS classes, e.g. `.nav`, `.nav-item`, and `nav-link` translate into `<Nav>`, `<NavItem>`, and `<NavLink>` components.
 
-We use [ESLint][eslint] for all JavaScript Linting. There should be no linting
-errors and no new warnings for new work. You are welcome to configure your
-editor to use ESLint or the `npm test` command will run unit tests and the
-linter.
+Avoid unnecessary Higher Order Components (HOCs), unless they add a significant amount of value or abstract way something that would otherwise complicate many components (like `uncontrollable`). It's not that HOCs are bad, but we want to try and keep these low level UI blocks as flat and straightforward as possible. Prefer to work explicitly in the component and avoid over optimization up front.
+
+Components should not be function components by default. Folks often add `refs` to them so class components are a better default for `react-bootstrap` components. Components should also **not** use `PureComponent` by default. For a variety of reasons the sort of components these are don't generally benefit from that optimization, and may cause bugs.
+
+### Accessible by Default
+
+React-bootstrap takes web accessibility (a11y) seriously and we take advantage of the React component model to add better defaults that plain bootstrap can (being mostly CSS). Often this means, making sure the a11y details present in the [bootstrap docs](https://getbootstrap.com/) are added as defaults to components where possible. Usually this means handling `aria-selected`/`aria-controls` for tab like components or having a default label for an icon only button, or making it easier to apply `htmlFor` and `id` to form controls.
+
+**There are plenty of cases where the correct a11y is only possible from the user's code and that's okay!** We can't handle every case.
 
 ## Visual Changes
 
@@ -41,7 +44,7 @@ When making a visual change, please provide screenshots
 and/or screencasts of the proposed change. This will help us to understand the
 desired change easier.
 
-## Docs
+## Documentation
 
 Please update the docs with any API changes, the code and docs should always be
 in sync.
@@ -69,9 +72,9 @@ propTypes: {
 There are a few caveats to this format that differ from conventional JSDoc comments.
 
 - Only specific doclets (the @ things) should be used, and only when the data cannot be parsed from the component itself
-    - `@type`: Override the "type", use the same names as the default React PropTypes: string, func, bool, number, object. You can express enum and oneOfType types, Like `{("optionA"|"optionB")}`.
-    - `@required`: to mark a prop as required (use the normal React isRequired if possible)
-    - `@private`: Will hide the prop in the documentation
+  - `@type`: Override the "type", use the same names as the default React PropTypes: string, func, bool, number, object. You can express enum and oneOfType types, Like `{("optionA"|"optionB")}`.
+  - `@required`: to mark a prop as required (use the normal React isRequired if possible)
+  - `@private`: Will hide the prop in the documentation
 - All description text should be above the doclets.
 
 ## Implement additional components and features
@@ -99,9 +102,7 @@ Please see the [Maintaining](./MAINTAINING.md) documentation.
 
 [huboard-badge]: https://img.shields.io/badge/Hu-Board-7965cc.svg
 [huboard]: https://huboard.com/react-bootstrap/react-bootstrap
-
 [issues]: https://github.com/react-bootstrap/react-bootstrap/issues
-
 [editorconfig]: http://editorconfig.org
 [eslint]: http://eslint.org
 [commit-message]: http://robots.thoughtbot.com/5-useful-tips-for-a-better-commit-message

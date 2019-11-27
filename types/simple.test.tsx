@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {
   Alert,
+  Accordion,
   Badge,
   Breadcrumb,
   BreadcrumbItem,
@@ -26,19 +27,38 @@ import {
   OverlayTrigger,
   Tooltip,
   Pagination,
+  Popover,
   ProgressBar,
   Spinner,
   Tabs,
   Tab,
   ToggleButtonGroup,
   ToggleButton,
+  Toast,
 } from 'react-bootstrap';
 
-<Alert dismissible>Woop woop</Alert>;
+<Alert ref={React.createRef<HTMLDivElement>()} dismissible>
+  Woop woop
+</Alert>;
 <Alert.Link as="a" href="blah" />;
 <Alert.Heading as="h3" />;
 
+<Accordion defaultActiveKey="0">
+  <Card>
+    <Card.Header>
+      <Accordion.Toggle eventKey="0">Click me!</Accordion.Toggle>
+    </Card.Header>
+    <Accordion.Collapse eventKey="0">
+      <Card.Body>Hello! I'm the body</Card.Body>
+    </Accordion.Collapse>
+  </Card>
+</Accordion>;
+
 <Badge pill={false}>42</Badge>;
+
+<Badge as="a" href="#" variant="primary" pill>
+  42
+</Badge>;
 
 <Breadcrumb listProps={{ type: 'I' }}>
   <Breadcrumb.Item />
@@ -133,7 +153,7 @@ import {
   </Dropdown.Toggle>
 
   <Dropdown.Menu>
-    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+    <Dropdown.Item eventKey="key">Action</Dropdown.Item>
     <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
     <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
   </Dropdown.Menu>
@@ -148,11 +168,24 @@ import {
 <Form>
   <Form.Group controlId="exampleForm.ControlInput1">
     <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="name@example.com" />
+    <Form.Control
+      type="email"
+      placeholder="name@example.com"
+      innerRef={React.createRef<HTMLInputElement>()}
+      onChange={(e: React.FormEvent<HTMLInputElement>) => {
+        e;
+      }}
+    />
   </Form.Group>
   <Form.Group controlId="exampleForm.ControlSelect1">
     <Form.Label>Example select</Form.Label>
-    <Form.Control as="select">
+    <Form.Control
+      as="select"
+      innerRef={React.createRef<HTMLSelectElement>()}
+      onChange={(e: React.FormEvent<HTMLSelectElement>) => {
+        e;
+      }}
+    >
       <option>1</option>
       <option>2</option>
       <option>3</option>
@@ -161,7 +194,7 @@ import {
     </Form.Control>
   </Form.Group>
   <Form.Group controlId="exampleForm.ControlSelect2">
-    <Form.Label>Example multiple select</Form.Label>
+    <Form.Label column={false}>Example multiple select</Form.Label>
     <Form.Control as="select">
       <option>1</option>
       <option>2</option>
@@ -172,7 +205,22 @@ import {
   </Form.Group>
   <Form.Group controlId="exampleForm.ControlTextarea1">
     <Form.Label>Example textarea</Form.Label>
-    <Form.Control as="textarea" rows={3} />
+    <Form.Control
+      as="textarea"
+      rows={3}
+      innerRef={React.createRef<HTMLTextAreaElement>()}
+      onChange={(e: React.FormEvent<HTMLTextAreaElement>) => {
+        e;
+      }}
+    />
+  </Form.Group>
+  <Form.Group as={Row} controlId="exampleForm.HorizontalControl">
+    <Form.Label column sm={2}>
+      Horizontal
+    </Form.Label>
+    <Col sm={10}>
+      <Form.Control type="text" placeholder="Hoizontal" />
+    </Col>
   </Form.Group>
 </Form>;
 
@@ -300,6 +348,15 @@ import {
   <span>Something Inside</span>
 </Spinner>;
 
+<Toast>
+  <Toast.Header>
+    <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+    <strong className="mr-auto">Bootstrap</strong>
+    <small>11 mins ago</small>
+  </Toast.Header>
+  <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
+</Toast>;
+
 <Pagination>
   <Pagination.First />
   <Pagination.Prev />
@@ -317,6 +374,13 @@ import {
   <Pagination.Next />
   <Pagination.Last />
 </Pagination>;
+
+<Popover id="test-popover">
+  <Popover.Title>Popover title</Popover.Title>
+  <Popover.Content>
+    <strong>Popover Content</strong>
+  </Popover.Content>
+</Popover>;
 
 <div>
   <ProgressBar striped variant="success" min={-10} now={40} max={200} />
@@ -337,8 +401,30 @@ import {
   </Tab>
 </Tabs>;
 
-<ToggleButtonGroup type="checkbox" name="options" defaultValue={1}>
+<ToggleButtonGroup type="checkbox" name="options" defaultValue={[1]}>
   <ToggleButton value={1}>Radio 1 (pre-checked)</ToggleButton>
   <ToggleButton value={2}>Radio 2</ToggleButton>
   <ToggleButton value={3}>Radio 3</ToggleButton>
 </ToggleButtonGroup>;
+
+// As = ComponentClass
+<Tabs invalidProp="2" />; // $ExpectError
+<Alert.Link invalidProp="2" />; // $ExpectError
+<Dropdown.Item invalidProp="2" />; // $ExpectError
+<Nav.Link invalidProp="2" />; // $ExpectError
+<Spinner invalidProp="2" animation="border" />; // $ExpectError
+<ToggleButton invalidProp="2" />; // $ExpectError
+<ToggleButtonGroup invalidProp="2" />; // $ExpectError
+
+// As = intrinsic
+<Button invalidProp="2" />; // $ExpectError
+<Alert invalidProp="2" />; // $ExpectError
+<Badge invalidProp="2" />; // $ExpectError
+
+// AS = ComponentClass
+<Spinner as={Button} colSpan="secondary" />; // $ExpectError
+<Spinner as={Button} active animation="border" />;
+
+// As = Intrinsic
+<Button<'img'> as="img" bla="foo" />; // $ExpectError
+<Button as="img" src="bla" />;

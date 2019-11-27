@@ -8,10 +8,10 @@ function BrowserGlobalsCodeBlock() {
     <CodeBlock
       mode="html"
       codeText={`
-<script src="https://unpkg.com/react/umd/react.production.js" crossorigin />
+<script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin />
 
 <script
-  src="https://unpkg.com/react-dom/umd/react-dom.production.js"
+  src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
   crossorigin
 />
 

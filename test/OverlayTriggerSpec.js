@@ -126,8 +126,7 @@ describe('<OverlayTrigger>', () => {
   });
 
   it('Should pass transition callbacks to Transition', done => {
-    let count = 0;
-    const increment = () => count++;
+    const increment = sinon.spy();
 
     const wrapper = mount(
       <OverlayTrigger
@@ -137,7 +136,7 @@ describe('<OverlayTrigger>', () => {
         onExiting={increment}
         onExited={() => {
           increment();
-          expect(count).to.equal(6);
+          expect(increment.callCount).to.equal(6);
           done();
         }}
         onEnter={increment}
@@ -283,16 +282,13 @@ describe('<OverlayTrigger>', () => {
     describe('replaced overlay', () => {
       it('Should still be shown', () => {
         class ReplacedOverlay extends React.Component {
-          constructor(props) {
-            super(props);
+          state = {
+            replaced: false,
+          };
 
-            this.handleClick = this.handleClick.bind(this);
-            this.state = { replaced: false };
-          }
-
-          handleClick() {
+          handleClick = () => {
             this.setState({ replaced: true });
-          }
+          };
 
           render() {
             if (this.state.replaced) {

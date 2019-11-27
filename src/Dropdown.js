@@ -1,16 +1,15 @@
 import classNames from 'classnames';
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import BaseDropdown from 'react-overlays/Dropdown';
-import useUncontrolled from 'uncontrollable/hook';
+import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
-
-import { useBootstrapPrefix } from './ThemeProvider';
+import DropdownItem from './DropdownItem';
 import DropdownMenu from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
-import DropdownItem from './DropdownItem';
 import SelectableContext from './SelectableContext';
-import createWithBsPrefix from './utils/createWithBsPrefix';
+import { useBootstrapPrefix } from './ThemeProvider';
+import createWithBsPrefix from './createWithBsPrefix';
 
 const propTypes = {
   /** @default 'dropdown' */
@@ -83,7 +82,6 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'div',
   navbar: false,
 };
 
@@ -97,7 +95,8 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
     onSelect,
     onToggle,
     focusFirstItemOnShow,
-    as: Component,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as: Component = 'div',
     navbar: _4,
     ...props
   } = useUncontrolled(uncontrolledProps, { show: 'onToggle' });
@@ -120,7 +119,7 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
 
   return (
     <SelectableContext.Provider value={handleSelect}>
-      <BaseDropdown.ControlledComponent
+      <BaseDropdown
         drop={drop}
         show={show}
         alignEnd={alignRight}
@@ -143,7 +142,7 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
             )}
           />
         )}
-      </BaseDropdown.ControlledComponent>
+      </BaseDropdown>
     </SelectableContext.Provider>
   );
 });

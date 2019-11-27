@@ -1,0 +1,75 @@
+import { graphql } from 'gatsby';
+
+import Callout from '../../components/Callout';
+import ComponentApi from '../../components/ComponentApi';
+import ReactPlayground from '../../components/ReactPlayground';
+
+import Basic from '../../examples/Accordion/Basic';
+import AllCollapse from '../../examples/Accordion/AllCollapse';
+import EntireHeaderClickable from '../../examples/Accordion/EntireHeaderClickable';
+import CustomToggle from '../../examples/Accordion/CustomToggle.js';
+
+# Accordion
+
+<p className="lead">
+  Accordions provide a way to restrict Card components to only open one at a
+  time.
+</p>
+
+## Examples
+
+Accordions use Card components to provide styling of the Accordion components.
+Use AccordionToggle to provide a button that switches between each AccordionCollapse component.
+
+### Basic Example
+
+<ReactPlayground codeText={Basic} />
+
+### Fully Collapsed State
+
+If you want your Accordion to start in a fully-collapsed state, then simply don't pass in a `defaultActiveKey` prop to `Accordion`.
+
+<ReactPlayground codeText={AllCollapse} />
+
+### Entire Header Clickable
+
+Each of the Card components in the Accordion can have their entire header clickable, by setting the AccordionToggle's
+underlying component to be a CardHeader component.
+
+<ReactPlayground codeText={EntireHeaderClickable} />
+
+### Custom Toggle
+
+You can now hook into the Accordion toggle functionality via `useAccordionToggle` to make custom toggle components.
+
+<ReactPlayground codeText={CustomToggle} />
+
+## API
+
+<ComponentApi metadata={props.data.Accordion} />
+<ComponentApi metadata={props.data.AccordionToggle} exportedBy={props.data.Accordion} />
+<ComponentApi metadata={props.data.AccordionCollapse} exportedBy={props.data.Accordion} />
+
+### useAccordionToggle
+
+```js
+import { useAccordionToggle } from 'react-bootstrap/AccordionToggle';
+
+const decoratedOnClick = useAccordionToggle(eventKey, onClick);
+```
+
+export const query = graphql`
+  query AccordionQuery {
+    Accordion: componentMetadata(displayName: { eq: "Accordion" }) {
+      ...ComponentApi_metadata
+    }
+    AccordionToggle: componentMetadata(displayName: { eq: "AccordionToggle" }) {
+      ...ComponentApi_metadata
+    }
+    AccordionCollapse: componentMetadata(
+      displayName: { eq: "AccordionCollapse" }
+    ) {
+      ...ComponentApi_metadata
+    }
+  }
+`;

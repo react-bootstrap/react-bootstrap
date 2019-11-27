@@ -9,9 +9,9 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * Specifies a large or small modal.
+   * Render a large, extra large or small modal.
    *
-   * @type ('sm'|'lg')
+   * @type ('sm'|'lg','xl')
    */
   size: PropTypes.string,
 
@@ -43,10 +43,10 @@ const ModalDialog = React.forwardRef(
           className,
           size && `${bsPrefix}-${size}`,
           centered && `${dialogClass}-centered`,
-          scrollable && `${bsPrefix}-scrollable`,
+          scrollable && `${dialogClass}-scrollable`,
         )}
       >
-        <div className={classNames(`${bsPrefix}-content`)}>{children}</div>
+        <div className={`${bsPrefix}-content`}>{children}</div>
       </div>
     );
   },

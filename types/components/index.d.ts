@@ -21,10 +21,23 @@
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 3.0
 
+export { default as Accordion, AccordionProps } from './Accordion';
+export {
+  default as AccordionCollapse,
+  AccordionCollapseProps,
+} from './AccordionCollapse';
+export {
+  default as AccordionToggle,
+  AccordionToggleProps,
+  useAccordionToggle,
+} from './AccordionToggle';
 export { default as Alert, AlertProps } from './Alert';
 export { default as Badge, BadgeProps } from './Badge';
 export { default as Breadcrumb, BreadcrumbProps } from './Breadcrumb';
-export { default as BreadcrumbItem, BreadcrumbItemProps } from './BreadcrumbItem';
+export {
+  default as BreadcrumbItem,
+  BreadcrumbItemProps,
+} from './BreadcrumbItem';
 export { default as Button, ButtonProps } from './Button';
 export { default as ButtonGroup, ButtonGroupProps } from './ButtonGroup';
 export { default as ButtonToolbar, ButtonToolbarProps } from './ButtonToolbar';
@@ -39,7 +52,10 @@ export { default as CloseButton, CloseButtonProps } from './CloseButton';
 export { default as Col, ColProps } from './Col';
 export { default as Collapse, CollapseProps } from './Collapse';
 export { default as Dropdown, DropdownProps } from './Dropdown';
-export { default as DropdownButton, DropdownButtonProps } from './DropdownButton';
+export {
+  default as DropdownButton,
+  DropdownButtonProps,
+} from './DropdownButton';
 export { default as Fade, FadeProps } from './Fade';
 
 export { default as Form, FormProps } from './Form';
@@ -67,13 +83,23 @@ export { default as Navbar, NavbarProps } from './Navbar';
 export { default as NavbarBrand, NavbarBrandProps } from './NavbarBrand';
 export { default as NavDropdown, NavDropdownProps } from './NavDropdown';
 export { default as NavItem, NavItemProps } from './NavItem';
+export { default as NavLink, NavLinkProps } from './NavLink';
 export { default as Overlay, OverlayProps } from './Overlay';
-export { default as OverlayTrigger, OverlayTriggerProps } from './OverlayTrigger';
+export {
+  default as OverlayTrigger,
+  OverlayTriggerProps,
+} from './OverlayTrigger';
 export { default as PageItem, PageItemProps } from './PageItem';
 export { default as Pagination, PaginationProps } from './Pagination';
+
 export { default as Popover, PopoverProps } from './Popover';
+export { default as PopoverTitle } from './PopoverTitle';
+export { default as PopoverContent } from './PopoverContent';
 export { default as ProgressBar, ProgressBarProps } from './ProgressBar';
-export { default as ResponsiveEmbed, ResponsiveEmbedProps } from './ResponsiveEmbed';
+export {
+  default as ResponsiveEmbed,
+  ResponsiveEmbedProps,
+} from './ResponsiveEmbed';
 export { default as Row, RowProps } from './Row';
 export { default as SafeAnchor, SafeAnchorProps } from './SafeAnchor';
 export { default as Spinner, SpinnerProps } from './Spinner';
@@ -85,6 +111,14 @@ export { default as Table, TableProps } from './Table';
 export { default as TabPane, TabPaneProps } from './TabPane';
 export { default as Tabs, TabsProps } from './Tabs';
 export { default as ThemeProvider, ThemeProviderProps } from './ThemeProvider';
+export { default as Toast, ToastProps } from './Toast';
+export { default as ToastBody } from './ToastBody';
+export { default as ToastHeader, ToastHeaderProps } from './ToastHeader';
 export { default as ToggleButton, ToggleButtonProps } from './ToggleButton';
-export { default as ToggleButtonGroup, ToggleButtonCheckboxProps, ToggleButtonGroupProps, ToggleButtonRadioProps } from './ToggleButtonGroup';
+export {
+  default as ToggleButtonGroup,
+  ToggleButtonCheckboxProps,
+  ToggleButtonGroupProps,
+  ToggleButtonRadioProps,
+} from './ToggleButtonGroup';
 export { default as Tooltip, TooltipProps } from './Tooltip';

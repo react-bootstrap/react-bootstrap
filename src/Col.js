@@ -35,7 +35,7 @@ const propTypes = {
   as: PropTypes.elementType,
 
   /**
-   * The number of columns to span on sxtra small devices (<576px)
+   * The number of columns to span on extra small devices (<576px)
    *
    * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
    */
@@ -70,12 +70,9 @@ const propTypes = {
   xl: column,
 };
 
-const defaultProps = {
-  as: 'div',
-};
-
 const Col = React.forwardRef(
-  ({ bsPrefix, className, as: Component, ...props }, ref) => {
+  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+  ({ bsPrefix, className, as: Component = 'div', ...props }, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'col');
     const spans = [];
     const classes = [];
@@ -118,6 +115,5 @@ const Col = React.forwardRef(
 
 Col.displayName = 'Col';
 Col.propTypes = propTypes;
-Col.defaultProps = defaultProps;
 
 export default Col;

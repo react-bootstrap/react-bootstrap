@@ -1,9 +1,7 @@
 import classNames from 'classnames';
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-
+import React, { useContext } from 'react';
 import warning from 'warning';
-
 import Feedback from './Feedback';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
@@ -33,7 +31,7 @@ const propTypes = {
   /**
    * The underlying HTML element to use when rendering the FormControl.
    *
-   * @type {('input'|'textarea'|elementType)}
+   * @type {('input'|'textarea'|'select'|elementType)}
    */
   as: PropTypes.elementType,
 
@@ -75,10 +73,6 @@ const propTypes = {
   isInvalid: PropTypes.bool,
 };
 
-const defaultProps = {
-  as: 'input',
-};
-
 const FormControl = React.forwardRef(
   (
     {
@@ -91,7 +85,8 @@ const FormControl = React.forwardRef(
       isInvalid,
       plaintext,
       readOnly,
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'input',
       ...props
     },
     ref,
@@ -136,7 +131,6 @@ const FormControl = React.forwardRef(
 
 FormControl.displayName = 'FormControl';
 FormControl.propTypes = propTypes;
-FormControl.defaultProps = defaultProps;
 
 FormControl.Feedback = Feedback;
 

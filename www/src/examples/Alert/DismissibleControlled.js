@@ -1,34 +1,26 @@
-class AlertDismissible extends React.Component {
-  constructor(props) {
-    super(props);
+function AlertDismissible() {
+  const [show, setShow] = useState(true);
 
-    this.state = { show: true };
-  }
+  return (
+    <>
+      <Alert show={show} variant="success">
+        <Alert.Heading>How's it going?!</Alert.Heading>
+        <p>
+          Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
+          lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
+          fermentum.
+        </p>
+        <hr />
+        <div className="d-flex justify-content-end">
+          <Button onClick={() => setShow(false)} variant="outline-success">
+            Close me ya'll!
+          </Button>
+        </div>
+      </Alert>
 
-  render() {
-    const handleHide = () => this.setState({ show: false });
-    const handleShow = () => this.setState({ show: true });
-    return (
-      <>
-        <Alert show={this.state.show} variant="success">
-          <Alert.Heading>How's it going?!</Alert.Heading>
-          <p>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
-            eget lacinia odio sem nec elit. Cras mattis consectetur purus sit
-            amet fermentum.
-          </p>
-          <hr />
-          <div className="d-flex justify-content-end">
-            <Button onClick={handleHide} variant="outline-success">
-              Close me ya'll!
-            </Button>
-          </div>
-        </Alert>
-
-        {!this.state.show && <Button onClick={handleShow}>Show Alert</Button>}
-      </>
-    );
-  }
+      {!show && <Button onClick={() => setShow(true)}>Show Alert</Button>}
+    </>
+  );
 }
 
 render(<AlertDismissible />);

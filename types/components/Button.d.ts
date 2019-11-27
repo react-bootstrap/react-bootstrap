@@ -30,7 +30,7 @@ export interface ButtonProps {
 }
 
 declare class Button<
-  As extends React.ReactType = 'button'
+  As extends React.ElementType = 'button'
 > extends BsPrefixComponent<As, ButtonProps> {}
 
 export default Button;

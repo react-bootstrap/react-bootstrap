@@ -1,4 +1,4 @@
-import createWithBsPrefix from './utils/createWithBsPrefix';
+import createWithBsPrefix from './createWithBsPrefix';
 
 import FigureImage from './FigureImage';
 import FigureCaption from './FigureCaption';

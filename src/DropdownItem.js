@@ -65,6 +65,7 @@ const DropdownItem = React.forwardRef(
       href,
       onClick,
       onSelect,
+      active: propActive,
       as: Component,
       ...props
     },
@@ -78,9 +79,9 @@ const DropdownItem = React.forwardRef(
     const key = makeEventKey(eventKey, href);
 
     const active =
-      props.active == null && key != null
+      propActive == null && key != null
         ? makeEventKey(activeKey) === key
-        : props.active;
+        : propActive;
 
     const handleClick = useEventCallback(event => {
       // SafeAnchor handles the disabled case, but we handle it here

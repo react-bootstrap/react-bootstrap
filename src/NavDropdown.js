@@ -39,9 +39,9 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 };
 
-class NavDropdown extends React.Component {
-  render() {
-    const {
+const NavDropdown = React.forwardRef(
+  (
+    {
       id,
       title,
       children,
@@ -51,29 +51,29 @@ class NavDropdown extends React.Component {
       disabled,
       active,
       ...props
-    } = this.props;
+    },
+    ref,
+  ) => (
+    <Dropdown ref={ref} {...props} as={NavItem}>
+      <Dropdown.Toggle
+        id={id}
+        eventKey={null}
+        active={active}
+        disabled={disabled}
+        childBsPrefix={bsPrefix}
+        as={NavLink}
+      >
+        {title}
+      </Dropdown.Toggle>
 
-    return (
-      <Dropdown {...props} as={NavItem}>
-        <Dropdown.Toggle
-          id={id}
-          eventKey={null}
-          active={active}
-          disabled={disabled}
-          childBsPrefix={bsPrefix}
-          as={NavLink}
-        >
-          {title}
-        </Dropdown.Toggle>
+      <Dropdown.Menu role={menuRole} rootCloseEvent={rootCloseEvent}>
+        {children}
+      </Dropdown.Menu>
+    </Dropdown>
+  ),
+);
 
-        <Dropdown.Menu role={menuRole} rootCloseEvent={rootCloseEvent}>
-          {children}
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  }
-}
-
+NavDropdown.displayName = 'NavDropdown';
 NavDropdown.propTypes = propTypes;
 NavDropdown.Item = Dropdown.Item;
 NavDropdown.Divider = Dropdown.Divider;

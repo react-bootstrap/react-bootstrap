@@ -1,18 +1,11 @@
 import classNames from 'classnames';
-import { findDOMNode } from 'react-dom';
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-
-import BaseDropdownMenu from 'react-overlays/DropdownMenu';
+import React, { useContext } from 'react';
+import { useDropdownMenu } from 'react-overlays/DropdownMenu';
+import useMergedRefs from '@restart/hooks/useMergedRefs';
 import NavbarContext from './NavbarContext';
-
 import { useBootstrapPrefix } from './ThemeProvider';
-
-const wrapRef = props => {
-  const { ref } = props;
-  props.ref = ref.__wrapped || (ref.__wrapped = r => ref(findDOMNode(r)));
-  return props;
-};
+import useWrappedRefWithWarning from './useWrappedRefWithWarning';
 
 const propTypes = {
   /**
@@ -57,7 +50,6 @@ const propTypes = {
 
 const defaultProps = {
   alignRight: false,
-  as: 'div',
   flip: true,
 };
 
@@ -71,54 +63,62 @@ const DropdownMenu = React.forwardRef(
       flip,
       popperConfig,
       show: showProps,
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
       ...props
     },
     ref,
   ) => {
     const isNavbar = useContext(NavbarContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
+    const {
+      hasShown,
+      placement,
+      show,
+      alignEnd,
+      close,
+      props: menuProps,
+    } = useDropdownMenu({
+      flip,
+      popperConfig,
+      rootCloseEvent,
+      show: showProps,
+      alignEnd: alignRight,
+      usePopper: !isNavbar,
+    });
 
+    menuProps.ref = useMergedRefs(
+      menuProps.ref,
+      useWrappedRefWithWarning(ref, 'DropdownMenu'),
+    );
+
+    if (!hasShown) return null;
+
+    // For custom components provide additional, non-DOM, props;
+    if (typeof Component !== 'string') {
+      menuProps.show = show;
+      menuProps.close = close;
+      menuProps.alignRight = alignEnd;
+    }
+    let style = props.style;
+    if (placement) {
+      // we don't need the default popper style,
+      // menus are display: none when not shown.
+      style = { ...style, ...menuProps.style };
+      props['x-placement'] = placement;
+    }
     return (
-      <BaseDropdownMenu
-        ref={ref} // FIXME: the ref situation is out of hand here
-        flip={flip}
-        show={showProps}
-        alignEnd={alignRight}
-        usePopper={!isNavbar}
-        popperConfig={popperConfig}
-        rootCloseEvent={rootCloseEvent}
-      >
-        {({ placement, show, alignEnd, close, props: menuProps }) => {
-          wrapRef(menuProps);
-          // For custom components provide additional, non-DOM, props;
-          if (typeof Component !== 'string') {
-            menuProps.show = show;
-            menuProps.close = close;
-            menuProps.alignRight = alignEnd;
-          }
-          let style = props.style;
-          if (placement) {
-            // we don't need the default popper style,
-            // menus are display: none when not shown.
-            style = { ...style, ...menuProps.style };
-            props['x-placement'] = placement;
-          }
-          return (
-            <Component
-              {...props}
-              {...menuProps}
-              style={style}
-              className={classNames(
-                className,
-                prefix,
-                show && 'show',
-                alignEnd && `${prefix}-right`,
-              )}
-            />
-          );
-        }}
-      </BaseDropdownMenu>
+      <Component
+        {...props}
+        {...menuProps}
+        style={style}
+        className={classNames(
+          className,
+          prefix,
+          show && 'show',
+          alignEnd && `${prefix}-right`,
+        )}
+      />
     );
   },
 );

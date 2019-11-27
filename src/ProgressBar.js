@@ -2,9 +2,9 @@ import classNames from 'classnames';
 import React, { cloneElement } from 'react';
 import PropTypes from 'prop-types';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-import { map } from './utils/ElementChildren';
+import { map } from './ElementChildren';
 
 const ROUND_PRECISION = 1000;
 
@@ -30,7 +30,7 @@ function onlyProgressBar(props, propName, componentName) {
      *
      * see https://github.com/gaearon/react-hot-loader#checking-element-types
      */
-    const element = <DecoratedProgressBar />;
+    const element = <ProgressBar />;
     if (child.type === element.type) return;
 
     const childIdentifier = React.isValidElement(child)
@@ -120,8 +120,8 @@ function getPercentage(now, min, max) {
   return Math.round(percentage * ROUND_PRECISION) / ROUND_PRECISION;
 }
 
-class ProgressBar extends React.Component {
-  renderProgressBar({
+function renderProgressBar(
+  {
     min,
     now,
     max,
@@ -134,53 +134,63 @@ class ProgressBar extends React.Component {
     variant,
     bsPrefix,
     ...props
-  }) {
-    return (
-      <div
-        {...props}
-        role="progressbar"
-        className={classNames(className, `${bsPrefix}-bar`, {
-          [`bg-${variant}`]: variant,
-          [`${bsPrefix}-bar-animated`]: animated,
-          [`${bsPrefix}-bar-striped`]: animated || striped,
-        })}
-        style={{ width: `${getPercentage(now, min, max)}%`, ...style }}
-        aria-valuenow={now}
-        aria-valuemin={min}
-        aria-valuemax={max}
-      >
-        {srOnly ? <span className="sr-only">{label}</span> : label}
-      </div>
-    );
+  },
+  ref,
+) {
+  return (
+    <div
+      ref={ref}
+      {...props}
+      role="progressbar"
+      className={classNames(className, `${bsPrefix}-bar`, {
+        [`bg-${variant}`]: variant,
+        [`${bsPrefix}-bar-animated`]: animated,
+        [`${bsPrefix}-bar-striped`]: animated || striped,
+      })}
+      style={{ width: `${getPercentage(now, min, max)}%`, ...style }}
+      aria-valuenow={now}
+      aria-valuemin={min}
+      aria-valuemax={max}
+    >
+      {srOnly ? <span className="sr-only">{label}</span> : label}
+    </div>
+  );
+}
+
+renderProgressBar.propTypes = propTypes;
+
+const ProgressBar = React.forwardRef(({ isChild, ...props }, ref) => {
+  props.bsPrefix = useBootstrapPrefix(props.bsPrefix, 'progress');
+
+  if (isChild) {
+    return renderProgressBar(props, ref);
   }
 
-  render() {
-    const { isChild, ...props } = this.props;
+  const {
+    min,
+    now,
+    max,
+    label,
+    srOnly,
+    striped,
+    animated,
+    bsPrefix,
+    variant,
+    className,
+    children,
+    ...wrapperProps
+  } = props;
 
-    if (isChild) {
-      return this.renderProgressBar(props);
-    }
-
-    const {
-      min,
-      now,
-      max,
-      label,
-      srOnly,
-      striped,
-      animated,
-      bsPrefix,
-      variant,
-      className,
-      children,
-      ...wrapperProps
-    } = props;
-
-    return (
-      <div {...wrapperProps} className={classNames(className, bsPrefix)}>
-        {children
-          ? map(children, child => cloneElement(child, { isChild: true }))
-          : this.renderProgressBar({
+  return (
+    <div
+      ref={ref}
+      {...wrapperProps}
+      className={classNames(className, bsPrefix)}
+    >
+      {children
+        ? map(children, child => cloneElement(child, { isChild: true }))
+        : renderProgressBar(
+            {
               min,
               now,
               max,
@@ -190,14 +200,15 @@ class ProgressBar extends React.Component {
               animated,
               bsPrefix,
               variant,
-            })}
-      </div>
-    );
-  }
-}
+            },
+            ref,
+          )}
+    </div>
+  );
+});
 
+ProgressBar.displayName = 'ProgressBar';
 ProgressBar.propTypes = propTypes;
 ProgressBar.defaultProps = defaultProps;
-const DecoratedProgressBar = createBootstrapComponent(ProgressBar, 'progress');
 
-export default DecoratedProgressBar;
+export default ProgressBar;

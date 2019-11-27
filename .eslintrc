@@ -1,4 +1,11 @@
 {
-  "extends": ["@react-bootstrap"],
-  "plugins": ["prettier"]
+  "extends": [
+    "@react-bootstrap"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error"
+  }
 }

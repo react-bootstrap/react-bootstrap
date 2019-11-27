@@ -86,12 +86,7 @@ describe('<TabContainer>', () => {
         </div>
       </TabContainer>,
     );
-
-    instance
-      .find('Nav')
-      .getDOMNode()
-      .getAttribute('role')
-      .should.equal('tablist');
+    instance.assertSingle('div.nav[role="tablist"]');
 
     instance
       .find('NavLink a')
@@ -116,11 +111,7 @@ describe('<TabContainer>', () => {
       </TabContainer>,
     );
 
-    instance
-      .find('Nav')
-      .getDOMNode()
-      .getAttribute('role')
-      .should.equal('navigation');
+    instance.assertSingle('div.nav[role="navigation"]');
 
     // make sure its not passed to the Nav.Link
     expect(

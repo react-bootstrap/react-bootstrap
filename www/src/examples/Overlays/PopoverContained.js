@@ -1,35 +1,33 @@
-class Example extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+function Example() {
+  const [show, setShow] = useState(false);
+  const [target, setTarget] = useState(null);
+  const ref = useRef(null);
 
-    this.handleClick = ({ target }) => {
-      this.setState(s => ({ target, show: !s.show }));
-    };
+  const handleClick = event => {
+    setShow(!show);
+    setTarget(event.target);
+  };
 
-    this.state = {
-      show: false,
-    };
-  }
+  return (
+    <ButtonToolbar ref={ref}>
+      <Button onClick={handleClick}>Holy guacamole!</Button>
 
-  render() {
-    return (
-      <ButtonToolbar>
-        <Button onClick={this.handleClick}>Holy guacamole!</Button>
-
-        <Overlay
-          show={this.state.show}
-          target={this.state.target}
-          placement="bottom"
-          container={this}
-          containerPadding={20}
-        >
-          <Popover id="popover-contained" title="Popover bottom">
+      <Overlay
+        show={show}
+        target={target}
+        placement="bottom"
+        container={ref.current}
+        containerPadding={20}
+      >
+        <Popover id="popover-contained">
+          <Popover.Title as="h3">Popover bottom</Popover.Title>
+          <Popover.Content>
             <strong>Holy guacamole!</strong> Check this info.
-          </Popover>
-        </Overlay>
-      </ButtonToolbar>
-    );
-  }
+          </Popover.Content>
+        </Popover>
+      </Overlay>
+    </ButtonToolbar>
+  );
 }
 
 render(<Example />);

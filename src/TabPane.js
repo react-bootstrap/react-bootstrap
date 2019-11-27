@@ -128,6 +128,7 @@ const TabPane = React.forwardRef((props, ref) => {
     mountOnEnter,
     unmountOnExit,
     transition: Transition,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as: Component = 'div',
     eventKey: _,
     ...rest
@@ -158,7 +159,7 @@ const TabPane = React.forwardRef((props, ref) => {
         onExiting={onExiting}
         onExited={onExited}
         mountOnEnter={mountOnEnter}
-        unmountOnExit={mountOnEnter}
+        unmountOnExit={unmountOnExit}
       >
         {pane}
       </Transition>

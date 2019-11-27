@@ -20,6 +20,9 @@ const propTypes = {
    * some additional horizontal padding
    */
   pill: PropTypes.bool.isRequired,
+
+  /** @default span */
+  as: PropTypes.elementType,
 };
 
 const defaultProps = {
@@ -27,10 +30,13 @@ const defaultProps = {
 };
 
 const Badge = React.forwardRef(
-  ({ bsPrefix, variant, pill, className, ...props }, ref) => {
+  (
+    { bsPrefix, variant, pill, className, as: Component = 'span', ...props },
+    ref,
+  ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'badge');
     return (
-      <span
+      <Component
         ref={ref}
         {...props}
         className={classNames(

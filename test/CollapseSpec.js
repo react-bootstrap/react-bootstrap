@@ -130,7 +130,7 @@ describe('<Collapse>', () => {
       assert.equal(node.style.height, '');
 
       wrapper.setState({ in: false });
-      assert.equal(node.style.height, '0px');
+      assert.equal(node.style.height, '');
     });
 
     it('Should transition from collapsing to not collapsing', done => {
@@ -146,11 +146,11 @@ describe('<Collapse>', () => {
       assert.equal(node.className, 'collapsing');
     });
 
-    it('Should have 0px height after transition complete', done => {
+    it('Should have no height after transition complete', done => {
       let node = wrapper.getDOMNode();
 
       function onExited() {
-        assert.ok(node.style.height === '0px');
+        assert.equal(node.style.height, '');
         done();
       }
 

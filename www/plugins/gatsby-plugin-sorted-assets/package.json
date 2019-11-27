@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "fs-extra": "^7.0.0",
+    "fs-extra": "^8.0.0",
     "lodash": "^4.17.11",
     "toposort": "^2.0.2"
   },

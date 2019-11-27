@@ -1,19 +1,20 @@
 import classNames from 'classnames';
-import styles from 'dom-helpers/style';
-import transition from 'dom-helpers/transition';
-import React, { cloneElement } from 'react';
+import styles from 'dom-helpers/css';
+import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
-import uncontrollable from 'uncontrollable';
-
+import React, { cloneElement } from 'react';
+import { uncontrollable } from 'uncontrollable';
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
+import { forEach, map } from './ElementChildren';
 import SafeAnchor from './SafeAnchor';
-import { map, forEach } from './utils/ElementChildren';
-import triggerBrowserReflow from './utils/triggerBrowserReflow';
 import { createBootstrapComponent } from './ThemeProvider';
+import triggerBrowserReflow from './triggerBrowserReflow';
 
 const countChildren = c =>
   React.Children.toArray(c).filter(React.isValidElement).length;
+
+const SWIPE_THRESHOLD = 40;
 
 // TODO: `slide` should be `animate`.
 
@@ -52,7 +53,7 @@ const propTypes = {
   controls: PropTypes.bool,
 
   /**
-   * Temporarily puase the slide interval when the mouse hovers over a slide.
+   * Temporarily pause the slide interval when the mouse hovers over a slide.
    */
   pauseOnHover: PropTypes.bool,
 
@@ -99,10 +100,14 @@ const propTypes = {
    * Set to null to deactivate.
    */
   nextLabel: PropTypes.string,
+
+  /**
+   * Whether the carousel should support left/right swipe interactions on touchscreen devices.
+   */
+  touch: PropTypes.bool,
 };
 
 const defaultProps = {
-  as: 'div',
   slide: true,
   fade: false,
   interval: 5000,
@@ -118,20 +123,19 @@ const defaultProps = {
 
   nextIcon: <span aria-hidden="true" className="carousel-control-next-icon" />,
   nextLabel: 'Next',
+  touch: true,
 };
 
 class Carousel extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  state = {
+    prevClasses: '',
+    currentClasses: 'active',
+    touchStartX: 0,
+  };
 
-    this.state = {
-      prevClasses: '',
-      currentClasses: 'active',
-    };
-    this.isUnmounted = false;
+  isUnmounted = false;
 
-    this.carousel = React.createRef();
-  }
+  carousel = React.createRef();
 
   componentDidMount() {
     this.cycle();
@@ -206,7 +210,7 @@ class Carousel extends React.Component {
             currentClasses: classNames(orderClassName, directionalClassName),
           },
           () =>
-            transition.end(nextElement, () => {
+            transitionEnd(nextElement, () => {
               this.safeSetState(
                 { prevClasses: '', currentClasses: 'active' },
                 this.handleSlideEnd,
@@ -224,6 +228,27 @@ class Carousel extends React.Component {
     clearTimeout(this.timeout);
     this.isUnmounted = true;
   }
+
+  handleTouchStart = e => {
+    this.setState({ touchStartX: e.changedTouches[0].screenX });
+  };
+
+  handleTouchEnd = e => {
+    // If the swipe is under the threshold, don't do anything.
+    if (
+      Math.abs(e.changedTouches[0].screenX - this.state.touchStartX) <
+      SWIPE_THRESHOLD
+    )
+      return;
+
+    if (e.changedTouches[0].screenX < this.state.touchStartX) {
+      // Swiping left to navigate to next item.
+      this.handleNext(e);
+    } else {
+      // Swiping right to navigate to previous item.
+      this.handlePrev(e);
+    }
+  };
 
   handleSlideEnd = () => {
     const pendingIndex = this._pendingIndex;
@@ -423,13 +448,15 @@ class Carousel extends React.Component {
 
   render() {
     const {
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
       bsPrefix,
       slide,
       fade,
       indicators,
       controls,
       wrap,
+      touch,
       prevIcon,
       prevLabel,
       nextIcon,
@@ -455,6 +482,8 @@ class Carousel extends React.Component {
     return (
       // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <Component
+        onTouchStart={touch ? this.handleTouchStart : undefined}
+        onTouchEnd={touch ? this.handleTouchEnd : undefined}
         {...props}
         className={classNames(
           className,
@@ -476,7 +505,6 @@ class Carousel extends React.Component {
             return cloneElement(child, {
               className: classNames(
                 child.props.className,
-                `${bsPrefix}-item`,
                 current && currentClasses,
                 previous && prevClasses,
               ),

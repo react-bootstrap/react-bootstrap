@@ -1,9 +1,10 @@
-import contains from 'dom-helpers/query/contains';
+/* eslint-disable max-classes-per-file */
+
+import contains from 'dom-helpers/contains';
+import PropTypes from 'prop-types';
 import React, { cloneElement } from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import warning from 'warning';
-
 import Overlay from './Overlay';
 
 class RefHolder extends React.Component {
@@ -43,6 +44,10 @@ const propTypes = {
    * control, consider using the Overlay component directly.
    */
   defaultShow: PropTypes.bool,
+  /**
+    The initial flip state of the Overlay.
+   */
+  flip: PropTypes.bool,
 
   /**
    * An element or text to overlay next to the target.

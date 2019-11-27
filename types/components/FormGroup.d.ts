@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { BsPrefixComponent } from './helpers';
 
 export interface FormGroupProps {
@@ -7,8 +6,8 @@ export interface FormGroupProps {
   controlId?: string;
 }
 
-declare class Form<
-  As extends React.ReactType = 'div'
+declare class FormGroup<
+  As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As, FormGroupProps> {}
 
-export default Form;
+export default FormGroup;

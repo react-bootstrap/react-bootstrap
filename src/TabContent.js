@@ -2,27 +2,39 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-class TabContent extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'tab-content'
-     */
-    bsPrefix: PropTypes.string,
+const propTypes = {
+  /**
+   * @default 'tab-content'
+   */
+  bsPrefix: PropTypes.string,
 
-    as: PropTypes.elementType,
-  };
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    as: 'div',
-  };
+const TabContent = React.forwardRef(
+  (
+    {
+      bsPrefix,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      className,
+      ...props
+    },
+    ref,
+  ) => {
+    const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'tab-content');
+    return (
+      <Component
+        ref={ref}
+        {...props}
+        className={classNames(className, decoratedBsPrefix)}
+      />
+    );
+  },
+);
 
-  render() {
-    const { bsPrefix, as: Component, className, ...props } = this.props;
+TabContent.propTypes = propTypes;
 
-    return <Component {...props} className={classNames(className, bsPrefix)} />;
-  }
-}
-
-export default createBootstrapComponent(TabContent, 'tab-content');
+export default TabContent;

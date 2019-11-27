@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import all from 'prop-types-extra/lib/all';
 import React, { useContext } from 'react';
-import useUncontrolled from 'uncontrollable/hook';
+import { useUncontrolled } from 'uncontrollable';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
@@ -38,12 +38,12 @@ const propTypes = {
   activeKey: PropTypes.any,
 
   /**
-   * Have all `NavItem`s to proportionatly fill all available width.
+   * Have all `NavItem`s proportionately fill all available width.
    */
   fill: PropTypes.bool,
 
   /**
-   * Have all `NavItem`s to evenly fill all available width.
+   * Have all `NavItem`s evenly fill all available width.
    *
    * @type {boolean}
    */
@@ -88,12 +88,11 @@ const propTypes = {
 const defaultProps = {
   justify: false,
   fill: false,
-  as: 'div',
 };
 
 const Nav = React.forwardRef((uncontrolledProps, ref) => {
   let {
-    as,
+    as = 'div',
     bsPrefix,
     variant,
     fill,
@@ -145,7 +144,5 @@ Nav.defaultProps = defaultProps;
 
 Nav.Item = NavItem;
 Nav.Link = NavLink;
-
-Nav._Nav = Nav; // for Testing until enzyme is working with context
 
 export default Nav;

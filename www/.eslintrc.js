@@ -31,8 +31,15 @@ module.exports = {
       files: ['src/examples/**'],
       rules: {
         'comma-dangle': 'off',
+        'max-classes-per-file': 'off',
         'no-console': 'off',
       },
     },
+    {
+      files: ['config.js', 'gatsby-config.js', 'gatsby-node.js'],
+      settings: {
+        'import/resolver': 'node'
+      }
+    }
   ],
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   as: PropTypes.elementType,
@@ -13,22 +13,38 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'div',
   fluid: false,
 };
 
-class Jumbotron extends React.Component {
-  render() {
-    const { as: Component, className, fluid, bsPrefix, ...props } = this.props;
+const Jumbotron = React.forwardRef(
+  (
+    {
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      className,
+      fluid,
+      bsPrefix,
+      ...props
+    },
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'jumbotron');
     const classes = {
       [bsPrefix]: true,
       [`${bsPrefix}-fluid`]: fluid,
     };
-    return <Component {...props} className={classNames(className, classes)} />;
-  }
-}
+    return (
+      <Component
+        ref={ref}
+        {...props}
+        className={classNames(className, classes)}
+      />
+    );
+  },
+);
 
 Jumbotron.propTypes = propTypes;
 Jumbotron.defaultProps = defaultProps;
+Jumbotron.displayName = 'Jumbotron';
 
-export default createBootstrapComponent(Jumbotron, 'jumbotron');
+export default Jumbotron;

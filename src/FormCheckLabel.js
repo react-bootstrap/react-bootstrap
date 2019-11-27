@@ -1,9 +1,8 @@
 import classNames from 'classnames';
-import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-
-import { useBootstrapPrefix } from './ThemeProvider';
+import React, { useContext } from 'react';
 import FormContext from './FormContext';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /**
@@ -11,30 +10,30 @@ const propTypes = {
    */
   bsPrefix: PropTypes.string,
 
+  /**
+   * A seperate bsPrefix used for custom controls
+   *
+   * @default 'custom-control'
+   */
+  bsCustomPrefix: PropTypes.string,
+
   /** The HTML for attribute for associating the label with an input */
   htmlFor: PropTypes.string,
 };
 
-const defaultProps = {
-  type: 'checkbox',
-};
-
 const FormCheckLabel = React.forwardRef(
-  ({ bsPrefix, className, htmlFor, ...props }, ref) => {
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check-label');
-
+  ({ bsPrefix, bsCustomPrefix, className, htmlFor, ...props }, ref) => {
     const { controlId, custom } = useContext(FormContext);
+    bsPrefix = custom
+      ? useBootstrapPrefix(bsCustomPrefix, 'custom-control-label')
+      : useBootstrapPrefix(bsPrefix, 'form-check-label');
 
     return (
       <label // eslint-disable-line jsx-a11y/label-has-associated-control
         {...props}
         ref={ref}
         htmlFor={htmlFor || controlId}
-        className={classNames(
-          className,
-          !custom && bsPrefix,
-          custom && 'custom-control-label',
-        )}
+        className={classNames(className, bsPrefix)}
       />
     );
   },
@@ -42,6 +41,5 @@ const FormCheckLabel = React.forwardRef(
 
 FormCheckLabel.displayName = 'FormCheckLabel';
 FormCheckLabel.propTypes = propTypes;
-FormCheckLabel.defaultProps = defaultProps;
 
 export default FormCheckLabel;

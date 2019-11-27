@@ -1,22 +1,21 @@
 import classNames from 'classnames';
-import events from 'dom-helpers/events';
+import addEventListener from 'dom-helpers/addEventListener';
+import canUseDOM from 'dom-helpers/canUseDOM';
 import ownerDocument from 'dom-helpers/ownerDocument';
-
-import canUseDOM from 'dom-helpers/util/inDOM';
-import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import React from 'react';
+import removeEventListener from 'dom-helpers/removeEventListener';
+import getScrollbarSize from 'dom-helpers/scrollbarSize';
 import PropTypes from 'prop-types';
+import React from 'react';
 import BaseModal from 'react-overlays/Modal';
-
+import BootstrapModalManager from './BootstrapModalManager';
 import Fade from './Fade';
 import Body from './ModalBody';
+import ModalContext from './ModalContext';
 import ModalDialog from './ModalDialog';
 import Footer from './ModalFooter';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
-import BootstrapModalManager from './utils/BootstrapModalManager';
 import { createBootstrapComponent } from './ThemeProvider';
-import ModalContext from './ModalContext';
 
 const propTypes = {
   /**
@@ -25,9 +24,9 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
-   * Render a large or small modal.
+   * Render a large, extra large or small modal.
    *
-   * @type ('sm'|'lg')
+   * @type ('sm'|'lg','xl')
    */
   size: PropTypes.string,
 
@@ -192,18 +191,15 @@ function BackdropTransition(props) {
 /* eslint-enable no-use-before-define */
 
 class Modal extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  state = { style: {} };
 
-    this.state = { style: {} };
-    this.modalContext = {
-      onHide: () => this.props.onHide(),
-    };
-  }
+  modalContext = {
+    onHide: () => this.props.onHide(),
+  };
 
   componentWillUnmount() {
     // Clean up the listener if we need to.
-    events.off(window, 'resize', this.handleWindowResize);
+    removeEventListener(window, 'resize', this.handleWindowResize);
   }
 
   setModalRef = ref => {
@@ -246,7 +242,7 @@ class Modal extends React.Component {
     if (this.props.onEntering) this.props.onEntering(node, ...args);
 
     // FIXME: This should work even when animation is disabled.
-    events.on(window, 'resize', this.handleWindowResize);
+    addEventListener(window, 'resize', this.handleWindowResize);
   };
 
   handleExited = (node, ...args) => {
@@ -254,7 +250,7 @@ class Modal extends React.Component {
     if (this.props.onExited) this.props.onExited(...args);
 
     // FIXME: This should work even when animation is disabled.
-    events.off(window, 'resize', this.handleWindowResize);
+    removeEventListener(window, 'resize', this.handleWindowResize);
   };
 
   handleWindowResize = () => {
@@ -285,12 +281,16 @@ class Modal extends React.Component {
   }
 
   renderBackdrop = props => {
-    const { bsPrefix, backdropClassName } = this.props;
+    const { bsPrefix, backdropClassName, animation } = this.props;
 
     return (
       <div
         {...props}
-        className={classNames(`${bsPrefix}-backdrop`, backdropClassName)}
+        className={classNames(
+          `${bsPrefix}-backdrop`,
+          backdropClassName,
+          !animation && 'show',
+        )}
       />
     );
   };
@@ -330,6 +330,13 @@ class Modal extends React.Component {
     } = this.props;
 
     const clickHandler = backdrop === true ? this.handleClick : null;
+    const baseModalStyle = {
+      ...style,
+      ...this.state.style,
+    };
+
+    // Sets `display` always block when `animation` is false
+    if (!animation) baseModalStyle.display = 'block';
 
     return (
       <ModalContext.Provider value={this.modalContext}>
@@ -351,7 +358,7 @@ class Modal extends React.Component {
             onExiting,
             manager,
             ref: this.setModalRef,
-            style: { ...style, ...this.state.style },
+            style: baseModalStyle,
             className: classNames(className, bsPrefix),
             containerClassName: `${bsPrefix}-open`,
             transition: animation ? DialogTransition : undefined,

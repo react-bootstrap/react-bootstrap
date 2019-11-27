@@ -7,6 +7,9 @@
     "react/no-multi-comp": "off"
   },
   "globals": {
+    "useState": false,
+    "useEffect": false,
+    "useRef": false,
     "render": false,
     "classNames": false,
     "React": false,
@@ -65,6 +68,8 @@
     "Tooltip": false,
 
     "ThemeProvider": false,
+
+    "useAccordionToggle": false, 
 
     "mountNode": false,
     "yup": false,

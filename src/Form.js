@@ -1,14 +1,14 @@
 import classNames from 'classnames';
-import React from 'react';
 import PropTypes from 'prop-types';
-
-import createWithBsPrefix from './utils/createWithBsPrefix';
-import { useBootstrapPrefix } from './ThemeProvider';
-import FormGroup from './FormGroup';
-import FormControl from './FormControl';
+import React from 'react';
 import FormCheck from './FormCheck';
+import FormControl from './FormControl';
+import FormGroup from './FormGroup';
 import FormLabel from './FormLabel';
 import FormText from './FormText';
+import Switch from './Switch';
+import { useBootstrapPrefix } from './ThemeProvider';
+import createWithBsPrefix from './createWithBsPrefix';
 
 const propTypes = {
   /**
@@ -42,12 +42,19 @@ const propTypes = {
 
 const defaultProps = {
   inline: false,
-  as: 'form',
 };
 
 const Form = React.forwardRef(
   (
-    { bsPrefix, inline, className, validated, as: Component, ...props },
+    {
+      bsPrefix,
+      inline,
+      className,
+      validated,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'form',
+      ...props
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form');
@@ -73,6 +80,7 @@ Form.Row = createWithBsPrefix('form-row');
 Form.Group = FormGroup;
 Form.Control = FormControl;
 Form.Check = FormCheck;
+Form.Switch = Switch;
 Form.Label = FormLabel;
 Form.Text = FormText;
 

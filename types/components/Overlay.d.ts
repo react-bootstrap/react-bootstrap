@@ -27,8 +27,8 @@ export interface OverlayProps extends TransitionCallbacks {
   popperConfig?: object;
   rootClose?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
-  onHide?: () => void;
-  transition?: boolean | React.ReactType;
+  onHide?: (event: React.SyntheticEvent) => void;
+  transition?: boolean | React.ElementType;
   placement?: Placement;
 }
 

@@ -2,52 +2,47 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-class Image extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'img'
-     */
-    bsPrefix: PropTypes.string,
-    /**
-     * Sets image as fluid image.
-     */
-    fluid: PropTypes.bool,
+const propTypes = {
+  /**
+   * @default 'img'
+   */
+  bsPrefix: PropTypes.string,
+  /**
+   * Sets image as fluid image.
+   */
+  fluid: PropTypes.bool,
 
-    /**
-     * Sets image shape as rounded.
-     */
-    rounded: PropTypes.bool,
+  /**
+   * Sets image shape as rounded.
+   */
+  rounded: PropTypes.bool,
 
-    /**
-     * Sets image shape as circle.
-     */
-    roundedCircle: PropTypes.bool,
+  /**
+   * Sets image shape as circle.
+   */
+  roundedCircle: PropTypes.bool,
 
-    /**
-     * Sets image shape as thumbnail.
-     */
-    thumbnail: PropTypes.bool,
-  };
+  /**
+   * Sets image shape as thumbnail.
+   */
+  thumbnail: PropTypes.bool,
+};
 
-  static defaultProps = {
-    fluid: false,
-    rounded: false,
-    roundedCircle: false,
-    thumbnail: false,
-  };
+const defaultProps = {
+  fluid: false,
+  rounded: false,
+  roundedCircle: false,
+  thumbnail: false,
+};
 
-  render() {
-    const {
-      bsPrefix,
-      className,
-      fluid,
-      rounded,
-      roundedCircle,
-      thumbnail,
-      ...props
-    } = this.props;
+const Image = React.forwardRef(
+  (
+    { bsPrefix, className, fluid, rounded, roundedCircle, thumbnail, ...props },
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'img');
 
     const classes = classNames(
       fluid && `${bsPrefix}-fluid`,
@@ -58,11 +53,16 @@ class Image extends React.Component {
 
     return (
       <img // eslint-disable-line jsx-a11y/alt-text
+        ref={ref}
         {...props}
         className={classNames(className, classes)}
       />
     );
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(Image, 'img');
+Image.displayName = 'Image';
+Image.propTypes = propTypes;
+Image.defaultProps = defaultProps;
+
+export default Image;

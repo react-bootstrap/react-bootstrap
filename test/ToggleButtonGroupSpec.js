@@ -27,6 +27,29 @@ describe('ToggleButton', () => {
 
     ref.current.tagName.should.equal('INPUT');
   });
+
+  it('should set focus state', () => {
+    const wrapper = mount(
+      <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>,
+    );
+
+    wrapper.find('input').simulate('focus');
+    wrapper
+      .find('Button')
+      .hasClass('focus')
+      .should.equal(true);
+  });
+
+  it('should set blur state', () => {
+    const wrapper = mount(
+      <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>,
+    );
+    wrapper.find('input').simulate('blur');
+    wrapper
+      .find('Button')
+      .hasClass('focus')
+      .should.equal(false);
+  });
 });
 
 describe('ToggleButtonGroup', () => {
@@ -114,5 +137,25 @@ describe('ToggleButtonGroup', () => {
       .simulate('change');
 
     spy.should.have.been.calledWith(2);
+  });
+
+  it('should filter out value when deselected', () => {
+    const spy = sinon.spy();
+    mount(
+      <ToggleButtonGroup
+        type="checkbox"
+        name="items"
+        defaultValue={[1, 2]}
+        onChange={spy}
+      >
+        <ToggleButtonGroup.Button value={1}>Option 1</ToggleButtonGroup.Button>
+        <ToggleButtonGroup.Button value={2}>Option 2</ToggleButtonGroup.Button>
+      </ToggleButtonGroup>,
+    )
+      .find('input[type="checkbox"]')
+      .at(0)
+      .simulate('change');
+
+    spy.should.have.been.calledWith([2]);
   });
 });
