@@ -49,8 +49,11 @@ class ModalDialog extends React.Component {
         className={classNames(className, bsClassName)}
       >
         {
-          // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-        }<div className={classNames(dialogClassName, dialogClasses)} onMouseDown={onMouseDownDialog}>
+          // eslint-disable-next-line jsx-a11y/no-static-element-interactions, prettier/prettier
+        }<div
+          className={classNames(dialogClassName, dialogClasses)}
+          onMouseDown={onMouseDownDialog}
+        >
           <div className={prefix(bsProps, 'content')} role="document">
             {children}
           </div>

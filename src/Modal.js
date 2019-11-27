@@ -232,15 +232,15 @@ class Modal extends React.Component {
 
   handleDialogBackdropMouseDown = () => {
     this._waitingForMouseUp = true;
-  }
+  };
 
-  handleMouseUp = (ev) => {
+  handleMouseUp = ev => {
     const dialogNode = this._modal.getDialogElement();
     if (this._waitingForMouseUp && ev.target === dialogNode) {
       this._ignoreBackdropClick = true;
     }
     this._waitingForMouseUp = false;
-  }
+  };
 
   render() {
     const {
