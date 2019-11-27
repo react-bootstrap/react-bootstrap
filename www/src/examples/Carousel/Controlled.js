@@ -1,14 +1,12 @@
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(null);
 
   const handleSelect = (selectedIndex, e) => {
     setIndex(selectedIndex);
-    setDirection(e.direction);
   };
 
   return (
-    <Carousel activeIndex={index} direction={direction} onSelect={handleSelect}>
+    <Carousel activeIndex={index} onSelect={handleSelect}>
       <Carousel.Item>
         <img
           className="d-block w-100"
