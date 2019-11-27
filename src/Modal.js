@@ -178,7 +178,8 @@ class Modal extends React.Component {
   }
 
   handleDialogClick(e) {
-    if (e.target !== e.currentTarget) {
+    if (this._ignoreBackdropClick || e.target !== e.currentTarget) {
+      this._ignoreBackdropClick = false;
       return;
     }
 
@@ -229,6 +230,18 @@ class Modal extends React.Component {
     });
   }
 
+  handleDialogBackdropMouseDown = () => {
+    this._waitingForMouseUp = true;
+  };
+
+  handleMouseUp = ev => {
+    const dialogNode = this._modal.getDialogElement();
+    if (this._waitingForMouseUp && ev.target === dialogNode) {
+      this._ignoreBackdropClick = true;
+    }
+    this._waitingForMouseUp = false;
+  };
+
   render() {
     const {
       backdrop,
@@ -264,12 +277,14 @@ class Modal extends React.Component {
         )}
         onEntering={createChainedFunction(onEntering, this.handleEntering)}
         onExited={createChainedFunction(onExited, this.handleExited)}
+        onMouseUp={this.handleMouseUp}
       >
         <Dialog
           {...dialogProps}
           style={{ ...this.state.style, ...style }}
           className={classNames(className, inClassName)}
           onClick={backdrop === true ? this.handleDialogClick : null}
+          onMouseDownDialog={this.handleDialogBackdropMouseDown}
         >
           {children}
         </Dialog>

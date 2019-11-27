@@ -25,6 +25,7 @@ class ModalDialog extends React.Component {
       className,
       style,
       children,
+      onMouseDownDialog,
       ...props
     } = this.props;
     const [bsProps, elementProps] = splitBsProps(props);
@@ -47,7 +48,12 @@ class ModalDialog extends React.Component {
         style={modalStyle}
         className={classNames(className, bsClassName)}
       >
-        <div className={classNames(dialogClassName, dialogClasses)}>
+        {
+          // eslint-disable-next-line jsx-a11y/no-static-element-interactions, prettier/prettier
+        }<div
+          className={classNames(dialogClassName, dialogClasses)}
+          onMouseDown={onMouseDownDialog}
+        >
           <div className={prefix(bsProps, 'content')} role="document">
             {children}
           </div>
