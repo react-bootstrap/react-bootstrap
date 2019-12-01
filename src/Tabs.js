@@ -70,7 +70,7 @@ const defaultProps = {
 };
 
 function getDefaultActiveKey(children) {
-  let defaultActiveKey;
+  let defaultActiveKey = null;
   ValidComponentChildren.forEach(children, child => {
     if (defaultActiveKey == null) {
       defaultActiveKey = child.props.eventKey;
