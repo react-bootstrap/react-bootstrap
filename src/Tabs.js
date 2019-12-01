@@ -20,6 +20,7 @@ const propTypes = {
    * @controllable onSelect
    */
   activeKey: PropTypes.any,
+  defaultActiveKey: PropTypes.any,
 
   /**
    * Navigation style
