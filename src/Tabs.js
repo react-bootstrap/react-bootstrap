@@ -83,14 +83,8 @@ const defaultProps = {
 };
 
 function getDefaultActiveKey(children) {
-  let defaultActiveKey = null;
-  forEach(children, child => {
-    if (defaultActiveKey == null) {
-      defaultActiveKey = child.props.eventKey;
-    }
-  });
-
-  return defaultActiveKey;
+  const child = children.find(child => child.props.eventKey);
+  return child ? child.props.eventKey : null;
 }
 
 function renderTab(child) {
