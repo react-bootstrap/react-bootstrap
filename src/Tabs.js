@@ -11,7 +11,7 @@ import TabContainer from './TabContainer';
 import TabContent from './TabContent';
 import TabPane from './TabPane';
 
-import { map } from './ElementChildren';
+import { forEach, map } from './ElementChildren';
 
 const propTypes = {
   /**
@@ -83,8 +83,13 @@ const defaultProps = {
 };
 
 function getDefaultActiveKey(children) {
-  const first = children.find(child => child.props.eventKey);
-  return first ? first.props.eventKey : null;
+  let defaultActiveKey = null;
+  forEach(children, child => {
+    if (defaultActiveKey === null) {
+      defaultActiveKey = child.props.eventKey;
+    }
+  });
+  return defaultActiveKey;
 }
 
 function renderTab(child) {
