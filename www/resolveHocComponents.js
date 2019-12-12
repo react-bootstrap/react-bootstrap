@@ -1,19 +1,13 @@
+const { namedTypes: t, visit } = require('ast-types');
 const { camelCase, upperFirst } = require('lodash');
 const { resolver, utils } = require('react-docgen');
-const buildParser = require('react-docgen/dist/babelParser').default;
 
-const parser = buildParser();
-
-module.exports = (ast, recast) => {
-  const {
-    types: { namedTypes: types },
-  } = recast;
-
-  let components = resolver.findAllComponentDefinitions(ast, recast);
+module.exports = (ast, parser) => {
+  let components = resolver.findAllComponentDefinitions(ast, parser);
 
   const getComment = path => {
     let searchPath = path;
-    while (searchPath && !types.Statement.check(searchPath.node)) {
+    while (searchPath && !t.Statement.check(searchPath.node)) {
       searchPath = searchPath.parent;
     }
     let comment =
@@ -26,9 +20,9 @@ module.exports = (ast, recast) => {
     return comment;
   };
 
-  recast.visit(ast, {
+  visit(ast, {
     visitCallExpression(path) {
-      if (types.ExpressionStatement.check(path.node)) {
+      if (t.ExpressionStatement.check(path.node)) {
         path = path.get('expression');
       }
       if (path.node.type !== 'CallExpression') return false;
@@ -52,7 +46,7 @@ module.exports = (ast, recast) => {
             : property.value.raw;
       }
 
-      let comp = recast.parse(
+      const comp = parser.parse(
         `
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -74,10 +68,9 @@ export default class ${upperFirst(
   }
 }
         `,
-        { esprima: parser },
       );
       components = components.concat(
-        resolver.findExportedComponentDefinition(comp.program, recast),
+        resolver.findExportedComponentDefinition(comp.program, parser),
       );
       return false;
     },
