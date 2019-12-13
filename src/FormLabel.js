@@ -25,6 +25,13 @@ const propTypes = {
   column: PropTypes.bool,
 
   /**
+   * Label size variants. Only applicable if column is true
+   *
+   * @type {('sm'|'lg')}
+   */
+  size: PropTypes.string,
+
+  /**
    * The FormLabel `ref` will be forwarded to the underlying element.
    * Unless the FormLabel is rendered `as` a composite component,
    * it will be a DOM node, when resolved.
@@ -47,7 +54,7 @@ const defaultProps = {
 };
 
 const FormLabel = React.forwardRef(
-  ({ bsPrefix, column, srOnly, className, htmlFor, ...props }, ref) => {
+  ({ bsPrefix, column, srOnly, className, htmlFor, size, ...props }, ref) => {
     const { controlId } = useContext(FormContext);
 
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-label');
@@ -57,6 +64,7 @@ const FormLabel = React.forwardRef(
       bsPrefix,
       srOnly && 'sr-only',
       column && 'col-form-label',
+      {[`col-form-label-${size}`]: size}
     );
 
     warning(
