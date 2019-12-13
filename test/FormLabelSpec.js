@@ -70,4 +70,12 @@ describe('<FormLabel>', () => {
     const instance = mount(<Container />).instance();
     expect(instance.input.tagName).to.equal('LABEL');
   });
+
+  it('should properly size itself when rendered as a Col', () => {
+    mount(
+      <FormLabel column size="sm">
+        Label
+      </FormLabel>,
+    ).assertSingle('label.col-form-label-sm');
+  });
 });
