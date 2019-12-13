@@ -70,8 +70,9 @@ export default withLayout(function FormControlsSection({ data }) {
         Sizing
       </LinkedHeading>
       <p>
-        Use <code>size</code> on <code>{'<FormControl>'}</code> and <code>{'<FormLabel>'}</code> to change the
-        size of inputs and labels respectively.
+        Use <code>size</code> on <code>{'<FormControl>'}</code> and{' '}
+        <code>{'<FormLabel>'}</code> to change the size of inputs and labels
+        respectively.
       </p>
       <ReactPlayground codeText={FormInputSizes} />
       <LinkedHeading h="3" id="forms-input-Plaintext">

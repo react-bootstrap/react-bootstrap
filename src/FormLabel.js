@@ -64,7 +64,7 @@ const FormLabel = React.forwardRef(
       bsPrefix,
       srOnly && 'sr-only',
       column && 'col-form-label',
-      {[`col-form-label-${size}`]: size}
+      { [`col-form-label-${size}`]: column && size },
     );
 
     warning(
