@@ -72,10 +72,8 @@ describe('<FormLabel>', () => {
   });
 
   it('should properly size itself when rendered as a Col', () => {
-    mount(
-      <FormLabel column size="sm">
-        Label
-      </FormLabel>,
-    ).assertSingle('label.col-form-label-sm');
+    mount(<FormLabel column="sm">Label</FormLabel>).assertSingle(
+      'label.col-form-label-sm',
+    );
   });
 });
