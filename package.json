@@ -99,7 +99,7 @@
     "cherry-pick": "^0.5.0",
     "codecov": "^3.6.1",
     "conventional-changelog-cli": "^2.0.31",
-    "cpy-cli": "^2.0.0",
+    "cpy-cli": "^3.0.0",
     "cross-env": "^6.0.3",
     "dtslint": "^2.0.2",
     "enzyme": "^3.10.0",
