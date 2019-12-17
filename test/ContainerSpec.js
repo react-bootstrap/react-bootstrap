@@ -18,6 +18,10 @@ describe('<Container>', () => {
     mount(<Container as="section" />).assertSingle('section.container');
   });
 
+  it('Should include breakpoint when breakpoint is set', () => {
+    mount(<Container breakpoint="sm" />).assertSingle('.container-sm');
+  });
+
   it('Should have div as default component', () => {
     mount(<Container />).assertSingle('div');
   });

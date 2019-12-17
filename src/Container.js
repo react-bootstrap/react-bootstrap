@@ -24,6 +24,7 @@ const propTypes = {
   as: PropTypes.elementType,
   /**
    * You can set responsive container width.
+   * @type {("sm"|"md"|"lg"|"xl")}
    */
   breakpoint: brkPoints,
 };
