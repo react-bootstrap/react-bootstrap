@@ -6,12 +6,12 @@ import React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 
 const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm', 'xs'];
-const colSize = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
+const rowColWidth = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
 
-const column = PropTypes.oneOfType([
-  colSize,
+const rowColumns = PropTypes.oneOfType([
+  rowColWidth,
   PropTypes.shape({
-    size: colSize,
+    size: rowColWidth,
   }),
 ]);
 
@@ -26,39 +26,39 @@ const propTypes = {
   as: PropTypes.elementType,
 
   /**
-   * The number of columns each column will span on extra small devices (<576px)
+   * The number of columns that will fit next to each other on extra small devices (<576px)
    *
    * @type {(number)}
    */
-  xs: column,
+  xs: rowColumns,
 
   /**
-   * The number of columns each column will span on small devices (≥576px)
+   * The number of columns that will fit next to each other on small devices (≥576px)
    *
    * @type {(number)}
    */
-  sm: column,
+  sm: rowColumns,
 
   /**
-   * The number of columns each column will span on medium devices (≥768px)
+   * The number of columns that will fit next to each other on medium devices (≥768px)
    *
    * @type {(number)}
    */
-  md: column,
+  md: rowColumns,
 
   /**
-   * The number of columns each column will span on large devices (≥992px)
+   * The number of columns that will fit next to each other on large devices (≥992px)
    *
    * @type {(number)}
    */
-  lg: column,
+  lg: rowColumns,
 
   /**
-   * The number of columns each column will span on extra large devices (≥1200px)
+   * The number of columns that will fit next to each other on extra large devices (≥1200px)
    *
    * @type {(number)}
    */
-  xl: column,
+  xl: rowColumns,
 };
 
 const defaultProps = {
@@ -76,32 +76,32 @@ const Row = React.forwardRef(
       `${decoratedBsPrefix}-cols`,
       'row-cols',
     );
-    const spans = [];
+    const cols = [];
     const classes = [];
 
     DEVICE_SIZES.forEach(brkPoint => {
       let propValue = props[brkPoint];
       delete props[brkPoint];
 
-      let span;
+      let col;
       if (propValue != null && typeof propValue === 'object') {
-        ({ span = true } = propValue);
+        ({ col = true } = propValue);
       } else {
-        span = propValue;
+        col = propValue;
       }
 
       let infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
 
-      if (span != null)
-        spans.push(
-          span === true
+      if (col != null)
+        cols.push(
+          col === true
             ? `${sizePrefix}${infix}`
-            : `${sizePrefix}${infix}-${span}`,
+            : `${sizePrefix}${infix}-${col}`,
         );
     });
 
-    if (!spans.length) {
-      spans.push(decoratedBsPrefix); // plain 'row'
+    if (!cols.length) {
+      cols.push(decoratedBsPrefix); // plain 'row'
     }
 
     return (
@@ -112,7 +112,7 @@ const Row = React.forwardRef(
           className,
           decoratedBsPrefix,
           noGutters && 'no-gutters',
-          ...spans,
+          ...cols,
           ...classes,
         )}
       />
