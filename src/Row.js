@@ -28,35 +28,35 @@ const propTypes = {
   /**
    * The number of columns that will fit next to each other on extra small devices (<576px)
    *
-   * @type {(number)}
+   * @type {(number|{ cols: number })}
    */
   xs: rowColumns,
 
   /**
    * The number of columns that will fit next to each other on small devices (≥576px)
    *
-   * @type {(number)}
+   * @type {(number|{ cols: number })}
    */
   sm: rowColumns,
 
   /**
    * The number of columns that will fit next to each other on medium devices (≥768px)
    *
-   * @type {(number)}
+   * @type {(number|{ cols: number })}
    */
   md: rowColumns,
 
   /**
    * The number of columns that will fit next to each other on large devices (≥992px)
    *
-   * @type {(number)}
+   * @type {(number|{ cols: number })}
    */
   lg: rowColumns,
 
   /**
    * The number of columns that will fit next to each other on extra large devices (≥1200px)
    *
-   * @type {(number)}
+   * @type {(number|{ cols: number })}
    */
   xl: rowColumns,
 };
@@ -76,32 +76,32 @@ const Row = React.forwardRef(
       `${decoratedBsPrefix}-cols`,
       'row-cols',
     );
-    const cols = [];
+    const rowCols = [];
     const classes = [];
 
     DEVICE_SIZES.forEach(brkPoint => {
       let propValue = props[brkPoint];
       delete props[brkPoint];
 
-      let col;
+      let cols;
       if (propValue != null && typeof propValue === 'object') {
-        ({ col = true } = propValue);
+        ({ cols = true } = propValue);
       } else {
-        col = propValue;
+        cols = propValue;
       }
 
       let infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
 
-      if (col != null)
-        cols.push(
-          col === true
+      if (cols != null)
+        rowCols.push(
+          cols === true
             ? `${sizePrefix}${infix}`
-            : `${sizePrefix}${infix}-${col}`,
+            : `${sizePrefix}${infix}-${cols}`,
         );
     });
 
-    if (!cols.length) {
-      cols.push(decoratedBsPrefix); // plain 'row'
+    if (!rowCols.length) {
+      rowCols.push(decoratedBsPrefix); // plain 'row'
     }
 
     return (
@@ -112,7 +112,7 @@ const Row = React.forwardRef(
           className,
           decoratedBsPrefix,
           noGutters && 'no-gutters',
-          ...cols,
+          ...rowCols,
           ...classes,
         )}
       />
