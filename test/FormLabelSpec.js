@@ -75,5 +75,15 @@ describe('<FormLabel>', () => {
     mount(<FormLabel column="sm">Label</FormLabel>).assertSingle(
       'label.col-form-label-sm',
     );
+    mount(<FormLabel column>Label</FormLabel>).assertSingle(
+      'label.col-form-label',
+    );
+    mount(<FormLabel column="lg">Label</FormLabel>).assertSingle(
+      'label.col-form-label-lg',
+    );
+    let labelComponent = mount(<FormLabel>Label</FormLabel>);
+    labelComponent.assertNone('label.col-form-label');
+    labelComponent.assertNone('label.col-form-label-sm');
+    labelComponent.assertNone('label.col-form-label-lg');
   });
 });

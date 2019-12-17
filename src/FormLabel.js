@@ -52,12 +52,13 @@ const FormLabel = React.forwardRef(
 
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-label');
 
+    let columnClass = 'col-form-label';
+    if (typeof column === 'string') columnClass = `${columnClass}-${column}`;
     const classes = classNames(
       className,
       bsPrefix,
       srOnly && 'sr-only',
-      typeof column === 'boolean' && 'col-form-label',
-      typeof column === 'string' && `col-form-label-${column}`,
+      column && columnClass,
     );
 
     warning(
