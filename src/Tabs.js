@@ -83,9 +83,9 @@ const defaultProps = {
 };
 
 function getDefaultActiveKey(children) {
-  let defaultActiveKey = null;
+  let defaultActiveKey;
   forEach(children, child => {
-    if (defaultActiveKey === null) {
+    if (defaultActiveKey == null) {
       defaultActiveKey = child.props.eventKey;
     }
   });
