@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 
-const brkPoints = PropTypes.oneOfType([
-  PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+const sizes = PropTypes.oneOfType([
+  PropTypes.oneOf(['sm', 'md', 'lg', 'xl', 'fluid']),
 ]);
 
 const propTypes = {
@@ -26,7 +26,7 @@ const propTypes = {
    * You can set responsive container width.
    * @type {("sm"|"md"|"lg"|"xl")}
    */
-  breakpoint: brkPoints,
+  size: sizes,
 };
 
 const defaultProps = {
@@ -36,11 +36,11 @@ const defaultProps = {
 const Container = React.forwardRef(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   (
-    { bsPrefix, fluid, breakpoint, as: Component = 'div', className, ...props },
+    { bsPrefix, fluid, size, as: Component = 'div', className, ...props },
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'container');
-    let suffix = breakpoint != null ? `-${breakpoint}` : '';
+    let suffix = size != null ? `-${size}` : '';
     return (
       <Component
         ref={ref}
