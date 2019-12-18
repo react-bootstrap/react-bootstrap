@@ -11,7 +11,7 @@ const rowColWidth = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
 const rowColumns = PropTypes.oneOfType([
   rowColWidth,
   PropTypes.shape({
-    size: rowColWidth,
+    cols: rowColWidth,
   }),
 ]);
 
@@ -72,10 +72,7 @@ const Row = React.forwardRef(
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'row');
-    const sizePrefix = useBootstrapPrefix(
-      `${decoratedBsPrefix}-cols`,
-      'row-cols',
-    );
+    const sizePrefix = `${decoratedBsPrefix}-cols`;
     const rowCols = [];
     const classes = [];
 
@@ -85,19 +82,14 @@ const Row = React.forwardRef(
 
       let cols;
       if (propValue != null && typeof propValue === 'object') {
-        ({ cols = true } = propValue);
+        ({ cols } = propValue);
       } else {
         cols = propValue;
       }
 
       let infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
 
-      if (cols != null)
-        rowCols.push(
-          cols === true
-            ? `${sizePrefix}${infix}`
-            : `${sizePrefix}${infix}-${cols}`,
-        );
+      if (cols != null) rowCols.push(`${sizePrefix}${infix}-${cols}`);
     });
 
     if (!rowCols.length) {
