@@ -110,6 +110,14 @@ class OverlayTrigger extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    const disabled = React.Children.only(this.props.children).props.disabled;
+    const prevDisabled = React.Children.only(prevProps.children).props.disabled;
+    if (disabled === true && disabled !== prevDisabled && this.state.show) {
+      this.hide();
+    }
+  }
+
   componentWillUnmount() {
     clearTimeout(this._timeout);
   }
