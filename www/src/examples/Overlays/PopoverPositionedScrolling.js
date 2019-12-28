@@ -18,7 +18,7 @@ const popoverRight = <popover position="right" />;
 class Positioner extends React.Component {
   render() {
     return (
-      <ButtonToolbar style={{ padding: '100px 0' }}>
+      <div style={{ padding: '100px 0' }}>
         <OverlayTrigger
           container={this}
           trigger="click"
@@ -26,7 +26,7 @@ class Positioner extends React.Component {
           overlay={popoverLeft}
         >
           <Button>Holy guacamole!</Button>
-        </OverlayTrigger>
+        </OverlayTrigger>{' '}
         <OverlayTrigger
           container={this}
           trigger="click"
@@ -34,7 +34,7 @@ class Positioner extends React.Component {
           overlay={popoverTop}
         >
           <Button>Holy guacamole!</Button>
-        </OverlayTrigger>
+        </OverlayTrigger>{' '}
         <OverlayTrigger
           container={this}
           trigger="click"
@@ -42,7 +42,7 @@ class Positioner extends React.Component {
           overlay={popoverBottom}
         >
           <Button>Holy guacamole!</Button>
-        </OverlayTrigger>
+        </OverlayTrigger>{' '}
         <OverlayTrigger
           container={this}
           trigger="click"
@@ -51,7 +51,7 @@ class Positioner extends React.Component {
         >
           <Button>Holy guacamole!</Button>
         </OverlayTrigger>
-      </ButtonToolbar>
+      </div>
     );
   }
 }

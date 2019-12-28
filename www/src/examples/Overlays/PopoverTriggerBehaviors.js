@@ -16,20 +16,20 @@ const popoverFocus = <popover triggerBehavior="focus" />;
 const popoverClickRootClose = <popover triggerBehavior="click-root-close" />;
 
 render(
-  <ButtonToolbar>
+  <>
     <OverlayTrigger trigger="click" placement="bottom" overlay={popoverClick}>
       <Button>Click</Button>
-    </OverlayTrigger>
+    </OverlayTrigger>{' '}
     <OverlayTrigger
       trigger={['hover', 'focus']}
       placement="bottom"
       overlay={popoverHoverFocus}
     >
       <Button>Hover + Focus</Button>
-    </OverlayTrigger>
+    </OverlayTrigger>{' '}
     <OverlayTrigger trigger="focus" placement="bottom" overlay={popoverFocus}>
       <Button>Focus</Button>
-    </OverlayTrigger>
+    </OverlayTrigger>{' '}
     <OverlayTrigger
       trigger="click"
       rootClose
@@ -38,5 +38,5 @@ render(
     >
       <Button>Click w/rootClose</Button>
     </OverlayTrigger>
-  </ButtonToolbar>,
+  </>,
 );
