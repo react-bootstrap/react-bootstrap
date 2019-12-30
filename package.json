@@ -133,9 +133,9 @@
     "react-dom": "^16.12.0",
     "react-test-renderer": "^16.12.0",
     "sinon": "^8.0.1",
-    "sinon-chai": "^3.3.0",
+    "sinon-chai": "^3.4.0",
     "typescript": "^3.7.4",
-    "webpack": "^4.41.4"
+    "webpack": "^4.41.5"
   },
   "release": {
     "publishDir": "lib"
