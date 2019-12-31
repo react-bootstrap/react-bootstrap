@@ -1,16 +1,11 @@
 /* eslint-disable no-shadow */
+import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import classNames from 'classnames';
 import styles from 'dom-helpers/css';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
-import React, {
-  cloneElement,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { cloneElement, useEffect, useRef, useState } from 'react';
 import { useUncontrolled } from 'uncontrollable';
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
@@ -137,6 +132,7 @@ const defaultProps = {
 const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   let {
     activeIndex: activeIndexProp,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as: Component = 'div',
     bsPrefix,
     children,
@@ -353,7 +349,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
     }
   };
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (
       !isUnmounted.current &&
       activeIndex.current !== previousActiveIndex.current &&
