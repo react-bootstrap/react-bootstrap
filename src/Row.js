@@ -45,6 +45,7 @@ const Row = React.forwardRef((props, ref) => {
   );
 });
 
+Row.displayName = 'Row';
 Row.propTypes = propTypes;
 Row.defaultProps = defaultProps;
 
