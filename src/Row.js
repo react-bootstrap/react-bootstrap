@@ -66,14 +66,19 @@ const defaultProps = {
 };
 
 const Row = React.forwardRef(
-  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   (
-    { bsPrefix, className, noGutters, as: Component = 'div', ...props },
+    {
+      bsPrefix,
+      className,
+      noGutters,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      ...props
+    },
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'row');
     const sizePrefix = `${decoratedBsPrefix}-cols`;
-    const rowCols = [];
     const classes = [];
 
     DEVICE_SIZES.forEach(brkPoint => {
@@ -89,11 +94,11 @@ const Row = React.forwardRef(
 
       let infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
 
-      if (cols != null) rowCols.push(`${sizePrefix}${infix}-${cols}`);
+      if (cols != null) classes.push(`${sizePrefix}${infix}-${cols}`);
     });
 
-    if (!rowCols.length) {
-      rowCols.push(decoratedBsPrefix); // plain 'row'
+    if (!classes.length) {
+      classes.push(decoratedBsPrefix); // plain 'row'
     }
 
     return (
@@ -104,7 +109,6 @@ const Row = React.forwardRef(
           className,
           decoratedBsPrefix,
           noGutters && 'no-gutters',
-          ...rowCols,
           ...classes,
         )}
       />
