@@ -158,12 +158,14 @@ export default withLayout(function GridSection({ data }) {
       />
 
       <LinkedHeading h="4" id="row-layout-col-width-sizing">
-        Setting column widths in Row and column widths
+        Setting column widths using Row
       </LinkedHeading>
 
       <p>
-        You can combine the <code>Row</code> column width with a specified width
-        for one or several <code>Col</code>.
+        You can define the column widths on the <code>Row</code> instead of on
+        each <code>Col</code>. You can use the same breakpoints (xs, sm, md,
+        large, and xl) on the <code>Row</code> to specify different widths for
+        the columns on each breakpoint.
       </p>
       <ReactPlayground
         codeText={RowColLayoutColWidth}
