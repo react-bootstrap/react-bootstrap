@@ -97,10 +97,6 @@ const Row = React.forwardRef(
       if (cols != null) classes.push(`${sizePrefix}${infix}-${cols}`);
     });
 
-    if (!classes.length) {
-      classes.push(decoratedBsPrefix); // plain 'row'
-    }
-
     return (
       <Component
         ref={ref}
