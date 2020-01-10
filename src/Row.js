@@ -82,7 +82,7 @@ const Row = React.forwardRef(
     const classes = [];
 
     DEVICE_SIZES.forEach(brkPoint => {
-      let propValue = props[brkPoint];
+      const propValue = props[brkPoint];
       delete props[brkPoint];
 
       let cols;
