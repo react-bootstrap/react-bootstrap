@@ -209,4 +209,19 @@ describe('<Modal>', () => {
 
     expect(onHideSpy).to.have.been.called;
   });
+
+  it('Should not call onHidet if the click target comes from inside the dialog', () => {
+    const onHideSpy = sinon.spy();
+    const wrapper = mount(
+      <Modal show onHide={onHideSpy}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    wrapper.find('div.modal-dialog').simulate('mouseDown');
+    wrapper.find('div.modal.show').simulate('mouseUp');
+    wrapper.find('div.modal.show').simulate('click');
+
+    expect(onHideSpy).to.not.have.been.called;
+  });
 });
