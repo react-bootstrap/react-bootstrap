@@ -2,9 +2,8 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState, useCallback } from 'react';
 
+import { useUncontrolled } from 'uncontrollable';
 import Button from './Button';
-
-const noop = () => {};
 
 const propTypes = {
   /**
@@ -20,6 +19,8 @@ const propTypes = {
 
   /**
    * The checked state of the input, managed by `<ToggleButtonGroup>` automatically
+   *
+   * @controllable onChange
    */
   checked: PropTypes.bool,
 
@@ -31,6 +32,8 @@ const propTypes = {
   /**
    * A callback fired when the underlying input element changes. This is passed
    * directly to the `<input>` so shares the same signature as a native `onChange` event.
+   *
+   * @controllable  checked
    */
   onChange: PropTypes.func,
 
@@ -45,65 +48,69 @@ const propTypes = {
    * @type {ReactRef}
    */
   inputRef: PropTypes.any,
+
+  /**
+   * The defaultChecked state of the input
+   */
+  defaultChecked: PropTypes.bool,
 };
 
-const ToggleButton = React.forwardRef(
-  (
-    {
-      children,
-      name,
-      className,
-      checked,
-      type,
-      onChange,
-      value,
-      disabled,
-      inputRef,
-      ...props
-    },
-    ref,
-  ) => {
-    const [focused, setFocused] = useState(false);
+const ToggleButton = React.forwardRef((props, ref) => {
+  let {
+    children,
+    name,
+    className,
+    checked,
+    type,
+    onChange,
+    value,
+    disabled,
+    inputRef,
+    ...controlledProps
+  } = useUncontrolled(props, {
+    checked: 'onChange',
+  });
 
-    const handleFocus = useCallback(e => {
-      if (e.target.tagName === 'INPUT') setFocused(true);
-    }, []);
+  const [focused, setFocused] = useState(false);
 
-    const handleBlur = useCallback(e => {
-      if (e.target.tagName === 'INPUT') setFocused(false);
-    }, []);
+  const handleFocus = useCallback(e => {
+    if (e.target.tagName === 'INPUT') setFocused(true);
+  }, []);
 
-    return (
-      <Button
-        {...props}
-        ref={ref}
-        className={classNames(
-          className,
-          focused && 'focus',
-          disabled && 'disabled',
-        )}
-        type={null}
-        active={!!checked}
-        as="label"
-      >
-        <input
-          name={name}
-          type={type}
-          value={value}
-          ref={inputRef}
-          autoComplete="off"
-          checked={!!checked}
-          disabled={!!disabled}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onChange={onChange || noop}
-        />
+  const handleBlur = useCallback(e => {
+    if (e.target.tagName === 'INPUT') setFocused(false);
+  }, []);
 
-        {children}
-      </Button>
-    );
-  },
-);
+  return (
+    <Button
+      {...controlledProps}
+      ref={ref}
+      className={classNames(
+        className,
+        focused && 'focus',
+        disabled && 'disabled',
+      )}
+      type={null}
+      active={!!checked}
+      as="label"
+    >
+      <input
+        name={name}
+        type={type}
+        value={value}
+        ref={inputRef}
+        autoComplete="off"
+        checked={!!checked}
+        disabled={!!disabled}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onChange={onChange}
+      />
+
+      {children}
+    </Button>
+  );
+});
 
 ToggleButton.propTypes = propTypes;
 ToggleButton.displayName = 'ToggleButton';

@@ -2,6 +2,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import ToggleButtonGroup from '../src/ToggleButtonGroup';
+import ToggleButton from '../src/ToggleButton';
+import ButtonGroup from '../src/ButtonGroup';
 
 describe('ToggleButton', () => {
   it('should forward refs to the label', () => {
@@ -49,6 +51,21 @@ describe('ToggleButton', () => {
       .find('Button')
       .hasClass('focus')
       .should.equal(false);
+  });
+
+  it('should be active when defaultChecked is true', () => {
+    const wrapper = mount(
+      <ButtonGroup toggle>
+        <ToggleButton type="checkbox" defaultChecked value="1">
+          Checked
+        </ToggleButton>
+      </ButtonGroup>,
+    );
+
+    wrapper
+      .find('label')
+      .hasClass('active')
+      .should.equal(true);
   });
 });
 

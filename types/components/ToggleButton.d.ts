@@ -12,6 +12,7 @@ export interface ToggleButtonProps {
   onChange?: React.ChangeEventHandler<this>;
   value: unknown;
   inputRef?: React.LegacyRef<this>;
+  defaultChecked?: boolean;
 }
 
 declare class ToggleButton<
