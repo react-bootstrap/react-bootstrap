@@ -1,11 +1,16 @@
 /* eslint-disable no-shadow */
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
-import useMergedRefs from '@restart/hooks/useMergedRefs';
 import classNames from 'classnames';
 import styles from 'dom-helpers/css';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
-import React, { cloneElement, useEffect, useRef, useState } from 'react';
+import React, {
+  cloneElement,
+  useEffect,
+  useRef,
+  useState,
+  useImperativeHandle,
+} from 'react';
 import { useUncontrolled } from 'uncontrollable';
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
@@ -427,6 +432,9 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const prevControl = useRef(null);
+  const nextControl = useRef(null);
+
   const renderControls = properties => {
     const {
       activeIndex,
@@ -446,6 +454,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
           key="prev"
           className={`${prefix}-control-prev`}
           onClick={handlePrev}
+          ref={prevControl}
         >
           {prevIcon}
           {prevLabel && <span className="sr-only">{prevLabel}</span>}
@@ -457,6 +466,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
           key="next"
           className={`${prefix}-control-next`}
           onClick={handleNext}
+          ref={nextControl}
         >
           {nextIcon}
           {nextLabel && <span className="sr-only">{nextLabel}</span>}
@@ -464,6 +474,8 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
       ),
     ];
   };
+
+  const indicatorsList = useRef(null);
 
   const renderIndicators = () => {
     let indicators = [];
@@ -482,10 +494,19 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
       );
     });
 
-    return <ol className={`${prefix}-indicators`}>{indicators}</ol>;
+    return (
+      <ol className={`${prefix}-indicators`} ref={indicatorsList}>
+        {indicators}
+      </ol>
+    );
   };
 
-  const mergedRef = useMergedRefs(ref, carouselNode);
+  useImperativeHandle(ref, () => ({
+    carouselNode: carouselNode.current,
+    prevControl: prevControl.current,
+    nextControl: nextControl.current,
+    indicatorsList: indicatorsList.current,
+  }));
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
@@ -505,7 +526,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
     >
       {indicators && renderIndicators()}
 
-      <div className={`${prefix}-inner`} ref={mergedRef}>
+      <div className={`${prefix}-inner`} ref={carouselNode}>
         {map(children, (child, index) => {
           const current = index === activeIndex.current;
           const previous = index === previousActiveIndex.current;
