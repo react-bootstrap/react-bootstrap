@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 
-const sizes = PropTypes.oneOfType([
-  PropTypes.oneOf(['sm', 'md', 'lg', 'xl', 'fluid']),
+const containerSizes = PropTypes.oneOfType([
+  PropTypes.bool,
+  PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 ]);
 
 const propTypes = {
@@ -16,17 +17,13 @@ const propTypes = {
 
   /**
    * Allow the Container to fill all of its available horizontal space.
+   * @type {(true|"sm"|"md"|"lg"|"xl")}
    */
-  fluid: PropTypes.bool,
+  fluid: containerSizes,
   /**
    * You can use a custom element for this component
    */
   as: PropTypes.elementType,
-  /**
-   * You can set responsive container width.
-   * @type {("sm"|"md"|"lg"|"xl")}
-   */
-  size: sizes,
 };
 
 const defaultProps = {
@@ -34,20 +31,26 @@ const defaultProps = {
 };
 
 const Container = React.forwardRef(
-  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   (
-    { bsPrefix, fluid, size, as: Component = 'div', className, ...props },
+    {
+      bsPrefix,
+      fluid,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      className,
+      ...props
+    },
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'container');
-    let suffix = size != null ? `-${size}` : '';
+    let suffix = fluid === false ? '' : `-${fluid}`;
     return (
       <Component
         ref={ref}
         {...props}
         className={classNames(
           className,
-          fluid ? `${prefix}-fluid` : `${prefix}${suffix}`,
+          fluid === true ? `${prefix}-fluid` : `${prefix}${suffix}`,
         )}
       />
     );
