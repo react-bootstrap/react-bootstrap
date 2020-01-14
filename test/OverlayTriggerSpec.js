@@ -23,9 +23,10 @@ describe('<OverlayTrigger>', () => {
     ).assertSingle('button');
   });
 
-  it('Should accept a function as a overlay render prop', () => {
+  it('Should accept a function as an overlay render prop', () => {
+    const overlay = () => <Div className="test" />;
     const wrapper = mount(
-      <OverlayTrigger trigger="click" overlay={() => <Div>test</Div>}>
+      <OverlayTrigger trigger="click" overlay={overlay}>
         <button type="button">button</button>
       </OverlayTrigger>,
     );

@@ -210,7 +210,7 @@ describe('<Modal>', () => {
     expect(onHideSpy).to.have.been.called;
   });
 
-  it('Should not call onHidet if the click target comes from inside the dialog', () => {
+  it('Should not call onHide if the click target comes from inside the dialog', () => {
     const onHideSpy = sinon.spy();
     const wrapper = mount(
       <Modal show onHide={onHideSpy}>
