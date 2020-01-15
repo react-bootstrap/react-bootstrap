@@ -23,6 +23,21 @@ describe('<OverlayTrigger>', () => {
     ).assertSingle('button');
   });
 
+  it('Should accept a function as an overlay render prop', () => {
+    const overlay = () => <Div className="test" />;
+    const wrapper = mount(
+      <OverlayTrigger trigger="click" overlay={overlay}>
+        <button type="button">button</button>
+      </OverlayTrigger>,
+    );
+
+    wrapper.assertNone('.test');
+
+    wrapper.find('button').simulate('click');
+
+    wrapper.assertSingle('div.test');
+  });
+
   it('Should call OverlayTrigger onClick prop to child', () => {
     const callback = sinon.spy();
 
