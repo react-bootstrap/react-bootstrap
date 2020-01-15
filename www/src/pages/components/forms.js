@@ -12,6 +12,7 @@ import CheckCustomInline from '../../examples/Form/CheckCustomInline';
 import CheckInline from '../../examples/Form/CheckInline';
 import FormGroup from '../../examples/Form/FormGroup';
 import FormRow from '../../examples/Form/FormRow';
+import FormLabelSizing from '../../examples/Form/FormLabelSizing';
 import GridBasic from '../../examples/Form/GridBasic';
 import GridComplex from '../../examples/Form/GridComplex';
 import Horizontal from '../../examples/Form/Horizontal';
@@ -70,8 +71,9 @@ export default withLayout(function FormControlsSection({ data }) {
         Sizing
       </LinkedHeading>
       <p>
-        Use <code>size</code> on <code>{'<FormControl>'}</code> to change the
-        size of inputs.
+        Use <code>size</code> on <code>{'<FormControl>'}</code> and{' '}
+        <code>{'<FormLabel>'}</code> to change the size of inputs and labels
+        respectively.
       </p>
       <ReactPlayground codeText={FormInputSizes} />
       <LinkedHeading h="3" id="forms-input-Plaintext">
@@ -182,7 +184,7 @@ export default withLayout(function FormControlsSection({ data }) {
       <ReactPlayground codeText={FormRow} />
       <p>More complex layouts can also be created with the grid system.</p>
       <ReactPlayground codeText={GridComplex} />
-      <LinkedHeading h="3" id="forms-layout-form-row">
+      <LinkedHeading h="3" id="horizontal-forms">
         Horizontal forms
       </LinkedHeading>
       <p>
@@ -191,6 +193,14 @@ export default withLayout(function FormControlsSection({ data }) {
         gutters for tighter and more compact layouts.
       </p>
       <ReactPlayground codeText={Horizontal} />
+      <LinkedHeading h="4" id="horizontal-forms-label-sizing">
+        Horizontal forms label sizing
+      </LinkedHeading>
+      <p>
+        You can size the <code>{'<FormLabel>'}</code> using the column prop as
+        shown.
+      </p>
+      <ReactPlayground codeText={FormLabelSizing} />
 
       <LinkedHeading h="2" id="forms-validation">
         Validation
