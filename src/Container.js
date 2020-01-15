@@ -43,7 +43,7 @@ const Container = React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'container');
-    let suffix = fluid === false ? '' : `-${fluid}`;
+    const suffix = typeof fluid === 'string' ? `-${fluid}` : '-fluid';
     return (
       <Component
         ref={ref}
