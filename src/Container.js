@@ -50,7 +50,7 @@ const Container = React.forwardRef(
         {...props}
         className={classNames(
           className,
-          fluid === true ? `${prefix}-fluid` : `${prefix}${suffix}`,
+          fluid ? `${prefix}${suffix}` : prefix,
         )}
       />
     );
