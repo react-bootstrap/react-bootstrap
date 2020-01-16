@@ -114,6 +114,11 @@ const propTypes = {
    * @default 'navigation'
    */
   role: PropTypes.string,
+
+  /**
+   * Will show the sub menu when set to true
+   */
+  show: PropTypes.bool,
 };
 
 const defaultProps = {
