@@ -1,8 +1,8 @@
 /* eslint-disable max-classes-per-file */
-
+import useMergedRefs from '@restart/hooks/useMergedRefs';
 import contains from 'dom-helpers/contains';
 import PropTypes from 'prop-types';
-import React, { cloneElement } from 'react';
+import React, { cloneElement, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import warning from 'warning';
 import Overlay from './Overlay';
@@ -82,24 +82,119 @@ const defaultProps = {
 };
 
 // eslint-disable-next-line react/no-multi-comp
-class OverlayTrigger extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+const OverlayTrigger = React.forwardRef(
+  (
+    {
+      trigger,
+      overlay,
+      children,
+      popperConfig = {},
+      defaultShow,
+      delay: delayProps,
+      ...props
+    },
+    ref,
+  ) => {
+    const triggerNode = useRef(null);
+    const mergedRef = useMergedRefs(ref, triggerNode);
+    const _timeout = useRef();
+    const _hoverState = useRef();
+    const [show, setShow] = useState(!!defaultShow);
 
-    this.trigger = React.createRef();
-    this.state = {
-      show: !!props.defaultShow,
+    useEffect(() => {
+      return () => {
+        clearTimeout(_timeout.current);
+      };
+    }, []);
+
+    const getChildProps = () => React.Children.only(children).props;
+
+    const getTarget = () => ReactDOM.findDOMNode(triggerNode.current);
+
+    const handleShow = () => {
+      clearTimeout(_timeout.current);
+      _hoverState.current = 'show';
+
+      const delay = normalizeDelay(delayProps);
+
+      if (!delay.show) {
+        setShow(true);
+        return;
+      }
+
+      _timeout.current = setTimeout(() => {
+        if (_hoverState.current === 'show') setShow(true);
+      }, delay.show);
     };
+
+    const handleHide = () => {
+      clearTimeout(_timeout.current);
+      _hoverState.current = 'hide';
+
+      const delay = normalizeDelay(delayProps);
+
+      if (!delay.hide) {
+        setShow(false);
+        return;
+      }
+
+      _timeout.current = setTimeout(() => {
+        if (_hoverState.current === 'hide') setShow(false);
+      }, delay.hide);
+    };
+
+    // eslint-disable-next-line no-unused-vars
+    const handleFocus = e => {
+      const { onFocus } = getChildProps();
+      handleShow(e);
+      if (onFocus) onFocus(e);
+    };
+
+    // eslint-disable-next-line no-unused-vars
+    const handleBlur = e => {
+      const { onBlur } = getChildProps();
+      handleHide(e);
+      if (onBlur) onBlur(e);
+    };
+
+    const handleClick = e => {
+      const { onClick } = getChildProps();
+
+      if (show) setShow(false);
+      else setShow(true);
+
+      if (onClick) onClick(e);
+    };
+
+    // Simple implementation of mouseEnter and mouseLeave.
+    // React's built version is broken: https://github.com/facebook/react/issues/4251
+    // for cases when the trigger is disabled and mouseOut/Over can cause flicker
+    // moving from one child element to another.
+    const handleMouseOverOut = (handler, e, relatedNative) => {
+      const target = e.currentTarget;
+      const related = e.relatedTarget || e.nativeEvent[relatedNative];
+
+      if ((!related || related !== target) && !contains(target, related)) {
+        handler(e);
+      }
+    };
+
+    const handleMouseOver = e => {
+      handleMouseOverOut(handleShow, e, 'fromElement');
+    };
+
+    const handleMouseOut = e => handleMouseOverOut(handleHide, e, 'toElement');
 
     // We add aria-describedby in the case where the overlay is a role="tooltip"
     // for other cases describedby isn't appropriate (e.g. a popover with inputs) so we don't add it.
-    this.ariaModifier = {
+    const ariaModifier = {
       enabled: true,
       order: 900,
       fn: data => {
         const { popper } = data.instance;
-        const target = this.getTarget();
-        if (!this.state.show || !target) return data;
+        const target = getTarget();
+
+        if (!show || !target) return data;
 
         const role = popper.getAttribute('role') || '';
         if (popper.id && role.toLowerCase() === 'tooltip') {
@@ -108,110 +203,6 @@ class OverlayTrigger extends React.Component {
         return data;
       },
     };
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this._timeout);
-  }
-
-  getChildProps() {
-    return React.Children.only(this.props.children).props;
-  }
-
-  getTarget = () => ReactDOM.findDOMNode(this.trigger.current);
-
-  handleShow = () => {
-    clearTimeout(this._timeout);
-    this._hoverState = 'show';
-
-    const delay = normalizeDelay(this.props.delay);
-
-    if (!delay.show) {
-      this.show();
-      return;
-    }
-
-    this._timeout = setTimeout(() => {
-      if (this._hoverState === 'show') this.show();
-    }, delay.show);
-  };
-
-  handleHide = () => {
-    clearTimeout(this._timeout);
-    this._hoverState = 'hide';
-
-    const delay = normalizeDelay(this.props.delay);
-
-    if (!delay.hide) {
-      this.hide();
-      return;
-    }
-
-    this._timeout = setTimeout(() => {
-      if (this._hoverState === 'hide') this.hide();
-    }, delay.hide);
-  };
-
-  handleFocus = e => {
-    const { onFocus } = this.getChildProps();
-    this.handleShow(e);
-    if (onFocus) onFocus(e);
-  };
-
-  handleBlur = e => {
-    const { onBlur } = this.getChildProps();
-    this.handleHide(e);
-    if (onBlur) onBlur(e);
-  };
-
-  handleClick = e => {
-    const { onClick } = this.getChildProps();
-
-    if (this.state.show) this.hide();
-    else this.show();
-
-    if (onClick) onClick(e);
-  };
-
-  handleMouseOver = e => {
-    this.handleMouseOverOut(this.handleShow, e, 'fromElement');
-  };
-
-  handleMouseOut = e =>
-    this.handleMouseOverOut(this.handleHide, e, 'toElement');
-
-  // Simple implementation of mouseEnter and mouseLeave.
-  // React's built version is broken: https://github.com/facebook/react/issues/4251
-  // for cases when the trigger is disabled and mouseOut/Over can cause flicker
-  // moving from one child element to another.
-  handleMouseOverOut(handler, e, relatedNative) {
-    const target = e.currentTarget;
-    const related = e.relatedTarget || e.nativeEvent[relatedNative];
-
-    if ((!related || related !== target) && !contains(target, related)) {
-      handler(e);
-    }
-  }
-
-  hide() {
-    this.setState({ show: false });
-  }
-
-  show() {
-    this.setState({ show: true });
-  }
-
-  render() {
-    const {
-      trigger,
-      overlay,
-      children,
-      popperConfig = {},
-      ...props
-    } = this.props;
-
-    delete props.delay;
-    delete props.defaultShow;
 
     const child = React.Children.only(children);
 
@@ -220,12 +211,12 @@ class OverlayTrigger extends React.Component {
     let triggers = trigger == null ? [] : [].concat(trigger);
 
     if (triggers.indexOf('click') !== -1) {
-      triggerProps.onClick = this.handleClick;
+      triggerProps.onClick = handleClick;
     }
 
     if (triggers.indexOf('focus') !== -1) {
-      triggerProps.onFocus = this.handleShow;
-      triggerProps.onBlur = this.handleHide;
+      triggerProps.onFocus = handleShow;
+      triggerProps.onBlur = handleHide;
     }
 
     if (triggers.indexOf('hover') !== -1) {
@@ -236,13 +227,13 @@ class OverlayTrigger extends React.Component {
           'including the `"focus"` trigger so that touch and keyboard only ' +
           'users can see the overlay as well.',
       );
-      triggerProps.onMouseOver = this.handleMouseOver;
-      triggerProps.onMouseOut = this.handleMouseOut;
+      triggerProps.onMouseOver = handleMouseOver;
+      triggerProps.onMouseOut = handleMouseOut;
     }
 
     return (
       <>
-        <RefHolder ref={this.trigger}>
+        <RefHolder ref={mergedRef}>
           {cloneElement(child, triggerProps)}
         </RefHolder>
         <Overlay
@@ -251,19 +242,19 @@ class OverlayTrigger extends React.Component {
             ...popperConfig,
             modifiers: {
               ...popperConfig.modifiers,
-              ariaModifier: this.ariaModifier,
+              ariaModifier,
             },
           }}
-          show={this.state.show}
-          onHide={this.handleHide}
-          target={this.getTarget}
+          show={show}
+          onHide={handleHide}
+          target={getTarget}
         >
           {overlay}
         </Overlay>
       </>
     );
-  }
-}
+  },
+);
 
 OverlayTrigger.propTypes = propTypes;
 OverlayTrigger.defaultProps = defaultProps;
