@@ -97,6 +97,24 @@ describe('<OverlayTrigger>', () => {
     });
   });
 
+  it('Should remove aria-describedby for tooltips if the state is hide', done => {
+    const wrapper = mount(
+      <OverlayTrigger trigger="click" overlay={<Div />}>
+        <button type="button">button</button>
+      </OverlayTrigger>,
+    );
+    wrapper.find('button').simulate('click');
+    wrapper.find('button').simulate('click');
+
+    setTimeout(() => {
+      wrapper
+        .find('button')
+        .getDOMNode()
+        .matches('[aria-describedby="test-tooltip"]')
+        .should.equal(false);
+      done();
+    });
+  });
   describe('trigger handlers', () => {
     let mountPoint;
 

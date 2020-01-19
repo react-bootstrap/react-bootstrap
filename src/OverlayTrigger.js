@@ -166,9 +166,11 @@ class OverlayTrigger extends React.Component {
 
   handleClick = e => {
     const { onClick } = this.getChildProps();
-
-    if (this.state.show) this.hide();
-    else this.show();
+    if (this.state.show) {
+      const target = e.currentTarget;
+      target.removeAttribute('aria-describedby');
+      this.hide();
+    } else this.show();
 
     if (onClick) onClick(e);
   };
