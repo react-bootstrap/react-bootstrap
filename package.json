@@ -34,14 +34,8 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "types/**/*.ts": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": "eslint --fix",
+    "types/**/*.ts": "prettier --write"
   },
   "prettier": {
     "singleQuote": true,
@@ -125,7 +119,7 @@
     "karma-sinon-chai": "^2.0.2",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^4.0.2",
-    "lint-staged": "^9.5.0",
+    "lint-staged": "^10.0.0",
     "lodash": "^4.17.15",
     "mocha": "^7.0.0",
     "prettier": "^1.19.1",
@@ -142,7 +136,5 @@
   },
   "bugs": {
     "url": "https://github.com/react-bootstrap/react-bootstrap/issues"
-  },
-  "readme": "ERROR: No README data found!",
-  "_id": "react-bootstrap@1.0.0-beta.15"
+  }
 }
