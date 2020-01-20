@@ -34,14 +34,8 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "types/**/*.ts": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": "eslint --fix",
+    "types/**/*.ts": "prettier --write"
   },
   "prettier": {
     "singleQuote": true,
