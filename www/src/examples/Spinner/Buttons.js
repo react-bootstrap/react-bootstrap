@@ -1,4 +1,4 @@
-<ButtonToolbar>
+<>
   <Button variant="primary" disabled>
     <Spinner
       as="span"
@@ -8,7 +8,7 @@
       aria-hidden="true"
     />
     <span className="sr-only">Loading...</span>
-  </Button>
+  </Button>{' '}
   <Button variant="primary" disabled>
     <Spinner
       as="span"
@@ -19,4 +19,4 @@
     />
     Loading...
   </Button>
-</ButtonToolbar>;
+</>;

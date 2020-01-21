@@ -6,17 +6,16 @@ import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import Overlay from '../../examples/Overlays/Overlay';
 import Disabled from '../../examples/Overlays/Disabled';
-import ScheduleUpdate from '../../examples/Overlays/ScheduleUpdate';
+import Overlay from '../../examples/Overlays/Overlay';
 import OverlayTrigger from '../../examples/Overlays/OverlayTrigger';
-import TooltipInCopy from '../../examples/Overlays/TooltipInCopy';
-import TooltipOverlay from '../../examples/Overlays/TooltipOverlay';
-import TooltipPositioned from '../../examples/Overlays/TooltipPositioned';
-
 import PopoverBasic from '../../examples/Overlays/PopoverBasic';
 import PopoverContained from '../../examples/Overlays/PopoverContained';
 import PopoverPositioned from '../../examples/Overlays/PopoverPositioned';
+import ScheduleUpdate from '../../examples/Overlays/ScheduleUpdate';
+import TooltipInCopy from '../../examples/Overlays/TooltipInCopy';
+import TooltipOverlay from '../../examples/Overlays/TooltipOverlay';
+import TooltipPositioned from '../../examples/Overlays/TooltipPositioned';
 
 import withLayout from '../../withLayout';
 

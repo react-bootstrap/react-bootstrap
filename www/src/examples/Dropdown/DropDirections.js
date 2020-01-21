@@ -1,37 +1,42 @@
 <>
-  <ButtonToolbar>
+  <div className="mb-2">
     {['up', 'down', 'left', 'right'].map(direction => (
-      <DropdownButton
-        drop={direction}
-        variant="secondary"
-        title={` Drop ${direction} `}
-        id={`dropdown-button-drop-${direction}`}
-        key={direction}
-      >
-        <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-        <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-        <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-        <Dropdown.Divider />
-        <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-      </DropdownButton>
+      <>
+        <DropdownButton
+          as={ButtonGroup}
+          key={direction}
+          id={`dropdown-button-drop-${direction}`}
+          drop={direction}
+          variant="secondary"
+          title={` Drop ${direction} `}
+        >
+          <Dropdown.Item eventKey="1">Action</Dropdown.Item>
+          <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
+          <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+        </DropdownButton>{' '}
+      </>
     ))}
-  </ButtonToolbar>
+  </div>
 
-  <ButtonToolbar>
+  <div>
     {['up', 'down', 'left', 'right'].map(direction => (
-      <SplitButton
-        drop={direction}
-        variant="secondary"
-        title={`Drop ${direction}`}
-        id={`dropdown-button-drop-${direction}`}
-        key={direction}
-      >
-        <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-        <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-        <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
-        <Dropdown.Divider />
-        <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-      </SplitButton>
+      <>
+        <SplitButton
+          key={direction}
+          id={`dropdown-button-drop-${direction}`}
+          drop={direction}
+          variant="secondary"
+          title={`Drop ${direction}`}
+        >
+          <Dropdown.Item eventKey="1">Action</Dropdown.Item>
+          <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
+          <Dropdown.Item eventKey="3">Something else here</Dropdown.Item>
+          <Dropdown.Divider />
+          <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
+        </SplitButton>{' '}
+      </>
     ))}
-  </ButtonToolbar>
+  </div>
 </>;
