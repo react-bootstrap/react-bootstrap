@@ -1,4 +1,5 @@
 /* eslint-disable max-classes-per-file */
+
 import contains from 'dom-helpers/contains';
 import PropTypes from 'prop-types';
 import React, { cloneElement, useEffect, useRef, useState } from 'react';
@@ -80,8 +81,7 @@ const defaultProps = {
   trigger: ['hover', 'focus'],
 };
 
-// eslint-disable-next-line react/no-multi-comp
-const OverlayTrigger = ({
+function OverlayTrigger({
   trigger,
   overlay,
   children,
@@ -89,7 +89,7 @@ const OverlayTrigger = ({
   defaultShow,
   delay: delayProps,
   ...props
-}) => {
+}) {
   const triggerNode = useRef(null);
   const _timeout = useRef();
   const _hoverState = useRef();
@@ -247,9 +247,8 @@ const OverlayTrigger = ({
       </Overlay>
     </>
   );
-};
+}
 
-OverlayTrigger.displayName = 'OverlayTrigger';
 OverlayTrigger.propTypes = propTypes;
 OverlayTrigger.defaultProps = defaultProps;
 
