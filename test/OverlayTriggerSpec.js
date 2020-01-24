@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 
+import Overlay from '../src/Overlay';
 import OverlayTrigger from '../src/OverlayTrigger';
 import Popover from '../src/Popover';
 import Tooltip from '../src/Tooltip';
@@ -228,6 +229,142 @@ describe('<OverlayTrigger>', () => {
             .find('button')
             .simulate('click');
         });
+      });
+    });
+  });
+
+  describe('rootClose', () => {
+    [
+      {
+        label: 'true',
+        rootClose: true,
+        shownAfterClick: false,
+      },
+      {
+        label: 'default (false)',
+        rootClose: null,
+        shownAfterClick: true,
+      },
+    ].forEach(testCase => {
+      describe(testCase.label, () => {
+        it('Should have correct show state', () => {
+          const wrapper = mount(
+            <OverlayTrigger
+              overlay={<Div>test</Div>}
+              trigger="click"
+              rootClose={testCase.rootClose}
+            >
+              <button type="button">button</button>
+            </OverlayTrigger>,
+          );
+          wrapper.find('button').simulate('click');
+
+          expect(
+            wrapper
+              .update()
+              .find(Overlay)
+              .props().show,
+          ).to.equal(true);
+
+          // Need to click this way for it to propagate to document element.
+          document.documentElement.click();
+
+          expect(
+            wrapper
+              .update()
+              .find(Overlay)
+              .props().show,
+          ).to.equal(testCase.shownAfterClick);
+        });
+      });
+    });
+
+    describe('clicking on trigger to hide', () => {
+      it('should hide after clicking on trigger', () => {
+        const attachTo = document.createElement('div');
+        document.body.appendChild(attachTo);
+
+        const wrapper = mount(
+          <OverlayTrigger overlay={<Div>test</Div>} trigger="click" rootClose>
+            <button type="button">button</button>
+          </OverlayTrigger>,
+          { attachTo },
+        );
+
+        const [node] = wrapper.getDOMNode();
+        expect(
+          wrapper
+            .update()
+            .find(Overlay)
+            .props().show,
+        ).to.be.false;
+
+        node.click();
+        expect(
+          wrapper
+            .update()
+            .find(Overlay)
+            .props().show,
+        ).to.be.true;
+
+        // Need to click this way for it to propagate to document element.
+        node.click();
+        expect(
+          wrapper
+            .update()
+            .find(Overlay)
+            .props().show,
+        ).to.be.false;
+
+        wrapper.unmount();
+      });
+    });
+
+    describe('replaced overlay', () => {
+      it('Should still be shown', () => {
+        class ReplacedOverlay extends React.Component {
+          state = {
+            replaced: false,
+          };
+
+          handleClick = () => {
+            this.setState({ replaced: true });
+          };
+
+          render() {
+            if (this.state.replaced) {
+              return <div>replaced</div>;
+            }
+
+            return (
+              <div>
+                <a id="replace-overlay" onClick={this.handleClick}>
+                  original
+                </a>
+              </div>
+            );
+          }
+        }
+
+        const wrapper = mount(
+          <OverlayTrigger
+            overlay={<ReplacedOverlay />}
+            trigger="click"
+            rootClose
+          >
+            <button type="button">button</button>
+          </OverlayTrigger>,
+        );
+
+        wrapper.find('button').simulate('click');
+
+        // Need to click this way for it to propagate to document element.
+        document.getElementById('replace-overlay').click();
+
+        wrapper
+          .update()
+          .find(Overlay)
+          .props().show.should.be.true;
       });
     });
   });
