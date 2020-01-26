@@ -94,7 +94,7 @@
     "codecov": "^3.6.1",
     "conventional-changelog-cli": "^2.0.31",
     "cpy-cli": "^3.0.0",
-    "cross-env": "^6.0.3",
+    "cross-env": "^7.0.0",
     "dtslint": "^2.0.5",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
