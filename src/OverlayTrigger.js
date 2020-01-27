@@ -1,12 +1,8 @@
 import contains from 'dom-helpers/contains';
 import PropTypes from 'prop-types';
-import React, {
-  cloneElement,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { cloneElement, useCallback, useRef, useState } from 'react';
+import useTimeout from '@restart/hooks/useTimeout';
+import useWillUnmount from '@restart/hooks/useWillUnmount';
 import ReactDOM from 'react-dom';
 import warning from 'warning';
 import Overlay from './Overlay';
@@ -114,15 +110,11 @@ function OverlayTrigger({
   ...props
 }) {
   const triggerNodeRef = useRef(null);
-  const timeoutRef = useRef();
+  const timeout = useTimeout();
   const hoverStateRef = useRef();
   const [show, setShow] = useState(!!defaultShow);
 
-  useEffect(() => {
-    return () => {
-      clearTimeout(timeoutRef.current);
-    };
-  }, []);
+  useWillUnmount(() => timeout.clear());
 
   const delay = normalizeDelay(propsDelay);
 
@@ -135,7 +127,7 @@ function OverlayTrigger({
   );
 
   const handleShow = useCallback(() => {
-    clearTimeout(timeoutRef.current);
+    timeout.clear();
     hoverStateRef.current = 'show';
 
     if (!delay.show) {
@@ -143,13 +135,13 @@ function OverlayTrigger({
       return;
     }
 
-    timeoutRef.current = setTimeout(() => {
+    timeout.set(() => {
       if (hoverStateRef.current === 'show') setShow(true);
     }, delay.show);
-  }, [delay.show]);
+  }, [delay.show, timeout]);
 
   const handleHide = useCallback(() => {
-    clearTimeout(timeoutRef.current);
+    timeout.clear();
     hoverStateRef.current = 'hide';
 
     if (!delay.hide) {
@@ -157,10 +149,10 @@ function OverlayTrigger({
       return;
     }
 
-    timeoutRef.current = setTimeout(() => {
+    timeout.set(() => {
       if (hoverStateRef.current === 'hide') setShow(false);
     }, delay.hide);
-  }, [delay.hide]);
+  }, [delay.hide, timeout]);
 
   const handleFocus = useCallback(
     e => {
