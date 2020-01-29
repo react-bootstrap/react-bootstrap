@@ -2,7 +2,6 @@ import contains from 'dom-helpers/contains';
 import PropTypes from 'prop-types';
 import React, { cloneElement, useCallback, useRef, useState } from 'react';
 import useTimeout from '@restart/hooks/useTimeout';
-import useWillUnmount from '@restart/hooks/useWillUnmount';
 import ReactDOM from 'react-dom';
 import warning from 'warning';
 import Overlay from './Overlay';
@@ -113,8 +112,6 @@ function OverlayTrigger({
   const timeout = useTimeout();
   const hoverStateRef = useRef();
   const [show, setShow] = useState(!!defaultShow);
-
-  useWillUnmount(() => timeout.clear());
 
   const delay = normalizeDelay(propsDelay);
 
