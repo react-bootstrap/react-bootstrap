@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 
+import Overlay from '../src/Overlay';
 import OverlayTrigger from '../src/OverlayTrigger';
 import Popover from '../src/Popover';
 import Tooltip from '../src/Tooltip';
@@ -258,12 +259,22 @@ describe('<OverlayTrigger>', () => {
           );
           wrapper.find('button').simulate('click');
 
-          expect(wrapper.state('show')).to.equal(true);
+          expect(
+            wrapper
+              .update()
+              .find(Overlay)
+              .props().show,
+          ).to.equal(true);
 
           // Need to click this way for it to propagate to document element.
           document.documentElement.click();
 
-          expect(wrapper.state('show')).to.equal(testCase.shownAfterClick);
+          expect(
+            wrapper
+              .update()
+              .find(Overlay)
+              .props().show,
+          ).to.equal(testCase.shownAfterClick);
         });
       });
     });
@@ -281,14 +292,29 @@ describe('<OverlayTrigger>', () => {
         );
 
         const [node] = wrapper.getDOMNode();
-        expect(wrapper.state('show')).to.be.false;
+        expect(
+          wrapper
+            .update()
+            .find(Overlay)
+            .props().show,
+        ).to.be.false;
 
         node.click();
-        expect(wrapper.state('show')).to.be.true;
+        expect(
+          wrapper
+            .update()
+            .find(Overlay)
+            .props().show,
+        ).to.be.true;
 
         // Need to click this way for it to propagate to document element.
         node.click();
-        expect(wrapper.state('show')).to.be.false;
+        expect(
+          wrapper
+            .update()
+            .find(Overlay)
+            .props().show,
+        ).to.be.false;
 
         wrapper.unmount();
       });
@@ -335,7 +361,10 @@ describe('<OverlayTrigger>', () => {
         // Need to click this way for it to propagate to document element.
         document.getElementById('replace-overlay').click();
 
-        wrapper.state('show').should.be.true;
+        wrapper
+          .update()
+          .find(Overlay)
+          .props().show.should.be.true;
       });
     });
   });
