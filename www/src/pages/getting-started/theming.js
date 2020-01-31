@@ -37,7 +37,7 @@ export default withLayout(function ThemingSection() {
       </LinkedHeading>
       <p>
         In some cases you may need to change the base class "prefix" of one or
-        more Components. You can control how a Component prefixes it's classes
+        more Components. You can control how a Component prefixes its classes
         locally by changing the <code>bsPrefix</code> prop. Or globally via the{' '}
         <code>ThemeProvider</code> Component.
       </p>
