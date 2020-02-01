@@ -27,7 +27,7 @@ export interface ButtonProps {
   type?: 'button' | 'reset' | 'submit';
   href?: string;
   disabled?: boolean;
-  onClick: (event: React.MouseEvent) => void;
+  onClick?: (event: React.MouseEvent) => void;
 }
 
 declare class Button<
