@@ -12,6 +12,8 @@ import ListGroupDisabled from '../../examples/ListGroup/Disabled';
 import ListGroupStyle from '../../examples/ListGroup/Style';
 import ListGroupStyleActions from '../../examples/ListGroup/StyleActions';
 import ListGroupFlush from '../../examples/ListGroup/Flush';
+import ListGroupHorizontal from '../../examples/ListGroup/Horizontal';
+import ListGroupHorizontalResponsive from '../../examples/ListGroup/HorizontalResponsive';
 import ListGroupTabs from '../../examples/ListGroup/Tabs';
 
 import styles from '../../css/examples.module.scss';
@@ -43,7 +45,7 @@ Set the `active` prop to indicate the list groups current active selection.
 
 ### Disabled items
 
-Set the `disabled` prop to prevent actions on a `<List.Item>`. For elements
+Set the `disabled` prop to prevent actions on a `<ListGroup.Item>`. For elements
 that aren't naturally disable-able (like anchors) `onClick` handlers are added
 that call `preventDefault` to mimick disabled behavior.
 
@@ -58,7 +60,7 @@ that call `preventDefault` to mimick disabled behavior.
 Toggle the `action` prop to create <em>actionable</em> list group
 items, with disabled, hover and active styles. List item actions will render
 a `<button>` or `<a>` (depending on the presence of an `href`) by default but
-can be overriden by setting the `as` prop as usual.
+can be overridden by setting the `as` prop as usual.
 
 List items `actions` are distinct from plain items to ensure that click or tap
 affordances aren't applied to non-interactive items.
@@ -78,9 +80,25 @@ edge-to-edge in a parent container [such as a `Card`](/components/cards/#list-gr
   exampleClassName={styles.listGroup}
 />
 
+### Horizontal
+
+Use the `horizontal` prop to make the ListGroup render horizontally. Currently **horizontal list groups cannot be combined with flush list groups.**
+
+<ReactPlayground
+  codeText={ListGroupHorizontal}
+  exampleClassName={styles.listGroup}
+/>
+
+There are responsive variants to `horizontal`: setting it to `{sm|md|lg|xl}` makes the list group horizontal starting at that breakpoint’s `min-width`.
+
+<ReactPlayground
+  codeText={ListGroupHorizontalResponsive}
+  exampleClassName={styles.listGroup}
+/>
+
 ### Contextual classes
 
-Use contextual variants on `<List.Item>`s to style them with a stateful background and color.
+Use contextual variants on `<ListGroup.Item>`s to style them with a stateful background and color.
 
 <ReactPlayground
   codeText={ListGroupStyle}

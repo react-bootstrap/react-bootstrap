@@ -1,13 +1,12 @@
 module.exports = api => {
-  let dev = false;
-  let modules = true;
+  const env = api.env();
 
-  switch (api.env()) {
+  let dev = false;
+  let modules;
+
+  switch (env) {
     case 'docs':
     case 'test':
-      dev = true;
-      modules = false;
-      break;
     case 'dist-dev':
       dev = true;
       modules = false;
@@ -16,38 +15,22 @@ module.exports = api => {
     case 'esm':
       modules = false;
       break;
-    case 'build':
+    case 'cjs':
     default:
-      break;
+      modules = 'commonjs';
   }
 
   return {
     presets: [
       [
-        '@babel/preset-env',
+        '@react-bootstrap',
         {
-          loose: true,
-          shippedProposals: true,
-          modules: modules ? 'commonjs' : false,
-          targets: {
-            browsers: ['last 4 versions', 'not ie <= 8'],
-          },
+          dev,
+          modules,
+          removePropTypes: !dev,
         },
       ],
-      ['@babel/preset-react', { development: dev }],
     ],
-    plugins: [
-      ['@babel/plugin-proposal-class-properties', { loose: true }],
-      '@babel/plugin-proposal-export-default-from',
-      '@babel/plugin-proposal-export-namespace-from',
-      ['@babel/plugin-transform-runtime', { useESModules: !modules }],
-      'babel-plugin-dev-expression',
-      modules && 'babel-plugin-add-module-exports',
-      api.env() === 'test' && 'babel-plugin-istanbul',
-      !dev && [
-        'transform-react-remove-prop-types',
-        { removeImport: true, additionalLibraries: ['prop-types-extra'] },
-      ],
-    ].filter(Boolean),
+    plugins: [env === 'test' && 'istanbul'].filter(Boolean),
   };
 };

@@ -29,8 +29,12 @@ module.exports = config => {
           },
         ],
       },
+      resolve: {
+        symlinks: false,
+      },
       plugins: [
         new DefinePlugin({
+          __DEV__: true,
           'process.env.NODE_ENV': JSON.stringify('test'),
         }),
       ],
@@ -51,13 +55,6 @@ module.exports = config => {
     coverageReporter: {
       type: 'lcov',
       dir: 'coverage',
-    },
-
-    customLaunchers: {
-      ChromeCi: {
-        base: 'Chrome',
-        flags: ['--no-sandbox'],
-      },
     },
 
     browsers: env.BROWSER ? env.BROWSER.split(',') : ['Chrome'],

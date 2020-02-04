@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
-import { css } from 'css-literal-loader/styled';
+import { css } from 'astroturf';
 
 const styles = css`
   .wrapper {

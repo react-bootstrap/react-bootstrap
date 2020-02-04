@@ -20,6 +20,10 @@ describe('Table', () => {
     mount(<Table bordered />).assertSingle('table.table-bordered');
   });
 
+  it('Should have correct class when borderless', () => {
+    mount(<Table borderless />).assertSingle('table.table-borderless');
+  });
+
   it('Should have correct class when small', () => {
     mount(<Table size="sm" />).assertSingle('table.table-sm');
   });

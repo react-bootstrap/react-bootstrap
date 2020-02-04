@@ -1,43 +1,52 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import React from 'react';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-class Row extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'row'
-     */
-    bsPrefix: PropTypes.string.isRequired,
+const propTypes = {
+  /**
+   * @default 'row'
+   */
+  bsPrefix: PropTypes.string,
 
-    /** Removes the gutter spacing between `Col`s as well as any added negative margins. */
-    noGutters: PropTypes.bool.isRequired,
-    as: elementType,
-  };
+  /** Removes the gutter spacing between `Col`s as well as any added negative margins. */
+  noGutters: PropTypes.bool.isRequired,
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    as: 'div',
-    noGutters: false,
-  };
+const defaultProps = {
+  noGutters: false,
+};
 
-  render() {
-    const {
-      bsPrefix,
-      noGutters,
-      as: Component,
-      className,
-      ...props
-    } = this.props;
+const Row = React.forwardRef((props, ref) => {
+  const {
+    bsPrefix,
+    noGutters,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as: Component = 'div',
+    className,
+    ...otherProps
+  } = props;
 
-    return (
-      <Component
-        {...props}
-        className={classNames(className, bsPrefix, noGutters && 'no-gutters')}
-      />
-    );
-  }
-}
+  const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'row');
 
-export default createBootstrapComponent(Row, 'row');
+  return (
+    <Component
+      ref={ref}
+      {...otherProps}
+      className={classNames(
+        className,
+        decoratedBsPrefix,
+        noGutters && 'no-gutters',
+      )}
+    />
+  );
+});
+
+Row.displayName = 'Row';
+Row.propTypes = propTypes;
+Row.defaultProps = defaultProps;
+
+export default Row;

@@ -1,37 +1,37 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { elementType } from 'prop-types-extra';
 
-import createWithBsPrefix from './utils/createWithBsPrefix';
-import { createBootstrapComponent } from './ThemeProvider';
+import createWithBsPrefix from './createWithBsPrefix';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /**
    * @default 'media'
    */
-  bsPrefix: PropTypes.string.isRequired,
+  bsPrefix: PropTypes.string,
 
-  as: elementType,
+  as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  as: 'div',
-};
+const Media = React.forwardRef(
+  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+  ({ bsPrefix, className, as: Component = 'div', ...props }, ref) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'media');
 
-class Media extends React.Component {
-  render() {
-    const { bsPrefix, className, as: Component, ...props } = this.props;
+    return (
+      <Component
+        {...props}
+        ref={ref}
+        className={classNames(className, prefix)}
+      />
+    );
+  },
+);
 
-    return <Component {...props} className={classNames(className, bsPrefix)} />;
-  }
-}
-
+Media.displayName = 'Media';
 Media.propTypes = propTypes;
-Media.defaultProps = defaultProps;
 
-const DecoratedMedia = createBootstrapComponent(Media, 'media');
+Media.Body = createWithBsPrefix('media-body');
 
-DecoratedMedia.Body = createWithBsPrefix('media-body');
-
-export default DecoratedMedia;
+export default Media;

@@ -1,121 +1,120 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
-import { createBootstrapComponent } from './ThemeProvider';
-import createWithBsPrefix from './utils/createWithBsPrefix';
-import divWithClassName from './utils/divWithClassName';
+import { useBootstrapPrefix } from './ThemeProvider';
+import createWithBsPrefix from './createWithBsPrefix';
+import divWithClassName from './divWithClassName';
 import CardContext from './CardContext';
 import CardImg from './CardImg';
 
+const DivStyledAsH5 = divWithClassName('h5');
+const DivStyledAsH6 = divWithClassName('h6');
+
 const CardBody = createWithBsPrefix('card-body');
 
-class Card extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'card'
-     */
-    bsPrefix: PropTypes.string.isRequired,
+const propTypes = {
+  /**
+   * @default 'card'
+   */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * Sets card background
-     *
-     * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
-     */
-    bg: PropTypes.string,
+  /**
+   * Sets card background
+   *
+   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
+   */
+  bg: PropTypes.string,
 
-    /**
-     * Sets card text color
-     *
-     * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light'|'white'|'muted')}
-     */
-    text: PropTypes.string,
+  /**
+   * Sets card text color
+   *
+   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light'|'white'|'muted')}
+   */
+  text: PropTypes.string,
 
-    /**
-     * Sets card border color
-     *
-     * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
-     */
-    border: PropTypes.string,
+  /**
+   * Sets card border color
+   *
+   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
+   */
+  border: PropTypes.string,
 
-    /**
-     * When this prop is set, it creates a Card with a Card.Body inside
-     * passing the children directly to it
-     */
-    body: PropTypes.bool,
+  /**
+   * When this prop is set, it creates a Card with a Card.Body inside
+   * passing the children directly to it
+   */
+  body: PropTypes.bool,
 
-    as: elementType,
-  };
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    as: 'div',
-    body: false,
-  };
+const defaultProps = {
+  body: false,
+};
 
-  state = {};
-
-  static getDerivedStateFromProps({ bsPrefix }) {
-    return {
-      cardContext: {
-        cardHeaderBsPrefix: `${bsPrefix}-header`,
-      },
-    };
-  }
-
-  render() {
-    const {
+const Card = React.forwardRef(
+  (
+    {
       bsPrefix,
       className,
-      as: Component,
       bg,
       text,
       border,
       body,
       children,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
       ...props
-    } = this.props;
-
-    const classes = classNames(
-      className,
-      bsPrefix,
-      bg && `bg-${bg}`,
-      text && `text-${text}`,
-      border && `border-${border}`,
+    },
+    ref,
+  ) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'card');
+    const cardContext = useMemo(
+      () => ({
+        cardHeaderBsPrefix: `${prefix}-header`,
+      }),
+      [prefix],
     );
 
     return (
-      <CardContext.Provider value={this.state.cardContext}>
-        <Component className={classes} {...props}>
+      <CardContext.Provider value={cardContext}>
+        <Component
+          ref={ref}
+          {...props}
+          className={classNames(
+            className,
+            prefix,
+            bg && `bg-${bg}`,
+            text && `text-${text}`,
+            border && `border-${border}`,
+          )}
+        >
           {body ? <CardBody>{children}</CardBody> : children}
         </Component>
       </CardContext.Provider>
     );
-  }
-}
+  },
+);
 
-const DivStyledAsH5 = divWithClassName('h5');
-const DivStyledAsH6 = divWithClassName('h6');
+Card.displayName = 'Card';
+Card.propTypes = propTypes;
+Card.defaultProps = defaultProps;
 
-const DecoratedCard = createBootstrapComponent(Card, 'card');
-DecoratedCard.Img = CardImg;
+Card.Img = CardImg;
 
-DecoratedCard.Title = createWithBsPrefix('card-title', {
+Card.Title = createWithBsPrefix('card-title', {
   Component: DivStyledAsH5,
 });
-DecoratedCard.Subtitle = createWithBsPrefix('card-subtitle', {
+Card.Subtitle = createWithBsPrefix('card-subtitle', {
   Component: DivStyledAsH6,
 });
 
-DecoratedCard.Body = CardBody;
-DecoratedCard.Link = createWithBsPrefix('card-link', {
-  Component: 'a',
-});
-DecoratedCard.Text = createWithBsPrefix('card-text', {
-  Component: 'p',
-});
-DecoratedCard.Header = createWithBsPrefix('card-header');
-DecoratedCard.Footer = createWithBsPrefix('card-footer');
-DecoratedCard.ImgOverlay = createWithBsPrefix('card-img-overlay');
+Card.Body = CardBody;
+Card.Link = createWithBsPrefix('card-link', { Component: 'a' });
+Card.Text = createWithBsPrefix('card-text', { Component: 'p' });
+Card.Header = createWithBsPrefix('card-header');
+Card.Footer = createWithBsPrefix('card-footer');
+Card.ImgOverlay = createWithBsPrefix('card-img-overlay');
 
-export default DecoratedCard;
+export default Card;

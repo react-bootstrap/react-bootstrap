@@ -1,79 +1,76 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+import useEventCallback from '@restart/hooks/useEventCallback';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
 
-class NavbarToggle extends React.Component {
-  static propTypes = {
-    /** @default 'navbar-toggler' */
-    bsPrefix: PropTypes.string,
+const propTypes = {
+  /** @default 'navbar-toggler' */
+  bsPrefix: PropTypes.string,
 
-    /** An accessible ARIA label for the toggler button. */
-    label: PropTypes.string,
+  /** An accessible ARIA label for the toggler button. */
+  label: PropTypes.string,
 
-    /** @private */
-    onClick: PropTypes.func,
+  /** @private */
+  onClick: PropTypes.func,
 
-    /**
-     * The toggle content. When empty, the default toggle will be rendered.
-     */
-    children: PropTypes.node,
+  /**
+   * The toggle content. When empty, the default toggle will be rendered.
+   */
+  children: PropTypes.node,
 
-    as: elementType,
-  };
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    label: 'Toggle navigation',
-    as: 'button',
-  };
+const defaultProps = {
+  label: 'Toggle navigation',
+};
 
-  handleClick = e => {
-    const { onClick } = this.props;
-    const { onToggle } = this.navbarContext;
-
-    if (onClick) onClick(e);
-    if (onToggle) onToggle();
-  };
-
-  render() {
-    const {
+const NavbarToggle = React.forwardRef(
+  (
+    {
       bsPrefix,
       className,
       children,
       label,
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'button',
+      onClick,
       ...props
-    } = this.props;
+    },
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-toggler');
+
+    const { onToggle, expanded } = useContext(NavbarContext) || {};
+
+    const handleClick = useEventCallback(e => {
+      if (onClick) onClick(e);
+      if (onToggle) onToggle();
+    });
 
     if (Component === 'button') {
       props.type = 'button';
     }
 
     return (
-      <NavbarContext.Consumer>
-        {context => {
-          this.navbarContext = context || {};
-          return (
-            <Component
-              {...props}
-              onClick={this.handleClick}
-              aria-label={label}
-              className={classNames(
-                className,
-                bsPrefix,
-                !!(context && context.expanded) && 'collapsed',
-              )}
-            >
-              {children || <span className={`${bsPrefix}-icon`} />}
-            </Component>
-          );
-        }}
-      </NavbarContext.Consumer>
+      <Component
+        {...props}
+        ref={ref}
+        onClick={handleClick}
+        aria-label={label}
+        className={classNames(className, bsPrefix, !expanded && 'collapsed')}
+      >
+        {children || <span className={`${bsPrefix}-icon`} />}
+      </Component>
     );
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(NavbarToggle, 'navbar-toggler');
+NavbarToggle.displayName = 'NavbarToggle';
+NavbarToggle.propTypes = propTypes;
+NavbarToggle.defaultProps = defaultProps;
+
+export default NavbarToggle;

@@ -41,6 +41,52 @@ describe('<TabContainer>', () => {
     onSelect.should.have.been.calledOnce;
   });
 
+  it('should let generateChildId function create id', () => {
+    const generateChildIdSpy = sinon.spy(() => 'test-id');
+
+    let instance = mount(
+      <TabContainer generateChildId={generateChildIdSpy}>
+        <div>
+          <Nav>
+            <Nav.Item>
+              <Nav.Link eventKey="1">One</Nav.Link>
+            </Nav.Item>
+          </Nav>
+          <TabContent>
+            <TabPane eventKey="1" />
+          </TabContent>
+        </div>
+      </TabContainer>,
+    );
+
+    instance.assertSingle(`SafeAnchor[id="test-id"]`);
+  });
+
+  it('should throw an error if id is not set', () => {
+    try {
+      mount(
+        <TabContainer>
+          <div>
+            <Nav>
+              <Nav.Item>
+                <Nav.Link eventKey="1">One</Nav.Link>
+              </Nav.Item>
+            </Nav>
+            <TabContent>
+              <TabPane eventKey="1" />
+            </TabContent>
+          </div>
+        </TabContainer>,
+      );
+    } catch (error) {
+      expect(error.message).to.contain(
+        'In order to properly initialize Tabs in a way that is accessible ' +
+          'to assistive technologies (such as screen readers) an `id` or a ' +
+          '`generateChildId` prop to TabContainer is required',
+      );
+    }
+  });
+
   it('should match up ids', () => {
     let instance = mount(
       <TabContainer id="custom-id">
@@ -86,12 +132,7 @@ describe('<TabContainer>', () => {
         </div>
       </TabContainer>,
     );
-
-    instance
-      .find('Nav')
-      .getDOMNode()
-      .getAttribute('role')
-      .should.equal('tablist');
+    instance.assertSingle('div.nav[role="tablist"]');
 
     instance
       .find('NavLink a')
@@ -116,11 +157,7 @@ describe('<TabContainer>', () => {
       </TabContainer>,
     );
 
-    instance
-      .find('Nav')
-      .getDOMNode()
-      .getAttribute('role')
-      .should.equal('navigation');
+    instance.assertSingle('div.nav[role="navigation"]');
 
     // make sure its not passed to the Nav.Link
     expect(

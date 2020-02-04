@@ -1,20 +1,20 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
-import uncontrollable from 'uncontrollable';
 
-import createWithBsPrefix from './utils/createWithBsPrefix';
+import { useUncontrolled } from 'uncontrollable';
+
+import createWithBsPrefix from './createWithBsPrefix';
 import NavbarBrand from './NavbarBrand';
 import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
 import SelectableContext from './SelectableContext';
 
 const propTypes = {
   /** @default 'navbar' */
-  bsPrefix: PropTypes.string.isRequired,
+  bsPrefix: PropTypes.string,
 
   /**
    * The general visual variant a the Navbar.
@@ -56,7 +56,7 @@ const propTypes = {
   /**
    * Set a custom element for this component.
    */
-  as: elementType,
+  as: PropTypes.elementType,
 
   /**
    * A callback fired when the `<Navbar>` body collapses or expands. Fired when
@@ -117,112 +117,95 @@ const propTypes = {
 };
 
 const defaultProps = {
-  as: 'nav',
   expand: true,
   variant: 'light',
   collapseOnSelect: false,
 };
 
-class Navbar extends React.Component {
-  constructor(...args) {
-    super(...args);
+const Navbar = React.forwardRef((props, ref) => {
+  let {
+    bsPrefix,
+    expand,
+    variant,
+    bg,
+    fixed,
+    sticky,
+    className,
+    children,
+    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+    as: Component = 'nav',
+    expanded,
+    onToggle,
+    onSelect,
+    collapseOnSelect,
+    ...controlledProps
+  } = useUncontrolled(props, {
+    expanded: 'onToggle',
+  });
 
-    this.state = {
-      navbarContext: {
-        onToggle: this.handleToggle,
-      },
-    };
+  bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar');
+
+  const handleCollapse = useCallback(
+    (...args) => {
+      if (onSelect) onSelect(...args);
+      if (collapseOnSelect && expanded) {
+        onToggle(false);
+      }
+    },
+    [onSelect, collapseOnSelect, expanded, onToggle],
+  );
+
+  // will result in some false positives but that seems better
+  // than false negatives. strict `undefined` check allows explicit
+  // "nulling" of the role if the user really doesn't want one
+  if (controlledProps.role === undefined && Component !== 'nav') {
+    controlledProps.role = 'navigation';
   }
+  let expandClass = `${bsPrefix}-expand`;
+  if (typeof expand === 'string') expandClass = `${expandClass}-${expand}`;
 
-  static getDerivedStateFromProps({ bsPrefix, expanded }, prevState) {
-    return {
-      navbarContext: {
-        ...prevState.navbarContext,
-        bsPrefix,
-        expanded,
-      },
-    };
-  }
-
-  handleCollapse = (...args) => {
-    const { onToggle, expanded, collapseOnSelect, onSelect } = this.props;
-
-    if (onSelect) onSelect(...args);
-    if (collapseOnSelect && expanded) {
-      onToggle(false);
-    }
-  };
-
-  handleToggle = () => {
-    const { onToggle, expanded } = this.props;
-
-    onToggle(!expanded);
-  };
-
-  render() {
-    const {
+  const navbarContext = useMemo(
+    () => ({
+      onToggle: () => onToggle(!expanded),
       bsPrefix,
-      expand,
-      variant,
-      bg,
-      fixed,
-      sticky,
-      className,
-      children,
-      as: Component,
-      expanded: _1,
-      onToggle: _2,
-      onSelect: _3,
-      collapseOnSelect: _4,
-      ...props
-    } = this.props;
+      expanded,
+    }),
+    [bsPrefix, expanded, onToggle],
+  );
 
-    // will result in some false positives but that seems better
-    // than false negatives. strict `undefined` check allows explicit
-    // "nulling" of the role if the user really doesn't want one
-    if (props.role === undefined && Component !== 'nav') {
-      props.role = 'navigation';
-    }
-    let expandClass = `${bsPrefix}-expand`;
-    if (typeof expand === 'string') expandClass = `${expandClass}-${expand}`;
-
-    return (
-      <NavbarContext.Provider value={this.state.navbarContext}>
-        <SelectableContext.Provider value={this.handleCollapse}>
-          <Component
-            {...props}
-            className={classNames(
-              className,
-              bsPrefix,
-              expand && expandClass,
-              variant && `${bsPrefix}-${variant}`,
-              bg && `bg-${bg}`,
-              sticky && `sticky-${sticky}`,
-              fixed && `fixed-${fixed}`,
-            )}
-          >
-            {children}
-          </Component>
-        </SelectableContext.Provider>
-      </NavbarContext.Provider>
-    );
-  }
-}
+  return (
+    <NavbarContext.Provider value={navbarContext}>
+      <SelectableContext.Provider value={handleCollapse}>
+        <Component
+          ref={ref}
+          {...controlledProps}
+          className={classNames(
+            className,
+            bsPrefix,
+            expand && expandClass,
+            variant && `${bsPrefix}-${variant}`,
+            bg && `bg-${bg}`,
+            sticky && `sticky-${sticky}`,
+            fixed && `fixed-${fixed}`,
+          )}
+        >
+          {children}
+        </Component>
+      </SelectableContext.Provider>
+    </NavbarContext.Provider>
+  );
+});
 
 Navbar.propTypes = propTypes;
 Navbar.defaultProps = defaultProps;
+Navbar.displayName = 'Navbar';
 
-const DecoratedNavbar = createBootstrapComponent(
-  uncontrollable(Navbar, { expanded: 'onToggle' }),
-  'navbar',
-);
+Navbar.Brand = NavbarBrand;
+Navbar.Toggle = NavbarToggle;
+Navbar.Collapse = NavbarCollapse;
 
-DecoratedNavbar.Brand = NavbarBrand;
-DecoratedNavbar.Toggle = NavbarToggle;
-DecoratedNavbar.Collapse = NavbarCollapse;
-
-DecoratedNavbar.Text = createWithBsPrefix('navbar-text', {
+Navbar.Text = createWithBsPrefix('navbar-text', {
   Component: 'span',
 });
 
-export default DecoratedNavbar;
+export default Navbar;

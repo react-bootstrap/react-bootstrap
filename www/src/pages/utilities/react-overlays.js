@@ -17,10 +17,15 @@ export default withLayout(function ReactOverlaysSection() {
         Often times you may need a more generic or low-level version of a
         Bootstrap component. Many of the <code>react-bootstrap</code> components
         are built on top of components from{' '}
-        <a href="https://react-bootstrap.github.io/react-overlays/">
+        <a
+          href="https://react-bootstrap.github.io/react-overlays/"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           react-overlays
-        </a>, if you find yourself at the limit of a Bootstrap component,
-        consider using the <code>react-overlays</code> base component directly.
+        </a>
+        , if you find yourself at the limit of a Bootstrap component, consider
+        using the <code>react-overlays</code> base component directly.
       </p>
     </>
   );

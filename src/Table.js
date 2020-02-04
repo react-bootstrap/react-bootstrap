@@ -1,82 +1,89 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-import { createBootstrapComponent } from './ThemeProvider';
+const propTypes = {
+  /**
+   * @default 'table'
+   */
+  bsPrefix: PropTypes.string,
 
-class Table extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'table'
-     */
-    bsPrefix: PropTypes.string,
+  /**
+   * Adds zebra-striping to any table row within the `<tbody>`.
+   */
+  striped: PropTypes.bool,
 
-    /**
-     * Adds zebra-striping to any table row within the `<tbody>`.
-     */
-    striped: PropTypes.bool,
+  /**
+   * Adds borders on all sides of the table and cells.
+   */
+  bordered: PropTypes.bool,
 
-    /**
-     * Adds borders on all sides of the table and cells.
-     */
-    bordered: PropTypes.bool,
+  /**
+   * Removes all borders on the table and cells, including table header.
+   */
+  borderless: PropTypes.bool,
 
-    /**
-     * Enable a hover state on table rows within a `<tbody>`.
-     */
-    hover: PropTypes.bool,
+  /**
+   * Enable a hover state on table rows within a `<tbody>`.
+   */
+  hover: PropTypes.bool,
 
-    /**
-     * Make tables more compact by cutting cell padding in half by setting
-     * size as `sm`.
-     */
-    size: PropTypes.string,
+  /**
+   * Make tables more compact by cutting cell padding in half by setting
+   * size as `sm`.
+   */
+  size: PropTypes.string,
 
-    /**
-     * Invert the colors of the table — with light text on dark backgrounds
-     * by setting variant as `dark`.
-     */
-    variant: PropTypes.string,
+  /**
+   * Invert the colors of the table — with light text on dark backgrounds
+   * by setting variant as `dark`.
+   */
+  variant: PropTypes.string,
 
-    /**
-     * Responsive tables allow tables to be scrolled horizontally with ease.
-     * Across every breakpoint, use `responsive` for horizontally
-     * scrolling tables. Responsive tables are wrapped automatically in a `div`.
-     * Use `responsive="sm"`, `responsive="md"`, `responsive="lg"`, or
-     * `responsive="xl"` as needed to create responsive tables up to
-     * a particular breakpoint. From that breakpoint and up, the table will
-     * behave normally and not scroll horizontally.
-     */
-    responsive: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
-  };
+  /**
+   * Responsive tables allow tables to be scrolled horizontally with ease.
+   * Across every breakpoint, use `responsive` for horizontally
+   * scrolling tables. Responsive tables are wrapped automatically in a `div`.
+   * Use `responsive="sm"`, `responsive="md"`, `responsive="lg"`, or
+   * `responsive="xl"` as needed to create responsive tables up to
+   * a particular breakpoint. From that breakpoint and up, the table will
+   * behave normally and not scroll horizontally.
+   */
+  responsive: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+};
 
-  render() {
-    const {
+const Table = React.forwardRef(
+  (
+    {
       bsPrefix,
       className,
       striped,
       bordered,
+      borderless,
       hover,
       size,
       variant,
       responsive,
       ...props
-    } = this.props;
-
+    },
+    ref,
+  ) => {
+    const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'table');
     const classes = classNames(
-      bsPrefix,
       className,
-      variant && `${bsPrefix}-${variant}`,
-      size && `${bsPrefix}-${size}`,
-      striped && `${bsPrefix}-striped`,
-      bordered && `${bsPrefix}-bordered`,
-      hover && `${bsPrefix}-hover`,
+      decoratedBsPrefix,
+      variant && `${decoratedBsPrefix}-${variant}`,
+      size && `${decoratedBsPrefix}-${size}`,
+      striped && `${decoratedBsPrefix}-striped`,
+      bordered && `${decoratedBsPrefix}-bordered`,
+      borderless && `${decoratedBsPrefix}-borderless`,
+      hover && `${decoratedBsPrefix}-hover`,
     );
 
-    const table = <table {...props} className={classes} />;
-
+    const table = <table {...props} className={classes} ref={ref} />;
     if (responsive) {
-      let responsiveClass = `${bsPrefix}-responsive`;
+      let responsiveClass = `${decoratedBsPrefix}-responsive`;
       if (typeof responsive === 'string') {
         responsiveClass = `${responsiveClass}-${responsive}`;
       }
@@ -85,7 +92,9 @@ class Table extends React.Component {
     }
 
     return table;
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(Table, 'table');
+Table.propTypes = propTypes;
+
+export default Table;

@@ -27,6 +27,13 @@ describe('<FormLabel>', () => {
       </FormLabel>,
     ).assertSingle('label.col-sm-4.col-form-label');
   });
+  it('should use controlId for htmlFor when render as Col', () => {
+    mount(
+      <FormGroup controlId="foo">
+        <FormLabel column sm={4} />
+      </FormGroup>,
+    ).assertSingle('label[htmlFor="foo"].col-sm-4.col-form-label');
+  });
 
   it('should respect srOnly', () => {
     mount(<FormLabel srOnly>Label</FormLabel>).assertSingle(
@@ -62,5 +69,21 @@ describe('<FormLabel>', () => {
 
     const instance = mount(<Container />).instance();
     expect(instance.input.tagName).to.equal('LABEL');
+  });
+
+  it('should properly size itself when rendered as a Col', () => {
+    mount(<FormLabel column="sm">Label</FormLabel>).assertSingle(
+      'label.col-form-label-sm',
+    );
+    mount(<FormLabel column>Label</FormLabel>).assertSingle(
+      'label.col-form-label',
+    );
+    mount(<FormLabel column="lg">Label</FormLabel>).assertSingle(
+      'label.col-form-label-lg',
+    );
+    let labelComponent = mount(<FormLabel>Label</FormLabel>);
+    labelComponent.assertNone('label.col-form-label');
+    labelComponent.assertNone('label.col-form-label-sm');
+    labelComponent.assertNone('label.col-form-label-lg');
   });
 });

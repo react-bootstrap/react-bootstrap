@@ -15,20 +15,20 @@ export default withLayout(function ThemingSection() {
       </LinkedHeading>
 
       <p>
-        Generally, if you stick to the bootstrap defined classes and variants,
+        Generally, if you stick to the Bootstrap defined classes and variants,
         there isn't anything you need to do to use a custom theme with
-        ReactBootstrap, it just works. There are plently of cases tho where you
-        want to color outside the lines and we try to make that easy to do.
+        React-Bootstrap. It just works. But we also make coloring outside the
+        lines easy to do.
       </p>
       <LinkedHeading h="2" id="custom-styles-variants">
         New variants and sizes
       </LinkedHeading>
       <p>
-        Custom variants and sizes to should follow the leapatternd of the
-        default bootstrap variants, and define css classes matching:{' '}
-        <code>compontent-*</code>. React bootstrap builds the component
-        classNames in a consistent way that you can rely on. For instance this
-        custom Button.
+        Custom variants and sizes should follow the pattern of the default
+        bootstrap variants, and define css classes matching:{' '}
+        <code>component-*</code>. React bootstrap builds the component
+        <code>classNames</code> in a consistent way that you can rely on. For
+        instance this custom Button.
       </p>
       <ReactPlayground codeText={Variants} />
 
@@ -37,12 +37,12 @@ export default withLayout(function ThemingSection() {
       </LinkedHeading>
       <p>
         In some cases you may need to change the base class "prefix" of one or
-        more Components. You can control how a Component prefixes it's classes
-        locallyy by changing the <code>bsPrefix</code> prop. Or globally via the{' '}
+        more Components. You can control how a Component prefixes its classes
+        locally by changing the <code>bsPrefix</code> prop. Or globally via the{' '}
         <code>ThemeProvider</code> Component.
       </p>
       <Callout theme="warning">
-        Changing prefixes is an escape hatch and generally shouldn't be used
+        Changing prefixes is an escape hatch and generally shouldn't be used.
       </Callout>
       <ReactPlayground codeText={Prefixes} />
     </>

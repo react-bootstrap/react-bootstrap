@@ -43,7 +43,7 @@ Use `<Card.Body>` to pad content inside a `<Card>`.
 
 <ReactPlayground codeText={CardBodyOnly} />
 
-Alernatively, you can use this shorthand version for Cards with body
+Alternatively, you can use this shorthand version for Cards with body
 only, and no other children
 
 <ReactPlayground codeText={CardBodyShorthand} />
@@ -164,6 +164,9 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     CardGroup: componentMetadata(displayName: { eq: "CardGroup" }) {
+      ...ComponentApi_metadata
+    }
+    CardColumns: componentMetadata(displayName: { eq: "CardColumns" }) {
       ...ComponentApi_metadata
     }
   }

@@ -1,12 +1,12 @@
 import classNames from 'classnames';
-import React from 'react';
+import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
+import React, { useCallback } from 'react';
 import Transition, {
   ENTERED,
   ENTERING,
 } from 'react-transition-group/Transition';
-import onEnd from 'dom-helpers/transition/end';
-import triggerBrowserReflow from './utils/triggerBrowserReflow';
+import triggerBrowserReflow from './triggerBrowserReflow';
 
 const propTypes = {
   /**
@@ -76,34 +76,39 @@ const fadeStyles = {
   [ENTERED]: 'show',
 };
 
-class Fade extends React.Component {
-  handleEnter = node => {
-    triggerBrowserReflow(node);
-    if (this.props.onEnter) this.props.onEnter(node);
-  };
+const Fade = React.forwardRef(({ className, children, ...props }, ref) => {
+  const handleEnter = useCallback(
+    node => {
+      triggerBrowserReflow(node);
+      if (props.onEnter) props.onEnter(node);
+    },
+    [props],
+  );
 
-  render() {
-    const { className, children, ...props } = this.props;
-
-    return (
-      <Transition addEndListener={onEnd} {...props} onEnter={this.handleEnter}>
-        {(status, innerProps) =>
-          React.cloneElement(children, {
-            ...innerProps,
-            className: classNames(
-              'fade',
-              className,
-              children.props.className,
-              fadeStyles[status],
-            ),
-          })
-        }
-      </Transition>
-    );
-  }
-}
+  return (
+    <Transition
+      ref={ref}
+      addEndListener={transitionEnd}
+      {...props}
+      onEnter={handleEnter}
+    >
+      {(status, innerProps) =>
+        React.cloneElement(children, {
+          ...innerProps,
+          className: classNames(
+            'fade',
+            className,
+            children.props.className,
+            fadeStyles[status],
+          ),
+        })
+      }
+    </Transition>
+  );
+});
 
 Fade.propTypes = propTypes;
 Fade.defaultProps = defaultProps;
+Fade.displayName = 'Fade';
 
 export default Fade;

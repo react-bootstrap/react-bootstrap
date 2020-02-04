@@ -1,14 +1,16 @@
+import styled from 'astroturf';
 import { graphql } from 'gatsby';
-
-import sortBy from 'lodash/sortBy';
 import capitalize from 'lodash/capitalize';
-import React from 'react';
+import sortBy from 'lodash/sortBy';
 import PropTypes from 'prop-types';
+import React from 'react';
+import Badge from 'react-bootstrap/Badge';
+import Table from 'react-bootstrap/Table';
 
-import Badge from 'react-bootstrap/lib/Badge';
-import Table from 'react-bootstrap/lib/Table';
-
-import { styled } from 'css-literal-loader/styled';
+function getDoclet(doclets = [], tag) {
+  const doclet = doclets.find(d => d.tag === tag);
+  return doclet && doclet.value;
+}
 
 const Code = styled('code')`
   white-space: nowrap;
@@ -34,11 +36,15 @@ function getDisplayTypeName(typeName) {
 
   return typeName;
 }
+
 function getTypeName(prop) {
   const type = prop.type || {};
-  let name = getDisplayTypeName(type.name);
-  let doclets = prop.doclets || {};
-  if (name === 'custom') return cleanDocletValue(doclets.type || type.raw);
+  const name = getDisplayTypeName(type.name);
+
+  if (name === 'custom') {
+    const dType = getDoclet(prop.doclets, 'type');
+    return cleanDocletValue((dType && dType.value) || type.raw);
+  }
   return name;
 }
 
@@ -50,7 +56,7 @@ class PropTable extends React.Component {
   getType(prop) {
     let type = prop.type || {};
     let name = getDisplayTypeName(type.name);
-    let doclets = prop.doclets || {};
+    const docletType = getDoclet(prop.doclets, 'type');
 
     switch (name) {
       case 'object':
@@ -79,25 +85,27 @@ class PropTable extends React.Component {
       case 'enum':
         return this.renderEnum(type);
       case 'custom':
-        return cleanDocletValue(doclets.type || type.raw);
+        return cleanDocletValue(docletType || type.raw);
       default:
         return name;
     }
   }
 
   _renderRows(propsData) {
-    return sortBy(propsData, _ => (_.name === 'bsPrefix' ? 'zzzzzz' : _.name))
+    return sortBy(propsData, _ => (_.name.startsWith('bs') ? 'zzzzzz' : _.name))
       .filter(
         prop => prop.type && !prop.doclets.private && !prop.doclets.ignore,
       )
       .map(propData => {
         const { name, description, doclets } = propData;
+        const alias = getDoclet(doclets, 'alias');
+        const deprecated = getDoclet(doclets, 'deprecated');
         let descHtml = description && description.childMarkdownRemark.html;
 
         return (
           <tr key={name} className="prop-table-row">
             <td className="text-monospace">
-              {name} {this.renderRequiredBadge(propData)}
+              {alias || name} {this.renderRequiredBadge(propData)}
             </td>
             <td className="text-monospace">
               <div>{this.getType(propData)}</div>
@@ -106,10 +114,10 @@ class PropTable extends React.Component {
             <td>{this.renderDefaultValue(propData)}</td>
 
             <td>
-              {doclets.deprecated && (
+              {!!deprecated && (
                 <div className="mb-1">
                   <strong className="text-danger">
-                    {`Deprecated: ${doclets.deprecated} `}
+                    {`Deprecated: ${deprecated} `}
                   </strong>
                 </div>
               )}
@@ -130,8 +138,8 @@ class PropTable extends React.Component {
   }
 
   renderControllableNote(prop, propName) {
-    let controllable = prop.doclets.controllable;
-    let isHandler = getDisplayTypeName(prop.type.name) === 'function';
+    const controllable = getDoclet(prop.doclets, 'controllable');
+    const isHandler = getDisplayTypeName(prop.type.name) === 'function';
 
     if (!controllable) {
       return false;
@@ -193,17 +201,19 @@ class PropTable extends React.Component {
     }
 
     return (
-      <Table bordered striped className="bg-white mt-4 mb-5" responsive="sm">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Default</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>{this._renderRows(propsData)}</tbody>
-      </Table>
+      <div className="overflow-auto mt-4 mb-5 border border-light">
+        <Table bordered striped className="bg-white mb-0">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>{this._renderRows(propsData)}</tbody>
+        </Table>
+      </div>
     );
   }
 }

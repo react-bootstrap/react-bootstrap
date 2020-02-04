@@ -6,6 +6,7 @@ import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import NavAlignement from '../../examples/Nav/Alignment';
 import NavBasic from '../../examples/Nav/Basic';
+import NavList from '../../examples/Nav/List';
 import NavDropdown from '../../examples/Nav/Dropdown';
 import NavDropdownImpl from '../../examples/Nav/DropdownImpl';
 import NavFill from '../../examples/Nav/Fill';
@@ -51,6 +52,18 @@ components.
 
 <ReactPlayground codeText={NavBasic} />
 
+`<Nav>` markup is very flexible and styling is controlled via classes so you can
+use whatever elements you like to build your navs. By default `<Nav>` and `<Nav.Item>` both
+render `<div>`s instead of `<ul>` and `<li>` elements respectively.
+This because it's possible (and common) to leave off the `<Nav.Item>`'s and
+render a `<Nav.Link>` directly, which would create invalid markup by default (`ul > a`).
+
+When a `<ul>` is appropriate you can render one via the `as` prop; be sure to
+also set your items to `<li>` as well!
+
+<ReactPlayground codeText={NavList} />
+
+
 ## Alignment and orientation
 
 You can control the the direction and orientation of the
@@ -71,7 +84,9 @@ responsive versions to stack in some viewports but not others (e.g.
 ## Tabs
 
 Visually represent nav items as "tabs". This style pairs nicely with
-tabbable regions created by our [Tab components]("../tabs/")
+tabbable regions created by our [Tab components](../tabs/).
+
+Note: creating a vertical nav (`.flex-column`) with tabs styling is unsupported by Bootstrap's default stylesheet.
 
 <ReactPlayground codeText={Tabs} />
 

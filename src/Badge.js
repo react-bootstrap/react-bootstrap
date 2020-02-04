@@ -2,46 +2,56 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import React from 'react';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-class Badge extends React.Component {
-  static propTypes = {
-    /** @default 'badge' */
-    bsPrefix: PropTypes.string.isRequired,
+const propTypes = {
+  /** @default 'badge' */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * The visual style of the badge
-     *
-     * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info|'light'|'dark')}
-     */
-    variant: PropTypes.string,
+  /**
+   * The visual style of the badge
+   *
+   * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')}
+   */
+  variant: PropTypes.string,
 
-    /**
-     * Add the `pill` modifier to make badges more rounded with
-     * some additional horizontal padding
-     */
-    pill: PropTypes.bool.isRequired,
-  };
+  /**
+   * Add the `pill` modifier to make badges more rounded with
+   * some additional horizontal padding
+   */
+  pill: PropTypes.bool.isRequired,
 
-  static defaultProps = {
-    pill: false,
-  };
+  /** @default span */
+  as: PropTypes.elementType,
+};
 
-  render() {
-    const { bsPrefix, variant, pill, className, ...props } = this.props;
+const defaultProps = {
+  pill: false,
+};
 
+const Badge = React.forwardRef(
+  (
+    { bsPrefix, variant, pill, className, as: Component = 'span', ...props },
+    ref,
+  ) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'badge');
     return (
-      <span
+      <Component
+        ref={ref}
         {...props}
         className={classNames(
           className,
-          bsPrefix,
-          pill && `${bsPrefix}-pill`,
-          variant && `${bsPrefix}-${variant}`,
+          prefix,
+          pill && `${prefix}-pill`,
+          variant && `${prefix}-${variant}`,
         )}
       />
     );
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(Badge, 'badge');
+Badge.displayName = 'Badge';
+Badge.propTypes = propTypes;
+Badge.defaultProps = defaultProps;
+
+export default Badge;

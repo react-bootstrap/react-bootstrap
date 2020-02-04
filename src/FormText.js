@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import React from 'react';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /** @default 'form-text' */
@@ -17,31 +17,32 @@ const propTypes = {
    * @type {ReactRef}
    * @alias ref
    */
-  innerRef: PropTypes.any,
+  _ref: PropTypes.any,
 
   /**
    * A convenience prop for add the `text-muted` class,
    * since it's so commonly used here.
    */
   muted: PropTypes.bool,
-  as: elementType,
+  as: PropTypes.elementType,
 };
 
-const defaultProps = {
-  as: 'small',
-};
+const FormText = React.forwardRef(
+  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+  ({ bsPrefix, className, as: Component = 'small', muted, ...props }, ref) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-text');
 
-function FormText({ bsPrefix, className, innerRef, as: Component, ...props }) {
-  return (
-    <Component
-      {...props}
-      ref={innerRef}
-      className={classNames(className, bsPrefix)}
-    />
-  );
-}
+    return (
+      <Component
+        {...props}
+        ref={ref}
+        className={classNames(className, bsPrefix, muted && 'text-muted')}
+      />
+    );
+  },
+);
 
+FormText.displayName = 'FormText';
 FormText.propTypes = propTypes;
-FormText.defaultProps = defaultProps;
 
-export default createBootstrapComponent(FormText, 'form-text');
+export default FormText;

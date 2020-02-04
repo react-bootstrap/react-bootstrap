@@ -1,42 +1,35 @@
-const popoverClick = (
-  <Popover id="popover-trigger-click" title="Popover bottom">
-    <strong>Holy guacamole!</strong> Check this info.
+const popover = triggerBehavior => (
+  <Popover id={`popover-trigger-${triggerBehavior}`}>
+    <Popover.Title as="h3">Popover bottom</Popover.Title>
+    <Popover.Content>
+      <strong>Holy guacamole!</strong> Check this info.
+    </Popover.Content>
   </Popover>
 );
 
-const popoverHoverFocus = (
-  <Popover id="popover-trigger-hover-focus" title="Popover bottom">
-    <strong>Holy guacamole!</strong> Check this info.
-  </Popover>
-);
+const popoverClick = <popover triggerBehavior="click" />;
 
-const popoverFocus = (
-  <Popover id="popover-trigger-focus" title="Popover bottom">
-    <strong>Holy guacamole!</strong> Check this info.
-  </Popover>
-);
+const popoverHoverFocus = <popover triggerBehavior="hover-focus" />;
 
-const popoverClickRootClose = (
-  <Popover id="popover-trigger-click-root-close" title="Popover bottom">
-    <strong>Holy guacamole!</strong> Check this info.
-  </Popover>
-);
+const popoverFocus = <popover triggerBehavior="focus" />;
+
+const popoverClickRootClose = <popover triggerBehavior="click-root-close" />;
 
 render(
-  <ButtonToolbar>
+  <>
     <OverlayTrigger trigger="click" placement="bottom" overlay={popoverClick}>
       <Button>Click</Button>
-    </OverlayTrigger>
+    </OverlayTrigger>{' '}
     <OverlayTrigger
       trigger={['hover', 'focus']}
       placement="bottom"
       overlay={popoverHoverFocus}
     >
       <Button>Hover + Focus</Button>
-    </OverlayTrigger>
+    </OverlayTrigger>{' '}
     <OverlayTrigger trigger="focus" placement="bottom" overlay={popoverFocus}>
       <Button>Focus</Button>
-    </OverlayTrigger>
+    </OverlayTrigger>{' '}
     <OverlayTrigger
       trigger="click"
       rootClose
@@ -45,5 +38,5 @@ render(
     >
       <Button>Click w/rootClose</Button>
     </OverlayTrigger>
-  </ButtonToolbar>,
+  </>,
 );

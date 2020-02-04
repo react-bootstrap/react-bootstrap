@@ -1,29 +1,32 @@
 import classNames from 'classnames';
-import events from 'dom-helpers/events';
+import addEventListener from 'dom-helpers/addEventListener';
+import canUseDOM from 'dom-helpers/canUseDOM';
 import ownerDocument from 'dom-helpers/ownerDocument';
-
-import canUseDOM from 'dom-helpers/util/inDOM';
-import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import React from 'react';
+import removeEventListener from 'dom-helpers/removeEventListener';
+import getScrollbarSize from 'dom-helpers/scrollbarSize';
 import PropTypes from 'prop-types';
+import React from 'react';
 import BaseModal from 'react-overlays/Modal';
-import { elementType } from 'prop-types-extra';
-
+import BootstrapModalManager from './BootstrapModalManager';
 import Fade from './Fade';
 import Body from './ModalBody';
+import ModalContext from './ModalContext';
 import ModalDialog from './ModalDialog';
 import Footer from './ModalFooter';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
-import BootstrapModalManager from './utils/BootstrapModalManager';
 import { createBootstrapComponent } from './ThemeProvider';
-import ModalContext from './ModalContext';
 
 const propTypes = {
   /**
-   * Render a large or small modal.
+   * @default 'modal'
+   */
+  bsPrefix: PropTypes.string,
+
+  /**
+   * Render a large, extra large or small modal.
    *
-   * @type ('sm'|'lg')
+   * @type ('sm'|'lg','xl')
    */
   size: PropTypes.string,
 
@@ -50,6 +53,11 @@ const propTypes = {
   keyboard: PropTypes.bool,
 
   /**
+   * Allows scrolling the `<Modal.Body>` instead of the entire Modal when overflowing.
+   */
+  scrollable: PropTypes.bool,
+
+  /**
    * Open and close the Modal with a slide and fade animation.
    */
   animation: PropTypes.bool,
@@ -64,7 +72,7 @@ const propTypes = {
    * prop when you want to use your own styles and markup to create a custom
    * modal component.
    */
-  dialogAs: elementType,
+  dialogAs: PropTypes.elementType,
 
   /**
    * When `true` The modal will automatically shift focus to itself when it
@@ -88,15 +96,34 @@ const propTypes = {
   restoreFocus: PropTypes.bool,
 
   /**
+   * Options passed to focus function when `restoreFocus` is set to `true`
+   *
+   * @link  https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#Parameters
+   */
+  restoreFocusOptions: PropTypes.shape({
+    preventScroll: PropTypes.bool,
+  }),
+
+  /**
    * When `true` The modal will show itself.
    */
   show: PropTypes.bool,
+
+  /**
+   * A callback fired when the Modal is opening.
+   */
+  onShow: PropTypes.func,
 
   /**
    * A callback fired when the header closeButton or non-static backdrop is
    * clicked. Required if either are specified.
    */
   onHide: PropTypes.func,
+
+  /**
+   * A callback fired when the escape key, if specified in `keyboard`, is pressed.
+   */
+  onEscapeKeyDown: PropTypes.func,
 
   /**
    * Callback fired before the Modal transitions in
@@ -129,6 +156,12 @@ const propTypes = {
   onExited: PropTypes.func,
 
   /**
+   * A ModalManager instance used to track and manage the state of open
+   * Modals. Useful when customizing how modals interact within a container
+   */
+  manager: PropTypes.object.isRequired,
+
+  /**
    * @private
    */
   container: PropTypes.any,
@@ -158,18 +191,15 @@ function BackdropTransition(props) {
 /* eslint-enable no-use-before-define */
 
 class Modal extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  state = { style: {} };
 
-    this.state = { style: {} };
-    this.modalContext = {
-      onHide: () => this.props.onHide(),
-    };
-  }
+  modalContext = {
+    onHide: () => this.props.onHide(),
+  };
 
   componentWillUnmount() {
     // Clean up the listener if we need to.
-    events.off(window, 'resize', this.handleWindowResize);
+    removeEventListener(window, 'resize', this.handleWindowResize);
   }
 
   setModalRef = ref => {
@@ -212,7 +242,7 @@ class Modal extends React.Component {
     if (this.props.onEntering) this.props.onEntering(node, ...args);
 
     // FIXME: This should work even when animation is disabled.
-    events.on(window, 'resize', this.handleWindowResize);
+    addEventListener(window, 'resize', this.handleWindowResize);
   };
 
   handleExited = (node, ...args) => {
@@ -220,7 +250,7 @@ class Modal extends React.Component {
     if (this.props.onExited) this.props.onExited(...args);
 
     // FIXME: This should work even when animation is disabled.
-    events.off(window, 'resize', this.handleWindowResize);
+    removeEventListener(window, 'resize', this.handleWindowResize);
   };
 
   handleWindowResize = () => {
@@ -251,12 +281,16 @@ class Modal extends React.Component {
   }
 
   renderBackdrop = props => {
-    const { bsPrefix, backdropClassName } = this.props;
+    const { bsPrefix, backdropClassName, animation } = this.props;
 
     return (
       <div
         {...props}
-        className={classNames(`${bsPrefix}-backdrop`, backdropClassName)}
+        className={classNames(
+          `${bsPrefix}-backdrop`,
+          backdropClassName,
+          !animation && 'show',
+        )}
       />
     );
   };
@@ -275,6 +309,7 @@ class Modal extends React.Component {
       animation,
       backdrop,
       keyboard,
+      manager,
       onEscapeKeyDown,
       onShow,
       onHide,
@@ -282,6 +317,7 @@ class Modal extends React.Component {
       autoFocus,
       enforceFocus,
       restoreFocus,
+      restoreFocusOptions,
       onEntered,
       onExit,
       onExiting,
@@ -290,11 +326,17 @@ class Modal extends React.Component {
       onEnter: _6,
       onEntering: _4,
       backdropClassName: _2,
-      backdropStyle: _3,
       ...props
     } = this.props;
 
     const clickHandler = backdrop === true ? this.handleClick : null;
+    const baseModalStyle = {
+      ...style,
+      ...this.state.style,
+    };
+
+    // Sets `display` always block when `animation` is false
+    if (!animation) baseModalStyle.display = 'block';
 
     return (
       <ModalContext.Provider value={this.modalContext}>
@@ -307,14 +349,16 @@ class Modal extends React.Component {
             autoFocus,
             enforceFocus,
             restoreFocus,
+            restoreFocusOptions,
             onEscapeKeyDown,
             onShow,
             onHide,
             onEntered,
             onExit,
             onExiting,
+            manager,
             ref: this.setModalRef,
-            style: { ...style, ...this.state.style },
+            style: baseModalStyle,
             className: classNames(className, bsPrefix),
             containerClassName: `${bsPrefix}-open`,
             transition: animation ? DialogTransition : undefined,

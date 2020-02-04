@@ -15,4 +15,12 @@ describe('Badge', () => {
         .text(),
     ).to.equal('Message');
   });
+
+  it('should support custom `as`', () => {
+    mount(
+      <Badge as="a" href="#" variant="primary" pill>
+        Message
+      </Badge>,
+    ).assertSingle('a[href="#"]');
+  });
 });

@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 
+import Overlay from '../src/Overlay';
 import OverlayTrigger from '../src/OverlayTrigger';
 import Popover from '../src/Popover';
 import Tooltip from '../src/Tooltip';
@@ -21,6 +22,21 @@ describe('<OverlayTrigger>', () => {
         <button type="button">button</button>
       </OverlayTrigger>,
     ).assertSingle('button');
+  });
+
+  it('Should accept a function as an overlay render prop', () => {
+    const overlay = () => <Div className="test" />;
+    const wrapper = mount(
+      <OverlayTrigger trigger="click" overlay={overlay}>
+        <button type="button">button</button>
+      </OverlayTrigger>,
+    );
+
+    wrapper.assertNone('.test');
+
+    wrapper.find('button').simulate('click');
+
+    wrapper.assertSingle('div.test');
   });
 
   it('Should call OverlayTrigger onClick prop to child', () => {
@@ -54,13 +70,13 @@ describe('<OverlayTrigger>', () => {
   });
 
   it('Should not set aria-describedby if the state is not show', () => {
-    const wrapper = mount(
+    const [button] = mount(
       <OverlayTrigger trigger="click" overlay={<Div />}>
         <button type="button">button</button>
       </OverlayTrigger>,
     ).getDOMNode();
 
-    assert.equal(wrapper.getAttribute('aria-describedby'), null);
+    assert.equal(button.getAttribute('aria-describedby'), null);
   });
 
   it('Should set aria-describedby for tooltips if the state is show', done => {
@@ -126,8 +142,7 @@ describe('<OverlayTrigger>', () => {
   });
 
   it('Should pass transition callbacks to Transition', done => {
-    let count = 0;
-    const increment = () => count++;
+    const increment = sinon.spy();
 
     const wrapper = mount(
       <OverlayTrigger
@@ -137,7 +152,7 @@ describe('<OverlayTrigger>', () => {
         onExiting={increment}
         onExited={() => {
           increment();
-          expect(count).to.equal(6);
+          expect(increment.callCount).to.equal(6);
           done();
         }}
         onEnter={increment}
@@ -244,12 +259,22 @@ describe('<OverlayTrigger>', () => {
           );
           wrapper.find('button').simulate('click');
 
-          expect(wrapper.state('show')).to.equal(true);
+          expect(
+            wrapper
+              .update()
+              .find(Overlay)
+              .props().show,
+          ).to.equal(true);
 
           // Need to click this way for it to propagate to document element.
           document.documentElement.click();
 
-          expect(wrapper.state('show')).to.equal(testCase.shownAfterClick);
+          expect(
+            wrapper
+              .update()
+              .find(Overlay)
+              .props().show,
+          ).to.equal(testCase.shownAfterClick);
         });
       });
     });
@@ -266,15 +291,30 @@ describe('<OverlayTrigger>', () => {
           { attachTo },
         );
 
-        const node = wrapper.getDOMNode();
-        expect(wrapper.state('show')).to.be.false;
+        const [node] = wrapper.getDOMNode();
+        expect(
+          wrapper
+            .update()
+            .find(Overlay)
+            .props().show,
+        ).to.be.false;
 
         node.click();
-        expect(wrapper.state('show')).to.be.true;
+        expect(
+          wrapper
+            .update()
+            .find(Overlay)
+            .props().show,
+        ).to.be.true;
 
         // Need to click this way for it to propagate to document element.
         node.click();
-        expect(wrapper.state('show')).to.be.false;
+        expect(
+          wrapper
+            .update()
+            .find(Overlay)
+            .props().show,
+        ).to.be.false;
 
         wrapper.unmount();
       });
@@ -283,16 +323,13 @@ describe('<OverlayTrigger>', () => {
     describe('replaced overlay', () => {
       it('Should still be shown', () => {
         class ReplacedOverlay extends React.Component {
-          constructor(props) {
-            super(props);
+          state = {
+            replaced: false,
+          };
 
-            this.handleClick = this.handleClick.bind(this);
-            this.state = { replaced: false };
-          }
-
-          handleClick() {
+          handleClick = () => {
             this.setState({ replaced: true });
-          }
+          };
 
           render() {
             if (this.state.replaced) {
@@ -324,7 +361,10 @@ describe('<OverlayTrigger>', () => {
         // Need to click this way for it to propagate to document element.
         document.getElementById('replace-overlay').click();
 
-        wrapper.state('show').should.be.true;
+        wrapper
+          .update()
+          .find(Overlay)
+          .props().show.should.be.true;
       });
     });
   });

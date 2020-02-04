@@ -1,5 +1,6 @@
-const { MDXProvider } = require('@mdx-js/tag');
+require('bootstrap/dist/css/bootstrap.min.css');
 const React = require('react');
+const { MDXProvider } = require('@mdx-js/react');
 
 const Heading = require('./components/Heading');
 const CodeBlock = require('./components/CodeBlock');
@@ -21,7 +22,7 @@ const components = {
     React.isValidElement(props.children) ? (
       <CodeBlock
         codeText={props.children.props.children}
-        mode={getMode(props.children.props.props.className)} // omg
+        mode={getMode(props.children.props.className)}
       />
     ) : (
       <pre {...props} />

@@ -31,16 +31,17 @@ export default withLayout(function NaπvbarSection({ data }) {
         Overview
       </LinkedHeading>
       <p>
-        Here’s what you need to know before getting started with the navbar:
+        Here’s what you need to know before getting started with the Navbar:
       </p>
       <ul>
         <li>
-          use the <code>expand</code> prop to allow for nvabar collapsing at
+          Use the <code>expand</code> prop to allow for collapsing the Navbar at
           lower breakpoints.
         </li>
         <li>
           Navbars and their contents are fluid by default. Use optional{' '}
-          <a href="#containers">containers </a> to limit their horizontal width.
+          <a href="#navbars-containers">containers </a> to limit their
+          horizontal width.
         </li>
         <li>Use spacing and flex utilities to size and position content</li>
       </ul>
@@ -66,8 +67,8 @@ export default withLayout(function NaπvbarSection({ data }) {
         Forms
       </LinkedHeading>
       <p>
-        Use <code>{'<Form inline>'}</code> and your variaous form controls
-        within the Navbar. Align the contents as needed with utility classes.
+        Use <code>{'<Form inline>'}</code> and your various form controls within
+        the Navbar. Align the contents as needed with utility classes.
       </p>
       <ReactPlayground codeText={NavbarForm} />
 
@@ -118,9 +119,7 @@ export default withLayout(function NaπvbarSection({ data }) {
       </LinkedHeading>
       <p>
         You can use Bootstrap's{' '}
-        <a href="https://getbootstrap.com/docs/4.1/utilities/position/">
-          position utilities
-        </a>{' '}
+        <a href={`${config.docUrl}/utilities/position/`}>position utilities</a>{' '}
         to place navbars in non-static positions. Choose from fixed to the top,
         fixed to the bottom, or stickied to the top (scrolls with the page until
         it reaches the top, then stays there). Fixed navbars use{' '}
@@ -133,7 +132,8 @@ export default withLayout(function NaπvbarSection({ data }) {
           <a href="https://caniuse.com/#feat=css-sticky">
             isn’t fully supported in every browser
           </a>
-        </strong>.
+        </strong>
+        .
       </p>
 
       <p>

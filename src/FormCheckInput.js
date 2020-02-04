@@ -1,15 +1,28 @@
 import classNames from 'classnames';
-import React from 'react';
 import PropTypes from 'prop-types';
-
-import { createBootstrapComponent } from './ThemeProvider';
+import React, { useContext } from 'react';
 import FormContext from './FormContext';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /**
    * @default 'form-check-input'
    */
   bsPrefix: PropTypes.string,
+
+  /**
+   * A seperate bsPrefix used for custom controls
+   *
+   * @default 'custom-control'
+   */
+  bsCustomPrefix: PropTypes.string,
+
+  /**
+   * The underlying HTML element to use when rendering the FormCheckInput.
+   *
+   * @type {('input'|elementType)}
+   */
+  as: PropTypes.elementType,
 
   /** A HTML id attribute, necessary for proper form accessibility. */
   id: PropTypes.string,
@@ -28,48 +41,52 @@ const propTypes = {
 
   /** Manually style the input as invalid */
   isInvalid: PropTypes.bool.isRequired,
-
-  /**
-   * @private
-   */
-  innerRef: PropTypes.any,
 };
 
 const defaultProps = {
   type: 'checkbox',
 };
 
-function FormCheckInput({
-  id,
-  bsPrefix,
-  className,
-  isValid,
-  isInvalid,
-  innerRef,
-  isStatic,
-  ...props
-}) {
-  return (
-    <FormContext.Consumer>
-      {({ controlId }) => (
-        <input
-          {...props}
-          ref={innerRef}
-          id={id || controlId}
-          className={classNames(
-            className,
-            bsPrefix,
-            isValid && 'is-valid',
-            isInvalid && 'is-invalid',
-            isStatic && 'position-static',
-          )}
-        />
-      )}
-    </FormContext.Consumer>
-  );
-}
+const FormCheckInput = React.forwardRef(
+  (
+    {
+      id,
+      bsPrefix,
+      bsCustomPrefix,
+      className,
+      isValid,
+      isInvalid,
+      isStatic,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'input',
+      ...props
+    },
+    ref,
+  ) => {
+    const { controlId, custom } = useContext(FormContext);
+    bsPrefix = custom
+      ? useBootstrapPrefix(bsCustomPrefix, 'custom-control-input')
+      : useBootstrapPrefix(bsPrefix, 'form-check-input');
 
+    return (
+      <Component
+        {...props}
+        ref={ref}
+        id={id || controlId}
+        className={classNames(
+          className,
+          bsPrefix,
+          isValid && 'is-valid',
+          isInvalid && 'is-invalid',
+          isStatic && 'position-static',
+        )}
+      />
+    );
+  },
+);
+
+FormCheckInput.displayName = 'FormCheckInput';
 FormCheckInput.propTypes = propTypes;
 FormCheckInput.defaultProps = defaultProps;
 
-export default createBootstrapComponent(FormCheckInput, 'form-check-input');
+export default FormCheckInput;

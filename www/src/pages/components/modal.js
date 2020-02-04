@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { css } from 'css-literal-loader/styled';
+import { css } from 'astroturf';
 
 import ComponentApi from '../../components/ComponentApi';
 import LinkedHeading from '../../components/LinkedHeading';
@@ -11,6 +11,7 @@ import ModalBasic from '../../examples/Modal/Basic';
 import ModalDefaultSizing from '../../examples/Modal/DefaultSizing';
 import ModalCustomSizing from '../../examples/Modal/CustomSizing';
 import ModalVerticallyCentered from '../../examples/Modal/VerticallyCentered';
+import ModalWithoutAnimation from '../../examples/Modal/WithoutAnimation';
 import ModalGrid from '../../examples/Modal/Grid';
 import withLayout from '../../withLayout';
 
@@ -85,22 +86,27 @@ export default withLayout(function ModalSection({ data }) {
         content.
       </p>
       <ReactPlayground codeText={ModalBasic} />
+      <LinkedHeading h="3" id="modals-live">
+        Without Animation
+      </LinkedHeading>
+      <p>
+        A Modal can also be without an animation. For that set the "animation"
+        prop to <code>false</code>.
+      </p>
+      <ReactPlayground codeText={ModalWithoutAnimation} />
       <div className="bs-callout bs-callout-info">
         <div className="h4">Additional Import Options</div>
         <p>
           The Modal Header, Title, Body, and Footer components are available as
           static properties the <code>{'<Modal/>'}</code> component, but you can
-          also, import them directly from the <code>/lib</code> directory like:{' '}
-          <code>require("react-bootstrap/lib/ModalHeader")</code>.
+          also, import them directly like:{' '}
+          <code>require("react-bootstrap/ModalHeader")</code>.
         </p>
       </div>
       <LinkedHeading h="3" id="modal-vertically-centered">
         Vertically centered
       </LinkedHeading>
-      <p>
-        You can vertically center a modal by passing the "verticallyCenter"
-        prop.
-      </p>
+      <p>You can vertically center a modal by passing the "centered" prop.</p>
       <ReactPlayground codeText={ModalVerticallyCentered} />
 
       <LinkedHeading h="3" id="modal-grid">

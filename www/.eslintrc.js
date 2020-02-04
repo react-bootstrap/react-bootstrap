@@ -3,6 +3,7 @@ const path = require('path');
 module.exports = {
   globals: {
     graphql: false,
+    config: false,
   },
   rules: {
     'global-require': 'off',
@@ -18,8 +19,7 @@ module.exports = {
         config: {
           resolve: {
             alias: {
-              'react-bootstrap$': path.resolve(__dirname, '../src/index.js'),
-              'react-bootstrap/lib': path.resolve(__dirname, '../src'),
+              'react-bootstrap': path.resolve(__dirname, '../src'),
             },
           },
         },
@@ -31,8 +31,15 @@ module.exports = {
       files: ['src/examples/**'],
       rules: {
         'comma-dangle': 'off',
+        'max-classes-per-file': 'off',
         'no-console': 'off',
       },
     },
+    {
+      files: ['config.js', 'gatsby-config.js', 'gatsby-node.js'],
+      settings: {
+        'import/resolver': 'node'
+      }
+    }
   ],
 };

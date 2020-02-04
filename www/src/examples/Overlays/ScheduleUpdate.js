@@ -1,15 +1,16 @@
-class UpdatingPopover extends React.Component {
-  componentDidUpdate(prevProps) {
-    if (prevProps.children !== this.props.children) {
+const UpdatingPopover = React.forwardRef(
+  ({ scheduleUpdate, children, ...props }, ref) => {
+    useEffect(() => {
       console.log('updating!');
-      this.props.scheduleUpdate();
-    }
-  }
-
-  render() {
-    return <Popover {...this.props} />;
-  }
-}
+      scheduleUpdate();
+    }, [children, scheduleUpdate]);
+    return (
+      <Popover ref={ref} {...props}>
+        {children}
+      </Popover>
+    );
+  },
+);
 
 const longContent = `
   Very long
@@ -18,34 +19,27 @@ const longContent = `
 `;
 const shortContent = 'Short and sweet!';
 
-class Example extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = { content: shortContent };
-  }
+function Example() {
+  const [content, setContent] = useState(shortContent);
 
-  componentDidMount() {
-    this.timer = setInterval(() => {
-      this.setState(state => ({
-        content: state.content === shortContent ? longContent : shortContent,
-      }));
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setContent(content === shortContent ? longContent : shortContent);
     }, 3000);
-  }
 
-  render() {
-    const { content } = this.state;
+    return () => clearInterval(timerId);
+  });
 
-    return (
-      <OverlayTrigger
-        trigger="click"
-        overlay={
-          <UpdatingPopover id="popover-contained">{content}</UpdatingPopover>
-        }
-      >
-        <Button onClick={this.handleClick}>Holy guacamole!</Button>
-      </OverlayTrigger>
-    );
-  }
+  return (
+    <OverlayTrigger
+      trigger="click"
+      overlay={
+        <UpdatingPopover id="popover-contained">{content}</UpdatingPopover>
+      }
+    >
+      <Button>Holy guacamole!</Button>
+    </OverlayTrigger>
+  );
 }
 
 render(<Example />);

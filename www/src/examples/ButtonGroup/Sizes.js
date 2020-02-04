@@ -1,18 +1,19 @@
-<div className="d-flex flex-column">
-  <ButtonGroup size="lg">
+<>
+  <ButtonGroup size="lg" className="mb-2">
     <Button>Left</Button>
     <Button>Middle</Button>
     <Button>Right</Button>
   </ButtonGroup>
-
-  <ButtonGroup className="mt-3">
+  <br />
+  <ButtonGroup className="mb-2">
     <Button>Left</Button>
     <Button>Middle</Button>
     <Button>Right</Button>
   </ButtonGroup>
-  <ButtonGroup size="sm" className="mt-3">
+  <br />
+  <ButtonGroup size="sm">
     <Button>Left</Button>
     <Button>Middle</Button>
     <Button>Right</Button>
   </ButtonGroup>
-</div>;
+</>;

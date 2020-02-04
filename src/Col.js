@@ -1,9 +1,8 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm', 'xs'];
 const colSize = PropTypes.oneOfType([
@@ -27,58 +26,54 @@ const column = PropTypes.oneOfType([
   }),
 ]);
 
-class Col extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'col'
-     */
-    bsPrefix: PropTypes.string,
+const propTypes = {
+  /**
+   * @default 'col'
+   */
+  bsPrefix: PropTypes.string,
 
-    as: elementType,
+  as: PropTypes.elementType,
 
-    /**
-     * The number of columns to span on sxtra small devices (<576px)
-     *
-     * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
-     */
-    xs: column,
+  /**
+   * The number of columns to span on extra small devices (<576px)
+   *
+   * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
+   */
+  xs: column,
 
-    /**
-     * The number of columns to span on small devices (≥576px)
-     *
-     * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
-     */
-    sm: column,
+  /**
+   * The number of columns to span on small devices (≥576px)
+   *
+   * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
+   */
+  sm: column,
 
-    /**
-     * The number of columns to span on medium devices (≥768px)
-     *
-     * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
-     */
-    md: column,
+  /**
+   * The number of columns to span on medium devices (≥768px)
+   *
+   * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
+   */
+  md: column,
 
-    /**
-     * The number of columns to span on large devices (≥992px)
-     *
-     * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
-     */
-    lg: column,
+  /**
+   * The number of columns to span on large devices (≥992px)
+   *
+   * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
+   */
+  lg: column,
 
-    /**
-     * The number of columns to span on extra large devices (≥1200px)
-     *
-     * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
-     */
-    xl: column,
-  };
+  /**
+   * The number of columns to span on extra large devices (≥1200px)
+   *
+   * @type {(true|"auto"|number|{ span: true|"auto"|number, offset: number, order: number })}
+   */
+  xl: column,
+};
 
-  static defaultProps = {
-    as: 'div',
-  };
-
-  render() {
-    const { bsPrefix, className, as: Component, ...props } = this.props;
-
+const Col = React.forwardRef(
+  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+  ({ bsPrefix, className, as: Component = 'div', ...props }, ref) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'col');
     const spans = [];
     const classes = [];
 
@@ -97,23 +92,28 @@ class Col extends React.Component {
 
       if (span != null)
         spans.push(
-          span === true ? `${bsPrefix}${infix}` : `${bsPrefix}${infix}-${span}`,
+          span === true ? `${prefix}${infix}` : `${prefix}${infix}-${span}`,
         );
 
       if (order != null) classes.push(`order${infix}-${order}`);
       if (offset != null) classes.push(`offset${infix}-${offset}`);
     });
+
     if (!spans.length) {
-      spans.push(bsPrefix); // plain 'col'
+      spans.push(prefix); // plain 'col'
     }
 
     return (
       <Component
         {...props}
+        ref={ref}
         className={classNames(className, ...spans, ...classes)}
       />
     );
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(Col, 'col');
+Col.displayName = 'Col';
+Col.propTypes = propTypes;
+
+export default Col;

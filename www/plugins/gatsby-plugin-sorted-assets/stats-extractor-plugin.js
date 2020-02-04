@@ -62,12 +62,14 @@ module.exports = class StatsExtractor {
 
             Object.entries(chunkGroup.childAssets).forEach(
               ([rel, childAssets]) => {
-                childAssets.filter(a => !files.includes(a)).forEach(file => {
-                  if (file.endsWith(`.js`))
-                    assets.js.push({ rel, file, chunkName });
-                  if (file.endsWith(`.css`))
-                    assets.css.push({ rel, file, chunkName });
-                });
+                childAssets
+                  .filter(a => !files.includes(a))
+                  .forEach(file => {
+                    if (file.endsWith(`.js`))
+                      assets.js.push({ rel, file, chunkName });
+                    if (file.endsWith(`.css`))
+                      assets.css.push({ rel, file, chunkName });
+                  });
               },
             );
           }

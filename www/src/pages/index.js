@@ -1,11 +1,10 @@
 import React from 'react';
-import Button from 'react-bootstrap/lib/Button';
-import Container from 'react-bootstrap/lib/Container';
-import Row from 'react-bootstrap/lib/Row';
-import Col from 'react-bootstrap/lib/Col';
-import Jumbotron from 'react-bootstrap/lib/Jumbotron';
-import { styled } from 'css-literal-loader/styled';
-import withProps from 'recompose/withProps';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import styled from 'astroturf';
 import pkg from '../../../package.json';
 
 import withLayout from '../withLayout';
@@ -63,22 +62,20 @@ const BrandButton = styled(Button)`
   }
 `;
 
-const FeatureCard = withProps({ md: 4 })(
-  styled(Col)`
-    @import '../css/theme';
+const FeatureCard = styled(Col).attrs({ md: 4 })`
+  @import '../css/theme';
 
-    composes: px-4 py-3 from global;
-    font-weight: 400;
-    line-height: 1.6;
+  composes: px-4 py-3 from global;
+  font-weight: 400;
+  line-height: 1.6;
 
-    & h2 {
-      font-size: 1.6rem;
-      color: $subtle;
-      font-weight: 300;
-      margin-bottom: 0.6rem;
-    }
-  `,
-);
+  & h2 {
+    font-size: 1.6rem;
+    color: $subtle;
+    font-weight: 300;
+    margin-bottom: 0.6rem;
+  }
+`;
 
 const ButtonToolbar = styled('div')`
   @import '../css/theme';
@@ -136,27 +133,27 @@ export default withLayout(
               <FeatureCard>
                 <h2>Rebuilt with React</h2>
                 <p>
-                  React bootstrap replaces the Bootstrap javascript. Each
-                  component has been built from stratch as true React
-                  components, without uneeded dependencies like jQuery.
+                  React-Bootstrap replaces the Bootstrap JavaScript. Each
+                  component has been built from scratch as a true React
+                  component, without unneeded dependencies like jQuery.
                 </p>
                 <p>
-                  As one of the oldest React libraries, react bootstrap has
-                  evolved and grown along-side React, making it an exellent
+                  As one of the oldest React libraries, React-Bootstrap has
+                  evolved and grown alongside React, making it an excellent
                   choice as your UI foundation.
                 </p>
               </FeatureCard>
 
               <FeatureCard>
-                <h2>Bootstrap at it's core</h2>
+                <h2>Bootstrap at its core</h2>
                 <p>
                   Built with compatibility in mind, we embrace our bootstrap
                   core and strive to be compatible with the world's largest UI
                   ecosystem.
                 </p>
                 <p>
-                  By relying entirely on the Bootstrap stylesheet, React
-                  bootstrap, just works with the thousands of bootstrap themes
+                  By relying entirely on the Bootstrap stylesheet, React-
+                  Bootstrap just works with the thousands of bootstrap themes
                   you already love.
                 </p>
                 <p />
@@ -170,7 +167,7 @@ export default withLayout(
                   function of each component.
                 </p>
                 <p>
-                  Each component is implemented with accessibilty in mind. The
+                  Each component is implemented with accessibility in mind. The
                   result is a set of accessible-by-default components, over what
                   is possible from plain Bootstrap.
                 </p>

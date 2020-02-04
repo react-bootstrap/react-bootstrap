@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import FormContext from './FormContext';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /**
@@ -12,7 +11,7 @@ const propTypes = {
    */
   bsPrefix: PropTypes.string,
 
-  as: elementType,
+  as: PropTypes.elementType,
 
   /**
    * Sets `id` on `<FormControl>` and `htmlFor` on `<FormGroup.Label>`.
@@ -27,36 +26,40 @@ const propTypes = {
    * @type {ReactRef}
    * @alias ref
    */
-  innerRef: PropTypes.any,
+  _ref: PropTypes.any,
 };
 
-const defaultProps = {
-  as: 'div',
-};
+const FormGroup = React.forwardRef(
+  (
+    {
+      bsPrefix,
+      className,
+      children,
+      controlId,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      ...props
+    },
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-group');
+    const context = useMemo(() => ({ controlId }), [controlId]);
 
-function FormGroup({
-  bsPrefix,
-  innerRef,
-  className,
-  children,
-  controlId,
-  as: Component,
-  ...props
-}) {
-  return (
-    <FormContext.Provider value={{ controlId }}>
-      <Component
-        {...props}
-        ref={innerRef}
-        className={classNames(className, bsPrefix)}
-      >
-        {children}
-      </Component>
-    </FormContext.Provider>
-  );
-}
+    return (
+      <FormContext.Provider value={context}>
+        <Component
+          {...props}
+          ref={ref}
+          className={classNames(className, bsPrefix)}
+        >
+          {children}
+        </Component>
+      </FormContext.Provider>
+    );
+  },
+);
 
+FormGroup.displayName = 'FormGroup';
 FormGroup.propTypes = propTypes;
-FormGroup.defaultProps = defaultProps;
 
-export default createBootstrapComponent(FormGroup, 'form-group');
+export default FormGroup;

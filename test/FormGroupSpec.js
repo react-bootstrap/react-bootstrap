@@ -36,4 +36,9 @@ describe('<FormGroup>', () => {
     wrapper.assertSingle('label[htmlFor="my-control"]');
     wrapper.assertSingle('input[id="my-control"]');
   });
+
+  it('Should have div as default component', () => {
+    const wrapper = mount(<FormGroup />);
+    expect(wrapper.find('div').length).to.equal(1);
+  });
 });

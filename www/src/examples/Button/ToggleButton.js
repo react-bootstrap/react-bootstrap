@@ -1,10 +1,11 @@
-<div className="d-flex flex-column">
-  <ButtonGroup toggle>
+<>
+  <ButtonGroup toggle className="mb-2">
     <ToggleButton type="checkbox" defaultChecked value="1">
       Checked
     </ToggleButton>
   </ButtonGroup>
-  <ButtonGroup toggle className="mt-3">
+  <br />
+  <ButtonGroup toggle>
     <ToggleButton type="radio" name="radio" defaultChecked value="1">
       Active
     </ToggleButton>
@@ -15,4 +16,4 @@
       Radio
     </ToggleButton>
   </ButtonGroup>
-</div>;
+</>;

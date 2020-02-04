@@ -1,7 +1,5 @@
-import events from 'dom-helpers/events';
-import React from 'react';
 import { mount } from 'enzyme';
-
+import React from 'react';
 import Modal from '../src/Modal';
 
 describe('<Modal>', () => {
@@ -20,6 +18,18 @@ describe('<Modal>', () => {
       .find('strong')
       .text()
       .should.equal('Message');
+  });
+
+  it('Should sets `display: block` to `div.modal` when animation is false', () => {
+    const node = mount(
+      <Modal show animation={false}>
+        <strong>Message</strong>
+      </Modal>,
+    )
+      .find('div.modal')
+      .getDOMNode();
+
+    expect(node.style.display).to.equal('block');
   });
 
   it('Should close the modal when the modal dialog is clicked', done => {
@@ -129,10 +139,7 @@ describe('<Modal>', () => {
   });
 
   it('Should pass transition callbacks to Transition', done => {
-    let count = 0;
-    const increment = () => {
-      ++count;
-    };
+    const increment = sinon.spy();
 
     const instance = mount(
       <Modal
@@ -142,7 +149,7 @@ describe('<Modal>', () => {
         onExiting={increment}
         onExited={() => {
           increment();
-          expect(count).to.equal(6);
+          expect(increment.callCount).to.equal(6);
           done();
         }}
         onEnter={increment}
@@ -161,22 +168,18 @@ describe('<Modal>', () => {
     let offSpy;
 
     beforeEach(() => {
-      offSpy = sinon.spy(events, 'off');
+      offSpy = sinon.spy(window, 'removeEventListener');
     });
 
     afterEach(() => {
-      events.off.restore();
+      offSpy.restore();
     });
 
     it('should remove resize listener when unmounted', () => {
       class Component extends React.Component {
-        constructor(props, context) {
-          super(props, context);
-
-          this.state = {
-            show: true,
-          };
-        }
+        state = {
+          show: true,
+        };
 
         render() {
           if (!this.state.show) {
@@ -190,7 +193,35 @@ describe('<Modal>', () => {
       const instance = mount(<Component />);
       instance.setState({ show: false });
 
-      expect(offSpy).to.have.been.calledWith(window, 'resize');
+      expect(offSpy).to.have.been.calledWith('resize');
     });
+  });
+
+  it('Should close once it was clicked outside of the Modal', () => {
+    const onHideSpy = sinon.spy();
+    mount(
+      <Modal show onHide={onHideSpy}>
+        <strong>Message</strong>
+      </Modal>,
+    )
+      .find('div.modal.show')
+      .simulate('click');
+
+    expect(onHideSpy).to.have.been.called;
+  });
+
+  it('Should not call onHide if the click target comes from inside the dialog', () => {
+    const onHideSpy = sinon.spy();
+    const wrapper = mount(
+      <Modal show onHide={onHideSpy}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    wrapper.find('div.modal-dialog').simulate('mouseDown');
+    wrapper.find('div.modal.show').simulate('mouseUp');
+    wrapper.find('div.modal.show').simulate('click');
+
+    expect(onHideSpy).to.not.have.been.called;
   });
 });

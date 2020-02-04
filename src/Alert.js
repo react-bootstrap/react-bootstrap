@@ -2,129 +2,125 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { elementType } from 'prop-types-extra';
-import uncontrollable from 'uncontrollable';
-import divWithClassName from './utils/divWithClassName';
+import { useUncontrolled } from 'uncontrollable';
+import useEventCallback from '@restart/hooks/useEventCallback';
 
-import createWithBsPrefix from './utils/createWithBsPrefix';
-import { createBootstrapComponent } from './ThemeProvider';
+import createWithBsPrefix from './createWithBsPrefix';
+import divWithClassName from './divWithClassName';
+import { useBootstrapPrefix } from './ThemeProvider';
 import Fade from './Fade';
 import CloseButton from './CloseButton';
 import SafeAnchor from './SafeAnchor';
 
-/**
- * @property {AlertHeading} Heading
- * @property {AlertLink} Link
- */
-class Alert extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'alert'
-     */
-    bsPrefix: PropTypes.string,
+const propTypes = {
+  /**
+   * @default 'alert'
+   */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * The Alert visual variant
-     *
-     * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light'}
-     */
-    variant: PropTypes.string,
+  /**
+   * The Alert visual variant
+   *
+   * @type {'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'dark' | 'light'}
+   */
+  variant: PropTypes.string,
 
-    /**
-     * Renders a properly aligned dismiss button, as well as
-     * adding extra horizontal padding to the Alert.
-     */
-    dismissible: PropTypes.bool,
+  /**
+   * Renders a properly aligned dismiss button, as well as
+   * adding extra horizontal padding to the Alert.
+   */
+  dismissible: PropTypes.bool,
 
-    /**
-     * Controls the visual state of the Alert.
-     *
-     * @controllable onClose
-     */
-    show: PropTypes.bool,
+  /**
+   * Controls the visual state of the Alert.
+   *
+   * @controllable onClose
+   */
+  show: PropTypes.bool,
 
-    /**
-     * Callback fired when alert is closed.
-     *
-     * @controllable show
-     */
-    onClose: PropTypes.func,
+  /**
+   * Callback fired when alert is closed.
+   *
+   * @controllable show
+   */
+  onClose: PropTypes.func,
 
-    /**
-     * Sets the text for alert close button.
-     */
-    closeLabel: PropTypes.string,
+  /**
+   * Sets the text for alert close button.
+   */
+  closeLabel: PropTypes.string,
 
-    /** A `react-transition-group` Transition component used to animate the Alert on dismissal. */
-    transition: elementType,
-  };
+  /** A `react-transition-group` Transition component used to animate the Alert on dismissal. */
+  transition: elementType,
+};
 
-  static defaultProps = {
-    show: true,
-    transition: Fade,
-    closeLabel: 'Close alert',
-  };
+const defaultProps = {
+  show: true,
+  transition: Fade,
+  closeLabel: 'Close alert',
+};
 
-  handleClose = e => {
-    this.props.onClose(false, e);
-  };
+const controllables = {
+  show: 'onClose',
+};
 
-  render() {
-    const {
-      bsPrefix,
-      show,
-      closeLabel,
-      className,
-      children,
-      variant,
-      dismissible,
-      transition: Transition,
-      onClose: _,
-      ...props
-    } = this.props;
+const Alert = React.forwardRef((uncontrolledProps, ref) => {
+  const {
+    bsPrefix,
+    show,
+    closeLabel,
+    className,
+    children,
+    variant,
+    onClose,
+    dismissible,
+    transition: Transition,
+    ...props
+  } = useUncontrolled(uncontrolledProps, controllables);
 
-    const alert = (
-      <div
-        role="alert"
-        {...(Transition ? props : undefined)}
-        className={classNames(
-          className,
-          bsPrefix,
-          variant && `${bsPrefix}-${variant}`,
-          dismissible && `${bsPrefix}-dismissible`,
-        )}
-      >
-        {dismissible && (
-          <CloseButton onClick={this.handleClose} label={closeLabel} />
-        )}
-        {children}
-      </div>
-    );
+  const prefix = useBootstrapPrefix(bsPrefix, 'alert');
+  const handleClose = useEventCallback(e => {
+    onClose(false, e);
+  });
 
-    if (!Transition) return show ? alert : null;
+  const alert = (
+    <div
+      role="alert"
+      {...(Transition ? props : undefined)}
+      className={classNames(
+        className,
+        prefix,
+        variant && `${prefix}-${variant}`,
+        dismissible && `${prefix}-dismissible`,
+      )}
+    >
+      {dismissible && <CloseButton onClick={handleClose} label={closeLabel} />}
+      {children}
+    </div>
+  );
 
-    return (
-      <Transition unmountOnExit {...props} in={show}>
-        {alert}
-      </Transition>
-    );
-  }
-}
+  if (!Transition) return show ? alert : null;
 
-const DecoratedAlert = uncontrollable(
-  createBootstrapComponent(Alert, 'alert'),
-  {
-    show: 'onClose',
-  },
-);
+  return (
+    <Transition unmountOnExit ref={ref} {...props} in={show}>
+      {alert}
+    </Transition>
+  );
+});
 
 const DivStyledAsH4 = divWithClassName('h4');
+DivStyledAsH4.displayName = 'DivStyledAsH4';
 
-DecoratedAlert.Link = createWithBsPrefix('alert-link', {
+Alert.displayName = 'Alert';
+Alert.propTypes = propTypes;
+Alert.defaultProps = defaultProps;
+
+Alert.Link = createWithBsPrefix('alert-link', {
   Component: SafeAnchor,
 });
 
-DecoratedAlert.Heading = createWithBsPrefix('alert-heading', {
+Alert.Heading = createWithBsPrefix('alert-heading', {
   Component: DivStyledAsH4,
 });
 
-export default DecoratedAlert;
+export default Alert;

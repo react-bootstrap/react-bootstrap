@@ -1,119 +1,164 @@
 import classNames from 'classnames';
-import React from 'react';
 import PropTypes from 'prop-types';
-
-import { createBootstrapComponent } from './ThemeProvider';
-import FormContext from './FormContext';
+import all from 'prop-types-extra/lib/all';
+import React, { useContext, useMemo } from 'react';
 import Feedback from './Feedback';
 import FormCheckInput from './FormCheckInput';
 import FormCheckLabel from './FormCheckLabel';
+import FormContext from './FormContext';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-class FormCheck extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'form-check'
-     */
-    bsPrefix: PropTypes.string,
+const propTypes = {
+  /**
+   * @default 'form-check'
+   */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * The FormCheck `ref` will be forwarded to the underlying input element,
-     * which means it will be a DOM node, when resolved.
-     *
-     * @type {ReactRef}
-     * @alias {ref}
-     */
-    inputRef: PropTypes.any,
+  /**
+   * A seperate bsPrefix used for custom controls
+   *
+   * @default 'custom-control'
+   */
+  bsCustomPrefix: PropTypes.string,
 
-    /** A HTML id attribute, necessary for proper form accessibility. */
-    id: PropTypes.string,
+  /**
+   * The FormCheck `ref` will be forwarded to the underlying input element,
+   * which means it will be a DOM node, when resolved.
+   *
+   * @type {ReactRef}
+   * @alias ref
+   */
+  _ref: PropTypes.any,
 
-    /**
-     * Provide a function child to manually handle the layout of the FormCheck's inner components.
-     *
-     * ````
-     * <FormCheck>
-     *   <FormCheck.Input isInvalid type={radio} />
-     *   <FormCheck.Label>Allow us to contact you?</FormCheck.Label>
-     *   <Feedback type="invalid">Yo this is required</Feedback>
-     * </FormCheck>
-     * ```
-     */
-    children: PropTypes.node,
+  /**
+   * The underlying HTML element to use when rendering the FormCheck.
+   *
+   * @type {('input'|elementType)}
+   */
+  as: PropTypes.elementType,
 
-    inline: PropTypes.bool,
-    disabled: PropTypes.bool,
-    title: PropTypes.string,
-    label: PropTypes.node,
+  /** A HTML id attribute, necessary for proper form accessibility. */
+  id: PropTypes.string,
 
-    /** The type of checkable. */
-    type: PropTypes.oneOf(['radio', 'checkbox']).isRequired,
+  /**
+   * Provide a function child to manually handle the layout of the FormCheck's inner components.
+   *
+   * ```jsx
+   * <FormCheck>
+   *   <FormCheck.Input isInvalid type={radio} />
+   *   <FormCheck.Label>Allow us to contact you?</FormCheck.Label>
+   *   <Feedback type="invalid">Yo this is required</Feedback>
+   * </FormCheck>
+   * ```
+   */
+  children: PropTypes.node,
 
-    /** Manually style the input as valid */
-    isValid: PropTypes.bool.isRequired,
+  inline: PropTypes.bool,
+  disabled: PropTypes.bool,
+  title: PropTypes.string,
+  label: PropTypes.node,
 
-    /** Manually style the input as invalid */
-    isInvalid: PropTypes.bool.isRequired,
+  /** Use Bootstrap's custom form elements to replace the browser defaults */
+  custom: PropTypes.bool,
 
-    /** A message to display when the input is in a validation state */
-    feedback: PropTypes.node,
-  };
+  /**
+   * The type of checkable.
+   * @type {('radio' | 'checkbox' | 'switch')}
+   */
+  type: all(
+    PropTypes.oneOf(['radio', 'checkbox', 'switch']).isRequired,
+    ({ type, custom }) =>
+      type === 'switch' && custom === false
+        ? Error('`custom` cannot be set to `false` when the type is `switch`')
+        : null,
+  ),
 
-  static defaultProps = {
-    type: 'checkbox',
-    inline: false,
-    disabled: false,
-    isValid: false,
-    isInvalid: false,
-    title: '',
-  };
+  /** Manually style the input as valid */
+  isValid: PropTypes.bool.isRequired,
 
-  render() {
-    const {
+  /** Manually style the input as invalid */
+  isInvalid: PropTypes.bool.isRequired,
+
+  /** A message to display when the input is in a validation state */
+  feedback: PropTypes.node,
+};
+
+const defaultProps = {
+  type: 'checkbox',
+  inline: false,
+  disabled: false,
+  isValid: false,
+  isInvalid: false,
+  title: '',
+};
+
+const FormCheck = React.forwardRef(
+  (
+    {
       id,
       bsPrefix,
+      bsCustomPrefix,
       inline,
       disabled,
       isValid,
       isInvalid,
       feedback,
-      inputRef,
       className,
       style,
       title,
       type,
       label,
       children,
+      custom: propCustom,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as = 'input',
       ...props
-    } = this.props;
+    },
+    ref,
+  ) => {
+    const custom = type === 'switch' ? true : propCustom;
+
+    bsPrefix = custom
+      ? useBootstrapPrefix(bsCustomPrefix, 'custom-control')
+      : useBootstrapPrefix(bsPrefix, 'form-check');
+
+    const { controlId } = useContext(FormContext);
+    const innerFormContext = useMemo(
+      () => ({
+        controlId: id || controlId,
+        custom,
+      }),
+      [controlId, custom, id],
+    );
 
     const hasLabel = label != null && label !== false && !children;
 
     const input = (
       <FormCheckInput
         {...props}
-        type={type}
-        ref={inputRef}
+        type={type === 'switch' ? 'checkbox' : type}
+        ref={ref}
         isValid={isValid}
         isInvalid={isInvalid}
         isStatic={!hasLabel}
         disabled={disabled}
+        as={as}
       />
     );
 
     return (
-      <FormContext.Transform
-        mapToValue={({ controlId }) => ({ controlId: id || controlId })}
-      >
+      <FormContext.Provider value={innerFormContext}>
         <div
           style={style}
           className={classNames(
             className,
             bsPrefix,
+            custom && `custom-${type}`,
             inline && `${bsPrefix}-inline`,
           )}
         >
           {children || (
-            <React.Fragment>
+            <>
               {input}
               {hasLabel && (
                 <FormCheckLabel title={title}>{label}</FormCheckLabel>
@@ -123,19 +168,19 @@ class FormCheck extends React.Component {
                   {feedback}
                 </Feedback>
               )}
-            </React.Fragment>
+            </>
           )}
         </div>
-      </FormContext.Transform>
+      </FormContext.Provider>
     );
-  }
-}
-const DecoratedFormCheck = createBootstrapComponent(FormCheck, {
-  forwardRefAs: 'inputRef',
-  prefix: 'form-check',
-});
+  },
+);
 
-DecoratedFormCheck.Input = FormCheckInput;
-DecoratedFormCheck.Label = FormCheckLabel;
+FormCheck.displayName = 'FormCheck';
+FormCheck.propTypes = propTypes;
+FormCheck.defaultProps = defaultProps;
 
-export default DecoratedFormCheck;
+FormCheck.Input = FormCheckInput;
+FormCheck.Label = FormCheckLabel;
+
+export default FormCheck;

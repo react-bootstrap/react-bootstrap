@@ -47,7 +47,7 @@ describe('<Navbar>', () => {
       <Navbar>
         <Nav />
       </Navbar>,
-    ).assertSingle('ul.navbar-nav');
+    ).assertSingle('div.navbar-nav');
   });
 
   it('Should add custom toggle', () => {
@@ -58,8 +58,8 @@ describe('<Navbar>', () => {
         </Navbar>,
       )
         .assertSingle('p.navbar-toggler')
-        .text(),
-      'hi',
+        .text()
+        .should.equal('hi'),
     );
   });
 
@@ -119,7 +119,7 @@ describe('<Navbar>', () => {
     let collapse = wrapper.find('Collapse');
 
     expect(collapse.is('[in=false]')).to.equal(true);
-    expect(toggle.hasClass('collapsed')).to.equal(false);
+    expect(toggle.hasClass('collapsed')).to.equal(true);
 
     toggle.simulate('click');
 
@@ -127,7 +127,7 @@ describe('<Navbar>', () => {
     collapse = wrapper.find('Collapse');
 
     expect(collapse.is('[in=true]')).to.equal(true);
-    expect(toggle.hasClass('collapsed')).to.equal(true);
+    expect(toggle.hasClass('collapsed')).to.equal(false);
   });
 
   it('Should open external href link in collapseOnSelect', () => {
@@ -222,5 +222,10 @@ describe('<Navbar>', () => {
     expect(navItemSpy).to.be.calledOnce;
     expect(selectSpy).to.be.calledOnce;
     expect(selectSpy).to.be.calledWith('#home');
+  });
+
+  it('Should have nav as default component', () => {
+    const wrapper = mount(<Navbar />);
+    expect(wrapper.find('nav').length).to.equal(1);
   });
 });

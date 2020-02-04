@@ -1,13 +1,10 @@
 import classNames from 'classnames';
-import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+import React, { useContext } from 'react';
 import warning from 'warning';
-
-import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
 import Feedback from './Feedback';
 import FormContext from './FormContext';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /**
@@ -21,9 +18,9 @@ const propTypes = {
    * it will be a DOM node, when resolved.
    *
    * @type {ReactRef}
-   * @alias {inputRef}
+   * @alias ref
    */
-  ref: PropTypes.any,
+  _ref: PropTypes.any,
   /**
    * Input size variants
    *
@@ -34,9 +31,9 @@ const propTypes = {
   /**
    * The underlying HTML element to use when rendering the FormControl.
    *
-   * @type {('input'|'textarea'|elementType)}
+   * @type {('input'|'textarea'|'select'|elementType)}
    */
-  as: elementType,
+  as: PropTypes.elementType,
 
   /**
    * Render the input as plain text. Generally used along side `readOnly`.
@@ -76,27 +73,27 @@ const propTypes = {
   isInvalid: PropTypes.bool,
 };
 
-const defaultProps = {
-  as: 'input',
-};
-
-class FormControl extends React.Component {
-  render() {
-    const {
+const FormControl = React.forwardRef(
+  (
+    {
       bsPrefix,
       type,
       size,
       id,
-      inputRef, // eslint-disable-line react/prop-types
       className,
       isValid,
       isInvalid,
       plaintext,
       readOnly,
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'input',
       ...props
-    } = this.props;
+    },
+    ref,
+  ) => {
+    const { controlId } = useContext(FormContext);
 
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-control');
     let classes;
     if (plaintext) {
       classes = { [`${bsPrefix}-plaintext`]: true };
@@ -109,13 +106,18 @@ class FormControl extends React.Component {
       };
     }
 
+    warning(
+      controlId == null || !id,
+      '`controlId` is ignored on `<FormControl>` when `id` is specified.',
+    );
+
     return (
       <Component
         {...props}
         type={type}
-        id={id}
-        ref={inputRef}
+        ref={ref}
         readOnly={readOnly}
+        id={id || controlId}
         className={classNames(
           className,
           classes,
@@ -124,31 +126,12 @@ class FormControl extends React.Component {
         )}
       />
     );
-  }
-}
-
-FormControl.propTypes = propTypes;
-FormControl.defaultProps = defaultProps;
-
-const mapContext = ({ controlId }, { id }) => {
-  warning(
-    controlId == null || !id,
-    '`controlId` is ignored on `<FormControl>` when `id` is specified.',
-  );
-  return {
-    id: id || controlId,
-  };
-};
-
-const DecoratedFormControl = mapContextToProps(
-  FormContext.Consumer,
-  mapContext,
-  createBootstrapComponent(FormControl, {
-    prefix: 'form-control',
-    forwardRefAs: 'inputRef',
-  }),
+  },
 );
 
-DecoratedFormControl.Feedback = Feedback;
+FormControl.displayName = 'FormControl';
+FormControl.propTypes = propTypes;
 
-export default DecoratedFormControl;
+FormControl.Feedback = Feedback;
+
+export default FormControl;

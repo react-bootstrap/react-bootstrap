@@ -2,28 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Collapse from './Collapse';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
 
-class NavbarCollapse extends React.Component {
-  static propTypes = {
-    /** @default 'navbar-collapse' */
-    bsPrefix: PropTypes.string,
-  };
+const propTypes = {
+  /** @default 'navbar-collapse' */
+  bsPrefix: PropTypes.string,
+};
 
-  render() {
-    const { children, bsPrefix, ...props } = this.props;
-
+const NavbarCollapse = React.forwardRef(
+  ({ children, bsPrefix, ...props }, ref) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-collapse');
     return (
       <NavbarContext.Consumer>
         {context => (
           <Collapse in={!!(context && context.expanded)} {...props}>
-            <div className={bsPrefix}>{children}</div>
+            <div ref={ref} className={bsPrefix}>
+              {children}
+            </div>
           </Collapse>
         )}
       </NavbarContext.Consumer>
     );
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(NavbarCollapse, 'navbar-collapse');
+NavbarCollapse.displayName = 'NavbarCollapse';
+NavbarCollapse.propTypes = propTypes;
+
+export default NavbarCollapse;

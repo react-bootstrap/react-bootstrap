@@ -1,83 +1,80 @@
 import classNames from 'classnames';
-import { findDOMNode } from 'react-dom';
 import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
-import { elementType } from 'prop-types-extra';
-import BaseDropdownToggle from 'react-overlays//DropdownToggle';
 import React from 'react';
-
+import { useDropdownToggle } from 'react-overlays/DropdownToggle';
+import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Button from './Button';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
+import useWrappedRefWithWarning from './useWrappedRefWithWarning';
 
-const wrapRef = props => {
-  const { ref } = props;
-  props.ref = ref.__wrapped || (ref.__wrapped = r => ref(findDOMNode(r)));
-  return props;
+const propTypes = {
+  /**
+   * @default 'dropdown-toggle'
+   */
+  bsPrefix: PropTypes.string,
+
+  /**
+   * An html id attribute, necessary for assistive technologies, such as screen readers.
+   * @type {string|number}
+   * @required
+   */
+  id: isRequiredForA11y(PropTypes.any),
+
+  split: PropTypes.bool,
+
+  as: PropTypes.elementType,
+
+  /**
+   * to passthrough to the underlying button or whatever from DropdownButton
+   * @private
+   */
+  childBsPrefix: PropTypes.string,
 };
 
-class DropdownToggle extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'dropdown-toggle'
-     */
-    bsPrefix: PropTypes.string,
-    title: PropTypes.string,
-
-    /**
-     * An html id attribute, necessary for assistive technologies, such as screen readers.
-     * @type {string|number}
-     * @required
-     */
-    id: isRequiredForA11y(PropTypes.any),
-
-    split: PropTypes.bool,
-
-    as: elementType,
-
-    /**
-     * to passthrough to the underlying button or whatever from DropdownButton
-     * @private
-     */
-    childBsPrefix: PropTypes.string,
-  };
-
-  static defaultProps = {
-    as: Button,
-  };
-
-  render() {
-    const {
+const DropdownToggle = React.forwardRef(
+  (
+    {
       bsPrefix,
       split,
       className,
       children,
       childBsPrefix,
-      as: Component,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = Button,
       ...props
-    } = this.props;
+    },
+    ref,
+  ) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-toggle');
+
+    if (childBsPrefix !== undefined) {
+      props.bsPrefix = childBsPrefix;
+    }
+
+    const [toggleProps, { toggle }] = useDropdownToggle();
+
+    toggleProps.ref = useMergedRefs(
+      toggleProps.ref,
+      useWrappedRefWithWarning(ref, 'DropdownToggle'),
+    );
 
     // This intentionally forwards size and variant (if set) to the
     // underlying component, to allow it to render size and style variants.
     return (
-      <BaseDropdownToggle>
-        {({ toggle, props: toggleProps }) => (
-          <Component
-            onClick={toggle}
-            bsPrefix={childBsPrefix}
-            className={classNames(
-              className,
-              bsPrefix,
-              split && `${bsPrefix}-split`,
-            )}
-            {...wrapRef(toggleProps)}
-            {...props}
-          >
-            {children}
-          </Component>
-        )}
-      </BaseDropdownToggle>
+      <Component
+        onClick={toggle}
+        className={classNames(className, prefix, split && `${prefix}-split`)}
+        {...toggleProps}
+        {...props}
+      >
+        {children}
+      </Component>
     );
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(DropdownToggle, 'dropdown-toggle');
+DropdownToggle.displayName = 'DropdownToggle';
+DropdownToggle.propTypes = propTypes;
+
+export default DropdownToggle;

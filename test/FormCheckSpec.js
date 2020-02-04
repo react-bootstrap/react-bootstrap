@@ -1,7 +1,7 @@
-import React from 'react';
 import { mount } from 'enzyme';
-
+import React from 'react';
 import FormCheck from '../src/FormCheck';
+import Switch from '../src/Switch';
 
 describe('<FormCheck>', () => {
   it('should render correctly', () => {
@@ -79,5 +79,50 @@ describe('<FormCheck>', () => {
     const instance = mount(<Container />).instance();
 
     expect(instance.input.tagName).to.equal('INPUT');
+  });
+
+  it('should supports custom', () => {
+    const wrapper = mount(<FormCheck custom label="My label" />);
+
+    wrapper
+      .assertSingle('div.custom-control')
+      .assertSingle('div.custom-checkbox')
+      .assertSingle('input.custom-control-input');
+
+    wrapper.assertSingle('label.custom-control-label');
+  });
+
+  it('should support custom with inline', () => {
+    const wrapper = mount(<FormCheck custom inline label="My label" />);
+    wrapper.assertSingle('div.custom-control-inline');
+  });
+
+  it('should supports switches', () => {
+    let wrapper = mount(<FormCheck type="switch" label="My label" />);
+
+    wrapper
+      .assertSingle('div.custom-control')
+      .assertSingle('div.custom-switch')
+      .assertSingle('input[type="checkbox"].custom-control-input');
+
+    wrapper.assertSingle('label.custom-control-label');
+    wrapper.unmount();
+
+    wrapper = mount(<Switch label="My label" />);
+
+    wrapper
+      .assertSingle('div.custom-control')
+      .assertSingle('div.custom-switch')
+      .assertSingle('input[type="checkbox"].custom-control-input');
+
+    wrapper.assertSingle('label.custom-control-label');
+  });
+
+  it('should support "as"', () => {
+    const Surrogate = ({ className = '', ...rest }) => (
+      <input className={`extraClass ${className}'`} {...rest} />
+    );
+    const wrapper = mount(<FormCheck as={Surrogate} />);
+    wrapper.assertSingle('input.extraClass[type="checkbox"]');
   });
 });

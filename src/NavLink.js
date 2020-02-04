@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
+
 import React from 'react';
 
 import SafeAnchor from './SafeAnchor';
 import AbstractNavItem from './AbstractNavItem';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
 const propTypes = {
   /**
@@ -41,16 +41,13 @@ const propTypes = {
   onSelect: PropTypes.func,
 
   /**
-   * Uniquely idenifies the `NavItem` amoungst its siblings,
-   * used to determine and control the active state ofthe parent `Nav`
+   * Uniquely idenifies the `NavItem` amongst its siblings,
+   * used to determine and control the active state of the parent `Nav`
    */
   eventKey: PropTypes.any,
 
   /** @default 'a' */
-  as: elementType,
-
-  /** @private */
-  onClick: PropTypes.func,
+  as: PropTypes.elementType,
 };
 
 const defaultProps = {
@@ -58,32 +55,29 @@ const defaultProps = {
   as: SafeAnchor,
 };
 
-function NavLink({
-  bsPrefix,
-  disabled,
-  className,
-  href,
-  eventKey,
-  onSelect,
-  innerRef,
-  as,
-  ...props
-}) {
-  return (
-    <AbstractNavItem
-      {...props}
-      href={href}
-      ref={innerRef}
-      eventKey={eventKey}
-      as={as}
-      disabled={disabled}
-      onSelect={onSelect}
-      className={classNames(className, bsPrefix, disabled && 'disabled')}
-    />
-  );
-}
+const NavLink = React.forwardRef(
+  (
+    { bsPrefix, disabled, className, href, eventKey, onSelect, as, ...props },
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-link');
+    return (
+      <AbstractNavItem
+        {...props}
+        href={href}
+        ref={ref}
+        eventKey={eventKey}
+        as={as}
+        disabled={disabled}
+        onSelect={onSelect}
+        className={classNames(className, bsPrefix, disabled && 'disabled')}
+      />
+    );
+  },
+);
 
+NavLink.displayName = 'NavLink';
 NavLink.propTypes = propTypes;
 NavLink.defaultProps = defaultProps;
 
-export default createBootstrapComponent(NavLink, 'nav-link');
+export default NavLink;

@@ -1,47 +1,49 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-class CardImg extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'card-img'
-     */
-    bsPrefix: PropTypes.string.isRequired,
+const propTypes = {
+  /**
+   * @default 'card-img'
+   */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * Defines image position inside
-     * the card.
-     *
-     * @type {('top'|'bottom')}
-     */
-    variant: PropTypes.oneOf(['top', 'bottom', null]),
+  /**
+   * Defines image position inside
+   * the card.
+   *
+   * @type {('top'|'bottom')}
+   */
+  variant: PropTypes.oneOf(['top', 'bottom', null]),
 
-    as: elementType,
-  };
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    as: 'img',
-    variant: null,
-  };
+const defaultProps = {
+  variant: null,
+};
 
-  render() {
-    const {
-      bsPrefix,
-      className,
-      variant,
-      as: Component,
-      ...props
-    } = this.props;
+const CardImg = React.forwardRef(
+  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+  ({ bsPrefix, className, variant, as: Component = 'img', ...props }, ref) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'card-img');
 
-    const baseClass = variant ? `${bsPrefix}-${variant}` : bsPrefix;
     return (
-      <Component className={classNames(baseClass, className)} {...props} />
+      <Component
+        ref={ref}
+        className={classNames(
+          variant ? `${prefix}-${variant}` : prefix,
+          className,
+        )}
+        {...props}
+      />
     );
-  }
-}
+  },
+);
+CardImg.displayName = 'CardImg';
+CardImg.propTypes = propTypes;
+CardImg.defaultProps = defaultProps;
 
-export default createBootstrapComponent(CardImg, 'card-img');
+export default CardImg;

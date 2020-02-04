@@ -1,114 +1,119 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
-import React from 'react';
-import mapContextToProps from 'react-context-toolbox/lib/mapContextToProps';
+import React, { useContext } from 'react';
+import useEventCallback from '@restart/hooks/useEventCallback';
 
-import chain from './utils/createChainedFunction';
 import SafeAnchor from './SafeAnchor';
 import SelectableContext, { makeEventKey } from './SelectableContext';
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 import NavContext from './NavContext';
 
-class DropdownItem extends React.Component {
-  static propTypes = {
-    /** @default 'dropdown' */
-    bsPrefix: PropTypes.string.isRequired,
+const propTypes = {
+  /** @default 'dropdown' */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * Highlight the menu item as active.
-     */
-    active: PropTypes.bool,
+  /**
+   * Highlight the menu item as active.
+   */
+  active: PropTypes.bool,
 
-    /**
-     * Disable the menu item, making it unselectable.
-     */
-    disabled: PropTypes.bool,
+  /**
+   * Disable the menu item, making it unselectable.
+   */
+  disabled: PropTypes.bool,
 
-    /**
-     * Value passed to the `onSelect` handler, useful for identifying the selected menu item.
-     */
-    eventKey: PropTypes.any,
+  /**
+   * Value passed to the `onSelect` handler, useful for identifying the selected menu item.
+   */
+  eventKey: PropTypes.any,
 
-    /**
-     * HTML `href` attribute corresponding to `a.href`.
-     */
-    href: PropTypes.string,
+  /**
+   * HTML `href` attribute corresponding to `a.href`.
+   */
+  href: PropTypes.string,
 
-    /**
-     * Callback fired when the menu item is clicked.
-     */
-    onClick: PropTypes.func,
+  /**
+   * Callback fired when the menu item is clicked.
+   */
+  onClick: PropTypes.func,
 
-    /**
-     * Callback fired when the menu item is selected.
-     *
-     * ```js
-     * (eventKey: any, event: Object) => any
-     * ```
-     */
-    onSelect: PropTypes.func,
+  /**
+   * Callback fired when the menu item is selected.
+   *
+   * ```js
+   * (eventKey: any, event: Object) => any
+   * ```
+   */
+  onSelect: PropTypes.func,
 
-    as: elementType,
-  };
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    as: SafeAnchor,
-    disabled: false,
-  };
+const defaultProps = {
+  as: SafeAnchor,
+  disabled: false,
+};
 
-  handleClick = event => {
-    const { disabled, onSelect, onClick, eventKey, href } = this.props;
-    const key = makeEventKey(eventKey, href);
-    // SafeAnchor handles the disabled case, but be handle it here
-    // for other components
-    if (disabled) return;
-    if (onClick) onClick(event);
-    if (onSelect) onSelect(key, event);
-    if (key !== null && this.contextSelect) this.contextSelect(key, event);
-  };
-
-  render() {
-    const {
+const DropdownItem = React.forwardRef(
+  (
+    {
       bsPrefix,
-      active,
       className,
       children,
-      eventKey: _,
-      onSelect: _1,
+      eventKey,
+      disabled,
+      href,
+      onClick,
+      onSelect,
+      active: propActive,
       as: Component,
       ...props
-    } = this.props;
+    },
+    ref,
+  ) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-item');
+    const onSelectCtx = useContext(SelectableContext);
+    const navContext = useContext(NavContext);
+
+    const { activeKey } = navContext || {};
+    const key = makeEventKey(eventKey, href);
+
+    const active =
+      propActive == null && key != null
+        ? makeEventKey(activeKey) === key
+        : propActive;
+
+    const handleClick = useEventCallback(event => {
+      // SafeAnchor handles the disabled case, but we handle it here
+      // for other components
+      if (disabled) return;
+      if (onClick) onClick(event);
+      if (onSelectCtx) onSelectCtx(key, event);
+      if (onSelect) onSelect(key, event);
+    });
 
     return (
       <Component
         {...props}
+        ref={ref}
+        href={href}
+        disabled={disabled}
         className={classNames(
           className,
-          bsPrefix,
+          prefix,
           active && 'active',
-          props.disabled && 'disabled',
+          disabled && 'disabled',
         )}
-        onClick={this.handleClick}
+        onClick={handleClick}
       >
         {children}
       </Component>
     );
-  }
-}
-
-export default mapContextToProps(
-  [SelectableContext, NavContext],
-  (onSelect, navContext, props) => {
-    const { activeKey } = navContext || {};
-    const key = makeEventKey(props.eventKey, props.href);
-    return {
-      onSelect: chain(props.onSelect, onSelect),
-      active:
-        props.active == null && key != null
-          ? makeEventKey(activeKey) === key
-          : props.active,
-    };
   },
-  createBootstrapComponent(DropdownItem, 'dropdown-item'),
 );
+
+DropdownItem.displayName = 'DropdownItem';
+DropdownItem.propTypes = propTypes;
+DropdownItem.defaultProps = defaultProps;
+
+export default DropdownItem;

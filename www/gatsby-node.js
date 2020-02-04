@@ -1,5 +1,12 @@
-const path = require('path');
 const _ = require('lodash');
+const path = require('path');
+
+const config = require('./config');
+
+const stringifiedConfig = Object.entries(config).reduce(
+  (acc, [key, value]) => ({ ...acc, [key]: JSON.stringify(value) }),
+  {},
+);
 
 exports.onCreateWebpackConfig = function onCreateWebpackConfig({
   actions,
@@ -10,7 +17,7 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
 }) {
   actions.setWebpackConfig({
     devtool: stage.includes('develop')
-      ? 'cheap-inline-module-source-map'
+      ? 'inline-module-source-map'
       : 'source-map',
     module: {
       rules: [
@@ -21,16 +28,19 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
       ],
     },
     resolve: {
+      symlinks: false,
       alias: {
         react: path.resolve(__dirname, '../node_modules/react'),
         'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),
-        'react-bootstrap$': path.resolve(__dirname, '../src/index.js'),
-        'react-bootstrap/lib': path.resolve(__dirname, '../src'),
+        'react-bootstrap': path.resolve(__dirname, '../src'),
       },
     },
     plugins: [
       // See https://github.com/FormidableLabs/react-live/issues/5
       plugins.ignore(/^(xor|props)$/),
+      plugins.define({
+        config: stringifiedConfig,
+      }),
     ],
   });
 

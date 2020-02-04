@@ -1,6 +1,7 @@
+const { cleanDoclets } = require('gatsby-transformer-react-docgen/doclets');
 const path = require('path');
 const remarkSlug = require('remark-slug');
-const { cleanDoclets } = require('gatsby-transformer-react-docgen/Doclets');
+
 const defaultDescriptions = require('./src/defaultPropDescriptions');
 
 module.exports = {
@@ -17,10 +18,12 @@ module.exports = {
   plugins: [
     'gatsby-plugin-sorted-assets',
     {
-      resolve: 'gatsby-mdx',
+      resolve: 'gatsby-plugin-mdx',
       options: {
-        defaultLayout: require.resolve('./src/layouts/ApiLayout'),
-        mdPlugins: [remarkSlug],
+        defaultLayouts: {
+          default: require.resolve('./src/layouts/ApiLayout'),
+        },
+        remarkPlugins: [remarkSlug],
       },
     },
     {
@@ -58,7 +61,7 @@ module.exports = {
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sass',
     {
-      resolve: 'gatsby-plugin-css-literal-loader',
+      resolve: 'gatsby-plugin-astroturf',
       options: { extension: '.module.scss' },
     },
   ],

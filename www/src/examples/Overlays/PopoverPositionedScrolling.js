@@ -1,31 +1,24 @@
-const popoverLeft = (
-  <Popover id="popover-positioned-scrolling-left" title="Popover left">
-    <strong>Holy guacamole!</strong> Check this info.
+const popover = position => (
+  <Popover id={`popover-positioned-scrolling-${position}`}>
+    <Popover.Title as="h3">{`Popover ${position}`}</Popover.Title>
+    <Popover.Content>
+      <strong>Holy guacamole!</strong> Check this info.
+    </Popover.Content>
   </Popover>
 );
 
-const popoverTop = (
-  <Popover id="popover-positioned-scrolling-top" title="Popover top">
-    <strong>Holy guacamole!</strong> Check this info.
-  </Popover>
-);
+const popoverLeft = <popover position="left" />;
 
-const popoverBottom = (
-  <Popover id="popover-positioned-scrolling-bottom" title="Popover bottom">
-    <strong>Holy guacamole!</strong> Check this info.
-  </Popover>
-);
+const popoverTop = <popover position="top" />;
 
-const popoverRight = (
-  <Popover id="popover-positioned-scrolling-right" title="Popover right">
-    <strong>Holy guacamole!</strong> Check this info.
-  </Popover>
-);
+const popoverBottom = <popover position="bottom" />;
+
+const popoverRight = <popover position="right" />;
 
 class Positioner extends React.Component {
   render() {
     return (
-      <ButtonToolbar style={{ padding: '100px 0' }}>
+      <div style={{ padding: '100px 0' }}>
         <OverlayTrigger
           container={this}
           trigger="click"
@@ -33,7 +26,7 @@ class Positioner extends React.Component {
           overlay={popoverLeft}
         >
           <Button>Holy guacamole!</Button>
-        </OverlayTrigger>
+        </OverlayTrigger>{' '}
         <OverlayTrigger
           container={this}
           trigger="click"
@@ -41,7 +34,7 @@ class Positioner extends React.Component {
           overlay={popoverTop}
         >
           <Button>Holy guacamole!</Button>
-        </OverlayTrigger>
+        </OverlayTrigger>{' '}
         <OverlayTrigger
           container={this}
           trigger="click"
@@ -49,7 +42,7 @@ class Positioner extends React.Component {
           overlay={popoverBottom}
         >
           <Button>Holy guacamole!</Button>
-        </OverlayTrigger>
+        </OverlayTrigger>{' '}
         <OverlayTrigger
           container={this}
           trigger="click"
@@ -58,7 +51,7 @@ class Positioner extends React.Component {
         >
           <Button>Holy guacamole!</Button>
         </OverlayTrigger>
-      </ButtonToolbar>
+      </div>
     );
   }
 }

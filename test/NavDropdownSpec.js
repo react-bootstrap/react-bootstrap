@@ -19,7 +19,7 @@ describe('<NavDropdown>', () => {
       </NavDropdown>,
     );
 
-    wrapper.assertSingle('li.dropdown.test-class');
+    wrapper.assertSingle('div.dropdown.test-class');
 
     wrapper
       .assertSingle('a.nav-link')

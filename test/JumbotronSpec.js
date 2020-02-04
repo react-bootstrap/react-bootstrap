@@ -25,4 +25,7 @@ describe('<Jumbotron>', () => {
       </Jumbotron>,
     ).assertSingle('section.jumbotron strong');
   });
+  it('Should have div as default component', () => {
+    mount(<Jumbotron />).assertSingle('div');
+  });
 });

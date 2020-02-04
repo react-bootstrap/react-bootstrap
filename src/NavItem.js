@@ -1,42 +1,39 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { elementType } from 'prop-types-extra';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-class NavItem extends React.Component {
-  static propTypes = {
-    /**
-     * @default 'nav-item'
-     */
-    bsPrefix: PropTypes.string,
+const propTypes = {
+  /**
+   * @default 'nav-item'
+   */
+  bsPrefix: PropTypes.string,
 
-    /** The ARIA role of the component */
-    role: PropTypes.string,
+  /** The ARIA role of the component */
+  role: PropTypes.string,
 
-    as: elementType,
-  };
+  as: PropTypes.elementType,
+};
 
-  static defaultProps = {
-    as: 'li',
-  };
-
-  render() {
-    const {
-      bsPrefix,
-      className,
-      children,
-      as: Component,
-      ...props
-    } = this.props;
+const NavItem = React.forwardRef(
+  // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+  ({ bsPrefix, className, children, as: Component = 'div', ...props }, ref) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-item');
 
     return (
-      <Component {...props} className={classNames(className, bsPrefix)}>
+      <Component
+        {...props}
+        ref={ref}
+        className={classNames(className, bsPrefix)}
+      >
         {children}
       </Component>
     );
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(NavItem, 'nav-item');
+NavItem.displayName = 'NavItem';
+NavItem.propTypes = propTypes;
+
+export default NavItem;

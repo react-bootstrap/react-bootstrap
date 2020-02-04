@@ -5,7 +5,7 @@
       xs=12 md=8
     </Col>
     <Col xs={6} md={4}>
-      xl=6 md=4
+      xs=6 md=4
     </Col>
   </Row>
 

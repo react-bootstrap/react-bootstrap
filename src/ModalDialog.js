@@ -2,50 +2,57 @@ import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { createBootstrapComponent } from './ThemeProvider';
+import { useBootstrapPrefix } from './ThemeProvider';
 
-class ModalDialog extends React.Component {
-  static propTypes = {
-    bsPrefix: PropTypes.string,
+const propTypes = {
+  /** @default 'modal' */
+  bsPrefix: PropTypes.string,
 
-    /**
-     * Specifies a large or small modal.
-     *
-     * @type ('sm'|'lg')
-     */
-    size: PropTypes.string,
+  /**
+   * Render a large, extra large or small modal.
+   *
+   * @type ('sm'|'lg','xl')
+   */
+  size: PropTypes.string,
 
-    /**
-     * Specify whether the Component should be vertically centered
-     */
-    centered: PropTypes.bool,
-  };
+  /**
+   * Specify whether the Component should be vertically centered
+   */
+  centered: PropTypes.bool,
 
-  render() {
-    const {
-      bsPrefix,
-      className,
-      centered,
-      size,
-      children,
-      ...props
-    } = this.props;
+  /**
+   * Allows scrolling the `<Modal.Body>` instead of the entire Modal when overflowing.
+   */
+  scrollable: PropTypes.bool,
+};
 
-    const bsClass = `${bsPrefix}-dialog`;
+const ModalDialog = React.forwardRef(
+  (
+    { bsPrefix, className, centered, size, children, scrollable, ...props },
+    ref,
+  ) => {
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
+    const dialogClass = `${bsPrefix}-dialog`;
+
     return (
       <div
         {...props}
+        ref={ref}
         className={classNames(
-          bsClass,
+          dialogClass,
           className,
           size && `${bsPrefix}-${size}`,
-          centered && `${bsClass}-centered`,
+          centered && `${dialogClass}-centered`,
+          scrollable && `${dialogClass}-scrollable`,
         )}
       >
-        <div className={classNames(`${bsPrefix}-content`)}>{children}</div>
+        <div className={`${bsPrefix}-content`}>{children}</div>
       </div>
     );
-  }
-}
+  },
+);
 
-export default createBootstrapComponent(ModalDialog, 'modal');
+ModalDialog.displayName = 'ModalDialog';
+ModalDialog.propTypes = propTypes;
+
+export default ModalDialog;

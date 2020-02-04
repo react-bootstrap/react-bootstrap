@@ -1,25 +1,23 @@
 import PropTypes from 'prop-types';
-import forwardRef from 'react-context-toolbox/lib/forwardRef';
-import React from 'react';
+import forwardRef from '@restart/context/forwardRef';
+import React, { useContext, useMemo } from 'react';
 
-const { Provider, Consumer } = React.createContext(new Map());
+const ThemeContext = React.createContext({});
+const { Consumer, Provider } = ThemeContext;
 
-class ThemeProvider extends React.Component {
-  static propTypes = {
-    prefixes: PropTypes.object.isRequired,
-  };
+function ThemeProvider({ prefixes, children }) {
+  const copiedPrefixes = useMemo(() => ({ ...prefixes }), [prefixes]);
 
-  constructor(...args) {
-    super(...args);
-    this.prefixes = new Map();
-    Object.keys(this.props.prefixes).forEach(key => {
-      this.prefixes.set(key, this.props.prefixes[key]);
-    });
-  }
+  return <Provider value={copiedPrefixes}>{children}</Provider>;
+}
 
-  render() {
-    return <Provider value={this.prefixes}>{this.props.children}</Provider>;
-  }
+ThemeProvider.propTypes = {
+  prefixes: PropTypes.object.isRequired,
+};
+
+export function useBootstrapPrefix(prefix, defaultPrefix) {
+  const prefixes = useContext(ThemeContext);
+  return prefix || prefixes[defaultPrefix] || defaultPrefix;
 }
 
 function createBootstrapComponent(Component, opts) {
@@ -31,16 +29,9 @@ function createBootstrapComponent(Component, opts) {
   return forwardRef(
     ({ ...props }, ref) => {
       props[forwardRefAs] = ref;
-      return (
-        <Consumer>
-          {prefixes => (
-            <Component
-              {...props}
-              bsPrefix={props.bsPrefix || prefixes.get(prefix) || prefix}
-            />
-          )}
-        </Consumer>
-      );
+      // eslint-disable-next-line react/prop-types
+      const bsPrefix = useBootstrapPrefix(props.bsPrefix, prefix);
+      return <Component {...props} bsPrefix={bsPrefix} />;
     },
     { displayName: `Bootstrap(${Component.displayName || Component.name})` },
   );

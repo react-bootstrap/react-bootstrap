@@ -1,22 +1,21 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { css } from 'css-literal-loader/styled';
+import { css } from 'astroturf';
 
 import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import Overlay from '../../examples/Overlays/Overlay';
 import Disabled from '../../examples/Overlays/Disabled';
-import ScheduleUpdate from '../../examples/Overlays/ScheduleUpdate';
+import Overlay from '../../examples/Overlays/Overlay';
 import OverlayTrigger from '../../examples/Overlays/OverlayTrigger';
-import TooltipInCopy from '../../examples/Overlays/TooltipInCopy';
-import TooltipOverlay from '../../examples/Overlays/TooltipOverlay';
-import TooltipPositioned from '../../examples/Overlays/TooltipPositioned';
-
 import PopoverBasic from '../../examples/Overlays/PopoverBasic';
 import PopoverContained from '../../examples/Overlays/PopoverContained';
 import PopoverPositioned from '../../examples/Overlays/PopoverPositioned';
+import ScheduleUpdate from '../../examples/Overlays/ScheduleUpdate';
+import TooltipInCopy from '../../examples/Overlays/TooltipInCopy';
+import TooltipOverlay from '../../examples/Overlays/TooltipOverlay';
+import TooltipPositioned from '../../examples/Overlays/TooltipPositioned';
 
 import withLayout from '../../withLayout';
 
@@ -44,15 +43,15 @@ export default withLayout(function TooltipSection({ data }) {
         Overview
       </LinkedHeading>
 
-      <p>Things to know about the react-boostrap Overlay components.</p>
+      <p>Things to know about the React-Boostrap Overlay components.</p>
       <ul>
         <li>
-          Overlays rely on a 3rd party library{' '}
+          Overlays rely on the third-party library{' '}
           <a href="https://github.com/FezVrasta/react-popper">react-popper</a>,
-          a tiny react wrapper around{' '}
-          <a href="https://popper.js.org/">Popper.js</a>. It's include
-          automatically with react-bootstrap, but you should reference the API
-          for more advanced use-cases.
+          a tiny React wrapper around{' '}
+          <a href="https://popper.js.org/">Popper.js</a>. It's included
+          automatically with React-Bootstrap, but you should reference the API
+          for more advanced use cases.
         </li>
         <li>
           The <code>{'<Tooltip>'}</code> and <code>{'<Popover>'}</code>{' '}
@@ -74,7 +73,7 @@ export default withLayout(function TooltipSection({ data }) {
         Overlay
       </LinkedHeading>
       <p>
-        <code>Overlay</code> is the fundemental component for positioning and
+        <code>Overlay</code> is the fundamental component for positioning and
         controlling tooltip visibility. It's a wrapper around react-popper, that
         adds support for transitions, and visibility toggling.
       </p>
@@ -117,7 +116,7 @@ export default withLayout(function TooltipSection({ data }) {
         <a href="https://reactjs.org/docs/react-api.html#reactforwardref">
           forwardRef()
         </a>{' '}
-        for stateless function components.
+        for function components.
       </p>
 
       <ReactPlayground codeText={OverlayTrigger} />
@@ -180,7 +179,7 @@ export default withLayout(function TooltipSection({ data }) {
         Changing containers
       </LinkedHeading>
       <p>
-        Yopu can specify a <code>container</code> to control the DOM element the
+        You can specify a <code>container</code> to control the DOM element the
         overlay is appended to. This is especially useful when styles conflict
         with your Overlay's.
       </p>
@@ -212,6 +211,8 @@ export default withLayout(function TooltipSection({ data }) {
       <ComponentApi metadata={data.OverlayTrigger} />
       <ComponentApi metadata={data.Tooltip} />
       <ComponentApi metadata={data.Popover} />
+      <ComponentApi metadata={data.PopoverContent} />
+      <ComponentApi metadata={data.PopoverTitle} />
     </>
   );
 });
@@ -222,6 +223,12 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     Popover: componentMetadata(displayName: { eq: "Popover" }) {
+      ...ComponentApi_metadata
+    }
+    PopoverContent: componentMetadata(displayName: { eq: "PopoverContent" }) {
+      ...ComponentApi_metadata
+    }
+    PopoverTitle: componentMetadata(displayName: { eq: "PopoverTitle" }) {
       ...ComponentApi_metadata
     }
     Overlay: componentMetadata(displayName: { eq: "Overlay" }) {

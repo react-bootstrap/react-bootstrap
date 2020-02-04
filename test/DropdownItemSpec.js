@@ -91,14 +91,14 @@ describe('<Dropdown.Item>', () => {
     expect(handleSelect).to.have.been.called;
   });
 
-  it('does not pass onClick to DOM node', () => {
+  it('does not pass onSelect to DOM node', () => {
     mount(<Dropdown.Item onSelect={() => {}}>Item</Dropdown.Item>)
       .find('a')
       .props()
       .should.not.have.property('onSelect');
   });
 
-  it('does not pass onClick to children', () => {
+  it('does not pass onSelect to children', () => {
     mount(<Dropdown.Item onSelect={() => {}}>Item</Dropdown.Item>)
       .find('SafeAnchor')
       .props()
