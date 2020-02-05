@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 
 import { BsPrefixPropsWithChildren } from './helpers';
 
@@ -53,6 +52,7 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
+    const classNames = useClassNameMapper();
     const dialogClass = `${bsPrefix}-dialog`;
 
     return (

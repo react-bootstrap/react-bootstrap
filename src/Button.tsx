@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import SafeAnchor from './SafeAnchor';
 import {
   BsPrefixPropsWithChildren,
@@ -101,6 +100,7 @@ const Button: Button = React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'btn');
+    const classNames = useClassNameMapper();
 
     const classes = classNames(
       className,

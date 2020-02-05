@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BaseOverlay, {
   OverlayProps as BaseOverlayProps,
 } from 'react-overlays/Overlay';
 import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import { componentOrElement, elementType } from 'prop-types-extra';
+import { useClassNameMapper } from './ThemeProvider';
 import usePopperMarginModifiers from './usePopperMarginModifiers';
 import Fade from './Fade';
 import { TransitionType } from './helpers';
@@ -169,6 +169,8 @@ function Overlay({
   const [ref, marginModifiers] = usePopperMarginModifiers();
 
   const actualTransition = transition === true ? Fade : transition || null;
+
+  const classNames = useClassNameMapper();
 
   return (
     <BaseOverlay

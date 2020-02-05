@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import css from 'dom-helpers/css';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';

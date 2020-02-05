@@ -1,7 +1,7 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
 
+import { useClassNameMapper } from './ThemeProvider';
 import Button, { ButtonProps } from './Button';
 import {
   BsPrefixAndClassNameOnlyProps,
@@ -82,6 +82,7 @@ const ToggleButton = React.forwardRef<any, ToggleButtonProps>(
     ref,
   ) => {
     const [focused, setFocused] = useState(false);
+    const classNames = useClassNameMapper();
 
     const handleFocus = useCallback((e) => {
       if (e.target.tagName === 'INPUT') setFocused(true);

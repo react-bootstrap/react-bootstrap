@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface JumbotronProps extends BsPrefixProps {
@@ -36,6 +35,7 @@ const Jumbotron: Jumbotron = React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'jumbotron');
+    const classNames = useClassNameMapper();
     const classes = {
       [bsPrefix]: true,
       [`${bsPrefix}-fluid`]: fluid,

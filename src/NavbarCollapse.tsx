@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Collapse, { CollapseProps } from './Collapse';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
 import { BsPrefixProps } from './helpers';
 
@@ -19,6 +19,7 @@ const propTypes = {
 const NavbarCollapse = React.forwardRef(
   ({ children, bsPrefix, ...props }: NavbarCollapseProps, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-collapse');
+    const classNames = useClassNameMapper();
     return (
       <NavbarContext.Consumer>
         {(context) => (

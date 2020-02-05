@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import createWithBsPrefix from './createWithBsPrefix';
 import divWithClassName from './divWithClassName';
 import CardContext from './CardContext';
@@ -54,6 +53,11 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 
   /**
+   * ClassName mapping
+   */
+  classNameMap: PropTypes.object,
+
+  /**
    * Sets card background
    *
    * @type {('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'dark'|'light')}
@@ -91,6 +95,7 @@ const Card: Card = (React.forwardRef(
   (
     {
       bsPrefix,
+      classNameMap,
       className,
       bg,
       text,
@@ -104,6 +109,7 @@ const Card: Card = (React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'card');
+    const classNames = useClassNameMapper(classNameMap);
     const cardContext = useMemo(
       () => ({
         cardHeaderBsPrefix: `${prefix}-header`,

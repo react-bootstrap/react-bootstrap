@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 
 import {
   BsPrefixPropsWithChildren,
@@ -38,6 +37,7 @@ const ButtonToolbar: ButtonToolbar = React.forwardRef<
   ButtonToolbarProps
 >(({ bsPrefix, className, ...props }, ref) => {
   const prefix = useBootstrapPrefix(bsPrefix, 'btn-toolbar');
+  const classNames = useClassNameMapper();
 
   return <div {...props} ref={ref} className={classNames(className, prefix)} />;
 });

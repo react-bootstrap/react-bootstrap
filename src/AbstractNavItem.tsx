@@ -1,7 +1,7 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
+import { useClassNameMapper } from './ThemeProvider';
 
 import warning from 'warning';
 import NavContext from './NavContext';
@@ -65,6 +65,7 @@ const AbstractNavItem: AbstractNavItem = React.forwardRef(
     const navKey = makeEventKey(eventKey, props.href);
     const parentOnSelect = useContext(SelectableContext);
     const navContext = useContext(NavContext);
+    const classNames = useClassNameMapper();
 
     let isActive = active;
     if (navContext) {

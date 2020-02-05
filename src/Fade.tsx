@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
@@ -8,6 +7,7 @@ import Transition, {
 } from 'react-transition-group/Transition';
 import { TransitionCallbacks } from './helpers';
 import triggerBrowserReflow from './triggerBrowserReflow';
+import { useClassNameMapper } from './ThemeProvider';
 
 export interface FadeProps extends TransitionCallbacks {
   className?: string;
@@ -96,6 +96,8 @@ const Fade = React.forwardRef<Transition<any>, FadeProps>(
       },
       [props],
     );
+
+    const classNames = useClassNameMapper();
 
     return (
       <Transition

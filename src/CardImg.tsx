@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 export interface CardImgProps extends BsPrefixProps {
@@ -45,6 +44,7 @@ const CardImg: CardImg = React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'card-img');
+    const classNames = useClassNameMapper();
 
     return (
       <Component

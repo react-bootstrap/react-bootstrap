@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import all from 'prop-types-extra/lib/all';
 import React, { useContext, useMemo } from 'react';
@@ -6,7 +5,7 @@ import Feedback from './Feedback';
 import FormCheckInput from './FormCheckInput';
 import FormCheckLabel from './FormCheckLabel';
 import FormContext from './FormContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -171,6 +170,7 @@ const FormCheck: FormCheck = (React.forwardRef(
 
     bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
 
+    const classNames = useClassNameMapper();
     const { controlId } = useContext(FormContext);
     const innerFormContext = useMemo(
       () => ({

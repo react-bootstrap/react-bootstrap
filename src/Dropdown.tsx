@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import BaseDropdown from 'react-overlays/Dropdown';
@@ -8,7 +7,7 @@ import DropdownItem from './DropdownItem';
 import DropdownMenu from './DropdownMenu';
 import DropdownToggle from './DropdownToggle';
 import SelectableContext from './SelectableContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import createWithBsPrefix from './createWithBsPrefix';
 import {
   BsPrefixPropsWithChildren,
@@ -53,6 +52,12 @@ type Dropdown = BsPrefixRefForwardingComponent<'div', DropdownProps> & {
 const propTypes = {
   /** @default 'dropdown' */
   bsPrefix: PropTypes.string,
+
+  /**
+   * ClassName mapping
+   */
+  classNameMap: PropTypes.object,
+
   /**
    * Determines the direction and location of the Menu in relation to it's Toggle.
    */
@@ -127,6 +132,7 @@ const defaultProps = {
 const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
   const {
     bsPrefix,
+    classNameMap,
     drop,
     show,
     className,
@@ -142,6 +148,7 @@ const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
 
   const onSelectCtx = useContext(SelectableContext);
   const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
+  const classNames = useClassNameMapper(classNameMap);
 
   const handleToggle = useEventCallback(
     (nextShow, event, source = event.type) => {

@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import BreadcrumbItem from './BreadcrumbItem';
 import {
   BsPrefixPropsWithChildren,
@@ -47,6 +46,7 @@ const Breadcrumb: Breadcrumb = (React.forwardRef(
     {
       bsPrefix,
       className,
+      classNameMap,
       listProps,
       children,
       label,
@@ -57,9 +57,10 @@ const Breadcrumb: Breadcrumb = (React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'breadcrumb');
+    const classNames = useClassNameMapper(classNameMap);
 
     return (
-      <Component aria-label={label} className={className} ref={ref} {...props}>
+      <Component aria-label={label} className={classNames(className)} ref={ref} {...props}>
         <ol {...listProps} className={classNames(prefix, listProps?.className)}>
           {children}
         </ol>

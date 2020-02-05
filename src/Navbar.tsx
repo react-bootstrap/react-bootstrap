@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
@@ -8,7 +7,7 @@ import createWithBsPrefix from './createWithBsPrefix';
 import NavbarBrand from './NavbarBrand';
 import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import NavbarContext, { NavbarContextType } from './NavbarContext';
 import SelectableContext from './SelectableContext';
 import {
@@ -173,6 +172,7 @@ const Navbar: Navbar = (React.forwardRef((props: NavbarProps, ref) => {
   });
 
   const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'navbar');
+  const classNames = useClassNameMapper();
 
   const handleCollapse = useCallback<SelectCallback>(
     (...args) => {

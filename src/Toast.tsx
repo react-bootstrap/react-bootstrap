@@ -1,12 +1,11 @@
 import React, { useEffect, useMemo, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 
 import useTimeout from '@restart/hooks/useTimeout';
 import Fade from './Fade';
 import ToastHeader from './ToastHeader';
 import ToastBody from './ToastBody';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import ToastContext from './ToastContext';
 import {
   BsPrefixPropsWithChildren,
@@ -80,6 +79,7 @@ const Toast: BsPrefixRefForwardingComponent<
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'toast');
+    const classNames = useClassNameMapper();
 
     // We use refs for these, because we don't want to restart the autohide
     // timer in case these values change.

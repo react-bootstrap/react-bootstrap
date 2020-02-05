@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import FormContext from './FormContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type FormCheckInputType = 'checkbox' | 'radio';
@@ -83,6 +82,7 @@ const FormCheckInput: FormCheckInput = React.forwardRef(
       : [bsPrefix, 'form-check-input'];
 
     bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
+    const classNames = useClassNameMapper();
 
     return (
       <Component

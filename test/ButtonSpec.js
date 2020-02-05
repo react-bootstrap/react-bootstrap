@@ -139,4 +139,20 @@ describe('<Button>', () => {
       </Button>,
     ).assertSingle(`.my-btn.my-btn-danger`);
   });
+
+  it('Should allow a custom classNameMap', () => {
+    mount(
+      <Button
+        variant="danger"
+        classNameMap={{
+          btn: 'someMappedClassNameForBtn',
+          'btn-danger': 'someMappedClassNameForBtnDanger',
+        }}
+      >
+        Title
+      </Button>,
+    ).assertSingle(
+      `button.someMappedClassNameForBtn.someMappedClassNameForBtnDanger`,
+    );
+  });
 });

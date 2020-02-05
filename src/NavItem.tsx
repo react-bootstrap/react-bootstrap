@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -39,6 +38,7 @@ const NavItem: NavItem = React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'nav-item');
+    const classNames = useClassNameMapper();
 
     return (
       <Component

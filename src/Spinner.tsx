@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import React from 'react';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import { BsPrefixPropsWithChildren } from './helpers';
 import { Variant } from './types';
 
@@ -75,6 +74,7 @@ const Spinner = React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'spinner');
+    const classNames = useClassNameMapper();
     const bsSpinnerPrefix = `${bsPrefix}-${animation}`;
 
     return (

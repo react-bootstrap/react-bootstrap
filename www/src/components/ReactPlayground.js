@@ -244,9 +244,15 @@ const PRETTIER_IGNORE_REGEX = /({\s*\/\*\s+prettier-ignore\s+\*\/\s*})|(\/\/\s+p
 
 const propTypes = {
   codeText: PropTypes.string.isRequired,
+  additionalScope: PropTypes.object,
 };
 
-function Playground({ codeText, exampleClassName, showCode = true }) {
+function Playground({
+  codeText,
+  exampleClassName,
+  showCode = true,
+  additionalScope = {},
+}) {
   // Remove Prettier comments and trailing semicolons in JSX in displayed code.
   const code = codeText
     .replace(PRETTIER_IGNORE_REGEX, '')
@@ -256,7 +262,7 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
   return (
     <StyledContainer>
       <LiveProvider
-        scope={scope}
+        scope={{ ...scope, ...additionalScope }}
         code={code}
         mountStylesheet={false}
         noInline={codeText.includes('render(')}

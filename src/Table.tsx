@@ -1,7 +1,6 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 
 import {
   BsPrefixAndClassNameOnlyProps,
@@ -25,6 +24,11 @@ const propTypes = {
    * @default 'table'
    */
   bsPrefix: PropTypes.string,
+
+  /**
+   * ClassName mapping
+   */
+  classNameMap: PropTypes.object,
 
   /**
    * Adds zebra-striping to any table row within the `<tbody>`.
@@ -74,6 +78,7 @@ const Table: Table = React.forwardRef<HTMLTableElement, TableProps>(
   (
     {
       bsPrefix,
+      classNameMap,
       className,
       striped,
       bordered,
@@ -87,6 +92,7 @@ const Table: Table = React.forwardRef<HTMLTableElement, TableProps>(
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'table');
+    const classNames = useClassNameMapper(classNameMap);
     const classes = classNames(
       className,
       decoratedBsPrefix,
@@ -105,7 +111,7 @@ const Table: Table = React.forwardRef<HTMLTableElement, TableProps>(
         responsiveClass = `${responsiveClass}-${responsive}`;
       }
 
-      return <div className={responsiveClass}>{table}</div>;
+      return <div className={classNames(responsiveClass)}>{table}</div>;
     }
 
     return table;

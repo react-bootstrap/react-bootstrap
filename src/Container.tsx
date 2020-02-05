@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -54,6 +53,7 @@ const Container: Container = React.forwardRef(
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'container');
     const suffix = typeof fluid === 'string' ? `-${fluid}` : '-fluid';
+    const classNames = useClassNameMapper();
     return (
       <Component
         ref={ref}

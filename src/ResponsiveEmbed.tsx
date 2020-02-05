@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -54,6 +53,7 @@ const ResponsiveEmbed: ResponsiveEmbed = React.forwardRef<
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'embed-responsive');
+    const classNames = useClassNameMapper();
     const child = React.Children.only(children);
     return (
       <div

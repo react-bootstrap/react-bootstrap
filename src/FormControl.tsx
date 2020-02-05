@@ -1,11 +1,10 @@
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import all from 'prop-types-extra/lib/all';
 import React, { useContext } from 'react';
 import warning from 'warning';
 import Feedback from './Feedback';
 import FormContext from './FormContext';
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type FormControlElement =
@@ -156,6 +155,7 @@ const FormControl: BsPrefixRefForwardingComponent<
       : [bsPrefix, 'form-control'];
 
     bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
+    const classNames = useClassNameMapper();
 
     let classes;
     if (plaintext) {

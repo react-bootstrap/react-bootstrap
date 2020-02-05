@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -113,6 +112,7 @@ const Col: BsPrefixRefForwardingComponent<'div', ColProps> = React.forwardRef(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   ({ bsPrefix, className, as: Component = 'div', ...props }: ColProps, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'col');
+    const classNames = useClassNameMapper();
     const spans: string[] = [];
     const classes: string[] = [];
 

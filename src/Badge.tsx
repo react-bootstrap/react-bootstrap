@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import React from 'react';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 import { Variant } from './types';
 
@@ -51,6 +50,7 @@ const Badge: Badge = React.forwardRef(
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'badge');
+    const classNames = useClassNameMapper();
     return (
       <Component
         ref={ref}

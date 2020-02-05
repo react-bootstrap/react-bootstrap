@@ -1,9 +1,8 @@
-import classNames from 'classnames';
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
 import {
   BsPrefixPropsWithChildren,
@@ -20,6 +19,11 @@ type NavbarToggle = BsPrefixRefForwardingComponent<'button', NavbarToggleProps>;
 const propTypes = {
   /** @default 'navbar-toggler' */
   bsPrefix: PropTypes.string,
+
+  /**
+   * ClassName mapping
+   */
+  classNameMap: PropTypes.object,
 
   /** An accessible ARIA label for the toggler button. */
   label: PropTypes.string,
@@ -43,6 +47,7 @@ const NavbarToggle: NavbarToggle = React.forwardRef(
   (
     {
       bsPrefix,
+      classNameMap,
       className,
       children,
       label,
@@ -54,6 +59,7 @@ const NavbarToggle: NavbarToggle = React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-toggler');
+    const classNames = useClassNameMapper(classNameMap);
 
     const { onToggle, expanded } = useContext(NavbarContext) || {};
 
@@ -74,7 +80,7 @@ const NavbarToggle: NavbarToggle = React.forwardRef(
         aria-label={label}
         className={classNames(className, bsPrefix, !expanded && 'collapsed')}
       >
-        {children || <span className={`${bsPrefix}-icon`} />}
+        {children || <span className={classNames(`${bsPrefix}-icon`)} />}
       </Component>
     );
   },

@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
-import { useBootstrapPrefix } from './ThemeProvider';
+import { useBootstrapPrefix, useClassNameMapper } from './ThemeProvider';
 import TabContext from './TabContext';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import Fade from './Fade';
@@ -28,6 +27,11 @@ const propTypes = {
    * @default 'tab-pane'
    */
   bsPrefix: PropTypes.string,
+
+  /**
+   * ClassName mapping
+   */
+  classNameMap: PropTypes.object,
 
   as: PropTypes.elementType,
 
@@ -127,6 +131,7 @@ function useTabContext(props: TabPaneProps) {
 const TabPane: TabPane = React.forwardRef((props: TabPaneProps, ref) => {
   const {
     bsPrefix,
+    classNameMap,
     className,
     active,
     onEnter,
@@ -145,6 +150,7 @@ const TabPane: TabPane = React.forwardRef((props: TabPaneProps, ref) => {
   } = useTabContext(props);
 
   const prefix = useBootstrapPrefix(bsPrefix, 'tab-pane');
+  const classNames = useClassNameMapper(classNameMap);
 
   if (!active && !Transition && unmountOnExit) return null;
 
