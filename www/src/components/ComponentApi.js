@@ -27,11 +27,11 @@ function ComponentApi({ heading, metadata, exportedBy }) {
       <Heading h={heading || '3'} id={id} title={name} className="my-3">
         <div className="d-flex align-items-center">
           <Anchor target={id}>
-            <span className=" text-monospace">{name}</span>
+            <span className="text-monospace">{name}</span>
           </Anchor>
 
           <span className="ml-auto" />
-          <LinkToSource component={name} />
+          <LinkToSource component={importName} />
         </div>
       </Heading>
 
