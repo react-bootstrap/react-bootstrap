@@ -138,4 +138,17 @@ describe('<DropdownButton>', () => {
         .props().defaultShow,
     ).to.not.exist;
   });
+
+  it('should render have an aria-controls attribute referencing the dropdown menu', () => {
+    const wrapper = mount(
+      <DropdownButton id="test-id" title="title">
+        <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
+      </DropdownButton>,
+    );
+
+    wrapper.assertSingle('div#test-id-menu');
+    expect(wrapper.find('button#test-id').prop('aria-controls')).to.equal(
+      'test-id-menu',
+    );
+  });
 });
