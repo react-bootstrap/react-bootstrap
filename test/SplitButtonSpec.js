@@ -105,7 +105,7 @@ describe('<SplitButton>', () => {
       .should.equal('Label');
   });
 
-  it('should render have an aria-controls attribute referencing the dropdown menu', () => {
+  it('should have an aria-controls attribute referencing the dropdown menu', () => {
     const wrapper = mount(
       <SplitButton id="test-id" title="title">
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>

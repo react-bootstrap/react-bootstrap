@@ -63,7 +63,7 @@ describe('<NavDropdown>', () => {
     wrapper.assertSingle('a#test-id');
   });
 
-  it('should render have an aria-controls attribute referencing the dropdown menu', () => {
+  it('should have an aria-controls attribute referencing the dropdown menu', () => {
     const wrapper = mount(
       <NavDropdown id="test-id" title="title">
         <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
