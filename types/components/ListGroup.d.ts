@@ -6,7 +6,7 @@ import { BsPrefixComponent, SelectCallback } from './helpers';
 
 export interface ListGroupProps {
   variant?: 'flush';
-  horizontal?: boolean;
+  horizontal?: boolean | string;
   activeKey?: unknown;
   defaultActiveKey?: unknown;
   onSelect?: SelectCallback;
