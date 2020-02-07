@@ -9,7 +9,7 @@ const propTypes = {
    * A key that corresponds to the toggler that triggers this collapse's expand or collapse.
    */
   eventKey: PropTypes.string.isRequired,
-  
+
   /** Children prop should only contain a single child, and  is enforced as such */
   children: PropTypes.element.isRequired,
 };
