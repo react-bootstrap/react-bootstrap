@@ -62,11 +62,16 @@ const NavDropdown = React.forwardRef(
         disabled={disabled}
         childBsPrefix={bsPrefix}
         as={NavLink}
+        aria-controls={`${id}-menu`}
       >
         {title}
       </Dropdown.Toggle>
 
-      <Dropdown.Menu role={menuRole} rootCloseEvent={rootCloseEvent}>
+      <Dropdown.Menu
+        id={`${id}-menu`}
+        role={menuRole}
+        rootCloseEvent={rootCloseEvent}
+      >
         {children}
       </Dropdown.Menu>
     </Dropdown>

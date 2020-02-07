@@ -72,7 +72,6 @@ const DropdownMenu = React.forwardRef(
     const isNavbar = useContext(NavbarContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
     const {
-      hasShown,
       placement,
       show,
       alignEnd,
@@ -91,8 +90,6 @@ const DropdownMenu = React.forwardRef(
       menuProps.ref,
       useWrappedRefWithWarning(ref, 'DropdownMenu'),
     );
-
-    if (!hasShown) return null;
 
     // For custom components provide additional, non-DOM, props;
     if (typeof Component !== 'string') {
