@@ -52,4 +52,27 @@ describe('<NavDropdown>', () => {
       .text()
       .should.equal('DropdownItem 2 content');
   });
+
+  it('should pass the id to the NavLink element', () => {
+    const wrapper = mount(
+      <NavDropdown id="test-id" title="title">
+        <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
+      </NavDropdown>,
+    );
+
+    wrapper.assertSingle('a#test-id');
+  });
+
+  it('should render have an aria-controls attribute referencing the dropdown menu', () => {
+    const wrapper = mount(
+      <NavDropdown id="test-id" title="title">
+        <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
+      </NavDropdown>,
+    );
+
+    wrapper.assertSingle('div#test-id-menu');
+    expect(wrapper.find('a#test-id').prop('aria-controls')).to.equal(
+      'test-id-menu',
+    );
+  });
 });
