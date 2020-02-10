@@ -74,15 +74,10 @@ const DropdownButton = React.forwardRef(
         variant={variant}
         disabled={disabled}
         childBsPrefix={bsPrefix}
-        aria-controls={`${id}-menu`}
       >
         {title}
       </Dropdown.Toggle>
-      <Dropdown.Menu
-        id={`${id}-menu`}
-        role={menuRole}
-        rootCloseEvent={rootCloseEvent}
-      >
+      <Dropdown.Menu role={menuRole} rootCloseEvent={rootCloseEvent}>
         {children}
       </Dropdown.Menu>
     </Dropdown>

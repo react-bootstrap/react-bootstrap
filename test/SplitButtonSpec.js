@@ -104,17 +104,4 @@ describe('<SplitButton>', () => {
       .text()
       .should.equal('Label');
   });
-
-  it('should have an aria-controls attribute referencing the dropdown menu', () => {
-    const wrapper = mount(
-      <SplitButton id="test-id" title="title">
-        <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
-      </SplitButton>,
-    );
-
-    wrapper.assertSingle('div#test-id-menu');
-    expect(wrapper.find('button#test-id').prop('aria-controls')).to.equal(
-      'test-id-menu',
-    );
-  });
 });

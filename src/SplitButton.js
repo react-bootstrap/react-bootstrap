@@ -92,16 +92,11 @@ const SplitButton = React.forwardRef(
         variant={variant}
         disabled={props.disabled}
         childBsPrefix={bsPrefix}
-        aria-controls={`${id}-menu`}
       >
         <span className="sr-only">{toggleLabel}</span>
       </Dropdown.Toggle>
 
-      <Dropdown.Menu
-        id={`${id}-menu`}
-        role={menuRole}
-        rootCloseEvent={rootCloseEvent}
-      >
+      <Dropdown.Menu role={menuRole} rootCloseEvent={rootCloseEvent}>
         {children}
       </Dropdown.Menu>
     </Dropdown>
