@@ -91,7 +91,7 @@
     "chai": "^4.2.0",
     "chalk": "^3.0.0",
     "cherry-pick": "^0.5.0",
-    "codecov": "^3.6.4",
+    "codecov": "^3.6.5",
     "conventional-changelog-cli": "^2.0.31",
     "cpy-cli": "^3.0.0",
     "cross-env": "^7.0.0",
