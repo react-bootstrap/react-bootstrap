@@ -26,6 +26,9 @@ const propTypes = {
   /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
   menuRole: PropTypes.string,
 
+  /** Whether to render the dropdown menu in the DOM before the first time it is shown */
+  renderMenuOnMount: PropTypes.bool,
+
   /**
    *  Which event when fired outside the component will cause it to be closed.
    *
@@ -59,6 +62,7 @@ const DropdownButton = React.forwardRef(
       variant,
       size,
       menuRole,
+      renderMenuOnMount,
       disabled,
       href,
       id,
@@ -77,7 +81,11 @@ const DropdownButton = React.forwardRef(
       >
         {title}
       </Dropdown.Toggle>
-      <Dropdown.Menu role={menuRole} rootCloseEvent={rootCloseEvent}>
+      <Dropdown.Menu
+        role={menuRole}
+        renderOnMount={renderMenuOnMount}
+        rootCloseEvent={rootCloseEvent}
+      >
         {children}
       </Dropdown.Menu>
     </Dropdown>

@@ -10,6 +10,7 @@ export interface NavDropdownProps {
   disabled?: boolean;
   active?: boolean;
   menuRole?: string;
+  renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
   bsPrefix?: string;
 }

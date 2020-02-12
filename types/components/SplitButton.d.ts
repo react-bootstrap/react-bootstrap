@@ -20,6 +20,7 @@ export interface SplitButtonProps extends PropsFromToggle {
   onClick?: React.MouseEventHandler<this>;
   title: React.ReactNode;
   menuRole?: string;
+  renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
   bsPrefix?: string;
 }

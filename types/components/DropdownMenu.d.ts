@@ -4,6 +4,7 @@ import { BsPrefixComponent, SelectCallback } from './helpers';
 
 export interface DropdownMenuProps {
   show?: boolean;
+  renderOnMount?: boolean;
   flip?: boolean;
   alignRight?: boolean;
   onSelect?: SelectCallback;

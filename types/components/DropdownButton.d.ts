@@ -16,6 +16,7 @@ export interface DropdownButtonProps extends PropsFromToggle {
   id: string;
   title: React.ReactNode;
   menuRole?: string;
+  renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
   bsPrefix?: string;
 }
