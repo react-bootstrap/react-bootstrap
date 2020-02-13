@@ -17,6 +17,8 @@ import Header from './ModalHeader';
 import Title from './ModalTitle';
 import { createBootstrapComponent } from './ThemeProvider';
 
+let manager;
+
 const propTypes = {
   /**
    * @default 'modal'
@@ -159,7 +161,7 @@ const propTypes = {
    * A ModalManager instance used to track and manage the state of open
    * Modals. Useful when customizing how modals interact within a container
    */
-  manager: PropTypes.object.isRequired,
+  manager: PropTypes.object,
 
   /**
    * @private
@@ -176,7 +178,6 @@ const defaultProps = {
   restoreFocus: true,
   animation: true,
   dialogAs: ModalDialog,
-  manager: new BootstrapModalManager(),
 };
 
 /* eslint-disable no-use-before-define, react/no-multi-comp */
@@ -257,11 +258,24 @@ class Modal extends React.Component {
     this.updateDialogStyle(this._modal.dialog);
   };
 
+  getModalManager = () => {
+    if (this.props.manager) {
+      return this.props.manager;
+    }
+
+    if (!manager) {
+      manager = new BootstrapModalManager();
+    }
+
+    return manager;
+  };
+
   updateDialogStyle(node) {
     if (!canUseDOM) return;
-    const { manager } = this.props;
 
-    const containerIsOverflowing = manager.isContainerOverflowing(this._modal);
+    const containerIsOverflowing = this.getModalManager().isContainerOverflowing(
+      this._modal,
+    );
 
     const modalIsOverflowing =
       node.scrollHeight > ownerDocument(node).documentElement.clientHeight;
@@ -309,7 +323,6 @@ class Modal extends React.Component {
       animation,
       backdrop,
       keyboard,
-      manager,
       onEscapeKeyDown,
       onShow,
       onHide,
@@ -356,7 +369,7 @@ class Modal extends React.Component {
             onEntered,
             onExit,
             onExiting,
-            manager,
+            manager: this.getModalManager(),
             ref: this.setModalRef,
             style: baseModalStyle,
             className: classNames(className, bsPrefix),
