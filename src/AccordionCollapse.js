@@ -10,6 +10,7 @@ const propTypes = {
    */
   eventKey: PropTypes.string.isRequired,
 
+  /** Children prop should only contain a single child, and is enforced as such */
   children: PropTypes.element.isRequired,
 };
 
