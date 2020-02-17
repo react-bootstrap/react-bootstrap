@@ -79,7 +79,7 @@
     "warning": "^4.0.3"
   },
   "devDependencies": {
-    "@4c/rollout": "^2.1.0",
+    "@4c/rollout": "^2.1.2",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
     "@babel/register": "^7.8.3",
@@ -93,7 +93,7 @@
     "cherry-pick": "^0.5.0",
     "codecov": "^3.6.5",
     "conventional-changelog-cli": "^2.0.31",
-    "cpy-cli": "^3.0.0",
+    "cpy-cli": "^3.1.0",
     "cross-env": "^7.0.0",
     "dtslint": "^3.0.0",
     "enzyme": "^3.11.0",
@@ -108,7 +108,7 @@
     "eslint-plugin-react": "^7.18.3",
     "execa": "^4.0.0",
     "fs-extra": "^8.1.0",
-    "husky": "^4.2.1",
+    "husky": "^4.2.3",
     "karma": "^4.4.1",
     "karma-chrome-launcher": "^3.1.0",
     "karma-cli": "^2.0.0",
@@ -129,7 +129,7 @@
     "sinon": "^8.1.1",
     "sinon-chai": "^3.4.0",
     "typescript": "^3.7.5",
-    "webpack": "^4.41.5"
+    "webpack": "^4.41.6"
   },
   "release": {
     "publishDir": "lib"
