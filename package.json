@@ -73,7 +73,7 @@
     "popper.js": "^1.16.0",
     "prop-types": "^15.7.2",
     "prop-types-extra": "^1.1.0",
-    "react-overlays": "^2.1.0",
+    "react-overlays": "^3.0.0",
     "react-transition-group": "^4.0.0",
     "uncontrollable": "^7.0.0",
     "warning": "^4.0.3"
