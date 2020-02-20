@@ -126,7 +126,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-test-renderer": "^16.12.0",
-    "sinon": "^8.1.1",
+    "sinon": "^9.0.0",
     "sinon-chai": "^3.4.0",
     "typescript": "^3.7.5",
     "webpack": "^4.41.6"
