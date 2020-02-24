@@ -103,7 +103,7 @@
     "eslint-import-resolver-webpack": "^0.12.1",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-mocha": "^6.2.2",
+    "eslint-plugin-mocha": "^6.3.0",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
     "execa": "^4.0.0",
@@ -127,8 +127,8 @@
     "react-dom": "^16.12.0",
     "react-test-renderer": "^16.12.0",
     "sinon": "^9.0.0",
-    "sinon-chai": "^3.4.0",
-    "typescript": "^3.7.5",
+    "sinon-chai": "^3.5.0",
+    "typescript": "^3.8.2",
     "webpack": "^4.41.6"
   },
   "release": {
