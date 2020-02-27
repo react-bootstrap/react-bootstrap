@@ -30,6 +30,9 @@ const propTypes = {
   /** The content of the non-toggle Button.  */
   title: PropTypes.node.isRequired,
 
+  /** A `type` passed to the non-toggle Button */
+  type: PropTypes.string,
+
   /** Disables both Buttons  */
   disabled: PropTypes.bool,
 
@@ -52,6 +55,7 @@ const propTypes = {
 
 const defaultProps = {
   toggleLabel: 'Toggle dropdown',
+  type: 'button',
 };
 
 const SplitButton = React.forwardRef(
@@ -62,6 +66,7 @@ const SplitButton = React.forwardRef(
       size,
       variant,
       title,
+      type,
       toggleLabel,
       children,
       onClick,
@@ -82,6 +87,7 @@ const SplitButton = React.forwardRef(
         href={href}
         target={target}
         onClick={onClick}
+        type={type}
       >
         {title}
       </Button>
