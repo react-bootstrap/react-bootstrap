@@ -37,6 +37,12 @@ describe('<Alert>', () => {
     );
   });
 
+  it('should forward refs to the alert', () => {
+    const ref = React.createRef();
+    mount(<Alert ref={ref}>Yo</Alert>);
+    ref.current.tagName.should.equal('DIV');
+  });
+
   describe('Web Accessibility', () => {
     it('Should have alert role', () => {
       mount(<Alert>Message</Alert>).assertSingle('[role="alert"]');
