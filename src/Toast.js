@@ -142,6 +142,10 @@ const Toast = React.forwardRef(
       </Transition>
     );
 
+    if ((!useAnimation && !show) || (!show && transitionComplete)) {
+      return null;
+    }
+
     return (
       <ToastContext.Provider value={toastContext}>
         {useAnimation ? toastWithTransition : toast}
