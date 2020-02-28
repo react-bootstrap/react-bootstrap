@@ -26,7 +26,7 @@ const propTypes = {
   show: PropTypes.bool,
 
   /**
-   * A set of popper options and props passed directly to PopperJs.
+   * A set of popper options and props passed directly to Popper.
    */
   popperConfig: PropTypes.object,
 

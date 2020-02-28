@@ -43,7 +43,7 @@ const propTypes = {
   as: PropTypes.elementType,
 
   /**
-   * A set of popper options and props passed directly to Popper's.
+   * A set of popper options and props passed directly to Popper.
    */
   popperConfig: PropTypes.object,
 };
