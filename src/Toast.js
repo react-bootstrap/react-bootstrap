@@ -121,8 +121,6 @@ const Toast = React.forwardRef(
           bsPrefix,
           className,
           !useAnimation && show && 'show',
-          !useAnimation && !show && 'hide',
-          !show && transitionComplete && 'hide',
         )}
         role="alert"
         aria-live="assertive"
