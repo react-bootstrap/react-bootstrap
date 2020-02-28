@@ -35,7 +35,7 @@ const propTypes = {
 
   /**
    * Allow Dropdown to flip in case of an overlapping on the reference element. For more information refer to
-   * Popper.js's flip [docs](https://popper.js.org/popper-documentation.html#modifiers..flip.enabled).
+   * Popper.js's flip [docs](https://popper.js.org/docs/v2/modifiers/flip/).
    *
    */
   flip: PropTypes.bool,
