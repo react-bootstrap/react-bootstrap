@@ -1,4 +1,10 @@
-import React, { useEffect, useRef, useMemo, useCallback } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -73,6 +79,13 @@ const Toast = React.forwardRef(
     bsPrefix = useBootstrapPrefix('toast');
     const delayRef = useRef(delay);
     const onCloseRef = useRef(onClose);
+    const [transitionComplete, setTransitionComplete] = useState(false);
+
+    useEffect(() => {
+      if (show && transitionComplete) {
+        setTransitionComplete(false);
+      }
+    }, [show, transitionComplete]);
 
     useEffect(() => {
       // We use refs for these, because we don't want to restart the autohide
@@ -96,6 +109,10 @@ const Toast = React.forwardRef(
       animation,
     ]);
 
+    const handleTransitionEnd = () => {
+      setTransitionComplete(true);
+    };
+
     const toast = (
       <div
         {...props}
@@ -104,6 +121,8 @@ const Toast = React.forwardRef(
           bsPrefix,
           className,
           !useAnimation && show && 'show',
+          !useAnimation && !show && 'hide',
+          !show && transitionComplete && 'hide',
         )}
         role="alert"
         aria-live="assertive"
@@ -117,9 +136,15 @@ const Toast = React.forwardRef(
       onClose,
     };
 
+    const toastWithTransition = (
+      <Transition in={show} onExited={handleTransitionEnd}>
+        {toast}
+      </Transition>
+    );
+
     return (
       <ToastContext.Provider value={toastContext}>
-        {useAnimation ? <Transition in={show}>{toast}</Transition> : toast}
+        {useAnimation ? toastWithTransition : toast}
       </ToastContext.Provider>
     );
   },
