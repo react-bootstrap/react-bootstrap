@@ -1,3 +1,32 @@
+# [1.0.0-beta.17](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2020-02-28)
+
+
+### Bug Fixes
+
+* **Alert:** forward ref to the alert dom element ([#5010](https://github.com/react-bootstrap/react-bootstrap/issues/5010)) ([fb79f2a](https://github.com/react-bootstrap/react-bootstrap/commit/fb79f2a4f951de38fbd6617d5bf8e752433db9de))
+* **Container:** fluid breakpoint typings  ([#5011](https://github.com/react-bootstrap/react-bootstrap/issues/5011)) ([f4dde13](https://github.com/react-bootstrap/react-bootstrap/commit/f4dde1389558c286c81695c048439528d2bbdb15))
+* add displayName to Row ([#4919](https://github.com/react-bootstrap/react-bootstrap/issues/4919)) ([a1e54a2](https://github.com/react-bootstrap/react-bootstrap/commit/a1e54a23e95d662a23ca363504f010f2ce012e47))
+* don't construct ModalManager while document.body may still be null ([#4982](https://github.com/react-bootstrap/react-bootstrap/issues/4982)) ([5aa2be1](https://github.com/react-bootstrap/react-bootstrap/commit/5aa2be1cca89af8b2b1fb44fab11c6eadeace8d0))
+* fix small typo in description of eventKey ([4ec9d79](https://github.com/react-bootstrap/react-bootstrap/commit/4ec9d79899c2edf387e235018f8f8a0e96d65845))
+* **tooltip:** prevent `non-boolean attribute` warning when passing `show` to Tooltip ([#4858](https://github.com/react-bootstrap/react-bootstrap/issues/4858)) ([2505cb7](https://github.com/react-bootstrap/react-bootstrap/commit/2505cb7d9ddd7984031cb3492a8de0b1cb2c584b))
+* **types:** fix type of Overlay's onHide prop ([#4857](https://github.com/react-bootstrap/react-bootstrap/issues/4857)) ([d616175](https://github.com/react-bootstrap/react-bootstrap/commit/d6161758053c4c4a1930d12c2b6fe2faccbadbf8))
+
+
+### Features
+
+* add size prop for FormLabel component - Fixes [#4886](https://github.com/react-bootstrap/react-bootstrap/issues/4886) ([#4893](https://github.com/react-bootstrap/react-bootstrap/issues/4893)) ([0ae281c](https://github.com/react-bootstrap/react-bootstrap/commit/0ae281cc63a23fbaf498627540cfc926fb4e253b))
+
+
+
+# [1.0.0-beta.16](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2019-11-20)
+
+
+### Bug Fixes
+
+* dom-helper api change ([#4848](https://github.com/react-bootstrap/react-bootstrap/issues/4848)) ([f84b1b2](https://github.com/react-bootstrap/react-bootstrap/commit/f84b1b21ed702a85d3afa304dacdeeadbf3b3994))
+
+
+
 # [1.0.0-beta.15](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.14...v1.0.0-beta.15) (2019-11-18)
 
 
