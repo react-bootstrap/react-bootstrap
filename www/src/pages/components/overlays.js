@@ -47,8 +47,6 @@ export default withLayout(function TooltipSection({ data }) {
       <ul>
         <li>
           Overlays rely on the third-party library{' '}
-          <a href="https://github.com/FezVrasta/react-popper">react-popper</a>,
-          a tiny React wrapper around{' '}
           <a href="https://popper.js.org/">Popper.js</a>. It's included
           automatically with React-Bootstrap, but you should reference the API
           for more advanced use cases.
@@ -74,7 +72,7 @@ export default withLayout(function TooltipSection({ data }) {
       </LinkedHeading>
       <p>
         <code>Overlay</code> is the fundamental component for positioning and
-        controlling tooltip visibility. It's a wrapper around react-popper, that
+        controlling tooltip visibility. It's a wrapper around Popper.js, that
         adds support for transitions, and visibility toggling.
       </p>
 
@@ -87,10 +85,7 @@ export default withLayout(function TooltipSection({ data }) {
         positioned in relation to. You can also also have an "arrow" element,
         like the tooltips and popovers, but that is optional. Be sure to{' '}
         <strong>
-          check out the{' '}
-          <a href="https://github.com/FezVrasta/react-popper#api-documentation">
-            react-popper
-          </a>{' '}
+          check out the <a href="https://popper.js.org/docs/v2/">Popper</a>{' '}
           documentation for more details about the injected props.
         </strong>
       </p>
