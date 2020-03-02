@@ -944,9 +944,9 @@
   integrity sha512-INJYZQJP7g+IoDUh/475NlGiTeMfwTXUEr3tmRneckHIxNolGOW9CTq83S8cxq0CgJwwcMzMJFchxvlwe7Rk8Q==
 
 "@restart/hooks@^0.3.11", "@restart/hooks@^0.3.12":
-  version "0.3.20"
-  resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.3.20.tgz#e7179ab41e5f346b2feca091261fbdad77e8bc19"
-  integrity sha512-Q1eeEqcxHQ4oqty7C5Me8/hzWwdCRR643nR/6EHxv8BVxLVYHe4IoWAHg8MIGkE4VtSm3/JnNhkoLJhCkLx5aw==
+  version "0.3.21"
+  resolved "https://registry.yarnpkg.com/@restart/hooks/-/hooks-0.3.21.tgz#5264d12019ffb844dc1fc44d55517ded7b580ee2"
+  integrity sha512-Wcu3CFJV+iiqPEIoPVx3/CYnZBRgPeRABo6bLJByRH9ptJXyObn7WYPG7Rv0cg3+55bqcBbG0xEfovzwE2PNXg==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
@@ -1065,9 +1065,9 @@
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
 "@types/react@^16.8.23", "@types/react@^16.9.11":
-  version "16.9.22"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.22.tgz#f0288c92d94e93c4b43e3f5633edf788b2c040ae"
-  integrity sha512-7OSt4EGiLvy0h5R7X+r0c7S739TCU/LvWbkNOrm10lUwNHe7XPz5OLhLOSZeCkqO9JSCly1NkYJ7ODTUqVnHJQ==
+  version "16.9.23"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.23.tgz#1a66c6d468ba11a8943ad958a8cb3e737568271c"
+  integrity sha512-SsGVT4E7L2wLN3tPYLiF20hmZTPGuzaayVunfgXzUn1x4uHVsKH6QDJQ/TdpHqwsTLd4CwrmQ2vOgxN7gE24gw==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
