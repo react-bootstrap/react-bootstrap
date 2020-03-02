@@ -3,6 +3,7 @@ import sinon from 'sinon';
 import { mount } from 'enzyme';
 
 import Breadcrumb from '../src/Breadcrumb';
+import Button from '../src/Button';
 
 describe('<Breadcrumb.Item>', () => {
   it('Should render `a` as inner element when is not active', () => {
@@ -122,5 +123,11 @@ describe('<Breadcrumb.Item>', () => {
 
   it('Should have li as default component', () => {
     mount(<Breadcrumb.Item />).assertSingle('li');
+  });
+
+  it('Should be able to customize inner link element', () => {
+    const instance = mount(<Breadcrumb.Item linkAs={Button} />);
+    instance.find('a').should.have.length(0);
+    instance.find('button').should.have.length(1);
   });
 });
