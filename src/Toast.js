@@ -79,13 +79,17 @@ const Toast = React.forwardRef(
     bsPrefix = useBootstrapPrefix('toast');
     const delayRef = useRef(delay);
     const onCloseRef = useRef(onClose);
-    const [transitionComplete, setTransitionComplete] = useState(false);
+    const [exited, setExited] = useState(!show);
 
-    useEffect(() => {
-      if (show && transitionComplete) {
-        setTransitionComplete(false);
+    const useAnimation = Transition && animation;
+
+    if (show) {
+      if (exited) {
+        setExited(false);
       }
-    }, [show, transitionComplete]);
+    } else if (!useAnimation && !exited) {
+      setExited(true);
+    }
 
     useEffect(() => {
       // We use refs for these, because we don't want to restart the autohide
@@ -104,14 +108,15 @@ const Toast = React.forwardRef(
 
     autohideTimeout.set(autohideFunc, delayRef.current);
 
-    const useAnimation = useMemo(() => Transition && animation, [
-      Transition,
-      animation,
-    ]);
+    const toastContext = useMemo(() => ({ onClose }), [onClose]);
 
-    const handleTransitionEnd = () => {
-      setTransitionComplete(true);
-    };
+    const handleExited = useCallback(() => {
+      setExited(true);
+    }, []);
+
+    if (exited) {
+      return null;
+    }
 
     const toast = (
       <div
@@ -130,23 +135,15 @@ const Toast = React.forwardRef(
       </div>
     );
 
-    const toastContext = {
-      onClose,
-    };
-
-    const toastWithTransition = (
-      <Transition in={show} onExited={handleTransitionEnd}>
-        {toast}
-      </Transition>
-    );
-
-    if ((!useAnimation && !show) || (!show && transitionComplete)) {
-      return null;
-    }
-
     return (
       <ToastContext.Provider value={toastContext}>
-        {useAnimation ? toastWithTransition : toast}
+        {useAnimation ? (
+          <Transition in={show} onExited={handleExited}>
+            {toast}
+          </Transition>
+        ) : (
+          toast
+        )}
       </ToastContext.Provider>
     );
   },
