@@ -5,6 +5,9 @@ import { css } from 'astroturf';
 import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
+import GridContainer from '../../examples/Grid/Container';
+import GridContainerFluid from '../../examples/Grid/ContainerFluid';
+import GridContainerFluidBreakpoint from '../../examples/Grid/ContainerFluidBreakpoint';
 import GridAutoLayout from '../../examples/Grid/AutoLayout';
 import GridAutoLayoutSizing from '../../examples/Grid/AutoLayoutSizing';
 import GridAutoLayoutVariable from '../../examples/Grid/AutoLayoutVariable';
@@ -56,6 +59,38 @@ export default withLayout(function GridSection({ data }) {
         </a>{' '}
         for background, terminology, guidelines, and code snippets.
       </p>
+      <LinkedHeading h="2" id="container">
+        Container
+      </LinkedHeading>
+      <p>
+        Containers provide a means to center and horizontally pad your site’s
+        contents. Use <code>Container</code> for a responsive pixel width.
+      </p>
+      <ReactPlayground
+        codeText={GridContainer}
+        exampleClassName={styles.example}
+      />
+      <LinkedHeading h="3" id="container-fluid">
+        Fluid Container
+      </LinkedHeading>
+      <p>
+        You can use <code>{'<Container fluid />'}</code> for width: 100% across
+        all viewport and device sizes.
+      </p>
+      <ReactPlayground
+        codeText={GridContainerFluid}
+        exampleClassName={styles.example}
+      />
+      <p>
+        You can set breakpoints for the <code>fluid</code> prop. Setting it to a
+        breakpoint (<code>sm, md, lg, xl</code>) will set the{' '}
+        <code>Container</code> as fluid until the specified breakpoint.
+      </p>
+      <ReactPlayground
+        codeText={GridContainerFluidBreakpoint}
+        exampleClassName={styles.example}
+      />
+
       <LinkedHeading h="2" id="auto-layout">
         Auto-layout columns
       </LinkedHeading>

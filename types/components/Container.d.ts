@@ -3,7 +3,7 @@ import * as React from 'react';
 import { BsPrefixComponent } from './helpers';
 
 export interface ContainerProps {
-  fluid?: boolean;
+  fluid?: boolean | 'sm' | 'md' | 'lg' | 'xl';
 }
 
 declare class Container<

@@ -104,4 +104,12 @@ describe('<SplitButton>', () => {
       .text()
       .should.equal('Label');
   });
+
+  it('should set type attribute from type', () => {
+    mount(
+      <SplitButton title="Title" id="test-id" type="submit">
+        <DropdownItem>Item 1</DropdownItem>
+      </SplitButton>,
+    ).assertSingle('button[type="submit"]');
+  });
 });

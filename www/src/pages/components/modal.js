@@ -69,7 +69,7 @@ export default withLayout(function ModalSection({ data }) {
       </LinkedHeading>
       <p>
         Below is a <em>static</em> modal dialog (without the positioning) to
-        demostrate the look and feel of the Modal.
+        demonstrate the look and feel of the Modal.
       </p>
       <ReactPlayground codeText={ModalStatic} />
 

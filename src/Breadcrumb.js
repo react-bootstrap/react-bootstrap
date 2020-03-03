@@ -16,7 +16,7 @@ const propTypes = {
    */
   label: PropTypes.string,
   /**
-   * Additional props passed as-is to the underlying `<ul>` element
+   * Additional props passed as-is to the underlying `<ol>` element
    */
   listProps: PropTypes.object,
 

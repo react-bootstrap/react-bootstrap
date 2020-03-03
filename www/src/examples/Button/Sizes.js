@@ -1,19 +1,18 @@
-<div>
-  <ButtonToolbar>
+<>
+  <div className="mb-2">
     <Button variant="primary" size="lg">
       Large button
-    </Button>
+    </Button>{' '}
     <Button variant="secondary" size="lg">
       Large button
     </Button>
-  </ButtonToolbar>
-
-  <ButtonToolbar>
+  </div>
+  <div>
     <Button variant="primary" size="sm">
       Small button
-    </Button>
+    </Button>{' '}
     <Button variant="secondary" size="sm">
       Small button
     </Button>
-  </ButtonToolbar>
-</div>;
+  </div>
+</>;

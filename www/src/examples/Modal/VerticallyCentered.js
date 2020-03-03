@@ -30,7 +30,7 @@ function App() {
   const [modalShow, setModalShow] = React.useState(false);
 
   return (
-    <ButtonToolbar>
+    <>
       <Button variant="primary" onClick={() => setModalShow(true)}>
         Launch vertically centered modal
       </Button>
@@ -39,7 +39,7 @@ function App() {
         show={modalShow}
         onHide={() => setModalShow(false)}
       />
-    </ButtonToolbar>
+    </>
   );
 }
 

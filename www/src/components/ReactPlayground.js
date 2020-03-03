@@ -67,15 +67,6 @@ const StyledExample = styled('div')`
   }
 
   :global {
-    .badge + .badge,
-    .btn-toolbar > * + * {
-      margin-left: 0.5em;
-    }
-
-    & .btn-toolbar + .btn-toolbar {
-      margin-top: 10px;
-    }
-
     .react-live-preview::after {
       display: block;
       clear: both;

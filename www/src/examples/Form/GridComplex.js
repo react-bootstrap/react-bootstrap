@@ -29,7 +29,7 @@
 
     <Form.Group as={Col} controlId="formGridState">
       <Form.Label>State</Form.Label>
-      <Form.Control as="select">
+      <Form.Control as="select" value="Choose...">
         <option>Choose...</option>
         <option>...</option>
       </Form.Control>
