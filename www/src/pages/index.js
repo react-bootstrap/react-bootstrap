@@ -153,7 +153,7 @@ export default withLayout(
                 </p>
                 <p>
                   By relying entirely on the Bootstrap stylesheet,
-                  React-Bootstrap just works with the thousands of bootstrap
+                  React-Bootstrap just works with the thousands of Bootstrap
                   themes you already love.
                 </p>
                 <p />
