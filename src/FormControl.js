@@ -51,7 +51,11 @@ const propTypes = {
    *
    * @controllable onChange
    * */
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+    PropTypes.number,
+  ]),
 
   /** A callback fired when the `value` prop changes */
   onChange: PropTypes.func,

@@ -13,7 +13,7 @@ export interface FormControlProps {
   plaintext?: boolean;
   readOnly?: boolean;
   disabled?: boolean;
-  value?: string;
+  value?: string | string[] | number;
   onChange?: React.FormEventHandler<FormControlElement>;
   type?: string;
   id?: string;

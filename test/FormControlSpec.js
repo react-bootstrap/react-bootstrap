@@ -80,4 +80,18 @@ describe('<FormControl>', () => {
   it('Should have input as default component', () => {
     mount(<FormControl />).assertSingle('input');
   });
+
+  it('should support numbers as values', () => {
+    const wrapper = mount(<FormControl value={10} onChange={() => {}} />);
+
+    expect(wrapper.find('input').props().value).to.eq(10);
+  });
+
+  it('should support an array of strings as values', () => {
+    const wrapper = mount(
+      <FormControl value={['hello', 'world']} onChange={() => {}} />,
+    );
+
+    expect(wrapper.find('input').props().value).to.eql(['hello', 'world']);
+  });
 });
