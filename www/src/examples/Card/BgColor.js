@@ -6,13 +6,13 @@
   'warning',
   'info',
   'light',
-  'dark'
+  'dark',
 ].map((variant, idx) => (
   <>
     <Card
       bg={variant}
       key={idx}
-      text={variant === "light" ? "dark" : "white"}
+      text={variant === 'light' ? 'dark' : 'white'}
       style={{ width: '18rem' }}
     >
       <Card.Header>Header</Card.Header>
