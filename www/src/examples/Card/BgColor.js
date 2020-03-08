@@ -1,19 +1,19 @@
 [
-  "primary",
-  "secondary",
-  "success",
-  "danger",
-  "warning",
-  "info",
-  "light",
-  "dark"
+  'primary',
+  'secondary',
+  'success',
+  'danger',
+  'warning',
+  'info',
+  'light',
+  'dark'
 ].map((variant, idx) => (
   <>
     <Card
       bg={variant}
       key={idx}
       text={variant === "light" ? "dark" : "white"}
-      style={{ width: "18rem" }}
+      style={{ width: '18rem' }}
     >
       <Card.Header>Header</Card.Header>
       <Card.Body>
@@ -27,8 +27,3 @@
     <br />
   </>
 ));
-
-
-
-
-
