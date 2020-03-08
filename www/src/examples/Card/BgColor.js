@@ -1,18 +1,18 @@
 [
-  'primary',
-  'secondary',
-  'success',
-  'danger',
-  'warning',
-  'info',
-  'light',
-  'dark',
+  'Primary',
+  'Secondary',
+  'Success',
+  'Danger',
+  'Warning',
+  'Info',
+  'Light',
+  'Dark',
 ].map((variant, idx) => (
   <>
     <Card
-      bg={variant}
+      bg={variant.toLowerCase()}
       key={idx}
-      text={variant === 'light' ? 'dark' : 'white'}
+      text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
       style={{ width: '18rem' }}
     >
       <Card.Header>Header</Card.Header>
