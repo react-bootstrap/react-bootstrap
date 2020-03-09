@@ -41,7 +41,6 @@ const propTypes = {
    *
    * @type {('input'|'textarea'|'select'|elementType)}
    */
-  // as: PropTypes.elementType,
   as: all(PropTypes.elementType, ({ as, custom }) =>
     as !== 'input' && as !== 'select' && custom === true
       ? Error(
@@ -82,7 +81,6 @@ const propTypes = {
    * The HTML input `type`, which is only relevant if `as` is `'input'` (the default).
    * @type string
    */
-  // type: PropTypes.string,
   type: all(PropTypes.string, ({ type, custom }) =>
     type !== 'range' && custom === true
       ? Error(
