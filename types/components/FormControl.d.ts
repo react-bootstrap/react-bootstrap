@@ -15,6 +15,7 @@ export interface FormControlProps {
   disabled?: boolean;
   value?: string | string[] | number;
   onChange?: React.FormEventHandler<FormControlElement>;
+  custom?: boolean;
   type?: string;
   id?: string;
   isValid?: boolean;
