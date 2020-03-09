@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { BsPrefixComponent } from './helpers';
 
-type NumberAttr =
+type RowColWidth =
   | number
   | '1'
   | '2'
@@ -16,15 +16,15 @@ type NumberAttr =
   | '10'
   | '11'
   | '12';
-type RowColSpec = NumberAttr | { cols?: NumberAttr };
+type RowColumns = RowColWidth | { cols?: RowColWidth };
 
 export interface RowProps {
   noGutters?: boolean;
-  xs?: RowColSpec;
-  sm?: RowColSpec;
-  md?: RowColSpec;
-  lg?: RowColSpec;
-  xl?: RowColSpec;
+  xs?: RowColumns;
+  sm?: RowColumns;
+  md?: RowColumns;
+  lg?: RowColumns;
+  xl?: RowColumns;
 }
 
 declare class Row<
