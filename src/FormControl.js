@@ -38,16 +38,8 @@ const propTypes = {
 
   /**
    * The underlying HTML element to use when rendering the FormControl.
-   *
-   * @type {('input'|'textarea'|'select'|elementType)}
    */
-  as: all(PropTypes.elementType, ({ as, custom }) =>
-    as !== 'input' && as !== 'select' && custom === true
-      ? Error(
-          '`custom` can only be set to `true` when the as is `input` or `select`',
-        )
-      : null,
-  ),
+  as: PropTypes.elementType,
 
   /**
    * Render the input as plain text. Generally used along side `readOnly`.
@@ -74,20 +66,22 @@ const propTypes = {
   /** A callback fired when the `value` prop changes */
   onChange: PropTypes.func,
 
-  /** Use Bootstrap's custom form elements to replace the browser defaults */
-  custom: PropTypes.bool,
-
   /**
-   * The HTML input `type`, which is only relevant if `as` is `'input'` (the default).
-   * @type string
+   * Use Bootstrap's custom form elements to replace the browser defaults
+   * @type boolean
    */
-  type: all(PropTypes.string, ({ type, custom }) =>
-    type !== 'range' && custom === true
+  custom: all(PropTypes.bool, ({ as, type, custom }) =>
+    custom === true && type !== 'range' && as !== 'select'
       ? Error(
-          '`custom` can only be set to `true` when the as is `input` and type is `range` or as is `select`',
+          '`custom` can only be set to `true` when the type is `range` or if as is `select`',
         )
       : null,
   ),
+
+  /**
+   * The HTML input `type`, which is only relevant if `as` is `'input'` (the default).
+   */
+  type: PropTypes.string,
 
   /**
    * Uses `controlId` from `<FormGroup>` if not explicitly specified.
