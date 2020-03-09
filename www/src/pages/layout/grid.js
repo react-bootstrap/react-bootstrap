@@ -7,8 +7,7 @@ import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import GridAutoLayout from '../../examples/Grid/AutoLayout';
 import GridRowColLayout from '../../examples/Grid/RowColLayout';
-import RowColLayoutColWidth from '../../examples/Grid/RowColLayoutColWidth';
-import RowColLayoutColWidthBreakpoint from '../../examples/Grid/RowColLayoutColWidthBreakpoint';
+import GridRowColLayoutColWidthBreakpoint from '../../examples/Grid/RowColLayoutColWidthBreakpoint';
 import GridAutoLayoutSizing from '../../examples/Grid/AutoLayoutSizing';
 import GridAutoLayoutVariable from '../../examples/Grid/AutoLayoutVariable';
 import GridOffsetting from '../../examples/Grid/Offsetting';
@@ -156,30 +155,14 @@ export default withLayout(function GridSection({ data }) {
         codeText={GridRowColLayout}
         exampleClassName={styles.example}
       />
-
-      <LinkedHeading h="4" id="row-layout-col-width-sizing">
-        Setting column widths using Row
-      </LinkedHeading>
-
       <p>
-        You can define the column widths on the <code>Row</code> instead of on
-        each <code>Col</code>. You can use the same breakpoints (xs, sm, md,
-        large, and xl) on the <code>Row</code> to specify different widths for
-        the columns on each breakpoint.
-      </p>
-      <ReactPlayground
-        codeText={RowColLayoutColWidth}
-        exampleClassName={styles.example}
-      />
-
-      <p>
-        Note that <code>Row</code> column widths will override <code>Col</code>
-        widths set on lower breakpoints when viewed on larger screens. The
-        <code>{'<Col xs={6} />'}</code> size will be overriden by
+        Note that <code>Row</code> column widths will override <code>Col</code>{' '}
+        widths set on lower breakpoints when viewed on larger screens. The{' '}
+        <code>{'<Col xs={6} />'}</code> size will be overriden by{' '}
         <code>{'<Row md={4} />'}</code> on medium and larger screens.
       </p>
       <ReactPlayground
-        codeText={RowColLayoutColWidthBreakpoint}
+        codeText={GridRowColLayoutColWidthBreakpoint}
         exampleClassName={styles.example}
       />
 
