@@ -38,6 +38,8 @@ const propTypes = {
 
   /**
    * The underlying HTML element to use when rendering the FormControl.
+   *
+   * @type {('input'|'textarea'|'select'|elementType)}
    */
   as: PropTypes.elementType,
 
