@@ -20,6 +20,8 @@ import FormInputSizes from '../../examples/Form/InputSizes';
 import NoLabels from '../../examples/Form/NoLabels';
 import Plaintext from '../../examples/Form/Plaintext';
 import Switch from '../../examples/Form/Switch';
+import File from '../../examples/Form/File';
+import FileButtonText from '../../examples/Form/FileButtonText';
 import FormTextControls from '../../examples/Form/TextControls';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
 import ValidationNative from '../../examples/Form/ValidationNative';
@@ -291,6 +293,16 @@ export default withLayout(function FormControlsSection({ data }) {
 
       <h3>Inline</h3>
       <ReactPlayground codeText={CheckCustomInline} />
+
+      <LinkedHeading h="3" id="forms-custom-file">
+        File
+      </LinkedHeading>
+      <p>A custom styled File uploader.</p>
+
+      <ReactPlayground codeText={File} />
+
+      <h4>Translating or customizing the strings with HTML</h4>
+      <ReactPlayground codeText={FileButtonText} />
 
       <LinkedHeading h="2" id="forms-api">
         API
