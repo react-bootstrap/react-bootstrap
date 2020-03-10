@@ -22,6 +22,7 @@ import Plaintext from '../../examples/Form/Plaintext';
 import Switch from '../../examples/Form/Switch';
 import File from '../../examples/Form/File';
 import FileButtonText from '../../examples/Form/FileButtonText';
+import FileApi from '../../examples/Form/FileApi';
 import FormTextControls from '../../examples/Form/TextControls';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
 import ValidationNative from '../../examples/Form/ValidationNative';
@@ -303,6 +304,36 @@ export default withLayout(function FormControlsSection({ data }) {
 
       <h4>Translating or customizing the strings with HTML</h4>
       <ReactPlayground codeText={FileButtonText} />
+
+      <h4>Customizing FormFile rendering</h4>
+      <p>
+        When you need tighter control, or want to customize how the{' '}
+        <code>FormFile</code> component renders, it may be better to use it's
+        constituent parts directly.
+      </p>
+      <p>
+        By providing <code>children</code> to the <code>FormFile</code> you can
+        forgo the default rendering and handle it yourself. (You can still
+        provide an <code>id</code> to the <code>FormFile</code> and have it
+        propagate to the label and input).
+      </p>
+      <Callout>
+        <p>
+          When customizing the <code>FormFile</code> rendering it is important
+          to note the order of the <code>label</code> and <code>input</code>{' '}
+          elements.
+        </p>
+        <p>
+          If you are not setting the <code>custom</code> prop the
+          <code>label</code> should be before the <code>input</code>.
+        </p>
+        <p>
+          If you are setting the custom prop the <code>input</code> must appear
+          before the <code>label</code> or the <code>buttonText</code> prop will
+          not work.
+        </p>
+      </Callout>
+      <ReactPlayground codeText={FileApi} />
 
       <LinkedHeading h="2" id="forms-api">
         API
