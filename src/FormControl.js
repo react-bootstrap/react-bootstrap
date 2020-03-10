@@ -75,7 +75,7 @@ const propTypes = {
   custom: all(PropTypes.bool, ({ as, type, custom }) =>
     custom === true && type !== 'range' && as !== 'select'
       ? Error(
-          '`custom` can only be set to `true` when the type is `range` or if as is `select`',
+          '`custom` can only be set to `true` when the input type is `range`, or  `select`',
         )
       : null,
   ),
