@@ -147,7 +147,7 @@ const FormFile = React.forwardRef(
                 <>
                   {input}
                   {hasLabel && (
-                    <FormFileLabel buttontext={buttonText}>
+                    <FormFileLabel buttonText={buttonText}>
                       {label}
                     </FormFileLabel>
                   )}
