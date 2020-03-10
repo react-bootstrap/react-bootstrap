@@ -32,6 +32,9 @@ const propTypes = {
 
   /** Manually style the input as invalid */
   isInvalid: PropTypes.bool.isRequired,
+
+  /** The language for the button when using custom file input and SCSS based strings */
+  lang: PropTypes.string,
 };
 
 const FormFileInput = React.forwardRef(
@@ -43,6 +46,7 @@ const FormFileInput = React.forwardRef(
       className,
       isValid,
       isInvalid,
+      lang,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
       ...props
@@ -61,6 +65,7 @@ const FormFileInput = React.forwardRef(
         ref={ref}
         id={id || controlId}
         type={type}
+        lang={lang}
         className={classNames(
           className,
           bsPrefix,

@@ -14,6 +14,7 @@ export interface FormFileProps {
   isInvalid?: boolean;
   feedback?: React.ReactNode;
   buttonText?: string;
+  lang?: string;
 }
 
 declare class FormFile<

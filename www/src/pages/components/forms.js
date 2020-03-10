@@ -25,7 +25,8 @@ import RangeCustom from '../../examples/Form/RangeCustom';
 import SelectCustom from '../../examples/Form/SelectCustom';
 import SelectCustomSize from '../../examples/Form/SelectCustomSize';
 import File from '../../examples/Form/File';
-import FileButtonText from '../../examples/Form/FileButtonText';
+import FileButtonTextHTML from '../../examples/Form/FileButtonTextHTML';
+import FileButtonTextSCSS from '../../examples/Form/FileButtonTextSCSS';
 import FileApi from '../../examples/Form/FileApi';
 import FormTextControls from '../../examples/Form/TextControls';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
@@ -341,7 +342,17 @@ export default withLayout(function FormControlsSection({ data }) {
       <ReactPlayground codeText={File} />
 
       <h4>Translating or customizing the strings with HTML</h4>
-      <ReactPlayground codeText={FileButtonText} />
+      <ReactPlayground codeText={FileButtonTextHTML} />
+
+      <h4>Translating or customizing the strings with SCSS</h4>
+      <p>
+        Please refer to the official{' '}
+        <a href="https://getbootstrap.com/docs/4.4/components/forms/#translating-or-customizing-the-strings-with-scss">
+          Bootstrap documentation for translating via SCSS
+        </a>
+        . The <code>lang</code> prop can be used to pass the language.
+      </p>
+      <ReactPlayground codeText={FileButtonTextSCSS} />
 
       <h4>Customizing FormFile rendering</h4>
       <p>
