@@ -250,32 +250,30 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   );
 
   // This is used in the setInterval, so it should not invalidate.
-  const next = useEventCallback(
-    event => {
-      if (isSliding) {
+  const next = useEventCallback(event => {
+    if (isSliding) {
+      return;
+    }
+
+    let nextActiveIndex = renderedActiveIndex + 1;
+    if (nextActiveIndex >= numChildren) {
+      if (!wrap) {
         return;
       }
 
-      let nextActiveIndex = renderedActiveIndex + 1;
-      if (nextActiveIndex >= numChildren) {
-        if (!wrap) {
-          return;
-        }
+      nextActiveIndex = 0;
+    }
 
-        nextActiveIndex = 0;
-      }
+    nextDirectionRef.current = 'next';
 
-      nextDirectionRef.current = 'next';
-
-      onSelect(nextActiveIndex, event);
-    },
-    [isSliding, renderedActiveIndex, numChildren, onSelect, wrap],
-  );
+    onSelect(nextActiveIndex, event);
+  });
 
   const elementRef = useRef();
 
   useImperativeHandle(ref, () => ({ element: elementRef.current, prev, next }));
 
+  // This is used in the setInterval, so it should not invalidate.
   const nextWhenVisible = useEventCallback(() => {
     if (!document.hidden && isVisible(elementRef.current)) {
       next();
@@ -284,28 +282,18 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
 
   const slideDirection = direction === 'next' ? 'left' : 'right';
 
-  const handleSlide = useEventCallback(
-    onSlide &&
-      (() => {
-        onSlide(renderedActiveIndex, slideDirection);
-      }),
-  );
-
-  const handleSlid = useEventCallback(
-    onSlid &&
-      (() => {
-        onSlid(renderedActiveIndex, slideDirection);
-      }),
-  );
-
   useUpdateEffect(() => {
     if (slide) {
       // These callbacks will be handled by the <Transition> callbacks.
       return;
     }
 
-    handleSlide();
-    handleSlid();
+    if (onSlide) {
+      onSlide(renderedActiveIndex, slideDirection);
+    }
+    if (onSlid) {
+      onSlid(renderedActiveIndex, slideDirection);
+    }
   }, [renderedActiveIndex]);
 
   const orderClassName = `${prefix}-item-${direction}`;
@@ -314,38 +302,43 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   const handleEnter = useCallback(
     node => {
       triggerBrowserReflow(node);
-      handleSlide();
+
+      if (onSlide) {
+        onSlide(renderedActiveIndex, slideDirection);
+      }
     },
-    [handleSlide],
+    [onSlide, renderedActiveIndex, slideDirection],
   );
 
   const handleEntered = useCallback(() => {
     setIsSliding(false);
-    handleSlid();
-  }, [handleSlid]);
+
+    if (onSlid) {
+      onSlid(renderedActiveIndex, slideDirection);
+    }
+  }, [onSlid, renderedActiveIndex, slideDirection]);
 
   const handleKeyDown = useCallback(
     event => {
-      if (/input|textarea/i.test(event.target.tagName)) {
-        return;
+      if (keyboard && !/input|textarea/i.test(event.target.tagName)) {
+        switch (event.key) {
+          case 'ArrowLeft':
+            event.preventDefault();
+            prev(event);
+            return;
+          case 'ArrowRight':
+            event.preventDefault();
+            next(event);
+            return;
+          default:
+        }
       }
 
-      switch (event.key) {
-        case 'ArrowLeft':
-          event.preventDefault();
-          prev(event);
-          break;
-        case 'ArrowRight':
-          event.preventDefault();
-          next(event);
-          break;
-        default:
-          if (onKeyDown) {
-            onKeyDown(event);
-          }
+      if (onKeyDown) {
+        onKeyDown(event);
       }
     },
-    [prev, next, onKeyDown],
+    [keyboard, onKeyDown, prev, next],
   );
 
   const [pausedOnHover, setPausedOnHover] = useState(false);
@@ -384,13 +377,15 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
       touchStartXRef.current = event.touches[0].clientX;
       touchDeltaXRef.current = 0;
 
-      setPausedOnTouch(true);
+      if (touch) {
+        setPausedOnTouch(true);
+      }
 
       if (onTouchStart) {
         onTouchStart(event);
       }
     },
-    [onTouchStart],
+    [touch, onTouchStart],
   );
 
   const handleTouchMove = useCallback(
@@ -411,16 +406,18 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
 
   const handleTouchEnd = useCallback(
     event => {
-      const touchDeltaX = touchDeltaXRef.current;
+      if (touch) {
+        const touchDeltaX = touchDeltaXRef.current;
 
-      if (Math.abs(touchDeltaX) <= SWIPE_THRESHOLD) {
-        return;
-      }
+        if (Math.abs(touchDeltaX) <= SWIPE_THRESHOLD) {
+          return;
+        }
 
-      if (touchDeltaX > 0) {
-        prev(event);
-      } else {
-        next(event);
+        if (touchDeltaX > 0) {
+          prev(event);
+        } else {
+          next(event);
+        }
       }
 
       touchUnpauseTimeout.set(() => {
@@ -431,7 +428,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
         onTouchEnd(event);
       }
     },
-    [touchUnpauseTimeout, interval, onTouchEnd, prev, next],
+    [touch, prev, next, touchUnpauseTimeout, interval, onTouchEnd],
   );
 
   const shouldPlay =
@@ -467,12 +464,12 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
     <Component
       ref={elementRef}
       {...props}
-      onKeyDown={keyboard ? handleKeyDown : undefined}
+      onKeyDown={handleKeyDown}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
-      onTouchStart={touch ? handleTouchStart : undefined}
-      onTouchMove={touch ? handleTouchMove : undefined}
-      onTouchEnd={touch ? handleTouchEnd : undefined}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       className={classNames(
         className,
         prefix,
@@ -499,8 +496,8 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
           return slide ? (
             <Transition
               in={isActive}
-              onEnter={handleEnter}
-              onEntered={handleEntered}
+              onEnter={isActive ? handleEnter : null}
+              onEntered={isActive ? handleEntered : null}
               addEndListener={transitionEnd}
             >
               {status =>
