@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext, useMemo, useEffect } from 'react';
-import bsCustomFileInput from 'bs-custom-file-input';
+import React, { useContext, useMemo } from 'react';
 import all from 'prop-types-extra/lib/all';
 import Feedback from './Feedback';
 import FormFileInput from './FormFileInput';
@@ -121,12 +120,6 @@ const FormFile = React.forwardRef(
     );
 
     const hasLabel = label != null && label !== false && !children;
-
-    useEffect(() => {
-      if (custom) {
-        bsCustomFileInput.init();
-      }
-    });
 
     const input = (
       <FormFileInput

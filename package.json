@@ -67,7 +67,6 @@
     "@restart/context": "^2.1.4",
     "@restart/hooks": "^0.3.11",
     "@types/react": "^16.8.23",
-    "bs-custom-file-input": "^1.3.4",
     "classnames": "^2.2.6",
     "dom-helpers": "^5.1.2",
     "invariant": "^2.2.4",
