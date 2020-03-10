@@ -65,7 +65,7 @@
   "dependencies": {
     "@babel/runtime": "^7.4.2",
     "@restart/context": "^2.1.4",
-    "@restart/hooks": "^0.3.11",
+    "@restart/hooks": "^0.3.21",
     "@types/react": "^16.8.23",
     "classnames": "^2.2.6",
     "dom-helpers": "^5.1.2",

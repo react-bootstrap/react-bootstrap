@@ -7,22 +7,24 @@ import { BsPrefixComponent } from './helpers';
 
 export interface CarouselProps {
   bsPrefix?: string;
-  slide?: boolean;
+  animate?: boolean;
   fade?: boolean;
-  wrap?: boolean;
-  indicators?: boolean;
-  interval?: number | null;
   controls?: boolean;
-  pauseOnHover?: boolean;
-  keyboard?: boolean;
-  onSelect?: (eventKey: any, direction: 'prev' | 'next', event: object) => void;
-  onSlideEnd?: () => void;
+  indicators?: boolean;
   activeIndex?: number;
-  prevIcon?: React.ReactNode;
-  prevLabel?: string;
-  nextIcon?: React.ReactNode;
-  nextLabel?: string;
+  onSelect?: (eventKey: number, event: object | null) => void;
+  defaultActiveIndex?: number;
+  onSlide?: (eventKey: number, direction: 'left' | 'right') => void;
+  onSlid?: (eventKey: number, direction: 'left' | 'right') => void;
+  interval?: number | null;
+  keyboard?: boolean;
+  pause?: 'hover' | false;
+  wrap?: boolean;
   touch?: boolean;
+  prevIcon?: React.ReactNode;
+  prevLabel?: React.ReactNode;
+  nextIcon?: React.ReactNode;
+  nextLabel?: React.ReactNode;
 }
 
 declare class Carousel<
