@@ -15,7 +15,7 @@
 ### Features
 
 * add size prop for FormLabel component - Fixes [#4886](https://github.com/react-bootstrap/react-bootstrap/issues/4886) ([#4893](https://github.com/react-bootstrap/react-bootstrap/issues/4893)) ([0ae281c](https://github.com/react-bootstrap/react-bootstrap/commit/0ae281cc63a23fbaf498627540cfc926fb4e253b))
-
+* add responsive Containers - Fixes [#4884](https://github.com/react-bootstrap/react-bootstrap/issues/4884) ([0ae281c](https://github.com/react-bootstrap/react-bootstrap/commit/fc271389aed7f55b36cdfc358c25c623e7c9776b))
 
 
 # [1.0.0-beta.16](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2019-11-20)

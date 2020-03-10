@@ -152,9 +152,9 @@ export default withLayout(
                   ecosystem.
                 </p>
                 <p>
-                  By relying entirely on the Bootstrap stylesheet, React-
-                  Bootstrap just works with the thousands of bootstrap themes
-                  you already love.
+                  By relying entirely on the Bootstrap stylesheet,
+                  React-Bootstrap just works with the thousands of Bootstrap
+                  themes you already love.
                 </p>
                 <p />
               </FeatureCard>
