@@ -16,7 +16,7 @@ const propTypes = {
   /**
    * A seperate bsPrefix used for custom controls
    *
-   * @default 'custom-control'
+   * @default 'custom'
    */
   bsCustomPrefix: PropTypes.string,
 
