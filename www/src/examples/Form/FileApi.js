@@ -2,7 +2,9 @@
   <div className="mb-3">
     <Form.File id="formcheck-api" custom>
       <Form.File.Input isValid />
-      <Form.File.Label>Custom file input</Form.File.Label>
+      <Form.File.Label buttonText="Button text">
+        Custom file input
+      </Form.File.Label>
       <Form.Control.Feedback type="valid">You did it!</Form.Control.Feedback>
     </Form.File>
   </div>
