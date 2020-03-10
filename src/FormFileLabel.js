@@ -21,12 +21,12 @@ const propTypes = {
   htmlFor: PropTypes.string,
 
   /** The string for the button when using custom file input */
-  buttontext: PropTypes.string,
+  buttonText: PropTypes.string,
 };
 
 const FormFileLabel = React.forwardRef(
   (
-    { bsPrefix, bsCustomPrefix, className, htmlFor, buttontext, ...props },
+    { bsPrefix, bsCustomPrefix, className, htmlFor, buttonText, ...props },
     ref,
   ) => {
     const { controlId, custom } = useContext(FormContext);
@@ -40,7 +40,7 @@ const FormFileLabel = React.forwardRef(
         ref={ref}
         htmlFor={htmlFor || controlId}
         className={classNames(className, bsPrefix)}
-        data-browse={buttontext}
+        data-browse={buttonText}
       />
     );
   },

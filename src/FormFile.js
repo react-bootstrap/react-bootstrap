@@ -69,10 +69,9 @@ const propTypes = {
   feedback: PropTypes.node,
 
   /** The string for the button when using custom file input */
-  // buttontext: PropTypes.string,
-  buttontext: all(PropTypes.string, ({ custom, buttontext }) =>
-    buttontext && !custom
-      ? Error('`buttontext` can only be set when custom is `true`')
+  buttonText: all(PropTypes.string, ({ custom, buttonText }) =>
+    buttonText && !custom
+      ? Error('`buttonText` can only be set when custom is `true`')
       : null,
   ),
 };
@@ -98,7 +97,7 @@ const FormFile = React.forwardRef(
       label,
       children,
       custom,
-      buttontext,
+      buttonText,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as = 'input',
       ...props
@@ -148,7 +147,7 @@ const FormFile = React.forwardRef(
                 <>
                   {input}
                   {hasLabel && (
-                    <FormFileLabel buttontext={buttontext}>
+                    <FormFileLabel buttontext={buttonText}>
                       {label}
                     </FormFileLabel>
                   )}
