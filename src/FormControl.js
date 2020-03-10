@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import all from 'prop-types-extra/lib/all';
 import React, { useContext } from 'react';
 import warning from 'warning';
 import Feedback from './Feedback';
@@ -11,6 +12,13 @@ const propTypes = {
    * @default {'form-control'}
    */
   bsPrefix: PropTypes.string,
+
+  /**
+   * A seperate bsPrefix used for custom controls
+   *
+   * @default 'custom'
+   */
+  bsCustomPrefix: PropTypes.string,
 
   /**
    * The FormControl `ref` will be forwarded to the underlying input element,
@@ -61,6 +69,18 @@ const propTypes = {
   onChange: PropTypes.func,
 
   /**
+   * Use Bootstrap's custom form elements to replace the browser defaults
+   * @type boolean
+   */
+  custom: all(PropTypes.bool, ({ as, type, custom }) =>
+    custom === true && type !== 'range' && as !== 'select'
+      ? Error(
+          '`custom` can only be set to `true` when the input type is `range`, or  `select`',
+        )
+      : null,
+  ),
+
+  /**
    * The HTML input `type`, which is only relevant if `as` is `'input'` (the default).
    */
   type: PropTypes.string,
@@ -81,6 +101,7 @@ const FormControl = React.forwardRef(
   (
     {
       bsPrefix,
+      bsCustomPrefix,
       type,
       size,
       id,
@@ -89,6 +110,7 @@ const FormControl = React.forwardRef(
       isInvalid,
       plaintext,
       readOnly,
+      custom,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
       ...props
@@ -96,13 +118,21 @@ const FormControl = React.forwardRef(
     ref,
   ) => {
     const { controlId } = useContext(FormContext);
-
-    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-control');
+    bsPrefix = custom
+      ? useBootstrapPrefix(bsCustomPrefix, 'custom')
+      : useBootstrapPrefix(bsPrefix, 'form-control');
     let classes;
     if (plaintext) {
       classes = { [`${bsPrefix}-plaintext`]: true };
     } else if (type === 'file') {
       classes = { [`${bsPrefix}-file`]: true };
+    } else if (type === 'range') {
+      classes = { [`${bsPrefix}-range`]: true };
+    } else if (Component === 'select' && custom) {
+      classes = {
+        [`${bsPrefix}-select`]: true,
+        [`${bsPrefix}-select-${size}`]: size,
+      };
     } else {
       classes = {
         [bsPrefix]: true,
