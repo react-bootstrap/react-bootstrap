@@ -1,15 +1,14 @@
 import useEventCallback from '@restart/hooks/useEventCallback';
-import useMounted from '@restart/hooks/useMounted';
 import useUpdateEffect from '@restart/hooks/useUpdateEffect';
-import useStateAsync from '@restart/hooks/useStateAsync';
 import useTimeout from '@restart/hooks/useTimeout';
 import classNames from 'classnames';
 import transitionEnd from 'dom-helpers/transitionEnd';
+import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
 import React, {
-  cloneElement,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
   useImperativeHandle,
@@ -206,34 +205,22 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   const nextDirectionRef = useRef(null);
   const [direction, setDirection] = useState(null);
 
-  const [prevActiveIndex, setPrevActiveIndex] = useState(null);
+  const [isSliding, setIsSliding] = useState(false);
   const [renderedActiveIndex, setRenderedActiveIndex] = useState(activeIndex);
 
-  const animationInProgress = prevActiveIndex != null;
-  const [animationStarted, setAnimationStarted] = useStateAsync(false);
-
-  const pendingActiveIndexRef = useRef(null);
-
-  if (!animationInProgress) {
-    if (pendingActiveIndexRef.current != null) {
-      const nextActiveIndex = pendingActiveIndexRef.current;
-      pendingActiveIndexRef.current = null;
-
-      onSelect(nextActiveIndex, null);
-    } else if (activeIndex !== renderedActiveIndex) {
-      if (nextDirectionRef.current) {
-        setDirection(nextDirectionRef.current);
-        nextDirectionRef.current = null;
-      } else {
-        setDirection(activeIndex > renderedActiveIndex ? 'next' : 'prev');
-      }
-
-      if (slide) {
-        setPrevActiveIndex(renderedActiveIndex);
-      }
-
-      setRenderedActiveIndex(activeIndex);
+  if (!isSliding && activeIndex !== renderedActiveIndex) {
+    if (nextDirectionRef.current) {
+      setDirection(nextDirectionRef.current);
+      nextDirectionRef.current = null;
+    } else {
+      setDirection(activeIndex > renderedActiveIndex ? 'next' : 'prev');
     }
+
+    if (slide) {
+      setIsSliding(true);
+    }
+
+    setRenderedActiveIndex(activeIndex);
   }
 
   const numChildren = React.Children.toArray(children).filter(
@@ -242,7 +229,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
 
   const prev = useCallback(
     event => {
-      if (animationInProgress) {
+      if (isSliding) {
         return;
       }
 
@@ -259,13 +246,13 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
 
       onSelect(nextActiveIndex, event);
     },
-    [animationInProgress, renderedActiveIndex, onSelect, wrap, numChildren],
+    [isSliding, renderedActiveIndex, onSelect, wrap, numChildren],
   );
 
   // This is used in the setInterval, so it should not invalidate.
   const next = useEventCallback(
     event => {
-      if (animationInProgress) {
+      if (isSliding) {
         return;
       }
 
@@ -282,7 +269,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
 
       onSelect(nextActiveIndex, event);
     },
-    [animationInProgress, renderedActiveIndex, numChildren, onSelect, wrap],
+    [isSliding, renderedActiveIndex, numChildren, onSelect, wrap],
   );
 
   const elementRef = useRef();
@@ -295,50 +282,47 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
     }
   });
 
+  const slideDirection = direction === 'next' ? 'left' : 'right';
+
   const handleSlide = useEventCallback(
     onSlide &&
       (() => {
-        onSlide(renderedActiveIndex, direction === 'next' ? 'left' : 'right');
+        onSlide(renderedActiveIndex, slideDirection);
       }),
   );
 
   const handleSlid = useEventCallback(
     onSlid &&
       (() => {
-        onSlid(renderedActiveIndex, direction === 'next' ? 'left' : 'right');
+        onSlid(renderedActiveIndex, slideDirection);
       }),
   );
 
-  const activeChildRef = useRef();
-  const isMounted = useMounted();
-
   useUpdateEffect(() => {
-    handleSlide();
-
-    if (!slide) {
-      handleSlid();
+    if (slide) {
+      // These callbacks will be handled by the <Transition> callbacks.
       return;
     }
 
-    triggerBrowserReflow(activeChildRef.current);
-
-    setAnimationStarted(true).then(() => {
-      if (!isMounted()) {
-        return;
-      }
-
-      transitionEnd(activeChildRef.current, () => {
-        if (!isMounted()) {
-          return;
-        }
-
-        setAnimationStarted(false);
-        setPrevActiveIndex(null);
-
-        handleSlid();
-      });
-    });
+    handleSlide();
+    handleSlid();
   }, [renderedActiveIndex]);
+
+  const orderClassName = `${prefix}-item-${direction}`;
+  const directionalClassName = `${prefix}-item-${slideDirection}`;
+
+  const handleEnter = useCallback(
+    node => {
+      triggerBrowserReflow(node);
+      handleSlide();
+    },
+    [handleSlide],
+  );
+
+  const handleEntered = useCallback(() => {
+    setIsSliding(false);
+    handleSlid();
+  }, [handleSlid]);
 
   const handleKeyDown = useCallback(
     event => {
@@ -451,10 +435,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   );
 
   const shouldPlay =
-    interval != null &&
-    !pausedOnHover &&
-    !pausedOnTouch &&
-    !animationInProgress;
+    interval != null && !pausedOnHover && !pausedOnTouch && !isSliding;
 
   const intervalHandleRef = useRef();
 
@@ -473,24 +454,14 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
     };
   }, [shouldPlay, next, interval, nextWhenVisible]);
 
-  let prevActiveChildClassName;
-  let renderedActiveChildClassName;
-
-  if (!animationInProgress) {
-    prevActiveChildClassName = null;
-    renderedActiveChildClassName = 'active';
-  } else {
-    prevActiveChildClassName = 'active';
-    renderedActiveChildClassName = `${prefix}-item-${direction}`;
-
-    if (animationStarted) {
-      const directionalClassName = `${prefix}-item-${
-        direction === 'next' ? 'left' : 'right'
-      }`;
-      prevActiveChildClassName += ` ${directionalClassName}`;
-      renderedActiveChildClassName += ` ${directionalClassName}`;
-    }
-  }
+  const indicatorOnClicks = useMemo(
+    () =>
+      indicators &&
+      Array.from({ length: numChildren }, (_, index) => event => {
+        onSelect(index, event);
+      }),
+    [indicators, numChildren, onSelect],
+  );
 
   return (
     <Component
@@ -515,29 +486,44 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
             <li
               key={index}
               className={index === renderedActiveIndex ? 'active' : null}
-              onClick={event => {
-                if (animationInProgress) {
-                  pendingActiveIndexRef.current = index;
-                } else {
-                  onSelect(index, event);
-                }
-              }}
+              onClick={indicatorOnClicks[index]}
             />
           ))}
         </ol>
       )}
 
       <div className={`${prefix}-inner`}>
-        {map(children, (child, index) =>
-          cloneElement(child, {
-            ref: index === renderedActiveIndex ? activeChildRef : null,
-            className: classNames(
-              child.props.className,
-              index === prevActiveIndex && prevActiveChildClassName,
-              index === renderedActiveIndex && renderedActiveChildClassName,
-            ),
-          }),
-        )}
+        {map(children, (child, index) => {
+          const isActive = index === renderedActiveIndex;
+
+          return slide ? (
+            <Transition
+              in={isActive}
+              onEnter={handleEnter}
+              onEntered={handleEntered}
+              addEndListener={transitionEnd}
+            >
+              {status =>
+                React.cloneElement(child, {
+                  className: classNames(
+                    child.props.className,
+                    isActive && status !== 'entered' && orderClassName,
+                    (status === 'entered' || status === 'exiting') && 'active',
+                    (status === 'entering' || status === 'exiting') &&
+                      directionalClassName,
+                  ),
+                })
+              }
+            </Transition>
+          ) : (
+            React.cloneElement(child, {
+              className: classNames(
+                child.props.className,
+                isActive && 'active',
+              ),
+            })
+          );
+        })}
       </div>
 
       {controls && (
