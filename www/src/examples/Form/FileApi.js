@@ -1,6 +1,6 @@
 <Form>
   <div className="mb-3">
-    <Form.File id="formcheck-api" custom>
+    <Form.File id="formcheck-api-custom" custom>
       <Form.File.Input isValid />
       <Form.File.Label buttonText="Button text">
         Custom file input
@@ -9,7 +9,7 @@
     </Form.File>
   </div>
   <div className="mb-3">
-    <Form.File id="formcheck-api">
+    <Form.File id="formcheck-api-regular">
       <Form.File.Label>Regular file input</Form.File.Label>
       <Form.File.Input />
     </Form.File>
