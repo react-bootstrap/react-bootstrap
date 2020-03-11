@@ -338,7 +338,15 @@ export default withLayout(function FormControlsSection({ data }) {
         File
       </LinkedHeading>
       <p>A custom styled File uploader.</p>
-
+      <Callout>
+        The custom <code>FormFile</code> will by default not visibly display
+        your selected file. This requires additional JS. The recommended plugin
+        to animate custom file input is{' '}
+        <a href="https://www.npmjs.com/package/bs-custom-file-input">
+          bs-custom-file-input
+        </a>
+        .
+      </Callout>
       <ReactPlayground codeText={File} />
 
       <h4>Translating or customizing the strings with HTML</h4>
@@ -372,15 +380,17 @@ export default withLayout(function FormControlsSection({ data }) {
           to note the order of the <code>label</code> and <code>input</code>{' '}
           elements.
         </p>
-        <p>
-          If you are not setting the <code>custom</code> prop the
-          <code>label</code> should be before the <code>input</code>.
-        </p>
-        <p>
-          If you are setting the custom prop the <code>input</code> must appear
-          before the <code>label</code> or the <code>buttonText</code> prop will
-          not work.
-        </p>
+        <ul>
+          <li>
+            If you are not setting the <code>custom</code> prop the
+            <code>label</code> should be before the <code>input</code>.
+          </li>
+          <li>
+            If you are setting the custom prop the <code>input</code> element
+            has to be placed before the <code>label</code> or the{' '}
+            <code>buttonText</code> prop will not work.
+          </li>
+        </ul>
       </Callout>
       <ReactPlayground codeText={FileApi} />
 
