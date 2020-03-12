@@ -45,8 +45,8 @@ const propTypes = {
    *
    * ```jsx
    * <FormFile>
-   *   <FormFile.Input isInvalid />
    *   <FormFile.Label>Allow us to contact you?</FormFile.Label>
+   *   <FormFile.Input isInvalid />
    *   <Feedback type="invalid">Yo this is required</Feedback>
    * </FormFile>
    * ```
@@ -68,6 +68,7 @@ const propTypes = {
   /** A message to display when the input is in a validation state */
   feedback: PropTypes.node,
 
+  /** The string for the "Browse" text label when using custom file input */
   'data-browse': PropTypes.string,
 
   /** The language for the button when using custom file input and SCSS based strings */

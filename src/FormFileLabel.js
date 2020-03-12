@@ -20,7 +20,7 @@ const propTypes = {
   /** The HTML for attribute for associating the label with an input */
   htmlFor: PropTypes.string,
 
-  /** The string for the button when using custom file input */
+  /** The string for the "Browse" text label when using custom file input */
   'data-browse': PropTypes.string,
 };
 

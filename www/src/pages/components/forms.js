@@ -421,6 +421,9 @@ export default withLayout(function FormControlsSection({ data }) {
         metadata={data.FormCheckLabel}
         exportedBy={data.FormCheck}
       />
+      <ComponentApi metadata={data.FormFile} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FormFileInput} exportedBy={data.FormFile} />
+      <ComponentApi metadata={data.FormFileLabel} exportedBy={data.FormFile} />
     </>
   );
 });
@@ -445,6 +448,9 @@ export const query = graphql`
     FormCheck: componentMetadata(displayName: { eq: "FormCheck" }) {
       ...ComponentApi_metadata
     }
+    FormFile: componentMetadata(displayName: { eq: "FormFile" }) {
+      ...ComponentApi_metadata
+    }
     FormCheckInput: componentMetadata(displayName: { eq: "FormCheckInput" }) {
       ...ComponentApi_metadata
     }
@@ -452,6 +458,12 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     Feedback: componentMetadata(displayName: { eq: "Feedback" }) {
+      ...ComponentApi_metadata
+    }
+    FormFileInput: componentMetadata(displayName: { eq: "FormFileInput" }) {
+      ...ComponentApi_metadata
+    }
+    FormFileLabel: componentMetadata(displayName: { eq: "FormFileLabel" }) {
       ...ComponentApi_metadata
     }
   }
