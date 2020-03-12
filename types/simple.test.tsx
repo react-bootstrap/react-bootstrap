@@ -222,6 +222,11 @@ import {
       <Form.Control type="text" placeholder="Hoizontal" />
     </Col>
   </Form.Group>
+  <Form.File
+    id="custom-file"
+    label="Custom file input"
+    custom
+  />
 </Form>;
 
 <div>
