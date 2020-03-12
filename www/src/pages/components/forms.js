@@ -350,6 +350,15 @@ export default withLayout(function FormControlsSection({ data }) {
       <ReactPlayground codeText={File} />
 
       <h4>Translating or customizing the strings with HTML</h4>
+      <p>
+        Bootstrap also provides a way to translate the “Browse” text in HTML
+        with the <code>data-browse</code> attribute which can be added to the
+        custom input label (example in Dutch):
+      </p>
+      <Callout>
+        Note that the <code>data-browse</code> attribute does not to anything
+        unless the <code>custom</code> prop is set.
+      </Callout>
       <ReactPlayground codeText={FileButtonTextHTML} />
 
       <h4>Translating or customizing the strings with SCSS</h4>

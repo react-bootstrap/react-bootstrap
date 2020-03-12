@@ -60,16 +60,6 @@ describe('<FormFile>', () => {
     expect(wrapper.prop('lang')).to.equal('en');
   });
 
-  it('should supports buttonText when custom', () => {
-    const wrapper = mount(
-      <FormFile custom buttonText="foo" label="My label" />,
-    );
-
-    const labelEl = wrapper.find('label.custom-file-label');
-
-    expect(labelEl.prop('data-browse')).to.equal('foo');
-  });
-
   it('should support "as"', () => {
     const Surrogate = ({ className = '', ...rest }) => (
       <input className={`extraClass ${className}'`} {...rest} />

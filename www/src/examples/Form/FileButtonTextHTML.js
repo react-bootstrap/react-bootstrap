@@ -1,8 +1,8 @@
 <Form>
   <Form.File // prettier-ignore
     id="custom-file-translate"
-    label="Custom file input"
-    buttonText="Button text"
+    label="Voeg je document toe"
+    data-browse="Bestand kiezen"
     custom
   />
 </Form>;

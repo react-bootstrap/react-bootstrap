@@ -21,14 +21,11 @@ const propTypes = {
   htmlFor: PropTypes.string,
 
   /** The string for the button when using custom file input */
-  buttonText: PropTypes.string,
+  'data-browse': PropTypes.string,
 };
 
 const FormFileLabel = React.forwardRef(
-  (
-    { bsPrefix, bsCustomPrefix, className, htmlFor, buttonText, ...props },
-    ref,
-  ) => {
+  ({ bsPrefix, bsCustomPrefix, className, htmlFor, ...props }, ref) => {
     const { controlId, custom } = useContext(FormContext);
     bsPrefix = custom
       ? useBootstrapPrefix(bsCustomPrefix, 'custom-file-label')
@@ -40,7 +37,7 @@ const FormFileLabel = React.forwardRef(
         ref={ref}
         htmlFor={htmlFor || controlId}
         className={classNames(className, bsPrefix)}
-        data-browse={buttonText}
+        data-browse={props['data-browse']}
       />
     );
   },

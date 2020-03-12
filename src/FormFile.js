@@ -68,12 +68,7 @@ const propTypes = {
   /** A message to display when the input is in a validation state */
   feedback: PropTypes.node,
 
-  /** The string for the button when using custom file input */
-  buttonText: all(PropTypes.string, ({ custom, buttonText }) =>
-    buttonText && !custom
-      ? Error('`buttonText` can only be set when custom is `true`')
-      : null,
-  ),
+  'data-browse': PropTypes.string,
 
   /** The language for the button when using custom file input and SCSS based strings */
   lang: all(PropTypes.string, ({ custom, lang }) =>
@@ -104,8 +99,8 @@ const FormFile = React.forwardRef(
       label,
       children,
       custom,
-      buttonText,
       lang,
+      'data-browse': dataBrowse,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as = 'input',
       ...props
@@ -156,7 +151,7 @@ const FormFile = React.forwardRef(
                 <>
                   {input}
                   {hasLabel && (
-                    <FormFileLabel buttonText={buttonText}>
+                    <FormFileLabel data-browse={dataBrowse}>
                       {label}
                     </FormFileLabel>
                   )}

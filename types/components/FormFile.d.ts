@@ -13,7 +13,6 @@ export interface FormFileProps {
   isValid?: boolean;
   isInvalid?: boolean;
   feedback?: React.ReactNode;
-  buttonText?: string;
   lang?: string;
 }
 
