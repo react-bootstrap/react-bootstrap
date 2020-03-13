@@ -69,7 +69,15 @@ const propTypes = {
   feedback: PropTypes.node,
 
   /** The string for the "Browse" text label when using custom file input */
-  'data-browse': PropTypes.string,
+  'data-browse': all(
+    PropTypes.string,
+    ({ custom, 'data-browse': dataBrowse }) =>
+      dataBrowse && !custom
+        ? Error(
+            '`data-browse` attribute value will only be used when custom is `true`',
+          )
+        : null,
+  ),
 
   /** The language for the button when using custom file input and SCSS based strings */
   lang: all(PropTypes.string, ({ custom, lang }) =>
