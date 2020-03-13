@@ -34,10 +34,20 @@ const propTypes = {
   /**
    * Provide a function child to manually handle the layout of the FormFile's inner components.
    *
+   * If not using the custom prop <code>FormFile.Label></code> should be before <code><FormFile.Input isInvalid /></code>
    * ```jsx
    * <FormFile>
    *   <FormFile.Label>Allow us to contact you?</FormFile.Label>
    *   <FormFile.Input isInvalid />
+   *   <Feedback type="invalid">Yo this is required</Feedback>
+   * </FormFile>
+   * ```
+   *
+   * If using the custom prop <code><FormFile.Input isInvalid /></code> should be before <code>FormFile.Label></code>
+   * ```jsx
+   * <FormFile custom>
+   *   <FormFile.Input isInvalid />
+   *   <FormFile.Label>Allow us to contact you?</FormFile.Label>
    *   <Feedback type="invalid">Yo this is required</Feedback>
    * </FormFile>
    * ```
