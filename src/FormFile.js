@@ -22,15 +22,6 @@ const propTypes = {
   bsCustomPrefix: PropTypes.string,
 
   /**
-   * The FormFile `ref` will be forwarded to the underlying input element,
-   * which means it will be a DOM node, when resolved.
-   *
-   * @type {ReactRef}
-   * @alias ref
-   */
-  _ref: PropTypes.any,
-
-  /**
    * The underlying HTML element to use when rendering the FormFile.
    *
    * @type {('input'|elementType)}

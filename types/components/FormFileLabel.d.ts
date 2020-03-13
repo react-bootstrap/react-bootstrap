@@ -4,7 +4,6 @@ import { BsPrefixComponent } from './helpers';
 
 export interface FormFileLabelProps {
   htmlFor?: string;
-  innerRef?: React.LegacyRef<this>;
 }
 
 declare class FormFileLabel extends BsPrefixComponent<

@@ -5,7 +5,6 @@ import { BsPrefixComponent } from './helpers';
 
 export interface FormFileProps {
   bsCustomPrefix?: string;
-  innerRef?: React.LegacyRef<this>;
   id?: string;
   disabled?: boolean;
   label?: React.ReactNode;

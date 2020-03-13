@@ -6,7 +6,6 @@ export interface FormFileInputProps {
   id?: string;
   isValid?: boolean;
   isInvalid?: boolean;
-  innerRef?: React.LegacyRef<this>;
   lang?: string;
 }
 
