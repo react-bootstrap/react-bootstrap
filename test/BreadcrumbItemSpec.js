@@ -3,6 +3,7 @@ import sinon from 'sinon';
 import { mount } from 'enzyme';
 
 import Breadcrumb from '../src/Breadcrumb';
+import Button from '../src/Button';
 
 describe('<Breadcrumb.Item>', () => {
   it('Should render `a` as inner element when is not active', () => {
@@ -11,21 +12,26 @@ describe('<Breadcrumb.Item>', () => {
       .should.have.length(0);
   });
 
-  it('Should render `span.active` with `active` attribute set.', () => {
-    mount(<Breadcrumb.Item active>Active Crumb</Breadcrumb.Item>)
-      .find('span.active')
-      .should.have.length(1);
+  it('Should render `li` with no children as inner element when active.', () => {
+    let li = mount(<Breadcrumb.Item active>Active Crumb</Breadcrumb.Item>).find(
+      'li',
+    );
+    li.should.have.length(1);
+    li.children()
+      .html()
+      .should.eql('Active Crumb');
   });
 
-  it('Should render `span.active` when active and has href', () => {
-    const instance = mount(
+  it('Should render `li` with no children as inner element when active and has href', () => {
+    let li = mount(
       <Breadcrumb.Item href="#" active>
         Active Crumb
       </Breadcrumb.Item>,
-    );
-    instance.find('span.active').should.have.length(1);
-    instance.find('span[href="#"]').should.have.length(0);
-    instance.find('a').should.have.length(0);
+    ).find('li');
+    li.should.have.length(1);
+    li.children()
+      .html()
+      .should.eql('Active Crumb');
   });
 
   it('Should add custom classes onto `li` wrapper element', () => {
@@ -122,5 +128,19 @@ describe('<Breadcrumb.Item>', () => {
 
   it('Should have li as default component', () => {
     mount(<Breadcrumb.Item />).assertSingle('li');
+  });
+
+  it('Should be able to customize inner link element', () => {
+    const instance = mount(<Breadcrumb.Item linkAs={Button} />);
+    instance.find('a').should.have.length(0);
+    instance.find('button').should.have.length(1);
+  });
+
+  it('Should spread property on customized inner link element', () => {
+    const instance = mount(<Breadcrumb.Item linkAs={Button} type="submit" />);
+    instance
+      .find('button')
+      .prop('type')
+      .should.eq('submit');
   });
 });

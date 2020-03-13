@@ -5,6 +5,7 @@ import { BsPrefixComponent } from './helpers';
 export interface BreadcrumbItemProps {
   active?: boolean;
   href?: string;
+  linkAs?: React.ElementType;
   target?: string;
   title?: React.ReactNode;
 }
