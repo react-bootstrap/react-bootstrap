@@ -1,8 +1,7 @@
-import React from 'react';
 import { mount } from 'enzyme';
-
-import DropdownMenu from '../src/DropdownMenu';
+import React from 'react';
 import DropdownItem from '../src/DropdownItem';
+import DropdownMenu from '../src/DropdownMenu';
 
 describe('<Dropdown.Menu>', () => {
   const simpleMenu = (
@@ -33,4 +32,32 @@ describe('<Dropdown.Menu>', () => {
       </DropdownMenu>,
     ).assertSingle('.dropdown-menu-right');
   });
+
+  // it.only('warns about bad refs', () => {
+  //   class Parent extends React.Component {
+  //     componentDidCatch() {}
+
+  //     render() {
+  //       return this.props.children;
+  //     }
+  //   }
+
+  //   class Menu extends React.Component {
+  //     render() {
+  //       const { show: _, alignRight: _1, close: _2, ...props } = this.props;
+
+  //       return <div {...props} />;
+  //     }
+  //   }
+
+  //   expect(() =>
+  //     mount(
+  //       <Parent>
+  //         <DropdownMenu show as={Menu}>
+  //           <DropdownItem>Item</DropdownItem>
+  //         </DropdownMenu>
+  //       </Parent>,
+  //     ),
+  //   ).to.throw();
+  // });
 });

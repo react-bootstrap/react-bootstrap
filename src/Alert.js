@@ -87,6 +87,7 @@ const Alert = React.forwardRef((uncontrolledProps, ref) => {
     <div
       role="alert"
       {...(Transition ? props : undefined)}
+      ref={ref}
       className={classNames(
         className,
         prefix,
@@ -102,7 +103,7 @@ const Alert = React.forwardRef((uncontrolledProps, ref) => {
   if (!Transition) return show ? alert : null;
 
   return (
-    <Transition unmountOnExit ref={ref} {...props} in={show}>
+    <Transition unmountOnExit {...props} in={show}>
       {alert}
     </Transition>
   );

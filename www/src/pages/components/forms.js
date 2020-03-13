@@ -12,6 +12,7 @@ import CheckCustomInline from '../../examples/Form/CheckCustomInline';
 import CheckInline from '../../examples/Form/CheckInline';
 import FormGroup from '../../examples/Form/FormGroup';
 import FormRow from '../../examples/Form/FormRow';
+import FormLabelSizing from '../../examples/Form/FormLabelSizing';
 import GridBasic from '../../examples/Form/GridBasic';
 import GridComplex from '../../examples/Form/GridComplex';
 import Horizontal from '../../examples/Form/Horizontal';
@@ -19,6 +20,10 @@ import FormInputSizes from '../../examples/Form/InputSizes';
 import NoLabels from '../../examples/Form/NoLabels';
 import Plaintext from '../../examples/Form/Plaintext';
 import Switch from '../../examples/Form/Switch';
+import Range from '../../examples/Form/Range';
+import RangeCustom from '../../examples/Form/RangeCustom';
+import SelectCustom from '../../examples/Form/SelectCustom';
+import SelectCustomSize from '../../examples/Form/SelectCustomSize';
 import FormTextControls from '../../examples/Form/TextControls';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
 import ValidationNative from '../../examples/Form/ValidationNative';
@@ -70,8 +75,9 @@ export default withLayout(function FormControlsSection({ data }) {
         Sizing
       </LinkedHeading>
       <p>
-        Use <code>size</code> on <code>{'<FormControl>'}</code> to change the
-        size of inputs.
+        Use <code>size</code> on <code>{'<FormControl>'}</code> and{' '}
+        <code>{'<FormLabel>'}</code> to change the size of inputs and labels
+        respectively.
       </p>
       <ReactPlayground codeText={FormInputSizes} />
       <LinkedHeading h="3" id="forms-input-Plaintext">
@@ -83,6 +89,10 @@ export default withLayout(function FormControlsSection({ data }) {
         field styling and preserve the correct margin and padding.
       </p>
       <ReactPlayground codeText={Plaintext} />
+      <LinkedHeading h="2" id="forms-range">
+        Range Inputs
+      </LinkedHeading>
+      <ReactPlayground codeText={Range} />
       <LinkedHeading h="2" id="forms-form-check">
         Checkboxes and Radios
       </LinkedHeading>
@@ -182,7 +192,7 @@ export default withLayout(function FormControlsSection({ data }) {
       <ReactPlayground codeText={FormRow} />
       <p>More complex layouts can also be created with the grid system.</p>
       <ReactPlayground codeText={GridComplex} />
-      <LinkedHeading h="3" id="forms-layout-form-row">
+      <LinkedHeading h="3" id="horizontal-forms">
         Horizontal forms
       </LinkedHeading>
       <p>
@@ -191,6 +201,14 @@ export default withLayout(function FormControlsSection({ data }) {
         gutters for tighter and more compact layouts.
       </p>
       <ReactPlayground codeText={Horizontal} />
+      <LinkedHeading h="4" id="horizontal-forms-label-sizing">
+        Horizontal forms label sizing
+      </LinkedHeading>
+      <p>
+        You can size the <code>{'<FormLabel>'}</code> using the column prop as
+        shown.
+      </p>
+      <ReactPlayground codeText={FormLabelSizing} />
 
       <LinkedHeading h="2" id="forms-validation">
         Validation
@@ -281,6 +299,36 @@ export default withLayout(function FormControlsSection({ data }) {
 
       <h3>Inline</h3>
       <ReactPlayground codeText={CheckCustomInline} />
+
+      <LinkedHeading h="3" id="forms-custom-select">
+        Select
+      </LinkedHeading>
+      <p>
+        For the <code>select</code> form control you can pass the{' '}
+        <code>custom</code> prop to get custom styling of the select element.
+        Custom styles are limited to the <code>select</code> initial appearance
+        and cannot modify the <code>option</code> styling due to browser
+        limitations.
+      </p>
+      <ReactPlayground codeText={SelectCustom} />
+      <h4>Sizing</h4>
+      <p>
+        The custom <code>select</code> element supports sizing.
+      </p>
+      <ReactPlayground codeText={SelectCustomSize} />
+
+      <LinkedHeading h="3" id="forms-custom-range">
+        Range
+      </LinkedHeading>
+      <p>
+        For the <code>range</code> form control you can pass the{' '}
+        <code>custom</code> prop to get custom styling of the select element.
+        The track (the background) and thumb (the value) are both styled to
+        appear the same across browsers. As only IE and Firefox support
+        “filling” their track from the left or right of the thumb as a means to
+        visually indicate progress, we do not currently support it.
+      </p>
+      <ReactPlayground codeText={RangeCustom} />
 
       <LinkedHeading h="2" id="forms-api">
         API

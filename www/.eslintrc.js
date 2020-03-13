@@ -31,6 +31,7 @@ module.exports = {
       files: ['src/examples/**'],
       rules: {
         'comma-dangle': 'off',
+        'max-classes-per-file': 'off',
         'no-console': 'off',
       },
     },

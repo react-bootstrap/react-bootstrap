@@ -41,13 +41,13 @@ function App() {
   const [modalShow, setModalShow] = useState(false);
 
   return (
-    <ButtonToolbar>
+    <>
       <Button variant="primary" onClick={() => setModalShow(true)}>
         Launch modal with grid
       </Button>
 
       <MydModalWithGrid show={modalShow} onHide={() => setModalShow(false)} />
-    </ButtonToolbar>
+    </>
   );
 }
 

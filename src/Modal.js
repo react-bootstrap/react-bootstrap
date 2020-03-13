@@ -1,22 +1,23 @@
 import classNames from 'classnames';
-import events from 'dom-helpers/events';
+import addEventListener from 'dom-helpers/addEventListener';
+import canUseDOM from 'dom-helpers/canUseDOM';
 import ownerDocument from 'dom-helpers/ownerDocument';
-
-import canUseDOM from 'dom-helpers/util/inDOM';
-import getScrollbarSize from 'dom-helpers/util/scrollbarSize';
-import React from 'react';
+import removeEventListener from 'dom-helpers/removeEventListener';
+import getScrollbarSize from 'dom-helpers/scrollbarSize';
 import PropTypes from 'prop-types';
+import React from 'react';
 import BaseModal from 'react-overlays/Modal';
-
+import BootstrapModalManager from './BootstrapModalManager';
 import Fade from './Fade';
 import Body from './ModalBody';
+import ModalContext from './ModalContext';
 import ModalDialog from './ModalDialog';
 import Footer from './ModalFooter';
 import Header from './ModalHeader';
 import Title from './ModalTitle';
-import BootstrapModalManager from './BootstrapModalManager';
 import { createBootstrapComponent } from './ThemeProvider';
-import ModalContext from './ModalContext';
+
+let manager;
 
 const propTypes = {
   /**
@@ -97,6 +98,15 @@ const propTypes = {
   restoreFocus: PropTypes.bool,
 
   /**
+   * Options passed to focus function when `restoreFocus` is set to `true`
+   *
+   * @link  https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#Parameters
+   */
+  restoreFocusOptions: PropTypes.shape({
+    preventScroll: PropTypes.bool,
+  }),
+
+  /**
    * When `true` The modal will show itself.
    */
   show: PropTypes.bool,
@@ -151,7 +161,7 @@ const propTypes = {
    * A ModalManager instance used to track and manage the state of open
    * Modals. Useful when customizing how modals interact within a container
    */
-  manager: PropTypes.object.isRequired,
+  manager: PropTypes.object,
 
   /**
    * @private
@@ -168,7 +178,6 @@ const defaultProps = {
   restoreFocus: true,
   animation: true,
   dialogAs: ModalDialog,
-  manager: new BootstrapModalManager(),
 };
 
 /* eslint-disable no-use-before-define, react/no-multi-comp */
@@ -191,7 +200,7 @@ class Modal extends React.Component {
 
   componentWillUnmount() {
     // Clean up the listener if we need to.
-    events.off(window, 'resize', this.handleWindowResize);
+    removeEventListener(window, 'resize', this.handleWindowResize);
   }
 
   setModalRef = ref => {
@@ -234,7 +243,7 @@ class Modal extends React.Component {
     if (this.props.onEntering) this.props.onEntering(node, ...args);
 
     // FIXME: This should work even when animation is disabled.
-    events.on(window, 'resize', this.handleWindowResize);
+    addEventListener(window, 'resize', this.handleWindowResize);
   };
 
   handleExited = (node, ...args) => {
@@ -242,18 +251,31 @@ class Modal extends React.Component {
     if (this.props.onExited) this.props.onExited(...args);
 
     // FIXME: This should work even when animation is disabled.
-    events.off(window, 'resize', this.handleWindowResize);
+    removeEventListener(window, 'resize', this.handleWindowResize);
   };
 
   handleWindowResize = () => {
     this.updateDialogStyle(this._modal.dialog);
   };
 
+  getModalManager = () => {
+    if (this.props.manager) {
+      return this.props.manager;
+    }
+
+    if (!manager) {
+      manager = new BootstrapModalManager();
+    }
+
+    return manager;
+  };
+
   updateDialogStyle(node) {
     if (!canUseDOM) return;
-    const { manager } = this.props;
 
-    const containerIsOverflowing = manager.isContainerOverflowing(this._modal);
+    const containerIsOverflowing = this.getModalManager().isContainerOverflowing(
+      this._modal,
+    );
 
     const modalIsOverflowing =
       node.scrollHeight > ownerDocument(node).documentElement.clientHeight;
@@ -301,7 +323,6 @@ class Modal extends React.Component {
       animation,
       backdrop,
       keyboard,
-      manager,
       onEscapeKeyDown,
       onShow,
       onHide,
@@ -309,6 +330,7 @@ class Modal extends React.Component {
       autoFocus,
       enforceFocus,
       restoreFocus,
+      restoreFocusOptions,
       onEntered,
       onExit,
       onExiting,
@@ -340,13 +362,14 @@ class Modal extends React.Component {
             autoFocus,
             enforceFocus,
             restoreFocus,
+            restoreFocusOptions,
             onEscapeKeyDown,
             onShow,
             onHide,
             onEntered,
             onExit,
             onExiting,
-            manager,
+            manager: this.getModalManager(),
             ref: this.setModalRef,
             style: baseModalStyle,
             className: classNames(className, bsPrefix),

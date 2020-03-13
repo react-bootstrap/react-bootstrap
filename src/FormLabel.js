@@ -22,7 +22,7 @@ const propTypes = {
    * Renders the FormLabel as a `<Col>` component (accepting all the same props),
    * as well as adding additional styling for horizontal forms.
    */
-  column: PropTypes.bool,
+  column: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['sm', 'lg'])]),
 
   /**
    * The FormLabel `ref` will be forwarded to the underlying element.
@@ -52,11 +52,13 @@ const FormLabel = React.forwardRef(
 
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-label');
 
+    let columnClass = 'col-form-label';
+    if (typeof column === 'string') columnClass = `${columnClass}-${column}`;
     const classes = classNames(
       className,
       bsPrefix,
       srOnly && 'sr-only',
-      column && 'col-form-label',
+      column && columnClass,
     );
 
     warning(

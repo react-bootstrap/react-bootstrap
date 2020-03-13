@@ -20,6 +20,7 @@ export interface ModalProps extends TransitionCallbacks {
   autoFocus?: boolean;
   enforceFocus?: boolean;
   restoreFocus?: boolean;
+  restoreFocusOptions?: FocusOptions;
   show?: boolean;
   onShow?: () => void;
   onHide?: () => void;

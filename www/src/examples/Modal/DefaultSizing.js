@@ -3,10 +3,9 @@ function Example() {
   const [lgShow, setLgShow] = useState(false);
 
   return (
-    <ButtonToolbar>
-      <Button onClick={() => setSmShow(true)}>Small modal</Button>
+    <>
+      <Button onClick={() => setSmShow(true)}>Small modal</Button>{' '}
       <Button onClick={() => setLgShow(true)}>Large modal</Button>
-
       <Modal
         size="sm"
         show={smShow}
@@ -20,7 +19,6 @@ function Example() {
         </Modal.Header>
         <Modal.Body>...</Modal.Body>
       </Modal>
-
       <Modal
         size="lg"
         show={lgShow}
@@ -34,7 +32,7 @@ function Example() {
         </Modal.Header>
         <Modal.Body>...</Modal.Body>
       </Modal>
-    </ButtonToolbar>
+    </>
   );
 }
 

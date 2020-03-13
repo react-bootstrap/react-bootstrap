@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import camelize from 'dom-helpers/util/camelize';
+import camelize from 'dom-helpers/camelize';
 import React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 

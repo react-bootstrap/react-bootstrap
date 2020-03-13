@@ -2,14 +2,20 @@ import * as React from 'react';
 import Feedback from './Feedback';
 import { BsPrefixComponent } from './helpers';
 
+type FormControlElement =
+  | HTMLInputElement
+  | HTMLSelectElement
+  | HTMLTextAreaElement;
+
 export interface FormControlProps {
-  innerRef?: React.LegacyRef<this>;
+  innerRef?: React.LegacyRef<FormControlElement>;
   size?: 'sm' | 'lg';
   plaintext?: boolean;
   readOnly?: boolean;
   disabled?: boolean;
-  value?: string;
-  onChange?: React.FormEventHandler<this>;
+  value?: string | string[] | number;
+  onChange?: React.FormEventHandler<FormControlElement>;
+  custom?: boolean;
   type?: string;
   id?: string;
   isValid?: boolean;

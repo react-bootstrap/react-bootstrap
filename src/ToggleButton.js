@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 
 import Button from './Button';
 
@@ -33,6 +33,7 @@ const propTypes = {
    * directly to the `<input>` so shares the same signature as a native `onChange` event.
    */
   onChange: PropTypes.func,
+
   /**
    * The value of the input, should be unique amongst it's siblings when nested in a
    * `ToggleButtonGroup`.
@@ -44,24 +45,11 @@ const propTypes = {
    * @type {ReactRef}
    */
   inputRef: PropTypes.any,
-
-  /** @ignore */
-  innerRef: PropTypes.any,
 };
 
-class ToggleButton extends React.Component {
-  state = { focused: false };
-
-  handleFocus = e => {
-    if (e.target.tagName === 'INPUT') this.setState({ focused: true });
-  };
-
-  handleBlur = e => {
-    if (e.target.tagName === 'INPUT') this.setState({ focused: false });
-  };
-
-  render() {
-    const {
+const ToggleButton = React.forwardRef(
+  (
+    {
       children,
       name,
       className,
@@ -71,15 +59,24 @@ class ToggleButton extends React.Component {
       value,
       disabled,
       inputRef,
-      innerRef,
       ...props
-    } = this.props;
-    const { focused } = this.state;
+    },
+    ref,
+  ) => {
+    const [focused, setFocused] = useState(false);
+
+    const handleFocus = useCallback(e => {
+      if (e.target.tagName === 'INPUT') setFocused(true);
+    }, []);
+
+    const handleBlur = useCallback(e => {
+      if (e.target.tagName === 'INPUT') setFocused(false);
+    }, []);
 
     return (
       <Button
         {...props}
-        ref={innerRef}
+        ref={ref}
         className={classNames(
           className,
           focused && 'focus',
@@ -97,19 +94,18 @@ class ToggleButton extends React.Component {
           autoComplete="off"
           checked={!!checked}
           disabled={!!disabled}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           onChange={onChange || noop}
         />
 
         {children}
       </Button>
     );
-  }
-}
+  },
+);
 
 ToggleButton.propTypes = propTypes;
+ToggleButton.displayName = 'ToggleButton';
 
-export default React.forwardRef((props, ref) => (
-  <ToggleButton innerRef={ref} {...props} />
-));
+export default ToggleButton;

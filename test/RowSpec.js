@@ -4,6 +4,14 @@ import { mount } from 'enzyme';
 import Row from '../src/Row';
 
 describe('Row', () => {
+  it('Should include "row" when there are no sizes', () => {
+    mount(<Row />).assertSingle('.row');
+  });
+
+  it('Should include sizes', () => {
+    mount(<Row xs={4} md={8} />).assertSingle('.row-cols-md-8.row-cols-4');
+  });
+
   it('uses "div" by default', () => {
     mount(
       <Row className="custom-class">

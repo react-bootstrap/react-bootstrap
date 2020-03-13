@@ -6,17 +6,16 @@ import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 
-import Overlay from '../../examples/Overlays/Overlay';
 import Disabled from '../../examples/Overlays/Disabled';
-import ScheduleUpdate from '../../examples/Overlays/ScheduleUpdate';
+import Overlay from '../../examples/Overlays/Overlay';
 import OverlayTrigger from '../../examples/Overlays/OverlayTrigger';
-import TooltipInCopy from '../../examples/Overlays/TooltipInCopy';
-import TooltipOverlay from '../../examples/Overlays/TooltipOverlay';
-import TooltipPositioned from '../../examples/Overlays/TooltipPositioned';
-
 import PopoverBasic from '../../examples/Overlays/PopoverBasic';
 import PopoverContained from '../../examples/Overlays/PopoverContained';
 import PopoverPositioned from '../../examples/Overlays/PopoverPositioned';
+import ScheduleUpdate from '../../examples/Overlays/ScheduleUpdate';
+import TooltipInCopy from '../../examples/Overlays/TooltipInCopy';
+import TooltipOverlay from '../../examples/Overlays/TooltipOverlay';
+import TooltipPositioned from '../../examples/Overlays/TooltipPositioned';
 
 import withLayout from '../../withLayout';
 
@@ -44,15 +43,15 @@ export default withLayout(function TooltipSection({ data }) {
         Overview
       </LinkedHeading>
 
-      <p>Things to know about the react-boostrap Overlay components.</p>
+      <p>Things to know about the React-Boostrap Overlay components.</p>
       <ul>
         <li>
-          Overlays rely on a 3rd party library{' '}
+          Overlays rely on the third-party library{' '}
           <a href="https://github.com/FezVrasta/react-popper">react-popper</a>,
-          a tiny react wrapper around{' '}
-          <a href="https://popper.js.org/">Popper.js</a>. It's include
-          automatically with react-bootstrap, but you should reference the API
-          for more advanced use-cases.
+          a tiny React wrapper around{' '}
+          <a href="https://popper.js.org/">Popper.js</a>. It's included
+          automatically with React-Bootstrap, but you should reference the API
+          for more advanced use cases.
         </li>
         <li>
           The <code>{'<Tooltip>'}</code> and <code>{'<Popover>'}</code>{' '}

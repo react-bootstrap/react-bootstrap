@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import css from 'dom-helpers/style';
-import onEnd from 'dom-helpers/transition/end';
+import css from 'dom-helpers/css';
+import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Transition, {
@@ -197,7 +197,7 @@ class Collapse extends React.Component {
 
     return (
       <Transition
-        addEndListener={onEnd}
+        addEndListener={transitionEnd}
         {...props}
         aria-expanded={props.role ? props.in : null}
         onEnter={handleEnter}

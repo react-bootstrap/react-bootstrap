@@ -22,33 +22,34 @@ const defaultProps = {
   activeLabel: '(current)',
 };
 
-export default function PageItem({
-  active,
-  disabled,
-  className,
-  style,
-  activeLabel,
-  children,
-  ...props
-}) {
-  const Component = active || disabled ? 'span' : SafeAnchor;
-  return (
-    <li
-      style={style}
-      className={classNames(className, 'page-item', { active, disabled })}
-    >
-      <Component className="page-link" disabled={disabled} {...props}>
-        {children}
-        {active && activeLabel && (
-          <span className="sr-only">{activeLabel}</span>
-        )}
-      </Component>
-    </li>
-  );
-}
+const PageItem = React.forwardRef(
+  (
+    { active, disabled, className, style, activeLabel, children, ...props },
+    ref,
+  ) => {
+    const Component = active || disabled ? 'span' : SafeAnchor;
+    return (
+      <li
+        ref={ref}
+        style={style}
+        className={classNames(className, 'page-item', { active, disabled })}
+      >
+        <Component className="page-link" disabled={disabled} {...props}>
+          {children}
+          {active && activeLabel && (
+            <span className="sr-only">{activeLabel}</span>
+          )}
+        </Component>
+      </li>
+    );
+  },
+);
 
 PageItem.propTypes = propTypes;
 PageItem.defaultProps = defaultProps;
+PageItem.displayName = 'PageItem';
+
+export default PageItem;
 
 function createButton(name, defaultValue, label = name) {
   return class extends React.Component {

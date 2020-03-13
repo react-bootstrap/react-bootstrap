@@ -1,6 +1,6 @@
 import styled, { css } from 'astroturf';
 import classNames from 'classnames';
-import qsa from 'dom-helpers/query/querySelectorAll';
+import qsa from 'dom-helpers/querySelectorAll';
 import * as formik from 'formik';
 import PropTypes from 'prop-types';
 import React, {
@@ -14,14 +14,13 @@ import * as ReactBootstrap from 'react-bootstrap';
 import ReactDOM from 'react-dom';
 import {
   LiveContext,
-  LiveProvider,
   LiveEditor,
   LiveError,
   LivePreview,
+  LiveProvider,
 } from 'react-live';
 import * as yup from 'yup';
 import useIsomorphicEffect from '@restart/hooks/useIsomorphicEffect';
-
 import PlaceholderImage from './PlaceholderImage';
 import Sonnet from './Sonnet';
 
@@ -68,15 +67,6 @@ const StyledExample = styled('div')`
   }
 
   :global {
-    .badge + .badge,
-    .btn-toolbar > * + * {
-      margin-left: 0.5em;
-    }
-
-    & .btn-toolbar + .btn-toolbar {
-      margin-top: 10px;
-    }
-
     .react-live-preview::after {
       display: block;
       clear: both;

@@ -9,7 +9,7 @@ function Example() {
   };
 
   return (
-    <ButtonToolbar ref={ref}>
+    <div ref={ref}>
       <Button onClick={handleClick}>Holy guacamole!</Button>
 
       <Overlay
@@ -26,7 +26,7 @@ function Example() {
           </Popover.Content>
         </Popover>
       </Overlay>
-    </ButtonToolbar>
+    </div>
   );
 }
 
