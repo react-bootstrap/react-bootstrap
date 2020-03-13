@@ -18,6 +18,7 @@ import {
   Dropdown,
   DropdownButton,
   Form,
+  FormFile,
   FormControl,
   InputGroup,
   ListGroup,
@@ -223,6 +224,12 @@ import {
     </Col>
   </Form.Group>
   <Form.File id="custom-file" label="Custom file input" custom />
+  <Form.File
+    ref={React.createRef<HTMLInputElement & FormFile>()}
+    id="custom-file-ref"
+    label="Custom file input"
+    custom
+  />
 </Form>;
 
 <div>

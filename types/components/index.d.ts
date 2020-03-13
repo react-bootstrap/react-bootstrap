@@ -61,6 +61,7 @@ export { default as Fade, FadeProps } from './Fade';
 export { default as Form, FormProps } from './Form';
 export { default as FormControl, FormControlProps } from './FormControl';
 export { default as FormCheck, FormCheckProps } from './FormCheck';
+export { default as FormFile, FormFileProps } from './FormFile';
 export { default as FormGroup, FormGroupProps } from './FormGroup';
 export { default as FormLabel, FormLabelProps } from './FormLabel';
 export { default as FormText, FormTextProps } from './FormText';

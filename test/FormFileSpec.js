@@ -60,6 +60,14 @@ describe('<FormFile>', () => {
     expect(wrapper.prop('lang')).to.equal('en');
   });
 
+  it('should supports data-browse when custom', () => {
+    const wrapper = mount(
+      <FormFile custom data-browse="foo" label="My label" />,
+    );
+
+    expect(wrapper.prop('data-browse')).to.equal('foo');
+  });
+
   it('should support "as"', () => {
     const Surrogate = ({ className = '', ...rest }) => (
       <input className={`extraClass ${className}'`} {...rest} />
