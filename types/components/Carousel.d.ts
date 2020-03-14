@@ -7,7 +7,7 @@ import { BsPrefixComponent } from './helpers';
 
 export interface CarouselProps {
   bsPrefix?: string;
-  animate?: boolean;
+  slide?: boolean;
   fade?: boolean;
   controls?: boolean;
   indicators?: boolean;

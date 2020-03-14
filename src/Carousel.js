@@ -203,7 +203,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   const prefix = useBootstrapPrefix(bsPrefix, 'carousel');
 
   const nextDirectionRef = useRef(null);
-  const [direction, setDirection] = useState(null);
+  const [direction, setDirection] = useState('next');
 
   const [isSliding, setIsSliding] = useState(false);
   const [renderedActiveIndex, setRenderedActiveIndex] = useState(activeIndex);
