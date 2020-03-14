@@ -20,6 +20,8 @@ export interface FormLabelWithColProps extends FormLabelBaseProps, ColProps {
 
 export type FormLabelProps = FormLabelWithColProps | FormLabelOwnProps;
 
-declare class FormLabel extends BsPrefixComponent<'label', FormLabelProps> {}
+declare class FormLabel<
+  As extends React.ElementType = 'label'
+> extends BsPrefixComponent<As, FormLabelProps> {}
 
 export default FormLabel;
