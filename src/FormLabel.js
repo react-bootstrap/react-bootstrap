@@ -39,6 +39,9 @@ const propTypes = {
    * read by assistive technologies.
    */
   srOnly: PropTypes.bool,
+
+  /** Set a custom element for this component */
+  as: PropTypes.elementType,
 };
 
 const defaultProps = {
@@ -47,7 +50,19 @@ const defaultProps = {
 };
 
 const FormLabel = React.forwardRef(
-  ({ bsPrefix, column, srOnly, className, htmlFor, ...props }, ref) => {
+  (
+    {
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'label',
+      bsPrefix,
+      column,
+      srOnly,
+      className,
+      htmlFor,
+      ...props
+    },
+    ref,
+  ) => {
     const { controlId } = useContext(FormContext);
 
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-label');
@@ -74,7 +89,7 @@ const FormLabel = React.forwardRef(
 
     return (
       // eslint-disable-next-line jsx-a11y/label-has-for, jsx-a11y/label-has-associated-control
-      <label ref={ref} className={classes} htmlFor={htmlFor} {...props} />
+      <Component ref={ref} className={classes} htmlFor={htmlFor} {...props} />
     );
   },
 );
