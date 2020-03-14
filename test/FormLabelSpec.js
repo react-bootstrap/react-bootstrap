@@ -71,6 +71,10 @@ describe('<FormLabel>', () => {
     expect(instance.input.tagName).to.equal('LABEL');
   });
 
+  it('accepts as prop', () => {
+    mount(<FormLabel as="legend">body</FormLabel>).assertSingle('legend');
+  });
+
   it('should properly size itself when rendered as a Col', () => {
     mount(<FormLabel column="sm">Label</FormLabel>).assertSingle(
       'label.col-form-label-sm',
