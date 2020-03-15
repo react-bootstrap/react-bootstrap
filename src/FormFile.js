@@ -22,11 +22,18 @@ const propTypes = {
   bsCustomPrefix: PropTypes.string,
 
   /**
+   * The wrapping HTML element to use when rendering the FormFile.
+   *
+   * @type {('div'|elementType)}
+   */
+  as: PropTypes.elementType,
+
+  /**
    * The underlying HTML element to use when rendering the FormFile.
    *
    * @type {('input'|elementType)}
    */
-  as: PropTypes.elementType,
+  inputAs: PropTypes.elementType,
 
   /** A HTML id attribute, necessary for proper form accessibility. */
   id: PropTypes.string,
@@ -69,7 +76,11 @@ const propTypes = {
   /** A message to display when the input is in a validation state */
   feedback: PropTypes.node,
 
-  /** The string for the "Browse" text label when using custom file input */
+  /**
+   * The string for the "Browse" text label when using custom file input
+   *
+   * @type string
+   */
   'data-browse': all(
     PropTypes.string,
     ({ custom, 'data-browse': dataBrowse }) =>
@@ -112,14 +123,15 @@ const FormFile = React.forwardRef(
       lang,
       'data-browse': dataBrowse,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-      as = 'input',
+      as: Component = 'div',
+      inputAs = 'input',
       ...props
     },
     ref,
   ) => {
     bsPrefix = custom
       ? useBootstrapPrefix(bsCustomPrefix, 'custom')
-      : useBootstrapPrefix(bsPrefix, 'form-group');
+      : useBootstrapPrefix(bsPrefix, 'form-file');
 
     const type = 'file';
     const { controlId } = useContext(FormContext);
@@ -140,14 +152,14 @@ const FormFile = React.forwardRef(
         isValid={isValid}
         isInvalid={isInvalid}
         disabled={disabled}
-        as={as}
+        as={inputAs}
         lang={lang}
       />
     );
 
     return (
       <FormContext.Provider value={innerFormContext}>
-        <div
+        <Component
           style={style}
           className={classNames(
             className,
@@ -179,7 +191,7 @@ const FormFile = React.forwardRef(
               )}
             </>
           )}
-        </div>
+        </Component>
       </FormContext.Provider>
     );
   },
