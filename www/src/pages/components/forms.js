@@ -26,7 +26,7 @@ import SelectCustom from '../../examples/Form/SelectCustom';
 import SelectCustomSize from '../../examples/Form/SelectCustomSize';
 import File from '../../examples/Form/File';
 import FileButtonTextHTML from '../../examples/Form/FileButtonTextHTML';
-import FileButtonTextSCSS from '../../examples/Form/FileButtonTextSCSS';
+import FileButtonTextScss from '../../examples/Form/FileButtonTextScss';
 import FileApi from '../../examples/Form/FileApi';
 import FormTextControls from '../../examples/Form/TextControls';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
@@ -369,7 +369,7 @@ export default withLayout(function FormControlsSection({ data }) {
         </a>
         . The <code>lang</code> prop can be used to pass the language.
       </p>
-      <ReactPlayground codeText={FileButtonTextSCSS} />
+      <ReactPlayground codeText={FileButtonTextScss} />
 
       <h4>Customizing FormFile rendering</h4>
       <p>
