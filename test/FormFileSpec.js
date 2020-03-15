@@ -9,7 +9,7 @@ describe('<FormFile>', () => {
     );
 
     wrapper
-      .assertSingle('div.form-group.my-file')
+      .assertSingle('div.form-file.my-file')
       .assertSingle('input[type="file"][name="foo"]');
 
     wrapper
@@ -68,11 +68,26 @@ describe('<FormFile>', () => {
     expect(wrapper.prop('data-browse')).to.equal('foo');
   });
 
-  it('should support "as"', () => {
+  it('should support "inputAs"', () => {
     const Surrogate = ({ className = '', ...rest }) => (
       <input className={`extraClass ${className}'`} {...rest} />
     );
-    const wrapper = mount(<FormFile as={Surrogate} />);
+    const wrapper = mount(<FormFile inputAs={Surrogate} />);
     wrapper.assertSingle('input.extraClass[type="file"]');
+  });
+
+  it('Should have div as default component', () => {
+    const wrapper = mount(<FormFile />);
+    expect(wrapper.find('div').length).to.equal(1);
+  });
+
+  it('should support "as"', () => {
+    // eslint-disable-next-line no-unused-vars
+    const wrapperEl = document.createElement('wrapper-element');
+    const Surrogate = ({ className = '', ...rest }) => (
+      <wrapper-element className={`extraClass ${className}'`} {...rest} />
+    );
+    const wrapper = mount(<FormFile as={Surrogate} />);
+    wrapper.assertSingle('wrapper-element.extraClass');
   });
 });
