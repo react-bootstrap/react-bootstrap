@@ -95,15 +95,16 @@ function NavMain({ activePage }) {
       </Nav>
       <Nav className="ml-auto pr-md-5">
         <StyledDropdown id="t-version">
-          <Dropdown.Toggle id="dropdown-version" variant="outline-light">
-            v{config.version} (Bootstrap{' '}
+          <Dropdown.Toggle id="dropdown-version" as={StyledNavLink}>
+            v{config.version} (
+            <span className="d-none d-lg-inline">Bootstrap </span>
             {config.bootstrapVersion
               .split('.')
               .slice(0, 2)
               .join('.')}
             )
           </Dropdown.Toggle>
-          <Dropdown.Menu className="w-100">
+          <Dropdown.Menu className="w-100" role="menu">
             <Dropdown.Item href="https://react-bootstrap-v3.netlify.com">
               v0.32.4 (Bootstrap 3)
             </Dropdown.Item>

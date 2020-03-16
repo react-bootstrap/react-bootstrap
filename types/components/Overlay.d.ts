@@ -20,7 +20,24 @@ export type Placement =
   | 'left'
   | 'left-start';
 
+export interface OverlayInjectedProps {
+  show: boolean;
+  arrowProps: Record<string, any>;
+  popper: {
+    state: any;
+    outOfBoundaries: boolean;
+    placement: Placement;
+    scheduleUpdate: () => void;
+  };
+  [prop: string]: any;
+}
+
+export type OverlayChildren =
+  | React.ReactElement<OverlayInjectedProps>
+  | ((injected: OverlayInjectedProps) => React.ReactNode);
+
 export interface OverlayProps extends TransitionCallbacks {
+  children: OverlayChildren;
   container?: ComponentOrElement | ((props: object) => ComponentOrElement);
   target?: ComponentOrElement | ((props: object) => ComponentOrElement);
   show?: boolean;

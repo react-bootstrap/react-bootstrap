@@ -220,7 +220,7 @@ describe('<OverlayTrigger>', () => {
       },
     ].forEach(testCase => {
       describe(testCase.name, () => {
-        it('Should handle trigger without warnings', () => {
+        it('Should handle trigger without warnings', done => {
           mount(
             <OverlayTrigger trigger="click" overlay={testCase.overlay}>
               <button type="button">button</button>
@@ -228,6 +228,10 @@ describe('<OverlayTrigger>', () => {
           )
             .find('button')
             .simulate('click');
+
+          // The use of Popper means that errors above will show up
+          //  asynchronously.
+          setTimeout(done, 10);
         });
       });
     });

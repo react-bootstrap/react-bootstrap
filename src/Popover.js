@@ -45,9 +45,10 @@ const propTypes = {
   content: PropTypes.bool,
 
   /** @private */
-  scheduleUpdate: PropTypes.func,
+  popper: PropTypes.object,
+
   /** @private */
-  outOfBoundaries: PropTypes.bool,
+  show: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -64,8 +65,8 @@ const Popover = React.forwardRef(
       children,
       content,
       arrowProps,
-      scheduleUpdate: _,
-      outOfBoundaries: _1,
+      popper: _,
+      show: _1,
       ...props
     },
     ref,

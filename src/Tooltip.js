@@ -55,10 +55,7 @@ const propTypes = {
   }),
 
   /** @private */
-  scheduleUpdate: PropTypes.func,
-
-  /** @private */
-  outOfBoundaries: PropTypes.any,
+  popper: PropTypes.object,
 
   /** @private */
   show: PropTypes.any,
@@ -77,8 +74,7 @@ const Tooltip = React.forwardRef(
       style,
       children,
       arrowProps,
-      scheduleUpdate: _,
-      outOfBoundaries: _1,
+      popper: _,
       show: _2,
       ...props
     },
