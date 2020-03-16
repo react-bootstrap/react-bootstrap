@@ -33,7 +33,7 @@ export interface OverlayInjectedProps {
 }
 
 export type OverlayChildren =
-  | React.ComponentType<OverlayInjectedProps>
+  | React.ReactElement<OverlayInjectedProps>
   | ((injected: OverlayInjectedProps) => React.ReactNode);
 
 export interface OverlayProps extends TransitionCallbacks {
