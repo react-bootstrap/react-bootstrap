@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import FormCheck from './FormCheck';
+import FormFile from './FormFile';
 import FormControl from './FormControl';
 import FormGroup from './FormGroup';
 import FormLabel from './FormLabel';
@@ -25,6 +26,7 @@ declare class Form<
   static Group: typeof FormGroup;
   static Control: typeof FormControl;
   static Check: typeof FormCheck;
+  static File: typeof FormFile;
   static Label: typeof FormLabel;
   static Text: typeof FormText;
 }
