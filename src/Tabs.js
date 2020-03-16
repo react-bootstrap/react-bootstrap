@@ -89,6 +89,7 @@ function getDefaultActiveKey(children) {
       defaultActiveKey = child.props.eventKey;
     }
   });
+
   return defaultActiveKey;
 }
 
