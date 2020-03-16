@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -121,25 +121,45 @@ function wrapRefs(props, arrowProps) {
 }
 
 function Overlay({ children: overlay, transition, ...outerProps }) {
+  const popperRef = useRef({});
   transition = transition === true ? Fade : transition || null;
 
   return (
     <BaseOverlay {...outerProps} transition={transition}>
-      {({ props: overlayProps, arrowProps, show, ...props }) => {
+      {({
+        props: overlayProps,
+        arrowProps,
+        show,
+        state,
+        scheduleUpdate,
+        placement,
+        outOfBoundaries,
+        ...props
+      }) => {
         wrapRefs(overlayProps, arrowProps);
+        const popper = Object.assign(popperRef.current, {
+          state,
+          scheduleUpdate,
+          placement,
+          outOfBoundaries,
+        });
 
         if (typeof overlay === 'function')
           return overlay({
             ...props,
             ...overlayProps,
+            placement,
             show,
+            popper,
             arrowProps,
           });
 
         return React.cloneElement(overlay, {
           ...props,
           ...overlayProps,
+          placement,
           arrowProps,
+          popper,
           className: classNames(
             overlay.props.className,
             !transition && show && 'show',

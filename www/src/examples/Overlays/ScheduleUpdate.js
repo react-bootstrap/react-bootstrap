@@ -1,11 +1,12 @@
 const UpdatingPopover = React.forwardRef(
-  ({ scheduleUpdate, children, ...props }, ref) => {
+  ({ popper, children, show: _, ...props }, ref) => {
     useEffect(() => {
       console.log('updating!');
-      scheduleUpdate();
-    }, [children, scheduleUpdate]);
+      popper.scheduleUpdate();
+    }, [children, popper]);
+
     return (
-      <Popover ref={ref} {...props}>
+      <Popover ref={ref} content {...props}>
         {children}
       </Popover>
     );

@@ -192,9 +192,9 @@ export default withLayout(function TooltipSection({ data }) {
         an Overlay in response to a change.
       </p>
       <p>
-        For this, the Overlay component also injects a{' '}
-        <code>scheduleUpdate()</code> method that an overlay component can use
-        to reposition itself.
+        For this, the Overlay component also injects a a <code>popper</code>{' '}
+        prop with a <code>scheduleUpdate()</code> method that an overlay
+        component can use to reposition itself.
       </p>
       <ReactPlayground codeText={ScheduleUpdate} />
 

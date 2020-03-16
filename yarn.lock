@@ -6994,10 +6994,10 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-overlays@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-3.0.0.tgz#c22f1fb450e66d529ca1fff2f0b117b28b3b4917"
-  integrity sha512-O54xzjVPlu5ERodZw27CfWSu0hDGm8LR6OOlTLAFi3EDXFTH9KfpdFs4Qv+8ZtxNQhiISbwFKt7O67d264cPDw==
+react-overlays@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-3.0.1.tgz#0a007d8d8b97d8e85bb23b2fbe2fb336d82422db"
+  integrity sha512-QEt6I3Cjy06pe2FwY/tuWaXEzSVOuXfP8zsC6oWHJhMYpEJQgZV/TCwbCw5slMW6VcgwcWPc4HrBzN0yfxf5Xw==
   dependencies:
     "@babel/runtime" "^7.4.5"
     "@popperjs/core" "^2.0.0"
