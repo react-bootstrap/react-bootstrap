@@ -26,7 +26,7 @@ export default withLayout(function ThemingSection() {
       <p>
         Custom variants and sizes should follow the pattern of the default
         bootstrap variants, and define css classes matching:{' '}
-        <code>component-*</code>. React bootstrap builds the component
+        <code>component-*</code>. React bootstrap builds the component{' '}
         <code>classNames</code> in a consistent way that you can rely on. For
         instance this custom Button.
       </p>
