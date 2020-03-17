@@ -17,7 +17,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macOS-latest]
     steps:
     - name: Checking out Repository
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: Setup Node.js
       uses: actions/setup-node@v1
       with:
