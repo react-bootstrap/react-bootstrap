@@ -64,7 +64,7 @@ import {
 <Breadcrumb listProps={{ type: 'I' }}>
   <Breadcrumb.Item />
   <BreadcrumbItem />
-  <BreadcrumbItem listItemProps={{ id: "foo" }} />
+  <BreadcrumbItem listItemProps={{ id: 'foo' }} />
 </Breadcrumb>;
 
 <Button size="lg" variant="primary" />;
@@ -294,16 +294,16 @@ import {
   <ListGroup.Item action>This one is a button</ListGroup.Item>
 </ListGroup>;
 
-<Modal show={false} onHide={() => { }}>
+<Modal show={false} onHide={() => {}}>
   <Modal.Header closeButton>
     <Modal.Title>Modal heading</Modal.Title>
   </Modal.Header>
   <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
   <Modal.Footer>
-    <Button variant="secondary" onClick={() => { }}>
+    <Button variant="secondary" onClick={() => {}}>
       Close
     </Button>
-    <Button variant="primary" onClick={() => { }}>
+    <Button variant="primary" onClick={() => {}}>
       Save Changes
     </Button>
   </Modal.Footer>
