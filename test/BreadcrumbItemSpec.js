@@ -62,13 +62,13 @@ describe('<Breadcrumb.Item>', () => {
     expect(handleClick.callCount).to.equal(1);
   });
 
-  it('Should apply id onto the anchor', () => {
+  it('Should apply id onto the li element', () => {
     mount(
       <Breadcrumb.Item href="#" id="test-link-id">
         Crumb
       </Breadcrumb.Item>,
     )
-      .find('a#test-link-id')
+      .find('li#test-link-id')
       .should.have.length(1);
   });
 
@@ -137,23 +137,27 @@ describe('<Breadcrumb.Item>', () => {
   });
 
   it('Should spread property on customized inner link element', () => {
-    const instance = mount(<Breadcrumb.Item linkAs={Button} type="submit" />);
+    const instance = mount(
+      <Breadcrumb.Item linkAs={Button} linkProps={{ type: 'submit' }} />,
+    );
     instance
       .find('button')
       .prop('type')
       .should.eq('submit');
   });
 
-  it('Should be able to pass attributes to the li element', () => {
+  it('Should be able to pass attributes to the link element', () => {
     const instance = mount(
-      <Breadcrumb.Item
-        target="_blank"
-        href="http://getbootstrap.com/components/#breadcrumbs"
-        listItemProps={{ foo: 'bar' }}
-      >
-        Crumb
-      </Breadcrumb.Item>,
+      <Breadcrumb.Item linkProps={{ foo: 'bar' }}>Crumb</Breadcrumb.Item>,
     );
+    instance
+      .find('a')
+      .prop('foo')
+      .should.eq('bar');
+  });
+
+  it('Should be able to pass attributes to the li element', () => {
+    const instance = mount(<Breadcrumb.Item foo="bar">Crumb</Breadcrumb.Item>);
     instance
       .find('li')
       .prop('foo')

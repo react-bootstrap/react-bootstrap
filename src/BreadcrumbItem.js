@@ -34,14 +34,14 @@ const propTypes = {
   /**
    * Additional props passed as-is to the underlying `<li>` element
    */
-  listItemProps: PropTypes.object,
+  linkProps: PropTypes.object,
 
   as: PropTypes.elementType,
 };
 
 const defaultProps = {
   active: false,
-  listItemProps: {},
+  linkProps: {},
 };
 
 const BreadcrumbItem = React.forwardRef(
@@ -54,23 +54,24 @@ const BreadcrumbItem = React.forwardRef(
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'li',
       linkAs: LinkComponent = SafeAnchor,
+      linkProps,
       ...props
     },
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'breadcrumb-item');
 
-    const { href, title, target, listItemProps, ...elementProps } = props;
-    const linkProps = { href, title, target };
+    const { href, title, target, ...elementProps } = props;
+    const linkComponentProps = { href, title, target, ...linkProps };
 
     return (
       <Component
         ref={ref}
         className={classNames(prefix, className, { active })}
         aria-current={active ? 'page' : undefined}
-        {...listItemProps}
+        {...elementProps}
       >
-        {active ? children : <LinkComponent {...elementProps} {...linkProps} />}
+        {active ? children : <LinkComponent {...linkComponentProps} />}
       </Component>
     );
   },

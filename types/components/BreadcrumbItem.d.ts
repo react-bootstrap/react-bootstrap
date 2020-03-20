@@ -8,7 +8,7 @@ export interface BreadcrumbItemProps {
   linkAs?: React.ElementType;
   target?: string;
   title?: React.ReactNode;
-  listItemProps?: React.LiHTMLAttributes<any>;
+  linkProps?: React.LinkHTMLAttributes<any>;
 }
 
 declare class BreadcrumbItem<
