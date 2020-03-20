@@ -143,4 +143,20 @@ describe('<Breadcrumb.Item>', () => {
       .prop('type')
       .should.eq('submit');
   });
+
+  it('Should be able to pass attributes to the li element', () => {
+    const instance = mount(
+      <Breadcrumb.Item
+        target="_blank"
+        href="http://getbootstrap.com/components/#breadcrumbs"
+        listItemProps={{ foo: 'bar' }}
+      >
+        Crumb
+      </Breadcrumb.Item>,
+    );
+    instance
+      .find('li')
+      .prop('foo')
+      .should.eq('bar');
+  });
 });

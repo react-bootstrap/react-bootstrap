@@ -31,12 +31,17 @@ const propTypes = {
    * `target` attribute for the inner `a` element
    */
   target: PropTypes.string,
+  /**
+   * Additional props passed as-is to the underlying `<li>` element
+   */
+  listItemProps: PropTypes.object,
 
   as: PropTypes.elementType,
 };
 
 const defaultProps = {
   active: false,
+  listItemProps: {},
 };
 
 const BreadcrumbItem = React.forwardRef(
@@ -55,7 +60,7 @@ const BreadcrumbItem = React.forwardRef(
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'breadcrumb-item');
 
-    const { href, title, target, ...elementProps } = props;
+    const { href, title, target, listItemProps, ...elementProps } = props;
     const linkProps = { href, title, target };
 
     return (
@@ -63,6 +68,7 @@ const BreadcrumbItem = React.forwardRef(
         ref={ref}
         className={classNames(prefix, className, { active })}
         aria-current={active ? 'page' : undefined}
+        {...listItemProps}
       >
         {active ? children : <LinkComponent {...elementProps} {...linkProps} />}
       </Component>
