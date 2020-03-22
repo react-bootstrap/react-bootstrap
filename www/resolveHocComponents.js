@@ -5,10 +5,10 @@ const buildParser = require('react-docgen/dist/babelParser').default;
 
 const parser = buildParser();
 
-module.exports = ast => {
+module.exports = (ast) => {
   let components = resolver.findAllComponentDefinitions(ast);
 
-  const getComment = path => {
+  const getComment = (path) => {
     let searchPath = path;
     while (searchPath && !types.Statement.check(searchPath.node)) {
       searchPath = searchPath.parent;
@@ -16,7 +16,7 @@ module.exports = ast => {
     let comment =
       (searchPath &&
         searchPath.node.leadingComments &&
-        searchPath.node.leadingComments.map(c => c.value).pop()) ||
+        searchPath.node.leadingComments.map((c) => c.value).pop()) ||
       null;
 
     if (comment) comment = `/${comment}*/`;
@@ -40,7 +40,7 @@ module.exports = ast => {
 
       const property =
         optionsNode &&
-        optionsNode.properties.find(p => p.key.name === 'Component');
+        optionsNode.properties.find((p) => p.key.name === 'Component');
 
       if (property) {
         type =

@@ -123,7 +123,7 @@ function Preview({ showCode, className }) {
     });
   }, [hjs, live.element]);
 
-  const handleClick = useCallback(e => {
+  const handleClick = useCallback((e) => {
     if (e.target.tagName === 'A') {
       e.preventDefault();
     }
@@ -178,7 +178,7 @@ function Editor() {
   const id = idRef.current;
 
   const handleKeyDown = useCallback(
-    e => {
+    (e) => {
       if (ignoreTab) {
         if (e.key !== 'Tab' && e.key !== 'Shift') {
           if (e.key === 'Enter') e.preventDefault();

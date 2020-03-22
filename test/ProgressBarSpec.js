@@ -11,7 +11,7 @@ describe('<ProgressBar>', () => {
     );
   });
 
-  ['success', 'warning', 'info', 'danger'].forEach(variant => {
+  ['success', 'warning', 'info', 'danger'].forEach((variant) => {
     it(`Should have the variant="${variant}" class`, () => {
       mount(
         <ProgressBar min={0} max={10} now={0} variant={variant} />,

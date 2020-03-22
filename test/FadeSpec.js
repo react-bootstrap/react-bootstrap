@@ -12,7 +12,7 @@ describe('Fade', () => {
         let { children, ...props } = this.props;
 
         return (
-          <Fade ref={r => (this.fade = r)} {...props} {...this.state}>
+          <Fade ref={(r) => (this.fade = r)} {...props} {...this.state}>
             <div>{children}</div>
           </Fade>
         );
@@ -34,7 +34,7 @@ describe('Fade', () => {
     assert.equal(wrapper.getDOMNode().className, 'fade');
   });
 
-  it('Should add "in" class when entering', done => {
+  it('Should add "in" class when entering', (done) => {
     wrapper = mount(<Component>Panel content</Component>);
 
     function onEntering() {
@@ -47,7 +47,7 @@ describe('Fade', () => {
     wrapper.setState({ in: true, onEntering });
   });
 
-  it('Should remove "in" class when exiting', done => {
+  it('Should remove "in" class when exiting', (done) => {
     wrapper = mount(<Component in>Panel content</Component>);
 
     function onExiting() {

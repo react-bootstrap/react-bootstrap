@@ -53,7 +53,7 @@ describe('<Tabs>', () => {
     ).assertSingle('NavLink a .special-tab');
   });
 
-  it('Should call onSelect when tab is selected', done => {
+  it('Should call onSelect when tab is selected', (done) => {
     function onSelect(key) {
       assert.equal(key, '2');
       done();

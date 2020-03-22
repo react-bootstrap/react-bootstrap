@@ -18,7 +18,7 @@ describe('<Alert>', () => {
     );
   });
 
-  it('Should call onClose callback on dismiss click', done => {
+  it('Should call onClose callback on dismiss click', (done) => {
     let doneOp = () => {
       done();
     };

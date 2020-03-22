@@ -1,5 +1,5 @@
 <Form>
-  {['checkbox', 'radio'].map(type => (
+  {['checkbox', 'radio'].map((type) => (
     <div key={type} className="mb-3">
       <Form.Check type={type} id={`check-api-${type}`}>
         <Form.Check.Input type={type} isValid />

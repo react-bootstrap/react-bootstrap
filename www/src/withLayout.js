@@ -4,7 +4,7 @@ import ApiLayout from './layouts/ApiLayout';
 import DefaultLayout from './layouts';
 
 export default function withLayout(Component) {
-  return props => {
+  return (props) => {
     const { pathname } = props.location;
     let Layout = DefaultLayout;
     if (

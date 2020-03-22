@@ -138,21 +138,21 @@ class Collapse extends React.Component {
   }
 
   /* -- Expanding -- */
-  handleEnter = elem => {
+  handleEnter = (elem) => {
     elem.style[this.getDimension()] = '0';
   };
 
-  handleEntering = elem => {
+  handleEntering = (elem) => {
     const dimension = this.getDimension();
     elem.style[dimension] = this._getScrollDimensionValue(elem, dimension);
   };
 
-  handleEntered = elem => {
+  handleEntered = (elem) => {
     elem.style[this.getDimension()] = null;
   };
 
   /* -- Collapsing -- */
-  handleExit = elem => {
+  handleExit = (elem) => {
     const dimension = this.getDimension();
     elem.style[dimension] = `${this.props.getDimensionValue(
       dimension,
@@ -161,7 +161,7 @@ class Collapse extends React.Component {
     triggerBrowserReflow(elem);
   };
 
-  handleExiting = elem => {
+  handleExiting = (elem) => {
     elem.style[this.getDimension()] = null;
   };
 

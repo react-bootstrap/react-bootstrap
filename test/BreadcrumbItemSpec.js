@@ -17,9 +17,7 @@ describe('<Breadcrumb.Item>', () => {
       'li',
     );
     li.should.have.length(1);
-    li.children()
-      .html()
-      .should.eql('Active Crumb');
+    li.children().html().should.eql('Active Crumb');
   });
 
   it('Should render `li` with no children as inner element when active and has href', () => {
@@ -29,9 +27,7 @@ describe('<Breadcrumb.Item>', () => {
       </Breadcrumb.Item>,
     ).find('li');
     li.should.have.length(1);
-    li.children()
-      .html()
-      .should.eql('Active Crumb');
+    li.children().html().should.eql('Active Crumb');
   });
 
   it('Should add custom classes onto `li` wrapper element', () => {
@@ -95,10 +91,7 @@ describe('<Breadcrumb.Item>', () => {
       </Breadcrumb.Item>,
     );
 
-    instance
-      .find('a')
-      .prop('title')
-      .should.eq('test-title');
+    instance.find('a').prop('title').should.eq('test-title');
   });
 
   it('Should not apply properties for inner `anchor` onto `li` wrapper element', () => {
@@ -120,10 +113,7 @@ describe('<Breadcrumb.Item>', () => {
         Crumb
       </Breadcrumb.Item>,
     );
-    instance
-      .find('a')
-      .prop('target')
-      .should.eq('_blank');
+    instance.find('a').prop('target').should.eq('_blank');
   });
 
   it('Should have li as default component', () => {
@@ -138,9 +128,6 @@ describe('<Breadcrumb.Item>', () => {
 
   it('Should spread property on customized inner link element', () => {
     const instance = mount(<Breadcrumb.Item linkAs={Button} type="submit" />);
-    instance
-      .find('button')
-      .prop('type')
-      .should.eq('submit');
+    instance.find('button').prop('type').should.eq('submit');
   });
 });

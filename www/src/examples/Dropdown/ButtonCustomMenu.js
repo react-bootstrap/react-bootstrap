@@ -4,7 +4,7 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
   <a
     href=""
     ref={ref}
-    onClick={e => {
+    onClick={(e) => {
       e.preventDefault();
       onClick(e);
     }}
@@ -31,12 +31,12 @@ const CustomMenu = React.forwardRef(
           autoFocus
           className="mx-3 my-2 w-auto"
           placeholder="Type to filter..."
-          onChange={e => setValue(e.target.value)}
+          onChange={(e) => setValue(e.target.value)}
           value={value}
         />
         <ul className="list-unstyled">
           {React.Children.toArray(children).filter(
-            child =>
+            (child) =>
               !value || child.props.children.toLowerCase().startsWith(value),
           )}
         </ul>

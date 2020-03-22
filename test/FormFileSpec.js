@@ -31,7 +31,7 @@ describe('<FormFile>', () => {
       render() {
         return (
           <FormFile
-            ref={ref => {
+            ref={(ref) => {
               this.input = ref;
             }}
           />

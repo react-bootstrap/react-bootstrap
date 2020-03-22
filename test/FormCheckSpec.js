@@ -68,7 +68,7 @@ describe('<FormCheck>', () => {
       render() {
         return (
           <FormCheck
-            ref={ref => {
+            ref={(ref) => {
               this.input = ref;
             }}
           />

@@ -61,7 +61,7 @@ const AbstractNavItem = React.forwardRef(
       props['aria-selected'] = isActive;
     }
 
-    const handleOnclick = useEventCallback(e => {
+    const handleOnclick = useEventCallback((e) => {
       if (onClick) onClick(e);
       if (navKey == null) return;
       if (onSelect) onSelect(navKey, e);

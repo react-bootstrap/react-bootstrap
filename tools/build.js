@@ -25,12 +25,12 @@ const step = (name, fn) => async () => {
   console.log(cyan('Built: ') + green(name));
 };
 
-const shell = cmd =>
+const shell = (cmd) =>
   execa(cmd, { stdio: ['pipe', 'pipe', 'inherit'], shell: true });
 
-const has = t => !targets.length || targets.includes(t);
+const has = (t) => !targets.length || targets.includes(t);
 
-const copyTypes = dest => shell(`cpy ${typesRoot}/components/*.d.ts ${dest}`);
+const copyTypes = (dest) => shell(`cpy ${typesRoot}/components/*.d.ts ${dest}`);
 
 /**
  * Run babel over the src directory and output
@@ -93,7 +93,7 @@ Promise.all([
   has('dist') && buildDist(),
 ])
   .then(buildDirectories)
-  .catch(err => {
+  .catch((err) => {
     if (err) console.error(red(err.stack || err.toString()));
     process.exit(1);
   });

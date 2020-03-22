@@ -1,6 +1,6 @@
 <>
   <div className="mb-2">
-    {['up', 'down', 'left', 'right'].map(direction => (
+    {['up', 'down', 'left', 'right'].map((direction) => (
       <>
         <DropdownButton
           as={ButtonGroup}
@@ -21,7 +21,7 @@
   </div>
 
   <div>
-    {['up', 'down', 'left', 'right'].map(direction => (
+    {['up', 'down', 'left', 'right'].map((direction) => (
       <>
         <SplitButton
           key={direction}

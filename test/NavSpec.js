@@ -84,7 +84,7 @@ describe('<Nav>', () => {
     ).assertSingle('div.card-header-pills');
   });
 
-  it('should call on select when item is selected', done => {
+  it('should call on select when item is selected', (done) => {
     function handleSelect(key) {
       assert.equal(key, '2');
       done();
@@ -126,7 +126,7 @@ describe('<Nav>', () => {
     let keyDownSpy;
 
     beforeEach(() => {
-      selectSpy = sinon.spy(activeKey => {
+      selectSpy = sinon.spy((activeKey) => {
         wrapper.setProps({ activeKey });
       });
       keyDownSpy = sinon.spy();
@@ -155,7 +155,7 @@ describe('<Nav>', () => {
     afterEach(() => wrapper.unmount());
 
     it('only the active tab should be focusable', () => {
-      const links = wrapper.find('a').map(n => n.getDOMNode());
+      const links = wrapper.find('a').map((n) => n.getDOMNode());
 
       expect(links[0].getAttribute('tabindex')).to.not.equal('-1');
       expect(links[1].getAttribute('tabindex')).to.equal('-1');
@@ -169,7 +169,7 @@ describe('<Nav>', () => {
 
       anchors
         .at(0)
-        .tap(a => a.getDOMNode().focus())
+        .tap((a) => a.getDOMNode().focus())
         .simulate('keydown', {
           key: 'ArrowRight',
         });
@@ -186,7 +186,7 @@ describe('<Nav>', () => {
 
       anchors
         .at(4)
-        .tap(a => a.getDOMNode().focus())
+        .tap((a) => a.getDOMNode().focus())
         .simulate('keydown', {
           key: 'ArrowLeft',
         });
@@ -201,7 +201,7 @@ describe('<Nav>', () => {
 
       anchors
         .at(4)
-        .tap(a => a.getDOMNode().focus())
+        .tap((a) => a.getDOMNode().focus())
         .simulate('keydown', {
           key: 'ArrowDown',
         });
@@ -215,7 +215,7 @@ describe('<Nav>', () => {
 
       anchors
         .at(0)
-        .tap(a => a.getDOMNode().focus())
+        .tap((a) => a.getDOMNode().focus())
         .simulate('keydown', {
           key: 'ArrowUp',
         });
@@ -229,7 +229,7 @@ describe('<Nav>', () => {
 
       anchors
         .at(0)
-        .tap(a => a.getDOMNode().focus())
+        .tap((a) => a.getDOMNode().focus())
         .simulate('keydown', {
           key: 'ArrowUp',
         });
@@ -243,7 +243,7 @@ describe('<Nav>', () => {
 
         anchors
           .at(0)
-          .tap(a => a.getDOMNode().focus())
+          .tap((a) => a.getDOMNode().focus())
           .simulate('keydown', {
             key,
           });

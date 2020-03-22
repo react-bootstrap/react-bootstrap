@@ -34,10 +34,7 @@ describe('ToggleButton', () => {
     );
 
     wrapper.find('input').simulate('focus');
-    wrapper
-      .find('Button')
-      .hasClass('focus')
-      .should.equal(true);
+    wrapper.find('Button').hasClass('focus').should.equal(true);
   });
 
   it('should set blur state', () => {
@@ -45,10 +42,7 @@ describe('ToggleButton', () => {
       <ToggleButtonGroup.Button value={3}>Option 3</ToggleButtonGroup.Button>,
     );
     wrapper.find('input').simulate('blur');
-    wrapper
-      .find('Button')
-      .hasClass('focus')
-      .should.equal(false);
+    wrapper.find('Button').hasClass('focus').should.equal(false);
   });
 });
 

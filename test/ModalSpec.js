@@ -32,7 +32,7 @@ describe('<Modal>', () => {
     expect(node.style.display).to.equal('block');
   });
 
-  it('Should close the modal when the modal dialog is clicked', done => {
+  it('Should close the modal when the modal dialog is clicked', (done) => {
     const doneOp = () => {
       done();
     };
@@ -59,7 +59,7 @@ describe('<Modal>', () => {
     expect(onHideSpy).to.not.have.been.called;
   });
 
-  it('Should close the modal when the modal close button is clicked', done => {
+  it('Should close the modal when the modal close button is clicked', (done) => {
     const doneOp = () => {
       done();
     };
@@ -138,7 +138,7 @@ describe('<Modal>', () => {
     ).assertSingle('.custom-dialog');
   });
 
-  it('Should pass transition callbacks to Transition', done => {
+  it('Should pass transition callbacks to Transition', (done) => {
     const increment = sinon.spy();
 
     const instance = mount(

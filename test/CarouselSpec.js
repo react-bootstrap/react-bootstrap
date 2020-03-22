@@ -49,7 +49,7 @@ describe('<Carousel>', () => {
     expect(wrapper.find('.carousel-indicators > li')).to.have.lengthOf(2);
   });
 
-  it('should call onSelect when indicator selected', done => {
+  it('should call onSelect when indicator selected', (done) => {
     function onSelect(index) {
       expect(index).to.equal(0);
 
@@ -62,14 +62,11 @@ describe('<Carousel>', () => {
       </Carousel>,
     );
 
-    wrapper
-      .find('.carousel-indicators li')
-      .first()
-      .simulate('click');
+    wrapper.find('.carousel-indicators li').first().simulate('click');
   });
 
-  ['onSlide', 'onSlid'].forEach(eventName => {
-    it(`should call ${eventName} with previous index and direction`, done => {
+  ['onSlide', 'onSlid'].forEach((eventName) => {
+    it(`should call ${eventName} with previous index and direction`, (done) => {
       function onEvent(index, direction) {
         expect(index).to.equal(0);
         expect(direction).to.equal('right');
@@ -83,13 +80,10 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
 
-      wrapper
-        .find('.carousel-indicators li')
-        .first()
-        .simulate('click');
+      wrapper.find('.carousel-indicators li').first().simulate('click');
     });
 
-    it(`should call ${eventName} with next index and direction`, done => {
+    it(`should call ${eventName} with next index and direction`, (done) => {
       function onEvent(index, direction) {
         const lastPossibleIndex = items.length - 1;
         expect(index).to.equal(lastPossibleIndex);
@@ -104,10 +98,7 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
 
-      wrapper
-        .find('.carousel-indicators li')
-        .last()
-        .simulate('click');
+      wrapper.find('.carousel-indicators li').last().simulate('click');
     });
   });
 
@@ -190,7 +181,7 @@ describe('<Carousel>', () => {
 
   it('should not render labels when values are null or undefined', () => {
     // undefined (as in nothing passed) renders default labels
-    [null, ''].forEach(falsyValue => {
+    [null, ''].forEach((falsyValue) => {
       const wrapper = mount(
         <Carousel
           controls
@@ -209,7 +200,7 @@ describe('<Carousel>', () => {
     });
   });
 
-  it('should transition properly when slide animation is disabled', done => {
+  it('should transition properly when slide animation is disabled', (done) => {
     const spy = sinon.spy();
     const wrapper = mount(
       <Carousel slide={false} onSelect={spy}>
@@ -462,7 +453,7 @@ describe('<Carousel>', () => {
       sinon.assert.notCalled(onSelectSpy);
     });
 
-    ['ArrowUp', 'ArrowRightLeft', 'Onwards'].forEach(key => {
+    ['ArrowUp', 'ArrowRightLeft', 'Onwards'].forEach((key) => {
       it('should do nothing for non left or right keys', () => {
         const onSelectSpy = sinon.spy();
         const wrapper = mount(

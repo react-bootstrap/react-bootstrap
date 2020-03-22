@@ -29,25 +29,19 @@ describe('<SplitButton>', () => {
 
     wrapper.assertNone('.show');
 
-    wrapper
-      .find('button')
-      .first()
-      .simulate('click');
+    wrapper.find('button').first().simulate('click');
 
     wrapper.assertNone('.show');
   });
 
-  it('should invoke onClick when SplitButton.Button is clicked (prop)', done => {
+  it('should invoke onClick when SplitButton.Button is clicked (prop)', (done) => {
     const wrapper = mount(
       <SplitButton title="Title" id="test-id" onClick={() => done()}>
         <DropdownItem>Item 1</DropdownItem>
       </SplitButton>,
     );
 
-    wrapper
-      .find('button')
-      .first()
-      .simulate('click');
+    wrapper.find('button').first().simulate('click');
   });
 
   it('should not invoke onClick when SplitButton.Toggle is clicked (prop)', () => {

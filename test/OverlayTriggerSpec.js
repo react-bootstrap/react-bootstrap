@@ -79,7 +79,7 @@ describe('<OverlayTrigger>', () => {
     assert.equal(button.getAttribute('aria-describedby'), null);
   });
 
-  it('Should set aria-describedby for tooltips if the state is show', done => {
+  it('Should set aria-describedby for tooltips if the state is show', (done) => {
     const wrapper = mount(
       <OverlayTrigger trigger="click" overlay={<Div />}>
         <button type="button">button</button>
@@ -111,7 +111,7 @@ describe('<OverlayTrigger>', () => {
       document.body.removeChild(mountPoint);
     });
 
-    it('Should keep trigger handlers', done => {
+    it('Should keep trigger handlers', (done) => {
       mount(
         <div>
           <OverlayTrigger trigger="click" overlay={<Div>test</Div>}>
@@ -141,7 +141,7 @@ describe('<OverlayTrigger>', () => {
     wrapper.assertSingle('div.test-overlay');
   });
 
-  it('Should pass transition callbacks to Transition', done => {
+  it('Should pass transition callbacks to Transition', (done) => {
     const increment = sinon.spy();
 
     const wrapper = mount(
@@ -218,9 +218,9 @@ describe('<OverlayTrigger>', () => {
         name: 'Tooltip',
         overlay: <Tooltip id="test-tooltip">test</Tooltip>,
       },
-    ].forEach(testCase => {
+    ].forEach((testCase) => {
       describe(testCase.name, () => {
-        it('Should handle trigger without warnings', done => {
+        it('Should handle trigger without warnings', (done) => {
           mount(
             <OverlayTrigger trigger="click" overlay={testCase.overlay}>
               <button type="button">button</button>
@@ -249,7 +249,7 @@ describe('<OverlayTrigger>', () => {
         rootClose: null,
         shownAfterClick: true,
       },
-    ].forEach(testCase => {
+    ].forEach((testCase) => {
       describe(testCase.label, () => {
         it('Should have correct show state', () => {
           const wrapper = mount(
@@ -263,22 +263,14 @@ describe('<OverlayTrigger>', () => {
           );
           wrapper.find('button').simulate('click');
 
-          expect(
-            wrapper
-              .update()
-              .find(Overlay)
-              .props().show,
-          ).to.equal(true);
+          expect(wrapper.update().find(Overlay).props().show).to.equal(true);
 
           // Need to click this way for it to propagate to document element.
           document.documentElement.click();
 
-          expect(
-            wrapper
-              .update()
-              .find(Overlay)
-              .props().show,
-          ).to.equal(testCase.shownAfterClick);
+          expect(wrapper.update().find(Overlay).props().show).to.equal(
+            testCase.shownAfterClick,
+          );
         });
       });
     });
@@ -296,29 +288,14 @@ describe('<OverlayTrigger>', () => {
         );
 
         const [node] = wrapper.getDOMNode();
-        expect(
-          wrapper
-            .update()
-            .find(Overlay)
-            .props().show,
-        ).to.be.false;
+        expect(wrapper.update().find(Overlay).props().show).to.be.false;
 
         node.click();
-        expect(
-          wrapper
-            .update()
-            .find(Overlay)
-            .props().show,
-        ).to.be.true;
+        expect(wrapper.update().find(Overlay).props().show).to.be.true;
 
         // Need to click this way for it to propagate to document element.
         node.click();
-        expect(
-          wrapper
-            .update()
-            .find(Overlay)
-            .props().show,
-        ).to.be.false;
+        expect(wrapper.update().find(Overlay).props().show).to.be.false;
 
         wrapper.unmount();
       });
@@ -365,10 +342,7 @@ describe('<OverlayTrigger>', () => {
         // Need to click this way for it to propagate to document element.
         document.getElementById('replace-overlay').click();
 
-        wrapper
-          .update()
-          .find(Overlay)
-          .props().show.should.be.true;
+        wrapper.update().find(Overlay).props().show.should.be.true;
       });
     });
   });
