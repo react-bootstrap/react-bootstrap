@@ -38,14 +38,14 @@ describe('<Dropdown.Item>', () => {
     node.style.height.should.equal('100px');
   });
 
-  it('renders menu item link', done => {
+  it('renders menu item link', (done) => {
     mount(
       <Dropdown.Item onKeyDown={() => done()} href="/herpa-derpa">
         Item
       </Dropdown.Item>,
     )
       .assertSingle('a.dropdown-item[href="/herpa-derpa"]')
-      .tap(a => a.text().should.equal('Item'))
+      .tap((a) => a.text().should.equal('Item'))
       .simulate('keyDown', { key: 'a' });
   });
 
@@ -55,8 +55,8 @@ describe('<Dropdown.Item>', () => {
     );
   });
 
-  it('click handling with onSelect prop', done => {
-    const handleSelect = eventKey => {
+  it('click handling with onSelect prop', (done) => {
+    const handleSelect = (eventKey) => {
       eventKey.should.equal('1');
       done();
     };
@@ -67,8 +67,8 @@ describe('<Dropdown.Item>', () => {
     ).simulate('click');
   });
 
-  it('click handling with onSelect prop (no eventKey)', done => {
-    const handleSelect = eventKey => {
+  it('click handling with onSelect prop (no eventKey)', (done) => {
+    const handleSelect = (eventKey) => {
       expect(eventKey).to.not.exist;
       done();
     };

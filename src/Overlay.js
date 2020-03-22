@@ -115,9 +115,9 @@ function wrapRefs(props, arrowProps) {
   const { ref } = props;
   const { ref: aRef } = arrowProps;
 
-  props.ref = ref.__wrapped || (ref.__wrapped = r => ref(findDOMNode(r)));
+  props.ref = ref.__wrapped || (ref.__wrapped = (r) => ref(findDOMNode(r)));
   arrowProps.ref =
-    aRef.__wrapped || (aRef.__wrapped = r => aRef(findDOMNode(r)));
+    aRef.__wrapped || (aRef.__wrapped = (r) => aRef(findDOMNode(r)));
 }
 
 function Overlay({ children: overlay, transition, ...outerProps }) {

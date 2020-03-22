@@ -78,7 +78,7 @@ const fadeStyles = {
 
 const Fade = React.forwardRef(({ className, children, ...props }, ref) => {
   const handleEnter = useCallback(
-    node => {
+    (node) => {
       triggerBrowserReflow(node);
       if (props.onEnter) props.onEnter(node);
     },

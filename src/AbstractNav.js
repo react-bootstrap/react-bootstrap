@@ -60,7 +60,7 @@ const AbstractNav = React.forwardRef(
 
     const listNode = useRef(null);
 
-    const getNextActiveChild = offset => {
+    const getNextActiveChild = (offset) => {
       if (!listNode.current) return null;
 
       let items = qsa(listNode.current, '[data-rb-event-key]:not(.disabled)');
@@ -81,7 +81,7 @@ const AbstractNav = React.forwardRef(
       if (parentOnSelect) parentOnSelect(key, event);
     };
 
-    const handleKeyDown = event => {
+    const handleKeyDown = (event) => {
       if (onKeyDown) onKeyDown(event);
 
       let nextActiveChild;

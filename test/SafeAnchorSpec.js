@@ -49,10 +49,7 @@ describe('SafeAnchor', () => {
     const wrapper = mount(<SafeAnchor onClick={handleClick} />);
     wrapper.find('a').simulate('click');
 
-    wrapper
-      .setProps({ href: '#' })
-      .find('a')
-      .simulate('click');
+    wrapper.setProps({ href: '#' }).find('a').simulate('click');
 
     expect(handleClick).to.have.been.calledTwice;
     expect(handleClick.getCall(0).args[0].isDefaultPrevented()).to.be.true;

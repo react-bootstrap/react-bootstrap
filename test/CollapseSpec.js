@@ -13,7 +13,7 @@ describe('<Collapse>', () => {
 
         return (
           <Collapse
-            ref={r => (this.collapse = r)}
+            ref={(r) => (this.collapse = r)}
             getDimensionValue={() => 15}
             {...props}
             {...this.state}
@@ -53,7 +53,7 @@ describe('<Collapse>', () => {
       assert.equal(wrapper.getDOMNode().className, 'collapsing');
     });
 
-    it('Should set initial 0px height', done => {
+    it('Should set initial 0px height', (done) => {
       let node = wrapper.getDOMNode();
 
       function onEnter() {
@@ -75,7 +75,7 @@ describe('<Collapse>', () => {
       assert.equal(node.style.height, '15px');
     });
 
-    it('Should transition from collapsing to not collapsing', done => {
+    it('Should transition from collapsing to not collapsing', (done) => {
       let node = wrapper.getDOMNode();
 
       function onEntered() {
@@ -88,7 +88,7 @@ describe('<Collapse>', () => {
       assert.equal(node.className, 'collapsing');
     });
 
-    it('Should clear height after transition complete', done => {
+    it('Should clear height after transition complete', (done) => {
       let node = wrapper.getDOMNode();
 
       function onEntered() {
@@ -133,7 +133,7 @@ describe('<Collapse>', () => {
       assert.equal(node.style.height, '');
     });
 
-    it('Should transition from collapsing to not collapsing', done => {
+    it('Should transition from collapsing to not collapsing', (done) => {
       let node = wrapper.getDOMNode();
 
       function onExited() {
@@ -146,7 +146,7 @@ describe('<Collapse>', () => {
       assert.equal(node.className, 'collapsing');
     });
 
-    it('Should have no height after transition complete', done => {
+    it('Should have no height after transition complete', (done) => {
       let node = wrapper.getDOMNode();
 
       function onExited() {

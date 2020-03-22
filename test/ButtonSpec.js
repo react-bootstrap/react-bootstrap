@@ -53,7 +53,7 @@ describe('<Button>', () => {
     mount(<Button href={href}>Title</Button>).assertSingle(`a[href="${href}"]`);
   });
 
-  it('Should call onClick callback', done => {
+  it('Should call onClick callback', (done) => {
     mount(<Button onClick={() => done()}>Title</Button>).simulate('click');
   });
 

@@ -12,7 +12,7 @@ const Link = styled('a')`
   padding: 0 0.5rem;
 `;
 
-export default props => {
+export default (props) => {
   const { component } = props;
   const linkToComponentOnGitHub = `//github.com/react-bootstrap/react-bootstrap/tree/v${version}/src/${component}.js`;
 

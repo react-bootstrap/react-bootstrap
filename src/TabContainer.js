@@ -81,7 +81,7 @@ const propTypes = {
   activeKey: PropTypes.any,
 };
 
-const TabContainer = props => {
+const TabContainer = (props) => {
   const {
     id,
     generateChildId: generateCustomChildId,
@@ -107,8 +107,8 @@ const TabContainer = props => {
       transition,
       mountOnEnter,
       unmountOnExit,
-      getControlledId: key => generateChildId(key, 'tabpane'),
-      getControllerId: key => generateChildId(key, 'tab'),
+      getControlledId: (key) => generateChildId(key, 'tabpane'),
+      getControllerId: (key) => generateChildId(key, 'tab'),
     }),
     [
       onSelect,

@@ -84,7 +84,7 @@ const defaultProps = {
 
 function getDefaultActiveKey(children) {
   let defaultActiveKey;
-  forEach(children, child => {
+  forEach(children, (child) => {
     if (defaultActiveKey == null) {
       defaultActiveKey = child.props.eventKey;
     }
@@ -140,7 +140,7 @@ const Tabs = React.forwardRef((props, ref) => {
       </Nav>
 
       <TabContent>
-        {map(children, child => {
+        {map(children, (child) => {
           const childProps = { ...child.props };
 
           delete childProps.title;

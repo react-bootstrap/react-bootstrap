@@ -3,7 +3,7 @@ import camelize from 'dom-helpers/camelize';
 import React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-const pascalCase = str => str[0].toUpperCase() + camelize(str).slice(1);
+const pascalCase = (str) => str[0].toUpperCase() + camelize(str).slice(1);
 
 export default function createWithBsPrefix(
   prefix,

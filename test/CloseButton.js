@@ -29,7 +29,7 @@ describe('<CloseButton>', () => {
     assert.equal(ReactDOM.findDOMNode(instance).getAttribute('class'), 'close');
   });
 
-  it('Should call onClick callback', done => {
+  it('Should call onClick callback', (done) => {
     let doneOp = () => {
       done();
     };

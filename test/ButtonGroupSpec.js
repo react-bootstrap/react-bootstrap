@@ -26,7 +26,7 @@ describe('ButtonGroup', () => {
         <Button>Title</Button>
       </ButtonGroup>,
     )
-      .tap(b => b.assertSingle('.btn-group-vertical'))
+      .tap((b) => b.assertSingle('.btn-group-vertical'))
       .assertNone('.btn-group');
   });
 

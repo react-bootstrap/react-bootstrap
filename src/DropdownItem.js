@@ -83,7 +83,7 @@ const DropdownItem = React.forwardRef(
         ? makeEventKey(activeKey) === key
         : propActive;
 
-    const handleClick = useEventCallback(event => {
+    const handleClick = useEventCallback((event) => {
       // SafeAnchor handles the disabled case, but we handle it here
       // for other components
       if (disabled) return;

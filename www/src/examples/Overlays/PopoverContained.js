@@ -3,7 +3,7 @@ function Example() {
   const [target, setTarget] = useState(null);
   const ref = useRef(null);
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     setShow(!show);
     setTarget(event.target);
   };

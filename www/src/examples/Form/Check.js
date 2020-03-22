@@ -1,5 +1,5 @@
 <Form>
-  {['checkbox', 'radio'].map(type => (
+  {['checkbox', 'radio'].map((type) => (
     <div key={`default-${type}`} className="mb-3">
       <Form.Check // prettier-ignore
         type={type}

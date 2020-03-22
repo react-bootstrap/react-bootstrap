@@ -21,10 +21,7 @@ describe('<NavDropdown>', () => {
 
     wrapper.assertSingle('div.dropdown.test-class');
 
-    wrapper
-      .assertSingle('a.nav-link')
-      .text()
-      .should.equal('Title');
+    wrapper.assertSingle('a.nav-link').text().should.equal('Title');
   });
 
   it('renders active toggle', () => {

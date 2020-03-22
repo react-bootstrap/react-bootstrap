@@ -44,6 +44,6 @@ class Heading extends React.Component {
 
 export default mapContextToProps(
   TocContext,
-  c => ({ registerNode: c.registerNode }),
+  (c) => ({ registerNode: c.registerNode }),
   Heading,
 );

@@ -24,7 +24,7 @@ export function useAccordionToggle(eventKey, onClick) {
   const contextEventKey = useContext(AccordionContext);
   const onSelect = useContext(SelectableContext);
 
-  return e => {
+  return (e) => {
     /* 
       Compare the event key in context with the given event key.
       If they are the same, then collapse the component.

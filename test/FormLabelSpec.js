@@ -58,7 +58,7 @@ describe('<FormLabel>', () => {
           <FormGroup controlId="foo">
             <FormLabel
               type="text"
-              ref={ref => {
+              ref={(ref) => {
                 this.input = ref;
               }}
             />

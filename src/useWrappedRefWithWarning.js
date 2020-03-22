@@ -7,7 +7,7 @@ export default function useWrappedRefWithWarning(ref, componentName) {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const warningRef = useCallback(
-    refValue => {
+    (refValue) => {
       invariant(
         refValue == null || !refValue.isReactComponent,
         `${componentName} injected a ref to a provided \`as\` component that resolved to a component instance instead of a DOM element. ` +

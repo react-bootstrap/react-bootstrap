@@ -152,7 +152,7 @@ function OverlayTrigger({
   }, [delay.hide, timeout]);
 
   const handleFocus = useCallback(
-    e => {
+    (e) => {
       handleShow(e);
       if (onFocus) onFocus(e);
     },
@@ -160,7 +160,7 @@ function OverlayTrigger({
   );
 
   const handleBlur = useCallback(
-    e => {
+    (e) => {
       handleHide(e);
       if (onBlur) onBlur(e);
     },
@@ -168,22 +168,22 @@ function OverlayTrigger({
   );
 
   const handleClick = useCallback(
-    e => {
-      setShow(prevShow => !prevShow);
+    (e) => {
+      setShow((prevShow) => !prevShow);
       if (onClick) onClick(e);
     },
     [onClick],
   );
 
   const handleMouseOver = useCallback(
-    e => {
+    (e) => {
       handleMouseOverOut(handleShow, e, 'fromElement');
     },
     [handleShow],
   );
 
   const handleMouseOut = useCallback(
-    e => {
+    (e) => {
       handleMouseOverOut(handleHide, e, 'toElement');
     },
     [handleHide],

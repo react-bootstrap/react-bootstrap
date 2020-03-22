@@ -68,7 +68,7 @@ const ToggleButtonGroup = React.forwardRef((props, ref) => {
 
     if (isActive) {
       onChange(
-        values.filter(n => n !== inputVal),
+        values.filter((n) => n !== inputVal),
         event,
       );
     } else {
@@ -84,10 +84,10 @@ const ToggleButtonGroup = React.forwardRef((props, ref) => {
 
   return (
     <ButtonGroup {...controlledProps} ref={ref} toggle>
-      {map(children, child => {
+      {map(children, (child) => {
         const values = getValues();
         const { value: childVal, onChange: childOnChange } = child.props;
-        const handler = e => handleToggle(childVal, e);
+        const handler = (e) => handleToggle(childVal, e);
 
         return React.cloneElement(child, {
           type,
