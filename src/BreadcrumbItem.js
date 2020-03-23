@@ -32,7 +32,7 @@ const propTypes = {
    */
   target: PropTypes.string,
   /**
-   * Additional props passed as-is to the underlying `<li>` element
+   * Additional props passed as-is to the underlying link for non-active items.
    */
   linkProps: PropTypes.object,
 
