@@ -224,6 +224,14 @@ import {
       <Form.Control type="text" placeholder="Hoizontal" />
     </Col>
   </Form.Group>
+  <Form.Group as={Row} controlId="exampleForm.HorizontalControl">
+    <Form.Label column="sm" sm={2}>
+      Horizontal
+    </Form.Label>
+    <Col sm={10}>
+      <Form.Control type="text" placeholder="Hoizontal" />
+    </Col>
+  </Form.Group>
   <Form.File id="custom-file" label="Custom file input" custom />
   <Form.File
     ref={React.createRef<HTMLInputElement & FormFile>()}
