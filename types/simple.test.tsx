@@ -64,6 +64,7 @@ import {
 <Breadcrumb listProps={{ type: 'I' }}>
   <Breadcrumb.Item />
   <BreadcrumbItem />
+  <BreadcrumbItem linkProps={{ id: 'foo' }} />
 </Breadcrumb>;
 
 <Button size="lg" variant="primary" />;
