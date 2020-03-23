@@ -55,23 +55,34 @@ const BreadcrumbItem = React.forwardRef(
       as: Component = 'li',
       linkAs: LinkComponent = SafeAnchor,
       linkProps,
+      href,
+      title,
+      target,
       ...props
     },
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'breadcrumb-item');
 
-    const { href, title, target, ...elementProps } = props;
-    const linkComponentProps = { href, title, target, ...linkProps };
-
     return (
       <Component
         ref={ref}
+        {...props}
         className={classNames(prefix, className, { active })}
         aria-current={active ? 'page' : undefined}
-        {...elementProps}
       >
-        {active ? children : <LinkComponent {...linkComponentProps} />}
+        {active ? (
+          children
+        ) : (
+          <LinkComponent
+            {...linkProps}
+            href={href}
+            title={title}
+            target={target}
+          >
+            {children}
+          </LinkComponent>
+        )}
       </Component>
     );
   },

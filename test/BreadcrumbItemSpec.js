@@ -136,7 +136,7 @@ describe('<Breadcrumb.Item>', () => {
     instance.find('button').should.have.length(1);
   });
 
-  it('Should spread property on customized inner link element', () => {
+  it('Should be able to pass props to the customized inner link element', () => {
     const instance = mount(
       <Breadcrumb.Item linkAs={Button} linkProps={{ type: 'submit' }} />,
     );
