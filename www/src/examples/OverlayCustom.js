@@ -31,14 +31,14 @@ class Example extends React.Component {
   }
 
   handleToggle() {
-    this.setState(s => ({ show: !s.show }));
+    this.setState((s) => ({ show: !s.show }));
   }
 
   render() {
     return (
       <div style={{ height: 100, position: 'relative' }}>
         <Button
-          ref={button => {
+          ref={(button) => {
             this.target = button;
           }}
           onClick={this.handleToggle}

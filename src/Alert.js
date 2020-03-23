@@ -79,7 +79,7 @@ const Alert = React.forwardRef((uncontrolledProps, ref) => {
   } = useUncontrolled(uncontrolledProps, controllables);
 
   const prefix = useBootstrapPrefix(bsPrefix, 'alert');
-  const handleClose = useEventCallback(e => {
+  const handleClose = useEventCallback((e) => {
     onClose(false, e);
   });
 

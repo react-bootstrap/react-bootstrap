@@ -119,7 +119,7 @@ function renderNode(root) {
 function Toc(props) {
   return (
     <SidePanel {...props}>
-      <TocContext.Consumer>{c => renderNode(c.tree)}</TocContext.Consumer>
+      <TocContext.Consumer>{(c) => renderNode(c.tree)}</TocContext.Consumer>
     </SidePanel>
   );
 }

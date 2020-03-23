@@ -30,7 +30,7 @@ describe('<NavLink>', () => {
     );
   });
 
-  it('Should call `onSelect` when item is selected', done => {
+  it('Should call `onSelect` when item is selected', (done) => {
     function handleSelect(key, event) {
       assert.equal(key, '2');
       assert.ok(event.target.tagName === 'A');

@@ -98,11 +98,7 @@ function NavMain({ activePage }) {
           <Dropdown.Toggle id="dropdown-version" as={StyledNavLink}>
             v{config.version} (
             <span className="d-none d-lg-inline">Bootstrap </span>
-            {config.bootstrapVersion
-              .split('.')
-              .slice(0, 2)
-              .join('.')}
-            )
+            {config.bootstrapVersion.split('.').slice(0, 2).join('.')})
           </Dropdown.Toggle>
           <Dropdown.Menu className="w-100" role="menu">
             <Dropdown.Item href="https://react-bootstrap-v3.netlify.com">

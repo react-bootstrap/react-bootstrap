@@ -1,5 +1,5 @@
 <>
-  {['top', 'right', 'bottom', 'left'].map(placement => (
+  {['top', 'right', 'bottom', 'left'].map((placement) => (
     <>
       <OverlayTrigger
         trigger="click"

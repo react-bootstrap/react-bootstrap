@@ -77,7 +77,7 @@ const Col = React.forwardRef(
     const spans = [];
     const classes = [];
 
-    DEVICE_SIZES.forEach(brkPoint => {
+    DEVICE_SIZES.forEach((brkPoint) => {
       let propValue = props[brkPoint];
       delete props[brkPoint];
 

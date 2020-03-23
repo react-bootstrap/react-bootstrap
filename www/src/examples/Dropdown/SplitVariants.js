@@ -1,6 +1,6 @@
 <>
   {['Primary', 'Secondary', 'Success', 'Info', 'Warning', 'Danger'].map(
-    variant => (
+    (variant) => (
       <>
         <SplitButton
           key={variant}

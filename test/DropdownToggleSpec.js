@@ -31,8 +31,8 @@ describe('<DropdownToggle>', () => {
       .should.equal('herpa derpa');
   });
 
-  it('forwards onClick handler', done => {
-    const handleClick = event => {
+  it('forwards onClick handler', (done) => {
+    const handleClick = (event) => {
       event.should.be.ok;
       done();
     };

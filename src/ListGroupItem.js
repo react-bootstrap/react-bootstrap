@@ -72,7 +72,7 @@ const ListGroupItem = React.forwardRef(
     bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group-item');
 
     const handleClick = useCallback(
-      event => {
+      (event) => {
         if (disabled) {
           event.preventDefault();
           event.stopPropagation();

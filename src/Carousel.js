@@ -228,7 +228,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   ).length;
 
   const prev = useCallback(
-    event => {
+    (event) => {
       if (isSliding) {
         return;
       }
@@ -250,7 +250,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   );
 
   // This is used in the setInterval, so it should not invalidate.
-  const next = useEventCallback(event => {
+  const next = useEventCallback((event) => {
     if (isSliding) {
       return;
     }
@@ -300,7 +300,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   const directionalClassName = `${prefix}-item-${slideDirection}`;
 
   const handleEnter = useCallback(
-    node => {
+    (node) => {
       triggerBrowserReflow(node);
 
       if (onSlide) {
@@ -319,7 +319,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   }, [onSlid, renderedActiveIndex, slideDirection]);
 
   const handleKeyDown = useCallback(
-    event => {
+    (event) => {
       if (keyboard && !/input|textarea/i.test(event.target.tagName)) {
         switch (event.key) {
           case 'ArrowLeft':
@@ -344,7 +344,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   const [pausedOnHover, setPausedOnHover] = useState(false);
 
   const handleMouseOver = useCallback(
-    event => {
+    (event) => {
       if (pause === 'hover') {
         setPausedOnHover(true);
       }
@@ -357,7 +357,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   );
 
   const handleMouseOut = useCallback(
-    event => {
+    (event) => {
       setPausedOnHover(false);
 
       if (onMouseOut) {
@@ -373,7 +373,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   const touchUnpauseTimeout = useTimeout();
 
   const handleTouchStart = useCallback(
-    event => {
+    (event) => {
       touchStartXRef.current = event.touches[0].clientX;
       touchDeltaXRef.current = 0;
 
@@ -389,7 +389,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   );
 
   const handleTouchMove = useCallback(
-    event => {
+    (event) => {
       if (event.touches && event.touches.length > 1) {
         touchDeltaXRef.current = 0;
       } else {
@@ -405,7 +405,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   );
 
   const handleTouchEnd = useCallback(
-    event => {
+    (event) => {
       if (touch) {
         const touchDeltaX = touchDeltaXRef.current;
 
@@ -454,7 +454,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   const indicatorOnClicks = useMemo(
     () =>
       indicators &&
-      Array.from({ length: numChildren }, (_, index) => event => {
+      Array.from({ length: numChildren }, (_, index) => (event) => {
         onSelect(index, event);
       }),
     [indicators, numChildren, onSelect],
@@ -500,7 +500,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
               onEntered={isActive ? handleEntered : null}
               addEndListener={transitionEnd}
             >
-              {status =>
+              {(status) =>
                 React.cloneElement(child, {
                   className: classNames(
                     child.props.className,

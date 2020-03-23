@@ -32,13 +32,13 @@ export default class BootstrapModalManager extends ModalManager {
     if (!containerState.overflowing) return;
     const size = getScrollbarSize();
 
-    qsa(container, Selector.FIXED_CONTENT).forEach(el =>
+    qsa(container, Selector.FIXED_CONTENT).forEach((el) =>
       this.adjustAndStore('paddingRight', el, size),
     );
-    qsa(container, Selector.STICKY_CONTENT).forEach(el =>
+    qsa(container, Selector.STICKY_CONTENT).forEach((el) =>
       this.adjustAndStore('margingRight', el, -size),
     );
-    qsa(container, Selector.NAVBAR_TOGGLER).forEach(el =>
+    qsa(container, Selector.NAVBAR_TOGGLER).forEach((el) =>
       this.adjustAndStore('margingRight', el, size),
     );
   }
@@ -46,13 +46,13 @@ export default class BootstrapModalManager extends ModalManager {
   removeContainerStyle(containerState, container) {
     super.removeContainerStyle(containerState, container);
 
-    qsa(container, Selector.FIXED_CONTENT).forEach(el =>
+    qsa(container, Selector.FIXED_CONTENT).forEach((el) =>
       this.restore('paddingRight', el),
     );
-    qsa(container, Selector.STICKY_CONTENT).forEach(el =>
+    qsa(container, Selector.STICKY_CONTENT).forEach((el) =>
       this.restore('margingRight', el),
     );
-    qsa(container, Selector.NAVBAR_TOGGLER).forEach(el =>
+    qsa(container, Selector.NAVBAR_TOGGLER).forEach((el) =>
       this.restore('margingRight', el),
     );
   }

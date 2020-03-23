@@ -19,7 +19,7 @@ function onlyProgressBar(props, propName, componentName) {
 
   let error = null;
 
-  React.Children.forEach(children, child => {
+  React.Children.forEach(children, (child) => {
     if (error) {
       return;
     }
@@ -188,7 +188,7 @@ const ProgressBar = React.forwardRef(({ isChild, ...props }, ref) => {
       className={classNames(className, bsPrefix)}
     >
       {children
-        ? map(children, child => cloneElement(child, { isChild: true }))
+        ? map(children, (child) => cloneElement(child, { isChild: true }))
         : renderProgressBar(
             {
               min,

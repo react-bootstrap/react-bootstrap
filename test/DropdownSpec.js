@@ -104,10 +104,7 @@ describe('<Dropdown>', () => {
 
     wrapper.assertSingle('.dropdown.show');
 
-    wrapper
-      .find('.dropdown-menu a')
-      .first()
-      .simulate('click');
+    wrapper.find('.dropdown-menu a').first().simulate('click');
 
     onToggle.should.have.been.calledWith(false);
   });
@@ -135,16 +132,16 @@ describe('<Dropdown>', () => {
         return (
           <Dropdown
             defaultShow
-            ref={dropdown => {
+            ref={(dropdown) => {
               this.dropdown = dropdown;
             }}
             id="test"
           >
             <Dropdown.Toggle
               id="test-id"
-              ref={toggle => (this.toggle = toggle)}
+              ref={(toggle) => (this.toggle = toggle)}
             />
-            <Dropdown.Menu ref={menu => (this.menu = menu)} />
+            <Dropdown.Menu ref={(menu) => (this.menu = menu)} />
           </Dropdown>
         );
       }
@@ -221,10 +218,7 @@ describe('<Dropdown>', () => {
 
       expect(spy).to.have.been.calledOnce;
 
-      wrapper
-        .find('a')
-        .first()
-        .simulate('click');
+      wrapper.find('a').first().simulate('click');
 
       expect(spy).to.have.been.calledTwice;
       expect(spy.getCall(1).args.length).to.equal(3);

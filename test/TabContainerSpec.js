@@ -33,10 +33,7 @@ describe('<TabContainer>', () => {
 
     onSelect.should.not.have.been.called;
 
-    instance
-      .find('Nav a')
-      .first()
-      .simulate('click');
+    instance.find('Nav a').first().simulate('click');
 
     onSelect.should.have.been.calledOnce;
   });
@@ -103,15 +100,9 @@ describe('<TabContainer>', () => {
       </TabContainer>,
     );
 
-    let tabId = instance
-      .find('NavLink a')
-      .first()
-      .prop('id');
+    let tabId = instance.find('NavLink a').first().prop('id');
 
-    let paneId = instance
-      .find('TabPane div')
-      .first()
-      .prop('id');
+    let paneId = instance.find('TabPane div').first().prop('id');
 
     expect(tabId).to.exist;
     expect(paneId).to.exist;
@@ -160,13 +151,8 @@ describe('<TabContainer>', () => {
     instance.assertSingle('div.nav[role="navigation"]');
 
     // make sure its not passed to the Nav.Link
-    expect(
-      instance
-        .find('NavLink a')
-        .first()
-        .getDOMNode()
-        .getAttribute('role'),
-    ).to.not.exist;
+    expect(instance.find('NavLink a').first().getDOMNode().getAttribute('role'))
+      .to.not.exist;
   });
 
   it('Should show the correct tab when selected', () => {
@@ -189,18 +175,15 @@ describe('<TabContainer>', () => {
 
     wrapper
       .find('div.tab-pane.active')
-      .tap(p => p.should.have.lengthOf(1))
+      .tap((p) => p.should.have.lengthOf(1))
       .text()
       .should.equal('Tab 1');
 
-    wrapper
-      .find('a.nav-link')
-      .last()
-      .simulate('click');
+    wrapper.find('a.nav-link').last().simulate('click');
 
     wrapper
       .find('div.tab-pane.active')
-      .tap(p => p.should.have.lengthOf(1))
+      .tap((p) => p.should.have.lengthOf(1))
       .text()
       .should.equal('Tab 2');
   });
@@ -231,18 +214,15 @@ describe('<TabContainer>', () => {
 
     wrapper
       .find('div.tab-pane')
-      .tap(p => p.should.have.lengthOf(1))
+      .tap((p) => p.should.have.lengthOf(1))
       .text()
       .should.equal('Tab 1');
 
-    wrapper
-      .find('a.nav-link')
-      .last()
-      .simulate('click');
+    wrapper.find('a.nav-link').last().simulate('click');
 
     wrapper
       .find('div.tab-pane')
-      .tap(p => p.should.have.lengthOf(1))
+      .tap((p) => p.should.have.lengthOf(1))
       .text()
       .should.equal('Tab 2');
   });
