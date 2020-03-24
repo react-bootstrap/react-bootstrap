@@ -15,7 +15,7 @@ export interface FormLabelOwnProps extends FormLabelBaseProps {
 }
 
 export interface FormLabelWithColProps extends FormLabelBaseProps, ColProps {
-  column: true;
+  column: true | 'sm' | 'lg';
 }
 
 export type FormLabelProps = FormLabelWithColProps | FormLabelOwnProps;
