@@ -22,7 +22,7 @@ export type Placement =
 
 export interface OverlayInjectedProps {
   show: boolean;
-  arrowProps: Record<string, any>;
+  arrowProps: { ref: any; style: object };
   popper: {
     state: any;
     outOfBoundaries: boolean;
