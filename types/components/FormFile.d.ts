@@ -1,7 +1,7 @@
 import * as React from 'react';
 import FormFileInput from './FormFileInput';
 import FormFileLabel from './FormFileLabel';
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface FormFileProps {
   bsCustomPrefix?: string;
@@ -15,11 +15,12 @@ export interface FormFileProps {
   lang?: string;
 }
 
-declare class FormFile<
-  As extends React.ElementType = 'input'
-> extends BsPrefixComponent<As, FormFileProps> {
-  static Input: typeof FormFileInput;
-  static Label: typeof FormFileLabel;
+declare interface FormFile
+  extends BsPrefixRefForwardingComponent<'input', FormFileProps> {
+  Input: typeof FormFileInput;
+  Label: typeof FormFileLabel;
 }
+
+declare const FormFile: FormFile;
 
 export default FormFile;

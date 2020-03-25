@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Feedback from './Feedback';
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
 type FormControlElement =
   | HTMLInputElement
@@ -8,7 +8,6 @@ type FormControlElement =
   | HTMLTextAreaElement;
 
 export interface FormControlProps {
-  innerRef?: React.LegacyRef<FormControlElement>;
   size?: 'sm' | 'lg';
   plaintext?: boolean;
   readOnly?: boolean;
@@ -21,11 +20,11 @@ export interface FormControlProps {
   isValid?: boolean;
   isInvalid?: boolean;
 }
-
-declare class FormControl<
-  As extends React.ElementType = 'input'
-> extends BsPrefixComponent<As, FormControlProps> {
-  static Feedback: typeof Feedback;
+declare interface FormControl
+  extends BsPrefixRefForwardingComponent<'input', FormControlProps> {
+  Feedback: typeof Feedback;
 }
+
+declare const FormControl: FormControl;
 
 export default FormControl;

@@ -1,11 +1,10 @@
 import * as React from 'react';
 import FormCheckInput from './FormCheckInput';
 import FormCheckLabel from './FormCheckLabel';
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface FormCheckProps {
   bsCustomPrefix?: string;
-  innerRef?: React.LegacyRef<this>;
   id?: string;
   inline?: boolean;
   disabled?: boolean;
@@ -18,11 +17,12 @@ export interface FormCheckProps {
   feedback?: React.ReactNode;
 }
 
-declare class FormCheck<
-  As extends React.ElementType = 'input'
-> extends BsPrefixComponent<As, FormCheckProps> {
-  static Input: typeof FormCheckInput;
-  static Label: typeof FormCheckLabel;
+declare interface FormCheck
+  extends BsPrefixRefForwardingComponent<'input', FormCheckProps> {
+  Input: typeof FormCheckInput;
+  Label: typeof FormCheckLabel;
 }
+
+declare const FormCheck: FormCheck;
 
 export default FormCheck;

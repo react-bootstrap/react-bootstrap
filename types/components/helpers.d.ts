@@ -13,6 +13,20 @@ export interface BsPrefixProps<As extends React.ElementType> {
   bsPrefix?: string;
 }
 
+export interface BsPrefixRefForwardingComponent<
+  TInitial extends React.ElementType,
+  P = {}
+> {
+  <As extends React.ElementType = TInitial>(
+    props: React.PropsWithChildren<ReplaceProps<As, BsPrefixProps<As> & P>>,
+    context?: any,
+  ): React.ReactElement | null;
+  propTypes?: any;
+  contextTypes?: any;
+  defaultProps?: Partial<P>;
+  displayName?: string;
+}
+
 export class BsPrefixComponent<
   As extends React.ElementType,
   P = {}

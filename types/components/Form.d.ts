@@ -7,28 +7,27 @@ import FormGroup from './FormGroup';
 import FormLabel from './FormLabel';
 import FormText from './FormText';
 
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixComponent, BsPrefixRefForwardingComponent } from './helpers';
 
 export class FormRow<
   As extends React.ElementType = 'div'
 > extends BsPrefixComponent<As> {}
 
 export interface FormProps {
-  innerRef?: React.LegacyRef<this>;
   inline?: boolean;
   validated?: boolean;
 }
 
-declare class Form<
-  As extends React.ElementType = 'form'
-> extends BsPrefixComponent<As, FormProps> {
-  static Row: typeof FormRow;
-  static Group: typeof FormGroup;
-  static Control: typeof FormControl;
-  static Check: typeof FormCheck;
-  static File: typeof FormFile;
-  static Label: typeof FormLabel;
-  static Text: typeof FormText;
+declare interface Form
+  extends BsPrefixRefForwardingComponent<'form', FormProps> {
+  Row: typeof FormRow;
+  Group: typeof FormGroup;
+  Control: typeof FormControl;
+  Check: typeof FormCheck;
+  File: typeof FormFile;
+  Label: typeof FormLabel;
+  Text: typeof FormText;
 }
 
+declare const Form: Form;
 export default Form;

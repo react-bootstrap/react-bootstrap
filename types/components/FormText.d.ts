@@ -1,14 +1,12 @@
-import * as React from 'react';
-
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface FormTextProps {
-  innerRef?: React.LegacyRef<this>;
   muted?: boolean;
 }
 
-declare class FormText<
-  As extends React.ElementType = 'small'
-> extends BsPrefixComponent<As, FormTextProps> {}
+declare interface FormText
+  extends BsPrefixRefForwardingComponent<'small', FormTextProps> {}
+
+declare const FormText: FormText;
 
 export default FormText;

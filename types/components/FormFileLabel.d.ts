@@ -1,14 +1,12 @@
-import * as React from 'react';
-
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface FormFileLabelProps {
   htmlFor?: string;
 }
 
-declare class FormFileLabel extends BsPrefixComponent<
-  'label',
-  FormFileLabelProps
-> {}
+declare interface FormFileLabel
+  extends BsPrefixRefForwardingComponent<'label', FormFileLabelProps> {}
+
+declare const FormFileLabel: FormFileLabel;
 
 export default FormFileLabel;
