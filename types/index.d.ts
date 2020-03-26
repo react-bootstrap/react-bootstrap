@@ -20,6 +20,6 @@
 //                 Duong Tran <https://github.com/t49tran>
 //                 Bartosz Łaniewski <https://github.com/Bartozzz>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.1
+// Minimum TypeScript Version: 3.5
 
 export * from './components';

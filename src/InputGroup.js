@@ -64,13 +64,13 @@ const InputGroupText = createWithBsPrefix('input-group-text', {
   Component: 'span',
 });
 
-const InputGroupCheckbox = props => (
+const InputGroupCheckbox = (props) => (
   <InputGroupText>
     <input type="checkbox" {...props} />
   </InputGroupText>
 );
 
-const InputGroupRadio = props => (
+const InputGroupRadio = (props) => (
   <InputGroupText>
     <input type="radio" {...props} />
   </InputGroupText>

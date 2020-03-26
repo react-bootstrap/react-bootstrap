@@ -1,5 +1,9 @@
 function renderTooltip(props) {
-  return <Tooltip {...props}>Simple tooltip</Tooltip>;
+  return (
+    <Tooltip id="button-tooltip" {...props}>
+      Simple tooltip
+    </Tooltip>
+  );
 }
 
 const Example = () => (

@@ -20,6 +20,14 @@ import FormInputSizes from '../../examples/Form/InputSizes';
 import NoLabels from '../../examples/Form/NoLabels';
 import Plaintext from '../../examples/Form/Plaintext';
 import Switch from '../../examples/Form/Switch';
+import Range from '../../examples/Form/Range';
+import RangeCustom from '../../examples/Form/RangeCustom';
+import SelectCustom from '../../examples/Form/SelectCustom';
+import SelectCustomSize from '../../examples/Form/SelectCustomSize';
+import File from '../../examples/Form/File';
+import FileButtonTextHTML from '../../examples/Form/FileButtonTextHTML';
+import FileButtonTextScss from '../../examples/Form/FileButtonTextScss';
+import FileApi from '../../examples/Form/FileApi';
 import FormTextControls from '../../examples/Form/TextControls';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
 import ValidationNative from '../../examples/Form/ValidationNative';
@@ -85,6 +93,10 @@ export default withLayout(function FormControlsSection({ data }) {
         field styling and preserve the correct margin and padding.
       </p>
       <ReactPlayground codeText={Plaintext} />
+      <LinkedHeading h="2" id="forms-range">
+        Range Inputs
+      </LinkedHeading>
+      <ReactPlayground codeText={Range} />
       <LinkedHeading h="2" id="forms-form-check">
         Checkboxes and Radios
       </LinkedHeading>
@@ -292,6 +304,105 @@ export default withLayout(function FormControlsSection({ data }) {
       <h3>Inline</h3>
       <ReactPlayground codeText={CheckCustomInline} />
 
+      <LinkedHeading h="3" id="forms-custom-select">
+        Select
+      </LinkedHeading>
+      <p>
+        For the <code>select</code> form control you can pass the{' '}
+        <code>custom</code> prop to get custom styling of the select element.
+        Custom styles are limited to the <code>select</code> initial appearance
+        and cannot modify the <code>option</code> styling due to browser
+        limitations.
+      </p>
+      <ReactPlayground codeText={SelectCustom} />
+      <h4>Sizing</h4>
+      <p>
+        The custom <code>select</code> element supports sizing.
+      </p>
+      <ReactPlayground codeText={SelectCustomSize} />
+
+      <LinkedHeading h="3" id="forms-custom-range">
+        Range
+      </LinkedHeading>
+      <p>
+        For the <code>range</code> form control you can pass the{' '}
+        <code>custom</code> prop to get custom styling of the select element.
+        The track (the background) and thumb (the value) are both styled to
+        appear the same across browsers. As only IE and Firefox support
+        “filling” their track from the left or right of the thumb as a means to
+        visually indicate progress, we do not currently support it.
+      </p>
+      <ReactPlayground codeText={RangeCustom} />
+
+      <LinkedHeading h="3" id="forms-custom-file">
+        File
+      </LinkedHeading>
+      <p>A custom styled File uploader.</p>
+      <Callout>
+        The custom <code>FormFile</code> will by default not visibly display
+        your selected file. This requires additional JS. The recommended plugin
+        to animate custom file input is{' '}
+        <a href="https://www.npmjs.com/package/bs-custom-file-input">
+          bs-custom-file-input
+        </a>
+        .
+      </Callout>
+      <ReactPlayground codeText={File} />
+
+      <h4>Translating or customizing the strings with HTML</h4>
+      <p>
+        Bootstrap also provides a way to translate the “Browse” text in HTML
+        with the <code>data-browse</code> attribute which can be added to the
+        custom input label (example in Dutch):
+      </p>
+      <Callout>
+        Note that the <code>data-browse</code> attribute does not to anything
+        unless the <code>custom</code> prop is set.
+      </Callout>
+      <ReactPlayground codeText={FileButtonTextHTML} />
+
+      <h4>Translating or customizing the strings with SCSS</h4>
+      <p>
+        Please refer to the official{' '}
+        <a href="https://getbootstrap.com/docs/4.4/components/forms/#translating-or-customizing-the-strings-with-scss">
+          Bootstrap documentation for translating via SCSS
+        </a>
+        . The <code>lang</code> prop can be used to pass the language.
+      </p>
+      <ReactPlayground codeText={FileButtonTextScss} />
+
+      <h4>Customizing FormFile rendering</h4>
+      <p>
+        When you need tighter control, or want to customize how the{' '}
+        <code>FormFile</code> component renders, it may be better to use it's
+        constituent parts directly.
+      </p>
+      <p>
+        By providing <code>children</code> to the <code>FormFile</code> you can
+        forgo the default rendering and handle it yourself. (You can still
+        provide an <code>id</code> to the <code>FormFile</code> and have it
+        propagate to the label and input).
+      </p>
+      <Callout>
+        <p>
+          When customizing the <code>FormFile</code> rendering it is important
+          to note the order of the <code>label</code> and <code>input</code>{' '}
+          elements.
+        </p>
+        <ul>
+          <li>
+            If you are not setting the <code>custom</code> prop the
+            <code>label</code> should be before the <code>input</code>.
+          </li>
+          <li>
+            If you are setting the custom prop the <code>input</code> element
+            has to be placed before the <code>label</code> or the{' '}
+            <code>buttonText</code> prop will not work.
+          </li>
+        </ul>
+      </Callout>
+      <ReactPlayground codeText={FileApi} />
+
       <LinkedHeading h="2" id="forms-api">
         API
       </LinkedHeading>
@@ -310,6 +421,9 @@ export default withLayout(function FormControlsSection({ data }) {
         metadata={data.FormCheckLabel}
         exportedBy={data.FormCheck}
       />
+      <ComponentApi metadata={data.FormFile} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FormFileInput} exportedBy={data.FormFile} />
+      <ComponentApi metadata={data.FormFileLabel} exportedBy={data.FormFile} />
     </>
   );
 });
@@ -334,6 +448,9 @@ export const query = graphql`
     FormCheck: componentMetadata(displayName: { eq: "FormCheck" }) {
       ...ComponentApi_metadata
     }
+    FormFile: componentMetadata(displayName: { eq: "FormFile" }) {
+      ...ComponentApi_metadata
+    }
     FormCheckInput: componentMetadata(displayName: { eq: "FormCheckInput" }) {
       ...ComponentApi_metadata
     }
@@ -341,6 +458,12 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     Feedback: componentMetadata(displayName: { eq: "Feedback" }) {
+      ...ComponentApi_metadata
+    }
+    FormFileInput: componentMetadata(displayName: { eq: "FormFileInput" }) {
+      ...ComponentApi_metadata
+    }
+    FormFileLabel: componentMetadata(displayName: { eq: "FormFileLabel" }) {
       ...ComponentApi_metadata
     }
   }

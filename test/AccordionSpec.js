@@ -32,14 +32,8 @@ describe('<Accordion>', () => {
     );
     const collapses = wrapper.find('AccordionCollapse');
 
-    collapses
-      .at(0)
-      .getDOMNode()
-      .className.should.include('show');
-    collapses
-      .at(1)
-      .getDOMNode()
-      .className.should.include('collapse');
+    collapses.at(0).getDOMNode().className.should.include('show');
+    collapses.at(1).getDOMNode().className.should.include('collapse');
   });
 
   it('should expand next card and collapse current card on click', () => {
@@ -64,29 +58,19 @@ describe('<Accordion>', () => {
         </Card>
       </Accordion>,
     );
-    wrapper
-      .find('CardHeader')
-      .at(1)
-      .find('button')
-      .simulate('click');
+    wrapper.find('CardHeader').at(1).find('button').simulate('click');
 
     onClickSpy.should.be.calledOnce;
 
     const collapses = wrapper.find('AccordionCollapse');
 
-    collapses
-      .at(0)
-      .getDOMNode()
-      .className.should.include('collapse');
+    collapses.at(0).getDOMNode().className.should.include('collapse');
 
     // Enzyme doesn't really provide support for async utilities
     // on components, but in an ideal setup we should be testing for
     // this className to be `show` after the collapsing animation is done
     // (which is possible in `@testing-library` via `waitForElement`).
     // https://testing-library.com/docs/dom-testing-library/api-async#waitforelement
-    collapses
-      .at(1)
-      .getDOMNode()
-      .className.should.include('collapsing');
+    collapses.at(1).getDOMNode().className.should.include('collapsing');
   });
 });

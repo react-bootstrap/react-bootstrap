@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -26,7 +26,7 @@ const propTypes = {
   show: PropTypes.bool,
 
   /**
-   * A set of popper options and props passed directly to react-popper's Popper component.
+   * A set of popper options and props passed directly to Popper.
    */
   popperConfig: PropTypes.object,
 
@@ -115,31 +115,51 @@ function wrapRefs(props, arrowProps) {
   const { ref } = props;
   const { ref: aRef } = arrowProps;
 
-  props.ref = ref.__wrapped || (ref.__wrapped = r => ref(findDOMNode(r)));
+  props.ref = ref.__wrapped || (ref.__wrapped = (r) => ref(findDOMNode(r)));
   arrowProps.ref =
-    aRef.__wrapped || (aRef.__wrapped = r => aRef(findDOMNode(r)));
+    aRef.__wrapped || (aRef.__wrapped = (r) => aRef(findDOMNode(r)));
 }
 
 function Overlay({ children: overlay, transition, ...outerProps }) {
+  const popperRef = useRef({});
   transition = transition === true ? Fade : transition || null;
 
   return (
     <BaseOverlay {...outerProps} transition={transition}>
-      {({ props: overlayProps, arrowProps, show, ...props }) => {
+      {({
+        props: overlayProps,
+        arrowProps,
+        show,
+        state,
+        scheduleUpdate,
+        placement,
+        outOfBoundaries,
+        ...props
+      }) => {
         wrapRefs(overlayProps, arrowProps);
+        const popper = Object.assign(popperRef.current, {
+          state,
+          scheduleUpdate,
+          placement,
+          outOfBoundaries,
+        });
 
         if (typeof overlay === 'function')
           return overlay({
             ...props,
             ...overlayProps,
+            placement,
             show,
+            popper,
             arrowProps,
           });
 
         return React.cloneElement(overlay, {
           ...props,
           ...overlayProps,
+          placement,
           arrowProps,
+          popper,
           className: classNames(
             overlay.props.className,
             !transition && show && 'show',

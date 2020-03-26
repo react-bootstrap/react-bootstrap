@@ -15,7 +15,7 @@ const NavbarCollapse = React.forwardRef(
     bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-collapse');
     return (
       <NavbarContext.Consumer>
-        {context => (
+        {(context) => (
           <Collapse in={!!(context && context.expanded)} {...props}>
             <div ref={ref} className={bsPrefix}>
               {children}

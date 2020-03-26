@@ -1,6 +1,6 @@
 <Nav
   activeKey="/home"
-  onSelect={selectedKey => alert(`selected ${selectedKey}`)}
+  onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
 >
   <Nav.Item>
     <Nav.Link href="/home">Active</Nav.Link>

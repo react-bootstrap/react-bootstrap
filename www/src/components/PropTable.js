@@ -8,7 +8,7 @@ import Badge from 'react-bootstrap/Badge';
 import Table from 'react-bootstrap/Table';
 
 function getDoclet(doclets = [], tag) {
-  const doclet = doclets.find(d => d.tag === tag);
+  const doclet = doclets.find((d) => d.tag === tag);
   return doclet && doclet.value;
 }
 
@@ -25,10 +25,7 @@ const PropDescription = styled('div')`
 `;
 
 function cleanDocletValue(str) {
-  return str
-    .trim()
-    .replace(/^\{/, '')
-    .replace(/\}$/, '');
+  return str.trim().replace(/^\{/, '').replace(/\}$/, '');
 }
 function getDisplayTypeName(typeName) {
   if (typeName === 'func') return 'function';
@@ -92,11 +89,13 @@ class PropTable extends React.Component {
   }
 
   _renderRows(propsData) {
-    return sortBy(propsData, _ => (_.name.startsWith('bs') ? 'zzzzzz' : _.name))
+    return sortBy(propsData, (_) =>
+      _.name.startsWith('bs') ? 'zzzzzz' : _.name,
+    )
       .filter(
-        prop => prop.type && !prop.doclets.private && !prop.doclets.ignore,
+        (prop) => prop.type && !prop.doclets.private && !prop.doclets.ignore,
       )
-      .map(propData => {
+      .map((propData) => {
         const { name, description, doclets } = propData;
         const alias = getDoclet(doclets, 'alias');
         const deprecated = getDoclet(doclets, 'deprecated');

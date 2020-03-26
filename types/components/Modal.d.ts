@@ -27,6 +27,7 @@ export interface ModalProps extends TransitionCallbacks {
   container?: any;
   scrollable?: boolean;
   onEscapeKeyDown?: () => void;
+  manager?: any;
 }
 
 declare class Modal<

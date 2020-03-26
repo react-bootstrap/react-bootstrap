@@ -152,7 +152,7 @@ function OverlayTrigger({
   }, [delay.hide, timeout]);
 
   const handleFocus = useCallback(
-    e => {
+    (e) => {
       handleShow(e);
       if (onFocus) onFocus(e);
     },
@@ -160,7 +160,7 @@ function OverlayTrigger({
   );
 
   const handleBlur = useCallback(
-    e => {
+    (e) => {
       handleHide(e);
       if (onBlur) onBlur(e);
     },
@@ -168,22 +168,22 @@ function OverlayTrigger({
   );
 
   const handleClick = useCallback(
-    e => {
-      setShow(prevShow => !prevShow);
+    (e) => {
+      setShow((prevShow) => !prevShow);
       if (onClick) onClick(e);
     },
     [onClick],
   );
 
   const handleMouseOver = useCallback(
-    e => {
+    (e) => {
       handleMouseOverOut(handleShow, e, 'fromElement');
     },
     [handleShow],
   );
 
   const handleMouseOut = useCallback(
-    e => {
+    (e) => {
       handleMouseOverOut(handleHide, e, 'toElement');
     },
     [handleHide],
@@ -192,19 +192,23 @@ function OverlayTrigger({
   // We add aria-describedby in the case where the overlay is a role="tooltip"
   // for other cases describedby isn't appropriate (e.g. a popover with inputs) so we don't add it.
   const ariaModifier = {
+    name: 'ariaDescribedBy',
     enabled: true,
-    order: 900,
-    fn: data => {
-      const { popper } = data.instance;
-      const target = getTarget();
+    phase: 'afterWrite',
+    effect: ({ state }) => {
+      return () => {
+        state.elements.reference.removeAttribute('aria-describedby');
+      };
+    },
+    fn: ({ state }) => {
+      const { popper, reference } = state.elements;
 
-      if (!show || !target) return data;
+      if (!show || !reference) return;
 
       const role = popper.getAttribute('role') || '';
       if (popper.id && role.toLowerCase() === 'tooltip') {
-        target.setAttribute('aria-describedby', popper.id);
+        reference.setAttribute('aria-describedby', popper.id);
       }
-      return data;
     },
   };
 
@@ -238,10 +242,7 @@ function OverlayTrigger({
         {...props}
         popperConfig={{
           ...popperConfig,
-          modifiers: {
-            ...popperConfig.modifiers,
-            ariaModifier,
-          },
+          modifiers: [ariaModifier].concat(popperConfig.modifiers || []),
         }}
         show={show}
         onHide={handleHide}

@@ -1,17 +1,14 @@
 const { camelCase, upperFirst } = require('lodash');
 const { resolver, utils } = require('react-docgen');
+const { namedTypes: types, visit } = require('ast-types');
 const buildParser = require('react-docgen/dist/babelParser').default;
 
 const parser = buildParser();
 
-module.exports = (ast, recast) => {
-  const {
-    types: { namedTypes: types },
-  } = recast;
+module.exports = (ast) => {
+  let components = resolver.findAllComponentDefinitions(ast);
 
-  let components = resolver.findAllComponentDefinitions(ast, recast);
-
-  const getComment = path => {
+  const getComment = (path) => {
     let searchPath = path;
     while (searchPath && !types.Statement.check(searchPath.node)) {
       searchPath = searchPath.parent;
@@ -19,14 +16,14 @@ module.exports = (ast, recast) => {
     let comment =
       (searchPath &&
         searchPath.node.leadingComments &&
-        searchPath.node.leadingComments.map(c => c.value).pop()) ||
+        searchPath.node.leadingComments.map((c) => c.value).pop()) ||
       null;
 
     if (comment) comment = `/${comment}*/`;
     return comment;
   };
 
-  recast.visit(ast, {
+  visit(ast, {
     visitCallExpression(path) {
       if (types.ExpressionStatement.check(path.node)) {
         path = path.get('expression');
@@ -43,7 +40,7 @@ module.exports = (ast, recast) => {
 
       const property =
         optionsNode &&
-        optionsNode.properties.find(p => p.key.name === 'Component');
+        optionsNode.properties.find((p) => p.key.name === 'Component');
 
       if (property) {
         type =
@@ -52,15 +49,14 @@ module.exports = (ast, recast) => {
             : property.value.raw;
       }
 
-      let comp = recast.parse(
-        `
+      const src = `
 import React from 'react';
 import PropTypes from 'prop-types';
 
 ${comment || ''}
 export default class ${upperFirst(
-          camelCase(prefixNode.value),
-        )} extends React.Component {
+        camelCase(prefixNode.value),
+      )} extends React.Component {
   static propTypes = {
     /** @default ${prefixNode.raw} */
     bsPrefix: PropTypes.string.isRequired,
@@ -73,11 +69,12 @@ export default class ${upperFirst(
     return null
   }
 }
-        `,
-        { esprima: parser },
-      );
+        `;
+
+      let comp = parser.parse(src);
+      comp.__src = src;
       components = components.concat(
-        resolver.findExportedComponentDefinition(comp.program, recast),
+        resolver.findExportedComponentDefinition(comp),
       );
       return false;
     },

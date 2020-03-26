@@ -203,7 +203,7 @@ class Modal extends React.Component {
     removeEventListener(window, 'resize', this.handleWindowResize);
   }
 
-  setModalRef = ref => {
+  setModalRef = (ref) => {
     this._modal = ref;
   };
 
@@ -214,14 +214,14 @@ class Modal extends React.Component {
     this._waitingForMouseUp = true;
   };
 
-  handleMouseUp = e => {
+  handleMouseUp = (e) => {
     if (this._waitingForMouseUp && e.target === this._modal.dialog) {
       this._ignoreBackdropClick = true;
     }
     this._waitingForMouseUp = false;
   };
 
-  handleClick = e => {
+  handleClick = (e) => {
     if (this._ignoreBackdropClick || e.target !== e.currentTarget) {
       this._ignoreBackdropClick = false;
       return;
@@ -294,7 +294,7 @@ class Modal extends React.Component {
     });
   }
 
-  renderBackdrop = props => {
+  renderBackdrop = (props) => {
     const { bsPrefix, backdropClassName, animation } = this.props;
 
     return (

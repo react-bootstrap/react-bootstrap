@@ -1,17 +1,17 @@
 import * as React from 'react';
 
-import Overlay from './Overlay';
+import { OverlayChildren, OverlayProps } from './Overlay';
 
 type TriggerType = 'hover' | 'click' | 'focus';
 
-export interface OverlayTriggerProps
-  extends React.ComponentPropsWithRef<typeof Overlay> {
+export interface OverlayTriggerProps extends Omit<OverlayProps, 'children'> {
   children: React.ReactNode;
   trigger?: TriggerType | TriggerType[];
   delay?: number | { show: number; hide: number };
   defaultShow?: boolean;
   flip?: boolean;
-  overlay: React.ReactNode | (() => React.ReactNode);
+  overlay: OverlayChildren;
+
   target?: never;
   onHide?: never;
   show?: never;

@@ -8,7 +8,7 @@ function Example() {
         Click me!
       </Button>
       <Overlay target={target.current} show={show} placement="right">
-        {props => (
+        {(props) => (
           <Tooltip id="overlay-example" {...props}>
             My Tooltip
           </Tooltip>

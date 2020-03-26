@@ -27,9 +27,9 @@ const propTypes = {
   active: PropTypes.bool,
 
   /**
-   * Use animation when showing or hiding `<TabPane>`s. Use `false` to disable,
-   * `true` to enable the default `<Fade>` animation or
-   * a react-transition-group v2 `<Transition/>` component.
+   * Use animation when showing or hiding `<TabPane>`s. Defaults to `<Fade>`
+   * animation, else use `false` to disable or a react-transition-group
+   * `<Transition/>` component.
    */
   transition: PropTypes.oneOfType([PropTypes.bool, PropTypes.elementType]),
 
@@ -136,7 +136,7 @@ const TabPane = React.forwardRef((props, ref) => {
 
   const prefix = useBootstrapPrefix(bsPrefix, 'tab-pane');
 
-  if (!active && unmountOnExit) return null;
+  if (!active && !Transition && unmountOnExit) return null;
 
   let pane = (
     <Component

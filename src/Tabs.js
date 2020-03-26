@@ -20,6 +20,8 @@ const propTypes = {
    * @controllable onSelect
    */
   activeKey: PropTypes.any,
+  /** The default active key that is selected on start */
+  defaultActiveKey: PropTypes.any,
 
   /**
    * Navigation style
@@ -29,9 +31,9 @@ const propTypes = {
   variant: PropTypes.string,
 
   /**
-   * Sets a default animation strategy for all children `<TabPane>`s. Use
-   * `false` to disable, `true` to enable the default `<Fade>` animation or
-   * a react-transition-group v2 `<Transition/>` component.
+   * Sets a default animation strategy for all children `<TabPane>`s.
+   * Defaults to `<Fade>` animation, else use `false` to disable or a
+   * react-transition-group `<Transition/>` component.
    *
    * @type {Transition | false}
    * @default {Fade}
@@ -82,7 +84,7 @@ const defaultProps = {
 
 function getDefaultActiveKey(children) {
   let defaultActiveKey;
-  forEach(children, child => {
+  forEach(children, (child) => {
     if (defaultActiveKey == null) {
       defaultActiveKey = child.props.eventKey;
     }
@@ -138,7 +140,7 @@ const Tabs = React.forwardRef((props, ref) => {
       </Nav>
 
       <TabContent>
-        {map(children, child => {
+        {map(children, (child) => {
           const childProps = { ...child.props };
 
           delete childProps.title;

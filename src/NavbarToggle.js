@@ -46,7 +46,7 @@ const NavbarToggle = React.forwardRef(
 
     const { onToggle, expanded } = useContext(NavbarContext) || {};
 
-    const handleClick = useEventCallback(e => {
+    const handleClick = useEventCallback((e) => {
       if (onClick) onClick(e);
       if (onToggle) onToggle();
     });

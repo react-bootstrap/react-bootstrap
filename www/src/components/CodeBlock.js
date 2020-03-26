@@ -37,7 +37,7 @@ const CodeBlock = ({ mode, codeText, ...props }) => {
   const ref = useRef();
   useEffect(() => {
     if (ref.current.innerText !== codeText.trim()) {
-      setVersion(s => s + 1);
+      setVersion((s) => s + 1);
     }
   }, [codeText]);
 

@@ -18,6 +18,7 @@ import {
   Dropdown,
   DropdownButton,
   Form,
+  FormFile,
   FormControl,
   InputGroup,
   ListGroup,
@@ -63,6 +64,7 @@ import {
 <Breadcrumb listProps={{ type: 'I' }}>
   <Breadcrumb.Item />
   <BreadcrumbItem />
+  <BreadcrumbItem linkProps={{ id: 'foo' }} />
 </Breadcrumb>;
 
 <Button size="lg" variant="primary" />;
@@ -222,6 +224,21 @@ import {
       <Form.Control type="text" placeholder="Hoizontal" />
     </Col>
   </Form.Group>
+  <Form.Group as={Row} controlId="exampleForm.HorizontalControl">
+    <Form.Label column="sm" sm={2}>
+      Horizontal
+    </Form.Label>
+    <Col sm={10}>
+      <Form.Control type="text" placeholder="Hoizontal" />
+    </Col>
+  </Form.Group>
+  <Form.File id="custom-file" label="Custom file input" custom />
+  <Form.File
+    ref={React.createRef<HTMLInputElement & FormFile>()}
+    id="custom-file-ref"
+    label="Custom file input"
+    custom
+  />
 </Form>;
 
 <div>

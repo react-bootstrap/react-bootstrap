@@ -6,7 +6,7 @@ import { BsPrefixComponent } from './helpers';
 
 export interface BreadcrumbProps {
   label?: string;
-  listProps?: React.OlHTMLAttributes<any>;
+  listProps?: React.OlHTMLAttributes<HTMLOListElement>;
 }
 
 declare class Breadcrumb<

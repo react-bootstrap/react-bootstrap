@@ -169,7 +169,7 @@ function NavSection({ heading, location: { pathname }, items, path }) {
 
       {items && active && (
         <Nav activeKey={pathname} onSelect={() => {}} className="d-block">
-          {items.map(name => (
+          {items.map((name) => (
             <Nav.Item key={`${path}/${name}/`}>
               <TocSubLink href={`${path}/${name}/`}>
                 {startCase(name.toLowerCase())}
@@ -186,7 +186,7 @@ class SideNav extends React.Component {
   state = { collapsed: false };
 
   handleCollapse = () => {
-    this.setState(s => ({ collapsed: !s.collapsed }));
+    this.setState((s) => ({ collapsed: !s.collapsed }));
   };
 
   render() {

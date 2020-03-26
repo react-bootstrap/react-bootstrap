@@ -58,7 +58,7 @@ describe('<FormLabel>', () => {
           <FormGroup controlId="foo">
             <FormLabel
               type="text"
-              ref={ref => {
+              ref={(ref) => {
                 this.input = ref;
               }}
             />
@@ -69,6 +69,10 @@ describe('<FormLabel>', () => {
 
     const instance = mount(<Container />).instance();
     expect(instance.input.tagName).to.equal('LABEL');
+  });
+
+  it('accepts as prop', () => {
+    mount(<FormLabel as="legend">body</FormLabel>).assertSingle('legend');
   });
 
   it('should properly size itself when rendered as a Col', () => {

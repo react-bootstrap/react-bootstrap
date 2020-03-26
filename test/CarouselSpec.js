@@ -49,7 +49,7 @@ describe('<Carousel>', () => {
     expect(wrapper.find('.carousel-indicators > li')).to.have.lengthOf(2);
   });
 
-  it('should call onSelect when indicator selected', done => {
+  it('should call onSelect when indicator selected', (done) => {
     function onSelect(index) {
       expect(index).to.equal(0);
 
@@ -62,53 +62,44 @@ describe('<Carousel>', () => {
       </Carousel>,
     );
 
-    wrapper
-      .find('.carousel-indicators li')
-      .first()
-      .simulate('click');
+    wrapper.find('.carousel-indicators li').first().simulate('click');
   });
 
-  it('should call onSelect with previous direction and event', done => {
-    function onSelect(index, direction, event) {
-      expect(index).to.equal(0);
-      expect(direction).to.equal('prev');
-      expect(event).to.exist;
+  ['onSlide', 'onSlid'].forEach((eventName) => {
+    it(`should call ${eventName} with previous index and direction`, (done) => {
+      function onEvent(index, direction) {
+        expect(index).to.equal(0);
+        expect(direction).to.equal('right');
 
-      done();
-    }
+        done();
+      }
 
-    const wrapper = mount(
-      <Carousel activeIndex={1} onSelect={onSelect}>
-        {items}
-      </Carousel>,
-    );
+      const wrapper = mount(
+        <Carousel defaultActiveIndex={1} {...{ [eventName]: onEvent }}>
+          {items}
+        </Carousel>,
+      );
 
-    wrapper
-      .find('.carousel-indicators li')
-      .first()
-      .simulate('click');
-  });
+      wrapper.find('.carousel-indicators li').first().simulate('click');
+    });
 
-  it('should call onSelect with next direction and event', done => {
-    function onSelect(index, direction, event) {
-      const lastPossibleIndex = items.length - 1;
-      expect(index).to.equal(lastPossibleIndex);
-      expect(direction).to.equal('next');
-      expect(event).to.exist;
+    it(`should call ${eventName} with next index and direction`, (done) => {
+      function onEvent(index, direction) {
+        const lastPossibleIndex = items.length - 1;
+        expect(index).to.equal(lastPossibleIndex);
+        expect(direction).to.equal('left');
 
-      done();
-    }
+        done();
+      }
 
-    const wrapper = mount(
-      <Carousel activeIndex={1} onSelect={onSelect}>
-        {items}
-      </Carousel>,
-    );
+      const wrapper = mount(
+        <Carousel defaultActiveIndex={1} {...{ [eventName]: onEvent }}>
+          {items}
+        </Carousel>,
+      );
 
-    wrapper
-      .find('.carousel-indicators li')
-      .last()
-      .simulate('click');
+      wrapper.find('.carousel-indicators li').last().simulate('click');
+    });
   });
 
   describe('Buttons and labels with and without wrapping', () => {
@@ -190,7 +181,7 @@ describe('<Carousel>', () => {
 
   it('should not render labels when values are null or undefined', () => {
     // undefined (as in nothing passed) renders default labels
-    [null, ''].forEach(falsyValue => {
+    [null, ''].forEach((falsyValue) => {
       const wrapper = mount(
         <Carousel
           controls
@@ -209,7 +200,7 @@ describe('<Carousel>', () => {
     });
   });
 
-  it('should transition properly when slide animation is disabled', done => {
+  it('should transition properly when slide animation is disabled', (done) => {
     const spy = sinon.spy();
     const wrapper = mount(
       <Carousel slide={false} onSelect={spy}>
@@ -272,7 +263,7 @@ describe('<Carousel>', () => {
           {items}
         </Carousel>,
       );
-      clock.tick(interval * 2);
+      clock.tick(interval * 1.5);
       expect(onSelectSpy).to.have.been.calledOnce;
     });
 
@@ -285,11 +276,11 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
       wrapper.simulate('mouseOver');
-      clock.tick(interval * 2);
+      clock.tick(interval * 1.5);
       sinon.assert.notCalled(onSelectSpy);
 
       wrapper.simulate('mouseOut');
-      clock.tick(interval * 2);
+      clock.tick(interval * 1.5);
       sinon.assert.calledOnce(onSelectSpy);
     });
 
@@ -297,17 +288,13 @@ describe('<Carousel>', () => {
       const onSelectSpy = sinon.spy();
       const interval = 500;
       const wrapper = mount(
-        <Carousel
-          interval={interval}
-          onSelect={onSelectSpy}
-          pauseOnHover={false}
-        >
+        <Carousel interval={interval} onSelect={onSelectSpy} pause={false}>
           {items}
         </Carousel>,
       );
       wrapper.simulate('mouseOver');
 
-      clock.tick(interval * 2);
+      clock.tick(interval * 1.5);
       expect(onSelectSpy).to.have.been.calledOnce;
     });
 
@@ -320,7 +307,7 @@ describe('<Carousel>', () => {
         </Carousel>,
       );
       wrapper.unmount();
-      clock.tick(interval * 2);
+      clock.tick(interval * 1.5);
       expect(onSelectSpy).not.to.have.been.called;
     });
   });
@@ -340,7 +327,7 @@ describe('<Carousel>', () => {
       const onSelectSpy = sinon.spy();
 
       const wrapper = mount(
-        <Carousel activeIndex={0} interval={0} onSelect={onSelectSpy}>
+        <Carousel activeIndex={0} onSelect={onSelectSpy}>
           {items}
         </Carousel>,
       );
@@ -349,19 +336,15 @@ describe('<Carousel>', () => {
         key: 'ArrowLeft',
       });
       clock.tick(50);
-      sinon.assert.calledOnce(onSelectSpy);
-      sinon.assert.calledWith(onSelectSpy, items.length - 1);
+
+      expect(onSelectSpy).to.have.been.calledOnceWith(items.length - 1);
     });
 
     it('should wrap from first to last', () => {
       const onSelectSpy = sinon.spy();
 
       const wrapper = mount(
-        <Carousel
-          activeIndex={items.length - 1}
-          interval={0}
-          onSelect={onSelectSpy}
-        >
+        <Carousel activeIndex={items.length - 1} onSelect={onSelectSpy}>
           {items}
         </Carousel>,
       );
@@ -370,8 +353,8 @@ describe('<Carousel>', () => {
         key: 'ArrowRight',
       });
       clock.tick(50);
-      sinon.assert.calledOnce(onSelectSpy);
-      sinon.assert.calledWith(onSelectSpy, 0);
+
+      expect(onSelectSpy).to.have.been.calledOnceWith(0);
     });
 
     [
@@ -396,7 +379,6 @@ describe('<Carousel>', () => {
           <Carousel
             activeIndex={activeIndex}
             wrap={false}
-            interval={0}
             onSelect={onSelectSpy}
           >
             {items}
@@ -415,6 +397,7 @@ describe('<Carousel>', () => {
 
   describe('keyboard events', () => {
     let clock;
+
     beforeEach(() => {
       clock = sinon.useFakeTimers();
     });
@@ -426,7 +409,7 @@ describe('<Carousel>', () => {
     it('should go back for the keyboard event ArrowLeft', () => {
       const onSelectSpy = sinon.spy();
       const wrapper = mount(
-        <Carousel activeIndex={1} interval={0} onSelect={onSelectSpy}>
+        <Carousel activeIndex={1} onSelect={onSelectSpy}>
           {items}
         </Carousel>,
       );
@@ -442,7 +425,7 @@ describe('<Carousel>', () => {
     it('should go forward for the keyboard event ArrowRight', () => {
       const onSelectSpy = sinon.spy();
       const wrapper = mount(
-        <Carousel activeIndex={1} interval={0} onSelect={onSelectSpy}>
+        <Carousel activeIndex={1} onSelect={onSelectSpy}>
           {items}
         </Carousel>,
       );
@@ -458,12 +441,7 @@ describe('<Carousel>', () => {
     it('should ignore keyEvents when the keyboard is disabled', () => {
       const onSelectSpy = sinon.spy();
       const wrapper = mount(
-        <Carousel
-          activeIndex={1}
-          interval={0}
-          onSelect={onSelectSpy}
-          keyboard={false}
-        >
+        <Carousel activeIndex={1} onSelect={onSelectSpy} keyboard={false}>
           {items}
         </Carousel>,
       );
@@ -475,11 +453,11 @@ describe('<Carousel>', () => {
       sinon.assert.notCalled(onSelectSpy);
     });
 
-    ['ArrowUp', 'ArrowRightLeft', 'Onwards'].forEach(({ key }) => {
+    ['ArrowUp', 'ArrowRightLeft', 'Onwards'].forEach((key) => {
       it('should do nothing for non left or right keys', () => {
         const onSelectSpy = sinon.spy();
         const wrapper = mount(
-          <Carousel activeIndex={1} interval={0} onSelect={onSelectSpy}>
+          <Carousel activeIndex={1} onSelect={onSelectSpy}>
             {items}
           </Carousel>,
         );
@@ -509,40 +487,39 @@ describe('<Carousel>', () => {
 
     afterEach(() => {
       clock.restore();
-      clock.tick(150);
     });
 
     it('should swipe right', () => {
-      wrapper.simulate('touchStart', { changedTouches: [{ screenX: 50 }] });
-      wrapper.simulate('touchEnd', { changedTouches: [{ screenX: 0 }] });
+      wrapper.simulate('touchStart', { touches: [{ clientX: 50 }] });
+      wrapper.simulate('touchMove', { touches: [{ clientX: 0 }] });
+      wrapper.simulate('touchEnd');
 
       clock.tick(50);
-      expect(onSelectSpy).to.have.been.calledOnce;
-      expect(onSelectSpy.getCall(0).args[0]).to.equal(2);
+
+      expect(onSelectSpy).to.have.been.calledOnceWith(2);
     });
 
     it('should swipe left', () => {
-      wrapper.simulate('touchStart', { changedTouches: [{ screenX: 0 }] });
-      wrapper.simulate('touchEnd', { changedTouches: [{ screenX: 50 }] });
+      wrapper.simulate('touchStart', { touches: [{ clientX: 0 }] });
+      wrapper.simulate('touchMove', { touches: [{ clientX: 50 }] });
+      wrapper.simulate('touchEnd');
 
       clock.tick(50);
-      expect(onSelectSpy).to.have.been.calledOnce;
-      expect(onSelectSpy.getCall(0).args[0]).to.equal(0);
+
+      expect(onSelectSpy).to.have.been.calledOnceWith(0);
     });
 
     it('should not swipe if swipe detected is under the swipe threshold', () => {
-      const SWIPE_THRESHOLD = 40;
-      wrapper.simulate('touchStart', { changedTouches: [{ screenX: 0 }] });
-      wrapper.simulate('touchEnd', {
-        changedTouches: [{ screenX: SWIPE_THRESHOLD - 5 }],
-      });
+      wrapper.simulate('touchStart', { touches: [{ clientX: 0 }] });
+      wrapper.simulate('touchMove', { touches: [{ clientX: 35 }] });
+      wrapper.simulate('touchEnd');
 
       clock.tick(50);
       expect(onSelectSpy).to.not.have.been.called;
     });
 
     it('should do nothing with disabled touch right', () => {
-      const noTochWrapper = mount(
+      const noTouchWrapper = mount(
         <Carousel
           activeIndex={1}
           interval={null}
@@ -552,12 +529,13 @@ describe('<Carousel>', () => {
           {items}
         </Carousel>,
       );
-      noTochWrapper.simulate('touchStart', {
-        changedTouches: [{ screenX: 50 }],
+      noTouchWrapper.simulate('touchStart', {
+        touches: [{ clientX: 50 }],
       });
-      noTochWrapper.simulate('touchEnd', {
-        changedTouches: [{ screenX: 0 }],
+      noTouchWrapper.simulate('touchMove', {
+        touches: [{ clientX: 0 }],
       });
+      noTouchWrapper.simulate('touchEnd');
 
       clock.tick(50);
       expect(onSelectSpy).to.not.have.been.called;

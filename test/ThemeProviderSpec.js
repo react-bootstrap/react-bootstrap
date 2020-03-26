@@ -56,7 +56,7 @@ describe('<ThemeProvider>', () => {
     let ref;
     const wrapper = mount(
       <div>
-        <Foo bsPrefix="my-foo" ref={r => (ref = r)} />
+        <Foo bsPrefix="my-foo" ref={(r) => (ref = r)} />
       </div>,
     );
 

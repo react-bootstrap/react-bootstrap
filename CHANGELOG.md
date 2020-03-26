@@ -1,3 +1,43 @@
+# [1.0.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.17...v1.0.0) (2020-03-23)
+
+
+### Features
+
+* **BreadcrumbItem:** pass props to li element ([#5055](https://github.com/react-bootstrap/react-bootstrap/issues/5055)) ([eb4877f](https://github.com/react-bootstrap/react-bootstrap/commit/eb4877f89650d5c93a2122dc63baeb814e4f9451)), closes [#5054](https://github.com/react-bootstrap/react-bootstrap/issues/5054)
+* add file input component ([#5036](https://github.com/react-bootstrap/react-bootstrap/issues/5036)) ([724ea6f](https://github.com/react-bootstrap/react-bootstrap/commit/724ea6f7cbc9fa34c60ff74d72f14bc42feab9f7)), closes [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047)
+* add Range input and allow for custom prop for select and range input ([#5034](https://github.com/react-bootstrap/react-bootstrap/issues/5034)) ([d000274](https://github.com/react-bootstrap/react-bootstrap/commit/d00027415f561793c10910e122362b23720b86bb)), closes [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047) [#3047](https://github.com/react-bootstrap/react-bootstrap/issues/3047)
+* can customize BreadcrumbItem's inner link ([77e35f4](https://github.com/react-bootstrap/react-bootstrap/commit/77e35f47b3b47f3ef53458b802b273cf1d0bf6be))
+
+
+* feat!: bump react-overlays (#5017) ([1b20f1b](https://github.com/react-bootstrap/react-bootstrap/commit/1b20f1be355034e27c36617c8f6eb066a9b26b1e)), closes [#5017](https://github.com/react-bootstrap/react-bootstrap/issues/5017)
+
+
+### Bug Fixes
+
+* **Carousel:** support for ref attribute ([#4917](https://github.com/react-bootstrap/react-bootstrap/issues/4917)) ([86ff195](https://github.com/react-bootstrap/react-bootstrap/commit/86ff1955279062ace0d3e03f95a627929ce3e1c9))
+* **Modal:** TypeScript manager typings ([#4866](https://github.com/react-bootstrap/react-bootstrap/issues/4866)) ([0f5c798](https://github.com/react-bootstrap/react-bootstrap/commit/0f5c79872110e829b70d3744196a5dc8265135b2))
+* **Tabs:** added defaultActiveKey PropType ([#4875](https://github.com/react-bootstrap/react-bootstrap/issues/4875)) ([5aa69e0](https://github.com/react-bootstrap/react-bootstrap/commit/5aa69e009f9902c13119414384c7a454e443b23d))
+* Allow tab to un/mount with transition ([#4312](https://github.com/react-bootstrap/react-bootstrap/issues/4312)) ([ef1861b](https://github.com/react-bootstrap/react-bootstrap/commit/ef1861b0ced6d3b762be9f5f7fd875fda3714814)), closes [#3497](https://github.com/react-bootstrap/react-bootstrap/issues/3497)
+
+
+### BREAKING CHANGES
+
+* only breaking if you pass a popperConfig directly to overlay or dropdown components. The config format is now the v2 one. This change only relevant to users of `popperConfig` prop on Overlay, OverlayTrigger, and Dropdown
+
+* docs: update some packages, clean up version dropdown a bit
+
+* Apply suggestions from code review
+
+* fail in the right place
+
+* clean up popper injected props
+
+* fix types
+
+Co-authored-by: Jimmy Jia <tesrin@gmail.com>
+
+
+
 # [1.0.0-beta.17](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.16...v1.0.0-beta.17) (2020-02-28)
 
 
@@ -15,7 +55,7 @@
 ### Features
 
 * add size prop for FormLabel component - Fixes [#4886](https://github.com/react-bootstrap/react-bootstrap/issues/4886) ([#4893](https://github.com/react-bootstrap/react-bootstrap/issues/4893)) ([0ae281c](https://github.com/react-bootstrap/react-bootstrap/commit/0ae281cc63a23fbaf498627540cfc926fb4e253b))
-
+* add responsive Containers - Fixes [#4884](https://github.com/react-bootstrap/react-bootstrap/issues/4884) ([0ae281c](https://github.com/react-bootstrap/react-bootstrap/commit/fc271389aed7f55b36cdfc358c25c623e7c9776b))
 
 
 # [1.0.0-beta.16](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.15...v1.0.0-beta.16) (2019-11-20)

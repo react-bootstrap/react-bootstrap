@@ -48,10 +48,10 @@ describe('<DropdownButton>', () => {
     ).find('button.dropdown-toggle.btn-success.btn-sm');
   });
 
-  it('forwards onSelect handler to DropdownItems', done => {
+  it('forwards onSelect handler to DropdownItems', (done) => {
     const selectedEvents = [];
 
-    const onSelect = eventKey => {
+    const onSelect = (eventKey) => {
       selectedEvents.push(eventKey);
 
       if (selectedEvents.length === 4) {
@@ -73,7 +73,7 @@ describe('<DropdownButton>', () => {
       </DropdownButton>,
     );
 
-    instance.find('a').forEach(item => {
+    instance.find('a').forEach((item) => {
       item.simulate('click');
     });
   });
@@ -93,17 +93,10 @@ describe('<DropdownButton>', () => {
     );
 
     wrapper.find('button').simulate('click');
-    wrapper
-      .find('.dropdown-menu a')
-      .first()
-      .simulate('click');
+    wrapper.find('.dropdown-menu a').first().simulate('click');
 
     handleSelect.should.have.been.calledWith(false);
-    wrapper
-      .find('Dropdown')
-      .first()
-      .prop('show')
-      .should.equal(true);
+    wrapper.find('Dropdown').first().prop('show').should.equal(true);
   });
 
   it('Should pass disabled to button', () => {
@@ -131,11 +124,7 @@ describe('<DropdownButton>', () => {
     );
 
     expect(wrapper.children().props().defaultShow).to.equal(true);
-    expect(
-      wrapper
-        .find('DropdownToggle')
-        .first()
-        .props().defaultShow,
-    ).to.not.exist;
+    expect(wrapper.find('DropdownToggle').first().props().defaultShow).to.not
+      .exist;
   });
 });

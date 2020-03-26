@@ -9,6 +9,8 @@ import GridContainer from '../../examples/Grid/Container';
 import GridContainerFluid from '../../examples/Grid/ContainerFluid';
 import GridContainerFluidBreakpoint from '../../examples/Grid/ContainerFluidBreakpoint';
 import GridAutoLayout from '../../examples/Grid/AutoLayout';
+import GridRowColLayout from '../../examples/Grid/RowColLayout';
+import GridRowColLayoutColWidthBreakpoint from '../../examples/Grid/RowColLayoutColWidthBreakpoint';
 import GridAutoLayoutSizing from '../../examples/Grid/AutoLayoutSizing';
 import GridAutoLayoutVariable from '../../examples/Grid/AutoLayoutVariable';
 import GridOffsetting from '../../examples/Grid/Offsetting';
@@ -174,6 +176,31 @@ export default withLayout(function GridSection({ data }) {
         codeText={GridOffsetting}
         exampleClassName={styles.example}
       />
+
+      <LinkedHeading h="3" id="row-layout-col-sizing">
+        Setting column widths in Row
+      </LinkedHeading>
+
+      <p>
+        The <code>Row</code> lets you specify column widths across 5 breakpoint
+        sizes (xs, sm, md, large, and xl). For every breakpoint, you can specify
+        the amount of columns that will fit next to each other.
+      </p>
+      <ReactPlayground
+        codeText={GridRowColLayout}
+        exampleClassName={styles.example}
+      />
+      <p>
+        Note that <code>Row</code> column widths will override <code>Col</code>{' '}
+        widths set on lower breakpoints when viewed on larger screens. The{' '}
+        <code>{'<Col xs={6} />'}</code> size will be overriden by{' '}
+        <code>{'<Row md={4} />'}</code> on medium and larger screens.
+      </p>
+      <ReactPlayground
+        codeText={GridRowColLayoutColWidthBreakpoint}
+        exampleClassName={styles.example}
+      />
+
       <LinkedHeading h="2" id="grid-props">
         API
       </LinkedHeading>

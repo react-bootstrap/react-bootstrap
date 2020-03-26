@@ -3,6 +3,7 @@ import sinon from 'sinon';
 import { mount } from 'enzyme';
 
 import Breadcrumb from '../src/Breadcrumb';
+import Button from '../src/Button';
 
 describe('<Breadcrumb.Item>', () => {
   it('Should render `a` as inner element when is not active', () => {
@@ -11,21 +12,22 @@ describe('<Breadcrumb.Item>', () => {
       .should.have.length(0);
   });
 
-  it('Should render `span.active` with `active` attribute set.', () => {
-    mount(<Breadcrumb.Item active>Active Crumb</Breadcrumb.Item>)
-      .find('span.active')
-      .should.have.length(1);
+  it('Should render `li` with no children as inner element when active.', () => {
+    let li = mount(<Breadcrumb.Item active>Active Crumb</Breadcrumb.Item>).find(
+      'li',
+    );
+    li.should.have.length(1);
+    li.children().html().should.eql('Active Crumb');
   });
 
-  it('Should render `span.active` when active and has href', () => {
-    const instance = mount(
+  it('Should render `li` with no children as inner element when active and has href', () => {
+    let li = mount(
       <Breadcrumb.Item href="#" active>
         Active Crumb
       </Breadcrumb.Item>,
-    );
-    instance.find('span.active').should.have.length(1);
-    instance.find('span[href="#"]').should.have.length(0);
-    instance.find('a').should.have.length(0);
+    ).find('li');
+    li.should.have.length(1);
+    li.children().html().should.eql('Active Crumb');
   });
 
   it('Should add custom classes onto `li` wrapper element', () => {
@@ -56,13 +58,13 @@ describe('<Breadcrumb.Item>', () => {
     expect(handleClick.callCount).to.equal(1);
   });
 
-  it('Should apply id onto the anchor', () => {
+  it('Should apply id onto the li element', () => {
     mount(
       <Breadcrumb.Item href="#" id="test-link-id">
         Crumb
       </Breadcrumb.Item>,
     )
-      .find('a#test-link-id')
+      .find('li#test-link-id')
       .should.have.length(1);
   });
 
@@ -89,10 +91,7 @@ describe('<Breadcrumb.Item>', () => {
       </Breadcrumb.Item>,
     );
 
-    instance
-      .find('a')
-      .prop('title')
-      .should.eq('test-title');
+    instance.find('a').prop('title').should.eq('test-title');
   });
 
   it('Should not apply properties for inner `anchor` onto `li` wrapper element', () => {
@@ -114,13 +113,35 @@ describe('<Breadcrumb.Item>', () => {
         Crumb
       </Breadcrumb.Item>,
     );
-    instance
-      .find('a')
-      .prop('target')
-      .should.eq('_blank');
+    instance.find('a').prop('target').should.eq('_blank');
   });
 
   it('Should have li as default component', () => {
     mount(<Breadcrumb.Item />).assertSingle('li');
+  });
+
+  it('Should be able to customize inner link element', () => {
+    const instance = mount(<Breadcrumb.Item linkAs={Button} />);
+    instance.find('a').should.have.length(0);
+    instance.find('button').should.have.length(1);
+  });
+
+  it('Should be able to pass props to the customized inner link element', () => {
+    const instance = mount(
+      <Breadcrumb.Item linkAs={Button} linkProps={{ type: 'submit' }} />,
+    );
+    instance.find('button').prop('type').should.eq('submit');
+  });
+
+  it('Should be able to pass attributes to the link element', () => {
+    const instance = mount(
+      <Breadcrumb.Item linkProps={{ foo: 'bar' }}>Crumb</Breadcrumb.Item>,
+    );
+    instance.find('a').prop('foo').should.eq('bar');
+  });
+
+  it('Should be able to pass attributes to the li element', () => {
+    const instance = mount(<Breadcrumb.Item foo="bar">Crumb</Breadcrumb.Item>);
+    instance.find('li').prop('foo').should.eq('bar');
   });
 });

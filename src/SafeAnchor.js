@@ -39,7 +39,7 @@ const SafeAnchor = React.forwardRef(
     },
     ref,
   ) => {
-    const handleClick = event => {
+    const handleClick = (event) => {
       const { href, onClick } = props;
 
       if (disabled || isTrivialHref(href)) {
@@ -56,7 +56,7 @@ const SafeAnchor = React.forwardRef(
       }
     };
 
-    const handleKeyDown = event => {
+    const handleKeyDown = (event) => {
       if (event.key === ' ') {
         event.preventDefault();
         handleClick(event);

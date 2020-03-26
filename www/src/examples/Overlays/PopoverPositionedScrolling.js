@@ -1,4 +1,4 @@
-const popover = position => (
+const popover = (position) => (
   <Popover id={`popover-positioned-scrolling-${position}`}>
     <Popover.Title as="h3">{`Popover ${position}`}</Popover.Title>
     <Popover.Content>

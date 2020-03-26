@@ -1,6 +1,6 @@
 const { DefinePlugin } = require('webpack');
 
-module.exports = config => {
+module.exports = (config) => {
   const { env } = process;
 
   config.set({
