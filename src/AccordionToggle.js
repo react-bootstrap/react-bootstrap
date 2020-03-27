@@ -25,7 +25,7 @@ export function useAccordionToggle(eventKey, onClick) {
   const onSelect = useContext(SelectableContext);
 
   return (e) => {
-    /* 
+    /*
       Compare the event key in context with the given event key.
       If they are the same, then collapse the component.
     */
@@ -49,6 +49,10 @@ const AccordionToggle = React.forwardRef(
     ref,
   ) => {
     const accordionOnClick = useAccordionToggle(eventKey, onClick);
+
+    if (Component === 'button') {
+      props.type = 'button';
+    }
 
     return (
       <Component ref={ref} onClick={accordionOnClick} {...props}>
