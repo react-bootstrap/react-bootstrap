@@ -20,11 +20,42 @@ install <DocLink path="/getting-started/download/#npm">vanilla Bootstrap</DocLin
 npm install react-bootstrap bootstrap
 ```
 
+## Importing Components
+
+You should import individual components like:
+`react-bootstrap/Button` rather than the entire library.
+Doing so pulls in only the specific components that you use, which
+can significantly reduce the amount of code you end up sending to
+the client.
+
+```jsx
+import Button from 'react-bootstrap/Button';
+
+// or less ideally
+import { Button } from 'react-bootstrap';
+```
+
+### Browser globals
+
+We provide `react-bootstrap.js` and
+`react-bootstrap.min.js` bundles with all components
+exported on the `window.ReactBootstrap` object. These
+bundles are available on [unpkg](https://unpkg.com/react-bootstrap/), as
+well as in the npm package.
+
+<BrowserGlobalsCodeBlock />
+
+## Examples
+
+React-Bootstrap has started a repo with a few basic CodeSandbox examples.
+[Click here](https://github.com/react-bootstrap/code-sandbox-examples/blob/master/README.md)
+to check them out.
+
 ## Stylesheets
 
 Because React-Bootstrap doesn't depend on a very precise version of
 Bootstrap, we don't ship with any included CSS. However, some
-stylesheet **is required** to use these components. 
+stylesheet **is required** to use these components.
 
 ### CSS
 
@@ -85,41 +116,10 @@ $theme-colors: (
 
 ### Advanced usage
 
-See [the Bootstrap docs](https://getbootstrap.com/docs/4.3/getting-started/theming/)
+See [the Bootstrap docs](https://getbootstrap.com/docs/4.4/getting-started/theming/)
 for more advanced use cases and details about customizing stylesheets.
 
-### Importing
-
-You should import individual components like:
-`react-bootstrap/Button` rather than the entire library.
-Doing so pulls in only the specific components that you use, which
-can significantly reduce the amount of code you end up sending to
-the client.
-
-```jsx
-import Button from 'react-bootstrap/Button';
-
-// or less ideally
-import { Button } from 'react-bootstrap';
-```
-
-### Browser globals
-
-We provide `react-bootstrap.js` and
-`react-bootstrap.min.js` bundles with all components
-exported on the `window.ReactBootstrap` object. These
-bundles are available on [unpkg](https://unpkg.com/react-bootstrap/), as
-well as in the npm package.
-
-<BrowserGlobalsCodeBlock />
-
-### Examples
-
-React-Bootstrap has started a repo with a few basic CodeSandbox examples.
-[Click here](https://github.com/react-bootstrap/react-bootstrap#codesandbox-examples) 
-to check them out.
-
-### Themes
+## Themes
 
 React-Bootstrap is compatible with existing Bootstrap themes. Just
 follow the installation instructions for your theme of choice.
