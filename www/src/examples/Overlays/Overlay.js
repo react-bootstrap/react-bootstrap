@@ -4,7 +4,7 @@ function Example() {
 
   return (
     <>
-      <Button variant="danger" ref={target} onClick={() => setShow(!show)}>
+      <Button variant="danger" ref={target || undefined} onClick={() => setShow(!show)}>
         Click me to see
       </Button>
       <Overlay target={target.current} show={show} placement="right">
