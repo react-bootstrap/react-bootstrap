@@ -88,7 +88,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-istanbul": "^6.0.0",
     "chai": "^4.2.0",
-    "chalk": "^3.0.0",
+    "chalk": "^4.0.0",
     "cherry-pick": "^0.5.0",
     "codecov": "^3.6.5",
     "conventional-changelog-cli": "^2.0.31",
