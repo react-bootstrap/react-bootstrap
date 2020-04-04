@@ -36,6 +36,6 @@ jobs:
       run: yarn test
       env:
         BROWSER: ${{ matrix.browser }}
-      - uses: codecov/codecov-action@v1
+    - uses: codecov/codecov-action@v1
     - name: Build Project
       run: yarn build
