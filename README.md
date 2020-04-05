@@ -2,7 +2,7 @@
 
 > [Bootstrap 4][bootstrap] components built with [React][react].
 
-[![GitHub Actions Build status][gh-actions-badge]][gh-actions]
+[![GitHub Actions CI status][gh-actions-badge]][gh-actions]
 [![Travis CI Build status][travis-badge]][travis]
 [![npm][npm-badge]][npm]
 [![Codecov][codecov-badge]][codecov]
@@ -64,5 +64,5 @@ Yes please! See the [contributing guidelines][contributing] for details.
 [discord]: https://discord.gg/0ZcbPKXt5bXLs9XK
 [netlify-badge]: https://api.netlify.com/api/v1/badges/91501718-8820-4d69-b7fe-1616eff5914e/deploy-status
 [netlify]: https://app.netlify.com/sites/react-bootstrap/deploys
-[gh-actions-badge]: https://github.com/react-bootstrap/react-bootstrap/workflows/Node%20CI/badge.svg
+[gh-actions-badge]: https://github.com/react-bootstrap/react-bootstrap/workflows/CI/badge.svg
 [gh-actions]: https://github.com/react-bootstrap/react-bootstrap/actions
