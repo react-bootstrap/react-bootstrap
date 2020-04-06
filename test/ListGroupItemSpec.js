@@ -14,8 +14,21 @@ describe('<ListGroupItem>', () => {
     );
   });
 
-  it('accepts active', () => {
-    mount(<ListGroupItem active />).assertSingle('div.list-group-item.active');
+  describe('active', () => {
+    it('accepts active', () => {
+      mount(<ListGroupItem active />).assertSingle(
+        'div.list-group-item.active',
+      );
+    });
+    it('passes down active to list-group-item children', () => {
+      expect(
+        mount(
+          <ListGroupItem active>
+            <ListGroupItem />
+          </ListGroupItem>,
+        ).find('div.list-group-item.active'),
+      ).to.have.lengthOf(2);
+    });
   });
 
   it('accepts disabled', () => {
