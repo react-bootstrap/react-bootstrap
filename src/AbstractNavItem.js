@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import useEventCallback from '@restart/hooks/useEventCallback';
 
+import warning from 'warning';
 import NavContext from './NavContext';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 
@@ -49,10 +50,21 @@ const AbstractNavItem = React.forwardRef(
     if (navContext) {
       if (!props.role && navContext.role === 'tablist') props.role = 'tab';
 
+      const contextControllerId = navContext.getControllerId(navKey);
+      const contextControlledId = navContext.getControlledId(navKey);
+
+      warning(
+        !contextControllerId || !props.id,
+        `[react-bootstrap] The provided id '${props.id}' was overwritten by the current navContext with '${contextControllerId}'.`,
+      );
+      warning(
+        !contextControlledId || !props['aria-controls'],
+        `[react-bootstrap] The provided aria-controls value '${props['aria-controls']}' was overwritten by the current navContext with '${contextControlledId}'.`,
+      );
+
       props['data-rb-event-key'] = navKey;
-      props.id = navContext.getControllerId(navKey) || props.id;
-      props['aria-controls'] =
-        navContext.getControlledId(navKey) || props['aria-controls'];
+      props.id = contextControllerId || props.id;
+      props['aria-controls'] = contextControlledId || props['aria-controls'];
 
       isActive =
         active == null && navKey != null
