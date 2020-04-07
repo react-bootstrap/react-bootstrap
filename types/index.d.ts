@@ -23,3 +23,5 @@
 // Minimum TypeScript Version: 3.5
 
 export * from './components';
+export as namespace ReactBootstrap;
+  
