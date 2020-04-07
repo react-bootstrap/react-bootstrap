@@ -29,6 +29,15 @@ describe('<ListGroupItem>', () => {
         ).find('div.list-group-item.active'),
       ).to.have.lengthOf(2);
     });
+    it('does not pass down active to disabled list-group-item children', () => {
+      expect(
+        mount(
+          <ListGroupItem active>
+            <ListGroupItem disabled />
+          </ListGroupItem>,
+        ).find('div.list-group-item.active'),
+      ).to.have.lengthOf(1);
+    });
   });
 
   it('accepts disabled', () => {
