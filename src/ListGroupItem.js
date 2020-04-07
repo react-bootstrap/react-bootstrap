@@ -23,6 +23,11 @@ const propTypes = {
    */
   action: PropTypes.bool,
   /**
+   * Marks a ListGroupItem as a part of a cascading chain for having the 'active' prop. Will set itself and its children's
+   * 'active' prop to true.
+   */
+  cascadeactive: PropTypes.bool,
+  /**
    * Sets list item as active
    */
   active: PropTypes.bool,
@@ -58,6 +63,7 @@ const ListGroupItem = React.forwardRef(
     {
       bsPrefix,
       active,
+      cascadeactive,
       disabled,
       className,
       variant,
@@ -70,6 +76,14 @@ const ListGroupItem = React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group-item');
+
+    let newChildren = props.children;
+    if (cascadeactive) {
+      newChildren = React.Children.map(props.children, child => {
+        let newProps = { active: true, cascadeactive };
+        return React.cloneElement(child, newProps);
+      });
+    }
 
     const handleClick = useCallback(
       event => {
@@ -100,7 +114,9 @@ const ListGroupItem = React.forwardRef(
           variant && `${bsPrefix}-${variant}`,
           action && `${bsPrefix}-action`,
         )}
-      />
+      >
+        {newChildren}
+      </AbstractNavItem>
     );
   },
 );
