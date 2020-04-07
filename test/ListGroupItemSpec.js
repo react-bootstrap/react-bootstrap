@@ -23,7 +23,7 @@ describe('<ListGroupItem>', () => {
     it('passes down active to list-group-item children', () => {
       expect(
         mount(
-          <ListGroupItem active>
+          <ListGroupItem cascadeactive>
             <ListGroupItem />
           </ListGroupItem>,
         ).find('div.list-group-item.active'),
@@ -32,7 +32,7 @@ describe('<ListGroupItem>', () => {
     it('does not pass down active to disabled list-group-item children', () => {
       expect(
         mount(
-          <ListGroupItem active>
+          <ListGroupItem cascadeactive>
             <ListGroupItem disabled />
           </ListGroupItem>,
         ).find('div.list-group-item.active'),
