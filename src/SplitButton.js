@@ -38,6 +38,10 @@ const propTypes = {
 
   /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
   menuRole: PropTypes.string,
+
+  /** Whether to render the dropdown menu in the DOM before the first time it is shown */
+  renderMenuOnMount: PropTypes.bool,
+
   /**
    *  Which event when fired outside the component will cause it to be closed.
    *
@@ -73,6 +77,7 @@ const SplitButton = React.forwardRef(
       href,
       target,
       menuRole,
+      renderMenuOnMount,
       rootCloseEvent,
       ...props
     },
@@ -102,7 +107,11 @@ const SplitButton = React.forwardRef(
         <span className="sr-only">{toggleLabel}</span>
       </Dropdown.Toggle>
 
-      <Dropdown.Menu role={menuRole} rootCloseEvent={rootCloseEvent}>
+      <Dropdown.Menu
+        role={menuRole}
+        renderOnMount={renderMenuOnMount}
+        rootCloseEvent={rootCloseEvent}
+      >
         {children}
       </Dropdown.Menu>
     </Dropdown>

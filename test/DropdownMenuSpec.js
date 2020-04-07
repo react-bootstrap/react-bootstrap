@@ -33,6 +33,14 @@ describe('<Dropdown.Menu>', () => {
     ).assertSingle('.dropdown-menu-right');
   });
 
+  it('renders on mount with prop', () => {
+    mount(
+      <DropdownMenu renderOnMount>
+        <DropdownItem>Item</DropdownItem>
+      </DropdownMenu>,
+    ).assertSingle('div.dropdown-menu');
+  });
+
   // it.only('warns about bad refs', () => {
   //   class Parent extends React.Component {
   //     componentDidCatch() {}

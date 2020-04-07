@@ -16,6 +16,9 @@ const propTypes = {
   /** Controls the visibility of the Dropdown menu  */
   show: PropTypes.bool,
 
+  /** Whether to render the dropdown menu in the DOM before the first time it is shown */
+  renderOnMount: PropTypes.bool,
+
   /** Have the dropdown switch to it's opposite placement when necessary to stay on screen. */
   flip: PropTypes.bool,
 
@@ -63,6 +66,7 @@ const DropdownMenu = React.forwardRef(
       flip,
       popperConfig,
       show: showProps,
+      renderOnMount,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       ...props
@@ -92,7 +96,7 @@ const DropdownMenu = React.forwardRef(
       useWrappedRefWithWarning(ref, 'DropdownMenu'),
     );
 
-    if (!hasShown) return null;
+    if (!hasShown && !renderOnMount) return null;
 
     // For custom components provide additional, non-DOM, props;
     if (typeof Component !== 'string') {

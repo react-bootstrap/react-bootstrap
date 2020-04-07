@@ -49,4 +49,14 @@ describe('<NavDropdown>', () => {
       .text()
       .should.equal('DropdownItem 2 content');
   });
+
+  it('should pass the id to the NavLink element', () => {
+    const wrapper = mount(
+      <NavDropdown id="test-id" title="title">
+        <DropdownItem eventKey="1">DropdownItem 1 content</DropdownItem>
+      </NavDropdown>,
+    );
+
+    wrapper.assertSingle('a#test-id');
+  });
 });
