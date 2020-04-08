@@ -79,7 +79,7 @@ const ListGroupItem = React.forwardRef(
 
     let newChildren = props.children;
     if (cascadeactive && typeof props.children !== 'string') {
-      newChildren = React.Children.map(props.children, child => {
+      newChildren = React.Children.map(props.children, (child) => {
         let newProps = {};
         if (
           child.type &&
@@ -102,7 +102,7 @@ const ListGroupItem = React.forwardRef(
     }
 
     const handleClick = useCallback(
-      event => {
+      (event) => {
         if (disabled) {
           event.preventDefault();
           event.stopPropagation();

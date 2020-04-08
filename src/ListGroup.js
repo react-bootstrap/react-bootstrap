@@ -65,7 +65,7 @@ const ListGroup = React.forwardRef((props, ref) => {
   let children = props.children;
 
   if (cascadeactive && typeof props.children !== 'string') {
-    children = React.Children.map(props.children, child => {
+    children = React.Children.map(props.children, (child) => {
       let newProps = {};
       if (
         child.type &&
