@@ -8,6 +8,7 @@ import withLayout from '../../withLayout';
 import ListGroupDefault from '../../examples/ListGroup/Default';
 import ListGroupLinked from '../../examples/ListGroup/Linked';
 import ListGroupActive from '../../examples/ListGroup/Active';
+import ListGroupCascadeActive from '../../examples/ListGroup/CascadeActive';
 import ListGroupDisabled from '../../examples/ListGroup/Disabled';
 import ListGroupStyle from '../../examples/ListGroup/Style';
 import ListGroupStyleActions from '../../examples/ListGroup/StyleActions';
@@ -40,6 +41,13 @@ Set the `active` prop to indicate the list groups current active selection.
 
 <ReactPlayground
   codeText={ListGroupActive}
+  exampleClassName={styles.listGroup}
+/>
+
+Set the `cascadeactive` if you want the props to cascade down to child components. 
+
+<ReactPlayground
+  codeText={ListGroupCascadeActive}
   exampleClassName={styles.listGroup}
 />
 
