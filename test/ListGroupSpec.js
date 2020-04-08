@@ -24,6 +24,18 @@ describe('<ListGroup>', () => {
     );
   });
 
+  it('passes down cascadeactive', () => {
+    expect(
+      mount(
+        <ListGroup.Item cascadeactive active>
+          <ListGroup>
+            <ListGroup.Item disabled />
+          </ListGroup>
+        </ListGroup.Item>,
+      ).find('div.list-group-item.active'),
+    ).to.have.lengthOf(2);
+  });
+
   it('accepts global horizontal', () => {
     mount(<ListGroup horizontal />).assertSingle(
       'div.list-group.list-group-horizontal',
