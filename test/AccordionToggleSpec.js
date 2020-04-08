@@ -5,6 +5,8 @@ import AccordionToggle from '../src/AccordionToggle';
 
 describe('<AccordionToggle>', () => {
   it('Should have button as default component', () => {
-    mount(<AccordionToggle eventKey="" />).assertSingle('button');
+    mount(<AccordionToggle eventKey="" />).assertSingle(
+      'button[type="button"]',
+    );
   });
 });
