@@ -79,18 +79,14 @@ const ListGroupItem = React.forwardRef(
 
     let newChildren = props.children;
     if (cascadeactive && typeof props.children !== 'string') {
-      newChildren = React.Children.map(props.children, (child) => {
+      newChildren = React.Children.map(props.children, child => {
         let newProps = {};
-        if (child.type) {
-          console.log(child.type, child.type.displayName);
-        }
         if (
           child.type &&
           child.type.displayName &&
           (child.type.displayName === 'ListGroup' ||
             child.type.displayName === 'ListGroupItem')
         ) {
-          console.log('entered item!');
           newProps = { cascadeactive };
         }
         if (
@@ -106,7 +102,7 @@ const ListGroupItem = React.forwardRef(
     }
 
     const handleClick = useCallback(
-      (event) => {
+      event => {
         if (disabled) {
           event.preventDefault();
           event.stopPropagation();

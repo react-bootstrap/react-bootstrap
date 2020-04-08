@@ -65,17 +65,14 @@ const ListGroup = React.forwardRef((props, ref) => {
   let children = props.children;
 
   if (cascadeactive && typeof props.children !== 'string') {
-    children = React.Children.map(props.children, (child) => {
+    children = React.Children.map(props.children, child => {
       let newProps = {};
-      console.log('list child loop');
-      console.log(child);
       if (
         child.type &&
         child.type.displayName &&
         (child.type.displayName === 'ListGroup' ||
           child.type.displayName === 'ListGroupItem')
       ) {
-        console.log('entered group');
         newProps = { active: true, cascadeactive };
       }
       return React.cloneElement(child, newProps);
