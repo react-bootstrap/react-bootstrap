@@ -24,4 +24,3 @@
 
 export * from './components';
 export as namespace ReactBootstrap;
-  
