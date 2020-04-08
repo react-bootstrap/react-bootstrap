@@ -167,6 +167,8 @@ const propTypes = {
    * @private
    */
   container: PropTypes.any,
+
+  'aria-labelledby': PropTypes.any,
 };
 
 const defaultProps = {
@@ -317,6 +319,7 @@ class Modal extends React.Component {
       dialogClassName,
       children,
       dialogAs: Dialog,
+      'aria-labelledby': ariaLabelledby,
 
       /* BaseModal props */
       show,
@@ -382,6 +385,7 @@ class Modal extends React.Component {
             onEnter: this.handleEnter,
             onEntering: this.handleEntering,
             onExited: this.handleExited,
+            'aria-labelledby': ariaLabelledby,
           }}
         >
           <Dialog

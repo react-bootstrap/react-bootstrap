@@ -224,4 +224,18 @@ describe('<Modal>', () => {
 
     expect(onHideSpy).to.not.have.been.called;
   });
+
+  it('Should set aria-labelledby to the role="dialog" element if aria-labelledby set', () => {
+    const noOp = () => {};
+    const wrapper = mount(
+      <Modal show onHide={noOp} aria-labelledby="modal-title">
+        <Modal.Header closeButton>
+          <Modal.Title id="modal-title">Modal heading</Modal.Title>
+        </Modal.Header>
+      </Modal>,
+    );
+    wrapper.assertSingle(
+      'div.modal.show[role="dialog"][aria-labelledby="modal-title"]',
+    );
+  });
 });
