@@ -21,6 +21,12 @@ const propTypes = {
    * @type {('flush')}
    */
   variant: PropTypes.oneOf(['flush', null]),
+  /**
+   * Marks a ListGroup as a part of a cascading chain for having the 'active' prop. Will set itself and its children's
+   * 'active' prop to true.
+   */
+  cascadeactive: PropTypes.bool,
+  active: PropTypes.bool,
 
   /**
    * Changes the flow of the list group items from vertical to horizontal.
@@ -48,12 +54,30 @@ const ListGroup = React.forwardRef((props, ref) => {
     bsPrefix,
     variant,
     horizontal,
+    cascadeactive,
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as = 'div',
     ...controlledProps
   } = useUncontrolled(props, {
     activeKey: 'onSelect',
   });
+
+  let children = props.children;
+
+  if (cascadeactive && typeof props.children !== 'string') {
+    children = React.Children.map(props.children, child => {
+      let newProps = {};
+      if (
+        child.type &&
+        child.type.displayName &&
+        (child.type.displayName === 'ListGroup' ||
+          child.type.displayName === 'ListGroupItem')
+      ) {
+        newProps = { active: true, cascadeactive };
+      }
+      return React.cloneElement(child, newProps);
+    });
+  }
 
   bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group');
 
@@ -81,7 +105,9 @@ const ListGroup = React.forwardRef((props, ref) => {
         variant && `${bsPrefix}-${variant}`,
         horizontalVariant && `${bsPrefix}-${horizontalVariant}`,
       )}
-    />
+    >
+      {children}
+    </AbstractNav>
   );
 });
 
