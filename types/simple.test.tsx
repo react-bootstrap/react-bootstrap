@@ -175,7 +175,7 @@ import {
       placeholder="name@example.com"
       ref={React.createRef<HTMLInputElement>()}
       onChange={(e) => {
-        // $ExpectType React.FormEvent<FormControlElement>
+        // $ExpectType ChangeEvent<FormControlElement>
         e;
       }}
     />
@@ -185,7 +185,7 @@ import {
     <Form.Control
       as="select"
       ref={React.createRef<HTMLSelectElement>()}
-      onChange={(e: React.FormEvent<HTMLSelectElement>) => {
+      onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
         e;
       }}
     >
@@ -212,7 +212,7 @@ import {
       as="textarea"
       rows={3}
       ref={React.createRef<HTMLTextAreaElement>()}
-      onChange={(e: React.FormEvent<HTMLTextAreaElement>) => {
+      onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
         e;
       }}
     />

@@ -13,13 +13,14 @@ export interface FormControlProps {
   readOnly?: boolean;
   disabled?: boolean;
   value?: string | string[] | number;
-  onChange?: React.FormEventHandler<FormControlElement>;
+  onChange?: React.ChangeEventHandler<FormControlElement>;
   custom?: boolean;
   type?: string;
   id?: string;
   isValid?: boolean;
   isInvalid?: boolean;
 }
+
 declare interface FormControl
   extends BsPrefixRefForwardingComponent<'input', FormControlProps> {
   Feedback: typeof Feedback;
