@@ -173,8 +173,9 @@ import {
     <Form.Control
       type="email"
       placeholder="name@example.com"
-      innerRef={React.createRef<HTMLInputElement>()}
-      onChange={(e: React.FormEvent<HTMLInputElement>) => {
+      ref={React.createRef<HTMLInputElement>()}
+      onChange={(e) => {
+        // $ExpectType ChangeEvent<FormControlElement>
         e;
       }}
     />
@@ -183,8 +184,8 @@ import {
     <Form.Label>Example select</Form.Label>
     <Form.Control
       as="select"
-      innerRef={React.createRef<HTMLSelectElement>()}
-      onChange={(e: React.FormEvent<HTMLSelectElement>) => {
+      ref={React.createRef<HTMLSelectElement>()}
+      onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
         e;
       }}
     >
@@ -210,8 +211,8 @@ import {
     <Form.Control
       as="textarea"
       rows={3}
-      innerRef={React.createRef<HTMLTextAreaElement>()}
-      onChange={(e: React.FormEvent<HTMLTextAreaElement>) => {
+      ref={React.createRef<HTMLTextAreaElement>()}
+      onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
         e;
       }}
     />
@@ -239,6 +240,7 @@ import {
     label="Custom file input"
     custom
   />
+  <Form.File.Input />
 </Form>;
 
 <div>

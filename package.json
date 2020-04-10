@@ -15,7 +15,7 @@
     "build": "node tools/build.js",
     "build-docs": "yarn --cwd www build",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "dtslint": "dtslint types",
+    "dtslint": "dtslint types --expectOnly",
     "format": "eslint . --fix && npm run prettier -- --write",
     "lint": "eslint . && npm run prettier -- -l",
     "deploy-docs": "yarn --cwd www deploy",

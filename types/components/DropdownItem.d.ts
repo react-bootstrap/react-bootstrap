@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import SafeAnchor, { SafeAnchorProps } from './SafeAnchor';
+import { SafeAnchorProps } from './SafeAnchor';
 
 import {
   BsPrefixComponent,

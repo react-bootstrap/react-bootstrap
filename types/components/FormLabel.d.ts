@@ -2,11 +2,10 @@ import * as React from 'react';
 
 import { ColProps } from './Col';
 
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
 interface FormLabelBaseProps {
   htmlFor?: string;
-  innerRef?: React.LegacyRef<this>;
   srOnly?: boolean;
 }
 
@@ -20,8 +19,9 @@ export interface FormLabelWithColProps extends FormLabelBaseProps, ColProps {
 
 export type FormLabelProps = FormLabelWithColProps | FormLabelOwnProps;
 
-declare class FormLabel<
-  As extends React.ElementType = 'label'
-> extends BsPrefixComponent<As, FormLabelProps> {}
+declare interface FormLabel
+  extends BsPrefixRefForwardingComponent<'label', FormLabelProps> {}
+
+declare const FormLabel: FormLabel;
 
 export default FormLabel;

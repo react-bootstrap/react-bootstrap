@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import Collapse, { CollapseProps } from './Collapse';
+import { CollapseProps } from './Collapse';
 
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface AccordionCollapseProps
   extends CollapseProps,
@@ -10,9 +10,8 @@ export interface AccordionCollapseProps
   eventKey: string;
 }
 
-declare class AccordionCollapse extends BsPrefixComponent<
-  typeof Collapse,
-  AccordionCollapseProps
-> {}
+declare interface AccordionCollapse
+  extends BsPrefixRefForwardingComponent<'div', AccordionCollapseProps> {}
+declare const AccordionCollapse: AccordionCollapse;
 
 export default AccordionCollapse;

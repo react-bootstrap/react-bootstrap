@@ -1,6 +1,4 @@
-import * as React from 'react';
-
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface FormFileInputProps {
   id?: string;
@@ -9,8 +7,9 @@ export interface FormFileInputProps {
   lang?: string;
 }
 
-declare class FormFileInput<
-  As extends React.ElementType = 'input'
-> extends BsPrefixComponent<As, FormFileInputProps> {}
+declare interface FormFileInput
+  extends BsPrefixRefForwardingComponent<'input', FormFileInputProps> {}
+
+declare const FormFileInput: FormFileInput;
 
 export default FormFileInput;
