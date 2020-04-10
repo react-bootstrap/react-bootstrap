@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface AccordionToggleProps {
   eventKey: string;
@@ -12,8 +12,8 @@ export function useAccordionToggle(
   onClick: (event?: React.SyntheticEvent) => void,
 ): (event?: React.SyntheticEvent) => void;
 
-declare class AccordionToggle<
-  As extends React.ElementType = 'button'
-> extends BsPrefixComponent<As, AccordionToggleProps> {}
+declare interface AccordionToggle
+  extends BsPrefixRefForwardingComponent<'div', AccordionToggleProps> {}
+declare const AccordionToggle: AccordionToggle;
 
 export default AccordionToggle;
