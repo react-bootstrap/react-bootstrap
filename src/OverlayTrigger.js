@@ -92,6 +92,27 @@ const propTypes = {
    * @private
    */
   show: PropTypes.oneOf([null]),
+
+  /**
+   * The placement of the Overlay in relation to it's `target`.
+   */
+  placement: PropTypes.oneOf([
+    'auto-start',
+    'auto',
+    'auto-end',
+    'top-start',
+    'top',
+    'top-end',
+    'right-start',
+    'right',
+    'right-end',
+    'bottom-end',
+    'bottom',
+    'bottom-start',
+    'left-end',
+    'left',
+    'left-start',
+  ]),
 };
 
 const defaultProps = {
@@ -106,6 +127,8 @@ function OverlayTrigger({
   popperConfig = {},
   defaultShow,
   delay: propsDelay,
+  placement,
+  flip = placement === 'auto',
   ...props
 }) {
   const triggerNodeRef = useRef(null);
@@ -247,6 +270,8 @@ function OverlayTrigger({
         show={show}
         onHide={handleHide}
         target={getTarget}
+        placement={placement}
+        flip={flip}
       >
         {overlay}
       </Overlay>
