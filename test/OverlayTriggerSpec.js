@@ -208,6 +208,21 @@ describe('<OverlayTrigger>', () => {
     contextSpy.calledWith('value').should.be.true;
   });
 
+  it('Should have flip set to true if placement is auto', () => {
+    const wrapper = mount(
+      <OverlayTrigger
+        overlay={<Div>test</Div>}
+        trigger="click"
+        placement="auto"
+      >
+        <button type="button">button</button>
+      </OverlayTrigger>,
+    );
+    wrapper.find('button').simulate('click');
+
+    expect(wrapper.update().find(Overlay).props().flip).to.equal(true);
+  });
+
   describe('overlay types', () => {
     [
       {
