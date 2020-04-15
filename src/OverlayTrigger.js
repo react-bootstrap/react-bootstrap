@@ -128,7 +128,7 @@ function OverlayTrigger({
   defaultShow,
   delay: propsDelay,
   placement,
-  flip = placement === 'auto',
+  flip = placement && placement.indexOf('auto') !== -1,
   ...props
 }) {
   const triggerNodeRef = useRef(null);
