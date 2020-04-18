@@ -37,9 +37,9 @@ const ToastHeader = React.forwardRef(
 
     const context = useContext(ToastContext);
 
-    const handleClick = useEventCallback(() => {
+    const handleClick = useEventCallback((e) => {
       if (context) {
-        context.onClose();
+        context.onClose(e);
       }
     });
 
