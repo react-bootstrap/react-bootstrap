@@ -6,7 +6,7 @@ import useMergedRefs from '@restart/hooks/useMergedRefs';
 import NavbarContext from './NavbarContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
-import { popperMarginOffset, arrowMarginOffset } from './PopperModifiers';
+import usePopperMarginModifiers from './usePopperMarginModifiers';
 
 const propTypes = {
   /**
@@ -57,8 +57,6 @@ const defaultProps = {
   flip: true,
 };
 
-const marginModifiers = [popperMarginOffset, arrowMarginOffset];
-
 const DropdownMenu = React.forwardRef(
   (
     {
@@ -78,6 +76,7 @@ const DropdownMenu = React.forwardRef(
   ) => {
     const isNavbar = useContext(NavbarContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
+    const [popperRef, marginModifiers] = usePopperMarginModifiers();
 
     const {
       hasShown,
@@ -99,8 +98,11 @@ const DropdownMenu = React.forwardRef(
     });
 
     menuProps.ref = useMergedRefs(
-      menuProps.ref,
-      useWrappedRefWithWarning(ref, 'DropdownMenu'),
+      popperRef,
+      useMergedRefs(
+        useWrappedRefWithWarning(ref, 'DropdownMenu'),
+        menuProps.ref,
+      ),
     );
 
     if (!hasShown && !renderOnMount) return null;

@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import BaseOverlay from 'react-overlays/Overlay';
 import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import { componentOrElement, elementType } from 'prop-types-extra';
-import { popperMarginOffset, arrowMarginOffset } from './PopperModifiers';
+
+import usePopperMarginModifiers from './usePopperMarginModifiers';
 
 import Fade from './Fade';
 
@@ -121,8 +122,6 @@ function wrapRefs(props, arrowProps) {
     aRef.__wrapped || (aRef.__wrapped = (r) => aRef(safeFindDOMNode(r)));
 }
 
-const marginModifiers = [popperMarginOffset, arrowMarginOffset];
-
 function Overlay({
   children: overlay,
   transition,
@@ -130,11 +129,14 @@ function Overlay({
   ...outerProps
 }) {
   const popperRef = useRef({});
+  const [ref, marginModifiers] = usePopperMarginModifiers();
+
   transition = transition === true ? Fade : transition || null;
 
   return (
     <BaseOverlay
       {...outerProps}
+      ref={ref}
       popperConfig={{
         ...popperConfig,
         modifiers: marginModifiers.concat(popperConfig.modifiers || []),
@@ -180,7 +182,6 @@ function Overlay({
             !transition && show && 'show',
           ),
           style: {
-            margin: 0,
             ...overlay.props.style,
             ...overlayProps.style,
           },

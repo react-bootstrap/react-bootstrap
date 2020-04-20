@@ -85,7 +85,11 @@ const Popover = React.forwardRef(
         )}
         {...props}
       >
-        <div className="arrow" {...arrowProps} />
+        <div
+          className="arrow"
+          {...arrowProps}
+          style={{ ...arrowProps.style, margin: 0 }}
+        />
         {content ? <PopoverContent>{children}</PopoverContent> : children}
       </div>
     );
