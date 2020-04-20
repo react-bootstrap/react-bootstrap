@@ -6,6 +6,7 @@ import useMergedRefs from '@restart/hooks/useMergedRefs';
 import NavbarContext from './NavbarContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
+import usePopperMarginModifiers from './usePopperMarginModifiers';
 
 const propTypes = {
   /**
@@ -64,17 +65,19 @@ const DropdownMenu = React.forwardRef(
       alignRight,
       rootCloseEvent,
       flip,
-      popperConfig,
       show: showProps,
       renderOnMount,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
+      popperConfig = {},
       ...props
     },
     ref,
   ) => {
     const isNavbar = useContext(NavbarContext);
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
+    const [popperRef, marginModifiers] = usePopperMarginModifiers();
+
     const {
       hasShown,
       placement,
@@ -84,16 +87,22 @@ const DropdownMenu = React.forwardRef(
       props: menuProps,
     } = useDropdownMenu({
       flip,
-      popperConfig,
       rootCloseEvent,
       show: showProps,
       alignEnd: alignRight,
       usePopper: !isNavbar,
+      popperConfig: {
+        ...popperConfig,
+        modifiers: marginModifiers.concat(popperConfig.modifiers || []),
+      },
     });
 
     menuProps.ref = useMergedRefs(
-      menuProps.ref,
-      useWrappedRefWithWarning(ref, 'DropdownMenu'),
+      popperRef,
+      useMergedRefs(
+        useWrappedRefWithWarning(ref, 'DropdownMenu'),
+        menuProps.ref,
+      ),
     );
 
     if (!hasShown && !renderOnMount) return null;

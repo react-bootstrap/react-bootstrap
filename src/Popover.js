@@ -85,7 +85,12 @@ const Popover = React.forwardRef(
         )}
         {...props}
       >
-        <div className="arrow" {...arrowProps} />
+        <div
+          className="arrow"
+          {...arrowProps}
+          // this prevents an error if you render a Popover without arrow props, like in a test
+          style={arrowProps ? { ...arrowProps.style, margin: 0 } : undefined}
+        />
         {content ? <PopoverContent>{children}</PopoverContent> : children}
       </div>
     );
