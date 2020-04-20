@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import { findDOMNode } from 'react-dom';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import BaseOverlay from 'react-overlays/Overlay';
+import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import { componentOrElement, elementType } from 'prop-types-extra';
 
 import Fade from './Fade';
@@ -115,9 +115,9 @@ function wrapRefs(props, arrowProps) {
   const { ref } = props;
   const { ref: aRef } = arrowProps;
 
-  props.ref = ref.__wrapped || (ref.__wrapped = (r) => ref(findDOMNode(r)));
+  props.ref = ref.__wrapped || (ref.__wrapped = (r) => ref(safeFindDOMNode(r)));
   arrowProps.ref =
-    aRef.__wrapped || (aRef.__wrapped = (r) => aRef(findDOMNode(r)));
+    aRef.__wrapped || (aRef.__wrapped = (r) => aRef(safeFindDOMNode(r)));
 }
 
 function Overlay({ children: overlay, transition, ...outerProps }) {

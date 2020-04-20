@@ -2,7 +2,7 @@ import contains from 'dom-helpers/contains';
 import PropTypes from 'prop-types';
 import React, { cloneElement, useCallback, useRef, useState } from 'react';
 import useTimeout from '@restart/hooks/useTimeout';
-import ReactDOM from 'react-dom';
+import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import warning from 'warning';
 import Overlay from './Overlay';
 
@@ -142,7 +142,7 @@ function OverlayTrigger({
   const { onFocus, onBlur, onClick } = child.props;
 
   const getTarget = useCallback(
-    () => ReactDOM.findDOMNode(triggerNodeRef.current),
+    () => safeFindDOMNode(triggerNodeRef.current),
     [],
   );
 

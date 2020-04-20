@@ -24,6 +24,7 @@ export interface DropdownProps {
     event: React.SyntheticEvent<Dropdown>,
     metadata: { source: 'select' | 'click' | 'rootClose' | 'keydown' },
   ) => void;
+  focusFirstItemOnShow?: boolean | 'keyboard';
   onSelect?: SelectCallback;
 }
 
