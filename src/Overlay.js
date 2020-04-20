@@ -4,18 +4,9 @@ import PropTypes from 'prop-types';
 import BaseOverlay from 'react-overlays/Overlay';
 import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import { componentOrElement, elementType } from 'prop-types-extra';
+import { popperMarginOffset, arrowMarginOffset } from './PopperModifiers';
 
 import Fade from './Fade';
-
-function getMargins(element) {
-  const styles = getComputedStyle(element);
-
-  const top = parseFloat(styles.marginTop) || 0;
-  const right = parseFloat(styles.marginRight) || 0;
-  const bottom = parseFloat(styles.marginBottom) || 0;
-  const left = parseFloat(styles.marginLeft) || 0;
-  return { top, right, bottom, left };
-}
 
 const propTypes = {
   /**
@@ -130,54 +121,7 @@ function wrapRefs(props, arrowProps) {
     aRef.__wrapped || (aRef.__wrapped = (r) => aRef(safeFindDOMNode(r)));
 }
 
-const marginModifiers = [
-  {
-    name: 'marginOffsets',
-    enabled: true,
-    phase: 'beforeRead',
-    effect: ({ state }) => {
-      return () => {
-        state.elements.reference.removeAttribute('aria-describedby');
-      };
-    },
-    fn: ({ state, name }) => {
-      const { popper: popperRect } = state.rects;
-      const { popper, arrow } = state.elements;
-
-      const popperMargins = getMargins(popper);
-      const arrowMargins = arrow && getMargins(arrow);
-
-      state.rects.popper = {
-        ...popperRect,
-        width: popperRect.width + popperMargins.left + popperMargins.right,
-        height: popperRect.height + popperMargins.top + popperMargins.bottom,
-        y: popperRect.y - popperMargins.top,
-        x: popperRect.x - popperMargins.left,
-      };
-
-      state.modifiersData[name] = {
-        popper: popperMargins,
-        arrow: arrowMargins,
-      };
-    },
-  },
-  {
-    name: 'marginOffsetArrow',
-    enabled: true,
-    phase: 'main',
-    requiresIfExists: ['arrow'],
-    fn({ state }) {
-      if (!state.elements.arrow) return;
-
-      const { arrow: arrowMargin } = state.modifiersData.marginOffsets;
-
-      const offsets = state.modifiersData.arrow;
-
-      if (offsets.x != null) offsets.x -= arrowMargin.left;
-      if (offsets.y != null) offsets.y -= arrowMargin.top;
-    },
-  },
-];
+const marginModifiers = [popperMarginOffset, arrowMarginOffset];
 
 function Overlay({
   children: overlay,
@@ -235,7 +179,11 @@ function Overlay({
             overlay.props.className,
             !transition && show && 'show',
           ),
-          style: { ...overlay.props.style, ...overlayProps.style },
+          style: {
+            margin: 0,
+            ...overlay.props.style,
+            ...overlayProps.style,
+          },
         });
       }}
     </BaseOverlay>
