@@ -64,7 +64,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.4.2",
-    "@popperjs/core": "^2.3.3",
     "@restart/context": "^2.1.4",
     "@restart/hooks": "^0.3.21",
     "@types/react": "^16.9.23",

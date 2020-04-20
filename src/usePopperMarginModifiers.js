@@ -1,6 +1,5 @@
 import { useCallback, useRef, useMemo } from 'react';
 import hasClass from 'dom-helpers/hasClass';
-import offset from '@popperjs/core/lib/modifiers/offset';
 
 function getMargins(element) {
   const styles = getComputedStyle(element);
@@ -31,10 +30,10 @@ export default function usePopperMarginModifiers() {
     [
       useMemo(() => {
         return {
-          ...offset,
-          name: 'bootstrap-margin-offset',
+          name: 'offset',
           options: {
             offset: ({ placement }) => {
+              if (!margins.current) return [0, 0];
               const { top, left, bottom, right } = margins.current;
 
               switch (placement.split('-')[0]) {
