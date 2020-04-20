@@ -25,7 +25,7 @@ export type OverlayChildren =
   | ((injected: OverlayInjectedProps) => React.ReactNode);
 
 export interface OverlayProps
-  extends Omit<BaseOverlay.OverlayProps, 'children'> {
+  extends Omit<BaseOverlay.OverlayProps, 'children' | 'transition'> {
   children: OverlayChildren;
   transition?: boolean | BaseOverlay.OverlayProps['transition'];
   placement?: Placement;
