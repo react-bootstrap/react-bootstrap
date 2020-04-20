@@ -27,6 +27,7 @@ export interface ButtonProps {
   type?: 'button' | 'reset' | 'submit';
   href?: string;
   disabled?: boolean;
+  as?:  React.ReactType;
 }
 
 declare class Button<
