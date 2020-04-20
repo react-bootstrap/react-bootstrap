@@ -1,28 +1,16 @@
 import * as React from 'react';
+import * as BaseOverlay from 'react-overlays/Overlay';
 
-import { TransitionCallbacks } from './helpers';
-
-type ComponentOrElement = React.ReactInstance | Node;
-export type Placement =
-  | 'auto-start'
-  | 'auto'
-  | 'auto-end'
-  | 'top-start'
-  | 'top'
-  | 'top-end'
-  | 'right-start'
-  | 'right'
-  | 'right-end'
-  | 'bottom-end'
-  | 'bottom'
-  | 'bottom-start'
-  | 'left-end'
-  | 'left'
-  | 'left-start';
+export type Placement = import('react-overlays/usePopper').Placement;
 
 export interface OverlayInjectedProps {
-  show: boolean;
+  ref: (instance: HTMLElement) => void;
+  style: React.CSSProperties;
+  'aria-labelledby'?: string;
+
   arrowProps: { ref: any; style: object };
+
+  show: boolean;
   popper: {
     state: any;
     outOfBoundaries: boolean;
@@ -36,19 +24,13 @@ export type OverlayChildren =
   | React.ReactElement<OverlayInjectedProps>
   | ((injected: OverlayInjectedProps) => React.ReactNode);
 
-export interface OverlayProps extends TransitionCallbacks {
+export interface OverlayProps
+  extends Omit<BaseOverlay.OverlayProps, 'children' | 'transition'> {
   children: OverlayChildren;
-  container?: ComponentOrElement | ((props: object) => ComponentOrElement);
-  target?: ComponentOrElement | ((props: object) => ComponentOrElement);
-  show?: boolean;
-  popperConfig?: object;
-  rootClose?: boolean;
-  rootCloseEvent?: 'click' | 'mousedown';
-  onHide?: (event: React.SyntheticEvent) => void;
-  transition?: boolean | React.ElementType;
+  transition?: boolean | BaseOverlay.OverlayProps['transition'];
   placement?: Placement;
 }
 
-declare class Overlay extends React.Component<OverlayProps> {}
+declare const Overlay: React.FunctionComponent<OverlayProps>;
 
 export default Overlay;

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as BaseModal from 'react-overlays/Modal';
 
 import ModalBody from './ModalBody';
 import ModalDialog from './ModalDialog';
@@ -6,28 +7,24 @@ import ModalFooter from './ModalFooter';
 import ModalHeader from './ModalHeader';
 import ModalTitle from './ModalTitle';
 
-import { BsPrefixComponent, TransitionCallbacks } from './helpers';
+import { BsPrefixComponent } from './helpers';
 
-export interface ModalProps extends TransitionCallbacks {
+export interface ModalProps
+  extends Omit<
+    BaseModal.ModalProps,
+    | 'role'
+    | 'renderBackdrop'
+    | 'renderDialog'
+    | 'transition'
+    | 'backdropTransition'
+  > {
   size?: 'sm' | 'lg' | 'xl';
   centered?: boolean;
-  backdrop?: 'static' | boolean;
   backdropClassName?: string;
-  keyboard?: boolean;
   animation?: boolean;
   dialogClassName?: string;
   dialogAs?: React.ElementType;
-  autoFocus?: boolean;
-  enforceFocus?: boolean;
-  restoreFocus?: boolean;
-  restoreFocusOptions?: FocusOptions;
-  show?: boolean;
-  onShow?: () => void;
-  onHide?: () => void;
-  container?: any;
   scrollable?: boolean;
-  onEscapeKeyDown?: () => void;
-  manager?: any;
 }
 
 declare class Modal<

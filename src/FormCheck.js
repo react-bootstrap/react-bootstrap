@@ -117,10 +117,11 @@ const FormCheck = React.forwardRef(
     ref,
   ) => {
     const custom = type === 'switch' ? true : propCustom;
+    let [prefix, defaultPrefix] = custom
+      ? [bsCustomPrefix, 'custom-control']
+      : [bsPrefix, 'form-check'];
 
-    bsPrefix = custom
-      ? useBootstrapPrefix(bsCustomPrefix, 'custom-control')
-      : useBootstrapPrefix(bsPrefix, 'form-check');
+    bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
 
     const { controlId } = useContext(FormContext);
     const innerFormContext = useMemo(

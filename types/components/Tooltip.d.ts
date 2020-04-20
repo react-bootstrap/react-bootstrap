@@ -1,13 +1,15 @@
 import { Placement } from './Overlay';
 
-import { BsPrefixComponent } from './helpers';
-
-export interface TooltipProps {
-  id: string | number;
+export interface TooltipProps extends React.ComponentPropsWithoutRef<'div'> {
+  bsPrefix?: string;
+  id: string;
   placement?: Placement;
   arrowProps?: { ref: any; style: object };
 }
 
-declare class Tooltip extends BsPrefixComponent<'div', TooltipProps> {}
+declare const Tooltip: React.ForwardRefRenderFunction<
+  HTMLDivElement,
+  TooltipProps
+>;
 
 export default Tooltip;

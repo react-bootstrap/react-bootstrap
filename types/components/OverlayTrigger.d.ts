@@ -2,11 +2,12 @@ import * as React from 'react';
 
 import { OverlayChildren, OverlayProps } from './Overlay';
 
-type TriggerType = 'hover' | 'click' | 'focus';
+export type OverlayTriggerType = 'hover' | 'click' | 'focus';
 
-export interface OverlayTriggerProps extends Omit<OverlayProps, 'children'> {
+export interface OverlayTriggerProps
+  extends Omit<OverlayProps, 'children' | 'target'> {
   children: React.ReactNode;
-  trigger?: TriggerType | TriggerType[];
+  trigger?: OverlayTriggerType | OverlayTriggerType[];
   delay?: number | { show: number; hide: number };
   defaultShow?: boolean;
   flip?: boolean;
