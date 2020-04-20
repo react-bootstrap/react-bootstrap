@@ -27,9 +27,11 @@ const propTypes = {
 const FormFileLabel = React.forwardRef(
   ({ bsPrefix, bsCustomPrefix, className, htmlFor, ...props }, ref) => {
     const { controlId, custom } = useContext(FormContext);
-    bsPrefix = custom
-      ? useBootstrapPrefix(bsCustomPrefix, 'custom-file-label')
-      : useBootstrapPrefix(bsPrefix, 'form-file-label');
+    const [prefix, defaultPrefix] = custom
+      ? [bsCustomPrefix, 'custom-file-label']
+      : [bsPrefix, 'form-file-label'];
+
+    bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
 
     return (
       <label // eslint-disable-line jsx-a11y/label-has-associated-control

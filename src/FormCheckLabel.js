@@ -24,9 +24,11 @@ const propTypes = {
 const FormCheckLabel = React.forwardRef(
   ({ bsPrefix, bsCustomPrefix, className, htmlFor, ...props }, ref) => {
     const { controlId, custom } = useContext(FormContext);
-    bsPrefix = custom
-      ? useBootstrapPrefix(bsCustomPrefix, 'custom-control-label')
-      : useBootstrapPrefix(bsPrefix, 'form-check-label');
+    const [prefix, defaultPrefix] = custom
+      ? [bsCustomPrefix, 'custom-control-label']
+      : [bsPrefix, 'form-check-label'];
+
+    bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
 
     return (
       <label // eslint-disable-line jsx-a11y/label-has-associated-control

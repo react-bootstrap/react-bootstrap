@@ -55,9 +55,12 @@ const FormFileInput = React.forwardRef(
   ) => {
     const { controlId, custom } = useContext(FormContext);
     const type = 'file';
-    bsPrefix = custom
-      ? useBootstrapPrefix(bsCustomPrefix, 'custom-file-input')
-      : useBootstrapPrefix(bsPrefix, 'form-control-file');
+
+    const [prefix, defaultPrefix] = custom
+      ? [bsCustomPrefix, 'custom-file-input']
+      : [bsPrefix, 'form-control-file'];
+
+    bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
 
     return (
       <Component

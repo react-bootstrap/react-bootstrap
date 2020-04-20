@@ -64,9 +64,11 @@ const FormCheckInput = React.forwardRef(
     ref,
   ) => {
     const { controlId, custom } = useContext(FormContext);
-    bsPrefix = custom
-      ? useBootstrapPrefix(bsCustomPrefix, 'custom-control-input')
-      : useBootstrapPrefix(bsPrefix, 'form-check-input');
+    const [prefix, defaultPrefix] = custom
+      ? [bsCustomPrefix, 'custom-control-input']
+      : [bsPrefix, 'form-check-input'];
+
+    bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
 
     return (
       <Component

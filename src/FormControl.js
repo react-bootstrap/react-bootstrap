@@ -118,9 +118,12 @@ const FormControl = React.forwardRef(
     ref,
   ) => {
     const { controlId } = useContext(FormContext);
-    bsPrefix = custom
-      ? useBootstrapPrefix(bsCustomPrefix, 'custom')
-      : useBootstrapPrefix(bsPrefix, 'form-control');
+    const [prefix, defaultPrefix] = custom
+      ? [bsCustomPrefix, 'custom']
+      : [bsPrefix, 'form-control'];
+
+    bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
+
     let classes;
     if (plaintext) {
       classes = { [`${bsPrefix}-plaintext`]: true };
