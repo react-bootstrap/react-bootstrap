@@ -91,7 +91,7 @@ const Toast = React.forwardRef(
 
     autohideTimeout.set(autohideFunc, delayRef.current);
 
-    const useAnimation = useMemo(() => Transition && animation, [
+    const hasAnimation = useMemo(() => Transition && animation, [
       Transition,
       animation,
     ]);
@@ -103,7 +103,7 @@ const Toast = React.forwardRef(
         className={classNames(
           bsPrefix,
           className,
-          !useAnimation && show && 'show',
+          !hasAnimation && (show ? 'show' : 'hide'),
         )}
         role="alert"
         aria-live="assertive"
@@ -119,7 +119,13 @@ const Toast = React.forwardRef(
 
     return (
       <ToastContext.Provider value={toastContext}>
-        {useAnimation ? <Transition in={show}>{toast}</Transition> : toast}
+        {hasAnimation ? (
+          <Transition in={show} unmountOnExit>
+            {toast}
+          </Transition>
+        ) : (
+          toast
+        )}
       </ToastContext.Provider>
     );
   },
