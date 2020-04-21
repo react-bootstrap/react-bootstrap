@@ -51,11 +51,12 @@ Add the `dismissible` prop to add a dismiss button to the Alert.
 
 > To keep Alert flexible, we require you to tell the close button what to do via `onClose`.
 
-Here's an example that you will cover the majority of use cases.
+However, if you don't need anything fancy, here's a general implementation that will cover the majority of use cases. 
+This alert will do the sensible thing when the close button is clicked, and it will display any children it's given.
 
 <ReactPlayground codeText={BasicDismissible} />
 
-You can also control the visual state directly which is great if you
+However, if you need to, you can control the visual state directly—which is great if you
 want to build more complicated alerts.
 
 <ReactPlayground codeText={DismissibleControlled} />
