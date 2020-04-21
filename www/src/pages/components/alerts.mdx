@@ -49,7 +49,11 @@ Alerts can contain whatever content you like. Headers, paragraphs, dividers, go 
 
 Add the `dismissible` prop to add a dismiss button to the Alert.
 
-<ReactPlayground codeText={Dismissible} />
+> To keep Alert flexible, we require you to tell the close button what to do via `onClose`.
+
+Here's an example that you will cover the majority of use cases.
+
+<ReactPlayground codeText={BasicDismissible} />
 
 You can also control the visual state directly which is great if you
 want to build more complicated alerts.
