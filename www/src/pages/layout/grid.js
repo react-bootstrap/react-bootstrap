@@ -1,6 +1,5 @@
 import { graphql } from 'gatsby';
 import React from 'react';
-import { css } from 'astroturf';
 
 import LinkedHeading from '../../components/LinkedHeading';
 import ComponentApi from '../../components/ComponentApi';
@@ -18,26 +17,6 @@ import GridOrdering from '../../examples/Grid/Ordering';
 import GridResponsive from '../../examples/Grid/Responsive';
 import GridResponsiveAuto from '../../examples/Grid/ResponsiveAuto';
 import withLayout from '../../withLayout';
-
-const styles = css`
-  @import '../../css/theme';
-
-  .example {
-    :global {
-      .row > .col,
-      .row > [class^='col-'] {
-        padding-top: 0.75rem;
-        padding-bottom: 0.75rem;
-        background-color: $brand-light;
-        border: 1px solid $brand;
-      }
-
-      .row + .row {
-        margin-top: 1rem;
-      }
-    }
-  }
-`;
 
 export default withLayout(function GridSection({ data }) {
   return (
@@ -68,10 +47,7 @@ export default withLayout(function GridSection({ data }) {
         Containers provide a means to center and horizontally pad your site’s
         contents. Use <code>Container</code> for a responsive pixel width.
       </p>
-      <ReactPlayground
-        codeText={GridContainer}
-        exampleClassName={styles.example}
-      />
+      <ReactPlayground codeText={GridContainer} exampleClassName="show-grid" />
       <LinkedHeading h="3" id="container-fluid">
         Fluid Container
       </LinkedHeading>
@@ -81,7 +57,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridContainerFluid}
-        exampleClassName={styles.example}
+        exampleClassName="show-grid"
       />
       <p>
         You can set breakpoints for the <code>fluid</code> prop. Setting it to a
@@ -90,7 +66,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridContainerFluidBreakpoint}
-        exampleClassName={styles.example}
+        exampleClassName="show-grid"
       />
 
       <LinkedHeading h="2" id="auto-layout">
@@ -100,10 +76,7 @@ export default withLayout(function GridSection({ data }) {
         When no column widths are specified the <code>Col</code> component will
         render equal width columns
       </p>
-      <ReactPlayground
-        codeText={GridAutoLayout}
-        exampleClassName={styles.example}
-      />
+      <ReactPlayground codeText={GridAutoLayout} exampleClassName="show-grid" />
 
       <LinkedHeading h="3" id="auto-layout-col-sizing">
         Setting one column width
@@ -118,7 +91,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridAutoLayoutSizing}
-        exampleClassName={styles.example}
+        exampleClassName="show-grid"
       />
 
       <LinkedHeading h="3" id="auto-layout-variable-sizes">
@@ -130,7 +103,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridAutoLayoutVariable}
-        exampleClassName={styles.example}
+        exampleClassName="show-grid"
       />
       <LinkedHeading h="2" id="responsive-grids">
         Responsive grids
@@ -143,16 +116,13 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridResponsiveAuto}
-        exampleClassName={styles.example}
+        exampleClassName="show-grid"
       />
       <p>
         You can also mix and match breakpoints to create different grids
         depending on the screen size.
       </p>
-      <ReactPlayground
-        codeText={GridResponsive}
-        exampleClassName={styles.example}
-      />
+      <ReactPlayground codeText={GridResponsive} exampleClassName="show-grid" />
       <p>
         The <code>Col</code> breakpoint props also have a more complicated{' '}
         <code>object</code> prop form:{' '}
@@ -164,18 +134,12 @@ export default withLayout(function GridSection({ data }) {
         You can use the `order` property to control the{' '}
         <strong>visual order</strong> of your content.
       </p>
-      <ReactPlayground
-        codeText={GridOrdering}
-        exampleClassName={styles.example}
-      />
+      <ReactPlayground codeText={GridOrdering} exampleClassName="show-grid" />
       <p>
         For offsetting grid columns you can set an `offset` value, or, for more
         general layout, use the margin class utilities.
       </p>
-      <ReactPlayground
-        codeText={GridOffsetting}
-        exampleClassName={styles.example}
-      />
+      <ReactPlayground codeText={GridOffsetting} exampleClassName="show-grid" />
 
       <LinkedHeading h="3" id="row-layout-col-sizing">
         Setting column widths in Row
@@ -188,7 +152,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridRowColLayout}
-        exampleClassName={styles.example}
+        exampleClassName="show-grid"
       />
       <p>
         Note that <code>Row</code> column widths will override <code>Col</code>{' '}
@@ -198,7 +162,7 @@ export default withLayout(function GridSection({ data }) {
       </p>
       <ReactPlayground
         codeText={GridRowColLayoutColWidthBreakpoint}
-        exampleClassName={styles.example}
+        exampleClassName="show-grid"
       />
 
       <LinkedHeading h="2" id="grid-props">

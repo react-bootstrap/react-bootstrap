@@ -1,10 +1,21 @@
+@import './theme';
+
 .list-group :global(.list-group) {
   max-width: 400px;
 }
 
-.static-dropdown-menu :global(.dropdown-menu) {
-  position: static;
-  display: block;
+.static-dropdown-menu {
+  composes: clearfix from global;
+
+  :global(.dropdown-menu) {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    right: auto !important;
+    display: block !important;
+    opacity: 1 !important;
+  }
 }
 .custom-dropdown-menu :global(.super-colors) {
   background: linear-gradient(
@@ -16,4 +27,19 @@
     blue,
     violet
   );
+}
+
+// global b/c we need to use it in a modal
+:global(.show-grid) {
+  :global(.row) > :global(.col),
+  :global(.row) > [class^='col-'] {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    background-color: $brand-light;
+    border: 1px solid $brand;
+  }
+
+  :global(.row) + :global(.row) {
+    margin-top: 1rem;
+  }
 }
