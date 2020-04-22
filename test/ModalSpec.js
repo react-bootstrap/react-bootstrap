@@ -1,6 +1,7 @@
 import { mount } from 'enzyme';
 import React from 'react';
 import Modal from '../src/Modal';
+import { shouldWarn } from './helpers';
 
 describe('<Modal>', () => {
   afterEach(() => {
@@ -113,6 +114,21 @@ describe('<Modal>', () => {
       .getDOMNode();
 
     assert.ok(dialog.style.color === 'red');
+  });
+
+  it('Should warn about ref access', () => {
+    const noOp = () => {};
+    const ref = React.createRef();
+
+    mount(
+      <Modal show ref={ref} onHide={noOp}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    shouldWarn('Accessing `_modal` is not supported');
+
+    ref.current._modal;
   });
 
   it('Should pass dialogClassName to the dialog', () => {

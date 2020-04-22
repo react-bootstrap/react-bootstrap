@@ -7,8 +7,6 @@ import ModalFooter from './ModalFooter';
 import ModalHeader from './ModalHeader';
 import ModalTitle from './ModalTitle';
 
-import { BsPrefixComponent } from './helpers';
-
 export interface ModalProps
   extends Omit<
     BaseModal.ModalProps,
@@ -19,6 +17,7 @@ export interface ModalProps
     | 'backdropTransition'
   > {
   size?: 'sm' | 'lg' | 'xl';
+  bsPrefix?: string;
   centered?: boolean;
   backdropClassName?: string;
   animation?: boolean;
@@ -27,15 +26,13 @@ export interface ModalProps
   scrollable?: boolean;
 }
 
-declare class Modal<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ModalProps> {
-  static Body: typeof ModalBody;
-  static Header: typeof ModalHeader;
-  static Title: typeof ModalTitle;
-  static Footer: typeof ModalFooter;
+declare type Modal = React.Component<ModalProps> & {
+  Body: typeof ModalBody;
+  Header: typeof ModalHeader;
+  Title: typeof ModalTitle;
+  Footer: typeof ModalFooter;
 
-  static Dialog: typeof ModalDialog;
-}
+  Dialog: typeof ModalDialog;
+};
 
 export default Modal;
