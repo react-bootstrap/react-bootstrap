@@ -26,7 +26,7 @@ export interface ModalProps
   scrollable?: boolean;
 }
 
-declare type Modal = React.Component<ModalProps> & {
+declare type Modal = React.ComponentClass<ModalProps> & {
   Body: typeof ModalBody;
   Header: typeof ModalHeader;
   Title: typeof ModalTitle;
@@ -35,4 +35,5 @@ declare type Modal = React.Component<ModalProps> & {
   Dialog: typeof ModalDialog;
 };
 
+declare const Modal: Modal;
 export default Modal;
