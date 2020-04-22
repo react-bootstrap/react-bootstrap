@@ -1,3 +1,18 @@
+## [1.0.1](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0...v1.0.1) (2020-04-22)
+
+
+### Bug Fixes
+
+* consider margins in Popper calculations ([#5112](https://github.com/react-bootstrap/react-bootstrap/issues/5112)) ([52de702](https://github.com/react-bootstrap/react-bootstrap/commit/52de7027b59d8c0c59642899c70d741c1fa97c03))
+* use upstream types and fix Overlay, Modal, Tooltip, and Popover … ([#5124](https://github.com/react-bootstrap/react-bootstrap/issues/5124)) ([02484ef](https://github.com/react-bootstrap/react-bootstrap/commit/02484efb372450f3ba3c6c8dcb4e41e281d50175))
+* **AccordionToggle:** default button type=button ([#5076](https://github.com/react-bootstrap/react-bootstrap/issues/5076)) ([59468d7](https://github.com/react-bootstrap/react-bootstrap/commit/59468d72d81aacc46ffd0f5d713bba4467de22f9))
+* **types:** more accurate form types ([#5067](https://github.com/react-bootstrap/react-bootstrap/issues/5067)) ([2395802](https://github.com/react-bootstrap/react-bootstrap/commit/239580251390cdb8ddeb014d61689a977ef7d3af))
+* **types:** types for FormLabel ([#5063](https://github.com/react-bootstrap/react-bootstrap/issues/5063)) ([42bd5af](https://github.com/react-bootstrap/react-bootstrap/commit/42bd5afc40f07f8a6e7acded31d6fa537176f533)), closes [#5056](https://github.com/react-bootstrap/react-bootstrap/issues/5056)
+
+
+
+
+
 # [1.0.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0-beta.17...v1.0.0) (2020-03-23)
 
 
