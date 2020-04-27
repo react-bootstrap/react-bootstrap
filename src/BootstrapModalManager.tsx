@@ -10,21 +10,28 @@ const Selector = {
 };
 
 export default class BootstrapModalManager extends ModalManager {
-  adjustAndStore = (prop, element, adjust) => {
+  private adjustAndStore<T extends keyof CSSStyleDeclaration>(
+    prop: T,
+    element: HTMLElement,
+    adjust: number,
+  ) {
     const actual = element.style[prop];
     element.dataset[prop] = actual;
     css(element, {
-      [prop]: `${parseFloat(css(element, prop)) + adjust}px`,
+      [prop]: `${parseFloat(css(element, prop as any)) + adjust}px`,
     });
-  };
+  }
 
-  restore = (prop, element) => {
+  private restore<T extends keyof CSSStyleDeclaration>(
+    prop: T,
+    element: HTMLElement,
+  ) {
     const value = element.dataset[prop];
     if (value !== undefined) {
       delete element.dataset[prop];
       css(element, { [prop]: value });
     }
-  };
+  }
 
   setContainerStyle(containerState, container) {
     super.setContainerStyle(containerState, container);
