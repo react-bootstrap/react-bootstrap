@@ -6,26 +6,26 @@ function MydModalWithGrid(props) {
           Using Grid in Modal
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="show-grid">
         <Container>
-          <Row className="show-grid">
+          <Row>
             <Col xs={12} md={8}>
-              <code>.col-xs-12 .col-md-8</code>
+              .col-xs-12 .col-md-8
             </Col>
             <Col xs={6} md={4}>
-              <code>.col-xs-6 .col-md-4</code>
+              .col-xs-6 .col-md-4
             </Col>
           </Row>
 
-          <Row className="show-grid">
+          <Row>
             <Col xs={6} md={4}>
-              <code>.col-xs-6 .col-md-4</code>
+              .col-xs-6 .col-md-4
             </Col>
             <Col xs={6} md={4}>
-              <code>.col-xs-6 .col-md-4</code>
+              .col-xs-6 .col-md-4
             </Col>
             <Col xs={6} md={4}>
-              <code>.col-xs-6 .col-md-4</code>
+              .col-xs-6 .col-md-4
             </Col>
           </Row>
         </Container>

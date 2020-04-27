@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import forwardRef from '@restart/context/forwardRef';
 import React, { useContext, useMemo } from 'react';
 
 const ThemeContext = React.createContext({});
@@ -26,15 +25,15 @@ function createBootstrapComponent(Component, opts) {
   // If it's a functional component make sure we don't break it with a ref
   const { prefix, forwardRefAs = isClassy ? 'ref' : 'innerRef' } = opts;
 
-  return forwardRef(
-    ({ ...props }, ref) => {
-      props[forwardRefAs] = ref;
-      // eslint-disable-next-line react/prop-types
-      const bsPrefix = useBootstrapPrefix(props.bsPrefix, prefix);
-      return <Component {...props} bsPrefix={bsPrefix} />;
-    },
-    { displayName: `Bootstrap(${Component.displayName || Component.name})` },
-  );
+  const Wrapped = React.forwardRef(({ ...props }, ref) => {
+    props[forwardRefAs] = ref;
+    // eslint-disable-next-line react/prop-types
+    const bsPrefix = useBootstrapPrefix(props.bsPrefix, prefix);
+    return <Component {...props} bsPrefix={bsPrefix} />;
+  });
+
+  Wrapped.displayName = `Bootstrap(${Component.displayName || Component.name})`;
+  return Wrapped;
 }
 
 export { createBootstrapComponent, Consumer as ThemeConsumer };
