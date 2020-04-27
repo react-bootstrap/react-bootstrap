@@ -86,7 +86,7 @@ export default withLayout(function ModalSection({ data }) {
         content.
       </p>
       <ReactPlayground codeText={ModalBasic} />
-      <LinkedHeading h="3" id="modals-live">
+      <LinkedHeading h="3" id="without-animation">
         Without Animation
       </LinkedHeading>
       <p>

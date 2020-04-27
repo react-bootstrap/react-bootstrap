@@ -6,6 +6,7 @@ import FormControl from './FormControl';
 import FormGroup from './FormGroup';
 import FormLabel from './FormLabel';
 import FormText from './FormText';
+import Switch from './Switch';
 
 import { BsPrefixComponent, BsPrefixRefForwardingComponent } from './helpers';
 
@@ -25,6 +26,7 @@ declare interface Form
   Control: typeof FormControl;
   Check: typeof FormCheck;
   File: typeof FormFile;
+  Switch: typeof Switch;
   Label: typeof FormLabel;
   Text: typeof FormText;
 }

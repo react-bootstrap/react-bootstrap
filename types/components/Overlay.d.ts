@@ -4,7 +4,7 @@ import * as BaseOverlay from 'react-overlays/Overlay';
 export type Placement = import('react-overlays/usePopper').Placement;
 
 export interface OverlayInjectedProps {
-  ref: (instance: HTMLElement) => void;
+  ref: React.RefCallback<HTMLElement>;
   style: React.CSSProperties;
   'aria-labelledby'?: string;
 

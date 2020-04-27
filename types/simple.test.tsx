@@ -241,6 +241,7 @@ import {
     custom
   />
   <Form.File.Input />
+  <Form.Switch label="Switch" disabled />
 </Form>;
 
 <div>
