@@ -30,6 +30,7 @@ module.exports = api => {
           removePropTypes: !dev,
         },
       ],
+      '@babel/preset-typescript',
     ],
     plugins: [env === 'test' && 'istanbul'].filter(Boolean),
   };
