@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 import Collapse, { CollapseProps } from './Collapse';
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavbarContext from './NavbarContext';
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixProps } from './helpers';
 
 export interface NavbarCollapseProps
   extends CollapseProps,
-    React.HTMLAttributes<HTMLDivElement> {}
+    React.HTMLAttributes<HTMLDivElement>,
+    BsPrefixProps {}
 
-declare class NavbarCollapse extends BsPrefixComponent<
-  typeof Collapse,
-  NavbarCollapseProps
-> {}
+// type NavbarCollapse = BsPrefixRefForwardingComponent<
+//   'div',
+//   NavbarCollapseProps
+// >;
 
 const propTypes = {
   /** @default 'navbar-collapse' */
@@ -21,13 +22,13 @@ const propTypes = {
 };
 
 const NavbarCollapse = React.forwardRef(
-  ({ children, bsPrefix, ...props }, ref) => {
+  ({ children, bsPrefix, ...props }: NavbarCollapseProps, ref) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar-collapse');
     return (
       <NavbarContext.Consumer>
         {(context) => (
           <Collapse in={!!(context && context.expanded)} {...props}>
-            <div ref={ref} className={bsPrefix}>
+            <div ref={ref as any} className={bsPrefix}>
               {children}
             </div>
           </Collapse>

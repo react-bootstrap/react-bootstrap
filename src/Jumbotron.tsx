@@ -3,15 +3,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface JumbotronProps {
+export interface JumbotronProps extends BsPrefixProps {
   fluid?: boolean;
 }
 
-declare class Jumbotron<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, JumbotronProps> {}
+type Jumbotron = BsPrefixRefForwardingComponent<'div', JumbotronProps>;
 
 const propTypes = {
   as: PropTypes.elementType,
@@ -25,7 +23,7 @@ const defaultProps = {
   fluid: false,
 };
 
-const Jumbotron = React.forwardRef(
+const Jumbotron: Jumbotron = React.forwardRef(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595

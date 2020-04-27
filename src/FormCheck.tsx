@@ -7,9 +7,16 @@ import FormCheckInput from './FormCheckInput';
 import FormCheckLabel from './FormCheckLabel';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface FormCheckProps {
+type FormCheckType = 'checkbox' | 'radio' | 'switch';
+
+export interface FormCheckProps
+  extends BsPrefixPropsWithChildren,
+    Pick<React.HTMLAttributes<HTMLElement>, 'style'> {
   bsCustomPrefix?: string;
   id?: string;
   inline?: boolean;
@@ -17,19 +24,16 @@ export interface FormCheckProps {
   title?: string;
   label?: React.ReactNode;
   custom?: boolean;
-  type?: 'checkbox' | 'radio' | 'switch';
+  type?: FormCheckType;
   isValid?: boolean;
   isInvalid?: boolean;
   feedback?: React.ReactNode;
 }
 
-declare interface FormCheck
-  extends BsPrefixRefForwardingComponent<'input', FormCheckProps> {
+type FormCheck = BsPrefixRefForwardingComponent<'input', FormCheckProps> & {
   Input: typeof FormCheckInput;
   Label: typeof FormCheckLabel;
-}
-
-declare const FormCheck: FormCheck;
+};
 
 const propTypes = {
   /**
@@ -107,7 +111,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  type: 'checkbox',
+  type: 'checkbox' as FormCheckType,
   inline: false,
   disabled: false,
   isValid: false,
@@ -115,7 +119,7 @@ const defaultProps = {
   title: '',
 };
 
-const FormCheck = React.forwardRef(
+const FormCheck: FormCheck = (React.forwardRef(
   (
     {
       id,
@@ -136,11 +140,11 @@ const FormCheck = React.forwardRef(
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as = 'input',
       ...props
-    },
+    }: FormCheckProps,
     ref,
   ) => {
     const custom = type === 'switch' ? true : propCustom;
-    let [prefix, defaultPrefix] = custom
+    const [prefix, defaultPrefix] = custom
       ? [bsCustomPrefix, 'custom-control']
       : [bsPrefix, 'form-check'];
 
@@ -198,7 +202,7 @@ const FormCheck = React.forwardRef(
       </FormContext.Provider>
     );
   },
-);
+) as unknown) as FormCheck;
 
 FormCheck.displayName = 'FormCheck';
 FormCheck.propTypes = propTypes;

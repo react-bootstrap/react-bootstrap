@@ -3,21 +3,23 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-import { BsPrefixRefForwardingComponent } from './helpers';
+type FormCheckInputType = 'checkbox' | 'radio';
 
-export interface FormCheckInputProps {
+export interface FormCheckInputProps extends BsPrefixProps {
   id?: string;
-  type?: 'checkbox' | 'radio';
+  bsCustomPrefix?: string;
+  type?: FormCheckInputType;
   isStatic?: boolean;
   isValid?: boolean;
   isInvalid?: boolean;
 }
 
-declare interface FormCheckInput
-  extends BsPrefixRefForwardingComponent<'input', FormCheckInputProps> {}
-
-declare const FormCheckInput: FormCheckInput;
+type FormCheckInput = BsPrefixRefForwardingComponent<
+  'input',
+  FormCheckInputProps
+>;
 
 const propTypes = {
   /**
@@ -59,10 +61,10 @@ const propTypes = {
 };
 
 const defaultProps = {
-  type: 'checkbox',
+  type: 'checkbox' as FormCheckInputType,
 };
 
-const FormCheckInput = React.forwardRef(
+const FormCheckInput: FormCheckInput = React.forwardRef(
   (
     {
       id,
@@ -75,7 +77,7 @@ const FormCheckInput = React.forwardRef(
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
       ...props
-    },
+    }: FormCheckInputProps,
     ref,
   ) => {
     const { controlId, custom } = useContext(FormContext);

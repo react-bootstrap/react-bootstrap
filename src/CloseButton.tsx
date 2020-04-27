@@ -2,12 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 
-export interface CloseButtonProps {
+export interface CloseButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string;
-  onClick?: React.MouseEventHandler<CloseButton>;
 }
-
-declare class CloseButton extends React.Component<CloseButtonProps> {}
 
 const propTypes = {
   label: PropTypes.string.isRequired,
@@ -18,8 +16,8 @@ const defaultProps = {
   label: 'Close',
 };
 
-const CloseButton = React.forwardRef(
-  ({ label, onClick, className, ...props }, ref) => (
+const CloseButton = React.forwardRef<HTMLButtonElement, CloseButtonProps>(
+  ({ label, onClick, className, ...props }: CloseButtonProps, ref) => (
     <button
       ref={ref}
       type="button"

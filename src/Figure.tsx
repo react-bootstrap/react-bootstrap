@@ -3,19 +3,14 @@ import createWithBsPrefix from './createWithBsPrefix';
 import FigureImage from './FigureImage';
 import FigureCaption from './FigureCaption';
 
-import * as React from 'react';
-import { BsPrefixComponent } from './helpers';
+type Figure = React.ComponentType & {
+  Image: typeof FigureImage;
+  Caption: typeof FigureCaption;
+};
 
-declare class Figure<
-  As extends React.ElementType = 'figure'
-> extends BsPrefixComponent<As> {
-  static Image: typeof FigureImage;
-  static Caption: typeof FigureCaption;
-}
-
-const Figure = createWithBsPrefix('figure', {
+const Figure: Figure = (createWithBsPrefix('figure', {
   Component: 'figure',
-});
+}) as unknown) as Figure;
 
 Figure.Image = FigureImage;
 Figure.Caption = FigureCaption;

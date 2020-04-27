@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 import Dropdown from './Dropdown';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
-import { ReplaceProps } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface NavDropdownProps {
+export interface NavDropdownProps extends BsPrefixPropsWithChildren {
   id: string;
   title: React.ReactNode;
   disabled?: boolean;
@@ -14,16 +17,13 @@ export interface NavDropdownProps {
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
-  bsPrefix?: string;
 }
 
-declare class NavDropdown extends React.Component<
-  ReplaceProps<typeof Dropdown, NavDropdownProps>
-> {
-  static Item: typeof Dropdown.Item;
-  static Divider: typeof Dropdown.Divider;
-  static Header: typeof Dropdown.Header;
-}
+type NavDropdown = BsPrefixRefForwardingComponent<'div', NavDropdownProps> & {
+  Item: typeof Dropdown.Item;
+  Divider: typeof Dropdown.Divider;
+  Header: typeof Dropdown.Header;
+};
 
 const propTypes = {
   /**
@@ -62,7 +62,7 @@ const propTypes = {
   bsPrefix: PropTypes.string,
 };
 
-const NavDropdown = React.forwardRef(
+const NavDropdown: NavDropdown = (React.forwardRef(
   (
     {
       id,
@@ -75,7 +75,7 @@ const NavDropdown = React.forwardRef(
       active,
       renderMenuOnMount,
       ...props
-    },
+    }: NavDropdownProps,
     ref,
   ) => (
     <Dropdown ref={ref} {...props} as={NavItem}>
@@ -99,7 +99,7 @@ const NavDropdown = React.forwardRef(
       </Dropdown.Menu>
     </Dropdown>
   ),
-);
+) as unknown) as NavDropdown;
 
 NavDropdown.displayName = 'NavDropdown';
 NavDropdown.propTypes = propTypes;

@@ -7,91 +7,45 @@ import createWithBsPrefix from './createWithBsPrefix';
 import divWithClassName from './divWithClassName';
 import CardContext from './CardContext';
 import CardImg from './CardImg';
-import { BsPrefixComponent } from './helpers';
-
-export class CardTitle<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
-
-export class CardSubtitle<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
-
-export class CardBody<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
-
-export class CardLink<
-  As extends React.ElementType = 'a'
-> extends BsPrefixComponent<As> {}
-
-export class CardText<
-  As extends React.ElementType = 'p'
-> extends BsPrefixComponent<As> {}
-
-export class CardHeader<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
-
-export class CardFooter<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
-
-export class CardImgOverlay<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
-
-export interface CardProps {
-  bg?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'dark'
-    | 'light';
-  text?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'dark'
-    | 'light'
-    | 'white'
-    | 'muted';
-  border?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'dark'
-    | 'light';
-  body?: boolean;
-}
-
-declare class Card<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, CardProps> {
-  static Img: typeof CardImg;
-  static Title: typeof CardTitle;
-  static Subtitle: typeof CardSubtitle;
-  static Body: typeof CardBody;
-  static Link: typeof CardLink;
-  static Text: typeof CardText;
-  static Header: typeof CardHeader;
-  static Footer: typeof CardFooter;
-  static ImgOverlay: typeof CardImgOverlay;
-}
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
+import { Color, Variant } from './types';
 
 const DivStyledAsH5 = divWithClassName('h5');
 const DivStyledAsH6 = divWithClassName('h6');
-
 const CardBody = createWithBsPrefix('card-body');
+const CardTitle = createWithBsPrefix('card-title', {
+  Component: DivStyledAsH5,
+});
+const CardSubtitle = createWithBsPrefix('card-subtitle', {
+  Component: DivStyledAsH6,
+});
+const CardLink = createWithBsPrefix('card-link', { Component: 'a' });
+const CardText = createWithBsPrefix('card-text', { Component: 'p' });
+const CardHeader = createWithBsPrefix('card-header');
+const CardFooter = createWithBsPrefix('card-footer');
+const CardImgOverlay = createWithBsPrefix('card-img-overlay');
+
+export interface CardProps extends BsPrefixPropsWithChildren {
+  bg?: Variant;
+  text?: Color;
+  border?: Variant;
+  body?: boolean;
+}
+
+type Card = BsPrefixRefForwardingComponent<'div', CardProps> & {
+  Img: typeof CardImg;
+  Title: typeof CardTitle;
+  Subtitle: typeof CardSubtitle;
+  Body: typeof CardBody;
+  Link: typeof CardLink;
+  Text: typeof CardText;
+  Header: typeof CardHeader;
+  Footer: typeof CardFooter;
+  ImgOverlay: typeof CardImgOverlay;
+};
 
 const propTypes = {
   /**
@@ -133,7 +87,7 @@ const defaultProps = {
   body: false,
 };
 
-const Card = React.forwardRef(
+const Card: Card = (React.forwardRef(
   (
     {
       bsPrefix,
@@ -146,7 +100,7 @@ const Card = React.forwardRef(
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       ...props
-    },
+    }: CardProps,
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'card');
@@ -170,31 +124,30 @@ const Card = React.forwardRef(
             border && `border-${border}`,
           )}
         >
-          {body ? <CardBody>{children}</CardBody> : children}
+          {body ? (
+            // @ts-ignore
+            <CardBody>{children}</CardBody>
+          ) : (
+            children
+          )}
         </Component>
       </CardContext.Provider>
     );
   },
-);
+) as unknown) as Card;
 
 Card.displayName = 'Card';
 Card.propTypes = propTypes;
 Card.defaultProps = defaultProps;
 
 Card.Img = CardImg;
-
-Card.Title = createWithBsPrefix('card-title', {
-  Component: DivStyledAsH5,
-});
-Card.Subtitle = createWithBsPrefix('card-subtitle', {
-  Component: DivStyledAsH6,
-});
-
+Card.Title = CardTitle;
+Card.Subtitle = CardSubtitle;
 Card.Body = CardBody;
-Card.Link = createWithBsPrefix('card-link', { Component: 'a' });
-Card.Text = createWithBsPrefix('card-text', { Component: 'p' });
-Card.Header = createWithBsPrefix('card-header');
-Card.Footer = createWithBsPrefix('card-footer');
-Card.ImgOverlay = createWithBsPrefix('card-img-overlay');
+Card.Link = CardLink;
+Card.Text = CardText;
+Card.Header = CardHeader;
+Card.Footer = CardFooter;
+Card.ImgOverlay = CardImgOverlay;
 
 export default Card;

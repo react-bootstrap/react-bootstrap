@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import requiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useUncontrolled } from 'uncontrollable';
 
-import Nav, { NavProps } from './Nav';
+import Nav from './Nav';
 import NavLink from './NavLink';
 import NavItem from './NavItem';
 import TabContainer from './TabContainer';
@@ -12,23 +12,23 @@ import TabContent from './TabContent';
 import TabPane from './TabPane';
 
 import { forEach, map } from './ElementChildren';
-import { BsPrefixComponent, BsPrefixComponentClass, SelectCallback } from './helpers';
+import { SelectCallback, TransitionType } from './helpers';
 
-export interface TabsProps {
+export interface TabsProps extends React.PropsWithChildren<{}> {
   activeKey?: unknown;
   defaultActiveKey?: unknown;
   onSelect?: SelectCallback;
   variant?: 'tabs' | 'pills';
-  transition?: false | React.ElementType;
+  transition?: TransitionType;
   id: string;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
 }
 
-declare class Tabs<
-  // Need to use BsPrefixComponentClass to get proper type checking.
-  As extends React.ElementType = BsPrefixComponentClass<'div', NavProps>
-> extends BsPrefixComponent<As, TabsProps> {}
+// declare class Tabs<
+//   // Need to use BsPrefixComponentClass to get proper type checking.
+//   As extends React.ElementType = BsPrefixComponentClass<'div', NavProps>
+// > extends BsPrefixComponent<As, TabsProps> {}
 
 const propTypes = {
   /**
@@ -129,7 +129,7 @@ function renderTab(child) {
   );
 }
 
-const Tabs = React.forwardRef((props, ref) => {
+const Tabs = (props: TabsProps) => {
   const {
     id,
     onSelect,
@@ -145,7 +145,6 @@ const Tabs = React.forwardRef((props, ref) => {
 
   return (
     <TabContainer
-      ref={ref}
       id={id}
       activeKey={activeKey}
       onSelect={onSelect}
@@ -170,10 +169,10 @@ const Tabs = React.forwardRef((props, ref) => {
       </TabContent>
     </TabContainer>
   );
-});
+};
 
-Tabs.propTypes = propTypes;
-Tabs.defaultProps = defaultProps;
+Tabs.propTypes = propTypes as any;
+Tabs.defaultProps = defaultProps as any;
 Tabs.displayName = 'Tabs';
 
 export default Tabs;

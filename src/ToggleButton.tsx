@@ -3,24 +3,25 @@ import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
 
 import Button, { ButtonProps } from './Button';
-import { BsPrefixComponent, BsPrefixComponentClass } from './helpers';
+import {
+  BsPrefixAndClassNameOnlyProps,
+  BsPrefixComponentClass,
+} from './helpers';
 
-export interface ToggleButtonProps {
+export interface ToggleButtonProps
+  extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps> {
   type?: 'checkbox' | 'radio';
   name?: string;
   checked?: boolean;
   disabled?: boolean;
-  onChange?: React.ChangeEventHandler<this>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
   value: unknown;
-  inputRef?: React.LegacyRef<this>;
+  inputRef?: React.LegacyRef<'input'>;
 }
 
-declare class ToggleButton<
-  // Need to use BsPrefixComponentClass to get proper type checking.
-  As extends React.ElementType = BsPrefixComponentClass<'button', ButtonProps>
-> extends BsPrefixComponent<As, ToggleButtonProps> {}
+type ToggleButton = BsPrefixComponentClass<'button', ButtonProps>;
 
-const noop = () => {};
+const noop = () => undefined;
 
 const propTypes = {
   /**
@@ -63,7 +64,7 @@ const propTypes = {
   inputRef: PropTypes.any,
 };
 
-const ToggleButton = React.forwardRef(
+const ToggleButton = React.forwardRef<any, ToggleButtonProps>(
   (
     {
       children,
@@ -76,7 +77,7 @@ const ToggleButton = React.forwardRef(
       disabled,
       inputRef,
       ...props
-    },
+    }: ToggleButtonProps,
     ref,
   ) => {
     const [focused, setFocused] = useState(false);
@@ -98,15 +99,15 @@ const ToggleButton = React.forwardRef(
           focused && 'focus',
           disabled && 'disabled',
         )}
-        type={null}
+        type={undefined}
         active={!!checked}
         as="label"
       >
         <input
           name={name}
           type={type}
-          value={value}
-          ref={inputRef}
+          value={value as any}
+          ref={inputRef as any}
           autoComplete="off"
           checked={!!checked}
           disabled={!!disabled}
@@ -121,7 +122,7 @@ const ToggleButton = React.forwardRef(
   },
 );
 
-ToggleButton.propTypes = propTypes;
+ToggleButton.propTypes = propTypes as any;
 ToggleButton.displayName = 'ToggleButton';
 
 export default ToggleButton;

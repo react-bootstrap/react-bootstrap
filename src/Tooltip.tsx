@@ -5,18 +5,21 @@ import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useBootstrapPrefix } from './ThemeProvider';
 
 import { Placement } from './Overlay';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface TooltipProps extends React.ComponentPropsWithoutRef<'div'> {
-  bsPrefix?: string;
+export interface TooltipProps extends BsPrefixPropsWithChildren {
+  style?: any;
   id: string;
   placement?: Placement;
   arrowProps?: { ref: any; style: object };
+  show?: boolean;
+  popper?: any;
 }
 
-declare const Tooltip: React.ForwardRefRenderFunction<
-  HTMLDivElement,
-  TooltipProps
->;
+type Tooltip = BsPrefixRefForwardingComponent<'div', TooltipProps>;
 
 const propTypes = {
   /**
@@ -79,7 +82,7 @@ const defaultProps = {
   placement: 'right',
 };
 
-const Tooltip = React.forwardRef(
+const Tooltip: Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
       bsPrefix,
@@ -91,7 +94,7 @@ const Tooltip = React.forwardRef(
       popper: _,
       show: _2,
       ...props
-    },
+    }: TooltipProps,
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'tooltip');
@@ -113,7 +116,7 @@ const Tooltip = React.forwardRef(
 );
 
 Tooltip.propTypes = propTypes;
-Tooltip.defaultProps = defaultProps;
+Tooltip.defaultProps = defaultProps as any;
 Tooltip.displayName = 'Tooltip';
 
 export default Tooltip;

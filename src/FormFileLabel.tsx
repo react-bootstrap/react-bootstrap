@@ -4,16 +4,19 @@ import React, { useContext } from 'react';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { BsPrefixRefForwardingComponent } from './helpers';
+import {
+  BsCustomPrefixProps,
+  BsPrefixProps,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface FormFileLabelProps {
+export interface FormFileLabelProps extends BsPrefixProps, BsCustomPrefixProps {
   htmlFor?: string;
 }
-
-declare interface FormFileLabel
-  extends BsPrefixRefForwardingComponent<'label', FormFileLabelProps> {}
-
-declare const FormFileLabel: FormFileLabel;
+type FormFileLabel = BsPrefixRefForwardingComponent<
+  'label',
+  FormFileLabelProps
+>;
 
 const propTypes = {
   /**
@@ -35,26 +38,27 @@ const propTypes = {
   'data-browse': PropTypes.string,
 };
 
-const FormFileLabel = React.forwardRef(
-  ({ bsPrefix, bsCustomPrefix, className, htmlFor, ...props }, ref) => {
-    const { controlId, custom } = useContext(FormContext);
-    const [prefix, defaultPrefix] = custom
-      ? [bsCustomPrefix, 'custom-file-label']
-      : [bsPrefix, 'form-file-label'];
+const FormFileLabel: FormFileLabel = React.forwardRef<
+  HTMLLabelElement,
+  FormFileLabelProps
+>(({ bsPrefix, bsCustomPrefix, className, htmlFor, ...props }, ref) => {
+  const { controlId, custom } = useContext(FormContext);
+  const [prefix, defaultPrefix] = custom
+    ? [bsCustomPrefix, 'custom-file-label']
+    : [bsPrefix, 'form-file-label'];
 
-    bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
+  bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
 
-    return (
-      <label // eslint-disable-line jsx-a11y/label-has-associated-control
-        {...props}
-        ref={ref}
-        htmlFor={htmlFor || controlId}
-        className={classNames(className, bsPrefix)}
-        data-browse={props['data-browse']}
-      />
-    );
-  },
-);
+  return (
+    <label // eslint-disable-line jsx-a11y/label-has-associated-control
+      {...props}
+      ref={ref}
+      htmlFor={htmlFor || controlId}
+      className={classNames(className, bsPrefix)}
+      data-browse={props['data-browse']}
+    />
+  );
+});
 
 FormFileLabel.displayName = 'FormFileLabel';
 FormFileLabel.propTypes = propTypes;

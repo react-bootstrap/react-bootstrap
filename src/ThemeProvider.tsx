@@ -5,7 +5,7 @@ export interface ThemeProviderProps {
   prefixes: object;
 }
 
-declare class ThemeProvider extends React.Component<ThemeProviderProps> {}
+// declare class ThemeProvider extends React.Component<ThemeProviderProps> {}
 
 const ThemeContext = React.createContext({});
 const { Consumer, Provider } = ThemeContext;
@@ -20,7 +20,10 @@ ThemeProvider.propTypes = {
   prefixes: PropTypes.object.isRequired,
 };
 
-export function useBootstrapPrefix(prefix, defaultPrefix) {
+export function useBootstrapPrefix(
+  prefix: string | undefined,
+  defaultPrefix: string,
+): string {
   const prefixes = useContext(ThemeContext);
   return prefix || prefixes[defaultPrefix] || defaultPrefix;
 }
@@ -33,8 +36,7 @@ function createBootstrapComponent(Component, opts) {
 
   const Wrapped = React.forwardRef(({ ...props }, ref) => {
     props[forwardRefAs] = ref;
-    // eslint-disable-next-line react/prop-types
-    const bsPrefix = useBootstrapPrefix(props.bsPrefix, prefix);
+    const bsPrefix = useBootstrapPrefix((props as any).bsPrefix, prefix);
     return <Component {...props} bsPrefix={bsPrefix} />;
   });
 

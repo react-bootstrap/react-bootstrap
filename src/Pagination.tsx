@@ -4,20 +4,23 @@ import React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 import PageItem, { Ellipsis, First, Last, Next, Prev } from './PageItem';
-import { BsPrefixComponent } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface PaginationProps {
+export interface PaginationProps extends BsPrefixPropsWithChildren {
   size?: 'sm' | 'lg';
 }
 
-declare class Pagination extends BsPrefixComponent<'ul', PaginationProps> {
-  static First: typeof First;
-  static Prev: typeof Prev;
-  static Ellipsis: typeof Ellipsis;
-  static Item: typeof PageItem;
-  static Next: typeof Next;
-  static Last: typeof Last;
-}
+type Pagination = BsPrefixRefForwardingComponent<'ul', PaginationProps> & {
+  First: typeof First;
+  Prev: typeof Prev;
+  Ellipsis: typeof Ellipsis;
+  Item: typeof PageItem;
+  Next: typeof Next;
+  Last: typeof Last;
+};
 
 const propTypes = {
   /**
@@ -41,24 +44,25 @@ const propTypes = {
  * @property {PageItem} Next
  * @property {PageItem} Last
  */
-const Pagination = React.forwardRef(
-  ({ bsPrefix, className, children, size, ...props }, ref) => {
-    const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'pagination');
-    return (
-      <ul
-        ref={ref}
-        {...props}
-        className={classNames(
-          className,
-          decoratedBsPrefix,
-          size && `${decoratedBsPrefix}-${size}`,
-        )}
-      >
-        {children}
-      </ul>
-    );
-  },
-);
+const Pagination: Pagination = (React.forwardRef<
+  HTMLUListElement,
+  PaginationProps
+>(({ bsPrefix, className, children, size, ...props }: PaginationProps, ref) => {
+  const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'pagination');
+  return (
+    <ul
+      ref={ref}
+      {...props}
+      className={classNames(
+        className,
+        decoratedBsPrefix,
+        size && `${decoratedBsPrefix}-${size}`,
+      )}
+    >
+      {children}
+    </ul>
+  );
+}) as unknown) as Pagination;
 
 Pagination.propTypes = propTypes;
 

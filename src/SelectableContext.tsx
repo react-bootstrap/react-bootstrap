@@ -1,8 +1,16 @@
 import React from 'react';
 
-const SelectableContext = React.createContext(/* () => {} */);
+// TODO (apparently this is a bare "onSelect"?)
+type SelectableContextType = (key: string | null, event: any) => void;
 
-export const makeEventKey = (eventKey, href) => {
+const SelectableContext = React.createContext<SelectableContextType | null>(
+  null,
+);
+
+export const makeEventKey = (
+  eventKey: string | null,
+  href: string | null = null,
+): string | null => {
   if (eventKey != null) return String(eventKey);
   return href || null;
 };

@@ -7,18 +7,23 @@ import useMergedRefs from '@restart/hooks/useMergedRefs';
 import Button, { ButtonProps } from './Button';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
-import { BsPrefixComponent, BsPrefixComponentClass } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface DropdownToggleProps {
-  id: string;
+export interface DropdownToggleProps
+  extends BsPrefixPropsWithChildren,
+    ButtonProps {
   split?: boolean;
   childBsPrefix?: string;
+  eventKey?: null; // TODO: Used by NavDropdown?
 }
 
-declare class DropdownToggle<
-  // Need to use BsPrefixComponentClass to get proper type checking.
-  As extends React.ElementType = BsPrefixComponentClass<'button', ButtonProps>
-> extends BsPrefixComponent<As, DropdownToggleProps> {}
+type DropdownToggle = BsPrefixRefForwardingComponent<
+  'button',
+  DropdownToggleProps
+>;
 
 const propTypes = {
   /**
@@ -44,7 +49,7 @@ const propTypes = {
   childBsPrefix: PropTypes.string,
 };
 
-const DropdownToggle = React.forwardRef(
+const DropdownToggle: DropdownToggle = React.forwardRef(
   (
     {
       bsPrefix,
@@ -55,13 +60,13 @@ const DropdownToggle = React.forwardRef(
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = Button,
       ...props
-    },
+    }: DropdownToggleProps,
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-toggle');
 
     if (childBsPrefix !== undefined) {
-      props.bsPrefix = childBsPrefix;
+      (props as any).bsPrefix = childBsPrefix;
     }
 
     const [toggleProps, { toggle }] = useDropdownToggle();

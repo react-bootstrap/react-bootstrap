@@ -4,16 +4,16 @@ import React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { BsPrefixComponent } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface ButtonToolbarProps {
+export interface ButtonToolbarProps extends BsPrefixPropsWithChildren {
   role?: string;
 }
 
-declare class ButtonToolbar extends BsPrefixComponent<
-  'div',
-  ButtonToolbarProps
-> {}
+type ButtonToolbar = BsPrefixRefForwardingComponent<'div', ButtonToolbarProps>;
 
 const propTypes = {
   /**
@@ -33,15 +33,14 @@ const defaultProps = {
   role: 'toolbar',
 };
 
-const ButtonToolbar = React.forwardRef(
-  ({ bsPrefix, className, ...props }, ref) => {
-    const prefix = useBootstrapPrefix(bsPrefix, 'btn-toolbar');
+const ButtonToolbar: ButtonToolbar = React.forwardRef<
+  HTMLDivElement,
+  ButtonToolbarProps
+>(({ bsPrefix, className, ...props }, ref) => {
+  const prefix = useBootstrapPrefix(bsPrefix, 'btn-toolbar');
 
-    return (
-      <div {...props} ref={ref} className={classNames(className, prefix)} />
-    );
-  },
-);
+  return <div {...props} ref={ref} className={classNames(className, prefix)} />;
+});
 
 ButtonToolbar.displayName = 'ButtonToolbar';
 ButtonToolbar.propTypes = propTypes;

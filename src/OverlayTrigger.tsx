@@ -22,7 +22,7 @@ export interface OverlayTriggerProps
   show?: never;
 }
 
-declare class OverlayTrigger extends React.Component<OverlayTriggerProps> {}
+// declare class OverlayTrigger extends React.Component<OverlayTriggerProps> {}
 
 class RefHolder extends React.Component {
   render() {
@@ -148,15 +148,16 @@ function OverlayTrigger({
   placement,
   flip = placement && placement.indexOf('auto') !== -1,
   ...props
-}) {
+}: OverlayTriggerProps) {
   const triggerNodeRef = useRef(null);
   const timeout = useTimeout();
-  const hoverStateRef = useRef();
+  const hoverStateRef = useRef<string>('');
   const [show, setShow] = useState(!!defaultShow);
 
   const delay = normalizeDelay(propsDelay);
 
   const child = React.Children.only(children);
+  // @ts-ignore
   const { onFocus, onBlur, onClick } = child.props;
 
   const getTarget = useCallback(
@@ -194,7 +195,7 @@ function OverlayTrigger({
 
   const handleFocus = useCallback(
     (e) => {
-      handleShow(e);
+      handleShow();
       if (onFocus) onFocus(e);
     },
     [handleShow, onFocus],
@@ -202,7 +203,7 @@ function OverlayTrigger({
 
   const handleBlur = useCallback(
     (e) => {
-      handleHide(e);
+      handleHide();
       if (onBlur) onBlur(e);
     },
     [handleHide, onBlur],
@@ -253,8 +254,8 @@ function OverlayTrigger({
     },
   };
 
-  const triggers = trigger == null ? [] : [].concat(trigger);
-  const triggerProps = {};
+  const triggers: string[] = trigger == null ? [] : [].concat(trigger as any);
+  const triggerProps: any = {};
 
   if (triggers.indexOf('click') !== -1) {
     triggerProps.onClick = handleClick;
@@ -274,20 +275,22 @@ function OverlayTrigger({
     triggerProps.onMouseOut = handleMouseOut;
   }
 
+  // @ts-ignore
+  const modifiers = [ariaModifier].concat(popperConfig.modifiers || []);
   return (
     <>
       <RefHolder ref={triggerNodeRef}>
-        {cloneElement(child, triggerProps)}
+        {cloneElement(child as any, triggerProps)}
       </RefHolder>
       <Overlay
         {...props}
         popperConfig={{
           ...popperConfig,
-          modifiers: [ariaModifier].concat(popperConfig.modifiers || []),
+          modifiers,
         }}
         show={show}
         onHide={handleHide}
-        target={getTarget}
+        target={getTarget as any}
         placement={placement}
         flip={flip}
       >

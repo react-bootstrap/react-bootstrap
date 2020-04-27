@@ -6,7 +6,9 @@ import useMergedRefs from '@restart/hooks/useMergedRefs';
 import NavContext from './NavContext';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import TabContext from './TabContext';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
 const propTypes = {
@@ -28,7 +30,21 @@ const propTypes = {
   activeKey: PropTypes.any,
 };
 
-const AbstractNav = React.forwardRef(
+// TODO: is this correct?
+interface AbstractNavProps {
+  activeKey?: any;
+  as?: React.ElementType;
+  getControlledId?: any;
+  getControllerId?: any;
+  onKeyDown?: any;
+  onSelect?: any;
+  parentOnSelect?: any;
+  role?: string;
+}
+
+type AbstractNav = BsPrefixRefForwardingComponent<'ul', AbstractNavProps>;
+
+const AbstractNav: AbstractNav = React.forwardRef(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -38,7 +54,7 @@ const AbstractNav = React.forwardRef(
       role,
       onKeyDown,
       ...props
-    },
+    }: AbstractNavProps,
     ref,
   ) => {
     // A ref and forceUpdate for refocus, b/c we only want to trigger when needed
@@ -58,15 +74,17 @@ const AbstractNav = React.forwardRef(
       getControllerId = tabContext.getControllerId;
     }
 
-    const listNode = useRef(null);
+    const listNode = useRef<HTMLElement>(null);
 
     const getNextActiveChild = (offset) => {
-      if (!listNode.current) return null;
+      const currentListNode = listNode.current;
+      if (!currentListNode) return null;
 
-      let items = qsa(listNode.current, '[data-rb-event-key]:not(.disabled)');
-      let activeChild = listNode.current.querySelector('.active');
+      const items = qsa(currentListNode, '[data-rb-event-key]:not(.disabled)');
+      const activeChild = currentListNode.querySelector<HTMLElement>('.active');
+      if (!activeChild) return null;
 
-      let index = items.indexOf(activeChild);
+      const index = items.indexOf(activeChild);
       if (index === -1) return null;
 
       let nextIndex = index + offset;
@@ -107,7 +125,7 @@ const AbstractNav = React.forwardRef(
 
     useEffect(() => {
       if (listNode.current && needsRefocusRef.current) {
-        let activeChild = listNode.current.querySelector(
+        const activeChild = listNode.current.querySelector<HTMLElement>(
           '[data-rb-event-key].active',
         );
 

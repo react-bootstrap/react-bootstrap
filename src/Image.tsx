@@ -4,18 +4,20 @@ import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixAndClassNameOnlyProps } from './helpers';
 
-export interface ImageProps {
+export interface ImageProps
+  extends BsPrefixAndClassNameOnlyProps,
+    React.ImgHTMLAttributes<HTMLImageElement> {
   fluid?: boolean;
   rounded?: boolean;
   roundedCircle?: boolean;
   thumbnail?: boolean;
 }
 
-declare class Image extends BsPrefixComponent<'img', ImageProps> {}
+// declare class Image extends BsPrefixComponent<'img', ImageProps> {}
 
-const propTypes = {
+export const propTypes = {
   /**
    * @default 'img'
    */
@@ -48,7 +50,7 @@ const defaultProps = {
   thumbnail: false,
 };
 
-const Image = React.forwardRef(
+const Image = React.forwardRef<HTMLImageElement, ImageProps>(
   (
     { bsPrefix, className, fluid, rounded, roundedCircle, thumbnail, ...props },
     ref,

@@ -7,19 +7,24 @@ import AccordionToggle from './AccordionToggle';
 import SelectableContext from './SelectableContext';
 import AccordionCollapse from './AccordionCollapse';
 import AccordionContext from './AccordionContext';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+  SelectCallback,
+} from './helpers';
 
-export interface AccordionProps {
+export interface AccordionProps
+  extends Omit<React.HTMLAttributes<HTMLElement>, 'onSelect'>,
+    BsPrefixPropsWithChildren {
   activeKey?: string;
   defaultActiveKey?: string;
+  onSelect?: SelectCallback;
 }
 
-declare interface Accordion
-  extends BsPrefixRefForwardingComponent<'div', AccordionProps> {
+type Accordion = BsPrefixRefForwardingComponent<'div', AccordionProps> & {
   Toggle: typeof AccordionToggle;
   Collapse: typeof AccordionCollapse;
-}
-declare const Accordion: Accordion;
+};
 
 const propTypes = {
   /** Set a custom element for this component */
@@ -35,8 +40,8 @@ const propTypes = {
   defaultActiveKey: PropTypes.string,
 };
 
-const Accordion = React.forwardRef((props, ref) => {
-  let {
+const Accordion = (React.forwardRef((props: AccordionProps, ref) => {
+  const {
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as: Component = 'div',
     activeKey,
@@ -49,25 +54,23 @@ const Accordion = React.forwardRef((props, ref) => {
     activeKey: 'onSelect',
   });
 
-  bsPrefix = useBootstrapPrefix(bsPrefix, 'accordion');
-
   return (
-    <AccordionContext.Provider value={activeKey}>
-      <SelectableContext.Provider value={onSelect}>
+    <AccordionContext.Provider value={activeKey || null}>
+      <SelectableContext.Provider value={onSelect || null}>
         <Component
           ref={ref}
           {...controlledProps}
-          className={classNames(className, bsPrefix)}
+          className={classNames(className, useBootstrapPrefix(bsPrefix, 'accordion'))}
         >
           {children}
         </Component>
       </SelectableContext.Provider>
     </AccordionContext.Provider>
   );
-});
+}) as unknown) as Accordion;
 
+Accordion.displayName = 'Accordion';
 Accordion.propTypes = propTypes;
-
 Accordion.Toggle = AccordionToggle;
 Accordion.Collapse = AccordionCollapse;
 

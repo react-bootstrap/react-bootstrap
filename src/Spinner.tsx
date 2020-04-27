@@ -3,27 +3,19 @@ import classNames from 'classnames';
 import React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixPropsWithChildren } from './helpers';
+import { Variant } from './types';
 
-export interface SpinnerProps {
+export interface SpinnerProps extends BsPrefixPropsWithChildren {
   animation: 'border' | 'grow';
   role?: string;
   size?: 'sm';
-  variant?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'light'
-    | 'dark';
-  bsPrefix?: string;
+  variant?: Variant;
 }
 
-declare class Spinner<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, SpinnerProps> {}
+// declare class Spinner<
+//   As extends React.ElementType = 'div'
+// > extends BsPrefixComponent<As, SpinnerProps> {}
 
 const propTypes = {
   /**
@@ -81,7 +73,7 @@ const Spinner = React.forwardRef(
       as: Component = 'div',
       className,
       ...props
-    },
+    }: SpinnerProps,
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'spinner');
@@ -104,7 +96,7 @@ const Spinner = React.forwardRef(
   },
 );
 
-Spinner.propTypes = propTypes;
+Spinner.propTypes = propTypes as any;
 Spinner.displayName = 'Spinner';
 
 export default Spinner;

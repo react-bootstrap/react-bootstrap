@@ -3,42 +3,50 @@ import css from 'dom-helpers/css';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Transition, { ENTERED, ENTERING, EXITED, EXITING } from 'react-transition-group/Transition';
+import Transition, {
+  ENTERED,
+  ENTERING,
+  EXITED,
+  EXITING,
+} from 'react-transition-group/Transition';
 import { TransitionCallbacks } from './helpers';
 import createChainedFunction from './createChainedFunction';
 import triggerBrowserReflow from './triggerBrowserReflow';
 
+type Dimension = 'height' | 'width';
+
 export interface CollapseProps
   extends TransitionCallbacks,
     React.ClassAttributes<Collapse> {
+  className?: string;
   in?: boolean;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
   appear?: boolean;
   timeout?: number;
-  dimension?: 'height' | 'width' | (() => 'height' | 'width');
+  dimension?: Dimension | (() => Dimension);
   getDimensionValue?: (
-    dimension: number,
+    dimension: Dimension,
     element: React.ReactElement,
   ) => number;
   role?: string;
 }
 
-declare class Collapse extends React.Component<CollapseProps> {}
-
-const MARGINS = {
+const MARGINS: { [d in Dimension]: string[] } = {
   height: ['marginTop', 'marginBottom'],
   width: ['marginLeft', 'marginRight'],
 };
 
-function getDimensionValue(dimension, elem) {
-  let offset = `offset${dimension[0].toUpperCase()}${dimension.slice(1)}`;
-  let value = elem[offset];
-  let margins = MARGINS[dimension];
+function getDimensionValue(dimension: Dimension, elem: HTMLElement) {
+  const offset = `offset${dimension[0].toUpperCase()}${dimension.slice(1)}`;
+  const value = elem[offset];
+  const margins = MARGINS[dimension];
 
   return (
     value +
+    // @ts-ignore
     parseInt(css(elem, margins[0]), 10) +
+    // @ts-ignore
     parseInt(css(elem, margins[1]), 10)
   );
 }
@@ -139,16 +147,14 @@ const defaultProps = {
   mountOnEnter: false,
   unmountOnExit: false,
   appear: false,
-
   dimension: 'height',
-  getDimensionValue,
 };
 
-class Collapse extends React.Component {
-  getDimension() {
+class Collapse extends React.Component<CollapseProps, never> {
+  getDimension(): Dimension {
     return typeof this.props.dimension === 'function'
       ? this.props.dimension()
-      : this.props.dimension;
+      : this.props.dimension || 'height';
   }
 
   /* -- Expanding -- */
@@ -168,10 +174,9 @@ class Collapse extends React.Component {
   /* -- Collapsing -- */
   handleExit = (elem) => {
     const dimension = this.getDimension();
-    elem.style[dimension] = `${this.props.getDimensionValue(
-      dimension,
-      elem,
-    )}px`;
+    // TODO: TS hack :(
+    const get = this.props.getDimensionValue || getDimensionValue;
+    elem.style[dimension] = `${get(dimension, elem)}px`;
     triggerBrowserReflow(elem);
   };
 
@@ -210,6 +215,7 @@ class Collapse extends React.Component {
     const handleExiting = createChainedFunction(this.handleExiting, onExiting);
 
     return (
+      // @ts-ignore
       <Transition
         addEndListener={transitionEnd}
         {...props}
@@ -220,23 +226,25 @@ class Collapse extends React.Component {
         onExit={handleExit}
         onExiting={handleExiting}
       >
-        {(state, innerProps) =>
-          React.cloneElement(children, {
+        {(state, innerProps) => {
+          return React.cloneElement(children as any, {
             ...innerProps,
             className: classNames(
               className,
-              children.props.className,
+              (children as any).props.className,
               collapseStyles[state],
               this.getDimension() === 'width' && 'width',
             ),
-          })
-        }
+          });
+        }}
       </Transition>
     );
   }
 }
 
+// @ts-ignore
 Collapse.propTypes = propTypes;
+// @ts-ignore
 Collapse.defaultProps = defaultProps;
 
 export default Collapse;

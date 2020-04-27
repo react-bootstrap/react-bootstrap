@@ -4,17 +4,13 @@ import React from 'react';
 
 import createWithBsPrefix from './createWithBsPrefix';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export class MediaBody<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
-
-declare class Media<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {
-  static Body: typeof MediaBody;
-}
+const MediaBody = createWithBsPrefix('media-body');
+type MediaProps = BsPrefixProps;
+type Media = BsPrefixRefForwardingComponent<'div', MediaProps> & {
+  Body: typeof MediaBody;
+};
 
 const propTypes = {
   /**
@@ -25,9 +21,12 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-const Media = React.forwardRef(
+const Media: Media = (React.forwardRef(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-  ({ bsPrefix, className, as: Component = 'div', ...props }, ref) => {
+  (
+    { bsPrefix, className, as: Component = 'div', ...props }: MediaProps,
+    ref,
+  ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'media');
 
     return (
@@ -38,11 +37,10 @@ const Media = React.forwardRef(
       />
     );
   },
-);
+) as unknown) as Media;
 
 Media.displayName = 'Media';
 Media.propTypes = propTypes;
-
-Media.Body = createWithBsPrefix('media-body');
+Media.Body = MediaBody;
 
 export default Media;

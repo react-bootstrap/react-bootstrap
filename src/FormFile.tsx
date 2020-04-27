@@ -7,10 +7,17 @@ import FormFileInput from './FormFileInput';
 import FormFileLabel from './FormFileLabel';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import {
+  BsCustomPrefixProps,
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface FormFileProps {
-  bsCustomPrefix?: string;
+export interface FormFileProps
+  extends BsPrefixPropsWithChildren,
+    BsCustomPrefixProps,
+    Pick<React.HTMLAttributes<HTMLElement>, 'style'> {
+  inputAs?: React.ElementType;
   id?: string;
   disabled?: boolean;
   label?: React.ReactNode;
@@ -19,15 +26,13 @@ export interface FormFileProps {
   isInvalid?: boolean;
   feedback?: React.ReactNode;
   lang?: string;
+  'data-browse'?: any; // ???
 }
 
-declare interface FormFile
-  extends BsPrefixRefForwardingComponent<'input', FormFileProps> {
+type FormFile = BsPrefixRefForwardingComponent<'input', FormFileProps> & {
   Input: typeof FormFileInput;
   Label: typeof FormFileLabel;
-}
-
-declare const FormFile: FormFile;
+};
 
 const propTypes = {
   /**
@@ -126,7 +131,7 @@ const defaultProps = {
   isInvalid: false,
 };
 
-const FormFile = React.forwardRef(
+const FormFile: FormFile = (React.forwardRef(
   (
     {
       id,
@@ -147,7 +152,7 @@ const FormFile = React.forwardRef(
       as: Component = 'div',
       inputAs = 'input',
       ...props
-    },
+    }: FormFileProps,
     ref,
   ) => {
     const [prefix, defaultPrefix] = custom
@@ -218,13 +223,10 @@ const FormFile = React.forwardRef(
       </FormContext.Provider>
     );
   },
-);
+) as unknown) as FormFile;
 
 FormFile.displayName = 'FormFile';
 FormFile.propTypes = propTypes;
 FormFile.defaultProps = defaultProps;
-
-FormFile.Input = FormFileInput;
-FormFile.Label = FormFileLabel;
 
 export default FormFile;

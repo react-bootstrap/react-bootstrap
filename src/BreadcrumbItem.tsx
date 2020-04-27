@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 
 import SafeAnchor from './SafeAnchor';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixComponent } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface BreadcrumbItemProps {
+export interface BreadcrumbItemProps extends BsPrefixPropsWithChildren {
   active?: boolean;
   href?: string;
   linkAs?: React.ElementType;
@@ -15,9 +18,7 @@ export interface BreadcrumbItemProps {
   linkProps?: React.LinkHTMLAttributes<HTMLLinkElement>;
 }
 
-declare class BreadcrumbItem<
-  As extends React.ElementType = 'li'
-> extends BsPrefixComponent<As, BreadcrumbItemProps> {}
+type BreadcrumbItem = BsPrefixRefForwardingComponent<'li', BreadcrumbItemProps>;
 
 const propTypes = {
   /**
@@ -58,7 +59,7 @@ const defaultProps = {
   linkProps: {},
 };
 
-const BreadcrumbItem = React.forwardRef(
+const BreadcrumbItem: BreadcrumbItem = React.forwardRef(
   (
     {
       bsPrefix,
@@ -73,7 +74,7 @@ const BreadcrumbItem = React.forwardRef(
       title,
       target,
       ...props
-    },
+    }: BreadcrumbItemProps,
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'breadcrumb-item');

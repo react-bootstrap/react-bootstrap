@@ -1,16 +1,15 @@
 import classNames from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface FeedbackProps {
+export interface FeedbackProps extends BsPrefixProps {
+  className?: string;
   bsPrefix?: never;
   type?: 'valid' | 'invalid';
 }
 
-declare class Feedback<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, FeedbackProps> {}
+type Feedback = BsPrefixRefForwardingComponent<'div', FeedbackProps>;
 
 const propTypes = {
   /**
@@ -23,12 +22,15 @@ const propTypes = {
 };
 
 const defaultProps = {
-  type: 'valid',
+  type: 'valid' as 'valid',
 };
 
-const Feedback = React.forwardRef(
+const Feedback: Feedback = React.forwardRef(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-  ({ as: Component = 'div', className, type, ...props }, ref) => (
+  (
+    { as: Component = 'div', className, type, ...props }: FeedbackProps,
+    ref,
+  ) => (
     <Component
       {...props}
       ref={ref}

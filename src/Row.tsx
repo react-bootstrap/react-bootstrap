@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixComponent } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
 type RowColWidth =
   | number
@@ -22,7 +25,7 @@ type RowColWidth =
   | '12';
 type RowColumns = RowColWidth | { cols?: RowColWidth };
 
-export interface RowProps {
+export interface RowProps extends BsPrefixPropsWithChildren {
   noGutters?: boolean;
   xs?: RowColumns;
   sm?: RowColumns;
@@ -31,9 +34,7 @@ export interface RowProps {
   xl?: RowColumns;
 }
 
-declare class Row<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, RowProps> {}
+type Row = BsPrefixRefForwardingComponent<'div', RowProps>;
 
 const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm', 'xs'];
 const rowColWidth = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
@@ -95,7 +96,7 @@ const defaultProps = {
   noGutters: false,
 };
 
-const Row = React.forwardRef(
+const Row: Row = React.forwardRef<HTMLDivElement, RowProps>(
   (
     {
       bsPrefix,
@@ -104,12 +105,12 @@ const Row = React.forwardRef(
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
       ...props
-    },
+    }: RowProps,
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'row');
     const sizePrefix = `${decoratedBsPrefix}-cols`;
-    const classes = [];
+    const classes: string[] = [];
 
     DEVICE_SIZES.forEach((brkPoint) => {
       const propValue = props[brkPoint];
@@ -122,7 +123,7 @@ const Row = React.forwardRef(
         cols = propValue;
       }
 
-      let infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
+      const infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
 
       if (cols != null) classes.push(`${sizePrefix}${infix}-${cols}`);
     });

@@ -4,16 +4,13 @@ import React, { useContext } from 'react';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { BsPrefixRefForwardingComponent } from './helpers';
+import { BsPrefixProps } from './helpers';
 
-export interface FormCheckLabelProps {
-  htmlFor?: string;
+export interface FormCheckLabelProps
+  extends React.LabelHTMLAttributes<HTMLLabelElement>,
+    BsPrefixProps {
+  bsCustomPrefix?: string;
 }
-
-declare interface FormCheckLabel
-  extends BsPrefixRefForwardingComponent<'label', FormCheckLabelProps> {}
-
-declare const FormCheckLabel: FormCheckLabel;
 
 const propTypes = {
   /**
@@ -32,7 +29,7 @@ const propTypes = {
   htmlFor: PropTypes.string,
 };
 
-const FormCheckLabel = React.forwardRef(
+const FormCheckLabel = React.forwardRef<HTMLLabelElement, FormCheckLabelProps>(
   ({ bsPrefix, bsCustomPrefix, className, htmlFor, ...props }, ref) => {
     const { controlId, custom } = useContext(FormContext);
     const [prefix, defaultPrefix] = custom

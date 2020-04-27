@@ -3,17 +3,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixComponent } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface ResponsiveEmbedProps {
+export interface ResponsiveEmbedProps extends BsPrefixPropsWithChildren {
   children: React.ReactChild;
   aspectRatio?: '21by9' | '16by9' | '4by3' | '1by1';
 }
 
-declare class ResponsiveEmbed extends BsPrefixComponent<
+type ResponsiveEmbed = BsPrefixRefForwardingComponent<
   'div',
   ResponsiveEmbedProps
-> {}
+>;
 
 const propTypes = {
   /**
@@ -33,11 +36,23 @@ const propTypes = {
 };
 
 const defaultProps = {
-  aspectRatio: '1by1',
+  aspectRatio: '1by1' as '1by1',
 };
 
-const ResponsiveEmbed = React.forwardRef(
-  ({ bsPrefix, className, children, aspectRatio, ...props }, ref) => {
+const ResponsiveEmbed: ResponsiveEmbed = React.forwardRef<
+  HTMLDivElement,
+  ResponsiveEmbedProps
+>(
+  (
+    {
+      bsPrefix,
+      className,
+      children,
+      aspectRatio,
+      ...props
+    }: ResponsiveEmbedProps,
+    ref,
+  ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'embed-responsive');
     const child = React.Children.only(children);
     return (
@@ -50,9 +65,9 @@ const ResponsiveEmbed = React.forwardRef(
           aspectRatio && `${decoratedBsPrefix}-${aspectRatio}`,
         )}
       >
-        {React.cloneElement(child, {
+        {React.cloneElement(child as any, {
           className: classNames(
-            child.props.className,
+            (child as any).props.className,
             `${decoratedBsPrefix}-item`,
           ),
         })}

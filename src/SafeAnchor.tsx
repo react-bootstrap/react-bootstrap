@@ -2,20 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import createChainedFunction from './createChainedFunction';
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface SafeAnchorProps {
+export interface SafeAnchorProps extends BsPrefixProps {
   href?: string;
   onClick?: React.MouseEventHandler<this>;
   onKeyDown?: React.KeyboardEventHandler<this>;
   disabled?: boolean;
   role?: string;
-  tabIndex?: number | string;
+  tabIndex?: number;
 }
 
-declare class SafeAnchor<
-  As extends React.ElementType = 'a'
-> extends BsPrefixComponent<As, SafeAnchorProps> {}
+type SafeAnchor = BsPrefixRefForwardingComponent<'a', SafeAnchorProps>;
 
 const propTypes = {
   href: PropTypes.string,
@@ -42,7 +40,7 @@ function isTrivialHref(href) {
  * button its accessible. It also emulates input `disabled` behavior for
  * links, which is usually desirable for Buttons, NavItems, DropdownItems, etc.
  */
-const SafeAnchor = React.forwardRef(
+const SafeAnchor: SafeAnchor = React.forwardRef(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -50,7 +48,7 @@ const SafeAnchor = React.forwardRef(
       disabled,
       onKeyDown,
       ...props
-    },
+    }: SafeAnchorProps,
     ref,
   ) => {
     const handleClick = (event) => {

@@ -8,9 +8,13 @@ import { useUncontrolled } from 'uncontrollable';
 import { useBootstrapPrefix } from './ThemeProvider';
 import AbstractNav from './AbstractNav';
 import ListGroupItem from './ListGroupItem';
-import { BsPrefixComponent, SelectCallback } from './helpers';
+import {
+  BsPrefixProps,
+  BsPrefixRefForwardingComponent,
+  SelectCallback,
+} from './helpers';
 
-export interface ListGroupProps {
+export interface ListGroupProps extends BsPrefixProps {
   variant?: 'flush';
   horizontal?: boolean | 'sm' | 'md' | 'lg' | 'xl';
   activeKey?: unknown;
@@ -18,11 +22,9 @@ export interface ListGroupProps {
   onSelect?: SelectCallback;
 }
 
-declare class ListGroup<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ListGroupProps> {
-  static Item: typeof ListGroupItem;
-}
+type ListGroup = BsPrefixRefForwardingComponent<'div', ListGroupProps> & {
+  Item: typeof ListGroupItem;
+};
 
 const propTypes = {
   /**
@@ -35,7 +37,7 @@ const propTypes = {
    *
    * @type {('flush')}
    */
-  variant: PropTypes.oneOf(['flush', null]),
+  variant: PropTypes.oneOf(['flush', undefined]),
 
   /**
    * Changes the flow of the list group items from vertical to horizontal.
@@ -44,7 +46,7 @@ const propTypes = {
    * makes the list group horizontal starting at that breakpoint’s `min-width`.
    * @type {(true|'sm'|'md'|'lg'|'xl')}
    */
-  horizontal: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', null]),
+  horizontal: PropTypes.oneOf([true, 'sm', 'md', 'lg', 'xl', undefined]),
 
   /**
    * You can use a custom element type for this component.
@@ -53,14 +55,14 @@ const propTypes = {
 };
 
 const defaultProps = {
-  variant: null,
-  horizontal: null,
+  variant: undefined,
+  horizontal: undefined,
 };
 
-const ListGroup = React.forwardRef((props, ref) => {
-  let {
+const ListGroup: ListGroup = (React.forwardRef((props: ListGroupProps, ref) => {
+  const {
     className,
-    bsPrefix,
+    bsPrefix: initialBsPrefix,
     variant,
     horizontal,
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
@@ -70,7 +72,7 @@ const ListGroup = React.forwardRef((props, ref) => {
     activeKey: 'onSelect',
   });
 
-  bsPrefix = useBootstrapPrefix(bsPrefix, 'list-group');
+  const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'list-group');
 
   let horizontalVariant;
   if (horizontal) {
@@ -98,7 +100,7 @@ const ListGroup = React.forwardRef((props, ref) => {
       )}
     />
   );
-});
+}) as unknown) as ListGroup;
 
 ListGroup.propTypes = propTypes;
 ListGroup.defaultProps = defaultProps;

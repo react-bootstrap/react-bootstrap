@@ -6,9 +6,12 @@ import warning from 'warning';
 import Col, { ColProps } from './Col';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-interface FormLabelBaseProps {
+interface FormLabelBaseProps extends BsPrefixPropsWithChildren {
   htmlFor?: string;
   srOnly?: boolean;
 }
@@ -23,10 +26,7 @@ export interface FormLabelWithColProps extends FormLabelBaseProps, ColProps {
 
 export type FormLabelProps = FormLabelWithColProps | FormLabelOwnProps;
 
-declare interface FormLabel
-  extends BsPrefixRefForwardingComponent<'label', FormLabelProps> {}
-
-declare const FormLabel: FormLabel;
+type FormLabel = BsPrefixRefForwardingComponent<'label', FormLabelProps>;
 
 const propTypes = {
   /**
@@ -70,7 +70,7 @@ const defaultProps = {
   srOnly: false,
 };
 
-const FormLabel = React.forwardRef(
+const FormLabel: FormLabel = React.forwardRef(
   (
     {
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595

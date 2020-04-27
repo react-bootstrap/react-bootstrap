@@ -3,7 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixComponent } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
 type NumberAttr =
   | number
@@ -24,7 +27,7 @@ type ColSpec =
   | ColSize
   | { span?: ColSize; offset?: NumberAttr; order?: NumberAttr };
 
-export interface ColProps {
+export interface ColProps extends BsPrefixPropsWithChildren {
   xs?: ColSpec;
   sm?: ColSpec;
   md?: ColSpec;
@@ -32,9 +35,7 @@ export interface ColProps {
   xl?: ColSpec;
 }
 
-declare class Col<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ColProps> {}
+type Col = BsPrefixRefForwardingComponent<'div', ColProps>;
 
 const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm', 'xs'];
 const colSize = PropTypes.oneOfType([
@@ -102,15 +103,15 @@ const propTypes = {
   xl: column,
 };
 
-const Col = React.forwardRef(
+const Col: Col = React.forwardRef(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-  ({ bsPrefix, className, as: Component = 'div', ...props }, ref) => {
+  ({ bsPrefix, className, as: Component = 'div', ...props }: ColProps, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'col');
     const spans: string[] = [];
     const classes: string[] = [];
 
     DEVICE_SIZES.forEach((brkPoint) => {
-      let propValue = props[brkPoint];
+      const propValue = props[brkPoint];
       delete props[brkPoint];
 
       let span, offset, order;
@@ -120,7 +121,7 @@ const Col = React.forwardRef(
         span = propValue;
       }
 
-      let infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
+      const infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
 
       if (span != null)
         spans.push(

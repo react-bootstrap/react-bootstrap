@@ -4,43 +4,37 @@ import PropTypes from 'prop-types';
 import { elementType } from 'prop-types-extra';
 import { useUncontrolled } from 'uncontrollable';
 import useEventCallback from '@restart/hooks/useEventCallback';
-
-import createWithBsPrefix from './createWithBsPrefix';
-import divWithClassName from './divWithClassName';
 import { useBootstrapPrefix } from './ThemeProvider';
 import Fade from './Fade';
 import CloseButton from './CloseButton';
-import SafeAnchor, { SafeAnchorProps } from './SafeAnchor';
-import { BsPrefixComponent, BsPrefixComponentClass } from './helpers';
-
-export class AlertLink<
-  // Need to use BsPrefixComponentClass to get proper type checking.
-  As extends React.ElementType = BsPrefixComponentClass<'a', SafeAnchorProps>
-> extends BsPrefixComponent<As> {}
-
-export class AlertHeading<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
+import { Variant } from './types';
+import divWithClassName from './divWithClassName';
+import createWithBsPrefix from './createWithBsPrefix';
+import SafeAnchor from './SafeAnchor';
+import { TransitionType } from './helpers';
 
 export interface AlertProps extends React.HTMLProps<HTMLDivElement> {
   bsPrefix?: string;
-  variant?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'dark'
-    | 'light';
+  variant?: Variant;
   dismissible?: boolean;
   show?: boolean;
-  onClose?: () => void;
+  onClose?: (a: any, b: any) => void;
   closeLabel?: string;
-  transition?: React.ElementType;
+  transition?: TransitionType;
 }
 
-declare const Alert: React.ForwardRefExoticComponent<AlertProps> & {
+const DivStyledAsH4 = divWithClassName('h4');
+DivStyledAsH4.displayName = 'DivStyledAsH4';
+
+const AlertHeading = createWithBsPrefix('alert-heading', {
+  Component: DivStyledAsH4,
+});
+
+const AlertLink = createWithBsPrefix('alert-link', {
+  Component: SafeAnchor,
+});
+
+type Alert = React.ForwardRefExoticComponent<AlertProps> & {
   Link: typeof AlertLink;
   Heading: typeof AlertHeading;
 };
@@ -93,68 +87,63 @@ const defaultProps = {
   closeLabel: 'Close alert',
 };
 
-const controllables = {
-  show: 'onClose',
-};
+const Alert = (React.forwardRef<HTMLDivElement, AlertProps>(
+  (uncontrolledProps: AlertProps, ref) => {
+    const {
+      bsPrefix,
+      show,
+      closeLabel,
+      className,
+      children,
+      variant,
+      onClose,
+      dismissible,
+      transition,
+      ...props
+    } = useUncontrolled(uncontrolledProps, {
+      show: 'onClose',
+    });
 
-const Alert = React.forwardRef((uncontrolledProps, ref) => {
-  const {
-    bsPrefix,
-    show,
-    closeLabel,
-    className,
-    children,
-    variant,
-    onClose,
-    dismissible,
-    transition: Transition,
-    ...props
-  } = useUncontrolled(uncontrolledProps, controllables);
+    const prefix = useBootstrapPrefix(bsPrefix, 'alert');
+    const handleClose = useEventCallback((e) => {
+      if (onClose) {
+        onClose(false, e);
+      }
+    });
+    const Transition = transition === true ? Fade : transition;
+    const alert = (
+      <div
+        role="alert"
+        {...(Transition ? props : undefined)}
+        ref={ref}
+        className={classNames(
+          className,
+          prefix,
+          variant && `${prefix}-${variant}`,
+          dismissible && `${prefix}-dismissible`,
+        )}
+      >
+        {dismissible && (
+          <CloseButton onClick={handleClose} label={closeLabel} />
+        )}
+        {children}
+      </div>
+    );
 
-  const prefix = useBootstrapPrefix(bsPrefix, 'alert');
-  const handleClose = useEventCallback((e) => {
-    onClose(false, e);
-  });
+    if (!Transition) return show ? alert : null;
 
-  const alert = (
-    <div
-      role="alert"
-      {...(Transition ? props : undefined)}
-      ref={ref}
-      className={classNames(
-        className,
-        prefix,
-        variant && `${prefix}-${variant}`,
-        dismissible && `${prefix}-dismissible`,
-      )}
-    >
-      {dismissible && <CloseButton onClick={handleClose} label={closeLabel} />}
-      {children}
-    </div>
-  );
-
-  if (!Transition) return show ? alert : null;
-
-  return (
-    <Transition unmountOnExit {...props} in={show}>
-      {alert}
-    </Transition>
-  );
-});
-
-const DivStyledAsH4 = divWithClassName('h4');
-DivStyledAsH4.displayName = 'DivStyledAsH4';
+    return (
+      <Transition unmountOnExit {...props} ref={undefined} in={show}>
+        {alert}
+      </Transition>
+    );
+  },
+) as unknown) as Alert;
 
 Alert.displayName = 'Alert';
+Alert.defaultProps = defaultProps as any;
 Alert.propTypes = propTypes;
-Alert.defaultProps = defaultProps;
-
-Alert.Link = createWithBsPrefix('alert-link', {
-  Component: SafeAnchor,
-});
-
-Alert.Heading = createWithBsPrefix('alert-heading', {
-  Component: DivStyledAsH4,
-});
+Alert.Link = AlertLink;
+Alert.Heading = AlertHeading;
 
 export default Alert;

@@ -1,28 +1,22 @@
-import { BsPrefixComponent } from './helpers';
 /* eslint-disable react/no-multi-comp */
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
 import SafeAnchor from './SafeAnchor';
 
-export interface PageItemProps {
+export interface PageItemProps extends BsPrefixPropsWithChildren {
+  style?: any;
   disabled?: boolean;
   active?: boolean;
   activeLabel?: string;
 }
 
-declare class PageItem extends BsPrefixComponent<
-  typeof SafeAnchor,
-  PageItemProps
-> {}
-
-
-export class First extends PageItem {}
-export class Prev extends PageItem {}
-export class Ellipsis extends PageItem {}
-export class Next extends PageItem {}
-export class Last extends PageItem {}
+type PageItem = BsPrefixRefForwardingComponent<'li', PageItemProps>;
 
 const propTypes = {
   /** Disables the PageItem */
@@ -41,9 +35,17 @@ const defaultProps = {
   activeLabel: '(current)',
 };
 
-const PageItem = React.forwardRef(
+const PageItem: PageItem = React.forwardRef<HTMLLIElement, PageItemProps>(
   (
-    { active, disabled, className, style, activeLabel, children, ...props },
+    {
+      active,
+      disabled,
+      className,
+      style,
+      activeLabel,
+      children,
+      ...props
+    }: PageItemProps,
     ref,
   ) => {
     const Component = active || disabled ? 'span' : SafeAnchor;
@@ -76,7 +78,7 @@ function createButton(name, defaultValue, label = name) {
 
     render() {
       const { children, ...props } = this.props;
-      delete props.active;
+      delete (props as any).active;
       return (
         <PageItem {...props}>
           <span aria-hidden="true">{children || defaultValue}</span>

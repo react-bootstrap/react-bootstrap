@@ -5,8 +5,14 @@ import classNames from 'classnames';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import Transition from 'react-transition-group/Transition';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
-import { BsPrefixComponent } from './helpers';
+import React, {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useUncontrolled } from 'uncontrollable';
 import CarouselCaption from './CarouselCaption';
 import CarouselItem from './CarouselItem';
@@ -14,9 +20,22 @@ import { map } from './ElementChildren';
 import SafeAnchor from './SafeAnchor';
 import { useBootstrapPrefix } from './ThemeProvider';
 import triggerBrowserReflow from './triggerBrowserReflow';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface CarouselProps {
-  bsPrefix?: string;
+export interface CarouselProps
+  extends BsPrefixPropsWithChildren,
+    Pick<
+      React.DOMAttributes<HTMLElement>,
+      | 'onKeyDown'
+      | 'onMouseOver'
+      | 'onMouseOut'
+      | 'onTouchStart'
+      | 'onTouchMove'
+      | 'onTouchEnd'
+    > {
   slide?: boolean;
   fade?: boolean;
   controls?: boolean;
@@ -37,12 +56,10 @@ export interface CarouselProps {
   nextLabel?: React.ReactNode;
 }
 
-declare class Carousel<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, CarouselProps> {
-  static Item: typeof CarouselItem;
-  static Caption: typeof CarouselCaption;
-}
+type Carousel = BsPrefixRefForwardingComponent<'div', CarouselProps> & {
+  Caption: typeof CarouselCaption;
+  Item: typeof CarouselItem;
+};
 
 const SWIPE_THRESHOLD = 40;
 
@@ -158,7 +175,7 @@ const defaultProps = {
   defaultActiveIndex: 0,
   interval: 5000,
   keyboard: true,
-  pause: 'hover',
+  pause: 'hover' as CarouselProps['pause'],
   wrap: true,
   touch: true,
 
@@ -188,7 +205,7 @@ function isVisible(element) {
   );
 }
 
-const Carousel = React.forwardRef((uncontrolledProps, ref) => {
+function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
   const {
     // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
     as: Component = 'div',
@@ -225,25 +242,27 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
 
   const prefix = useBootstrapPrefix(bsPrefix, 'carousel');
 
-  const nextDirectionRef = useRef(null);
+  const nextDirectionRef = useRef<string | null>(null);
   const [direction, setDirection] = useState('next');
 
   const [isSliding, setIsSliding] = useState(false);
-  const [renderedActiveIndex, setRenderedActiveIndex] = useState(activeIndex);
+  const [renderedActiveIndex, setRenderedActiveIndex] = useState<number>(
+    activeIndex || 0,
+  );
 
   if (!isSliding && activeIndex !== renderedActiveIndex) {
     if (nextDirectionRef.current) {
       setDirection(nextDirectionRef.current);
       nextDirectionRef.current = null;
     } else {
-      setDirection(activeIndex > renderedActiveIndex ? 'next' : 'prev');
+      setDirection((activeIndex || 0) > renderedActiveIndex ? 'next' : 'prev');
     }
 
     if (slide) {
       setIsSliding(true);
     }
 
-    setRenderedActiveIndex(activeIndex);
+    setRenderedActiveIndex(activeIndex || 0);
   }
 
   const numChildren = React.Children.toArray(children).filter(
@@ -267,13 +286,15 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
 
       nextDirectionRef.current = 'prev';
 
-      onSelect(nextActiveIndex, event);
+      if (onSelect) {
+        onSelect(nextActiveIndex, event);
+      }
     },
     [isSliding, renderedActiveIndex, onSelect, wrap, numChildren],
   );
 
   // This is used in the setInterval, so it should not invalidate.
-  const next = useEventCallback((event) => {
+  const next = useEventCallback((event?) => {
     if (isSliding) {
       return;
     }
@@ -289,7 +310,9 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
 
     nextDirectionRef.current = 'next';
 
-    onSelect(nextActiveIndex, event);
+    if (onSelect) {
+      onSelect(nextActiveIndex, event);
+    }
   });
 
   const elementRef = useRef();
@@ -445,7 +468,7 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
 
       touchUnpauseTimeout.set(() => {
         setPausedOnTouch(false);
-      }, interval);
+      }, interval || undefined);
 
       if (onTouchEnd) {
         onTouchEnd(event);
@@ -457,20 +480,22 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
   const shouldPlay =
     interval != null && !pausedOnHover && !pausedOnTouch && !isSliding;
 
-  const intervalHandleRef = useRef();
+  const intervalHandleRef = useRef<number | null>();
 
   useEffect(() => {
     if (!shouldPlay) {
       return undefined;
     }
 
-    intervalHandleRef.current = setInterval(
+    intervalHandleRef.current = window.setInterval(
       document.visibilityState ? nextWhenVisible : next,
-      interval,
+      interval || undefined,
     );
 
     return () => {
-      clearInterval(intervalHandleRef.current);
+      if (intervalHandleRef.current !== null) {
+        clearInterval(intervalHandleRef.current);
+      }
     };
   }, [shouldPlay, next, interval, nextWhenVisible]);
 
@@ -478,7 +503,9 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
     () =>
       indicators &&
       Array.from({ length: numChildren }, (_, index) => (event) => {
-        onSelect(index, event);
+        if (onSelect) {
+          onSelect(index, event);
+        }
       }),
     [indicators, numChildren, onSelect],
   );
@@ -502,11 +529,11 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
     >
       {indicators && (
         <ol className={`${prefix}-indicators`}>
-          {map(children, (child, index) => (
+          {map(children, (_child, index) => (
             <li
               key={index}
-              className={index === renderedActiveIndex ? 'active' : null}
-              onClick={indicatorOnClicks[index]}
+              className={index === renderedActiveIndex ? 'active' : undefined}
+              onClick={indicatorOnClicks ? indicatorOnClicks[index] : undefined}
             />
           ))}
         </ol>
@@ -519,8 +546,8 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
           return slide ? (
             <Transition
               in={isActive}
-              onEnter={isActive ? handleEnter : null}
-              onEntered={isActive ? handleEntered : null}
+              onEnter={isActive ? handleEnter : undefined}
+              onEntered={isActive ? handleEntered : undefined}
               addEndListener={transitionEnd}
             >
               {(status) =>
@@ -564,7 +591,11 @@ const Carousel = React.forwardRef((uncontrolledProps, ref) => {
       )}
     </Component>
   );
-});
+}
+
+const Carousel: Carousel = (React.forwardRef(
+  CarouselFunc,
+) as unknown) as Carousel;
 
 Carousel.displayName = 'Carousel';
 Carousel.propTypes = propTypes;

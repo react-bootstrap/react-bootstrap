@@ -3,18 +3,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixComponent } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface ButtonGroupProps {
+export interface ButtonGroupProps extends BsPrefixPropsWithChildren {
   role?: string;
   size?: 'sm' | 'lg';
   toggle?: boolean;
   vertical?: boolean;
 }
 
-declare class ButtonGroup<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ButtonGroupProps> {}
+type ButtonGroup = BsPrefixRefForwardingComponent<'div', ButtonGroupProps>;
 
 const propTypes = {
   /**
@@ -55,36 +56,39 @@ const defaultProps = {
   role: 'group',
 };
 
-const ButtonGroup = React.forwardRef((props, ref) => {
-  const {
-    bsPrefix,
-    size,
-    toggle,
-    vertical,
-    className,
-    // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-    as: Component = 'div',
-    ...rest
-  } = props;
+const ButtonGroup: ButtonGroup = React.forwardRef(
+  (
+    {
+      bsPrefix,
+      size,
+      toggle,
+      vertical,
+      className,
+      // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
+      as: Component = 'div',
+      ...rest
+    }: ButtonGroupProps,
+    ref,
+  ) => {
+    const prefix = useBootstrapPrefix(bsPrefix, 'btn-group');
+    let baseClass = prefix;
 
-  const prefix = useBootstrapPrefix(bsPrefix, 'btn-group');
-  let baseClass = prefix;
+    if (vertical) baseClass = `${prefix}-vertical`;
 
-  if (vertical) baseClass = `${prefix}-vertical`;
-
-  return (
-    <Component
-      {...rest}
-      ref={ref}
-      className={classNames(
-        className,
-        baseClass,
-        size && `${prefix}-${size}`,
-        toggle && `${prefix}-toggle`,
-      )}
-    />
-  );
-});
+    return (
+      <Component
+        {...rest}
+        ref={ref}
+        className={classNames(
+          className,
+          baseClass,
+          size && `${prefix}-${size}`,
+          toggle && `${prefix}-toggle`,
+        )}
+      />
+    );
+  },
+);
 
 ButtonGroup.displayName = 'ButtonGroup';
 ButtonGroup.propTypes = propTypes;

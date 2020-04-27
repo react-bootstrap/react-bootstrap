@@ -6,14 +6,16 @@ import warning from 'warning';
 import Feedback from './Feedback';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
 type FormControlElement =
   | HTMLInputElement
   | HTMLSelectElement
   | HTMLTextAreaElement;
 
-export interface FormControlProps {
+export interface FormControlProps extends BsPrefixProps {
+  bsCustomPrefix?: string;
+  htmlSize?: number;
   size?: 'sm' | 'lg';
   plaintext?: boolean;
   readOnly?: boolean;
@@ -27,10 +29,9 @@ export interface FormControlProps {
   isInvalid?: boolean;
 }
 
-declare interface FormControl
-  extends BsPrefixRefForwardingComponent<'input', FormControlProps> {
+type FormControl = BsPrefixRefForwardingComponent<'input', FormControlProps> & {
   Feedback: typeof Feedback;
-}
+};
 
 const propTypes = {
   /**
@@ -129,7 +130,7 @@ const propTypes = {
   isInvalid: PropTypes.bool,
 };
 
-const FormControl = React.forwardRef(
+const FormControl: FormControl = (React.forwardRef(
   (
     {
       bsPrefix,
@@ -147,7 +148,7 @@ const FormControl = React.forwardRef(
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
       ...props
-    },
+    }: FormControlProps,
     ref,
   ) => {
     const { controlId } = useContext(FormContext);
@@ -198,11 +199,10 @@ const FormControl = React.forwardRef(
       />
     );
   },
-);
+) as unknown) as FormControl;
 
 FormControl.displayName = 'FormControl';
 FormControl.propTypes = propTypes;
-
 FormControl.Feedback = Feedback;
 
 export default FormControl;

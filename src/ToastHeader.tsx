@@ -6,16 +6,18 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 import { useBootstrapPrefix } from './ThemeProvider';
 import CloseButton from './CloseButton';
 import ToastContext from './ToastContext';
-import { BsPrefixComponent } from './helpers';
+import {
+  BsPrefixAndClassNameOnlyProps,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface ToastHeaderProps {
+export interface ToastHeaderProps
+  extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps> {
   closeLabel?: string;
   closeButton?: boolean;
 }
 
-declare class ToastHeader<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ToastHeaderProps> {}
+type ToastHeader = BsPrefixRefForwardingComponent<'div', ToastHeaderProps>;
 
 const propTypes = {
   bsPrefix: PropTypes.string,
@@ -38,9 +40,19 @@ const defaultProps = {
   closeButton: true,
 };
 
-const ToastHeader = React.forwardRef(
+const ToastHeader: ToastHeader = React.forwardRef<
+  HTMLDivElement,
+  ToastHeaderProps
+>(
   (
-    { bsPrefix, closeLabel, closeButton, className, children, ...props },
+    {
+      bsPrefix,
+      closeLabel,
+      closeButton,
+      className,
+      children,
+      ...props
+    }: ToastHeaderProps,
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'toast-header');

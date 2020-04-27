@@ -1,6 +1,12 @@
 import React from 'react';
 
-const ToastContext = React.createContext({
+// TODO: check
+export interface ToastContextType {
+  onClose?: (e: Event) => void;
+}
+
+const ToastContext = React.createContext<ToastContextType>({
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   onClose() {},
 });
 

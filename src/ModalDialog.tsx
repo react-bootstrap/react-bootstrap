@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixPropsWithChildren } from './helpers';
 
-export interface ModalDialogProps {
+export interface ModalDialogProps extends BsPrefixPropsWithChildren {
   size?: 'sm' | 'lg' | 'xl';
   centered?: boolean;
   scrollable?: boolean;
 }
 
-declare class ModalDialog extends BsPrefixComponent<'div', ModalDialogProps> {}
+// declare class ModalDialog extends BsPrefixComponent<'div', ModalDialogProps> {}
 
 const propTypes = {
   /** @default 'modal' */
@@ -36,9 +36,17 @@ const propTypes = {
   scrollable: PropTypes.bool,
 };
 
-const ModalDialog = React.forwardRef(
+const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
   (
-    { bsPrefix, className, centered, size, children, scrollable, ...props },
+    {
+      bsPrefix,
+      className,
+      centered,
+      size,
+      children,
+      scrollable,
+      ...props
+    }: ModalDialogProps,
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
@@ -63,6 +71,6 @@ const ModalDialog = React.forwardRef(
 );
 
 ModalDialog.displayName = 'ModalDialog';
-ModalDialog.propTypes = propTypes;
+ModalDialog.propTypes = propTypes as any;
 
 export default ModalDialog;

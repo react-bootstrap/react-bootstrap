@@ -5,37 +5,44 @@ import React from 'react';
 
 import createWithBsPrefix from './createWithBsPrefix';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixComponent } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export class InputGroupAppend<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
+const InputGroupAppend = createWithBsPrefix('input-group-append');
 
-export class InputGroupPrepend<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
+const InputGroupPrepend = createWithBsPrefix('input-group-prepend');
 
-export class InputGroupText<
-  As extends React.ElementType = 'span'
-> extends BsPrefixComponent<As> {}
+const InputGroupText = (createWithBsPrefix('input-group-text', {
+  Component: 'span',
+}) as unknown) as React.FC;
 
-export class InputGroupCheckbox extends BsPrefixComponent<'input'> {}
+const InputGroupCheckbox = (props) => (
+  <InputGroupText>
+    <input type="checkbox" {...props} />
+  </InputGroupText>
+);
 
-export class InputGroupRadio extends BsPrefixComponent<'input'> {}
+const InputGroupRadio = (props) => (
+  <InputGroupText>
+    <input type="radio" {...props} />
+  </InputGroupText>
+);
 
-export interface InputGroupProps {
+export interface InputGroupProps extends BsPrefixPropsWithChildren {
   size?: 'sm' | 'lg';
 }
 
-declare class InputGroup<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, InputGroupProps> {
-  static Append: typeof InputGroupAppend;
-  static Prepend: typeof InputGroupPrepend;
-  static Text: typeof InputGroupText;
-  static Checkbox: typeof InputGroupCheckbox;
-  static Radio: typeof InputGroupRadio;
-}
+type InputGroupExtras = {
+  Append: typeof InputGroupAppend;
+  Prepend: typeof InputGroupPrepend;
+  Text: typeof InputGroupText;
+  Checkbox: typeof InputGroupCheckbox;
+  Radio: typeof InputGroupRadio;
+};
+
+type InputGroup = BsPrefixRefForwardingComponent<'div', InputGroupProps>;
 
 const propTypes = {
   /** @default 'input-group' */
@@ -59,7 +66,7 @@ const propTypes = {
  * @property {InputGroupRadio} Radio
  * @property {InputGroupCheckbox} Checkbox
  */
-const InputGroup = React.forwardRef(
+const InputGroup: InputGroup = React.forwardRef(
   (
     {
       bsPrefix,
@@ -87,33 +94,16 @@ const InputGroup = React.forwardRef(
   },
 );
 
-const InputGroupAppend = createWithBsPrefix('input-group-append');
-
-const InputGroupPrepend = createWithBsPrefix('input-group-prepend');
-
-const InputGroupText = createWithBsPrefix('input-group-text', {
-  Component: 'span',
-});
-
-const InputGroupCheckbox = (props) => (
-  <InputGroupText>
-    <input type="checkbox" {...props} />
-  </InputGroupText>
-);
-
-const InputGroupRadio = (props) => (
-  <InputGroupText>
-    <input type="radio" {...props} />
-  </InputGroupText>
-);
-
 InputGroup.propTypes = propTypes;
 InputGroup.displayName = 'InputGroup';
 
-InputGroup.Text = InputGroupText;
-InputGroup.Radio = InputGroupRadio;
-InputGroup.Checkbox = InputGroupCheckbox;
-InputGroup.Append = InputGroupAppend;
-InputGroup.Prepend = InputGroupPrepend;
+const InputGroupWithExtras: InputGroup & InputGroupExtras = {
+  ...InputGroup,
+  Text: InputGroupText,
+  Radio: InputGroupRadio,
+  Checkbox: InputGroupCheckbox,
+  Append: InputGroupAppend,
+  Prepend: InputGroupPrepend,
+} as any;
 
-export default InputGroup;
+export default InputGroupWithExtras;

@@ -1,5 +1,13 @@
 import React from 'react';
 
-const NavContext = React.createContext(null);
+// TODO: check this
+interface NavContextType {
+  role?: string; // used by NavLink to determine it's role
+  activeKey: any;
+  getControlledId: (key: any) => any;
+  getControllerId: (key: any) => any;
+}
+
+const NavContext = React.createContext<NavContextType | null>(null);
 
 export default NavContext;

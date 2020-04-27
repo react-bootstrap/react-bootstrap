@@ -11,9 +11,10 @@ export interface AccordionCollapseProps
   eventKey: string;
 }
 
-declare interface AccordionCollapse
-  extends BsPrefixRefForwardingComponent<'div', AccordionCollapseProps> {}
-declare const AccordionCollapse: AccordionCollapse;
+type AccordionCollapse = BsPrefixRefForwardingComponent<
+  'div',
+  AccordionCollapseProps
+>;
 
 const propTypes = {
   /**
@@ -25,8 +26,8 @@ const propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-const AccordionCollapse = React.forwardRef(
-  ({ children, eventKey, ...props }, ref) => {
+const AccordionCollapse: AccordionCollapse = React.forwardRef(
+  ({ children, eventKey, ...props }: AccordionCollapseProps, ref) => {
     const contextEventKey = useContext(AccordionContext);
 
     return (

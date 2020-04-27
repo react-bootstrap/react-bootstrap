@@ -1,13 +1,14 @@
 import React, { useRef } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import BaseOverlay from 'react-overlays/Overlay';
+import BaseOverlay, {
+  OverlayProps as BaseOverlayProps,
+} from 'react-overlays/Overlay';
 import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import { componentOrElement, elementType } from 'prop-types-extra';
-
 import usePopperMarginModifiers from './usePopperMarginModifiers';
-
 import Fade from './Fade';
+import { TransitionType } from './helpers';
 
 export type Placement = import('react-overlays/usePopper').Placement;
 
@@ -33,13 +34,13 @@ export type OverlayChildren =
   | ((injected: OverlayInjectedProps) => React.ReactNode);
 
 export interface OverlayProps
-  extends Omit<BaseOverlay.OverlayProps, 'children' | 'transition'> {
+  extends Omit<BaseOverlayProps, 'children' | 'transition'> {
   children: OverlayChildren;
-  transition?: boolean | BaseOverlay.OverlayProps['transition'];
+  transition?: TransitionType;
   placement?: Placement;
 }
 
-declare const Overlay: React.FunctionComponent<OverlayProps>;
+// declare const Overlay: React.FunctionComponent<OverlayProps>;
 
 const propTypes = {
   /**
@@ -159,11 +160,11 @@ function Overlay({
   transition,
   popperConfig = {},
   ...outerProps
-}) {
+}: OverlayProps) {
   const popperRef = useRef({});
   const [ref, marginModifiers] = usePopperMarginModifiers();
 
-  transition = transition === true ? Fade : transition || null;
+  const actualTransition = transition === true ? Fade : transition || null;
 
   return (
     <BaseOverlay
@@ -173,12 +174,13 @@ function Overlay({
         ...popperConfig,
         modifiers: marginModifiers.concat(popperConfig.modifiers || []),
       }}
-      transition={transition}
+      transition={actualTransition as any}
     >
       {({
         props: overlayProps,
         arrowProps,
         show,
+        // @ts-ignore
         state,
         scheduleUpdate,
         placement,

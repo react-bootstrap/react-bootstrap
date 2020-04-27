@@ -5,18 +5,23 @@ import { useUncontrolled } from 'uncontrollable';
 
 import chainFunction from './createChainedFunction';
 import { map } from './ElementChildren';
-import ButtonGroup, { ButtonGroupProps } from './ButtonGroup';
+import ButtonGroup from './ButtonGroup';
 import ToggleButton from './ToggleButton';
-import { BsPrefixComponent, BsPrefixComponentClass } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface ToggleButtonRadioProps<T> {
+export interface ToggleButtonRadioProps<T> extends BsPrefixPropsWithChildren {
   type?: 'radio';
   name: string;
   value?: T;
   defaultValue?: T;
-  onChange?: (value: T) => void;
+  onChange?: (value: T, event: any) => void;
 }
-export interface ToggleButtonCheckboxProps<T> {
+
+export interface ToggleButtonCheckboxProps<T>
+  extends BsPrefixPropsWithChildren {
   type: 'checkbox';
   name?: string;
   value?: T[];
@@ -28,11 +33,12 @@ export type ToggleButtonGroupProps<T> =
   | ToggleButtonRadioProps<T>
   | ToggleButtonCheckboxProps<T>;
 
-declare class ToggleButtonGroup<
-  T,
-  // Need to use BsPrefixComponentClass to get proper type checking.
-  As extends React.ElementType = BsPrefixComponentClass<'a', ButtonGroupProps>
-> extends BsPrefixComponent<As, ToggleButtonGroupProps<T>> {}
+type ToggleButtonGroup<T> = BsPrefixRefForwardingComponent<
+  'a',
+  ToggleButtonGroupProps<T>
+> & {
+  Button: typeof ToggleButton;
+};
 
 const propTypes = {
   /**
@@ -69,66 +75,71 @@ const defaultProps = {
   type: 'radio',
 };
 
-const ToggleButtonGroup = React.forwardRef((props, ref) => {
-  let {
-    children,
-    type,
-    name,
-    value,
-    onChange,
-    ...controlledProps
-  } = useUncontrolled(props, {
-    value: 'onChange',
-  });
+const ToggleButtonGroup: ToggleButtonGroup<any> = (React.forwardRef(
+  (props: ToggleButtonGroupProps<any>, ref) => {
+    const {
+      children,
+      type,
+      name,
+      value,
+      onChange,
+      ...controlledProps
+    } = useUncontrolled(props, {
+      value: 'onChange',
+    });
 
-  const getValues = () => (value == null ? [] : [].concat(value));
+    const getValues: () => any[] = () =>
+      value == null ? [] : [].concat(value);
 
-  const handleToggle = (inputVal, event) => {
-    const values = getValues();
-    const isActive = values.indexOf(inputVal) !== -1;
+    const handleToggle = (inputVal: any, event: any) => {
+      if (!onChange) {
+        return;
+      }
+      const values = getValues();
+      const isActive = values.indexOf(inputVal) !== -1;
 
-    if (type === 'radio') {
-      if (!isActive) onChange(inputVal, event);
-      return;
-    }
+      if (type === 'radio') {
+        if (!isActive && onChange) onChange(inputVal, event);
+        return;
+      }
 
-    if (isActive) {
-      onChange(
-        values.filter((n) => n !== inputVal),
-        event,
-      );
-    } else {
-      onChange([...values, inputVal], event);
-    }
-  };
+      if (isActive) {
+        onChange(
+          values.filter((n) => n !== inputVal),
+          event,
+        );
+      } else {
+        onChange([...values, inputVal], event);
+      }
+    };
 
-  invariant(
-    type !== 'radio' || !!name,
-    'A `name` is required to group the toggle buttons when the `type` ' +
-      'is set to "radio"',
-  );
+    invariant(
+      type !== 'radio' || !!name,
+      'A `name` is required to group the toggle buttons when the `type` ' +
+        'is set to "radio"',
+    );
 
-  return (
-    <ButtonGroup {...controlledProps} ref={ref} toggle>
-      {map(children, (child) => {
-        const values = getValues();
-        const { value: childVal, onChange: childOnChange } = child.props;
-        const handler = (e) => handleToggle(childVal, e);
+    return (
+      <ButtonGroup {...controlledProps} ref={ref as any} toggle>
+        {map(children, (child) => {
+          const values = getValues();
+          const { value: childVal, onChange: childOnChange } = child.props;
+          const handler = (e) => handleToggle(childVal, e);
 
-        return React.cloneElement(child, {
-          type,
-          name: child.name || name,
-          checked: values.indexOf(childVal) !== -1,
-          onChange: chainFunction(childOnChange, handler),
-        });
-      })}
-    </ButtonGroup>
-  );
-});
+          return React.cloneElement(child, {
+            type,
+            name: (child as any).name || name,
+            checked: values.indexOf(childVal) !== -1,
+            onChange: chainFunction(childOnChange, handler),
+          });
+        })}
+      </ButtonGroup>
+    );
+  },
+) as unknown) as ToggleButtonGroup<any>;
 
 ToggleButtonGroup.propTypes = propTypes;
-ToggleButtonGroup.defaultProps = defaultProps;
-
+ToggleButtonGroup.defaultProps = defaultProps as any;
 ToggleButtonGroup.Button = ToggleButton;
 
 export default ToggleButtonGroup;

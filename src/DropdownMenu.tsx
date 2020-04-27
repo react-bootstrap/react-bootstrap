@@ -1,27 +1,32 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-import { useDropdownMenu } from 'react-overlays/DropdownMenu';
+import {
+  useDropdownMenu,
+  UseDropdownMenuValue,
+} from 'react-overlays/DropdownMenu';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import NavbarContext from './NavbarContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
 import usePopperMarginModifiers from './usePopperMarginModifiers';
-import { BsPrefixComponent, SelectCallback } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+  SelectCallback,
+} from './helpers';
 
-export interface DropdownMenuProps {
+export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
   show?: boolean;
   renderOnMount?: boolean;
   flip?: boolean;
   alignRight?: boolean;
   onSelect?: SelectCallback;
   rootCloseEvent?: 'click' | 'mousedown';
-  popperConfig?: object;
+  popperConfig?: { modifiers?: any };
 }
 
-declare class DropdownMenu<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, DropdownMenuProps> {}
+type DropdownMenu = BsPrefixRefForwardingComponent<'a', DropdownMenuProps>;
 
 const propTypes = {
   /**
@@ -72,7 +77,10 @@ const defaultProps = {
   flip: true,
 };
 
-const DropdownMenu = React.forwardRef(
+// TODO: remove this hack
+type UseDropdownMenuValueHack = UseDropdownMenuValue & { placement: any };
+
+const DropdownMenu: DropdownMenu = React.forwardRef(
   (
     {
       bsPrefix,
@@ -86,7 +94,7 @@ const DropdownMenu = React.forwardRef(
       as: Component = 'div',
       popperConfig = {},
       ...props
-    },
+    }: DropdownMenuProps,
     ref,
   ) => {
     const isNavbar = useContext(NavbarContext);
@@ -110,7 +118,7 @@ const DropdownMenu = React.forwardRef(
         ...popperConfig,
         modifiers: marginModifiers.concat(popperConfig.modifiers || []),
       },
-    });
+    }) as UseDropdownMenuValueHack;
 
     menuProps.ref = useMergedRefs(
       popperRef,
@@ -124,22 +132,20 @@ const DropdownMenu = React.forwardRef(
 
     // For custom components provide additional, non-DOM, props;
     if (typeof Component !== 'string') {
-      menuProps.show = show;
-      menuProps.close = close;
-      menuProps.alignRight = alignEnd;
+      (menuProps as any).show = show;
+      (menuProps as any).close = close;
+      (menuProps as any).alignRight = alignEnd;
     }
-    let style = props.style;
     if (placement) {
       // we don't need the default popper style,
       // menus are display: none when not shown.
-      style = { ...style, ...menuProps.style };
+      (props as any).style = { ...(props as any).style, ...menuProps.style };
       props['x-placement'] = placement;
     }
     return (
       <Component
         {...props}
         {...menuProps}
-        style={style}
         className={classNames(
           className,
           prefix,

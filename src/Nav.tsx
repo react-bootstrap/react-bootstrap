@@ -11,9 +11,13 @@ import CardContext from './CardContext';
 import AbstractNav from './AbstractNav';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
-import { BsPrefixComponent, SelectCallback } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+  SelectCallback,
+} from './helpers';
 
-export interface NavProps {
+export interface NavProps extends BsPrefixPropsWithChildren {
   navbarBsPrefix?: string;
   cardHeaderBsPrefix?: string;
   variant?: 'tabs' | 'pills';
@@ -27,12 +31,10 @@ export interface NavProps {
   onKeyDown?: React.KeyboardEventHandler<this>;
 }
 
-declare class Nav<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, NavProps> {
-  static Item: typeof NavItem;
-  static Link: typeof NavLink;
-}
+type Nav = BsPrefixRefForwardingComponent<'div', NavProps> & {
+  Item: typeof NavItem;
+  Link: typeof NavLink;
+};
 
 const propTypes = {
   /**
@@ -112,10 +114,10 @@ const defaultProps = {
   fill: false,
 };
 
-const Nav = React.forwardRef((uncontrolledProps, ref) => {
-  let {
+const Nav: Nav = (React.forwardRef((uncontrolledProps: NavProps, ref) => {
+  const {
     as = 'div',
-    bsPrefix,
+    bsPrefix: initialBsPrefix,
     variant,
     fill,
     justify,
@@ -126,16 +128,18 @@ const Nav = React.forwardRef((uncontrolledProps, ref) => {
     ...props
   } = useUncontrolled(uncontrolledProps, { activeKey: 'onSelect' });
 
-  bsPrefix = useBootstrapPrefix(bsPrefix, 'nav');
+  const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'nav');
 
-  let navbarBsPrefix, cardHeaderBsPrefix;
+  let navbarBsPrefix;
+  let cardHeaderBsPrefix;
+  let isNavbar = false;
 
   const navbarContext = useContext(NavbarContext);
   const cardContext = useContext(CardContext);
 
   if (navbarContext) {
     navbarBsPrefix = navbarContext.bsPrefix;
-    navbar = navbar == null ? true : navbar;
+    isNavbar = navbar == null ? true : navbar;
   } else if (cardContext) {
     ({ cardHeaderBsPrefix } = cardContext);
   }
@@ -146,8 +150,8 @@ const Nav = React.forwardRef((uncontrolledProps, ref) => {
       ref={ref}
       activeKey={activeKey}
       className={classNames(className, {
-        [bsPrefix]: !navbar,
-        [`${navbarBsPrefix}-nav`]: navbar,
+        [bsPrefix]: !isNavbar,
+        [`${navbarBsPrefix}-nav`]: isNavbar,
         [`${cardHeaderBsPrefix}-${variant}`]: !!cardHeaderBsPrefix,
         [`${bsPrefix}-${variant}`]: !!variant,
         [`${bsPrefix}-fill`]: fill,
@@ -158,7 +162,7 @@ const Nav = React.forwardRef((uncontrolledProps, ref) => {
       {children}
     </AbstractNav>
   );
-});
+}) as unknown) as Nav;
 
 Nav.displayName = 'Nav';
 Nav.propTypes = propTypes;

@@ -9,15 +9,19 @@ import NavbarBrand from './NavbarBrand';
 import NavbarCollapse from './NavbarCollapse';
 import NavbarToggle from './NavbarToggle';
 import { useBootstrapPrefix } from './ThemeProvider';
-import NavbarContext from './NavbarContext';
+import NavbarContext, { NavbarContextType } from './NavbarContext';
 import SelectableContext from './SelectableContext';
-import { BsPrefixComponent, SelectCallback } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+  SelectCallback,
+} from './helpers';
 
-export class NavbarText<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
+const NavbarText = createWithBsPrefix('navbar-text', {
+  Component: 'span',
+});
 
-export interface NavbarProps {
+export interface NavbarProps extends BsPrefixPropsWithChildren {
   variant?: 'light' | 'dark';
   expand?: boolean | 'sm' | 'md' | 'lg' | 'xl';
   bg?: string;
@@ -30,14 +34,12 @@ export interface NavbarProps {
   role?: string;
 }
 
-declare class Navbar<
-  As extends React.ElementType = 'nav'
-> extends BsPrefixComponent<As, NavbarProps> {
-  static Brand: typeof NavbarBrand;
-  static Toggle: typeof NavbarToggle;
-  static Collapse: typeof NavbarCollapse;
-  static Text: typeof NavbarText;
-}
+type Navbar = BsPrefixRefForwardingComponent<'nav', NavbarProps> & {
+  Brand: typeof NavbarBrand;
+  Collapse: typeof NavbarCollapse;
+  Text: typeof NavbarText;
+  Toggle: typeof NavbarToggle;
+};
 
 const propTypes = {
   /** @default 'navbar' */
@@ -145,13 +147,13 @@ const propTypes = {
 
 const defaultProps = {
   expand: true,
-  variant: 'light',
+  variant: 'light' as 'light',
   collapseOnSelect: false,
 };
 
-const Navbar = React.forwardRef((props, ref) => {
-  let {
-    bsPrefix,
+const Navbar: Navbar = (React.forwardRef((props: NavbarProps, ref) => {
+  const {
+    bsPrefix: initialBsPrefix,
     expand,
     variant,
     bg,
@@ -170,13 +172,15 @@ const Navbar = React.forwardRef((props, ref) => {
     expanded: 'onToggle',
   });
 
-  bsPrefix = useBootstrapPrefix(bsPrefix, 'navbar');
+  const bsPrefix = useBootstrapPrefix(initialBsPrefix, 'navbar');
 
-  const handleCollapse = useCallback(
+  const handleCollapse = useCallback<SelectCallback>(
     (...args) => {
       if (onSelect) onSelect(...args);
       if (collapseOnSelect && expanded) {
-        onToggle(false);
+        if (onToggle) {
+          onToggle(false);
+        }
       }
     },
     [onSelect, collapseOnSelect, expanded, onToggle],
@@ -191,11 +195,11 @@ const Navbar = React.forwardRef((props, ref) => {
   let expandClass = `${bsPrefix}-expand`;
   if (typeof expand === 'string') expandClass = `${expandClass}-${expand}`;
 
-  const navbarContext = useMemo(
+  const navbarContext = useMemo<NavbarContextType>(
     () => ({
-      onToggle: () => onToggle(!expanded),
+      onToggle: () => onToggle && onToggle(!expanded),
       bsPrefix,
-      expanded,
+      expanded: !!expanded,
     }),
     [bsPrefix, expanded, onToggle],
   );
@@ -221,7 +225,7 @@ const Navbar = React.forwardRef((props, ref) => {
       </SelectableContext.Provider>
     </NavbarContext.Provider>
   );
-});
+}) as unknown) as Navbar;
 
 Navbar.propTypes = propTypes;
 Navbar.defaultProps = defaultProps;
@@ -230,9 +234,6 @@ Navbar.displayName = 'Navbar';
 Navbar.Brand = NavbarBrand;
 Navbar.Toggle = NavbarToggle;
 Navbar.Collapse = NavbarCollapse;
-
-Navbar.Text = createWithBsPrefix('navbar-text', {
-  Component: 'span',
-});
+Navbar.Text = NavbarText;
 
 export default Navbar;

@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { Validator } from 'prop-types';
 import { useUncontrolled } from 'uncontrollable';
 
-import TabContext from './TabContext';
+import TabContext, { TabContextType } from './TabContext';
 import SelectableContext from './SelectableContext';
-import { SelectCallback } from './helpers';
+import { SelectCallback, TransitionType } from './helpers';
 
-export interface TabContainerProps {
+export interface TabContainerProps extends React.PropsWithChildren<{}> {
   id?: string;
-  transition?: false | React.ElementType;
+  transition?: TransitionType;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
   generateChildId?: (eventKey: unknown, type: 'tab' | 'pane') => string;
@@ -17,7 +17,25 @@ export interface TabContainerProps {
   defaultActiveKey?: unknown;
 }
 
-declare class TabContainer extends React.Component<TabContainerProps> {}
+// declare class TabContainer extends React.Component<TabContainerProps> {}
+
+const validateId: Validator<string> = (props, ...args) => {
+  let error: Error | null = null;
+
+  if (!props.generateChildId) {
+    error = PropTypes.string(props, ...args);
+
+    if (!error && !props.id) {
+      error = new Error(
+        'In order to properly initialize Tabs in a way that is accessible ' +
+          'to assistive technologies (such as screen readers) an `id` or a ' +
+          '`generateChildId` prop to TabContainer is required',
+      );
+    }
+  }
+
+  return error;
+};
 
 /* eslint-disable react/no-unused-prop-types */
 const propTypes = {
@@ -27,23 +45,7 @@ const propTypes = {
    *
    * @type {string}
    */
-  id(props, ...args) {
-    let error = null;
-
-    if (!props.generateChildId) {
-      error = PropTypes.string(props, ...args);
-
-      if (!error && !props.id) {
-        error = new Error(
-          'In order to properly initialize Tabs in a way that is accessible ' +
-            'to assistive technologies (such as screen readers) an `id` or a ' +
-            '`generateChildId` prop to TabContainer is required',
-        );
-      }
-    }
-
-    return error;
-  },
+  id: validateId,
 
   /**
    * Sets a default animation strategy for all children `<TabPane>`s.
@@ -95,7 +97,7 @@ const propTypes = {
   activeKey: PropTypes.any,
 };
 
-const TabContainer = (props) => {
+const TabContainer = (props: TabContainerProps) => {
   const {
     id,
     generateChildId: generateCustomChildId,
@@ -114,13 +116,13 @@ const TabContainer = (props) => {
     [id, generateCustomChildId],
   );
 
-  const tabContext = useMemo(
+  const tabContext: TabContextType = useMemo(
     () => ({
       onSelect,
       activeKey,
       transition,
-      mountOnEnter,
-      unmountOnExit,
+      mountOnEnter: mountOnEnter || false,
+      unmountOnExit: unmountOnExit || false,
       getControlledId: (key) => generateChildId(key, 'tabpane'),
       getControllerId: (key) => generateChildId(key, 'tab'),
     }),
@@ -136,7 +138,7 @@ const TabContainer = (props) => {
 
   return (
     <TabContext.Provider value={tabContext}>
-      <SelectableContext.Provider value={onSelect}>
+      <SelectableContext.Provider value={onSelect || null}>
         {children}
       </SelectableContext.Provider>
     </TabContext.Provider>

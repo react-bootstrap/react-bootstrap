@@ -5,26 +5,20 @@ import PropTypes from 'prop-types';
 import AbstractNavItem from './AbstractNavItem';
 import { makeEventKey } from './SelectableContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
+import { Variant } from './types';
 
-export interface ListGroupItemProps {
+export interface ListGroupItemProps extends BsPrefixProps {
   action?: boolean;
   active?: boolean;
   disabled?: boolean;
-  variant?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'danger'
-    | 'warning'
-    | 'info'
-    | 'dark'
-    | 'light';
+  eventKey?: string;
+  href?: string;
+  onClick?: React.MouseEventHandler;
+  variant?: Variant;
 }
 
-declare class ListGroupItem<
-  As extends React.ElementType = 'a'
-> extends BsPrefixComponent<As, ListGroupItemProps> {}
+type ListGroupItem = BsPrefixRefForwardingComponent<'a', ListGroupItemProps>;
 
 const propTypes = {
   /**
@@ -68,12 +62,12 @@ const propTypes = {
 };
 
 const defaultProps = {
-  variant: null,
+  variant: undefined,
   active: false,
   disabled: false,
 };
 
-const ListGroupItem = React.forwardRef(
+const ListGroupItem: ListGroupItem = React.forwardRef(
   (
     {
       bsPrefix,
@@ -108,9 +102,9 @@ const ListGroupItem = React.forwardRef(
       <AbstractNavItem
         ref={ref}
         {...props}
-        eventKey={makeEventKey(eventKey, props.href)}
-        // eslint-disable-next-line
-      as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
+        eventKey={makeEventKey(eventKey || null, props.href)}
+        // eslint-disable-next-line no-nested-ternary
+        as={as || (action ? (props.href ? 'a' : 'button') : 'div')}
         onClick={handleClick}
         className={classNames(
           className,

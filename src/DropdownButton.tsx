@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 import Dropdown from './Dropdown';
 import DropdownToggle from './DropdownToggle';
-import { ReplaceProps } from './helpers';
+import { BsPrefixRefForwardingComponent } from './helpers';
+import DropdownMenu from './DropdownMenu';
 
 type PropsFromToggle = Partial<
   Pick<
@@ -12,8 +13,9 @@ type PropsFromToggle = Partial<
   >
 >;
 
-export interface DropdownButtonProps extends PropsFromToggle {
-  id: string;
+export interface DropdownButtonProps
+  extends React.PropsWithChildren<PropsFromToggle> {
+  id?: string;
   title: React.ReactNode;
   menuRole?: string;
   renderMenuOnMount?: boolean;
@@ -21,9 +23,10 @@ export interface DropdownButtonProps extends PropsFromToggle {
   bsPrefix?: string;
 }
 
-declare class DropdownButton extends React.Component<
-  ReplaceProps<typeof Dropdown, DropdownButtonProps>
-> {}
+type DropdownButton = BsPrefixRefForwardingComponent<
+  'button',
+  DropdownButtonProps
+>;
 
 const propTypes = {
   /**
@@ -74,7 +77,10 @@ const propTypes = {
  * the Button `variant`, `size` and `bsPrefix` props are passed to the toggle,
  * along with menu related props are passed to the `Dropdown.Menu`
  */
-const DropdownButton = React.forwardRef(
+const DropdownButton: DropdownButton = React.forwardRef<
+  HTMLDivElement,
+  DropdownButtonProps
+>(
   (
     {
       title,
@@ -89,11 +95,11 @@ const DropdownButton = React.forwardRef(
       href,
       id,
       ...props
-    },
+    }: DropdownButtonProps,
     ref,
   ) => (
     <Dropdown ref={ref} {...props}>
-      <Dropdown.Toggle
+      <DropdownToggle
         id={id}
         href={href}
         size={size}
@@ -102,14 +108,14 @@ const DropdownButton = React.forwardRef(
         childBsPrefix={bsPrefix}
       >
         {title}
-      </Dropdown.Toggle>
-      <Dropdown.Menu
+      </DropdownToggle>
+      <DropdownMenu
         role={menuRole}
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}
       >
         {children}
-      </Dropdown.Menu>
+      </DropdownMenu>
     </Dropdown>
   ),
 );

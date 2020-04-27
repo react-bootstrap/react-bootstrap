@@ -6,6 +6,27 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 import warning from 'warning';
 import NavContext from './NavContext';
 import SelectableContext, { makeEventKey } from './SelectableContext';
+import { BsPrefixRefForwardingComponent } from './helpers';
+
+// TODO: check this
+interface AbstractNavItemProps {
+  active?: boolean;
+  as: React.ElementType;
+  className?: string;
+  disabled?: boolean;
+  eventKey?: any; // TODO: especially fix this
+  href?: string;
+  role?: string;
+  id?: string;
+  tabIndex?: number;
+  onClick?: (e: any) => void;
+  onSelect?: (navKey: string, e: any) => void;
+}
+
+type AbstractNavItem = BsPrefixRefForwardingComponent<
+  'div',
+  AbstractNavItemProps
+>;
 
 const propTypes = {
   id: PropTypes.string,
@@ -28,18 +49,17 @@ const defaultProps = {
   disabled: false,
 };
 
-const AbstractNavItem = React.forwardRef(
+const AbstractNavItem: AbstractNavItem = React.forwardRef(
   (
     {
       active,
       className,
-      tabIndex,
       eventKey,
       onSelect,
       onClick,
       as: Component,
       ...props
-    },
+    }: AbstractNavItemProps,
     ref,
   ) => {
     const navKey = makeEventKey(eventKey, props.href);
@@ -73,7 +93,7 @@ const AbstractNavItem = React.forwardRef(
     }
 
     if (props.role === 'tab') {
-      props.tabIndex = isActive ? tabIndex : -1;
+      props.tabIndex = isActive ? props.tabIndex : -1;
       props['aria-selected'] = isActive;
     }
 

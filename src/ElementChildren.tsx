@@ -8,11 +8,14 @@ import React from 'react';
  * so an invalid component would not increase the index.
  *
  */
-function map(children, func) {
+function map<P = any>(
+  children,
+  func: (el: React.ReactElement<P>, index: number) => any,
+) {
   let index = 0;
 
   return React.Children.map(children, (child) =>
-    React.isValidElement(child) ? func(child, index++) : child,
+    React.isValidElement<P>(child) ? func(child, index++) : child,
   );
 }
 
@@ -22,10 +25,13 @@ function map(children, func) {
  * The provided forEachFunc(child, index) will be called for each
  * leaf child with the index reflecting the position relative to "valid components".
  */
-function forEach(children, func) {
+function forEach<P = any>(
+  children,
+  func: (el: React.ReactElement<P>, index: number) => void,
+) {
   let index = 0;
   React.Children.forEach(children, (child) => {
-    if (React.isValidElement(child)) func(child, index++);
+    if (React.isValidElement<P>(child)) func(child, index++);
   });
 }
 

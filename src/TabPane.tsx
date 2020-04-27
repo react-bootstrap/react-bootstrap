@@ -6,20 +6,23 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import TabContext from './TabContext';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import Fade from './Fade';
-import { BsPrefixComponent, TransitionCallbacks } from './helpers';
+import {
+  BsPrefixProps,
+  BsPrefixRefForwardingComponent,
+  TransitionCallbacks,
+  TransitionType,
+} from './helpers';
 
-export interface TabPaneProps extends TransitionCallbacks {
-  eventKey?: unknown;
+export interface TabPaneProps extends TransitionCallbacks, BsPrefixProps {
+  eventKey?: any;
   active?: boolean;
-  transition?: false | React.ElementType;
+  transition?: TransitionType;
   bsClass?: string;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
 }
 
-declare class TabPane<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, TabPaneProps> {}
+type TabPane = BsPrefixRefForwardingComponent<'div', TabPaneProps>;
 
 const propTypes = {
   /**
@@ -100,7 +103,7 @@ const propTypes = {
   'aria-labelledby': PropTypes.string,
 };
 
-function useTabContext(props) {
+function useTabContext(props: TabPaneProps) {
   const context = useContext(TabContext);
 
   if (!context) return props;
@@ -109,7 +112,7 @@ function useTabContext(props) {
   const shouldTransition =
     props.transition !== false && rest.transition !== false;
 
-  let key = makeEventKey(props.eventKey);
+  const key = makeEventKey(props.eventKey);
 
   return {
     ...props,
@@ -128,7 +131,7 @@ function useTabContext(props) {
   };
 }
 
-const TabPane = React.forwardRef((props, ref) => {
+const TabPane: TabPane = React.forwardRef((props: TabPaneProps, ref) => {
   const {
     bsPrefix,
     className,

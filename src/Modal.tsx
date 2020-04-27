@@ -8,26 +8,29 @@ import useCallbackRef from '@restart/hooks/useCallbackRef';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import useWillUnmount from '@restart/hooks/useWillUnmount';
 import PropTypes from 'prop-types';
-import React, { useCallback, useImperativeHandle, useMemo, useRef, useState } from 'react';
-import BaseModal from 'react-overlays/Modal';
-import Body from './ModalBody';
-import ModalBody from './ModalBody';
+import React, {
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import BaseModal, { ModalProps as BaseModalProps } from 'react-overlays/Modal';
+import warning from 'warning';
 import BootstrapModalManager from './BootstrapModalManager';
 import Fade from './Fade';
-import Footer from './ModalFooter';
-import ModalFooter from './ModalFooter';
-import Header from './ModalHeader';
-import ModalHeader from './ModalHeader';
+import ModalBody from './ModalBody';
 import ModalContext from './ModalContext';
 import ModalDialog from './ModalDialog';
+import ModalFooter from './ModalFooter';
+import ModalHeader from './ModalHeader';
 import ModalTitle from './ModalTitle';
-import Title from './ModalTitle';
-import warning from 'warning';
+import { BsPrefixRefForwardingComponent } from './helpers';
 import { useBootstrapPrefix } from './ThemeProvider';
 
 export interface ModalProps
   extends Omit<
-    BaseModal.ModalProps,
+    BaseModalProps,
     | 'role'
     | 'renderBackdrop'
     | 'renderDialog'
@@ -44,16 +47,15 @@ export interface ModalProps
   scrollable?: boolean;
 }
 
-declare type Modal = React.ComponentClass<ModalProps> & {
+type Modal = BsPrefixRefForwardingComponent<'div', ModalProps> & {
   Body: typeof ModalBody;
   Header: typeof ModalHeader;
   Title: typeof ModalTitle;
   Footer: typeof ModalFooter;
-
   Dialog: typeof ModalDialog;
+  TRANSITION_DURATION: number;
+  BACKDROP_TRANSITION_DURATION: number;
 };
-
-declare const Modal: Modal;
 
 let manager;
 
@@ -231,7 +233,7 @@ function BackdropTransition(props) {
 
 /* eslint-enable no-use-before-define */
 
-const Modal = React.forwardRef(
+const Modal: Modal = (React.forwardRef(
   (
     {
       bsPrefix,
@@ -265,14 +267,15 @@ const Modal = React.forwardRef(
       backdropClassName,
       manager: propsManager,
       ...props
-    },
+    }: ModalProps,
     ref,
   ) => {
     const [modalStyle, setStyle] = useState({});
     const waitingForMouseUpRef = useRef(false);
     const ignoreBackdropClickRef = useRef(false);
 
-    const [modal, setModalRef] = useCallbackRef();
+    // TODO: what's this type
+    const [modal, setModalRef] = useCallbackRef<{ dialog: any }>();
     const handleHide = useEventCallback(onHide);
 
     bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
@@ -327,11 +330,13 @@ const Modal = React.forwardRef(
     }
 
     const handleWindowResize = useEventCallback(() => {
-      updateDialogStyle(modal.dialog);
+      if (modal) {
+        updateDialogStyle(modal.dialog);
+      }
     });
 
     useWillUnmount(() => {
-      removeEventListener(window, 'resize', handleWindowResize);
+      removeEventListener(window as any, 'resize', handleWindowResize);
     });
 
     // We prevent the modal from closing during a drag by detecting where the
@@ -342,7 +347,7 @@ const Modal = React.forwardRef(
     };
 
     const handleMouseUp = (e) => {
-      if (waitingForMouseUpRef.current && e.target === modal.dialog) {
+      if (waitingForMouseUpRef.current && modal && e.target === modal.dialog) {
         ignoreBackdropClickRef.current = true;
       }
       waitingForMouseUpRef.current = false;
@@ -370,7 +375,7 @@ const Modal = React.forwardRef(
       if (onEntering) onEntering(node, ...args);
 
       // FIXME: This should work even when animation is disabled.
-      addEventListener(window, 'resize', handleWindowResize);
+      addEventListener(window as any, 'resize', handleWindowResize);
     };
 
     const handleExited = (node, ...args) => {
@@ -378,7 +383,7 @@ const Modal = React.forwardRef(
       if (onExited) onExited(...args);
 
       // FIXME: This should work even when animation is disabled.
-      removeEventListener(window, 'resize', handleWindowResize);
+      removeEventListener(window as any, 'resize', handleWindowResize);
     };
 
     const renderBackdrop = useCallback(
@@ -412,6 +417,8 @@ const Modal = React.forwardRef(
         onMouseUp={handleMouseUp}
         aria-labelledby={ariaLabelledby}
       >
+        {/*
+        // @ts-ignore */}
         <Dialog
           {...props}
           role="document"
@@ -454,17 +461,16 @@ const Modal = React.forwardRef(
       </ModalContext.Provider>
     );
   },
-);
+) as unknown) as Modal;
 
 Modal.displayName = 'Modal';
 Modal.propTypes = propTypes;
 Modal.defaultProps = defaultProps;
 
-Modal.Body = Body;
-Modal.Header = Header;
-Modal.Title = Title;
-Modal.Footer = Footer;
-
+Modal.Body = ModalBody;
+Modal.Header = ModalHeader;
+Modal.Title = ModalTitle;
+Modal.Footer = ModalFooter;
 Modal.Dialog = ModalDialog;
 
 Modal.TRANSITION_DURATION = 300;

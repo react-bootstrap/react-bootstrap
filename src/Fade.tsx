@@ -2,21 +2,20 @@ import classNames from 'classnames';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
 import React, { useCallback } from 'react';
-import Transition, { ENTERED, ENTERING } from 'react-transition-group/Transition';
-import { TransitionCallbacks } from './helpers';
+import Transition, {
+  ENTERED,
+  ENTERING,
+  TransitionProps,
+} from 'react-transition-group/Transition';
 import triggerBrowserReflow from './triggerBrowserReflow';
 
-export interface FadeProps
-  extends TransitionCallbacks,
-    React.ClassAttributes<Fade> {
+export interface FadeProps extends Omit<TransitionProps, 'addEndListener'> {
   in?: boolean;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
   appear?: boolean;
   timeout?: number;
 }
-
-declare class Fade extends React.Component<FadeProps> {}
 
 const propTypes = {
   /**
@@ -86,36 +85,38 @@ const fadeStyles = {
   [ENTERED]: 'show',
 };
 
-const Fade = React.forwardRef(({ className, children, ...props }, ref) => {
-  const handleEnter = useCallback(
-    (node) => {
-      triggerBrowserReflow(node);
-      if (props.onEnter) props.onEnter(node);
-    },
-    [props],
-  );
+const Fade = React.forwardRef<Transition, FadeProps>(
+  ({ className, children, ...props }: FadeProps, ref) => {
+    const handleEnter = useCallback(
+      (node) => {
+        triggerBrowserReflow(node);
+        if (props.onEnter) props.onEnter(node);
+      },
+      [props],
+    );
 
-  return (
-    <Transition
-      ref={ref}
-      addEndListener={transitionEnd}
-      {...props}
-      onEnter={handleEnter}
-    >
-      {(status, innerProps) =>
-        React.cloneElement(children, {
-          ...innerProps,
-          className: classNames(
-            'fade',
-            className,
-            children.props.className,
-            fadeStyles[status],
-          ),
-        })
-      }
-    </Transition>
-  );
-});
+    return (
+      <Transition
+        ref={ref}
+        addEndListener={transitionEnd}
+        {...props}
+        onEnter={handleEnter}
+      >
+        {(status, innerProps) =>
+          React.cloneElement(children, {
+            ...innerProps,
+            className: classNames(
+              'fade',
+              className,
+              children.props.className,
+              fadeStyles[status],
+            ),
+          })
+        }
+      </Transition>
+    );
+  },
+);
 
 Fade.propTypes = propTypes;
 Fade.defaultProps = defaultProps;

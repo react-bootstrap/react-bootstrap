@@ -4,16 +4,16 @@ import React, { useMemo } from 'react';
 
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
-import { BsPrefixRefForwardingComponent } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface FormGroupProps {
+export interface FormGroupProps extends BsPrefixPropsWithChildren {
   controlId?: string;
 }
 
-declare interface FormGroup
-  extends BsPrefixRefForwardingComponent<'div', FormGroupProps> {}
-
-declare const FormGroup: FormGroup;
+type FormGroup = BsPrefixRefForwardingComponent<'div', FormGroupProps>;
 
 const propTypes = {
   /**
@@ -39,7 +39,7 @@ const propTypes = {
   _ref: PropTypes.any,
 };
 
-const FormGroup = React.forwardRef(
+const FormGroup: FormGroup = React.forwardRef(
   (
     {
       bsPrefix,

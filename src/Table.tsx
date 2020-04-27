@@ -3,9 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { BsPrefixComponent } from './helpers';
+import {
+  BsPrefixAndClassNameOnlyProps,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface TableProps {
+export interface TableProps extends BsPrefixAndClassNameOnlyProps {
   striped?: boolean;
   bordered?: boolean;
   borderless?: boolean;
@@ -15,7 +18,7 @@ export interface TableProps {
   responsive?: boolean | string;
 }
 
-declare class Table extends BsPrefixComponent<'table', TableProps> {}
+type Table = BsPrefixRefForwardingComponent<'table', TableProps>;
 
 const propTypes = {
   /**
@@ -67,7 +70,7 @@ const propTypes = {
   responsive: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
-const Table = React.forwardRef(
+const Table: Table = React.forwardRef<HTMLTableElement, TableProps>(
   (
     {
       bsPrefix,
@@ -80,7 +83,7 @@ const Table = React.forwardRef(
       variant,
       responsive,
       ...props
-    },
+    }: TableProps,
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'table');

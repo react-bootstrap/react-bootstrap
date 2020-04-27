@@ -6,10 +6,14 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 import SelectableContext, { makeEventKey } from './SelectableContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import NavContext from './NavContext';
-import SafeAnchor, { SafeAnchorProps } from './SafeAnchor';
-import { BsPrefixComponent, BsPrefixComponentClass, SelectCallback } from './helpers';
+import SafeAnchor from './SafeAnchor';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+  SelectCallback,
+} from './helpers';
 
-export interface DropdownItemProps {
+export interface DropdownItemProps extends BsPrefixPropsWithChildren {
   active?: boolean;
   disabled?: boolean;
   eventKey?: string;
@@ -18,10 +22,7 @@ export interface DropdownItemProps {
   onSelect?: SelectCallback;
 }
 
-declare class DropdownItem<
-  // Need to use BsPrefixComponentClass to get proper type checking.
-  As extends React.ElementType = BsPrefixComponentClass<'a', SafeAnchorProps>
-> extends BsPrefixComponent<As, DropdownItemProps> {}
+type DropdownItem = BsPrefixRefForwardingComponent<'a', DropdownItemProps>;
 
 const propTypes = {
   /** @default 'dropdown' */
@@ -69,7 +70,7 @@ const defaultProps = {
   disabled: false,
 };
 
-const DropdownItem = React.forwardRef(
+const DropdownItem: DropdownItem = React.forwardRef(
   (
     {
       bsPrefix,
@@ -83,7 +84,7 @@ const DropdownItem = React.forwardRef(
       active: propActive,
       as: Component,
       ...props
-    },
+    }: DropdownItemProps,
     ref,
   ) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-item');
@@ -91,7 +92,7 @@ const DropdownItem = React.forwardRef(
     const navContext = useContext(NavContext);
 
     const { activeKey } = navContext || {};
-    const key = makeEventKey(eventKey, href);
+    const key = makeEventKey(eventKey || null, href);
 
     const active =
       propActive == null && key != null
@@ -108,6 +109,7 @@ const DropdownItem = React.forwardRef(
     });
 
     return (
+      // @ts-ignore
       <Component
         {...props}
         ref={ref}

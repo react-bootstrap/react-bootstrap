@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 import { useBootstrapPrefix } from './ThemeProvider';
 
 import { map } from './ElementChildren';
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixPropsWithChildren } from './helpers';
 
-export interface ProgressBarProps {
+export interface ProgressBarProps extends BsPrefixPropsWithChildren {
+  style?: any;
   min?: number;
   now?: number;
   max?: number;
@@ -15,23 +16,22 @@ export interface ProgressBarProps {
   srOnly?: boolean;
   striped?: boolean;
   animated?: boolean;
-  variant?: 'success' | 'danger' | 'warning' | 'info';
+  variant?: 'success' | 'danger' | 'warning' | 'info' | string;
+  isChild?: boolean;
 }
-
-declare class ProgressBar extends BsPrefixComponent<'div', ProgressBarProps> {}
 
 const ROUND_PRECISION = 1000;
 
 /**
  * Validate that children, if any, are instances of `<ProgressBar>`.
  */
-function onlyProgressBar(props, propName, componentName) {
+function onlyProgressBar(props, propName, componentName): Error | null {
   const children = props[propName];
   if (!children) {
     return null;
   }
 
-  let error = null;
+  let error: Error | null = null;
 
   React.Children.forEach(children, (child) => {
     if (error) {
@@ -47,8 +47,9 @@ function onlyProgressBar(props, propName, componentName) {
     const element = <ProgressBar />;
     if (child.type === element.type) return;
 
+    const childType: any = child.type;
     const childIdentifier = React.isValidElement(child)
-      ? child.type.displayName || child.type.name || child.type
+      ? childType.displayName || childType.name || childType
       : child;
     error = new Error(
       `Children of ${componentName} can contain only ProgressBar ` +
@@ -148,7 +149,7 @@ function renderProgressBar(
     variant,
     bsPrefix,
     ...props
-  },
+  }: ProgressBarProps,
   ref,
 ) {
   return (
@@ -173,53 +174,55 @@ function renderProgressBar(
 
 renderProgressBar.propTypes = propTypes;
 
-const ProgressBar = React.forwardRef(({ isChild, ...props }, ref) => {
-  props.bsPrefix = useBootstrapPrefix(props.bsPrefix, 'progress');
+const ProgressBar = React.forwardRef<HTMLDivElement, ProgressBarProps>(
+  ({ isChild, ...props }: ProgressBarProps, ref) => {
+    props.bsPrefix = useBootstrapPrefix(props.bsPrefix, 'progress');
 
-  if (isChild) {
-    return renderProgressBar(props, ref);
-  }
+    if (isChild) {
+      return renderProgressBar(props, ref);
+    }
 
-  const {
-    min,
-    now,
-    max,
-    label,
-    srOnly,
-    striped,
-    animated,
-    bsPrefix,
-    variant,
-    className,
-    children,
-    ...wrapperProps
-  } = props;
+    const {
+      min,
+      now,
+      max,
+      label,
+      srOnly,
+      striped,
+      animated,
+      bsPrefix,
+      variant,
+      className,
+      children,
+      ...wrapperProps
+    } = props;
 
-  return (
-    <div
-      ref={ref}
-      {...wrapperProps}
-      className={classNames(className, bsPrefix)}
-    >
-      {children
-        ? map(children, (child) => cloneElement(child, { isChild: true }))
-        : renderProgressBar(
-            {
-              min,
-              now,
-              max,
-              label,
-              srOnly,
-              striped,
-              animated,
-              bsPrefix,
-              variant,
-            },
-            ref,
-          )}
-    </div>
-  );
-});
+    return (
+      <div
+        ref={ref}
+        {...wrapperProps}
+        className={classNames(className, bsPrefix)}
+      >
+        {children
+          ? map(children, (child) => cloneElement(child, { isChild: true }))
+          : renderProgressBar(
+              {
+                min,
+                now,
+                max,
+                label,
+                srOnly,
+                striped,
+                animated,
+                bsPrefix,
+                variant,
+              },
+              ref,
+            )}
+      </div>
+    );
+  },
+);
 
 ProgressBar.displayName = 'ProgressBar';
 ProgressBar.propTypes = propTypes;

@@ -1,5 +1,13 @@
 import React from 'react';
 
-const FormContext = React.createContext({ controlId: undefined });
+// TODO
+interface FormContextType {
+  controlId: any;
+  custom?: boolean;
+}
+
+const FormContext = React.createContext<FormContextType>({
+  controlId: undefined,
+});
 
 export default FormContext;

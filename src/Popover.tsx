@@ -6,23 +6,27 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import PopoverTitle from './PopoverTitle';
 import PopoverContent from './PopoverContent';
 import { Placement } from './Overlay';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface PopoverProps extends React.ComponentPropsWithoutRef<'div'> {
-  bsPrefix?: string;
+export interface PopoverProps
+  extends React.ComponentPropsWithoutRef<'div'>,
+    BsPrefixPropsWithChildren {
   id: string;
   placement?: Placement;
   title?: string;
   arrowProps?: { ref: any; style: object };
   content?: boolean;
+  popper?: any;
+  show?: boolean;
 }
 
-declare interface Popover
-  extends React.ForwardRefRenderFunction<HTMLDivElement, PopoverProps> {
+type Popover = BsPrefixRefForwardingComponent<'div', PopoverProps> & {
   Title: typeof PopoverTitle;
   Content: typeof PopoverContent;
-}
-
-declare const Popover: Popover;
+};
 
 const propTypes = {
   /**
@@ -73,7 +77,7 @@ const defaultProps = {
   placement: 'right',
 };
 
-const Popover = React.forwardRef(
+const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
       bsPrefix,
@@ -86,7 +90,7 @@ const Popover = React.forwardRef(
       popper: _,
       show: _1,
       ...props
-    },
+    }: PopoverProps,
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'popover');
@@ -113,10 +117,10 @@ const Popover = React.forwardRef(
       </div>
     );
   },
-);
+) as unknown) as Popover;
 
 Popover.propTypes = propTypes;
-Popover.defaultProps = defaultProps;
+Popover.defaultProps = defaultProps as any;
 
 Popover.Title = PopoverTitle;
 Popover.Content = PopoverContent;

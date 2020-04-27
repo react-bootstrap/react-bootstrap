@@ -5,7 +5,10 @@ import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 import Dropdown from './Dropdown';
 import DropdownToggle from './DropdownToggle';
-import { ReplaceProps } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
 type PropsFromToggle = Partial<
   Pick<
@@ -14,22 +17,22 @@ type PropsFromToggle = Partial<
   >
 >;
 
-export interface SplitButtonProps extends PropsFromToggle {
-  id: string | number;
-  toggleLabel?: string;
+export interface SplitButtonProps
+  extends PropsFromToggle,
+    BsPrefixPropsWithChildren {
   href?: string;
-  target?: string;
-  onClick?: React.MouseEventHandler<this>;
-  title: React.ReactNode;
+  id: string | number;
   menuRole?: string;
+  onClick?: React.MouseEventHandler<this>;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
-  bsPrefix?: string;
+  target?: string;
+  title: React.ReactNode;
+  toggleLabel?: string;
+  type?: any;
 }
 
-declare class SplitButton extends React.Component<
-  ReplaceProps<typeof Dropdown, SplitButtonProps>
-> {}
+type SplitButton = BsPrefixRefForwardingComponent<'div', SplitButtonProps>;
 
 const propTypes = {
   /**
@@ -88,7 +91,7 @@ const defaultProps = {
   type: 'button',
 };
 
-const SplitButton = React.forwardRef(
+const SplitButton: SplitButton = React.forwardRef(
   (
     {
       id,
@@ -106,7 +109,7 @@ const SplitButton = React.forwardRef(
       renderMenuOnMount,
       rootCloseEvent,
       ...props
-    },
+    }: SplitButtonProps,
     ref,
   ) => (
     <Dropdown ref={ref} {...props} as={ButtonGroup}>
@@ -124,7 +127,7 @@ const SplitButton = React.forwardRef(
       </Button>
       <Dropdown.Toggle
         split
-        id={id}
+        id={id ? id.toString() : undefined}
         size={size}
         variant={variant}
         disabled={props.disabled}

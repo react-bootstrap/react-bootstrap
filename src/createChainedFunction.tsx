@@ -20,7 +20,9 @@ function createChainedFunction(...funcs) {
       if (acc === null) return f;
 
       return function chainedFunction(...args) {
+        // @ts-ignore
         acc.apply(this, args);
+        // @ts-ignore
         f.apply(this, args);
       };
     }, null);

@@ -6,17 +6,14 @@ import useEventCallback from '@restart/hooks/useEventCallback';
 import { useBootstrapPrefix } from './ThemeProvider';
 import CloseButton from './CloseButton';
 import ModalContext from './ModalContext';
-import { BsPrefixComponent } from './helpers';
+import { BsPrefixAndClassNameOnlyProps } from './helpers';
 
-export interface ModalHeaderProps {
+export interface ModalHeaderProps
+  extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps> {
   closeLabel?: string;
   closeButton?: boolean;
   onHide?: () => void;
 }
-
-declare class ModalHeader<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, ModalHeaderProps> {}
 
 const propTypes = {
   bsPrefix: PropTypes.string,
@@ -46,7 +43,7 @@ const defaultProps = {
   closeButton: false,
 };
 
-const ModalHeader = React.forwardRef(
+const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
   (
     {
       bsPrefix,
@@ -56,7 +53,7 @@ const ModalHeader = React.forwardRef(
       className,
       children,
       ...props
-    },
+    }: ModalHeaderProps,
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'modal-header');

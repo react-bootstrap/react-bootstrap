@@ -4,19 +4,22 @@ import React, { useContext } from 'react';
 import FormContext from './FormContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { BsPrefixRefForwardingComponent } from './helpers';
+import {
+  BsCustomPrefixProps,
+  BsPrefixProps,
+  BsPrefixRefForwardingComponent,
+} from './helpers';
 
-export interface FormFileInputProps {
+export interface FormFileInputProps extends BsPrefixProps, BsCustomPrefixProps {
   id?: string;
   isValid?: boolean;
   isInvalid?: boolean;
   lang?: string;
 }
-
-declare interface FormFileInput
-  extends BsPrefixRefForwardingComponent<'input', FormFileInputProps> {}
-
-declare const FormFileInput: FormFileInput;
+type FormFileInput = BsPrefixRefForwardingComponent<
+  'input',
+  FormFileInputProps
+>;
 
 const propTypes = {
   /**
@@ -51,7 +54,7 @@ const propTypes = {
   lang: PropTypes.string,
 };
 
-const FormFileInput = React.forwardRef(
+const FormFileInput: FormFileInput = React.forwardRef(
   (
     {
       id,

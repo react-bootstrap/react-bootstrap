@@ -4,14 +4,19 @@ import { BsPrefixRefForwardingComponent } from './helpers';
 
 type SwitchProps = Omit<FormCheckProps, 'type'>;
 
-declare interface Switch
-  extends BsPrefixRefForwardingComponent<FormCheck, SwitchProps> {}
+type Switch = BsPrefixRefForwardingComponent<FormCheck, SwitchProps> & {
+  Input: typeof FormCheck.Input;
+  Label: typeof FormCheck.Label;
+};
 
-declare const Switch: Switch;
+// declare interface Switch
+//   extends BsPrefixRefForwardingComponent<FormCheck, SwitchProps> {}
+//
+// declare const Switch: Switch;
 
-const Switch = React.forwardRef((props, ref) => (
-  <FormCheck {...props} ref={ref} type="switch" />
-));
+const Switch: Switch = (React.forwardRef<FormCheck, SwitchProps>(
+  (props, ref) => <FormCheck {...props} ref={ref} type="switch" />,
+) as unknown) as Switch;
 
 Switch.displayName = 'Switch';
 

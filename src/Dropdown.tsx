@@ -10,17 +10,20 @@ import DropdownToggle from './DropdownToggle';
 import SelectableContext from './SelectableContext';
 import { useBootstrapPrefix } from './ThemeProvider';
 import createWithBsPrefix from './createWithBsPrefix';
-import { BsPrefixComponent, SelectCallback } from './helpers';
+import {
+  BsPrefixPropsWithChildren,
+  BsPrefixRefForwardingComponent,
+  SelectCallback,
+} from './helpers';
 
-export class DropdownDivider<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
+const DropdownHeader = createWithBsPrefix('dropdown-header', {
+  defaultProps: { role: 'heading' },
+});
+const DropdownDivider = createWithBsPrefix('dropdown-divider', {
+  defaultProps: { role: 'separator' },
+});
 
-export class DropdownHeader<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As> {}
-
-export interface DropdownProps {
+export interface DropdownProps extends BsPrefixPropsWithChildren {
   drop?: 'up' | 'left' | 'right' | 'down';
   alignRight?: boolean;
   show?: boolean;
@@ -32,17 +35,16 @@ export interface DropdownProps {
   ) => void;
   focusFirstItemOnShow?: boolean | 'keyboard';
   onSelect?: SelectCallback;
+  navbar?: boolean;
 }
 
-declare class Dropdown<
-  As extends React.ElementType = 'div'
-> extends BsPrefixComponent<As, DropdownProps> {
-  static Toggle: typeof DropdownToggle;
-  static Menu: typeof DropdownMenu;
-  static Item: typeof DropdownItem;
-  static Divider: typeof DropdownDivider;
-  static Header: typeof DropdownHeader;
-}
+type Dropdown = BsPrefixRefForwardingComponent<'div', DropdownProps> & {
+  Toggle: typeof DropdownToggle;
+  Menu: typeof DropdownMenu;
+  Item: typeof DropdownItem;
+  Divider: typeof DropdownDivider;
+  Header: typeof DropdownHeader;
+};
 
 const propTypes = {
   /** @default 'dropdown' */
@@ -118,7 +120,7 @@ const defaultProps = {
   navbar: false,
 };
 
-const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
+const Dropdown: Dropdown = (React.forwardRef((pProps: DropdownProps, ref) => {
   const {
     bsPrefix,
     drop,
@@ -132,7 +134,7 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
     as: Component = 'div',
     navbar: _4,
     ...props
-  } = useUncontrolled(uncontrolledProps, { show: 'onToggle' });
+  } = useUncontrolled(pProps, { show: 'onToggle' });
 
   const onSelectCtx = useContext(SelectableContext);
   const prefix = useBootstrapPrefix(bsPrefix, 'dropdown');
@@ -140,7 +142,9 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
   const handleToggle = useEventCallback(
     (nextShow, event, source = event.type) => {
       if (event.currentTarget === document) source = 'rootClose';
-      onToggle(nextShow, event, { source });
+      if (onToggle) {
+        onToggle(nextShow, event, { source });
+      }
     },
   );
 
@@ -178,21 +182,16 @@ const Dropdown = React.forwardRef((uncontrolledProps, ref) => {
       </BaseDropdown>
     </SelectableContext.Provider>
   );
-});
+}) as unknown) as Dropdown;
 
 Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = propTypes;
 Dropdown.defaultProps = defaultProps;
 
-Dropdown.Toggle = DropdownToggle;
-Dropdown.Menu = DropdownMenu;
+Dropdown.Divider = DropdownDivider;
+Dropdown.Header = DropdownHeader;
 Dropdown.Item = DropdownItem;
-
-Dropdown.Header = createWithBsPrefix('dropdown-header', {
-  defaultProps: { role: 'heading' },
-});
-Dropdown.Divider = createWithBsPrefix('dropdown-divider', {
-  defaultProps: { role: 'separator' },
-});
+Dropdown.Menu = DropdownMenu;
+Dropdown.Toggle = DropdownToggle;
 
 export default Dropdown;
