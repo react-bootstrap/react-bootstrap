@@ -36,10 +36,10 @@ export default class BootstrapModalManager extends ModalManager {
       this.adjustAndStore('paddingRight', el, size),
     );
     qsa(container, Selector.STICKY_CONTENT).forEach((el) =>
-      this.adjustAndStore('margingRight', el, -size),
+      this.adjustAndStore('marginRight', el, -size),
     );
     qsa(container, Selector.NAVBAR_TOGGLER).forEach((el) =>
-      this.adjustAndStore('margingRight', el, size),
+      this.adjustAndStore('marginRight', el, size),
     );
   }
 
@@ -50,10 +50,10 @@ export default class BootstrapModalManager extends ModalManager {
       this.restore('paddingRight', el),
     );
     qsa(container, Selector.STICKY_CONTENT).forEach((el) =>
-      this.restore('margingRight', el),
+      this.restore('marginRight', el),
     );
     qsa(container, Selector.NAVBAR_TOGGLER).forEach((el) =>
-      this.restore('margingRight', el),
+      this.restore('marginRight', el),
     );
   }
 }
