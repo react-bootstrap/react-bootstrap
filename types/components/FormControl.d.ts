@@ -9,6 +9,7 @@ type FormControlElement =
 
 export interface FormControlProps {
   size?: 'sm' | 'lg';
+  htmlSize?: number;
   plaintext?: boolean;
   readOnly?: boolean;
   disabled?: boolean;
