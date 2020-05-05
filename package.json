@@ -14,19 +14,18 @@
     "bootstrap": "yarn && yarn --cwd www",
     "build": "node tools/build.js",
     "build-docs": "yarn --cwd www build",
+    "build-types": "yarn tsc -d --emitDeclarationOnly --outDir types",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "dtslint": "dtslint types --expectOnly",
-    "format": "eslint . --fix && npm run prettier -- --write",
-    "lint": "eslint . && npm run prettier -- -l",
     "deploy-docs": "yarn --cwd www deploy",
+    "format": "eslint --ext tsx --ext ts src --fix",
+    "lint": "eslint --ext tsx --ext ts src && tsc --noEmit",
     "prepublishOnly": "npm run build",
-    "prettier": "prettier \"types/**/*.{ts,tsx}\"",
     "release": "rollout",
     "start": "yarn --cwd www develop",
     "tdd": "karma start",
-    "test": "npm run lint && npm run dtslint && npm run test-browser && npm run test-node",
+    "test": "npm run lint && npm run test-browser && npm run test-node",
     "test-browser": "cross-env NODE_ENV=test karma start --single-run",
-    "test-node": "cross-env NODE_ENV=test-server mocha --require @babel/register test/server/*Spec.js"
+    "test-node": "cross-env NODE_ENV=test-server mocha test/server/*Spec.js"
   },
   "husky": {
     "hooks": {
@@ -34,8 +33,7 @@
     }
   },
   "lint-staged": {
-    "*.js": "eslint --fix",
-    "types/**/*.ts": "prettier --write"
+    "*.{js,ts,tsx}": "eslint --fix"
   },
   "prettier": {
     "singleQuote": true,
