@@ -37,6 +37,13 @@ const propTypes = {
   size: PropTypes.string,
 
   /**
+   * The size attribute of the underlying HTML element.
+   * Specifies the visible width in characters if `as` is `'input'`.
+   * Specifies the number of visible options if `as` is `'select'`.
+   */
+  htmlSize: PropTypes.number,
+
+  /**
    * The underlying HTML element to use when rendering the FormControl.
    *
    * @type {('input'|'textarea'|'select'|elementType)}
@@ -104,6 +111,7 @@ const FormControl = React.forwardRef(
       bsCustomPrefix,
       type,
       size,
+      htmlSize,
       id,
       className,
       isValid,
@@ -152,6 +160,7 @@ const FormControl = React.forwardRef(
       <Component
         {...props}
         type={type}
+        size={htmlSize}
         ref={ref}
         readOnly={readOnly}
         id={id || controlId}

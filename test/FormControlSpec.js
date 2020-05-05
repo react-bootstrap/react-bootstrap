@@ -95,6 +95,12 @@ describe('<FormControl>', () => {
     );
   });
 
+  it('should properly display html size of FormControl', () => {
+    const wrapper = mount(<FormControl type="text" htmlSize={42} />);
+
+    expect(wrapper.find('input').props().size).to.eq(42);
+  });
+
   it('Should have input as default component', () => {
     mount(<FormControl />).assertSingle('input');
   });

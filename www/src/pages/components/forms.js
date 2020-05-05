@@ -24,6 +24,7 @@ import Range from '../../examples/Form/Range';
 import RangeCustom from '../../examples/Form/RangeCustom';
 import SelectCustom from '../../examples/Form/SelectCustom';
 import SelectCustomSize from '../../examples/Form/SelectCustomSize';
+import SelectCustomHtmlSize from '../../examples/Form/SelectCustomHtmlSize';
 import File from '../../examples/Form/File';
 import FileButtonTextHTML from '../../examples/Form/FileButtonTextHTML';
 import FileButtonTextScss from '../../examples/Form/FileButtonTextScss';
@@ -320,6 +321,12 @@ export default withLayout(function FormControlsSection({ data }) {
         The custom <code>select</code> element supports sizing.
       </p>
       <ReactPlayground codeText={SelectCustomSize} />
+      <h4>HTML size</h4>
+      <p>
+        You can also specify the visible options of your <code>select</code>{' '}
+        element.
+      </p>
+      <ReactPlayground codeText={SelectCustomHtmlSize} />
 
       <LinkedHeading h="3" id="forms-custom-range">
         Range
