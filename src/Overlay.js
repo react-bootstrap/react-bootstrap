@@ -49,7 +49,7 @@ const propTypes = {
   onHide: PropTypes.func,
 
   /**
-   * Animate the entering and exiting of the Ovelay. `true` will use the `<Fade>` transition,
+   * Animate the entering and exiting of the Overlay. `true` will use the `<Fade>` transition,
    * or a custom react-transition-group `<Transition>` component can be provided.
    */
   transition: PropTypes.oneOfType([PropTypes.bool, elementType]),
