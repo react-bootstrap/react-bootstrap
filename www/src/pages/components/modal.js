@@ -8,6 +8,7 @@ import ReactPlayground from '../../components/ReactPlayground';
 
 import ModalStatic from '../../examples/Modal/Static';
 import ModalBasic from '../../examples/Modal/Basic';
+import ModalStaticBackdrop from '../../examples/Modal/StaticBackdrop';
 import ModalDefaultSizing from '../../examples/Modal/DefaultSizing';
 import ModalCustomSizing from '../../examples/Modal/CustomSizing';
 import ModalVerticallyCentered from '../../examples/Modal/VerticallyCentered';
@@ -86,6 +87,14 @@ export default withLayout(function ModalSection({ data }) {
         content.
       </p>
       <ReactPlayground codeText={ModalBasic} />
+      <LinkedHeading h="3" id="static-backdrop">
+        Static backdrop
+      </LinkedHeading>
+      <p>
+        When backdrop is set to static, the modal will not close when clicking
+        outside it. Click the button below to try it.
+      </p>
+      <ReactPlayground codeText={ModalStaticBackdrop} />
       <LinkedHeading h="3" id="without-animation">
         Without Animation
       </LinkedHeading>

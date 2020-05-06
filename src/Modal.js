@@ -4,6 +4,8 @@ import canUseDOM from 'dom-helpers/canUseDOM';
 import ownerDocument from 'dom-helpers/ownerDocument';
 import removeEventListener from 'dom-helpers/removeEventListener';
 import getScrollbarSize from 'dom-helpers/scrollbarSize';
+import transitionEnd from 'dom-helpers/transitionEnd';
+import listen from 'dom-helpers/listen';
 import PropTypes from 'prop-types';
 import React, {
   useCallback,
@@ -241,8 +243,11 @@ const Modal = React.forwardRef(
     ref,
   ) => {
     const [modalStyle, setStyle] = useState({});
+    const [animateStaticModal, setAnimateStaticModal] = useState(false);
     const waitingForMouseUpRef = useRef(false);
     const ignoreBackdropClickRef = useRef(false);
+    const removeKeydownListenerRef = useRef(null);
+    const removeStaticModalAnimationRef = useRef(null);
 
     const [modal, setModalRef] = useCallbackRef();
     const handleHide = useEventCallback(onHide);
@@ -320,7 +325,33 @@ const Modal = React.forwardRef(
       waitingForMouseUpRef.current = false;
     };
 
+    const handleStaticModalAnimation = () => {
+      setAnimateStaticModal(true);
+      removeStaticModalAnimationRef.current = transitionEnd(
+        modal.dialog,
+        () => {
+          if (removeStaticModalAnimationRef.current) {
+            removeStaticModalAnimationRef.current();
+          }
+          setAnimateStaticModal(false);
+        },
+      );
+    };
+
+    const handleStaticBackdropClick = (e) => {
+      if (e.target !== e.currentTarget) {
+        return;
+      }
+
+      handleStaticModalAnimation();
+    };
+
     const handleClick = (e) => {
+      if (backdrop === 'static') {
+        handleStaticBackdropClick(e);
+        return;
+      }
+
       if (ignoreBackdropClickRef.current || e.target !== e.currentTarget) {
         ignoreBackdropClickRef.current = false;
         return;
@@ -329,13 +360,41 @@ const Modal = React.forwardRef(
       onHide();
     };
 
+    const handleDocumentKeyDown = useEventCallback((e) => {
+      if (e.keyCode === 27) {
+        handleStaticModalAnimation();
+      }
+    });
+
     const handleEnter = (node, ...args) => {
       if (node) {
         node.style.display = 'block';
         updateDialogStyle(node);
       }
 
+      // If keyboard is false, we still need to listen
+      // to esc presses to trigger animation.
+      if (backdrop === 'static' && !keyboard) {
+        removeKeydownListenerRef.current = listen(
+          document,
+          'keydown',
+          handleDocumentKeyDown,
+        );
+      }
+
       if (onEnter) onEnter(node, ...args);
+    };
+
+    const handleExit = (node, ...args) => {
+      if (removeKeydownListenerRef.current) {
+        removeKeydownListenerRef.current();
+      }
+
+      if (removeStaticModalAnimationRef.current) {
+        removeStaticModalAnimationRef.current();
+      }
+
+      if (onExit) onExit(node, ...args);
     };
 
     const handleEntering = (node, ...args) => {
@@ -379,8 +438,14 @@ const Modal = React.forwardRef(
         role="dialog"
         {...dialogProps}
         style={baseModalStyle}
-        className={classNames(className, bsPrefix)}
-        onClick={backdrop === true ? handleClick : undefined}
+        className={classNames(
+          className,
+          bsPrefix,
+          animateStaticModal && 'modal-static',
+        )}
+        onClick={
+          backdrop === true || backdrop === 'static' ? handleClick : undefined
+        }
         onMouseUp={handleMouseUp}
         aria-labelledby={ariaLabelledby}
       >
@@ -413,7 +478,7 @@ const Modal = React.forwardRef(
           onEnter={handleEnter}
           onEntering={handleEntering}
           onEntered={onEntered}
-          onExit={onExit}
+          onExit={handleExit}
           onExiting={onExiting}
           onExited={handleExited}
           manager={getModalManager()}
