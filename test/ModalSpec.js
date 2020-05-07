@@ -60,6 +60,64 @@ describe('<Modal>', () => {
     expect(onHideSpy).to.not.have.been.called;
   });
 
+  it('Should show "static" dialog animation when backdrop is clicked', () => {
+    const noOp = () => {};
+    const wrapper = mount(
+      <Modal show onHide={noOp} backdrop="static">
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    const modal = wrapper.find('.modal');
+    modal.simulate('click');
+
+    expect(wrapper.find('.modal-static').length).to.equal(1);
+  });
+
+  it('Should show "static" dialog animation when esc pressed and keyboard is false', () => {
+    const noOp = () => {};
+    const wrapper = mount(
+      <Modal show onHide={noOp} backdrop="static" keyboard={false}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    const event = new KeyboardEvent('keydown', { keyCode: 27 });
+    document.dispatchEvent(event);
+    wrapper.update();
+
+    expect(wrapper.find('.modal-static').length).to.equal(1);
+  });
+
+  it('Should not show "static" dialog animation when esc pressed and keyboard is true', () => {
+    const noOp = () => {};
+    const wrapper = mount(
+      <Modal show onHide={noOp} backdrop="static" keyboard>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    const event = new KeyboardEvent('keydown', { keyCode: 27 });
+    document.dispatchEvent(event);
+    wrapper.update();
+
+    expect(wrapper.find('.modal-static').length).to.equal(0);
+  });
+
+  it('Should not show "static" dialog animation modal backdrop is not "static"', () => {
+    const noOp = () => {};
+    const wrapper = mount(
+      <Modal show onHide={noOp} backdrop>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    const modal = wrapper.find('.modal');
+    modal.simulate('click');
+
+    expect(wrapper.find('.modal-static').length).to.equal(0);
+  });
+
   it('Should close the modal when the modal close button is clicked', (done) => {
     const doneOp = () => {
       done();
