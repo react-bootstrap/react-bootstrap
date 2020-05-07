@@ -4,7 +4,7 @@ import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import React from 'react';
 import { useDropdownToggle } from 'react-overlays/DropdownToggle';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
-import Button, { ButtonProps } from './Button';
+import Button, { ButtonProps, CommonButtonProps } from './Button';
 import { useBootstrapPrefix } from './ThemeProvider';
 import useWrappedRefWithWarning from './useWrappedRefWithWarning';
 import {
@@ -23,6 +23,10 @@ export interface DropdownToggleProps
 type DropdownToggle = BsPrefixRefForwardingComponent<
   'button',
   DropdownToggleProps
+>;
+
+export type PropsFromToggle = Partial<
+  Pick<React.ComponentPropsWithRef<DropdownToggle>, CommonButtonProps>
 >;
 
 const propTypes = {

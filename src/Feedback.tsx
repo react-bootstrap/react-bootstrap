@@ -22,7 +22,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  type: 'valid' as 'valid',
+  type: 'valid' as const,
 };
 
 const Feedback: Feedback = React.forwardRef(

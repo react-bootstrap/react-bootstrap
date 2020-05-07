@@ -4,23 +4,15 @@ import PropTypes from 'prop-types';
 import Button from './Button';
 import ButtonGroup from './ButtonGroup';
 import Dropdown from './Dropdown';
-import DropdownToggle from './DropdownToggle';
+import { PropsFromToggle } from './DropdownToggle';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
 } from './helpers';
 
-type PropsFromToggle = Partial<
-  Pick<
-    React.ComponentPropsWithRef<typeof DropdownToggle>,
-    'size' | 'variant' | 'disabled'
-  >
->;
-
 export interface SplitButtonProps
   extends PropsFromToggle,
     BsPrefixPropsWithChildren {
-  href?: string;
   id: string | number;
   menuRole?: string;
   onClick?: React.MouseEventHandler<this>;

@@ -2,16 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Dropdown from './Dropdown';
-import DropdownToggle from './DropdownToggle';
+import DropdownToggle, { PropsFromToggle } from './DropdownToggle';
 import { BsPrefixRefForwardingComponent } from './helpers';
 import DropdownMenu from './DropdownMenu';
-
-type PropsFromToggle = Partial<
-  Pick<
-    React.ComponentPropsWithRef<typeof DropdownToggle>,
-    'href' | 'size' | 'variant' | 'disabled'
-  >
->;
 
 export interface DropdownButtonProps
   extends React.PropsWithChildren<PropsFromToggle> {

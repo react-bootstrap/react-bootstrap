@@ -24,6 +24,7 @@ export interface ButtonProps
 }
 
 type Button = BsPrefixRefForwardingComponent<'button', ButtonProps>;
+export type CommonButtonProps = 'href' | 'size' | 'variant' | 'disabled';
 
 const propTypes = {
   /**

@@ -147,7 +147,7 @@ const propTypes = {
 
 const defaultProps = {
   expand: true,
-  variant: 'light' as 'light',
+  variant: 'light' as const,
   collapseOnSelect: false,
 };
 

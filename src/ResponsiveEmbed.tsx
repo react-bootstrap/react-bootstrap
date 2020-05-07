@@ -36,7 +36,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  aspectRatio: '1by1' as '1by1',
+  aspectRatio: '1by1' as const,
 };
 
 const ResponsiveEmbed: ResponsiveEmbed = React.forwardRef<
