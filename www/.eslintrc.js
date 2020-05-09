@@ -36,10 +36,15 @@ module.exports = {
       },
     },
     {
-      files: ['config.js', 'gatsby-config.js', 'gatsby-node.js'],
+      files: [
+        '.eslintrc.js',
+        'config.js',
+        'gatsby-config.js',
+        'gatsby-node.js',
+      ],
       settings: {
-        'import/resolver': 'node'
-      }
-    }
+        'import/resolver': 'node',
+      },
+    },
   ],
 };
