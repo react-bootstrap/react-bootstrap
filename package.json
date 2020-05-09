@@ -97,7 +97,7 @@
     "dtslint": "^3.5.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
-    "eslint": "^6.8.0",
+    "eslint": "^7.0.0",
     "eslint-import-resolver-node": "^0.3.3",
     "eslint-import-resolver-webpack": "^0.12.1",
     "eslint-plugin-import": "^2.20.2",
