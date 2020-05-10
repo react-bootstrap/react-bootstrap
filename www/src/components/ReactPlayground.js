@@ -11,6 +11,7 @@ import React, {
   useState,
 } from 'react';
 import * as ReactBootstrap from 'react-bootstrap';
+import AccordionContext from 'react-bootstrap/AccordionContext';
 import ReactDOM from 'react-dom';
 import {
   LiveContext,
@@ -28,7 +29,9 @@ const scope = {
   useEffect,
   useRef,
   useState,
+  useContext,
   ...ReactBootstrap,
+  AccordionContext,
   ReactDOM,
   classNames,
   PropTypes,

@@ -10,6 +10,7 @@
     "useState": false,
     "useEffect": false,
     "useRef": false,
+    "useContext":false,
     "render": false,
     "classNames": false,
     "React": false,
@@ -69,7 +70,8 @@
 
     "ThemeProvider": false,
 
-    "useAccordionToggle": false, 
+    "useAccordionToggle": false,
+    "AccordionContext": false,
 
     "mountNode": false,
     "yup": false,
