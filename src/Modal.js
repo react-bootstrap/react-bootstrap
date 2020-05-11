@@ -441,7 +441,7 @@ const Modal = React.forwardRef(
         className={classNames(
           className,
           bsPrefix,
-          animateStaticModal && 'modal-static',
+          animateStaticModal && `${bsPrefix}-static`,
         )}
         onClick={
           backdrop === true || backdrop === 'static' ? handleClick : undefined
