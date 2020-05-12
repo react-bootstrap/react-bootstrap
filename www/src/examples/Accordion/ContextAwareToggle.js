@@ -1,4 +1,4 @@
-function ContexAwareToggle({ children, eventKey, callback }) {
+function ContextAwareToggle({ children, eventKey, callback }) {
   const currentEventKey = useContext(AccordionContext);
 
   const decoratedOnClick = useAccordionToggle(
@@ -24,7 +24,7 @@ function Example() {
     <Accordion defaultActiveKey="0">
       <Card>
         <Card.Header>
-          <ContexAwareToggle eventKey="0">Click me!</ContexAwareToggle>
+          <ContextAwareToggle eventKey="0">Click me!</ContextAwareToggle>
         </Card.Header>
         <Accordion.Collapse eventKey="0">
           <Card.Body>Hello! I'm the body</Card.Body>
@@ -32,7 +32,7 @@ function Example() {
       </Card>
       <Card>
         <Card.Header>
-          <ContexAwareToggle eventKey="1">Click me!</ContexAwareToggle>
+          <ContextAwareToggle eventKey="1">Click me!</ContextAwareToggle>
         </Card.Header>
         <Accordion.Collapse eventKey="1">
           <Card.Body>Hello! I'm another body</Card.Body>
