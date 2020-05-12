@@ -28,6 +28,7 @@ const scope = {
   useEffect,
   useRef,
   useState,
+  useContext,
   ...ReactBootstrap,
   ReactDOM,
   classNames,

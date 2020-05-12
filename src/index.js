@@ -1,4 +1,5 @@
 export Accordion from './Accordion';
+export AccordionContext from './AccordionContext';
 export AccordionToggle, { useAccordionToggle } from './AccordionToggle';
 export AccordionCollapse from './AccordionCollapse';
 export Alert from './Alert';
