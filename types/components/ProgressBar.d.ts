@@ -10,7 +10,15 @@ export interface ProgressBarProps {
   srOnly?: boolean;
   striped?: boolean;
   animated?: boolean;
-  variant?: 'success' | 'danger' | 'warning' | 'info';
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'info'
+    | 'light'
+    | 'dark';
 }
 
 declare class ProgressBar extends BsPrefixComponent<'div', ProgressBarProps> {}

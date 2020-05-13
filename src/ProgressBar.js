@@ -91,7 +91,7 @@ const propTypes = {
   /**
    * Sets the background class of the progress bar.
    *
-   * @type ('success'|'danger'|'warning'|'info')
+   * @type ('primary'|'secondary'|'success'|'danger'|'warning'|'info'|'light'|'dark')
    */
   variant: PropTypes.string,
 
