@@ -307,6 +307,10 @@ const Modal = React.forwardRef(
 
     useWillUnmount(() => {
       removeEventListener(window, 'resize', handleWindowResize);
+
+      if (removeStaticModalAnimationRef.current) {
+        removeStaticModalAnimationRef.current();
+      }
     });
 
     // We prevent the modal from closing during a drag by detecting where the
