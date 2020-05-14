@@ -312,4 +312,39 @@ describe('<Modal>', () => {
       'div.modal.show[role="dialog"][aria-labelledby="modal-title"]',
     );
   });
+
+  it('Should call onEscapeKeyDown when keyboard is true', () => {
+    const noOp = () => {};
+    const onEscapeKeyDownSpy = sinon.spy();
+    mount(
+      <Modal show onHide={noOp} keyboard onEscapeKeyDown={onEscapeKeyDownSpy}>
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    const event = new KeyboardEvent('keydown', { keyCode: 27 });
+    document.dispatchEvent(event);
+
+    expect(onEscapeKeyDownSpy).to.have.been.called;
+  });
+
+  it('Should not call onEscapeKeyDown when keyboard is false', () => {
+    const noOp = () => {};
+    const onEscapeKeyDownSpy = sinon.spy();
+    mount(
+      <Modal
+        show
+        onHide={noOp}
+        keyboard={false}
+        onEscapeKeyDown={onEscapeKeyDownSpy}
+      >
+        <strong>Message</strong>
+      </Modal>,
+    );
+
+    const event = new KeyboardEvent('keydown', { keyCode: 27 });
+    document.dispatchEvent(event);
+
+    expect(onEscapeKeyDownSpy).to.not.have.been.called;
+  });
 });

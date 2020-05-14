@@ -5,7 +5,6 @@ import ownerDocument from 'dom-helpers/ownerDocument';
 import removeEventListener from 'dom-helpers/removeEventListener';
 import getScrollbarSize from 'dom-helpers/scrollbarSize';
 import transitionEnd from 'dom-helpers/transitionEnd';
-import listen from 'dom-helpers/listen';
 import PropTypes from 'prop-types';
 import React, {
   useCallback,
@@ -246,7 +245,6 @@ const Modal = React.forwardRef(
     const [animateStaticModal, setAnimateStaticModal] = useState(false);
     const waitingForMouseUpRef = useRef(false);
     const ignoreBackdropClickRef = useRef(false);
-    const removeKeydownListenerRef = useRef(null);
     const removeStaticModalAnimationRef = useRef(null);
 
     const [modal, setModalRef] = useCallbackRef();
@@ -360,11 +358,16 @@ const Modal = React.forwardRef(
       onHide();
     };
 
-    const handleDocumentKeyDown = useEventCallback((e) => {
-      if (e.keyCode === 27) {
+    const handleEscapeKeyDown = (e) => {
+      if (!keyboard && backdrop === 'static') {
+        // Call preventDefault to stop modal from closing in react-overlays,
+        // then play our animation.
+        e.preventDefault();
         handleStaticModalAnimation();
+      } else if (keyboard && onEscapeKeyDown) {
+        onEscapeKeyDown(e);
       }
-    });
+    };
 
     const handleEnter = (node, ...args) => {
       if (node) {
@@ -372,24 +375,10 @@ const Modal = React.forwardRef(
         updateDialogStyle(node);
       }
 
-      // If keyboard is false, we still need to listen
-      // to esc presses to trigger animation.
-      if (backdrop === 'static' && !keyboard) {
-        removeKeydownListenerRef.current = listen(
-          document,
-          'keydown',
-          handleDocumentKeyDown,
-        );
-      }
-
       if (onEnter) onEnter(node, ...args);
     };
 
     const handleExit = (node, ...args) => {
-      if (removeKeydownListenerRef.current) {
-        removeKeydownListenerRef.current();
-      }
-
       if (removeStaticModalAnimationRef.current) {
         removeStaticModalAnimationRef.current();
       }
@@ -467,12 +456,12 @@ const Modal = React.forwardRef(
           ref={setModalRef}
           backdrop={backdrop}
           container={container}
-          keyboard={keyboard}
+          keyboard // Always set true - see handleEscapeKeyDown
           autoFocus={autoFocus}
           enforceFocus={enforceFocus}
           restoreFocus={restoreFocus}
           restoreFocusOptions={restoreFocusOptions}
-          onEscapeKeyDown={onEscapeKeyDown}
+          onEscapeKeyDown={handleEscapeKeyDown}
           onShow={onShow}
           onHide={onHide}
           onEnter={handleEnter}
