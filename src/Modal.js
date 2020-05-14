@@ -328,9 +328,6 @@ const Modal = React.forwardRef(
       removeStaticModalAnimationRef.current = transitionEnd(
         modal.dialog,
         () => {
-          if (removeStaticModalAnimationRef.current) {
-            removeStaticModalAnimationRef.current();
-          }
           setAnimateStaticModal(false);
         },
       );
@@ -432,9 +429,7 @@ const Modal = React.forwardRef(
           bsPrefix,
           animateStaticModal && `${bsPrefix}-static`,
         )}
-        onClick={
-          backdrop === true || backdrop === 'static' ? handleClick : undefined
-        }
+        onClick={backdrop ? handleClick : undefined}
         onMouseUp={handleMouseUp}
         aria-labelledby={ariaLabelledby}
       >
