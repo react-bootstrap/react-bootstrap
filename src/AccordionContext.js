@@ -1,3 +1,6 @@
 import React from 'react';
 
-export default React.createContext(null);
+const context = React.createContext(null);
+context.displayName = 'AccordionContext';
+
+export default context;
