@@ -20,7 +20,7 @@ export interface TabsProps extends React.PropsWithChildren<{}> {
   onSelect?: SelectCallback;
   variant?: 'tabs' | 'pills';
   transition?: TransitionType;
-  id: string;
+  id?: string;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
 }

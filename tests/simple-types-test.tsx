@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable jsx-a11y/aria-role */
 import * as React from 'react';
 
 import {
@@ -36,8 +38,9 @@ import {
   ToggleButtonGroup,
   ToggleButton,
   Toast,
-} from './src';
+} from '../src';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MegaComponent = () => (
   <>
     <Alert ref={React.createRef<HTMLDivElement>()} dismissible>
@@ -51,7 +54,7 @@ const MegaComponent = () => (
           <Accordion.Toggle eventKey="0">Click me!</Accordion.Toggle>
         </Card.Header>
         <Accordion.Collapse eventKey="0">
-          <Card.Body>Hello! I'm the body</Card.Body>
+          <Card.Body>Hello! I am the body</Card.Body>
         </Accordion.Collapse>
       </Card>
     </Accordion>
@@ -80,7 +83,7 @@ const MegaComponent = () => (
           <Card.Title>Card Title</Card.Title>
           <Card.Text>
             Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            bulk of the card content.
           </Card.Text>
           <Button variant="primary">Go somewhere</Button>
         </Card.Body>
@@ -168,7 +171,7 @@ const MegaComponent = () => (
           ref={React.createRef<HTMLInputElement>()}
           onChange={(e) => {
             // $ExpectType ChangeEvent<FormControlElement>
-            e;
+            return e;
           }}
         />
       </Form.Group>
@@ -178,7 +181,7 @@ const MegaComponent = () => (
           as="select"
           ref={React.createRef<HTMLSelectElement>()}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-            e;
+            return e;
           }}
         >
           <option>1</option>
@@ -205,7 +208,7 @@ const MegaComponent = () => (
           rows={3}
           ref={React.createRef<HTMLTextAreaElement>()}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            e;
+            return e;
           }}
         />
       </Form.Group>
@@ -294,18 +297,14 @@ const MegaComponent = () => (
       </ListGroup.Item>
       <ListGroup.Item action>This one is a button</ListGroup.Item>
     </ListGroup>
-    <Modal show={false} onHide={() => {}}>
+    <Modal show={false}>
       <Modal.Header closeButton>
         <Modal.Title>Modal heading</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+      <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={() => {}}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={() => {}}>
-          Save Changes
-        </Button>
+        <Button variant="secondary">Close</Button>
+        <Button variant="primary">Save Changes</Button>
       </Modal.Footer>
     </Modal>
     <Nav variant="pills" activeKey="1" onSelect={(k: string) => console.log(k)}>
@@ -405,7 +404,8 @@ const MegaComponent = () => (
       <ToggleButton value={2}>Radio 2</ToggleButton>
       <ToggleButton value={3}>Radio 3</ToggleButton>
     </ToggleButtonGroup>
-    // As = ComponentClass
+    // As = ComponentClass // TODO: Reinstate these? What _is_ ExpectError?
+    {/*
     <Tabs invalidProp="2" />; // $ExpectError
     <Alert.Link invalidProp="2" />; // $ExpectError
     <Dropdown.Item invalidProp="2" />; // $ExpectError
@@ -421,5 +421,6 @@ const MegaComponent = () => (
     // As = Intrinsic
     <Button<'img'> as="img" bla="foo" />; // $ExpectError
     <Button as="img" src="bla" />
+    */}
   </>
 );

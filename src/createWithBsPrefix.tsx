@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import camelize from 'dom-helpers/camelize';
 import React from 'react';
 import { useBootstrapPrefix } from './ThemeProvider';
+import { BsPrefixRefForwardingComponent } from './helpers';
 
 const pascalCase = (str) => str[0].toUpperCase() + camelize(str).slice(1);
 
@@ -11,7 +12,7 @@ interface BsPrefixOptions {
   defaultProps?: any; // TODO
 }
 
-// TODO: emstricten the typing here! `createWithBsPrefix<TElementType>...`
+// TODO: emstricten & fix the typing here! `createWithBsPrefix<TElementType>...`
 export default function createWithBsPrefix(
   prefix: string,
   {
@@ -19,7 +20,7 @@ export default function createWithBsPrefix(
     Component = 'div',
     defaultProps,
   }: BsPrefixOptions = {},
-) {
+): BsPrefixRefForwardingComponent<any> {
   const BsComponent = React.forwardRef(
     // @ts-ignore
     ({ className, bsPrefix, as: Tag = Component, ...props }, ref) => {
@@ -35,5 +36,5 @@ export default function createWithBsPrefix(
   );
   BsComponent.defaultProps = defaultProps;
   BsComponent.displayName = displayName;
-  return BsComponent;
+  return BsComponent as any;
 }

@@ -6,14 +6,14 @@ import TabContent from './TabContent';
 import TabPane from './TabPane';
 
 export interface TabProps extends React.ComponentPropsWithRef<typeof TabPane> {
-  eventKey?: unknown;
+  eventKey?: string;
   title: React.ReactNode;
   disabled?: boolean;
   tabClassName?: string;
 }
 
 /* eslint-disable react/require-render-return, react/no-unused-prop-types */
-class Tab extends React.Component {
+class Tab extends React.Component<TabProps> {
   static propTypes = {
     title: PropTypes.node.isRequired,
   };

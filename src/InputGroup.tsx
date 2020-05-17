@@ -14,9 +14,9 @@ const InputGroupAppend = createWithBsPrefix('input-group-append');
 
 const InputGroupPrepend = createWithBsPrefix('input-group-prepend');
 
-const InputGroupText = (createWithBsPrefix('input-group-text', {
+const InputGroupText = createWithBsPrefix('input-group-text', {
   Component: 'span',
-}) as unknown) as React.FC;
+});
 
 const InputGroupCheckbox = (props) => (
   <InputGroupText>
