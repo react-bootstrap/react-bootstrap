@@ -6,8 +6,7 @@ import AccordionContext from './AccordionContext';
 import { BsPrefixRefForwardingComponent } from './helpers';
 
 export interface AccordionCollapseProps
-  extends CollapseProps,
-    React.HTMLAttributes<HTMLDivElement> {
+  extends React.PropsWithChildren<CollapseProps> {
   eventKey: string;
 }
 
@@ -26,7 +25,7 @@ const propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-const AccordionCollapse: AccordionCollapse = React.forwardRef(
+const AccordionCollapse: AccordionCollapse = React.forwardRef<Collapse>(
   ({ children, eventKey, ...props }: AccordionCollapseProps, ref) => {
     const contextEventKey = useContext(AccordionContext);
 
@@ -36,7 +35,7 @@ const AccordionCollapse: AccordionCollapse = React.forwardRef(
       </Collapse>
     );
   },
-);
+) as any;
 
 AccordionCollapse.propTypes = propTypes;
 AccordionCollapse.displayName = 'AccordionCollapse';

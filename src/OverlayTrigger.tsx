@@ -273,6 +273,7 @@ function OverlayTrigger({
     triggerProps.onMouseOut = handleMouseOut;
   }
 
+  // TODO: fix typing
   // @ts-ignore
   const modifiers = [ariaModifier].concat(popperConfig.modifiers || []);
   return (
@@ -284,6 +285,8 @@ function OverlayTrigger({
         {...props}
         popperConfig={{
           ...popperConfig,
+          // TODO: fix typing
+          // @ts-ignore
           modifiers,
         }}
         show={show}
