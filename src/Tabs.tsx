@@ -25,11 +25,6 @@ export interface TabsProps extends React.PropsWithChildren<{}> {
   unmountOnExit?: boolean;
 }
 
-// declare class Tabs<
-//   // Need to use BsPrefixComponentClass to get proper type checking.
-//   As extends React.ElementType = BsPrefixComponentClass<'div', NavProps>
-// > extends BsPrefixComponent<As, TabsProps> {}
-
 const propTypes = {
   /**
    * Mark the Tab with a matching `eventKey` as active.

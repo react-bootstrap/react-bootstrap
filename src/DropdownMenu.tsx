@@ -26,7 +26,7 @@ export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
   popperConfig?: { modifiers?: any };
 }
 
-type DropdownMenu = BsPrefixRefForwardingComponent<'a', DropdownMenuProps>;
+type DropdownMenu = BsPrefixRefForwardingComponent<'div', DropdownMenuProps>;
 
 const propTypes = {
   /**

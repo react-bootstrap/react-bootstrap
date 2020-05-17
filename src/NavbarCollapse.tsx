@@ -11,11 +11,6 @@ export interface NavbarCollapseProps
     React.HTMLAttributes<HTMLDivElement>,
     BsPrefixProps {}
 
-// type NavbarCollapse = BsPrefixRefForwardingComponent<
-//   'div',
-//   NavbarCollapseProps
-// >;
-
 const propTypes = {
   /** @default 'navbar-collapse' */
   bsPrefix: PropTypes.string,

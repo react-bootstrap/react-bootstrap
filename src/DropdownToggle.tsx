@@ -17,7 +17,7 @@ export interface DropdownToggleProps
     ButtonProps {
   split?: boolean;
   childBsPrefix?: string;
-  eventKey?: null; // TODO: Used by NavDropdown?
+  eventKey?: any; // TODO: fix this type
 }
 
 type DropdownToggle = BsPrefixRefForwardingComponent<

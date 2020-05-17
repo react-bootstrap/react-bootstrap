@@ -40,8 +40,6 @@ export interface OverlayProps
   placement?: Placement;
 }
 
-// declare const Overlay: React.FunctionComponent<OverlayProps>;
-
 const propTypes = {
   /**
    * A component instance, DOM node, or function that returns either.

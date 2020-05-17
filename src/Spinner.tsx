@@ -13,10 +13,6 @@ export interface SpinnerProps extends BsPrefixPropsWithChildren {
   variant?: Variant;
 }
 
-// declare class Spinner<
-//   As extends React.ElementType = 'div'
-// > extends BsPrefixComponent<As, SpinnerProps> {}
-
 const propTypes = {
   /**
    * @default 'spinner'

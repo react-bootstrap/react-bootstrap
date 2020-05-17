@@ -54,14 +54,14 @@ const Accordion = (React.forwardRef((props: AccordionProps, ref) => {
     activeKey: 'onSelect',
   });
 
+  const finalClassName = classNames(
+    className,
+    useBootstrapPrefix(bsPrefix, 'accordion'),
+  );
   return (
     <AccordionContext.Provider value={activeKey || null}>
       <SelectableContext.Provider value={onSelect || null}>
-        <Component
-          ref={ref}
-          {...controlledProps}
-          className={classNames(className, useBootstrapPrefix(bsPrefix, 'accordion'))}
-        >
+        <Component ref={ref} {...controlledProps} className={finalClassName}>
           {children}
         </Component>
       </SelectableContext.Provider>

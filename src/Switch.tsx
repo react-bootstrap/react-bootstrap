@@ -9,11 +9,6 @@ type Switch = BsPrefixRefForwardingComponent<FormCheck, SwitchProps> & {
   Label: typeof FormCheck.Label;
 };
 
-// declare interface Switch
-//   extends BsPrefixRefForwardingComponent<FormCheck, SwitchProps> {}
-//
-// declare const Switch: Switch;
-
 const Switch: Switch = (React.forwardRef<FormCheck, SwitchProps>(
   (props, ref) => <FormCheck {...props} ref={ref} type="switch" />,
 ) as unknown) as Switch;

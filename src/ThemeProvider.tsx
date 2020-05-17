@@ -5,8 +5,6 @@ export interface ThemeProviderProps {
   prefixes: object;
 }
 
-// declare class ThemeProvider extends React.Component<ThemeProviderProps> {}
-
 const ThemeContext = React.createContext({});
 const { Consumer, Provider } = ThemeContext;
 

@@ -17,8 +17,6 @@ export interface TabContainerProps extends React.PropsWithChildren<{}> {
   defaultActiveKey?: unknown;
 }
 
-// declare class TabContainer extends React.Component<TabContainerProps> {}
-
 const validateId: Validator<string> = (props, ...args) => {
   let error: Error | null = null;
 

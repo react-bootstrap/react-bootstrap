@@ -12,8 +12,6 @@ export interface ModalDialogProps extends BsPrefixPropsWithChildren {
   scrollable?: boolean;
 }
 
-// declare class ModalDialog extends BsPrefixComponent<'div', ModalDialogProps> {}
-
 const propTypes = {
   /** @default 'modal' */
   bsPrefix: PropTypes.string,

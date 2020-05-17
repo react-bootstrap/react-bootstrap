@@ -22,8 +22,6 @@ export interface OverlayTriggerProps
   show?: never;
 }
 
-// declare class OverlayTrigger extends React.Component<OverlayTriggerProps> {}
-
 class RefHolder extends React.Component {
   render() {
     return this.props.children;

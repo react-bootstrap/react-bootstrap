@@ -22,7 +22,10 @@ export interface DropdownItemProps extends BsPrefixPropsWithChildren {
   onSelect?: SelectCallback;
 }
 
-type DropdownItem = BsPrefixRefForwardingComponent<'a', DropdownItemProps>;
+type DropdownItem = BsPrefixRefForwardingComponent<
+  typeof SafeAnchor,
+  DropdownItemProps
+>;
 
 const propTypes = {
   /** @default 'dropdown' */
@@ -109,6 +112,7 @@ const DropdownItem: DropdownItem = React.forwardRef(
     });
 
     return (
+      // "TS2604: JSX element type 'Component' does not have any construct or call signatures."
       // @ts-ignore
       <Component
         {...props}

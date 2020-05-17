@@ -15,8 +15,6 @@ export interface ImageProps
   thumbnail?: boolean;
 }
 
-// declare class Image extends BsPrefixComponent<'img', ImageProps> {}
-
 export const propTypes = {
   /**
    * @default 'img'
