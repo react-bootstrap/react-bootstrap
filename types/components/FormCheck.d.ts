@@ -14,6 +14,7 @@ export interface FormCheckProps {
   type?: 'checkbox' | 'radio' | 'switch';
   isValid?: boolean;
   isInvalid?: boolean;
+  feedbackTooltip?: boolean;
   feedback?: React.ReactNode;
 }
 

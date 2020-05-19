@@ -9,20 +9,28 @@ const propTypes = {
    * @type {('valid'|'invalid')}
    */
   type: PropTypes.string.isRequired,
+
+  /** Display feedback as a tooltip. */
+  tooltip: PropTypes.bool,
+
   as: PropTypes.elementType,
 };
 
 const defaultProps = {
   type: 'valid',
+  tooltip: false,
 };
 
 const Feedback = React.forwardRef(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
-  ({ as: Component = 'div', className, type, ...props }, ref) => (
+  ({ as: Component = 'div', className, type, tooltip, ...props }, ref) => (
     <Component
       {...props}
       ref={ref}
-      className={classNames(className, type && `${type}-feedback`)}
+      className={classNames(
+        className,
+        `${type}-${tooltip ? 'tooltip' : 'feedback'}`,
+      )}
     />
   ),
 );
