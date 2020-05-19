@@ -32,6 +32,7 @@ import FileApi from '../../examples/Form/FileApi';
 import FormTextControls from '../../examples/Form/TextControls';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
 import ValidationNative from '../../examples/Form/ValidationNative';
+import ValidationTooltips from '../../examples/Form/ValidationTooltips';
 import withLayout from '../../withLayout';
 
 export default withLayout(function FormControlsSection({ data }) {
@@ -255,6 +256,18 @@ export default withLayout(function FormControlsSection({ data }) {
         <a href="https://github.com/jaredpalmer/formik">Formik</a>.
       </p>
       <ReactPlayground codeText={ValidationFormik} />
+
+      <LinkedHeading h="3" id="forms-validation-tooltips">
+        Tooltips
+      </LinkedHeading>
+      <p>
+        If your form layout allows it, you can use the <code>tooltip</code> prop
+        to display validation feedback in a styled tooltip. Be sure to have a
+        parent with <code>position: relative</code> on it for tooltip
+        positioning. In the example below, our column classes have this already,
+        but your project may require an alternative setup.
+      </p>
+      <ReactPlayground codeText={ValidationTooltips} />
 
       <LinkedHeading h="3" id="forms-validation-examples">
         Examples

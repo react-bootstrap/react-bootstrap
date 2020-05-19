@@ -125,4 +125,40 @@ describe('<FormCheck>', () => {
     const wrapper = mount(<FormCheck as={Surrogate} />);
     wrapper.assertSingle('input.extraClass[type="checkbox"]');
   });
+
+  it('Should render valid feedback properly', () => {
+    const wrapper = mount(<FormCheck label="My label" isValid />);
+    const feedback = wrapper.find('Feedback');
+
+    expect(feedback.prop('type')).to.equal('valid');
+    expect(feedback.prop('tooltip')).to.be.false;
+  });
+
+  it('Should render invalid feedback properly', () => {
+    const wrapper = mount(
+      <FormCheck label="My label" isValid={false} isInvalid />,
+    );
+    const feedback = wrapper.find('Feedback');
+
+    expect(feedback.prop('type')).to.equal('invalid');
+    expect(feedback.prop('tooltip')).to.be.false;
+  });
+
+  it('Should render valid feedback tooltip properly', () => {
+    const wrapper = mount(<FormCheck label="My label" isValid tooltip />);
+    const feedback = wrapper.find('Feedback');
+
+    expect(feedback.prop('type')).to.equal('valid');
+    expect(feedback.prop('tooltip')).to.be.true;
+  });
+
+  it('Should render invalid feedback tooltip properly', () => {
+    const wrapper = mount(
+      <FormCheck label="My label" isValid={false} isInvalid tooltip />,
+    );
+    const feedback = wrapper.find('Feedback');
+
+    expect(feedback.prop('type')).to.equal('invalid');
+    expect(feedback.prop('tooltip')).to.be.true;
+  });
 });

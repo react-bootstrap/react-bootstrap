@@ -5,6 +5,7 @@ import { BsPrefixComponent } from './helpers';
 export interface FeedbackProps {
   bsPrefix?: never;
   type?: 'valid' | 'invalid';
+  tooltip?: boolean;
 }
 
 declare class Feedback<

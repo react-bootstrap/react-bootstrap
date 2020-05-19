@@ -11,6 +11,7 @@ export interface FormFileProps {
   custom?: boolean;
   isValid?: boolean;
   isInvalid?: boolean;
+  tooltip?: boolean;
   feedback?: React.ReactNode;
   lang?: string;
 }

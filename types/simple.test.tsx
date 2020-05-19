@@ -234,6 +234,7 @@ import {
     </Col>
   </Form.Group>
   <Form.File id="custom-file" label="Custom file input" custom />
+  <Form.File id="file-tooltip" label="File tooltip" tooltip />
   <Form.File
     ref={React.createRef<HTMLInputElement & FormFile>()}
     id="custom-file-ref"
@@ -242,6 +243,8 @@ import {
   />
   <Form.File.Input />
   <Form.Switch label="Switch" disabled />
+  <Form.Check id="check-tooltip" tooltip />
+  <FormControl.Feedback tooltip />
 </Form>;
 
 <div>

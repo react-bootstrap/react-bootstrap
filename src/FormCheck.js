@@ -79,6 +79,9 @@ const propTypes = {
   /** Manually style the input as invalid */
   isInvalid: PropTypes.bool.isRequired,
 
+  /** Display feedback as a tooltip. */
+  tooltip: PropTypes.bool,
+
   /** A message to display when the input is in a validation state */
   feedback: PropTypes.node,
 };
@@ -89,6 +92,7 @@ const defaultProps = {
   disabled: false,
   isValid: false,
   isInvalid: false,
+  tooltip: false,
   title: '',
 };
 
@@ -102,6 +106,7 @@ const FormCheck = React.forwardRef(
       disabled,
       isValid,
       isInvalid,
+      tooltip,
       feedback,
       className,
       style,
@@ -165,7 +170,10 @@ const FormCheck = React.forwardRef(
                 <FormCheckLabel title={title}>{label}</FormCheckLabel>
               )}
               {(isValid || isInvalid) && (
-                <Feedback type={isValid ? 'valid' : 'invalid'}>
+                <Feedback
+                  type={isValid ? 'valid' : 'invalid'}
+                  tooltip={tooltip}
+                >
                   {feedback}
                 </Feedback>
               )}
