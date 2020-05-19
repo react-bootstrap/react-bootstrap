@@ -145,7 +145,9 @@ describe('<FormCheck>', () => {
   });
 
   it('Should render valid feedback tooltip properly', () => {
-    const wrapper = mount(<FormCheck label="My label" isValid tooltip />);
+    const wrapper = mount(
+      <FormCheck label="My label" isValid feedbackTooltip />,
+    );
     const feedback = wrapper.find('Feedback');
 
     expect(feedback.prop('type')).to.equal('valid');
@@ -154,7 +156,7 @@ describe('<FormCheck>', () => {
 
   it('Should render invalid feedback tooltip properly', () => {
     const wrapper = mount(
-      <FormCheck label="My label" isValid={false} isInvalid tooltip />,
+      <FormCheck label="My label" isValid={false} isInvalid feedbackTooltip />,
     );
     const feedback = wrapper.find('Feedback');
 

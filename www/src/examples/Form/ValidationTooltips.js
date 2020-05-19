@@ -132,7 +132,7 @@ function FormExample() {
               isInvalid={!!errors.file}
               feedback={errors.file}
               id="validationFormik07"
-              tooltip
+              feedbackTooltip
             />
           </Form.Group>
           <Form.Group>
@@ -144,7 +144,7 @@ function FormExample() {
               isInvalid={!!errors.terms}
               feedback={errors.terms}
               id="validationFormik06"
-              tooltip
+              feedbackTooltip
             />
           </Form.Group>
           <Button type="submit">Submit form</Button>

@@ -74,7 +74,7 @@ const propTypes = {
   isInvalid: PropTypes.bool.isRequired,
 
   /** Display feedback as a tooltip. */
-  tooltip: PropTypes.bool,
+  feedbackTooltip: PropTypes.bool,
 
   /** A message to display when the input is in a validation state */
   feedback: PropTypes.node,
@@ -106,7 +106,7 @@ const defaultProps = {
   disabled: false,
   isValid: false,
   isInvalid: false,
-  tooltip: false,
+  feedbackTooltip: false,
 };
 
 const FormFile = React.forwardRef(
@@ -118,7 +118,7 @@ const FormFile = React.forwardRef(
       disabled,
       isValid,
       isInvalid,
-      tooltip,
+      feedbackTooltip,
       feedback,
       className,
       style,
@@ -194,7 +194,7 @@ const FormFile = React.forwardRef(
               {(isValid || isInvalid) && (
                 <Feedback
                   type={isValid ? 'valid' : 'invalid'}
-                  tooltip={tooltip}
+                  tooltip={feedbackTooltip}
                 >
                   {feedback}
                 </Feedback>

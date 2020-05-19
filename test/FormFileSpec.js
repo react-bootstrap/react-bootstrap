@@ -110,7 +110,9 @@ describe('<FormFile>', () => {
   });
 
   it('Should render valid feedback tooltip properly', () => {
-    const wrapper = mount(<FormFile label="My label" isValid tooltip />);
+    const wrapper = mount(
+      <FormFile label="My label" isValid feedbackTooltip />,
+    );
     const feedback = wrapper.find('Feedback');
 
     expect(feedback.prop('type')).to.equal('valid');
@@ -119,7 +121,7 @@ describe('<FormFile>', () => {
 
   it('Should render invalid feedback tooltip properly', () => {
     const wrapper = mount(
-      <FormFile label="My label" isValid={false} isInvalid tooltip />,
+      <FormFile label="My label" isValid={false} isInvalid feedbackTooltip />,
     );
     const feedback = wrapper.find('Feedback');
 
