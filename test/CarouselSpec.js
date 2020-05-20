@@ -223,6 +223,78 @@ describe('<Carousel>', () => {
     }, 150);
   });
 
+  it('should call onSlide when slide animation is disabled', (done) => {
+    const onSlideSpy = sinon.spy();
+    const wrapper = mount(
+      <Carousel slide={false} onSelect={() => {}} onSlide={onSlideSpy}>
+        {items}
+      </Carousel>,
+    );
+
+    wrapper.find('a.carousel-control-next').simulate('click');
+
+    setTimeout(() => {
+      onSlideSpy.should.have.been.calledOnce;
+
+      wrapper.find('a.carousel-control-prev').simulate('click');
+
+      setTimeout(() => {
+        onSlideSpy.should.have.been.calledTwice;
+
+        done();
+      }, 150);
+    }, 150);
+  });
+
+  it('should call onSlid when slide animation is disabled', (done) => {
+    const onSlidSpy = sinon.spy();
+    const wrapper = mount(
+      <Carousel slide={false} onSelect={() => {}} onSlid={onSlidSpy}>
+        {items}
+      </Carousel>,
+    );
+
+    wrapper.find('a.carousel-control-next').simulate('click');
+
+    setTimeout(() => {
+      onSlidSpy.should.have.been.calledOnce;
+
+      wrapper.find('a.carousel-control-prev').simulate('click');
+
+      setTimeout(() => {
+        onSlidSpy.should.have.been.calledTwice;
+
+        done();
+      }, 150);
+    }, 150);
+  });
+
+  it('should only transition once if previous arrow double clicked', (done) => {
+    const onSelectSpy = sinon.spy();
+    const wrapper = mount(<Carousel onSelect={onSelectSpy}>{items}</Carousel>);
+
+    const prev = wrapper.find('a.carousel-control-prev');
+    prev.simulate('click');
+    prev.simulate('click');
+    setTimeout(() => {
+      onSelectSpy.should.have.been.calledOnce;
+      done();
+    }, 150);
+  });
+
+  it('should only transition once if next arrow double clicked', (done) => {
+    const onSelectSpy = sinon.spy();
+    const wrapper = mount(<Carousel onSelect={onSelectSpy}>{items}</Carousel>);
+
+    const next = wrapper.find('a.carousel-control-next');
+    next.simulate('click');
+    next.simulate('click');
+    setTimeout(() => {
+      onSelectSpy.should.have.been.calledOnce;
+      done();
+    }, 150);
+  });
+
   it('should render on update, active item > new child length', () => {
     let wrapper = mount(
       <Carousel defaultActiveIndex={items.length - 1}>{items}</Carousel>,
@@ -242,6 +314,14 @@ describe('<Carousel>', () => {
     expect(wrapper.find('div.carousel-item')).to.have.lengthOf(
       fewerItems.length,
     );
+  });
+
+  it('should render correctly when fade is set', () => {
+    mount(
+      <Carousel defaultActiveIndex={1} fade>
+        {items}
+      </Carousel>,
+    ).assertSingle('.carousel-fade');
   });
 
   describe('automatic traversal', () => {

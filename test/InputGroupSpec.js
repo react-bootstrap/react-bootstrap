@@ -9,6 +9,10 @@ describe('<InputGroup>', () => {
     expect(wrapper.find('div').length).to.equal(1);
   });
 
+  it('Should render size correctly', () => {
+    mount(<InputGroup size="sm" />).assertSingle('.input-group-sm');
+  });
+
   describe('<Checkbox>', () => {
     it('Should forward props to underlying input element', () => {
       const name = 'foobar';

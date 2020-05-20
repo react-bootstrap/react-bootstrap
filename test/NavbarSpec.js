@@ -228,4 +228,16 @@ describe('<Navbar>', () => {
     const wrapper = mount(<Navbar />);
     expect(wrapper.find('nav').length).to.equal(1);
   });
+
+  it('Should render correctly when expand is a string', () => {
+    mount(<Navbar expand="sm" />).assertSingle('.navbar-expand-sm');
+  });
+
+  it('Should render correctly when bg is set', () => {
+    mount(<Navbar bg="light" />).assertSingle('.navbar.bg-light');
+  });
+
+  it('Should render correctly when sticky is set', () => {
+    mount(<Navbar sticky="top" />).assertSingle('.navbar.sticky-top');
+  });
 });
