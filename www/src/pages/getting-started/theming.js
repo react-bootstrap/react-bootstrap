@@ -11,7 +11,7 @@ export default withLayout(function ThemingSection() {
   return (
     <>
       <LinkedHeading h="1" id="custom-styles">
-        Theming and Customizing styles.
+        Theming and customizing styles
       </LinkedHeading>
 
       <p>

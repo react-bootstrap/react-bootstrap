@@ -245,7 +245,7 @@ export default withLayout(function FormControlsSection({ data }) {
       <ReactPlayground codeText={ValidationNative} />
 
       <LinkedHeading h="3" id="forms-validation-libraries">
-        Form libraries and server rendered styles.
+        Form libraries and server-rendered styles
       </LinkedHeading>
       <p>
         It's often beneficial (especially in React) to handle form validation

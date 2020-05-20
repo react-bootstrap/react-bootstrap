@@ -172,7 +172,10 @@ function NavSection({ heading, location: { pathname }, items, path }) {
           {items.map((name) => (
             <Nav.Item key={`${path}/${name}/`}>
               <TocSubLink href={`${path}/${name}/`}>
-                {startCase(name.toLowerCase())}
+                {startCase(name.toLowerCase()).replace(
+                  'React Bootstrap',
+                  'React-Bootstrap',
+                )}
               </TocSubLink>
             </Nav.Item>
           ))}
