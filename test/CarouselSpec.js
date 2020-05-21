@@ -223,7 +223,8 @@ describe('<Carousel>', () => {
     }, 150);
   });
 
-  it('should call onSlide when slide animation is disabled', (done) => {
+  it('should call onSlide when slide animation is disabled', () => {
+    const clock = sinon.useFakeTimers();
     const onSlideSpy = sinon.spy();
     const wrapper = mount(
       <Carousel slide={false} onSelect={() => {}} onSlide={onSlideSpy}>
@@ -231,22 +232,21 @@ describe('<Carousel>', () => {
       </Carousel>,
     );
 
-    wrapper.find('a.carousel-control-next').simulate('click');
-
-    setTimeout(() => {
+    try {
+      wrapper.find('a.carousel-control-next').simulate('click');
+      clock.tick(150);
       onSlideSpy.should.have.been.calledOnce;
 
       wrapper.find('a.carousel-control-prev').simulate('click');
-
-      setTimeout(() => {
-        onSlideSpy.should.have.been.calledTwice;
-
-        done();
-      }, 150);
-    }, 150);
+      clock.tick(150);
+      onSlideSpy.should.have.been.calledTwice;
+    } finally {
+      clock.restore();
+    }
   });
 
-  it('should call onSlid when slide animation is disabled', (done) => {
+  it('should call onSlid when slide animation is disabled', () => {
+    const clock = sinon.useFakeTimers();
     const onSlidSpy = sinon.spy();
     const wrapper = mount(
       <Carousel slide={false} onSelect={() => {}} onSlid={onSlidSpy}>
@@ -254,45 +254,51 @@ describe('<Carousel>', () => {
       </Carousel>,
     );
 
-    wrapper.find('a.carousel-control-next').simulate('click');
-
-    setTimeout(() => {
+    try {
+      wrapper.find('a.carousel-control-next').simulate('click');
+      clock.tick(150);
       onSlidSpy.should.have.been.calledOnce;
 
       wrapper.find('a.carousel-control-prev').simulate('click');
-
-      setTimeout(() => {
-        onSlidSpy.should.have.been.calledTwice;
-
-        done();
-      }, 150);
-    }, 150);
+      clock.tick(150);
+      onSlidSpy.should.have.been.calledTwice;
+    } finally {
+      clock.restore();
+    }
   });
 
-  it('should only transition once if previous arrow double clicked', (done) => {
+  it('should only transition once if previous arrow double clicked', () => {
+    const clock = sinon.useFakeTimers();
     const onSelectSpy = sinon.spy();
     const wrapper = mount(<Carousel onSelect={onSelectSpy}>{items}</Carousel>);
 
     const prev = wrapper.find('a.carousel-control-prev');
     prev.simulate('click');
     prev.simulate('click');
-    setTimeout(() => {
+
+    try {
+      clock.tick(1000);
       onSelectSpy.should.have.been.calledOnce;
-      done();
-    }, 150);
+    } finally {
+      clock.restore();
+    }
   });
 
-  it('should only transition once if next arrow double clicked', (done) => {
+  it('should only transition once if next arrow double clicked', () => {
+    const clock = sinon.useFakeTimers();
     const onSelectSpy = sinon.spy();
     const wrapper = mount(<Carousel onSelect={onSelectSpy}>{items}</Carousel>);
 
     const next = wrapper.find('a.carousel-control-next');
     next.simulate('click');
     next.simulate('click');
-    setTimeout(() => {
+
+    try {
+      clock.tick(1000);
       onSelectSpy.should.have.been.calledOnce;
-      done();
-    }, 150);
+    } finally {
+      clock.restore();
+    }
   });
 
   it('should render on update, active item > new child length', () => {
