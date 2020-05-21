@@ -12,6 +12,12 @@ describe('Row', () => {
     mount(<Row xs={4} md={8} />).assertSingle('.row-cols-md-8.row-cols-4');
   });
 
+  it('Should allow sizes as objects', () => {
+    mount(<Row xs={{ cols: 4 }} md={{ cols: 8 }} />).assertSingle(
+      '.row-cols-md-8.row-cols-4',
+    );
+  });
+
   it('uses "div" by default', () => {
     mount(
       <Row className="custom-class">
@@ -22,5 +28,9 @@ describe('Row', () => {
 
   it('should allow custom elements instead of "div"', () => {
     mount(<Row as="section" />).assertSingle('section.row');
+  });
+
+  it('Should render no-gutters correctly', () => {
+    mount(<Row noGutters />).assertSingle('.row.no-gutters');
   });
 });

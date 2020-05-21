@@ -244,6 +244,14 @@ describe('<Carousel>', () => {
     );
   });
 
+  it('should render correctly when fade is set', () => {
+    mount(
+      <Carousel defaultActiveIndex={1} fade>
+        {items}
+      </Carousel>,
+    ).assertSingle('.carousel-fade');
+  });
+
   describe('automatic traversal', () => {
     let clock;
 
@@ -542,6 +550,80 @@ describe('<Carousel>', () => {
 
       const carouselItems = wrapper.find('CarouselItem');
       expect(carouselItems.at(1).is('.active')).to.be.true;
+    });
+  });
+
+  describe('callback tests', () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = sinon.useFakeTimers();
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    it('should call onSlide when slide animation is disabled', () => {
+      const onSlideSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel slide={false} onSelect={() => {}} onSlide={onSlideSpy}>
+          {items}
+        </Carousel>,
+      );
+
+      wrapper.find('a.carousel-control-next').simulate('click');
+      clock.tick(150);
+      onSlideSpy.should.have.been.calledOnce;
+
+      wrapper.find('a.carousel-control-prev').simulate('click');
+      clock.tick(150);
+      onSlideSpy.should.have.been.calledTwice;
+    });
+
+    it('should call onSlid when slide animation is disabled', () => {
+      const onSlidSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel slide={false} onSelect={() => {}} onSlid={onSlidSpy}>
+          {items}
+        </Carousel>,
+      );
+
+      wrapper.find('a.carousel-control-next').simulate('click');
+      clock.tick(150);
+      onSlidSpy.should.have.been.calledOnce;
+
+      wrapper.find('a.carousel-control-prev').simulate('click');
+      clock.tick(150);
+      onSlidSpy.should.have.been.calledTwice;
+    });
+
+    it('should transition/call onSelect once if previous arrow double clicked', () => {
+      const onSelectSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel onSelect={onSelectSpy}>{items}</Carousel>,
+      );
+
+      const prev = wrapper.find('a.carousel-control-prev');
+      prev.simulate('click');
+      prev.simulate('click');
+
+      clock.tick(1000);
+      onSelectSpy.should.have.been.calledOnce;
+    });
+
+    it('should transition/call onSelect once if next arrow double clicked', () => {
+      const onSelectSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel onSelect={onSelectSpy}>{items}</Carousel>,
+      );
+
+      const next = wrapper.find('a.carousel-control-next');
+      next.simulate('click');
+      next.simulate('click');
+
+      clock.tick(1000);
+      onSelectSpy.should.have.been.calledOnce;
     });
   });
 });
