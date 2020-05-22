@@ -14,6 +14,7 @@ import GridAutoLayoutSizing from '../../examples/Grid/AutoLayoutSizing';
 import GridAutoLayoutVariable from '../../examples/Grid/AutoLayoutVariable';
 import GridOffsetting from '../../examples/Grid/Offsetting';
 import GridOrdering from '../../examples/Grid/Ordering';
+import GridOrderingFirstLast from '../../examples/Grid/OrderingFirstLast';
 import GridResponsive from '../../examples/Grid/Responsive';
 import GridResponsiveAuto from '../../examples/Grid/ResponsiveAuto';
 import withLayout from '../../withLayout';
@@ -135,6 +136,15 @@ export default withLayout(function GridSection({ data }) {
         <strong>visual order</strong> of your content.
       </p>
       <ReactPlayground codeText={GridOrdering} exampleClassName="show-grid" />
+
+      <p>
+        The `order` property also supports `first` (<code>order: -1</code>) and
+        `last` (<code>order: $columns+1</code>).
+      </p>
+      <ReactPlayground
+        codeText={GridOrderingFirstLast}
+        exampleClassName="show-grid"
+      />
       <p>
         For offsetting grid columns you can set an `offset` value, or, for more
         general layout, use the margin class utilities.
