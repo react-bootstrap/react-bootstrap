@@ -16,10 +16,11 @@ type NumberAttr =
   | '10'
   | '11'
   | '12';
+type ColOrder = 'first' | 'last' | NumberAttr;
 type ColSize = true | 'auto' | NumberAttr;
 type ColSpec =
   | ColSize
-  | { span?: ColSize; offset?: NumberAttr; order?: NumberAttr };
+  | { span?: ColSize; offset?: NumberAttr; order?: ColOrder };
 
 export interface ColProps {
   xs?: ColSpec;
