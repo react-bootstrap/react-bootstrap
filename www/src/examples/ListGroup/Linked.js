@@ -13,5 +13,5 @@ render(
     <ListGroup.Item action onClick={alertClicked}>
       This one is a button
     </ListGroup.Item>
-  </ListGroup>,
+  </ListGroup>
 );
