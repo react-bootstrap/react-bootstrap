@@ -34,7 +34,10 @@ const buildTypes = step('generating .d.ts', () => shell(`yarn build-types`));
 
 const copyTypes = (dest) => shell(`cpy ${typesRoot}/*.d.ts ${dest}`);
 
-const babel = (outDir, envName) => shell(`yarn babel ${srcRoot} -x .es6,.js,.es,.jsx,.mjs,.ts,.tsx --out-dir ${outDir} --env-name "${envName}"`);
+const babel = (outDir, envName) =>
+  shell(
+    `yarn babel ${srcRoot} -x .es6,.js,.es,.jsx,.mjs,.ts,.tsx --out-dir ${outDir} --env-name "${envName}"`,
+  );
 
 /**
  * Run babel over the src directory and output
@@ -42,7 +45,7 @@ const babel = (outDir, envName) => shell(`yarn babel ${srcRoot} -x .es6,.js,.es,
  */
 const buildLib = step('commonjs modules', async () => {
   await babel(cjsRoot, 'cjs');
-  await copyTypes(libRoot);
+  await copyTypes(cjsRoot);
 });
 
 /**
@@ -93,11 +96,13 @@ clean();
 
 Promise.resolve(true)
   .then(buildTypes)
-  .then(() => Promise.all([
-    has('lib') && buildLib(),
-    has('es') && buildEsm(),
-    has('dist') && buildDist(),
-  ]))
+  .then(() =>
+    Promise.all([
+      has('lib') && buildLib(),
+      has('es') && buildEsm(),
+      has('dist') && buildDist(),
+    ]),
+  )
   .then(buildDirectories)
   .catch((err) => {
     if (err) console.error(red(err.stack || err.toString()));
