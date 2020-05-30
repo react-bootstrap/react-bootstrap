@@ -32,7 +32,7 @@
     "gatsby-source-filesystem": "2.3.8",
     "gatsby-transformer-react-docgen": "^5.2.2",
     "gatsby-transformer-remark": "^2.8.13",
-    "gh-pages": "^2.2.0",
+    "gh-pages": "^3.0.0",
     "holderjs": "^2.9.7",
     "import-sort-cli": "^6.0.0",
     "import-sort-parser-4catalyzer": "^4.0.1",
