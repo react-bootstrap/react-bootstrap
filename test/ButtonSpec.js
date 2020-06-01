@@ -26,6 +26,23 @@ describe('<Button>', () => {
       .should.equal('submit');
   });
 
+  it('Should not show the type if "as" is not an input', () => {
+    const wrapper = mount(
+      <Button as="div" type="submit">
+        Title
+      </Button>,
+    );
+
+    expect(wrapper.getDOMNode().getAttribute('type')).to.be.null;
+  });
+
+  it('Should show the type if "as" is an input', () => {
+    mount(<Button as="input" type="submit" value="Title" />)
+      .getDOMNode()
+      .getAttribute('type')
+      .should.equal('submit');
+  });
+
   it('should forward refs to the button', () => {
     const ref = React.createRef();
     mount(

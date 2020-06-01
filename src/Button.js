@@ -94,7 +94,7 @@ const Button = React.forwardRef(
       props.ref = ref;
     }
 
-    if (!as) {
+    if (!as || as === 'input') {
       props.type = type;
     }
 
