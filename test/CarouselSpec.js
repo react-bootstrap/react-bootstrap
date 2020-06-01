@@ -100,6 +100,18 @@ describe('<Carousel>', () => {
 
       wrapper.find('.carousel-indicators li').last().simulate('click');
     });
+
+    it(`should allow refs to be attached and expose next, prev functions`, () => {
+      let inputRef = React.createRef();
+      const wrapper = mount(
+        <Carousel ref={(input) => (inputRef = input)}>{items}</Carousel>,
+      );
+      expect(inputRef).to.have.property('next');
+      expect(inputRef).to.have.property('prev');
+      expect(inputRef).to.have.property('element');
+
+      wrapper.unmount();
+    });
   });
 
   describe('Buttons and labels with and without wrapping', () => {
@@ -271,6 +283,7 @@ describe('<Carousel>', () => {
           {items}
         </Carousel>,
       );
+
       clock.tick(interval * 1.5);
       expect(onSelectSpy).to.have.been.calledOnce;
     });
@@ -461,6 +474,21 @@ describe('<Carousel>', () => {
       sinon.assert.notCalled(onSelectSpy);
     });
 
+    it('should handle a defined custom key event', () => {
+      const onKeyDownSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel activeIndex={1} onKeyDown={onKeyDownSpy}>
+          {items}
+        </Carousel>,
+      );
+
+      wrapper.simulate('keyDown', {
+        key: 'ArrowUp',
+      });
+      clock.tick(50);
+      sinon.assert.calledOnce(onKeyDownSpy);
+    });
+
     ['ArrowUp', 'ArrowRightLeft', 'Onwards'].forEach((key) => {
       it('should do nothing for non left or right keys', () => {
         const onSelectSpy = sinon.spy();
@@ -479,13 +507,64 @@ describe('<Carousel>', () => {
     });
   });
 
+  describe('mouse events', () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = sinon.useFakeTimers();
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    it('should handle a defined mouse over event', () => {
+      const onMouseOverSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel activeIndex={1} onMouseOver={onMouseOverSpy}>
+          {items}
+        </Carousel>,
+      );
+
+      wrapper.simulate('mouseOver');
+      clock.tick(1500);
+      sinon.assert.calledOnce(onMouseOverSpy);
+    });
+
+    it('should handle a defined mouse over event', () => {
+      const onMouseOutSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel activeIndex={1} onMouseOut={onMouseOutSpy}>
+          {items}
+        </Carousel>,
+      );
+
+      wrapper.simulate('mouseOut');
+      clock.tick(50);
+      sinon.assert.calledOnce(onMouseOutSpy);
+    });
+  });
+
   describe('touch events', () => {
-    let clock, wrapper, onSelectSpy;
+    let clock, wrapper, onSelectSpy, wrapperWithCustomEvents;
 
     beforeEach(() => {
       onSelectSpy = sinon.spy();
       wrapper = mount(
         <Carousel activeIndex={1} interval={null} onSelect={onSelectSpy} touch>
+          {items}
+        </Carousel>,
+      );
+
+      wrapperWithCustomEvents = mount(
+        <Carousel
+          activeIndex={1}
+          interval={null}
+          onTouchStart={onSelectSpy}
+          onTouchMove={onSelectSpy}
+          onTouchEnd={onSelectSpy}
+          touch
+        >
           {items}
         </Carousel>,
       );
@@ -550,6 +629,26 @@ describe('<Carousel>', () => {
 
       const carouselItems = wrapper.find('CarouselItem');
       expect(carouselItems.at(1).is('.active')).to.be.true;
+    });
+
+    it('should handle a custom touch start and end event', () => {
+      wrapperWithCustomEvents.simulate('touchStart', {
+        touches: [{ clientX: 50 }],
+      });
+      wrapperWithCustomEvents.simulate('touchMove', {
+        touches: [{ clientX: 0 }],
+      });
+      wrapperWithCustomEvents.simulate('touchEnd');
+      clock.tick(50);
+      sinon.assert.calledThrice(onSelectSpy);
+    });
+
+    it('should handle a custom multi-touch move event', () => {
+      wrapperWithCustomEvents.simulate('touchMove', {
+        touches: [{ clientX: 0 }, { clientX: 50 }],
+      });
+      clock.tick(50);
+      expect(onSelectSpy).to.have.been.calledOnce;
     });
   });
 
