@@ -103,13 +103,19 @@ describe('<Carousel>', () => {
 
     it(`should allow refs to be attached and expose next, prev functions`, () => {
       let inputRef = React.createRef();
+      const onSelectSpy = sinon.spy();
       const wrapper = mount(
-        <Carousel ref={(input) => (inputRef = input)}>{items}</Carousel>,
+        <Carousel ref={inputRef} onSelect={onSelectSpy}>
+          {items}
+        </Carousel>,
       );
-      expect(inputRef).to.have.property('next');
-      expect(inputRef).to.have.property('prev');
-      expect(inputRef).to.have.property('element');
-
+      expect(inputRef.current).to.have.property('next');
+      expect(inputRef.current).to.have.property('prev');
+      expect(inputRef.current).to.have.property('element');
+      inputRef.current.next();
+      expect(onSelectSpy).to.have.been.calledOnce;
+      inputRef.current.prev();
+      expect(onSelectSpy).to.have.been.calledOnce;
       wrapper.unmount();
     });
   });
