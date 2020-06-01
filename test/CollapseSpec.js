@@ -1,10 +1,10 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import Collapse from '../src/Collapse';
+import Collapse, { collapseHelpers } from '../src/Collapse';
 
 describe('<Collapse>', () => {
-  let Component, wrapper;
+  let Component, wrapper, getScrollDimensionValue;
 
   beforeEach(() => {
     Component = class extends React.Component {
@@ -30,7 +30,7 @@ describe('<Collapse>', () => {
   it('Should default to collapsed', () => {
     wrapper = mount(<Component>Panel content</Component>);
 
-    assert.ok(wrapper.find('Collapse').props().in === false);
+    assert.ok(wrapper.find(Collapse).props().in === false);
   });
 
   it('Should have collapse class', () => {
@@ -40,11 +40,14 @@ describe('<Collapse>', () => {
   describe('from collapsed to expanded', () => {
     beforeEach(() => {
       wrapper = mount(<Component>Panel content</Component>);
-
       // since scrollHeight is gonna be 0 detached from the DOM
-      sinon
-        .stub(wrapper.instance().collapse, '_getScrollDimensionValue')
+      getScrollDimensionValue = sinon
+        .stub(collapseHelpers, '_getScrollDimensionValue')
         .returns('15px');
+    });
+
+    afterEach(() => {
+      getScrollDimensionValue.restore();
     });
 
     it('Should have collapsing class', () => {
@@ -174,7 +177,7 @@ describe('<Collapse>', () => {
     });
 
     it('Defaults to height', () => {
-      assert.equal(wrapper.instance().collapse.getDimension(), 'height');
+      assert.equal(collapseHelpers.getDimension(), 'height');
     });
 
     it('Uses getCollapsibleDimension if exists', () => {
@@ -184,7 +187,10 @@ describe('<Collapse>', () => {
 
       wrapper.setState({ dimension });
 
-      assert.equal(wrapper.instance().collapse.getDimension(), 'whatevs');
+      assert.equal(
+        collapseHelpers.getDimension(wrapper.find(Collapse).props().dimension),
+        'whatevs',
+      );
     });
   });
 
