@@ -104,6 +104,11 @@ const propTypes = {
   isInvalid: PropTypes.bool,
 };
 
+const defaultProps = {
+  isValid: false,
+  isInvalid: false,
+};
+
 const FormControl = React.forwardRef(
   (
     {
@@ -177,6 +182,7 @@ const FormControl = React.forwardRef(
 
 FormControl.displayName = 'FormControl';
 FormControl.propTypes = propTypes;
+FormControl.defaultProps = defaultProps;
 
 FormControl.Feedback = Feedback;
 

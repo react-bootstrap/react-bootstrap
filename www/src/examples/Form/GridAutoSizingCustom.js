@@ -1,7 +1,7 @@
 <Form>
   <Form.Row className="align-items-center">
     <Col xs="auto" className="my-1">
-      <Form.Label className="mr-sm-2" for="inlineFormCustomSelect" srOnly>
+      <Form.Label className="mr-sm-2" htmlFor="inlineFormCustomSelect" srOnly>
         Preference
       </Form.Label>
       <Form.Control
@@ -10,7 +10,7 @@
         id="inlineFormCustomSelect"
         custom
       >
-        <option selected>Choose...</option>
+        <option value="0">Choose...</option>
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>

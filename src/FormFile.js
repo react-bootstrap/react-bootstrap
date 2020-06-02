@@ -68,10 +68,10 @@ const propTypes = {
   custom: PropTypes.bool,
 
   /** Manually style the input as valid */
-  isValid: PropTypes.bool.isRequired,
+  isValid: PropTypes.bool,
 
   /** Manually style the input as invalid */
-  isInvalid: PropTypes.bool.isRequired,
+  isInvalid: PropTypes.bool,
 
   /** Display feedback as a tooltip. */
   feedbackTooltip: PropTypes.bool,
