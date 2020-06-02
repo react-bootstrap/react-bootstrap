@@ -13,6 +13,31 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons/faGithub';
 
 import logo from '../assets/logo.svg';
 
+const Banner = styled(Navbar).attrs({
+  as: 'header',
+  variant: 'dark',
+  role: 'banner',
+})`
+  @import '../css/theme.scss';
+
+  composes: text-light justify-content-center from global;
+  min-height: 4rem;
+  background-color: $darker;
+  filter: none;
+  -webkit-filter: none;
+
+  a {
+    margin-left: 1em;
+    color: $brand;
+  }
+
+  @include media-breakpoint-up(md) {
+    position: sticky;
+    top: 0rem;
+    z-index: 1040;
+  }
+`;
+
 const StyledNavbar = styled(Navbar).attrs({
   as: 'header',
   variant: 'dark',
@@ -25,7 +50,7 @@ const StyledNavbar = styled(Navbar).attrs({
 
   @include media-breakpoint-up(md) {
     position: sticky;
-    top: 0;
+    top: 4rem;
     z-index: 1040;
   }
 `;
@@ -74,68 +99,80 @@ const propTypes = {
 
 function NavMain({ activePage }) {
   return (
-    <StyledNavbar expand collapseOnSelect>
-      <SkipToContentLink href="#rb-docs-content" tabIndex="0">
-        Skip to content
-      </SkipToContentLink>
-      <Navbar.Brand href="/">
-        <img src={logo} alt="react-bootstrap" height={30} />
-      </Navbar.Brand>
+    <>
+      <Banner>
+        <span className="text-light">Black Lives Matter.</span>
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://support.eji.org/give/153413/#!/donation/checkout"
+        >
+          Support the Equal Justice Initiative.
+        </a>
+      </Banner>
+      <StyledNavbar expand collapseOnSelect>
+        <SkipToContentLink href="#rb-docs-content" tabIndex="0">
+          Skip to content
+        </SkipToContentLink>
+        <Navbar.Brand href="/">
+          <img src={logo} alt="react-bootstrap" height={30} />
+        </Navbar.Brand>
 
-      <Nav role="navigation" id="top" className="d-none d-md-flex">
-        {NAV_LINKS.map(({ link, title, exact }) => (
-          <StyledNavLink
-            key={link}
-            href={link}
-            active={exact ? activePage === link : activePage.startsWith(link)}
+        <Nav role="navigation" id="top" className="d-none d-md-flex">
+          {NAV_LINKS.map(({ link, title, exact }) => (
+            <StyledNavLink
+              key={link}
+              href={link}
+              active={exact ? activePage === link : activePage.startsWith(link)}
+            >
+              {title}
+            </StyledNavLink>
+          ))}
+        </Nav>
+        <Nav className="ml-auto pr-md-5">
+          <StyledDropdown id="t-version">
+            <Dropdown.Toggle id="dropdown-version" as={StyledNavLink}>
+              v{config.version} (
+              <span className="d-none d-lg-inline">Bootstrap </span>
+              {config.bootstrapVersion.split('.').slice(0, 2).join('.')})
+            </Dropdown.Toggle>
+            <Dropdown.Menu className="w-100" role="menu">
+              <Dropdown.Item href="https://react-bootstrap-v3.netlify.com">
+                v0.32.4 (Bootstrap 3)
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </StyledDropdown>
+          <OverlayTrigger
+            placement="bottom"
+            delay={{ show: 200 }}
+            overlay={<Tooltip id="t-github">Github</Tooltip>}
           >
-            {title}
-          </StyledNavLink>
-        ))}
-      </Nav>
-      <Nav className="ml-auto pr-md-5">
-        <StyledDropdown id="t-version">
-          <Dropdown.Toggle id="dropdown-version" as={StyledNavLink}>
-            v{config.version} (
-            <span className="d-none d-lg-inline">Bootstrap </span>
-            {config.bootstrapVersion.split('.').slice(0, 2).join('.')})
-          </Dropdown.Toggle>
-          <Dropdown.Menu className="w-100" role="menu">
-            <Dropdown.Item href="https://react-bootstrap-v3.netlify.com">
-              v0.32.4 (Bootstrap 3)
-            </Dropdown.Item>
-          </Dropdown.Menu>
-        </StyledDropdown>
-        <OverlayTrigger
-          placement="bottom"
-          delay={{ show: 200 }}
-          overlay={<Tooltip id="t-github">Github</Tooltip>}
-        >
-          <StyledNavLink
-            href="https://github.com/react-bootstrap/react-bootstrap"
-            target="_blank"
-            rel="noopener noreferrer"
+            <StyledNavLink
+              href="https://github.com/react-bootstrap/react-bootstrap"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon={faGithub} size="lg" />
+              <span className="sr-only">Github</span>
+            </StyledNavLink>
+          </OverlayTrigger>
+          <OverlayTrigger
+            placement="bottom"
+            delay={{ show: 200 }}
+            overlay={<Tooltip id="t-discord">Discord</Tooltip>}
           >
-            <FontAwesomeIcon icon={faGithub} size="lg" />
-            <span className="sr-only">Github</span>
-          </StyledNavLink>
-        </OverlayTrigger>
-        <OverlayTrigger
-          placement="bottom"
-          delay={{ show: 200 }}
-          overlay={<Tooltip id="t-discord">Discord</Tooltip>}
-        >
-          <StyledNavLink
-            href="https://discord.gg/0ZcbPKXt5bXLs9XK"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon icon={faDiscord} size="lg" />
-            <span className="sr-only">Discord</span>
-          </StyledNavLink>
-        </OverlayTrigger>
-      </Nav>
-    </StyledNavbar>
+            <StyledNavLink
+              href="https://discord.gg/0ZcbPKXt5bXLs9XK"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FontAwesomeIcon icon={faDiscord} size="lg" />
+              <span className="sr-only">Discord</span>
+            </StyledNavLink>
+          </OverlayTrigger>
+        </Nav>
+      </StyledNavbar>
+    </>
   );
 }
 
