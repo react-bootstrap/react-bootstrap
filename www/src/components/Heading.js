@@ -30,7 +30,8 @@ const Heading = ({ h, id, title, className, children, registerNode }) => {
     if (registerNode) {
       registerNode(parseInt(h, 10), title, id);
     }
-  }, []);
+  }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
+
   const H = `h${h}`;
   return (
     <H id={id} className={classNames(className, styles.heading)}>
