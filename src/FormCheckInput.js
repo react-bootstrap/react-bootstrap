@@ -37,14 +37,16 @@ const propTypes = {
   isStatic: PropTypes.bool,
 
   /** Manually style the input as valid */
-  isValid: PropTypes.bool.isRequired,
+  isValid: PropTypes.bool,
 
   /** Manually style the input as invalid */
-  isInvalid: PropTypes.bool.isRequired,
+  isInvalid: PropTypes.bool,
 };
 
 const defaultProps = {
   type: 'checkbox',
+  isValid: false,
+  isInvalid: false,
 };
 
 const FormCheckInput = React.forwardRef(

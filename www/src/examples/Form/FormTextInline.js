@@ -1,6 +1,6 @@
 <Form inline>
   <Form.Group>
-    <Form.Label for="inputPassword6">Password</Form.Label>
+    <Form.Label htmlFor="inputPassword6">Password</Form.Label>
     <Form.Control
       type="password"
       className="mx-sm-3"

@@ -1,5 +1,5 @@
 <Form inline>
-  <Form.Label for="inlineFormInputName2" srOnly>
+  <Form.Label htmlFor="inlineFormInputName2" srOnly>
     Name
   </Form.Label>
   <Form.Control
@@ -7,7 +7,7 @@
     id="inlineFormInputName2"
     placeholder="Jane Doe"
   />
-  <Form.Label for="inlineFormInputGroupUsername2" srOnly>
+  <Form.Label htmlFor="inlineFormInputGroupUsername2" srOnly>
     Username
   </Form.Label>
   <InputGroup className="mb-2 mr-sm-2">

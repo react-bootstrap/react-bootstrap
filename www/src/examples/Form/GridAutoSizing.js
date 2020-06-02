@@ -1,7 +1,7 @@
 <Form>
   <Form.Row className="align-items-center">
     <Col xs="auto">
-      <Form.Label for="inlineFormInput" srOnly>
+      <Form.Label htmlFor="inlineFormInput" srOnly>
         Name
       </Form.Label>
       <Form.Control
@@ -11,7 +11,7 @@
       />
     </Col>
     <Col xs="auto">
-      <Form.Label for="inlineFormInputGroup" srOnly>
+      <Form.Label htmlFor="inlineFormInputGroup" srOnly>
         Username
       </Form.Label>
       <InputGroup className="mb-2">

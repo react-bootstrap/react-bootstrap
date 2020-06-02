@@ -32,7 +32,7 @@ function FormExample() {
       }) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Row>
-            <Form.Group as={Col} md="4" controlId="validationFormik01">
+            <Form.Group as={Col} md="4" controlId="validationFormik101">
               <Form.Label>First name</Form.Label>
               <Form.Control
                 type="text"
@@ -43,7 +43,7 @@ function FormExample() {
               />
               <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormik02">
+            <Form.Group as={Col} md="4" controlId="validationFormik102">
               <Form.Label>Last name</Form.Label>
               <Form.Control
                 type="text"
@@ -55,7 +55,7 @@ function FormExample() {
 
               <Form.Control.Feedback tooltip>Looks good!</Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormikUsername">
+            <Form.Group as={Col} md="4" controlId="validationFormikUsername2">
               <Form.Label>Username</Form.Label>
               <InputGroup>
                 <InputGroup.Prepend>
@@ -77,7 +77,7 @@ function FormExample() {
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Form.Group as={Col} md="6" controlId="validationFormik03">
+            <Form.Group as={Col} md="6" controlId="validationFormik103">
               <Form.Label>City</Form.Label>
               <Form.Control
                 type="text"
@@ -92,7 +92,7 @@ function FormExample() {
                 {errors.city}
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="3" controlId="validationFormik04">
+            <Form.Group as={Col} md="3" controlId="validationFormik104">
               <Form.Label>State</Form.Label>
               <Form.Control
                 type="text"
@@ -106,7 +106,7 @@ function FormExample() {
                 {errors.state}
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="3" controlId="validationFormik05">
+            <Form.Group as={Col} md="3" controlId="validationFormik105">
               <Form.Label>Zip</Form.Label>
               <Form.Control
                 type="text"
@@ -131,7 +131,7 @@ function FormExample() {
               onChange={handleChange}
               isInvalid={!!errors.file}
               feedback={errors.file}
-              id="validationFormik07"
+              id="validationFormik107"
               feedbackTooltip
             />
           </Form.Group>
@@ -143,7 +143,7 @@ function FormExample() {
               onChange={handleChange}
               isInvalid={!!errors.terms}
               feedback={errors.terms}
-              id="validationFormik06"
+              id="validationFormik106"
               feedbackTooltip
             />
           </Form.Group>

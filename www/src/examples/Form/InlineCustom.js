@@ -1,5 +1,5 @@
 <Form inline>
-  <Form.Label className="my-1 mr-2" for="inlineFormCustomSelectPref">
+  <Form.Label className="my-1 mr-2" htmlFor="inlineFormCustomSelectPref">
     Preference
   </Form.Label>
   <Form.Control
@@ -8,7 +8,7 @@
     id="inlineFormCustomSelectPref"
     custom
   >
-    <option selected>Choose...</option>
+    <option value="0">Choose...</option>
     <option value="1">One</option>
     <option value="2">Two</option>
     <option value="3">Three</option>

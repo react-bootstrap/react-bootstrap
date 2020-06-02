@@ -1,5 +1,5 @@
 <>
-  <Form.Label for="inputPassword5">Password</Form.Label>
+  <Form.Label htmlFor="inputPassword5">Password</Form.Label>
   <Form.Control
     type="password"
     id="inputPassword5"
