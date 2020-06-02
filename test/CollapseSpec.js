@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import Collapse, { collapseHelpers } from '../src/Collapse';
 
 describe('<Collapse>', () => {
-  let Component, wrapper, getScrollDimensionValue;
+  let Component, wrapper;
 
   beforeEach(() => {
     Component = class extends React.Component {
@@ -38,16 +38,11 @@ describe('<Collapse>', () => {
   });
 
   describe('from collapsed to expanded', () => {
+    // since scrollHeight is gonna be 0 detached from the DOM
+    sinon.stub(collapseHelpers, '_getScrollDimensionValue').returns('15px');
+
     beforeEach(() => {
       wrapper = mount(<Component>Panel content</Component>);
-      // since scrollHeight is gonna be 0 detached from the DOM
-      getScrollDimensionValue = sinon
-        .stub(collapseHelpers, '_getScrollDimensionValue')
-        .returns('15px');
-    });
-
-    afterEach(() => {
-      getScrollDimensionValue.restore();
     });
 
     it('Should have collapsing class', () => {
