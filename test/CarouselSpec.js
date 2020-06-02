@@ -65,7 +65,38 @@ describe('<Carousel>', () => {
     wrapper.find('.carousel-indicators li').first().simulate('click');
   });
 
-  ['onSlide', 'onSlid'].forEach((eventName) => {
+  describe(`ref testing`, () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = sinon.useFakeTimers();
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+    it(`should allow refs to be attached and expose next, prev functions`, () => {
+      let inputRef = React.createRef();
+      const onSelectSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel ref={inputRef} onSelect={onSelectSpy} defaultActiveIndex={1}>
+          {items}
+        </Carousel>,
+      );
+      expect(inputRef.current).to.have.property('next');
+      expect(inputRef.current).to.have.property('prev');
+      expect(inputRef.current).to.have.property('element');
+      inputRef.current.next();
+      clock.tick(50);
+      expect(onSelectSpy).to.have.been.calledOnce;
+      inputRef.current.prev();
+      clock.tick(50);
+      expect(onSelectSpy).to.have.been.calledTwice;
+      wrapper.unmount();
+    });
+  });
+
+  [('onSlide', 'onSlid')].forEach((eventName) => {
     it(`should call ${eventName} with previous index and direction`, (done) => {
       function onEvent(index, direction) {
         expect(index).to.equal(0);
@@ -99,24 +130,6 @@ describe('<Carousel>', () => {
       );
 
       wrapper.find('.carousel-indicators li').last().simulate('click');
-    });
-
-    it(`should allow refs to be attached and expose next, prev functions`, () => {
-      let inputRef = React.createRef();
-      const onSelectSpy = sinon.spy();
-      const wrapper = mount(
-        <Carousel ref={inputRef} onSelect={onSelectSpy}>
-          {items}
-        </Carousel>,
-      );
-      expect(inputRef.current).to.have.property('next');
-      expect(inputRef.current).to.have.property('prev');
-      expect(inputRef.current).to.have.property('element');
-      inputRef.current.next();
-      expect(onSelectSpy).to.have.been.calledOnce;
-      inputRef.current.prev();
-      expect(onSelectSpy).to.have.been.calledOnce;
-      wrapper.unmount();
     });
   });
 
@@ -537,7 +550,7 @@ describe('<Carousel>', () => {
       sinon.assert.calledOnce(onMouseOverSpy);
     });
 
-    it('should handle a defined mouse over event', () => {
+    it('should handle a defined mouse out event', () => {
       const onMouseOutSpy = sinon.spy();
       const wrapper = mount(
         <Carousel activeIndex={1} onMouseOut={onMouseOutSpy}>
@@ -552,23 +565,26 @@ describe('<Carousel>', () => {
   });
 
   describe('touch events', () => {
-    let clock, wrapper, onSelectSpy, wrapperWithCustomEvents;
+    let clock,
+      wrapper,
+      onSelectSpy,
+      onTouchStartSpy,
+      onTouchMoveSpy,
+      onTouchEndSpy;
 
     beforeEach(() => {
       onSelectSpy = sinon.spy();
+      onTouchStartSpy = sinon.spy();
+      onTouchMoveSpy = sinon.spy();
+      onTouchEndSpy = sinon.spy();
       wrapper = mount(
-        <Carousel activeIndex={1} interval={null} onSelect={onSelectSpy} touch>
-          {items}
-        </Carousel>,
-      );
-
-      wrapperWithCustomEvents = mount(
         <Carousel
           activeIndex={1}
           interval={null}
-          onTouchStart={onSelectSpy}
-          onTouchMove={onSelectSpy}
-          onTouchEnd={onSelectSpy}
+          onSelect={onSelectSpy}
+          onTouchStart={onTouchStartSpy}
+          onTouchMove={onTouchMoveSpy}
+          onTouchEnd={onTouchEndSpy}
           touch
         >
           {items}
@@ -638,23 +654,25 @@ describe('<Carousel>', () => {
     });
 
     it('should handle a custom touch start and end event', () => {
-      wrapperWithCustomEvents.simulate('touchStart', {
+      wrapper.simulate('touchStart', {
         touches: [{ clientX: 50 }],
       });
-      wrapperWithCustomEvents.simulate('touchMove', {
+      wrapper.simulate('touchMove', {
         touches: [{ clientX: 0 }],
       });
-      wrapperWithCustomEvents.simulate('touchEnd');
+      wrapper.simulate('touchEnd');
       clock.tick(50);
-      sinon.assert.calledThrice(onSelectSpy);
+      sinon.assert.calledOnce(onTouchStartSpy);
+      sinon.assert.calledOnce(onTouchMoveSpy);
+      sinon.assert.calledOnce(onTouchEndSpy);
     });
 
     it('should handle a custom multi-touch move event', () => {
-      wrapperWithCustomEvents.simulate('touchMove', {
+      wrapper.simulate('touchMove', {
         touches: [{ clientX: 0 }, { clientX: 50 }],
       });
       clock.tick(50);
-      expect(onSelectSpy).to.have.been.calledOnce;
+      expect(onTouchMoveSpy).to.have.been.calledOnce;
     });
   });
 
