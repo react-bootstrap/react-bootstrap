@@ -128,7 +128,6 @@ const components = [
   'navbar',
   'overlays',
   'pagination',
-  'popovers',
   'progress',
   'spinners',
   'table',
