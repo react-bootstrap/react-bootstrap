@@ -29,6 +29,7 @@ function getDefaultDimensionValue(dimension, elem) {
   );
 }
 
+/* Check if dimension that should be calculated is height or width */
 function getDimension(dimension = 'height') {
   return typeof dimension === 'function' ? dimension() : dimension;
 }
