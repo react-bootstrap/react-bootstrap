@@ -79,7 +79,7 @@ describe('<Carousel>', () => {
     it('should allow refs to be attached and expose next, prev functions', () => {
       const ref = React.createRef();
       const onSelectSpy = sinon.spy();
-      const wrapper = mount(
+      mount(
         <Carousel ref={ref} onSelect={onSelectSpy} defaultActiveIndex={1}>
           {items}
         </Carousel>,
