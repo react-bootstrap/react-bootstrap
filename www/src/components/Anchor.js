@@ -24,23 +24,25 @@ const styles = css`
   }
 `;
 
-class Anchor extends React.Component {
-  static propTypes = {
-    target: PropTypes.any.isRequired,
-  };
+const propTypes = {
+  target: PropTypes.any.isRequired,
+  as: PropTypes.elementType,
+};
 
-  render() {
-    const { as: Tag = 'span', className } = this.props;
+const defaultProps = {
+  as: 'span',
+};
 
-    return (
-      <Tag className={cn(className, styles.wrapper)}>
-        {this.props.children}
-        <a href={`#${this.props.target}`} className={styles.anchor} aria-hidden>
-          <span aria-hidden>#</span>
-        </a>
-      </Tag>
-    );
-  }
-}
+const Anchor = ({ as: Tag, className, children, target }) => (
+  <Tag className={cn(className, styles.wrapper)}>
+    {children}
+    <a href={`#${target}`} className={styles.anchor} aria-hidden>
+      <span aria-hidden>#</span>
+    </a>
+  </Tag>
+);
+
+Anchor.propTypes = propTypes;
+Anchor.defaultProps = defaultProps;
 
 export default Anchor;
