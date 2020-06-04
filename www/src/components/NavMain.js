@@ -47,6 +47,7 @@ const StyledNavbar = styled(Navbar).attrs({
 
   min-height: 4rem;
   background-color: $darker;
+  z-index: 1;
 
   @include media-breakpoint-up(md) {
     position: sticky;
@@ -136,7 +137,7 @@ function NavMain({ activePage }) {
               <span className="d-none d-lg-inline">Bootstrap </span>
               {config.bootstrapVersion.split('.').slice(0, 2).join('.')})
             </Dropdown.Toggle>
-            <Dropdown.Menu className="w-100" role="menu">
+            <Dropdown.Menu role="menu">
               <Dropdown.Item href="https://react-bootstrap-v3.netlify.com">
                 v0.32.4 (Bootstrap 3)
               </Dropdown.Item>
