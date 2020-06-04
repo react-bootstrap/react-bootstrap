@@ -65,7 +65,7 @@ describe('<Carousel>', () => {
     wrapper.find('.carousel-indicators li').first().simulate('click');
   });
 
-  describe(`ref testing`, () => {
+  describe('ref testing', () => {
     let clock;
 
     beforeEach(() => {
@@ -75,28 +75,29 @@ describe('<Carousel>', () => {
     afterEach(() => {
       clock.restore();
     });
-    it(`should allow refs to be attached and expose next, prev functions`, () => {
-      let inputRef = React.createRef();
+
+    it('should allow refs to be attached and expose next, prev functions', () => {
+      const ref = React.createRef();
       const onSelectSpy = sinon.spy();
       const wrapper = mount(
-        <Carousel ref={inputRef} onSelect={onSelectSpy} defaultActiveIndex={1}>
+        <Carousel ref={ref} onSelect={onSelectSpy} defaultActiveIndex={1}>
           {items}
         </Carousel>,
       );
-      expect(inputRef.current).to.have.property('next');
-      expect(inputRef.current).to.have.property('prev');
-      expect(inputRef.current).to.have.property('element');
-      inputRef.current.next();
+      expect(ref.current).to.have.property('next');
+      expect(ref.current).to.have.property('prev');
+      expect(ref.current).to.have.property('element');
+      ref.current.next();
       clock.tick(50);
       expect(onSelectSpy).to.have.been.calledOnce;
-      inputRef.current.prev();
+      ref.current.prev();
       clock.tick(50);
       expect(onSelectSpy).to.have.been.calledTwice;
       wrapper.unmount();
     });
   });
 
-  [('onSlide', 'onSlid')].forEach((eventName) => {
+  ['onSlide', 'onSlid'].forEach((eventName) => {
     it(`should call ${eventName} with previous index and direction`, (done) => {
       function onEvent(index, direction) {
         expect(index).to.equal(0);
@@ -577,6 +578,7 @@ describe('<Carousel>', () => {
       onTouchStartSpy = sinon.spy();
       onTouchMoveSpy = sinon.spy();
       onTouchEndSpy = sinon.spy();
+
       wrapper = mount(
         <Carousel
           activeIndex={1}
