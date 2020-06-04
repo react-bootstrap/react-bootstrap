@@ -93,7 +93,6 @@ describe('<Carousel>', () => {
       ref.current.prev();
       clock.tick(50);
       expect(onSelectSpy).to.have.been.calledTwice;
-      wrapper.unmount();
     });
   });
 
