@@ -29,21 +29,6 @@ function getDefaultDimensionValue(dimension, elem) {
   );
 }
 
-/* Check if dimension that should be calculated is height or width */
-function getDimension(dimension = 'height') {
-  return typeof dimension === 'function' ? dimension() : dimension;
-}
-
-// for testing
-function _getScrollDimensionValue(elem, computedDimension) {
-  const scroll = `scroll${computedDimension[0].toUpperCase()}${computedDimension.slice(
-    1,
-  )}`;
-  return `${elem[scroll]}px`;
-}
-// For testing purposes we should export _getScrollDimensionValue in order to stub it
-export const collapseHelpers = { _getScrollDimensionValue, getDimension };
-
 const collapseStyles = {
   [EXITED]: 'collapse',
   [EXITING]: 'collapsing',
@@ -161,7 +146,8 @@ const Collapse = React.forwardRef(
     ref,
   ) => {
     /* Compute dimension */
-    const computedDimension = getDimension(dimension);
+    const computedDimension =
+      typeof dimension === 'function' ? dimension() : dimension;
 
     /* -- Expanding -- */
     const handleEnter = useMemo(
@@ -175,10 +161,10 @@ const Collapse = React.forwardRef(
     const handleEntering = useMemo(
       () =>
         createChainedFunction((elem) => {
-          elem.style[dimension] = collapseHelpers._getScrollDimensionValue(
-            elem,
-            computedDimension,
-          );
+          const scroll = `scroll${computedDimension[0].toUpperCase()}${computedDimension.slice(
+            1,
+          )}`;
+          elem.style[dimension] = `${elem[scroll]}px`;
         }, onEntering),
       [computedDimension, onEntering, dimension],
     );
@@ -210,9 +196,6 @@ const Collapse = React.forwardRef(
         }, onExiting),
       [computedDimension, onExiting],
     );
-
-    delete props.dimension;
-    delete props.getDimensionValue;
 
     return (
       <Transition
