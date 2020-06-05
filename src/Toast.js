@@ -89,7 +89,15 @@ const Toast = React.forwardRef(
       onCloseRef.current();
     }, [autohide, show]);
 
-    autohideTimeout.set(autohideFunc, delayRef.current);
+    useEffect(() => {
+      if (autohide && show) {
+        autohideTimeout.set(autohideFunc, delayRef.current);
+      }
+
+      return () => {
+        autohideTimeout.clear();
+      };
+    }, [autohide, show, autohideTimeout, autohideFunc]);
 
     const hasAnimation = useMemo(() => Transition && animation, [
       Transition,
