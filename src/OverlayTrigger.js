@@ -6,12 +6,6 @@ import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import warning from 'warning';
 import Overlay from './Overlay';
 
-class RefHolder extends React.Component {
-  render() {
-    return this.props.children;
-  }
-}
-
 function normalizeDelay(delay) {
   return delay && typeof delay === 'object'
     ? delay
@@ -258,9 +252,7 @@ function OverlayTrigger({
 
   return (
     <>
-      <RefHolder ref={triggerNodeRef}>
-        {cloneElement(child, triggerProps)}
-      </RefHolder>
+      {cloneElement(child, { ...triggerProps, ref: triggerNodeRef })}
       <Overlay
         {...props}
         popperConfig={{
