@@ -52,14 +52,18 @@ PageItem.displayName = 'PageItem';
 export default PageItem;
 
 function createButton(name, defaultValue, label = name) {
-  return ({ children, ...props }) => {
+  function Button({ children, ...props }) {
     return (
       <PageItem {...props}>
         <span aria-hidden="true">{children || defaultValue}</span>
         <span className="sr-only">{label}</span>
       </PageItem>
     );
-  };
+  }
+
+  Button.displayName = name;
+
+  return Button;
 }
 
 export const First = createButton('First', '«');
