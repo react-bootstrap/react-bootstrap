@@ -96,9 +96,12 @@ const Toast = React.forwardRef(
       autohideTimeout.set(autohideFunc, delayRef.current);
     }, [autohideTimeout, autohideFunc]);
 
-    const toastContext = useMemo(() => ({
-      onClose,
-    }), [onClose]);
+    const toastContext = useMemo(
+      () => ({
+        onClose,
+      }),
+      [onClose],
+    );
 
     const hasAnimation = !!(Transition && animation);
 
