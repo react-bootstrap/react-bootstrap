@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import css from 'dom-helpers/css';
 import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useMemo } from 'react';
 import Transition, {
   ENTERED,
   ENTERING,
@@ -17,7 +17,7 @@ const MARGINS = {
   width: ['marginLeft', 'marginRight'],
 };
 
-function getDimensionValue(dimension, elem) {
+function getDefaultDimensionValue(dimension, elem) {
   let offset = `offset${dimension[0].toUpperCase()}${dimension.slice(1)}`;
   let value = elem[offset];
   let margins = MARGINS[dimension];
@@ -125,54 +125,13 @@ const defaultProps = {
   mountOnEnter: false,
   unmountOnExit: false,
   appear: false,
-
   dimension: 'height',
-  getDimensionValue,
+  getDimensionValue: getDefaultDimensionValue,
 };
 
-class Collapse extends React.Component {
-  getDimension() {
-    return typeof this.props.dimension === 'function'
-      ? this.props.dimension()
-      : this.props.dimension;
-  }
-
-  /* -- Expanding -- */
-  handleEnter = (elem) => {
-    elem.style[this.getDimension()] = '0';
-  };
-
-  handleEntering = (elem) => {
-    const dimension = this.getDimension();
-    elem.style[dimension] = this._getScrollDimensionValue(elem, dimension);
-  };
-
-  handleEntered = (elem) => {
-    elem.style[this.getDimension()] = null;
-  };
-
-  /* -- Collapsing -- */
-  handleExit = (elem) => {
-    const dimension = this.getDimension();
-    elem.style[dimension] = `${this.props.getDimensionValue(
-      dimension,
-      elem,
-    )}px`;
-    triggerBrowserReflow(elem);
-  };
-
-  handleExiting = (elem) => {
-    elem.style[this.getDimension()] = null;
-  };
-
-  // for testing
-  _getScrollDimensionValue(elem, dimension) {
-    const scroll = `scroll${dimension[0].toUpperCase()}${dimension.slice(1)}`;
-    return `${elem[scroll]}px`;
-  }
-
-  render() {
-    const {
+const Collapse = React.forwardRef(
+  (
+    {
       onEnter,
       onEntering,
       onEntered,
@@ -180,23 +139,67 @@ class Collapse extends React.Component {
       onExiting,
       className,
       children,
+      dimension,
+      getDimensionValue,
       ...props
-    } = this.props;
+    },
+    ref,
+  ) => {
+    /* Compute dimension */
+    const computedDimension =
+      typeof dimension === 'function' ? dimension() : dimension;
 
-    delete props.dimension;
-    delete props.getDimensionValue;
-
-    const handleEnter = createChainedFunction(this.handleEnter, onEnter);
-    const handleEntering = createChainedFunction(
-      this.handleEntering,
-      onEntering,
+    /* -- Expanding -- */
+    const handleEnter = useMemo(
+      () =>
+        createChainedFunction((elem) => {
+          elem.style[computedDimension] = '0';
+        }, onEnter),
+      [computedDimension, onEnter],
     );
-    const handleEntered = createChainedFunction(this.handleEntered, onEntered);
-    const handleExit = createChainedFunction(this.handleExit, onExit);
-    const handleExiting = createChainedFunction(this.handleExiting, onExiting);
+
+    const handleEntering = useMemo(
+      () =>
+        createChainedFunction((elem) => {
+          const scroll = `scroll${computedDimension[0].toUpperCase()}${computedDimension.slice(
+            1,
+          )}`;
+          elem.style[dimension] = `${elem[scroll]}px`;
+        }, onEntering),
+      [computedDimension, onEntering, dimension],
+    );
+
+    const handleEntered = useMemo(
+      () =>
+        createChainedFunction((elem) => {
+          elem.style[computedDimension] = null;
+        }, onEntered),
+      [computedDimension, onEntered],
+    );
+
+    /* -- Collapsing -- */
+    const handleExit = useMemo(
+      () =>
+        createChainedFunction((elem) => {
+          elem.style[dimension] = `${getDimensionValue(
+            computedDimension,
+            elem,
+          )}px`;
+          triggerBrowserReflow(elem);
+        }, onExit),
+      [dimension, onExit, getDimensionValue, computedDimension],
+    );
+    const handleExiting = useMemo(
+      () =>
+        createChainedFunction((elem) => {
+          elem.style[computedDimension] = null;
+        }, onExiting),
+      [computedDimension, onExiting],
+    );
 
     return (
       <Transition
+        ref={ref}
         addEndListener={transitionEnd}
         {...props}
         aria-expanded={props.role ? props.in : null}
@@ -213,14 +216,14 @@ class Collapse extends React.Component {
               className,
               children.props.className,
               collapseStyles[state],
-              this.getDimension() === 'width' && 'width',
+              computedDimension === 'width' && 'width',
             ),
           })
         }
       </Transition>
     );
-  }
-}
+  },
+);
 
 Collapse.propTypes = propTypes;
 Collapse.defaultProps = defaultProps;
