@@ -13,7 +13,7 @@ function AlertDismissible() {
         <hr />
         <div className="d-flex justify-content-end">
           <Button onClick={() => setShow(false)} variant="outline-success">
-            Close me ya'll!
+            Close me y'all!
           </Button>
         </div>
       </Alert>
