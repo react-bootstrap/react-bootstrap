@@ -57,15 +57,15 @@
     "react-dom": ">=16.3.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
-    "@babel/plugin-proposal-export-default-from": "^7.0.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/cli": "^7.4.0",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-proposal-export-default-from": "^7.4.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.4.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.4.0",
+    "@babel/preset-env": "^7.4.0",
+    "@babel/preset-react": "^7.4.0",
     "@babel/register": "^7.0.0",
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.2",
@@ -115,7 +115,7 @@
     "webpack": "^4.35.2"
   },
   "dependencies": {
-    "@babel/runtime-corejs2": "^7.0.0",
+    "@babel/runtime-corejs3": "^7.4.0",
     "classnames": "^2.2.5",
     "dom-helpers": "^3.2.0",
     "invariant": "^2.2.4",
