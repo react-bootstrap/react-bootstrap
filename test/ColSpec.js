@@ -27,6 +27,12 @@ describe('Col', () => {
     ).assertSingle('.col-md-8.order-md-1.col-4.offset-1.order-lg-last');
   });
 
+  it('Should allow span to be null', () => {
+    const wrapper = mount(<Col xs="6" md={{ span: null, order: 1 }} />);
+    wrapper.assertSingle('.col-6.order-md-1');
+    wrapper.find('div').hasClass('col-md').should.equal(false);
+  });
+
   it('Should have div as default component', () => {
     mount(<Col />).assertSingle('div');
   });

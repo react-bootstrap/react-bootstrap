@@ -17,7 +17,7 @@ type NumberAttr =
   | '11'
   | '12';
 type ColOrder = 'first' | 'last' | NumberAttr;
-type ColSize = true | 'auto' | NumberAttr;
+type ColSize = true | 'auto' | NumberAttr | null;
 type ColSpec =
   | ColSize
   | { span?: ColSize; offset?: NumberAttr; order?: ColOrder };
