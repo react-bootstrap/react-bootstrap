@@ -14,7 +14,9 @@ describe('Col', () => {
   });
 
   it('Should include sizes', () => {
-    mount(<Col xs={4} md={8} />).assertSingle('.col-md-8.col-4');
+    mount(<Col xs={4} md={8} lg={{ span: 12 }} />).assertSingle(
+      '.col-md-8.col-4.col-lg-12',
+    );
   });
 
   it('Should include offsets', () => {
@@ -31,6 +33,18 @@ describe('Col', () => {
     const wrapper = mount(<Col xs="6" md={{ span: null, order: 1 }} />);
     wrapper.assertSingle('.col-6.order-md-1');
     wrapper.find('div').hasClass('col-md').should.equal(false);
+  });
+
+  it('Should allow span to be false', () => {
+    const wrapper = mount(<Col xs="6" md={{ span: false, order: 1 }} />);
+    wrapper.assertSingle('.col-6.order-md-1');
+    wrapper.find('div').hasClass('col-md').should.equal(false);
+  });
+
+  it('Should allow span to be auto', () => {
+    mount(<Col md="auto" lg={{ span: 'auto' }} />).assertSingle(
+      '.col-md-auto.col-lg-auto',
+    );
   });
 
   it('Should have div as default component', () => {

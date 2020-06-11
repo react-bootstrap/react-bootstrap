@@ -37,35 +37,35 @@ const propTypes = {
   /**
    * The number of columns to span on extra small devices (<576px)
    *
-   * @type {(true|"auto"|number|{ span: true|"auto"|number|null, offset: number, order: "first"|"last"|number })}
+   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
    */
   xs: column,
 
   /**
    * The number of columns to span on small devices (≥576px)
    *
-   * @type {(true|"auto"|number|{ span: true|"auto"|number|null, offset: number, order: "first"|"last"|number })}
+   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
    */
   sm: column,
 
   /**
    * The number of columns to span on medium devices (≥768px)
    *
-   * @type {(true|"auto"|number|{ span: true|"auto"|number|null, offset: number, order: "first"|"last"|number })}
+   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
    */
   md: column,
 
   /**
    * The number of columns to span on large devices (≥992px)
    *
-   * @type {(true|"auto"|number|{ span: true|"auto"|number|null, offset: number, order: "first"|"last"|number })}
+   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
    */
   lg: column,
 
   /**
    * The number of columns to span on extra large devices (≥1200px)
    *
-   * @type {(true|"auto"|number|{ span: true|"auto"|number|null, offset: number, order: "first"|"last"|number })}
+   * @type {(boolean|"auto"|number|{ span: boolean|"auto"|number, offset: number, order: "first"|"last"|number })}
    */
   xl: column,
 };
@@ -90,7 +90,7 @@ const Col = React.forwardRef(
 
       let infix = brkPoint !== 'xs' ? `-${brkPoint}` : '';
 
-      if (span != null)
+      if (span)
         spans.push(
           span === true ? `${prefix}${infix}` : `${prefix}${infix}-${span}`,
         );

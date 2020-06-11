@@ -146,7 +146,7 @@ import {
     <Col xs md={{ span: 4, offset: 4 }}>
       3 of 3
     </Col>
-    <Col xs="2" md={{ span: null, offset: 1 }}>
+    <Col xs="2" md={{ span: false, offset: 1 }}>
       .col-2 .offset-md-1
     </Col>
   </Row>

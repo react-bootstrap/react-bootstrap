@@ -111,7 +111,7 @@ export default withLayout(function GridSection({ data }) {
       </LinkedHeading>
       <p>
         The <code>Col</code> lets you specify column widths across 5 breakpoint
-        sizes (xs, sm, md, large, and xl). For every breakpoint, you can specify
+        sizes (xs, sm, md, lg, and xl). For every breakpoint, you can specify
         the amount of columns to span, or set the prop to{' '}
         <code>{'<Col lg={true} />'}</code> for auto layout widths.
       </p>
