@@ -120,7 +120,7 @@
     "karma-webpack": "^4.0.2",
     "lint-staged": "^10.2.9",
     "lodash": "^4.17.15",
-    "mocha": "^7.2.0",
+    "mocha": "^8.0.1",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
