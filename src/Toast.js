@@ -70,7 +70,7 @@ const Toast = React.forwardRef(
     },
     ref,
   ) => {
-    bsPrefix = useBootstrapPrefix('toast');
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'toast');
     const delayRef = useRef(delay);
     const onCloseRef = useRef(onClose);
 

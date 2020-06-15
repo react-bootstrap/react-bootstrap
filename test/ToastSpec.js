@@ -97,4 +97,13 @@ describe('<Toast>', () => {
       clock.restore();
     }
   });
+
+  it('should render with bsPrefix', () => {
+    mount(
+      <Toast bsPrefix="my-toast">
+        <Toast.Header />
+        <Toast.Body />
+      </Toast>,
+    ).assertSingle('div.my-toast');
+  });
 });
