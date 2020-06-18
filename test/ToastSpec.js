@@ -177,4 +177,13 @@ describe('<Toast>', () => {
     clock.tick(300);
     expect(onCloseSpy).not.to.have.been.called;
   });
+
+  it('should render with bsPrefix', () => {
+    mount(
+      <Toast bsPrefix="my-toast">
+        <Toast.Header />
+        <Toast.Body />
+      </Toast>,
+    ).assertSingle('div.my-toast');
+  });
 });

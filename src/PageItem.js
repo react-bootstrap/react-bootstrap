@@ -52,20 +52,18 @@ PageItem.displayName = 'PageItem';
 export default PageItem;
 
 function createButton(name, defaultValue, label = name) {
-  return class extends React.Component {
-    static displayName = name;
+  function Button({ children, ...props }) {
+    return (
+      <PageItem {...props}>
+        <span aria-hidden="true">{children || defaultValue}</span>
+        <span className="sr-only">{label}</span>
+      </PageItem>
+    );
+  }
 
-    render() {
-      const { children, ...props } = this.props;
-      delete props.active;
-      return (
-        <PageItem {...props}>
-          <span aria-hidden="true">{children || defaultValue}</span>
-          <span className="sr-only">{label}</span>
-        </PageItem>
-      );
-    }
-  };
+  Button.displayName = name;
+
+  return Button;
 }
 
 export const First = createButton('First', '«');

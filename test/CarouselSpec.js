@@ -57,7 +57,7 @@ describe('<Carousel>', () => {
     }
 
     const wrapper = mount(
-      <Carousel activeIndex={1} onSelect={onSelect}>
+      <Carousel activeIndex={1} onSelect={onSelect} interval={null}>
         {items}
       </Carousel>,
     );
@@ -106,7 +106,11 @@ describe('<Carousel>', () => {
       }
 
       const wrapper = mount(
-        <Carousel defaultActiveIndex={1} {...{ [eventName]: onEvent }}>
+        <Carousel
+          defaultActiveIndex={1}
+          interval={null}
+          {...{ [eventName]: onEvent }}
+        >
           {items}
         </Carousel>,
       );

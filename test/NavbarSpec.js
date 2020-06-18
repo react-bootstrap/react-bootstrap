@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 
 import Nav from '../src/Nav';
 import Navbar from '../src/Navbar';
+import Collapse from '../src/Collapse';
 
 describe('<Navbar>', () => {
   it('Should create nav element', () => {
@@ -100,11 +101,12 @@ describe('<Navbar>', () => {
   });
 
   it('Should pass expanded to Collapse', () => {
-    mount(
+    const wrapper = mount(
       <Navbar defaultExpanded>
         <Navbar.Collapse>hello</Navbar.Collapse>
       </Navbar>,
-    ).assertSingle('Collapse[in]');
+    );
+    expect(wrapper.find(Collapse).prop('in')).to.be.true;
   });
 
   it('Should wire the toggle to the collapse', () => {
@@ -116,7 +118,7 @@ describe('<Navbar>', () => {
     );
 
     let toggle = wrapper.find('.navbar-toggler');
-    let collapse = wrapper.find('Collapse');
+    let collapse = wrapper.find(Collapse);
 
     expect(collapse.is('[in=false]')).to.equal(true);
     expect(toggle.hasClass('collapsed')).to.equal(true);
@@ -124,7 +126,7 @@ describe('<Navbar>', () => {
     toggle.simulate('click');
 
     toggle = wrapper.find('.navbar-toggler');
-    collapse = wrapper.find('Collapse');
+    collapse = wrapper.find(Collapse);
 
     expect(collapse.is('[in=true]')).to.equal(true);
     expect(toggle.hasClass('collapsed')).to.equal(false);

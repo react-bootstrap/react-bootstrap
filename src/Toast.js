@@ -70,7 +70,7 @@ const Toast = React.forwardRef(
     },
     ref,
   ) => {
-    bsPrefix = useBootstrapPrefix('toast');
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'toast');
 
     // We use refs for these, because we don't want to restart the autohide
     // timer in case these values change.

@@ -4,7 +4,7 @@ import { TransitionCallbacks } from './helpers';
 
 export interface CollapseProps
   extends TransitionCallbacks,
-    React.ClassAttributes<Collapse> {
+    React.ComponentPropsWithoutRef<'div'> {
   in?: boolean;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
@@ -18,6 +18,9 @@ export interface CollapseProps
   role?: string;
 }
 
-declare class Collapse extends React.Component<CollapseProps> {}
+declare const Collapse: React.ForwardRefRenderFunction<
+  HTMLDivElement,
+  CollapseProps
+>;
 
 export default Collapse;
