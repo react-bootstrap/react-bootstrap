@@ -118,7 +118,7 @@ const Fade = React.forwardRef<Transition, FadeProps>(
   },
 );
 
-Fade.propTypes = propTypes;
+Fade.propTypes = propTypes as any;
 Fade.defaultProps = defaultProps;
 Fade.displayName = 'Fade';
 

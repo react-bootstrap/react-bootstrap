@@ -22,10 +22,12 @@ type NumberAttr =
   | '10'
   | '11'
   | '12';
-type ColSize = true | 'auto' | NumberAttr;
+
+type ColOrder = 'first' | 'last' | NumberAttr;
+type ColSize = boolean | 'auto' | NumberAttr;
 type ColSpec =
   | ColSize
-  | { span?: ColSize; offset?: NumberAttr; order?: NumberAttr };
+  | { span?: ColSize; offset?: NumberAttr; order?: ColOrder };
 
 export interface ColProps extends BsPrefixPropsWithChildren {
   xs?: ColSpec;
@@ -35,9 +37,13 @@ export interface ColProps extends BsPrefixPropsWithChildren {
   xl?: ColSpec;
 }
 
-type Col = BsPrefixRefForwardingComponent<'div', ColProps>;
-
-const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm', 'xs'];
+const DEVICE_SIZES = [
+  'xl' as const,
+  'lg' as const,
+  'md' as const,
+  'sm' as const,
+  'xs' as const,
+];
 const colSize = PropTypes.oneOfType([
   PropTypes.bool,
   PropTypes.number,
@@ -103,7 +109,7 @@ const propTypes = {
   xl: column,
 };
 
-const Col: Col = React.forwardRef(
+const Col: BsPrefixRefForwardingComponent<'div', ColProps> = React.forwardRef(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   ({ bsPrefix, className, as: Component = 'div', ...props }: ColProps, ref) => {
     const prefix = useBootstrapPrefix(bsPrefix, 'col');
@@ -114,8 +120,11 @@ const Col: Col = React.forwardRef(
       const propValue = props[brkPoint];
       delete props[brkPoint];
 
-      let span, offset, order;
-      if (propValue != null && typeof propValue === 'object') {
+      let span: ColSize | undefined;
+      let offset: NumberAttr | undefined;
+      let order: ColOrder | undefined;
+
+      if (typeof propValue === 'object' && propValue != null) {
         ({ span = true, offset, order } = propValue);
       } else {
         span = propValue;

@@ -12,7 +12,7 @@ import {
   BsPrefixRefForwardingComponent,
 } from './helpers';
 
-type FormCheckType = 'checkbox' | 'radio' | 'switch';
+export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 
 export interface FormCheckProps
   extends BsPrefixPropsWithChildren,
@@ -27,6 +27,7 @@ export interface FormCheckProps
   type?: FormCheckType;
   isValid?: boolean;
   isInvalid?: boolean;
+  feedbackTooltip?: boolean;
   feedback?: React.ReactNode;
 }
 
@@ -113,32 +114,22 @@ const propTypes = {
   feedback: PropTypes.node,
 };
 
-const defaultProps = {
-  type: 'checkbox' as FormCheckType,
-  inline: false,
-  disabled: false,
-  isValid: false,
-  isInvalid: false,
-  feedbackTooltip: false,
-  title: '',
-};
-
 const FormCheck: FormCheck = (React.forwardRef(
   (
     {
       id,
       bsPrefix,
       bsCustomPrefix,
-      inline,
-      disabled,
-      isValid,
-      isInvalid,
-      feedbackTooltip,
+      inline = false,
+      disabled = false,
+      isValid = false,
+      isInvalid = false,
+      feedbackTooltip = false,
       feedback,
       className,
       style,
-      title,
-      type,
+      title = '',
+      type = 'checkbox',
       label,
       children,
       custom: propCustom,
@@ -214,7 +205,6 @@ const FormCheck: FormCheck = (React.forwardRef(
 
 FormCheck.displayName = 'FormCheck';
 FormCheck.propTypes = propTypes;
-FormCheck.defaultProps = defaultProps;
 
 FormCheck.Input = FormCheckInput;
 FormCheck.Label = FormCheckLabel;

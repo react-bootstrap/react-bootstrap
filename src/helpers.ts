@@ -66,11 +66,11 @@ export interface TransitionCallbacks {
   onExiting?(node: HTMLElement): any;
 }
 
-export type TransitionType =
-  | boolean
-  | React.ComponentType<
-      {
-        in?: boolean;
-        appear?: boolean;
-      } & TransitionCallbacks
-    >;
+export type TransitionComponent = React.ComponentType<
+  {
+    in?: boolean;
+    appear?: boolean;
+  } & TransitionCallbacks
+>;
+
+export type TransitionType = boolean | TransitionComponent;
