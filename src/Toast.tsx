@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -7,11 +7,11 @@ import Fade from './Fade';
 import ToastHeader from './ToastHeader';
 import ToastBody from './ToastBody';
 import { useBootstrapPrefix } from './ThemeProvider';
-import ToastContext, { ToastContextType } from './ToastContext';
+import ToastContext from './ToastContext';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
-  TransitionType,
+  TransitionComponent,
 } from './helpers';
 
 export interface ToastProps extends BsPrefixPropsWithChildren {
@@ -20,13 +20,8 @@ export interface ToastProps extends BsPrefixPropsWithChildren {
   delay?: number;
   onClose?: () => void;
   show?: boolean;
-  transition?: TransitionType;
+  transition?: TransitionComponent;
 }
-
-type Toast = BsPrefixRefForwardingComponent<'div', ToastProps> & {
-  Body: typeof ToastBody;
-  Header: typeof ToastHeader;
-};
 
 const propTypes = {
   /**
@@ -65,54 +60,59 @@ const propTypes = {
   transition: PropTypes.elementType,
 };
 
-const defaultProps = {
-  animation: true,
-  autohide: false,
-  delay: 3000,
-  show: true,
-  transition: Fade,
-};
-
-const Toast: Toast = (React.forwardRef<HTMLDivElement, ToastProps>(
+const Toast: BsPrefixRefForwardingComponent<
+  'div',
+  ToastProps
+> = React.forwardRef<HTMLDivElement, ToastProps>(
   (
     {
       bsPrefix,
       className,
       children,
-      transition,
-      show,
-      animation,
-      delay,
-      autohide,
+      transition: Transition = Fade,
+      show = true,
+      animation = true,
+      delay = 3000,
+      autohide = false,
       onClose,
       ...props
-    }: ToastProps,
+    },
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'toast');
+
+    // We use refs for these, because we don't want to restart the autohide
+    // timer in case these values change.
     const delayRef = useRef(delay);
     const onCloseRef = useRef(onClose);
 
     useEffect(() => {
-      // We use refs for these, because we don't want to restart the autohide
-      // timer in case these values change.
       delayRef.current = delay;
       onCloseRef.current = onClose;
     }, [delay, onClose]);
 
     const autohideTimeout = useTimeout();
+    const autohideToast = !!(autohide && show);
+
     const autohideFunc = useCallback(() => {
-      if (!(autohide && show)) {
-        return;
+      if (autohideToast) {
+        onCloseRef.current?.();
       }
-      if (onCloseRef.current) {
-        onCloseRef.current();
-      }
-    }, [autohide, show]);
+    }, [autohideToast]);
 
-    autohideTimeout.set(autohideFunc, delayRef.current);
+    useEffect(() => {
+      // Only reset timer if show or autohide changes.
+      autohideTimeout.set(autohideFunc, delayRef.current);
+    }, [autohideTimeout, autohideFunc]);
 
-    const hasAnimation = transition && animation;
+    const toastContext = useMemo(
+      () => ({
+        onClose,
+      }),
+      [onClose],
+    );
+
+    const hasAnimation = !!(Transition && animation);
 
     const toast = (
       <div
@@ -131,12 +131,6 @@ const Toast: Toast = (React.forwardRef<HTMLDivElement, ToastProps>(
       </div>
     );
 
-    const toastContext: ToastContextType = {
-      onClose,
-    };
-
-    const Transition = transition === true ? Fade : transition;
-
     return (
       <ToastContext.Provider value={toastContext}>
         {hasAnimation && Transition ? (
@@ -149,12 +143,12 @@ const Toast: Toast = (React.forwardRef<HTMLDivElement, ToastProps>(
       </ToastContext.Provider>
     );
   },
-) as unknown) as Toast;
+);
 
 Toast.propTypes = propTypes;
-Toast.defaultProps = defaultProps as any;
 Toast.displayName = 'Toast';
-Toast.Body = ToastBody;
-Toast.Header = ToastHeader;
 
-export default Toast;
+export default Object.assign(Toast, {
+  Body: ToastBody,
+  Header: ToastHeader,
+});

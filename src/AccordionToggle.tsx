@@ -31,9 +31,6 @@ const propTypes = {
 
   /** A callback function for when this component is clicked */
   onClick: PropTypes.func,
-
-  /** Children prop should only contain a single child, and  is enforced as such */
-  children: PropTypes.element,
 };
 
 export function useAccordionToggle(

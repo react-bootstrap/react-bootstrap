@@ -57,12 +57,43 @@ describe('<Carousel>', () => {
     }
 
     const wrapper = mount(
-      <Carousel activeIndex={1} onSelect={onSelect}>
+      <Carousel activeIndex={1} onSelect={onSelect} interval={null}>
         {items}
       </Carousel>,
     );
 
     wrapper.find('.carousel-indicators li').first().simulate('click');
+  });
+
+  describe('ref testing', () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = sinon.useFakeTimers();
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    it('should allow refs to be attached and expose next, prev functions', () => {
+      const ref = React.createRef();
+      const onSelectSpy = sinon.spy();
+      mount(
+        <Carousel ref={ref} onSelect={onSelectSpy} defaultActiveIndex={1}>
+          {items}
+        </Carousel>,
+      );
+      expect(ref.current).to.have.property('next');
+      expect(ref.current).to.have.property('prev');
+      expect(ref.current).to.have.property('element');
+      ref.current.next();
+      clock.tick(50);
+      expect(onSelectSpy).to.have.been.calledOnce;
+      ref.current.prev();
+      clock.tick(50);
+      expect(onSelectSpy).to.have.been.calledTwice;
+    });
   });
 
   ['onSlide', 'onSlid'].forEach((eventName) => {
@@ -75,7 +106,11 @@ describe('<Carousel>', () => {
       }
 
       const wrapper = mount(
-        <Carousel defaultActiveIndex={1} {...{ [eventName]: onEvent }}>
+        <Carousel
+          defaultActiveIndex={1}
+          interval={null}
+          {...{ [eventName]: onEvent }}
+        >
           {items}
         </Carousel>,
       );
@@ -244,6 +279,14 @@ describe('<Carousel>', () => {
     );
   });
 
+  it('should render correctly when fade is set', () => {
+    mount(
+      <Carousel defaultActiveIndex={1} fade>
+        {items}
+      </Carousel>,
+    ).assertSingle('.carousel-fade');
+  });
+
   describe('automatic traversal', () => {
     let clock;
 
@@ -263,6 +306,7 @@ describe('<Carousel>', () => {
           {items}
         </Carousel>,
       );
+
       clock.tick(interval * 1.5);
       expect(onSelectSpy).to.have.been.calledOnce;
     });
@@ -453,6 +497,21 @@ describe('<Carousel>', () => {
       sinon.assert.notCalled(onSelectSpy);
     });
 
+    it('should handle a defined custom key event', () => {
+      const onKeyDownSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel activeIndex={1} onKeyDown={onKeyDownSpy}>
+          {items}
+        </Carousel>,
+      );
+
+      wrapper.simulate('keyDown', {
+        key: 'ArrowUp',
+      });
+      clock.tick(50);
+      sinon.assert.calledOnce(onKeyDownSpy);
+    });
+
     ['ArrowUp', 'ArrowRightLeft', 'Onwards'].forEach((key) => {
       it('should do nothing for non left or right keys', () => {
         const onSelectSpy = sinon.spy();
@@ -471,13 +530,68 @@ describe('<Carousel>', () => {
     });
   });
 
+  describe('mouse events', () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = sinon.useFakeTimers();
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    it('should handle a defined mouse over event', () => {
+      const onMouseOverSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel activeIndex={1} onMouseOver={onMouseOverSpy}>
+          {items}
+        </Carousel>,
+      );
+
+      wrapper.simulate('mouseOver');
+      clock.tick(1500);
+      sinon.assert.calledOnce(onMouseOverSpy);
+    });
+
+    it('should handle a defined mouse out event', () => {
+      const onMouseOutSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel activeIndex={1} onMouseOut={onMouseOutSpy}>
+          {items}
+        </Carousel>,
+      );
+
+      wrapper.simulate('mouseOut');
+      clock.tick(50);
+      sinon.assert.calledOnce(onMouseOutSpy);
+    });
+  });
+
   describe('touch events', () => {
-    let clock, wrapper, onSelectSpy;
+    let clock,
+      wrapper,
+      onSelectSpy,
+      onTouchStartSpy,
+      onTouchMoveSpy,
+      onTouchEndSpy;
 
     beforeEach(() => {
       onSelectSpy = sinon.spy();
+      onTouchStartSpy = sinon.spy();
+      onTouchMoveSpy = sinon.spy();
+      onTouchEndSpy = sinon.spy();
+
       wrapper = mount(
-        <Carousel activeIndex={1} interval={null} onSelect={onSelectSpy} touch>
+        <Carousel
+          activeIndex={1}
+          interval={null}
+          onSelect={onSelectSpy}
+          onTouchStart={onTouchStartSpy}
+          onTouchMove={onTouchMoveSpy}
+          onTouchEnd={onTouchEndSpy}
+          touch
+        >
           {items}
         </Carousel>,
       );
@@ -542,6 +656,102 @@ describe('<Carousel>', () => {
 
       const carouselItems = wrapper.find('CarouselItem');
       expect(carouselItems.at(1).is('.active')).to.be.true;
+    });
+
+    it('should handle a custom touch start and end event', () => {
+      wrapper.simulate('touchStart', {
+        touches: [{ clientX: 50 }],
+      });
+      wrapper.simulate('touchMove', {
+        touches: [{ clientX: 0 }],
+      });
+      wrapper.simulate('touchEnd');
+      clock.tick(50);
+      sinon.assert.calledOnce(onTouchStartSpy);
+      sinon.assert.calledOnce(onTouchMoveSpy);
+      sinon.assert.calledOnce(onTouchEndSpy);
+    });
+
+    it('should handle a custom multi-touch move event', () => {
+      wrapper.simulate('touchMove', {
+        touches: [{ clientX: 0 }, { clientX: 50 }],
+      });
+      clock.tick(50);
+      expect(onTouchMoveSpy).to.have.been.calledOnce;
+    });
+  });
+
+  describe('callback tests', () => {
+    let clock;
+
+    beforeEach(() => {
+      clock = sinon.useFakeTimers();
+    });
+
+    afterEach(() => {
+      clock.restore();
+    });
+
+    it('should call onSlide when slide animation is disabled', () => {
+      const onSlideSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel slide={false} onSelect={() => {}} onSlide={onSlideSpy}>
+          {items}
+        </Carousel>,
+      );
+
+      wrapper.find('a.carousel-control-next').simulate('click');
+      clock.tick(150);
+      onSlideSpy.should.have.been.calledOnce;
+
+      wrapper.find('a.carousel-control-prev').simulate('click');
+      clock.tick(150);
+      onSlideSpy.should.have.been.calledTwice;
+    });
+
+    it('should call onSlid when slide animation is disabled', () => {
+      const onSlidSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel slide={false} onSelect={() => {}} onSlid={onSlidSpy}>
+          {items}
+        </Carousel>,
+      );
+
+      wrapper.find('a.carousel-control-next').simulate('click');
+      clock.tick(150);
+      onSlidSpy.should.have.been.calledOnce;
+
+      wrapper.find('a.carousel-control-prev').simulate('click');
+      clock.tick(150);
+      onSlidSpy.should.have.been.calledTwice;
+    });
+
+    it('should transition/call onSelect once if previous arrow double clicked', () => {
+      const onSelectSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel onSelect={onSelectSpy}>{items}</Carousel>,
+      );
+
+      const prev = wrapper.find('a.carousel-control-prev');
+      prev.simulate('click');
+      prev.simulate('click');
+
+      clock.tick(1000);
+      onSelectSpy.should.have.been.calledOnce;
+    });
+
+    it('should transition/call onSelect once if next arrow double clicked', () => {
+      const onSelectSpy = sinon.spy();
+      const wrapper = mount(
+        <Carousel onSelect={onSelectSpy}>{items}</Carousel>,
+      );
+
+      const next = wrapper.find('a.carousel-control-next');
+      next.simulate('click');
+      next.simulate('click');
+
+      clock.tick(1000);
+      onSelectSpy.should.have.been.calledOnce;
     });
   });
 });

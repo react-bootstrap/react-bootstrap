@@ -7,6 +7,7 @@ export interface FeedbackProps extends BsPrefixProps {
   className?: string;
   bsPrefix?: never;
   type?: 'valid' | 'invalid';
+  tooltip?: boolean;
 }
 
 type Feedback = BsPrefixRefForwardingComponent<'div', FeedbackProps>;
@@ -18,29 +19,37 @@ const propTypes = {
    * @type {('valid'|'invalid')}
    */
   type: PropTypes.string.isRequired,
-  as: PropTypes.elementType,
-};
 
-const defaultProps = {
-  type: 'valid' as const,
+  /** Display feedback as a tooltip. */
+  tooltip: PropTypes.bool,
+
+  as: PropTypes.elementType,
 };
 
 const Feedback: Feedback = React.forwardRef(
   // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
   (
-    { as: Component = 'div', className, type, ...props }: FeedbackProps,
+    {
+      as: Component = 'div',
+      className,
+      type = 'valid',
+      tooltip = false,
+      ...props
+    }: FeedbackProps,
     ref,
   ) => (
     <Component
       {...props}
       ref={ref}
-      className={classNames(className, type && `${type}-feedback`)}
+      className={classNames(
+        className,
+        `${type}-${tooltip ? 'tooltip' : 'feedback'}`,
+      )}
     />
   ),
 );
 
 Feedback.displayName = 'Feedback';
 Feedback.propTypes = propTypes;
-Feedback.defaultProps = defaultProps;
 
 export default Feedback;

@@ -118,6 +118,17 @@ describe('<Dropdown.Item>', () => {
       .simulate('click');
   });
 
+  it('should not call onSelect for disabled item that is not a SafeAnchor', () => {
+    const onSelectSpy = sinon.spy();
+    mount(
+      <Dropdown.Item as="div" onSelect={onSelectSpy} disabled>
+        Text
+      </Dropdown.Item>,
+    ).simulate('click');
+
+    onSelectSpy.should.not.have.been.called;
+  });
+
   it('should pass through props', () => {
     let node = mount(
       <Dropdown.Item

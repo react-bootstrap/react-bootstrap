@@ -81,7 +81,6 @@ const defaultProps = {
   variant: 'primary',
   active: false,
   disabled: false,
-  type: 'button',
 };
 
 const Button: Button = React.forwardRef(
@@ -125,8 +124,10 @@ const Button: Button = React.forwardRef(
       (props as any).ref = ref;
     }
 
-    if (!as) {
+    if (type) {
       (props as any).type = type;
+    } else if (!as) {
+      (props as any).type = 'button';
     }
 
     const Component = as || 'button';

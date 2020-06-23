@@ -36,6 +36,22 @@ describe('<Dropdown>', () => {
     node.className.should.match(/\bdropup\b/);
   });
 
+  it('renders div with dropright class', () => {
+    mount(
+      <Dropdown title="Dropup" drop="right">
+        {dropdownChildren}
+      </Dropdown>,
+    ).assertSingle('.dropright');
+  });
+
+  it('renders div with dropleft class', () => {
+    mount(
+      <Dropdown title="Dropup" drop="left">
+        {dropdownChildren}
+      </Dropdown>,
+    ).assertSingle('.dropleft');
+  });
+
   it('renders toggle with Dropdown.Toggle', () => {
     const buttonNode = mount(simpleDropdown)
       .find('DropdownToggle')

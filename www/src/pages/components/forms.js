@@ -10,12 +10,24 @@ import CheckApi from '../../examples/Form/CheckApi';
 import CheckCustom from '../../examples/Form/CheckCustom';
 import CheckCustomInline from '../../examples/Form/CheckCustomInline';
 import CheckInline from '../../examples/Form/CheckInline';
+import FormFile from '../../examples/Form/FormFile';
+import FormDisabled from '../../examples/Form/FormDisabled';
+import FormDisabledInputs from '../../examples/Form/FormDisabledInputs';
 import FormGroup from '../../examples/Form/FormGroup';
 import FormRow from '../../examples/Form/FormRow';
+import FormText from '../../examples/Form/FormText';
+import FormTextInline from '../../examples/Form/FormTextInline';
 import FormLabelSizing from '../../examples/Form/FormLabelSizing';
+import GridAutoSizing from '../../examples/Form/GridAutoSizing';
+import GridAutoSizingCustom from '../../examples/Form/GridAutoSizingCustom';
+import GridAutoSizingColMix from '../../examples/Form/GridAutoSizingColMix';
 import GridBasic from '../../examples/Form/GridBasic';
+import GridColSizes from '../../examples/Form/GridColSizes';
 import GridComplex from '../../examples/Form/GridComplex';
 import Horizontal from '../../examples/Form/Horizontal';
+import Inline from '../../examples/Form/Inline';
+import InlineCustom from '../../examples/Form/InlineCustom';
+import InputReadOnly from '../../examples/Form/InputReadOnly';
 import FormInputSizes from '../../examples/Form/InputSizes';
 import NoLabels from '../../examples/Form/NoLabels';
 import Plaintext from '../../examples/Form/Plaintext';
@@ -25,6 +37,7 @@ import RangeCustom from '../../examples/Form/RangeCustom';
 import SelectCustom from '../../examples/Form/SelectCustom';
 import SelectCustomSize from '../../examples/Form/SelectCustomSize';
 import SelectCustomHtmlSize from '../../examples/Form/SelectCustomHtmlSize';
+import SelectSizes from '../../examples/Form/SelectSizes';
 import File from '../../examples/Form/File';
 import FileButtonTextHTML from '../../examples/Form/FileButtonTextHTML';
 import FileButtonTextScss from '../../examples/Form/FileButtonTextScss';
@@ -32,6 +45,7 @@ import FileApi from '../../examples/Form/FileApi';
 import FormTextControls from '../../examples/Form/TextControls';
 import ValidationFormik from '../../examples/Form/ValidationFormik';
 import ValidationNative from '../../examples/Form/ValidationNative';
+import ValidationTooltips from '../../examples/Form/ValidationTooltips';
 import withLayout from '../../withLayout';
 
 export default withLayout(function FormControlsSection({ data }) {
@@ -76,6 +90,10 @@ export default withLayout(function FormControlsSection({ data }) {
         appearance, focus state, sizing, and more.
       </p>
       <ReactPlayground codeText={FormTextControls} />
+      <p>
+        For file inputs, use <code>Form.File</code>.
+      </p>
+      <ReactPlayground codeText={FormFile} />
       <LinkedHeading h="3" id="forms-input-sizes">
         Sizing
       </LinkedHeading>
@@ -85,13 +103,23 @@ export default withLayout(function FormControlsSection({ data }) {
         respectively.
       </p>
       <ReactPlayground codeText={FormInputSizes} />
-      <LinkedHeading h="3" id="forms-input-Plaintext">
-        Plaintext
+      <ReactPlayground codeText={SelectSizes} />
+      <LinkedHeading h="3" id="forms-input-readonly">
+        Readonly
       </LinkedHeading>
       <p>
-        If you want to have elements in your form styled as plain text, use the{' '}
-        <code>plaintext</code> prop on FormControls to remove the default form
-        field styling and preserve the correct margin and padding.
+        Add the <code>readOnly</code> prop on an input to prevent modification
+        of the input's value. Read-only inputs appear lighter (just like
+        disabled inputs), but retain the standard cursor.
+      </p>
+      <ReactPlayground codeText={InputReadOnly} />
+      <LinkedHeading h="3" id="forms-input-plaintext">
+        Readonly plain text
+      </LinkedHeading>
+      <p>
+        If you want to have readonly elements in your form styled as plain text,
+        use the <code>plaintext</code> prop on FormControls to remove the
+        default form field styling and preserve the correct margin and padding.
       </p>
       <ReactPlayground codeText={Plaintext} />
       <LinkedHeading h="2" id="forms-range">
@@ -123,7 +151,7 @@ export default withLayout(function FormControlsSection({ data }) {
         <code>inline</code> prop.
       </p>
       <ReactPlayground codeText={CheckInline} />
-      <LinkedHeading h="3" id="forms-check-inline">
+      <LinkedHeading h="3" id="forms-check-without-labels">
         Without labels
       </LinkedHeading>
       <p>
@@ -162,7 +190,7 @@ export default withLayout(function FormControlsSection({ data }) {
         layout on a per-form basis.
       </p>
       <LinkedHeading h="3" id="forms-layout-group">
-        Form group
+        Form groups
       </LinkedHeading>
       <p>
         The <code>FormGroup</code> component is the easiest way to add some
@@ -197,8 +225,8 @@ export default withLayout(function FormControlsSection({ data }) {
       <ReactPlayground codeText={FormRow} />
       <p>More complex layouts can also be created with the grid system.</p>
       <ReactPlayground codeText={GridComplex} />
-      <LinkedHeading h="3" id="horizontal-forms">
-        Horizontal forms
+      <LinkedHeading h="4" id="horizontal-forms">
+        Horizontal form
       </LinkedHeading>
       <p>
         You may also swap <code>{'<Row>'}</code> for <code>{'<Form.Row>'}</code>
@@ -207,14 +235,160 @@ export default withLayout(function FormControlsSection({ data }) {
       </p>
       <ReactPlayground codeText={Horizontal} />
       <LinkedHeading h="4" id="horizontal-forms-label-sizing">
-        Horizontal forms label sizing
+        Horizontal form label sizing
       </LinkedHeading>
       <p>
         You can size the <code>{'<FormLabel>'}</code> using the column prop as
         shown.
       </p>
       <ReactPlayground codeText={FormLabelSizing} />
-
+      <LinkedHeading h="4" id="forms-col-sizing">
+        Column sizing
+      </LinkedHeading>
+      <p>
+        As shown in the previous examples, our grid system allows you to place
+        any number of <code>{'<Col>'}</code>s within a <code>{'<Row>'}</code> or{' '}
+        <code>{'<Form.Row>'}</code>. They'll split the available width equally
+        between them. You may also pick a subset of your columns to take up more
+        or less space, while the remaining <code>{'<Col>'}</code>s equally split
+        the rest, with specific column classes like{' '}
+        <code>{'<Col xs={7}>'}</code>.
+      </p>
+      <ReactPlayground codeText={GridColSizes} />
+      <LinkedHeading h="4" id="forms-auto-sizing">
+        Auto-sizing
+      </LinkedHeading>
+      <p>
+        The example below uses a flexbox utility to vertically center the
+        contents and changes <code>{'<Col>'}</code> to{' '}
+        <code>{'<Col xs="auto">'}</code> so that your columns only take up as
+        much space as needed. Put another way, the column sizes itself based on
+        on the contents.
+      </p>
+      <ReactPlayground codeText={GridAutoSizing} />
+      <p>
+        You can then remix that once again with size-specific column classes.
+      </p>
+      <ReactPlayground codeText={GridAutoSizingColMix} />
+      <p>
+        And of course <a href="#forms-custom">custom form controls</a> are
+        supported.
+      </p>
+      <ReactPlayground codeText={GridAutoSizingCustom} />
+      <LinkedHeading h="3" id="forms-inline">
+        Inline forms
+      </LinkedHeading>
+      <p>
+        Use the <code>inline</code> prop to display a series of labels, form
+        controls, and buttons on a single horizontal row. Form controls within
+        forms vary slightly from their default states.
+      </p>
+      <ul>
+        <li>
+          Controls are <code>display: flex</code>, collapsing any HTML white
+          space and allowing you to provide alignment control with spacing and
+          utilities.
+        </li>
+        <li>
+          Controls and input groups receive <code>width: auto</code> to override
+          the Bootstrap default <code>width: 100%</code>.
+        </li>
+        <li>
+          Controls{' '}
+          <b>only appear inline in viewports that are at least 576px wide</b> to
+          account for narrow viewports on mobile devices.
+        </li>
+      </ul>
+      <p>
+        You may need to manually address the width and alignment of individual
+        form controls with spacing utilities (as shown below). Lastly, be sure
+        to always include a <code>{'<Form.Label>'}</code> with each form
+        control, even if you need to hide it from non-screenreader visitors with
+        the <code>srOnly</code> prop.
+      </p>
+      <ReactPlayground codeText={Inline} />
+      <p>Custom form controls and selects are also supported.</p>
+      <ReactPlayground codeText={InlineCustom} />
+      <Callout>
+        <h5>Alternatives to hidden labels</h5>
+        Assistive technologies such as screen readers will have trouble with
+        your forms if you don’t include a label for every input. For these
+        inline forms, you can hide the labels using the <code>srOnly</code>{' '}
+        prop. There are further alternative methods of providing a label for
+        assistive technologies, such as the <code>aria-label</code>,{' '}
+        <code>aria-labelledby</code> or <code>title</code> attribute. If none of
+        these are present, assistive technologies may resort to using the{' '}
+        <code>placeholder</code> attribute, if present, but note that use of{' '}
+        <code>placeholder</code> as a replacement for other labelling methods is
+        not advised.
+      </Callout>
+      <LinkedHeading h="2" id="forms-help-text">
+        Help text
+      </LinkedHeading>
+      <p>
+        Block-level help text in forms can be created using{' '}
+        <code>{'<Form.Text>'}</code>. Inline help text can be flexibly
+        implemented using any inline HTML element and utility classes like
+        <code>.text-muted</code>.
+      </p>
+      <Callout>
+        <h5>Associating help text with form controls</h5>
+        Help text should be explicitly associated with the form control it
+        relates to using the <code>aria-describedby</code> attribute. This will
+        ensure that assistive technologies—such as screen readers—will announce
+        this help text when the user focuses or enters the control.
+      </Callout>
+      <p>
+        Help text below inputs can be styled with <code>{'<Form.Text>'}</code>.
+        This component includes <code>display: block</code> and adds some top
+        margin for easy spacing from the inputs above.
+      </p>
+      <ReactPlayground codeText={FormText} />
+      <p>
+        Inline text can use any typical inline HTML element (be it a{' '}
+        <code>{'<small>'}</code>, <code>{'<span>'}</code>, or something else)
+        with nothing more than a utility class.
+      </p>
+      <ReactPlayground codeText={FormTextInline} />
+      <LinkedHeading h="2" id="forms-disabled">
+        Disabled forms
+      </LinkedHeading>
+      <p>
+        Add the <code>disabled</code> boolean attribute on an input to prevent
+        user interactions and make it appear lighter.
+      </p>
+      <ReactPlayground codeText={FormDisabledInputs} />
+      <p>
+        Add the <code>disabled</code> attribute to a <code>{'<fieldset>'}</code>{' '}
+        to disable all the controls within.
+      </p>
+      <ReactPlayground codeText={FormDisabled} />
+      <Callout>
+        <h5>Caveat with anchors</h5>
+        By default, browsers will treat all native form controls (
+        <code>{'<input>'}</code>, <code>{'<select>'}</code> and{' '}
+        <code>{'<button>'}</code> elements) inside a{' '}
+        <code>{'<fieldset disabled>'}</code> as disabled, preventing both
+        keyboard and mouse interactions on them. However, if your form also
+        includes <code>{'<a ... class="btn btn-*">'}</code> elements, these will
+        only be given a style of <code>pointer-events: none</code>. As noted in
+        the section about{' '}
+        <a href="/components/buttons/#disabled-state">
+          disabled state for buttons
+        </a>{' '}
+        (and specifically in the sub-section for anchor elements), this CSS
+        property is not yet standardized and isn’t fully supported in Internet
+        Explorer 10, and won’t prevent keyboard users from being able to focus
+        or activate these links. So to be safe, use custom JavaScript to disable
+        such links.
+      </Callout>
+      <Callout theme="danger">
+        <h4>Cross-browser compatibility</h4>
+        While Bootstrap will apply these styles in all browsers, Internet
+        Explorer 11 and below don’t fully support the <code>disabled</code>{' '}
+        attribute on a <code>{'<fieldset>'}</code>. Use custom JavaScript to
+        disable the fieldset in these browsers.
+      </Callout>
       <LinkedHeading h="2" id="forms-validation">
         Validation
       </LinkedHeading>
@@ -244,7 +418,7 @@ export default withLayout(function FormControlsSection({ data }) {
       <ReactPlayground codeText={ValidationNative} />
 
       <LinkedHeading h="3" id="forms-validation-libraries">
-        Form libraries and server rendered styles.
+        Form libraries and server-rendered styles
       </LinkedHeading>
       <p>
         It's often beneficial (especially in React) to handle form validation
@@ -255,6 +429,18 @@ export default withLayout(function FormControlsSection({ data }) {
         <a href="https://github.com/jaredpalmer/formik">Formik</a>.
       </p>
       <ReactPlayground codeText={ValidationFormik} />
+
+      <LinkedHeading h="3" id="forms-validation-tooltips">
+        Tooltips
+      </LinkedHeading>
+      <p>
+        If your form layout allows it, you can use the <code>tooltip</code> prop
+        to display validation feedback in a styled tooltip. Be sure to have a
+        parent with <code>position: relative</code> on it for tooltip
+        positioning. In the example below, our column classes have this already,
+        but your project may require an alternative setup.
+      </p>
+      <ReactPlayground codeText={ValidationTooltips} />
 
       <LinkedHeading h="3" id="forms-validation-examples">
         Examples
@@ -417,6 +603,7 @@ export default withLayout(function FormControlsSection({ data }) {
       <ComponentApi metadata={data.FormRow} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormGroup} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormLabel} exportedBy={data.Form} />
+      <ComponentApi metadata={data.FormText} exportedBy={data.Form} />
       <ComponentApi metadata={data.FormControl} exportedBy={data.Form} />
       <ComponentApi metadata={data.Feedback} exportedBy={data.FormControl} />
       <ComponentApi metadata={data.FormCheck} exportedBy={data.Form} />
@@ -450,6 +637,9 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     FormLabel: componentMetadata(displayName: { eq: "FormLabel" }) {
+      ...ComponentApi_metadata
+    }
+    FormText: componentMetadata(displayName: { eq: "FormText" }) {
       ...ComponentApi_metadata
     }
     FormCheck: componentMetadata(displayName: { eq: "FormCheck" }) {

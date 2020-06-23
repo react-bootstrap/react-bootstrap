@@ -54,14 +54,10 @@ const propTypes = {
   isStatic: PropTypes.bool,
 
   /** Manually style the input as valid */
-  isValid: PropTypes.bool.isRequired,
+  isValid: PropTypes.bool,
 
   /** Manually style the input as invalid */
-  isInvalid: PropTypes.bool.isRequired,
-};
-
-const defaultProps = {
-  type: 'checkbox' as FormCheckInputType,
+  isInvalid: PropTypes.bool,
 };
 
 const FormCheckInput: FormCheckInput = React.forwardRef(
@@ -71,8 +67,9 @@ const FormCheckInput: FormCheckInput = React.forwardRef(
       bsPrefix,
       bsCustomPrefix,
       className,
-      isValid,
-      isInvalid,
+      type = 'checkbox',
+      isValid = false,
+      isInvalid = false,
       isStatic,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'input',
@@ -91,6 +88,7 @@ const FormCheckInput: FormCheckInput = React.forwardRef(
       <Component
         {...props}
         ref={ref}
+        type={type}
         id={id || controlId}
         className={classNames(
           className,
@@ -106,6 +104,5 @@ const FormCheckInput: FormCheckInput = React.forwardRef(
 
 FormCheckInput.displayName = 'FormCheckInput';
 FormCheckInput.propTypes = propTypes;
-FormCheckInput.defaultProps = defaultProps;
 
 export default FormCheckInput;

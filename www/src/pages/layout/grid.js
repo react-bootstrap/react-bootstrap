@@ -14,6 +14,7 @@ import GridAutoLayoutSizing from '../../examples/Grid/AutoLayoutSizing';
 import GridAutoLayoutVariable from '../../examples/Grid/AutoLayoutVariable';
 import GridOffsetting from '../../examples/Grid/Offsetting';
 import GridOrdering from '../../examples/Grid/Ordering';
+import GridOrderingFirstLast from '../../examples/Grid/OrderingFirstLast';
 import GridResponsive from '../../examples/Grid/Responsive';
 import GridResponsiveAuto from '../../examples/Grid/ResponsiveAuto';
 import withLayout from '../../withLayout';
@@ -110,7 +111,7 @@ export default withLayout(function GridSection({ data }) {
       </LinkedHeading>
       <p>
         The <code>Col</code> lets you specify column widths across 5 breakpoint
-        sizes (xs, sm, md, large, and xl). For every breakpoint, you can specify
+        sizes (xs, sm, md, lg, and xl). For every breakpoint, you can specify
         the amount of columns to span, or set the prop to{' '}
         <code>{'<Col lg={true} />'}</code> for auto layout widths.
       </p>
@@ -127,17 +128,27 @@ export default withLayout(function GridSection({ data }) {
         The <code>Col</code> breakpoint props also have a more complicated{' '}
         <code>object</code> prop form:{' '}
         <code>{`{span: number, order: number, offset: number}`}</code> for
-        specifying offsets and ordering affects.
+        specifying offsets and ordering effects.
       </p>
 
       <p>
-        You can use the `order` property to control the{' '}
+        You can use the <code>order</code> property to control the{' '}
         <strong>visual order</strong> of your content.
       </p>
       <ReactPlayground codeText={GridOrdering} exampleClassName="show-grid" />
+
       <p>
-        For offsetting grid columns you can set an `offset` value, or, for more
-        general layout, use the margin class utilities.
+        The <code>order</code> property also supports <code>first</code> (
+        <code>order: -1</code>) and <code>last</code> (
+        <code>order: $columns+1</code>).
+      </p>
+      <ReactPlayground
+        codeText={GridOrderingFirstLast}
+        exampleClassName="show-grid"
+      />
+      <p>
+        For offsetting grid columns you can set an <code>offset</code> value or
+        for a more general layout, use the margin class utilities.
       </p>
       <ReactPlayground codeText={GridOffsetting} exampleClassName="show-grid" />
 
@@ -147,7 +158,7 @@ export default withLayout(function GridSection({ data }) {
 
       <p>
         The <code>Row</code> lets you specify column widths across 5 breakpoint
-        sizes (xs, sm, md, large, and xl). For every breakpoint, you can specify
+        sizes (xs, sm, md, lg, and xl). For every breakpoint, you can specify
         the amount of columns that will fit next to each other.
       </p>
       <ReactPlayground

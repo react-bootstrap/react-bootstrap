@@ -30,7 +30,7 @@ describe('<Collapse>', () => {
   it('Should default to collapsed', () => {
     wrapper = mount(<Component>Panel content</Component>);
 
-    assert.ok(wrapper.find('Collapse').props().in === false);
+    assert.ok(wrapper.find(Collapse).props().in === false);
   });
 
   it('Should have collapse class', () => {
@@ -40,11 +40,6 @@ describe('<Collapse>', () => {
   describe('from collapsed to expanded', () => {
     beforeEach(() => {
       wrapper = mount(<Component>Panel content</Component>);
-
-      // since scrollHeight is gonna be 0 detached from the DOM
-      sinon
-        .stub(wrapper.instance().collapse, '_getScrollDimensionValue')
-        .returns('15px');
     });
 
     it('Should have collapsing class', () => {
@@ -70,9 +65,8 @@ describe('<Collapse>', () => {
       let node = wrapper.getDOMNode();
 
       assert.equal(node.style.height, '');
-
       wrapper.setState({ in: true });
-      assert.equal(node.style.height, '15px');
+      assert.equal(node.style.height, `${node.scrollHeight}px`);
     });
 
     it('Should transition from collapsing to not collapsing', (done) => {
@@ -99,7 +93,7 @@ describe('<Collapse>', () => {
       assert.equal(node.style.height, '');
 
       wrapper.setState({ in: true, onEntered });
-      assert.equal(node.style.height, '15px');
+      assert.equal(node.style.height, `${node.scrollHeight}px`);
     });
   });
 
@@ -173,18 +167,19 @@ describe('<Collapse>', () => {
       wrapper = mount(<Component>Panel content</Component>);
     });
 
-    it('Defaults to height', () => {
-      assert.equal(wrapper.instance().collapse.getDimension(), 'height');
+    it('Should not have width in class', () => {
+      let node = wrapper.getDOMNode();
+      assert.ok(node.className.indexOf('width') === -1);
     });
 
-    it('Uses getCollapsibleDimension if exists', () => {
+    it('Should have width in class', () => {
       function dimension() {
-        return 'whatevs';
+        return 'width';
       }
 
-      wrapper.setState({ dimension });
-
-      assert.equal(wrapper.instance().collapse.getDimension(), 'whatevs');
+      wrapper.setProps({ dimension });
+      let node = wrapper.getDOMNode();
+      assert.ok(node.className.indexOf('width') !== -1);
     });
   });
 

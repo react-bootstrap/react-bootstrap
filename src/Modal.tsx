@@ -7,6 +7,7 @@ import getScrollbarSize from 'dom-helpers/scrollbarSize';
 import useCallbackRef from '@restart/hooks/useCallbackRef';
 import useEventCallback from '@restart/hooks/useEventCallback';
 import useWillUnmount from '@restart/hooks/useWillUnmount';
+import transitionEnd from 'dom-helpers/transitionEnd';
 import PropTypes from 'prop-types';
 import React, {
   useCallback,
@@ -271,8 +272,10 @@ const Modal: Modal = (React.forwardRef(
     ref,
   ) => {
     const [modalStyle, setStyle] = useState({});
+    const [animateStaticModal, setAnimateStaticModal] = useState(false);
     const waitingForMouseUpRef = useRef(false);
     const ignoreBackdropClickRef = useRef(false);
+    const removeStaticModalAnimationRef = useRef<(() => void) | null>(null);
 
     // TODO: what's this type
     const [modal, setModalRef] = useCallbackRef<{ dialog: any }>();
@@ -337,6 +340,10 @@ const Modal: Modal = (React.forwardRef(
 
     useWillUnmount(() => {
       removeEventListener(window as any, 'resize', handleWindowResize);
+
+      if (removeStaticModalAnimationRef.current) {
+        removeStaticModalAnimationRef.current();
+      }
     });
 
     // We prevent the modal from closing during a drag by detecting where the
@@ -353,13 +360,47 @@ const Modal: Modal = (React.forwardRef(
       waitingForMouseUpRef.current = false;
     };
 
+    const handleStaticModalAnimation = () => {
+      setAnimateStaticModal(true);
+      removeStaticModalAnimationRef.current = transitionEnd(
+        modal!.dialog,
+        () => {
+          setAnimateStaticModal(false);
+        },
+      );
+    };
+
+    const handleStaticBackdropClick = (e) => {
+      if (e.target !== e.currentTarget) {
+        return;
+      }
+
+      handleStaticModalAnimation();
+    };
+
     const handleClick = (e) => {
+      if (backdrop === 'static') {
+        handleStaticBackdropClick(e);
+        return;
+      }
+
       if (ignoreBackdropClickRef.current || e.target !== e.currentTarget) {
         ignoreBackdropClickRef.current = false;
         return;
       }
 
       onHide();
+    };
+
+    const handleEscapeKeyDown = (e) => {
+      if (!keyboard && backdrop === 'static') {
+        // Call preventDefault to stop modal from closing in react-overlays,
+        // then play our animation.
+        e.preventDefault();
+        handleStaticModalAnimation();
+      } else if (keyboard && onEscapeKeyDown) {
+        onEscapeKeyDown(e);
+      }
     };
 
     const handleEnter = (node, ...args) => {
@@ -369,6 +410,14 @@ const Modal: Modal = (React.forwardRef(
       }
 
       if (onEnter) onEnter(node, ...args);
+    };
+
+    const handleExit = (node, ...args) => {
+      if (removeStaticModalAnimationRef.current) {
+        removeStaticModalAnimationRef.current();
+      }
+
+      if (onExit) onExit(node, ...args);
     };
 
     const handleEntering = (node, ...args) => {
@@ -412,8 +461,12 @@ const Modal: Modal = (React.forwardRef(
         role="dialog"
         {...dialogProps}
         style={baseModalStyle}
-        className={classNames(className, bsPrefix)}
-        onClick={backdrop === true ? handleClick : undefined}
+        className={classNames(
+          className,
+          bsPrefix,
+          animateStaticModal && `${bsPrefix}-static`,
+        )}
+        onClick={backdrop ? handleClick : undefined}
         onMouseUp={handleMouseUp}
         aria-labelledby={ariaLabelledby}
       >
@@ -437,18 +490,18 @@ const Modal: Modal = (React.forwardRef(
           ref={setModalRef}
           backdrop={backdrop}
           container={container}
-          keyboard={keyboard}
+          keyboard // Always set true - see handleEscapeKeyDown
           autoFocus={autoFocus}
           enforceFocus={enforceFocus}
           restoreFocus={restoreFocus}
           restoreFocusOptions={restoreFocusOptions}
-          onEscapeKeyDown={onEscapeKeyDown}
+          onEscapeKeyDown={handleEscapeKeyDown}
           onShow={onShow}
           onHide={onHide}
           onEnter={handleEnter}
           onEntering={handleEntering}
           onEntered={onEntered}
-          onExit={onExit}
+          onExit={handleExit}
           onExiting={onExiting}
           onExited={handleExited}
           manager={getModalManager()}

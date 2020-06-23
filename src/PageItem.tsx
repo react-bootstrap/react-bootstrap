@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { ReactNode } from 'react';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -72,21 +72,19 @@ PageItem.displayName = 'PageItem';
 
 export default PageItem;
 
-function createButton(name, defaultValue, label = name) {
-  return class extends React.Component {
-    static displayName = name;
+function createButton(name: string, defaultValue: ReactNode, label = name) {
+  function Button({ children, ...props }) {
+    return (
+      <PageItem {...props}>
+        <span aria-hidden="true">{children || defaultValue}</span>
+        <span className="sr-only">{label}</span>
+      </PageItem>
+    );
+  }
 
-    render() {
-      const { children, ...props } = this.props;
-      delete (props as any).active;
-      return (
-        <PageItem {...props}>
-          <span aria-hidden="true">{children || defaultValue}</span>
-          <span className="sr-only">{label}</span>
-        </PageItem>
-      );
-    }
-  };
+  Button.displayName = name;
+
+  return Button;
 }
 
 export const First = createButton('First', '«');

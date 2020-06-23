@@ -45,10 +45,10 @@ const propTypes = {
   id: PropTypes.string,
 
   /** Manually style the input as valid */
-  isValid: PropTypes.bool.isRequired,
+  isValid: PropTypes.bool,
 
   /** Manually style the input as invalid */
-  isInvalid: PropTypes.bool.isRequired,
+  isInvalid: PropTypes.bool,
 
   /** The language for the button when using custom file input and SCSS based strings */
   lang: PropTypes.string,

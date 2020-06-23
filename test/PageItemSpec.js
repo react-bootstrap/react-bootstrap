@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { First } from '../src/PageItem';
+import PageItem, { First } from '../src/PageItem';
 
 describe('<PageItem>', () => {
   describe('<First>', () => {
@@ -17,6 +17,14 @@ describe('<PageItem>', () => {
         '.page-link>span[aria-hidden="true"]',
       );
       expect(inner.text()).to.equal(innerHTML);
+    });
+
+    it('should render a span if active is true', () => {
+      mount(<PageItem active />).assertSingle('span.page-link');
+    });
+
+    it('should render a span if disabled is true', () => {
+      mount(<PageItem disabled />).assertSingle('span.page-link');
     });
   });
 });

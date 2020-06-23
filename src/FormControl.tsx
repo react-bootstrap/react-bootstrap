@@ -29,10 +29,6 @@ export interface FormControlProps extends BsPrefixProps {
   isInvalid?: boolean;
 }
 
-type FormControl = BsPrefixRefForwardingComponent<'input', FormControlProps> & {
-  Feedback: typeof Feedback;
-};
-
 const propTypes = {
   /**
    * @default {'form-control'}
@@ -130,7 +126,10 @@ const propTypes = {
   isInvalid: PropTypes.bool,
 };
 
-const FormControl: FormControl = (React.forwardRef(
+const FormControl: BsPrefixRefForwardingComponent<
+  'input',
+  FormControlProps
+> = React.forwardRef(
   (
     {
       bsPrefix,
@@ -140,8 +139,8 @@ const FormControl: FormControl = (React.forwardRef(
       htmlSize,
       id,
       className,
-      isValid,
-      isInvalid,
+      isValid = false,
+      isInvalid = false,
       plaintext,
       readOnly,
       custom,
@@ -199,10 +198,9 @@ const FormControl: FormControl = (React.forwardRef(
       />
     );
   },
-) as unknown) as FormControl;
+);
 
 FormControl.displayName = 'FormControl';
 FormControl.propTypes = propTypes;
-FormControl.Feedback = Feedback;
 
-export default FormControl;
+export default Object.assign(FormControl, { Feedback });
