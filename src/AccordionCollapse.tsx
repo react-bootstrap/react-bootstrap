@@ -25,7 +25,7 @@ const propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-const AccordionCollapse: AccordionCollapse = React.forwardRef<Collapse>(
+const AccordionCollapse: AccordionCollapse = React.forwardRef<typeof Collapse>(
   ({ children, eventKey, ...props }: AccordionCollapseProps, ref) => {
     const contextEventKey = useContext(AccordionContext);
 

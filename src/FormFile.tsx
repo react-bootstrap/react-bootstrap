@@ -25,6 +25,7 @@ export interface FormFileProps
   isValid?: boolean;
   isInvalid?: boolean;
   feedback?: React.ReactNode;
+  feedbackTooltip?: boolean;
   lang?: string;
   'data-browse'?: any; // ???
 }
@@ -128,23 +129,16 @@ const propTypes = {
   ),
 };
 
-const defaultProps = {
-  disabled: false,
-  isValid: false,
-  isInvalid: false,
-  feedbackTooltip: false,
-};
-
 const FormFile: FormFile = (React.forwardRef(
   (
     {
       id,
       bsPrefix,
       bsCustomPrefix,
-      disabled,
-      isValid,
-      isInvalid,
-      feedbackTooltip,
+      disabled = false,
+      isValid = false,
+      isInvalid = false,
+      feedbackTooltip = false,
       feedback,
       className,
       style,
@@ -235,6 +229,5 @@ const FormFile: FormFile = (React.forwardRef(
 
 FormFile.displayName = 'FormFile';
 FormFile.propTypes = propTypes;
-FormFile.defaultProps = defaultProps;
 
 export default FormFile;

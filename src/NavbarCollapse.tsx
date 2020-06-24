@@ -7,7 +7,7 @@ import NavbarContext from './NavbarContext';
 import { BsPrefixProps } from './helpers';
 
 export interface NavbarCollapseProps
-  extends CollapseProps,
+  extends Omit<CollapseProps, 'children'>,
     React.HTMLAttributes<HTMLDivElement>,
     BsPrefixProps {}
 
