@@ -18,7 +18,7 @@ const propTypes = {
    *
    * @type {('valid'|'invalid')}
    */
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
 
   /** Display feedback as a tooltip. */
   tooltip: PropTypes.bool,
