@@ -410,10 +410,20 @@ export default withLayout(function FormControlsSection({ data }) {
       <p>
         Bootstrap scopes the <code>:valid</code> and <code>:invalid</code>{' '}
         styles to parent <code>.was-validated</code> class, usually applied to
-        the <code>Form</code> (you can use the <code>validated</code> prop as a
-        shortcut). Otherwise, any required field without a value shows up as
-        invalid on page load. This way, you may choose when to activate them
+        the <code>{'<Form>'}</code> (you can use the <code>validated</code> prop
+        as a shortcut). Otherwise, any required field without a value shows up
+        as invalid on page load. This way, you may choose when to activate them
         (typically after form submission is attempted).
+      </p>
+      <p>
+        For custom Bootstrap form validation messages, you’ll need to add the{' '}
+        <code>noValidate</code> boolean attribute to your{' '}
+        <code>{'<Form>'}</code>. This disables the browser default feedback
+        tooltips, but still provides access to the form validation APIs in
+        JavaScript. Try to submit the form below; our JavaScript will intercept
+        the submit button and relay feedback to you. When attempting to submit,
+        you’ll see the <code>:invalid</code> and <code>:valid</code> styles
+        applied to your form controls.
       </p>
       <ReactPlayground codeText={ValidationNative} />
 
