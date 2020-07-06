@@ -1,3 +1,26 @@
+# [1.1.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.1...v1.1.0) (2020-07-06)
+
+
+### Bug Fixes
+
+* **Button:** Use type attribute if specified ([#5208](https://github.com/react-bootstrap/react-bootstrap/issues/5208)) ([426b6da](https://github.com/react-bootstrap/react-bootstrap/commit/426b6da8af15c9cbb66e409b311ebab17b24c77e))
+* **Toast:** Fix bsPrefix ([#5240](https://github.com/react-bootstrap/react-bootstrap/issues/5240)) ([501b3bf](https://github.com/react-bootstrap/react-bootstrap/commit/501b3bf2a597a52979aa740508b7ecd6a7e80013))
+* **Toast:** Reset autohide timer only if show or autohide changed ([#5220](https://github.com/react-bootstrap/react-bootstrap/issues/5220)) ([20b532d](https://github.com/react-bootstrap/react-bootstrap/commit/20b532d924554af0af5dc17f9b244225a0349924))
+* make each context unique to prevent them being optimized away by Parcel ([#5181](https://github.com/react-bootstrap/react-bootstrap/issues/5181)) ([c918dbf](https://github.com/react-bootstrap/react-bootstrap/commit/c918dbfce2c6d4f6b2f88d09abad075a1453a406))
+
+
+### Features
+
+* Add proper Typescript support ([#5251](https://github.com/react-bootstrap/react-bootstrap/issues/5251)) ([dec919b](https://github.com/react-bootstrap/react-bootstrap/commit/dec919bf9bb0cb3153f3e3afe6a486968b218329)), closes [#5150](https://github.com/react-bootstrap/react-bootstrap/issues/5150) [#5204](https://github.com/react-bootstrap/react-bootstrap/issues/5204)
+* **Col:** Allow false to be used for Col span ([#5232](https://github.com/react-bootstrap/react-bootstrap/issues/5232)) ([eef3791](https://github.com/react-bootstrap/react-bootstrap/commit/eef37912eda899899bbf1c92063d3eb77396760b))
+* **Feedback:** Add support for tooltips ([#5189](https://github.com/react-bootstrap/react-bootstrap/issues/5189)) ([59b1fce](https://github.com/react-bootstrap/react-bootstrap/commit/59b1fcec6c2097539374bf3f600086a816d17b6c))
+* **FormControl:** Add support for html size attribute ([#5161](https://github.com/react-bootstrap/react-bootstrap/issues/5161)) ([1ddd8c7](https://github.com/react-bootstrap/react-bootstrap/commit/1ddd8c70ae4a031e6210ff45fa907ac7b7507a5d))
+* **Modal:** Add modal static backdrop animation ([#5165](https://github.com/react-bootstrap/react-bootstrap/issues/5165)) ([f846dfb](https://github.com/react-bootstrap/react-bootstrap/commit/f846dfbe9b8d85fa9ec8cd3d7e50d1310fd12220))
+
+
+
+
+
 ## [1.0.1](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.0...v1.0.1) (2020-04-22)
 
 
