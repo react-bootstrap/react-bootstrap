@@ -3,7 +3,7 @@ module.exports = (distRoot, optimize) => ({
   optimization: {
     minimize: !!optimize,
   },
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     path: distRoot,
     filename: optimize ? 'react-bootstrap.min.js' : 'react-bootstrap.js',
@@ -13,7 +13,7 @@ module.exports = (distRoot, optimize) => ({
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.[tj]sx?$/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -23,6 +23,9 @@ module.exports = (distRoot, optimize) => ({
         },
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   externals: {
     react: {

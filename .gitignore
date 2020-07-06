@@ -90,3 +90,6 @@ typings/
 
 *~
 .DS_Store
+
+# Generated types
+/types

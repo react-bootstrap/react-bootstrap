@@ -29,6 +29,7 @@ exports.onCreateWebpackConfig = function onCreateWebpackConfig({
     },
     resolve: {
       symlinks: false,
+      extensions: ['.mjs', '.js', '.ts', '.tsx', '.json'],
       alias: {
         react: path.resolve(__dirname, '../node_modules/react'),
         'react-dom': path.resolve(__dirname, '../node_modules/react-dom'),

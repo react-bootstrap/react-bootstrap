@@ -18,6 +18,7 @@ module.exports = {
       webpack: {
         config: {
           resolve: {
+            extensions: ['.mjs', '.js', '.ts', '.tsx', '.json'],
             alias: {
               'react-bootstrap': path.resolve(__dirname, '../src'),
             },
