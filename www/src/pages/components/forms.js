@@ -415,16 +415,12 @@ export default withLayout(function FormControlsSection({ data }) {
         as invalid on page load. This way, you may choose when to activate them
         (typically after form submission is attempted).
       </p>
-      <p>
-        For custom Bootstrap form validation messages, you’ll need to add the{' '}
-        <code>noValidate</code> boolean attribute to your{' '}
-        <code>{'<Form>'}</code>. This disables the browser default feedback
-        tooltips, but still provides access to the form validation APIs in
-        JavaScript. Try to submit the form below; our JavaScript will intercept
-        the submit button and relay feedback to you. When attempting to submit,
-        you’ll see the <code>:invalid</code> and <code>:valid</code> styles
-        applied to your form controls.
-      </p>
+      <Callout>
+        Watch out! Browsers provide their own validation UI by default on{' '}
+        <code>form</code>s. You can disable the default UI by adding the HTML{' '}
+        <code>noValidate</code> attribute to your <code>{'<Form>'}</code> or{' '}
+        <code>{'<form>'}</code> element.
+      </Callout>
       <ReactPlayground codeText={ValidationNative} />
 
       <LinkedHeading h="3" id="forms-validation-libraries">
