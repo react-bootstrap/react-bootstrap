@@ -1,3 +1,15 @@
+## [1.1.1](https://github.com/react-bootstrap/react-bootstrap/compare/v1.1.0...v1.1.1) (2020-07-07)
+
+
+### Bug Fixes
+
+* **types:** include dep type defs in dependencies" ([8e30fb8](https://github.com/react-bootstrap/react-bootstrap/commit/8e30fb88be504928e9f2bf19eaa0d92ec71d1b9e)), closes [#5271](https://github.com/react-bootstrap/react-bootstrap/issues/5271)
+* **types:** type exports not being removed from compiled out ([7b4c639](https://github.com/react-bootstrap/react-bootstrap/commit/7b4c639314107b76d73fac2203fd38244e9812e2)), closes [#5267](https://github.com/react-bootstrap/react-bootstrap/issues/5267)
+
+
+
+
+
 # [1.1.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.0.1...v1.1.0) (2020-07-06)
 
 
