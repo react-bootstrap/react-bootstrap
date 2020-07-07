@@ -73,7 +73,7 @@ PageItem.displayName = 'PageItem';
 export default PageItem;
 
 function createButton(name: string, defaultValue: ReactNode, label = name) {
-  function Button({ children, ...props }) {
+  function Button({ children, ...props }: PageItemProps) {
     return (
       <PageItem {...props}>
         <span aria-hidden="true">{children || defaultValue}</span>
