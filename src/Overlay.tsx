@@ -17,9 +17,13 @@ export interface OverlayInjectedProps {
   style: React.CSSProperties;
   'aria-labelledby'?: string;
 
-  arrowProps: { ref: any; style: object };
+  arrowProps: {
+    ref: React.RefCallback<HTMLElement>;
+    style: React.CSSProperties;
+  };
 
   show: boolean;
+  placement: Placement;
   popper: {
     state: any;
     outOfBoundaries: boolean;
