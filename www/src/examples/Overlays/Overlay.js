@@ -8,14 +8,7 @@ function Example() {
         Click me to see
       </Button>
       <Overlay target={target.current} show={show} placement="right">
-        {({
-          placement,
-          scheduleUpdate,
-          arrowProps,
-          outOfBoundaries,
-          show: _show,
-          ...props
-        }) => (
+        {({ placement, arrowProps, show: _show, popper, ...props }) => (
           <div
             {...props}
             style={{
