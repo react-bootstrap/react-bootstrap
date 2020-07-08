@@ -85,7 +85,7 @@ const fadeStyles = {
   [ENTERED]: 'show',
 };
 
-const Fade = React.forwardRef<Transition, FadeProps>(
+const Fade = React.forwardRef<Transition<any>, FadeProps>(
   ({ className, children, ...props }: FadeProps, ref) => {
     const handleEnter = useCallback(
       (node) => {

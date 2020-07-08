@@ -9,7 +9,8 @@ import ModalContext from './ModalContext';
 import { BsPrefixAndClassNameOnlyProps } from './helpers';
 
 export interface ModalHeaderProps
-  extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps> {
+  extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps>,
+    React.ComponentProps<'div'> {
   closeLabel?: string;
   closeButton?: boolean;
   onHide?: () => void;

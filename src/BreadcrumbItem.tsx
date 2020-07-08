@@ -15,7 +15,7 @@ export interface BreadcrumbItemProps extends BsPrefixPropsWithChildren {
   linkAs?: React.ElementType;
   target?: string;
   title?: React.ReactNode;
-  linkProps?: React.LinkHTMLAttributes<HTMLLinkElement>;
+  linkProps?: Record<string, any>; // the generic is to much work here
 }
 
 type BreadcrumbItem = BsPrefixRefForwardingComponent<'li', BreadcrumbItemProps>;
