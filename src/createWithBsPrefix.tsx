@@ -6,24 +6,28 @@ import { BsPrefixRefForwardingComponent } from './helpers';
 
 const pascalCase = (str) => str[0].toUpperCase() + camelize(str).slice(1);
 
-interface BsPrefixOptions {
+interface BsPrefixOptions<As extends React.ElementType = 'div'> {
   displayName?: string;
-  Component?: React.ElementType;
-  defaultProps?: any; // TODO
+  Component?: As;
+  defaultProps?: Partial<React.ComponentProps<As>>;
 }
 
 // TODO: emstricten & fix the typing here! `createWithBsPrefix<TElementType>...`
-export default function createWithBsPrefix(
+export default function createWithBsPrefix<
+  As extends React.ElementType = 'div'
+>(
   prefix: string,
   {
     displayName = pascalCase(prefix),
-    Component = 'div',
+    Component,
     defaultProps,
-  }: BsPrefixOptions = {},
-): BsPrefixRefForwardingComponent<any> {
+  }: BsPrefixOptions<As> = {},
+): BsPrefixRefForwardingComponent<As> {
   const BsComponent = React.forwardRef(
-    // @ts-ignore
-    ({ className, bsPrefix, as: Tag = Component, ...props }, ref) => {
+    (
+      { className, bsPrefix, as: Tag = Component || 'div', ...props }: any,
+      ref,
+    ) => {
       const resolvedPrefix = useBootstrapPrefix(bsPrefix, prefix);
       return (
         <Tag
@@ -34,7 +38,7 @@ export default function createWithBsPrefix(
       );
     },
   );
-  BsComponent.defaultProps = defaultProps;
+  BsComponent.defaultProps = defaultProps as any;
   BsComponent.displayName = displayName;
   return BsComponent as any;
 }

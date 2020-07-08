@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Dropdown from './Dropdown';
+import Dropdown, { DropdownProps } from './Dropdown';
 import DropdownToggle, { PropsFromToggle } from './DropdownToggle';
 import DropdownMenu from './DropdownMenu';
 
 export interface DropdownButtonProps
-  extends React.PropsWithChildren<PropsFromToggle> {
+  extends DropdownProps,
+    React.PropsWithChildren<PropsFromToggle> {
   id?: string;
   title: React.ReactNode;
   menuRole?: string;
