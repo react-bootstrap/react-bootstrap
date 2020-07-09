@@ -55,6 +55,27 @@ describe('<OverlayTrigger>', () => {
     callback.should.have.been.called;
   });
 
+  it('Should be controllable', () => {
+    const callback = sinon.spy();
+
+    const wrapper = mount(
+      <OverlayTrigger
+        show
+        trigger="click"
+        onToggle={callback}
+        overlay={<Div className="test" />}
+      >
+        <button type="button">button</button>
+      </OverlayTrigger>,
+    );
+
+    wrapper.assertSingle('div.test');
+
+    wrapper.find('button').simulate('click');
+
+    callback.should.have.been.calledOnce.and.calledWith(false);
+  });
+
   it('Should show after click trigger', () => {
     const wrapper = mount(
       <OverlayTrigger trigger="click" overlay={<Div className="test" />}>
