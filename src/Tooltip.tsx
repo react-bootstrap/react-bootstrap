@@ -99,13 +99,19 @@ const Tooltip: Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'tooltip');
 
+    const [primaryPlacement] = placement?.split('-') || [];
+
     return (
       <div
         ref={ref}
         style={style}
         role="tooltip"
-        x-placement={placement}
-        className={classNames(className, bsPrefix, `bs-tooltip-${placement}`)}
+        x-placement={primaryPlacement}
+        className={classNames(
+          className,
+          bsPrefix,
+          `bs-tooltip-${primaryPlacement}`,
+        )}
         {...props}
       >
         <div className="arrow" {...arrowProps} />

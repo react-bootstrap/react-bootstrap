@@ -94,16 +94,18 @@ const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
     ref,
   ) => {
     const decoratedBsPrefix = useBootstrapPrefix(bsPrefix, 'popover');
+    const [primaryPlacement] = placement?.split('-') || [];
+
     return (
       <div
         ref={ref}
         role="tooltip"
         style={style}
-        x-placement={placement}
+        x-placement={primaryPlacement}
         className={classNames(
           className,
           decoratedBsPrefix,
-          `bs-popover-${placement}`,
+          `bs-popover-${primaryPlacement}`,
         )}
         {...props}
       >
