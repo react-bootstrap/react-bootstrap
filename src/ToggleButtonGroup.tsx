@@ -60,7 +60,7 @@ const propTypes = {
    * is `'radio'` or `'checkbox'`, `onChange` will be called with the value or
    * array of active values
    *
-   * @controllable values
+   * @controllable value
    */
   onChange: PropTypes.func,
 
