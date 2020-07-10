@@ -1,3 +1,25 @@
+# [1.2.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.1.1...v1.2.0) (2020-07-10)
+
+
+### Bug Fixes
+
+* **Tooltip:** *-start and *-end placements work correctly ([1c99fec](https://github.com/react-bootstrap/react-bootstrap/commit/1c99fec378472f1ea13c2c5389c9c63e8d6542b8))
+* **types:** allow anything in linkProps ([4bd37b7](https://github.com/react-bootstrap/react-bootstrap/commit/4bd37b7e9e3126605fa791a1b84ab8b9699ede57)), closes [#5249](https://github.com/react-bootstrap/react-bootstrap/issues/5249)
+* bump RTG types to latest ([750d63f](https://github.com/react-bootstrap/react-bootstrap/commit/750d63fe730f68d242b7fe6f8cfd2d6088a2d398))
+* helper typing and missing host props ([d5f39e7](https://github.com/react-bootstrap/react-bootstrap/commit/d5f39e7be4cefa134249f3ad28ddb1a2d1e31ba5))
+* **Form:** Fix types ([#5274](https://github.com/react-bootstrap/react-bootstrap/issues/5274)) ([596cee7](https://github.com/react-bootstrap/react-bootstrap/commit/596cee7e02482aa544f0871ee303a25f66e9c878))
+* **Overlay:** Fix types and overlay example ([#5275](https://github.com/react-bootstrap/react-bootstrap/issues/5275)) ([f14ca04](https://github.com/react-bootstrap/react-bootstrap/commit/f14ca04848bbfe52b6655e9bba5408ec87a53c8e))
+
+
+### Features
+
+* **OverlayTrigger:** expose `show` for manually controlling visibility ([77f105a](https://github.com/react-bootstrap/react-bootstrap/commit/77f105a8221754762343f5020ec20323a6dbd152))
+* **OverlayTrigger:** expose `show` for manually controlling visibility ([#5282](https://github.com/react-bootstrap/react-bootstrap/issues/5282)) ([d7dab82](https://github.com/react-bootstrap/react-bootstrap/commit/d7dab828b617e765d3ba9a1c7d94bf47de02ae99))
+
+
+
+
+
 ## [1.1.1](https://github.com/react-bootstrap/react-bootstrap/compare/v1.1.0...v1.1.1) (2020-07-07)
 
 
