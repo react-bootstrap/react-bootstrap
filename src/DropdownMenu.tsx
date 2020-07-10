@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 import {
   useDropdownMenu,
   UseDropdownMenuValue,
+  UseDropdownMenuOptions,
 } from 'react-overlays/DropdownMenu';
 import useMergedRefs from '@restart/hooks/useMergedRefs';
 import NavbarContext from './NavbarContext';
@@ -23,7 +24,7 @@ export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
   alignRight?: boolean;
   onSelect?: SelectCallback;
   rootCloseEvent?: 'click' | 'mousedown';
-  popperConfig?: { modifiers?: any };
+  popperConfig?: UseDropdownMenuOptions['popperConfig'];
 }
 
 type DropdownMenu = BsPrefixRefForwardingComponent<'div', DropdownMenuProps>;
@@ -92,7 +93,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       renderOnMount,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as: Component = 'div',
-      popperConfig = {},
+      popperConfig,
       ...props
     }: DropdownMenuProps,
     ref,
@@ -116,7 +117,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       usePopper: !isNavbar,
       popperConfig: {
         ...popperConfig,
-        modifiers: marginModifiers.concat(popperConfig.modifiers || []),
+        modifiers: marginModifiers.concat(popperConfig?.modifiers || []),
       },
     }) as UseDropdownMenuValueHack;
 

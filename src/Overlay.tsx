@@ -182,19 +182,18 @@ function Overlay({
         props: overlayProps,
         arrowProps,
         show,
-        // @ts-ignore
-        state,
-        scheduleUpdate,
+        update,
         placement,
-        outOfBoundaries,
+        state,
         ...props
       }) => {
         wrapRefs(overlayProps, arrowProps);
         const popper = Object.assign(popperRef.current, {
           state,
-          scheduleUpdate,
+          scheduleUpdate: update,
           placement,
-          outOfBoundaries,
+          outOfBoundaries:
+            state?.modifiersData.hide?.isReferenceHidden || false,
         });
 
         if (typeof overlay === 'function')
