@@ -17,7 +17,6 @@ export interface TabPaneProps extends TransitionCallbacks, BsPrefixProps {
   eventKey?: any;
   active?: boolean;
   transition?: TransitionType;
-  bsClass?: string;
   mountOnEnter?: boolean;
   unmountOnExit?: boolean;
 }
@@ -49,12 +48,6 @@ const propTypes = {
    * `<Transition/>` component.
    */
   transition: PropTypes.oneOfType([PropTypes.bool, PropTypes.elementType]),
-
-  /**
-   *
-   * @default 'tab-pane'
-   */
-  bsClass: PropTypes.string,
 
   /**
    * Transition onEnter callback when animation is not `false`
