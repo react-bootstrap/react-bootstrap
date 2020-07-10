@@ -12,15 +12,17 @@ import { TransitionType } from './helpers';
 
 export type Placement = import('react-overlays/usePopper').Placement;
 
+export type ArrowProps = {
+  ref: React.RefCallback<HTMLElement>;
+  style: React.CSSProperties;
+};
+
 export interface OverlayInjectedProps {
   ref: React.RefCallback<HTMLElement>;
   style: React.CSSProperties;
   'aria-labelledby'?: string;
 
-  arrowProps: {
-    ref: React.RefCallback<HTMLElement>;
-    style: React.CSSProperties;
-  };
+  arrowProps: ArrowProps;
 
   show: boolean;
   placement: Placement;

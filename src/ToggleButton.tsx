@@ -9,7 +9,8 @@ import {
 } from './helpers';
 
 export interface ToggleButtonProps
-  extends React.PropsWithChildren<BsPrefixAndClassNameOnlyProps> {
+  extends ButtonProps,
+    React.PropsWithChildren<BsPrefixAndClassNameOnlyProps> {
   type?: 'checkbox' | 'radio';
   name?: string;
   checked?: boolean;
@@ -19,7 +20,7 @@ export interface ToggleButtonProps
   inputRef?: React.LegacyRef<'input'>;
 }
 
-type ToggleButton = BsPrefixComponentClass<'button', ButtonProps>;
+type ToggleButton = BsPrefixComponentClass<'button', ToggleButtonProps>;
 
 const noop = () => undefined;
 

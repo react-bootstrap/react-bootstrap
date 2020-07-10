@@ -10,6 +10,8 @@ import {
 } from './helpers';
 import { ButtonVariant } from './types';
 
+export type ButtonType = 'button' | 'reset' | 'submit' | string;
+
 export interface ButtonProps
   extends React.HTMLAttributes<HTMLElement>,
     BsPrefixPropsWithChildren {
@@ -17,7 +19,7 @@ export interface ButtonProps
   block?: boolean;
   variant?: ButtonVariant;
   size?: 'sm' | 'lg';
-  type?: 'button' | 'reset' | 'submit' | string;
+  type?: ButtonType;
   href?: string;
   disabled?: boolean;
   target?: any;

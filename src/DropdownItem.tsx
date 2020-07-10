@@ -28,7 +28,7 @@ type DropdownItem = BsPrefixRefForwardingComponent<
 >;
 
 const propTypes = {
-  /** @default 'dropdown' */
+  /** @default 'dropdown-item' */
   bsPrefix: PropTypes.string,
 
   /**

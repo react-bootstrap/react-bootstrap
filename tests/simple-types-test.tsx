@@ -13,26 +13,35 @@ import {
   ButtonToolbar,
   Card,
   CardColumns,
+  CardDeck,
+  CardGroup,
   Carousel,
   Container,
   Col,
   Row,
   Dropdown,
   DropdownButton,
+  Figure,
   Form,
   FormFile,
   FormControl,
+  Image,
+  Jumbotron,
   InputGroup,
   ListGroup,
   Modal,
   Nav,
+  Navbar,
   NavDropdown,
+  Overlay,
   OverlayTrigger,
   Tooltip,
   Pagination,
   Popover,
   ProgressBar,
   Spinner,
+  SplitButton,
+  Table,
   Tabs,
   Tab,
   ToggleButtonGroup,
@@ -40,63 +49,167 @@ import {
   Toast,
 } from '../src';
 
+const style: React.CSSProperties = {
+  color: 'red',
+};
+
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+const noop = () => {};
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const MegaComponent = () => (
   <>
-    <Alert ref={React.createRef<HTMLDivElement>()} dismissible>
+    <Alert
+      ref={React.createRef<HTMLDivElement>()}
+      style={style}
+      closeLabel="close"
+      dismissible
+      onClose={noop}
+      show
+      // transition={} TODO
+      variant="primary"
+      bsPrefix="alert"
+    >
       Woop woop
     </Alert>
-    <Alert.Link as="a" href="blah" />
-    <Alert.Heading as="h3" />
-    <Accordion defaultActiveKey="0">
+    <Alert.Link as="a" href="blah" style={style} bsPrefix="alert-link" />
+    <Alert.Heading as="h3" style={style} bsPrefix="alert-heading" />
+    <Accordion
+      defaultActiveKey="0"
+      activeKey="0"
+      as="div"
+      bsPrefix="accordion"
+      style={style}
+    >
       <Card>
         <Card.Header>
-          <Accordion.Toggle eventKey="0">Click me!</Accordion.Toggle>
+          <Accordion.Toggle as="div" eventKey="0" onClick={noop} style={style}>
+            Click me!
+          </Accordion.Toggle>
         </Card.Header>
-        <Accordion.Collapse eventKey="0">
+        <Accordion.Collapse eventKey="0" style={style}>
           <Card.Body>Hello! I am the body</Card.Body>
         </Accordion.Collapse>
       </Card>
     </Accordion>
-    <Badge pill={false}>42</Badge>
+    <Badge as="div" pill={false} style={style}>
+      42
+    </Badge>
     <Badge as="a" href="#" variant="primary" pill>
       42
     </Badge>
-    <Breadcrumb listProps={{ type: 'I' }}>
-      <Breadcrumb.Item />
+    <Breadcrumb
+      as="div"
+      listProps={{ type: 'I' }}
+      style={style}
+      label="label"
+      bsPrefix="breadcrumb"
+    >
+      <Breadcrumb.Item
+        active={false}
+        as="li"
+        href="#"
+        linkAs="a"
+        target="#"
+        title="mytitle"
+        bsPrefix="breadcrumbitem"
+        style={style}
+      />
       <BreadcrumbItem />
       <BreadcrumbItem linkProps={{ id: 'foo' }} />
     </Breadcrumb>
-    <Button size="lg" variant="primary" />
-    // If custom variants or sizes are desired, cast to any
-    <Button size="lg" variant={'custom' as any} />
+    <Button
+      active={false}
+      as="a"
+      block={false}
+      disabled={false}
+      href="#"
+      size="lg"
+      type="button"
+      variant="primary"
+      bsPrefix="btn"
+      style={style}
+    />
+    {/* If custom variants or sizes are desired, cast to any */}
+    <Button size="lg" variant={'custom' as any} style={style} />
     <Button size={'custom' as any} variant="outline-warning" />
-    <ButtonToolbar>
-      <ButtonGroup size="lg">
+    <ButtonToolbar role="group" bsPrefix="toolbar" style={style}>
+      <ButtonGroup
+        as="div"
+        role="group"
+        size="lg"
+        toggle
+        vertical
+        bsPrefix="btn-group"
+        style={style}
+      >
         <Button href="wooot" />
       </ButtonGroup>
     </ButtonToolbar>
-    <CardColumns>
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
-        <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
+    <CardColumns style={style} bsPrefix="card-col">
+      <Card
+        as="div"
+        bg="primary"
+        body
+        border="primary"
+        text="primary"
+        bsPrefix="card"
+        style={{ width: '18rem' }}
+      >
+        <Card.Img
+          as="img"
+          variant="top"
+          src="holder.js/100px180"
+          bsPrefix="cardimg"
+          style={style}
+        />
+        <Card.ImgOverlay
+          as="img"
+          src="holder.js/100px180"
+          bsPrefix="cardimg"
+          style={style}
+        />
+        <Card.Body as="div" bsPrefix="cardbody" style={style}>
+          <Card.Title style={style}>Card Title</Card.Title>
+          <Card.Text style={style}>
             Some quick example text to build on the card title and make up the
             bulk of the card content.
           </Card.Text>
           <Button variant="primary">Go somewhere</Button>
         </Card.Body>
       </Card>
+      <CardDeck as="div" bsPrefix="carddeck" style={style} />
+      <CardGroup as="div" bsPrefix="cardgroup" style={style} />
     </CardColumns>
-    <Carousel wrap={false}>
-      <Carousel.Item>
+    <Carousel
+      activeIndex={1}
+      as="div"
+      controls
+      fade
+      indicators
+      interval={1000}
+      keyboard
+      nextIcon={<span />}
+      nextLabel="next"
+      onSelect={noop}
+      onSlid={noop}
+      onSlide={noop}
+      pause="hover"
+      prevIcon={<span />}
+      prevLabel="previous"
+      slide
+      touch
+      wrap={false}
+      bsPrefix="carousel"
+      style={style}
+    >
+      <Carousel.Item as="div" bsPrefix="item" style={style}>
         <img
           className="d-block w-100"
           src="holder.js/800x400?text=First slide&bg=373940"
           alt="First slide"
         />
-        <Carousel.Caption>
+        <Carousel.Caption as="div" bsPrefix="caption" style={style}>
           <h3>First slide label</h3>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
         </Carousel.Caption>
@@ -128,9 +241,19 @@ const MegaComponent = () => (
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
-    <Container fluid>
-      <Row className="justify-content-md-center">
-        <Col xs lg="2">
+    <Container as="div" fluid bsPrefix="container" style={style}>
+      <Row
+        as="div"
+        xs={1}
+        sm={1}
+        md={1}
+        lg={1}
+        xl={1}
+        noGutters
+        bsPrefix="row"
+        className="justify-content-md-center"
+      >
+        <Col xs lg="2" bsPrefix="col">
           1 of 3
         </Col>
         <Col md="auto">Variable width content</Col>
@@ -145,35 +268,190 @@ const MegaComponent = () => (
           3 of 3
         </Col>
       </Row>
+      <Row
+        xs={{ cols: 1 }}
+        sm={{ cols: 1 }}
+        md={{ cols: 1 }}
+        lg={{ cols: 1 }}
+        xl={{ cols: 1 }}
+      />
     </Container>
-    <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+    <Container fluid="sm" />
+    <Dropdown
+      alignRight
+      as="div"
+      drop="up"
+      flip
+      focusFirstItemOnShow="keyboard"
+      navbar
+      onSelect={noop}
+      onToggle={noop}
+      show
+      bsPrefix="dropdown"
+      style={style}
+    >
+      <Dropdown.Toggle
+        as="button"
+        childBsPrefix="childprefix"
+        variant="success"
+        id="dropdown-basic"
+        split
+        style={style}
+      >
         Dropdown Button
       </Dropdown.Toggle>
 
-      <Dropdown.Menu>
-        <Dropdown.Item eventKey="key">Action</Dropdown.Item>
+      <Dropdown.Menu
+        alignRight
+        as="div"
+        flip
+        onSelect={noop}
+        popperConfig={{}}
+        renderOnMount
+        rootCloseEvent="click"
+        show
+        bsPrefix="dropdownmenu"
+        style={style}
+      >
+        <Dropdown.Item
+          active
+          as="a"
+          disabled
+          eventKey="key"
+          href="#"
+          onClick={noop}
+          onSelect={noop}
+          bsPrefix="dropdownitem"
+          style={style}
+        >
+          Action
+        </Dropdown.Item>
         <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
         <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        <Dropdown.Header as="div" bsPrefix="dropdownheader" style={style} />
+        <Dropdown.Divider as="div" bsPrefix="dropdowndivider" style={style} />
       </Dropdown.Menu>
     </Dropdown>
-    <DropdownButton id="dropdown-basic-button" title="Dropdown button">
+    <DropdownButton
+      disabled
+      href="#"
+      id="dropdown-basic-button"
+      menuRole="role"
+      onClick={noop}
+      renderMenuOnMount
+      rootCloseEvent="click"
+      size="lg"
+      title="Dropdown button"
+      variant="primary"
+      bsPrefix="dropdownbtn"
+      style={style}
+    >
       <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
       <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
       <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
     </DropdownButton>
-    <Form>
-      <Form.Group controlId="exampleForm.ControlInput1">
-        <Form.Label>Email address</Form.Label>
+    <Figure as="figure" bsPrefix="figure" style={style} />
+    <Figure.Image
+      fluid
+      rounded
+      roundedCircle
+      thumbnail
+      bsPrefix="img"
+      style={style}
+    />
+    <Figure.Caption as="figcaption" bsPrefix="figurecaption" />
+    <Form
+      ref={React.createRef<HTMLFormElement>()}
+      as="form"
+      inline
+      validated
+      bsPrefix="form"
+    >
+      <Form.Row as="div" bsPrefix="formrow" style={style} />
+      <Form.Group
+        ref={React.createRef<HTMLDivElement>()}
+        as="div"
+        controlId="exampleForm.ControlInput1"
+        bsPrefix="formgroup"
+        style={style}
+      >
+        <Form.Label
+          ref={React.createRef<HTMLDivElement>()}
+          as="div"
+          column="sm"
+          htmlFor="id"
+          srOnly
+          bsPrefix="formlabel"
+          style={style}
+        >
+          Email address
+        </Form.Label>
+        <Form.Text
+          ref={React.createRef<HTMLElement>()}
+          as="small"
+          muted
+          bsPrefix="formtext"
+          style={style}
+        />
         <Form.Control
+          as="input"
+          custom
+          disabled
+          htmlSize={1}
+          id="id"
+          isInvalid
+          isValid
+          plaintext
+          readOnly
+          size="sm"
           type="email"
+          value="a"
+          bsPrefix="formcontrol"
           placeholder="name@example.com"
           ref={React.createRef<HTMLInputElement>()}
           onChange={(e) => {
             // $ExpectType ChangeEvent<FormControlElement>
             return e;
           }}
+          style={style}
         />
+        <FormControl.Feedback as="div" tooltip type="valid" style={style} />
+        <Form.Check
+          ref={React.createRef<HTMLInputElement>()}
+          as="input"
+          custom
+          disabled
+          feedback="test"
+          feedbackTooltip
+          id="id"
+          inline
+          isInvalid
+          isValid
+          label="label"
+          title="title"
+          type="checkbox"
+          bsPrefix="formcheck"
+          bsCustomPrefix="customcheck"
+          style={style}
+        >
+          <Form.Check.Input
+            as="input"
+            id="id"
+            isInvalid
+            isStatic
+            isValid
+            type="radio"
+            bsPrefix="formcheckinput"
+            bsCustomPrefix="customcheckinput"
+            style={style}
+          />
+          <Form.Check.Label
+            htmlFor="for"
+            bsPrefix="formlabel"
+            bsCustomPrefix="formlabelcustom"
+            style={style}
+          />
+        </Form.Check>
       </Form.Group>
       <Form.Group controlId="exampleForm.ControlSelect1">
         <Form.Label>Example select</Form.Label>
@@ -228,19 +506,61 @@ const MegaComponent = () => (
           <Form.Control type="text" placeholder="Hoizontal" />
         </Col>
       </Form.Group>
-      <Form.File id="custom-file" label="Custom file input" custom />
+      <Form.File
+        as="div"
+        id="custom-file"
+        label="Custom file input"
+        custom
+        data-browse="browse"
+        disabled
+        feedback="feedback"
+        feedbackTooltip
+        inputAs="input"
+        isInvalid
+        isValid
+        lang="lang"
+        bsPrefix="formfile"
+        bsCustomPrefix="formfilecustom"
+        style={style}
+      >
+        <Form.File.Label
+          data-browse="browse"
+          htmlFor="id"
+          bsPrefix="formfilelabel"
+          bsCustomPrefix="formfilelabelcustom"
+          style={style}
+        />
+        <Form.File.Input
+          as="input"
+          id="id"
+          isInvalid
+          isValid
+          lang="en"
+          bsPrefix="formfileinput"
+          bsCustomPrefix="formfileinputcustom"
+          style={style}
+        />
+      </Form.File>
       <Form.File
         ref={React.createRef<HTMLInputElement & FormFile>()}
         id="custom-file-ref"
         label="Custom file input"
         custom
       />
-      <Form.File.Input />
+
       <Form.Switch label="Switch" disabled />
     </Form>
+    <Image fluid rounded roundedCircle thumbnail bsPrefix="img" style={style} />
+    <Jumbotron as="div" fluid bsPrefix="jumbotron" style={style} />
     <div>
-      <InputGroup className="mb-3">
-        <InputGroup.Prepend>
+      <InputGroup
+        as="div"
+        size="sm"
+        bsPrefix="inputgroup"
+        className="mb-3"
+        style={style}
+      >
+        <InputGroup.Prepend bsPrefix="inputgroupprepend" style={style}>
           <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
         </InputGroup.Prepend>
         <FormControl
@@ -256,7 +576,7 @@ const MegaComponent = () => (
           aria-label="Recipient's username"
           aria-describedby="basic-addon2"
         />
-        <InputGroup.Append>
+        <InputGroup.Append bsPrefix="inputgroupappend" style={style}>
           <InputGroup.Text id="basic-addon2">@example.com</InputGroup.Text>
         </InputGroup.Append>
       </InputGroup>
@@ -288,8 +608,26 @@ const MegaComponent = () => (
         <FormControl as="textarea" aria-label="With textarea" />
       </InputGroup>
     </div>
-    <ListGroup defaultActiveKey="#link1">
-      <ListGroup.Item action href="#link1">
+    <ListGroup
+      as="div"
+      horizontal
+      variant="flush"
+      bsPrefix="list-group"
+      defaultActiveKey="#link1"
+      style={style}
+    >
+      <ListGroup.Item
+        action
+        active
+        as="div"
+        disabled
+        eventKey="1"
+        href="#link1"
+        onClick={noop}
+        variant="primary"
+        bsPrefix="listgroupitem"
+        style={style}
+      >
         Link 1
       </ListGroup.Item>
       <ListGroup.Item action href="#link2" disabled>
@@ -297,19 +635,92 @@ const MegaComponent = () => (
       </ListGroup.Item>
       <ListGroup.Item action>This one is a button</ListGroup.Item>
     </ListGroup>
-    <Modal show={false}>
-      <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+    <Modal
+      animation
+      aria-labelledby="label"
+      autoFocus
+      backdrop="static"
+      backdropClassName="class"
+      centered
+      container="test"
+      dialogAs="div"
+      dialogClassName="class"
+      enforceFocus
+      keyboard
+      manager={{}}
+      onEnter={noop}
+      onEntered={noop}
+      onEntering={noop}
+      onEscapeKeyDown={noop}
+      onExit={noop}
+      onExited={noop}
+      onExiting={noop}
+      onHide={noop}
+      onShow={noop}
+      restoreFocus
+      restoreFocusOptions={{}}
+      scrollabel
+      show={false}
+      size="xl"
+      bsPrefix="modal"
+      style={style}
+    >
+      <Modal.Header
+        closeButton
+        closeLabel="close"
+        onHide={noop}
+        bsPrefix="header"
+        style={style}
+      >
+        <Modal.Title as="h4" bsPrefix="modaltitle" style={style}>
+          Modal heading
+        </Modal.Title>
       </Modal.Header>
-      <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-      <Modal.Footer>
+      <Modal.Body as="div" bsPrefix="modalbody" style={style}>
+        Woohoo, you are reading this text in a modal!
+      </Modal.Body>
+      <Modal.Footer as="div" bsPrefix="modalfooter" style={style}>
         <Button variant="secondary">Close</Button>
         <Button variant="primary">Save Changes</Button>
       </Modal.Footer>
     </Modal>
-    <Nav variant="pills" activeKey="1" onSelect={(k: string) => console.log(k)}>
-      <Nav.Item>
-        <Nav.Link eventKey="1" href="#/home">
+    <Modal.Dialog
+      centered
+      scrollable
+      size="sm"
+      bsPrefix="modal"
+      style={style}
+    />
+    <Nav
+      as="div"
+      cardHeaderBsPrefix="prefix"
+      fill
+      justify
+      navbar
+      navbarBsPrefix="prefix"
+      onKeyDown={noop}
+      variant="pills"
+      activeKey="1"
+      onSelect={(k: string) => {
+        // eslint-disable-next-line no-console
+        console.log(k);
+      }}
+      role="role"
+      bsPrefix="prefix"
+      style={style}
+    >
+      <Nav.Item as="div" role="role" bsPrefix="prefix" style={style}>
+        <Nav.Link
+          active
+          as="a"
+          disabled
+          eventKey="1"
+          href="#/home"
+          onSelect={noop}
+          role="role"
+          bsPrefix="prefix"
+          style={style}
+        >
           NavLink 1 content
         </Nav.Link>
       </Nav.Item>
@@ -323,7 +734,18 @@ const MegaComponent = () => (
           NavLink 3 content
         </Nav.Link>
       </Nav.Item>
-      <NavDropdown title="Dropdown" id="nav-dropdown">
+      <NavDropdown
+        active
+        disabled
+        menuRole="role"
+        onClick={noop}
+        renderMenuOnMount
+        rootCloseEvent="click"
+        title="Dropdown"
+        id="nav-dropdown"
+        bsPrefix="prefix"
+        style={style}
+      >
         <NavDropdown.Item eventKey="4.1">Action</NavDropdown.Item>
         <NavDropdown.Item eventKey="4.2">Another action</NavDropdown.Item>
         <NavDropdown.Item eventKey="4.3">Something else here</NavDropdown.Item>
@@ -331,10 +753,63 @@ const MegaComponent = () => (
         <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>
       </NavDropdown>
     </Nav>
+    <Navbar
+      as="div"
+      bg="light"
+      collapseOnSelect
+      expand="sm"
+      expanded
+      fixed="top"
+      onSelect={noop}
+      onToggle={noop}
+      role="role"
+      sticky="top"
+      variant="light"
+      bsPrefix="prefix"
+      style={style}
+    />
+    <Navbar.Brand as="div" href="#" bsPrefix="prefix" style={style} />
+    <Navbar.Toggle
+      as="div"
+      label="label"
+      onClick={noop}
+      bsPrefix="prefix"
+      style={style}
+    />
+    <Navbar.Collapse bsPrefix="prefix" style={style} />
+    <Overlay
+      container={React.createRef()}
+      onEnter={noop}
+      onEntered={noop}
+      onEntering={noop}
+      onExit={noop}
+      onExited={noop}
+      onExiting={noop}
+      onHide={noop}
+      placement="auto"
+      popperConfig={{}}
+      rootClose
+      rootCloseEvent="click"
+      show
+      target={React.createRef()}
+      transition
+    >
+      {(props) => (
+        <Tooltip id="overlay-example" {...props}>
+          My Tooltip
+        </Tooltip>
+      )}
+    </Overlay>
     <OverlayTrigger
+      defaultShow
+      delay={1000}
+      flip
+      popperConfig={{}}
+      show
       placement="left"
+      trigger="hover"
       overlay={
-        <Tooltip id="tooltip-left">
+        <Tooltip id="tooltip-left" style={style}>
           Tooltip on <strong>left</strong>.
         </Tooltip>
       }
@@ -347,23 +822,49 @@ const MegaComponent = () => (
       variant="primary"
       size="sm"
       role="state"
+      bsPrefix="prefix"
+      style={style}
     />
     <Spinner animation="grow">
       <span>Something Inside</span>
     </Spinner>
-    <Toast>
-      <Toast.Header>
+    <Toast
+      animation
+      autohide
+      delay={1000}
+      onClose={noop}
+      show
+      bsPrefix="prefix"
+      style={style}
+    >
+      <Toast.Header
+        closeButton
+        closeLabel="label"
+        bsPrefix="prefix"
+        style={style}
+      >
         <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
         <strong className="mr-auto">Bootstrap</strong>
         <small>11 mins ago</small>
       </Toast.Header>
-      <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
+      <Toast.Body as="div" bsPrefix="prefix" id="id" style={style}>
+        Hello, world! This is a toast message.
+      </Toast.Body>
     </Toast>
-    <Pagination>
-      <Pagination.First />
-      <Pagination.Prev />
-      <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Ellipsis />
+    <Pagination id="id" size="sm" bsPrefix="prefix" style={style}>
+      <Pagination.First id="id" style={style} onClick={noop} />
+      <Pagination.Prev id="id" style={style} onClick={noop} />
+      <Pagination.Item
+        id="id"
+        active
+        activeLabel="label"
+        disabled
+        style={style}
+        onClick={noop}
+      >
+        {1}
+      </Pagination.Item>
+      <Pagination.Ellipsis id="id" style={style} />
 
       <Pagination.Item>{10}</Pagination.Item>
       <Pagination.Item>{11}</Pagination.Item>
@@ -376,9 +877,19 @@ const MegaComponent = () => (
       <Pagination.Next />
       <Pagination.Last />
     </Pagination>
-    <Popover id="test-popover">
-      <Popover.Title>Popover title</Popover.Title>
-      <Popover.Content>
+    <Popover
+      id="test-popover"
+      content
+      placement="auto"
+      popper={{}}
+      show
+      bsPrefix="popover"
+      style={style}
+    >
+      <Popover.Title as="div" bsPrefix="prefix" style={style}>
+        Popover title
+      </Popover.Title>
+      <Popover.Content as="div" bsPrefix="prefix" style={style}>
         <strong>Popover Content</strong>
       </Popover.Content>
     </Popover>
@@ -387,9 +898,51 @@ const MegaComponent = () => (
       <ProgressBar striped animated variant="info" now={20} />
       <ProgressBar striped variant="warning" now={60} />
       <ProgressBar striped variant="danger" now={80} />
+      <ProgressBar id="id" label="label" srOnly bsPrefix="prefix" style={style}>
+        <ProgressBar isChild />
+      </ProgressBar>
     </div>
-    <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-      <Tab eventKey="home" title="Home">
+    <SplitButton
+      disabled
+      href="#"
+      id="id"
+      menuRole="role"
+      onClick={noop}
+      renderMenuOnMount
+      rootCloseEvent="click"
+      size="lg"
+      target="target"
+      title="title"
+      toggleLabel="label"
+      type="button"
+      variant="primary"
+      bsPrefix="splitbutton"
+      style={style}
+    />
+    <Table
+      id="id"
+      bordered
+      borderless
+      hover
+      responsive="sm"
+      size="sm"
+      striped
+      variant="dark"
+      bsPrefix="prefix"
+      style={style}
+    />
+    <Tabs
+      activeKey="profile"
+      defaultActiveKey="profile"
+      id="uncontrolled-tab-example"
+      mountOnEnter
+      onSelect={noop}
+      transition={false}
+      unmountOnExit
+      variant="tabs"
+      style={style}
+    >
+      <Tab eventKey="home" title="Home" id="id" style={style}>
         <div />
       </Tab>
       <Tab eventKey="profile" title="Profile">
@@ -399,12 +952,59 @@ const MegaComponent = () => (
         <div />
       </Tab>
     </Tabs>
-    <ToggleButtonGroup type="checkbox" name="options" defaultValue={[1]}>
-      <ToggleButton value={1}>Radio 1 (pre-checked)</ToggleButton>
+    <Tab.Container
+      activeKey="key"
+      generateChildId={() => 'id'}
+      id="id"
+      mountOnEnter
+      onSelect={noop}
+      transition={false}
+      unmountOnExit
+    />
+    <Tab.Content id="id" as="div" bsPrefix="prefix" style={style} />
+    <Tab.Pane
+      active
+      aria-labelledby="label"
+      as="div"
+      eventKey="1"
+      id="id"
+      mountOnEnter
+      onEnter={noop}
+      onEntered={noop}
+      onEntering={noop}
+      onExit={noop}
+      onExited={noop}
+      onExiting={noop}
+      transition={false}
+      unmountOnExit
+      bsPrefix="prefix"
+      style={style}
+    />
+    <ToggleButtonGroup
+      type="checkbox"
+      name="options"
+      defaultValue={[1]}
+      onChange={noop}
+      value={[1]}
+      style={style}
+    >
+      <ToggleButton
+        value={1}
+        checked
+        disabled={false}
+        inputRef={React.createRef()}
+        name="name"
+        onChange={noop}
+        type="checkbox"
+        size="lg"
+        style={style}
+      >
+        Radio 1 (pre-checked)
+      </ToggleButton>
       <ToggleButton value={2}>Radio 2</ToggleButton>
       <ToggleButton value={3}>Radio 3</ToggleButton>
     </ToggleButtonGroup>
-    // As = ComponentClass // TODO: Reinstate these? What _is_ ExpectError?
+    {/* // As = ComponentClass // TODO: Reinstate these? What _is_ ExpectError? */}
     {/*
     <Tabs invalidProp="2" />; // $ExpectError
     <Alert.Link invalidProp="2" />; // $ExpectError

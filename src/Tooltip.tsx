@@ -4,17 +4,18 @@ import PropTypes from 'prop-types';
 import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useBootstrapPrefix } from './ThemeProvider';
 
-import { Placement } from './Overlay';
+import { ArrowProps, Placement } from './Overlay';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
 } from './helpers';
 
-export interface TooltipProps extends BsPrefixPropsWithChildren {
-  style?: any;
+export interface TooltipProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    BsPrefixPropsWithChildren {
   id: string;
   placement?: Placement;
-  arrowProps?: { ref: any; style: object };
+  arrowProps?: ArrowProps;
   show?: boolean;
   popper?: any;
 }

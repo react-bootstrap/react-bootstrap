@@ -6,7 +6,9 @@ import { useBootstrapPrefix } from './ThemeProvider';
 
 import { BsPrefixPropsWithChildren } from './helpers';
 
-export interface ModalDialogProps extends BsPrefixPropsWithChildren {
+export interface ModalDialogProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    BsPrefixPropsWithChildren {
   size?: 'sm' | 'lg' | 'xl';
   centered?: boolean;
   scrollable?: boolean;

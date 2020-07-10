@@ -7,8 +7,9 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import { map } from './ElementChildren';
 import { BsPrefixPropsWithChildren } from './helpers';
 
-export interface ProgressBarProps extends BsPrefixPropsWithChildren {
-  style?: any;
+export interface ProgressBarProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    BsPrefixPropsWithChildren {
   min?: number;
   now?: number;
   max?: number;
