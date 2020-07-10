@@ -6,7 +6,9 @@ import { useBootstrapPrefix } from './ThemeProvider';
 import { BsPrefixPropsWithChildren } from './helpers';
 import { Variant } from './types';
 
-export interface SpinnerProps extends BsPrefixPropsWithChildren {
+export interface SpinnerProps
+  extends React.HTMLAttributes<HTMLElement>,
+    BsPrefixPropsWithChildren {
   animation: 'border' | 'grow';
   role?: string;
   size?: 'sm';

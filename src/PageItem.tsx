@@ -9,8 +9,9 @@ import {
 
 import SafeAnchor from './SafeAnchor';
 
-export interface PageItemProps extends BsPrefixPropsWithChildren {
-  style?: any;
+export interface PageItemProps
+  extends React.HTMLAttributes<HTMLElement>,
+    BsPrefixPropsWithChildren {
   disabled?: boolean;
   active?: boolean;
   activeLabel?: string;

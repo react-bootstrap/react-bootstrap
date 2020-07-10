@@ -5,7 +5,7 @@ import isRequiredForA11y from 'prop-types-extra/lib/isRequiredForA11y';
 import { useBootstrapPrefix } from './ThemeProvider';
 import PopoverTitle from './PopoverTitle';
 import PopoverContent from './PopoverContent';
-import { Placement } from './Overlay';
+import { ArrowProps, Placement } from './Overlay';
 import {
   BsPrefixPropsWithChildren,
   BsPrefixRefForwardingComponent,
@@ -17,7 +17,7 @@ export interface PopoverProps
   id: string;
   placement?: Placement;
   title?: string;
-  arrowProps?: { ref: any; style: object };
+  arrowProps?: ArrowProps;
   content?: boolean;
   popper?: any;
   show?: boolean;

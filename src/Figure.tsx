@@ -1,9 +1,9 @@
 import createWithBsPrefix from './createWithBsPrefix';
-
+import { BsPrefixRefForwardingComponent } from './helpers';
 import FigureImage from './FigureImage';
 import FigureCaption from './FigureCaption';
 
-type Figure = React.ComponentType & {
+type Figure = BsPrefixRefForwardingComponent<'figure'> & {
   Image: typeof FigureImage;
   Caption: typeof FigureCaption;
 };

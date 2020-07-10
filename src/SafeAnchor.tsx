@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import createChainedFunction from './createChainedFunction';
 import { BsPrefixProps, BsPrefixRefForwardingComponent } from './helpers';
 
-export interface SafeAnchorProps extends BsPrefixProps {
+export interface SafeAnchorProps
+  extends React.HTMLAttributes<HTMLElement>,
+    BsPrefixProps {
   href?: string;
-  onClick?: React.MouseEventHandler<this>;
-  onKeyDown?: React.KeyboardEventHandler<this>;
   disabled?: boolean;
   role?: string;
   tabIndex?: number;

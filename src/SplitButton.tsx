@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Button from './Button';
+import Button, { ButtonType } from './Button';
 import ButtonGroup from './ButtonGroup';
 import Dropdown from './Dropdown';
 import { PropsFromToggle } from './DropdownToggle';
@@ -21,7 +21,7 @@ export interface SplitButtonProps
   target?: string;
   title: React.ReactNode;
   toggleLabel?: string;
-  type?: any;
+  type?: ButtonType;
 }
 
 type SplitButton = BsPrefixRefForwardingComponent<'div', SplitButtonProps>;

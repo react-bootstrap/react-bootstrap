@@ -7,8 +7,8 @@ import DropdownMenu from './DropdownMenu';
 
 export interface DropdownButtonProps
   extends DropdownProps,
+    Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title'>,
     React.PropsWithChildren<PropsFromToggle> {
-  id?: string;
   title: React.ReactNode;
   menuRole?: string;
   renderMenuOnMount?: boolean;
