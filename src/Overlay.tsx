@@ -183,6 +183,7 @@ function Overlay({
         arrowProps,
         show,
         update,
+        forceUpdate: _,
         placement,
         state,
         ...props
