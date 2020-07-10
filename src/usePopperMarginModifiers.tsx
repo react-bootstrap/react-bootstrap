@@ -37,7 +37,7 @@ export default function usePopperMarginModifiers(): [
     overlayRef.current = overlay;
   }, []);
 
-  const modifier = useMemo(() => {
+  const offset = useMemo(() => {
     return {
       name: 'offset',
       options: {
@@ -61,5 +61,40 @@ export default function usePopperMarginModifiers(): [
       },
     };
   }, [margins]);
-  return [callback, [modifier]];
+
+  // Converts popover arrow margin to arrow modifier padding
+  const popoverArrowMargins = useMemo(() => {
+    return {
+      name: 'popoverArrowMargins',
+      enabled: true,
+      phase: 'main',
+      requiresIfExists: ['arrow'],
+      effect({ state }) {
+        if (
+          !overlayRef.current ||
+          !state.elements.arrow ||
+          !hasClass(overlayRef.current, 'popover') ||
+          !state.modifiersData['arrow#persistent']
+        ) {
+          return undefined;
+        }
+
+        const { top, right } = getMargins(state.elements.arrow);
+        const padding = top || right;
+        state.modifiersData['arrow#persistent'].padding = {
+          top: padding,
+          left: padding,
+          right: padding,
+          bottom: padding,
+        };
+        state.elements.arrow.style.margin = '0';
+
+        return () => {
+          if (state.elements.arrow) state.elements.arrow.style.margin = '';
+        };
+      },
+    };
+  }, []);
+
+  return [callback, [offset, popoverArrowMargins]];
 }

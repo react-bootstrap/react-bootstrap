@@ -5,6 +5,7 @@ import useTimeout from '@restart/hooks/useTimeout';
 import safeFindDOMNode from 'react-overlays/safeFindDOMNode';
 import warning from 'warning';
 import { useUncontrolledProp } from 'uncontrollable';
+import { Modifier } from 'react-overlays/esm/usePopper';
 import Overlay, { OverlayChildren, OverlayProps } from './Overlay';
 
 export type OverlayTriggerType = 'hover' | 'click' | 'focus';
@@ -264,13 +265,14 @@ function OverlayTrigger({
 
   // We add aria-describedby in the case where the overlay is a role="tooltip"
   // for other cases describedby isn't appropriate (e.g. a popover with inputs) so we don't add it.
-  const ariaModifier = {
+  const ariaModifier: Modifier<'ariaDescribedBy', {}> = {
     name: 'ariaDescribedBy',
     enabled: true,
     phase: 'afterWrite',
     effect: ({ state }) => {
       return () => {
-        state.elements.reference.removeAttribute('aria-describedby');
+        if ('removeAttribute' in state.elements.reference)
+          state.elements.reference.removeAttribute('aria-describedby');
       };
     },
     fn: ({ state }) => {
@@ -279,7 +281,11 @@ function OverlayTrigger({
       if (!show || !reference) return;
 
       const role = popper.getAttribute('role') || '';
-      if (popper.id && role.toLowerCase() === 'tooltip') {
+      if (
+        popper.id &&
+        role.toLowerCase() === 'tooltip' &&
+        'setAttribute' in reference
+      ) {
         reference.setAttribute('aria-describedby', popper.id);
       }
     },
@@ -318,8 +324,6 @@ function OverlayTrigger({
         {...props}
         popperConfig={{
           ...popperConfig,
-          // TODO: fix typing
-          // @ts-ignore
           modifiers,
         }}
         show={show}
