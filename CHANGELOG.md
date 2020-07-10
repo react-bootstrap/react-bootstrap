@@ -1,3 +1,14 @@
+## [1.2.1](https://github.com/react-bootstrap/react-bootstrap/compare/v1.2.0...v1.2.1) (2020-07-10)
+
+
+### Bug Fixes
+
+* **Popover:** arrow offset when scrolling offscreen ([#5287](https://github.com/react-bootstrap/react-bootstrap/issues/5287)) ([0e86a51](https://github.com/react-bootstrap/react-bootstrap/commit/0e86a51b0680deeb1bb8a0361bb04a235cfc4e77))
+
+
+
+
+
 # [1.2.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.1.1...v1.2.0) (2020-07-10)
 
 
