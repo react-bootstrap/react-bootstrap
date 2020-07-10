@@ -42,7 +42,7 @@ module.exports = api => {
       '@babel/plugin-proposal-export-namespace-from',
       [
         '@babel/plugin-transform-runtime',
-        { useESModules: !modules, corejs: 2 }
+        { useESModules: !modules, corejs: 3 }
       ],
       'babel-plugin-dev-expression',
       modules && 'babel-plugin-add-module-exports',
