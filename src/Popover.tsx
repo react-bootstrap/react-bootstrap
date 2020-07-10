@@ -105,7 +105,7 @@ const Popover: Popover = (React.forwardRef<HTMLDivElement, PopoverProps>(
         className={classNames(
           className,
           decoratedBsPrefix,
-          `bs-popover-${primaryPlacement}`,
+          primaryPlacement && `bs-popover-${primaryPlacement}`,
         )}
         {...props}
       >
