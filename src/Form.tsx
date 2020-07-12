@@ -66,7 +66,7 @@ const defaultProps = {
   inline: false,
 };
 
-const Form: Form = (React.forwardRef(
+const FormImpl: Form = (React.forwardRef(
   (
     {
       bsPrefix,
@@ -94,17 +94,17 @@ const Form: Form = (React.forwardRef(
   },
 ) as unknown) as Form;
 
-Form.displayName = 'Form';
-Form.propTypes = propTypes;
-Form.defaultProps = defaultProps;
+FormImpl.displayName = 'Form';
+FormImpl.propTypes = propTypes;
+FormImpl.defaultProps = defaultProps;
 
-Form.Row = FormRow;
-Form.Group = FormGroup;
-Form.Control = FormControl;
-Form.Check = FormCheck;
-Form.File = FormFile;
-Form.Switch = Switch;
-Form.Label = FormLabel;
-Form.Text = FormText;
+FormImpl.Row = FormRow;
+FormImpl.Group = FormGroup;
+FormImpl.Control = FormControl;
+FormImpl.Check = FormCheck;
+FormImpl.File = FormFile;
+FormImpl.Switch = Switch;
+FormImpl.Label = FormLabel;
+FormImpl.Text = FormText;
 
-export default Form;
+export default FormImpl;

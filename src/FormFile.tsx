@@ -230,4 +230,7 @@ const FormFile: FormFile = (React.forwardRef(
 FormFile.displayName = 'FormFile';
 FormFile.propTypes = propTypes;
 
+FormFile.Input = FormFileInput;
+FormFile.Label = FormFileLabel;
+
 export default FormFile;
