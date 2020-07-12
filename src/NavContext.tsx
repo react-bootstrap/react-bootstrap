@@ -9,5 +9,6 @@ interface NavContextType {
 }
 
 const NavContext = React.createContext<NavContextType | null>(null);
+NavContext.displayName = 'NavContext';
 
 export default NavContext;
