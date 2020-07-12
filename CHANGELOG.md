@@ -1,3 +1,16 @@
+## [1.2.2](https://github.com/react-bootstrap/react-bootstrap/compare/v1.2.1...v1.2.2) (2020-07-12)
+
+
+### Bug Fixes
+
+* form file exports ([01ca9fc](https://github.com/react-bootstrap/react-bootstrap/commit/01ca9fca4703b148ed686f025b0dfd8fedadb97e))
+* Various types ([321ca96](https://github.com/react-bootstrap/react-bootstrap/commit/321ca961cca3aa006ad38dfeafbf558ef395e688))
+* **TabPane:** Remove BS3 bsClass prop ([c671f0c](https://github.com/react-bootstrap/react-bootstrap/commit/c671f0c03b9cf8a8332c8bad08d9818b164f3dc9))
+
+
+
+
+
 ## [1.2.1](https://github.com/react-bootstrap/react-bootstrap/compare/v1.2.0...v1.2.1) (2020-07-10)
 
 
