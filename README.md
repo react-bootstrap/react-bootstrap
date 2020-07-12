@@ -48,7 +48,7 @@ Yes please! See the [contributing guidelines][contributing] for details.
 
 [bootstrap]: https://getbootstrap.com/
 [react]: https://reactjs.org/
-[documentation]: https://react-bootstrap.github.io/
+[documentation]: https://react-bootstrap.netlify.app/
 [contributing]: CONTRIBUTING.md
 [travis-badge]: https://travis-ci.org/react-bootstrap/react-bootstrap.svg?branch=master
 [travis]: https://travis-ci.org/react-bootstrap/react-bootstrap
