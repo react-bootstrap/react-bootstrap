@@ -77,8 +77,12 @@ const propTypes = {
    */
   closeLabel: PropTypes.string,
 
-  /** A `react-transition-group` Transition component used to animate the Alert on dismissal. */
-  transition: elementType,
+  /**
+   * Animate the alert dismissal. Defaults to using `<Fade>` animation or use
+   * `false` to disable. A custom `react-transition-group` Transition can also
+   * be provided.
+   */
+  transition: PropTypes.oneOfType([PropTypes.bool, elementType]),
 };
 
 const defaultProps = {
