@@ -44,7 +44,7 @@ const propTypes = {
 
 function DefaultLayout({ children, location, grayscale = true }) {
   return (
-    <div className={grayscale && styles.gray}>
+    <div className={grayscale ? styles.gray : undefined}>
       <NavMain activePage={location.pathname} />
       <MDXProvider components={components}>{children}</MDXProvider>
     </div>
