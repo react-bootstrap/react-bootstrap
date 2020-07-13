@@ -29,7 +29,7 @@ const propTypes = {
   as: PropTypes.elementType,
 };
 
-function isTrivialHref(href) {
+function isTrivialHref(href?: string) {
   return !href || href.trim() === '#';
 }
 
@@ -75,11 +75,10 @@ const SafeAnchor: SafeAnchor = React.forwardRef(
       }
     };
 
-    if (isTrivialHref(props.href)) {
-      props.role = props.role || 'button';
+    if (!props.href) {
       // we want to make sure there is a href attribute on the node
-      // otherwise, the cursor incorrectly styled (except with role='button')
-      props.href = props.href || '#';
+      // otherwise, the cursor incorrectly styled
+      props.href = '#';
     }
 
     if (disabled) {
