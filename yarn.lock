@@ -3817,10 +3817,10 @@ escape-string-regexp@1.0.5, escape-string-regexp@^1.0.2, escape-string-regexp@^1
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
-eslint-config-4catalyzer-typescript@^1.1.8:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/eslint-config-4catalyzer-typescript/-/eslint-config-4catalyzer-typescript-1.1.8.tgz#e5acfbc720dee664bb17474e09458f88f56c6c09"
-  integrity sha512-JWuI28v0ujjOyK65UIDAJbyUVhk3Fi8LJt+MyYDNkA9Hnn03yDMS0pM0aeKdRuTNO9nsnGZPsZX5WkOYS0w1OQ==
+eslint-config-4catalyzer-typescript@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-4catalyzer-typescript/-/eslint-config-4catalyzer-typescript-2.0.2.tgz#0aa78fc031402c57e3e59ae94af6652b15377a41"
+  integrity sha512-JQuZqPSoZcLzVaMbK8xJmeC+aVAJd49g8rieMu0MKDBdXT737yjlJDNy6TbWmKAFGBE4ONDsF6ZBJBI2fX9AdA==
   dependencies:
     babel-eslint "^10.0.3"
     eslint-import-resolver-typescript "^2.0.0"
