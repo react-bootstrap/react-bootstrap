@@ -43,6 +43,28 @@ describe('<Alert>', () => {
     ref.current.tagName.should.equal('DIV');
   });
 
+  it('should not have fade class when transition=false', () => {
+    const wrapper = mount(<Alert transition={false}>Message</Alert>);
+    expect(wrapper.find('.fade').length).to.equal(0);
+  });
+
+  it('should use Fade when transition=true', () => {
+    mount(
+      <Alert variant="danger" transition>
+        Message
+      </Alert>,
+    ).assertSingle('.fade');
+  });
+
+  it('should render null when transition and show are false', () => {
+    const wrapper = mount(
+      <Alert transition={false} show={false}>
+        Message
+      </Alert>,
+    );
+    expect(wrapper.isEmptyRender()).to.be.true;
+  });
+
   describe('Web Accessibility', () => {
     it('Should have alert role', () => {
       mount(<Alert>Message</Alert>).assertSingle('[role="alert"]');
