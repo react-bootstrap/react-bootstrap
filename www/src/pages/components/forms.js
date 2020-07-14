@@ -410,11 +410,17 @@ export default withLayout(function FormControlsSection({ data }) {
       <p>
         Bootstrap scopes the <code>:valid</code> and <code>:invalid</code>{' '}
         styles to parent <code>.was-validated</code> class, usually applied to
-        the <code>Form</code> (you can use the <code>validated</code> prop as a
-        shortcut). Otherwise, any required field without a value shows up as
-        invalid on page load. This way, you may choose when to activate them
+        the <code>{'<Form>'}</code> (you can use the <code>validated</code> prop
+        as a shortcut). Otherwise, any required field without a value shows up
+        as invalid on page load. This way, you may choose when to activate them
         (typically after form submission is attempted).
       </p>
+      <Callout>
+        Watch out! Browsers provide their own validation UI by default on{' '}
+        <code>form</code>s. You can disable the default UI by adding the HTML{' '}
+        <code>noValidate</code> attribute to your <code>{'<Form>'}</code> or{' '}
+        <code>{'<form>'}</code> element.
+      </Callout>
       <ReactPlayground codeText={ValidationNative} />
 
       <LinkedHeading h="3" id="forms-validation-libraries">
