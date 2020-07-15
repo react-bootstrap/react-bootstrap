@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useContext, useMemo } from 'react';
 
 export interface ThemeProviderProps {
-  prefixes: object;
+  prefixes: Record<string, unknown>;
 }
 
 const ThemeContext = React.createContext({});

@@ -265,7 +265,7 @@ function OverlayTrigger({
 
   // We add aria-describedby in the case where the overlay is a role="tooltip"
   // for other cases describedby isn't appropriate (e.g. a popover with inputs) so we don't add it.
-  const ariaModifier: Modifier<'ariaDescribedBy', {}> = {
+  const ariaModifier: Modifier<'ariaDescribedBy', Record<string, unknown>> = {
     name: 'ariaDescribedBy',
     enabled: true,
     phase: 'afterWrite',

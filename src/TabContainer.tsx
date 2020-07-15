@@ -6,7 +6,7 @@ import TabContext, { TabContextType } from './TabContext';
 import SelectableContext from './SelectableContext';
 import { SelectCallback, TransitionType } from './helpers';
 
-export interface TabContainerProps extends React.PropsWithChildren<{}> {
+export interface TabContainerProps extends React.PropsWithChildren<unknown> {
   id?: string;
   transition?: TransitionType;
   mountOnEnter?: boolean;
