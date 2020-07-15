@@ -1,7 +1,5 @@
 import React from 'react';
 
-// TODO
-// eslint-disable-next-line @typescript-eslint/interface-name-prefix
 export interface TabContextType {
   onSelect: any;
   activeKey: any;

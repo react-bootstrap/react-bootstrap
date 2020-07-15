@@ -20,7 +20,7 @@ function getMargins(element: Element): Margins {
 
 export default function usePopperMarginModifiers(): [
   (overlay: HTMLDivElement) => void,
-  object[], // TODO: use popper Modifier type?
+  Array<Record<string, unknown>>, // TODO: use popper Modifier type?
 ] {
   const overlayRef = useRef<HTMLDivElement | null>(null);
   const margins = useRef<Margins | null>(null);

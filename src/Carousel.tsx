@@ -41,7 +41,7 @@ export interface CarouselProps
   controls?: boolean;
   indicators?: boolean;
   activeIndex?: number;
-  onSelect?: (eventKey: number, event: object | null) => void;
+  onSelect?: (eventKey: number, event: Record<string, unknown> | null) => void;
   defaultActiveIndex?: number;
   onSlide?: (eventKey: number, direction: 'left' | 'right') => void;
   onSlid?: (eventKey: number, direction: 'left' | 'right') => void;
