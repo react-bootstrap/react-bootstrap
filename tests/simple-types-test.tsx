@@ -861,6 +861,7 @@ const MegaComponent = () => (
         disabled
         style={style}
         onClick={noop}
+        href="#"
       >
         {1}
       </Pagination.Item>
