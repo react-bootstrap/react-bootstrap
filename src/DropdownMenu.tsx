@@ -17,10 +17,20 @@ import {
   SelectCallback,
 } from './helpers';
 
+export type AlignDirection = 'left' | 'right';
+
+export interface ResponsiveAlignProp {
+  sm?: AlignDirection;
+  md?: AlignDirection;
+  lg?: AlignDirection;
+  xl?: AlignDirection;
+}
+
 export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
   show?: boolean;
   renderOnMount?: boolean;
   flip?: boolean;
+  align?: ResponsiveAlignProp;
   alignRight?: boolean;
   onSelect?: SelectCallback;
   rootCloseEvent?: 'click' | 'mousedown';
@@ -28,6 +38,22 @@ export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
 }
 
 type DropdownMenu = BsPrefixRefForwardingComponent<'div', DropdownMenuProps>;
+
+const DEVICE_SIZES = [
+  'xl' as const,
+  'lg' as const,
+  'md' as const,
+  'sm' as const,
+];
+
+const alignDirection = PropTypes.oneOf(['left', 'right']);
+
+export const alignPropTypes = PropTypes.shape({
+  sm: alignDirection,
+  md: alignDirection,
+  lg: alignDirection,
+  xl: alignDirection,
+});
 
 const propTypes = {
   /**
@@ -43,6 +69,14 @@ const propTypes = {
 
   /** Have the dropdown switch to it's opposite placement when necessary to stay on screen. */
   flip: PropTypes.bool,
+
+  /**
+   * Aligns the dropdown menu responsively depending on the breakpoint.
+   * The alignment direction will affect the specified breakpoint or larger.
+   *
+   * *Note: Using responsive alignment will disable Popper usage for positioning.*
+   */
+  align: alignPropTypes,
 
   /** Aligns the Dropdown menu to the right of it's container. */
   alignRight: PropTypes.bool,
@@ -86,6 +120,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
     {
       bsPrefix,
       className,
+      align,
       alignRight,
       rootCloseEvent,
       flip,
@@ -102,6 +137,16 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
     const prefix = useBootstrapPrefix(bsPrefix, 'dropdown-menu');
     const [popperRef, marginModifiers] = usePopperMarginModifiers();
 
+    const alignClasses: string[] = [];
+    if (align) {
+      DEVICE_SIZES.forEach((brkPoint) => {
+        const direction = align[brkPoint];
+        if (direction) {
+          alignClasses.push(`${prefix}-${brkPoint}-${direction}`);
+        }
+      });
+    }
+
     const {
       hasShown,
       placement,
@@ -114,7 +159,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       rootCloseEvent,
       show: showProps,
       alignEnd: alignRight,
-      usePopper: !isNavbar,
+      usePopper: !isNavbar && alignClasses.length === 0,
       popperConfig: {
         ...popperConfig,
         modifiers: marginModifiers.concat(popperConfig?.modifiers || []),
@@ -137,12 +182,14 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
       (menuProps as any).close = close;
       (menuProps as any).alignRight = alignEnd;
     }
+
     if (placement) {
       // we don't need the default popper style,
       // menus are display: none when not shown.
       (props as any).style = { ...(props as any).style, ...menuProps.style };
       props['x-placement'] = placement;
     }
+
     return (
       <Component
         {...props}
@@ -151,7 +198,8 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
           className,
           prefix,
           show && 'show',
-          alignEnd && `${prefix}-right`,
+          (alignEnd || alignClasses.length) && `${prefix}-right`,
+          ...alignClasses,
         )}
       />
     );

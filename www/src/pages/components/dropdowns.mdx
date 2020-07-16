@@ -11,6 +11,7 @@ import DropdownButtonSizes from '../../examples/Dropdown/ButtonSizes';
 import DropDirections from '../../examples/Dropdown/DropDirections';
 import DropdownItemTags from '../../examples/Dropdown/DropdownItemTags';
 import MenuAlignRight from '../../examples/Dropdown/MenuAlignRight';
+import MenuAlignResponsive from '../../examples/Dropdown/MenuAlignResponsive';
 import MenuDividers from '../../examples/Dropdown/MenuDividers';
 import MenuHeaders from '../../examples/Dropdown/MenuHeaders';
 import SplitBasic from '../../examples/Dropdown/SplitBasic';
@@ -106,12 +107,22 @@ longer the case with v4. Now you can optionally use
 
 <ReactPlayground codeText={DropdownItemTags} />
 
-### Menu alignment
+## Menu alignment
 
 By default, a dropdown menu is aligned to the left, but you can switch
 it by passing the `alignRight` prop.
 
 <ReactPlayground codeText={MenuAlignRight} />
+
+### Responsive alignment
+
+If you want to use responsive alignment, use the `align` prop on the `<DropdownMenu>`, 
+or the `menuAlign` prop on the `<DropdownButton>` and `<SplitButton>`. 
+You can specify the directions `left` or `right` at each of the various breakpoints.
+
+Note: Using responsive alignment will disable Popper usage for positioning.
+
+<ReactPlayground codeText={MenuAlignResponsive} />
 
 ## Menu headers
 

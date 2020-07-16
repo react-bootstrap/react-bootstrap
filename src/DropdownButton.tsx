@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 
 import Dropdown, { DropdownProps } from './Dropdown';
 import DropdownToggle, { PropsFromToggle } from './DropdownToggle';
-import DropdownMenu from './DropdownMenu';
+import DropdownMenu, {
+  alignPropTypes,
+  ResponsiveAlignProp,
+} from './DropdownMenu';
 
 export interface DropdownButtonProps
   extends DropdownProps,
     Omit<React.HTMLAttributes<HTMLElement>, 'onSelect' | 'title'>,
     React.PropsWithChildren<PropsFromToggle> {
   title: React.ReactNode;
+  menuAlign?: ResponsiveAlignProp;
   menuRole?: string;
   renderMenuOnMount?: boolean;
   rootCloseEvent?: 'click' | 'mousedown';
@@ -36,6 +40,13 @@ const propTypes = {
   /** Disables both Buttons  */
   disabled: PropTypes.bool,
 
+  /**
+   * Aligns the dropdown menu responsively.
+   *
+   * _see [DropdownMenu](#dropdown-menu-props) for more details_
+   */
+  menuAlign: alignPropTypes,
+
   /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
   menuRole: PropTypes.string,
 
@@ -45,7 +56,7 @@ const propTypes = {
   /**
    *  Which event when fired outside the component will cause it to be closed.
    *
-   * _see [DropdownMenu](#menu-props) for more details_
+   * _see [DropdownMenu](#dropdown-menu-props) for more details_
    */
   rootCloseEvent: PropTypes.string,
 
@@ -74,6 +85,7 @@ const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
       rootCloseEvent,
       variant,
       size,
+      menuAlign,
       menuRole,
       renderMenuOnMount,
       disabled,
@@ -95,6 +107,7 @@ const DropdownButton = React.forwardRef<HTMLDivElement, DropdownButtonProps>(
         {title}
       </DropdownToggle>
       <DropdownMenu
+        align={menuAlign}
         role={menuRole}
         renderOnMount={renderMenuOnMount}
         rootCloseEvent={rootCloseEvent}
