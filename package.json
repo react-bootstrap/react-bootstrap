@@ -1,7 +1,7 @@
 {
   "name": "react-bootstrap",
   "version": "1.2.2",
-  "description": "Bootstrap 4 components built with React",
+  "description": "Bootstrap 5 components built with React",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/react-bootstrap/react-bootstrap.git"

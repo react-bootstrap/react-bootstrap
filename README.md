@@ -1,6 +1,6 @@
 # React-Bootstrap
 
-> [Bootstrap 4][bootstrap] components built with [React][react].
+> [Bootstrap 5][bootstrap] components built with [React][react].
 
 [![GitHub Actions CI status][gh-actions-badge]][gh-actions]
 [![Travis CI Build status][travis-badge]][travis]
