@@ -1,7 +1,12 @@
 {
   "name": "react-bootstrap",
+<<<<<<< HEAD
   "version": "1.3.0",
   "description": "Bootstrap 4 components built with React",
+=======
+  "version": "1.2.2",
+  "description": "Bootstrap 5 components built with React",
+>>>>>>> bf572f91... Bump bootstrap to 5.0.0-alpha1
   "repository": {
     "type": "git",
     "url": "git+https://github.com/react-bootstrap/react-bootstrap.git"
