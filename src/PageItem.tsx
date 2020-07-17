@@ -15,6 +15,7 @@ export interface PageItemProps
   disabled?: boolean;
   active?: boolean;
   activeLabel?: string;
+  href?: string;
 }
 
 type PageItem = BsPrefixRefForwardingComponent<'li', PageItemProps>;
