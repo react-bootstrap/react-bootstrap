@@ -1,6 +1,7 @@
 import { graphql } from 'gatsby';
 
 import ARIA from '../../components/AriaAbbr';
+import Callout from '../../components/Callout';
 import ComponentApi from '../../components/ComponentApi';
 import ReactPlayground from '../../components/ReactPlayground';
 import DropdownBasic from '../../examples/Dropdown/Basic';
@@ -110,17 +111,24 @@ longer the case with v4. Now you can optionally use
 ## Menu alignment
 
 By default, a dropdown menu is aligned to the left, but you can switch
-it by passing the `alignRight` prop.
+it by passing `right` to the `align` prop on a `<DropdownMenu>` or passing 
+`right` to the `menuAlign` prop on the `<DropdownButton>` or `<SplitButton>`
+as seen below.
 
 <ReactPlayground codeText={MenuAlignRight} />
 
 ### Responsive alignment
 
-If you want to use responsive alignment, use the `align` prop on the `<DropdownMenu>`, 
-or the `menuAlign` prop on the `<DropdownButton>` and `<SplitButton>`. 
-You can specify the directions `left` or `right` at each of the various breakpoints.
+If you want to use responsive menu alignment, pass an object to the `align` prop 
+on the `<DropdownMenu>` or the `menuAlign` prop on the `<DropdownButton>` and 
+`<SplitButton>`. You can specify the directions `left` or `right` at each of 
+the various breakpoints.
 
-Note: Using responsive alignment will disable Popper usage for positioning.
+<Callout theme="danger" title="Warning">
+  Using responsive alignment will disable Popper usage so any dynamic positioning 
+  features such as <code>flip</code> will not work.
+</Callout>
+
 
 <ReactPlayground codeText={MenuAlignResponsive} />
 

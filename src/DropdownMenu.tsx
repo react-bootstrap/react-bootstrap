@@ -30,7 +30,7 @@ export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
   show?: boolean;
   renderOnMount?: boolean;
   flip?: boolean;
-  align?: ResponsiveAlignProp;
+  align?: AlignDirection | ResponsiveAlignProp;
   alignRight?: boolean;
   onSelect?: SelectCallback;
   rootCloseEvent?: 'click' | 'mousedown';
@@ -43,12 +43,15 @@ const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm'] as const;
 
 const alignDirection = PropTypes.oneOf(['left', 'right']);
 
-export const alignPropType = PropTypes.shape({
-  sm: alignDirection,
-  md: alignDirection,
-  lg: alignDirection,
-  xl: alignDirection,
-});
+export const alignPropType = PropTypes.oneOfType([
+  alignDirection,
+  PropTypes.shape({
+    sm: alignDirection,
+    md: alignDirection,
+    lg: alignDirection,
+    xl: alignDirection,
+  }),
+]);
 
 const propTypes = {
   /**
@@ -66,14 +69,21 @@ const propTypes = {
   flip: PropTypes.bool,
 
   /**
-   * Aligns the dropdown menu responsively depending on the breakpoint.
-   * The alignment direction will affect the specified breakpoint or larger.
+   * Aligns the dropdown menu to the specified side of the container. You can also align
+   * the menu responsively for breakpoints starting at `sm` and up. The alignment
+   * direction will affect the specified breakpoint or larger.
    *
    * *Note: Using responsive alignment will disable Popper usage for positioning.*
+   *
+   * @type {"left"|"right"|{ sm: "left"|"right", md: "left"|"right", lg: "left"|"right", xl: "left"|"right" }}
    */
   align: alignPropType,
 
-  /** Aligns the Dropdown menu to the right of it's container. */
+  /**
+   * Aligns the Dropdown menu to the right of it's container.
+   *
+   * @deprecated Use align="right"
+   */
   alignRight: PropTypes.bool,
 
   onSelect: PropTypes.func,
@@ -102,7 +112,8 @@ const propTypes = {
   popperConfig: PropTypes.object,
 };
 
-const defaultProps = {
+const defaultProps: Partial<DropdownMenuProps> = {
+  align: 'left',
   alignRight: false,
   flip: true,
 };
@@ -134,12 +145,17 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
 
     const alignClasses: string[] = [];
     if (align) {
-      DEVICE_SIZES.forEach((brkPoint) => {
-        const direction = align[brkPoint];
-        if (direction) {
-          alignClasses.push(`${prefix}-${brkPoint}-${direction}`);
-        }
-      });
+      if (typeof align === 'object') {
+        DEVICE_SIZES.forEach((brkPoint) => {
+          const direction = align[brkPoint];
+          if (direction) {
+            alignRight = alignRight || direction === 'left';
+            alignClasses.push(`${prefix}-${brkPoint}-${direction}`);
+          }
+        });
+      } else if (align === 'right') {
+        alignRight = true;
+      }
     }
 
     const {
@@ -193,7 +209,7 @@ const DropdownMenu: DropdownMenu = React.forwardRef(
           className,
           prefix,
           show && 'show',
-          (alignEnd || alignClasses.length) && `${prefix}-right`,
+          alignEnd && `${prefix}-right`,
           ...alignClasses,
         )}
       />

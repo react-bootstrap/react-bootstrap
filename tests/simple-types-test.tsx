@@ -332,6 +332,8 @@ const MegaComponent = () => (
         <Dropdown.Header as="div" bsPrefix="dropdownheader" style={style} />
         <Dropdown.Divider as="div" bsPrefix="dropdowndivider" style={style} />
       </Dropdown.Menu>
+      <Dropdown.Menu align="left" />
+      <Dropdown.Menu align="right" />
     </Dropdown>
     <DropdownButton
       disabled

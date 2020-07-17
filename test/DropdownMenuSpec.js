@@ -41,6 +41,24 @@ describe('<Dropdown.Menu>', () => {
     ).assertSingle('div.dropdown-menu');
   });
 
+  it('does not add any extra classes when align="left"', () => {
+    const wrapper = mount(
+      <DropdownMenu show align="left">
+        <DropdownItem>Item</DropdownItem>
+      </DropdownMenu>,
+    ).find('DropdownMenu');
+
+    expect(wrapper.getDOMNode().className).to.equal('dropdown-menu show');
+  });
+
+  it('adds right align class when align="right"', () => {
+    mount(
+      <DropdownMenu show align="right">
+        <DropdownItem>Item</DropdownItem>
+      </DropdownMenu>,
+    ).assertSingle('.dropdown-menu-right');
+  });
+
   it('adds responsive left alignment classes', () => {
     mount(
       <DropdownMenu
@@ -66,7 +84,6 @@ describe('<Dropdown.Menu>', () => {
         <DropdownItem>Item</DropdownItem>
       </DropdownMenu>,
     )
-      .assertSingle('.dropdown-menu-right')
       .assertSingle('.dropdown-menu-sm-right')
       .assertSingle('.dropdown-menu-md-right')
       .assertSingle('.dropdown-menu-lg-right')
