@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Dropdown, { DropdownProps } from './Dropdown';
 import DropdownToggle, { PropsFromToggle } from './DropdownToggle';
 import DropdownMenu, {
-  alignPropTypes,
+  alignPropType,
   ResponsiveAlignProp,
 } from './DropdownMenu';
 
@@ -45,7 +45,7 @@ const propTypes = {
    *
    * _see [DropdownMenu](#dropdown-menu-props) for more details_
    */
-  menuAlign: alignPropTypes,
+  menuAlign: alignPropType,
 
   /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
   menuRole: PropTypes.string,

@@ -39,16 +39,11 @@ export interface DropdownMenuProps extends BsPrefixPropsWithChildren {
 
 type DropdownMenu = BsPrefixRefForwardingComponent<'div', DropdownMenuProps>;
 
-const DEVICE_SIZES = [
-  'xl' as const,
-  'lg' as const,
-  'md' as const,
-  'sm' as const,
-];
+const DEVICE_SIZES = ['xl', 'lg', 'md', 'sm'] as const;
 
 const alignDirection = PropTypes.oneOf(['left', 'right']);
 
-export const alignPropTypes = PropTypes.shape({
+export const alignPropType = PropTypes.shape({
   sm: alignDirection,
   md: alignDirection,
   lg: alignDirection,
@@ -76,7 +71,7 @@ const propTypes = {
    *
    * *Note: Using responsive alignment will disable Popper usage for positioning.*
    */
-  align: alignPropTypes,
+  align: alignPropType,
 
   /** Aligns the Dropdown menu to the right of it's container. */
   alignRight: PropTypes.bool,

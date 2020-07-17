@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Button, { ButtonType } from './Button';
 import ButtonGroup from './ButtonGroup';
 import Dropdown from './Dropdown';
-import { alignPropTypes, ResponsiveAlignProp } from './DropdownMenu';
+import { alignPropType, ResponsiveAlignProp } from './DropdownMenu';
 import { PropsFromToggle } from './DropdownToggle';
 import {
   BsPrefixPropsWithChildren,
@@ -64,7 +64,7 @@ const propTypes = {
    *
    * _see [DropdownMenu](#dropdown-menu-props) for more details_
    */
-  menuAlign: alignPropTypes,
+  menuAlign: alignPropType,
 
   /** An ARIA accessible role applied to the Menu component. When set to 'menu', The dropdown */
   menuRole: PropTypes.string,
