@@ -38,6 +38,24 @@ describe('<Dropdown.Item>', () => {
     node.style.height.should.equal('100px');
   });
 
+  it('renders Dropdown.ItemText', () => {
+    mount(<Dropdown.ItemText>My text</Dropdown.ItemText>)
+      .assertSingle('span.dropdown-item-text')
+      .text()
+      .should.equal('My text');
+  });
+
+  it('renders Dropdown.ItemText className and style', () => {
+    const node = mount(
+      <Dropdown.ItemText className="foo bar" style={{ height: '100px' }}>
+        My text
+      </Dropdown.ItemText>,
+    ).getDOMNode();
+
+    node.className.should.match(/\bfoo bar dropdown-item-text\b/);
+    node.style.height.should.equal('100px');
+  });
+
   it('renders menu item link', (done) => {
     mount(
       <Dropdown.Item onKeyDown={() => done()} href="/herpa-derpa">

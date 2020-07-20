@@ -21,6 +21,7 @@ export interface NavDropdownProps extends BsPrefixPropsWithChildren {
 
 type NavDropdown = BsPrefixRefForwardingComponent<'div', NavDropdownProps> & {
   Item: typeof Dropdown.Item;
+  ItemText: typeof Dropdown.ItemText;
   Divider: typeof Dropdown.Divider;
   Header: typeof Dropdown.Header;
 };
@@ -104,6 +105,7 @@ const NavDropdown: NavDropdown = (React.forwardRef(
 NavDropdown.displayName = 'NavDropdown';
 NavDropdown.propTypes = propTypes;
 NavDropdown.Item = Dropdown.Item;
+NavDropdown.ItemText = Dropdown.ItemText;
 NavDropdown.Divider = Dropdown.Divider;
 NavDropdown.Header = Dropdown.Header;
 
