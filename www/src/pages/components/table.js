@@ -59,7 +59,7 @@ export default withLayout(function TableSection({ data }) {
       <p>
         Across every breakpoint, use <code>responsive</code> for horizontally
         scrolling tables. Responsive tables are wrapped automatically in a{' '}
-        <code>div</code>. The following example has 50 columns that are
+        <code>div</code>. The following example has 12 columns that are
         scrollable horizontally.
       </p>
       <ReactPlayground codeText={TableResponsive} />

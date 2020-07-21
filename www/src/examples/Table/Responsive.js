@@ -2,37 +2,29 @@
   <thead>
     <tr>
       <th>#</th>
-      {(function () {
-        const headings = [];
-        for (let i = 0; i < 50; i++) headings.push(<th>Table heading</th>);
-        return headings;
-      })()}
+      {Array.from({ length: 12 }).map((_, index) => (
+        <th key={index}>Table heading</th>
+      ))}
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>1</td>
-      {(function () {
-        const cells = [];
-        for (let i = 0; i < 50; i++) cells.push(<td>Table cell</td>);
-        return cells;
-      })()}
+      {Array.from({ length: 12 }).map((_, index) => (
+        <td key={index}>Table cell {index}</td>
+      ))}
     </tr>
     <tr>
       <td>2</td>
-      {(function () {
-        const cells = [];
-        for (let i = 0; i < 50; i++) cells.push(<td>Table cell</td>);
-        return cells;
-      })()}
+      {Array.from({ length: 12 }).map((_, index) => (
+        <td key={index}>Table cell {index}</td>
+      ))}
     </tr>
     <tr>
       <td>3</td>
-      {(function () {
-        const cells = [];
-        for (let i = 0; i < 50; i++) cells.push(<td>Table cell</td>);
-        return cells;
-      })()}
+      {Array.from({ length: 12 }).map((_, index) => (
+        <td key={index}>Table cell {index}</td>
+      ))}
     </tr>
   </tbody>
 </Table>;
