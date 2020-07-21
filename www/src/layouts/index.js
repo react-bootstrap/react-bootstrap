@@ -7,6 +7,7 @@ import NavMain from '../components/NavMain';
 import Heading from '../components/Heading';
 import CodeBlock from '../components/CodeBlock';
 import LinkedHeading from '../components/LinkedHeading';
+import MasterDocsAlert from '../components/MasterDocsAlert';
 
 const styles = css`
   .gray > :not(:first-child) {
@@ -46,6 +47,7 @@ function DefaultLayout({ children, location, grayscale = true }) {
   return (
     <div className={grayscale ? styles.gray : undefined}>
       <NavMain activePage={location.pathname} />
+      <MasterDocsAlert />
       <MDXProvider components={components}>{children}</MDXProvider>
     </div>
   );
