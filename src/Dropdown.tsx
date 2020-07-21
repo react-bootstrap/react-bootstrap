@@ -22,6 +22,9 @@ const DropdownHeader = createWithBsPrefix('dropdown-header', {
 const DropdownDivider = createWithBsPrefix('dropdown-divider', {
   defaultProps: { role: 'separator' },
 });
+const DropdownItemText = createWithBsPrefix('dropdown-item-text', {
+  Component: 'span',
+});
 
 export interface DropdownProps extends BsPrefixPropsWithChildren {
   drop?: 'up' | 'left' | 'right' | 'down';
@@ -42,6 +45,7 @@ type Dropdown = BsPrefixRefForwardingComponent<'div', DropdownProps> & {
   Toggle: typeof DropdownToggle;
   Menu: typeof DropdownMenu;
   Item: typeof DropdownItem;
+  ItemText: typeof DropdownItemText;
   Divider: typeof DropdownDivider;
   Header: typeof DropdownHeader;
 };
@@ -191,6 +195,7 @@ Dropdown.defaultProps = defaultProps;
 Dropdown.Divider = DropdownDivider;
 Dropdown.Header = DropdownHeader;
 Dropdown.Item = DropdownItem;
+Dropdown.ItemText = DropdownItemText;
 Dropdown.Menu = DropdownMenu;
 Dropdown.Toggle = DropdownToggle;
 

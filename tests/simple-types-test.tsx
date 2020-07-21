@@ -330,6 +330,7 @@ const MegaComponent = () => (
         <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
         <Dropdown.Header as="div" bsPrefix="dropdownheader" style={style} />
         <Dropdown.Divider as="div" bsPrefix="dropdowndivider" style={style} />
+        <Dropdown.Divider as="div" bsPrefix="prefix" style={style} />
       </Dropdown.Menu>
     </Dropdown>
     <DropdownButton
@@ -751,6 +752,7 @@ const MegaComponent = () => (
         <NavDropdown.Item eventKey="4.3">Something else here</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item eventKey="4.4">Separated link</NavDropdown.Item>
+        <NavDropdown.ItemText bsPrefix="prefix" as="div" />
       </NavDropdown>
     </Nav>
     <Navbar
