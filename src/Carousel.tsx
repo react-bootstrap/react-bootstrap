@@ -250,20 +250,24 @@ function CarouselFunc(uncontrolledProps: CarouselProps, ref) {
     activeIndex || 0,
   );
 
-  if (!isSliding && activeIndex !== renderedActiveIndex) {
-    if (nextDirectionRef.current) {
-      setDirection(nextDirectionRef.current);
-      nextDirectionRef.current = null;
-    } else {
-      setDirection((activeIndex || 0) > renderedActiveIndex ? 'next' : 'prev');
-    }
+  useEffect(() => {
+    if (!isSliding && activeIndex !== renderedActiveIndex) {
+      if (nextDirectionRef.current) {
+        setDirection(nextDirectionRef.current);
+        nextDirectionRef.current = null;
+      } else {
+        setDirection(
+          (activeIndex || 0) > renderedActiveIndex ? 'next' : 'prev',
+        );
+      }
 
-    if (slide) {
-      setIsSliding(true);
-    }
+      if (slide) {
+        setIsSliding(true);
+      }
 
-    setRenderedActiveIndex(activeIndex || 0);
-  }
+      setRenderedActiveIndex(activeIndex || 0);
+    }
+  }, [isSliding, slide, activeIndex, renderedActiveIndex]);
 
   const numChildren = React.Children.toArray(children).filter(
     React.isValidElement,
