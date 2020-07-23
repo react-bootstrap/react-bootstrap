@@ -8,7 +8,7 @@ const SidePanel = styled('div')`
 
   order: 2;
   position: sticky;
-  top: 4rem;
+  top: 7rem;
   height: calc(100vh - 4rem);
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
