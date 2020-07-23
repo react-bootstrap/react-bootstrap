@@ -1,3 +1,20 @@
+# [1.3.0](https://github.com/react-bootstrap/react-bootstrap/compare/v1.2.2...v1.3.0) (2020-07-23)
+
+
+### Bug Fixes
+
+* **Alert:** Fix transition prop to allow bools ([f4e7630](https://github.com/react-bootstrap/react-bootstrap/commit/f4e76305901bb5641f0ad0d6fcaa46afb93f134e))
+
+
+### Features
+
+* allow renderProp pattern in OverlayTrigger ([#5316](https://github.com/react-bootstrap/react-bootstrap/issues/5316)) ([b2bf177](https://github.com/react-bootstrap/react-bootstrap/commit/b2bf1771fc5784c9eae74b7f708030ce35dcf9a5))
+* **Dropdown:** Add Dropdown.ItemText component ([#5315](https://github.com/react-bootstrap/react-bootstrap/issues/5315)) ([3960106](https://github.com/react-bootstrap/react-bootstrap/commit/39601066991b24598cd63ae77e920522ce2a9f87))
+
+
+
+
+
 ## [1.2.2](https://github.com/react-bootstrap/react-bootstrap/compare/v1.2.1...v1.2.2) (2020-07-12)
 
 
