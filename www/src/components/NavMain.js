@@ -32,8 +32,6 @@ const Banner = styled(Navbar).attrs({
   }
 
   @include media-breakpoint-up(md) {
-    position: sticky;
-    top: 0rem;
     z-index: 1040;
   }
 `;
@@ -51,7 +49,7 @@ const StyledNavbar = styled(Navbar).attrs({
 
   @include media-breakpoint-up(md) {
     position: sticky;
-    top: 4rem;
+    top: 0rem;
     z-index: 1040;
   }
 `;
