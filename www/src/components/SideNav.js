@@ -18,15 +18,17 @@ const MenuButton = styled(Button).attrs({ variant: 'link' })`
 const SidePanel = styled('div')`
   @import '../css/theme';
 
+  $top: 4rem;
+
   composes: d-flex flex-column from global;
 
   background-color: #f7f7f7;
 
   @include media-breakpoint-up(md) {
     position: sticky;
-    top: 4rem;
+    top: $top;
     z-index: 1000;
-    height: calc(100vh - 4rem);
+    height: calc(100vh - #{$top});
     background-color: #f7f7f7;
     border-right: 1px solid $divider;
   }

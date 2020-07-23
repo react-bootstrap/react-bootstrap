@@ -10,18 +10,7 @@ const styles = css`
     composes: __heading from global;
 
     position: relative;
-    pointer-events: none;
-
-    &:before {
-      display: block;
-      height: 6rem;
-      margin-top: -6rem;
-      visibility: hidden;
-      content: '';
-    }
-  }
-  .inner {
-    pointer-events: auto;
+    scroll-margin-top: 5rem;
   }
 `;
 
@@ -35,7 +24,7 @@ const Heading = ({ h, id, title, className, children, registerNode }) => {
   const H = `h${h}`;
   return (
     <H id={id} className={classNames(className, styles.heading)}>
-      <div className={styles.inner}>{children}</div>
+      {children}
     </H>
   );
 };
