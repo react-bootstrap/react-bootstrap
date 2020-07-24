@@ -104,7 +104,6 @@ export type { ListGroupProps } from './ListGroup';
 export { default as ListGroupItem } from './ListGroupItem';
 export type { ListGroupItemProps } from './ListGroupItem';
 
-export { default as Media } from './Media';
 export { default as Modal } from './Modal';
 export type { ModalProps } from './Modal';
 
