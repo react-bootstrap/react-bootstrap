@@ -3,6 +3,10 @@ import styled from 'astroturf';
 
 export const TocContext = React.createContext();
 
+/*
+Changed top: 4rem to top 7rem because "Black Live Matters" Banner cut off
+Sidepanel slightly
+ */
 const SidePanel = styled('div')`
   @import '../css/theme';
 
