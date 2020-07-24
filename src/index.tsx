@@ -95,9 +95,6 @@ export { default as Figure } from './Figure';
 export { default as InputGroup } from './InputGroup';
 export type { InputGroupProps } from './InputGroup';
 
-export { default as Jumbotron } from './Jumbotron';
-export type { JumbotronProps } from './Jumbotron';
-
 export { default as ListGroup } from './ListGroup';
 export type { ListGroupProps } from './ListGroup';
 

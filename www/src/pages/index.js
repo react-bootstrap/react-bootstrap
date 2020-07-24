@@ -3,14 +3,15 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Jumbotron from 'react-bootstrap/Jumbotron';
 import styled from 'astroturf';
 import pkg from '../../../package.json';
 
 import withLayout from '../withLayout';
 
-const MastHead = styled(Jumbotron)`
+const MastHead = styled('div')`
   @import '../css/theme';
+
+  composes: mb-4 from global;
 
   background-color: $dark;
   padding: 0;
