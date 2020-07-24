@@ -10,10 +10,12 @@ Sidepanel slightly
 const SidePanel = styled('div')`
   @import '../css/theme';
 
+  $top: 4rem;
+
   order: 2;
   position: sticky;
-  top: 7rem;
-  height: calc(100vh - 4rem);
+  top: $top;
+  height: calc(100vh - #{$top});
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   font-size: 0.875rem;
