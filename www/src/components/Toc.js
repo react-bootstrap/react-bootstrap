@@ -10,7 +10,7 @@ Sidepanel slightly
 const SidePanel = styled('div')`
   @import '../css/theme';
 
-  $top: 4rem;
+  $top: 7rem;
 
   order: 2;
   position: sticky;
