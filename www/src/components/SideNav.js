@@ -123,7 +123,6 @@ const components = [
   'input-group',
   'images',
   'figures',
-  'jumbotron',
   'list-group',
   'modal',
   'navs',

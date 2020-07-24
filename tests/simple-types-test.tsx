@@ -26,7 +26,6 @@ import {
   FormFile,
   FormControl,
   Image,
-  Jumbotron,
   InputGroup,
   ListGroup,
   Modal,
@@ -552,7 +551,6 @@ const MegaComponent = () => (
       <Form.Switch label="Switch" disabled />
     </Form>
     <Image fluid rounded roundedCircle thumbnail bsPrefix="img" style={style} />
-    <Jumbotron as="div" fluid bsPrefix="jumbotron" style={style} />
     <div>
       <InputGroup
         as="div"
