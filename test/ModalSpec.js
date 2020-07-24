@@ -161,6 +161,22 @@ describe('<Modal>', () => {
     ).find('.modal-dialog.modal-sm');
   });
 
+  it('Should pass fullScreen as bool to the dialog', () => {
+    mount(
+      <Modal show fullScreen>
+        <strong>Message</strong>
+      </Modal>,
+    ).assertSingle('.modal-dialog.modal-fullscreen');
+  });
+
+  it('Should pass fullScreen as string to the dialog', () => {
+    mount(
+      <Modal show fullScreen="sm">
+        <strong>Message</strong>
+      </Modal>,
+    ).assertSingle('.modal-dialog.modal-fullscreen-sm-down');
+  });
+
   it('Should pass dialog style to the dialog', () => {
     const noOp = () => {};
     const dialog = mount(

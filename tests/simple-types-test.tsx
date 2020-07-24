@@ -685,6 +685,16 @@ const MegaComponent = () => (
         <Button variant="primary">Save Changes</Button>
       </Modal.Footer>
     </Modal>
+    <Modal fullScreen />
+    <Modal fullScreen="sm" />
+    <Modal fullScreen="md" />
+    <Modal fullScreen="lg" />
+    <Modal fullScreen="xl" />
+    <Modal.Dialog fullScreen />
+    <Modal.Dialog fullScreen="sm" />
+    <Modal.Dialog fullScreen="md" />
+    <Modal.Dialog fullScreen="lg" />
+    <Modal.Dialog fullScreen="xl" />
     <Modal.Dialog
       centered
       scrollable
