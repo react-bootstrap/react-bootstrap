@@ -11,6 +11,8 @@ import withLayout from '../withLayout';
 const MastHead = styled('div')`
   @import '../css/theme';
 
+  composes: mb-4 from global;
+
   background-color: $dark;
   padding: 0;
   color: white;
