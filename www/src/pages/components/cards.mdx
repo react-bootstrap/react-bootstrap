@@ -9,7 +9,7 @@ import CardBodyOnly from '../../examples/Card/BodyOnly';
 import CardBodyShorthand from '../../examples/Card/BodyShorthand';
 import CardBorder from '../../examples/Card/Border';
 import CardColumns from '../../examples/Card/Columns';
-import CardDeck from '../../examples/Card/Deck';
+import CardGrid from '../../examples/Card/Grid';
 import CardGroup from '../../examples/Card/Group';
 import CardHeaderAndFooter from '../../examples/Card/HeaderAndFooter';
 import CardImageAndText from '../../examples/Card/ImageAndText';
@@ -130,9 +130,11 @@ You can change a card's appearance by changing their `<bg>`, and `<text>` props.
 
 <ReactPlayground codeText={CardGroup} />
 
-### Card Deck
+### Grid cards
 
-<ReactPlayground codeText={CardDeck} />
+Use `Row`'s [grid column](/layout/grid/#row-layout-col-sizing) props to control how many cards to show per row.
+
+<ReactPlayground codeText={CardGrid} />
 
 ### Card Columns
 
@@ -145,7 +147,6 @@ You can change a card's appearance by changing their `<bg>`, and `<text>` props.
 <ComponentApi metadata={props.data.CardImg} exportedBy={props.data.Card} />
 <ComponentApi metadata={props.data.CardImgOverlay} exportedBy={props.data.Card} />
 
-<ComponentApi metadata={props.data.CardDeck} />
 <ComponentApi metadata={props.data.CardGroup} />
 
 
@@ -161,9 +162,6 @@ export const query = graphql`
       ...ComponentApi_metadata
     }
     CardImgOverlay: componentMetadata(displayName: { eq: "CardImgOverlay" }) {
-      ...ComponentApi_metadata
-    }
-    CardDeck: componentMetadata(displayName: { eq: "CardDeck" }) {
       ...ComponentApi_metadata
     }
     CardGroup: componentMetadata(displayName: { eq: "CardGroup" }) {
