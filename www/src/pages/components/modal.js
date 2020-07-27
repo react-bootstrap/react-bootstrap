@@ -141,7 +141,7 @@ export default withLayout(function ModalSection({ data }) {
         Fullscreen Modal
       </LinkedHeading>
       <p>
-        You can use the <code>fullScreen</code> prop to make the modal
+        You can use the <code>fullscreen</code> prop to make the modal
         fullscreen. Specifying a breakpoint will only set the modal as
         fullscreen <b>below</b> the breakpoint size.
       </p>
