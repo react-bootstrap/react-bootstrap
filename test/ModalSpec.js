@@ -161,17 +161,17 @@ describe('<Modal>', () => {
     ).find('.modal-dialog.modal-sm');
   });
 
-  it('Should pass fullScreen as bool to the dialog', () => {
+  it('Should pass fullscreen as bool to the dialog', () => {
     mount(
-      <Modal show fullScreen>
+      <Modal show fullscreen>
         <strong>Message</strong>
       </Modal>,
     ).assertSingle('.modal-dialog.modal-fullscreen');
   });
 
-  it('Should pass fullScreen as string to the dialog', () => {
+  it('Should pass fullscreen as string to the dialog', () => {
     mount(
-      <Modal show fullScreen="sm">
+      <Modal show fullscreen="sm-down">
         <strong>Message</strong>
       </Modal>,
     ).assertSingle('.modal-dialog.modal-fullscreen-sm-down');

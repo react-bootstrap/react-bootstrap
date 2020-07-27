@@ -1,10 +1,10 @@
 function Example() {
-  const values = [true, 'sm', 'md', 'lg', 'xl'];
-  const [fullScreen, setFullScreen] = useState(true);
+  const values = [true, 'sm-down', 'md-down', 'lg-down', 'xl-down'];
+  const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);
 
   function handleShow(breakpoint) {
-    setFullScreen(breakpoint);
+    setFullscreen(breakpoint);
     setShow(true);
   }
 
@@ -13,10 +13,10 @@ function Example() {
       {values.map((v, idx) => (
         <Button key={idx} className="mr-2" onClick={() => handleShow(v)}>
           Full screen
-          {typeof v === 'string' && `below ${v}`}
+          {typeof v === 'string' && `below ${v.split('-')[0]}`}
         </Button>
       ))}
-      <Modal show={show} fullScreen={fullScreen} onHide={() => setShow(false)}>
+      <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Modal</Modal.Title>
         </Modal.Header>
