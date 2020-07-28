@@ -428,6 +428,7 @@ const MegaComponent = () => (
           title="title"
           type="checkbox"
           bsPrefix="formcheck"
+          bsSwitchPrefix="formswitch"
           style={style}
         >
           <Form.Check.Input

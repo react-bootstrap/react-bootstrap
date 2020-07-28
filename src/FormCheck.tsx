@@ -26,6 +26,7 @@ export interface FormCheckProps
   isInvalid?: boolean;
   feedbackTooltip?: boolean;
   feedback?: React.ReactNode;
+  bsSwitchPrefix?: string;
 }
 
 type FormCheck = BsPrefixRefForwardingComponent<'input', FormCheckProps> & {
@@ -38,6 +39,13 @@ const propTypes = {
    * @default 'form-check'
    */
   bsPrefix: PropTypes.string,
+
+  /**
+   * bsPrefix override for the base switch class.
+   *
+   * @default 'form-switch'
+   */
+  bsSwitchPrefix: PropTypes.string,
 
   /**
    * The FormCheck `ref` will be forwarded to the underlying input element,
@@ -100,6 +108,7 @@ const FormCheck: FormCheck = (React.forwardRef(
     {
       id,
       bsPrefix,
+      bsSwitchPrefix,
       inline = false,
       disabled = false,
       isValid = false,
@@ -119,6 +128,7 @@ const FormCheck: FormCheck = (React.forwardRef(
     ref,
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check');
+    bsSwitchPrefix = useBootstrapPrefix(bsSwitchPrefix, 'form-switch');
 
     const { controlId } = useContext(FormContext);
     const innerFormContext = useMemo(
@@ -150,7 +160,7 @@ const FormCheck: FormCheck = (React.forwardRef(
             className,
             label && bsPrefix,
             inline && `${bsPrefix}-inline`,
-            type === 'switch' && 'form-switch',
+            type === 'switch' && bsSwitchPrefix,
           )}
         >
           {children || (
