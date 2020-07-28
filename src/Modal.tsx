@@ -39,6 +39,7 @@ export interface ModalProps
     | 'backdropTransition'
   > {
   size?: 'sm' | 'lg' | 'xl';
+  fullscreen?: true | 'sm-down' | 'md-down' | 'lg-down' | 'xl-down';
   bsPrefix?: string;
   centered?: boolean;
   backdropClassName?: string;
@@ -69,9 +70,17 @@ const propTypes = {
   /**
    * Render a large, extra large or small modal.
    *
-   * @type ('sm'|'lg','xl')
+   * @type ('sm'|'lg'|'xl')
    */
   size: PropTypes.string,
+
+  /**
+   * Renders a fullscreen modal. Specifying a breakpoint will render the modal
+   * as fullscreen __below__ the breakpoint size.
+   *
+   * @type (true|'sm-down'|'md-down'|'lg-down'|'xl-down')
+   */
+  fullscreen: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
   /**
    * vertically center the Dialog in the window

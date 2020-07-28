@@ -10,6 +10,7 @@ export interface ModalDialogProps
   extends React.HTMLAttributes<HTMLDivElement>,
     BsPrefixPropsWithChildren {
   size?: 'sm' | 'lg' | 'xl';
+  fullscreen?: true | 'sm-down' | 'md-down' | 'lg-down' | 'xl-down';
   centered?: boolean;
   scrollable?: boolean;
 }
@@ -24,6 +25,14 @@ const propTypes = {
    * @type ('sm'|'lg','xl')
    */
   size: PropTypes.string,
+
+  /**
+   * Renders a fullscreen modal. Specifying a breakpoint will render the modal
+   * as fullscreen __below__ the breakpoint size.
+   *
+   * @type (true|'sm-down'|'md-down'|'lg-down'|'xl-down')
+   */
+  fullscreen: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 
   /**
    * Specify whether the Component should be vertically centered
@@ -43,6 +52,7 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
       className,
       centered,
       size,
+      fullscreen,
       children,
       scrollable,
       ...props
@@ -51,6 +61,11 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
   ) => {
     bsPrefix = useBootstrapPrefix(bsPrefix, 'modal');
     const dialogClass = `${bsPrefix}-dialog`;
+
+    const fullScreenClass =
+      typeof fullscreen === 'string'
+        ? `${bsPrefix}-fullscreen-${fullscreen}`
+        : `${bsPrefix}-fullscreen`;
 
     return (
       <div
@@ -62,6 +77,7 @@ const ModalDialog = React.forwardRef<HTMLDivElement, ModalDialogProps>(
           size && `${bsPrefix}-${size}`,
           centered && `${dialogClass}-centered`,
           scrollable && `${dialogClass}-scrollable`,
+          fullscreen && fullScreenClass,
         )}
       >
         <div className={`${bsPrefix}-content`}>{children}</div>
