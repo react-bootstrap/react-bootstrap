@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import all from 'prop-types-extra/lib/all';
 import React, { useContext, useMemo } from 'react';
 import Feedback from './Feedback';
 import FormCheckInput from './FormCheckInput';
@@ -17,13 +16,11 @@ export type FormCheckType = 'checkbox' | 'radio' | 'switch';
 export interface FormCheckProps
   extends BsPrefixPropsWithChildren,
     Pick<React.HTMLAttributes<HTMLElement>, 'style'> {
-  bsCustomPrefix?: string;
   id?: string;
   inline?: boolean;
   disabled?: boolean;
   title?: string;
   label?: React.ReactNode;
-  custom?: boolean;
   type?: FormCheckType;
   isValid?: boolean;
   isInvalid?: boolean;
@@ -41,13 +38,6 @@ const propTypes = {
    * @default 'form-check'
    */
   bsPrefix: PropTypes.string,
-
-  /**
-   * A seperate bsPrefix used for custom controls
-   *
-   * @default 'custom-control'
-   */
-  bsCustomPrefix: PropTypes.string,
 
   /**
    * The FormCheck `ref` will be forwarded to the underlying input element,
@@ -86,20 +76,11 @@ const propTypes = {
   title: PropTypes.string,
   label: PropTypes.node,
 
-  /** Use Bootstrap's custom form elements to replace the browser defaults */
-  custom: PropTypes.bool,
-
   /**
    * The type of checkable.
    * @type {('radio' | 'checkbox' | 'switch')}
    */
-  type: all(
-    PropTypes.oneOf(['radio', 'checkbox', 'switch']).isRequired,
-    ({ type, custom }) =>
-      type === 'switch' && custom === false
-        ? Error('`custom` cannot be set to `false` when the type is `switch`')
-        : null,
-  ),
+  type: PropTypes.oneOf(['radio', 'checkbox', 'switch']),
 
   /** Manually style the input as valid */
   isValid: PropTypes.bool,
@@ -119,7 +100,6 @@ const FormCheck: FormCheck = (React.forwardRef(
     {
       id,
       bsPrefix,
-      bsCustomPrefix,
       inline = false,
       disabled = false,
       isValid = false,
@@ -132,27 +112,20 @@ const FormCheck: FormCheck = (React.forwardRef(
       type = 'checkbox',
       label,
       children,
-      custom: propCustom,
       // Need to define the default "as" during prop destructuring to be compatible with styled-components github.com/react-bootstrap/react-bootstrap/issues/3595
       as = 'input',
       ...props
     }: FormCheckProps,
     ref,
   ) => {
-    const custom = type === 'switch' ? true : propCustom;
-    const [prefix, defaultPrefix] = custom
-      ? [bsCustomPrefix, 'custom-control']
-      : [bsPrefix, 'form-check'];
-
-    bsPrefix = useBootstrapPrefix(prefix, defaultPrefix);
+    bsPrefix = useBootstrapPrefix(bsPrefix, 'form-check');
 
     const { controlId } = useContext(FormContext);
     const innerFormContext = useMemo(
       () => ({
         controlId: id || controlId,
-        custom,
       }),
-      [controlId, custom, id],
+      [controlId, id],
     );
 
     const hasLabel = label != null && label !== false && !children;
@@ -164,7 +137,6 @@ const FormCheck: FormCheck = (React.forwardRef(
         ref={ref}
         isValid={isValid}
         isInvalid={isInvalid}
-        isStatic={!hasLabel}
         disabled={disabled}
         as={as}
       />
@@ -176,9 +148,9 @@ const FormCheck: FormCheck = (React.forwardRef(
           style={style}
           className={classNames(
             className,
-            bsPrefix,
-            custom && `custom-${type}`,
+            label && bsPrefix,
             inline && `${bsPrefix}-inline`,
+            type === 'switch' && 'form-switch',
           )}
         >
           {children || (

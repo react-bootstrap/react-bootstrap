@@ -7,8 +7,6 @@ import ReactPlayground from '../../components/ReactPlayground';
 import FormBasic from '../../examples/Form/Basic';
 import Check from '../../examples/Form/Check';
 import CheckApi from '../../examples/Form/CheckApi';
-import CheckCustom from '../../examples/Form/CheckCustom';
-import CheckCustomInline from '../../examples/Form/CheckCustomInline';
 import CheckInline from '../../examples/Form/CheckInline';
 import FormFile from '../../examples/Form/FormFile';
 import FormDisabled from '../../examples/Form/FormDisabled';
@@ -461,23 +459,6 @@ export default withLayout(function FormControlsSection({ data }) {
         built on top of semantic and accessible markup, so they’re solid
         replacements for any default form control.
       </p>
-      <LinkedHeading h="3" id="forms-custom-checkboxes-and-radios">
-        Checkboxes and radios
-      </LinkedHeading>
-      <p>
-        Custom checkbox and radio styles are achieved with a resourceful use of
-        the <code>:checked</code> selector and <code>:after</code> pseudo
-        elements, but are Structurally similar to the default{' '}
-        <code>FormCheck</code>. By default the checked and indeterminate icons
-        use embedded svg icons from{' '}
-        <a href="https://useiconic.com/open">Open Iconic</a>.
-      </p>
-
-      <p>
-        Apply Bootstrap's custom elements by adding the <code>custom</code>{' '}
-        prop.
-      </p>
-      <ReactPlayground codeText={CheckCustom} />
 
       <LinkedHeading h="3" id="forms-custom-switch">
         Switches
@@ -493,9 +474,6 @@ export default withLayout(function FormControlsSection({ data }) {
         You can also use the <code>{'<Form.Switch>'}</code> alias which
         encapsulates the above, in a very small component wrapper.
       </Callout>
-
-      <h3>Inline</h3>
-      <ReactPlayground codeText={CheckCustomInline} />
 
       <LinkedHeading h="3" id="forms-custom-select">
         Select

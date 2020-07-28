@@ -81,41 +81,32 @@ describe('<FormCheck>', () => {
     expect(instance.input.tagName).to.equal('INPUT');
   });
 
-  it('should supports custom', () => {
-    const wrapper = mount(<FormCheck custom label="My label" />);
-
-    wrapper
-      .assertSingle('div.custom-control')
-      .assertSingle('div.custom-checkbox')
-      .assertSingle('input.custom-control-input');
-
-    wrapper.assertSingle('label.custom-control-label');
+  it('should not render bsPrefix if no label is specified', () => {
+    const wrapper = mount(
+      <FormCheck id="foo" name="foo" value="foo" type="radio" />,
+    );
+    expect(wrapper.find('.form-check').length).to.equal(0);
   });
 
-  it('should support custom with inline', () => {
-    const wrapper = mount(<FormCheck custom inline label="My label" />);
-    wrapper.assertSingle('div.custom-control-inline');
-  });
-
-  it('should supports switches', () => {
+  it('should support switches', () => {
     let wrapper = mount(<FormCheck type="switch" label="My label" />);
 
     wrapper
-      .assertSingle('div.custom-control')
-      .assertSingle('div.custom-switch')
-      .assertSingle('input[type="checkbox"].custom-control-input');
+      .assertSingle('div.form-check')
+      .assertSingle('div.form-switch')
+      .assertSingle('input[type="checkbox"].form-check-input');
 
-    wrapper.assertSingle('label.custom-control-label');
+    wrapper.assertSingle('label.form-check-label');
     wrapper.unmount();
 
     wrapper = mount(<Switch label="My label" />);
 
     wrapper
-      .assertSingle('div.custom-control')
-      .assertSingle('div.custom-switch')
-      .assertSingle('input[type="checkbox"].custom-control-input');
+      .assertSingle('div.form-check')
+      .assertSingle('div.form-switch')
+      .assertSingle('input[type="checkbox"].form-check-input');
 
-    wrapper.assertSingle('label.custom-control-label');
+    wrapper.assertSingle('label.form-check-label');
   });
 
   it('should support "as"', () => {
